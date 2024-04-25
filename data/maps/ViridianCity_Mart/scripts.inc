@@ -91,6 +91,7 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_EXP_CANDY_XL
 	.2byte ITEM_FIRE_STONE
 	.2byte ITEM_ICE_STONE
+	.2byte ITEM_BLACK_AUGURITE
 	.2byte ITEM_NONE
 	release
 	end

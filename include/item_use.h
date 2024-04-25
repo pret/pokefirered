@@ -4,45 +4,40 @@
 #include "global.h"
 
 void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8);
+void Task_UseDigEscapeRopeOnField(u8 taskId);
 void ItemUse_SetQuestLogEvent(u8, struct Pokemon *, u16, u16);
 
 void ItemUseOutOfBattle_BerryPouch(u8 taskId);
 void ItemUseOutOfBattle_Bike(u8 taskId);
 void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId);
-void ItemUseOutOfBattle_Mail(u8 taskId);
-void ItemUseOutOfBattle_Rod(u8 taskId);
 void ItemUseOutOfBattle_CoinCase(u8 taskId);
-void ItemUseOutOfBattle_PowderJar(u8 taskId);
-void ItemUseOutOfBattle_PokeFlute(u8 taskId);
+void ItemUseOutOfBattle_EscapeRope(u8 taskId);
+void ItemUseOutOfBattle_EnigmaBerry(u8 taskId);
+void ItemUseOutOfBattle_EvolutionStone(u8 taskId);
+void ItemUseOutOfBattle_FameChecker(u8 taskId);
+void ItemUseOutOfBattle_Itemfinder(u8 taskId);
+void ItemUseOutOfBattle_Mail(u8 taskId);
 void ItemUseOutOfBattle_Medicine(u8 taskId);
+void ItemUseOutOfBattle_PokeFlute(u8 taskId);
+void ItemUseOutOfBattle_PowderJar(u8 taskId);
 void ItemUseOutOfBattle_PPRecovery(u8 taskId);
 void ItemUseOutOfBattle_PPUp(u8 taskId);
 void ItemUseOutOfBattle_RareCandy(u8 taskId);
-void ItemUseOutOfBattle_EvolutionStone(u8 taskId);
-void ItemUseOutOfBattle_SacredAsh(u8 taskId);
-void ItemUseOutOfBattle_TmCase(u8 taskId);
-void ItemUseOutOfBattle_TeachyTv(u8 taskId);
 void ItemUseOutOfBattle_Repel(u8 taskId);
+void ItemUseOutOfBattle_Rod(u8 taskId);
+void ItemUseOutOfBattle_SacredAsh(u8 taskId);
+void ItemUseOutOfBattle_TeachyTv(u8 taskId);
+void ItemUseOutOfBattle_TmCase(u8 taskId);
 void ItemUseOutOfBattle_TownMap(u8 taskId);
-void ItemUseOutOfBattle_FameChecker(u8 taskId);
 void ItemUseOutOfBattle_VsSeeker(u8 taskId);
 void ItemUseOutOfBattle_CannotUse(u8 taskId);
-void ItemUseOutOfBattle_EscapeRope(u8 taskId);
-void ItemUseOutOfBattle_EnigmaBerry(u8 taskId);
-void ItemUseInBattle_EnigmaBerry(u8 taskId);
-void ItemUseOutOfBattle_Itemfinder(u8 taskId);
-void Task_UseDigEscapeRopeOnField(u8 taskId);
-void BattleUseFunc_BerryPouch(u8 taskId);
-void BattleUseFunc_PokeFlute(u8 taskId);
-void BattleUseFunc_StatBooster(u8 taskId);
-void BattleUseFunc_Medicine(u8 taskId);
-void BattleUseFunc_Ether(u8 taskId);
+void ItemUseInBattle_BagMenu(u8 taskId);
+// void ItemUseInBattle_BerryPouch(u8 taskId);
+void ItemUseInBattle_PartyMenu(u8 taskId);
+void ItemUseInBattle_PartyMenuChooseMove(u8 taskId);
 u8 CanUseEscapeRopeOnCurrMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 
-void ItemUseInBattle_BagMenu(u8 taskId);
-void ItemUseInBattle_PartyMenu(u8 taskId);
-void ItemUseInBattle_PartyMenuChooseMove(u8 taskId);
 
 enum {
     BALL_THROW_UNABLE_TWO_MONS,

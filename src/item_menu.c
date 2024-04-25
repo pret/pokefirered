@@ -1695,16 +1695,6 @@ static void Task_ItemMenuAction_BattleUse(u8 taskId)
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     CopyWindowToVram(0, COPYWIN_MAP);   
-    
-    if (gSpecialVar_ItemId == ITEM_BERRY_POUCH) {
-        BattleUseFunc_BerryPouch(taskId);
-        return;
-    }
-    if (gSpecialVar_ItemId == ITEM_ENIGMA_BERRY) {
-        ItemUseInBattle_EnigmaBerry(taskId);
-        return;
-    }
-    
 
     if (type == ITEM_TYPE_BAG_MENU) {
         ItemUseInBattle_BagMenu(taskId);

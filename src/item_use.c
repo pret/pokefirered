@@ -69,64 +69,6 @@ static void Task_UseTownMapFromField(u8 taskId);
 static void UseFameCheckerFromBag(void);
 static void Task_UseFameCheckerFromField(u8 taskId);
 
-// unknown unused data.
-// It's curiously about the size of an array of values indexed by species (including padding),
-// but the arrangement of values is not sensible (e.g., not giving all "old unown" the same value).
-static const u8 sUnused[] = {
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x01, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x40, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x20, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x04, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x10, 0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x20, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x20, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x43, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x20, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x21, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x10, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x40, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x40, 0x02, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x40, 0x21, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x30, 0x00, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x40, 0x03, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x23, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x10, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x1f, 0x00, 0xe0, 0x03, 0x00, 0x7c,
-    0xff, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-};
-
 static void (*const sExitCallbackByItemType[])(void) = {
     [ITEM_TYPE_PARTY_MENU - 1] = CB2_ShowPartyMenuForItemUse,
     [ITEM_TYPE_FIELD      - 1] = CB2_ReturnToField,
@@ -555,7 +497,7 @@ static void Task_InitBerryPouchFromField(u8 taskId)
     }
 }
 
-void BattleUseFunc_BerryPouch(u8 taskId)
+static void ItemUseInBattle_BerryPouch(u8 taskId)
 {
     ItemMenu_SetExitCallback(InitBerryPouchFromBattle);
     ItemMenu_StartFadeToExitCallback(taskId);
@@ -739,44 +681,11 @@ void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId)
     Task_ItemUse_CloseMessageBoxAndReturnToField(taskId);
 }
 
-void BattleUseFunc_PokeFlute(u8 taskId)
+static void ItemUseInBattle_PokeFlute(u8 taskId)
 {
     Bag_BeginCloseWin0Animation();
     ItemMenu_StartFadeToExitCallback(taskId);
 }
-
-void BattleUseFunc_StatBooster(u8 taskId)
-{
-    // if (ExecuteTableBasedItemEffect(&gPlayerParty[gBattlerPartyIndexes[gBattlerInMenuId]], gSpecialVar_ItemId, gBattlerPartyIndexes[gBattlerInMenuId], 0))
-    //     DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_WontHaveEffect, Task_ReturnToBagFromContextMenu);
-    // else
-    // {
-    //     gTasks[taskId].data[8] = 0;
-    //     gTasks[taskId].func = Task_BattleUse_StatBooster_DelayAndPrint;
-    // }
-}
-
-// static void Task_BattleUse_StatBooster_DelayAndPrint(u8 taskId)
-// {
-//     s16 *data = gTasks[taskId].data;
-
-//     if (++data[8] > 7)
-//     {
-//         u16 itemId = gSpecialVar_ItemId;
-//         PlaySE(SE_USE_ITEM);
-//         RemoveBagItem(itemId, 1);
-//         DisplayItemMessageInBag(taskId, FONT_NORMAL, Battle_PrintStatBoosterEffectMessage(itemId), Task_BattleUse_StatBooster_WaitButton_ReturnToBattle);
-//     }
-// }
-
-// static void Task_BattleUse_StatBooster_WaitButton_ReturnToBattle(u8 taskId)
-// {
-//     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
-//     {
-//         Bag_BeginCloseWin0Animation();
-//         ItemMenu_StartFadeToExitCallback(taskId);
-//     }
-// }
 
 static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
 {
@@ -792,6 +701,28 @@ static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
     }
 }
 
+void ItemUseInBattle_BagMenu(u8 taskId)
+{
+    if (gSpecialVar_ItemId == ITEM_BERRY_POUCH)
+    {
+        ItemUseInBattle_BerryPouch(taskId);
+    } 
+    else if (CannotUseItemsInBattle(gSpecialVar_ItemId, NULL))
+    {
+        DisplayItemMessageInBag(taskId, FONT_NORMAL, gStringVar4, Task_ReturnToBagFromContextMenu);
+    }
+    else
+    {
+        PlaySE(SE_SELECT);
+        if (!(B_TRY_CATCH_TRAINER_BALL >= GEN_4 && (ItemId_GetBattleUsage(gSpecialVar_ItemId) == EFFECT_ITEM_THROW_BALL) && (gBattleTypeFlags & BATTLE_TYPE_TRAINER))) 
+        {
+            RemoveBagItem(gSpecialVar_ItemId, 1);
+        }
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = ItemMenu_StartFadeToExitCallback;
+    }
+}
+
 void ItemUseInBattle_PartyMenu(u8 taskId)
 {
     gItemUseCB = ItemUseCB_BattleScript;
@@ -801,18 +732,6 @@ void ItemUseInBattle_PartyMenu(u8 taskId)
 void ItemUseInBattle_PartyMenuChooseMove(u8 taskId)
 {
     gItemUseCB = ItemUseCB_BattleChooseMove;
-    ItemUse_SwitchToPartyMenuInBattle(taskId);
-}
-
-void BattleUseFunc_Medicine(u8 taskId)
-{
-    gItemUseCB = ItemUseCB_MedicineStep;
-    ItemUse_SwitchToPartyMenuInBattle(taskId);
-}
-
-void BattleUseFunc_Ether(u8 taskId)
-{
-    gItemUseCB = ItemUseCB_PPRecovery;
     ItemUse_SwitchToPartyMenuInBattle(taskId);
 }
 
@@ -831,47 +750,9 @@ static u32 GetBallThrowableState(void)
     return BALL_THROW_ABLE;
 }
 
-bool32 CanThrowBall(void)
-{
-    return (GetBallThrowableState() == BALL_THROW_ABLE);
-}
-
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
 static const u8 sText_CantThrowPokeBall_Disabled[] = _("POKé BALLS cannot be used\nright now!\p");
-void ItemUseInBattle_PokeBall(u8 taskId)
-{
-    switch (GetBallThrowableState())
-    {
-    case BALL_THROW_ABLE:
-    default:
-        RemoveBagItem(gSpecialVar_ItemId, 1);
-        // Task_FadeAndCloseBagMenu(taskId);
-        ItemMenu_StartFadeToExitCallback(taskId);
-        break;
-    case BALL_THROW_UNABLE_TWO_MONS:
-        PrintNotTheTimeToUseThat(taskId, FALSE);
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, sText_CantThrowPokeBall_TwoMons, Task_ReturnToBagFromContextMenu);
-        // DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_TwoMons, CloseItemMessage);
-        break;
-    case BALL_THROW_UNABLE_NO_ROOM:
-        PrintNotTheTimeToUseThat(taskId, FALSE);
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_BoxFull, Task_ReturnToBagFromContextMenu);
-        // DisplayItemMessage(taskId, FONT_NORMAL, gText_BoxFull, CloseItemMessage);
-        break;
-    case BALL_THROW_UNABLE_SEMI_INVULNERABLE:
-        PrintNotTheTimeToUseThat(taskId, FALSE);
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, sText_CantThrowPokeBall_SemiInvulnerable, Task_ReturnToBagFromContextMenu);
-        // DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_SemiInvulnerable, CloseItemMessage);
-        break;
-    case BALL_THROW_UNABLE_DISABLED_FLAG:
-        PrintNotTheTimeToUseThat(taskId, FALSE);
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, sText_CantThrowPokeBall_Disabled, Task_ReturnToBagFromContextMenu);
-        // DisplayItemMessage(taskId, FONT_NORMAL, sText_CantThrowPokeBall_Disabled, CloseItemMessage);
-        break;
-    }
-}
-
 // Returns whether an item can be used in battle and sets the fail text.
 bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
 {
@@ -1026,32 +907,6 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
     }
 }
 
-void ItemUseInBattle_EnigmaBerry(u8 taskId)
-{
-    switch (GetItemEffectType(gSpecialVar_ItemId))
-    {
-    case ITEM_EFFECT_X_ITEM:
-        BattleUseFunc_StatBooster(taskId);
-        break;
-    case ITEM_EFFECT_HEAL_HP:
-    case ITEM_EFFECT_CURE_POISON:
-    case ITEM_EFFECT_CURE_SLEEP:
-    case ITEM_EFFECT_CURE_BURN:
-    case ITEM_EFFECT_CURE_FREEZE:
-    case ITEM_EFFECT_CURE_PARALYSIS:
-    case ITEM_EFFECT_CURE_CONFUSION:
-    case ITEM_EFFECT_CURE_INFATUATION:
-    case ITEM_EFFECT_CURE_ALL_STATUS:
-        BattleUseFunc_Medicine(taskId);
-        break;
-    case ITEM_EFFECT_HEAL_PP:
-        BattleUseFunc_Ether(taskId);
-        break;
-    default:
-        ItemUseOutOfBattle_CannotUse(taskId);
-    }
-}
-
 void ItemUseOutOfBattle_CannotUse(u8 taskId)
 {
     if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
@@ -1075,22 +930,4 @@ void ItemUse_SetQuestLogEvent(u8 eventId, struct Pokemon *pokemon, u16 itemId, u
         data->species = 0xFFFF;
     SetQuestLogEvent(eventId, (void *)data);
     Free(data);
-}
-
-void ItemUseInBattle_BagMenu(u8 taskId)
-{
-    if (CannotUseItemsInBattle(gSpecialVar_ItemId, NULL))
-    {
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, gStringVar4, Task_ReturnToBagFromContextMenu);
-    }
-    else
-    {
-        PlaySE(SE_SELECT);
-        if (!(B_TRY_CATCH_TRAINER_BALL >= GEN_4 && (ItemId_GetBattleUsage(gSpecialVar_ItemId) == EFFECT_ITEM_THROW_BALL) && (gBattleTypeFlags & BATTLE_TYPE_TRAINER))) 
-        {
-            RemoveBagItem(gSpecialVar_ItemId, 1);
-        }
-        ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = ItemMenu_StartFadeToExitCallback;
-    }
 }

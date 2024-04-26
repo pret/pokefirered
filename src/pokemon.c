@@ -2975,30 +2975,6 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
     return PokemonUseItemEffects(mon, item, partyIndex, moveIndex, FALSE);
 }
 
-// #define UPDATE_FRIENDSHIP_FROM_ITEM()                                                                   \
-// {                                                                                                       \
-//     if (retVal == 0 && friendshipChange == 0)                                                           \
-//     {                                                                                                   \
-//         friendshipChange = itemEffect[idx];                                                             \
-//         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);                                        \
-//         if (friendshipChange > 0 && holdEffect == HOLD_EFFECT_FRIENDSHIP_UP)                            \
-//             friendship += 150 * friendshipChange / 100;                                                 \
-//         else                                                                                            \
-//             friendship += friendshipChange;                                                             \
-//         if (friendshipChange > 0)                                                                       \
-//         {                                                                                               \
-//             if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == ITEM_LUXURY_BALL)                           \
-//                 friendship++;                                                                           \
-//             if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())         \
-//                 friendship++;                                                                           \
-//         }                                                                                               \
-//         if (friendship < 0)                                                                             \
-//             friendship = 0;                                                                             \
-//         if (friendship > MAX_FRIENDSHIP)                                                                \
-//             friendship = MAX_FRIENDSHIP;                                                                \
-//         SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);                                              \
-//     }                                                                                                   \
-// }
 #define UPDATE_FRIENDSHIP_FROM_ITEM()                                                                   \
 {                                                                                                       \
     if ((retVal == 0 || friendshipOnly) && !ShouldSkipFriendshipChange() && friendshipChange == 0)      \

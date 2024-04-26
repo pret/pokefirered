@@ -536,6 +536,18 @@ void ItemUseOutOfBattle_Repel(u8 taskId)
         DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_RepelEffectsLingered, Task_ReturnToBagFromContextMenu);
 }
 
+void ItemUseOutOfBattle_ReduceEV(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_ReduceEV;
+    SetUpItemUseCallback(taskId);
+}
+
+void ItemUseOutOfBattle_ResetEVs(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_ResetEVs;
+    SetUpItemUseCallback(taskId);
+}
+
 static void Task_UseRepel(u8 taskId)
 {
     if (!IsSEPlaying())

@@ -24,6 +24,8 @@ void ItemUseOutOfBattle_PPRecovery(u8 taskId);
 void ItemUseOutOfBattle_PPUp(u8 taskId);
 void ItemUseOutOfBattle_RareCandy(u8 taskId);
 void ItemUseOutOfBattle_Repel(u8 taskId);
+void ItemUseOutOfBattle_ReduceEV(u8 taksId);
+void ItemUseOutOfBattle_ResetEVs(u8 taskId);
 void ItemUseOutOfBattle_Rod(u8 taskId);
 void ItemUseOutOfBattle_SacredAsh(u8 taskId);
 void ItemUseOutOfBattle_TeachyTv(u8 taskId);

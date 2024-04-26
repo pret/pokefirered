@@ -92,6 +92,12 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_FIRE_STONE
 	.2byte ITEM_ICE_STONE
 	.2byte ITEM_BLACK_AUGURITE
+	.2byte ITEM_POMEG_BERRY
+	.2byte ITEM_KELPSY_BERRY
+	.2byte ITEM_QUALOT_BERRY
+	.2byte ITEM_HONDEW_BERRY
+	.2byte ITEM_GREPA_BERRY
+	.2byte ITEM_TAMATO_BERRY
 	.2byte ITEM_NONE
 	release
 	end

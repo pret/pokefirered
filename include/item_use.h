@@ -7,6 +7,8 @@ void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8);
 void Task_UseDigEscapeRopeOnField(u8 taskId);
 void ItemUse_SetQuestLogEvent(u8, struct Pokemon *, u16, u16);
 
+void ItemUseOutOfBattle_AbilityCapsule(u8);
+void ItemUseOutOfBattle_AbilityPatch(u8);
 void ItemUseOutOfBattle_BerryPouch(u8 taskId);
 void ItemUseOutOfBattle_Bike(u8 taskId);
 void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId);
@@ -34,7 +36,6 @@ void ItemUseOutOfBattle_TownMap(u8 taskId);
 void ItemUseOutOfBattle_VsSeeker(u8 taskId);
 void ItemUseOutOfBattle_CannotUse(u8 taskId);
 void ItemUseInBattle_BagMenu(u8 taskId);
-// void ItemUseInBattle_BerryPouch(u8 taskId);
 void ItemUseInBattle_PartyMenu(u8 taskId);
 void ItemUseInBattle_PartyMenuChooseMove(u8 taskId);
 u8 CanUseEscapeRopeOnCurrMap(void);

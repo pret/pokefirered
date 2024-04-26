@@ -83,7 +83,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
 static bool8 FindMonThatAbsorbsOpponentsMove(void)
 {
     u8 battlerIn1, battlerIn2;
-    u8 absorbingTypeAbility;
+    u16 absorbingTypeAbility;
     s32 i;
 
     if ((HasSuperEffectiveMoveAgainstOpponents(TRUE) && Random() % 3) 
@@ -118,7 +118,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     for (i = 0; i < PARTY_SIZE; ++i)
     {
         u16 species;
-        u8 monAbility;
+        u16 monAbility;
 
         if ((GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
          || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
@@ -263,7 +263,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
     for (i = 0; i < PARTY_SIZE; ++i)
     {
         u16 species;
-        u8 monAbility;
+        u16 monAbility;
 
         if ((GetMonData(&gEnemyParty[i], MON_DATA_HP) == 0)
          || (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)

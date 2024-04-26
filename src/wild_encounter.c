@@ -336,7 +336,7 @@ static u8 GetAbilityEncounterRateModType(void)
     sWildEncounterData.abilityEffect = 0;
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
     {
-        u8 ability = GetMonAbility(&gPlayerParty[0]);
+        u16 ability = GetMonAbility(&gPlayerParty[0]);
         if (ability == ABILITY_STENCH)
             sWildEncounterData.abilityEffect = 1;
         else if (ability == ABILITY_ILLUMINATE)

@@ -482,7 +482,7 @@ static void ClearBattlerMoveHistory(u8 battlerId)
         BATTLE_HISTORY->usedMoves[battlerId / 2][i] = MOVE_NONE;
 }
 
-void RecordAbilityBattle(u8 battlerId, u8 abilityId)
+void RecordAbilityBattle(u8 battlerId, u16 abilityId)
 {
     if (GetBattlerSide(battlerId) == 0)
         BATTLE_HISTORY->abilities[GET_BATTLER_SIDE(battlerId)] = abilityId;
@@ -1152,7 +1152,7 @@ static void Cmd_get_ability(void)
     {
         u16 side = GET_BATTLER_SIDE(battlerId);
 
-        if (BATTLE_HISTORY->abilities[side] != 0)
+        if (BATTLE_HISTORY->abilities[side] != ABILITY_NONE)
         {
             AI_THINKING_STRUCT->funcResult = BATTLE_HISTORY->abilities[side];
             sAIScriptPtr += 2;

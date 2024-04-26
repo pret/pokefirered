@@ -1643,7 +1643,7 @@ u8 CastformDataTypeChange(u8 battler)
     return formChange;
 }
 
-u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveArg)
+u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 moveArg)
 {
     u8 effect = 0;
     struct Pokemon *pokeAtk;

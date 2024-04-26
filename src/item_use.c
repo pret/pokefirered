@@ -178,6 +178,18 @@ static void Task_ItemUseWaitForFade(u8 taskId)
     }
 }
 
+void ItemUseOutOfBattle_AbilityCapsule(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_AbilityCapsule;
+    SetUpItemUseCallback(taskId);
+}
+
+void ItemUseOutOfBattle_AbilityPatch(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_AbilityPatch;
+    SetUpItemUseCallback(taskId);
+}
+
 void ItemUseOutOfBattle_Mail(u8 taskId)
 {
     ItemMenu_SetExitCallback(CB2_CheckMail);

@@ -1357,7 +1357,7 @@ const struct Item gItems[] =
             "mon's ability."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_AbilityCapsule,
     },
 
     [ITEM_ABILITY_PATCH] =
@@ -1372,7 +1372,7 @@ const struct Item gItems[] =
             "a rare ability."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_AbilityPatch,
     },
 
 // Mints
@@ -9363,7 +9363,7 @@ const struct Item gItems[] =
     [ITEM_TM10] =
     {
         .name = _("TM10"),
-        .price = 2,
+        .price = 10000,
         .description = COMPOUND_STRING(
             "The attack power\n"
             "varies among\n"

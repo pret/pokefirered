@@ -1552,7 +1552,7 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
     return flags;
 }
 
-u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
+u8 AI_TypeCalc(u16 move, u16 targetSpecies, u16 targetAbility)
 {
     s32 i = 0;
     u8 flags = 0;
@@ -3022,48 +3022,49 @@ static void Cmd_jumpifstatus2(void)
 
 static void Cmd_jumpifability(void)
 {
-    u8 battlerId;
-    u8 ability = gBattlescriptCurrInstr[2];
-    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
+    CMD_ARGS(u8 battler, u16 ability, const u8 *jumpInstr);
+    u32 battlerId;
+    bool32 hasAbility = FALSE;
+    u32 ability = cmd->ability;
 
-    if (gBattlescriptCurrInstr[1] == BS_ATTACKER_SIDE)
+    if (cmd->battler == BS_ATTACKER_SIDE)
     {
         battlerId = AbilityBattleEffects(ABILITYEFFECT_CHECK_BATTLER_SIDE, gBattlerAttacker, ability, 0, 0);
         if (battlerId)
         {
             gLastUsedAbility = ability;
-            gBattlescriptCurrInstr = jumpPtr;
+            gBattlescriptCurrInstr = cmd->jumpInstr;
             RecordAbilityBattle(battlerId - 1, gLastUsedAbility);
             gBattleScripting.battlerWithAbility = battlerId - 1;
         }
         else
-            gBattlescriptCurrInstr += 7;
+            gBattlescriptCurrInstr = cmd->nextInstr;
     }
-    else if (gBattlescriptCurrInstr[1] == BS_NOT_ATTACKER_SIDE)
+    else if (cmd->battler == BS_NOT_ATTACKER_SIDE)
     {
         battlerId = AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, gBattlerAttacker, ability, 0, 0);
         if (battlerId)
         {
             gLastUsedAbility = ability;
-            gBattlescriptCurrInstr = jumpPtr;
+            gBattlescriptCurrInstr = cmd->jumpInstr;
             RecordAbilityBattle(battlerId - 1, gLastUsedAbility);
             gBattleScripting.battlerWithAbility = battlerId - 1;
         }
         else
-            gBattlescriptCurrInstr += 7;
+            gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else
     {
-        battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+        battlerId = GetBattlerForBattleScript(cmd->battler);
         if (gBattleMons[battlerId].ability == ability)
         {
             gLastUsedAbility = ability;
-            gBattlescriptCurrInstr = jumpPtr;
+            gBattlescriptCurrInstr = cmd->jumpInstr;
             RecordAbilityBattle(battlerId, gLastUsedAbility);
             gBattleScripting.battlerWithAbility = battlerId;
         }
         else
-            gBattlescriptCurrInstr += 7;
+            gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
@@ -3889,10 +3890,13 @@ static void Cmd_jumpiftype2(void)
 
 static void Cmd_jumpifabilitypresent(void)
 {
-    if (AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, gBattlescriptCurrInstr[1], 0, 0))
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
+    CMD_ARGS(u16 ability, const u8 *jumpInstr);
+    u16 ability = cmd->ability;
+
+    if (AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ability, 0, 0))
+        gBattlescriptCurrInstr = cmd->jumpInstr;
     else
-        gBattlescriptCurrInstr += 6;
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_endselectionscript(void)
@@ -8108,7 +8112,7 @@ static void Cmd_healpartystatus(void)
 
             if (species != SPECIES_NONE && species != SPECIES_EGG)
             {
-                u8 ability;
+                u16 ability;
 
                 if (gBattlerPartyIndexes[gBattlerAttacker] == i)
                     ability = gBattleMons[gBattlerAttacker].ability;
@@ -9070,7 +9074,7 @@ static void Cmd_tryswapabilities(void)
      }
     else
     {
-        u8 abilityAtk = gBattleMons[gBattlerAttacker].ability;
+        u16 abilityAtk = gBattleMons[gBattlerAttacker].ability;
         gBattleMons[gBattlerAttacker].ability = gBattleMons[gBattlerTarget].ability;
         gBattleMons[gBattlerTarget].ability = abilityAtk;
 

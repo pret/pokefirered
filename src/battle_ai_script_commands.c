@@ -42,6 +42,38 @@ AI scripts.
 static EWRAM_DATA const u8 *sAIScriptPtr = NULL;
 extern u8 *gBattleAI_ScriptsTable[];
 
+
+// Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
+//
+// For example accuracycheck is defined as:
+//
+//     .macro accuracycheck failInstr:req, move:req
+//     .byte 0x1
+//     .4byte \failInstr
+//     .2byte \move
+//     .endm
+//
+// Which corresponds to:
+//
+//     CMD_ARGS(const u8 *failInstr, u16 move);
+//
+// The arguments can be accessed as cmd->failInstr and cmd->move.
+// gBattlescriptCurrInstr = cmd->nextInstr; advances to the next instruction.
+#define CMD_ARGS(...) const struct __attribute__((packed)) { u8 opcode; MEMBERS(__VA_ARGS__) const u8 nextInstr[0]; } *const cmd UNUSED = (const void *)sAIScriptPtr
+#define VARIOUS_ARGS(...) CMD_ARGS(u8 battler, u8 id, ##__VA_ARGS__)
+#define NATIVE_ARGS(...) CMD_ARGS(void (*func)(void), ##__VA_ARGS__)
+
+#define MEMBERS(...) VARARG_8(MEMBERS_, __VA_ARGS__)
+#define MEMBERS_0()
+#define MEMBERS_1(a) a;
+#define MEMBERS_2(a, b) a; b;
+#define MEMBERS_3(a, b, c) a; b; c;
+#define MEMBERS_4(a, b, c, d) a; b; c; d;
+#define MEMBERS_5(a, b, c, d, e) a; b; c; d; e;
+#define MEMBERS_6(a, b, c, d, e, f) a; b; c; d; e; f;
+#define MEMBERS_7(a, b, c, d, e, f, g) a; b; c; d; e; f; g;
+#define MEMBERS_8(a, b, c, d, e, f, g, h) a; b; c; d; e; f; g; h;
+
 static void Cmd_if_random_less_than(void);
 static void Cmd_if_random_greater_than(void);
 static void Cmd_if_random_equal(void);
@@ -760,18 +792,37 @@ static void Cmd_if_more_than(void)
 
 static void Cmd_if_equal(void)
 {
-    if (AI_THINKING_STRUCT->funcResult == sAIScriptPtr[1])
-        sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 2);
+    CMD_ARGS(u16 value, const u8 *ptr);
+    DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_equal, value = %d", cmd->value);
+    if (AI_THINKING_STRUCT->funcResult == cmd->value)
+    {
+        if (cmd->value == TYPE_GRASS)
+        {
+            DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_equal, maybe grass type?");
+        }
+        sAIScriptPtr = cmd->ptr; //T1_READ_PTR(sAIScriptPtr + 2);
+    }
     else
-        sAIScriptPtr += 6;
+    {
+        DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_not_equal, is not equal");
+        sAIScriptPtr = cmd->nextInstr;
+    }
 }
 
 static void Cmd_if_not_equal(void)
 {
-    if (AI_THINKING_STRUCT->funcResult != sAIScriptPtr[1])
-        sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 2);
+    CMD_ARGS(u16 value, const u8 *ptr);
+    DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_not_equal, value = %d", cmd->value);
+    if (AI_THINKING_STRUCT->funcResult != cmd->value)
+    {
+        DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_not_equal, is not equal");
+        sAIScriptPtr = cmd->ptr; //T1_READ_PTR(sAIScriptPtr + 2);
+    }
     else
-        sAIScriptPtr += 6;
+    {
+        DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_not_equal, is equal");
+        sAIScriptPtr = cmd->nextInstr;
+    }
 }
 
 static void Cmd_if_less_than_ptr(void)

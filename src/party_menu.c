@@ -4441,11 +4441,6 @@ void Task_AbilityCapsule(u8 taskId)
     static const u8 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
 
-    DebugPrintfLevel(MGBA_LOG_ERROR, "species: %s", gSpeciesInfo[tSpecies].speciesName);
-    DebugPrintfLevel(MGBA_LOG_ERROR, "ability1: %s", gAbilityNames[gSpeciesInfo[tSpecies].abilities[0]]);
-    DebugPrintfLevel(MGBA_LOG_ERROR, "ability2: %s", gAbilityNames[gSpeciesInfo[tSpecies].abilities[1]]);
-    DebugPrintfLevel(MGBA_LOG_ERROR, "ability3: %s", gAbilityNames[gSpeciesInfo[tSpecies].abilities[2]]);
-
     switch (tState)
     {
     case 0:
@@ -4534,11 +4529,6 @@ void Task_AbilityPatch(u8 taskId)
     static const u8 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
 
-    DebugPrintfLevel(MGBA_LOG_ERROR, "species: %S", gSpeciesInfo[tSpecies].speciesName);
-    DebugPrintfLevel(MGBA_LOG_ERROR, "ability1: %S", gAbilityNames[gSpeciesInfo[tSpecies].abilities[0]]);
-    DebugPrintfLevel(MGBA_LOG_ERROR, "ability2: %S", gAbilityNames[gSpeciesInfo[tSpecies].abilities[1]]);
-    DebugPrintfLevel(MGBA_LOG_ERROR, "ability3: %S", gAbilityNames[gSpeciesInfo[tSpecies].abilities[2]]);
-
     switch (tState)
     {
     case 0:
@@ -4556,8 +4546,6 @@ void Task_AbilityPatch(u8 taskId)
         }
         gPartyMenuUseExitCallback = TRUE;
         GetMonNickname(&gPlayerParty[tMonId], gStringVar1);
-        DebugPrintfLevel(MGBA_LOG_ERROR, "tAbilityNum: %d", tAbilityNum);
-        DebugPrintfLevel(MGBA_LOG_ERROR, "abilityName: %S", gAbilityNames[GetAbilityBySpecies(tSpecies, tAbilityNum)]);
         StringCopy(gStringVar2, gAbilityNames[GetAbilityBySpecies(tSpecies, tAbilityNum)]);
         StringExpandPlaceholders(gStringVar4, askText);
         PlaySE(SE_SELECT);

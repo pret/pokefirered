@@ -53,7 +53,6 @@ void SetUsedFlyQuestLogEvent(const u8 *healLocCtrlData);
 void CB2_ShowPartyMenuForItemUse(void);
 void ItemUseCB_BattleScript(u8 taskId, TaskFunc task);
 void ItemUseCB_Medicine(u8 taskId, TaskFunc func);
-void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func);
 void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task);
 void ItemUseCB_ResetEVs(u8 taskId, TaskFunc task);
 void ItemUseCB_PPRecovery(u8 taskId, TaskFunc func);

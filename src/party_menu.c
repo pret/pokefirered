@@ -4528,11 +4528,6 @@ static bool8 ExecuteTableBasedItemEffect_(u8 partyMonIndex, u16 item, u8 monMove
 
 void ItemUseCB_Medicine(u8 taskId, TaskFunc func)
 {
-    ItemUseCB_MedicineStep(taskId, func);
-}
-
-void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
-{
     u16 hp = 0;
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 item = gSpecialVar_ItemId;

@@ -157,7 +157,7 @@
 	.macro jumpifsideaffecting battler:req, sidestatus:req, ptr:req
 	.byte 0x1f
 	.byte \battler
-	.2byte \sidestatus
+	.4byte \sidestatus
 	.4byte \ptr
 	.endm
 

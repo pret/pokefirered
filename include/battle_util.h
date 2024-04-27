@@ -94,8 +94,11 @@ void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
 // new
+u32 GetBattlerAbility(u32 battler);
 u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating);
 bool32 IsBattlerAlive(u32 battler);
 bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind);
+u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
+bool32 MoveHasAdditionalEffect(u32 move, u32 moveEffect);
 
 #endif // GUARD_BATTLE_UTIL_H

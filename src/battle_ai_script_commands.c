@@ -282,10 +282,8 @@ static const u16 sDiscouragedPowerfulMoveEffects[] =
 {
     EFFECT_EXPLOSION,
     EFFECT_DREAM_EATER,
-    EFFECT_RAZOR_WIND,
-    EFFECT_SKY_ATTACK,
+    EFFECT_TWO_TURNS_ATTACK,
     EFFECT_RECHARGE,
-    EFFECT_SKULL_BASH,
     EFFECT_SOLAR_BEAM,
     EFFECT_SPIT_UP,
     EFFECT_FOCUS_PUNCH,
@@ -948,7 +946,7 @@ static void Cmd_if_user_has_attacking_move(void)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (gBattleMons[gBattlerAttacker].moves[i] != 0
-            && gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].power != 0)
+            && gMovesInfo[gBattleMons[gBattlerAttacker].moves[i]].power != 0)
             break;
     }
 
@@ -965,7 +963,7 @@ static void Cmd_if_user_has_no_attacking_moves(void)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (gBattleMons[gBattlerAttacker].moves[i] != 0
-         && gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].power != 0)
+         && gMovesInfo[gBattleMons[gBattlerAttacker].moves[i]].power != 0)
             break;
     }
 
@@ -998,7 +996,7 @@ static void Cmd_get_type(void)
         AI_THINKING_STRUCT->funcResult = gBattleMons[gBattlerTarget].type2;
         break;
     case AI_TYPE_MOVE:
-        AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].type;
+        AI_THINKING_STRUCT->funcResult = gMovesInfo[AI_THINKING_STRUCT->moveConsidered].type;
         break;
     }
     sAIScriptPtr += 2;
@@ -1006,7 +1004,7 @@ static void Cmd_get_type(void)
 
 static void Cmd_get_considered_move_power(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power;
+    AI_THINKING_STRUCT->funcResult = gMovesInfo[AI_THINKING_STRUCT->moveConsidered].power;
     sAIScriptPtr += 1;
 }
 
@@ -1017,11 +1015,11 @@ static void Cmd_get_how_powerful_move_is(void)
 
     for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
     {
-        if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == sDiscouragedPowerfulMoveEffects[i])
+        if (gMovesInfo[AI_THINKING_STRUCT->moveConsidered].effect == sDiscouragedPowerfulMoveEffects[i])
             break;
     }
 
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power > 1
+    if (gMovesInfo[AI_THINKING_STRUCT->moveConsidered].power > 1
         && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gDynamicBasePower = 0;
@@ -1034,13 +1032,13 @@ static void Cmd_get_how_powerful_move_is(void)
         {
             for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
             {
-                if (gBattleMoves[gBattleMons[gBattlerAttacker].moves[checkedMove]].effect == sDiscouragedPowerfulMoveEffects[i])
+                if (gMovesInfo[gBattleMons[gBattlerAttacker].moves[checkedMove]].effect == sDiscouragedPowerfulMoveEffects[i])
                     break;
             }
 
             if (gBattleMons[gBattlerAttacker].moves[checkedMove] != MOVE_NONE
                 && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF
-                && gBattleMoves[gBattleMons[gBattlerAttacker].moves[checkedMove]].power > 1)
+                && gMovesInfo[gBattleMons[gBattlerAttacker].moves[checkedMove]].power > 1)
             {
                 gCurrentMove = gBattleMons[gBattlerAttacker].moves[checkedMove];
                 AI_CalcDmg(gBattlerAttacker, gBattlerTarget);
@@ -1178,7 +1176,7 @@ static void Cmd_get_considered_move(void)
 
 static void Cmd_get_considered_move_effect(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect;
+    AI_THINKING_STRUCT->funcResult = gMovesInfo[AI_THINKING_STRUCT->moveConsidered].effect;
     sAIScriptPtr += 1;
 }
 
@@ -1446,7 +1444,7 @@ static void Cmd_get_weather(void)
 static void Cmd_if_effect(void)
 {
     CMD_ARGS(u16 byte, const u8 *ptr);
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == cmd->byte)
+    if (gMovesInfo[AI_THINKING_STRUCT->moveConsidered].effect == cmd->byte)
     {
         sAIScriptPtr = cmd->ptr;
     }
@@ -1459,7 +1457,7 @@ static void Cmd_if_effect(void)
 static void Cmd_if_not_effect(void)
 {
     CMD_ARGS(u16 byte, const u8 *ptr);
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect != cmd->byte)
+    if (gMovesInfo[AI_THINKING_STRUCT->moveConsidered].effect != cmd->byte)
     {
         sAIScriptPtr = cmd->ptr;
     }
@@ -1531,7 +1529,7 @@ static void Cmd_if_stat_level_not_equal(void)
 
 static void Cmd_if_can_faint(void)
 {
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power < 2)
+    if (gMovesInfo[AI_THINKING_STRUCT->moveConsidered].power < 2)
     {
         sAIScriptPtr += 5;
         return;
@@ -1560,7 +1558,7 @@ static void Cmd_if_can_faint(void)
 
 static void Cmd_if_cant_faint(void)
 {
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power < 2)
+    if (gMovesInfo[AI_THINKING_STRUCT->moveConsidered].power < 2)
     {
         sAIScriptPtr += 5;
         return;
@@ -1664,7 +1662,7 @@ static void Cmd_if_has_move_with_effect(void)
     case AI_USER_PARTNER:
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].effect == cmd->effect)
+            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gMovesInfo[gBattleMons[gBattlerAttacker].moves[i]].effect == cmd->effect)
                 break;
         }
         if (i != MAX_MON_MOVES)
@@ -1676,7 +1674,7 @@ static void Cmd_if_has_move_with_effect(void)
     case AI_TARGET_PARTNER:
         for (i = 0; i < 8; i++)
         {
-            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i]].effect == cmd->effect)
+            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gMovesInfo[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i]].effect == cmd->effect)
                 break;
         }
         sAIScriptPtr = cmd->ptr;
@@ -1694,7 +1692,7 @@ static void Cmd_if_doesnt_have_move_with_effect(void)
     case AI_USER_PARTNER:
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].effect == cmd->effect)
+            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gMovesInfo[gBattleMons[gBattlerAttacker].moves[i]].effect == cmd->effect)
                 break;
         }
         if (i != MAX_MON_MOVES)
@@ -1706,7 +1704,7 @@ static void Cmd_if_doesnt_have_move_with_effect(void)
     case AI_TARGET_PARTNER:
         for (i = 0; i < 8; i++)
         {
-            if (BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i]].effect == cmd->effect)
+            if (BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] != 0 && gMovesInfo[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i]].effect == cmd->effect)
                 break;
         }
         sAIScriptPtr = cmd->nextInstr;
@@ -1884,21 +1882,21 @@ static void Cmd_get_used_held_item(void)
 
 static void Cmd_get_move_type_from_result(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].type;
+    AI_THINKING_STRUCT->funcResult = gMovesInfo[AI_THINKING_STRUCT->funcResult].type;
 
     sAIScriptPtr += 1;
 }
 
 static void Cmd_get_move_power_from_result(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].power;
+    AI_THINKING_STRUCT->funcResult = gMovesInfo[AI_THINKING_STRUCT->funcResult].power;
 
     sAIScriptPtr += 1;
 }
 
 static void Cmd_get_move_effect_from_result(void)
 {
-    AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].effect;
+    AI_THINKING_STRUCT->funcResult = gMovesInfo[AI_THINKING_STRUCT->funcResult].effect;
 
     sAIScriptPtr += 1;
 }

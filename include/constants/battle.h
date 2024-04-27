@@ -31,11 +31,12 @@
 #define B_POSITION_OPPONENT_RIGHT     3
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
-#define BATTLE_OPPOSITE(id) ((id) ^ 1)
-#define BATTLE_PARTNER(id) ((id) ^ 2)
+#define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
+#define BATTLE_PARTNER(id) ((id) ^ BIT_FLANK)
 
 #define B_SIDE_PLAYER     0
 #define B_SIDE_OPPONENT   1
+#define NUM_BATTLE_SIDES  2
 
 #define B_FLANK_LEFT 0
 #define B_FLANK_RIGHT 1
@@ -202,14 +203,30 @@
 #define HITMARKER_FAINTED2(battler)     ((1 << 28) << battler)
 
 // Per-side statuses that affect an entire party
-#define SIDE_STATUS_REFLECT          (1 << 0)
-#define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
-#define SIDE_STATUS_X4               (1 << 2)
-#define SIDE_STATUS_SPIKES           (1 << 4)
-#define SIDE_STATUS_SAFEGUARD        (1 << 5)
-#define SIDE_STATUS_FUTUREATTACK     (1 << 6)
-#define SIDE_STATUS_MIST             (1 << 8)
-#define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
+#define SIDE_STATUS_REFLECT                 (1 << 0)
+#define SIDE_STATUS_LIGHTSCREEN             (1 << 1)
+#define SIDE_STATUS_STICKY_WEB              (1 << 2)
+#define SIDE_STATUS_SPIKES                  (1 << 4)
+#define SIDE_STATUS_SAFEGUARD               (1 << 5)
+#define SIDE_STATUS_FUTUREATTACK            (1 << 6)
+#define SIDE_STATUS_MIST                    (1 << 8)
+#define SIDE_STATUS_SPIKES_DAMAGED          (1 << 9)
+// (1 << 9) previously was SIDE_STATUS_SPIKES_DAMAGED
+#define SIDE_STATUS_TAILWIND                (1 << 10)
+#define SIDE_STATUS_AURORA_VEIL             (1 << 11)
+#define SIDE_STATUS_LUCKY_CHANT             (1 << 12)
+#define SIDE_STATUS_TOXIC_SPIKES            (1 << 13)
+#define SIDE_STATUS_STEALTH_ROCK            (1 << 14)
+// Missing flags previously were SIDE_STATUS_TOXIC_SPIKES_DAMAGED, SIDE_STATUS_STEALTH_ROCK_DAMAGED, SIDE_STATUS_STICKY_WEB_DAMAGED
+#define SIDE_STATUS_QUICK_GUARD             (1 << 18)
+#define SIDE_STATUS_WIDE_GUARD              (1 << 19)
+#define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)
+#define SIDE_STATUS_MAT_BLOCK               (1 << 21)
+#define SIDE_STATUS_STEELSURGE              (1 << 22)
+#define SIDE_STATUS_DAMAGE_NON_TYPES        (1 << 23)
+#define SIDE_STATUS_RAINBOW                 (1 << 24)
+#define SIDE_STATUS_SEA_OF_FIRE             (1 << 25)
+#define SIDE_STATUS_SWAMP                   (1 << 26)
 
 // Flags describing move's result
 #define MOVE_RESULT_MISSED             (1 << 0)
@@ -244,15 +261,16 @@
 #define MOVE_EFFECT_FREEZE              4
 #define MOVE_EFFECT_PARALYSIS           5
 #define MOVE_EFFECT_TOXIC               6
-#define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_TOXIC // All above move effects apply primary status
-#define MOVE_EFFECT_CONFUSION           7
-#define MOVE_EFFECT_FLINCH              8
-#define MOVE_EFFECT_TRI_ATTACK          9
-#define MOVE_EFFECT_UPROAR              10
-#define MOVE_EFFECT_PAYDAY              11
-#define MOVE_EFFECT_CHARGING            12
-#define MOVE_EFFECT_WRAP                13
-#define MOVE_EFFECT_RECOIL_25           14
+#define MOVE_EFFECT_FROSTBITE           7
+#define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_FROSTBITE // All above move effects apply primary status
+#define MOVE_EFFECT_FREEZE_OR_FROSTBITE (B_USE_FROSTBITE == TRUE ? MOVE_EFFECT_FROSTBITE : MOVE_EFFECT_FREEZE)
+#define MOVE_EFFECT_CONFUSION           8
+#define MOVE_EFFECT_FLINCH              9
+#define MOVE_EFFECT_TRI_ATTACK          10
+#define MOVE_EFFECT_UPROAR              11
+#define MOVE_EFFECT_PAYDAY              12
+#define MOVE_EFFECT_CHARGING            13
+#define MOVE_EFFECT_WRAP                14
 #define MOVE_EFFECT_ATK_PLUS_1          15
 #define MOVE_EFFECT_DEF_PLUS_1          16
 #define MOVE_EFFECT_SPD_PLUS_1          17
@@ -267,16 +285,16 @@
 #define MOVE_EFFECT_SP_DEF_MINUS_1      26
 #define MOVE_EFFECT_ACC_MINUS_1         27
 #define MOVE_EFFECT_EVS_MINUS_1         28
-#define MOVE_EFFECT_RECHARGE            29
-#define MOVE_EFFECT_RAGE                30
-#define MOVE_EFFECT_STEAL_ITEM          31
-#define MOVE_EFFECT_PREVENT_ESCAPE      32
-#define MOVE_EFFECT_NIGHTMARE           33
-#define MOVE_EFFECT_ALL_STATS_UP        34
-#define MOVE_EFFECT_RAPIDSPIN           35
-#define MOVE_EFFECT_REMOVE_PARALYSIS    36
-#define MOVE_EFFECT_ATK_DEF_DOWN        37
-#define MOVE_EFFECT_RECOIL_33           38
+#define MOVE_EFFECT_REMOVE_ARG_TYPE     29
+#define MOVE_EFFECT_RECHARGE            30
+#define MOVE_EFFECT_RAGE                31
+#define MOVE_EFFECT_STEAL_ITEM          32
+#define MOVE_EFFECT_PREVENT_ESCAPE      33
+#define MOVE_EFFECT_NIGHTMARE           34
+#define MOVE_EFFECT_ALL_STATS_UP        35
+#define MOVE_EFFECT_RAPID_SPIN          36
+#define MOVE_EFFECT_REMOVE_STATUS       37
+#define MOVE_EFFECT_ATK_DEF_DOWN        38
 #define MOVE_EFFECT_ATK_PLUS_2          39
 #define MOVE_EFFECT_DEF_PLUS_2          40
 #define MOVE_EFFECT_SPD_PLUS_2          41
@@ -291,14 +309,39 @@
 #define MOVE_EFFECT_SP_DEF_MINUS_2      50
 #define MOVE_EFFECT_ACC_MINUS_2         51
 #define MOVE_EFFECT_EVS_MINUS_2         52
-#define MOVE_EFFECT_THRASH              53
-#define MOVE_EFFECT_KNOCK_OFF           54
-#define MOVE_EFFECT_NOTHING_37          55
-#define MOVE_EFFECT_NOTHING_38          56
-#define MOVE_EFFECT_NOTHING_39          57
-#define MOVE_EFFECT_NOTHING_3A          58
-#define MOVE_EFFECT_SP_ATK_TWO_DOWN     59
-#define NUM_MOVE_EFFECTS                60
+#define MOVE_EFFECT_SCALE_SHOT          53
+#define MOVE_EFFECT_THRASH              54
+#define MOVE_EFFECT_KNOCK_OFF           55
+#define MOVE_EFFECT_DEF_SPDEF_DOWN      56
+#define MOVE_EFFECT_CLEAR_SMOG          57
+#define MOVE_EFFECT_SP_ATK_TWO_DOWN     58
+#define MOVE_EFFECT_SMACK_DOWN          59
+#define MOVE_EFFECT_FLAME_BURST         60
+#define MOVE_EFFECT_FEINT               61
+#define MOVE_EFFECT_SPECTRAL_THIEF      62
+#define MOVE_EFFECT_V_CREATE            63
+#define MOVE_EFFECT_HAPPY_HOUR          64
+#define MOVE_EFFECT_CORE_ENFORCER       65
+#define MOVE_EFFECT_THROAT_CHOP         66
+#define MOVE_EFFECT_INCINERATE          67
+#define MOVE_EFFECT_BUG_BITE            68
+#define MOVE_EFFECT_RECOIL_HP_25        69
+#define MOVE_EFFECT_TRAP_BOTH           70
+#define MOVE_EFFECT_ROUND               71
+#define MOVE_EFFECT_STOCKPILE_WORE_OFF  72
+#define MOVE_EFFECT_DIRE_CLAW           73
+#define MOVE_EFFECT_STEALTH_ROCK        74
+#define MOVE_EFFECT_SPIKES              75
+#define MOVE_EFFECT_SYRUP_BOMB          76
+#define MOVE_EFFECT_FLORAL_HEALING      77
+#define MOVE_EFFECT_SECRET_POWER        78
+#define MOVE_EFFECT_PSYCHIC_NOISE       79
+#define MOVE_EFFECT_RECOIL_25           80
+#define MOVE_EFFECT_RAPIDSPIN           81
+#define MOVE_EFFECT_REMOVE_PARALYSIS    82
+#define MOVE_EFFECT_RECOIL_33           83
+
+#define NUM_MOVE_EFFECTS                84
 
 #define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
 #define MOVE_EFFECT_CERTAIN             (1 << 7) // 128

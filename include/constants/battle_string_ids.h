@@ -388,8 +388,15 @@
 #define STRINGID_ITEMRESTOREDSPECIESHEALTH            386
 #define STRINGID_ITEMRESTOREDSPECIESPP                387
 #define STRINGID_ITEMCUREDSPECIESSTATUS               388
+#define STRINGID_ELECTROSHOTCHARGING                  389
+#define STRINGID_METEORBEAMCHARGING                   390
+#define STRINGID_CLOAKEDINAHARSHLIGHT                 391
+#define STRINGID_VANISHEDINSTANTLY                    392
+#define STRINGID_PKMNTOOKTARGETHIGH                   393
+#define STRINGID_CLOAKEDINAFREEZINGLIGHT              394
+#define STRINGID_PKNMABSORBINGPOWER                   395
 
-#define BATTLESTRINGS_COUNT     389
+#define BATTLESTRINGS_COUNT     396
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

@@ -48,6 +48,22 @@
 #define B_ACTION_NOTHING_FAINTED           13 // when choosing an action
 #define B_ACTION_NONE                      0xFF
 
+
+
+// For defining EFFECT_HIT etc. with battle TV scores and flags etc.
+struct __attribute__((packed, aligned(2))) BattleMoveEffect
+{
+    const u8 *battleScript;
+    u16 encourageEncore:1;
+    u16 twoTurnEffect:1;
+    u16 semiInvulnerableEffect:1;
+    u16 usesProtectCounter:1;
+    u16 padding:12;
+};
+
+#define GET_MOVE_BATTLESCRIPT(move) gBattleMoveEffects[gMovesInfo[move].effect].battleScript
+
+
 #define MAX_TRAINER_ITEMS 4
 
 enum {
@@ -64,6 +80,8 @@ enum {
 #define MOVE_TARGET_USER                (1 << 4)
 #define MOVE_TARGET_FOES_AND_ALLY       (1 << 5)
 #define MOVE_TARGET_OPPONENTS_FIELD     (1 << 6)
+#define MOVE_TARGET_ALLY                (1 << 7)
+#define MOVE_TARGET_ALL_BATTLERS        ((1 << 8) | MOVE_TARGET_USER)
 
 // For the second argument of GetMoveTarget, when no target override is needed
 #define NO_TARGET_OVERRIDE 0
@@ -472,7 +490,7 @@ extern struct BattleStruct *gBattleStruct;
     if (gBattleStruct->dynamicMoveType)                               \
         typeArg = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK; \
     else                                                              \
-        typeArg = gBattleMoves[move].type;                            \
+        typeArg = gMovesInfo[move].type;                            \
 }
 
 #define IS_TYPE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
@@ -695,7 +713,7 @@ extern const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
 extern u16 gLastMoves[MAX_BATTLERS_COUNT];
 extern u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT];
-extern u16 gSideStatuses[2];
+extern u32 gSideStatuses[NUM_BATTLE_SIDES];
 extern u32 gHitMarker;
 extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
 extern u8 gMoveResultFlags;
@@ -727,6 +745,7 @@ extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
 extern u8 gPartyCriticalHits[PARTY_SIZE];
+extern const struct BattleMoveEffect gBattleMoveEffects[];
 
 static inline u32 GetBattlerPosition(u32 battler)
 {

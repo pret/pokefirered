@@ -1555,30 +1555,30 @@ static void PrintMoveInfo(u16 itemId)
     {
         // Draw type icon
         move = ItemIdToBattleMoveId(itemId);
-        BlitMenuInfoIcon(WIN_MOVE_INFO, gBattleMoves[move].type + 1, 0, 0);
+        BlitMenuInfoIcon(WIN_MOVE_INFO, gMovesInfo[move].type + 1, 0, 0);
 
         // Print power
-        if (gBattleMoves[move].power < 2)
+        if (gMovesInfo[move].power < 2)
             str = gText_ThreeHyphens;
         else
         {
-            ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[move].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
             str = gStringVar1;
         }
         TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL_COPY_2, str, 7, 12, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
 
         // Print accuracy
-        if (gBattleMoves[move].accuracy == 0)
+        if (gMovesInfo[move].accuracy == 0)
             str = gText_ThreeHyphens;
         else
         {
-            ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[move].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
             str = gStringVar1;
         }
         TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL_COPY_2, str, 7, 24, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
 
         // Print PP
-        ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].pp, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[move].pp, STR_CONV_MODE_RIGHT_ALIGN, 3);
         TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL_COPY_2, gStringVar1, 7, 36, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
 
         CopyWindowToVram(WIN_MOVE_INFO, COPYWIN_GFX);
@@ -1633,7 +1633,7 @@ static u8 CreateDiscSprite(u16 itemId)
     {
         tmIdx = itemId - ITEM_TM01;
         SetDiscSpriteAnim(&gSprites[spriteId], tmIdx);
-        TintDiscpriteByType(gBattleMoves[ItemIdToBattleMoveId(itemId)].type);
+        TintDiscpriteByType(gMovesInfo[ItemIdToBattleMoveId(itemId)].type);
         SetDiscSpritePosition(&gSprites[spriteId], tmIdx);
         return spriteId;
     }
@@ -1700,7 +1700,7 @@ static void SpriteCB_SwapDisc(struct Sprite *sprite)
             if (sprite->sItemId != ITEM_NONE)
             {
                 sprite->sState++;
-                TintDiscpriteByType(gBattleMoves[ItemIdToBattleMoveId(sprite->sItemId)].type);
+                TintDiscpriteByType(gMovesInfo[ItemIdToBattleMoveId(sprite->sItemId)].type);
                 sprite->sItemId -= ITEM_TM01;
                 SetDiscSpriteAnim(sprite, sprite->sItemId);
                 SetDiscSpritePosition(sprite, sprite->sItemId);

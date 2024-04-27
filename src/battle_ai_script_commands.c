@@ -894,18 +894,19 @@ static void Cmd_if_in_bytes(void)
 
 static void Cmd_if_not_in_bytes(void)
 {
-    const u8 *ptr = T1_READ_PTR(sAIScriptPtr + 1);
+    CMD_ARGS(const u8 *list, const u8 *ptr);
+    const u8 *ptr = cmd->list;
 
     while (*ptr != 0xFF)
     {
         if (AI_THINKING_STRUCT->funcResult == *ptr)
         {
-            sAIScriptPtr += 9;
+            sAIScriptPtr = cmd->nextInstr;
             return;
         }
         ptr++;
     }
-    sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 5);
+    sAIScriptPtr = cmd->ptr;
 }
 
 static void Cmd_if_in_hwords(void)
@@ -1444,18 +1445,28 @@ static void Cmd_get_weather(void)
 
 static void Cmd_if_effect(void)
 {
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == sAIScriptPtr[1])
-        sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 2);
+    CMD_ARGS(u16 byte, const u8 *ptr);
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == cmd->byte)
+    {
+        sAIScriptPtr = cmd->ptr;
+    }
     else
-        sAIScriptPtr += 6;
+    {
+        sAIScriptPtr = cmd->nextInstr;
+    }
 }
 
 static void Cmd_if_not_effect(void)
 {
-    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect != sAIScriptPtr[1])
-        sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 2);
+    CMD_ARGS(u16 byte, const u8 *ptr);
+    if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect != cmd->byte)
+    {
+        sAIScriptPtr = cmd->ptr;
+    }
     else
-        sAIScriptPtr += 6;
+    {
+        sAIScriptPtr = cmd->nextInstr;
+    }
 }
 
 static void Cmd_if_stat_level_less_than(void)
@@ -1644,59 +1655,61 @@ static void Cmd_if_doesnt_have_move(void)
 
 static void Cmd_if_has_move_with_effect(void)
 {
+    CMD_ARGS(u8 battler, u16 effect, const u8 *ptr);
     int i;
 
-    switch (sAIScriptPtr[1])
+    switch (cmd->battler)
     {
     case AI_USER:
     case AI_USER_PARTNER:
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].effect == sAIScriptPtr[2])
+            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].effect == cmd->effect)
                 break;
         }
         if (i != MAX_MON_MOVES)
-            sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 3);
+            sAIScriptPtr = cmd->ptr;
         else
-            sAIScriptPtr += 7;
+            sAIScriptPtr = cmd->nextInstr;
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
         for (i = 0; i < 8; i++)
         {
-            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i]].effect == sAIScriptPtr[2])
+            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i]].effect == cmd->effect)
                 break;
         }
-        sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 3);
+        sAIScriptPtr = cmd->ptr;
     }
 }
 
 static void Cmd_if_doesnt_have_move_with_effect(void)
 {
+    CMD_ARGS(u8 battler, u16 effect, const u8 *ptr);
     int i;
 
-    switch (sAIScriptPtr[1])
+    switch (cmd->battler)
     {
     case AI_USER:
     case AI_USER_PARTNER:
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].effect == sAIScriptPtr[2])
+            if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gBattleMoves[gBattleMons[gBattlerAttacker].moves[i]].effect == cmd->effect)
                 break;
         }
         if (i != MAX_MON_MOVES)
-            sAIScriptPtr += 7;
+            sAIScriptPtr = cmd->nextInstr;
         else
-            sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 3);
+            sAIScriptPtr = cmd->ptr;
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
         for (i = 0; i < 8; i++)
         {
-            if (BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i]].effect == sAIScriptPtr[2])
+            if (BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1][i]].effect == cmd->effect)
                 break;
         }
-        sAIScriptPtr += 7;
+        sAIScriptPtr = cmd->nextInstr;
     }
 }
 

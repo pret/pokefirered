@@ -4835,10 +4835,11 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 u16 SpeciesToPokedexNum(u16 species)
 {
     species = SpeciesToNationalPokedexNum(species);
-
-    if (!IsNationalPokedexEnabled() && species > KANTO_SPECIES_END)
-        return 0xFFFF;
-    return species;
+    if (!IsNationalPokedexEnabled())
+    {
+        species = NationalToKantoOrder(species);
+    }
+    return species > 0 ? species : 0xFFFF;
 }
 
 void ClearBattleMonForms(void)

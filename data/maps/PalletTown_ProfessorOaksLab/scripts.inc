@@ -307,6 +307,7 @@ PalletTown_ProfessorOaksLab_EventScript_RivalBattle::
 	goto_if_eq VAR_STARTER_MON, 0, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander
 	goto_if_eq VAR_STARTER_MON, 1, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur
 	goto_if_eq VAR_STARTER_MON, 2, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle
+	setvar 0x40FE, 0
 	end
 
 @ The scripts for the rival approaching the player for battle are a bit bloated because

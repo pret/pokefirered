@@ -59,6 +59,9 @@ PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale::
 PalletTown_PlayersHouse_1F_EventScript_Dad::
 	lockall
 	faceplayer
+	// TODO: This is here for testing the battle, once it's complete
+	// 		  remove this so she has to beat the champ to fight DAD
+	setflag FLAG_DEFEATED_CHAMP
 	goto_if_set FLAG_DEFEATED_CHAMP, PalletTown_PlayersHouse_1F_EventScript_DadBattle
 	msgbox PalletTown_PlayersHouse_1F_EventScript_DadBattle_TooWeak, MSGBOX_AUTOCLOSE
 	applymovement LOCALID_DAD, Common_Movement_FaceOriginalDirection
@@ -69,6 +72,8 @@ PalletTown_PlayersHouse_1F_EventScript_Dad::
 PalletTown_PlayersHouse_1F_EventScript_DadBattle::
 	lockall
 	trainerbattle_single TRAINER_MASTER_DAD, PalletTown_PlayersHouse_1F_Text_Dad_Battle_Intro, PalletTown_PlayersHouse_1F_Text_Dad_Battle_Defeat
+	// TODO: The flag is cleared to reset the flag to not break other shit
+	clearflag FLAG_DEFEATED_CHAMP
 	msgbox PalletTown_PlayersHouse_1F_Text_DadPostBattle, MSGBOX_AUTOCLOSE
 	release
 	end

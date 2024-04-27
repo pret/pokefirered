@@ -23,9 +23,6 @@ struct MultiBattlePokemonTx
     /*0x1D*/ u8 language;
 };
 
-#define TYPE_NAME_LENGTH 6
-#define ABILITY_NAME_LENGTH 12
-
 // defines for the u8 array gTypeEffectiveness
 #define TYPE_EFFECT_ATK_TYPE(i)((gTypeEffectiveness[i + 0]))
 #define TYPE_EFFECT_DEF_TYPE(i)((gTypeEffectiveness[i + 1]))
@@ -59,8 +56,6 @@ extern const u8 gStatusConditionString_LoveJpn[8];
 extern const u8 *const gStatusConditionStringsTable[7][2];
 extern const u8 gTypeEffectiveness[372];
 extern const struct TrainerMoney gTrainerMoneyTable[];
-extern const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT];
-extern const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1];
 
 void CB2_InitBattle(void);
 void BattleMainCB2(void);

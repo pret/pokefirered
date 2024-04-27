@@ -572,8 +572,6 @@ const struct TrainerMoney gTrainerMoneyTable[] =
     { 0xFF, 5},
 };
 
-#include "data/text/abilities.h"
-
 static void (*const sTurnActionsFuncsTable[])(void) =
 {
     [B_ACTION_USE_MOVE]               = HandleAction_UseMove,

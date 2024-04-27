@@ -84,6 +84,7 @@ static bool8 ShouldSkipFriendshipChange(void);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 
 #include "data/battle_moves.h"
+#include "data/abilities.h"
 
 // Used in an unreferenced function in RS.
 // Unreferenced here and in Emerald.

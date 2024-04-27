@@ -9,20 +9,152 @@
 
 #define FORM_SPECIES_END (0xffff)
 
+
+
+// For (Set|Get)(Box)?MonData
+enum {
+    MON_DATA_PERSONALITY,
+    MON_DATA_STATUS,
+    MON_DATA_OT_ID,
+    MON_DATA_LANGUAGE,
+    MON_DATA_SANITY_IS_BAD_EGG,
+    MON_DATA_SANITY_HAS_SPECIES,
+    MON_DATA_SANITY_IS_EGG,
+    MON_DATA_OT_NAME,
+    MON_DATA_MARKINGS,
+    MON_DATA_CHECKSUM,
+    MON_DATA_HP,
+    MON_DATA_IS_SHINY,
+    MON_DATA_HIDDEN_NATURE,
+    MON_DATA_HP_LOST,
+    MON_DATA_ENCRYPT_SEPARATOR,
+    MON_DATA_NICKNAME,
+    MON_DATA_SPECIES,
+    MON_DATA_HELD_ITEM,
+    MON_DATA_MOVE1,
+    MON_DATA_MOVE2,
+    MON_DATA_MOVE3,
+    MON_DATA_MOVE4,
+    MON_DATA_PP1,
+    MON_DATA_PP2,
+    MON_DATA_PP3,
+    MON_DATA_PP4,
+    MON_DATA_PP_BONUSES,
+    MON_DATA_COOL,
+    MON_DATA_BEAUTY,
+    MON_DATA_CUTE,
+    MON_DATA_EXP,
+    MON_DATA_HP_EV,
+    MON_DATA_ATK_EV,
+    MON_DATA_DEF_EV,
+    MON_DATA_SPEED_EV,
+    MON_DATA_SPATK_EV,
+    MON_DATA_SPDEF_EV,
+    MON_DATA_FRIENDSHIP,
+    MON_DATA_SMART,
+    MON_DATA_POKERUS,
+    MON_DATA_MET_LOCATION,
+    MON_DATA_MET_LEVEL,
+    MON_DATA_MET_GAME,
+    MON_DATA_POKEBALL,
+    MON_DATA_HP_IV,
+    MON_DATA_ATK_IV,
+    MON_DATA_DEF_IV,
+    MON_DATA_SPEED_IV,
+    MON_DATA_SPATK_IV,
+    MON_DATA_SPDEF_IV,
+    MON_DATA_IS_EGG,
+    MON_DATA_ABILITY_NUM,
+    MON_DATA_TOUGH,
+    MON_DATA_SHEEN,
+    MON_DATA_OT_GENDER,
+    MON_DATA_COOL_RIBBON,
+    MON_DATA_BEAUTY_RIBBON,
+    MON_DATA_CUTE_RIBBON,
+    MON_DATA_SMART_RIBBON,
+    MON_DATA_TOUGH_RIBBON,
+    MON_DATA_LEVEL,
+    MON_DATA_MAX_HP,
+    MON_DATA_ATK,
+    MON_DATA_DEF,
+    MON_DATA_SPEED,
+    MON_DATA_SPATK,
+    MON_DATA_SPDEF,
+    MON_DATA_MAIL,
+    MON_DATA_SPECIES_OR_EGG,
+    MON_DATA_IVS,
+    MON_DATA_CHAMPION_RIBBON,
+    MON_DATA_WINNING_RIBBON,
+    MON_DATA_VICTORY_RIBBON,
+    MON_DATA_ARTIST_RIBBON,
+    MON_DATA_EFFORT_RIBBON,
+    MON_DATA_MARINE_RIBBON,
+    MON_DATA_LAND_RIBBON,
+    MON_DATA_SKY_RIBBON,
+    MON_DATA_COUNTRY_RIBBON,
+    MON_DATA_NATIONAL_RIBBON,
+    MON_DATA_EARTH_RIBBON,
+    MON_DATA_WORLD_RIBBON,
+    MON_DATA_MODERN_FATEFUL_ENCOUNTER,
+    MON_DATA_KNOWN_MOVES,
+    MON_DATA_RIBBON_COUNT,
+    MON_DATA_RIBBONS,
+    MON_DATA_ATK2,
+    MON_DATA_DEF2,
+    MON_DATA_SPEED2,
+    MON_DATA_SPATK2,
+    MON_DATA_SPDEF2,
+    MON_DATA_HYPER_TRAINED_HP,
+    MON_DATA_HYPER_TRAINED_ATK,
+    MON_DATA_HYPER_TRAINED_DEF,
+    MON_DATA_HYPER_TRAINED_SPEED,
+    MON_DATA_HYPER_TRAINED_SPATK,
+    MON_DATA_HYPER_TRAINED_SPDEF,
+    MON_DATA_IS_SHADOW,
+    MON_DATA_DYNAMAX_LEVEL,
+    MON_DATA_GIGANTAMAX_FACTOR,
+    MON_DATA_TERA_TYPE,
+    MON_DATA_EVOLUTION_TRACKER,
+};
+
+
 struct PokemonSubstruct0
 {
-    u16 species;
-    u16 heldItem;
-    u32 experience;
+    u16 species:11; // 2047 species.
+    u16 teraType:5; // 30 types.
+    u16 heldItem:10; // 1023 items.
+    u16 unused_02:6;
+    u32 experience:21;
+    u32 nickname11:8; // 11th character of nickname.
+    u32 unused_04:3;
     u8 ppBonuses;
     u8 friendship;
-    u16 filler;
+    u16 pokeball:6; // 63 balls.
+    u16 nickname12:8; // 12th character of nickname.
+    u16 unused_0A:2;
 };
 
 struct PokemonSubstruct1
 {
-    u16 moves[MAX_MON_MOVES];
-    u8 pp[MAX_MON_MOVES];
+    u16 move1:11; // 2047 moves.
+    u16 evolutionTracker1:5;
+    u16 move2:11; // 2047 moves.
+    u16 evolutionTracker2:4;
+    u16 unused_02:1;
+    u16 move3:11; // 2047 moves.
+    u16 unused_04:5;
+    u16 move4:11; // 2047 moves.
+    u16 unused_06:3;
+    u16 hyperTrainedHP:1;
+    u16 hyperTrainedAttack:1;
+    u8 pp1:7; // 127 PP.
+    u8 hyperTrainedDefense:1;
+    u8 pp2:7; // 127 PP.
+    u8 hyperTrainedSpeed:1;
+    u8 pp3:7; // 127 PP.
+    u8 hyperTrainedSpAttack:1;
+    u8 pp4:7; // 127 PP.
+    u8 hyperTrainedSpDefense:1;
 };
 
 struct PokemonSubstruct2
@@ -43,41 +175,40 @@ struct PokemonSubstruct2
 
 struct PokemonSubstruct3
 {
- /* 0x00 */ u8 pokerus;
- /* 0x01 */ u8 metLocation;
-
- /* 0x02 */ u16 metLevel:7;
- /* 0x02 */ u16 metGame:4;
- /* 0x03 */ u16 pokeball:4;
- /* 0x03 */ u16 otGender:1;
-
- /* 0x04 */ u32 hpIV:5;
- /* 0x04 */ u32 attackIV:5;
- /* 0x05 */ u32 defenseIV:5;
- /* 0x05 */ u32 speedIV:5;
- /* 0x05 */ u32 spAttackIV:5;
- /* 0x06 */ u32 spDefenseIV:5;
- /* 0x07 */ u32 isEgg:1;
- /* 0x07 */ u32 abilityNum:2;
-
- /* 0x08 */ u32 coolRibbon:3;               // Stores the highest contest rank achieved in the Cool category.
- /* 0x08 */ u32 beautyRibbon:3;             // Stores the highest contest rank achieved in the Beauty category.
- /* 0x08 */ u32 cuteRibbon:3;               // Stores the highest contest rank achieved in the Cute category.
- /* 0x09 */ u32 smartRibbon:3;              // Stores the highest contest rank achieved in the Smart category.
- /* 0x09 */ u32 toughRibbon:3;              // Stores the highest contest rank achieved in the Tough category.
- /* 0x09 */ u32 championRibbon:1;           // Given when defeating the Champion. Because both RSE and FRLG use it, later generations don't specify from which region it comes from.
- /* 0x0A */ u32 winningRibbon:1;            // Given at the Battle Tower's Level 50 challenge by winning a set of seven battles that extends the current streak to 56 or more.
- /* 0x0A */ u32 victoryRibbon:1;            // Given at the Battle Tower's Level 100 challenge by winning a set of seven battles that extends the current streak to 56 or more.
- /* 0x0A */ u32 artistRibbon:1;             // Given at the Contest Hall by winning a Master Rank contest with at least 800 points, and agreeing to have the Pokémon's portrait placed in the museum after being offered.
- /* 0x0A */ u32 effortRibbon:1;             // Given at Slateport's market to Pokémon with maximum EVs.
- /* 0x0A */ u32 marineRibbon:1;             // Never distributed.
- /* 0x0A */ u32 landRibbon:1;               // Never distributed.
- /* 0x0A */ u32 skyRibbon:1;                // Never distributed.
- /* 0x0A */ u32 countryRibbon:1;            // Distributed during Pokémon Festa '04 and '05 to tournament winners.
- /* 0x0B */ u32 nationalRibbon:1;           // Given to purified Shadow Pokémon in Colosseum/XD.
- /* 0x0B */ u32 earthRibbon:1;              // Given to teams that have beaten Mt. Battle's 100-battle challenge in Colosseum/XD.
- /* 0x0B */ u32 worldRibbon:1;              // Distributed during Pokémon Festa '04 and '05 to tournament winners.
- /* 0x0B */ u32 unusedRibbons:3;            // Discarded in Gen 4.
+    u8 pokerus;
+    u8 metLocation;
+    u16 metLevel:7;
+    u16 metGame:4;
+    u16 dynamaxLevel:4;
+    u16 otGender:1;
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 isEgg:1;
+    u32 gigantamaxFactor:1;
+    u32 coolRibbon:3;     // Stores the highest contest rank achieved in the Cool category.
+    u32 beautyRibbon:3;   // Stores the highest contest rank achieved in the Beauty category.
+    u32 cuteRibbon:3;     // Stores the highest contest rank achieved in the Cute category.
+    u32 smartRibbon:3;    // Stores the highest contest rank achieved in the Smart category.
+    u32 toughRibbon:3;    // Stores the highest contest rank achieved in the Tough category.
+    u32 championRibbon:1; // Given when defeating the Champion. Because both RSE and FRLG use it, later generations don't specify from which region it comes from.
+    u32 winningRibbon:1;  // Given at the Battle Tower's Level 50 challenge by winning a set of seven battles that extends the current streak to 56 or more.
+    u32 victoryRibbon:1;  // Given at the Battle Tower's Level 100 challenge by winning a set of seven battles that extends the current streak to 56 or more.
+    u32 artistRibbon:1;   // Given at the Contest Hall by winning a Master Rank contest with at least 800 points, and agreeing to have the Pokémon's portrait placed in the museum after being offered.
+    u32 effortRibbon:1;   // Given at Slateport's market to Pokémon with maximum EVs.
+    u32 marineRibbon:1;   // Never distributed.
+    u32 landRibbon:1;     // Never distributed.
+    u32 skyRibbon:1;      // Never distributed.
+    u32 countryRibbon:1;  // Distributed during Pokémon Festa '04 and '05 to tournament winners.
+    u32 nationalRibbon:1; // Given to purified Shadow Pokémon in Colosseum/XD.
+    u32 earthRibbon:1;    // Given to teams that have beaten Mt. Battle's 100-battle challenge in Colosseum/XD.
+    u32 worldRibbon:1;    // Distributed during Pokémon Festa '04 and '05 to tournament winners.
+    u32 isShadow:1;
+    u32 unused_0B:1;
+    u32 abilityNum:2;
 
  // The functionality of this bit changed in FRLG:
  // In RS, this bit does nothing, is never set, & is accidentally unset when hatching Eggs.
@@ -110,17 +241,21 @@ struct BoxPokemon
 {
     u32 personality;
     u32 otId;
-    u8 nickname[POKEMON_NAME_LENGTH];
-    u8 language;
+    u8 nickname[min(10, POKEMON_NAME_LENGTH)];
+    u8 language:3;
+    u8 hiddenNatureModifier:5; // 31 natures.
     u8 isBadEgg:1;
     u8 hasSpecies:1;
     u8 isEgg:1;
     u8 blockBoxRS:1; // Unused, but Pokémon Box Ruby & Sapphire will refuse to deposit a Pokémon with this flag set
-    u8 unused:4;
+    u8 unused_13:4;
     u8 otName[PLAYER_NAME_LENGTH];
-    u8 markings;
+    u8 markings:4;
+    u8 compressedStatus:4;
     u16 checksum;
-    u16 unknown;
+    u16 hpLost:14; // 16383 HP.
+    u16 shinyModifier:1;
+    u16 unused_1E:1;
 
     union
     {
@@ -425,13 +560,25 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
 // u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
 // u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data);
 
-#ifdef IS_POKEMON_C
-u32 GetMonData(struct Pokemon *, s32, u8 *);
-u32 GetBoxMonData(struct BoxPokemon *, s32, u8 *);
-#else
-u32 GetMonData();
-u32 GetBoxMonData();
-#endif // IS_POKEMON_C
+// #ifdef IS_POKEMON_C
+// u32 GetMonData(struct Pokemon *, s32, u8 *);
+// u32 GetBoxMonData(struct BoxPokemon *, s32, u8 *);
+// #else
+// u32 GetMonData();
+// u32 GetBoxMonData();
+// #endif // IS_POKEMON_C
+
+/* GameFreak called Get(Box)MonData with either 2 or 3 arguments, for
+ * type safety we have a Get(Box)MonData macro which dispatches to
+ * either Get(Box)MonData2 or Get(Box)MonData3 based on the number of
+ * arguments. The two functions are aliases of each other, but they
+ * differ for matching purposes in the caller's codegen. */
+#define GetMonData(...) CAT(GetMonData, NARG_8(__VA_ARGS__))(__VA_ARGS__)
+#define GetBoxMonData(...) CAT(GetBoxMonData, NARG_8(__VA_ARGS__))(__VA_ARGS__)
+u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data);
+u32 GetMonData2(struct Pokemon *mon, s32 field);
+u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data);
+u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field);
 
 void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg);
@@ -445,6 +592,7 @@ u16 GetMonAbility(struct Pokemon *mon);
 u8 GetSecretBaseTrainerPicIndex(void);
 u8 GetSecretBaseTrainerNameIndex(void);
 bool8 IsPlayerPartyAndPokemonStorageFull(void);
+const u8 *GetSpeciesName2(u16 species);
 void GetSpeciesName(u8 *name, u16 species);
 u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex);
 void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex);

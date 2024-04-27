@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "item.h"
 #include "item_use.h"
+#include "item_menu.h"
 #include "load_save.h"
 #include "party_menu.h"
 #include "quest_log.h"
@@ -20,6 +21,7 @@ void SortAndCompactBagPocket(struct BagPocket * pocket);
 // Item descriptions and data
 #include "constants/moves.h"
 #include "pokemon_summary_screen.h"
+#include "data/pokemon/item_effects.h"
 #include "data/items.h"
 
 u16 GetBagItemQuantity(u16 * ptr)
@@ -145,7 +147,7 @@ bool8 CheckBagHasItem(u16 itemId, u16 count)
 
 bool8 HasAtLeastOneBerry(void)
 {
-    u8 itemId;
+    u16 itemId;
     bool8 exists;
 
     exists = CheckBagHasItem(ITEM_BERRY_POUCH, 1);
@@ -658,7 +660,32 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId)
 
 bool8 ItemId_GetBattleUsage(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].battleUsage;
+    u16 item = SanitizeItemId(itemId);    
+    if (item == ITEM_ENIGMA_BERRY)
+    {
+        switch (GetItemEffectType(gSpecialVar_ItemId))
+        {
+            case ITEM_EFFECT_X_ITEM:
+                return EFFECT_ITEM_INCREASE_STAT;
+            case ITEM_EFFECT_HEAL_HP:
+                return EFFECT_ITEM_RESTORE_HP;
+            case ITEM_EFFECT_CURE_POISON:
+            case ITEM_EFFECT_CURE_SLEEP:
+            case ITEM_EFFECT_CURE_BURN:
+            case ITEM_EFFECT_CURE_FREEZE:
+            case ITEM_EFFECT_CURE_PARALYSIS:
+            case ITEM_EFFECT_CURE_ALL_STATUS:
+            case ITEM_EFFECT_CURE_CONFUSION:
+            case ITEM_EFFECT_CURE_INFATUATION:
+                return EFFECT_ITEM_CURE_STATUS;
+            case ITEM_EFFECT_HEAL_PP:
+                return EFFECT_ITEM_RESTORE_PP;
+            default:
+                return 0;
+        }
+    }
+    else
+        return gItems[item].battleUsage;
 }
 
 u8 ItemId_GetSecondaryId(u16 itemId)
@@ -666,10 +693,22 @@ u8 ItemId_GetSecondaryId(u16 itemId)
     return gItems[SanitizeItemId(itemId)].secondaryId;
 }
 
+const u8 *ItemId_GetEffect(u32 itemId)
+{
+    if (itemId == ITEM_ENIGMA_BERRY)
+    {
+        return gSaveBlock1Ptr->enigmaBerry.itemEffect;
+    }
+    else
+    {
+        return gItems[SanitizeItemId(itemId)].effect;
+    }
+}
+
 
 u32 GetItemStatus1Mask(u16 itemId)
 {
-    const u8 *effect = GetItemEffect(itemId);
+    const u8 *effect = ItemId_GetEffect(itemId);
     switch (effect[3])
     {
         case ITEM3_PARALYSIS:
@@ -690,7 +729,7 @@ u32 GetItemStatus1Mask(u16 itemId)
 
 u32 GetItemStatus2Mask(u16 itemId)
 {
-    const u8 *effect = GetItemEffect(itemId);
+    const u8 *effect = ItemId_GetEffect(itemId);
     if (effect[3] & ITEM3_STATUS_ALL)
         return STATUS2_INFATUATION | STATUS2_CONFUSION;
     else if (effect[0] & ITEM0_INFATUATION)

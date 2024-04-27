@@ -12,7 +12,7 @@ void BattleAI_HandleItemUseBeforeAISetup(void);
 void BattleAI_SetupAIData(void);
 u8 BattleAI_ChooseMoveOrAction(void);
 void ClearBankMoveHistory(u8 bank);
-void RecordAbilityBattle(u8 bank, u8 abilityId);
+void RecordAbilityBattle(u8 bank, u16 abilityId);
 void ClearBankAbilityHistory(u8 bank);
 void RecordItemEffectBattle(u8 bank, u8 itemEffect);
 void ClearBankItemEffectHistory(u8 bank);

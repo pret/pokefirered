@@ -1695,17 +1695,6 @@ static void Task_ItemMenuAction_BattleUse(u8 taskId)
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     CopyWindowToVram(0, COPYWIN_MAP);   
-    
-    if (gSpecialVar_ItemId == ITEM_BERRY_POUCH) {
-        BattleUseFunc_BerryPouch(taskId);
-        return;
-    }
-    if (gSpecialVar_ItemId == ITEM_ENIGMA_BERRY) {
-        ItemUseInBattle_EnigmaBerry(taskId);
-        return;
-    }
-    
-    DebugPrintfLevel(MGBA_LOG_WARN, "Task_ItemMenuAction_BattleUse");
 
     if (type == ITEM_TYPE_BAG_MENU) {
         ItemUseInBattle_BagMenu(taskId);
@@ -2041,6 +2030,8 @@ static void Task_TryDoItemDeposit(u8 taskId)
     }
 }
 
+#define tIsFieldUse data[3]
+
 bool8 UseRegisteredKeyItemOnField(void)
 {
     u8 taskId;
@@ -2058,7 +2049,7 @@ bool8 UseRegisteredKeyItemOnField(void)
             StopPlayerAvatar();
             gSpecialVar_ItemId = gSaveBlock1Ptr->registeredItem;
             taskId = CreateTask(ItemId_GetFieldFunc(gSaveBlock1Ptr->registeredItem), 8);
-            gTasks[taskId].data[3] = 1;
+            gTasks[taskId].tIsFieldUse = TRUE;
             return TRUE;
         }
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
@@ -2066,6 +2057,8 @@ bool8 UseRegisteredKeyItemOnField(void)
     ScriptContext_SetupScript(EventScript_BagItemCanBeRegistered);
     return TRUE;
 }
+
+#undef tIsFieldUse
 
 static bool8 BagIsTutorial(void)
 {
@@ -2373,7 +2366,7 @@ static void Task_Bag_TeachyTvStatus(u8 taskId)
             CopyWindowToVram(0, COPYWIN_MAP);
             DestroyListMenuTask(data[0], NULL, NULL);
             RestorePlayerBag();
-            gItemUseCB = ItemUseCB_MedicineStep;
+            gItemUseCB = ItemUseCB_Medicine;
             ItemMenu_SetExitCallback(Pokedude_ChooseMonForInBattleItem);
             gTasks[taskId].func = Task_Pokedude_FadeFromBag;
             return;

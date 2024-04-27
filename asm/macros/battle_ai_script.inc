@@ -126,13 +126,13 @@
 
 	.macro if_equal value:req, ptr:req
 	.byte 0x13
-	.byte \value
+	.2byte \value
 	.4byte \ptr
 	.endm
 
 	.macro if_not_equal value:req, ptr:req
 	.byte 0x14
-	.byte \value
+	.2byte \value
 	.4byte \ptr
 	.endm
 

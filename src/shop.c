@@ -227,11 +227,11 @@ static u8 GetMartTypeFromItemList(u32 martType)
     if (martType != MART_TYPE_REGULAR)
         return martType;
 
-    for (i = 0; i < sShopData.itemCount && sShopData.itemList[i] != 0; i++)
-    {
-        if (ItemId_GetPocket(sShopData.itemList[i]) == POCKET_TM_CASE)
-            return MART_TYPE_TMHM;
-    }
+    // for (i = 0; i < sShopData.itemCount && sShopData.itemList[i] != 0; i++)
+    // {
+    //     if (ItemId_GetPocket(sShopData.itemList[i]) == POCKET_TM_CASE)
+    //         return MART_TYPE_TMHM;
+    // }
     return MART_TYPE_REGULAR;
 }
 

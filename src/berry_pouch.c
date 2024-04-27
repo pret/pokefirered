@@ -1072,7 +1072,7 @@ static void Task_BerryPouch_Use(u8 taskId)
     {
         u16 type = ItemId_GetType(gSpecialVar_ItemId);
         if (!ItemId_GetBattleUsage(gSpecialVar_ItemId)) {
-            FieldUseFunc_OakStopsYou(taskId);
+            ItemUseOutOfBattle_CannotUse(taskId);
             return;
         }
         if (type == ITEM_TYPE_BAG_MENU) {

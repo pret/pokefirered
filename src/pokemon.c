@@ -666,7 +666,6 @@ static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/experience_tables.h"
 #include "data/pokemon/teachable_learnsets.h"
 #include "data/pokemon/level_up_learnsets.h"
-#include "data/pokemon/evolution.h"
 #include "data/pokemon/level_up_learnset_pointers.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_change_tables.h"

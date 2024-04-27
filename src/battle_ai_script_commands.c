@@ -793,18 +793,12 @@ static void Cmd_if_more_than(void)
 static void Cmd_if_equal(void)
 {
     CMD_ARGS(u16 value, const u8 *ptr);
-    DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_equal, value = %d", cmd->value);
     if (AI_THINKING_STRUCT->funcResult == cmd->value)
     {
-        if (cmd->value == TYPE_GRASS)
-        {
-            DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_equal, maybe grass type?");
-        }
         sAIScriptPtr = cmd->ptr; //T1_READ_PTR(sAIScriptPtr + 2);
     }
     else
     {
-        DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_not_equal, is not equal");
         sAIScriptPtr = cmd->nextInstr;
     }
 }
@@ -812,15 +806,12 @@ static void Cmd_if_equal(void)
 static void Cmd_if_not_equal(void)
 {
     CMD_ARGS(u16 value, const u8 *ptr);
-    DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_not_equal, value = %d", cmd->value);
     if (AI_THINKING_STRUCT->funcResult != cmd->value)
     {
-        DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_not_equal, is not equal");
         sAIScriptPtr = cmd->ptr; //T1_READ_PTR(sAIScriptPtr + 2);
     }
     else
     {
-        DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_not_equal, is equal");
         sAIScriptPtr = cmd->nextInstr;
     }
 }

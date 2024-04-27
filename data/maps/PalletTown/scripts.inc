@@ -483,6 +483,7 @@ PalletTown_EventScript_CheckForSquirtle::
 
 PalletTown_EventScript_EmmaChoseCharmander::
 	lockall
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox PalletTown_Text_Charmander, MSGBOX_SIGN
 	showmonpic SPECIES_CHARIZARD, 10, 3
 	playmoncry SPECIES_CHARIZARD, CRY_MODE_NORMAL
@@ -498,6 +499,7 @@ PalletTown_EventScript_EmmaChoseCharmander::
 
 PalletTown_EventScript_EmmaChoseSquirtle::
 	lockall
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox PalletTown_Text_Squirtle, MSGBOX_SIGN
 	showmonpic SPECIES_BLASTOISE, 10, 3
 	playmoncry SPECIES_BLASTOISE, CRY_MODE_NORMAL
@@ -513,6 +515,7 @@ PalletTown_EventScript_EmmaChoseSquirtle::
 
 PalletTown_EventScript_EmmaChoseBulbasaur::
 	lockall
+	textcolor NPC_TEXT_COLOR_MALE
 	msgbox PalletTown_Text_Bulbasaur, MSGBOX_SIGN
 	showmonpic SPECIES_VENUSAUR, 10, 3
 	playmoncry SPECIES_VENUSAUR, CRY_MODE_NORMAL

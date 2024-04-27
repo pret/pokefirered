@@ -58,6 +58,7 @@ PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale::
 
 PalletTown_PlayersHouse_1F_EventScript_Dad::
 	lockall
+	textcolor NPC_TEXT_COLOR_MALE
 	faceplayer
 	// TODO: This is here for testing the battle, once it's complete
 	// 		  remove this so she has to beat the champ to fight DAD
@@ -71,6 +72,7 @@ PalletTown_PlayersHouse_1F_EventScript_Dad::
 
 PalletTown_PlayersHouse_1F_EventScript_DadBattle::
 	lockall
+	textcolor NPC_TEXT_COLOR_MALE
 	trainerbattle_single TRAINER_MASTER_DAD, PalletTown_PlayersHouse_1F_Text_Dad_Battle_Intro, PalletTown_PlayersHouse_1F_Text_Dad_Battle_Defeat
 	// TODO: The flag is cleared to reset the flag to not break other shit
 	clearflag FLAG_DEFEATED_CHAMP

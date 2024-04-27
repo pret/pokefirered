@@ -2097,7 +2097,7 @@ static void BufferMonInfo(void)
     if (!sMonSummaryScreen->isEgg)
     {
         dexNum = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES);
-        GetSpeciesName(sMonSummaryScreen->summary.speciesNameStrBuf, dexNum);
+        StringCopy(sMonSummaryScreen->summary.speciesNameStrBuf, GetSpeciesName(dexNum));
     }
     else
     {

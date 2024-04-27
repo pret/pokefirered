@@ -2293,7 +2293,7 @@ static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             srcId += 2;
             break;
         case B_BUFF_SPECIES: // species name
-            GetSpeciesName(dst, T1_READ_16(&src[srcId + 1]));
+            StringCopy(dst, GetSpeciesName(T1_READ_16(&src[srcId + 1])));
             srcId += 3;
             break;
         case B_BUFF_MON_NICK: // poke nick without prefix

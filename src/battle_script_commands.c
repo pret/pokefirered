@@ -1241,9 +1241,14 @@ static void Cmd_critcalc(void)
      && !(Random() % sCriticalHitChance[critChance])
      && (!(gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) || BtlCtrl_OakOldMan_TestState2Flag(1))
      && !(gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
+     {
         gCritMultiplier = 2;
+        gPartyCriticalHits[gBattlerPartyIndexes[gBattlerAttacker]]++;
+     }
     else
+    {
         gCritMultiplier = 1;
+    }
 
     gBattlescriptCurrInstr++;
 }

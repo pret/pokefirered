@@ -150,7 +150,7 @@ PewterCity_Text_RunningShoesLetterFromMom::
     .string "for my beloved challenger.\p"
     .string "Remember, I'll always cheer for\n"
     .string "you! Don't ever give up!\p"
-    .string "From Mom$"
+    .string "Love Mom$"
 
 PewterCity_Text_LassBattle1::
     .string "Let's go PIDGEY, you can do it!$"

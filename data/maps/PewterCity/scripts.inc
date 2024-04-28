@@ -1,6 +1,8 @@
 .equ LOCALID_MUSEUM_GUIDE, 2
 .equ LOCALID_GYM_GUIDE,    5
 .equ LOCALID_AIDE,         7
+.equ LOCALID_BOY,          8
+.equ LOCALID_LASS,         9
 
 PewterCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, PewterCity_OnTransition
@@ -845,3 +847,41 @@ PewterCity_Movement_AideExit3::
 PewterCity_Movement_WalkInPlaceLeft::
 	walk_in_place_left
 	step_end
+
+PewterCity_EventScript_LassBattle::
+	lockall
+	msgbox PewterCity_Text_LassBattle1, MSGBOX_SIGN
+	faceplayer
+	msgbox PewterCity_Text_LassBattle2, MSGBOX_SIGN
+	applymovement LOCALID_LASS, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+PewterCity_EventScript_PidgeyBattle::
+	lockall
+	playmoncry SPECIES_PIDGEY, CRY_MODE_ENCOUNTER
+	msgbox PewterCity_Text_PidgeyBattle, MSGBOX_SIGN
+	waitmoncry
+	delay 20
+	release
+	end
+
+PewterCity_EventScript_BoyBattle::
+	lockall
+	faceplayer
+	msgbox PewterCity_Text_BoyBattle1, MSGBOX_SIGN
+	applymovement LOCALID_BOY, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	msgbox PewterCity_Text_BoyBattle2, MSGBOX_SIGN
+	release
+	end
+
+PewterCity_EventScript_NidoranBattle::
+	lockall
+	playmoncry SPECIES_NIDORAN_F, CRY_MODE_ENCOUNTER
+	msgbox PewterCity_Text_NidoranBattle, MSGBOX_SIGN
+	waitmoncry
+	delay 20
+	release
+	end

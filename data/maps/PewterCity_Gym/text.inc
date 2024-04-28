@@ -18,8 +18,9 @@ PewterCity_Gym_Text_BrockIntro::
 @ buffer that it's put into, and it stomps all over the gBattleTextBuffs after, as well as the otherwise
 @ unused array after that, sFlickerArray. Perhaps that's the reason why said array exists.
 PewterCity_Gym_Text_BrockDefeat::
-    .string "I took you for granted, and so\n"
-    .string "I lost.\p"
+    .string "Your fighting style... it reminds me\n"
+    .string "of a very strong trainer who once\l"
+    .string "challenged me here.\p"
     .string "As proof of your victory, I confer\n"
     .string "on you this…the official POKéMON\l"
     .string "LEAGUE BOULDERBADGE.\p"
@@ -28,9 +29,7 @@ PewterCity_Gym_Text_BrockDefeat::
     .string "{FONT_MALE}Just having the BOULDERBADGE makes\n"
     .string "your POKéMON more powerful.\p"
     .string "It also enables the use of the\n"
-    .string "move FLASH outside of battle.\p"
-    .string "Of course, a POKéMON must know the\n"
-    .string "move FLASH to use it.$"
+    .string "move FLASH outside of battle.$"
 
 PewterCity_Gym_Text_TakeThisWithYou::
     .string "Wait!\n"
@@ -45,9 +44,6 @@ PewterCity_Gym_Text_ExplainTM39::
     .string "technique for POKéMON.\p"
     .string "Using a TM teaches the move it\n"
     .string "contains to a POKéMON.\p"
-    .string "A TM is good for only one use.\p"
-    .string "So, when you use one, pick the\n"
-    .string "POKéMON carefully.\p"
     .string "Anyways…\n"
     .string "TM39 contains ROCK TOMB.\p"
     .string "It hurls boulders at the foe and\n"
@@ -56,11 +52,12 @@ PewterCity_Gym_Text_ExplainTM39::
 PewterCity_Gym_Text_BrockPostBattle::
     .string "There are all kinds of TRAINERS in\n"
     .string "this huge world of ours.\p"
-    .string "You appear to be very gifted as a\n"
-    .string "POKéMON TRAINER.\p"
-    .string "So let me make a suggestion.\p"
-    .string "Go to the GYM in CERULEAN and test\n"
-    .string "your abilities.$"
+    .string "Your fighting style reminds me of\n"
+    .string "a very powerful POKéMON TRAINER\l"
+    .string "I faced many years ago.\p"
+    .string "Let me make a suggestion...\p"
+    .string "Go to the GYM in CERULEAN and\n"
+    .string "further test your abilities.$"
 
 PewterCity_Gym_Text_DontHaveRoomForThis::
     .string "You don't have room for this.$"

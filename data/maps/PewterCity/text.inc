@@ -152,3 +152,20 @@ PewterCity_Text_RunningShoesLetterFromMom::
     .string "you! Don't ever give up!\p"
     .string "From Mom$"
 
+PewterCity_Text_LassBattle1::
+    .string "Let's go PIDGEY, you can do it!$"
+
+PewterCity_Text_LassBattle2::
+    .string "BROCK won't know what hit him…$"
+
+PewterCity_Text_BoyBattle1::
+    .string "I'm practicing for BROCK…$"
+
+PewterCity_Text_BoyBattle2::
+    .string "Don't let up now NIDORAN♀!$"
+
+PewterCity_Text_NidoranBattle::
+    .string " Gaaaoo...$"
+
+PewterCity_Text_PidgeyBattle::
+    .string " Cooo...$"

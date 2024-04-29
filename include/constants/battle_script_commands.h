@@ -2,30 +2,49 @@
 #define GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H
 
 // The following correspond to the struct members of BattleScripting by adding their offset
-#define sPAINSPLIT_HP                gBattleScripting + 0x00 // painSplitHp
-#define sBIDE_DMG                    gBattleScripting + 0x04 // bideDmg
-#define sMULTIHIT_STRING             gBattleScripting + 0x08 // multihitString
-#define sDMG_MULTIPLIER              gBattleScripting + 0x0E // dmgMultiplier
-#define sTWOTURN_STRINGID            gBattleScripting + 0x0F // twoTurnsMoveStringId
-#define sB_ANIM_ARG1                 gBattleScripting + 0x10 // animArg1
-#define sB_ANIM_ARG2                 gBattleScripting + 0x11 // animArg2
-#define sTRIPLE_KICK_POWER           gBattleScripting + 0x12 // tripleKickPower
-#define sMOVEEND_STATE               gBattleScripting + 0x14 // moveendState
-#define sBATTLER_WITH_ABILITY        gBattleScripting + 0x15 // battlerWithAbility
-#define sMULTIHIT_EFFECT             gBattleScripting + 0x16 // multihitMoveEffect
-#define sBATTLER                     gBattleScripting + 0x17 // battler
-#define sB_ANIM_TURN                 gBattleScripting + 0x18 // animTurn
-#define sB_ANIM_TARGETS_HIT          gBattleScripting + 0x19 // animTargetsHit
-#define sSTATCHANGER                 gBattleScripting + 0x1A // statChanger
-#define sSTAT_ANIM_PLAYED            gBattleScripting + 0x1B // statAnimPlayed
-#define sGIVEEXP_STATE               gBattleScripting + 0x1C // getexpState
-#define sBATTLE_STYLE                gBattleScripting + 0x1D // battleStyle
-#define sLVLBOX_STATE                gBattleScripting + 0x1E // drawlvlupboxState
-#define sLEARNMOVE_STATE             gBattleScripting + 0x1F // learnMoveState
-#define sPURSUIT_DOUBLES_ATTACKER    gBattleScripting + 0x20 // pursuitDoublesAttacker
-#define sRESHOW_MAIN_STATE           gBattleScripting + 0x21 // reshowMainState
-#define sRESHOW_HELPER_STATE         gBattleScripting + 0x22 // reshowHelperState
-#define sLVLUP_HP                    gBattleScripting + 0x23 // levelUpHP
+#define sPAINSPLIT_HP                (gBattleScripting + 0x00) // painSplitHp
+#define sBIDE_DMG                    (gBattleScripting + 0x04) // bideDmg
+#define sMULTIHIT_STRING             (gBattleScripting + 0x08) // multihitString
+#define sEXP_CATCH                   (gBattleScripting + 0x0E) // expOnCatch
+#define sUNUSED                      (gBattleScripting + 0x0F) // unused
+#define sB_ANIM_ARG1                 (gBattleScripting + 0x10) // animArg1
+#define sB_ANIM_ARG2                 (gBattleScripting + 0x11) // animArg2
+#define sSAVED_STRINID               (gBattleScripting + 0x12) // savedStringId
+#define sMOVEEND_STATE               (gBattleScripting + 0x14) // moveendState
+#define sSAVED_STAT_CHANGER          (gBattleScripting + 0x15) // savedStatChanger
+#define sSHIFT_SWITCHED              (gBattleScripting + 0x16) // shiftSwitched
+#define sBATTLER                     (gBattleScripting + 0x17) // battler
+#define sB_ANIM_TURN                 (gBattleScripting + 0x18) // animTurn
+#define sB_ANIM_TARGETS_HIT          (gBattleScripting + 0x19) // animTargetsHit
+#define sSTATCHANGER                 (gBattleScripting + 0x1A) // statChanger
+#define sSTAT_ANIM_PLAYED            (gBattleScripting + 0x1B) // statAnimPlayed
+#define sGIVEEXP_STATE               (gBattleScripting + 0x1C) // getexpState
+#define sBATTLE_STYLE                (gBattleScripting + 0x1D) // battleStyle
+#define sLVLBOX_STATE                (gBattleScripting + 0x1E) // drawlvlupboxState
+#define sLEARNMOVE_STATE             (gBattleScripting + 0x1F) // learnMoveState
+#define sSAVED_BATTLER               (gBattleScripting + 0x20) // savedBattler
+#define sRESHOW_MAIN_STATE           (gBattleScripting + 0x21) // reshowMainState
+#define sRESHOW_HELPER_STATE         (gBattleScripting + 0x22) // reshowHelperState
+#define sLVLUP_HP                    (gBattleScripting + 0x23) // levelUpHP
+#define sWINDOWS_TYPE                (gBattleScripting + 0x24) // windowsType
+#define sMULTIPLAYER_ID              (gBattleScripting + 0x25) // multiplayerId
+#define sSPECIAL_TRAINER_BATTLE_TYPE (gBattleScripting + 0x26) // specialTrainerBattleType
+#define sMON_CAUGHT                  (gBattleScripting + 0x27) // monCaught
+#define sSAVED_DMG                   (gBattleScripting + 0x28) // savedDmg
+#define sSAVED_MOVE_EFFECT           (gBattleScripting + 0x2C) // savedMoveEffect
+#define sMOVE_EFFECT                 (gBattleScripting + 0x2E) // moveEffect
+#define sMULTIHIT_EFFECT             (gBattleScripting + 0x30) // multihitMoveEffect
+#define sILLUSION_NICK_HACK          (gBattleScripting + 0x32) // illusionNickHack
+#define sFIXED_ABILITY_POPUP         (gBattleScripting + 0x33) // fixedPopup
+#define sABILITY_OVERWRITE           (gBattleScripting + 0x34) // abilityPopupOverwrite
+#define sSWITCH_CASE                 (gBattleScripting + 0x36) // switchCase
+#define sBERRY_OVERRIDE              (gBattleScripting + 0x37) // overrideBerryRequirements
+#define sSTICKY_WEB_STAT_DROP        (gBattleScripting + 0x38) // stickyWebStatDrop
+#define sDMG_MULTIPLIER              (gBattleScripting + 0x39) // dmgMultiplier
+#define sTWOTURN_STRINGID            (gBattleScripting + 0x3A) // twoTurnsMoveStringId
+#define sBATTLER_WITH_ABILITY        (gBattleScripting + 0x3B) // battlerWithAbility
+#define sTRIPLE_KICK_POWER           (gBattleScripting + 0x3C)// tripleKickPower
+#define sPURSUIT_DOUBLES_ATTACKER    (gBattleScripting + 0x3E) // pursuitDoublesAttacker
 
 // Array entries for battle communication
 #define MULTIUSE_STATE          0
@@ -60,6 +79,8 @@
 #define BS_OPPONENT1                12
 #define BS_PLAYER2                  13 // for Cmd_updatestatusicon
 #define BS_OPPONENT2                14
+#define BS_ABILITY_BATTLER          15
+#define BS_ATTACKER_PARTNER         16
 
 // atk 01, accuracy calc
 #define NO_ACC_CALC 0xFFFE
@@ -90,6 +111,7 @@
 #define VARIOUS_CHECK_POKEFLUTE                 11
 #define VARIOUS_WAIT_FANFARE                    12
 #define VARIOUS_PLAY_MOVE_ANIMATION             36
+#define VARIOUS_ABILITY_POPUP                   53
 
 // Cmd_manipulatedmg
 #define DMG_CHANGE_SIGN            0

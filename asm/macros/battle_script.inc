@@ -254,10 +254,10 @@
 	.4byte \param3
 	.endm
 
-	.macro setbyte ptr:req, param1:req
+	.macro setbyte bytePtr:req, value:req
 	.byte 0x2e
-	.4byte \ptr
-	.byte \param1
+	.4byte \bytePtr
+	.byte \value
 	.endm
 
 	.macro addbyte ptr:req, param1:req
@@ -631,7 +631,7 @@
 	.byte \battler
 	.endm
 
-	.macro recordlastability battler:req
+	.macro recordability battler:req
 	.byte 0x70
 	.byte \battler
 	.endm
@@ -748,7 +748,7 @@
 
 	.macro statbuffchange param0:req, param1:req
 	.byte 0x89
-	.byte \param0
+	.2byte \param0
 	.4byte \param1
 	.endm
 
@@ -1313,15 +1313,19 @@
 	various \battler, VARIOUS_PLAY_MOVE_ANIMATION
 	.2byte \move
 	.endm
+	
+	.macro showabilitypopup battler:req
+	various \battler, VARIOUS_ABILITY_POPUP
+	.endm
 
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
-	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
+	setbyte sSTATCHANGER, \stat | \stages << 4 | \down << 7
 	.endm
 
 	.macro setmoveeffect effect:req
-	setbyte cEFFECT_CHOOSER, \effect
+	sethword sMOVE_EFFECT, \effect
 	.endm
 
 	.macro chosenstatus1animation battler:req, status:req

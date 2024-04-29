@@ -173,7 +173,7 @@ extern const u8 BattleScript_SynchronizeActivates[];
 extern const u8 BattleScript_NoItemSteal[];
 extern const u8 BattleScript_AbilityCuredStatus[];
 extern const u8 BattleScript_IgnoresAndUsesRandomMove[];
-extern const u8 BattleScript_MoveUsedLoafingAround[];
+extern const u8 BattleScript_MoveUsedLoafingAroundMsg[];
 extern const u8 BattleScript_IgnoresAndFallsAsleep[];
 extern const u8 BattleScript_SubstituteFade[];
 extern const u8 BattleScript_BerryCurePrlzEnd2[];
@@ -453,5 +453,19 @@ extern const u8 BattleScript_EffectWaterSport[];
 extern const u8 BattleScript_EffectCalmMind[];
 extern const u8 BattleScript_EffectDragonDance[];
 extern const u8 BattleScript_EffectCamouflage[];
+
+// pokeemerald
+extern const u8 BattleScript_ProteanActivates[];
+extern const u8 BattleScript_MoveUsedPsychicTerrainPrevents[];
+extern const u8 BattleScript_FailedFromAtkString[];
+extern const u8 BattleScript_FlingFailConsumeItem[];
+extern const u8 BattleScript_MagicCoatBouncePrankster[];
+extern const u8 BattleScript_TruantLoafingAround[];
+extern const u8 BattleScript_MoveUsedHealBlockPrevents[];
+extern const u8 BattleScript_MoveUsedGravityPrevents[];
+extern const u8 BattleScript_MoveUsedUnfrostbite[];
+extern const u8 BattleScript_PowderMoveNoEffect[];
+extern const u8 BattleScript_MoveUsedPowder[];
+extern const u8 BattleScript_MoveUsedIsThroatChopPrevented[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

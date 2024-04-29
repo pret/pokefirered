@@ -89,5 +89,9 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battler);
+s8 GetMovePriority(u32 battlerId, u16 move);
+s8 GetChosenMovePriority(u32 battlerId);
+u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect);
+u32 GetBattlerTotalSpeedStat(u32 battler);
 
 #endif // GUARD_BATTLE_MAIN_H

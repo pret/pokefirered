@@ -221,6 +221,11 @@ EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
+EWRAM_DATA u32 gFieldStatuses = 0;
+EWRAM_DATA u8 gBattlerAbility = 0;
+EWRAM_DATA s32 gBideDmg[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gBideTarget[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u16 gLastUsedMove = 0;
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
@@ -2404,7 +2409,7 @@ void SwitchInClearSetData(void)
         gDisableStructs[gActiveBattler].substituteHP = disableStructCopy.substituteHP;
         gDisableStructs[gActiveBattler].battlerWithSureHit = disableStructCopy.battlerWithSureHit;
         gDisableStructs[gActiveBattler].perishSongTimer = disableStructCopy.perishSongTimer;
-        gDisableStructs[gActiveBattler].perishSongTimerStartValue = disableStructCopy.perishSongTimerStartValue;
+        // gDisableStructs[gActiveBattler].perishSongTimerStartValue = disableStructCopy.perishSongTimerStartValue;
         gDisableStructs[gActiveBattler].battlerPreventingEscape = disableStructCopy.battlerPreventingEscape;
     }
 
@@ -2481,7 +2486,6 @@ void FaintClearSetData(void)
     gProtectStructs[gActiveBattler].helpingHand = FALSE;
     gProtectStructs[gActiveBattler].bounceMove = FALSE;
     gProtectStructs[gActiveBattler].stealMove = FALSE;
-    gProtectStructs[gActiveBattler].flag0Unknown = FALSE;
     gProtectStructs[gActiveBattler].prlzImmobility = FALSE;
     gProtectStructs[gActiveBattler].confusionSelfDmg = FALSE;
     gProtectStructs[gActiveBattler].targetNotAffected = FALSE;
@@ -4499,3 +4503,135 @@ static void HandleAction_ActionFinished(void)
     gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
 }
+
+s8 GetMovePriority(u32 battler, u16 move)
+{
+    s8 priority;
+    u16 ability = GetBattlerAbility(battler);
+
+    // TODO: Z-Moves
+    // if (gBattleStruct->zmove.toBeUsed[battler] && gMovesInfo[move].power != 0)
+    //     move = gBattleStruct->zmove.toBeUsed[battler];
+
+    priority = gMovesInfo[move].priority;
+
+    // Max Guard check
+    // TODO: Dynamax
+    // if (gBattleStruct->dynamax.usingMaxMove[battler] && gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
+    //     return gMovesInfo[MOVE_MAX_GUARD].priority;
+
+    if (ability == ABILITY_GALE_WINGS
+        && (B_GALE_WINGS < GEN_7 || BATTLER_MAX_HP(battler))
+        && gMovesInfo[move].type == TYPE_FLYING)
+    {
+        priority++;
+    }
+    else if (ability == ABILITY_PRANKSTER && IS_MOVE_STATUS(move))
+    {
+        gProtectStructs[battler].pranksterElevated = 1;
+        priority++;
+    }
+    else if (gMovesInfo[move].effect == EFFECT_GRASSY_GLIDE && gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && IsBattlerGrounded(battler))
+    {
+        priority++;
+    }
+    else if (ability == ABILITY_TRIAGE && IsHealingMove(move))
+        priority += 3;
+
+    if (gProtectStructs[battler].quash)
+        priority = -8;
+
+    return priority;
+}
+
+s8 GetChosenMovePriority(u32 battler)
+{
+    u16 move;
+
+    gProtectStructs[battler].pranksterElevated = 0;
+    if (gProtectStructs[battler].noValidMoves)
+        move = MOVE_STRUGGLE;
+    else
+        move = gBattleMons[battler].moves[*(gBattleStruct->chosenMovePositions + battler)];
+
+    return GetMovePriority(battler, move);
+}
+
+// For AI, so it doesn't 'cheat' by knowing player's ability
+u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
+{
+    u32 speed = gBattleMons[battler].speed;
+    u32 highestStat = GetHighestStatId(battler);
+
+    // weather abilities
+    if (WEATHER_HAS_EFFECT)
+    {
+        if (ability == ABILITY_SWIFT_SWIM       && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_RAIN)
+            speed *= 2;
+        else if (ability == ABILITY_CHLOROPHYLL && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_SUN)
+            speed *= 2;
+        else if (ability == ABILITY_SAND_RUSH   && gBattleWeather & B_WEATHER_SANDSTORM)
+            speed *= 2;
+        else if (ability == ABILITY_SLUSH_RUSH  && (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
+            speed *= 2;
+    }
+
+    // other abilities
+    if (ability == ABILITY_QUICK_FEET && gBattleMons[battler].status1 & STATUS1_ANY)
+        speed = (speed * 150) / 100;
+    else if (ability == ABILITY_SURGE_SURFER && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
+        speed *= 2;
+    else if (ability == ABILITY_SLOW_START && gDisableStructs[battler].slowStartTimer != 0)
+        speed /= 2;
+    else if (ability == ABILITY_PROTOSYNTHESIS && gBattleWeather & B_WEATHER_SUN && highestStat == STAT_SPEED)
+        speed = (speed * 150) / 100;
+    else if (ability == ABILITY_QUARK_DRIVE && gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN && highestStat == STAT_SPEED)
+        speed = (speed * 150) / 100;
+
+    // stat stages
+    speed *= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][0];
+    speed /= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][1];
+
+    // player's badge boost
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER))
+        && ShouldGetStatBadgeBoost(FLAG_BADGE03_GET, battler)
+        && GetBattlerSide(battler) == B_SIDE_PLAYER)
+    {
+        speed = (speed * 110) / 100;
+    }
+
+    // item effects
+    if (holdEffect == HOLD_EFFECT_MACHO_BRACE || holdEffect == HOLD_EFFECT_POWER_ITEM)
+        speed /= 2;
+    else if (holdEffect == HOLD_EFFECT_IRON_BALL)
+        speed /= 2;
+    else if (holdEffect == HOLD_EFFECT_CHOICE_SCARF /*&& !IsDynamaxed(battler)*/) // TODO: Dynamax
+        speed = (speed * 150) / 100;
+    else if (holdEffect == HOLD_EFFECT_QUICK_POWDER && gBattleMons[battler].species == SPECIES_DITTO && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED))
+        speed *= 2;
+
+    // various effects
+    if (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_TAILWIND)
+        speed *= 2;
+    if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_UNBURDEN)
+        speed *= 2;
+
+    // paralysis drop
+    if (gBattleMons[battler].status1 & STATUS1_PARALYSIS && ability != ABILITY_QUICK_FEET)
+        speed /= B_PARALYSIS_SPEED >= GEN_7 ? 2 : 4;
+
+    if (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SWAMP)
+        speed /= 4;
+
+    return speed;
+}
+
+u32 GetBattlerTotalSpeedStat(u32 battler)
+{
+    u32 ability = GetBattlerAbility(battler);
+    u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
+    return GetBattlerTotalSpeedStatArgs(battler, ability, holdEffect);
+}
+
+
+

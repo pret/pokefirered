@@ -395,8 +395,17 @@
 #define STRINGID_PKMNTOOKTARGETHIGH                   393
 #define STRINGID_CLOAKEDINAFREEZINGLIGHT              394
 #define STRINGID_PKNMABSORBINGPOWER                   395
+#define STRINGID_POKEMONCANNOTUSEMOVE                 396
+#define STRINGID_PKMNMOVEBOUNCEDABILITY               397
+#define STRINGID_HEALBLOCKPREVENTSUSAGE               398
+#define STRINGID_GRAVITYPREVENTSUSAGE                 399
+#define STRINGID_PKMNFROSTBITEHEALED2                 400
+#define STRINGID_PKMNFROSTBITEHEALEDBY                401
+#define STRINGID_SAFETYGOGGLESPROTECTED               402
+#define STRINGID_POWDEREXPLODES                       403
+#define STRINGID_PKMNCANTUSEMOVETHROATCHOP            404
 
-#define BATTLESTRINGS_COUNT     396
+#define BATTLESTRINGS_COUNT     405
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -551,6 +560,10 @@
 #define B_MSG_SOMEONES_BOX_FULL 2
 #define B_MSG_BILLS_BOX_FULL    3
 
+// gPrimalWeatherBlocksStringIds
+#define B_MSG_PRIMAL_WEATHER_FIZZLED_BY_RAIN    0
+#define B_MSG_PRIMAL_WEATHER_EVAPORATED_IN_SUN  1
+
 // gInobedientStringIds
 #define B_MSG_LOAFING            0
 #define B_MSG_WONT_OBEY          1
@@ -596,6 +609,10 @@
 // gGotDefrostedStringIds
 #define B_MSG_DEFROSTED         0
 #define B_MSG_DEFROSTED_BY_MOVE 1
+
+// gFrostbiteHealedStringIds
+#define B_MSG_FROSTBITE_HEALED         0
+#define B_MSG_FROSTBITE_HEALED_BY_MOVE 1
 
 #define NUM_TRAPPING_MOVES 6
 

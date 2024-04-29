@@ -5111,9 +5111,7 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc func)
 
 u16 ItemIdToBattleMoveId(u16 item)
 {
-    u16 tmNumber = item - ITEM_TM01;
-
-    return gTMHMMoves[tmNumber];
+    return (ItemId_GetPocket(item) == POCKET_TM_CASE) ? gItems[item].secondaryId : MOVE_NONE;
 }
 
 bool8 IsMoveHm(u16 move)

@@ -258,6 +258,11 @@
 // - Deoxys has 2 frames, 1 for each form
 #define MAX_MON_PIC_FRAMES 4
 
+#define BATTLE_ALIVE_EXCEPT_BATTLER  0
+#define BATTLE_ALIVE_SIDE            1
+
+#define SKIP_FRONT_ANIM (1 << 7)
+
 // used by ShouldIgnoreDeoxysForm
 #define DEOXYS_CHECK_BATTLE_SPRITE      1
 #define DEOXYS_CHECK_TRADE_MAIN         3

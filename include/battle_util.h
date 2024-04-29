@@ -58,6 +58,45 @@
 #define BS_GET_PLAYER2                  13
 #define BS_GET_OPPONENT2                14
 
+// for Natural Gift and Fling
+struct TypePower
+{
+    u8 type;
+    u8 power;
+    u16 effect;
+};
+
+enum
+{
+    CANCELLER_FLAGS,
+    CANCELLER_SKY_DROP,
+    CANCELLER_ASLEEP,
+    CANCELLER_FROZEN,
+    CANCELLER_TRUANT,
+    CANCELLER_RECHARGE,
+    CANCELLER_FLINCH,
+    CANCELLER_DISABLED,
+    CANCELLER_GRAVITY,
+    CANCELLER_HEAL_BLOCKED,
+    CANCELLER_TAUNTED,
+    CANCELLER_IMPRISONED,
+    CANCELLER_CONFUSED,
+    CANCELLER_PARALYSED,
+    CANCELLER_GHOST,
+    CANCELLER_IN_LOVE,
+    CANCELLER_BIDE,
+    CANCELLER_THAW,
+    CANCELLER_POWDER_MOVE,
+    CANCELLER_POWDER_STATUS,
+    CANCELLER_THROAT_CHOP,
+    CANCELLER_MULTIHIT_MOVES,
+    CANCELLER_Z_MOVES,
+    CANCELLER_END,
+    CANCELLER_PSYCHIC_TERRAIN,
+    CANCELLER_END2,
+};
+
+
 u8 GetBattlerForBattleScript(u8 caseId);
 void PressurePPLose(u8 target, u8 attacker, u16 move);
 void PressurePPLoseOnUsingImprison(u8 attacker);
@@ -82,7 +121,7 @@ u8 DoBattlerEndTurnEffects(void);
 bool8 HandleWishPerishSongOnTurnEnd(void);
 bool8 HandleFaintedMonActions(void);
 void TryClearRageStatuses(void);
-u8 AtkCanceller_UnableToUseMove(void);
+u8 AtkCanceller_UnableToUseMove(u32 moveType);
 bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2);
 u8 CastformDataTypeChange(u8 battler);
 u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 moveArg);
@@ -95,10 +134,51 @@ u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
 // new
 u32 GetBattlerAbility(u32 battler);
+u32 IsAbilityOnSide(u32 battler, u32 ability);
+u32 IsAbilityOnOpposingSide(u32 battler, u32 ability);
+u32 IsAbilityOnField(u32 ability);
+u32 IsAbilityOnFieldExcept(u32 battler, u32 ability);
+u32 IsAbilityPreventingEscape(u32 battler);
 u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating);
 bool32 IsBattlerAlive(u32 battler);
 bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind);
 u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
 bool32 MoveHasAdditionalEffect(u32 move, u32 moveEffect);
+u8 GetBattleMoveCategory(u32 moveId);
+u32 GetBattlerMoveTargetType(u32 battler, u32 move);
+bool32 IsBattlerTerrainAffected(u32 battler, u32 terrainFlag);
+bool32 IsBattlerGrounded(u32 battler);
+u8 AtkCanceller_UnableToUseMove2(void);
+void SetAtkCancellerForCalledMove(void);
+bool32 BlocksPrankster(u16 move, u32 battlerPrankster, u32 battlerDef, bool32 checkTarget);
+bool32 IsBattlerProtected(u32 battler, u32 move);
+bool32 IsMoveMakingContact(u32 move, u32 battlerAtk);
+bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
+s32 CalculateMoveDamage(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, s32 fixedBasePower, bool32 isCrit, bool32 randomFactor, bool32 updateFlags);
+bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument);
+u32 GetMoveSlot(u16 *moves, u32 move);
+u32 GetBattlerWeight(u32 battler);
+u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc);
+bool32 ShouldGetStatBadgeBoost(u16 flagId, u32 battler);
+bool32 IsBattlerWeatherAffected(u32 battler, u32 weatherFlags);
+bool32 CanBattlerGetOrLoseItem(u32 battler, u16 itemId);
+bool32 MoveIsAffectedBySheerForce(u32 move);
+u8 GetBattlerGender(u32 battler);
+bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2);
+bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2);
+u32 GetBattlerHoldEffectParam(u32 battler);
+uq4_12_t CalcTypeEffectivenessMultiplier(u32 move, u32 moveType, u32 battlerAtk, u32 battlerDef, u32 defAbility, bool32 recordAbilities);
+bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect);
+uq4_12_t GetTypeModifier(u32 atkType, u32 defType);
+u8 GetBattlerType(u32 battler, u8 typeIndex);
+u32 GetIllusionMonSpecies(u32 battler);
+struct Pokemon *GetIllusionMonPtr(u32 battler);
+void ClearIllusionMon(u32 battler);
+bool32 SetIllusionMon(struct Pokemon *mon, u32 battler);
+
+// battle_ai_util.h
+bool32 IsHealingMove(u32 move);
+
+// end battle_ai_util.h
 
 #endif // GUARD_BATTLE_UTIL_H

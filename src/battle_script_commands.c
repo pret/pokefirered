@@ -933,6 +933,7 @@ static void Cmd_attackcanceler(void)
     u16 attackerAbility = GetBattlerAbility(gBattlerAttacker);
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
+    // TODO: dynamax
     // Weight-based moves are blocked by Dynamax.
     // if (IsDynamaxed(gBattlerTarget) && IsMoveBlockedByDynamax(gCurrentMove))
     // {
@@ -959,20 +960,19 @@ static void Cmd_attackcanceler(void)
 
     if (WEATHER_HAS_EFFECT && gMovesInfo[gCurrentMove].power)
     {
-        // TODO: battlescripts
         if (moveType == TYPE_FIRE && (gBattleWeather & B_WEATHER_RAIN_PRIMAL))
         {
-            // gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PRIMAL_WEATHER_FIZZLED_BY_RAIN;
-            // BattleScriptPushCursor();
-            // gBattlescriptCurrInstr = BattleScript_PrimalWeatherBlocksMove;
-            // return;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PRIMAL_WEATHER_FIZZLED_BY_RAIN;
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_PrimalWeatherBlocksMove;
+            return;
         }
         else if (moveType == TYPE_WATER && (gBattleWeather & B_WEATHER_SUN_PRIMAL))
         {
-            // gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PRIMAL_WEATHER_EVAPORATED_IN_SUN;
-            // BattleScriptPushCursor();
-            // gBattlescriptCurrInstr = BattleScript_PrimalWeatherBlocksMove;
-            // return;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PRIMAL_WEATHER_EVAPORATED_IN_SUN;
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_PrimalWeatherBlocksMove;
+            return;
         }
     }
 

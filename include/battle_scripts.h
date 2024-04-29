@@ -467,5 +467,6 @@ extern const u8 BattleScript_MoveUsedUnfrostbite[];
 extern const u8 BattleScript_PowderMoveNoEffect[];
 extern const u8 BattleScript_MoveUsedPowder[];
 extern const u8 BattleScript_MoveUsedIsThroatChopPrevented[];
+extern const u8 BattleScript_PrimalWeatherBlocksMove[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

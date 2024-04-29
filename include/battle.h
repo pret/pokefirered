@@ -588,6 +588,7 @@ struct BattleStruct
     u8 blunderPolicy:1; // should blunder policy activate
     u8 skyDropTargets[MAX_BATTLERS_COUNT]; // For Sky Drop, to account for if multiple Pokemon use Sky Drop in a double battle.
     u8 bonusCritStages[MAX_BATTLERS_COUNT]; // G-Max Chi Strike boosts crit stages of allies.
+    u8 enduredDamage;
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;

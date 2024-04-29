@@ -356,7 +356,7 @@
 #define B_ANIM_TURN_TRAP                6
 #define B_ANIM_HELD_ITEM_EFFECT         7
 #define B_ANIM_SMOKEBALL_ESCAPE         8
-#define B_ANIM_FOCUS_BAND               9
+#define B_ANIM_HANGED_ON               9
 #define B_ANIM_RAIN_CONTINUES           10
 #define B_ANIM_SUN_CONTINUES            11
 #define B_ANIM_SANDSTORM_CONTINUES      12

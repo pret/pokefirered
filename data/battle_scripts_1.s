@@ -6,6 +6,7 @@
 #include "constants/battle_anim.h"
 #include "constants/items.h"
 #include "constants/abilities.h"
+#include "constants/hold_effects.h"
 #include "constants/species.h"
 #include "constants/pokemon.h"
 #include "constants/songs.h"
@@ -252,7 +253,7 @@ BattleScript_HitFromCritCalc::
 	critcalc
 	damagecalc
 	typecalc
-	adjustnormaldamage
+	adjustdamage
 BattleScript_HitFromAtkAnimation::
 	attackanimation
 	waitanimation
@@ -330,7 +331,7 @@ BattleScript_EffectAbsorb::
 	critcalc
 	damagecalc
 	typecalc
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -392,7 +393,7 @@ BattleScript_ExplosionLoop:
 	critcalc
 	damagecalc
 	typecalc
-	adjustnormaldamage
+	adjustdamage
 	accuracycheck BattleScript_ExplosionMissed, ACC_CURR_MOVE
 	effectivenesssound
 	hitanimation BS_TARGET
@@ -440,7 +441,7 @@ BattleScript_DreamEaterWorked:
 	critcalc
 	damagecalc
 	typecalc
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -622,7 +623,7 @@ BattleScript_DoMultiHit::
 	damagecalc
 	typecalc
 	jumpifmovehadnoeffect BattleScript_MultiHitNoMoreHits
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -860,7 +861,7 @@ BattleScript_MoveMissedDoDamage::
 	waitmessage B_WAIT_TIME_LONG
 	damagecalc
 	typecalc
-	adjustnormaldamage
+	adjustdamage
 	manipulatedamage DMG_RECOIL_FROM_MISS
 	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
@@ -1398,7 +1399,7 @@ BattleScript_DoTripleKickAttack::
 	critcalc
 	damagecalc
 	typecalc
-	adjustnormaldamage
+	adjustdamage
 	jumpifmovehadnoeffect BattleScript_TripleKickNoMoreHits
 	attackanimation
 	waitanimation
@@ -1635,7 +1636,7 @@ BattleScript_FuryCutterHit::
 	damagecalc
 	typecalc
 	jumpifmovehadnoeffect BattleScript_FuryCutterHit
-	adjustnormaldamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectAttract::
@@ -1846,7 +1847,7 @@ BattleScript_DoHitAllWithUndergroundBonus::
 	critcalc
 	damagecalc
 	typecalc
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -1948,7 +1949,7 @@ BattleScript_BeatUpLoop::
 	jumpifbyte CMP_NOT_EQUAL, gCritMultiplier, 2, BattleScript_BeatUpAttack
 	manipulatedamage DMG_DOUBLED
 BattleScript_BeatUpAttack::
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -2421,7 +2422,7 @@ BattleScript_EffectBrickBreak::
 	critcalc
 	damagecalc
 	typecalc
-	adjustnormaldamage
+	adjustdamage
 	jumpifbyte CMP_EQUAL, sB_ANIM_TURN, 0, BattleScript_BrickBreakAnim
 	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
 BattleScript_BrickBreakAnim::
@@ -3087,7 +3088,7 @@ BattleScript_PursuitDmgOnSwitchOut::
 	critcalc
 	damagecalc
 	typecalc
-	adjustnormaldamage
+	adjustdamage
 	attackanimation
 	waitanimation
 	effectivenesssound
@@ -3469,7 +3470,9 @@ BattleScript_MonTookFutureAttack::
 BattleScript_CheckDoomDesireMiss::
 	accuracycheck BattleScript_FutureAttackMiss, MOVE_DOOM_DESIRE
 BattleScript_FutureAttackAnimate::
-	adjustnormaldamage2
+	critcalc
+	damagecalc
+	adjustdamage
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, B_MSG_FUTURE_SIGHT, BattleScript_FutureHitAnimDoomDesire
 	playanimation BS_ATTACKER, B_ANIM_FUTURE_SIGHT_HIT
 	goto BattleScript_DoFutureAttackHit
@@ -3757,7 +3760,7 @@ BattleScript_MoveUsedIsConfused::
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, FALSE, BattleScript_MoveUsedIsConfusedRet
 BattleScript_DoSelfConfusionDmg::
 	cancelmultiturnmoves BS_ATTACKER
-	adjustnormaldamage2
+	adjustdamage
 	printstring STRINGID_ITHURTCONFUSION
 	waitmessage B_WAIT_TIME_LONG
 	effectivenesssound
@@ -4358,7 +4361,7 @@ BattleScript_SelectingNotAllowedMoveChoiceItem::
 	endselectionscript
 
 BattleScript_FocusBandActivates::
-	playanimation BS_TARGET, B_ANIM_FOCUS_BAND
+	playanimation BS_TARGET, B_ANIM_HANGED_ON
 	printstring STRINGID_PKMNHUNGONWITHX
 	waitmessage B_WAIT_TIME_LONG
 	return
@@ -4496,4 +4499,49 @@ BattleScript_PrimalWeatherBlocksMove::
 	printfromtable gPrimalWeatherBlocksStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
-	
+
+BattleScript_BerryReduceDmg::
+	playanimation BS_TARGET, B_ANIM_HELD_ITEM_EFFECT
+	waitanimation
+	setlastuseditem BS_TARGET
+	printstring STRINGID_TARGETATEITEM
+	waitmessage B_WAIT_TIME_LONG
+	removeitem BS_TARGET
+	return
+
+BattleScript_GemActivates::
+	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT
+	waitanimation
+	setlastuseditem BS_ATTACKER
+	printstring STRINGID_GEMACTIVATES
+	waitmessage B_WAIT_TIME_LONG
+	removeitem BS_ATTACKER
+	return
+
+BattleScript_AttackWeakenedByStrongWinds::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_ATTACKWEAKENEDBSTRONGWINDS
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_SturdiedMsg::
+	pause B_WAIT_TIME_SHORTEST
+	call BattleScript_AbilityPopUpTarget
+	printstring STRINGID_ENDUREDSTURDY
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_HangedOnMsg::
+	playanimation BS_TARGET, B_ANIM_HANGED_ON
+	printstring STRINGID_PKMNHUNGONWITHX
+	waitmessage B_WAIT_TIME_LONG
+	jumpifnoholdeffect BS_TARGET, HOLD_EFFECT_FOCUS_SASH, BattleScript_HangedOnMsgRet
+	removeitem BS_TARGET
+BattleScript_HangedOnMsgRet:
+	return
+
+BattleScript_PrintBerryReduceString::
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_BERRYDMGREDUCES
+	waitmessage B_WAIT_TIME_LONG
+	return

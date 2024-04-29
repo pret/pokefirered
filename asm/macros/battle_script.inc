@@ -29,11 +29,11 @@
 	.byte 0x6
 	.endm
 
-	.macro adjustnormaldamage
+	.macro adjustdamage
 	.byte 0x7
 	.endm
 
-	.macro adjustnormaldamage2
+	.macro multihitresultmessage
 	.byte 0x8
 	.endm
 
@@ -1316,6 +1316,21 @@
 	
 	.macro showabilitypopup battler:req
 	various \battler, VARIOUS_ABILITY_POPUP
+	.endm
+
+	.macro setlastuseditem battler:req
+	various \battler, VARIOUS_SET_LAST_USED_ITEM
+	.endm	
+	
+	.macro jumpifholdeffect battler:req, holdEffect:req, jumpInstr:req, equal=TRUE
+	various \battler, VARIOUS_JUMP_IF_HOLD_EFFECT
+	.byte \holdEffect
+	.4byte \jumpInstr
+	.byte \equal
+	.endm
+
+	.macro jumpifnoholdeffect battler:req, holdEffect:req, jumpInstr:req
+	jumpifholdeffect \battler, \holdEffect, \jumpInstr, FALSE
 	.endm
 
 

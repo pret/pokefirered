@@ -406,8 +406,13 @@
 #define STRINGID_PKMNCANTUSEMOVETHROATCHOP            404
 #define STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN         405
 #define STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT     406
+#define STRINGID_TARGETATEITEM                        407
+#define STRINGID_GEMACTIVATES                         408
+#define STRINGID_ATTACKWEAKENEDBSTRONGWINDS           409
+#define STRINGID_ENDUREDSTURDY                        410
+#define STRINGID_BERRYDMGREDUCES                      411
 
-#define BATTLESTRINGS_COUNT     407
+#define BATTLESTRINGS_COUNT     412
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

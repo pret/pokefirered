@@ -28,6 +28,8 @@ u8 GetCatchingBattler(void);
 bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler);
 u32 GetHighestStatId(u32 battlerId);
 u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
+bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move);
+bool32 DoesDisguiseBlockMove(u32 battler, u32 move);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const struct StatFractions gAccuracyStageRatios[];

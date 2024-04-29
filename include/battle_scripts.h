@@ -468,5 +468,11 @@ extern const u8 BattleScript_PowderMoveNoEffect[];
 extern const u8 BattleScript_MoveUsedPowder[];
 extern const u8 BattleScript_MoveUsedIsThroatChopPrevented[];
 extern const u8 BattleScript_PrimalWeatherBlocksMove[];
+extern const u8 BattleScript_BerryReduceDmg[];
+extern const u8 BattleScript_GemActivates[];
+extern const u8 BattleScript_AttackWeakenedByStrongWinds[];
+extern const u8 BattleScript_SturdiedMsg[];
+extern const u8 BattleScript_HangedOnMsg[];
+extern const u8 BattleScript_PrintBerryReduceString[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

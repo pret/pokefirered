@@ -349,9 +349,9 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_attackcanceler,                          //0x0 // done
     Cmd_accuracycheck,                           //0x1 // done
     Cmd_attackstring,                            //0x2 // done
-    Cmd_ppreduce,                                //0x3
-    Cmd_critcalc,                                //0x4
-    Cmd_damagecalc,                              //0x5
+    Cmd_ppreduce,                                //0x3 // done
+    Cmd_critcalc,                                //0x4 // done
+    Cmd_damagecalc,                              //0x5 // done
     Cmd_typecalc,                                //0x6
     Cmd_adjustnormaldamage,                      //0x7
     Cmd_adjustnormaldamage2,                     //0x8
@@ -620,9 +620,6 @@ const struct StatFractions gAccuracyStageRatios[] =
     {133,  50}, // +5
     {  3,   1}, // +6
 };
-
-// The chance is 1/N for each stage.
-static const u16 sCriticalHitChance[] = {16, 8, 4, 3, 2};
 
 static const u32 sStatusFlagsForMoveEffects[NUM_MOVE_EFFECTS] =
 {
@@ -1555,64 +1552,99 @@ static void Cmd_ppreduce(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_critcalc(void)
+// The chance is 1/N for each stage.
+#if B_CRIT_CHANCE >= GEN_7
+    static const u8 sCriticalHitChance[] = {24, 8, 2, 1, 1};
+#elif B_CRIT_CHANCE == GEN_6
+    static const u8 sCriticalHitChance[] = {16, 8, 2, 1, 1};
+#else
+    static const u8 sCriticalHitChance[] = {16, 8, 4, 3, 2}; // Gens 2,3,4,5
+#endif // B_CRIT_CHANCE
+
+#define BENEFITS_FROM_LEEK(battler, holdEffect)((holdEffect == HOLD_EFFECT_LEEK) && (GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_FARFETCHD || gBattleMons[battler].species == SPECIES_SIRFETCHD))
+s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, u32 abilityAtk, u32 abilityDef, u32 holdEffectAtk)
 {
-    u8 holdEffect;
-    u16 item, critChance;
+    s32 critChance = 0;
 
-    item = gBattleMons[gBattlerAttacker].item;
-
-    if (item == ITEM_ENIGMA_BERRY)
-        holdEffect = gEnigmaBerries[gBattlerAttacker].holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(item);
-
-    gPotentialItemEffectBattler = gBattlerAttacker;
-
-    critChance  = 2 * ((gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0)
-                + (gMovesInfo[gCurrentMove].effect == EFFECT_HIGH_CRITICAL)
-                + (gMovesInfo[gCurrentMove].effect == EFFECT_SKY_ATTACK)
-                + (gMovesInfo[gCurrentMove].effect == EFFECT_BLAZE_KICK)
-                + (gMovesInfo[gCurrentMove].effect == EFFECT_POISON_TAIL)
-                + (holdEffect == HOLD_EFFECT_SCOPE_LENS)
-                + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBattlerAttacker].species == SPECIES_CHANSEY)
-                + 2 * (holdEffect == HOLD_EFFECT_STICK && gBattleMons[gBattlerAttacker].species == SPECIES_FARFETCHD);
-
-    if (critChance >= ARRAY_COUNT(sCriticalHitChance))
-        critChance = ARRAY_COUNT(sCriticalHitChance) - 1;
-
-    if ((gBattleMons[gBattlerTarget].ability != ABILITY_BATTLE_ARMOR && gBattleMons[gBattlerTarget].ability != ABILITY_SHELL_ARMOR)
-     && !(gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT)
-     && !(gBattleTypeFlags & BATTLE_TYPE_OLD_MAN_TUTORIAL)
-     && !(Random() % sCriticalHitChance[critChance])
-     && (!(gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) || BtlCtrl_OakOldMan_TestState2Flag(1))
-     && !(gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
-     {
-        gCritMultiplier = 2;
-        gPartyCriticalHits[gBattlerPartyIndexes[gBattlerAttacker]]++;
-     }
+    if (gSideStatuses[battlerDef] & SIDE_STATUS_LUCKY_CHANT
+        || abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR)
+    {
+        critChance = -1;
+    }
+    else if (gStatuses3[battlerAtk] & STATUS3_LASER_FOCUS
+        || gMovesInfo[gCurrentMove].alwaysCriticalHit
+        || (abilityAtk == ABILITY_MERCILESS && gBattleMons[battlerDef].status1 & STATUS1_PSN_ANY))
+    {
+        critChance = -2;
+    }
     else
     {
-        gCritMultiplier = 1;
+        critChance  = 2 * ((gBattleMons[battlerAtk].status2 & STATUS2_FOCUS_ENERGY) != 0)
+                    + 1 * ((gBattleMons[battlerAtk].status2 & STATUS2_DRAGON_CHEER) != 0)
+                    + gMovesInfo[gCurrentMove].criticalHitStage
+                    + (holdEffectAtk == HOLD_EFFECT_SCOPE_LENS)
+                    + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[battlerAtk].species == SPECIES_CHANSEY)
+                    + 2 * BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk)
+                    + 2 * (B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(battlerAtk) == AFFECTION_FIVE_HEARTS)
+                    + (abilityAtk == ABILITY_SUPER_LUCK)
+                    + gBattleStruct->bonusCritStages[gBattlerAttacker];
+
+        // Record ability only if move had at least +3 chance to get a crit
+        if (critChance >= 3 && recordAbility && (abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR))
+            RecordAbilityBattle(battlerDef, abilityDef);
+
+        if (critChance >= ARRAY_COUNT(sCriticalHitChance))
+            critChance = ARRAY_COUNT(sCriticalHitChance) - 1;
     }
 
-    gBattlescriptCurrInstr++;
+    return critChance;
+}
+
+s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility)
+{
+    u32 abilityAtk = GetBattlerAbility(gBattlerAttacker);
+    u32 abilityDef = GetBattlerAbility(gBattlerTarget);
+    u32 holdEffectAtk = GetBattlerHoldEffect(battlerAtk, TRUE);
+    return CalcCritChanceStageArgs(battlerAtk, battlerDef, move, recordAbility, abilityAtk, abilityDef, holdEffectAtk);
+}
+#undef BENEFITS_FROM_LEEK
+
+static void Cmd_critcalc(void)
+{
+    CMD_ARGS();
+
+    u16 partySlot;
+    s32 critChance = CalcCritChanceStage(gBattlerAttacker, gBattlerTarget, gCurrentMove, TRUE);
+    gPotentialItemEffectBattler = gBattlerAttacker;
+
+    if ((gBattleTypeFlags & (BATTLE_TYPE_OLD_MAN_TUTORIAL | BATTLE_TYPE_POKEDUDE))
+    || ((gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) && !BtlCtrl_OakOldMan_TestState2Flag(1)))
+        gIsCriticalHit = FALSE;
+    else if (critChance == -1)
+        gIsCriticalHit = FALSE;
+    else if (critChance == -2)
+        gIsCriticalHit = TRUE;
+    else
+        gIsCriticalHit = RandomWeighted(RNG_CRITICAL_HIT, sCriticalHitChance[critChance] - 1, 1);
+
+    // Counter for EVO_CRITICAL_HITS.
+    partySlot = gBattlerPartyIndexes[gBattlerAttacker];
+    if (gIsCriticalHit && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
+        && !(gBattleTypeFlags & BATTLE_TYPE_MULTI && GetBattlerPosition(gBattlerAttacker) == B_POSITION_PLAYER_LEFT))
+        gPartyCriticalHits[partySlot]++;
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_damagecalc(void)
 {
-    u32 sideStatus = gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)];
-    gBattleMoveDamage = CalculateBaseDamageOld(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
-                                            sideStatus, gDynamicBasePower,
-                                            gBattleStruct->dynamicMoveType, gBattlerAttacker, gBattlerTarget);
-    gBattleMoveDamage = gBattleMoveDamage * gCritMultiplier * gBattleScripting.dmgMultiplier;
+    CMD_ARGS();
 
-    if (gStatuses3[gBattlerAttacker] & STATUS3_CHARGED_UP && gMovesInfo[gCurrentMove].type == TYPE_ELECTRIC)
-        gBattleMoveDamage *= 2;
-    if (gProtectStructs[gBattlerAttacker].helpingHand)
-        gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
+    u8 moveType;
 
-    gBattlescriptCurrInstr++;
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+    gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, gBattlerAttacker, gBattlerTarget, moveType, 0, gIsCriticalHit, TRUE, TRUE);
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void AI_CalcDmg(u8 attacker, u8 defender)
@@ -1666,73 +1698,14 @@ static void ModulateDmgByType(u8 multiplier)
 
 static void Cmd_typecalc(void)
 {
-    s32 i = 0;
+    CMD_ARGS();
+
     u8 moveType;
 
-    if (gCurrentMove == MOVE_STRUGGLE)
-    {
-        gBattlescriptCurrInstr++;
-        return;
-    }
-
     GET_MOVE_TYPE(gCurrentMove, moveType);
+    CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget), TRUE);
 
-    // check stab
-    if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType))
-    {
-        gBattleMoveDamage = gBattleMoveDamage * 15;
-        gBattleMoveDamage = gBattleMoveDamage / 10;
-    }
-
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
-    {
-        gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
-        gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
-        gLastLandedMoves[gBattlerTarget] = 0;
-        gLastHitByType[gBattlerTarget] = 0;
-        gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
-        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
-    }
-    else
-    {
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-        {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-            {
-                if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
-                    break;
-                i += 3;
-                continue;
-            }
-            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-            {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
-                    ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2 &&
-                    gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2)
-                    ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
-            }
-            i += 3;
-        }
-    }
-
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBattlerAttacker, gCurrentMove) == 2
-     && (!(gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE) || ((gMoveResultFlags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) == (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
-     && gMovesInfo[gCurrentMove].power)
-    {
-        gLastUsedAbility = ABILITY_WONDER_GUARD;
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        gLastLandedMoves[gBattlerTarget] = 0;
-        gLastHitByType[gBattlerTarget] = 0;
-        gBattleCommunication[MISS_TYPE] = B_MSG_AVOIDED_DMG;
-        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
-    }
-    if (gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
-        gProtectStructs[gBattlerAttacker].targetNotAffected = 1;
-
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void CheckWonderGuardAndLevitate(void)

@@ -512,10 +512,11 @@ static void ClearBattlerMoveHistory(u8 battlerId)
         BATTLE_HISTORY->usedMoves[battlerId / 2][i] = MOVE_NONE;
 }
 
-void RecordAbilityBattle(u8 battlerId, u16 abilityId)
+void RecordAbilityBattle(u32 battlerId, u32 abilityId)
 {
-    if (GetBattlerSide(battlerId) == 0)
-        BATTLE_HISTORY->abilities[GET_BATTLER_SIDE(battlerId)] = abilityId;
+    BATTLE_HISTORY->abilities[battlerId] = abilityId;
+    // TODO: AI
+    // AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability = abilityId;
 }
 
 void RecordItemEffectBattle(u8 battlerId, u8 itemEffect)

@@ -104,7 +104,7 @@ void PressurePPLoseOnUsingPerishSong(u8 attacker);
 void MarkBattlerForControllerExec(u8 battlerId);
 void MarkBattlerReceivedLinkData(u8 battlerId);
 void CancelMultiTurnMoves(u8 battler);
-bool8 WasUnableToUseMove(u8 battler);
+bool32 WasUnableToUseMove(u32 battler);
 void PrepareStringBattle(u16 stringId, u8 battler);
 void ResetSentPokesToOpponentValue(void);
 void OpponentSwitchInResetSentPokesToOpponentValue(u8 battler);

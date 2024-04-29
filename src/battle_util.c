@@ -240,17 +240,20 @@ void CancelMultiTurnMoves(u8 battler)
     gDisableStructs[battler].furyCutterCounter = 0;
 }
 
-bool8 WasUnableToUseMove(u8 battler)
+bool32 WasUnableToUseMove(u32 battler)
 {
     if (gProtectStructs[battler].prlzImmobility
-        || gProtectStructs[battler].targetNotAffected
         || gProtectStructs[battler].usedImprisonedMove
         || gProtectStructs[battler].loveImmobility
         || gProtectStructs[battler].usedDisabledMove
         || gProtectStructs[battler].usedTauntedMove
+        || gProtectStructs[battler].usedGravityPreventedMove
+        || gProtectStructs[battler].usedHealBlockedMove
         || gProtectStructs[battler].flag2Unknown
         || gProtectStructs[battler].flinchImmobility
-        || gProtectStructs[battler].confusionSelfDmg)
+        || gProtectStructs[battler].confusionSelfDmg
+        || gProtectStructs[battler].powderSelfDmg
+        || gProtectStructs[battler].usedThroatChopPreventedMove)
         return TRUE;
     else
         return FALSE;
@@ -3885,12 +3888,13 @@ static bool32 UnnerveOn(u32 battler, u32 itemId)
 
 u8 GetBattleMoveCategory(u32 moveId)
 {
+    // TODO: Z-Move and Dynamax
     // if (gBattleStruct != NULL && gBattleStruct->zmove.active && !IS_MOVE_STATUS(moveId))
     //     return gBattleStruct->zmove.activeCategory;
     // if (gBattleStruct != NULL && IsMaxMove(moveId)) // TODO: Might be buggy depending on when this is called.
     //     return gBattleStruct->dynamax.activeCategory;
-    // if (gBattleStruct != NULL && gBattleStruct->swapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky
-    //     return DAMAGE_CATEGORY_PHYSICAL;
+    if (gBattleStruct != NULL && gBattleStruct->swapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+        return DAMAGE_CATEGORY_PHYSICAL;
     if (B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)
         return gMovesInfo[moveId].category;
 

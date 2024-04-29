@@ -346,9 +346,9 @@ static void Cmd_callnative(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
-    Cmd_attackcanceler,                          //0x0
-    Cmd_accuracycheck,                           //0x1
-    Cmd_attackstring,                            //0x2
+    Cmd_attackcanceler,                          //0x0 // done
+    Cmd_accuracycheck,                           //0x1 // done
+    Cmd_attackstring,                            //0x2 // done
     Cmd_ppreduce,                                //0x3
     Cmd_critcalc,                                //0x4
     Cmd_damagecalc,                              //0x5
@@ -1485,6 +1485,8 @@ static void Cmd_accuracycheck(void)
 
 static void Cmd_attackstring(void)
 {
+    CMD_ARGS();
+
     if (gBattleControllerExecFlags)
         return;
 
@@ -1493,38 +1495,47 @@ static void Cmd_attackstring(void)
         PrepareStringBattle(STRINGID_USEDMOVE, gBattlerAttacker);
         gHitMarker |= HITMARKER_ATTACKSTRING_PRINTED;
     }
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
     gBattleCommunication[MSG_DISPLAY] = 0;
 }
 
 static void Cmd_ppreduce(void)
 {
-    s32 ppToDeduct = 1;
+    CMD_ARGS();
+
+    s32 i, ppToDeduct = 1;
+    u32 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
 
     if (gBattleControllerExecFlags)
         return;
 
-    if (!gSpecialStatuses[gBattlerAttacker].ppNotAffectedByPressure)
+    if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
+        gHitMarker |= HITMARKER_NO_PPDEDUCT;
+
+    if (moveTarget == MOVE_TARGET_BOTH
+        || moveTarget == MOVE_TARGET_FOES_AND_ALLY
+        || moveTarget == MOVE_TARGET_ALL_BATTLERS
+        || gMovesInfo[gCurrentMove].forcePressure)
     {
-        switch (gMovesInfo[gCurrentMove].target)
+        for (i = 0; i < gBattlersCount; i++)
         {
-        case MOVE_TARGET_FOES_AND_ALLY:
-            ppToDeduct += AbilityBattleEffects(ABILITYEFFECT_COUNT_ON_FIELD, gBattlerAttacker, ABILITY_PRESSURE, 0, 0);
-            break;
-        case MOVE_TARGET_BOTH:
-        case MOVE_TARGET_OPPONENTS_FIELD:
-            ppToDeduct += AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIDE, gBattlerAttacker, ABILITY_PRESSURE, 0, 0);
-            break;
-        default:
-            if (gBattlerAttacker != gBattlerTarget && gBattleMons[gBattlerTarget].ability == ABILITY_PRESSURE)
-                ppToDeduct++;
-            break;
+            if (GetBattlerSide(i) != GetBattlerSide(gBattlerAttacker) && IsBattlerAlive(i))
+                ppToDeduct += (GetBattlerAbility(i) == ABILITY_PRESSURE);
         }
+    }
+    else if (moveTarget != MOVE_TARGET_OPPONENTS_FIELD)
+    {
+        if (gBattlerAttacker != gBattlerTarget && GetBattlerAbility(gBattlerTarget) == ABILITY_PRESSURE)
+             ppToDeduct++;
     }
 
     if (!(gHitMarker & (HITMARKER_NO_PPDEDUCT | HITMARKER_NO_ATTACKSTRING)) && gBattleMons[gBattlerAttacker].pp[gCurrMovePos])
     {
-        gProtectStructs[gBattlerAttacker].notFirstStrike = 1;
+        gProtectStructs[gBattlerAttacker].notFirstStrike = TRUE;
+
+        // For item Metronome, echoed voice
+        if (gCurrentMove != gLastResultingMoves[gBattlerAttacker] || WasUnableToUseMove(gBattlerAttacker))
+            gBattleStruct->sameMoveTurns[gBattlerAttacker] = 0;
 
         if (gBattleMons[gBattlerAttacker].pp[gCurrMovePos] > ppToDeduct)
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] -= ppToDeduct;
@@ -1533,7 +1544,6 @@ static void Cmd_ppreduce(void)
 
         if (MOVE_IS_PERMANENT(gBattlerAttacker, gCurrMovePos))
         {
-            gActiveBattler = gBattlerAttacker;
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_PPMOVE1_BATTLE + gCurrMovePos, 0,
                                          sizeof(gBattleMons[gBattlerAttacker].pp[gCurrMovePos]),
                                          &gBattleMons[gBattlerAttacker].pp[gCurrMovePos]);
@@ -1542,7 +1552,7 @@ static void Cmd_ppreduce(void)
     }
 
     gHitMarker &= ~HITMARKER_NO_PPDEDUCT;
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_critcalc(void)

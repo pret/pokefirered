@@ -3566,44 +3566,90 @@ static bool32 IsBattlerModernFatefulEncounter(u8 battlerId)
     return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MODERN_FATEFUL_ENCOUNTER, NULL);
 }
 
+bool32 IsNeutralizingGasOnField(void)
+{
+    u32 i;
+
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (IsBattlerAlive(i) && gBattleMons[i].ability == ABILITY_NEUTRALIZING_GAS && !(gStatuses3[i] & STATUS3_GASTRO_ACID))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 IsMyceliumMightOnField(void)
+{
+    u32 i;
+
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (IsBattlerAlive(i) && gBattleMons[i].ability == ABILITY_MYCELIUM_MIGHT && IS_MOVE_STATUS(gCurrentMove))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 IsMoldBreakerTypeAbility(u32 ability)
+{
+    return (ability == ABILITY_MOLD_BREAKER || ability == ABILITY_TERAVOLT || ability == ABILITY_TURBOBLAZE);
+}
+
 u32 GetBattlerAbility(u32 battler)
 {
-    // if (gStatuses3[battler] & STATUS3_GASTRO_ACID)
-    //     return ABILITY_NONE;
+    if (gAbilitiesInfo[gBattleMons[battler].ability].cantBeSuppressed)
+        return gBattleMons[battler].ability;
 
-    // if (IsNeutralizingGasOnField() && !IsNeutralizingGasBannedAbility(gBattleMons[battler].ability))
-    //     return ABILITY_NONE;
+    if (gStatuses3[battler] & STATUS3_GASTRO_ACID)
+        return ABILITY_NONE;
 
-    // if (IsMyceliumMightOnField())
-    //     return ABILITY_NONE;
+    if (IsNeutralizingGasOnField()
+     && gBattleMons[battler].ability != ABILITY_NEUTRALIZING_GAS
+     && GetBattlerHoldEffectIgnoreAbility(battler, TRUE) != HOLD_EFFECT_ABILITY_SHIELD)
+        return ABILITY_NONE;
 
-    // if (((IsMoldBreakerTypeAbility(gBattleMons[gBattlerAttacker].ability)
-    //         && !(gStatuses3[gBattlerAttacker] & STATUS3_GASTRO_ACID))
-    //         || gBattleMoves[gCurrentMove].ignoresTargetAbility)
-    //         && sAbilitiesAffectedByMoldBreaker[gBattleMons[battler].ability]
-    //         && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
-    //         && gActionsByTurnOrder[gBattlerByTurnOrder[gBattlerAttacker]] == B_ACTION_USE_MOVE
-    //         && gCurrentTurnActionNumber < gBattlersCount)
-    //     return ABILITY_NONE;
+    if (IsMyceliumMightOnField())
+        return ABILITY_NONE;
+
+    if (((IsMoldBreakerTypeAbility(gBattleMons[gBattlerAttacker].ability)
+            && !(gStatuses3[gBattlerAttacker] & STATUS3_GASTRO_ACID))
+            || gMovesInfo[gCurrentMove].ignoresTargetAbility)
+            && gAbilitiesInfo[gBattleMons[battler].ability].breakable
+            && gBattlerByTurnOrder[gCurrentTurnActionNumber] == gBattlerAttacker
+            && gActionsByTurnOrder[gBattlerByTurnOrder[gBattlerAttacker]] == B_ACTION_USE_MOVE
+            && gCurrentTurnActionNumber < gBattlersCount)
+        return ABILITY_NONE;
 
     return gBattleMons[battler].ability;
 }
 
 u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating)
 {
+    return GetBattlerHoldEffectInternal(battler, checkNegating, TRUE);
+}
+
+u32 GetBattlerHoldEffectIgnoreAbility(u32 battler, bool32 checkNegating)
+{
+    return GetBattlerHoldEffectInternal(battler, checkNegating, FALSE);
+}
+
+u32 GetBattlerHoldEffectInternal(u32 battler, bool32 checkNegating, bool32 checkAbility)
+{
     if (checkNegating)
     {
-        // if (gStatuses3[battler] & STATUS3_EMBARGO)
-        //     return HOLD_EFFECT_NONE;
-        // if (gFieldStatuses & STATUS_FIELD_MAGIC_ROOM)
-        //     return HOLD_EFFECT_NONE;
-        if (GetBattlerAbility(battler) == ABILITY_KLUTZ)
+        if (gStatuses3[battler] & STATUS3_EMBARGO)
+            return HOLD_EFFECT_NONE;
+        if (gFieldStatuses & STATUS_FIELD_MAGIC_ROOM)
+            return HOLD_EFFECT_NONE;
+        if (checkAbility && GetBattlerAbility(battler) == ABILITY_KLUTZ)
             return HOLD_EFFECT_NONE;
     }
 
     gPotentialItemEffectBattler = battler;
 
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY)
+    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
         return gEnigmaBerries[battler].holdEffect;
     else
         return ItemId_GetHoldEffect(gBattleMons[battler].item);
@@ -6114,6 +6160,23 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battler)
     }
 
     return FALSE;
+}
+
+u32 GetBattlerAffectionHearts(u32 battler)
+{
+    u8 side = GetBattlerSide(battler);
+    struct Pokemon *party = GetSideParty(side);
+    u16 species = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+
+    if (side != B_SIDE_PLAYER)
+        return AFFECTION_NO_HEARTS;
+    else if (gSpeciesInfo[species].isMegaEvolution
+          || (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
+                                | BATTLE_TYPE_BATTLE_TOWER
+                                | BATTLE_TYPE_LINK)))
+        return AFFECTION_NO_HEARTS;
+
+    return GetMonAffectionHearts(&party[gBattlerPartyIndexes[battler]]);
 }
 
 

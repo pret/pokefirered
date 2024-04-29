@@ -133,13 +133,15 @@ void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
 // new
+bool32 IsNeutralizingGasOnField(void);
+bool32 IsMyceliumMightOnField(void);
+bool32 IsMoldBreakerTypeAbility(u32 ability);
 u32 GetBattlerAbility(u32 battler);
 u32 IsAbilityOnSide(u32 battler, u32 ability);
 u32 IsAbilityOnOpposingSide(u32 battler, u32 ability);
 u32 IsAbilityOnField(u32 ability);
 u32 IsAbilityOnFieldExcept(u32 battler, u32 ability);
 u32 IsAbilityPreventingEscape(u32 battler);
-u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating);
 bool32 IsBattlerAlive(u32 battler);
 bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind);
 u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
@@ -175,6 +177,10 @@ u32 GetIllusionMonSpecies(u32 battler);
 struct Pokemon *GetIllusionMonPtr(u32 battler);
 void ClearIllusionMon(u32 battler);
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battler);
+u32 GetBattlerAffectionHearts(u32 battler);
+u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating);
+u32 GetBattlerHoldEffectIgnoreAbility(u32 battler, bool32 checkNegating);
+u32 GetBattlerHoldEffectInternal(u32 battler, bool32 checkNegating, bool32 checkAbility);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);

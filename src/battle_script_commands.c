@@ -604,13 +604,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_callnative,                              //0xFF
 };
 
-struct StatFractions
-{
-    u8 dividend;
-    u8 divisor;
-};
-
-static const struct StatFractions sAccuracyStageRatios[] =
+const struct StatFractions gAccuracyStageRatios[] =
 {
     { 33, 100}, // -6
     { 36, 100}, // -5
@@ -1156,22 +1150,23 @@ static void Cmd_attackcanceler(void)
     }
 }
 
-static void JumpIfMoveFailed(u8 adder, u16 move)
+static bool32 JumpIfMoveFailed(u8 adder, u16 move)
 {
-    const u8 *BS_ptr = gBattlescriptCurrInstr + adder;
     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
     {
         gLastLandedMoves[gBattlerTarget] = 0;
         gLastHitByType[gBattlerTarget] = 0;
-        BS_ptr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        return TRUE;
     }
     else
     {
         TrySetDestinyBondToHappen();
         if (AbilityBattleEffects(ABILITYEFFECT_ABSORBING, gBattlerTarget, 0, 0, move))
-            return;
+            return TRUE;
     }
-    gBattlescriptCurrInstr = BS_ptr;
+    gBattlescriptCurrInstr += adder;
+    return FALSE;
 }
 
 static void Cmd_jumpifaffectedbyprotect(void)
@@ -1191,7 +1186,7 @@ static void Cmd_jumpifaffectedbyprotect(void)
 static bool8 JumpIfMoveAffectedByProtect(u16 move)
 {
     bool8 affected = FALSE;
-    if (DEFENDER_IS_PROTECTED)
+    if (IsBattlerProtected(gBattlerTarget, move))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         JumpIfMoveFailed(7, move);
@@ -1201,43 +1196,81 @@ static bool8 JumpIfMoveAffectedByProtect(u16 move)
     return affected;
 }
 
-static bool8 AccuracyCalcHelper(u16 move)
+static bool32 AccuracyCalcHelper(u16 move)
 {
-    if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
+    if ((gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
+     || (B_TOXIC_NEVER_MISS >= GEN_6 && gMovesInfo[move].effect == EFFECT_TOXIC && IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_POISON))
+     || gStatuses4[gBattlerTarget] & STATUS4_GLAIVE_RUSH)
+    {
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
+    // If the attacker has the ability No Guard and they aren't targeting a Pokemon involved in a Sky Drop with the move Sky Drop, move hits.
+    else if (GetBattlerAbility(gBattlerAttacker) == ABILITY_NO_GUARD && (move != MOVE_SKY_DROP || gBattleStruct->skyDropTargets[gBattlerTarget] == 0xFF))
+    {
+        if (!JumpIfMoveFailed(7, move))
+            RecordAbilityBattle(gBattlerAttacker, ABILITY_NO_GUARD);
+        return TRUE;
+    }
+    // If the target has the ability No Guard and they aren't involved in a Sky Drop or the current move isn't Sky Drop, move hits.
+    else if (GetBattlerAbility(gBattlerTarget) == ABILITY_NO_GUARD && (move != MOVE_SKY_DROP || gBattleStruct->skyDropTargets[gBattlerTarget] == 0xFF))
+    {
+        if (!JumpIfMoveFailed(7, move))
+            RecordAbilityBattle(gBattlerTarget, ABILITY_NO_GUARD);
+        return TRUE;
+    }
+    // If the target is under the effects of Telekinesis, and the move isn't a OH-KO move, move hits.
+    else if (gStatuses3[gBattlerTarget] & STATUS3_TELEKINESIS
+             && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE)
+             && gMovesInfo[move].effect != EFFECT_OHKO)
     {
         JumpIfMoveFailed(7, move);
         return TRUE;
     }
 
-    if (!(gHitMarker & HITMARKER_IGNORE_ON_AIR) && gStatuses3[gBattlerTarget] & STATUS3_ON_AIR)
+    // TODO: Z-Moves
+    // if (gBattleStruct->zmove.active && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
+    // {
+    //     JumpIfMoveFailed(7, move);
+    //     return TRUE;
+    // }
+
+    if ((gStatuses3[gBattlerTarget] & STATUS3_PHANTOM_FORCE)
+    || ((gStatuses3[gBattlerTarget] & STATUS3_ON_AIR) && !(gMovesInfo[move].damagesAirborne || gMovesInfo[move].damagesAirborneDoubleDamage))
+    || ((gStatuses3[gBattlerTarget] & STATUS3_UNDERGROUND) && !gMovesInfo[move].damagesUnderground)
+    || ((gStatuses3[gBattlerTarget] & STATUS3_UNDERWATER) && !gMovesInfo[move].damagesUnderwater))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         JumpIfMoveFailed(7, move);
         return TRUE;
     }
 
-    gHitMarker &= ~HITMARKER_IGNORE_ON_AIR;
-
-    if (!(gHitMarker & HITMARKER_IGNORE_UNDERGROUND) && gStatuses3[gBattlerTarget] & STATUS3_UNDERGROUND)
+    if (WEATHER_HAS_EFFECT)
     {
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        if ((gMovesInfo[move].effect == EFFECT_THUNDER || gMovesInfo[move].effect == EFFECT_RAIN_ALWAYS_HIT)
+            && IsBattlerWeatherAffected(gBattlerTarget, B_WEATHER_RAIN))
+        {
+            // thunder/hurricane/genie moves ignore acc checks in rain unless target is holding utility umbrella
+            JumpIfMoveFailed(7, move);
+            return TRUE;
+        }
+        else if ((gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)) && gMovesInfo[move].effect == EFFECT_BLIZZARD)
+        {
+            // Blizzard ignores acc checks in Hail in Gen4+
+            JumpIfMoveFailed(7, move);
+            return TRUE;
+        }
+    }
+
+    if (B_MINIMIZE_DMG_ACC >= GEN_6
+     && (gStatuses3[gBattlerTarget] & STATUS3_MINIMIZED)
+     && gMovesInfo[move].minimizeDoubleDamage)
+    {
         JumpIfMoveFailed(7, move);
         return TRUE;
     }
 
-    gHitMarker &= ~HITMARKER_IGNORE_UNDERGROUND;
-
-    if (!(gHitMarker & HITMARKER_IGNORE_UNDERWATER) && gStatuses3[gBattlerTarget] & STATUS3_UNDERWATER)
-    {
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        JumpIfMoveFailed(7, move);
-        return TRUE;
-    }
-
-    gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
-
-    if ((WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gMovesInfo[move].effect == EFFECT_THUNDER)
-     || (gMovesInfo[move].effect == EFFECT_ALWAYS_HIT || gMovesInfo[move].effect == EFFECT_VITAL_THROW))
+    if (gMovesInfo[move].accuracy == 0)
     {
         JumpIfMoveFailed(7, move);
         return TRUE;
@@ -1246,10 +1279,137 @@ static bool8 AccuracyCalcHelper(u16 move)
     return FALSE;
 }
 
+u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect)
+{
+    u32 calc, moveAcc;
+    s8 buff, accStage, evasionStage;
+    u32 atkParam = GetBattlerHoldEffectParam(battlerAtk);
+    u32 defParam = GetBattlerHoldEffectParam(battlerDef);
+    u32 atkAlly = BATTLE_PARTNER(battlerAtk);
+    u32 atkAllyAbility = GetBattlerAbility(atkAlly);
+
+    gPotentialItemEffectBattler = battlerDef;
+    accStage = gBattleMons[battlerAtk].statStages[STAT_ACC];
+    evasionStage = gBattleMons[battlerDef].statStages[STAT_EVASION];
+    if (atkAbility == ABILITY_UNAWARE || atkAbility == ABILITY_KEEN_EYE || atkAbility == ABILITY_MINDS_EYE
+            || (B_ILLUMINATE_EFFECT >= GEN_9 && atkAbility == ABILITY_ILLUMINATE))
+        evasionStage = DEFAULT_STAT_STAGE;
+    if (gMovesInfo[move].ignoresTargetDefenseEvasionStages)
+        evasionStage = DEFAULT_STAT_STAGE;
+    if (defAbility == ABILITY_UNAWARE)
+        accStage = DEFAULT_STAT_STAGE;
+
+    if (gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT || gStatuses3[battlerDef] & STATUS3_MIRACLE_EYED)
+        buff = accStage;
+    else
+        buff = accStage + DEFAULT_STAT_STAGE - evasionStage;
+
+    if (buff < MIN_STAT_STAGE)
+        buff = MIN_STAT_STAGE;
+    if (buff > MAX_STAT_STAGE)
+        buff = MAX_STAT_STAGE;
+
+    moveAcc = gMovesInfo[move].accuracy;
+    // Check Thunder and Hurricane on sunny weather.
+    if (IsBattlerWeatherAffected(battlerDef, B_WEATHER_SUN) && gMovesInfo[move].effect == EFFECT_THUNDER)
+        moveAcc = 50;
+    // Check Wonder Skin.
+    if (defAbility == ABILITY_WONDER_SKIN && IS_MOVE_STATUS(move) && moveAcc > 50)
+        moveAcc = 50;
+
+    calc = gAccuracyStageRatios[buff].dividend * moveAcc;
+    calc /= gAccuracyStageRatios[buff].divisor;
+
+    // Attacker's ability
+    switch (atkAbility)
+    {
+    case ABILITY_COMPOUND_EYES:
+        calc = (calc * 130) / 100; // 1.3 compound eyes boost
+        break;
+    case ABILITY_VICTORY_STAR:
+        calc = (calc * 110) / 100; // 1.1 victory star boost
+        break;
+    case ABILITY_HUSTLE:
+        if (IS_MOVE_PHYSICAL(move))
+            calc = (calc * 80) / 100; // 1.2 hustle loss
+        break;
+    }
+
+    // Target's ability
+    switch (defAbility)
+    {
+    case ABILITY_SAND_VEIL:
+        if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SANDSTORM)
+            calc = (calc * 80) / 100; // 1.2 sand veil loss
+        break;
+    case ABILITY_SNOW_CLOAK:
+        if (WEATHER_HAS_EFFECT && (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
+            calc = (calc * 80) / 100; // 1.2 snow cloak loss
+        break;
+    case ABILITY_TANGLED_FEET:
+        if (gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
+            calc = (calc * 50) / 100; // 1.5 tangled feet loss
+        break;
+    }
+
+    // Attacker's ally's ability
+    switch (atkAllyAbility)
+    {
+    case ABILITY_VICTORY_STAR:
+        if (IsBattlerAlive(atkAlly))
+            calc = (calc * 110) / 100; // 1.1 ally's victory star boost
+        break;
+    }
+
+    // Attacker's hold effect
+    switch (atkHoldEffect)
+    {
+    case HOLD_EFFECT_WIDE_LENS:
+        calc = (calc * (100 + atkParam)) / 100;
+        break;
+    case HOLD_EFFECT_ZOOM_LENS:
+        if (GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef))
+            calc = (calc * (100 + atkParam)) / 100;
+        break;
+    }
+
+    // Target's hold effect
+    switch (defHoldEffect)
+    {
+    case HOLD_EFFECT_EVASION_UP:
+        calc = (calc * (100 - defParam)) / 100;
+        break;
+    }
+
+    if (gProtectStructs[battlerAtk].usedMicleBerry)
+    {
+        gProtectStructs[battlerAtk].usedMicleBerry = FALSE;
+        if (atkAbility == ABILITY_RIPEN)
+            calc = (calc * 140) / 100;  // ripen gives 40% acc boost
+        else
+            calc = (calc * 120) / 100;  // 20% acc boost
+    }
+
+    if (gFieldStatuses & STATUS_FIELD_GRAVITY)
+        calc = (calc * 5) / 3; // 1.66 Gravity acc boost
+
+    if (B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(battlerDef) == AFFECTION_FIVE_HEARTS)
+        calc = (calc * 90) / 100;
+
+    return calc;
+}
+
 static void Cmd_accuracycheck(void)
 {
-    u16 move = T2_READ_16(gBattlescriptCurrInstr + 5);
+    CMD_ARGS(const u8 *failInstr, u16 move);
 
+    u32 type, move = cmd->move;
+    u32 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
+    u32 abilityAtk = GetBattlerAbility(gBattlerAttacker);
+    u32 abilityDef = GetBattlerAbility(gBattlerTarget);
+    u32 holdEffectAtk = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+
+    // pokefirered specific
     if ((gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE
         && !BtlCtrl_OakOldMan_TestState2Flag(1)
         && gMovesInfo[move].power != 0
@@ -1263,89 +1423,61 @@ static void Cmd_accuracycheck(void)
         JumpIfMoveFailed(7, move);
         return;
     }
-    if (move == NO_ACC_CALC || move == NO_ACC_CALC_CHECK_LOCK_ON)
+
+    if (move == ACC_CURR_MOVE)
+        move = gCurrentMove;
+
+    if (move == NO_ACC_CALC_CHECK_LOCK_ON)
     {
-        if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && move == NO_ACC_CALC_CHECK_LOCK_ON && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
-            gBattlescriptCurrInstr += 7;
-        else if (gStatuses3[gBattlerTarget] & (STATUS3_ON_AIR | STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-        else if (!JumpIfMoveAffectedByProtect(0))
-            gBattlescriptCurrInstr += 7;
+        if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        else if (gStatuses3[gBattlerTarget] & (STATUS3_SEMI_INVULNERABLE))
+            gBattlescriptCurrInstr = cmd->failInstr;
+        else if (!JumpIfMoveAffectedByProtect(gCurrentMove))
+            gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT
+        || (gSpecialStatuses[gBattlerAttacker].multiHitOn
+        && (abilityAtk == ABILITY_SKILL_LINK || holdEffectAtk == HOLD_EFFECT_LOADED_DICE
+        || !(gMovesInfo[move].effect == EFFECT_TRIPLE_KICK || gMovesInfo[move].effect == EFFECT_POPULATION_BOMB))))
+    {
+        // No acc checks for second hit of Parental Bond or multi hit moves, except Triple Kick/Triple Axel/Population Bomb
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else
     {
-        u8 type, moveAcc, holdEffect, param;
-        s8 buff;
-        u16 calc;
-
-        if (move == ACC_CURR_MOVE)
-            move = gCurrentMove;
+        u32 accuracy;
 
         GET_MOVE_TYPE(move, type);
-
         if (JumpIfMoveAffectedByProtect(move))
             return;
         if (AccuracyCalcHelper(move))
             return;
 
-        if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
-        {
-            u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
-            buff = acc;
-        }
-        else
-        {
-            u8 acc = gBattleMons[gBattlerAttacker].statStages[STAT_ACC];
-            buff = acc + DEFAULT_STAT_STAGE - gBattleMons[gBattlerTarget].statStages[STAT_EVASION];
-        }
+        accuracy = GetTotalAccuracy(
+            gBattlerAttacker,
+            gBattlerTarget,
+            move,
+            abilityAtk,
+            abilityDef,
+            holdEffectAtk,
+            GetBattlerHoldEffect(gBattlerTarget, TRUE)
+        );
 
-        if (buff < MIN_STAT_STAGE)
-            buff = MIN_STAT_STAGE;
-        if (buff > MAX_STAT_STAGE)
-            buff = MAX_STAT_STAGE;
-
-        moveAcc = gMovesInfo[move].accuracy;
-        // check Thunder on sunny weather
-        if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SUN && gMovesInfo[move].effect == EFFECT_THUNDER)
-            moveAcc = 50;
-
-        calc = sAccuracyStageRatios[buff].dividend * moveAcc;
-        calc /= sAccuracyStageRatios[buff].divisor;
-
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_COMPOUND_EYES)
-            calc = (calc * 130) / 100; // 1.3 compound eyes boost
-        if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & B_WEATHER_SANDSTORM)
-            calc = (calc * 80) / 100; // 1.2 sand veil loss
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && IS_TYPE_PHYSICAL(type))
-            calc = (calc * 80) / 100; // 1.2 hustle loss
-
-        if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
-        {
-            holdEffect = gEnigmaBerries[gBattlerTarget].holdEffect;
-            param = gEnigmaBerries[gBattlerTarget].holdEffectParam;
-        }
-        else
-        {
-            holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item);
-            param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
-        }
-
-        gPotentialItemEffectBattler = gBattlerTarget;
-
-        if (holdEffect == HOLD_EFFECT_EVASION_UP)
-            calc = (calc * (100 - param)) / 100;
-
-        // final calculation
-        if ((Random() % 100 + 1) > calc)
+        if (!RandomPercentage(RNG_ACCURACY, accuracy))
         {
             gMoveResultFlags |= MOVE_RESULT_MISSED;
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-             && (gMovesInfo[move].target == MOVE_TARGET_BOTH || gMovesInfo[move].target == MOVE_TARGET_FOES_AND_ALLY))
+            if (holdEffectAtk == HOLD_EFFECT_BLUNDER_POLICY)
+                gBattleStruct->blunderPolicy = TRUE;    // Only activates from missing through acc/evasion checks
+
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE &&
+                (moveTarget == MOVE_TARGET_BOTH || moveTarget == MOVE_TARGET_FOES_AND_ALLY))
                 gBattleCommunication[MISS_TYPE] = B_MSG_AVOIDED_ATK;
             else
                 gBattleCommunication[MISS_TYPE] = B_MSG_MISSED;
 
-            CheckWonderGuardAndLevitate();
+            if (gMovesInfo[move].power)
+                CalcTypeEffectivenessMultiplier(move, type, gBattlerAttacker, gBattlerTarget, abilityDef, TRUE);
         }
         JumpIfMoveFailed(7, move);
     }

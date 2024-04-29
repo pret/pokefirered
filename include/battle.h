@@ -585,6 +585,8 @@ struct BattleStruct
     u8 supremeOverlordCounter[MAX_BATTLERS_COUNT];
     struct Illusion illusion[MAX_BATTLERS_COUNT];
     u8 trainerSlideFirstSTABMoveMsgState:2;
+    u8 blunderPolicy:1; // should blunder policy activate
+    u8 skyDropTargets[MAX_BATTLERS_COUNT]; // For Sky Drop, to account for if multiple Pokemon use Sky Drop in a double battle.
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;

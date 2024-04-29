@@ -657,7 +657,7 @@ void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot);
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
 s32 CalculateBaseDamageOld(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u32 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef);
-
+u32 GetMonAffectionHearts(struct Pokemon *pokemon);
 u8 CountAliveMonsInBattle(u8 caseId, u32 battler);
 
 u8 GetDefaultMoveTarget(u8 battlerId);

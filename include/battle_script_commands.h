@@ -7,6 +7,12 @@
 #define WINDOW_CLEAR (1 << 0)
 #define WINDOW_BG1   (1 << 7)
 
+struct StatFractions
+{
+    u8 dividend;
+    u8 divisor;
+};
+
 void AI_CalcDmg(u8 attacker, u8 defender);
 u8 TypeCalc(u16 move, u8 attacker, u8 defender);
 u8 AI_TypeCalc(u16 move, u16 targetSpecies, u16 targetAbility);
@@ -21,7 +27,9 @@ bool8 UproarWakeUpCheck(u8 battlerId);
 u8 GetCatchingBattler(void);
 bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler);
 u32 GetHighestStatId(u32 battlerId);
+u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
+extern const struct StatFractions gAccuracyStageRatios[];
 
 #endif // GUARD_BATTLE_SCRIPT_COMMANDS_H

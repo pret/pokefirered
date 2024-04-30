@@ -392,8 +392,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setadditionaleffects,                    //0x15 // done
     Cmd_seteffectprimary,                        //0x16 // done
     Cmd_seteffectsecondary,                      //0x17 // done
-    Cmd_clearstatusfromeffect,                   //0x18
-    Cmd_tryfaintmon,                             //0x19
+    Cmd_clearstatusfromeffect,                   //0x18 // done
+    Cmd_tryfaintmon,                             //0x19 // done
     Cmd_dofaintanimation,                        //0x1A
     Cmd_cleareffectsonfaint,                     //0x1B
     Cmd_jumpifstatus,                            //0x1C
@@ -3985,79 +3985,84 @@ static void Cmd_seteffectsecondary(void)
 
 static void Cmd_clearstatusfromeffect(void)
 {
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    CMD_ARGS(u8 battler);
+    
+    u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
 
     if (gBattleScripting.moveEffect <= PRIMARY_STATUS_MOVE_EFFECT)
-        gBattleMons[gActiveBattler].status1 &= (~sStatusFlagsForMoveEffects[gBattleScripting.moveEffect]);
+        gBattleMons[battler].status1 &= (~sStatusFlagsForMoveEffects[gBattleScripting.moveEffect]);
     else
-        gBattleMons[gActiveBattler].status2 &= (~sStatusFlagsForMoveEffects[gBattleScripting.moveEffect]);
+    {
+        gBattleMons[battler].status2 &= (~sStatusFlagsForMoveEffects[gBattleScripting.moveEffect]);
+        if (gBattleScripting.moveEffect == MOVE_EFFECT_CHARGING)
+            gProtectStructs[battler].chargingTurn = FALSE;
+    }
 
     gBattleScripting.moveEffect = 0;
-    gBattlescriptCurrInstr += 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
     gBattleScripting.multihitMoveEffect = 0;
 }
 
 static void Cmd_tryfaintmon(void)
 {
-    const u8 *BS_ptr;
+    CMD_ARGS(u8 battler, bool8 isSpikes, const u8 *instr);
+    u32 battler, destinyBondBattler;
+    const u8 *faintScript;
 
-    if (gBattlescriptCurrInstr[2] != 0)
+    battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    if (cmd->isSpikes != FALSE)
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        if (gHitMarker & HITMARKER_FAINTED(gActiveBattler))
+        if (gHitMarker & HITMARKER_FAINTED(battler))
         {
-            BS_ptr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
-
             BattleScriptPop();
-            gBattlescriptCurrInstr = BS_ptr;
-            gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~SIDE_STATUS_SPIKES_DAMAGED;
+            gBattlescriptCurrInstr = cmd->instr;
         }
         else
         {
-            gBattlescriptCurrInstr += 7;
+            gBattlescriptCurrInstr = cmd->nextInstr;
         }
     }
     else
     {
-        u8 battlerId;
-
-        if (gBattlescriptCurrInstr[1] == BS_ATTACKER)
+        if (cmd->battler == BS_ATTACKER)
         {
             gActiveBattler = gBattlerAttacker;
-            battlerId = gBattlerTarget;
-            BS_ptr = BattleScript_FaintAttacker;
+            destinyBondBattler = gBattlerTarget;
+            faintScript = BattleScript_FaintAttacker;
         }
         else
         {
             gActiveBattler = gBattlerTarget;
-            battlerId = gBattlerAttacker;
-            BS_ptr = BattleScript_FaintTarget;
+            destinyBondBattler = gBattlerAttacker;
+            faintScript = BattleScript_FaintTarget;
         }
-        if (!(gAbsentBattlerFlags & gBitTable[gActiveBattler])
-         && gBattleMons[gActiveBattler].hp == 0)
+        if (!(gAbsentBattlerFlags & gBitTable[battler])
+         && gBattleMons[battler].hp == 0)
         {
-            gHitMarker |= HITMARKER_FAINTED(gActiveBattler);
-            BattleScriptPush(gBattlescriptCurrInstr + 7);
-            gBattlescriptCurrInstr = BS_ptr;
-            if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
+            gHitMarker |= HITMARKER_FAINTED(battler);
+            BattleScriptPush(cmd->nextInstr);
+            gBattlescriptCurrInstr = faintScript;
+            if (GetBattlerSide(battler) == B_SIDE_PLAYER)
             {
                 gHitMarker |= HITMARKER_PLAYER_FAINTED;
                 if (gBattleResults.playerFaintCounter < 255)
                     gBattleResults.playerFaintCounter++;
-                AdjustFriendshipOnBattleFaint(gActiveBattler);
+                AdjustFriendshipOnBattleFaint(battler);
+                gSideTimers[B_SIDE_PLAYER].retaliateTimer = 2;
             }
             else
             {
                 if (gBattleResults.opponentFaintCounter < 255)
                     gBattleResults.opponentFaintCounter++;
-                gBattleResults.lastOpponentSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
-                *(u8 *)(&gBattleStruct->lastAttackerToFaintOpponent) = gBattlerAttacker;
+                gBattleResults.lastOpponentSpecies = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES, NULL);
+                gSideTimers[B_SIDE_OPPONENT].retaliateTimer = 2;
             }
-            if ((gHitMarker & HITMARKER_DESTINYBOND) && gBattleMons[gBattlerAttacker].hp != 0)
+            if ((gHitMarker & HITMARKER_DESTINYBOND) && gBattleMons[gBattlerAttacker].hp != 0
+                 /* && !IsDynamaxed(gBattlerAttacker) */) // TODO: Dynamax
             {
                 gHitMarker &= ~HITMARKER_DESTINYBOND;
                 BattleScriptPush(gBattlescriptCurrInstr);
-                gBattleMoveDamage = gBattleMons[battlerId].hp;
+                gBattleMoveDamage = gBattleMons[destinyBondBattler].hp;
                 gBattlescriptCurrInstr = BattleScript_DestinyBondTakesLife;
             }
             if ((gStatuses3[gBattlerTarget] & STATUS3_GRUDGE)
@@ -4072,15 +4077,15 @@ static void Cmd_tryfaintmon(void)
                 BattleScriptPush(gBattlescriptCurrInstr);
                 gBattlescriptCurrInstr = BattleScript_GrudgeTakesPp;
                 gActiveBattler = gBattlerAttacker;
-                BtlController_EmitSetMonData(BUFFER_A, moveIndex + REQUEST_PPMOVE1_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].pp[moveIndex]), &gBattleMons[gActiveBattler].pp[moveIndex]);
-                MarkBattlerForControllerExec(gActiveBattler);
+                BtlController_EmitSetMonData(BUFFER_A, moveIndex + REQUEST_PPMOVE1_BATTLE, 0, sizeof(gBattleMons[gBattlerAttacker].pp[moveIndex]), &gBattleMons[gBattlerAttacker].pp[moveIndex]);
+                MarkBattlerForControllerExec(gBattlerAttacker);
 
                 PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].moves[moveIndex])
             }
         }
         else
         {
-            gBattlescriptCurrInstr += 7;
+            gBattlescriptCurrInstr = cmd->nextInstr;
         }
     }
 }

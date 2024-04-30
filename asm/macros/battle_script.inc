@@ -116,11 +116,11 @@
 	.4byte NULL
 	.endm
 
-	.macro tryfaintmon_spikes battler:req, ptr:req
+	.macro tryfaintmon_spikes battler:req, instr:req
 	.byte 0x19
 	.byte \battler
 	.byte TRUE
-	.4byte \ptr
+	.4byte \instr
 	.endm
 
 	.macro dofaintanimation battler:req

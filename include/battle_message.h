@@ -233,7 +233,6 @@ extern const u8 *const gRefereeStringsTable[];
 extern const u8 *const gStatNamesTable2[];
 
 extern const u16 gMissStringIds[];
-extern const u16 gTrappingMoves[];
 
 extern const u8 gText_Sleep[];
 extern const u8 gText_Poison[];

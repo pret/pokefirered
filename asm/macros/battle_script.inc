@@ -92,7 +92,7 @@
 	.4byte \ptr
 	.endm
 
-	.macro seteffectwithchance
+	.macro setadditionaleffects
 	.byte 0x15
 	.endm
 
@@ -1095,8 +1095,9 @@
 	.4byte \param0
 	.endm
 
-	.macro doubledamagedealtifdamaged
+	.macro setgastroacid failInstr:req
 	.byte 0xd6
+	.4byte \failInstr
 	.endm
 
 	.macro setyawn param0:req
@@ -1123,9 +1124,9 @@
 	.4byte \param0
 	.endm
 
-	.macro trysetgrudge param0:req
+	.macro setstealthrock failInstr:req
 	.byte 0xdc
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro weightdamagecalculation
@@ -1307,12 +1308,12 @@
 	various \battler, VARIOUS_WAIT_FANFARE
 	.endm
 
+	@ pokeemerald
+
 	.macro handleformchange battler:req, case:req
 	various \battler, VARIOUS_HANDLE_FORM_CHANGE
 	.byte \case
 	.endm
-
-	@ pokeemerald
 
 	.macro playmoveanimation battler:req, move:req
 	various \battler, VARIOUS_PLAY_MOVE_ANIMATION
@@ -1334,10 +1335,26 @@
 	.byte \equal
 	.endm
 
-	.macro jumpifnoholdeffect battler:req, holdEffect:req, jumpInstr:req
-	jumpifholdeffect \battler, \holdEffect, \jumpInstr, FALSE
+	.macro savetarget
+	various BS_TARGET, VARIOUS_SAVE_TARGET
 	.endm
 
+	.macro restoretarget
+	various BS_TARGET, VARIOUS_RESTORE_TARGET
+	.endm
+
+	.macro spectralthiefprintstats
+	various BS_ATTACKER, VARIOUS_SPECTRAL_THIEF
+	.endm
+
+	.macro trytoclearprimalweather
+	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
+	.endm
+
+	.macro consumeberry battler:req, fromBattler:req
+	various \battler, VARIOUS_CONSUME_BERRY
+	.byte \fromBattler
+	.endm
 
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
@@ -1416,6 +1433,10 @@
 	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
 	.endm
 
+	.macro jumpifnoholdeffect battler:req, holdEffect:req, jumpInstr:req
+	jumpifholdeffect \battler, \holdEffect, \jumpInstr, FALSE
+	.endm
+
 @ callnative macros
 	.macro itemrestorehp
 	callnative BS_ItemRestoreHP
@@ -1442,4 +1463,13 @@
 	.macro flushtextbox
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
+	.endm
+
+	.macro tryrevertweatherform
+	callnative BS_TryRevertWeatherForm
+	.endm
+
+	@ Used by effects that may proc Symbiosis but do not call removeitem.
+	.macro trysymbiosis
+	callnative BS_TrySymbiosis
 	.endm

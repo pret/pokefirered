@@ -4,6 +4,7 @@
 #include <limits.h>
 #include "global.h"
 #include "constants/battle.h"
+#include "constants/form_change_types.h"
 #include "constants/battle_script_commands.h"
 #include "battle_util.h"
 #include "battle_script_commands.h"
@@ -352,6 +353,7 @@ struct SideTimer
     /*0x0B*/ u8 fieldB;
     // pokeemerald
     u8 retaliateTimer;
+    u8 stealthRockAmount;
 };
 
 extern struct SideTimer gSideTimers[];
@@ -485,6 +487,12 @@ struct Illusion
     struct Pokemon *mon;
 };
 
+struct LostItem
+{
+    u16 originalItem:15;
+    u16 stolen:1;
+};
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -593,6 +601,17 @@ struct BattleStruct
     u8 bonusCritStages[MAX_BATTLERS_COUNT]; // G-Max Chi Strike boosts crit stages of allies.
     u8 enduredDamage;
     u16 changedSpecies[NUM_BATTLE_SIDES][PARTY_SIZE]; // For forms when multiple mons can change into the same pokemon.
+    u8 trainerSlideFirstCriticalHitMsgState:2;
+    u8 trainerSlideFirstSuperEffectiveHitMsgState:2;
+    u8 additionalEffectsCounter:4; // A counter for the additionalEffects applied by the current move in Cmd_setadditionaleffects
+    u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
+    u16 moveEffect2; // For Knock Off
+    u8 stolenStats[NUM_BATTLE_STATS]; // hp byte is used for which stats to raise, other inform about by how many stages
+    u8 stickySyrupdBy[MAX_BATTLERS_COUNT];
+    u8 moneyMultiplierMove:1;
+    struct LostItem itemLost[PARTY_SIZE];  // Player's team that had items consumed or stolen (two bytes per party member)
+    u8 savedBattlerTarget;
+    u8 ateBerry[2]; // array id determined by side, each party pokemon as bit
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;
@@ -621,15 +640,29 @@ extern struct BattleStruct *gBattleStruct;
 #define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
 
-#define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type))
-#define SET_BATTLER_TYPE(battlerId, type)   \
-{                                           \
-    gBattleMons[battlerId].type1 = type;    \
-    gBattleMons[battlerId].type2 = type;    \
+#define IS_BATTLER_OF_TYPE(battlerId, type)((GetBattlerType(battlerId, 0) == type || GetBattlerType(battlerId, 1) == type || (GetBattlerType(battlerId, 2) != TYPE_MYSTERY && GetBattlerType(battlerId, 2) == type)))
+#define SET_BATTLER_TYPE(battlerId, type)           \
+{                                                   \
+    gBattleMons[battlerId].type1 = type;            \
+    gBattleMons[battlerId].type2 = type;            \
+    gBattleMons[battlerId].type3 = TYPE_MYSTERY;    \
 }
+
+#define IS_BATTLER_PROTECTED(battlerId)(gProtectStructs[battlerId].protected                                           \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_WIDE_GUARD           \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_QUICK_GUARD          \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_CRAFTY_SHIELD        \
+                                        || gSideStatuses[GetBattlerSide(battlerId)] & SIDE_STATUS_MAT_BLOCK            \
+                                        || gProtectStructs[battlerId].spikyShielded                                    \
+                                        || gProtectStructs[battlerId].kingsShielded                                    \
+                                        || gProtectStructs[battlerId].banefulBunkered                                  \
+                                        || gProtectStructs[battlerId].burningBulwarked                                 \
+                                        || gProtectStructs[battlerId].obstructed                                       \
+                                        || gProtectStructs[battlerId].silkTrapped)
 
 #define GET_STAT_BUFF_ID(n)((n & 0xF))              // first four bits 0x1, 0x2, 0x4, 0x8
 #define GET_STAT_BUFF_VALUE2(n)((n & 0xF0))
+#define GET_STAT_BUFF_VALUE_WITH_SIGN(n)((n & 0xF8))
 #define GET_STAT_BUFF_VALUE(n)(((n >> 4) & 7))      // 0x10, 0x20, 0x40
 #define STAT_BUFF_NEGATIVE 0x80                     // 0x80, the sign bit
 

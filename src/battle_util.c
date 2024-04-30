@@ -227,17 +227,87 @@ void MarkBattlerReceivedLinkData(u8 battlerId)
     gBattleControllerExecFlags &= ~((1 << 28) << battlerId);
 }
 
-void CancelMultiTurnMoves(u8 battler)
+const u8* CancelMultiTurnMoves(u32 battler)
 {
-    gBattleMons[battler].status2 &= ~STATUS2_MULTIPLETURNS;
-    gBattleMons[battler].status2 &= ~STATUS2_LOCK_CONFUSE;
-    gBattleMons[battler].status2 &= ~STATUS2_UPROAR;
-    gBattleMons[battler].status2 &= ~STATUS2_BIDE;
+    const u8 *result = NULL;
+    gBattleMons[battler].status2 &= ~(STATUS2_MULTIPLETURNS);
+    gBattleMons[battler].status2 &= ~(STATUS2_LOCK_CONFUSE);
+    gBattleMons[battler].status2 &= ~(STATUS2_UPROAR);
+    gBattleMons[battler].status2 &= ~(STATUS2_BIDE);
 
-    gStatuses3[battler] &= ~STATUS3_SEMI_INVULNERABLE;
+    // Clear battler's semi-invulnerable bits if they are not held by Sky Drop.
+    if (!(gStatuses3[battler] & STATUS3_SKY_DROPPED))
+        gStatuses3[battler] &= ~(STATUS3_SEMI_INVULNERABLE);
+
+    // Check to see if this Pokemon was in the middle of using Sky Drop. If so, release the target.
+    if (gBattleStruct->skyDropTargets[battler] != 0xFF && !(gStatuses3[battler] & STATUS3_SKY_DROPPED))
+    {
+        // Get the target's battler id
+        u8 otherSkyDropper = gBattleStruct->skyDropTargets[battler];
+
+        // Clears sky_dropped and on_air statuses
+        gStatuses3[otherSkyDropper] &= ~(STATUS3_SKY_DROPPED | STATUS3_ON_AIR);
+
+        // Makes both attacker and target's sprites visible
+        gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
+        gSprites[gBattlerSpriteIds[otherSkyDropper]].invisible = FALSE;
+
+        // If target was sky dropped in the middle of Outrage/Thrash/Petal Dance,
+        // confuse them upon release and display "confused by fatigue" message & animation.
+        // Don't do this if this CancelMultiTurnMoves is caused by falling asleep via Yawn.
+        if (gBattleMons[otherSkyDropper].status2 & STATUS2_LOCK_CONFUSE && gBattleStruct->turnEffectsTracker != 24)
+        {
+            gBattleMons[otherSkyDropper].status2 &= ~(STATUS2_LOCK_CONFUSE);
+
+            // If the target can be confused, confuse them.
+            // Don't use CanBeConfused, can cause issues in edge cases.
+            if (!(GetBattlerAbility(otherSkyDropper) == ABILITY_OWN_TEMPO
+                || gBattleMons[otherSkyDropper].status2 & STATUS2_CONFUSION
+                || IsBattlerTerrainAffected(otherSkyDropper, STATUS_FIELD_MISTY_TERRAIN)))
+            {
+                // Set confused status
+                gBattleMons[otherSkyDropper].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
+
+                // If this CancelMultiTurnMoves is occuring due to attackcanceller
+                if (gBattlescriptCurrInstr[0] == 0x0)
+                {
+                    gBattleStruct->skyDropTargets[battler] = 0xFE;
+                }
+                // If this CancelMultiTurnMoves is occuring due to VARIOUS_GRAVITY_ON_AIRBORNE_MONS
+                // Reapplying STATUS3_SKY_DROPPED allows for avoiding unecessary messages when Gravity is applied to the target.
+                else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 76)
+                {
+                    gBattleStruct->skyDropTargets[battler] = 0xFE;
+                    gStatuses3[otherSkyDropper] |= STATUS3_SKY_DROPPED;
+                }
+                // If this CancelMultiTurnMoves is occuring due to cancelmultiturnmoves script
+                else if (gBattlescriptCurrInstr[0] == 0x76 && gBattlescriptCurrInstr[2] == 0)
+                {
+                    gBattlerAttacker = otherSkyDropper;
+                    result = BattleScript_ThrashConfuses;
+                }
+                // If this CancelMultiTurnMoves is occuring due to receiving Sleep/Freeze status
+                else if (gBattleScripting.moveEffect <= PRIMARY_STATUS_MOVE_EFFECT)
+                {
+                    gBattlerAttacker = otherSkyDropper;
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    result = BattleScript_ThrashConfuses;
+                }
+            }
+        }
+
+        // Clear skyDropTargets data, unless this CancelMultiTurnMoves is caused by Yawn, attackcanceler, or VARIOUS_GRAVITY_ON_AIRBORNE_MONS
+        if (!(gBattleMons[otherSkyDropper].status2 & STATUS2_LOCK_CONFUSE) && gBattleStruct->skyDropTargets[battler] < 4)
+        {
+            gBattleStruct->skyDropTargets[battler] = 0xFF;
+            gBattleStruct->skyDropTargets[otherSkyDropper] = 0xFF;
+        }
+    }
 
     gDisableStructs[battler].rolloutTimer = 0;
     gDisableStructs[battler].furyCutterCounter = 0;
+
+    return result;
 }
 
 bool32 WasUnableToUseMove(u32 battler)
@@ -3255,7 +3325,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
             }
         }
         break;
-    case ITEMEFFECT_KINGSROCK_SHELLBELL:
+    case ITEMEFFECT_KINGSROCK:
         if (gBattleMoveDamage)
         {
             switch (atkHoldEffect)
@@ -6211,6 +6281,366 @@ void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
     //     ApplyDynamaxHPMultiplier(battler, mon);
     CopyMonLevelAndBaseStatsToBattleMon(battler, mon);
     CopyMonAbilityAndTypesToBattleMon(battler, mon);
+}
+
+bool32 TestIfSheerForceAffected(u32 battler, u16 move)
+{
+    return GetBattlerAbility(battler) == ABILITY_SHEER_FORCE && MoveIsAffectedBySheerForce(move);
+}
+
+bool32 CanSleep(u32 battler)
+{
+    u16 ability = GetBattlerAbility(battler);
+    if (ability == ABILITY_INSOMNIA
+      || ability == ABILITY_VITAL_SPIRIT
+      || ability == ABILITY_COMATOSE
+      || ability == ABILITY_PURIFYING_SALT
+      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
+      || gBattleMons[battler].status1 & STATUS1_ANY
+      || IsAbilityOnSide(battler, ABILITY_SWEET_VEIL)
+      || IsAbilityStatusProtected(battler)
+      || IsBattlerTerrainAffected(battler, STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanBePoisoned(u32 battlerAttacker, u32 battlerTarget)
+{
+    u16 ability = GetBattlerAbility(battlerTarget);
+
+    if (!(CanPoisonType(battlerAttacker, battlerTarget))
+     || gSideStatuses[GetBattlerSide(battlerTarget)] & SIDE_STATUS_SAFEGUARD
+     || gBattleMons[battlerTarget].status1 & STATUS1_ANY
+     || ability == ABILITY_IMMUNITY
+     || ability == ABILITY_COMATOSE
+     || ability == ABILITY_PURIFYING_SALT
+     || IsAbilityOnSide(battlerTarget, ABILITY_PASTEL_VEIL)
+     || IsAbilityStatusProtected(battlerTarget)
+     || IsBattlerTerrainAffected(battlerTarget, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanBeBurned(u32 battler)
+{
+    u16 ability = GetBattlerAbility(battler);
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_FIRE)
+      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
+      || gBattleMons[battler].status1 & STATUS1_ANY
+      || ability == ABILITY_WATER_VEIL
+      || ability == ABILITY_WATER_BUBBLE
+      || ability == ABILITY_COMATOSE
+      || ability == ABILITY_THERMAL_EXCHANGE
+      || ability == ABILITY_PURIFYING_SALT
+      || IsAbilityStatusProtected(battler)
+      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanBeParalyzed(u32 battler)
+{
+    u16 ability = GetBattlerAbility(battler);
+    if ((B_PARALYZE_ELECTRIC >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC))
+        || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
+        || ability == ABILITY_LIMBER
+        || ability == ABILITY_COMATOSE
+        || ability == ABILITY_PURIFYING_SALT
+        || gBattleMons[battler].status1 & STATUS1_ANY
+        || IsAbilityStatusProtected(battler)
+        || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanBeFrozen(u32 battler)
+{
+    u16 ability = GetBattlerAbility(battler);
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
+      || IsBattlerWeatherAffected(battler, B_WEATHER_SUN)
+      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
+      || ability == ABILITY_MAGMA_ARMOR
+      || ability == ABILITY_COMATOSE
+      || ability == ABILITY_PURIFYING_SALT
+      || gBattleMons[battler].status1 & STATUS1_ANY
+      || IsAbilityStatusProtected(battler)
+      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanGetFrostbite(u32 battler)
+{
+    u16 ability = GetBattlerAbility(battler);
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
+      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
+      || ability == ABILITY_MAGMA_ARMOR
+      || ability == ABILITY_COMATOSE
+      || ability == ABILITY_PURIFYING_SALT
+      || gBattleMons[battler].status1 & STATUS1_ANY
+      || IsAbilityStatusProtected(battler)
+      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanBeConfused(u32 battler)
+{
+    if (GetBattlerAbility(battler) == ABILITY_OWN_TEMPO
+      || gBattleMons[battler].status2 & STATUS2_CONFUSION
+      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
+{
+    u8 stealerSide = GetBattlerSide(battlerStealing);
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
+        return FALSE;
+
+    // Check if the battler trying to steal should be able to
+    if (stealerSide == B_SIDE_OPPONENT
+        && !(gBattleTypeFlags &
+             (BATTLE_TYPE_EREADER_TRAINER
+              | BATTLE_TYPE_TRAINER_TOWER
+              | BATTLE_TYPE_LINK
+              | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
+              )))
+    {
+        return FALSE;
+    }
+    else if (!(gBattleTypeFlags &
+          (BATTLE_TYPE_EREADER_TRAINER
+           | BATTLE_TYPE_BATTLE_TOWER
+           | BATTLE_TYPE_LINK))
+        && (gWishFutureKnock.knockedOffMons[stealerSide] & gBitTable[gBattlerPartyIndexes[battlerStealing]]))
+    {
+        return FALSE;
+    }
+
+    if (!CanBattlerGetOrLoseItem(battlerItem, item)      // Battler with item cannot have it stolen
+      ||!CanBattlerGetOrLoseItem(battlerStealing, item)) // Stealer cannot take the item
+        return FALSE;
+
+    return TRUE;
+}
+
+void TrySaveExchangedItem(u32 battler, u16 stolenItem)
+{
+    // Because BtlController_EmitSetMonData does SetMonData, we need to save the stolen item only if it matches the battler's original
+    // So, if the player steals an item during battle and has it stolen from it, it will not end the battle with it (naturally)
+    if (B_TRAINERS_KNOCK_OFF_ITEMS == FALSE)
+        return;
+    // If regular trainer battle and mon's original item matches what is being stolen, save it to be restored at end of battle
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+      && !(gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+      && GetBattlerSide(battler) == B_SIDE_PLAYER
+      && stolenItem == gBattleStruct->itemLost[gBattlerPartyIndexes[battler]].originalItem)
+        gBattleStruct->itemLost[gBattlerPartyIndexes[battler]].stolen = TRUE;
+}
+
+void RemoveBattlerType(u32 battler, u8 type)
+{
+    u32 i;
+    for (i = 0; i < 3; i++)
+    {
+        if (*(u8 *)(&gBattleMons[battler].type1 + i) == type)
+            *(u8 *)(&gBattleMons[battler].type1 + i) = TYPE_MYSTERY;
+    }
+}
+
+// Returns SPECIES_NONE if no form change is possible
+u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
+{
+    u32 i;
+    u16 targetSpecies = SPECIES_NONE;
+    u16 species = gBattleMons[battler].species;
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+    struct Pokemon *mon = &GetBattlerParty(battler)[gBattlerPartyIndexes[battler]];
+    u16 heldItem;
+
+    if (formChanges != NULL)
+    {
+        heldItem = gBattleMons[battler].item;
+
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+        {
+            if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
+            {
+                switch (method)
+                {
+                case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
+                case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
+                case FORM_CHANGE_BATTLE_ULTRA_BURST:
+                    if (heldItem == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE:
+                    if (gBattleMons[battler].moves[0] == formChanges[i].param1
+                     || gBattleMons[battler].moves[1] == formChanges[i].param1
+                     || gBattleMons[battler].moves[2] == formChanges[i].param1
+                     || gBattleMons[battler].moves[3] == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_BATTLE_SWITCH:
+                    targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_BATTLE_HP_PERCENT:
+                    if (formChanges[i].param1 == GetBattlerAbility(battler))
+                    {
+                        // We multiply by 100 to make sure that integer division doesn't mess with the health check.
+                        u32 hpCheck = gBattleMons[battler].hp * 100 * 100 / gBattleMons[battler].maxHP;
+                        switch(formChanges[i].param2)
+                        {
+                        case HP_HIGHER_THAN:
+                            if (hpCheck > formChanges[i].param3 * 100)
+                                targetSpecies = formChanges[i].targetSpecies;
+                            break;
+                        case HP_LOWER_EQ_THAN:
+                            if (hpCheck <= formChanges[i].param3 * 100)
+                                targetSpecies = formChanges[i].targetSpecies;
+                            break;
+                        }
+                    }
+                    break;
+                case FORM_CHANGE_BATTLE_GIGANTAMAX:
+                    if (GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR))
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_BATTLE_WEATHER:
+                    // Check if there is a required ability and if the battler's ability does not match it
+                    // or is suppressed. If so, revert to the no weather form.
+                    if (formChanges[i].param2
+                        && GetBattlerAbility(battler) != formChanges[i].param2
+                        && formChanges[i].param1 == B_WEATHER_NONE)
+                    {
+                        targetSpecies = formChanges[i].targetSpecies;
+                    }
+                    // We need to revert the weather form if the field is under Air Lock, too.
+                    else if (!WEATHER_HAS_EFFECT && formChanges[i].param1 == B_WEATHER_NONE)
+                    {
+                        targetSpecies = formChanges[i].targetSpecies;
+                    }
+                    // Otherwise, just check for a match between the weather and the form change table.
+                    // Added a check for whether the weather is in effect to prevent end-of-turn soft locks with Cloud Nine / Air Lock
+                    else if (((gBattleWeather & formChanges[i].param1) && WEATHER_HAS_EFFECT)
+                        || (gBattleWeather == B_WEATHER_NONE && formChanges[i].param1 == B_WEATHER_NONE))
+                    {
+                        targetSpecies = formChanges[i].targetSpecies;
+                    }
+                    break;
+                case FORM_CHANGE_BATTLE_TURN_END:
+                    if (formChanges[i].param1 == GetBattlerAbility(battler))
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_STATUS:
+                    if (gBattleMons[battler].status1 & formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                }
+            }
+        }
+    }
+
+    return targetSpecies;
+}
+
+bool32 IsBattlerMegaEvolved(u32 battler)
+{
+    // While Transform does copy stats and visuals, it shouldn't be counted as true Mega Evolution.
+    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
+    return (gSpeciesInfo[gBattleMons[battler].species].isMegaEvolution);
+}
+
+bool32 IsBattlerPrimalReverted(u32 battler)
+{
+    // While Transform does copy stats and visuals, it shouldn't be counted as true Primal Revesion.
+    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
+    return (gSpeciesInfo[gBattleMons[battler].species].isPrimalReversion);
+}
+
+bool32 IsBattlerUltraBursted(u32 battler)
+{
+    // While Transform does copy stats and visuals, it shouldn't be counted as true Ultra Burst.
+    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
+    return (gSpeciesInfo[gBattleMons[battler].species].isUltraBurst);
+}
+
+bool32 CanBattlerFormChange(u32 battler, u16 method)
+{
+    // Can't change form if transformed.
+    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED
+        && B_TRANSFORM_FORM_CHANGES >= GEN_5)
+        return FALSE;
+    // Mega Evolved and Ultra Bursted Pokémon should always revert to normal upon fainting or ending the battle.
+    if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
+        return TRUE;
+    else if (IsBattlerPrimalReverted(battler) && (method == FORM_CHANGE_END_BATTLE))
+        return TRUE;
+    // TODO: Dynamax
+    // Gigantamaxed Pokemon should revert upon fainting, switching, or ending the battle.
+   /*  else if (IsGigantamaxed(battler) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
+        return TRUE; */
+    return DoesSpeciesHaveFormChangeMethod(gBattleMons[battler].species, method);
+}
+
+bool32 TryBattleFormChange(u32 battler, u16 method)
+{
+    u8 monId = gBattlerPartyIndexes[battler];
+    u8 side = GetBattlerSide(battler);
+    struct Pokemon *party = GetBattlerParty(battler);
+    u16 targetSpecies;
+
+    if (!CanBattlerFormChange(battler, method))
+        return FALSE;
+
+    targetSpecies = GetBattleFormChangeTargetSpecies(battler, method);
+    if (targetSpecies == SPECIES_NONE)
+        targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
+    if (targetSpecies != SPECIES_NONE)
+    {
+        // Saves the original species on the first form change.
+        if (gBattleStruct->changedSpecies[side][monId] == SPECIES_NONE)
+            gBattleStruct->changedSpecies[side][monId] = gBattleMons[battler].species;
+
+        TryToSetBattleFormChangeMoves(&party[monId], method);
+        SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+        gBattleMons[battler].species = targetSpecies;
+        RecalcBattlerStats(battler, &party[monId]);
+        return TRUE;
+    }
+    else if (gBattleStruct->changedSpecies[side][monId] != SPECIES_NONE)
+    {
+        bool32 restoreSpecies = FALSE;
+
+        // Mega Evolved and Ultra Bursted Pokémon should always revert to normal upon fainting or ending the battle, so no need to add it to the form change tables.
+        if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
+            restoreSpecies = TRUE;
+
+        // Unlike Megas, Primal Reversion isn't canceled on fainting.
+        else if (IsBattlerPrimalReverted(battler) && (method == FORM_CHANGE_END_BATTLE))
+            restoreSpecies = TRUE;
+
+        // Gigantamax Pokemon have their forms reverted after fainting, switching, or ending the battle.
+        else if (FALSE /* IsGigantamaxed(battler) */ && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
+            restoreSpecies = TRUE;
+
+        if (restoreSpecies)
+        {
+            // Reverts the original species
+            TryToSetBattleFormChangeMoves(&party[monId], method);
+            SetMonData(&party[monId], MON_DATA_SPECIES, &gBattleStruct->changedSpecies[side][monId]);
+            RecalcBattlerStats(battler, &party[monId]);
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }
 
 

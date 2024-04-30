@@ -39,12 +39,17 @@
 #define ABILITY_ON_FIELD(abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, abilityId, 0, 0))
 #define ABILITY_ON_FIELD2(abilityId)(AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, abilityId, 0, 0))
 
-// For the first argument of ItemBattleEffects, to deteremine which block of item effects to try
+/// For the first argument of ItemBattleEffects, to deteremine which block of item effects to try
 #define ITEMEFFECT_ON_SWITCH_IN                 0
 #define ITEMEFFECT_NORMAL                       1
 #define ITEMEFFECT_DUMMY                        2 // Unused, empty
 #define ITEMEFFECT_MOVE_END                     3
-#define ITEMEFFECT_KINGSROCK_SHELLBELL          4
+#define ITEMEFFECT_KINGSROCK                    4
+#define ITEMEFFECT_TARGET                       5
+#define ITEMEFFECT_ORBS                         6
+#define ITEMEFFECT_LIFEORB_SHELLBELL            7
+#define ITEMEFFECT_USE_LAST_ITEM                8 // move end effects for just the battler, not whole field
+#define ITEMEFFECT_STATS_CHANGED                9 // For White Herb and Eject Pack
 
 #define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
 #define WEATHER_HAS_EFFECT2 ((!AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, ABILITY_AIR_LOCK, 0, 0)))
@@ -103,7 +108,7 @@ void PressurePPLoseOnUsingImprison(u8 attacker);
 void PressurePPLoseOnUsingPerishSong(u8 attacker);
 void MarkBattlerForControllerExec(u8 battlerId);
 void MarkBattlerReceivedLinkData(u8 battlerId);
-void CancelMultiTurnMoves(u8 battler);
+const u8* CancelMultiTurnMoves(u32 battler);
 bool32 WasUnableToUseMove(u32 battler);
 void PrepareStringBattle(u16 stringId, u8 battler);
 void ResetSentPokesToOpponentValue(void);
@@ -182,6 +187,22 @@ u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating);
 u32 GetBattlerHoldEffectIgnoreAbility(u32 battler, bool32 checkNegating);
 u32 GetBattlerHoldEffectInternal(u32 battler, bool32 checkNegating, bool32 checkAbility);
 void RecalcBattlerStats(u32 battler, struct Pokemon *mon);
+bool32 TestIfSheerForceAffected(u32 battler, u16 move);
+bool32 CanSleep(u32 battler);
+bool32 CanBePoisoned(u32 battlerAttacker, u32 battlerTarget);
+bool32 CanBeBurned(u32 battler);
+bool32 CanBeParalyzed(u32 battler);
+bool32 CanBeFrozen(u32 battler);
+bool32 CanGetFrostbite(u32 battler);
+bool32 CanBeConfused(u32 battler);
+bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item);
+void TrySaveExchangedItem(u32 battler, u16 stolenItem);
+void RemoveBattlerType(u32 battler, u8 type);
+bool32 IsBattlerMegaEvolved(u32 battler);
+bool32 IsBattlerPrimalReverted(u32 battler);
+bool32 IsBattlerUltraBursted(u32 battler);
+u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method);
+bool32 TryBattleFormChange(u32 battler, u16 method);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);

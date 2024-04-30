@@ -411,8 +411,36 @@
 #define STRINGID_ATTACKWEAKENEDBSTRONGWINDS           409
 #define STRINGID_ENDUREDSTURDY                        410
 #define STRINGID_BERRYDMGREDUCES                      411
+#define STRINGID_TARGETTOUGHEDITOUT                   412
+#define STRINGID_TRAPPEDBYSWIRLINGMAGMA               413
+#define	STRINGID_INFESTATION                          414
+#define STRINGID_PKMNINSNAPTRAP                       415
+#define STRINGID_THUNDERCAGETRAPPED                   416
+#define STRINGID_RESETSTARGETSSTATLEVELS              417
+#define STRINGID_EXTREMESUNLIGHTFADED                 418
+#define STRINGID_HEAVYRAINLIFTED                      419
+#define STRINGID_STRONGWINDSDISSIPATED                420
+#define STRINGID_SYMBIOSISITEMPASS                    421
+#define	STRINGID_BURSTINGFLAMESHIT                    422
+#define STRINGID_BROKETHROUGHPROTECTION               423
+#define STRINGID_FELLFORFEINT                         424
+#define STRINGID_SPECTRALTHIEFSTEAL                   425
+#define STRINGID_PKMNSABILITYSUPPRESSED               426
+#define STRINGID_INCINERATEBURN                       427
+#define STRINGID_BUGBITE                              428
+#define STRINGID_BOTHCANNOLONGERESCAPE                429
+#define STRINGID_ATTACKERLOSTFIRETYPE                 430
+#define STRINGID_ATTACKERLOSTELECTRICTYPE             431
+#define STRINGID_ATTACKERLOSTITSTYPE                  432
+#define STRINGID_STEALTHROCKDMG                       433
+#define STRINGID_SHARPSTEELDMG                        434
+#define STRINGID_POINTEDSTONESFLOAT                   435
+#define STRINGID_SHARPSTEELFLOATS                     436
+#define STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP      437
+#define STRINGID_AROMAVEILPROTECTED                   438
+#define STRINGID_PKMNPREVENTEDFROMHEALING             439
 
-#define BATTLESTRINGS_COUNT     412
+#define BATTLESTRINGS_COUNT     440
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -621,6 +649,25 @@
 #define B_MSG_FROSTBITE_HEALED         0
 #define B_MSG_FROSTBITE_HEALED_BY_MOVE 1
 
-#define NUM_TRAPPING_MOVES 6
+// gWrappedStringIds
+#define B_MSG_WRAPPED_BIND         0
+#define B_MSG_WRAPPED_WRAP         1
+#define B_MSG_WRAPPED_FIRE_SPIN    2
+#define B_MSG_WRAPPED_CLAMP        3
+#define B_MSG_WRAPPED_WHIRLPOOL    4
+#define B_MSG_WRAPPED_SAND_TOMB    5
+#define B_MSG_WRAPPED_MAGMA_STORM  6
+#define B_MSG_WRAPPED_INFESTATION  7
+#define B_MSG_WRAPPED_SNAP_TRAP    8
+#define B_MSG_WRAPPED_THUNDER_CAGE 9
+#define NUM_TRAPPING_MOVES         10
+
+// gDmgHazardsStringIds
+#define B_MSG_PKMNHURTBYSPIKES   0
+#define B_MSG_STEALTHROCKDMG     1
+#define B_MSG_SHARPSTEELDMG      2
+#define B_MSG_POINTEDSTONESFLOAT 3
+#define B_MSG_SPIKESSCATTERED    4
+#define B_MSG_SHARPSTEELFLOATS   5
 
 #endif // GUARD_BATTLE_STRING_IDS_H

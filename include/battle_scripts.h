@@ -476,5 +476,28 @@ extern const u8 BattleScript_HangedOnMsg[];
 extern const u8 BattleScript_PrintBerryReduceString[];
 extern const u8 BattleScript_TargetFormChange[];
 extern const u8 BattleScript_TargetFormChangeWithStringNoPopup[];
+extern const u8 BattleScript_IceFaceNullsDamage[];
+extern const u8 BattleScript_AffectionBasedEndurance[];
+extern const u8 BattleScript_DefSpDefDown[];
+extern const u8 BattleScript_MoveEffectClearSmog[];
+extern const u8 BattleScript_MoveEffectFlameBurst[];
+extern const u8 BattleScript_HyperspaceFuryRemoveProtect[];
+extern const u8 BattleScript_MoveEffectFeint[];
+extern const u8 BattleScript_SpectralThiefSteal[];
+extern const u8 BattleScript_VCreateStatLoss[];
+extern const u8 BattleScript_MoveEffectCoreEnforcer[];
+extern const u8 BattleScript_MoveEffectIncinerate[];
+extern const u8 BattleScript_MoveEffectBugBite[];
+extern const u8 BattleScript_BothCanNoLongerEscape[];
+extern const u8 BattleScript_RemoveFireType[];
+extern const u8 BattleScript_RemoveElectricType[];
+extern const u8 BattleScript_RemoveGenericType[];
+extern const u8 BattleScript_StealthRockActivates[];
+extern const u8 BattleScript_SpikesActivates[];
+extern const u8 BattleScript_SyrupBombActivates[];
+extern const u8 BattleScript_AromaVeilProtectsRet[];
+extern const u8 BattleScript_EffectPsychicNoise[];
+extern const u8 BattleScript_StatUpMsg[];
+extern const u8 BattleScript_SymbiosisActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

@@ -30,6 +30,15 @@ u32 GetHighestStatId(u32 battlerId);
 u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u32 defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 DoesDisguiseBlockMove(u32 battler, u32 move);
+bool32 CanPoisonType(u8 battlerAttacker, u8 battlerTarget);
+bool32 CanParalyzeType(u8 battlerAttacker, u8 battlerTarget);
+bool32 NoAliveMonsForPlayer(void);
+bool32 NoAliveMonsForEitherParty(void);
+void StealTargetItem(u8 battlerStealer, u8 battlerItem);
+u32 IsFlowerVeilProtected(u32 battler);
+u32 IsLeafGuardProtected(u32 battler);
+bool32 IsShieldsDownProtected(u32 battler);
+u32 IsAbilityStatusProtected(u32 battler);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const struct StatFractions gAccuracyStageRatios[];

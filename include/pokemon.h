@@ -791,6 +791,11 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mo
 void DestroyMonSpritesGfxManager(void);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId);
 u16 GetFormSpeciesId(u16 speciesId, u8 formId);
+u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
+u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);
+u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 arg);
+bool32 DoesSpeciesHaveFormChangeMethod(u16 species, u16 method);
+void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method);
 
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, u8 battleId);

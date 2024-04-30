@@ -30,6 +30,7 @@
 #include "constants/items.h"
 #include "constants/item_effects.h"
 #include "constants/cries.h"
+#include "constants/form_change_types.h"
 #include "constants/pokemon.h"
 #include "constants/abilities.h"
 #include "constants/moves.h"
@@ -1671,6 +1672,17 @@ void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot)
 {
     SetMonData(mon, MON_DATA_MOVE1 + slot, &move);
     SetMonData(mon, MON_DATA_PP1 + slot, &gMovesInfo[move].pp);
+}
+
+static void SetMonMoveSlot_KeepPP(struct Pokemon *mon, u16 move, u8 slot)
+{
+    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
+    u8 currPP = GetMonData(mon, MON_DATA_PP1 + slot, NULL);
+    u8 newPP = CalculatePPWithBonus(move, ppBonuses, slot);
+    u16 finalPP = min(currPP, newPP);
+
+    SetMonData(mon, MON_DATA_MOVE1 + slot, &move);
+    SetMonData(mon, MON_DATA_PP1 + slot, &finalPP);
 }
 
 void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot)
@@ -6171,6 +6183,140 @@ u16 GetFormSpeciesId(u16 speciesId, u8 formId)
         return speciesId;
 }
 
+u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId)
+{
+    u8 targetFormId = 0;
+
+    if (GetSpeciesFormTable(formSpeciesId) != NULL)
+    {
+        for (targetFormId = 0; GetSpeciesFormTable(formSpeciesId)[targetFormId] != FORM_SPECIES_END; targetFormId++)
+        {
+            if (formSpeciesId == GetSpeciesFormTable(formSpeciesId)[targetFormId])
+                break;
+        }
+    }
+    return targetFormId;
+}
+
+u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
+{
+    return GetFormChangeTargetSpeciesBoxMon(&mon->box, method, arg);
+}
+
+// Returns SPECIES_NONE if no form change is possible
+u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 arg)
+{
+    u32 i;
+    u16 targetSpecies = SPECIES_NONE;
+    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+    u16 heldItem;
+    u32 ability;
+
+    if (formChanges != NULL)
+    {
+        heldItem = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM, NULL);
+        ability = GetAbilityBySpecies(species, GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, NULL));
+
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+        {
+            if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
+            {
+                switch (method)
+                {
+                case FORM_CHANGE_ITEM_HOLD:
+                    if ((heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                     && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_ITEM_USE:
+                    if (arg == formChanges[i].param1)
+                    {
+                        // TODO: time
+                        switch (formChanges[i].param2)
+                        {
+                        case DAY:
+                            // if (GetTimeOfDay() != TIME_NIGHT)
+                            //     targetSpecies = formChanges[i].targetSpecies;
+                            targetSpecies = SPECIES_NONE;
+                            break;
+                        case NIGHT:
+                            // if (GetTimeOfDay() == TIME_NIGHT)
+                            //     targetSpecies = formChanges[i].targetSpecies;
+                            targetSpecies = SPECIES_NONE;
+                            break;
+                        default:
+                            targetSpecies = formChanges[i].targetSpecies;
+                            break;
+                        }
+                    }
+                    break;
+                case FORM_CHANGE_ITEM_USE_MULTICHOICE:
+                    if (arg == formChanges[i].param1)
+                    {
+                        if (formChanges[i].param2 == gSpecialVar_Result)
+                            targetSpecies = formChanges[i].targetSpecies;
+                    }
+                    break;
+                case FORM_CHANGE_MOVE:
+                    if (BoxMonKnowsMove(boxMon, formChanges[i].param1) != formChanges[i].param2)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_BEGIN_BATTLE:
+                case FORM_CHANGE_END_BATTLE:
+                    if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_END_BATTLE_TERRAIN:
+                    if (gBattleTerrain == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_WITHDRAW:
+                case FORM_CHANGE_FAINT:
+                case FORM_CHANGE_STATUS:
+                    targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_TIME_OF_DAY:
+                    // TODO: time
+                    // switch (formChanges[i].param1)
+                    // {
+                    // case DAY:
+                    //     if (GetTimeOfDay() != TIME_NIGHT)
+                    //         targetSpecies = formChanges[i].targetSpecies;
+                    //     break;
+                    // case NIGHT:
+                    //     if (GetTimeOfDay() == TIME_NIGHT)
+                    //         targetSpecies = formChanges[i].targetSpecies;
+                    //     break;
+                    // }
+                    // break;
+                    targetSpecies = SPECIES_NONE;
+                    break;
+                }
+            }
+        }
+    }
+
+    return targetSpecies;
+}
+
+bool32 DoesSpeciesHaveFormChangeMethod(u16 species, u16 method)
+{
+    u32 i;
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+
+    if (formChanges != NULL)
+    {
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+        {
+            if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
 u32 GetMonAffectionHearts(struct Pokemon *pokemon)
 {
     u32 friendship = GetMonData(pokemon, MON_DATA_FRIENDSHIP, NULL);
@@ -6187,4 +6333,35 @@ u32 GetMonAffectionHearts(struct Pokemon *pokemon)
         return AFFECTION_ONE_HEART;
 
     return AFFECTION_NO_HEARTS;
+}
+
+void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method)
+{
+    int i, j;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+
+    if (formChanges == NULL
+        || (method != FORM_CHANGE_BEGIN_BATTLE && method != FORM_CHANGE_END_BATTLE))
+        return;
+
+    for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+    {
+        if (formChanges[i].method == method
+            && formChanges[i].param2
+            && formChanges[i].param3
+            && formChanges[i].targetSpecies != species)
+        {
+            u16 originalMove = formChanges[i].param2;
+            u16 newMove = formChanges[i].param3;
+
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                u16 currMove = GetMonData(mon, MON_DATA_MOVE1 + j, NULL);
+                if (currMove == originalMove)
+                    SetMonMoveSlot_KeepPP(mon, newMove, j);
+            }
+            break;
+        }
+    }
 }

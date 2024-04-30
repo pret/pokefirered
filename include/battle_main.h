@@ -79,8 +79,8 @@ void SpriteCB_PlayerThrowInit(struct Sprite *sprite);
 void UpdatePlayerPosInThrowAnim(struct Sprite *sprite);
 void BeginBattleIntroDummy(void);
 void BeginBattleIntro(void);
-void SwitchInClearSetData(void);
-void FaintClearSetData(void);
+void SwitchInClearSetData(u32 battler);
+const u8* FaintClearSetData(u32 battler);
 void BattleTurnPassed(void);
 u8 IsRunningFromBattleImpossible(void);
 void UpdatePartyOwnerOnSwitch_NonMulti(u8 battler);
@@ -93,5 +93,6 @@ s8 GetMovePriority(u32 battlerId, u16 move);
 s8 GetChosenMovePriority(u32 battlerId);
 u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect);
 u32 GetBattlerTotalSpeedStat(u32 battler);
+void SpecialStatusesClear(void);
 
 #endif // GUARD_BATTLE_MAIN_H

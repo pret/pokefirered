@@ -394,8 +394,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_seteffectsecondary,                      //0x17 // done
     Cmd_clearstatusfromeffect,                   //0x18 // done
     Cmd_tryfaintmon,                             //0x19 // done
-    Cmd_dofaintanimation,                        //0x1A
-    Cmd_cleareffectsonfaint,                     //0x1B
+    Cmd_dofaintanimation,                        //0x1A // done
+    Cmd_cleareffectsonfaint,                     //0x1B // done
     Cmd_jumpifstatus,                            //0x1C
     Cmd_jumpifstatus2,                           //0x1D
     Cmd_jumpifability,                           //0x1E
@@ -4092,27 +4092,35 @@ static void Cmd_tryfaintmon(void)
 
 static void Cmd_dofaintanimation(void)
 {
+    CMD_ARGS(u8 battler);
+
     if (gBattleControllerExecFlags == 0)
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+        u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
         BtlController_EmitFaintAnimation(BUFFER_A);
-        MarkBattlerForControllerExec(gActiveBattler);
-        gBattlescriptCurrInstr += 2;
+        MarkBattlerForControllerExec(battler);
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
 static void Cmd_cleareffectsonfaint(void)
 {
+    CMD_ARGS(u8 battler);
+
     if (gBattleControllerExecFlags == 0)
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+        u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+        const u8 *clearDataResult = NULL;
 
-        gBattleMons[gActiveBattler].status1 = 0;
-        BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].status1), &gBattleMons[gActiveBattler].status1);
-        MarkBattlerForControllerExec(gActiveBattler);
+        gBattleMons[battler].status1 = 0;
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[battler].status1), &gBattleMons[battler].status1);
+        MarkBattlerForControllerExec(battler);
 
-        FaintClearSetData(); // Effects like attractions, trapping, etc.
-        gBattlescriptCurrInstr += 2;
+        clearDataResult = FaintClearSetData(battler); // Effects like attractions, trapping, etc.
+        if (clearDataResult)
+            gBattlescriptCurrInstr = clearDataResult;
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
@@ -5706,7 +5714,7 @@ static void Cmd_switchindataupdate(void)
         gBattleMons[gActiveBattler].status2 = oldData.status2;
     }
 
-    SwitchInClearSetData();
+    SwitchInClearSetData(gActiveBattler);
 
     gBattleScripting.battler = gActiveBattler;
 
@@ -6851,7 +6859,7 @@ static void Cmd_removeitem(void)
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
-    usedHeldItem = &gBattleStruct->usedHeldItems[gActiveBattler];
+    usedHeldItem = &gBattleStruct->usedHeldItems[gActiveBattler][GetBattlerSide(gActiveBattler)];
     *usedHeldItem = gBattleMons[gActiveBattler].item;
     gBattleMons[gActiveBattler].item = ITEM_NONE;
 
@@ -7719,7 +7727,7 @@ static void Cmd_trymirrormove(void)
     {
         if (i != gBattlerAttacker)
         {
-            move = T1_READ_16(i * 2 + gBattlerAttacker * 8 + gBattleStruct->lastTakenMoveFrom);
+            move = gBattleStruct->lastTakenMoveFrom[gBattlerAttacker][i];
 
             if (move != MOVE_NONE && move != MOVE_UNAVAILABLE)
             {
@@ -10740,7 +10748,7 @@ static void Cmd_tryrecycleitem(void)
     u16 *usedHeldItem;
 
     gActiveBattler = gBattlerAttacker;
-    usedHeldItem = &gBattleStruct->usedHeldItems[gActiveBattler];
+    usedHeldItem = &gBattleStruct->usedHeldItems[gActiveBattler][GetBattlerSide(gActiveBattler)];
     if (*usedHeldItem != ITEM_NONE && gBattleMons[gActiveBattler].item == ITEM_NONE)
     {
         gLastUsedItem = *usedHeldItem;

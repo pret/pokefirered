@@ -354,9 +354,22 @@ struct SideTimer
     // pokeemerald
     u8 retaliateTimer;
     u8 stealthRockAmount;
+    u8 stickyWebBattlerId;
 };
 
 extern struct SideTimer gSideTimers[];
+
+struct FieldTimer
+{
+    u8 mudSportTimer;
+    u8 waterSportTimer;
+    u8 wonderRoomTimer;
+    u8 magicRoomTimer;
+    u8 trickRoomTimer;
+    u8 terrainTimer;
+    u8 gravityTimer;
+    u8 fairyLockTimer;
+};
 
 struct WishFutureKnock
 {
@@ -478,6 +491,24 @@ struct LinkBattlerHeader
     struct BattleEnigmaBerry battleEnigmaBerry;
 };
 
+struct MegaEvolutionData
+{
+    u8 toEvolve; // As flags using gBitTable.
+    bool8 alreadyEvolved[4]; // Array id is used for mon position.
+    u8 battlerId;
+    bool8 playerSelect;
+    u8 triggerSpriteId;
+};
+
+struct UltraBurstData
+{
+    u8 toBurst; // As flags using gBitTable.
+    bool8 alreadyBursted[4]; // Array id is used for mon position.
+    u8 battlerId;
+    bool8 playerSelect;
+    u8 triggerSpriteId;
+};
+
 struct Illusion
 {
     u8 on;
@@ -485,6 +516,25 @@ struct Illusion
     u8 broken;
     u8 partyId;
     struct Pokemon *mon;
+};
+
+struct ZMoveData
+{
+    u8 viable:1;    // current move can become a z move
+    u8 viewing:1;  // if player is viewing the z move name instead of regular moves
+    u8 active:1;   // is z move being used this turn
+    u8 zStatusActive:1;
+    u8 healReplacement:1;
+    u8 activeCategory:2;  // active z move category
+    u8 zUnused:1;
+    u8 triggerSpriteId;
+    u8 possibleZMoves[MAX_BATTLERS_COUNT];
+    u16 chosenZMove;  // z move of move cursor is on
+    u8 effect;
+    u8 used[MAX_BATTLERS_COUNT];   //one per bank for multi-battles
+    u16 toBeUsed[MAX_BATTLERS_COUNT];  // z moves per battler to be used
+    u16 baseMoves[MAX_BATTLERS_COUNT];
+    u8 categories[MAX_BATTLERS_COUNT];
 };
 
 struct LostItem
@@ -525,8 +575,8 @@ struct BattleStruct
     u8 runTries;
     u8 caughtMonNick[POKEMON_NAME_LENGTH + 1];
     u8 field_78; // unused
-    u8 safariRockThrowCounter;
-    u8 safariBaitThrowCounter;
+    u8 safariRockThrowCounter; // safariGoNearCounter in pokeemerald
+    u8 safariBaitThrowCounter; // safariPkblThrowCounter in pokeemerald
     u8 safariEscapeFactor;
     u8 safariCatchFactor;
     u8 linkBattleVsSpriteId_V;
@@ -556,7 +606,7 @@ struct BattleStruct
     u8 multiplayerId;
     u8 overworldWeatherDone;
     u8 atkCancellerTracker;
-    u16 usedHeldItems[MAX_BATTLERS_COUNT];
+    u16 usedHeldItems[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side. For harvest, recycle
     u8 chosenItem[MAX_BATTLERS_COUNT]; // why is this an u8?
     u8 AI_itemType[2];
     u8 AI_itemFlags[2];
@@ -568,7 +618,7 @@ struct BattleStruct
     u8 turnSideTracker;
     u8 fillerDC[0xDF-0xDC];
     u8 givenExpMons;
-    u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT * MAX_BATTLERS_COUNT * 2];
+    u8 lastTakenMoveFrom[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
     u16 castformPalette[MAX_BATTLERS_COUNT][16];
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
@@ -612,6 +662,12 @@ struct BattleStruct
     struct LostItem itemLost[PARTY_SIZE];  // Player's team that had items consumed or stolen (two bytes per party member)
     u8 savedBattlerTarget;
     u8 ateBerry[2]; // array id determined by side, each party pokemon as bit
+    u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
+    struct MegaEvolutionData mega;
+    struct UltraBurstData burst;
+    struct ZMoveData zmove;
+    u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
+    bool8 allowedToChangeFormInWeather[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side, used by Ice Face.
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;
@@ -848,6 +904,12 @@ struct PokedudeBattlerState
     u8 saved_bg0y;
 };
 
+struct QueuedStatBoost
+{
+    u8 stats;   // bitfield for each battle stat that is set if the stat changes
+    s8 statChanges[NUM_BATTLE_STATS - 1];    // highest bit being set decreases the stat
+}; /* size = 8 */
+
 extern u16 gBattle_BG0_X;
 extern u16 gBattle_BG0_Y;
 extern u16 gBattle_BG1_X;
@@ -952,6 +1014,10 @@ extern s32 gBideDmg[MAX_BATTLERS_COUNT];
 extern u8 gBideTarget[MAX_BATTLERS_COUNT];
 extern u16 gLastUsedMove;
 extern u8 gIsCriticalHit;
+extern struct FieldTimer gFieldTimers;
+extern bool8 gHasFetchedBall;
+extern u8 gLastUsedBall;
+extern struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT];
 
 static inline u32 GetBattlerPosition(u32 battler)
 {

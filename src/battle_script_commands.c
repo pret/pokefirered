@@ -355,10 +355,10 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_typecalc,                                //0x6 // done
     Cmd_adjustdamage,                            //0x7 // done
     Cmd_multihitresultmessage,                   //0x8 // done
-    Cmd_attackanimation,                         //0x9
-    Cmd_waitanimation,                           //0xA
-    Cmd_healthbarupdate,                         //0xB
-    Cmd_datahpupdate,                            //0xC
+    Cmd_attackanimation,                         //0x9 // done
+    Cmd_waitanimation,                           //0xA // done
+    Cmd_healthbarupdate,                         //0xB // done
+    Cmd_datahpupdate,                            //0xC // done
     Cmd_critmessage,                             //0xD
     Cmd_effectivenesssound,                      //0xE
     Cmd_resultmessage,                           //0xF
@@ -2117,39 +2117,68 @@ static void Cmd_multihitresultmessage(void)
 
 static void Cmd_attackanimation(void)
 {
+    CMD_ARGS();
+
+    u16 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
+
     if (gBattleControllerExecFlags)
         return;
 
-    if ((gHitMarker & HITMARKER_NO_ANIMATIONS) && (gCurrentMove != MOVE_TRANSFORM && gCurrentMove != MOVE_SUBSTITUTE))
+    if ((gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION))
+        && gCurrentMove != MOVE_TRANSFORM
+        && gCurrentMove != MOVE_SUBSTITUTE
+        && gCurrentMove != MOVE_ALLY_SWITCH
+        // In a wild double battle gotta use the teleport animation if two wild pokemon are alive.
+        && !(gCurrentMove == MOVE_TELEPORT && WILD_DOUBLE_BATTLE && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT && IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker))))
     {
-        BattleScriptPush(gBattlescriptCurrInstr + 1);
+        BattleScriptPush(cmd->nextInstr);
         gBattlescriptCurrInstr = BattleScript_Pausex20;
         gBattleScripting.animTurn++;
         gBattleScripting.animTargetsHit++;
     }
     else
     {
-        if ((gMovesInfo[gCurrentMove].target & MOVE_TARGET_BOTH
-            || gMovesInfo[gCurrentMove].target & MOVE_TARGET_FOES_AND_ALLY
-            || gMovesInfo[gCurrentMove].target & MOVE_TARGET_DEPENDS)
+        if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT) // No animation on second hit
+        {
+            gBattlescriptCurrInstr = cmd->nextInstr;
+            return;
+        }
+
+        if ((moveTarget & MOVE_TARGET_BOTH
+             || moveTarget & MOVE_TARGET_FOES_AND_ALLY
+             || moveTarget & MOVE_TARGET_DEPENDS)
             && gBattleScripting.animTargetsHit)
         {
-            gBattlescriptCurrInstr++;
+            gBattlescriptCurrInstr = cmd->nextInstr;
             return;
         }
         if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
         {
+            u8 multihit;
+
+            if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+                multihit = gMultiHitCounter;
+            else if (gMultiHitCounter != 0 && gMultiHitCounter != 1)
+            {
+                if (gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
+                    multihit = 1;
+                else
+                    multihit = gMultiHitCounter;
+            }
+            else
+                multihit = gMultiHitCounter;
+
             gActiveBattler = gBattlerAttacker;
 
-            BtlController_EmitMoveAnimation(BUFFER_A, gCurrentMove, gBattleScripting.animTurn, gBattleMovePower, gBattleMoveDamage, gBattleMons[gBattlerAttacker].friendship, &gDisableStructs[gBattlerAttacker]);
+            BtlController_EmitMoveAnimation(BUFFER_A, gCurrentMove, gBattleScripting.animTurn, gBattleMovePower, gBattleMoveDamage, gBattleMons[gBattlerAttacker].friendship, &gDisableStructs[gBattlerAttacker], multihit);
             gBattleScripting.animTurn++;
             gBattleScripting.animTargetsHit++;
             MarkBattlerForControllerExec(gBattlerAttacker);
-            gBattlescriptCurrInstr++;
+            gBattlescriptCurrInstr = cmd->nextInstr;
         }
         else
         {
-            BattleScriptPush(gBattlescriptCurrInstr + 1);
+            BattleScriptPush(cmd->nextInstr);
             gBattlescriptCurrInstr = BattleScript_Pausex20;
         }
     }
@@ -2157,170 +2186,195 @@ static void Cmd_attackanimation(void)
 
 static void Cmd_waitanimation(void)
 {
+    CMD_ARGS();
+
     if (gBattleControllerExecFlags == 0)
-        gBattlescriptCurrInstr++;
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_healthbarupdate(void)
 {
+    CMD_ARGS(u8 battler);
+
     if (gBattleControllerExecFlags)
         return;
 
-    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) || (gHitMarker & HITMARKER_PASSIVE_DAMAGE))
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+        u32 battler = GetBattlerForBattleScript(cmd->battler);
+        gActiveBattler = battler;
 
-        if (gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
+        if (DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove) && gDisableStructs[battler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
         {
-            PrepareStringBattle(STRINGID_SUBSTITUTEDAMAGED, gActiveBattler);
+            PrepareStringBattle(STRINGID_SUBSTITUTEDAMAGED, battler);
         }
-        else
+        else if (!DoesDisguiseBlockMove(battler, gCurrentMove))
         {
-            s16 healthValue;
-
-            s32 currDmg = gBattleMoveDamage;
-            s32 maxPossibleDmgValue = 10000; // not present in R/S, ensures that huge damage values don't change sign
-
-            if (currDmg <= maxPossibleDmgValue)
-                healthValue = currDmg;
-            else
-                healthValue = maxPossibleDmgValue;
+            s16 healthValue = min(gBattleMoveDamage, 10000); // Max damage (10000) not present in R/S, ensures that huge damage values don't change sign
 
             BtlController_EmitHealthBarUpdate(BUFFER_A, healthValue);
-            MarkBattlerForControllerExec(gActiveBattler);
+            MarkBattlerForControllerExec(battler);
 
-            if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER && gBattleMoveDamage > 0)
+            if (GetBattlerSide(battler) == B_SIDE_PLAYER && gBattleMoveDamage > 0)
                 gBattleResults.playerMonWasDamaged = TRUE;
         }
     }
 
-    gBattlescriptCurrInstr += 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_datahpupdate(void)
 {
-    u32 moveType;
+    CMD_ARGS(u8 battler);
+
+    u32 battler;
 
     if (gBattleControllerExecFlags)
         return;
 
-    if (gBattleStruct->dynamicMoveType == 0)
-        moveType = gMovesInfo[gCurrentMove].type;
-    else if (!(gBattleStruct->dynamicMoveType & F_DYNAMIC_TYPE_1))
-        moveType = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK;
-    else
-        moveType = gMovesInfo[gCurrentMove].type;
-
-    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT) || (gHitMarker & HITMARKER_PASSIVE_DAMAGE))
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        if (gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE && gDisableStructs[gActiveBattler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
+        battler = GetBattlerForBattleScript(cmd->battler);
+        gActiveBattler = battler;
+        if (DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove) && gDisableStructs[battler].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
         {
-            if (gDisableStructs[gActiveBattler].substituteHP >= gBattleMoveDamage)
+            if (gDisableStructs[battler].substituteHP >= gBattleMoveDamage)
             {
-                if (gSpecialStatuses[gActiveBattler].dmg == 0)
-                    gSpecialStatuses[gActiveBattler].dmg = gBattleMoveDamage;
-                gDisableStructs[gActiveBattler].substituteHP -= gBattleMoveDamage;
+                if (gSpecialStatuses[battler].shellBellDmg == 0)
+                    gSpecialStatuses[battler].shellBellDmg = gBattleMoveDamage;
+                gDisableStructs[battler].substituteHP -= gBattleMoveDamage;
                 gHpDealt = gBattleMoveDamage;
             }
             else
             {
-                if (gSpecialStatuses[gActiveBattler].dmg == 0)
-                    gSpecialStatuses[gActiveBattler].dmg = gDisableStructs[gActiveBattler].substituteHP;
-                gHpDealt = gDisableStructs[gActiveBattler].substituteHP;
-                gDisableStructs[gActiveBattler].substituteHP = 0;
+                if (gSpecialStatuses[battler].shellBellDmg == 0)
+                    gSpecialStatuses[battler].shellBellDmg = gDisableStructs[battler].substituteHP;
+                gHpDealt = gDisableStructs[battler].substituteHP;
+                gDisableStructs[battler].substituteHP = 0;
             }
             // check substitute fading
-            if (gDisableStructs[gActiveBattler].substituteHP == 0)
+            if (gDisableStructs[battler].substituteHP == 0)
             {
-                gBattlescriptCurrInstr += 2;
+                gBattlescriptCurrInstr = cmd->nextInstr;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_SubstituteFade;
                 return;
             }
         }
+        else if (DoesDisguiseBlockMove(battler, gCurrentMove))
+        {
+            // TODO: Convert this to a proper FORM_CHANGE type.
+            u32 side = GetBattlerSide(battler);
+            gBattleScripting.battler = battler;
+            if (gBattleStruct->changedSpecies[side][gBattlerPartyIndexes[battler]] == SPECIES_NONE)
+                gBattleStruct->changedSpecies[side][gBattlerPartyIndexes[battler]] = gBattleMons[battler].species;
+            // TODO: Totems
+            // if (gBattleMons[battler].species == SPECIES_MIMIKYU_TOTEM_DISGUISED)
+            //     gBattleMons[battler].species = SPECIES_MIMIKYU_TOTEM_BUSTED;
+            // else
+            //     gBattleMons[battler].species = SPECIES_MIMIKYU_BUSTED;
+            gBattleMons[battler].species = SPECIES_MIMIKYU_BUSTED;
+            if (B_DISGUISE_HP_LOSS >= GEN_8)
+            {
+                // TODO: Dynamax
+                // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+            }
+            BattleScriptPush(cmd->nextInstr);
+            gBattlescriptCurrInstr = BattleScript_TargetFormChange;
+            return;
+        }
         else
         {
             gHitMarker &= ~HITMARKER_IGNORE_SUBSTITUTE;
-            if (gBattleMoveDamage < 0) // hp goes up
+            if (gBattleMoveDamage < 0)
             {
-                gBattleMons[gActiveBattler].hp -= gBattleMoveDamage;
-                if (gBattleMons[gActiveBattler].hp > gBattleMons[gActiveBattler].maxHP)
-                    gBattleMons[gActiveBattler].hp = gBattleMons[gActiveBattler].maxHP;
-
+                // Negative damage is HP gain
+                gBattleMons[battler].hp += -gBattleMoveDamage;
+                if (gBattleMons[battler].hp > gBattleMons[battler].maxHP)
+                    gBattleMons[battler].hp = gBattleMons[battler].maxHP;
             }
-            else // hp goes down
+            else
             {
-                if (gHitMarker & HITMARKER_SKIP_DMG_TRACK)
+                if (gHitMarker & HITMARKER_IGNORE_BIDE)
                 {
-                    gHitMarker &= ~HITMARKER_SKIP_DMG_TRACK;
+                    gHitMarker &= ~HITMARKER_IGNORE_BIDE;
                 }
                 else
                 {
-                    gTakenDmg[gActiveBattler] += gBattleMoveDamage;
-                    if (gBattlescriptCurrInstr[1] == BS_TARGET)
-                        gTakenDmgByBattler[gActiveBattler] = gBattlerAttacker;
+                    gBideDmg[battler] += gBattleMoveDamage;
+                    if (cmd->battler == BS_TARGET)
+                        gBideTarget[battler] = gBattlerAttacker;
                     else
-                        gTakenDmgByBattler[gActiveBattler] = gBattlerTarget;
+                        gBideTarget[battler] = gBattlerTarget;
                 }
 
-                if (gBattleMons[gActiveBattler].hp > gBattleMoveDamage)
+                // Deal damage to the battler
+                if (gBattleMons[battler].hp > gBattleMoveDamage)
                 {
-                    gBattleMons[gActiveBattler].hp -= gBattleMoveDamage;
+                    gBattleMons[battler].hp -= gBattleMoveDamage;
                     gHpDealt = gBattleMoveDamage;
                 }
                 else
                 {
-                    gHpDealt = gBattleMons[gActiveBattler].hp;
-                    gBattleMons[gActiveBattler].hp = 0;
+                    gHpDealt = gBattleMons[battler].hp;
+                    gBattleMons[battler].hp = 0;
                 }
 
-                if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
-                    gSpecialStatuses[gActiveBattler].dmg = gHpDealt;
+                // Record damage for Shell Bell
+                if (gSpecialStatuses[battler].shellBellDmg == 0 && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
+                    gSpecialStatuses[battler].shellBellDmg = gHpDealt;
 
-                if (IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
+                // Note: While physicalDmg/specialDmg below are only distinguished between for Counter/Mirror Coat, they are
+                //       used in combination as general damage trackers for other purposes. specialDmg is additionally used
+                //       to help determine if a fire move should defrost the target.
+                if (IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gMovesInfo[gCurrentMove].effect != EFFECT_PAIN_SPLIT)
                 {
-                    gProtectStructs[gActiveBattler].physicalDmg = gHpDealt;
-                    gSpecialStatuses[gActiveBattler].physicalDmg = gHpDealt;
-                    if (gBattlescriptCurrInstr[1] == BS_TARGET)
+                    gProtectStructs[battler].physicalDmg = gHpDealt;
+                    gSpecialStatuses[battler].physicalDmg = gHpDealt;
+                    if (cmd->battler == BS_TARGET)
                     {
-                        gProtectStructs[gActiveBattler].physicalBattlerId = gBattlerAttacker;
-                        gSpecialStatuses[gActiveBattler].physicalBattlerId = gBattlerAttacker;
+                        gProtectStructs[battler].physicalBattlerId = gBattlerAttacker;
+                        gSpecialStatuses[battler].physicalBattlerId = gBattlerAttacker;
                     }
                     else
                     {
-                        gProtectStructs[gActiveBattler].physicalBattlerId = gBattlerTarget;
-                        gSpecialStatuses[gActiveBattler].physicalBattlerId = gBattlerTarget;
+                        gProtectStructs[battler].physicalBattlerId = gBattlerTarget;
+                        gSpecialStatuses[battler].physicalBattlerId = gBattlerTarget;
                     }
                 }
-                else if (!IS_TYPE_PHYSICAL(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
+                else if (!IS_MOVE_PHYSICAL(gCurrentMove) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gMovesInfo[gCurrentMove].effect != EFFECT_PAIN_SPLIT)
                 {
-                    gProtectStructs[gActiveBattler].specialDmg = gHpDealt;
-                    gSpecialStatuses[gActiveBattler].specialDmg = gHpDealt;
-                    if (gBattlescriptCurrInstr[1] == BS_TARGET)
+                    // Record special damage/attacker for Mirror Coat
+                    gProtectStructs[battler].specialDmg = gHpDealt;
+                    gSpecialStatuses[battler].specialDmg = gHpDealt;
+                    if (cmd->battler == BS_TARGET)
                     {
-                        gProtectStructs[gActiveBattler].specialBattlerId = gBattlerAttacker;
-                        gSpecialStatuses[gActiveBattler].specialBattlerId = gBattlerAttacker;
+                        gProtectStructs[battler].specialBattlerId = gBattlerAttacker;
+                        gSpecialStatuses[battler].specialBattlerId = gBattlerAttacker;
                     }
                     else
                     {
-                        gProtectStructs[gActiveBattler].specialBattlerId = gBattlerTarget;
-                        gSpecialStatuses[gActiveBattler].specialBattlerId = gBattlerTarget;
+                        gProtectStructs[battler].specialBattlerId = gBattlerTarget;
+                        gSpecialStatuses[battler].specialBattlerId = gBattlerTarget;
                     }
                 }
             }
             gHitMarker &= ~HITMARKER_PASSIVE_DAMAGE;
-            BtlController_EmitSetMonData(BUFFER_A, REQUEST_HP_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].hp), &gBattleMons[gActiveBattler].hp);
-            MarkBattlerForControllerExec(gActiveBattler);
+
+            // Send updated HP
+            BtlController_EmitSetMonData(BUFFER_A, REQUEST_HP_BATTLE, 0, sizeof(gBattleMons[battler].hp), &gBattleMons[battler].hp);
+            MarkBattlerForControllerExec(battler);
         }
     }
     else
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        if (gSpecialStatuses[gActiveBattler].dmg == 0)
-            gSpecialStatuses[gActiveBattler].dmg = 0xFFFF;
+        // MOVE_RESULT_NO_EFFECT was set
+        battler = GetBattlerForBattleScript(cmd->battler);
+        if (gSpecialStatuses[battler].shellBellDmg == 0)
+            gSpecialStatuses[battler].shellBellDmg = IGNORE_SHELL_BELL;
     }
-    gBattlescriptCurrInstr += 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_critmessage(void)
@@ -6534,6 +6588,7 @@ static void Cmd_various(void)
     u32 monToCheck, status;
     u16 species;
     u8 abilityNum;
+    struct Pokemon *mon;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
@@ -6686,7 +6741,7 @@ static void Cmd_various(void)
     case VARIOUS_PLAY_MOVE_ANIMATION:
     {
         VARIOUS_ARGS(u16 move);
-        BtlController_EmitMoveAnimation(BUFFER_A, cmd->move, gBattleScripting.animTurn, 0, 0, gBattleMons[gActiveBattler].friendship, &gDisableStructs[gActiveBattler]);
+        BtlController_EmitMoveAnimation(BUFFER_A, cmd->move, gBattleScripting.animTurn, 0, 0, gBattleMons[gActiveBattler].friendship, &gDisableStructs[gActiveBattler], gMultiHitCounter);
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
@@ -6719,6 +6774,38 @@ static void Cmd_various(void)
                 gLastUsedItem = gBattleMons[gActiveBattler].item; // For B_LAST_USED_ITEM
             gBattlescriptCurrInstr = cmd->nextInstr;
         }
+        return;
+    }
+    case VARIOUS_HANDLE_FORM_CHANGE:
+    {
+        VARIOUS_ARGS(u8 case_);
+        u32 battler = gActiveBattler;
+        if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+            mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
+        else
+            mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
+
+        // Change species.
+        if (cmd->case_ == 0)
+        {
+            /* What was the idea here?
+            if (!gBattleTextBuff1)
+                PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[battler].species);
+            */
+            BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[battler]], sizeof(gBattleMons[battler].species), &gBattleMons[battler].species);
+            MarkBattlerForControllerExec(battler);
+        }
+        // Change stats.
+        else if (cmd->case_ == 1)
+        {
+            RecalcBattlerStats(battler, mon);
+        }
+        // Update healthbox.
+        else
+        {
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
+        }
+        gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
     }

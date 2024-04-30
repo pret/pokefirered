@@ -3,8 +3,9 @@
 
 #include "global.h"
 #include "sprite.h"
-#include "constants/pokemon.h"
 #include "constants/items.h"
+#include "constants/region_map_sections.h"
+#include "constants/pokemon.h"
 
 #define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
 #define FORM_SPECIES_END (0xffff)
@@ -588,6 +589,17 @@ struct FormChange
     u16 param1;
     u16 param2;
     u16 param3;
+};
+
+struct Fusion
+{
+    u16 fusionStorageIndex;
+    u16 itemId;
+    u16 targetSpecies1;
+    u16 targetSpecies2;
+    u16 fusingIntoMon;
+    u16 fusionMove;
+    u16 unfuseForgetMove;
 };
 
 // struct __attribute__((packed)) LevelUpMove

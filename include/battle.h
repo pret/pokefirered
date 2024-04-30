@@ -49,6 +49,9 @@
 #define B_ACTION_NONE                      0xFF
 
 
+// Special indicator value for shellBellDmg in SpecialStatus
+#define IGNORE_SHELL_BELL 0xFFFF
+
 
 // For defining EFFECT_HIT etc. with battle TV scores and flags etc.
 struct __attribute__((packed, aligned(2))) BattleMoveEffect
@@ -589,6 +592,7 @@ struct BattleStruct
     u8 skyDropTargets[MAX_BATTLERS_COUNT]; // For Sky Drop, to account for if multiple Pokemon use Sky Drop in a double battle.
     u8 bonusCritStages[MAX_BATTLERS_COUNT]; // G-Max Chi Strike boosts crit stages of allies.
     u8 enduredDamage;
+    u16 changedSpecies[NUM_BATTLE_SIDES][PARTY_SIZE]; // For forms when multiple mons can change into the same pokemon.
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;

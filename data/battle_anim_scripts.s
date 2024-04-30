@@ -991,7 +991,7 @@ gBattleAnims_General::
 	.4byte General_TurnTrap                 @ B_ANIM_TURN_TRAP
 	.4byte General_HeldItemEffect           @ B_ANIM_HELD_ITEM_EFFECT
 	.4byte General_SmokeballEscape          @ B_ANIM_SMOKEBALL_ESCAPE
-	.4byte General_FocusBand                @ B_ANIM_FOCUS_BAND
+	.4byte General_FocusBand                @ B_ANIM_HANGED_ON
 	.4byte General_Rain                     @ B_ANIM_RAIN_CONTINUES
 	.4byte General_Sun                      @ B_ANIM_SUN_CONTINUES
 	.4byte General_Sandstorm                @ B_ANIM_SANDSTORM_CONTINUES

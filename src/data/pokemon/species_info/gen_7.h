@@ -918,7 +918,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         ICON(Crabrawler, 2),
         .footprint = gMonFootprint_Crabrawler,
         LEARNSETS(Crabrawler),
-        .evolutions = EVOLUTION({EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_CRABOMINABLE},
+        .evolutions = EVOLUTION({EVO_SPECIFIC_MAP, MAPSEC_SEAFOAM_ISLANDS, SPECIES_CRABOMINABLE},
                                 {EVO_ITEM, ITEM_ICE_STONE, SPECIES_CRABOMINABLE}),
     },
 

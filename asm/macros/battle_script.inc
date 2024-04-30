@@ -1307,6 +1307,11 @@
 	various \battler, VARIOUS_WAIT_FANFARE
 	.endm
 
+	.macro handleformchange battler:req, case:req
+	various \battler, VARIOUS_HANDLE_FORM_CHANGE
+	.byte \case
+	.endm
+
 	@ pokeemerald
 
 	.macro playmoveanimation battler:req, move:req
@@ -1432,4 +1437,9 @@
 	.macro getbattlerside battler:req
 	callnative BS_GetBattlerSide
 	.byte \battler
+	.endm
+
+	.macro flushtextbox
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
 	.endm

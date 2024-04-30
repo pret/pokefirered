@@ -181,6 +181,7 @@ u32 GetBattlerAffectionHearts(u32 battler);
 u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating);
 u32 GetBattlerHoldEffectIgnoreAbility(u32 battler, bool32 checkNegating);
 u32 GetBattlerHoldEffectInternal(u32 battler, bool32 checkNegating, bool32 checkAbility);
+void RecalcBattlerStats(u32 battler, struct Pokemon *mon);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);

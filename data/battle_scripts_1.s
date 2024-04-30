@@ -1,3 +1,5 @@
+#include "config.h"
+#include "config/battle.h"
 #include "constants/global.h"
 #include "constants/moves.h"
 #include "constants/battle.h"
@@ -4543,5 +4545,38 @@ BattleScript_HangedOnMsgRet:
 BattleScript_PrintBerryReduceString::
 	waitmessage B_WAIT_TIME_LONG
 	printstring STRINGID_BERRYDMGREDUCES
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_TargetFormChangeNoPopup:
+	flushtextbox
+	handleformchange BS_SCRIPTING, 0
+	handleformchange BS_SCRIPTING, 1
+@	playanimation BS_TARGET, B_ANIM_FORM_CHANGE @ TODO: Animation
+	waitanimation
+	handleformchange BS_SCRIPTING, 2
+ .if B_DISGUISE_HP_LOSS >= GEN_8
+	healthbarupdate BS_SCRIPTING
+	datahpupdate BS_SCRIPTING
+ .endif
+	return
+
+BattleScript_TargetFormChange::
+	pause 5
+	call BattleScript_AbilityPopUpTarget
+	call BattleScript_TargetFormChangeNoPopup
+	return
+
+BattleScript_TargetFormChangeWithString::
+	pause 5
+	call BattleScript_AbilityPopUpTarget
+	call BattleScript_TargetFormChangeNoPopup
+	printstring STRINGID_PKMNTRANSFORMED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_TargetFormChangeWithStringNoPopup::
+	call BattleScript_TargetFormChangeNoPopup
+	printstring STRINGID_PKMNTRANSFORMED
 	waitmessage B_WAIT_TIME_LONG
 	return

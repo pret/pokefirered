@@ -133,25 +133,25 @@
 	.byte \battler
 	.endm
 
-	.macro jumpifstatus battler:req, status1:req, ptr:req
+	.macro jumpifstatus battler:req, flags:req, jumpInstr:req
 	.byte 0x1c
 	.byte \battler
-	.4byte \status1
-	.4byte \ptr
+	.4byte \flags
+	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifstatus2 battler:req, status2:req, ptr:req
+	.macro jumpifstatus2 battler:req, flags:req, jumpInstr:req
 	.byte 0x1d
 	.byte \battler
-	.4byte \status2
-	.4byte \ptr
+	.4byte \flags
+	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifability param0:req, ability:req, ptr:req
+	.macro jumpifability battler:req, ability:req, jumpInstr:req
 	.byte 0x1e
-	.byte \param0
+	.byte \battler
 	.2byte \ability
-	.4byte \ptr
+	.4byte \jumpInstr
 	.endm
 
 	.macro jumpifsideaffecting battler:req, sidestatus:req, ptr:req

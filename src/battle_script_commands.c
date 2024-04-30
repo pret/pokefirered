@@ -396,9 +396,9 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_tryfaintmon,                             //0x19 // done
     Cmd_dofaintanimation,                        //0x1A // done
     Cmd_cleareffectsonfaint,                     //0x1B // done
-    Cmd_jumpifstatus,                            //0x1C
-    Cmd_jumpifstatus2,                           //0x1D
-    Cmd_jumpifability,                           //0x1E
+    Cmd_jumpifstatus,                            //0x1C // done
+    Cmd_jumpifstatus2,                           //0x1D // done
+    Cmd_jumpifability,                           //0x1E // done
     Cmd_jumpifsideaffecting,                     //0x1F
     Cmd_jumpifstat,                              //0x20
     Cmd_jumpifstatus3condition,                  //0x21
@@ -4126,75 +4126,75 @@ static void Cmd_cleareffectsonfaint(void)
 
 static void Cmd_jumpifstatus(void)
 {
-    u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    u32 flags = T2_READ_32(gBattlescriptCurrInstr + 2);
-    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 6);
+    CMD_ARGS(u8 battler, u32 flags, const u8 *jumpInstr);
 
-    if (gBattleMons[battlerId].status1 & flags && gBattleMons[battlerId].hp != 0) {
-        gBattlescriptCurrInstr = jumpPtr;
-    }
-    else {
-        gBattlescriptCurrInstr += 10;
-    }
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    u32 flags = cmd->flags;
+    const u8 *jumpInstr = cmd->jumpInstr;
+
+    if (gBattleMons[battler].status1 & flags && gBattleMons[battler].hp != 0)
+        gBattlescriptCurrInstr = jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_jumpifstatus2(void)
 {
-    u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    u32 flags = T2_READ_32(gBattlescriptCurrInstr + 2);
-    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 6);
+    CMD_ARGS(u8 battler, u32 flags, const u8 *jumpInstr);
 
-    if (gBattleMons[battlerId].status2 & flags && gBattleMons[battlerId].hp != 0)
-        gBattlescriptCurrInstr = jumpPtr;
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    u32 flags = cmd->flags;
+    const u8 *jumpInstr = cmd->jumpInstr;
+
+    if (gBattleMons[battler].status2 & flags && gBattleMons[battler].hp != 0)
+        gBattlescriptCurrInstr = jumpInstr;
     else
-        gBattlescriptCurrInstr += 10;
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_jumpifability(void)
 {
     CMD_ARGS(u8 battler, u16 ability, const u8 *jumpInstr);
-    u32 battlerId;
+
+    u32 battler;
     bool32 hasAbility = FALSE;
     u32 ability = cmd->ability;
 
-    if (cmd->battler == BS_ATTACKER_SIDE)
+    switch (cmd->battler)
     {
-        battlerId = AbilityBattleEffects(ABILITYEFFECT_CHECK_BATTLER_SIDE, gBattlerAttacker, ability, 0, 0);
-        if (battlerId)
+    default:
+        battler = GetBattlerForBattleScript(cmd->battler);
+        if (GetBattlerAbility(battler) == ability)
+            hasAbility = TRUE;
+        break;
+    case BS_ATTACKER_SIDE:
+        battler = IsAbilityOnSide(gBattlerAttacker, ability);
+        if (battler)
         {
-            gLastUsedAbility = ability;
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-            RecordAbilityBattle(battlerId - 1, gLastUsedAbility);
-            gBattleScripting.battlerWithAbility = battlerId - 1;
+            battler--;
+            hasAbility = TRUE;
         }
-        else
-            gBattlescriptCurrInstr = cmd->nextInstr;
+        break;
+    case BS_TARGET_SIDE:
+        battler = IsAbilityOnOpposingSide(gBattlerAttacker, ability);
+        if (battler)
+        {
+            battler--;
+            hasAbility = TRUE;
+        }
+        break;
     }
-    else if (cmd->battler == BS_NOT_ATTACKER_SIDE)
+
+    if (hasAbility)
     {
-        battlerId = AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, gBattlerAttacker, ability, 0, 0);
-        if (battlerId)
-        {
-            gLastUsedAbility = ability;
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-            RecordAbilityBattle(battlerId - 1, gLastUsedAbility);
-            gBattleScripting.battlerWithAbility = battlerId - 1;
-        }
-        else
-            gBattlescriptCurrInstr = cmd->nextInstr;
+        gLastUsedAbility = ability;
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+        RecordAbilityBattle(battler, gLastUsedAbility);
+        gBattlerAbility = battler;
     }
     else
     {
-        battlerId = GetBattlerForBattleScript(cmd->battler);
-        if (gBattleMons[battlerId].ability == ability)
-        {
-            gLastUsedAbility = ability;
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-            RecordAbilityBattle(battlerId, gLastUsedAbility);
-            gBattleScripting.battlerWithAbility = battlerId;
-        }
-        else
-            gBattlescriptCurrInstr = cmd->nextInstr;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 

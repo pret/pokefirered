@@ -93,7 +93,7 @@ u8 GetBattlerForBattleScript(u8 caseId)
     case BS_ATTACKER_WITH_PARTNER:
     case BS_FAINTED_LINK_MULTIPLE_2:
     case BS_ATTACKER_SIDE:
-    case BS_NOT_ATTACKER_SIDE:
+    case BS_TARGET_SIDE:
         break;
     case BS_ABILITY_BATTLER:
         ret = gBattlerAbility;

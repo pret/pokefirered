@@ -797,6 +797,7 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
 bool32 DoesSpeciesHaveFormChangeMethod(u16 species, u16 method);
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method);
 bool8 IsMonPastEvolutionLevel(struct Pokemon *mon);
+bool32 IsPersonalityFemale(u16 species, u32 personality);
 
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, u8 battleId);

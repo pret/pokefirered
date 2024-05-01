@@ -938,7 +938,7 @@ static void SpriteCB_HeldMon(struct Sprite *sprite)
     sprite->y = gStorage->cursorSprite->y + gStorage->cursorSprite->y2 + 4;
 }
 
-static u16 TryLoadMonIconTiles(u16 species)
+static u16 TryLoadMonIconTiles(u16 species, u32 personality)
 {
     u16 i, offset;
 
@@ -964,7 +964,7 @@ static u16 TryLoadMonIconTiles(u16 species)
     gStorage->iconSpeciesList[i] = species;
     gStorage->numIconsPerSpecies[i]++;
     offset = 16 * i;
-    CpuCopy32(GetMonIconTiles(species, TRUE), (void *)(OBJ_VRAM0) + offset * 32, 0x200);
+    CpuCopy32(GetMonIconTiles(species, personality), (void *)(OBJ_VRAM0) + offset * 32, 0x200);
 
     return offset;
 }
@@ -992,7 +992,7 @@ struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s16 y, u
 
     species = GetIconSpecies(species, personality);
     template.paletteTag = PALTAG_MON_ICON_0 + gSpeciesInfo[species].iconPalIndex;
-    tileNum = TryLoadMonIconTiles(species);
+    tileNum = TryLoadMonIconTiles(species, personality);
     if (tileNum == 0xFFFF)
         return NULL;
 

@@ -6398,3 +6398,8 @@ bool8 IsMonPastEvolutionLevel(struct Pokemon *mon)
 
     return FALSE;
 }
+
+bool32 IsPersonalityFemale(u16 species, u32 personality)
+{
+    return GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+}

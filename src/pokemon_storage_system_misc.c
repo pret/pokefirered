@@ -405,7 +405,7 @@ static void MultiMove_SetIconToBg(u8 x, u8 y)
 
     if (species != SPECIES_NONE)
     {
-        const u8 *iconGfx = GetMonIconPtr(species, personality, 1);
+        const u8 *iconGfx = GetMonIconPtr(species, personality);
         u8 palNum = GetValidMonIconPalIndex(species) + 8;
         BlitBitmapRectToWindow4BitTo8Bit(gStorage->multiMoveWindowId, iconGfx, 0, 0, 32, 32, 24 * x, 24 * y, 32, 32, palNum);
     }

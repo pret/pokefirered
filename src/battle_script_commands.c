@@ -699,9 +699,9 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_cancelallactions,                        //0x68 // done
     Cmd_setgravity,                              //0x69 // done
     Cmd_removeitem,                              //0x6A // done
-    Cmd_atknameinbuff1,                          //0x6B
-    Cmd_drawlvlupbox,                            //0x6C
-    Cmd_resetsentmonsvalue,                      //0x6D
+    Cmd_atknameinbuff1,                          //0x6B // done
+    Cmd_drawlvlupbox,                            //0x6C // done
+    Cmd_resetsentmonsvalue,                      //0x6D // done
     Cmd_setatktoplayer0,                         //0x6E
     Cmd_makevisible,                             //0x6F
     Cmd_recordability,                           //0x70 // done
@@ -8233,13 +8233,17 @@ static void Cmd_removeitem(void)
 
 static void Cmd_atknameinbuff1(void)
 {
-    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker])
+    CMD_ARGS();
 
-    gBattlescriptCurrInstr++;
+    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker]);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_drawlvlupbox(void)
 {
+    CMD_ARGS();
+
     if (gBattleScripting.drawlvlupboxState == 0)
     {
         // If the Pokémon getting exp is not in-battle then
@@ -8333,7 +8337,7 @@ static void Cmd_drawlvlupbox(void)
             SetBgAttribute(1, BG_ATTR_PRIORITY, 1);
             ShowBg(0);
             ShowBg(1);
-            gBattlescriptCurrInstr++;
+            gBattlescriptCurrInstr = cmd->nextInstr;
         }
         break;
     }
@@ -8388,15 +8392,14 @@ static bool8 SlideInLevelUpBanner(void)
 
 static void DrawLevelUpBannerText(void)
 {
-    u16 monLevel;
-    u8 monGender;
     struct TextPrinterTemplate printerTemplate;
     u8 *txtPtr;
-    u8 *txtPtr2;
+    u32 var;
 
-    monLevel = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
-    monGender = GetMonGender(&gPlayerParty[gBattleStruct->expGetterMonId]);
-    GetMonNickname(&gPlayerParty[gBattleStruct->expGetterMonId], gStringVar4);
+    struct Pokemon *mon = &gPlayerParty[gBattleStruct->expGetterMonId];
+    u32 monLevel = GetMonData(mon, MON_DATA_LEVEL);
+    u8 monGender = GetMonGender(mon);
+    GetMonNickname(mon, gStringVar4);
 
     printerTemplate.currentChar = gStringVar4;
     printerTemplate.windowId = B_WIN_LEVEL_UP_BANNER;
@@ -8415,13 +8418,14 @@ static void DrawLevelUpBannerText(void)
     AddTextPrinter(&printerTemplate, TEXT_SKIP_DRAW, NULL);
 
     txtPtr = gStringVar4;
-    gStringVar4[0] = CHAR_EXTRA_SYMBOL;
-    *++txtPtr = CHAR_LV_2;
-    *++txtPtr = 0;
-    txtPtr2 = txtPtr + 1;
-    txtPtr = ConvertIntToDecimalStringN(++txtPtr, monLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
-    txtPtr = StringFill(txtPtr, 0, 5);
-    txtPtr = txtPtr2 + 4;
+    *(txtPtr)++ = CHAR_EXTRA_SYMBOL;
+    *(txtPtr)++ = CHAR_LV_2;
+
+    var = (u32)(txtPtr);
+    txtPtr = ConvertIntToDecimalStringN(txtPtr, monLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+    var = (u32)(txtPtr) - var;
+    txtPtr = StringFill(txtPtr, CHAR_SPACER, 4 - var);
+
     if (monGender != MON_GENDERLESS)
     {
         if (monGender == MON_MALE)
@@ -8465,20 +8469,18 @@ static bool8 SlideOutLevelUpBanner(void)
 static void PutMonIconOnLvlUpBanner(void)
 {
     u8 spriteId;
-    const u16 *iconPal;
     struct SpriteSheet iconSheet;
     struct SpritePalette iconPalSheet;
 
-    u16 species = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPECIES);
-    u32 personality = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_PERSONALITY);
+    struct Pokemon *mon = &gPlayerParty[gBattleStruct->expGetterMonId];
+    u32 species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
 
-    const u8 *iconPtr = GetMonIconPtr(species, personality, 1);
-    iconSheet.data = iconPtr;
+    iconSheet.data = GetMonIconPtr(species, personality);
     iconSheet.size = 0x200;
     iconSheet.tag = TAG_LVLUP_BANNER_MON_ICON;
 
-    iconPal = GetValidMonIconPalettePtr(species);
-    iconPalSheet.data = iconPal;
+    iconPalSheet.data = GetValidMonIconPalettePtr(species);
     iconPalSheet.tag = TAG_LVLUP_BANNER_MON_ICON;
 
     LoadSpriteSheet(&iconSheet);
@@ -8489,7 +8491,7 @@ static void PutMonIconOnLvlUpBanner(void)
     gSprites[spriteId].sXOffset = gBattle_BG2_X;
 }
 
-static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite* sprite)
+static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite *sprite)
 {
     sprite->x2 = sprite->sXOffset - gBattle_BG2_X;
 
@@ -8520,8 +8522,10 @@ bool32 IsMonGettingExpSentOut(void)
 
 static void Cmd_resetsentmonsvalue(void)
 {
+    CMD_ARGS();
+
     ResetSentPokesToOpponentValue();
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_setatktoplayer0(void)

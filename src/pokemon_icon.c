@@ -1018,7 +1018,7 @@ u8 CreateMonIcon(u16 species, SpriteCallback callback, s16 x, s16 y, u8 subprior
     struct MonIconSpriteTemplate iconTemplate =
         {
             .oam = &sMonIconOamData,
-            .image = GetMonIconPtr(species, personality, extra),
+            .image = GetMonIconPtr(species, personality),
             .anims = sMonIconAnims,
             .affineAnims = sMonIconAffineAnims,
             .callback = callback,
@@ -1048,7 +1048,7 @@ u8 CreateMonIcon_HandleDeoxys(u16 species, SpriteCallback callback, s16 x, s16 y
             .paletteTag = POKE_ICON_BASE_PAL_TAG + gSpeciesInfo[species].iconPalIndex,
         };
 
-    iconTemplate.image = GetMonIconTiles(species, extra);
+    iconTemplate.image = GetMonIconTiles(species, 0);
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
 
     UpdateMonIconFrame(&gSprites[spriteId]);
@@ -1108,17 +1108,26 @@ u16 MailSpeciesToIconSpecies(u16 species)
     }
 }
 
-const u8 *GetMonIconTiles(u16 species, bool32 extra)
+const u8 *GetMonIconTiles(u16 species, u32 personality)
 {
-    const u8 *iconSprite = gSpeciesInfo[species].iconSprite;
-    if (species == SPECIES_DEOXYS && extra == TRUE)
-        iconSprite += 0x400;
+    const u8 *iconSprite;
+
+    if (species > NUM_SPECIES)
+        species = SPECIES_NONE;
+
+    if (gSpeciesInfo[species].iconSpriteFemale != NULL && IsPersonalityFemale(species, personality))
+        iconSprite = gSpeciesInfo[species].iconSpriteFemale;
+    else if (gSpeciesInfo[species].iconSprite != NULL)
+        iconSprite = gSpeciesInfo[species].iconSprite;
+    else
+        iconSprite = gSpeciesInfo[SPECIES_NONE].iconSprite;
+
     return iconSprite;
 }
 
-const u8 *GetMonIconPtr(u16 species, u32 personality, bool32 extra)
+const u8 *GetMonIconPtr(u16 species, u32 personality)
 {
-    return GetMonIconTiles(GetIconSpecies(species, personality), extra);
+    return GetMonIconTiles(GetIconSpecies(species, personality), personality);
 }
 
 void DestroyMonIcon(struct Sprite *sprite)

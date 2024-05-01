@@ -44,6 +44,7 @@ bool32 IsShieldsDownProtected(u32 battler);
 u32 IsAbilityStatusProtected(u32 battler);
 bool32 TryResetBattlerStatChanges(u8 battler);
 bool32 CanBattlerSwitch(u32 battlerId);
+u8 GetFirstFaintedPartyIndex(u8 battlerId);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const struct StatFractions gAccuracyStageRatios[];

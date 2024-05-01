@@ -2450,17 +2450,20 @@ BattleScript_GiveExp::
 	end2
 
 BattleScript_HandleFaintedMon::
+	setbyte sSHIFT_SWITCHED, 0
 	checkteamslost BattleScript_LinkHandleFaintedMonMultiple
 	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_FaintedMonEnd
-	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonTryChoose
+	jumpifbattletype BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonTryChoose
 	jumpifword CMP_NO_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonTryChoose
+@ Yes/No for sending out a new Pokémon if one is defeated in a wild battle
 	printstring STRINGID_USENEXTPKMN
 	setbyte gBattleCommunication, 0
 	yesnobox
 	jumpifbyte CMP_EQUAL, gBattleCommunication + 1, 0, BattleScript_FaintedMonTryChoose
+@ Player said no, try to run
 	jumpifplayerran BattleScript_FaintedMonEnd
 	printstring STRINGID_CANTESCAPE2
-BattleScript_FaintedMonTryChoose::
+BattleScript_FaintedMonTryChoose:
 	openpartyscreen BS_FAINTED, BattleScript_FaintedMonEnd
 	switchhandleorder BS_FAINTED, 2
 	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonSendOutNew
@@ -2470,6 +2473,7 @@ BattleScript_FaintedMonTryChoose::
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonSendOutNew
 	jumpifbyte CMP_EQUAL, sBATTLE_STYLE, OPTIONS_BATTLE_STYLE_SET, BattleScript_FaintedMonSendOutNew
 	jumpifcantswitch BS_PLAYER1, BattleScript_FaintedMonSendOutNew
+	setbyte sILLUSION_NICK_HACK, 1
 @ Yes/No for sending out a new Pokémon when the opponent is switching
 	printstring STRINGID_ENEMYABOUTTOSWITCHPKMN
 	setbyte gBattleCommunication, 0
@@ -2482,7 +2486,7 @@ BattleScript_FaintedMonTryChoose::
 	jumpifbyte CMP_EQUAL, gBattleCommunication, PARTY_SIZE, BattleScript_FaintedMonSendOutNew
 @ Switch Pokémon before opponent
 	atknameinbuff1
-	resetintimidatetracebits BS_ATTACKER
+	resetswitchinabilitybits BS_ATTACKER
 	hpthresholds2 BS_ATTACKER
 	printstring STRINGID_RETURNMON
 	switchoutabilities BS_ATTACKER
@@ -2493,27 +2497,39 @@ BattleScript_FaintedMonTryChoose::
 	getswitchedmondata BS_ATTACKER
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	flushtextbox
 	printstring STRINGID_SWITCHINMON
 	hidepartystatussummary BS_ATTACKER
 	switchinanim BS_ATTACKER, 0
 	waitstate
-	switchineffects BS_ATTACKER
-	resetsentmonsvalue
-BattleScript_FaintedMonSendOutNew::
+	setbyte sSHIFT_SWITCHED, 1
+BattleScript_FaintedMonSendOutNew:
 	drawpartystatussummary BS_FAINTED
 	getswitchedmondata BS_FAINTED
 	switchindataupdate BS_FAINTED
 	hpthresholds BS_FAINTED
+	trytoclearprimalweather
+	flushtextbox
 	printstring STRINGID_SWITCHINMON
 	hidepartystatussummary BS_FAINTED
 	switchinanim BS_FAINTED, FALSE
 	waitstate
 	resetplayerfainted
+	trytrainerslidelastonmsg BS_FAINTED
+	jumpifbytenotequal sSHIFT_SWITCHED, sZero, BattleScript_FaintedMonShiftSwitched
+BattleScript_FaintedMonSendOutNewEnd:
 	switchineffects BS_FAINTED
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonEnd
 	cancelallactions
 BattleScript_FaintedMonEnd::
 	end2
+BattleScript_FaintedMonShiftSwitched:
+	copybyte sSAVED_BATTLER, gBattlerTarget
+	switchineffects BS_ATTACKER
+	resetsentmonsvalue
+	copybyte gBattlerTarget, sSAVED_BATTLER
+	goto BattleScript_FaintedMonSendOutNewEnd
 
 BattleScript_LinkHandleFaintedMonMultiple::
 	openpartyscreen BS_FAINTED_LINK_MULTIPLE_1, BattleScript_LinkHandleFaintedMonMultipleStart
@@ -2596,9 +2612,9 @@ BattleScript_BattleTowerLost::
 	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 0, BattleScript_BattleTowerLostLostSkipMonRecall
 	printfromtable gDoubleBattleRecallStrings
 	waitmessage B_WAIT_TIME_LONG
-	returnopponentmon1toball
+	returnopponentmon1toball BS_ATTACKER
 	waitstate
-	returnopponentmon2toball
+	returnopponentmon2toball BS_ATTACKER
 	waitstate
 BattleScript_BattleTowerLostLostSkipMonRecall::
 	trainerslidein BS_ATTACKER
@@ -6097,5 +6113,110 @@ BattleScript_CheekPouchActivates::
 	copybyte gBattlerAttacker, gBattlerAbility
 	call BattleScript_AbilityHpHeal
 	copybyte gBattlerAttacker, sSAVED_BATTLER
+	return
+
+BattleScript_SideStatusWoreOffReturn::
+	printstring STRINGID_PKMNSXWOREOFF
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_SpikesDefog::
+	printstring STRINGID_SPIKESDISAPPEAREDFROMTEAM
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_ToxicSpikesDefog::
+	printstring STRINGID_TOXICSPIKESDISAPPEAREDFROMTEAM
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_StickyWebDefog::
+	printstring STRINGID_STICKYWEBDISAPPEAREDFROMTEAM
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_StealthRockDefog::
+	printstring STRINGID_STEALTHROCKDISAPPEAREDFROMTEAM
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_SteelsurgeDefog::
+	printstring STRINGID_SHARPSTEELDISAPPEAREDFROMTEAM
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_TerrainEnds_Ret::
+	printfromtable gTerrainStringIds
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_RESTORE_BG
+	return
+
+BattleScript_RaiseStatOnFaintingTarget::
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_RaiseStatOnFaintingTarget_End
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_LASTABILITYRAISEDSTAT
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_RaiseStatOnFaintingTarget_End:
+	return
+
+BattleScript_ReceiverActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_RECEIVERABILITYTAKEOVER
+	waitmessage B_WAIT_TIME_LONG
+	settracedability BS_ABILITY_BATTLER
+	return
+
+BattleScript_FellStingerRaisesStat::
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_FellStingerRaisesAtkEnd
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, B_MSG_DEFENDER_STAT_ROSE, BattleScript_FellStingerRaisesAtkEnd
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_FellStingerRaisesAtkEnd:
+	return
+
+BattleScript_NeutralizingGasExits::
+	savetarget
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_NEUTRALIZINGGASOVER
+	waitmessage B_WAIT_TIME_LONG
+	setbyte gBattlerTarget, 0
+BattleScript_NeutralizingGasExitsLoop:
+	switchinabilities BS_TARGET
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_NeutralizingGasExitsLoop
+	restoretarget
+	return
+
+BattleScript_BattleBondActivatesOnMoveEndAttacker::
+	pause 5
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ATTACKERBECAMEFULLYCHARGED
+	handleformchange BS_ATTACKER, 0
+	handleformchange BS_ATTACKER, 1
+	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE
+	waitanimation
+	handleformchange BS_ATTACKER, 2
+	printstring STRINGID_ATTACKERBECAMEASHSPECIES
+	return
+
+BattleScript_ScriptingAbilityStatRaise::
+	copybyte gBattlerAbility, sBATTLER
+	call BattleScript_AbilityPopUp
+	copybyte sSAVED_DMG, gBattlerAttacker
+	copybyte gBattlerAttacker, sBATTLER
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
+	setgraphicalstatchangevalues
+	playanimation BS_SCRIPTING, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_ATTACKERABILITYSTATRAISE
+	waitmessage B_WAIT_TIME_LONG
+	copybyte gBattlerAttacker, sSAVED_DMG
 	return
 

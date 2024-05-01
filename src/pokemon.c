@@ -3411,7 +3411,7 @@ u8 GetMonsStateToDoubles(void)
     return (aliveCount > 1) ? PLAYER_HAS_TWO_USABLE_MONS : PLAYER_HAS_ONE_USABLE_MON;
 }
 
-u16 GetAbilityBySpecies(u16 species, bool8 abilityNum)
+u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
 {
     int i;
 

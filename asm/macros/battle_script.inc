@@ -1277,6 +1277,11 @@
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES
 	.endm
 
+	@ Stores Healing Wish effect.
+	.macro storehealingwish battler:req
+	various \battler, VARIOUS_STORE_HEALING_WISH
+	.endm
+
 	.macro setmagiccoattarget battler:req
 	various \battler, VARIOUS_SET_MAGIC_COAT_TARGET
 	.endm
@@ -1293,8 +1298,8 @@
 	various \battler, VARIOUS_GET_BATTLER_FAINTED
 	.endm
 
-	.macro resetintimidatetracebits battler:req
-	various \battler, VARIOUS_RESET_INTIMIDATE_TRACE_BITS
+	.macro resetswitchinabilitybits battler:req
+	various \battler, VARIOUS_RESET_SWITCH_IN_ABILITY_BITS
 	.endm
 
 	.macro updatechoicemoveonlvlup battler:req
@@ -1305,55 +1310,88 @@
 	various BS_ATTACKER, VARIOUS_RESET_PLAYER_FAINTED
 	.endm
 
-	.macro getbattlersforrecall
-	various BS_ATTACKER, VARIOUS_GET_BATTLERS_FOR_RECALL
+	.macro palaceflavortext battler:req
+	various \battler, VARIOUS_PALACE_FLAVOR_TEXT
 	.endm
 
-	.macro returnopponentmon1toball
-	various BS_ATTACKER, VARIOUS_RETURN_OPPONENT_MON1
+	.macro arenajudgmentwindow
+	various BS_ATTACKER, VARIOUS_ARENA_JUDGMENT_WINDOW
 	.endm
 
-	.macro returnopponentmon2toball
-	various BS_ATTACKER, VARIOUS_RETURN_OPPONENT_MON2
+	.macro arenaopponentmonlost
+	various BS_ATTACKER, VARIOUS_ARENA_OPPONENT_MON_LOST
 	.endm
 
-	.macro checkpokeflute battler:req
-	various \battler, VARIOUS_CHECK_POKEFLUTE
+	.macro arenaplayermonlost
+	various BS_ATTACKER, VARIOUS_ARENA_PLAYER_MON_LOST
 	.endm
 
-	.macro waitfanfare battler:req
-	various \battler, VARIOUS_WAIT_FANFARE
+	.macro arenabothmonlost
+	various BS_ATTACKER, VARIOUS_ARENA_BOTH_MONS_LOST
 	.endm
 
-	@ pokeemerald
-
-	.macro handleformchange battler:req, case:req
-	various \battler, VARIOUS_HANDLE_FORM_CHANGE
-	.byte \case
+	.macro forfeityesnobox battler:req
+	various \battler, VARIOUS_EMIT_YESNOBOX
 	.endm
 
-	.macro playmoveanimation battler:req, move:req
-	various \battler, VARIOUS_PLAY_MOVE_ANIMATION
-	.2byte \move
-	.endm
-	
-	.macro showabilitypopup battler:req
-	various \battler, VARIOUS_ABILITY_POPUP
+	.macro arenadrawreftextbox
+	various BS_ATTACKER, VARIOUS_DRAW_ARENA_REF_TEXT_BOX
 	.endm
 
-	.macro updateabilitypopup battler:req
-	various \battler, VARIOUS_UPDATE_ABILITY_POPUP
+	.macro arenaerasereftextbox
+	various BS_ATTACKER, VARIOUS_ERASE_ARENA_REF_TEXT_BOX
 	.endm
 
-	.macro setlastuseditem battler:req
-	various \battler, VARIOUS_SET_LAST_USED_ITEM
-	.endm	
-	
-	.macro jumpifholdeffect battler:req, holdEffect:req, jumpInstr:req, equal=TRUE
-	various \battler, VARIOUS_JUMP_IF_HOLD_EFFECT
-	.byte \holdEffect
-	.4byte \jumpInstr
-	.byte \equal
+	.macro arenajudgmentstring id:req
+	various \id, VARIOUS_ARENA_JUDGMENT_STRING
+	.endm
+
+	.macro arenawaitmessage id:req
+	various \id, VARIOUS_ARENA_WAIT_STRING
+	.endm
+
+	.macro waitcry battler:req
+	various \battler, VARIOUS_WAIT_CRY
+	.endm
+
+	.macro returnopponentmon1toball battler:req
+	various \battler, VARIOUS_RETURN_OPPONENT_MON1
+	.endm
+
+	.macro returnopponentmon2toball battler:req
+	various \battler, VARIOUS_RETURN_OPPONENT_MON2
+	.endm
+
+	.macro volumedown
+	various BS_ATTACKER, VARIOUS_VOLUME_DOWN
+	.endm
+
+	.macro volumeup
+	various BS_ATTACKER, VARIOUS_VOLUME_UP
+	.endm
+
+	.macro setalreadystatusedmoveattempt battler:req
+	various \battler, VARIOUS_SET_ALREADY_STATUS_MOVE_ATTEMPT
+	.endm
+
+	.macro palacetryescapestatus battler:req
+	various \battler, VARIOUS_PALACE_TRY_ESCAPE_STATUS
+	.endm
+
+	.macro setoutcomeonteleport battler:req
+	various \battler, VARIOUS_SET_TELEPORT_OUTCOME
+	.endm
+
+	.macro playtrainerdefeatbgm battler:req
+	various \battler, VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC
+	.endm
+
+	.macro stattextbuffer battler:req
+	various \battler, VARIOUS_STAT_TEXT_BUFFER
+	.endm
+
+	.macro switchinabilities battler:req
+	various \battler, VARIOUS_SWITCHIN_ABILITIES
 	.endm
 
 	.macro savetarget
@@ -1364,44 +1402,136 @@
 	various BS_TARGET, VARIOUS_RESTORE_TARGET
 	.endm
 
-	.macro spectralthiefprintstats
-	various BS_ATTACKER, VARIOUS_SPECTRAL_THIEF
+	.macro instanthpdrop battler:req
+	various \battler, VARIOUS_INSTANT_HP_DROP
 	.endm
 
-	.macro trytoclearprimalweather
-	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
+	.macro clearstatus battler:req
+	various \battler, VARIOUS_CLEAR_STATUS
 	.endm
 
-	.macro consumeberry battler:req, fromBattler:req
-	various \battler, VARIOUS_CONSUME_BERRY
-	.byte \fromBattler
+	.macro restorepp battler:req
+	various \battler, VARIOUS_RESTORE_PP
 	.endm
 
-	.macro tryroomservice battler:req, failInstr:req
-	various \battler, VARIOUS_ROOM_SERVICE
+	.macro tryactivatemoxie battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_MOXIE
+	.endm
+
+	.macro tryactivatebeastboost battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_BEAST_BOOST
+	.endm
+
+	.macro tryactivatereceiver battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_RECEIVER
+	.endm
+
+	.macro tryactivatesoulheart
+	various BS_ATTACKER, VARIOUS_TRY_ACTIVATE_SOULHEART
+	.endm
+
+	.macro tryactivatefellstinger battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_FELL_STINGER
+	.endm
+
+	.macro playmoveanimation battler:req, move:req
+	various \battler, VARIOUS_PLAY_MOVE_ANIMATION
+	.2byte \move
+	.endm
+
+	.macro setluckychant battler:req, failInstr:req
+	various \battler VARIOUS_SET_LUCKY_CHANT
 	.4byte \failInstr
 	.endm
 
-	.macro trywindriderpower battler:req, failInstr:req
-	various \battler, VARIOUS_TRY_WIND_RIDER_POWER
+	.macro suckerpunchcheck failInstr:req
+	various BS_ATTACKER, VARIOUS_SUCKER_PUNCH_CHECK
 	.4byte \failInstr
 	.endm
 
-	.macro curestatus battler:req
-	various \battler, VARIOUS_CURE_STATUS
+	.macro setabilitysimple battler:req, failInstr:req
+	various \battler VARIOUS_SET_SIMPLE_BEAM
+	.4byte \failInstr
 	.endm
 
-	.macro jumpifnoally battler:req, jumpInstr:req
-	various \battler, VARIOUS_JUMP_IF_NO_ALLY
+	.macro tryentrainment failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_ENTRAINMENT
+	.4byte \failInstr
+	.endm
+
+	.macro setlastusedability battler:req
+	various \battler, VARIOUS_SET_LAST_USED_ABILITY
+	.endm
+
+	.macro tryafteryou failInstr:req
+	various BS_ATTACKER, VARIOUS_AFTER_YOU
+	.4byte \failInstr
+	.endm
+
+	.macro trybestow failInstr:req
+	various BS_ATTACKER, VARIOUS_BESTOW
+	.4byte \failInstr
+	.endm
+
+	.macro invertstatstages battler:req
+	various \battler, VARIOUS_INVERT_STAT_STAGES
+	.endm
+
+	.macro trymefirst failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_ME_FIRST
+	.4byte \failInstr
+	.endm
+
+	.macro jumpifbattleend jumpInstr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_BATTLE_END
 	.4byte \jumpInstr
 	.endm
 
-	.macro tryfriskmsg battler:req
-	various \battler, VARIOUS_TRY_FRISK
+	.macro tryelectrify failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_ELECTRIFY
+	.4byte \failInstr
 	.endm
 
-	.macro destroyabilitypopup
-	various BS_ABILITY_BATTLER, VARIOUS_DESTROY_ABILITY_POPUP
+	.macro trysoak failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_SOAK
+	.4byte \failInstr
+	.endm
+
+	.macro handleformchange battler:req, case:req
+	various \battler, VARIOUS_HANDLE_FORM_CHANGE
+	.byte \case
+	.endm
+
+	.macro jumpifcantuselastresort battler:req, jumpInstr:req
+	various \battler, VARIOUS_TRY_LAST_RESORT
+	.4byte \jumpInstr
+	.endm
+
+	.macro setargtobattledamage
+	various BS_ATTACKER, VARIOUS_SET_ARG_TO_BATTLE_DAMAGE
+	.endm
+
+	.macro tryhitswitchtarget failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_HIT_SWITCH_TARGET
+	.4byte \failInstr
+	.endm
+
+	.macro tryautotomize battler:req, failInstr:req
+	various \battler, VARIOUS_TRY_AUTOTOMIZE
+	.4byte \failInstr
+	.endm
+
+	.macro jumpifcantusesynchronoise jumpInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_SYNCHRONOISE
+	.4byte \jumpInstr
+	.endm
+
+	.macro showabilitypopup battler:req
+	various \battler, VARIOUS_ABILITY_POPUP
+	.endm
+
+	.macro updateabilitypopup battler:req
+	various \battler, VARIOUS_UPDATE_ABILITY_POPUP
 	.endm
 
 	.macro jumpiftargetally jumpInstr:req
@@ -1409,13 +1539,93 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifabsent battler:req, jumpInstr:req
-	various \battler, VARIOUS_JUMP_IF_ABSENT
+	.macro trypsychoshift failInstr:req
+	various BS_ATTACKER, VARIOUS_PSYCHO_SHIFT
+	.4byte \failInstr
+	.endm
+
+	.macro curestatus battler:req
+	various \battler, VARIOUS_CURE_STATUS
+	.endm
+
+	.macro powertrick battler:req
+	various \battler, VARIOUS_POWER_TRICK
+	.endm
+
+	.macro jumpifnotgrounded battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_NOT_GROUNDED
 	.4byte \jumpInstr
 	.endm
 
-	.macro switchinabilities battler:req
-	various \battler, VARIOUS_SWITCHIN_ABILITIES
+	.macro handletrainerslidemsg battler:req, case:req
+	various \battler, VARIOUS_HANDLE_TRAINER_SLIDE_MSG
+	.byte \case
+	.endm
+
+	.macro trytrainerslidefirstdownmsg battler:req
+	various \battler, VARIOUS_TRY_TRAINER_SLIDE_MSG_FIRST_OFF
+	.endm
+
+	.macro trytrainerslidelastonmsg battler:req
+	various \battler, VARIOUS_TRY_TRAINER_SLIDE_MSG_LAST_ON
+	.endm
+
+	.macro setauroraveil battler:req
+	various \battler, VARIOUS_SET_AURORA_VEIL
+	.endm
+
+	.macro trysetthirdtype battler:req, failInstr:req
+	various \battler, VARIOUS_TRY_THIRD_TYPE
+	.4byte \failInstr
+	.endm
+
+	.macro tryaccupressure battler:req, failInstr:req
+	various \battler, VARIOUS_ACUPRESSURE
+	.4byte \failInstr
+	.endm
+
+	.macro setpowder battler:req
+	various \battler, VARIOUS_SET_POWDER
+	.endm
+
+	.macro spectralthiefprintstats
+	various BS_ATTACKER, VARIOUS_SPECTRAL_THIEF
+	.endm
+
+	.macro bringdownairbornebattler battler:req
+	various \battler, VARIOUS_GRAVITY_ON_AIRBORNE_MONS
+	.endm
+
+	.macro checkgrassyterrainheal battler:req, failInstr:req
+	various \battler, VARIOUS_CHECK_IF_GRASSY_TERRAIN_HEALS
+	.4byte \failInstr
+	.endm
+
+	.macro jumpifnotberry battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_NOT_BERRY
+	.4byte \jumpInstr
+	.endm
+
+	.macro jumpifroarfails jumpInstr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_ROAR_FAILS
+	.4byte \jumpInstr
+	.endm
+
+	.macro tryinstruct failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_INSTRUCT
+	.4byte \failInstr
+	.endm
+
+	.macro settracedability battler:req
+	various \battler, VARIOUS_TRACE_ABILITY
+	.endm
+
+	.macro updatenick battler:req
+	various \battler, VARIOUS_UPDATE_NICK
+	.endm
+
+	.macro tryillusionoff battler:req
+	various \battler, VARIOUS_TRY_ILLUSION_OFF
 	.endm
 
 	.macro spriteignore0hp value:req
@@ -1423,21 +1633,79 @@
 	.byte \value
 	.endm
 
-	.macro updatenick battler:req
-	various \battler, VARIOUS_UPDATE_NICK
+	.macro getstatvalue battler:req, stat:req
+	various \battler, VARIOUS_GET_STAT_VALUE
+	.byte \stat
 	.endm
 
-	.macro doterrainseed battler:req, failInstr:req
-	various \battler, VARIOUS_TERRAIN_SEED
+	.macro jumpiffullhp battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_FULL_HP
+	.4byte \jumpInstr
+	.endm
+
+	.macro losetype battler:req, type:req
+	various \battler, VARIOUS_LOSE_TYPE
+	.byte \type
+	.endm
+
+	.macro tryfriskmsg battler:req
+	various \battler, VARIOUS_TRY_FRISK
+	.endm
+
+	.macro jumpifshieldsdown battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED
+	.4byte \jumpInstr
+	.endm
+
+	.macro trypoisontype attacker:req, target:req, failInstr:req
+	various \attacker, VARIOUS_POISON_TYPE_IMMUNITY
+	.byte \target
 	.4byte \failInstr
 	.endm
 
-	.macro activateterrainchangeabilities battler:req
-	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
+	.macro tryparalyzetype attacker:req, target:req, failInstr:req
+	various \attacker, VARIOUS_PARALYZE_TYPE_IMMUNITY
+	.byte \target
+	.4byte \failInstr
 	.endm
 
-	.macro activateweatherchangeabilities battler:req
-	various \battler, VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES
+	.macro trysetfairylock failInstr:req
+	various BS_ATTACKER, VARIOUS_TRY_FAIRY_LOCK
+	.4byte \failInstr
+	.endm
+
+	.macro jumpifnoally battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_NO_ALLY
+	.4byte \jumpInstr
+	.endm
+
+	.macro jumpifholdeffect battler:req, holdEffect:req, jumpInstr:req, equal=TRUE
+	various \battler, VARIOUS_JUMP_IF_HOLD_EFFECT
+	.byte \holdEffect
+	.4byte \jumpInstr
+	.byte \equal
+	.endm
+
+	.macro jumpifnoholdeffect battler:req, holdEffect:req, jumpInstr:req
+	jumpifholdeffect \battler, \holdEffect, \jumpInstr, FALSE
+	.endm
+
+	.macro infatuatewithbattler battler:req, infatuateWith:req
+	various \battler, VARIOUS_INFATUATE_WITH_BATTLER
+	.byte \infatuateWith
+	.endm
+
+	.macro setlastuseditem battler:req
+	various \battler, VARIOUS_SET_LAST_USED_ITEM
+	.endm
+
+	.macro jumpifabsent battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_ABSENT
+	.4byte \jumpInstr
+	.endm
+
+	.macro destroyabilitypopup
+	various BS_ABILITY_BATTLER, VARIOUS_DESTROY_ABILITY_POPUP
 	.endm
 
 	.macro gettotemboost jumpInstr:req
@@ -1445,28 +1713,211 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro makeinvisible battler:req
-	various \battler, VARIOUS_MAKE_INVISIBLE
+	.macro tryactivategrimneigh, battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_GRIM_NEIGH
+	.endm
+
+	.macro consumeberry battler:req, fromBattler:req
+	various \battler, VARIOUS_CONSUME_BERRY
+	.byte \fromBattler
 	.endm
 
 	.macro activateitemeffects battler:req
 	various \battler, VARIOUS_MOVEEND_ITEM_EFFECTS
 	.endm
 
-	.macro setoutcomeonteleport battler:req
-	various \battler, VARIOUS_SET_TELEPORT_OUTCOME
+	.macro pickpocketsteal
+	various 0, VARIOUS_PICKPOCKET
 	.endm
 
-	.macro restorepp battler:req
-	various \battler, VARIOUS_RESTORE_PP
+	.macro doterrainseed battler:req, failInstr:req
+	various \battler, VARIOUS_TERRAIN_SEED
+	.4byte \failInstr
 	.endm
 
-	.macro clearstatus battler:req
-	various \battler, VARIOUS_CLEAR_STATUS
+	.macro makeinvisible battler:req
+	various \battler, VARIOUS_MAKE_INVISIBLE
+	.endm
+
+	.macro tryroomservice battler:req, failInstr:req
+	various \battler, VARIOUS_ROOM_SERVICE
+	.4byte \failInstr
+	.endm
+
+	.macro jumpifpranksterblocked battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_PRANKSTER_BLOCKED
+	.4byte \jumpInstr
+	.endm
+
+	.macro eeriespellppreduce failInstr:req
+	various BS_TARGET, VARIOUS_EERIE_SPELL_PP_REDUCE
+	.4byte \failInstr
+	.endm
+
+	.macro jumpifteamhealthy battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_TEAM_HEALTHY
+	.4byte \jumpInstr
+	.endm
+
+	.macro tryhealquarterhealth battler:req, failInstr:req
+	various \battler, VARIOUS_TRY_HEAL_QUARTER_HP
+	.4byte \failInstr
+	.endm
+
+	.macro removeterrain
+	various BS_ATTACKER, VARIOUS_REMOVE_TERRAIN
+	.endm
+
+	.macro trytoclearprimalweather
+	various BS_ATTACKER, VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER
 	.endm
 
 	.macro setattackertostickywebuser
 	various BS_TARGET, VARIOUS_SET_ATTACKER_STICKY_WEB_USER
+	.endm
+
+	.macro getrototillertargets failInstr:req
+	various BS_ATTACKER, VARIOUS_GET_ROTOTILLER_TARGETS
+	.4byte \failInstr
+	.endm
+
+	.macro jumpifnotrototilleraffected battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED
+	.4byte \jumpInstr
+	.endm
+
+	.macro tryactivatebattlebond battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_BATTLE_BOND
+	.endm
+
+	.macro jumpifcantreverttoprimal jumpInstr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_CANT_REVERT_TO_PRIMAL
+	.4byte \jumpInstr
+	.endm
+
+	.macro jumpifweatheraffected battler:req, flags:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_WEATHER_AFFECTED
+	.4byte \flags
+	.4byte \jumpInstr
+	.endm
+
+	.macro jumpifspecies battler:req, species:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_SPECIES
+	.2byte \species
+	.4byte \jumpInstr
+	.endm
+
+	.macro tryendneutralizinggas battler:req
+	various \battler, VARIOUS_TRY_END_NEUTRALIZING_GAS
+	.endm
+
+	.macro trynoretreat battler:req, failInstr:req
+	various \battler, VARIOUS_TRY_NO_RETREAT
+	.4byte \failInstr
+	.endm
+
+	.macro trytarshot battler:req, failInstr:req
+	various \battler, VARIOUS_TRY_TAR_SHOT
+	.4byte \failInstr
+	.endm
+
+	.macro cantarshotwork battler:req, failInstr:req
+	various \battler, VARIOUS_CAN_TAR_SHOT_WORK
+	.4byte \failInstr
+	.endm
+
+	.macro checkpoltergeist battler:req, failInstr:req
+	various \battler, VARIOUS_CHECK_POLTERGEIST
+	.4byte \failInstr
+	.endm
+
+	.macro cutonethirdhpraisestats failInstr:req
+	various BS_ATTACKER, VARIOUS_CUT_1_3_HP_RAISE_STATS
+	.4byte \failInstr
+	.endm
+
+	.macro shellsidearmcheck
+	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
+	.endm
+
+	.macro jumpifteanoberry jumpInstr:req
+	various BS_ATTACKER, VARIOUS_TEATIME_TARGETS
+	.4byte \jumpInstr
+	.endm
+
+	.macro jumpifteainvulnerable battler:req, jumpInstr:req
+	various \battler, VARIOUS_TEATIME_INVUL
+	.4byte \jumpInstr
+	.endm
+
+	.macro curecertainstatuses battler:req
+	various \battler, VARIOUS_CURE_CERTAIN_STATUSES
+	.endm
+
+	.macro tryresetnegativestatstages battler:req
+	various \battler, VARIOUS_TRY_RESET_NEGATIVE_STAT_STAGES
+	.endm
+
+	.macro jumpiflastuseditemberry jumpInstr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_LAST_USED_ITEM_BERRY
+	.4byte \jumpInstr
+	.endm
+
+	.macro jumpiflastuseditemholdeffect battler:req, holdEffect:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_LAST_USED_ITEM_HOLD_EFFECT
+	.byte \holdEffect
+	.4byte \jumpInstr
+	.endm
+
+	.macro savebattleritem battler:req
+	various \battler, VARIOUS_SAVE_BATTLER_ITEM
+	.endm
+
+	.macro restorebattleritem battler:req
+	various \battler, VARIOUS_RESTORE_BATTLER_ITEM
+	.endm
+
+	.macro battleritemtolastuseditem battler:req
+	various \battler, VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM
+	.endm
+
+	.macro setbeakblast battler:req
+	various \battler, VARIOUS_SET_BEAK_BLAST
+	.endm
+
+	.macro swapsidestatuses
+	various BS_ATTACKER, VARIOUS_SWAP_SIDE_STATUSES
+	.endm
+
+	.macro swapstats stat:req
+	various BS_ATTACKER, VARIOUS_SWAP_STATS
+	.byte \stat
+	.endm
+
+	.macro trywindriderpower battler:req, failInstr:req
+	various \battler, VARIOUS_TRY_WIND_RIDER_POWER
+	.4byte \failInstr
+	.endm
+
+	.macro activateweatherchangeabilities battler:req
+	various \battler, VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES
+	.endm
+
+	.macro activateterrainchangeabilities battler:req
+	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
+	.endm
+
+@ various remaining from pokefirered
+	.macro getbattlersforrecall
+	various BS_ATTACKER, VARIOUS_GET_BATTLERS_FOR_RECALL
+	.endm
+
+	.macro checkpokeflute battler:req
+	various \battler, VARIOUS_CHECK_POKEFLUTE
+	.endm
+
+	.macro waitfanfare battler:req
+	various \battler, VARIOUS_WAIT_FANFARE
 	.endm
 
 @ helpful macros
@@ -1544,10 +1995,6 @@
 
 	.macro jumpifnotbattletype flags:req, jumpptr:req
 	jumpifword CMP_NO_COMMON_BITS, gBattleTypeFlags, \flags, \jumpptr
-	.endm
-
-	.macro jumpifnoholdeffect battler:req, holdEffect:req, jumpInstr:req
-	jumpifholdeffect \battler, \holdEffect, \jumpInstr, FALSE
 	.endm
 
 	@ Tries to increase or decrease a battler's stat's stat stage by a specified amount. If impossible, jumps to \script.

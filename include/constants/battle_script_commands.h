@@ -102,23 +102,23 @@
 #define VARIOUS_RESET_SWITCH_IN_ABILITY_BITS         5
 #define VARIOUS_UPDATE_CHOICE_MOVE_ON_LVL_UP         6
 #define VARIOUS_RESET_PLAYER_FAINTED                 7
-#define VARIOUS_PALACE_FLAVOR_TEXT                   8
-#define VARIOUS_ARENA_JUDGMENT_WINDOW                9
-#define VARIOUS_ARENA_OPPONENT_MON_LOST              10
-#define VARIOUS_ARENA_PLAYER_MON_LOST                11
-#define VARIOUS_ARENA_BOTH_MONS_LOST                 12
-#define VARIOUS_EMIT_YESNOBOX                        13
-#define VARIOUS_DRAW_ARENA_REF_TEXT_BOX              14
-#define VARIOUS_ERASE_ARENA_REF_TEXT_BOX             15
-#define VARIOUS_ARENA_JUDGMENT_STRING                16
-#define VARIOUS_ARENA_WAIT_STRING                    17
+#define VARIOUS_PALACE_FLAVOR_TEXT                   8   // unused from pokeemerald
+#define VARIOUS_ARENA_JUDGMENT_WINDOW                9   // unused, from pokeemerald
+#define VARIOUS_ARENA_OPPONENT_MON_LOST              10  // unused, from pokeemerald
+#define VARIOUS_ARENA_PLAYER_MON_LOST                11  // unused, from pokeemerald
+#define VARIOUS_ARENA_BOTH_MONS_LOST                 12  // unused, from pokeemerald
+#define VARIOUS_EMIT_YESNOBOX                        13  // unused, from pokeemerald
+#define VARIOUS_DRAW_ARENA_REF_TEXT_BOX              14  // unused, from pokeemerald
+#define VARIOUS_ERASE_ARENA_REF_TEXT_BOX             15  // unused, from pokeemerald
+#define VARIOUS_ARENA_JUDGMENT_STRING                16  // unused, from pokeemerald
+#define VARIOUS_ARENA_WAIT_STRING                    17  // unused, from pokeemerald
 #define VARIOUS_WAIT_CRY                             18
 #define VARIOUS_RETURN_OPPONENT_MON1                 19
 #define VARIOUS_RETURN_OPPONENT_MON2                 20
 #define VARIOUS_VOLUME_DOWN                          21
 #define VARIOUS_VOLUME_UP                            22
 #define VARIOUS_SET_ALREADY_STATUS_MOVE_ATTEMPT      23
-#define VARIOUS_PALACE_TRY_ESCAPE_STATUS             24
+#define VARIOUS_PALACE_TRY_ESCAPE_STATUS             24  // unused from pokeemerald
 #define VARIOUS_SET_TELEPORT_OUTCOME                 25
 #define VARIOUS_PLAY_TRAINER_DEFEATED_MUSIC          26
 #define VARIOUS_STAT_TEXT_BUFFER                     27
@@ -243,10 +243,9 @@
 #define VARIOUS_HIT_SWITCH_TARGET_FAILED             146
 #define VARIOUS_TRY_REVIVAL_BLESSING                 147
 // pokefirered
-#define VARIOUS_RESET_INTIMIDATE_TRACE_BITS          148
-#define VARIOUS_GET_BATTLERS_FOR_RECALL              149
-#define VARIOUS_CHECK_POKEFLUTE                      150
-#define VARIOUS_WAIT_FANFARE                         151
+#define VARIOUS_GET_BATTLERS_FOR_RECALL              148 // for battle tower
+#define VARIOUS_CHECK_POKEFLUTE                      149 // pokeflute
+#define VARIOUS_WAIT_FANFARE                         151 // pokeflute and other
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

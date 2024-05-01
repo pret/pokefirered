@@ -9516,6 +9516,43 @@ s32 GetStealthHazardDamage(u8 hazardType, u32 battler)
     return GetStealthHazardDamageByTypesAndHP(hazardType, type1, type2, maxHp);
 }
 
+bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move)
+{
+    u32 ability = GetBattlerAbility(battlerAtk);
+
+    if (gSideTimers[defSide].followmeTimer == 0
+        || gBattleMons[gSideTimers[defSide].followmeTarget].hp == 0
+        || gMovesInfo[move].effect == EFFECT_SNIPE_SHOT
+        || gMovesInfo[move].effect == EFFECT_SKY_DROP
+        || ability == ABILITY_PROPELLER_TAIL || ability == ABILITY_STALWART)
+        return FALSE;
+
+    if (gSideTimers[defSide].followmePowder && !IsAffectedByPowder(battlerAtk, ability, GetBattlerHoldEffect(battlerAtk, TRUE)))
+        return FALSE;
+
+    return TRUE;
+}
+
+bool32 DoBattlersShareType(u32 battler1, u32 battler2)
+{
+    s32 i;
+    u8 types1[3] = {GetBattlerType(battler1, 0), GetBattlerType(battler1, 1), GetBattlerType(battler1, 2)};
+    u8 types2[3] = {GetBattlerType(battler2, 0), GetBattlerType(battler2, 1), GetBattlerType(battler2, 2)};
+
+    if (types1[2] == TYPE_MYSTERY)
+        types1[2] = types1[0];
+    if (types2[2] == TYPE_MYSTERY)
+        types2[2] = types2[0];
+
+    for (i = 0; i < 3; i++)
+    {
+        if (types1[i] == types2[0] || types1[i] == types2[1] || types1[i] == types2[2])
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 
 
 // battle_ai_util.c
@@ -9616,6 +9653,16 @@ bool32 BattlerHasAi(u32 battlerId)
 void ClearBattlerItemEffectHistory(u32 battlerId)
 {
     BATTLE_HISTORY->itemEffects[battlerId] = 0;
+}
+
+// move checks
+bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect)
+{
+    if (ability == ABILITY_OVERCOAT
+        || (B_POWDER_GRASS >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GRASS))
+        || holdEffect == HOLD_EFFECT_SAFETY_GOGGLES)
+        return FALSE;
+    return TRUE;
 }
 
 

@@ -361,10 +361,21 @@ struct SideTimer
     u8 stealthRockAmount;
     u8 stickyWebAmount;
     u8 stickyWebBattlerId;
+    u8 stickyWebBattlerSide; // Used for Court Change
     u8 tailwindTimer;
     u8 tailwindBattlerId;
     u8 auroraVeilTimer;
+    u8 auroraVeilBattlerId;
     u8 toxicSpikesAmount;
+    u8 followmePowder:1; // Rage powder, does not affect grass type pokemon.
+    u8 steelsurgeAmount;
+    u8 luckyChantTimer;
+    u8 luckyChantBattlerId;
+    u8 damageNonTypesTimer;
+    u8 damageNonTypesType;
+    u8 rainbowTimer;
+    u8 seaOfFireTimer;
+    u8 swampTimer;
 };
 
 extern struct SideTimer gSideTimers[];
@@ -434,6 +445,7 @@ struct BattleHistory
     /*0x2C*/ u8 itemsNo;
     u16 moveHistory[MAX_BATTLERS_COUNT][AI_MOVE_HISTORY_COUNT]; // 3 last used moves for each battler
     u8 moveHistoryIndex[MAX_BATTLERS_COUNT];
+    u16 heldItems[MAX_BATTLERS_COUNT];
 };
 
 struct BattleScriptsStack
@@ -706,15 +718,19 @@ struct BattleStruct
     u8 storedHealingWish:4; // Each battler as a bit.
     u8 storedLunarDance:4; // Each battler as a bit.
     u8 forcedSwitch:4; // For each battler
+    u8 alreadyStatusedMoveAttempt; // As bits for battlers; For example when using Thunder Wave on an already paralyzed Pokémon.
+    u8 soulheartBattlerId;
+    const u8 *trainerSlideMsg;
+    u8 battleBondTransformed[NUM_BATTLE_SIDES]; // Bitfield for each party.
     // pokeemerald unknown use
     u8 field_93; // related to choosing pokemon? probably related to recording
 };
 
 extern struct BattleStruct *gBattleStruct;
 
-#define F_DYNAMIC_TYPE_1 (1 << 6)
-#define F_DYNAMIC_TYPE_2 (1 << 7)
-#define DYNAMIC_TYPE_MASK (F_DYNAMIC_TYPE_1 - 1)
+#define DYNAMIC_TYPE_MASK                 ((1 << 6) - 1)
+#define F_DYNAMIC_TYPE_IGNORE_PHYSICALITY  (1 << 6) // If set, the dynamic type's physicality won't be used for certain move effects.
+#define F_DYNAMIC_TYPE_SET                 (1 << 7) // Set for all dynamic types to distinguish a dynamic type of Normal (0) from no dynamic type.
 
 #define GET_MOVE_TYPE(move, typeArg)                                  \
 {                                                                     \
@@ -905,7 +921,8 @@ struct MonSpritesGfx
     void *sprites[MAX_BATTLERS_COUNT];
     struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
     struct SpriteFrameImage images[MAX_BATTLERS_COUNT][4];
-    u8 field_F4[0x80]; // unused
+    u8 field_F4[0x80 - (4 * MAX_BATTLERS_COUNT)]; // unused, original - spritesGfx
+    u8 *spritesGfx[MAX_BATTLERS_COUNT];
     u8 *barFontGfx;
     void *field_178; // freed but never allocated
     u16 *multiUseBuffer;

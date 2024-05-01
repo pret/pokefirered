@@ -65,14 +65,8 @@
 #define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
 #define WEATHER_HAS_EFFECT2 ((!AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, ABILITY_AIR_LOCK, 0, 0)))
 
-#define BS_GET_TARGET                   0
-#define BS_GET_ATTACKER                 1
-#define BS_GET_EFFECT_BANK              2
-#define BS_GET_SCRIPTING_BANK           10
-#define BS_GET_PLAYER1                  11
-#define BS_GET_OPPONENT1                12
-#define BS_GET_PLAYER2                  13
-#define BS_GET_OPPONENT2                14
+#define IS_WHOLE_SIDE_ALIVE(battler)    ((IsBattlerAlive(battler) && IsBattlerAlive(BATTLE_PARTNER(battler))))
+#define IS_ALIVE_AND_PRESENT(battler)   (IsBattlerAlive(battler) && IsBattlerSpritePresent(battler))
 
 // for Natural Gift and Fling
 struct TypePower
@@ -150,6 +144,7 @@ u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
 void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1);
 // new
+bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move);
 bool32 IsNeutralizingGasOnField(void);
 bool32 IsMyceliumMightOnField(void);
 bool32 IsMoldBreakerTypeAbility(u32 ability);
@@ -232,6 +227,7 @@ bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes);
 bool32 TryPrimalReversion(u32 battler);
 s32 GetStealthHazardDamage(u8 hazardType, u32 battler);
 s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp);
+bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);
@@ -241,6 +237,7 @@ bool32 IsAiVsAiBattle(void);
 void RecordLastUsedMoveBy(u32 battlerId, u32 move);
 bool32 BattlerHasAi(u32 battlerId);
 void ClearBattlerItemEffectHistory(u32 battlerId);
+bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect);
 
 // end battle_ai_util.h
 

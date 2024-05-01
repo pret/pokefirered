@@ -674,10 +674,10 @@
 	.byte 0x75
 	.endm
 
-	.macro various battler:req, param1:req
+	.macro various battler:req, id:req
 	.byte 0x76
 	.byte \battler
-	.byte \param1
+	.byte \id
 	.endm
 
 	.macro setprotectlike
@@ -692,14 +692,14 @@
 	.byte 0x79
 	.endm
 
-	.macro jumpifnexttargetvalid ptr:req
+	.macro jumpifnexttargetvalid jumpInstr:req
 	.byte 0x7a
-	.4byte \ptr
+	.4byte \jumpInstr
 	.endm
 
-	.macro tryhealhalfhealth param0:req, battler:req
+	.macro tryhealhalfhealth failInstr:req, battler:req
 	.byte 0x7b
-	.4byte \param0
+	.4byte \failInstr
 	.byte \battler
 	.endm
 

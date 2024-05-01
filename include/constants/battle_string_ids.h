@@ -558,8 +558,9 @@
 #define STRINGID_NEUTRALIZINGGASOVER                  555
 #define STRINGID_ATTACKERBECAMEFULLYCHARGED           556
 #define STRINGID_ATTACKERBECAMEASHSPECIES             557
+#define STRINGID_PROTECTEDTEAM                        558
 
-#define BATTLESTRINGS_COUNT     558
+#define BATTLESTRINGS_COUNT     559
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -642,6 +643,7 @@
 #define B_MSG_PROTECTED_ITSELF 0
 #define B_MSG_BRACED_ITSELF    1
 #define B_MSG_PROTECT_FAILED   2
+#define B_MSG_PROTECTED_TEAM   3
 
 // gRestUsedStringIds
 #define B_MSG_REST           0

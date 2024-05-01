@@ -563,8 +563,11 @@
 #define STRINGID_MISTYTERRAINPREVENTS                 560
 #define STRINGID_PSYCHICTERRAINPREVENTS               561
 #define STRINGID_FLOWERVEILPROTECTED                  562
+#define	STRINGID_DRASTICALLY                          563
+#define	STRINGID_SEVERELY                             564
+#define STRINGID_CLEARAMULETWONTLOWERSTATS            565
 
-#define BATTLESTRINGS_COUNT     563
+#define BATTLESTRINGS_COUNT     566
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

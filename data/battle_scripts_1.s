@@ -119,31 +119,16 @@ BattleScript_EffectPoisonHit::
 	goto BattleScript_EffectHit
 
 BattleScript_EffectAbsorb::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	typecalc
-	adjustdamage
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	negativedamage
-	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	call BattleScript_EffectHit_Ret
+	jumpifstatus3 BS_ATTACKER, STATUS3_HEAL_BLOCK, BattleScript_AbsorbHealBlock
+	setdrainedhp
+	manipulatedamage DMG_BIG_ROOT
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_IGNORE_DISGUISE
 	jumpifability BS_TARGET, ABILITY_LIQUID_OOZE, BattleScript_AbsorbLiquidOoze
 	setbyte cMULTISTRING_CHOOSER, B_MSG_ABSORB
 	goto BattleScript_AbsorbUpdateHp
 BattleScript_AbsorbLiquidOoze::
+	call BattleScript_AbilityPopUpTarget
 	manipulatedamage DMG_CHANGE_SIGN
 	setbyte cMULTISTRING_CHOOSER, B_MSG_ABSORB_OOZE
 BattleScript_AbsorbUpdateHp::
@@ -154,6 +139,7 @@ BattleScript_AbsorbUpdateHp::
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_AbsorbTryFainting::
 	tryfaintmon BS_ATTACKER
+BattleScript_AbsorbHealBlock::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
 
@@ -222,8 +208,9 @@ BattleScript_PreserveMissedBitDoMoveAnim:
 
 BattleScript_EffectDreamEater::
 	attackcanceler
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_DreamEaterNoEffect
+	jumpifsubstituteblocks BattleScript_DreamEaterNoEffect
 	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_DreamEaterWorked
+	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_DreamEaterWorked
 BattleScript_DreamEaterNoEffect:
 	attackstring
 	ppreduce
@@ -235,7 +222,6 @@ BattleScript_DreamEaterWorked:
 	ppreduce
 	critcalc
 	damagecalc
-	typecalc
 	adjustdamage
 	attackanimation
 	waitanimation
@@ -248,7 +234,9 @@ BattleScript_DreamEaterWorked:
 	waitmessage B_WAIT_TIME_LONG
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
-	negativedamage
+	jumpifstatus3 BS_ATTACKER, STATUS3_HEAL_BLOCK, BattleScript_DreamEaterTryFaintEnd
+	setdrainedhp
+	manipulatedamage DMG_BIG_ROOT
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
@@ -6322,4 +6310,35 @@ BattleScript_LeafGuardPreventsRest::
 	printstring STRINGID_BUTITFAILED
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectHit_Ret::
+	attackcanceler
+BattleScript_EffectHit_RetFromAccCheck::
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+BattleScript_EffectHit_RetFromCritCalc::
+	critcalc
+	damagecalc
+	adjustdamage
+BattleScript_Hit_RetFromAtkAnimation::
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	setadditionaleffects
+	return
+
+BattleScript_ItemNoStatLoss::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_CLEARAMULETWONTLOWERSTATS
+	waitmessage B_WAIT_TIME_LONG
+	return
 

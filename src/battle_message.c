@@ -692,6 +692,9 @@ static const u8 sText_ElectricTerrainPreventsSleep[] = _("{B_DEF_NAME_WITH_PREFI
 static const u8 sText_MistyTerrainPreventsStatus[] = _("{B_DEF_NAME_WITH_PREFIX} surrounds itself\nwith a protective mist!");
 static const u8 sText_PsychicTerrainPreventsPriority[] = _("{B_DEF_NAME_WITH_PREFIX} surrounds itself\nwith psychic terrain!");
 static const u8 sText_FlowerVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} surrounded itself\nwith a veil of petals!");
+static const u8 sText_drastically[] = _("drastically ");
+static const u8 sText_severely[] = _("severely ");
+static const u8 sText_ClearAmuletWontLowerStats[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM} prevents\nits stats from being lowered!");
 
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_START] = {
@@ -1246,6 +1249,9 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_MISTYTERRAINPREVENTS - BATTLESTRINGS_TABLE_START] = sText_MistyTerrainPreventsStatus,
     [STRINGID_PSYCHICTERRAINPREVENTS - BATTLESTRINGS_TABLE_START] = sText_PsychicTerrainPreventsPriority,
     [STRINGID_FLOWERVEILPROTECTED - BATTLESTRINGS_TABLE_START] = sText_FlowerVeilProtected,
+    [STRINGID_DRASTICALLY - BATTLESTRINGS_TABLE_START] = sText_drastically,
+    [STRINGID_SEVERELY - BATTLESTRINGS_TABLE_START] = sText_severely,
+    [STRINGID_CLEARAMULETWONTLOWERSTATS - BATTLESTRINGS_TABLE_START] = sText_ClearAmuletWontLowerStats,
 };
 
 const u16 gTrainerUsedItemStringIds[] =

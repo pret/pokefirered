@@ -655,9 +655,9 @@
 	.byte 0x71
 	.endm
 
-	.macro jumpifplayerran ptr:req
+	.macro jumpifplayerran jumpInstr:req
 	.byte 0x72
-	.4byte \ptr
+	.4byte \jumpInstr
 	.endm
 
 	.macro hpthresholds battler:req

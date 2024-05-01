@@ -702,14 +702,14 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_atknameinbuff1,                          //0x6B // done
     Cmd_drawlvlupbox,                            //0x6C // done
     Cmd_resetsentmonsvalue,                      //0x6D // done
-    Cmd_setatktoplayer0,                         //0x6E
-    Cmd_makevisible,                             //0x6F
+    Cmd_setatktoplayer0,                         //0x6E // done
+    Cmd_makevisible,                             //0x6F // done
     Cmd_recordability,                           //0x70 // done
-    Cmd_buffermovetolearn,                       //0x71
-    Cmd_jumpifplayerran,                         //0x72
-    Cmd_hpthresholds,                            //0x73
-    Cmd_hpthresholds2,                           //0x74
-    Cmd_useitemonopponent,                       //0x75
+    Cmd_buffermovetolearn,                       //0x71 // done
+    Cmd_jumpifplayerran,                         //0x72 // done
+    Cmd_hpthresholds,                            //0x73 // done
+    Cmd_hpthresholds2,                           //0x74 // done
+    Cmd_useitemonopponent,                       //0x75 // done
     Cmd_various,                                 //0x76
     Cmd_setprotectlike,                          //0x77
     Cmd_tryexplosion,                            //0x78
@@ -8530,25 +8530,33 @@ static void Cmd_resetsentmonsvalue(void)
 
 static void Cmd_setatktoplayer0(void)
 {
+    CMD_ARGS();
+
     gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_makevisible(void)
 {
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    BtlController_EmitSpriteInvisibility(BUFFER_A, FALSE);
-    MarkBattlerForControllerExec(gActiveBattler);
+    CMD_ARGS(u8 battler);
+    u32 battler;
 
-    gBattlescriptCurrInstr += 2;
+    if (gBattleControllerExecFlags)
+        return;
+
+    battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    BtlController_EmitSpriteInvisibility(BUFFER_A, FALSE);
+    MarkBattlerForControllerExec(battler);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_recordability(void)
 {
     CMD_ARGS(u8 battler);
-    gActiveBattler = GetBattlerForBattleScript(cmd->battler);
-    RecordAbilityBattle(gActiveBattler, gBattleMons[gActiveBattler].ability);
 
+    u8 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    RecordAbilityBattle(battler, gBattleMons[battler].ability);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
@@ -8559,29 +8567,32 @@ void BufferMoveToLearnIntoBattleTextBuff2(void)
 
 static void Cmd_buffermovetolearn(void)
 {
+    CMD_ARGS();
+
     BufferMoveToLearnIntoBattleTextBuff2();
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_jumpifplayerran(void)
 {
+    CMD_ARGS(const u8 *jumpInstr);
+
     if (TryRunFromBattle(gBattlerFainted))
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->jumpInstr;
     else
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_hpthresholds(void)
 {
-    u8 opposingBattler;
-    s32 result;
+    CMD_ARGS(u8 battler);
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        opposingBattler = gActiveBattler ^ BIT_SIDE;
+        u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+        u32 opposingBattler = BATTLE_OPPOSITE(battler);
 
-        result = gBattleMons[opposingBattler].hp * 100 / gBattleMons[opposingBattler].maxHP;
+        s32 result = gBattleMons[opposingBattler].hp * 100 / gBattleMons[opposingBattler].maxHP;
         if (result == 0)
             result = 1;
 
@@ -8595,21 +8606,19 @@ static void Cmd_hpthresholds(void)
             gBattleStruct->hpScale = 3;
     }
 
-    gBattlescriptCurrInstr += 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_hpthresholds2(void)
 {
-    u8 opposingBattler;
-    s32 result;
-    u8 hpSwitchout;
+    CMD_ARGS(u8 battler);
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        opposingBattler = gActiveBattler ^ BIT_SIDE;
-        hpSwitchout = *(gBattleStruct->hpOnSwitchout + GetBattlerSide(opposingBattler));
-        result = (hpSwitchout - gBattleMons[opposingBattler].hp) * 100 / hpSwitchout;
+        u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+        u32 opposingBattler = BATTLE_OPPOSITE(battler);
+        u8 hpSwitchout = *(gBattleStruct->hpOnSwitchout + GetBattlerSide(opposingBattler));
+        s32 result = (hpSwitchout - gBattleMons[opposingBattler].hp) * 100 / hpSwitchout;
 
         if (gBattleMons[opposingBattler].hp >= hpSwitchout)
             gBattleStruct->hpScale = 0;
@@ -8621,14 +8630,16 @@ static void Cmd_hpthresholds2(void)
             gBattleStruct->hpScale = 3;
     }
 
-    gBattlescriptCurrInstr += 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_useitemonopponent(void)
 {
+    CMD_ARGS();
+
     gBattlerInMenuId = gBattlerAttacker;
     PokemonUseItemEffects(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker]], gLastUsedItem, gBattlerPartyIndexes[gBattlerAttacker], 0, TRUE);
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 // Return True if the order was changed, and false if the order was not changed(for example because the target would move after the attacker anyway).

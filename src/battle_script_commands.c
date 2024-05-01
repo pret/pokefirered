@@ -472,8 +472,8 @@ static void Cmd_setseeded(void);
 static void Cmd_manipulatedamage(void);
 static void Cmd_trysetrest(void);
 static void Cmd_jumpifnotfirstturn(void);
-static void Cmd_nop(void);
-static void Cmd_jumpifcantmakeasleep(void);
+static void Cmd_setmiracleeye(void);
+static void Cmd_jumpifuproarwakes(void);
 static void Cmd_stockpile(void);
 static void Cmd_stockpiletobasedamage(void);
 static void Cmd_stockpiletohpheal(void);
@@ -724,11 +724,11 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_manipulatedamage,                        //0x80 // done
     Cmd_trysetrest,                              //0x81 // done
     Cmd_jumpifnotfirstturn,                      //0x82 // done
-    Cmd_nop,                                     //0x83
-    Cmd_jumpifcantmakeasleep,                    //0x84
-    Cmd_stockpile,                               //0x85
-    Cmd_stockpiletobasedamage,                   //0x86
-    Cmd_stockpiletohpheal,                       //0x87
+    Cmd_setmiracleeye,                           //0x83 // done
+    Cmd_jumpifuproarwakes,                       //0x84 // done
+    Cmd_stockpile,                               //0x85 // done
+    Cmd_stockpiletobasedamage,                   //0x86 // done
+    Cmd_stockpiletohpheal,                       //0x87 // done
     Cmd_negativedamage,                          //0x88
     Cmd_statbuffchange,                          //0x89
     Cmd_normalisebuffs,                          //0x8A
@@ -11544,18 +11544,28 @@ static void Cmd_jumpifnotfirstturn(void)
         gBattlescriptCurrInstr = jumpInstr;
 }
 
-static void Cmd_nop(void)
+static void Cmd_setmiracleeye(void)
 {
-    gBattlescriptCurrInstr++;
+    CMD_ARGS(const u8 *failInstr);
+
+    if (!(gStatuses3[gBattlerTarget] & STATUS3_MIRACLE_EYED))
+    {
+        gStatuses3[gBattlerTarget] |= STATUS3_MIRACLE_EYED;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
 }
 
-bool8 UproarWakeUpCheck(u8 battlerId)
+bool8 UproarWakeUpCheck(u8 battler)
 {
     s32 i;
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        if (!(gBattleMons[i].status2 & STATUS2_UPROAR) || gBattleMons[battlerId].ability == ABILITY_SOUNDPROOF)
+        if (!(gBattleMons[i].status2 & STATUS2_UPROAR) || (GetBattlerAbility(battler) == ABILITY_SOUNDPROOF && B_UPROAR_IGNORE_SOUNDPROOF < GEN_5))
             continue;
 
         gBattleScripting.battler = i;
@@ -11576,100 +11586,106 @@ bool8 UproarWakeUpCheck(u8 battlerId)
         return TRUE;
 }
 
-static void Cmd_jumpifcantmakeasleep(void)
+static void Cmd_jumpifuproarwakes(void)
 {
-    const u8 *jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    CMD_ARGS(const u8 *jumpInstr);
 
     if (UproarWakeUpCheck(gBattlerTarget))
-    {
-        gBattlescriptCurrInstr = jumpPtr;
-    }
-    else if (gBattleMons[gBattlerTarget].ability == ABILITY_INSOMNIA
-            || gBattleMons[gBattlerTarget].ability == ABILITY_VITAL_SPIRIT)
-    {
-        gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STAYED_AWAKE_USING;
-        gBattlescriptCurrInstr = jumpPtr;
-        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
-    }
+        gBattlescriptCurrInstr = cmd->jumpInstr;
     else
-    {
-        gBattlescriptCurrInstr += 5;
-    }
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_stockpile(void)
 {
-    if (gDisableStructs[gBattlerAttacker].stockpileCounter == 3)
-    {
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_STOCKPILE;
-    }
-    else
-    {
-        gDisableStructs[gBattlerAttacker].stockpileCounter++;
+    CMD_ARGS(u8 id);
 
-        PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 1, gDisableStructs[gBattlerAttacker].stockpileCounter)
-
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STOCKPILED;
+    switch (cmd->id)
+    {
+    case 0:
+        if (gDisableStructs[gBattlerAttacker].stockpileCounter >= 3)
+        {
+            gMoveResultFlags |= MOVE_RESULT_MISSED;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_STOCKPILE;
+        }
+        else
+        {
+            gDisableStructs[gBattlerAttacker].stockpileCounter++;
+            gDisableStructs[gBattlerAttacker].stockpileBeforeDef = gBattleMons[gBattlerAttacker].statStages[STAT_DEF];
+            gDisableStructs[gBattlerAttacker].stockpileBeforeSpDef = gBattleMons[gBattlerAttacker].statStages[STAT_SPDEF];
+            PREPARE_BYTE_NUMBER_BUFFER(gBattleTextBuff1, 1, gDisableStructs[gBattlerAttacker].stockpileCounter);
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STOCKPILED;
+        }
+        break;
+    case 1: // Save def/sp def stats.
+        if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+        {
+            gDisableStructs[gBattlerAttacker].stockpileDef += gBattleMons[gBattlerAttacker].statStages[STAT_DEF] - gDisableStructs[gBattlerAttacker].stockpileBeforeDef;
+            gDisableStructs[gBattlerAttacker].stockpileSpDef += gBattleMons[gBattlerAttacker].statStages[STAT_SPDEF] - gDisableStructs[gBattlerAttacker].stockpileBeforeSpDef;
+        }
+        break;
     }
-    gBattlescriptCurrInstr++;
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_stockpiletobasedamage(void)
 {
-    const u8 *jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    CMD_ARGS(const u8 *failInstr);
+
+    const u8 *failInstr = cmd->failInstr;
     if (gDisableStructs[gBattlerAttacker].stockpileCounter == 0)
     {
-        gBattlescriptCurrInstr = jumpPtr;
+        gBattlescriptCurrInstr = failInstr;
     }
     else
     {
         if (gBattleCommunication[MISS_TYPE] != B_MSG_PROTECTED)
-        {
-            gBattleMoveDamage = CalculateBaseDamageOld(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
-                                                    gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)], 0,
-                                                    0, gBattlerAttacker, gBattlerTarget)
-                                * gDisableStructs[gBattlerAttacker].stockpileCounter;
             gBattleScripting.animTurn = gDisableStructs[gBattlerAttacker].stockpileCounter;
 
-            if (gProtectStructs[gBattlerAttacker].helpingHand)
-                gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
+        if (!(gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_1ST_HIT && gBattleMons[gBattlerTarget].hp != 0))
+        {
+            gBattleStruct->moveEffect2 = MOVE_EFFECT_STOCKPILE_WORE_OFF;
         }
-
-        gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
 static void Cmd_stockpiletohpheal(void)
 {
-    const u8 *jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    CMD_ARGS(const u8 *failInstr);
+
+    const u8 *failInstr = cmd->failInstr;
 
     if (gDisableStructs[gBattlerAttacker].stockpileCounter == 0)
     {
-        gBattlescriptCurrInstr = jumpPtr;
+        gBattlescriptCurrInstr = failInstr;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWALLOW_FAILED;
-    }
-    else if (gBattleMons[gBattlerAttacker].maxHP == gBattleMons[gBattlerAttacker].hp)
-    {
-        gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
-        gBattlescriptCurrInstr = jumpPtr;
-        gBattlerTarget = gBattlerAttacker;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWALLOW_FULL_HP;
     }
     else
     {
-        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
+        if (gBattleMons[gBattlerAttacker].maxHP == gBattleMons[gBattlerAttacker].hp)
+        {
+            gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
+            gBattlescriptCurrInstr = failInstr;
+            gBattlerTarget = gBattlerAttacker;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWALLOW_FULL_HP;
+        }
+        else
+        {
+            // TODO: Dynamax
+            // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
+            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
 
-        if (gBattleMoveDamage == 0)
-            gBattleMoveDamage = 1;
-        gBattleMoveDamage *= -1;
+            if (gBattleMoveDamage == 0)
+                gBattleMoveDamage = 1;
+            gBattleMoveDamage *= -1;
 
-        gBattleScripting.animTurn = gDisableStructs[gBattlerAttacker].stockpileCounter;
-        gDisableStructs[gBattlerAttacker].stockpileCounter = 0;
-        gBattlescriptCurrInstr += 5;
-        gBattlerTarget = gBattlerAttacker;
+            gBattleScripting.animTurn = gDisableStructs[gBattlerAttacker].stockpileCounter;
+            gBattleStruct->moveEffect2 = MOVE_EFFECT_STOCKPILE_WORE_OFF;
+            gBattlescriptCurrInstr = cmd->nextInstr;
+            gBattlerTarget = gBattlerAttacker;
+        }
     }
 }
 
@@ -15453,5 +15469,27 @@ void BS_HandlePrimalReversion(void)
     u8 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
     HandleScriptMegaPrimalBurst(cmd->caseId, battler, HANDLE_TYPE_PRIMAL_REVERSION);
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_JumpIfTerrainAffected(void)
+{
+    NATIVE_ARGS(u8 battler, u32 flags, const u8 *jumpInstr);
+    u32 battler = GetBattlerForBattleScript(cmd->battler);
+
+    if (IsBattlerTerrainAffected(battler, cmd->flags))
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_CheckParentalBondCounter(void)
+{
+    NATIVE_ARGS(u8 counter, const u8 *jumpInstr);
+    // Some effects should only happen on the first or second strike of Parental Bond,
+    // so a way to check this in battle scripts is useful
+    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == cmd->counter && gBattleMons[gBattlerTarget].hp != 0)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

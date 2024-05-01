@@ -559,8 +559,12 @@
 #define STRINGID_ATTACKERBECAMEFULLYCHARGED           556
 #define STRINGID_ATTACKERBECAMEASHSPECIES             557
 #define STRINGID_PROTECTEDTEAM                        558
+#define STRINGID_ELECTRICTERRAINPREVENTS              559
+#define STRINGID_MISTYTERRAINPREVENTS                 560
+#define STRINGID_PSYCHICTERRAINPREVENTS               561
+#define STRINGID_FLOWERVEILPROTECTED                  562
 
-#define BATTLESTRINGS_COUNT     559
+#define BATTLESTRINGS_COUNT     563
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -796,6 +800,11 @@
 #define B_MSG_MENTALHERBCURE_TORMENT           3
 #define B_MSG_MENTALHERBCURE_HEALBLOCK         4
 #define B_MSG_MENTALHERBCURE_DISABLE           5
+
+// gTerrainPreventsStringIds
+#define B_MSG_TERRAINPREVENTS_MISTY     0
+#define B_MSG_TERRAINPREVENTS_ELECTRIC  1
+#define B_MSG_TERRAINPREVENTS_PSYCHIC   2
 
 // gTerrainStringIds
 #define B_MSG_TERRAIN_SET_MISTY     0

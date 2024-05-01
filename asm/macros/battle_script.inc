@@ -724,37 +724,39 @@
 	.byte \mode
 	.endm
 
-	.macro trysetrest param0:req
+	.macro trysetrest failInstr:req
 	.byte 0x81
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro jumpifnotfirstturn ptr:req
+	.macro jumpifnotfirstturn jumpInstr:req
 	.byte 0x82
-	.4byte \ptr
+	.4byte \jumpInstr
 	.endm
 
-	.macro nop
+	.macro setmiracleeye failInstr:req
 	.byte 0x83
+	.4byte \failInstr
 	.endm
 
-	.macro jumpifcantmakeasleep param0:req
+	.macro jumpifuproarwakes jumpInstr:req
 	.byte 0x84
-	.4byte \param0
+	.4byte \jumpInstr
 	.endm
 
-	.macro stockpile
+	.macro stockpile id:req
 	.byte 0x85
+	.byte \id
 	.endm
 
-	.macro stockpiletobasedamage param0:req
+	.macro stockpiletobasedamage failInstr:req
 	.byte 0x86
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro stockpiletohpheal param0:req
+	.macro stockpiletohpheal failInstr:req
 	.byte 0x87
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro negativedamage
@@ -1907,6 +1909,11 @@
 	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
 	.endm
 
+	.macro jumpifleafguardprotected battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED
+	.4byte \jumpInstr
+	.endm
+
 @ various remaining from pokefirered
 	.macro getbattlersforrecall
 	various BS_ATTACKER, VARIOUS_GET_BATTLERS_FOR_RECALL
@@ -2096,6 +2103,12 @@
 	jumpifbyte CMP_EQUAL, gBattleCommunication, \value, \ptr
 	.endm
 
+	.macro jumpifflowerveil jumpInstr:req
+	jumpifnottype BS_TARGET, TYPE_GRASS, 1f
+	jumpifability BS_TARGET_SIDE, ABILITY_FLOWER_VEIL, \jumpInstr
+	1:
+	.endm
+
 	.macro jumpifflowerveilattacker jumpInstr:req
 	jumpifnottype BS_ATTACKER, TYPE_GRASS, 1f
 	jumpifability BS_ATTACKER_SIDE, ABILITY_FLOWER_VEIL, \jumpInstr
@@ -2117,6 +2130,19 @@
 	callnative BS_HandlePrimalReversion
 	.byte \battler
 	.byte \case
+	.endm
+
+	.macro jumpifterrainaffected battler:req, terrainFlags:req, jumpInstr:req
+	callnative BS_JumpIfTerrainAffected
+	.byte \battler
+	.4byte \terrainFlags
+	.4byte \jumpInstr
+	.endm
+
+	.macro checkparentalbondcounter counter:req, ptr:req
+	callnative BS_CheckParentalBondCounter
+	.byte \counter
+	.4byte \ptr
 	.endm
 
 	

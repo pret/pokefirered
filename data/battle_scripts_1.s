@@ -75,16 +75,25 @@ BattleScript_EffectSleep::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_AlreadyAsleep
-	jumpifcantmakeasleep BattleScript_CantMakeAsleep
+	jumpifuproarwakes BattleScript_CantMakeAsleep
+	jumpifability BS_TARGET, ABILITY_INSOMNIA, BattleScript_InsomniaProtects
+	jumpifability BS_TARGET, ABILITY_VITAL_SPIRIT, BattleScript_InsomniaProtects
+	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_AbilityProtectsDoesntAffect
+	jumpifability BS_TARGET, ABILITY_PURIFYING_SALT, BattleScript_AbilityProtectsDoesntAffect
+	jumpifflowerveil BattleScript_FlowerVeilProtects
+	jumpifability BS_TARGET_SIDE, ABILITY_SWEET_VEIL, BattleScript_SweetVeilProtects
+	jumpifleafguardprotected BS_TARGET, BattleScript_AbilityProtectsDoesntAffect
+	jumpifshieldsdown BS_TARGET, BattleScript_AbilityProtectsDoesntAffect
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
+	jumpifterrainaffected BS_TARGET, STATUS_FIELD_ELECTRIC_TERRAIN, BattleScript_ElectricTerrainPrevents
+	jumpifterrainaffected BS_TARGET, STATUS_FIELD_MISTY_TERRAIN, BattleScript_MistyTerrainPrevents
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
-	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	jumpifsafeguard BattleScript_SafeguardProtected
 	attackanimation
 	waitanimation
-	setmoveeffect MOVE_EFFECT_SLEEP
-	seteffectprimary
+	seteffectprimary MOVE_EFFECT_SLEEP
 	goto BattleScript_MoveEnd
 
 BattleScript_AlreadyAsleep::
@@ -526,7 +535,14 @@ BattleScript_EffectRest::
 	attackstring
 	ppreduce
 	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_RestIsAlreadyAsleep
-	jumpifcantmakeasleep BattleScript_RestCantSleep
+	jumpifability BS_ATTACKER, ABILITY_COMATOSE, BattleScript_RestIsAlreadyAsleep
+	jumpifuproarwakes BattleScript_RestCantSleep
+	jumpifability BS_TARGET, ABILITY_INSOMNIA, BattleScript_InsomniaProtects
+	jumpifability BS_TARGET, ABILITY_VITAL_SPIRIT, BattleScript_InsomniaProtects
+	jumpifability BS_ATTACKER, ABILITY_PURIFYING_SALT, BattleScript_InsomniaProtects
+.if B_LEAF_GUARD_PREVENTS_REST >= GEN_5
+	jumpifleafguardprotected BS_TARGET, BattleScript_LeafGuardPreventsRest
+.endif
 	trysetrest BattleScript_AlreadyAtFullHp
 	pause B_WAIT_TIME_SHORT
 	printfromtable gRestUsedStringIds
@@ -1715,23 +1731,43 @@ BattleScript_NotAffected::
 BattleScript_EffectUproar::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	setmoveeffect MOVE_EFFECT_UPROAR | MOVE_EFFECT_AFFECTS_USER
 	attackstring
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_UproarHit
 	ppreduce
 BattleScript_UproarHit::
-	nop
 	goto BattleScript_HitFromCritCalc
 
 BattleScript_EffectStockpile::
 	attackcanceler
 	attackstring
 	ppreduce
-	stockpile
+	stockpile 0
 	attackanimation
 	waitanimation
 	printfromtable gStockpileUsedStringIds
 	waitmessage B_WAIT_TIME_LONG
+	.if B_STOCKPILE_RAISES_DEFS < GEN_4
+	goto BattleScript_EffectStockpileEnd
+	.endif
+	jumpifmovehadnoeffect BattleScript_EffectStockpileEnd
+	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_EffectStockpileDef
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_EffectStockpileEnd
+BattleScript_EffectStockpileDef:
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_ATTACKER, BIT_DEF | BIT_SPDEF, 0
+	setstatchanger STAT_DEF, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_EffectStockpileSpDef
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_EffectStockpileSpDef
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectStockpileSpDef::
+	setstatchanger STAT_SPDEF, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_EffectStockpileEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_EffectStockpileEnd
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectStockpileEnd:
+	stockpile 1
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSpitUp::
@@ -1740,14 +1776,17 @@ BattleScript_EffectSpitUp::
 	attackstring
 	ppreduce
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	stockpiletobasedamage BattleScript_SpitUpFail
-	typecalc
+	setbyte gIsCriticalHit, FALSE
+	damagecalc
 	adjustdamage
+	stockpiletobasedamage BattleScript_SpitUpFail
 	goto BattleScript_HitFromAtkAnimation
 BattleScript_SpitUpFail::
+	checkparentalbondcounter 2, BattleScript_SpitUpEnd
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_FAILEDTOSPITUP
 	waitmessage B_WAIT_TIME_LONG
+BattleScript_SpitUpEnd:
 	goto BattleScript_MoveEnd
 
 BattleScript_SpitUpFailProtect::
@@ -6219,4 +6258,68 @@ BattleScript_ScriptingAbilityStatRaise::
 	waitmessage B_WAIT_TIME_LONG
 	copybyte gBattlerAttacker, sSAVED_DMG
 	return
+
+BattleScript_ElectricTerrainPrevents::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_ELECTRICTERRAINPREVENTS
+	waitmessage B_WAIT_TIME_LONG
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
+
+BattleScript_MistyTerrainPrevents::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_MISTYTERRAINPREVENTS
+	waitmessage B_WAIT_TIME_LONG
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
+
+BattleScript_InsomniaProtects:
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSTAYEDAWAKEUSING
+	waitmessage B_WAIT_TIME_LONG
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
+
+BattleScript_AbilityProtectsDoesntAffectRet::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ITDOESNTAFFECT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_AbilityProtectsDoesntAffect:
+	call BattleScript_AbilityProtectsDoesntAffectRet
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
+
+BattleScript_FlowerVeilProtectsRet::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_FLOWERVEILPROTECTED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_FlowerVeilProtects:
+	call BattleScript_FlowerVeilProtectsRet
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
+
+BattleScript_SweetVeilProtectsRet::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_FLOWERVEILPROTECTED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_SweetVeilProtects:
+	call BattleScript_SweetVeilProtectsRet
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
+	goto BattleScript_MoveEnd
+
+BattleScript_LeafGuardPreventsRest::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_BUTITFAILED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 

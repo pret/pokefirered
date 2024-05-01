@@ -223,11 +223,14 @@ void BufferStatChange(u32 battler, u8 statId, u8 stringId);
 s32 GetDrainedBigRootHp(u32 battler, s32 hp);
 u8 TryHandleSeed(u32 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute);
 bool32 HasEnoughHpToEatBerry(u32 battler, u32 hpFraction, u32 itemId);
+bool32 IsGen6ExpShareEnabled(void);
+void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);
 void RecordKnownMove(u32 battlerId, u32 move);
 s32 CountUsablePartyMons(u32 battlerId);
+bool32 IsAiVsAiBattle(void);
 
 // end battle_ai_util.h
 

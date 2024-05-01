@@ -206,6 +206,7 @@ void SetUpBattleVars(void);
 void InitBattleControllers(void);
 void TryReceiveLinkBattleData(void);
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data);
+bool32 IsValidForBattle(struct Pokemon *mon);
 
 // emitters
 void BtlController_EmitGetMonData(u8 bufferId, u8 requestId, u8 monToCheck);

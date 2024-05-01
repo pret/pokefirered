@@ -525,8 +525,9 @@
 #define STRINGID_HURTBYITEM                           523
 #define STRINGID_AIRBALLOONPOP                        524
 #define STRINGID_STICKYBARBTRANSFER                   525
+#define STRINGID_TEAMGAINEDEXP                        526
 
-#define BATTLESTRINGS_COUNT     526
+#define BATTLESTRINGS_COUNT     527
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

@@ -570,7 +570,7 @@ struct BattleStruct
     u8 faintedActionsState;
     u8 faintedActionsBattlerId;
     // balign 2
-    u16 expValue;
+    u32 expValue;
     u8 scriptPartyIdx; // for printing the nickname
     u8 sentInPokes;
     bool8 selectionScriptFinished[MAX_BATTLERS_COUNT];
@@ -685,6 +685,11 @@ struct BattleStruct
     bool8 friskedAbility; // If identifies two mons, show the ability pop-up only once.
     bool8 spriteIgnore0Hp;
     u8 moneyMultiplierItem:1;
+    u8 expGettersOrder[PARTY_SIZE]; // First battlers which were sent out, then via exp-share
+    u32 expShareExpValue;
+    u8 expOrderId:3;
+    u8 expSentInMons; // As bits for player party mons - not including exp share mons.
+    u8 teamGotExpMsgPrinted:1; // The 'Rest of your team got msg' has been printed.
 };
 
 extern struct BattleStruct *gBattleStruct;

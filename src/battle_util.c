@@ -9261,6 +9261,14 @@ static bool32 CanBeInfinitelyConfused(u32 battler)
     return TRUE;
 }
 
+bool32 IsGen6ExpShareEnabled(void)
+{
+    if (I_EXP_SHARE_FLAG <= TEMP_FLAGS_END)
+        return FALSE;
+
+    return FlagGet(I_EXP_SHARE_FLAG);
+}
+
 
 
 // battle_ai_util.c
@@ -9320,6 +9328,12 @@ s32 CountUsablePartyMons(u32 battlerId)
     }
 
     return ret;
+}
+
+bool32 IsAiVsAiBattle(void)
+{
+    // TODO: Flag?
+    return (B_FLAG_AI_VS_AI_BATTLE && FlagGet(B_FLAG_AI_VS_AI_BATTLE));
 }
 
 

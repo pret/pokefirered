@@ -205,9 +205,9 @@
 	.byte \battler
 	.endm
 
-	.macro checkteamslost ptr:req
+	.macro checkteamslost jumpInstr:req
 	.byte 0x24
-	.4byte \ptr
+	.4byte \jumpInstr
 	.endm
 
 	.macro movevaluescleanup
@@ -219,38 +219,38 @@
 	.byte \value
 	.endm
 
-	.macro decrementmultihit value:req
+	.macro decrementmultihit loopInstr:req
 	.byte 0x27
-	.4byte \value
+	.4byte \loopInstr
 	.endm
 
-	.macro goto ptr:req
+	.macro goto instr:req
 	.byte 0x28
-	.4byte \ptr
+	.4byte \instr
 	.endm
 
-	.macro jumpifbyte ifflag:req, param1:req, param2:req, param3:req
+	.macro jumpifbyte comparison:req, bytePtr:req, value:req, jumpInstr:req
 	.byte 0x29
-	.byte \ifflag
-	.4byte \param1
-	.byte \param2
-	.4byte \param3
+	.byte \comparison
+	.4byte \bytePtr
+	.byte \value
+	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifhalfword ifflag:req, param1:req, param2:req, param3:req
+	.macro jumpifhalfword comparison:req, halfwordPtr:req, value:req, jumpInstr:req
 	.byte 0x2a
-	.byte \ifflag
-	.4byte \param1
-	.2byte \param2
-	.4byte \param3
+	.byte \comparison
+	.4byte \halfwordPtr
+	.2byte \value
+	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifword ifflag:req, param1:req, param2:req, param3:req
+	.macro jumpifword comparison:req, wordPtr:req, value:req, jumpInstr:req
 	.byte 0x2b
-	.byte \ifflag
-	.4byte \param1
-	.4byte \param2
-	.4byte \param3
+	.byte \comparison
+	.4byte \wordPtr
+	.4byte \value
+	.4byte \jumpInstr
 	.endm
 
 	.macro jumpifarrayequal param0:req, param1:req, param2:req, param3:req

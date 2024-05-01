@@ -621,15 +621,15 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifstat,                              //0x20 // done
     Cmd_jumpifstatus3condition,                  //0x21 // done
     Cmd_jumpbasedontype,                         //0x22 // done
-    Cmd_getexp,                                  //0x23
-    Cmd_checkteamslost,                          //0x24
-    Cmd_movevaluescleanup,                       //0x25
-    Cmd_setmultihit,                             //0x26
-    Cmd_decrementmultihit,                       //0x27
-    Cmd_goto,                                    //0x28
-    Cmd_jumpifbyte,                              //0x29
-    Cmd_jumpifhalfword,                          //0x2A
-    Cmd_jumpifword,                              //0x2B
+    Cmd_getexp,                                  //0x23 // done
+    Cmd_checkteamslost,                          //0x24 // done
+    Cmd_movevaluescleanup,                       //0x25 // done
+    Cmd_setmultihit,                             //0x26 // done
+    Cmd_decrementmultihit,                       //0x27 // done
+    Cmd_goto,                                    //0x28 // done
+    Cmd_jumpifbyte,                              //0x29 // done
+    Cmd_jumpifhalfword,                          //0x2A // done
+    Cmd_jumpifword,                              //0x2B // done
     Cmd_jumpifarrayequal,                        //0x2C
     Cmd_jumpifarraynotequal,                     //0x2D
     Cmd_setbyte,                                 //0x2E
@@ -4833,93 +4833,62 @@ static void Cmd_getexp(void)
 // sets gBattleOutcome accordingly, if necessary.
 static void Cmd_checkteamslost(void)
 {
-    u16 HP_count = 0;
-    s32 i;
+    CMD_ARGS(const u8 *jumpInstr);
 
     if (gBattleControllerExecFlags)
         return;
 
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
-        {
-            HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
-        }
-    }
-    if (HP_count == 0)
+    if (NoAliveMonsForPlayer())
         gBattleOutcome |= B_OUTCOME_LOST;
-    HP_count = 0;
 
-    // Get total HP for the enemy's party to determine if the player has won
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG))
-        {
-            HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
-        }
-    }
-    if (HP_count == 0)
+    if (NoAliveMonsForOpponent())
         gBattleOutcome |= B_OUTCOME_WON;
 
     // For link battles that haven't ended, count number of empty battler spots
     // In link multi battles, jump to pointer if more than 1 spot empty
     // In non-multi battles, jump to pointer if 1 spot is missing on both sides
-    if (gBattleOutcome == 0 && (gBattleTypeFlags & BATTLE_TYPE_LINK))
+    if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK)))
     {
-        s32 emptyPlayerSpots;
-        s32 emptyOpponentSpots;
+        s32 i, emptyPlayerSpots, emptyOpponentSpots;
 
         for (emptyPlayerSpots = 0, i = 0; i < gBattlersCount; i += 2)
         {
-            u32 *ptr = &gHitMarker;
-            u32 hitMarkerUnk = 0x10000000;
-            
-            i++;
-            --i;
-            if ((hitMarkerUnk << i) & *ptr && !gSpecialStatuses[i].faintedHasReplacement)
+            if ((gHitMarker & HITMARKER_FAINTED2(i)) && (!gSpecialStatuses[i].faintedHasReplacement))
                 emptyPlayerSpots++;
         }
-        for (emptyOpponentSpots = 0, i = 1; i < gBattlersCount; i += 2)
-        {
-            u32 *ptr = &gHitMarker;
-            u32 hitMarkerUnk = 0x10000000;
-            
-            {
-                u8 match;
 
-                ++match;
-                --match;
-            }
-            if ((hitMarkerUnk << i) & *ptr && !gSpecialStatuses[i].faintedHasReplacement)
+        emptyOpponentSpots = 0;
+        for (i = 1; i < gBattlersCount; i += 2)
+        {
+            if ((gHitMarker & HITMARKER_FAINTED2(i)) && (!gSpecialStatuses[i].faintedHasReplacement))
                 emptyOpponentSpots++;
         }
 
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             if (emptyOpponentSpots + emptyPlayerSpots > 1)
-                gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = cmd->jumpInstr;
             else
-                gBattlescriptCurrInstr += 5;
+                gBattlescriptCurrInstr = cmd->nextInstr;
         }
         else
         {
             if (emptyOpponentSpots != 0 && emptyPlayerSpots != 0)
-                gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = cmd->jumpInstr;
             else
-                gBattlescriptCurrInstr += 5;
+                gBattlescriptCurrInstr = cmd->nextInstr;
         }
     }
     else
     {
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
 static void MoveValuesCleanUp(void)
 {
     gMoveResultFlags = 0;
-    gBattleScripting.dmgMultiplier = 1;
-    gCritMultiplier = 1;
+    gIsCriticalHit = FALSE;
     gBattleScripting.moveEffect = 0;
     gBattleCommunication[MISS_TYPE] = 0;
     gHitMarker &= ~HITMARKER_DESTINYBOND;
@@ -4928,139 +4897,153 @@ static void MoveValuesCleanUp(void)
 
 static void Cmd_movevaluescleanup(void)
 {
+    CMD_ARGS();
+
     MoveValuesCleanUp();
-    gBattlescriptCurrInstr += 1;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_setmultihit(void)
 {
-    gMultiHitCounter = gBattlescriptCurrInstr[1];
-    gBattlescriptCurrInstr += 2;
+    CMD_ARGS(u8 value);
+
+    gMultiHitCounter = cmd->value;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_decrementmultihit(void)
 {
+    CMD_ARGS(const u8 *loopInstr);
+
     if (--gMultiHitCounter == 0)
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     else
-        gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->loopInstr;
 }
 
 static void Cmd_goto(void)
 {
-    gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 1);
+    CMD_ARGS(const u8 *instr);
+
+    gBattlescriptCurrInstr = cmd->instr;
 }
 
 static void Cmd_jumpifbyte(void)
 {
-    u8 caseID = gBattlescriptCurrInstr[1];
-    const u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 2);
-    u8 value = gBattlescriptCurrInstr[6];
-    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 7);
+    CMD_ARGS(u8 comparison, const u8 *bytePtr, u8 value, const u8 *jumpInstr);
 
-    gBattlescriptCurrInstr += 11;
+    u8 comparison = cmd->comparison;
+    const u8 *bytePtr = cmd->bytePtr;
+    u8 value = cmd->value;
+    const u8 *jumpInstr = cmd->jumpInstr;
 
-    switch (caseID)
+    gBattlescriptCurrInstr = cmd->nextInstr;
+
+    switch (comparison)
     {
     case CMP_EQUAL:
-        if (*memByte == value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*bytePtr == value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_NOT_EQUAL:
-        if (*memByte != value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*bytePtr != value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_GREATER_THAN:
-        if (*memByte > value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*bytePtr > value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_LESS_THAN:
-        if (*memByte < value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*bytePtr < value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_COMMON_BITS:
-        if (*memByte & value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*bytePtr & value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_NO_COMMON_BITS:
-        if (!(*memByte & value))
-            gBattlescriptCurrInstr = jumpPtr;
+        if (!(*bytePtr & value))
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     }
 }
 
 static void Cmd_jumpifhalfword(void)
 {
-    u8 caseID = gBattlescriptCurrInstr[1];
-    const u16 *memHword = T2_READ_PTR(gBattlescriptCurrInstr + 2);
-    u16 value = T2_READ_16(gBattlescriptCurrInstr + 6);
-    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 8);
+    CMD_ARGS(u8 comparison, const u16 *halfwordPtr, u16 value, const u8 *jumpInstr);
 
-    gBattlescriptCurrInstr += 12;
+    u8 comparison = cmd->comparison;
+    const u16 *halfwordPtr = cmd->halfwordPtr;
+    u16 value = cmd->value;
+    const u8 *jumpInstr = cmd->jumpInstr;
 
-    switch (caseID)
+    gBattlescriptCurrInstr = cmd->nextInstr;
+
+    switch (comparison)
     {
     case CMP_EQUAL:
-        if (*memHword == value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*halfwordPtr == value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_NOT_EQUAL:
-        if (*memHword != value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*halfwordPtr != value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_GREATER_THAN:
-        if (*memHword > value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*halfwordPtr > value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_LESS_THAN:
-        if (*memHword < value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*halfwordPtr < value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_COMMON_BITS:
-        if (*memHword & value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*halfwordPtr & value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_NO_COMMON_BITS:
-        if (!(*memHword & value))
-            gBattlescriptCurrInstr = jumpPtr;
+        if (!(*halfwordPtr & value))
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     }
 }
 
 static void Cmd_jumpifword(void)
 {
-    u8 caseID = gBattlescriptCurrInstr[1];
-    const u32 *memWord = T2_READ_PTR(gBattlescriptCurrInstr + 2);
-    u32 value = T1_READ_32(gBattlescriptCurrInstr + 6);
-    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 10);
+    CMD_ARGS(u8 comparison, const u32 *wordPtr, u32 value, const u8 *jumpInstr);
 
-    gBattlescriptCurrInstr += 14;
+    u8 comparison = cmd->comparison;
+    const u32 *wordPtr = cmd->wordPtr;
+    u32 value = cmd->value;
+    const u8 *jumpInstr = cmd->jumpInstr;
 
-    switch (caseID)
+    gBattlescriptCurrInstr = cmd->nextInstr;
+
+    switch (comparison)
     {
     case CMP_EQUAL:
-        if (*memWord == value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*wordPtr == value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_NOT_EQUAL:
-        if (*memWord != value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*wordPtr != value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_GREATER_THAN:
-        if (*memWord > value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*wordPtr > value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_LESS_THAN:
-        if (*memWord < value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*wordPtr < value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_COMMON_BITS:
-        if (*memWord & value)
-            gBattlescriptCurrInstr = jumpPtr;
+        if (*wordPtr & value)
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     case CMP_NO_COMMON_BITS:
-        if (!(*memWord & value))
-            gBattlescriptCurrInstr = jumpPtr;
+        if (!(*wordPtr & value))
+            gBattlescriptCurrInstr = jumpInstr;
         break;
     }
 }

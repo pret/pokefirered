@@ -434,7 +434,6 @@ extern const u8 BattleScript_EffectTeeterDance[];
 extern const u8 BattleScript_EffectBurnHit[];
 extern const u8 BattleScript_EffectMudSport[];
 extern const u8 BattleScript_EffectPoisonFang[];
-extern const u8 BattleScript_EffectWeatherBall[];
 extern const u8 BattleScript_EffectOverheat[];
 extern const u8 BattleScript_EffectTickle[];
 extern const u8 BattleScript_EffectCosmicPower[];

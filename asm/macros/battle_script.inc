@@ -493,10 +493,10 @@
 	.4byte \failInstr
 	.endm
 
-	.macro switchhandleorder battler:req, param1:req
+	.macro switchhandleorder battler:req, state:req
 	.byte 0x51
 	.byte \battler
-	.byte \param1
+	.byte \state
 	.endm
 
 	.macro switchineffects battler:req
@@ -1201,8 +1201,9 @@
 	.4byte \param0
 	.endm
 
-	.macro setweatherballtype
+	.macro jumpifsubstituteblocks jumpInstr:req
 	.byte 0xe9
+	.4byte \jumpInstr
 	.endm
 
 	.macro tryrecycleitem param0:req
@@ -1456,6 +1457,18 @@
 	various \battler, VARIOUS_SET_TELEPORT_OUTCOME
 	.endm
 
+	.macro restorepp battler:req
+	various \battler, VARIOUS_RESTORE_PP
+	.endm
+
+	.macro clearstatus battler:req
+	various \battler, VARIOUS_CLEAR_STATUS
+	.endm
+
+	.macro setattackertostickywebuser
+	various BS_TARGET, VARIOUS_SET_ATTACKER_STICKY_WEB_USER
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 4 | \down << 7
@@ -1587,6 +1600,10 @@
 	1:
 	.endm
 
+	.macro dmgtomaxattackerhp
+	manipulatedamage DMG_FULL_ATTACKER_HP
+	.endm
+
 @ callnative macros
 	.macro itemrestorehp jumpInstr:req
 	callnative BS_ItemRestoreHP
@@ -1647,6 +1664,12 @@
 	callnative BS_DoStockpileStatChangesWearOff
 	.byte \battler
 	.4byte \statChangeInstr
+	.endm
+
+	.macro handleprimalreversion battler:req, case:req
+	callnative BS_HandlePrimalReversion
+	.byte \battler
+	.byte \case
 	.endm
 
 	

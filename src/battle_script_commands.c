@@ -568,7 +568,7 @@ static void Cmd_pickup(void);
 static void Cmd_docastformchangeanimation(void);
 static void Cmd_trycastformdatachange(void);
 static void Cmd_settypebasedhalvers(void);
-static void Cmd_setweatherballtype(void);
+static void Cmd_jumpifsubstituteblocks(void);
 static void Cmd_tryrecycleitem(void);
 static void Cmd_settypetoterrain(void);
 static void Cmd_pursuitdoubles(void);
@@ -669,7 +669,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifcantswitch,                        //0x4F // done
     Cmd_openpartyscreen,                         //0x50 // done
     Cmd_switchhandleorder,                       //0x51 // done
-    Cmd_switchineffects,                         //0x52
+    Cmd_switchineffects,                         //0x52 // done
     Cmd_trainerslidein,                          //0x53
     Cmd_playse,                                  //0x54
     Cmd_fanfare,                                 //0x55
@@ -820,7 +820,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_docastformchangeanimation,               //0xE6
     Cmd_trycastformdatachange,                   //0xE7
     Cmd_settypebasedhalvers,                     //0xE8
-    Cmd_setweatherballtype,                      //0xE9
+    Cmd_jumpifsubstituteblocks,                  //0xE9 // done
     Cmd_tryrecycleitem,                          //0xEA
     Cmd_settypetoterrain,                        //0xEB
     Cmd_pursuitdoubles,                          //0xEC
@@ -7295,87 +7295,225 @@ static void Cmd_switchhandleorder(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+static void SetDmgHazardsBattlescript(u8 battler, u8 multistringId)
+{
+    gBattleMons[battler].status2 &= ~STATUS2_DESTINY_BOND;
+    gHitMarker &= ~HITMARKER_DESTINYBOND;
+    gBattleScripting.battler = battler;
+    gBattleCommunication[MULTISTRING_CHOOSER] = multistringId;
+
+    BattleScriptPushCursor();
+    if (gBattlescriptCurrInstr[1] == BS_TARGET)
+        gBattlescriptCurrInstr = BattleScript_DmgHazardsOnTarget;
+    else if (gBattlescriptCurrInstr[1] == BS_ATTACKER)
+        gBattlescriptCurrInstr = BattleScript_DmgHazardsOnAttacker;
+    else
+        gBattlescriptCurrInstr = BattleScript_DmgHazardsOnFaintedBattler;
+}
+
+bool32 DoSwitchInAbilities(u32 battler)
+{
+    return (TryPrimalReversion(battler)
+         || AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, 0, 0, 0)
+         || (gBattleWeather & B_WEATHER_ANY && WEATHER_HAS_EFFECT && AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, battler, 0, 0, 0))
+         || (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY && AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, battler, 0, 0, 0))
+         || AbilityBattleEffects(ABILITYEFFECT_TRACE2, 0, 0, 0, 0));
+}
+
 static void Cmd_switchineffects(void)
 {
+    CMD_ARGS(u8 battler);
+
     s32 i;
+    u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    UpdateSentPokesToOpponentValue(gActiveBattler);
+    UpdateSentPokesToOpponentValue(battler); // TODO: compare with pokeemerald
 
-    gHitMarker &= ~HITMARKER_FAINTED(gActiveBattler);
-    gSpecialStatuses[gActiveBattler].faintedHasReplacement = FALSE;
+    gHitMarker &= ~HITMARKER_FAINTED(battler);
+    gSpecialStatuses[battler].faintedHasReplacement = FALSE;
 
-    if (!(gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES_DAMAGED)
-        && (gSideStatuses[GetBattlerSide(gActiveBattler)] & SIDE_STATUS_SPIKES)
-        && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FLYING)
-        && gBattleMons[gActiveBattler].ability != ABILITY_LEVITATE)
+    if (!BattlerHasAi(battler))
+        gBattleStruct->appearedInBattle |= gBitTable[gBattlerPartyIndexes[battler]];
+
+    // Neutralizing Gas announces itself before hazards
+    if (gBattleMons[battler].ability == ABILITY_NEUTRALIZING_GAS && gSpecialStatuses[battler].announceNeutralizingGas == 0)
     {
-        u8 spikesDmg;
-
-        gSideStatuses[GetBattlerSide(gActiveBattler)] |= SIDE_STATUS_SPIKES_DAMAGED;
-
-        // Present in pokeemerald but not here
-        // gBattleMons[gActiveBattler].status2 &= ~STATUS2_DESTINY_BOND;
-        // gHitMarker &= ~HITMARKER_DESTINYBOND;
-
-        spikesDmg = (5 - gSideTimers[GetBattlerSide(gActiveBattler)].spikesAmount) * 2;
-        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / (spikesDmg);
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_NEUTRALIZING_GAS;
+        gSpecialStatuses[battler].announceNeutralizingGas = TRUE;
+        gBattlerAbility = battler;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_SwitchInAbilityMsgRet;
+    }
+    // Healing Wish activates before hazards.
+    // Starting from Gen8 - it heals only pokemon which can be healed. In gens 5,6,7 the effect activates anyways.
+    else if (((gBattleStruct->storedHealingWish & gBitTable[battler]) || (gBattleStruct->storedLunarDance & gBitTable[battler]))
+        && (gBattleMons[battler].hp != gBattleMons[battler].maxHP || gBattleMons[battler].status1 != 0 || B_HEALING_WISH_SWITCH < GEN_8))
+    {
+        if (gBattleStruct->storedHealingWish & gBitTable[battler])
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_HealingWishActivates;
+            gBattleStruct->storedHealingWish  &= ~(gBitTable[battler]);
+        }
+        else // Lunar Dance
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_LunarDanceActivates;
+            gBattleStruct->storedLunarDance  &= ~(gBitTable[battler]);
+        }
+    }
+    else if (!(gDisableStructs[battler].spikesDone)
+        && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SPIKES)
+        && GetBattlerAbility(battler) != ABILITY_MAGIC_GUARD
+        && IsBattlerAffectedByHazards(battler, FALSE)
+        && IsBattlerGrounded(battler))
+    {
+        u8 spikesDmg = (5 - gSideTimers[GetBattlerSide(battler)].spikesAmount) * 2;
+        gBattleMoveDamage = gBattleMons[battler].maxHP / (spikesDmg);
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
-        gBattleScripting.battler = gActiveBattler;
-        BattleScriptPushCursor();
+        gDisableStructs[battler].spikesDone = TRUE;
+        SetDmgHazardsBattlescript(battler, B_MSG_PKMNHURTBYSPIKES);
+    }
+    else if (!(gDisableStructs[battler].stealthRockDone)
+        && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_STEALTH_ROCK)
+        && IsBattlerAffectedByHazards(battler, FALSE)
+        && GetBattlerAbility(battler) != ABILITY_MAGIC_GUARD)
+    {
+        gDisableStructs[battler].stealthRockDone = TRUE;
+        gBattleMoveDamage = GetStealthHazardDamage(gMovesInfo[MOVE_STEALTH_ROCK].type, battler);
 
-        if (gBattlescriptCurrInstr[1] == BS_TARGET)
-            gBattlescriptCurrInstr = BattleScript_SpikesOnTarget;
-        else if (gBattlescriptCurrInstr[1] == BS_ATTACKER)
-            gBattlescriptCurrInstr = BattleScript_SpikesOnAttacker;
-        else
-            gBattlescriptCurrInstr = BattleScript_SpikesOnFaintedBattler;
+        if (gBattleMoveDamage != 0)
+            SetDmgHazardsBattlescript(battler, B_MSG_STEALTHROCKDMG);
+    }
+    else if (!(gDisableStructs[battler].toxicSpikesDone)
+        && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_TOXIC_SPIKES)
+        && IsBattlerGrounded(battler))
+    {
+        gDisableStructs[battler].toxicSpikesDone = TRUE;
+        if (IS_BATTLER_OF_TYPE(battler, TYPE_POISON)) // Absorb the toxic spikes.
+        {
+            gSideStatuses[GetBattlerSide(battler)] &= ~SIDE_STATUS_TOXIC_SPIKES;
+            gSideTimers[GetBattlerSide(battler)].toxicSpikesAmount = 0;
+            gBattleScripting.battler = battler;
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_ToxicSpikesAbsorbed;
+        }
+        else if (IsBattlerAffectedByHazards(battler, TRUE))
+        {
+            if (!(gBattleMons[battler].status1 & STATUS1_ANY)
+                && !IS_BATTLER_OF_TYPE(battler, TYPE_STEEL)
+                && GetBattlerAbility(battler) != ABILITY_IMMUNITY
+                && !IsAbilityOnSide(battler, ABILITY_PASTEL_VEIL)
+                && !(gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD)
+                && !(gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN))
+            {
+                if (gSideTimers[GetBattlerSide(battler)].toxicSpikesAmount >= 2)
+                    gBattleMons[battler].status1 |= STATUS1_TOXIC_POISON;
+                else
+                    gBattleMons[battler].status1 |= STATUS1_POISON;
+
+                gActiveBattler = battler;
+                BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[battler].status1), &gBattleMons[battler].status1);
+                MarkBattlerForControllerExec(battler);
+                gBattleScripting.battler = battler;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_ToxicSpikesPoisoned;
+            }
+        }
+    }
+    else if (!(gDisableStructs[battler].stickyWebDone)
+        && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_STICKY_WEB)
+        && IsBattlerAffectedByHazards(battler, FALSE)
+        && IsBattlerGrounded(battler))
+    {
+        gDisableStructs[battler].stickyWebDone = TRUE;
+        gBattleScripting.battler = battler;
+        SET_STATCHANGER(STAT_SPEED, 1, TRUE);
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_StickyWebOnSwitchIn;
+    }
+    else if (!(gDisableStructs[battler].steelSurgeDone)
+        && (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_STEELSURGE)
+        && IsBattlerAffectedByHazards(battler, FALSE)
+        && GetBattlerAbility(battler) != ABILITY_MAGIC_GUARD)
+    {
+        gDisableStructs[battler].steelSurgeDone = TRUE;
+        gBattleMoveDamage = GetStealthHazardDamage(gMovesInfo[MOVE_G_MAX_STEELSURGE].type, battler);
+
+        if (gBattleMoveDamage != 0)
+            SetDmgHazardsBattlescript(battler, B_MSG_SHARPSTEELDMG);
+    }
+    else if (gBattleMons[battler].hp != gBattleMons[battler].maxHP && gBattleStruct->zmove.healReplacement)
+    {
+        gBattleStruct->zmove.healReplacement = FALSE;
+        gBattleMoveDamage = -1 * (gBattleMons[battler].maxHP);
+        gBattleScripting.battler = battler;
+        BattleScriptPushCursor();
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_HP_TRAP;
+        gBattlescriptCurrInstr = BattleScript_HealReplacementZMove;
+        return;
     }
     else
     {
-        // There is a hack here in pokeemerald to ensure the truant counter will be 0 when the battler's next turn starts.
-        // The truant counter is not updated in the case where a mon switches in after a lost judgement in the battle arena.
-        if (gBattleMons[gActiveBattler].ability == ABILITY_TRUANT)
-        //if (gBattleMons[gActiveBattler].ability == ABILITY_TRUANT && !gDisableStructs[gActiveBattler].truantSwitchInHack) // In pokeemerald.
-            gDisableStructs[gActiveBattler].truantCounter = 1;
+        u32 battlerAbility = GetBattlerAbility(battler);
+        // There is a hack here to ensure the truant counter will be 0 when the battler's next turn starts.
+        // The truant counter is not updated in the case where a mon switches in after a lost judgment in the battle arena.
+        if (battlerAbility == ABILITY_TRUANT
+            && gCurrentActionFuncId != B_ACTION_USE_MOVE
+            && !gDisableStructs[battler].truantSwitchInHack)
+            gDisableStructs[battler].truantCounter = 1;
 
-        //gDisableStructs[gActiveBattler].truantSwitchInHack = 0; // In pokeemerald, otherwise unused.
+        gDisableStructs[battler].truantSwitchInHack = 0;
 
-        if (!AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gActiveBattler, 0, 0, 0)
-            && !ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, gActiveBattler, FALSE))
+        // Don't activate switch-in abilities if the opposing field is empty.
+        // This could happen when a mon uses explosion and causes everyone to faint.
+        if ((battlerAbility == ABILITY_INTIMIDATE || battlerAbility == ABILITY_SUPERSWEET_SYRUP || battlerAbility == ABILITY_DOWNLOAD)
+         && !IsBattlerAlive(BATTLE_OPPOSITE(battler))
+         && !IsBattlerAlive(BATTLE_PARTNER(BATTLE_OPPOSITE(battler))))
         {
-            gSideStatuses[GetBattlerSide(gActiveBattler)] &= ~SIDE_STATUS_SPIKES_DAMAGED;
-
-            for (i = 0; i < gBattlersCount; i++)
-            {
-                if (gBattlerByTurnOrder[i] == gActiveBattler)
-                    gActionsByTurnOrder[i] = B_ACTION_CANCEL_PARTNER;
-            }
-
-            for (i = 0; i < gBattlersCount; i++)
-            {
-                u16 *hpOnSwitchout = &gBattleStruct->hpOnSwitchout[GetBattlerSide(i)];
-                *hpOnSwitchout = gBattleMons[i].hp;
-            }
-
-            if (gBattlescriptCurrInstr[1] == BS_FAINTED_LINK_MULTIPLE_1)
-            {
-                u32 hitmarkerFaintBits = gHitMarker >> 28;
-
-                gBattlerFainted++;
-                while (TRUE)
-                {
-                    if (hitmarkerFaintBits & gBitTable[gBattlerFainted] && !(gAbsentBattlerFlags & gBitTable[gBattlerFainted]))
-                        break;
-                    if (gBattlerFainted >= gBattlersCount)
-                        break;
-                    gBattlerFainted++;
-                }
-            }
-            gBattlescriptCurrInstr += 2;
+            if (ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, battler, FALSE))
+                return;
         }
+        else
+        {
+            if (DoSwitchInAbilities(battler) || ItemBattleEffects(ITEMEFFECT_ON_SWITCH_IN, battler, FALSE))
+                return;
+            else if (AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, 0, 0, 0))
+                return;
+        }
+
+        gDisableStructs[battler].stickyWebDone = FALSE;
+        gDisableStructs[battler].spikesDone = FALSE;
+        gDisableStructs[battler].toxicSpikesDone = FALSE;
+        gDisableStructs[battler].stealthRockDone = FALSE;
+        gDisableStructs[battler].steelSurgeDone = FALSE;
+
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (gBattlerByTurnOrder[i] == battler)
+                gActionsByTurnOrder[i] = B_ACTION_CANCEL_PARTNER;
+
+            gBattleStruct->hpOnSwitchout[GetBattlerSide(i)] = gBattleMons[i].hp;
+        }
+
+        if (cmd->battler == BS_FAINTED_LINK_MULTIPLE_1)
+        {
+            u32 hitmarkerFaintBits = gHitMarker >> 28;
+
+            gBattlerFainted++;
+            while (1)
+            {
+                if (hitmarkerFaintBits & gBitTable[gBattlerFainted] && !(gAbsentBattlerFlags & gBitTable[gBattlerFainted]))
+                    break;
+                if (gBattlerFainted >= gBattlersCount)
+                    break;
+                gBattlerFainted++;
+            }
+        }
+        gBattleStruct->forcedSwitch &= ~(gBitTable[battler]);
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
@@ -8434,6 +8572,7 @@ static void Cmd_various(void)
     u32 monToCheck, status;
     u16 species;
     u8 abilityNum;
+    u8 data[10];
     struct Pokemon *mon;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
@@ -8999,6 +9138,40 @@ static void Cmd_various(void)
         {
             gBattleOutcome = B_OUTCOME_MON_TELEPORTED;
         }
+        break;
+    }
+    case VARIOUS_RESTORE_PP:
+    {
+        VARIOUS_ARGS();
+        for (i = 0; i < 4; i++)
+        {
+            gBattleMons[battler].pp[i] = CalculatePPWithBonus(gBattleMons[battler].moves[i], gBattleMons[battler].ppBonuses, i);
+            data[i] = gBattleMons[battler].pp[i];
+        }
+        data[i] = gBattleMons[battler].ppBonuses;
+        gActiveBattler = battler;
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_PP_DATA_BATTLE, 0, 5, data);
+        MarkBattlerForControllerExec(battler);
+        break;
+    }
+    case VARIOUS_CLEAR_STATUS:
+    {
+        VARIOUS_ARGS();
+        gBattleMons[battler].status1 = 0;
+        gActiveBattler = battler;
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[battler].status1), &gBattleMons[battler].status1);
+        MarkBattlerForControllerExec(battler);
+        break;
+    }
+    case VARIOUS_SET_ATTACKER_STICKY_WEB_USER:
+    {
+        VARIOUS_ARGS();
+        // For Mirror Armor: "If the Pokémon with this Ability is affected by Sticky Web, the effect is reflected back to the Pokémon which set it up.
+        //  If Pokémon which set up Sticky Web is not on the field, no Pokémon have their Speed lowered."
+        gBattlerAttacker = gBattlerTarget;  // Initialize 'fail' condition
+        SET_STATCHANGER(STAT_SPEED, 1, TRUE);
+        if (gSideTimers[GetBattlerSide(battler)].stickyWebBattlerId != 0xFF)
+            gBattlerAttacker = gSideTimers[GetBattlerSide(battler)].stickyWebBattlerId;
         break;
     }
     }
@@ -12219,25 +12392,14 @@ static void Cmd_settypebasedhalvers(void)
         gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
 }
 
-static void Cmd_setweatherballtype(void)
+static void Cmd_jumpifsubstituteblocks(void)
 {
-    if (WEATHER_HAS_EFFECT)
-    {
-        if (gBattleWeather & B_WEATHER_ANY)
-            gBattleScripting.dmgMultiplier = 2;
-        if (gBattleWeather & B_WEATHER_RAIN)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_WATER | F_DYNAMIC_TYPE_2;
-        else if (gBattleWeather & B_WEATHER_SANDSTORM)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_ROCK | F_DYNAMIC_TYPE_2;
-        else if (gBattleWeather & B_WEATHER_SUN)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_FIRE | F_DYNAMIC_TYPE_2;
-        else if (gBattleWeather & B_WEATHER_HAIL)
-            *(&gBattleStruct->dynamicMoveType) = TYPE_ICE | F_DYNAMIC_TYPE_2;
-        else
-            *(&gBattleStruct->dynamicMoveType) = TYPE_NORMAL | F_DYNAMIC_TYPE_2;
-    }
+    CMD_ARGS(const u8 *jumpInstr);
 
-    gBattlescriptCurrInstr++;
+    if (DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove))
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_tryrecycleitem(void)
@@ -13296,5 +13458,53 @@ void BS_DoStockpileStatChangesWearOff(void)
     {
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
+}
+
+static void HandleScriptMegaPrimalBurst(u32 caseId, u32 battler, u32 type)
+{
+    struct Pokemon *party = GetBattlerParty(battler);
+    struct Pokemon *mon = &party[gBattlerPartyIndexes[battler]];
+    u32 position = GetBattlerPosition(battler);
+    u32 side = GetBattlerSide(battler);
+
+    // Change species.
+    if (caseId == 0)
+    {
+        if (type == HANDLE_TYPE_MEGA_EVOLUTION)
+        {
+            if (!TryBattleFormChange(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM))
+                TryBattleFormChange(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE);
+        }
+        else if (type == HANDLE_TYPE_PRIMAL_REVERSION)
+            TryBattleFormChange(battler, FORM_CHANGE_BATTLE_PRIMAL_REVERSION);
+        else
+            TryBattleFormChange(battler, FORM_CHANGE_BATTLE_ULTRA_BURST);
+
+        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[battler].species);
+        
+        gActiveBattler = battler;
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[battler]], sizeof(gBattleMons[battler].species), &gBattleMons[battler].species);
+        MarkBattlerForControllerExec(battler);
+    }
+    // Update healthbox and elevation and play cry.
+    else
+    {
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
+        if (side == B_SIDE_OPPONENT)
+            SetBattlerShadowSpriteCallback(battler, gBattleMons[battler].species);
+        if (type == HANDLE_TYPE_MEGA_EVOLUTION)
+            gBattleStruct->mega.alreadyEvolved[position] = TRUE;
+        if (type == HANDLE_TYPE_ULTRA_BURST)
+            gBattleStruct->burst.alreadyBursted[position] = TRUE;
+    }
+}
+
+void BS_HandlePrimalReversion(void)
+{
+    NATIVE_ARGS(u8 battler, u8 caseId);
+
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    HandleScriptMegaPrimalBurst(cmd->caseId, battler, HANDLE_TYPE_PRIMAL_REVERSION);
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

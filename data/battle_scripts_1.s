@@ -2265,10 +2265,6 @@ BattleScript_EffectPoisonFang::
 	setmoveeffect MOVE_EFFECT_TOXIC
 	goto BattleScript_EffectHit
 
-BattleScript_EffectWeatherBall::
-	setweatherballtype
-	goto BattleScript_EffectHit
-
 BattleScript_EffectOverheat::
 	setmoveeffect MOVE_EFFECT_SP_ATK_TWO_DOWN | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
 	goto BattleScript_EffectHit
@@ -5909,3 +5905,181 @@ BattleScript_EmergencyExitWildNoPopUp::
 	setoutcomeonteleport BS_TARGET
 	finishaction
 	return
+
+BattleScript_PrimalReversion::
+	call BattleScript_PrimalReversionRet
+	end2
+
+BattleScript_PrimalReversionRestoreAttacker::
+	call BattleScript_PrimalReversionRet
+	copybyte gBattlerAttacker, sSAVED_BATTLER
+	end2
+
+BattleScript_PrimalReversionRet::
+	flushtextbox
+	setbyte gIsCriticalHit, 0
+	handleprimalreversion BS_ATTACKER, 0
+	handleprimalreversion BS_ATTACKER, 1
+	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE @ TODO: Animation B_ANIM_PRIMAL_REVERSION
+	waitanimation
+	handleprimalreversion BS_ATTACKER, 2
+	printstring STRINGID_PKMNREVERTEDTOPRIMAL
+	waitmessage B_WAIT_TIME_LONG
+	switchinabilities BS_ATTACKER
+	return
+
+BattleScript_DmgHazardsOnTarget::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	call BattleScript_PrintHurtByDmgHazards
+	tryfaintmon BS_TARGET
+	tryfaintmon_spikes BS_TARGET, BattleScript_DmgHazardsOnTargetFainted
+	return
+
+BattleScript_DmgHazardsOnTargetFainted::
+	setbyte sGIVEEXP_STATE, 0
+	getexp BS_TARGET
+	moveendall
+	goto BattleScript_HandleFaintedMon
+
+BattleScript_DmgHazardsOnAttacker::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	call BattleScript_PrintHurtByDmgHazards
+	tryfaintmon BS_ATTACKER
+	tryfaintmon_spikes BS_ATTACKER, BattleScript_DmgHazardsOnAttackerFainted
+	return
+
+BattleScript_DmgHazardsOnAttackerFainted::
+	setbyte sGIVEEXP_STATE, 0
+	getexp BS_ATTACKER
+	moveendall
+	goto BattleScript_HandleFaintedMon
+
+BattleScript_HealingWishActivates::
+	setbyte cMULTISTRING_CHOOSER, 0
+	goto BattleScript_EffectHealingWishRestore
+BattleScript_LunarDanceActivates::
+	setbyte cMULTISTRING_CHOOSER, 1
+	restorepp BS_ATTACKER
+BattleScript_EffectHealingWishRestore:
+	printfromtable gHealingWishStringIds
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_WISH_HEAL
+	waitanimation
+	dmgtomaxattackerhp
+	manipulatedamage DMG_CHANGE_SIGN
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	clearstatus BS_ATTACKER
+	waitstate
+	updatestatusicon BS_ATTACKER
+	waitstate
+	printstring STRINGID_HEALINGWISHHEALED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_DmgHazardsOnFaintedBattler::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_FAINTED
+	datahpupdate BS_FAINTED
+	call BattleScript_PrintHurtByDmgHazards
+	tryfaintmon BS_FAINTED
+	tryfaintmon_spikes BS_FAINTED, BattleScript_DmgHazardsOnFaintedBattlerFainted
+	return
+
+BattleScript_DmgHazardsOnFaintedBattlerFainted::
+	setbyte sGIVEEXP_STATE, 0
+	getexp BS_FAINTED
+	moveendall
+	goto BattleScript_HandleFaintedMon
+
+BattleScript_ToxicSpikesAbsorbed::
+	printstring STRINGID_TOXICSPIKESABSORBED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_ToxicSpikesPoisoned::
+	printstring STRINGID_TOXICSPIKESPOISONED
+	waitmessage B_WAIT_TIME_LONG
+	statusanimation BS_SCRIPTING
+	updatestatusicon BS_SCRIPTING
+	waitstate
+	return
+
+BattleScript_StickyWebOnSwitchIn::
+	savetarget
+	copybyte gBattlerTarget, sBATTLER
+	setbyte sSTICKY_WEB_STAT_DROP, 1
+	printstring STRINGID_STICKYWEBSWITCHIN
+	waitmessage B_WAIT_TIME_LONG
+	jumpifability BS_TARGET, ABILITY_MIRROR_ARMOR, BattleScript_MirrorArmorReflectStickyWeb
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_StickyWebOnSwitchInEnd
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_StickyWebOnSwitchInStatAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_FELL_EMPTY, BattleScript_StickyWebOnSwitchInEnd
+	pause B_WAIT_TIME_SHORT
+	goto BattleScript_StickyWebOnSwitchInPrintStatMsg
+BattleScript_StickyWebOnSwitchInStatAnim:
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_StickyWebOnSwitchInPrintStatMsg:
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_StickyWebOnSwitchInEnd:
+	restoretarget
+	return
+
+BattleScript_HealReplacementZMove::
+	playanimation BS_SCRIPTING B_ANIM_WISH_HEAL 0x0
+	printfromtable gZEffectStringIds
+	waitmessage B_WAIT_TIME_LONG
+	healthbarupdate BS_SCRIPTING
+	datahpupdate BS_SCRIPTING
+	return
+
+BattleScript_PrintHurtByDmgHazards::
+	printfromtable gDmgHazardsStringIds
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+@ gBattlerTarget is battler with Mirror Armor
+BattleScript_MirrorArmorReflectStickyWeb:
+	call BattleScript_AbilityPopUp
+	setattackertostickywebuser
+	jumpifbyteequal gBattlerAttacker, gBattlerTarget, BattleScript_StickyWebOnSwitchInEnd   @ Sticky web user not on field -> no stat loss
+	goto BattleScript_MirrorArmorReflectStatLoss
+
+BattleScript_MirrorArmorReflect::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	jumpifsubstituteblocks BattleScript_AbilityNoSpecificStatLoss
+BattleScript_MirrorArmorReflectStatLoss:
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_MIRROR_ARMOR | STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_MirrorArmorReflectEnd
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_MirrorArmorReflectAnim
+	goto BattleScript_MirrorArmorReflectWontFall
+BattleScript_MirrorArmorReflectAnim:
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_MirrorArmorReflectPrintString:
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_MirrorArmorReflectEnd:
+	return
+
+BattleScript_MirrorArmorReflectWontFall:
+	copybyte gBattlerTarget, gBattlerAttacker   @ STRINGID_STATSWONTDECREASE uses target
+	goto BattleScript_MirrorArmorReflectPrintString
+
+BattleScript_EffectStealthRock::
+	attackcanceler
+	attackstring
+	ppreduce
+	setstealthrock BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_POINTEDSTONESFLOAT
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+

@@ -534,8 +534,21 @@
 #define STRINGID_REDCARDACTIVATE                      532
 #define STRINGID_MOVEBLOCKEDBYDYNAMAX                 533
 #define STRINGID_ITEMCANNOTBEREMOVED                  534
+#define STRINGID_ZMOVERESETSSTATS                     535
+#define STRINGID_ZMOVEZBOOSTCRIT                      536
+#define STRINGID_ZMOVERESTOREHP                       537
+#define STRINGID_ZMOVESTATUP                          538
+#define STRINGID_ZMOVEHPTRAP                          539
+#define STRINGID_ZMOVEALLSTATSUP                      540
+#define STRINGID_PKMNREVERTEDTOPRIMAL                 541
+#define STRINGID_HEALINGWISHHEALED                    542
+#define STRINGID_TOXICSPIKESABSORBED                  543
+#define STRINGID_TOXICSPIKESPOISONED                  544
+#define STRINGID_STICKYWEBSWITCHIN                    545
+#define STRINGID_HEALINGWISHCAMETRUE                  546
+#define STRINGID_LUNARDANCECAMETRUE                   547
 
-#define BATTLESTRINGS_COUNT     535
+#define BATTLESTRINGS_COUNT     548
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -806,6 +819,15 @@
 #define B_MSG_WRAPPED_SNAP_TRAP    8
 #define B_MSG_WRAPPED_THUNDER_CAGE 9
 #define NUM_TRAPPING_MOVES         10
+
+// z effects (gZEffectStringIds)
+#define B_MSG_Z_RESET_STATS   0
+#define B_MSG_Z_ALL_STATS_UP  1
+#define B_MSG_Z_BOOST_CRITS   2
+#define B_MSG_Z_FOLLOW_ME     3
+#define B_MSG_Z_RECOVER_HP    4
+#define B_MSG_Z_STAT_UP       5
+#define B_MSG_Z_HP_TRAP       6
 
 // gDmgHazardsStringIds
 #define B_MSG_PKMNHURTBYSPIKES   0

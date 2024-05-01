@@ -1124,7 +1124,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_STEALTH_ROCK] =
     {
-        .battleScript = BattleScript_EffectHit,
+        .battleScript = BattleScript_EffectStealthRock,
         .encourageEncore = TRUE,
     },
 

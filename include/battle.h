@@ -95,6 +95,11 @@ enum {
 #define PARENTAL_BOND_2ND_HIT 1
 #define PARENTAL_BOND_OFF     0
 
+// Constants for if HandleScriptMegaPrimalBurst should handle Mega Evolution, Primal Reversion, or Ultra Burst.
+#define HANDLE_TYPE_MEGA_EVOLUTION 0
+#define HANDLE_TYPE_PRIMAL_REVERSION 1
+#define HANDLE_TYPE_ULTRA_BURST 2
+
 struct TrainerMonNoItemDefaultMoves
 {
     u16 iv;
@@ -698,8 +703,11 @@ struct BattleStruct
     u8 lastMoveTarget[MAX_BATTLERS_COUNT]; // The last target on which each mon used a move, for the sake of Instruct
     u8 attackerBeforeBounce:2;
     bool8 hitSwitchTargetFailed:1;
+    u8 storedHealingWish:4; // Each battler as a bit.
+    u8 storedLunarDance:4; // Each battler as a bit.
+    u8 forcedSwitch:4; // For each battler
     // pokeemerald unknown use
-    u8 field_93; // related to choosing pokemon?
+    u8 field_93; // related to choosing pokemon? probably related to recording
 };
 
 extern struct BattleStruct *gBattleStruct;

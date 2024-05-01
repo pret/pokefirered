@@ -6154,6 +6154,27 @@ static bool32 IsBattlerModernFatefulEncounter(u8 battlerId)
     return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MODERN_FATEFUL_ENCOUNTER, NULL);
 }
 
+bool32 TryPrimalReversion(u32 battler)
+{
+    if (GetBattlerHoldEffect(battler, FALSE) == HOLD_EFFECT_PRIMAL_ORB
+     && GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_PRIMAL_REVERSION) != SPECIES_NONE)
+    {
+        if (gBattlerAttacker == battler)
+        {
+            BattleScriptExecute(BattleScript_PrimalReversion);
+        }
+        else
+        {
+            // edge case for scenarios like a switch-in after activated eject button
+            gBattleScripting.savedBattler = gBattlerAttacker;
+            gBattlerAttacker = battler;
+            BattleScriptExecute(BattleScript_PrimalReversionRestoreAttacker);
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
 bool32 IsNeutralizingGasOnField(void)
 {
     u32 i;
@@ -9425,6 +9446,76 @@ void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1)
     }
 }
 
+bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes)
+{
+    bool32 ret = TRUE;
+    u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
+    if (toxicSpikes && holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS && !IS_BATTLER_OF_TYPE(battler, TYPE_POISON))
+    {
+        ret = FALSE;
+        RecordItemEffectBattle(battler, holdEffect);
+    }
+    else if (holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS)
+    {
+        ret = FALSE;
+        RecordItemEffectBattle(battler, holdEffect);
+    }
+    return ret;
+}
+
+s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp)
+{
+    s32 dmg = 0;
+    uq4_12_t modifier = UQ_4_12(1.0);
+
+    modifier = uq4_12_multiply(modifier, GetTypeModifier(hazardType, type1));
+    if (type2 != type1)
+        modifier = uq4_12_multiply(modifier, GetTypeModifier(hazardType, type2));
+
+    switch (modifier)
+    {
+    case UQ_4_12(0.0):
+        dmg = 0;
+        break;
+    case UQ_4_12(0.25):
+        dmg = maxHp / 32;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(0.5):
+        dmg = maxHp / 16;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(1.0):
+        dmg = maxHp / 8;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(2.0):
+        dmg = maxHp / 4;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(4.0):
+        dmg = maxHp / 2;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    }
+
+    return dmg;
+}
+
+s32 GetStealthHazardDamage(u8 hazardType, u32 battler)
+{
+    u8 type1 = gBattleMons[battler].type1;
+    u8 type2 = gBattleMons[battler].type2;
+    u32 maxHp = gBattleMons[battler].maxHP;
+
+    return GetStealthHazardDamageByTypesAndHP(hazardType, type1, type2, maxHp);
+}
+
 
 
 // battle_ai_util.c
@@ -9499,6 +9590,27 @@ void RecordLastUsedMoveBy(u32 battlerId, u32 move)
     if (++(*index) >= AI_MOVE_HISTORY_COUNT)
         *index = 0;
     BATTLE_HISTORY->moveHistory[battlerId][*index] = move;
+}
+
+bool32 BattlerHasAi(u32 battlerId)
+{
+    switch (GetBattlerPosition(battlerId))
+    {
+    case B_POSITION_PLAYER_LEFT:
+        if (IsAiVsAiBattle())
+            return TRUE;
+    default:
+        return FALSE;
+    case B_POSITION_OPPONENT_LEFT:
+        return TRUE;
+    case B_POSITION_PLAYER_RIGHT:
+        if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || IsAiVsAiBattle())
+            return TRUE;
+        else
+            return FALSE;
+    case B_POSITION_OPPONENT_RIGHT:
+        return TRUE;
+    }
 }
 
 

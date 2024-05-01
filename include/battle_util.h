@@ -228,6 +228,10 @@ bool32 IsGen6ExpShareEnabled(void);
 void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon);
 void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast);
 bool32 CanBattlerEscape(u32 battler); // no ability check
+bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes);
+bool32 TryPrimalReversion(u32 battler);
+s32 GetStealthHazardDamage(u8 hazardType, u32 battler);
+s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);
@@ -235,6 +239,7 @@ void RecordKnownMove(u32 battlerId, u32 move);
 s32 CountUsablePartyMons(u32 battlerId);
 bool32 IsAiVsAiBattle(void);
 void RecordLastUsedMoveBy(u32 battlerId, u32 move);
+bool32 BattlerHasAi(u32 battlerId);
 
 // end battle_ai_util.h
 

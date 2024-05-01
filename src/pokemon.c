@@ -5607,7 +5607,7 @@ const u32 *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 
     }
 }
 
-bool32 IsHMMove2(u16 move)
+bool32 IsMoveHM(u16 move)
 {
     int i = 0;
     while (sHMMoves[i] != HM_MOVES_END)
@@ -5616,6 +5616,12 @@ bool32 IsHMMove2(u16 move)
             return TRUE;
     }
     return FALSE;
+    // u8 i;
+
+    // for (i = 0; i < NUM_HIDDEN_MACHINES - 1; ++i) // no dive
+    //     if (gTMHMMoves[i + NUM_TECHNICAL_MACHINES] == move)
+    //         return TRUE;
+    // return FALSE;
 }
 
 bool8 IsMonSpriteNotFlipped(u16 species)

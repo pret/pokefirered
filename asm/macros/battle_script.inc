@@ -541,9 +541,9 @@
 	.byte \isFirstMove
 	.endm
 
-	.macro yesnoboxlearnmove param0:req
+	.macro yesnoboxlearnmove forgotMoveInstr:req
 	.byte 0x5a
-	.4byte \param0
+	.4byte \forgotMoveInstr
 	.endm
 
 	.macro yesnoboxstoplearningmove param0:req

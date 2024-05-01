@@ -7629,12 +7629,13 @@ static void Cmd_handlelearnnewmove(void)
 
 static void Cmd_yesnoboxlearnmove(void)
 {
+    CMD_ARGS(const u8 *forgotMovePtr);
     gActiveBattler = 0;
 
     switch (gBattleScripting.learnMoveState)
     {
     case 0:
-        HandleBattleWindow(23, 8, 29, 13, 0);
+        HandleBattleWindow(YESNOBOX_X_Y, 0);
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleScripting.learnMoveState++;
         gBattleCommunication[CURSOR_POSITION] = 0;
@@ -7660,19 +7661,19 @@ static void Cmd_yesnoboxlearnmove(void)
             PlaySE(SE_SELECT);
             if (gBattleCommunication[1] == 0)
             {
-                HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
+                HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 gBattleScripting.learnMoveState++;
             }
             else
             {
-                gBattleScripting.learnMoveState = 4;
+                gBattleScripting.learnMoveState = 5;
             }
         }
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            gBattleScripting.learnMoveState = 4;
+            gBattleScripting.learnMoveState = 5;
         }
         break;
     case 2:
@@ -7686,23 +7687,28 @@ static void Cmd_yesnoboxlearnmove(void)
     case 3:
         if (!gPaletteFade.active && gMain.callback2 == BattleMainCB2)
         {
+            gBattleScripting.learnMoveState++;
+        }
+        break;
+    case 4:
+        if (!gPaletteFade.active && gMain.callback2 == BattleMainCB2)
+        {
             u8 movePosition = GetMoveSlotToReplace();
             if (movePosition == MAX_MON_MOVES)
             {
-                gBattleScripting.learnMoveState = 4;
+                gBattleScripting.learnMoveState = 5;
             }
             else
             {
                 u16 moveId = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MOVE1 + movePosition);
-                
-                if (IsHMMove2(moveId))
+                if (IsMoveHM(moveId))
                 {
-                    PrepareStringBattle(STRINGID_HMMOVESCANTBEFORGOTTEN, gActiveBattler);
-                    gBattleScripting.learnMoveState = 5;
+                    PrepareStringBattle(STRINGID_HMMOVESCANTBEFORGOTTEN, B_POSITION_PLAYER_LEFT);
+                    gBattleScripting.learnMoveState = 6;
                 }
                 else
                 {
-                    gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = cmd->forgotMovePtr;
 
                     PREPARE_MOVE_BUFFER(gBattleTextBuff2, moveId)
 
@@ -7725,11 +7731,11 @@ static void Cmd_yesnoboxlearnmove(void)
             }
         }
         break;
-    case 4:
-        HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
-        gBattlescriptCurrInstr += 5;
-        break;
     case 5:
+        HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        break;
+    case 6:
         if (gBattleControllerExecFlags == 0)
         {
             gBattleScripting.learnMoveState = 2;

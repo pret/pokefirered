@@ -5114,16 +5114,6 @@ u16 ItemIdToBattleMoveId(u16 item)
     return (ItemId_GetPocket(item) == POCKET_TM_CASE) ? gItems[item].secondaryId : MOVE_NONE;
 }
 
-bool8 IsMoveHm(u16 move)
-{
-    u8 i;
-
-    for (i = 0; i < NUM_HIDDEN_MACHINES - 1; ++i) // no dive
-        if (gTMHMMoves[i + NUM_TECHNICAL_MACHINES] == move)
-            return TRUE;
-    return FALSE;
-}
-
 bool8 MonKnowsMove(struct Pokemon *mon, u16 move)
 {
     u8 i;

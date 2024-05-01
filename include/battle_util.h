@@ -225,12 +225,14 @@ u8 TryHandleSeed(u32 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 exe
 bool32 HasEnoughHpToEatBerry(u32 battler, u32 hpFraction, u32 itemId);
 bool32 IsGen6ExpShareEnabled(void);
 void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon);
+void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);
 void RecordKnownMove(u32 battlerId, u32 move);
 s32 CountUsablePartyMons(u32 battlerId);
 bool32 IsAiVsAiBattle(void);
+void RecordLastUsedMoveBy(u32 battlerId, u32 move);
 
 // end battle_ai_util.h
 

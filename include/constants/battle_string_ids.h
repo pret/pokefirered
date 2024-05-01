@@ -526,8 +526,16 @@
 #define STRINGID_AIRBALLOONPOP                        524
 #define STRINGID_STICKYBARBTRANSFER                   525
 #define STRINGID_TEAMGAINEDEXP                        526
+#define STRINGID_PKMNFROSTBITEHEALED                  527
+#define STRINGID_STOCKPILEDEFFECTWOREOFF              528
+#define STRINGID_FELLSTRAIGHTDOWN                     529
+#define STRINGID_TARGETWOKEUP                         530
+#define STRINGID_PKMNBURNHEALED                       531
+#define STRINGID_REDCARDACTIVATE                      532
+#define STRINGID_MOVEBLOCKEDBYDYNAMAX                 533
+#define STRINGID_ITEMCANNOTBEREMOVED                  534
 
-#define BATTLESTRINGS_COUNT     527
+#define BATTLESTRINGS_COUNT     535
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

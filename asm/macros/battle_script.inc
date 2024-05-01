@@ -411,17 +411,17 @@
 	.byte 0x47
 	.endm
 
-	.macro playstatchangeanimation battler:req, param1:req, param2:req
+	.macro playstatchangeanimation battler:req, stats:req, flags:req
 	.byte 0x48
 	.byte \battler
-	.byte \param1
-	.byte \param2
+	.byte \stats
+	.byte \flags
 	.endm
 
-	.macro moveend param0:req, param1:req
+	.macro moveend endMode:req, endState:req
 	.byte 0x49
-	.byte \param0
-	.byte \param1
+	.byte \endMode
+	.byte \endState
 	.endm
 
 	@ Help macros for 5 uses of moveend command
@@ -1447,6 +1447,14 @@
 	various \battler, VARIOUS_MAKE_INVISIBLE
 	.endm
 
+	.macro activateitemeffects battler:req
+	various \battler, VARIOUS_MOVEEND_ITEM_EFFECTS
+	.endm
+
+	.macro setoutcomeonteleport battler:req
+	various \battler, VARIOUS_SET_TELEPORT_OUTCOME
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 4 | \down << 7
@@ -1632,6 +1640,12 @@
 	.macro itemstatchangeeffects battler:req
 	callnative BS_RunStatChangeItems
 	.byte \battler
+	.endm
+
+	.macro dostockpilestatchangeswearoff, battler:req, statChangeInstr:req
+	callnative BS_DoStockpileStatChangesWearOff
+	.byte \battler
+	.4byte \statChangeInstr
 	.endm
 
 	

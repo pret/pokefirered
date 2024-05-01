@@ -303,6 +303,13 @@
 #define ANIM_ATK_PARTNER 2
 #define ANIM_DEF_PARTNER 3
 
+// Below are used by AnimTask_ShakeMon2 and AnimTask_SetGrayscaleOrOriginalPal
+#define ANIM_PLAYER_LEFT      (MAX_BATTLERS_COUNT + 0)
+#define ANIM_OPPONENT_LEFT    (MAX_BATTLERS_COUNT + 1)
+#define ANIM_PLAYER_RIGHT     (MAX_BATTLERS_COUNT + 2)
+#define ANIM_OPPONENT_RIGHT   (MAX_BATTLERS_COUNT + 3)
+#define ANIM_ATTACKER_FORCE   (MAX_BATTLERS_COUNT + 4)
+
 // stereo panning constants [0-255]
 //
 //          0
@@ -376,6 +383,7 @@
 #define B_ANIM_ROCK_THROW               26
 #define B_ANIM_SAFARI_REACTION          27
 #define B_ANIM_RESTORE_BG               28 // for Terrain Endings
+#define B_ANIM_SLIDE_OFFSCREEN          29 // for Emergency Exit
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

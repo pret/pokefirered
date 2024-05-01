@@ -418,6 +418,8 @@ struct UsedMoves
     u16 unknown[MAX_BATTLERS_COUNT];
 };
 
+#define AI_MOVE_HISTORY_COUNT 3
+
 struct BattleHistory
 {
     /*0x00*/ u16 usedMoves[2][8]; // 0xFFFF means move not used (confuse self hit, etc)
@@ -425,6 +427,8 @@ struct BattleHistory
     /*0x22*/ u8 itemEffects[MAX_BATTLERS_COUNT];
     /*0x24*/ u16 trainerItems[MAX_BATTLERS_COUNT];
     /*0x2C*/ u8 itemsNo;
+    u16 moveHistory[MAX_BATTLERS_COUNT][AI_MOVE_HISTORY_COUNT]; // 3 last used moves for each battler
+    u8 moveHistoryIndex[MAX_BATTLERS_COUNT];
 };
 
 struct BattleScriptsStack
@@ -691,6 +695,9 @@ struct BattleStruct
     u8 expSentInMons; // As bits for player party mons - not including exp share mons.
     u8 teamGotExpMsgPrinted:1; // The 'Rest of your team got msg' has been printed.
     u8 roostTypes[MAX_BATTLERS_COUNT][2];
+    u8 lastMoveTarget[MAX_BATTLERS_COUNT]; // The last target on which each mon used a move, for the sake of Instruct
+    u8 attackerBeforeBounce:2;
+    bool8 hitSwitchTargetFailed:1;
 };
 
 extern struct BattleStruct *gBattleStruct;
@@ -717,9 +724,11 @@ extern struct BattleStruct *gBattleStruct;
 #define IS_TYPE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)  // TODO: remove
 
 #define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
-#define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
+#define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0) || (gBattleStruct->enduredDamage & gBitTable[gBattlerTarget]))
+#define BATTLER_TURN_DAMAGED(battlerId) ((gSpecialStatuses[battlerId].physicalDmg != 0 || gSpecialStatuses[battlerId].specialDmg != 0) || (gBattleStruct->enduredDamage & gBitTable[battler]))
 
 #define IS_BATTLER_OF_TYPE(battlerId, type)((GetBattlerType(battlerId, 0) == type || GetBattlerType(battlerId, 1) == type || (GetBattlerType(battlerId, 2) != TYPE_MYSTERY && GetBattlerType(battlerId, 2) == type)))
+
 #define SET_BATTLER_TYPE(battlerId, type)           \
 {                                                   \
     gBattleMons[battlerId].type1 = type;            \

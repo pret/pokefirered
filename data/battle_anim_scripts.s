@@ -1011,6 +1011,7 @@ gBattleAnims_General::
 	.4byte General_SafariRockThrow          @ B_ANIM_ROCK_THROW
 	.4byte General_SafariReaction           @ B_ANIM_SAFARI_REACTION
 	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
+	.4byte General_SlideOffScreen           @ B_ANIM_SLIDE_OFFSCREEN
 
 	.align 2
 gBattleAnims_Special::
@@ -12276,6 +12277,13 @@ Special_MonToSubstitute:
 General_RestoreBg:
 	restorebg
 	waitbgfadein
+	end
+
+General_SlideOffScreen:
+	createvisualtask AnimTask_SlideOffScreen, 5, ANIM_TARGET, 3
+	waitforvisualfinish
+	createvisualtask AnimTask_SetInvisible, 1, ANIM_TARGET, TRUE
+	waitforvisualfinish
 	end
 
 

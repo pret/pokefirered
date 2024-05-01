@@ -9269,6 +9269,46 @@ bool32 IsGen6ExpShareEnabled(void)
     return FlagGet(I_EXP_SHARE_FLAG);
 }
 
+// Sort an array of battlers by speed
+// Useful for effects like pickpocket, eject button, red card, dancer
+void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast)
+{
+    int i, j, currSpeed, currBattler;
+    u16 speeds[MAX_BATTLERS_COUNT] = {0};
+
+    for (i = 0; i < gBattlersCount; i++)
+        speeds[i] = GetBattlerTotalSpeedStat(battlers[i]);
+
+    for (i = 1; i < gBattlersCount; i++)
+    {
+        currBattler = battlers[i];
+        currSpeed = speeds[i];
+        j = i - 1;
+
+        if (slowToFast)
+        {
+            while (j >= 0 && speeds[j] > currSpeed)
+            {
+                battlers[j + 1] = battlers[j];
+                speeds[j + 1] = speeds[j];
+                j = j - 1;
+            }
+        }
+        else
+        {
+            while (j >= 0 && speeds[j] < currSpeed)
+            {
+                battlers[j + 1] = battlers[j];
+                speeds[j + 1] = speeds[j];
+                j = j - 1;
+            }
+        }
+
+        battlers[j + 1] = currBattler;
+        speeds[j + 1] = currSpeed;
+    }
+}
+
 
 
 // battle_ai_util.c
@@ -9334,6 +9374,15 @@ bool32 IsAiVsAiBattle(void)
 {
     // TODO: Flag?
     return (B_FLAG_AI_VS_AI_BATTLE && FlagGet(B_FLAG_AI_VS_AI_BATTLE));
+}
+
+void RecordLastUsedMoveBy(u32 battlerId, u32 move)
+{
+    u8 *index = &BATTLE_HISTORY->moveHistoryIndex[battlerId];
+
+    if (++(*index) >= AI_MOVE_HISTORY_COUNT)
+        *index = 0;
+    BATTLE_HISTORY->moveHistory[battlerId][*index] = move;
 }
 
 

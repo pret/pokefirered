@@ -686,9 +686,9 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_yesnoboxstoplearningmove,                //0x5B // done
     Cmd_hitanimation,                            //0x5C // done
     Cmd_getmoneyreward,                          //0x5D // done
-    Cmd_updatebattlermoves,                      //0x5E
-    Cmd_swapattackerwithtarget,                  //0x5F
-    Cmd_incrementgamestat,                       //0x60
+    Cmd_updatebattlermoves,                      //0x5E // done
+    Cmd_swapattackerwithtarget,                  //0x5F // done
+    Cmd_incrementgamestat,                       //0x60 // done
     Cmd_drawpartystatussummary,                  //0x61
     Cmd_hidepartystatussummary,                  //0x62
     Cmd_jumptocalledmove,                        //0x63
@@ -7831,6 +7831,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     }
     else
     {
+        // TODO: Update Trainer struct
         // const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
         // if (party == NULL)
         //     return 20;
@@ -7892,26 +7893,28 @@ static void Cmd_getmoneyreward(void)
 // Command is never used
 static void Cmd_updatebattlermoves(void)
 {
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    CMD_ARGS(u8 battler);
+
+    u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
 
     switch (gBattleCommunication[0])
     {
     case 0:
         BtlController_EmitGetMonData(BUFFER_A, REQUEST_ALL_BATTLE, 0);
-        MarkBattlerForControllerExec(gActiveBattler);
+        MarkBattlerForControllerExec(battler);
         gBattleCommunication[0]++;
         break;
     case 1:
          if (gBattleControllerExecFlags == 0)
          {
             s32 i;
-            struct BattlePokemon *bufferPoke = (struct BattlePokemon *) &gBattleBufferB[gActiveBattler][4];
+            struct BattlePokemon *bufferPoke = (struct BattlePokemon *) &gBattleResources->bufferB[battler][4];
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                gBattleMons[gActiveBattler].moves[i] = bufferPoke->moves[i];
-                gBattleMons[gActiveBattler].pp[i] = bufferPoke->pp[i];
+                gBattleMons[battler].moves[i] = bufferPoke->moves[i];
+                gBattleMons[battler].pp[i] = bufferPoke->pp[i];
             }
-            gBattlescriptCurrInstr += 2;
+            gBattlescriptCurrInstr = cmd->nextInstr;
          }
          break;
     }
@@ -7919,24 +7922,28 @@ static void Cmd_updatebattlermoves(void)
 
 static void Cmd_swapattackerwithtarget(void)
 {
-    gActiveBattler = gBattlerAttacker;
-    gBattlerAttacker = gBattlerTarget;
-    gBattlerTarget = gActiveBattler;
+    CMD_ARGS();
+
+    u8 temp;
+    // SWAP(gBattlerAttacker, gBattlerTarget, temp);
+    SWAP(gBattlerAttacker, gBattlerTarget, gActiveBattler);
 
     if (gHitMarker & HITMARKER_SWAP_ATTACKER_TARGET)
         gHitMarker &= ~HITMARKER_SWAP_ATTACKER_TARGET;
     else
         gHitMarker |= HITMARKER_SWAP_ATTACKER_TARGET;
 
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_incrementgamestat(void)
 {
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-        IncrementGameStat(gBattlescriptCurrInstr[1]);
+    CMD_ARGS(u8 stat);
 
-    gBattlescriptCurrInstr += 2;
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+        IncrementGameStat(cmd->stat); // TODO: compare IncrementGameStat to pokeemerald
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_drawpartystatussummary(void)

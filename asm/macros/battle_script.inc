@@ -569,9 +569,9 @@
 	.byte 0x5f
 	.endm
 
-	.macro incrementgamestat param0:req
+	.macro incrementgamestat stat:req
 	.byte 0x60
-	.byte \param0
+	.byte \stat
 	.endm
 
 	.macro drawpartystatussummary battler:req

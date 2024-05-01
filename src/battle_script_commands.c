@@ -399,9 +399,9 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifstatus,                            //0x1C // done
     Cmd_jumpifstatus2,                           //0x1D // done
     Cmd_jumpifability,                           //0x1E // done
-    Cmd_jumpifsideaffecting,                     //0x1F
-    Cmd_jumpifstat,                              //0x20
-    Cmd_jumpifstatus3condition,                  //0x21
+    Cmd_jumpifsideaffecting,                     //0x1F // done
+    Cmd_jumpifstat,                              //0x20 // done
+    Cmd_jumpifstatus3condition,                  //0x21 // done
     Cmd_jumpbasedontype,                         //0x22 // done
     Cmd_getexp,                                  //0x23
     Cmd_checkteamslost,                          //0x24
@@ -4200,87 +4200,52 @@ static void Cmd_jumpifability(void)
 
 static void Cmd_jumpifsideaffecting(void)
 {
-    CMD_ARGS(u8 battler, u32 flags, const u8 *ptr);
-    u8 side = cmd->battler;
-    u32 flags = cmd->flags;
-    const u8 *jumpPtr = cmd->ptr;
+    CMD_ARGS(u8 battler, u32 flags, const u8 *jumpInstr);
 
-    if (gBattlescriptCurrInstr[1] == BS_ATTACKER)
-        side = GET_BATTLER_SIDE(gBattlerAttacker);
+    u32 side = GetBattlerSide(GetBattlerForBattleScript(cmd->battler));
+
+    if (gSideStatuses[side] & cmd->flags)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
     else
-        side = GET_BATTLER_SIDE(gBattlerTarget);
-
-    flags = T2_READ_16(gBattlescriptCurrInstr + 2);
-    jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 4);
-
-    if (gSideStatuses[side] & flags)
-        gBattlescriptCurrInstr = jumpPtr;
-    else
-        gBattlescriptCurrInstr += 8;
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_jumpifstat(void)
 {
-    u8 ret = 0;
-    u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    u8 value = gBattleMons[battlerId].statStages[gBattlescriptCurrInstr[3]];
+    CMD_ARGS(u8 battler, u8 comparison, u8 stat, u8 value, const u8 *jumpInstr);
 
-    switch (gBattlescriptCurrInstr[2])
-    {
-    case CMP_EQUAL:
-        if (value == gBattlescriptCurrInstr[4])
-            ret++;
-        break;
-    case CMP_NOT_EQUAL:
-        if (value != gBattlescriptCurrInstr[4])
-            ret++;
-        break;
-    case CMP_GREATER_THAN:
-        if (value > gBattlescriptCurrInstr[4])
-            ret++;
-        break;
-    case CMP_LESS_THAN:
-        if (value < gBattlescriptCurrInstr[4])
-            ret++;
-        break;
-    case CMP_COMMON_BITS:
-        if (value & gBattlescriptCurrInstr[4])
-            ret++;
-        break;
-    case CMP_NO_COMMON_BITS:
-        if (!(value & gBattlescriptCurrInstr[4]))
-            ret++;
-        break;
-    }
+    bool32 ret = 0;
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    u8 stat = cmd->stat;
+    u8 value = cmd->value;
+    u8 comparison = cmd->comparison;
+
+    ret = CompareStat(battler, stat, value, comparison);
 
     if (ret)
-        gBattlescriptCurrInstr = T2_READ_PTR(gBattlescriptCurrInstr + 5);
+        gBattlescriptCurrInstr = cmd->jumpInstr;
     else
-        gBattlescriptCurrInstr += 9;
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_jumpifstatus3condition(void)
 {
-    u32 status;
-    const u8 *jumpPtr;
+    CMD_ARGS(u8 battler, u32 flags, bool8 jumpIfTrue, const u8 *jumpInstr);
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    status = T2_READ_32(gBattlescriptCurrInstr + 2);
-    jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 7);
-
-    if (gBattlescriptCurrInstr[6])
+    u32 battler = GetBattlerForBattleScript(cmd->battler);
+    if (cmd->jumpIfTrue)
     {
-        if ((gStatuses3[gActiveBattler] & status) != 0)
-            gBattlescriptCurrInstr += 11;
+        if ((gStatuses3[battler] & cmd->flags) != 0)
+            gBattlescriptCurrInstr = cmd->nextInstr;
         else
-            gBattlescriptCurrInstr = jumpPtr;
+            gBattlescriptCurrInstr = cmd->jumpInstr;
     }
     else
     {
-        if ((gStatuses3[gActiveBattler] & status) != 0)
-            gBattlescriptCurrInstr = jumpPtr;
+        if ((gStatuses3[battler] & cmd->flags) != 0)
+            gBattlescriptCurrInstr = cmd->jumpInstr;
         else
-            gBattlescriptCurrInstr += 11;
+            gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
@@ -7640,6 +7605,7 @@ static void Cmd_various(void)
             if (!gBattleTextBuff1)
                 PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[battler].species);
             */
+            gActiveBattler = battler;
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_SPECIES_BATTLE, gBitTable[gBattlerPartyIndexes[battler]], sizeof(gBattleMons[battler].species), &gBattleMons[battler].species);
             MarkBattlerForControllerExec(battler);
         }

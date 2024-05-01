@@ -160,28 +160,28 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifsideaffecting battler:req, sidestatus:req, ptr:req
+	.macro jumpifsideaffecting battler:req, flags:req, jumpInstr:req
 	.byte 0x1f
 	.byte \battler
-	.4byte \sidestatus
-	.4byte \ptr
+	.4byte \flags
+	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifstat battler:req, ifflag:req, stat:req, value:req, ptr
+	.macro jumpifstat battler:req, comparison:req, stat:req, value:req, jumpInstr:req
 	.byte 0x20
 	.byte \battler
-	.byte \ifflag
+	.byte \comparison
 	.byte \stat
 	.byte \value
-	.4byte \ptr
+	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifstatus3condition battler:req, status3:req, param2:req, ptr:req
+	.macro jumpifstatus3condition battler:req, flags:req, jumpIfTrue:req, jumpInstr:req
 	.byte 0x21
 	.byte \battler
-	.4byte \status3
-	.byte \param2
-	.4byte \ptr
+	.4byte \flags
+	.byte \jumpIfTrue
+	.4byte \jumpInstr
 	.endm
 
 	.macro jumpbasedontype battler:req, type:req, jumpIfType:req, jumpInstr:req

@@ -519,10 +519,11 @@ void RecordAbilityBattle(u32 battlerId, u32 abilityId)
     // AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability = abilityId;
 }
 
-void RecordItemEffectBattle(u8 battlerId, u8 itemEffect)
+void RecordItemEffectBattle(u32 battlerId, u32 itemEffect)
 {
-    if (GetBattlerSide(battlerId) == 0)
-        BATTLE_HISTORY->itemEffects[GET_BATTLER_SIDE(battlerId)] = itemEffect;
+    BATTLE_HISTORY->itemEffects[battlerId] = itemEffect;
+    // TODO: AI
+    // AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].heldEffect = itemEffect;
 }
 
 static void Cmd_if_random_less_than(void)

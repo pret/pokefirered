@@ -456,7 +456,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_fanfare,                                 //0x55
     Cmd_playfaintcry,                            //0x56
     Cmd_endlinkbattle,                           //0x57
-    Cmd_returntoball,                            //0x58
+    Cmd_returntoball,                            //0x58 // done
     Cmd_handlelearnnewmove,                      //0x59
     Cmd_yesnoboxlearnmove,                       //0x5A
     Cmd_yesnoboxstoplearningmove,                //0x5B
@@ -496,7 +496,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setrain,                                 //0x7D
     Cmd_setreflect,                              //0x7E
     Cmd_setseeded,                               //0x7F
-    Cmd_manipulatedamage,                        //0x80
+    Cmd_manipulatedamage,                        //0x80 // done
     Cmd_trysetrest,                              //0x81
     Cmd_jumpifnotfirstturn,                      //0x82
     Cmd_nop,                                     //0x83
@@ -6463,11 +6463,17 @@ static void Cmd_endlinkbattle(void)
 
 static void Cmd_returntoball(void)
 {
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    BtlController_EmitReturnMonToBall(BUFFER_A, TRUE);
-    MarkBattlerForControllerExec(gActiveBattler);
+    CMD_ARGS(u8 battler, bool8 changingForm);
 
-    gBattlescriptCurrInstr += 2;
+    u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    BtlController_EmitReturnMonToBall(BUFFER_A, TRUE);
+    MarkBattlerForControllerExec(battler);
+
+    // Don't always execute a form change here otherwise we can stomp gigantamax
+    if(!cmd->changingForm)
+        TryBattleFormChange(battler, FORM_CHANGE_BATTLE_SWITCH);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_handlelearnnewmove(void)
@@ -7954,6 +7960,17 @@ static void Cmd_various(void)
         }
         return;
     }
+    case VARIOUS_MAKE_INVISIBLE:
+    {
+        VARIOUS_ARGS();
+        if (gBattleControllerExecFlags)
+            break;
+        
+        gActiveBattler = battler;
+        BtlController_EmitSpriteInvisibility(BUFFER_A, TRUE);
+        MarkBattlerForControllerExec(battler);
+        break;
+    }
     }
 
     gBattlescriptCurrInstr += 3;
@@ -8248,7 +8265,7 @@ static void Cmd_manipulatedamage(void)
     case DMG_CURR_ATTACKER_HP:
         // TODO: Dynamax
         // gBattleMoveDamage = GetNonDynamaxHP(gBattlerAttacker);
-        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP;
+        gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp;
         break;
     case DMG_BIG_ROOT:
         gBattleMoveDamage = GetDrainedBigRootHp(gBattlerAttacker, gBattleMoveDamage);

@@ -529,9 +529,10 @@
 	.byte 0x57
 	.endm
 
-	.macro returntoball battler:req
+	.macro returntoball battler:req, changingForm:req
 	.byte 0x58
 	.byte \battler
+	.byte \changingForm
 	.endm
 
 	.macro handlelearnnewmove param0:req, param1:req, param2:req
@@ -1444,6 +1445,10 @@
 	.4byte \jumpInstr
 	.endm
 
+	.macro makeinvisible battler:req
+	various \battler, VARIOUS_MAKE_INVISIBLE
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 4 | \down << 7
@@ -1567,6 +1572,12 @@
 
 	.macro dmg_1_8_targethp
 	manipulatedamage DMG_1_8_TARGET_HP
+	.endm
+
+	.macro jumpifsafeguard jumpInstr:req
+	jumpifability BS_ATTACKER, ABILITY_INFILTRATOR, 1f
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, \jumpInstr
+	1:
 	.endm
 
 @ callnative macros

@@ -143,7 +143,7 @@ u8 CastformDataTypeChange(u8 battler);
 u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg);
 void BattleScriptExecute(const u8 *BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8 *BS_ptr);
-u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn);
+u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn);
 void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
@@ -222,6 +222,7 @@ bool32 TryRoomService(u32 battler);
 void BufferStatChange(u32 battler, u8 statId, u8 stringId);
 s32 GetDrainedBigRootHp(u32 battler, s32 hp);
 u8 TryHandleSeed(u32 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute);
+bool32 HasEnoughHpToEatBerry(u32 battler, u32 hpFraction, u32 itemId);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);

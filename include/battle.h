@@ -422,7 +422,7 @@ struct BattleHistory
 {
     /*0x00*/ u16 usedMoves[2][8]; // 0xFFFF means move not used (confuse self hit, etc)
     u16 abilities[MAX_BATTLERS_COUNT];
-    /*0x22*/ u8 itemEffects[MAX_BATTLERS_COUNT / 2];
+    /*0x22*/ u8 itemEffects[MAX_BATTLERS_COUNT];
     /*0x24*/ u16 trainerItems[MAX_BATTLERS_COUNT];
     /*0x2C*/ u8 itemsNo;
 };
@@ -684,6 +684,7 @@ struct BattleStruct
     u8 friskedBattler; // Frisk needs to identify 2 battlers in double battles.
     bool8 friskedAbility; // If identifies two mons, show the ability pop-up only once.
     bool8 spriteIgnore0Hp;
+    u8 moneyMultiplierItem:1;
 };
 
 extern struct BattleStruct *gBattleStruct;

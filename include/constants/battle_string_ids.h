@@ -513,8 +513,20 @@
 #define STRINGID_NORELIEFROMHEAVYRAIN                 511
 #define STRINGID_MYSTERIOUSAIRCURRENTBLOWSON          512
 #define STRINGID_AURAFLAREDTOLIFE                     513
+#define STRINGID_ATKGOTOVERINFATUATION                514
+#define STRINGID_TORMENTEDNOMORE                      515
+#define STRINGID_BUFFERENDS                           516
+#define STRINGID_HEALBLOCKEDNOMORE                    517
+#define STRINGID_MICLEBERRYACTIVATES                  518
+#define STRINGID_MIRRORHERBCOPIED                     519
+#define STRINGID_PKMNSITEMHEALEDFROSTBITE             520
+#define STRINGID_AIRBALLOONFLOAT                      521
+#define STRINGID_EJECTBUTTONACTIVATE                  522
+#define STRINGID_HURTBYITEM                           523
+#define STRINGID_AIRBALLOONPOP                        524
+#define STRINGID_STICKYBARBTRANSFER                   525
 
-#define BATTLESTRINGS_COUNT     514
+#define BATTLESTRINGS_COUNT     526
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -741,6 +753,14 @@
 #define B_MSG_SWITCHIN_CURIOUS_MEDICINE 14
 #define B_MSG_SWITCHIN_PASTEL_VEIL      15
 #define B_MSG_SWITCHIN_NEUTRALIZING_GAS 16
+
+// gMentalHerbCureStringIds
+#define B_MSG_MENTALHERBCURE_INFATUATION       0
+#define B_MSG_MENTALHERBCURE_TAUNT             1
+#define B_MSG_MENTALHERBCURE_ENCORE            2
+#define B_MSG_MENTALHERBCURE_TORMENT           3
+#define B_MSG_MENTALHERBCURE_HEALBLOCK         4
+#define B_MSG_MENTALHERBCURE_DISABLE           5
 
 // gTerrainStringIds
 #define B_MSG_TERRAIN_SET_MISTY     0

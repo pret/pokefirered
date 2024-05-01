@@ -668,7 +668,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_switchinanim,                            //0x4E // done
     Cmd_jumpifcantswitch,                        //0x4F // done
     Cmd_openpartyscreen,                         //0x50 // done
-    Cmd_switchhandleorder,                       //0x51
+    Cmd_switchhandleorder,                       //0x51 // done
     Cmd_switchineffects,                         //0x52
     Cmd_trainerslidein,                          //0x53
     Cmd_playse,                                  //0x54
@@ -6950,7 +6950,6 @@ static void Cmd_openpartyscreen(void)
     u8 hitmarkerFaintBits = 0;
     u32 i, battler = 0;
     const u8 *failInstr = cmd->failInstr;
-    DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_openpartyscreen");
 
     if (cmd->battler == BS_FAINTED_LINK_MULTIPLE_1)
     {
@@ -7232,13 +7231,15 @@ static void Cmd_openpartyscreen(void)
 
 static void Cmd_switchhandleorder(void)
 {
-    s32 i;
+    CMD_ARGS(u8 battler, u8 state);
+
+    u32 battler, i;
     if (gBattleControllerExecFlags)
         return;
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
 
-    switch (gBattlescriptCurrInstr[2])
+    switch (cmd->state)
     {
     case 0:
         for (i = 0; i < gBattlersCount; i++)
@@ -7246,38 +7247,52 @@ static void Cmd_switchhandleorder(void)
             if (gBattleBufferB[i][0] == CONTROLLER_CHOSENMONRETURNVALUE)
             {
                 *(gBattleStruct->monToSwitchIntoId + i) = gBattleBufferB[i][1];
+                if (!(gBattleStruct->field_93 & gBitTable[i]))
+                {
+                    gBattleStruct->field_93 |= gBitTable[i];
+                }
             }
         }
         break;
     case 1:
         if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-            UpdatePartyOwnerOnSwitch_NonMulti(gActiveBattler);
+            SwitchPartyOrder(battler);
         break;
     case 2:
-        gBattleCommunication[0] = gBattleBufferB[gActiveBattler][1];
-        *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = gBattleBufferB[gActiveBattler][1];
-
-        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        if (!(gBattleStruct->field_93 & gBitTable[battler]))
         {
-            *(gActiveBattler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= 0xF;
-            *(gActiveBattler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[gActiveBattler][2] & 0xF0);
-            *(gActiveBattler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 1) = gBattleBufferB[gActiveBattler][3];
+            gBattleStruct->field_93 |= gBitTable[battler];
+        }
+        // fall through
+    case 3:
+        gBattleCommunication[0] = gBattleBufferB[battler][1];
+        *(gBattleStruct->monToSwitchIntoId + battler) = gBattleBufferB[battler][1];
 
-            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= (0xF0);
-            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[gActiveBattler][2] & 0xF0) >> 4;
-            *((gActiveBattler ^ BIT_FLANK) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 2) = gBattleBufferB[gActiveBattler][3];
+        if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        {
+            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= 0xF;
+            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[battler][2] & 0xF0);
+            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 1) = gBattleBufferB[battler][3];
+
+            *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= (0xF0);
+            *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[battler][2] & 0xF0) >> 4;
+            *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 2) = gBattleBufferB[battler][3];
+        }
+        else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        {
+            SwitchPartyOrderInGameMulti(battler, *(gBattleStruct->monToSwitchIntoId + battler));
         }
         else
         {
-            UpdatePartyOwnerOnSwitch_NonMulti(gActiveBattler);
+            SwitchPartyOrder(battler);
         }
-        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
-        PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, gActiveBattler, gBattleBufferB[gActiveBattler][1])
 
+        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
+        PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, battler, gBattleBufferB[battler][1])
         break;
     }
 
-    gBattlescriptCurrInstr += 3;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_switchineffects(void)
@@ -9838,7 +9853,7 @@ static void Cmd_forcerandomswitch(void)
             }
             *(gBattleStruct->monToSwitchIntoId + gBattlerTarget) = i;
             if (!IsMultiBattle())
-                UpdatePartyOwnerOnSwitch_NonMulti(gBattlerTarget);
+                SwitchPartyOrder(gBattlerTarget);
             SwitchPartyOrderLinkMulti(gBattlerTarget, i, 0);
             SwitchPartyOrderLinkMulti(gBattlerTarget ^ BIT_FLANK, i, 1);
         }

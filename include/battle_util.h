@@ -148,6 +148,7 @@ void ClearFuryCutterDestinyBondGrudge(u8 battlerId);
 void HandleAction_RunBattleScript(void);
 u8 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
+void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1);
 // new
 bool32 IsNeutralizingGasOnField(void);
 bool32 IsMyceliumMightOnField(void);

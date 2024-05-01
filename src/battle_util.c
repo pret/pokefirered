@@ -9410,6 +9410,21 @@ bool32 CanBattlerEscape(u32 battler) // no ability check
         return TRUE;
 }
 
+void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1)
+{
+    if (GetBattlerSide(battler) != B_SIDE_OPPONENT)
+    {
+        s32 i;
+        for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+            gBattlePartyCurrentOrder[i] = *(0 * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders));
+
+        SwitchPartyMonSlots(GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]), GetPartyIdFromBattlePartyId(arg1));
+
+        for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+            *(0 * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
+    }
+}
+
 
 
 // battle_ai_util.c

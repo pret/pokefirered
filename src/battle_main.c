@@ -3173,19 +3173,21 @@ u8 IsRunningFromBattleImpossible(void)
     return BATTLE_RUN_SUCCESS;
 }
 
-void UpdatePartyOwnerOnSwitch_NonMulti(u8 battler)
+void SwitchPartyOrder(u32 battler)
 {
     s32 i;
-    u8 r4, r1;
+    u32 partyId1, partyId2;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
         gBattlePartyCurrentOrder[i] = *(battler * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders));
-    r4 = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]);
-    r1 = GetPartyIdFromBattlePartyId(*(gBattleStruct->monToSwitchIntoId + battler));
-    SwitchPartyMonSlots(r4, r1);
+
+    partyId1 = GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[battler]);
+    partyId2 = GetPartyIdFromBattlePartyId(*(gBattleStruct->monToSwitchIntoId + battler));
+    SwitchPartyMonSlots(partyId1, partyId2);
+
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
         {
             *(battler * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
             *(BATTLE_PARTNER(battler) * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
@@ -3193,8 +3195,10 @@ void UpdatePartyOwnerOnSwitch_NonMulti(u8 battler)
     }
     else
     {
-        for (i = 0; i < 3; i++)
+        for (i = 0; i < (int)ARRAY_COUNT(gBattlePartyCurrentOrder); i++)
+        {
             *(battler * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
+        }
     }
 }
 

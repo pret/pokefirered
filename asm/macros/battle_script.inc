@@ -96,11 +96,17 @@
 	.byte 0x15
 	.endm
 
-	.macro seteffectprimary
+	.macro seteffectprimary moveEffect=0
+	.if \moveEffect != 0
+		setmoveeffect \moveEffect
+	.endif
 	.byte 0x16
 	.endm
 
-	.macro seteffectsecondary
+	.macro seteffectsecondary moveEffect=0
+	.if \moveEffect != 0
+		setmoveeffect \moveEffect
+	.endif
 	.byte 0x17
 	.endm
 
@@ -178,11 +184,20 @@
 	.4byte \ptr
 	.endm
 
-	.macro jumpiftype battler:req, type:req, ptr:req
+	.macro jumpbasedontype battler:req, type:req, jumpIfType:req, jumpInstr:req
 	.byte 0x22
 	.byte \battler
 	.byte \type
-	.4byte \ptr
+	.byte \jumpIfType
+	.4byte \jumpInstr
+	.endm
+
+	.macro jumpiftype battler:req, type:req, jumpInstr:req
+	jumpbasedontype \battler, \type, TRUE, \jumpInstr
+	.endm
+
+	.macro jumpifnottype battler:req, type:req, jumpInstr:req
+	jumpbasedontype \battler, \type, FALSE, \jumpInstr
 	.endm
 
 	.macro getexp battler:req
@@ -704,9 +719,9 @@
 	.byte 0x7f
 	.endm
 
-	.macro manipulatedamage param0:req
+	.macro manipulatedamage mode:req
 	.byte 0x80
-	.byte \param0
+	.byte \mode
 	.endm
 
 	.macro trysetrest param0:req
@@ -1041,8 +1056,9 @@
 	.byte 0xca
 	.endm
 
-	.macro setcharge
+	.macro setcharge battler:req
 	.byte 0xcb
+	.byte \battler
 	.endm
 
 	.macro callterrainattack
@@ -1090,7 +1106,7 @@
 	.4byte \param1
 	.endm
 
-	.macro trysetroots param0:req
+	.macro settoxicspikes param0:req
 	.byte 0xd5
 	.4byte \param0
 	.endm
@@ -1324,6 +1340,10 @@
 	various \battler, VARIOUS_ABILITY_POPUP
 	.endm
 
+	.macro updateabilitypopup battler:req
+	various \battler, VARIOUS_UPDATE_ABILITY_POPUP
+	.endm
+
 	.macro setlastuseditem battler:req
 	various \battler, VARIOUS_SET_LAST_USED_ITEM
 	.endm	
@@ -1354,6 +1374,74 @@
 	.macro consumeberry battler:req, fromBattler:req
 	various \battler, VARIOUS_CONSUME_BERRY
 	.byte \fromBattler
+	.endm
+
+	.macro tryroomservice battler:req, failInstr:req
+	various \battler, VARIOUS_ROOM_SERVICE
+	.4byte \failInstr
+	.endm
+
+	.macro trywindriderpower battler:req, failInstr:req
+	various \battler, VARIOUS_TRY_WIND_RIDER_POWER
+	.4byte \failInstr
+	.endm
+
+	.macro curestatus battler:req
+	various \battler, VARIOUS_CURE_STATUS
+	.endm
+
+	.macro jumpifnoally battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_NO_ALLY
+	.4byte \jumpInstr
+	.endm
+
+	.macro tryfriskmsg battler:req
+	various \battler, VARIOUS_TRY_FRISK
+	.endm
+
+	.macro destroyabilitypopup
+	various BS_ABILITY_BATTLER, VARIOUS_DESTROY_ABILITY_POPUP
+	.endm
+
+	.macro jumpiftargetally jumpInstr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_TARGET_ALLY
+	.4byte \jumpInstr
+	.endm
+
+	.macro jumpifabsent battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_ABSENT
+	.4byte \jumpInstr
+	.endm
+
+	.macro switchinabilities battler:req
+	various \battler, VARIOUS_SWITCHIN_ABILITIES
+	.endm
+
+	.macro spriteignore0hp value:req
+	various BS_ATTACKER, VARIOUS_SET_SPRITEIGNORE0HP
+	.byte \value
+	.endm
+
+	.macro updatenick battler:req
+	various \battler, VARIOUS_UPDATE_NICK
+	.endm
+
+	.macro doterrainseed battler:req, failInstr:req
+	various \battler, VARIOUS_TERRAIN_SEED
+	.4byte \failInstr
+	.endm
+
+	.macro activateterrainchangeabilities battler:req
+	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
+	.endm
+
+	.macro activateweatherchangeabilities battler:req
+	various \battler, VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES
+	.endm
+
+	.macro gettotemboost jumpInstr:req
+	various BS_ATTACKER, VARIOUS_TOTEM_BOOST
+	.4byte \jumpInstr
 	.endm
 
 @ helpful macros
@@ -1437,13 +1525,59 @@
 	jumpifholdeffect \battler, \holdEffect, \jumpInstr, FALSE
 	.endm
 
-@ callnative macros
-	.macro itemrestorehp
-	callnative BS_ItemRestoreHP
+	@ Tries to increase or decrease a battler's stat's stat stage by a specified amount. If impossible, jumps to \script.
+	.macro modifybattlerstatstage battler:req, stat:req, mode:req, amount:req, script:req, animation:req, customString
+
+	@ \mode parameters
+	INCREASE = FALSE
+	DECREASE = TRUE
+
+	@ \animation parameters
+	ANIM_OFF = FALSE
+	ANIM_ON = TRUE
+
+	setstatchanger \stat, \amount, \mode
+	statbuffchange STAT_CHANGE_ALLOW_PTR, \script
+	setgraphicalstatchangevalues
+	.if \animation == TRUE
+		playanimation \battler, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	.endif
+	.ifnb \customString
+		printstring \customString
+	.else
+		.if \mode == DECREASE
+			printfromtable gStatDownStringIds
+		.else
+		.if \mode == INCREASE
+			printfromtable gStatUpStringIds
+		.endif
+		.endif
+	.endif
+	waitmessage B_WAIT_TIME_LONG
 	.endm
 
-	.macro itemcurestatus
+	.macro setallytonexttarget jumpInstr:req
+	jumpifbyte CMP_GREATER_THAN, gBattlerTarget, 0x1, 1f
+	addbyte gBattlerTarget, 0x2
+	goto \jumpInstr
+	1:
+	subbyte gBattlerTarget, 0x2
+	goto \jumpInstr
+	.endm
+
+	.macro dmg_1_8_targethp
+	manipulatedamage DMG_1_8_TARGET_HP
+	.endm
+
+@ callnative macros
+	.macro itemrestorehp jumpInstr:req
+	callnative BS_ItemRestoreHP
+	.4byte \jumpInstr
+	.endm
+
+	.macro itemcurestatus jumpInstr:req
 	callnative BS_ItemCureStatus
+	.4byte \jumpInstr
 	.endm
 
 	.macro itemincreasestat
@@ -1473,3 +1607,22 @@
 	.macro trysymbiosis
 	callnative BS_TrySymbiosis
 	.endm
+
+	@ Will jump to script pointer if the specified battler has or has not fainted.
+	.macro jumpiffainted battler:req, value:req, ptr:req
+	getbattlerfainted \battler
+	jumpifbyte CMP_EQUAL, gBattleCommunication, \value, \ptr
+	.endm
+
+	.macro jumpifflowerveilattacker jumpInstr:req
+	jumpifnottype BS_ATTACKER, TYPE_GRASS, 1f
+	jumpifability BS_ATTACKER_SIDE, ABILITY_FLOWER_VEIL, \jumpInstr
+	1:
+	.endm
+
+	.macro itemstatchangeeffects battler:req
+	callnative BS_RunStatChangeItems
+	.byte \battler
+	.endm
+
+	

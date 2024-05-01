@@ -347,7 +347,7 @@
 #define BG_SOLAR_BEAM_CONTESTS 26
 
 // table ids for general animations (gBattleAnims_General)
-#define B_ANIM_CASTFORM_CHANGE          0
+#define B_ANIM_FORM_CHANGE              0
 #define B_ANIM_STATS_CHANGE             1
 #define B_ANIM_SUBSTITUTE_FADE          2
 #define B_ANIM_SUBSTITUTE_APPEAR        3
@@ -356,7 +356,7 @@
 #define B_ANIM_TURN_TRAP                6
 #define B_ANIM_HELD_ITEM_EFFECT         7
 #define B_ANIM_SMOKEBALL_ESCAPE         8
-#define B_ANIM_HANGED_ON               9
+#define B_ANIM_HANGED_ON                9
 #define B_ANIM_RAIN_CONTINUES           10
 #define B_ANIM_SUN_CONTINUES            11
 #define B_ANIM_SANDSTORM_CONTINUES      12
@@ -375,6 +375,7 @@
 #define B_ANIM_SILPH_SCOPED             25
 #define B_ANIM_ROCK_THROW               26
 #define B_ANIM_SAFARI_REACTION          27
+#define B_ANIM_RESTORE_BG               28 // for Terrain Endings
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

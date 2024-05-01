@@ -66,11 +66,15 @@
 #define BATTLE_TYPE_WILD_SCRIPTED      (1 << 17) // Used in pokeemerald as BATTLE_TYPE_PALACE.
 #define BATTLE_TYPE_LEGENDARY_FRLG     (1 << 18) // Used in pokeemerald as BATTLE_TYPE_ARENA.
 #define BATTLE_TYPE_TRAINER_TOWER      (1 << 19) // Used in pokeemerald as BATTLE_TYPE_FACTORY.
+// pokeemerald
 #define BATTLE_TYPE_INGAME_PARTNER     (1 << 20)
+#define BATTLE_TYPE_TOWER_LINK_MULTI   (1 << 21)
+#define BATTLE_TYPE_TWO_OPPONENTS      (1 << 22)
 
 #define IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && !((flags) & BATTLE_TYPE_GHOST_UNVEILED))
 #define IS_BATTLE_TYPE_GHOST_WITH_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && (flags) & BATTLE_TYPE_GHOST_UNVEILED)
 #define WILD_DOUBLE_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER))))
+#define BATTLE_TWO_VS_ONE_OPPONENT ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gTrainerBattleOpponent_B == 0xFFFF))
 
 #define RIVAL_BATTLE_HEAL_AFTER  1
 #define RIVAL_BATTLE_TUTORIAL    3
@@ -492,5 +496,18 @@
 
 // Indicator for the party summary bar to display an empty slot.
 #define HP_EMPTY_SLOT 0xFFFF
+
+// Constants for B_VAR_STARTING_STATUS
+// Timer value controlled by B_VAR_STARTING_STATUS_TIMER
+#define STARTING_STATUS_NONE                0
+#define STARTING_STATUS_ELECTRIC_TERRAIN    1
+#define STARTING_STATUS_MISTY_TERRAIN       2
+#define STARTING_STATUS_GRASSY_TERRAIN      3
+#define STARTING_STATUS_PSYCHIC_TERRAIN     4
+#define STARTING_STATUS_TRICK_ROOM          5
+#define STARTING_STATUS_MAGIC_ROOM          6
+#define STARTING_STATUS_WONDER_ROOM         7
+#define STARTING_STATUS_TAILWIND_PLAYER     8
+#define STARTING_STATUS_TAILWIND_OPPONENT   9
 
 #endif // GUARD_CONSTANTS_BATTLE_H

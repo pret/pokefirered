@@ -150,7 +150,7 @@ static void Cmd_jumpifability(void);
 static void Cmd_jumpifsideaffecting(void);
 static void Cmd_jumpifstat(void);
 static void Cmd_jumpifstatus3condition(void);
-static void Cmd_jumpiftype(void);
+static void Cmd_jumpbasedontype(void);
 static void Cmd_getexp(void);
 static void Cmd_checkteamslost(void);
 static void Cmd_movevaluescleanup(void);
@@ -329,7 +329,7 @@ static void Cmd_trysethelpinghand(void);
 static void Cmd_tryswapitems(void);
 static void Cmd_trycopyability(void);
 static void Cmd_trywish(void);
-static void Cmd_trysetroots(void);
+static void Cmd_settoxicspikes(void);
 static void Cmd_setgastroacid(void);
 static void Cmd_setyawn(void);
 static void Cmd_setdamagetohealthdifference(void);
@@ -402,7 +402,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifsideaffecting,                     //0x1F
     Cmd_jumpifstat,                              //0x20
     Cmd_jumpifstatus3condition,                  //0x21
-    Cmd_jumpiftype,                              //0x22
+    Cmd_jumpbasedontype,                         //0x22 // done
     Cmd_getexp,                                  //0x23
     Cmd_checkteamslost,                          //0x24
     Cmd_movevaluescleanup,                       //0x25
@@ -571,7 +571,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_sethail,                                 //0xC8
     Cmd_trymemento,                              //0xC9
     Cmd_setforcedtarget,                         //0xCA
-    Cmd_setcharge,                               //0xCB
+    Cmd_setcharge,                               //0xCB // done
     Cmd_callterrainattack,                       //0xCC
     Cmd_cureifburnedparalysedorpoisoned,         //0xCD
     Cmd_settorment,                              //0xCE
@@ -581,7 +581,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_tryswapitems,                            //0xD2
     Cmd_trycopyability,                          //0xD3
     Cmd_trywish,                                 //0xD4
-    Cmd_trysetroots,                             //0xD5
+    Cmd_settoxicspikes,                          //0xD5 // done
     Cmd_setgastroacid,                           //0xD6 // done
     Cmd_setyawn,                                 //0xD7
     Cmd_setdamagetohealthdifference,             //0xD8
@@ -2370,7 +2370,7 @@ static void Cmd_datahpupdate(void)
             {
                 // TODO: Dynamax
                 // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+                gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
             }
             BattleScriptPush(cmd->nextInstr);
             gBattlescriptCurrInstr = BattleScript_TargetFormChange;
@@ -4284,16 +4284,30 @@ static void Cmd_jumpifstatus3condition(void)
     }
 }
 
-static void Cmd_jumpiftype(void)
+static void Cmd_jumpbasedontype(void)
 {
-    u8 battlerId = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    u8 type = gBattlescriptCurrInstr[2];
-    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
+    CMD_ARGS(u8 battler, u8 type, u8 jumpIfType, const u8 *jumpInstr);
 
-    if (IS_BATTLER_OF_TYPE(battlerId, type))
-        gBattlescriptCurrInstr = jumpPtr;
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    u8 type = cmd->type;
+    const u8 *jumpInstr = cmd->jumpInstr;
+
+    // jumpiftype
+    if (cmd->jumpIfType)
+    {
+        if (IS_BATTLER_OF_TYPE(battler, type))
+            gBattlescriptCurrInstr = jumpInstr;
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    // jumpifnottype
     else
-        gBattlescriptCurrInstr += 7;
+    {
+        if (!IS_BATTLER_OF_TYPE(battler, type))
+            gBattlescriptCurrInstr = jumpInstr;
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }
 
 static void Cmd_getexp(void)
@@ -5745,6 +5759,149 @@ static void Cmd_switchinanim(void)
     MarkBattlerForControllerExec(gActiveBattler);
 
     gBattlescriptCurrInstr += 3;
+}
+
+bool32 CanBattlerSwitch(u32 battler)
+{
+    s32 i, lastMonId, battlerIn1, battlerIn2;
+    bool32 ret = FALSE;
+    struct Pokemon *party;
+
+    if (BATTLE_TWO_VS_ONE_OPPONENT && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+    {
+        battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        battlerIn2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        party = gEnemyParty;
+
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_HP) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
+                break;
+        }
+
+        ret = (i != PARTY_SIZE);
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+    {
+        party = GetBattlerParty(battler);
+
+        lastMonId = 0;
+        if (battler & 2)
+            lastMonId = MULTI_PARTY_SIZE;
+
+        for (i = lastMonId; i < lastMonId + MULTI_PARTY_SIZE; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && GetMonData(&party[i], MON_DATA_HP) != 0
+             && gBattlerPartyIndexes[battler] != i)
+                break;
+        }
+
+        ret = (i != lastMonId + MULTI_PARTY_SIZE);
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
+        {
+            if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+            {
+                party = gPlayerParty;
+
+                lastMonId = 0;
+                if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(battler)) == TRUE)
+                    lastMonId = MULTI_PARTY_SIZE;
+            }
+            else
+            {
+                party = gEnemyParty;
+
+                if (battler == 1)
+                    lastMonId = 0;
+                else
+                    lastMonId = MULTI_PARTY_SIZE;
+            }
+        }
+        else
+        {
+            party = GetBattlerParty(battler);
+
+            lastMonId = 0;
+            if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(battler)) == TRUE)
+                lastMonId = MULTI_PARTY_SIZE;
+        }
+
+        for (i = lastMonId; i < lastMonId + MULTI_PARTY_SIZE; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && GetMonData(&party[i], MON_DATA_HP) != 0
+             && gBattlerPartyIndexes[battler] != i)
+                break;
+        }
+
+        ret = (i != lastMonId + MULTI_PARTY_SIZE);
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+    {
+        party = gEnemyParty;
+
+        lastMonId = 0;
+        if (battler == B_POSITION_OPPONENT_RIGHT)
+            lastMonId = PARTY_SIZE / 2;
+
+        for (i = lastMonId; i < lastMonId + (PARTY_SIZE / 2); i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && GetMonData(&party[i], MON_DATA_HP) != 0
+             && gBattlerPartyIndexes[battler] != i)
+                break;
+        }
+
+        ret = (i != lastMonId + (PARTY_SIZE / 2));
+    }
+    else
+    {
+        if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        {
+            battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                battlerIn2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+            else
+                battlerIn2 = battlerIn1;
+
+            party = gEnemyParty;
+        }
+        else
+        {
+            // Check if attacker side has mon to switch into
+            battlerIn1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                battlerIn2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+            else
+                battlerIn2 = battlerIn1;
+
+            party = gPlayerParty;
+        }
+
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_HP) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+             && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
+                break;
+        }
+
+        ret = (i != PARTY_SIZE);
+    }
+    return ret;
 }
 
 static void Cmd_jumpifcantswitch(void)
@@ -7435,7 +7592,7 @@ static void Cmd_various(void)
     case VARIOUS_ABILITY_POPUP:
     {
         VARIOUS_ARGS();
-        // TODO: Popup
+        // TODO: Ability Popup
         // CreateAbilityPopUp(cmd->battler, gBattleMons[cmd->battler].ability, (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) != 0);
         break;
     }
@@ -7575,6 +7732,226 @@ static void Cmd_various(void)
         if (ItemBattleEffects(ITEMEFFECT_USE_LAST_ITEM, battler, FALSE))
             return;
         gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+    case VARIOUS_ROOM_SERVICE:
+    {
+        VARIOUS_ARGS(const u8 *failInstr);
+        if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_ROOM_SERVICE && TryRoomService(battler))
+        {
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_BerryStatRaiseRet;
+        }
+        else
+        {
+            gBattlescriptCurrInstr = cmd->failInstr;
+        }
+        return;
+    }
+    case VARIOUS_TRY_WIND_RIDER_POWER:
+        {
+            VARIOUS_ARGS(const u8 *failInstr);
+            u16 ability = GetBattlerAbility(battler);
+            if (GetBattlerSide(battler) == GetBattlerSide(gBattlerAttacker)
+             && (ability == ABILITY_WIND_RIDER || ability == ABILITY_WIND_POWER))
+            {
+                gLastUsedAbility = ability;
+                RecordAbilityBattle(battler, gLastUsedAbility);
+                gBattlerAbility = gBattleScripting.battler = battler;
+                gBattlescriptCurrInstr = cmd->nextInstr;
+            }
+            else
+            {
+                gBattlescriptCurrInstr = cmd->failInstr;
+            }
+            return;
+        }
+    case VARIOUS_CURE_STATUS:
+    {
+        VARIOUS_ARGS();
+        gBattleMons[battler].status1 = 0;
+        gActiveBattler = battler;
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[battler].status1), &gBattleMons[battler].status1);
+        MarkBattlerForControllerExec(battler);
+        break;
+    }
+    case VARIOUS_JUMP_IF_NO_ALLY:
+    {
+        VARIOUS_ARGS(const u8 *jumpInstr);
+        if (!IsBattlerAlive(BATTLE_PARTNER(battler)))
+            gBattlescriptCurrInstr = cmd->jumpInstr;
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+    case VARIOUS_TRY_FRISK:
+    {
+        VARIOUS_ARGS();
+        while (gBattleStruct->friskedBattler < gBattlersCount)
+        {
+            gBattlerTarget = gBattleStruct->friskedBattler++;
+            if (GetBattlerSide(battler) != GetBattlerSide(gBattlerTarget)
+                && IsBattlerAlive(gBattlerTarget)
+                && gBattleMons[gBattlerTarget].item != ITEM_NONE)
+            {
+                gLastUsedItem = gBattleMons[gBattlerTarget].item;
+                RecordItemEffectBattle(gBattlerTarget, GetBattlerHoldEffect(gBattlerTarget, FALSE));
+                BattleScriptPushCursor();
+                // If Frisk identifies two mons' items, show the pop-up only once.
+                if (gBattleStruct->friskedAbility)
+                {
+                    gBattlescriptCurrInstr = BattleScript_FriskMsg;
+                }
+                else
+                {
+                    gBattleStruct->friskedAbility = TRUE;
+                    gBattlescriptCurrInstr = BattleScript_FriskMsgWithPopup;
+                }
+                return;
+            }
+        }
+        gBattleStruct->friskedBattler = 0;
+        gBattleStruct->friskedAbility = FALSE;
+        break;
+    }
+    case VARIOUS_DESTROY_ABILITY_POPUP:
+    {
+        VARIOUS_ARGS();
+        // TODO: Ability Popup
+        // DestroyAbilityPopUp(battler);
+        break;
+    }
+    case VARIOUS_JUMP_IF_TARGET_ALLY:
+    {
+        VARIOUS_ARGS(const u8 *jumpInstr);
+        if (GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget))
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        else
+            gBattlescriptCurrInstr = cmd->jumpInstr;
+        return;
+    }
+    case VARIOUS_JUMP_IF_ABSENT:
+    {
+        VARIOUS_ARGS(const u8 *jumpInstr);
+        if (!IsBattlerAlive(battler))
+            gBattlescriptCurrInstr = cmd->jumpInstr;
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+    case VARIOUS_UPDATE_ABILITY_POPUP:
+    {
+        VARIOUS_ARGS();
+        // TODO: Ability Popup
+        // UpdateAbilityPopup(battler);
+        break;
+    }
+    case VARIOUS_SWITCHIN_ABILITIES:
+    {
+        VARIOUS_ARGS();
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        AbilityBattleEffects(ABILITYEFFECT_NEUTRALIZINGGAS, battler, 0, 0, 0);
+        AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, 0, 0, 0);
+        AbilityBattleEffects(ABILITYEFFECT_TRACE2, battler, 0, 0, 0);
+        AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, 0, 0, 0);
+        return;
+    }
+    case VARIOUS_SET_SPRITEIGNORE0HP:
+    {
+        VARIOUS_ARGS(bool8 ignore0HP);
+        gBattleStruct->spriteIgnore0Hp = cmd->ignore0HP;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+    case VARIOUS_UPDATE_NICK:
+    {
+        VARIOUS_ARGS();
+        if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+            mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
+        else
+            mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_NICK);
+        break;
+    }
+    case VARIOUS_TERRAIN_SEED:
+    {
+        VARIOUS_ARGS(const u8 *failInstr);
+        if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_SEEDS)
+        {
+            u8 effect = 0;
+            u16 item = gBattleMons[battler].item;
+            switch (GetBattlerHoldEffectParam(battler))
+            {
+            case HOLD_EFFECT_PARAM_ELECTRIC_TERRAIN:
+                effect = TryHandleSeed(battler, STATUS_FIELD_ELECTRIC_TERRAIN, STAT_DEF, item, FALSE);
+                break;
+            case HOLD_EFFECT_PARAM_GRASSY_TERRAIN:
+                effect = TryHandleSeed(battler, STATUS_FIELD_GRASSY_TERRAIN, STAT_DEF, item, FALSE);
+                break;
+            case HOLD_EFFECT_PARAM_MISTY_TERRAIN:
+                effect = TryHandleSeed(battler, STATUS_FIELD_MISTY_TERRAIN, STAT_SPDEF, item, FALSE);
+                break;
+            case HOLD_EFFECT_PARAM_PSYCHIC_TERRAIN:
+                effect = TryHandleSeed(battler, STATUS_FIELD_PSYCHIC_TERRAIN, STAT_SPDEF, item, FALSE);
+                break;
+            }
+
+            if (effect)
+                return;
+        }
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
+    case VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES:
+    {
+        VARIOUS_ARGS();
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, battler, 0, 0, 0);
+        return;
+    }
+    case VARIOUS_ACTIVATE_WEATHER_CHANGE_ABILITIES:
+    {
+        VARIOUS_ARGS();
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, battler, 0, 0, 0);
+        return;
+    }
+    case VARIOUS_TOTEM_BOOST:
+    {
+        VARIOUS_ARGS(const u8 *jumpInstr);
+        battler = gBattlerAttacker;
+        if (gQueuedStatBoosts[battler].stats == 0)
+        {
+            gBattlescriptCurrInstr = cmd->nextInstr;    // stats done, exit
+        }
+        else
+        {
+            for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
+            {
+                if (gQueuedStatBoosts[battler].stats & (1 << i))
+                {
+                    if (gQueuedStatBoosts[battler].statChanges[i] <= -1)
+                        SET_STATCHANGER(i + 1, abs(gQueuedStatBoosts[battler].statChanges[i]), TRUE);
+                    else
+                        SET_STATCHANGER(i + 1, gQueuedStatBoosts[battler].statChanges[i], FALSE);
+
+                    gQueuedStatBoosts[battler].stats &= ~(1 << i);
+                    gBattleScripting.battler = battler;
+                    gBattlerTarget = battler;
+                    if (gQueuedStatBoosts[battler].stats & 0x80)
+                    {
+                        gQueuedStatBoosts[battler].stats &= ~0x80; // set 'aura flared to life' flag
+                        gBattlescriptCurrInstr = BattleScript_TotemFlaredToLife;
+                    }
+                    else
+                    {
+                        gBattlescriptCurrInstr = cmd->jumpInstr;   // do boost
+                    }
+                    return;
+                }
+            }
+            gBattlescriptCurrInstr = cmd->nextInstr;    // exit if loop failed (failsafe)
+        }
         return;
     }
     }
@@ -7823,24 +8200,72 @@ static void Cmd_setseeded(void)
 
 static void Cmd_manipulatedamage(void)
 {
-    switch (gBattlescriptCurrInstr[1])
+    CMD_ARGS(u8 mode);
+
+    switch (cmd->mode)
     {
     case DMG_CHANGE_SIGN:
         gBattleMoveDamage *= -1;
         break;
     case DMG_RECOIL_FROM_MISS:
-        gBattleMoveDamage /= 2;
+        if (B_RECOIL_IF_MISS_DMG >= GEN_5)
+        {
+            // TODO: Dynamax
+            // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
+            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+        }
+        else if (B_RECOIL_IF_MISS_DMG == GEN_4)
+        {
+            if ((gBattleMons[gBattlerTarget].maxHP / 2) < gBattleMoveDamage)
+            {
+                // TODO: Dynamax
+                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
+                gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
+            }
+        }
+        else
+        {
+            gBattleMoveDamage /= 2;
+        }
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
-        if ((gBattleMons[gBattlerTarget].maxHP / 2) < gBattleMoveDamage)
-            gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
         break;
     case DMG_DOUBLED:
         gBattleMoveDamage *= 2;
         break;
+    case DMG_1_8_TARGET_HP:
+        // TODO: Dynamax
+        // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 8;
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 8;
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+        break;
+    case DMG_FULL_ATTACKER_HP:
+        // TODO: Dynamax
+        // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker);
+        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP;
+        break;
+    case DMG_CURR_ATTACKER_HP:
+        // TODO: Dynamax
+        // gBattleMoveDamage = GetNonDynamaxHP(gBattlerAttacker);
+        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP;
+        break;
+    case DMG_BIG_ROOT:
+        gBattleMoveDamage = GetDrainedBigRootHp(gBattlerAttacker, gBattleMoveDamage);
+        break;
+    case DMG_1_2_ATTACKER_HP:
+        // TODO: Dynamax
+        // gBattleMoveDamage = (GetNonDynamaxMaxHP(gBattlerAttacker) + 1) / 2; // Half of Max HP Rounded UP
+        gBattleMoveDamage = (gBattleMons[gBattlerAttacker].maxHP + 1) / 2; // Half of Max HP Rounded UP
+        break;
+    case DMG_RECOIL_FROM_IMMUNE:
+        // TODO: Dynamax
+        // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
+        gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
+        break;
     }
 
-    gBattlescriptCurrInstr += 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_trysetrest(void)
@@ -8207,6 +8632,24 @@ static void Cmd_normalisebuffs(void)
     }
 
     gBattlescriptCurrInstr++;
+}
+
+bool32 TryResetBattlerStatChanges(u8 battler)
+{
+    u32 j;
+    bool32 ret = FALSE;
+
+    gDisableStructs[battler].stockpileDef = 0;
+    gDisableStructs[battler].stockpileSpDef = 0;
+    for (j = 0; j < NUM_BATTLE_STATS; j++)
+    {
+        if (gBattleMons[battler].statStages[j] != DEFAULT_STAT_STAGE)
+            ret = TRUE; // returns TRUE if any stat was reset
+
+        gBattleMons[battler].statStages[j] = DEFAULT_STAT_STAGE;
+    }
+
+    return ret;
 }
 
 static void Cmd_setbide(void)
@@ -10079,10 +10522,13 @@ static void Cmd_setforcedtarget(void)
 
 static void Cmd_setcharge(void)
 {
-    gStatuses3[gBattlerAttacker] |= STATUS3_CHARGED_UP;
-    gDisableStructs[gBattlerAttacker].chargeTimer = 2;
-    // gDisableStructs[gBattlerAttacker].chargeTimerStartValue = 2;
+    CMD_ARGS(u8 battler);
+
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    gStatuses3[battler] |= STATUS3_CHARGED_UP;
+    gDisableStructs[battler].chargeTimer = 2;
     gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 // Nature Power
@@ -10301,16 +10747,20 @@ static void Cmd_trywish(void)
 }
 
 // Ingrain
-static void Cmd_trysetroots(void)
+static void Cmd_settoxicspikes(void)
 {
-    if (gStatuses3[gBattlerAttacker] & STATUS3_ROOTED)
+    CMD_ARGS(const u8 *failInstr);
+
+    u8 targetSide = GetBattlerSide(gBattlerTarget);
+    if (gSideTimers[targetSide].toxicSpikesAmount >= 2)
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
     {
-        gStatuses3[gBattlerAttacker] |= STATUS3_ROOTED;
-        gBattlescriptCurrInstr += 5;
+        gSideTimers[targetSide].toxicSpikesAmount++;
+        gSideStatuses[targetSide] |= SIDE_STATUS_TOXIC_SPIKES;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
@@ -10673,7 +11123,7 @@ static void Cmd_docastformchangeanimation(void)
     if (gBattleMons[gActiveBattler].status2 & STATUS2_SUBSTITUTE)
         *(&gBattleStruct->formToChangeInto) |= CASTFORM_SUBSTITUTE;
 
-    BtlController_EmitBattleAnimation(BUFFER_A, B_ANIM_CASTFORM_CHANGE, gBattleStruct->formToChangeInto);
+    BtlController_EmitBattleAnimation(BUFFER_A, B_ANIM_FORM_CHANGE, gBattleStruct->formToChangeInto);
     MarkBattlerForControllerExec(gActiveBattler);
 
     gBattlescriptCurrInstr++;
@@ -11288,102 +11738,123 @@ void BS_GetBattlerSide(void)
 
 void BS_ItemRestoreHP(void)
 {
-    NATIVE_ARGS();
+    NATIVE_ARGS(const u8 *alreadyMaxHpInstr);
     u16 healAmount;
     u32 battler = MAX_BATTLERS_COUNT;
     u32 healParam = ItemId_GetEffect(gLastUsedItem)[6];
     u32 side = GetBattlerSide(gBattlerAttacker);
     struct Pokemon *party = GetSideParty(side);
-    u8 itemPartyIndex = gBattleStruct->itemPartyIndex[gBattlerAttacker];
     u16 hp = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_HP);
     u16 maxHP = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_MAX_HP);
-    u32 species = GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES);
     gBattleCommunication[MULTIUSE_STATE] = 0;
 
-    // Track the number of Revives used in a battle.
-    if (hp == 0 && side == B_SIDE_PLAYER && gBattleResults.numRevivesUsed < 255)
-        gBattleResults.numRevivesUsed++;
-
-    // Check if the recipient is an active battler.
-    if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
-        battler = gBattlerAttacker;
-    else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-                && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
-        battler = BATTLE_PARTNER(gBattlerAttacker);
-
-    // Get amount to heal.
-    switch (healParam)
+    if (hp == maxHP)
     {
-        case ITEM6_HEAL_HP_FULL:
-            healAmount = maxHP;
-            break;
-        case ITEM6_HEAL_HP_HALF:
-            healAmount = maxHP / 2;
-            break;
-        case ITEM6_HEAL_HP_QUARTER:
-            healAmount = maxHP / 4;
-            break;
-        default:
-            healAmount = healParam;
-            break;
-    }
-    if (hp + healAmount > maxHP)
-        healAmount = maxHP - hp;
-
-    gBattleScripting.battler = battler;
-    PREPARE_SPECIES_BUFFER(gBattleTextBuff1, species);
-
-    // Heal is applied as move damage if battler is active.
-    if (battler != MAX_BATTLERS_COUNT && hp != 0)
-    {
-        gBattleMoveDamage = -healAmount;
-        gBattlescriptCurrInstr = cmd->nextInstr;
+        gBattlescriptCurrInstr = cmd->alreadyMaxHpInstr;
     }
     else
     {
-        hp += healAmount;
-        SetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_HP, &hp);
+        // Track the number of Revives used in a battle.
+        if (hp == 0 && side == B_SIDE_PLAYER && gBattleResults.numRevivesUsed < 255)
+            gBattleResults.numRevivesUsed++;
 
-        // Revived battlers on the field need to be brought back.
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && battler != MAX_BATTLERS_COUNT)
+        // Check if the recipient is an active battler.
+        if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
+            battler = gBattlerAttacker;
+        else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+                    && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
+            battler = BATTLE_PARTNER(gBattlerAttacker);
+
+        // Get amount to heal.
+        switch (healParam)
         {
-            gAbsentBattlerFlags &= ~gBitTable[battler];
-            gBattleCommunication[MULTIUSE_STATE] = TRUE;
+            case ITEM6_HEAL_HP_FULL:
+                healAmount = maxHP;
+                break;
+            case ITEM6_HEAL_HP_HALF:
+                healAmount = maxHP / 2;
+                break;
+            case ITEM6_HEAL_HP_QUARTER:
+                healAmount = maxHP / 4;
+                break;
+            default:
+                healAmount = healParam;
+                break;
         }
-        gBattlescriptCurrInstr = BattleScript_ItemRestoreHP_Party;
+        if (hp + healAmount > maxHP)
+            healAmount = maxHP - hp;
+
+        gBattleScripting.battler = battler;
+        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES));
+
+        // Heal is applied as move damage if battler is active.
+        if (battler != MAX_BATTLERS_COUNT && hp != 0)
+        {
+            gBattleMoveDamage = -healAmount;
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        }
+        else
+        {
+            hp += healAmount;
+            SetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_HP, &hp);
+
+            // Revived battlers on the field need to be brought back.
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && battler != MAX_BATTLERS_COUNT)
+            {
+                gAbsentBattlerFlags &= ~gBitTable[battler];
+                gBattleCommunication[MULTIUSE_STATE] = TRUE;
+            }
+            gBattlescriptCurrInstr = BattleScript_ItemRestoreHP_Party;
+        }
     }
 }
 
 void BS_ItemCureStatus(void)
 {
-    NATIVE_ARGS();
+    NATIVE_ARGS(const u8 *noStatusInstr);
     u32 battler = gBattlerAttacker;
     u32 side = GetBattlerSide(gBattlerAttacker);
+    u32 previousStatus2 = 0;
+    bool32 statusChanged = FALSE;
     struct Pokemon *party = GetSideParty(side);
 
     // Heal Status2 conditions if battler is active.
     if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
     {
+        previousStatus2 = gBattleMons[battler].status2;
         gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                 && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerAttacker)])
     {
-        gBattleMons[gBattlerAttacker].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
         battler = BATTLE_PARTNER(gBattlerAttacker);
+        previousStatus2 = gBattleMons[battler].status2;
+        gBattleMons[battler].status2 &= ~GetItemStatus2Mask(gLastUsedItem);
     }
 
+    if (previousStatus2 != gBattleMons[battler].status2)
+        statusChanged = TRUE;
+
     // Heal Status1 conditions.
-    HealStatusConditions(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], GetItemStatus1Mask(gLastUsedItem), battler);
+    if (!HealStatusConditions(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], GetItemStatus1Mask(gLastUsedItem), battler))
+    {
+        statusChanged = TRUE;
+        if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
+            gBattleMons[battler].status2 &= ~STATUS2_NIGHTMARE;
+        if (GetItemStatus2Mask(gLastUsedItem) & STATUS2_CONFUSION)
+            gStatuses4[battler] &= ~STATUS4_INFINITE_CONFUSION;
+    }
 
-    if (GetItemStatus1Mask(gLastUsedItem) & STATUS1_SLEEP)
-        gBattleMons[battler].status2 &= ~STATUS2_NIGHTMARE;
-    if (GetItemStatus2Mask(gLastUsedItem) & STATUS2_CONFUSION)
-        gStatuses4[battler] &= ~STATUS4_INFINITE_CONFUSION;
-
-    gBattleScripting.battler = battler;
-    PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES));
-    gBattlescriptCurrInstr = cmd->nextInstr;
+    if (statusChanged)
+    {
+        gBattleScripting.battler = battler;
+        PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gBattleStruct->itemPartyIndex[gBattlerAttacker]], MON_DATA_SPECIES));
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = cmd->noStatusInstr;
+    }
 }
 
 void BS_ItemIncreaseStat(void)
@@ -11448,6 +11919,15 @@ void BS_ItemRestorePP(void)
     gBattleScripting.battler = battler;
     PREPARE_SPECIES_BUFFER(gBattleTextBuff1, species);
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_RunStatChangeItems(void)
+{
+    NATIVE_ARGS(u8 battler);
+
+    // Change instruction before calling ItemBattleEffects.
+    gBattlescriptCurrInstr = cmd->nextInstr;
+    ItemBattleEffects(ITEMEFFECT_STATS_CHANGED, GetBattlerForBattleScript(cmd->battler), FALSE); // TODO: update
 }
 
 bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler)

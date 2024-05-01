@@ -354,7 +354,12 @@ struct SideTimer
     // pokeemerald
     u8 retaliateTimer;
     u8 stealthRockAmount;
+    u8 stickyWebAmount;
     u8 stickyWebBattlerId;
+    u8 tailwindTimer;
+    u8 tailwindBattlerId;
+    u8 auroraVeilTimer;
+    u8 toxicSpikesAmount;
 };
 
 extern struct SideTimer gSideTimers[];
@@ -668,7 +673,18 @@ struct BattleStruct
     struct ZMoveData zmove;
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
     bool8 allowedToChangeFormInWeather[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side, used by Ice Face.
-}; // size == 0x200 bytes
+    u8 startingStatus; // status to apply at battle start. defined in constants/battle.h
+    u8 startingStatusTimer;
+    u8 transformZeroToHero[NUM_BATTLE_SIDES];
+    u8 supersweetSyrup[NUM_BATTLE_SIDES];
+    u8 intrepidSwordBoost[NUM_BATTLE_SIDES];
+    u8 dauntlessShieldBoost[NUM_BATTLE_SIDES];
+    u16 tracedAbility[MAX_BATTLERS_COUNT];
+    u16 hpBefore[MAX_BATTLERS_COUNT]; // Hp of battlers before using a move. For Berserk and Anger Shell.
+    u8 friskedBattler; // Frisk needs to identify 2 battlers in double battles.
+    bool8 friskedAbility; // If identifies two mons, show the ability pop-up only once.
+    bool8 spriteIgnore0Hp;
+};
 
 extern struct BattleStruct *gBattleStruct;
 
@@ -725,6 +741,8 @@ extern struct BattleStruct *gBattleStruct;
 #define SET_STAT_BUFF_VALUE(n)(((s8)(((s8)(n) << 4)) & 0xF0))
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + (stage << 4) + (goesDown << 7))
+#define SET_STATCHANGER2(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7))
+// TODO: change in battle script(?) from stage << 4 to stage << 3
 
 // NOTE: The members of this struct have hard-coded offsets
 //       in include/constants/battle_script_commands.h
@@ -928,6 +946,7 @@ extern u16 gLastUsedItem;
 extern u32 gBattleTypeFlags;
 extern struct MonSpritesGfx *gMonSpritesGfxPtr;
 extern u16 gTrainerBattleOpponent_A;
+extern u16 gTrainerBattleOpponent_B;
 extern u16 gMoveToLearn;
 extern u16 gBattleMovePower;
 extern struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT];

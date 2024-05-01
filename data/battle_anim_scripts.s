@@ -982,7 +982,7 @@ gBattleAnims_StatusConditions::
 
 	.align 2
 gBattleAnims_General::
-	.4byte General_CastformChange           @ B_ANIM_CASTFORM_CHANGE
+	.4byte General_FormChange               @ B_ANIM_FORM_CHANGE
 	.4byte General_StatsChange              @ B_ANIM_STATS_CHANGE
 	.4byte General_SubstituteFade           @ B_ANIM_SUBSTITUTE_FADE
 	.4byte General_SubstituteAppear         @ B_ANIM_SUBSTITUTE_APPEAR
@@ -1010,6 +1010,7 @@ gBattleAnims_General::
 	.4byte General_SilphScoped              @ B_ANIM_SILPH_SCOPED
 	.4byte General_SafariRockThrow          @ B_ANIM_ROCK_THROW
 	.4byte General_SafariReaction           @ B_ANIM_SAFARI_REACTION
+	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
 
 	.align 2
 gBattleAnims_Special::
@@ -11696,16 +11697,9 @@ Status_Nightmare:
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
-General_CastformChange:
-	createvisualtask AnimTask_IsMonInvisible, 2
-	jumpreteq TRUE, CastformChangeSkipAnim
-	goto CastformChangeContinue
-
-CastformChangeContinue:
+General_FormChange:
 	monbg ANIM_ATTACKER
-	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
-	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
-	createvisualtask AnimTask_TransformMon, 2, 1
+	createvisualtask AnimTask_TransformMon, 2, 1, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
@@ -12278,3 +12272,10 @@ Special_SubstituteToMon:
 Special_MonToSubstitute:
 	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, FALSE
 	end
+
+General_RestoreBg:
+	restorebg
+	waitbgfadein
+	end
+
+

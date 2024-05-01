@@ -2299,9 +2299,19 @@ BattleScript_EffectCharge::
 	attackcanceler
 	attackstring
 	ppreduce
-	setcharge
+	setcharge BS_ATTACKER
 	attackanimation
 	waitanimation
+.if B_CHARGE_SPDEF_RAISE >= GEN_5
+	setstatchanger STAT_SPDEF, 1, FALSE
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_EffectChargeString
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_EffectChargeString
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectChargeString:
+.endif
 	printstring STRINGID_PKMNCHARGINGPOWER
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -2379,7 +2389,7 @@ BattleScript_EffectIngrain::
 	attackcanceler
 	attackstring
 	ppreduce
-	trysetroots BattleScript_ButItFailed
+	settoxicspikes BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNPLANTEDROOTS
@@ -4572,7 +4582,7 @@ BattleScript_TargetFormChangeNoPopup:
 	flushtextbox
 	handleformchange BS_SCRIPTING, 0
 	handleformchange BS_SCRIPTING, 1
-@	playanimation BS_TARGET, B_ANIM_FORM_CHANGE @ TODO: Animation
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE
 	waitanimation
 	handleformchange BS_SCRIPTING, 2
  .if B_DISGUISE_HP_LOSS >= GEN_8
@@ -4762,3 +4772,1013 @@ BattleScript_NoItemSteal::
 	printstring STRINGID_PKMNSXMADEYINEFFECTIVE
 	waitmessage B_WAIT_TIME_LONG
 	return
+
+BattleScript_OverworldStatusStarts::
+	printfromtable gStartingStatusStringIds
+	waitmessage B_WAIT_TIME_LONG
+	playanimation_var BS_ATTACKER, sB_ANIM_ARG1
+	call BattleScript_OverworldStatusStarts_TryActivations
+	end3
+
+BattleScript_OverworldStatusStarts_TryActivations:
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SET_TRICK_ROOM, BattleScript_TryRoomServiceLoop
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SET_TAILWIND_PLAYER, BattleScript_TryTailwindAbilitiesLoop
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SET_TAILWIND_OPPONENT, BattleScript_TryTailwindAbilitiesLoop
+	return
+
+BattleScript_TryRoomServiceLoop:
+	savetarget
+	setbyte gBattlerTarget, 0
+BattleScript_RoomServiceLoop:
+	copybyte sBATTLER, gBattlerTarget
+	tryroomservice BS_TARGET, BattleScript_RoomServiceLoop_NextBattler
+	removeitem BS_TARGET
+BattleScript_RoomServiceLoop_NextBattler:
+	addbyte gBattlerTarget, 0x1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_RoomServiceLoop
+	restoretarget
+	return
+
+BattleScript_TryTailwindAbilitiesLoop:
+	savetarget
+	setbyte gBattlerTarget, 0
+BattleScript_TryTailwindAbilitiesLoop_Iter:
+	trywindriderpower BS_TARGET, BattleScript_TryTailwindAbilitiesLoop_Increment
+	jumpifability BS_TARGET, ABILITY_WIND_RIDER, BattleScript_TryTailwindAbilitiesLoop_WindRider
+	jumpifability BS_TARGET, ABILITY_WIND_POWER, BattleScript_TryTailwindAbilitiesLoop_WindPower
+BattleScript_TryTailwindAbilitiesLoop_Increment:
+	addbyte gBattlerTarget, 0x1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TryTailwindAbilitiesLoop_Iter
+BattleScript_TryTailwindAbilitiesLoop_Ret:
+	restoretarget
+	return
+
+BattleScript_TryTailwindAbilitiesLoop_WindRider:
+	call BattleScript_AbilityPopUp
+	modifybattlerstatstage BS_TARGET, STAT_ATK, INCREASE, 1, BattleScript_TryTailwindAbilitiesLoop_Increment, ANIM_ON
+	goto BattleScript_TryTailwindAbilitiesLoop_Increment
+
+BattleScript_TryTailwindAbilitiesLoop_WindPower:
+	call BattleScript_AbilityPopUp
+	setcharge BS_TARGET
+	printstring STRINGID_BEINGHITCHARGEDPKMNWITHPOWER
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_TryTailwindAbilitiesLoop_Increment
+
+BattleScript_OverworldTerrain::
+	printfromtable gTerrainStringIds
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_BATTLER_0, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainEffects
+	end3
+
+BattleScript_ImposterActivates::
+	call BattleScript_AbilityPopUp
+	transformdataexecution
+	playmoveanimation BS_ATTACKER, MOVE_TRANSFORM
+	waitanimation
+	printstring STRINGID_IMPOSTERTRANSFORM
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_SwitchInAbilityMsg::
+	call BattleScript_AbilityPopUp
+	printfromtable gSwitchInAbilityStringIds
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_SwitchInAbilityMsgRet::
+	call BattleScript_AbilityPopUp
+	printfromtable gSwitchInAbilityStringIds
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_ActivateAsOne::
+	call BattleScript_AbilityPopUp
+	printfromtable gSwitchInAbilityStringIds
+	waitmessage B_WAIT_TIME_LONG
+	@ show unnerve
+	sethword sABILITY_OVERWRITE, ABILITY_UNNERVE
+	setbyte cMULTISTRING_CHOOSER, B_MSG_SWITCHIN_UNNERVE
+	call BattleScript_AbilityPopUp
+	printfromtable gSwitchInAbilityStringIds
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_PastelVeilActivates::
+	setbyte gBattleCommunication, 0
+	setbyte gBattleCommunication + 1, 0
+BattleScript_PastelVeil_TryCurePoison:
+	jumpifstatus BS_TARGET, STATUS1_POISON | STATUS1_TOXIC_POISON, BattleScript_PastelVeilCurePoison
+	goto BattleScript_PastelVeilLoopIncrement
+BattleScript_PastelVeilCurePoison:
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication + 1, 0x0, BattleScript_PastelVeilCurePoisonNoPopUp
+	call BattleScript_AbilityPopUp
+	setbyte gBattleCommunication + 1, 1
+BattleScript_PastelVeilCurePoisonNoPopUp: @ Only show Pastel Veil pop up once if it cures two mons
+	printfromtable gSwitchInAbilityStringIds
+	waitmessage B_WAIT_TIME_LONG
+	curestatus BS_TARGET
+	updatestatusicon BS_TARGET
+BattleScript_PastelVeilLoopIncrement:
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_PastelVeilEnd
+	addbyte gBattleCommunication, 1
+	jumpifnoally BS_TARGET, BattleScript_PastelVeilEnd
+	setallytonexttarget BattleScript_PastelVeil_TryCurePoison
+	goto BattleScript_PastelVeilEnd
+BattleScript_PastelVeilEnd:
+	end3
+
+BattleScript_FriskActivates::
+	tryfriskmsg BS_ATTACKER
+	end3
+
+BattleScript_AttackerAbilityStatRaiseEnd3::
+	call BattleScript_AttackerAbilityStatRaise
+	end3
+
+BattleScript_BlockedByPrimalWeatherEnd3::
+	call BattleScript_AbilityPopUp
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessenedEnd3
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRainEnd3
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOnEnd3
+	end3
+
+BattleScript_SnowWarningActivatesHail::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_SNOWWARNINGHAIL
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES
+	call BattleScript_ActivateWeatherAbilities
+	end3
+
+BattleScript_SnowWarningActivatesSnow::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_SNOWWARNINGSNOW
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_HAIL_CONTINUES @ TODO: Animation B_ANIM_SNOW_CONTINUES
+	call BattleScript_ActivateWeatherAbilities
+	end3
+
+BattleScript_ElectricSurgeActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TERRAINBECOMESELECTRIC
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainEffects
+	end3
+
+BattleScript_GrassySurgeActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TERRAINBECOMESGRASSY
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainEffects
+	end3
+
+BattleScript_MistySurgeActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TERRAINBECOMESMISTY
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainEffects
+	end3
+
+BattleScript_PsychicSurgeActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TERRAINBECOMESPSYCHIC
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainEffects
+	end3
+
+BattleScript_SupersweetSyrupActivates::
+ 	copybyte sSAVED_BATTLER, gBattlerTarget
+.if B_ABILITY_POP_UP == TRUE
+	showabilitypopup BS_ATTACKER
+	pause B_WAIT_TIME_LONG
+	destroyabilitypopup
+.endif
+	printstring STRINGID_SUPERSWEETAROMAWAFTS
+	waitmessage B_WAIT_TIME_LONG
+	setbyte gBattlerTarget, 0
+BattleScript_SupersweetSyrupLoop:
+	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_SupersweetSyrupLoopIncrement
+	jumpiftargetally BattleScript_SupersweetSyrupLoopIncrement
+	jumpifabsent BS_TARGET, BattleScript_SupersweetSyrupLoopIncrement
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_SupersweetSyrupLoopIncrement
+BattleScript_SupersweetSyrupEffect:
+	copybyte sBATTLER, gBattlerAttacker
+	setstatchanger STAT_EVASION, 1, TRUE
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | STAT_CHANGE_ALLOW_PTR, BattleScript_SupersweetSyrupLoopIncrement
+	setgraphicalstatchangevalues
+	jumpifability BS_TARGET, ABILITY_CONTRARY, BattleScript_SupersweetSyrupContrary
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_SupersweetSyrupWontDecrease
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+BattleScript_SupersweetSyrupEffect_WaitString:
+	waitmessage B_WAIT_TIME_LONG
+	copybyte sBATTLER, gBattlerTarget
+	call BattleScript_TryIntimidateHoldEffects
+BattleScript_SupersweetSyrupLoopIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_SupersweetSyrupLoop
+BattleScript_SupersweetSyrupEnd:
+	copybyte sBATTLER, gBattlerAttacker
+	destroyabilitypopup
+ 	copybyte gBattlerTarget, sSAVED_BATTLER
+	pause B_WAIT_TIME_MED
+	end3
+
+BattleScript_AnnounceAirLockCloudNine::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_AIRLOCKACTIVATES
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_ActivateWeatherAbilities
+	end3
+
+BattleScript_AttackerFormChangeEnd3::
+	call BattleScript_AttackerFormChange
+	end3
+
+BattleScript_AttackerFormChangeEnd3NoPopup::
+	call BattleScript_AttackerFormChangeNoPopup
+	end3
+
+BattleScript_BattlerAbilityStatRaiseOnSwitchIn::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_BATTLERABILITYRAISEDSTAT
+	waitmessage B_WAIT_TIME_LONG
+	copybyte gBattlerAttacker, sSAVED_BATTLER
+	end3
+
+BattleScript_DesolateLandActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_EXTREMELYHARSHSUNLIGHT
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_SUN_CONTINUES
+	call BattleScript_ActivateWeatherAbilities
+	end3
+
+BattleScript_PrimordialSeaActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_HEAVYRAIN
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_RAIN_CONTINUES
+	call BattleScript_ActivateWeatherAbilities
+	end3
+
+BattleScript_DeltaStreamActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_MYSTERIOUSAIRCURRENT
+	waitstate
+	playanimation BS_ATTACKER, B_ANIM_MON_HIT @ TODO: Animation B_ANIM_STRONG_WINDS
+	end3
+
+BattleScript_RuinAbilityActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ABILITYWEAKENEDFSURROUNDINGMONSSTAT
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_SupremeOverlordActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ATTACKERGAINEDSTRENGTHFROMTHEFALLEN
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_CostarActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNCOPIEDSTATCHANGES
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_ZeroToHeroActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ZEROTOHEROTRANSFORMATION
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_HospitalityActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_HOSPITALITYRESTORATION
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	end3
+
+BattleScript_HarvestActivates::
+	pause 5
+	tryrecycleitem BattleScript_HarvestActivatesEnd
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_HARVESTBERRY
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_HarvestActivatesEnd:
+	end3
+	
+@ Can't compare directly to a value, have to compare to value at pointer
+sZero:
+.byte 0
+
+BattleScript_MoodyActivates::
+	call BattleScript_AbilityPopUp
+	jumpifbyteequal sSTATCHANGER, sZero, BattleScript_MoodyLower
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_MoodyLower
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, B_MSG_DEFENDER_STAT_ROSE, BattleScript_MoodyLower
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_MoodyLower:
+	jumpifbyteequal sSAVED_STAT_CHANGER, sZero, BattleScript_MoodyEnd
+	copybyte sSTATCHANGER, sSAVED_STAT_CHANGER
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN | STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_MoodyEnd
+	jumpifbyte CMP_GREATER_THAN, cMULTISTRING_CHOOSER, B_MSG_DEFENDER_STAT_FELL, BattleScript_MoodyEnd
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_MoodyEnd:
+	end3
+
+BattleScript_BadDreamsActivates::
+	setbyte gBattlerTarget, 0
+BattleScript_BadDreamsLoop:
+	jumpiftargetally BattleScript_BadDreamsIncrement
+	jumpifability BS_TARGET, ABILITY_MAGIC_GUARD, BattleScript_BadDreamsIncrement
+	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_BadDreams_Dmg
+	jumpifstatus BS_TARGET, STATUS1_SLEEP, BattleScript_BadDreams_Dmg
+	goto BattleScript_BadDreamsIncrement
+BattleScript_BadDreams_Dmg:
+	jumpifbyteequal sFIXED_ABILITY_POPUP, sZero, BattleScript_BadDreams_ShowPopUp
+BattleScript_BadDreams_DmgAfterPopUp:
+	printstring STRINGID_BADDREAMSDMG
+	waitmessage B_WAIT_TIME_LONG
+	dmg_1_8_targethp
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	jumpifhasnohp BS_TARGET, BattleScript_BadDreams_HidePopUp
+BattleScript_BadDreamsIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_BadDreamsLoop
+	jumpifbyteequal sFIXED_ABILITY_POPUP, sZero, BattleScript_BadDreamsEnd
+	destroyabilitypopup
+	pause 15
+BattleScript_BadDreamsEnd:
+	end3
+BattleScript_BadDreams_ShowPopUp:
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	setbyte sFIXED_ABILITY_POPUP, TRUE
+	goto BattleScript_BadDreams_DmgAfterPopUp
+BattleScript_BadDreams_HidePopUp:
+	destroyabilitypopup
+	tryfaintmon BS_TARGET
+	goto BattleScript_BadDreamsIncrement
+
+BattleScript_SolarPowerActivates::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	call BattleScript_AbilityPopUp
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_SOLARPOWERHPDROP
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_ATTACKER
+	end3
+
+BattleScript_HealerActivates::
+	call BattleScript_AbilityPopUp
+	curestatus BS_SCRIPTING
+	updatestatusicon BS_SCRIPTING
+	printstring STRINGID_HEALERCURE
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_BallFetch::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_FETCHEDPOKEBALL
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_CudChewActivates::
+	pause B_WAIT_TIME_SHORTEST
+	call BattleScript_AbilityPopUp
+	setbyte sBERRY_OVERRIDE, 1 @ override the requirements for eating berries
+	consumeberry BS_SCRIPTING, FALSE
+	setbyte sBERRY_OVERRIDE, 0
+	end3
+
+BattleScript_DazzlingProtected::
+	attackstring
+	ppreduce
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_POKEMONCANNOTUSEMOVE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_DarkTypePreventsPrankster::
+	attackstring
+	ppreduce
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_ITDOESNTAFFECT
+	waitmessage B_WAIT_TIME_LONG
+	orhalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	goto BattleScript_MoveEnd
+
+BattleScript_GoodAsGoldActivates::
+	attackstring
+	ppreduce
+	call BattleScript_AbilityPopUpTarget
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_ITDOESNTAFFECT
+	waitmessage B_WAIT_TIME_MED
+	goto BattleScript_MoveEnd
+
+BattleScript_MoveStatDrain_PPLoss::
+	ppreduce
+BattleScript_MoveStatDrain::
+	attackstring
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_MoveStatDrain_Cont
+.if B_ABSORBING_ABILITY_STRING >= GEN_5
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+.else
+	printstring STRINGID_TARGETABILITYSTATRAISE
+	waitmessage B_WAIT_TIME_LONG
+.endif
+BattleScript_MoveStatDrain_Cont:
+	clearsemiinvulnerablebit
+	tryfaintmon BS_ATTACKER
+	goto BattleScript_MoveEnd
+
+BattleScript_TargetAbilityStatRaiseRet::
+	copybyte sSAVED_BATTLER, gBattlerAttacker
+	copybyte gBattlerAbility, gEffectBattler
+	copybyte gBattlerAttacker, gBattlerTarget
+	call BattleScript_AbilityPopUp
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN, BattleScript_TargetAbilityStatRaiseRet_End
+	setgraphicalstatchangevalues
+	call BattleScript_StatUp
+BattleScript_TargetAbilityStatRaiseRet_End:
+	copybyte gBattlerAttacker, sSAVED_BATTLER
+	return
+
+BattleScript_WeakArmorActivates::
+	call BattleScript_AbilityPopUp
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_WeakArmorActivatesSpeed
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_WeakArmorDefAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_FELL_EMPTY, BattleScript_WeakArmorActivatesSpeed
+	pause B_WAIT_TIME_SHORTEST
+	printfromtable gStatDownStringIds
+	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED @ Set by statbuffchange when stat can't be decreased
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_WeakArmorActivatesSpeed
+BattleScript_WeakArmorDefAnim:
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_TARGETABILITYSTATLOWER
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_WeakArmorActivatesSpeed:
+.if B_WEAK_ARMOR_SPEED >= GEN_7
+	setstatchanger STAT_SPEED, 2, FALSE
+.else
+	setstatchanger STAT_SPEED, 1, FALSE
+.endif
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_WeakArmorActivatesEnd
+	jumpifbyte CMP_LESS_THAN, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_WeakArmorSpeedAnim
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_ROSE_EMPTY, BattleScript_WeakArmorActivatesEnd
+	pause B_WAIT_TIME_SHORTEST
+	printstring STRINGID_TARGETSTATWONTGOHIGHER
+	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_WeakArmorActivatesEnd
+BattleScript_WeakArmorSpeedAnim:
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_TARGETABILITYSTATRAISE
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_WeakArmorActivatesEnd:
+	return
+
+BattleScript_CursedBodyActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_CUSEDBODYDISABLED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_MummyActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ATTACKERACQUIREDABILITY
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_WanderingSpiritActivates::
+.if B_ABILITY_POP_UP == TRUE
+	setbyte sFIXED_ABILITY_POPUP, TRUE
+	sethword sABILITY_OVERWRITE, ABILITY_WANDERING_SPIRIT
+	showabilitypopup BS_TARGET
+	pause 60
+	sethword sABILITY_OVERWRITE, 0
+	updateabilitypopup BS_TARGET
+	pause 20
+	destroyabilitypopup
+	pause 40
+	copybyte gBattlerAbility, gBattlerAttacker
+	setbyte sFIXED_ABILITY_POPUP, TRUE
+	copyhword sABILITY_OVERWRITE, gLastUsedAbility
+	showabilitypopup BS_ATTACKER
+	pause 60
+	sethword sABILITY_OVERWRITE, 0
+	updateabilitypopup BS_ATTACKER
+	pause 20
+	destroyabilitypopup
+	pause 40
+.endif
+	printstring STRINGID_SWAPPEDABILITIES
+	waitmessage B_WAIT_TIME_LONG
+	switchinabilities BS_ATTACKER
+	switchinabilities BS_TARGET
+	return
+
+BattleScript_TargetsStatWasMaxedOut::
+	call BattleScript_AbilityPopUp
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN, NULL
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_TARGETSSTATWASMAXEDOUT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_GooeyActivates::
+	waitstate
+	call BattleScript_AbilityPopUp
+	swapattackerwithtarget  @ for defiant, mirror armor
+	seteffectsecondary MOVE_EFFECT_SPD_MINUS_1
+	swapattackerwithtarget
+	return
+
+BattleScript_DampPreventsAftermath::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	pause 40
+	copybyte gBattlerAbility, sBATTLER
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSABILITYPREVENTSABILITY
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_AftermathDmg::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_AftermathDmgRet
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	printstring STRINGID_AFTERMATHDMG
+	waitmessage B_WAIT_TIME_LONG
+	tryfaintmon BS_ATTACKER
+BattleScript_AftermathDmgRet:
+	return
+
+BattleScript_AbilityStatusEffect::
+	waitstate
+	call BattleScript_AbilityPopUp
+	seteffectsecondary
+	return
+	
+BattleScript_IllusionOff::
+	spriteignore0hp TRUE
+	playanimation BS_TARGET, B_ANIM_MON_HIT @ TODO: Animation B_ANIM_ILLUSION_OFF
+	waitanimation
+	updatenick BS_TARGET
+	waitstate
+	spriteignore0hp FALSE
+	printstring STRINGID_ILLUSIONWOREOFF
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_CottonDownActivates::
+	copybyte sSAVED_BATTLER, gBattlerAttacker
+	call BattleScript_AbilityPopUpTarget
+	copybyte gEffectBattler, gBattlerTarget
+	swapattackerwithtarget
+	setbyte gBattlerTarget, 0
+BattleScript_CottonDownLoop:
+	jumpiffainted BS_TARGET, TRUE, BattleScript_CottonDownLoopIncrement
+	setstatchanger STAT_SPEED, 1, TRUE
+	jumpifbyteequal gBattlerTarget, gEffectBattler, BattleScript_CottonDownLoopIncrement
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_CottonDownTargetSpeedCantGoLower
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_CottonDownLoopIncrement
+BattleScript_CottonDownTargetSpeedCantGoLower:
+	printstring STRINGID_STATSWONTDECREASE
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_CottonDownLoopIncrement:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_CottonDownLoop
+BattleScript_CottonDownReturn:
+	swapattackerwithtarget
+	copybyte gBattlerAttacker, sSAVED_BATTLER
+	return
+
+BattleScript_BlockedByPrimalWeatherRet::
+	call BattleScript_AbilityPopUp
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_SUN_PRIMAL, BattleScript_ExtremelyHarshSunlightWasNotLessenedRet
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_RAIN_PRIMAL, BattleScript_NoReliefFromHeavyRainRet
+	jumpifhalfword CMP_COMMON_BITS, gBattleWeather, B_WEATHER_STRONG_WINDS, BattleScript_MysteriousAirCurrentBlowsOnRet
+	return
+
+BattleScript_SandSpitActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ASANDSTORMKICKEDUP
+	waitstate
+	playanimation BS_BATTLER_0, B_ANIM_SANDSTORM_CONTINUES
+	call BattleScript_ActivateWeatherAbilities
+	return
+
+BattleScript_PerishBodyActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSWILLPERISHIN3TURNS
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	return
+
+BattleScript_GulpMissileGulping::
+	call BattleScript_AbilityPopUp
+	playanimation BS_ATTACKER, B_ANIM_MON_HIT @ TODO: Animation B_ANIM_GULP_MISSILE
+	waitanimation
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	effectivenesssound
+	hitanimation BS_ATTACKER
+	waitstate
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_GulpMissileNoDmgGulping
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	tryfaintmon BS_ATTACKER
+	jumpiffainted BS_ATTACKER, TRUE, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifholdeffect BS_ATTACKER, HOLD_EFFECT_CLEAR_AMULET, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifability BS_ATTACKER, ABILITY_CLEAR_BODY, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifability BS_ATTACKER, ABILITY_FULL_METAL_BODY, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifability BS_ATTACKER, ABILITY_WHITE_SMOKE, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpifflowerveilattacker BattleScript_GulpMissileNoSecondEffectGulping
+BattleScript_GulpMissileNoDmgGulping:
+	handleformchange BS_TARGET, 0
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE
+	waitanimation
+	swapattackerwithtarget @ to make gStatDownStringIds down below print the right battler
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_GulpMissileGorgingTargetDefenseCantGoLower
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+	swapattackerwithtarget @ restore the battlers, just in case
+	return
+BattleScript_GulpMissileNoSecondEffectGulping:
+	handleformchange BS_TARGET, 0
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE
+	waitanimation
+	return
+BattleScript_GulpMissileGorgingTargetDefenseCantGoLower:
+	printstring STRINGID_STATSWONTDECREASE
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_GulpMissileGorging::
+	call BattleScript_AbilityPopUp
+	playanimation BS_ATTACKER, B_ANIM_MON_HIT @ TODO: Animation B_ANIM_GULP_MISSILE
+	waitanimation
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	effectivenesssound
+	hitanimation BS_ATTACKER
+	waitstate
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_GulpMissileNoDmgGorging
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	tryfaintmon BS_ATTACKER
+	jumpiffainted BS_ATTACKER, TRUE, BattleScript_GulpMissileNoSecondEffectGorging
+BattleScript_GulpMissileNoDmgGorging:
+	handleformchange BS_TARGET, 0
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE
+	waitanimation
+	swapattackerwithtarget
+	seteffectprimary MOVE_EFFECT_PARALYSIS
+	swapattackerwithtarget
+	return
+BattleScript_GulpMissileNoSecondEffectGorging:
+	handleformchange BS_TARGET, 0
+	playanimation BS_TARGET, B_ANIM_FORM_CHANGE
+	waitanimation
+	return
+
+BattleScript_SeedSowerActivates::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_TERRAINBECOMESGRASSY
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_SCRIPTING, B_ANIM_RESTORE_BG
+	call BattleScript_ActivateTerrainEffects
+	return
+
+BattleScript_AngerShellActivates::
+	call BattleScript_AbilityPopUp
+	jumpifstat BS_TARGET, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_AngerShellTryDef
+	jumpifstat BS_TARGET, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_AngerShellTryDef
+	jumpifstat BS_TARGET, CMP_LESS_THAN, STAT_SPEED, MAX_STAT_STAGE, BattleScript_AngerShellTryDef
+	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_DEF, MIN_STAT_STAGE, BattleScript_AngerShellTryDef
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPDEF, MIN_STAT_STAGE, BattleScript_ButItFailed
+BattleScript_AngerShellTryDef::
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	modifybattlerstatstage BS_ATTACKER, STAT_DEF, DECREASE, 1, BattleScript_AngerShellTrySpDef, ANIM_ON
+BattleScript_AngerShellTrySpDef:
+	modifybattlerstatstage BS_ATTACKER, STAT_SPDEF, DECREASE, 1, BattleScript_AngerShellTryAttack, ANIM_ON
+BattleScript_AngerShellTryAttack:
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	modifybattlerstatstage BS_ATTACKER, STAT_ATK, INCREASE, 1, BattleScript_AngerShellTrySpAtk, ANIM_ON
+BattleScript_AngerShellTrySpAtk:
+	modifybattlerstatstage BS_ATTACKER, STAT_SPATK, INCREASE, 1, BattleScript_AngerShellTrySpeed, ANIM_ON
+BattleScript_AngerShellTrySpeed:
+	modifybattlerstatstage BS_ATTACKER, STAT_SPEED, INCREASE, 1, BattleScript_AngerShellRet, ANIM_ON
+BattleScript_AngerShellRet:
+	return
+
+BattleScript_WindPowerActivates::
+	call BattleScript_AbilityPopUp
+	setcharge BS_TARGET
+	printstring STRINGID_BEINGHITCHARGEDPKMNWITHPOWER
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_WindPowerActivates_Ret:
+	return
+
+BattleScript_ToxicDebrisActivates::
+	call BattleScript_AbilityPopUp
+	pause B_WAIT_TIME_SHORT
+	settoxicspikes BattleScript_ToxicDebrisRet
+	printstring STRINGID_POISONSPIKESSCATTERED
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_ToxicDebrisRet:
+	copybyte sBATTLER, gBattlerTarget
+	copybyte gBattlerTarget, gBattlerAttacker
+	copybyte gBattlerAttacker, sBATTLER
+	return
+
+BattleScript_AttackerFormChange::
+	pause 5
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	flushtextbox
+BattleScript_AttackerFormChangeNoPopup::
+	handleformchange BS_ATTACKER, 0
+	handleformchange BS_ATTACKER, 1
+	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE
+	waitanimation
+	handleformchange BS_ATTACKER, 2
+	return
+
+BattleScript_DancerActivates::
+	call BattleScript_AbilityPopUp
+	waitmessage B_WAIT_TIME_SHORT
+	setbyte sB_ANIM_TURN, 0
+	setbyte sB_ANIM_TARGETS_HIT, 0
+	orword gHitMarker, HITMARKER_ALLOW_NO_PP
+	jumptocalledmove TRUE
+
+BattleScript_OpportunistCopyStatChange::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_OPPORTUNISTCOPIED
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_TotemVar_Ret
+	copybyte gBattlerAttacker, sSAVED_BATTLER	@ restore the original attacker just to be safe
+	end3
+
+BattleScript_BattlerGotOverItsInfatuation::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNGOTOVERITSINFATUATION
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_BattlerShookOffTaunt::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSHOOKOFFTHETAUNT
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_BattlerFormChangeWithStringEnd3::
+	pause 5
+	call BattleScript_AbilityPopUp
+	flushtextbox
+	handleformchange BS_SCRIPTING, 0
+	handleformchange BS_SCRIPTING, 1
+	playanimation BS_SCRIPTING, B_ANIM_FORM_CHANGE, NULL
+	waitanimation
+	handleformchange BS_SCRIPTING, 2
+	printstring STRINGID_PKMNTRANSFORMED
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_ProtosynthesisActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_SUNLIGHTACTIVATEDABILITY
+	waitmessage B_WAIT_TIME_MED
+	printstring STRINGID_STATWASHEIGHTENED
+	waitmessage B_WAIT_TIME_MED
+	end3
+
+BattleScript_MimicryActivates_End3::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_BATTLERTYPECHANGEDTO
+	waitmessage B_WAIT_TIME_SHORT
+	end3
+
+BattleScript_TraceActivatesEnd3::
+	call BattleScript_TraceActivates
+	end3
+
+BattleScript_QuarkDriveActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_ELECTRICTERRAINACTIVATEDABILITY
+	waitmessage B_WAIT_TIME_MED
+	printstring STRINGID_STATWASHEIGHTENED
+	waitmessage B_WAIT_TIME_MED
+	end3
+
+BattleScript_FriskMsgWithPopup::
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+BattleScript_FriskMsg::
+	printstring STRINGID_FRISKACTIVATES
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_BerryStatRaiseRet::
+	jumpifability BS_SCRIPTING, ABILITY_RIPEN, BattleScript_BerryStatRaiseRet_AbilityPopup
+	goto BattleScript_BerryStatRaiseRet_Anim
+BattleScript_BerryStatRaiseRet_AbilityPopup:
+	call BattleScript_AbilityPopUp
+BattleScript_BerryStatRaiseRet_Anim:
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_BerryStatRaiseRet_End
+	setgraphicalstatchangevalues
+	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT, sB_ANIM_ARG1
+	setbyte cMULTISTRING_CHOOSER, B_MSG_STAT_ROSE_ITEM
+	call BattleScript_StatUp
+	removeitem BS_SCRIPTING
+BattleScript_BerryStatRaiseRet_End:
+	return
+
+BattleScript_ActivateTerrainEffects:
+	savetarget
+	setbyte gBattlerTarget, 0
+BattleScript_ActivateTerrainSeed:
+	copybyte sBATTLER, gBattlerTarget
+	doterrainseed BS_TARGET, BattleScript_ActivateTerrainAbility
+	removeitem BS_TARGET
+BattleScript_ActivateTerrainAbility:
+	activateterrainchangeabilities BS_TARGET
+BattleScript_ActivateTerrainEffects_Increment:
+	addbyte gBattlerTarget, 0x1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_ActivateTerrainSeed
+	restoretarget
+	return
+
+BattleScript_AttackerAbilityStatRaise::
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_AttackerAbilityStatRaise_End
+	copybyte gBattlerAbility, gBattlerAttacker
+	call BattleScript_AbilityPopUp
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	waitanimation
+	printstring STRINGID_ATTACKERABILITYSTATRAISE
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_AttackerAbilityStatRaise_End:
+	return
+
+BattleScript_ExtremelyHarshSunlightWasNotLessenedEnd3:
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_EXTREMELYHARSHSUNLIGHTWASNOTLESSENED
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_NoReliefFromHeavyRainEnd3:
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_NORELIEFROMHEAVYRAIN
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_MysteriousAirCurrentBlowsOnEnd3:
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_MYSTERIOUSAIRCURRENTBLOWSON
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_ActivateWeatherAbilities:
+	savetarget
+	setbyte gBattlerTarget, 0
+BattleScript_ActivateWeatherAbilities_Loop:
+	copybyte sBATTLER, gBattlerTarget
+	activateweatherchangeabilities BS_TARGET
+BattleScript_ActivateWeatherAbilities_Increment:
+	addbyte gBattlerTarget, 1
+	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_ActivateWeatherAbilities_Loop
+	restoretarget
+	return
+
+BattleScript_SupersweetSyrupWontDecrease:
+	printstring STRINGID_STATSWONTDECREASE
+	goto BattleScript_SupersweetSyrupEffect_WaitString
+
+BattleScript_SupersweetSyrupContrary:
+	call BattleScript_AbilityPopUpTarget
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_SupersweetSyrupContrary_WontIncrease
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	goto BattleScript_SupersweetSyrupEffect_WaitString
+BattleScript_SupersweetSyrupContrary_WontIncrease:
+	printstring STRINGID_TARGETSTATWONTGOHIGHER
+	goto BattleScript_SupersweetSyrupEffect_WaitString
+
+BattleScript_TryIntimidateHoldEffects:
+	itemstatchangeeffects BS_TARGET
+	jumpifnoholdeffect BS_TARGET, HOLD_EFFECT_ADRENALINE_ORB, BattleScript_TryIntimidateHoldEffectsRet
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_SPEED, 12, BattleScript_TryIntimidateHoldEffectsRet
+	setstatchanger STAT_SPEED, 1, FALSE
+	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED | MOVE_EFFECT_CERTAIN | STAT_CHANGE_ALLOW_PTR, BattleScript_TryIntimidateHoldEffectsRet
+	playanimation BS_TARGET, B_ANIM_HELD_ITEM_EFFECT
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	copybyte sBATTLER, gBattlerTarget
+	setlastuseditem BS_TARGET
+	printstring STRINGID_USINGITEMSTATOFPKMNROSE
+	waitmessage B_WAIT_TIME_LONG
+	removeitem BS_TARGET
+BattleScript_TryIntimidateHoldEffectsRet:
+	return
+
+BattleScript_ExtremelyHarshSunlightWasNotLessenedRet:
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_EXTREMELYHARSHSUNLIGHTWASNOTLESSENED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_NoReliefFromHeavyRainRet:
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_NORELIEFROMHEAVYRAIN
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_MysteriousAirCurrentBlowsOnRet:
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_MYSTERIOUSAIRCURRENTBLOWSON
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_TotemVar_Ret::
+	gettotemboost BattleScript_ApplyTotemVarBoost
+BattleScript_TotemVarEnd:
+	return
+BattleScript_ApplyTotemVarBoost:
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TotemVarEnd
+	setgraphicalstatchangevalues
+	playanimation BS_SCRIPTING, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_TotemVar_Ret  @loop until stats bitfield is empty
+
+BattleScript_TotemFlaredToLife::
+	playanimation BS_ATTACKER, B_ANIM_MON_HIT, NULL @ TODO Animation B_ANIM_TOTEM_FLARE, NULL
+	printstring STRINGID_AURAFLAREDTOLIFE
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_ApplyTotemVarBoost
+	end2
+

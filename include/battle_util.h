@@ -15,25 +15,36 @@
 #define ABILITYEFFECT_ENDTURN                    1
 #define ABILITYEFFECT_MOVES_BLOCK                2
 #define ABILITYEFFECT_ABSORBING                  3
-#define ABILITYEFFECT_ON_DAMAGE                  4
-#define ABILITYEFFECT_IMMUNITY                   5
-#define ABILITYEFFECT_FORECAST                   6
+#define ABILITYEFFECT_MOVE_END_ATTACKER          4
+#define ABILITYEFFECT_MOVE_END                   5
+#define ABILITYEFFECT_IMMUNITY                   6
 #define ABILITYEFFECT_SYNCHRONIZE                7
 #define ABILITYEFFECT_ATK_SYNCHRONIZE            8
-#define ABILITYEFFECT_INTIMIDATE1                9
-#define ABILITYEFFECT_INTIMIDATE2                10
-#define ABILITYEFFECT_TRACE                      11
-#define ABILITYEFFECT_CHECK_OTHER_SIDE           12
-#define ABILITYEFFECT_CHECK_BATTLER_SIDE         13
-#define ABILITYEFFECT_FIELD_SPORT                14
-#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER 15
-#define ABILITYEFFECT_COUNT_OTHER_SIDE           16
-#define ABILITYEFFECT_COUNT_BATTLER_SIDE         17
-#define ABILITYEFFECT_COUNT_ON_FIELD             18
-#define ABILITYEFFECT_CHECK_ON_FIELD             19
-#define ABILITYEFFECT_MUD_SPORT                  253
-#define ABILITYEFFECT_WATER_SPORT                254
-#define ABILITYEFFECT_SWITCH_IN_WEATHER          255
+#define ABILITYEFFECT_TRACE1                     9
+#define ABILITYEFFECT_TRACE2                     10
+#define ABILITYEFFECT_MOVE_END_OTHER             11
+#define ABILITYEFFECT_NEUTRALIZINGGAS            12
+#define ABILITYEFFECT_FIELD_SPORT                13 // Only used if B_SPORT_TURNS >= GEN_6
+#define ABILITYEFFECT_ON_WEATHER                 14
+#define ABILITYEFFECT_ON_TERRAIN                 15
+#define ABILITYEFFECT_SWITCH_IN_TERRAIN          16
+#define ABILITYEFFECT_SWITCH_IN_WEATHER          17
+#define ABILITYEFFECT_OPPORTUNIST                18
+#define ABILITYEFFECT_SWITCH_IN_STATUSES         19
+// pokefirered
+#define ABILITYEFFECT_CHECK_OTHER_SIDE           20
+#define ABILITYEFFECT_CHECK_BATTLER_SIDE         21
+#define ABILITYEFFECT_INTIMIDATE1                22
+#define ABILITYEFFECT_INTIMIDATE2                23
+#define ABILITYEFFECT_TRACE                      24
+#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER 25
+#define ABILITYEFFECT_CHECK_ON_FIELD             26
+#define ABILITYEFFECT_ON_DAMAGE                  27
+#define ABILITYEFFECT_FORECAST                   28
+#define ABILITYEFFECT_COUNT_OTHER_SIDE           29
+// Special cases
+#define ABILITYEFFECT_MUD_SPORT                  252 // Only used if B_SPORT_TURNS >= GEN_6
+#define ABILITYEFFECT_WATER_SPORT                253 // Only used if B_SPORT_TURNS >= GEN_6
 
 #define ABILITY_ON_OPPOSING_FIELD(battlerId, abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_OTHER_SIDE, battlerId, abilityId, 0, 0))
 #define ABILITY_ON_FIELD(abilityId)(AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, abilityId, 0, 0))
@@ -129,7 +140,7 @@ void TryClearRageStatuses(void);
 u8 AtkCanceller_UnableToUseMove(u32 moveType);
 bool8 HasNoMonsToSwitch(u8 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2);
 u8 CastformDataTypeChange(u8 battler);
-u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 moveArg);
+u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg);
 void BattleScriptExecute(const u8 *BS_ptr);
 void BattleScriptPushCursorAndCallback(const u8 *BS_ptr);
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn);
@@ -203,9 +214,19 @@ bool32 IsBattlerPrimalReverted(u32 battler);
 bool32 IsBattlerUltraBursted(u32 battler);
 u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method);
 bool32 TryBattleFormChange(u32 battler, u16 method);
+bool32 TryChangeBattleWeather(u32 battler, u32 weatherEnumId, bool32 viaAbility);
+u16 GetUsedHeldItem(u32 battler);
+void RemoveConfusionStatus(u32 battler);
+bool32 ChangeTypeBasedOnTerrain(u32 battler);
+bool32 TryRoomService(u32 battler);
+void BufferStatChange(u32 battler, u8 statId, u8 stringId);
+s32 GetDrainedBigRootHp(u32 battler, s32 hp);
+u8 TryHandleSeed(u32 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);
+void RecordKnownMove(u32 battlerId, u32 move);
+s32 CountUsablePartyMons(u32 battlerId);
 
 // end battle_ai_util.h
 

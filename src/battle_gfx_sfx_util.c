@@ -209,7 +209,7 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 de
 {
     u8 taskId;
 
-    if (tableId == B_ANIM_CASTFORM_CHANGE && (argument & 0x80))
+    if (tableId == B_ANIM_FORM_CHANGE && (argument & 0x80))
     {
         gBattleMonForms[activeBattler] = (argument & ~(0x80));
         return TRUE;

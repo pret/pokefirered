@@ -690,6 +690,7 @@ struct BattleStruct
     u8 expOrderId:3;
     u8 expSentInMons; // As bits for player party mons - not including exp share mons.
     u8 teamGotExpMsgPrinted:1; // The 'Rest of your team got msg' has been printed.
+    u8 roostTypes[MAX_BATTLERS_COUNT][2];
 };
 
 extern struct BattleStruct *gBattleStruct;

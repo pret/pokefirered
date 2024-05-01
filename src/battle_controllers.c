@@ -1191,13 +1191,14 @@ void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument)
+void BtlController_EmitBattleAnimation(u32 bufferId, u8 animationId, struct DisableStruct* disableStructPtr, u16 argument)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_BATTLEANIMATION;
     sBattleBuffersTransferData[1] = animationId;
     sBattleBuffersTransferData[2] = argument;
     sBattleBuffersTransferData[3] = (argument & 0xFF00) >> 8;
-    PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
+    memcpy(&sBattleBuffersTransferData[4], disableStructPtr, sizeof(struct DisableStruct));
+    PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4 + sizeof(struct DisableStruct));
 }
 
 // mode is a LINK_STANDBY_* constant

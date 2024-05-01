@@ -379,35 +379,32 @@
 	.4byte \instr
 	.endm
 
-	.macro jumpiftype2 battler:req, type:req, ptr:req
+	.macro setroost
 	.byte 0x42
-	.byte \battler
-	.byte \type
-	.4byte \ptr
 	.endm
 
-	.macro jumpifabilitypresent ability:req, ptr:req
+	.macro jumpifabilitypresent ability:req, jumpInstr:req
 	.byte 0x43
 	.2byte \ability
-	.4byte \ptr
+	.4byte \jumpInstr
 	.endm
 
 	.macro endselectionscript
 	.byte 0x44
 	.endm
 
-	.macro playanimation battler:req, animType:req, arg=NULL
+	.macro playanimation battler:req, animId:req, argPtr=NULL
 	.byte 0x45
 	.byte \battler
-	.byte \animType
-	.4byte \arg
+	.byte \animId
+	.4byte \argPtr
 	.endm
 
-	.macro playanimation_var battler:req, animType:req, arg=NULL
+	.macro playanimation_var battler:req, animIdPtr:req, argPtr=NULL
 	.byte 0x46
 	.byte \battler
-	.4byte \animType
-	.4byte \arg
+	.4byte \animIdPtr
+	.4byte \argPtr
 	.endm
 
 	.macro setgraphicalstatchangevalues

@@ -306,8 +306,6 @@ static const u16 sTrappingMoves[NUM_TRAPPING_MOVES] =
 #define STAT_CHANGE_WORKED      0
 #define STAT_CHANGE_DIDNT_WORK  1
 
-extern const u8 *const gBattleScriptsForMoveEffects[];
-
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (!gMovesInfo[gCurrentMove].ignoresProtect))
 
 #define LEVEL_UP_BANNER_START 416
@@ -7920,7 +7918,7 @@ static void Cmd_jumptocalledmove(void)
     else
         gChosenMove = gCurrentMove = gCalledMove;
 
-    gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gMovesInfo[gCurrentMove].effect];
+    gBattlescriptCurrInstr = GET_MOVE_BATTLESCRIPT(gCurrentMove);
 }
 
 static void Cmd_statusanimation(void)
@@ -9258,7 +9256,7 @@ static void Cmd_trymirrormove(void)
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
         gCurrentMove = move;
         gBattlerTarget = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
-        gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gMovesInfo[gCurrentMove].effect];
+        gBattlescriptCurrInstr = GET_MOVE_BATTLESCRIPT(gCurrentMove);
     }
     else if (validMovesCount != 0)
     {
@@ -9266,7 +9264,7 @@ static void Cmd_trymirrormove(void)
         i = Random() % validMovesCount;
         gCurrentMove = validMoves[i];
         gBattlerTarget = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
-        gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gMovesInfo[gCurrentMove].effect];
+        gBattlescriptCurrInstr = GET_MOVE_BATTLESCRIPT(gCurrentMove);
     }
     else // no valid moves found
     {
@@ -10495,7 +10493,7 @@ static void Cmd_metronome(void)
         if (sMovesForbiddenToCopy[i] == METRONOME_FORBIDDEN_END)
         {
             gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
-            gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gMovesInfo[gCurrentMove].effect];
+            gBattlescriptCurrInstr = GET_MOVE_BATTLESCRIPT(gCurrentMove);
             gBattlerTarget = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
             return;
         }
@@ -11673,7 +11671,7 @@ static void Cmd_callterrainattack(void)
     gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
     gCurrentMove = sNaturePowerMoves[gBattleTerrain];
     gBattlerTarget = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
-    BattleScriptPush(gBattleScriptsForMoveEffects[gMovesInfo[gCurrentMove].effect]);
+    BattleScriptPush(GET_MOVE_BATTLESCRIPT(gCurrentMove));
     gBattlescriptCurrInstr++;
 }
 
@@ -12381,7 +12379,6 @@ static void Cmd_pursuitdoubles(void)
         gCurrentMove = MOVE_PURSUIT;
         gBattlescriptCurrInstr += 5;
         gBattleScripting.animTurn = 1;
-        gBattleScripting.pursuitDoublesAttacker = gBattlerAttacker;
         gBattlerAttacker = gActiveBattler;
     }
     else

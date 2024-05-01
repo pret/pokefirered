@@ -4250,7 +4250,6 @@ static void HandleAction_UseMove(void)
         }
     }
     gBattlescriptCurrInstr = GET_MOVE_BATTLESCRIPT(gCurrentMove);
-    // gBattlescriptCurrInstr = gBattleScriptsForMoveEffects[gBattleMoves[gCurrentMove].effect];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 

@@ -2,6 +2,7 @@
 #include "battle_scripts.h"
 #include "constants/battle_move_effects.h"
 
+// TODO: use correct battlescripts, currently replaced with _EffectHit
 const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 {
     [EFFECT_PLACEHOLDER] =
@@ -843,7 +844,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_YAWN] =
     {
-        .battleScript = BattleScript_EffectYawn,
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_KNOCK_OFF] =

@@ -804,34 +804,6 @@ struct BattleScripting
     u8 stickyWebStatDrop; // To prevent Defiant activating on a Court Change'd Sticky Web
     // TODO: remove pokefirered members
     u8 dmgMultiplier;
-    u8 twoTurnsMoveStringId;
-    u8 battlerWithAbility;
-    u16 tripleKickPower;
-    u8 pursuitDoublesAttacker;
-    // s32 painSplitHp;
-    // s32 bideDmg;
-    // u8 multihitString[6];
-    // u8 dmgMultiplier;
-    // u8 twoTurnsMoveStringId;
-    // u8 animArg1;
-    // u8 animArg2;
-    // u16 tripleKickPower;
-    // u8 moveendState;
-    // u8 battlerWithAbility;
-    // u8 multihitMoveEffect;
-    // u8 battler;
-    // u8 animTurn;
-    // u8 animTargetsHit;
-    // u8 statChanger;
-    // bool8 statAnimPlayed;
-    // u8 getexpState;
-    // u8 battleStyle;
-    // u8 drawlvlupboxState;
-    // u8 learnMoveState;
-    // u8 pursuitDoublesAttacker;
-    // u8 reshowMainState;
-    // u8 reshowHelperState;
-    // u8 levelUpHP;
 };
 
 struct BattleSpriteInfo

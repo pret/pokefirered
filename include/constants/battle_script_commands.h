@@ -1,7 +1,6 @@
 #ifndef GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H
 #define GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H
 
-// TODO: update gBattleScripting offsets 
 // The following correspond to the struct members of BattleScripting by adding their offset
 #define sPAINSPLIT_HP                (gBattleScripting + 0x00) // painSplitHp
 #define sBIDE_DMG                    (gBattleScripting + 0x04) // bideDmg
@@ -42,10 +41,6 @@
 #define sBERRY_OVERRIDE              (gBattleScripting + 0x37) // overrideBerryRequirements
 #define sSTICKY_WEB_STAT_DROP        (gBattleScripting + 0x38) // stickyWebStatDrop
 #define sDMG_MULTIPLIER              (gBattleScripting + 0x39) // dmgMultiplier
-#define sTWOTURN_STRINGID            (gBattleScripting + 0x3A) // twoTurnsMoveStringId
-#define sBATTLER_WITH_ABILITY        (gBattleScripting + 0x3B) // battlerWithAbility
-#define sTRIPLE_KICK_POWER           (gBattleScripting + 0x3C)// tripleKickPower
-#define sPURSUIT_DOUBLES_ATTACKER    (gBattleScripting + 0x3E) // pursuitDoublesAttacker
 
 // Array entries for battle communication
 #define MULTIUSE_STATE          0
@@ -60,7 +55,6 @@
 #define MSG_DISPLAY             7
 #define BATTLE_COMMUNICATION_ENTRIES_COUNT  8
 
-#define cEFFECT_CHOOSER      (gBattleCommunication + MOVE_EFFECT_BYTE)
 #define cMULTISTRING_CHOOSER (gBattleCommunication + MULTISTRING_CHOOSER)
 #define cMISS_TYPE           (gBattleCommunication + MISS_TYPE)
 

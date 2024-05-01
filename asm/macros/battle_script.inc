@@ -475,16 +475,16 @@
 	.byte \battler
 	.endm
 
-	.macro switchinanim battler:req, dontclearsubstitutebit:req
+	.macro switchinanim battler:req, dontClearSubstitute:req
 	.byte 0x4e
 	.byte \battler
-	.byte \dontclearsubstitutebit
+	.byte \dontClearSubstitute
 	.endm
 
-	.macro jumpifcantswitch battler:req, ptr:req
+	.macro jumpifcantswitch battler:req, jumpInstr:req
 	.byte 0x4f
 	.byte \battler
-	.4byte \ptr
+	.4byte \jumpInstr
 	.endm
 
 	.macro openpartyscreen param0:req, param1:req

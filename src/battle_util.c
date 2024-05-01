@@ -9309,6 +9309,24 @@ void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast)
     }
 }
 
+bool32 CanBattlerEscape(u32 battler) // no ability check
+{
+    if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_SHED_SHELL)
+        return TRUE;
+    else if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+        return TRUE;
+    else if (gBattleMons[battler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
+        return FALSE;
+    else if (gStatuses3[battler] & STATUS3_ROOTED)
+        return FALSE;
+    else if (gFieldStatuses & STATUS_FIELD_FAIRY_LOCK)
+        return FALSE;
+    else if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
+        return FALSE;
+    else
+        return TRUE;
+}
+
 
 
 // battle_ai_util.c

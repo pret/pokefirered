@@ -665,8 +665,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_returnatktoball,                         //0x4B // done
     Cmd_getswitchedmondata,                      //0x4C // done
     Cmd_switchindataupdate,                      //0x4D // done
-    Cmd_switchinanim,                            //0x4E
-    Cmd_jumpifcantswitch,                        //0x4F
+    Cmd_switchinanim,                            //0x4E // done
+    Cmd_jumpifcantswitch,                        //0x4F // done
     Cmd_openpartyscreen,                         //0x50
     Cmd_switchhandleorder,                       //0x51
     Cmd_switchineffects,                         //0x52
@@ -6741,26 +6741,30 @@ static void Cmd_switchindataupdate(void)
 
 static void Cmd_switchinanim(void)
 {
+    u32 battler;
+
+    CMD_ARGS(u8 battler, bool8 dontClearSubstitute);
+
     if (gBattleControllerExecFlags)
         return;
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
 
-    if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT
         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                  | BATTLE_TYPE_LEGENDARY
                                  | BATTLE_TYPE_OLD_MAN_TUTORIAL
                                  | BATTLE_TYPE_POKEDUDE
                                  | BATTLE_TYPE_EREADER_TRAINER
                                  | BATTLE_TYPE_GHOST)))
-        HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), FLAG_SET_SEEN, gBattleMons[gActiveBattler].personality);
+        HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN, gBattleMons[battler].personality);
 
-    gAbsentBattlerFlags &= ~(gBitTable[gActiveBattler]);
+    gAbsentBattlerFlags &= ~(gBitTable[battler]);
 
-    BtlController_EmitSwitchInAnim(BUFFER_A, gBattlerPartyIndexes[gActiveBattler], gBattlescriptCurrInstr[2]);
-    MarkBattlerForControllerExec(gActiveBattler);
+    BtlController_EmitSwitchInAnim(BUFFER_A, gBattlerPartyIndexes[battler], cmd->dontClearSubstitute);
+    MarkBattlerForControllerExec(battler);
 
-    gBattlescriptCurrInstr += 3;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 bool32 CanBattlerSwitch(u32 battler)
@@ -6908,81 +6912,19 @@ bool32 CanBattlerSwitch(u32 battler)
 
 static void Cmd_jumpifcantswitch(void)
 {
-    s32 i;
-    s32 lastMonId;
-    struct Pokemon *party;
+    CMD_ARGS(u8 battler:7, u8 ignoreEscapePrevention:1, const u8 *jumpInstr);
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1] & ~SWITCH_IGNORE_ESCAPE_PREVENTION);
-    if (!(gBattlescriptCurrInstr[1] & SWITCH_IGNORE_ESCAPE_PREVENTION)
-        && ((gBattleMons[gActiveBattler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION))
-            || (gStatuses3[gActiveBattler] & STATUS3_ROOTED)))
+    u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    if (!cmd->ignoreEscapePrevention && !CanBattlerEscape(battler))
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-    {
-        if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
-            party = gEnemyParty;
-        else
-            party = gPlayerParty;
-
-        i = 0;
-        if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(gActiveBattler)) == TRUE)
-            i = 3;
-        for (lastMonId = i + 3; i < lastMonId; i++)
-        {
-            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
-             && GetMonData(&party[i], MON_DATA_HP) != 0
-             && gBattlerPartyIndexes[gActiveBattler] != i)
-                break;
-        }
-
-        if (i == lastMonId)
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
-        else
-            gBattlescriptCurrInstr += 6;
+        gBattlescriptCurrInstr = cmd->jumpInstr;
     }
     else
     {
-        u8 battlerIn1, battlerIn2;
-
-        if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT)
-        {
-            battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                battlerIn2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-            else
-                battlerIn2 = battlerIn1;
-
-            party = gEnemyParty;
-        }
+        if (CanBattlerSwitch(battler))
+            gBattlescriptCurrInstr = cmd->nextInstr;
         else
-        {
-            battlerIn1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                battlerIn2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-            else
-                battlerIn2 = battlerIn1;
-
-            party = gPlayerParty;
-        }
-
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (GetMonData(&party[i], MON_DATA_HP) != 0
-             && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
-             && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
-                break;
-        }
-
-        if (i == PARTY_SIZE)
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 2);
-        else
-            gBattlescriptCurrInstr += 6;
+           gBattlescriptCurrInstr = cmd->jumpInstr;
     }
 }
 

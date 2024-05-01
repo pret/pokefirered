@@ -534,11 +534,11 @@
 	.byte \changingForm
 	.endm
 
-	.macro handlelearnnewmove param0:req, param1:req, param2:req
+	.macro handlelearnnewmove learnedMoveInstr:req, nothingToLearnInstr:req, isFirstMove:req
 	.byte 0x59
-	.4byte \param0
-	.4byte \param1
-	.byte \param2
+	.4byte \learnedMoveInstr
+	.4byte \nothingToLearnInstr
+	.byte \isFirstMove
 	.endm
 
 	.macro yesnoboxlearnmove param0:req

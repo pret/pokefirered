@@ -676,7 +676,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_playfaintcry,                            //0x56 // done
     Cmd_endlinkbattle,                           //0x57 // done
     Cmd_returntoball,                            //0x58 // done
-    Cmd_handlelearnnewmove,                      //0x59
+    Cmd_handlelearnnewmove,                      //0x59 // done
     Cmd_yesnoboxlearnmove,                       //0x5A
     Cmd_yesnoboxstoplearningmove,                //0x5B
     Cmd_hitanimation,                            //0x5C
@@ -7589,41 +7589,41 @@ static void Cmd_returntoball(void)
 
 static void Cmd_handlelearnnewmove(void)
 {
-    const u8 *learnedMovePtr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-    const u8 *nothingToLearnPtr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
+    CMD_ARGS(const u8 *learnedMovePtr, const u8 *nothingToLearnPtr, bool8 isFirstMove);
 
-    u16 learnMove = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], gBattlescriptCurrInstr[9]);
+    u32 monId = gBattleStruct->expGetterMonId;
+    u16 learnMove = MonTryLearningNewMove(&gPlayerParty[monId], cmd->isFirstMove);
     while (learnMove == MON_ALREADY_KNOWS_MOVE)
-        learnMove = MonTryLearningNewMove(&gPlayerParty[gBattleStruct->expGetterMonId], FALSE);
+        learnMove = MonTryLearningNewMove(&gPlayerParty[monId], FALSE);
 
     if (learnMove == MOVE_NONE)
     {
-        gBattlescriptCurrInstr = nothingToLearnPtr;
+        gBattlescriptCurrInstr = cmd->nothingToLearnPtr;
     }
     else if (learnMove == MON_HAS_MAX_MOVES)
     {
-        gBattlescriptCurrInstr += 10;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else
     {
-        gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        u32 battler = gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
 
-        if (gBattlerPartyIndexes[gActiveBattler] == gBattleStruct->expGetterMonId
-            && !(gBattleMons[gActiveBattler].status2 & STATUS2_TRANSFORMED))
+        if (gBattlerPartyIndexes[battler] == monId
+            && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED))
         {
-            GiveMoveToBattleMon(&gBattleMons[gActiveBattler], learnMove);
+            GiveMoveToBattleMon(&gBattleMons[battler], learnMove);
         }
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         {
-            gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-            if (gBattlerPartyIndexes[gActiveBattler] == gBattleStruct->expGetterMonId
-                && !(gBattleMons[gActiveBattler].status2 & STATUS2_TRANSFORMED))
+            battler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+            if (gBattlerPartyIndexes[battler] == monId
+                && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED))
             {
-                GiveMoveToBattleMon(&gBattleMons[gActiveBattler], learnMove);
+                GiveMoveToBattleMon(&gBattleMons[battler], learnMove);
             }
         }
 
-        gBattlescriptCurrInstr = learnedMovePtr;
+        gBattlescriptCurrInstr = cmd->learnedMovePtr;
     }
 }
 

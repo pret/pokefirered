@@ -368,14 +368,15 @@
 	.byte 0x3f
 	.endm
 
-	.macro jumpifaffectedbyprotect ptr:req
-	.byte 0x40
-	.4byte \ptr
-	.endm
+	@ unused5
+	@.macro jumpifaffectedbyprotect ptr:req
+	@.byte 0x40
+	@.4byte \ptr
+	@.endm
 
-	.macro call ptr:req
+	.macro call instr:req
 	.byte 0x41
-	.4byte \ptr
+	.4byte \instr
 	.endm
 
 	.macro jumpiftype2 battler:req, type:req, ptr:req

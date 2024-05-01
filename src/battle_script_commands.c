@@ -398,7 +398,7 @@ static void Cmd_return(void);
 static void Cmd_end(void);
 static void Cmd_end2(void);
 static void Cmd_end3(void);
-static void Cmd_jumpifaffectedbyprotect(void);
+static void Cmd_unused5(void);
 static void Cmd_call(void);
 static void Cmd_jumpiftype2(void);
 static void Cmd_jumpifabilitypresent(void);
@@ -650,8 +650,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_end,                                     //0x3D // done
     Cmd_end2,                                    //0x3E // done
     Cmd_end3,                                    //0x3F // done
-    Cmd_jumpifaffectedbyprotect,                 //0x40
-    Cmd_call,                                    //0x41
+    Cmd_unused5,                                 //0x40 // done
+    Cmd_call,                                    //0x41 // done
     Cmd_jumpiftype2,                             //0x42
     Cmd_jumpifabilitypresent,                    //0x43
     Cmd_endselectionscript,                      //0x44
@@ -1476,17 +1476,20 @@ static bool32 JumpIfMoveFailed(u8 adder, u16 move)
     return FALSE;
 }
 
-static void Cmd_jumpifaffectedbyprotect(void)
+// used to be Cmd_jumpifaffectedbyprotect
+static void Cmd_unused5(void)
 {
-    if (DEFENDER_IS_PROTECTED)
+    CMD_ARGS(const u8 *failInstr);
+
+    if (IsBattlerProtected(gBattlerTarget, gCurrentMove))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
-        JumpIfMoveFailed(5, 0);
+        JumpIfMoveFailed(sizeof(*cmd), MOVE_NONE);
         gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
     }
     else
     {
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
@@ -5334,8 +5337,10 @@ static void Cmd_end3(void)
 
 static void Cmd_call(void)
 {
-    BattleScriptPush(gBattlescriptCurrInstr + 5);
-    gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+    CMD_ARGS(const u8 *instr);
+
+    BattleScriptPush(cmd->nextInstr);
+    gBattlescriptCurrInstr = cmd->instr;
 }
 
 static void Cmd_jumpiftype2(void)

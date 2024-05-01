@@ -630,26 +630,26 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifbyte,                              //0x29 // done
     Cmd_jumpifhalfword,                          //0x2A // done
     Cmd_jumpifword,                              //0x2B // done
-    Cmd_jumpifarrayequal,                        //0x2C
-    Cmd_jumpifarraynotequal,                     //0x2D
-    Cmd_setbyte,                                 //0x2E
-    Cmd_addbyte,                                 //0x2F
-    Cmd_subbyte,                                 //0x30
-    Cmd_copyarray,                               //0x31
-    Cmd_copyarraywithindex,                      //0x32
-    Cmd_orbyte,                                  //0x33
-    Cmd_orhalfword,                              //0x34
-    Cmd_orword,                                  //0x35
-    Cmd_bicbyte,                                 //0x36
-    Cmd_bichalfword,                             //0x37
-    Cmd_bicword,                                 //0x38
-    Cmd_pause,                                   //0x39
-    Cmd_waitstate,                               //0x3A
-    Cmd_healthbar_update,                        //0x3B
-    Cmd_return,                                  //0x3C
-    Cmd_end,                                     //0x3D
-    Cmd_end2,                                    //0x3E
-    Cmd_end3,                                    //0x3F
+    Cmd_jumpifarrayequal,                        //0x2C // done
+    Cmd_jumpifarraynotequal,                     //0x2D // done
+    Cmd_setbyte,                                 //0x2E // done
+    Cmd_addbyte,                                 //0x2F // done
+    Cmd_subbyte,                                 //0x30 // done
+    Cmd_copyarray,                               //0x31 // done
+    Cmd_copyarraywithindex,                      //0x32 // done
+    Cmd_orbyte,                                  //0x33 // done
+    Cmd_orhalfword,                              //0x34 // done
+    Cmd_orword,                                  //0x35 // done
+    Cmd_bicbyte,                                 //0x36 // done
+    Cmd_bichalfword,                             //0x37 // done
+    Cmd_bicword,                                 //0x38 // done
+    Cmd_pause,                                   //0x39 // done
+    Cmd_waitstate,                               //0x3A // done
+    Cmd_healthbar_update,                        //0x3B // done
+    Cmd_return,                                  //0x3C // done
+    Cmd_end,                                     //0x3D // done
+    Cmd_end2,                                    //0x3E // done
+    Cmd_end3,                                    //0x3F // done
     Cmd_jumpifaffectedbyprotect,                 //0x40
     Cmd_call,                                    //0x41
     Cmd_jumpiftype2,                             //0x42
@@ -4828,6 +4828,49 @@ static void Cmd_getexp(void)
     }
 }
 
+bool32 NoAliveMonsForPlayer(void)
+{
+    u32 i;
+    u32 maxI = PARTY_SIZE;
+    u32 HP_count = 0;
+
+    if (B_MULTI_BATTLE_WHITEOUT < GEN_4 && gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))
+        maxI = MULTI_PARTY_SIZE;
+
+    // Get total HP for the player's party to determine if the player has lost
+    for (i = 0; i < maxI; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        {
+            HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
+        }
+    }
+
+    return (HP_count == 0);
+}
+
+static bool32 NoAliveMonsForOpponent(void)
+{
+    u32 i;
+    u32 HP_count = 0;
+
+    // Get total HP for the enemy's party to determine if the player has won
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG))
+        {
+            HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
+        }
+    }
+
+    return (HP_count == 0);
+}
+
+bool32 NoAliveMonsForEitherParty(void)
+{
+    return (NoAliveMonsForPlayer() || NoAliveMonsForOpponent());
+}
+
 // For battles that aren't BATTLE_TYPE_LINK, the only thing this
 // command does is check whether the player has won/lost by totaling each team's HP. It then
 // sets gBattleOutcome accordingly, if necessary.
@@ -5050,177 +5093,210 @@ static void Cmd_jumpifword(void)
 
 static void Cmd_jumpifarrayequal(void)
 {
-    const u8 *mem1 = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    const u8 *mem2 = T2_READ_PTR(gBattlescriptCurrInstr + 5);
-    u32 size = gBattlescriptCurrInstr[9];
-    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 10);
+    CMD_ARGS(const u8 *array1, const u8 *array2, u8 size, const u8 *jumpInstr);
+
+    const u8 *array1 = cmd->array1;
+    const u8 *array2 = cmd->array2;
+    u32 size = cmd->size;
+    const u8 *jumpInstr = cmd->jumpInstr;
 
     u8 i;
     for (i = 0; i < size; i++)
     {
-        if (*mem1 != *mem2)
+        if (*array1 != *array2)
         {
-            gBattlescriptCurrInstr += 14;
+            gBattlescriptCurrInstr = cmd->nextInstr;
             break;
         }
-        mem1++, mem2++;
+        array1++, array2++;
     }
 
     if (i == size)
-        gBattlescriptCurrInstr = jumpPtr;
+        gBattlescriptCurrInstr = jumpInstr;
 }
 
 static void Cmd_jumpifarraynotequal(void)
 {
+    CMD_ARGS(const u8 *array1, const u8 *array2, u8 size, const u8 *jumpInstr);
+
     u8 equalBytes = 0;
-    const u8 *mem1 = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    const u8 *mem2 = T2_READ_PTR(gBattlescriptCurrInstr + 5);
-    u32 size = gBattlescriptCurrInstr[9];
-    const u8 *jumpPtr = T2_READ_PTR(gBattlescriptCurrInstr + 10);
+    const u8 *array1 = cmd->array1;
+    const u8 *array2 = cmd->array2;
+    u32 size = cmd->size;
+    const u8 *jumpInstr = cmd->jumpInstr;
 
     u8 i;
     for (i = 0; i < size; i++)
     {
-        if (*mem1 == *mem2)
+        if (*array1 == *array2)
             equalBytes++;
-        mem1++, mem2++;
+        array1++, array2++;
     }
 
     if (equalBytes != size)
-        gBattlescriptCurrInstr = jumpPtr;
+        gBattlescriptCurrInstr = jumpInstr;
     else
-        gBattlescriptCurrInstr += 14;
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_setbyte(void)
 {
     CMD_ARGS(u8 *bytePtr, u8 value);
-    u8 *memByte = cmd->bytePtr;
-    *memByte = cmd->value;
+
+    u8 *bytePtr = cmd->bytePtr;
+    *bytePtr = cmd->value;
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_addbyte(void)
 {
-    u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    *memByte += gBattlescriptCurrInstr[5];
-    gBattlescriptCurrInstr += 6;
+    CMD_ARGS(u8 *bytePtr, u8 value);
+
+    u8 *bytePtr = cmd->bytePtr;
+    *bytePtr += cmd->value;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_subbyte(void)
 {
-    u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    *memByte -= gBattlescriptCurrInstr[5];
-    gBattlescriptCurrInstr += 6;
+    CMD_ARGS(u8 *bytePtr, u8 value);
+
+    u8 *bytePtr = cmd->bytePtr;
+    *bytePtr -= cmd->value;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_copyarray(void)
 {
-    u8 *dest = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    const u8 *src = T2_READ_PTR(gBattlescriptCurrInstr + 5);
-    s32 size = gBattlescriptCurrInstr[9];
+    CMD_ARGS(u8 *dest, const u8 *src, u8 size);
+
+    u8 *dest = cmd->dest;
+    const u8 *src = cmd->src;
+    s32 size = cmd->size;
 
     s32 i;
     for (i = 0; i < size; i++)
         dest[i] = src[i];
 
-    gBattlescriptCurrInstr += 10;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_copyarraywithindex(void)
 {
-    u8 *dest = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    const u8 *src = T2_READ_PTR(gBattlescriptCurrInstr + 5);
-    const u8 *index = T2_READ_PTR(gBattlescriptCurrInstr + 9);
-    s32 size = gBattlescriptCurrInstr[13];
+    CMD_ARGS(u8 *dest, const u8 *src, const u8 *indexPtr, u8 size);
+
+    u8 *dest = cmd->dest;
+    const u8 *src = cmd->src;
+    const u8 *indexPtr = cmd->indexPtr;
+    s32 size = cmd->size;
 
     s32 i;
     for (i = 0; i < size; i++)
-        dest[i] = src[i + *index];
+        dest[i] = src[i + *indexPtr];
 
-    gBattlescriptCurrInstr += 14;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_orbyte(void)
 {
-    u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    *memByte |= gBattlescriptCurrInstr[5];
-    gBattlescriptCurrInstr += 6;
+    CMD_ARGS(u8 *bytePtr, u8 value);
+
+    u8 *bytePtr = cmd->bytePtr;
+    *bytePtr |= cmd->value;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_orhalfword(void)
 {
-    u16 *memHword = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    u16 val = T2_READ_16(gBattlescriptCurrInstr + 5);
+    CMD_ARGS(u16 *halfwordPtr, u16 value);
 
-    *memHword |= val;
-    gBattlescriptCurrInstr += 7;
+    u16 *halfwordPtr = cmd->halfwordPtr;
+    u16 value = cmd->value;
+
+    *halfwordPtr |= value;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_orword(void)
 {
-    u32 *memWord = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    u32 val = T2_READ_32(gBattlescriptCurrInstr + 5);
+    CMD_ARGS(u32 *wordPtr, u32 value);
 
-    *memWord |= val;
-    gBattlescriptCurrInstr += 9;
+    u32 *wordPtr = cmd->wordPtr;
+    u32 value = cmd->value;
+
+    *wordPtr |= value;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_bicbyte(void)
 {
-    u8 *memByte = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    *memByte &= ~(gBattlescriptCurrInstr[5]);
-    gBattlescriptCurrInstr += 6;
+    CMD_ARGS(u8 *bytePtr, u8 value);
+
+    u8 *bytePtr = cmd->bytePtr;
+    *bytePtr &= ~cmd->value;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_bichalfword(void)
 {
-    u16 *memHword = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    u16 val = T2_READ_16(gBattlescriptCurrInstr + 5);
+    CMD_ARGS(u16 *halfwordPtr, u16 value);
 
-    *memHword &= ~val;
-    gBattlescriptCurrInstr += 7;
+    u16 *halfwordPtr = cmd->halfwordPtr;
+    u16 value = cmd->value;
+
+    *halfwordPtr &= ~value;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_bicword(void)
 {
-    u32 *memWord = T2_READ_PTR(gBattlescriptCurrInstr + 1);
-    u32 val = T2_READ_32(gBattlescriptCurrInstr + 5);
+    CMD_ARGS(u32 *wordPtr, u32 value);
 
-    *memWord &= ~val;
-    gBattlescriptCurrInstr += 9;
+    u32 *wordPtr = cmd->wordPtr;
+    u32 value = cmd->value;
+
+    *wordPtr &= ~value;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_pause(void)
 {
+    CMD_ARGS(u16 frames);
+
     if (gBattleControllerExecFlags == 0)
     {
-        u16 value = T2_READ_16(gBattlescriptCurrInstr + 1);
+        u16 value = cmd->frames;
         if (++gPauseCounterBattle >= value)
         {
             gPauseCounterBattle = 0;
-            gBattlescriptCurrInstr += 3;
+            gBattlescriptCurrInstr = cmd->nextInstr;
         }
     }
 }
 
 static void Cmd_waitstate(void)
 {
+    CMD_ARGS();
+
     if (gBattleControllerExecFlags == 0)
-        gBattlescriptCurrInstr++;
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_healthbar_update(void)
 {
-    if (gBattlescriptCurrInstr[1] == BS_TARGET)
-        gActiveBattler = gBattlerTarget;
-    else
-        gActiveBattler = gBattlerAttacker;
+    CMD_ARGS(u8 battler);
+    u32 battler;
 
+    if (cmd->battler == BS_TARGET)
+        battler = gBattlerTarget;
+    else
+        battler = gBattlerAttacker;
+    
+    gActiveBattler = battler;
     BtlController_EmitHealthBarUpdate(BUFFER_A, gBattleMoveDamage);
-    MarkBattlerForControllerExec(gActiveBattler);
-    gBattlescriptCurrInstr += 2;
+    MarkBattlerForControllerExec(battler);
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_return(void)
@@ -5230,6 +5306,8 @@ static void Cmd_return(void)
 
 static void Cmd_end(void)
 {
+    CMD_ARGS();
+
     gMoveResultFlags = 0;
     gActiveBattler = 0;
     gCurrentActionFuncId = B_ACTION_TRY_FINISH;
@@ -5237,6 +5315,8 @@ static void Cmd_end(void)
 
 static void Cmd_end2(void)
 {
+    CMD_ARGS();
+
     gActiveBattler = 0;
     gCurrentActionFuncId = B_ACTION_TRY_FINISH;
 }
@@ -5244,6 +5324,8 @@ static void Cmd_end2(void)
 // Pops the main function stack
 static void Cmd_end3(void)
 {
+    CMD_ARGS();
+
     BattleScriptPop();
     if (gBattleResources->battleCallbackStack->size != 0)
         gBattleResources->battleCallbackStack->size--;
@@ -12302,49 +12384,6 @@ bool32 CanPoisonType(u8 battlerAttacker, u8 battlerTarget)
 bool32 CanParalyzeType(u8 battlerAttacker, u8 battlerTarget)
 {
     return !(B_PARALYZE_ELECTRIC >= GEN_6 && IS_BATTLER_OF_TYPE(battlerTarget, TYPE_ELECTRIC));
-}
-
-bool32 NoAliveMonsForPlayer(void)
-{
-    u32 i;
-    u32 maxI = PARTY_SIZE;
-    u32 HP_count = 0;
-
-    if (B_MULTI_BATTLE_WHITEOUT < GEN_4 && gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))
-        maxI = MULTI_PARTY_SIZE;
-
-    // Get total HP for the player's party to determine if the player has lost
-    for (i = 0; i < maxI; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
-        {
-            HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
-        }
-    }
-
-    return (HP_count == 0);
-}
-
-static bool32 NoAliveMonsForOpponent(void)
-{
-    u32 i;
-    u32 HP_count = 0;
-
-    // Get total HP for the enemy's party to determine if the player has won
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES) && !GetMonData(&gEnemyParty[i], MON_DATA_IS_EGG))
-        {
-            HP_count += GetMonData(&gEnemyParty[i], MON_DATA_HP);
-        }
-    }
-
-    return (HP_count == 0);
-}
-
-bool32 NoAliveMonsForEitherParty(void)
-{
-    return (NoAliveMonsForPlayer() || NoAliveMonsForOpponent());
 }
 
 static void TryUpdateRoundTurnOrder(void)

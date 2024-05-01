@@ -253,20 +253,20 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifarrayequal param0:req, param1:req, param2:req, param3:req
+	.macro jumpifarrayequal array1:req, array2:req, size:req, jumpInstr:req
 	.byte 0x2c
-	.4byte \param0
-	.4byte \param1
-	.byte \param2
-	.4byte \param3
+	.4byte \array1
+	.4byte \array2
+	.byte \size
+	.4byte \jumpInstr
 	.endm
 
-	.macro jumpifarraynotequal param0:req, param1:req, param2:req, param3:req
+	.macro jumpifarraynotequal array1:req, array2:req, size:req, jumpInstr:req
 	.byte 0x2d
-	.4byte \param0
-	.4byte \param1
-	.byte \param2
-	.4byte \param3
+	.4byte \array1
+	.4byte \array2
+	.byte \size
+	.4byte \jumpInstr
 	.endm
 
 	.macro setbyte bytePtr:req, value:req
@@ -275,72 +275,72 @@
 	.byte \value
 	.endm
 
-	.macro addbyte ptr:req, param1:req
+	.macro addbyte bytePtr:req, value:req
 	.byte 0x2f
-	.4byte \ptr
-	.byte \param1
+	.4byte \bytePtr
+	.byte \value
 	.endm
 
-	.macro subbyte ptr:req, param1:req
+	.macro subbyte bytePtr:req, value:req
 	.byte 0x30
-	.4byte \ptr
-	.byte \param1
+	.4byte \bytePtr
+	.byte \value
 	.endm
 
-	.macro copyarray param0:req, param1:req, param2:req
+	.macro copyarray dest:req, src:req, size:req
 	.byte 0x31
-	.4byte \param0
-	.4byte \param1
-	.byte \param2
+	.4byte \dest
+	.4byte \src
+	.byte \size
 	.endm
 
-	.macro copyarraywithindex param0:req, param1:req, param2:req, param3:req
+	.macro copyarraywithindex dest:req, src:req, indexPtr:req, size:req
 	.byte 0x32
-	.4byte \param0
-	.4byte \param1
-	.4byte \param2
-	.byte \param3
+	.4byte \dest
+	.4byte \src
+	.4byte \indexPtr
+	.byte \size
 	.endm
 
-	.macro orbyte ptr:req, param1:req
+	.macro orbyte bytePtr:req, value:req
 	.byte 0x33
-	.4byte \ptr
-	.byte \param1
+	.4byte \bytePtr
+	.byte \value
 	.endm
 
-	.macro orhalfword ptr:req, param1:req
+	.macro orhalfword halfwordPtr:req, value:req
 	.byte 0x34
-	.4byte \ptr
-	.2byte \param1
+	.4byte \halfwordPtr
+	.2byte \value
 	.endm
 
-	.macro orword ptr:req, param1:req
+	.macro orword wordPtr:req, value:req
 	.byte 0x35
-	.4byte \ptr
-	.4byte \param1
+	.4byte \wordPtr
+	.4byte \value
 	.endm
 
-	.macro bicbyte ptr:req, param1:req
+	.macro bicbyte bytePtr:req, value:req
 	.byte 0x36
-	.4byte \ptr
-	.byte \param1
+	.4byte \bytePtr
+	.byte \value
 	.endm
 
-	.macro bichalfword ptr:req, param1:req
+	.macro bichalfword halfwordPtr:req, value:req
 	.byte 0x37
-	.4byte \ptr
-	.2byte \param1
+	.4byte \halfwordPtr
+	.2byte \value
 	.endm
 
-	.macro bicword ptr:req, param1:req
+	.macro bicword wordPtr:req, value:req
 	.byte 0x38
-	.4byte \ptr
-	.4byte \param1
+	.4byte \wordPtr
+	.4byte \value
 	.endm
 
-	.macro pause param0:req
+	.macro pause frames:req
 	.byte 0x39
-	.2byte \param0
+	.2byte \frames
 	.endm
 
 	.macro waitstate

@@ -487,10 +487,10 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro openpartyscreen param0:req, param1:req
+	.macro openpartyscreen battler:req, failInstr:req
 	.byte 0x50
-	.byte \param0
-	.4byte \param1
+	.byte \battler
+	.4byte \failInstr
 	.endm
 
 	.macro switchhandleorder battler:req, param1:req

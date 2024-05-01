@@ -698,6 +698,8 @@ struct BattleStruct
     u8 lastMoveTarget[MAX_BATTLERS_COUNT]; // The last target on which each mon used a move, for the sake of Instruct
     u8 attackerBeforeBounce:2;
     bool8 hitSwitchTargetFailed:1;
+    // pokeemerald unknown use
+    u8 field_93; // related to choosing pokemon?
 };
 
 extern struct BattleStruct *gBattleStruct;

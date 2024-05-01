@@ -977,8 +977,9 @@ BattleScript_EffectCounter::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
-	typecalc2
-	adjustsetdamage
+	typecalc
+	bichalfword gMoveResultFlags, MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectEncore::
@@ -1294,18 +1295,6 @@ BattleScript_EffectSandstorm::
 	setsandstorm
 	goto BattleScript_MoveWeatherChange
 
-BattleScript_EffectRollout::
-	attackcanceler
-	attackstring
-	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_RolloutCheckAccuracy
-	ppreduce
-BattleScript_RolloutCheckAccuracy::
-	accuracycheck BattleScript_RolloutHit, ACC_CURR_MOVE
-BattleScript_RolloutHit::
-	typecalc2
-	rolloutdamagecalculation
-	goto BattleScript_HitFromCritCalc
-
 BattleScript_EffectSwagger::
 	attackcanceler
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_MakeMoveMissed
@@ -1505,8 +1494,9 @@ BattleScript_EffectMirrorCoat::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	ppreduce
-	typecalc2
-	adjustsetdamage
+	typecalc
+	bichalfword gMoveResultFlags, MOVE_RESULT_NOT_VERY_EFFECTIVE | MOVE_RESULT_SUPER_EFFECTIVE
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectTwister::
@@ -2085,10 +2075,9 @@ BattleScript_EffectBrickBreak::
 	removelightscreenreflect
 	critcalc
 	damagecalc
-	typecalc
 	adjustdamage
 	jumpifbyte CMP_EQUAL, sB_ANIM_TURN, 0, BattleScript_BrickBreakAnim
-	bicbyte gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
+	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE
 BattleScript_BrickBreakAnim::
 	attackanimation
 	waitanimation
@@ -2096,7 +2085,7 @@ BattleScript_BrickBreakAnim::
 	printstring STRINGID_THEWALLSHATTERED
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_BrickBreakDoHit::
-	typecalc2
+	typecalc
 	effectivenesssound
 	hitanimation BS_TARGET
 	waitstate

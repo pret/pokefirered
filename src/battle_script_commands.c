@@ -409,7 +409,7 @@ static void Cmd_playanimation_var(void);
 static void Cmd_setgraphicalstatchangevalues(void);
 static void Cmd_playstatchangeanimation(void);
 static void Cmd_moveend(void);
-static void Cmd_typecalc2(void);
+static void Cmd_sethealblock(void);
 static void Cmd_returnatktoball(void);
 static void Cmd_getswitchedmondata(void);
 static void Cmd_switchindataupdate(void);
@@ -661,10 +661,10 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setgraphicalstatchangevalues,            //0x47 // done
     Cmd_playstatchangeanimation,                 //0x48 // done
     Cmd_moveend,                                 //0x49 // done
-    Cmd_typecalc2,                               //0x4A
-    Cmd_returnatktoball,                         //0x4B
-    Cmd_getswitchedmondata,                      //0x4C
-    Cmd_switchindataupdate,                      //0x4D
+    Cmd_sethealblock,                            //0x4A // done
+    Cmd_returnatktoball,                         //0x4B // done
+    Cmd_getswitchedmondata,                      //0x4C // done
+    Cmd_switchindataupdate,                      //0x4D // done
     Cmd_switchinanim,                            //0x4E
     Cmd_jumpifcantswitch,                        //0x4F
     Cmd_openpartyscreen,                         //0x50
@@ -6624,170 +6624,119 @@ static void Cmd_moveend(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_typecalc2(void)
+static void Cmd_sethealblock(void)
 {
-    u8 flags = 0;
-    s32 i = 0;
-    u8 moveType = gMovesInfo[gCurrentMove].type;
+    CMD_ARGS(const u8 *failInstr);
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if (gStatuses3[gBattlerTarget] & STATUS3_HEAL_BLOCK)
     {
-        gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
-        gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
-        gLastLandedMoves[gBattlerTarget] = 0;
-        gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
-        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
     {
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-        {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-            {
-                if (gBattleMons[gBattlerTarget].status2 & STATUS2_FORESIGHT)
-                {
-                    break;
-                }
-                else
-                {
-                    i += 3;
-                    continue;
-                }
-            }
-
-            if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-            {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
-                {
-                    if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
-                    {
-                        gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-                        break;
-                    }
-                    if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-                    }
-                    if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_SUPER_EFFECTIVE;
-                    }
-                }
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2)
-                {
-                    if (gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-                        && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
-                    {
-                        gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-                        break;
-                    }
-                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
-                        && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-                        && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-                    }
-                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
-                        && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-                        && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_SUPER_EFFECTIVE;
-                    }
-                }
-            }
-            i += 3;
-        }
+        gStatuses3[gBattlerTarget] |= STATUS3_HEAL_BLOCK;
+        gDisableStructs[gBattlerTarget].healBlockTimer = 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
-
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD
-        && !(flags & MOVE_RESULT_NO_EFFECT)
-        && AttacksThisTurn(gBattlerAttacker, gCurrentMove) == 2
-        && (!(flags & MOVE_RESULT_SUPER_EFFECTIVE) || ((flags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) == (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
-        && gMovesInfo[gCurrentMove].power)
-    {
-        gLastUsedAbility = ABILITY_WONDER_GUARD;
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        gLastLandedMoves[gBattlerTarget] = 0;
-        gBattleCommunication[MISS_TYPE] = B_MSG_AVOIDED_DMG;
-        RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
-    }
-    if (gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
-        gProtectStructs[gBattlerAttacker].targetNotAffected = 1;
-
-    gBattlescriptCurrInstr++;
 }
 
 static void Cmd_returnatktoball(void)
 {
+    CMD_ARGS();
+
     gActiveBattler = gBattlerAttacker;
-    if (!(gHitMarker & HITMARKER_FAINTED(gActiveBattler)))
+    if (!(gHitMarker & HITMARKER_FAINTED(gBattlerAttacker)))
     {
         BtlController_EmitReturnMonToBall(BUFFER_A, FALSE);
-        MarkBattlerForControllerExec(gActiveBattler);
+        MarkBattlerForControllerExec(gBattlerAttacker);
     }
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_getswitchedmondata(void)
 {
+    CMD_ARGS(u8 battler);
+
+    u32 battler = GetBattlerForBattleScript(cmd->battler);
     if (gBattleControllerExecFlags)
         return;
+    
+    gActiveBattler = battler;
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    gBattlerPartyIndexes[battler] = gBattleStruct->monToSwitchIntoId[battler];
 
-    gBattlerPartyIndexes[gActiveBattler] = *(gBattleStruct->monToSwitchIntoId + gActiveBattler);
+    BtlController_EmitGetMonData(BUFFER_A, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[battler]]);
+    MarkBattlerForControllerExec(battler);
 
-    BtlController_EmitGetMonData(BUFFER_A, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[gActiveBattler]]);
-    MarkBattlerForControllerExec(gActiveBattler);
-
-    gBattlescriptCurrInstr += 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_switchindataupdate(void)
 {
+    CMD_ARGS(u8 battler);
+
     struct BattlePokemon oldData;
-    s32 i;
+    u32 battler, i;
     u8 *monData;
 
     if (gBattleControllerExecFlags)
         return;
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    oldData = gBattleMons[gActiveBattler];
-    monData = (u8 *)(&gBattleMons[gActiveBattler]);
+    battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    oldData = gBattleMons[battler];
+    monData = (u8 *)(&gBattleMons[battler]);
 
     for (i = 0; i < sizeof(struct BattlePokemon); i++)
-        monData[i] = gBattleBufferB[gActiveBattler][4 + i];
+        monData[i] = gBattleBufferB[battler][4 + i];
 
-    gBattleMons[gActiveBattler].type1 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[0];
-    gBattleMons[gActiveBattler].type2 = gSpeciesInfo[gBattleMons[gActiveBattler].species].types[1];
-    gBattleMons[gActiveBattler].ability = GetAbilityBySpecies(gBattleMons[gActiveBattler].species, gBattleMons[gActiveBattler].abilityNum);
+    // Edge case: the sent out pokemon has 0 HP. This should never happen.
+    if (gBattleMons[battler].hp == 0)
+    {
+        struct Pokemon *party = GetBattlerParty(battler);
+        // Find the first possible replacement for the not valid pokemon.
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (IsValidForBattle(&party[i]))
+                break;
+        }
+        // There is valid replacement.
+        if (i != PARTY_SIZE)
+        {
+            gBattlerPartyIndexes[battler] = gBattleStruct->monToSwitchIntoId[battler] = i;
+            BtlController_EmitGetMonData(BUFFER_A, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[battler]]);
+            MarkBattlerForControllerExec(battler);
+            return;
+        }
+    }
+
+    gBattleMons[battler].type1 = gSpeciesInfo[gBattleMons[battler].species].types[0];
+    gBattleMons[battler].type2 = gSpeciesInfo[gBattleMons[battler].species].types[1];
+    gBattleMons[battler].type3 = TYPE_MYSTERY;
+    gBattleMons[battler].ability = GetAbilityBySpecies(gBattleMons[battler].species, gBattleMons[battler].abilityNum);
 
     // check knocked off item
-    i = GetBattlerSide(gActiveBattler);
-    if (gWishFutureKnock.knockedOffMons[i] & gBitTable[gBattlerPartyIndexes[gActiveBattler]])
+    i = GetBattlerSide(battler);
+    if (gWishFutureKnock.knockedOffMons[i] & gBitTable[gBattlerPartyIndexes[battler]])
     {
-        gBattleMons[gActiveBattler].item = ITEM_NONE;
+        gBattleMons[battler].item = ITEM_NONE;
     }
 
     if (gMovesInfo[gCurrentMove].effect == EFFECT_BATON_PASS)
     {
         for (i = 0; i < NUM_BATTLE_STATS; i++)
         {
-            gBattleMons[gActiveBattler].statStages[i] = oldData.statStages[i];
+            gBattleMons[battler].statStages[i] = oldData.statStages[i];
         }
-        gBattleMons[gActiveBattler].status2 = oldData.status2;
+        gBattleMons[battler].status2 = oldData.status2;
     }
 
-    SwitchInClearSetData(gActiveBattler);
+    SwitchInClearSetData(battler);
 
-    gBattleScripting.battler = gActiveBattler;
+    gBattleScripting.battler = battler;
 
-    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler]);
+    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, battler, gBattlerPartyIndexes[battler]);
 
-    gBattlescriptCurrInstr += 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_switchinanim(void)

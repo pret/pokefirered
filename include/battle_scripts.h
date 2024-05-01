@@ -352,7 +352,6 @@ extern const u8 BattleScript_EffectForesight[];
 extern const u8 BattleScript_EffectPerishSong[];
 extern const u8 BattleScript_EffectSandstorm[];
 extern const u8 BattleScript_EffectEndure[];
-extern const u8 BattleScript_EffectRollout[];
 extern const u8 BattleScript_EffectSwagger[];
 extern const u8 BattleScript_EffectFuryCutter[];
 extern const u8 BattleScript_EffectAttract[];

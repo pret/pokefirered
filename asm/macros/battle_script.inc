@@ -456,8 +456,9 @@
 	moveend 2, \to
 	.endm
 
-	.macro typecalc2
+	.macro sethealblock failInstr:req
 	.byte 0x4a
+	.4byte \failInstr
 	.endm
 
 	.macro returnatktoball

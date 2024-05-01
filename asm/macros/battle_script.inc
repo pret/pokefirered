@@ -615,8 +615,9 @@
 	.byte 0x68
 	.endm
 
-	.macro adjustsetdamage
+	.macro setgravity failInstr:req
 	.byte 0x69
+	.4byte \failInstr
 	.endm
 
 	.macro removeitem battler:req

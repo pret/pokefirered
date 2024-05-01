@@ -240,6 +240,7 @@ s32 CountUsablePartyMons(u32 battlerId);
 bool32 IsAiVsAiBattle(void);
 void RecordLastUsedMoveBy(u32 battlerId, u32 move);
 bool32 BattlerHasAi(u32 battlerId);
+void ClearBattlerItemEffectHistory(u32 battlerId);
 
 // end battle_ai_util.h
 

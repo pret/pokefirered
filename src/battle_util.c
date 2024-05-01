@@ -9613,5 +9613,10 @@ bool32 BattlerHasAi(u32 battlerId)
     }
 }
 
+void ClearBattlerItemEffectHistory(u32 battlerId)
+{
+    BATTLE_HISTORY->itemEffects[battlerId] = 0;
+}
+
 
 // end battle_ai_util.c

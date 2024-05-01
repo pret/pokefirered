@@ -591,7 +591,7 @@ BattleScript_EffectDragonRage::
 	typecalc
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	setword gBattleMoveDamage, 40
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectTrap::
@@ -957,7 +957,7 @@ BattleScript_EffectLevelDamage::
 	typecalc
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	dmgtolevel
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectPsywave::
@@ -968,7 +968,7 @@ BattleScript_EffectPsywave::
 	typecalc
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	psywavedamageeffect
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectCounter::
@@ -1414,7 +1414,7 @@ BattleScript_EffectSonicboom::
 	typecalc
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	setword gBattleMoveDamage, 20
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectMorningSun::
@@ -1742,7 +1742,7 @@ BattleScript_EffectSpitUp::
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	stockpiletobasedamage BattleScript_SpitUpFail
 	typecalc
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 BattleScript_SpitUpFail::
 	pause B_WAIT_TIME_SHORT
@@ -2114,7 +2114,7 @@ BattleScript_EffectEndeavor::
 	jumpifmovehadnoeffect BattleScript_HitFromAtkAnimation
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	copyword gBattleMoveDamage, gHpDealt
-	adjustsetdamage
+	adjustdamage
 	goto BattleScript_HitFromAtkAnimation
 
 BattleScript_EffectEruption::
@@ -2888,7 +2888,7 @@ BattleScript_BideAttack::
 	typecalc
 	bicbyte gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
 	copyword gBattleMoveDamage, sBIDE_DMG
-	adjustsetdamage
+	adjustdamage
 	setbyte sB_ANIM_TURN, 1
 	attackanimation
 	waitanimation
@@ -6082,4 +6082,20 @@ BattleScript_EffectStealthRock::
 	printstring STRINGID_POINTEDSTONESFLOAT
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_AbilityHpHeal:
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNSXRESTOREDHPALITTLE2
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	return
+
+BattleScript_CheekPouchActivates::
+	copybyte sSAVED_BATTLER, gBattlerAttacker
+	copybyte gBattlerAttacker, gBattlerAbility
+	call BattleScript_AbilityHpHeal
+	copybyte gBattlerAttacker, sSAVED_BATTLER
+	return
 

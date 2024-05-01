@@ -445,7 +445,7 @@ static void Cmd_status2animation(void);
 static void Cmd_chosenstatusanimation(void);
 static void Cmd_yesnobox(void);
 static void Cmd_cancelallactions(void);
-static void Cmd_adjustsetdamage(void);
+static void Cmd_setgravity(void);
 static void Cmd_removeitem(void);
 static void Cmd_atknameinbuff1(void);
 static void Cmd_drawlvlupbox(void);
@@ -695,10 +695,10 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_statusanimation,                         //0x64 // done
     Cmd_status2animation,                        //0x65 // done
     Cmd_chosenstatusanimation,                   //0x66 // done
-    Cmd_yesnobox,                                //0x67
-    Cmd_cancelallactions,                        //0x68
-    Cmd_adjustsetdamage,                         //0x69
-    Cmd_removeitem,                              //0x6A
+    Cmd_yesnobox,                                //0x67 // done
+    Cmd_cancelallactions,                        //0x68 // done
+    Cmd_setgravity,                              //0x69 // done
+    Cmd_removeitem,                              //0x6A // done
     Cmd_atknameinbuff1,                          //0x6B
     Cmd_drawlvlupbox,                            //0x6C
     Cmd_resetsentmonsvalue,                      //0x6D
@@ -8062,10 +8062,12 @@ static void Cmd_chosenstatusanimation(void)
 
 static void Cmd_yesnobox(void)
 {
+    CMD_ARGS();
+
     switch (gBattleCommunication[0])
     {
     case 0:
-        HandleBattleWindow(23, 8, 29, 13, 0);
+        HandleBattleWindow(YESNOBOX_X_Y, 0);
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
         gBattleCommunication[0]++;
         gBattleCommunication[CURSOR_POSITION] = 0;
@@ -8090,14 +8092,14 @@ static void Cmd_yesnobox(void)
         {
             gBattleCommunication[CURSOR_POSITION] = 1;
             PlaySE(SE_SELECT);
-            HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
-            gBattlescriptCurrInstr++;
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+            gBattlescriptCurrInstr = cmd->nextInstr;
         }
         else if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
-            HandleBattleWindow(23, 8, 29, 13, WINDOW_CLEAR);
-            gBattlescriptCurrInstr++;
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+            gBattlescriptCurrInstr = cmd->nextInstr;
         }
         break;
     }
@@ -8105,69 +8107,128 @@ static void Cmd_yesnobox(void)
 
 static void Cmd_cancelallactions(void)
 {
+    CMD_ARGS();
+
     s32 i;
 
     for (i = 0; i < gBattlersCount; i++)
         gActionsByTurnOrder[i] = B_ACTION_CANCEL_PARTNER;
 
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 // The same as adjustdamage, except there's no random damage multiplier.
-static void Cmd_adjustsetdamage(void)
+static void Cmd_setgravity(void)
 {
-    u8 holdEffect, param;
+    CMD_ARGS(const u8 *failInstr);
 
-    if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
+    if (gFieldStatuses & STATUS_FIELD_GRAVITY)
     {
-        holdEffect = gEnigmaBerries[gBattlerTarget].holdEffect;
-        param = gEnigmaBerries[gBattlerTarget].holdEffectParam;
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
     {
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerTarget].item);
-        param = ItemId_GetHoldEffectParam(gBattleMons[gBattlerTarget].item);
+        gFieldStatuses |= STATUS_FIELD_GRAVITY;
+        gFieldTimers.gravityTimer = 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
+}
 
-    gPotentialItemEffectBattler = gBattlerTarget;
+static bool32 TryCheekPouch(u32 battler, u32 itemId)
+{
+    if (ItemId_GetPocket(itemId) == POCKET_BERRY_POUCH
+        && GetBattlerAbility(battler) == ABILITY_CHEEK_POUCH
+        && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK)
+        && gBattleStruct->ateBerry[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]]
+        && !BATTLER_MAX_HP(battler))
+    {
+        // TODO: Dynamax
+        // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 3;
+        gBattleMoveDamage = gBattleMons[battler].maxHP / 3;
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+        gBattleMoveDamage *= -1;
+        gBattlerAbility = battler;
+        BattleScriptPush(gBattlescriptCurrInstr + 2);
+        gBattlescriptCurrInstr = BattleScript_CheekPouchActivates;
+        return TRUE;
+    }
+    return FALSE;
+}
 
-    if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < param)
+// Used by Bestow and Symbiosis to take an item from one battler and give to another.
+static void BestowItem(u32 battlerAtk, u32 battlerDef)
+{
+    gLastUsedItem = gBattleMons[battlerAtk].item;
+
+    gBattleMons[battlerAtk].item = ITEM_NONE;
+    gActiveBattler = battlerAtk;
+    BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battlerAtk].item), &gBattleMons[battlerAtk].item);
+    MarkBattlerForControllerExec(battlerAtk);
+    CheckSetUnburden(battlerAtk);
+
+    gBattleMons[battlerDef].item = gLastUsedItem;
+    gActiveBattler = battlerDef;
+    BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battlerDef].item), &gBattleMons[battlerDef].item);
+    MarkBattlerForControllerExec(battlerDef);
+    gBattleResources->flags->flags[battlerDef] &= ~RESOURCE_FLAG_UNBURDEN;
+}
+
+// Called by Cmd_removeitem. itemId represents the item that was removed, not being given.
+static bool32 TrySymbiosis(u32 battler, u32 itemId)
+{
+    if (!gBattleStruct->itemLost[gBattlerPartyIndexes[battler]].stolen
+        && gBattleStruct->changedItems[battler] == ITEM_NONE
+        && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_BUTTON
+        && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_PACK
+        && (B_SYMBIOSIS_GEMS < GEN_7 || !(gSpecialStatuses[battler].gemBoost))
+        && gCurrentMove != MOVE_FLING //Fling and damage-reducing berries are handled separately.
+        && !gSpecialStatuses[battler].berryReduced
+        && SYMBIOSIS_CHECK(battler, BATTLE_PARTNER(battler)))
     {
-        RecordItemEffectBattle(gBattlerTarget, holdEffect);
-        gSpecialStatuses[gBattlerTarget].focusBanded = 1;
+        BestowItem(BATTLE_PARTNER(battler), battler);
+        gLastUsedAbility = gBattleMons[BATTLE_PARTNER(battler)].ability;
+        gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(battler);
+        gBattlerAttacker = battler;
+        BattleScriptPush(gBattlescriptCurrInstr + 2);
+        gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
+        return TRUE;
     }
-    if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
-     && (gMovesInfo[gCurrentMove].effect == EFFECT_FALSE_SWIPE || gProtectStructs[gBattlerTarget].endured || gSpecialStatuses[gBattlerTarget].focusBanded)
-     && gBattleMons[gBattlerTarget].hp <= gBattleMoveDamage)
-    {
-        gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
-        if (gProtectStructs[gBattlerTarget].endured)
-        {
-            gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
-        }
-        else if (gSpecialStatuses[gBattlerTarget].focusBanded)
-        {
-            gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
-            gLastUsedItem = gBattleMons[gBattlerTarget].item;
-        }
-    }
-    gBattlescriptCurrInstr++;
+    return FALSE;
 }
 
 static void Cmd_removeitem(void)
 {
-    u16 *usedHeldItem;
+    CMD_ARGS(u8 battler);
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    u32 battler;
+    u16 itemId = 0;
 
-    usedHeldItem = &gBattleStruct->usedHeldItems[gActiveBattler][GetBattlerSide(gActiveBattler)];
-    *usedHeldItem = gBattleMons[gActiveBattler].item;
-    gBattleMons[gActiveBattler].item = ITEM_NONE;
+    if (gBattleScripting.overrideBerryRequirements)
+    {
+        // bug bite / pluck - don't remove current item
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
 
-    BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].item), &gBattleMons[gActiveBattler].item);
-    MarkBattlerForControllerExec(gActiveBattler);
+    battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    itemId = gBattleMons[battler].item;
 
-    gBattlescriptCurrInstr += 2;
+    // Popped Air Balloon cannot be restored by any means.
+    // Corroded items cannot be restored either.
+    if (GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_AIR_BALLOON
+        && gMovesInfo[gCurrentMove].effect != EFFECT_CORROSIVE_GAS)
+        gBattleStruct->usedHeldItems[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)] = itemId; // Remember if switched out
+
+    gBattleMons[battler].item = ITEM_NONE;
+    CheckSetUnburden(battler);
+
+    BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battler].item), &gBattleMons[battler].item);
+    MarkBattlerForControllerExec(battler);
+
+    ClearBattlerItemEffectHistory(battler);
+    if (!TryCheekPouch(battler, itemId) && !TrySymbiosis(battler, itemId))
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_atknameinbuff1(void)
@@ -13354,24 +13415,6 @@ void BS_TryRevertWeatherForm(void)
         return;
     }
     gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-// Used by Bestow and Symbiosis to take an item from one battler and give to another.
-static void BestowItem(u32 battlerAtk, u32 battlerDef)
-{
-    gLastUsedItem = gBattleMons[battlerAtk].item;
-
-    gBattleMons[battlerAtk].item = ITEM_NONE;
-    gActiveBattler = battlerAtk;
-    BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battlerAtk].item), &gBattleMons[battlerAtk].item);
-    MarkBattlerForControllerExec(battlerAtk);
-    CheckSetUnburden(battlerAtk);
-
-    gBattleMons[battlerDef].item = gLastUsedItem;
-    gActiveBattler = battlerDef;
-    BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battlerDef].item), &gBattleMons[battlerDef].item);
-    MarkBattlerForControllerExec(battlerDef);
-    gBattleResources->flags->flags[battlerDef] &= ~RESOURCE_FLAG_UNBURDEN;
 }
 
 void BS_TrySymbiosis(void)

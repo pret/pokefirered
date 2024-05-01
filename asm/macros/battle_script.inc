@@ -546,9 +546,9 @@
 	.4byte \forgotMoveInstr
 	.endm
 
-	.macro yesnoboxstoplearningmove param0:req
+	.macro yesnoboxstoplearningmove noInstr:req
 	.byte 0x5b
-	.4byte \param0
+	.4byte \noInstr
 	.endm
 
 	.macro hitanimation battler:req
@@ -556,9 +556,8 @@
 	.byte \battler
 	.endm
 
-	.macro getmoneyreward addr
+	.macro getmoneyreward
 	.byte 0x5d
-	.4byte \addr
 	.endm
 
 	.macro updatebattlermoves battler:req

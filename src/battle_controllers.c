@@ -1117,12 +1117,12 @@ void BtlController_EmitPlaySE(u8 bufferId, u16 songId)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitPlayFanfare(u8 bufferId, u16 songId)
+void BtlController_EmitPlayFanfareOrBGM(u32 bufferId, u16 songId, bool8 playBGM)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_PLAYFANFARE;
+    sBattleBuffersTransferData[0] = CONTROLLER_PLAYFANFAREORBGM;
     sBattleBuffersTransferData[1] = songId;
     sBattleBuffersTransferData[2] = (songId & 0xFF00) >> 8;
-    sBattleBuffersTransferData[3] = 0;
+    sBattleBuffersTransferData[3] = playBGM;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 

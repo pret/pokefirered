@@ -181,7 +181,7 @@ enum
     CONTROLLER_HITANIMATION,
     CONTROLLER_CANTSWITCH,
     CONTROLLER_PLAYSE,
-    CONTROLLER_PLAYFANFARE,
+    CONTROLLER_PLAYFANFAREORBGM,
     CONTROLLER_FAINTINGCRY,
     CONTROLLER_INTROSLIDE,
     CONTROLLER_INTROTRAINERBALLTHROW,
@@ -238,7 +238,7 @@ void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 b);
 void BtlController_EmitHitAnimation(u8 bufferId);
 void BtlController_EmitCantSwitch(u8 bufferId);
 void BtlController_EmitPlaySE(u8 bufferId, u16 songId);
-void BtlController_EmitPlayFanfare(u8 bufferId, u16 songId);
+void BtlController_EmitPlayFanfareOrBGM(u32 bufferId, u16 songId, bool8 playBGM);
 void BtlController_EmitFaintingCry(u8 bufferId);
 void BtlController_EmitIntroSlide(u8 bufferId, u8 terrainId);
 void BtlController_EmitIntroTrainerBallThrow(u8 bufferId);

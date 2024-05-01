@@ -670,11 +670,11 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_openpartyscreen,                         //0x50 // done
     Cmd_switchhandleorder,                       //0x51 // done
     Cmd_switchineffects,                         //0x52 // done
-    Cmd_trainerslidein,                          //0x53
-    Cmd_playse,                                  //0x54
-    Cmd_fanfare,                                 //0x55
-    Cmd_playfaintcry,                            //0x56
-    Cmd_endlinkbattle,                           //0x57
+    Cmd_trainerslidein,                          //0x53 // done
+    Cmd_playse,                                  //0x54 // done
+    Cmd_fanfare,                                 //0x55 // done
+    Cmd_playfaintcry,                            //0x56 // done
+    Cmd_endlinkbattle,                           //0x57 // done
     Cmd_returntoball,                            //0x58 // done
     Cmd_handlelearnnewmove,                      //0x59
     Cmd_yesnoboxlearnmove,                       //0x5A
@@ -7519,50 +7519,57 @@ static void Cmd_switchineffects(void)
 
 static void Cmd_trainerslidein(void)
 {
-    if (!gBattlescriptCurrInstr[1])
-        gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-    else
-        gActiveBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-    BtlController_EmitTrainerSlide(BUFFER_A);
-    MarkBattlerForControllerExec(gActiveBattler);
+    CMD_ARGS(u8 battler);
 
-    gBattlescriptCurrInstr += 2;
+    u32 battler = gActiveBattler = GetBattlerAtPosition(cmd->battler);
+    BtlController_EmitTrainerSlide(BUFFER_A);
+    MarkBattlerForControllerExec(battler);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_playse(void)
 {
-    gActiveBattler = gBattlerAttacker;
-    BtlController_EmitPlaySE(BUFFER_A, T2_READ_16(gBattlescriptCurrInstr + 1));
-    MarkBattlerForControllerExec(gActiveBattler);
+    CMD_ARGS(u16 song);
 
-    gBattlescriptCurrInstr += 3;
+    gActiveBattler = gBattlerAttacker;
+    BtlController_EmitPlaySE(BUFFER_A, cmd->song);
+    MarkBattlerForControllerExec(gBattlerAttacker);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_fanfare(void)
 {
-    gActiveBattler = gBattlerAttacker;
-    BtlController_EmitPlayFanfare(BUFFER_A, T2_READ_16(gBattlescriptCurrInstr + 1));
-    MarkBattlerForControllerExec(gActiveBattler);
+    CMD_ARGS(u16 song);
 
-    gBattlescriptCurrInstr += 3;
+    gActiveBattler = gBattlerAttacker;
+    BtlController_EmitPlayFanfareOrBGM(BUFFER_A, cmd->song, FALSE);
+    MarkBattlerForControllerExec(gBattlerAttacker);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_playfaintcry(void)
 {
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    BtlController_EmitFaintingCry(BUFFER_A);
-    MarkBattlerForControllerExec(gActiveBattler);
+    CMD_ARGS(u8 battler);
 
-    gBattlescriptCurrInstr += 2;
+    u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    BtlController_EmitFaintingCry(BUFFER_A);
+    MarkBattlerForControllerExec(battler);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_endlinkbattle(void)
 {
-    gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-    BtlController_EmitEndLinkBattle(BUFFER_A, gBattleOutcome);
-    MarkBattlerForControllerExec(gActiveBattler);
+    CMD_ARGS();
 
-    gBattlescriptCurrInstr += 1;
+    u32 battler = gActiveBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+    BtlController_EmitEndLinkBattle(BUFFER_A, gBattleOutcome);
+    MarkBattlerForControllerExec(battler);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_returntoball(void)

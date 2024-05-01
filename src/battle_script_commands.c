@@ -689,12 +689,12 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_updatebattlermoves,                      //0x5E // done
     Cmd_swapattackerwithtarget,                  //0x5F // done
     Cmd_incrementgamestat,                       //0x60 // done
-    Cmd_drawpartystatussummary,                  //0x61
-    Cmd_hidepartystatussummary,                  //0x62
-    Cmd_jumptocalledmove,                        //0x63
-    Cmd_statusanimation,                         //0x64
-    Cmd_status2animation,                        //0x65
-    Cmd_chosenstatusanimation,                   //0x66
+    Cmd_drawpartystatussummary,                  //0x61 // done
+    Cmd_hidepartystatussummary,                  //0x62 // done
+    Cmd_jumptocalledmove,                        //0x63 // done
+    Cmd_statusanimation,                         //0x64 // done
+    Cmd_status2animation,                        //0x65 // done
+    Cmd_chosenstatusanimation,                   //0x66 // done
     Cmd_yesnobox,                                //0x67
     Cmd_cancelallactions,                        //0x68
     Cmd_adjustsetdamage,                         //0x69
@@ -7908,7 +7908,7 @@ static void Cmd_updatebattlermoves(void)
          if (gBattleControllerExecFlags == 0)
          {
             s32 i;
-            struct BattlePokemon *bufferPoke = (struct BattlePokemon *) &gBattleResources->bufferB[battler][4];
+            struct BattlePokemon *bufferPoke = (struct BattlePokemon *) &gBattleBufferB[battler][4];
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 gBattleMons[battler].moves[i] = bufferPoke->moves[i];
@@ -7948,19 +7948,17 @@ static void Cmd_incrementgamestat(void)
 
 static void Cmd_drawpartystatussummary(void)
 {
-    s32 i;
+    CMD_ARGS(u8 battler);
+
+    u32 battler, i;
     struct Pokemon *party;
     struct HpAndStatus hpStatuses[PARTY_SIZE];
 
     if (gBattleControllerExecFlags)
         return;
 
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-
-    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    party = GetBattlerParty(battler);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -7978,23 +7976,27 @@ static void Cmd_drawpartystatussummary(void)
     }
 
     BtlController_EmitDrawPartyStatusSummary(BUFFER_A, hpStatuses, 1);
-    MarkBattlerForControllerExec(gActiveBattler);
+    MarkBattlerForControllerExec(battler);
 
-    gBattlescriptCurrInstr += 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_hidepartystatussummary(void)
 {
-    gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-    BtlController_EmitHidePartyStatusSummary(BUFFER_A);
-    MarkBattlerForControllerExec(gActiveBattler);
+    CMD_ARGS(u8 battler);
 
-    gBattlescriptCurrInstr += 2;
+    u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+    BtlController_EmitHidePartyStatusSummary(BUFFER_A);
+    MarkBattlerForControllerExec(battler);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_jumptocalledmove(void)
 {
-    if (gBattlescriptCurrInstr[1])
+    CMD_ARGS(bool8 notChosenMove);
+
+    if (cmd->notChosenMove)
         gCurrentMove = gCalledMove;
     else
         gChosenMove = gCurrentMove = gCalledMove;
@@ -8004,55 +8006,57 @@ static void Cmd_jumptocalledmove(void)
 
 static void Cmd_statusanimation(void)
 {
+    CMD_ARGS(u8 battler);
+
     if (gBattleControllerExecFlags == 0)
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        if (!(gStatuses3[gActiveBattler] & STATUS3_SEMI_INVULNERABLE)
-            && gDisableStructs[gActiveBattler].substituteHP == 0
-            && !(gHitMarker & HITMARKER_NO_ANIMATIONS))
+        u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+        if (!(gStatuses3[battler] & STATUS3_SEMI_INVULNERABLE)
+            && gDisableStructs[battler].substituteHP == 0
+            && !(gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION)))
         {
-            BtlController_EmitStatusAnimation(BUFFER_A, FALSE, gBattleMons[gActiveBattler].status1);
-            MarkBattlerForControllerExec(gActiveBattler);
+            BtlController_EmitStatusAnimation(BUFFER_A, FALSE, gBattleMons[battler].status1);
+            MarkBattlerForControllerExec(battler);
         }
-        gBattlescriptCurrInstr += 2;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
 static void Cmd_status2animation(void)
 {
-    u32 wantedToAnimate;
+    CMD_ARGS(u8 battler, u32 status2);
 
     if (gBattleControllerExecFlags == 0)
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        wantedToAnimate = T1_READ_32(gBattlescriptCurrInstr + 2);
-        if (!(gStatuses3[gActiveBattler] & STATUS3_SEMI_INVULNERABLE)
-            && gDisableStructs[gActiveBattler].substituteHP == 0
-            && !(gHitMarker & HITMARKER_NO_ANIMATIONS))
+        u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+        u32 status2ToAnim = cmd->status2;
+        if (!(gStatuses3[battler] & STATUS3_SEMI_INVULNERABLE)
+            && gDisableStructs[battler].substituteHP == 0
+            && !(gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION)))
         {
-            BtlController_EmitStatusAnimation(BUFFER_A, TRUE, gBattleMons[gActiveBattler].status2 & wantedToAnimate);
-            MarkBattlerForControllerExec(gActiveBattler);
+            BtlController_EmitStatusAnimation(BUFFER_A, TRUE, gBattleMons[battler].status2 & status2ToAnim);
+            MarkBattlerForControllerExec(battler);
         }
-        gBattlescriptCurrInstr += 6;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
 static void Cmd_chosenstatusanimation(void)
 {
-    u32 wantedStatus;
+    CMD_ARGS(u8 battler, bool8 isStatus2, u32 status);
 
     if (gBattleControllerExecFlags == 0)
     {
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        wantedStatus = T1_READ_32(gBattlescriptCurrInstr + 3);
-        if (!(gStatuses3[gActiveBattler] & STATUS3_SEMI_INVULNERABLE)
-            && gDisableStructs[gActiveBattler].substituteHP == 0
-            && !(gHitMarker & HITMARKER_NO_ANIMATIONS))
+        u32 battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+        u32 wantedStatus = cmd->status;
+        if (!(gStatuses3[battler] & STATUS3_SEMI_INVULNERABLE)
+            && gDisableStructs[battler].substituteHP == 0
+            && !(gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION)))
         {
-            BtlController_EmitStatusAnimation(BUFFER_A, gBattlescriptCurrInstr[2], wantedStatus);
-            MarkBattlerForControllerExec(gActiveBattler);
+            BtlController_EmitStatusAnimation(BUFFER_A, cmd->isStatus2, wantedStatus);
+            MarkBattlerForControllerExec(battler);
         }
-        gBattlescriptCurrInstr += 7;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 

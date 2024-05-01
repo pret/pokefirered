@@ -584,9 +584,9 @@
 	.byte \battler
 	.endm
 
-	.macro jumptocalledmove param0:req
+	.macro jumptocalledmove notChosenMove:req
 	.byte 0x63
-	.byte \param0
+	.byte \notChosenMove
 	.endm
 
 	.macro statusanimation battler:req
@@ -600,11 +600,11 @@
 	.4byte \status2
 	.endm
 
-	.macro chosenstatusanimation battler:req, param1:req, param2:req
+	.macro chosenstatusanimation battler:req, isStatus2:req, status:req
 	.byte 0x66
 	.byte \battler
-	.byte \param1
-	.4byte \param2
+	.byte \isStatus2
+	.4byte \status
 	.endm
 
 	.macro yesnobox

@@ -947,26 +947,26 @@
 	.byte 0xae
 	.endm
 
-	.macro cursetarget param0:req
+	.macro cursetarget failInstr:req
 	.byte 0xaf
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro trysetspikes param0:req
+	.macro trysetspikes failInstr:req
 	.byte 0xb0
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro setforesight
 	.byte 0xb1
 	.endm
 
-	.macro trysetperishsong param0:req
+	.macro trysetperishsong failInstr:req
 	.byte 0xb2
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro rolloutdamagecalculation
+	.macro handlerollout
 	.byte 0xb3
 	.endm
 
@@ -976,12 +976,13 @@
 	.4byte \ptr
 	.endm
 
-	.macro furycuttercalc
+	.macro handlefurycutter
 	.byte 0xb5
 	.endm
 
-	.macro friendshiptodamagecalculation
+	.macro setembargo failInstr:req
 	.byte 0xb6
+	.4byte \failInstr
 	.endm
 
 	.macro presentdamagecalculation
@@ -996,9 +997,9 @@
 	.byte 0xb9
 	.endm
 
-	.macro jumpifnopursuitswitchdmg param0:req
+	.macro jumpifnopursuitswitchdmg jumpInstr:req
 	.byte 0xba
-	.4byte \param0
+	.4byte \jumpInstr
 	.endm
 
 	.macro setsunny

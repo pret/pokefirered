@@ -518,7 +518,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_ROLLOUT] =
     {
-        .battleScript = BattleScript_EffectHit,
+        .battleScript = BattleScript_EffectRollout,
     },
 
     [EFFECT_SWAGGER] =

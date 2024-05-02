@@ -1330,7 +1330,7 @@ BattleScript_EffectFuryCutter::
 	ppreduce
 	accuracycheck BattleScript_FuryCutterHit, ACC_CURR_MOVE
 BattleScript_FuryCutterHit::
-	furycuttercalc
+	handlefurycutter
 	critcalc
 	damagecalc
 	typecalc
@@ -1349,13 +1349,6 @@ BattleScript_EffectAttract::
 	printstring STRINGID_PKMNFELLINLOVE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectReturn::
-BattleScript_EffectFrustration::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	friendshiptodamagecalculation
-	goto BattleScript_HitFromAtkString
 
 BattleScript_EffectPresent::
 	attackcanceler
@@ -6387,4 +6380,16 @@ BattleScript_NotAffectedAbilityPopUp::
 	resultmessage
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectRollout::
+	attackcanceler
+	attackstring
+	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_RolloutCheckAccuracy
+	ppreduce
+BattleScript_RolloutCheckAccuracy::
+	accuracycheck BattleScript_RolloutHit, ACC_CURR_MOVE
+BattleScript_RolloutHit::
+	typecalc
+	handlerollout
+	goto BattleScript_HitFromCritCalc
 

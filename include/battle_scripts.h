@@ -334,7 +334,6 @@ extern const u8 BattleScript_EffectSketch[];
 extern const u8 BattleScript_EffectHit[];
 extern const u8 BattleScript_EffectSleepTalk[];
 extern const u8 BattleScript_EffectDestinyBond[];
-extern const u8 BattleScript_EffectFlail[];
 extern const u8 BattleScript_EffectSpite[];
 extern const u8 BattleScript_EffectHit[];
 extern const u8 BattleScript_EffectHealBell[];

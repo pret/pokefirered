@@ -825,13 +825,13 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_pickup,                                  //0xE5 // done
     Cmd_unused3,                                 //0xE6 // done
     Cmd_unused4,                                 //0xE7 // done
-    Cmd_settypebasedhalvers,                     //0xE8
+    Cmd_settypebasedhalvers,                     //0xE8 // done
     Cmd_jumpifsubstituteblocks,                  //0xE9 // done
-    Cmd_tryrecycleitem,                          //0xEA
-    Cmd_settypetoterrain,                        //0xEB
-    Cmd_pursuitdoubles,                          //0xEC
-    Cmd_snatchsetbattlers,                       //0xED
-    Cmd_removelightscreenreflect,                //0xEE
+    Cmd_tryrecycleitem,                          //0xEA // done
+    Cmd_settypetoterrain,                        //0xEB // done
+    Cmd_pursuitdoubles,                          //0xEC // done
+    Cmd_snatchsetbattlers,                       //0xED // done
+    Cmd_removelightscreenreflect,                //0xEE // done
     Cmd_handleballthrow,                         //0xEF
     Cmd_givecaughtmon,                           //0xF0
     Cmd_trysetcaughtmondexflags,                 //0xF1
@@ -1134,6 +1134,43 @@ static const struct PickupItem sPickupTable[] =
 
 #undef _
 
+static const u8 sTerrainToType[BATTLE_TERRAIN_COUNT] =
+{
+    [BATTLE_TERRAIN_GRASS]            = TYPE_GRASS,
+    [BATTLE_TERRAIN_LONG_GRASS]       = TYPE_GRASS,
+    [BATTLE_TERRAIN_SAND]             = TYPE_GROUND,
+    [BATTLE_TERRAIN_UNDERWATER]       = TYPE_WATER,
+    [BATTLE_TERRAIN_WATER]            = TYPE_WATER,
+    [BATTLE_TERRAIN_POND]             = TYPE_WATER,
+    [BATTLE_TERRAIN_CAVE]             = TYPE_ROCK,
+    [BATTLE_TERRAIN_BUILDING]         = TYPE_NORMAL,
+    [BATTLE_TERRAIN_SOARING]          = TYPE_FLYING,
+    [BATTLE_TERRAIN_SKY_PILLAR]       = TYPE_FLYING,
+    [BATTLE_TERRAIN_BURIAL_GROUND]    = TYPE_GHOST,
+    [BATTLE_TERRAIN_PUDDLE]           = TYPE_GROUND,
+    [BATTLE_TERRAIN_MARSH]            = TYPE_GROUND,
+    [BATTLE_TERRAIN_SWAMP]            = TYPE_GROUND,
+    [BATTLE_TERRAIN_SNOW]             = TYPE_ICE,
+    [BATTLE_TERRAIN_ICE]              = TYPE_ICE,
+    [BATTLE_TERRAIN_VOLCANO]          = TYPE_FIRE,
+    [BATTLE_TERRAIN_DISTORTION_WORLD] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_SPACE]            = TYPE_DRAGON,
+    [BATTLE_TERRAIN_ULTRA_SPACE]      = TYPE_PSYCHIC,
+    [BATTLE_TERRAIN_MOUNTAIN]         = (B_CAMOUFLAGE_TYPES >= GEN_5 ? TYPE_GROUND : TYPE_ROCK),
+    [BATTLE_TERRAIN_PLAIN]            = (B_CAMOUFLAGE_TYPES >= GEN_4 ? TYPE_GROUND : TYPE_NORMAL),
+    // pokefirered, necessary?
+    [BATTLE_TERRAIN_LINK] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_GYM] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_LEADER] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_INDOOR_2] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_INDOOR_1] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_LORELEI] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_BRUNO] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_AGATHA] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_LANCE] = TYPE_NORMAL,
+    [BATTLE_TERRAIN_CHAMPION] = TYPE_NORMAL,
+};
+
 // format: min. weight (hectograms), base power
 static const u16 sWeightToDamageTable[] =
 {
@@ -1143,20 +1180,6 @@ static const u16 sWeightToDamageTable[] =
     1000, 80,
     2000, 100,
     0xFFFF, 0xFFFF
-};
-
-static const u8 sTerrainToType[] =
-{
-    [BATTLE_TERRAIN_GRASS]      = TYPE_GRASS,
-    [BATTLE_TERRAIN_LONG_GRASS] = TYPE_GRASS,
-    [BATTLE_TERRAIN_SAND]       = TYPE_GROUND,
-    [BATTLE_TERRAIN_UNDERWATER] = TYPE_WATER,
-    [BATTLE_TERRAIN_WATER]      = TYPE_WATER,
-    [BATTLE_TERRAIN_POND]       = TYPE_WATER,
-    [BATTLE_TERRAIN_MOUNTAIN]   = TYPE_ROCK,
-    [BATTLE_TERRAIN_CAVE]       = TYPE_ROCK,
-    [BATTLE_TERRAIN_BUILDING]   = TYPE_NORMAL,
-    [BATTLE_TERRAIN_PLAIN]      = TYPE_NORMAL,
 };
 
 // - ITEM_ULTRA_BALL skips Master Ball and ITEM_NONE
@@ -15055,31 +15078,84 @@ static void Cmd_unused4(void)
 // Water and Mud Sport
 static void Cmd_settypebasedhalvers(void)
 {
+    CMD_ARGS(const u8 *failInstr);
+
     bool8 worked = FALSE;
 
     if (gMovesInfo[gCurrentMove].effect == EFFECT_MUD_SPORT)
     {
-        if (!(gStatuses4[gBattlerAttacker] & STATUS4_MUD_SPORT))
+        if (B_SPORT_TURNS >= GEN_6)
         {
-            gStatuses4[gBattlerAttacker] |= STATUS4_MUD_SPORT;
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_ELECTRIC;
-            worked = TRUE;
+            if (!(gFieldStatuses & STATUS_FIELD_MUDSPORT))
+            {
+                gFieldStatuses |= STATUS_FIELD_MUDSPORT;
+                gFieldTimers.mudSportTimer = 5;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_ELECTRIC;
+                worked = TRUE;
+            }
+        }
+        else
+        {
+            if (!(gStatuses4[gBattlerAttacker] & STATUS4_MUD_SPORT))
+            {
+                gStatuses4[gBattlerAttacker] |= STATUS4_MUD_SPORT;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_ELECTRIC;
+                worked = TRUE;
+            }
         }
     }
     else // Water Sport
     {
-        if (!(gStatuses4[gBattlerAttacker] & STATUS4_WATER_SPORT))
+        if (B_SPORT_TURNS >= GEN_6)
         {
-            gStatuses4[gBattlerAttacker] |= STATUS4_WATER_SPORT;
-            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_FIRE;
-            worked = TRUE;
+            if (!(gFieldStatuses & STATUS_FIELD_WATERSPORT))
+            {
+                gFieldStatuses |= STATUS_FIELD_WATERSPORT;
+                gFieldTimers.waterSportTimer = 5;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_FIRE;
+                worked = TRUE;
+            }
+        }
+        else
+        {
+            if (!(gStatuses4[gBattlerAttacker] & STATUS4_WATER_SPORT))
+            {
+                gStatuses4[gBattlerAttacker] |= STATUS4_WATER_SPORT;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEAKEN_FIRE;
+                worked = TRUE;
+            }
         }
     }
 
     if (worked)
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     else
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
+}
+
+bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move)
+{
+    if (!(gBattleMons[battlerDef].status2 & STATUS2_SUBSTITUTE))
+        return FALSE;
+    else if (gMovesInfo[move].ignoresSubstitute)
+        return FALSE;
+    else if (GetBattlerAbility(battlerAtk) == ABILITY_INFILTRATOR)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+bool32 DoesDisguiseBlockMove(u32 battler, u32 move)
+{
+    // TODO: Totems
+    if (!(gBattleMons[battler].species == SPECIES_MIMIKYU_DISGUISED /* || gBattleMons[battler].species == SPECIES_MIMIKYU_TOTEM_DISGUISED */)
+        || gBattleMons[battler].status2 & STATUS2_TRANSFORMED
+        || (!gProtectStructs[battler].confusionSelfDmg && (IS_MOVE_STATUS(move) || gHitMarker & HITMARKER_PASSIVE_DAMAGE))
+        || gHitMarker & HITMARKER_IGNORE_DISGUISE
+        || GetBattlerAbility(battler) != ABILITY_DISGUISE)
+        return FALSE;
+    else
+        return TRUE;
 }
 
 static void Cmd_jumpifsubstituteblocks(void)
@@ -15094,66 +15170,102 @@ static void Cmd_jumpifsubstituteblocks(void)
 
 static void Cmd_tryrecycleitem(void)
 {
+    CMD_ARGS(const u8 *failInstr);
+
     u16 *usedHeldItem;
 
     gActiveBattler = gBattlerAttacker;
-    usedHeldItem = &gBattleStruct->usedHeldItems[gActiveBattler][GetBattlerSide(gActiveBattler)];
-    if (*usedHeldItem != ITEM_NONE && gBattleMons[gActiveBattler].item == ITEM_NONE)
+    usedHeldItem = &gBattleStruct->usedHeldItems[gBattlerPartyIndexes[gBattlerAttacker]][GetBattlerSide(gBattlerAttacker)];
+    if (*usedHeldItem != ITEM_NONE && gBattleMons[gBattlerAttacker].item == ITEM_NONE)
     {
         gLastUsedItem = *usedHeldItem;
         *usedHeldItem = ITEM_NONE;
-        gBattleMons[gActiveBattler].item = gLastUsedItem;
+        gBattleMons[gBattlerAttacker].item = gLastUsedItem;
 
-        BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].item), &gBattleMons[gActiveBattler].item);
-        MarkBattlerForControllerExec(gActiveBattler);
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerAttacker].item), &gBattleMons[gBattlerAttacker].item);
+        MarkBattlerForControllerExec(gBattlerAttacker);
 
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
+}
+
+bool32 CanCamouflage(u8 battler)
+{
+    if (IS_BATTLER_OF_TYPE(battler, sTerrainToType[gBattleTerrain]))
+        return FALSE;
+    return TRUE;
 }
 
 static void Cmd_settypetoterrain(void)
 {
-    if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, sTerrainToType[gBattleTerrain]))
-    {
-        SET_BATTLER_TYPE(gBattlerAttacker, sTerrainToType[gBattleTerrain]);
-        PREPARE_TYPE_BUFFER(gBattleTextBuff1, sTerrainToType[gBattleTerrain]);
+    CMD_ARGS(const u8 *failInstr);
 
-        gBattlescriptCurrInstr += 5;
+    u8 terrainType;
+    switch(gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+    {
+    case STATUS_FIELD_ELECTRIC_TERRAIN:
+        terrainType = TYPE_ELECTRIC;
+        break;
+    case STATUS_FIELD_GRASSY_TERRAIN:
+        terrainType = TYPE_GRASS;
+        break;
+    case STATUS_FIELD_MISTY_TERRAIN:
+        terrainType = TYPE_FAIRY;
+        break;
+    case STATUS_FIELD_PSYCHIC_TERRAIN:
+        terrainType = TYPE_PSYCHIC;
+        break;
+    default:
+        terrainType = sTerrainToType[gBattleTerrain];
+        break;
+    }
+
+    if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, terrainType))
+    {
+        SET_BATTLER_TYPE(gBattlerAttacker, terrainType);
+        PREPARE_TYPE_BUFFER(gBattleTextBuff1, terrainType);
+
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
 }
 
 // Unused
 static void Cmd_pursuitdoubles(void)
 {
-    gActiveBattler = GetBattlerAtPosition(GetBattlerPosition(gBattlerAttacker) ^ BIT_FLANK);
+    CMD_ARGS(const u8 *failInstr);
+
+    u32 battler = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBattlerAttacker)));
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-        && !(gAbsentBattlerFlags & gBitTable[gActiveBattler])
-        && gChosenActionByBattler[gActiveBattler] == B_ACTION_USE_MOVE
-        && gChosenMoveByBattler[gActiveBattler] == MOVE_PURSUIT)
+        && !(gAbsentBattlerFlags & gBitTable[battler])
+        && gChosenActionByBattler[battler] == B_ACTION_USE_MOVE
+        && gMovesInfo[gChosenMoveByBattler[battler]].effect == EFFECT_PURSUIT)
     {
-        gActionsByTurnOrder[gActiveBattler] = B_ACTION_TRY_FINISH;
-        gCurrentMove = MOVE_PURSUIT;
-        gBattlescriptCurrInstr += 5;
+        gActionsByTurnOrder[battler] = B_ACTION_TRY_FINISH;
+        gCurrentMove = gChosenMoveByBattler[battler];
+        gBattlescriptCurrInstr = cmd->nextInstr;
         gBattleScripting.animTurn = 1;
-        gBattlerAttacker = gActiveBattler;
+        gBattleScripting.savedBattler = gBattlerAttacker;
+        gBattlerAttacker = battler;
     }
     else
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
 }
 
 static void Cmd_snatchsetbattlers(void)
 {
+    CMD_ARGS();
+
     gEffectBattler = gBattlerAttacker;
 
     if (gBattlerAttacker == gBattlerTarget)
@@ -15162,20 +15274,38 @@ static void Cmd_snatchsetbattlers(void)
         gBattlerTarget = gBattleScripting.battler;
 
     gBattleScripting.battler = gEffectBattler;
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 // Brick Break
 static void Cmd_removelightscreenreflect(void)
 {
-    u8 opposingSide = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
+    CMD_ARGS();
 
-    if (gSideTimers[opposingSide].reflectTimer || gSideTimers[opposingSide].lightscreenTimer)
+    u8 side;
+    bool32 failed;
+
+    if (B_BRICK_BREAK >= GEN_4)
+        side = GetBattlerSide(gBattlerTarget); // From Gen 4 onwards, Brick Break can remove screens on the user's side if used on an ally
+    else
+        side = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
+
+    if (B_BRICK_BREAK >= GEN_5)
+        failed = (gMoveResultFlags & MOVE_RESULT_NO_EFFECT);
+    else
+        failed = FALSE;
+
+    if (!failed
+     && (gSideTimers[side].reflectTimer
+      || gSideTimers[side].lightscreenTimer
+      || gSideTimers[side].auroraVeilTimer))
     {
-        gSideStatuses[opposingSide] &= ~SIDE_STATUS_REFLECT;
-        gSideStatuses[opposingSide] &= ~SIDE_STATUS_LIGHTSCREEN;
-        gSideTimers[opposingSide].reflectTimer = 0;
-        gSideTimers[opposingSide].lightscreenTimer = 0;
+        gSideStatuses[side] &= ~SIDE_STATUS_REFLECT;
+        gSideStatuses[side] &= ~SIDE_STATUS_LIGHTSCREEN;
+        gSideStatuses[side] &= ~SIDE_STATUS_AURORA_VEIL;
+        gSideTimers[side].reflectTimer = 0;
+        gSideTimers[side].lightscreenTimer = 0;
+        gSideTimers[side].auroraVeilTimer = 0;
         gBattleScripting.animTurn = 1;
         gBattleScripting.animTargetsHit = 1;
     }
@@ -15185,7 +15315,7 @@ static void Cmd_removelightscreenreflect(void)
         gBattleScripting.animTargetsHit = 0;
     }
 
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 u8 GetCatchingBattler(void)
@@ -15856,31 +15986,6 @@ bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler)
         return TRUE;
     }
     return FALSE;
-}
-
-bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move)
-{
-    if (!(gBattleMons[battlerDef].status2 & STATUS2_SUBSTITUTE))
-        return FALSE;
-    else if (gMovesInfo[move].ignoresSubstitute)
-        return FALSE;
-    else if (GetBattlerAbility(battlerAtk) == ABILITY_INFILTRATOR)
-        return FALSE;
-    else
-        return TRUE;
-}
-
-bool32 DoesDisguiseBlockMove(u32 battler, u32 move)
-{
-    // TODO: Totems
-    if (!(gBattleMons[battler].species == SPECIES_MIMIKYU_DISGUISED /* || gBattleMons[battler].species == SPECIES_MIMIKYU_TOTEM_DISGUISED */)
-        || gBattleMons[battler].status2 & STATUS2_TRANSFORMED
-        || (!gProtectStructs[battler].confusionSelfDmg && (IS_MOVE_STATUS(move) || gHitMarker & HITMARKER_PASSIVE_DAMAGE))
-        || gHitMarker & HITMARKER_IGNORE_DISGUISE
-        || GetBattlerAbility(battler) != ABILITY_DISGUISE)
-        return FALSE;
-    else
-        return TRUE;
 }
 
 static bool8 IsFinalStrikeEffect(u16 move)

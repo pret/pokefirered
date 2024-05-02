@@ -52,6 +52,7 @@ bool32 TryResetBattlerStatChanges(u8 battler);
 bool32 CanBattlerSwitch(u32 battlerId);
 u8 GetFirstFaintedPartyIndex(u8 battlerId);
 u16 GetNaturePowerMove(void);
+bool32 CanCamouflage(u8 battlerId);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const struct StatFractions gAccuracyStageRatios[];

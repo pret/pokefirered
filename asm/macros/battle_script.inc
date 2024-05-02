@@ -1235,9 +1235,9 @@
 	.byte 0xe7
 	.endm
 
-	.macro settypebasedhalvers param0:req
+	.macro settypebasedhalvers failInstr:req
 	.byte 0xe8
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro jumpifsubstituteblocks jumpInstr:req
@@ -1245,19 +1245,19 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro tryrecycleitem param0:req
+	.macro tryrecycleitem failInstr:req
 	.byte 0xea
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro settypetoterrain param0:req
+	.macro settypetoterrain failInstr:req
 	.byte 0xeb
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro pursuitrelated param0:req
+	.macro pursuitdoubles failInstr:req
 	.byte 0xec
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro snatchsetbattlers

@@ -655,12 +655,6 @@ BattleScript_EffectFocusEnergy::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectRecoil::
-	setmoveeffect MOVE_EFFECT_RECOIL_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
-	jumpifnotmove MOVE_STRUGGLE, BattleScript_EffectHit
-	incrementgamestat GAME_STAT_USED_STRUGGLE
-	goto BattleScript_EffectHit
-
 BattleScript_EffectConfuse::
 	attackcanceler
 	attackstring
@@ -3567,6 +3561,12 @@ BattleScript_MoveEffectBurn::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_UpdateEffectStatusIconRet
 
+BattleScript_MoveEffectFrostbite::
+	statusanimation BS_EFFECT_BATTLER
+	printfromtable gGotFrostbiteStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_UpdateEffectStatusIconRet
+
 BattleScript_MoveEffectFreeze::
 	statusanimation BS_EFFECT_BATTLER
 	printfromtable gGotFrozenStringIds
@@ -3578,7 +3578,7 @@ BattleScript_MoveEffectParalysis::
 	printfromtable gGotParalyzedStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_UpdateEffectStatusIconRet
-
+	
 BattleScript_MoveEffectUproar::
 	printstring STRINGID_PKMNCAUSEDUPROAR
 	waitmessage B_WAIT_TIME_LONG

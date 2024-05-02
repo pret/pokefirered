@@ -1306,6 +1306,41 @@
 	.byte 0xf7
 	.endm
 
+	.macro trainerslideout position:req
+	.byte 0xf8
+	.byte \position
+	.endm
+
+	.macro settelekinesis failInstr:req
+	.byte 0xf9
+	.4byte \failInstr
+	.endm
+
+	.macro swapstatstages stat:req
+	.byte 0xfa
+	.byte \stat
+	.endm
+
+	.macro averagestats stat:req
+	.byte 0xfb
+	.byte \stat
+	.endm
+
+	.macro jumpifoppositegenders jumpInstr:req
+	.byte 0xfc
+	.4byte \jumpInstr
+	.endm
+
+	.macro unused ptr:req
+	.byte 0xfd
+	.4byte \ptr
+	.endm
+
+	.macro tryworryseed failInstr:req
+	.byte 0xfe
+	.4byte \failInstr
+	.endm
+
 	.macro callnative func:req
 	.byte 0xff
 	.4byte \func

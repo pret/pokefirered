@@ -590,6 +590,13 @@ static void Cmd_subattackerhpbydmg(void);
 static void Cmd_removeattackerstatus1(void);
 static void Cmd_finishaction(void);
 static void Cmd_finishturn(void);
+static void Cmd_trainerslideout(void);
+static void Cmd_settelekinesis(void);
+static void Cmd_swapstatstages(void);
+static void Cmd_averagestats(void);
+static void Cmd_jumpifoppositegenders(void);
+static void Cmd_unused(void);
+static void Cmd_tryworryseed(void);
 static void Cmd_callnative(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
@@ -838,18 +845,18 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_trysetcaughtmondexflags,                 //0xF1 // done
     Cmd_displaydexinfo,                          //0xF2 // done
     Cmd_trygivecaughtmonnick,                    //0xF3 // done
-    Cmd_subattackerhpbydmg,                      //0xF4
-    Cmd_removeattackerstatus1,                   //0xF5
-    Cmd_finishaction,                            //0xF6
-    Cmd_finishturn,                              //0xF7
-    NULL,                                        //0xF8
-    NULL,                                        //0xF9
-    NULL,                                        //0xFA
-    NULL,                                        //0xFB
-    NULL,                                        //0xFC
-    NULL,                                        //0xFD
-    NULL,                                        //0xFE
-    Cmd_callnative,                              //0xFF
+    Cmd_subattackerhpbydmg,                      //0xF4 // done
+    Cmd_removeattackerstatus1,                   //0xF5 // done
+    Cmd_finishaction,                            //0xF6 // done
+    Cmd_finishturn,                              //0xF7 // done
+    Cmd_trainerslideout,                         //0xF8 // done
+    Cmd_settelekinesis,                          //0xF9 // done
+    Cmd_swapstatstages,                          //0xFA // done
+    Cmd_averagestats,                            //0xFB // done
+    Cmd_jumpifoppositegenders,                   //0xFC // done
+    Cmd_unused,                                  //0xFD // done
+    Cmd_tryworryseed,                            //0xFE // done
+    Cmd_callnative,                              //0xFF // done
 };
 
 const struct StatFractions gAccuracyStageRatios[] =
@@ -877,6 +884,7 @@ static const u32 sStatusFlagsForMoveEffects[NUM_MOVE_EFFECTS] =
     [MOVE_EFFECT_FREEZE]         = STATUS1_FREEZE,
     [MOVE_EFFECT_PARALYSIS]      = STATUS1_PARALYSIS,
     [MOVE_EFFECT_TOXIC]          = STATUS1_TOXIC_POISON,
+    [MOVE_EFFECT_FROSTBITE]      = STATUS1_FROSTBITE,
     [MOVE_EFFECT_CONFUSION]      = STATUS2_CONFUSION,
     [MOVE_EFFECT_FLINCH]         = STATUS2_FLINCHED,
     [MOVE_EFFECT_UPROAR]         = STATUS2_UPROAR,
@@ -890,7 +898,6 @@ static const u32 sStatusFlagsForMoveEffects[NUM_MOVE_EFFECTS] =
 
 static const u8 *const sMoveEffectBS_Ptrs[] =
 {
-    [0]                            = BattleScript_MoveEffectSleep,
     [MOVE_EFFECT_SLEEP]            = BattleScript_MoveEffectSleep,
     [MOVE_EFFECT_POISON]           = BattleScript_MoveEffectPoison,
     [MOVE_EFFECT_BURN]             = BattleScript_MoveEffectBurn,
@@ -898,37 +905,10 @@ static const u8 *const sMoveEffectBS_Ptrs[] =
     [MOVE_EFFECT_PARALYSIS]        = BattleScript_MoveEffectParalysis,
     [MOVE_EFFECT_TOXIC]            = BattleScript_MoveEffectToxic,
     [MOVE_EFFECT_CONFUSION]        = BattleScript_MoveEffectConfusion,
-    [MOVE_EFFECT_FLINCH]           = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_TRI_ATTACK]       = BattleScript_MoveEffectSleep,
     [MOVE_EFFECT_UPROAR]           = BattleScript_MoveEffectUproar,
     [MOVE_EFFECT_PAYDAY]           = BattleScript_MoveEffectPayDay,
-    [MOVE_EFFECT_CHARGING]         = BattleScript_MoveEffectSleep,
     [MOVE_EFFECT_WRAP]             = BattleScript_MoveEffectWrap,
-    [MOVE_EFFECT_RECOIL_25]        = BattleScript_MoveEffectRecoil,
-    [MOVE_EFFECT_ATK_PLUS_1]       = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_DEF_PLUS_1]       = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SPD_PLUS_1]       = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SP_ATK_PLUS_1]    = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SP_DEF_PLUS_1]    = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_ACC_PLUS_1]       = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_EVS_PLUS_1]       = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_ATK_MINUS_1]      = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_DEF_MINUS_1]      = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SPD_MINUS_1]      = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SP_ATK_MINUS_1]   = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_SP_DEF_MINUS_1]   = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_ACC_MINUS_1]      = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_EVS_MINUS_1]      = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_RECHARGE]         = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_RAGE]             = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_STEAL_ITEM]       = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_PREVENT_ESCAPE]   = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_NIGHTMARE]        = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_ALL_STATS_UP]     = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_RAPIDSPIN]        = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_REMOVE_PARALYSIS] = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_ATK_DEF_DOWN]     = BattleScript_MoveEffectSleep,
-    [MOVE_EFFECT_RECOIL_33]        = BattleScript_MoveEffectRecoil,
+    [MOVE_EFFECT_FROSTBITE]        = BattleScript_MoveEffectFrostbite,
 };
 
 static const struct WindowTemplate sUnusedWinTemplate =
@@ -15899,16 +15879,21 @@ static void Cmd_trygivecaughtmonnick(void)
 
 static void Cmd_subattackerhpbydmg(void)
 {
+    CMD_ARGS();
+
     gBattleMons[gBattlerAttacker].hp -= gBattleMoveDamage;
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_removeattackerstatus1(void)
 {
+    CMD_ARGS();
+
     gBattleMons[gBattlerAttacker].status1 = 0;
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+// CMD_ARGS is not needed for these functions as they end the script execution.
 static void Cmd_finishaction(void)
 {
     gCurrentActionFuncId = B_ACTION_FINISHED;
@@ -15918,6 +15903,124 @@ static void Cmd_finishturn(void)
 {
     gCurrentActionFuncId = B_ACTION_FINISHED;
     gCurrentTurnActionNumber = gBattlersCount;
+}
+
+static void Cmd_trainerslideout(void)
+{
+    CMD_ARGS(u8 position);
+
+    u32 battler = gActiveBattler = GetBattlerAtPosition(cmd->position);
+    BtlController_EmitTrainerSlideBack(BUFFER_A);
+    MarkBattlerForControllerExec(battler);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+static const u16 sTelekinesisBanList[] =
+{
+    SPECIES_DIGLETT,
+    SPECIES_DUGTRIO,
+    SPECIES_DIGLETT_ALOLAN,
+    SPECIES_DUGTRIO_ALOLAN,
+    SPECIES_SANDYGAST,
+    SPECIES_PALOSSAND,
+    SPECIES_GENGAR_MEGA,
+};
+
+bool32 IsTelekinesisBannedSpecies(u16 species)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sTelekinesisBanList); i++)
+    {
+        if (species == sTelekinesisBanList[i])
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static void Cmd_settelekinesis(void)
+{
+    CMD_ARGS(const u8 *failInstr);
+
+    if (gStatuses3[gBattlerTarget] & (STATUS3_TELEKINESIS | STATUS3_ROOTED | STATUS3_SMACKED_DOWN)
+        || gFieldStatuses & STATUS_FIELD_GRAVITY
+        || IsTelekinesisBannedSpecies(gBattleMons[gBattlerTarget].species))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        gStatuses3[gBattlerTarget] |= STATUS3_TELEKINESIS;
+        gDisableStructs[gBattlerTarget].telekinesisTimer = 3;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
+static void Cmd_swapstatstages(void)
+{
+    CMD_ARGS(u8 stat);
+
+    u8 stat = cmd->stat;
+    s8 atkStatStage = gBattleMons[gBattlerAttacker].statStages[stat];
+    s8 defStatStage = gBattleMons[gBattlerTarget].statStages[stat];
+
+    gBattleMons[gBattlerAttacker].statStages[stat] = defStatStage;
+    gBattleMons[gBattlerTarget].statStages[stat] = atkStatStage;
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+static void Cmd_averagestats(void)
+{
+    CMD_ARGS(u8 stat);
+
+    u8 stat = cmd->stat;
+    u16 atkStat = *(u16 *)((&gBattleMons[gBattlerAttacker].attack) + (stat - 1));
+    u16 defStat = *(u16 *)((&gBattleMons[gBattlerTarget].attack) + (stat - 1));
+    u16 average = (atkStat + defStat) / 2;
+
+    *(u16 *)((&gBattleMons[gBattlerAttacker].attack) + (stat - 1)) = average;
+    *(u16 *)((&gBattleMons[gBattlerTarget].attack) + (stat - 1)) = average;
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+static void Cmd_jumpifoppositegenders(void)
+{
+    CMD_ARGS(const u8 *jumpInstr);
+
+    if (AreBattlersOfOppositeGender(gBattlerAttacker, gBattlerTarget))
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+static void Cmd_unused(void)
+{
+}
+
+static void Cmd_tryworryseed(void)
+{
+    CMD_ARGS(const u8 *failInstr);
+
+    if (gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeOverwritten
+      || gBattleMons[gBattlerTarget].ability == ABILITY_INSOMNIA)
+    {
+        RecordAbilityBattle(gBattlerTarget, gBattleMons[gBattlerTarget].ability);
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else if (GetBattlerHoldEffect(gBattlerTarget, TRUE) == HOLD_EFFECT_ABILITY_SHIELD)
+    {
+        RecordItemEffectBattle(gBattlerTarget, HOLD_EFFECT_ABILITY_SHIELD);
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        gBattleMons[gBattlerTarget].ability = gBattleStruct->overwrittenAbilities[gBattlerTarget] = ABILITY_INSOMNIA;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }
 
 static void Cmd_callnative(void)

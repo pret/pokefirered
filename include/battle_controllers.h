@@ -181,7 +181,7 @@ enum
     CONTROLLER_HITANIMATION,
     CONTROLLER_CANTSWITCH,
     CONTROLLER_PLAYSE,
-    CONTROLLER_PLAYFANFARE,
+    CONTROLLER_PLAYFANFAREORBGM,
     CONTROLLER_FAINTINGCRY,
     CONTROLLER_INTROSLIDE,
     CONTROLLER_INTROTRAINERBALLTHROW,
@@ -206,6 +206,7 @@ void SetUpBattleVars(void);
 void InitBattleControllers(void);
 void TryReceiveLinkBattleData(void);
 void PrepareBufferDataTransferLink(u8 bufferId, u16 size, u8 *data);
+bool32 IsValidForBattle(struct Pokemon *mon);
 
 // emitters
 void BtlController_EmitGetMonData(u8 bufferId, u8 requestId, u8 monToCheck);
@@ -218,7 +219,7 @@ void BtlController_EmitTrainerSlide(u8 bufferId);
 void BtlController_EmitTrainerSlideBack(u8 bufferId);
 void BtlController_EmitFaintAnimation(u8 bufferId);
 void BtlController_EmitBallThrowAnim(u8 bufferId, u8 caseId);
-void BtlController_EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct *disableStructPtr);
+void BtlController_EmitMoveAnimation(u32 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct *disableStructPtr, u8 multihit);
 void BtlController_EmitPrintString(u8 bufferId, u16 stringId);
 void BtlController_EmitPrintSelectionString(u8 bufferId, u16 stringId);
 void BtlController_EmitChooseAction(u8 bufferId, u8 action, u16 itemId);
@@ -237,7 +238,7 @@ void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 b);
 void BtlController_EmitHitAnimation(u8 bufferId);
 void BtlController_EmitCantSwitch(u8 bufferId);
 void BtlController_EmitPlaySE(u8 bufferId, u16 songId);
-void BtlController_EmitPlayFanfare(u8 bufferId, u16 songId);
+void BtlController_EmitPlayFanfareOrBGM(u32 bufferId, u16 songId, bool8 playBGM);
 void BtlController_EmitFaintingCry(u8 bufferId);
 void BtlController_EmitIntroSlide(u8 bufferId, u8 terrainId);
 void BtlController_EmitIntroTrainerBallThrow(u8 bufferId);
@@ -245,7 +246,7 @@ void BtlController_EmitDrawPartyStatusSummary(u8 bufferId, struct HpAndStatus *h
 void BtlController_EmitHidePartyStatusSummary(u8 bufferId);
 void BtlController_EmitEndBounceEffect(u8 bufferId);
 void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible);
-void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument);
+void BtlController_EmitBattleAnimation(u32 bufferId, u8 animationId, struct DisableStruct* disableStructPtr, u16 argument);
 void BtlController_EmitLinkStandbyMsg(u8 bufferId, u8 mode);
 void BtlController_EmitResetActionMoveSelection(u8 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome);

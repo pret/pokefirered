@@ -136,11 +136,16 @@
 #define FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE 8
 #define FRIENDSHIP_EVENT_FAINT_LARGE          9
 
-#if P_UPDATED_FRIENDSHIP >= GEN_8
-#define STANDARD_FRIENDSHIP 50
-#else
-#define STANDARD_FRIENDSHIP 70
-#endif
+// Constants for GetBattlerAffectionHearts (based on friendship value)
+#define AFFECTION_NO_HEARTS     0 // 0-79 friendship
+#define AFFECTION_ONE_HEART     1 // 80-129 friendship
+#define AFFECTION_TWO_HEARTS    2 // 130-179 friendship
+#define AFFECTION_THREE_HEARTS  3 // 180-219 friendship
+#define AFFECTION_FOUR_HEARTS   4 // 220-254 friendship
+#define AFFECTION_FIVE_HEARTS   5 // Max friendship
+
+// Friendship value that the majority of species use.
+#define STANDARD_FRIENDSHIP ((P_UPDATED_FRIENDSHIP >= GEN_8) ? 50 : 70)
 
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255
@@ -152,6 +157,11 @@
 #define MAX_PER_STAT_EVS ((P_EV_CAP >= GEN_6) ? 252 : 255)
 #define MAX_TOTAL_EVS 510
 #define EV_ITEM_RAISE_LIMIT ((I_VITAMIN_EV_CAP >= GEN_8) ? MAX_PER_STAT_EVS : 100)
+
+// Move category defines.
+#define DAMAGE_CATEGORY_PHYSICAL    0
+#define DAMAGE_CATEGORY_SPECIAL     1
+#define DAMAGE_CATEGORY_STATUS      2
 
 // Battle move flags
 #define FLAG_MAKES_CONTACT          (1 << 0)
@@ -252,6 +262,11 @@
 // - Castform has 4 frames, 1 for each form
 // - Deoxys has 2 frames, 1 for each form
 #define MAX_MON_PIC_FRAMES 4
+
+#define BATTLE_ALIVE_EXCEPT_BATTLER  0
+#define BATTLE_ALIVE_SIDE            1
+
+#define SKIP_FRONT_ANIM (1 << 7)
 
 // used by ShouldIgnoreDeoxysForm
 #define DEOXYS_CHECK_BATTLE_SPRITE      1

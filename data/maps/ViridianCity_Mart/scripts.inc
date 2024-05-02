@@ -95,6 +95,9 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_ABILITY_CAPSULE
 	.2byte ITEM_ABILITY_PATCH
+	.2byte ITEM_STICKY_BARB
+	.2byte ITEM_ORAN_BERRY
+	.2byte ITEM_BEAST_BALL
 	.2byte ITEM_NONE
 	release
 	end

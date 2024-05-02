@@ -132,7 +132,7 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_HITANIMATION]             = LinkOpponentHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = LinkOpponentHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = LinkOpponentHandlePlaySE,
-    [CONTROLLER_PLAYFANFARE]              = LinkOpponentHandlePlayFanfare,
+    [CONTROLLER_PLAYFANFAREORBGM]              = LinkOpponentHandlePlayFanfare,
     [CONTROLLER_FAINTINGCRY]              = LinkOpponentHandleFaintingCry,
     [CONTROLLER_INTROSLIDE]               = LinkOpponentHandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = LinkOpponentHandleIntroTrainerBallThrow,
@@ -505,7 +505,7 @@ static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
         battleMon.speed = GetMonData(&gEnemyParty[monId], MON_DATA_SPEED);
         battleMon.spAttack = GetMonData(&gEnemyParty[monId], MON_DATA_SPATK);
         battleMon.spDefense = GetMonData(&gEnemyParty[monId], MON_DATA_SPDEF);
-        battleMon.isEgg = GetMonData(&gEnemyParty[monId], MON_DATA_IS_EGG);
+        // battleMon.isEgg = GetMonData(&gEnemyParty[monId], MON_DATA_IS_EGG);
         battleMon.abilityNum = GetMonData(&gEnemyParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gEnemyParty[monId], MON_DATA_OT_ID);
         GetMonData(&gEnemyParty[monId], MON_DATA_NICKNAME, nickname);

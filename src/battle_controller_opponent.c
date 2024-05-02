@@ -136,7 +136,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_HITANIMATION]             = OpponentHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = OpponentHandleCmd42,
     [CONTROLLER_PLAYSE]                   = OpponentHandlePlaySE,
-    [CONTROLLER_PLAYFANFARE]              = OpponentHandlePlayFanfare,
+    [CONTROLLER_PLAYFANFAREORBGM]              = OpponentHandlePlayFanfare,
     [CONTROLLER_FAINTINGCRY]              = OpponentHandleFaintingCry,
     [CONTROLLER_INTROSLIDE]               = OpponentHandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = OpponentHandleIntroTrainerBallThrow,
@@ -490,7 +490,7 @@ static u32 GetOpponentMonData(u8 monId, u8 *dst)
         battleMon.speed = GetMonData(&gEnemyParty[monId], MON_DATA_SPEED);
         battleMon.spAttack = GetMonData(&gEnemyParty[monId], MON_DATA_SPATK);
         battleMon.spDefense = GetMonData(&gEnemyParty[monId], MON_DATA_SPDEF);
-        battleMon.isEgg = GetMonData(&gEnemyParty[monId], MON_DATA_IS_EGG);
+        // battleMon.isEgg = GetMonData(&gEnemyParty[monId], MON_DATA_IS_EGG);
         battleMon.abilityNum = GetMonData(&gEnemyParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gEnemyParty[monId], MON_DATA_OT_ID);
         GetMonData(&gEnemyParty[monId], MON_DATA_NICKNAME, nickname);
@@ -1367,9 +1367,9 @@ static void OpponentHandleChooseMove(void)
             BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
             break;
         default:
-            if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+            if (gMovesInfo[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                 gBattlerTarget = gActiveBattler;
-            if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
+            if (gMovesInfo[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
             {
                 gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
                 if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
@@ -1390,7 +1390,7 @@ static void OpponentHandleChooseMove(void)
             move = moveInfo->moves[chosenMoveId];
         }
         while (move == MOVE_NONE);
-        if (gBattleMoves[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+        if (gMovesInfo[move].target & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
             BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (gActiveBattler << 8));
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             BtlController_EmitTwoReturnValues(1, 10, (chosenMoveId) | (GetBattlerAtPosition(Random() & 2) << 8));

@@ -185,6 +185,12 @@ extern const u8 *const gBattleAnims_StatusConditions[];
 extern const u8 *const gBattleAnims_Moves[];
 extern const u16 gMovesWithQuietBGM[];
 
+u8 GetAnimBattlerId(u8 wantedBattler);
+
+// battle_anim_throw.c
+bool32 IsCriticalCapture(void);
+
+//
 void MoveBattlerSpriteToBG(u8 battlerId, u8);
 void ResetBattleAnimBg(u8);
 void ClearBattleAnimationVars(void);

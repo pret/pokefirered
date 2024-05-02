@@ -693,6 +693,11 @@ u8 ItemId_GetSecondaryId(u16 itemId)
     return gItems[SanitizeItemId(itemId)].secondaryId;
 }
 
+u32 ItemId_GetFlingPower(u32 itemId)
+{
+    return gItems[SanitizeItemId(itemId)].flingPower;
+}
+
 const u8 *ItemId_GetEffect(u32 itemId)
 {
     if (itemId == ITEM_ENIGMA_BERRY)

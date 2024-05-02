@@ -287,6 +287,14 @@ static void InitLinkBtlControllers(void)
     }
 }
 
+bool32 IsValidForBattle(struct Pokemon *mon)
+{
+    u32 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    return (species != SPECIES_NONE && species != SPECIES_EGG
+             && GetMonData(mon, MON_DATA_HP) != 0
+             && GetMonData(mon, MON_DATA_IS_EGG) == FALSE);
+}
+
 static void SetBattlePartyIds(void)
 {
     s32 i, j;
@@ -740,7 +748,7 @@ static void BtlController_EmitPause(u8 bufferId, u8 toWait, void *data)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, toWait * 3 + 2);
 }
 
-void BtlController_EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct *disableStructPtr)
+void BtlController_EmitMoveAnimation(u32 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct *disableStructPtr, u8 multihit)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_MOVEANIMATION;
     sBattleBuffersTransferData[1] = move;
@@ -753,7 +761,7 @@ void BtlController_EmitMoveAnimation(u8 bufferId, u16 move, u8 turnOfMove, u16 m
     sBattleBuffersTransferData[8] = (dmg & 0x00FF0000) >> 16;
     sBattleBuffersTransferData[9] = (dmg & 0xFF000000) >> 24;
     sBattleBuffersTransferData[10] = friendship;
-    sBattleBuffersTransferData[11] = gMultiHitCounter; // multihit in pokeem
+    sBattleBuffersTransferData[11] = multihit; // multihit in pokeem
     if (WEATHER_HAS_EFFECT2)
     {
         sBattleBuffersTransferData[12] = gBattleWeather;
@@ -789,7 +797,7 @@ void BtlController_EmitPrintString(u8 bufferId, u16 stringID)
     stringInfo->bakScriptPartyIdx = gBattleStruct->scriptPartyIdx;
     stringInfo->hpScale = gBattleStruct->hpScale;
     stringInfo->itemEffectBattler = gPotentialItemEffectBattler;
-    stringInfo->moveType = gBattleMoves[gCurrentMove].type;
+    stringInfo->moveType = gMovesInfo[gCurrentMove].type;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         stringInfo->abilities[i] = gBattleMons[i].ability;
@@ -1109,12 +1117,12 @@ void BtlController_EmitPlaySE(u8 bufferId, u16 songId)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitPlayFanfare(u8 bufferId, u16 songId)
+void BtlController_EmitPlayFanfareOrBGM(u32 bufferId, u16 songId, bool8 playBGM)
 {
-    sBattleBuffersTransferData[0] = CONTROLLER_PLAYFANFARE;
+    sBattleBuffersTransferData[0] = CONTROLLER_PLAYFANFAREORBGM;
     sBattleBuffersTransferData[1] = songId;
     sBattleBuffersTransferData[2] = (songId & 0xFF00) >> 8;
-    sBattleBuffersTransferData[3] = 0;
+    sBattleBuffersTransferData[3] = playBGM;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
@@ -1183,13 +1191,14 @@ void BtlController_EmitSpriteInvisibility(u8 bufferId, bool8 isInvisible)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-void BtlController_EmitBattleAnimation(u8 bufferId, u8 animationId, u16 argument)
+void BtlController_EmitBattleAnimation(u32 bufferId, u8 animationId, struct DisableStruct* disableStructPtr, u16 argument)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_BATTLEANIMATION;
     sBattleBuffersTransferData[1] = animationId;
     sBattleBuffersTransferData[2] = argument;
     sBattleBuffersTransferData[3] = (argument & 0xFF00) >> 8;
-    PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
+    memcpy(&sBattleBuffersTransferData[4], disableStructPtr, sizeof(struct DisableStruct));
+    PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4 + sizeof(struct DisableStruct));
 }
 
 // mode is a LINK_STANDBY_* constant

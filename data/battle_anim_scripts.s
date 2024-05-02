@@ -982,7 +982,7 @@ gBattleAnims_StatusConditions::
 
 	.align 2
 gBattleAnims_General::
-	.4byte General_CastformChange           @ B_ANIM_CASTFORM_CHANGE
+	.4byte General_FormChange               @ B_ANIM_FORM_CHANGE
 	.4byte General_StatsChange              @ B_ANIM_STATS_CHANGE
 	.4byte General_SubstituteFade           @ B_ANIM_SUBSTITUTE_FADE
 	.4byte General_SubstituteAppear         @ B_ANIM_SUBSTITUTE_APPEAR
@@ -991,7 +991,7 @@ gBattleAnims_General::
 	.4byte General_TurnTrap                 @ B_ANIM_TURN_TRAP
 	.4byte General_HeldItemEffect           @ B_ANIM_HELD_ITEM_EFFECT
 	.4byte General_SmokeballEscape          @ B_ANIM_SMOKEBALL_ESCAPE
-	.4byte General_FocusBand                @ B_ANIM_FOCUS_BAND
+	.4byte General_FocusBand                @ B_ANIM_HANGED_ON
 	.4byte General_Rain                     @ B_ANIM_RAIN_CONTINUES
 	.4byte General_Sun                      @ B_ANIM_SUN_CONTINUES
 	.4byte General_Sandstorm                @ B_ANIM_SANDSTORM_CONTINUES
@@ -1010,6 +1010,8 @@ gBattleAnims_General::
 	.4byte General_SilphScoped              @ B_ANIM_SILPH_SCOPED
 	.4byte General_SafariRockThrow          @ B_ANIM_ROCK_THROW
 	.4byte General_SafariReaction           @ B_ANIM_SAFARI_REACTION
+	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
+	.4byte General_SlideOffScreen           @ B_ANIM_SLIDE_OFFSCREEN
 
 	.align 2
 gBattleAnims_Special::
@@ -11696,16 +11698,9 @@ Status_Nightmare:
 	clearmonbg ANIM_DEF_PARTNER
 	end
 
-General_CastformChange:
-	createvisualtask AnimTask_IsMonInvisible, 2
-	jumpreteq TRUE, CastformChangeSkipAnim
-	goto CastformChangeContinue
-
-CastformChangeContinue:
+General_FormChange:
 	monbg ANIM_ATTACKER
-	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
-	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
-	createvisualtask AnimTask_TransformMon, 2, 1
+	createvisualtask AnimTask_TransformMon, 2, 1, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
@@ -12278,3 +12273,17 @@ Special_SubstituteToMon:
 Special_MonToSubstitute:
 	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, FALSE
 	end
+
+General_RestoreBg:
+	restorebg
+	waitbgfadein
+	end
+
+General_SlideOffScreen:
+	createvisualtask AnimTask_SlideOffScreen, 5, ANIM_TARGET, 3
+	waitforvisualfinish
+	createvisualtask AnimTask_SetInvisible, 1, ANIM_TARGET, TRUE
+	waitforvisualfinish
+	end
+
+

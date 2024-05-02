@@ -75,7 +75,7 @@ void FreeBattleResources(void)
     }
 }
 
-void AdjustFriendshipOnBattleFaint(u8 battlerId)
+void AdjustFriendshipOnBattleFaint(u8 battler)
 {
     u8 opposingBattlerId;
 
@@ -94,15 +94,15 @@ void AdjustFriendshipOnBattleFaint(u8 battlerId)
         opposingBattlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
     }
 
-    if (gBattleMons[opposingBattlerId].level > gBattleMons[battlerId].level)
+    if (gBattleMons[opposingBattlerId].level > gBattleMons[battler].level)
     {
-        if (gBattleMons[opposingBattlerId].level - gBattleMons[battlerId].level > 29)
-            AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], FRIENDSHIP_EVENT_FAINT_LARGE);
+        if (gBattleMons[opposingBattlerId].level - gBattleMons[battler].level > 29)
+            AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battler]], FRIENDSHIP_EVENT_FAINT_LARGE);
         else
-            AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], FRIENDSHIP_EVENT_FAINT_SMALL);
+            AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battler]], FRIENDSHIP_EVENT_FAINT_SMALL);
     }
     else
     {
-        AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battlerId]], FRIENDSHIP_EVENT_FAINT_SMALL);
+        AdjustFriendship(&gPlayerParty[gBattlerPartyIndexes[battler]], FRIENDSHIP_EVENT_FAINT_SMALL);
     }
 }

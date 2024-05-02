@@ -2,6 +2,7 @@
 #define GUARD_DATA_H
 
 #include "global.h"
+#include "constants/trainers.h"
 
 #define SPECIES_SHINY_TAG 500
 #define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
@@ -23,6 +24,13 @@ extern const u8 gMoveNames[][MOVE_NAME_LENGTH + 1];
 
 extern const u8 gTrainerClassNames[][13];
 
+static inline u16 SanitizeTrainerId(u16 trainerId)
+{
+    if (trainerId >= NUM_TRAINERS)
+        return TRAINER_NONE;
+    return trainerId;
+}
+
 // extern const struct MonCoords gMonFrontPicCoords[];
 // extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 // extern const struct MonCoords gMonBackPicCoords[];
@@ -40,8 +48,6 @@ extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
-
-extern const u8 gEnemyMonElevation[NUM_SPECIES];
 
 extern const u8 *const gBattleAnims_General[];
 extern const u8 *const gBattleAnims_Special[];
@@ -62,5 +68,10 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_RSMay[];
 
 
 extern const union AnimCmd sAnim_GeneralFrame0[];
+
+// static inline const struct TrainerMon *GetTrainerPartyFromId(u16 trainerId)
+// {
+//     return gTrainers[SanitizeTrainerId(trainerId)].party;
+// }
 
 #endif // GUARD_DATA_H

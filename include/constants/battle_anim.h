@@ -303,6 +303,13 @@
 #define ANIM_ATK_PARTNER 2
 #define ANIM_DEF_PARTNER 3
 
+// Below are used by AnimTask_ShakeMon2 and AnimTask_SetGrayscaleOrOriginalPal
+#define ANIM_PLAYER_LEFT      (MAX_BATTLERS_COUNT + 0)
+#define ANIM_OPPONENT_LEFT    (MAX_BATTLERS_COUNT + 1)
+#define ANIM_PLAYER_RIGHT     (MAX_BATTLERS_COUNT + 2)
+#define ANIM_OPPONENT_RIGHT   (MAX_BATTLERS_COUNT + 3)
+#define ANIM_ATTACKER_FORCE   (MAX_BATTLERS_COUNT + 4)
+
 // stereo panning constants [0-255]
 //
 //          0
@@ -347,7 +354,7 @@
 #define BG_SOLAR_BEAM_CONTESTS 26
 
 // table ids for general animations (gBattleAnims_General)
-#define B_ANIM_CASTFORM_CHANGE          0
+#define B_ANIM_FORM_CHANGE              0
 #define B_ANIM_STATS_CHANGE             1
 #define B_ANIM_SUBSTITUTE_FADE          2
 #define B_ANIM_SUBSTITUTE_APPEAR        3
@@ -356,7 +363,7 @@
 #define B_ANIM_TURN_TRAP                6
 #define B_ANIM_HELD_ITEM_EFFECT         7
 #define B_ANIM_SMOKEBALL_ESCAPE         8
-#define B_ANIM_FOCUS_BAND               9
+#define B_ANIM_HANGED_ON                9
 #define B_ANIM_RAIN_CONTINUES           10
 #define B_ANIM_SUN_CONTINUES            11
 #define B_ANIM_SANDSTORM_CONTINUES      12
@@ -375,6 +382,8 @@
 #define B_ANIM_SILPH_SCOPED             25
 #define B_ANIM_ROCK_THROW               26
 #define B_ANIM_SAFARI_REACTION          27
+#define B_ANIM_RESTORE_BG               28 // for Terrain Endings
+#define B_ANIM_SLIDE_OFFSCREEN          29 // for Emergency Exit
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

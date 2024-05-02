@@ -1723,3 +1723,30 @@ static void Cmd_stopsound(void)
     m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
 }
+
+u8 GetAnimBattlerId(u8 wantedBattler)
+{
+    switch (wantedBattler)
+    {
+    case ANIM_ATTACKER:
+    default:
+        return gBattleAnimAttacker;
+    case ANIM_TARGET:
+        return gBattleAnimTarget;
+    case ANIM_ATK_PARTNER:
+        return BATTLE_PARTNER(gBattleAnimAttacker);
+    case ANIM_DEF_PARTNER:
+        return BATTLE_PARTNER(gBattleAnimTarget);
+    case ANIM_PLAYER_LEFT ... ANIM_OPPONENT_RIGHT:
+        return wantedBattler - MAX_BATTLERS_COUNT;
+    }
+}
+
+// battle_anim_throw.c
+
+bool32 IsCriticalCapture(void)
+{
+    return gBattleSpritesDataPtr->animationData->isCriticalCapture;
+}
+
+//

@@ -746,9 +746,9 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setsandstorm,                            //0x95 // done
     Cmd_weatherdamage,                           //0x96 // done
     Cmd_tryinfatuating,                          //0x97 // done
-    Cmd_updatestatusicon,                        //0x98
-    Cmd_setmist,                                 //0x99
-    Cmd_setfocusenergy,                          //0x9A
+    Cmd_updatestatusicon,                        //0x98 // done
+    Cmd_setmist,                                 //0x99 // done
+    Cmd_setfocusenergy,                          //0x9A // done
     Cmd_transformdataexecution,                  //0x9B
     Cmd_setsubstitute,                           //0x9C
     Cmd_mimicattackcopy,                         //0x9D
@@ -12716,80 +12716,80 @@ static void Cmd_tryinfatuating(void)
 
 static void Cmd_updatestatusicon(void)
 {
+    CMD_ARGS(u8 battler);
+    u32 battler;
+
     if (gBattleControllerExecFlags)
         return;
 
-    if (gBattlescriptCurrInstr[1] == BS_PLAYER2)
+    if (cmd->battler != BS_ATTACKER_WITH_PARTNER)
     {
-        for (gActiveBattler = gBattleControllerExecFlags; gActiveBattler < gBattlersCount; gActiveBattler++)
-        {
-            if (!(gAbsentBattlerFlags & gBitTable[gActiveBattler]))
-            {
-                BtlController_EmitStatusIconUpdate(BUFFER_A, gBattleMons[gActiveBattler].status1, gBattleMons[gActiveBattler].status2);
-                MarkBattlerForControllerExec(gActiveBattler);
-            }
-        }
-        gBattlescriptCurrInstr += 2;
-    }
-    else if (gBattlescriptCurrInstr[1] == BS_ATTACKER_WITH_PARTNER)
-    {
-        gActiveBattler = gBattlerAttacker;
-        if (!(gAbsentBattlerFlags & gBitTable[gActiveBattler]))
-        {
-            BtlController_EmitStatusIconUpdate(BUFFER_A, gBattleMons[gActiveBattler].status1, gBattleMons[gActiveBattler].status2);
-            MarkBattlerForControllerExec(gActiveBattler);
-        }
-        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        {
-            gActiveBattler = GetBattlerAtPosition(GetBattlerPosition(gBattlerAttacker) ^ BIT_FLANK);
-            if (!(gAbsentBattlerFlags & gBitTable[gActiveBattler]))
-            {
-                BtlController_EmitStatusIconUpdate(BUFFER_A, gBattleMons[gActiveBattler].status1, gBattleMons[gActiveBattler].status2);
-                MarkBattlerForControllerExec(gActiveBattler);
-            }
-        }
-        gBattlescriptCurrInstr += 2;
+        battler = gActiveBattler = GetBattlerForBattleScript(cmd->battler);
+        BtlController_EmitStatusIconUpdate(BUFFER_A, gBattleMons[battler].status1, gBattleMons[battler].status2);
+        MarkBattlerForControllerExec(battler);
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else
     {
-
-        gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
-        BtlController_EmitStatusIconUpdate(BUFFER_A, gBattleMons[gActiveBattler].status1, gBattleMons[gActiveBattler].status2);
-        MarkBattlerForControllerExec(gActiveBattler);
-        gBattlescriptCurrInstr += 2;
+        battler = gActiveBattler = gBattlerAttacker;
+        if (!(gAbsentBattlerFlags & gBitTable[battler]))
+        {
+            BtlController_EmitStatusIconUpdate(BUFFER_A, gBattleMons[battler].status1, gBattleMons[battler].status2);
+            MarkBattlerForControllerExec(battler);
+        }
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        {
+            battler = gActiveBattler = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBattlerAttacker)));
+            if (!(gAbsentBattlerFlags & gBitTable[battler]))
+            {
+                BtlController_EmitStatusIconUpdate(BUFFER_A, gBattleMons[battler].status1, gBattleMons[battler].status2);
+                MarkBattlerForControllerExec(battler);
+            }
+        }
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
 static void Cmd_setmist(void)
 {
-    if (gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].mistTimer)
+    CMD_ARGS();
+
+    if (gSideTimers[GetBattlerSide(gBattlerAttacker)].mistTimer)
     {
         gMoveResultFlags |= MOVE_RESULT_FAILED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MIST_FAILED;
     }
     else
     {
-        gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].mistTimer = 5;
-        gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].mistBattlerId = gBattlerAttacker;
-        gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_MIST;
+        gSideTimers[GetBattlerSide(gBattlerAttacker)].mistTimer = 5;
+        gSideTimers[GetBattlerSide(gBattlerAttacker)].mistBattlerId = gBattlerAttacker;
+        gSideStatuses[GetBattlerSide(gBattlerAttacker)] |= SIDE_STATUS_MIST;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_MIST;
     }
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_setfocusenergy(void)
 {
-    if (gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY)
+    CMD_ARGS();
+
+    if ((gMovesInfo[gCurrentMove].effect == EFFECT_DRAGON_CHEER && (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE) || (gAbsentBattlerFlags & gBitTable[gBattlerTarget])))
+     || gBattleMons[gBattlerTarget].status2 & STATUS2_FOCUS_ENERGY_ANY)
     {
         gMoveResultFlags |= MOVE_RESULT_FAILED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_FOCUS_ENERGY_FAILED;
     }
-    else
+    else if (gMovesInfo[gCurrentMove].effect == EFFECT_DRAGON_CHEER && !IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_DRAGON))
     {
-        gBattleMons[gBattlerAttacker].status2 |= STATUS2_FOCUS_ENERGY;
+        gBattleMons[gBattlerTarget].status2 |= STATUS2_DRAGON_CHEER;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_GETTING_PUMPED;
     }
-    gBattlescriptCurrInstr++;
+    else
+    {
+        gBattleMons[gBattlerTarget].status2 |= STATUS2_FOCUS_ENERGY;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_GETTING_PUMPED;
+    }
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_transformdataexecution(void)

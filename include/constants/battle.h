@@ -497,6 +497,33 @@
 // Indicator for the party summary bar to display an empty slot.
 #define HP_EMPTY_SLOT 0xFFFF
 
+#define MOVE_TARGET_SELECTED            0
+#define MOVE_TARGET_DEPENDS             (1 << 0)
+#define MOVE_TARGET_USER_OR_SELECTED    (1 << 1)
+#define MOVE_TARGET_RANDOM              (1 << 2)
+#define MOVE_TARGET_BOTH                (1 << 3)
+#define MOVE_TARGET_USER                (1 << 4)
+#define MOVE_TARGET_FOES_AND_ALLY       (1 << 5)
+#define MOVE_TARGET_OPPONENTS_FIELD     (1 << 6)
+#define MOVE_TARGET_ALLY                (1 << 7)
+#define MOVE_TARGET_ALL_BATTLERS        ((1 << 8) | MOVE_TARGET_USER)
+
+// For the second argument of GetMoveTarget, when no target override is needed
+#define NO_TARGET_OVERRIDE 0
+
+// Constants for Parental Bond
+#define PARENTAL_BOND_1ST_HIT 2
+#define PARENTAL_BOND_2ND_HIT 1
+#define PARENTAL_BOND_OFF     0
+
+// Constants for if HandleScriptMegaPrimalBurst should handle Mega Evolution, Primal Reversion, or Ultra Burst.
+#define HANDLE_TYPE_MEGA_EVOLUTION 0
+#define HANDLE_TYPE_PRIMAL_REVERSION 1
+#define HANDLE_TYPE_ULTRA_BURST 2
+
+// Constants for Torment
+#define PERMANENT_TORMENT   0xF
+
 // Constants for B_VAR_STARTING_STATUS
 // Timer value controlled by B_VAR_STARTING_STATUS_TIMER
 #define STARTING_STATUS_NONE                0

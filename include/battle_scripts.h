@@ -1199,7 +1199,6 @@ extern const u8 BattleScript_EffectFollowMe[];
 extern const u8 BattleScript_EffectNaturePower[];
 extern const u8 BattleScript_EffectTaunt[];
 extern const u8 BattleScript_EffectHelpingHand[];
-extern const u8 BattleScript_EffectTrick[];
 extern const u8 BattleScript_EffectRolePlay[];
 extern const u8 BattleScript_EffectWish[];
 extern const u8 BattleScript_EffectAssist[];

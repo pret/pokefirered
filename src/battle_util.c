@@ -9520,6 +9520,18 @@ bool32 MoveHasChargeTurnAdditionalEffect(u32 move)
     return FALSE;
 }
 
+bool32 IsPartnerMonFromSameTrainer(u32 battler)
+{
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT && gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        return FALSE;
+    else if (GetBattlerSide(battler) == B_SIDE_PLAYER && gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        return FALSE;
+    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        return FALSE;
+    else
+        return TRUE;
+}
+
 
 
 // battle_ai_util.c

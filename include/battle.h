@@ -87,19 +87,6 @@ enum {
 #define MOVE_TARGET_ALLY                (1 << 7)
 #define MOVE_TARGET_ALL_BATTLERS        ((1 << 8) | MOVE_TARGET_USER)
 
-// For the second argument of GetMoveTarget, when no target override is needed
-#define NO_TARGET_OVERRIDE 0
-
-// Constants for Parental Bond
-#define PARENTAL_BOND_1ST_HIT 2
-#define PARENTAL_BOND_2ND_HIT 1
-#define PARENTAL_BOND_OFF     0
-
-// Constants for if HandleScriptMegaPrimalBurst should handle Mega Evolution, Primal Reversion, or Ultra Burst.
-#define HANDLE_TYPE_MEGA_EVOLUTION 0
-#define HANDLE_TYPE_PRIMAL_REVERSION 1
-#define HANDLE_TYPE_ULTRA_BURST 2
-
 struct TrainerMonNoItemDefaultMoves
 {
     u16 iv;

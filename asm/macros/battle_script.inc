@@ -1099,34 +1099,34 @@
 	.byte 0xcc
 	.endm
 
-	.macro cureifburnedparalysedorpoisoned param0:req
+	.macro cureifburnedparalysedorpoisoned failInstr:req
 	.byte 0xcd
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro settorment param0:req
+	.macro settorment failInstr:req
 	.byte 0xce
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro jumpifnodamage param0:req
+	.macro jumpifnodamage jumpInstr:req
 	.byte 0xcf
-	.4byte \param0
+	.4byte \jumpInstr
 	.endm
 
-	.macro settaunt param0:req
+	.macro settaunt failInstr:req
 	.byte 0xd0
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro trysethelpinghand param0:req
+	.macro trysethelpinghand failInstr:req
 	.byte 0xd1
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro tryswapitems param0:req
+	.macro tryswapitems failInstr:req
 	.byte 0xd2
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro trycopyability param0:req

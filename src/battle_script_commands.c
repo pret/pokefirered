@@ -798,12 +798,12 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_setforcedtarget,                         //0xCA // done
     Cmd_setcharge,                               //0xCB // done
     Cmd_callterrainattack,                       //0xCC // done
-    Cmd_cureifburnedparalysedorpoisoned,         //0xCD
-    Cmd_settorment,                              //0xCE
-    Cmd_jumpifnodamage,                          //0xCF
-    Cmd_settaunt,                                //0xD0
-    Cmd_trysethelpinghand,                       //0xD1
-    Cmd_tryswapitems,                            //0xD2
+    Cmd_cureifburnedparalysedorpoisoned,         //0xCD // done
+    Cmd_settorment,                              //0xCE // done
+    Cmd_jumpifnodamage,                          //0xCF // done
+    Cmd_settaunt,                                //0xD0 // done
+    Cmd_trysethelpinghand,                       //0xD1 // done
+    Cmd_tryswapitems,                            //0xD2 // done
     Cmd_trycopyability,                          //0xD3
     Cmd_trywish,                                 //0xD4
     Cmd_settoxicspikes,                          //0xD5 // done
@@ -14307,92 +14307,128 @@ u16 GetNaturePowerMove(void)
 // Refresh
 static void Cmd_cureifburnedparalysedorpoisoned(void)
 {
-    if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
+    CMD_ARGS(const u8 *failInstr);
+
+    if (gBattleMons[gBattlerAttacker].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FROSTBITE))
     {
         gBattleMons[gBattlerAttacker].status1 = 0;
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
         gActiveBattler = gBattlerAttacker;
-        BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].status1), &gBattleMons[gActiveBattler].status1);
-        MarkBattlerForControllerExec(gActiveBattler);
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gBattlerAttacker].status1), &gBattleMons[gBattlerAttacker].status1);
+        MarkBattlerForControllerExec(gBattlerAttacker);
     }
     else
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
 }
 
 static void Cmd_settorment(void)
 {
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_TORMENT)
+    CMD_ARGS(const u8 *failInstr);
+
+    if (gBattleMons[gBattlerTarget].status2 & STATUS2_TORMENT
+        /* || IsDynamaxed(gBattlerTarget) */) // TODO: Dynamax
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
     {
         gBattleMons[gBattlerTarget].status2 |= STATUS2_TORMENT;
-        gBattlescriptCurrInstr += 5;
+        gDisableStructs[gBattlerTarget].tormentTimer = PERMANENT_TORMENT; // permanent
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
 
 static void Cmd_jumpifnodamage(void)
 {
+    CMD_ARGS(const u8 *jumpInstr);
+
     if (gProtectStructs[gBattlerAttacker].physicalDmg || gProtectStructs[gBattlerAttacker].specialDmg)
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     else
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->jumpInstr;
 }
 
 static void Cmd_settaunt(void)
 {
-    if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
+    CMD_ARGS(const u8 *failInstr);
+
+    if (B_OBLIVIOUS_TAUNT >= GEN_6 && GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
     {
-        gDisableStructs[gBattlerTarget].tauntTimer = 2;
-        // gDisableStructs[gBattlerTarget].tauntTimer2 = 2;
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
+        gLastUsedAbility = ABILITY_OBLIVIOUS;
+        RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
+    }
+    else if (gDisableStructs[gBattlerTarget].tauntTimer == 0)
+    {
+        u8 turns;
+        if (B_TAUNT_TURNS >= GEN_5)
+        {
+            turns = 4;
+            if (GetBattlerTurnOrderNum(gBattlerTarget) > GetBattlerTurnOrderNum(gBattlerAttacker))
+                turns--; // If the target hasn't yet moved this turn, Taunt lasts for only three turns (source: Bulbapedia)
+        }
+        else if (B_TAUNT_TURNS >= GEN_4)
+        {
+            turns = (Random() & 2) + 3;
+        }
+        else
+        {
+            turns = 2;
+        }
+
+        gDisableStructs[gBattlerTarget].tauntTimer = turns;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
 }
 
 static void Cmd_trysethelpinghand(void)
 {
-    gBattlerTarget = GetBattlerAtPosition(GetBattlerPosition(gBattlerAttacker) ^ BIT_FLANK);
+    CMD_ARGS(const u8 *failInstr);
+
+    gBattlerTarget = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBattlerAttacker)));
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
         && !(gAbsentBattlerFlags & gBitTable[gBattlerTarget])
         && !gProtectStructs[gBattlerAttacker].helpingHand
         && !gProtectStructs[gBattlerTarget].helpingHand)
     {
-        gProtectStructs[gBattlerTarget].helpingHand = 1;
-        gBattlescriptCurrInstr += 5;
+        gProtectStructs[gBattlerTarget].helpingHand = TRUE;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
 }
 
 // Trick
 static void Cmd_tryswapitems(void)
 {
+    CMD_ARGS(const u8 *failInstr);
+
     // opponent can't swap items with player in regular battles
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER
         || (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
             && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_BATTLE_TOWER
-                                  | BATTLE_TYPE_EREADER_TRAINER))
-                && gTrainerBattleOpponent_A != TRAINER_SECRET_BASE))
+                                  | BATTLE_TYPE_EREADER_TRAINER
+                                  | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)))
+            && gTrainerBattleOpponent_A != TRAINER_SECRET_BASE))
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
     {
         u8 sideAttacker = GetBattlerSide(gBattlerAttacker);
         u8 sideTarget = GetBattlerSide(gBattlerTarget);
 
-        // you can't swap items if they were knocked off in regular battles
+        // You can't swap items if they were knocked off in regular battles
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                              | BATTLE_TYPE_BATTLE_TOWER
                              | BATTLE_TYPE_EREADER_TRAINER))
@@ -14400,20 +14436,20 @@ static void Cmd_tryswapitems(void)
             && (gWishFutureKnock.knockedOffMons[sideAttacker] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]
                 || gWishFutureKnock.knockedOffMons[sideTarget] & gBitTable[gBattlerPartyIndexes[gBattlerTarget]]))
         {
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = cmd->failInstr;
         }
-        // can't swap if two pokemon don't have an item
+        // can't swap if two Pokémon don't have an item
         // or if either of them is an enigma berry or a mail
         else if ((gBattleMons[gBattlerAttacker].item == ITEM_NONE && gBattleMons[gBattlerTarget].item == ITEM_NONE)
-                 || gBattleMons[gBattlerAttacker].item == ITEM_ENIGMA_BERRY
-                 || gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY
-                 || IS_ITEM_MAIL(gBattleMons[gBattlerAttacker].item)
-                 || IS_ITEM_MAIL(gBattleMons[gBattlerTarget].item))
+                 || !CanBattlerGetOrLoseItem(gBattlerAttacker, gBattleMons[gBattlerAttacker].item)
+                 || !CanBattlerGetOrLoseItem(gBattlerAttacker, gBattleMons[gBattlerTarget].item)
+                 || !CanBattlerGetOrLoseItem(gBattlerTarget, gBattleMons[gBattlerTarget].item)
+                 || !CanBattlerGetOrLoseItem(gBattlerTarget, gBattleMons[gBattlerAttacker].item))
         {
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = cmd->failInstr;
         }
         // check if ability prevents swapping
-        else if (gBattleMons[gBattlerTarget].ability == ABILITY_STICKY_HOLD)
+        else if (GetBattlerAbility(gBattlerTarget) == ABILITY_STICKY_HOLD)
         {
             gBattlescriptCurrInstr = BattleScript_StickyHoldActivates;
             gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
@@ -14431,6 +14467,9 @@ static void Cmd_tryswapitems(void)
             gBattleMons[gBattlerAttacker].item = ITEM_NONE;
             gBattleMons[gBattlerTarget].item = oldItemAtk;
 
+            RecordItemEffectBattle(gBattlerAttacker, 0);
+            RecordItemEffectBattle(gBattlerTarget, ItemId_GetHoldEffect(oldItemAtk));
+
             gActiveBattler = gBattlerAttacker;
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(*newItemAtk), newItemAtk);
             MarkBattlerForControllerExec(gBattlerAttacker);
@@ -14439,23 +14478,39 @@ static void Cmd_tryswapitems(void)
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].item), &gBattleMons[gBattlerTarget].item);
             MarkBattlerForControllerExec(gBattlerTarget);
 
-            *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerTarget]) + 0) = 0;
-            *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerTarget]) + 1) = 0;
+            gBattleStruct->choicedMove[gBattlerTarget] = MOVE_NONE;
+            gBattleStruct->choicedMove[gBattlerAttacker] = MOVE_NONE;
 
-            *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 0) = 0;
-            *(u8 *)((u8 *)(&gBattleStruct->choicedMove[gBattlerAttacker]) + 1) = 0;
-
-            gBattlescriptCurrInstr += 5;
+            gBattlescriptCurrInstr = cmd->nextInstr;
 
             PREPARE_ITEM_BUFFER(gBattleTextBuff1, *newItemAtk)
             PREPARE_ITEM_BUFFER(gBattleTextBuff2, oldItemAtk)
 
+            if (!(sideAttacker == sideTarget && IsPartnerMonFromSameTrainer(gBattlerAttacker)))
+            {
+                // if targeting your own side and you aren't in a multi battle, don't save items as stolen
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+                    TrySaveExchangedItem(gBattlerAttacker, oldItemAtk);
+                if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
+                    TrySaveExchangedItem(gBattlerTarget, *newItemAtk);
+            }
+
             if (oldItemAtk != ITEM_NONE && *newItemAtk != ITEM_NONE)
+            {
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_BOTH;  // attacker's item -> <- target's item
+            }
             else if (oldItemAtk == ITEM_NONE && *newItemAtk != ITEM_NONE)
+            {
+                if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNBURDEN && gBattleResources->flags->flags[gBattlerAttacker] & RESOURCE_FLAG_UNBURDEN)
+                    gBattleResources->flags->flags[gBattlerAttacker] &= ~RESOURCE_FLAG_UNBURDEN;
+
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_TAKEN; // nothing -> <- target's item
+            }
             else
+            {
+                CheckSetUnburden(gBattlerAttacker);
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_GIVEN; // attacker's item -> <- nothing
+            }
         }
     }
 }

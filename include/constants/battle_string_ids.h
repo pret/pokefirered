@@ -566,8 +566,9 @@
 #define	STRINGID_DRASTICALLY                          563
 #define	STRINGID_SEVERELY                             564
 #define STRINGID_CLEARAMULETWONTLOWERSTATS            565
+#define STRINGID_CELEBRATEMESSAGE                     566
 
-#define BATTLESTRINGS_COUNT     566
+#define BATTLESTRINGS_COUNT     567
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

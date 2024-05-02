@@ -794,23 +794,23 @@
 	2:
 	.endm
 
-	.macro setmultihitcounter param0:req
+	.macro setmultihitcounter value:req
 	.byte 0x8d
-	.byte \param0
+	.byte \value
 	.endm
 
 	.macro initmultihitstring
 	.byte 0x8e
 	.endm
 
-	.macro forcerandomswitch param0:req
+	.macro forcerandomswitch failInstr:req
 	.byte 0x8f
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro tryconversiontypechange param0:req
+	.macro tryconversiontypechange failInstr:req
 	.byte 0x90
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro givepaydaymoney
@@ -821,9 +821,9 @@
 	.byte 0x92
 	.endm
 
-	.macro tryKO param0:req
+	.macro tryKO failInstr:req
 	.byte 0x93
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro damagetohalftargethp
@@ -838,9 +838,9 @@
 	.byte 0x96
 	.endm
 
-	.macro tryinfatuating param0:req
+	.macro tryinfatuating failInstr:req
 	.byte 0x97
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro updatestatusicon battler:req

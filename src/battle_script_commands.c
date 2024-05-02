@@ -742,10 +742,10 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_givepaydaymoney,                         //0x91 // done
     Cmd_setlightscreen,                          //0x92 // done
     Cmd_tryKO,                                   //0x93 // done
-    Cmd_damagetohalftargethp,                    //0x94
-    Cmd_setsandstorm,                            //0x95
-    Cmd_weatherdamage,                           //0x96
-    Cmd_tryinfatuating,                          //0x97
+    Cmd_damagetohalftargethp,                    //0x94 // done
+    Cmd_setsandstorm,                            //0x95 // done
+    Cmd_weatherdamage,                           //0x96 // done
+    Cmd_tryinfatuating,                          //0x97 // done
     Cmd_updatestatusicon,                        //0x98
     Cmd_setmist,                                 //0x99
     Cmd_setfocusenergy,                          //0x9A
@@ -12580,129 +12580,136 @@ static void Cmd_tryKO(void)
 // Super Fang
 static void Cmd_damagetohalftargethp(void)
 {
+    CMD_ARGS();
+
+    // TODO: Dynamax
+    // gBattleMoveDamage = GetNonDynamaxHP(gBattlerTarget) / 2;
     gBattleMoveDamage = gBattleMons[gBattlerTarget].hp / 2;
     if (gBattleMoveDamage == 0)
         gBattleMoveDamage = 1;
 
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_setsandstorm(void)
 {
-    if (gBattleWeather & B_WEATHER_SANDSTORM)
+    CMD_ARGS();
+
+    if (!TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SANDSTORM, FALSE))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
     }
     else
     {
-        gBattleWeather = B_WEATHER_SANDSTORM_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SANDSTORM;
-        gWishFutureKnock.weatherDuration = 5;
     }
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_weatherdamage(void)
 {
+    CMD_ARGS();
+
+    u32 ability = GetBattlerAbility(gBattlerAttacker);
+
+    gBattleMoveDamage = 0;
     if (IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags)
      && (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT))
     {
-        gBattleMoveDamage = 0;
-        gBattlescriptCurrInstr++;
+        gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
-    if (WEATHER_HAS_EFFECT)
+    if (IsBattlerAlive(gBattlerAttacker) && WEATHER_HAS_EFFECT && ability != ABILITY_MAGIC_GUARD)
     {
         if (gBattleWeather & B_WEATHER_SANDSTORM)
         {
-            if (gBattleMons[gBattlerAttacker].type1 != TYPE_ROCK
-                && gBattleMons[gBattlerAttacker].type1 != TYPE_STEEL
-                && gBattleMons[gBattlerAttacker].type1 != TYPE_GROUND
-                && gBattleMons[gBattlerAttacker].type2 != TYPE_ROCK
-                && gBattleMons[gBattlerAttacker].type2 != TYPE_STEEL
-                && gBattleMons[gBattlerAttacker].type2 != TYPE_GROUND
-                && gBattleMons[gBattlerAttacker].ability != ABILITY_SAND_VEIL
-                && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
-                && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
+            if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ROCK)
+                && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GROUND)
+                && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_STEEL)
+                && ability != ABILITY_SAND_VEIL
+                && ability != ABILITY_SAND_FORCE
+                && ability != ABILITY_SAND_RUSH
+                && ability != ABILITY_OVERCOAT
+                && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+                && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
             {
+                // TODO: Dynamax
+                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
-            }
-            else
-            {
-                gBattleMoveDamage = 0;
             }
         }
         if (gBattleWeather & B_WEATHER_HAIL)
         {
-            if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
-                && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERGROUND)
-                && !(gStatuses3[gBattlerAttacker] & STATUS3_UNDERWATER))
+            if (ability == ABILITY_ICE_BODY
+                && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+                && !BATTLER_MAX_HP(gBattlerAttacker)
+                && !(gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK))
             {
+                gBattlerAbility = gBattlerAttacker;
+                // TODO: Dynamax
+                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
+                gBattleMoveDamage *= -1;
+            }
+            else if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_ICE)
+                && ability != ABILITY_SNOW_CLOAK
+                && ability != ABILITY_OVERCOAT
+                && ability != ABILITY_ICE_BODY
+                && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+                && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
+            {
+                // TODO: Dynamax
+                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
                 gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
             }
-            else
+        }
+        if (gBattleWeather & B_WEATHER_SNOW)
+        {
+            if (ability == ABILITY_ICE_BODY
+                && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+                && !BATTLER_MAX_HP(gBattlerAttacker)
+                && !(gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK))
             {
-                gBattleMoveDamage = 0;
+                gBattlerAbility = gBattlerAttacker;
+                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
+                gBattleMoveDamage *= -1;
             }
         }
     }
-    else
-    {
-        gBattleMoveDamage = 0;
-    }
 
-    if (gAbsentBattlerFlags & gBitTable[gBattlerAttacker])
-        gBattleMoveDamage = 0;
-
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_tryinfatuating(void)
 {
-    struct Pokemon *monAttacker, *monTarget;
-    u16 speciesAttacker, speciesTarget;
-    u32 personalityAttacker, personalityTarget;
+    CMD_ARGS(const u8 *failInstr);
 
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-        monAttacker = &gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]];
-    else
-        monAttacker = &gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker]];
-
-    if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-        monTarget = &gPlayerParty[gBattlerPartyIndexes[gBattlerTarget]];
-    else
-        monTarget = &gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]];
-
-    speciesAttacker = GetMonData(monAttacker, MON_DATA_SPECIES);
-    personalityAttacker = GetMonData(monAttacker, MON_DATA_PERSONALITY);
-
-    speciesTarget = GetMonData(monTarget, MON_DATA_SPECIES);
-    personalityTarget = GetMonData(monTarget, MON_DATA_PERSONALITY);
-
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_OBLIVIOUS)
+    if (GetBattlerAbility(gBattlerTarget) == ABILITY_OBLIVIOUS)
     {
-        gBattlescriptCurrInstr = BattleScript_ObliviousPreventsAttraction;
+        gBattlescriptCurrInstr = BattleScript_NotAffectedAbilityPopUp;
         gLastUsedAbility = ABILITY_OBLIVIOUS;
         RecordAbilityBattle(gBattlerTarget, ABILITY_OBLIVIOUS);
     }
     else
     {
-        if (GetGenderFromSpeciesAndPersonality(speciesAttacker, personalityAttacker) == GetGenderFromSpeciesAndPersonality(speciesTarget, personalityTarget)
-            || gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION
-            || GetGenderFromSpeciesAndPersonality(speciesAttacker, personalityAttacker) == MON_GENDERLESS
-            || GetGenderFromSpeciesAndPersonality(speciesTarget, personalityTarget) == MON_GENDERLESS)
+        if (gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION
+            || !AreBattlersOfOppositeGender(gBattlerAttacker, gBattlerTarget))
         {
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = cmd->failInstr;
         }
         else
         {
             gBattleMons[gBattlerTarget].status2 |= STATUS2_INFATUATED_WITH(gBattlerAttacker);
-            gBattlescriptCurrInstr += 5;
+            gBattlescriptCurrInstr = cmd->nextInstr;
         }
     }
 }

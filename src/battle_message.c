@@ -695,6 +695,7 @@ static const u8 sText_FlowerVeilProtected[] = _("{B_DEF_NAME_WITH_PREFIX} surrou
 static const u8 sText_drastically[] = _("drastically ");
 static const u8 sText_severely[] = _("severely ");
 static const u8 sText_ClearAmuletWontLowerStats[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM} prevents\nits stats from being lowered!");
+static const u8 sText_CelebrateMessage[] = _("Congratulations, {B_PLAYER_NAME}!");
 
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_START] = {
@@ -1252,6 +1253,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_DRASTICALLY - BATTLESTRINGS_TABLE_START] = sText_drastically,
     [STRINGID_SEVERELY - BATTLESTRINGS_TABLE_START] = sText_severely,
     [STRINGID_CLEARAMULETWONTLOWERSTATS - BATTLESTRINGS_TABLE_START] = sText_ClearAmuletWontLowerStats,
+    [STRINGID_CELEBRATEMESSAGE - BATTLESTRINGS_TABLE_START] = sText_CelebrateMessage,
 };
 
 const u16 gTrainerUsedItemStringIds[] =

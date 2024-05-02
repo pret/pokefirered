@@ -920,15 +920,31 @@ BattleScript_DoLeechSeed::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectSplash::
+BattleScript_EffectDoNothing::
 	attackcanceler
 	attackstring
 	ppreduce
+	jumpifmove MOVE_HOLD_HANDS, BattleScript_EffectHoldHands
 	attackanimation
 	waitanimation
+	jumpifmove MOVE_CELEBRATE, BattleScript_EffectCelebrate
+	jumpifmove MOVE_HAPPY_HOUR, BattleScript_EffectHappyHour
 	incrementgamestat GAME_STAT_USED_SPLASH
 	printstring STRINGID_BUTNOTHINGHAPPENED
 	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+BattleScript_EffectHoldHands:
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_CRAFTY_SHIELD, BattleScript_ButItFailed
+	jumpifbyteequal gBattlerTarget, gBattlerAttacker, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	goto BattleScript_MoveEnd
+BattleScript_EffectCelebrate:
+	printstring STRINGID_CELEBRATEMESSAGE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+BattleScript_EffectHappyHour:
+	seteffectprimary MOVE_EFFECT_HAPPY_HOUR
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectDisable::
@@ -6367,4 +6383,12 @@ BattleScript_RoarSuccessRet_Ret:
 	returntoball BS_TARGET, FALSE
 	waitstate
 	return
+
+BattleScript_NotAffectedAbilityPopUp::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUpTarget
+	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 

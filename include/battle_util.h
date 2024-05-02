@@ -239,6 +239,7 @@ void RecordLastUsedMoveBy(u32 battlerId, u32 move);
 bool32 BattlerHasAi(u32 battlerId);
 void ClearBattlerItemEffectHistory(u32 battlerId);
 bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect);
+void RecordAllMoves(u32 battler);
 
 // end battle_ai_util.h
 

@@ -9676,5 +9676,11 @@ bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect)
     return TRUE;
 }
 
+void RecordAllMoves(u32 battler)
+{
+    // TODO: AI
+    // memcpy(AI_PARTY->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]].moves, gBattleMons[battler].moves, MAX_MON_MOVES * sizeof(u16));
+}
+
 
 // end battle_ai_util.c

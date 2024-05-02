@@ -864,9 +864,9 @@
 	.byte 0x9c
 	.endm
 
-	.macro mimicattackcopy param0:req
+	.macro mimicattackcopy failInstr:req
 	.byte 0x9d
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro metronome
@@ -881,34 +881,34 @@
 	.byte 0xa0
 	.endm
 
-	.macro counterdamagecalculator param0:req
+	.macro counterdamagecalculator failInstr:req
 	.byte 0xa1
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro mirrorcoatdamagecalculator param0:req
+	.macro mirrorcoatdamagecalculator failInstr:req
 	.byte 0xa2
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro disablelastusedattack param0:req
+	.macro disablelastusedattack failInstr:req
 	.byte 0xa3
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro trysetencore param0:req
+	.macro trysetencore failInstr:req
 	.byte 0xa4
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro painsplitdmgcalc param0:req
+	.macro painsplitdmgcalc failInstr:req
 	.byte 0xa5
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro settypetorandomresistance param0:req
+	.macro settypetorandomresistance failInstr:req
 	.byte 0xa6
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro setalwayshitflag

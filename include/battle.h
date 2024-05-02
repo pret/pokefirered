@@ -563,6 +563,22 @@ struct ZMoveData
     u8 categories[MAX_BATTLERS_COUNT];
 };
 
+struct DynamaxData
+{
+    bool8 playerSelect;
+    u8 triggerSpriteId;
+    u8 toDynamax; // flags using gBitTable
+    bool8 alreadyDynamaxed[NUM_BATTLE_SIDES];
+    bool8 dynamaxed[MAX_BATTLERS_COUNT];
+    u8 dynamaxTurns[MAX_BATTLERS_COUNT];
+    u8 usingMaxMove[MAX_BATTLERS_COUNT];
+    u8 activeCategory;
+    u8 categories[MAX_BATTLERS_COUNT];
+    u16 baseMove[MAX_BATTLERS_COUNT]; // base move of Max Move
+    u16 lastUsedBaseMove;
+    u16 levelUpHP;
+};
+
 struct LostItem
 {
     u16 originalItem:15;
@@ -692,6 +708,7 @@ struct BattleStruct
     struct MegaEvolutionData mega;
     struct UltraBurstData burst;
     struct ZMoveData zmove;
+    struct DynamaxData dynamax;
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
     bool8 allowedToChangeFormInWeather[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side, used by Ice Face.
     u8 startingStatus; // status to apply at battle start. defined in constants/battle.h

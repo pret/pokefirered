@@ -8263,22 +8263,22 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MIMIKYU"
+                "species": "SPECIES_CLEFAIRY"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MIMIKYU"
+                "species": "SPECIES_CLEFAIRY"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MIMIKYU"
+                "species": "SPECIES_CLEFAIRY"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MIMIKYU"
+                "species": "SPECIES_CLEFAIRY"
               },
               {
                 "min_level": 2,
@@ -8293,32 +8293,32 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_SCYTHER"
+                "species": "SPECIES_MIMIKYU"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_SCYTHER"
+                "species": "SPECIES_MIMIKYU"
               },
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_SCYTHER"
+                "species": "SPECIES_MIMIKYU"
               },
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_SCYTHER"
+                "species": "SPECIES_MIMIKYU"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_SCYTHER"
+                "species": "SPECIES_MIMIKYU"
               },
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_SCYTHER"
+                "species": "SPECIES_MIMIKYU"
               }
             ]
           }

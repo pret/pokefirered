@@ -119,7 +119,6 @@ enum
 
 
 u8 GetBattlerForBattleScript(u8 caseId);
-void PressurePPLoseOnUsingImprison(u8 attacker);
 void MarkBattlerForControllerExec(u8 battlerId);
 void MarkBattlerReceivedLinkData(u8 battlerId);
 const u8* CancelMultiTurnMoves(u32 battler);

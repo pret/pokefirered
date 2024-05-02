@@ -1129,20 +1129,21 @@
 	.4byte \failInstr
 	.endm
 
-	.macro trycopyability param0:req
+	.macro trycopyability battler:req, failInstr:req
 	.byte 0xd3
-	.4byte \param0
+	.byte \battler
+	.4byte \failInstr
 	.endm
 
-	.macro trywish param0:req, param1:req
+	.macro trywish turnNumber:req, failInstr:req
 	.byte 0xd4
-	.byte \param0
-	.4byte \param1
+	.byte \turnNumber
+	.4byte \failInstr
 	.endm
 
-	.macro settoxicspikes param0:req
+	.macro settoxicspikes failInstr:req
 	.byte 0xd5
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro setgastroacid failInstr:req
@@ -1150,28 +1151,28 @@
 	.4byte \failInstr
 	.endm
 
-	.macro setyawn param0:req
+	.macro setyawn failInstr:req
 	.byte 0xd7
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro setdamagetohealthdifference param0:req
+	.macro setdamagetohealthdifference failInstr:req
 	.byte 0xd8
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro scaledamagebyhealthratio
+	.macro setroom
 	.byte 0xd9
 	.endm
 
-	.macro tryswapabilities param0:req
+	.macro tryswapabilities failInstr:req
 	.byte 0xda
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro tryimprison param0:req
+	.macro tryimprison failInstr:req
 	.byte 0xdb
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro setstealthrock failInstr:req
@@ -1179,28 +1180,30 @@
 	.4byte \failInstr
 	.endm
 
-	.macro weightdamagecalculation
+	.macro setuserstatus3 flags:req, failInstr:req
 	.byte 0xdd
+	.4byte \flags
+	.4byte \failInstr
 	.endm
 
-	.macro assistattackselect param0:req
+	.macro assistattackselect failInstr:req
 	.byte 0xde
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro trysetmagiccoat param0:req
+	.macro trysetmagiccoat failInstr:req
 	.byte 0xdf
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro trysetsnatch param0:req
+	.macro trysetsnatch failInstr:req
 	.byte 0xe0
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro trygetintimidatetarget param0:req
+	.macro unused2 ptr:req
 	.byte 0xe1
-	.4byte \param0
+	.4byte \ptr
 	.endm
 
 	.macro switchoutabilities battler:req

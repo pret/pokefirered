@@ -16,6 +16,12 @@ struct StatFractions
     u8 divisor;
 };
 
+struct PickupItem
+{
+    u16 itemId;
+    u8 percentage[10];
+};
+
 void AI_CalcDmg(u8 attacker, u8 defender);
 u8 TypeCalc(u16 move, u8 attacker, u8 defender);
 u8 AI_TypeCalc(u16 move, u16 targetSpecies, u16 targetAbility);

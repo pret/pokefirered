@@ -1211,25 +1211,27 @@
 	.byte \battler
 	.endm
 
-	.macro jumpifhasnohp battler:req, param1:req
+	.macro jumpifhasnohp battler:req, jumpInstr:req
 	.byte 0xe3
 	.byte \battler
-	.4byte \param1
+	.4byte \jumpInstr
 	.endm
 
-	.macro getsecretpowereffect
+	.macro jumpifnotcurrentmoveargtype battler:req, failInstr:req
 	.byte 0xe4
+	.byte \battler
+	.4byte \failInstr
 	.endm
 
 	.macro pickup
 	.byte 0xe5
 	.endm
 
-	.macro docastformchangeanimation
+	.macro unused3
 	.byte 0xe6
 	.endm
 
-	.macro trycastformdatachange
+	.macro unused4
 	.byte 0xe7
 	.endm
 

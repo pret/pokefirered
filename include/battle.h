@@ -842,7 +842,9 @@ struct BattleAnimationInfo
     u8 field_5;
     u8 field_6;
     u8 field_7;
-    u8 ballThrowCaseId;
+    u8 ballThrowCaseId:6;
+    u8 isCriticalCapture:1;
+    u8 criticalCaptureSuccess:1;
     u8 introAnimActive:1;
     u8 wildMonInvisible:1;
     u8 field_9_x1C:3;
@@ -1042,6 +1044,8 @@ extern u8 gIsCriticalHit;
 extern struct FieldTimer gFieldTimers;
 extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
+extern u16 gLastThrownBall;
+extern u16 gBallToDisplay;
 extern struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT];
 
 static inline u32 GetBattlerPosition(u32 battler)

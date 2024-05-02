@@ -1741,3 +1741,12 @@ u8 GetAnimBattlerId(u8 wantedBattler)
         return wantedBattler - MAX_BATTLERS_COUNT;
     }
 }
+
+// battle_anim_throw.c
+
+bool32 IsCriticalCapture(void)
+{
+    return gBattleSpritesDataPtr->animationData->isCriticalCapture;
+}
+
+//

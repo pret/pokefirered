@@ -31,11 +31,12 @@
 #define B_POSITION_OPPONENT_RIGHT     3
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
-#define BATTLE_OPPOSITE(id) ((id) ^ 1)
-#define BATTLE_PARTNER(id) ((id) ^ 2)
+#define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
+#define BATTLE_PARTNER(id) ((id) ^ BIT_FLANK)
 
 #define B_SIDE_PLAYER     0
 #define B_SIDE_OPPONENT   1
+#define NUM_BATTLE_SIDES  2
 
 #define B_FLANK_LEFT 0
 #define B_FLANK_RIGHT 1
@@ -65,9 +66,15 @@
 #define BATTLE_TYPE_WILD_SCRIPTED      (1 << 17) // Used in pokeemerald as BATTLE_TYPE_PALACE.
 #define BATTLE_TYPE_LEGENDARY_FRLG     (1 << 18) // Used in pokeemerald as BATTLE_TYPE_ARENA.
 #define BATTLE_TYPE_TRAINER_TOWER      (1 << 19) // Used in pokeemerald as BATTLE_TYPE_FACTORY.
+// pokeemerald
+#define BATTLE_TYPE_INGAME_PARTNER     (1 << 20)
+#define BATTLE_TYPE_TOWER_LINK_MULTI   (1 << 21)
+#define BATTLE_TYPE_TWO_OPPONENTS      (1 << 22)
 
 #define IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && !((flags) & BATTLE_TYPE_GHOST_UNVEILED))
 #define IS_BATTLE_TYPE_GHOST_WITH_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && (flags) & BATTLE_TYPE_GHOST_UNVEILED)
+#define WILD_DOUBLE_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER))))
+#define BATTLE_TWO_VS_ONE_OPPONENT ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gTrainerBattleOpponent_B == 0xFFFF))
 
 #define RIVAL_BATTLE_HEAL_AFTER  1
 #define RIVAL_BATTLE_TUTORIAL    3
@@ -86,7 +93,10 @@
 #define B_OUTCOME_LINK_BATTLE_RAN      (1 << 7) // 128
 
 // Non-volatile status conditions
-// These persist remain outside of battle and after switching out
+// These remain outside of battle and after switching out.
+// If a new STATUS1 is added here, it should also be added to
+// sCompressedStatuses in src/pokemon.c or else it will be lost outside
+// of battle.
 #define STATUS1_NONE             0
 #define STATUS1_SLEEP            (1 << 0 | 1 << 1 | 1 << 2) // First 3 bits (Number of turns to sleep)
 #define STATUS1_SLEEP_TURN(num)  ((num) << 0) // Just for readability (or if rearranging statuses)
@@ -108,7 +118,7 @@
 #define STATUS2_FLINCHED              (1 << 3)
 #define STATUS2_UPROAR                (1 << 4 | 1 << 5 | 1 << 6)
 #define STATUS2_UPROAR_TURN(num)      ((num) << 4)
-#define STATUS2_UNUSED                (1 << 7)
+#define STATUS2_TORMENT               (1 << 7)
 #define STATUS2_BIDE                  (1 << 8 | 1 << 9)
 #define STATUS2_BIDE_TURN(num)        (((num) << 8) & STATUS2_BIDE)
 #define STATUS2_LOCK_CONFUSE          (1 << 10 | 1 << 11) // e.g. Thrash
@@ -118,7 +128,7 @@
 #define STATUS2_POWDER                (1 << 14)
 #define STATUS2_INFATUATION           (1 << 16 | 1 << 17 | 1 << 18 | 1 << 19)  // 4 bits, one for every battler
 #define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
-#define STATUS2_FOCUS_ENERGY          (1 << 20)
+#define STATUS2_DEFENSE_CURL          (1 << 20)
 #define STATUS2_TRANSFORMED           (1 << 21)
 #define STATUS2_RECHARGE              (1 << 22)
 #define STATUS2_RAGE                  (1 << 23)
@@ -128,10 +138,10 @@
 #define STATUS2_NIGHTMARE             (1 << 27)
 #define STATUS2_CURSED                (1 << 28)
 #define STATUS2_FORESIGHT             (1 << 29)
-#define STATUS2_DEFENSE_CURL          (1 << 30)
-#define STATUS2_TORMENT               (1 << 31)
+#define STATUS2_DRAGON_CHEER          (1 << 30)
+#define STATUS2_FOCUS_ENERGY          (1 << 31)
+#define STATUS2_FOCUS_ENERGY_ANY      (STATUS2_DRAGON_CHEER | STATUS2_FOCUS_ENERGY)
 
-// Seems like per-battler statuses. Not quite sure how to categorize these
 #define STATUS3_LEECHSEED_BATTLER       (1 << 0 | 1 << 1) // The battler to receive HP from Leech Seed
 #define STATUS3_LEECHSEED               (1 << 2)
 #define STATUS3_ALWAYS_HITS             (1 << 3 | 1 << 4)
@@ -146,7 +156,7 @@
 #define STATUS3_YAWN_TURN(num)          (((num) << 11) & STATUS3_YAWN)
 #define STATUS3_IMPRISONED_OTHERS       (1 << 13)
 #define STATUS3_GRUDGE                  (1 << 14)
-#define STATUS3_CANT_SCORE_A_CRIT       (1 << 15)
+#define STATUS3_CANT_SCORE_A_CRIT       (1 << 15) // unused?
 #define STATUS3_GASTRO_ACID             (1 << 16)
 #define STATUS3_EMBARGO                 (1 << 17)
 #define STATUS3_UNDERWATER              (1 << 18)
@@ -175,9 +185,9 @@
 
 // Not really sure what a "hitmarker" is.
 #define HITMARKER_WAKE_UP_CLEAR         (1 << 4) // Cleared when waking up. Never set or checked.
-#define HITMARKER_SKIP_DMG_TRACK        (1 << 5)
+#define HITMARKER_IGNORE_BIDE           (1 << 5)
 #define HITMARKER_DESTINYBOND           (1 << 6)
-#define HITMARKER_NO_ANIMATIONS         (1 << 7)
+#define HITMARKER_NO_ANIMATIONS         (1 << 7)  // set from battleSceneOff. Never changed during battle
 #define HITMARKER_IGNORE_SUBSTITUTE     (1 << 8)
 #define HITMARKER_NO_ATTACKSTRING       (1 << 9)
 #define HITMARKER_ATTACKSTRING_PRINTED  (1 << 10)
@@ -186,9 +196,9 @@
 #define HITMARKER_STATUS_ABILITY_EFFECT (1 << 13)
 #define HITMARKER_SYNCHRONISE_EFFECT    (1 << 14)
 #define HITMARKER_RUN                   (1 << 15)
-#define HITMARKER_IGNORE_ON_AIR         (1 << 16)
-#define HITMARKER_IGNORE_UNDERGROUND    (1 << 17)
-#define HITMARKER_IGNORE_UNDERWATER     (1 << 18)
+#define HITMARKER_IGNORE_DISGUISE       (1 << 16)
+#define HITMARKER_DISABLE_ANIMATION     (1 << 17)   // disable animations during battle scripts, e.g. for Bug Bite
+// 3 free spots because of change in handling of UNDERGROUND/UNDERWATER/ON AIR
 #define HITMARKER_UNABLE_TO_USE_MOVE    (1 << 19)
 #define HITMARKER_PASSIVE_DAMAGE        (1 << 20)
 #define HITMARKER_DISOBEDIENT_MOVE      (1 << 21)
@@ -200,42 +210,108 @@
 #define HITMARKER_CHARGING              (1 << 27)
 #define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 28)
 #define HITMARKER_FAINTED2(battler)     ((1 << 28) << battler)
+#define HITMARKER_STRING_PRINTED        (1 << 29)
+// TODO: old hitmarkers for compatability, remove with new battle system
+#define HITMARKER_SKIP_DMG_TRACK        (1 << 30)
+#define HITMARKER_IGNORE_ON_AIR         (1 << 31)
+#define HITMARKER_IGNORE_UNDERGROUND    (1 << 0)
+#define HITMARKER_IGNORE_UNDERWATER     (1 << 1)
+
 
 // Per-side statuses that affect an entire party
-#define SIDE_STATUS_REFLECT          (1 << 0)
-#define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
-#define SIDE_STATUS_X4               (1 << 2)
-#define SIDE_STATUS_SPIKES           (1 << 4)
-#define SIDE_STATUS_SAFEGUARD        (1 << 5)
-#define SIDE_STATUS_FUTUREATTACK     (1 << 6)
-#define SIDE_STATUS_MIST             (1 << 8)
-#define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
+#define SIDE_STATUS_REFLECT                 (1 << 0)
+#define SIDE_STATUS_LIGHTSCREEN             (1 << 1)
+#define SIDE_STATUS_STICKY_WEB              (1 << 2)
+#define SIDE_STATUS_SPIKES                  (1 << 4)
+#define SIDE_STATUS_SAFEGUARD               (1 << 5)
+#define SIDE_STATUS_FUTUREATTACK            (1 << 6)
+#define SIDE_STATUS_MIST                    (1 << 8)
+#define SIDE_STATUS_SPIKES_DAMAGED          (1 << 9) // TODO: remove with new battle system
+// (1 << 9) previously was SIDE_STATUS_SPIKES_DAMAGED
+#define SIDE_STATUS_TAILWIND                (1 << 10)
+#define SIDE_STATUS_AURORA_VEIL             (1 << 11)
+#define SIDE_STATUS_LUCKY_CHANT             (1 << 12)
+#define SIDE_STATUS_TOXIC_SPIKES            (1 << 13)
+#define SIDE_STATUS_STEALTH_ROCK            (1 << 14)
+// Missing flags previously were SIDE_STATUS_TOXIC_SPIKES_DAMAGED, SIDE_STATUS_STEALTH_ROCK_DAMAGED, SIDE_STATUS_STICKY_WEB_DAMAGED
+#define SIDE_STATUS_QUICK_GUARD             (1 << 18)
+#define SIDE_STATUS_WIDE_GUARD              (1 << 19)
+#define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)
+#define SIDE_STATUS_MAT_BLOCK               (1 << 21)
+#define SIDE_STATUS_STEELSURGE              (1 << 22)
+#define SIDE_STATUS_DAMAGE_NON_TYPES        (1 << 23)
+#define SIDE_STATUS_RAINBOW                 (1 << 24)
+#define SIDE_STATUS_SEA_OF_FIRE             (1 << 25)
+#define SIDE_STATUS_SWAMP                   (1 << 26)
+
+#define SIDE_STATUS_HAZARDS_ANY    (SIDE_STATUS_SPIKES | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES | SIDE_STATUS_STEALTH_ROCK | SIDE_STATUS_STEELSURGE)
+#define SIDE_STATUS_SCREEN_ANY     (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL)
+#define SIDE_STATUS_PLEDGE_ANY     (SIDE_STATUS_RAINBOW | SIDE_STATUS_SEA_OF_FIRE | SIDE_STATUS_SWAMP)
+
+// Field affecting statuses.
+#define STATUS_FIELD_MAGIC_ROOM                     (1 << 0)
+#define STATUS_FIELD_TRICK_ROOM                     (1 << 1)
+#define STATUS_FIELD_WONDER_ROOM                    (1 << 2)
+#define STATUS_FIELD_MUDSPORT                       (1 << 3)
+#define STATUS_FIELD_WATERSPORT                     (1 << 4)
+#define STATUS_FIELD_GRAVITY                        (1 << 5)
+#define STATUS_FIELD_GRASSY_TERRAIN                 (1 << 6)
+#define STATUS_FIELD_MISTY_TERRAIN                  (1 << 7)
+#define STATUS_FIELD_ELECTRIC_TERRAIN               (1 << 8)
+#define STATUS_FIELD_PSYCHIC_TERRAIN                (1 << 9)
+#define STATUS_FIELD_ION_DELUGE                     (1 << 10)
+#define STATUS_FIELD_FAIRY_LOCK                     (1 << 11)
+#define STATUS_FIELD_TERRAIN_PERMANENT              (1 << 12)   // Overworld thunderstorm generates electric terrain
+
+#define STATUS_FIELD_TERRAIN_ANY        (STATUS_FIELD_GRASSY_TERRAIN | STATUS_FIELD_MISTY_TERRAIN | STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_PSYCHIC_TERRAIN)
 
 // Flags describing move's result
-#define MOVE_RESULT_MISSED             (1 << 0)
-#define MOVE_RESULT_SUPER_EFFECTIVE    (1 << 1)
-#define MOVE_RESULT_NOT_VERY_EFFECTIVE (1 << 2)
-#define MOVE_RESULT_DOESNT_AFFECT_FOE  (1 << 3)
-#define MOVE_RESULT_ONE_HIT_KO         (1 << 4)
-#define MOVE_RESULT_FAILED             (1 << 5)
-#define MOVE_RESULT_FOE_ENDURED        (1 << 6)
-#define MOVE_RESULT_FOE_HUNG_ON        (1 << 7)
-#define MOVE_RESULT_NO_EFFECT          (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
+#define MOVE_RESULT_MISSED                (1 << 0)
+#define MOVE_RESULT_SUPER_EFFECTIVE       (1 << 1)
+#define MOVE_RESULT_NOT_VERY_EFFECTIVE    (1 << 2)
+#define MOVE_RESULT_DOESNT_AFFECT_FOE     (1 << 3)
+#define MOVE_RESULT_ONE_HIT_KO            (1 << 4)
+#define MOVE_RESULT_FAILED                (1 << 5)
+#define MOVE_RESULT_FOE_ENDURED           (1 << 6)
+#define MOVE_RESULT_FOE_HUNG_ON           (1 << 7)
+#define MOVE_RESULT_STURDIED              (1 << 8)
+#define MOVE_RESULT_FOE_ENDURED_AFFECTION (1 << 9)
+#define MOVE_RESULT_NO_EFFECT             (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED)
 
 // Battle Weather flags
+#define B_WEATHER_NONE                0
 #define B_WEATHER_RAIN_TEMPORARY      (1 << 0)
 #define B_WEATHER_RAIN_DOWNPOUR       (1 << 1)  // unused
 #define B_WEATHER_RAIN_PERMANENT      (1 << 2)
-#define B_WEATHER_RAIN                (B_WEATHER_RAIN_TEMPORARY | B_WEATHER_RAIN_DOWNPOUR | B_WEATHER_RAIN_PERMANENT)
-#define B_WEATHER_SANDSTORM_TEMPORARY (1 << 3)
-#define B_WEATHER_SANDSTORM_PERMANENT (1 << 4)
+#define B_WEATHER_RAIN_PRIMAL         (1 << 3)
+#define B_WEATHER_RAIN                (B_WEATHER_RAIN_TEMPORARY | B_WEATHER_RAIN_DOWNPOUR | B_WEATHER_RAIN_PERMANENT | B_WEATHER_RAIN_PRIMAL)
+#define B_WEATHER_SANDSTORM_TEMPORARY (1 << 4)
+#define B_WEATHER_SANDSTORM_PERMANENT (1 << 5)
 #define B_WEATHER_SANDSTORM           (B_WEATHER_SANDSTORM_TEMPORARY | B_WEATHER_SANDSTORM_PERMANENT)
-#define B_WEATHER_SUN_TEMPORARY       (1 << 5)
-#define B_WEATHER_SUN_PERMANENT       (1 << 6)
-#define B_WEATHER_SUN                 (B_WEATHER_SUN_TEMPORARY | B_WEATHER_SUN_PERMANENT)
-#define B_WEATHER_HAIL_TEMPORARY      (1 << 7)
-#define B_WEATHER_HAIL                (B_WEATHER_HAIL_TEMPORARY)
-#define B_WEATHER_ANY                 (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL)
+#define B_WEATHER_SUN_TEMPORARY       (1 << 6)
+#define B_WEATHER_SUN_PERMANENT       (1 << 7)
+#define B_WEATHER_SUN_PRIMAL          (1 << 8)
+#define B_WEATHER_SUN                 (B_WEATHER_SUN_TEMPORARY | B_WEATHER_SUN_PERMANENT | B_WEATHER_SUN_PRIMAL)
+#define B_WEATHER_HAIL_TEMPORARY      (1 << 9)
+#define B_WEATHER_HAIL_PERMANENT      (1 << 10)
+#define B_WEATHER_HAIL                (B_WEATHER_HAIL_TEMPORARY | B_WEATHER_HAIL_PERMANENT)
+#define B_WEATHER_STRONG_WINDS        (1 << 11)
+#define B_WEATHER_ANY                 (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL | B_WEATHER_STRONG_WINDS | B_WEATHER_SNOW)
+#define B_WEATHER_PRIMAL_ANY          (B_WEATHER_RAIN_PRIMAL | B_WEATHER_SUN_PRIMAL | B_WEATHER_STRONG_WINDS)
+#define B_WEATHER_SNOW_TEMPORARY      (1 << 12)
+#define B_WEATHER_SNOW_PERMANENT      (1 << 13)
+#define B_WEATHER_SNOW                (B_WEATHER_SNOW_TEMPORARY | B_WEATHER_SNOW_PERMANENT)
+
+// Battle Weather as enum
+#define ENUM_WEATHER_NONE                 0
+#define ENUM_WEATHER_RAIN                 1
+#define ENUM_WEATHER_SUN                  2
+#define ENUM_WEATHER_SANDSTORM            3
+#define ENUM_WEATHER_HAIL                 4
+#define ENUM_WEATHER_SUN_PRIMAL           5
+#define ENUM_WEATHER_RAIN_PRIMAL          6
+#define ENUM_WEATHER_STRONG_WINDS         7
+#define ENUM_WEATHER_SNOW                 8
 
 // Move Effects
 #define MOVE_EFFECT_SLEEP               1
@@ -244,15 +320,16 @@
 #define MOVE_EFFECT_FREEZE              4
 #define MOVE_EFFECT_PARALYSIS           5
 #define MOVE_EFFECT_TOXIC               6
-#define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_TOXIC // All above move effects apply primary status
-#define MOVE_EFFECT_CONFUSION           7
-#define MOVE_EFFECT_FLINCH              8
-#define MOVE_EFFECT_TRI_ATTACK          9
-#define MOVE_EFFECT_UPROAR              10
-#define MOVE_EFFECT_PAYDAY              11
-#define MOVE_EFFECT_CHARGING            12
-#define MOVE_EFFECT_WRAP                13
-#define MOVE_EFFECT_RECOIL_25           14
+#define MOVE_EFFECT_FROSTBITE           7
+#define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_FROSTBITE // All above move effects apply primary status
+#define MOVE_EFFECT_FREEZE_OR_FROSTBITE (B_USE_FROSTBITE == TRUE ? MOVE_EFFECT_FROSTBITE : MOVE_EFFECT_FREEZE)
+#define MOVE_EFFECT_CONFUSION           8
+#define MOVE_EFFECT_FLINCH              9
+#define MOVE_EFFECT_TRI_ATTACK          10
+#define MOVE_EFFECT_UPROAR              11
+#define MOVE_EFFECT_PAYDAY              12
+#define MOVE_EFFECT_CHARGING            13
+#define MOVE_EFFECT_WRAP                14
 #define MOVE_EFFECT_ATK_PLUS_1          15
 #define MOVE_EFFECT_DEF_PLUS_1          16
 #define MOVE_EFFECT_SPD_PLUS_1          17
@@ -267,16 +344,16 @@
 #define MOVE_EFFECT_SP_DEF_MINUS_1      26
 #define MOVE_EFFECT_ACC_MINUS_1         27
 #define MOVE_EFFECT_EVS_MINUS_1         28
-#define MOVE_EFFECT_RECHARGE            29
-#define MOVE_EFFECT_RAGE                30
-#define MOVE_EFFECT_STEAL_ITEM          31
-#define MOVE_EFFECT_PREVENT_ESCAPE      32
-#define MOVE_EFFECT_NIGHTMARE           33
-#define MOVE_EFFECT_ALL_STATS_UP        34
-#define MOVE_EFFECT_RAPIDSPIN           35
-#define MOVE_EFFECT_REMOVE_PARALYSIS    36
-#define MOVE_EFFECT_ATK_DEF_DOWN        37
-#define MOVE_EFFECT_RECOIL_33           38
+#define MOVE_EFFECT_REMOVE_ARG_TYPE     29
+#define MOVE_EFFECT_RECHARGE            30
+#define MOVE_EFFECT_RAGE                31
+#define MOVE_EFFECT_STEAL_ITEM          32
+#define MOVE_EFFECT_PREVENT_ESCAPE      33
+#define MOVE_EFFECT_NIGHTMARE           34
+#define MOVE_EFFECT_ALL_STATS_UP        35
+#define MOVE_EFFECT_RAPID_SPIN          36
+#define MOVE_EFFECT_REMOVE_STATUS       37
+#define MOVE_EFFECT_ATK_DEF_DOWN        38
 #define MOVE_EFFECT_ATK_PLUS_2          39
 #define MOVE_EFFECT_DEF_PLUS_2          40
 #define MOVE_EFFECT_SPD_PLUS_2          41
@@ -291,43 +368,86 @@
 #define MOVE_EFFECT_SP_DEF_MINUS_2      50
 #define MOVE_EFFECT_ACC_MINUS_2         51
 #define MOVE_EFFECT_EVS_MINUS_2         52
-#define MOVE_EFFECT_THRASH              53
-#define MOVE_EFFECT_KNOCK_OFF           54
-#define MOVE_EFFECT_NOTHING_37          55
-#define MOVE_EFFECT_NOTHING_38          56
-#define MOVE_EFFECT_NOTHING_39          57
-#define MOVE_EFFECT_NOTHING_3A          58
-#define MOVE_EFFECT_SP_ATK_TWO_DOWN     59
-#define NUM_MOVE_EFFECTS                60
+#define MOVE_EFFECT_SCALE_SHOT          53
+#define MOVE_EFFECT_THRASH              54
+#define MOVE_EFFECT_KNOCK_OFF           55
+#define MOVE_EFFECT_DEF_SPDEF_DOWN      56
+#define MOVE_EFFECT_CLEAR_SMOG          57
+#define MOVE_EFFECT_SP_ATK_TWO_DOWN     58
+#define MOVE_EFFECT_SMACK_DOWN          59
+#define MOVE_EFFECT_FLAME_BURST         60
+#define MOVE_EFFECT_FEINT               61
+#define MOVE_EFFECT_SPECTRAL_THIEF      62
+#define MOVE_EFFECT_V_CREATE            63
+#define MOVE_EFFECT_HAPPY_HOUR          64
+#define MOVE_EFFECT_CORE_ENFORCER       65
+#define MOVE_EFFECT_THROAT_CHOP         66
+#define MOVE_EFFECT_INCINERATE          67
+#define MOVE_EFFECT_BUG_BITE            68
+#define MOVE_EFFECT_RECOIL_HP_25        69
+#define MOVE_EFFECT_TRAP_BOTH           70
+#define MOVE_EFFECT_ROUND               71
+#define MOVE_EFFECT_STOCKPILE_WORE_OFF  72
+#define MOVE_EFFECT_DIRE_CLAW           73
+#define MOVE_EFFECT_STEALTH_ROCK        74
+#define MOVE_EFFECT_SPIKES              75
+#define MOVE_EFFECT_SYRUP_BOMB          76
+#define MOVE_EFFECT_FLORAL_HEALING      77
+#define MOVE_EFFECT_SECRET_POWER        78
+#define MOVE_EFFECT_PSYCHIC_NOISE       79
+// TODO: old pokefirered move effects, remove with new battle system
+#define MOVE_EFFECT_RECOIL_25           80
+#define MOVE_EFFECT_RAPIDSPIN           81
+#define MOVE_EFFECT_REMOVE_PARALYSIS    82
+#define MOVE_EFFECT_RECOIL_33           83
 
-#define MOVE_EFFECT_AFFECTS_USER        (1 << 6) // 64
-#define MOVE_EFFECT_CERTAIN             (1 << 7) // 128
+#define NUM_MOVE_EFFECTS                84
+
+#define MOVE_EFFECT_AFFECTS_USER        0x2000
+#define MOVE_EFFECT_CERTAIN             0x4000
+#define MOVE_EFFECT_CONTINUE            0x8000
 
 // Battle terrain defines for gBattleTerrain.
-#define BATTLE_TERRAIN_GRASS        0
-#define BATTLE_TERRAIN_LONG_GRASS   1
-#define BATTLE_TERRAIN_SAND         2
-#define BATTLE_TERRAIN_UNDERWATER   3
-#define BATTLE_TERRAIN_WATER        4
-#define BATTLE_TERRAIN_POND         5
-#define BATTLE_TERRAIN_MOUNTAIN     6
-#define BATTLE_TERRAIN_CAVE         7
-#define BATTLE_TERRAIN_BUILDING     8
-#define BATTLE_TERRAIN_PLAIN        9
-#define BATTLE_TERRAIN_LINK        10
-#define BATTLE_TERRAIN_GYM         11
-#define BATTLE_TERRAIN_LEADER      12
-#define BATTLE_TERRAIN_INDOOR_2    13
-#define BATTLE_TERRAIN_INDOOR_1    14
-#define BATTLE_TERRAIN_LORELEI     15
-#define BATTLE_TERRAIN_BRUNO       16
-#define BATTLE_TERRAIN_AGATHA      17
-#define BATTLE_TERRAIN_LANCE       18
-#define BATTLE_TERRAIN_CHAMPION    19
+#define BATTLE_TERRAIN_GRASS            0
+#define BATTLE_TERRAIN_LONG_GRASS       1
+#define BATTLE_TERRAIN_SAND             2
+#define BATTLE_TERRAIN_UNDERWATER       3
+#define BATTLE_TERRAIN_WATER            4
+#define BATTLE_TERRAIN_POND             5
+#define BATTLE_TERRAIN_MOUNTAIN         6
+#define BATTLE_TERRAIN_CAVE             7
+#define BATTLE_TERRAIN_BUILDING         8
+#define BATTLE_TERRAIN_PLAIN            9
+// New battle terrains are used for Secret Power but not fully implemented.
+#define BATTLE_TERRAIN_SOARING          10
+#define BATTLE_TERRAIN_SKY_PILLAR       11
+#define BATTLE_TERRAIN_BURIAL_GROUND    12
+#define BATTLE_TERRAIN_PUDDLE           13
+#define BATTLE_TERRAIN_MARSH            14
+#define BATTLE_TERRAIN_SWAMP            15
+#define BATTLE_TERRAIN_SNOW             16
+#define BATTLE_TERRAIN_ICE              17
+#define BATTLE_TERRAIN_VOLCANO          18
+#define BATTLE_TERRAIN_DISTORTION_WORLD 19
+#define BATTLE_TERRAIN_SPACE            20
+#define BATTLE_TERRAIN_ULTRA_SPACE      21
+#define BATTLE_TERRAIN_LINK             22
+#define BATTLE_TERRAIN_GYM              23
+#define BATTLE_TERRAIN_LEADER           24
+#define BATTLE_TERRAIN_INDOOR_2         25
+#define BATTLE_TERRAIN_INDOOR_1         26
+#define BATTLE_TERRAIN_LORELEI          27
+#define BATTLE_TERRAIN_BRUNO            28
+#define BATTLE_TERRAIN_AGATHA           29
+#define BATTLE_TERRAIN_LANCE            30
+#define BATTLE_TERRAIN_CHAMPION         31
 
-#define B_WAIT_TIME_LONG  64
-#define B_WAIT_TIME_MED   48
-#define B_WAIT_TIME_SHORT 32
+#define BATTLE_TERRAIN_COUNT            32
+
+#define B_WAIT_TIME_LONG        64
+#define B_WAIT_TIME_MED         48
+#define B_WAIT_TIME_SHORT       32
+#define B_WAIT_TIME_SHORTEST    16
 
 #define CASTFORM_NORMAL     0
 #define CASTFORM_FIRE       1
@@ -376,5 +496,45 @@
 
 // Indicator for the party summary bar to display an empty slot.
 #define HP_EMPTY_SLOT 0xFFFF
+
+#define MOVE_TARGET_SELECTED            0
+#define MOVE_TARGET_DEPENDS             (1 << 0)
+#define MOVE_TARGET_USER_OR_SELECTED    (1 << 1)
+#define MOVE_TARGET_RANDOM              (1 << 2)
+#define MOVE_TARGET_BOTH                (1 << 3)
+#define MOVE_TARGET_USER                (1 << 4)
+#define MOVE_TARGET_FOES_AND_ALLY       (1 << 5)
+#define MOVE_TARGET_OPPONENTS_FIELD     (1 << 6)
+#define MOVE_TARGET_ALLY                (1 << 7)
+#define MOVE_TARGET_ALL_BATTLERS        ((1 << 8) | MOVE_TARGET_USER)
+
+// For the second argument of GetMoveTarget, when no target override is needed
+#define NO_TARGET_OVERRIDE 0
+
+// Constants for Parental Bond
+#define PARENTAL_BOND_1ST_HIT 2
+#define PARENTAL_BOND_2ND_HIT 1
+#define PARENTAL_BOND_OFF     0
+
+// Constants for if HandleScriptMegaPrimalBurst should handle Mega Evolution, Primal Reversion, or Ultra Burst.
+#define HANDLE_TYPE_MEGA_EVOLUTION 0
+#define HANDLE_TYPE_PRIMAL_REVERSION 1
+#define HANDLE_TYPE_ULTRA_BURST 2
+
+// Constants for Torment
+#define PERMANENT_TORMENT   0xF
+
+// Constants for B_VAR_STARTING_STATUS
+// Timer value controlled by B_VAR_STARTING_STATUS_TIMER
+#define STARTING_STATUS_NONE                0
+#define STARTING_STATUS_ELECTRIC_TERRAIN    1
+#define STARTING_STATUS_MISTY_TERRAIN       2
+#define STARTING_STATUS_GRASSY_TERRAIN      3
+#define STARTING_STATUS_PSYCHIC_TERRAIN     4
+#define STARTING_STATUS_TRICK_ROOM          5
+#define STARTING_STATUS_MAGIC_ROOM          6
+#define STARTING_STATUS_WONDER_ROOM         7
+#define STARTING_STATUS_TAILWIND_PLAYER     8
+#define STARTING_STATUS_TAILWIND_OPPONENT   9
 
 #endif // GUARD_CONSTANTS_BATTLE_H

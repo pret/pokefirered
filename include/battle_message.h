@@ -55,6 +55,8 @@
 #define B_TXT_TRAINER2_LOSE_TEXT 0x2E
 #define B_TXT_TRAINER2_WIN_TEXT 0x2F
 #define B_TXT_BUFF3 0x30
+#define B_TXT_ATK_TEAM2 0x38 // your/the opposing
+#define B_TXT_DEF_TEAM2 0x3B // your/the opposing
 
 // for B_TXT_BUFF1, B_TXT_BUFF2 and B_TXT_BUFF3
 
@@ -152,7 +154,7 @@
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
     textVar[1] = B_BUFF_MOVE;                                   \
-    textVar[2] = move;                                          \
+    textVar[2] = (move & 0xFF);                                 \
     textVar[3] = (move & 0xFF00) >> 8;                          \
     textVar[4] = B_BUFF_EOS;                                    \
 }
@@ -233,7 +235,6 @@ extern const u8 *const gRefereeStringsTable[];
 extern const u8 *const gStatNamesTable2[];
 
 extern const u16 gMissStringIds[];
-extern const u16 gTrappingMoves[];
 
 extern const u8 gText_Sleep[];
 extern const u8 gText_Poison[];

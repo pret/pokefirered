@@ -153,7 +153,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_HITANIMATION]             = PlayerHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = PlayerHandleCmd42,
     [CONTROLLER_PLAYSE]                   = PlayerHandlePlaySE,
-    [CONTROLLER_PLAYFANFARE]              = PlayerHandlePlayFanfare,
+    [CONTROLLER_PLAYFANFAREORBGM]              = PlayerHandlePlayFanfare,
     [CONTROLLER_FAINTINGCRY]              = PlayerHandleFaintingCry,
     [CONTROLLER_INTROSLIDE]               = PlayerHandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = PlayerHandleIntroTrainerBallThrow,
@@ -378,7 +378,7 @@ static void HandleInputChooseTarget(void)
             case B_POSITION_PLAYER_RIGHT:
                 if (gActiveBattler != gMultiUsePlayerCursor)
                     ++i;
-                else if (gBattleMoves[GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler])].target & MOVE_TARGET_USER_OR_SELECTED)
+                else if (gMovesInfo[GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler])].target & MOVE_TARGET_USER_OR_SELECTED)
                     ++i;
                 break;
             case B_POSITION_OPPONENT_LEFT:
@@ -418,7 +418,7 @@ static void HandleInputChooseTarget(void)
             case B_POSITION_PLAYER_RIGHT:
                 if (gActiveBattler != gMultiUsePlayerCursor)
                     ++i;
-                else if (gBattleMoves[GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler])].target & MOVE_TARGET_USER_OR_SELECTED)
+                else if (gMovesInfo[GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_MOVE1 + gMoveSelectionCursor[gActiveBattler])].target & MOVE_TARGET_USER_OR_SELECTED)
                     ++i;
                 break;
             case B_POSITION_OPPONENT_LEFT:
@@ -454,7 +454,7 @@ void HandleInputChooseMove(void)
         }
         else
         {
-            moveTarget = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].target;
+            moveTarget = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].target;
         }
 
         if (moveTarget & MOVE_TARGET_USER)
@@ -475,7 +475,7 @@ void HandleInputChooseMove(void)
             {
                 canSelectTarget = FALSE;
             }
-            else if (!(moveTarget & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED)) && CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) <= 1)
+            else if (!(moveTarget & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED)) && CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_BATTLER, gActiveBattler) <= 1)
             {
                 gMultiUsePlayerCursor = GetDefaultMoveTarget(gActiveBattler);
                 canSelectTarget = FALSE;
@@ -1409,7 +1409,7 @@ static void MoveSelectionDisplayMoveType(void)
     *txtPtr++ = 6;
     *txtPtr++ = 1;
     txtPtr = StringCopy(txtPtr, gText_MoveInterfaceDynamicColors);
-    StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
+    StringCopy(txtPtr, gTypeNames[gMovesInfo[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 
@@ -1549,7 +1549,7 @@ static u32 CopyPlayerMonData(u8 monId, u8 *dst)
         battleMon.speed = GetMonData(&gPlayerParty[monId], MON_DATA_SPEED);
         battleMon.spAttack = GetMonData(&gPlayerParty[monId], MON_DATA_SPATK);
         battleMon.spDefense = GetMonData(&gPlayerParty[monId], MON_DATA_SPDEF);
-        battleMon.isEgg = GetMonData(&gPlayerParty[monId], MON_DATA_IS_EGG);
+        // battleMon.isEgg = GetMonData(&gPlayerParty[monId], MON_DATA_IS_EGG);
         battleMon.abilityNum = GetMonData(&gPlayerParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gPlayerParty[monId], MON_DATA_OT_ID);
         GetMonData(&gPlayerParty[monId], MON_DATA_NICKNAME, nickname);
@@ -2900,7 +2900,7 @@ static void PreviewDeterminativeMoveTargets(void)
         }
         else
         {
-            moveTarget = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].target;
+            moveTarget = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].target;
         }
         switch (moveTarget)
         {

@@ -1016,9 +1016,13 @@ static void QuestLog_GetSpeciesName(u16 species, u8 *dest, u8 stringVarId)
     if (dest != NULL)
     {
         if (species != SPECIES_EGG)
-            GetSpeciesName(dest, species);
+        {
+            StringCopy(dest, GetSpeciesName(species));
+        }
         else
+        {
             StringCopy(dest, gText_EggNickname);
+        }
     }
     else
     {

@@ -70,6 +70,7 @@ u8 ItemId_GetType(u16 itemId);
 ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
+u32 ItemId_GetFlingPower(u32 itemId);
 u16 ItemId_GetPrice(u16 itemId);
 void ClearBag(void);
 void ClearPCItemSlots(void);

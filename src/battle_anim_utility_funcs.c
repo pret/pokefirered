@@ -968,3 +968,12 @@ static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+void AnimTask_SetInvisible(u8 taskId)
+{
+    u32 battlerId = GetAnimBattlerId(gBattleAnimArgs[0]);
+    u32 spriteId = gBattlerSpriteIds[battlerId];
+
+    gSprites[spriteId].invisible = gBattleSpritesDataPtr->battlerData[battlerId].invisible = gBattleAnimArgs[1];
+    DestroyAnimVisualTask(taskId);
+}

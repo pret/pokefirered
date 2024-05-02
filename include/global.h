@@ -4,6 +4,8 @@
 #include "config.h"
 #include "gba/gba.h"
 #include <string.h>
+#include "fpmath.h"
+#include "metaprogram.h"
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
@@ -51,13 +53,13 @@
 #define Q_8_8(n) ((s16)((n) * 256))
 
 // Converts a number from Q8.8 fixed-point format
-#define Q_8_8_TO_INT(n) ((s16)((n) >> 8))
+// #define Q_8_8_TO_INT(n) ((s16)((n) >> 8))
 
 // Converts a number to Q4.12 fixed-point format
-#define Q_4_12(n)  ((s16)((n) * 4096))
+// #define Q_4_12(n)  ((s16)((n) * 4096))
 
 // Converts a number from Q4.12 fixed-point format
-#define Q_4_12_TO_INT(n) ((s16)((n) >> 12))
+// #define Q_4_12_TO_INT(n) ((s16)((n) >> 12))
 
 // Converts a number to QN.S fixed-point format (16-bits)
 #define Q_N_S(s, n) ((s16)((n) * (1 << (s))))
@@ -85,6 +87,12 @@
 #else
 #define SAFE_DIV(a, b) ((a) / (b))
 #endif
+
+// The below macro does a%n, but (to match) will switch to a&(n-1) if n is a power of 2.
+// There are cases where GF does a&(n-1) where we would really like to have a%n, because
+// if n is changed to a value that isn't a power of 2 then a&(n-1) is unlikely to work as
+// intended, and a%n for powers of 2 isn't always optimized to use &.
+#define MOD(a, n)(((n) & ((n)-1)) ? ((a) % (n)) : ((a) & ((n)-1)))
 
 // Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
@@ -132,24 +140,26 @@ extern u8 gStringVar4[];
 #define NUM_ADDITIONAL_PHRASE_BYTES ROUND_BITS_TO_BYTES(NUM_ADDITIONAL_PHRASES)
 
 // Calls m0/m1/.../m8 depending on how many arguments are passed.
-#define VARARG_8(m, ...) CAT(m, NARG_8(__VA_ARGS__))(__VA_ARGS__)
+// #define VARARG_8(m, ...) CAT(m, NARG_8(__VA_ARGS__))(__VA_ARGS__)
 
 // This returns the number of arguments passed to it (up to 8).
-#define NARG_8(...) NARG_8_(_, ##__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1, 0)
-#define NARG_8_(_, a, b, c, d, e, f, g, h, N, ...) N
+// #define NARG_8(...) NARG_8_(_, ##__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+// #define NARG_8_(_, a, b, c, d, e, f, g, h, N, ...) N
 
-#define CAT(a, b) CAT_(a, b)
-#define CAT_(a, b) a ## b
+// #define CAT(a, b) CAT_(a, b)
+// #define CAT_(a, b) a ## b
 
-#define STR(a) STR_(a)
-#define STR_(a) #a
+// #define STR(a) STR_(a)
+// #define STR_(a) #a
 
 // Converts a string to a compound literal, essentially making it a pointer to const u8
-#define COMPOUND_STRING(str) (const u8[]) _(str)
+// #define COMPOUND_STRING(str) (const u8[]) _(str)
 
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
+
+#define FEATURE_FLAG_ASSERT(flag, id) STATIC_ASSERT(flag > TEMP_FLAGS_END || flag == 0, id)
 
 struct Coords8
 {

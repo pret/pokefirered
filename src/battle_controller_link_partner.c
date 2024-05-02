@@ -129,7 +129,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_HITANIMATION]             = LinkPartnerHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = LinkPartnerHandleCantSwitch,
     [CONTROLLER_PLAYSE]                   = LinkPartnerHandlePlaySE,
-    [CONTROLLER_PLAYFANFARE]              = LinkPartnerHandlePlayFanfare,
+    [CONTROLLER_PLAYFANFAREORBGM]              = LinkPartnerHandlePlayFanfare,
     [CONTROLLER_FAINTINGCRY]              = LinkPartnerHandleFaintingCry,
     [CONTROLLER_INTROSLIDE]               = LinkPartnerHandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = LinkPartnerHandleIntroTrainerBallThrow,
@@ -466,7 +466,7 @@ static u32 CopyLinkPartnerMonData(u8 monId, u8 *dst)
         battleMon.speed = GetMonData(&gPlayerParty[monId], MON_DATA_SPEED);
         battleMon.spAttack = GetMonData(&gPlayerParty[monId], MON_DATA_SPATK);
         battleMon.spDefense = GetMonData(&gPlayerParty[monId], MON_DATA_SPDEF);
-        battleMon.isEgg = GetMonData(&gPlayerParty[monId], MON_DATA_IS_EGG);
+        // battleMon.isEgg = GetMonData(&gPlayerParty[monId], MON_DATA_IS_EGG); TODO: check controllers if this is correct
         battleMon.abilityNum = GetMonData(&gPlayerParty[monId], MON_DATA_ABILITY_NUM);
         battleMon.otId = GetMonData(&gPlayerParty[monId], MON_DATA_OT_ID);
         GetMonData(&gPlayerParty[monId], MON_DATA_NICKNAME, nickname);

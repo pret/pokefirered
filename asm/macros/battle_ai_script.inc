@@ -325,13 +325,13 @@
 
 	.macro if_effect byte:req, ptr:req
 	.byte 0x37
-	.byte \byte
+	.2byte \byte
 	.4byte \ptr
 	.endm
 
 	.macro if_not_effect byte:req, ptr:req
 	.byte 0x38
-	.byte \byte
+	.2byte \byte
 	.4byte \ptr
 	.endm
 
@@ -396,14 +396,14 @@
 	.macro if_has_move_with_effect battler:req, effect:req, ptr:req
 	.byte 0x41
 	.byte \battler
-	.byte \effect
+	.2byte \effect
 	.4byte \ptr
 	.endm
 
 	.macro if_doesnt_have_move_with_effect battler:req, effect:req, ptr:req
 	.byte 0x42
 	.byte \battler
-	.byte \effect
+	.2byte \effect
 	.4byte \ptr
 	.endm
 

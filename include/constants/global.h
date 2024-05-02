@@ -21,6 +21,8 @@
 #define VERSION_PLATINUM 12
 #define VERSION_GAMECUBE 15
 
+#define NUM_VERSIONS 15
+
 #define LANGUAGE_JAPANESE 1
 #define LANGUAGE_ENGLISH  2
 #define LANGUAGE_FRENCH   3
@@ -33,6 +35,10 @@
 #ifdef ENGLISH
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 #endif
+
+// party sizes
+#define PARTY_SIZE 6
+#define MULTI_PARTY_SIZE (PARTY_SIZE / 2)
 
 // capacities of various saveblock objects
 #define DAYCARE_MON_COUNT   2
@@ -74,13 +80,14 @@
 #define WONDER_NEWS_TEXT_LENGTH 40
 #define WONDER_CARD_BODY_TEXT_LINES 4
 #define WONDER_NEWS_BODY_TEXT_LINES 10
+#define TYPE_NAME_LENGTH 6
+#define ABILITY_NAME_LENGTH ((B_EXPANDED_ABILITY_NAMES == TRUE) ? 16 : 12)
 
 #define MAX_STAMP_CARD_STAMPS 7
 
 #define TRAINER_ID_LENGTH 4
 #define MAX_MON_MOVES 4
-#define PARTY_SIZE 6
-#define MULTI_PARTY_SIZE (PARTY_SIZE / 2)
+#define ALL_MOVES_MASK ((1 << MAX_MON_MOVES) - 1)
 
 #define QUEST_LOG_SCENE_COUNT 4
 

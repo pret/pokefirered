@@ -623,7 +623,6 @@ static const u32 sStarObjTiles[] = INCBIN_U32( "graphics/summary_screen/shiny_st
 static const u32 sBgTilemap_MovesInfoPage[] = INCBIN_U32( "graphics/summary_screen/moves_info_page.bin.lz");
 static const u32 sBgTilemap_MovesPage[] = INCBIN_U32( "graphics/summary_screen/moves_page.bin.lz");
 
-#include "data/text/move_descriptions.h"
 #include "data/text/nature_names.h"
 
 static const u8 *const sEggHatchTimeTexts[] = {
@@ -2097,7 +2096,7 @@ static void BufferMonInfo(void)
     if (!sMonSummaryScreen->isEgg)
     {
         dexNum = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES);
-        GetSpeciesName(sMonSummaryScreen->summary.speciesNameStrBuf, dexNum);
+        StringCopy(sMonSummaryScreen->summary.speciesNameStrBuf, GetSpeciesName(dexNum));
     }
     else
     {
@@ -2231,8 +2230,8 @@ static void BufferMonSkills(void)
     sMonSkillsPrinterXpos->toNextLevel = GetNumberRightAlign63(sMonSummaryScreen->summary.expToNextLevelStrBuf);
 
     type = GetAbilityBySpecies(GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES), GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ABILITY_NUM));
-    StringCopy(sMonSummaryScreen->summary.abilityNameStrBuf, gAbilityNames[type]);
-    StringCopy(sMonSummaryScreen->summary.abilityDescStrBuf, gAbilityDescriptionPointers[type]);
+    StringCopy(sMonSummaryScreen->summary.abilityNameStrBuf, gAbilitiesInfo[type].name);
+    StringCopy(sMonSummaryScreen->summary.abilityDescStrBuf, gAbilitiesInfo[type].description);
 
     sMonSummaryScreen->curMonStatusAilment = StatusToAilment(GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_STATUS));
     if (sMonSummaryScreen->curMonStatusAilment == AILMENT_NONE)
@@ -2270,15 +2269,15 @@ static void BufferMonMoveI(u8 i)
     }
 
     sMonSummaryScreen->numMoves++;
-    sMonSummaryScreen->moveTypes[i] = gBattleMoves[sMonSummaryScreen->moveIds[i]].type;
+    sMonSummaryScreen->moveTypes[i] = gMovesInfo[sMonSummaryScreen->moveIds[i]].type;
     StringCopy(sMonSummaryScreen->summary.moveNameStrBufs[i], gMoveNames[sMonSummaryScreen->moveIds[i]]);
 
     if (i >= 4 && sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
     {
         ConvertIntToDecimalStringN(sMonSummaryScreen->summary.moveCurPpStrBufs[i],
-                                   gBattleMoves[sMonSummaryScreen->moveIds[i]].pp, STR_CONV_MODE_LEFT_ALIGN, 3);
+                                   gMovesInfo[sMonSummaryScreen->moveIds[i]].pp, STR_CONV_MODE_LEFT_ALIGN, 3);
         ConvertIntToDecimalStringN(sMonSummaryScreen->summary.moveMaxPpStrBufs[i],
-                                   gBattleMoves[sMonSummaryScreen->moveIds[i]].pp, STR_CONV_MODE_LEFT_ALIGN, 3);
+                                   gMovesInfo[sMonSummaryScreen->moveIds[i]].pp, STR_CONV_MODE_LEFT_ALIGN, 3);
     }
     else
     {
@@ -2292,15 +2291,15 @@ static void BufferMonMoveI(u8 i)
     sMonSkillsPrinterXpos->curPp[i] = GetRightAlignXpos_NDigits(2, sMonSummaryScreen->summary.moveCurPpStrBufs[i]);
     sMonSkillsPrinterXpos->maxPp[i] = GetRightAlignXpos_NDigits(2, sMonSummaryScreen->summary.moveMaxPpStrBufs[i]);
 
-    if (gBattleMoves[sMonSummaryScreen->moveIds[i]].power <= 1)
+    if (gMovesInfo[sMonSummaryScreen->moveIds[i]].power <= 1)
         StringCopy(sMonSummaryScreen->summary.movePowerStrBufs[i], gText_ThreeHyphens);
     else
-        ConvertIntToDecimalStringN(sMonSummaryScreen->summary.movePowerStrBufs[i], gBattleMoves[sMonSummaryScreen->moveIds[i]].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(sMonSummaryScreen->summary.movePowerStrBufs[i], gMovesInfo[sMonSummaryScreen->moveIds[i]].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
 
-    if (gBattleMoves[sMonSummaryScreen->moveIds[i]].accuracy == 0)
+    if (gMovesInfo[sMonSummaryScreen->moveIds[i]].accuracy == 0)
         StringCopy(sMonSummaryScreen->summary.moveAccuracyStrBufs[i], gText_ThreeHyphens);
     else
-        ConvertIntToDecimalStringN(sMonSummaryScreen->summary.moveAccuracyStrBufs[i], gBattleMoves[sMonSummaryScreen->moveIds[i]].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(sMonSummaryScreen->summary.moveAccuracyStrBufs[i], gMovesInfo[sMonSummaryScreen->moveIds[i]].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
 }
 
 static u8 PokeSum_HandleCreateSprites(void)
@@ -2874,7 +2873,7 @@ static void PokeSum_PrintSelectedMoveStats(void)
                                      7, 42,
                                      0, 0,
                                      sLevelNickTextColors[0], TEXT_SKIP_DRAW,
-                                     gMoveDescriptionPointers[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos] - 1]);
+                                     gMovesInfo[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].description);
     }
 }
 
@@ -3770,7 +3769,7 @@ static u8 PokeSum_CanForgetSelectedMove(void)
 
     move = GetMonMoveBySlotId(&sMonSummaryScreen->currentMon, sMoveSelectionCursorPos);
 
-    if (IsMoveHm(move) == TRUE && sMonSummaryScreen->mode != PSS_MODE_FORGET_MOVE)
+    if (IsMoveHM(move) == TRUE && sMonSummaryScreen->mode != PSS_MODE_FORGET_MOVE)
         return FALSE;
 
     return TRUE;

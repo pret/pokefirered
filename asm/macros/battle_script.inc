@@ -1276,9 +1276,9 @@
 	.byte 0xf0
 	.endm
 
-	.macro trysetcaughtmondexflags param0:req
+	.macro trysetcaughtmondexflags failInstr:req
 	.byte 0xf1
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro displaydexinfo

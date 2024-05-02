@@ -84,7 +84,6 @@ static u16 SpeciesToHoennPokedexNum(u16 species);
 static bool8 ShouldSkipFriendshipChange(void);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 
-#include "data/battle_moves.h"
 #include "data/moves_info.h"
 #include "data/abilities.h"
 
@@ -669,7 +668,6 @@ static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/experience_tables.h"
 #include "data/pokemon/teachable_learnsets.h"
 #include "data/pokemon/level_up_learnsets.h"
-#include "data/pokemon/level_up_learnset_pointers.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_change_tables.h"
 #include "data/pokemon/species_info.h"

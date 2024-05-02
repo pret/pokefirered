@@ -228,6 +228,7 @@ bool32 TryPrimalReversion(u32 battler);
 s32 GetStealthHazardDamage(u8 hazardType, u32 battler);
 s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
+bool32 MoveHasChargeTurnAdditionalEffect(u32 move);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);

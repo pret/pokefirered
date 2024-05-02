@@ -265,7 +265,6 @@ extern const u8 BattleScript_EffectAccuracyDown[];
 extern const u8 BattleScript_EffectEvasionDown[];
 extern const u8 BattleScript_EffectHaze[];
 extern const u8 BattleScript_EffectBide[];
-extern const u8 BattleScript_EffectRampage[];
 extern const u8 BattleScript_EffectRoar[];
 extern const u8 BattleScript_EffectMultiHit[];
 extern const u8 BattleScript_EffectConversion[];

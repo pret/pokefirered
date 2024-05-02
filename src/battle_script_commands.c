@@ -482,7 +482,7 @@ static void Cmd_setdrainedhp(void);
 static void Cmd_statbuffchange(void);
 static void Cmd_normalisebuffs(void);
 static void Cmd_setbide(void);
-static void Cmd_confuseifrepeatingattackends(void);
+static void Cmd_twoturnmoveschargestringandanimation(void);
 static void Cmd_setmultihitcounter(void);
 static void Cmd_initmultihitstring(void);
 static void Cmd_forcerandomswitch(void);
@@ -732,11 +732,11 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_stockpiletohpheal,                       //0x87 // done
     Cmd_setdrainedhp,                            //0x88 // done
     Cmd_statbuffchange,                          //0x89 // done
-    Cmd_normalisebuffs,                          //0x8A
-    Cmd_setbide,                                 //0x8B
-    Cmd_confuseifrepeatingattackends,            //0x8C
-    Cmd_setmultihitcounter,                      //0x8D
-    Cmd_initmultihitstring,                      //0x8E
+    Cmd_normalisebuffs,                          //0x8A // done
+    Cmd_setbide,                                 //0x8B // done
+    Cmd_twoturnmoveschargestringandanimation,    //0x8C // done
+    Cmd_setmultihitcounter,                      //0x8D // done
+    Cmd_initmultihitstring,                      //0x8E // done
     Cmd_forcerandomswitch,                       //0x8F
     Cmd_tryconversiontypechange,                 //0x90
     Cmd_givepaydaymoney,                         //0x91
@@ -12069,20 +12069,6 @@ static void Cmd_statbuffchange(void)
         gBattlescriptCurrInstr = failInstr;
 }
 
-// Haze
-static void Cmd_normalisebuffs(void)
-{
-    s32 i, j;
-
-    for (i = 0; i < gBattlersCount; i++)
-    {
-        for (j = 0; j < NUM_BATTLE_STATS; j++)
-            gBattleMons[i].statStages[j] = DEFAULT_STAT_STAGE;
-    }
-
-    gBattlescriptCurrInstr++;
-}
-
 bool32 TryResetBattlerStatChanges(u8 battler)
 {
     u32 j;
@@ -12101,49 +12087,78 @@ bool32 TryResetBattlerStatChanges(u8 battler)
     return ret;
 }
 
-static void Cmd_setbide(void)
+// Haze
+static void Cmd_normalisebuffs(void)
 {
-    gBattleMons[gBattlerAttacker].status2 |= STATUS2_MULTIPLETURNS;
-    gLockedMoves[gBattlerAttacker] = gCurrentMove;
-    gTakenDmg[gBattlerAttacker] = 0;
-    gBattleMons[gBattlerAttacker].status2 |= STATUS2_BIDE_TURN(2);
+    CMD_ARGS();
 
-    gBattlescriptCurrInstr++;
+    s32 i;
+
+    for (i = 0; i < gBattlersCount; i++)
+        TryResetBattlerStatChanges(i);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_confuseifrepeatingattackends(void)
+static void Cmd_setbide(void)
 {
-    if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_LOCK_CONFUSE))
-    {
-        gBattleScripting.moveEffect = (MOVE_EFFECT_THRASH | MOVE_EFFECT_AFFECTS_USER);
-    }
+    CMD_ARGS();
 
-    gBattlescriptCurrInstr++;
+    gBattleMons[gBattlerAttacker].status2 |= STATUS2_MULTIPLETURNS;
+    gLockedMoves[gBattlerAttacker] = gCurrentMove;
+    gBideDmg[gBattlerAttacker] = 0;
+    gBattleMons[gBattlerAttacker].status2 |= STATUS2_BIDE_TURN(2);
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+static void Cmd_twoturnmoveschargestringandanimation(void)
+{
+    CMD_ARGS(const u8 *animationThenStringPtr);
+
+    gBattleScripting.savedStringId = LOHALF(gMovesInfo[gCurrentMove].argument);
+    if (B_UPDATED_MOVE_DATA < GEN_5 || MoveHasChargeTurnAdditionalEffect(gCurrentMove))
+        gBattlescriptCurrInstr = cmd->animationThenStringPtr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_setmultihitcounter(void)
 {
-    if (gBattlescriptCurrInstr[1])
+    CMD_ARGS(u8 value);
+
+    if (cmd->value)
     {
-        gMultiHitCounter = gBattlescriptCurrInstr[1];
+        gMultiHitCounter = cmd->value;
     }
     else
     {
-        gMultiHitCounter = Random() & 3;
-        if (gMultiHitCounter > 1)
-            gMultiHitCounter = (Random() & 3) + 2;
+        if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SKILL_LINK)
+        {
+            gMultiHitCounter = 5;
+        }
         else
-            gMultiHitCounter += 2;
+        {
+            // WARNING: These seem to be unused, see SetRandomMultiHitCounter.
+            if (B_MULTI_HIT_CHANCE >= GEN_5)
+                // 35%: 2 hits, 35%: 3 hits, 15% 4 hits, 15% 5 hits.
+                gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 7, 7, 3, 3);
+            else
+                // 37.5%: 2 hits, 37.5%: 3 hits, 12.5% 4 hits, 12.5% 5 hits.
+                gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 3, 3, 1, 1);
+        }
     }
 
-    gBattlescriptCurrInstr += 2;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void Cmd_initmultihitstring(void)
 {
+    CMD_ARGS();
+
     PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
 
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static bool8 TryDoForceSwitchOut(void)

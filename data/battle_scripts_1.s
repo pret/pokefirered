@@ -367,16 +367,6 @@ BattleScript_EffectBide::
 	setbide
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectRampage::
-	attackcanceler
-	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
-	attackstring
-	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_EffectRampage2
-	ppreduce
-BattleScript_EffectRampage2:
-	confuseifrepeatingattackends
-	goto BattleScript_HitFromCritCalc
-
 BattleScript_EffectRoar::
 	attackcanceler
 	attackstring

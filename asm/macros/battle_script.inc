@@ -763,10 +763,10 @@
 	.byte 0x88
 	.endm
 
-	.macro statbuffchange param0:req, param1:req
+	.macro statbuffchange flags:req, failInstr:req
 	.byte 0x89
-	.2byte \param0
-	.4byte \param1
+	.2byte \flags
+	.4byte \failInstr
 	.endm
 
 	.macro normalisebuffs
@@ -777,8 +777,21 @@
 	.byte 0x8b
 	.endm
 
-	.macro confuseifrepeatingattackends
+	.macro twoturnmoveschargestringandanimation
 	.byte 0x8c
+	.4byte 1f @animation then attack string
+	@default - attack string then animation
+	printsavedstring
+	waitmessage B_WAIT_TIME_LONG
+	attackanimation
+	waitanimation
+	goto 2f
+	1:
+	attackanimation
+	waitanimation
+	printsavedstring
+	waitmessage B_WAIT_TIME_LONG
+	2:
 	.endm
 
 	.macro setmultihitcounter param0:req

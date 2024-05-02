@@ -9553,6 +9553,17 @@ bool32 DoBattlersShareType(u32 battler1, u32 battler2)
     return FALSE;
 }
 
+bool32 MoveHasChargeTurnAdditionalEffect(u32 move)
+{
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].onChargeTurnOnly)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 
 
 // battle_ai_util.c

@@ -6332,3 +6332,39 @@ BattleScript_ItemNoStatLoss::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+BattleScript_RoarSuccessSwitch::
+	call BattleScript_RoarSuccessRet
+	getswitchedmondata BS_TARGET
+	switchindataupdate BS_TARGET
+	trytoclearprimalweather
+	flushtextbox
+	switchinanim BS_TARGET, FALSE
+	waitstate
+	printstring STRINGID_PKMNWASDRAGGEDOUT
+	switchineffects BS_TARGET
+	jumpifbyte CMP_EQUAL, sSWITCH_CASE, B_SWITCH_RED_CARD, BattleScript_RoarSuccessSwitch_Ret
+	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
+	goto BattleScript_MoveEnd
+BattleScript_RoarSuccessSwitch_Ret:
+	swapattackerwithtarget  @ continuation of RedCardActivates
+	restoretarget
+	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
+	return
+
+BattleScript_RoarSuccessEndBattle::
+	call BattleScript_RoarSuccessRet
+	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
+	setoutcomeonteleport BS_ATTACKER
+	finishaction
+
+BattleScript_RoarSuccessRet:
+	jumpifbyte CMP_EQUAL, sSWITCH_CASE, B_SWITCH_HIT, BattleScript_RoarSuccessRet_Ret
+	jumpifbyte CMP_EQUAL, sSWITCH_CASE, B_SWITCH_RED_CARD, BattleScript_RoarSuccessRet_Ret
+	attackanimation
+	waitanimation
+BattleScript_RoarSuccessRet_Ret:
+	switchoutabilities BS_TARGET
+	returntoball BS_TARGET, FALSE
+	waitstate
+	return
+

@@ -567,8 +567,12 @@
 #define	STRINGID_SEVERELY                             564
 #define STRINGID_CLEARAMULETWONTLOWERSTATS            565
 #define STRINGID_CELEBRATEMESSAGE                     566
+#define	STRINGID_PKMNBLEWAWAYTOXICSPIKES              567
+#define	STRINGID_PKMNBLEWAWAYSTICKYWEB                568
+#define	STRINGID_PKMNBLEWAWAYSTEALTHROCK              569
+#define STRINGID_PKMNBLEWAWAYSHARPSTEEL               570
 
-#define BATTLESTRINGS_COUNT     567
+#define BATTLESTRINGS_COUNT     571
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

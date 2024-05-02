@@ -1006,14 +1006,14 @@
 	.byte 0xbb
 	.endm
 
-	.macro maxattackhalvehp param0:req
+	.macro halvehp failInstr:req
 	.byte 0xbc
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro copyfoestats param0:req
+	.macro copyfoestats unused:req
 	.byte 0xbd
-	.4byte \param0
+	.4byte \unused
 	.endm
 
 	.macro rapidspinfree
@@ -1024,36 +1024,53 @@
 	.byte 0xbf
 	.endm
 
-	.macro recoverbasedonsunlight param0:req
+	.macro recoverbasedonsunlight failInstr:req
 	.byte 0xc0
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro hiddenpowercalc
+	.macro setstickyweb failInstr:req
 	.byte 0xc1
+	.4byte \failInstr
 	.endm
 
 	.macro selectfirstvalidtarget
 	.byte 0xc2
 	.endm
 
-	.macro trysetfutureattack param0:req
+	.macro trysetfutureattack failInstr:req
 	.byte 0xc3
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro trydobeatup param0:req, param1:req
+	.macro trydobeatup endInstr, failInstr
 	.byte 0xc4
-	.4byte \param0
-	.4byte \param1
+	.4byte \endInstr
+	.4byte \failInstr
 	.endm
 
-	.macro setsemiinvulnerablebit
+	.macro setsemiinvulnerablebit clear=FALSE
 	.byte 0xc5
+	.byte \clear
 	.endm
 
 	.macro clearsemiinvulnerablebit
+	setsemiinvulnerablebit TRUE
+	.endm
+
+	.macro tryfiretwoturnmovenowbyeffect battler:req, checkChargeTurnEffects:req, jumpInstr:req
 	.byte 0xc6
+	.byte \battler
+	.byte \checkChargeTurnEffects
+	.4byte \jumpInstr
+	.endm
+
+	.macro tryfiretwoturnmovewithoutcharging battler:req, jumpInstr:req
+	tryfiretwoturnmovenowbyeffect \battler, TRUE, \jumpInstr
+	.endm
+
+	.macro tryfiretwoturnmoveaftercharging battler:req, jumpInstr:req
+	tryfiretwoturnmovenowbyeffect \battler, FALSE, \jumpInstr
 	.endm
 
 	.macro setminimize
@@ -1064,9 +1081,9 @@
 	.byte 0xc8
 	.endm
 
-	.macro trymemento ptr:req
+	.macro trymemento failInstr:req
 	.byte 0xc9
-	.4byte \ptr
+	.4byte \failInstr
 	.endm
 
 	.macro setforcedtarget

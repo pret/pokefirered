@@ -469,50 +469,98 @@ u8 TrySetCantSelectMoveBattleScript(void)
     return limitations;
 }
 
-u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u8 check)
+static bool32 IsGravityPreventingMove(u32 move)
 {
-    u8 holdEffect;
-    u16 *choicedMove = &gBattleStruct->choicedMove[battlerId];
+    if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
+        return FALSE;
+
+    return gMovesInfo[move].gravityBanned;
+}
+
+bool32 IsHealBlockPreventingMove(u32 battler, u32 move)
+{
+    if (!(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
+        return FALSE;
+
+    return gMovesInfo[move].healingMove;
+}
+
+static bool32 IsBelchPreventingMove(u32 battler, u32 move)
+{
+    if (gMovesInfo[move].effect != EFFECT_BELCH)
+        return FALSE;
+
+    return !(gBattleStruct->ateBerry[battler & BIT_SIDE] & gBitTable[gBattlerPartyIndexes[battler]]);
+}
+
+u8 CheckMoveLimitations(u32 battler, u8 unusableMoves, u16 check)
+{
+    u32 move, moveEffect;
+    u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
+    u16 *choicedMove = &gBattleStruct->choicedMove[battler];
     s32 i;
 
-    if (gBattleMons[battlerId].item == ITEM_ENIGMA_BERRY)
-        holdEffect = gEnigmaBerries[battlerId].holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[battlerId].item);
-
-    gPotentialItemEffectBattler = battlerId;
+    gPotentialItemEffectBattler = battler;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
+        move = gBattleMons[battler].moves[i];
+        moveEffect = gMovesInfo[move].effect;
         // No move
-        if (gBattleMons[battlerId].moves[i] == MOVE_NONE && check & MOVE_LIMITATION_ZEROMOVE)
+        if (check & MOVE_LIMITATION_ZEROMOVE && move == MOVE_NONE)
             unusableMoves |= gBitTable[i];
         // No PP
-        if (gBattleMons[battlerId].pp[i] == 0 && check & MOVE_LIMITATION_PP)
+        else if (check & MOVE_LIMITATION_PP && gBattleMons[battler].pp[i] == 0)
+            unusableMoves |= gBitTable[i];
+        // Placeholder
+        else if (check & MOVE_LIMITATION_PLACEHOLDER && moveEffect == EFFECT_PLACEHOLDER)
             unusableMoves |= gBitTable[i];
         // Disable
-        if (gBattleMons[battlerId].moves[i] == gDisableStructs[battlerId].disabledMove && check & MOVE_LIMITATION_DISABLED)
+        else if (check & MOVE_LIMITATION_DISABLED && move == gDisableStructs[battler].disabledMove)
             unusableMoves |= gBitTable[i];
         // Torment
-        if (gBattleMons[battlerId].moves[i] == gLastMoves[battlerId] && check & MOVE_LIMITATION_TORMENTED && gBattleMons[battlerId].status2 & STATUS2_TORMENT)
+        else if (check & MOVE_LIMITATION_TORMENTED && move == gLastMoves[battler] && gBattleMons[battler].status2 & STATUS2_TORMENT)
             unusableMoves |= gBitTable[i];
         // Taunt
-        if (gDisableStructs[battlerId].tauntTimer && check & MOVE_LIMITATION_TAUNT && gMovesInfo[gBattleMons[battlerId].moves[i]].power == 0)
+        else if (check & MOVE_LIMITATION_TAUNT && gDisableStructs[battler].tauntTimer && IS_MOVE_STATUS(move))
             unusableMoves |= gBitTable[i];
         // Imprison
-        if (GetImprisonedMovesCount(battlerId, gBattleMons[battlerId].moves[i]) && check & MOVE_LIMITATION_IMPRISON)
+        else if (check & MOVE_LIMITATION_IMPRISON && GetImprisonedMovesCount(battler, move))
             unusableMoves |= gBitTable[i];
         // Encore
-        if (gDisableStructs[battlerId].encoreTimer && gDisableStructs[battlerId].encoredMove != gBattleMons[battlerId].moves[i])
+        else if (check & MOVE_LIMITATION_ENCORE && gDisableStructs[battler].encoreTimer && gDisableStructs[battler].encoredMove != move)
             unusableMoves |= gBitTable[i];
-        // Choice Band
-        if (holdEffect == HOLD_EFFECT_CHOICE_BAND && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != gBattleMons[battlerId].moves[i])
+        // Choice Items
+        else if (check & MOVE_LIMITATION_CHOICE_ITEM && HOLD_EFFECT_CHOICE(holdEffect) && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
+            unusableMoves |= gBitTable[i];
+        // Assault Vest
+        else if (check & MOVE_LIMITATION_ASSAULT_VEST && holdEffect == HOLD_EFFECT_ASSAULT_VEST && IS_MOVE_STATUS(move) && gMovesInfo[move].effect != EFFECT_ME_FIRST)
+            unusableMoves |= gBitTable[i];
+        // Gravity
+        else if (check & MOVE_LIMITATION_GRAVITY && IsGravityPreventingMove(move))
+            unusableMoves |= gBitTable[i];
+        // Heal Block
+        else if (check & MOVE_LIMITATION_HEAL_BLOCK && IsHealBlockPreventingMove(battler, move))
+            unusableMoves |= gBitTable[i];
+        // Belch
+        else if (check & MOVE_LIMITATION_BELCH && IsBelchPreventingMove(battler, move))
+            unusableMoves |= gBitTable[i];
+        // Throat Chop
+        else if (check & MOVE_LIMITATION_THROAT_CHOP && gDisableStructs[battler].throatChopTimer && gMovesInfo[move].soundMove)
+            unusableMoves |= gBitTable[i];
+        // Stuff Cheeks
+        else if (check & MOVE_LIMITATION_STUFF_CHEEKS && moveEffect == EFFECT_STUFF_CHEEKS && ItemId_GetPocket(gBattleMons[battler].item) != POCKET_BERRY_POUCH)
+            unusableMoves |= gBitTable[i];
+        // Gorilla Tactics
+        else if (check & MOVE_LIMITATION_CHOICE_ITEM && GetBattlerAbility(battler) == ABILITY_GORILLA_TACTICS && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
+            unusableMoves |= gBitTable[i];
+        // Can't Use Twice flag
+        else if (check & MOVE_LIMITATION_CANT_USE_TWICE && gMovesInfo[move].cantUseTwice && move == gLastResultingMoves[battler])
             unusableMoves |= gBitTable[i];
     }
     return unusableMoves;
 }
 
-#define ALL_MOVES_MASK ((1 << MAX_MON_MOVES) - 1)
 bool8 AreAllMovesUnusable(void)
 {
     u8 unusable = CheckMoveLimitations(gActiveBattler, 0, MOVE_LIMITATIONS_ALL);
@@ -533,7 +581,6 @@ bool8 AreAllMovesUnusable(void)
 
     return (unusable == ALL_MOVES_MASK);
 }
-#undef ALL_MOVES_MASK
 
 u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
 {
@@ -1339,22 +1386,6 @@ void TryClearRageStatuses(void)
         if ((gBattleMons[i].status2 & STATUS2_RAGE) && gChosenMoveByBattler[i] != MOVE_RAGE)
             gBattleMons[i].status2 &= ~STATUS2_RAGE;
     }
-}
-
-static bool32 IsGravityPreventingMove(u32 move)
-{
-    if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
-        return FALSE;
-
-    return gMovesInfo[move].gravityBanned;
-}
-
-bool32 IsHealBlockPreventingMove(u32 battler, u32 move)
-{
-    if (!(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
-        return FALSE;
-
-    return gMovesInfo[move].healingMove;
 }
 
 u8 AtkCanceller_UnableToUseMove(u32 moveType)

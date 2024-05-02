@@ -915,14 +915,14 @@
 	.byte 0xa7
 	.endm
 
-	.macro copymovepermanently param0:req
+	.macro copymovepermanently failInstr:req
 	.byte 0xa8
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
-	.macro trychoosesleeptalkmove param0:req
+	.macro trychoosesleeptalkmove failInstr:req
 	.byte 0xa9
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro setdestinybond
@@ -933,13 +933,14 @@
 	.byte 0xab
 	.endm
 
-	.macro remaininghptopower
+	.macro settailwind failInstr:req
 	.byte 0xac
+	.4byte \failInstr
 	.endm
 
-	.macro tryspiteppreduce param0:req
+	.macro tryspiteppreduce failInstr:req
 	.byte 0xad
-	.4byte \param0
+	.4byte \failInstr
 	.endm
 
 	.macro healpartystatus

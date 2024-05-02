@@ -319,7 +319,6 @@ static const u16 sWhiteOutBadgeMoney[9] = { 8, 16, 24, 36, 48, 64, 80, 100, 120 
 
 #define TAG_LVLUP_BANNER_MON_ICON 55130
 
-static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
 static void CheckWonderGuardAndLevitate(void);
@@ -514,7 +513,7 @@ static void Cmd_copymovepermanently(void);
 static void Cmd_trychoosesleeptalkmove(void);
 static void Cmd_setdestinybond(void);
 static void Cmd_trysetdestinybondtohappen(void);
-static void Cmd_remaininghptopower(void);
+static void Cmd_settailwind(void);
 static void Cmd_tryspiteppreduce(void);
 static void Cmd_healpartystatus(void);
 static void Cmd_cursetarget(void);
@@ -761,13 +760,13 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_trysetencore,                            //0xA4 // done
     Cmd_painsplitdmgcalc,                        //0xA5 // done
     Cmd_settypetorandomresistance,               //0xA6 // done
-    Cmd_setalwayshitflag,                        //0xA7
-    Cmd_copymovepermanently,                     //0xA8
-    Cmd_trychoosesleeptalkmove,                  //0xA9
-    Cmd_setdestinybond,                          //0xAA
-    Cmd_trysetdestinybondtohappen,               //0xAB
-    Cmd_remaininghptopower,                      //0xAC
-    Cmd_tryspiteppreduce,                        //0xAD
+    Cmd_setalwayshitflag,                        //0xA7 // done
+    Cmd_copymovepermanently,                     //0xA8 // done
+    Cmd_trychoosesleeptalkmove,                  //0xA9 // done
+    Cmd_setdestinybond,                          //0xAA // done
+    Cmd_trysetdestinybondtohappen,               //0xAB // done
+    Cmd_settailwind,                             //0xAC // done
+    Cmd_tryspiteppreduce,                        //0xAD // done
     Cmd_healpartystatus,                         //0xAE
     Cmd_cursetarget,                             //0xAF
     Cmd_trysetspikes,                            //0xB0
@@ -13198,22 +13197,24 @@ static void Cmd_settypetorandomresistance(void)
 
 static void Cmd_setalwayshitflag(void)
 {
+    CMD_ARGS();
+
     gStatuses3[gBattlerTarget] &= ~STATUS3_ALWAYS_HITS;
     gStatuses3[gBattlerTarget] |= STATUS3_ALWAYS_HITS_TURN(2);
     gDisableStructs[gBattlerTarget].battlerWithSureHit = gBattlerAttacker;
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 // Sketch
 static void Cmd_copymovepermanently(void)
 {
+    CMD_ARGS(const u8 *failInstr);
+
     gChosenMove = MOVE_UNAVAILABLE;
 
     if (!(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
-        && gLastPrintedMoves[gBattlerTarget] != MOVE_STRUGGLE
-        && gLastPrintedMoves[gBattlerTarget] != MOVE_NONE
         && gLastPrintedMoves[gBattlerTarget] != MOVE_UNAVAILABLE
-        && gLastPrintedMoves[gBattlerTarget] != MOVE_SKETCH)
+        && !gMovesInfo[gLastPrintedMoves[gBattlerTarget]].sketchBanned)
     {
         s32 i;
 
@@ -13227,7 +13228,7 @@ static void Cmd_copymovepermanently(void)
 
         if (i != MAX_MON_MOVES)
         {
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = cmd->failInstr;
         }
         else // sketch worked
         {
@@ -13245,40 +13246,17 @@ static void Cmd_copymovepermanently(void)
             movePpData.ppBonuses = gBattleMons[gBattlerAttacker].ppBonuses;
 
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_MOVES_PP_BATTLE, 0, sizeof(movePpData), &movePpData);
-            MarkBattlerForControllerExec(gActiveBattler);
+            MarkBattlerForControllerExec(gBattlerAttacker);
 
             PREPARE_MOVE_BUFFER(gBattleTextBuff1, gLastPrintedMoves[gBattlerTarget])
 
-            gBattlescriptCurrInstr += 5;
+            gBattlescriptCurrInstr = cmd->nextInstr;
         }
     }
     else
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
-}
-
-static bool8 IsTwoTurnsMove(u16 move)
-{
-    if (gMovesInfo[move].effect == EFFECT_TWO_TURNS_ATTACK
-     || gMovesInfo[move].effect == EFFECT_SOLAR_BEAM
-     || gMovesInfo[move].effect == EFFECT_SEMI_INVULNERABLE
-     || gMovesInfo[move].effect == EFFECT_BIDE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-static bool8 IsInvalidForSleepTalkOrAssist(u16 move)
-{
-    if (move == MOVE_NONE
-     || move == MOVE_SLEEP_TALK
-     || move == MOVE_ASSIST
-     || move == MOVE_MIRROR_MOVE
-     || move == MOVE_METRONOME)
-        return TRUE;
-    else
-        return FALSE;
 }
 
 static u8 AttacksThisTurn(u8 battlerId, u16 move) // Note: returns 1 if it's a charging turn, otherwise 2
@@ -13301,46 +13279,47 @@ static u8 AttacksThisTurn(u8 battlerId, u16 move) // Note: returns 1 if it's a c
 
 static void Cmd_trychoosesleeptalkmove(void)
 {
-    s32 i;
-    u8 unusableMovesBits = 0;
+    CMD_ARGS(const u8 *failInstr);
+
+    u32 i, unusableMovesBits = 0, movePosition;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (IsInvalidForSleepTalkOrAssist(gBattleMons[gBattlerAttacker].moves[i])
-            || gBattleMons[gBattlerAttacker].moves[i] == MOVE_FOCUS_PUNCH
-            || gBattleMons[gBattlerAttacker].moves[i] == MOVE_UPROAR
-            || IsTwoTurnsMove(gBattleMons[gBattlerAttacker].moves[i]))
+        if (gMovesInfo[gBattleMons[gBattlerAttacker].moves[i]].sleepTalkBanned
+            || gBattleMoveEffects[gMovesInfo[gBattleMons[gBattlerAttacker].moves[i]].effect].twoTurnEffect)
         {
             unusableMovesBits |= gBitTable[i];
         }
     }
 
     unusableMovesBits = CheckMoveLimitations(gBattlerAttacker, unusableMovesBits, ~MOVE_LIMITATION_PP);
-    if (unusableMovesBits == (1 << MAX_MON_MOVES) - 1) // all 4 moves cannot be chosen
+    if (unusableMovesBits == ALL_MOVES_MASK) // all 4 moves cannot be chosen
     {
-        gBattlescriptCurrInstr += 5;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
     else // at least one move can be chosen
     {
-        u32 movePosition;
-
+        // Set Sleep Talk as used move, so it works with Last Resort.
+        gDisableStructs[gBattlerAttacker].usedMoves |= gBitTable[gCurrMovePos];
         do
         {
-            movePosition = Random() & (MAX_MON_MOVES - 1);
+            movePosition = MOD(Random(), MAX_MON_MOVES);
         } while ((gBitTable[movePosition] & unusableMovesBits));
 
         gCalledMove = gBattleMons[gBattlerAttacker].moves[movePosition];
         gCurrMovePos = movePosition;
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
         gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
 }
 
 static void Cmd_setdestinybond(void)
 {
+    CMD_ARGS();
+
     gBattleMons[gBattlerAttacker].status2 |= STATUS2_DESTINY_BOND;
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 static void TrySetDestinyBondToHappen(void)
@@ -13357,41 +13336,66 @@ static void TrySetDestinyBondToHappen(void)
 
 static void Cmd_trysetdestinybondtohappen(void)
 {
+    CMD_ARGS();
+
     TrySetDestinyBondToHappen();
-    gBattlescriptCurrInstr++;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_remaininghptopower(void)
+static void Cmd_settailwind(void)
 {
-    s32 i;
-    s32 hpFraction = GetScaledHPFraction(gBattleMons[gBattlerAttacker].hp, gBattleMons[gBattlerAttacker].maxHP, 48);
+    CMD_ARGS(const u8 *failInstr);
 
-    for (i = 0; i < (s32) sizeof(sFlailHpScaleToPowerTable); i += 2)
+    u8 side = GetBattlerSide(gBattlerAttacker);
+
+    if (!(gSideStatuses[side] & SIDE_STATUS_TAILWIND))
     {
-        if (hpFraction <= sFlailHpScaleToPowerTable[i])
-            break;
+        gSideStatuses[side] |= SIDE_STATUS_TAILWIND;
+        gSideTimers[side].tailwindBattlerId = gBattlerAttacker;
+        gSideTimers[side].tailwindTimer = B_TAILWIND_TURNS >= GEN_5 ? 4 : 3;
+        gBattlescriptCurrInstr = cmd->nextInstr;
     }
-
-    gDynamicBasePower = sFlailHpScaleToPowerTable[i + 1];
-    gBattlescriptCurrInstr++;
+    else
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
 }
 
 static void Cmd_tryspiteppreduce(void)
 {
+    CMD_ARGS(const u8 *failInstr);
+
     if (gLastMoves[gBattlerTarget] != MOVE_NONE
      && gLastMoves[gBattlerTarget] != MOVE_UNAVAILABLE)
     {
         s32 i;
 
-        for (i = 0; i < MAX_MON_MOVES; i++)
+        // Get move slot to reduce PP.
+        if (FALSE /* IsMaxMove(gLastMoves[gBattlerTarget]) */) // TODO: Dynamax
         {
-            if (gLastMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
-                break;
+            for (i = 0; i < MAX_MON_MOVES; i++)
+            {
+                if (gBattleStruct->dynamax.baseMove[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
+                    break;
+            }
+        }
+        else
+        {
+            for (i = 0; i < MAX_MON_MOVES; i++)
+            {
+                if (gLastMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
+                    break;
+            }
         }
 
-        if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > 1)
+        if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > (B_CAN_SPITE_FAIL >= GEN_4 ? 0 : 1))
         {
-            s32 ppToDeduct = (Random() & 3) + 2;
+            s32 ppToDeduct = B_PP_REDUCED_BY_SPITE >= GEN_4 ? 4 : (Random() & 3) + 2;
+            // TODO: Dynamax
+            // G-Max Depletion only deducts 2 PP.
+            // if (IsMaxMove(gCurrentMove) && gMovesInfo[gCurrentMove].argument == MAX_EFFECT_SPITE)
+            //     ppToDeduct = 2;
+
             if (gBattleMons[gBattlerTarget].pp[i] < ppToDeduct)
                 ppToDeduct = gBattleMons[gBattlerTarget].pp[i];
 
@@ -13404,27 +13408,28 @@ static void Cmd_tryspiteppreduce(void)
             gBattleMons[gBattlerTarget].pp[i] -= ppToDeduct;
             gActiveBattler = gBattlerTarget;
 
-            // if (MOVE_IS_PERMANENT(gActiveBattler, i)), but backwards
-            if (!(gDisableStructs[gActiveBattler].mimickedMoves & gBitTable[i])
-                && !(gBattleMons[gActiveBattler].status2 & STATUS2_TRANSFORMED))
+            // if (MOVE_IS_PERMANENT(gBattlerTarget, i)), but backwards
+            if (!(gDisableStructs[gBattlerTarget].mimickedMoves & gBitTable[i])
+                && !(gBattleMons[gBattlerTarget].status2 & STATUS2_TRANSFORMED))
             {
-                BtlController_EmitSetMonData(BUFFER_A, REQUEST_PPMOVE1_BATTLE + i, 0, sizeof(gBattleMons[gActiveBattler].pp[i]), &gBattleMons[gActiveBattler].pp[i]);
-                MarkBattlerForControllerExec(gActiveBattler);
+                BtlController_EmitSetMonData(BUFFER_A, REQUEST_PPMOVE1_BATTLE + i, 0, sizeof(gBattleMons[gBattlerTarget].pp[i]), &gBattleMons[gBattlerTarget].pp[i]);
+                MarkBattlerForControllerExec(gBattlerTarget);
             }
 
-            gBattlescriptCurrInstr += 5;
+            gBattlescriptCurrInstr = cmd->nextInstr;
 
-            if (gBattleMons[gBattlerTarget].pp[i] == 0)
+            // Don't cut off Sky Drop if pp is brought to zero.
+            if (gBattleMons[gBattlerTarget].pp[i] == 0 && gBattleStruct->skyDropTargets[gBattlerTarget] == 0xFF)
                 CancelMultiTurnMoves(gBattlerTarget);
         }
         else
         {
-            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = cmd->failInstr;
         }
     }
     else
     {
-        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = cmd->failInstr;
     }
 }
 
@@ -14538,6 +14543,18 @@ static void Cmd_weightdamagecalculation(void)
         gDynamicBasePower = 120;
 
     gBattlescriptCurrInstr++;
+}
+
+static bool8 IsInvalidForSleepTalkOrAssist(u16 move)
+{
+    if (move == MOVE_NONE
+     || move == MOVE_SLEEP_TALK
+     || move == MOVE_ASSIST
+     || move == MOVE_MIRROR_MOVE
+     || move == MOVE_METRONOME)
+        return TRUE;
+    else
+        return FALSE;
 }
 
 static void Cmd_assistattackselect(void)

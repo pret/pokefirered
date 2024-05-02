@@ -1110,10 +1110,6 @@ BattleScript_EffectDestinyBond::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectFlail::
-	remaininghptopower
-	goto BattleScript_EffectHit
-
 BattleScript_EffectSpite::
 	attackcanceler
 	attackstring

@@ -1297,7 +1297,7 @@ static u32 CopyOakOldManMonData(u8 monId, u8 *dst)
 
 static void OakOldManHandleGetRawMonData(void)
 {
-    PlayerHandleGetRawMonData();
+    PlayerHandleGetRawMonData(gActiveBattler);
 }
 
 static void OakOldManHandleSetMonData(void)

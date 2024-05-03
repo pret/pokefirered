@@ -24,62 +24,62 @@
 #include "constants/songs.h"
 #include "constants/sound.h"
 
-static void PlayerHandleGetMonData(void);
-static void PlayerHandleSetMonData(void);
-static void PlayerHandleSetRawMonData(void);
-static void PlayerHandleLoadMonSprite(void);
-static void PlayerHandleSwitchInAnim(void);
-static void PlayerHandleReturnMonToBall(void);
-static void PlayerHandleDrawTrainerPic(void);
-static void PlayerHandleTrainerSlide(void);
-static void PlayerHandleTrainerSlideBack(void);
-static void PlayerHandleFaintAnimation(void);
-static void PlayerHandlePaletteFade(void);
-static void PlayerHandleSuccessBallThrowAnim(void);
-static void PlayerHandleBallThrowAnim(void);
-static void PlayerHandlePause(void);
-static void PlayerHandleMoveAnimation(void);
-static void PlayerHandlePrintString(void);
-static void PlayerHandlePrintSelectionString(void);
-static void PlayerHandleChooseAction(void);
-static void PlayerHandleUnknownYesNoBox(void);
-static void PlayerHandleChooseMove(void);
-static void PlayerHandleChooseItem(void);
-static void PlayerHandleChoosePokemon(void);
-static void PlayerHandleCmd23(void);
-static void PlayerHandleHealthBarUpdate(void);
-static void PlayerHandleExpUpdate(void);
-static void PlayerHandleStatusIconUpdate(void);
-static void PlayerHandleStatusAnimation(void);
-static void PlayerHandleStatusXor(void);
-static void PlayerHandleDataTransfer(void);
-static void PlayerHandleDMA3Transfer(void);
-static void PlayerHandlePlayBGM(void);
-static void PlayerHandleCmd32(void);
-static void PlayerHandleTwoReturnValues(void);
-static void PlayerHandleChosenMonReturnValue(void);
-static void PlayerHandleOneReturnValue(void);
-static void PlayerHandleOneReturnValue_Duplicate(void);
-static void PlayerHandleCmd37(void);
-static void PlayerHandleCmd38(void);
-static void PlayerHandleCmd39(void);
-static void PlayerHandleCmd40(void);
-static void PlayerHandleHitAnimation(void);
-static void PlayerHandleCmd42(void);
-static void PlayerHandlePlaySE(void);
-static void PlayerHandlePlayFanfare(void);
-static void PlayerHandleFaintingCry(void);
-static void PlayerHandleIntroSlide(void);
-static void PlayerHandleIntroTrainerBallThrow(void);
-static void PlayerHandleDrawPartyStatusSummary(void);
-static void PlayerHandleHidePartyStatusSummary(void);
-static void PlayerHandleEndBounceEffect(void);
-static void PlayerHandleSpriteInvisibility(void);
-static void PlayerHandleBattleAnimation(void);
-static void PlayerHandleLinkStandbyMsg(void);
-static void PlayerHandleResetActionMoveSelection(void);
-static void PlayerHandleCmd55(void);
-static void PlayerCmdEnd(void);
+static void PlayerHandleGetMonData(u32 battler);
+static void PlayerHandleSetMonData(u32 battler);
+static void PlayerHandleSetRawMonData(u32 battler);
+static void PlayerHandleLoadMonSprite(u32 battler);
+static void PlayerHandleSwitchInAnim(u32 battler);
+static void PlayerHandleReturnMonToBall(u32 battler);
+static void PlayerHandleDrawTrainerPic(u32 battler);
+static void PlayerHandleTrainerSlide(u32 battler);
+static void PlayerHandleTrainerSlideBack(u32 battler);
+static void PlayerHandleFaintAnimation(u32 battler);
+static void PlayerHandlePaletteFade(u32 battler);
+static void PlayerHandleSuccessBallThrowAnim(u32 battler);
+static void PlayerHandleBallThrowAnim(u32 battler);
+static void PlayerHandlePause(u32 battler);
+static void PlayerHandleMoveAnimation(u32 battler);
+static void PlayerHandlePrintString(u32 battler);
+static void PlayerHandlePrintSelectionString(u32 battler);
+static void PlayerHandleChooseAction(u32 battler);
+static void PlayerHandleUnknownYesNoBox(u32 battler);
+static void PlayerHandleChooseMove(u32 battler);
+static void PlayerHandleChooseItem(u32 battler);
+static void PlayerHandleChoosePokemon(u32 battler);
+static void PlayerHandleCmd23(u32 battler);
+static void PlayerHandleHealthBarUpdate(u32 battler);
+static void PlayerHandleExpUpdate(u32 battler);
+static void PlayerHandleStatusIconUpdate(u32 battler);
+static void PlayerHandleStatusAnimation(u32 battler);
+static void PlayerHandleStatusXor(u32 battler);
+static void PlayerHandleDataTransfer(u32 battler);
+static void PlayerHandleDMA3Transfer(u32 battler);
+static void PlayerHandlePlayBGM(u32 battler);
+static void PlayerHandleCmd32(u32 battler);
+static void PlayerHandleTwoReturnValues(u32 battler);
+static void PlayerHandleChosenMonReturnValue(u32 battler);
+static void PlayerHandleOneReturnValue(u32 battler);
+static void PlayerHandleOneReturnValue_Duplicate(u32 battler);
+static void PlayerHandleCmd37(u32 battler);
+static void PlayerHandleCmd38(u32 battler);
+static void PlayerHandleCmd39(u32 battler);
+static void PlayerHandleCmd40(u32 battler);
+static void PlayerHandleHitAnimation(u32 battler);
+static void PlayerHandleCmd42(u32 battler);
+static void PlayerHandlePlaySE(u32 battler);
+static void PlayerHandlePlayFanfare(u32 battler);
+static void PlayerHandleFaintingCry(u32 battler);
+static void PlayerHandleIntroSlide(u32 battler);
+static void PlayerHandleIntroTrainerBallThrow(u32 battler);
+static void PlayerHandleDrawPartyStatusSummary(u32 battler);
+static void PlayerHandleHidePartyStatusSummary(u32 battler);
+static void PlayerHandleEndBounceEffect(u32 battler);
+static void PlayerHandleSpriteInvisibility(u32 battler);
+static void PlayerHandleBattleAnimation(u32 battler);
+static void PlayerHandleLinkStandbyMsg(u32 battler);
+static void PlayerHandleResetActionMoveSelection(u32 battler);
+static void PlayerHandleCmd55(u32 battler);
+static void PlayerCmdEnd(u32 battler);
 
 static void PlayerBufferRunCommand(void);
 static void HandleInputChooseTarget(void);
@@ -107,7 +107,7 @@ static void Task_CreateLevelUpVerticalStripes(u8 taskId);
 static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit);
 static void EndDrawPartyStatusSummary(void);
 
-static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
+static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
 {
     [CONTROLLER_GETMONDATA]               = PlayerHandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = PlayerHandleGetRawMonData,
@@ -153,7 +153,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_HITANIMATION]             = PlayerHandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = PlayerHandleCmd42,
     [CONTROLLER_PLAYSE]                   = PlayerHandlePlaySE,
-    [CONTROLLER_PLAYFANFAREORBGM]              = PlayerHandlePlayFanfare,
+    [CONTROLLER_PLAYFANFAREORBGM]         = PlayerHandlePlayFanfare,
     [CONTROLLER_FAINTINGCRY]              = PlayerHandleFaintingCry,
     [CONTROLLER_INTROSLIDE]               = PlayerHandleIntroSlide,
     [CONTROLLER_INTROTRAINERBALLTHROW]    = PlayerHandleIntroTrainerBallThrow,
@@ -204,7 +204,7 @@ static void PlayerBufferRunCommand(void)
     if (gBattleControllerExecFlags & gBitTable[gActiveBattler])
     {
         if (gBattleBufferA[gActiveBattler][0] < NELEMS(sPlayerBufferCommands))
-            sPlayerBufferCommands[gBattleBufferA[gActiveBattler][0]]();
+            sPlayerBufferCommands[gBattleBufferA[gActiveBattler][0]](gActiveBattler);
         else
             PlayerBufferExecCompleted();
     }
@@ -1485,7 +1485,7 @@ static void PrintLinkStandbyMsg(void)
     }
 }
 
-static void PlayerHandleGetMonData(void)
+static void PlayerHandleGetMonData(u32 battler)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
@@ -1815,7 +1815,7 @@ static u32 CopyPlayerMonData(u8 monId, u8 *dst)
     return size;
 }
 
-void PlayerHandleGetRawMonData(void)
+void PlayerHandleGetRawMonData(u32 battler)
 {
     struct BattlePokemon battleMon;
     u8 *src = (u8 *)&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]] + gBattleBufferA[gActiveBattler][1];
@@ -1829,7 +1829,7 @@ void PlayerHandleGetRawMonData(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleSetMonData(void)
+static void PlayerHandleSetMonData(u32 battler)
 {
     u8 monToCheck;
     u8 i;
@@ -2068,7 +2068,7 @@ static void SetPlayerMonData(u8 monId)
     HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
 }
 
-static void PlayerHandleSetRawMonData(void)
+static void PlayerHandleSetRawMonData(u32 battler)
 {
     u8 *dst = (u8 *)&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]] + gBattleBufferA[gActiveBattler][1];
     u8 i;
@@ -2078,14 +2078,14 @@ static void PlayerHandleSetRawMonData(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleLoadMonSprite(void)
+static void PlayerHandleLoadMonSprite(u32 battler)
 {
     BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], gActiveBattler);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = gActiveBattler;
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpritePosX_0;
 }
 
-static void PlayerHandleSwitchInAnim(void)
+static void PlayerHandleSwitchInAnim(u32 battler)
 {
     ClearTemporarySpeciesSpriteData(gActiveBattler, gBattleBufferA[gActiveBattler][2]);
     gBattlerPartyIndexes[gActiveBattler] = gBattleBufferA[gActiveBattler][1];
@@ -2119,7 +2119,7 @@ static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
     gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_PLAYER_SENDOUT);
 }
 
-static void PlayerHandleReturnMonToBall(void)
+static void PlayerHandleReturnMonToBall(u32 battler)
 {
     if (gBattleBufferA[gActiveBattler][1] == 0)
     {
@@ -2155,7 +2155,7 @@ static void DoSwitchOutAnimation(void)
     }
 }
 
-static void PlayerHandleDrawTrainerPic(void)
+static void PlayerHandleDrawTrainerPic(u32 battler)
 {
     s16 xPos;
     u32 trainerPicId;
@@ -2198,7 +2198,7 @@ static void PlayerHandleDrawTrainerPic(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
-static void PlayerHandleTrainerSlide(void)
+static void PlayerHandleTrainerSlide(u32 battler)
 {
     u32 trainerPicId;
 
@@ -2228,7 +2228,7 @@ static void PlayerHandleTrainerSlide(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy2;
 }
 
-static void PlayerHandleTrainerSlideBack(void)
+static void PlayerHandleTrainerSlideBack(u32 battler)
 {
     SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 50;
@@ -2240,7 +2240,7 @@ static void PlayerHandleTrainerSlideBack(void)
     gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
 }
 
-static void PlayerHandleFaintAnimation(void)
+static void PlayerHandleFaintAnimation(u32 battler)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState == 0)
     {
@@ -2263,13 +2263,13 @@ static void PlayerHandleFaintAnimation(void)
     }
 }
 
-static void PlayerHandlePaletteFade(void)
+static void PlayerHandlePaletteFade(u32 battler)
 {
     BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_BLACK);
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleSuccessBallThrowAnim(void)
+static void PlayerHandleSuccessBallThrowAnim(u32 battler)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
     gDoingBattleAnim = TRUE;
@@ -2277,7 +2277,7 @@ static void PlayerHandleSuccessBallThrowAnim(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone;
 }
 
-static void PlayerHandleBallThrowAnim(void)
+static void PlayerHandleBallThrowAnim(u32 battler)
 {
     u8 ballThrowCaseId = gBattleBufferA[gActiveBattler][1];
 
@@ -2287,7 +2287,7 @@ static void PlayerHandleBallThrowAnim(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnSpecialAnimDone;
 }
 
-static void PlayerHandlePause(void)
+static void PlayerHandlePause(u32 battler)
 {
     u8 var = gBattleBufferA[gActiveBattler][1];
 
@@ -2296,7 +2296,7 @@ static void PlayerHandlePause(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleMoveAnimation(void)
+static void PlayerHandleMoveAnimation(u32 battler)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
     {
@@ -2370,7 +2370,7 @@ static void PlayerDoMoveAnimation(void)
     }
 }
 
-static void PlayerHandlePrintString(void)
+static void PlayerHandlePrintString(u32 battler)
 {
     u16 *stringId;
 
@@ -2385,10 +2385,10 @@ static void PlayerHandlePrintString(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
 }
 
-static void PlayerHandlePrintSelectionString(void)
+static void PlayerHandlePrintSelectionString(u32 battler)
 {
-    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
-        PlayerHandlePrintString();
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+        PlayerHandlePrintString(battler);
     else
         PlayerBufferExecCompleted();
 }
@@ -2403,7 +2403,7 @@ static void HandleChooseActionAfterDma3(void)
     }
 }
 
-static void PlayerHandleChooseAction(void)
+static void PlayerHandleChooseAction(u32 battler)
 {
     s32 i;
 
@@ -2418,7 +2418,7 @@ static void PlayerHandleChooseAction(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 
-static void PlayerHandleUnknownYesNoBox(void)
+static void PlayerHandleUnknownYesNoBox(u32 battler)
 {
 }
 
@@ -2432,7 +2432,7 @@ static void HandleChooseMoveAfterDma3(void)
     }
 }
 
-static void PlayerHandleChooseMove(void)
+static void PlayerHandleChooseMove(u32 battler)
 {
     InitMoveSelectionsVarsAndStrings();
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseMoveAfterDma3;
@@ -2448,7 +2448,7 @@ void InitMoveSelectionsVarsAndStrings(void)
     MoveSelectionDisplayMoveType();
 }
 
-static void PlayerHandleChooseItem(void)
+static void PlayerHandleChooseItem(u32 battler)
 {
     s32 i;
 
@@ -2459,7 +2459,7 @@ static void PlayerHandleChooseItem(void)
         gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][1 + i];
 }
 
-static void PlayerHandleChoosePokemon(void)
+static void PlayerHandleChoosePokemon(u32 battler)
 {
     s32 i;
 
@@ -2475,14 +2475,14 @@ static void PlayerHandleChoosePokemon(void)
     gBattlerInMenuId = gActiveBattler;
 }
 
-static void PlayerHandleCmd23(void)
+static void PlayerHandleCmd23(u32 battler)
 {
     BattleStopLowHpSound();
     BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_BLACK);
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleHealthBarUpdate(void)
+static void PlayerHandleHealthBarUpdate(u32 battler)
 {
     s16 hpVal;
 
@@ -2505,7 +2505,7 @@ static void PlayerHandleHealthBarUpdate(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
 }
 
-static void PlayerHandleExpUpdate(void)
+static void PlayerHandleExpUpdate(u32 battler)
 {
     u8 monId = gBattleBufferA[gActiveBattler][1];
 
@@ -2529,7 +2529,7 @@ static void PlayerHandleExpUpdate(void)
     }
 }
 
-static void PlayerHandleStatusIconUpdate(void)
+static void PlayerHandleStatusIconUpdate(u32 battler)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
     {
@@ -2542,7 +2542,7 @@ static void PlayerHandleStatusIconUpdate(void)
     }
 }
 
-static void PlayerHandleStatusAnimation(void)
+static void PlayerHandleStatusAnimation(u32 battler)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
     {
@@ -2552,7 +2552,7 @@ static void PlayerHandleStatusAnimation(void)
     }
 }
 
-static void PlayerHandleStatusXor(void)
+static void PlayerHandleStatusXor(u32 battler)
 {
     u8 val = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_STATUS) ^ gBattleBufferA[gActiveBattler][1];
 
@@ -2560,12 +2560,12 @@ static void PlayerHandleStatusXor(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleDataTransfer(void)
+static void PlayerHandleDataTransfer(u32 battler)
 {
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleDMA3Transfer(void)
+static void PlayerHandleDMA3Transfer(u32 battler)
 {
     u32 dstArg = gBattleBufferA[gActiveBattler][1]
                | (gBattleBufferA[gActiveBattler][2] << 8)
@@ -2591,66 +2591,66 @@ static void PlayerHandleDMA3Transfer(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandlePlayBGM(void)
+static void PlayerHandlePlayBGM(u32 battler)
 {
     PlayBGM(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleCmd32(void)
+static void PlayerHandleCmd32(u32 battler)
 {
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleTwoReturnValues(void)
+static void PlayerHandleTwoReturnValues(u32 battler)
 {
     BtlController_EmitTwoReturnValues(1, 0, 0);
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleChosenMonReturnValue(void)
+static void PlayerHandleChosenMonReturnValue(u32 battler)
 {
     BtlController_EmitChosenMonReturnValue(1, 0, NULL);
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleOneReturnValue(void)
+static void PlayerHandleOneReturnValue(u32 battler)
 {
     BtlController_EmitOneReturnValue(1, 0);
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleOneReturnValue_Duplicate(void)
+static void PlayerHandleOneReturnValue_Duplicate(u32 battler)
 {
     BtlController_EmitOneReturnValue_Duplicate(1, 0);
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleCmd37(void)
+static void PlayerHandleCmd37(u32 battler)
 {
     gUnusedControllerStruct.unk = 0;
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleCmd38(void)
+static void PlayerHandleCmd38(u32 battler)
 {
     gUnusedControllerStruct.unk = gBattleBufferA[gActiveBattler][1];
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleCmd39(void)
+static void PlayerHandleCmd39(u32 battler)
 {
     gUnusedControllerStruct.flag = 0;
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleCmd40(void)
+static void PlayerHandleCmd40(u32 battler)
 {
     gUnusedControllerStruct.flag ^= 1;
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleHitAnimation(void)
+static void PlayerHandleHitAnimation(u32 battler)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
     {
@@ -2665,12 +2665,12 @@ static void PlayerHandleHitAnimation(void)
     }
 }
 
-static void PlayerHandleCmd42(void)
+static void PlayerHandleCmd42(u32 battler)
 {
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandlePlaySE(void)
+static void PlayerHandlePlaySE(u32 battler)
 {
     s8 pan;
 
@@ -2682,26 +2682,26 @@ static void PlayerHandlePlaySE(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandlePlayFanfare(void)
+static void PlayerHandlePlayFanfare(u32 battler)
 {
     PlayFanfare(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleFaintingCry(void)
+static void PlayerHandleFaintingCry(u32 battler)
 {
     PlayCry_ByMode(GetMonData(&gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES), -25, CRY_MODE_FAINT);
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleIntroSlide(void)
+static void PlayerHandleIntroSlide(u32 battler)
 {
     HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
     gIntroSlideFlags |= 1;
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleIntroTrainerBallThrow(void)
+static void PlayerHandleIntroTrainerBallThrow(u32 battler)
 {
     u8 paletteNum;
     u8 taskId;
@@ -2768,7 +2768,7 @@ static void Task_StartSendOutAnim(u8 taskId)
     }
 }
 
-static void PlayerHandleDrawPartyStatusSummary(void)
+static void PlayerHandleDrawPartyStatusSummary(u32 battler)
 {
     if (gBattleBufferA[gActiveBattler][1] && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
@@ -2794,21 +2794,21 @@ static void EndDrawPartyStatusSummary(void)
     }
 }
 
-static void PlayerHandleHidePartyStatusSummary(void)
+static void PlayerHandleHidePartyStatusSummary(u32 battler)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleEndBounceEffect(void)
+static void PlayerHandleEndBounceEffect(u32 battler)
 {
     EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
     EndBounceEffect(gActiveBattler, BOUNCE_MON);
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleSpriteInvisibility(void)
+static void PlayerHandleSpriteInvisibility(u32 battler)
 {
     if (IsBattlerSpritePresent(gActiveBattler))
     {
@@ -2818,7 +2818,7 @@ static void PlayerHandleSpriteInvisibility(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleBattleAnimation(void)
+static void PlayerHandleBattleAnimation(u32 battler)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
     {
@@ -2832,7 +2832,7 @@ static void PlayerHandleBattleAnimation(void)
     }
 }
 
-static void PlayerHandleLinkStandbyMsg(void)
+static void PlayerHandleLinkStandbyMsg(u32 battler)
 {
     switch (gBattleBufferA[gActiveBattler][1])
     {
@@ -2850,7 +2850,7 @@ static void PlayerHandleLinkStandbyMsg(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleResetActionMoveSelection(void)
+static void PlayerHandleResetActionMoveSelection(u32 battler)
 {
     switch (gBattleBufferA[gActiveBattler][1])
     {
@@ -2868,7 +2868,7 @@ static void PlayerHandleResetActionMoveSelection(void)
     PlayerBufferExecCompleted();
 }
 
-static void PlayerHandleCmd55(void)
+static void PlayerHandleCmd55(u32 battler)
 {
     gBattleOutcome = gBattleBufferA[gActiveBattler][1];
     FadeOutMapMusic(5);
@@ -2877,7 +2877,7 @@ static void PlayerHandleCmd55(void)
     gBattlerControllerFuncs[gActiveBattler] = SetBattleEndCallbacks;
 }
 
-static void PlayerCmdEnd(void)
+static void PlayerCmdEnd(u32 battler)
 {
 }
 

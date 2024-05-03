@@ -1045,7 +1045,7 @@ static u32 CopyPokedudeMonData(u8 monId, u8 *dst)
 
 static void PokedudeHandleGetRawMonData(void)
 {
-    PlayerHandleGetRawMonData();
+    PlayerHandleGetRawMonData(gActiveBattler);
 }
 
 static void PokedudeHandleSetMonData(void)

@@ -254,7 +254,7 @@ void BtlController_EmitEndLinkBattle(u32 bufferId, u8 battleOutcome);
 // player controller
 void BattleControllerDummy(void);
 void SetControllerToPlayer(void);
-void PlayerHandleGetRawMonData(void);
+void PlayerHandleGetRawMonData(u32 battler);
 void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 void SetCB2ToReshowScreenAfterMenu(void);
 void SetCB2ToReshowScreenAfterMenu2(void);

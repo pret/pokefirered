@@ -1355,7 +1355,7 @@ static void OpponentHandleChooseMove(u32 battler)
     if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
     {
 
-        BattleAI_SetupAIData();
+        BattleAI_SetupAIData(gActiveBattler);
         chosenMoveId = BattleAI_ChooseMoveOrAction();
 
         switch (chosenMoveId)

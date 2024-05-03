@@ -33,6 +33,7 @@
 #include "constants/form_change_types.h"
 #include "constants/pokemon.h"
 #include "constants/abilities.h"
+#include "constants/layouts.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/item_effects.h"
@@ -44,18 +45,10 @@
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_9) ? 160 : 220)
 
-struct MonSpritesGfxManager
+struct SpeciesItem
 {
-    u8 numSprites:4;
-    u8 battlePosition:4;
-    u8 numFrames;
-    u8 active;
-    u8 mode;
-    u32 dataSize;
-    u8 *spriteBuffer;
-    u8 **spritePointers;
-    struct SpriteTemplate *templates;
-    struct SpriteFrameImage *frameImages;
+    u16 species;
+    u16 item;
 };
 
 static EWRAM_DATA u8 sLearningMoveTableID = 0;
@@ -67,7 +60,6 @@ EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 static EWRAM_DATA struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
 
 static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
-static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId);
 static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
 static u8 GetNatureFromPersonality(u32 personality);
@@ -875,7 +867,7 @@ static const u8 sSecretBaseFacilityClasses[GENDER_COUNT][NUM_SECRET_BASE_CLASSES
     },
 };
 
-static const u8 sGetMonDataEVConstants[] = 
+static const u8 sGetMonDataEVConstants[] =
 {
     MON_DATA_HP_EV,
     MON_DATA_ATK_EV,
@@ -883,12 +875,6 @@ static const u8 sGetMonDataEVConstants[] =
     MON_DATA_SPEED_EV,
     MON_DATA_SPDEF_EV,
     MON_DATA_SPATK_EV
-};
-
-// For stat-raising items
-static const u8 sStatsToRaise[] = 
-{
-    STAT_ATK, STAT_ATK, STAT_SPEED, STAT_DEF, STAT_SPATK, STAT_ACC
 };
 
 // 3 modifiers each for how much to change friendship for different ranges
@@ -915,29 +901,18 @@ static const u16 sHMMoves[] =
     MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, HM_MOVES_END
 };
 
-#if defined(FIRERED)
-// Attack forme
-static const u16 sDeoxysBaseStats[] = 
+static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
 {
-    [STAT_HP]    = 50,
-    [STAT_ATK]   = 180,
-    [STAT_DEF]   = 20,
-    [STAT_SPEED] = 150,
-    [STAT_SPATK] = 180,
-    [STAT_SPDEF] = 20,
+    {SPECIES_NONE,      ITEM_NONE},
+    {SPECIES_MAREEP,    ITEM_GANLON_BERRY},
+    {SPECIES_PINECO,    ITEM_APICOT_BERRY},
+    {SPECIES_HOUNDOUR,  ITEM_BIG_MUSHROOM},
+    {SPECIES_TEDDIURSA, ITEM_PETAYA_BERRY},
+    {SPECIES_AIPOM,     ITEM_BERRY_JUICE},
+    {SPECIES_SHUCKLE,   ITEM_BERRY_JUICE},
+    {SPECIES_STANTLER,  ITEM_PETAYA_BERRY},
+    {SPECIES_SMEARGLE,  ITEM_SALAC_BERRY},
 };
-#elif defined(LEAFGREEN)
-// Defense forme
-static const u16 sDeoxysBaseStats[] =
-{
-    [STAT_HP]    = 50,
-    [STAT_ATK]   = 70,
-    [STAT_DEF]   = 160,
-    [STAT_SPEED] = 90,
-    [STAT_SPATK] = 70,
-    [STAT_SPDEF] = 160,
-};
-#endif
 
 // The classes used by other players in the Union Room.
 // These should correspond with the overworld graphics in sUnionRoomObjGfxIds
@@ -1511,8 +1486,9 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
 {                                                               \
     u8 baseStat = gSpeciesInfo[species].base;                   \
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
-    u8 nature = GetNature(mon);                                 \
     n = ModifyStatByNature(nature, n, statIndex);               \
+    if (B_FRIENDSHIP_BOOST == TRUE)                             \
+        n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));\
     SetMonData(mon, field, &n);                                 \
 }
 
@@ -4017,14 +3993,6 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     return offset;
 }
 
-static void BufferStatRoseMessage(int statIdx)
-{
-    gBattlerTarget = gBattlerInMenuId;
-    StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[statIdx]]);
-    StringCopy(gBattleTextBuff2, gBattleText_Rose);
-    BattleStringExpandPlaceholdersToDisplayedString(gText_DefendersStatRose);
-}
-
 u8 GetNature(struct Pokemon *mon)
 {
     return GetMonData(mon, MON_DATA_PERSONALITY, NULL) % NUM_NATURES;
@@ -4037,6 +4005,7 @@ static u8 GetNatureFromPersonality(u32 personality)
 
 static u32 GetGMaxTargetSpecies(u32 species)
 {
+    // TODO: Dynamax
     // const struct FormChange *formChanges = GetSpeciesFormChanges(species);
     // u32 i;
     // for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
@@ -5399,25 +5368,86 @@ void SetMonPreventsSwitchingString(void)
     BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar4);
 }
 
+static s32 GetWildMonTableIdInAlteringCave(u16 species)
+{
+    s32 i;
+    for (i = 0; i < (s32) ARRAY_COUNT(sAlteringCaveWildMonHeldItems); i++)
+        if (sAlteringCaveWildMonHeldItems[i].species == species)
+            return i;
+    return 0;
+}
+
+static inline bool32 CanFirstMonBoostHeldItemRarity(void)
+{
+    u32 ability;
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
+        return FALSE;
+
+    ability = GetMonAbility(&gPlayerParty[0]);
+    if (/* (OW_COMPOUND_EYES < GEN_9) && */ ability == ABILITY_COMPOUND_EYES)
+        return TRUE;
+    else if (/* (OW_SUPER_LUCK == GEN_8) && */ ability == ABILITY_SUPER_LUCK)
+        return TRUE;
+    return FALSE;
+}
+
 void SetWildMonHeldItem(void)
 {
     if (!(gBattleTypeFlags & (BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER)))
     {
-        u16 rnd = Random() % 100;
-        u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
-        if (gSpeciesInfo[species].itemCommon == gSpeciesInfo[species].itemRare)
-        {
-            // Both held items are the same, 100% chance to hold item   
-            SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemCommon);
-            return;
-        }
+        u16 rnd;
+        u16 species;
+        u16 count = (WILD_DOUBLE_BATTLE) ? 2 : 1;
+        u16 i;
+        bool32 itemHeldBoost = CanFirstMonBoostHeldItemRarity();
+        u16 chanceNoItem = itemHeldBoost ? 20 : 45;
+        u16 chanceNotRare = itemHeldBoost ? 80 : 95;
 
-        if (rnd > 44)
+        for (i = 0; i < count; i++)
         {
-            if (rnd <= 94)
-                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemCommon);
+            if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) != ITEM_NONE)
+                continue; // prevent overwriting previously set item
+
+            rnd = Random() % 100;
+            species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, 0);
+            if (gMapHeader.mapLayoutId == LAYOUT_SIX_ISLAND_ALTERING_CAVE)
+            {
+                s32 alteringCaveId = GetWildMonTableIdInAlteringCave(species);
+                if (alteringCaveId != 0)
+                {
+                    // In active Altering Cave, use special item list
+                    if (rnd < chanceNotRare)
+                        continue;
+                    SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &sAlteringCaveWildMonHeldItems[alteringCaveId].item);
+                }
+                else
+                {
+                    // In inactive Altering Cave, use normal items
+                    if (rnd < chanceNoItem)
+                        continue;
+                    if (rnd < chanceNotRare)
+                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemCommon);
+                    else
+                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemRare);
+                }
+            }
             else
-                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemRare);
+            {
+                if (gSpeciesInfo[species].itemCommon == gSpeciesInfo[species].itemRare && gSpeciesInfo[species].itemCommon != ITEM_NONE)
+                {
+                    // Both held items are the same, 100% chance to hold item
+                    SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemCommon);
+                }
+                else
+                {
+                    if (rnd < chanceNoItem)
+                        continue;
+                    if (rnd < chanceNotRare)
+                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemCommon);
+                    else
+                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemRare);
+                }
+            }
         }
     }
 }
@@ -5524,46 +5554,6 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
     return TRUE;
 }
 
-static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
-{
-    s32 ivVal, evVal;
-    u16 statValue = 0;
-    u8 nature;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
-        return 0;
-
-    ivVal = GetMonData(mon, MON_DATA_HP_IV + statId, NULL);
-    evVal = GetMonData(mon, MON_DATA_HP_EV + statId, NULL);
-    statValue = ((sDeoxysBaseStats[statId] * 2 + ivVal + evVal / 4) * mon->level) / 100 + 5;
-    nature = GetNature(mon);
-    statValue = ModifyStatByNature(nature, statValue, (u8)statId);
-    return statValue;
-}
-
-void SetDeoxysStats(void)
-{
-    s32 i, value;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        struct Pokemon *mon = &gPlayerParty[i];
-
-        if (GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS)
-            continue;
-        value = GetMonData(mon, MON_DATA_ATK, NULL);
-        SetMonData(mon, MON_DATA_ATK, &value);
-        value = GetMonData(mon, MON_DATA_DEF, NULL);
-        SetMonData(mon, MON_DATA_DEF, &value);
-        value = GetMonData(mon, MON_DATA_SPEED, NULL);
-        SetMonData(mon, MON_DATA_SPEED, &value);
-        value = GetMonData(mon, MON_DATA_SPATK, NULL);
-        SetMonData(mon, MON_DATA_SPATK, &value);
-        value = GetMonData(mon, MON_DATA_SPDEF, NULL);
-        SetMonData(mon, MON_DATA_SPDEF, &value);
-    }
-}
-
 u16 GetUnionRoomTrainerPic(void)
 {
     u8 linkId = GetMultiplayerId() ^ 1;
@@ -5593,7 +5583,6 @@ void CreateEnemyEventMon(void)
     if (itemId)
     {
         u8 heldItem[2];
-        
         heldItem[0] = itemId;
         heldItem[1] = itemId >> 8;
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);

@@ -1021,7 +1021,6 @@ static void CB2_HandleStartBattle(void)
             gTasks[taskId].data[5] = 0;
             gTasks[taskId].data[3] = gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsLo | (gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsHi << 8);
             gTasks[taskId].data[4] = gBlockRecvBuffer[enemyMultiplayerId][1];
-            SetDeoxysStats();
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -1262,7 +1261,6 @@ static void CB2_HandleStartMultiBattle(void)
             ResetBlockReceivedFlags();
             LinkBattleComputeBattleTypeFlags(4, playerMultiplayerId);
             SetAllPlayersBerryData();
-            SetDeoxysStats();
             memcpy(gDecompressionBuffer, gPlayerParty, sizeof(struct Pokemon) * 3);
             taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 270;

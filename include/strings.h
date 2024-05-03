@@ -184,7 +184,8 @@ extern const u8 gText_Berry[];
 extern const u8 gText_Ghost[];
 
 // pokemon
-extern const u8 gBattleText_Rose[];
+extern const u8 gText_StatSharply[];
+extern const u8 gText_StatRose[];
 extern const u8 gText_DefendersStatRose[];
 extern const u8 gBattleText_GetPumped[];
 extern const u8 gBattleText_MistShroud[];

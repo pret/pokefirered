@@ -8379,7 +8379,6 @@ static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 move
 {
     uq4_12_t mod = GetTypeModifier(moveType, defType);
     u32 abilityAtk = GetBattlerAbility(battlerAtk);
-    DebugPrintfLevel(MGBA_LOG_ERROR, "MulByTypeEffectiveness: mod = %d, moveType=%d, defType=%d", mod, moveType, defType);
 
     if (mod == UQ_4_12(0.0) && GetBattlerHoldEffect(battlerDef, TRUE) == HOLD_EFFECT_RING_TARGET)
     {
@@ -8585,17 +8584,14 @@ u8 GetBattlerType(u32 battler, u8 typeIndex)
         {
             if (types[0] == TYPE_FLYING && types[1] == TYPE_FLYING)
             {
-                DebugPrintfLevel(MGBA_LOG_ERROR, "GetBattlerType: roost1, typeIndex=%d, type=%d", typeIndex, B_ROOST_PURE_FLYING >= GEN_5 ? TYPE_NORMAL : TYPE_MYSTERY);
                 return B_ROOST_PURE_FLYING >= GEN_5 ? TYPE_NORMAL : TYPE_MYSTERY;
             }
             else
             {
-                DebugPrintfLevel(MGBA_LOG_ERROR, "GetBattlerType: roost1, typeIndex=%d, type=%d", typeIndex, types[typeIndex] == TYPE_FLYING ? TYPE_MYSTERY : types[typeIndex]);
                 return types[typeIndex] == TYPE_FLYING ? TYPE_MYSTERY : types[typeIndex];
             }
         }
     }
-    DebugPrintfLevel(MGBA_LOG_ERROR, "GetBattlerType: typeIndex=%d, type=%d", typeIndex, types[typeIndex]);
     return types[typeIndex];
 }
 

@@ -280,6 +280,20 @@ struct Pokemon
     u16 spDefense;
 };
 
+struct MonSpritesGfxManager
+{
+    u8 numSprites:4;
+    u8 battlePosition:4;
+    u8 numFrames;
+    u8 active;
+    u8 mode;
+    u32 dataSize;
+    u8 *spriteBuffer;
+    u8 **spritePointers;
+    struct SpriteTemplate *templates;
+    struct SpriteFrameImage *frameImages;
+};
+
 struct BattleTowerPokemon
 {
     /*0x00*/ u16 species;
@@ -778,7 +792,6 @@ u8 *GetTrainerPartnerName(void);
 u8 GetPlayerPartyHighestLevel(void);
 u16 FacilityClassToPicIndex(u16 facilityClass);
 bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId);
-void SetDeoxysStats(void);
 u16 GetUnionRoomTrainerPic(void);
 u16 GetUnionRoomTrainerClass(void);
 void CreateEnemyEventMon(void);

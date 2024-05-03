@@ -34,14 +34,6 @@
 #define BATTLE_HISTORY (gBattleResources->battleHistory)
 
 
-#define SOUND_MOVES_END 0xFFFF
-
-static const u16 sSoundMovesTable[] =
-{
-    MOVE_GROWL, MOVE_ROAR, MOVE_SING, MOVE_SUPERSONIC, MOVE_SCREECH, MOVE_SNORE,
-    MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, SOUND_MOVES_END
-};
-
 static bool32 TryRemoveScreens(u32 battler);
 static bool32 IsUnnerveAbilityOnOpposingSide(u32 battler);
 static u32 GetFlingPowerFromItemId(u32 itemId);
@@ -542,7 +534,7 @@ u8 DoFieldEndTurnEffects(void)
                 s32 j;
                 for (j = i + 1; j < gBattlersCount; j++)
                 {
-                    if (GetWhoStrikesFirst(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE))
+                    if (GetWhichBattlerFaster(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], FALSE) == 1)
                         SwapTurnOrder(i, j);
                 }
             }
@@ -8387,6 +8379,7 @@ static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 move
 {
     uq4_12_t mod = GetTypeModifier(moveType, defType);
     u32 abilityAtk = GetBattlerAbility(battlerAtk);
+    DebugPrintfLevel(MGBA_LOG_ERROR, "MulByTypeEffectiveness: mod = %d, moveType=%d, defType=%d", mod, moveType, defType);
 
     if (mod == UQ_4_12(0.0) && GetBattlerHoldEffect(battlerDef, TRUE) == HOLD_EFFECT_RING_TARGET)
     {
@@ -8591,12 +8584,18 @@ u8 GetBattlerType(u32 battler, u8 typeIndex)
         if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_ROOST)
         {
             if (types[0] == TYPE_FLYING && types[1] == TYPE_FLYING)
+            {
+                DebugPrintfLevel(MGBA_LOG_ERROR, "GetBattlerType: roost1, typeIndex=%d, type=%d", typeIndex, B_ROOST_PURE_FLYING >= GEN_5 ? TYPE_NORMAL : TYPE_MYSTERY);
                 return B_ROOST_PURE_FLYING >= GEN_5 ? TYPE_NORMAL : TYPE_MYSTERY;
+            }
             else
+            {
+                DebugPrintfLevel(MGBA_LOG_ERROR, "GetBattlerType: roost1, typeIndex=%d, type=%d", typeIndex, types[typeIndex] == TYPE_FLYING ? TYPE_MYSTERY : types[typeIndex]);
                 return types[typeIndex] == TYPE_FLYING ? TYPE_MYSTERY : types[typeIndex];
+            }
         }
     }
-
+    DebugPrintfLevel(MGBA_LOG_ERROR, "GetBattlerType: typeIndex=%d, type=%d", typeIndex, types[typeIndex]);
     return types[typeIndex];
 }
 

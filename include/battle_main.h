@@ -94,5 +94,8 @@ s8 GetChosenMovePriority(u32 battlerId);
 u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect);
 u32 GetBattlerTotalSpeedStat(u32 battler);
 void SpecialStatusesClear(void);
+s32 GetWhichBattlerFasterArgs(u32 battler1, u32 battler2, bool32 ignoreChosenMoves, u32 ability1, u32 ability2,
+                              u32 holdEffectBattler1, u32 holdEffectBattler2, u32 speedBattler1, u32 speedBattler2, s32 priority1, s32 priority2);
+s32 GetWhichBattlerFaster(u32 battler1, u32 battler2, bool32 ignoreChosenMoves);
 
 #endif // GUARD_BATTLE_MAIN_H

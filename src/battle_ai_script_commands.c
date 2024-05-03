@@ -1102,7 +1102,7 @@ static void Cmd_if_not_equal_(void) // Same as if_not_equal.
 
 static void Cmd_if_would_go_first(void)
 {
-    if (GetWhoStrikesFirst(gBattlerAttacker, gBattlerTarget, TRUE) == sAIScriptPtr[1])
+    if ((GetWhichBattlerFaster(gBattlerAttacker, gBattlerTarget, TRUE) == 1) == sAIScriptPtr[1])
         sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 2);
     else
         sAIScriptPtr += 6;
@@ -1110,7 +1110,7 @@ static void Cmd_if_would_go_first(void)
 
 static void Cmd_if_would_not_go_first(void)
 {
-    if (GetWhoStrikesFirst(gBattlerAttacker, gBattlerTarget, TRUE) != sAIScriptPtr[1])
+    if ((GetWhichBattlerFaster(gBattlerAttacker, gBattlerTarget, TRUE) == 1) != sAIScriptPtr[1])
         sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 2);
     else
         sAIScriptPtr += 6;

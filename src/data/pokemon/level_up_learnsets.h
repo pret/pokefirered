@@ -10182,6 +10182,8 @@ static const struct LevelUpMove sJirachiLevelUpLearnset[] = {
 static const struct LevelUpMove sDeoxysNormalLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_LEER),
     LEVEL_UP_MOVE( 1, MOVE_WRAP),
+    LEVEL_UP_MOVE( 1, MOVE_DISABLE),
+    LEVEL_UP_MOVE( 1, MOVE_ENCORE),
     LEVEL_UP_MOVE( 7, MOVE_NIGHT_SHADE),
     LEVEL_UP_MOVE(13, MOVE_TELEPORT),
     LEVEL_UP_MOVE(19, MOVE_KNOCK_OFF),
@@ -10200,6 +10202,8 @@ static const struct LevelUpMove sDeoxysNormalLevelUpLearnset[] = {
 static const struct LevelUpMove sDeoxysAttackLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_LEER),
     LEVEL_UP_MOVE( 1, MOVE_WRAP),
+    LEVEL_UP_MOVE( 1, MOVE_DISABLE),
+    LEVEL_UP_MOVE( 1, MOVE_ENCORE),
     LEVEL_UP_MOVE( 7, MOVE_NIGHT_SHADE),
     LEVEL_UP_MOVE(13, MOVE_TELEPORT),
     LEVEL_UP_MOVE(19, MOVE_TAUNT),
@@ -10218,6 +10222,8 @@ static const struct LevelUpMove sDeoxysAttackLevelUpLearnset[] = {
 static const struct LevelUpMove sDeoxysDefenseLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_LEER),
     LEVEL_UP_MOVE( 1, MOVE_WRAP),
+    LEVEL_UP_MOVE( 1, MOVE_DISABLE),
+    LEVEL_UP_MOVE( 1, MOVE_ENCORE),
     LEVEL_UP_MOVE( 7, MOVE_NIGHT_SHADE),
     LEVEL_UP_MOVE(13, MOVE_TELEPORT),
     LEVEL_UP_MOVE(19, MOVE_KNOCK_OFF),

@@ -1746,6 +1746,7 @@ static void Cmd_if_any_move_disabled_or_encored(void)
 
 static void Cmd_if_curr_move_disabled_or_encored(void)
 {
+    DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_curr_move_disabled_or_encored");
     switch (sAIScriptPtr[1])
     {
     case 0:

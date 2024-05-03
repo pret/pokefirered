@@ -168,16 +168,16 @@ static void HandleInputChooseAction(u32 battler)
         switch (gActionSelectionCursor[gActiveBattler])
         {
         case 0:
-            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_BALL, 0);
+            BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SAFARI_BALL, 0);
             break;
         case 1:
-            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_BAIT, 0);
+            BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SAFARI_BAIT, 0);
             break;
         case 2:
-            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_GO_NEAR, 0);
+            BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SAFARI_GO_NEAR, 0);
             break;
         case 3:
-            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_RUN, 0);
+            BtlController_EmitTwoReturnValues(battler, 1, B_ACTION_SAFARI_RUN, 0);
             break;
         }
         SafariBufferExecCompleted(battler);
@@ -268,7 +268,7 @@ static void CompleteWhenChosePokeblock(u32 battler)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
-        BtlController_EmitOneReturnValue(1, gSpecialVar_ItemId);
+        BtlController_EmitOneReturnValue(battler, 1, gSpecialVar_ItemId);
         SafariBufferExecCompleted(battler);
     }
 }
@@ -281,17 +281,17 @@ static void CompleteOnFinishedBattleAnimation(u32 battler)
 
 static void SafariBufferExecCompleted(u32 battler)
 {
-    gBattlerControllerFuncs[gActiveBattler] = SafariBufferRunCommand;
+    gBattlerControllerFuncs[battler] = SafariBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         u8 playerId = GetMultiplayerId();
 
-        PrepareBufferDataTransferLink(2, 4, &playerId);
-        gBattleBufferA[gActiveBattler][0] = CONTROLLER_TERMINATOR_NOP;
+        PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
+        gBattleBufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
     }
     else
     {
-        gBattleControllerExecFlags &= ~gBitTable[gActiveBattler];
+        gBattleControllerExecFlags &= ~gBitTable[battler];
     }
 }
 

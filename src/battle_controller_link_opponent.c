@@ -427,17 +427,17 @@ static void CompleteOnFinishedBattleAnimation(u32 battler)
 
 static void LinkOpponentBufferExecCompleted(u32 battler)
 {
-    gBattlerControllerFuncs[gActiveBattler] = LinkOpponentBufferRunCommand;
+    gBattlerControllerFuncs[battler] = LinkOpponentBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         u8 playerId = GetMultiplayerId();
 
-        PrepareBufferDataTransferLink(2, 4, &playerId);
-        gBattleBufferA[gActiveBattler][0] = CONTROLLER_TERMINATOR_NOP;
+        PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
+        gBattleBufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
     }
     else
     {
-        gBattleControllerExecFlags &= ~gBitTable[gActiveBattler];
+        gBattleControllerExecFlags &= ~gBitTable[battler];
     }
 }
 
@@ -462,7 +462,7 @@ static void LinkOpponentHandleGetMonData(u32 battler)
             monToCheck >>= 1;
         }
     }
-    BtlController_EmitDataTransfer(BUFFER_B, size, monData);
+    BtlController_EmitDataTransfer(battler, BUFFER_B, size, monData);
     LinkOpponentBufferExecCompleted(battler);
 }
 

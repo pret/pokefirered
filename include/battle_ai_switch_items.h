@@ -21,7 +21,7 @@ enum {
     AI_HEAL_SLEEP,
 };
 
-void AI_TrySwitchOrUseItem(void);
+void AI_TrySwitchOrUseItem(u32 battler);
 u8 GetMostSuitableMonToSwitchInto(void);
 
 #endif // GUARD_BATTLE_AI_SWITCH_ITEMS_H

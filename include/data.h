@@ -31,6 +31,23 @@ static inline u16 SanitizeTrainerId(u16 trainerId)
     return trainerId;
 }
 
+struct TypeInfo
+{
+    u8 name[TYPE_NAME_LENGTH + 1];
+    u8 generic[17];
+    u8 palette;
+    u16 zMove;
+    u16 maxMove;
+    //u16 enhanceItem;
+    //u16 berry;
+    //u16 gem;
+    //u16 plate;
+    //u16 memory;
+    //u16 zCrystal;
+    //u16 teraShard;
+    //u16 arceusForm;
+};
+
 // extern const struct MonCoords gMonFrontPicCoords[];
 // extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 // extern const struct MonCoords gMonBackPicCoords[];

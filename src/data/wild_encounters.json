@@ -8263,37 +8263,37 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_CASTFORM"
+                "species": "SPECIES_DEOXYS"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_CASTFORM"
+                "species": "SPECIES_DEOXYS"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MIMIKYU"
+                "species": "SPECIES_DEOXYS_ATTACK"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MIMIKYU"
+                "species": "SPECIES_DEOXYS_ATTACK"
               },
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_MIMIKYU"
+                "species": "SPECIES_DEOXYS_DEFENSE"
               },
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_MIMIKYU"
+                "species": "SPECIES_DEOXYS_DEFENSE"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MIMIKYU"
+                "species": "SPECIES_DEOXYS_DEFENSE"
               },
               {
                 "min_level": 3,

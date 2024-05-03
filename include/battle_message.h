@@ -55,7 +55,16 @@
 #define B_TXT_TRAINER2_LOSE_TEXT 0x2E
 #define B_TXT_TRAINER2_WIN_TEXT 0x2F
 #define B_TXT_BUFF3 0x30
+#define B_TXT_TRAINER2_CLASS 0x31
+#define B_TXT_TRAINER2_NAME 0x32
+#define B_TXT_PARTNER_CLASS 0x33
+#define B_TXT_PARTNER_NAME 0x34
+#define B_TXT_ATK_TRAINER_NAME 0x35
+#define B_TXT_ATK_TRAINER_CLASS 0x36
+#define B_TXT_ATK_TEAM1 0x37 // Your/The opposing
 #define B_TXT_ATK_TEAM2 0x38 // your/the opposing
+#define B_TXT_DEF_NAME 0x39
+#define B_TXT_DEF_TEAM1 0x3A // Your/The opposing
 #define B_TXT_DEF_TEAM2 0x3B // your/the opposing
 
 // for B_TXT_BUFF1, B_TXT_BUFF2 and B_TXT_BUFF3
@@ -96,7 +105,8 @@
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
     textVar[1] = B_BUFF_ABILITY;                                            \
     textVar[2] = abilityId;                                                 \
-    textVar[3] = B_BUFF_EOS;                                                \
+    textVar[3] = (abilityId & 0xFF00) >> 8;                                 \
+    textVar[4] = B_BUFF_EOS;                                                \
 }
 
 #define PREPARE_TYPE_BUFFER(textVar, typeId)                                \
@@ -145,7 +155,7 @@
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
     textVar[1] = B_BUFF_STRING;                                 \
-    textVar[2] = stringId;                                      \
+    textVar[2] = stringId & 0xFF;                               \
     textVar[3] = (stringId & 0xFF00) >> 8;                      \
     textVar[4] = B_BUFF_EOS;                                    \
 }
@@ -177,20 +187,20 @@
     textVar[4] = B_BUFF_EOS;                                    \
 }
 
-#define PREPARE_MON_NICK_WITH_PREFIX_BUFFER(textVar, bank, partyId)         \
+#define PREPARE_MON_NICK_WITH_PREFIX_BUFFER(textVar, battler, partyId)      \
 {                                                                           \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
     textVar[1] = B_BUFF_MON_NICK_WITH_PREFIX;                               \
-    textVar[2] = bank;                                                      \
+    textVar[2] = battler;                                                   \
     textVar[3] = partyId;                                                   \
     textVar[4] = B_BUFF_EOS;                                                \
 }
 
-#define PREPARE_MON_NICK_BUFFER(textVar, bank, partyId)         \
+#define PREPARE_MON_NICK_BUFFER(textVar, battler, partyId)      \
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
     textVar[1] = B_BUFF_MON_NICK;                               \
-    textVar[2] = bank;                                          \
+    textVar[2] = battler;                                       \
     textVar[3] = partyId;                                       \
     textVar[4] = B_BUFF_EOS;                                    \
 }

@@ -317,18 +317,3 @@ u32 GetDecompressedDataSize(const u8 *ptr)
     ptr8[3] = 0;
     return ptr32[0];
 }
-
-void DecompressPicFromTable_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *buffer)
-{
-    DecompressPicFromTable(src, buffer);
-}
-
-void HandleLoadSpecialPokePic_DontHandleDeoxys(bool32 isFrontPic, void *dest, s32 species, u32 personality)
-{
-    LoadSpecialPokePic_DontHandleDeoxys(dest, species, personality, isFrontPic);
-}
-
-void LoadSpecialPokePic_DontHandleDeoxys(void *dest, s32 species, u32 personality, bool8 isFrontPic)
-{
-    LoadSpecialPokePic(dest, species, personality, isFrontPic);
-}

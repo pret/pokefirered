@@ -57,6 +57,7 @@
 #include "tm_case.h"
 #include "trade.h"
 #include "union_room.h"
+#include "constants/abilities.h"
 #include "constants/battle.h"
 #include "constants/easy_chat.h"
 #include "constants/field_effects.h"

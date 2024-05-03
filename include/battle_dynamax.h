@@ -87,6 +87,6 @@ enum MaxMoveEffect
 // void CreateDynamaxTriggerSprite(u8, bool8);
 // void HideDynamaxTriggerSprite(void);
 // bool32 IsDynamaxTriggerSpriteActive(void);
-// void DestroyDynamaxTriggerSprite(void);
+void DestroyDynamaxTriggerSprite(void);
 
 #endif

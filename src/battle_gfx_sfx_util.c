@@ -339,9 +339,8 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     }
     isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
     position = GetBattlerPosition(battlerId);
-    HandleLoadSpecialPokePic_DontHandleDeoxys(TRUE,
-                                              gMonSpritesGfxPtr->sprites[position],
-                                              species, currentPersonality);
+    HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->sprites[position], species, currentPersonality);
+    
     paletteOffset = OBJ_PLTT_ID(battlerId);
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
         lzPaletteData = GetMonFrontSpritePal(mon);
@@ -383,14 +382,8 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     }
     isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
     position = GetBattlerPosition(battlerId);
-    if (ShouldIgnoreDeoxysForm(DEOXYS_CHECK_BATTLE_SPRITE, battlerId) == TRUE || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != SPECIES_NONE)
-        HandleLoadSpecialPokePic_DontHandleDeoxys(FALSE,
-                                                  gMonSpritesGfxPtr->sprites[position],
-                                                  species, currentPersonality);
-    else
-        HandleLoadSpecialPokePic(FALSE,
-                                gMonSpritesGfxPtr->sprites[position],
-                                species, currentPersonality);
+    HandleLoadSpecialPokePic(FALSE, gMonSpritesGfxPtr->sprites[position], species, currentPersonality);
+
     paletteOffset = OBJ_PLTT_ID(battlerId);
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
         lzPaletteData = GetMonFrontSpritePal(mon);

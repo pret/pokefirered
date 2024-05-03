@@ -2217,4 +2217,8 @@
 	.4byte \ptr
 	.endm
 
+	.macro damagenontypes
+	callnative BS_DamageNonTypes
+	.endm
+
 	

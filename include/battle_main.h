@@ -1,7 +1,8 @@
 #ifndef GUARD_BATTLE_MAIN_H
 #define GUARD_BATTLE_MAIN_H
 
-#include "constants/abilities.h"
+#include "pokemon.h"
+#include "data.h"
 
 struct TrainerMoney
 {
@@ -96,5 +97,8 @@ void SpecialStatusesClear(void);
 s32 GetWhichBattlerFasterArgs(u32 battler1, u32 battler2, bool32 ignoreChosenMoves, u32 ability1, u32 ability2,
                               u32 holdEffectBattler1, u32 holdEffectBattler2, u32 speedBattler1, u32 speedBattler2, s32 priority1, s32 priority2);
 s32 GetWhichBattlerFaster(u32 battler1, u32 battler2, bool32 ignoreChosenMoves);
+
+
+extern const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES];
 
 #endif // GUARD_BATTLE_MAIN_H

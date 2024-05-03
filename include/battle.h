@@ -982,7 +982,7 @@ extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gBattleOutcome;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
-extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
+extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(u32 battler);
 extern u32 gBattleControllerExecFlags;
 extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
 extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];

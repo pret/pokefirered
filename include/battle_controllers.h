@@ -252,8 +252,8 @@ void BtlController_EmitResetActionMoveSelection(u32 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u32 bufferId, u8 battleOutcome);
 
 // player controller
-void BattleControllerDummy(void);
-void SetControllerToPlayer(void);
+void BattleControllerDummy(u32 battler);
+void SetControllerToPlayer(u32 battler);
 void PlayerHandleGetRawMonData(u32 battler);
 void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 void SetCB2ToReshowScreenAfterMenu(void);
@@ -261,25 +261,25 @@ void SetCB2ToReshowScreenAfterMenu2(void);
 void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);
 void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
 void ActionSelectionDestroyCursorAt(u8 cursorPos);
-void InitMoveSelectionsVarsAndStrings(void);
-void SetBattleEndCallbacks(void);
+void InitMoveSelectionsVarsAndStrings(u32 battler);
+void SetBattleEndCallbacks(u32 battler);
 void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
 void MoveSelectionDestroyCursorAt(u8 cursorPos);
-void HandleInputChooseMove(void);
+void HandleInputChooseMove(u32 battler);
 
 // opponent controller
-void SetControllerToOpponent(void);
-void OpponentBufferExecCompleted(void);
+void SetControllerToOpponent(u32 battler);
+void OpponentBufferExecCompleted(u32 battler);
 
 // safari controller
-void SetControllerToSafari(void);
+void SetControllerToSafari(u32 battler);
 
 // pokedude controller
-void SetControllerToPokedude(void);
+void SetControllerToPokedude(u32 battler);
 void InitPokedudePartyAndOpponent(void);
 
 // oak and old man controller
-void SetControllerToOakOrOldMan(void);
+void SetControllerToOakOrOldMan(u32 battler);
 
 // These flags are set to signal that the indicated message
 // was already emitted
@@ -295,17 +295,17 @@ void SetControllerToOakOrOldMan(void);
 
 bool8 BtlCtrl_OakOldMan_TestState2Flag(u8 mask);
 void BtlCtrl_OakOldMan_SetState2Flag(u8 mask);
-void PrintOakText_InflictingDamageIsKey(void);
-void PrintOakText_HowDisappointing(void);
-void PrintOakText_OakNoRunningFromATrainer(void);
-void OakOldManHandleInputChooseMove(void);
+void PrintOakText_InflictingDamageIsKey(u32 battler);
+void PrintOakText_HowDisappointing(u32 battler);
+void PrintOakText_OakNoRunningFromATrainer(u32 battler);
+void OakOldManHandleInputChooseMove(u32 battler);
 void BtlCtrl_DrawVoiceoverMessageFrame(void);
 void BtlCtrl_RemoveVoiceoverMessageFrame(void);
 
 // link opponent controller
-void SetControllerToLinkOpponent(void);
+void SetControllerToLinkOpponent(u32 battler);
 
 // link partner controller
-void SetControllerToLinkPartner(void);
+void SetControllerToLinkPartner(u32 battler);
 
 #endif // GUARD_BATTLE_CONTROLLERS_H

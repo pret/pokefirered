@@ -237,7 +237,7 @@ void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
 struct BattleResults gBattleResults;
 u8 gLeveledUpInBattle;
-void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
+void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(u32 battler);
 u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 u8 gMultiUsePlayerCursor;
 u8 gNumberOfMovesToChoose;
@@ -2523,7 +2523,7 @@ static void BattleMainCB1(void)
     gBattleMainFunc();
 
     for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
-        gBattlerControllerFuncs[gActiveBattler]();
+        gBattlerControllerFuncs[gActiveBattler](gActiveBattler);
 }
 
 static void ClearSetBScriptingStruct(void)

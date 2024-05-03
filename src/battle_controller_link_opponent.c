@@ -16,77 +16,77 @@
 #include "constants/sound.h"
 #include "constants/trainers.h"
 
-static void LinkOpponentHandleGetMonData(void);
-static void LinkOpponentHandleGetRawMonData(void);
-static void LinkOpponentHandleSetMonData(void);
-static void LinkOpponentHandleSetRawMonData(void);
-static void LinkOpponentHandleLoadMonSprite(void);
-static void LinkOpponentHandleSwitchInAnim(void);
-static void LinkOpponentHandleReturnMonToBall(void);
-static void LinkOpponentHandleDrawTrainerPic(void);
-static void LinkOpponentHandleTrainerSlide(void);
-static void LinkOpponentHandleTrainerSlideBack(void);
-static void LinkOpponentHandleFaintAnimation(void);
-static void LinkOpponentHandlePaletteFade(void);
-static void LinkOpponentHandleSuccessBallThrowAnim(void);
-static void LinkOpponentHandleBallThrowAnim(void);
-static void LinkOpponentHandlePause(void);
-static void LinkOpponentHandleMoveAnimation(void);
-static void LinkOpponentHandlePrintString(void);
-static void LinkOpponentHandlePrintSelectionString(void);
-static void LinkOpponentHandleChooseAction(void);
-static void LinkOpponentHandleUnknownYesNoBox(void);
-static void LinkOpponentHandleChooseMove(void);
-static void LinkOpponentHandleChooseItem(void);
-static void LinkOpponentHandleChoosePokemon(void);
-static void LinkOpponentHandleCmd23(void);
-static void LinkOpponentHandleHealthBarUpdate(void);
-static void LinkOpponentHandleExpUpdate(void);
-static void LinkOpponentHandleStatusIconUpdate(void);
-static void LinkOpponentHandleStatusAnimation(void);
-static void LinkOpponentHandleStatusXor(void);
-static void LinkOpponentHandleDataTransfer(void);
-static void LinkOpponentHandleDMA3Transfer(void);
-static void LinkOpponentHandlePlayBGM(void);
-static void LinkOpponentHandleCmd32(void);
-static void LinkOpponentHandleTwoReturnValues(void);
-static void LinkOpponentHandleChosenMonReturnValue(void);
-static void LinkOpponentHandleOneReturnValue(void);
-static void LinkOpponentHandleOneReturnValue_Duplicate(void);
-static void LinkOpponentHandleClearUnkVar(void);
-static void LinkOpponentHandleSetUnkVar(void);
-static void LinkOpponentHandleClearUnkFlag(void);
-static void LinkOpponentHandleToggleUnkFlag(void);
-static void LinkOpponentHandleHitAnimation(void);
-static void LinkOpponentHandleCantSwitch(void);
-static void LinkOpponentHandlePlaySE(void);
-static void LinkOpponentHandlePlayFanfare(void);
-static void LinkOpponentHandleFaintingCry(void);
-static void LinkOpponentHandleIntroSlide(void);
-static void LinkOpponentHandleIntroTrainerBallThrow(void);
-static void LinkOpponentHandleDrawPartyStatusSummary(void);
-static void LinkOpponentHandleHidePartyStatusSummary(void);
-static void LinkOpponentHandleEndBounceEffect(void);
-static void LinkOpponentHandleSpriteInvisibility(void);
-static void LinkOpponentHandleBattleAnimation(void);
-static void LinkOpponentHandleLinkStandbyMsg(void);
-static void LinkOpponentHandleResetActionMoveSelection(void);
-static void LinkOpponentHandleEndLinkBattle(void);
-static void LinkOpponentCmdEnd(void);
+static void LinkOpponentHandleGetMonData(u32 battler);
+static void LinkOpponentHandleGetRawMonData(u32 battler);
+static void LinkOpponentHandleSetMonData(u32 battler);
+static void LinkOpponentHandleSetRawMonData(u32 battler);
+static void LinkOpponentHandleLoadMonSprite(u32 battler);
+static void LinkOpponentHandleSwitchInAnim(u32 battler);
+static void LinkOpponentHandleReturnMonToBall(u32 battler);
+static void LinkOpponentHandleDrawTrainerPic(u32 battler);
+static void LinkOpponentHandleTrainerSlide(u32 battler);
+static void LinkOpponentHandleTrainerSlideBack(u32 battler);
+static void LinkOpponentHandleFaintAnimation(u32 battler);
+static void LinkOpponentHandlePaletteFade(u32 battler);
+static void LinkOpponentHandleSuccessBallThrowAnim(u32 battler);
+static void LinkOpponentHandleBallThrowAnim(u32 battler);
+static void LinkOpponentHandlePause(u32 battler);
+static void LinkOpponentHandleMoveAnimation(u32 battler);
+static void LinkOpponentHandlePrintString(u32 battler);
+static void LinkOpponentHandlePrintSelectionString(u32 battler);
+static void LinkOpponentHandleChooseAction(u32 battler);
+static void LinkOpponentHandleUnknownYesNoBox(u32 battler);
+static void LinkOpponentHandleChooseMove(u32 battler);
+static void LinkOpponentHandleChooseItem(u32 battler);
+static void LinkOpponentHandleChoosePokemon(u32 battler);
+static void LinkOpponentHandleCmd23(u32 battler);
+static void LinkOpponentHandleHealthBarUpdate(u32 battler);
+static void LinkOpponentHandleExpUpdate(u32 battler);
+static void LinkOpponentHandleStatusIconUpdate(u32 battler);
+static void LinkOpponentHandleStatusAnimation(u32 battler);
+static void LinkOpponentHandleStatusXor(u32 battler);
+static void LinkOpponentHandleDataTransfer(u32 battler);
+static void LinkOpponentHandleDMA3Transfer(u32 battler);
+static void LinkOpponentHandlePlayBGM(u32 battler);
+static void LinkOpponentHandleCmd32(u32 battler);
+static void LinkOpponentHandleTwoReturnValues(u32 battler);
+static void LinkOpponentHandleChosenMonReturnValue(u32 battler);
+static void LinkOpponentHandleOneReturnValue(u32 battler);
+static void LinkOpponentHandleOneReturnValue_Duplicate(u32 battler);
+static void LinkOpponentHandleClearUnkVar(u32 battler);
+static void LinkOpponentHandleSetUnkVar(u32 battler);
+static void LinkOpponentHandleClearUnkFlag(u32 battler);
+static void LinkOpponentHandleToggleUnkFlag(u32 battler);
+static void LinkOpponentHandleHitAnimation(u32 battler);
+static void LinkOpponentHandleCantSwitch(u32 battler);
+static void LinkOpponentHandlePlaySE(u32 battler);
+static void LinkOpponentHandlePlayFanfare(u32 battler);
+static void LinkOpponentHandleFaintingCry(u32 battler);
+static void LinkOpponentHandleIntroSlide(u32 battler);
+static void LinkOpponentHandleIntroTrainerBallThrow(u32 battler);
+static void LinkOpponentHandleDrawPartyStatusSummary(u32 battler);
+static void LinkOpponentHandleHidePartyStatusSummary(u32 battler);
+static void LinkOpponentHandleEndBounceEffect(u32 battler);
+static void LinkOpponentHandleSpriteInvisibility(u32 battler);
+static void LinkOpponentHandleBattleAnimation(u32 battler);
+static void LinkOpponentHandleLinkStandbyMsg(u32 battler);
+static void LinkOpponentHandleResetActionMoveSelection(u32 battler);
+static void LinkOpponentHandleEndLinkBattle(u32 battler);
+static void LinkOpponentCmdEnd(u32 battler);
 
-static void LinkOpponentBufferRunCommand(void);
-static void LinkOpponentBufferExecCompleted(void);
-static void SwitchIn_HandleSoundAndEnd(void);
+static void LinkOpponentBufferRunCommand(u32 battler);
+static void LinkOpponentBufferExecCompleted(u32 battler);
+static void SwitchIn_HandleSoundAndEnd(u32 battler);
 static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst);
 static void SetLinkOpponentMonData(u8 monId);
 static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit);
-static void DoSwitchOutAnimation(void);
-static void LinkOpponentDoMoveAnimation(void);
+static void DoSwitchOutAnimation(u32 battler);
+static void LinkOpponentDoMoveAnimation(u32 battler);
 static void Task_StartSendOutAnim(u8 taskId);
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
-static void EndDrawPartyStatusSummary(void);
+static void EndDrawPartyStatusSummary(u32 battler);
 
-static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
+static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
 {
     [CONTROLLER_GETMONDATA]               = LinkOpponentHandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = LinkOpponentHandleGetRawMonData,
@@ -147,33 +147,33 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TERMINATOR_NOP]           = LinkOpponentCmdEnd
 };
 
-static void LinkOpponentDummy(void)
+static void LinkOpponentDummy(u32 battler)
 {
 }
 
-void SetControllerToLinkOpponent(void)
+void SetControllerToLinkOpponent(u32 battler)
 {
     gBattlerControllerFuncs[gActiveBattler] = LinkOpponentBufferRunCommand;
 }
 
-static void LinkOpponentBufferRunCommand(void)
+static void LinkOpponentBufferRunCommand(u32 battler)
 {
     if (gBattleControllerExecFlags & gBitTable[gActiveBattler])
     {
         if (gBattleBufferA[gActiveBattler][0] < ARRAY_COUNT(sLinkOpponentBufferCommands))
-            sLinkOpponentBufferCommands[gBattleBufferA[gActiveBattler][0]]();
+            sLinkOpponentBufferCommands[gBattleBufferA[gActiveBattler][0]](battler);
         else
-            LinkOpponentBufferExecCompleted();
+            LinkOpponentBufferExecCompleted(battler);
     }
 }
 
-static void CompleteOnBattlerSpriteCallbackDummy(void)
+static void CompleteOnBattlerSpriteCallbackDummy(u32 battler)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
 }
 
-static void FreeTrainerSpriteAfterSlide(void)
+static void FreeTrainerSpriteAfterSlide(u32 battler)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
@@ -181,20 +181,20 @@ static void FreeTrainerSpriteAfterSlide(void)
         gSprites[gBattlerSpriteIds[gActiveBattler]].oam.tileNum = gSprites[gBattlerSpriteIds[gActiveBattler]].data[5];
         FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
         DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
     }
 }
 
-static void Intro_DelayAndEnd(void)
+static void Intro_DelayAndEnd(u32 battler)
 {
     if (--gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay == (u8)-1)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].introEndDelay = 0;
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
     }
 }
 
-static void Intro_WaitForShinyAnimAndHealthbox(void)
+static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
 {
     bool32 healthboxAnimDone = FALSE;
 
@@ -241,7 +241,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(void)
     }
 }
 
-static void Intro_TryShinyAnimShowHealthbox(void)
+static void Intro_TryShinyAnimShowHealthbox(u32 battler)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive
      && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler ^ BIT_FLANK].ballAnimActive)
@@ -278,7 +278,7 @@ static void Intro_TryShinyAnimShowHealthbox(void)
     }
 }
 
-static void TryShinyAnimAfterMonAnim(void)
+static void TryShinyAnimAfterMonAnim(u32 battler)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].animEnded == TRUE
      && gSprites[gBattlerSpriteIds[gActiveBattler]].x2 == 0)
@@ -293,12 +293,12 @@ static void TryShinyAnimAfterMonAnim(void)
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim = FALSE;
             FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
             FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
-            LinkOpponentBufferExecCompleted();
+            LinkOpponentBufferExecCompleted(battler);
         }
     }
 }
 
-static void CompleteOnHealthbarDone(void)
+static void CompleteOnHealthbarDone(u32 battler)
 {
     s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
 
@@ -307,19 +307,19 @@ static void CompleteOnHealthbarDone(void)
     if (hpValue != -1)
         UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], hpValue, HP_CURRENT);
     else
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
 }
 
-static void HideHealthboxAfterMonFaint(void)
+static void HideHealthboxAfterMonFaint(u32 battler)
 {
     if (!gSprites[gBattlerSpriteIds[gActiveBattler]].inUse)
     {
         SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
     }
 }
 
-static void FreeMonSpriteAfterSwitchOutAnim(void)
+static void FreeMonSpriteAfterSwitchOutAnim(u32 battler)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive)
     {
@@ -327,17 +327,17 @@ static void FreeMonSpriteAfterSwitchOutAnim(void)
         DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
         HideBattlerShadowSprite(gActiveBattler);
         SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
     }
 }
 
-static void CompleteOnInactiveTextPrinter(void)
+static void CompleteOnInactiveTextPrinter(u32 battler)
 {
     if (!IsTextPrinterActive(B_WIN_MSG))
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
 }
 
-static void DoHitAnimBlinkSpriteEffect(void)
+static void DoHitAnimBlinkSpriteEffect(u32 battler)
 {
     u8 spriteId = gBattlerSpriteIds[gActiveBattler];
 
@@ -346,7 +346,7 @@ static void DoHitAnimBlinkSpriteEffect(void)
         gSprites[spriteId].data[1] = 0;
         gSprites[spriteId].invisible = FALSE;
         gDoingBattleAnim = FALSE;
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
     }
     else
     {
@@ -356,7 +356,7 @@ static void DoHitAnimBlinkSpriteEffect(void)
     }
 }
 
-static void SwitchIn_ShowSubstitute(void)
+static void SwitchIn_ShowSubstitute(u32 battler)
 {
     if (gSprites[gHealthboxSpriteIds[gActiveBattler]].callback == SpriteCallbackDummy)
     {
@@ -367,16 +367,16 @@ static void SwitchIn_ShowSubstitute(void)
     }
 }
 
-static void SwitchIn_HandleSoundAndEnd(void)
+static void SwitchIn_HandleSoundAndEnd(u32 battler)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].specialAnimActive && !IsCryPlayingOrClearCrySongs())
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
     }
 }
 
-static void SwitchIn_ShowHealthbox(void)
+static void SwitchIn_ShowHealthbox(u32 battler)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].finishedShinyMonAnim)
     {
@@ -396,7 +396,7 @@ static void SwitchIn_ShowHealthbox(void)
     }
 }
 
-static void SwitchIn_TryShinyAnim(void)
+static void SwitchIn_TryShinyAnim(u32 battler)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].ballAnimActive
         && !gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].triedShinyMonAnim)
@@ -413,19 +413,19 @@ static void SwitchIn_TryShinyAnim(void)
     }
 }
 
-static void CompleteOnFinishedStatusAnimation(void)
+static void CompleteOnFinishedStatusAnimation(u32 battler)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].statusAnimActive)
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
 }
 
-static void CompleteOnFinishedBattleAnimation(void)
+static void CompleteOnFinishedBattleAnimation(u32 battler)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animFromTableActive)
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentBufferExecCompleted(void)
+static void LinkOpponentBufferExecCompleted(u32 battler)
 {
     gBattlerControllerFuncs[gActiveBattler] = LinkOpponentBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -441,7 +441,7 @@ static void LinkOpponentBufferExecCompleted(void)
     }
 }
 
-static void LinkOpponentHandleGetMonData(void)
+static void LinkOpponentHandleGetMonData(u32 battler)
 {
     u8 monData[sizeof(struct Pokemon) * 2 + 56]; // this allows to get full data of two pokemon, trying to get more will result in overwriting data
     u32 size = 0;
@@ -463,7 +463,7 @@ static void LinkOpponentHandleGetMonData(void)
         }
     }
     BtlController_EmitDataTransfer(BUFFER_B, size, monData);
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
 static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
@@ -771,12 +771,12 @@ static u32 CopyLinkOpponentMonData(u8 monId, u8 *dst)
     return size;
 }
 
-static void LinkOpponentHandleGetRawMonData(void)
+static void LinkOpponentHandleGetRawMonData(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleSetMonData(void)
+static void LinkOpponentHandleSetMonData(u32 battler)
 {
     u8 monToCheck;
     u8 i;
@@ -795,7 +795,7 @@ static void LinkOpponentHandleSetMonData(void)
             monToCheck >>= 1;
         }
     }
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
 static void SetLinkOpponentMonData(u8 monId)
@@ -1014,7 +1014,7 @@ static void SetLinkOpponentMonData(u8 monId)
     }
 }
 
-static void LinkOpponentHandleSetRawMonData(void)
+static void LinkOpponentHandleSetRawMonData(u32 battler)
 {
     u8 *dst = (u8 *)&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]] + gBattleBufferA[gActiveBattler][1];
     u8 i;
@@ -1022,10 +1022,10 @@ static void LinkOpponentHandleSetRawMonData(void)
     for (i = 0; i < gBattleBufferA[gActiveBattler][2]; i++)
         dst[i] = gBattleBufferA[gActiveBattler][3 + i];
 
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleLoadMonSprite(void)
+static void LinkOpponentHandleLoadMonSprite(u32 battler)
 {
     u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
@@ -1047,7 +1047,7 @@ static void LinkOpponentHandleLoadMonSprite(void)
     gBattlerControllerFuncs[gActiveBattler] = TryShinyAnimAfterMonAnim;
 }
 
-static void LinkOpponentHandleSwitchInAnim(void)
+static void LinkOpponentHandleSwitchInAnim(u32 battler)
 {
     gBattlerPartyIndexes[gActiveBattler] = gBattleBufferA[gActiveBattler][1];
     StartSendOutAnim(gActiveBattler, gBattleBufferA[gActiveBattler][2]);
@@ -1083,7 +1083,7 @@ static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
     gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(0, POKEBALL_OPPONENT_SENDOUT);
 }
 
-static void LinkOpponentHandleReturnMonToBall(void)
+static void LinkOpponentHandleReturnMonToBall(u32 battler)
 {
     if (gBattleBufferA[gActiveBattler][1] == 0)
     {
@@ -1096,11 +1096,11 @@ static void LinkOpponentHandleReturnMonToBall(void)
         DestroySprite(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
         HideBattlerShadowSprite(gActiveBattler);
         SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
     }
 }
 
-static void DoSwitchOutAnimation(void)
+static void DoSwitchOutAnimation(u32 battler)
 {
     switch (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState)
     {
@@ -1123,7 +1123,7 @@ static void DoSwitchOutAnimation(void)
 
 #define sSpeedX data[0]
 
-static void LinkOpponentHandleDrawTrainerPic(void)
+static void LinkOpponentHandleDrawTrainerPic(u32 battler)
 {
     s16 xPos;
     u32 trainerPicId;
@@ -1195,14 +1195,14 @@ static void LinkOpponentHandleDrawTrainerPic(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnBattlerSpriteCallbackDummy;
 }
 
-static void LinkOpponentHandleTrainerSlide(void)
+static void LinkOpponentHandleTrainerSlide(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
 #undef sSpeedX
 
-static void LinkOpponentHandleTrainerSlideBack(void)
+static void LinkOpponentHandleTrainerSlideBack(u32 battler)
 {
     SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[gActiveBattler]]);
     gSprites[gBattlerSpriteIds[gActiveBattler]].data[0] = 35;
@@ -1213,7 +1213,7 @@ static void LinkOpponentHandleTrainerSlideBack(void)
     gBattlerControllerFuncs[gActiveBattler] = FreeTrainerSpriteAfterSlide;
 }
 
-static void LinkOpponentHandleFaintAnimation(void)
+static void LinkOpponentHandleFaintAnimation(u32 battler)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState == 0)
     {
@@ -1233,27 +1233,27 @@ static void LinkOpponentHandleFaintAnimation(void)
     }
 }
 
-static void LinkOpponentHandlePaletteFade(void)
+static void LinkOpponentHandlePaletteFade(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleSuccessBallThrowAnim(void)
+static void LinkOpponentHandleSuccessBallThrowAnim(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleBallThrowAnim(void)
+static void LinkOpponentHandleBallThrowAnim(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandlePause(void)
+static void LinkOpponentHandlePause(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleMoveAnimation(void)
+static void LinkOpponentHandleMoveAnimation(u32 battler)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
     {
@@ -1268,7 +1268,7 @@ static void LinkOpponentHandleMoveAnimation(void)
         gTransformedPersonalities[gActiveBattler] = gAnimDisableStructPtr->transformedMonPersonality;
         if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // always returns FALSE
         {
-            LinkOpponentBufferExecCompleted();
+            LinkOpponentBufferExecCompleted(battler);
         }
         else
         {
@@ -1278,7 +1278,7 @@ static void LinkOpponentHandleMoveAnimation(void)
     }
 }
 
-static void LinkOpponentDoMoveAnimation(void)
+static void LinkOpponentDoMoveAnimation(u32 battler)
 {
     u16 move = gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8);
     u8 multihit = gBattleBufferA[gActiveBattler][11];
@@ -1321,13 +1321,13 @@ static void LinkOpponentDoMoveAnimation(void)
             CopyAllBattleSpritesInvisibilities();
             TrySetBehindSubstituteSpriteBit(gActiveBattler, gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
             gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].animationState = 0;
-            LinkOpponentBufferExecCompleted();
+            LinkOpponentBufferExecCompleted(battler);
         }
         break;
     }
 }
 
-static void LinkOpponentHandlePrintString(void)
+static void LinkOpponentHandlePrintString(u32 battler)
 {
     u16 *stringId;
 
@@ -1342,42 +1342,42 @@ static void LinkOpponentHandlePrintString(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
-static void LinkOpponentHandlePrintSelectionString(void)
+static void LinkOpponentHandlePrintSelectionString(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleChooseAction(void)
+static void LinkOpponentHandleChooseAction(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleUnknownYesNoBox(void)
+static void LinkOpponentHandleUnknownYesNoBox(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleChooseMove(void)
+static void LinkOpponentHandleChooseMove(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleChooseItem(void)
+static void LinkOpponentHandleChooseItem(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleChoosePokemon(void)
+static void LinkOpponentHandleChoosePokemon(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleCmd23(void)
+static void LinkOpponentHandleCmd23(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleHealthBarUpdate(void)
+static void LinkOpponentHandleHealthBarUpdate(u32 battler)
 {
     s16 hpVal;
 
@@ -1401,12 +1401,12 @@ static void LinkOpponentHandleHealthBarUpdate(void)
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
 }
 
-static void LinkOpponentHandleExpUpdate(void)
+static void LinkOpponentHandleExpUpdate(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleStatusIconUpdate(void)
+static void LinkOpponentHandleStatusIconUpdate(u32 battler)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
     {
@@ -1419,7 +1419,7 @@ static void LinkOpponentHandleStatusIconUpdate(void)
     }
 }
 
-static void LinkOpponentHandleStatusAnimation(void)
+static void LinkOpponentHandleStatusAnimation(u32 battler)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
     {
@@ -1429,80 +1429,80 @@ static void LinkOpponentHandleStatusAnimation(void)
     }
 }
 
-static void LinkOpponentHandleStatusXor(void)
+static void LinkOpponentHandleStatusXor(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleDataTransfer(void)
+static void LinkOpponentHandleDataTransfer(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleDMA3Transfer(void)
+static void LinkOpponentHandleDMA3Transfer(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandlePlayBGM(void)
+static void LinkOpponentHandlePlayBGM(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleCmd32(void)
+static void LinkOpponentHandleCmd32(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleTwoReturnValues(void)
+static void LinkOpponentHandleTwoReturnValues(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleChosenMonReturnValue(void)
+static void LinkOpponentHandleChosenMonReturnValue(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleOneReturnValue(void)
+static void LinkOpponentHandleOneReturnValue(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleOneReturnValue_Duplicate(void)
+static void LinkOpponentHandleOneReturnValue_Duplicate(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleClearUnkVar(void)
+static void LinkOpponentHandleClearUnkVar(u32 battler)
 {
     gUnusedControllerStruct.unk = 0;
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleSetUnkVar(void)
+static void LinkOpponentHandleSetUnkVar(u32 battler)
 {
     gUnusedControllerStruct.unk = gBattleBufferA[gActiveBattler][1];
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleClearUnkFlag(void)
+static void LinkOpponentHandleClearUnkFlag(u32 battler)
 {
     gUnusedControllerStruct.flag = 0;
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleToggleUnkFlag(void)
+static void LinkOpponentHandleToggleUnkFlag(u32 battler)
 {
     gUnusedControllerStruct.flag ^= 1;
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleHitAnimation(void)
+static void LinkOpponentHandleHitAnimation(u32 battler)
 {
     if (gSprites[gBattlerSpriteIds[gActiveBattler]].invisible == TRUE)
     {
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
     }
     else
     {
@@ -1513,12 +1513,12 @@ static void LinkOpponentHandleHitAnimation(void)
     }
 }
 
-static void LinkOpponentHandleCantSwitch(void)
+static void LinkOpponentHandleCantSwitch(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandlePlaySE(void)
+static void LinkOpponentHandlePlaySE(u32 battler)
 {
     s8 pan;
 
@@ -1528,31 +1528,31 @@ static void LinkOpponentHandlePlaySE(void)
         pan = SOUND_PAN_TARGET;
 
     PlaySE12WithPanning(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8), pan);
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandlePlayFanfare(void)
+static void LinkOpponentHandlePlayFanfare(u32 battler)
 {
     PlayFanfare(gBattleBufferA[gActiveBattler][1] | (gBattleBufferA[gActiveBattler][2] << 8));
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleFaintingCry(void)
+static void LinkOpponentHandleFaintingCry(u32 battler)
 {
     u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gActiveBattler]], MON_DATA_SPECIES);
 
     PlayCry_ByMode(species, 25, CRY_MODE_FAINT);
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleIntroSlide(void)
+static void LinkOpponentHandleIntroSlide(u32 battler)
 {
     HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
     gIntroSlideFlags |= 1;
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleIntroTrainerBallThrow(void)
+static void LinkOpponentHandleIntroTrainerBallThrow(u32 battler)
 {
     u8 taskId;
 
@@ -1607,11 +1607,11 @@ static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-static void LinkOpponentHandleDrawPartyStatusSummary(void)
+static void LinkOpponentHandleDrawPartyStatusSummary(u32 battler)
 {
     if (gBattleBufferA[gActiveBattler][1] != 0 && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
     }
     else
     {
@@ -1640,38 +1640,38 @@ static void LinkOpponentHandleDrawPartyStatusSummary(void)
     }
 }
 
-static void EndDrawPartyStatusSummary(void)
+static void EndDrawPartyStatusSummary(u32 battler)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer++ > 92)
     {
         gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusDelayTimer = 0;
-        LinkOpponentBufferExecCompleted();
+        LinkOpponentBufferExecCompleted(battler);
     }
 }
 
-static void LinkOpponentHandleHidePartyStatusSummary(void)
+static void LinkOpponentHandleHidePartyStatusSummary(u32 battler)
 {
     if (gBattleSpritesDataPtr->healthBoxesData[gActiveBattler].partyStatusSummaryShown)
         gTasks[gBattlerStatusSummaryTaskId[gActiveBattler]].func = Task_HidePartyStatusSummary;
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleEndBounceEffect(void)
+static void LinkOpponentHandleEndBounceEffect(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleSpriteInvisibility(void)
+static void LinkOpponentHandleSpriteInvisibility(u32 battler)
 {
     if (IsBattlerSpritePresent(gActiveBattler))
     {
         gSprites[gBattlerSpriteIds[gActiveBattler]].invisible = gBattleBufferA[gActiveBattler][1];
         CopyBattleSpriteInvisibility(gActiveBattler);
     }
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleBattleAnimation(void)
+static void LinkOpponentHandleBattleAnimation(u32 battler)
 {
     if (!IsBattleSEPlaying(gActiveBattler))
     {
@@ -1679,23 +1679,23 @@ static void LinkOpponentHandleBattleAnimation(void)
         u16 argument = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
         if (TryHandleLaunchBattleTableAnimation(gActiveBattler, gActiveBattler, gActiveBattler, animationId, argument))
-            LinkOpponentBufferExecCompleted();
+            LinkOpponentBufferExecCompleted(battler);
         else
             gBattlerControllerFuncs[gActiveBattler] = CompleteOnFinishedBattleAnimation;
     }
 }
 
-static void LinkOpponentHandleLinkStandbyMsg(void)
+static void LinkOpponentHandleLinkStandbyMsg(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleResetActionMoveSelection(void)
+static void LinkOpponentHandleResetActionMoveSelection(u32 battler)
 {
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
 }
 
-static void LinkOpponentHandleEndLinkBattle(void)
+static void LinkOpponentHandleEndLinkBattle(u32 battler)
 {
     if (gBattleBufferA[gActiveBattler][1] == B_OUTCOME_DREW)
         gBattleOutcome = gBattleBufferA[gActiveBattler][1];
@@ -1704,10 +1704,10 @@ static void LinkOpponentHandleEndLinkBattle(void)
 
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
-    LinkOpponentBufferExecCompleted();
+    LinkOpponentBufferExecCompleted(battler);
     gBattlerControllerFuncs[gActiveBattler] = SetBattleEndCallbacks;
 }
 
-static void LinkOpponentCmdEnd(void)
+static void LinkOpponentCmdEnd(u32 battler)
 {
 }

@@ -764,9 +764,7 @@ void ClearBattleMonForms(void);
 void PlayBattleBGM(void);
 void PlayMapChosenOrBattleBGM(u16 songId);
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon);
-const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality);
-const u32 *GetMonSpritePalStruct(struct Pokemon *mon);
-const u32 *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality);
+const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality);
 bool32 IsMoveHM(u16 move);
 bool8 IsMonSpriteNotFlipped(u16 species);
 s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor);
@@ -798,6 +796,7 @@ bool32 DoesSpeciesHaveFormChangeMethod(u16 species, u16 method);
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method);
 bool8 IsMonPastEvolutionLevel(struct Pokemon *mon);
 bool32 IsPersonalityFemale(u16 species, u32 personality);
+bool32 TryFormChange(u32 monId, u32 side, u16 method);
 
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, u8 battleId);

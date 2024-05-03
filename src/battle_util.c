@@ -2012,50 +2012,6 @@ static void ForewarnChooseMove(u32 battler)
     Free(data);
 }
 
-enum
-{
-    CASTFORM_NO_CHANGE,
-    CASTFORM_TO_NORMAL,
-    CASTFORM_TO_FIRE,
-    CASTFORM_TO_WATER,
-    CASTFORM_TO_ICE,
-};
-
-u8 CastformDataTypeChange(u8 battler)
-{
-    u8 formChange = 0;
-    if (gBattleMons[battler].species != SPECIES_CASTFORM || gBattleMons[battler].ability != ABILITY_FORECAST || gBattleMons[battler].hp == 0)
-        return CASTFORM_NO_CHANGE;
-    if (!WEATHER_HAS_EFFECT && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-        return CASTFORM_TO_NORMAL;
-    }
-    if (!WEATHER_HAS_EFFECT)
-        return CASTFORM_NO_CHANGE;
-    if (!(gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SUN | B_WEATHER_HAIL)) && !IS_BATTLER_OF_TYPE(battler, TYPE_NORMAL))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_NORMAL);
-        formChange = CASTFORM_TO_NORMAL;
-    }
-    if (gBattleWeather & B_WEATHER_SUN && !IS_BATTLER_OF_TYPE(battler, TYPE_FIRE))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_FIRE);
-        formChange = CASTFORM_TO_FIRE;
-    }
-    if (gBattleWeather & B_WEATHER_RAIN && !IS_BATTLER_OF_TYPE(battler, TYPE_WATER))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_WATER);
-        formChange = CASTFORM_TO_WATER;
-    }
-    if (gBattleWeather & B_WEATHER_HAIL && !IS_BATTLER_OF_TYPE(battler, TYPE_ICE))
-    {
-        SET_BATTLER_TYPE(battler, TYPE_ICE);
-        formChange = CASTFORM_TO_ICE;
-    }
-    return formChange;
-}
-
 bool32 ChangeTypeBasedOnTerrain(u32 battler)
 {
     u32 battlerType;
@@ -8873,6 +8829,22 @@ bool32 CanBeConfused(u32 battler)
       || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
         return FALSE;
     return TRUE;
+}
+
+void TryRestoreHeldItems(void)
+{
+    u32 i;
+    u16 lostItem = ITEM_NONE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9 || gBattleStruct->itemLost[i].stolen)
+        {
+            lostItem = gBattleStruct->itemLost[i].originalItem;
+            if (lostItem != ITEM_NONE && ItemId_GetPocket(lostItem) != POCKET_BERRY_POUCH)
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);  // Restore stolen non-berry items
+        }
+    }
 }
 
 bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)

@@ -4009,27 +4009,27 @@ static void PokeSum_CreateMonPicSprite(void)
     u16 spriteId;
     u16 species;
     u32 personality;
-    u32 trainerId;
+    bool32 isShiny;
 
     sMonPicBounceState = AllocZeroed(sizeof(struct MonPicBounceState));
 
     species = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES_OR_EGG);
     personality = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_PERSONALITY);
-    trainerId = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_OT_ID);
+    isShiny = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_IS_SHINY, NULL);
 
     if (sMonSummaryScreen->savedCallback == CB2_ReturnToTradeMenuFromSummary)
     {
         if (sMonSummaryScreen->isEnemyParty == TRUE)
-            spriteId = CreateMonPicSprite(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff, TRUE);
+            spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 60, 65, 12, 0xffff, TRUE);
         else
-            spriteId = CreateMonPicSprite_HandleDeoxys(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff);
+            spriteId = CreateMonPicSprite_HandleDeoxys(species, isShiny, personality, TRUE, 60, 65, 12, 0xffff);
     }
     else
     {
         if (ShouldIgnoreDeoxysForm(DEOXYS_CHECK_TRADE_MAIN, sLastViewedMonIndex))
-            spriteId = CreateMonPicSprite(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff, TRUE);
+            spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 60, 65, 12, 0xffff, TRUE);
         else
-            spriteId = CreateMonPicSprite_HandleDeoxys(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff);
+            spriteId = CreateMonPicSprite_HandleDeoxys(species, isShiny, personality, TRUE, 60, 65, 12, 0xffff);
     }
 
     FreeSpriteOamMatrix(&gSprites[spriteId]);

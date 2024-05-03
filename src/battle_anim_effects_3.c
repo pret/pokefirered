@@ -2220,6 +2220,10 @@ void AnimTask_SwallowDeformMon(u8 taskId)
     }
 }
 
+#define megaEvo data[10]
+#define trackEnemyPersonality data[11]
+#define ghostUnveil data[12]
+
 void AnimTask_TransformMon(u8 taskId)
 {
     int i, j;
@@ -2239,7 +2243,9 @@ void AnimTask_TransformMon(u8 taskId)
         else
             SetAnimBgAttribute(2, BG_ANIM_MOSAIC, 1);
 
-        gTasks[taskId].data[10] = gBattleAnimArgs[0];
+        gTasks[taskId].megaEvo = gBattleAnimArgs[0];
+        gTasks[taskId].trackEnemyPersonality = gBattleAnimArgs[1];
+        gTasks[taskId].ghostUnveil = gBattleAnimArgs[2];
         gTasks[taskId].data[0]++;
         break;
     case 1:
@@ -2254,7 +2260,7 @@ void AnimTask_TransformMon(u8 taskId)
         }
         break;
     case 2:
-        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
+        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].megaEvo, gTasks[taskId].trackEnemyPersonality, gTasks[taskId].ghostUnveil);
         GetBattleAnimBgDataByPriorityRank(&animBg, gBattleAnimAttacker);
         if (IsContest())
             position = 0;
@@ -2300,15 +2306,13 @@ void AnimTask_TransformMon(u8 taskId)
     }
 }
 
+#undef megaEvo
+#undef trackEnemyPersonality
+#undef ghostUnveil
+
 void AnimTask_IsMonInvisible(u8 taskId)
 {
     gBattleAnimArgs[ARG_RET_ID] = gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].invisible;
-    DestroyAnimVisualTask(taskId);
-}
-
-void AnimTask_CastformGfxChange(u8 taskId)
-{
-    HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, TRUE);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -3123,7 +3127,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
 {
     bool8 isBackPic;
     u32 personality;
-    u32 otId;
+    bool32 isShiny;
     u16 species;
     s16 xOffset;
     u32 priority;
@@ -3135,7 +3139,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     {
         isBackPic = FALSE;
         personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
-        otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_OT_ID);
+        isShiny = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_IS_SHINY, NULL);
         if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
         {
             if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
@@ -3155,7 +3159,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     {
         isBackPic = TRUE;
         personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
-        otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_OT_ID);
+        isShiny = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_IS_SHINY, NULL);
         if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
         {
             if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
@@ -3174,7 +3178,7 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
 
     coord1 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
     coord2 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
-    spriteId = CreateAdditionalMonSpriteForMoveAnim(species, isBackPic, 0, coord1 + xOffset, coord2, 5, personality, otId, gBattleAnimTarget, 1);
+    spriteId = CreateAdditionalMonSpriteForMoveAnim(species, isBackPic, 0, coord1 + xOffset, coord2, 5, personality, isShiny, gBattleAnimTarget, 1);
     gSprites[spriteId].oam.priority = priority;
     gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
     FillPalette(RGB_WHITE, OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), PLTT_SIZE_4BPP);
@@ -4967,7 +4971,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
 {
     u8 spriteId, spriteId2;
     u32 personality;
-    u32 otId;
+    bool32 isShiny;
     u16 species;
     u8 subpriority;
     bool8 isBackPic;
@@ -4998,7 +5002,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
             {
                 personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-                otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
+                isShiny = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_IS_SHINY, NULL);
                 if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
                     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
                 else
@@ -5011,7 +5015,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
             else
             {
                 personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-                otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_OT_ID);
+                isShiny = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_IS_SHINY, NULL);
                 if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
                     species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
                 else
@@ -5022,7 +5026,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
                 x = -32;
             }
 
-            spriteId2 = CreateAdditionalMonSpriteForMoveAnim(species, isBackPic, 0, x, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, otId, gBattleAnimAttacker, 0);
+            spriteId2 = CreateAdditionalMonSpriteForMoveAnim(species, isBackPic, 0, x, GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y), subpriority, personality, isShiny, gBattleAnimAttacker, 0);
             
             if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies != SPECIES_NONE)
                 BlendPalette(OBJ_PLTT_ID(gSprites[spriteId2].oam.paletteNum), 16, 6, RGB_WHITE);

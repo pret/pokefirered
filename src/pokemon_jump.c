@@ -148,7 +148,8 @@ enum {
 
 struct PokemonJump_MonInfo
 {
-    u16 species;
+    u16 species:15;
+    u16 isShiny:1;
     u32 otId;
     u32 personality;
 };
@@ -997,6 +998,7 @@ static void InitJumpMonInfo(struct PokemonJump_MonInfo *monInfo, struct Pokemon 
     monInfo->species = GetMonData(mon, MON_DATA_SPECIES);
     monInfo->otId = GetMonData(mon, MON_DATA_OT_ID);
     monInfo->personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    monInfo->isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 }
 
 static void VBlankCB_PokemonJump(void)
@@ -2707,7 +2709,8 @@ void IsPokemonJumpSpeciesInParty(void)
 struct MonInfoPacket
 {
     u8 id;
-    u16 species;
+    u16 species:15;
+    u16 isShiny:1;
     u32 personality;
     u32 otId;
 };
@@ -2719,6 +2722,7 @@ static void SendPacket_MonInfo(struct PokemonJump_MonInfo *monInfo)
     packet.species = monInfo->species;
     packet.otId = monInfo->otId;
     packet.personality = monInfo->personality;
+    packet.isShiny = monInfo->isShiny;
     Rfu_SendPacket(&packet);
 }
 
@@ -2735,6 +2739,7 @@ static bool32 RecvPacket_MonInfo(int multiplayerId, struct PokemonJump_MonInfo *
         monInfo->species = packet.species;
         monInfo->otId = packet.otId;
         monInfo->personality = packet.personality;
+        monInfo->isShiny = packet.isShiny;
         return TRUE;
     }
 
@@ -4162,7 +4167,7 @@ static void CreateJumpMonSprite(struct PokemonJumpGfx *jumpGfx, struct PokemonJu
         spriteSheet.size = MON_PIC_SIZE;
         LoadSpriteSheet(&spriteSheet);
 
-        spritePalette.data = GetMonSpritePalFromSpeciesAndPersonality(monInfo->species, monInfo->otId, monInfo->personality);
+        spritePalette.data = GetMonSpritePalFromSpeciesAndPersonality(monInfo->species, FALSE, monInfo->personality);
         spritePalette.tag = multiplayerId;
         LoadCompressedSpritePalette(&spritePalette);
 

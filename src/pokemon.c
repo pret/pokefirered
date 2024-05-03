@@ -5546,62 +5546,32 @@ void PlayMapChosenOrBattleBGM(u16 songId)
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
+    bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    return GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality);
+    return GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality);
 }
 
-const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 personality)
+const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality)
 {
-    u32 shinyValue;
-
-    if (species > SPECIES_EGG)
-        return gSpeciesInfo[SPECIES_NONE].palette;
-
-    shinyValue = GET_SHINY_VALUE(otId, personality);
-    if (shinyValue < SHINY_ODDS)
-        return gSpeciesInfo[species].shinyPalette;
-    else
-        return gSpeciesInfo[species].palette;
-}
-
-const u32 *GetMonSpritePalStruct(struct Pokemon *mon)
-{
-    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    return GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
-}
-
-const u32 *GetMonSpritePalStructFromOtIdPersonality(u16 species, u32 otId , u32 personality)
-{
-    u32 shinyValue;
-    
     species = SanitizeSpeciesId(species);
 
-    shinyValue = GET_SHINY_VALUE(otId, personality);
-    if (shinyValue < SHINY_ODDS) 
+    if (isShiny)
     {
-        if (gSpeciesInfo[species].shinyPalette != NULL) 
-        {
+        if (gSpeciesInfo[species].shinyPaletteFemale != NULL && IsPersonalityFemale(species, personality))
+            return gSpeciesInfo[species].shinyPaletteFemale;
+        else if (gSpeciesInfo[species].shinyPalette != NULL)
             return gSpeciesInfo[species].shinyPalette;
-        }
-        else 
-        {
-            return gSpeciesInfo[SPECIES_NONE].shinyPalette;
-        }
-    }
-    else 
-    {
-        if (gSpeciesInfo[species].palette != NULL)
-        {
-            return gSpeciesInfo[species].palette;
-        }
         else
-        {
+            return gSpeciesInfo[SPECIES_NONE].shinyPalette;
+    }
+    else
+    {
+        if (gSpeciesInfo[species].paletteFemale != NULL && IsPersonalityFemale(species, personality))
+            return gSpeciesInfo[species].paletteFemale;
+        else if (gSpeciesInfo[species].palette != NULL)
+            return gSpeciesInfo[species].palette;
+        else
             return gSpeciesInfo[SPECIES_NONE].palette;
-        }
-            
     }
 }
 
@@ -6400,4 +6370,29 @@ bool8 IsMonPastEvolutionLevel(struct Pokemon *mon)
 bool32 IsPersonalityFemale(u16 species, u32 personality)
 {
     return GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+}
+
+bool32 TryFormChange(u32 monId, u32 side, u16 method)
+{
+    struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+    u16 targetSpecies;
+
+    if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_NONE
+     || GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_EGG)
+        return FALSE;
+
+    targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
+
+    if (targetSpecies == SPECIES_NONE && gBattleStruct != NULL)
+        targetSpecies = gBattleStruct->changedSpecies[side][monId];
+
+    if (targetSpecies != SPECIES_NONE)
+    {
+        TryToSetBattleFormChangeMoves(&party[monId], method);
+        SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);
+        CalculateMonStats(&party[monId]);
+        return TRUE;
+    }
+
+    return FALSE;
 }

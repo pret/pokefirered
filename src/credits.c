@@ -1050,28 +1050,28 @@ static void LoadCreditsMonPic(u8 whichMon)
     case CREDITSMON_CHARIZARD:
         InitWindows(sWindowTemplates_Charizard);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        LoadMonPicInWindow(SPECIES_CHARIZARD, SHINY_ODDS, 0, TRUE, 10, 0);
+        LoadMonPicInWindow(SPECIES_CHARIZARD, FALSE, 0, TRUE, 10, 0);
         CopyToWindowPixelBuffer(1, (const void *)sCharizard1_Tiles, 0, 0);
         CopyToWindowPixelBuffer(2, (const void *)sCharizard2_Tiles, 0, 0);
         break;
     case CREDITSMON_VENUSAUR:
         InitWindows(sWindowTemplates_Venusaur);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        LoadMonPicInWindow(SPECIES_VENUSAUR, SHINY_ODDS, 0, TRUE, 10, 0);
+        LoadMonPicInWindow(SPECIES_VENUSAUR, FALSE, 0, TRUE, 10, 0);
         CopyToWindowPixelBuffer(1, (const void *)sVenusaur1_Tiles, 0, 0);
         CopyToWindowPixelBuffer(2, (const void *)sVenusaur2_Tiles, 0, 0);
         break;
     case CREDITSMON_BLASTOISE:
         InitWindows(sWindowTemplates_Blastoise);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        LoadMonPicInWindow(SPECIES_BLASTOISE, SHINY_ODDS, 0, TRUE, 10, 0);
+        LoadMonPicInWindow(SPECIES_BLASTOISE, FALSE, 0, TRUE, 10, 0);
         CopyToWindowPixelBuffer(1, (const void *)sBlastoise1_Tiles, 0, 0);
         CopyToWindowPixelBuffer(2, (const void *)sBlastoise2_Tiles, 0, 0);
         break;
     case CREDITSMON_PIKACHU:
         InitWindows(sWindowTemplates_Pikachu);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        LoadMonPicInWindow(SPECIES_PIKACHU, SHINY_ODDS, 0, TRUE, 10, 0);
+        LoadMonPicInWindow(SPECIES_PIKACHU, FALSE, 0, TRUE, 10, 0);
         CopyToWindowPixelBuffer(1, (const void *)sPikachu1_Tiles, 0, 0);
         CopyToWindowPixelBuffer(2, (const void *)sPikachu2_Tiles, 0, 0);
         break;

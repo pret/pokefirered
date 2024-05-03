@@ -761,7 +761,7 @@ static void LoadTradeMonPic(u8 whichParty, u8 state)
         else
             HandleLoadSpecialPokePic_DontHandleDeoxys(TRUE, gMonSpritesGfxPtr->sprites[whichParty * 2 + 1], species, personality);
 
-        LoadCompressedSpritePaletteWithTag(GetMonSpritePalStruct(mon), species);
+        LoadCompressedSpritePaletteWithTag(GetMonFrontSpritePal(mon), species);
         sTradeAnim->monSpecies[whichParty] = species;
         sTradeAnim->monPersonalities[whichParty] = personality;
         break;

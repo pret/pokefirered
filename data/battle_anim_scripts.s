@@ -9598,7 +9598,7 @@ Move_TRANSFORM:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
-	createvisualtask AnimTask_TransformMon, 2, 0
+	createvisualtask AnimTask_TransformMon, 2, 0, 1, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
@@ -11700,13 +11700,9 @@ Status_Nightmare:
 
 General_FormChange:
 	monbg ANIM_ATTACKER
-	createvisualtask AnimTask_TransformMon, 2, 1, 0
+	createvisualtask AnimTask_TransformMon, 2, 1, 0, 0
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
-	end
-
-CastformChangeSkipAnim:
-	createvisualtask AnimTask_CastformGfxChange, 2, 1
 	end
 
 General_StatsChange:
@@ -12118,7 +12114,7 @@ General_SilphScoped:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
-	createvisualtask AnimTask_TransformMon, 2, 255
+	createvisualtask AnimTask_TransformMon, 2, 0, 0, 1
 	waitsound
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER

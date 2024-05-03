@@ -33,7 +33,8 @@ struct HallofFameMon
 {
     u32 tid;
     u32 personality;
-    u16 species;
+    u16 isShiny:1;
+    u16 species:15;
     u8 lvl;
     u8 nick[POKEMON_NAME_LENGTH];
 };
@@ -293,7 +294,8 @@ static const struct HallofFameMon sDummyHofMon = {
     .personality = 0,
     .species = SPECIES_NONE,
     .lvl = 0,
-    .nick = __("          ")
+    .nick = __("          "),
+    .isShiny = FALSE,
 };
 
 static const u8 sUnused[] = {2, 1, 3, 6, 4, 5};
@@ -394,6 +396,7 @@ static void Task_Hof_InitMonData(u8 taskId)
             sHofMonPtr[0].mon[i].tid = GetMonData(&gPlayerParty[i], MON_DATA_OT_ID);
             sHofMonPtr[0].mon[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
             sHofMonPtr[0].mon[i].lvl = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            sHofMonPtr[0].mon[i].isShiny = GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY);
             GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nick);
             for (j = 0; j < 10; j++)
                 sHofMonPtr[0].mon[i].nick[j] = nick[j];
@@ -405,6 +408,7 @@ static void Task_Hof_InitMonData(u8 taskId)
             sHofMonPtr[0].mon[i].tid = 0;
             sHofMonPtr[0].mon[i].personality = 0;
             sHofMonPtr[0].mon[i].lvl = 0;
+            sHofMonPtr[0].mon[i].isShiny = FALSE;
             sHofMonPtr[0].mon[i].nick[0] = EOS;
         }
     }
@@ -508,7 +512,7 @@ static void Task_Hof_DisplayMon(u8 taskId)
         dstY = sHallOfFame_MonHalfTeamPositions[currMonId][3];
     }
 
-    spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->tid, currMon->personality, 1, srcX, srcY, currMonId, 0xFFFF);
+    spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->isShiny, currMon->personality, 1, srcX, srcY, currMonId, 0xFFFF);
     gSprites[spriteId].data[1] = dstX;
     gSprites[spriteId].data[2] = dstY;
     gSprites[spriteId].data[0] = 0;
@@ -826,7 +830,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
                 posY = sHallOfFame_MonHalfTeamPositions[i][3];
             }
 
-            spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->tid, currMon->personality, TRUE, posX,
+            spriteId = CreateMonPicSprite_HandleDeoxys(currMon->species, currMon->isShiny, currMon->personality, TRUE, posX,
                                                        posY, i, 0xFFFF);
             gSprites[spriteId].oam.priority = 1;
             gTasks[taskId].data[5 + i] = spriteId;

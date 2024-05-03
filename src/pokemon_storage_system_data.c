@@ -1057,7 +1057,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         gStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
         if (gStorage->displayMonSpecies != SPECIES_NONE)
         {
-            u32 otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
+            bool32 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY, NULL);
             sanityIsBagEgg = GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG);
             if (sanityIsBagEgg)
                 gStorage->displayMonIsEgg = TRUE;
@@ -1069,7 +1069,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             gStorage->displayMonLevel = GetLevelFromBoxMonExp(boxMon);
             gStorage->displayMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
             gStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
-            gStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(gStorage->displayMonSpecies, otId, gStorage->displayMonPersonality);
+            gStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(gStorage->displayMonSpecies, isShiny, gStorage->displayMonPersonality);
             gender = GetGenderFromSpeciesAndPersonality(gStorage->displayMonSpecies, gStorage->displayMonPersonality);
             gStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
         }

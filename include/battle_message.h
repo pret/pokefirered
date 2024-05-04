@@ -24,7 +24,7 @@
 #define B_TXT_ATK_NAME_WITH_PREFIX 0xF
 #define B_TXT_DEF_NAME_WITH_PREFIX 0x10
 #define B_TXT_EFF_NAME_WITH_PREFIX 0x11 // EFF = short for gEffectBank
-#define B_TXT_ACTIVE_NAME_WITH_PREFIX 0x12
+// #define B_TXT_ACTIVE_NAME_WITH_PREFIX 0x12 - removed
 #define B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX 0x13
 #define B_TXT_CURRENT_MOVE 0x14
 #define B_TXT_LAST_MOVE 0x15
@@ -220,11 +220,11 @@ struct BattleMsgData
     u8 textBuffs[3][0x10];
 };
 
-void BufferStringBattle(u16 stringID);
+void BufferStringBattle(u32 battler, u16 stringID);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst);
 void BattleHandleAddTextPrinter(const u8 *text, u8 arg1);
-void SetPpNumbersPaletteInMoveSelection(void);
+void SetPpNumbersPaletteInMoveSelection(u32 battler);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId_flags);
 bool8 BattleStringShouldBeColored(u16);

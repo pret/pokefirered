@@ -117,26 +117,27 @@ enum
     CANCELLER_END2,
 };
 
+extern const struct TypePower gNaturalGiftTable[];
 
 u8 GetBattlerForBattleScript(u8 caseId);
 void MarkBattlerForControllerExec(u8 battlerId);
 void MarkBattlerReceivedLinkData(u8 battlerId);
 const u8* CancelMultiTurnMoves(u32 battler);
 bool32 WasUnableToUseMove(u32 battler);
-void PrepareStringBattle(u16 stringId, u8 battler);
+void PrepareStringBattle(u16 stringId, u32 battler);
 void ResetSentPokesToOpponentValue(void);
 void OpponentSwitchInResetSentPokesToOpponentValue(u8 battler);
 void UpdateSentPokesToOpponentValue(u8 battler);
 void BattleScriptPush(const u8 *bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);
-u8 TrySetCantSelectMoveBattleScript(void);
+u8 TrySetCantSelectMoveBattleScript(u32 battler);
 u8 CheckMoveLimitations(u32 battler, u8 unusableMoves, u16 check);
-bool8 AreAllMovesUnusable(void);
+bool32 AreAllMovesUnusable(u32 battler);
 u8 GetImprisonedMovesCount(u8 battlerId, u16 move);
 u8 DoFieldEndTurnEffects(void);
 u8 DoBattlerEndTurnEffects(void);
-bool8 HandleWishPerishSongOnTurnEnd(void);
+bool32 HandleWishPerishSongOnTurnEnd(void);
 bool8 HandleFaintedMonActions(void);
 void TryClearRageStatuses(void);
 u8 AtkCanceller_UnableToUseMove(u32 moveType);

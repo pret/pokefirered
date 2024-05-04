@@ -1804,13 +1804,13 @@ u8 CountAliveMonsInBattle(u8 caseId, u32 battler)
     return retVal;
 }
 
-u8 GetDefaultMoveTarget(u8 battlerId)
+u8 GetDefaultMoveTarget(u32 battler)
 {
-    u8 opposing = BATTLE_OPPOSITE(GetBattlerPosition(battlerId) & BIT_SIDE);
+    u8 opposing = BATTLE_OPPOSITE(GetBattlerPosition(battler) & BIT_SIDE);
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
         return GetBattlerAtPosition(opposing);
-    if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_BATTLER, gActiveBattler) > 1)
+    if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_BATTLER, battler) > 1)
     {
         u8 position;
 
@@ -3420,47 +3420,23 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
     // Get item hold effect
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
-    if (heldItem == ITEM_ENIGMA_BERRY)
-    {
-        if (gMain.inBattle)
-            holdEffect = gEnigmaBerries[gBattlerInMenuId].holdEffect;
-        else
-            holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-    }
+    if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
+    #if FREE_ENIGMA_BERRY == FALSE
+        holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+    #else
+        holdEffect = 0;
+    #endif //FREE_ENIGMA_BERRY
     else
-    {
         holdEffect = ItemId_GetHoldEffect(heldItem);
-    }
-
-    // Get battler id (if relevant)
-    gPotentialItemEffectBattler = gBattlerInMenuId;
-    if (gMain.inBattle)
-    {
-        gActiveBattler = gBattlerInMenuId;
-        i = (GetBattlerSide(gActiveBattler) != B_SIDE_PLAYER);
-        while (i < gBattlersCount)
-        {
-            if (gBattlerPartyIndexes[i] == partyIndex)
-            {
-                battlerId = i;
-                break;
-            }
-            i += 2;
-        }
-    }
-    else
-    {
-        gActiveBattler = 0;
-        battlerId = MAX_BATTLERS_COUNT;
-    }
 
     // Skip using the item if it won't do anything
-    if (ItemId_GetEffect(item) == NULL && item != ITEM_ENIGMA_BERRY)
+    if (ItemId_GetEffect(item) == NULL && item != ITEM_ENIGMA_BERRY_E_READER)
         return TRUE;
 
     // Get item effect
     itemEffect = ItemId_GetEffect(item);
 
+    // Do item effect
     for (i = 0; i < ITEM_EFFECT_ARG_START; i++)
     {
         switch (i)
@@ -3593,10 +3569,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 break;
                             }
                             dataSigned += evChange;
-                            #if I_EV_LOWERING_BERRY_JUMP == GEN_4
-                            if (dataSigned > 100)
+                            if (I_BERRY_EV_JUMP == GEN_4 && dataSigned > 100)
                                 dataSigned = 100;
-                            #endif
                             if (dataSigned < 0)
                                 dataSigned = 0;
                         }
@@ -3713,6 +3687,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
                             if (targetSpecies != SPECIES_NONE)
                             {
+                                BeginEvolutionScene(mon, targetSpecies, FALSE, partyIndex);
                                 return FALSE;
                             }
                         }
@@ -3779,10 +3754,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                                 break;
                             }
                             dataSigned += evChange;
-                            #if I_BERRY_EV_JUMP == GEN_4
-                            if (dataSigned > 100)
+                            if (I_BERRY_EV_JUMP == GEN_4 && dataSigned > 100)
                                 dataSigned = 100;
-                            #endif
                             if (dataSigned < 0)
                                 dataSigned = 0;
                         }
@@ -3879,25 +3852,25 @@ static bool8 PartyMonHasStatus(struct Pokemon *mon, u32 unused, u32 healMask, u8
         return FALSE;
 }
 
-u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
+u8 GetItemEffectParamOffset(u32 battler, u16 itemId, u8 effectByte, u8 effectBit)
 {
     const u8 *temp;
     const u8 *itemEffect;
     u8 offset;
     int i;
     u8 j;
-    u8 val;
+    u8 effectFlags;
 
     offset = ITEM_EFFECT_ARG_START;
 
     temp = ItemId_GetEffect(itemId);
 
-    if (!temp && itemId != ITEM_ENIGMA_BERRY)
+    if (temp != NULL && !temp && itemId != ITEM_ENIGMA_BERRY_E_READER)
         return 0;
 
-    if (itemId == ITEM_ENIGMA_BERRY)
+    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
     {
-        temp = gEnigmaBerries[gActiveBattler].itemEffect;
+        temp = gEnigmaBerries[battler].itemEffect;
     }
 
     itemEffect = temp;
@@ -3914,32 +3887,32 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
                 return 0;
             break;
         case 4:
-            val = itemEffect[4];
-            if (val & ITEM4_PP_UP)
-                val &= ~ITEM4_PP_UP;
+            effectFlags = itemEffect[4];
+            if (effectFlags & ITEM4_PP_UP)
+                effectFlags &= ~(ITEM4_PP_UP);
             j = 0;
-            while (val)
+            while (effectFlags)
             {
-                if (val & 1)
+                if (effectFlags & 1)
                 {
                     switch (j)
                     {
                     case 2: // ITEM4_HEAL_HP
-                        if (val & (ITEM4_REVIVE >> 2))
-                            val &= ~(ITEM4_REVIVE >> 2);
+                        if (effectFlags & (ITEM4_REVIVE >> 2))
+                            effectFlags &= ~(ITEM4_REVIVE >> 2);
                         // fallthrough
                     case 0: // ITEM4_EV_HP
-                        if (i == effectByte && (val & effectBit))
+                        if (i == effectByte && (effectFlags & effectBit))
                             return offset;
                         offset++;
                         break;
                     case 1: // ITEM4_EV_ATK
-                        if (i == effectByte && (val & effectBit))
+                        if (i == effectByte && (effectFlags & effectBit))
                             return offset;
                         offset++;
                         break;
                     case 3: // ITEM4_HEAL_PP
-                        if (i == effectByte && (val & effectBit))
+                        if (i == effectByte && (effectFlags & effectBit))
                             return offset;
                         offset++;
                         break;
@@ -3950,17 +3923,17 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
                     }
                 }
                 j++;
-                val >>= 1;
+                effectFlags >>= 1;
                 if (i == effectByte)
                     effectBit >>= 1;
             }
             break;
         case 5:
-            val = itemEffect[5];
+            effectFlags = itemEffect[5];
             j = 0;
-            while (val)
+            while (effectFlags)
             {
-                if (val & 1)
+                if (effectFlags & 1)
                 {
                     switch (j)
                     {
@@ -3971,7 +3944,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
                     case 4: // ITEM5_PP_MAX
                     case 5: // ITEM5_FRIENDSHIP_LOW
                     case 6: // ITEM5_FRIENDSHIP_MID
-                        if (i == effectByte && (val & effectBit))
+                        if (i == effectByte && (effectFlags & effectBit))
                             return offset;
                         offset++;
                         break;
@@ -3982,7 +3955,7 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
                     }
                 }
                 j++;
-                val >>= 1;
+                effectFlags >>= 1;
                 if (i == effectByte)
                     effectBit >>= 1;
             }

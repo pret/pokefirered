@@ -319,7 +319,7 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
 
     // TODO: check if always calling with 0 or 2 is fine
     // always called with 0 if first battle of this load or if for any further battle
-    BattleAI_SetupAIData(gActiveBattler);
+    BattleAI_SetupAIData(0);
 }
 
 void BattleAI_SetupAIData(u32 battler)
@@ -1746,17 +1746,17 @@ static void Cmd_if_any_move_disabled_or_encored(void)
 
 static void Cmd_if_curr_move_disabled_or_encored(void)
 {
-    DebugPrintfLevel(MGBA_LOG_ERROR, "Cmd_if_curr_move_disabled_or_encored");
-    switch (sAIScriptPtr[1])
+    u8 battler = sAIScriptPtr[1];
+    switch (battler)
     {
-    case 0:
-        if (gDisableStructs[gActiveBattler].disabledMove == AI_THINKING_STRUCT->moveConsidered)
+    case AI_TARGET:
+        if (gDisableStructs[battler].disabledMove == AI_THINKING_STRUCT->moveConsidered)
             sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 2);
         else
             sAIScriptPtr += 6;
         break;
-    case 1:
-        if (gDisableStructs[gActiveBattler].encoredMove == AI_THINKING_STRUCT->moveConsidered)
+    case AI_USER:
+        if (gDisableStructs[battler].encoredMove == AI_THINKING_STRUCT->moveConsidered)
             sAIScriptPtr = T1_READ_PTR(sAIScriptPtr + 2);
         else
             sAIScriptPtr += 6;

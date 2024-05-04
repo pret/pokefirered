@@ -6630,3 +6630,13 @@ BattleScript_HurtTarget_NoString:
 	tryfaintmon BS_TARGET
 	return
 
+BattleScript_AbilityRaisesDefenderStat::
+	pause B_WAIT_TIME_SHORT
+	call BattleScript_AbilityPopUp
+	statbuffchange 0, NULL
+	setgraphicalstatchangevalues
+	playanimation BS_ABILITY_BATTLER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printstring STRINGID_DEFENDERSSTATROSE
+	waitmessage B_WAIT_TIME_LONG
+	return
+

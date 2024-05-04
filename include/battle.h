@@ -399,7 +399,6 @@ struct AI_ThinkingStruct
     u8 simulatedRNG[4];
 };
 
-extern u8 gActiveBattler;
 extern u8 gBattlerTarget;
 extern u8 gAbsentBattlerFlags;
 

@@ -16434,3 +16434,16 @@ static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 byIntimidate)
     return FALSE;
 }
 
+void BS_TryGulpMissile(void)
+{
+    NATIVE_ARGS();
+
+    if ((gBattleMons[gBattlerAttacker].species == SPECIES_CRAMORANT)
+     && (gCurrentMove == MOVE_DIVE)
+     && (GetBattlerAbility(gBattlerAttacker) == ABILITY_GULP_MISSILE)
+     && TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_HP_PERCENT))
+        gBattlescriptCurrInstr = BattleScript_GulpMissileFormChange;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+

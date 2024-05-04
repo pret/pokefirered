@@ -3,10 +3,10 @@
 	.byte 0x0
 	.endm
 
-	.macro accuracycheck param0:req, param1:req
+	.macro accuracycheck failInstr:req, move:req
 	.byte 0x1
-	.4byte \param0
-	.2byte \param1
+	.4byte \failInstr
+	.2byte \move
 	.endm
 
 	.macro attackstring
@@ -72,14 +72,18 @@
 	.2byte \id
 	.endm
 
+	.macro printsavedstring
+	printstring 0
+	.endm
+
 	.macro printselectionstring id:req
 	.byte 0x11
 	.2byte \id
 	.endm
 
-	.macro waitmessage param0:req
+	.macro waitmessage time:req
 	.byte 0x12
-	.2byte \param0
+	.2byte \time
 	.endm
 
 	.macro printfromtable ptr:req
@@ -93,7 +97,9 @@
 	.endm
 
 	.macro setadditionaleffects
+	1:
 	.byte 0x15
+	jumpifhalfword CMP_EQUAL, sMOVE_EFFECT, MOVE_EFFECT_CONTINUE, 1b
 	.endm
 
 	.macro seteffectprimary moveEffect=0
@@ -110,7 +116,10 @@
 	.byte 0x17
 	.endm
 
-	.macro clearstatusfromeffect battler:req
+	.macro clearstatusfromeffect battler:req, moveEffect=0
+	.if \moveEffect != 0
+		setmoveeffect \moveEffect
+	.endif
 	.byte 0x18
 	.byte \battler
 	.endm
@@ -367,12 +376,6 @@
 	.macro end3
 	.byte 0x3f
 	.endm
-
-	@ unused5
-	@.macro jumpifaffectedbyprotect ptr:req
-	@.byte 0x40
-	@.4byte \ptr
-	@.endm
 
 	.macro call instr:req
 	.byte 0x41
@@ -970,10 +973,10 @@
 	.byte 0xb3
 	.endm
 
-	.macro jumpifconfusedandstatmaxed stat:req, ptr:req
+	.macro jumpifconfusedandstatmaxed stat:req, jumpInstr:req
 	.byte 0xb4
 	.byte \stat
-	.4byte \ptr
+	.4byte \jumpInstr
 	.endm
 
 	.macro handlefurycutter
@@ -2219,6 +2222,10 @@
 
 	.macro damagenontypes
 	callnative BS_DamageNonTypes
+	.endm
+
+	.macro trygulpmissile
+	callnative BS_TryGulpMissile
 	.endm
 
 	

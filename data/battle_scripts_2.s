@@ -84,15 +84,15 @@ BattleScript_TryNicknameCaughtMon::
 	printstring STRINGID_GIVENICKNAMECAPTURED
 	waitstate
 	setbyte gBattleCommunication, 0
-	trygivecaughtmonnick BattleScript_GiveCaughtMonEnd
+	trygivecaughtmonnick BattleScript_CaughtPokemonSkipNickname
 	givecaughtmon
 	printfromtable gCaughtMonStringIds
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_SuccessBallThrowEnd
+	goto BattleScript_CaughtPokemonDone
 
-BattleScript_GiveCaughtMonEnd::
+BattleScript_CaughtPokemonSkipNickname::
 	givecaughtmon
-BattleScript_SuccessBallThrowEnd::
+BattleScript_CaughtPokemonDone::
 	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 

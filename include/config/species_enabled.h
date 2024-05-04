@@ -1,6 +1,9 @@
 #ifndef GUARD_CONFIG_SPECIES_ENABLED_H
 #define GUARD_CONFIG_SPECIES_ENABLED_H
 
+// WARNING: For some reason, using 1/0 instead of TRUE/FALSE causes cry IDs to be shifted.
+// Please use TRUE/FALSE when using the family toggles.
+
 // Modifying the latest generation WILL change the saveblock due to Dex flags and will require a new save file.
 // Generations of Pokémon are defined by the first member introduced,
 // so Pikachu depends on the Gen 1 setting despite Pichu being the lowest member of the evolution tree.
@@ -594,5 +597,11 @@
 #define P_FAMILY_MUNKIDORI               P_GEN_9_POKEMON
 #define P_FAMILY_FEZANDIPITI             P_GEN_9_POKEMON
 #define P_FAMILY_OGERPON                 P_GEN_9_POKEMON
+#define P_FAMILY_GOUGING_FIRE            P_GEN_9_POKEMON
+#define P_FAMILY_RAGING_BOLT             P_GEN_9_POKEMON
+#define P_FAMILY_IRON_BOULDER            P_GEN_9_POKEMON
+#define P_FAMILY_IRON_CROWN              P_GEN_9_POKEMON
+#define P_FAMILY_TERAPAGOS               P_GEN_9_POKEMON
+#define P_FAMILY_PECHARUNT               P_GEN_9_POKEMON
 
 #endif // GUARD_CONFIG_SPECIES_ENABLED_H

@@ -417,9 +417,9 @@ struct SpeciesInfo /*0x8C*/
  /* 0x64 */ const u32 *shinyPaletteFemale;
  /* 0x68 */ const u8 *iconSprite;
  /* 0x6C */ const u8 *iconSpriteFemale;
-// #if P_FOOTPRINTS
+#if P_FOOTPRINTS
  /* 0x70 */ const u8 *footprint;
-// #endif
+#endif
             // All Pokémon pics are 64x64, but this data table defines where in this 64x64 frame the sprite's non-transparent pixels actually are.
  /* 0x74 */ u8 frontPicSize; // The dimensions of this drawn pixel area.
  /* 0x74 */ u8 frontPicSizeFemale; // The dimensions of this drawn pixel area.
@@ -809,8 +809,7 @@ void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method);
 bool8 IsMonPastEvolutionLevel(struct Pokemon *mon);
 bool32 IsPersonalityFemale(u16 species, u32 personality);
 bool32 TryFormChange(u32 monId, u32 side, u16 method);
-
-
+u16 ModifyStatByNature(u8 nature, u16 stat, u8 statIndex);
 bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, u8 battleId);
 u16 SanitizeSpeciesId(u16 species);
 bool32 IsSpeciesEnabled(u16 species);

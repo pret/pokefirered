@@ -198,8 +198,6 @@ const u16 sBlitTiles_WideEllipse[] = INCBIN_U16("graphics/pokedex/blit_wide_elli
 
 static const u8 gExpandedPlaceholder_PokedexDescription[] = _("");
 
-#include "data/pokemon/pokedex_text.h"
-
 static const struct BgTemplate sBgTemplates[] = {
     {
         .bg = 0,

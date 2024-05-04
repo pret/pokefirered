@@ -61,7 +61,6 @@ static EWRAM_DATA struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
 
 static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
 static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
-static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
 static u8 GetNatureFromPersonality(u32 personality);
 static bool8 PartyMonHasStatus(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 static bool8 IsPokemonStorageFull(void);
@@ -621,10 +620,8 @@ static const struct SpindaSpot sSpindaSpotGraphics[] =
     {.x = 34, .y = 26, .image = INCBIN_U16("graphics/spinda_spots/spot_3.bin")}
 };
 
-// #include "data/pokemon/item_effects.h"
-
-static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
-{                      // Attack  Defense  Speed  Sp.Atk  Sp.Def
+const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
+{                      // Attack  Defense  Speed  Sp.Atk  Sp. Def
     [NATURE_HARDY]   = {    0,      0,      0,      0,      0   },
     [NATURE_LONELY]  = {   +1,     -1,      0,      0,      0   },
     [NATURE_BRAVE]   = {   +1,      0,     -1,      0,      0   },
@@ -658,10 +655,31 @@ static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 
 #include "data/pokemon/trainer_class_lookups.h"
 #include "data/pokemon/experience_tables.h"
+
+#if P_LVL_UP_LEARNSETS >= GEN_9
+#include "data/pokemon/level_up_learnsets/gen_9.h" // Scarlet/Violet
+#elif P_LVL_UP_LEARNSETS >= GEN_8
+#include "data/pokemon/level_up_learnsets/gen_8.h" // Sword/Shield
+#elif P_LVL_UP_LEARNSETS >= GEN_7
+#include "data/pokemon/level_up_learnsets/gen_7.h" // Ultra Sun/ Ultra Moon
+#elif P_LVL_UP_LEARNSETS >= GEN_6
+#include "data/pokemon/level_up_learnsets/gen_6.h" // Omega Ruby/Alpha Sapphire
+#elif P_LVL_UP_LEARNSETS >= GEN_5
+#include "data/pokemon/level_up_learnsets/gen_5.h" // Black 2/White 2
+#elif P_LVL_UP_LEARNSETS >= GEN_4
+#include "data/pokemon/level_up_learnsets/gen_4.h" // HeartGold/SoulSilver
+#elif P_LVL_UP_LEARNSETS >= GEN_3
+#include "data/pokemon/level_up_learnsets/gen_3.h" // Ruby/Sapphire/Emerald
+#elif P_LVL_UP_LEARNSETS >= GEN_2
+#include "data/pokemon/level_up_learnsets/gen_2.h" // Crystal
+#elif P_LVL_UP_LEARNSETS >= GEN_1
+#include "data/pokemon/level_up_learnsets/gen_1.h" // Yellow
+#endif
+
 #include "data/pokemon/teachable_learnsets.h"
-#include "data/pokemon/level_up_learnsets.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_change_tables.h"
+
 #include "data/pokemon/species_info.h"
 
 static const s8 sPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT] =
@@ -4704,7 +4722,7 @@ u8 GetTrainerEncounterMusicId(u16 trainerId)
     return TRAINER_ENCOUNTER_MUSIC(trainerId);
 }
 
-static u16 ModifyStatByNature(u8 nature, u16 stat, u8 statIndex)
+u16 ModifyStatByNature(u8 nature, u16 stat, u8 statIndex)
 {
 // Because this is a u16 it will be unable to store the
 // result of the multiplication for any stat > 595 for a
@@ -4712,17 +4730,17 @@ static u16 ModifyStatByNature(u8 nature, u16 stat, u8 statIndex)
 // Neither occur in the base game, but this can happen if
 // any Nature-affected base stat is increased to a value
 // above 248. The closest by default is Shuckle at 230.
-#ifdef BUGFIX
+// #ifdef BUGFIX
     u32 retVal;
-#else
-    u16 retVal;
-#endif
+// #else
+//     u16 retVal;
+// #endif
 
     // Don't modify HP, Accuracy, or Evasion by nature
     if (statIndex <= STAT_HP || statIndex > NUM_NATURE_STATS)
         return stat;
 
-    switch (sNatureStatTable[nature][statIndex - 1])
+    switch (gNatureStatTable[nature][statIndex - 1])
     {
     case 1:
         retVal = stat * 110;

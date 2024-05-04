@@ -325,7 +325,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_TWO_TURNS_ATTACK] =
     {
-        .battleScript = BattleScript_EffectHit,
+        .battleScript = BattleScript_EffectTwoTurnsAttack,
         .twoTurnEffect = TRUE,
     },
 

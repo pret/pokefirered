@@ -79,7 +79,7 @@ static void SpriteCB_PartySummaryBar(struct Sprite *sprite);
 static void SpriteCB_PartySummaryBall_OnBattleStart(struct Sprite *sprite);
 static u8 GetStatusIconForBattlerId(u8 statusElementId, u8 battlerId);
 static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar);
-static u8 GetReceivedValueInPixels(s32 oldValue, s32 receivedValue, s32 maxValue, u8 scale);
+static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8 scale);
 static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 *arg4, u8 scale);
 static s32 CalcNewBarValue(s32 maxValue, s32 currValue, s32 receivedValue, s32 *arg3, u8 arg4, u16 arg5);
 static void DrawHealthbarOntoScreen(struct TestingBar *barInfo, s32 *currValue, u8 bg, u8 x, u8 y);
@@ -1865,21 +1865,21 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
     }
     else // exp bar
     {
-        u16 increment = GetReceivedValueInPixels(gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
+        u16 expFraction = GetScaledExpFraction(gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
                                                    gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
                                                    gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
                                                    B_EXPBAR_NUM_TILES);
 
-        if (increment == 0)
-            increment = 1;
-        increment = abs(gBattleSpritesDataPtr->battleBars[battlerId].receivedValue / increment);
+        if (expFraction == 0)
+            expFraction = 1;
+        expFraction = abs(gBattleSpritesDataPtr->battleBars[battlerId].receivedValue / expFraction);
 
         currentBarValue = CalcNewBarValue(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
                                           gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
                                           gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
                                           &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
                                           B_EXPBAR_NUM_TILES,
-                                          increment);
+                                          expFraction);
     }
 
     if (whichBar == EXP_BAR || (whichBar == HEALTH_BAR && !gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars))
@@ -1956,14 +1956,14 @@ static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar)
     }
 }
 
-static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 totalPixels, u16 increment)
+static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 scale, u16 toAdd)
 {
     s32 ret, newValue;
-    totalPixels *= 8;
+    scale *= 8;
 
     if (*currValue == -32768) // first function call
     {
-        if (maxValue < totalPixels)
+        if (maxValue < scale)
             *currValue = Q_24_8(oldValue);
         else
             *currValue = oldValue;
@@ -1975,7 +1975,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
     else if (newValue > maxValue)
         newValue = maxValue;
 
-    if (maxValue < totalPixels)
+    if (maxValue < scale)
     {
         if (newValue == Q_24_8_TO_INT(*currValue) && (*currValue & 0xFF) == 0)
             return -1;
@@ -1986,13 +1986,13 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
             return -1;
     }
 
-    if (maxValue < totalPixels) // handle cases of max var having less pixels than the whole bar
+    if (maxValue < scale) // handle cases of max var having less pixels than the whole bar
     {
-        s32 incrementInQ = Q_24_8(maxValue) / totalPixels;
+        s32 toAdd = Q_24_8(maxValue) / scale;
 
         if (receivedValue < 0) // fill bar right
         {
-            *currValue += incrementInQ;
+            *currValue += toAdd;
             ret = Q_24_8_TO_INT(*currValue);
             if (ret >= newValue)
             {
@@ -2002,7 +2002,7 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
         }
         else // move bar left
         {
-            *currValue -= incrementInQ;
+            *currValue -= toAdd;
             ret = Q_24_8_TO_INT(*currValue);
             // try round up
             if ((*currValue & 0xFF) > 0)
@@ -2018,14 +2018,14 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
     {
         if (receivedValue < 0) // fill bar right
         {
-            *currValue += increment;
+            *currValue += toAdd;
             if (*currValue > newValue)
                 *currValue = newValue;
             ret = *currValue;
         }
         else // move bar left
         {
-            *currValue -= increment;
+            *currValue -= toAdd;
             if (*currValue < newValue)
                 *currValue = newValue;
             ret = *currValue;
@@ -2136,12 +2136,12 @@ static void DrawHealthbarOntoScreen(struct TestingBar *barInfo, s32 *currValue, 
     CopyToBgTilemapBufferRect_ChangePalette(bg, tiles, x, y, 6, 1, 17);
 }
 
-static u8 GetReceivedValueInPixels(s32 oldValue, s32 receivedValue, s32 maxValue, u8 totalPixels)
+static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8 scale)
 {
     s32 newVal, result;
     s8 oldToMax, newToMax;
 
-    totalPixels *= 8;
+    scale *= 8;
     newVal = oldValue - receivedValue;
 
     if (newVal < 0)
@@ -2149,8 +2149,8 @@ static u8 GetReceivedValueInPixels(s32 oldValue, s32 receivedValue, s32 maxValue
     else if (newVal > maxValue)
         newVal = maxValue;
 
-    oldToMax = oldValue * totalPixels / maxValue;
-    newToMax = newVal * totalPixels / maxValue;
+    oldToMax = oldValue * scale / maxValue;
+    newToMax = newVal * scale / maxValue;
     result = oldToMax - newToMax;
 
     return abs(result);

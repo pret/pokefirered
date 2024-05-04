@@ -39,7 +39,7 @@ gBattlescriptsForUsingItem::
 	.4byte BattleScript_OpponentUsesHealItem        @ AI_ITEM_HEAL_HP
 	.4byte BattleScript_OpponentUsesStatusCureItem  @ AI_ITEM_CURE_CONDITION
 	.4byte BattleScript_OpponentUsesXItem           @ AI_ITEM_X_STAT
-	.4byte BattleScript_OpponentUsesGuardSpec       @ AI_ITEM_GUARD_SPEC
+	.4byte BattleScript_OpponentUsesGuardSpec       @ AI_ITEM_GUARD_SPECS
 
 gBattlescriptsForRunningByItem::
 	.4byte BattleScript_UseFluffyTail

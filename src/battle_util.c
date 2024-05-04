@@ -4973,35 +4973,120 @@ enum
     ITEM_STATS_CHANGE,
 };
 
-#define TRY_EAT_CONFUSE_BERRY(flavor)                                                       \
-    if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / 2 && !moveTurn)         \
-    {                                                                                       \
-        PREPARE_FLAVOR_BUFFER(gBattleTextBuff1, flavor);                                    \
-        gBattleMoveDamage = gBattleMons[battlerId].maxHP / battlerHoldEffectParam;          \
-        if (gBattleMoveDamage == 0)                                                         \
-            gBattleMoveDamage = 1;                                                          \
-        if (gBattleMons[battlerId].hp + gBattleMoveDamage > gBattleMons[battlerId].maxHP)   \
-            gBattleMoveDamage = gBattleMons[battlerId].maxHP - gBattleMons[battlerId].hp;   \
-        gBattleMoveDamage *= -1;                                                            \
-        if (GetFlavorRelationByPersonality(gBattleMons[battlerId].personality, flavor) < 0) \
-            BattleScriptExecute(BattleScript_BerryConfuseHealEnd2);                         \
-        else                                                                                \
-            BattleScriptExecute(BattleScript_ItemHealHP_RemoveItem);                        \
-        effect = ITEM_HP_CHANGE;                                                            \
-    }
+bool32 IsBattlerTerrainAffected(u32 battler, u32 terrainFlag)
+{
+    if (!(gFieldStatuses & terrainFlag))
+        return FALSE;
+    else if (gStatuses3[battler] & STATUS3_SEMI_INVULNERABLE)
+        return FALSE;
 
-#define TRY_EAT_STAT_UP_BERRY(stat)                                                         \
-    if (gBattleMons[battlerId].hp <= gBattleMons[battlerId].maxHP / battlerHoldEffectParam  \
-    && !moveTurn && gBattleMons[battlerId].statStages[stat] < MAX_STAT_STAGE)               \
-    {                                                                                       \
-        PREPARE_STAT_BUFFER(gBattleTextBuff1, stat);                                        \
-        gEffectBattler = battlerId;                                                         \
-        SET_STATCHANGER(stat, 1, FALSE);                                                    \
-        gBattleScripting.animArg1 = 14 + (stat);                                            \
-        gBattleScripting.animArg2 = 0;                                                      \
-        BattleScriptExecute(BattleScript_BerryStatRaiseEnd2);                               \
-        effect = ITEM_STATS_CHANGE;                                                         \
-    }
+    return IsBattlerGrounded(battler);
+}
+
+bool32 CanSleep(u32 battler)
+{
+    u16 ability = GetBattlerAbility(battler);
+    if (ability == ABILITY_INSOMNIA
+      || ability == ABILITY_VITAL_SPIRIT
+      || ability == ABILITY_COMATOSE
+      || ability == ABILITY_PURIFYING_SALT
+      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
+      || gBattleMons[battler].status1 & STATUS1_ANY
+      || IsAbilityOnSide(battler, ABILITY_SWEET_VEIL)
+      || IsAbilityStatusProtected(battler)
+      || IsBattlerTerrainAffected(battler, STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanBePoisoned(u32 battlerAttacker, u32 battlerTarget)
+{
+    u16 ability = GetBattlerAbility(battlerTarget);
+
+    if (!(CanPoisonType(battlerAttacker, battlerTarget))
+     || gSideStatuses[GetBattlerSide(battlerTarget)] & SIDE_STATUS_SAFEGUARD
+     || gBattleMons[battlerTarget].status1 & STATUS1_ANY
+     || ability == ABILITY_IMMUNITY
+     || ability == ABILITY_COMATOSE
+     || ability == ABILITY_PURIFYING_SALT
+     || IsAbilityOnSide(battlerTarget, ABILITY_PASTEL_VEIL)
+     || IsAbilityStatusProtected(battlerTarget)
+     || IsBattlerTerrainAffected(battlerTarget, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanBeBurned(u32 battler)
+{
+    u16 ability = GetBattlerAbility(battler);
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_FIRE)
+      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
+      || gBattleMons[battler].status1 & STATUS1_ANY
+      || ability == ABILITY_WATER_VEIL
+      || ability == ABILITY_WATER_BUBBLE
+      || ability == ABILITY_COMATOSE
+      || ability == ABILITY_THERMAL_EXCHANGE
+      || ability == ABILITY_PURIFYING_SALT
+      || IsAbilityStatusProtected(battler)
+      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanBeParalyzed(u32 battler)
+{
+    u16 ability = GetBattlerAbility(battler);
+    if ((B_PARALYZE_ELECTRIC >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC))
+        || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
+        || ability == ABILITY_LIMBER
+        || ability == ABILITY_COMATOSE
+        || ability == ABILITY_PURIFYING_SALT
+        || gBattleMons[battler].status1 & STATUS1_ANY
+        || IsAbilityStatusProtected(battler)
+        || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanBeFrozen(u32 battler)
+{
+    u16 ability = GetBattlerAbility(battler);
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
+      || IsBattlerWeatherAffected(battler, B_WEATHER_SUN)
+      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
+      || ability == ABILITY_MAGMA_ARMOR
+      || ability == ABILITY_COMATOSE
+      || ability == ABILITY_PURIFYING_SALT
+      || gBattleMons[battler].status1 & STATUS1_ANY
+      || IsAbilityStatusProtected(battler)
+      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanGetFrostbite(u32 battler)
+{
+    u16 ability = GetBattlerAbility(battler);
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
+      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
+      || ability == ABILITY_MAGMA_ARMOR
+      || ability == ABILITY_COMATOSE
+      || ability == ABILITY_PURIFYING_SALT
+      || gBattleMons[battler].status1 & STATUS1_ANY
+      || IsAbilityStatusProtected(battler)
+      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
+
+bool32 CanBeConfused(u32 battler)
+{
+    if (GetBattlerAbility(battler) == ABILITY_OWN_TEMPO
+      || gBattleMons[battler].status2 & STATUS2_CONFUSION
+      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
+        return FALSE;
+    return TRUE;
+}
 
 // second argument is 1/X of current hp compared to max hp
 bool32 HasEnoughHpToEatBerry(u32 battler, u32 hpFraction, u32 itemId)
@@ -7193,16 +7278,6 @@ u32 GetBattlerMoveTargetType(u32 battler, u32 move)
         return MOVE_TARGET_BOTH;
     else
         return gMovesInfo[move].target;
-}
-
-bool32 IsBattlerTerrainAffected(u32 battler, u32 terrainFlag)
-{
-    if (!(gFieldStatuses & terrainFlag))
-        return FALSE;
-    else if (gStatuses3[battler] & STATUS3_SEMI_INVULNERABLE)
-        return FALSE;
-
-    return IsBattlerGrounded(battler);
 }
 
 bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
@@ -9497,111 +9572,6 @@ void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
 bool32 TestIfSheerForceAffected(u32 battler, u16 move)
 {
     return GetBattlerAbility(battler) == ABILITY_SHEER_FORCE && MoveIsAffectedBySheerForce(move);
-}
-
-bool32 CanSleep(u32 battler)
-{
-    u16 ability = GetBattlerAbility(battler);
-    if (ability == ABILITY_INSOMNIA
-      || ability == ABILITY_VITAL_SPIRIT
-      || ability == ABILITY_COMATOSE
-      || ability == ABILITY_PURIFYING_SALT
-      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
-      || gBattleMons[battler].status1 & STATUS1_ANY
-      || IsAbilityOnSide(battler, ABILITY_SWEET_VEIL)
-      || IsAbilityStatusProtected(battler)
-      || IsBattlerTerrainAffected(battler, STATUS_FIELD_ELECTRIC_TERRAIN | STATUS_FIELD_MISTY_TERRAIN))
-        return FALSE;
-    return TRUE;
-}
-
-bool32 CanBePoisoned(u32 battlerAttacker, u32 battlerTarget)
-{
-    u16 ability = GetBattlerAbility(battlerTarget);
-
-    if (!(CanPoisonType(battlerAttacker, battlerTarget))
-     || gSideStatuses[GetBattlerSide(battlerTarget)] & SIDE_STATUS_SAFEGUARD
-     || gBattleMons[battlerTarget].status1 & STATUS1_ANY
-     || ability == ABILITY_IMMUNITY
-     || ability == ABILITY_COMATOSE
-     || ability == ABILITY_PURIFYING_SALT
-     || IsAbilityOnSide(battlerTarget, ABILITY_PASTEL_VEIL)
-     || IsAbilityStatusProtected(battlerTarget)
-     || IsBattlerTerrainAffected(battlerTarget, STATUS_FIELD_MISTY_TERRAIN))
-        return FALSE;
-    return TRUE;
-}
-
-bool32 CanBeBurned(u32 battler)
-{
-    u16 ability = GetBattlerAbility(battler);
-    if (IS_BATTLER_OF_TYPE(battler, TYPE_FIRE)
-      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
-      || gBattleMons[battler].status1 & STATUS1_ANY
-      || ability == ABILITY_WATER_VEIL
-      || ability == ABILITY_WATER_BUBBLE
-      || ability == ABILITY_COMATOSE
-      || ability == ABILITY_THERMAL_EXCHANGE
-      || ability == ABILITY_PURIFYING_SALT
-      || IsAbilityStatusProtected(battler)
-      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
-        return FALSE;
-    return TRUE;
-}
-
-bool32 CanBeParalyzed(u32 battler)
-{
-    u16 ability = GetBattlerAbility(battler);
-    if ((B_PARALYZE_ELECTRIC >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_ELECTRIC))
-        || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
-        || ability == ABILITY_LIMBER
-        || ability == ABILITY_COMATOSE
-        || ability == ABILITY_PURIFYING_SALT
-        || gBattleMons[battler].status1 & STATUS1_ANY
-        || IsAbilityStatusProtected(battler)
-        || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
-        return FALSE;
-    return TRUE;
-}
-
-bool32 CanBeFrozen(u32 battler)
-{
-    u16 ability = GetBattlerAbility(battler);
-    if (IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
-      || IsBattlerWeatherAffected(battler, B_WEATHER_SUN)
-      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
-      || ability == ABILITY_MAGMA_ARMOR
-      || ability == ABILITY_COMATOSE
-      || ability == ABILITY_PURIFYING_SALT
-      || gBattleMons[battler].status1 & STATUS1_ANY
-      || IsAbilityStatusProtected(battler)
-      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
-        return FALSE;
-    return TRUE;
-}
-
-bool32 CanGetFrostbite(u32 battler)
-{
-    u16 ability = GetBattlerAbility(battler);
-    if (IS_BATTLER_OF_TYPE(battler, TYPE_ICE)
-      || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD
-      || ability == ABILITY_MAGMA_ARMOR
-      || ability == ABILITY_COMATOSE
-      || ability == ABILITY_PURIFYING_SALT
-      || gBattleMons[battler].status1 & STATUS1_ANY
-      || IsAbilityStatusProtected(battler)
-      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
-        return FALSE;
-    return TRUE;
-}
-
-bool32 CanBeConfused(u32 battler)
-{
-    if (GetBattlerAbility(battler) == ABILITY_OWN_TEMPO
-      || gBattleMons[battler].status2 & STATUS2_CONFUSION
-      || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN))
-        return FALSE;
-    return TRUE;
 }
 
 void TryRestoreHeldItems(void)

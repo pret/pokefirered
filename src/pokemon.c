@@ -1688,26 +1688,21 @@ static void GiveMonInitialMoveset(struct Pokemon *mon)
     GiveBoxMonInitialMoveset(&mon->box);
 }
 
-static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
+void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 {
     u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromBoxMonExp(boxMon);
     s32 i;
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
-    for (i = 0; gSpeciesInfo[species].levelUpLearnset[i].move != LEVEL_UP_MOVE_END; i++)
+    for (i = 0; learnset[i].move != LEVEL_UP_MOVE_END; i++)
     {
-        u16 moveLevel;
-        u16 move;
-
-        moveLevel = gSpeciesInfo[species].levelUpLearnset[i].level;
-
-        if (moveLevel > level)
+        if (learnset[i].level > level)
             break;
-
-        move = gSpeciesInfo[species].levelUpLearnset[i].move;
-
-        if (GiveMoveToBoxMon(boxMon, move) == MON_HAS_MAX_MOVES)
-            DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
+        if (learnset[i].level == 0)
+            continue;
+        if (GiveMoveToBoxMon(boxMon, learnset[i].move) == MON_HAS_MAX_MOVES)
+            DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, learnset[i].move);
     }
 }
 
@@ -1716,6 +1711,7 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
     u32 retVal = MOVE_NONE;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
     // since you can learn more than one move per level
     // the game needs to know whether you decided to
@@ -1725,17 +1721,17 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
     {
         sLearningMoveTableID = 0;
 
-        while (gSpeciesInfo[species].levelUpLearnset[sLearningMoveTableID].level != level)
+        while (learnset[sLearningMoveTableID].level != level)
         {
             sLearningMoveTableID++;
-            if (gSpeciesInfo[species].levelUpLearnset[sLearningMoveTableID].move == LEVEL_UP_MOVE_END)
+            if (learnset[sLearningMoveTableID].move == LEVEL_UP_MOVE_END)
                 return MOVE_NONE;
         }
     }
 
-    if (gSpeciesInfo[species].levelUpLearnset[sLearningMoveTableID].level == level)
+    if (learnset[sLearningMoveTableID].level == level)
     {
-        gMoveToLearn = gSpeciesInfo[species].levelUpLearnset[sLearningMoveTableID].move;
+        gMoveToLearn = learnset[sLearningMoveTableID].move;
         sLearningMoveTableID++;
         retVal = GiveMoveToMon(mon, gMoveToLearn);
     }
@@ -1768,6 +1764,33 @@ void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move)
     }
 
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+}
+
+u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+
+    // Since you can learn more than one move per level,
+    // the game needs to know whether you decided to
+    // learn it or keep the old set to avoid asking
+    // you to learn the same move over and over again.
+    if (firstMove)
+    {
+        sLearningMoveTableID = 0;
+    }
+    while(learnset[sLearningMoveTableID].move != LEVEL_UP_MOVE_END)
+    {
+        while (learnset[sLearningMoveTableID].level == 0 || learnset[sLearningMoveTableID].level == level)
+        {
+            gMoveToLearn = learnset[sLearningMoveTableID].move;
+            sLearningMoveTableID++;
+            return GiveMoveToMon(mon, gMoveToLearn);
+        }
+        sLearningMoveTableID++;
+    }
+    return 0;
 }
 
 static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
@@ -5278,12 +5301,6 @@ bool32 IsMoveHM(u16 move)
 bool8 IsMonSpriteNotFlipped(u16 species)
 {
     return gSpeciesInfo[species].noFlip;
-}
-
-static s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
-{
-    u8 nature = GetNature(mon);
-    return sPokeblockFlavorCompatibilityTable[nature * FLAVOR_COUNT + flavor];
 }
 
 s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)

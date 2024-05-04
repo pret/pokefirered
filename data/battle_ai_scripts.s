@@ -16,7 +16,7 @@
 
 	.align 2
 gBattleAI_ScriptsTable::
-    .4byte AI_CheckBadMove          @ AI_SCRIPT_CHECK_BAD_MOVE
+	.4byte AI_CheckBadMove          @ AI_SCRIPT_CHECK_BAD_MOVE
 	.4byte AI_CheckViability        @ AI_SCRIPT_CHECK_VIABILITY
 	.4byte AI_TryToFaint            @ AI_SCRIPT_TRY_TO_FAINT
 	.4byte AI_SetupFirstTurn        @ AI_SCRIPT_SETUP_FIRST_TURN

@@ -49,7 +49,7 @@ gBattlescriptsForSafariActions::
 	.4byte BattleScript_ActionWatchesCarefully
 	.4byte BattleScript_ActionThrowRock
 	.4byte BattleScript_ActionThrowBait
-	.4byte BattleScript_ActionWatchesCarefullyLeftoverWallyPrepToThrow
+	.4byte BattleScript_ActionLeftoverWallyPrepToThrow
 
 BattleScript_BallThrow::
 	jumpifbattletype BATTLE_TYPE_OLD_MAN_TUTORIAL, BattleScript_BallThrowByOldMan
@@ -226,7 +226,7 @@ BattleScript_ActionThrowBait::
 	playanimation BS_ATTACKER, B_ANIM_BAIT_THROW
 	end2
 
-BattleScript_ActionWatchesCarefullyLeftoverWallyPrepToThrow::
+BattleScript_ActionLeftoverWallyPrepToThrow::
 	printstring STRINGID_RETURNMON
 	waitmessage B_WAIT_TIME_LONG
 	returnatktoball

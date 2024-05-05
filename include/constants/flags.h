@@ -886,7 +886,7 @@
 #define FLAG_0x359               0x359
 #define FLAG_0x35A               0x35A
 #define FLAG_0x35B               0x35B
-#define FLAG_0x35C               0x35C
+#define FLAG_SET_WALL_CLOCK      0x35C
 #define FLAG_0x35D               0x35D
 #define FLAG_0x35E               0x35E
 #define FLAG_0x35F               0x35F
@@ -938,6 +938,9 @@
 #define FLAG_0x38D               0x38D
 #define FLAG_0x38E               0x38E
 #define FLAG_0x38F               0x38F
+
+#define DAILY_FLAGS_START                           (FLAG_0x38F + (8 - FLAG_0x38F % 8))
+
 #define FLAG_0x390               0x390
 #define FLAG_0x391               0x391
 #define FLAG_0x392               0x392
@@ -1002,6 +1005,9 @@
 #define FLAG_0x3CD               0x3CD
 #define FLAG_0x3CE               0x3CE
 #define FLAG_0x3CF               0x3CF
+
+#define DAILY_FLAGS_END          (FLAG_0x3CF + (7 - FLAG_0x3CF % 8))
+
 #define FLAG_0x3D0               0x3D0
 #define FLAG_0x3D1               0x3D1
 #define FLAG_0x3D2               0x3D2
@@ -1394,7 +1400,7 @@
 #define FLAG_SYS_SAW_HELP_SYSTEM_INTRO                              (SYS_FLAGS + 0x3C)
 #define FLAG_0x83D                                                  (SYS_FLAGS + 0x3D)
 #define FLAG_OPENED_START_MENU                                      (SYS_FLAGS + 0x3E)
-#define FLAG_0x83F                                                  (SYS_FLAGS + 0x3F)
+#define FLAG_SYS_CLOCK_SET                                          (SYS_FLAGS + 0x3F) // FLAG_0x83F
 #define FLAG_SYS_NATIONAL_DEX                                       (SYS_FLAGS + 0x40)
 #define FLAG_SYS_PC_STORAGE_DISABLED                                (SYS_FLAGS + 0x41)
 #define FLAG_SYS_INFORMED_OF_LOCAL_WIRELESS_PLAYER                  (SYS_FLAGS + 0x42)

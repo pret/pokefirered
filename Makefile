@@ -92,7 +92,7 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 
 ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym MODERN=$(MODERN)
 
-LDFLAGS = -Map ../../$(MAP)
+LDFLAGS = --print-memory-usage -Map ../../$(MAP)
 
 LIB := $(LIBPATH) -lc -lgcc
 ifneq ($(MODERN),0)
@@ -238,6 +238,8 @@ sound/songs/%.s: sound/songs/%.mid
 	$(MID) $< $@
 
 ifeq ($(MODERN),0)
+$(C_BUILDDIR)/siirtc.o: CFLAGS := -mthumb-interwork
+
 $(C_BUILDDIR)/agb_flash.o: CFLAGS := -O -mthumb-interwork
 $(C_BUILDDIR)/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
 $(C_BUILDDIR)/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork

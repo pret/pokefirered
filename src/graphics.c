@@ -1258,6 +1258,12 @@ const u16 gTilesetPalettes_General[][16] =
 
 const u32 gTilesetTiles_General[] = INCBIN_U32("data/tilesets/primary/general/tiles.4bpp.lz");
 
+const u16 gWallClockMale_Pal[]      = INCBIN_U16("graphics/wallclock/male.gbapal");
+const u16 gWallClockFemale_Pal[]    = INCBIN_U16("graphics/wallclock/female.gbapal");
+const u32 gWallClock_Gfx[]          = INCBIN_U32("graphics/wallclock/clock.4bpp.lz");
+const u32 gWallClockStart_Tilemap[] = INCBIN_U32("graphics/wallclock/clock_start.bin.lz");
+const u32 gWallClockView_Tilemap[]  = INCBIN_U32("graphics/wallclock/clock_view.bin.lz");
+
 const u8 gBerryFixGameboy_Pal[] = INCBIN_U8("graphics/berry_fix/gba_small.gbapal");
 const u8 gBerryFixGameboy_Gfx[] = INCBIN_U8("graphics/berry_fix/gba_small.4bpp.lz");
 const u8 gBerryFixGameboy_Tilemap[] = INCBIN_U8("graphics/berry_fix/gba_small.bin.lz");

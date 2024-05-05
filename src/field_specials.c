@@ -31,6 +31,8 @@
 #include "mystery_gift.h"
 #include "naming_screen.h"
 #include "party_menu.h"
+#include "rtc.h"
+#include "wallclock.h"
 #include "dynamic_placeholder_text_util.h"
 #include "new_menu_helpers.h"
 #include "constants/songs.h"
@@ -91,6 +93,13 @@ void ShowDiploma(void)
 {
     QuestLog_CutRecording();
     SetMainCallback2(CB2_ShowDiploma);
+    LockPlayerFieldControls();
+}
+
+void Special_ViewWallClock(void)
+{
+    gMain.savedCallback = CB2_ReturnToField;
+    SetMainCallback2(CB2_ViewWallClock);
     LockPlayerFieldControls();
 }
 
@@ -158,6 +167,16 @@ u8 GetBattleOutcome(void)
 void SetHiddenItemFlag(void)
 {
     FlagSet(gSpecialVar_0x8004);
+}
+
+u16 GetWeekCount(void)
+{
+    u16 weekCount = gLocalTime.days / 7;
+    if (weekCount > 9999)
+    {
+        weekCount = 9999;
+    }
+    return weekCount;
 }
 
 u8 GetLeadMonFriendship(void)

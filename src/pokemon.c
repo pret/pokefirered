@@ -3,6 +3,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "random.h"
+#include "rtc.h"
 #include "text.h"
 #include "data.h"
 #include "battle.h"
@@ -4103,37 +4104,37 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_DAY:
-                if (/*GetTimeOfDay() != TIME_NIGHT &&*/ friendship >= FRIENDSHIP_EVO_THRESHOLD)
+                if (GetTimeOfDay() != TIME_NIGHT && friendship >= FRIENDSHIP_EVO_THRESHOLD)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_LEVEL_DAY:
-                if (/* GetTimeOfDay() != TIME_NIGHT && */ evolutions[i].param <= level)
+                if (GetTimeOfDay() != TIME_NIGHT && evolutions[i].param <= level)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_NIGHT:
-                if (/* GetTimeOfDay() == TIME_NIGHT && */ friendship >= FRIENDSHIP_EVO_THRESHOLD)
+                if (GetTimeOfDay() == TIME_NIGHT && friendship >= FRIENDSHIP_EVO_THRESHOLD)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_LEVEL_NIGHT:
-                if (/* GetTimeOfDay() == TIME_NIGHT && */ evolutions[i].param <= level)
+                if (GetTimeOfDay() == TIME_NIGHT && evolutions[i].param <= level)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_ITEM_HOLD_NIGHT:
-                if (/* GetTimeOfDay() == TIME_NIGHT && */ heldItem == evolutions[i].param)
+                if (GetTimeOfDay() == TIME_NIGHT && heldItem == evolutions[i].param)
                 {
                     targetSpecies = evolutions[i].targetSpecies;
                     consumeItem = TRUE;
                 }
                 break;
             case EVO_ITEM_HOLD_DAY:
-                if (/* GetTimeOfDay() != TIME_NIGHT && */ heldItem == evolutions[i].param)
+                if (GetTimeOfDay() != TIME_NIGHT && heldItem == evolutions[i].param)
                 {
                     targetSpecies = evolutions[i].targetSpecies;
                     consumeItem = TRUE;
                 }
                 break;
             case EVO_LEVEL_DUSK:
-                if (/* GetTimeOfDay() == TIME_EVENING && */ evolutions[i].param <= level)
+                if (GetTimeOfDay() == TIME_EVENING && evolutions[i].param <= level)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_LEVEL:
@@ -4374,11 +4375,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_ITEM_NIGHT:
-                if (/* GetTimeOfDay() == TIME_NIGHT && */ evolutions[i].param == evolutionItem)
+                if (GetTimeOfDay() == TIME_NIGHT && evolutions[i].param == evolutionItem)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             case EVO_ITEM_DAY:
-                if (/* GetTimeOfDay() != TIME_NIGHT && */ evolutions[i].param == evolutionItem)
+                if (GetTimeOfDay() != TIME_NIGHT && evolutions[i].param == evolutionItem)
                     targetSpecies = evolutions[i].targetSpecies;
                 break;
             }
@@ -4949,14 +4950,44 @@ u16 GetMonEVCount(struct Pokemon *mon)
     return count;
 }
 
-// This function was stubbed from RS, but it is stubbed badly.
-// This variable is likely the u8 passed to SetMonData in RSE.
-// The pointer reference causes agbcc to reserve it on the stack before even checking
-// whether it's used.
 void RandomlyGivePartyPokerus(struct Pokemon *party)
 {
-    u8 foo;
-    &foo;
+    u16 rnd = Random();
+    if (rnd == 0x4000 || rnd == 0x8000 || rnd == 0xC000)
+    {
+        struct Pokemon *mon;
+
+        do
+        {
+            do
+            {
+                rnd = Random() % PARTY_SIZE;
+                mon = &party[rnd];
+            }
+            while (!GetMonData(mon, MON_DATA_SPECIES, 0));
+        }
+        while (GetMonData(mon, MON_DATA_IS_EGG, 0));
+
+        if (!(CheckPartyHasHadPokerus(party, gBitTable[rnd])))
+        {
+            u8 rnd2;
+
+            do
+            {
+                rnd2 = Random();
+            }
+            while ((rnd2 & 0x7) == 0);
+
+            if (rnd2 & 0xF0)
+                rnd2 &= 0x7;
+
+            rnd2 |= (rnd2 << 4);
+            rnd2 &= 0xF3;
+            rnd2++;
+
+            SetMonData(&party[rnd], MON_DATA_POKERUS, &rnd2);
+        }
+    }
 }
 
 u8 CheckPartyPokerus(struct Pokemon *party, u8 selection)
@@ -5017,16 +5048,58 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
 
 // These two functions are stubbed from RS, but they're stubbed badly.
 // See note on RandomlyGivePartyPokerus above.
-static void UpdatePartyPokerusTime(void)
+void UpdatePartyPokerusTime(u16 days)
 {
-    u8 foo;
-    &foo;
+    int i;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0))
+        {
+            u8 pokerus = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS, 0);
+            if (pokerus & 0xF)
+            {
+                if ((pokerus & 0xF) < days || days > 4)
+                    pokerus &= 0xF0;
+                else
+                    pokerus -= days;
+
+                if (pokerus == 0)
+                    pokerus = 0x10;
+
+                SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &pokerus);
+            }
+        }
+    }
 }
 
 void PartySpreadPokerus(struct Pokemon *party)
 {
-    u8 foo;
-    &foo;
+    if ((Random() % 3) == 0)
+    {
+        int i;
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_SPECIES, 0))
+            {
+                u8 pokerus = GetMonData(&party[i], MON_DATA_POKERUS, 0);
+                u8 curPokerus = pokerus;
+                if (pokerus)
+                {
+                    if (pokerus & 0xF)
+                    {
+                        // Spread to adjacent party members.
+                        if (i != 0 && !(GetMonData(&party[i - 1], MON_DATA_POKERUS, 0) & 0xF0))
+                            SetMonData(&party[i - 1], MON_DATA_POKERUS, &curPokerus);
+                        if (i != (PARTY_SIZE - 1) && !(GetMonData(&party[i + 1], MON_DATA_POKERUS, 0) & 0xF0))
+                        {
+                            SetMonData(&party[i + 1], MON_DATA_POKERUS, &curPokerus);
+                            i++;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 static void SetMonExpWithMaxLevelCheck(struct Pokemon *mon, int species, u8 unused, u32 data)
@@ -5926,18 +5999,15 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                 case FORM_CHANGE_ITEM_USE:
                     if (arg == formChanges[i].param1)
                     {
-                        // TODO: time
                         switch (formChanges[i].param2)
                         {
                         case DAY:
-                            // if (GetTimeOfDay() != TIME_NIGHT)
-                            //     targetSpecies = formChanges[i].targetSpecies;
-                            targetSpecies = SPECIES_NONE;
+                            if (GetTimeOfDay() != TIME_NIGHT)
+                                targetSpecies = formChanges[i].targetSpecies;
                             break;
                         case NIGHT:
-                            // if (GetTimeOfDay() == TIME_NIGHT)
-                            //     targetSpecies = formChanges[i].targetSpecies;
-                            targetSpecies = SPECIES_NONE;
+                            if (GetTimeOfDay() == TIME_NIGHT)
+                                targetSpecies = formChanges[i].targetSpecies;
                             break;
                         default:
                             targetSpecies = formChanges[i].targetSpecies;
@@ -5971,20 +6041,17 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                     targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_TIME_OF_DAY:
-                    // TODO: time
-                    // switch (formChanges[i].param1)
-                    // {
-                    // case DAY:
-                    //     if (GetTimeOfDay() != TIME_NIGHT)
-                    //         targetSpecies = formChanges[i].targetSpecies;
-                    //     break;
-                    // case NIGHT:
-                    //     if (GetTimeOfDay() == TIME_NIGHT)
-                    //         targetSpecies = formChanges[i].targetSpecies;
-                    //     break;
-                    // }
-                    // break;
-                    targetSpecies = SPECIES_NONE;
+                    switch (formChanges[i].param1)
+                    {
+                    case DAY:
+                        if (GetTimeOfDay() != TIME_NIGHT)
+                            targetSpecies = formChanges[i].targetSpecies;
+                        break;
+                    case NIGHT:
+                        if (GetTimeOfDay() == TIME_NIGHT)
+                            targetSpecies = formChanges[i].targetSpecies;
+                        break;
+                    }
                     break;
                 }
             }

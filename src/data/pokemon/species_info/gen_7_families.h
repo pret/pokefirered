@@ -1126,7 +1126,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         FOOTPRINT(Crabrawler)
         .levelUpLearnset = sCrabrawlerLevelUpLearnset,
         .teachableLearnset = sCrabrawlerTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_SPECIFIC_MAP, MAPSEC_SEAFOAM_ISLANDS, SPECIES_CRABOMINABLE},
+        .evolutions = EVOLUTION({EVO_SPECIFIC_MAP, MAP_SEAFOAM_ISLANDS_B4F, SPECIES_CRABOMINABLE},
                                 {EVO_ITEM, ITEM_ICE_STONE, SPECIES_CRABOMINABLE}),
     },
 

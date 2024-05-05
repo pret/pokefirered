@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
+#include "constants/map_groups.h"
 #include "constants/pokemon.h"
 
 #define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
@@ -767,6 +768,7 @@ u16 GetMonEVCount(struct Pokemon *mon);
 void RandomlyGivePartyPokerus(struct Pokemon *party);
 u8 CheckPartyPokerus(struct Pokemon *party, u8 party_bm);
 u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection);
+void UpdatePartyPokerusTime(u16 days);
 void PartySpreadPokerus(struct Pokemon *party);
 bool8 TryIncrementMonLevel(struct Pokemon *mon);
 u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm);

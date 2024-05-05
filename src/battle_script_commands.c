@@ -6478,7 +6478,8 @@ static void Cmd_moveend(void)
         case MOVEEND_SET_EVOLUTION_TRACKER:
         {
             // If the Pokémon needs to keep track of move usage for its evolutions, do it
-            TryUpdateEvolutionTracker(EVO_LEVEL_MOVE_TWENTY_TIMES, 1, originallyUsedMove);
+            if (originallyUsedMove != MOVE_NONE)
+                TryUpdateEvolutionTracker(EVO_LEVEL_MOVE_TWENTY_TIMES, 1, originallyUsedMove);
             gBattleScripting.moveendState++;
             break;
 
@@ -16362,8 +16363,8 @@ static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount, u16 use
                     case EVO_LEVEL_RECOIL_DAMAGE_FEMALE:
                         if (gBattleMons[gBattlerAttacker].hp == 0)
                             val = 0;
-                    default:
                         SetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_EVOLUTION_TRACKER, &val);
+                        break;
                 }
                 return;
             }
@@ -16449,11 +16450,19 @@ static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 byIntimidate)
 void BS_TryUpdateRecoilTracker(void)
 {
     NATIVE_ARGS();
+    u8 gender = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]);
 
-    if (GetMonGender(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) == MON_MALE)
-        TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_MALE, gBattleMoveDamage, MOVE_NONE);
-    else
-        TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_FEMALE, gBattleMoveDamage, MOVE_NONE);
+    switch(gender)
+    {
+        case MON_MALE:
+            TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_MALE, gBattleMoveDamage, MOVE_NONE);
+            break;
+        case MON_FEMALE:
+            TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_FEMALE, gBattleMoveDamage, MOVE_NONE);
+            break;
+        case MON_GENDERLESS:
+            break;
+    }
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }

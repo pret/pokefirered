@@ -623,8 +623,6 @@ static const u32 sStarObjTiles[] = INCBIN_U32( "graphics/summary_screen/shiny_st
 static const u32 sBgTilemap_MovesInfoPage[] = INCBIN_U32( "graphics/summary_screen/moves_info_page.bin.lz");
 static const u32 sBgTilemap_MovesPage[] = INCBIN_U32( "graphics/summary_screen/moves_page.bin.lz");
 
-#include "data/text/nature_names.h"
-
 static const u8 *const sEggHatchTimeTexts[] = {
     gText_PokeSum_EggHatch_LongTime,
     gText_PokeSum_EggHatch_SomeTime,
@@ -2270,7 +2268,7 @@ static void BufferMonMoveI(u8 i)
 
     sMonSummaryScreen->numMoves++;
     sMonSummaryScreen->moveTypes[i] = gMovesInfo[sMonSummaryScreen->moveIds[i]].type;
-    StringCopy(sMonSummaryScreen->summary.moveNameStrBufs[i], gMoveNames[sMonSummaryScreen->moveIds[i]]);
+    StringCopy(sMonSummaryScreen->summary.moveNameStrBufs[i], gMovesInfo[sMonSummaryScreen->moveIds[i]].name);
 
     if (i >= 4 && sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
     {

@@ -2055,7 +2055,10 @@ static void Task_PartyMenu_PokedudeStep(u8 taskId)
             break;
         case 240:
             PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);
-            sCursorOptions[sPartyMenuInternal->actions[0]].func(taskId);
+            if (sPartyMenuInternal->actions[0] >= CURSOR_OPTION_FIELD_MOVES)
+                CursorCB_FieldMove(taskId);
+            else
+                sCursorOptions[sPartyMenuInternal->actions[0]].func(taskId);
             break;
         }
         ++data[0];
@@ -2571,9 +2574,14 @@ static u8 DisplaySelectionWindow(u8 windowType)
     fontAttribute = GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING);
     for (i = 0; i < sPartyMenuInternal->numActions; ++i)
     {
+        const u8 *text;
         u8 fontColorsId = (sPartyMenuInternal->actions[i] >= CURSOR_OPTION_FIELD_MOVES) ? 4 : 3;
+        if (sPartyMenuInternal->actions[i] >= CURSOR_OPTION_FIELD_MOVES)
+            text = gMovesInfo[sFieldMoves[sPartyMenuInternal->actions[i] - CURSOR_OPTION_FIELD_MOVES]].name;
+        else
+            text = sCursorOptions[sPartyMenuInternal->actions[i]].text;
         
-        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_NORMAL, cursorDimension, (i * 16) + 2, fontAttribute, 0, sFontColorTable[fontColorsId], 0, sCursorOptions[sPartyMenuInternal->actions[i]].text);
+        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_NORMAL, cursorDimension, (i * 16) + 2, fontAttribute, 0, sFontColorTable[fontColorsId], 0, text);
     }
     Menu_InitCursorInternal(sPartyMenuInternal->windowId[0], FONT_NORMAL, 0, 2, 16, sPartyMenuInternal->numActions, 0, 1);
     ScheduleBgCopyTilemapToVram(2);
@@ -3095,11 +3103,17 @@ static void Task_HandleSelectionMenuInput(u8 taskId)
         case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
             PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);
-            sCursorOptions[sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1]].func(taskId);
+            if (sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1] >= CURSOR_OPTION_FIELD_MOVES)
+                CursorCB_FieldMove(taskId);
+            else
+                sCursorOptions[sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1]].func(taskId);
             break;
         default:
             PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);
-            sCursorOptions[sPartyMenuInternal->actions[input]].func(taskId);
+            if (sPartyMenuInternal->actions[input] >= CURSOR_OPTION_FIELD_MOVES)
+                CursorCB_FieldMove(taskId);
+            else
+                sCursorOptions[sPartyMenuInternal->actions[input]].func(taskId);
             break;
         }
     }
@@ -4931,7 +4945,7 @@ static void ShowMoveSelectWindow(u8 slot)
         move = GetMonData(&gPlayerParty[slot], MON_DATA_MOVE1 + i);
         AddTextPrinterParameterized(windowId,
                                     fontId,
-                                    gMoveNames[move],
+                                    gMovesInfo[move].name,
                                     GetFontAttribute(fontId, FONTATTR_MAX_LETTER_WIDTH) + GetFontAttribute(fontId, FONTATTR_LETTER_SPACING),
                                     (i * 16) + 2,
                                     TEXT_SKIP_DRAW,
@@ -5065,7 +5079,7 @@ static void ItemUseCB_RestorePP(u8 taskId, TaskFunc func)
     PlaySE(SE_USE_ITEM);
     RemoveBagItem(gSpecialVar_ItemId, 1);
     move = GetMonData(mon, gPartyMenu.ppMoveSlot + MON_DATA_MOVE1);
-    StringCopy(gStringVar1, gMoveNames[move]);
+    StringCopy(gStringVar1, gMovesInfo[move].name);
     GetMedicineItemEffectMessage(gSpecialVar_ItemId);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
@@ -5167,7 +5181,7 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc func)
     item = gSpecialVar_ItemId;
     GetMonNickname(mon, gStringVar1);
     learnMoveId = ItemIdToBattleMoveId(item);
-    StringCopy(gStringVar2, gMoveNames[learnMoveId]);
+    StringCopy(gStringVar2, gMovesInfo[learnMoveId].name);
     learnMoveMethod = LEARN_VIA_TMHM;
     switch (CanMonLearnTMTutor(mon, item, 0))
     {
@@ -5209,7 +5223,7 @@ static void Task_LearnedMove(u8 taskId)
             RemoveBagItem(item, 1);
     }
     GetMonNickname(mon, gStringVar1);
-    StringCopy(gStringVar2, gMoveNames[learnMoveId]);
+    StringCopy(gStringVar2, gMovesInfo[learnMoveId].name);
     StringExpandPlaceholders(gStringVar4, gText_PkmnLearnedMove3);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
@@ -5321,7 +5335,7 @@ static void Task_ReplaceMoveWithTMHM(u8 taskId)
 
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, move);
     GetMonNickname(mon, gStringVar1);
-    StringCopy(gStringVar2, gMoveNames[move]);
+    StringCopy(gStringVar2, gMovesInfo[move].name);
     RemoveMonPPBonus(mon, moveIdx);
     SetMonMoveSlot(mon, gPartyMenu.learnMoveId, moveIdx);
     Task_LearnedMove(taskId);
@@ -5333,7 +5347,7 @@ static void DisplayPartyMenuForgotMoveMessage(u8 taskId)
     u16 move = GetMonData(mon, MON_DATA_MOVE1 + GetMoveSlotToReplace());
 
     GetMonNickname(mon, gStringVar1);
-    StringCopy(gStringVar2, gMoveNames[move]);
+    StringCopy(gStringVar2, gMovesInfo[move].name);
     DisplayLearnMoveMessage(gText_12PoofForgotMove);
     gTasks[taskId].func = Task_PartyMenuReplaceMove;
 }
@@ -5355,7 +5369,7 @@ static void Task_PartyMenuReplaceMove(u8 taskId)
 
 static void StopLearningMovePrompt(u8 taskId)
 {
-    StringCopy(gStringVar2, gMoveNames[gPartyMenu.learnMoveId]);
+    StringCopy(gStringVar2, gMovesInfo[gPartyMenu.learnMoveId].name);
     StringExpandPlaceholders(gStringVar4, gText_StopLearningMove2);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
@@ -5379,7 +5393,7 @@ static void Task_HandleStopLearningMoveYesNoInput(u8 taskId)
     {
     case 0: // Yes
         GetMonNickname(mon, gStringVar1);
-        StringCopy(gStringVar2, gMoveNames[gPartyMenu.learnMoveId]);
+        StringCopy(gStringVar2, gMovesInfo[gPartyMenu.learnMoveId].name);
         StringExpandPlaceholders(gStringVar4, gText_MoveNotLearned);
         DisplayPartyMenuMessage(gStringVar4, TRUE);
         if (gPartyMenu.learnMoveMethod == LEARN_VIA_LEVEL_UP)
@@ -5398,7 +5412,7 @@ static void Task_HandleStopLearningMoveYesNoInput(u8 taskId)
         // fallthrough
     case 1: // No
         GetMonNickname(mon, gStringVar1);
-        StringCopy(gStringVar2, gMoveNames[gPartyMenu.learnMoveId]);
+        StringCopy(gStringVar2, gMovesInfo[gPartyMenu.learnMoveId].name);
         DisplayLearnMoveMessage(gText_PkmnNeedsToReplaceMove);
         gTasks[taskId].func = Task_ReplaceMoveYesNo;
         break;
@@ -5651,7 +5665,7 @@ static void PartyMenuTryEvolution(u8 taskId)
 static void DisplayMonNeedsToReplaceMove(u8 taskId)
 {
     GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
-    StringCopy(gStringVar2, gMoveNames[gMoveToLearn]);
+    StringCopy(gStringVar2, gMovesInfo[gMoveToLearn].name);
     StringExpandPlaceholders(gStringVar4, gText_PkmnNeedsToReplaceMove);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
@@ -5662,7 +5676,7 @@ static void DisplayMonNeedsToReplaceMove(u8 taskId)
 static void DisplayMonLearnedMove(u8 taskId, u16 move)
 {
     GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
-    StringCopy(gStringVar2, gMoveNames[move]);
+    StringCopy(gStringVar2, gMovesInfo[move].name);
     StringExpandPlaceholders(gStringVar4, gText_PkmnLearnedMove3);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
@@ -5870,7 +5884,7 @@ static void TryTutorSelectedMon(u8 taskId)
         data = gPartyMenu.data;
         GetMonNickname(mon, gStringVar1);
         gPartyMenu.learnMoveId = GetTutorMove(gSpecialVar_0x8005);
-        StringCopy(gStringVar2, gMoveNames[gPartyMenu.learnMoveId]);
+        StringCopy(gStringVar2, gMovesInfo[gPartyMenu.learnMoveId].name);
         learnMoveMethod = LEARN_VIA_TUTOR;
         switch (CanMonLearnTMTutor(mon, 0, gSpecialVar_0x8005))
         {

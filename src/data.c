@@ -292,4 +292,3 @@ const union AnimCmd *const gAnims_MonPic[] =
 #include "data/trainer_parties.h"
 #include "data/text/trainer_class_names.h"
 #include "data/trainers.h"
-#include "data/text/move_names.h"

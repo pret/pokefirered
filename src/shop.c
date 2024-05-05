@@ -621,7 +621,7 @@ static void LoadTmHmNameInMart(s32 item)
         StringCopy(gStringVar4, gText_NumberClear01);
         StringAppend(gStringVar4, gStringVar1);
         BuyMenuPrint(6, FONT_SMALL, gStringVar4, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);
-        StringCopy(gStringVar4, gMoveNames[ItemIdToBattleMoveId(item)]);
+        StringCopy(gStringVar4, gMovesInfo[ItemIdToBattleMoveId(item)].name);
         BuyMenuPrint(6, FONT_NORMAL, gStringVar4, 0, 0x10, 0, 0, 0, 1);
     }
     else

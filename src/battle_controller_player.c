@@ -1312,7 +1312,7 @@ static void MoveSelectionDisplayMoveNames(u32 battler)
     {
         MoveSelectionDestroyCursorAt(i);
         StringCopy(gDisplayedStringBattle, gText_MoveInterfaceDynamicColors);
-        StringAppend(gDisplayedStringBattle, gMoveNames[moveInfo->moves[i]]);
+        StringAppend(gDisplayedStringBattle, gMovesInfo[moveInfo->moves[i]].name);
         BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
         if (moveInfo->moves[i] != MOVE_NONE)
             ++gNumberOfMovesToChoose;

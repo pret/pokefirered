@@ -2352,7 +2352,7 @@ static void BufferMovesString(u8 *movesString, u8 whichParty, u8 partyIdx)
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             if (moves[i] != MOVE_NONE)
-                StringAppend(movesString, gMoveNames[moves[i]]);
+                StringAppend(movesString, gMovesInfo[moves[i]].name);
 
             StringAppend(movesString, sText_Newline);
         }

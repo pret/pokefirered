@@ -2077,7 +2077,7 @@ bool8 BufferTMHMMoveName(void)
     // 8004 = item ID
     if (gSpecialVar_0x8004 >= ITEM_TM01 && gSpecialVar_0x8004 <= ITEM_HM08)
     {
-        StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_0x8004)]);
+        StringCopy(gStringVar1, gMovesInfo[ItemIdToBattleMoveId(gSpecialVar_0x8004)].name);
         return TRUE;
     }
     else
@@ -2259,21 +2259,21 @@ bool8 CapeBrinkGetMoveToTeachLeadPokemon(void)
         return FALSE;
     if (tutorMonId == 0)
     {
-        StringCopy(gStringVar2, gMoveNames[MOVE_FRENZY_PLANT]);
+        StringCopy(gStringVar2, gMovesInfo[MOVE_FRENZY_PLANT].name);
         gSpecialVar_0x8005 = MOVETUTOR_FRENZY_PLANT;
         if (FlagGet(FLAG_TUTOR_FRENZY_PLANT) == TRUE)
             return FALSE;
     }
     else if (tutorMonId == 1)
     {
-        StringCopy(gStringVar2, gMoveNames[MOVE_BLAST_BURN]);
+        StringCopy(gStringVar2, gMovesInfo[MOVE_BLAST_BURN].name);
         gSpecialVar_0x8005 = MOVETUTOR_BLAST_BURN;
         if (FlagGet(FLAG_TUTOR_BLAST_BURN) == TRUE)
             return FALSE;
     }
     else
     {
-        StringCopy(gStringVar2, gMoveNames[MOVE_HYDRO_CANNON]);
+        StringCopy(gStringVar2, gMovesInfo[MOVE_HYDRO_CANNON].name);
         gSpecialVar_0x8005 = MOVETUTOR_HYDRO_CANNON;
         if (FlagGet(FLAG_TUTOR_HYDRO_CANNON) == TRUE)
             return FALSE;

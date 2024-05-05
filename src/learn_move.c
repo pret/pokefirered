@@ -643,10 +643,10 @@ static void MoveRelearnerStateMachine(void)
             else
             {
                 move = GetMonData(&gPlayerParty[sMoveRelearner->selectedPartyMember], MON_DATA_MOVE1 + sMoveRelearner->selectedMoveSlot);
-                StringCopy(gStringVar3, gMoveNames[move]);
+                StringCopy(gStringVar3, gMovesInfo[move].name);
                 RemoveMonPPBonus(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->selectedMoveSlot);
                 SetMonMoveSlot(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex], sMoveRelearner->selectedMoveSlot);
-                StringCopy(gStringVar2, gMoveNames[sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]]);
+                StringCopy(gStringVar2, gMovesInfo[sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]].name);
                 StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_1_2_and_Poof);
                 sMoveRelearner->state = 30;
                 gSpecialVar_0x8004 = TRUE;
@@ -755,7 +755,7 @@ static void MoveRelearnerInitListMenuBuffersEtc(void)
     sMoveRelearner->numLearnableMoves = GetMoveRelearnerMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves);
     count = GetMoveRelearnerMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves);
     for (i = 0; i < sMoveRelearner->numLearnableMoves; i++)
-        StringCopy(sMoveRelearner->listMenuStrbufs[i], gMoveNames[sMoveRelearner->learnableMoves[i]]);
+        StringCopy(sMoveRelearner->listMenuStrbufs[i], gMovesInfo[sMoveRelearner->learnableMoves[i]].name);
     GetMonData(&gPlayerParty[sMoveRelearner->selectedPartyMember], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(sMoveRelearner->listMenuStrbufs[sMoveRelearner->numLearnableMoves], gFameCheckerText_Cancel);

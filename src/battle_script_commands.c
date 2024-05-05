@@ -6476,11 +6476,15 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_SET_EVOLUTION_TRACKER:
+        {
             // If the Pokémon needs to keep track of move usage for its evolutions, do it
-            if (originallyUsedMove != MOVE_NONE)
+            const struct Evolution *evolutions = GetSpeciesEvolutions(gBattleMons[gBattlerAttacker].species);
+            if (evolutions->param == originallyUsedMove)
                 TryUpdateEvolutionTracker(EVO_LEVEL_MOVE_TWENTY_TIMES, 1);
             gBattleScripting.moveendState++;
             break;
+
+        }
         case MOVEEND_CLEAR_BITS: // Clear/Set bits for things like using a move for all targets and all hits.
             if (gSpecialStatuses[gBattlerAttacker].instructedChosenTarget)
                 *(gBattleStruct->moveTarget + gBattlerAttacker) = gSpecialStatuses[gBattlerAttacker].instructedChosenTarget & 0x3;
@@ -16432,6 +16436,34 @@ static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 byIntimidate)
         break;
     }
     return FALSE;
+}
+
+void BS_TryUpdateRecoilTracker(void)
+{
+    NATIVE_ARGS();
+    TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_MALE, gBattleMoveDamage);
+    TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_FEMALE, gBattleMoveDamage);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_TryTidyUp(void)
+{
+    NATIVE_ARGS(u8 clear, const u8 *jumpInstr);
+
+    if (cmd->clear)
+    {
+        if (TryTidyUpClear(gEffectBattler, TRUE))
+            return;
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+    {
+        if (TryTidyUpClear(gBattlerAttacker, FALSE))
+            gBattlescriptCurrInstr = cmd->jumpInstr;
+        else
+            gBattlescriptCurrInstr = cmd->nextInstr;
+    }
 }
 
 void BS_TryGulpMissile(void)

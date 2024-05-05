@@ -23,6 +23,23 @@
 	.section script_data, "aw", %progbits
 	.align 2
 
+BattleScript_EffectTidyUp::
+	attackcanceler
+	attackstring
+	pause B_WAIT_TIME_MED
+	ppreduce
+	waitstate
+	trytidyup FALSE, BattleScript_EffectTidyUpDoMoveAnimation
+	goto BattleScript_EffectDragonDanceFromStatUp
+
+BattleScript_EffectTidyUpDoMoveAnimation::
+	attackanimation
+	waitanimation
+	trytidyup TRUE, NULL
+	printstring STRINGID_TIDYINGUPCOMPLETE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_EffectDragonDanceFromStatUp
+
 BattleScript_EffectHit::
 BattleScript_HitFromAtkCanceler::
 	attackcanceler
@@ -2362,7 +2379,7 @@ BattleScript_CalmMindEnd::
 
 BattleScript_CantRaiseMultipleStats::
 	pause B_WAIT_TIME_SHORT
-	orbyte gMoveResultFlags, MOVE_RESULT_FAILED
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAILED
 	printstring STRINGID_STATSWONTINCREASE2
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -2371,6 +2388,7 @@ BattleScript_EffectDragonDance::
 	attackcanceler
 	attackstring
 	ppreduce
+BattleScript_EffectDragonDanceFromStatUp::
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_DragonDanceDoMoveAnim
 	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
 BattleScript_DragonDanceDoMoveAnim::

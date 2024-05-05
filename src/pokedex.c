@@ -2,12 +2,6 @@
 #include "pokedex.h"
 #include "pokedex_screen.h"
 
-// Unused
-const u8 *GetPokedexCategoryName(u16 dexNum)
-{
-    return gSpeciesInfo[dexNum].categoryName;
-}
-
 u16 GetPokedexHeightWeight(u16 dexNum, u8 data)
 {
     switch (data)
@@ -47,30 +41,6 @@ u16 GetNationalPokedexCount(u8 caseID)
     }
     return count;
 }
-
-/*
-u16 GetHoennPokedexCount(u8 caseID)
-{
-    u16 count = 0;
-    u16 i;
-
-    for (i = 0; i < HOENN_DEX_COUNT; i++)
-    {
-        switch (caseID)
-        {
-        case FLAG_GET_SEEN:
-            if (GetSetPokedexFlag(HoennToNationalOrder(i + 1), FLAG_GET_SEEN))
-                count++;
-            break;
-        case FLAG_GET_CAUGHT:
-            if (GetSetPokedexFlag(HoennToNationalOrder(i + 1), FLAG_GET_CAUGHT))
-                count++;
-            break;
-        }
-    }
-    return count;
-}
-*/
 
 u16 GetKantoPokedexCount(u8 caseID)
 {

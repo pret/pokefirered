@@ -2224,6 +2224,16 @@
 	callnative BS_DamageNonTypes
 	.endm
 
+	.macro tryupdaterecoiltracker
+	callnative BS_TryUpdateRecoilTracker
+	.endm
+
+	.macro trytidyup clear:req, jumpInstr:req
+	callnative BS_TryTidyUp
+	.byte \clear
+	.4byte \jumpInstr
+	.endm
+
 	.macro trygulpmissile
 	callnative BS_TryGulpMissile
 	.endm

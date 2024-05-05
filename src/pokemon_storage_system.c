@@ -82,19 +82,6 @@ void CopyBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon * dst)
         *dst = gPokemonStoragePtr->boxes[boxId][boxPosition];
 }
 
-void CreateBoxMonAt(u8 boxId, u8 boxPosition, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 personality, u8 otIDType, u32 otID)
-{
-    if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)
-    {
-        CreateBoxMon(&gPokemonStoragePtr->boxes[boxId][boxPosition],
-                     species,
-                     level,
-                     fixedIV,
-                     hasFixedPersonality, personality,
-                     otIDType, otID);
-    }
-}
-
 void ZeroBoxMonAt(u8 boxId, u8 boxPosition)
 {
     if (boxId < TOTAL_BOXES_COUNT && boxPosition < IN_BOX_COUNT)

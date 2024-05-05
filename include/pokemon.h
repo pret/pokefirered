@@ -13,7 +13,7 @@
 
 
 
-// For (Set|Get)(Box)?MonData
+// Property labels for Get(Box)MonData / Set(Box)MonData
 enum {
     MON_DATA_PERSONALITY,
     MON_DATA_STATUS,

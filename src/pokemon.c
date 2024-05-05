@@ -72,34 +72,18 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
-static u16 SpeciesToHoennPokedexNum(u16 species);
 static bool8 ShouldSkipFriendshipChange(void);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 
 #include "data/moves_info.h"
 #include "data/abilities.h"
 
-// Used in an unreferenced function in RS.
-// Unreferenced here and in Emerald.
-struct CombinedMove
-{
-    u16 move1;
-    u16 move2;
-    u16 newMove;
-};
-
-static const struct CombinedMove sCombinedMoves[2] =
-{
-    {MOVE_EMBER, MOVE_GUST, MOVE_HEAT_WAVE},
-    {0xFFFF, 0xFFFF, 0xFFFF}
-};
-
 // NOTE: The order of the elements in the 3 arrays below is irrelevant.
 // To reorder the pokedex, see the values in include/constants/pokedex.h.
 
  // Assigns all species to the Hoenn Dex Index (Summary No. for Hoenn Dex)
  // removed:
- // static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
+ // static const u16 sKantoToNationalOrder[NUM_SPECIES - 1] =
 
 
  // Assigns all species to the National Dex Index (Summary No. for National Dex)
@@ -1083,12 +1067,12 @@ void ZeroEnemyPartyMons(void)
 
 void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
-    u32 arg;
+    u32 mail;
     ZeroMonData(mon);
     CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
     SetMonData(mon, MON_DATA_LEVEL, &level);
-    arg = MAIL_NONE;
-    SetMonData(mon, MON_DATA_MAIL, &arg);
+    mail = MAIL_NONE;
+    SetMonData(mon, MON_DATA_MAIL, &mail);
     CalculateMonStats(mon);
 }
 
@@ -1219,8 +1203,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         else if (P_LEGENDARY_PERFECT_IVS >= GEN_6
          && (gSpeciesInfo[species].isLegendary
           || gSpeciesInfo[species].isMythical
-          || gSpeciesInfo[species].isUltraBeast)
-          /*|| gSpeciesInfo[species].isTotem)*/)
+          || gSpeciesInfo[species].isUltraBeast
+          || gSpeciesInfo[species].isTotem))
         {
             iv = MAX_PER_STAT_IVS;
             // Initialize a list of IV indices.
@@ -1275,7 +1259,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
 {
     u32 personality;
-
+    u16 evolutionTracker = GetMonData(mon, MON_DATA_EVOLUTION_TRACKER);
     do
     {
         personality = Random32();
@@ -2536,6 +2520,7 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_EVOLUTION_TRACKER:
             evoTracker.asField.a = substruct1->evolutionTracker1;
             evoTracker.asField.b = substruct1->evolutionTracker2;
+            evoTracker.asField.unused = 0; // fix for non-modern?
             retVal = evoTracker.value;
             break;
         default:
@@ -4451,24 +4436,6 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     return targetSpecies;
 }
 
-static u16 HoennPokedexNumToSpecies(u16 hoennNum)
-{
-    u16 species;
-
-    if (!hoennNum)
-        return 0;
-
-    species = 0;
-
-    while (species < NUM_SPECIES - 1 && SpeciesToHoennPokedexNum(species) != hoennNum)
-        species++;
-
-    if (species == NUM_SPECIES - 1)
-        return 0;
-
-    return species + 1;
-}
-
 u16 NationalPokedexNumToSpecies(u16 nationalNum)
 {
     u16 species;
@@ -4521,20 +4488,6 @@ static u16 NationalToHoennOrder(u16 nationalNum)
         return 0;
 
     return hoennNum + 1;
-    // u16 hoennNum;
-
-    // if (!nationalNum)
-    //     return 0;
-
-    // hoennNum = 0;
-
-    // while (hoennNum < NUM_SPECIES - 1 && sHoennToNationalOrder[hoennNum] != nationalNum)
-    //     hoennNum++;
-
-    // if (hoennNum == NUM_SPECIES - 1)
-    //     return 0;
-
-    // return hoennNum + 1;
 }
 
 u16 SpeciesToNationalPokedexNum(u16 species)
@@ -4543,21 +4496,6 @@ u16 SpeciesToNationalPokedexNum(u16 species)
         return NATIONAL_DEX_NONE;
 
     return gSpeciesInfo[species].natDexNum;
-    // if (!species)
-    //     return 0;
-
-    // return sSpeciesToNationalPokedexNum[species - 1];
-}
-
-static u16 SpeciesToHoennPokedexNum(u16 species)
-{
-    if (!species)
-        return 0;
-    return NationalToHoennOrder(gSpeciesInfo[species].natDexNum);
-    // if (!species)
-    //     return 0;
-
-    // return sSpeciesToHoennPokedexNum[species - 1];
 }
 
 u16 KantoToNationalOrder(u16 kantoNum)
@@ -4574,11 +4512,6 @@ u16 HoennToNationalOrder(u16 hoennNum)
         return 0;
 
     return sHoennToNationalOrder[hoennNum - 1];
-
-    // if (!hoennNum)
-    //     return 0;
-
-    // return sHoennToNationalOrder[hoennNum - 1];
 }
 
 u16 SpeciesToCryId(u16 species)

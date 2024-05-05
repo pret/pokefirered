@@ -337,7 +337,7 @@ static void BestowItem(u32 battlerAtk, u32 battlerDef);
 static void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBattler);
 static bool8 CanBurnHitThaw(u16 move);
 static bool32 ChangeOrderTargetAfterAttacker(void);
-static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount);
+static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount, u16 usedMove);
 static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 isIntimidate);
 static bool32 CriticalCapture(u32 odds);
 
@@ -6478,9 +6478,7 @@ static void Cmd_moveend(void)
         case MOVEEND_SET_EVOLUTION_TRACKER:
         {
             // If the Pokémon needs to keep track of move usage for its evolutions, do it
-            const struct Evolution *evolutions = GetSpeciesEvolutions(gBattleMons[gBattlerAttacker].species);
-            if (evolutions->param == originallyUsedMove)
-                TryUpdateEvolutionTracker(EVO_LEVEL_MOVE_TWENTY_TIMES, 1);
+            TryUpdateEvolutionTracker(EVO_LEVEL_MOVE_TWENTY_TIMES, 1, originallyUsedMove);
             gBattleScripting.moveendState++;
             break;
 
@@ -16330,7 +16328,7 @@ static bool8 CanBurnHitThaw(u16 move)
     return FALSE;
 }
 
-static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount)
+static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount, u16 usedMove)
 {
     u32 i;
 
@@ -16354,9 +16352,19 @@ static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount)
                 // We only have 9 bits to use
                 u16 val = min(511, GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_EVOLUTION_TRACKER) + upAmount);
                 // Reset progress if you faint for the recoil method.
-                if (gBattleMons[gBattlerAttacker].hp == 0 && (evolutionMethod == EVO_LEVEL_RECOIL_DAMAGE_MALE || evolutionMethod == EVO_LEVEL_RECOIL_DAMAGE_FEMALE))
-                    val = 0;
-                SetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_EVOLUTION_TRACKER, &val);
+                switch (evolutionMethod)
+                {
+                    case EVO_LEVEL_MOVE_TWENTY_TIMES:
+                        if (evolutions[i].param == usedMove)
+                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_EVOLUTION_TRACKER, &val);
+                        break;
+                    case EVO_LEVEL_RECOIL_DAMAGE_MALE:
+                    case EVO_LEVEL_RECOIL_DAMAGE_FEMALE:
+                        if (gBattleMons[gBattlerAttacker].hp == 0)
+                            val = 0;
+                    default:
+                        SetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_EVOLUTION_TRACKER, &val);
+                }
                 return;
             }
         }
@@ -16441,8 +16449,12 @@ static bool8 CanAbilityPreventStatLoss(u16 abilityDef, bool8 byIntimidate)
 void BS_TryUpdateRecoilTracker(void)
 {
     NATIVE_ARGS();
-    TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_MALE, gBattleMoveDamage);
-    TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_FEMALE, gBattleMoveDamage);
+
+    if (GetMonGender(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]) == MON_MALE)
+        TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_MALE, gBattleMoveDamage, MOVE_NONE);
+    else
+        TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_FEMALE, gBattleMoveDamage, MOVE_NONE);
+
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

@@ -24,7 +24,7 @@ SECTIONS {
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
-        . = 0x40000;
+        /*. = 0x40000;*/
     } > EWRAM
 
     . = 0x3000000;
@@ -46,7 +46,7 @@ SECTIONS {
         *libc.a:sbrkr.o(COMMON);
         end = .;
 
-        . = 0x8000;
+        /*. = 0x8000;*/
     } > IWRAM
 
     . = 0x8000000;

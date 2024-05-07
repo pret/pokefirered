@@ -167,6 +167,7 @@ bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind);
 u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
 bool32 MoveHasAdditionalEffect(u32 move, u32 moveEffect);
 u8 GetBattleMoveCategory(u32 moveId);
+bool32 CanFling(u32 battler);
 u32 GetBattlerMoveTargetType(u32 battler, u32 move);
 bool32 IsBattlerTerrainAffected(u32 battler, u32 terrainFlag);
 bool32 IsBattlerGrounded(u32 battler);
@@ -239,6 +240,7 @@ s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 ma
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 MoveHasChargeTurnAdditionalEffect(u32 move);
 bool32 IsPartnerMonFromSameTrainer(u32 battler);
+u8 GetCategoryBasedOnStats(u32 battler);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);

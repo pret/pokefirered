@@ -8984,6 +8984,24 @@ bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
     return (gMovesInfo[move].argument == argument) && MoveHasAdditionalEffectSelf(move, moveEffect);
 }
 
+// Photon geyser & light that burns the sky
+u8 GetCategoryBasedOnStats(u32 battler)
+{
+    u32 attack = gBattleMons[battler].attack;
+    u32 spAttack = gBattleMons[battler].spAttack;
+
+    attack = attack * gStatStageRatios[gBattleMons[battler].statStages[STAT_ATK]][0];
+    attack = attack / gStatStageRatios[gBattleMons[battler].statStages[STAT_ATK]][1];
+
+    spAttack = spAttack * gStatStageRatios[gBattleMons[battler].statStages[STAT_SPATK]][0];
+    spAttack = spAttack / gStatStageRatios[gBattleMons[battler].statStages[STAT_SPATK]][1];
+
+    if (spAttack >= attack)
+        return DAMAGE_CATEGORY_SPECIAL;
+    else
+        return DAMAGE_CATEGORY_PHYSICAL;
+}
+
 static u32 GetFlingPowerFromItemId(u32 itemId)
 {
     if (itemId >= ITEM_TM01 && itemId <= ITEM_HM08)
@@ -8995,6 +9013,21 @@ static u32 GetFlingPowerFromItemId(u32 itemId)
     }
     else
         return ItemId_GetFlingPower(itemId);
+}
+
+bool32 CanFling(u32 battler)
+{
+    u16 item = gBattleMons[battler].item;
+
+    if (item == ITEM_NONE
+      || (B_KLUTZ_FLING_INTERACTION >= GEN_5 && GetBattlerAbility(battler) == ABILITY_KLUTZ)
+      || gFieldStatuses & STATUS_FIELD_MAGIC_ROOM
+      || gDisableStructs[battler].embargoTimer != 0
+      || GetFlingPowerFromItemId(item) == 0
+      || !CanBattlerGetOrLoseItem(battler, item))
+        return FALSE;
+
+    return TRUE;
 }
 
 static void SetRandomMultiHitCounter()

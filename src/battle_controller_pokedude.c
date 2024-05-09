@@ -691,7 +691,7 @@ static void PokedudeHandleLoadMonSprite(u32 battler)
     u32 y;
     u16 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
 
-    BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battler]], battler);
+    BattleLoadMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battler]], battler);
     y = GetBattlerSpriteDefault_Y(battler);
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battler));
     gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
@@ -712,7 +712,7 @@ static void PokedudeHandleSwitchInAnim(u32 battler)
 {
     ClearTemporarySpeciesSpriteData(battler, gBattleResources->bufferA[battler][2]);
     gBattlerPartyIndexes[battler] = gBattleResources->bufferA[battler][1];
-    BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+    BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
     gActionSelectionCursor[battler] = 0;
     gMoveSelectionCursor[battler] = 0;
     StartSendOutAnim(battler);

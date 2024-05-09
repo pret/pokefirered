@@ -993,7 +993,7 @@ static void LinkPartnerHandleLoadMonSprite(u32 battler)
 {
     u16 species;
 
-    BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+    BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battler));
 
@@ -1012,7 +1012,7 @@ static void LinkPartnerHandleSwitchInAnim(u32 battler)
 {
     ClearTemporarySpeciesSpriteData(battler, gBattleResources->bufferA[battler][2]);
     gBattlerPartyIndexes[battler] = gBattleResources->bufferA[battler][1];
-    BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+    BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
     StartSendOutAnim(battler, gBattleResources->bufferA[battler][2]);
     gBattlerControllerFuncs[battler] = SwitchIn_TryShinyAnim;
 }
@@ -1551,7 +1551,7 @@ static void Task_StartSendOutAnim(u8 taskId)
 
             battlerPartner = BATTLE_PARTNER(battler);
             gBattleResources->bufferA[battlerPartner][1] = gBattlerPartyIndexes[battlerPartner];
-            BattleLoadPlayerMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerPartner]], battlerPartner);
+            BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerPartner]], battlerPartner);
             StartSendOutAnim(battlerPartner, FALSE);
         }
         gBattlerControllerFuncs[battler] = Intro_ShowHealthbox;

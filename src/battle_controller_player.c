@@ -1590,10 +1590,10 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 
     txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
     *txtPtr++ = EXT_CTRL_CODE_BEGIN;
-    *txtPtr++ = 6;
-    *txtPtr++ = 1;
+    *txtPtr++ = EXT_CTRL_CODE_FONT;
+    *txtPtr++ = FONT_SMALL;
     txtPtr = StringCopy(txtPtr, gText_MoveInterfaceDynamicColors);
-    StringCopy(txtPtr, gTypeNames[gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type]);
+    StringCopy(txtPtr, gTypesInfo[gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type].name);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 

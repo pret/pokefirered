@@ -551,7 +551,6 @@ extern const u8 BattleScript_LeechSeedFree[];
 extern const u8 BattleScript_SpikesFree[];
 extern const u8 BattleScript_MonTookFutureAttack[];
 extern const u8 BattleScript_NoMovesLeft[];
-extern const u8 BattleScript_SelectingMoveWithNoPP[];
 extern const u8 BattleScript_NoPPForMove[];
 extern const u8 BattleScript_SelectingTormentedMove[];
 extern const u8 BattleScript_MoveUsedIsTormented[];

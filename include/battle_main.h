@@ -46,7 +46,6 @@ struct MultiPartnerMenuPokemon
 extern const struct SpriteTemplate gUnknownDebugSprite;
 extern const struct OamData gOamData_BattlerOpponent;
 extern const struct OamData gOamData_BattlerPlayer;
-extern const u8 gTypeNames[][TYPE_NAME_LENGTH + 1];
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];
 extern const u8 gStatusConditionString_ParalysisJpn[8];

@@ -3001,12 +3001,12 @@ static void Task_RunUnionRoom(u8 taskId)
                     break;
                 case UR_TRADE_NOTYPE:
                     CopyAndTranslatePlayerName2(gStringVar1, uroom->playerList->players[input]);
-                    StringCopy(gStringVar2, gTypeNames[uroom->playerList->players[input].rfu.data.tradeType]);
+                    StringCopy(gStringVar2, gTypesInfo[uroom->playerList->players[input].rfu.data.tradeType].name);
                     ScheduleFieldMessageWithFollowupState(UR_STATE_TRADING_BOARD_LOAD, gText_UR_DontHaveTypeTrainerWants);
                     break;
                 case UR_TRADE_NOEGG:
                     CopyAndTranslatePlayerName2(gStringVar1, uroom->playerList->players[input]);
-                    StringCopy(gStringVar2, gTypeNames[uroom->playerList->players[input].rfu.data.tradeType]);
+                    StringCopy(gStringVar2, gTypesInfo[uroom->playerList->players[input].rfu.data.tradeType].name);
                     ScheduleFieldMessageWithFollowupState(UR_STATE_TRADING_BOARD_LOAD, gText_UR_DontHaveEggTrainerWants);
                     break;
                 }

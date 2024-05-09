@@ -260,12 +260,18 @@ void BtlController_EmitResetActionMoveSelection(u32 battler, u32 bufferId, u8 ca
 void BtlController_EmitEndLinkBattle(u32 battler, u32 bufferId, u8 battleOutcome);
 
 void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.
+void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit);
 
 // handlers
 void BtlController_HandleGetMonData(u32 battler);
 void BtlController_HandleGetRawMonData(u32 battler);
 void BtlController_HandleSetMonData(u32 battler);
 void BtlController_HandleSetRawMonData(u32 battler);
+void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(u32 battler));
+void BtlController_HandleReturnMonToBall(u32 battler);
+void BtlController_HandleDrawTrainerPic(u32 battlerId, u32 trainerPicId, bool32 isFrontPic, s16 xPos, s16 yPos, s32 subpriority);
+void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId);
+void BtlController_HandleTrainerSlideBack(u32 battlerId, s16 data0, bool32 startAnim);
 
 // player controller
 void BattleControllerDummy(u32 battler);

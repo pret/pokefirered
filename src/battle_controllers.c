@@ -1676,6 +1676,97 @@ static void SetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId)
         HandleLowHpMusicChange(&party[gBattlerPartyIndexes[battler]], battler);
 }
 
+void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit)
+{
+    u16 species;
+    u32 side = GetBattlerSide(battler);
+    struct Pokemon *party = GetBattlerParty(battler);
+
+    ClearTemporarySpeciesSpriteData(battler, dontClearSubstituteBit);
+    gBattlerPartyIndexes[battler] = gBattleResources->bufferA[battler][1];
+    species = GetIllusionMonSpecies(battler);
+    if (species == SPECIES_NONE)
+        species = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+    gBattleControllerData[battler] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
+    // Load sprite for opponent only, player sprite is expected to be already loaded.
+    if (side == B_SIDE_OPPONENT)
+        BattleLoadMonSpriteGfx(&party[gBattlerPartyIndexes[battler]], battler);
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battler));
+
+    gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                        GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2),
+                                        GetBattlerSpriteDefault_Y(battler),
+                                        GetBattlerSpriteSubpriority(battler));
+
+    gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
+    gSprites[gBattlerSpriteIds[battler]].data[2] = species;
+    gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 0);
+    gSprites[gBattlerSpriteIds[battler]].invisible = TRUE;
+    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
+
+    gSprites[gBattleControllerData[battler]].data[1] = gBattlerSpriteIds[battler];
+    gSprites[gBattleControllerData[battler]].data[2] = battler;
+    gSprites[gBattleControllerData[battler]].data[0] = DoPokeballSendOutAnimation(battler, 0, (side == B_SIDE_OPPONENT) ? POKEBALL_OPPONENT_SENDOUT : POKEBALL_PLAYER_SENDOUT);
+}
+
+static void FreeMonSprite(u32 battler)
+{
+    FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[battler]]);
+    DestroySprite(&gSprites[gBattlerSpriteIds[battler]]);
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        HideBattlerShadowSprite(battler);
+    SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
+}
+
+static void Controller_ReturnMonToBall2(u32 battler)
+{
+    if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
+    {
+        FreeMonSprite(battler);
+        BattleControllerComplete(battler);
+    }
+}
+
+static void Controller_ReturnMonToBall(u32 battler)
+{
+    switch (gBattleSpritesDataPtr->healthBoxesData[battler].animationState)
+    {
+    case 0:
+        if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
+            InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_SUBSTITUTE_TO_MON);
+
+        gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 1;
+        break;
+    case 1:
+        if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
+        {
+            gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
+            InitAndLaunchSpecialAnimation(battler, battler, battler, (GetBattlerSide(battler) == B_SIDE_OPPONENT) ? B_ANIM_SWITCH_OUT_OPPONENT_MON : B_ANIM_SWITCH_OUT_PLAYER_MON);
+            gBattlerControllerFuncs[battler] = Controller_ReturnMonToBall2;
+        }
+        break;
+    }
+}
+
+static void Controller_HandleTrainerSlideBack(u32 battler)
+{
+    if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
+    {
+        if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+            FreeTrainerFrontPicPalette(gSprites[gBattlerSpriteIds[battler]].oam.affineParam);
+        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[battler]]);
+        DestroySprite(&gSprites[gBattlerSpriteIds[battler]]);
+        BattleControllerComplete(battler);
+    }
+}
+
+static void Controller_WaitForTrainerPic(u32 battler)
+{
+    if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
+        BattleControllerComplete(battler);
+}
+
 // Used for all the commands which do nothing.
 void BtlController_Empty(u32 battler)
 {
@@ -1766,6 +1857,141 @@ void BtlController_HandleSetRawMonData(u32 battler)
         dst[i] = gBattleResources->bufferA[battler][3 + i];
 
     BattleControllerComplete(battler);
+}
+
+void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(u32 battler))
+{
+    if (isPlayerSide)
+        ClearTemporarySpeciesSpriteData(battler, gBattleResources->bufferA[battler][2]);
+    gBattlerPartyIndexes[battler] = gBattleResources->bufferA[battler][1];
+    if (isPlayerSide)
+        BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+    StartSendOutAnim(battler, gBattleResources->bufferA[battler][2]);
+    gBattlerControllerFuncs[battler] = controllerCallback;
+}
+
+void BtlController_HandleReturnMonToBall(u32 battler)
+{
+    if (gBattleResources->bufferA[battler][1] == 0)
+    {
+        gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
+        gBattlerControllerFuncs[battler] = Controller_ReturnMonToBall;
+    }
+    else
+    {
+        FreeMonSprite(battler);
+        BattleControllerComplete(battler);
+    }
+}
+
+// In emerald it's possible to have a tag battle in the battle frontier facilities with AI
+// which use the front sprite for both the player and the partner as opposed to any other battles (including the one with Steven)
+// that use an animated back pic.
+
+#define sSpeedX data[0]
+
+void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 isFrontPic, s16 xPos, s16 yPos, s32 subpriority)
+{
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT) // Always the front sprite for the opponent.
+    {
+        DecompressTrainerFrontPic(trainerPicId, battler);
+        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
+        if (subpriority == -1)
+            subpriority = GetBattlerSpriteSubpriority(battler);
+        gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                   xPos,
+                                                   yPos,
+                                                   subpriority);
+
+        gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
+        gSprites[gBattlerSpriteIds[battler]].x2 = -DISPLAY_WIDTH;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = 2;
+        gSprites[gBattlerSpriteIds[battler]].oam.affineParam = trainerPicId;
+    }
+    else // Player's side
+    {
+        if (isFrontPic)
+        {
+            DecompressTrainerFrontPic(trainerPicId, battler);
+            SetMultiuseSpriteTemplateToTrainerFront(trainerPicId, GetBattlerPosition(battler));
+            if (subpriority == -1)
+                subpriority = GetBattlerSpriteSubpriority(battler);
+            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                             xPos,
+                                                             yPos,
+                                                             subpriority);
+
+            gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
+            gSprites[gBattlerSpriteIds[battler]].oam.affineMode = ST_OAM_AFFINE_OFF;
+            gSprites[gBattlerSpriteIds[battler]].hFlip = 1;
+            gSprites[gBattlerSpriteIds[battler]].y2 = 48;
+        }
+        else
+        {
+            DecompressTrainerBackPic(trainerPicId, battler);
+            SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
+            if (subpriority == -1)
+                subpriority = GetBattlerSpriteSubpriority(battler);
+            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                             xPos,
+                                                             yPos,
+                                                             subpriority);
+
+            gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+        }
+        gSprites[gBattlerSpriteIds[battler]].x2 = DISPLAY_WIDTH;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = -2;
+    }
+    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
+
+    gBattlerControllerFuncs[battler] = Controller_WaitForTrainerPic;
+}
+
+void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
+{
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+    {
+        DecompressTrainerBackPic(trainerPicId, battler);
+        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
+        gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                                         80,
+                                                         (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80,
+                                                         30);
+        gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+        gSprites[gBattlerSpriteIds[battler]].x2 = -96;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = 2;
+    }
+    else
+    {
+        DecompressTrainerFrontPic(trainerPicId, battler);
+        SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
+        gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, 176, 40, 30);
+        gSprites[gBattlerSpriteIds[battler]].oam.affineParam = trainerPicId;
+        gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
+        gSprites[gBattlerSpriteIds[battler]].x2 = 96;
+        gSprites[gBattlerSpriteIds[battler]].x += 32;
+        gSprites[gBattlerSpriteIds[battler]].sSpeedX = -2;
+    }
+    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
+
+    gBattlerControllerFuncs[battler] = Controller_WaitForTrainerPic;
+}
+
+#undef sSpeedX
+
+void BtlController_HandleTrainerSlideBack(u32 battler, s16 data0, bool32 startAnim)
+{
+    u32 side = GetBattlerSide(battler);
+
+    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[battler]]);
+    gSprites[gBattlerSpriteIds[battler]].data[0] = data0;
+    gSprites[gBattlerSpriteIds[battler]].data[2] = (side == B_SIDE_PLAYER) ? -40 : 280;
+    gSprites[gBattlerSpriteIds[battler]].data[4] = gSprites[gBattlerSpriteIds[battler]].y;
+    gSprites[gBattlerSpriteIds[battler]].callback = StartAnimLinearTranslation;
+    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battler]], SpriteCallbackDummy);
+    if (startAnim)
+        StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 1);
+    gBattlerControllerFuncs[battler] = Controller_HandleTrainerSlideBack;
 }
 
 

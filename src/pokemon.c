@@ -1972,6 +1972,17 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
     }
 }
 
+void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPosition)
+{
+    if (gMonSpritesGfxPtr != NULL)
+        gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
+    else
+        gMultiuseSpriteTemplate = gSpriteTemplates_Battlers[battlerPosition];
+
+    gMultiuseSpriteTemplate.paletteTag = trainerPicId;
+    gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[trainerPicId];
+}
+
 static void EncryptBoxMon(struct BoxPokemon *boxMon)
 {
     u32 i;
@@ -5534,11 +5545,6 @@ u8 GetPlayerPartyHighestLevel(void)
     return level;
 }
 
-u16 FacilityClassToPicIndex(u16 facilityClass)
-{
-    return gFacilityClassToPicIndex[facilityClass];
-}
-
 // If FALSE, should load this game's Deoxys form. If TRUE, should load normal Deoxys form
 bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
 {
@@ -5629,6 +5635,19 @@ void CreateEnemyEventMon(void)
         heldItem[1] = itemId >> 8;
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
     }
+}
+
+u16 FacilityClassToPicIndex(u16 facilityClass)
+{
+    return gFacilityClassToPicIndex[facilityClass];
+}
+
+u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
+{
+    if (playerGender != MALE)
+        return FacilityClassToPicIndex(FACILITY_CLASS_MAY);
+    else
+        return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
 }
 
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)

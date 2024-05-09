@@ -16,9 +16,11 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
+#include "battle_setup.h"
 #include "battle_script_commands.h"
 #include "reshow_battle_screen.h"
 #include "constants/battle_anim.h"
+#include "constants/battle_partner.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -27,7 +29,6 @@
 static void PlayerBufferExecCompleted(u32 battler);
 static void PlayerHandleLoadMonSprite(u32 battler);
 static void PlayerHandleSwitchInAnim(u32 battler);
-static void PlayerHandleReturnMonToBall(u32 battler);
 static void PlayerHandleDrawTrainerPic(u32 battler);
 static void PlayerHandleTrainerSlide(u32 battler);
 static void PlayerHandleTrainerSlideBack(u32 battler);
@@ -93,30 +94,28 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId);
 static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId);
 static void Task_UpdateLvlInHealthbox(u8 taskId);
 static void PrintLinkStandbyMsg(void);
-static void DoSwitchOutAnimation(u32 battler);
 static void PlayerDoMoveAnimation(u32 battler);
 static void Task_StartSendOutAnim(u8 taskId);
 static void PreviewDeterminativeMoveTargets(u32 battler);
 static void SwitchIn_HandleSoundAndEnd(u32 battler);
 static void Task_GiveExpWithExpBar(u8 taskId);
 static void Task_CreateLevelUpVerticalStripes(u8 taskId);
-static void StartSendOutAnim(u32 battler, bool8 dontClearSubstituteBit);
 static void EndDrawPartyStatusSummary(u32 battler);
 
 static void ReloadMoveNames(u32 battler);
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
 {
-    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
-    [CONTROLLER_GETRAWMONDATA]            = BtlController_HandleGetRawMonData,
-    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,
-    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
-    [CONTROLLER_LOADMONSPRITE]            = PlayerHandleLoadMonSprite,
-    [CONTROLLER_SWITCHINANIM]             = PlayerHandleSwitchInAnim,
-    [CONTROLLER_RETURNMONTOBALL]          = PlayerHandleReturnMonToBall,
-    [CONTROLLER_DRAWTRAINERPIC]           = PlayerHandleDrawTrainerPic,
-    [CONTROLLER_TRAINERSLIDE]             = PlayerHandleTrainerSlide,
-    [CONTROLLER_TRAINERSLIDEBACK]         = PlayerHandleTrainerSlideBack,
+    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,         // done
+    [CONTROLLER_GETRAWMONDATA]            = BtlController_HandleGetRawMonData,      // done
+    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,         // done
+    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,      // done
+    [CONTROLLER_LOADMONSPRITE]            = PlayerHandleLoadMonSprite,              // done
+    [CONTROLLER_SWITCHINANIM]             = PlayerHandleSwitchInAnim,               // done
+    [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,    // done
+    [CONTROLLER_DRAWTRAINERPIC]           = PlayerHandleDrawTrainerPic,             // done
+    [CONTROLLER_TRAINERSLIDE]             = PlayerHandleTrainerSlide,               // done
+    [CONTROLLER_TRAINERSLIDEBACK]         = PlayerHandleTrainerSlideBack,           // done
     [CONTROLLER_FAINTANIMATION]           = PlayerHandleFaintAnimation,
     [CONTROLLER_PALETTEFADE]              = PlayerHandlePaletteFade,
     [CONTROLLER_SUCCESSBALLTHROWANIM]     = PlayerHandleSuccessBallThrowAnim,
@@ -1441,17 +1440,6 @@ static void FreeMonSpriteAfterFaintAnim(u32 battler)
     }
 }
 
-static void FreeMonSpriteAfterSwitchOutAnim(u32 battler)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[battler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[battler]]);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
-        PlayerBufferExecCompleted(battler);
-    }
-}
-
 static void CompleteOnInactiveTextPrinter2(u32 battler)
 {
     if (!IsTextPrinterActive(0))
@@ -1664,80 +1652,45 @@ static void PlayerHandleLoadMonSprite(u32 battler)
 
 static void PlayerHandleSwitchInAnim(u32 battler)
 {
-    ClearTemporarySpeciesSpriteData(battler, gBattleResources->bufferA[battler][2]);
-    gBattlerPartyIndexes[battler] = gBattleResources->bufferA[battler][1];
-    BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
     gActionSelectionCursor[battler] = 0;
     gMoveSelectionCursor[battler] = 0;
-    StartSendOutAnim(battler, gBattleResources->bufferA[battler][2]);
-    gBattlerControllerFuncs[battler] = SwitchIn_TryShinyAnimShowHealthbox;
+    BtlController_HandleSwitchInAnim(battler, TRUE, SwitchIn_TryShinyAnimShowHealthbox);
 }
 
-static void StartSendOutAnim(u32 battler, bool8 dontClearSubstituteBit)
+u32 LinkPlayerGetTrainerPicId(u32 multiplayerId)
 {
-    u16 species;
+    u32 trainerPicId;
 
-    ClearTemporarySpeciesSpriteData(battler, dontClearSubstituteBit);
-    gBattlerPartyIndexes[battler] = gBattleResources->bufferA[battler][1];
-    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+    u8 gender = gLinkPlayers[multiplayerId].gender;
+    u8 version = gLinkPlayers[multiplayerId].version & 0xFF;
 
-    gBattleControllerData[battler] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
-    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battler));
-    gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                                GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2),
-                                                GetBattlerSpriteDefault_Y(battler),
-                                                GetBattlerSpriteSubpriority(battler));
-    gSprites[gBattleControllerData[battler]].data[1] = gBattlerSpriteIds[battler];
-    gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
-    gSprites[gBattlerSpriteIds[battler]].data[2] = species;
-    gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], gBattleMonForms[battler]);
-    gSprites[gBattlerSpriteIds[battler]].invisible = TRUE;
-    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
-    gSprites[gBattleControllerData[battler]].data[0] = DoPokeballSendOutAnimation(battler, 0, POKEBALL_PLAYER_SENDOUT);
-}
-
-static void PlayerHandleReturnMonToBall(u32 battler)
-{
-    if (gBattleResources->bufferA[battler][1] == 0)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
-        gBattlerControllerFuncs[battler] = DoSwitchOutAnimation;
-    }
+    if (version == VERSION_RUBY || version == VERSION_SAPPHIRE || version == VERSION_EMERALD)
+        trainerPicId = gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
     else
-    {
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[battler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[battler]]);
-        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
-        PlayerBufferExecCompleted(battler);
-    }
+        trainerPicId = gender + TRAINER_BACK_PIC_RED;
+
+    return trainerPicId;
 }
 
-static void DoSwitchOutAnimation(u32 battler)
+static u32 PlayerGetTrainerBackPicId(void)
 {
-    switch (gBattleSpritesDataPtr->healthBoxesData[battler].animationState)
-    {
-    case 0:
-        if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
-            InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_SUBSTITUTE_TO_MON);
-        gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 1;
-        break;
-    case 1:
-        if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
-        {
-            gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
-            InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_SWITCH_OUT_PLAYER_MON);
-            gBattlerControllerFuncs[battler] = FreeMonSpriteAfterSwitchOutAnim;
-        }
-        break;
-    }
+    u32 trainerPicId;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        trainerPicId = LinkPlayerGetTrainerPicId(GetMultiplayerId());
+    else
+        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_RED;
+
+    return trainerPicId;
 }
 
 static void PlayerHandleDrawTrainerPic(u32 battler)
 {
-    s16 xPos;
+    bool32 isFrontPic;
+    s16 xPos, yPos;
     u32 trainerPicId;
 
+    trainerPicId = PlayerGetTrainerBackPicId();
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         if ((GetBattlerPosition(battler) & BIT_FLANK) != B_FLANK_LEFT) // Second mon, on the right.
@@ -1745,77 +1698,46 @@ static void PlayerHandleDrawTrainerPic(u32 battler)
         else // First mon, on the left.
             xPos = 32;
 
+        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId < TRAINER_PARTNER(PARTNER_NONE))
+        {
+            xPos = 90;
+            yPos = 80;
+        }
+        else
+        {
+            yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
+        }
+
     }
     else
     {
         xPos = 80;
+        yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
     }
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+
+    // Use front pic table for any tag battles unless your partner is Steven or a custom partner.
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId < TRAINER_PARTNER(PARTNER_NONE))
     {
-        if ((gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_RUBY
-         || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_SAPPHIRE
-         || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_EMERALD)
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
-        else
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender;
+        trainerPicId = PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender);
+        isFrontPic = TRUE;
     }
-    else
+    else // Use back pic in all the other usual circumstances.
     {
-        trainerPicId = gSaveBlock2Ptr->playerGender;
+        isFrontPic = FALSE;
     }
-    DecompressTrainerBackPalette(trainerPicId, battler);
-    SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
-    gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                                     xPos,
-                                                     (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80,
-                                                     GetBattlerSpriteSubpriority(battler));
-    gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
-    gSprites[gBattlerSpriteIds[battler]].x2 = DISPLAY_WIDTH;
-    gSprites[gBattlerSpriteIds[battler]].data[0] = -2;
-    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
-    gBattlerControllerFuncs[battler] = CompleteOnBattlerSpriteCallbackDummy;
+
+    BtlController_HandleDrawTrainerPic(battler, trainerPicId, isFrontPic, xPos, yPos, -1);
 }
 
 static void PlayerHandleTrainerSlide(u32 battler)
 {
-    u32 trainerPicId;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        if ((gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_RUBY
-         || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_SAPPHIRE
-         || (gLinkPlayers[GetMultiplayerId()].version & 0xFF) == VERSION_EMERALD)
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + 2;
-        else
-            trainerPicId = gLinkPlayers[GetMultiplayerId()].gender + 0;
-    }
-    else
-    {
-        trainerPicId = gSaveBlock2Ptr->playerGender + 0;
-    }
-    DecompressTrainerBackPalette(trainerPicId, battler);
-    SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(battler));
-    gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
-                                                     80,
-                                                     (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80,
-                                                     30);
-    gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
-    gSprites[gBattlerSpriteIds[battler]].x2 = -96;
-    gSprites[gBattlerSpriteIds[battler]].data[0] = 2;
-    gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
-    gBattlerControllerFuncs[battler] = CompleteOnBattlerSpriteCallbackDummy2;
+    u32 trainerPicId = PlayerGetTrainerBackPicId();
+    BtlController_HandleTrainerSlide(battler, trainerPicId);
 }
 
 static void PlayerHandleTrainerSlideBack(u32 battler)
 {
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[battler]]);
-    gSprites[gBattlerSpriteIds[battler]].data[0] = 50;
-    gSprites[gBattlerSpriteIds[battler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[battler]].data[4] = gSprites[gBattlerSpriteIds[battler]].y;
-    gSprites[gBattlerSpriteIds[battler]].callback = StartAnimLinearTranslation;
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battler]], SpriteCallbackDummy);
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 1);
-    gBattlerControllerFuncs[battler] = FreeTrainerSpriteAfterSlide;
+    BtlController_HandleTrainerSlideBack(battler, 50, TRUE);
 }
 
 static void PlayerHandleFaintAnimation(u32 battler)

@@ -77,7 +77,7 @@ static void LinkPartnerBufferExecCompleted(u32 battler);
 static void SwitchIn_WaitAndEnd(u32 battler);
 static u32 CopyLinkPartnerMonData(u32 battler, u8 monId, u8 *dst);
 static void SetLinkPartnerMonData(u32 battler, u8 monId);
-static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit);
+// static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit);
 static void DoSwitchOutAnimation(u32 battler);
 static void LinkPartnerDoMoveAnimation(u32 battler);
 static void Task_StartSendOutAnim(u8 taskId);
@@ -1017,34 +1017,34 @@ static void LinkPartnerHandleSwitchInAnim(u32 battler)
     gBattlerControllerFuncs[battler] = SwitchIn_TryShinyAnim;
 }
 
-static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
-{
-    u16 species;
+// static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
+// {
+//     u16 species;
 
-    ClearTemporarySpeciesSpriteData(battlerId, dontClearSubstituteBit);
-    gBattlerPartyIndexes[battlerId] = gBattleResources->bufferA[battlerId][1];
-    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
-    gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
-    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
+//     ClearTemporarySpeciesSpriteData(battlerId, dontClearSubstituteBit);
+//     gBattlerPartyIndexes[battlerId] = gBattleResources->bufferA[battlerId][1];
+//     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+//     gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
+//     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
 
-    gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
-                                                GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
-                                                GetBattlerSpriteDefault_Y(battlerId),
-                                                GetBattlerSpriteSubpriority(battlerId));
+//     gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
+//                                                 GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
+//                                                 GetBattlerSpriteDefault_Y(battlerId),
+//                                                 GetBattlerSpriteSubpriority(battlerId));
 
-    gSprites[gBattleControllerData[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
+//     gSprites[gBattleControllerData[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
 
-    gSprites[gBattlerSpriteIds[battlerId]].data[0] = battlerId;
-    gSprites[gBattlerSpriteIds[battlerId]].data[2] = species;
-    gSprites[gBattlerSpriteIds[battlerId]].oam.paletteNum = battlerId;
+//     gSprites[gBattlerSpriteIds[battlerId]].data[0] = battlerId;
+//     gSprites[gBattlerSpriteIds[battlerId]].data[2] = species;
+//     gSprites[gBattlerSpriteIds[battlerId]].oam.paletteNum = battlerId;
 
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], gBattleMonForms[battlerId]);
+//     StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], gBattleMonForms[battlerId]);
 
-    gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
-    gSprites[gBattlerSpriteIds[battlerId]].callback = SpriteCallbackDummy;
+//     gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
+//     gSprites[gBattlerSpriteIds[battlerId]].callback = SpriteCallbackDummy;
 
-    gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(battlerId, 0, POKEBALL_PLAYER_SENDOUT);
-}
+//     gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(battlerId, 0, POKEBALL_PLAYER_SENDOUT);
+// }
 
 static void LinkPartnerHandleReturnMonToBall(u32 battler)
 {

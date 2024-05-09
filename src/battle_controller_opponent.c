@@ -85,7 +85,7 @@ static void SetOpponentMonData(u32 battler, u8 monId);
 static void DoSwitchOutAnimation(u32 battler);
 static void OpponentDoMoveAnimation(u32 battler);
 static void SwitchIn_HandleSoundAndEnd(u32 battler);
-static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit);
+// static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit);
 static void Task_StartSendOutAnim(u8 taskId);
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
 static void EndDrawPartyStatusSummary(u32 battler);
@@ -1057,29 +1057,29 @@ static void OpponentHandleSwitchInAnim(u32 battler)
     gBattlerControllerFuncs[battler] = SwitchIn_TryShinyAnim;
 }
 
-static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
-{
-    u16 species;
+// static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
+// {
+//     u16 species;
 
-    ClearTemporarySpeciesSpriteData(battlerId, dontClearSubstituteBit);
-    gBattlerPartyIndexes[battlerId] = gBattleResources->bufferA[battlerId][1];
-    species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
-    gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
-    BattleLoadMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battlerId]], battlerId);
-    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
-    gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
-                                                GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
-                                                GetBattlerSpriteDefault_Y(battlerId),
-                                                GetBattlerSpriteSubpriority(battlerId));
-    gSprites[gBattlerSpriteIds[battlerId]].data[0] = battlerId;
-    gSprites[gBattlerSpriteIds[battlerId]].data[2] = species;
-    gSprites[gBattleControllerData[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
-    gSprites[gBattlerSpriteIds[battlerId]].oam.paletteNum = battlerId;
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], gBattleMonForms[battlerId]);
-    gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
-    gSprites[gBattlerSpriteIds[battlerId]].callback = SpriteCallbackDummy;
-    gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(battlerId, 0, POKEBALL_OPPONENT_SENDOUT);
-}
+//     ClearTemporarySpeciesSpriteData(battlerId, dontClearSubstituteBit);
+//     gBattlerPartyIndexes[battlerId] = gBattleResources->bufferA[battlerId][1];
+//     species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+//     gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
+//     BattleLoadMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battlerId]], battlerId);
+//     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
+//     gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
+//                                                 GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
+//                                                 GetBattlerSpriteDefault_Y(battlerId),
+//                                                 GetBattlerSpriteSubpriority(battlerId));
+//     gSprites[gBattlerSpriteIds[battlerId]].data[0] = battlerId;
+//     gSprites[gBattlerSpriteIds[battlerId]].data[2] = species;
+//     gSprites[gBattleControllerData[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
+//     gSprites[gBattlerSpriteIds[battlerId]].oam.paletteNum = battlerId;
+//     StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], gBattleMonForms[battlerId]);
+//     gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
+//     gSprites[gBattlerSpriteIds[battlerId]].callback = SpriteCallbackDummy;
+//     gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(battlerId, 0, POKEBALL_OPPONENT_SENDOUT);
+// }
 
 static void OpponentHandleReturnMonToBall(u32 battler)
 {

@@ -109,7 +109,7 @@ static void CompleteOnInactiveTextPrinter2(u32 battler);
 static void Task_PrepareToGiveExpWithExpBar(u8 taskId);
 static void Task_GiveExpWithExpBar(u8 taskId);
 static void Task_UpdateLvlInHealthbox(u8 taskId);
-static void StartSendOutAnim(u8 battlerId);
+// static void StartSendOutAnim(u8 battlerId);
 static void PokedudeDoMoveAnimation(u32 battler);
 static void Task_StartSendOutAnim(u8 taskId);
 static const u8 *GetPokedudeText(void);
@@ -715,7 +715,7 @@ static void PokedudeHandleSwitchInAnim(u32 battler)
     BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
     gActionSelectionCursor[battler] = 0;
     gMoveSelectionCursor[battler] = 0;
-    StartSendOutAnim(battler);
+    StartSendOutAnim(battler, FALSE);
     gBattlerControllerFuncs[battler] = SwitchIn_TryShinyAnimShowHealthbox;
 }
 
@@ -1257,28 +1257,28 @@ static void PokedudeHandleIntroTrainerBallThrow(u32 battler)
     gBattlerControllerFuncs[battler] = PokedudeDummy;
 }
 
-static void StartSendOutAnim(u8 battlerId)
-{
-    u16 species;
+// static void StartSendOutAnim(u8 battlerId)
+// {
+//     u16 species;
 
-    gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies = SPECIES_NONE;
-    gBattlerPartyIndexes[battlerId] = gBattleResources->bufferA[battlerId][1];
-    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
-    gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
-    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
-    gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
-                                                GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
-                                                GetBattlerSpriteDefault_Y(battlerId),
-                                                GetBattlerSpriteSubpriority(battlerId));
-    gSprites[gBattleControllerData[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
-    gSprites[gBattlerSpriteIds[battlerId]].data[0] = battlerId;
-    gSprites[gBattlerSpriteIds[battlerId]].data[2] = species;
-    gSprites[gBattlerSpriteIds[battlerId]].oam.paletteNum = battlerId;
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], gBattleMonForms[battlerId]);
-    gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
-    gSprites[gBattlerSpriteIds[battlerId]].callback = SpriteCallbackDummy;
-    gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(battlerId, 0, POKEBALL_PLAYER_SENDOUT);
-}
+//     gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies = SPECIES_NONE;
+//     gBattlerPartyIndexes[battlerId] = gBattleResources->bufferA[battlerId][1];
+//     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
+//     gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
+//     SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battlerId));
+//     gBattlerSpriteIds[battlerId] = CreateSprite(&gMultiuseSpriteTemplate,
+//                                                 GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2),
+//                                                 GetBattlerSpriteDefault_Y(battlerId),
+//                                                 GetBattlerSpriteSubpriority(battlerId));
+//     gSprites[gBattleControllerData[battlerId]].data[1] = gBattlerSpriteIds[battlerId];
+//     gSprites[gBattlerSpriteIds[battlerId]].data[0] = battlerId;
+//     gSprites[gBattlerSpriteIds[battlerId]].data[2] = species;
+//     gSprites[gBattlerSpriteIds[battlerId]].oam.paletteNum = battlerId;
+//     StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], gBattleMonForms[battlerId]);
+//     gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
+//     gSprites[gBattlerSpriteIds[battlerId]].callback = SpriteCallbackDummy;
+//     gSprites[gBattleControllerData[battlerId]].data[0] = DoPokeballSendOutAnimation(battlerId, 0, POKEBALL_PLAYER_SENDOUT);
+// }
 
 static void Task_StartSendOutAnim(u8 taskId)
 {
@@ -1290,7 +1290,7 @@ static void Task_StartSendOutAnim(u8 taskId)
     {
         u8 battler = gTasks[taskId].data[0];
         gBattleResources->bufferA[battler][1] = gBattlerPartyIndexes[battler];
-        StartSendOutAnim(battler);
+        StartSendOutAnim(battler, FALSE);
 
         gBattlerControllerFuncs[battler] = Intro_TryShinyAnimShowHealthbox;
         DestroyTask(taskId);

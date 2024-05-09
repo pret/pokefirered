@@ -10,10 +10,12 @@
 #include "link_rfu.h"
 #include "party_menu.h"
 #include "pokeball.h"
+#include "sound.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
 #include "util.h"
+#include "constants/songs.h"
 #include "constants/abilities.h"
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
@@ -1749,6 +1751,77 @@ static void Controller_ReturnMonToBall(u32 battler)
     }
 }
 
+static void Controller_FaintPlayerMon(u32 battler)
+{
+    u32 spriteId = gBattlerSpriteIds[battler];
+    if (gSprites[spriteId].y + gSprites[spriteId].y2 > DISPLAY_HEIGHT)
+    {
+        FreeOamMatrix(gSprites[spriteId].oam.matrixNum);
+        DestroySprite(&gSprites[spriteId]);
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
+        BattleControllerComplete(battler);
+    }
+}
+
+static void Controller_FaintOpponentMon(u32 battler)
+{
+    if (!gSprites[gBattlerSpriteIds[battler]].inUse)
+    {
+        SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
+        BattleControllerComplete(battler);
+    }
+}
+
+static void Controller_DoMoveAnimation(u32 battler)
+{
+    u16 move = gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8);
+
+    switch (gBattleSpritesDataPtr->healthBoxesData[battler].animationState)
+    {
+    case 0:
+        if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute
+            && !gBattleSpritesDataPtr->battlerData[battler].flag_x8)
+        {
+            gBattleSpritesDataPtr->battlerData[battler].flag_x8 = 1;
+            InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_SUBSTITUTE_TO_MON);
+        }
+        gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 1;
+        break;
+    case 1:
+        if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
+        {
+            SetBattlerSpriteAffineMode(ST_OAM_AFFINE_OFF);
+            DoMoveAnim(move);
+            gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 2;
+        }
+        break;
+    case 2:
+        gAnimScriptCallback();
+        if (!gAnimScriptActive)
+        {
+            u8 multihit = gBattleResources->bufferA[battler][11];
+
+            SetBattlerSpriteAffineMode(ST_OAM_AFFINE_NORMAL);
+            if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute && multihit < 2)
+            {
+                InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_MON_TO_SUBSTITUTE);
+                gBattleSpritesDataPtr->battlerData[battler].flag_x8 = 0;
+            }
+            gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 3;
+        }
+        break;
+    case 3:
+        if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
+        {
+            CopyAllBattleSpritesInvisibilities();
+            TrySetBehindSubstituteSpriteBit(battler, gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8));
+            gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
+            BattleControllerComplete(battler);
+        }
+        break;
+    }
+}
+
 static void Controller_HandleTrainerSlideBack(u32 battler)
 {
     if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
@@ -1761,9 +1834,44 @@ static void Controller_HandleTrainerSlideBack(u32 battler)
     }
 }
 
+void Controller_WaitForHealthBar(u32 battler)
+{
+    s16 hpValue = MoveBattleBar(battler, gHealthboxSpriteIds[battler], HEALTH_BAR, 0);
+
+    SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
+    if (hpValue != -1)
+    {
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[battler], HP_CURRENT, hpValue, gBattleMons[battler].maxHP);
+    }
+    else
+    {
+        if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+            HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+        BattleControllerComplete(battler);
+    }
+}
+
+static void Controller_WaitForBallThrow(u32 battler)
+{
+    if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
+        BattleControllerComplete(battler);
+}
+
+static void Controller_WaitForStatusAnimation(u32 battler)
+{
+    if (!gBattleSpritesDataPtr->healthBoxesData[battler].statusAnimActive)
+        BattleControllerComplete(battler);
+}
+
 static void Controller_WaitForTrainerPic(u32 battler)
 {
     if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
+        BattleControllerComplete(battler);
+}
+
+void Controller_WaitForString(u32 battler)
+{
+    if (!IsTextPrinterActive(B_WIN_MSG))
         BattleControllerComplete(battler);
 }
 
@@ -1992,6 +2100,142 @@ void BtlController_HandleTrainerSlideBack(u32 battler, s16 data0, bool32 startAn
     if (startAnim)
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 1);
     gBattlerControllerFuncs[battler] = Controller_HandleTrainerSlideBack;
+}
+
+#define sSpeedX data[1]
+#define sSpeedY data[2]
+
+void BtlController_HandleFaintAnimation(u32 battler)
+{
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].animationState == 0)
+    {
+        if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
+            InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_SUBSTITUTE_TO_MON);
+        gBattleSpritesDataPtr->healthBoxesData[battler].animationState++;
+    }
+    else
+    {
+        if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
+        {
+            gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
+            if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+            {
+                HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+                gSprites[gBattlerSpriteIds[battler]].sSpeedX = 0;
+                gSprites[gBattlerSpriteIds[battler]].sSpeedY = 5;
+                PlaySE12WithPanning(SE_FAINT, SOUND_PAN_ATTACKER);
+                gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_FaintSlideAnim;
+                gBattlerControllerFuncs[battler] = Controller_FaintPlayerMon;
+            }
+            else
+            {
+                PlaySE12WithPanning(SE_FAINT, SOUND_PAN_TARGET);
+                gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_FaintOpponentMon;
+                gBattlerControllerFuncs[battler] = Controller_FaintOpponentMon;
+            }
+            // The player's sprite callback just slides the mon, the opponent's removes the sprite.
+            // The player's sprite is removed in Controller_FaintPlayerMon. Controller_FaintOpponentMon only removes the healthbox once the sprite is removed by SpriteCB_FaintOpponentMon.
+        }
+    }
+}
+
+#undef sSpeedX
+#undef sSpeedY
+
+static void HandleBallThrow(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture)
+{
+    gDoingBattleAnim = TRUE;
+    if (allowCriticalCapture && IsCriticalCapture())
+        animId = B_ANIM_CRITICAL_CAPTURE_THROW;
+    InitAndLaunchSpecialAnimation(battler, battler, target, animId);
+
+    gBattlerControllerFuncs[battler] = Controller_WaitForBallThrow;
+}
+
+void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture)
+{
+    gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
+    HandleBallThrow(battler, target, animId, allowCriticalCapture);
+}
+
+void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture)
+{
+    gBattleSpritesDataPtr->animationData->ballThrowCaseId = gBattleResources->bufferA[battler][1];
+    HandleBallThrow(battler, target, animId, allowCriticalCapture);
+}
+
+void BtlController_HandleMoveAnimation(u32 battler)
+{
+    if (!IsBattleSEPlaying(battler))
+    {
+        u16 move = gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8);
+
+        gAnimMoveTurn = gBattleResources->bufferA[battler][3];
+        gAnimMovePower = gBattleResources->bufferA[battler][4] | (gBattleResources->bufferA[battler][5] << 8);
+        gAnimMoveDmg = gBattleResources->bufferA[battler][6] | (gBattleResources->bufferA[battler][7] << 8) | (gBattleResources->bufferA[battler][8] << 16) | (gBattleResources->bufferA[battler][9] << 24);
+        gAnimFriendship = gBattleResources->bufferA[battler][10];
+        gWeatherMoveAnim = gBattleResources->bufferA[battler][12] | (gBattleResources->bufferA[battler][13] << 8);
+        gAnimDisableStructPtr = (struct DisableStruct *)&gBattleResources->bufferA[battler][16];
+        gTransformedPersonalities[battler] = gAnimDisableStructPtr->transformedMonPersonality;
+        gTransformedShininess[battler] = gAnimDisableStructPtr->transformedMonShininess;
+        gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
+        gBattlerControllerFuncs[battler] = Controller_DoMoveAnimation;
+    }
+}
+
+void BtlController_HandlePrintString(u32 battler)
+{
+    u16 *stringId;
+
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    stringId = (u16 *)(&gBattleResources->bufferA[battler][2]);
+    BufferStringBattle(battler, *stringId);
+
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
+    gBattlerControllerFuncs[battler] = Controller_WaitForString;
+}
+
+void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText)
+{
+    s32 maxHP, curHP;
+    s16 hpVal;
+    struct Pokemon *party = GetBattlerParty(battler);
+
+    LoadBattleBarGfx(0);
+    hpVal = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
+    maxHP = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_MAX_HP);
+    curHP = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_HP);
+
+    if (hpVal != INSTANT_HP_BAR_DROP)
+    {
+        SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], maxHP, curHP, hpVal);
+    }
+    else
+    {
+        SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], maxHP, 0, hpVal);
+        if (updateHpText)
+            UpdateHpTextInHealthbox(gHealthboxSpriteIds[battler], HP_CURRENT, 0, maxHP);
+    }
+
+    gBattlerControllerFuncs[battler] = Controller_WaitForHealthBar;
+}
+
+void DoStatusIconUpdate(u32 battler)
+{
+    struct Pokemon *party = GetBattlerParty(battler);
+
+    UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &party[gBattlerPartyIndexes[battler]], HEALTHBOX_STATUS_ICON);
+    gBattleSpritesDataPtr->healthBoxesData[battler].statusAnimActive = FALSE;
+    gBattlerControllerFuncs[battler] = Controller_WaitForStatusAnimation;
+}
+
+void BtlController_HandleStatusIconUpdate(u32 battler)
+{
+    if (!IsBattleSEPlaying(battler))
+    {
+        DoStatusIconUpdate(battler);
+    }
 }
 
 

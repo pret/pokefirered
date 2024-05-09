@@ -83,6 +83,7 @@ enum
     HEALTHBOX_SAFARI_BALLS_TEXT
 };
 
+u32 WhichBattleCoords(u32 battlerId);
 void Task_HidePartyStatusSummary(u8 taskId);
 u8 CreateBattlerHealthboxSprites(u8 battlerId);
 u8 CreateSafariPlayerHealthboxSprites(void);

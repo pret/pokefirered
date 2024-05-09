@@ -305,7 +305,7 @@ static void CompleteOnHealthbarDone(u32 battler)
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
 
     if (hpValue != -1)
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[battler], hpValue, HP_CURRENT);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[battler], HP_CURRENT, hpValue, gBattleMons[battler].maxHP);
     else
         LinkOpponentBufferExecCompleted(battler);
 }

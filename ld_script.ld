@@ -420,6 +420,7 @@ SECTIONS {
         src/rtc.o(.rodata);
         src/reset_rtc_screen.o(.rodata);
         src/main_menu.o(.rodata);
+        src/battle_controllers.o(.rodata);
         src/data.o(.rodata);
         src/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);

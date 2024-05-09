@@ -204,6 +204,9 @@ enum
 };
 
 extern struct UnusedControllerStruct gUnusedControllerStruct;
+extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(u32 battler);
+extern void (*gBattlerControllerEndFuncs[MAX_BATTLERS_COUNT])(u32 battler);
+extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 
 // general functions
 void HandleLinkBattleSetup(void);
@@ -256,10 +259,17 @@ void BtlController_EmitLinkStandbyMsg(u32 battler, u32 bufferId, u8 mode);
 void BtlController_EmitResetActionMoveSelection(u32 battler, u32 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u32 battler, u32 bufferId, u8 battleOutcome);
 
+void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.
+
+// handlers
+void BtlController_HandleGetMonData(u32 battler);
+void BtlController_HandleGetRawMonData(u32 battler);
+void BtlController_HandleSetMonData(u32 battler);
+void BtlController_HandleSetRawMonData(u32 battler);
+
 // player controller
 void BattleControllerDummy(u32 battler);
 void SetControllerToPlayer(u32 battler);
-void PlayerHandleGetRawMonData(u32 battler);
 void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
 void SetCB2ToReshowScreenAfterMenu(void);
 void SetCB2ToReshowScreenAfterMenu2(void);

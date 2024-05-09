@@ -9,6 +9,7 @@
 	.include "link.o"
 	.align 4
 	.include "battle_main.o"
+	.include "battle_controllers.o"
 	.include "random.o"
 	.include "load_save.o"
 	.include "overworld.o"

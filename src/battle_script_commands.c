@@ -4589,7 +4589,7 @@ static void Cmd_getexp(void)
         if (gBattleControllerExecFlags == 0)
         {
             // gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0; TODO: bufferB as part of battle resource
-            gBattleBufferB[gBattleStruct->expGetterBattlerId][0] = 0; 
+            gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0; 
             if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_HP) && GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) != MAX_LEVEL)
             {
                 gBattleResources->beforeLvlUp->stats[STAT_HP]    = GetMonData(&gPlayerParty[*expMonId], MON_DATA_MAX_HP);
@@ -4609,7 +4609,7 @@ static void Cmd_getexp(void)
         if (gBattleControllerExecFlags == 0)
         {
             u32 expBattler = gBattleStruct->expGetterBattlerId;
-            if (gBattleBufferB[expBattler][0] == CONTROLLER_TWORETURNVALUES && gBattleBufferB[expBattler][1] == RET_VALUE_LEVELED_UP)
+            if (gBattleResources->bufferB[expBattler][0] == CONTROLLER_TWORETURNVALUES && gBattleResources->bufferB[expBattler][1] == RET_VALUE_LEVELED_UP)
             {
                 u16 temp, battler = 0xFF;
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gBattlerPartyIndexes[expBattler] == *expMonId)
@@ -4621,7 +4621,7 @@ static void Cmd_getexp(void)
                 BattleScriptPushCursor();
                 gLeveledUpInBattle |= gBitTable[*expMonId];
                 gBattlescriptCurrInstr = BattleScript_LevelUp;
-                gBattleMoveDamage = T1_READ_32(&gBattleBufferB[expBattler][2]);
+                gBattleMoveDamage = T1_READ_32(&gBattleResources->bufferB[expBattler][2]);
                 AdjustFriendship(&gPlayerParty[*expMonId], FRIENDSHIP_EVENT_GROW_LEVEL);
 
                 // update battle mon structure after level up
@@ -6522,7 +6522,7 @@ static void Cmd_switchindataupdate(void)
     monData = (u8 *)(&gBattleMons[battler]);
 
     for (i = 0; i < sizeof(struct BattlePokemon); i++)
-        monData[i] = gBattleBufferB[battler][4 + i];
+        monData[i] = gBattleResources->bufferB[battler][4 + i];
 
     // Edge case: the sent out pokemon has 0 HP. This should never happen.
     if (gBattleMons[battler].hp == 0)
@@ -6950,7 +6950,7 @@ static void Cmd_openpartyscreen(void)
                 if (gBitTable[2] & hitmarkerFaintBits && gBitTable[0] & hitmarkerFaintBits)
                 {
                     battler = 2;
-                    if (HasNoMonsToSwitch(battler, gBattleBufferB[0][1], PARTY_SIZE))
+                    if (HasNoMonsToSwitch(battler, gBattleResources->bufferB[0][1], PARTY_SIZE))
                     {
                         gAbsentBattlerFlags |= gBitTable[battler];
                         gHitMarker &= ~HITMARKER_FAINTED(battler);
@@ -6966,7 +6966,7 @@ static void Cmd_openpartyscreen(void)
                 if (gBitTable[3] & hitmarkerFaintBits && hitmarkerFaintBits & gBitTable[1])
                 {
                     battler = 3;
-                    if (HasNoMonsToSwitch(battler, gBattleBufferB[1][1], PARTY_SIZE))
+                    if (HasNoMonsToSwitch(battler, gBattleResources->bufferB[1][1], PARTY_SIZE))
                     {
                         gAbsentBattlerFlags |= gBitTable[battler];
                         gHitMarker &= ~HITMARKER_FAINTED(battler);
@@ -7074,9 +7074,9 @@ static void Cmd_switchhandleorder(void)
     case 0:
         for (i = 0; i < gBattlersCount; i++)
         {
-            if (gBattleBufferB[i][0] == CONTROLLER_CHOSENMONRETURNVALUE)
+            if (gBattleResources->bufferB[i][0] == CONTROLLER_CHOSENMONRETURNVALUE)
             {
-                *(gBattleStruct->monToSwitchIntoId + i) = gBattleBufferB[i][1];
+                *(gBattleStruct->monToSwitchIntoId + i) = gBattleResources->bufferB[i][1];
                 if (!(gBattleStruct->field_93 & gBitTable[i]))
                 {
                     gBattleStruct->field_93 |= gBitTable[i];
@@ -7095,18 +7095,18 @@ static void Cmd_switchhandleorder(void)
         }
         // fall through
     case 3:
-        gBattleCommunication[0] = gBattleBufferB[battler][1];
-        *(gBattleStruct->monToSwitchIntoId + battler) = gBattleBufferB[battler][1];
+        gBattleCommunication[0] = gBattleResources->bufferB[battler][1];
+        *(gBattleStruct->monToSwitchIntoId + battler) = gBattleResources->bufferB[battler][1];
 
         if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
         {
             *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= 0xF;
-            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[battler][2] & 0xF0);
-            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 1) = gBattleBufferB[battler][3];
+            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleResources->bufferB[battler][2] & 0xF0);
+            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 1) = gBattleResources->bufferB[battler][3];
 
             *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= (0xF0);
-            *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[battler][2] & 0xF0) >> 4;
-            *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 2) = gBattleBufferB[battler][3];
+            *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleResources->bufferB[battler][2] & 0xF0) >> 4;
+            *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 2) = gBattleResources->bufferB[battler][3];
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
@@ -7118,7 +7118,7 @@ static void Cmd_switchhandleorder(void)
         }
 
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerAttacker].species)
-        PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, battler, gBattleBufferB[battler][1])
+        PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, battler, gBattleResources->bufferB[battler][1])
         break;
     }
 
@@ -7730,7 +7730,7 @@ static void Cmd_updatebattlermoves(void)
          if (gBattleControllerExecFlags == 0)
          {
             s32 i;
-            struct BattlePokemon *bufferPoke = (struct BattlePokemon *) &gBattleBufferB[battler][4];
+            struct BattlePokemon *bufferPoke = (struct BattlePokemon *) &gBattleResources->bufferB[battler][4];
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 gBattleMons[battler].moves[i] = bufferPoke->moves[i];

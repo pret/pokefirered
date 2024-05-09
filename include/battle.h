@@ -381,8 +381,13 @@ struct BattleResources
     struct BattleCallbacksStack *battleCallbackStack;
     struct StatsArray *beforeLvlUp;
     struct AI_ThinkingStruct *ai;
+    struct AiLogicData *aiData;
+    struct AIPartyData *aiParty;
     struct BattleHistory *battleHistory;
     struct BattleScriptsStack *AI_ScriptsStack;
+    u8 bufferA[MAX_BATTLERS_COUNT][0x200];
+    u8 bufferB[MAX_BATTLERS_COUNT][0x200];
+    u8 transferBuffer[0x100];
 };
 
 extern struct BattleResources *gBattleResources;
@@ -922,8 +927,8 @@ extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gBattleOutcome;
 extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
 extern u32 gBattleControllerExecFlags;
-extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
+// extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
+// extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern void (*gPreBattleCallback1)(void);
 extern bool8 gDoingBattleAnim;

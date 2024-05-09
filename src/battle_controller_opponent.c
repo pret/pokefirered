@@ -167,8 +167,8 @@ static void OpponentBufferRunCommand(u32 battler)
 {
     if (gBattleControllerExecFlags & gBitTable[battler])
     {
-        if (gBattleBufferA[battler][0] < NELEMS(sOpponentBufferCommands))
-            sOpponentBufferCommands[gBattleBufferA[battler][0]](battler);
+        if (gBattleResources->bufferA[battler][0] < NELEMS(sOpponentBufferCommands))
+            sOpponentBufferCommands[gBattleResources->bufferA[battler][0]](battler);
         else
             OpponentBufferExecCompleted(battler);
     }
@@ -433,13 +433,13 @@ static void OpponentHandleGetMonData(u32 battler)
     u8 monToCheck;
     s32 i;
 
-    if (!gBattleBufferA[battler][2])
+    if (!gBattleResources->bufferA[battler][2])
     {
         size += GetOpponentMonData(battler, gBattlerPartyIndexes[battler], monData);
     }
     else
     {
-        monToCheck = gBattleBufferA[battler][2];
+        monToCheck = gBattleResources->bufferA[battler][2];
         for (i = 0; i < PARTY_SIZE; ++i)
         {
             if (monToCheck & 1)
@@ -461,7 +461,7 @@ static u32 GetOpponentMonData(u32 battler, u8 monId, u8 *dst)
     u32 data32;
     s32 size = 0;
 
-    switch (gBattleBufferA[battler][1])
+    switch (gBattleResources->bufferA[battler][1])
     {
     case REQUEST_ALL_BATTLE:
         battleMon.species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES);
@@ -527,7 +527,7 @@ static u32 GetOpponentMonData(u32 battler, u8 monId, u8 *dst)
     case REQUEST_MOVE2_BATTLE:
     case REQUEST_MOVE3_BATTLE:
     case REQUEST_MOVE4_BATTLE:
-        data16 = GetMonData(&gEnemyParty[monId], MON_DATA_MOVE1 + gBattleBufferA[battler][1] - REQUEST_MOVE1_BATTLE);
+        data16 = GetMonData(&gEnemyParty[monId], MON_DATA_MOVE1 + gBattleResources->bufferA[battler][1] - REQUEST_MOVE1_BATTLE);
         dst[0] = data16;
         dst[1] = data16 >> 8;
         size = 2;
@@ -542,7 +542,7 @@ static u32 GetOpponentMonData(u32 battler, u8 monId, u8 *dst)
     case REQUEST_PPMOVE2_BATTLE:
     case REQUEST_PPMOVE3_BATTLE:
     case REQUEST_PPMOVE4_BATTLE:
-        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_PP1 + gBattleBufferA[battler][1] - REQUEST_PPMOVE1_BATTLE);
+        dst[0] = GetMonData(&gEnemyParty[monId], MON_DATA_PP1 + gBattleResources->bufferA[battler][1] - REQUEST_PPMOVE1_BATTLE);
         size = 1;
         break;
     case REQUEST_OTID_BATTLE:
@@ -759,13 +759,13 @@ static u32 GetOpponentMonData(u32 battler, u8 monId, u8 *dst)
 static void OpponentHandleGetRawMonData(u32 battler)
 {
     struct BattlePokemon battleMon;
-    u8 *src = (u8 *)&gEnemyParty[gBattlerPartyIndexes[battler]] + gBattleBufferA[battler][1];
-    u8 *dst = (u8 *)&battleMon + gBattleBufferA[battler][1];
+    u8 *src = (u8 *)&gEnemyParty[gBattlerPartyIndexes[battler]] + gBattleResources->bufferA[battler][1];
+    u8 *dst = (u8 *)&battleMon + gBattleResources->bufferA[battler][1];
     u8 i;
 
-    for (i = 0; i < gBattleBufferA[battler][2]; ++i)
+    for (i = 0; i < gBattleResources->bufferA[battler][2]; ++i)
         dst[i] = src[i];
-    BtlController_EmitDataTransfer(battler, BUFFER_B, gBattleBufferA[battler][2], dst);
+    BtlController_EmitDataTransfer(battler, BUFFER_B, gBattleResources->bufferA[battler][2], dst);
     OpponentBufferExecCompleted(battler);
 }
 
@@ -774,13 +774,13 @@ static void OpponentHandleSetMonData(u32 battler)
     u8 monToCheck;
     u8 i;
 
-    if (gBattleBufferA[battler][2] == 0)
+    if (gBattleResources->bufferA[battler][2] == 0)
     {
         SetOpponentMonData(battler, gBattlerPartyIndexes[battler]);
     }
     else
     {
-        monToCheck = gBattleBufferA[battler][2];
+        monToCheck = gBattleResources->bufferA[battler][2];
         for (i = 0; i < PARTY_SIZE; ++i)
         {
             if (monToCheck & 1)
@@ -793,11 +793,11 @@ static void OpponentHandleSetMonData(u32 battler)
 
 static void SetOpponentMonData(u32 battler, u8 monId)
 {
-    struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleBufferA[battler][3];
-    struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleBufferA[battler][3];
+    struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleResources->bufferA[battler][3];
+    struct MovePpInfo *moveData = (struct MovePpInfo *)&gBattleResources->bufferA[battler][3];
     s32 i;
 
-    switch (gBattleBufferA[battler][1])
+    switch (gBattleResources->bufferA[battler][1])
     {
     case REQUEST_ALL_BATTLE:
         {
@@ -838,10 +838,10 @@ static void SetOpponentMonData(u32 battler, u8 monId)
         }
         break;
     case REQUEST_SPECIES_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_HELDITEM_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_HELD_ITEM, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_HELD_ITEM, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_MOVES_PP_BATTLE:
         for (i = 0; i < MAX_MON_MOVES; ++i)
@@ -855,165 +855,165 @@ static void SetOpponentMonData(u32 battler, u8 monId)
     case REQUEST_MOVE2_BATTLE:
     case REQUEST_MOVE3_BATTLE:
     case REQUEST_MOVE4_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_MOVE1 + gBattleBufferA[battler][1] - REQUEST_MOVE1_BATTLE, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_MOVE1 + gBattleResources->bufferA[battler][1] - REQUEST_MOVE1_BATTLE, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_PP_DATA_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_PP1, &gBattleBufferA[battler][3]);
-        SetMonData(&gEnemyParty[monId], MON_DATA_PP2, &gBattleBufferA[battler][4]);
-        SetMonData(&gEnemyParty[monId], MON_DATA_PP3, &gBattleBufferA[battler][5]);
-        SetMonData(&gEnemyParty[monId], MON_DATA_PP4, &gBattleBufferA[battler][6]);
-        SetMonData(&gEnemyParty[monId], MON_DATA_PP_BONUSES, &gBattleBufferA[battler][7]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_PP1, &gBattleResources->bufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_PP2, &gBattleResources->bufferA[battler][4]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_PP3, &gBattleResources->bufferA[battler][5]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_PP4, &gBattleResources->bufferA[battler][6]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_PP_BONUSES, &gBattleResources->bufferA[battler][7]);
         break;
     case REQUEST_PPMOVE1_BATTLE:
     case REQUEST_PPMOVE2_BATTLE:
     case REQUEST_PPMOVE3_BATTLE:
     case REQUEST_PPMOVE4_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_PP1 + gBattleBufferA[battler][1] - REQUEST_PPMOVE1_BATTLE, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_PP1 + gBattleResources->bufferA[battler][1] - REQUEST_PPMOVE1_BATTLE, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_OTID_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_OT_ID, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_OT_ID, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_EXP_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_EXP, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_EXP, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_HP_EV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_HP_EV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_HP_EV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_ATK_EV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_ATK_EV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_ATK_EV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_DEF_EV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_DEF_EV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_DEF_EV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SPEED_EV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED_EV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED_EV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SPATK_EV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPATK_EV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPATK_EV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SPDEF_EV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF_EV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF_EV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_FRIENDSHIP_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_FRIENDSHIP, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_FRIENDSHIP, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_POKERUS_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_POKERUS, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_POKERUS, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_MET_LOCATION_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_MET_LOCATION, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_MET_LOCATION, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_MET_LEVEL_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_MET_LEVEL, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_MET_LEVEL, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_MET_GAME_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_MET_GAME, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_MET_GAME, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_POKEBALL_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_POKEBALL, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_POKEBALL, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_ALL_IVS_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_HP_IV, &gBattleBufferA[battler][3]);
-        SetMonData(&gEnemyParty[monId], MON_DATA_ATK_IV, &gBattleBufferA[battler][4]);
-        SetMonData(&gEnemyParty[monId], MON_DATA_DEF_IV, &gBattleBufferA[battler][5]);
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED_IV, &gBattleBufferA[battler][6]);
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPATK_IV, &gBattleBufferA[battler][7]);
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF_IV, &gBattleBufferA[battler][8]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_HP_IV, &gBattleResources->bufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_ATK_IV, &gBattleResources->bufferA[battler][4]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_DEF_IV, &gBattleResources->bufferA[battler][5]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED_IV, &gBattleResources->bufferA[battler][6]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPATK_IV, &gBattleResources->bufferA[battler][7]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF_IV, &gBattleResources->bufferA[battler][8]);
         break;
     case REQUEST_HP_IV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_HP_IV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_HP_IV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_ATK_IV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_ATK_IV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_ATK_IV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_DEF_IV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_DEF_IV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_DEF_IV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SPEED_IV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED_IV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED_IV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SPATK_IV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPATK_IV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPATK_IV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SPDEF_IV_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF_IV, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF_IV, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_PERSONALITY_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_PERSONALITY, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_PERSONALITY, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_CHECKSUM_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_CHECKSUM, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_CHECKSUM, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_STATUS_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_STATUS, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_STATUS, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_LEVEL_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_LEVEL, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_LEVEL, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_HP_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_HP, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_HP, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_MAX_HP_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_MAX_HP, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_MAX_HP, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_ATK_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_ATK, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_ATK, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_DEF_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_DEF, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_DEF, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SPEED_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPEED, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SPATK_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPATK, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPATK, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SPDEF_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SPDEF, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_COOL_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_COOL, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_COOL, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_BEAUTY_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_BEAUTY, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_BEAUTY, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_CUTE_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_CUTE, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_CUTE, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SMART_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SMART, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SMART, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_TOUGH_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_TOUGH, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_TOUGH, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SHEEN_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SHEEN, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SHEEN, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_COOL_RIBBON_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_COOL_RIBBON, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_COOL_RIBBON, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_BEAUTY_RIBBON_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_BEAUTY_RIBBON, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_BEAUTY_RIBBON, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_CUTE_RIBBON_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_CUTE_RIBBON, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_CUTE_RIBBON, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_SMART_RIBBON_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_SMART_RIBBON, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_SMART_RIBBON, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_TOUGH_RIBBON_BATTLE:
-        SetMonData(&gEnemyParty[monId], MON_DATA_TOUGH_RIBBON, &gBattleBufferA[battler][3]);
+        SetMonData(&gEnemyParty[monId], MON_DATA_TOUGH_RIBBON, &gBattleResources->bufferA[battler][3]);
         break;
     }
 }
 
 static void OpponentHandleSetRawMonData(u32 battler)
 {
-    u8 *dst = (u8 *)&gEnemyParty[gBattlerPartyIndexes[battler]] + gBattleBufferA[battler][1];
+    u8 *dst = (u8 *)&gEnemyParty[gBattlerPartyIndexes[battler]] + gBattleResources->bufferA[battler][1];
     u8 i;
 
-    for (i = 0; i < gBattleBufferA[battler][2]; ++i)
-        dst[i] = gBattleBufferA[battler][3 + i];
+    for (i = 0; i < gBattleResources->bufferA[battler][2]; ++i)
+        dst[i] = gBattleResources->bufferA[battler][3 + i];
     OpponentBufferExecCompleted(battler);
 }
 
@@ -1052,8 +1052,8 @@ static void OpponentHandleLoadMonSprite(u32 battler)
 static void OpponentHandleSwitchInAnim(u32 battler)
 {
     *(gBattleStruct->monToSwitchIntoId + battler) = 6;
-    gBattlerPartyIndexes[battler] = gBattleBufferA[battler][1];
-    StartSendOutAnim(battler, gBattleBufferA[battler][2]);
+    gBattlerPartyIndexes[battler] = gBattleResources->bufferA[battler][1];
+    StartSendOutAnim(battler, gBattleResources->bufferA[battler][2]);
     gBattlerControllerFuncs[battler] = SwitchIn_TryShinyAnim;
 }
 
@@ -1062,7 +1062,7 @@ static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
     u16 species;
 
     ClearTemporarySpeciesSpriteData(battlerId, dontClearSubstituteBit);
-    gBattlerPartyIndexes[battlerId] = gBattleBufferA[battlerId][1];
+    gBattlerPartyIndexes[battlerId] = gBattleResources->bufferA[battlerId][1];
     species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES);
     gBattleControllerData[battlerId] = CreateInvisibleSpriteWithCallback(SpriteCB_WaitForBattlerBallReleaseAnim);
     BattleLoadOpponentMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battlerId]], battlerId);
@@ -1083,7 +1083,7 @@ static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit)
 
 static void OpponentHandleReturnMonToBall(u32 battler)
 {
-    if (!gBattleBufferA[battler][1])
+    if (!gBattleResources->bufferA[battler][1])
     {
         gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
         gBattlerControllerFuncs[battler] = DoSwitchOutAnimation;
@@ -1234,14 +1234,14 @@ static void OpponentHandleMoveAnimation(u32 battler)
 {
     if (!IsBattleSEPlaying(battler))
     {
-        u16 move = gBattleBufferA[battler][1] | (gBattleBufferA[battler][2] << 8);
+        u16 move = gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8);
 
-        gAnimMoveTurn = gBattleBufferA[battler][3];
-        gAnimMovePower = gBattleBufferA[battler][4] | (gBattleBufferA[battler][5] << 8);
-        gAnimMoveDmg = gBattleBufferA[battler][6] | (gBattleBufferA[battler][7] << 8) | (gBattleBufferA[battler][8] << 16) | (gBattleBufferA[battler][9] << 24);
-        gAnimFriendship = gBattleBufferA[battler][10];
-        gWeatherMoveAnim = gBattleBufferA[battler][12] | (gBattleBufferA[battler][13] << 8);
-        gAnimDisableStructPtr = (struct DisableStruct *)&gBattleBufferA[battler][16];
+        gAnimMoveTurn = gBattleResources->bufferA[battler][3];
+        gAnimMovePower = gBattleResources->bufferA[battler][4] | (gBattleResources->bufferA[battler][5] << 8);
+        gAnimMoveDmg = gBattleResources->bufferA[battler][6] | (gBattleResources->bufferA[battler][7] << 8) | (gBattleResources->bufferA[battler][8] << 16) | (gBattleResources->bufferA[battler][9] << 24);
+        gAnimFriendship = gBattleResources->bufferA[battler][10];
+        gWeatherMoveAnim = gBattleResources->bufferA[battler][12] | (gBattleResources->bufferA[battler][13] << 8);
+        gAnimDisableStructPtr = (struct DisableStruct *)&gBattleResources->bufferA[battler][16];
         gTransformedPersonalities[battler] = gAnimDisableStructPtr->transformedMonPersonality;
         if (IsMoveWithoutAnimation(move, gAnimMoveTurn)) // always returns FALSE
         {
@@ -1257,8 +1257,8 @@ static void OpponentHandleMoveAnimation(u32 battler)
 
 static void OpponentDoMoveAnimation(u32 battler)
 {
-    u16 move = gBattleBufferA[battler][1] | (gBattleBufferA[battler][2] << 8);
-    u8 multihit = gBattleBufferA[battler][11];
+    u16 move = gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8);
+    u8 multihit = gBattleResources->bufferA[battler][11];
 
     switch (gBattleSpritesDataPtr->healthBoxesData[battler].animationState)
     {
@@ -1296,7 +1296,7 @@ static void OpponentDoMoveAnimation(u32 battler)
         if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
         {
             CopyAllBattleSpritesInvisibilities();
-            TrySetBehindSubstituteSpriteBit(battler, gBattleBufferA[battler][1] | (gBattleBufferA[battler][2] << 8));
+            TrySetBehindSubstituteSpriteBit(battler, gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8));
             gBattleSpritesDataPtr->healthBoxesData[battler].animationState = 0;
             OpponentBufferExecCompleted(battler);
         }
@@ -1310,7 +1310,7 @@ static void OpponentHandlePrintString(u32 battler)
 
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
-    stringId = (u16 *)(&gBattleBufferA[battler][2]);
+    stringId = (u16 *)(&gBattleResources->bufferA[battler][2]);
     BufferStringBattle(battler, *stringId);
     if (BattleStringShouldBeColored(*stringId))
         BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
@@ -1350,7 +1350,7 @@ static void OpponentHandleUnknownYesNoBox(u32 battler)
 static void OpponentHandleChooseMove(u32 battler)
 {
     u8 chosenMoveId;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[battler][4]);
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
     if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER))
     {
@@ -1455,7 +1455,7 @@ static void OpponentHandleHealthBarUpdate(u32 battler)
     s16 hpVal;
 
     LoadBattleBarGfx(0);
-    hpVal = (gBattleBufferA[battler][3] << 8) | gBattleBufferA[battler][2];
+    hpVal = (gBattleResources->bufferA[battler][3] << 8) | gBattleResources->bufferA[battler][2];
 
     if (hpVal != INSTANT_HP_BAR_DROP)
     {
@@ -1495,8 +1495,8 @@ static void OpponentHandleStatusAnimation(u32 battler)
 {
     if (!IsBattleSEPlaying(battler))
     {
-        InitAndLaunchChosenStatusAnimation(battler, gBattleBufferA[battler][1],
-                                           gBattleBufferA[battler][2] | (gBattleBufferA[battler][3] << 8) | (gBattleBufferA[battler][4] << 16) | (gBattleBufferA[battler][5] << 24));
+        InitAndLaunchChosenStatusAnimation(battler, gBattleResources->bufferA[battler][1],
+                                           gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8) | (gBattleResources->bufferA[battler][4] << 16) | (gBattleResources->bufferA[battler][5] << 24));
         gBattlerControllerFuncs[battler] = CompleteOnFinishedStatusAnimation;
     }
 }
@@ -1554,7 +1554,7 @@ static void OpponentHandleCmd37(u32 battler)
 
 static void OpponentHandleCmd38(u32 battler)
 {
-    gUnusedControllerStruct.unk = gBattleBufferA[battler][1];
+    gUnusedControllerStruct.unk = gBattleResources->bufferA[battler][1];
     OpponentBufferExecCompleted(battler);
 }
 
@@ -1598,13 +1598,13 @@ static void OpponentHandlePlaySE(u32 battler)
         pan = SOUND_PAN_ATTACKER;
     else
         pan = SOUND_PAN_TARGET;
-    PlaySE12WithPanning(gBattleBufferA[battler][1] | (gBattleBufferA[battler][2] << 8), pan);
+    PlaySE12WithPanning(gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8), pan);
     OpponentBufferExecCompleted(battler);
 }
 
 static void OpponentHandlePlayFanfare(u32 battler)
 {
-    PlayFanfare(gBattleBufferA[battler][1] | (gBattleBufferA[battler][2] << 8));
+    PlayFanfare(gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8));
     OpponentBufferExecCompleted(battler);
 }
 
@@ -1618,7 +1618,7 @@ static void OpponentHandleFaintingCry(u32 battler)
 
 static void OpponentHandleIntroSlide(u32 battler)
 {
-    HandleIntroSlide(gBattleBufferA[battler][1]);
+    HandleIntroSlide(gBattleResources->bufferA[battler][1]);
     gIntroSlideFlags |= 1;
     OpponentBufferExecCompleted(battler);
 }
@@ -1655,16 +1655,16 @@ static void Task_StartSendOutAnim(u8 taskId)
     u8 battler = gTasks[taskId].data[0];
     if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
-        gBattleBufferA[battler][1] = gBattlerPartyIndexes[battler];
+        gBattleResources->bufferA[battler][1] = gBattlerPartyIndexes[battler];
         StartSendOutAnim(battler, FALSE);
     }
     else
     {
         u8 battlerPartner = BATTLE_PARTNER(battler);
-        gBattleBufferA[battler][1] = gBattlerPartyIndexes[battler];
+        gBattleResources->bufferA[battler][1] = gBattlerPartyIndexes[battler];
         StartSendOutAnim(battler, FALSE);
 
-        gBattleBufferA[battlerPartner][1] = gBattlerPartyIndexes[battlerPartner];
+        gBattleResources->bufferA[battlerPartner][1] = gBattlerPartyIndexes[battlerPartner];
         StartSendOutAnim(battlerPartner, FALSE);
     }
     gBattlerControllerFuncs[battler] = Intro_TryShinyAnimShowHealthbox;
@@ -1673,14 +1673,14 @@ static void Task_StartSendOutAnim(u8 taskId)
 
 static void OpponentHandleDrawPartyStatusSummary(u32 battler)
 {
-    if (gBattleBufferA[battler][1] && GetBattlerSide(battler) == B_SIDE_PLAYER)
+    if (gBattleResources->bufferA[battler][1] && GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
         OpponentBufferExecCompleted(battler);
     }
     else
     {
         gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown = TRUE;
-        if (gBattleBufferA[battler][2])
+        if (gBattleResources->bufferA[battler][2])
         {
             if (gBattleSpritesDataPtr->healthBoxesData[battler].opponentDrawPartyStatusSummaryDelay < 2)
             {
@@ -1693,11 +1693,11 @@ static void OpponentHandleDrawPartyStatusSummary(u32 battler)
             }
         }
         gBattlerStatusSummaryTaskId[battler] = CreatePartyStatusSummarySprites(battler, 
-                                                                                      (struct HpAndStatus *)&gBattleBufferA[battler][4], 
-                                                                                      gBattleBufferA[battler][1], 
-                                                                                      gBattleBufferA[battler][2]);
+                                                                                      (struct HpAndStatus *)&gBattleResources->bufferA[battler][4], 
+                                                                                      gBattleResources->bufferA[battler][1], 
+                                                                                      gBattleResources->bufferA[battler][2]);
         gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 0;
-        if (gBattleBufferA[battler][2])
+        if (gBattleResources->bufferA[battler][2])
             gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 0x5D;
         gBattlerControllerFuncs[battler] = EndDrawPartyStatusSummary;
     }
@@ -1728,7 +1728,7 @@ static void OpponentHandleSpriteInvisibility(u32 battler)
 {
     if (IsBattlerSpritePresent(battler))
     {
-        gSprites[gBattlerSpriteIds[battler]].invisible = gBattleBufferA[battler][1];
+        gSprites[gBattlerSpriteIds[battler]].invisible = gBattleResources->bufferA[battler][1];
         CopyBattleSpriteInvisibility(battler);
     }
     OpponentBufferExecCompleted(battler);
@@ -1738,8 +1738,8 @@ static void OpponentHandleBattleAnimation(u32 battler)
 {
     if (!IsBattleSEPlaying(battler))
     {
-        u8 animationId = gBattleBufferA[battler][1];
-        u16 argument = gBattleBufferA[battler][2] | (gBattleBufferA[battler][3] << 8);
+        u8 animationId = gBattleResources->bufferA[battler][1];
+        u16 argument = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
 
         if (TryHandleLaunchBattleTableAnimation(battler, battler, battler, animationId, argument))
             OpponentBufferExecCompleted(battler);

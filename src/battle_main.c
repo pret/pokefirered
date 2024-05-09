@@ -139,8 +139,6 @@ EWRAM_DATA static struct MultiPartnerMenuPokemon* sMultiPartnerPartyBuffer = NUL
 EWRAM_DATA u8 *gBattleAnimBgTileBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTilemapBuffer = NULL;
 static EWRAM_DATA u16 *sUnknownDebugSpriteDataBuffer = NULL;
-EWRAM_DATA u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200] = {0};
-EWRAM_DATA u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200] = {0};
 EWRAM_DATA u32 gBattleControllerExecFlags = 0;
 EWRAM_DATA u8 gBattlersCount = 0;
 EWRAM_DATA u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT] = {0};
@@ -2880,7 +2878,7 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
 
             ptr = (u8 *)&gBattleMons[battler];
             for (i = 0; i < sizeof(struct BattlePokemon); i++)
-                ptr[i] = gBattleBufferB[battler][4 + i];
+                ptr[i] = gBattleResources->bufferB[battler][4 + i];
 
             gBattleMons[battler].type1 = gSpeciesInfo[gBattleMons[battler].species].types[0];
             gBattleMons[battler].type2 = gSpeciesInfo[gBattleMons[battler].species].types[1];
@@ -3419,7 +3417,7 @@ static void HandleTurnActionSelectionState(void)
                     else
                     {
                         gBattleStruct->itemPartyIndex[battler] = PARTY_SIZE;
-                        BtlController_EmitChooseAction(battler, BUFFER_A, gChosenActionByBattler[0], gBattleBufferB[0][1] | (gBattleBufferB[0][2] << 8));
+                        BtlController_EmitChooseAction(battler, BUFFER_A, gChosenActionByBattler[0], gBattleResources->bufferB[0][1] | (gBattleResources->bufferB[0][2] << 8));
                         MarkBattlerForControllerExec(battler);
                         gBattleCommunication[battler]++;
                     }
@@ -3429,8 +3427,8 @@ static void HandleTurnActionSelectionState(void)
         case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.
             if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF << 28) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 12))))
             {
-                gChosenActionByBattler[battler] = gBattleBufferB[battler][1];
-                switch (gBattleBufferB[battler][1])
+                gChosenActionByBattler[battler] = gBattleResources->bufferB[battler][1];
+                switch (gBattleResources->bufferB[battler][1])
                 {
                 case B_ACTION_USE_MOVE:
                     if (AreAllMovesUnusable(battler))
@@ -3438,7 +3436,7 @@ static void HandleTurnActionSelectionState(void)
                         gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
                         *(gBattleStruct->selectionScriptFinished + battler) = FALSE;
                         *(gBattleStruct->stateIdAfterSelScript + battler) = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
-                        *(gBattleStruct->moveTarget + battler) = gBattleBufferB[battler][3];
+                        *(gBattleStruct->moveTarget + battler) = gBattleResources->bufferB[battler][3];
                         return;
                     }
                     else if (gDisableStructs[battler].encoredMove != MOVE_NONE)
@@ -3541,13 +3539,13 @@ static void HandleTurnActionSelectionState(void)
 
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
                  && !(gBattleTypeFlags & BATTLE_TYPE_LINK)
-                 && gBattleBufferB[battler][1] == B_ACTION_RUN)
+                 && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
                     BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
                     gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
                 }
                 else if (IsRunningFromBattleImpossible(battler) != BATTLE_RUN_SUCCESS
-                      && gBattleBufferB[battler][1] == B_ACTION_RUN)
+                      && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
                     gSelectionBattleScripts[battler] = BattleScript_PrintCantEscapeFromBattle;
                     gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
@@ -3567,7 +3565,7 @@ static void HandleTurnActionSelectionState(void)
                 switch (gChosenActionByBattler[battler])
                 {
                 case B_ACTION_USE_MOVE:
-                    switch (gBattleBufferB[battler][1])
+                    switch (gBattleResources->bufferB[battler][1])
                     {
                     case 3:
                     case 4:
@@ -3576,14 +3574,14 @@ static void HandleTurnActionSelectionState(void)
                     case 7:
                     case 8:
                     case 9:
-                        gChosenActionByBattler[battler] = gBattleBufferB[battler][1];
+                        gChosenActionByBattler[battler] = gBattleResources->bufferB[battler][1];
                         return;
                     case 15:
                         gChosenActionByBattler[battler] = B_ACTION_SWITCH;
                         UpdateBattlerPartyOrdersOnSwitch(battler);
                         return;
                     default:
-                        if ((gBattleBufferB[battler][2] | (gBattleBufferB[battler][3] << 8)) == 0xFFFF)
+                        if ((gBattleResources->bufferB[battler][2] | (gBattleResources->bufferB[battler][3] << 8)) == 0xFFFF)
                         {
                             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
                         }
@@ -3591,23 +3589,23 @@ static void HandleTurnActionSelectionState(void)
                         {
                             gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
                             *(gBattleStruct->selectionScriptFinished + battler) = FALSE;
-                            gBattleBufferB[battler][1] = B_ACTION_USE_MOVE;
+                            gBattleResources->bufferB[battler][1] = B_ACTION_USE_MOVE;
                             *(gBattleStruct->stateIdAfterSelScript + battler) = STATE_WAIT_ACTION_CHOSEN;
                             return;
                         }
                         else
                         {
                             // Get the chosen move position (and thus the chosen move) and target from the returned buffer.
-                            *(gBattleStruct->chosenMovePositions + battler) = gBattleBufferB[battler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST | RET_DYNAMAX);
+                            *(gBattleStruct->chosenMovePositions + battler) = gBattleResources->bufferB[battler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST | RET_DYNAMAX);
                             gChosenMoveByBattler[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
-                            *(gBattleStruct->moveTarget + battler) = gBattleBufferB[battler][3];
+                            *(gBattleStruct->moveTarget + battler) = gBattleResources->bufferB[battler][3];
                             
                             // Check to see if any gimmicks need to be prepared.
-                            if (gBattleBufferB[battler][2] & RET_MEGA_EVOLUTION)
+                            if (gBattleResources->bufferB[battler][2] & RET_MEGA_EVOLUTION)
                                 gBattleStruct->mega.toEvolve |= gBitTable[battler];
-                            else if (gBattleBufferB[battler][2] & RET_ULTRA_BURST)
+                            else if (gBattleResources->bufferB[battler][2] & RET_ULTRA_BURST)
                                 gBattleStruct->burst.toBurst |= gBitTable[battler];
-                            else if (gBattleBufferB[battler][2] & RET_DYNAMAX)
+                            else if (gBattleResources->bufferB[battler][2] & RET_DYNAMAX)
                                 gBattleStruct->dynamax.toDynamax |= gBitTable[battler];
 
                             // TODO: Dynamax
@@ -3624,32 +3622,32 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case B_ACTION_USE_ITEM:
-                    if ((gBattleBufferB[battler][1] | (gBattleBufferB[battler][2] << 8)) == 0)
+                    if ((gBattleResources->bufferB[battler][1] | (gBattleResources->bufferB[battler][2] << 8)) == 0)
                     {
                         gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
                     }
                     else
                     {
-                        gLastUsedItem = (gBattleBufferB[battler][1] | (gBattleBufferB[battler][2] << 8));
+                        gLastUsedItem = (gBattleResources->bufferB[battler][1] | (gBattleResources->bufferB[battler][2] << 8));
                         gBattleCommunication[battler]++;
                     }
                     break;
                 case B_ACTION_SWITCH:
-                    if (gBattleBufferB[battler][1] == PARTY_SIZE)
+                    if (gBattleResources->bufferB[battler][1] == PARTY_SIZE)
                     {
                         gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
                     }
                     else
                     {
-                        *(gBattleStruct->monToSwitchIntoId + battler) = gBattleBufferB[battler][1];
+                        *(gBattleStruct->monToSwitchIntoId + battler) = gBattleResources->bufferB[battler][1];
                         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                         {
                             *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= 0xF;
-                            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[battler][2] & 0xF0);
-                            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 1) = gBattleBufferB[battler][3];
+                            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleResources->bufferB[battler][2] & 0xF0);
+                            *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 1) = gBattleResources->bufferB[battler][3];
                             *(BATTLE_PARTNER(battler) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= (0xF0);
-                            *(BATTLE_PARTNER(battler) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[battler][2] & 0xF0) >> 4;
-                            *(BATTLE_PARTNER(battler) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 2) = gBattleBufferB[battler][3];
+                            *(BATTLE_PARTNER(battler) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleResources->bufferB[battler][2] & 0xF0) >> 4;
+                            *(BATTLE_PARTNER(battler) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 2) = gBattleResources->bufferB[battler][3];
                         }
                         gBattleCommunication[battler]++;
                     }
@@ -3722,17 +3720,17 @@ static void HandleTurnActionSelectionState(void)
 
 static void UpdateBattlerPartyOrdersOnSwitch(u32 battler)
 {
-    gBattleStruct->monToSwitchIntoId[battler] = gBattleBufferB[battler][1];
+    gBattleStruct->monToSwitchIntoId[battler] = gBattleResources->bufferB[battler][1];
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= 0xF;
-        *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[battler][2] & 0xF0);
-        *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 1) = gBattleBufferB[battler][3];
+        *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleResources->bufferB[battler][2] & 0xF0);
+        *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 1) = gBattleResources->bufferB[battler][3];
 
         *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= (0xF0);
-        *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[battler][2] & 0xF0) >> 4;
-        *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 2) = gBattleBufferB[battler][3];
+        *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleResources->bufferB[battler][2] & 0xF0) >> 4;
+        *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 2) = gBattleResources->bufferB[battler][3];
     }
 }
 
@@ -4794,7 +4792,7 @@ static void HandleAction_UseItem(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
-    gLastUsedItem = gBattleBufferB[gBattlerAttacker][1] | (gBattleBufferB[gBattlerAttacker][2] << 8);
+    gLastUsedItem = gBattleResources->bufferB[gBattlerAttacker][1] | (gBattleResources->bufferB[gBattlerAttacker][2] << 8);
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER) {
         // change to index minus 1
         DebugPrintfLevel(MGBA_LOG_ERROR, "BattleUsage: %d", ItemId_GetBattleUsage(gLastUsedItem));

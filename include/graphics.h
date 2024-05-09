@@ -5464,4 +5464,12 @@ extern const u16 gPokeStorageInterface_NoDisplayMon_Pal[];
 extern const u16 gDexScreen_TopMenuIconPals_AtoZ[];
 extern const u32 gDexScreen_TopMenuIconTiles_AtoZ[];
 
+// new battle anim particles
+extern const u32 gBattleAnimSpriteGfx_MegaStone[];
+extern const u32 gBattleAnimSpritePal_MegaStone[];
+extern const u32 gBattleAnimSpriteGfx_MegaParticles[];
+extern const u32 gBattleAnimSpritePal_MegaParticles[];
+extern const u32 gBattleAnimSpriteGfx_MegaSymbol[];
+extern const u32 gBattleAnimSpritePal_MegaSymbol[];
+
 #endif //GUARD_GRAPHICS_H

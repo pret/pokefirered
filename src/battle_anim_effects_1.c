@@ -19,7 +19,6 @@ static void AnimMovePowderParticle_Step(struct Sprite *);
 static void AnimSolarBeamSmallOrb(struct Sprite *);
 static void AnimSolarBeamSmallOrb_Step(struct Sprite *);
 static void AnimSolarBeamBigOrb(struct Sprite *);
-static void AnimPowerAbsorptionOrb(struct Sprite *);
 static void AnimAbsorptionOrb(struct Sprite *);
 static void AnimAbsorptionOrb_Step(struct Sprite *);
 static void AnimHyperBeamOrb(struct Sprite *);
@@ -2216,6 +2215,26 @@ const struct SpriteTemplate gTauntFingerSpriteTemplate =
     .callback = AnimTauntFinger,
 };
 
+const union AffineAnimCmd gPowerAbsorptionOrbAffineAnimCmds[] = {
+    AFFINEANIMCMD_FRAME(-5, -5, 0, 1),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const gPowerAbsorptionOrbAffineAnimTable[] = {
+    gPowerAbsorptionOrbAffineAnimCmds,
+};
+
+const union AnimCmd gPowerAbsorptionOrbAnimCmds[] =
+{
+    ANIMCMD_FRAME(8, 1),
+    ANIMCMD_END,
+};
+
+const union AnimCmd *const gPowerAbsorptionOrbAnimTable[] =
+{
+    gPowerAbsorptionOrbAnimCmds,
+};
+
 // Animates the falling particles that horizontally wave back and forth.
 // Used by Sleep Powder, Stun Spore, and Poison Powder.
 // arg 0: initial x pixel offset
@@ -2264,7 +2283,7 @@ static void AnimMovePowderParticle_Step(struct Sprite* sprite)
 // arg 0: initial x pixel offset
 // arg 1: initial y pixel offset
 // arg 2: duration
-static void AnimPowerAbsorptionOrb(struct Sprite* sprite)
+void AnimPowerAbsorptionOrb(struct Sprite* sprite)
 {
     InitSpritePosToAnimAttacker(sprite, TRUE);
     sprite->data[0] = gBattleAnimArgs[2];

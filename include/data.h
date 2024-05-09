@@ -19,6 +19,74 @@ struct MonCoords
 #define GET_MON_COORDS_WIDTH(size)((size >> 4) * 8)
 #define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
 
+
+#define MAX_TRAINER_ITEMS 4
+
+enum {
+    BATTLER_AFFINE_NORMAL,
+    BATTLER_AFFINE_EMERGE,
+    BATTLER_AFFINE_RETURN,
+};
+
+struct TrainerMonNoItemDefaultMoves
+{
+    u16 iv;
+    u8 lvl;
+    u16 species;
+};
+
+struct TrainerMonItemDefaultMoves
+{
+    u16 iv;
+    u8 lvl;
+    u16 species;
+    u16 heldItem;
+};
+
+struct TrainerMonNoItemCustomMoves
+{
+    u16 iv;
+    u8 lvl;
+    u16 species;
+    u16 moves[MAX_MON_MOVES];
+};
+
+struct TrainerMonItemCustomMoves
+{
+    u16 iv;
+    u8 lvl;
+    u16 species;
+    u16 heldItem;
+    u16 moves[MAX_MON_MOVES];
+};
+
+#define NO_ITEM_DEFAULT_MOVES(party) { .NoItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = 0
+#define NO_ITEM_CUSTOM_MOVES(party) { .NoItemCustomMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET
+#define ITEM_DEFAULT_MOVES(party) { .ItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_HELD_ITEM
+#define ITEM_CUSTOM_MOVES(party) { .ItemCustomMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM
+
+union TrainerMonPtr
+{
+    const struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
+    const struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
+    const struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
+    const struct TrainerMonItemCustomMoves *ItemCustomMoves;
+};
+
+struct Trainer
+{
+    /*0x00*/ u8 partyFlags;
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u8 encounterMusic_gender; // last bit is gender
+    /*0x03*/ u8 trainerPic;
+    /*0x04*/ u8 trainerName[12];
+    /*0x10*/ u16 items[MAX_TRAINER_ITEMS];
+    /*0x18*/ bool8 doubleBattle;
+    /*0x1C*/ u32 aiFlags;
+    /*0x20*/ u8 partySize;
+    /*0x24*/ const union TrainerMonPtr party;
+};
+
 // extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 // extern const u8 gMoveNames[][MOVE_NAME_LENGTH + 1];
 
@@ -86,6 +154,14 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_RSMay[];
 
 extern const union AnimCmd sAnim_GeneralFrame0[];
 
+extern const struct Trainer gTrainers[];
+
+static inline const u8 *GetTrainerNameFromId(u16 trainerId)
+{
+    // if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
+    //     return gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
+    return gTrainers[SanitizeTrainerId(trainerId)].trainerName;
+}
 // static inline const struct TrainerMon *GetTrainerPartyFromId(u16 trainerId)
 // {
 //     return gTrainers[SanitizeTrainerId(trainerId)].party;

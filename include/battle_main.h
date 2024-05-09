@@ -10,7 +10,7 @@ struct TrainerMoney
     u8 value;
 };
 
-struct MultiBattlePokemonTx
+struct MultiPartnerMenuPokemon
 {
     /*0x00*/ u16 species;
     /*0x02*/ u16 heldItem;
@@ -55,7 +55,6 @@ extern const u8 gStatusConditionString_IceJpn[8];
 extern const u8 gStatusConditionString_ConfusionJpn[8];
 extern const u8 gStatusConditionString_LoveJpn[8];
 extern const u8 *const gStatusConditionStringsTable[7][2];
-extern const u8 gTypeEffectiveness[372];
 extern const struct TrainerMoney gTrainerMoneyTable[];
 
 void CB2_InitBattle(void);

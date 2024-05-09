@@ -1985,40 +1985,6 @@ void AI_CalcDmg(u8 attacker, u8 defender)
     CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget), TRUE);
 }
 
-static void ModulateDmgByType(u8 multiplier)
-{
-    gBattleMoveDamage = gBattleMoveDamage * multiplier / 10;
-    if (gBattleMoveDamage == 0 && multiplier != 0)
-        gBattleMoveDamage = 1;
-
-    switch (multiplier)
-    {
-    case TYPE_MUL_NO_EFFECT:
-        gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-        gMoveResultFlags &= ~MOVE_RESULT_NOT_VERY_EFFECTIVE;
-        gMoveResultFlags &= ~MOVE_RESULT_SUPER_EFFECTIVE;
-        break;
-    case TYPE_MUL_NOT_EFFECTIVE:
-        if (gMovesInfo[gCurrentMove].power && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
-        {
-            if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
-                gMoveResultFlags &= ~MOVE_RESULT_SUPER_EFFECTIVE;
-            else
-                gMoveResultFlags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-        }
-        break;
-    case TYPE_MUL_SUPER_EFFECTIVE:
-        if (gMovesInfo[gCurrentMove].power && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
-        {
-            if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
-                gMoveResultFlags &= ~MOVE_RESULT_NOT_VERY_EFFECTIVE;
-            else
-                gMoveResultFlags |= MOVE_RESULT_SUPER_EFFECTIVE;
-        }
-        break;
-    }
-}
-
 static void Cmd_typecalc(void)
 {
     CMD_ARGS();
@@ -2032,20 +1998,20 @@ static void Cmd_typecalc(void)
 }
 
 // Same as ModulateDmgByType except different arguments
-static void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags)
+static void ModulateDmgByType2(uq4_12_t multiplier, u16 move, u8 *flags)
 {
-    gBattleMoveDamage = gBattleMoveDamage * multiplier / 10;
+    gBattleMoveDamage = uq4_12_multiply(gBattleMoveDamage, multiplier);
     if (gBattleMoveDamage == 0 && multiplier != 0)
         gBattleMoveDamage = 1;
 
     switch (multiplier)
     {
-    case TYPE_MUL_NO_EFFECT:
+    case UQ_4_12(0.0):
         *flags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
         *flags &= ~MOVE_RESULT_NOT_VERY_EFFECTIVE;
         *flags &= ~MOVE_RESULT_SUPER_EFFECTIVE;
         break;
-    case TYPE_MUL_NOT_EFFECTIVE:
+    case UQ_4_12(0.5):
         if (gMovesInfo[move].power && !(*flags & MOVE_RESULT_NO_EFFECT))
         {
             if (*flags & MOVE_RESULT_SUPER_EFFECTIVE)
@@ -2054,7 +2020,7 @@ static void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags)
                 *flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
         }
         break;
-    case TYPE_MUL_SUPER_EFFECTIVE:
+    case UQ_4_12(2.0):
         if (gMovesInfo[move].power && !(*flags & MOVE_RESULT_NO_EFFECT))
         {
             if (*flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
@@ -2090,28 +2056,8 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
     }
     else
     {
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-        {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-            {
-                if (gBattleMons[defender].status2 & STATUS2_FORESIGHT)
-                    break;
-                i += 3;
-                continue;
-            }
-
-            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-            {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type1)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type2 &&
-                    gBattleMons[defender].type1 != gBattleMons[defender].type2)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
-            }
-            i += 3;
-        }
+        ModulateDmgByType2(gTypeEffectivenessTable[moveType][gBattleMons[defender].type1], move, &flags);
+        ModulateDmgByType2(gTypeEffectivenessTable[moveType][gBattleMons[defender].type2], move, &flags);
     }
 
     if (gBattleMons[defender].ability == ABILITY_WONDER_GUARD && !(flags & MOVE_RESULT_MISSED)
@@ -2142,24 +2088,8 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u16 targetAbility)
     }
     else
     {
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-        {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-            {
-                i += 3;
-                continue;
-            }
-            if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-            {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == type1)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == type2 && type1 != type2)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
-            }
-            i += 3;
-        }
+        ModulateDmgByType2(gTypeEffectivenessTable[moveType][type1], move, &flags);
+        ModulateDmgByType2(gTypeEffectivenessTable[moveType][type2], move, &flags);
     }
     if (targetAbility == ABILITY_WONDER_GUARD
      && (!(flags & MOVE_RESULT_SUPER_EFFECTIVE) || ((flags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) == (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
@@ -2835,7 +2765,7 @@ static void Cmd_printstring(void)
 
     if (gBattleControllerExecFlags == 0)
     {
-        u16 id = cmd->id;
+        u16 id = (cmd->id == 0 ? gBattleScripting.savedStringId : cmd->id);
 
         gBattlescriptCurrInstr = cmd->nextInstr;
         PrepareStringBattle(id, gBattlerAttacker);
@@ -5305,8 +5235,8 @@ static void PlayAnimation(u32 battler, u8 animId, const u16 *argPtr, const u8 *n
     // TODO: Animation
     if (animId == B_ANIM_STATS_CHANGE
      || animId == B_ANIM_SNATCH_MOVE
-     /* || animId == B_ANIM_MEGA_EVOLUTION
-     || animId == B_ANIM_ILLUSION_OFF */
+     || animId == B_ANIM_MEGA_EVOLUTION
+     /* || animId == B_ANIM_ILLUSION_OFF */
      || animId == B_ANIM_FORM_CHANGE
      || animId == B_ANIM_SUBSTITUTE_FADE
      /* || animId == B_ANIM_PRIMAL_REVERSION
@@ -16103,18 +16033,6 @@ void BS_SetZEffect(void) // TODO: Z-Moves
 {
     NATIVE_ARGS();
     // SetZEffect();   // Handles battle script jumping internally
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_SetMaxMoveEffect(void) // TODO: Dynamax
-{
-    NATIVE_ARGS();
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_SetSteelsurge(void) // TODO: Dynamax
-{
-    NATIVE_ARGS();
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

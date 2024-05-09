@@ -118,6 +118,7 @@ enum
 };
 
 extern const struct TypePower gNaturalGiftTable[];
+extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];
 
 u8 GetBattlerForBattleScript(u8 caseId);
 void MarkBattlerForControllerExec(u8 battlerId);
@@ -131,7 +132,7 @@ void UpdateSentPokesToOpponentValue(u8 battler);
 void BattleScriptPush(const u8 *bsPtr);
 void BattleScriptPushCursor(void);
 void BattleScriptPop(void);
-u8 TrySetCantSelectMoveBattleScript(u32 battler);
+u32 TrySetCantSelectMoveBattleScript(u32 battler);
 u8 CheckMoveLimitations(u32 battler, u8 unusableMoves, u16 check);
 bool32 AreAllMovesUnusable(u32 battler);
 u8 GetImprisonedMovesCount(u8 battlerId, u16 move);
@@ -139,7 +140,6 @@ u8 DoFieldEndTurnEffects(void);
 u8 DoBattlerEndTurnEffects(void);
 bool32 HandleWishPerishSongOnTurnEnd(void);
 bool8 HandleFaintedMonActions(void);
-void TryClearRageStatuses(void);
 u8 AtkCanceller_UnableToUseMove(u32 moveType);
 bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2);
 u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg);
@@ -241,6 +241,10 @@ bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 MoveHasChargeTurnAdditionalEffect(u32 move);
 bool32 IsPartnerMonFromSameTrainer(u32 battler);
 u8 GetCategoryBasedOnStats(u32 battler);
+void TryClearRageAndFuryCutter(void);
+bool32 CanMegaEvolve(u32 battler);
+bool32 CanUltraBurst(u32 battler);
+bool32 CanTargetBattler(u32 battlerAtk, u32 battlerDef, u16 move);
 
 // battle_ai_util.h
 bool32 IsHealingMove(u32 move);

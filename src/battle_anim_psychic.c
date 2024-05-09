@@ -361,7 +361,7 @@ static const union AffineAnimCmd sAffineAnim_LusterPurgeCircle[] =
     AFFINEANIMCMD_END_ALT(1),
 };
 
-static const union AffineAnimCmd *const gAffineAnims_LusterPurgeCircle[] =
+const union AffineAnimCmd *const gAffineAnims_LusterPurgeCircle[] =
 {
     sAffineAnim_LusterPurgeCircle,
 };

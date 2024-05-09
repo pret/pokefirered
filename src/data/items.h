@@ -10898,7 +10898,7 @@ const struct Item gItems[] =
     [ITEM_MEGA_RING] =
     {
         .name = _("Mega Ring"),
-        .price = 0,
+        .price = 2,
         .importance = 1,
         .description = COMPOUND_STRING(
             "Enables {PKMN} holding\n"

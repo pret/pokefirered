@@ -100,12 +100,15 @@ static void TryDoEventsBeforeFirstTurn(void);
 static void HandleTurnActionSelectionState(void);
 static void RunTurnActionsFunctions(void);
 static void SetActionsAndBattlersTurnOrder(void);
-static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void);
+static void TryChangeTurnOrder(void);
+static void TryChangingTurnOrderEffects(u32 battler1, u32 battler2);
+static void CheckChangingTurnOrderEffects(void);
 static void HandleEndTurn_FinishBattle(void);
 static void FreeResetData_ReturnToOvOrDoEvolutions(void);
 static void ReturnFromBattleToOverworld(void);
 static void TryEvolvePokemon(void);
 static void WaitForEvoSceneToFinish(void);
+static void UpdateBattlerPartyOrdersOnSwitch(u32 battler);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -131,7 +134,8 @@ EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT] = {0};
 static EWRAM_DATA u32 sFlickerArray[25] = {0};
 EWRAM_DATA u32 gBattleTypeFlags = 0;
 EWRAM_DATA u8 gBattleTerrain = 0;
-EWRAM_DATA struct MultiBattlePokemonTx gMultiPartnerParty[3] = {0};
+EWRAM_DATA struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE] = {0};
+EWRAM_DATA static struct MultiPartnerMenuPokemon* sMultiPartnerPartyBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTileBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTilemapBuffer = NULL;
 static EWRAM_DATA u16 *sUnknownDebugSpriteDataBuffer = NULL;
@@ -211,6 +215,7 @@ EWRAM_DATA u8 gBattlerStatusSummaryTaskId[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerInMenuId = 0;
 EWRAM_DATA bool8 gDoingBattleAnim = FALSE;
 EWRAM_DATA u32 gTransformedPersonalities[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gPlayerDpadHoldFrames = 0;
 EWRAM_DATA struct BattleSpriteData *gBattleSpritesDataPtr = NULL;
 EWRAM_DATA struct MonSpritesGfx *gMonSpritesGfxPtr = NULL;
 EWRAM_DATA u16 gBattleMovePower = 0;
@@ -617,140 +622,6 @@ static const union AffineAnimCmd *const sAffineAnims_Unused[] =
 
 static const s8 sPlayerThrowXTranslation[] = { -32, -16, -16, -32, -32, 0, 0, 0 };
 
-// format: attacking type, defending type, damage multiplier
-// the multiplier is a (decimal) fixed-point number:
-// 20 is ×2.0 TYPE_MUL_SUPER_EFFECTIVE
-// 10 is ×1.0 TYPE_MUL_NORMAL
-// 05 is ×0.5 TYPE_MUL_NOT_EFFECTIVE
-// 00 is ×0.0 TYPE_MUL_NO_EFFECT
-const u8 gTypeEffectiveness[372] =
-{
-    TYPE_NORMAL, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_NORMAL, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIRE, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIRE, TYPE_WATER, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIRE, TYPE_GRASS, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIRE, TYPE_ICE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIRE, TYPE_BUG, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIRE, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIRE, TYPE_DRAGON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIRE, TYPE_STEEL, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_WATER, TYPE_FIRE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_WATER, TYPE_WATER, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_WATER, TYPE_GRASS, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_WATER, TYPE_GROUND, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_WATER, TYPE_ROCK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_WATER, TYPE_DRAGON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ELECTRIC, TYPE_WATER, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ELECTRIC, TYPE_ELECTRIC, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ELECTRIC, TYPE_GRASS, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ELECTRIC, TYPE_GROUND, TYPE_MUL_NO_EFFECT,
-    TYPE_ELECTRIC, TYPE_FLYING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ELECTRIC, TYPE_DRAGON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_WATER, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GRASS, TYPE_GRASS, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_POISON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_GROUND, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GRASS, TYPE_FLYING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_BUG, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_ROCK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GRASS, TYPE_DRAGON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GRASS, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ICE, TYPE_WATER, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ICE, TYPE_GRASS, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ICE, TYPE_ICE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ICE, TYPE_GROUND, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ICE, TYPE_FLYING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ICE, TYPE_DRAGON, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ICE, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ICE, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_NORMAL, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_ICE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_POISON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_FLYING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_PSYCHIC, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_BUG, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_ROCK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_DARK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_STEEL, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FIGHTING, TYPE_FAIRY, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_POISON, TYPE_GRASS, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_POISON, TYPE_POISON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_POISON, TYPE_GROUND, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_POISON, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_POISON, TYPE_GHOST, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_POISON, TYPE_STEEL, TYPE_MUL_NO_EFFECT,
-    TYPE_POISON, TYPE_FAIRY, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GROUND, TYPE_FIRE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GROUND, TYPE_ELECTRIC, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GROUND, TYPE_GRASS, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GROUND, TYPE_POISON, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GROUND, TYPE_FLYING, TYPE_MUL_NO_EFFECT,
-    TYPE_GROUND, TYPE_BUG, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GROUND, TYPE_ROCK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GROUND, TYPE_STEEL, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FLYING, TYPE_ELECTRIC, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FLYING, TYPE_GRASS, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FLYING, TYPE_FIGHTING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FLYING, TYPE_BUG, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FLYING, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FLYING, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_PSYCHIC, TYPE_FIGHTING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_PSYCHIC, TYPE_POISON, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_PSYCHIC, TYPE_PSYCHIC, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_PSYCHIC, TYPE_DARK, TYPE_MUL_NO_EFFECT,
-    TYPE_PSYCHIC, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_GRASS, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_BUG, TYPE_FIGHTING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_POISON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_FLYING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_PSYCHIC, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_BUG, TYPE_GHOST, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_DARK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_BUG, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_BUG, TYPE_FAIRY, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ROCK, TYPE_FIRE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ROCK, TYPE_ICE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ROCK, TYPE_FIGHTING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ROCK, TYPE_GROUND, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_ROCK, TYPE_FLYING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ROCK, TYPE_BUG, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_ROCK, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GHOST, TYPE_NORMAL, TYPE_MUL_NO_EFFECT,
-    TYPE_GHOST, TYPE_PSYCHIC, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_GHOST, TYPE_DARK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GHOST, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_GHOST, TYPE_GHOST, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_DRAGON, TYPE_DRAGON, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_DRAGON, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_DRAGON, TYPE_FAIRY, TYPE_MUL_NO_EFFECT,
-    TYPE_DARK, TYPE_FIGHTING, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_DARK, TYPE_PSYCHIC, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_DARK, TYPE_GHOST, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_DARK, TYPE_DARK, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_DARK, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_DARK, TYPE_FAIRY, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_STEEL, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_STEEL, TYPE_WATER, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_STEEL, TYPE_ELECTRIC, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_STEEL, TYPE_ICE, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_STEEL, TYPE_ROCK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_STEEL, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_STEEL, TYPE_FAIRY, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FAIRY, TYPE_FIGHTING, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FAIRY, TYPE_POISON, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FAIRY, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FAIRY, TYPE_FIRE, TYPE_MUL_NOT_EFFECTIVE,
-    TYPE_FAIRY, TYPE_DRAGON, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FAIRY, TYPE_DARK, TYPE_MUL_SUPER_EFFECTIVE,
-    TYPE_FORESIGHT, TYPE_FORESIGHT, TYPE_MUL_NO_EFFECT,
-    TYPE_NORMAL, TYPE_GHOST, TYPE_MUL_NO_EFFECT,
-    TYPE_FIGHTING, TYPE_GHOST, TYPE_MUL_NO_EFFECT,
-    TYPE_ENDTABLE, TYPE_ENDTABLE, TYPE_MUL_NO_EFFECT
-};
-
 const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 {
     [TYPE_NORMAL] = _("NORMAL"),
@@ -942,8 +813,15 @@ void CB2_InitBattle(void)
     AllocateMonSpritesGfx();
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        HandleLinkBattleSetup();
-        SetMainCallback2(CB2_PreInitMultiBattle);
+        if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER))
+        {
+            HandleLinkBattleSetup();
+            SetMainCallback2(CB2_PreInitMultiBattle);
+        }
+        else
+        {
+            // SetMainCallback2(CB2_PreInitIngamePlayerPartnerBattle);
+        }
         gBattleCommunication[MULTIUSE_STATE] = 0;
     }
     else
@@ -1512,6 +1390,42 @@ static void CB2_PreInitMultiBattle(void)
         break;
     }
 }
+
+// static void CB2_PreInitIngamePlayerPartnerBattle(void)
+// {
+//     u32 *savedBattleTypeFlags;
+//     void (**savedCallback)(void);
+
+//     savedCallback = &gBattleStruct->savedCallback;
+//     savedBattleTypeFlags = &gBattleStruct->savedBattleTypeFlags;
+
+//     RunTasks();
+//     AnimateSprites();
+//     BuildOamBuffer();
+
+//     switch (gBattleCommunication[MULTIUSE_STATE])
+//     {
+//     case 0:
+//         sMultiPartnerPartyBuffer = Alloc(sizeof(gMultiPartnerParty));
+//         SetMultiPartnerMenuParty(MULTI_PARTY_SIZE);
+//         gBattleCommunication[MULTIUSE_STATE]++;
+//         *savedCallback = gMain.savedCallback;
+//         *savedBattleTypeFlags = gBattleTypeFlags;
+//         gMain.savedCallback = CB2_PreInitIngamePlayerPartnerBattle;
+//         ShowPartyMenuToShowcaseMultiBattleParty();
+//         break;
+//     case 1:
+//         if (!gPaletteFade.active)
+//         {
+//             gBattleCommunication[MULTIUSE_STATE] = 2;
+//             gBattleTypeFlags = *savedBattleTypeFlags;
+//             gMain.savedCallback = *savedCallback;
+//             SetMainCallback2(CB2_InitBattleInternal);
+//             FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
+//         }
+//         break;
+//     }
+// }
 
 static void CB2_HandleStartMultiBattle(void)
 {
@@ -3492,16 +3406,15 @@ static void HandleTurnActionSelectionState(void)
     gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
     for (battler = 0; battler < gBattlersCount; battler++)
     {
-        u8 position = GetBattlerPosition(battler);
-
+        u32 position = GetBattlerPosition(battler);
         switch (gBattleCommunication[battler])
         {
         case STATE_BEFORE_ACTION_CHOSEN: // Choose an action.
             *(gBattleStruct->monToSwitchIntoId + battler) = PARTY_SIZE;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI
-             || (position & BIT_FLANK) == B_FLANK_LEFT
-             || gBattleStruct->absentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(position))]
-             || gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(position))] == STATE_WAIT_ACTION_CONFIRMED)
+                || (position & BIT_FLANK) == B_FLANK_LEFT
+                || gBattleStruct->absentBattlerFlags & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(position))]
+                || gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(position))] == STATE_WAIT_ACTION_CONFIRMED)
             {
                 if (gBattleStruct->absentBattlerFlags & gBitTable[battler])
                 {
@@ -3514,15 +3427,24 @@ static void HandleTurnActionSelectionState(void)
                 else
                 {
                     if (gBattleMons[battler].status2 & STATUS2_MULTIPLETURNS
-                     || gBattleMons[battler].status2 & STATUS2_RECHARGE)
+                        || gBattleMons[battler].status2 & STATUS2_RECHARGE)
                     {
                         gChosenActionByBattler[battler] = B_ACTION_USE_MOVE;
+                        gBattleCommunication[battler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
+                    }
+                    else if (WILD_DOUBLE_BATTLE
+                             && position == B_POSITION_PLAYER_RIGHT
+                             && (gBattleStruct->throwingPokeBall || gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] == B_ACTION_RUN)
+                             && gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] != B_ACTION_NOTHING_FAINTED)
+                    {
+                        gBattleStruct->throwingPokeBall = FALSE;
+                        gChosenActionByBattler[battler] = B_ACTION_NOTHING_FAINTED; // Not fainted, but it cannot move, because of the throwing ball.
                         gBattleCommunication[battler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
                     }
                     else
                     {
                         gBattleStruct->itemPartyIndex[battler] = PARTY_SIZE;
-                        BtlController_EmitChooseAction(battler, 0, gChosenActionByBattler[0], gBattleBufferB[0][1] | (gBattleBufferB[0][2] << 8));
+                        BtlController_EmitChooseAction(battler, BUFFER_A, gChosenActionByBattler[0], gBattleBufferB[0][1] | (gBattleBufferB[0][2] << 8));
                         MarkBattlerForControllerExec(battler);
                         gBattleCommunication[battler]++;
                     }
@@ -3530,7 +3452,7 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.
-            if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF0000000) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 0xC))))
+            if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF << 28) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 12))))
             {
                 gChosenActionByBattler[battler] = gBattleBufferB[battler][1];
                 switch (gBattleBufferB[battler][1])
@@ -3555,9 +3477,12 @@ static void HandleTurnActionSelectionState(void)
                     {
                         struct ChooseMoveStruct moveInfo;
 
+                        moveInfo.zmove = gBattleStruct->zmove;
+                        moveInfo.mega = gBattleStruct->mega;
                         moveInfo.species = gBattleMons[battler].species;
                         moveInfo.monType1 = gBattleMons[battler].type1;
                         moveInfo.monType2 = gBattleMons[battler].type2;
+                        moveInfo.monType3 = gBattleMons[battler].type3;
                         for (i = 0; i < MAX_MON_MOVES; i++)
                         {
                             moveInfo.moves[i] = gBattleMons[battler].moves[i];
@@ -3566,12 +3491,13 @@ static void HandleTurnActionSelectionState(void)
                                                                      gBattleMons[battler].ppBonuses,
                                                                      i);
                         }
-                        BtlController_EmitChooseMove(battler, 0, (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) != 0, FALSE, &moveInfo);
+
+                        BtlController_EmitChooseMove(battler, BUFFER_A, (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) != 0, FALSE, &moveInfo);
                         MarkBattlerForControllerExec(battler);
                     }
                     break;
                 case B_ACTION_USE_ITEM:
-                    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
+                    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER) || gStatuses3[battler] & STATUS3_SKY_DROPPED)
                     {
                         gSelectionBattleScripts[battler] = BattleScript_ActionSelectionItemsCantBeUsed;
                         gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
@@ -3587,18 +3513,14 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_SWITCH:
                     *(gBattleStruct->battlerPartyIndexes + battler) = gBattlerPartyIndexes[battler];
-                    if (gBattleMons[battler].status2 & (STATUS2_WRAPPED | STATUS2_ESCAPE_PREVENTION) || gStatuses3[battler] & STATUS3_ROOTED)
+                    if (!CanBattlerEscape(battler))
                     {
-                        BtlController_EmitChoosePokemon(battler, BUFFER_A, PARTY_ACTION_CANT_SWITCH, 6, ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
+                        BtlController_EmitChoosePokemon(battler, BUFFER_A, PARTY_ACTION_CANT_SWITCH, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
                     }
-                    else if ((i = ABILITY_ON_OPPOSING_FIELD(battler, ABILITY_SHADOW_TAG))
-                          || ((i = ABILITY_ON_OPPOSING_FIELD(battler, ABILITY_ARENA_TRAP))
-                              && !IS_BATTLER_OF_TYPE(battler, TYPE_FLYING)
-                              && gBattleMons[battler].ability != ABILITY_LEVITATE)
-                          || ((i = AbilityBattleEffects(ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER, battler, ABILITY_MAGNET_PULL, 0, 0))
-                              && IS_BATTLER_OF_TYPE(battler, TYPE_STEEL)))
+                    else if (ItemId_GetHoldEffect(gBattleMons[battler].item) != HOLD_EFFECT_SHED_SHELL
+                      && (i = IsAbilityPreventingEscape(battler)))
                     {
-                        BtlController_EmitChoosePokemon(battler, BUFFER_A, ((i - 1) << 4) | PARTY_ACTION_ABILITY_PREVENTS, 6, gLastUsedAbility, gBattleStruct->battlerPartyOrders[battler]);
+                        BtlController_EmitChoosePokemon(battler, BUFFER_A, ((i - 1) << 4) | PARTY_ACTION_ABILITY_PREVENTS, PARTY_SIZE, gBattleMons[i - 1].ability, gBattleStruct->battlerPartyOrders[battler]);
                     }
                     else
                     {
@@ -3607,7 +3529,7 @@ static void HandleTurnActionSelectionState(void)
                         else if (battler == 3 && gChosenActionByBattler[1] == B_ACTION_SWITCH)
                             BtlController_EmitChoosePokemon(battler, BUFFER_A, PARTY_ACTION_CHOOSE_MON, *(gBattleStruct->monToSwitchIntoId + 1), ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
                         else
-                            BtlController_EmitChoosePokemon(battler, BUFFER_A, PARTY_ACTION_CHOOSE_MON, 6, ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
+                            BtlController_EmitChoosePokemon(battler, BUFFER_A, PARTY_ACTION_CHOOSE_MON, PARTY_SIZE, ABILITY_NONE, gBattleStruct->battlerPartyOrders[battler]);
                     }
                     MarkBattlerForControllerExec(battler);
                     break;
@@ -3624,10 +3546,24 @@ static void HandleTurnActionSelectionState(void)
                 case B_ACTION_CANCEL_PARTNER:
                     gBattleCommunication[battler] = STATE_WAIT_SET_BEFORE_ACTION;
                     gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))] = STATE_BEFORE_ACTION_CHOSEN;
+                    if (gBattleMons[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))].status2 & STATUS2_MULTIPLETURNS
+                        || gBattleMons[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))].status2 & STATUS2_RECHARGE)
+                    {
+                        BtlController_EmitEndBounceEffect(battler, BUFFER_A);
+                        MarkBattlerForControllerExec(battler);
+                        return;
+                    }
+
+                    gBattleStruct->mega.toEvolve &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(battler))]);
+                    gBattleStruct->burst.toBurst &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(battler))]);
+                    gBattleStruct->dynamax.toDynamax &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(battler))]);
+                    gBattleStruct->dynamax.usingMaxMove[BATTLE_PARTNER(GetBattlerPosition(battler))] = FALSE;
+                    gBattleStruct->zmove.toBeUsed[BATTLE_PARTNER(GetBattlerPosition(battler))] = MOVE_NONE;
                     BtlController_EmitEndBounceEffect(battler, 0);
                     MarkBattlerForControllerExec(battler);
                     return;
                 }
+
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
                  && !(gBattleTypeFlags & BATTLE_TYPE_LINK)
                  && gBattleBufferB[battler][1] == B_ACTION_RUN)
@@ -3651,15 +3587,25 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_ACTION_CASE_CHOSEN:
-            if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF0000000) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 0xC))))
+            if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF << 28) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 12))))
             {
                 switch (gChosenActionByBattler[battler])
                 {
                 case B_ACTION_USE_MOVE:
                     switch (gBattleBufferB[battler][1])
                     {
-                    case 3 ... 9:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
                         gChosenActionByBattler[battler] = gBattleBufferB[battler][1];
+                        return;
+                    case 15:
+                        gChosenActionByBattler[battler] = B_ACTION_SWITCH;
+                        UpdateBattlerPartyOrdersOnSwitch(battler);
                         return;
                     default:
                         if ((gBattleBufferB[battler][2] | (gBattleBufferB[battler][3] << 8)) == 0xFFFF)
@@ -3670,15 +3616,33 @@ static void HandleTurnActionSelectionState(void)
                         {
                             gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
                             *(gBattleStruct->selectionScriptFinished + battler) = FALSE;
-                            gBattleBufferB[battler][1] = 0;
+                            gBattleBufferB[battler][1] = B_ACTION_USE_MOVE;
                             *(gBattleStruct->stateIdAfterSelScript + battler) = STATE_WAIT_ACTION_CHOSEN;
                             return;
                         }
                         else
                         {
-                            *(gBattleStruct->chosenMovePositions + battler) = gBattleBufferB[battler][2];
-                            gChosenMoveByBattler[battler] = gBattleMons[battler].moves[*(gBattleStruct->chosenMovePositions + battler)];
+                            // Get the chosen move position (and thus the chosen move) and target from the returned buffer.
+                            *(gBattleStruct->chosenMovePositions + battler) = gBattleBufferB[battler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST | RET_DYNAMAX);
+                            gChosenMoveByBattler[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
                             *(gBattleStruct->moveTarget + battler) = gBattleBufferB[battler][3];
+                            
+                            // Check to see if any gimmicks need to be prepared.
+                            if (gBattleBufferB[battler][2] & RET_MEGA_EVOLUTION)
+                                gBattleStruct->mega.toEvolve |= gBitTable[battler];
+                            else if (gBattleBufferB[battler][2] & RET_ULTRA_BURST)
+                                gBattleStruct->burst.toBurst |= gBitTable[battler];
+                            else if (gBattleBufferB[battler][2] & RET_DYNAMAX)
+                                gBattleStruct->dynamax.toDynamax |= gBitTable[battler];
+
+                            // TODO: Dynamax
+                            // Max Move check
+                            // if (ShouldUseMaxMove(battler, gChosenMoveByBattler[battler]))
+                            // {
+                            //     gBattleStruct->dynamax.baseMove[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
+                            //     gBattleStruct->dynamax.usingMaxMove[battler] = TRUE;
+                            // }
+
                             gBattleCommunication[battler]++;
                         }
                         break;
@@ -3781,6 +3745,22 @@ static void HandleTurnActionSelectionState(void)
         gBattleMainFunc = SetActionsAndBattlersTurnOrder;
 }
 
+static void UpdateBattlerPartyOrdersOnSwitch(u32 battler)
+{
+    gBattleStruct->monToSwitchIntoId[battler] = gBattleBufferB[battler][1];
+
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
+    {
+        *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= 0xF;
+        *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[battler][2] & 0xF0);
+        *(battler * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 1) = gBattleBufferB[battler][3];
+
+        *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) &= (0xF0);
+        *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 0) |= (gBattleBufferB[battler][2] & 0xF0) >> 4;
+        *((BATTLE_PARTNER(battler)) * 3 + (u8 *)(gBattleStruct->battlerPartyOrders) + 2) = gBattleBufferB[battler][3];
+    }
+}
+
 void SwapTurnOrder(u8 id1, u8 id2)
 {
     u32 temp;
@@ -3880,9 +3860,8 @@ s32 GetWhichBattlerFaster(u32 battler1, u32 battler2, bool32 ignoreChosenMoves)
 
 static void SetActionsAndBattlersTurnOrder(void)
 {
-    u32 battler;
     s32 turnOrderId = 0;
-    s32 i, j;
+    s32 i, j, battler;
 
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
     {
@@ -3906,11 +3885,20 @@ static void SetActionsAndBattlersTurnOrder(void)
                 }
             }
         }
-        else if (gChosenActionByBattler[0] == B_ACTION_RUN)
+        else
         {
-            battler = 0;
-            turnOrderId = 5;
+            if (gChosenActionByBattler[0] == B_ACTION_RUN)
+            {
+                battler = 0;
+                turnOrderId = 5;
+            }
+            if (gChosenActionByBattler[2] == B_ACTION_RUN)
+            {
+                battler = 2;
+                turnOrderId = 5;
+            }
         }
+
         if (turnOrderId == 5) // One of battlers wants to run.
         {
             gActionsByTurnOrder[0] = gChosenActionByBattler[battler];
@@ -3925,15 +3913,13 @@ static void SetActionsAndBattlersTurnOrder(void)
                     turnOrderId++;
                 }
             }
-            gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
-            gBattleStruct->focusPunchBattlerId = 0;
-            return;
         }
         else
         {
             for (battler = 0; battler < gBattlersCount; battler++)
             {
-                if (gChosenActionByBattler[battler] == B_ACTION_USE_ITEM || gChosenActionByBattler[battler] == B_ACTION_SWITCH)
+                if (gChosenActionByBattler[battler] == B_ACTION_USE_ITEM
+                  || gChosenActionByBattler[battler] == B_ACTION_SWITCH)
                 {
                     gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[battler];
                     gBattlerByTurnOrder[turnOrderId] = battler;
@@ -3942,10 +3928,13 @@ static void SetActionsAndBattlersTurnOrder(void)
             }
             for (battler = 0; battler < gBattlersCount; battler++)
             {
-                if (gChosenActionByBattler[battler] != B_ACTION_USE_ITEM && gChosenActionByBattler[battler] != B_ACTION_SWITCH)
+                if (gChosenActionByBattler[battler] != B_ACTION_USE_ITEM
+                  && gChosenActionByBattler[battler] != B_ACTION_SWITCH)
                 {
                     gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[battler];
                     gBattlerByTurnOrder[turnOrderId] = battler;
+                    gBattleStruct->quickClawRandom[battler] = RandomPercentage(RNG_QUICK_CLAW, GetBattlerHoldEffectParam(battler));
+                    gBattleStruct->quickDrawRandom[battler] = RandomPercentage(RNG_QUICK_DRAW, 30);
                     turnOrderId++;
                 }
             }
@@ -3955,19 +3944,21 @@ static void SetActionsAndBattlersTurnOrder(void)
                 {
                     u8 battler1 = gBattlerByTurnOrder[i];
                     u8 battler2 = gBattlerByTurnOrder[j];
-
+                    TryChangingTurnOrderEffects(battler1, battler2);
                     if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
-                     && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
-                     && gActionsByTurnOrder[i] != B_ACTION_SWITCH
-                     && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
-                        if (GetWhichBattlerFaster(battler1, battler2, FALSE) == 1)
+                        && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
+                        && gActionsByTurnOrder[i] != B_ACTION_SWITCH
+                        && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
+                    {
+                        if (GetWhichBattlerFaster(battler1, battler2, FALSE) == -1)
                             SwapTurnOrder(i, j);
+                    }
                 }
             }
         }
     }
-    gBattleMainFunc = CheckFocusPunch_ClearVarsBeforeTurnStarts;
-    gBattleStruct->focusPunchBattlerId = 0;
+    gBattleMainFunc = CheckChangingTurnOrderEffects;
+    gBattleStruct->quickClawBattlerId = 0;
 }
 
 static void TurnValuesCleanUp(bool8 var0)
@@ -4021,34 +4012,210 @@ void SpecialStatusesClear(void)
     memset(&gSpecialStatuses, 0, sizeof(gSpecialStatuses));
 }
 
-static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
+static void PopulateArrayWithBattlers(u8 *battlers)
+{
+    u32 i;
+    for (i = 0; i < gBattlersCount; i++)
+        battlers[i] = i;
+}
+
+static bool32 TryDoGimmicksBeforeMoves(void)
+{
+    if (!(gHitMarker & HITMARKER_RUN)
+        && (gBattleStruct->mega.toEvolve || gBattleStruct->burst.toBurst || gBattleStruct->dynamax.toDynamax))
+    {
+        u32 i, battler;
+        u8 order[MAX_BATTLERS_COUNT];
+
+        PopulateArrayWithBattlers(order);
+        SortBattlersBySpeed(order, FALSE);
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            // Dynamax Check
+            if (gBattleStruct->dynamax.toDynamax & gBitTable[order[i]])
+            {
+                gBattlerAttacker = order[i];
+                gBattleScripting.battler = gBattlerAttacker;
+                gBattleStruct->dynamax.toDynamax &= ~(gBitTable[gBattlerAttacker]);
+                // PrepareBattlerForDynamax(gBattlerAttacker); // TODO: Dynamax
+                BattleScriptExecute(BattleScript_DynamaxBegins);
+                return TRUE;
+            }
+            // Mega Evo Check
+            if (gBattleStruct->mega.toEvolve & gBitTable[order[i]]
+                && !(gProtectStructs[order[i]].noValidMoves))
+            {
+                gBattlerAttacker = order[i];
+                gBattleStruct->mega.toEvolve &= ~(gBitTable[gBattlerAttacker]);
+                gLastUsedItem = gBattleMons[gBattlerAttacker].item;
+                if (GetBattleFormChangeTargetSpecies(gBattlerAttacker, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE) != SPECIES_NONE)
+                    BattleScriptExecute(BattleScript_WishMegaEvolution);
+                else
+                    BattleScriptExecute(BattleScript_MegaEvolution);
+                return TRUE;
+            }
+            // Ultra Burst Check
+            if (gBattleStruct->burst.toBurst & gBitTable[order[i]]
+                && !(gProtectStructs[order[i]].noValidMoves))
+            {
+                battler = gBattlerAttacker = order[i];
+                gBattleStruct->burst.toBurst &= ~(gBitTable[battler]);
+                gLastUsedItem = gBattleMons[battler].item;
+                BattleScriptExecute(BattleScript_UltraBurst);
+                return TRUE;
+            }
+        }
+    }
+
+    if (B_MEGA_EVO_TURN_ORDER >= GEN_7)
+        TryChangeTurnOrder(); // This will just do nothing if no mon has mega evolved.
+    return FALSE;
+}
+
+static bool32 TryDoMoveEffectsBeforeMoves(void)
 {
     if (!(gHitMarker & HITMARKER_RUN))
     {
-        while (gBattleStruct->focusPunchBattlerId < gBattlersCount)
+        u32 i;
+        u8 battlers[MAX_BATTLERS_COUNT];
+
+        PopulateArrayWithBattlers(battlers);
+        SortBattlersBySpeed(battlers, FALSE);
+        for (i = 0; i < gBattlersCount; i++)
         {
-            gBattlerAttacker = gBattleStruct->focusPunchBattlerId;
-            ++gBattleStruct->focusPunchBattlerId;
-            if (gChosenMoveByBattler[gBattlerAttacker] == MOVE_FOCUS_PUNCH
-             && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP)
-             && !(gDisableStructs[gBattlerAttacker].truantCounter)
-             && !(gProtectStructs[gBattlerAttacker].noValidMoves))
+            if (!(gBattleStruct->focusPunchBattlers & gBitTable[battlers[i]])
+                && !(gBattleMons[battlers[i]].status1 & STATUS1_SLEEP)
+                && !(gDisableStructs[battlers[i]].truantCounter)
+                && !(gProtectStructs[battlers[i]].noValidMoves))
             {
-                BattleScriptExecute(BattleScript_FocusPunchSetUp);
+                gBattleStruct->focusPunchBattlers |= gBitTable[battlers[i]];
+                gBattlerAttacker = battlers[i];
+                switch (gChosenMoveByBattler[gBattlerAttacker])
+                {
+                case MOVE_FOCUS_PUNCH:
+                    BattleScriptExecute(BattleScript_FocusPunchSetUp);
+                    return TRUE;
+                case MOVE_BEAK_BLAST:
+                    BattleScriptExecute(BattleScript_BeakBlastSetUp);
+                    return TRUE;
+                case MOVE_SHELL_TRAP:
+                    BattleScriptExecute(BattleScript_ShellTrapSetUp);
+                    return TRUE;
+                }
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+// In gen7, priority and speed are recalculated during the turn in which a pokemon mega evolves
+static void TryChangeTurnOrder(void)
+{
+    u32 i, j;
+    for (i = 0; i < gBattlersCount - 1; i++)
+    {
+        for (j = i + 1; j < gBattlersCount; j++)
+        {
+            u32 battler1 = gBattlerByTurnOrder[i];
+            u32 battler2 = gBattlerByTurnOrder[j];
+
+            if (gActionsByTurnOrder[i] == B_ACTION_USE_MOVE
+                && gActionsByTurnOrder[j] == B_ACTION_USE_MOVE)
+            {
+                if (GetWhichBattlerFaster(battler1, battler2, FALSE) == -1)
+                    SwapTurnOrder(i, j);
+            }
+        }
+    }
+}
+
+static void TryChangingTurnOrderEffects(u32 battler1, u32 battler2)
+{
+    u32 ability1 = GetBattlerAbility(battler1);
+    u32 holdEffectBattler1 = GetBattlerHoldEffect(battler1, TRUE);
+    u32 holdEffectBattler2 = GetBattlerHoldEffect(battler2, TRUE);
+    u32 ability2 = GetBattlerAbility(battler2);
+
+    // Battler 1
+    // Quick Draw
+    if (ability1 == ABILITY_QUICK_DRAW && !IS_MOVE_STATUS(gChosenMoveByBattler[battler1]) && gBattleStruct->quickDrawRandom[battler1])
+        gProtectStructs[battler1].quickDraw = TRUE;
+    // Quick Claw and Custap Berry
+    if (!gProtectStructs[battler1].quickDraw
+     && ((holdEffectBattler1 == HOLD_EFFECT_QUICK_CLAW && gBattleStruct->quickClawRandom[battler1])
+     || (holdEffectBattler1 == HOLD_EFFECT_CUSTAP_BERRY && HasEnoughHpToEatBerry(battler1, 4, gBattleMons[battler1].item))))
+        gProtectStructs[battler1].usedCustapBerry = TRUE;
+
+    // Battler 2
+    // Quick Draw
+    if (ability2 == ABILITY_QUICK_DRAW && !IS_MOVE_STATUS(gChosenMoveByBattler[battler2]) && gBattleStruct->quickDrawRandom[battler2])
+        gProtectStructs[battler2].quickDraw = TRUE;
+    // Quick Claw and Custap Berry
+    if (!gProtectStructs[battler2].quickDraw
+     && ((holdEffectBattler2 == HOLD_EFFECT_QUICK_CLAW && gBattleStruct->quickClawRandom[battler2])
+     || (holdEffectBattler2 == HOLD_EFFECT_CUSTAP_BERRY && HasEnoughHpToEatBerry(battler2, 4, gBattleMons[battler2].item))))
+        gProtectStructs[battler2].usedCustapBerry = TRUE;
+}
+
+static void CheckChangingTurnOrderEffects(void)
+{
+    u32 i, battler;
+
+    if (!(gHitMarker & HITMARKER_RUN))
+    {
+        while (gBattleStruct->quickClawBattlerId < gBattlersCount)
+        {
+            battler = gBattlerAttacker = gBattleStruct->quickClawBattlerId;
+            gBattleStruct->quickClawBattlerId++;
+            if (gChosenActionByBattler[battler] == B_ACTION_USE_MOVE
+             && gChosenMoveByBattler[battler] != MOVE_FOCUS_PUNCH   // quick claw message doesn't need to activate here
+             && (gProtectStructs[battler].usedCustapBerry || gProtectStructs[battler].quickDraw)
+             && !(gBattleMons[battler].status1 & STATUS1_SLEEP)
+             && !(gDisableStructs[gBattlerAttacker].truantCounter)
+             && !(gProtectStructs[battler].noValidMoves))
+            {
+                if (gProtectStructs[battler].usedCustapBerry)
+                {
+                    gLastUsedItem = gBattleMons[battler].item;
+                    PREPARE_ITEM_BUFFER(gBattleTextBuff1, gLastUsedItem);
+                    if (GetBattlerHoldEffect(battler, FALSE) == HOLD_EFFECT_CUSTAP_BERRY)
+                    {
+                        // don't record berry since its gone now
+                        BattleScriptExecute(BattleScript_CustapBerryActivation);
+                    }
+                    else
+                    {
+                        RecordItemEffectBattle(battler, GetBattlerHoldEffect(battler, FALSE));
+                        BattleScriptExecute(BattleScript_QuickClawActivation);
+                    }
+                }
+                else if (gProtectStructs[battler].quickDraw)
+                {
+                    gBattlerAbility = battler;
+                    gLastUsedAbility = gBattleMons[battler].ability;
+                    PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                    RecordAbilityBattle(battler, gLastUsedAbility);
+                    BattleScriptExecute(BattleScript_QuickDrawActivation);
+                }
                 return;
             }
         }
     }
-    TryClearRageStatuses();
-    gCurrentTurnActionNumber = 0;
-    {
-        // something stupid needed to match
-        u8 zero;
 
-        gCurrentActionFuncId = gActionsByTurnOrder[(zero = 0)];
-    }
-    gDynamicBasePower = 0;
+    // setup stuff before turns/actions
+    TryClearRageAndFuryCutter();
+    gCurrentTurnActionNumber = 0;
+    gCurrentActionFuncId = gActionsByTurnOrder[0];
     gBattleStruct->dynamicMoveType = 0;
+    gBattleStruct->effectsBeforeUsingMoveDone = FALSE;
+    gBattleStruct->focusPunchBattlers = 0;
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        gBattleStruct->ateBoost[i] = FALSE;
+        gSpecialStatuses[i].gemBoost = FALSE;
+    }
+
     gBattleMainFunc = RunTurnActionsFunctions;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
@@ -4060,20 +4227,31 @@ static void RunTurnActionsFunctions(void)
 {
     if (gBattleOutcome != 0)
         gCurrentActionFuncId = B_ACTION_FINISHED;
+
+    // Mega Evolve / Focus Punch-like moves after switching, items, running, but before using a move.
+    if (gCurrentActionFuncId == B_ACTION_USE_MOVE && !gBattleStruct->effectsBeforeUsingMoveDone)
+    {
+        if (TryDoGimmicksBeforeMoves())
+            return;
+        else if (TryDoMoveEffectsBeforeMoves())
+            return;
+        gBattleStruct->effectsBeforeUsingMoveDone = TRUE;
+    }
+
     *(&gBattleStruct->savedTurnActionNumber) = gCurrentTurnActionNumber;
     sTurnActionsFuncsTable[gCurrentActionFuncId]();
 
     if (gCurrentTurnActionNumber >= gBattlersCount) // everyone did their actions, turn finished
     {
-        gHitMarker &= ~(HITMARKER_PASSIVE_DAMAGE);
+        gHitMarker &= ~HITMARKER_PASSIVE_DAMAGE;
         gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
     }
     else
     {
-        if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another battlerId
+        if (gBattleStruct->savedTurnActionNumber != gCurrentTurnActionNumber) // action turn has been done, clear hitmarker bits for another battler
         {
-            gHitMarker &= ~(HITMARKER_NO_ATTACKSTRING);
-            gHitMarker &= ~(HITMARKER_UNABLE_TO_USE_MOVE);
+            gHitMarker &= ~HITMARKER_NO_ATTACKSTRING;
+            gHitMarker &= ~HITMARKER_UNABLE_TO_USE_MOVE;
         }
     }
 }

@@ -68,74 +68,6 @@ struct __attribute__((packed, aligned(2))) BattleMoveEffect
 
 #define GET_MOVE_BATTLESCRIPT(move) gBattleMoveEffects[gMovesInfo[move].effect].battleScript
 
-
-#define MAX_TRAINER_ITEMS 4
-
-enum {
-    BATTLER_AFFINE_NORMAL,
-    BATTLER_AFFINE_EMERGE,
-    BATTLER_AFFINE_RETURN,
-};
-
-struct TrainerMonNoItemDefaultMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-};
-
-struct TrainerMonItemDefaultMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-    u16 heldItem;
-};
-
-struct TrainerMonNoItemCustomMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-    u16 moves[MAX_MON_MOVES];
-};
-
-struct TrainerMonItemCustomMoves
-{
-    u16 iv;
-    u8 lvl;
-    u16 species;
-    u16 heldItem;
-    u16 moves[MAX_MON_MOVES];
-};
-
-#define NO_ITEM_DEFAULT_MOVES(party) { .NoItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = 0
-#define NO_ITEM_CUSTOM_MOVES(party) { .NoItemCustomMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET
-#define ITEM_DEFAULT_MOVES(party) { .ItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_HELD_ITEM
-#define ITEM_CUSTOM_MOVES(party) { .ItemCustomMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM
-
-union TrainerMonPtr
-{
-    const struct TrainerMonNoItemDefaultMoves *NoItemDefaultMoves;
-    const struct TrainerMonNoItemCustomMoves *NoItemCustomMoves;
-    const struct TrainerMonItemDefaultMoves *ItemDefaultMoves;
-    const struct TrainerMonItemCustomMoves *ItemCustomMoves;
-};
-
-struct Trainer
-{
-    /*0x00*/ u8 partyFlags;
-    /*0x01*/ u8 trainerClass;
-    /*0x02*/ u8 encounterMusic_gender; // last bit is gender
-    /*0x03*/ u8 trainerPic;
-    /*0x04*/ u8 trainerName[12];
-    /*0x10*/ u16 items[MAX_TRAINER_ITEMS];
-    /*0x18*/ bool8 doubleBattle;
-    /*0x1C*/ u32 aiFlags;
-    /*0x20*/ u8 partySize;
-    /*0x24*/ const union TrainerMonPtr party;
-};
-
 extern const struct Trainer gTrainers[];
 
 struct ResourceFlags
@@ -642,7 +574,7 @@ struct BattleStruct
     // align 4
     union {
         struct LinkBattlerHeader linkBattlerHeader;
-        struct MultiBattlePokemonTx multiBattleMons[3];
+        struct MultiPartnerMenuPokemon multiBattleMons[3];
     } multiBuffer;
     u8 itemPartyIndex[MAX_BATTLERS_COUNT];
     u8 itemMoveIndex[MAX_BATTLERS_COUNT];
@@ -713,6 +645,12 @@ struct BattleStruct
     u8 soulheartBattlerId;
     const u8 *trainerSlideMsg;
     u8 battleBondTransformed[NUM_BATTLE_SIDES]; // Bitfield for each party.
+    u8 quickClawBattlerId;
+    bool8 effectsBeforeUsingMoveDone:1; // Mega Evo and Focus Punch/Shell Trap effects.
+    u8 focusPunchBattlers; // as bits
+    u8 quickClawRandom[MAX_BATTLERS_COUNT];
+    u8 quickDrawRandom[MAX_BATTLERS_COUNT];
+    bool8 throwingPokeBall;
     // pokeemerald unknown use
     u8 field_93; // related to choosing pokemon? probably related to recording
 };
@@ -1037,11 +975,12 @@ extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
-extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
+extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 extern u16 gRandomTurnNumber;
 extern u8 gPartyCriticalHits[PARTY_SIZE];
 extern const struct BattleMoveEffect gBattleMoveEffects[];
 extern u32 gFieldStatuses;
+extern u8 gPlayerDpadHoldFrames;
 extern u8 gBattlerAbility;
 extern s32 gBideDmg[MAX_BATTLERS_COUNT];
 extern u8 gBideTarget[MAX_BATTLERS_COUNT];

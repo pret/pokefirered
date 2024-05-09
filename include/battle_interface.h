@@ -103,4 +103,18 @@ void UpdateNickInHealthbox(u8 spriteId, struct Pokemon *mon);
 void TryAddPokeballIconToHealthbox(u8 spriteId, u8);
 s32 MoveBattleBar(u8 battler, u8 healthboxSpriteId, u8 whichBar, u8 arg3);
 
+void CreateMegaTriggerSprite(u8 battlerId, u8 palId);
+void ChangeMegaTriggerSprite(u8 spriteId, u8 animId);
+void HideMegaTriggerSprite(void);
+void DestroyMegaTriggerSprite(void);
+bool32 IsMegaTriggerSpriteActive(void);
+
+void CreateBurstTriggerSprite(u8 battlerId, u8 palId);
+void ChangeBurstTriggerSprite(u8 spriteId, u8 animId);
+void HideBurstTriggerSprite(void);
+void DestroyBurstTriggerSprite(void);
+bool32 IsBurstTriggerSpriteActive(void);
+
+void HideTriggerSprites(void);
+
 #endif // GUARD_BATTLE_INTERFACE_H

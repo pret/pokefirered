@@ -296,6 +296,10 @@
 #define ANIM_TAG_SLASH_2                    (ANIM_SPRITES_START + 286)
 #define ANIM_TAG_WHIP_HIT                   (ANIM_SPRITES_START + 287)
 #define ANIM_TAG_BLUE_RING_2                (ANIM_SPRITES_START + 288)
+// new particles
+#define ANIM_TAG_MEGA_STONE                 (ANIM_SPRITES_START + 289)
+#define ANIM_TAG_MEGA_SYMBOL                (ANIM_SPRITES_START + 290)
+#define ANIM_TAG_MEGA_PARTICLES             (ANIM_SPRITES_START + 291)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -384,6 +388,8 @@
 #define B_ANIM_SAFARI_REACTION          27
 #define B_ANIM_RESTORE_BG               28 // for Terrain Endings
 #define B_ANIM_SLIDE_OFFSCREEN          29 // for Emergency Exit
+// pokeemerald
+#define B_ANIM_MEGA_EVOLUTION           30
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

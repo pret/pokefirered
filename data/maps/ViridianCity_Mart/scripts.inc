@@ -99,6 +99,9 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_ORAN_BERRY
 	.2byte ITEM_BEAST_BALL
 	.2byte ITEM_POMEG_BERRY
+	.2byte ITEM_MEGA_RING
+	.2byte ITEM_CHARIZARDITE_X
+	.2byte ITEM_CHARIZARDITE_Y
 	.2byte ITEM_NONE
 	release
 	end

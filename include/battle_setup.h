@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+extern u16 gPartnerTrainerId;
+
 void StartWildBattle(void);
 void StartRoamerBattle(void);
 void StartOldManTutorialBattle(void);

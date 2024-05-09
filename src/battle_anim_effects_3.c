@@ -1168,6 +1168,39 @@ static const union AffineAnimCmd sSlackOffSquishAffineAnimCmds[] =
     AFFINEANIMCMD_END,
 };
 
+const struct SpriteTemplate gMegaStoneSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_MEGA_STONE,
+    .paletteTag = ANIM_TAG_MEGA_STONE,
+    .oam = &gOamData_AffineDouble_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_LusterPurgeCircle,
+    .callback = AnimSpriteOnMonPos,
+};
+
+const struct SpriteTemplate gMegaParticlesSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_MEGA_PARTICLES,
+    .paletteTag = ANIM_TAG_MEGA_PARTICLES,
+    .oam = &gOamData_AffineNormal_ObjBlend_16x16,
+    .anims = gPowerAbsorptionOrbAnimTable,
+    .images = NULL,
+    .affineAnims = gPowerAbsorptionOrbAffineAnimTable,
+    .callback = AnimPowerAbsorptionOrb,
+};
+
+const struct SpriteTemplate gMegaSymbolSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_MEGA_SYMBOL,
+    .paletteTag = ANIM_TAG_MEGA_SYMBOL,
+    .oam = &gOamData_AffineOff_ObjBlend_32x32,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimGhostStatusSprite,
+};
+
 static void AnimBlackSmoke(struct Sprite *sprite)
 {
     sprite->x += gBattleAnimArgs[0];

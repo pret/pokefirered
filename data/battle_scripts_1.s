@@ -6935,7 +6935,7 @@ BattleScript_MegaEvolutionAfterString:
 	waitmessage B_WAIT_TIME_LONG
 	setbyte gIsCriticalHit, 0
 	handlemegaevo BS_ATTACKER, 0
-	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE @ TODO animation: B_ANIM_MEGA_EVOLUTION
+	playanimation BS_ATTACKER, B_ANIM_MEGA_EVOLUTION
 	waitanimation
 	handlemegaevo BS_ATTACKER, 1
 	printstring STRINGID_MEGAEVOEVOLVED

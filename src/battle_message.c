@@ -2746,6 +2746,87 @@ static void GetBattlerNick(u32 battler, u8 *dst)
     StringGet_Nickname(text);                                           \
     toCpy = text;
 
+static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text, u8 multiplayerId, u8 battler)
+{
+    const u8 *toCpy = NULL;
+    // TODO: update after trainer refactoring
+    
+    if (trainerId == TRAINER_UNION_ROOM)
+    {
+        toCpy = gLinkPlayers[multiplayerId ^ BIT_SIDE].name;
+    }
+    else if (trainerId == TRAINER_LINK_OPPONENT)
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            toCpy = gLinkPlayers[GetBattlerMultiplayerId(battler)].name;
+        else
+            toCpy = gLinkPlayers[GetBattlerMultiplayerId(battler) & BIT_SIDE].name;
+    }
+    else
+    {
+        toCpy = GetTrainerNameFromId(trainerId);
+    }
+
+    return toCpy;
+}
+
+static const u8 *BattleStringGetOpponentName(u8 *text, u8 multiplayerId, u8 battler)
+{
+    const u8 *toCpy = NULL;
+
+    switch (GetBattlerPosition(battler))
+    {
+    case B_POSITION_OPPONENT_LEFT:
+        toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_A, text, multiplayerId, battler);
+        break;
+    case B_POSITION_OPPONENT_RIGHT:
+        if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI) && !BATTLE_TWO_VS_ONE_OPPONENT)
+            toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_B, text, multiplayerId, battler);
+        else
+            toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_A, text, multiplayerId, battler);
+        break;
+    }
+
+    return toCpy;
+}
+
+static const u8 *BattleStringGetPlayerName(u8 *text, u8 battler)
+{
+    const u8 *toCpy = NULL;
+
+    switch (GetBattlerPosition(battler))
+    {
+    case B_POSITION_PLAYER_LEFT:
+        toCpy = gSaveBlock2Ptr->playerName;
+        break;
+    case B_POSITION_PLAYER_RIGHT:
+        if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && gBattleTypeFlags & (BATTLE_TYPE_MULTI))
+        {
+            toCpy = gLinkPlayers[2].name;
+        } // TODO: Trainer refactoring
+        // else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        // {
+        //     GetFrontierTrainerName(text, gPartnerTrainerId);
+        //     toCpy = text;
+        // }
+        else
+        {
+            toCpy = gSaveBlock2Ptr->playerName;
+        }
+        break;
+    }
+
+    return toCpy;
+}
+
+static const u8 *BattleStringGetTrainerName(u8 *text, u8 multiplayerId, u8 battler)
+{
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+        return BattleStringGetPlayerName(text, battler);
+    else
+        return BattleStringGetOpponentName(text, multiplayerId, battler);
+}
+
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 {
     u32 dstId = 0; // if they used dstId, why not use srcId as well?
@@ -3115,9 +3196,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     toCpy = sText_FoePkmnPrefix4;
                 break;
             case B_TXT_ATK_TRAINER_NAME:
-                // TODO: get trainer name 
-                // toCpy = BattleStringGetTrainerName(text, multiplayerId, gBattlerAttacker);
-                toCpy = "TODO";
+                toCpy = BattleStringGetTrainerName(text, multiplayerId, gBattlerAttacker);
                 break;
             case B_TXT_ATK_TRAINER_CLASS:
                 // TODO: get trainer name

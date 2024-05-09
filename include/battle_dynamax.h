@@ -56,37 +56,37 @@ enum MaxMoveEffect
 	MAX_EFFECT_BYPASS_PROTECT,
 };
 
-// bool32 IsDynamaxed(u16 battlerId);
-// bool32 CanDynamax(u16 battlerId);
-// bool32 IsGigantamaxed(u16 battlerId);
-// void ApplyDynamaxHPMultiplier(u32 battler, struct Pokemon* mon);
-// void PrepareBattlerForDynamax(u16 battlerId);
-// u16 GetNonDynamaxHP(u16 battlerId);
-// u16 GetNonDynamaxMaxHP(u32 battlerId);
-// void UndoDynamax(u16 battlerId);
-// bool32 IsMoveBlockedByMaxGuard(u16 move);
-// bool32 IsMoveBlockedByDynamax(u16 move);
+bool32 IsDynamaxed(u16 battlerId);
+bool32 CanDynamax(u16 battlerId);
+bool32 IsGigantamaxed(u16 battlerId);
+void ApplyDynamaxHPMultiplier(u32 battler, struct Pokemon* mon);
+void PrepareBattlerForDynamax(u16 battlerId);
+u16 GetNonDynamaxHP(u16 battlerId);
+u16 GetNonDynamaxMaxHP(u32 battlerId);
+void UndoDynamax(u16 battlerId);
+bool32 IsMoveBlockedByMaxGuard(u16 move);
+bool32 IsMoveBlockedByDynamax(u16 move);
 
-// bool32 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
-// u16 GetMaxMove(u16 battlerId, u16 baseMove);
-// u8 GetMaxMovePower(u16 move);
-// bool32 IsMaxMove(u16 move);
-// void ChooseDamageNonTypesString(u8 type);
+bool32 ShouldUseMaxMove(u16 battlerId, u16 baseMove);
+u16 GetMaxMove(u16 battlerId, u16 baseMove);
+u8 GetMaxMovePower(u16 move);
+bool32 IsMaxMove(u16 move);
+void ChooseDamageNonTypesString(u8 type);
 
-// void BS_UpdateDynamax(void);
-// void BS_SetMaxMoveEffect(void);
-// void BS_SetSteelsurge(void);
-// void BS_TrySetStatus1(void);
-// void BS_TrySetStatus2(void);
-// void BS_DamageNonTypes(void);
-// void BS_HealOneSixth(void);
-// void BS_TryRecycleBerry(void);
-// void BS_JumpIfDynamaxed(void);
+void BS_UpdateDynamax(void);
+void BS_SetMaxMoveEffect(void);
+void BS_SetSteelsurge(void);
+void BS_TrySetStatus1(void);
+void BS_TrySetStatus2(void);
+void BS_DamageNonTypes(void);
+void BS_HealOneSixth(void);
+void BS_TryRecycleBerry(void);
+void BS_JumpIfDynamaxed(void);
 
-// void ChangeDynamaxTriggerSprite(u8 spriteId, u8 animId);
-// void CreateDynamaxTriggerSprite(u8, bool8);
-// void HideDynamaxTriggerSprite(void);
-// bool32 IsDynamaxTriggerSpriteActive(void);
+void ChangeDynamaxTriggerSprite(u8 spriteId, u8 animId);
+void CreateDynamaxTriggerSprite(u8, bool8);
+void HideDynamaxTriggerSprite(void);
+bool32 IsDynamaxTriggerSpriteActive(void);
 void DestroyDynamaxTriggerSprite(void);
 
 #endif

@@ -549,342 +549,342 @@ void BS_UpdateDynamax(void)
 }
 
 // Activates the secondary effect of a Max Move.
-// void BS_SetMaxMoveEffect(void)
-// {
-//     NATIVE_ARGS();
-//     u16 effect = 0;
-//     u8 maxEffect = gMovesInfo[gCurrentMove].argument;
+void BS_SetMaxMoveEffect(void)
+{
+    NATIVE_ARGS();
+    u16 effect = 0;
+    u8 maxEffect = gMovesInfo[gCurrentMove].argument;
 
-//     // Don't continue if the move didn't land.
-//     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-//     {
-//         gBattlescriptCurrInstr = cmd->nextInstr;
-//         return;
-//     }
+    // Don't continue if the move didn't land.
+    if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+    {
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
 
-//     switch (maxEffect)
-//     {
-//         case MAX_EFFECT_RAISE_TEAM_ATTACK:
-//         case MAX_EFFECT_RAISE_TEAM_DEFENSE:
-//         case MAX_EFFECT_RAISE_TEAM_SPEED:
-//         case MAX_EFFECT_RAISE_TEAM_SP_ATK:
-//         case MAX_EFFECT_RAISE_TEAM_SP_DEF:
-//             if (!NoAliveMonsForEitherParty())
-//             {
-//                 // Max Effects are ordered by stat ID.
-//                 SET_STATCHANGER(gMovesInfo[gCurrentMove].argument, 1, FALSE);
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectRaiseStatAllies;
-//                 effect++;
-//             }
-//             break;
-//         case MAX_EFFECT_LOWER_ATTACK:
-//         case MAX_EFFECT_LOWER_DEFENSE:
-//         case MAX_EFFECT_LOWER_SPEED:
-//         case MAX_EFFECT_LOWER_SP_ATK:
-//         case MAX_EFFECT_LOWER_SP_DEF:
-//         case MAX_EFFECT_LOWER_SPEED_2_FOES:
-//         case MAX_EFFECT_LOWER_EVASIVENESS_FOES:
-//             if (!NoAliveMonsForEitherParty())
-//             {
-//                 u8 statId = 0;
-//                 u8 stage = 1;
-//                 switch (maxEffect)
-//                 {
-//                     case MAX_EFFECT_LOWER_SPEED_2_FOES:
-//                         statId = STAT_SPEED;
-//                         stage = 2;
-//                         break;
-//                     case MAX_EFFECT_LOWER_EVASIVENESS_FOES:
-//                         statId = STAT_EVASION;
-//                         break;
-//                     default:
-//                         // Max Effects are ordered by stat ID.
-//                         statId = gMovesInfo[gCurrentMove].argument - MAX_EFFECT_LOWER_ATTACK + 1;
-//                         break;
-//                 }
-//                 SET_STATCHANGER(statId, stage, TRUE);
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectLowerStatFoes;
-//                 effect++;
-//             }
-//             break;
-//         case MAX_EFFECT_SUN:
-//         case MAX_EFFECT_RAIN:
-//         case MAX_EFFECT_SANDSTORM:
-//         case MAX_EFFECT_HAIL:
-//         {
-//             u8 weather = 0, msg = 0;
-//             switch (maxEffect)
-//             {
-//                 case MAX_EFFECT_SUN:
-//                     weather = ENUM_WEATHER_SUN;
-//                     msg = B_MSG_STARTED_SUNLIGHT;
-//                     break;
-//                 case MAX_EFFECT_RAIN:
-//                     weather = ENUM_WEATHER_RAIN;
-//                     msg = B_MSG_STARTED_RAIN;
-//                     break;
-//                 case MAX_EFFECT_SANDSTORM:
-//                     weather = ENUM_WEATHER_SANDSTORM;
-//                     msg = B_MSG_STARTED_SANDSTORM;
-//                     break;
-//                 case MAX_EFFECT_HAIL:
-//                     weather = ENUM_WEATHER_HAIL;
-//                     msg = B_MSG_STARTED_HAIL;
-//                     break;
-//             }
-//             if (TryChangeBattleWeather(gBattlerAttacker, weather, FALSE))
-//             {
-//                 gBattleCommunication[MULTISTRING_CHOOSER] = msg;
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
-//                 effect++;
-//             }
-//             break;
-//         }
-//         case MAX_EFFECT_MISTY_TERRAIN:
-//         case MAX_EFFECT_GRASSY_TERRAIN:
-//         case MAX_EFFECT_ELECTRIC_TERRAIN:
-//         case MAX_EFFECT_PSYCHIC_TERRAIN:
-//         {
-//             u32 statusFlag = 0;
-//             switch (gMovesInfo[gCurrentMove].argument)
-//             {
-//                 case MAX_EFFECT_MISTY_TERRAIN:
-//                     statusFlag = STATUS_FIELD_MISTY_TERRAIN;
-//                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_MISTY;
-//                     break;
-//                 case MAX_EFFECT_GRASSY_TERRAIN:
-//                     statusFlag = STATUS_FIELD_GRASSY_TERRAIN;
-//                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
-//                     break;
-//                 case MAX_EFFECT_ELECTRIC_TERRAIN:
-//                     statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN;
-//                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_ELECTRIC;
-//                     break;
-//                 case MAX_EFFECT_PSYCHIC_TERRAIN:
-//                     statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN;
-//                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_PSYCHIC;
-//                     break;
-//             }
-//             if (!(gFieldStatuses & statusFlag) && statusFlag != 0)
-//             {
-//                 gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
-//                 gFieldStatuses |= statusFlag;
-//                 if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
-//                     gFieldTimers.terrainTimer = 8;
-//                 else
-//                     gFieldTimers.terrainTimer = 5;
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
-//                 effect++;
-//             }
-//             break;
-//         }
-//         case MAX_EFFECT_VINE_LASH:
-//         case MAX_EFFECT_CANNONADE:
-//         case MAX_EFFECT_WILDFIRE:
-//         case MAX_EFFECT_VOLCALITH:
-//         {
-//             u8 side = GetBattlerSide(gBattlerTarget);
-//             if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
-//             {
-//                 gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
-//                 gSideTimers[side].damageNonTypesTimer = 5; // damage is dealt for 4 turns, ends on 5th
-//                 gSideTimers[side].damageNonTypesType = gMovesInfo[gCurrentMove].type;
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 ChooseDamageNonTypesString(gMovesInfo[gCurrentMove].type);
-//                 gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
-//                 effect++;
-//             }
-//             break;
-//         }
-//         case MAX_EFFECT_STEALTH_ROCK:
-//             if (!(gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_STEALTH_ROCK))
-//             {
-//                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_POINTEDSTONESFLOAT;
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectStonesurge;
-//                 effect++;
-//             }
-//             break;
-//         case MAX_EFFECT_STEELSURGE:
-//             if (!(gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_STEELSURGE))
-//             {
-//                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHARPSTEELFLOATS;
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectSteelsurge;
-//                 effect++;
-//             }
-//             break;
-//         case MAX_EFFECT_DEFOG:
-//             if (gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_SCREEN_ANY
-//                 || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_HAZARDS_ANY
-//                 || gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_HAZARDS_ANY
-//                 || gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
-//             {
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_DefogTryHazards;
-//                 effect++;
-//             }
-//             break;
-//         case MAX_EFFECT_AURORA_VEIL:
-//             if (!(gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_AURORA_VEIL))
-//             {
-//                 gSideStatuses[GetBattlerSide(gBattlerAttacker)] |= SIDE_STATUS_AURORA_VEIL;
-//                 if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIGHT_CLAY)
-//                     gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 8;
-//                 else
-//                     gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 5;
-//                 gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilBattlerId = gBattlerAttacker;
-//                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAFEGUARD;
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectAuroraVeilSuccess;
-//                 effect++;
-//             }
-//             break;
-//         case MAX_EFFECT_GRAVITY:
-//             if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
-//             {
-//                 gFieldStatuses |= STATUS_FIELD_GRAVITY;
-//                 gFieldTimers.gravityTimer = 5;
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectGravitySuccess;
-//                 effect++;
-//             }
-//             break;
-//         case MAX_EFFECT_SANDBLAST_FOES:
-//         case MAX_EFFECT_FIRE_SPIN_FOES:
-//         {
-//             // Affects both opponents, but doesn't print strings so we can handle it here.
-//             u8 battler;
-//             for (battler = 0; battler < MAX_BATTLERS_COUNT; ++battler)
-//             {
-//                 if (GetBattlerSide(battler) != GetBattlerSide(gBattlerTarget))
-//                     continue;
-//                 if (!(gBattleMons[battler].status2 & STATUS2_WRAPPED))
-//                 {
-//                     gBattleMons[battler].status2 |= STATUS2_WRAPPED;
-//                     if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_GRIP_CLAW)
-//                 #if B_BINDING_TURNS >= GEN_5
-//                         gDisableStructs[battler].wrapTurns = 7;
-//                     else
-//                         gDisableStructs[battler].wrapTurns = (Random() % 2) + 4;
-//                 #else
-//                         gDisableStructs[battler].wrapTurns = 5;
-//                     else
-//                         gDisableStructs[battler].wrapTurns = (Random() % 4) + 2;
-//                 #endif
-//                     // The Wrap effect does not expire when the user switches, so here's some cheese.
-//                     gBattleStruct->wrappedBy[battler] = gBattlerTarget;
-//                     if (maxEffect == MAX_EFFECT_SANDBLAST_FOES)
-//                         gBattleStruct->wrappedMove[battler] = MOVE_SAND_TOMB;
-//                     else
-//                         gBattleStruct->wrappedMove[battler] = MOVE_FIRE_SPIN;
-//                 }
-//             }
-//             break;
-//         }
-//         case MAX_EFFECT_YAWN_FOE:
-//         {
-//             static const u8 sSnoozeEffects[] = {TRUE, FALSE};
-//             if (!(gStatuses3[gBattlerTarget] & STATUS3_YAWN)
-//                 && CanSleep(gBattlerTarget)
-//                 && RandomElement(RNG_G_MAX_SNOOZE, sSnoozeEffects)) // 50% chance of success
-//             {
-//                 gStatuses3[gBattlerTarget] |= STATUS3_YAWN_TURN(2);
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectYawnSuccess;
-//                 effect++;
-//             }
-//             break;
-//         }
-//         case MAX_EFFECT_SPITE:
-//             if (gLastMoves[gBattlerTarget] != MOVE_NONE
-//                 && gLastMoves[gBattlerTarget] != MOVE_UNAVAILABLE)
-//             {
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectTryReducePP;
-//                 effect++;
-//             }
-//             break;
-//         case MAX_EFFECT_PARALYZE_FOES:
-//         case MAX_EFFECT_POISON_FOES:
-//         case MAX_EFFECT_POISON_PARALYZE_FOES:
-//         case MAX_EFFECT_EFFECT_SPORE_FOES:
-//             BattleScriptPush(gBattlescriptCurrInstr + 1);
-//             gBattlescriptCurrInstr = BattleScript_EffectStatus1Foes;
-//             effect++;
-//             break;
-//         case MAX_EFFECT_CONFUSE_FOES_PAY_DAY:
-//             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-//             {
-//                 u16 payday = gPaydayMoney;
-//                 gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 100);
-//                 if (payday > gPaydayMoney)
-//                     gPaydayMoney = 0xFFFF;
-//                 gBattleCommunication[CURSOR_POSITION] = 1; // add "Coins scattered." message
-//             }
-//             // fall through
-//         case MAX_EFFECT_CONFUSE_FOES:
-//         case MAX_EFFECT_INFATUATE_FOES:
-//         case MAX_EFFECT_TORMENT_FOES:
-//         case MAX_EFFECT_MEAN_LOOK:
-//             BattleScriptPush(gBattlescriptCurrInstr + 1);
-//             gBattlescriptCurrInstr = BattleScript_EffectStatus2Foes;
-//             effect++;
-//             break;
-//         case MAX_EFFECT_CRIT_PLUS:
-//             gBattleStruct->bonusCritStages[gBattlerAttacker]++;
-//             gBattleStruct->bonusCritStages[BATTLE_PARTNER(gBattlerAttacker)]++;
-//             BattleScriptPush(gBattlescriptCurrInstr + 1);
-//             gBattlescriptCurrInstr = BattleScript_EffectRaiseCritAlliesAnim;
-//             effect++;
-//             break;
-//         case MAX_EFFECT_HEAL_TEAM:
-//             BattleScriptPush(gBattlescriptCurrInstr + 1);
-//             gBattlescriptCurrInstr = BattleScript_EffectHealOneSixthAllies;
-//             effect++;
-//             break;
-//         case MAX_EFFECT_AROMATHERAPY:
-//             BattleScriptPush(gBattlescriptCurrInstr + 1);
-//             gBattlescriptCurrInstr = BattleScript_EffectCureStatusAllies;
-//             effect++;
-//             break;
-//         case MAX_EFFECT_RECYCLE_BERRIES:
-//         {
-//             static const u8 sReplenishEffects[] = {TRUE, FALSE};
-//             if (RandomElement(RNG_G_MAX_REPLENISH, sReplenishEffects)) // 50% chance of success
-//             {
-//                 BattleScriptPush(gBattlescriptCurrInstr + 1);
-//                 gBattlescriptCurrInstr = BattleScript_EffectRecycleBerriesAllies;
-//                 effect++;
-//             }
-//             break;
-//         }
-//     }
+    switch (maxEffect)
+    {
+        case MAX_EFFECT_RAISE_TEAM_ATTACK:
+        case MAX_EFFECT_RAISE_TEAM_DEFENSE:
+        case MAX_EFFECT_RAISE_TEAM_SPEED:
+        case MAX_EFFECT_RAISE_TEAM_SP_ATK:
+        case MAX_EFFECT_RAISE_TEAM_SP_DEF:
+            if (!NoAliveMonsForEitherParty())
+            {
+                // Max Effects are ordered by stat ID.
+                SET_STATCHANGER(gMovesInfo[gCurrentMove].argument, 1, FALSE);
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectRaiseStatAllies;
+                effect++;
+            }
+            break;
+        case MAX_EFFECT_LOWER_ATTACK:
+        case MAX_EFFECT_LOWER_DEFENSE:
+        case MAX_EFFECT_LOWER_SPEED:
+        case MAX_EFFECT_LOWER_SP_ATK:
+        case MAX_EFFECT_LOWER_SP_DEF:
+        case MAX_EFFECT_LOWER_SPEED_2_FOES:
+        case MAX_EFFECT_LOWER_EVASIVENESS_FOES:
+            if (!NoAliveMonsForEitherParty())
+            {
+                u8 statId = 0;
+                u8 stage = 1;
+                switch (maxEffect)
+                {
+                    case MAX_EFFECT_LOWER_SPEED_2_FOES:
+                        statId = STAT_SPEED;
+                        stage = 2;
+                        break;
+                    case MAX_EFFECT_LOWER_EVASIVENESS_FOES:
+                        statId = STAT_EVASION;
+                        break;
+                    default:
+                        // Max Effects are ordered by stat ID.
+                        statId = gMovesInfo[gCurrentMove].argument - MAX_EFFECT_LOWER_ATTACK + 1;
+                        break;
+                }
+                SET_STATCHANGER(statId, stage, TRUE);
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectLowerStatFoes;
+                effect++;
+            }
+            break;
+        case MAX_EFFECT_SUN:
+        case MAX_EFFECT_RAIN:
+        case MAX_EFFECT_SANDSTORM:
+        case MAX_EFFECT_HAIL:
+        {
+            u8 weather = 0, msg = 0;
+            switch (maxEffect)
+            {
+                case MAX_EFFECT_SUN:
+                    weather = ENUM_WEATHER_SUN;
+                    msg = B_MSG_STARTED_SUNLIGHT;
+                    break;
+                case MAX_EFFECT_RAIN:
+                    weather = ENUM_WEATHER_RAIN;
+                    msg = B_MSG_STARTED_RAIN;
+                    break;
+                case MAX_EFFECT_SANDSTORM:
+                    weather = ENUM_WEATHER_SANDSTORM;
+                    msg = B_MSG_STARTED_SANDSTORM;
+                    break;
+                case MAX_EFFECT_HAIL:
+                    weather = ENUM_WEATHER_HAIL;
+                    msg = B_MSG_STARTED_HAIL;
+                    break;
+            }
+            if (TryChangeBattleWeather(gBattlerAttacker, weather, FALSE))
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = msg;
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
+                effect++;
+            }
+            break;
+        }
+        case MAX_EFFECT_MISTY_TERRAIN:
+        case MAX_EFFECT_GRASSY_TERRAIN:
+        case MAX_EFFECT_ELECTRIC_TERRAIN:
+        case MAX_EFFECT_PSYCHIC_TERRAIN:
+        {
+            u32 statusFlag = 0;
+            switch (gMovesInfo[gCurrentMove].argument)
+            {
+                case MAX_EFFECT_MISTY_TERRAIN:
+                    statusFlag = STATUS_FIELD_MISTY_TERRAIN;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_MISTY;
+                    break;
+                case MAX_EFFECT_GRASSY_TERRAIN:
+                    statusFlag = STATUS_FIELD_GRASSY_TERRAIN;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
+                    break;
+                case MAX_EFFECT_ELECTRIC_TERRAIN:
+                    statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_ELECTRIC;
+                    break;
+                case MAX_EFFECT_PSYCHIC_TERRAIN:
+                    statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_PSYCHIC;
+                    break;
+            }
+            if (!(gFieldStatuses & statusFlag) && statusFlag != 0)
+            {
+                gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
+                gFieldStatuses |= statusFlag;
+                if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
+                    gFieldTimers.terrainTimer = 8;
+                else
+                    gFieldTimers.terrainTimer = 5;
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
+                effect++;
+            }
+            break;
+        }
+        case MAX_EFFECT_VINE_LASH:
+        case MAX_EFFECT_CANNONADE:
+        case MAX_EFFECT_WILDFIRE:
+        case MAX_EFFECT_VOLCALITH:
+        {
+            u8 side = GetBattlerSide(gBattlerTarget);
+            if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
+            {
+                gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
+                gSideTimers[side].damageNonTypesTimer = 5; // damage is dealt for 4 turns, ends on 5th
+                gSideTimers[side].damageNonTypesType = gMovesInfo[gCurrentMove].type;
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                ChooseDamageNonTypesString(gMovesInfo[gCurrentMove].type);
+                gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
+                effect++;
+            }
+            break;
+        }
+        case MAX_EFFECT_STEALTH_ROCK:
+            if (!(gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_STEALTH_ROCK))
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_POINTEDSTONESFLOAT;
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectStonesurge;
+                effect++;
+            }
+            break;
+        case MAX_EFFECT_STEELSURGE:
+            if (!(gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_STEELSURGE))
+            {
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHARPSTEELFLOATS;
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectSteelsurge;
+                effect++;
+            }
+            break;
+        case MAX_EFFECT_DEFOG:
+            if (gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_SCREEN_ANY
+                || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_HAZARDS_ANY
+                || gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_HAZARDS_ANY
+                || gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+            {
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_DefogTryHazards;
+                effect++;
+            }
+            break;
+        case MAX_EFFECT_AURORA_VEIL:
+            if (!(gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_AURORA_VEIL))
+            {
+                gSideStatuses[GetBattlerSide(gBattlerAttacker)] |= SIDE_STATUS_AURORA_VEIL;
+                if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIGHT_CLAY)
+                    gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 8;
+                else
+                    gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 5;
+                gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilBattlerId = gBattlerAttacker;
+                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAFEGUARD;
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectAuroraVeilSuccess;
+                effect++;
+            }
+            break;
+        case MAX_EFFECT_GRAVITY:
+            if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
+            {
+                gFieldStatuses |= STATUS_FIELD_GRAVITY;
+                gFieldTimers.gravityTimer = 5;
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectGravitySuccess;
+                effect++;
+            }
+            break;
+        case MAX_EFFECT_SANDBLAST_FOES:
+        case MAX_EFFECT_FIRE_SPIN_FOES:
+        {
+            // Affects both opponents, but doesn't print strings so we can handle it here.
+            u8 battler;
+            for (battler = 0; battler < MAX_BATTLERS_COUNT; ++battler)
+            {
+                if (GetBattlerSide(battler) != GetBattlerSide(gBattlerTarget))
+                    continue;
+                if (!(gBattleMons[battler].status2 & STATUS2_WRAPPED))
+                {
+                    gBattleMons[battler].status2 |= STATUS2_WRAPPED;
+                    if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_GRIP_CLAW)
+                #if B_BINDING_TURNS >= GEN_5
+                        gDisableStructs[battler].wrapTurns = 7;
+                    else
+                        gDisableStructs[battler].wrapTurns = (Random() % 2) + 4;
+                #else
+                        gDisableStructs[battler].wrapTurns = 5;
+                    else
+                        gDisableStructs[battler].wrapTurns = (Random() % 4) + 2;
+                #endif
+                    // The Wrap effect does not expire when the user switches, so here's some cheese.
+                    gBattleStruct->wrappedBy[battler] = gBattlerTarget;
+                    if (maxEffect == MAX_EFFECT_SANDBLAST_FOES)
+                        gBattleStruct->wrappedMove[battler] = MOVE_SAND_TOMB;
+                    else
+                        gBattleStruct->wrappedMove[battler] = MOVE_FIRE_SPIN;
+                }
+            }
+            break;
+        }
+        case MAX_EFFECT_YAWN_FOE:
+        {
+            static const u8 sSnoozeEffects[] = {TRUE, FALSE};
+            if (!(gStatuses3[gBattlerTarget] & STATUS3_YAWN)
+                && CanSleep(gBattlerTarget)
+                && RandomElement(RNG_G_MAX_SNOOZE, sSnoozeEffects)) // 50% chance of success
+            {
+                gStatuses3[gBattlerTarget] |= STATUS3_YAWN_TURN(2);
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectYawnSuccess;
+                effect++;
+            }
+            break;
+        }
+        case MAX_EFFECT_SPITE:
+            if (gLastMoves[gBattlerTarget] != MOVE_NONE
+                && gLastMoves[gBattlerTarget] != MOVE_UNAVAILABLE)
+            {
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectTryReducePP;
+                effect++;
+            }
+            break;
+        case MAX_EFFECT_PARALYZE_FOES:
+        case MAX_EFFECT_POISON_FOES:
+        case MAX_EFFECT_POISON_PARALYZE_FOES:
+        case MAX_EFFECT_EFFECT_SPORE_FOES:
+            BattleScriptPush(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = BattleScript_EffectStatus1Foes;
+            effect++;
+            break;
+        case MAX_EFFECT_CONFUSE_FOES_PAY_DAY:
+            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            {
+                u16 payday = gPaydayMoney;
+                gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 100);
+                if (payday > gPaydayMoney)
+                    gPaydayMoney = 0xFFFF;
+                gBattleCommunication[CURSOR_POSITION] = 1; // add "Coins scattered." message
+            }
+            // fall through
+        case MAX_EFFECT_CONFUSE_FOES:
+        case MAX_EFFECT_INFATUATE_FOES:
+        case MAX_EFFECT_TORMENT_FOES:
+        case MAX_EFFECT_MEAN_LOOK:
+            BattleScriptPush(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = BattleScript_EffectStatus2Foes;
+            effect++;
+            break;
+        case MAX_EFFECT_CRIT_PLUS:
+            gBattleStruct->bonusCritStages[gBattlerAttacker]++;
+            gBattleStruct->bonusCritStages[BATTLE_PARTNER(gBattlerAttacker)]++;
+            BattleScriptPush(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = BattleScript_EffectRaiseCritAlliesAnim;
+            effect++;
+            break;
+        case MAX_EFFECT_HEAL_TEAM:
+            BattleScriptPush(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = BattleScript_EffectHealOneSixthAllies;
+            effect++;
+            break;
+        case MAX_EFFECT_AROMATHERAPY:
+            BattleScriptPush(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = BattleScript_EffectCureStatusAllies;
+            effect++;
+            break;
+        case MAX_EFFECT_RECYCLE_BERRIES:
+        {
+            static const u8 sReplenishEffects[] = {TRUE, FALSE};
+            if (RandomElement(RNG_G_MAX_REPLENISH, sReplenishEffects)) // 50% chance of success
+            {
+                BattleScriptPush(gBattlescriptCurrInstr + 1);
+                gBattlescriptCurrInstr = BattleScript_EffectRecycleBerriesAllies;
+                effect++;
+            }
+            break;
+        }
+    }
 
-//     if (!effect)
-//         gBattlescriptCurrInstr = cmd->nextInstr;
-// }
+    if (!effect)
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
 
 // Sets up sharp steel on the target's side.
-// void BS_SetSteelsurge(void)
-// {
-//     NATIVE_ARGS(const u8 *failInstr);
-//     u8 targetSide = GetBattlerSide(gBattlerTarget);
-//     if (gSideStatuses[targetSide] & SIDE_STATUS_STEELSURGE)
-//     {
-//         gBattlescriptCurrInstr = cmd->failInstr;
-//     }
-//     else
-//     {
-//         gSideStatuses[targetSide] |= SIDE_STATUS_STEELSURGE;
-//         gSideTimers[targetSide].steelsurgeAmount = 1;
-//         gBattlescriptCurrInstr = cmd->nextInstr;
-//     }
-// }
+void BS_SetSteelsurge(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    u8 targetSide = GetBattlerSide(gBattlerTarget);
+    if (gSideStatuses[targetSide] & SIDE_STATUS_STEELSURGE)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else
+    {
+        gSideStatuses[targetSide] |= SIDE_STATUS_STEELSURGE;
+        gSideTimers[targetSide].steelsurgeAmount = 1;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
 
 // Applies the status1 effect associated with a given G-Max Move.
 // Could be expanded to function for any move.

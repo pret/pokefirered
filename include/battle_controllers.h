@@ -97,14 +97,15 @@ enum {
     LINK_STANDBY_MSG_ONLY,
 };
 
-#define RET_VALUE_LEVELLED_UP   11
-
 #define INSTANT_HP_BAR_DROP     0x7FFF
 
 #define PARTY_SUMM_SKIP_DRAW_DELAY (1 << 7)
 
 // Special return values in gBattleBufferB from Battle Controller functions.
 #define RET_VALUE_LEVELED_UP   11
+#define RET_MEGA_EVOLUTION (1 << 7)
+#define RET_ULTRA_BURST    (1 << 6)
+#define RET_DYNAMAX        (1 << 5)
 
 struct UnusedControllerStruct
 {
@@ -133,6 +134,10 @@ struct ChooseMoveStruct
     u16 species;
     u8 monType1;
     u8 monType2;
+    u8 monType3;
+    struct MegaEvolutionData mega;
+    struct UltraBurstData burst;
+    struct ZMoveData zmove;
 };
 
 enum

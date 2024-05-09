@@ -12,6 +12,7 @@
 #include "event_data.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_dynamax.h"
 #include "battle_interface.h"
 #include "battle_scripts.h"
 #include "battle_message.h"
@@ -343,66 +344,6 @@ void BattleScriptPop(void)
         gBattlescriptCurrInstr = gBattleResources->battleScriptsStack->ptr[--gBattleResources->battleScriptsStack->size];
 }
 
-// TODO: update
-u8 TrySetCantSelectMoveBattleScript(u32 battler)
-{
-    u8 holdEffect;
-    u8 limitations = 0;
-    u16 move = gBattleMons[battler].moves[gBattleBufferB[battler][2]];
-    u16 *choicedMove = &gBattleStruct->choicedMove[battler];
-
-    if (gDisableStructs[battler].disabledMove == move && move != MOVE_NONE)
-    {
-        gBattleScripting.battler = battler;
-        gCurrentMove = move;
-        gSelectionBattleScripts[battler] = BattleScript_SelectingDisabledMove;
-        limitations = 1;
-    }
-
-    if (move == gLastMoves[battler] && move != MOVE_STRUGGLE && (gBattleMons[battler].status2 & STATUS2_TORMENT))
-    {
-        CancelMultiTurnMoves(battler);
-        gSelectionBattleScripts[battler] = BattleScript_SelectingTormentedMove;
-        limitations++;
-    }
-
-    if (gDisableStructs[battler].tauntTimer != 0 && gMovesInfo[move].power == 0)
-    {
-        gCurrentMove = move;
-        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveTaunt;
-        limitations++;
-    }
-
-    if (GetImprisonedMovesCount(battler, move))
-    {
-        gCurrentMove = move;
-        gSelectionBattleScripts[battler] = BattleScript_SelectingImprisonedMove;
-        limitations++;
-    }
-
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY)
-        holdEffect = gEnigmaBerries[battler].holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
-
-    gPotentialItemEffectBattler = battler;
-
-    if (holdEffect == HOLD_EFFECT_CHOICE_BAND && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
-    {
-        gCurrentMove = *choicedMove;
-        gLastUsedItem = gBattleMons[battler].item;
-        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveChoiceItem;
-        limitations++;
-    }
-
-    if (gBattleMons[battler].pp[gBattleBufferB[battler][2]] == 0)
-    {
-        gSelectionBattleScripts[battler] = BattleScript_SelectingMoveWithNoPP;
-        limitations++;
-    }
-    return limitations;
-}
-
 static bool32 IsGravityPreventingMove(u32 move)
 {
     if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
@@ -425,6 +366,134 @@ static bool32 IsBelchPreventingMove(u32 battler, u32 move)
         return FALSE;
 
     return !(gBattleStruct->ateBerry[battler & BIT_SIDE] & gBitTable[gBattlerPartyIndexes[battler]]);
+}
+
+// Dynamax bypasses all selection prevention except Taunt and Assault Vest.
+#define DYNAMAX_BYPASS_CHECK    !gBattleStruct->dynamax.playerSelect && !IsDynamaxed(gBattlerAttacker)
+
+u32 TrySetCantSelectMoveBattleScript(u32 battler)
+{
+    u32 limitations = 0;
+    u8 moveId = gBattleBufferB[battler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST | RET_DYNAMAX);
+    u32 move = gBattleMons[battler].moves[moveId];
+    u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
+    u16 *choicedMove = &gBattleStruct->choicedMove[battler];
+
+    if (DYNAMAX_BYPASS_CHECK && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && gDisableStructs[battler].disabledMove == move && move != MOVE_NONE)
+    {
+        gBattleScripting.battler = battler;
+        gCurrentMove = move;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingDisabledMove;
+        limitations++;
+    }
+
+    if (DYNAMAX_BYPASS_CHECK && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && move == gLastMoves[battler] && move != MOVE_STRUGGLE && (gBattleMons[battler].status2 & STATUS2_TORMENT))
+    {
+        CancelMultiTurnMoves(battler);
+        gSelectionBattleScripts[battler] = BattleScript_SelectingTormentedMove;
+        limitations++;
+    }
+
+    if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && gDisableStructs[battler].tauntTimer != 0 && IS_MOVE_STATUS(move))
+    {
+        if (IsDynamaxed(gBattlerAttacker))
+            gCurrentMove = MOVE_MAX_GUARD;
+        else
+            gCurrentMove = move;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveTaunt;
+        limitations++;
+    }
+
+    if (DYNAMAX_BYPASS_CHECK && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && gDisableStructs[battler].throatChopTimer != 0 && gMovesInfo[move].soundMove)
+    {
+        gCurrentMove = move;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveThroatChop;
+        limitations++;
+    }
+
+    if (DYNAMAX_BYPASS_CHECK && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && GetImprisonedMovesCount(battler, move))
+    {
+        gCurrentMove = move;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingImprisonedMove;
+        limitations++;
+    }
+
+    if (DYNAMAX_BYPASS_CHECK && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && IsGravityPreventingMove(move))
+    {
+        gCurrentMove = move;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveGravity;
+        limitations++;
+    }
+
+    if (DYNAMAX_BYPASS_CHECK && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && IsHealBlockPreventingMove(battler, move))
+    {
+        gCurrentMove = move;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveHealBlock;
+        limitations++;
+    }
+
+    if (DYNAMAX_BYPASS_CHECK && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && IsBelchPreventingMove(battler, move))
+    {
+        gCurrentMove = move;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedBelch;
+        limitations++;
+    }
+
+    if (DYNAMAX_BYPASS_CHECK && gMovesInfo[move].effect == EFFECT_STUFF_CHEEKS && ItemId_GetPocket(gBattleMons[battler].item) != POCKET_BERRY_POUCH)
+    {
+        gCurrentMove = move;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedStuffCheeks;
+        limitations++;
+    }
+
+    if (gMovesInfo[move].cantUseTwice && move == gLastResultingMoves[battler])
+    {
+        gCurrentMove = move;
+        PREPARE_MOVE_BUFFER(gBattleTextBuff1, gCurrentMove);
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedCurrentMove;
+        limitations++;
+    }
+
+    gPotentialItemEffectBattler = battler;
+    if (DYNAMAX_BYPASS_CHECK && HOLD_EFFECT_CHOICE(holdEffect) && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
+    {
+        gCurrentMove = *choicedMove;
+        gLastUsedItem = gBattleMons[battler].item;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveChoiceItem;
+        limitations++;
+    }
+    else if (holdEffect == HOLD_EFFECT_ASSAULT_VEST && IS_MOVE_STATUS(move) && gMovesInfo[move].effect != EFFECT_ME_FIRST)
+    {
+        if (IsDynamaxed(gBattlerAttacker))
+            gCurrentMove = MOVE_MAX_GUARD;
+        else
+            gCurrentMove = move;
+        gLastUsedItem = gBattleMons[battler].item;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveAssaultVest;
+        limitations++;
+    }
+    if (DYNAMAX_BYPASS_CHECK && (GetBattlerAbility(battler) == ABILITY_GORILLA_TACTICS) && *choicedMove != MOVE_NONE
+              && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
+    {
+        gCurrentMove = *choicedMove;
+        gLastUsedItem = gBattleMons[battler].item;
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedMoveGorillaTactics;
+        limitations++;
+    }
+
+    if (gBattleMons[battler].pp[moveId] == 0)
+    {
+        gSelectionBattleScripts[battler] = BattleScript_SelectingMoveWithNoPP;
+        limitations++;
+    }
+
+    if (gMovesInfo[move].effect == EFFECT_PLACEHOLDER)
+    {
+        gSelectionBattleScripts[battler] = BattleScript_SelectingNotAllowedPlaceholder;
+        limitations++;
+    }
+
+    return limitations;
 }
 
 u8 CheckMoveLimitations(u32 battler, u8 unusableMoves, u16 check)
@@ -2042,16 +2111,6 @@ bool8 HandleFaintedMonActions(void)
         }
     } while (gBattleStruct->faintedActionsState != FAINTED_ACTIONS_MAX_CASE);
     return FALSE;
-}
-
-void TryClearRageStatuses(void)
-{
-    s32 i;
-    for (i = 0; i < gBattlersCount; i++)
-    {
-        if ((gBattleMons[i].status2 & STATUS2_RAGE) && gChosenMoveByBattler[i] != MOVE_RAGE)
-            gBattleMons[i].status2 &= ~STATUS2_RAGE;
-    }
 }
 
 u8 AtkCanceller_UnableToUseMove(u32 moveType)
@@ -6765,7 +6824,7 @@ static const uq4_12_t sPercentToModifier[] =
 #define X UQ_4_12
 #define ______ X(1.0) // Regular effectiveness.
 
-static const uq4_12_t sTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES] =
+const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES] =
 {//                   Defender -->
  //  Attacker         Normal  Fighting Flying  Poison  Ground   Rock    Bug     Ghost   Steel  Mystery  Fire   Water   Grass  Electric Psychic   Ice   Dragon   Dark   Fairy
     [TYPE_NORMAL]   = {______, ______, ______, ______, ______, X(0.5), ______, X(0.0), X(0.5), ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
@@ -7280,6 +7339,18 @@ u32 GetBattlerMoveTargetType(u32 battler, u32 move)
         return gMovesInfo[move].target;
 }
 
+bool32 CanTargetBattler(u32 battlerAtk, u32 battlerDef, u16 move)
+{
+    if (gMovesInfo[move].effect == EFFECT_HIT_ENEMY_HEAL_ALLY
+      && GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef)
+      && gStatuses3[battlerAtk] & STATUS3_HEAL_BLOCK)
+        return FALSE;   // Pokémon affected by Heal Block cannot target allies with Pollen Puff
+    if ((/* IsDynamaxed(battlerAtk) ||  */gBattleStruct->dynamax.playerSelect) // TODO: Dynamax
+      && GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef))
+        return FALSE;
+    return TRUE;
+}
+
 bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
 {
     u32 atkHoldEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
@@ -7392,6 +7463,18 @@ static bool32 IsBattlerGrounded2(u32 battler, bool32 considerInverse)
 bool32 IsBattlerGrounded(u32 battler)
 {
     return IsBattlerGrounded2(battler, FALSE);
+}
+
+void TryClearRageAndFuryCutter(void)
+{
+    s32 i;
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if ((gBattleMons[i].status2 & STATUS2_RAGE) && gChosenMoveByBattler[i] != MOVE_RAGE)
+            gBattleMons[i].status2 &= ~STATUS2_RAGE;
+        if (gDisableStructs[i].furyCutterCounter != 0 && gChosenMoveByBattler[i] != MOVE_FURY_CUTTER)
+            gDisableStructs[i].furyCutterCounter = 0;
+    }
 }
 
 void SetAtkCancellerForCalledMove(void)
@@ -9452,8 +9535,8 @@ static uq4_12_t GetInverseTypeMultiplier(uq4_12_t multiplier)
 uq4_12_t GetTypeModifier(u32 atkType, u32 defType)
 {
     if (B_FLAG_INVERSE_BATTLE != 0 && FlagGet(B_FLAG_INVERSE_BATTLE))
-        return GetInverseTypeMultiplier(sTypeEffectivenessTable[atkType][defType]);
-    return sTypeEffectivenessTable[atkType][defType];
+        return GetInverseTypeMultiplier(gTypeEffectivenessTable[atkType][defType]);
+    return gTypeEffectivenessTable[atkType][defType];
 }
 
 u8 GetBattlerType(u32 battler, u8 typeIndex)
@@ -10235,6 +10318,123 @@ bool32 IsPartnerMonFromSameTrainer(u32 battler)
         return FALSE;
     else
         return TRUE;
+}
+
+bool32 CanMegaEvolve(u32 battler)
+{
+    u32 itemId, holdEffect;
+    struct Pokemon *mon;
+    u32 battlerPosition = GetBattlerPosition(battler);
+    u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
+    struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct *)(&gBattleBufferA[battler][4]))->mega);
+
+    // Check if Player has a Mega Ring
+    if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
+     && !CheckBagHasItem(ITEM_MEGA_RING, 1))
+        return FALSE;
+
+    // Check if trainer already mega evolved a pokemon.
+    if (mega->alreadyEvolved[battlerPosition])
+        return FALSE;
+
+    // Cannot use z move and mega evolve on same turn
+    if (gBattleStruct->zmove.toBeUsed[battler])
+        return FALSE;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+     && IsPartnerMonFromSameTrainer(battler)
+     && (mega->alreadyEvolved[partnerPosition] || (mega->toEvolve & gBitTable[BATTLE_PARTNER(battler)])))
+        return FALSE;
+
+    // Check if mon is currently held by Sky Drop
+    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
+        return FALSE;
+
+    // Gets mon data.
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
+    else
+        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
+
+    itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+
+    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
+        holdEffect = gEnigmaBerries[battler].holdEffect;
+    else
+        holdEffect = ItemId_GetHoldEffect(itemId);
+
+    // Check if there is an entry in the evolution table for regular Mega Evolution.
+    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM) != SPECIES_NONE)
+    {
+        // Can Mega Evolve via Mega Stone.
+        if (holdEffect == HOLD_EFFECT_MEGA_STONE)
+            return TRUE;
+    }
+
+    // Check if there is an entry in the evolution table for Wish Mega Evolution.
+    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE) != SPECIES_NONE)
+    {
+        // Can't Wish Mega Evolve if holding a Z Crystal.
+        if (holdEffect != HOLD_EFFECT_Z_CRYSTAL)
+            return TRUE;
+    }
+
+    // No checks passed, the mon CAN'T mega evolve.
+    return FALSE;
+}
+
+bool32 CanUltraBurst(u32 battler)
+{
+    u32 itemId, holdEffect;
+    struct Pokemon *mon;
+    u32 battlerPosition = GetBattlerPosition(battler);
+    u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
+
+    // Check if Player has a Z Ring
+    if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
+     && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
+        return FALSE;
+
+    // Check if trainer already ultra bursted a pokemon.
+    if (gBattleStruct->burst.alreadyBursted[battlerPosition])
+        return FALSE;
+
+    // Cannot use z move and ultra burst on same turn
+    if (gBattleStruct->zmove.toBeUsed[battler])
+        return FALSE;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+     && IsPartnerMonFromSameTrainer(battler)
+     && (gBattleStruct->burst.alreadyBursted[partnerPosition] || (gBattleStruct->burst.toBurst & gBitTable[BATTLE_PARTNER(battler)])))
+        return FALSE;
+
+    // Check if mon is currently held by Sky Drop
+    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
+        return FALSE;
+
+    // Gets mon data.
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
+    else
+        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
+
+    itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+
+    // Check if there is an entry in the evolution table for Ultra Burst.
+    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_ULTRA_BURST) != SPECIES_NONE)
+    {
+        if (itemId == ITEM_ENIGMA_BERRY_E_READER)
+            holdEffect = gEnigmaBerries[battler].holdEffect;
+        else
+            holdEffect = ItemId_GetHoldEffect(itemId);
+
+        // Can Ultra Burst via Z Crystal.
+        if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
+            return TRUE;
+    }
+
+    // No checks passed, the mon CAN'T ultra burst.
+    return FALSE;
 }
 
 

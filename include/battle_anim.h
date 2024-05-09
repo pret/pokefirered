@@ -92,6 +92,17 @@ extern s32 gAnimMoveDmg;
 extern u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT];
 extern u8 gAnimCustomPanning;
 
+// battle_anim_effects1.c
+void AnimPowerAbsorptionOrb(struct Sprite *sprite);
+extern const union AnimCmd *const gPowerAbsorptionOrbAnimTable[];
+extern const union AffineAnimCmd *const gPowerAbsorptionOrbAffineAnimTable[];
+
+// battle_anim_psychic.c
+extern const union AffineAnimCmd *const gAffineAnims_LusterPurgeCircle[];
+
+// battle_anim_ghost.c
+void AnimGhostStatusSprite(struct Sprite *sprite);
+
 extern const struct OamData gOamData_AffineOff_ObjNormal_8x8;
 extern const struct OamData gOamData_AffineOff_ObjNormal_16x16;
 extern const struct OamData gOamData_AffineOff_ObjNormal_32x32;

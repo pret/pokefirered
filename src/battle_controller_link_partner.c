@@ -1498,7 +1498,7 @@ static void LinkPartnerHandleIntroTrainerBallThrow(u32 battler)
     gSprites[gBattlerSpriteIds[battler]].callback = StartAnimLinearTranslation;
     gSprites[gBattlerSpriteIds[battler]].data[5] = battler;
 
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battler]], SpriteCB_FreePlayerSpriteLoadMonSprite);
+    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battler]], SpriteCB_FreePlayerSpriteLoadMonSpriteOld);
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 1);
 
     paletteNum = AllocSpritePalette(0xD6F9);

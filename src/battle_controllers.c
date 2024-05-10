@@ -8,6 +8,7 @@
 #include "cable_club.h"
 #include "link.h"
 #include "link_rfu.h"
+#include "palette.h"
 #include "party_menu.h"
 #include "pokeball.h"
 #include "sound.h"
@@ -16,6 +17,7 @@
 #include "text.h"
 #include "util.h"
 #include "constants/songs.h"
+#include "constants/sound.h"
 #include "constants/abilities.h"
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
@@ -33,6 +35,9 @@ static void InitSinglePlayerBtlControllers(void);
 static void SetBattlePartyIds(void);
 static void Task_HandleSendLinkBuffersData(u8 taskId);
 static void Task_HandleCopyReceivedLinkBuffersData(u8 taskId);
+static void Task_StartSendOutAnim(u8 taskId);
+static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
+static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite);
 
 void HandleLinkBattleSetup(void)
 {
@@ -1875,6 +1880,34 @@ void Controller_WaitForString(u32 battler)
         BattleControllerComplete(battler);
 }
 
+static void Controller_WaitForPartyStatusSummary(u32 battler)
+{
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer++ > 92)
+    {
+        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 0;
+        BattleControllerComplete(battler);
+    }
+}
+
+static void Controller_HitAnimation(u32 battler)
+{
+    u32 spriteId = gBattlerSpriteIds[battler];
+
+    if (gSprites[spriteId].data[1] == 32)
+    {
+        gSprites[spriteId].data[1] = 0;
+        gSprites[spriteId].invisible = FALSE;
+        gDoingBattleAnim = FALSE;
+        BattleControllerComplete(battler);
+    }
+    else
+    {
+        if ((gSprites[spriteId].data[1] % 4) == 0)
+            gSprites[spriteId].invisible ^= 1;
+        gSprites[spriteId].data[1]++;
+    }
+}
+
 // Used for all the commands which do nothing.
 void BtlController_Empty(u32 battler)
 {
@@ -2235,6 +2268,290 @@ void BtlController_HandleStatusIconUpdate(u32 battler)
     if (!IsBattleSEPlaying(battler))
     {
         DoStatusIconUpdate(battler);
+    }
+}
+
+void BtlController_HandleStatusAnimation(u32 battler)
+{
+    if (!IsBattleSEPlaying(battler))
+    {
+        InitAndLaunchChosenStatusAnimation(battler, gBattleResources->bufferA[battler][1],
+                        gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8) | (gBattleResources->bufferA[battler][4] << 16) | (gBattleResources->bufferA[battler][5] << 24));
+        gBattlerControllerFuncs[battler] = Controller_WaitForStatusAnimation;
+    }
+}
+
+void BtlController_HandleClearUnkVar(u32 battler)
+{
+    gUnusedControllerStruct.unk = 0;
+    BattleControllerComplete(battler);
+}
+
+void BtlController_HandleSetUnkVar(u32 battler)
+{
+    gUnusedControllerStruct.unk = gBattleResources->bufferA[battler][1];
+    BattleControllerComplete(battler);
+}
+
+void BtlController_HandleClearUnkFlag(u32 battler)
+{
+    gUnusedControllerStruct.flag = 0;
+    BattleControllerComplete(battler);
+}
+
+void BtlController_HandleToggleUnkFlag(u32 battler)
+{
+    gUnusedControllerStruct.flag ^= 1;
+    BattleControllerComplete(battler);
+}
+
+void BtlController_HandleHitAnimation(u32 battler)
+{
+    if (gSprites[gBattlerSpriteIds[battler]].invisible == TRUE)
+    {
+        BattleControllerComplete(battler);
+    }
+    else
+    {
+        gDoingBattleAnim = TRUE;
+        gSprites[gBattlerSpriteIds[battler]].data[1] = 0;
+        DoHitAnimHealthboxEffect(battler);
+        gBattlerControllerFuncs[battler] = Controller_HitAnimation;
+    }
+}
+
+void BtlController_HandlePlaySE(u32 battler)
+{
+    s8 pan = (GetBattlerSide(battler) == B_SIDE_PLAYER) ? SOUND_PAN_ATTACKER : SOUND_PAN_TARGET;
+
+    PlaySE12WithPanning(gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8), pan);
+    BattleControllerComplete(battler);
+}
+
+void BtlController_HandlePlayFanfareOrBGM(u32 battler)
+{
+    if (gBattleResources->bufferA[battler][3])
+    {
+        BattleStopLowHpSound();
+        PlayBGM(gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8));
+    }
+    else
+    {
+        PlayFanfare(gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8));
+    }
+
+    BattleControllerComplete(battler);
+}
+
+void BtlController_HandleFaintingCry(u32 battler)
+{
+    struct Pokemon *party;
+    s8 pan;
+
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+    {
+        party = gPlayerParty;
+        pan = -25;
+    }
+    else
+    {
+        party = gEnemyParty;
+        pan = 25;
+    }
+
+    PlayCry_ByMode(GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), pan, CRY_MODE_FAINT);
+    BattleControllerComplete(battler);
+}
+
+void BtlController_HandleIntroSlide(u32 battler)
+{
+    HandleIntroSlide(gBattleResources->bufferA[battler][1]);
+    gIntroSlideFlags |= 1;
+    BattleControllerComplete(battler);
+}
+
+bool32 TwoPlayerIntroMons(u32 battler) // Double battle with both player pokemon active.
+{
+    return (IsDoubleBattle() && IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battler ^ BIT_FLANK]]));
+}
+
+bool32 TwoOpponentIntroMons(u32 battler) // Double battle with both opponent pokemon active.
+{
+    return (IsDoubleBattle()
+            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[battler]])
+            && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]));
+}
+
+// Task data for Task_StartSendOutAnim
+#define tBattlerId          data[0]
+#define tStartTimer         data[1]
+#define tFramesToWait       data[2]
+#define tControllerFunc_1   3 // Stored as two halfwords
+#define tControllerFunc_2   4
+
+// Sprite data for SpriteCB_FreePlayerSpriteLoadMonSprite
+#define sBattlerId data[5]
+
+void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, const u32 *trainerPal, s16 framesToWait, void (*controllerCallback)(u32 battler), void (*spriteCallback)(struct Sprite *sprite))
+{
+    u8 paletteNum, taskId;
+    u32 side = GetBattlerSide(battler);
+
+    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[battler]]);
+    if (side == B_SIDE_PLAYER)
+    {
+        gSprites[gBattlerSpriteIds[battler]].data[0] = 50;
+        gSprites[gBattlerSpriteIds[battler]].data[2] = -40;
+    }
+    else
+    {
+        gSprites[gBattlerSpriteIds[battler]].data[0] = 35;
+        gSprites[gBattlerSpriteIds[battler]].data[2] = 280;
+    }
+
+    gSprites[gBattlerSpriteIds[battler]].data[4] = gSprites[gBattlerSpriteIds[battler]].y;
+    gSprites[gBattlerSpriteIds[battler]].callback = spriteCallback;
+    gSprites[gBattlerSpriteIds[battler]].sBattlerId = battler;
+
+    if (side == B_SIDE_PLAYER)
+    {
+        StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battler]], SpriteCB_FreePlayerSpriteLoadMonSprite);
+        StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 1);
+
+        paletteNum = AllocSpritePalette(tagTrainerPal);
+        LoadCompressedPalette(trainerPal, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+        gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = paletteNum;
+    }
+    else
+    {
+        StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battler]], SpriteCB_FreeOpponentSprite);
+    }
+
+    taskId = CreateTask(Task_StartSendOutAnim, 5);
+    gTasks[taskId].tBattlerId = battler;
+    gTasks[taskId].tFramesToWait = framesToWait;
+    SetWordTaskArg(taskId, tControllerFunc_1, (uint32_t)(controllerCallback));
+
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[battler]].func = Task_HidePartyStatusSummary;
+
+    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
+    gBattlerControllerFuncs[battler] = BattleControllerDummy;
+}
+
+static bool32 TwoMonsAtSendOut(u32 battler)
+{
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+    {
+        if (TwoPlayerIntroMons(battler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+            return TRUE;
+        else
+            return FALSE;
+    }
+    else
+    {
+        if ((!TwoOpponentIntroMons(battler) || (gBattleTypeFlags & BATTLE_TYPE_MULTI)) && !BATTLE_TWO_VS_ONE_OPPONENT)
+            return FALSE;
+        else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) || (BATTLE_TWO_VS_ONE_OPPONENT && !TwoOpponentIntroMons(battler)))
+            return FALSE;
+        else
+            return TRUE;
+    }
+    return FALSE;
+}
+
+// Send out at start of battle
+static void Task_StartSendOutAnim(u8 taskId)
+{
+    if (gTasks[taskId].tFramesToWait != 0 && gTasks[taskId].tStartTimer < gTasks[taskId].tFramesToWait)
+    {
+        gTasks[taskId].tStartTimer++;
+    }
+    else
+    {
+        u32 battlerPartner;
+        u32 battler = gTasks[taskId].tBattlerId;
+
+        if (TwoMonsAtSendOut(battler))
+        {
+            gBattleResources->bufferA[battler][1] = gBattlerPartyIndexes[battler];
+            StartSendOutAnim(battler, FALSE);
+
+            battlerPartner = BATTLE_PARTNER(battler);
+            gBattleResources->bufferA[battlerPartner][1] = gBattlerPartyIndexes[battlerPartner];
+            BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerPartner]], battlerPartner);
+            StartSendOutAnim(battlerPartner, FALSE);
+        }
+        else
+        {
+            gBattleResources->bufferA[battler][1] = gBattlerPartyIndexes[battler];
+            StartSendOutAnim(battler, FALSE);
+        }
+        gBattlerControllerFuncs[battler] = (void*)(GetWordTaskArg(taskId, tControllerFunc_1));
+        DestroyTask(taskId);
+    }
+}
+
+#undef tBattlerId
+#undef tStartTimer
+#undef tFramesToWait
+#undef tControllerFunc_1
+#undef tControllerFunc_2
+
+static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
+{
+    u8 battler = sprite->sBattlerId;
+
+    // Free player trainer sprite
+    FreeSpriteOamMatrix(sprite);
+    FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
+    DestroySprite(sprite);
+
+    // Load mon sprite
+    BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 0);
+}
+
+static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)
+{
+    FreeTrainerFrontPicPalette(sprite->oam.affineParam);
+    FreeSpriteOamMatrix(sprite);
+    DestroySprite(sprite);
+}
+
+#undef sBattlerId
+
+void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay)
+{
+    if (gBattleResources->bufferA[battler][1] != 0 && GetBattlerSide(battler) == B_SIDE_PLAYER)
+    {
+        BattleControllerComplete(battler);
+    }
+    else
+    {
+        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown = TRUE;
+
+        if (side == B_SIDE_OPPONENT && gBattleResources->bufferA[battler][2] != 0)
+        {
+            if (gBattleSpritesDataPtr->healthBoxesData[battler].opponentDrawPartyStatusSummaryDelay < 2)
+            {
+                gBattleSpritesDataPtr->healthBoxesData[battler].opponentDrawPartyStatusSummaryDelay++;
+                return;
+            }
+            else
+            {
+                gBattleSpritesDataPtr->healthBoxesData[battler].opponentDrawPartyStatusSummaryDelay = 0;
+            }
+        }
+
+        gBattlerStatusSummaryTaskId[battler] = CreatePartyStatusSummarySprites(battler, (struct HpAndStatus *)&gBattleResources->bufferA[battler][4], gBattleResources->bufferA[battler][1], gBattleResources->bufferA[battler][2]);
+        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 0;
+
+        // If intro, skip the delay after drawing
+        if (considerDelay && gBattleResources->bufferA[battler][2] != 0)
+            gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 93;
+
+        gBattlerControllerFuncs[battler] = Controller_WaitForPartyStatusSummary;
     }
 }
 

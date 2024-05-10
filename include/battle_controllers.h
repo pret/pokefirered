@@ -280,11 +280,25 @@ void BtlController_HandleMoveAnimation(u32 battler);
 void BtlController_HandlePrintString(u32 battler);
 void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText);
 void BtlController_HandleStatusIconUpdate(u32 battler);
+void BtlController_HandleStatusAnimation(u32 battler);
+void BtlController_HandleClearUnkVar(u32 battler);
+void BtlController_HandleSetUnkVar(u32 battler);
+void BtlController_HandleClearUnkFlag(u32 battler);
+void BtlController_HandleToggleUnkFlag(u32 battler);
+void BtlController_HandleHitAnimation(u32 battler);
+void BtlController_HandlePlaySE(u32 battler);
+void BtlController_HandlePlayFanfareOrBGM(u32 battler);
+void BtlController_HandleFaintingCry(u32 battler);
+void BtlController_HandleIntroSlide(u32 battler);
+bool32 TwoPlayerIntroMons(u32 battlerId); // Double battle with both player pokemon active.
+bool32 TwoOpponentIntroMons(u32 battlerId); // Double battle with both opponent pokemon active.
+void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, const u32 *trainerPal, s16 framesToWait, void (*controllerCallback)(u32 battler), void (*spriteCallback)(struct Sprite *sprite));
+void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay);
 
 // player controller
 void BattleControllerDummy(u32 battler);
 void SetControllerToPlayer(u32 battler);
-void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite);
+void SpriteCB_FreePlayerSpriteLoadMonSpriteOld(struct Sprite *sprite);
 void SetCB2ToReshowScreenAfterMenu(void);
 void SetCB2ToReshowScreenAfterMenu2(void);
 void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);

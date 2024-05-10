@@ -45,26 +45,13 @@ static void PlayerHandleChoosePokemon(u32 battler);
 static void PlayerHandleCmd23(u32 battler);
 static void PlayerHandleHealthBarUpdate(u32 battler);
 static void PlayerHandleExpUpdate(u32 battler);
-static void PlayerHandleStatusAnimation(u32 battler);
 static void PlayerHandleStatusXor(u32 battler);
-static void PlayerHandleDataTransfer(u32 battler);
 static void PlayerHandleDMA3Transfer(u32 battler);
 static void PlayerHandlePlayBGM(u32 battler);
-static void PlayerHandleCmd32(u32 battler);
 static void PlayerHandleTwoReturnValues(u32 battler);
 static void PlayerHandleChosenMonReturnValue(u32 battler);
 static void PlayerHandleOneReturnValue(u32 battler);
 static void PlayerHandleOneReturnValue_Duplicate(u32 battler);
-static void PlayerHandleCmd37(u32 battler);
-static void PlayerHandleCmd38(u32 battler);
-static void PlayerHandleCmd39(u32 battler);
-static void PlayerHandleCmd40(u32 battler);
-static void PlayerHandleHitAnimation(u32 battler);
-static void PlayerHandleCmd42(u32 battler);
-static void PlayerHandlePlaySE(u32 battler);
-static void PlayerHandlePlayFanfare(u32 battler);
-static void PlayerHandleFaintingCry(u32 battler);
-static void PlayerHandleIntroSlide(u32 battler);
 static void PlayerHandleIntroTrainerBallThrow(u32 battler);
 static void PlayerHandleDrawPartyStatusSummary(u32 battler);
 static void PlayerHandleHidePartyStatusSummary(u32 battler);
@@ -90,12 +77,10 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId);
 static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId);
 static void Task_UpdateLvlInHealthbox(u8 taskId);
 static void PrintLinkStandbyMsg(void);
-static void Task_StartSendOutAnim(u8 taskId);
 static void PreviewDeterminativeMoveTargets(u32 battler);
 static void SwitchIn_HandleSoundAndEnd(u32 battler);
 static void Task_GiveExpWithExpBar(u8 taskId);
 static void Task_CreateLevelUpVerticalStripes(u8 taskId);
-static void EndDrawPartyStatusSummary(u32 battler);
 
 static void ReloadMoveNames(u32 battler);
 
@@ -128,28 +113,28 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
     [CONTROLLER_HEALTHBARUPDATE]          = PlayerHandleHealthBarUpdate,            // done
     [CONTROLLER_EXPUPDATE]                = PlayerHandleExpUpdate,                  // done
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,   // done
-    [CONTROLLER_STATUSANIMATION]          = PlayerHandleStatusAnimation,
-    [CONTROLLER_STATUSXOR]                = PlayerHandleStatusXor,
-    [CONTROLLER_DATATRANSFER]             = PlayerHandleDataTransfer,
-    [CONTROLLER_DMA3TRANSFER]             = PlayerHandleDMA3Transfer,
-    [CONTROLLER_PLAYBGM]                  = PlayerHandlePlayBGM,
-    [CONTROLLER_32]                       = PlayerHandleCmd32,
-    [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerHandleChosenMonReturnValue,
-    [CONTROLLER_TWORETURNVALUES]          = PlayerHandleTwoReturnValues,
-    [CONTROLLER_ONERETURNVALUE]           = PlayerHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerHandleOneReturnValue_Duplicate,
-    [CONTROLLER_CLEARUNKVAR]              = PlayerHandleCmd37,
-    [CONTROLLER_SETUNKVAR]                = PlayerHandleCmd38,
-    [CONTROLLER_CLEARUNKFLAG]             = PlayerHandleCmd39,
-    [CONTROLLER_TOGGLEUNKFLAG]            = PlayerHandleCmd40,
-    [CONTROLLER_HITANIMATION]             = PlayerHandleHitAnimation,
-    [CONTROLLER_CANTSWITCH]               = PlayerHandleCmd42,
-    [CONTROLLER_PLAYSE]                   = PlayerHandlePlaySE,
-    [CONTROLLER_PLAYFANFAREORBGM]         = PlayerHandlePlayFanfare,
-    [CONTROLLER_FAINTINGCRY]              = PlayerHandleFaintingCry,
-    [CONTROLLER_INTROSLIDE]               = PlayerHandleIntroSlide,
-    [CONTROLLER_INTROTRAINERBALLTHROW]    = PlayerHandleIntroTrainerBallThrow,
-    [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = PlayerHandleDrawPartyStatusSummary,
+    [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,    // done
+    [CONTROLLER_STATUSXOR]                = PlayerHandleStatusXor,                  // done
+    [CONTROLLER_DATATRANSFER]             = BtlController_Empty,                    // done
+    [CONTROLLER_DMA3TRANSFER]             = PlayerHandleDMA3Transfer,               // done
+    [CONTROLLER_PLAYBGM]                  = PlayerHandlePlayBGM,                    // done
+    [CONTROLLER_32]                       = BtlController_Empty,                    // done
+    [CONTROLLER_TWORETURNVALUES]          = PlayerHandleTwoReturnValues,            // done
+    [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerHandleChosenMonReturnValue,       // done
+    [CONTROLLER_ONERETURNVALUE]           = PlayerHandleOneReturnValue,             // done
+    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerHandleOneReturnValue_Duplicate,   // done
+    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,        // done
+    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,          // done
+    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,       // done
+    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,      // done
+    [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,       // done
+    [CONTROLLER_CANTSWITCH]               = BtlController_Empty,                    // done
+    [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,             // done
+    [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,   // done
+    [CONTROLLER_FAINTINGCRY]              = BtlController_HandleFaintingCry,        // done
+    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,         // done
+    [CONTROLLER_INTROTRAINERBALLTHROW]    = PlayerHandleIntroTrainerBallThrow,      // done
+    [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = PlayerHandleDrawPartyStatusSummary,     // done
     [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = PlayerHandleHidePartyStatusSummary,
     [CONTROLLER_ENDBOUNCE]                = PlayerHandleEndBounceEffect,
     [CONTROLLER_SPRITEINVISIBILITY]       = PlayerHandleSpriteInvisibility,
@@ -1010,29 +995,6 @@ void SetBattleEndCallbacks(u32 battler)
     }
 }
 
-static void CompleteOnBattlerSpriteCallbackDummy(u32 battler)
-{
-    if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
-        PlayerBufferExecCompleted(battler);
-}
-
-static void CompleteOnBattlerSpriteCallbackDummy2(u32 battler)
-{
-    if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
-        PlayerBufferExecCompleted(battler);
-}
-
-static void FreeTrainerSpriteAfterSlide(u32 battler)
-{
-    if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
-    {
-        BattleGfxSfxDummy3(gSaveBlock2Ptr->playerGender);
-        FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[battler]]);
-        DestroySprite(&gSprites[gBattlerSpriteIds[battler]]);
-        PlayerBufferExecCompleted(battler);
-    }
-}
-
 static void Intro_DelayAndEnd(u32 battler)
 {
     if (--gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay == (u8)-1)
@@ -1483,25 +1445,6 @@ static void CompleteOnSpecialAnimDone(u32 battler)
         PlayerBufferExecCompleted(battler);
 }
 
-static void DoHitAnimBlinkSpriteEffect(u32 battler)
-{
-    u8 spriteId = gBattlerSpriteIds[battler];
-
-    if (gSprites[spriteId].data[1] == 32)
-    {
-        gSprites[spriteId].data[1] = 0;
-        gSprites[spriteId].invisible = FALSE;
-        gDoingBattleAnim = FALSE;
-        PlayerBufferExecCompleted(battler);
-    }
-    else
-    {
-        if ((gSprites[spriteId].data[1] % 4) == 0)
-            gSprites[spriteId].invisible ^= 1;
-        ++gSprites[spriteId].data[1];
-    }
-}
-
 static void MoveSelectionDisplayMoveNames(u32 battler)
 {
     s32 i;
@@ -1602,12 +1545,6 @@ void SetCB2ToReshowScreenAfterMenu(void)
 void SetCB2ToReshowScreenAfterMenu2(void)
 {
     SetMainCallback2(ReshowBattleScreenAfterMenu);
-}
-
-static void CompleteOnFinishedStatusAnimation(u32 battler)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].statusAnimActive)
-        PlayerBufferExecCompleted(battler);
 }
 
 static void CompleteOnFinishedBattleAnimation(u32 battler)
@@ -1897,15 +1834,11 @@ static void PlayerHandleExpUpdate(u32 battler)
     }
 }
 
-static void PlayerHandleStatusAnimation(u32 battler)
-{
-    if (!IsBattleSEPlaying(battler))
-    {
-        InitAndLaunchChosenStatusAnimation(battler, gBattleResources->bufferA[battler][1],
-                                           gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8) | (gBattleResources->bufferA[battler][4] << 16) | (gBattleResources->bufferA[battler][5] << 24));
-        gBattlerControllerFuncs[battler] = CompleteOnFinishedStatusAnimation;
-    }
-}
+#undef tExpTask_monId
+#undef tExpTask_battler
+#undef tExpTask_gainedExp_1
+#undef tExpTask_gainedExp_2
+#undef tExpTask_frames
 
 static void PlayerHandleStatusXor(u32 battler)
 {
@@ -1915,18 +1848,14 @@ static void PlayerHandleStatusXor(u32 battler)
     PlayerBufferExecCompleted(battler);
 }
 
-static void PlayerHandleDataTransfer(u32 battler)
-{
-    PlayerBufferExecCompleted(battler);
-}
-
 static void PlayerHandleDMA3Transfer(u32 battler)
 {
     u32 dstArg = gBattleResources->bufferA[battler][1]
-               | (gBattleResources->bufferA[battler][2] << 8)
-               | (gBattleResources->bufferA[battler][3] << 16)
-               | (gBattleResources->bufferA[battler][4] << 24);
+                | (gBattleResources->bufferA[battler][2] << 8)
+                | (gBattleResources->bufferA[battler][3] << 16)
+                | (gBattleResources->bufferA[battler][4] << 24);
     u16 sizeArg = gBattleResources->bufferA[battler][5] | (gBattleResources->bufferA[battler][6] << 8);
+
     const u8 *src = &gBattleResources->bufferA[battler][7];
     u8 *dst = (u8 *)(dstArg);
     u32 size = sizeArg;
@@ -1952,135 +1881,37 @@ static void PlayerHandlePlayBGM(u32 battler)
     PlayerBufferExecCompleted(battler);
 }
 
-static void PlayerHandleCmd32(u32 battler)
-{
-    PlayerBufferExecCompleted(battler);
-}
-
 static void PlayerHandleTwoReturnValues(u32 battler)
 {
-    BtlController_EmitTwoReturnValues(battler, 1, 0, 0);
+    BtlController_EmitTwoReturnValues(battler, BUFFER_B, 0, 0);
     PlayerBufferExecCompleted(battler);
 }
 
 static void PlayerHandleChosenMonReturnValue(u32 battler)
 {
-    BtlController_EmitChosenMonReturnValue(battler, 1, 0, NULL);
+    BtlController_EmitChosenMonReturnValue(battler, BUFFER_B, 0, NULL);
     PlayerBufferExecCompleted(battler);
 }
 
 static void PlayerHandleOneReturnValue(u32 battler)
 {
-    BtlController_EmitOneReturnValue(battler, 1, 0);
+    BtlController_EmitOneReturnValue(battler, BUFFER_B, 0);
     PlayerBufferExecCompleted(battler);
 }
 
 static void PlayerHandleOneReturnValue_Duplicate(u32 battler)
 {
-    BtlController_EmitOneReturnValue_Duplicate(battler, 1, 0);
-    PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandleCmd37(u32 battler)
-{
-    gUnusedControllerStruct.unk = 0;
-    PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandleCmd38(u32 battler)
-{
-    gUnusedControllerStruct.unk = gBattleResources->bufferA[battler][1];
-    PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandleCmd39(u32 battler)
-{
-    gUnusedControllerStruct.flag = 0;
-    PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandleCmd40(u32 battler)
-{
-    gUnusedControllerStruct.flag ^= 1;
-    PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandleHitAnimation(u32 battler)
-{
-    if (gSprites[gBattlerSpriteIds[battler]].invisible == TRUE)
-    {
-        PlayerBufferExecCompleted(battler);
-    }
-    else
-    {
-        gDoingBattleAnim = TRUE;
-        gSprites[gBattlerSpriteIds[battler]].data[1] = 0;
-        DoHitAnimHealthboxEffect(battler);
-        gBattlerControllerFuncs[battler] = DoHitAnimBlinkSpriteEffect;
-    }
-}
-
-static void PlayerHandleCmd42(u32 battler)
-{
-    PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandlePlaySE(u32 battler)
-{
-    s8 pan;
-
-    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-        pan = SOUND_PAN_ATTACKER;
-    else
-        pan = SOUND_PAN_TARGET;
-    PlaySE12WithPanning(gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8), pan);
-    PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandlePlayFanfare(u32 battler)
-{
-    PlayFanfare(gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8));
-    PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandleFaintingCry(u32 battler)
-{
-    PlayCry_ByMode(GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), -25, CRY_MODE_FAINT);
-    PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandleIntroSlide(u32 battler)
-{
-    HandleIntroSlide(gBattleResources->bufferA[battler][1]);
-    gIntroSlideFlags |= 1;
+    BtlController_EmitOneReturnValue_Duplicate(battler, BUFFER_B, 0);
     PlayerBufferExecCompleted(battler);
 }
 
 static void PlayerHandleIntroTrainerBallThrow(u32 battler)
 {
-    u8 paletteNum;
-    u8 taskId;
-
-    SetSpritePrimaryCoordsFromSecondaryCoords(&gSprites[gBattlerSpriteIds[battler]]);
-    gSprites[gBattlerSpriteIds[battler]].data[0] = 50;
-    gSprites[gBattlerSpriteIds[battler]].data[2] = -40;
-    gSprites[gBattlerSpriteIds[battler]].data[4] = gSprites[gBattlerSpriteIds[battler]].y;
-    gSprites[gBattlerSpriteIds[battler]].callback = PlayerThrowBall_StartAnimLinearTranslation;
-    gSprites[gBattlerSpriteIds[battler]].data[5] = battler;
-    StoreSpriteCallbackInData6(&gSprites[gBattlerSpriteIds[battler]], SpriteCB_FreePlayerSpriteLoadMonSprite);
-    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 1);
-    paletteNum = AllocSpritePalette(0xD6F8);
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[gSaveBlock2Ptr->playerGender].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-    gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = paletteNum;
-    taskId = CreateTask(Task_StartSendOutAnim, 5);
-    gTasks[taskId].data[0] = battler;
-    if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[battler]].func = Task_HidePartyStatusSummary;
-    gBattleSpritesDataPtr->animationData->introAnimActive = TRUE;
-    gBattlerControllerFuncs[battler] = BattleControllerDummy;
+    const u32 *trainerPal = gTrainerBackPicPaletteTable[gSaveBlock2Ptr->playerGender].data;
+    BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F8, trainerPal, 31, Intro_TryShinyAnimShowHealthbox, PlayerThrowBall_StartAnimLinearTranslation);
 }
 
-void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
+void SpriteCB_FreePlayerSpriteLoadMonSpriteOld(struct Sprite *sprite)
 {
     u8 battlerId = sprite->data[5];
 
@@ -2091,59 +1922,9 @@ void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerId]], 0);
 }
 
-static void Task_StartSendOutAnim(u8 taskId)
-{
-    if (gTasks[taskId].data[1] < 31)
-    {
-        ++gTasks[taskId].data[1];
-    }
-    else
-    {
-        u32 battler = gTasks[taskId].data[0];
-        if (!IsDoubleBattle() || (gBattleTypeFlags & BATTLE_TYPE_MULTI))
-        {
-            gBattleResources->bufferA[battler][1] = gBattlerPartyIndexes[battler];
-            StartSendOutAnim(battler, FALSE);
-        }
-        else
-        {
-            u32 battlerPartner = BATTLE_PARTNER(battler);
-            gBattleResources->bufferA[battler][1] = gBattlerPartyIndexes[battler];
-            StartSendOutAnim(battler, FALSE);
-
-            gBattleResources->bufferA[battlerPartner][1] = gBattlerPartyIndexes[battlerPartner];
-            BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battlerPartner]], battlerPartner);
-            StartSendOutAnim(battlerPartner, FALSE);
-        }
-        gBattlerControllerFuncs[battler] = Intro_TryShinyAnimShowHealthbox;
-        DestroyTask(taskId);
-    }
-}
-
 static void PlayerHandleDrawPartyStatusSummary(u32 battler)
-{
-    if (gBattleResources->bufferA[battler][1] && GetBattlerSide(battler) == B_SIDE_PLAYER)
-    {
-        PlayerBufferExecCompleted(battler);
-    }
-    else
-    {
-        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown = TRUE;
-        gBattlerStatusSummaryTaskId[battler] = CreatePartyStatusSummarySprites(battler, (struct HpAndStatus *)&gBattleResources->bufferA[battler][4], gBattleResources->bufferA[battler][1], gBattleResources->bufferA[battler][2]);
-        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 0;
-        if (gBattleResources->bufferA[battler][2] != 0)
-            gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 93;
-        gBattlerControllerFuncs[battler] = EndDrawPartyStatusSummary;
-    }
-}
-
-static void EndDrawPartyStatusSummary(u32 battler)
-{
-    if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer++ > 0x5C)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 0;
-        PlayerBufferExecCompleted(battler);
-    }
+{   
+    BtlController_HandleDrawPartyStatusSummary(battler, B_SIDE_PLAYER, TRUE);
 }
 
 static void PlayerHandleHidePartyStatusSummary(u32 battler)

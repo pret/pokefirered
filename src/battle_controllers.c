@@ -1832,7 +1832,10 @@ static void Controller_HandleTrainerSlideBack(u32 battler)
     if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
     {
         if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
-            FreeTrainerFrontPicPalette(gSprites[gBattlerSpriteIds[battler]].oam.affineParam);
+        {
+            FreeTrainerFrontPicPaletteAndTile(gSprites[gBattlerSpriteIds[battler]].oam.affineParam);
+            gSprites[gBattlerSpriteIds[battler]].oam.tileNum = gSprites[gBattlerSpriteIds[battler]].data[5];
+        }
         FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[battler]]);
         DestroySprite(&gSprites[gBattlerSpriteIds[battler]]);
         BattleControllerComplete(battler);
@@ -2154,9 +2157,11 @@ void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId)
         gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, 176, 40, 30);
         gSprites[gBattlerSpriteIds[battler]].oam.affineParam = trainerPicId;
         gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[trainerPicId].tag);
+        gSprites[gBattlerSpriteIds[battler]].oam.tileNum = GetSpriteTileStartByTag(gTrainerFrontPicTable[trainerPicId].tag);
         gSprites[gBattlerSpriteIds[battler]].x2 = 96;
         gSprites[gBattlerSpriteIds[battler]].x += 32;
         gSprites[gBattlerSpriteIds[battler]].sSpeedX = -2;
+        gSprites[gBattlerSpriteIds[battler]].data[5] = gSprites[gBattlerSpriteIds[battler]].oam.tileNum;
     }
     gSprites[gBattlerSpriteIds[battler]].callback = SpriteCB_TrainerSlideIn;
 
@@ -2270,7 +2275,23 @@ void BtlController_HandlePrintString(u32 battler)
     stringId = (u16 *)(&gBattleResources->bufferA[battler][2]);
     BufferStringBattle(battler, *stringId);
 
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
+    if (BattleStringShouldBeColored(*stringId))
+        BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
+    else
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
+    
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+    {
+        switch (*stringId)
+        {
+        case STRINGID_TRAINER1WINTEXT:        
+            gBattlerControllerFuncs[battler] = PrintOakText_HowDisappointing;
+            return;
+        case STRINGID_DONTLEAVEBIRCH:
+            gBattlerControllerFuncs[battler] = PrintOakText_OakNoRunningFromATrainer;
+            return;
+        }
+    }
     gBattlerControllerFuncs[battler] = Controller_WaitForString;
 }
 

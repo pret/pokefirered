@@ -265,7 +265,7 @@ void HideBagWindow(u8 whichWindow)
 }
 
 u8 OpenBagWindow(u8 whichWindow)
-{
+{   
     if (sOpenWindows[whichWindow] == 0xFF)
     {
         sOpenWindows[whichWindow] = AddWindow(&sWindowTemplates[whichWindow]);

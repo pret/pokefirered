@@ -1803,6 +1803,7 @@ static void PlayerHandleHealthBarUpdate(u32 battler)
     BtlController_HandleHealthBarUpdate(battler, TRUE);
 }
 
+// consider moving to battle_controller, shared with battle_controller_pokedude
 static void PlayerHandleExpUpdate(u32 battler)
 {
     u8 monId = gBattleResources->bufferA[battler][1];

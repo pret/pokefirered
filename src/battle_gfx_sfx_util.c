@@ -285,11 +285,6 @@ static void Task_ClearBitWhenSpecialAnimDone(u8 taskId)
     }
 }
 
-bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn)
-{
-    return FALSE;
-}
-
 bool8 IsBattleSEPlaying(u8 battlerId)
 {
     u8 zero = 0;

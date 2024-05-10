@@ -314,6 +314,7 @@ void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
 void MoveSelectionDestroyCursorAt(u8 cursorPos);
 void HandleInputChooseMove(u32 battler);
 u32 LinkPlayerGetTrainerPicId(u32 multiplayerId);
+void PlayerHandleExpUpdate(u32 battler);
 
 // opponent controller
 void SetControllerToOpponent(u32 battler);

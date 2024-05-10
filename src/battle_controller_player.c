@@ -44,7 +44,6 @@ static void PlayerHandleChooseItem(u32 battler);
 static void PlayerHandleChoosePokemon(u32 battler);
 static void PlayerHandleCmd23(u32 battler);
 static void PlayerHandleHealthBarUpdate(u32 battler);
-static void PlayerHandleExpUpdate(u32 battler);
 static void PlayerHandleStatusXor(u32 battler);
 static void PlayerHandleDMA3Transfer(u32 battler);
 static void PlayerHandlePlayBGM(u32 battler);
@@ -1804,7 +1803,7 @@ static void PlayerHandleHealthBarUpdate(u32 battler)
 }
 
 // consider moving to battle_controller, shared with battle_controller_pokedude
-static void PlayerHandleExpUpdate(u32 battler)
+void PlayerHandleExpUpdate(u32 battler)
 {
     u8 monId = gBattleResources->bufferA[battler][1];
     s32 taskId, expPointsToGive;

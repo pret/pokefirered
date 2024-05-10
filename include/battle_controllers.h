@@ -260,6 +260,7 @@ void BtlController_EmitResetActionMoveSelection(u32 battler, u32 bufferId, u8 ca
 void BtlController_EmitEndLinkBattle(u32 battler, u32 bufferId, u8 battleOutcome);
 
 void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.
+void BtlController_TerminatorNop(u32 battler); // Dummy function at the end of the table.
 void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit);
 void Controller_WaitForString(u32 battler);
 
@@ -290,10 +291,13 @@ void BtlController_HandlePlaySE(u32 battler);
 void BtlController_HandlePlayFanfareOrBGM(u32 battler);
 void BtlController_HandleFaintingCry(u32 battler);
 void BtlController_HandleIntroSlide(u32 battler);
+void BtlController_HandleSpriteInvisibility(u32 battler);
 bool32 TwoPlayerIntroMons(u32 battlerId); // Double battle with both player pokemon active.
 bool32 TwoOpponentIntroMons(u32 battlerId); // Double battle with both opponent pokemon active.
 void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, const u32 *trainerPal, s16 framesToWait, void (*controllerCallback)(u32 battler), void (*spriteCallback)(struct Sprite *sprite));
 void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay);
+void BtlController_HandleHidePartyStatusSummary(u32 battler);
+void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE);
 
 // player controller
 void BattleControllerDummy(u32 battler);

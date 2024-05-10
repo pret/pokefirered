@@ -54,14 +54,11 @@ static void PlayerHandleOneReturnValue(u32 battler);
 static void PlayerHandleOneReturnValue_Duplicate(u32 battler);
 static void PlayerHandleIntroTrainerBallThrow(u32 battler);
 static void PlayerHandleDrawPartyStatusSummary(u32 battler);
-static void PlayerHandleHidePartyStatusSummary(u32 battler);
 static void PlayerHandleEndBounceEffect(u32 battler);
-static void PlayerHandleSpriteInvisibility(u32 battler);
 static void PlayerHandleBattleAnimation(u32 battler);
 static void PlayerHandleLinkStandbyMsg(u32 battler);
 static void PlayerHandleResetActionMoveSelection(u32 battler);
-static void PlayerHandleCmd55(u32 battler);
-static void PlayerCmdEnd(u32 battler);
+static void PlayerHandleEndLinkBattle(u32 battler);
 
 static void PlayerBufferRunCommand(u32 battler);
 static void HandleInputChooseTarget(u32 battler);
@@ -86,63 +83,63 @@ static void ReloadMoveNames(u32 battler);
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
 {
-    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,         // done
-    [CONTROLLER_GETRAWMONDATA]            = BtlController_HandleGetRawMonData,      // done
-    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,         // done
-    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,      // done
-    [CONTROLLER_LOADMONSPRITE]            = PlayerHandleLoadMonSprite,              // done
-    [CONTROLLER_SWITCHINANIM]             = PlayerHandleSwitchInAnim,               // done
-    [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,    // done
-    [CONTROLLER_DRAWTRAINERPIC]           = PlayerHandleDrawTrainerPic,             // done
-    [CONTROLLER_TRAINERSLIDE]             = PlayerHandleTrainerSlide,               // done
-    [CONTROLLER_TRAINERSLIDEBACK]         = PlayerHandleTrainerSlideBack,           // done
-    [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,     // done
-    [CONTROLLER_PALETTEFADE]              = PlayerHandlePaletteFade,                // done
-    [CONTROLLER_SUCCESSBALLTHROWANIM]     = PlayerHandleSuccessBallThrowAnim,       // done
-    [CONTROLLER_BALLTHROWANIM]            = PlayerHandleBallThrowAnim,              // done
-    [CONTROLLER_PAUSE]                    = PlayerHandlePause,                      // done
-    [CONTROLLER_MOVEANIMATION]            = BtlController_HandleMoveAnimation,      // done
-    [CONTROLLER_PRINTSTRING]              = BtlController_HandlePrintString,        // done
-    [CONTROLLER_PRINTSTRINGPLAYERONLY]    = PlayerHandlePrintSelectionString,       // done
-    [CONTROLLER_CHOOSEACTION]             = PlayerHandleChooseAction,               // done
-    [CONTROLLER_UNKNOWNYESNOBOX]          = BtlController_Empty,                    // done
-    [CONTROLLER_CHOOSEMOVE]               = PlayerHandleChooseMove,                 // done
-    [CONTROLLER_OPENBAG]                  = PlayerHandleChooseItem,                 // done
-    [CONTROLLER_CHOOSEPOKEMON]            = PlayerHandleChoosePokemon,              // done
-    [CONTROLLER_23]                       = PlayerHandleCmd23,                      // done
-    [CONTROLLER_HEALTHBARUPDATE]          = PlayerHandleHealthBarUpdate,            // done
-    [CONTROLLER_EXPUPDATE]                = PlayerHandleExpUpdate,                  // done
-    [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,   // done
-    [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,    // done
-    [CONTROLLER_STATUSXOR]                = PlayerHandleStatusXor,                  // done
-    [CONTROLLER_DATATRANSFER]             = BtlController_Empty,                    // done
-    [CONTROLLER_DMA3TRANSFER]             = PlayerHandleDMA3Transfer,               // done
-    [CONTROLLER_PLAYBGM]                  = PlayerHandlePlayBGM,                    // done
-    [CONTROLLER_32]                       = BtlController_Empty,                    // done
-    [CONTROLLER_TWORETURNVALUES]          = PlayerHandleTwoReturnValues,            // done
-    [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerHandleChosenMonReturnValue,       // done
-    [CONTROLLER_ONERETURNVALUE]           = PlayerHandleOneReturnValue,             // done
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerHandleOneReturnValue_Duplicate,   // done
-    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,        // done
-    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,          // done
-    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,       // done
-    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,      // done
-    [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,       // done
-    [CONTROLLER_CANTSWITCH]               = BtlController_Empty,                    // done
-    [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,             // done
-    [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,   // done
-    [CONTROLLER_FAINTINGCRY]              = BtlController_HandleFaintingCry,        // done
-    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,         // done
-    [CONTROLLER_INTROTRAINERBALLTHROW]    = PlayerHandleIntroTrainerBallThrow,      // done
-    [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = PlayerHandleDrawPartyStatusSummary,     // done
-    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = PlayerHandleHidePartyStatusSummary,
-    [CONTROLLER_ENDBOUNCE]                = PlayerHandleEndBounceEffect,
-    [CONTROLLER_SPRITEINVISIBILITY]       = PlayerHandleSpriteInvisibility,
-    [CONTROLLER_BATTLEANIMATION]          = PlayerHandleBattleAnimation,
-    [CONTROLLER_LINKSTANDBYMSG]           = PlayerHandleLinkStandbyMsg,
-    [CONTROLLER_RESETACTIONMOVESELECTION] = PlayerHandleResetActionMoveSelection,
-    [CONTROLLER_ENDLINKBATTLE]            = PlayerHandleCmd55,
-    [CONTROLLER_TERMINATOR_NOP]           = PlayerCmdEnd,
+    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,             // done
+    [CONTROLLER_GETRAWMONDATA]            = BtlController_HandleGetRawMonData,          // done
+    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,             // done
+    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,          // done
+    [CONTROLLER_LOADMONSPRITE]            = PlayerHandleLoadMonSprite,                  // done
+    [CONTROLLER_SWITCHINANIM]             = PlayerHandleSwitchInAnim,                   // done
+    [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,        // done
+    [CONTROLLER_DRAWTRAINERPIC]           = PlayerHandleDrawTrainerPic,                 // done
+    [CONTROLLER_TRAINERSLIDE]             = PlayerHandleTrainerSlide,                   // done
+    [CONTROLLER_TRAINERSLIDEBACK]         = PlayerHandleTrainerSlideBack,               // done
+    [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,         // done
+    [CONTROLLER_PALETTEFADE]              = PlayerHandlePaletteFade,                    // done
+    [CONTROLLER_SUCCESSBALLTHROWANIM]     = PlayerHandleSuccessBallThrowAnim,           // done
+    [CONTROLLER_BALLTHROWANIM]            = PlayerHandleBallThrowAnim,                  // done
+    [CONTROLLER_PAUSE]                    = PlayerHandlePause,                          // done
+    [CONTROLLER_MOVEANIMATION]            = BtlController_HandleMoveAnimation,          // done
+    [CONTROLLER_PRINTSTRING]              = BtlController_HandlePrintString,            // done
+    [CONTROLLER_PRINTSTRINGPLAYERONLY]    = PlayerHandlePrintSelectionString,           // done
+    [CONTROLLER_CHOOSEACTION]             = PlayerHandleChooseAction,                   // done
+    [CONTROLLER_UNKNOWNYESNOBOX]          = BtlController_Empty,                        // done
+    [CONTROLLER_CHOOSEMOVE]               = PlayerHandleChooseMove,                     // done
+    [CONTROLLER_OPENBAG]                  = PlayerHandleChooseItem,                     // done
+    [CONTROLLER_CHOOSEPOKEMON]            = PlayerHandleChoosePokemon,                  // done
+    [CONTROLLER_23]                       = PlayerHandleCmd23,                          // done
+    [CONTROLLER_HEALTHBARUPDATE]          = PlayerHandleHealthBarUpdate,                // done
+    [CONTROLLER_EXPUPDATE]                = PlayerHandleExpUpdate,                      // done
+    [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,       // done
+    [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,        // done
+    [CONTROLLER_STATUSXOR]                = PlayerHandleStatusXor,                      // done
+    [CONTROLLER_DATATRANSFER]             = BtlController_Empty,                        // done
+    [CONTROLLER_DMA3TRANSFER]             = PlayerHandleDMA3Transfer,                   // done
+    [CONTROLLER_PLAYBGM]                  = PlayerHandlePlayBGM,                        // done
+    [CONTROLLER_32]                       = BtlController_Empty,                        // done
+    [CONTROLLER_TWORETURNVALUES]          = PlayerHandleTwoReturnValues,                // done
+    [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerHandleChosenMonReturnValue,           // done
+    [CONTROLLER_ONERETURNVALUE]           = PlayerHandleOneReturnValue,                 // done
+    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerHandleOneReturnValue_Duplicate,       // done
+    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,            // done
+    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,              // done
+    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,           // done
+    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,          // done
+    [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,           // done
+    [CONTROLLER_CANTSWITCH]               = BtlController_Empty,                        // done
+    [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,                 // done
+    [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,       // done
+    [CONTROLLER_FAINTINGCRY]              = BtlController_HandleFaintingCry,            // done
+    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,             // done
+    [CONTROLLER_INTROTRAINERBALLTHROW]    = PlayerHandleIntroTrainerBallThrow,          // done
+    [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = PlayerHandleDrawPartyStatusSummary,         // done
+    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_HandleHidePartyStatusSummary, // done
+    [CONTROLLER_ENDBOUNCE]                = PlayerHandleEndBounceEffect,                // done
+    [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_HandleSpriteInvisibility,     // done
+    [CONTROLLER_BATTLEANIMATION]          = PlayerHandleBattleAnimation,                // done
+    [CONTROLLER_LINKSTANDBYMSG]           = PlayerHandleLinkStandbyMsg,                 // done
+    [CONTROLLER_RESETACTIONMOVESELECTION] = PlayerHandleResetActionMoveSelection,       // done
+    [CONTROLLER_ENDLINKBATTLE]            = PlayerHandleEndLinkBattle,                  // done
+    [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop,                // done
 };
 
 void SetControllerToPlayer(u32 battler)
@@ -1547,12 +1544,6 @@ void SetCB2ToReshowScreenAfterMenu2(void)
     SetMainCallback2(ReshowBattleScreenAfterMenu);
 }
 
-static void CompleteOnFinishedBattleAnimation(u32 battler)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].animFromTableActive)
-        PlayerBufferExecCompleted(battler);
-}
-
 static void PrintLinkStandbyMsg(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -1927,13 +1918,6 @@ static void PlayerHandleDrawPartyStatusSummary(u32 battler)
     BtlController_HandleDrawPartyStatusSummary(battler, B_SIDE_PLAYER, TRUE);
 }
 
-static void PlayerHandleHidePartyStatusSummary(u32 battler)
-{
-    if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown)
-        gTasks[gBattlerStatusSummaryTaskId[battler]].func = Task_HidePartyStatusSummary;
-    PlayerBufferExecCompleted(battler);
-}
-
 static void PlayerHandleEndBounceEffect(u32 battler)
 {
     EndBounceEffect(battler, BOUNCE_HEALTHBOX);
@@ -1941,42 +1925,23 @@ static void PlayerHandleEndBounceEffect(u32 battler)
     PlayerBufferExecCompleted(battler);
 }
 
-static void PlayerHandleSpriteInvisibility(u32 battler)
-{
-    if (IsBattlerSpritePresent(battler))
-    {
-        gSprites[gBattlerSpriteIds[battler]].invisible = gBattleResources->bufferA[battler][1];
-        CopyBattleSpriteInvisibility(battler);
-    }
-    PlayerBufferExecCompleted(battler);
-}
-
 static void PlayerHandleBattleAnimation(u32 battler)
 {
-    if (!IsBattleSEPlaying(battler))
-    {
-        u8 animationId = gBattleResources->bufferA[battler][1];
-        u16 argument = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
-
-        if (TryHandleLaunchBattleTableAnimation(battler, battler, battler, animationId, argument))
-            PlayerBufferExecCompleted(battler);
-        else
-            gBattlerControllerFuncs[battler] = CompleteOnFinishedBattleAnimation;
-    }
+    BtlController_HandleBattleAnimation(battler, FALSE);
 }
 
 static void PlayerHandleLinkStandbyMsg(u32 battler)
 {
     switch (gBattleResources->bufferA[battler][1])
     {
-    case 0:
+    case LINK_STANDBY_MSG_STOP_BOUNCE:
         PrintLinkStandbyMsg();
         // fall through
-    case 1:
+    case LINK_STANDBY_STOP_BOUNCE_ONLY:
         EndBounceEffect(battler, BOUNCE_HEALTHBOX);
         EndBounceEffect(battler, BOUNCE_MON);
         break;
-    case 2:
+    case LINK_STANDBY_MSG_ONLY:
         PrintLinkStandbyMsg();
         break;
     }
@@ -2001,17 +1966,13 @@ static void PlayerHandleResetActionMoveSelection(u32 battler)
     PlayerBufferExecCompleted(battler);
 }
 
-static void PlayerHandleCmd55(u32 battler)
+static void PlayerHandleEndLinkBattle(u32 battler)
 {
     gBattleOutcome = gBattleResources->bufferA[battler][1];
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
     PlayerBufferExecCompleted(battler);
     gBattlerControllerFuncs[battler] = SetBattleEndCallbacks;
-}
-
-static void PlayerCmdEnd(u32 battler)
-{
 }
 
 static void PreviewDeterminativeMoveTargets(u32 battler)

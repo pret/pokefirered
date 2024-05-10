@@ -1862,6 +1862,12 @@ static void Controller_WaitForBallThrow(u32 battler)
         BattleControllerComplete(battler);
 }
 
+static void Controller_WaitForBattleAnimation(u32 battler)
+{
+    if (!gBattleSpritesDataPtr->healthBoxesData[battler].animFromTableActive)
+        BattleControllerComplete(battler);
+}
+
 static void Controller_WaitForStatusAnimation(u32 battler)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[battler].statusAnimActive)
@@ -2370,6 +2376,16 @@ void BtlController_HandleIntroSlide(u32 battler)
     BattleControllerComplete(battler);
 }
 
+void BtlController_HandleSpriteInvisibility(u32 battler)
+{
+    if (IsBattlerSpritePresent(battler))
+    {
+        gSprites[gBattlerSpriteIds[battler]].invisible = gBattleResources->bufferA[battler][1];
+        CopyBattleSpriteInvisibility(battler);
+    }
+    BattleControllerComplete(battler);
+}
+
 bool32 TwoPlayerIntroMons(u32 battler) // Double battle with both player pokemon active.
 {
     return (IsDoubleBattle() && IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battler ^ BIT_FLANK]]));
@@ -2552,6 +2568,29 @@ void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 co
             gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusDelayTimer = 93;
 
         gBattlerControllerFuncs[battler] = Controller_WaitForPartyStatusSummary;
+    }
+}
+
+void BtlController_HandleHidePartyStatusSummary(u32 battler)
+{
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].partyStatusSummaryShown)
+        gTasks[gBattlerStatusSummaryTaskId[battler]].func = Task_HidePartyStatusSummary;
+    BattleControllerComplete(battler);
+}
+
+void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE)
+{
+    if (ignoreSE || !IsBattleSEPlaying(battler))
+    {
+        u8 animationId = gBattleResources->bufferA[battler][1];
+        u16 argument = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
+
+        gAnimDisableStructPtr = (struct DisableStruct *)&gBattleResources->bufferA[battler][4];
+
+        if (TryHandleLaunchBattleTableAnimation(battler, battler, battler, animationId, argument))
+            BattleControllerComplete(battler);
+        else
+            gBattlerControllerFuncs[battler] = Controller_WaitForBattleAnimation;
     }
 }
 

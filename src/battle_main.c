@@ -4310,10 +4310,10 @@ static void HandleEndTurn_RanFromBattle(void)
     default:
         gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
         break;
-    case 1:
+    case FLEE_ITEM:
         gBattlescriptCurrInstr = BattleScript_SmokeBallEscape;
         break;
-    case 2:
+    case FLEE_ABILITY:
         gBattlescriptCurrInstr = BattleScript_RanAwayUsingMonAbility;
         break;
     }
@@ -4366,13 +4366,12 @@ static void HandleEndTurn_FinishBattle(void)
         if (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE || B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9)
             TryRestoreHeldItems();
 
-        // TODO: Dynamax
         // Undo Dynamax HP multiplier before recalculating stats.
-        // for (i = 0; i < gBattlersCount; ++i)
-        // {
-        //     if (IsDynamaxed(i))
-        //         UndoDynamax(i);
-        // }
+        for (i = 0; i < gBattlersCount; ++i)
+        {
+            if (IsDynamaxed(i))
+                UndoDynamax(i);
+        }
 
         for (i = 0; i < PARTY_SIZE; i++)
         {

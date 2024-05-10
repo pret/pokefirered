@@ -4,8 +4,7 @@
 #include "global.h"
 #include "battle.h"
 
-enum
-{
+enum {
     REQUEST_ALL_BATTLE,
     REQUEST_SPECIES_BATTLE,
     REQUEST_HELDITEM_BATTLE,
@@ -269,6 +268,7 @@ void BtlController_HandleGetMonData(u32 battler);
 void BtlController_HandleGetRawMonData(u32 battler);
 void BtlController_HandleSetMonData(u32 battler);
 void BtlController_HandleSetRawMonData(u32 battler);
+void BtlController_HandleLoadMonSprite(u32 battler, void (*controllerCallback)(u32 battler));
 void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(u32 battler));
 void BtlController_HandleReturnMonToBall(u32 battler);
 void BtlController_HandleDrawTrainerPic(u32 battlerId, u32 trainerPicId, bool32 isFrontPic, s16 xPos, s16 yPos, s32 subpriority);

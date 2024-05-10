@@ -2006,6 +2006,43 @@ void BtlController_HandleSetRawMonData(u32 battler)
     BattleControllerComplete(battler);
 }
 
+void BtlController_HandleLoadMonSprite(u32 battler, void (*controllerCallback)(u32 battler))
+{
+    u32 y;
+    struct Pokemon *party = GetBattlerParty(battler);
+    u16 species = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+
+    if (gBattleTypeFlags & BATTLE_TYPE_GHOST && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+    {
+        DecompressGhostFrontPic(&party[gBattlerPartyIndexes[battler]], battler);
+        y = GetGhostSpriteDefault_Y(battler);
+        gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = TRUE;
+        gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = TRUE;
+    }
+    else
+    {
+        BattleLoadMonSpriteGfx(&party[gBattlerPartyIndexes[battler]], battler);
+        y = GetBattlerSpriteDefault_Y(battler);
+    }
+    SetMultiuseSpriteTemplateToPokemon(species, GetBattlerPosition(battler));
+
+    gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate,
+                                               GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2),
+                                               y,
+                                               GetBattlerSpriteSubpriority(battler));
+
+    gSprites[gBattlerSpriteIds[battler]].x2 = -DISPLAY_WIDTH;
+    gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
+    gSprites[gBattlerSpriteIds[battler]].data[2] = species;
+    gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 0);
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_GHOST))
+        SetBattlerShadowSpriteCallback(battler, species);
+
+    gBattlerControllerFuncs[battler] = controllerCallback;
+}
+
 void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(u32 battler))
 {
     if (isPlayerSide)
@@ -2054,6 +2091,8 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
         gSprites[gBattlerSpriteIds[battler]].x2 = -DISPLAY_WIDTH;
         gSprites[gBattlerSpriteIds[battler]].sSpeedX = 2;
         gSprites[gBattlerSpriteIds[battler]].oam.affineParam = trainerPicId;
+        gSprites[gBattlerSpriteIds[battler]].data[5] = gSprites[gBattlerSpriteIds[battler]].oam.tileNum;
+        gSprites[gBattlerSpriteIds[battler]].oam.tileNum = GetSpriteTileStartByTag(gTrainerFrontPicTable[trainerPicId].tag);
     }
     else // Player's side
     {

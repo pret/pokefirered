@@ -2827,6 +2827,24 @@ static const u8 *BattleStringGetTrainerName(u8 *text, u8 multiplayerId, u8 battl
         return BattleStringGetOpponentName(text, multiplayerId, battler);
 }
 
+static const u8 *BattleStringGetOpponentClassByTrainerId(u16 trainerId)
+{
+    const u8 *toCpy;
+
+    if (trainerId == TRAINER_UNION_ROOM)
+        toCpy = gTrainerClasses[GetUnionRoomTrainerClass()].name;
+    else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+        toCpy = gTrainerClasses[GetBattleTowerTrainerClassNameId()].name;
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
+        toCpy = gTrainerClasses[GetTrainerTowerOpponentClass()].name;
+    else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
+        toCpy = gTrainerClasses[GetEreaderTrainerClassId()].name;
+    else
+        toCpy = gTrainerClasses[GetTrainerClassFromId(trainerId)].name;
+
+    return toCpy;
+}
+
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 {
     u32 dstId = 0; // if they used dstId, why not use srcId as well?
@@ -2876,18 +2894,14 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     toCpy = gBattleTextBuff3;
                 break;
             case B_TXT_TRAINER2_CLASS:
-                // TODO: trainer name
-                // toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_B);
-                toCpy = "TODO";
+                toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_B);
                 break;
             case B_TXT_TRAINER2_NAME:
-                // TODO: trainer name
-                // toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_B, text, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT));
-                toCpy = "TODO";
+                toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_B, text, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT));
                 break;
             case B_TXT_PARTNER_CLASS:
                 // TODO: trainer name
-                // toCpy = gTrainerClassNames[GetFrontierOpponentClass(gPartnerTrainerId)].name;
+                // toCpy = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
                 toCpy = "TODO";
                 break;
             case B_TXT_PARTNER_NAME:
@@ -3053,17 +3067,17 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name
                 if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-                    toCpy = gTrainerClassNames[GetSecretBaseTrainerNameIndex()];
+                    toCpy = gTrainerClasses[GetSecretBaseTrainerNameIndex()].name;
                 else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-                    toCpy = gTrainerClassNames[GetUnionRoomTrainerClass()];
+                    toCpy = gTrainerClasses[GetUnionRoomTrainerClass()].name;
                 else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-                    toCpy = gTrainerClassNames[GetBattleTowerTrainerClassNameId()];
+                    toCpy = gTrainerClasses[GetBattleTowerTrainerClassNameId()].name;
                 else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
-                    toCpy = gTrainerClassNames[GetTrainerTowerOpponentClass()];
+                    toCpy = gTrainerClasses[GetTrainerTowerOpponentClass()].name;
                 else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-                    toCpy = gTrainerClassNames[GetEreaderTrainerClassId()];
+                    toCpy = gTrainerClasses[GetEreaderTrainerClassId()].name;
                 else
-                    toCpy = gTrainerClassNames[gTrainers[gTrainerBattleOpponent_A].trainerClass];
+                    toCpy = gTrainerClasses[gTrainers[gTrainerBattleOpponent_A].trainerClass].name;
                 break;
             case B_TXT_TRAINER1_NAME: // trainer1 name
                 if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
@@ -3199,24 +3213,24 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = BattleStringGetTrainerName(text, multiplayerId, gBattlerAttacker);
                 break;
             case B_TXT_ATK_TRAINER_CLASS:
-                // TODO: get trainer name
-                toCpy = "TODO";
-                // switch (GetBattlerPosition(gBattlerAttacker))
-                // {
-                // case B_POSITION_PLAYER_RIGHT:
-                //     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-                //         toCpy = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
-                //     break;
-                // case B_POSITION_OPPONENT_LEFT:
-                //     toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
-                //     break;
-                // case B_POSITION_OPPONENT_RIGHT:
-                //     if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
-                //         toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_B);
-                //     else
-                //         toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
-                //     break;
-                // }
+                switch (GetBattlerPosition(gBattlerAttacker))
+                {
+                case B_POSITION_PLAYER_RIGHT:
+                    // TODO: implement partner trainers?
+                    // if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+                    //     toCpy = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
+                    toCpy = gTrainerClasses[TRAINER_CLASS_NONE].name;
+                    break;
+                case B_POSITION_OPPONENT_LEFT:
+                    toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
+                    break;
+                case B_POSITION_OPPONENT_RIGHT:
+                    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
+                        toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_B);
+                    else
+                        toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
+                    break;
+                }
                 break;
             case B_TXT_ATK_TEAM1:
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)

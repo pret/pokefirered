@@ -89,10 +89,6 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battl
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop                 // done
 };
 
-static void LinkPartnerDummy(u32 battler)
-{
-}
-
 void SetControllerToLinkPartner(u32 battler)
 {
     gBattlerControllerEndFuncs[battler] = LinkPartnerBufferExecCompleted;

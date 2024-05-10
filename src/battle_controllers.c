@@ -2597,7 +2597,7 @@ static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
 
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)
 {
-    FreeTrainerFrontPicPalette(sprite->oam.affineParam);
+    FreeTrainerFrontPicPaletteAndTile(sprite->oam.affineParam);
     FreeSpriteOamMatrix(sprite);
     DestroySprite(sprite);
 }

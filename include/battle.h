@@ -656,6 +656,9 @@ struct BattleStruct
     u8 quickClawRandom[MAX_BATTLERS_COUNT];
     u8 quickDrawRandom[MAX_BATTLERS_COUNT];
     bool8 throwingPokeBall;
+    s32 aiFinalScore[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // AI, target, moves to make debugging easier
+    u8 aiMoveOrAction[MAX_BATTLERS_COUNT];
+    u8 aiChosenTarget[MAX_BATTLERS_COUNT];
     // pokeemerald unknown use
     u8 field_93; // related to choosing pokemon? probably related to recording
 };

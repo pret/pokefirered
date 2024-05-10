@@ -1855,7 +1855,16 @@ void Controller_WaitForHealthBar(u32 battler)
     {
         if (GetBattlerSide(battler) == B_SIDE_PLAYER)
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
-        BattleControllerComplete(battler);
+            
+        if (GetBattlerSide(battler) == B_SIDE_OPPONENT && !BtlCtrl_OakOldMan_TestState2Flag(1) && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))
+        {
+            BtlCtrl_OakOldMan_SetState2Flag(1);
+            gBattlerControllerFuncs[battler] = PrintOakText_InflictingDamageIsKey;
+        }
+        else
+        {
+            BattleControllerComplete(battler);
+        }
     }
 }
 

@@ -5361,6 +5361,15 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
     }
 }
 
+bool32 IsWildMonSmart(void)
+{
+#if B_SMART_WILD_AI_FLAG != 0
+    return (FlagGet(B_SMART_WILD_AI_FLAG));
+#else
+    return FALSE;
+#endif
+}
+
 
 
 

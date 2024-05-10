@@ -110,7 +110,6 @@ static void OpponentBufferRunCommand(u32 battler)
 {
     if (gBattleControllerExecFlags & gBitTable[battler])
     {
-        DebugPrintfLevel(MGBA_LOG_ERROR, "opponentRun: %u", gBattleResources->bufferA[battler][0]);
         if (gBattleResources->bufferA[battler][0] < NELEMS(sOpponentBufferCommands))
             sOpponentBufferCommands[gBattleResources->bufferA[battler][0]](battler);
         else

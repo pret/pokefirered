@@ -1432,7 +1432,7 @@ u8 DoFieldEndTurnEffects(void)
                     gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
                 }
 
-                gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES; // B_ANIM_SNOW_CONTINUES; // TODO: Animation
+                gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES; // TODO: Animation B_ANIM_SNOW_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SNOW;
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
@@ -1453,8 +1453,7 @@ u8 DoFieldEndTurnEffects(void)
                     }
                     else
                     {
-                        // TODO: Dynamax
-                        // ChooseDamageNonTypesString(gSideTimers[side].damageNonTypesType);
+                        ChooseDamageNonTypesString(gSideTimers[side].damageNonTypesType);
                         BattleScriptExecute(BattleScript_DamageNonTypesContinues);
                     }
                 }
@@ -1769,9 +1768,7 @@ u8 DoBattlerEndTurnEffects(void)
              && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK)
              && gBattleMons[battler].hp != 0)
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetDrainedBigRootHp(battler, GetNonDynamaxMaxHP(battler) / 16);
-                gBattleMoveDamage = GetDrainedBigRootHp(battler, gBattleMons[battler].maxHP / 16);
+                gBattleMoveDamage = GetDrainedBigRootHp(battler, GetNonDynamaxMaxHP(battler) / 16);
                 BattleScriptExecute(BattleScript_IngrainTurnHeal);
                 effect++;
             }
@@ -1783,9 +1780,7 @@ u8 DoBattlerEndTurnEffects(void)
              && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK)
              && gBattleMons[battler].hp != 0)
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetDrainedBigRootHp(battler, GetNonDynamaxMaxHP(battler) / 16);
-                gBattleMoveDamage = GetDrainedBigRootHp(battler, gBattleMons[battler].maxHP / 16);
+                gBattleMoveDamage = GetDrainedBigRootHp(battler, GetNonDynamaxMaxHP(battler) / 16);
                 BattleScriptExecute(BattleScript_AquaRingHeal);
                 effect++;
             }
@@ -1819,9 +1814,7 @@ u8 DoBattlerEndTurnEffects(void)
                 MAGIC_GUARD_CHECK;
 
                 gBattlerTarget = gStatuses3[battler] & STATUS3_LEECHSEED_BATTLER; // Notice gBattlerTarget is actually the HP receiver.
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
-                gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
                 gBattleScripting.animArg1 = gBattlerTarget;
@@ -1841,9 +1834,7 @@ u8 DoBattlerEndTurnEffects(void)
                 {
                     if (!BATTLER_MAX_HP(battler) && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
                     {
-                        // TODO: Dynamax
-                        // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
-                        gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
+                        gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
                         if (gBattleMoveDamage == 0)
                             gBattleMoveDamage = 1;
                         gBattleMoveDamage *= -1;
@@ -1853,9 +1844,7 @@ u8 DoBattlerEndTurnEffects(void)
                 }
                 else
                 {
-                    // TODO: Dynamax
-                    // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
-                    gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
+                    gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
                     BattleScriptExecute(BattleScript_PoisonTurnDmg);
@@ -1874,9 +1863,7 @@ u8 DoBattlerEndTurnEffects(void)
                 {
                     if (!BATTLER_MAX_HP(battler) && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
                     {
-                        // TODO: Dynamax
-                        // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
-                        gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
+                        gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
                         if (gBattleMoveDamage == 0)
                             gBattleMoveDamage = 1;
                         gBattleMoveDamage *= -1;
@@ -1886,9 +1873,7 @@ u8 DoBattlerEndTurnEffects(void)
                 }
                 else
                 {
-                    // TODO: Dynamax
-                    // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 16;
-                    gBattleMoveDamage = gBattleMons[battler].maxHP / 16;
+                    gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 16;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
                     if ((gBattleMons[battler].status1 & STATUS1_TOXIC_COUNTER) != STATUS1_TOXIC_TURN(15)) // not 16 turns
@@ -1905,9 +1890,7 @@ u8 DoBattlerEndTurnEffects(void)
                 && gBattleMons[battler].hp != 0)
             {
                 MAGIC_GUARD_CHECK;
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
-                gBattleMoveDamage = gBattleMons[battler].maxHP / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
+                gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
                 if (ability == ABILITY_HEATPROOF)
                 {
                     if (gBattleMoveDamage > (gBattleMoveDamage / 2) + 1) // Record ability if the burn takes less damage than it normally would.
@@ -1926,9 +1909,7 @@ u8 DoBattlerEndTurnEffects(void)
                 && gBattleMons[battler].hp != 0)
             {
                 MAGIC_GUARD_CHECK;
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
-                gBattleMoveDamage = gBattleMons[battler].maxHP / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
+                gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
                 BattleScriptExecute(BattleScript_FrostbiteTurnDmg);
@@ -1945,9 +1926,7 @@ u8 DoBattlerEndTurnEffects(void)
                 // persist even after the affected Pokémon has been awakened by Shed Skin.
                 if (gBattleMons[battler].status1 & STATUS1_SLEEP)
                 {
-                    // TODO: Dynamax
-                    // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 4;
-                    gBattleMoveDamage = gBattleMons[battler].maxHP / 4;
+                    gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 4;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
                     BattleScriptExecute(BattleScript_NightmareTurnDmg);
@@ -1965,9 +1944,7 @@ u8 DoBattlerEndTurnEffects(void)
                 && gBattleMons[battler].hp != 0)
             {
                 MAGIC_GUARD_CHECK;
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 4;
-                gBattleMoveDamage = gBattleMons[battler].maxHP / 4;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 4;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
                 BattleScriptExecute(BattleScript_CurseTurnDmg);
@@ -1987,17 +1964,9 @@ u8 DoBattlerEndTurnEffects(void)
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleStruct->wrappedMove[battler]);
                     gBattlescriptCurrInstr = BattleScript_WrapTurnDmg;
                     if (GetBattlerHoldEffect(gBattleStruct->wrappedBy[battler], TRUE) == HOLD_EFFECT_BINDING_BAND)
-                    {
-                        // TODO: Dynamax
-                        // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BINDING_DAMAGE >= GEN_6 ? 6 : 8);
-                        gBattleMoveDamage = gBattleMons[battler].maxHP / (B_BINDING_DAMAGE >= GEN_6 ? 6 : 8);
-                    }
+                        gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BINDING_DAMAGE >= GEN_6 ? 6 : 8);
                     else
-                    {
-                        // TODO: Dynamax
-                        // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BINDING_DAMAGE >= GEN_6 ? 8 : 16);
-                        gBattleMoveDamage = gBattleMons[battler].maxHP / (B_BINDING_DAMAGE >= GEN_6 ? 8 : 16);
-                    }
+                        gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BINDING_DAMAGE >= GEN_6 ? 8 : 16);
 
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
@@ -2329,15 +2298,14 @@ u8 DoBattlerEndTurnEffects(void)
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_DYNAMAX:
-            // TODO: Dynamax
-            // if (IsDynamaxed(battler)
-            //     && --gBattleStruct->dynamax.dynamaxTurns[battler] == 0)
-            // {
-            //     gBattleScripting.battler = battler;
-	        //     UndoDynamax(battler);
-            //     BattleScriptExecute(BattleScript_DynamaxEnds);
-            //     effect++;
-            // }
+            if (IsDynamaxed(battler)
+                && --gBattleStruct->dynamax.dynamaxTurns[battler] == 0)
+            {
+                gBattleScripting.battler = battler;
+	            UndoDynamax(battler);
+                BattleScriptExecute(BattleScript_DynamaxEnds);
+                effect++;
+            }
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_SEA_OF_FIRE_DAMAGE:
@@ -2494,8 +2462,26 @@ bool8 HandleFaintedMonActions(void)
                 gBattleStruct->faintedActionsState = 3;
             else
                 gBattleStruct->faintedActionsState = 1;
+            // Don't switch mons until all pokemon performed their actions or the battle's over.
+            if (B_FAINT_SWITCH_IN >= GEN_4
+                && gBattleOutcome == 0
+                && !NoAliveMonsForEitherParty()
+                && gCurrentTurnActionNumber != gBattlersCount)
+            {
+                gAbsentBattlerFlags |= gBitTable[gBattlerFainted];
+                if (gBattleStruct->faintedActionsState != 1)
+                    return FALSE;
+            }
             break;
         case 3:
+            // Don't switch mons until all pokemon performed their actions or the battle's over.
+            if (B_FAINT_SWITCH_IN >= GEN_4
+                && gBattleOutcome == 0
+                && !NoAliveMonsForEitherParty()
+                && gCurrentTurnActionNumber != gBattlersCount)
+            {
+                return FALSE;
+            }
             gBattleStruct->faintedActionsBattlerId = 0;
             gBattleStruct->faintedActionsState++;
             // fall through
@@ -2520,10 +2506,7 @@ bool8 HandleFaintedMonActions(void)
                 gBattleStruct->faintedActionsState = 4;
             break;
         case 6:
-            if (AbilityBattleEffects(ABILITYEFFECT_INTIMIDATE1, 0, 0, 0, 0)
-             || AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0)
-             || ItemBattleEffects(ITEMEFFECT_NORMAL, 0, TRUE)
-             || AbilityBattleEffects(ABILITYEFFECT_FORECAST, 0, 0, 0, 0))
+            if (ItemBattleEffects(ITEMEFFECT_NORMAL, 0, TRUE))
                 return TRUE;
             gBattleStruct->faintedActionsState++;
             break;

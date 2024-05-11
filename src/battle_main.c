@@ -3479,7 +3479,7 @@ static void HandleEndTurn_ContinueBattle(void)
             gBattleCommunication[i] = 0;
         for (i = 0; i < gBattlersCount; i++)
         {
-            gBattleMons[i].status2 &= ~(STATUS2_FLINCHED);
+            gBattleMons[i].status2 &= ~STATUS2_FLINCHED;
             if ((gBattleMons[i].status1 & STATUS1_SLEEP) && (gBattleMons[i].status2 & STATUS2_MULTIPLETURNS))
                 CancelMultiTurnMoves(i);
         }
@@ -3532,7 +3532,7 @@ void BattleTurnPassed(void)
     }
 
     if (gBattleResults.battleTurnCounter < 0xFF)
-        ++gBattleResults.battleTurnCounter;
+        gBattleResults.battleTurnCounter++;
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -3544,6 +3544,7 @@ void BattleTurnPassed(void)
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
 
     *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;
+    BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
     SetAiLogicDataForTurn(AI_DATA); // get assumed abilities, hold effects, etc of all battlers
     gBattleMainFunc = HandleTurnActionSelectionState;
 }

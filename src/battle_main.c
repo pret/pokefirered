@@ -2598,6 +2598,7 @@ void BeginBattleIntro(void)
 {
     BattleStartClearSetData();
     gBattleCommunication[1] = 0;
+    gBattleStruct->introState = 0;
     gBattleMainFunc = BattleIntroGetMonsData;
 }
 
@@ -2730,10 +2731,10 @@ static void BattleStartClearSetData(void)
 
 void SwitchInClearSetData(u32 battler)
 {
-    struct DisableStruct disableStructCopy = gDisableStructs[battler];
     s32 i;
-    u8 *ptr;
+    struct DisableStruct disableStructCopy = gDisableStructs[battler];
 
+    ClearIllusionMon(battler);
     if (gMovesInfo[gCurrentMove].effect != EFFECT_BATON_PASS)
     {
         for (i = 0; i < NUM_BATTLE_STATS; i++)
@@ -2845,13 +2846,16 @@ void SwitchInClearSetData(u32 battler)
     // Reset damage to prevent things like red card activating if the switched-in mon is holding it
     gSpecialStatuses[battler].physicalDmg = 0;
     gSpecialStatuses[battler].specialDmg = 0;
+    gBattleStruct->enduredDamage &= ~gBitTable[battler];
 
     // Reset G-Max Chi Strike boosts.
     gBattleStruct->bonusCritStages[battler] = 0;
 
-    // TODO: Dynamax
+    // Reset G-Max Chi Strike boosts.
+    gBattleStruct->bonusCritStages[battler] = 0;
+
     // Reset Dynamax flags.
-    // UndoDynamax(battler);
+    UndoDynamax(battler);
 
     gBattleStruct->overwrittenAbilities[battler] = ABILITY_NONE;
 
@@ -2917,12 +2921,12 @@ const u8* FaintClearSetData(u32 battler)
     gProtectStructs[battler].flinchImmobility = FALSE;
     gProtectStructs[battler].notFirstStrike = FALSE;
     gProtectStructs[battler].usedHealBlockedMove = FALSE;
-    gProtectStructs[battler].usesBouncedMove = FALSE;
     gProtectStructs[battler].usedGravityPreventedMove = FALSE;
     gProtectStructs[battler].usedThroatChopPreventedMove = FALSE;
     gProtectStructs[battler].statRaised = FALSE;
     gProtectStructs[battler].statFell = FALSE;
     gProtectStructs[battler].pranksterElevated = FALSE;
+    gProtectStructs[battler].usesBouncedMove = FALSE; // TODO remove
 
     gDisableStructs[battler].isFirstTurn = 2;
 
@@ -2962,8 +2966,7 @@ const u8* FaintClearSetData(u32 battler)
     gBattleMons[battler].type2 = gSpeciesInfo[gBattleMons[battler].species].types[1];
     gBattleMons[battler].type3 = TYPE_MYSTERY;
 
-    // TODO: AI
-    // Ai_UpdateFaintData(battler);
+    Ai_UpdateFaintData(battler);
     TryBattleFormChange(battler, FORM_CHANGE_FAINT);
 
     gBattleStruct->overwrittenAbilities[battler] = ABILITY_NONE;
@@ -3325,7 +3328,26 @@ static void BattleIntroPlayerSendsOutMonAnimation(void)
     gBattleStruct->switchInAbilitiesCounter = 0;
     gBattleStruct->switchInItemsCounter = 0;
     gBattleStruct->overworldWeatherDone = FALSE;
+    SetAiLogicDataForTurn(AI_DATA); // get assumed abilities, hold effects, etc of all battlers
+    Ai_InitPartyStruct(); // Save mons party counts, and first 2/4 mons on the battlefield.
 
+    // Try to set a status to start the battle with
+    gBattleStruct->startingStatus = 0;
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetTrainerStartingStatusFromId(gTrainerBattleOpponent_B))
+    {
+        gBattleStruct->startingStatus = GetTrainerStartingStatusFromId(gTrainerBattleOpponent_B);
+        gBattleStruct->startingStatusTimer = 0; // infinite
+    }
+    else if (GetTrainerStartingStatusFromId(gTrainerBattleOpponent_A))
+    {
+        gBattleStruct->startingStatus = GetTrainerStartingStatusFromId(gTrainerBattleOpponent_A);
+        gBattleStruct->startingStatusTimer = 0; // infinite
+    }
+    else if (B_VAR_STARTING_STATUS != 0)
+    {
+        gBattleStruct->startingStatus = VarGet(B_VAR_STARTING_STATUS);
+        gBattleStruct->startingStatusTimer = VarGet(B_VAR_STARTING_STATUS_TIMER);
+    }
     gBattleMainFunc = TryDoEventsBeforeFirstTurn;
 }
 
@@ -3478,6 +3500,7 @@ void BattleTurnPassed(void)
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
 
     *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;
+    SetAiLogicDataForTurn(AI_DATA); // get assumed abilities, hold effects, etc of all battlers
     gBattleMainFunc = HandleTurnActionSelectionState;
 }
 

@@ -128,7 +128,7 @@ void TrySetQuestLogLinkBattleEvent(void)
             }
 
             for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-                data->playerNames[0][i] = gLinkPlayers[gBattleStruct->multiplayerId ^ 1].name[i];
+                data->playerNames[0][i] = gLinkPlayers[gBattleScripting.multiplayerId ^ 1].name[i];
         }
         SetQuestLogEvent(eventId, (const u16 *)data);
         Free(data);
@@ -139,12 +139,12 @@ static void GetLinkMultiBattlePlayerIndexes(s32 * partnerIdx, s32 * opponentIdxs
 {
     s32 i;
     s32 numOpponentsFound = 0;
-    u8 partnerId = gLinkPlayers[gBattleStruct->multiplayerId].id ^ 2;
+    u8 partnerId = gLinkPlayers[gBattleScripting.multiplayerId].id ^ 2;
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         if (partnerId == gLinkPlayers[i].id)
             *partnerIdx = i;
-        else if (i != gBattleStruct->multiplayerId)
+        else if (i != gBattleScripting.multiplayerId)
             opponentIdxs[numOpponentsFound++] = i;
     }
 }

@@ -268,9 +268,6 @@ u32 BattleAI_ChooseMoveOrAction(void)
     // Clear protect structures, some flags may be set during AI calcs
     // e.g. pranksterElevated from GetMovePriority
     memset(&gProtectStructs, 0, MAX_BATTLERS_COUNT * sizeof(struct ProtectStruct));
-    #if TESTING
-    TestRunner_Battle_CheckAiMoveScores(sBattler_AI);
-    #endif // TESTING
     return ret;
 }
 

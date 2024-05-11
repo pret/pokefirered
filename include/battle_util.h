@@ -120,6 +120,12 @@ enum
 extern const struct TypePower gNaturalGiftTable[];
 extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];
 
+void HandleAction_UseMove(void);
+void HandleAction_Switch(void);
+void HandleAction_UseItem(void);
+bool8 TryRunFromBattle(u8 battler);
+void HandleAction_Run(void);
+
 u8 GetBattlerForBattleScript(u8 caseId);
 void MarkBattlerForControllerExec(u8 battlerId);
 void MarkBattlerReceivedLinkData(u8 battlerId);
@@ -150,7 +156,6 @@ void ClearVariousBattlerFlags(u32 battler);
 void HandleAction_RunBattleScript(void);
 u32 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
-void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1);
 // new
 bool32 IsAffectedByFollowMe(u32 battlerAtk, u32 defSide, u32 move);
 bool32 IsNeutralizingGasOnField(void);
@@ -253,19 +258,5 @@ u32 CalcRolloutBasePower(u32 battlerAtk, u32 basePower, u32 rolloutTimer);
 u32 CalcFuryCutterBasePower(u32 basePower, u32 furyCutterCounter);
 s32 CalculateMoveDamageVars(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, s32 fixedBasePower, uq4_12_t typeEffectivenessModifier,
                                           u32 weather, bool32 isCrit, u32 holdEffectAtk, u32 holdEffectDef, u32 abilityAtk, u32 abilityDef);
-
-
-// battle_ai_util.h
-// bool32 IsHealingMove(u32 move);
-// void RecordKnownMove(u32 battlerId, u32 move);
-// s32 CountUsablePartyMons(u32 battlerId);
-// bool32 IsAiVsAiBattle(void);
-// void RecordLastUsedMoveBy(u32 battlerId, u32 move);
-// bool32 BattlerHasAi(u32 battlerId);
-// void ClearBattlerItemEffectHistory(u32 battlerId);
-// bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect);
-// void RecordAllMoves(u32 battler);
-
-// end battle_ai_util.h
 
 #endif // GUARD_BATTLE_UTIL_H

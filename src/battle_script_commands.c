@@ -322,7 +322,6 @@ static const u16 sWhiteOutBadgeMoney[9] = { 8, 16, 24, 36, 48, 64, 80, 100, 120 
 #define TAG_LVLUP_BANNER_MON_ICON 55130
 
 static void TrySetDestinyBondToHappen(void);
-static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
 static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr);
 static void InitLevelUpBanner(void);
 static bool8 SlideInLevelUpBanner(void);
@@ -1982,19 +1981,6 @@ static void Cmd_damagecalc(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-void AI_CalcDmg(u8 attacker, u8 defender)
-{
-    u32 sideStatus = gSideStatuses[GET_BATTLER_SIDE(defender)];
-    u8 moveType;
-    s32 critChance;
-
-    GET_MOVE_TYPE(gCurrentMove, moveType);
-    critChance = CalcCritChanceStage(attacker, defender, gCurrentMove, TRUE);
-    gIsCriticalHit = RandomWeighted(RNG_CRITICAL_HIT, sCriticalHitChance[critChance] - 1, 1);
-    gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, attacker, defender, moveType, 0, gIsCriticalHit, TRUE, TRUE);
-    CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget), TRUE);
-}
-
 static void Cmd_typecalc(void)
 {
     CMD_ARGS();
@@ -2005,127 +1991,6 @@ static void Cmd_typecalc(void)
     CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget), TRUE);
 
     gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-// Same as ModulateDmgByType except different arguments
-static void ModulateDmgByType2(uq4_12_t multiplier, u16 move, u8 *flags)
-{
-    gBattleMoveDamage = uq4_12_multiply(gBattleMoveDamage, multiplier);
-    if (gBattleMoveDamage == 0 && multiplier != 0)
-        gBattleMoveDamage = 1;
-
-    switch (multiplier)
-    {
-    case UQ_4_12(0.0):
-        *flags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-        *flags &= ~MOVE_RESULT_NOT_VERY_EFFECTIVE;
-        *flags &= ~MOVE_RESULT_SUPER_EFFECTIVE;
-        break;
-    case UQ_4_12(0.5):
-        if (gMovesInfo[move].power && !(*flags & MOVE_RESULT_NO_EFFECT))
-        {
-            if (*flags & MOVE_RESULT_SUPER_EFFECTIVE)
-                *flags &= ~MOVE_RESULT_SUPER_EFFECTIVE;
-            else
-                *flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-        }
-        break;
-    case UQ_4_12(2.0):
-        if (gMovesInfo[move].power && !(*flags & MOVE_RESULT_NO_EFFECT))
-        {
-            if (*flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
-                *flags &= ~MOVE_RESULT_NOT_VERY_EFFECTIVE;
-            else
-                *flags |= MOVE_RESULT_SUPER_EFFECTIVE;
-        }
-        break;
-    }
-}
-
-u8 TypeCalc(u16 move, u8 attacker, u8 defender)
-{
-    s32 i = 0;
-    u8 flags = 0;
-    u8 moveType;
-
-    if (move == MOVE_STRUGGLE)
-        return 0;
-
-    moveType = gMovesInfo[move].type;
-
-    // check stab
-    if (IS_BATTLER_OF_TYPE(attacker, moveType))
-    {
-        gBattleMoveDamage = gBattleMoveDamage * 15;
-        gBattleMoveDamage = gBattleMoveDamage / 10;
-    }
-
-    if (gBattleMons[defender].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
-    {
-        flags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
-    }
-    else
-    {
-        ModulateDmgByType2(gTypeEffectivenessTable[moveType][gBattleMons[defender].type1], move, &flags);
-        ModulateDmgByType2(gTypeEffectivenessTable[moveType][gBattleMons[defender].type2], move, &flags);
-    }
-
-    if (gBattleMons[defender].ability == ABILITY_WONDER_GUARD && !(flags & MOVE_RESULT_MISSED)
-        && AttacksThisTurn(attacker, move) == 2
-        && (!(flags & MOVE_RESULT_SUPER_EFFECTIVE) || ((flags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) == (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
-        && gMovesInfo[move].power)
-    {
-        flags |= MOVE_RESULT_MISSED;
-    }
-    return flags;
-}
-
-u8 AI_TypeCalc(u16 move, u16 targetSpecies, u16 targetAbility)
-{
-    s32 i = 0;
-    u8 flags = 0;
-    u8 type1 = gSpeciesInfo[targetSpecies].types[0], type2 = gSpeciesInfo[targetSpecies].types[1];
-    u8 moveType;
-
-    if (move == MOVE_STRUGGLE)
-        return 0;
-
-    moveType = gMovesInfo[move].type;
-
-    if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
-    {
-        flags = MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE;
-    }
-    else
-    {
-        ModulateDmgByType2(gTypeEffectivenessTable[moveType][type1], move, &flags);
-        ModulateDmgByType2(gTypeEffectivenessTable[moveType][type2], move, &flags);
-    }
-    if (targetAbility == ABILITY_WONDER_GUARD
-     && (!(flags & MOVE_RESULT_SUPER_EFFECTIVE) || ((flags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) == (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
-     && gMovesInfo[move].power)
-        flags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-    return flags;
-}
-
-// Multiplies the damage by a random factor between 85% to 100% inclusive
-static inline void ApplyRandomDmgMultiplier(void)
-{
-    u16 rand = Random();
-    u16 randPercent = 100 - (rand % 16);
-
-    if (gBattleMoveDamage != 0)
-    {
-        gBattleMoveDamage *= randPercent;
-        gBattleMoveDamage /= 100;
-        if (gBattleMoveDamage == 0)
-            gBattleMoveDamage = 1;
-    }
-}
-
-static void Unused_ApplyRandomDmgMultiplier(void)
-{
-    ApplyRandomDmgMultiplier();
 }
 
 static void Cmd_adjustdamage(void)
@@ -13079,24 +12944,6 @@ static void Cmd_copymovepermanently(void)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
-}
-
-static u8 AttacksThisTurn(u8 battlerId, u16 move) // Note: returns 1 if it's a charging turn, otherwise 2
-{
-    // first argument is unused
-    if (gMovesInfo[move].effect == EFFECT_SOLAR_BEAM
-        && (gBattleWeather & B_WEATHER_SUN))
-        return 2;
-
-    if (gMovesInfo[move].effect == EFFECT_TWO_TURNS_ATTACK
-     || gMovesInfo[move].effect == EFFECT_SOLAR_BEAM
-     || gMovesInfo[move].effect == EFFECT_SEMI_INVULNERABLE
-     || gMovesInfo[move].effect == EFFECT_BIDE)
-    {
-        if ((gHitMarker & HITMARKER_CHARGING))
-            return 1;
-    }
-    return 2;
 }
 
 static void Cmd_trychoosesleeptalkmove(void)

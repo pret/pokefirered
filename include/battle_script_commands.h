@@ -22,9 +22,6 @@ struct PickupItem
     u8 percentage[10];
 };
 
-void AI_CalcDmg(u8 attacker, u8 defender);
-u8 TypeCalc(u16 move, u8 attacker, u8 defender);
-u8 AI_TypeCalc(u16 move, u16 targetSpecies, u16 targetAbility);
 u8 GetBattlerTurnOrderNum(u8 battlerId);
 void SetMoveEffect(bool32 primary, u32 certain);
 bool32 IsMonGettingExpSentOut(void);

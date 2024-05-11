@@ -1400,14 +1400,13 @@ static void Cmd_attackcanceler(void)
     }
 
     // Z-moves and Max Moves bypass protection, but deal reduced damage (factored in AccumulateOtherModifiers)
-    // TODO: Z-Moves and Dynamax
-    // if ((gBattleStruct->zmove.active || IsMaxMove(gCurrentMove))
-    //      && IS_BATTLER_PROTECTED(gBattlerTarget))
-    // {
-    //     BattleScriptPush(cmd->nextInstr);
-    //     gBattlescriptCurrInstr = BattleScript_CouldntFullyProtect;
-    //     return;
-    // }
+    if ((gBattleStruct->zmove.active || IsMaxMove(gCurrentMove))
+         && IS_BATTLER_PROTECTED(gBattlerTarget))
+    {
+        BattleScriptPush(cmd->nextInstr);
+        gBattlescriptCurrInstr = BattleScript_CouldntFullyProtect;
+        return;
+    }
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -6373,7 +6372,7 @@ static void Cmd_getswitchedmondata(void)
     u32 battler = GetBattlerForBattleScript(cmd->battler);
     if (gBattleControllerExecFlags)
         return;
-        
+
     gBattlerPartyIndexes[battler] = gBattleStruct->monToSwitchIntoId[battler];
     BtlController_EmitGetMonData(battler, BUFFER_A, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[battler]]);
     MarkBattlerForControllerExec(battler);

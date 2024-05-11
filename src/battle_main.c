@@ -3901,13 +3901,12 @@ static void HandleTurnActionSelectionState(void)
                             else if (gBattleResources->bufferB[battler][2] & RET_DYNAMAX)
                                 gBattleStruct->dynamax.toDynamax |= gBitTable[battler];
 
-                            // TODO: Dynamax
                             // Max Move check
-                            // if (ShouldUseMaxMove(battler, gChosenMoveByBattler[battler]))
-                            // {
-                            //     gBattleStruct->dynamax.baseMove[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
-                            //     gBattleStruct->dynamax.usingMaxMove[battler] = TRUE;
-                            // }
+                            if (ShouldUseMaxMove(battler, gChosenMoveByBattler[battler]))
+                            {
+                                gBattleStruct->dynamax.baseMove[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
+                                gBattleStruct->dynamax.usingMaxMove[battler] = TRUE;
+                            }
 
                             gBattleCommunication[battler]++;
                         }
@@ -3999,9 +3998,34 @@ static void HandleTurnActionSelectionState(void)
             break;
         }
     }
+
     // Check if everyone chose actions.
     if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattlersCount)
+    {
+        if (WILD_DOUBLE_BATTLE
+            && gBattleStruct->throwingPokeBall
+            && gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)] != B_ACTION_NOTHING_FAINTED)
+        {
+            // if we choose to throw a ball with our second mon, skip the action of the first
+            // (if we have chosen throw ball with first, second's is already skipped)
+            // if throwing a ball in a wild battle with an in-game partner, skip partner's turn when throwing a ball
+            if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+                gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)] = B_ACTION_NOTHING_FAINTED;
+            else
+                gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] = B_ACTION_NOTHING_FAINTED;
+        }
+
         gBattleMainFunc = SetActionsAndBattlersTurnOrder;
+
+        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        {
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gChosenActionByBattler[i] == B_ACTION_SWITCH)
+                    SwitchPartyOrderInGameMulti(i, *(gBattleStruct->monToSwitchIntoId + i));
+            }
+        }
+    }
 }
 
 static void UpdateBattlerPartyOrdersOnSwitch(u32 battler)

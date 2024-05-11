@@ -11,6 +11,8 @@
 #include "field_weather.h"
 #include "event_data.h"
 #include "battle.h"
+#include "battle_ai_main.h"
+#include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_dynamax.h"
 #include "battle_interface.h"
@@ -19,7 +21,6 @@
 #include "malloc.h"
 #include "constants/battle_anim.h"
 #include "battle_controllers.h"
-#include "battle_ai_script_commands.h"
 #include "constants/battle.h"
 #include "constants/moves.h"
 #include "constants/items.h"
@@ -29,11 +30,6 @@
 #include "constants/hold_effects.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
-
-// TODO: remove when battle_ai_util
-#define AI_THINKING_STRUCT (gBattleResources->ai)
-#define BATTLE_HISTORY (gBattleResources->battleHistory)
-
 
 static bool32 TryRemoveScreens(u32 battler);
 static bool32 IsUnnerveAbilityOnOpposingSide(u32 battler);
@@ -6860,37 +6856,72 @@ const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES]
 #undef ______
 #undef X
 
-u8 GetMoveTarget(u16 move, u8 setTarget)
+
+
+
+u32 SetRandomTarget(u32 battler)
+{
+    u32 target;
+    static const u8 targets[2][2] =
+    {
+        [B_SIDE_PLAYER] = {B_POSITION_OPPONENT_LEFT, B_POSITION_OPPONENT_RIGHT},
+        [B_SIDE_OPPONENT] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT},
+    };
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        target = GetBattlerAtPosition(targets[GetBattlerSide(battler)][Random() % 2]);
+        if (!IsBattlerAlive(target))
+            target ^= BIT_FLANK;
+    }
+    else
+    {
+        target = GetBattlerAtPosition(targets[GetBattlerSide(battler)][0]);
+    }
+
+    return target;
+}
+
+u32 GetMoveTarget(u16 move, u8 setTarget)
 {
     u8 targetBattler = 0;
-    u8 moveTarget;
-    u8 side;
+    u32 moveTarget, side;
 
     if (setTarget != NO_TARGET_OVERRIDE)
         moveTarget = setTarget - 1;
     else
-        moveTarget = gMovesInfo[move].target;
+        moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
+
+    // Special cases
+    if (move == MOVE_CURSE && !IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+        moveTarget = MOVE_TARGET_USER;
 
     switch (moveTarget)
     {
     case MOVE_TARGET_SELECTED:
-        side = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
-        if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
+        side = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
+        if (IsAffectedByFollowMe(gBattlerAttacker, side, move))
+        {
             targetBattler = gSideTimers[side].followmeTarget;
+        }
         else
         {
-            side = GetBattlerSide(gBattlerAttacker);
-            do
-            {
-                targetBattler = Random() % gBattlersCount;
-            } while (targetBattler == gBattlerAttacker || side == GetBattlerSide(targetBattler) || gAbsentBattlerFlags & gBitTable[targetBattler]);
+            targetBattler = SetRandomTarget(gBattlerAttacker);
             if (gMovesInfo[move].type == TYPE_ELECTRIC
-                && AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIDE, gBattlerAttacker, ABILITY_LIGHTNING_ROD, 0, 0)
-                && gBattleMons[targetBattler].ability != ABILITY_LIGHTNING_ROD)
+                && IsAbilityOnOpposingSide(gBattlerAttacker, ABILITY_LIGHTNING_ROD)
+                && GetBattlerAbility(targetBattler) != ABILITY_LIGHTNING_ROD)
             {
                 targetBattler ^= BIT_FLANK;
                 RecordAbilityBattle(targetBattler, gBattleMons[targetBattler].ability);
-                gSpecialStatuses[targetBattler].lightningRodRedirected = 1;
+                gSpecialStatuses[targetBattler].lightningRodRedirected = TRUE;
+            }
+            else if (gMovesInfo[move].type == TYPE_WATER
+                && IsAbilityOnOpposingSide(gBattlerAttacker, ABILITY_STORM_DRAIN)
+                && GetBattlerAbility(targetBattler) != ABILITY_STORM_DRAIN)
+            {
+                targetBattler ^= BIT_FLANK;
+                RecordAbilityBattle(targetBattler, gBattleMons[targetBattler].ability);
+                gSpecialStatuses[targetBattler].stormDrainRedirected = TRUE;
             }
         }
         break;
@@ -6898,39 +6929,29 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
     case MOVE_TARGET_BOTH:
     case MOVE_TARGET_FOES_AND_ALLY:
     case MOVE_TARGET_OPPONENTS_FIELD:
-        targetBattler = GetBattlerAtPosition((GetBattlerPosition(gBattlerAttacker) & BIT_SIDE) ^ BIT_SIDE);
-        if (gAbsentBattlerFlags & gBitTable[targetBattler])
+        targetBattler = GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker)));
+        if (!IsBattlerAlive(targetBattler))
             targetBattler ^= BIT_FLANK;
         break;
     case MOVE_TARGET_RANDOM:
-        side = GetBattlerSide(gBattlerAttacker) ^ BIT_SIDE;
-        if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
+        side = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
+        if (IsAffectedByFollowMe(gBattlerAttacker, side, move))
             targetBattler = gSideTimers[side].followmeTarget;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & MOVE_TARGET_RANDOM)
-        {
-            if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-            {
-                if (Random() & 1)
-                    targetBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-                else
-                    targetBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-            }
-            else
-            {
-                if (Random() & 1)
-                    targetBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-                else
-                    targetBattler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-            }
-            if (gAbsentBattlerFlags & gBitTable[targetBattler])
-                targetBattler ^= BIT_FLANK;
-        }
+            targetBattler = SetRandomTarget(gBattlerAttacker);
         else
-            targetBattler = GetBattlerAtPosition((GetBattlerPosition(gBattlerAttacker) & BIT_SIDE) ^ BIT_SIDE);
+            targetBattler = GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker)));
         break;
     case MOVE_TARGET_USER_OR_SELECTED:
     case MOVE_TARGET_USER:
+    default:
         targetBattler = gBattlerAttacker;
+        break;
+    case MOVE_TARGET_ALLY:
+        if (IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker)))
+            targetBattler = BATTLE_PARTNER(gBattlerAttacker);
+        else
+            targetBattler = gBattlerAttacker;
         break;
     }
 
@@ -7200,6 +7221,11 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
         secondaryEffectChance *= 2;
 
     return secondaryEffectChance;
+}
+
+bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect)
+{
+    return additionalEffect->chance == 0 || CalcSecondaryEffectChance(battler, battlerAbility, additionalEffect) >= 100;
 }
 
 bool32 MoveHasAdditionalEffect(u32 move, u32 moveEffect)
@@ -9063,6 +9089,30 @@ s32 CalculateMoveDamage(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, 
     }
 }
 
+bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect)
+{
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
+         && gMovesInfo[move].additionalEffects[i].self == TRUE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 MoveHasAdditionalEffectWithChance(u32 move, u32 moveEffect, u32 chance)
+{
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
+         && gMovesInfo[move].additionalEffects[i].chance == chance)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
 {
     return (gMovesInfo[move].argument == argument) && MoveHasAdditionalEffectSelf(move, moveEffect);
@@ -9345,6 +9395,14 @@ u8 IsMonDisobedient(void)
     }
 }
 
+// for AI so that typeEffectivenessModifier, weather, abilities and holdEffects are calculated only once
+s32 CalculateMoveDamageVars(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, s32 fixedBasePower, uq4_12_t typeEffectivenessModifier,
+                                          u32 weather, bool32 isCrit, u32 holdEffectAtk, u32 holdEffectDef, u32 abilityAtk, u32 abilityDef)
+{
+    return DoMoveDamageCalcVars(move, battlerAtk, battlerDef, moveType, fixedBasePower, isCrit, FALSE, FALSE,
+                                typeEffectivenessModifier, weather, holdEffectAtk, holdEffectDef, abilityAtk, abilityDef);
+}
+
 static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 moveType, u32 battlerDef, u32 defType, u32 battlerAtk, bool32 recordAbilities)
 {
     uq4_12_t mod = GetTypeModifier(moveType, defType);
@@ -9506,16 +9564,25 @@ uq4_12_t CalcTypeEffectivenessMultiplier(u32 move, u32 moveType, u32 battlerAtk,
     return modifier;
 }
 
-bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect)
+uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef)
 {
-    u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    uq4_12_t modifier = UQ_4_12(1.0);
+    u8 moveType = gMovesInfo[move].type;
+
+    if (move != MOVE_STRUGGLE && moveType != TYPE_MYSTERY)
     {
-        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
-         && gMovesInfo[move].additionalEffects[i].self == TRUE)
-            return TRUE;
+        MulByTypeEffectiveness(&modifier, move, moveType, 0, gSpeciesInfo[speciesDef].types[0], 0, FALSE);
+        if (gSpeciesInfo[speciesDef].types[1] != gSpeciesInfo[speciesDef].types[0])
+            MulByTypeEffectiveness(&modifier, move, moveType, 0, gSpeciesInfo[speciesDef].types[1], 0, FALSE);
+
+        if (moveType == TYPE_GROUND && abilityDef == ABILITY_LEVITATE && !(gFieldStatuses & STATUS_FIELD_GRAVITY))
+            modifier = UQ_4_12(0.0);
+        if (abilityDef == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0) && gMovesInfo[move].power)
+            modifier = UQ_4_12(0.0);
     }
-    return FALSE;
+
+    UpdateMoveResultFlags(modifier);
+    return modifier;
 }
 
 static uq4_12_t GetInverseTypeMultiplier(uq4_12_t multiplier)
@@ -10441,120 +10508,120 @@ bool32 CanUltraBurst(u32 battler)
 
 
 // battle_ai_util.c
-bool32 IsHealingMove(u32 move)
-{
-    return gMovesInfo[move].healingMove;
-}
+// bool32 IsHealingMove(u32 move)
+// {
+//     return gMovesInfo[move].healingMove;
+// }
 
-void RecordKnownMove(u32 battlerId, u32 move)
-{
-    s32 i;
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (BATTLE_HISTORY->usedMoves[battlerId][i] == move)
-            break;
-        if (BATTLE_HISTORY->usedMoves[battlerId][i] == MOVE_NONE)
-        {
-            BATTLE_HISTORY->usedMoves[battlerId][i] = move;
-            // TODO: AI
-            // AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].moves[i] = move;
-            break;
-        }
-    }
-}
+// void RecordKnownMove(u32 battlerId, u32 move)
+// {
+//     s32 i;
+//     for (i = 0; i < MAX_MON_MOVES; i++)
+//     {
+//         if (BATTLE_HISTORY->usedMoves[battlerId][i] == move)
+//             break;
+//         if (BATTLE_HISTORY->usedMoves[battlerId][i] == MOVE_NONE)
+//         {
+//             BATTLE_HISTORY->usedMoves[battlerId][i] = move;
+//             // TODO: AI
+//             // AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].moves[i] = move;
+//             break;
+//         }
+//     }
+// }
 
-s32 CountUsablePartyMons(u32 battlerId)
-{
-    s32 battlerOnField1, battlerOnField2, i, ret;
-    struct Pokemon *party;
+// s32 CountUsablePartyMons(u32 battlerId)
+// {
+//     s32 battlerOnField1, battlerOnField2, i, ret;
+//     struct Pokemon *party;
 
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+//     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+//         party = gPlayerParty;
+//     else
+//         party = gEnemyParty;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-    {
-        battlerOnField1 = gBattlerPartyIndexes[battlerId];
-        battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battlerId)))];
-    }
-    else // In singles there's only one battlerId by side.
-    {
-        battlerOnField1 = gBattlerPartyIndexes[battlerId];
-        battlerOnField2 = gBattlerPartyIndexes[battlerId];
-    }
+//     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+//     {
+//         battlerOnField1 = gBattlerPartyIndexes[battlerId];
+//         battlerOnField2 = gBattlerPartyIndexes[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battlerId)))];
+//     }
+//     else // In singles there's only one battlerId by side.
+//     {
+//         battlerOnField1 = gBattlerPartyIndexes[battlerId];
+//         battlerOnField2 = gBattlerPartyIndexes[battlerId];
+//     }
 
-    ret = 0;
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (i != battlerOnField1 && i != battlerOnField2
-         && GetMonData(&party[i], MON_DATA_HP) != 0
-         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-         && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
-        {
-            ret++;
-        }
-    }
+//     ret = 0;
+//     for (i = 0; i < PARTY_SIZE; i++)
+//     {
+//         if (i != battlerOnField1 && i != battlerOnField2
+//          && GetMonData(&party[i], MON_DATA_HP) != 0
+//          && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+//          && GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
+//         {
+//             ret++;
+//         }
+//     }
 
-    return ret;
-}
+//     return ret;
+// }
 
-bool32 IsAiVsAiBattle(void)
-{
-    // TODO: Flag?
-    return (B_FLAG_AI_VS_AI_BATTLE && FlagGet(B_FLAG_AI_VS_AI_BATTLE));
-}
+// bool32 IsAiVsAiBattle(void)
+// {
+//     // TODO: Flag?
+//     return (B_FLAG_AI_VS_AI_BATTLE && FlagGet(B_FLAG_AI_VS_AI_BATTLE));
+// }
 
-void RecordLastUsedMoveBy(u32 battlerId, u32 move)
-{
-    u8 *index = &BATTLE_HISTORY->moveHistoryIndex[battlerId];
+// void RecordLastUsedMoveBy(u32 battlerId, u32 move)
+// {
+//     u8 *index = &BATTLE_HISTORY->moveHistoryIndex[battlerId];
 
-    if (++(*index) >= AI_MOVE_HISTORY_COUNT)
-        *index = 0;
-    BATTLE_HISTORY->moveHistory[battlerId][*index] = move;
-}
+//     if (++(*index) >= AI_MOVE_HISTORY_COUNT)
+//         *index = 0;
+//     BATTLE_HISTORY->moveHistory[battlerId][*index] = move;
+// }
 
-bool32 BattlerHasAi(u32 battlerId)
-{
-    switch (GetBattlerPosition(battlerId))
-    {
-    case B_POSITION_PLAYER_LEFT:
-        if (IsAiVsAiBattle())
-            return TRUE;
-    default:
-        return FALSE;
-    case B_POSITION_OPPONENT_LEFT:
-        return TRUE;
-    case B_POSITION_PLAYER_RIGHT:
-        if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || IsAiVsAiBattle())
-            return TRUE;
-        else
-            return FALSE;
-    case B_POSITION_OPPONENT_RIGHT:
-        return TRUE;
-    }
-}
+// bool32 BattlerHasAi(u32 battlerId)
+// {
+//     switch (GetBattlerPosition(battlerId))
+//     {
+//     case B_POSITION_PLAYER_LEFT:
+//         if (IsAiVsAiBattle())
+//             return TRUE;
+//     default:
+//         return FALSE;
+//     case B_POSITION_OPPONENT_LEFT:
+//         return TRUE;
+//     case B_POSITION_PLAYER_RIGHT:
+//         if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || IsAiVsAiBattle())
+//             return TRUE;
+//         else
+//             return FALSE;
+//     case B_POSITION_OPPONENT_RIGHT:
+//         return TRUE;
+//     }
+// }
 
-void ClearBattlerItemEffectHistory(u32 battlerId)
-{
-    BATTLE_HISTORY->itemEffects[battlerId] = 0;
-}
+// void ClearBattlerItemEffectHistory(u32 battlerId)
+// {
+//     BATTLE_HISTORY->itemEffects[battlerId] = 0;
+// }
 
-// move checks
-bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect)
-{
-    if (ability == ABILITY_OVERCOAT
-        || (B_POWDER_GRASS >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GRASS))
-        || holdEffect == HOLD_EFFECT_SAFETY_GOGGLES)
-        return FALSE;
-    return TRUE;
-}
+// // move checks
+// bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect)
+// {
+//     if (ability == ABILITY_OVERCOAT
+//         || (B_POWDER_GRASS >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GRASS))
+//         || holdEffect == HOLD_EFFECT_SAFETY_GOGGLES)
+//         return FALSE;
+//     return TRUE;
+// }
 
-void RecordAllMoves(u32 battler)
-{
-    // TODO: AI
-    // memcpy(AI_PARTY->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]].moves, gBattleMons[battler].moves, MAX_MON_MOVES * sizeof(u16));
-}
+// void RecordAllMoves(u32 battler)
+// {
+//     // TODO: AI
+//     // memcpy(AI_PARTY->mons[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]].moves, gBattleMons[battler].moves, MAX_MON_MOVES * sizeof(u16));
+// }
 
 
 // end battle_ai_util.c

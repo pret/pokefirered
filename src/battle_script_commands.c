@@ -20,9 +20,10 @@
 #include "trainer_pokemon_sprites.h"
 #include "field_specials.h"
 #include "battle.h"
+#include "battle_ai_main.h"
+#include "battle_ai_util.h"
 #include "battle_message.h"
 #include "battle_anim.h"
-#include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
 #include "reshow_battle_screen.h"
 #include "battle_controllers.h"
@@ -1934,6 +1935,14 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
     return CalcCritChanceStageArgs(battlerAtk, battlerDef, move, recordAbility, abilityAtk, abilityDef, holdEffectAtk);
 }
 #undef BENEFITS_FROM_LEEK
+
+s32 GetCritHitChance(s32 critChanceIndex)
+{
+    if (critChanceIndex < 0)
+        return -1;
+    else
+        return sCriticalHitChance[critChanceIndex];
+}
 
 static void Cmd_critcalc(void)
 {

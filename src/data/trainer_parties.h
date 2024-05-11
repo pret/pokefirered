@@ -9922,6 +9922,7 @@ static const struct TrainerMon sParty_TestBattle[] = {
     {
         .lvl = 14,
         .species = SPECIES_VENUSAUR,
+        .heldItem = ITEM_VENUSAURITE,
     },
     {
         .lvl = 14,

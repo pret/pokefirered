@@ -148,7 +148,7 @@ void BattleScriptPushCursorAndCallback(const u8 *BS_ptr);
 u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn);
 void ClearVariousBattlerFlags(u32 battler);
 void HandleAction_RunBattleScript(void);
-u8 GetMoveTarget(u16 move, u8 setTarget);
+u32 GetMoveTarget(u16 move, u8 setTarget);
 u8 IsMonDisobedient(void);
 void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1);
 // new
@@ -178,6 +178,7 @@ bool32 IsBattlerProtected(u32 battler, u32 move);
 bool32 IsMoveMakingContact(u32 move, u32 battlerAtk);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
 s32 CalculateMoveDamage(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, s32 fixedBasePower, bool32 isCrit, bool32 randomFactor, bool32 updateFlags);
+bool32 MoveHasAdditionalEffectWithChance(u32 move, u32 moveEffect, u32 chance);
 bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument);
 u32 GetMoveSlot(u16 *moves, u32 move);
 u32 GetBattlerWeight(u32 battler);
@@ -191,6 +192,7 @@ bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2);
 bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2);
 u32 GetBattlerHoldEffectParam(u32 battler);
 uq4_12_t CalcTypeEffectivenessMultiplier(u32 move, u32 moveType, u32 battlerAtk, u32 battlerDef, u32 defAbility, bool32 recordAbilities);
+uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef);
 bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect);
 uq4_12_t GetTypeModifier(u32 atkType, u32 defType);
 u8 GetBattlerType(u32 battler, u8 typeIndex);
@@ -245,17 +247,24 @@ void TryClearRageAndFuryCutter(void);
 bool32 CanMegaEvolve(u32 battler);
 bool32 CanUltraBurst(u32 battler);
 bool32 CanTargetBattler(u32 battlerAtk, u32 battlerDef, u16 move);
+u32 SetRandomTarget(u32 battler);
+bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect);
+u32 CalcRolloutBasePower(u32 battlerAtk, u32 basePower, u32 rolloutTimer);
+u32 CalcFuryCutterBasePower(u32 basePower, u32 furyCutterCounter);
+s32 CalculateMoveDamageVars(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, s32 fixedBasePower, uq4_12_t typeEffectivenessModifier,
+                                          u32 weather, bool32 isCrit, u32 holdEffectAtk, u32 holdEffectDef, u32 abilityAtk, u32 abilityDef);
+
 
 // battle_ai_util.h
-bool32 IsHealingMove(u32 move);
-void RecordKnownMove(u32 battlerId, u32 move);
-s32 CountUsablePartyMons(u32 battlerId);
-bool32 IsAiVsAiBattle(void);
-void RecordLastUsedMoveBy(u32 battlerId, u32 move);
-bool32 BattlerHasAi(u32 battlerId);
-void ClearBattlerItemEffectHistory(u32 battlerId);
-bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect);
-void RecordAllMoves(u32 battler);
+// bool32 IsHealingMove(u32 move);
+// void RecordKnownMove(u32 battlerId, u32 move);
+// s32 CountUsablePartyMons(u32 battlerId);
+// bool32 IsAiVsAiBattle(void);
+// void RecordLastUsedMoveBy(u32 battlerId, u32 move);
+// bool32 BattlerHasAi(u32 battlerId);
+// void ClearBattlerItemEffectHistory(u32 battlerId);
+// bool32 IsAffectedByPowder(u32 battler, u32 ability, u32 holdEffect);
+// void RecordAllMoves(u32 battler);
 
 // end battle_ai_util.h
 

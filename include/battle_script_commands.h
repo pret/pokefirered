@@ -53,6 +53,11 @@ bool32 CanBattlerSwitch(u32 battlerId);
 u8 GetFirstFaintedPartyIndex(u8 battlerId);
 u16 GetNaturePowerMove(void);
 bool32 CanCamouflage(u8 battlerId);
+bool32 IsTelekinesisBannedSpecies(u16 species);
+bool32 CanUseLastResort(u8 battlerId);
+bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType);
+s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, u32 abilityAtk, u32 abilityDef, u32 holdEffectAtk);
+s32 GetCritHitChance(s32 critChanceIndex);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
 extern const struct StatFractions gAccuracyStageRatios[];

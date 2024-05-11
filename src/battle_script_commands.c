@@ -29,6 +29,7 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "rtc.h"
+#include "wild_encounter.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
@@ -15026,10 +15027,9 @@ static void Cmd_handleballthrow(void)
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
             case ITEM_DIVE_BALL:
-                // TODO: gIsFishingEncounter and gIsSurfingEncounter
-                // if (GetCurrentMapType() == MAP_TYPE_UNDERWATER
-                //     || (B_DIVE_BALL_MODIFIER >= GEN_4 && (gIsFishingEncounter || gIsSurfingEncounter)))
-                //     ballMultiplier = 350;
+                if (GetCurrentMapType() == MAP_TYPE_UNDERWATER
+                    || (B_DIVE_BALL_MODIFIER >= GEN_4 && (gIsFishingEncounter || gIsSurfingEncounter)))
+                    ballMultiplier = 350;
                 break;
             case ITEM_NEST_BALL:
                 if (B_NEST_BALL_MODIFIER >= GEN_6)
@@ -15079,16 +15079,15 @@ static void Cmd_handleballthrow(void)
                     ballMultiplier = 200;
                 break;
             case ITEM_LURE_BALL:
-                // TODO: gIsFishingEncounter
-                // if (gIsFishingEncounter)
-                // {
-                //     if (B_LURE_BALL_MODIFIER >= GEN_8)
-                //         ballMultiplier = 400;
-                //     else if (B_LURE_BALL_MODIFIER >= GEN_7)
-                //         ballMultiplier = 500;
-                //     else
-                //         ballMultiplier = 300;
-                // }
+                if (gIsFishingEncounter)
+                {
+                    if (B_LURE_BALL_MODIFIER >= GEN_8)
+                        ballMultiplier = 400;
+                    else if (B_LURE_BALL_MODIFIER >= GEN_7)
+                        ballMultiplier = 500;
+                    else
+                        ballMultiplier = 300;
+                }
                 break;
             case ITEM_MOON_BALL:
             {

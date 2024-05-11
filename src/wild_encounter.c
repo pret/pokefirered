@@ -33,6 +33,8 @@ struct WildEncounterData
 
 static EWRAM_DATA struct WildEncounterData sWildEncounterData = {};
 static EWRAM_DATA bool8 sWildEncountersDisabled = FALSE;
+EWRAM_DATA bool8 gIsFishingEncounter = 0;
+EWRAM_DATA bool8 gIsSurfingEncounter = 0;
 
 static bool8 UnlockedTanobyOrAreNotInTanoby(void);
 static u32 GenerateUnownPersonalityByLetter(u8 letter);
@@ -428,7 +430,8 @@ bool8 StandardWildEncounter(u32 currMetatileAttrs, u16 previousMetatileBehavior)
             else // try a regular surfing encounter
             {
                 if (TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, WILD_CHECK_REPEL) == TRUE)
-                {
+                {   
+                    gIsSurfingEncounter = TRUE;
                     StartWildBattle();
                     return TRUE;
                 }
@@ -520,6 +523,7 @@ void FishingWildEncounter(u8 rod)
 {
     GenerateFishingEncounter(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
     IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
+    gIsFishingEncounter = TRUE;
     StartWildBattle();
 }
 

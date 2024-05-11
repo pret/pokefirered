@@ -127,6 +127,7 @@ bool8 TryRunFromBattle(u8 battler);
 void HandleAction_Run(void);
 
 u8 GetBattlerForBattleScript(u8 caseId);
+bool32 IsBattlerMarkedForControllerExec(u32 battler);
 void MarkBattlerForControllerExec(u8 battlerId);
 void MarkBattlerReceivedLinkData(u8 battlerId);
 const u8* CancelMultiTurnMoves(u32 battler);

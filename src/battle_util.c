@@ -518,6 +518,14 @@ u8 GetBattlerForBattleScript(u8 caseId)
     return ret;
 }
 
+bool32 IsBattlerMarkedForControllerExec(u32 battler)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        return (gBattleControllerExecFlags & (gBitTable[battler] << 0x1C)) != 0;
+    else
+        return (gBattleControllerExecFlags & (gBitTable[battler])) != 0;
+}
+
 void MarkBattlerForControllerExec(u8 battlerId)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)

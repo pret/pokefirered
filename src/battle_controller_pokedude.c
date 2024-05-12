@@ -735,7 +735,7 @@ static void PokedudeHandleChoosePokemon(u32 battler)
     gBattleControllerData[battler] = CreateTask(TaskDummy, 0xFF);
     gTasks[gBattleControllerData[battler]].data[0] = gBattleResources->bufferA[battler][1] & 0xF;
     *(&gBattleStruct->battlerPreventingSwitchout) = gBattleResources->bufferA[battler][1] >> 4;
-    *(&gBattleStruct->playerPartyIdx) = gBattleResources->bufferA[battler][2];
+    *(&gBattleStruct->prevSelectedPartySlot) = gBattleResources->bufferA[battler][2];
     *(&gBattleStruct->abilityPreventingSwitchout) = (gBattleResources->bufferA[battler][3] & 0xFF) | (gBattleResources->bufferA[battler][7] << 8);
     for (i = 0; i < 3; ++i)
         gBattlePartyCurrentOrder[i] = gBattleResources->bufferA[battler][4 + i];

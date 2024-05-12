@@ -59,7 +59,7 @@ struct TrainerBattleParameter
 
 static void DoSafariBattle(void);
 static void DoGhostBattle(void);
-static void DoStandardWildBattle(void);
+static void DoStandardWildBattle(bool32 isDouble);
 static void CB2_EndWildBattle(void);
 static u8 GetWildBattleTransition(void);
 static u8 GetTrainerBattleTransition(void);
@@ -242,16 +242,23 @@ void StartWildBattle(void)
     else if (CheckSilphScopeInPokemonTower(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
         DoGhostBattle();
     else
-        DoStandardWildBattle();
+        DoStandardWildBattle(FALSE);
 }
 
-static void DoStandardWildBattle(void)
+void StartDoubleWildBattle(void)
+{
+    DoStandardWildBattle(TRUE);
+}
+
+static void DoStandardWildBattle(bool32 isDouble)
 {
     LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
+    if (isDouble)
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -564,49 +571,17 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     u8 i;
     u8 sum;
     u32 count = numMons;
+    const struct TrainerMon *party;
 
-    if (gTrainers[opponentId].partySize < count)
-        count = gTrainers[opponentId].partySize;
+    if (GetTrainerPartySizeFromId(opponentId) < count)
+        count = GetTrainerPartySizeFromId(opponentId);
+
     sum = 0;
-    switch (gTrainers[opponentId].partyFlags)
-    {
-    case 0:
-        {
-            const struct TrainerMonNoItemDefaultMoves *party;
 
-            party = gTrainers[opponentId].party.NoItemDefaultMoves;
-            for (i = 0; i < count; ++i)
-                sum += party[i].lvl;
-        }
-        break;
-    case F_TRAINER_PARTY_CUSTOM_MOVESET:
-        {
-            const struct TrainerMonNoItemCustomMoves *party;
+    party = GetTrainerPartyFromId(opponentId);
+    for (i = 0; i < count && party != NULL; i++)
+        sum += party[i].lvl;
 
-            party = gTrainers[opponentId].party.NoItemCustomMoves;
-            for (i = 0; i < count; ++i)
-                sum += party[i].lvl;
-        }
-        break;
-    case F_TRAINER_PARTY_HELD_ITEM:
-        {
-            const struct TrainerMonItemDefaultMoves *party;
-
-            party = gTrainers[opponentId].party.ItemDefaultMoves;
-            for (i = 0; i < count; ++i)
-                sum += party[i].lvl;
-        }
-        break;
-    case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
-        {
-            const struct TrainerMonItemCustomMoves *party;
-
-            party = gTrainers[opponentId].party.ItemCustomMoves;
-            for (i = 0; i < count; ++i)
-                sum += party[i].lvl;
-        }
-        break;
-    }
     return sum;
 }
 
@@ -628,29 +603,30 @@ static u8 GetTrainerBattleTransition(void)
     u8 transitionType;
     u8 enemyLevel;
     u8 playerLevel;
+    u32 trainerId = SanitizeTrainerId(gTrainerBattleOpponent_A);
 
-    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
+    if (trainerId == TRAINER_SECRET_BASE)
         return B_TRANSITION_BLUE;
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR)
+    if (gTrainers[trainerId].trainerClass == TRAINER_CLASS_ELITE_FOUR)
     {
-        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LORELEI || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LORELEI_2)
+        if (trainerId == TRAINER_ELITE_FOUR_LORELEI || trainerId == TRAINER_ELITE_FOUR_LORELEI_2)
             return B_TRANSITION_LORELEI;
-        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_BRUNO || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_BRUNO_2)
+        if (trainerId == TRAINER_ELITE_FOUR_BRUNO || trainerId == TRAINER_ELITE_FOUR_BRUNO_2)
             return B_TRANSITION_BRUNO;
-        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_AGATHA || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_AGATHA_2)
+        if (trainerId == TRAINER_ELITE_FOUR_AGATHA || trainerId == TRAINER_ELITE_FOUR_AGATHA_2)
             return B_TRANSITION_AGATHA;
-        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LANCE || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LANCE_2)
+        if (trainerId == TRAINER_ELITE_FOUR_LANCE || trainerId == TRAINER_ELITE_FOUR_LANCE_2)
             return B_TRANSITION_LANCE;
         return B_TRANSITION_BLUE;
     }
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION)
+    if (gTrainers[trainerId].trainerClass == TRAINER_CLASS_CHAMPION)
         return B_TRANSITION_BLUE;
-    if (gTrainers[gTrainerBattleOpponent_A].doubleBattle == TRUE)
+    if (gTrainers[trainerId].doubleBattle == TRUE)
         minPartyCount = 2; // double battles always at least have 2 pokemon.
     else
         minPartyCount = 1;
     transitionType = GetBattleTransitionTypeByMap();
-    enemyLevel = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent_A, minPartyCount);
+    enemyLevel = GetSumOfEnemyPartyLevel(trainerId, minPartyCount);
     playerLevel = GetSumOfPlayerPartyLevel(minPartyCount);
     if (enemyLevel < playerLevel)
         return sBattleTransitionTable_Trainer[transitionType][0];

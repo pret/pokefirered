@@ -1219,6 +1219,24 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
             if (IsSelectedMonNotEgg((u8 *)slotPtr))
                 TryEnterMonForMinigame(taskId, (u8)*slotPtr);
             break;
+        case PARTY_ACTION_CHOOSE_FAINTED_MON:
+        {
+            u8 partyId = GetPartyIdFromBattleSlot((u8)*slotPtr);
+            if (GetMonData(&gPlayerParty[*slotPtr], MON_DATA_HP) > 0
+                || GetMonData(&gPlayerParty[*slotPtr], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG
+                || ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && partyId >= (PARTY_SIZE / 2)))
+            {
+                // Can't select if egg, alive, or doesn't belong to you
+                PlaySE(SE_FAILURE);
+            }
+            else
+            {
+                PlaySE(SE_SELECT);
+                gSelectedMonPartyId = partyId;
+                Task_ClosePartyMenu(taskId);
+            }
+            break;
+        }
         default:
         case PARTY_ACTION_ABILITY_PREVENTS:
         case PARTY_ACTION_SWITCHING:
@@ -6307,10 +6325,10 @@ void ChooseMonForWirelessMinigame(void)
 
 static u8 GetPartyLayoutFromBattleType(void)
 {
-    if (IsDoubleBattle() == FALSE)
-        return PARTY_LAYOUT_SINGLE;
     if (IsMultiBattle() == TRUE)
         return PARTY_LAYOUT_MULTI;
+    if (!IsDoubleBattle() || gPlayerPartyCount == 1)
+        return PARTY_LAYOUT_SINGLE;
     return PARTY_LAYOUT_DOUBLE;
 }
 
@@ -6431,7 +6449,7 @@ static bool8 TrySwitchInPokemon(void)
         StringExpandPlaceholders(gStringVar4, gText_EggCantBattle);
         return FALSE;
     }
-    if (GetPartyIdFromBattleSlot(slot) == gBattleStruct->playerPartyIdx)
+    if (GetPartyIdFromBattleSlot(slot) == gBattleStruct->prevSelectedPartySlot)
     {
         GetMonNickname(&gPlayerParty[slot], gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_PkmnAlreadySelected);
@@ -6560,12 +6578,12 @@ static void BufferBattlePartyOrderBySide(u8 *partyBattleOrder, u8 flankId, u8 ba
     {
         j = 1;
         partyIndexes[0] = gBattlerPartyIndexes[leftBattler];
-        for (i = 0; i < PARTY_SIZE; ++i)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (i != partyIndexes[0])
             {
                 partyIndexes[j] = i;
-                ++j;
+                j++;
             }
         }
     }
@@ -6574,16 +6592,16 @@ static void BufferBattlePartyOrderBySide(u8 *partyBattleOrder, u8 flankId, u8 ba
         j = 2;
         partyIndexes[0] = gBattlerPartyIndexes[leftBattler];
         partyIndexes[1] = gBattlerPartyIndexes[rightBattler];
-        for (i = 0; i < PARTY_SIZE; ++i)
+        for (i = 0; i < PARTY_SIZE; i++)
         {
             if (i != partyIndexes[0] && i != partyIndexes[1])
             {
                 partyIndexes[j] = i;
-                ++j;
+                j++;
             }
         }
     }
-    for (i = 0; i < 3; ++i)
+    for (i = 0; i < 3; i++)
         partyBattleOrder[i] = (partyIndexes[0 + (i * 2)] << 4) | partyIndexes[1 + (i * 2)];
 }
 

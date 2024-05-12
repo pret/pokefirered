@@ -14,9 +14,6 @@ PewterCity_Gym_Text_BrockIntro::
     .string "Fine, then!\n"
     .string "Show me your best!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
-@ NOTE: This defeat text actually causes a buffer overflow. It's too long for the gDisplayedStringBattle
-@ buffer that it's put into, and it stomps all over the gBattleTextBuffs after, as well as the otherwise
-@ unused array after that, sFlickerArray. Perhaps that's the reason why said array exists.
 PewterCity_Gym_Text_BrockDefeat::
     .string "I took you for granted, and so\n"
     .string "I lost.\p"

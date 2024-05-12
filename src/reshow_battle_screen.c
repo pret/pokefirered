@@ -236,7 +236,7 @@ static void CreateBattlerSprite(u8 battler)
             gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
             gSprites[gBattlerSpriteIds[battler]].data[2] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
-            StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], gBattleMonForms[battler]);
+            StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 0);
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT)
         {
@@ -270,7 +270,7 @@ static void CreateBattlerSprite(u8 battler)
             gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
             gSprites[gBattlerSpriteIds[battler]].data[2] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
-            StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], gBattleMonForms[battler]);
+            StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 0);
         }
         gSprites[gBattlerSpriteIds[battler]].invisible = gBattleSpritesDataPtr->battlerData[battler].invisible;
     }
@@ -306,9 +306,10 @@ static void CreateHealthboxSprite(u8 battler)
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
                 SetHealthboxSpriteInvisible(healthboxSpriteId);
         }
-        else if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI) && GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
-        {    
-            SetHealthboxSpriteInvisible(healthboxSpriteId);
+        else if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
+        {
+            if (!IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battler]]))
+                SetHealthboxSpriteInvisible(healthboxSpriteId);
         }
     }
 }

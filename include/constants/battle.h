@@ -75,6 +75,7 @@
 #define IS_BATTLE_TYPE_GHOST_WITH_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && (flags) & BATTLE_TYPE_GHOST_UNVEILED)
 #define WILD_DOUBLE_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER))))
 #define BATTLE_TWO_VS_ONE_OPPONENT ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gTrainerBattleOpponent_B == 0xFFFF))
+#define BATTLE_TYPE_HAS_AI          (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER | BATTLE_TYPE_INGAME_PARTNER)
 
 #define RIVAL_BATTLE_HEAL_AFTER  1
 #define RIVAL_BATTLE_TUTORIAL    3
@@ -211,11 +212,6 @@
 #define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 28)
 #define HITMARKER_FAINTED2(battler)     ((1 << 28) << battler)
 #define HITMARKER_STRING_PRINTED        (1 << 29)
-// TODO: old hitmarkers for compatability, remove with new battle system
-#define HITMARKER_SKIP_DMG_TRACK        (1 << 30)
-#define HITMARKER_IGNORE_ON_AIR         (1 << 31)
-#define HITMARKER_IGNORE_UNDERGROUND    (1 << 0)
-#define HITMARKER_IGNORE_UNDERWATER     (1 << 1)
 
 
 // Per-side statuses that affect an entire party
@@ -226,7 +222,6 @@
 #define SIDE_STATUS_SAFEGUARD               (1 << 5)
 #define SIDE_STATUS_FUTUREATTACK            (1 << 6)
 #define SIDE_STATUS_MIST                    (1 << 8)
-#define SIDE_STATUS_SPIKES_DAMAGED          (1 << 9) // TODO: remove with new battle system
 // (1 << 9) previously was SIDE_STATUS_SPIKES_DAMAGED
 #define SIDE_STATUS_TAILWIND                (1 << 10)
 #define SIDE_STATUS_AURORA_VEIL             (1 << 11)

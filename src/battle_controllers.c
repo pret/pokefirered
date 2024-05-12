@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
-#include "battle_ai_script_commands.h"
+#include "battle_ai_main.h"
+#include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
@@ -69,8 +70,8 @@ void SetUpBattleVars(void)
     HandleLinkBattleSetup();
     gBattleControllerExecFlags = 0;
     ClearBattleAnimationVars();
-    ClearBattleMonForms();
-    BattleAI_HandleItemUseBeforeAISetup();
+    BattleAI_SetupItems();
+	BattleAI_SetupFlags();
 }
 
 void InitBattleControllers(void)
@@ -313,16 +314,13 @@ static void SetBattlePartyIds(void)
     {
         for (i = 0; i < gBattlersCount; i++)
         {
-            for (j = 0; j < PARTY_SIZE; ++j)
+            for (j = 0; j < PARTY_SIZE; j++)
             {
                 if (i < 2)
                 {
-                    if (GET_BATTLER_SIDE2(i) == B_SIDE_PLAYER)
+                    if (GetBattlerSide(i) == B_SIDE_PLAYER)
                     {
-                        if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
-                         && !GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG))
+                        if (IsValidForBattle(&gPlayerParty[j]))
                         {
                             gBattlerPartyIndexes[i] = j;
                             break;
@@ -330,10 +328,7 @@ static void SetBattlePartyIds(void)
                     }
                     else
                     {
-                        if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
-                         && !GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG))
+                        if (IsValidForBattle(&gEnemyParty[j]))
                         {
                             gBattlerPartyIndexes[i] = j;
                             break;
@@ -342,13 +337,9 @@ static void SetBattlePartyIds(void)
                 }
                 else
                 {
-                    if (GET_BATTLER_SIDE2(i) == B_SIDE_PLAYER)
+                    if (GetBattlerSide(i) == B_SIDE_PLAYER)
                     {
-                        if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != SPECIES_NONE  // Probably a typo by Game Freak. The rest use SPECIES2.
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
-                         && !GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG)
-                         && gBattlerPartyIndexes[i - 2] != j)
+                        if (IsValidForBattle(&gPlayerParty[j]) && gBattlerPartyIndexes[i - 2] != j)
                         {
                             gBattlerPartyIndexes[i] = j;
                             break;
@@ -356,19 +347,24 @@ static void SetBattlePartyIds(void)
                     }
                     else
                     {
-                        if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
-                         && !GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG)
-                         && gBattlerPartyIndexes[i - 2] != j)
+                        if (IsValidForBattle(&gEnemyParty[j]) && gBattlerPartyIndexes[i - 2] != j)
                         {
                             gBattlerPartyIndexes[i] = j;
                             break;
                         }
                     }
+
+                    // No valid mons were found. Add the empty slot.
+                    if (gBattlerPartyIndexes[i - 2] == 0)
+                        gBattlerPartyIndexes[i] = 1;
+                    else
+                        gBattlerPartyIndexes[i] = 0;
                 }
             }
         }
+
+        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+            gBattlerPartyIndexes[1] = 0, gBattlerPartyIndexes[3] = 3;
     }
 }
 
@@ -837,7 +833,7 @@ void BtlController_EmitChooseAction(u32 battler, u32 bufferId, u8 action, u16 it
 }
 
 // Unused
-static void BtlController_EmitUnknownYesNoBox(u32 battler, u32 bufferId, u32 arg1) // TODO: Does the function name make sense for pokefirered?
+static void BtlController_EmitUnknownYesNoBox(u32 battler, u32 bufferId, u32 arg1)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_UNKNOWNYESNOBOX;
     gBattleResources->transferBuffer[1] = arg1;

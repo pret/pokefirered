@@ -54,7 +54,6 @@ extern const u8 gStatusConditionString_IceJpn[8];
 extern const u8 gStatusConditionString_ConfusionJpn[8];
 extern const u8 gStatusConditionString_LoveJpn[8];
 extern const u8 *const gStatusConditionStringsTable[7][2];
-extern const struct TrainerMoney gTrainerMoneyTable[];
 
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
@@ -86,7 +85,6 @@ void SwitchPartyOrder(u32 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
-bool8 TryRunFromBattle(u8 battler);
 s8 GetMovePriority(u32 battlerId, u16 move);
 s8 GetChosenMovePriority(u32 battlerId);
 u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect);

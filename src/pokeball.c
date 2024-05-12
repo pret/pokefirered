@@ -672,8 +672,10 @@ static void SpriteCB_BallThrow_Shake(struct Sprite *sprite)
 #define tCryTaskSpecies         data[0]
 #define tCryTaskPan             data[1]
 #define tCryTaskWantedCry       data[2]
-#define tCryTaskMonPtr1         data[3]
-#define tCryTaskMonPtr2         data[4]
+#define tCryTaskBattler         data[3]
+#define tCryTaskMonSpriteId     data[4]
+#define tCryTaskMonPtr1         data[5]
+#define tCryTaskMonPtr2         data[6]
 #define tCryTaskFrames          data[10]
 #define tCryTaskState           data[15]
 
@@ -682,15 +684,15 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
     u8 wantedCry = gTasks[taskId].tCryTaskWantedCry;
     s8 pan = gTasks[taskId].tCryTaskPan;
     u16 species = gTasks[taskId].tCryTaskSpecies;
+    u8 battlerId = gTasks[taskId].tCryTaskBattler;
+    u8 monSpriteId = gTasks[taskId].tCryTaskMonSpriteId;
     struct Pokemon *mon = (void *)(u32)((gTasks[taskId].tCryTaskMonPtr1 << 16) | (u16)(gTasks[taskId].tCryTaskMonPtr2));
 
     switch (gTasks[taskId].tCryTaskState)
     {
     case 0:
     default:
-        if (gTasks[taskId].data[8] < 3)
-            gTasks[taskId].data[8]++;
-        else
+        if (gSprites[monSpriteId].affineAnimEnded)
             gTasks[taskId].tCryTaskState = wantedCry + 1;
         break;
     case 1:
@@ -699,7 +701,7 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             PlayCry_ByMode(species, pan, CRY_MODE_NORMAL);
         else
             PlayCry_ByMode(species, pan, CRY_MODE_WEAK);
-
+        gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
         DestroyTask(taskId);
         break;
     case 2:
@@ -716,6 +718,7 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
             else
                 PlayCry_ReleaseDouble(species, pan, CRY_MODE_WEAK_DOUBLES);
 
+            gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
             DestroyTask(taskId);
         }
         else
@@ -755,6 +758,7 @@ static void Task_PlayCryWhenReleasedFromBall(u8 taskId)
         else
             PlayCry_ReleaseDouble(species, pan, CRY_MODE_WEAK);
 
+        gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = FALSE;
         DestroyTask(taskId);
         break;
     }
@@ -773,7 +777,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 
     if (gMain.inBattle)
     {
-        struct Pokemon *mon;
+        struct Pokemon *mon, *illusionMon;
         u16 species;
         s8 pan;
         u16 wantedCryCase;
@@ -812,10 +816,20 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
         else
             wantedCryCase = 2;
 
+        gBattleSpritesDataPtr->healthBoxesData[battlerId].waitForCry = TRUE;
+
         taskId = CreateTask(Task_PlayCryWhenReleasedFromBall, 3);
-        gTasks[taskId].tCryTaskSpecies = species;
+
+        illusionMon = GetIllusionMonPtr(battlerId);
+        if (illusionMon != NULL)
+            gTasks[taskId].tCryTaskSpecies = GetMonData(illusionMon, MON_DATA_SPECIES);
+        else
+            gTasks[taskId].tCryTaskSpecies = GetMonData(mon, MON_DATA_SPECIES);
+
         gTasks[taskId].tCryTaskPan = pan;
         gTasks[taskId].tCryTaskWantedCry = wantedCryCase;
+        gTasks[taskId].tCryTaskBattler = battlerId;
+        gTasks[taskId].tCryTaskMonSpriteId = gBattlerSpriteIds[sprite->sBattler];
         gTasks[taskId].tCryTaskMonPtr1 = (u32)(mon) >> 16;
         gTasks[taskId].tCryTaskMonPtr2 = (u32)(mon);
         gTasks[taskId].tCryTaskState = 0;
@@ -829,6 +843,8 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 #undef tCryTaskSpecies
 #undef tCryTaskPan
 #undef tCryTaskWantedCry
+#undef tCryTaskBattler
+#undef tCryTaskMonSpriteId
 #undef tCryTaskMonPtr1
 #undef tCryTaskMonPtr2
 #undef tCryTaskFrames

@@ -20,14 +20,16 @@
 #include "trainer_pokemon_sprites.h"
 #include "field_specials.h"
 #include "battle.h"
+#include "battle_ai_main.h"
+#include "battle_ai_util.h"
 #include "battle_message.h"
 #include "battle_anim.h"
-#include "battle_ai_script_commands.h"
 #include "battle_scripts.h"
 #include "reshow_battle_screen.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "rtc.h"
+#include "wild_encounter.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
@@ -321,7 +323,6 @@ static const u16 sWhiteOutBadgeMoney[9] = { 8, 16, 24, 36, 48, 64, 80, 100, 120 
 #define TAG_LVLUP_BANNER_MON_ICON 55130
 
 static void TrySetDestinyBondToHappen(void);
-static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
 static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr);
 static void InitLevelUpBanner(void);
 static bool8 SlideInLevelUpBanner(void);
@@ -1400,14 +1401,13 @@ static void Cmd_attackcanceler(void)
     }
 
     // Z-moves and Max Moves bypass protection, but deal reduced damage (factored in AccumulateOtherModifiers)
-    // TODO: Z-Moves and Dynamax
-    // if ((gBattleStruct->zmove.active || IsMaxMove(gCurrentMove))
-    //      && IS_BATTLER_PROTECTED(gBattlerTarget))
-    // {
-    //     BattleScriptPush(cmd->nextInstr);
-    //     gBattlescriptCurrInstr = BattleScript_CouldntFullyProtect;
-    //     return;
-    // }
+    if ((gBattleStruct->zmove.active || IsMaxMove(gCurrentMove))
+         && IS_BATTLER_PROTECTED(gBattlerTarget))
+    {
+        BattleScriptPush(cmd->nextInstr);
+        gBattlescriptCurrInstr = BattleScript_CouldntFullyProtect;
+        return;
+    }
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -1935,6 +1935,14 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
 }
 #undef BENEFITS_FROM_LEEK
 
+s32 GetCritHitChance(s32 critChanceIndex)
+{
+    if (critChanceIndex < 0)
+        return -1;
+    else
+        return sCriticalHitChance[critChanceIndex];
+}
+
 static void Cmd_critcalc(void)
 {
     CMD_ARGS();
@@ -1973,19 +1981,6 @@ static void Cmd_damagecalc(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-void AI_CalcDmg(u8 attacker, u8 defender)
-{
-    u32 sideStatus = gSideStatuses[GET_BATTLER_SIDE(defender)];
-    u8 moveType;
-    s32 critChance;
-
-    GET_MOVE_TYPE(gCurrentMove, moveType);
-    critChance = CalcCritChanceStage(attacker, defender, gCurrentMove, TRUE);
-    gIsCriticalHit = RandomWeighted(RNG_CRITICAL_HIT, sCriticalHitChance[critChance] - 1, 1);
-    gBattleMoveDamage = CalculateMoveDamage(gCurrentMove, attacker, defender, moveType, 0, gIsCriticalHit, TRUE, TRUE);
-    CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget), TRUE);
-}
-
 static void Cmd_typecalc(void)
 {
     CMD_ARGS();
@@ -1996,127 +1991,6 @@ static void Cmd_typecalc(void)
     CalcTypeEffectivenessMultiplier(gCurrentMove, moveType, gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget), TRUE);
 
     gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-// Same as ModulateDmgByType except different arguments
-static void ModulateDmgByType2(uq4_12_t multiplier, u16 move, u8 *flags)
-{
-    gBattleMoveDamage = uq4_12_multiply(gBattleMoveDamage, multiplier);
-    if (gBattleMoveDamage == 0 && multiplier != 0)
-        gBattleMoveDamage = 1;
-
-    switch (multiplier)
-    {
-    case UQ_4_12(0.0):
-        *flags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-        *flags &= ~MOVE_RESULT_NOT_VERY_EFFECTIVE;
-        *flags &= ~MOVE_RESULT_SUPER_EFFECTIVE;
-        break;
-    case UQ_4_12(0.5):
-        if (gMovesInfo[move].power && !(*flags & MOVE_RESULT_NO_EFFECT))
-        {
-            if (*flags & MOVE_RESULT_SUPER_EFFECTIVE)
-                *flags &= ~MOVE_RESULT_SUPER_EFFECTIVE;
-            else
-                *flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-        }
-        break;
-    case UQ_4_12(2.0):
-        if (gMovesInfo[move].power && !(*flags & MOVE_RESULT_NO_EFFECT))
-        {
-            if (*flags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
-                *flags &= ~MOVE_RESULT_NOT_VERY_EFFECTIVE;
-            else
-                *flags |= MOVE_RESULT_SUPER_EFFECTIVE;
-        }
-        break;
-    }
-}
-
-u8 TypeCalc(u16 move, u8 attacker, u8 defender)
-{
-    s32 i = 0;
-    u8 flags = 0;
-    u8 moveType;
-
-    if (move == MOVE_STRUGGLE)
-        return 0;
-
-    moveType = gMovesInfo[move].type;
-
-    // check stab
-    if (IS_BATTLER_OF_TYPE(attacker, moveType))
-    {
-        gBattleMoveDamage = gBattleMoveDamage * 15;
-        gBattleMoveDamage = gBattleMoveDamage / 10;
-    }
-
-    if (gBattleMons[defender].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
-    {
-        flags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
-    }
-    else
-    {
-        ModulateDmgByType2(gTypeEffectivenessTable[moveType][gBattleMons[defender].type1], move, &flags);
-        ModulateDmgByType2(gTypeEffectivenessTable[moveType][gBattleMons[defender].type2], move, &flags);
-    }
-
-    if (gBattleMons[defender].ability == ABILITY_WONDER_GUARD && !(flags & MOVE_RESULT_MISSED)
-        && AttacksThisTurn(attacker, move) == 2
-        && (!(flags & MOVE_RESULT_SUPER_EFFECTIVE) || ((flags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) == (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
-        && gMovesInfo[move].power)
-    {
-        flags |= MOVE_RESULT_MISSED;
-    }
-    return flags;
-}
-
-u8 AI_TypeCalc(u16 move, u16 targetSpecies, u16 targetAbility)
-{
-    s32 i = 0;
-    u8 flags = 0;
-    u8 type1 = gSpeciesInfo[targetSpecies].types[0], type2 = gSpeciesInfo[targetSpecies].types[1];
-    u8 moveType;
-
-    if (move == MOVE_STRUGGLE)
-        return 0;
-
-    moveType = gMovesInfo[move].type;
-
-    if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
-    {
-        flags = MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE;
-    }
-    else
-    {
-        ModulateDmgByType2(gTypeEffectivenessTable[moveType][type1], move, &flags);
-        ModulateDmgByType2(gTypeEffectivenessTable[moveType][type2], move, &flags);
-    }
-    if (targetAbility == ABILITY_WONDER_GUARD
-     && (!(flags & MOVE_RESULT_SUPER_EFFECTIVE) || ((flags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) == (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
-     && gMovesInfo[move].power)
-        flags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-    return flags;
-}
-
-// Multiplies the damage by a random factor between 85% to 100% inclusive
-static inline void ApplyRandomDmgMultiplier(void)
-{
-    u16 rand = Random();
-    u16 randPercent = 100 - (rand % 16);
-
-    if (gBattleMoveDamage != 0)
-    {
-        gBattleMoveDamage *= randPercent;
-        gBattleMoveDamage /= 100;
-        if (gBattleMoveDamage == 0)
-            gBattleMoveDamage = 1;
-    }
-}
-
-static void Unused_ApplyRandomDmgMultiplier(void)
-{
-    ApplyRandomDmgMultiplier();
 }
 
 static void Cmd_adjustdamage(void)
@@ -6499,7 +6373,7 @@ static void Cmd_getswitchedmondata(void)
     u32 battler = GetBattlerForBattleScript(cmd->battler);
     if (gBattleControllerExecFlags)
         return;
-        
+
     gBattlerPartyIndexes[battler] = gBattleStruct->monToSwitchIntoId[battler];
     BtlController_EmitGetMonData(battler, BUFFER_A, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[battler]]);
     MarkBattlerForControllerExec(battler);
@@ -7654,14 +7528,11 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     }
     else
     {
-        // TODO: Update Trainer struct
-        // const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
-        // if (party == NULL)
-        //     return 20;
-        // lastMonLevel = party[GetTrainerPartySizeFromId(trainerId) - 1].lvl;
-        // trainerMoney = gTrainerClasses[GetTrainerClassFromId(trainerId)].money;
-        lastMonLevel = 10;
-        trainerMoney = 100;
+        const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
+        if (party == NULL)
+            return 20;
+        lastMonLevel = party[GetTrainerPartySizeFromId(trainerId) - 1].lvl;
+        trainerMoney = gTrainerClasses[GetTrainerClassFromId(trainerId)].money;
 
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
             moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
@@ -13072,24 +12943,6 @@ static void Cmd_copymovepermanently(void)
     }
 }
 
-static u8 AttacksThisTurn(u8 battlerId, u16 move) // Note: returns 1 if it's a charging turn, otherwise 2
-{
-    // first argument is unused
-    if (gMovesInfo[move].effect == EFFECT_SOLAR_BEAM
-        && (gBattleWeather & B_WEATHER_SUN))
-        return 2;
-
-    if (gMovesInfo[move].effect == EFFECT_TWO_TURNS_ATTACK
-     || gMovesInfo[move].effect == EFFECT_SOLAR_BEAM
-     || gMovesInfo[move].effect == EFFECT_SEMI_INVULNERABLE
-     || gMovesInfo[move].effect == EFFECT_BIDE)
-    {
-        if ((gHitMarker & HITMARKER_CHARGING))
-            return 1;
-    }
-    return 2;
-}
-
 static void Cmd_trychoosesleeptalkmove(void)
 {
     CMD_ARGS(const u8 *failInstr);
@@ -15171,10 +15024,9 @@ static void Cmd_handleballthrow(void)
                     ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
                 break;
             case ITEM_DIVE_BALL:
-                // TODO: gIsFishingEncounter and gIsSurfingEncounter
-                // if (GetCurrentMapType() == MAP_TYPE_UNDERWATER
-                //     || (B_DIVE_BALL_MODIFIER >= GEN_4 && (gIsFishingEncounter || gIsSurfingEncounter)))
-                //     ballMultiplier = 350;
+                if (GetCurrentMapType() == MAP_TYPE_UNDERWATER
+                    || (B_DIVE_BALL_MODIFIER >= GEN_4 && (gIsFishingEncounter || gIsSurfingEncounter)))
+                    ballMultiplier = 350;
                 break;
             case ITEM_NEST_BALL:
                 if (B_NEST_BALL_MODIFIER >= GEN_6)
@@ -15224,16 +15076,15 @@ static void Cmd_handleballthrow(void)
                     ballMultiplier = 200;
                 break;
             case ITEM_LURE_BALL:
-                // TODO: gIsFishingEncounter
-                // if (gIsFishingEncounter)
-                // {
-                //     if (B_LURE_BALL_MODIFIER >= GEN_8)
-                //         ballMultiplier = 400;
-                //     else if (B_LURE_BALL_MODIFIER >= GEN_7)
-                //         ballMultiplier = 500;
-                //     else
-                //         ballMultiplier = 300;
-                // }
+                if (gIsFishingEncounter)
+                {
+                    if (B_LURE_BALL_MODIFIER >= GEN_8)
+                        ballMultiplier = 400;
+                    else if (B_LURE_BALL_MODIFIER >= GEN_7)
+                        ballMultiplier = 500;
+                    else
+                        ballMultiplier = 300;
+                }
                 break;
             case ITEM_MOON_BALL:
             {

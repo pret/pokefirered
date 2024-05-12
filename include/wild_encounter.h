@@ -34,6 +34,8 @@ struct WildPokemonHeader
 };
 
 extern const struct WildPokemonHeader gWildMonHeaders[];
+extern bool8 gIsFishingEncounter;
+extern bool8 gIsSurfingEncounter;
 
 void DisableWildEncounters(bool8 disabled);
 bool8 StandardWildEncounter(u32 currMetatileAttrs, u16 previousMetaTileBehavior);
@@ -49,5 +51,6 @@ bool8 SweetScentWildEncounter(void);
 void SeedWildEncounterRng(u16 randVal);
 void ResetEncounterRateModifiers(void);
 bool8 TryStandardWildEncounter(u32 currMetatileAttrs);
+bool8 TryDoDoubleWildBattle(void);
 
 #endif // GUARD_WILD_ENCOUNTER_H

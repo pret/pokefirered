@@ -4280,7 +4280,7 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct WirelessLink_URoom * 
 
     DynamicPlaceholderTextUtil_Reset();
 
-    StringCopy(uroom->trainerCardStrBuffer[0], gTrainerClassNames[GetUnionRoomTrainerClass()]);
+    StringCopy(uroom->trainerCardStrBuffer[0], gTrainerClasses[GetUnionRoomTrainerClass()].name);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, uroom->trainerCardStrBuffer[0]);
 
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, trainerCard->rse.playerName);

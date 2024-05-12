@@ -67,7 +67,7 @@ struct TestingBar
 static void SpriteCB_HealthBoxOther(struct Sprite *sprite);
 static void SpriteCB_HealthBar(struct Sprite *sprite);
 static const u8 *GetBattleInterfaceGfxPtr(u8 which);
-static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent);
+static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp);
 static void Task_HidePartyStatusSummary_BattleStart_1(u8 taskId);
 static void Task_HidePartyStatusSummary_BattleStart_2(u8 taskId);
 static void SpriteCB_PartySummaryBar_Exit(struct Sprite *sprite);
@@ -682,7 +682,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     u8 healthbarSpriteId;
     struct Sprite *healthbarSprite;
 
-    if (!IsDoubleBattle())
+    if (WhichBattleCoords(battlerId) == 0)
     {
         if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         {
@@ -864,7 +864,7 @@ void InitBattlerHealthboxCoords(u8 battler)
 {
     s16 x = 0, y = 0;
 
-    if (!IsDoubleBattle())
+    if (!WhichBattleCoords(battler))
     {
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
             x = 44, y = 30;
@@ -910,7 +910,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     if (GetBattlerSide(gSprites[healthboxSpriteId].sBattlerId) == B_SIDE_PLAYER)
     {
         objVram = (void *)(OBJ_VRAM0);
-        if (!IsDoubleBattle())
+        if (!WhichBattleCoords(gSprites[healthboxSpriteId].sBattlerId))
             objVram += spriteTileNum + 0x820;
         else
             objVram += spriteTileNum + 0x420;
@@ -929,7 +929,7 @@ void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp
     u32 windowId, spriteTileNum;
     u8 *windowTileData;
 
-    if (GetBattlerSide(gSprites[healthboxSpriteId].sBattlerId) == B_SIDE_PLAYER && !IsDoubleBattle())
+    if (GetBattlerSide(gSprites[healthboxSpriteId].sBattlerId) == B_SIDE_PLAYER && !WhichBattleCoords(gSprites[healthboxSpriteId].sBattlerId))
     {
         // Only in the Japanese release can HP be displayed as text outside of double battles
         u8 text[8];
@@ -960,12 +960,12 @@ void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp
 
         u8 text[20] = __("{COLOR 01}{HIGHLIGHT 02}");
         battler = gSprites[healthboxSpriteId].sBattlerId;
-        if (IsDoubleBattle() == TRUE || GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        if (WhichBattleCoords(battler) == TRUE || GetBattlerSide(battler) == B_SIDE_OPPONENT)
         {
             if (maxOrCurrent != HP_CURRENT)
-                UpdateHpTextInHealthboxInDoubles(healthboxSpriteId, maxHp, maxOrCurrent);
+                UpdateHpTextInHealthboxInDoubles(healthboxSpriteId, maxOrCurrent, currHp, maxHp);
             else
-                UpdateHpTextInHealthboxInDoubles(healthboxSpriteId, currHp, maxOrCurrent);
+                UpdateHpTextInHealthboxInDoubles(healthboxSpriteId, maxOrCurrent, currHp, maxHp);
         }
         else
         {
@@ -992,7 +992,7 @@ void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp
                 ConvertIntToDecimalStringN(text + 6, maxHp, STR_CONV_MODE_RIGHT_ALIGN, 3);
             else
                 ConvertIntToDecimalStringN(text + 6, currHp, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, 0, text, 0, 0, 0, 0, 0);
+            RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, 0, text);
 
             for (i = 0; i < 3; i++)
             {
@@ -1006,7 +1006,7 @@ void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp
 
 static const u8 sText_Slash[] = _("/");
 
-static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
+static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp)
 {
     u32 windowId, spriteTileNum;
     u8 *windowTileData;
@@ -1027,11 +1027,15 @@ static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, s16 value, u8
             var = 0;
 
         healthBarSpriteId = gSprites[healthboxSpriteId].sHealthBarSpriteId;
-        txtPtr = ConvertIntToDecimalStringN(text + 6, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        if (maxOrCurrent == HP_CURRENT)
+            txtPtr = ConvertIntToDecimalStringN(text + 6, currHp, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        else
+            txtPtr = ConvertIntToDecimalStringN(text + 6, maxHp, STR_CONV_MODE_RIGHT_ALIGN, 3);
+
         if (maxOrCurrent == HP_CURRENT)
             StringCopy(txtPtr, sText_Slash);
 
-        RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, 0, text, 0, 0, 0, 0, 0);
+        RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, 0, text);
 
         for (i = var; i < var + 3; i++)
         {
@@ -1082,7 +1086,7 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
     var = 5;
     nature = GetNature(mon);
     StringCopy(text + 6, gNatureNamePointers[nature]);
-    RenderTextHandleBold(barFontGfx, 0, text, 0, 0, 0, 0, 0);
+    RenderTextHandleBold(barFontGfx, 0, text);
 
     for (j = 6, i = 0; i < var; i++, j++)
     {
@@ -1114,7 +1118,7 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
     ConvertIntToDecimalStringN(text + 9, gBattleStruct->safariEscapeFactor, STR_CONV_MODE_RIGHT_ALIGN, 2);
     text[5] = CHAR_SPACE;
     text[8] = CHAR_SLASH;
-    RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, 0, text, 0, 0, 0, 0, 0);
+    RenderTextHandleBold(gMonSpritesGfxPtr->barFontGfx, 0, text);
 
     j = healthBarSpriteId; // Needed to match for some reason.
     for (j = 0; j < 5; j++)
@@ -1143,7 +1147,7 @@ void SwapHpBarsWithHpText(void)
     {
         if (gSprites[gHealthboxSpriteIds[i]].callback == SpriteCallbackDummy
             && GetBattlerSide(i) != B_SIDE_OPPONENT
-            && (IsDoubleBattle() || GetBattlerSide(i) != B_SIDE_PLAYER))
+            && (WhichBattleCoords(i) || GetBattlerSide(i) != B_SIDE_PLAYER))
         {
             bool8 noBars;
 
@@ -1151,18 +1155,20 @@ void SwapHpBarsWithHpText(void)
             noBars = gBattleSpritesDataPtr->battlerData[i].hpNumbersNoBars;
             if (GetBattlerSide(i) == B_SIDE_PLAYER)
             {
-                if (!IsDoubleBattle())
+                if (!WhichBattleCoords(i))
                     continue;
                 if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                     continue;
 
                 if (noBars == TRUE) // bars to text
                 {
+                    s16 currHp = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_HP);
+                    s16 maxHp = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP);
                     healthBarSpriteId = gSprites[gHealthboxSpriteIds[i]].sHealthBarSpriteId;
 
                     CpuFill32(0, (void *)(OBJ_VRAM0 + gSprites[healthBarSpriteId].oam.tileNum * TILE_SIZE_4BPP), 8 * TILE_SIZE_4BPP);
-                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_HP), HP_CURRENT);
-                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), HP_MAX);
+                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], HP_CURRENT, currHp, maxHp);
+                    UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], HP_MAX, currHp, maxHp);
                 }
                 else // text to bars
                 {
@@ -1184,11 +1190,13 @@ void SwapHpBarsWithHpText(void)
                     }
                     else
                     {
+                        s16 currHp = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_HP);
+                        s16 maxHp = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP);
                         healthBarSpriteId = gSprites[gHealthboxSpriteIds[i]].sHealthBarSpriteId;
 
                         CpuFill32(0, (void *)(OBJ_VRAM0 + gSprites[healthBarSpriteId].oam.tileNum * 32), 8 * TILE_SIZE_4BPP);
-                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_HP), HP_CURRENT);
-                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_MAX_HP), HP_MAX);
+                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], HP_CURRENT, currHp, maxHp);
+                        UpdateHpTextInHealthboxInDoubles(gHealthboxSpriteIds[i], HP_MAX, currHp, maxHp);
                     }
                 }
                 else // text to bars
@@ -1496,7 +1504,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             isOpponent = TRUE;
 
-            if (!isSwitchingMons || !IsDoubleBattle())
+            if (!isSwitchingMons || !WhichBattleCoords(battlerId))
                 x = 104, y = 40;
             else
                 x = 104, y = 16;
@@ -1935,7 +1943,7 @@ void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     {
         TextIntoHealthboxObject((void *)(OBJ_VRAM0 + 0x40 + spriteTileNum), windowTileData, 6);
         ptr = (void *)(OBJ_VRAM0);
-        if (!IsDoubleBattle())
+        if (!WhichBattleCoords(gSprites[healthboxSpriteId].sBattlerId))
             ptr += spriteTileNum + 0x800;
         else
             ptr += spriteTileNum + 0x400;
@@ -2005,7 +2013,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
         status = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_STATUS);
-        if (!IsDoubleBattle())
+        if (!WhichBattleCoords(battlerId))
             tileNumAdder = 0x1A;
         else
             tileNumAdder = 0x12;
@@ -2065,7 +2073,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     FillPalette(sStatusIconColors[statusPalId], pltAdder + OBJ_PLTT_OFFSET, PLTT_SIZEOF(1));
     CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_OFFSET + pltAdder], (u16 *)OBJ_PLTT + pltAdder, PLTT_SIZEOF(1));
     CpuCopy32(statusGfxPtr, (void *)(OBJ_VRAM0 + (gSprites[healthboxSpriteId].oam.tileNum + tileNumAdder) * TILE_SIZE_4BPP), 3 * TILE_SIZE_4BPP);
-    if (IsDoubleBattle() == TRUE || GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
+    if (WhichBattleCoords(battlerId) == TRUE || GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
     {
         if (!gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars)
         {
@@ -2171,31 +2179,30 @@ static void UpdateLeftNoOfBallsTextOnHealthbox(u8 healthboxSpriteId)
 
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId)
 {
-    s32 maxHp, currHp;
     u8 battlerId = gSprites[healthboxSpriteId].sBattlerId;
+    s32 maxHp = GetMonData(mon, MON_DATA_MAX_HP);
+    s32 currHp = GetMonData(mon, MON_DATA_HP);
 
-    if (elementId == HEALTHBOX_ALL && !IsDoubleBattle())
-        GetBattlerSide(battlerId); // Pointless function call.
-
-    if (GetBattlerSide(gSprites[healthboxSpriteId].sBattlerId) == B_SIDE_PLAYER)
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
-        u8 isDoubles;
+        u8 isDoubles = WhichBattleCoords(battlerId);
 
-        maxHp = GetMonData(mon, MON_DATA_MAX_HP);
-        currHp = GetMonData(mon, MON_DATA_HP);
         if (elementId == HEALTHBOX_LEVEL || elementId == HEALTHBOX_ALL)
             UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL));
+
+
         if (elementId == HEALTHBOX_CURRENT_HP || elementId == HEALTHBOX_ALL)
             UpdateHpTextInHealthbox(healthboxSpriteId, HP_CURRENT, currHp, maxHp);
         if (elementId == HEALTHBOX_MAX_HP || elementId == HEALTHBOX_ALL)
             UpdateHpTextInHealthbox(healthboxSpriteId, HP_MAX, currHp, maxHp);
+
         if (elementId == HEALTHBOX_HEALTH_BAR || elementId == HEALTHBOX_ALL)
         {
             LoadBattleBarGfx(0);
             SetBattleBarStruct(battlerId, healthboxSpriteId, maxHp, currHp, 0);
             MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR, 0);
         }
-        isDoubles = IsDoubleBattle();
+
         if (!isDoubles && (elementId == HEALTHBOX_EXP_BAR || elementId == HEALTHBOX_ALL))
         {
             u16 species;

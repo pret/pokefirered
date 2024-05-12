@@ -1002,37 +1002,38 @@ static void Intro_DelayAndEnd(u32 battler)
 
 static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
 {
-    bool8 var = FALSE;
+    bool8 healthboxAnimDone = FALSE;
 
-    if (!IsDoubleBattle() || (IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI)))
-    {
-        if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy)
-            var = TRUE;
-    }
-    else
+    // Check if healthbox has finished sliding in
+    if (TwoPlayerIntroMons(battler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
     {
         if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy
          && gSprites[gHealthboxSpriteIds[BATTLE_PARTNER(battler)]].callback == SpriteCallbackDummy)
-            var = TRUE;
+            healthboxAnimDone = TRUE;
     }
-    if (IsCryPlayingOrClearCrySongs())
-        var = FALSE;
-    if (var && gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim
+    else
+    {
+        if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy)
+            healthboxAnimDone = TRUE;
+    }
+
+    // If healthbox and shiny anim are done
+    if (healthboxAnimDone && gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim
         && gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim)
     {
+        // Reset shiny anim (even if it didn't occur)
         gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim = FALSE;
         FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
         FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
-            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-                m4aMPlayContinue(&gMPlayInfo_BGM);
-            else
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+
         HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
-        if (IsDoubleBattle())
+
+        if (TwoPlayerIntroMons(battler))
             HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]], BATTLE_PARTNER(battler));
+
         gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 3;
         gBattlerControllerFuncs[battler] = Intro_DelayAndEnd;
     }
@@ -1040,28 +1041,86 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
 
 static void Intro_TryShinyAnimShowHealthbox(u32 battler)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].ballAnimActive)
+    bool32 bgmRestored = FALSE;
+    bool32 battlerAnimsDone = FALSE;
+
+    // Start shiny animation if applicable for 1st Pokémon
+    if (!gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim
+     && !gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive)
+        TryShinyAnimation(battler, &gPlayerParty[gBattlerPartyIndexes[battler]]);
+
+    // Start shiny animation if applicable for 2nd Pokémon
+    if (!gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim
+     && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].ballAnimActive)
+        TryShinyAnimation(BATTLE_PARTNER(battler), &gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]);
+
+    // Show healthbox after ball anim
+    if (!gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive
+     && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].ballAnimActive)
     {
-        if (!gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim)
-            TryShinyAnimation(battler, &gPlayerParty[gBattlerPartyIndexes[battler]]);
-        if (!gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim)
-            TryShinyAnimation(BATTLE_PARTNER(battler), &gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]);
-        if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        if (!gBattleSpritesDataPtr->healthBoxesData[battler].healthboxSlideInStarted)
         {
-            DestroySprite(&gSprites[gBattleControllerData[BATTLE_PARTNER(battler)]]);
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(battler)],
-                                     &gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]],
-                                     HEALTHBOX_ALL);
-            StartHealthboxSlideIn(BATTLE_PARTNER(battler));
-            SetHealthboxSpriteVisible(gHealthboxSpriteIds[BATTLE_PARTNER(battler)]);
+            if (TwoPlayerIntroMons(battler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+            {
+                UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(battler)], &gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]], HEALTHBOX_ALL);
+                StartHealthboxSlideIn(BATTLE_PARTNER(battler));
+                SetHealthboxSpriteVisible(gHealthboxSpriteIds[BATTLE_PARTNER(battler)]);
+            }
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
+            StartHealthboxSlideIn(battler);
+            SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
         }
+        gBattleSpritesDataPtr->healthBoxesData[battler].healthboxSlideInStarted = TRUE;
+    }
+
+    // Restore bgm after cry has played and healthbox anim is started
+    if (!gBattleSpritesDataPtr->healthBoxesData[battler].waitForCry
+        && gBattleSpritesDataPtr->healthBoxesData[battler].healthboxSlideInStarted
+        && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].waitForCry
+        && !IsCryPlayingOrClearCrySongs())
+    {
+        if (!gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored)
+        {
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
+                m4aMPlayContinue(&gMPlayInfo_BGM);
+            else
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+        }
+        gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored = TRUE;
+        bgmRestored = TRUE;
+    }
+
+    // Wait for battler anims
+    if (TwoPlayerIntroMons(battler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+    {
+        if (gSprites[gBattleControllerData[battler]].callback == SpriteCallbackDummy
+            && gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy
+            && gSprites[gBattleControllerData[BATTLE_PARTNER(battler)]].callback == SpriteCallbackDummy
+            && gSprites[gBattlerSpriteIds[BATTLE_PARTNER(battler)]].callback == SpriteCallbackDummy)
+        {
+            battlerAnimsDone = TRUE;
+        }
+    }
+    else
+    {
+        if (gSprites[gBattleControllerData[battler]].callback == SpriteCallbackDummy
+            && gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
+        {
+            battlerAnimsDone = TRUE;
+        }
+    }
+
+    // Clean up
+    if (bgmRestored && battlerAnimsDone)
+    {
+        if (TwoPlayerIntroMons(battler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+            DestroySprite(&gSprites[gBattleControllerData[BATTLE_PARTNER(battler)]]);
         DestroySprite(&gSprites[gBattleControllerData[battler]]);
-        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler],
-                                 &gPlayerParty[gBattlerPartyIndexes[battler]],
-                                 HEALTHBOX_ALL);
-        StartHealthboxSlideIn(battler);
-        SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
+
         gBattleSpritesDataPtr->animationData->introAnimActive = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[battler].healthboxSlideInStarted = FALSE;
+
         gBattlerControllerFuncs[battler] = Intro_WaitForShinyAnimAndHealthbox;
     }
 }
@@ -1783,7 +1842,7 @@ static void PlayerHandleChoosePokemon(u32 battler)
     gBattleControllerData[battler] = CreateTask(TaskDummy, 0xFF);
     gTasks[gBattleControllerData[battler]].data[0] = gBattleResources->bufferA[battler][1] & 0xF;
     *(&gBattleStruct->battlerPreventingSwitchout) = gBattleResources->bufferA[battler][1] >> 4;
-    *(&gBattleStruct->playerPartyIdx) = gBattleResources->bufferA[battler][2];
+    *(&gBattleStruct->prevSelectedPartySlot) = gBattleResources->bufferA[battler][2];
     *(&gBattleStruct->abilityPreventingSwitchout) = (gBattleResources->bufferA[battler][3] & 0xFF) | (gBattleResources->bufferA[battler][7] << 8);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[battler] = OpenPartyMenuToChooseMon;

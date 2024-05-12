@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "battle_anim.h"
+#include "battle_interface.h"
 #include "data.h"
 #include "decompress.h"
 #include "pokemon_icon.h"
@@ -86,10 +87,10 @@ u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType)
     {
     case BATTLER_COORD_X:
     case BATTLER_COORD_X_2:
-        retVal = sBattlerCoords[IS_DOUBLE_BATTLE()][GetBattlerPosition(battlerId)].x;
+        retVal = sBattlerCoords[WhichBattleCoords(battlerId)][GetBattlerPosition(battlerId)].x;
         break;
     case BATTLER_COORD_Y:
-        retVal = sBattlerCoords[IS_DOUBLE_BATTLE()][GetBattlerPosition(battlerId)].y;
+        retVal = sBattlerCoords[WhichBattleCoords(battlerId)][GetBattlerPosition(battlerId)].y;
         break;
     case BATTLER_COORD_Y_PIC_OFFSET:
     case BATTLER_COORD_Y_PIC_OFFSET_DEFAULT:
@@ -208,7 +209,7 @@ static u8 GetBattlerSpriteFinal_Y(u8 battlerId, u16 species, bool8 a3)
         offset = GetBattlerYDelta(battlerId, species);
         offset -= GetBattlerElevation(battlerId, species);
     }
-    y = offset + sBattlerCoords[IS_DOUBLE_BATTLE()][GetBattlerPosition(battlerId)].y;
+    y = offset + sBattlerCoords[WhichBattleCoords(battlerId)][GetBattlerPosition(battlerId)].y;
     if (a3)
     {
         if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
@@ -781,16 +782,6 @@ void InitSpritePosToAnimAttacker(struct Sprite *sprite, bool8 respectMonPicOffse
     SetAnimSpriteInitialXOffset(sprite, gBattleAnimArgs[0]);
     sprite->y += gBattleAnimArgs[1];
 }
-
-// u8 GetBattlerSide(u8 battlerId)
-// {
-//     return GET_BATTLER_SIDE2(battlerId);
-// }
-
-// u8 GetBattlerPosition(u8 battlerId)
-// {
-//     return GET_BATTLER_POSITION(battlerId);
-// }
 
 u8 GetBattlerAtPosition(u8 position)
 {

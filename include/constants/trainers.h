@@ -288,6 +288,8 @@
 #define TRAINER_CLASS_LADY                105
 #define TRAINER_CLASS_PAINTER             106
 
+#define TRAINER_CLASS_COUNT               107
+
 #define FACILITY_CLASS_AQUA_LEADER_ARCHIE     0
 #define FACILITY_CLASS_AQUA_GRUNT_M           1
 #define FACILITY_CLASS_AQUA_GRUNT_F           2
@@ -440,6 +442,10 @@
 #define FACILITY_CLASS_CHAMPION_RIVAL_2       149
 
 #define F_TRAINER_FEMALE (1 << 7)
+
+// Trainer party defines
+#define TRAINER_MON_MALE    1
+#define TRAINER_MON_FEMALE  2
 
 // All trainer parties specify the IV, level, and species for each Pokémon in the
 // party. Some trainer parties also specify held items and custom moves for each

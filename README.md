@@ -1,13 +1,8 @@
 # Pokémon FireRed and LeafGreen
 
-[![Build Status][travis-badge]][travis]
+This is a decompilation of English Pokémon FireRed and LeafGreen.
 
-[travis]: https://travis-ci.org/pret/pokefirered
-[travis-badge]: https://travis-ci.org/pret/pokefirered.svg?branch=master
-
-This is a disassembly of Pokémon FireRed and LeafGreen.
-
-It builds the following ROMs:
+It builds the following ROM images:
 
 * [**pokefirered.gba**](https://datomatic.no-intro.org/?page=show_record&s=23&n=1616) `sha1: 41cb23d8dccc8ebd7c649cd8fbb58eeace6e2fdc`
 * [**pokeleafgreen.gba**](https://datomatic.no-intro.org/?page=show_record&s=23&n=1617) `sha1: 574fa542ffebb14be69902d1d36f1ec0a4afd71e`

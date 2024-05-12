@@ -471,7 +471,7 @@ void CopyBattlerSpriteToBg(s32 bgId, u8 x, u8 y, u8 battlerPosition, u8 palno, u
     u8 battler = GetBattlerAtPosition(battlerPosition);
     s32 offset = tilesOffset;
 
-    CpuCopy16(gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * gBattleMonForms[battler], tilesDest, BG_SCREEN_SIZE);
+    CpuCopy16(gMonSpritesGfxPtr->sprites[battlerPosition], tilesDest, BG_SCREEN_SIZE);
     LoadBgTiles(bgId, tilesDest, 0x1000, tilesOffset);
     for (i = y; i < y + 8; ++i)
         for (j = x; j < x + 8; ++j)

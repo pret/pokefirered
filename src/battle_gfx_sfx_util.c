@@ -139,11 +139,7 @@ void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
     if (gSprites[spriteId].animPaused)
         gSprites[spriteId].animPaused = 0;
     else if (gSprites[spriteId].animEnded)
-    {
-        gSprites[spriteId].callback = SetIdleSpriteCallback;
-        StartSpriteAffineAnim(&gSprites[spriteId], 0);
         sprite->callback = SpriteCallbackDummy;
-    }
 }
 
 // Unused
@@ -211,7 +207,6 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 de
 
     if (tableId == B_ANIM_FORM_CHANGE && (argument & 0x80))
     {
-        gBattleMonForms[activeBattler] = (argument & ~(0x80));
         return TRUE;
     }
     else if (gBattleSpritesDataPtr->battlerData[activeBattler].behindSubstitute
@@ -313,6 +308,8 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
     u32 monsPersonality, currentPersonality, isShiny, species, paletteOffset, position;
     const void *lzPaletteData;
     struct Pokemon *illusionMon = GetIllusionMonPtr(battler);
+    if (illusionMon != NULL)
+        mon = illusionMon;
 
     if (GetMonData(mon, MON_DATA_IS_EGG) || GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE) // Don't load GFX of egg pokemon.
         return;
@@ -497,7 +494,12 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
         else
         {
             if (state == 2)
-                LoadCompressedSpriteSheetUsingHeap(&sSpriteSheets_DoublesPlayerHealthbox[0]);
+            {
+                if (WhichBattleCoords(0))
+                    LoadCompressedSpriteSheetUsingHeap(&sSpriteSheets_DoublesPlayerHealthbox[0]);
+                else
+                    LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_SinglesPlayerHealthbox);
+            }
             else if (state == 3)
                 LoadCompressedSpriteSheetUsingHeap(&sSpriteSheets_DoublesPlayerHealthbox[1]);
             else if (state == 4)
@@ -697,7 +699,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
         CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZEOF(16));
         gBattleSpritesDataPtr->battlerData[battlerAtk].transformSpecies = targetSpecies;
     }
-    gBattleMonForms[battlerAtk] = gBattleMonForms[battlerDef];
+
     gSprites[gBattlerSpriteIds[battlerAtk]].y = GetBattlerSpriteDefault_Y(battlerAtk);
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerAtk]], 0);
 }
@@ -717,11 +719,7 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
             LZDecompressVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->sprites[position]);
         for (i = 1; i < 4; ++i)
         {
-            u8 (*ptr)[4][0x800] = gMonSpritesGfxPtr->sprites[position];
-
-            ++ptr;
-            --ptr;
-            DmaCopy32Defvars(3, (*ptr)[0], (*ptr)[i], 0x800);
+            Dma3CopyLarge32_(gMonSpritesGfxPtr->sprites[position], &gMonSpritesGfxPtr->sprites[position][MON_PIC_SIZE * i], MON_PIC_SIZE);
         }
         palOffset = OBJ_PLTT_ID(battlerId);
         LoadCompressedPalette(gSubstituteDollPal, palOffset, PLTT_SIZE_4BPP);
@@ -738,7 +736,7 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite)
 void LoadBattleMonGfxAndAnimate(u8 battlerId, bool8 loadMonSprite, u8 spriteId)
 {
     BattleLoadSubstituteOrMonSpriteGfx(battlerId, loadMonSprite);
-    StartSpriteAnim(&gSprites[spriteId], gBattleMonForms[battlerId]);
+    StartSpriteAnim(&gSprites[spriteId], 0);
     if (!loadMonSprite)
         gSprites[spriteId].y = GetSubstituteSpriteDefault_Y(battlerId);
     else
@@ -946,7 +944,6 @@ void BattleInterfaceSetWindowPals(void)
 void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute)
 {
     gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies = SPECIES_NONE;
-    gBattleMonForms[battlerId] = 0;
     if (!dontClearSubstitute)
         ClearBehindSubstituteBit(battlerId);
 }

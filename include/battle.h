@@ -873,6 +873,9 @@ struct BattleHealthboxInfo
     u8 triedShinyMonAnim : 1; // x80
     u8 finishedShinyMonAnim : 1; // x1
     u8 opponentDrawPartyStatusSummaryDelay : 5; // x2
+    u8 bgmRestored:1;
+    u8 waitForCry:1;
+    u8 healthboxSlideInStarted:1;
     u8 healthboxBounceSpriteId;
     u8 battlerBounceSpriteId;
     u8 animationState;
@@ -914,7 +917,7 @@ extern u8 *gLinkBattleRecvBuffer;
 struct MonSpritesGfx
 {
     void *firstDecompressed; // ptr to the decompressed sprite of the first pokemon
-    void *sprites[MAX_BATTLERS_COUNT];
+    u8 *sprites[MAX_BATTLERS_COUNT];
     struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
     struct SpriteFrameImage images[MAX_BATTLERS_COUNT][4];
     u8 field_F4[0x80 - (4 * MAX_BATTLERS_COUNT)]; // unused, original - spritesGfx
@@ -978,10 +981,7 @@ extern bool8 gTransformedShininess[MAX_BATTLERS_COUNT];
 extern u8 gBattlerPositions[MAX_BATTLERS_COUNT];
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gBattleOutcome;
-extern u8 gBattleMonForms[MAX_BATTLERS_COUNT];
 extern u32 gBattleControllerExecFlags;
-// extern u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
-// extern u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 extern u8 gActionSelectionCursor[MAX_BATTLERS_COUNT];
 extern void (*gPreBattleCallback1)(void);
 extern bool8 gDoingBattleAnim;

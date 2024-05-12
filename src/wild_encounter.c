@@ -13,6 +13,7 @@
 #include "script.h"
 #include "link.h"
 #include "quest_log.h"
+#include "safari_zone.h"
 #include "constants/maps.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
@@ -394,7 +395,17 @@ bool8 StandardWildEncounter(u32 currMetatileAttrs, u16 previousMetatileBehavior)
                 // try a regular wild land encounter
                 if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL) == TRUE)
                 {
-                    StartWildBattle();
+                    if (TryDoDoubleWildBattle())
+                    {
+                        struct Pokemon mon1 = gEnemyParty[0];
+                        TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE);
+                        gEnemyParty[1] = mon1;
+                        StartDoubleWildBattle();
+                    }
+                    else
+                    {
+                        StartWildBattle();
+                    }
                     return TRUE;
                 }
                 else
@@ -432,7 +443,17 @@ bool8 StandardWildEncounter(u32 currMetatileAttrs, u16 previousMetatileBehavior)
                 if (TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, WILD_CHECK_REPEL) == TRUE)
                 {   
                     gIsSurfingEncounter = TRUE;
-                    StartWildBattle();
+                    if (TryDoDoubleWildBattle())
+                    {
+                        struct Pokemon mon1 = gEnemyParty[0];
+                        TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, WILD_CHECK_KEEN_EYE);
+                        gEnemyParty[1] = mon1;
+                        StartDoubleWildBattle();
+                    }
+                    else
+                    {
+                        StartWildBattle();
+                    }
                     return TRUE;
                 }
                 else
@@ -785,4 +806,16 @@ static void AddToWildEncounterRateBuff(u8 encounterRate)
         sWildEncounterData.encounterRateBuff += encounterRate;
     else
         sWildEncounterData.encounterRateBuff = 0;
+}
+
+bool8 TryDoDoubleWildBattle(void)
+{
+    if (GetSafariZoneFlag()
+      || (B_DOUBLE_WILD_REQUIRE_2_MONS == TRUE && GetMonsStateToDoubles() != PLAYER_HAS_TWO_USABLE_MONS))
+        return FALSE;
+    else if (B_FLAG_FORCE_DOUBLE_WILD != 0 && FlagGet(B_FLAG_FORCE_DOUBLE_WILD))
+        return TRUE;
+    else if (B_DOUBLE_WILD_CHANCE != 0 && ((Random() % 100) + 1 <= B_DOUBLE_WILD_CHANCE))
+        return TRUE;
+    return FALSE;
 }

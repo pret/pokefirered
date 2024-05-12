@@ -2478,7 +2478,7 @@ void BufferStringBattle(u32 battler, u16 stringId)
             }
             else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
                 stringPtr = sText_WildPkmnAppeared2;
-            else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) // interesting, looks like they had something planned for wild double battles
+            else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]])) // interesting, looks like they had something planned for wild double battles
                 stringPtr = sText_TwoWildPkmnAppeared;
             else if (gBattleTypeFlags & BATTLE_TYPE_OLD_MAN_TUTORIAL)
                 stringPtr = sText_WildPkmnAppearedPause;
@@ -2489,9 +2489,13 @@ void BufferStringBattle(u32 battler, u16 stringId)
     case STRINGID_INTROSENDOUT: // poke first send-out
         if (GetBattlerSide(battler) == B_SIDE_PLAYER)
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]))
             {
-                if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+                if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+                    stringPtr = sText_InGamePartnerSentOutZGoN;
+                else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+                    stringPtr = sText_GoTwoPkmn;
+                else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                     stringPtr = sText_LinkPartnerSentOutPkmnGoPkmn;
                 else
                     stringPtr = sText_GoTwoPkmn;
@@ -2503,9 +2507,13 @@ void BufferStringBattle(u32 battler, u16 stringId)
         }
         else
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]))
             {
-                if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+                if (BATTLE_TWO_VS_ONE_OPPONENT)
+                    stringPtr = sText_Trainer1SentOutTwoPkmn;
+                else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+                    stringPtr = sText_TwoTrainersSentPkmn;
+                else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                     stringPtr = sText_TwoLinkTrainersSentOutPkmn;
                 else if (gBattleTypeFlags & BATTLE_TYPE_LINK)
                     stringPtr = sText_LinkTrainerSentOutTwoPkmn;

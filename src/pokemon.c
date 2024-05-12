@@ -5317,13 +5317,6 @@ u16 SpeciesToPokedexNum(u16 species)
     return species > 0 ? species : 0xFFFF;
 }
 
-void ClearBattleMonForms(void)
-{
-    int i;
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        gBattleMonForms[i] = 0;
-}
-
 static u16 GetBattleBGM(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)

@@ -366,22 +366,28 @@ void HandleAction_UseItem(void)
 
 bool8 TryRunFromBattle(u8 battler)
 {
-    bool8 effect = FALSE;
+    bool32 effect = FALSE;
     u8 holdEffect;
     u8 speedVar;
 
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY)
+    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
         holdEffect = gEnigmaBerries[battler].holdEffect;
     else
         holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
+
     gPotentialItemEffectBattler = battler;
+
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
     {
         gLastUsedItem = gBattleMons[battler].item;
         gProtectStructs[battler].fleeType = FLEE_ITEM;
         effect++;
     }
-    else if (gBattleMons[battler].ability == ABILITY_RUN_AWAY)
+    else if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+    {
+        effect++;
+    }
+    else if (GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
     {
         gLastUsedAbility = ABILITY_RUN_AWAY;
         gProtectStructs[battler].fleeType = FLEE_ABILITY;
@@ -394,27 +400,30 @@ bool8 TryRunFromBattle(u8 battler)
     }
     else
     {
-        if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        u8 runningFromBattler = BATTLE_OPPOSITE(battler);
+        if (!IsBattlerAlive(runningFromBattler))
+            runningFromBattler |= BIT_FLANK;
+
+        if (gBattleMons[battler].speed < gBattleMons[runningFromBattler].speed)
         {
-            if (gBattleMons[battler].speed < gBattleMons[BATTLE_OPPOSITE(battler)].speed)
-            {
-                speedVar = (gBattleMons[battler].speed * 128) / (gBattleMons[BATTLE_OPPOSITE(battler)].speed) + (gBattleStruct->runTries * 30);
-                if (speedVar > (Random() & 0xFF))
-                    effect++;
-            }
-            else // same speed or faster
-            {
+            speedVar = (gBattleMons[battler].speed * 128) / (gBattleMons[runningFromBattler].speed) + (gBattleStruct->runTries * 30);
+            if (speedVar > (Random() & 0xFF))
                 effect++;
-            }
+        }
+        else // same speed or faster
+        {
+            effect++;
         }
 
-        ++gBattleStruct->runTries;
+        gBattleStruct->runTries++;
     }
+
     if (effect != 0)
     {
         gCurrentTurnActionNumber = gBattlersCount;
         gBattleOutcome = B_OUTCOME_RAN;
     }
+
     return effect;
 }
 

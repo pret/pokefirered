@@ -193,7 +193,6 @@ EWRAM_DATA struct BattleSpriteData *gBattleSpritesDataPtr = NULL;
 EWRAM_DATA struct MonSpritesGfx *gMonSpritesGfxPtr = NULL;
 EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
-EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA u32 gFieldStatuses = 0;
 EWRAM_DATA u8 gBattlerAbility = 0;
@@ -861,7 +860,10 @@ static void CB2_InitBattleInternal(void)
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
         CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, FALSE);
+        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
+            CreateNPCTrainerParty(&gEnemyParty[PARTY_SIZE / 2], gTrainerBattleOpponent_B, FALSE);
         SetWildMonHeldItem();
+        CalculateEnemyPartyCount();
     }
 
     gMain.inBattle = TRUE;
@@ -1627,12 +1629,14 @@ static void CB2_HandleStartMultiBattle(void)
         break;
     case 5:
     case 9:
+    case 13:
         ++gBattleCommunication[0];
-        gBattleCommunication[SPRITES_INIT_STATE1] = 1;
+        gBattleCommunication[1] = 1;
         // fall through
     case 6:
     case 10:
-        if (--gBattleCommunication[SPRITES_INIT_STATE1] == 0)
+    case 14:
+        if (--gBattleCommunication[1] == 0)
             ++gBattleCommunication[0];
         break;
     }
@@ -2257,11 +2261,11 @@ static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite)
         }
         else // Erase bottom part of the sprite to create a smooth illusion of mon falling down.
         {
-            u8 *dst = (u8 *)gMonSpritesGfxPtr->sprites[GetBattlerPosition(sprite->sBattler)] + (gBattleMonForms[sprite->sBattler] << 11) + (sprite->data[3] << 8);
+            u8 *dst = &gMonSpritesGfxPtr->sprites[GetBattlerPosition(sprite->sBattler)][(sprite->data[3] << 8)];
 
             for (i = 0; i < 0x100; i++)
                 *(dst++) = 0;
-            StartSpriteAnim(sprite, gBattleMonForms[sprite->sBattler]);
+            StartSpriteAnim(sprite, 0);
         }
     }
 }
@@ -3190,6 +3194,7 @@ static void DoBattleIntro(void)
         }
         break;
     }
+
 }
 
 static void TryDoEventsBeforeFirstTurn(void)

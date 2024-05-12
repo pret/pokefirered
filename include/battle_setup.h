@@ -6,6 +6,7 @@
 extern u16 gPartnerTrainerId;
 
 void StartWildBattle(void);
+void StartDoubleWildBattle(void);
 void StartRoamerBattle(void);
 void StartOldManTutorialBattle(void);
 void StartScriptedWildBattle(void);

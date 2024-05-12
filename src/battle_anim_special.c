@@ -2040,21 +2040,17 @@ void AnimTask_SetTargetToEffectBattler(u8 taskId)
 void TryShinyAnimation(u8 battler, struct Pokemon *mon)
 {
     bool32 isShiny;
-    u32 otId, personality;
-    u32 shinyValue;
     u8 taskId1, taskId2;
+    struct Pokemon* illusionMon;
 
-    isShiny = FALSE;
+    isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
     gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = TRUE;
-    otId = GetMonData(mon, MON_DATA_OT_ID);
-    personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    illusionMon = GetIllusionMonPtr(battler);
+    if (illusionMon != NULL)
+        mon = illusionMon;
 
-    if (IsBattlerSpriteVisible(battler))
+    if (IsBattlerSpriteVisible(battler) && IsValidForBattle(mon))
     {
-        shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
-        if (shinyValue < SHINY_ODDS)
-            isShiny = TRUE;
-
         if (isShiny)
         {
             if (GetSpriteTileStartByTag(ANIM_TAG_GOLD_STARS) == 0xFFFF)

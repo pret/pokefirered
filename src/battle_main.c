@@ -3875,6 +3875,7 @@ static void HandleTurnActionSelectionState(void)
                 gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)] = B_ACTION_NOTHING_FAINTED;
             else
                 gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] = B_ACTION_NOTHING_FAINTED;
+            gBattleStruct->throwingPokeBall = FALSE;
         }
 
         gBattleMainFunc = SetActionsAndBattlersTurnOrder;

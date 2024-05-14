@@ -381,7 +381,7 @@ const struct Item gItems[] =
     [ITEM_MOON_BALL] =
     {
         .name = _("Moon Ball"),
-        .price = (I_PRICE >= GEN_7) ? 0 : 300,
+        .price = (I_PRICE >= GEN_7) ? 2 : 2,
         .description = COMPOUND_STRING(
             "A Ball that works\n"
             "well on Moon\n"
@@ -524,7 +524,7 @@ const struct Item gItems[] =
     [ITEM_CHERISH_BALL] =
     {
         .name = _("Cherish Ball"),
-        .price = 0,
+        .price = 2,
         .description = COMPOUND_STRING(
             "A rare Ball made\n"
             "in commemoration\n"

@@ -25,9 +25,6 @@
 #include "constants/songs.h"
 #include "constants/quest_log.h"
 
-// Any item in the TM Case with nonzero importance is considered an HM
-#define IS_HM(itemId) (ItemId_GetImportance(itemId) != 0)
-
 #define TAG_SCROLL_ARROW 110
 
 enum {
@@ -679,7 +676,7 @@ static void InitTMCaseListMenuItems(void)
 static void GetTMNumberAndMoveString(u8 * dest, u16 itemId)
 {
     StringCopy(gStringVar4, gText_FontSmall);
-    if (itemId >= ITEM_HM01)
+    if (IsItemHM(itemId))
     {
         StringAppend(gStringVar4, sText_ClearTo18);
         StringAppend(gStringVar4, gText_NumberClear01);
@@ -720,10 +717,18 @@ static void List_ItemPrintFunc(u8 windowId, u32 itemIndex, u8 y)
 {
     if (itemIndex != LIST_CANCEL)
     {
-        if (!IS_HM(BagGetItemIdByPocketPosition(POCKET_TM_CASE, itemIndex)))
+        u16 itemId = BagGetItemIdByPocketPosition(POCKET_TM_CASE, itemIndex);
+        if (!IsItemHM(itemId))
         {
-            ConvertIntToDecimalStringN(gStringVar1, BagGetQuantityByPocketPosition(POCKET_TM_CASE, itemIndex), STR_CONV_MODE_RIGHT_ALIGN, 3);
-            StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+            if (!ItemId_GetImportance(itemId))
+            {
+                ConvertIntToDecimalStringN(gStringVar1, BagGetQuantityByPocketPosition(POCKET_TM_CASE, itemIndex), STR_CONV_MODE_RIGHT_ALIGN, 3);
+                StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+            }
+            else
+            {
+                StringCopy(gStringVar4, gText_EmptyString3);
+            }
             TMCase_Print(windowId, FONT_SMALL, gStringVar4, 126, y, 0, 0, TEXT_SKIP_DRAW, COLOR_DARK);
         }
         else
@@ -982,7 +987,7 @@ static void Task_SelectedTMHM_Field(u8 taskId)
     StringAppend(strbuf, gText_Var1IsSelected + 2); // +2 skips over the stringvar
     TMCase_Print(WIN_SELECTED_MSG, FONT_NORMAL, strbuf, 0, 2, 1, 0, 0, COLOR_DARK);
     Free(strbuf);
-    if (IS_HM(gSpecialVar_ItemId))
+    if (IsItemHM(gSpecialVar_ItemId))
     {
         PlaceHMTileInWindow(WIN_SELECTED_MSG, 0, 2);
         CopyWindowToVram(WIN_SELECTED_MSG, COPYWIN_GFX);
@@ -1050,7 +1055,7 @@ static void Action_Give(u8 taskId)
     PutWindowTilemap(WIN_MOVE_INFO);
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(1);
-    if (!IS_HM(itemId))
+    if (!ItemId_GetImportance(itemId))
     {
         if (CalculatePlayerPartyCount() == 0)
         {
@@ -1127,7 +1132,7 @@ static void Task_SelectedTMHM_GiveParty(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    if (!IS_HM(BagGetItemIdByPocketPosition(POCKET_TM_CASE, tSelection)))
+    if (!ItemId_GetImportance(BagGetItemIdByPocketPosition(POCKET_TM_CASE, tSelection)))
     {
         sTMCaseDynamicResources->nextScreenCallback = CB2_GiveHoldItem;
         Task_BeginFadeOutFromTMCase(taskId);
@@ -1143,7 +1148,7 @@ static void Task_SelectedTMHM_GivePC(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    if (!IS_HM(BagGetItemIdByPocketPosition(POCKET_TM_CASE, tSelection)))
+    if (!ItemId_GetImportance(BagGetItemIdByPocketPosition(POCKET_TM_CASE, tSelection)))
     {
         sTMCaseDynamicResources->nextScreenCallback = CB2_ReturnToPokeStorage;
         Task_BeginFadeOutFromTMCase(taskId);
@@ -1159,7 +1164,7 @@ static void Task_SelectedTMHM_Sell(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    if (ItemId_GetPrice(gSpecialVar_ItemId) == 0)
+    if (ItemId_GetImportance(gSpecialVar_ItemId))
     {
         // Can't sell TM/HMs with no price (by default this is just the HMs)
         CopyItemName(gSpecialVar_ItemId, gStringVar1);

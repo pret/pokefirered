@@ -14,6 +14,7 @@
 #include "battle_util2.h"
 #include "battle_bg.h"
 #include "battle_dynamax.h"
+#include "pokeball.h"
 
 /*
     Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.
@@ -467,7 +468,7 @@ struct BattleResults
     u16 caughtMonSpecies;     // 0x28
     u8 caughtMonNick[10];     // 0x2A
     u8 filler34[2];
-    u8 catchAttempts[11];     // 0x36
+    u8 catchAttempts[POKEBALL_COUNT];     // 0x36
 };
 
 extern struct BattleResults gBattleResults;

@@ -93,6 +93,12 @@ u8 CountItemsInPC(void);
 void ApplyNewEncryptionKeyToBagItems_(u32 newKey);
 bool8 HasAtLeastOneBerry(void);
 
+bool8 IsItemTM(u16 itemId);
+bool8 IsItemHM(u16 itemId);
+bool8 IsItemTMHM(u16 itemId);
+
+bool8 IsItemBall(u16 itemId);
+
 const u8 *ItemId_GetEffect(u32 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
 u32 GetItemStatus2Mask(u16 itemId);

@@ -2867,7 +2867,7 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
     {
         printerTemplate.currentChar = gSpeciesInfo[species].description;
         printerTemplate.windowId = windowId;
-        printerTemplate.fontId = FONT_NORMAL;
+        printerTemplate.fontId = FONT_SMALL;
         printerTemplate.letterSpacing = 1;
         printerTemplate.lineSpacing = 0;
         printerTemplate.unk = 0;
@@ -2875,7 +2875,7 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
         printerTemplate.bgColor = 0;
         printerTemplate.shadowColor = 2;
 
-        length = GetStringWidth(FONT_NORMAL, gSpeciesInfo[species].description, 0);
+        length = GetStringWidth(FONT_SMALL, gSpeciesInfo[species].description, 0);
         xCenter = x + (240 - length) / 2;
 
         if (xCenter > 0)
@@ -2954,7 +2954,7 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
 
     // Dex entry
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[2], PIXEL_FILL(0));
-    DexScreen_PrintMonFlavorText(sPokedexScreenData->windowIds[2], sPokedexScreenData->dexSpecies, 0, 8);
+    DexScreen_PrintMonFlavorText(sPokedexScreenData->windowIds[2], sPokedexScreenData->dexSpecies, 0, 1);
     PutWindowTilemap(sPokedexScreenData->windowIds[2]);
     CopyWindowToVram(sPokedexScreenData->windowIds[2], COPYWIN_GFX);
 

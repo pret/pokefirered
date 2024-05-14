@@ -208,7 +208,7 @@ static void HandleInputChooseAction(u32 battler)
             if (gBattleResources->bufferA[battler][1] == B_ACTION_USE_ITEM)
             {
                 // Add item to bag if it is a ball
-                if (itemId <= ITEM_PREMIER_BALL)
+                if (IsItemBall(itemId))
                     AddBagItem(itemId, 1);
                 else
                     return;

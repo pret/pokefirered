@@ -61,7 +61,6 @@ EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 static EWRAM_DATA struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
 
 static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
-static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 static bool8 PartyMonHasStatus(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 static bool8 IsPokemonStorageFull(void);
 static u8 CopyMonToPC(struct Pokemon *mon);
@@ -5546,18 +5545,7 @@ void SetWildMonHeldItem(void)
 
 bool8 IsMonShiny(struct Pokemon *mon)
 {
-    u32 otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    return IsShinyOtIdPersonality(otId, personality);
-}
-
-static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
-{
-    bool8 retVal = FALSE;
-    u32 shinyValue = GET_SHINY_VALUE(otId, personality);
-    if (shinyValue < SHINY_ODDS)
-        retVal = TRUE;
-    return retVal;
+    return GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 }
 
 u8 *GetTrainerPartnerName(void)

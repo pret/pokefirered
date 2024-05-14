@@ -464,6 +464,9 @@ const u32 gBattleAnimSpritePal_Impact[] = INCBIN_U32("graphics/battle_anims/spri
 
 const u32 gBattleAnimSpriteGfx_Particles[] = INCBIN_U32("graphics/battle_anims/sprites/particles.4bpp.lz");
 
+const u32 gBattleAnimSpriteGfx_Particles2[] = INCBIN_U32("graphics/battle_anims/sprites/particles2.4bpp.lz");
+const u32 gBattleAnimSpritePal_Particles2[] = INCBIN_U32("graphics/battle_anims/sprites/particles2.gbapal.lz");
+
 const u32 gBattleAnimSpriteGfx_CircleImpact[] = INCBIN_U32("graphics/battle_anims/sprites/circle_impact.4bpp.lz");
 const u32 gBattleAnimSpritePal_CircleImpact[] = INCBIN_U32("graphics/battle_anims/sprites/circle_impact.gbapal.lz");
 

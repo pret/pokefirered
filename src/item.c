@@ -744,3 +744,26 @@ u32 GetItemStatus2Mask(u16 itemId)
     else
         return 0;
 }
+
+bool8 IsItemTM(u16 itemId)
+{
+    itemId = SanitizeItemId(itemId);
+    return ITEM_TM01 <= itemId && itemId <= ITEM_TM100;
+}
+
+bool8 IsItemHM(u16 itemId)
+{
+    itemId = SanitizeItemId(itemId);
+    return ITEM_HM01 <= itemId && itemId <= ITEM_HM08;
+}
+
+bool8 IsItemTMHM(u16 itemId)
+{
+    return IsItemTM(itemId) || IsItemHM(itemId);
+}
+
+bool8 IsItemBall(u16 itemId)
+{
+    itemId = SanitizeItemId(itemId);
+    return FIRST_BALL <= itemId && itemId <= LAST_BALL;
+}

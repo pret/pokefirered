@@ -18,6 +18,7 @@
 #include "field_camera.h"
 #include "field_effect.h"
 #include "event_object_movement.h"
+#include "item.h"
 #include "menu_indicators.h"
 #include "random.h"
 #include "mail_data.h"
@@ -2075,7 +2076,7 @@ bool8 UsedPokemonCenterWarp(void)
 bool8 BufferTMHMMoveName(void)
 {
     // 8004 = item ID
-    if (gSpecialVar_0x8004 >= ITEM_TM01 && gSpecialVar_0x8004 <= ITEM_HM08)
+    if (IsItemTMHM(gSpecialVar_0x8004))
     {
         StringCopy(gStringVar1, gMovesInfo[ItemIdToBattleMoveId(gSpecialVar_0x8004)].name);
         return TRUE;

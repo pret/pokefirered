@@ -4437,7 +4437,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 break;
             case ABILITY_BALL_FETCH:
                 if (gBattleMons[battler].item == ITEM_NONE
-                    && gBattleResults.catchAttempts[gLastUsedBall - ITEM_ULTRA_BALL] >= 1
+                    && gBattleResults.catchAttempts[gLastUsedBall - FIRST_BALL] >= 1
                     && !gHasFetchedBall)
                 {
                     gBattleScripting.battler = battler;
@@ -9746,7 +9746,7 @@ u8 GetCategoryBasedOnStats(u32 battler)
 
 static u32 GetFlingPowerFromItemId(u32 itemId)
 {
-    if (itemId >= ITEM_TM01 && itemId <= ITEM_HM08)
+    if (IsItemTMHM(itemId))
     {
         u32 power = gMovesInfo[ItemIdToBattleMoveId(itemId)].power;
         if (power > 1)

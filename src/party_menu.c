@@ -203,8 +203,7 @@ static void DisplayPartyPokemonHPBarCheck(struct Pokemon *mon, struct PartyMenuB
 static void DisplayPartyPokemonDescriptionText(u8 stringId, struct PartyMenuBox *menuBox, u8 drawMenuBoxOrText);
 static bool8 GetBattleEntryEligibility(struct Pokemon *mon);
 static bool8 IsMonAllowedInMinigame(u8 slot);
-static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 item, u8 tutor);
-static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor);
+static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 move);
 static void DisplayPartyPokemonBarDetail(u8 windowId, const u8 *str, u8 color, const u8 *dimensions);
 static void DisplayPartyPokemonLevel(u8 level, struct PartyMenuBox *menuBox);
 static void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, struct PartyMenuBox *menuBox);
@@ -262,8 +261,6 @@ static bool16 IsMonAllowedInDodrioBerryPicking(struct Pokemon *mon);
 static void Task_CancelParticipationYesNo(u8 taskId);
 static void Task_HandleCancelParticipationYesNoInput(u8 taskId);
 static void Task_TryCreateSelectionWindow(u8 taskId);
-static u16 GetTutorMove(u8 tutor);
-static bool8 CanLearnTutorMove(u16 species, u8 tutor);
 static void CreateSelectionWindow(void);
 static bool8 ShouldUseChooseMonText(void);
 static void UpdatePartyMonHPBar(u8 spriteId, struct Pokemon *mon);
@@ -399,6 +396,7 @@ static void ItemUseCB_ReplaceMoveWithTMHM(u8 taskId, TaskFunc func);
 static void Task_ReplaceMoveWithTMHM(u8 taskId);
 static void CB2_UseEvolutionStone(void);
 static bool8 MonCanEvolve(void);
+static u8 CanTeachMove(struct Pokemon *mon, u16 move);
 
 static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon);
 static void ShowMoveSelectWindow(u8 slot);
@@ -429,7 +427,6 @@ static EWRAM_DATA u8 sFinalLevel = 0;
 
 void (*gItemUseCB)(u8, TaskFunc);
 
-#include "data/pokemon/tutor_learnsets.h"
 #include "data/party_menu.h"
 
 void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCursorPos, u8 messageId, TaskFunc task, MainCallback callback)
@@ -865,10 +862,8 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
 
     if (gPartyMenu.action == PARTY_ACTION_MOVE_TUTOR)
     {
-        gSpecialVar_Result = FALSE;
-        if (gSpecialVar_0x8005 >= TUTOR_MOVE_COUNT)
-            return FALSE;
-        DisplayPartyPokemonDataToTeachMove(slot, 0, gSpecialVar_0x8005);
+        gSpecialVar_Result = FALSE;        
+        DisplayPartyPokemonDataToTeachMove(slot, gSpecialVar_0x8005);
     }
     else
     {
@@ -879,7 +874,7 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
         default:
             return FALSE;
         case 1: // TM/HM
-            DisplayPartyPokemonDataToTeachMove(slot, item, 0);
+            DisplayPartyPokemonDataToTeachMove(slot, ItemId_GetSecondaryId(item));
             break;
         case 2: // Evolution stone
             if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item, NULL) != SPECIES_NONE)
@@ -891,9 +886,9 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
     return TRUE;
 }
 
-static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 item, u8 tutor)
+static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 move)
 {
-    switch (CanMonLearnTMTutor(&gPlayerParty[slot], item, tutor))
+    switch (CanTeachMove(&gPlayerParty[slot], move))
     {
     case CANNOT_LEARN_MOVE:
     case CANNOT_LEARN_MOVE_IS_EGG:
@@ -1895,71 +1890,17 @@ static void Task_HandleCancelParticipationYesNoInput(u8 taskId)
     }
 }
 
-static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
+static u8 CanTeachMove(struct Pokemon *mon, u16 move)
 {
-    u16 move;
-
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
-
-    if (item >= ITEM_TM01)
-    {
-        if (!CanMonLearnTMHM(mon, item - ITEM_TM01))
-            return CANNOT_LEARN_MOVE;
-        else
-            move = ItemIdToBattleMoveId(item);
-    }
-    else if (CanLearnTutorMove(GetMonData(mon, MON_DATA_SPECIES), tutor) == FALSE)
-        return CANNOT_LEARN_MOVE;
-    else
-        move = GetTutorMove(tutor);
-
     if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
-    else
+    if (GetFirstPartnerMove(GetMonData(mon, MON_DATA_SPECIES_OR_EGG)) == move)
         return CAN_LEARN_MOVE;
-}
-
-static u16 GetTutorMove(u8 tutor)
-{
-    switch (tutor)
-    {
-    case TUTOR_MOVE_FRENZY_PLANT:
-        return MOVE_FRENZY_PLANT;
-    case TUTOR_MOVE_BLAST_BURN:
-        return MOVE_BLAST_BURN;
-    case TUTOR_MOVE_HYDRO_CANNON:
-        return MOVE_HYDRO_CANNON;
-    default:
-        return sTutorMoves[tutor];
-    }
-}
-
-static bool8 CanLearnTutorMove(u16 species, u8 tutor)
-{
-    switch (tutor)
-    {
-    case TUTOR_MOVE_FRENZY_PLANT:
-        if (species == SPECIES_VENUSAUR)
-            return TRUE;
-        else
-            return FALSE;
-    case TUTOR_MOVE_BLAST_BURN:
-        if (species == SPECIES_CHARIZARD)
-            return TRUE;
-        else
-            return FALSE;
-    case TUTOR_MOVE_HYDRO_CANNON:
-        if (species == SPECIES_BLASTOISE)
-            return TRUE;
-        else
-            return FALSE;
-    default:
-        if (sTutorLearnsets[species] & (1 << tutor))
-            return TRUE;
-        else
-            return FALSE;
-    }
+    if (!CanLearnTeachableMove(GetMonData(mon, MON_DATA_SPECIES_OR_EGG), move))
+        return CANNOT_LEARN_MOVE;
+    return CAN_LEARN_MOVE;
 }
 
 // Tutorial battle messages
@@ -5201,7 +5142,7 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc func)
     learnMoveId = ItemIdToBattleMoveId(item);
     StringCopy(gStringVar2, gMovesInfo[learnMoveId].name);
     learnMoveMethod = LEARN_VIA_TMHM;
-    switch (CanMonLearnTMTutor(mon, item, 0))
+    switch (CanTeachMove(mon, learnMoveId))
     {
     case CANNOT_LEARN_MOVE:
         DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMove);
@@ -5901,10 +5842,10 @@ static void TryTutorSelectedMon(u8 taskId)
         mon = &gPlayerParty[gPartyMenu.slotId];
         data = gPartyMenu.data;
         GetMonNickname(mon, gStringVar1);
-        gPartyMenu.learnMoveId = GetTutorMove(gSpecialVar_0x8005);
+        gPartyMenu.learnMoveId = gSpecialVar_0x8005;
         StringCopy(gStringVar2, gMovesInfo[gPartyMenu.learnMoveId].name);
         learnMoveMethod = LEARN_VIA_TUTOR;
-        switch (CanMonLearnTMTutor(mon, 0, gSpecialVar_0x8005))
+        switch (CanTeachMove(mon, gPartyMenu.learnMoveId))
         {
         case CANNOT_LEARN_MOVE:
             DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMove);
@@ -6295,26 +6236,28 @@ void ChooseMonForTradingBoard(u8 menuType, MainCallback callback)
 
 void ChooseMonForMoveTutor(void)
 {
-    if (gSpecialVar_0x8005 < TUTOR_MOVE_COUNT)
+    switch (gSpecialVar_0x8005)
     {
-        InitPartyMenu(PARTY_MENU_TYPE_FIELD,
-                      PARTY_LAYOUT_SINGLE,
-                      PARTY_ACTION_MOVE_TUTOR,
-                      FALSE,
-                      PARTY_MSG_TEACH_WHICH_MON,
-                      Task_HandleChooseMonInput,
-                      CB2_ReturnToFieldContinueScriptPlayMapMusic);
-    }
-    else
-    {
-        InitPartyMenu(PARTY_MENU_TYPE_FIELD,
-                      PARTY_LAYOUT_SINGLE,
-                      PARTY_ACTION_MOVE_TUTOR,
-                      FALSE,
-                      PARTY_MSG_NONE,
-                      TryTutorSelectedMon,
-                      CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        gPartyMenu.slotId = gSpecialVar_0x8007;
+        case MOVE_FRENZY_PLANT:
+        case MOVE_BLAST_BURN:
+        case MOVE_HYDRO_CANNON:
+            InitPartyMenu(PARTY_MENU_TYPE_FIELD,
+                        PARTY_LAYOUT_SINGLE,
+                        PARTY_ACTION_MOVE_TUTOR,
+                        FALSE,
+                        PARTY_MSG_NONE,
+                        TryTutorSelectedMon,
+                        CB2_ReturnToFieldContinueScriptPlayMapMusic);
+            gPartyMenu.slotId = gSpecialVar_0x8007;
+            break;
+        default:
+            InitPartyMenu(PARTY_MENU_TYPE_FIELD,
+                        PARTY_LAYOUT_SINGLE,
+                        PARTY_ACTION_MOVE_TUTOR,
+                        FALSE,
+                        PARTY_MSG_TEACH_WHICH_MON,
+                        Task_HandleChooseMonInput,
+                        CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
 }
 

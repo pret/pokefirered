@@ -5184,36 +5184,6 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
     }
 }
 
-u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
-{
-    u16 i;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
-    if (species == SPECIES_EGG)
-    {
-        return 0;
-    }
-    i = 0;
-    while (gSpeciesInfo[species].teachableLearnset[i] != MOVE_UNAVAILABLE)
-    {
-        if (gTMHMMoves[tm] == gSpeciesInfo[species].teachableLearnset[i])
-        {
-            return TRUE;
-        }
-        i++;
-    }
-    return FALSE;
-    // else if (tm < 32)
-    // {
-    //     u32 mask = 1 << tm;
-    //     return sTMHMLearnsets[species][0] & mask;
-    // }
-    // else
-    // {
-    //     u32 mask = 1 << (tm - 32);
-    //     return sTMHMLearnsets[species][1] & mask;
-    // }
-}
-
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 {
     u16 learnedMoves[MAX_MON_MOVES];
@@ -6231,4 +6201,48 @@ bool32 TryFormChange(u32 monId, u32 side, u16 method)
     }
 
     return FALSE;
+}
+
+u16 GetFirstPartnerMove(u16 species)
+{
+    switch(species)
+    {
+        case SPECIES_VENUSAUR:
+        case SPECIES_MEGANIUM:
+        case SPECIES_SCEPTILE:
+        case SPECIES_TORTERRA:
+        case SPECIES_SERPERIOR:
+        case SPECIES_CHESNAUGHT:
+        case SPECIES_DECIDUEYE:
+        case SPECIES_DECIDUEYE_HISUIAN:
+        case SPECIES_RILLABOOM:
+        case SPECIES_MEOWSCARADA:
+            return MOVE_FRENZY_PLANT;
+        case SPECIES_CHARIZARD:
+        case SPECIES_TYPHLOSION:
+        case SPECIES_TYPHLOSION_HISUIAN:
+        case SPECIES_BLAZIKEN:
+        case SPECIES_INFERNAPE:
+        case SPECIES_EMBOAR:
+        case SPECIES_DELPHOX:
+        case SPECIES_INCINEROAR:
+        case SPECIES_CINDERACE:
+        case SPECIES_SKELEDIRGE:
+            return MOVE_BLAST_BURN;
+        case SPECIES_BLASTOISE:
+        case SPECIES_FERALIGATR:
+        case SPECIES_SWAMPERT:
+        case SPECIES_EMPOLEON:
+        case SPECIES_SAMUROTT:
+        case SPECIES_SAMUROTT_HISUIAN:
+        case SPECIES_GRENINJA:
+        case SPECIES_GRENINJA_ASH:
+        case SPECIES_GRENINJA_BATTLE_BOND:
+        case SPECIES_PRIMARINA:
+        case SPECIES_INTELEON:
+        case SPECIES_QUAQUAVAL:
+            return MOVE_HYDRO_CANNON;
+        default:
+            return MOVE_NONE;
+    }
 }

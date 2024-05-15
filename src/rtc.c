@@ -307,6 +307,25 @@ u8 GetTimeOfDay(void)
     return TIME_DAY;
 }
 
+u8 GetSeason(void)
+{
+    u8 seasonIndex;
+
+    RtcCalcLocalTime();
+    seasonIndex = (gLocalTime.days / DAYS_PER_SEASON) % NUM_SEASONS;
+    switch (seasonIndex)
+    {
+        case 0:
+            return SEASON_SPRING;
+        case 1:
+            return SEASON_SUMMER;
+        case 2:
+            return SEASON_AUTUMN;
+        case 3:
+            return SEASON_WINTER;
+    }
+}
+
 void RtcCalcLocalTime(void)
 {
     RtcGetInfo(&sRtc);

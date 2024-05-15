@@ -14,6 +14,7 @@
 #include "link.h"
 #include "quest_log.h"
 #include "safari_zone.h"
+#include "rtc.h"
 #include "constants/maps.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
@@ -226,11 +227,56 @@ static bool8 UnlockedTanobyOrAreNotInTanoby(void)
     return FALSE;
 }
 
+static u16 GetSeasonalDeerling()
+{
+    switch (GetSeason())
+    {
+    case SEASON_SPRING:
+        return SPECIES_DEERLING_SPRING;
+    case SEASON_SUMMER:
+        return SPECIES_DEERLING_SUMMER;
+    case SEASON_AUTUMN:
+        return SPECIES_DEERLING_AUTUMN;
+    case SEASON_WINTER:
+        return SPECIES_DEERLING_WINTER;
+    }
+    return SPECIES_DEERLING;
+}
+
+static u16 GetSeasonalSawsbuck()
+{
+    switch (GetSeason())
+    {
+    case SEASON_SPRING:
+        return SPECIES_SAWSBUCK_SPRING;
+    case SEASON_SUMMER:
+        return SPECIES_SAWSBUCK_SUMMER;
+    case SEASON_AUTUMN:
+        return SPECIES_SAWSBUCK_AUTUMN;
+    case SEASON_WINTER:
+        return SPECIES_SAWSBUCK_WINTER;
+    }
+    return SPECIES_SAWSBUCK;
+}
+
+static u16 GetSeasonalSpecies(u16 species)
+{
+    switch(species)
+    {
+        case SPECIES_DEERLING:
+            return GetSeasonalDeerling();
+        case SPECIES_SAWSBUCK:
+            return GetSeasonalSawsbuck();
+    }
+    return species;
+}
+
 static void GenerateWildMon(u16 species, u8 level, u8 slot)
 {
     u32 personality;
     s8 chamber;
     ZeroEnemyPartyMons();
+    species = GetSeasonalSpecies(species);
     if (species != SPECIES_UNOWN)
     {
         CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, Random() % NUM_NATURES);

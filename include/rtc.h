@@ -88,6 +88,13 @@
 #define TIME_EVENING           2
 #define TIME_NIGHT             3
 
+#define SEASON_SPRING   0
+#define SEASON_SUMMER   1
+#define SEASON_AUTUMN   2
+#define SEASON_WINTER   3
+#define NUM_SEASONS     4
+#define DAYS_PER_SEASON 5
+
 extern struct Time gLocalTime;
 
 void RtcDisableInterrupts(void);
@@ -118,5 +125,6 @@ void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds);
 void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2);
 u32 RtcGetMinuteCount(void);
 u32 RtcGetLocalDayCount(void);
+u8 GetSeason(void);
 
 #endif // GUARD_RTC_UTIL_H

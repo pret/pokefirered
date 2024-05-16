@@ -307,6 +307,18 @@ u8 GetTimeOfDay(void)
     return TIME_DAY;
 }
 
+u8 GetCurrentHour(void)
+{
+    RtcCalcLocalTime();
+    return gLocalTime.hours;
+}
+
+u8 GetCurrentMinute(void)
+{
+    RtcCalcLocalTime();
+    return gLocalTime.minutes;
+}
+
 u8 GetSeason(void)
 {
     u8 seasonIndex;
@@ -324,6 +336,13 @@ u8 GetSeason(void)
         case 3:
             return SEASON_WINTER;
     }
+}
+
+u8 GetSeasonDay(void)
+{
+    RtcCalcLocalTime();
+
+    return (gLocalTime.days % DAYS_PER_SEASON) + 1;
 }
 
 void RtcCalcLocalTime(void)

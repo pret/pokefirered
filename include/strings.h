@@ -667,6 +667,12 @@ extern const u8 gSaveStatName_Player[];
 extern const u8 gSaveStatName_Badges[];
 extern const u8 gSaveStatName_Pokedex[];
 extern const u8 gSaveStatName_Time[];
+extern const u8 gText_MenuTime[];
+extern const u8 gText_MenuDay[];
+extern const u8 gText_SeasonSpring[];
+extern const u8 gText_SeasonSummer[];
+extern const u8 gText_SeasonAutumn[];
+extern const u8 gText_SeasonWinter[];
 
 // mail
 extern const u8 gText_From[];

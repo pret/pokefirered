@@ -32,6 +32,7 @@
 #include "pokedex_screen.h"
 #include "trainer_card.h"
 #include "option_menu.h"
+#include "rtc.h"
 #include "save_menu_util.h"
 #include "help_system.h"
 #include "constants/songs.h"
@@ -65,6 +66,7 @@ static EWRAM_DATA u8 sNumStartMenuItems = 0;
 static EWRAM_DATA u8 sStartMenuOrder[MAX_STARTMENU_ITEMS] = {};
 static EWRAM_DATA s8 sDrawStartMenuState[2] = {};
 static EWRAM_DATA u8 sSafariZoneStatsWindowId = 0;
+static EWRAM_DATA u8 sTimeWindowId = 0;
 static ALIGNED(4) EWRAM_DATA u8 sSaveStatsWindowId = 0;
 
 static u8 (*sSaveDialogCB)(void);
@@ -122,6 +124,26 @@ static const struct MenuAction sStartMenuActionTable[] = {
     { gText_MenuExit, {.u8_void = StartMenuExitCallback} },
     { gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback} },
     { gText_MenuPlayer, {.u8_void = StartMenuLinkPlayerCallback} }
+};
+
+static const struct WindowTemplate sTimeWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 10,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x198
+};
+
+static const struct WindowTemplate sTimeSafariWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 7,
+    .width = 10,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x198
 };
 
 static const struct WindowTemplate sSafariZoneStatsWindowTemplate = {
@@ -183,13 +205,6 @@ static const struct WindowTemplate sSaveStatsWindowTemplate = {
 static ALIGNED(2) const u8 sTextColor_StatName[] = { 1, 2, 3 };
 static ALIGNED(2) const u8 sTextColor_StatValue[] = { 1, 4, 5 };
 static ALIGNED(2) const u8 sTextColor_LocationHeader[] = { 1, 6, 7 };
-
-// Unused
-static void SetHasPokedexAndPokemon(void)
-{
-    FlagSet(FLAG_SYS_POKEDEX_GET);
-    FlagSet(FLAG_SYS_POKEMON_GET);
-}
 
 static void SetUpStartMenu(void)
 {
@@ -274,6 +289,53 @@ static void DestroySafariZoneStatsWindow(void)
     }
 }
 
+static void DrawTimeWindow(void)
+{
+    if (GetSafariZoneFlag())
+    {
+        sTimeWindowId = AddWindow(&sTimeSafariWindowTemplate);
+    }
+    else
+    {
+        sTimeWindowId = AddWindow(&sTimeWindowTemplate);
+    }
+    
+    PutWindowTilemap(sTimeWindowId);
+    DrawStdWindowFrame(sTimeWindowId, FALSE);
+    ConvertIntToDecimalStringN(gStringVar1, GetCurrentHour(), STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, GetCurrentMinute(), STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringExpandPlaceholders(gStringVar4, gText_MenuTime);
+    AddTextPrinterParameterized(sTimeWindowId, FONT_NORMAL, gStringVar4, 4, 1, 0xFF, NULL);
+
+    switch (GetSeason())
+    {
+        case SEASON_SPRING:
+            StringCopy(gStringVar1, gText_SeasonSpring);
+            break;
+        case SEASON_SUMMER:
+            StringCopy(gStringVar1, gText_SeasonSummer);
+            break;
+        case SEASON_AUTUMN:
+            StringCopy(gStringVar1, gText_SeasonAutumn);
+            break;
+        case SEASON_WINTER:
+            StringCopy(gStringVar1, gText_SeasonWinter);
+            break;
+    }
+    ConvertIntToDecimalStringN(gStringVar2, GetSeasonDay(), STR_CONV_MODE_RIGHT_ALIGN, 1);
+    StringExpandPlaceholders(gStringVar4, gText_MenuDay);
+    AddTextPrinterParameterized(sTimeWindowId, FONT_NORMAL, gStringVar4, 4, 18, 0xFF, NULL);
+
+    CopyWindowToVram(sTimeWindowId, COPYWIN_GFX);
+}
+
+static void DestroyTimeWindow(void)
+{
+    ClearStdWindowAndFrameToTransparent(sTimeWindowId, FALSE);
+    CopyWindowToVram(sTimeWindowId, COPYWIN_GFX);
+    RemoveWindow(sTimeWindowId);
+}
+
 static s8 PrintStartMenuItems(s8 *cursor_p, u8 nitems)
 {
     s16 i = *cursor_p;
@@ -321,10 +383,14 @@ static s8 DoDrawStartMenu(void)
         sDrawStartMenuState[0]++;
         break;
     case 4:
+        DrawTimeWindow();
+        sDrawStartMenuState[0]++;
+        break;
+    case 5:
         if (PrintStartMenuItems(&sDrawStartMenuState[1], 2) == TRUE)
             sDrawStartMenuState[0]++;
         break;
-    case 5:
+    case 6:
         sStartMenuCursorPos = Menu_InitCursor(GetStartMenuWindowId(), FONT_NORMAL, 0, 0, 15, sNumStartMenuItems, sStartMenuCursorPos);
         if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
         {
@@ -1003,6 +1069,7 @@ static void CloseStartMenu(void)
     RemoveStartMenuWindow();
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     UnlockPlayerFieldControls();
+    DestroyTimeWindow();
 }
 
 void AppendToList(u8 *list, u8 *cursor, u8 newEntry)

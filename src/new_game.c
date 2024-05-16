@@ -7,6 +7,7 @@
 #include "item_menu.h"
 #include "tm_case.h"
 #include "berry_pouch.h"
+#include "clock.h"
 #include "quest_log.h"
 #include "wild_encounter.h"
 #include "event_data.h"
@@ -129,6 +130,7 @@ void NewGameInitData(void)
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
+    InitTimeBasedEvents();
     ResetFameChecker();
     SetMoney(&gSaveBlock1Ptr->money, 900000); // change back to 3000
     ResetGameStats();

@@ -1195,30 +1195,29 @@ static bool32 NoTargetPresent(u8 battler, u32 move)
 static bool32 TryAegiFormChange(void)
 {
     // Only Aegislash with Stance Change can transform, transformed mons cannot.
-    // if (GetBattlerAbility(gBattlerAttacker) != ABILITY_STANCE_CHANGE
-    //     || gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
-    //     return FALSE;
+    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_STANCE_CHANGE
+        || gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
 
-    // switch (gBattleMons[gBattlerAttacker].species)
-    // {
-    // default:
-    //     return FALSE;
-    // case SPECIES_AEGISLASH_SHIELD: // Shield -> Blade
-    //     if (IS_MOVE_STATUS(gCurrentMove))
-    //         return FALSE;
-    //     gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH_BLADE;
-    //     break;
-    // case SPECIES_AEGISLASH_BLADE: // Blade -> Shield
-    //     if (gCurrentMove != MOVE_KINGS_SHIELD)
-    //         return FALSE;
-    //     gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH_SHIELD;
-    //     break;
-    // }
+    switch (gBattleMons[gBattlerAttacker].species)
+    {
+    default:
+        return FALSE;
+    case SPECIES_AEGISLASH_SHIELD: // Shield -> Blade
+        if (IS_MOVE_STATUS(gCurrentMove))
+            return FALSE;
+        gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH_BLADE;
+        break;
+    case SPECIES_AEGISLASH_BLADE: // Blade -> Shield
+        if (gCurrentMove != MOVE_KINGS_SHIELD)
+            return FALSE;
+        gBattleMons[gBattlerAttacker].species = SPECIES_AEGISLASH_SHIELD;
+        break;
+    }
 
-    // BattleScriptPushCursor();
-    // gBattlescriptCurrInstr = BattleScript_AttackerFormChange;
-    // return TRUE;
-    return FALSE;
+    BattleScriptPushCursor();
+    gBattlescriptCurrInstr = BattleScript_AttackerFormChange;
+    return TRUE;
 }
 
 bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType)
@@ -4463,7 +4462,6 @@ static void Cmd_getexp(void)
     case 3: // Set stats and give exp
         if (gBattleControllerExecFlags == 0)
         {
-            // gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0; TODO: bufferB as part of battle resource
             gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0; 
             if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_HP) && GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) != MAX_LEVEL)
             {

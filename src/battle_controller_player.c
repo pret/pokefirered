@@ -1510,7 +1510,11 @@ static void MoveSelectionDisplayMoveNames(u32 battler)
     {
         MoveSelectionDestroyCursorAt(i);
         StringCopy(gDisplayedStringBattle, gText_MoveInterfaceDynamicColors);
-        StringAppend(gDisplayedStringBattle, gMovesInfo[moveInfo->moves[i]].name);
+        if ((gBattleStruct->dynamax.playerSelect && CanDynamax(battler))
+            || IsDynamaxed(battler))
+            StringAppend(gDisplayedStringBattle, GetMoveName(GetMaxMove(battler, moveInfo->moves[i])));
+        else
+            StringAppend(gDisplayedStringBattle, GetMoveName(moveInfo->moves[i]));
         BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
         if (moveInfo->moves[i] != MOVE_NONE)
             ++gNumberOfMovesToChoose;

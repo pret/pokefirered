@@ -88,10 +88,10 @@ bool32 CanDynamax(u16 battlerId)
     u16 holdEffect = ItemId_GetHoldEffect(gBattleMons[battlerId].item);
 
     // Check if Dynamax battle flag is set. This needs to be defined in include/config/battle.h
-    #if B_FLAG_DYNAMAX_BATTLE != 0
-    if (!FlagGet(B_FLAG_DYNAMAX_BATTLE))
-    #endif
-        return FALSE;
+    // #if B_FLAG_DYNAMAX_BATTLE != 0
+    // if (!FlagGet(B_FLAG_DYNAMAX_BATTLE))
+    // #endif
+    //     return FALSE;
 
 
     // Check if Player has a Dynamax Band.
@@ -926,7 +926,6 @@ void BS_TrySetStatus1(void)
     if (effect)
     {
         gEffectBattler = gBattlerTarget;
-        
         BtlController_EmitSetMonData(gBattlerTarget, BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].status1), &gBattleMons[gBattlerTarget].status1);
         MarkBattlerForControllerExec(gBattlerTarget);
         gBattlescriptCurrInstr = cmd->nextInstr;

@@ -1247,14 +1247,13 @@ static void Cmd_attackcanceler(void)
     u16 attackerAbility = GetBattlerAbility(gBattlerAttacker);
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
-    // TODO: dynamax
     // Weight-based moves are blocked by Dynamax.
-    // if (IsDynamaxed(gBattlerTarget) && IsMoveBlockedByDynamax(gCurrentMove))
-    // {
-    //     BattleScriptPushCursor();
-    //     gBattlescriptCurrInstr = BattleScript_MoveBlockedByDynamax;
-    //     return;
-    // }
+    if (IsDynamaxed(gBattlerTarget) && IsMoveBlockedByDynamax(gCurrentMove))
+    {
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_MoveBlockedByDynamax;
+        return;
+    }
 
     if (gBattleOutcome != 0)
     {
@@ -2324,9 +2323,7 @@ static void Cmd_datahpupdate(void)
             gBattleMons[battler].species = SPECIES_MIMIKYU_BUSTED;
             if (B_DISGUISE_HP_LOSS >= GEN_8)
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
-                gBattleMoveDamage = gBattleMons[battler].maxHP / 8;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
             }
             BattleScriptPush(cmd->nextInstr);
             gBattlescriptCurrInstr = BattleScript_TargetFormChange;
@@ -3190,7 +3187,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     }
                 }
                 else if (GetBattlerTurnOrderNum(gEffectBattler) > gCurrentTurnActionNumber
-                        /* && !IsDynamaxed(gEffectBattler) */) // TODO: Dynamax
+                        && !IsDynamaxed(gEffectBattler))
                 {
                     gBattleMons[gEffectBattler].status2 |= sStatusFlagsForMoveEffects[gBattleScripting.moveEffect];
                     gBattlescriptCurrInstr++;
@@ -4003,7 +4000,7 @@ static void Cmd_tryfaintmon(void)
                 gSideTimers[B_SIDE_OPPONENT].retaliateTimer = 2;
             }
             if ((gHitMarker & HITMARKER_DESTINYBOND) && gBattleMons[gBattlerAttacker].hp != 0
-                 /* && !IsDynamaxed(gBattlerAttacker) */) // TODO: Dynamax
+                 && !IsDynamaxed(gBattlerAttacker))
             {
                 gHitMarker &= ~HITMARKER_DESTINYBOND;
                 BattleScriptPush(gBattlescriptCurrInstr);
@@ -5410,9 +5407,7 @@ static void Cmd_moveend(void)
                 if (gProtectStructs[gBattlerTarget].spikyShielded && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
                 {
                     gProtectStructs[gBattlerAttacker].touchedProtectLike = FALSE;
-                    // TODO: Dynamax
-                    // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 8;
-                    gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 8;
+                    gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 8;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SPIKY_SHIELD);
@@ -5808,9 +5803,8 @@ static void Cmd_moveend(void)
                 {
                     gLastPrintedMoves[gBattlerAttacker] = gChosenMove;
                     gLastUsedMove = gCurrentMove;
-                    // TODO: Dynamax
-                    // if (IsMaxMove(gCurrentMove))
-                    //     gBattleStruct->dynamax.lastUsedBaseMove = gBattleStruct->dynamax.baseMove[gBattlerAttacker];
+                    if (IsMaxMove(gCurrentMove))
+                        gBattleStruct->dynamax.lastUsedBaseMove = gBattleStruct->dynamax.baseMove[gBattlerAttacker];
                 }
             }
             if (!(gAbsentBattlerFlags & gBitTable[gBattlerAttacker])
@@ -7833,9 +7827,7 @@ static bool32 TryCheekPouch(u32 battler, u32 itemId)
         && gBattleStruct->ateBerry[GetBattlerSide(battler)] & gBitTable[gBattlerPartyIndexes[battler]]
         && !BATTLER_MAX_HP(battler))
     {
-        // TODO: Dynamax
-        // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 3;
-        gBattleMoveDamage = gBattleMons[battler].maxHP / 3;
+        gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 3;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
         gBattleMoveDamage *= -1;
@@ -8955,9 +8947,7 @@ static void Cmd_various(void)
         }
         else
         {
-            // TODO: Dynamax
-            // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 16;
-            gBattleMoveDamage = gBattleMons[battler].maxHP / 16;
+            gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 16;
             if (gBattleMoveDamage == 0)
                 gBattleMoveDamage = 1;
             gBattleMoveDamage *= -1;
@@ -9465,7 +9455,7 @@ static void Cmd_various(void)
         else
         {
             if (gBattleMons[gBattlerTarget].ability == gBattleMons[gBattlerAttacker].ability
-                /* || IsDynamaxed(gBattlerTarget) */) // TODO: Dynamax
+                || IsDynamaxed(gBattlerTarget))
             {
                 gBattlescriptCurrInstr = cmd->failInstr;
             }
@@ -9636,7 +9626,7 @@ static void Cmd_various(void)
         if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || MoveHasAdditionalEffectSelf(move, MOVE_EFFECT_RECHARGE)
          || gMovesInfo[move].instructBanned
          || gBattleMoveEffects[gMovesInfo[move].effect].twoTurnEffect
-         /* || IsDynamaxed(gBattlerTarget) */) // TODO: Dynamax
+         || IsDynamaxed(gBattlerTarget))
         {
             gBattlescriptCurrInstr = cmd->failInstr;
         }
@@ -10062,9 +10052,7 @@ static void Cmd_various(void)
     case VARIOUS_TRY_HEAL_QUARTER_HP:
     {
         VARIOUS_ARGS(const u8 *failInstr);
-        // TODO: Dynamax
-        // gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 4;
-        gBattleMoveDamage = gBattleMons[battler].maxHP / 4;
+        gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 4;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
         gBattleMoveDamage *= -1;
@@ -10383,9 +10371,7 @@ static void Cmd_various(void)
             VARIOUS_ARGS(const u8 *failInstr);
 
             bool8 atLeastOneStatBoosted = FALSE;
-            // TODO: Dynamax
-            // u16 hpFraction = max(1, GetNonDynamaxMaxHP(gBattlerAttacker) / 3);
-            u16 hpFraction = max(1, gBattleMons[gBattlerAttacker].maxHP / 3);
+            u16 hpFraction = max(1, GetNonDynamaxMaxHP(gBattlerAttacker) / 3);
 
             for (i = 1; i < NUM_STATS; i++)
             {
@@ -10978,9 +10964,7 @@ static void Cmd_tryhealhalfhealth(void)
     if (cmd->battler == BS_ATTACKER)
         gBattlerTarget = gBattlerAttacker;
 
-    // TODO: Dynamax
-    // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
+    gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
     if (gBattleMoveDamage == 0)
         gBattleMoveDamage = 1;
     gBattleMoveDamage *= -1;
@@ -11125,17 +11109,13 @@ static void Cmd_manipulatedamage(void)
     case DMG_RECOIL_FROM_MISS:
         if (B_RECOIL_IF_MISS_DMG >= GEN_5)
         {
-            // TODO: Dynamax
-            // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
-            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
         }
         else if (B_RECOIL_IF_MISS_DMG == GEN_4)
         {
             if ((gBattleMons[gBattlerTarget].maxHP / 2) < gBattleMoveDamage)
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
-                gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
             }
         }
         else
@@ -11149,34 +11129,24 @@ static void Cmd_manipulatedamage(void)
         gBattleMoveDamage *= 2;
         break;
     case DMG_1_8_TARGET_HP:
-        // TODO: Dynamax
-        // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 8;
-        gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 8;
+        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 8;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
         break;
     case DMG_FULL_ATTACKER_HP:
-        // TODO: Dynamax
-        // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker);
-        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP;
+        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker);
         break;
     case DMG_CURR_ATTACKER_HP:
-        // TODO: Dynamax
-        // gBattleMoveDamage = GetNonDynamaxHP(gBattlerAttacker);
-        gBattleMoveDamage = gBattleMons[gBattlerAttacker].hp;
+        gBattleMoveDamage = GetNonDynamaxHP(gBattlerAttacker);
         break;
     case DMG_BIG_ROOT:
         gBattleMoveDamage = GetDrainedBigRootHp(gBattlerAttacker, gBattleMoveDamage);
         break;
     case DMG_1_2_ATTACKER_HP:
-        // TODO: Dynamax
-        // gBattleMoveDamage = (GetNonDynamaxMaxHP(gBattlerAttacker) + 1) / 2; // Half of Max HP Rounded UP
-        gBattleMoveDamage = (gBattleMons[gBattlerAttacker].maxHP + 1) / 2; // Half of Max HP Rounded UP
+        gBattleMoveDamage = (GetNonDynamaxMaxHP(gBattlerAttacker) + 1) / 2; // Half of Max HP Rounded UP
         break;
     case DMG_RECOIL_FROM_IMMUNE:
-        // TODO: Dynamax
-        // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
-        gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 2;
+        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
         break;
     }
 
@@ -11358,9 +11328,7 @@ static void Cmd_stockpiletohpheal(void)
         }
         else
         {
-            // TODO: Dynamax
-            // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
-            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
+            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
 
             if (gBattleMoveDamage == 0)
                 gBattleMoveDamage = 1;
@@ -12174,15 +12142,14 @@ static void Cmd_tryKO(void)
     u32 holdEffect = GetBattlerHoldEffect(gBattlerTarget, TRUE);
     u16 targetAbility = GetBattlerAbility(gBattlerTarget);
 
-    // TODO: Dynamax
     // Dynamaxed Pokemon cannot be hit by OHKO moves.
-    // if (IsDynamaxed(gBattlerTarget))
-    // {
-    //     gMoveResultFlags |= MOVE_RESULT_MISSED;
-    //     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_KO_UNAFFECTED;
-    //     gBattlescriptCurrInstr = cmd->failInstr;
-    //     return;
-    // }
+    if (IsDynamaxed(gBattlerTarget))
+    {
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_KO_UNAFFECTED;
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
 
     gPotentialItemEffectBattler = gBattlerTarget;
     if (holdEffect == HOLD_EFFECT_FOCUS_BAND
@@ -12265,9 +12232,7 @@ static void Cmd_damagetohalftargethp(void)
 {
     CMD_ARGS();
 
-    // TODO: Dynamax
-    // gBattleMoveDamage = GetNonDynamaxHP(gBattlerTarget) / 2;
-    gBattleMoveDamage = gBattleMons[gBattlerTarget].hp / 2;
+    gBattleMoveDamage = GetNonDynamaxHP(gBattlerTarget) / 2;
     if (gBattleMoveDamage == 0)
         gBattleMoveDamage = 1;
 
@@ -12317,9 +12282,7 @@ static void Cmd_weatherdamage(void)
                 && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
                 && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
             }
@@ -12332,9 +12295,7 @@ static void Cmd_weatherdamage(void)
                 && !(gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK))
             {
                 gBattlerAbility = gBattlerAttacker;
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
                 gBattleMoveDamage *= -1;
@@ -12346,9 +12307,7 @@ static void Cmd_weatherdamage(void)
                 && !(gStatuses3[gBattlerAttacker] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
                 && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_SAFETY_GOGGLES)
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 16;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
             }
@@ -12537,13 +12496,9 @@ static void Cmd_setsubstitute(void)
     CMD_ARGS();
 
     u32 factor = gMovesInfo[gCurrentMove].effect == EFFECT_SHED_TAIL ? 2 : 4;
-    // TODO: Dynamax
-    // u32 hp = GetNonDynamaxMaxHP(gBattlerAttacker) / factor;
-    u32 hp = gBattleMons[gBattlerAttacker].maxHP / factor;
+    u32 hp = GetNonDynamaxMaxHP(gBattlerAttacker) / factor;
 
-    // TODO: Dynamax
-    // if (GetNonDynamaxMaxHP(gBattlerAttacker) / factor == 0)
-    if (gBattleMons[gBattlerAttacker].maxHP / factor == 0)
+    if (GetNonDynamaxMaxHP(gBattlerAttacker) / factor == 0)
         hp = 1;
 
     if (gBattleMons[gBattlerAttacker].hp <= hp)
@@ -12553,9 +12508,7 @@ static void Cmd_setsubstitute(void)
     }
     else
     {
-        // TODO: Dynamax
-        // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / factor; // one bit value will only work for Pokémon which max hp can go to 1020(which is more than possible in games)
-        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / factor; // one bit value will only work for Pokémon which max hp can go to 1020(which is more than possible in games)
+        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / factor; // one bit value will only work for Pokémon which max hp can go to 1020(which is more than possible in games)
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
@@ -12755,8 +12708,7 @@ static void Cmd_trysetencore(void)
 
     s32 i;
 
-    // TODO: Dynamax
-    if (FALSE /* IsMaxMove(gLastMoves[gBattlerTarget]) && !IsDynamaxed(gBattlerTarget) */)
+    if (IsMaxMove(gLastMoves[gBattlerTarget]) && !IsDynamaxed(gBattlerTarget))
     {
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
@@ -12800,12 +12752,8 @@ static void Cmd_painsplitdmgcalc(void)
 
     if (!(DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)))
     {
-        // TODO: Dynamax
-        // s32 hpDiff = (gBattleMons[gBattlerAttacker].hp + GetNonDynamaxHP(gBattlerTarget)) / 2;
-        s32 hpDiff = (gBattleMons[gBattlerAttacker].hp + gBattleMons[gBattlerTarget].hp) / 2;
-        // TODO: Dynamax
-        // s32 painSplitHp = gBattleMoveDamage = GetNonDynamaxHP(gBattlerTarget) - hpDiff;
-        s32 painSplitHp = gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - hpDiff;
+        s32 hpDiff = (gBattleMons[gBattlerAttacker].hp + GetNonDynamaxHP(gBattlerTarget)) / 2;
+        s32 painSplitHp = gBattleMoveDamage = GetNonDynamaxHP(gBattlerTarget) - hpDiff;
         u8 *storeLoc = (void *)(&gBattleScripting.painSplitHp);
 
         storeLoc[0] = (painSplitHp);
@@ -13035,7 +12983,7 @@ static void Cmd_tryspiteppreduce(void)
         s32 i;
 
         // Get move slot to reduce PP.
-        if (FALSE /* IsMaxMove(gLastMoves[gBattlerTarget]) */) // TODO: Dynamax
+        if (IsMaxMove(gLastMoves[gBattlerTarget]))
         {
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
@@ -13055,10 +13003,9 @@ static void Cmd_tryspiteppreduce(void)
         if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > (B_CAN_SPITE_FAIL >= GEN_4 ? 0 : 1))
         {
             s32 ppToDeduct = B_PP_REDUCED_BY_SPITE >= GEN_4 ? 4 : (Random() & 3) + 2;
-            // TODO: Dynamax
             // G-Max Depletion only deducts 2 PP.
-            // if (IsMaxMove(gCurrentMove) && gMovesInfo[gCurrentMove].argument == MAX_EFFECT_SPITE)
-            //     ppToDeduct = 2;
+            if (IsMaxMove(gCurrentMove) && gMovesInfo[gCurrentMove].argument == MAX_EFFECT_SPITE)
+                ppToDeduct = 2;
 
             if (gBattleMons[gBattlerTarget].pp[i] < ppToDeduct)
                 ppToDeduct = gBattleMons[gBattlerTarget].pp[i];
@@ -13202,9 +13149,7 @@ static void Cmd_cursetarget(void)
     else
     {
         gBattleMons[gBattlerTarget].status2 |= STATUS2_CURSED;
-        // TODO: Dynamax
-        // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
-        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
@@ -13367,9 +13312,7 @@ static void Cmd_presentdamagecalculation(void)
         }
         else
         {
-            // TODO: Dynamax
-            // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 4;
-            gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 4;
+            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 4;
             if (gBattleMoveDamage == 0)
                 gBattleMoveDamage = 1;
             gBattleMoveDamage *= -1;
@@ -13535,19 +13478,14 @@ static void Cmd_halvehp(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    // TODO: Dynamax
-    // u32 halfHp = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
-    u32 halfHp = gBattleMons[gBattlerAttacker].maxHP / 2;
+    u32 halfHp = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
 
-    // TODO: Dynamax
-    if (/* !(GetNonDynamaxMaxHP(gBattlerAttacker) / 2) */ !(gBattleMons[gBattlerAttacker].maxHP / 2))
+    if (!(GetNonDynamaxMaxHP(gBattlerAttacker) / 2))
         halfHp = 1;
 
     if (gBattleMons[gBattlerAttacker].hp > halfHp)
     {
-        // TODO: Dynamax
-        // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
-        gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
@@ -13656,36 +13594,26 @@ static void Cmd_recoverbasedonsunlight(void)
         {
             if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SANDSTORM)
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = 20 * GetNonDynamaxMaxHP(gBattlerAttacker) / 30;
-                gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
+                gBattleMoveDamage = 20 * GetNonDynamaxMaxHP(gBattlerAttacker) / 30;
             }
             else
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
             }
         }
         else
         {
             if (!(gBattleWeather & B_WEATHER_ANY) || !WEATHER_HAS_EFFECT || GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA)
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 2;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
             }
             else if (gBattleWeather & B_WEATHER_SUN)
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = 20 * GetNonDynamaxMaxHP(gBattlerAttacker) / 30;
-                gBattleMoveDamage = 20 * gBattleMons[gBattlerAttacker].maxHP / 30;
+                gBattleMoveDamage = 20 * GetNonDynamaxMaxHP(gBattlerAttacker) / 30;
             }
             else // not sunny weather
             {
-                // TODO: Dynamax
-                // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
-                gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 4;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
             }
         }
 
@@ -13989,7 +13917,7 @@ static void Cmd_settorment(void)
     CMD_ARGS(const u8 *failInstr);
 
     if (gBattleMons[gBattlerTarget].status2 & STATUS2_TORMENT
-        /* || IsDynamaxed(gBattlerTarget) */) // TODO: Dynamax
+        || IsDynamaxed(gBattlerTarget))
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -14228,9 +14156,7 @@ static void Cmd_trywish(void)
         }
         else
         {
-            // TODO: Dynamax
-            // gBattleMoveDamage = max(1, GetNonDynamaxMaxHP(gBattlerAttacker) / 2);
-            gBattleMoveDamage = max(1, gBattleMons[gBattlerTarget].maxHP / 2);
+            gBattleMoveDamage = max(1, GetNonDynamaxMaxHP(gBattlerAttacker) / 2);
         }
 
         gBattleMoveDamage *= -1;
@@ -14310,15 +14236,13 @@ static void Cmd_setdamagetohealthdifference(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (gBattleMons[gBattlerTarget].hp /* GetNonDynamaxHP(gBattlerTarget) */ <= gBattleMons[gBattlerAttacker].hp) // TODO: Dynamax
+    if (GetNonDynamaxHP(gBattlerTarget) <= gBattleMons[gBattlerAttacker].hp)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
     {
-        // TODO: Dynamax
-        // gBattleMoveDamage = GetNonDynamaxHP(gBattlerTarget) - gBattleMons[gBattlerAttacker].hp;
-        gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - gBattleMons[gBattlerAttacker].hp;
+        gBattleMoveDamage = GetNonDynamaxHP(gBattlerTarget) - gBattleMons[gBattlerAttacker].hp;
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
@@ -14379,7 +14303,7 @@ static void Cmd_tryswapabilities(void)
     }
     else
     {
-        if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT /* || IsDynamaxed(gBattlerTarget) */) // TODO: Dynamax
+        if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT || IsDynamaxed(gBattlerTarget))
         {
             gBattlescriptCurrInstr = cmd->failInstr;
         }
@@ -14588,9 +14512,7 @@ static void Cmd_switchoutabilities(void)
             MarkBattlerForControllerExec(battler);
             break;
         case ABILITY_REGENERATOR:
-            // TODO: Dynamax
-            // gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 3;
-            gBattleMoveDamage = gBattleMons[gBattlerAttacker].maxHP / 3;
+            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 3;
             gBattleMoveDamage += gBattleMons[battler].hp;
             if (gBattleMoveDamage > gBattleMons[battler].maxHP)
                 gBattleMoveDamage = gBattleMons[battler].maxHP;
@@ -16198,11 +16120,11 @@ void BS_TryHealPulse(void)
     else
     {
         if (GetBattlerAbility(gBattlerAttacker) == ABILITY_MEGA_LAUNCHER && gMovesInfo[gCurrentMove].pulseMove)
-            gBattleMoveDamage = -(/* GetNonDynamaxMaxHP(gBattlerTarget) */ gBattleMons[gBattlerTarget].maxHP * 75 / 100); // TODO: Dynamax
+            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) * 75 / 100);
         else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && gMovesInfo[gCurrentMove].argument == MOVE_EFFECT_FLORAL_HEALING)
-            gBattleMoveDamage = -(/* GetNonDynamaxMaxHP(gBattlerTarget) */ gBattleMons[gBattlerTarget].maxHP * 2 / 3); // TODO: Dynamax
+            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) * 2 / 3);
         else
-            gBattleMoveDamage = -(/* GetNonDynamaxMaxHP(gBattlerTarget) */ gBattleMons[gBattlerTarget].maxHP / 2); // TODO: Dynamax 
+            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) / 2);
 
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = -1;
@@ -16220,7 +16142,7 @@ void BS_TryCopycat(void)
     }
     else
     {
-        if (FALSE/* IsMaxMove(gLastUsedMove) */) // TODO: Dynamax
+        if (IsMaxMove(gLastUsedMove))
             gCalledMove = gBattleStruct->dynamax.lastUsedBaseMove;
         else
             gCalledMove = gLastUsedMove;

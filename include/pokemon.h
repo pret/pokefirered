@@ -821,5 +821,6 @@ bool32 IsSpeciesEnabled(u16 species);
 u32 GetUnownSpeciesId(u32 personality);
 u8 CalculatePartyCount(struct Pokemon *party);
 u16 GetFirstPartnerMove(u16 species);
+const u8 *GetMoveName(u16 moveId);
 
 #endif // GUARD_POKEMON_H

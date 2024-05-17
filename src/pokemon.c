@@ -4034,14 +4034,13 @@ u8 GetNatureFromPersonality(u32 personality)
 
 static u32 GetGMaxTargetSpecies(u32 species)
 {
-    // TODO: Dynamax
-    // const struct FormChange *formChanges = GetSpeciesFormChanges(species);
-    // u32 i;
-    // for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
-    // {
-    //     if (formChanges[i].method == FORM_CHANGE_BATTLE_GIGANTAMAX)
-    //         return formChanges[i].targetSpecies;
-    // }
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+    u32 i;
+    for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+    {
+        if (formChanges[i].method == FORM_CHANGE_BATTLE_GIGANTAMAX)
+            return formChanges[i].targetSpecies;
+    }
     return SPECIES_NONE;
 }
 
@@ -6233,4 +6232,9 @@ u16 GetFirstPartnerMove(u16 species)
         default:
             return MOVE_NONE;
     }
+}
+
+const u8 *GetMoveName(u16 moveId)
+{
+    return gMovesInfo[moveId].name;
 }

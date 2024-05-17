@@ -1326,7 +1326,7 @@ void HideTriggerSprites(void)
     HideMegaTriggerSprite();
     HideBurstTriggerSprite();
     // HideZMoveTriggerSprite(); // TODO: Z-Move
-    // HideDynamaxTriggerSprite(); / TODO: Dynamax
+    HideDynamaxTriggerSprite(); 
 }
 
 void DestroyMegaTriggerSprite(void)

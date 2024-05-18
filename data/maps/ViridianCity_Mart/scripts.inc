@@ -107,6 +107,9 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_CHARIZARDITE_Y
 	.2byte ITEM_SILPH_SCOPE
 	.2byte ITEM_DYNAMAX_BAND
+	.2byte ITEM_Z_POWER_RING
+	.2byte ITEM_NORMALIUM_Z
+	.2byte ITEM_ULTRANECROZIUM_Z
 	.2byte ITEM_NONE
 	release
 	end

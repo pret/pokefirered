@@ -28,6 +28,7 @@
 #include "reshow_battle_screen.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "battle_z_move.h"
 #include "rtc.h"
 #include "wild_encounter.h"
 #include "constants/battle_anim.h"
@@ -1293,7 +1294,7 @@ static void Cmd_attackcanceler(void)
     && GetBattlerAbility(gBattlerAttacker) == ABILITY_PARENTAL_BOND
     && IsMoveAffectedByParentalBond(gCurrentMove, gBattlerAttacker)
     && !(gAbsentBattlerFlags & gBitTable[gBattlerTarget])
-    /*&& gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE*/) // TODO: Z-Moves
+    && gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE)
     {
         gSpecialStatuses[gBattlerAttacker].parentalBondState = PARENTAL_BOND_1ST_HIT;
         gMultiHitCounter = 2;
@@ -1549,12 +1550,11 @@ static bool32 AccuracyCalcHelper(u16 move)
         return TRUE;
     }
 
-    // TODO: Z-Moves
-    // if (gBattleStruct->zmove.active && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
-    // {
-    //     JumpIfMoveFailed(7, move);
-    //     return TRUE;
-    // }
+    if (gBattleStruct->zmove.active && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
+    {
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
 
     if ((gStatuses3[gBattlerTarget] & STATUS3_PHANTOM_FORCE)
     || ((gStatuses3[gBattlerTarget] & STATUS3_ON_AIR) && !(gMovesInfo[move].damagesAirborne || gMovesInfo[move].damagesAirborneDoubleDamage))
@@ -10979,11 +10979,10 @@ static void SetMoveForMirrorMove(u32 move)
 {
     gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
     // Edge case, we used Z Mirror Move, got the stat boost and now need to use the Z-move
-    if (FALSE /* gBattleStruct->zmove.toBeUsed[gBattlerAttacker] && !IS_MOVE_STATUS(move) */) // TODO: Z-Moves
+    if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] && !IS_MOVE_STATUS(move))
     {
-        // TODO: Z-Moves
-        // gCurrentMove = gBattleStruct->zmove.chosenZMove = GetTypeBasedZMove(move, gBattlerAttacker);
-        // QueueZMove(gBattlerAttacker, move);
+        gCurrentMove = gBattleStruct->zmove.chosenZMove = GetTypeBasedZMove(move, gBattlerAttacker);
+        QueueZMove(gBattlerAttacker, move);
     }
     else
     {
@@ -15800,10 +15799,10 @@ void BS_TrySymbiosis(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-void BS_SetZEffect(void) // TODO: Z-Moves
+void BS_SetZEffect(void)
 {
     NATIVE_ARGS();
-    // SetZEffect();   // Handles battle script jumping internally
+    SetZEffect();   // Handles battle script jumping internally
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

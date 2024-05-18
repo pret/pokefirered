@@ -18,6 +18,7 @@
 #include "battle_interface.h"
 #include "battle_scripts.h"
 #include "battle_message.h"
+#include "battle_z_move.h"
 #include "malloc.h"
 #include "safari_zone.h"
 #include "sound.h"
@@ -2839,8 +2840,7 @@ u8 effect = 0;
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_DISABLED: // disabled move
-            // TODO: Z-Moves
-            if (/*gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE &&*/ gDisableStructs[gBattlerAttacker].disabledMove == gCurrentMove && gDisableStructs[gBattlerAttacker].disabledMove != MOVE_NONE)
+            if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && gDisableStructs[gBattlerAttacker].disabledMove == gCurrentMove && gDisableStructs[gBattlerAttacker].disabledMove != MOVE_NONE)
             {
                 gProtectStructs[gBattlerAttacker].usedDisabledMove = TRUE;
                 gBattleScripting.battler = gBattlerAttacker;
@@ -2852,8 +2852,7 @@ u8 effect = 0;
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_HEAL_BLOCKED:
-            // TODO: Z-Moves
-            if (/*gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE &&*/ gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK && IsHealBlockPreventingMove(gBattlerAttacker, gCurrentMove))
+            if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && gStatuses3[gBattlerAttacker] & STATUS3_HEAL_BLOCK && IsHealBlockPreventingMove(gBattlerAttacker, gCurrentMove))
             {
                 gProtectStructs[gBattlerAttacker].usedHealBlockedMove = TRUE;
                 gBattleScripting.battler = gBattlerAttacker;
@@ -2877,8 +2876,7 @@ u8 effect = 0;
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_TAUNTED: // taunt
-            // TODO: Z-Moves
-            if (/*gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE &&*/ gDisableStructs[gBattlerAttacker].tauntTimer && IS_MOVE_STATUS(gCurrentMove))
+            if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && gDisableStructs[gBattlerAttacker].tauntTimer && IS_MOVE_STATUS(gCurrentMove))
             {
                 gProtectStructs[gBattlerAttacker].usedTauntedMove = TRUE;
                 CancelMultiTurnMoves(gBattlerAttacker);
@@ -2889,8 +2887,7 @@ u8 effect = 0;
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_IMPRISONED: // imprisoned
-            // TODO: Z-Moves
-            if (/* gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && */ GetImprisonedMovesCount(gBattlerAttacker, gCurrentMove))
+            if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] == MOVE_NONE && GetImprisonedMovesCount(gBattlerAttacker, gCurrentMove))
             {
                 gProtectStructs[gBattlerAttacker].usedImprisonedMove = TRUE;
                 CancelMultiTurnMoves(gBattlerAttacker);
@@ -3080,40 +3077,39 @@ u8 effect = 0;
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_Z_MOVES:
-            // TODO: Z-Moves
-            // if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] != MOVE_NONE)
-            // {
-            //     // For Z-Mirror Move, so it doesn't play the animation twice.
-            //     bool32 alreadyUsed = (gBattleStruct->zmove.used[gBattlerAttacker] == TRUE);
+            if (gBattleStruct->zmove.toBeUsed[gBattlerAttacker] != MOVE_NONE)
+            {
+                // For Z-Mirror Move, so it doesn't play the animation twice.
+                bool32 alreadyUsed = (gBattleStruct->zmove.used[gBattlerAttacker] == TRUE);
 
-            //     //attacker has a queued z move
-            //     gBattleStruct->zmove.active = TRUE;
-            //     gBattleStruct->zmove.activeCategory = gBattleStruct->zmove.categories[gBattlerAttacker];
-            //     RecordItemEffectBattle(gBattlerAttacker, HOLD_EFFECT_Z_CRYSTAL);
-            //     gBattleStruct->zmove.used[gBattlerAttacker] = TRUE;
-            //     if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && IsPartnerMonFromSameTrainer(gBattlerAttacker))
-            //         gBattleStruct->zmove.used[BATTLE_PARTNER(gBattlerAttacker)] = TRUE; //if 1v1 double, set partner used flag as well
+                //attacker has a queued z move
+                gBattleStruct->zmove.active = TRUE;
+                gBattleStruct->zmove.activeCategory = gBattleStruct->zmove.categories[gBattlerAttacker];
+                RecordItemEffectBattle(gBattlerAttacker, HOLD_EFFECT_Z_CRYSTAL);
+                gBattleStruct->zmove.used[gBattlerAttacker] = TRUE;
+                if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && IsPartnerMonFromSameTrainer(gBattlerAttacker))
+                    gBattleStruct->zmove.used[BATTLE_PARTNER(gBattlerAttacker)] = TRUE; //if 1v1 double, set partner used flag as well
 
-            //     gBattleScripting.battler = gBattlerAttacker;
-            //     if (gBattleStruct->zmove.activeCategory == DAMAGE_CATEGORY_STATUS)
-            //     {
-            //         gBattleStruct->zmove.effect = gMovesInfo[gBattleStruct->zmove.baseMoves[gBattlerAttacker]].zMove.effect;
-            //         if (!alreadyUsed)
-            //         {
-            //             BattleScriptPushCursor();
-            //             gBattlescriptCurrInstr = BattleScript_ZMoveActivateStatus;
-            //         }
-            //     }
-            //     else
-            //     {
-            //         if (!alreadyUsed)
-            //         {
-            //             BattleScriptPushCursor();
-            //             gBattlescriptCurrInstr = BattleScript_ZMoveActivateDamaging;
-            //         }
-            //     }
-            //     effect = 1;
-            // }
+                gBattleScripting.battler = gBattlerAttacker;
+                if (gBattleStruct->zmove.activeCategory == DAMAGE_CATEGORY_STATUS)
+                {
+                    gBattleStruct->zmove.effect = gMovesInfo[gBattleStruct->zmove.baseMoves[gBattlerAttacker]].zMove.effect;
+                    if (!alreadyUsed)
+                    {
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_ZMoveActivateStatus;
+                    }
+                }
+                else
+                {
+                    if (!alreadyUsed)
+                    {
+                        BattleScriptPushCursor();
+                        gBattlescriptCurrInstr = BattleScript_ZMoveActivateDamaging;
+                    }
+                }
+                effect = 1;
+            }
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_MULTIHIT_MOVES:
@@ -8533,9 +8529,8 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
     u32 basePower = gMovesInfo[move].power;
     u32 weight, hpFraction, speed;
 
-    // TODO: Z-Moves
-    // if (gBattleStruct->zmove.active)
-    //     return GetZMovePower(gBattleStruct->zmove.baseMoves[battlerAtk]);
+    if (gBattleStruct->zmove.active)
+        return GetZMovePower(gBattleStruct->zmove.baseMoves[battlerAtk]);
 
     switch (gMovesInfo[move].effect)
     {

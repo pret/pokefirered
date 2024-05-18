@@ -38,8 +38,6 @@ struct BattleWindowText
 static EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] = {};
 static EWRAM_DATA struct BattleMsgData *sBattleMsgDataPtr = NULL;
 
-static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
-
 // merged
 static const u8 sText_Trainer1LoseText[] = _("{B_TRAINER1_LOSE_TEXT}");
 static const u8 sText_PkmnGainedEXP[] = _("{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} EXP. Points!\p");
@@ -3297,7 +3295,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
     return dstId;
 }
 
-static void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
+void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 {
     u32 srcId = 1;
     u32 value = 0;

@@ -16,6 +16,7 @@
 #include "battle_tower.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_ai_switch_items.h"
+#include "battle_z_move.h"
 #include "party_menu.h"
 #include "trainer_tower.h"
 #include "constants/battle_ai.h"
@@ -398,9 +399,8 @@ static void OpponentHandleChooseMove(u32 battler)
                     if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
                 }
-                // TODO: Z-Moves
-                // if (ShouldUseZMove(battler, gBattlerTarget, chosenMove))
-                //     QueueZMove(battler, chosenMove);
+                if (ShouldUseZMove(battler, gBattlerTarget, chosenMove))
+                    QueueZMove(battler, chosenMove);
                 // If opponent can Mega Evolve, do it.
                 if (CanMegaEvolve(battler))
                     BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_MEGA_EVOLUTION) | (gBattlerTarget << 8));

@@ -18,6 +18,7 @@
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "battle_script_commands.h"
+#include "battle_z_move.h"
 #include "reshow_battle_screen.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_partner.h"
@@ -545,16 +546,15 @@ void HandleInputChooseMove(u32 battler)
             moveTarget = GetBattlerMoveTargetType(battler, moveInfo->moves[gMoveSelectionCursor[battler]]);
         }
 
-        // TODO: Z-Moves
-        // if (gBattleStruct->zmove.viewing)
-        // {
-        //     u16 chosenMove = moveInfo->moves[gMoveSelectionCursor[battler]];
+        if (gBattleStruct->zmove.viewing)
+        {
+            u16 chosenMove = moveInfo->moves[gMoveSelectionCursor[battler]];
 
-        //     QueueZMove(battler, chosenMove);
-        //     gBattleStruct->zmove.viewing = FALSE;
-        //     if (gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].category != DAMAGE_CATEGORY_STATUS)
-        //         moveTarget = MOVE_TARGET_SELECTED;  //damaging z moves always have selected target
-        // }
+            QueueZMove(battler, chosenMove);
+            gBattleStruct->zmove.viewing = FALSE;
+            if (gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].category != DAMAGE_CATEGORY_STATUS)
+                moveTarget = MOVE_TARGET_SELECTED;  //damaging z moves always have selected target
+        }
 
         // Status moves turn into Max Guard when Dynamaxed, targets user.
         if ((IsDynamaxed(battler) || gBattleStruct->dynamax.playerSelect))
@@ -664,7 +664,7 @@ void HandleInputChooseMove(u32 battler)
             BeginNormalPaletteFade(0xF0000, 0, 0, 0, RGB_WHITE);
         }
     }
-    else if (JOY_NEW(DPAD_LEFT))
+    else if (JOY_NEW(DPAD_LEFT) && !gBattleStruct->zmove.viewing)
     {
         if (gMoveSelectionCursor[battler] & 1)
         {
@@ -674,10 +674,11 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
+            TryChangeZIndicator(battler, gMoveSelectionCursor[battler]);
             BeginNormalPaletteFade(0xF0000, 0, 0, 0, RGB_WHITE);
         }
     }
-    else if (JOY_NEW(DPAD_RIGHT))
+    else if (JOY_NEW(DPAD_RIGHT) && !gBattleStruct->zmove.viewing)
     {
         if (!(gMoveSelectionCursor[battler] & 1)
          && (gMoveSelectionCursor[battler] ^ 1) < gNumberOfMovesToChoose)
@@ -688,10 +689,11 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
+            TryChangeZIndicator(battler, gMoveSelectionCursor[battler]);
             BeginNormalPaletteFade(0xF0000, 0, 0, 0, RGB_WHITE);
         }
     }
-    else if (JOY_NEW(DPAD_UP))
+    else if (JOY_NEW(DPAD_UP) && !gBattleStruct->zmove.viewing)
     {
         if (gMoveSelectionCursor[battler] & 2)
         {
@@ -701,10 +703,11 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
+            TryChangeZIndicator(battler, gMoveSelectionCursor[battler]);
             BeginNormalPaletteFade(0xF0000, 0, 0, 0, RGB_WHITE);
         }
     }
-    else if (JOY_NEW(DPAD_DOWN))
+    else if (JOY_NEW(DPAD_DOWN) && !gBattleStruct->zmove.viewing)
     {
         if (!(gMoveSelectionCursor[battler] & 2)
          && (gMoveSelectionCursor[battler] ^ 2) < gNumberOfMovesToChoose)
@@ -715,10 +718,11 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
+            TryChangeZIndicator(battler, gMoveSelectionCursor[battler]);
             BeginNormalPaletteFade(0xF0000, 0, 0, 0, RGB_WHITE);
         }
     }
-    else if (JOY_NEW(SELECT_BUTTON))
+    else if (JOY_NEW(SELECT_BUTTON) && !gBattleStruct->zmove.viewing)
     {
         if (gNumberOfMovesToChoose > 1 && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
         {
@@ -745,7 +749,7 @@ void HandleInputChooseMove(u32 battler)
             gBattleStruct->burst.playerSelect ^= 1;
             ChangeBurstTriggerSprite(gBattleStruct->burst.triggerSpriteId, gBattleStruct->burst.playerSelect);
             PlaySE(SE_SELECT);
-        }/* 
+        }
         else if (gBattleStruct->zmove.viable)
         {
             // show z move name / info
@@ -755,7 +759,7 @@ void HandleInputChooseMove(u32 battler)
                 MoveSelectionDisplayZMove(gBattleStruct->zmove.chosenZMove, battler);
             else
                 ReloadMoveNames(battler);
-        } */
+        }
         else if (CanDynamax(battler))
         {
             gBattleStruct->dynamax.playerSelect ^= 1;
@@ -1804,13 +1808,12 @@ static void PlayerHandleChooseMove(u32 battler)
         gBattleStruct->dynamax.triggerSpriteId = 0xFF;
     if (CanDynamax(battler))
         CreateDynamaxTriggerSprite(battler, 0);
-    // TODO: Z-Move
-    // if (!IsZMoveTriggerSpriteActive())
-    //     gBattleStruct->zmove.triggerSpriteId = 0xFF;
+    if (!IsZMoveTriggerSpriteActive())
+        gBattleStruct->zmove.triggerSpriteId = 0xFF;
 
-    // GetUsableZMoves(battler, moveInfo->moves);
-    // gBattleStruct->zmove.viable = IsZMoveUsable(battler, gMoveSelectionCursor[battler]);
-    // CreateZMoveTriggerSprite(battler, gBattleStruct->zmove.viable);
+    GetUsableZMoves(battler, moveInfo->moves);
+    gBattleStruct->zmove.viable = IsZMoveUsable(battler, gMoveSelectionCursor[battler]);
+    CreateZMoveTriggerSprite(battler, gBattleStruct->zmove.viable);
     gBattlerControllerFuncs[battler] = HandleChooseMoveAfterDma3;
 }
 

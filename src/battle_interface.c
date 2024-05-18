@@ -3,6 +3,7 @@
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "battle_message.h"
+#include "battle_z_move.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "menu.h"
@@ -1325,7 +1326,7 @@ void HideTriggerSprites(void)
 {
     HideMegaTriggerSprite();
     HideBurstTriggerSprite();
-    // HideZMoveTriggerSprite(); // TODO: Z-Move
+    HideZMoveTriggerSprite();
     HideDynamaxTriggerSprite(); 
 }
 

@@ -1,5 +1,5 @@
 #include "global.h"
-// #include "battle_z_move.h"
+#include "battle_z_move.h"
 #include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -455,14 +455,13 @@ s32 AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectivenes
     SetBattlerData(battlerAtk);
     SetBattlerData(battlerDef);
 
-    // TODO: Z-moves
-    /* if (considerZPower && IsViableZMove(battlerAtk, move))
+    if (considerZPower && IsViableZMove(battlerAtk, move))
     {
         //temporarily enable z moves for damage calcs
         gBattleStruct->zmove.baseMoves[battlerAtk] = move;
         gBattleStruct->zmove.active = TRUE;
     }
-    else  */if (gMovesInfo[move].effect == EFFECT_PHOTON_GEYSER)
+    else if (gMovesInfo[move].effect == EFFECT_PHOTON_GEYSER)
         gBattleStruct->swapDamageCategory = (GetCategoryBasedOnStats(gBattlerAttacker) == DAMAGE_CATEGORY_PHYSICAL);
 
     if (gMovesInfo[move].effect == EFFECT_NATURE_POWER)
@@ -3627,8 +3626,7 @@ bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove)
     if (gBattleStruct->zmove.used[battlerAtk])
         return FALSE;   //cant use z move twice
 
-    // TODO: Z-moves
-    if (FALSE /* IsViableZMove(battlerAtk, chosenMove) */)
+    if (IsViableZMove(battlerAtk, chosenMove))
     {
         u8 effectiveness;
 

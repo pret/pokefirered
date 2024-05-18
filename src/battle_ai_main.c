@@ -7,7 +7,7 @@
 #include "battle_ai_main.h"
 #include "battle_controllers.h"
 #include "battle_setup.h"
-// #include "battle_z_move.h"
+#include "battle_z_move.h"
 #include "data.h"
 #include "event_data.h"
 #include "item.h"
@@ -2426,7 +2426,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 if (instructedMove == MOVE_NONE
                   || gMovesInfo[instructedMove].instructBanned
                   || MoveHasAdditionalEffectSelf(instructedMove, MOVE_EFFECT_RECHARGE)
-                //   || IsZMove(instructedMove) // TODO: Z-move
+                  || IsZMove(instructedMove)
                   || (gLockedMoves[battlerDef] != 0 && gLockedMoves[battlerDef] != 0xFFFF)
                   || gBattleMons[battlerDef].status2 & STATUS2_MULTIPLETURNS
                   || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove))

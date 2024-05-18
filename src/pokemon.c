@@ -79,19 +79,10 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 // NOTE: The order of the elements in the 3 arrays below is irrelevant.
 // To reorder the pokedex, see the values in include/constants/pokedex.h.
 
- // Assigns all species to the Hoenn Dex Index (Summary No. for Hoenn Dex)
- // removed:
- // static const u16 sKantoToNationalOrder[NUM_SPECIES - 1] =
-
-
- // Assigns all species to the National Dex Index (Summary No. for National Dex)
- // removed:
- //static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
-
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
-#define KANTO_TO_NATIONAL(name)     [KANTO_DEX_##name - 1] = NATIONAL_DEX_##name
+#define KANTO_TO_NATIONAL(name)     [KANTO_DEX_##name] = NATIONAL_DEX_##name
 
-static const u16 sKantoToNationalOrder[NUM_SPECIES - 1] =
+static const u16 sKantoDexNumToNationalDexNum[KANTO_DEX_COUNT] =
 {
     // Kanto
     KANTO_TO_NATIONAL(BULBASAUR),
@@ -4482,24 +4473,6 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum)
     return species;
 }
 
-u16 NationalToKantoOrder(u16 nationalNum)
-{
-    u16 kantoNum;
-
-    if (!nationalNum)
-        return 0;
-
-    kantoNum = 0;
-
-    while (kantoNum < (KANTO_DEX_COUNT - 1) && sKantoToNationalOrder[kantoNum] != nationalNum)
-        kantoNum++;
-
-    if (kantoNum >= KANTO_DEX_COUNT - 1)
-        return 0;
-
-    return kantoNum + 1;
-}
-
 static u16 NationalToHoennOrder(u16 nationalNum)
 {
     u16 hoennNum;
@@ -4526,12 +4499,35 @@ u16 SpeciesToNationalPokedexNum(u16 species)
     return gSpeciesInfo[species].natDexNum;
 }
 
+u16 NationalToKantoOrder(u16 natDexNum)
+{
+    u16 i;
+
+    if (natDexNum == 0)
+    {
+        return KANTO_DEX_NONE;
+    }
+
+    for (i = KANTO_DEX_BULBASAUR; i < KANTO_DEX_COUNT; i++)
+    {
+        if (sKantoDexNumToNationalDexNum[i] == natDexNum)
+        {
+            return i;
+        }
+    }
+    return KANTO_DEX_NONE;
+}
+
+u16 SpeciesToKantoDexNum(u16 species)
+{
+    return NationalToKantoOrder(SpeciesToNationalPokedexNum(species));
+}
+
 u16 KantoToNationalOrder(u16 kantoNum)
 {
-    if (!kantoNum || kantoNum >= KANTO_DEX_COUNT)
-        return 0;
-
-    return sKantoToNationalOrder[kantoNum - 1];
+    if (KANTO_DEX_NONE < kantoNum && kantoNum < KANTO_DEX_COUNT)
+        return sKantoDexNumToNationalDexNum[kantoNum];
+    return NATIONAL_DEX_NONE;
 }
 
 u16 HoennToNationalOrder(u16 hoennNum)

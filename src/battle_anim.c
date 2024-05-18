@@ -392,12 +392,13 @@ static void Cmd_createsprite(void)
     if (subpriority < 3)
         subpriority = 3;
 
-    CreateSpriteAndAnimate(
-        template,
+    if (CreateSpriteAndAnimate(template,
         GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2),
         GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET),
-        subpriority);
-    gAnimVisualTaskCount++;
+        subpriority) != MAX_SPRITES)
+    {
+        gAnimVisualTaskCount++;
+    }
 }
 
 static void Cmd_createvisualtask(void)

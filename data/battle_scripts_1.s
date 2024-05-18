@@ -6978,7 +6978,7 @@ BattleScript_UltraBurst::
 	waitmessage B_WAIT_TIME_LONG
 	setbyte gIsCriticalHit, 0
 	handleultraburst BS_ATTACKER, 0
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT @ TODO: animation B_ANIM_ULTRA_BURST
+	playanimation BS_ATTACKER, B_ANIM_ULTRA_BURST
 	waitanimation
 	handleultraburst BS_ATTACKER, 1
 	printstring STRINGID_ULTRABURSTCOMPLETED

@@ -200,6 +200,24 @@ u8 GetAnimBattlerId(u8 wantedBattler);
 // battle_anim_throw.c
 bool32 IsCriticalCapture(void);
 
+// battle_anim_effects_2.c
+void AnimUproarRing(struct Sprite *sprite);
+extern const union AnimCmd *const gExplosionAnimTable[];
+extern const union AffineAnimCmd *const gThinRingExpandingAffineAnimTable[];
+
+// battle_anim_electric.c
+void AnimGrowingChargeOrb(struct Sprite *sprite);
+void AnimZapCannonSpark(struct Sprite *sprite);
+void AnimSparkElectricity(struct Sprite *sprite);
+void AnimSparkElectricityFlashing(struct Sprite *sprite);
+extern const union AffineAnimCmd *const gAffineAnims_GrowingElectricOrb[];
+extern const union AffineAnimCmd *const gAffineAnims_FlashingSpark[];
+extern const union AnimCmd *const gAnims_ThunderboltOrb[];
+
+// battle_anim_fire.c
+extern const union AnimCmd *const gAnims_FirePlume[];
+
+
 //
 void MoveBattlerSpriteToBG(u8 battlerId, u8);
 void ResetBattleAnimBg(u8);

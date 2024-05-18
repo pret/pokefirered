@@ -300,6 +300,8 @@
 #define ANIM_TAG_MEGA_STONE                 (ANIM_SPRITES_START + 289)
 #define ANIM_TAG_MEGA_SYMBOL                (ANIM_SPRITES_START + 290)
 #define ANIM_TAG_MEGA_PARTICLES             (ANIM_SPRITES_START + 291)
+#define ANIM_TAG_ULTRA_BURST_SYMBOL         (ANIM_SPRITES_START + 292)
+#define ANIM_TAG_STRAIGHT_BEAM              (ANIM_SPRITES_START + 293)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -356,6 +358,7 @@
 #define BG_SOLAR_BEAM_OPPONENT 24
 #define BG_SOLAR_BEAM_PLAYER 25
 #define BG_SOLAR_BEAM_CONTESTS 26
+#define BG_ZMOVE_MOUNTAIN 61
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_FORM_CHANGE              0
@@ -390,6 +393,7 @@
 #define B_ANIM_SLIDE_OFFSCREEN          29 // for Emergency Exit
 // pokeemerald
 #define B_ANIM_MEGA_EVOLUTION           30
+#define B_ANIM_ULTRA_BURST              31
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -446,6 +450,9 @@
 #define F_PAL_ATK_SIDE    (F_PAL_ATTACKER | F_PAL_ATK_PARTNER)
 #define F_PAL_DEF_SIDE    (F_PAL_TARGET | F_PAL_DEF_PARTNER)
 #define F_PAL_BATTLERS    (F_PAL_ATK_SIDE | F_PAL_DEF_SIDE)
+#define F_PAL_ADJACENT            (F_PAL_DEF_SIDE | F_PAL_ATK_PARTNER)
+#define F_PAL_ALL_BUT_DEF         (F_PAL_ATK_SIDE | F_PAL_DEF_PARTNER)
+#define F_PAL_ALL_BUT_ATK_PARTNER (F_PAL_ATTACKER | F_PAL_DEF_SIDE)
 // The below are only used by AnimTask_BlendBattleAnimPal to get battler sprite palettes by position rather than by role.
 // It's redundant with F_PAL_BATTLERS, because they're only ever used together to refer to all the battlers at once.
 #define F_PAL_BATTLERS_2  (1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)

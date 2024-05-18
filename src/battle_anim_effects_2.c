@@ -87,7 +87,6 @@ static void AnimBreathPuff(struct Sprite *);
 static void AnimAngerMark(struct Sprite *);
 static void AnimBlendThinRing(struct Sprite *);
 static void AnimHyperVoiceRing(struct Sprite *);
-static void AnimUproarRing(struct Sprite *);
 static void AnimSpeedDust(struct Sprite *);
 static void AnimHealBellMusicNote(struct Sprite *);
 static void AnimMagentaHeart(struct Sprite *);
@@ -637,7 +636,7 @@ static const union AnimCmd sExplosionAnimCmds[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sExplosionAnimTable[] =
+const union AnimCmd *const gExplosionAnimTable[] =
 {
     sExplosionAnimCmds,
 };
@@ -647,7 +646,7 @@ const struct SpriteTemplate gExplosionSpriteTemplate =
     .tileTag = ANIM_TAG_EXPLOSION,
     .paletteTag = ANIM_TAG_EXPLOSION,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sExplosionAnimTable,
+    .anims = gExplosionAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSpriteOnMonPos,
@@ -718,7 +717,7 @@ static const union AffineAnimCmd sHyperVoiceRingAffineAnimCmds[] =
     AFFINEANIMCMD_END_ALT(1),
 };
 
-static const union AffineAnimCmd *const sThinRingExpandingAffineAnimTable[] =
+const union AffineAnimCmd *const gThinRingExpandingAffineAnimTable[] =
 {
     sThinRingExpandingAffineAnimCmds1,
     sThinRingExpandingAffineAnimCmds2,
@@ -736,7 +735,7 @@ const struct SpriteTemplate gThinRingExpandingSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = sThinRingExpandingAffineAnimTable,
+    .affineAnims = gThinRingExpandingAffineAnimTable,
     .callback = AnimSpriteOnMonPos,
 };
 
@@ -770,7 +769,7 @@ const struct SpriteTemplate gBlendThinRingExpandingSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = sThinRingExpandingAffineAnimTable,
+    .affineAnims = gThinRingExpandingAffineAnimTable,
     .callback = AnimBlendThinRing,
 };
 
@@ -792,7 +791,7 @@ const struct SpriteTemplate gUproarRingSpriteTemplate =
     .oam = &gOamData_AffineDouble_ObjBlend_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = sThinRingExpandingAffineAnimTable,
+    .affineAnims = gThinRingExpandingAffineAnimTable,
     .callback = AnimUproarRing,
 };
 
@@ -2682,7 +2681,7 @@ static void AnimHyperVoiceRing(struct Sprite *sprite)
     sprite->callback(sprite);
 }
 
-static void AnimUproarRing(struct Sprite *sprite)
+void AnimUproarRing(struct Sprite *sprite)
 {
     u8 index = IndexOfSpritePaletteTag(ANIM_TAG_THIN_RING);
     

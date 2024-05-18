@@ -10564,7 +10564,7 @@ bool32 TryBattleFormChange(u32 battler, u16 method)
             restoreSpecies = TRUE;
 
         // Gigantamax Pokemon have their forms reverted after fainting, switching, or ending the battle.
-        else if (FALSE /* IsGigantamaxed(battler) */ && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
+        else if (IsGigantamaxed(battler) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
             restoreSpecies = TRUE;
 
         if (restoreSpecies)

@@ -1013,6 +1013,7 @@ gBattleAnims_General::
 	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
 	.4byte General_SlideOffScreen           @ B_ANIM_SLIDE_OFFSCREEN
 	.4byte General_MegaEvolution            @ B_ANIM_MEGA_EVOLUTION
+	.4byte General_UltraBurst               @ B_ANIM_ULTRA_BURST
 
 	.align 2
 gBattleAnims_Special::
@@ -1351,7 +1352,6 @@ Move_NATURES_MADNESS:
 Move_MULTI_ATTACK:
 Move_MIND_BLOWN:
 Move_PLASMA_FISTS:
-Move_PHOTON_GEYSER:
 Move_ZIPPY_ZAP:
 Move_SPLISHY_SPLASH:
 Move_FLOATY_FALL:
@@ -1561,7 +1561,6 @@ Move_CLANGOROUS_SOULBLAZE:
 Move_GUARDIAN_OF_ALOLA:
 Move_SEARING_SUNRAZE_SMASH:
 Move_MENACING_MOONRAZE_MAELSTROM:
-Move_LIGHT_THAT_BURNS_THE_SKY:
 Move_SOUL_STEALING_7_STAR_STRIKE:
 @@@@ MAX MOVES
 Move_MAX_GUARD:
@@ -12336,6 +12335,311 @@ MegaEvolutionParticles:
 	delay 3
 	createsprite gMegaParticlesSpriteTemplate, ANIM_ATTACKER, 2, 5, -40, 13
 	delay 3
+	return
+
+General_UltraBurst::
+	loadspritegfx ANIM_TAG_ULTRA_BURST_SYMBOL
+	loadspritegfx ANIM_TAG_SPARK_2 @spark
+	loadspritegfx ANIM_TAG_LEAF @green
+	loadspritegfx ANIM_TAG_ELECTRIC_ORBS @charge particles
+	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT @psycho boost
+	monbg ANIM_ATTACKER
+	setalpha 12, 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, (F_PAL_BG | F_PAL_ADJACENT), 0x2, 0x0, 0xF, 0x0000
+	waitforvisualfinish
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 60, 2, 12 	@ charge particles to attacker
+	delay 0x1e
+	loopsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER, 0xe, 0xa
+	createsprite gSuperpowerOrbSpriteTemplate, ANIM_TARGET, 3, 0x0
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	delay 20
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 0, 16, RGB_WHITEALPHA
+	createvisualtask AnimTask_TransformMon, 2, 1, 0
+	createsprite gUltraBurstSymbolSpriteTemplate, ANIM_ATTACKER, 0x0, 0x0, 0x0, 0x0, 0x0
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 16, 0, RGB_WHITEALPHA
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 5, 14
+	waitforvisualfinish
+	createvisualtask SoundTask_PlayNormalCry, 0
+	waitforvisualfinish
+	clearmonbg ANIM_ATK_PARTNER
+	blendoff
+	end
+
+
+Move_LIGHT_THAT_BURNS_THE_SKY::
+	loadspritegfx ANIM_TAG_SPARK_2 @spark
+	loadspritegfx ANIM_TAG_LEAF @green
+	loadspritegfx ANIM_TAG_ELECTRIC_ORBS @charge particles
+	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT @psycho boost
+	fadetobg BG_ZMOVE_MOUNTAIN
+	waitbgfadeout
+	loadspritegfx ANIM_TAG_FOCUS_ENERGY
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
+	call EndureEffect
+	delay 0x8
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 2, 2, 0, 11, RGB(31, 31, 22)
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
+	call EndureEffect
+	delay 0x8
+	call EndureEffect
+	delay 0x8
+	unloadspritegfx ANIM_TAG_FOCUS_ENERGY
+	monbg ANIM_ATTACKER
+	setalpha 12, 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, (F_PAL_BG | F_PAL_ADJACENT), 0x2, 0x0, 0xF, 0x0000
+	waitforvisualfinish
+	createvisualtask AnimTask_ElectricChargingParticles, 2, ANIM_ATTACKER, 60, 2, 12 	@ charge particles to attacker
+	delay 0x1e
+	loopsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER, 0xe, 0xa
+	createsprite gSuperpowerOrbSpriteTemplate, ANIM_TARGET, 3, 0x0
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	call LightThatBurnsTheSkyGreenSparks
+	delay 0xe
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x2, 0x0, 0x4, 0x0000
+	clearmonbg ANIM_ATTACKER
+	blendoff
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffe0, 0xfff0, 0x25, 0x2c, 0x20, 0x8, 0x0, 0x3
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffe0, 0xfff0, 0x25, 0x2c, 0x60, 0x8, 0x1, 0x3
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffe0, 0xfff0, 0x25, 0x2c, 0xa0, 0x8, 0x0, 0x3
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffe0, 0xfff0, 0x25, 0x2c, 0xe0, 0x8, 0x2, 0x3
+	delay 0x1
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffd0, 0xffe4, 0x25, 0x2c, 0x20, 0x8, 0x0, 0x3
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffd0, 0xffe4, 0x25, 0x2c, 0x60, 0x8, 0x1, 0x3
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffd0, 0xffe4, 0x25, 0x2c, 0xa0, 0x8, 0x0, 0x3
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffd0, 0xffe4, 0x25, 0x2c, 0xe0, 0x8, 0x2, 0x3
+	delay 0x1
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffc0, 0xffd8, 0x25, 0x2c, 0x20, 0x8, 0x0, 0x3
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffc0, 0xffd8, 0x25, 0x2c, 0x60, 0x8, 0x1, 0x3
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffc0, 0xffd8, 0x25, 0x2c, 0xa0, 0x8, 0x0, 0x3
+	createsprite gSparkElectricityFlashingSpriteTemplate, ANIM_ATTACKER, 2, 0xffc0, 0xffd8, 0x25, 0x2c, 0xe0, 0x8, 0x2, 0x3
+	delay 0x6
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 3, 60
+	unloadspritegfx ANIM_TAG_LEAF @green
+	unloadspritegfx ANIM_TAG_ELECTRIC_ORBS @charge
+	loadspritegfx ANIM_TAG_FIRE_PLUME @blast burn
+	loadspritegfx ANIM_TAG_EXPLOSION_2 @explode
+	loadspritegfx ANIM_TAG_STRAIGHT_BEAM
+	panse SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 0x2, 0x0
+	monbg ANIM_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x6, 0x0, 0x10, 0x43FF @;Light yellow
+	call PhotonGeyserBeam
+	call LightThatBurnsTheSkyGeyser
+	call LightThatBurnsTheSkyBlast_1
+	call LightThatBurnsTheSkyGeyser
+	call LightThatBurnsTheSkyBlast_2
+	call LightThatBurnsTheSkyGeyser
+	createvisualtask AnimTask_BlendBattleAnimPal, 0x2, (F_PAL_BG | F_PAL_ALL_BUT_DEF), 0x4, 0x0, 0x10, 0x43FF
+	call LightThatBurnsTheSkyBlast_3
+	clearmonbg ANIM_TARGET
+	waitforvisualfinish
+	delay 0x10
+	createvisualtask AnimTask_BlendBattleAnimPal, 0x2, (F_PAL_BG | F_PAL_BATTLERS_2), 0x0, 0x10, 0x0, 0x43FF
+	restorebg
+	waitbgfadeout
+	end
+LightThatBurnsTheSkyBlast_1:
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0xffe0, 0x0, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0xffec, 0xfff6, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 0x0, 0xfff0, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 0x14, 0xfff6, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 0x20, 0x0, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 0x14, 0xa, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x10, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0xffec, 0xa, 0x18, 0x0, 0x0, 0x0
+	return
+LightThatBurnsTheSkyBlast_2:
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0xffc0, 0x0, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 6, 0xffd8, 0xffec, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 70, 0x0, 0xffe0, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 70, 0x28, 0xffec, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 0x40, 0x0, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 0x28, 0x14, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x20, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0xffd8, 0x14, 0x18, 0x0, 0x0, 0x0
+	return
+LightThatBurnsTheSkyBlast_3:
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0xffa0, 0x0, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 6, 0xffc4, 0xffe2, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 70, 0x0, 0xffd0, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 70, 0x3c, 0xffe2, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 0x60, 0x0, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 66, 0x3c, 0x1e, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x30, 0x18, 0x0, 0x0, 0x0
+	createsprite gLightThatBurnsTheSkyBlastBurnSpriteTemplate, ANIM_ATTACKER, 2, 0xffc4, 0x1e, 0x18, 0x0, 0x0, 0x0
+	return
+LightThatBurnsTheSkyGeyser:
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0x0003, 0x0005, 0x1, 0x0
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0xfff5, 0xfff1, 0x1, 0x0
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0x0008, 0xfffb, 0x1, 0x0
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0xfffa, 0x0012, 0x1, 0x0
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0x0000, 0x0005, 0x1, 0x0
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0x0003, 0xfff5, ANIM_TARGET, 0x0
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0xfff5, 0xffe1, ANIM_TARGET, 0x0
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0x0008, 0xffeb, ANIM_TARGET, 0x0
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0xfffa, 0x0002, ANIM_TARGET, 0x0
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0x0000, 0xfff5, ANIM_TARGET, 0x0
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0x0003, 0xffe5, ANIM_TARGET, 0x0
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0xfff5, 0xffd1, ANIM_TARGET, 0x0
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0x0008, 0xffdb, ANIM_TARGET, 0x0
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0xfffa, 0xfff2, ANIM_TARGET, 0x0
+	delay 0x0
+	createsprite gLightThatBurnsTheSkyExplosionSpriteTemplate, ANIM_TARGET, 4, 0x0000, 0xffe5, ANIM_TARGET, 0x0
+	delay 0x0
+	return
+LightThatBurnsTheSkyGreenSparks:
+	createsprite gLightThatBurnsTheSkyGreenSparkSpriteTemplate, ANIM_TARGET, 3, 0x0, 0x0, 0x30, 0x2c, 0x0, 0x28, 0x0, 0x3
+	createsprite gLightThatBurnsTheSkyGreenSparkSpriteTemplate, ANIM_TARGET, 3, 0x0, 0x0, 0x30, 0x2c, 0x40, 0x28, 0x1, 0x3
+	createsprite gLightThatBurnsTheSkyGreenSparkSpriteTemplate, ANIM_TARGET, 3, 0x0, 0x0, 0x30, 0x2c, 0x80, 0x28, 0x0, 0x3
+	createsprite gLightThatBurnsTheSkyGreenSparkSpriteTemplate, ANIM_TARGET, 3, 0x0, 0x0, 0x30, 0x2c, 0x0, 0x28, 0x2, 0x3
+	createsprite gLightThatBurnsTheSkyGreenSparkSpriteTemplate, ANIM_TARGET, 3, 0x0, 0x0, 0x15, 0x2c, 0x0, 0x28, 0x0, 0x3
+	createsprite gLightThatBurnsTheSkyGreenSparkSpriteTemplate, ANIM_TARGET, 3, 0x0, 0x0, 0x15, 0x2c, 0x40, 0x28, 0x1, 0x3
+	createsprite gLightThatBurnsTheSkyGreenSparkSpriteTemplate, ANIM_TARGET, 3, 0x0, 0x0, 0x15, 0x2c, 0x80, 0x28, 0x0, 0x3
+	createsprite gLightThatBurnsTheSkyGreenSparkSpriteTemplate, ANIM_TARGET, 3, 0x0, 0x0, 0x15, 0x2c, 0x0, 0x28, 0x2, 0x3
+	delay 0x10
+	return
+
+Move_PHOTON_GEYSER::
+	loadspritegfx ANIM_TAG_SHOCK_3 @charge
+	loadspritegfx ANIM_TAG_SPARK_2 @ElectricityEffect
+	loadspritegfx ANIM_TAG_SMALL_RED_EYE @red color
+	loadspritegfx ANIM_TAG_THIN_RING @calm mind
+	loadspritegfx ANIM_TAG_SMALL_EMBER @yellow color
+	loadspritegfx ANIM_TAG_ORBS @recover
+	monbg ANIM_ATTACKER
+	setalpha 12, 8
+	createsprite gPhotonGeyserChargeTemplate, ANIM_ATTACKER, 2, 0x0
+	call PhotonGeyserSparks1
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 0xffd8, 0xffd8, 0x10
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x28, 0x10
+	delay 0xA
+	call PhotonGeyserSparks2
+	delay 0xA
+	call PhotonGeyserSparks1
+	delay 0xA
+	call PhotonGeyserSparks2
+	delay 0xA
+	call PhotonGeyserSparks1
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0xffd8, 0x10
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 0x28, 0x14, 0x10
+	delay 0xA
+	call PhotonGeyserSparks2
+	delay 0xA
+	call PhotonGeyserSparks1
+	delay 0xA
+	call PhotonGeyserSparks2
+	delay 0xA
+	call PhotonGeyserSparks1
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 0xffd8, 0x0, 0x10
+	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 0x28, 0x0, 0x10
+	delay 0xA
+	call PhotonGeyserSparks2
+	delay 0xA
+	call PhotonGeyserSparks1
+	delay 0xA
+	call PhotonGeyserSparks2
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0xF, 0x0
+	clearmonbg ANIM_ATTACKER
+	playsewithpan SE_M_THUNDER_WAVE, SOUND_PAN_ATTACKER
+	unloadspritegfx ANIM_TAG_ORBS @recover
+	unloadspritegfx ANIM_TAG_SHOCK_3 @charge
+	loadspritegfx ANIM_TAG_YELLOW_BALL @confuse ray (for zap cannon)
+	loadspritegfx ANIM_TAG_BLACK_BALL_2 @zap cannon
+	loadspritegfx ANIM_TAG_AIR_WAVE_2 @white/gray color
+	createsprite gPhotonGeyserWhiteRingTemplate, ANIM_ATTACKER, 3, 0x0, 0x0, 0x0, 0x0, 0x1f, 0x8
+	createsprite gPhotonGeyserZapBallTemplate, ANIM_TARGET, 3, 0xa, 0x0, 0x0, 0x0, 0x1e, 0x0
+	createsprite gPhotonGeyserZapCannonSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x10, 0x1e, 0x0, 0x28, 0x0
+	createsprite gPhotonGeyserZapCannonSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x10, 0x1e, 0x40, 0x28, 0x1
+	createsprite gPhotonGeyserZapCannonSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x10, 0x1e, 0x80, 0x28, 0x0
+	createsprite gPhotonGeyserZapCannonSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x10, 0x1e, 0x0, 0x28, 0x2
+	createsprite gPhotonGeyserZapCannonSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0x20, 0x28, 0x0
+	createsprite gPhotonGeyserZapCannonSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0x60, 0x28, 0x1
+	createsprite gPhotonGeyserZapCannonSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0xa0, 0x28, 0x0
+	createsprite gPhotonGeyserZapCannonSparkTemplate, ANIM_TARGET, 4, 0xa, 0x0, 0x8, 0x1e, 0xe0, 0x28, 0x2
+	waitforvisualfinish
+	monbg ANIM_TARGET
+	createsprite gPhotonGeyserYellowRingTemplate, ANIM_ATTACKER, 3, 0x0, 0x0, 0x1, 0x0, 0x1f, 0x8
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
+	playsewithpan SE_M_EXPLOSION, SOUND_PAN_ATTACKER
+	unloadspritegfx ANIM_TAG_YELLOW_BALL @confuse ray (for zap cannon)
+	unloadspritegfx ANIM_TAG_BLACK_BALL_2 @zap cannon
+	unloadspritegfx ANIM_TAG_AIR_WAVE_2 @white/gray color
+	@Shoot beam to the sky
+	loadspritegfx ANIM_TAG_STRAIGHT_BEAM
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x6, 0x0, 0x10, 0x43FF  @Light yellow
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 96, 1
+	panse SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 0x2, 0x0
+	call PhotonGeyserBeam
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_TARGET, 0x1, 0x10, 0x0, 0x43FF  @Light yellow
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0xF, 0x0, 0x0
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
+PhotonGeyserSparks1:
+	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
+	createsprite gThinRingShrinkingSpriteTemplate, ANIM_ATTACKER, 40, 0x0, 0x0, 0x0, 0x0
+	createsprite gPhotonGeyserSparkTemplate, ANIM_ATTACKER, 0, 0x20, 0x18, 0xbe, 0xc, 0x0, 0x1, 0x0
+	delay 0x0
+	createsprite gPhotonGeyserSparkTemplate, ANIM_ATTACKER, 0, 0x50, 0x18, 0x16, 0xc, 0x0, 0x1, 0x0
+	createsprite gPhotonGeyserSparkTemplate, ANIM_ATTACKER, 0, 0x9c, 0x18, 0x79, 0xd, 0x0, 0x1, 0x1
+	return
+PhotonGeyserSparks2:
+	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
+	createsprite gPhotonGeyserSparkTemplate, ANIM_ATTACKER, 0, 0x64, 0x18, 0x3c, 0xa, 0x0, 0x1, 0x0
+	createsprite gPhotonGeyserSparkTemplate, ANIM_ATTACKER, 0, 0xaa, 0x18, 0x2a, 0xb, 0x0, 0x1, 0x1
+	delay 0x0
+	createsprite gPhotonGeyserSparkTemplate, ANIM_ATTACKER, 0, 0xee, 0x18, 0xa5, 0xa, 0x0, 0x1, 0x1
+	return
+PhotonGeyserBeam:
+	createsprite gPhotonGeyserBeam, ANIM_TARGET, 3, 0,  19, ANIM_TARGET, 180, 2, 6
+	delay 0x1
+	createsprite gPhotonGeyserBeam, ANIM_TARGET, 3, 0,   3, ANIM_TARGET, 180, 2, 5
+	delay 0x1
+	createsprite gPhotonGeyserBeam, ANIM_TARGET, 3, 0, -13, ANIM_TARGET, 180, 2, 4
+	delay 0x1
+	createsprite gPhotonGeyserBeam, ANIM_TARGET, 3, 0, -29, ANIM_TARGET, 180, 2, 3
+	delay 0x1
+	createsprite gPhotonGeyserBeam, ANIM_TARGET, 3, 0, -45, ANIM_TARGET, 180, 2, 2
+	delay 0x1
+	createsprite gPhotonGeyserBeam, ANIM_TARGET, 3, 0, -61, ANIM_TARGET, 180, 2, 1
+	delay 0x1
+	createsprite gPhotonGeyserBeam, ANIM_TARGET, 3, 0, -77, ANIM_TARGET, 180, 2, 0
 	return
 
 

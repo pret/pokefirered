@@ -1394,10 +1394,10 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         }
         break;
     case DEX_ORDER_ATOZ:
-        for (i = 0; i < NUM_SPECIES - 1; i++)
+        for (i = 0; i < NATIONAL_DEX_COUNT - 1; i++)
         {
             ndex_num = gPokedexOrder_Alphabetical[i];
-            if (ndex_num <= max_n)
+            if (0 < ndex_num && ndex_num <= max_n)
             {
                 seen = DexScreen_GetSetPokedexFlag(ndex_num, FLAG_GET_SEEN, FALSE);
                 caught = DexScreen_GetSetPokedexFlag(ndex_num, FLAG_GET_CAUGHT, FALSE);
@@ -1414,7 +1414,7 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         for (i = 0; i < NUM_SPECIES - 1; i++)
         {
             ndex_num = SpeciesToNationalPokedexNum(gPokedexOrder_Type[i]);
-            if (ndex_num <= max_n)
+            if (0 < ndex_num && ndex_num <= max_n)
             {
                 seen = DexScreen_GetSetPokedexFlag(ndex_num, FLAG_GET_SEEN, FALSE);
                 caught = DexScreen_GetSetPokedexFlag(ndex_num, FLAG_GET_CAUGHT, FALSE);
@@ -1431,7 +1431,7 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
             ndex_num = gPokedexOrder_Weight[i];
-            if (ndex_num <= max_n)
+            if (0 < ndex_num && ndex_num <= max_n)
             {
                 seen = DexScreen_GetSetPokedexFlag(ndex_num, FLAG_GET_SEEN, FALSE);
                 caught = DexScreen_GetSetPokedexFlag(ndex_num, FLAG_GET_CAUGHT, FALSE);
@@ -1448,7 +1448,7 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
             ndex_num = gPokedexOrder_Height[i];
-            if (ndex_num <= max_n)
+            if (0 < ndex_num && ndex_num <= max_n)
             {
                 seen = DexScreen_GetSetPokedexFlag(ndex_num, FLAG_GET_SEEN, FALSE);
                 caught = DexScreen_GetSetPokedexFlag(ndex_num, FLAG_GET_CAUGHT, FALSE);
@@ -2673,12 +2673,11 @@ void DexScreen_PrintMonCategory(u8 windowId, u16 species, u8 x, u8 y)
 {
     u8 * categoryName;
     u8 index, categoryStr[12];
-
-    species = SpeciesToNationalPokedexNum(species);
+    u16 natDexNum = SpeciesToNationalPokedexNum(species);
 
     categoryName = (u8 *)gSpeciesInfo[species].categoryName;
     index = 0;
-    if (DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, FALSE))
+    if (DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE))
     {
 #if REVISION == 0
         while ((categoryName[index] != CHAR_SPACE) && (index < 11))
@@ -2713,8 +2712,8 @@ void DexScreen_PrintMonHeight(u8 windowId, u16 species, u8 x, u8 y)
     const u8 *labelText;
     u8 buffer[32];
     u8 i;
+    u16 natDexNum = SpeciesToNationalPokedexNum(species);
 
-    species = SpeciesToNationalPokedexNum(species);
     height = gSpeciesInfo[species].height;
     labelText = gText_HT;
 
@@ -2724,7 +2723,7 @@ void DexScreen_PrintMonHeight(u8 windowId, u16 species, u8 x, u8 y)
     buffer[i++] = 5;
     buffer[i++] = CHAR_SPACE;
 
-    if (DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, FALSE))
+    if (DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE))
     {
         inches = 10000 * height / 254; // actually tenths of inches here
         if (inches % 10 >= 5)
@@ -2773,8 +2772,8 @@ void DexScreen_PrintMonWeight(u8 windowId, u16 species, u8 x, u8 y)
     u8 buffer[32];
     u8 i;
     u32 j;
+    u16 natDexNum = SpeciesToNationalPokedexNum(species);
 
-    species = SpeciesToNationalPokedexNum(species);
     weight = gSpeciesInfo[species].weight;
     labelText = gText_WT;
     lbsText = gText_Lbs;
@@ -2784,7 +2783,7 @@ void DexScreen_PrintMonWeight(u8 windowId, u16 species, u8 x, u8 y)
     buffer[i++] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
     buffer[i++] = 5;
 
-    if (DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, FALSE))
+    if (DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE))
     {
         lbs = (weight * 100000) / 4536; // Convert to hundredths of lb
 
@@ -2860,10 +2859,9 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
     struct TextPrinterTemplate printerTemplate;
     u16 length;
     s32 xCenter;
+    u16 natDexNum = SpeciesToNationalPokedexNum(species);
 
-    species = SpeciesToNationalPokedexNum(species);
-
-    if (DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, FALSE))
+    if (DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE))
     {
         printerTemplate.currentChar = gSpeciesInfo[species].description;
         printerTemplate.windowId = windowId;
@@ -2989,11 +2987,11 @@ u8 DexScreen_DrawMonAreaPage(void)
     u8 width, height;
     bool8 monIsCaught;
     s16 left, top;
-    u16 speciesId, species;
+    u16 natDexNum, species;
     u16 kantoMapVoff;
 
     species = sPokedexScreenData->dexSpecies;
-    speciesId = SpeciesToNationalPokedexNum(species);
+    natDexNum = SpeciesToNationalPokedexNum(species);
     monIsCaught = DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE);
     width = 28;
     height = 14;
@@ -3112,15 +3110,15 @@ u8 DexScreen_DrawMonAreaPage(void)
         gSprites[sPokedexScreenData->windowIds[14]].oam.affineMode = ST_OAM_AFFINE_NORMAL;
         gSprites[sPokedexScreenData->windowIds[14]].oam.matrixNum = 2;
         gSprites[sPokedexScreenData->windowIds[14]].oam.priority = 1;
-        gSprites[sPokedexScreenData->windowIds[14]].y2 = gSpeciesInfo[speciesId].pokemonOffset;
-        SetOamMatrix(2, gSpeciesInfo[speciesId].pokemonScale, 0, 0, gSpeciesInfo[speciesId].pokemonScale);
+        gSprites[sPokedexScreenData->windowIds[14]].y2 = gSpeciesInfo[species].pokemonOffset;
+        SetOamMatrix(2, gSpeciesInfo[species].pokemonScale, 0, 0, gSpeciesInfo[species].pokemonScale);
         sPokedexScreenData->windowIds[15] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), 1, 80, 104, 0, 0xFFFF);
         gSprites[sPokedexScreenData->windowIds[15]].oam.paletteNum = 2;
         gSprites[sPokedexScreenData->windowIds[15]].oam.affineMode = ST_OAM_AFFINE_NORMAL;
         gSprites[sPokedexScreenData->windowIds[15]].oam.matrixNum = 1;
         gSprites[sPokedexScreenData->windowIds[15]].oam.priority = 1;
-        gSprites[sPokedexScreenData->windowIds[15]].y2 = gSpeciesInfo[speciesId].trainerOffset;
-        SetOamMatrix(1, gSpeciesInfo[speciesId].trainerScale, 0, 0, gSpeciesInfo[speciesId].trainerScale);
+        gSprites[sPokedexScreenData->windowIds[15]].y2 = gSpeciesInfo[species].trainerOffset;
+        SetOamMatrix(1, gSpeciesInfo[species].trainerScale, 0, 0, gSpeciesInfo[species].trainerScale);
     }
     else
     {
@@ -3167,11 +3165,31 @@ u8 DexScreen_DestroyAreaScreenResources(void)
     return 0;
 }
 
+static bool8 DexScreen_MonHasCategoryEntry(u16 species)
+{
+    u16 i, j, k;
+    u16 natDexNum = SpeciesToNationalPokedexNum(species);
+
+    for (i = 0; i < NELEMS(gDexCategories); i++)
+    {
+        for (j = 0; j < gDexCategories[i].count; j++)
+        {
+            for (k = 0; k < gDexCategories[i].page[j].count; k++)
+            {
+                u16 pageSpecies = gDexCategories[i].page[j].species[k];
+                if (SpeciesToNationalPokedexNum(pageSpecies) == natDexNum)
+                    return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
 static int DexScreen_CanShowMonInDex(u16 species)
 {
-    if (IsNationalPokedexEnabled() == TRUE)
+    if (IsNationalPokedexEnabled() == TRUE && DexScreen_MonHasCategoryEntry(species))
         return TRUE;
-    if (NationalToKantoOrder(SpeciesToNationalPokedexNum(species)) > 0)
+    if (SpeciesToKantoDexNum(species) > 0)
         return TRUE;
     return FALSE;
 }
@@ -3311,7 +3329,7 @@ u8 DexScreen_RegisterMonToPokedex(u16 species)
     DexScreen_GetSetPokedexFlag(species, FLAG_SET_SEEN, TRUE);
     DexScreen_GetSetPokedexFlag(species, FLAG_SET_CAUGHT, TRUE);
 
-    if (!IsNationalPokedexEnabled() && NationalToKantoOrder(SpeciesToNationalPokedexNum(species)) > 0)
+    if ((!IsNationalPokedexEnabled() && SpeciesToKantoDexNum(species) == KANTO_DEX_NONE) || !DexScreen_MonHasCategoryEntry(species))
         return CreateTask(Task_DexScreen_RegisterNonKantoMonBeforeNationalDex, 0);
 
     DexScreen_LoadResources();

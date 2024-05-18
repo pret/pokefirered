@@ -111,7 +111,7 @@ static const union AnimCmd sAnim_FirePlume[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnims_FirePlume[] =
+const union AnimCmd *const gAnims_FirePlume[] =
 {
     sAnim_FirePlume,
 };
@@ -155,7 +155,7 @@ const struct SpriteTemplate gFirePlumeSpriteTemplate =
     .tileTag = ANIM_TAG_FIRE_PLUME,
     .paletteTag = ANIM_TAG_FIRE_PLUME,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_FirePlume,
+    .anims = gAnims_FirePlume,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFirePlume,
@@ -166,7 +166,7 @@ static const struct SpriteTemplate sUnusedEmberFirePlumeSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_FirePlume,
+    .anims = gAnims_FirePlume,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFirePlume,

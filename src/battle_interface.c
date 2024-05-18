@@ -1345,8 +1345,7 @@ void DestroyMegaTriggerSprite(void)
 // Ultra Burst Trigger icon functions.
 void ChangeBurstTriggerSprite(u8 spriteId, u8 animId)
 {
-    // TODO: animation
-    // StartSpriteAnim(&gSprites[spriteId], animId);
+    StartSpriteAnim(&gSprites[spriteId], animId);
 }
 
 #define SINGLES_BURST_TRIGGER_POS_X_OPTIMAL (30)

@@ -4020,6 +4020,8 @@ extern const u32 gItemIcon_ZPowerRing[];
 extern const u32 gItemIconPalette_ZPowerRing[];
 extern const u32 gItemIcon_DynamaxBand[];
 extern const u32 gItemIconPalette_DynamaxBand[];
+extern const u32 gBattleAnimSpriteGfx_NecrozmaStar[];
+extern const u32 gBattleAnimSpritePal_NecrozmaStar[];
 // Misc. Key Items
 extern const u32 gItemIcon_Bicycle[];
 extern const u32 gItemIconPalette_Bicycle[];
@@ -4845,6 +4847,11 @@ extern const u32 gBattleAnimBgTilemap_Fissure[];
 extern const u32 gBattleAnimBgTilemap_SurfOpponent[];
 extern const u32 gBattleAnimBgTilemap_SurfPlayer[];
 extern const u32 gBattleAnimBgTilemap_SurfContest[];
+extern const u32 gBattleAnimBgImage_ZMoveMountain[];
+extern const u32 gBattleAnimBgPalette_ZMoveMountain[];
+extern const u32 gBattleAnimBgTilemap_ZMoveMountain[];
+extern const u32 gBattleAnimSpriteGfx_StraightBeam[];
+extern const u32 gBattleAnimSpritePal_StraightBeam[];
 
 // dark
 extern const u32 gMetalShineGfx[];

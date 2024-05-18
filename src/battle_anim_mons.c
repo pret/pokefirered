@@ -795,21 +795,23 @@ u8 GetBattlerAtPosition(u8 position)
 
 bool8 IsBattlerSpritePresent(u8 battlerId)
 {
-    if (gBattlerPositions[battlerId] == 0xFF)
-    {
+    if (GetBattlerPosition(battlerId) == 0xFF)
         return FALSE;
-    }
-    else if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
+
+    if (!gBattleStruct->spriteIgnore0Hp)
     {
-        if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_HP) != 0)
-            return TRUE;
+        if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
+        {
+            if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_HP) == 0)
+                return FALSE;
+        }
+        else
+        {
+            if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_HP) == 0)
+                return FALSE;
+        }
     }
-    else
-    {
-        if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_HP) != 0)
-            return TRUE;
-    }
-    return FALSE;
+    return TRUE;
 }
 
 bool8 IsDoubleBattle(void)

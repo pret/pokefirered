@@ -1301,6 +1301,8 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_MegaStone, 0x800, ANIM_TAG_MEGA_STONE},
     {gBattleAnimSpriteGfx_MegaSymbol, 0x0200, ANIM_TAG_MEGA_SYMBOL},
     {gBattleAnimSpriteGfx_MegaParticles, 0x0180, ANIM_TAG_MEGA_PARTICLES},
+    {gBattleAnimSpriteGfx_NecrozmaStar, 0x200, ANIM_TAG_ULTRA_BURST_SYMBOL},
+    {gBattleAnimSpriteGfx_StraightBeam, 0x180, ANIM_TAG_STRAIGHT_BEAM},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1597,6 +1599,8 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_MegaStone, ANIM_TAG_MEGA_STONE},
     {gBattleAnimSpritePal_MegaSymbol, ANIM_TAG_MEGA_SYMBOL},
     {gBattleAnimSpritePal_MegaParticles, ANIM_TAG_MEGA_PARTICLES},
+    {gBattleAnimSpritePal_NecrozmaStar, ANIM_TAG_ULTRA_BURST_SYMBOL},
+    {gBattleAnimSpritePal_StraightBeam, ANIM_TAG_STRAIGHT_BEAM},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
@@ -1628,4 +1632,5 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_SOLAR_BEAM_OPPONENT] = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactOpponent},
     [BG_SOLAR_BEAM_PLAYER]   = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactPlayer},
     [BG_SOLAR_BEAM_CONTESTS] = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactContests},
+    [BG_ZMOVE_MOUNTAIN]      = {gBattleAnimBgImage_ZMoveMountain, gBattleAnimBgPalette_ZMoveMountain, gBattleAnimBgTilemap_ZMoveMountain},
 };

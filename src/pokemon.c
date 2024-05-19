@@ -4523,6 +4523,11 @@ u16 SpeciesToKantoDexNum(u16 species)
     return NationalToKantoOrder(SpeciesToNationalPokedexNum(species));
 }
 
+bool32 IsSpeciesInKantoDex(u16 species)
+{
+    return SpeciesToKantoDexNum(species) != KANTO_DEX_NONE;
+}
+
 u16 KantoToNationalOrder(u16 kantoNum)
 {
     if (KANTO_DEX_NONE < kantoNum && kantoNum < KANTO_DEX_COUNT)

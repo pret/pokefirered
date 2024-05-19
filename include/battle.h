@@ -819,8 +819,6 @@ struct BattleScripting
     u8 switchCase;  // Special switching conditions, eg. red card
     u8 overrideBerryRequirements;
     u8 stickyWebStatDrop; // To prevent Defiant activating on a Court Change'd Sticky Web
-    // TODO: remove pokefirered members
-    u8 dmgMultiplier;
 };
 
 struct BattleSpriteInfo

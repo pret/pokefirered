@@ -3165,7 +3165,7 @@ u8 DexScreen_DestroyAreaScreenResources(void)
     return 0;
 }
 
-static bool8 DexScreen_MonHasCategoryEntry(u16 species)
+static bool32 DexScreen_MonHasCategoryEntry(u16 species)
 {
     u16 i, j, k;
     u16 natDexNum = SpeciesToNationalPokedexNum(species);
@@ -3185,13 +3185,9 @@ static bool8 DexScreen_MonHasCategoryEntry(u16 species)
     return FALSE;
 }
 
-static int DexScreen_CanShowMonInDex(u16 species)
+static bool32 DexScreen_CanShowMonInDex(u16 species)
 {
-    if (IsNationalPokedexEnabled() == TRUE && DexScreen_MonHasCategoryEntry(species))
-        return TRUE;
-    if (SpeciesToKantoDexNum(species) > 0)
-        return TRUE;
-    return FALSE;
+    return (IsNationalPokedexEnabled() || IsSpeciesInKantoDex(species)) && DexScreen_MonHasCategoryEntry(species);
 }
 
 static u8 DexScreen_IsPageUnlocked(u8 categoryNum, u8 pageNum)
@@ -3206,7 +3202,7 @@ static u8 DexScreen_IsPageUnlocked(u8 categoryNum, u8 pageNum)
         if (i < count)
         {
             species = gDexCategories[categoryNum].page[pageNum].species[i];
-            if (DexScreen_CanShowMonInDex(species) == TRUE && DexScreen_GetSetPokedexFlag(species, FLAG_GET_SEEN, TRUE))
+            if (DexScreen_CanShowMonInDex(species) && DexScreen_GetSetPokedexFlag(species, FLAG_GET_SEEN, TRUE))
                 return TRUE;
         }
     }
@@ -3240,7 +3236,7 @@ void DexScreen_CreateCategoryPageSpeciesList(u8 categoryNum, u8 pageNum)
     for (i = 0; i < count; i++)
     {
         species = gDexCategories[categoryNum].page[pageNum].species[i];
-        if (DexScreen_CanShowMonInDex(species) == TRUE && DexScreen_GetSetPokedexFlag(species, FLAG_GET_SEEN, TRUE))
+        if (DexScreen_CanShowMonInDex(species) && DexScreen_GetSetPokedexFlag(species, FLAG_GET_SEEN, TRUE))
         {
             sPokedexScreenData->pageSpecies[sPokedexScreenData->numMonsOnPage] = gDexCategories[categoryNum].page[pageNum].species[i];
             sPokedexScreenData->numMonsOnPage++;
@@ -3292,14 +3288,14 @@ static u8 DexScreen_LookUpCategoryBySpecies(u16 species)
             for (k = 0, posInPage = 0; k < categoryPageCount; k++)
             {
                 dexSpecies = gDexCategories[i].page[j].species[k];
-                if (species == dexSpecies)
+                if (SpeciesToNationalPokedexNum(species) == SpeciesToNationalPokedexNum(dexSpecies))
                 {
                     sPokedexScreenData->category = i;
                     sPokedexScreenData->pageNum = j;
                     sPokedexScreenData->categoryCursorPosInPage = posInPage;
                     return FALSE;
                 }
-                if (DexScreen_CanShowMonInDex(dexSpecies) == TRUE && DexScreen_GetSetPokedexFlag(dexSpecies, FLAG_GET_SEEN, TRUE))
+                if (DexScreen_CanShowMonInDex(dexSpecies) && DexScreen_GetSetPokedexFlag(dexSpecies, FLAG_GET_SEEN, TRUE))
                     posInPage++;
             }
         }
@@ -3329,7 +3325,7 @@ u8 DexScreen_RegisterMonToPokedex(u16 species)
     DexScreen_GetSetPokedexFlag(species, FLAG_SET_SEEN, TRUE);
     DexScreen_GetSetPokedexFlag(species, FLAG_SET_CAUGHT, TRUE);
 
-    if ((!IsNationalPokedexEnabled() && SpeciesToKantoDexNum(species) == KANTO_DEX_NONE) || !DexScreen_MonHasCategoryEntry(species))
+    if ((!IsNationalPokedexEnabled() && !IsSpeciesInKantoDex(species)) || !DexScreen_MonHasCategoryEntry(species))
         return CreateTask(Task_DexScreen_RegisterNonKantoMonBeforeNationalDex, 0);
 
     DexScreen_LoadResources();

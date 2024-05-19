@@ -756,6 +756,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, s
 u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 SpeciesToNationalPokedexNum(u16 species);
 u16 SpeciesToKantoDexNum(u16 species);
+bool32 IsSpeciesInKantoDex(u16 species);
 u16 KantoToNationalOrder(u16 kantoNum);
 u16 NationalToKantoOrder(u16 nationalNum);
 u16 HoennToNationalOrder(u16 hoennNum);

@@ -390,13 +390,8 @@
 #define MOVE_EFFECT_FLORAL_HEALING      77
 #define MOVE_EFFECT_SECRET_POWER        78
 #define MOVE_EFFECT_PSYCHIC_NOISE       79
-// TODO: old pokefirered move effects, remove with new battle system
-#define MOVE_EFFECT_RECOIL_25           80
-#define MOVE_EFFECT_RAPIDSPIN           81
-#define MOVE_EFFECT_REMOVE_PARALYSIS    82
-#define MOVE_EFFECT_RECOIL_33           83
 
-#define NUM_MOVE_EFFECTS                84
+#define NUM_MOVE_EFFECTS                80
 
 #define MOVE_EFFECT_AFFECTS_USER        0x2000
 #define MOVE_EFFECT_CERTAIN             0x4000

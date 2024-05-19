@@ -1257,6 +1257,7 @@ static void HandleChooseMonCancel(u8 taskId, s8 *slotPtr)
     switch (gPartyMenu.action)
     {
     case PARTY_ACTION_SEND_OUT:
+    case PARTY_ACTION_CHOOSE_FAINTED_MON:
         PlaySE(SE_FAILURE);
         break;
     case PARTY_ACTION_SWITCH:

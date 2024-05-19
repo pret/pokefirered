@@ -8261,29 +8261,29 @@
             "encounter_rate": 21,
             "mons": [
               {
-                "min_level": 3,
-                "max_level": 3,
-                "species": "SPECIES_GEODUDE_ALOLAN"
-              },
-              {
-                "min_level": 3,
-                "max_level": 3,
-                "species": "SPECIES_GEODUDE_ALOLAN"
-              },
-              {
-                "min_level": 3,
-                "max_level": 3,
-                "species": "SPECIES_SIRFETCHD"
-              },
-              {
-                "min_level": 3,
-                "max_level": 3,
-                "species": "SPECIES_SIRFETCHD"
+                "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_PAWMO"
               },
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_GEODUDE_ALOLAN"
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_PAWMO"
+              },
+              {
+                "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_PAWMO"
               },
               {
                 "min_level": 2,

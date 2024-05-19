@@ -2563,3 +2563,44 @@ static void Task_WingFlapSound(u8 taskId)
     if (data[0] == gSpecialVar_0x8004 - 1)
         DestroyTask(taskId);
 }
+
+bool8 InPokemonCenter(void)
+{
+    static const u16 sPokemonCenters[] =
+    {
+        MAP_VIRIDIAN_CITY_POKEMON_CENTER_1F,
+        MAP_PEWTER_CITY_POKEMON_CENTER_1F,
+        MAP_ROUTE4_POKEMON_CENTER_1F,
+        MAP_CERULEAN_CITY_POKEMON_CENTER_1F,
+        MAP_VERMILION_CITY_POKEMON_CENTER_1F,
+        MAP_ROUTE10_POKEMON_CENTER_1F,
+        MAP_LAVENDER_TOWN_POKEMON_CENTER_1F,
+        MAP_CELADON_CITY_POKEMON_CENTER_1F,
+        MAP_FUCHSIA_CITY_POKEMON_CENTER_1F,
+        MAP_SAFFRON_CITY_POKEMON_CENTER_1F,
+        MAP_CINNABAR_ISLAND_POKEMON_CENTER_1F,
+        MAP_INDIGO_PLATEAU_POKEMON_CENTER_1F,
+        MAP_ONE_ISLAND_POKEMON_CENTER_1F,
+        MAP_TWO_ISLAND_POKEMON_CENTER_1F,
+        MAP_THREE_ISLAND_POKEMON_CENTER_1F,
+        MAP_FOUR_ISLAND_POKEMON_CENTER_1F,
+        MAP_FIVE_ISLAND_POKEMON_CENTER_1F,
+        MAP_SIX_ISLAND_POKEMON_CENTER_1F,
+        MAP_SEVEN_ISLAND_POKEMON_CENTER_1F,
+        MAP_BATTLE_COLOSSEUM_2P,
+        MAP_TRADE_CENTER,
+        MAP_RECORD_CORNER,
+        MAP_BATTLE_COLOSSEUM_4P,
+        MAP_UNDEFINED
+    };
+
+    int i;
+    u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
+
+    for (i = 0; sPokemonCenters[i] != MAP_UNDEFINED; i++)
+    {
+        if (sPokemonCenters[i] == map)
+            return TRUE;
+    }
+    return FALSE;
+}

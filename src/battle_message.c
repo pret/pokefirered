@@ -2913,7 +2913,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_PARTNER_NAME:
                 // TODO: trainer name
                 // toCpy = BattleStringGetPlayerName(text, GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT));
-                toCpy = "TODO";;
+                toCpy = "TODO";
                 break;
             case B_TXT_COPY_VAR_1:
                 toCpy = gStringVar1;

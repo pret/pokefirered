@@ -2330,16 +2330,12 @@ static void Cmd_datahpupdate(void)
             gBattleScripting.battler = battler;
             if (gBattleStruct->changedSpecies[side][gBattlerPartyIndexes[battler]] == SPECIES_NONE)
                 gBattleStruct->changedSpecies[side][gBattlerPartyIndexes[battler]] = gBattleMons[battler].species;
-            // TODO: Totems
-            // if (gBattleMons[battler].species == SPECIES_MIMIKYU_TOTEM_DISGUISED)
-            //     gBattleMons[battler].species = SPECIES_MIMIKYU_TOTEM_BUSTED;
-            // else
-            //     gBattleMons[battler].species = SPECIES_MIMIKYU_BUSTED;
-            gBattleMons[battler].species = SPECIES_MIMIKYU_BUSTED;
+            if (gBattleMons[battler].species == SPECIES_MIMIKYU_TOTEM_DISGUISED)
+                gBattleMons[battler].species = SPECIES_MIMIKYU_TOTEM_BUSTED;
+            else
+                gBattleMons[battler].species = SPECIES_MIMIKYU_BUSTED;
             if (B_DISGUISE_HP_LOSS >= GEN_8)
-            {
                 gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 8;
-            }
             BattleScriptPush(cmd->nextInstr);
             gBattlescriptCurrInstr = BattleScript_TargetFormChange;
             return;
@@ -14705,8 +14701,7 @@ bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move)
 
 bool32 DoesDisguiseBlockMove(u32 battler, u32 move)
 {
-    // TODO: Totems
-    if (!(gBattleMons[battler].species == SPECIES_MIMIKYU_DISGUISED /* || gBattleMons[battler].species == SPECIES_MIMIKYU_TOTEM_DISGUISED */)
+    if (!(gBattleMons[battler].species == SPECIES_MIMIKYU_DISGUISED || gBattleMons[battler].species == SPECIES_MIMIKYU_TOTEM_DISGUISED)
         || gBattleMons[battler].status2 & STATUS2_TRANSFORMED
         || (!gProtectStructs[battler].confusionSelfDmg && (IS_MOVE_STATUS(move) || gHitMarker & HITMARKER_PASSIVE_DAMAGE))
         || gHitMarker & HITMARKER_IGNORE_DISGUISE

@@ -2779,7 +2779,6 @@ const u8* FaintClearSetData(u32 battler)
     gProtectStructs[battler].statRaised = FALSE;
     gProtectStructs[battler].statFell = FALSE;
     gProtectStructs[battler].pranksterElevated = FALSE;
-    gProtectStructs[battler].usesBouncedMove = FALSE; // TODO remove
 
     gDisableStructs[battler].isFirstTurn = 2;
 

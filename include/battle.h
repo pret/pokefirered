@@ -167,8 +167,6 @@ struct ProtectStruct
     u32 flag2Unknown:1; // Only set to 0 once. Checked in 'WasUnableToUseMove' function.
     u32 flinchImmobility:1;
     u32 notFirstStrike:1;
-    u32 palaceUnableToUseMove:1;
-    u32 usesBouncedMove:1;
     u32 usedHealBlockedMove:1;
     u32 usedGravityPreventedMove:1;
     u32 powderSelfDmg:1;

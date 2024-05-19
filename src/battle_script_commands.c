@@ -15960,7 +15960,7 @@ static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount, u16 use
 
 void BS_ItemRestoreHP(void)
 {
-    NATIVE_ARGS(const u8 *alreadyMaxHpInstr);
+    NATIVE_ARGS(const u8 *alreadyMaxHpInstr, const u8 *restoreBattlerInstr);
     u16 healAmount;
     u32 battler = MAX_BATTLERS_COUNT;
     u32 healParam = ItemId_GetEffect(gLastUsedItem)[6];
@@ -16013,7 +16013,7 @@ void BS_ItemRestoreHP(void)
         if (battler != MAX_BATTLERS_COUNT && hp != 0)
         {
             gBattleMoveDamage = -healAmount;
-            gBattlescriptCurrInstr = cmd->nextInstr;
+            gBattlescriptCurrInstr = cmd->restoreBattlerInstr;
         }
         else
         {
@@ -16026,7 +16026,7 @@ void BS_ItemRestoreHP(void)
                 gAbsentBattlerFlags &= ~gBitTable[battler];
                 gBattleCommunication[MULTIUSE_STATE] = TRUE;
             }
-            gBattlescriptCurrInstr = BattleScript_ItemRestoreHP_Party;
+            gBattlescriptCurrInstr = cmd->nextInstr;
         }
     }
 }
@@ -16040,6 +16040,7 @@ void BS_ItemCureStatus(void)
     bool32 statusChanged = FALSE;
     struct Pokemon *party = GetSideParty(side);
 
+    DebugPrintfLevel(MGBA_LOG_ERROR, "BS_ItemCureStatus");
     // Heal Status2 conditions if battler is active.
     if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
     {

@@ -212,7 +212,6 @@ extern const u8 BattleScript_SilphScopeUnveiled[];
 
 extern const u8 *const gBattlescriptsForUsingItem[];
 extern const u8 *const gBattlescriptsForSafariActions[];
-extern const u8 BattleScript_ItemRestoreHP_Party[];
 
 // effect scripts
 extern const u8 BattleScript_EffectHit[];

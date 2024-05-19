@@ -8261,64 +8261,64 @@
             "encounter_rate": 21,
             "mons": [
               {
-                "min_level": 2,
-                "max_level": 2,
-                "species": "SPECIES_SALAMENCE"
-              },
-              {
-                "min_level": 2,
-                "max_level": 2,
-                "species": "SPECIES_SALAMENCE"
-              },
-              {
-                "min_level": 2,
-                "max_level": 2,
-                "species": "SPECIES_SALAMENCE"
-              },
-              {
-                "min_level": 2,
-                "max_level": 2,
-                "species": "SPECIES_SALAMENCE"
-              },
-              {
-                "min_level": 2,
-                "max_level": 2,
-                "species": "SPECIES_SALAMENCE"
-              },
-              {
-                "min_level": 2,
-                "max_level": 2,
-                "species": "SPECIES_GEODUDE_ALOLAN"
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_SALAMENCE"
+                "species": "SPECIES_RATTATA"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_SALAMENCE"
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_RATTATA"
+              },
+              {
+                "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_RATTATA"
+              },
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_PIDGEY"
+              },
+              {
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_RATTATA"
               },
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_SALAMENCE"
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_SALAMENCE"
+                "species": "SPECIES_RATTATA"
               },
               {
                 "min_level": 5,
                 "max_level": 5,
-                "species": "SPECIES_ANNIHILAPE"
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 4,
                 "max_level": 4,
-                "species": "SPECIES_ANNIHILAPE"
+                "species": "SPECIES_RATTATA"
               }
             ]
           }
@@ -10499,29 +10499,29 @@
             "encounter_rate": 21,
             "mons": [
               {
-                "min_level": 14,
-                "max_level": 14,
-                "species": "SPECIES_MAGIKARP"
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_RATTATA"
               },
               {
-                "min_level": 14,
-                "max_level": 14,
-                "species": "SPECIES_MAGIKARP"
+                "min_level": 3,
+                "max_level": 3,
+                "species": "SPECIES_MANKEY"
               },
               {
-                "min_level": 14,
-                "max_level": 14,
-                "species": "SPECIES_MAGIKARP"
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_RATTATA"
               },
               {
-                "min_level": 14,
-                "max_level": 14,
-                "species": "SPECIES_MAGIKARP"
+                "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_MANKEY"
               },
               {
-                "min_level": 14,
-                "max_level": 14,
-                "species": "SPECIES_MAGIKARP"
+                "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_RATTATA"
               },
               {
                 "min_level": 2,

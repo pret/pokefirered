@@ -16,6 +16,7 @@
 #include "battle_controllers.h"
 #include "graphics.h"
 #include "battle_ai_switch_items.h"
+#include "constants/abilities.h"
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/trainers.h"
@@ -36,7 +37,7 @@ struct BattleWindowText
 };
 
 static EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] = {};
-static EWRAM_DATA struct BattleMsgData *sBattleMsgDataPtr = NULL;
+EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
 // merged
 static const u8 sText_Trainer1LoseText[] = _("{B_TRAINER1_LOSE_TEXT}");
@@ -2421,24 +2422,24 @@ void BufferStringBattle(u32 battler, u16 stringId)
     s32 i;
     const u8 *stringPtr = NULL;
 
-    sBattleMsgDataPtr = (struct BattleMsgData *)(&gBattleResources->bufferA[battler][4]);
-    gLastUsedItem = sBattleMsgDataPtr->lastItem;
-    gLastUsedAbility = sBattleMsgDataPtr->lastAbility;
-    gBattleScripting.battler = sBattleMsgDataPtr->scrActive;
-    *(&gBattleStruct->scriptPartyIdx) = sBattleMsgDataPtr->bakScriptPartyIdx;
-    *(&gBattleStruct->hpScale) = sBattleMsgDataPtr->hpScale;
-    gPotentialItemEffectBattler = sBattleMsgDataPtr->itemEffectBattler;
-    *(&gBattleStruct->stringMoveType) = sBattleMsgDataPtr->moveType;
+    gBattleMsgDataPtr = (struct BattleMsgData *)(&gBattleResources->bufferA[battler][4]);
+    gLastUsedItem = gBattleMsgDataPtr->lastItem;
+    gLastUsedAbility = gBattleMsgDataPtr->lastAbility;
+    gBattleScripting.battler = gBattleMsgDataPtr->scrActive;
+    gBattleStruct->scriptPartyIdx = gBattleMsgDataPtr->bakScriptPartyIdx;
+    gBattleStruct->hpScale = gBattleMsgDataPtr->hpScale;
+    gPotentialItemEffectBattler = gBattleMsgDataPtr->itemEffectBattler;
+    gBattleStruct->stringMoveType = gBattleMsgDataPtr->moveType;
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        sBattlerAbilities[i] = sBattleMsgDataPtr->abilities[i];
+        sBattlerAbilities[i] = gBattleMsgDataPtr->abilities[i];
     }
     for (i = 0; i < TEXT_BUFF_ARRAY_COUNT; i++)
     {
-        gBattleTextBuff1[i] = sBattleMsgDataPtr->textBuffs[0][i];
-        gBattleTextBuff2[i] = sBattleMsgDataPtr->textBuffs[1][i];
-        gBattleTextBuff3[i] = sBattleMsgDataPtr->textBuffs[2][i];
+        gBattleTextBuff1[i] = gBattleMsgDataPtr->textBuffs[0][i];
+        gBattleTextBuff2[i] = gBattleMsgDataPtr->textBuffs[1][i];
+        gBattleTextBuff3[i] = gBattleMsgDataPtr->textBuffs[2][i];
     }
 
     switch (stringId)
@@ -2586,10 +2587,10 @@ void BufferStringBattle(u32 battler, u16 stringId)
         }
         break;
     case STRINGID_USEDMOVE: // pokemon used a move msg
-        if (sBattleMsgDataPtr->currentMove >= MOVES_COUNT)
+        if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT)
             StringCopy(gBattleTextBuff3, sATypeMove_Table[*(&gBattleStruct->stringMoveType)]);
         else
-            StringCopy(gBattleTextBuff3, gMovesInfo[sBattleMsgDataPtr->currentMove].name);
+            StringCopy(gBattleTextBuff3, gMovesInfo[gBattleMsgDataPtr->currentMove].name);
 
         stringPtr = sText_AttackerUsedX;
         break;
@@ -2688,15 +2689,16 @@ u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src)
 static const u8 *TryGetStatusString(u8 *src)
 {
     u32 i;
-    u8 status[] = _("$$$$$$$");
+    u8 status[8];
     u32 chars1, chars2;
     u8 *statusPtr;
 
+    memcpy(status, sText_EmptyStatus, min(ARRAY_COUNT(status), ARRAY_COUNT(sText_EmptyStatus)));
+
     statusPtr = status;
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < ARRAY_COUNT(status); i++)
     {
-        if (*src == EOS)
-            break;
+        if (*src == EOS) break; // one line required to match -g
         *statusPtr = *src;
         src++;
         statusPtr++;
@@ -2705,7 +2707,7 @@ static const u8 *TryGetStatusString(u8 *src)
     chars1 = *(u32 *)(&status[0]);
     chars2 = *(u32 *)(&status[4]);
 
-    for (i = 0; i < NELEMS(gStatusConditionStringsTable); i++)
+    for (i = 0; i < ARRAY_COUNT(gStatusConditionStringsTable); i++)
     {
         if (chars1 == *(u32 *)(&gStatusConditionStringsTable[i][0][0])
             && chars2 == *(u32 *)(&gStatusConditionStringsTable[i][0][4]))
@@ -2730,8 +2732,8 @@ static void GetBattlerNick(u32 battler, u8 *dst)
     StringGet_Nickname(dst);
 }
 
-#define HANDLE_NICKNAME_STRING_CASE(battlerId, monIndex)                \
-    if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)                     \
+#define HANDLE_NICKNAME_STRING_CASE(battler)                          \
+    if (GetBattlerSide(battler) != B_SIDE_PLAYER)                     \
     {                                                                   \
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
             toCpy = sText_FoePkmnPrefix;                                \
@@ -2743,13 +2745,8 @@ static void GetBattlerNick(u32 battler, u8 *dst)
             dstId++;                                                    \
             toCpy++;                                                    \
         }                                                               \
-        GetMonData(&gEnemyParty[monIndex], MON_DATA_NICKNAME, text);    \
     }                                                                   \
-    else                                                                \
-    {                                                                   \
-        GetMonData(&gPlayerParty[monIndex], MON_DATA_NICKNAME, text);   \
-    }                                                                   \
-    StringGet_Nickname(text);                                           \
+    GetBattlerNick(battler, text);                                    \
     toCpy = text;
 
 static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text, u8 multiplayerId, u8 battler)
@@ -2973,8 +2970,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = text;
                 break;
             case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // attacker name with prefix, only battlerId 0/1
-                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker,
-                                            gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker))])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker)
                 break;
             case B_TXT_ATK_PARTNER_NAME: // attacker partner name
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
@@ -2990,28 +2986,28 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = text;
                 break;
             case B_TXT_ATK_NAME_WITH_PREFIX: // attacker name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker)
                 break;
             case B_TXT_DEF_NAME_WITH_PREFIX: // target name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerTarget)
                 break;
             case B_TXT_EFF_NAME_WITH_PREFIX: // effect battlerId name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gEffectBattler, gBattlerPartyIndexes[gEffectBattler])
+                HANDLE_NICKNAME_STRING_CASE(gEffectBattler)
                 break;
             case B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX: // scripting active battlerId name with prefix
-                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, gBattlerPartyIndexes[gBattleScripting.battler])
+                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler)
                 break;
             case B_TXT_CURRENT_MOVE: // current move name
-                if (sBattleMsgDataPtr->currentMove >= MOVES_COUNT)
+                if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT)
                     toCpy = (const u8 *)&sATypeMove_Table[gBattleStruct->stringMoveType];
                 else
-                    toCpy = gMovesInfo[sBattleMsgDataPtr->currentMove].name;
+                    toCpy = gMovesInfo[gBattleMsgDataPtr->currentMove].name;
                 break;
             case B_TXT_LAST_MOVE: // originally used move name
-                if (sBattleMsgDataPtr->originallyUsedMove >= MOVES_COUNT)
+                if (gBattleMsgDataPtr->originallyUsedMove >= MOVES_COUNT)
                     toCpy = (const u8 *)&sATypeMove_Table[gBattleStruct->stringMoveType];
                 else
-                    toCpy = gMovesInfo[sBattleMsgDataPtr->originallyUsedMove].name;
+                    toCpy = gMovesInfo[gBattleMsgDataPtr->originallyUsedMove].name;
                 break;
             case B_TXT_LAST_ITEM: // last used item
                 if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -3171,7 +3167,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 toCpy = gStringVar4;
                 break;
             case B_TXT_26: // ?
-                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, *(&gBattleStruct->scriptPartyIdx))
+                HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler)
                 break;
             case B_TXT_PC_CREATOR_NAME: // lanette pc
                 if (FlagGet(FLAG_SYS_NOT_SOMEONES_PC))
@@ -3251,7 +3247,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     toCpy = sText_Opposing2;
                 break;
             case B_TXT_DEF_NAME: // target name
-                HANDLE_NICKNAME_STRING_CASE(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
+                HANDLE_NICKNAME_STRING_CASE(gBattlerTarget)
                 // GetBattlerNick(gBattlerTarget, text);
                 toCpy = text;
                 break;
@@ -3268,7 +3264,6 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     toCpy = sText_Opposing2;
                 break;
             }
-
 
             // missing if (toCpy != NULL) check
             while (*toCpy != EOS)
@@ -3295,51 +3290,82 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
     return dstId;
 }
 
+static void IllusionNickHack(u32 battler, u32 partyId, u8 *dst)
+{
+    s32 id, i;
+    // we know it's gEnemyParty
+    struct Pokemon *mon = &gEnemyParty[partyId], *partnerMon;
+
+    if (GetMonAbility(mon) == ABILITY_ILLUSION)
+    {
+        if (IsBattlerAlive(BATTLE_PARTNER(battler)))
+            partnerMon = &gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]];
+        else
+            partnerMon = mon;
+
+        // Find last alive non-egg pokemon.
+        for (i = PARTY_SIZE - 1; i >= 0; i--)
+        {
+            id = i;
+            if (GetMonData(&gEnemyParty[id], MON_DATA_SANITY_HAS_SPECIES)
+                && GetMonData(&gEnemyParty[id], MON_DATA_HP)
+                && &gEnemyParty[id] != mon
+                && &gEnemyParty[id] != partnerMon)
+            {
+                GetMonData(&gEnemyParty[id], MON_DATA_NICKNAME, dst);
+                return;
+            }
+        }
+    }
+
+    GetMonData(mon, MON_DATA_NICKNAME, dst);
+}
+
 void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 {
-    u32 srcId = 1;
+    u32 srcID = 1;
     u32 value = 0;
-    u8 text[12];
+    u8 nickname[POKEMON_NAME_LENGTH + 2];
     u16 hword;
 
     *dst = EOS;
-    while (src[srcId] != B_BUFF_EOS)
+    while (src[srcID] != B_BUFF_EOS)
     {
-        switch (src[srcId])
+        switch (src[srcID])
         {
         case B_BUFF_STRING: // battle string
-            hword = T1_READ_16(&src[srcId + 1]);
+            hword = T1_READ_16(&src[srcID + 1]);
             StringAppend(dst, gBattleStringsTable[hword - BATTLESTRINGS_TABLE_START]);
-            srcId += 3;
+            srcID += 3;
             break;
         case B_BUFF_NUMBER: // int to string
-            switch (src[srcId + 1])
+            switch (src[srcID + 1])
             {
             case 1:
-                value = src[srcId + 3];
+                value = src[srcID + 3];
                 break;
             case 2:
-                value = T1_READ_16(&src[srcId + 3]);
+                value = T1_READ_16(&src[srcID + 3]);
                 break;
             case 4:
-                value = T1_READ_32(&src[srcId + 3]);
+                value = T1_READ_32(&src[srcID + 3]);
                 break;
             }
-            ConvertIntToDecimalStringN(dst, value, STR_CONV_MODE_LEFT_ALIGN, src[srcId + 2]);
-            srcId += src[srcId + 1] + 3;
+            ConvertIntToDecimalStringN(dst, value, STR_CONV_MODE_LEFT_ALIGN, src[srcID + 2]);
+            srcID += src[srcID + 1] + 3;
             break;
         case B_BUFF_MOVE: // move name
-            StringAppend(dst, gMovesInfo[T1_READ_16(&src[srcId + 1])].name);
-            srcId += 3;
+            StringAppend(dst, gMovesInfo[T1_READ_16(&src[srcID + 1])].name);
+            srcID += 3;
             break;
         case B_BUFF_TYPE: // type name
-            StringAppend(dst, gTypesInfo[src[srcId + 1]].name);
-            srcId += 2;
+            StringAppend(dst, gTypesInfo[src[srcID + 1]].name);
+            srcID += 2;
             break;
         case B_BUFF_MON_NICK_WITH_PREFIX: // poke nick with prefix
-            if (GetBattlerSide(src[srcId + 1]) == B_SIDE_PLAYER)
+            if (GetBattlerSide(src[srcID + 1]) == B_SIDE_PLAYER)
             {
-                GetMonData(&gPlayerParty[src[srcId + 2]], MON_DATA_NICKNAME, text);
+                GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, nickname);
             }
             else
             {
@@ -3348,38 +3374,51 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
                 else
                     StringAppend(dst, sText_WildPkmnPrefix);
 
-                GetMonData(&gEnemyParty[src[srcId + 2]], MON_DATA_NICKNAME, text);
+                GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, nickname);
             }
-            StringGet_Nickname(text);
-            StringAppend(dst, text);
-            srcId += 3;
+            StringGet_Nickname(nickname);
+            StringAppend(dst, nickname);
+            srcID += 3;
             break;
         case B_BUFF_STAT: // stats
-            StringAppend(dst, gStatNamesTable[src[srcId + 1]]);
-            srcId += 2;
+            StringAppend(dst, gStatNamesTable[src[srcID + 1]]);
+            srcID += 2;
             break;
         case B_BUFF_SPECIES: // species name
-            StringCopy(dst, GetSpeciesName(T1_READ_16(&src[srcId + 1])));
-            srcId += 3;
+            StringCopy(dst, GetSpeciesName(T1_READ_16(&src[srcID + 1])));
+            srcID += 3;
             break;
         case B_BUFF_MON_NICK: // poke nick without prefix
-            if (GetBattlerSide(src[srcId + 1]) == B_SIDE_PLAYER)
-                GetMonData(&gPlayerParty[src[srcId + 2]], MON_DATA_NICKNAME, dst);
+            if (src[srcID + 2] == gBattlerPartyIndexes[src[srcID + 1]])
+            {
+                GetBattlerNick(src[srcID + 1], dst);
+            }
+            else if (gBattleScripting.illusionNickHack) // for STRINGID_ENEMYABOUTTOSWITCHPKMN
+            {
+                gBattleScripting.illusionNickHack = 0;
+                IllusionNickHack(src[srcID + 1], src[srcID + 2], dst);
+                StringGet_Nickname(dst);
+            }
             else
-                GetMonData(&gEnemyParty[src[srcId + 2]], MON_DATA_NICKNAME, dst);
-            StringGet_Nickname(dst);
-            srcId += 3;
+            {
+                if (GetBattlerSide(src[srcID + 1]) == B_SIDE_PLAYER)
+                    GetMonData(&gPlayerParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
+                else
+                    GetMonData(&gEnemyParty[src[srcID + 2]], MON_DATA_NICKNAME, dst);
+                StringGet_Nickname(dst);
+            }
+            srcID += 3;
             break;
         case B_BUFF_NEGATIVE_FLAVOR: // flavor table
-            StringAppend(dst, gPokeblockWasTooXStringTable[src[srcId + 1]]);
-            srcId += 2;
+            StringAppend(dst, gPokeblockWasTooXStringTable[src[srcID + 1]]);
+            srcID += 2;
             break;
         case B_BUFF_ABILITY: // ability names
-            StringAppend(dst, gAbilitiesInfo[src[srcId + 1]].name);
-            srcId += 2;
+            StringAppend(dst, gAbilitiesInfo[T1_READ_16(&src[srcID + 1])].name);
+            srcID += 3;
             break;
         case B_BUFF_ITEM: // item name
-            hword = T1_READ_16(&src[srcId + 1]);
+            hword = T1_READ_16(&src[srcID + 1]);
             if (gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 if (hword == ITEM_ENIGMA_BERRY)
@@ -3403,7 +3442,7 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             {
                 CopyItemName(hword, dst);
             }
-            srcId += 3;
+            srcID += 3;
             break;
         }
     }

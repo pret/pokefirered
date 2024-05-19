@@ -23,6 +23,8 @@
 #include "constants/songs.h"
 
 
+// function declarations
+static void AnimTask_DynamaxGrowthStep(u8 taskId);
 static void SpriteCB_PhotonGeyserBeam(struct Sprite *sprite);
 static void SpriteCB_BeamUpStep(struct Sprite *sprite);
 static void AnimBlastBurnTargetPlume_Step1(struct Sprite *sprite);
@@ -312,4 +314,41 @@ static void AnimBlastBurnTargetPlume_Step1(struct Sprite *sprite)
 
     if (sprite->data[0] == sprite->data[1])
         DestroySpriteAndMatrix(sprite);
+}
+
+// DYNAMAX
+static const union AffineAnimCmd sDynamaxGrowthAffineAnimCmds[] = // from CFRU
+{
+	AFFINEANIMCMD_FRAME(-2, -2, 0, 64), //Double in size over 1 second
+	AFFINEANIMCMD_FRAME(0, 0, 0, 64), //Pause for 1 seconds
+	AFFINEANIMCMD_FRAME(16, 16, 0, 8), //Shrink back down in 1/8 of a second
+	AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sDynamaxGrowthAttackAnimationAffineAnimCmds[] =
+{
+	AFFINEANIMCMD_FRAME(-4, -4, 0, 32), //Double in size quicker
+	AFFINEANIMCMD_FRAME(0, 0, 0, 32), //Pause for less
+	AFFINEANIMCMD_FRAME(16, 16, 0, 8),
+	AFFINEANIMCMD_END,
+};
+
+//Arg 0: Animation for attack
+void AnimTask_DynamaxGrowth(u8 taskId) // from CFRU
+{
+	struct Task* task = &gTasks[taskId];
+	u8 spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
+
+	if (gBattleAnimArgs[0] == 0)
+		PrepareAffineAnimInTaskData(task, spriteId, sDynamaxGrowthAffineAnimCmds);
+	else
+		PrepareAffineAnimInTaskData(task, spriteId, sDynamaxGrowthAttackAnimationAffineAnimCmds);
+	task->func = AnimTask_DynamaxGrowthStep;
+}
+
+static void AnimTask_DynamaxGrowthStep(u8 taskId) // from CFRU
+{
+	struct Task* task = &gTasks[taskId];
+	if (!RunAffineAnimFromTaskData(task))
+		DestroyAnimVisualTask(taskId);
 }

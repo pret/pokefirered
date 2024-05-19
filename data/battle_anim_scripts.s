@@ -1014,6 +1014,7 @@ gBattleAnims_General::
 	.4byte General_SlideOffScreen           @ B_ANIM_SLIDE_OFFSCREEN
 	.4byte General_MegaEvolution            @ B_ANIM_MEGA_EVOLUTION
 	.4byte General_UltraBurst               @ B_ANIM_ULTRA_BURST
+	.4byte General_DynamaxGrowth            @ B_ANIM_DYNAMAX_GROWTH
 
 	.align 2
 gBattleAnims_Special::
@@ -12641,5 +12642,13 @@ PhotonGeyserBeam:
 	delay 0x1
 	createsprite gPhotonGeyserBeam, ANIM_TARGET, 3, 0, -77, ANIM_TARGET, 180, 2, 0
 	return
+
+@@@ DYNAMAX AND MAX RAIDS
+General_DynamaxGrowth:: @ PORTED FROM CFRU
+	createvisualtask SoundTask_PlayCryWithEcho, 2, ANIM_ATTACKER, 2
+	delay 8
+	createvisualtask AnimTask_DynamaxGrowth, 0x5, 0x1, 0x0
+	waitforvisualfinish
+	end
 
 

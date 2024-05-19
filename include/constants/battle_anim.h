@@ -394,6 +394,7 @@
 // pokeemerald
 #define B_ANIM_MEGA_EVOLUTION           30
 #define B_ANIM_ULTRA_BURST              31
+#define B_ANIM_DYNAMAX_GROWTH           32
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

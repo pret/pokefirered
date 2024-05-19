@@ -9742,7 +9742,7 @@ BattleScript_DynamaxBegins::
 	returntoball BS_SCRIPTING, TRUE
 	switchinanim BS_SCRIPTING, TRUE
 	updatedynamax
-	playanimation BS_SCRIPTING, B_ANIM_FORM_CHANGE @ TODO: animation B_ANIM_DYNAMAX_GROWTH
+	playanimation BS_SCRIPTING, B_ANIM_DYNAMAX_GROWTH
 	waitanimation
 	end3
 

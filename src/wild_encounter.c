@@ -21,6 +21,17 @@
 
 #define MAX_ENCOUNTER_RATE 1600
 
+enum
+{
+    WILD_AREA_LAND,
+    WILD_AREA_WATER,
+    WILD_AREA_ROCKS,
+    WILD_AREA_FISHING,
+};
+
+#define WILD_CHECK_REPEL    0x1
+#define WILD_CHECK_KEEN_EYE 0x2
+
 #define HEADER_NONE 0xFFFF
 
 struct WildEncounterData
@@ -47,6 +58,7 @@ static void ApplyCleanseTagEncounterRateMod(u32 *rate);
 static bool8 IsLeadMonHoldingCleanseTag(void);
 static u16 WildEncounterRandom(void);
 static void AddToWildEncounterRateBuff(u8 encouterRate);
+static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u16 ability, u8 *monIndex, u32 size);
 
 #include "data/wild_encounters.h"
 
@@ -304,39 +316,56 @@ u8 GetUnownLetterByPersonalityLoByte(u32 personality)
     return GET_UNOWN_LETTER(personality);
 }
 
-enum
-{
-    WILD_AREA_LAND,
-    WILD_AREA_WATER,
-    WILD_AREA_ROCKS,
-    WILD_AREA_FISHING,
-};
+#define TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildPokemon, type, ability, ptr, count) TryGetAbilityInfluencedWildMonIndex(wildPokemon, type, ability, ptr, count)
 
-#define WILD_CHECK_REPEL    0x1
-#define WILD_CHECK_KEEN_EYE 0x2
-
-static bool8 TryGenerateWildMon(const struct WildPokemonInfo * info, u8 area, u8 flags)
+static bool8 TryGenerateWildMon(const struct WildPokemonInfo * wildMonInfo, u8 area, u8 flags)
 {
-    u8 slot = 0;
+    u8 wildMonIndex = 0;
     u8 level;
     switch (area)
     {
     case WILD_AREA_LAND:
-        slot = ChooseWildMonIndex_Land();
+        if (OW_MAGNET_PULL < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex, LAND_WILD_COUNT))
+            break;
+        if (OW_STATIC < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_STATIC, &wildMonIndex, LAND_WILD_COUNT))
+            break;
+        if (OW_LIGHTNING_ROD == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_LIGHTNING_ROD, &wildMonIndex, LAND_WILD_COUNT))
+            break;
+        if (OW_FLASH_FIRE == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_FIRE, ABILITY_FLASH_FIRE, &wildMonIndex, LAND_WILD_COUNT))
+            break;
+        if (OW_HARVEST == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_GRASS, ABILITY_HARVEST, &wildMonIndex, LAND_WILD_COUNT))
+            break;
+        if (OW_STORM_DRAIN == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_WATER, ABILITY_STORM_DRAIN, &wildMonIndex, LAND_WILD_COUNT))
+            break;
+
+        wildMonIndex = ChooseWildMonIndex_Land();
         break;
     case WILD_AREA_WATER:
-        slot = ChooseWildMonIndex_WaterRock();
+        if (OW_MAGNET_PULL < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex, WATER_WILD_COUNT))
+            break;
+        if (OW_STATIC < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_STATIC, &wildMonIndex, WATER_WILD_COUNT))
+            break;
+        if (OW_LIGHTNING_ROD == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_LIGHTNING_ROD, &wildMonIndex, WATER_WILD_COUNT))
+            break;
+        if (OW_FLASH_FIRE == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_FIRE, ABILITY_FLASH_FIRE, &wildMonIndex, WATER_WILD_COUNT))
+            break;
+        if (OW_HARVEST == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_GRASS, ABILITY_HARVEST, &wildMonIndex, WATER_WILD_COUNT))
+            break;
+        if (OW_STORM_DRAIN == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_WATER, ABILITY_STORM_DRAIN, &wildMonIndex, WATER_WILD_COUNT))
+            break;
+
+        wildMonIndex = ChooseWildMonIndex_WaterRock();
         break;
     case WILD_AREA_ROCKS:
-        slot = ChooseWildMonIndex_WaterRock();
+        wildMonIndex = ChooseWildMonIndex_WaterRock();
         break;
     }
-    level = ChooseWildMonLevel(&info->wildPokemon[slot]);
+
+    level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex]);
     if (flags == WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
-    {
         return FALSE;
-    }
-    GenerateWildMon(info->wildPokemon[slot].species, level, slot);
+
+    GenerateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level, wildMonIndex);
     return TRUE;
 }
 
@@ -864,4 +893,37 @@ bool8 TryDoDoubleWildBattle(void)
     else if (B_DOUBLE_WILD_CHANCE != 0 && ((Random() % 100) + 1 <= B_DOUBLE_WILD_CHANCE))
         return TRUE;
     return FALSE;
+}
+
+static bool8 TryGetRandomWildMonIndexByType(const struct WildPokemon *wildMon, u8 type, u8 numMon, u8 *monIndex)
+{
+    u8 validIndexes[numMon]; // variable length array, an interesting feature
+    u8 i, validMonCount;
+
+    for (i = 0; i < numMon; i++)
+        validIndexes[i] = 0;
+
+    for (validMonCount = 0, i = 0; i < numMon; i++)
+    {
+        if (gSpeciesInfo[wildMon[i].species].types[0] == type || gSpeciesInfo[wildMon[i].species].types[1] == type)
+            validIndexes[validMonCount++] = i;
+    }
+
+    if (validMonCount == 0 || validMonCount == numMon)
+        return FALSE;
+
+    *monIndex = validIndexes[Random() % validMonCount];
+    return TRUE;
+}
+
+static bool8 TryGetAbilityInfluencedWildMonIndex(const struct WildPokemon *wildMon, u8 type, u16 ability, u8 *monIndex, u32 size)
+{
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
+        return FALSE;
+    else if (GetMonAbility(&gPlayerParty[0]) != ability)
+        return FALSE;
+    else if (Random() % 2 != 0)
+        return FALSE;
+
+    return TryGetRandomWildMonIndexByType(wildMon, type, size, monIndex);
 }

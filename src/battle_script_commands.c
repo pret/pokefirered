@@ -7610,7 +7610,7 @@ static void Cmd_incrementgamestat(void)
     CMD_ARGS(u8 stat);
 
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-        IncrementGameStat(cmd->stat); // TODO: compare IncrementGameStat to pokeemerald
+        IncrementGameStat(cmd->stat);
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -16040,7 +16040,6 @@ void BS_ItemCureStatus(void)
     bool32 statusChanged = FALSE;
     struct Pokemon *party = GetSideParty(side);
 
-    DebugPrintfLevel(MGBA_LOG_ERROR, "BS_ItemCureStatus");
     // Heal Status2 conditions if battler is active.
     if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
     {

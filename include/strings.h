@@ -1034,6 +1034,11 @@ extern const u8 gText_Area[];
 extern const u8 gText_Size[];
 extern const u8 gText_AreaUnknown[];
 
+extern const u8 gText_UnkHeight[];
+extern const u8 gText_UnkHeightMetric[];
+extern const u8 gText_UnkWeight[];
+extern const u8 gText_UnkWeightMetric[];
+
 // daycare
 extern const u8 gText_Lv[];
 extern const u8 gDaycareText_GetAlongVeryWell[];

@@ -16,15 +16,6 @@
 #undef abs
 #define abs(a) ((a) < 0 ? -(a) : (a))
 
-struct TestingBar
-{
-    s32 maxValue;
-    s32 oldValue;
-    s32 receivedValue;
-    u32 pal:5;
-    u32 tileOffset;
-};
-
 // These are used as indexes for each "section of tiles" in gBattleInterface_Gfx
 #define B_INTERFACE_GFX_TRANSPARENT             0
 #define B_INTERFACE_GFX_HP_BAR_HP_TEXT          1
@@ -84,7 +75,6 @@ static void MoveBattleBarGraphically(u8 battlerId, u8 whichBar);
 static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8 scale);
 static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *currValue, u8 *arg4, u8 scale);
 static s32 CalcNewBarValue(s32 maxValue, s32 currValue, s32 receivedValue, s32 *arg3, u8 arg4, u16 arg5);
-static void DrawHealthbarOntoScreen(struct TestingBar *barInfo, s32 *currValue, u8 bg, u8 x, u8 y);
 static void SafariTextIntoHealthboxObject(void *dest, u8 *windowTileData, u32 windowWidth);
 static u8 *AddTextPrinterAndCreateWindowOnHealthbox(const u8 *str, u32 x, u32 y, u32 *windowId);
 static void RemoveWindowOnHealthbox(u32 windowId);
@@ -2486,61 +2476,6 @@ static u8 CalcBarFilledPixels(s32 maxValue, s32 oldValue, s32 receivedValue, s32
     }
 
     return totalFilledPixels;
-}
-
-// Unused
-// These functions seem as if they were made for testing the health bar.
-static s16 UpdateAndDrawHealthbarOntoScreen(struct TestingBar *barInfo, s32 *currValue, u8 bg, u8 x, u8 y)
-{
-    s16 hpVal;
-
-    hpVal = CalcNewBarValue(barInfo->maxValue,
-                          barInfo->oldValue,
-                          barInfo->receivedValue,
-                          currValue,
-                          B_HEALTHBAR_NUM_TILES,
-                          1);
-
-    DrawHealthbarOntoScreen(barInfo, currValue, bg, x, y);
-
-    return hpVal;
-}
-
-// Unused
-static s16 CalcNewHealthbarValue(struct TestingBar *barInfo, s32 *currValue)
-{
-    return CalcNewBarValue(barInfo->maxValue,
-                          barInfo->oldValue,
-                          barInfo->receivedValue,
-                          currValue,
-                          B_HEALTHBAR_NUM_TILES,
-                          1);
-}
-
-// Unused
-static void DoDrawHealthbarOntoScreen(struct TestingBar *barInfo, s32 *currValue, u8 bg, u8 x, u8 y)
-{
-    DrawHealthbarOntoScreen(barInfo, currValue, bg, x, y);
-}
-
-// Unused
-static void DrawHealthbarOntoScreen(struct TestingBar *barInfo, s32 *currValue, u8 bg, u8 x, u8 y)
-{
-    u8 filledPixels[B_HEALTHBAR_NUM_TILES];
-    u16 tiles[B_HEALTHBAR_NUM_TILES];
-    u8 i;
-
-    CalcBarFilledPixels(barInfo->maxValue,
-                        barInfo->oldValue,
-                        barInfo->receivedValue,
-                        currValue,
-                        filledPixels,
-                        B_HEALTHBAR_NUM_TILES);
-
-    for (i = 0; i < ARRAY_COUNT(tiles); i++)
-        tiles[i] = (barInfo->pal << 12) | (barInfo->tileOffset + filledPixels[i]);
-
-    CopyToBgTilemapBufferRect_ChangePalette(bg, tiles, x, y, 6, 1, 17);
 }
 
 static u8 GetScaledExpFraction(s32 oldValue, s32 receivedValue, s32 maxValue, u8 scale)

@@ -90,11 +90,8 @@ static u32 GetMonSize(u16 species, u16 b)
 
 static void FormatMonSizeRecord(u8 *string, u32 size)
 {
-#ifdef UNITS_IMPERIAL
-    //Convert size from centimeters to inches
-    //In the Hoenn games, this conversion was performed using floating point values
-    size = size * 100 / 254;
-#endif
+    if (UNITS == UNITS_IMPERIAL)
+        size = size * 100 / 254;
 
     string = ConvertIntToDecimalStringN(string, size / 10, STR_CONV_MODE_LEFT_ALIGN, 8);
     string = StringAppend(string, gText_DecimalPoint);

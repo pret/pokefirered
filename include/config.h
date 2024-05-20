@@ -49,12 +49,6 @@
 
 #define ABSPATH(x) (CODE_ROOT x)
 
-#ifdef ENGLISH
-#define UNITS_IMPERIAL
-#else
-#define UNITS_METRIC
-#endif // ENGLISH
-
 // Crashes may occur due to section reordering in the modern build,
 // so we force BUGFIX here.
 #if MODERN
@@ -77,5 +71,12 @@
 #define GEN_8 7
 #define GEN_9 8
 #define GEN_LATEST GEN_9
+
+// Measurement system constants to be used for UNITS
+#define UNITS_IMPERIAL               0       // Inches, feet, pounds
+#define UNITS_METRIC                 1       // meters, kilograms
+
+#define UNITS                        UNITS_METRIC
+#define CHAR_DEC_SEPARATOR           CHAR_PERIOD // CHAR_PERIOD is used as a decimal separator only in the UK and the US. The rest of the world uses CHAR_COMMA.
 
 #endif // GUARD_CONFIG_H

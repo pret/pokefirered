@@ -1760,11 +1760,11 @@ Cry_Teddiursa::
 Cry_Ursaring::
 	.incbin "sound/direct_sound_samples/cries/ursaring.bin"
 
-.if P_GEN_9_CROSS_EVOS == TRUE
+.if P_GEN_8_CROSS_EVOS == TRUE
 	.align 2
 Cry_Ursaluna::
 	.incbin "sound/direct_sound_samples/cries/ursaluna.bin"
-.endif @ P_GEN_9_CROSS_EVOS
+.endif @ P_GEN_8_CROSS_EVOS
 .endif @ P_FAMILY_TEDDIURSA
 
 .if P_FAMILY_SLUGMA == TRUE
@@ -5126,6 +5126,10 @@ Cry_Appletun::
 	.align 2
 Cry_Dipplin::
 	.incbin "sound/direct_sound_samples/cries/dipplin.bin"
+
+	.align 2
+Cry_Hydrapple::
+	.incbin "sound/direct_sound_samples/cries/hydrapple.bin"
 .endif @ P_GEN_9_CROSS_EVOS
 .endif @ P_FAMILY_APPLIN
 
@@ -5333,6 +5337,10 @@ Cry_Arctovish::
 	.align 2
 Cry_Duraludon::
 	.incbin "sound/direct_sound_samples/cries/duraludon.bin"
+
+	.align 2
+Cry_Archaludon::
+	.incbin "sound/direct_sound_samples/cries/archaludon.bin"
 .endif @ P_FAMILY_DURALUDON
 
 .if P_FAMILY_DREEPY == TRUE
@@ -6025,6 +6033,42 @@ Cry_Fezandipiti::
 Cry_Ogerpon::
 	.incbin "sound/direct_sound_samples/cries/ogerpon.bin"
 .endif @ P_FAMILY_OGERPON
+
+.if P_FAMILY_GOUGING_FIRE == TRUE
+	.align 2
+Cry_GougingFire::
+	.incbin "sound/direct_sound_samples/cries/gouging_fire.bin"
+.endif @ P_FAMILY_GOUGING_FIRE
+
+.if P_FAMILY_RAGING_BOLT == TRUE
+	.align 2
+Cry_RagingBolt::
+	.incbin "sound/direct_sound_samples/cries/raging_bolt.bin"
+.endif @ P_FAMILY_RAGING_BOLT
+
+.if P_FAMILY_IRON_BOULDER == TRUE
+	.align 2
+Cry_IronBoulder::
+	.incbin "sound/direct_sound_samples/cries/iron_boulder.bin"
+.endif @ P_FAMILY_IRON_BOULDER
+
+.if P_FAMILY_IRON_CROWN == TRUE
+	.align 2
+Cry_IronCrown::
+	.incbin "sound/direct_sound_samples/cries/iron_crown.bin"
+.endif @ P_FAMILY_IRON_CROWN
+
+.if P_FAMILY_TERAPAGOS == TRUE
+	.align 2
+Cry_Terapagos::
+	.incbin "sound/direct_sound_samples/cries/terapagos.bin"
+.endif @ P_FAMILY_TERAPAGOS
+
+.if P_FAMILY_PECHARUNT == TRUE
+	.align 2
+Cry_Pecharunt::
+	.incbin "sound/direct_sound_samples/cries/pecharunt.bin"
+.endif @ P_FAMILY_PECHARUNT
 
 
 	.align 2

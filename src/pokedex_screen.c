@@ -323,7 +323,7 @@ static const struct WindowTemplate sWindowTemplate_DexCounts = {
 
 static const struct ListMenuItem sListMenuItems_KantoDexModeSelect[] = {
     {gText_PokemonList,                  LIST_HEADER},
-    {gText_NumericalMode,                DEX_MODE(NUMERICAL_KANTO)},
+    {gText_NumericalMode,                DEX_ORDER_NUMERICAL_KANTO},
     {gText_PokemonHabitats,              LIST_HEADER},
     {gText_DexCategory_GrasslandPkmn,    DEX_CATEGORY_GRASSLAND},
     {gText_DexCategory_ForestPkmn,       DEX_CATEGORY_FOREST},
@@ -335,10 +335,10 @@ static const struct ListMenuItem sListMenuItems_KantoDexModeSelect[] = {
     {gText_DexCategory_UrbanPkmn,        DEX_CATEGORY_URBAN},
     {gText_DexCategory_RarePkmn,         DEX_CATEGORY_RARE},
     {gText_Search,                       LIST_HEADER},
-    {gText_AToZMode,                     DEX_MODE(ATOZ)},
-    {gText_TypeMode,                     DEX_MODE(TYPE)},
-    {gText_LightestMode,                 DEX_MODE(LIGHTEST)},
-    {gText_SmallestMode,                 DEX_MODE(SMALLEST)},
+    {gText_AToZMode,                     DEX_ORDER_ATOZ},
+    {gText_TypeMode,                     DEX_ORDER_TYPE},
+    {gText_LightestMode,                 DEX_ORDER_LIGHTEST},
+    {gText_SmallestMode,                 DEX_ORDER_SMALLEST},
     {gText_PokedexOther,                 LIST_HEADER},
     {gText_ClosePokedex,                 LIST_CANCEL},
 };
@@ -366,8 +366,8 @@ static const struct ListMenuTemplate sListMenuTemplate_KantoDexModeSelect = {
 
 static const struct ListMenuItem sListMenuItems_NatDexModeSelect[] = {
     {gText_PokemonList,                  LIST_HEADER},
-    {gText_NumericalModeKanto,           DEX_MODE(NUMERICAL_KANTO)},
-    {gText_NumericalModeNational,        DEX_MODE(NUMERICAL_NATIONAL)},
+    {gText_NumericalModeKanto,           DEX_ORDER_NUMERICAL_KANTO},
+    {gText_NumericalModeNational,        DEX_ORDER_NUMERICAL_NATIONAL},
     {gText_PokemonHabitats,              LIST_HEADER},
     {gText_DexCategory_GrasslandPkmn,    DEX_CATEGORY_GRASSLAND},
     {gText_DexCategory_ForestPkmn,       DEX_CATEGORY_FOREST},
@@ -379,10 +379,10 @@ static const struct ListMenuItem sListMenuItems_NatDexModeSelect[] = {
     {gText_DexCategory_UrbanPkmn,        DEX_CATEGORY_URBAN},
     {gText_DexCategory_RarePkmn,         DEX_CATEGORY_RARE},
     {gText_Search,                       LIST_HEADER},
-    {gText_AToZMode,                     DEX_MODE(ATOZ)},
-    {gText_TypeMode,                     DEX_MODE(TYPE)},
-    {gText_LightestMode,                 DEX_MODE(LIGHTEST)},
-    {gText_SmallestMode,                 DEX_MODE(SMALLEST)},
+    {gText_AToZMode,                     DEX_ORDER_ATOZ},
+    {gText_TypeMode,                     DEX_ORDER_TYPE},
+    {gText_LightestMode,                 DEX_ORDER_LIGHTEST},
+    {gText_SmallestMode,                 DEX_ORDER_SMALLEST},
     {gText_PokedexOther,                 LIST_HEADER},
     {gText_ClosePokedex,                 LIST_CANCEL},
 };
@@ -474,27 +474,27 @@ static const struct PokedexScreenWindowGfx sTopMenuSelectionIconGfxPtrs[] = {
         .tiles = sTopMenuIconTiles_Rare,
         .pal   = sTopMenuIconPals_Rare
     },
-    [DEX_MODE(NUMERICAL_KANTO)] = {
+    [DEX_ORDER_NUMERICAL_KANTO] = {
         .tiles = sTopMenuIconTiles_Numerical,
         .pal   = sTopMenuIconPals_Numerical
     },
-    [DEX_MODE(ATOZ)] = {
+    [DEX_ORDER_ATOZ] = {
         .tiles = gDexScreen_TopMenuIconTiles_AtoZ,
         .pal   = gDexScreen_TopMenuIconPals_AtoZ
     },
-    [DEX_MODE(TYPE)] = {
+    [DEX_ORDER_TYPE] = {
         .tiles = sTopMenuIconTiles_Type,
         .pal   = sTopMenuIconPals_Type
     },
-    [DEX_MODE(LIGHTEST)] = {
+    [DEX_ORDER_LIGHTEST] = {
         .tiles = sTopMenuIconTiles_Lightest,
         .pal   = sTopMenuIconPals_Lightest
     },
-    [DEX_MODE(SMALLEST)] = {
+    [DEX_ORDER_SMALLEST] = {
         .tiles = sTopMenuIconTiles_Smallest,
         .pal   = sTopMenuIconPals_Smallest
     },
-    [DEX_MODE(NUMERICAL_NATIONAL)] = {
+    [DEX_ORDER_NUMERICAL_NATIONAL] = {
         .tiles = sTopMenuIconTiles_Numerical,
         .pal   = sTopMenuIconPals_Numerical
     },
@@ -1070,19 +1070,19 @@ static void Task_PokedexScreen(u8 taskId)
                     sPokedexScreenData->state = 7;
                 }
                 break;
-            case DEX_MODE(NUMERICAL_KANTO):
-            case DEX_MODE(NUMERICAL_NATIONAL):
+            case DEX_ORDER_NUMERICAL_KANTO:
+            case DEX_ORDER_NUMERICAL_NATIONAL:
                 RemoveScrollIndicatorArrowPair(sPokedexScreenData->scrollArrowsTaskId);
-                sPokedexScreenData->dexOrderId = sPokedexScreenData->modeSelectInput - DEX_CATEGORY_COUNT + 1;
+                sPokedexScreenData->dexOrderId = sPokedexScreenData->modeSelectInput;
                 BeginNormalPaletteFade(~0x8000, 0, 0, 16, RGB_WHITEALPHA);
                 sPokedexScreenData->state = 9;
                 break;
-            case DEX_MODE(ATOZ):
-            case DEX_MODE(TYPE):
-            case DEX_MODE(LIGHTEST):
-            case DEX_MODE(SMALLEST):
+            case DEX_ORDER_ATOZ:
+            case DEX_ORDER_TYPE:
+            case DEX_ORDER_LIGHTEST:
+            case DEX_ORDER_SMALLEST:
                 RemoveScrollIndicatorArrowPair(sPokedexScreenData->scrollArrowsTaskId);
-                sPokedexScreenData->dexOrderId = sPokedexScreenData->modeSelectInput - DEX_CATEGORY_COUNT + 1;
+                sPokedexScreenData->dexOrderId = sPokedexScreenData->modeSelectInput;
                 sPokedexScreenData->characteristicOrderMenuItemsAbove = sPokedexScreenData->characteristicOrderMenuCursorPos = 0;
                 BeginNormalPaletteFade(~0x8000, 0, 0, 16, RGB_WHITEALPHA);
                 sPokedexScreenData->state = 8;
@@ -1198,7 +1198,7 @@ static void MoveCursorFunc_DexModeSelect(s32 itemIndex, bool8 onInit, struct Lis
 
 static void ItemPrintFunc_DexModeSelect(u8 windowId, u32 itemId, u8 y)
 {
-    if (itemId >= DEX_CATEGORY_COUNT || sPokedexScreenData->unlockedCategories & (1 << itemId))
+    if (itemId >= DEX_ORDER_START || sPokedexScreenData->unlockedCategories & (1 << itemId))
         ListMenuOverrideSetColors(TEXT_COLOR_WHITE, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_LIGHT_GRAY);
     else
         ListMenuOverrideSetColors(TEXT_DYNAMIC_COLOR_1, TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_2);

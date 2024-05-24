@@ -41,7 +41,7 @@ enum {
     ITEM_TYPE_PARTY_MENU_MOVES,
 };
 
-extern const struct Item gItems[];
+extern const struct Item gItemsInfo[];
 extern struct BagPocket gBagPockets[];
 
 void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity);

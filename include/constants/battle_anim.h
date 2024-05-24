@@ -361,40 +361,61 @@
 #define BG_ZMOVE_MOUNTAIN 61
 
 // table ids for general animations (gBattleAnims_General)
-#define B_ANIM_FORM_CHANGE              0
-#define B_ANIM_STATS_CHANGE             1
-#define B_ANIM_SUBSTITUTE_FADE          2
-#define B_ANIM_SUBSTITUTE_APPEAR        3
-#define B_ANIM_BAIT_THROW               4
-#define B_ANIM_ITEM_KNOCKOFF            5
-#define B_ANIM_TURN_TRAP                6
-#define B_ANIM_HELD_ITEM_EFFECT         7
-#define B_ANIM_SMOKEBALL_ESCAPE         8
-#define B_ANIM_HANGED_ON                9
-#define B_ANIM_RAIN_CONTINUES           10
-#define B_ANIM_SUN_CONTINUES            11
-#define B_ANIM_SANDSTORM_CONTINUES      12
-#define B_ANIM_HAIL_CONTINUES           13
-#define B_ANIM_LEECH_SEED_DRAIN         14
-#define B_ANIM_MON_HIT                  15
-#define B_ANIM_ITEM_STEAL               16
-#define B_ANIM_SNATCH_MOVE              17
-#define B_ANIM_FUTURE_SIGHT_HIT         18
-#define B_ANIM_DOOM_DESIRE_HIT          19
-#define B_ANIM_FOCUS_PUNCH_SETUP        20
-#define B_ANIM_INGRAIN_HEAL             21
-#define B_ANIM_WISH_HEAL                22
-#define B_ANIM_MON_SCARED               23
-#define B_ANIM_GHOST_GET_OUT            24
-#define B_ANIM_SILPH_SCOPED             25
-#define B_ANIM_ROCK_THROW               26
-#define B_ANIM_SAFARI_REACTION          27
-#define B_ANIM_RESTORE_BG               28 // for Terrain Endings
-#define B_ANIM_SLIDE_OFFSCREEN          29 // for Emergency Exit
-// pokeemerald
-#define B_ANIM_MEGA_EVOLUTION           30
-#define B_ANIM_ULTRA_BURST              31
-#define B_ANIM_DYNAMAX_GROWTH           32
+#define B_ANIM_STATS_CHANGE             0
+#define B_ANIM_SUBSTITUTE_FADE          1
+#define B_ANIM_SUBSTITUTE_APPEAR        2
+#define B_ANIM_BAIT_THROW               3
+#define B_ANIM_ITEM_KNOCKOFF            4
+#define B_ANIM_TURN_TRAP                5
+#define B_ANIM_HELD_ITEM_EFFECT         6
+#define B_ANIM_SMOKEBALL_ESCAPE         7
+#define B_ANIM_HANGED_ON                8
+#define B_ANIM_RAIN_CONTINUES           9
+#define B_ANIM_SUN_CONTINUES            10
+#define B_ANIM_SANDSTORM_CONTINUES      11
+#define B_ANIM_HAIL_CONTINUES           12
+#define B_ANIM_LEECH_SEED_DRAIN         13
+#define B_ANIM_MON_HIT                  14
+#define B_ANIM_ITEM_STEAL               15
+#define B_ANIM_SNATCH_MOVE              16
+#define B_ANIM_FUTURE_SIGHT_HIT         17
+#define B_ANIM_DOOM_DESIRE_HIT          18
+#define B_ANIM_FOCUS_PUNCH_SETUP        19
+#define B_ANIM_INGRAIN_HEAL             20
+#define B_ANIM_WISH_HEAL                21
+#define B_ANIM_MEGA_EVOLUTION           22
+#define B_ANIM_ILLUSION_OFF             23
+#define B_ANIM_FORM_CHANGE              24
+#define B_ANIM_SLIDE_OFFSCREEN          25 // for Emergency Exit
+#define B_ANIM_RESTORE_BG               26 // for Terrain Endings
+#define B_ANIM_TOTEM_FLARE              27 // Totem boosts aura flare
+#define B_ANIM_GULP_MISSILE             28
+#define B_ANIM_STRONG_WINDS             29
+#define B_ANIM_PRIMAL_REVERSION         30
+#define B_ANIM_AQUA_RING_HEAL           31
+#define B_ANIM_BEAK_BLAST_SETUP         32
+#define B_ANIM_SHELL_TRAP_SETUP         33
+#define B_ANIM_ZMOVE_ACTIVATE           34 // Using Z Moves
+#define B_ANIM_AFFECTION_HANGED_ON      35
+#define B_ANIM_SNOW_CONTINUES           36
+#define B_ANIM_ULTRA_BURST              37
+#define B_ANIM_SALT_CURE_DAMAGE         38
+#define B_ANIM_DYNAMAX_GROWTH           39
+#define B_ANIM_MAX_SET_WEATHER          40
+#define B_ANIM_SYRUP_BOMB_SPEED_DROP    41
+#define B_ANIM_RAINBOW                  42
+#define B_ANIM_SEA_OF_FIRE              43
+#define B_ANIM_SWAMP                    44
+#define B_ANIM_TRICK_ROOM               45
+#define B_ANIM_WONDER_ROOM              46
+#define B_ANIM_MAGIC_ROOM               47
+#define B_ANIM_TAILWIND                 48
+// pokefirered
+#define B_ANIM_MON_SCARED               49
+#define B_ANIM_GHOST_GET_OUT            50
+#define B_ANIM_SILPH_SCOPED             51
+#define B_ANIM_ROCK_THROW               52
+#define B_ANIM_SAFARI_REACTION          53
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

@@ -1632,7 +1632,7 @@ u8 DoFieldEndTurnEffects(void)
                     gBattlescriptCurrInstr = BattleScript_DamagingWeatherContinues;
                 }
 
-                gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES; // TODO: Animation B_ANIM_SNOW_CONTINUES;
+                gBattleScripting.animArg1 = B_ANIM_SNOW_CONTINUES;
                 gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SNOW;
                 BattleScriptExecute(gBattlescriptCurrInstr);
                 effect++;
@@ -3572,7 +3572,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_TRICK_ROOM;
                     gFieldStatuses |= STATUS_FIELD_TRICK_ROOM;
-                    gBattleScripting.animArg1 = B_ANIM_STATS_CHANGE; // TODO: Animation B_ANIM_TRICK_ROOM;
+                    gBattleScripting.animArg1 = B_ANIM_TRICK_ROOM;
                     if (timerVal == 0)
                         gFieldTimers.trickRoomTimer = 0;    // infinite
                     else
@@ -3585,7 +3585,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_MAGIC_ROOM;
                     gFieldStatuses |= STATUS_FIELD_MAGIC_ROOM;
-                    gBattleScripting.animArg1 = B_ANIM_STATS_CHANGE; // TODO: Animation B_ANIM_MAGIC_ROOM;
+                    gBattleScripting.animArg1 = B_ANIM_MAGIC_ROOM;
                     if (timerVal == 0)
                         gFieldTimers.magicRoomTimer = 0;    // infinite
                     else
@@ -3598,7 +3598,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_WONDER_ROOM;
                     gFieldStatuses |= STATUS_FIELD_WONDER_ROOM;
-                    gBattleScripting.animArg1 = B_ANIM_STATS_CHANGE; // TODO: Animation B_ANIM_WONDER_ROOM;
+                    gBattleScripting.animArg1 = B_ANIM_WONDER_ROOM;
                     if (timerVal == 0)
                         gFieldTimers.wonderRoomTimer = 0;    // infinite
                     else
@@ -3612,7 +3612,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     gBattlerAttacker = B_POSITION_PLAYER_LEFT;
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_TAILWIND_PLAYER;
                     gSideStatuses[B_SIDE_PLAYER] |= SIDE_STATUS_TAILWIND;
-                    gBattleScripting.animArg1 = B_ANIM_STATS_CHANGE; // TODO: Animation B_ANIM_TAILWIND;
+                    gBattleScripting.animArg1 = B_ANIM_TAILWIND;
                     if (timerVal == 0)
                         gSideTimers[B_SIDE_PLAYER].tailwindTimer = 0; // infinite
                     else
@@ -3626,7 +3626,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     gBattlerAttacker = B_POSITION_OPPONENT_LEFT;
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_TAILWIND_OPPONENT;
                     gSideStatuses[B_SIDE_OPPONENT] |= SIDE_STATUS_TAILWIND;
-                    gBattleScripting.animArg1 = B_ANIM_STATS_CHANGE; // TODO: Animation B_ANIM_TAILWIND;
+                    gBattleScripting.animArg1 = B_ANIM_TAILWIND;
                     if (timerVal == 0)
                         gSideTimers[B_SIDE_OPPONENT].tailwindTimer = 0; // infinite
                     else
@@ -3699,7 +3699,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 if (B_OVERWORLD_SNOW >= GEN_9)
                 {
                     gBattleWeather = B_WEATHER_SNOW;
-                    gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES; // TODO: Animation B_ANIM_SNOW_CONTINUES;
+                    gBattleScripting.animArg1 = B_ANIM_SNOW_CONTINUES;
                 }
                 else
                 {

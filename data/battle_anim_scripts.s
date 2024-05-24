@@ -982,7 +982,6 @@ gBattleAnims_StatusConditions::
 
 	.align 2
 gBattleAnims_General::
-	.4byte General_FormChange               @ B_ANIM_FORM_CHANGE
 	.4byte General_StatsChange              @ B_ANIM_STATS_CHANGE
 	.4byte General_SubstituteFade           @ B_ANIM_SUBSTITUTE_FADE
 	.4byte General_SubstituteAppear         @ B_ANIM_SUBSTITUTE_APPEAR
@@ -991,7 +990,7 @@ gBattleAnims_General::
 	.4byte General_TurnTrap                 @ B_ANIM_TURN_TRAP
 	.4byte General_HeldItemEffect           @ B_ANIM_HELD_ITEM_EFFECT
 	.4byte General_SmokeballEscape          @ B_ANIM_SMOKEBALL_ESCAPE
-	.4byte General_FocusBand                @ B_ANIM_HANGED_ON
+	.4byte General_HangedOn                 @ B_ANIM_HANGED_ON
 	.4byte General_Rain                     @ B_ANIM_RAIN_CONTINUES
 	.4byte General_Sun                      @ B_ANIM_SUN_CONTINUES
 	.4byte General_Sandstorm                @ B_ANIM_SANDSTORM_CONTINUES
@@ -1005,16 +1004,38 @@ gBattleAnims_General::
 	.4byte General_FocusPunchSetUp          @ B_ANIM_FOCUS_PUNCH_SETUP
 	.4byte General_IngrainHeal              @ B_ANIM_INGRAIN_HEAL
 	.4byte General_WishHeal                 @ B_ANIM_WISH_HEAL
+	.4byte General_MegaEvolution            @ B_ANIM_MEGA_EVOLUTION
+	.4byte General_FormChange               @ TODO: B_ANIM_ILLUSION_OFF
+	.4byte General_FormChange               @ B_ANIM_FORM_CHANGE
+	.4byte General_SlideOffScreen           @ B_ANIM_SLIDE_OFFSCREEN
+	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
+	.4byte General_StatsChange              @ TODO: B_ANIM_TOTEM_FLARE
+	.4byte General_MonHit                   @ TODO: B_ANIM_GULP_MISSILE
+	.4byte General_StatsChange              @ TODO: B_ANIM_STRONG_WINDS
+	.4byte General_FormChange     	        @ TODO: B_ANIM_PRIMAL_REVERSION
+	.4byte General_StatsChange              @ TODO: B_ANIM_AQUA_RING_HEAL
+	.4byte General_StatsChange	            @ TODO: B_ANIM_BEAK_BLAST_SETUP
+	.4byte General_StatsChange         	    @ TODO: B_ANIM_SHELL_TRAP_SETUP
+	.4byte General_StatsChange        	    @ TODO: B_ANIM_ZMOVE_ACTIVATE
+	.4byte General_MonHit            		@ TODO: B_ANIM_AFFECTION_HANGED_ON
+	.4byte General_Hail                     @ TODO: B_ANIM_SNOW_CONTINUES
+	.4byte General_UltraBurst               @ B_ANIM_ULTRA_BURST
+	.4byte General_MonHit 		           	@ TODO: B_ANIM_SALT_CURE_DAMAGE
+	.4byte General_DynamaxGrowth            @ B_ANIM_DYNAMAX_GROWTH
+	.4byte General_FormChange               @ TODO: B_ANIM_MAX_SET_WEATHER
+	.4byte General_FormChange       		@ TODO: B_ANIM_SYRUP_BOMB_SPEED_DROP
+	.4byte General_FormChange               @ TODO: B_ANIM_RAINBOW
+	.4byte General_FormChange               @ TODO: B_ANIM_SEA_OF_FIRE
+	.4byte General_FormChange               @ TODO: B_ANIM_SWAMP
+	.4byte General_FormChange               @ TODO: B_ANIM_TRICK_ROOM
+	.4byte General_FormChange               @ TODO: B_ANIM_WONDER_ROOM
+	.4byte General_FormChange               @ TODO: B_ANIM_MAGIC_ROOM
+	.4byte General_FormChange               @ TODO: B_ANIM_TAILLWIND
 	.4byte General_MonScared                @ B_ANIM_MON_SCARED
 	.4byte General_GhostGetOut              @ B_ANIM_GHOST_GET_OUT
 	.4byte General_SilphScoped              @ B_ANIM_SILPH_SCOPED
 	.4byte General_SafariRockThrow          @ B_ANIM_ROCK_THROW
 	.4byte General_SafariReaction           @ B_ANIM_SAFARI_REACTION
-	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
-	.4byte General_SlideOffScreen           @ B_ANIM_SLIDE_OFFSCREEN
-	.4byte General_MegaEvolution            @ B_ANIM_MEGA_EVOLUTION
-	.4byte General_UltraBurst               @ B_ANIM_ULTRA_BURST
-	.4byte General_DynamaxGrowth            @ B_ANIM_DYNAMAX_GROWTH
 
 	.align 2
 gBattleAnims_Special::
@@ -11887,7 +11908,7 @@ General_SmokeballEscape:
 	blendoff
 	end
 
-General_FocusBand:
+General_HangedOn:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_ATTACKER, 7, 0, 9, RGB_RED
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_SlideMonForFocusBand, 5, 30, 128, 0, 1, 2, 0, 1

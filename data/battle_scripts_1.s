@@ -262,7 +262,7 @@ BattleScript_SyrupBombActivates::
 
 BattleScript_SyrupBombEndTurn::
 	flushtextbox
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT @ TODO animation: B_ANIM_SYRUP_BOMB_SPEED_DROP
+	playanimation BS_ATTACKER, B_ANIM_SYRUP_BOMB_SPEED_DROP
 	setstatchanger STAT_SPEED, 1, TRUE
 	statbuffchange STAT_CHANGE_ALLOW_PTR | STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_SyrupBombTurnDmgEnd
 	printfromtable gStatDownStringIds
@@ -349,7 +349,7 @@ BattleScript_EffectCombinedPledge_Water::
 	pause B_WAIT_TIME_SHORTEST
 	printstring STRINGID_ARAINBOWAPPEAREDONSIDE
 	waitmessage B_WAIT_TIME_LONG
-	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE @ TODO animation: B_ANIM_RAINBOW
+	playanimation BS_ATTACKER, B_ANIM_RAINBOW
 	waitanimation
 	goto BattleScript_MoveEnd
 
@@ -364,7 +364,7 @@ BattleScript_EffectCombinedPledge_Fire::
 	pause B_WAIT_TIME_SHORTEST
 	printstring STRINGID_SEAOFFIREENVELOPEDSIDE
 	waitmessage B_WAIT_TIME_LONG
-	playanimation BS_TARGET, B_ANIM_STATS_CHANGE @ TODO animation: B_ANIM_SEA_OF_FIRE
+	playanimation BS_TARGET, B_ANIM_SEA_OF_FIRE
 	waitanimation
 	goto BattleScript_MoveEnd
 
@@ -384,7 +384,7 @@ BattleScript_EffectCombinedPledge_Grass::
 	pause B_WAIT_TIME_SHORTEST
 	printstring STRINGID_SWAMPENVELOPEDSIDE
 	waitmessage B_WAIT_TIME_LONG
-	playanimation BS_TARGET, B_ANIM_STATS_CHANGE @ TODO: animation B_ANIM_SWAMP
+	playanimation BS_TARGET, B_ANIM_SWAMP
 	waitanimation
 	goto BattleScript_MoveEnd
 
@@ -412,7 +412,7 @@ BattleScript_EffectSaltCure_End:
 	goto BattleScript_MoveEnd
 
 BattleScript_SaltCureExtraDamage::
-	playanimation BS_TARGET, B_ANIM_MON_HIT, NULL @ TODO: animation B_ANIM_SALT_CURE_DAMAGE, NULL
+	playanimation BS_TARGET, B_ANIM_SALT_CURE_DAMAGE, NULL
 	waitanimation
 	call BattleScript_HurtTarget_NoString
 	printstring STRINGID_TARGETISHURTBYSALTCURE
@@ -610,7 +610,7 @@ BattleScript_TeatimeBuffer:
 	goto BattleScript_MoveEnd
 
 BattleScript_AffectionBasedEndurance::
-	playanimation BS_TARGET, B_ANIM_MON_HIT @ TODO animation: B_ANIM_AFFECTION_HANGED_ON
+	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
 	printstring STRINGID_TARGETTOUGHEDITOUT
 	waitmessage B_WAIT_TIME_LONG
 	return
@@ -650,7 +650,7 @@ BattleScript_AffectionBasedStatusHeal_Continue:
 
 BattleScript_ShellTrapSetUp::
 	flushtextbox
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT, NULL @ TODO: animation B_ANIM_SHELL_TRAP_SETUP, NULL
+	playanimation BS_ATTACKER, B_ANIM_SHELL_TRAP_SETUP, NULL
 	printstring STRINGID_PREPARESHELLTRAP
 	waitmessage B_WAIT_TIME_LONG
 	end3
@@ -709,7 +709,7 @@ BattleScript_EffectCourtChange::
 BattleScript_BeakBlastSetUp::
 	setbeakblast BS_ATTACKER
 	flushtextbox
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT, NULL @ TODO animation: B_ANIM_BEAK_BLAST_SETUP, NULL
+	playanimation BS_ATTACKER, B_ANIM_BEAK_BLAST_SETUP, NULL
 	printstring STRINGID_HEATUPBEAK
 	waitmessage B_WAIT_TIME_LONG
 	end3
@@ -6331,7 +6331,7 @@ BattleScript_PerishBodyActivates::
 
 BattleScript_GulpMissileGorging::
 	call BattleScript_AbilityPopUp
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT @ TODO animation: B_ANIM_GULP_MISSILE
+	playanimation BS_ATTACKER, B_ANIM_GULP_MISSILE
 	waitanimation
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
 	effectivenesssound
@@ -6358,7 +6358,7 @@ BattleScript_GulpMissileNoSecondEffectGorging:
 
 BattleScript_GulpMissileGulping::
 	call BattleScript_AbilityPopUp
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT @ TODO animation: B_ANIM_GULP_MISSILE
+	playanimation BS_ATTACKER, B_ANIM_GULP_MISSILE 
 	waitanimation
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
 	effectivenesssound
@@ -6759,7 +6759,7 @@ BattleScript_TurnHeal:
 	end2
 
 BattleScript_AquaRingHeal::
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT @ TODO: animation B_ANIM_AQUA_RING_HEAL
+	playanimation BS_ATTACKER, B_ANIM_AQUA_RING_HEAL 
 	printstring STRINGID_AQUARINGHEAL
 	goto BattleScript_TurnHeal
 
@@ -6963,7 +6963,7 @@ BattleScript_PrimalReversionRet::
 	setbyte gIsCriticalHit, 0
 	handleprimalreversion BS_ATTACKER, 0
 	handleprimalreversion BS_ATTACKER, 1
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT @ TODO: animation B_ANIM_PRIMAL_REVERSION
+	playanimation BS_ATTACKER, B_ANIM_PRIMAL_REVERSION
 	waitanimation
 	handleprimalreversion BS_ATTACKER, 2
 	printstring STRINGID_PKMNREVERTEDTOPRIMAL
@@ -7085,7 +7085,7 @@ BattleScript_BattlerFormChangeWithStringEnd3::
 
 BattleScript_IllusionOff::
 	spriteignore0hp TRUE
-	playanimation BS_TARGET, B_ANIM_MON_HIT @ TODO: animation B_ANIM_ILLUSION_OFF
+	playanimation BS_TARGET, B_ANIM_ILLUSION_OFF
 	waitanimation
 	updatenick BS_TARGET
 	waitstate
@@ -7895,7 +7895,7 @@ BattleScript_DeltaStreamActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_MYSTERIOUSAIRCURRENT
 	waitstate
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT @ TODO: animation B_ANIM_STRONG_WINDS
+	playanimation BS_ATTACKER, B_ANIM_STRONG_WINDS
 	end3
 
 BattleScript_ProtosynthesisActivates::
@@ -7978,7 +7978,7 @@ BattleScript_SnowWarningActivatesSnow::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_SNOWWARNINGSNOW
 	waitstate
-	playanimation BS_BATTLER_0, B_ANIM_MON_HIT @ TODO animation: B_ANIM_SNOW_CONTINUES
+	playanimation BS_BATTLER_0, B_ANIM_SNOW_CONTINUES
 	call BattleScript_ActivateWeatherAbilities
 	end3
 
@@ -9024,7 +9024,7 @@ BattleScript_PrintPlayerForfeitedLinkBattle::
 	end2
 
 BattleScript_TotemFlaredToLife::
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT, NULL @ TODO: animation B_ANIM_TOTEM_FLARE, NULL
+	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE, NULL
 	printstring STRINGID_AURAFLAREDTOLIFE
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_ApplyTotemVarBoost
@@ -9143,7 +9143,7 @@ BattleScript_ZMoveActivateDamaging::
 	flushtextbox
 	trytrainerslidezmovemsg
 	printstring STRINGID_ZPOWERSURROUNDS
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT, NULL @ TODO: animation B_ANIM_ZMOVE_ACTIVATE, NULL
+	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
 	printstring STRINGID_ZMOVEUNLEASHED
 	waitmessage B_WAIT_TIME_LONG
 	return
@@ -9153,7 +9153,7 @@ BattleScript_ZMoveActivateStatus::
 	trytrainerslidezmovemsg
 	savetarget
 	printstring STRINGID_ZPOWERSURROUNDS
-	playanimation BS_ATTACKER, B_ANIM_MON_HIT, NULL @ TODO: animation B_ANIM_ZMOVE_ACTIVATE, NULL
+	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
 	setzeffect
 	restoretarget
 	copybyte sSTATCHANGER, sSAVED_STAT_CHANGER
@@ -9541,7 +9541,7 @@ BattleScript_LowerSideStatsEnd:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSetWeather::
-	playanimation 0, B_ANIM_MON_HIT @ TODO: animation B_ANIM_MAX_SET_WEATHER
+	playanimation 0, B_ANIM_MAX_SET_WEATHER
 	printfromtable gMoveWeatherChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_ActivateWeatherAbilities

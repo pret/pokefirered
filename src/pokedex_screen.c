@@ -1389,7 +1389,7 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
     {
     default:
     case DEX_ORDER_NUMERICAL_KANTO:
-        for (i = 0; i < KANTO_DEX_COUNT - 1; i++)
+        for (i = 0; i < KANTO_DEX_COUNT; i++)
         {
             natDexNum = KantoToNationalOrder(i + 1);
             seen = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_SEEN, FALSE);
@@ -2309,7 +2309,7 @@ static u16 DexScreen_GetDexCount(u8 caseId, bool8 whichDex)
     switch (whichDex)
     {
     case 0: // Kanto
-        for (i = 1; i < KANTO_DEX_COUNT; i++)
+        for (i = KANTO_DEX_START; i < KANTO_DEX_END; i++)
         {
             if (DexScreen_GetSetPokedexFlag(KantoToNationalOrder(i), caseId, FALSE))
                 count++;

@@ -82,7 +82,7 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
 #define KANTO_TO_NATIONAL(name)     [KANTO_DEX_##name] = NATIONAL_DEX_##name
 
-static const u16 sKantoDexNumToNationalDexNum[KANTO_DEX_COUNT] =
+static const u16 sKantoDexNumToNationalDexNum[KANTO_DEX_COUNT + 1] =
 {
     // Kanto
     KANTO_TO_NATIONAL(BULBASAUR),
@@ -4508,7 +4508,7 @@ u16 NationalToKantoOrder(u16 natDexNum)
         return KANTO_DEX_NONE;
     }
 
-    for (i = KANTO_DEX_BULBASAUR; i < KANTO_DEX_COUNT; i++)
+    for (i = KANTO_DEX_BULBASAUR; i < KANTO_DEX_END; i++)
     {
         if (sKantoDexNumToNationalDexNum[i] == natDexNum)
         {
@@ -4530,7 +4530,7 @@ bool32 IsSpeciesInKantoDex(u16 species)
 
 u16 KantoToNationalOrder(u16 kantoNum)
 {
-    if (KANTO_DEX_NONE < kantoNum && kantoNum < KANTO_DEX_COUNT)
+    if (KANTO_DEX_NONE < kantoNum && kantoNum < KANTO_DEX_END)
         return sKantoDexNumToNationalDexNum[kantoNum];
     return NATIONAL_DEX_NONE;
 }

@@ -48,7 +48,7 @@ u16 GetKantoPokedexCount(u8 caseID)
     u16 i;
     u16 nationalNum;
 
-    for (i = 1; i < KANTO_DEX_COUNT; i++)
+    for (i = 1; i < KANTO_DEX_END; i++)
     {
         nationalNum = KantoToNationalOrder(i);
         switch (caseID)
@@ -84,9 +84,9 @@ bool16 HasAllKantoMons(void)
     u16 i;
 
     // -1 excludes Mew
-    for (i = 0; i < KANTO_DEX_COUNT - 1; i++)
+    for (i = KANTO_DEX_START; i < KANTO_DEX_END; i++)
     {
-        if (!GetSetPokedexFlag(KantoToNationalOrder(i + 1), FLAG_GET_CAUGHT))
+        if (!GetSetPokedexFlag(KantoToNationalOrder(i), FLAG_GET_CAUGHT))
             return FALSE;
     }
     return TRUE;

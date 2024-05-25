@@ -6442,7 +6442,7 @@ static void Cmd_switchinanim(void)
                                  | BATTLE_TYPE_POKEDUDE
                                  | BATTLE_TYPE_EREADER_TRAINER
                                  | BATTLE_TYPE_GHOST)))
-        HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN, gBattleMons[battler].personality);
+        HandleSetPokedexFlag(SpeciesToNationalDexNum(gBattleMons[battler].species), FLAG_SET_SEEN, gBattleMons[battler].personality);
 
     gAbsentBattlerFlags &= ~(gBitTable[battler]);
 
@@ -14948,7 +14948,7 @@ static void Cmd_handleballthrow(void)
                 }
                 break;
             case ITEM_REPEAT_BALL:
-                if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT))
+                if (GetSetPokedexFlag(SpeciesToNationalDexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT))
                     ballMultiplier = (B_REPEAT_BALL_MODIFIER >= GEN_7 ? 350 : 300);
                 break;
             case ITEM_TIMER_BALL:
@@ -15207,13 +15207,13 @@ static void Cmd_trysetcaughtmondexflags(void)
     u32 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]], MON_DATA_SPECIES, NULL);
     u32 personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[GetCatchingBattler()]], MON_DATA_PERSONALITY, NULL);
 
-    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
+    if (GetSetPokedexFlag(SpeciesToNationalDexNum(species), FLAG_GET_CAUGHT))
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
     {
-        HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT, personality);
+        HandleSetPokedexFlag(SpeciesToNationalDexNum(species), FLAG_SET_CAUGHT, personality);
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }

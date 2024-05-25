@@ -1391,33 +1391,33 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
     case DEX_ORDER_NUMERICAL_KANTO:
         for (i = 0; i < KANTO_DEX_COUNT; i++)
         {
-            natDexNum = KantoToNationalOrder(i + 1);
+            natDexNum = KantoToNationalDexNum(i + KANTO_DEX_START);
             seen = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_SEEN, FALSE);
             caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
             if (seen)
             {
-                sPokedexScreenData->listItems[i].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
+                sPokedexScreenData->listItems[i].label = gSpeciesInfo[NationalDexNumToSpecies(natDexNum)].speciesName;
                 ret = i + 1;
             }
             else
             {
                 sPokedexScreenData->listItems[i].label = gText_5Dashes;
             }
-            sPokedexScreenData->listItems[i].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+            sPokedexScreenData->listItems[i].index = (caught << 17) + (seen << 16) + NationalDexNumToSpecies(natDexNum);
         }
         break;
     case DEX_ORDER_ATOZ:
         for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Alphabetical); i++)
         {
             natDexNum = gPokedexOrder_Alphabetical[i];
-            if (NATIONAL_DEX_NONE < natDexNum && natDexNum <= NATIONAL_DEX_COUNT && (isNationalDex || NationalToKantoOrder(natDexNum) != KANTO_DEX_NONE))
+            if (NATIONAL_DEX_NONE < natDexNum && natDexNum <= NATIONAL_DEX_COUNT && (isNationalDex || NationalToKantoDexNum(natDexNum) != KANTO_DEX_NONE))
             {
                 seen = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_SEEN, FALSE);
                 caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
                 if (seen)
                 {
-                    sPokedexScreenData->listItems[ret].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
-                    sPokedexScreenData->listItems[ret].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+                    sPokedexScreenData->listItems[ret].label = gSpeciesInfo[NationalDexNumToSpecies(natDexNum)].speciesName;
+                    sPokedexScreenData->listItems[ret].index = (caught << 17) + (seen << 16) + NationalDexNumToSpecies(natDexNum);
                     ret++;
                 }
             }
@@ -1426,15 +1426,15 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
     case DEX_ORDER_TYPE:
         for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Type); i++)
         {
-            natDexNum = SpeciesToNationalPokedexNum(gPokedexOrder_Type[i]);
-            if (NATIONAL_DEX_NONE < natDexNum && natDexNum <= NATIONAL_DEX_COUNT && (isNationalDex || NationalToKantoOrder(natDexNum) != KANTO_DEX_NONE))
+            natDexNum = SpeciesToNationalDexNum(gPokedexOrder_Type[i]);
+            if (NATIONAL_DEX_NONE < natDexNum && natDexNum <= NATIONAL_DEX_COUNT && (isNationalDex || NationalToKantoDexNum(natDexNum) != KANTO_DEX_NONE))
             {
                 seen = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_SEEN, FALSE);
                 caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
                 if (caught)
                 {
-                    sPokedexScreenData->listItems[ret].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
-                    sPokedexScreenData->listItems[ret].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+                    sPokedexScreenData->listItems[ret].label = gSpeciesInfo[NationalDexNumToSpecies(natDexNum)].speciesName;
+                    sPokedexScreenData->listItems[ret].index = (caught << 17) + (seen << 16) + NationalDexNumToSpecies(natDexNum);
                     ret++;
                 }
             }
@@ -1444,14 +1444,14 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Weight); i++)
         {
             natDexNum = gPokedexOrder_Weight[i];
-            if (NATIONAL_DEX_NONE < natDexNum && natDexNum <= NATIONAL_DEX_COUNT && (isNationalDex || NationalToKantoOrder(natDexNum) != KANTO_DEX_NONE))
+            if (NATIONAL_DEX_NONE < natDexNum && natDexNum <= NATIONAL_DEX_COUNT && (isNationalDex || NationalToKantoDexNum(natDexNum) != KANTO_DEX_NONE))
             {
                 seen = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_SEEN, FALSE);
                 caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
                 if (caught)
                 {
-                    sPokedexScreenData->listItems[ret].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
-                    sPokedexScreenData->listItems[ret].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+                    sPokedexScreenData->listItems[ret].label = gSpeciesInfo[NationalDexNumToSpecies(natDexNum)].speciesName;
+                    sPokedexScreenData->listItems[ret].index = (caught << 17) + (seen << 16) + NationalDexNumToSpecies(natDexNum);
                     ret++;
                 }
             }
@@ -1461,14 +1461,14 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Height); i++)
         {
             natDexNum = gPokedexOrder_Height[i];
-            if (NATIONAL_DEX_NONE < natDexNum && natDexNum <= NATIONAL_DEX_COUNT && (isNationalDex || NationalToKantoOrder(natDexNum) != KANTO_DEX_NONE))
+            if (NATIONAL_DEX_NONE < natDexNum && natDexNum <= NATIONAL_DEX_COUNT && (isNationalDex || NationalToKantoDexNum(natDexNum) != KANTO_DEX_NONE))
             {
                 seen = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_SEEN, FALSE);
                 caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
                 if (caught)
                 {
-                    sPokedexScreenData->listItems[ret].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
-                    sPokedexScreenData->listItems[ret].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+                    sPokedexScreenData->listItems[ret].label = gSpeciesInfo[NationalDexNumToSpecies(natDexNum)].speciesName;
+                    sPokedexScreenData->listItems[ret].index = (caught << 17) + (seen << 16) + NationalDexNumToSpecies(natDexNum);
                     ret++;
                 }
             }
@@ -1482,14 +1482,14 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
             caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
             if (seen)
             {
-                sPokedexScreenData->listItems[i].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
+                sPokedexScreenData->listItems[i].label = gSpeciesInfo[NationalDexNumToSpecies(natDexNum)].speciesName;
                 ret = natDexNum;
             }
             else
             {
                 sPokedexScreenData->listItems[i].label = gText_5Dashes;
             }
-            sPokedexScreenData->listItems[i].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+            sPokedexScreenData->listItems[i].index = (caught << 17) + (seen << 16) + NationalDexNumToSpecies(natDexNum);
         }
         break;
     }
@@ -2240,13 +2240,13 @@ static void DexScreen_PrintMonDexNo(u8 windowId, u8 fontId, u16 species, u8 x, u
     xNum = x + 9;
     if (isKantoNum)
     {
-        dexNum = NationalToKantoOrder(SpeciesToNationalPokedexNum(species));
+        dexNum = NationalToKantoDexNum(SpeciesToNationalDexNum(species));
         DexScreen_AddTextPrinterParameterized(windowId, fontId, gText_PokedexNo, x, y, 0);
         DexScreen_PrintNum3LeadingZeroes(windowId, fontId, dexNum, xNum, y, 0);
     }
     else
     {
-        dexNum = SpeciesToNationalPokedexNum(species);
+        dexNum = SpeciesToNationalDexNum(species);
         DexScreen_AddTextPrinterParameterized(windowId, fontId, gText_PokedexNo, x, y, 0);
         DexScreen_PrintNum4LeadingZeroes(windowId, fontId, dexNum, xNum, y, 0);
     }
@@ -2260,7 +2260,7 @@ s8 DexScreen_GetSetPokedexFlag(u16 nationalDexNo, u8 caseId, bool8 indexIsSpecie
     s8 retVal;
 
     if (indexIsSpecies)
-        nationalDexNo = SpeciesToNationalPokedexNum(nationalDexNo);
+        nationalDexNo = SpeciesToNationalDexNum(nationalDexNo);
 
     nationalDexNo--;
     index = nationalDexNo / 8;
@@ -2311,7 +2311,7 @@ static u16 DexScreen_GetDexCount(u8 caseId, bool8 whichDex)
     case 0: // Kanto
         for (i = KANTO_DEX_START; i < KANTO_DEX_END; i++)
         {
-            if (DexScreen_GetSetPokedexFlag(KantoToNationalOrder(i), caseId, FALSE))
+            if (DexScreen_GetSetPokedexFlag(KantoToNationalDexNum(i), caseId, FALSE))
                 count++;
         }
         break;
@@ -2703,7 +2703,7 @@ void DexScreen_PrintMonCategory(u8 windowId, u16 species, u8 x, u8 y)
 {
     u8 * categoryName;
     u8 index, categoryStr[12];
-    u16 natDexNum = SpeciesToNationalPokedexNum(species);
+    u16 natDexNum = SpeciesToNationalDexNum(species);
 
     categoryName = (u8 *)gSpeciesInfo[species].categoryName;
     index = 0;
@@ -2739,7 +2739,7 @@ void DexScreen_PrintMonHeight(u8 windowId, u16 species, u8 x, u8 y)
 {
     u8* heightString;
 
-    if (DexScreen_GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT, FALSE))
+    if (DexScreen_GetSetPokedexFlag(SpeciesToNationalDexNum(species), FLAG_GET_CAUGHT, FALSE))
         heightString = ConvertMonHeightToString(gSpeciesInfo[species].height);
     else
         heightString = GetUnknownMonHeightString();
@@ -2844,7 +2844,7 @@ void DexScreen_PrintMonWeight(u8 windowId, u16 species, u8 x, u8 y)
 {
     u8* weightString;
 
-    if (DexScreen_GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT, FALSE))
+    if (DexScreen_GetSetPokedexFlag(SpeciesToNationalDexNum(species), FLAG_GET_CAUGHT, FALSE))
         weightString = ConvertMonWeightToString(gSpeciesInfo[species].weight);
     else
         weightString = GetUnknownMonWeightString();
@@ -2973,7 +2973,7 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
     struct TextPrinterTemplate printerTemplate;
     u16 length;
     s32 xCenter;
-    u16 natDexNum = SpeciesToNationalPokedexNum(species);
+    u16 natDexNum = SpeciesToNationalDexNum(species);
 
     if (DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE))
     {
@@ -3105,7 +3105,7 @@ u8 DexScreen_DrawMonAreaPage(void)
     u16 kantoMapVoff;
 
     species = sPokedexScreenData->dexSpecies;
-    natDexNum = SpeciesToNationalPokedexNum(species);
+    natDexNum = SpeciesToNationalDexNum(species);
     monIsCaught = DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE);
     width = 28;
     height = 14;
@@ -3282,7 +3282,7 @@ u8 DexScreen_DestroyAreaScreenResources(void)
 static bool32 DexScreen_MonHasCategoryEntry(u16 species)
 {
     u16 i, j, k;
-    u16 natDexNum = SpeciesToNationalPokedexNum(species);
+    u16 natDexNum = SpeciesToNationalDexNum(species);
 
     for (i = 0; i < NELEMS(gDexCategories); i++)
     {
@@ -3291,7 +3291,7 @@ static bool32 DexScreen_MonHasCategoryEntry(u16 species)
             for (k = 0; k < gDexCategories[i].page[j].count; k++)
             {
                 u16 pageSpecies = gDexCategories[i].page[j].species[k];
-                if (SpeciesToNationalPokedexNum(pageSpecies) == natDexNum)
+                if (SpeciesToNationalDexNum(pageSpecies) == natDexNum)
                     return TRUE;
             }
         }
@@ -3402,7 +3402,7 @@ static u8 DexScreen_LookUpCategoryBySpecies(u16 species)
             for (k = 0, posInPage = 0; k < categoryPageCount; k++)
             {
                 dexSpecies = gDexCategories[i].page[j].species[k];
-                if (SpeciesToNationalPokedexNum(species) == SpeciesToNationalPokedexNum(dexSpecies))
+                if (SpeciesToNationalDexNum(species) == SpeciesToNationalDexNum(dexSpecies))
                 {
                     sPokedexScreenData->category = i;
                     sPokedexScreenData->pageNum = j;

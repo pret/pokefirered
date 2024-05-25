@@ -113,7 +113,6 @@ struct PokedexEntry
     /*0x20*/ u16 trainerOffset;
 };  /*size = 0x24*/
 
-u16 GetPokedexHeightWeight(u16 dexNum, u8 data);
 u16 GetNationalPokedexCount(u8);
 u16 GetKantoPokedexCount(u8);
 bool16 HasAllMons(void);
@@ -124,7 +123,6 @@ bool16 HasAllKantoMons(void);
 bool16 HasAllMons(void);
 u8* ConvertMonHeightToString(u32 height);
 u8* ConvertMonWeightToString(u32 weight);
-
 u8 DexScreen_RegisterMonToPokedex(u16 species);
 
 #endif // GUARD_POKEDEX_H

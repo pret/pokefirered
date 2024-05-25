@@ -4455,43 +4455,41 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     return targetSpecies;
 }
 
-u16 NationalPokedexNumToSpecies(u16 nationalNum)
+u16 NationalDexNumToSpecies(u16 nationalNum)
 {
     u16 species;
 
     if (!nationalNum)
-        return 0;
+        return SPECIES_NONE;
 
-    species = 1;
-
-    while (species < NUM_SPECIES && gSpeciesInfo[species].natDexNum != nationalNum)
-        species++;
-
-    if (species == NUM_SPECIES)
-        return NATIONAL_DEX_NONE;
-
-    return species;
+    for (species = 1; species < NUM_SPECIES; species++)
+    {
+        if (gSpeciesInfo[species].natDexNum == nationalNum)
+            return species;
+    }
+    return SPECIES_NONE;
 }
 
-static u16 NationalToHoennOrder(u16 nationalNum)
+static u16 NationalToHoennOrder(u16 natDexNum)
 {
-    u16 hoennNum;
+    u16 i;
 
-    if (!nationalNum)
-        return 0;
+    if (natDexNum == 0)
+    {
+        return HOENN_DEX_NONE;
+    }
 
-    hoennNum = 0;
-
-    while (hoennNum < (HOENN_DEX_COUNT - 1) && sHoennToNationalOrder[hoennNum] != nationalNum)
-        hoennNum++;
-
-    if (hoennNum >= HOENN_DEX_COUNT - 1)
-        return 0;
-
-    return hoennNum + 1;
+    for (i = HOENN_DEX_START; i < HOENN_DEX_END; i++)
+    {
+        if (sHoennToNationalOrder[i] == natDexNum)
+        {
+            return i;
+        }
+    }
+    return HOENN_DEX_NONE;
 }
 
-u16 SpeciesToNationalPokedexNum(u16 species)
+u16 SpeciesToNationalDexNum(u16 species)
 {
     if (!species)
         return NATIONAL_DEX_NONE;
@@ -4499,7 +4497,7 @@ u16 SpeciesToNationalPokedexNum(u16 species)
     return gSpeciesInfo[species].natDexNum;
 }
 
-u16 NationalToKantoOrder(u16 natDexNum)
+u16 NationalToKantoDexNum(u16 natDexNum)
 {
     u16 i;
 
@@ -4520,7 +4518,7 @@ u16 NationalToKantoOrder(u16 natDexNum)
 
 u16 SpeciesToKantoDexNum(u16 species)
 {
-    return NationalToKantoOrder(SpeciesToNationalPokedexNum(species));
+    return NationalToKantoDexNum(SpeciesToNationalDexNum(species));
 }
 
 bool32 IsSpeciesInKantoDex(u16 species)
@@ -4528,19 +4526,28 @@ bool32 IsSpeciesInKantoDex(u16 species)
     return SpeciesToKantoDexNum(species) != KANTO_DEX_NONE;
 }
 
-u16 KantoToNationalOrder(u16 kantoNum)
+u16 KantoToNationalDexNum(u16 kantoNum)
 {
-    if (KANTO_DEX_NONE < kantoNum && kantoNum < KANTO_DEX_END)
+    if (KANTO_DEX_START <= kantoNum && kantoNum < KANTO_DEX_END)
         return sKantoDexNumToNationalDexNum[kantoNum];
     return NATIONAL_DEX_NONE;
 }
 
-u16 HoennToNationalOrder(u16 hoennNum)
+u16 KantoNumToSpecies(u16 kantoNum)
 {
-    if (!hoennNum || hoennNum >= HOENN_DEX_COUNT)
-        return 0;
+    return NationalDexNumToSpecies(KantoToNationalDexNum(kantoNum));
+}
 
-    return sHoennToNationalOrder[hoennNum - 1];
+u16 HoennToNationalDexNum(u16 hoennNum)
+{
+    if (HOENN_DEX_START <= hoennNum && hoennNum < HOENN_DEX_END)
+        return sHoennToNationalOrder[hoennNum];
+    return NATIONAL_DEX_NONE;
+}
+
+u16 HoennNumToSpecies(u16 hoennNum)
+{
+    return NationalDexNumToSpecies(HoennToNationalDexNum(hoennNum));
 }
 
 u16 SpeciesToCryId(u16 species)
@@ -5278,10 +5285,10 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 
 u16 SpeciesToPokedexNum(u16 species)
 {
-    species = SpeciesToNationalPokedexNum(species);
+    species = SpeciesToNationalDexNum(species);
     if (!IsNationalPokedexEnabled())
     {
-        species = NationalToKantoOrder(species);
+        species = NationalToKantoDexNum(species);
     }
     return species > 0 ? species : 0xFFFF;
 }
@@ -5684,9 +5691,9 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
     if (!GetSetPokedexFlag(nationalNum, getFlagCaseId))
     {
         GetSetPokedexFlag(nationalNum, caseId);
-        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_UNOWN)
+        if (NationalDexNumToSpecies(nationalNum) == SPECIES_UNOWN)
             gSaveBlock2Ptr->pokedex.unownPersonality = personality;
-        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_SPINDA)
+        if (NationalDexNumToSpecies(nationalNum) == SPECIES_SPINDA)
             gSaveBlock2Ptr->pokedex.spindaPersonality = personality;
     }
 }

@@ -3596,12 +3596,12 @@
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_VOLTORB"
+                "species": "SPECIES_ELEKID"
               },
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_MAGNEMITE"
+                "species": "SPECIES_ELEKID"
               },
               {
                 "min_level": 25,
@@ -8263,27 +8263,27 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MEW"
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MEW"
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MEW"
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MEW"
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_MEW"
+                "species": "SPECIES_PIDGEY"
               },
               {
                 "min_level": 2,
@@ -13756,7 +13756,7 @@
               {
                 "min_level": 32,
                 "max_level": 32,
-                "species": "SPECIES_RATICATE"
+                "species": "SPECIES_MAGBY"
               },
               {
                 "min_level": 30,
@@ -13766,7 +13766,7 @@
               {
                 "min_level": 36,
                 "max_level": 36,
-                "species": "SPECIES_RATICATE"
+                "species": "SPECIES_MAGBY"
               },
               {
                 "min_level": 30,

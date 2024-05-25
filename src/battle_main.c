@@ -3161,7 +3161,7 @@ static void DoBattleIntro(void)
                                     | BATTLE_TYPE_LEGENDARY))
                     || ((gBattleTypeFlags & (BATTLE_TYPE_GHOST | BATTLE_TYPE_GHOST_UNVEILED)) && !IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags))))
                 {
-                    HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN, gBattleMons[battler].personality);
+                    HandleSetPokedexFlag(SpeciesToNationalDexNum(gBattleMons[battler].species), FLAG_SET_SEEN, gBattleMons[battler].personality);
                 }
             }
 

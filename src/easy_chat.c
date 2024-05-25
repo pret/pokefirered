@@ -422,7 +422,7 @@ static u16 GetRandomECPokemon(void)
     numWords = sEasyChatGroups[EC_GROUP_POKEMON_2].numWords;
     for (i = 0; i < numWords; i++)
     {
-        u16 dexNum = SpeciesToNationalPokedexNum(*species);
+        u16 dexNum = SpeciesToNationalDexNum(*species);
         if (GetSetPokedexFlag(dexNum, FLAG_GET_SEEN))
         {
             if (index)
@@ -694,10 +694,10 @@ static bool8 UnlockedECMonOrMove(u16 wordIndex, u8 groupId)
     switch (groupId)
     {
     case EC_GROUP_POKEMON:
-        return GetSetPokedexFlag(SpeciesToNationalPokedexNum(wordIndex), FLAG_GET_SEEN);
+        return GetSetPokedexFlag(SpeciesToNationalDexNum(wordIndex), FLAG_GET_SEEN);
     case EC_GROUP_POKEMON_2:
         if (EC_IsDeoxys(wordIndex))
-            return GetSetPokedexFlag(SpeciesToNationalPokedexNum(wordIndex), FLAG_GET_SEEN);
+            return GetSetPokedexFlag(SpeciesToNationalDexNum(wordIndex), FLAG_GET_SEEN);
         return TRUE;
     case EC_GROUP_MOVE_1:
     case EC_GROUP_MOVE_2:

@@ -87,7 +87,7 @@ static const u8 *GetProfOaksRatingMessageByCount(u16 count)
     if (count == KANTO_DEX_COUNT - 1)
     {
         // Mew doesn't count for completing the pokedex
-        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_MEW), 1))
+        if (GetSetPokedexFlag(SpeciesToNationalDexNum(SPECIES_MEW), 1))
             return PokedexRating_Text_LessThan150;
 
         gSpecialVar_Result = TRUE;

@@ -10949,7 +10949,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_Bike,
     },
 
     [ITEM_MACH_BIKE] =
@@ -11052,7 +11052,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_TownMap,
     },
 
     [ITEM_VS_SEEKER] =
@@ -11067,7 +11067,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_FIELD,
 #if I_VS_SEEKER_CHARGING != 0
-        .fieldUseFunc = FieldUseFunc_VsSeeker,
+        .fieldUseFunc = ItemUseOutOfBattle_VsSeeker,
 #else
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
 #endif
@@ -11225,7 +11225,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_FameChecker,
     },
 
     [ITEM_TEACHY_TV] =
@@ -11239,7 +11239,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_TeachyTv,
     },
 
 // Story Key Items

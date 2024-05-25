@@ -753,13 +753,13 @@ u8 CanLearnTeachableMove(u16 species, u16 move);
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, struct Pokemon *tradePartner);
-u16 NationalPokedexNumToSpecies(u16 nationalNum);
-u16 SpeciesToNationalPokedexNum(u16 species);
+u16 NationalDexNumToSpecies(u16 nationalNum);
+u16 SpeciesToNationalDexNum(u16 species);
 u16 SpeciesToKantoDexNum(u16 species);
 bool32 IsSpeciesInKantoDex(u16 species);
-u16 KantoToNationalOrder(u16 kantoNum);
-u16 NationalToKantoOrder(u16 nationalNum);
-u16 HoennToNationalOrder(u16 hoennNum);
+u16 KantoToNationalDexNum(u16 kantoNum);
+u16 NationalToKantoDexNum(u16 nationalNum);
+u16 HoennToNationalDexNum(u16 hoennNum);
 u16 SpeciesToCryId(u16 species);
 void DrawSpindaSpots(u32 species, u32 personality, u8 *dest, bool8 isFrontPic);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
@@ -824,5 +824,7 @@ u32 GetUnownSpeciesId(u32 personality);
 u8 CalculatePartyCount(struct Pokemon *party);
 u16 GetFirstPartnerMove(u16 species);
 const u8 *GetMoveName(u16 moveId);
+u16 KantoNumToSpecies(u16 kantoNum);
+u16 HoennNumToSpecies(u16 hoennNum);
 
 #endif // GUARD_POKEMON_H

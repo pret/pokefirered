@@ -38,6 +38,9 @@ u16 GetPokedexCount(void)
 static const u8 *GetProfOaksRatingMessageByCount(u16 count)
 {
     gSpecialVar_Result = FALSE;
+    
+    if (count > 0 && GetSetPokedexFlag(NATIONAL_DEX_MEW, FLAG_GET_CAUGHT))
+        count--;
 
     if (count < 10)
         return PokedexRating_Text_LessThan10;
@@ -81,26 +84,11 @@ static const u8 *GetProfOaksRatingMessageByCount(u16 count)
     if (count < 140)
         return PokedexRating_Text_LessThan140;
 
-    if (count < 150)
+    if (count < KANTO_DEX_COUNT - 1)
         return PokedexRating_Text_LessThan150;
 
-    if (count == KANTO_DEX_COUNT - 1)
-    {
-        // Mew doesn't count for completing the pokedex
-        if (GetSetPokedexFlag(SpeciesToNationalDexNum(SPECIES_MEW), 1))
-            return PokedexRating_Text_LessThan150;
-
-        gSpecialVar_Result = TRUE;
-        return PokedexRating_Text_Complete;
-    }
-
-    if (count == KANTO_DEX_COUNT)
-    {
-        gSpecialVar_Result = TRUE;
-        return PokedexRating_Text_Complete;
-    }
-
-    return PokedexRating_Text_LessThan10;
+    gSpecialVar_Result = TRUE;
+    return PokedexRating_Text_Complete;
 }
 
 void GetProfOaksRatingMessage(void)

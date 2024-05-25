@@ -420,7 +420,8 @@ EWRAM_DATA u8 gSelectedOrderFromParty[3] = {0};
 static EWRAM_DATA u16 sPartyMenuItemId = ITEM_NONE;
 ALIGNED(4) EWRAM_DATA u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2] = {0}; // bits 0-3 are the current pos of Slot 1, 4-7 are Slot 2, and so on
 
-static EWRAM_DATA s16 sLevelUpStatsBeforeAfter[NUM_STATS * 2];
+static EWRAM_DATA s16 sLevelUpStatsBefore[NUM_STATS];
+static EWRAM_DATA s16 sLevelUpStatsAfter[NUM_STATS];
 static EWRAM_DATA u8 sInitialLevel = 0;
 static EWRAM_DATA u8 sFinalLevel = 0;
 
@@ -5395,9 +5396,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
     if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL) 
     {
-        GetMonLevelUpWindowStats(mon, sLevelUpStatsBeforeAfter);
+        GetMonLevelUpWindowStats(mon, sLevelUpStatsBefore);
         cannotUseEffect = ExecuteTableBasedItemEffect(mon, *itemPtr, gPartyMenu.slotId, 0);
-        GetMonLevelUpWindowStats(mon, &sLevelUpStatsBeforeAfter[NUM_STATS]);
+        GetMonLevelUpWindowStats(mon, sLevelUpStatsAfter);
     }
     else
     {
@@ -5433,7 +5434,10 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
     }
     else
     {
+        u8 i;
         sFinalLevel = GetMonData(mon, MON_DATA_LEVEL, NULL);
+        for (i = sInitialLevel; i < sFinalLevel; i++)
+            AdjustFriendship(mon, FRIENDSHIP_EVENT_GROW_LEVEL);
         Task_DoUseItemAnim(taskId);
         gItemUseCB = ItemUseCB_RareCandyStep;
     }
@@ -5445,8 +5449,9 @@ static void ItemUseCB_RareCandyStep(u8 taskId, TaskFunc func)
     u8 holdEffectParam = ItemId_GetHoldEffectParam(gSpecialVar_ItemId);
     u8 i;
 
-    for (i = 0; i < NUM_STATS * 2; i++) {
-        sPartyMenuInternal->data[i] = sLevelUpStatsBeforeAfter[i];
+    for (i = 0; i < NUM_STATS; i++) {
+        sPartyMenuInternal->data[i] = sLevelUpStatsBefore[i];
+        sPartyMenuInternal->data[NUM_STATS + i] = sLevelUpStatsAfter[i];
     }
 
     gPartyMenuUseExitCallback = TRUE;

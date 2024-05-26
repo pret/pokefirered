@@ -28,5 +28,6 @@ void ScriptHatchMon(void);
 void EggHatch(void);
 u8 GetEggStepsToSubtract(void);
 bool8 ShouldEggHatch(void);
+u8 GetEggCyclesToSubtract(void);
 
 #endif // GUARD_DAYCARE_H

@@ -8263,32 +8263,32 @@
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_STARYU"
+                "species": "SPECIES_VULPIX"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_HORSEA"
+                "species": "SPECIES_VULPIX_ALOLAN"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MR_RIME"
+                "species": "SPECIES_VULPIX"
               },
               {
                 "min_level": 3,
                 "max_level": 3,
-                "species": "SPECIES_MIME_JR"
+                "species": "SPECIES_VULPIX_ALOLAN"
               },
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_HORSEA"
+                "species": "SPECIES_VULPIX"
               },
               {
                 "min_level": 2,
                 "max_level": 2,
-                "species": "SPECIES_KABUTO"
+                "species": "SPECIES_VULPIX_ALOLAN"
               },
               {
                 "min_level": 3,

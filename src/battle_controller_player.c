@@ -1876,7 +1876,7 @@ void PlayerHandleExpUpdate(u32 battler)
 
     if (GetMonData(&gPlayerParty[monId], MON_DATA_LEVEL) >= MAX_LEVEL)
     {
-        PlayerBufferExecCompleted(battler);
+        BattleControllerComplete(battler);
     }
     else
     {

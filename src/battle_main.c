@@ -4729,16 +4729,15 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         else
         {
             gBattleMainFunc = ReturnFromBattleToOverworld;
-            return;
         }
-    }
-            
-    FreeAllWindowBuffers();
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
-    {
-        FreeMonSpritesGfx();
-        FreeBattleSpritesData();
-        FreeBattleResources();
+
+        FreeAllWindowBuffers();
+        if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
+        {
+            FreeMonSpritesGfx();
+            FreeBattleSpritesData();
+            FreeBattleResources();
+        }
     }
 }
 

@@ -497,6 +497,7 @@ static void PokedudeHandleChooseAction(u32 battler)
         for (i = 0; i < MAX_MON_MOVES; ++i)
             ActionSelectionDestroyCursorAt((u8)i);
         ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
+        PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, battler, gBattlerPartyIndexes[battler]);
         BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
     }

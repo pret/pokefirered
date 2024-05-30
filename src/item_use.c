@@ -447,6 +447,12 @@ void ItemUseOutOfBattle_Medicine(u8 taskId)
     DoSetUpItemUseCallback(taskId);
 }
 
+void ItemUseOutOfBattle_Mint(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_Mint;
+    SetUpItemUseCallback(taskId);
+}
+
 void ItemUseOutOfBattle_PPRecovery(u8 taskId)
 {
     gItemUseCB = ItemUseCB_PPRecovery;

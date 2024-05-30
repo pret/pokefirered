@@ -20,6 +20,7 @@ void ItemUseOutOfBattle_FameChecker(u8 taskId);
 void ItemUseOutOfBattle_Itemfinder(u8 taskId);
 void ItemUseOutOfBattle_Mail(u8 taskId);
 void ItemUseOutOfBattle_Medicine(u8 taskId);
+void ItemUseOutOfBattle_Mint(u8 taskId);
 void ItemUseOutOfBattle_PokeFlute(u8 taskId);
 void ItemUseOutOfBattle_PowderJar(u8 taskId);
 void ItemUseOutOfBattle_PPRecovery(u8 taskId);

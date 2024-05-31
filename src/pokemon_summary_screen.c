@@ -2675,7 +2675,7 @@ static void PrintSkillsPage(void)
             statFontId = FONT_NORMAL;
             break;
         case PSS_SKILL_PAGE_IVS:
-            x = 11;
+            x = 10;
             yDiff = 1;
             statFontId = FONT_SMALL;
             break;

@@ -56,6 +56,23 @@ enum PokemonSummaryScreenStat
     PSS_STAT_SPE
 };
 
+enum PokemonSummaryScreenSkillPageMode
+{
+    PSS_SKILL_PAGE_STATS,
+    PSS_SKILL_PAGE_IVS,
+    PSS_SKILL_PAGE_EVS,
+    PSS_SKILL_PAGE_MODE_COUNT
+};
+
+struct StatData {
+    u8 monDataStat;
+    u8 monDataStat2;
+    u8 monDataEv;
+    u8 monDataIv;
+    u8 monDataHyperTrained;
+    u8 pssStat;
+};
+
 #define TAG_PSS_UNK_64 0x64
 #define TAG_PSS_UNK_65 0x65
 #define TAG_PSS_UNK_66 0x66

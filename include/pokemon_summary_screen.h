@@ -49,6 +49,7 @@ enum PokemonSummaryScreenState3270
 
 enum PokemonSummaryScreenStat
 {
+    PSS_STAT_HP,
     PSS_STAT_ATK,
     PSS_STAT_DEF,
     PSS_STAT_SPA,

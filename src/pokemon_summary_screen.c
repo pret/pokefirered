@@ -172,8 +172,7 @@ struct PokemonSummaryScreenData
 
         u8 ALIGNED(4) genderSymbolStrBuf[3];
         u8 ALIGNED(4) levelStrBuf[7];
-        u8 ALIGNED(4) curHpStrBuf[20];
-        u8 ALIGNED(4) statValueStrBufs[5][30];
+        u8 ALIGNED(4) statValueStrBufs[NUM_STATS][30];
 
         u8 ALIGNED(4) moveCurPpStrBufs[5][11];
         u8 ALIGNED(4) moveMaxPpStrBufs[5][11];
@@ -2165,7 +2164,7 @@ static const struct StatData sStatData[] = {
         .monDataEv              = MON_DATA_HP_EV,
         .monDataIv              = MON_DATA_HP_IV,
         .monDataHyperTrained    = MON_DATA_HYPER_TRAINED_HP,
-        .pssStat                = -1, // unused, TODO: add HP String buffer to stats buffer(?)
+        .pssStat                = PSS_STAT_HP,
     },
     [STAT_ATK] = 
     {
@@ -2262,13 +2261,8 @@ static void ApplyNatureColor(u8 *str, u8 stat)
 
 static void BufferStatString(u8 stat)
 {
-    u8 *dst;
+    u8 *dst = sMonSummaryScreen->summary.statValueStrBufs[sStatData[stat].pssStat];
     u16 statValue;
-
-    if (stat == STAT_HP)
-        dst = sMonSummaryScreen->summary.curHpStrBuf;
-    else
-        dst = sMonSummaryScreen->summary.statValueStrBufs[sStatData[stat].pssStat];
 
     if (sMonSummaryScreen->savedCallback == CB2_ReturnToTradeMenuFromSummary && sMonSummaryScreen->isEnemyParty == TRUE)
         statValue = GetMonData(&sMonSummaryScreen->currentMon, sStatData[stat].monDataStat2);
@@ -2294,13 +2288,8 @@ static void BufferStatString(u8 stat)
 static void BufferEVString(u8 stat)
 {
     u16 statValue = GetMonData(&sMonSummaryScreen->currentMon, sStatData[stat].monDataEv);
-    u8 *dst;
+    u8 *dst = sMonSummaryScreen->summary.statValueStrBufs[sStatData[stat].pssStat];
     u8 tmp[20];
-    
-    if (stat == STAT_HP)
-        dst = sMonSummaryScreen->summary.curHpStrBuf;
-    else
-        dst = sMonSummaryScreen->summary.statValueStrBufs[sStatData[stat].pssStat];
     
     ConvertIntToDecimalStringN(dst, statValue, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(dst, gText_Slash);
@@ -2323,12 +2312,7 @@ static void BufferIVString(u8 stat)
 {
     bool8 isHyperTrained = GetMonData(&sMonSummaryScreen->currentMon, sStatData[stat].monDataHyperTrained);
     u16 statValue = GetMonData(&sMonSummaryScreen->currentMon, sStatData[stat].monDataIv);
-    u8 *dst;
-
-    if (stat == STAT_HP)
-        dst = sMonSummaryScreen->summary.curHpStrBuf;
-    else
-        dst = sMonSummaryScreen->summary.statValueStrBufs[sStatData[stat].pssStat];
+    u8 *dst = sMonSummaryScreen->summary.statValueStrBufs[sStatData[stat].pssStat];
 
     if (isHyperTrained)
         StringCopy(dst, sText_JudgeHyperTrained);
@@ -2680,7 +2664,7 @@ static void PrintSkillsPage(void)
             statFontId = FONT_SMALL;
             break;
     }
-    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], statFontId, x + sMonSkillsPrinterXpos->curHpStr, 4 - yDiff, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.curHpStrBuf);
+    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], statFontId, x + sMonSkillsPrinterXpos->curHpStr, 4 - yDiff, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_HP]);
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], statFontId, x + sMonSkillsPrinterXpos->atkStr, 22 - yDiff, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_ATK]);
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], statFontId, x + sMonSkillsPrinterXpos->defStr, 35 - yDiff, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_DEF]);
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], statFontId, x + sMonSkillsPrinterXpos->spAStr, 48 - yDiff, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_SPA]);

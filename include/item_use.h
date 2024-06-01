@@ -13,6 +13,7 @@ void ItemUseOutOfBattle_BerryPouch(u8 taskId);
 void ItemUseOutOfBattle_Bike(u8 taskId);
 void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId);
 void ItemUseOutOfBattle_CoinCase(u8 taskId);
+void ItemUseOutOfBattle_DynamaxCandy(u8);
 void ItemUseOutOfBattle_EscapeRope(u8 taskId);
 void ItemUseOutOfBattle_EnigmaBerry(u8 taskId);
 void ItemUseOutOfBattle_EvolutionStone(u8 taskId);

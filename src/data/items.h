@@ -1806,7 +1806,7 @@ const struct Item gItemsInfo[] =
             "Pokémon by one."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_DynamaxCandy,
         .flingPower = 30,
     },
 

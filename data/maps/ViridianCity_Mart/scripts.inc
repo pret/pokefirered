@@ -131,6 +131,7 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_BOLD_MINT
 	.2byte ITEM_ADAMANT_MINT
 	.2byte ITEM_SERIOUS_MINT
+	.2byte ITEM_DYNAMAX_CANDY
 	.2byte ITEM_NONE
 	release
 	end

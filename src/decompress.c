@@ -3,11 +3,6 @@
 #include "decompress.h"
 #include "pokemon.h"
 
-// extern const struct CompressedSpriteSheet gMonFrontPicTable[];
-// extern const struct CompressedSpriteSheet gMonBackPicTable[];
-
-static void DuplicateDeoxysTiles(void *pointer, s32 species);
-
 void LZDecompressWram(const void *src, void *dest)
 {
     LZ77UnCompWram(src, dest);
@@ -102,17 +97,6 @@ void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool8 isFrontP
             LZ77UnCompWram(gSpeciesInfo[SPECIES_NONE].backPic, dest);
     }
     DrawSpindaSpots(species, personality, dest, isFrontPic);
-}
-
-static void DuplicateDeoxysTiles(void *pointer, s32 species)
-{
-    if (species == SPECIES_DEOXYS)
-        CpuCopy32(pointer + 0x800, pointer, 0x800);
-}
-
-static void Unused_LZDecompressWramIndirect(const void **src, void *dest)
-{
-    LZ77UnCompWram(*src, dest);
 }
 
 static void StitchObjectsOn8x8Canvas(s32 object_size, s32 object_count, u8 *src_tiles, u8 *dest_tiles)

@@ -1359,3 +1359,17 @@ const u8 gText_UnkHeight[] = _("{CLEAR_TO 0x0A}??'??”");
 const u8 gText_UnkHeightMetric[] = _("???.? m");
 const u8 gText_UnkWeight[] = _("????.? lbs.");
 const u8 gText_UnkWeightMetric[] = _("???.? kg.");
+
+// party_menu form changes
+const u8 gText_LightBulb[] = _("Light bulb");
+const u8 gText_MicrowaveOven[] = _("Microwave oven");
+const u8 gText_WashingMachine[] = _("Washing machine");
+const u8 gText_Refrigerator[] = _("Refrigerator");
+const u8 gText_ElectricFan[] = _("Electric fan");
+const u8 gText_LawnMower[] = _("Lawn mower");
+const u8 gText_ChangeForm[] = _("Change form");
+const u8 gText_ChangeAbility[] = _("Change Ability");
+
+const u8 gText_PkmnTransformed[] = _("{STR_VAR_1} transformed!{PAUSE_UNTIL_PRESS}");
+const u8 gText_WhichAppliance[] = _("Order which\nappliance?");
+const u8 gText_NextFusionMon[] = _("Choose {PKMN} to fuse with.");

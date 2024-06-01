@@ -1584,4 +1584,21 @@ extern const u8 gText_PkmnFriendlyBaseVar2Fell[];
 extern const u8 gText_PkmnFriendlyBaseVar2CantFall[];
 extern const u8 gText_PkmnAdoresBaseVar2Fell[];
 
+// Rotom Catalog text
+extern const u8 gText_LightBulb[];
+extern const u8 gText_MicrowaveOven[];
+extern const u8 gText_WashingMachine[];
+extern const u8 gText_Refrigerator[];
+extern const u8 gText_ElectricFan[];
+extern const u8 gText_LawnMower[];
+extern const u8 gText_Exit[];
+
+// Zygarde Cube text
+extern const u8 gText_ChangeForm[];
+extern const u8 gText_ChangeAbility[];
+
+extern const u8 gText_PkmnTransformed[];
+extern const u8 gText_WhichAppliance[];
+extern const u8 gText_NextFusionMon[];
+
 #endif //GUARD_STRINGS_H

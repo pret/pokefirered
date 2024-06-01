@@ -465,7 +465,7 @@ static void CreateCardSprites(void)
     // Create icon sprite
     if (sWonderCardData->cardMetadata.iconSpecies != SPECIES_NONE)
     {
-        sWonderCardData->monIconSpriteId = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0, FALSE);
+        sWonderCardData->monIconSpriteId = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0);
         gSprites[sWonderCardData->monIconSpriteId].oam.priority = 2;
     }
     
@@ -481,7 +481,7 @@ static void CreateCardSprites(void)
             sWonderCardData->stampSpriteIds[i][0] = CreateSprite(&sSpriteTemplate_StampShadow, 216 - 32 * i, 0x90, 8);
             if (sWonderCardData->cardMetadata.stampData[0][i] != 0)
             {
-                sWonderCardData->stampSpriteIds[i][1] = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sWonderCardData->cardMetadata.stampData[0][i]), SpriteCallbackDummy, 216 - 32 * i, 136, 0, 0);
+                sWonderCardData->stampSpriteIds[i][1] = CreateMonIcon_HandleDeoxys(MailSpeciesToIconSpecies(sWonderCardData->cardMetadata.stampData[0][i]), SpriteCallbackDummy, 216 - 32 * i, 136, 0);
                 gSprites[sWonderCardData->stampSpriteIds[i][1]].oam.priority = 2;
             }
         }

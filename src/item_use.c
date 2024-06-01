@@ -69,6 +69,10 @@ static void Task_UseTownMapFromField(u8 taskId);
 static void UseFameCheckerFromBag(void);
 static void Task_UseFameCheckerFromField(u8 taskId);
 
+
+// Below is set TRUE by UseRegisteredKeyItemOnField
+#define tUsingRegisteredKeyItem  data[3]
+
 static void (*const sExitCallbackByItemType[])(void) = {
     [ITEM_TYPE_PARTY_MENU - 1] = CB2_ShowPartyMenuForItemUse,
     [ITEM_TYPE_FIELD      - 1] = CB2_ReturnToField,
@@ -247,6 +251,37 @@ void ItemUseOutOfBattle_Rod(u8 taskId)
     else
         PrintNotTheTimeToUseThat(taskId, gTasks[taskId].data[3]);
 }
+
+void ItemUseOutOfBattle_RotomCatalog(u8 taskId)
+{
+    if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        gItemUseCB = ItemUseCB_RotomCatalog;
+        gTasks[taskId].data[0] = TRUE;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        // TODO: handle key items with callbacks to menus allow to be used by registering them.
+        PrintNotTheTimeToUseThat(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
+}
+
+void ItemUseOutOfBattle_ZygardeCube(u8 taskId)
+{
+    if (!gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        gItemUseCB = ItemUseCB_ZygardeCube;
+        gTasks[taskId].data[0] = TRUE;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        // TODO: handle key items with callbacks to menus allow to be used by registering them.
+        PrintNotTheTimeToUseThat(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
+}
+
 
 static bool8 CanFish(void)
 {
@@ -967,3 +1002,5 @@ void ItemUse_SetQuestLogEvent(u8 eventId, struct Pokemon *pokemon, u16 itemId, u
     SetQuestLogEvent(eventId, (void *)data);
     Free(data);
 }
+
+#undef tUsingRegisteredKeyItem

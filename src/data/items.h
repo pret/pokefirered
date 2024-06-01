@@ -10775,7 +10775,7 @@ const struct Item gItemsInfo[] =
             "Rotom."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_RotomCatalog,
     },
 
     [ITEM_GRACIDEA] =
@@ -10833,7 +10833,7 @@ const struct Item gItemsInfo[] =
             "Cells."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_ZygardeCube,
     },
 
     [ITEM_PRISON_BOTTLE] =

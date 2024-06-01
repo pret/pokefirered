@@ -25,7 +25,6 @@ extern u8 gSelectedMonPartyId;
 extern MainCallback gPostMenuFieldCallback;
 extern u8 gSelectedOrderFromParty[3];
 extern u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2];
-extern const u16 gTMHMMoves[];
 
 extern void (*gItemUseCB)(u8, TaskFunc);
 
@@ -91,5 +90,7 @@ void ChooseMonForDaycare(void);
 void ChoosePartyMonByMenuType(u8 menuType);
 void ItemUseCB_BattleChooseMove(u8 taskId, TaskFunc task);
 const u8* GetItemEffect(u16 item);
+void ItemUseCB_RotomCatalog(u8 taskId, TaskFunc task);
+void ItemUseCB_ZygardeCube(u8 taskId, TaskFunc task);
 
 #endif // GUARD_PARTY_MENU_H

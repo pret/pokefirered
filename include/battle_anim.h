@@ -8,6 +8,14 @@
 
 enum
 {
+    ANIM_TYPE_GENERAL,
+    ANIM_TYPE_MOVE,
+    ANIM_TYPE_STATUS,
+    ANIM_TYPE_SPECIAL,
+};
+
+enum
+{
     BG_ANIM_SCREEN_SIZE,
     BG_ANIM_AREA_OVERFLOW_MODE,
     BG_ANIM_MOSAIC,
@@ -192,7 +200,6 @@ extern const union AnimCmd *const gAnims_WaterMudOrb[];
 extern const union AnimCmd *const gAnims_WaterBubble[];
 extern const union AnimCmd *const gMusicNotesAnimTable[];
 extern const u8 *const gBattleAnims_StatusConditions[];
-extern const u8 *const gBattleAnims_Moves[];
 extern const u16 gMovesWithQuietBGM[];
 
 u8 GetAnimBattlerId(u8 wantedBattler);
@@ -223,7 +230,7 @@ void MoveBattlerSpriteToBG(u8 battlerId, u8);
 void ResetBattleAnimBg(u8);
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
-void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim);
+void LaunchBattleAnimation(u32 animType, u16 animId);
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
 void DestroyAnimSoundTask(u8 taskId);

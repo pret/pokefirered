@@ -550,6 +550,7 @@ struct MoveInfo
     // u8 contestCategory:3;
     // u8 contestComboStarterId;
     // u8 contestComboMoves[MAX_COMBO_MOVES];
+    const u8 *battleAnimScript;
 };
 
 #define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
@@ -825,6 +826,7 @@ u32 GetUnownSpeciesId(u32 personality);
 u8 CalculatePartyCount(struct Pokemon *party);
 u16 GetFirstPartnerMove(u16 species);
 const u8 *GetMoveName(u16 moveId);
+const u8 *GetMoveAnimationScript(u16 moveId);
 u16 KantoNumToSpecies(u16 kantoNum);
 u16 HoennNumToSpecies(u16 hoennNum);
 

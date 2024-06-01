@@ -194,12 +194,13 @@ void DoMoveAnim(u16 move)
 {
     gBattleAnimAttacker = gBattlerAttacker;
     gBattleAnimTarget = gBattlerTarget;
-    LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
+    LaunchBattleAnimation(ANIM_TYPE_MOVE, move);
 }
 
-void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim)
+void LaunchBattleAnimation(u32 animType, u16 animId)
 {
     s32 i;
+    bool8 isMoveAnim = (animId == ANIM_TYPE_MOVE);
 
     InitPrioritiesForVisibleBattlers();
     UpdateOamPriorityInAllHealthboxes(0);
@@ -214,14 +215,30 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     if (!isMoveAnim)
         sAnimMoveIndex = 0;
     else
-        sAnimMoveIndex = tableId;
+        sAnimMoveIndex = animId;
 
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;
 
     sMonAnimTaskIdArray[0] = TASK_NONE;
     sMonAnimTaskIdArray[1] = TASK_NONE;
-    sBattleAnimScriptPtr = animsTable[tableId];
+
+    switch (animType)
+    {
+    case ANIM_TYPE_GENERAL:
+    default:
+        sBattleAnimScriptPtr = gBattleAnims_General[animId];
+        break;
+    case ANIM_TYPE_MOVE:
+        sBattleAnimScriptPtr = GetMoveAnimationScript(animId);
+        break;
+    case ANIM_TYPE_STATUS:
+        sBattleAnimScriptPtr = gBattleAnims_StatusConditions[animId];
+        break;
+    case ANIM_TYPE_SPECIAL:
+        sBattleAnimScriptPtr = gBattleAnims_Special[animId];
+        break;
+    }
     gAnimScriptActive = TRUE;
     sAnimFramesToWait = 0;
     gAnimScriptCallback = RunAnimScriptCommand;
@@ -233,7 +250,7 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     {
         for (i = 0; gMovesWithQuietBGM[i] != 0xFFFF; i++)
         {
-            if (tableId == gMovesWithQuietBGM[i])
+            if (animId == gMovesWithQuietBGM[i])
             {
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 128);
                 break;

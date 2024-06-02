@@ -721,7 +721,11 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 static void ItemUseOnFieldCB_EscapeRope(u8 taskId)
 {
     Overworld_ResetStateAfterDigEscRope();
-    RemoveUsedItem();
+    if (I_KEY_ESCAPE_ROPE < GEN_8)
+        RemoveBagItem(gSpecialVar_ItemId, 1);
+
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
+    StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
     gTasks[taskId].data[0] = 0;
     DisplayItemMessageOnField(taskId, FONT_NORMAL, gStringVar4, Task_UseDigEscapeRopeOnField);
 }

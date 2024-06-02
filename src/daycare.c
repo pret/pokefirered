@@ -900,7 +900,7 @@ static void InheritPokeball(struct Pokemon *egg, struct BoxPokemon *father, stru
 
     if (P_BALL_INHERITING >= GEN_7)
     {
-        if (fatherSpecies == motherSpecies)
+        if (GET_BASE_SPECIES_ID(fatherSpecies) == GET_BASE_SPECIES_ID(motherSpecies))
             inheritBall = (Random() % 2 == 0 ? motherBall : fatherBall);
         else if (motherSpecies != SPECIES_DITTO)
             inheritBall = motherBall;
@@ -1143,7 +1143,7 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
     u16 i;
     u16 species[DAYCARE_MON_COUNT];
     u16 eggSpecies, parentSpecies;
-    bool32 hasMotherEverstone, hasFatherEverstone;
+    bool8 hasMotherEverstone, hasFatherEverstone;
 
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
@@ -1165,10 +1165,10 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
 
     if (hasMotherEverstone)
         parentSpecies = species[parentSlots[0]];
-    else if (hasFatherEverstone && GET_BASE_SPECIES_ID(species[parentSlots[0]]) == GET_BASE_SPECIES_ID(species[parentSlots[1]]))
+    else if (hasFatherEverstone && GET_BASE_SPECIES_ID(GetEggSpecies(species[parentSlots[0]])) == GET_BASE_SPECIES_ID(GetEggSpecies(species[parentSlots[1]])))
         parentSpecies = species[parentSlots[1]];
     else
-        parentSpecies = GET_BASE_SPECIES_ID(species[parentSlots[0]]);
+        parentSpecies = GET_BASE_SPECIES_ID(GetEggSpecies(species[parentSlots[0]]));
 
     eggSpecies = GetEggSpecies(parentSpecies);
 

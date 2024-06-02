@@ -4259,17 +4259,9 @@ static void PokeSum_DestroyMonPicSprite(void)
 
 static void CreateBallIconObj(void)
 {
-    u16 ballItemId;
-    u8 ballId;
+    u8 ballId = ItemIdToBallId(GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_POKEBALL));
 
-    if (!sMonSummaryScreen->isEgg)
-        ballItemId = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_POKEBALL);
-    else
-        ballItemId = 0;
-
-    ballId = ItemIdToBallId(ballItemId);
     LoadBallGfx(ballId);
-
     sMonSummaryScreen->ballIconSpriteId = CreateSprite(&gBallSpriteTemplates[ballId], 106, 88, 0);
     gSprites[sMonSummaryScreen->ballIconSpriteId].callback = SpriteCallbackDummy;
     gSprites[sMonSummaryScreen->ballIconSpriteId].oam.priority = 0;

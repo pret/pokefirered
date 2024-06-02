@@ -361,6 +361,13 @@ struct BattlePokemon
     /*0x5A*/ bool8 isShiny;
 };
 
+struct Evolution
+{
+    u16 method;
+    u16 param;
+    u16 targetSpecies;
+};
+
 struct SpeciesInfo /*0x8C*/
 {
  /* 0x00 */ u8 baseHP;
@@ -618,18 +625,7 @@ struct Fusion
     u16 unfuseForgetMove;
 };
 
-// struct __attribute__((packed)) LevelUpMove
-// {
-//     u16 move:9;
-//     u16 level:7;
-// };
-
-struct Evolution
-{
-    u16 method;
-    u16 param;
-    u16 targetSpecies;
-};
+extern const struct Fusion *const gFusionTablePointers[NUM_SPECIES];
 
 #define NUM_UNOWN_FORMS 28
 

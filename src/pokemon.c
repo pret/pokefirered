@@ -682,6 +682,7 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/teachable_learnsets.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_change_tables.h"
+#include "data/pokemon/form_change_table_pointers.h"
 
 #include "data/pokemon/species_info.h"
 

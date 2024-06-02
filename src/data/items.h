@@ -3892,7 +3892,7 @@ const struct Item gItemsInfo[] =
         .description = sNectarDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
         .flingPower = 10,
     },
 
@@ -3904,7 +3904,7 @@ const struct Item gItemsInfo[] =
         .description = sNectarDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
         .flingPower = 10,
     },
 
@@ -3916,7 +3916,7 @@ const struct Item gItemsInfo[] =
         .description = sNectarDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
         .flingPower = 10,
     },
 
@@ -3928,7 +3928,7 @@ const struct Item gItemsInfo[] =
         .description = sNectarDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_FormChange_ConsumedOnUse,
         .flingPower = 10,
     },
 
@@ -10789,7 +10789,7 @@ const struct Item gItemsInfo[] =
             "token of gratitude."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_FormChange,
     },
 
     [ITEM_REVEAL_GLASS] =
@@ -10804,7 +10804,7 @@ const struct Item gItemsInfo[] =
             "its original form."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_FormChange,
     },
 
     [ITEM_DNA_SPLICERS] =
@@ -10847,7 +10847,7 @@ const struct Item gItemsInfo[] =
             "\nPokémon long ago."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_FormChange,
     },
 
     [ITEM_N_SOLARIZER] =
@@ -11473,7 +11473,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_TYPE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_FormChange,
     },
 
     [ITEM_MAGMA_EMBLEM] =

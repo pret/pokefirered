@@ -18,6 +18,8 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId);
 void ItemUseOutOfBattle_EnigmaBerry(u8 taskId);
 void ItemUseOutOfBattle_EvolutionStone(u8 taskId);
 void ItemUseOutOfBattle_FameChecker(u8 taskId);
+void ItemUseOutOfBattle_FormChange(u8 taskId);
+void ItemUseOutOfBattle_FormChange_ConsumedOnUse(u8 taskId);
 void ItemUseOutOfBattle_Itemfinder(u8 taskId);
 void ItemUseOutOfBattle_Mail(u8 taskId);
 void ItemUseOutOfBattle_Medicine(u8 taskId);

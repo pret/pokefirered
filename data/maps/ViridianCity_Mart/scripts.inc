@@ -134,6 +134,8 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_DYNAMAX_CANDY
 	.2byte ITEM_ROTOM_CATALOG
 	.2byte ITEM_ZYGARDE_CUBE
+	.2byte ITEM_METEORITE
+	.2byte ITEM_YELLOW_NECTAR
 	.2byte ITEM_NONE
 	release
 	end

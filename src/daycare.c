@@ -1142,7 +1142,8 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
 {
     u16 i;
     u16 species[DAYCARE_MON_COUNT];
-    u16 eggSpecies;
+    u16 eggSpecies, parentSpecies;
+    bool32 hasMotherEverstone;
 
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
@@ -1159,34 +1160,28 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
         }
     }
 
+    hasMotherEverstone = ItemId_GetHoldEffect(GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_PREVENT_EVOLVE;
+
     if (GET_BASE_SPECIES_ID(species[parentSlots[0]]) == GET_BASE_SPECIES_ID(species[parentSlots[1]]))
     {
-        bool32 hasSlot0Everstone = ItemId_GetHoldEffect(GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_PREVENT_EVOLVE;
-        bool32 hasSlot1Everstone = ItemId_GetHoldEffect(GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_PREVENT_EVOLVE;
-        u16 parentSpecies;
-
-        if (hasSlot0Everstone && hasSlot1Everstone)
-        {
+        bool32 hasFatherEverstone = ItemId_GetHoldEffect(GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_PREVENT_EVOLVE;
+        if (hasMotherEverstone && hasFatherEverstone)
             parentSpecies = species[parentSlots[Random() & 1]];
-        }
-        else if (hasSlot0Everstone)
-        {
+        else if (hasMotherEverstone)
             parentSpecies = species[parentSlots[0]];
-        }
-        else if (hasSlot1Everstone)
-        {
+        else if (hasFatherEverstone)
             parentSpecies = species[parentSlots[1]];
-        }
         else
-        {
             parentSpecies = GET_BASE_SPECIES_ID(species[parentSlots[0]]);
-        }
-        eggSpecies = GetEggSpecies(parentSpecies);
     }
     else 
     {
-        eggSpecies = GetEggSpecies(species[parentSlots[0]]);
+        if (hasMotherEverstone)
+            parentSpecies = species[parentSlots[0]];
+        else
+            parentSpecies = GET_BASE_SPECIES_ID(species[parentSlots[0]]);
     }
+    eggSpecies = GetEggSpecies(parentSpecies);
 
     if (eggSpecies == SPECIES_NIDORAN_F && daycare->offspringPersonality & EGG_GENDER_MALE)
         eggSpecies = SPECIES_NIDORAN_M;

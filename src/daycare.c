@@ -1143,7 +1143,7 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
     u16 i;
     u16 species[DAYCARE_MON_COUNT];
     u16 eggSpecies, parentSpecies;
-    bool32 hasMotherEverstone;
+    bool32 hasMotherEverstone, hasFatherEverstone;
 
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
@@ -1161,26 +1161,15 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
     }
 
     hasMotherEverstone = ItemId_GetHoldEffect(GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_PREVENT_EVOLVE;
+    hasFatherEverstone = ItemId_GetHoldEffect(GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_PREVENT_EVOLVE;
 
-    if (GET_BASE_SPECIES_ID(species[parentSlots[0]]) == GET_BASE_SPECIES_ID(species[parentSlots[1]]))
-    {
-        bool32 hasFatherEverstone = ItemId_GetHoldEffect(GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_PREVENT_EVOLVE;
-        if (hasMotherEverstone && hasFatherEverstone)
-            parentSpecies = species[parentSlots[Random() & 1]];
-        else if (hasMotherEverstone)
-            parentSpecies = species[parentSlots[0]];
-        else if (hasFatherEverstone)
-            parentSpecies = species[parentSlots[1]];
-        else
-            parentSpecies = GET_BASE_SPECIES_ID(species[parentSlots[0]]);
-    }
-    else 
-    {
-        if (hasMotherEverstone)
-            parentSpecies = species[parentSlots[0]];
-        else
-            parentSpecies = GET_BASE_SPECIES_ID(species[parentSlots[0]]);
-    }
+    if (hasMotherEverstone)
+        parentSpecies = species[parentSlots[0]];
+    else if (hasFatherEverstone && GET_BASE_SPECIES_ID(species[parentSlots[0]]) == GET_BASE_SPECIES_ID(species[parentSlots[1]]))
+        parentSpecies = species[parentSlots[1]];
+    else
+        parentSpecies = GET_BASE_SPECIES_ID(species[parentSlots[0]]);
+
     eggSpecies = GetEggSpecies(parentSpecies);
 
     if (eggSpecies == SPECIES_NIDORAN_F && daycare->offspringPersonality & EGG_GENDER_MALE)

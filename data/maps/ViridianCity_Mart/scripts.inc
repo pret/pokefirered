@@ -139,6 +139,7 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_REINS_OF_UNITY
 	.2byte ITEM_N_SOLARIZER
 	.2byte ITEM_N_LUNARIZER
+	.2byte ITEM_HONEY
 	.2byte ITEM_NONE
 	release
 	end

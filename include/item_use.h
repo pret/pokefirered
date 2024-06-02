@@ -1,12 +1,6 @@
 #ifndef GUARD_ITEM_USE_H
 #define GUARD_ITEM_USE_H
 
-#include "global.h"
-
-void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8);
-void Task_UseDigEscapeRopeOnField(u8 taskId);
-void ItemUse_SetQuestLogEvent(u8, struct Pokemon *, u16, u16);
-
 void ItemUseOutOfBattle_AbilityCapsule(u8 taskId);
 void ItemUseOutOfBattle_AbilityPatch(u8 taskId);
 void ItemUseOutOfBattle_BerryPouch(u8 taskId);
@@ -21,6 +15,7 @@ void ItemUseOutOfBattle_FameChecker(u8 taskId);
 void ItemUseOutOfBattle_FormChange(u8 taskId);
 void ItemUseOutOfBattle_FormChange_ConsumedOnUse(u8 taskId);
 void ItemUseOutOfBattle_Fusion(u8 taskId);
+void ItemUseOutOfBattle_Honey(u8 taskId);
 void ItemUseOutOfBattle_Itemfinder(u8 taskId);
 void ItemUseOutOfBattle_Mail(u8 taskId);
 void ItemUseOutOfBattle_Medicine(u8 taskId);
@@ -45,9 +40,11 @@ void ItemUseOutOfBattle_CannotUse(u8 taskId);
 void ItemUseInBattle_BagMenu(u8 taskId);
 void ItemUseInBattle_PartyMenu(u8 taskId);
 void ItemUseInBattle_PartyMenuChooseMove(u8 taskId);
+void Task_UseDigEscapeRopeOnField(u8 taskId);
 u8 CanUseEscapeRopeOnCurrMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
-
+void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8);
+void ItemUse_SetQuestLogEvent(u8, struct Pokemon *, u16, u16);
 
 enum {
     BALL_THROW_UNABLE_TWO_MONS,

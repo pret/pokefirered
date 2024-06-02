@@ -14,6 +14,7 @@
 #include "field_specials.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "fldeff.h"
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
@@ -42,7 +43,7 @@
 
 static EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
-static void FieldCB_FadeInFromBlack(void);
+static void FieldCB_UseItemOnField(void);
 static void Task_WaitFadeIn_CallItemUseOnFieldCB(u8 taskId);
 static void Task_ItemUse_CloseMessageBoxAndReturnToField(u8 taskId);
 static void Task_ItemUseWaitForFade(u8 taskId);
@@ -104,16 +105,16 @@ static void SetUpItemUseCallback(u8 taskId)
 
 static void SetUpItemUseOnFieldCallback(u8 taskId)
 {
-    if (gTasks[taskId].data[3] != 1)
+    if (gTasks[taskId].tUsingRegisteredKeyItem != TRUE)
     {
-        gFieldCallback = FieldCB_FadeInFromBlack;
+        gFieldCallback = FieldCB_UseItemOnField;
         SetUpItemUseCallback(taskId);
     }
     else
         sItemUseOnFieldCB(taskId);
 }
 
-static void FieldCB_FadeInFromBlack(void)
+static void FieldCB_UseItemOnField(void)
 {
     FadeInFromBlack();
     CreateTask(Task_WaitFadeIn_CallItemUseOnFieldCB, 8);
@@ -1013,6 +1014,28 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
         gTasks[taskId].data[4] = 4;
         ItemUseOutOfBattle_CannotUse(taskId);
     }
+}
+
+void Task_UseHoneyOnField(u8 taskId)
+{
+    StartSweetScentFieldEffect();
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_Honey(u8 taskId)
+{
+    Overworld_ResetStateAfterDigEscRope();
+    RemoveBagItem(gSpecialVar_ItemId, 1);
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
+    StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
+    gTasks[taskId].data[0] = 0;
+    DisplayItemMessageOnField(taskId, FONT_NORMAL, gStringVar4, Task_UseHoneyOnField);
+}
+
+void ItemUseOutOfBattle_Honey(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Honey;
+    SetUpItemUseOnFieldCallback(taskId);
 }
 
 void ItemUseOutOfBattle_CannotUse(u8 taskId)

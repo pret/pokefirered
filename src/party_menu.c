@@ -438,6 +438,10 @@ static EWRAM_DATA s16 sLevelUpStatsBefore[NUM_STATS];
 static EWRAM_DATA s16 sLevelUpStatsAfter[NUM_STATS];
 static EWRAM_DATA u8 sInitialLevel = 0;
 static EWRAM_DATA u8 sFinalLevel = 0;
+static EWRAM_DATA u16 sFriendshipBefore = 0;
+static EWRAM_DATA u16 sFriendshipAfter = 0;
+static EWRAM_DATA u16 sEvBefore = 0;
+static EWRAM_DATA u16 sEvAfter = 0;
 
 
 void (*gItemUseCB)(u8, TaskFunc);
@@ -5130,18 +5134,46 @@ static void ItemEffectToStatString(u8 effectType, u8 *dest)
     }
 }
 
+void ItemUseCB_ReduceEVStep(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u8 effectType = GetItemEffectType(gSpecialVar_ItemId);
+
+    gPartyMenuUseExitCallback = TRUE;
+    PlaySE(SE_USE_ITEM);
+    RemoveBagItem(gSpecialVar_ItemId, 1);
+    GetMonNickname(mon, gStringVar1);
+    ItemEffectToStatString(effectType, gStringVar2);
+    if (sFriendshipBefore != sFriendshipAfter)
+    {
+        if (sEvBefore != sEvAfter)
+            StringExpandPlaceholders(gStringVar4, gText_PkmnFriendlyBaseVar2Fell);
+        else
+            StringExpandPlaceholders(gStringVar4, gText_PkmnFriendlyBaseVar2CantFall);
+    }
+    else
+    {
+        StringExpandPlaceholders(gStringVar4, gText_PkmnAdoresBaseVar2Fell);
+    }
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = task;
+}
+
 void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 item = gSpecialVar_ItemId;
     u8 effectType = GetItemEffectType(item);
-    u16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-    u16 ev = ItemEffectToMonEv(mon, effectType);
-    bool8 cannotUseEffect = ExecuteTableBasedItemEffect(mon, item, gPartyMenu.slotId, 0);
-    u16 newFriendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-    u16 newEv = ItemEffectToMonEv(mon, effectType);
+    bool8 cannotUseEffect;
 
-    if (cannotUseEffect || (friendship == newFriendship && ev == newEv))
+    sFriendshipBefore = GetMonData(mon, MON_DATA_FRIENDSHIP);
+    sEvBefore = ItemEffectToMonEv(mon, effectType);
+    cannotUseEffect = ExecuteTableBasedItemEffect(mon, item, gPartyMenu.slotId, 0);
+    sFriendshipAfter = GetMonData(mon, MON_DATA_FRIENDSHIP);
+    sEvAfter = ItemEffectToMonEv(mon, effectType);
+
+    if (cannotUseEffect || (sFriendshipBefore == sFriendshipAfter && sEvBefore == sEvAfter))
     {
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
@@ -5151,25 +5183,8 @@ void ItemUseCB_ReduceEV(u8 taskId, TaskFunc task)
     }
     else
     {
-        gPartyMenuUseExitCallback = TRUE;
-        PlaySE(SE_USE_ITEM);
-        RemoveBagItem(item, 1);
-        GetMonNickname(mon, gStringVar1);
-        ItemEffectToStatString(effectType, gStringVar2);
-        if (friendship != newFriendship)
-        {
-            if (ev != newEv)
-                StringExpandPlaceholders(gStringVar4, gText_PkmnFriendlyBaseVar2Fell);
-            else
-                StringExpandPlaceholders(gStringVar4, gText_PkmnFriendlyBaseVar2CantFall);
-        }
-        else
-        {
-            StringExpandPlaceholders(gStringVar4, gText_PkmnAdoresBaseVar2Fell);
-        }
-        DisplayPartyMenuMessage(gStringVar4, TRUE);
-        ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = task;
+        Task_DoUseItemAnim(taskId);
+        gItemUseCB = ItemUseCB_ReduceEVStep;
     }
 }
 

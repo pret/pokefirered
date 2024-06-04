@@ -4653,29 +4653,52 @@ void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
     gTasks[taskId].func = Task_AbilityCapsule;
 }
 
+static u16 GetAbilityPatchAbilityNum(struct Pokemon *mon)
+{
+    if (GetMonData(mon, MON_DATA_ABILITY_NUM, NULL) == 2)
+        return 0;
+    return 2;
+}
+
+void ItemUseCB_ApplyAbilityPatch(u8 taskId, TaskFunc task)
+{
+    static const u8 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+    s16 *data = gTasks[taskId].data;
+    switch(tState)
+    {
+    case 0:
+        tSpecies = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES, NULL);
+        tAbilityNum = GetAbilityPatchAbilityNum(&gPlayerParty[gPartyMenu.slotId]);
+        PlaySE(SE_USE_ITEM);
+        GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+        StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(tSpecies, tAbilityNum)].name);
+        StringExpandPlaceholders(gStringVar4, doneText);
+        DisplayPartyMenuMessage(gStringVar4, 1);
+        ScheduleBgCopyTilemapToVram(2);
+        tState++;
+        break;
+    case 1:
+        if (!IsPartyMenuTextPrinterActive())
+            tState++;
+        break;
+    case 2:
+        SetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_ABILITY_NUM, &tAbilityNum);
+        RemoveBagItem(gSpecialVar_ItemId, 1);
+        gTasks[taskId].func = Task_ClosePartyMenu;
+        break;
+    }
+}
+
 void Task_AbilityPatch(u8 taskId)
 {
     static const u8 askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
-    static const u8 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
     {
     case 0:
-        // Can't use.
-        if (gSpeciesInfo[tSpecies].abilities[tAbilityNum] == 0
-            || !tSpecies
-            )
-        {
-            gPartyMenuUseExitCallback = FALSE;
-            PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
-            ScheduleBgCopyTilemapToVram(2);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-            return;
-        }
         gPartyMenuUseExitCallback = TRUE;
-        GetMonNickname(&gPlayerParty[tMonId], gStringVar1);
+        GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
         StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(tSpecies, tAbilityNum)].name);
         StringExpandPlaceholders(gStringVar4, askText);
         PlaySE(SE_SELECT);
@@ -4710,20 +4733,8 @@ void Task_AbilityPatch(u8 taskId)
         }
         break;
     case 3:
-        PlaySE(SE_USE_ITEM);
-        StringExpandPlaceholders(gStringVar4, doneText);
-        DisplayPartyMenuMessage(gStringVar4, 1);
-        ScheduleBgCopyTilemapToVram(2);
-        tState++;
-        break;
-    case 4:
-        if (!IsPartyMenuTextPrinterActive())
-            tState++;
-        break;
-    case 5:
-        SetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, &tAbilityNum);
-        RemoveBagItem(gSpecialVar_ItemId, 1);
-        gTasks[taskId].func = Task_ClosePartyMenu;
+        Task_DoUseItemAnim(taskId);
+        gItemUseCB = ItemUseCB_ApplyAbilityPatch;
         break;
     }
 }
@@ -4731,16 +4742,23 @@ void Task_AbilityPatch(u8 taskId)
 void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
 {
     s16 *data = gTasks[taskId].data;
-
+    tSpecies = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES, NULL);
+    tAbilityNum = GetAbilityPatchAbilityNum(&gPlayerParty[gPartyMenu.slotId]);
     tState = 0;
-    tMonId = gPartyMenu.slotId;
-    tSpecies = GetMonData(&gPlayerParty[tMonId], MON_DATA_SPECIES, NULL);
-    if (GetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, NULL) == 2)
-        tAbilityNum = 0;
+    if (gSpeciesInfo[tSpecies].abilities[tAbilityNum] == 0 || !tSpecies)
+    {
+        // Can't use.
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    }
     else
-        tAbilityNum = 2;
-    SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
-    gTasks[taskId].func = Task_AbilityPatch;
+    {
+        SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
+        gTasks[taskId].func = Task_AbilityPatch;
+    }
 }
 
 #undef tState

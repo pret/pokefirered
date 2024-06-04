@@ -2,5 +2,6 @@
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
-[pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion/).  
-[pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion/).
+# Credits
+[rh-hideout/pokeemerald-expansion](https://github.com/rh-hideout/pokeemerald-expansion/).  
+[Sotomura/pokefirered-rtc](https://github.com/Sotomura/pokefirered/tree/pokefirered-rtc).

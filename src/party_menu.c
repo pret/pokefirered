@@ -4788,6 +4788,9 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
 #undef tOldFunc
 
 #define tState      data[0]
+#define tMonId      data[1]
+#define tOldNature  data[2]
+#define tNewNature  data[3]
 #define tOldFunc    4
 
 void ItemUseCB_MintStep(u8 taskId, TaskFunc func)
@@ -4798,8 +4801,10 @@ void ItemUseCB_MintStep(u8 taskId, TaskFunc func)
     switch (tState)
     {
         case 0:
+            tMonId = gPartyMenu.slotId;
+            tNewNature = ItemId_GetSecondaryId(gSpecialVar_ItemId);
             PlaySE(SE_USE_ITEM);
-            GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+            GetMonNickname(&gPlayerParty[tMonId], gStringVar1);
             CopyItemName(gSpecialVar_ItemId, gStringVar2);
             StringExpandPlaceholders(gStringVar4, doneText);
             DisplayPartyMenuMessage(gStringVar4, 1);
@@ -4812,9 +4817,8 @@ void ItemUseCB_MintStep(u8 taskId, TaskFunc func)
             break;
         case 2:
         {
-            u8 newNature = ItemId_GetSecondaryId(gSpecialVar_ItemId);
-            SetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_HIDDEN_NATURE, &newNature);
-            CalculateMonStats(&gPlayerParty[gPartyMenu.slotId]);
+            SetMonData(&gPlayerParty[tMonId], MON_DATA_HIDDEN_NATURE, &tNewNature);
+            CalculateMonStats(&gPlayerParty[tMonId]);
             RemoveBagItem(gSpecialVar_ItemId, 1);
             gTasks[taskId].func = Task_ClosePartyMenu;
             break;
@@ -4827,10 +4831,10 @@ void Task_Mint(u8 taskId)
     static const u8 askText[] = _("It might affect {STR_VAR_1}'s stats.\nAre you sure you want to use it?");
     s16 *data = gTasks[taskId].data;
     switch(tState)
-    {   
+    {
         case 0:
             gPartyMenuUseExitCallback = TRUE;
-            GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+            GetMonNickname(&gPlayerParty[tMonId], gStringVar1);
             StringExpandPlaceholders(gStringVar4, askText);
             PlaySE(SE_SELECT);
             DisplayPartyMenuMessage(gStringVar4, 1);
@@ -4872,8 +4876,13 @@ void Task_Mint(u8 taskId)
 
 void ItemUseCB_Mint(u8 taskId, TaskFunc task)
 {
-    gTasks[taskId].tState = 0;
-    if (GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_HIDDEN_NATURE) == ItemId_GetSecondaryId(gSpecialVar_ItemId))
+    s16 *data = gTasks[taskId].data;
+
+    tState = 0;
+    tMonId = gPartyMenu.slotId;
+    tOldNature = GetMonData(&gPlayerParty[tMonId], MON_DATA_HIDDEN_NATURE);
+    tNewNature = ItemId_GetSecondaryId(gSpecialVar_ItemId);
+    if (tOldNature == tNewNature)
     {
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
@@ -4889,6 +4898,9 @@ void ItemUseCB_Mint(u8 taskId, TaskFunc task)
 }
 
 #undef tState
+#undef tMonId
+#undef tOldNature
+#undef tNewNature
 #undef tOldFunc
 
 static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon)

@@ -4565,28 +4565,44 @@ static bool8 IsItemFlute(u16 item)
 #define tMonId      data[3]
 #define tOldFunc    4
 
+void ItemUseCB_ApplyAbilityCapsule(u8 taskId, TaskFunc task)
+{
+    static const u8 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
+    s16 *data = gTasks[taskId].data;
+    switch (tState)
+    {
+    case 0:    
+        tMonId = gPartyMenu.slotId;
+        tSpecies = GetMonData(&gPlayerParty[tMonId], MON_DATA_SPECIES, NULL);
+        tAbilityNum = GetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, NULL) ^ 1;
+        PlaySE(SE_USE_ITEM);
+        GetMonNickname(&gPlayerParty[tMonId], gStringVar1);
+        StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(tSpecies, tAbilityNum)].name);
+        StringExpandPlaceholders(gStringVar4, doneText);
+        DisplayPartyMenuMessage(gStringVar4, 1);
+        ScheduleBgCopyTilemapToVram(2);
+        tState++;
+        break;
+    case 1:
+        if (!IsPartyMenuTextPrinterActive())
+            tState++;
+        break;
+    case 2:
+        SetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, &tAbilityNum);
+        RemoveBagItem(gSpecialVar_ItemId, 1);
+        gTasks[taskId].func = Task_ClosePartyMenu;
+        break;
+    }
+}
+
 void Task_AbilityCapsule(u8 taskId)
 {
     static const u8 askText[] = _("Would you like to change {STR_VAR_1}'s\nability to {STR_VAR_2}?");
-    static const u8 doneText[] = _("{STR_VAR_1}'s ability became\n{STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
     {
     case 0:
-        // Can't use.
-        if (gSpeciesInfo[tSpecies].abilities[0] == gSpeciesInfo[tSpecies].abilities[1]
-            || gSpeciesInfo[tSpecies].abilities[1] == ABILITY_NONE
-            || tAbilityNum > 1
-            || !tSpecies)
-        {
-            gPartyMenuUseExitCallback = FALSE;
-            PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
-            ScheduleBgCopyTilemapToVram(2);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-            return;
-        }
         gPartyMenuUseExitCallback = TRUE;
         GetMonNickname(&gPlayerParty[tMonId], gStringVar1);
         StringCopy(gStringVar2, gAbilitiesInfo[GetAbilityBySpecies(tSpecies, tAbilityNum)].name);
@@ -4623,20 +4639,8 @@ void Task_AbilityCapsule(u8 taskId)
         }
         break;
     case 3:
-        PlaySE(SE_USE_ITEM);
-        StringExpandPlaceholders(gStringVar4, doneText);
-        DisplayPartyMenuMessage(gStringVar4, 1);
-        ScheduleBgCopyTilemapToVram(2);
-        tState++;
-        break;
-    case 4:
-        if (!IsPartyMenuTextPrinterActive())
-            tState++;
-        break;
-    case 5:
-        SetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, &tAbilityNum);
-        RemoveBagItem(gSpecialVar_ItemId, 1);
-        gTasks[taskId].func = Task_ClosePartyMenu;
+        Task_DoUseItemAnim(taskId);
+        gItemUseCB = ItemUseCB_ApplyAbilityCapsule;
         break;
     }
 }
@@ -4649,8 +4653,24 @@ void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
     tMonId = gPartyMenu.slotId;
     tSpecies = GetMonData(&gPlayerParty[tMonId], MON_DATA_SPECIES, NULL);
     tAbilityNum = GetMonData(&gPlayerParty[tMonId], MON_DATA_ABILITY_NUM, NULL) ^ 1;
-    SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
-    gTasks[taskId].func = Task_AbilityCapsule;
+    
+    // Can't use.
+    if (gSpeciesInfo[tSpecies].abilities[0] == gSpeciesInfo[tSpecies].abilities[1]
+        || gSpeciesInfo[tSpecies].abilities[1] == ABILITY_NONE
+        || tAbilityNum > 1
+        || !tSpecies)
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    }
+    else
+    {
+        SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
+        gTasks[taskId].func = Task_AbilityCapsule;
+    }
 }
 
 static u16 GetAbilityPatchAbilityNum(struct Pokemon *mon)

@@ -7286,7 +7286,7 @@ const struct Item gItemsInfo[] =
         #endif
         .pocket = I_EXP_SHARE_ITEM >= GEN_6 ? POCKET_KEY_ITEMS : POCKET_ITEMS,
         .type = ITEM_TYPE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_ExpShare,
         .flingPower = 30,
     },
 

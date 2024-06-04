@@ -1601,4 +1601,8 @@ extern const u8 gText_PkmnTransformed[];
 extern const u8 gText_WhichAppliance[];
 extern const u8 gText_NextFusionMon[];
 
+// Exp. Share
+extern const u8 gText_ExpShareOn[];
+extern const u8 gText_ExpShareOff[];
+
 #endif //GUARD_STRINGS_H

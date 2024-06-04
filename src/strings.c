@@ -1373,3 +1373,6 @@ const u8 gText_ChangeAbility[] = _("Change Ability");
 const u8 gText_PkmnTransformed[] = _("{STR_VAR_1} transformed!{PAUSE_UNTIL_PRESS}");
 const u8 gText_WhichAppliance[] = _("Order which\nappliance?");
 const u8 gText_NextFusionMon[] = _("Choose {PKMN} to fuse with.");
+
+const u8 gText_ExpShareOn[] = _("The Exp. Share has been turned on.{PAUSE_UNTIL_PRESS}");
+const u8 gText_ExpShareOff[] = _("The Exp. Share has been turned off.{PAUSE_UNTIL_PRESS}");

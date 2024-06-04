@@ -211,6 +211,33 @@ static void CB2_CheckMail(void)
     ReadMail(&mail, CB2_BagMenuFromStartMenu, FALSE);
 }
 
+STATIC_ASSERT(I_EXP_SHARE_ITEM < GEN_6 || I_EXP_SHARE_FLAG > TEMP_FLAGS_END, YouNeedToSetAFlagToUseGen6ExpShare);
+
+void ItemUseOutOfBattle_ExpShare(u8 taskId)
+{
+#if I_EXP_SHARE_ITEM >= GEN_6
+    if (IsGen6ExpShareEnabled())
+    {
+        PlaySE(SE_PC_OFF);
+        if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+            DisplayItemMessageOnField(taskId, FONT_NORMAL, gText_ExpShareOff, Task_ItemUse_CloseMessageBoxAndReturnToField);
+        else
+            DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_ExpShareOff, Task_ReturnToBagFromContextMenu);
+    }
+    else
+    {
+        PlaySE(SE_EXP_MAX);
+        if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+            DisplayItemMessageOnField(taskId, FONT_NORMAL, gText_ExpShareOn, Task_ItemUse_CloseMessageBoxAndReturnToField);
+        else
+            DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_ExpShareOn, Task_ReturnToBagFromContextMenu);
+    }
+    FlagToggle(I_EXP_SHARE_FLAG);
+#else
+    PrintNotTheTimeToUseThat(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+#endif
+}
+
 void ItemUseOutOfBattle_Bike(u8 taskId)
 {
     s16 x, y;

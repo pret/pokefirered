@@ -11,6 +11,7 @@ void ItemUseOutOfBattle_DynamaxCandy(u8 taskId);
 void ItemUseOutOfBattle_EscapeRope(u8 taskId);
 void ItemUseOutOfBattle_EnigmaBerry(u8 taskId);
 void ItemUseOutOfBattle_EvolutionStone(u8 taskId);
+void ItemUseOutOfBattle_ExpShare(u8 taskId);
 void ItemUseOutOfBattle_FameChecker(u8 taskId);
 void ItemUseOutOfBattle_FormChange(u8 taskId);
 void ItemUseOutOfBattle_FormChange_ConsumedOnUse(u8 taskId);

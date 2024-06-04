@@ -4750,101 +4750,107 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
 #undef tOldFunc
 
 #define tState      data[0]
-#define tMonId      data[1]
-#define tOldNature  data[2]
-#define tNewNature  data[3]
 #define tOldFunc    4
 
-void Task_Mint(u8 taskId)
+void ItemUseCB_MintStep(u8 taskId, TaskFunc func)
 {
-    static const u8 askText[] = _("It might affect {STR_VAR_1}'s stats.\nAre you sure you want to use it?");
     static const u8 doneText[] = _("{STR_VAR_1}'s stats may have changed due\nto the effects of the {STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
     {
-    case 0:
-        // Can't use.
-        if (tOldNature == tNewNature)
-        {
-            gPartyMenuUseExitCallback = FALSE;
-            PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
-            ScheduleBgCopyTilemapToVram(2);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-            return;
-        }
-        gPartyMenuUseExitCallback = TRUE;
-        GetMonNickname(&gPlayerParty[tMonId], gStringVar1);
-        CopyItemName(gSpecialVar_ItemId, gStringVar2);
-        StringExpandPlaceholders(gStringVar4, askText);
-        PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gStringVar4, 1);
-        ScheduleBgCopyTilemapToVram(2);
-        tState++;
-        break;
-    case 1:
-        if (!IsPartyMenuTextPrinterActive())
-        {
-            PartyMenuDisplayYesNoMenu();
-            tState++;
-        }
-        break;
-    case 2:
-        switch (Menu_ProcessInputNoWrapClearOnChoose())
-        {
         case 0:
+            PlaySE(SE_USE_ITEM);
+            GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+            CopyItemName(gSpecialVar_ItemId, gStringVar2);
+            StringExpandPlaceholders(gStringVar4, doneText);
+            DisplayPartyMenuMessage(gStringVar4, 1);
+            ScheduleBgCopyTilemapToVram(2);
             tState++;
             break;
         case 1:
-        case MENU_B_PRESSED:
-            gPartyMenuUseExitCallback = FALSE;
-            PlaySE(SE_SELECT);
-            ScheduleBgCopyTilemapToVram(2);
-            // Don't exit party selections screen, return to choosing a mon.
-            ClearStdWindowAndFrameToTransparent(6, 0);
-            ClearWindowTilemap(6);
-            DisplayPartyMenuStdMessage(5);
-            gTasks[taskId].func = (void *)GetWordTaskArg(taskId, tOldFunc);
-            return;
+            if (!IsPartyMenuTextPrinterActive())
+                tState++;
+            break;
+        case 2:
+        {
+            u8 newNature = ItemId_GetSecondaryId(gSpecialVar_ItemId);
+            SetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_HIDDEN_NATURE, &newNature);
+            CalculateMonStats(&gPlayerParty[gPartyMenu.slotId]);
+            RemoveBagItem(gSpecialVar_ItemId, 1);
+            gTasks[taskId].func = Task_ClosePartyMenu;
+            break;
         }
-        break;
-    case 3:
-        PlaySE(SE_USE_ITEM);
-        StringExpandPlaceholders(gStringVar4, doneText);
-        DisplayPartyMenuMessage(gStringVar4, 1);
-        ScheduleBgCopyTilemapToVram(2);
-        tState++;
-        break;
-    case 4:
-        if (!IsPartyMenuTextPrinterActive())
+    }
+}
+
+void Task_Mint(u8 taskId)
+{
+    static const u8 askText[] = _("It might affect {STR_VAR_1}'s stats.\nAre you sure you want to use it?");
+    s16 *data = gTasks[taskId].data;
+    switch(tState)
+    {   
+        case 0:
+            gPartyMenuUseExitCallback = TRUE;
+            GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+            StringExpandPlaceholders(gStringVar4, askText);
+            PlaySE(SE_SELECT);
+            DisplayPartyMenuMessage(gStringVar4, 1);
+            ScheduleBgCopyTilemapToVram(2);
             tState++;
-        break;
-    case 5:
-        SetMonData(&gPlayerParty[tMonId], MON_DATA_HIDDEN_NATURE, &tNewNature);
-        CalculateMonStats(&gPlayerParty[tMonId]);
-        RemoveBagItem(gSpecialVar_ItemId, 1);
-        gTasks[taskId].func = Task_ClosePartyMenu;
-        break;
+            break;
+        case 1:
+            if (!IsPartyMenuTextPrinterActive())
+            {
+                PartyMenuDisplayYesNoMenu();
+                tState++;
+            }
+            break;
+        case 2:
+            switch (Menu_ProcessInputNoWrapClearOnChoose())
+            {
+                case 0:
+                    tState++;
+                    break;
+                case 1:
+                case MENU_B_PRESSED:
+                    gPartyMenuUseExitCallback = FALSE;
+                    PlaySE(SE_SELECT);
+                    ScheduleBgCopyTilemapToVram(2);
+                    // Don't exit party selections screen, return to choosing a mon.
+                    ClearStdWindowAndFrameToTransparent(6, 0);
+                    ClearWindowTilemap(6);
+                    DisplayPartyMenuStdMessage(5);
+                    gTasks[taskId].func = (void *)GetWordTaskArg(taskId, tOldFunc);
+                    return;
+            }
+            break;
+        case 3:
+            Task_DoUseItemAnim(taskId);
+            gItemUseCB = ItemUseCB_MintStep;
+            break;
     }
 }
 
 void ItemUseCB_Mint(u8 taskId, TaskFunc task)
 {
-    s16 *data = gTasks[taskId].data;
-
-    tState = 0;
-    tMonId = gPartyMenu.slotId;
-    tOldNature = GetMonData(&gPlayerParty[tMonId], MON_DATA_HIDDEN_NATURE);
-    tNewNature = ItemId_GetSecondaryId(gSpecialVar_ItemId);
-    SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
-    gTasks[taskId].func = Task_Mint;
+    gTasks[taskId].tState = 0;
+    if (GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_HIDDEN_NATURE) == ItemId_GetSecondaryId(gSpecialVar_ItemId))
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    }
+    else
+    {
+        SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
+        gTasks[taskId].func = Task_Mint;
+    }
 }
 
 #undef tState
-#undef tMonId
-#undef tOldNature
-#undef tNewNature
 #undef tOldFunc
 
 static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon)

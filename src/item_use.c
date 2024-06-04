@@ -10,6 +10,7 @@
 #include "field_effect.h"
 #include "field_fadetransition.h"
 #include "event_object_movement.h"
+#include "event_scripts.h"
 #include "field_player_avatar.h"
 #include "field_specials.h"
 #include "field_weather.h"
@@ -49,6 +50,7 @@ static void Task_ItemUse_CloseMessageBoxAndReturnToField(u8 taskId);
 static void Task_ItemUseWaitForFade(u8 taskId);
 static bool8 FieldCB2_UseItemFromField(void);
 static void CB2_CheckMail(void);
+static void Task_AccessPokemonBoxLink(u8);
 static void ItemUseOnFieldCB_Bicycle(u8 taskId);
 static bool8 CanFish(void);
 static void ItemUseOnFieldCB_Rod(u8 taskId);
@@ -359,6 +361,18 @@ void ItemUseOutOfBattle_Itemfinder(u8 taskId)
     IncrementGameStat(GAME_STAT_USED_ITEMFINDER);
     sItemUseOnFieldCB = ItemUseOnFieldCB_Itemfinder;
     SetUpItemUseOnFieldCallback(taskId);
+}
+
+void ItemUseOutOfBattle_PokemonBoxLink(u8 taskId)
+{
+    sItemUseOnFieldCB = Task_AccessPokemonBoxLink;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
+static void Task_AccessPokemonBoxLink(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_AccessPokemonBoxLink);
+    DestroyTask(taskId);
 }
 
 #define tIsFieldUse data[3]

@@ -140,6 +140,7 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_N_SOLARIZER
 	.2byte ITEM_N_LUNARIZER
 	.2byte ITEM_HONEY
+	.2byte ITEM_POKEMON_BOX_LINK
 	.2byte ITEM_NONE
 	release
 	end

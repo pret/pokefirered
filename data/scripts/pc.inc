@@ -99,3 +99,11 @@ EventScript_ExitOaksPC::
 	msgbox Text_ClosedLinkToProfOaksPC
 	goto EventScript_PCMainMenu
 	end
+
+EventScript_AccessPokemonBoxLink::
+	playse SE_PC_LOGIN
+	msgbox Text_OpenedPkmnStorage, MSGBOX_DEFAULT
+	special ShowPokemonStorageSystemPC
+	waitstate
+	goto EventScript_TurnOffPC
+	end

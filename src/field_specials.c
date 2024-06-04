@@ -226,6 +226,20 @@ bool8 PlayerHasGrassPokemonInParty(void)
     return FALSE;
 }
 
+static bool8 IsPlayerInFrontOfPC(void)
+{
+    s16 x, y;
+    u32 tileInFront;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    tileInFront = MapGridGetMetatileIdAt(x, y);
+
+    return (tileInFront == METATILE_Building_PCOff
+         || tileInFront == METATILE_Building_PCOn
+         || tileInFront == METATILE_GenericBuilding1_PlayersPCOff
+         || tileInFront == METATILE_GenericBuilding1_PlayersPCOn);
+}
+
 #define tState data[0]
 #define tTimer data[1]
 
@@ -233,7 +247,7 @@ void AnimatePcTurnOn(void)
 {
     u8 taskId;
 
-    if (FuncIsActiveTask(Task_AnimatePcTurnOn) != TRUE)
+    if (FuncIsActiveTask(Task_AnimatePcTurnOn) != TRUE && IsPlayerInFrontOfPC() == TRUE)
     {
         taskId = CreateTask(Task_AnimatePcTurnOn, 8);
         gTasks[taskId].tState = 0;
@@ -310,6 +324,8 @@ void AnimatePcTurnOff()
     s8 deltaY = 0;
     u8 direction = GetPlayerFacingDirection();
 
+    if (IsPlayerInFrontOfPC() == FALSE)
+        return;
     switch (direction)
     {
     case DIR_NORTH:

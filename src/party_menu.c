@@ -4793,7 +4793,7 @@ void ItemUseCB_AbilityPatch(u8 taskId, TaskFunc task)
 #define tNewNature  data[3]
 #define tOldFunc    4
 
-void ItemUseCB_MintStep(u8 taskId, TaskFunc func)
+void ItemUseCB_ApplyMint(u8 taskId, TaskFunc func)
 {
     static const u8 doneText[] = _("{STR_VAR_1}'s stats may have changed due\nto the effects of the {STR_VAR_2}!{PAUSE_UNTIL_PRESS}");
     s16 *data = gTasks[taskId].data;
@@ -4833,6 +4833,16 @@ void Task_Mint(u8 taskId)
     switch(tState)
     {
         case 0:
+        // Can't use.
+            if (tOldNature == tNewNature)
+            {
+                gPartyMenuUseExitCallback = FALSE;
+                PlaySE(SE_SELECT);
+                DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
+                ScheduleBgCopyTilemapToVram(2);
+                gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+                return;
+            }
             gPartyMenuUseExitCallback = TRUE;
             GetMonNickname(&gPlayerParty[tMonId], gStringVar1);
             StringExpandPlaceholders(gStringVar4, askText);
@@ -4869,7 +4879,7 @@ void Task_Mint(u8 taskId)
             break;
         case 3:
             Task_DoUseItemAnim(taskId);
-            gItemUseCB = ItemUseCB_MintStep;
+            gItemUseCB = ItemUseCB_ApplyMint;
             break;
     }
 }
@@ -4882,19 +4892,8 @@ void ItemUseCB_Mint(u8 taskId, TaskFunc task)
     tMonId = gPartyMenu.slotId;
     tOldNature = GetMonData(&gPlayerParty[tMonId], MON_DATA_HIDDEN_NATURE);
     tNewNature = ItemId_GetSecondaryId(gSpecialVar_ItemId);
-    if (tOldNature == tNewNature)
-    {
-        gPartyMenuUseExitCallback = FALSE;
-        PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-    }
-    else
-    {
-        SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
-        gTasks[taskId].func = Task_Mint;
-    }
+    SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
+    gTasks[taskId].func = Task_Mint;
 }
 
 #undef tState

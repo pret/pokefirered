@@ -664,7 +664,7 @@ static void Task_InitTeachyTvFromField(u8 taskId)
 
 void ItemUseOutOfBattle_Repel(u8 taskId)
 {
-    if (VarGet(VAR_REPEL_STEP_COUNT) == 0)
+    if (REPEL_STEP_COUNT == 0)
     {
         PlaySE(SE_REPEL);
         gTasks[taskId].func = Task_UseRepel;
@@ -672,6 +672,20 @@ void ItemUseOutOfBattle_Repel(u8 taskId)
     else
         // An earlier repel is still in effect
         DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_RepelEffectsLingered, Task_ReturnToBagFromContextMenu);
+}
+
+static void Task_UseRepel(u8 taskId)
+{
+    if (!IsSEPlaying())
+    {
+        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
+        VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
+    #if VAR_LAST_REPEL_LURE_USED != 0
+        VarSet(VAR_LAST_REPEL_LURE_USED, gSpecialVar_ItemId);
+    #endif
+        RemoveUsedItem();
+        DisplayItemMessageInBag(taskId, FONT_NORMAL, gStringVar4, Task_ReturnToBagFromContextMenu);
+    }
 }
 
 void ItemUseOutOfBattle_ReduceEV(u8 taskId)
@@ -684,17 +698,6 @@ void ItemUseOutOfBattle_ResetEVs(u8 taskId)
 {
     gItemUseCB = ItemUseCB_ResetEVs;
     SetUpItemUseCallback(taskId);
-}
-
-static void Task_UseRepel(u8 taskId)
-{
-    if (!IsSEPlaying())
-    {
-        ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);
-        VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
-        RemoveUsedItem();
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, gStringVar4, Task_ReturnToBagFromContextMenu);
-    }
 }
 
 static void RemoveUsedItem(void)

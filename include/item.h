@@ -2,6 +2,7 @@
 #define GUARD_ITEM_H
 
 #include "global.h"
+#include "constants/item.h"
 
 
 

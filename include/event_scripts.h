@@ -1171,7 +1171,7 @@ extern const u8 CableClub_Text_CanMakeBerryPowder[];
 extern const u8 EventScript_PC[];
 extern const u8 EventScript_AccessPokemonBoxLink[];
 
-extern const u8 EventScript_RepelWoreOff[];
+extern const u8 EventScript_SprayWoreOff[];
 
 // battle_message
 extern const u8 Text_MonSentToBoxInSomeonesPC[];

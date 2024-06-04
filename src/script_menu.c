@@ -706,20 +706,21 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 mcId, u8 ignoreBpres
 
 static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos)
 {
+    DrawVerticalMultichoiceMenuInternal(left, top, mcId, ignoreBpress, initPos, sMultichoiceLists[mcId].list, sMultichoiceLists[mcId].count);
+}
+
+ void DrawVerticalMultichoiceMenuInternal(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos, const struct MenuAction *list, u8 count)
+{
     s32 i;
     s32 strWidth;
     s32 tmp;
     u8 width;
     u8 height;
-    u8 count;
     u8 windowId;
-    const struct MenuAction * list;
 
     if ((ignoreBpress & 2) || QL_AvoidDisplay(QL_DestroyAbortedDisplay) != TRUE)
     {
         ignoreBpress &= 1;
-        count = sMultichoiceLists[mcId].count;
-        list = sMultichoiceLists[mcId].list;
         strWidth = 0;
         for (i = 0; i < count; i++)
         {

@@ -17,6 +17,7 @@
 #include "rtc.h"
 #include "constants/maps.h"
 #include "constants/abilities.h"
+#include "constants/item.h"
 #include "constants/items.h"
 
 #define MAX_ENCOUNTER_RATE 1600
@@ -675,7 +676,9 @@ u16 GetLocalWaterMon(void)
 
 bool8 UpdateRepelCounter(void)
 {
-    u16 steps;
+    u16 repelLureVar = VarGet(VAR_REPEL_STEP_COUNT);
+    u16 steps = REPEL_LURE_STEPS(repelLureVar);
+    bool32 isLure = IS_LAST_USED_LURE(repelLureVar);
 
     if (InUnionRoom() == TRUE)
         return FALSE;
@@ -688,11 +691,23 @@ bool8 UpdateRepelCounter(void)
     if (steps != 0)
     {
         steps--;
-        VarSet(VAR_REPEL_STEP_COUNT, steps);
-        if (steps == 0)
+        if (!isLure)
         {
-            ScriptContext_SetupScript(EventScript_RepelWoreOff);
-            return TRUE;
+            VarSet(VAR_REPEL_STEP_COUNT, steps);
+            if (steps == 0)
+            {
+                ScriptContext_SetupScript(EventScript_SprayWoreOff);
+                return TRUE;
+            }
+        }
+        else
+        {
+            VarSet(VAR_REPEL_STEP_COUNT, steps | REPEL_LURE_MASK);
+            if (steps == 0)
+            {
+                ScriptContext_SetupScript(EventScript_SprayWoreOff);
+                return TRUE;
+            }
         }
     }
     return FALSE;

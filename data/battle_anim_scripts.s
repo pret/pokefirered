@@ -62,7 +62,7 @@ gBattleAnims_General::
 	.4byte General_StatsChange              @ TODO: B_ANIM_TOTEM_FLARE
 	.4byte General_MonHit                   @ TODO: B_ANIM_GULP_MISSILE
 	.4byte General_StatsChange              @ TODO: B_ANIM_STRONG_WINDS
-	.4byte General_FormChange     	        @ TODO: B_ANIM_PRIMAL_REVERSION
+	.4byte General_MegaEvolution            @ TODO: B_ANIM_PRIMAL_REVERSION
 	.4byte General_StatsChange              @ TODO: B_ANIM_AQUA_RING_HEAL
 	.4byte General_StatsChange	            @ TODO: B_ANIM_BEAK_BLAST_SETUP
 	.4byte General_StatsChange         	    @ TODO: B_ANIM_SHELL_TRAP_SETUP
@@ -72,15 +72,15 @@ gBattleAnims_General::
 	.4byte General_UltraBurst               @ B_ANIM_ULTRA_BURST
 	.4byte General_MonHit 		           	@ TODO: B_ANIM_SALT_CURE_DAMAGE
 	.4byte General_DynamaxGrowth            @ B_ANIM_DYNAMAX_GROWTH
-	.4byte General_FormChange               @ TODO: B_ANIM_MAX_SET_WEATHER
-	.4byte General_FormChange       		@ TODO: B_ANIM_SYRUP_BOMB_SPEED_DROP
-	.4byte General_FormChange               @ TODO: B_ANIM_RAINBOW
-	.4byte General_FormChange               @ TODO: B_ANIM_SEA_OF_FIRE
-	.4byte General_FormChange               @ TODO: B_ANIM_SWAMP
-	.4byte General_FormChange               @ TODO: B_ANIM_TRICK_ROOM
-	.4byte General_FormChange               @ TODO: B_ANIM_WONDER_ROOM
-	.4byte General_FormChange               @ TODO: B_ANIM_MAGIC_ROOM
-	.4byte General_FormChange               @ TODO: B_ANIM_TAILLWIND
+	.4byte General_MonHit                   @ TODO: B_ANIM_MAX_SET_WEATHER
+	.4byte General_MonHit            		@ TODO: B_ANIM_SYRUP_BOMB_SPEED_DROP
+	.4byte General_MonHit		            @ TODO: B_ANIM_RAINBOW
+	.4byte General_MonHit     		        @ TODO: B_ANIM_SEA_OF_FIRE
+	.4byte General_MonHit     		        @ TODO: B_ANIM_SWAMP
+	.4byte General_MonHit     		        @ TODO: B_ANIM_TRICK_ROOM
+	.4byte General_MonHit     		        @ TODO: B_ANIM_WONDER_ROOM
+	.4byte General_MonHit     		        @ TODO: B_ANIM_MAGIC_ROOM
+	.4byte General_MonHit	                @ TODO: B_ANIM_TAILLWIND
 	.4byte General_MonScared                @ B_ANIM_MON_SCARED
 	.4byte General_GhostGetOut              @ B_ANIM_GHOST_GET_OUT
 	.4byte General_SilphScoped              @ B_ANIM_SILPH_SCOPED

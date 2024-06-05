@@ -18,6 +18,7 @@ void ItemUseOutOfBattle_FormChange_ConsumedOnUse(u8 taskId);
 void ItemUseOutOfBattle_Fusion(u8 taskId);
 void ItemUseOutOfBattle_Honey(u8 taskId);
 void ItemUseOutOfBattle_Itemfinder(u8 taskId);
+void ItemUseOutOfBattle_Lure(u8 taskId);
 void ItemUseOutOfBattle_Mail(u8 taskId);
 void ItemUseOutOfBattle_Medicine(u8 taskId);
 void ItemUseOutOfBattle_Mint(u8 taskId);

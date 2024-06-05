@@ -143,6 +143,7 @@ ViridianCity_Mart_Items::
 	.2byte ITEM_HONEY
 	.2byte ITEM_POKEMON_BOX_LINK
 	.2byte ITEM_EXP_SHARE
+	.2byte ITEM_LURE
 	.2byte ITEM_NONE
 	release
 	end

@@ -63,7 +63,6 @@ static EWRAM_DATA struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
 static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
 static bool8 PartyMonHasStatus(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 static bool8 IsPokemonStorageFull(void);
-static u8 CopyMonToPC(struct Pokemon *mon);
 static void EncryptBoxMon(struct BoxPokemon *boxMon);
 static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
@@ -3082,7 +3081,7 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     return MON_GIVEN_TO_PARTY;
 }
 
-static u8 CopyMonToPC(struct Pokemon *mon)
+u8 CopyMonToPC(struct Pokemon *mon)
 {
     s32 boxNo, boxPos;
 
@@ -6046,6 +6045,43 @@ u32 GetMonAffectionHearts(struct Pokemon *pokemon)
         return AFFECTION_ONE_HEART;
 
     return AFFECTION_NO_HEARTS;
+}
+
+void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
+{
+    struct PokemonSubstruct0 *old0, *new0;
+    struct PokemonSubstruct1 *old1, *new1;
+    struct PokemonSubstruct2 *old2, *new2;
+    struct PokemonSubstruct3 *old3, *new3;
+    struct BoxPokemon old;
+
+    bool32 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY, NULL);
+    u32 hiddenNature = GetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, NULL);
+    u32 teraType = GetBoxMonData(boxMon, MON_DATA_TERA_TYPE, NULL);
+
+    old = *boxMon;
+    old0 = &(GetSubstruct(&old, old.personality, 0)->type0);
+    old1 = &(GetSubstruct(&old, old.personality, 1)->type1);
+    old2 = &(GetSubstruct(&old, old.personality, 2)->type2);
+    old3 = &(GetSubstruct(&old, old.personality, 3)->type3);
+
+    new0 = &(GetSubstruct(boxMon, personality, 0)->type0);
+    new1 = &(GetSubstruct(boxMon, personality, 1)->type1);
+    new2 = &(GetSubstruct(boxMon, personality, 2)->type2);
+    new3 = &(GetSubstruct(boxMon, personality, 3)->type3);
+
+    DecryptBoxMon(&old);
+    boxMon->personality = personality;
+    *new0 = *old0;
+    *new1 = *old1;
+    *new2 = *old2;
+    *new3 = *old3;
+    boxMon->checksum = CalculateBoxMonChecksum(boxMon);
+    EncryptBoxMon(boxMon);
+
+    SetBoxMonData(boxMon, MON_DATA_IS_SHINY, &isShiny);
+    SetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, &hiddenNature);
+    SetBoxMonData(boxMon, MON_DATA_TERA_TYPE, &teraType);
 }
 
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method)

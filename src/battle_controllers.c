@@ -12,6 +12,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokeball.h"
+#include "recorded_battle.h"
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
@@ -77,6 +78,14 @@ void SetUpBattleVars(void)
 void InitBattleControllers(void)
 {
     s32 i;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
+        RecordedBattle_Init(B_RECORD_MODE_RECORDING);
+    else
+        RecordedBattle_Init(B_RECORD_MODE_PLAYBACK);
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
+        RecordedBattle_SaveParties();
 
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         InitLinkBtlControllers();

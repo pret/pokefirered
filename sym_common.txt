@@ -1,11 +1,11 @@
 	.include "main.o"
   	.include "rtc.o"
-	.include "bg.o"
+	.include "gflib/bg.o"
 	.include "text_printer.o"
 	.align 4
-	.include "window.o"
-	.include "text.o"
-	.include "sprite.o"
+	.include "gflib/window.o"
+	.include "gflib/text.o"
+    @ ../gflib/sprite.o
 	.include "link.o"
 	.align 4
 	.include "battle_main.o"

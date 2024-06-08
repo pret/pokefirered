@@ -10,6 +10,7 @@
 #include "graphics.h"
 #include "m4a.h"
 #include "pokeball.h"
+#include "sound.h"
 #include "task.h"
 #include "trig.h"
 #include "util.h"

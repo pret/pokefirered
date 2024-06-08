@@ -1,7 +1,6 @@
 #ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
-#include <limits.h>
 #include "global.h"
 #include "constants/battle.h"
 #include "constants/form_change_types.h"

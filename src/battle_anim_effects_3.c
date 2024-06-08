@@ -1,10 +1,11 @@
 #include "global.h"
-#include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "data.h"
 #include "decompress.h"
+#include "gflib.h"
 #include "graphics.h"
+#include "palette.h"
 #include "pokemon_icon.h"
 #include "random.h"
 #include "scanline_effect.h"
@@ -1445,8 +1446,8 @@ static void FadeScreenToWhite_Step(u8 taskId)
 
 static void AnimSpikes(struct Sprite *sprite)
 {
-    u16 x;
-    u16 y;
+    s16 x;
+    s16 y;
 
     InitSpritePosToAnimAttacker(sprite, TRUE);
     SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &x, &y);

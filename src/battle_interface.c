@@ -1634,7 +1634,6 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
                     } while (0);
                 }
             }
-            ballIconSpritesIds[5 - ++i] += 0; i--;
         }
     }
 

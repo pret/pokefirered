@@ -8,6 +8,7 @@
 #include "link.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
+#include "sound.h"
 #include "text_window.h"
 #include "trig.h"
 #include "constants/maps.h"

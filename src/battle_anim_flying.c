@@ -1,6 +1,6 @@
 #include "global.h"
 #include "battle_anim.h"
-#include "gflib.h"
+#include "palette.h"
 #include "trig.h"
 #include "constants/battle_anim.h"
 #include "random.h"

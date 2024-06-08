@@ -10,3 +10,4 @@ IntrMain_Buffer
 sVcountAtIntr
 sVcountBeforeSound
 gPcmDmaCounter
+gAgbMainLoop_sp

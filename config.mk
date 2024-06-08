@@ -3,7 +3,8 @@
 GAME_VERSION  ?= FIRERED
 GAME_REVISION ?= 0
 GAME_LANGUAGE ?= ENGLISH
-MODERN        ?= 0
+MODERN       ?= 1
+TEST         ?= 0
 COMPARE       ?= 0
 
 # For gbafix
@@ -44,8 +45,3 @@ $(error unknown language $(GAME_LANGUAGE))
 endif
 
 # Modern GCC
-ifeq ($(MODERN), 0)
-  BUILD_NAME := $(BUILD_NAME)
-else
-  BUILD_NAME := $(BUILD_NAME)_modern
-endif

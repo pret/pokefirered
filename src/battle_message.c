@@ -979,6 +979,8 @@ const u8 gText_Unused_6F[] = _("6F");
 const u8 gText_Unused_7F[] = _("7F");
 const u8 gText_Unused_8F[] = _("8F");
 
+
+const u8 gText_TODO[] = _("TODO");
 // merged end
 
 const u8 *const gStatNamesTable[] = {
@@ -2683,7 +2685,7 @@ void BufferStringBattle(u32 battler, u16 stringId)
 
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src)
 {
-    BattleStringExpandPlaceholders(src, gDisplayedStringBattle);
+    return BattleStringExpandPlaceholders(src, gDisplayedStringBattle);
 }
 
 static const u8 *TryGetStatusString(u8 *src)
@@ -2905,12 +2907,12 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_PARTNER_CLASS:
                 // TODO: trainer name
                 // toCpy = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
-                toCpy = "TODO";
+                toCpy = gText_TODO;
                 break;
             case B_TXT_PARTNER_NAME:
                 // TODO: trainer name
                 // toCpy = BattleStringGetPlayerName(text, GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT));
-                toCpy = "TODO";
+                toCpy = gText_TODO;
                 break;
             case B_TXT_COPY_VAR_1:
                 toCpy = gStringVar1;

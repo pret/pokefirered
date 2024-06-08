@@ -52,6 +52,7 @@ extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
 
 void AgbMain(void);
+void AgbMainLoop(void);
 void SetMainCallback2(MainCallback callback);
 void InitKeys(void);
 void SetVBlankCallback(IntrCallback callback);

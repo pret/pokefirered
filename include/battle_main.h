@@ -57,6 +57,7 @@ extern const u8 *const gStatusConditionStringsTable[7][2];
 
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
+void CB2_QuitRecordedBattle(void);
 void FreeRestoreBattleData(void);
 void VBlankCB_Battle(void);
 void SpriteCB_VsLetterDummy(struct Sprite *sprite);

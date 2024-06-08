@@ -25,6 +25,9 @@ static void VCountIntr(void);
 static void SerialIntr(void);
 static void IntrDummy(void);
 
+// Defined in the linker script so that the test build can override it.
+extern void gInitialMainCB2(void);
+
 const u8 gGameVersion = GAME_VERSION;
 
 const u8 gGameLanguage = GAME_LANGUAGE;
@@ -68,6 +71,7 @@ IntrFunc gIntrTable[INTR_COUNT];
 bool8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
 u8 gPcmDmaCounter;
+void *gAgbMainLoop_sp;
 
 // These variables are not defined in RS or Emerald, and are never read.
 // They were likely used to debug the audio engine and VCount interrupt.
@@ -159,7 +163,12 @@ void AgbMain()
 #endif
 
     gLinkTransferringData = FALSE;
+    gAgbMainLoop_sp = __builtin_frame_address(0);
+    AgbMainLoop();
+}
 
+void AgbMainLoop(void)
+{
     for (;;)
     {
         ReadKeys();
@@ -211,7 +220,7 @@ static void InitMainCallbacks(void)
     gMain.vblankCounter1 = 0;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
-    SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
+    SetMainCallback2(gInitialMainCB2);
     gSaveBlock2Ptr = &gSaveBlock2;
     gSaveBlock1Ptr = &gSaveBlock1;
     gSaveBlock2.encryptionKey = 0;

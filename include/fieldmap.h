@@ -22,6 +22,7 @@
 
 extern struct BackupMapLayout VMap;
 extern const struct MapLayout Route1_Layout;
+extern u16 ALIGNED(4) gBackupMapData[VIRTUAL_MAP_SIZE];
 
 u32 MapGridGetMetatileIdAt(s32, s32);
 u32 MapGridGetMetatileBehaviorAt(s16, s16);

@@ -431,7 +431,7 @@ void HandleAction_Run(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
 
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
     {
         u32 battler;
         gCurrentTurnActionNumber = gBattlersCount;
@@ -3665,50 +3665,53 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         break;
     case ABILITYEFFECT_SWITCH_IN_WEATHER:
         gBattleScripting.battler = battler;
-        switch (GetCurrentWeather())
+        if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
         {
-        case WEATHER_RAIN:
-        case WEATHER_RAIN_THUNDERSTORM:
-        case WEATHER_DOWNPOUR:
-            if (!(gBattleWeather & B_WEATHER_RAIN))
+            switch (GetCurrentWeather())
             {
-                gBattleWeather = (B_WEATHER_RAIN_TEMPORARY | B_WEATHER_RAIN_PERMANENT);
-                gBattleScripting.animArg1 = B_ANIM_RAIN_CONTINUES;
-                effect++;
-            }
-            break;
-        case WEATHER_SANDSTORM:
-            if (!(gBattleWeather & B_WEATHER_SANDSTORM))
-            {
-                gBattleWeather = B_WEATHER_SANDSTORM;
-                gBattleScripting.animArg1 = B_ANIM_SANDSTORM_CONTINUES;
-                effect++;
-            }
-            break;
-        case WEATHER_DROUGHT:
-            if (!(gBattleWeather & B_WEATHER_SUN))
-            {
-                gBattleWeather = (B_WEATHER_SUN_PERMANENT | B_WEATHER_SUN_TEMPORARY);
-                gBattleScripting.animArg1 = B_ANIM_SUN_CONTINUES;
-                effect++;
-            }
-            break;
-        case WEATHER_SNOW:
-            if (!(gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
-            {
-                if (B_OVERWORLD_SNOW >= GEN_9)
+            case WEATHER_RAIN:
+            case WEATHER_RAIN_THUNDERSTORM:
+            case WEATHER_DOWNPOUR:
+                if (!(gBattleWeather & B_WEATHER_RAIN))
                 {
-                    gBattleWeather = B_WEATHER_SNOW;
-                    gBattleScripting.animArg1 = B_ANIM_SNOW_CONTINUES;
+                    gBattleWeather = (B_WEATHER_RAIN_TEMPORARY | B_WEATHER_RAIN_PERMANENT);
+                    gBattleScripting.animArg1 = B_ANIM_RAIN_CONTINUES;
+                    effect++;
                 }
-                else
+                break;
+            case WEATHER_SANDSTORM:
+                if (!(gBattleWeather & B_WEATHER_SANDSTORM))
                 {
-                    gBattleWeather = B_WEATHER_HAIL;
-                    gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
+                    gBattleWeather = B_WEATHER_SANDSTORM;
+                    gBattleScripting.animArg1 = B_ANIM_SANDSTORM_CONTINUES;
+                    effect++;
                 }
-                effect++;
+                break;
+            case WEATHER_DROUGHT:
+                if (!(gBattleWeather & B_WEATHER_SUN))
+                {
+                    gBattleWeather = (B_WEATHER_SUN_PERMANENT | B_WEATHER_SUN_TEMPORARY);
+                    gBattleScripting.animArg1 = B_ANIM_SUN_CONTINUES;
+                    effect++;
+                }
+                break;
+            case WEATHER_SNOW:
+                if (!(gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
+                {
+                    if (B_OVERWORLD_SNOW >= GEN_9)
+                    {
+                        gBattleWeather = B_WEATHER_SNOW;
+                        gBattleScripting.animArg1 = B_ANIM_SNOW_CONTINUES;
+                    }
+                    else
+                    {
+                        gBattleWeather = B_WEATHER_HAIL;
+                        gBattleScripting.animArg1 = B_ANIM_HAIL_CONTINUES;
+                    }
+                    effect++;
+                }
+                break;
             }
-            break;
         }
         if (effect != 0)
         {
@@ -9733,7 +9736,7 @@ bool32 ShouldGetStatBadgeBoost(u16 badgeFlag, u32 battler)
 {
     if (B_BADGE_BOOST == GEN_3)
     {
-        if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_BATTLE_TOWER))
+        if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_BATTLE_TOWER))
             return FALSE;
         else if (GetBattlerSide(battler) != B_SIDE_PLAYER)
             return FALSE;
@@ -9845,13 +9848,19 @@ u8 IsMonDisobedient(void)
     s32 calc;
     u8 obedienceLevel = 0;
 
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+        return 0;
+    if (BattlerHasAi(gBattlerAttacker))
+        return 0;
     if ((gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_POKEDUDE)))
         return 0;
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
-        return 0;
+        return 0; // TODO: might not be reached? remove?
 
     if (IsBattlerModernFatefulEncounter(gBattlerAttacker)) // only false if illegal Mew or Deoxys
     {
+        if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+            return 0;
         if (!IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
             return 0;
         if (FlagGet(FLAG_BADGE08_GET))
@@ -10272,6 +10281,7 @@ u32 GetBattlerAffectionHearts(u32 battler)
     else if (gSpeciesInfo[species].isMegaEvolution
           || (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
                                 | BATTLE_TYPE_BATTLE_TOWER
+                                | BATTLE_TYPE_RECORDED_LINK
                                 | BATTLE_TYPE_LINK)))
         return AFFECTION_NO_HEARTS;
 
@@ -10341,6 +10351,7 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
              (BATTLE_TYPE_EREADER_TRAINER
               | BATTLE_TYPE_TRAINER_TOWER
               | BATTLE_TYPE_LINK
+              | BATTLE_TYPE_RECORDED_LINK
               | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
               )))
     {
@@ -10349,7 +10360,8 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
     else if (!(gBattleTypeFlags &
           (BATTLE_TYPE_EREADER_TRAINER
            | BATTLE_TYPE_BATTLE_TOWER
-           | BATTLE_TYPE_LINK))
+           | BATTLE_TYPE_LINK
+           | BATTLE_TYPE_RECORDED_LINK))
         && (gWishFutureKnock.knockedOffMons[stealerSide] & gBitTable[gBattlerPartyIndexes[battlerStealing]]))
     {
         return FALSE;

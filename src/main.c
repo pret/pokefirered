@@ -15,6 +15,7 @@
 #include "battle_controllers.h"
 #include "scanline_effect.h"
 #include "save_failed_screen.h"
+#include "test_runner.h"
 #include "quest_log.h"
 
 extern u32 intr_main[];
@@ -229,7 +230,11 @@ static void InitMainCallbacks(void)
 
 static void CallCallbacks(void)
 {
+#if TESTING // test framework not working with help system
+    if (!RunSaveFailedScreen())
+#else
     if (!RunSaveFailedScreen() && !RunHelpSystemCallback())
+#endif
     {
         if (gMain.callback1)
             gMain.callback1();
@@ -398,7 +403,10 @@ static void VBlankIntr(void)
 #endif
 
     TryReceiveLinkBattleData();
-    Random();
+
+    if (!gTestRunnerEnabled && (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_RECORDED))))
+        AdvanceRandom();
+    // Random(); // old
     UpdateWirelessStatusIndicatorSprite();
 
     INTR_CHECK |= INTR_FLAG_VBLANK;

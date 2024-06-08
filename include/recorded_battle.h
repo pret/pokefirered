@@ -78,5 +78,6 @@ void RecordedBattle_CheckMovesetChanges(u8 mode);
 u32 GetAiScriptsInRecordedBattle(void);
 void RecordedBattle_SetPlaybackFinished(void);
 bool8 RecordedBattle_CanStopPlayback(void);
+u8 GetBattlerLinkPlayerGender(u32 battler);
 
 #endif // GUARD_RECORDED_BATTLE_H

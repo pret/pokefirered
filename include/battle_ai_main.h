@@ -49,23 +49,27 @@
 #define SLOW_KILL      4 // AI is slower and faints target
 #define LAST_CHANCE    2 // AI faints to target. It should try and do damage with a priority move
 
+#include "test_runner.h"
 
 // Logs for debugging AI tests.
 #define SET_SCORE(battler, movesetIndex, val) \
     do \
     { \
+        TestRunner_Battle_AISetScore(__FILE__, __LINE__, battler, movesetIndex, val); \
         AI_THINKING_STRUCT->score[movesetIndex] = val; \
     } while (0) \
 
 #define ADJUST_SCORE(val) \
     do \
     { \
+        TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, sBattler_AI, AI_THINKING_STRUCT->movesetIndex, val); \
         score += val; \
     } while (0) \
 
 #define ADJUST_SCORE_PTR(val) \
     do \
     { \
+        TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, sBattler_AI, AI_THINKING_STRUCT->movesetIndex, val); \
         (*score) += val; \
     } while (0) \
 

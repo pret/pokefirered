@@ -2564,6 +2564,7 @@ bool32 CanKnockOffItem(u32 battler, u32 item)
     if (!(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
       | BATTLE_TYPE_BATTLE_TOWER
       | BATTLE_TYPE_LINK
+      | BATTLE_TYPE_RECORDED_LINK
       | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
       )) && GetBattlerSide(battler) == B_SIDE_PLAYER)
         return FALSE;

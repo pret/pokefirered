@@ -535,6 +535,9 @@ static void OpponentHandleChoosePokemon(u32 battler)
         *(gBattleStruct->AI_monToSwitchIntoId + battler) = PARTY_SIZE;
         *(gBattleStruct->monToSwitchIntoId + battler) = chosenMonId;
     }
+    #if TESTING
+    TestRunner_Battle_CheckSwitch(battler, chosenMonId);
+    #endif // TESTING
     BtlController_EmitChosenMonReturnValue(battler, BUFFER_B, chosenMonId, NULL);
     OpponentBufferExecCompleted(battler);
 }

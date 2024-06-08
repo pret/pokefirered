@@ -12,6 +12,7 @@
 #include "m4a.h"
 #include "sound.h"
 #include "task.h"
+#include "test_runner.h"
 #include "constants/battle_anim.h"
 
 /*
@@ -200,10 +201,27 @@ void DoMoveAnim(u16 move)
     LaunchBattleAnimation(ANIM_TYPE_MOVE, move);
 }
 
+static void Nop(void)
+{
+}
+
 void LaunchBattleAnimation(u32 animType, u16 animId)
 {
     s32 i;
     bool8 isMoveAnim = (animId == ANIM_TYPE_MOVE);
+
+    if (gTestRunnerEnabled)
+    {
+        TestRunner_Battle_RecordAnimation(animType, animId);
+        // Play Transform and Ally Switch even in Headless as these move animations also change mon data.
+        if (gTestRunnerHeadless
+            && !(animType == ANIM_TYPE_MOVE && (animId == MOVE_TRANSFORM || animId == MOVE_ALLY_SWITCH)))
+        {
+            gAnimScriptCallback = Nop;
+            gAnimScriptActive = FALSE;
+            return;
+        }
+    }
 
     InitPrioritiesForVisibleBattlers();
     UpdateOamPriorityInAllHealthboxes(0);

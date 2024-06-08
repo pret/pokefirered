@@ -317,6 +317,9 @@ void HandleInputChooseMove(u32 battler);
 u32 LinkPlayerGetTrainerPicId(u32 multiplayerId);
 void PlayerHandleExpUpdate(u32 battler);
 
+// recorded player controller
+void SetControllerToRecordedPlayer(u32 battler);
+
 // opponent controller
 void SetControllerToOpponent(u32 battler);
 void OpponentBufferExecCompleted(u32 battler);
@@ -327,6 +330,9 @@ void SetControllerToSafari(u32 battler);
 // pokedude controller
 void SetControllerToPokedude(u32 battler);
 void InitPokedudePartyAndOpponent(void);
+
+// recorded opponent controller
+void SetControllerToRecordedOpponent(u32 battler);
 
 // oak and old man controller
 void SetControllerToOakOrOldMan(u32 battler);

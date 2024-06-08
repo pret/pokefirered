@@ -466,3 +466,19 @@ bool8 RecordedBattle_CanStopPlayback(void)
 {
     return (sIsPlaybackFinished == FALSE);
 }
+
+u8 GetBattlerLinkPlayerGender(u32 battler)
+{
+    s32 i;
+
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
+    {
+        if (gLinkPlayers[i].id == battler)
+            break;
+    }
+
+    if (i != MAX_LINK_PLAYERS)
+        return gLinkPlayers[i].gender;
+
+    return 0;
+}

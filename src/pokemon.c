@@ -28,6 +28,7 @@
 #include "pokemon_icon.h"
 #include "field_specials.h"
 #include "berry.h"
+#include "recorded_battle.h"
 #include "constants/items.h"
 #include "constants/item_effects.h"
 #include "constants/cries.h"
@@ -5299,7 +5300,7 @@ static u16 GetBattleBGM(void)
         return MUS_VS_WILD;
     if (gBattleTypeFlags & BATTLE_TYPE_REGI)
         return MUS_RS_VS_TRAINER;
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return MUS_RS_VS_TRAINER;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
@@ -5575,18 +5576,30 @@ u8 GetPlayerPartyHighestLevel(void)
 
 u16 GetUnionRoomTrainerPic(void)
 {
-    u8 linkId = GetMultiplayerId() ^ 1;
+    u8 linkId;
+    u32 arrId;
 
-    u32 arrId = gLinkPlayers[linkId].trainerId % NUM_UNION_ROOM_CLASSES;
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
+        linkId = gRecordedBattleMultiplayerId ^ 1;
+    else
+        linkId = GetMultiplayerId() ^ 1;
+
+    arrId = gLinkPlayers[linkId].trainerId % NUM_UNION_ROOM_CLASSES;
     arrId |= gLinkPlayers[linkId].gender * NUM_UNION_ROOM_CLASSES;
     return FacilityClassToPicIndex(gUnionRoomFacilityClasses[arrId]);
 }
 
 u16 GetUnionRoomTrainerClass(void)
 {
-    u8 linkId = GetMultiplayerId() ^ 1;
+    u8 linkId;
+    u32 arrId;
 
-    u32 arrId = gLinkPlayers[linkId].trainerId % NUM_UNION_ROOM_CLASSES;
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
+        linkId = gRecordedBattleMultiplayerId ^ 1;
+    else
+        linkId = GetMultiplayerId() ^ 1;
+
+    arrId = gLinkPlayers[linkId].trainerId % NUM_UNION_ROOM_CLASSES;
     arrId |= gLinkPlayers[linkId].gender * NUM_UNION_ROOM_CLASSES;
     return gFacilityClassToTrainerClass[gUnionRoomFacilityClasses[arrId]];
 }

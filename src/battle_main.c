@@ -90,6 +90,7 @@ static void ReturnFromBattleToOverworld(void);
 static void TryEvolvePokemon(void);
 static void WaitForEvoSceneToFinish(void);
 static void UpdateBattlerPartyOrdersOnSwitch(u32 battler);
+static bool8 AllAtActionConfirmed(void);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -3615,10 +3616,12 @@ static void HandleTurnActionSelectionState(void)
         switch (gBattleCommunication[battler])
         {
         case STATE_TURN_START_RECORD: // Recorded battle related action on start of every turn.
+            RecordedBattle_CopyBattlerMoves(battler);
             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
 
             // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
-            if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart()) && BattlerHasAi(battler))
+            if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
+                    && (BattlerHasAi(battler)))
             {
                 AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, FALSE);
                 gBattleStruct->aiMoveOrAction[battler] = ComputeBattleAiScores(battler);
@@ -3901,7 +3904,6 @@ static void HandleTurnActionSelectionState(void)
                                 gBattleStruct->dynamax.baseMove[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
                                 gBattleStruct->dynamax.usingMaxMove[battler] = TRUE;
                             }
-
                             gBattleCommunication[battler]++;
 
                             if (gTestRunnerEnabled)
@@ -3964,12 +3966,21 @@ static void HandleTurnActionSelectionState(void)
         case STATE_WAIT_ACTION_CONFIRMED_STANDBY:
             if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF0000000) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 0xC))))
             {
-                if (((gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_DOUBLE)) != BATTLE_TYPE_DOUBLE)
-                 || (position & BIT_FLANK) != B_FLANK_LEFT
-                 || (*(&gBattleStruct->absentBattlerFlags) & gBitTable[GetBattlerAtPosition(position ^ BIT_FLANK)]))
-                    BtlController_EmitLinkStandbyMsg(battler, BUFFER_A, LINK_STANDBY_MSG_STOP_BOUNCE);
+                if (AllAtActionConfirmed())
+                    i = TRUE;
                 else
-                    BtlController_EmitLinkStandbyMsg(battler, BUFFER_A, LINK_STANDBY_STOP_BOUNCE_ONLY);
+                    i = FALSE;
+
+                if (((gBattleTypeFlags & BATTLE_TYPE_MULTI) || !(gBattleTypeFlags &  BATTLE_TYPE_DOUBLE))
+                    || (position & BIT_FLANK) != B_FLANK_LEFT
+                    || (*(&gBattleStruct->absentBattlerFlags) & gBitTable[GetBattlerAtPosition(BATTLE_PARTNER(position))]))
+                {
+                    BtlController_EmitLinkStandbyMsg(battler, BUFFER_A, LINK_STANDBY_MSG_STOP_BOUNCE, i);
+                }
+                else
+                {
+                    BtlController_EmitLinkStandbyMsg(battler, BUFFER_A, LINK_STANDBY_STOP_BOUNCE_ONLY, i);
+                }
                 MarkBattlerForControllerExec(battler);
                 gBattleCommunication[battler]++;
             }
@@ -4002,6 +4013,8 @@ static void HandleTurnActionSelectionState(void)
     // Check if everyone chose actions.
     if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattlersCount)
     {
+        RecordedBattle_CheckMovesetChanges(B_RECORD_MODE_RECORDING);
+
         if (WILD_DOUBLE_BATTLE
             && gBattleStruct->throwingPokeBall
             && gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)] != B_ACTION_NOTHING_FAINTED)
@@ -4027,6 +4040,22 @@ static void HandleTurnActionSelectionState(void)
             }
         }
     }
+}
+
+static bool8 AllAtActionConfirmed(void)
+{
+    s32 i, count;
+
+    for (count = 0, i = 0; i < gBattlersCount; i++)
+    {
+        if (gBattleCommunication[i] == STATE_WAIT_ACTION_CONFIRMED)
+            count++;
+    }
+
+    if (count + 1 == gBattlersCount)
+        return TRUE;
+    else
+        return FALSE;
 }
 
 static void UpdateBattlerPartyOrdersOnSwitch(u32 battler)

@@ -157,7 +157,7 @@ static u32 GetAiFlags(u16 trainerId)
             flags = AI_FLAG_SAFARI;
         else if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
             flags = AI_FLAG_ROAMING;
-        // else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) // pokeemerald specific
+        // else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         //     flags = AI_FLAG_FIRST_BATTLE;
         else if (gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER_TOWER))
             flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;

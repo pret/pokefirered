@@ -1999,6 +1999,7 @@ static void PlayerHandleBattleAnimation(u32 battler)
 
 static void PlayerHandleLinkStandbyMsg(u32 battler)
 {
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
     switch (gBattleResources->bufferA[battler][1])
     {
     case LINK_STANDBY_MSG_STOP_BOUNCE:

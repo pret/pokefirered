@@ -1637,6 +1637,10 @@
 	.macro trygulpmissile
 	callnative BS_TryGulpMissile
 	.endm
+	
+	.macro tryactivategulpmissile
+	callnative BS_TryActivateGulpMissile
+	.endm
 
 	.macro tryquash failInstr:req
 	callnative BS_TryQuash

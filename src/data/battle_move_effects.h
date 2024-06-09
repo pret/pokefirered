@@ -1495,7 +1495,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_MIND_BLOWN] =
     {
-        .battleScript = BattleScript_EffectMindBlown,
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_PURIFY] =

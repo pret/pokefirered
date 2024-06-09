@@ -7976,7 +7976,7 @@ static void Cmd_drawlvlupbox(void)
         }
         break;
     case 6:
-        if (gMain.newKeys != 0)
+        if (gMain.newKeys != 0 || RECORDED_WILD_BATTLE)
         {
             // Draw page 2 of level up box
             PlaySE(SE_SELECT);
@@ -7986,7 +7986,7 @@ static void Cmd_drawlvlupbox(void)
         }
         break;
     case 8:
-        if (gMain.newKeys != 0)
+        if (gMain.newKeys != 0 || RECORDED_WILD_BATTLE)
         {
             // Close level up box
             PlaySE(SE_SELECT);
@@ -15150,7 +15150,6 @@ static void Cmd_handleballthrow(void)
                 for (shakes = 0; shakes < maxShakes && Random() < odds; shakes++);
             }
 
-            DebugPrintfLevel(MGBA_LOG_ERROR, "BtlController_EmitBallThrowAnim2");
             BtlController_EmitBallThrowAnim(gBattlerAttacker, BUFFER_A, shakes);
             MarkBattlerForControllerExec(gBattlerAttacker);
 

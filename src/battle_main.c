@@ -868,7 +868,7 @@ static void CB2_InitBattleInternal(void)
         SetMainCallback2(CB2_HandleStartMultiBattle);
     else
         SetMainCallback2(CB2_HandleStartBattle);
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED)))
     {
         CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)

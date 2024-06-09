@@ -40,6 +40,8 @@
 #include "constants/maps.h"
 #include "constants/sound.h"
 
+typedef void (*NativeFunc)(struct ScriptContext *ctx);
+
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
 extern const u8 *const gStdScripts[];
@@ -120,8 +122,9 @@ bool8 ScrCmd_specialvar(struct ScriptContext * ctx)
 
 bool8 ScrCmd_callnative(struct ScriptContext * ctx)
 {
-    void (*func )(void) = ((void (*)(void))ScriptReadWord(ctx));
-    func();
+    NativeFunc func = (NativeFunc)ScriptReadWord(ctx);
+
+    func(ctx);
     return FALSE;
 }
 
@@ -1728,48 +1731,6 @@ bool8 ScrCmd_bufferboxname(struct ScriptContext * ctx)
     StringCopy(sScriptStringVars[stringVarIndex], GetBoxNamePtr(boxId));
     return FALSE;
 }
-
-#define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
-
-void ScrCmd_givemon(struct ScriptContext *ctx)
-{
-    u16 species       = VarGet(ScriptReadHalfword(ctx));
-    u8 level          = VarGet(ScriptReadHalfword(ctx));
-
-    u32 flags         = ScriptReadWord(ctx);
-    u16 item          = PARSE_FLAG(0, ITEM_NONE);
-    u8 ball           = PARSE_FLAG(1, ITEM_POKE_BALL);
-    u8 nature         = PARSE_FLAG(2, NUM_NATURES);
-    u8 abilityNum     = PARSE_FLAG(3, NUM_ABILITY_PERSONALITY);
-    u8 gender         = PARSE_FLAG(4, MON_GENDERLESS); // TODO: Find a better way to assign a random gender.
-    u8 hpEv           = PARSE_FLAG(5, 0);
-    u8 atkEv          = PARSE_FLAG(6, 0);
-    u8 defEv          = PARSE_FLAG(7, 0);
-    u8 speedEv        = PARSE_FLAG(8, 0);
-    u8 spAtkEv        = PARSE_FLAG(9, 0);
-    u8 spDefEv        = PARSE_FLAG(10, 0);
-    u8 hpIv           = PARSE_FLAG(11, Random() % MAX_PER_STAT_IVS + 1);
-    u8 atkIv          = PARSE_FLAG(12, Random() % MAX_PER_STAT_IVS + 1);
-    u8 defIv          = PARSE_FLAG(13, Random() % MAX_PER_STAT_IVS + 1);
-    u8 speedIv        = PARSE_FLAG(14, Random() % MAX_PER_STAT_IVS + 1);
-    u8 spAtkIv        = PARSE_FLAG(15, Random() % MAX_PER_STAT_IVS + 1);
-    u8 spDefIv        = PARSE_FLAG(16, Random() % MAX_PER_STAT_IVS + 1);
-    u16 move1         = PARSE_FLAG(17, MOVE_NONE);
-    u16 move2         = PARSE_FLAG(18, MOVE_NONE);
-    u16 move3         = PARSE_FLAG(19, MOVE_NONE);
-    u16 move4         = PARSE_FLAG(20, MOVE_NONE);
-    bool8 isShiny     = PARSE_FLAG(21, FALSE);
-    bool8 ggMaxFactor = PARSE_FLAG(22, FALSE);
-    u8 teraType       = PARSE_FLAG(23, NUMBER_OF_MON_TYPES);
-
-    u8 evs[NUM_STATS]        = {hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv};
-    u8 ivs[NUM_STATS]        = {hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv};
-    u16 moves[MAX_MON_MOVES] = {move1, move2, move3, move4};
-
-    gSpecialVar_Result = ScriptGiveMonParameterized(species, level, item, ball, nature, abilityNum, gender, evs, ivs, moves, isShiny, ggMaxFactor, teraType);
-}
-
-#undef PARSE_FLAG
 
 bool8 ScrCmd_giveegg(struct ScriptContext * ctx)
 {

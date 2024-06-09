@@ -39,15 +39,45 @@ endif
 GAME_VERSION  ?= FIRERED
 GAME_LANGUAGE ?= ENGLISH
 GAME_REVISION ?= 0
-
-TITLE        := POKEMON FIRE
-GAME_CODE    := BPRE
 MAKER_CODE   := 01
-REVISION     := 0
 MODERN       ?= 1
 TEST         ?= 0
 ANALYZE      ?= 0
 UNUSED_ERROR ?= 0
+
+# game version
+ifeq ($(GAME_VERSION),FIRERED)
+TITLE       := POKEMON FIRE
+GAME_CODE   := BPRE
+BUILD_NAME  := firered
+else
+ifeq ($(GAME_VERSION),LEAFGREEN)
+TITLE       := POKEMON LEAF
+GAME_CODE   := BPGE
+BUILD_NAME  := leafgreen
+else
+$(error unknown version $(GAME_VERSION))
+endif
+endif
+
+# Revision
+ifeq ($(GAME_REVISION),0)
+BUILD_NAME  := $(BUILD_NAME)
+else
+ifeq ($(GAME_REVISION),1)
+BUILD_NAME  := $(BUILD_NAME)_rev1
+else
+$(error unknown revision $(GAME_REVISION))
+endif
+endif
+
+# Language
+ifeq ($(GAME_LANGUAGE),ENGLISH)
+BUILD_NAME  := $(BUILD_NAME)
+GAME_CODE   := $(GAME_CODE)E
+else
+$(error unknown language $(GAME_LANGUAGE))
+endif
 
 ifeq (agbcc,$(MAKECMDGOALS))
   MODERN := 0
@@ -74,15 +104,15 @@ else
   CPP := $(PREFIX)cpp
 endif
 
-ROM_NAME := pokefirered_agbcc.gba
+ROM_NAME := poke$(BUILD_NAME)_agbcc.gba
 ELF_NAME := $(ROM_NAME:.gba=.elf)
 MAP_NAME := $(ROM_NAME:.gba=.map)
-OBJ_DIR_NAME := build/firered
+OBJ_DIR_NAME := build/$(BUILD_NAME)_agbcc
 
-MODERN_ROM_NAME := pokefirered.gba
+MODERN_ROM_NAME := poke$(BUILD_NAME).gba
 MODERN_ELF_NAME := $(MODERN_ROM_NAME:.gba=.elf)
 MODERN_MAP_NAME := $(MODERN_ROM_NAME:.gba=.map)
-MODERN_OBJ_DIR_NAME := build/modern
+MODERN_OBJ_DIR_NAME := build/$(BUILD_NAME)
 
 SHELL := /bin/bash -o pipefail
 
@@ -90,8 +120,8 @@ ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
 SYM = $(ROM:.gba=.sym)
 
-TEST_OBJ_DIR_NAME_MODERN := build/modern-test
-TEST_OBJ_DIR_NAME_AGBCC := build/test
+TEST_OBJ_DIR_NAME_MODERN := $(MODERN_OBJ_DIR_NAME)-test
+TEST_OBJ_DIR_NAME_AGBCC := $(OBJ_DIR_NAME)-test
 
 ifeq ($(MODERN),0)
 TEST_OBJ_DIR_NAME := $(TEST_OBJ_DIR_NAME_AGBCC)
@@ -495,7 +525,7 @@ LDFLAGS = -Map ../../$(MAP)
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) libagbsyscall
 	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ <objects> <lib>"
 	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
-	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
@@ -513,7 +543,7 @@ $(OBJ_DIR)/ld_script_test.ld: $(LD_SCRIPT_TEST) $(LD_SCRIPT_DEPS)
 $(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tools check-tools
 	@echo "cd $(OBJ_DIR) && $(LD) -T ld_script_test.ld -o ../../$@ <objects> <test-objects> <lib>"
 	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o ../../$@ $(OBJS_REL) $(TEST_OBJS_REL) $(LIB)
-	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) -d0 --silent
+	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) -d0 --silent
 	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS)\0"
 
 ifeq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)

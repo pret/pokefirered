@@ -15150,6 +15150,7 @@ static void Cmd_handleballthrow(void)
                 for (shakes = 0; shakes < maxShakes && Random() < odds; shakes++);
             }
 
+            DebugPrintfLevel(MGBA_LOG_ERROR, "BtlController_EmitBallThrowAnim2");
             BtlController_EmitBallThrowAnim(gBattlerAttacker, BUFFER_A, shakes);
             MarkBattlerForControllerExec(gBattlerAttacker);
 

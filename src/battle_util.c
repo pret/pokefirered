@@ -679,6 +679,9 @@ u8 GetBattlerForBattleScript(u8 caseId)
     case BS_ATTACKER:
         ret = gBattlerAttacker;
         break;
+    case BS_ATTACKER_PARTNER:
+        ret = BATTLE_PARTNER(gBattlerAttacker);
+        break;
     case BS_EFFECT_BATTLER:
         ret = gEffectBattler;
         break;
@@ -8842,7 +8845,6 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         if (gBattleStruct->lastMoveFailed & gBitTable[battlerAtk])
             modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
         break;
-    case EFFECT_BULLDOZE:
     case EFFECT_MAGNITUDE:
     case EFFECT_EARTHQUAKE:
         if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && !(gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE))
@@ -9119,7 +9121,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
     case HOLD_EFFECT_SOUL_DEW:
         if ((gBattleMons[battlerAtk].species == SPECIES_LATIAS || gBattleMons[battlerAtk].species == SPECIES_LATIOS)
             && ((B_SOUL_DEW_BOOST >= GEN_7 && (moveType == TYPE_PSYCHIC || moveType == TYPE_DRAGON))
-             || (B_SOUL_DEW_BOOST < GEN_7 && !(gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER) && IS_MOVE_SPECIAL(move))))
+             || (B_SOUL_DEW_BOOST < GEN_7 && IS_MOVE_SPECIAL(move))))
             modifier = uq4_12_multiply(modifier, holdEffectModifier);
         break;
     case HOLD_EFFECT_BUG_POWER:

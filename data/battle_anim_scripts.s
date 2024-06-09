@@ -249,7 +249,6 @@ Move_CHIP_AWAY::
 Move_CLEAR_SMOG::
 Move_STORED_POWER::
 Move_QUICK_GUARD::
-Move_ALLY_SWITCH::
 Move_SCALD::
 Move_SHELL_SMASH::
 Move_HEAL_PULSE::
@@ -3015,7 +3014,7 @@ Move_MEDITATE::
 	delay 16
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 Move_AGILITY::
@@ -3082,14 +3081,13 @@ Move_TELEPORT::
 	createvisualtask AnimTask_Teleport, 2
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	delay 15
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	waitforvisualfinish
 	end
 
-Move_DOUBLE_TEAM::
-	monbg ANIM_ATK_PARTNER
+DoubleTeamAnimRet:
 	setalpha 12, 8
-	createvisualtask AnimTask_DoubleTeam, 2
+	monbg ANIM_ATK_PARTNER
 	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
 	delay 32
 	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
@@ -3111,6 +3109,11 @@ Move_DOUBLE_TEAM::
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
 	delay 1
+	return
+
+Move_DOUBLE_TEAM::
+	createvisualtask AnimTask_DoubleTeam, 2
+	call DoubleTeamAnimRet
 	end
 
 Move_MINIMIZE::
@@ -3178,7 +3181,7 @@ Move_AMNESIA::
 	delay 54
 	loopsewithpan SE_M_METRONOME, SOUND_PAN_ATTACKER, 16, 3
 	waitforvisualfinish
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 Move_KINESIS::
@@ -3197,7 +3200,7 @@ Move_KINESIS::
 	delay 70
 	playsewithpan SE_M_SWAGGER2, SOUND_PAN_ATTACKER
 	waitforvisualfinish
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 Move_GLARE::
@@ -4160,7 +4163,7 @@ Move_SKILL_SWAP::
 	createvisualtask AnimTask_SkillSwap, 3, ANIM_ATTACKER
 	createvisualtask AnimTask_BlendMonInAndOut, 5, ANIM_ATTACKER, RGB_WHITE, 12, 3, 1
 	waitforvisualfinish
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 Move_IMPRISON::
@@ -4177,7 +4180,7 @@ Move_IMPRISON::
 	createvisualtask AnimTask_HorizontalShake, 5, MAX_BATTLERS_COUNT, 1, 10
 	playsewithpan SE_M_HYPER_BEAM, SOUND_PAN_ATTACKER
 	clearmonbg ANIM_DEF_PARTNER
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 Move_GRUDGE::
@@ -4272,7 +4275,7 @@ Move_LUSTER_PURGE::
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	blendoff
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 Move_MIST_BALL::
@@ -4668,7 +4671,7 @@ Move_EXTRASENSORY::
 	waitforvisualfinish
 	blendoff
 	clearmonbg ANIM_DEF_PARTNER
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 Move_AERIAL_ACE::
@@ -5052,7 +5055,7 @@ Move_CONFUSION::
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	delay 1
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 Move_PSYCHIC::
@@ -5069,7 +5072,7 @@ Move_PSYCHIC::
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	delay 1
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 Move_FUTURE_SIGHT::
@@ -5078,7 +5081,7 @@ Move_FUTURE_SIGHT::
 FutureSightContinue:
 	waitforvisualfinish
 	delay 1
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 FutureSight:
@@ -7399,7 +7402,7 @@ Move_DREAM_EATER::
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	delay 1
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 DreamEaterAbsorb:
@@ -7519,7 +7522,7 @@ Move_PSYBEAM::
 	call PsybeamRings
 	waitforvisualfinish
 	delay 1
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 PsybeamRings:
@@ -7536,7 +7539,7 @@ Move_HYPNOSIS::
 	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_TARGET, 2, 2, 0, 12, RGB(31, 18, 31)
 	waitforvisualfinish
 	delay 1
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 HypnosisRings:
@@ -7561,7 +7564,7 @@ Move_PSYWAVE::
 	call PsywaveRings
 	waitforvisualfinish
 	delay 1
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 PsywaveRings:
@@ -9971,7 +9974,7 @@ Move_PSYCHO_BOOST::
 	waitforvisualfinish
 	clearmonbg ANIM_ATK_PARTNER
 	blendoff
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 Move_KNOCK_OFF::
@@ -10632,7 +10635,7 @@ SetPsychicBackground:
 	waitbgfadein
 	return
 
-UnsetPsychicBackground:
+UnsetPsychicBg:
 	restorebg
 	waitbgfadeout
 	setarg 7, 0xFFFF
@@ -11059,7 +11062,7 @@ General_FutureSightHit:
 	blendoff
 	waitforvisualfinish
 	delay 1
-	call UnsetPsychicBackground
+	call UnsetPsychicBg
 	end
 
 General_DoomDesireHit:
@@ -11722,4 +11725,11 @@ General_DynamaxGrowth:: @ PORTED FROM CFRU
 	waitforvisualfinish
 	end
 
+Move_ALLY_SWITCH::
+	call SetPsychicBackground
+	createvisualtask AnimTask_AllySwitchAttacker, 2
+	createvisualtask AnimTask_AllySwitchPartner, 2
+	call DoubleTeamAnimRet
+	call UnsetPsychicBg
+	end
 

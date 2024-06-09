@@ -192,7 +192,7 @@
     #define EFFECT_ROUND 186 
     #define EFFECT_BRINE 187 
     #define EFFECT_RETALIATE 188 
-    #define EFFECT_BULLDOZE 189 
+    // #define EFFECT_BULLDOZE 189  // TODO: remove
     #define EFFECT_FOUL_PLAY 190 
     #define EFFECT_PSYSHOCK 191 
     #define EFFECT_ROOST 192 

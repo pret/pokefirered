@@ -4393,6 +4393,18 @@ static void Cmd_getexp(void)
 
                     ApplyExperienceMultipliers(&gBattleMoveDamage, *expMonId, gBattlerFainted);
 
+                    // if (B_EXP_CAP_TYPE == EXP_CAP_HARD && gBattleMoveDamage != 0)
+                    // {
+                    //     u32 growthRate = gSpeciesInfo[GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES)].growthRate;
+                    //     u32 currentExp = GetMonData(&gPlayerParty[*expMonId], MON_DATA_EXP);
+                    //     u32 levelCap = GetCurrentLevelCap();
+
+                    //     if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) >= levelCap)
+                    //         gBattleMoveDamage = 0;
+                    //     else if (gExperienceTables[growthRate][levelCap] < currentExp + gBattleMoveDamage)
+                    //         gBattleMoveDamage = gExperienceTables[growthRate][levelCap] - currentExp;
+                    // }
+
                     if (IsTradedMon(&gPlayerParty[*expMonId]))
                     {
                         // check if the Pokémon doesn't belong to the player
@@ -4449,7 +4461,7 @@ static void Cmd_getexp(void)
     case 3: // Set stats and give exp
         if (gBattleControllerExecFlags == 0)
         {
-            gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0; 
+            gBattleResources->bufferB[gBattleStruct->expGetterBattlerId][0] = 0;
             if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_HP) && GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) != MAX_LEVEL)
             {
                 gBattleResources->beforeLvlUp->stats[STAT_HP]    = GetMonData(&gPlayerParty[*expMonId], MON_DATA_MAX_HP);

@@ -12,7 +12,6 @@
 static void CB2_ReshowBattleScreenAfterMenu(void);
 static void ReshowBattleScreen_TurnOnDisplay(void);
 static bool8 LoadBattlerSpriteGfx(u8 battlerId);
-static void CreateBattlerSprite(u8 battlerId);
 static void CreateHealthboxSprite(u8 battlerId);
 
 void ReshowBattleScreenDummy(void)
@@ -214,7 +213,7 @@ static bool8 LoadBattlerSpriteGfx(u8 battler)
     return TRUE;
 }
 
-static void CreateBattlerSprite(u8 battler)
+void CreateBattlerSprite(u8 battler)
 {
     if (battler < gBattlersCount)
     {

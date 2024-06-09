@@ -1,12 +1,15 @@
 #include "global.h"
+#include "malloc.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "gpu_regs.h"
 #include "palette.h"
 #include "random.h"
+#include "reshow_battle_screen.h"
 #include "sound.h"
 #include "trig.h"
 #include "util.h"
+#include "constants/abilities.h"
 #include "constants/songs.h"
 
 struct {
@@ -5227,56 +5230,224 @@ static void AnimHornHit_Step(struct Sprite* sprite)
         DestroyAnimSprite(sprite);
 }
 
-void AnimTask_DoubleTeam(u8 taskId)
-{
-    u16 i;
-    int obj;
-    u16 r3;
-    u16 r4;
-    struct Task* task = &gTasks[taskId];
-    
-    task->data[0] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-    task->data[1] = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
-    r3 = OBJ_PLTT_ID(task->data[1]);
-    r4 = OBJ_PLTT_ID2(gSprites[task->data[0]].oam.paletteNum);
-    for (i = 1; i < 16; i++)
-        gPlttBufferUnfaded[r3 + i] = gPlttBufferUnfaded[r4 + i];
+// Double Team and Ally Switch.
+#define tBattlerSpriteId    data[0]
+#define tSpoonPal           data[1]
+#define tBlendSpritesCount  data[3]
+#define tBattlerId          data[4]
+#define tIsAllySwitch       data[5]
 
-    BlendPalette(r3, 16, 11, RGB_BLACK);
-    task->data[3] = 0;
-    i = 0;
-    while (i < 2 && (obj = CloneBattlerSpriteWithBlend(0)) >= 0)
+#define sCounter            data[0]
+#define sSinIndex           data[1]
+#define sTaskId             data[2]
+#define sCounter2           data[3]
+#define sSinAmplitude       data[4]
+#define sSinIndexMod        data[5]
+#define sBattlerFlank       data[6]
+
+void PrepareDoubleTeamAnim(u32 taskId, u32 animBattler, bool32 forAllySwitch)
+{
+    s32 i, spriteId;
+    u16 palOffsetBattler, palOffsetSpoon;
+    struct Task *task = &gTasks[taskId];
+
+    task->tBattlerSpriteId = GetAnimBattlerSpriteId(animBattler);
+    task->tSpoonPal = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
+    task->tBattlerId = GetAnimBattlerId(animBattler);
+    task->tIsAllySwitch = forAllySwitch;
+    palOffsetSpoon = OBJ_PLTT_ID(task->tSpoonPal);
+    palOffsetBattler = OBJ_PLTT_ID2(gSprites[task->tBattlerSpriteId].oam.paletteNum);
+    for (i = 1; i < 16; i++)
+        gPlttBufferUnfaded[palOffsetSpoon + i] = gPlttBufferUnfaded[palOffsetBattler + i];
+
+    BlendPalette(palOffsetSpoon, 16, 11, RGB_BLACK);
+    task->tBlendSpritesCount = 0;
+    for (i = 0; i < ((forAllySwitch == TRUE) ? 1 : 2); i++)
     {
-        gSprites[obj].oam.paletteNum = task->data[1];
-        gSprites[obj].data[0] = 0;
-        gSprites[obj].data[1] = i << 7;
-        gSprites[obj].data[2] = taskId;
-        gSprites[obj].callback = AnimDoubleTeam;
-        task->data[3]++;
-        i++;
+        spriteId = CloneBattlerSpriteWithBlend(animBattler);
+        if (spriteId < 0)
+            break;
+        gSprites[spriteId].oam.paletteNum = task->tSpoonPal;
+        gSprites[spriteId].sCounter = 0;
+        gSprites[spriteId].sSinIndex = i << 7;
+        gSprites[spriteId].sTaskId = taskId;
+        // Which direction
+        if (gBattleAnimAttacker & BIT_FLANK)
+            gSprites[spriteId].sBattlerFlank = (animBattler != ANIM_ATTACKER);
+        else
+            gSprites[spriteId].sBattlerFlank = (animBattler == ANIM_ATTACKER);
+        gSprites[spriteId].callback = AnimDoubleTeam;
+        task->tBlendSpritesCount++;
     }
 
     task->func = AnimTask_DoubleTeam_Step;
-    if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
+    if (GetBattlerSpriteBGPriorityRank(task->tBattlerId) == 1)
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
     else
         ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
 }
 
+void AnimTask_DoubleTeam(u8 taskId)
+{
+    PrepareDoubleTeamAnim(taskId, ANIM_ATTACKER, FALSE);
+    // TODO: remove old if not needed anymore
+    // u16 i;
+    // int obj;
+    // u16 r3;
+    // u16 r4;
+    // struct Task* task = &gTasks[taskId];
+    
+    // task->data[0] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
+    // task->data[1] = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
+    // r3 = OBJ_PLTT_ID(task->data[1]);
+    // r4 = OBJ_PLTT_ID2(gSprites[task->data[0]].oam.paletteNum);
+    // for (i = 1; i < 16; i++)
+    //     gPlttBufferUnfaded[r3 + i] = gPlttBufferUnfaded[r4 + i];
+
+    // BlendPalette(r3, 16, 11, RGB_BLACK);
+    // task->data[3] = 0;
+    // i = 0;
+    // while (i < 2 && (obj = CloneBattlerSpriteWithBlend(0)) >= 0)
+    // {
+    //     gSprites[obj].oam.paletteNum = task->data[1];
+    //     gSprites[obj].data[0] = 0;
+    //     gSprites[obj].data[1] = i << 7;
+    //     gSprites[obj].data[2] = taskId;
+    //     gSprites[obj].callback = AnimDoubleTeam;
+    //     task->data[3]++;
+    //     i++;
+    // }
+
+    // task->func = AnimTask_DoubleTeam_Step;
+    // if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
+    //     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
+    // else
+    //     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
+}
+
+static inline void SwapStructData(void *s1, void *s2, void *data, u32 size)
+{
+    memcpy(data, s1, size);
+    memcpy(s1, s2, size);
+    memcpy(s2, data, size);
+}
+
+static void ReloadBattlerSprites(u32 battler, struct Pokemon *party)
+{
+    BattleLoadMonSpriteGfx(&party[gBattlerPartyIndexes[battler]], battler);
+    CreateBattlerSprite(battler);
+    UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &party[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
+    // If battler is mega evolved / primal reversed, hide the sprite until the move animation finishes.
+    // TODO: mega indicator
+    // MegaIndicator_SetVisibilities(gHealthboxSpriteIds[battler], TRUE);
+}
+
+static void AnimTask_AllySwitchDataSwap(u8 taskId)
+{
+    s32 i, j;
+    struct Pokemon *party;
+    u32 temp;
+    u32 battlerAtk = gBattlerAttacker;
+    u32 battlerPartner = BATTLE_PARTNER(battlerAtk);
+
+    void *data = Alloc(0x200);
+    if (data == NULL)
+    {
+        SoftReset(1);
+    }
+
+    SwapStructData(&gBattleMons[battlerAtk], &gBattleMons[battlerPartner], data, sizeof(struct BattlePokemon));
+    SwapStructData(&gDisableStructs[battlerAtk], &gDisableStructs[battlerPartner], data, sizeof(struct DisableStruct));
+    SwapStructData(&gSpecialStatuses[battlerAtk], &gSpecialStatuses[battlerPartner], data, sizeof(struct SpecialStatus));
+    SwapStructData(&gProtectStructs[battlerAtk], &gProtectStructs[battlerPartner], data, sizeof(struct ProtectStruct));
+    SwapStructData(&gBattleSpritesDataPtr->battlerData[battlerAtk], &gBattleSpritesDataPtr->battlerData[battlerPartner], data, sizeof(struct BattleSpriteInfo));
+
+    SWAP(gBattleSpritesDataPtr->battlerData[battlerAtk].invisible, gBattleSpritesDataPtr->battlerData[battlerPartner].invisible, temp);
+    SWAP(gTransformedPersonalities[battlerAtk], gTransformedPersonalities[battlerPartner], temp);
+    SWAP(gTransformedShininess[battlerAtk], gTransformedShininess[battlerPartner], temp);
+    SWAP(gStatuses3[battlerAtk], gStatuses3[battlerPartner], temp);
+    SWAP(gStatuses4[battlerAtk], gStatuses4[battlerPartner], temp);
+    SWAP(gBattleStruct->chosenMovePositions[battlerAtk], gBattleStruct->chosenMovePositions[battlerPartner], temp);
+    SWAP(gChosenMoveByBattler[battlerAtk], gChosenMoveByBattler[battlerPartner], temp);
+    SWAP(gLockedMoves[battlerAtk], gLockedMoves[battlerPartner], temp);
+    SWAP(gBattleStruct->moveTarget[battlerAtk], gBattleStruct->moveTarget[battlerPartner], temp);
+    SWAP(gMoveSelectionCursor[battlerAtk], gMoveSelectionCursor[battlerPartner], temp);
+    // Swap turn order, so that all the battlers take action
+    SWAP(gChosenActionByBattler[battlerAtk], gChosenActionByBattler[battlerPartner], temp);
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (gBattlerByTurnOrder[i] == battlerAtk || gBattlerByTurnOrder[i] == battlerPartner)
+        {
+            for (j = i + 1; j < MAX_BATTLERS_COUNT; j++)
+            {
+                if (gBattlerByTurnOrder[j] == battlerAtk || gBattlerByTurnOrder[j] == battlerPartner)
+                    break;
+            }
+            SWAP(gBattlerByTurnOrder[i], gBattlerByTurnOrder[j], temp);
+            break;
+        }
+    }
+
+    party = GetBattlerParty(battlerAtk);
+    SwitchTwoBattlersInParty(battlerAtk, battlerPartner);
+    SWAP(gBattlerPartyIndexes[battlerAtk], gBattlerPartyIndexes[battlerPartner], temp);
+
+    // For Snipe Shot and abilities Stalwart/Propeller Tail - keep the original target.
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        u16 ability = GetBattlerAbility(i);
+        if (gChosenMoveByBattler[i] == MOVE_SNIPE_SHOT || ability == ABILITY_PROPELLER_TAIL || ability == ABILITY_STALWART)
+            gBattleStruct->moveTarget[i] ^= BIT_FLANK;
+    }
+
+    // For some reason the order in which the sprites are created matters. Looks like an issue with the sprite system, potentially with the Sprite Template.
+    if ((battlerAtk & BIT_FLANK) != 0)
+    {
+        ReloadBattlerSprites(battlerAtk, party);
+        ReloadBattlerSprites(battlerPartner, party);
+    }
+    else
+    {
+        ReloadBattlerSprites(battlerPartner, party);
+        ReloadBattlerSprites(battlerAtk, party);
+    }
+
+    Free(data);
+
+    gBattleScripting.battler = battlerPartner;
+    DestroyAnimVisualTask(taskId);
+}
+
 static void AnimTask_DoubleTeam_Step(u8 taskId)
 {
-    struct Task* task = &gTasks[taskId];
-    
-    if (!task->data[3])
+    struct Task *task = &gTasks[taskId];
+    if (task->tBlendSpritesCount == 0)
     {
-        if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
+        if (GetBattlerSpriteBGPriorityRank(task->tBattlerId) == 1)
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
         else
             SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
 
         FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
-        DestroyAnimVisualTask(taskId);
+        // Swap attacker and partner data-wise and visually
+        if (task->tIsAllySwitch && task->tBattlerId == BATTLE_PARTNER(gBattlerAttacker))
+            gTasks[taskId].func = AnimTask_AllySwitchDataSwap;
+        else
+            DestroyAnimVisualTask(taskId);
     }
+    // TODO: remove old if not needed anymore
+    // struct Task* task = &gTasks[taskId];
+    
+    // if (!task->data[3])
+    // {
+    //     if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
+    //         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
+    //     else
+    //         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
+
+    //     FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
+    //     DestroyAnimVisualTask(taskId);
+    // }
 }
 
 static void AnimDoubleTeam(struct Sprite* sprite)
@@ -5300,6 +5471,38 @@ static void AnimDoubleTeam(struct Sprite* sprite)
         sprite->x2 = Sin(sprite->data[1], sprite->data[4]);
     }
 }
+
+void AnimTask_AllySwitchAttacker(u8 taskId)
+{
+    PrepareDoubleTeamAnim(taskId, ANIM_ATTACKER, TRUE);
+    gSprites[gBattlerSpriteIds[gBattlerAttacker]].invisible = TRUE;
+    gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattlerAttacker)]].invisible = TRUE;
+    // Edge case: Partner's sprite is invisible(i.e. after using Dig).
+    if (gBattleSpritesDataPtr->battlerData[BATTLE_PARTNER(gBattlerAttacker)].invisible)
+    {
+        gBattleSpritesDataPtr->battlerData[BATTLE_PARTNER(gBattlerAttacker)].invisible = FALSE;
+        gBattleSpritesDataPtr->battlerData[gBattlerAttacker].invisible = TRUE;
+    }
+}
+
+void AnimTask_AllySwitchPartner(u8 taskId)
+{
+    PrepareDoubleTeamAnim(taskId, ANIM_ATK_PARTNER, TRUE);
+}
+
+#undef tBattlerSpriteId
+#undef tSpoonPal
+#undef tBlendSpritesCount
+#undef tBattlerId
+#undef tIsAllySwitch
+
+#undef sCounter
+#undef sSinIndex
+#undef sTaskId
+#undef sCounter2
+#undef sSinAmplitude
+#undef sSinIndexMod
+#undef sBattlerFlank
 
 static void AnimSuperFang(struct Sprite* sprite)
 {

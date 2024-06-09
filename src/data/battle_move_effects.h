@@ -1039,11 +1039,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
     },
 
-    [EFFECT_BULLDOZE] =
-    {
-        .battleScript = BattleScript_EffectHit,
-    },
-
     [EFFECT_FOUL_PLAY] =
     {
         .battleScript = BattleScript_EffectHit,

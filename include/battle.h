@@ -999,7 +999,7 @@ extern u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT];
 extern u32 gSideStatuses[NUM_BATTLE_SIDES];
 extern u32 gHitMarker;
 extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
-extern u8 gMoveResultFlags;
+extern u16 gMoveResultFlags;
 extern s32 gTakenDmg[MAX_BATTLERS_COUNT];
 extern u8 gTakenDmgByBattler[MAX_BATTLERS_COUNT];
 extern u8 gCurrentActionFuncId;

@@ -664,30 +664,6 @@ BattleScript_EffectShellTrap::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_EffectMaxHp50Recoil::
-	attackcanceler
-	attackstring
-	ppreduce
-	accuracycheck BattleScript_SteelBeamMiss, ACC_CURR_MOVE
-	call BattleScript_EffectHit_RetFromCritCalc
-	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_SteelBeamAfterSelfDamage
-	call BattleScript_SteelBeamSelfDamage
-BattleScript_SteelBeamAfterSelfDamage::
-	waitstate
-	tryfaintmon BS_ATTACKER
-	tryfaintmon BS_TARGET
-	goto BattleScript_MoveEnd
-BattleScript_SteelBeamMiss::
-	pause B_WAIT_TIME_SHORT
-	effectivenesssound
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_MoveEnd
-	bichalfword gMoveResultFlags, MOVE_RESULT_MISSED
-	call BattleScript_SteelBeamSelfDamage
-	orhalfword gMoveResultFlags, MOVE_RESULT_MISSED
-	goto BattleScript_SteelBeamAfterSelfDamage
-
 BattleScript_SteelBeamSelfDamage::
 	dmg_1_2_attackerhp
 	healthbarupdate BS_ATTACKER
@@ -3082,37 +3058,6 @@ BattleScript_AbsorbTryFainting::
 BattleScript_AbsorbHealBlock::
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectExplosion_AnimDmgRet:
-	jumpifbyte CMP_NO_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_MISSED, BattleScript_ExplosionAnimRet
-	call BattleScript_PreserveMissedBitDoMoveAnim
-	goto BattleScript_ExplosionDmgRet
-BattleScript_ExplosionAnimRet:
-	attackanimation
-	waitanimation
-BattleScript_ExplosionDmgRet:
-	movevaluescleanup
-	critcalc
-	damagecalc
-	adjustdamage
-	accuracycheck BattleScript_ExplosionMissedRet, ACC_CURR_MOVE
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	tryfaintmon BS_TARGET
-BattleScript_ExplosionAnimEndRet_Return:
-	return
-BattleScript_ExplosionMissedRet:
-	effectivenesssound
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_ExplosionAnimEndRet_Return
 
 BattleScript_EffectExplosion::
 	attackcanceler
@@ -7495,6 +7440,7 @@ BattleScript_MoveEffectConfusion::
 BattleScript_MoveEffectRecoil::
 	jumpifmove MOVE_STRUGGLE, BattleScript_DoRecoil
 	jumpifability BS_ATTACKER, ABILITY_ROCK_HEAD, BattleScript_RecoilEnd
+	jumpifability BS_ATTACKER, ABILITY_MAGIC_GUARD, BattleScript_RecoilEnd
 BattleScript_DoRecoil::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE | HITMARKER_IGNORE_DISGUISE
 	healthbarupdate BS_ATTACKER
@@ -7539,6 +7485,15 @@ BattleScript_AbilityPopUp:
 	pause 40
 	.endif
 	recordability BS_ABILITY_BATTLER
+	sethword sABILITY_OVERWRITE, 0
+	return
+
+BattleScript_AbilityPopUpScripting:
+	.if B_ABILITY_POP_UP == TRUE
+	showabilitypopup BS_SCRIPTING
+	pause 40
+	.endif
+	recordability BS_SCRIPTING
 	sethword sABILITY_OVERWRITE, 0
 	return
 
@@ -7744,6 +7699,12 @@ BattleScript_IntimidateLoop:
 	jumpiftargetally BattleScript_IntimidateLoopIncrement
 	jumpifabsent BS_TARGET, BattleScript_IntimidateLoopIncrement
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_IntimidateLoopIncrement
+.if B_UPDATED_INTIMIDATE >= GEN_8 @These abilties specifically prevent just intimidate, without blocking stat decreases
+	jumpifability BS_TARGET, ABILITY_INNER_FOCUS, BattleScript_IntimidatePrevented
+	jumpifability BS_TARGET, ABILITY_SCRAPPY, BattleScript_IntimidatePrevented
+	jumpifability BS_TARGET, ABILITY_OWN_TEMPO, BattleScript_IntimidatePrevented
+	jumpifability BS_TARGET, ABILITY_OBLIVIOUS, BattleScript_IntimidatePrevented
+.endif
 	jumpifability BS_TARGET, ABILITY_GUARD_DOG, BattleScript_IntimidateInReverse
 BattleScript_IntimidateEffect:
 	copybyte sBATTLER, gBattlerAttacker
@@ -7767,6 +7728,12 @@ BattleScript_IntimidateEnd:
 	copybyte gBattlerTarget, sSAVED_BATTLER
 	pause B_WAIT_TIME_MED
 	end3
+
+BattleScript_IntimidatePrevented:
+	copybyte sBATTLER, gBattlerTarget
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PKMNPREVENTSSTATLOSSWITH
+	goto BattleScript_IntimidateEffect_WaitString
 
 BattleScript_IntimidateWontDecrease:
 	printstring STRINGID_STATSWONTDECREASE
@@ -8075,7 +8042,7 @@ BattleScript_SturdyPreventsOHKO::
 
 BattleScript_DampStopsExplosion::
 	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUpTarget
+	call BattleScript_AbilityPopUpScripting
 	printstring STRINGID_PKMNPREVENTSUSAGE
 	pause B_WAIT_TIME_LONG
 	moveendto MOVEEND_NEXT_TARGET
@@ -8218,7 +8185,7 @@ BattleScript_DazzlingProtected::
 	attackstring
 	ppreduce
 	pause B_WAIT_TIME_SHORT
-	call BattleScript_AbilityPopUp
+	call BattleScript_AbilityPopUpScripting
 	printstring STRINGID_POKEMONCANNOTUSEMOVE
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd

@@ -1714,7 +1714,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_MAX_HP_50_RECOIL] =
     {
-        .battleScript = BattleScript_EffectMaxHp50Recoil,
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_EXTREME_EVOBOOST] =

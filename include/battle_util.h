@@ -187,6 +187,7 @@ bool32 BlocksPrankster(u16 move, u32 battlerPrankster, u32 battlerDef, bool32 ch
 bool32 IsBattlerProtected(u32 battler, u32 move);
 bool32 IsMoveMakingContact(u32 move, u32 battlerAtk);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
+bool32 IsBelchPreventingMove(u32 battler, u32 move);
 s32 CalculateMoveDamage(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, s32 fixedBasePower, bool32 isCrit, bool32 randomFactor, bool32 updateFlags);
 bool32 MoveHasAdditionalEffectWithChance(u32 move, u32 moveEffect, u32 chance);
 bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument);

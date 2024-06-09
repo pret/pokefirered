@@ -1,7 +1,6 @@
 #ifndef GUARD_POKEMON_H
 #define GUARD_POKEMON_H
 
-#include "global.h"
 #include "sprite.h"
 #include "constants/items.h"
 #include "constants/region_map_sections.h"
@@ -683,6 +682,7 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
 u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
 u32 GetMonAffectionHearts(struct Pokemon *pokemon);
+void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality);
 u8 CountAliveMonsInBattle(u8 caseId, u32 battler);
 
 u8 GetDefaultMoveTarget(u32 battler);
@@ -824,5 +824,6 @@ const u8 *GetMoveName(u16 moveId);
 const u8 *GetMoveAnimationScript(u16 moveId);
 u16 KantoNumToSpecies(u16 kantoNum);
 u16 HoennNumToSpecies(u16 hoennNum);
+u8 CopyMonToPC(struct Pokemon *mon);
 
 #endif // GUARD_POKEMON_H

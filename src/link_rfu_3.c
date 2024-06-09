@@ -131,7 +131,7 @@ static const u8 sWireless_ASCIItoRSETable[] = {
     0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94
 };
 
-static const u8 sWireless_RSEtoASCIITable[] = {
+const u8 gWireless_RSEtoASCIITable[] = {
     [CHAR_SPACE] = ' ',
     0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d,
     0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94, 0x95,
@@ -600,7 +600,7 @@ static void PkmnStrToASCII(u8 *dest, const u8 *src)
     s32 i;
 
     for (i = 0; src[i] != EOS; i++)
-        dest[i] = sWireless_RSEtoASCIITable[src[i]];
+        dest[i] = gWireless_RSEtoASCIITable[src[i]];
     dest[i] = 0;
 }
 

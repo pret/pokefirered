@@ -13,6 +13,7 @@
 #include "item.h"
 #include "pokemon.h"
 #include "random.h"
+#include "recorded_battle.h"
 #include "util.h"
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
@@ -101,7 +102,7 @@ void BattleAI_SetupItems(void)
     // Items are allowed to use in ONLY trainer battles.
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_BATTLE_TOWER
-                               | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_INGAME_PARTNER)
+                               | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_RECORDED_LINK)
             )
        )
     {
@@ -150,12 +151,14 @@ static u32 GetAiFlags(u16 trainerId)
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+        if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+            flags = GetAiScriptsInRecordedBattle();
+        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             flags = AI_FLAG_SAFARI;
         else if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
             flags = AI_FLAG_ROAMING;
-        else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
-            flags = AI_FLAG_FIRST_BATTLE;
+        // else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) // pokeemerald specific
+        //     flags = AI_FLAG_FIRST_BATTLE;
         else if (gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER_TOWER))
             flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
         else
@@ -268,6 +271,9 @@ u32 BattleAI_ChooseMoveOrAction(void)
     // Clear protect structures, some flags may be set during AI calcs
     // e.g. pranksterElevated from GetMovePriority
     memset(&gProtectStructs, 0, MAX_BATTLERS_COUNT * sizeof(struct ProtectStruct));
+    #if TESTING
+    TestRunner_Battle_CheckAiMoveScores(sBattler_AI);
+    #endif // TESTING
     return ret;
 }
 
@@ -5182,8 +5188,8 @@ static s32 AI_Safari(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 // First battle logic
 static s32 AI_FirstBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
-    if (AI_DATA->hpPercents[battlerDef] <= 20)
-        AI_Flee();
+    // if (AI_DATA->hpPercents[battlerDef] <= 20)
+    //     AI_Flee();
 
     return score;
 }

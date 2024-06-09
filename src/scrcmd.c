@@ -40,6 +40,8 @@
 #include "constants/maps.h"
 #include "constants/sound.h"
 
+typedef void (*NativeFunc)(struct ScriptContext *ctx);
+
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
 extern const u8 *const gStdScripts[];
@@ -120,8 +122,9 @@ bool8 ScrCmd_specialvar(struct ScriptContext * ctx)
 
 bool8 ScrCmd_callnative(struct ScriptContext * ctx)
 {
-    void (*func )(void) = ((void (*)(void))ScriptReadWord(ctx));
-    func();
+    NativeFunc func = (NativeFunc)ScriptReadWord(ctx);
+
+    func(ctx);
     return FALSE;
 }
 
@@ -1726,19 +1729,6 @@ bool8 ScrCmd_bufferboxname(struct ScriptContext * ctx)
     u16 boxId = VarGet(ScriptReadHalfword(ctx));
 
     StringCopy(sScriptStringVars[stringVarIndex], GetBoxNamePtr(boxId));
-    return FALSE;
-}
-
-bool8 ScrCmd_givemon(struct ScriptContext * ctx)
-{
-    u16 species = VarGet(ScriptReadHalfword(ctx));
-    u8 level = ScriptReadByte(ctx);
-    u16 item = VarGet(ScriptReadHalfword(ctx));
-    u32 unkParam1 = ScriptReadWord(ctx);
-    u32 unkParam2 = ScriptReadWord(ctx);
-    u8 unkParam3 = ScriptReadByte(ctx);
-
-    gSpecialVar_Result = ScriptGiveMon(species, level, item, unkParam1, unkParam2, unkParam3);
     return FALSE;
 }
 

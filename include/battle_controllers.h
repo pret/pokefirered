@@ -261,6 +261,7 @@ void BtlController_EmitEndLinkBattle(u32 battler, u32 bufferId, u8 battleOutcome
 void BattleControllerComplete(u32 battler); // Can be used for all the controllers.
 void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.
 void BtlController_TerminatorNop(u32 battler); // Dummy function at the end of the table.
+void BattleControllerDummy(u32 battler);
 void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit);
 void Controller_WaitForString(u32 battler);
 
@@ -301,8 +302,9 @@ void BtlController_HandleHidePartyStatusSummary(u32 battler);
 void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE);
 
 // player controller
-void BattleControllerDummy(u32 battler);
+void SetBattleEndCallbacks(u32 battler);
 void SetControllerToPlayer(u32 battler);
+void PlayerHandleBallThrowAnim(u32 battler);
 void SpriteCB_FreePlayerSpriteLoadMonSpriteOld(struct Sprite *sprite);
 void SetCB2ToReshowScreenAfterMenu(void);
 void SetCB2ToReshowScreenAfterMenu2(void);
@@ -310,12 +312,14 @@ void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);
 void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
 void ActionSelectionDestroyCursorAt(u8 cursorPos);
 void InitMoveSelectionsVarsAndStrings(u32 battler);
-void SetBattleEndCallbacks(u32 battler);
 void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
 void MoveSelectionDestroyCursorAt(u8 cursorPos);
 void HandleInputChooseMove(u32 battler);
 u32 LinkPlayerGetTrainerPicId(u32 multiplayerId);
 void PlayerHandleExpUpdate(u32 battler);
+
+// recorded player controller
+void SetControllerToRecordedPlayer(u32 battler);
 
 // opponent controller
 void SetControllerToOpponent(u32 battler);
@@ -327,6 +331,9 @@ void SetControllerToSafari(u32 battler);
 // pokedude controller
 void SetControllerToPokedude(u32 battler);
 void InitPokedudePartyAndOpponent(void);
+
+// recorded opponent controller
+void SetControllerToRecordedOpponent(u32 battler);
 
 // oak and old man controller
 void SetControllerToOakOrOldMan(u32 battler);

@@ -492,6 +492,7 @@ u8 GetBattleTowerTrainerFrontSpriteId(void)
     }
     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
     {
+        // TODO: fix?
         return gFacilityClassToPicIndex[sBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].trainerClass];
     }
     else

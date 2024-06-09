@@ -10,6 +10,7 @@
 #include "pokedex.h"
 #include "pokemon_summary_screen.h"
 #include "safari_zone.h"
+#include "test_runner.h"
 #include "util.h"
 #include "constants/songs.h"
 
@@ -1634,7 +1635,6 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
                     } while (0);
                 }
             }
-            ballIconSpritesIds[5 - ++i] += 0; i--;
         }
     }
 
@@ -2889,6 +2889,13 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 
     if (gBattleScripting.abilityPopupOverwrite != 0)
         ability = gBattleScripting.abilityPopupOverwrite;
+
+    if (gTestRunnerEnabled)
+    {
+        TestRunner_Battle_RecordAbilityPopUp(battlerId, ability);
+        if (gTestRunnerHeadless)
+            return;
+    }
 
     if (!gBattleStruct->activeAbilityPopUps)
     {

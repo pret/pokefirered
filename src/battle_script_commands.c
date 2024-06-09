@@ -30,6 +30,7 @@
 #include "battle_interface.h"
 #include "battle_z_move.h"
 #include "rtc.h"
+#include "test_runner.h"
 #include "wild_encounter.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
@@ -4205,6 +4206,7 @@ static bool32 BattleTypeAllowsExp(void)
 {
     if (gBattleTypeFlags &
               ( BATTLE_TYPE_LINK
+              | BATTLE_TYPE_RECORDED_LINK
               | BATTLE_TYPE_TRAINER_TOWER
               | BATTLE_TYPE_BATTLE_TOWER
               | BATTLE_TYPE_SAFARI
@@ -4595,7 +4597,7 @@ static void Cmd_checkteamslost(void)
     // For link battles that haven't ended, count number of empty battler spots
     // In link multi battles, jump to pointer if more than 1 spot empty
     // In non-multi battles, jump to pointer if 1 spot is missing on both sides
-    if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK)))
+    if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
     {
         s32 i, emptyPlayerSpots, emptyOpponentSpots;
 
@@ -6378,20 +6380,29 @@ static void Cmd_switchindataupdate(void)
     // Edge case: the sent out pokemon has 0 HP. This should never happen.
     if (gBattleMons[battler].hp == 0)
     {
-        struct Pokemon *party = GetBattlerParty(battler);
-        // Find the first possible replacement for the not valid pokemon.
-        for (i = 0; i < PARTY_SIZE; i++)
+        // If it's a test, mark it as invalid.
+        if (gTestRunnerEnabled)
         {
-            if (IsValidForBattle(&party[i]))
-                break;
+            TestRunner_Battle_InvalidNoHPMon(battler, gBattlerPartyIndexes[battler]);
         }
-        // There is valid replacement.
-        if (i != PARTY_SIZE)
+        // Handle in-game scenario.
+        else
         {
-            gBattlerPartyIndexes[battler] = gBattleStruct->monToSwitchIntoId[battler] = i;
-            BtlController_EmitGetMonData(battler, BUFFER_A, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[battler]]);
-            MarkBattlerForControllerExec(battler);
-            return;
+            struct Pokemon *party = GetBattlerParty(battler);
+            // Find the first possible replacement for the not valid pokemon.
+            for (i = 0; i < PARTY_SIZE; i++)
+            {
+                if (IsValidForBattle(&party[i]))
+                    break;
+            }
+            // There is valid replacement.
+            if (i != PARTY_SIZE)
+            {
+                gBattlerPartyIndexes[battler] = gBattleStruct->monToSwitchIntoId[battler] = i;
+                BtlController_EmitGetMonData(battler, BUFFER_A, REQUEST_ALL_BATTLE, gBitTable[gBattlerPartyIndexes[battler]]);
+                MarkBattlerForControllerExec(battler);
+                return;
+            }
         }
     }
 
@@ -6439,6 +6450,7 @@ static void Cmd_switchinanim(void)
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT
         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                  | BATTLE_TYPE_LEGENDARY
+                                 | BATTLE_TYPE_RECORDED_LINK
                                  | BATTLE_TYPE_OLD_MAN_TUTORIAL
                                  | BATTLE_TYPE_POKEDUDE
                                  | BATTLE_TYPE_EREADER_TRAINER
@@ -6930,6 +6942,7 @@ static void Cmd_switchhandleorder(void)
                 *(gBattleStruct->monToSwitchIntoId + i) = gBattleResources->bufferB[i][1];
                 if (!(gBattleStruct->field_93 & gBitTable[i]))
                 {
+                    RecordedBattle_SetBattlerAction(i, gBattleResources->bufferB[i][1]);
                     gBattleStruct->field_93 |= gBitTable[i];
                 }
             }
@@ -6942,6 +6955,7 @@ static void Cmd_switchhandleorder(void)
     case 2:
         if (!(gBattleStruct->field_93 & gBitTable[battler]))
         {
+            RecordedBattle_SetBattlerAction(battler, gBattleResources->bufferB[battler][1]);
             gBattleStruct->field_93 |= gBitTable[battler];
         }
         // fall through
@@ -11861,6 +11875,7 @@ static void Cmd_forcerandomswitch(void)
             battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
         }
         else if ((gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER && gBattleTypeFlags & BATTLE_TYPE_LINK)
+            || (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER && gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
             || (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER))
         {
             if ((gBattlerTarget & BIT_FLANK) != B_FLANK_LEFT)
@@ -11876,7 +11891,8 @@ static void Cmd_forcerandomswitch(void)
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
         }
-        else if ((gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK))
+        else if ((gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
+                 || (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK))
         {
             if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(gBattlerTarget)) == B_FLANK_RIGHT)
             {
@@ -11956,7 +11972,9 @@ static void Cmd_forcerandomswitch(void)
                 SwitchPartyOrder(gBattlerTarget);
 
             if ((gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-                || (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI))
+                || (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
+                || (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+                || (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI))
             {
                 SwitchPartyOrderLinkMulti(gBattlerTarget, i, 0);
                 SwitchPartyOrderLinkMulti(BATTLE_PARTNER(gBattlerTarget), i, 1);
@@ -12071,7 +12089,7 @@ static void Cmd_givepaydaymoney(void)
 {
     CMD_ARGS();
 
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)) && gPaydayMoney != 0)
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)) && gPaydayMoney != 0)
     {
         u32 bonusMoney = gPaydayMoney * gBattleStruct->moneyMultiplier;
         AddMoney(&gSaveBlock1Ptr->money, bonusMoney);
@@ -13988,6 +14006,7 @@ static void Cmd_tryswapitems(void)
             && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_BATTLE_TOWER
                                   | BATTLE_TYPE_EREADER_TRAINER
+                                  | BATTLE_TYPE_RECORDED_LINK
                                   | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)))
             && gTrainerBattleOpponent_A != TRAINER_SECRET_BASE))
     {
@@ -14001,7 +14020,8 @@ static void Cmd_tryswapitems(void)
         // You can't swap items if they were knocked off in regular battles
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                              | BATTLE_TYPE_BATTLE_TOWER
-                             | BATTLE_TYPE_EREADER_TRAINER))
+                             | BATTLE_TYPE_EREADER_TRAINER
+                             | BATTLE_TYPE_RECORDED_LINK))
             && gTrainerBattleOpponent_A != TRAINER_SECRET_BASE
             && (gWishFutureKnock.knockedOffMons[sideAttacker] & gBitTable[gBattlerPartyIndexes[gBattlerAttacker]]
                 || gWishFutureKnock.knockedOffMons[sideTarget] & gBitTable[gBattlerPartyIndexes[gBattlerTarget]]))
@@ -15130,6 +15150,7 @@ static void Cmd_handleballthrow(void)
                 for (shakes = 0; shakes < maxShakes && Random() < odds; shakes++);
             }
 
+            DebugPrintfLevel(MGBA_LOG_ERROR, "BtlController_EmitBallThrowAnim2");
             BtlController_EmitBallThrowAnim(gBattlerAttacker, BUFFER_A, shakes);
             MarkBattlerForControllerExec(gBattlerAttacker);
 
@@ -15923,6 +15944,7 @@ static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount, u16 use
     if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
      && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
                              | BATTLE_TYPE_EREADER_TRAINER
+                             | BATTLE_TYPE_RECORDED_LINK
                              | BATTLE_TYPE_BATTLE_TOWER
                              | BATTLE_TYPE_TRAINER_TOWER)))
     {

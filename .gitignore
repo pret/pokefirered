@@ -1,6 +1,7 @@
 *.1bpp
 *.4bpp
 *.8bpp
+*.a
 *.DS_Store
 *.bak
 *.bat

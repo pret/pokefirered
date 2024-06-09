@@ -2,6 +2,7 @@
 #define GUARD_DATA_H
 
 #include "global.h"
+#include "constants/moves.h"
 #include "constants/trainers.h"
 
 #define SPECIES_SHINY_TAG 500

@@ -1290,47 +1290,6 @@ void AwardBattleTowerRibbons(void)
         IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
 }
 
-// This is a leftover debugging function that is used to populate the E-Reader
-// trainer with the player's current data.
-static void Debug_FillEReaderTrainerWithPlayerData(void)
-{
-    struct BattleTowerEReaderTrainer *ereaderTrainer;
-    s32 i;
-    s32 j;
-
-    ereaderTrainer = &gSaveBlock2Ptr->battleTower.ereaderTrainer;
-
-    if (gSaveBlock2Ptr->playerGender != MALE)
-    {
-        ereaderTrainer->trainerClass = sFemaleTrainerClasses[(gSaveBlock2Ptr->playerTrainerId[0] + gSaveBlock2Ptr->playerTrainerId[1]
-                                                              + gSaveBlock2Ptr->playerTrainerId[2] + gSaveBlock2Ptr->playerTrainerId[3]) % NELEMS(sFemaleTrainerClasses)];
-    }
-    else
-    {
-        ereaderTrainer->trainerClass = sMaleTrainerClasses[(gSaveBlock2Ptr->playerTrainerId[0] + gSaveBlock2Ptr->playerTrainerId[1]
-                                                            + gSaveBlock2Ptr->playerTrainerId[2] + gSaveBlock2Ptr->playerTrainerId[3]) % NELEMS(sMaleTrainerClasses)];
-    }
-
-    CopyTrainerId(ereaderTrainer->trainerId, gSaveBlock2Ptr->playerTrainerId);
-    StringCopy_PlayerName(ereaderTrainer->name, gSaveBlock2Ptr->playerName);
-
-    ereaderTrainer->winStreak = 1;
-
-    j = 7;
-    for (i = 0; i < 6; i++)
-    {
-        ereaderTrainer->greeting[i] = gSaveBlock1Ptr->easyChatBattleStart[i];
-        ereaderTrainer->farewellPlayerLost[i] = j;
-        ereaderTrainer->farewellPlayerWon[i] = j + 6;
-        j++;
-    }
-
-    for (i = 0; i < 3; i++)
-        ConvertPokemonToBattleTowerPokemon(&gPlayerParty[i], &ereaderTrainer->party[i]);
-
-    SetEReaderTrainerChecksum(ereaderTrainer);
-}
-
 u8 GetEreaderTrainerFrontSpriteId(void)
 {
     return gFacilityClassToPicIndex[gSaveBlock2Ptr->battleTower.ereaderTrainer.trainerClass];

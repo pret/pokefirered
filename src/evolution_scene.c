@@ -312,7 +312,6 @@ void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u
 static void CB2_EvolutionSceneLoadGraphics(void)
 {
     u8 id;
-    const struct CompressedSpritePalette* pokePal;
     u16 postEvoSpecies;
     u32 personality;
     bool32 isShiny;

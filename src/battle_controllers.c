@@ -913,43 +913,11 @@ void BtlController_EmitFaintAnimation(u32 battler, u32 bufferId)
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
-// Unused
-static void BtlController_EmitPaletteFade(u32 battler, u32 bufferId)
-{
-    gBattleResources->transferBuffer[0] = CONTROLLER_PALETTEFADE;
-    gBattleResources->transferBuffer[1] = CONTROLLER_PALETTEFADE;
-    gBattleResources->transferBuffer[2] = CONTROLLER_PALETTEFADE;
-    gBattleResources->transferBuffer[3] = CONTROLLER_PALETTEFADE;
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
-}
-
-// Unused
-static void BtlController_EmitSuccessBallThrowAnim(u32 battler, u32 bufferId)
-{
-    gBattleResources->transferBuffer[0] = CONTROLLER_SUCCESSBALLTHROWANIM;
-    gBattleResources->transferBuffer[1] = CONTROLLER_SUCCESSBALLTHROWANIM;
-    gBattleResources->transferBuffer[2] = CONTROLLER_SUCCESSBALLTHROWANIM;
-    gBattleResources->transferBuffer[3] = CONTROLLER_SUCCESSBALLTHROWANIM;
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
-}
-
 void BtlController_EmitBallThrowAnim(u32 battler, u32 bufferId, u8 caseId)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_BALLTHROWANIM;
     gBattleResources->transferBuffer[1] = caseId;
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 2);
-}
-
-// Unused
-static void BtlController_EmitPause(u32 battler, u32 bufferId, u8 toWait, void *data)
-{
-    s32 i;
-
-    gBattleResources->transferBuffer[0] = CONTROLLER_PAUSE;
-    gBattleResources->transferBuffer[1] = toWait;
-    for (i = 0; i < toWait * 3; i++)
-        gBattleResources->transferBuffer[2 + i] = *(u8 *)(data++);
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, toWait * 3 + 2);
 }
 
 void BtlController_EmitMoveAnimation(u32 battler, u32 bufferId, u16 move, u8 turnOfMove, u16 movePower, s32 dmg, u8 friendship, struct DisableStruct *disableStructPtr, u8 multihit)
@@ -1051,14 +1019,6 @@ void BtlController_EmitChooseAction(u32 battler, u32 bufferId, u8 action, u16 it
     gBattleResources->transferBuffer[2] = itemId;
     gBattleResources->transferBuffer[3] = (itemId & 0xFF00) >> 8;
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
-}
-
-// Unused
-static void BtlController_EmitUnknownYesNoBox(u32 battler, u32 bufferId, u32 arg1)
-{
-    gBattleResources->transferBuffer[0] = CONTROLLER_UNKNOWNYESNOBOX;
-    gBattleResources->transferBuffer[1] = arg1;
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 2);
 }
 
 void BtlController_EmitChooseMove(u32 battler, u32 bufferId, bool8 isDoubleBattle, bool8 NoPpNumber, struct ChooseMoveStruct *movePpData)
@@ -1193,44 +1153,6 @@ void BtlController_EmitOneReturnValue_Duplicate(u32 battler, u32 bufferId, u16 r
     gBattleResources->transferBuffer[1] = ret;
     gBattleResources->transferBuffer[2] = (ret & 0xFF00) >> 8;
     gBattleResources->transferBuffer[3] = 0;
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
-}
-
-// Unused
-static void BtlController_EmitClearUnkVar(u32 battler, u32 bufferId)
-{
-    gBattleResources->transferBuffer[0] = CONTROLLER_CLEARUNKVAR;
-    gBattleResources->transferBuffer[1] = CONTROLLER_CLEARUNKVAR;
-    gBattleResources->transferBuffer[2] = CONTROLLER_CLEARUNKVAR;
-    gBattleResources->transferBuffer[3] = CONTROLLER_CLEARUNKVAR;
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
-}
-
-// Unused
-static void BtlController_EmitSetUnkVar(u32 battler, u32 bufferId, u8 b)
-{
-    gBattleResources->transferBuffer[0] = CONTROLLER_SETUNKVAR;
-    gBattleResources->transferBuffer[1] = b;
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 2);
-}
-
-// Unused
-static void BtlController_EmitClearUnkFlag(u32 battler, u32 bufferId)
-{
-    gBattleResources->transferBuffer[0] = CONTROLLER_CLEARUNKFLAG;
-    gBattleResources->transferBuffer[1] = CONTROLLER_CLEARUNKFLAG;
-    gBattleResources->transferBuffer[2] = CONTROLLER_CLEARUNKFLAG;
-    gBattleResources->transferBuffer[3] = CONTROLLER_CLEARUNKFLAG;
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
-}
-
-// Unused
-static void BtlController_EmitToggleUnkFlag(u32 battler, u32 bufferId)
-{
-    gBattleResources->transferBuffer[0] = CONTROLLER_TOGGLEUNKFLAG;
-    gBattleResources->transferBuffer[1] = CONTROLLER_TOGGLEUNKFLAG;
-    gBattleResources->transferBuffer[2] = CONTROLLER_TOGGLEUNKFLAG;
-    gBattleResources->transferBuffer[3] = CONTROLLER_TOGGLEUNKFLAG;
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 4);
 }
 
@@ -2481,8 +2403,6 @@ void BtlController_HandleMoveAnimation(u32 battler)
 {
     if (!IsBattleSEPlaying(battler))
     {
-        u16 move = gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8);
-
         gAnimMoveTurn = gBattleResources->bufferA[battler][3];
         gAnimMovePower = gBattleResources->bufferA[battler][4] | (gBattleResources->bufferA[battler][5] << 8);
         gAnimMoveDmg = gBattleResources->bufferA[battler][6] | (gBattleResources->bufferA[battler][7] << 8) | (gBattleResources->bufferA[battler][8] << 16) | (gBattleResources->bufferA[battler][9] << 24);

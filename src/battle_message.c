@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_z_move.h"
 #include "strings.h"
 #include "battle_message.h"
 #include "link.h"
@@ -3752,7 +3753,6 @@ static const u8 sNpcTextColorToFont[] =
 //   x40: Use NPC context-defined font
 //   x80: Inhibit window clear
 void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
-    bool32 copyToVram;
     struct TextPrinterTemplate printerTemplate;
     u8 speed;
     int x;

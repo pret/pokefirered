@@ -190,12 +190,6 @@ static void Safari_SetBattleEndCallbacks(u32 battler)
     }
 }
 
-static void CompleteOnSpecialAnimDone(u32 battler)
-{
-    if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
-        SafariBufferExecCompleted(battler);
-}
-
 static void SafariOpenPokeblockCase(u32 battler)
 {
     if (!gPaletteFade.active)
@@ -280,8 +274,6 @@ static void SafariHandleChooseAction(u32 battler)
 
 static void SafariHandleChooseItem(u32 battler)
 {
-    s32 i;
-
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[battler] = SafariOpenPokeblockCase;
     gBattlerInMenuId = battler;

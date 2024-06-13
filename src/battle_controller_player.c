@@ -19,6 +19,7 @@
 #include "battle_setup.h"
 #include "battle_script_commands.h"
 #include "battle_z_move.h"
+#include "recorded_battle.h"
 #include "reshow_battle_screen.h"
 #include "test_runner.h"
 #include "constants/battle_anim.h"
@@ -39,7 +40,6 @@ static void PlayerHandleSuccessBallThrowAnim(u32 battler);
 static void PlayerHandlePause(u32 battler);
 static void PlayerHandlePrintSelectionString(u32 battler);
 static void PlayerHandleChooseAction(u32 battler);
-static void PlayerHandleUnknownYesNoBox(u32 battler);
 static void PlayerHandleChooseMove(u32 battler);
 static void PlayerHandleChooseItem(u32 battler);
 static void PlayerHandleChoosePokemon(u32 battler);
@@ -74,7 +74,6 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId);
 static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId);
 static void Task_UpdateLvlInHealthbox(u8 taskId);
 static void PrintLinkStandbyMsg(void);
-static void PreviewDeterminativeMoveTargets(u32 battler);
 static void SwitchIn_HandleSoundAndEnd(u32 battler);
 static void Task_GiveExpWithExpBar(u8 taskId);
 static void Task_CreateLevelUpVerticalStripes(u8 taskId);
@@ -271,14 +270,6 @@ static void HandleInputChooseAction(u32 battler)
     {
         SwapHpBarsWithHpText();
     }
-}
-
-// Unused
-static void EndBounceEffect2(u32 battler)
-{
-    EndBounceEffect(battler, BOUNCE_HEALTHBOX);
-    EndBounceEffect(battler, BOUNCE_MON);
-    gBattlerControllerFuncs[battler] = HandleInputChooseTarget;
 }
 
 static void HandleInputChooseTarget(u32 battler)
@@ -529,10 +520,8 @@ void HandleInputChooseMove(u32 battler)
     u32 canSelectTarget = 0;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
-    // PreviewDeterminativeMoveTargets(battler);
     if (JOY_NEW(A_BUTTON))
     {
-
         PlaySE(SE_SELECT);
         if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_CURSE)
         {
@@ -1355,7 +1344,6 @@ static void Task_UpdateLvlInHealthbox(u8 taskId)
 
 static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId)
 {
-    u8 monIndex;
     s32 battlerId = gTasks[taskId].tExpTask_battler;
 
     if (IsBattlerSpriteVisible((u8)battlerId) == TRUE)
@@ -1497,12 +1485,6 @@ static void CompleteWhenChoseItem(u32 battler)
         BtlController_EmitOneReturnValue(battler, 1, gSpecialVar_ItemId);
         PlayerBufferExecCompleted(battler);
     }
-}
-
-static void CompleteOnSpecialAnimDone(u32 battler)
-{
-    if (!gDoingBattleAnim || !gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
-        PlayerBufferExecCompleted(battler);
 }
 
 static void MoveSelectionDisplayMoveNames(u32 battler)
@@ -1775,10 +1757,6 @@ static void PlayerHandleChooseAction(u32 battler)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 
-static void PlayerHandleUnknownYesNoBox(u32 battler)
-{
-}
-
 static void HandleChooseMoveAfterDma3(u32 battler)
 {
     if (!IsDma3ManagerBusyWithBgCopy())
@@ -2041,83 +2019,4 @@ static void PlayerHandleEndLinkBattle(u32 battler)
     BeginFastPaletteFade(3);
     PlayerBufferExecCompleted(battler);
     gBattlerControllerFuncs[battler] = SetBattleEndCallbacks;
-}
-
-static void PreviewDeterminativeMoveTargets(u32 battler)
-{
-    u32 bitMask = 0;
-    u8 startY = 0;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-    {
-        u8 moveTarget;
-        struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-        u16 move = moveInfo->moves[gMoveSelectionCursor[battler]];
-
-        if (move == MOVE_CURSE)
-        {
-            if (moveInfo->monType1 != TYPE_GHOST && moveInfo->monType2 != TYPE_GHOST)
-                moveTarget = MOVE_TARGET_USER;
-            else
-                moveTarget = MOVE_TARGET_SELECTED;
-        }
-        else
-        {
-            moveTarget = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].target;
-        }
-        switch (moveTarget)
-        {
-        case MOVE_TARGET_SELECTED:
-        case MOVE_TARGET_DEPENDS:
-        case MOVE_TARGET_USER_OR_SELECTED:
-        case MOVE_TARGET_RANDOM:
-            bitMask = 0xF0000;
-            startY = 0;
-            break;
-        case MOVE_TARGET_BOTH:
-        case MOVE_TARGET_OPPONENTS_FIELD:
-            bitMask = (gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)]
-                     | gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]) << 16;
-            startY = 8;
-            break;
-        case MOVE_TARGET_USER:
-            switch (move)
-            {
-            case MOVE_HAZE:
-            case MOVE_SANDSTORM:
-            case MOVE_PERISH_SONG:
-            case MOVE_RAIN_DANCE:
-            case MOVE_SUNNY_DAY:
-            case MOVE_HAIL:
-            case MOVE_MUD_SPORT:
-            case MOVE_WATER_SPORT:
-                bitMask = 0xF0000;
-                break;
-            case MOVE_SAFEGUARD:
-            case MOVE_REFLECT:
-            case MOVE_LIGHT_SCREEN:
-            case MOVE_MIST:
-            case MOVE_HEAL_BELL:
-            case MOVE_AROMATHERAPY:
-                bitMask = (gBitTable[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)]
-                         | gBitTable[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)]) << 16;
-                break;
-            case MOVE_HELPING_HAND:
-                bitMask = (gBitTable[GetBattlerAtPosition(GetBattlerPosition(battler) ^ BIT_FLANK)]) << 16;
-                break;
-            default:
-                bitMask = (gBitTable[battler]) << 16;
-                break;
-            }
-            startY = 8;
-            break;
-        case MOVE_TARGET_FOES_AND_ALLY:
-            bitMask = (gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)]
-                     | gBitTable[GetBattlerAtPosition(GetBattlerPosition(battler) ^ BIT_FLANK)]
-                     | gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]) << 16;
-            startY = 8;
-            break;
-        }
-        BeginNormalPaletteFade(bitMask, 8, startY, 0, RGB_WHITE);
-    }
 }

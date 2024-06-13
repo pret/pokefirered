@@ -433,7 +433,7 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo * wildMonInfo, u8 a
         break;
     }
 
-    level = ChooseWildMonLevel(&wildMonInfo->wildPokemon[wildMonIndex], wildMonIndex, area);
+    level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, area);
     if (flags & WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
         return FALSE;
     if (flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
@@ -446,7 +446,7 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo * wildMonInfo, u8 a
 static u16 GenerateFishingEncounter(const struct WildPokemonInfo * info, u8 rod)
 {
     u8 wildMonIndex = ChooseWildMonIndex_Fishing(rod);
-    u8 level = ChooseWildMonLevel(&info->wildPokemon[wildMonIndex], wildMonIndex, WILD_AREA_FISHING);
+    u8 level = ChooseWildMonLevel(info->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
     CreateWildMon(info->wildPokemon[wildMonIndex].species, level, wildMonIndex);
     return info->wildPokemon[wildMonIndex].species;
@@ -625,7 +625,6 @@ bool8 TryStandardWildSurfEncounter(u16 headerId, u32 currMetatileAttrs, u16 prev
 bool8 StandardWildEncounter(u32 currMetatileAttrs, u16 previousMetatileBehavior)
 {
     u16 headerId;
-    struct Roamer * roamer;
 
     if (sWildEncountersDisabled == TRUE)
         return FALSE;

@@ -5,7 +5,7 @@
 
 void CreateLevelUpVerticalSpritesTask(u16 x, u16 y, u16 tileTag, u16 paletteTag, u16 priority, u16 subpriority);
 bool8 LevelUpVerticalSpritesTaskIsRunning(void);
-void GetMonLevelUpWindowStats(struct Pokemon *mon, u16 *currStats);
+void GetMonLevelUpWindowStats(struct Pokemon *mon, s16 *currStats);
 void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr);
 void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 shadowClr);
 void StartUseItemAnim_Normal(u8 slotId, u16 itemId, MainCallback callback);

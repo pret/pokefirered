@@ -692,7 +692,7 @@ u32 PSA_GetMonPersonality(void)
     return GetPSAStruct()->personality;
 }
 
-void GetMonLevelUpWindowStats(struct Pokemon * pokemon, u16 *data)
+void GetMonLevelUpWindowStats(struct Pokemon * pokemon, s16 *data)
 {
     data[0] = GetMonData(pokemon, MON_DATA_MAX_HP);
     data[1] = GetMonData(pokemon, MON_DATA_ATK);

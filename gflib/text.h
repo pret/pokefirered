@@ -94,7 +94,7 @@ struct TextPrinter
 {
     struct TextPrinterTemplate printerTemplate;
     void (*callback)(struct TextPrinterTemplate *, u16); // 0x10
-    union __attribute__((packed)) {
+    union {
         struct TextPrinterSubStruct sub;
         u8 fields[7];
     } subUnion;

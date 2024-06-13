@@ -873,12 +873,6 @@ void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId)
     Task_ItemUse_CloseMessageBoxAndReturnToField(taskId);
 }
 
-static void ItemUseInBattle_PokeFlute(u8 taskId)
-{
-    Bag_BeginCloseWin0Animation();
-    ItemMenu_StartFadeToExitCallback(taskId);
-}
-
 static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
 {
     if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)

@@ -910,7 +910,6 @@ void CreateItemIconSpriteAtMaxCloseness(u16 itemId)
 static struct Sprite *PSA_CreateItemIconObject(u16 itemId)
 {
     u8 spriteId;
-    struct Sprite *sprite;
     spriteId = AddItemIconObject(1, 1, itemId);
     if (spriteId == MAX_SPRITES)
         return NULL;

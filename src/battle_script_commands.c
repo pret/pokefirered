@@ -29,6 +29,7 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_z_move.h"
+#include "recorded_battle.h"
 #include "rtc.h"
 #include "test_runner.h"
 #include "wild_encounter.h"

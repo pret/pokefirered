@@ -548,88 +548,6 @@ static const struct SpriteTemplate sSpriteTemplate_BurstTrigger =
     .callback = SpriteCb_BurstTrigger
 };
 
-
-
-static void Debug_DrawNumber(s16 number, u16 *dest, bool8 singleRow)
-{
-    s8 i, j;
-    u8 buff[4];
-
-    for (i = 0; i < 4; i++)
-        buff[i] = 0;
-
-    for (i = 3; ; i--)
-    {
-        if (number > 0)
-        {
-            buff[i] = number % 10;
-            number /= 10;
-        }
-        else
-        {
-            while (i > -1)
-            {
-                buff[i] = 0xFF;
-                i--;
-            }
-
-            if (buff[3] == 0xFF)
-                buff[3] = 0;
-            break;
-        }
-    }
-
-    if (!singleRow)
-    {
-        for (i = 0, j = 0; i < 4; i++)
-        {
-            if (buff[j] == 0xFF)
-            {
-                dest[j + 0x00] &= 0xFC00;
-                dest[j + 0x00] |= 30;
-                dest[i + 0x20] &= 0xFC00;
-                dest[i + 0x20] |= 30;
-            }
-            else
-            {
-                dest[j + 0x00] &= 0xFC00;
-                dest[j + 0x00] |= 20 + buff[j];
-                dest[i + 0x20] &= 0xFC00;
-                dest[i + 0x20] |= 20 + buff[i] + 1 * TILE_SIZE_4BPP;
-            }
-            j++;
-        }
-    }
-    else
-    {
-        for (i = 0; i < 4; i++)
-        {
-            if (buff[i] == 0xFF)
-            {
-                dest[i + 0x00] &= 0xFC00;
-                dest[i + 0x00] |= 30;
-                dest[i + 0x20] &= 0xFC00;
-                dest[i + 0x20] |= 30;
-            }
-            else
-            {
-                dest[i + 0x00] &= 0xFC00;
-                dest[i + 0x00] |= 20 + buff[i];
-                dest[i + 0x20] &= 0xFC00;
-                dest[i + 0x20] |= 20 + buff[i] + 1 * TILE_SIZE_4BPP;
-            }
-        }
-    }
-}
-
-// Unused
-static void Debug_DrawNumberPair(s16 num1, s16 num2, u16 *dest)
-{
-    dest[4] = 30;
-    Debug_DrawNumber(num2, &dest[0], FALSE);
-    Debug_DrawNumber(num1, &dest[5], TRUE);
-}
-
 // Because the healthbox is too large to fit into one sprite, it is divided
 // into two sprites. The left sprite is used as the 'main' healthbox sprite,
 // while the right sprite is the 'other' healthbox sprite.
@@ -1004,11 +922,7 @@ static const u8 sText_Slash[] = _("/");
 
 static void UpdateHpTextInHealthboxInDoubles(u8 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp)
 {
-    u32 windowId, spriteTileNum;
-    u8 *windowTileData;
-
     u8 battlerId;
-
     u8 text[20] = __("{COLOR 01}{HIGHLIGHT 00}");
     battlerId = gSprites[healthboxSpriteId].sBattlerId;
 
@@ -1723,7 +1637,6 @@ static void Task_HidePartyStatusSummary_BattleStart_2(u8 taskId)
     u8 ballIconSpriteIds[PARTY_SIZE];
     s32 i;
 
-    u8 battlerId = gTasks[taskId].tBattler;
     if (--gTasks[taskId].tBlendWeight == -1)
     {
         u8 summaryBarSpriteId = gTasks[taskId].tSummaryBarSpriteId;
@@ -1749,7 +1662,6 @@ static void Task_HidePartyStatusSummary_DuringBattle(u8 taskId)
 {
     u8 ballIconSpriteIds[PARTY_SIZE];
     s32 i;
-    u8 battlerId = gTasks[taskId].tBattler;
 
     if (--gTasks[taskId].tBlendWeight >= 0)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gTasks[taskId].tBlendWeight, 16 - gTasks[taskId].tBlendWeight));
@@ -2259,7 +2171,7 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
                                           gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
                                           &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
                                           B_HEALTHBAR_NUM_TILES,
-                                          1);
+                                          hpFraction);
     }
     else // exp bar
     {

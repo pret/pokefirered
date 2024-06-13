@@ -408,25 +408,6 @@ void StartRegiBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-// Unused
-static void EndPokedudeBattle(void)
-{
-    LoadPlayerParty();
-    CB2_EndWildBattle();
-}
-
-// Unused
-static void StartPokedudeBattle(void)
-{
-    LockPlayerFieldControls();
-    FreezeObjectEvents();
-    StopPlayerAvatar();
-    gMain.savedCallback = EndPokedudeBattle;
-    SavePlayerParty();
-    InitPokedudePartyAndOpponent();
-    CreateBattleStartTask(GetWildBattleTransition(), 0);
-}
-
 static void CB2_EndWildBattle(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
@@ -845,12 +826,6 @@ u16 Script_HasTrainerBeenFought(void)
 }
 
 void SetBattledTrainerFlag(void)
-{
-    FlagSet(GetTrainerAFlag());
-}
-
-// not used
-static void SetBattledTrainerFlag2(void)
 {
     FlagSet(GetTrainerAFlag());
 }

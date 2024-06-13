@@ -40,7 +40,7 @@ EWRAM_DATA static u16 sSoundAnimFramesToWait = 0;
 EWRAM_DATA static u8 sMonAnimTaskIdArray[2] = {0};
 EWRAM_DATA u8 gAnimMoveTurn = 0;
 EWRAM_DATA static u8 sAnimBackgroundFadeState = 0;
-EWRAM_DATA static u16 sAnimMoveIndex = 0; // Set but unused.
+EWRAM_DATA u16 gAnimMoveIndex = 0;
 EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
@@ -188,7 +188,7 @@ void ClearBattleAnimationVars(void)
     sMonAnimTaskIdArray[1] = TASK_NONE;
     gAnimMoveTurn = 0;
     sAnimBackgroundFadeState = 0;
-    sAnimMoveIndex = 0;
+    gAnimMoveIndex = 0;
     gBattleAnimAttacker = 0;
     gBattleAnimTarget = 0;
     gAnimCustomPanning = 0;
@@ -234,9 +234,9 @@ void LaunchBattleAnimation(u32 animType, u16 animId)
     }
 
     if (!isMoveAnim)
-        sAnimMoveIndex = 0;
+        gAnimMoveIndex = 0;
     else
-        sAnimMoveIndex = animId;
+        gAnimMoveIndex = animId;
 
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;
@@ -670,7 +670,6 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
 {
     struct BattleAnimBgData animBg;
     u8 battlerSpriteId;
-    struct Sprite *sprite;
 
     if (!toBG_2)
     {
@@ -935,7 +934,6 @@ static void Cmd_clearmonbg_static(void)
 
 static void Task_ClearMonBgStatic(u8 taskId)
 {
-    bool8 to_BG2;
     u8 position;
     u8 battlerId;
     
@@ -1056,15 +1054,6 @@ bool8 IsContest(void)
     return FALSE;
 }
 
-// Unused
-static bool8 IsSpeciesNotUnown(u16 species)
-{
-    if (species == SPECIES_UNOWN)
-        return FALSE;
-    else
-        return TRUE;
-}
-
 #define tBackgroundId   data[0]
 #define tState          data[10]
 
@@ -1083,13 +1072,12 @@ static void Cmd_fadetobg(void)
 
 static void Cmd_fadetobgfromset(void)
 {
-    u8 bg1, bg2, bg3;
+    u8 bg1, bg2;
     u8 taskId;
 
     sBattleAnimScriptPtr++;
     bg1 = sBattleAnimScriptPtr[0];
     bg2 = sBattleAnimScriptPtr[1];
-    bg3 = sBattleAnimScriptPtr[2];
     sBattleAnimScriptPtr += 3;
     taskId = CreateTask(Task_FadeToBg, 5);
 

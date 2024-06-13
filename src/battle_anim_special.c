@@ -2102,7 +2102,7 @@ static void PremierBallOpenParticleAnimation_Step1(struct Sprite *sprite)
 
 static void DestroyBallOpenAnimationParticle(struct Sprite *sprite)
 {
-    int i, j;
+    int i;
 
     if (!gMain.inBattle)
     {
@@ -2116,10 +2116,10 @@ static void DestroyBallOpenAnimationParticle(struct Sprite *sprite)
         gBattleSpritesDataPtr->animationData->numBallParticles--;
         if (gBattleSpritesDataPtr->animationData->numBallParticles == 0)
         {
-            for (j = 0; j < POKEBALL_COUNT; j++)
+            for (i = 0; i < POKEBALL_COUNT; i++)
             {
-                FreeSpriteTilesByTag(gBallParticleSpritesheets[j].tag);
-                FreeSpritePaletteByTag(gBallParticlePalettes[j].tag);
+                FreeSpriteTilesByTag(gBallParticleSpritesheets[i].tag);
+                FreeSpritePaletteByTag(gBallParticlePalettes[i].tag);
             }
 
             DestroySprite(sprite);
@@ -2463,11 +2463,8 @@ static void SpriteCB_ShinySparkles_2(struct Sprite *sprite)
 
 void AnimTask_LoadBaitGfx(u8 taskId)
 {
-    u8 paletteIndex;
-
     LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[ANIM_TAG_SAFARI_BAIT - ANIM_SPRITES_START]);
     LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[ANIM_TAG_SAFARI_BAIT - ANIM_SPRITES_START]);
-    paletteIndex = IndexOfSpritePaletteTag(ANIM_TAG_SAFARI_BAIT);
     DestroyAnimVisualTask(taskId);
 }
 

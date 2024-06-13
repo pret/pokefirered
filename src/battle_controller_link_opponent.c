@@ -278,12 +278,6 @@ static void SwitchIn_TryShinyAnim(u32 battler)
     }
 }
 
-static void CompleteOnFinishedBattleAnimation(u32 battler)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].animFromTableActive)
-        LinkOpponentBufferExecCompleted(battler);
-}
-
 static void LinkOpponentBufferExecCompleted(u32 battler)
 {
     gBattlerControllerFuncs[battler] = LinkOpponentBufferRunCommand;

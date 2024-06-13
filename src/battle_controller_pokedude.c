@@ -138,10 +138,6 @@ static void (*const sPokedudeBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler)
 #define pdScriptNum      simulatedInputState[2]
 #define pdMessageNo      simulatedInputState[3]
 
-static void PokedudeDummy(u32 battler)
-{
-}
-
 void SetControllerToPokedude(u32 battler)
 {
     gBattlerControllerEndFuncs[battler] = PokedudeBufferExecCompleted;
@@ -169,12 +165,6 @@ static void PokedudeBufferRunCommand(u32 battler)
 static void HandleInputChooseAction(u32 battler)
 {
     PokedudeSimulateInputChooseAction(battler);
-}
-
-static void CompleteOnBattlerSpriteCallbackDummy(u32 battler)
-{
-    if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
-        PokedudeBufferExecCompleted(battler);
 }
 
 static void CompleteOnBattlerSpritePosX_0(u32 battler)
@@ -372,28 +362,6 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
     }
 }
 
-static void FreeMonSpriteAfterFaintAnim(u32 battler)
-{
-    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-    {
-        if (gSprites[gBattlerSpriteIds[battler]].y + gSprites[gBattlerSpriteIds[battler]].y2 > DISPLAY_HEIGHT)
-        {
-            FreeOamMatrix(gSprites[gBattlerSpriteIds[battler]].oam.matrixNum);
-            DestroySprite(&gSprites[gBattlerSpriteIds[battler]]);
-            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
-            PokedudeBufferExecCompleted(battler);
-        }
-    }
-    else
-    {
-        if (!gSprites[gBattlerSpriteIds[battler]].inUse)
-        {
-            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[battler]);
-            PokedudeBufferExecCompleted(battler);
-        }
-    }
-}
-
 static void PokedudeBufferExecCompleted(u32 battler)
 {
     gBattlerControllerFuncs[battler] = PokedudeBufferRunCommand;
@@ -444,7 +412,7 @@ static void PokedudeHandleDrawTrainerPic(u32 battler)
         xPos = 176;
         yPos = (8 - gTrainerFrontPicCoords[trainerPicId].size) * 4 + 40;
     }
-    BtlController_HandleDrawTrainerPic(battler, trainerPicId, isFrontPic, xPos, yPos, -1);
+    BtlController_HandleDrawTrainerPic(battler, trainerPicId, isFrontPic, xPos, yPos, subpriority);
 }
 
 static void PokedudeHandleTrainerSlide(u32 battler)
@@ -460,11 +428,6 @@ static void PokedudeHandleSuccessBallThrowAnim(u32 battler)
 static void PokedudeHandleBallThrowAnim(u32 battler)
 {
     BtlController_HandleBallThrowAnim(battler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW, FALSE);
-}
-
-static void PokedudeHandlePause(u32 battler)
-{
-    PokedudeBufferExecCompleted(battler);
 }
 
 static void PokedudeHandlePrintSelectionString(u32 battler)

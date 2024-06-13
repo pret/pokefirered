@@ -256,12 +256,6 @@ static void SimulateInputChooseAction(u32 battler)
     }
 }
 
-static void CompleteOnBattlerSpriteCallbackDummy(u32 battler)
-{
-    if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
-        OakOldManBufferExecCompleted(battler);
-}
-
 static void CompleteOnInactiveTextPrinter(u32 battler)
 {
     if (!IsTextPrinterActive(0))
@@ -666,12 +660,6 @@ static void OakOldManBufferExecCompleted(u32 battler)
     {
         gBattleControllerExecFlags &= ~gBitTable[battler];
     }
-}
-
-static void CompleteOnFinishedStatusAnimation(u32 battler)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].statusAnimActive)
-        OakOldManBufferExecCompleted(battler);
 }
 
 static void OakOldManHandleDrawTrainerPic(u32 battler)

@@ -215,29 +215,6 @@ static void TryShinyAnimAfterMonAnim(u32 battler)
     }
 }
 
-static void CompleteOnHealthbarDone(u32 battler)
-{
-    s16 hpValue = MoveBattleBar(battler, gHealthboxSpriteIds[battler], HEALTH_BAR, 0);
-    
-    SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
-    if (hpValue != -1)
-    {
-        UpdateHpTextInHealthbox(gHealthboxSpriteIds[battler], HP_CURRENT, hpValue, gBattleMons[battler].maxHP);
-    }
-    else
-    {
-        if (!BtlCtrl_OakOldMan_TestState2Flag(1) && (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE))
-        {
-            BtlCtrl_OakOldMan_SetState2Flag(1);
-            gBattlerControllerFuncs[battler] = PrintOakText_InflictingDamageIsKey;
-        }
-        else
-        {
-            OpponentBufferExecCompleted(battler);
-        }
-    }
-}
-
 static void SwitchIn_ShowSubstitute(u32 battler)
 {
     if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy)

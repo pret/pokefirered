@@ -218,12 +218,6 @@ static void LinkPartnerBufferExecCompleted(u32 battler)
     }
 }
 
-static void CompleteOnFinishedBattleAnimation(u32 battler)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].animFromTableActive)
-        LinkPartnerBufferExecCompleted(battler);
-}
-
 static void LinkPartnerHandleLoadMonSprite(u32 battler)
 {
     BtlController_HandleLoadMonSprite(battler, WaitForMonAnimAfterLoad);

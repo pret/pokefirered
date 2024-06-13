@@ -25,6 +25,7 @@ SECTIONS {
     .ewram.sbss (NOLOAD) :
     ALIGN(4)
     {
+        gflib/malloc.o(.sbss); /* fixes issue when learning move with XP candies, gHeap corruption due to UB? */
         src/*.o(.sbss);
         gflib/*.o(.sbss);
     } > EWRAM

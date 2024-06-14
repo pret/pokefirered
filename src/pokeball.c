@@ -973,7 +973,6 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
     if (gMain.inBattle)
     {
         struct Pokemon *mon, *illusionMon;
-        u16 species;
         s8 pan;
         u16 wantedCryCase;
         u8 taskId;
@@ -989,7 +988,6 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
             pan = -25;
         }
 
-        species = GetMonData(mon, MON_DATA_SPECIES);
         if ((battlerId == GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) || battlerId == GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
          && IsDoubleBattle() && gBattleSpritesDataPtr->animationData->introAnimActive)
         {

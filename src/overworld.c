@@ -198,7 +198,7 @@ static void RunTerminateLinkScript(void);
 static void SpawnLinkPlayerObjectEvent(u8 i, s16 x, s16 y, u8 gender);
 static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s16 x, s16 y);
 static u8 GetSpriteForLinkedPlayer(u8 linkPlayerId);
-static void GetLinkPlayerCoords(u8 linkPlayerId, u16 *x, u16 *y);
+static void GetLinkPlayerCoords(u8 linkPlayerId, s16 *x, s16 *y);
 static u8 GetLinkPlayerFacingDirection(u8 linkPlayerId);
 static u8 GetLinkPlayerElevation(u8 linkPlayerId);
 static u8 GetLinkPlayerIdAt(s16 x, s16 y);
@@ -682,11 +682,6 @@ static void SetWarpDestinationToContinueGameWarp(void)
     sWarpDestination = gSaveBlock1Ptr->continueGameWarp;
 }
 
-static void SetContinueGameWarp(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
-{
-    SetWarpData(&gSaveBlock1Ptr->continueGameWarp, mapGroup, mapNum, warpId, x, y);
-}
-
 void SetContinueGameWarpToHealLocation(u8 healLocationId)
 {
     const struct HealLocation *warp = GetHealLocation(healLocationId);
@@ -812,11 +807,8 @@ static void LoadMapFromWarp(bool32 unused)
 
 static void QL_LoadMapNormal(void)
 {
-    bool8 isOutdoors;
-
     LoadCurrentMapData();
     LoadObjEventTemplatesFromHeader();
-    isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
     TrySetMapSaveWarpStatus();
     DoTimeBasedEvents();
     SetSavedWeatherFromCurrMapHeader();
@@ -1153,8 +1145,6 @@ static void PlayAmbientCry(void)
 
 void UpdateAmbientCry(s16 *state, u16 *delayCounter)
 {
-    u8 i, monsCount, divBy;
-
     switch (*state)
     {
     case 0:
@@ -1254,11 +1244,6 @@ bool8 IsMapTypeIndoors(u8 mapType)
         return TRUE;
     else
         return FALSE;
-}
-
-static u8 GetSavedWarpRegionMapSectionId(void)
-{
-    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->dynamicWarp.mapGroup, gSaveBlock1Ptr->dynamicWarp.mapNum)->regionMapSectionId;
 }
 
 u8 GetCurrentRegionMapSectionId(void)
@@ -2126,7 +2111,7 @@ static void InitObjectEventsLink(void)
 
 static void InitObjectEventsLocal(void)
 {
-    s16 x, y;
+    u16 x, y;
     struct InitialPlayerAvatarState *player;
 
     gTotalCameraPixelOffsetX = 0;
@@ -2996,11 +2981,6 @@ u32 GetCableClubPartnersReady(void)
     return CABLE_SEAT_WAITING;
 }
 
-static bool32 IsAnyPlayerExitingCableClub(void)
-{
-    return IsAnyPlayerInLinkState(PLAYER_LINK_STATE_EXITING_ROOM);
-}
-
 u16 SetInCableClubSeat(void)
 {
     SetKeyInterceptCallback(KeyInterCB_SetReady);
@@ -3304,27 +3284,6 @@ static void InitLinkPlayerObjectEventPos(struct ObjectEvent *objEvent, s16 x, s1
     ObjectEventUpdateElevation(objEvent);
 }
 
-static void SetLinkPlayerObjectRange(u8 linkPlayerId, u8 dir)
-{
-    if (gLinkPlayerObjectEvents[linkPlayerId].active)
-    {
-        u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
-        struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
-        linkDirection(objEvent) = dir;
-    }
-}
-
-static void DestroyLinkPlayerObject(u8 linkPlayerId)
-{
-    struct LinkPlayerObjectEvent *linkPlayerObjEvent = &gLinkPlayerObjectEvents[linkPlayerId];
-    u8 objEventId = linkPlayerObjEvent->objEventId;
-    struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
-    if (objEvent->spriteId != MAX_SPRITES)
-        DestroySprite(&gSprites[objEvent->spriteId]);
-    linkPlayerObjEvent->active = FALSE;
-    objEvent->active = FALSE;
-}
-
 // Returns the spriteId corresponding to this player.
 static u8 GetSpriteForLinkedPlayer(u8 linkPlayerId)
 {
@@ -3333,7 +3292,7 @@ static u8 GetSpriteForLinkedPlayer(u8 linkPlayerId)
     return objEvent->spriteId;
 }
 
-static void GetLinkPlayerCoords(u8 linkPlayerId, u16 *x, u16 *y)
+static void GetLinkPlayerCoords(u8 linkPlayerId, s16 *x, s16 *y)
 {
     u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
     struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
@@ -3353,13 +3312,6 @@ static u8 GetLinkPlayerElevation(u8 linkPlayerId)
     u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
     struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
     return objEvent->currentElevation;
-}
-
-static s32 GetLinkPlayerObjectStepTimer(u8 linkPlayerId)
-{
-    u8 objEventId = gLinkPlayerObjectEvents[linkPlayerId].objEventId;
-    struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
-    return 16 - (s8)objEvent->directionSequenceIndex;
 }
 
 static u8 GetLinkPlayerIdAt(s16 x, s16 y)

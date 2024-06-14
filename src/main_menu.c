@@ -161,11 +161,6 @@ void CB2_InitMainMenu(void)
     MainMenuGpuInit(1);
 }
 
-static void CB2_InitMainMenu_2(void)
-{
-    MainMenuGpuInit(1);
-}
-
 static bool32 MainMenuGpuInit(u8 a0)
 {
     u8 taskId;

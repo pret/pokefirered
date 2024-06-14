@@ -67,13 +67,13 @@ void *const gNullScriptPtr = NULL;
 
 static const u8 sScriptConditionTable[6][3] =
 {
-//  <  =  >
-    1, 0, 0, // <
-    0, 1, 0, // =
-    0, 0, 1, // >
-    1, 1, 0, // <=
-    0, 1, 1, // >=
-    1, 0, 1, // !=
+//   <  =  >
+    {1, 0, 0}, // <
+    {0, 1, 0}, // =
+    {0, 0, 1}, // >
+    {1, 1, 0}, // <=
+    {0, 1, 1}, // >=
+    {1, 0, 1}, // !=
 };
 
 bool8 ScrCmd_nop(struct ScriptContext * ctx)
@@ -529,33 +529,21 @@ bool8 ScrCmd_checkpcitem(struct ScriptContext * ctx)
 
 bool8 ScrCmd_adddecoration(struct ScriptContext * ctx)
 {
-    u32 decorId = VarGet(ScriptReadHalfword(ctx));
-
-//    gSpecialVar_Result = DecorationAdd(decorId);
     return FALSE;
 }
 
 bool8 ScrCmd_removedecoration(struct ScriptContext * ctx)
 {
-    u32 decorId = VarGet(ScriptReadHalfword(ctx));
-
-//    gSpecialVar_Result = DecorationRemove(decorId);
     return FALSE;
 }
 
 bool8 ScrCmd_checkdecorspace(struct ScriptContext * ctx)
 {
-    u32 decorId = VarGet(ScriptReadHalfword(ctx));
-
-//    gSpecialVar_Result = DecorationCheckSpace(decorId);
     return FALSE;
 }
 
 bool8 ScrCmd_checkdecor(struct ScriptContext * ctx)
 {
-    u32 decorId = VarGet(ScriptReadHalfword(ctx));
-
-//    gSpecialVar_Result = CheckHasDecoration(decorId);
     return FALSE;
 }
 
@@ -763,8 +751,8 @@ bool8 ScrCmd_warphole(struct ScriptContext * ctx)
 {
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
-    u16 x;
-    u16 y;
+    s16 x;
+    s16 y;
 
     PlayerGetDestCoords(&x, &y);
     if (mapGroup == MAP_GROUP(UNDEFINED) && mapNum == MAP_NUM(UNDEFINED))
@@ -1494,27 +1482,11 @@ bool8 ScrCmd_multichoicegrid(struct ScriptContext * ctx)
 
 bool8 ScrCmd_erasebox(struct ScriptContext * ctx)
 {
-    u8 left = ScriptReadByte(ctx);
-    u8 top = ScriptReadByte(ctx);
-    u8 right = ScriptReadByte(ctx);
-    u8 bottom = ScriptReadByte(ctx);
-
-    // Menu_EraseWindowRect(left, top, right, bottom);
     return FALSE;
 }
 
 bool8 ScrCmd_drawboxtext(struct ScriptContext * ctx)
 {
-//    u8 left = ScriptReadByte(ctx);
-//    u8 top = ScriptReadByte(ctx);
-//    u8 multichoiceId = ScriptReadByte(ctx);
-//    bool8 ignoreBPress = ScriptReadByte(ctx);
-
-    /*if (Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
-    {
-        ScriptContext_Stop();
-        return TRUE;
-    }*/
     return FALSE;
 }
 
@@ -1543,16 +1515,6 @@ bool8 ScrCmd_hidemonpic(struct ScriptContext * ctx)
 
 bool8 ScrCmd_showcontestpainting(struct ScriptContext * ctx)
 {
-    u8 contestWinnerId = ScriptReadByte(ctx);
-    /*
-    // Artist's painting is temporary and already has its data loaded
-    if (contestWinnerId != CONTEST_WINNER_ARTIST)
-        SetContestWinnerForPainting(contestWinnerId);
-
-    ShowContestPainting();
-    ScriptContext_Stop()
-    return TRUE;
-    */
     return FALSE;
 }
 
@@ -1660,10 +1622,6 @@ bool8 ScrCmd_bufferitemnameplural(struct ScriptContext * ctx)
 
 bool8 ScrCmd_bufferdecorationname(struct ScriptContext * ctx)
 {
-    u8 stringVarIndex = ScriptReadByte(ctx);
-    u16 decorId = VarGet(ScriptReadHalfword(ctx));
-
-//    StringCopy(sScriptStringVars[stringVarIndex], gDecorations[decorId].name);
     return FALSE;
 }
 
@@ -1814,17 +1772,12 @@ bool8 ScrCmd_showmoneybox(struct ScriptContext * ctx)
 
 bool8 ScrCmd_hidemoneybox(struct ScriptContext * ctx)
 {
-    /*u8 x = ScriptReadByte(ctx);
-    u8 y = ScriptReadByte(ctx);*/
-
     HideMoneyBox();
     return FALSE;
 }
 
 bool8 ScrCmd_updatemoneybox(struct ScriptContext * ctx)
 {
-    u8 x = ScriptReadByte(ctx);
-    u8 y = ScriptReadByte(ctx);
     u8 ignore = ScriptReadByte(ctx);
 
     if (!ignore)
@@ -1844,18 +1797,12 @@ bool8 ScrCmd_showcoinsbox(struct ScriptContext * ctx)
 
 bool8 ScrCmd_hidecoinsbox(struct ScriptContext * ctx)
 {
-    u8 x = ScriptReadByte(ctx);
-    u8 y = ScriptReadByte(ctx);
-
     HideCoinsWindow();
     return FALSE;
 }
 
 bool8 ScrCmd_updatecoinsbox(struct ScriptContext * ctx)
 {
-    u8 x = ScriptReadByte(ctx);
-    u8 y = ScriptReadByte(ctx);
-
     PrintCoinsString(GetCoins());
     return FALSE;
 }

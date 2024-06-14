@@ -540,6 +540,10 @@ check: $(TESTELF)
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=$(MODERN)
 
+	
+firered:                ; @$(MAKE) GAME_VERSION=FIRERED
+leafgreen:              ; @$(MAKE) GAME_VERSION=LEAFGREEN
+
 ###################
 ### Symbol file ###
 ###################

@@ -182,13 +182,9 @@ static bool8 MovementAction_AcroWheelieFaceUp_Step0(struct ObjectEvent *, struct
 static bool8 MovementAction_AcroWheelieFaceLeft_Step0(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_AcroWheelieFaceRight_Step0(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_AcroPopWheelieDown_Step0(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_AcroPopWheelieDown_Step1(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_AcroPopWheelieUp_Step0(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_AcroPopWheelieUp_Step1(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_AcroPopWheelieLeft_Step0(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_AcroPopWheelieLeft_Step1(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_AcroPopWheelieRight_Step0(struct ObjectEvent *, struct Sprite *);
-static bool8 MovementAction_AcroPopWheelieRight_Step1(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_AcroEndWheelieFaceDown_Step0(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_AcroEndWheelieFaceUp_Step0(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementAction_AcroEndWheelieFaceLeft_Step0(struct ObjectEvent *, struct Sprite *);

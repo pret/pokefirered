@@ -9,7 +9,6 @@
 static EWRAM_DATA u8 sMessageBoxType = 0;
 
 static void ExpandStringAndStartDrawFieldMessageBox(const u8 *str);
-static void StartDrawFieldMessageBox(void);
 
 void InitFieldMessageBox(void)
 {
@@ -80,35 +79,9 @@ bool8 ShowFieldAutoScrollMessage(const u8 *str)
     return TRUE;
 }
 
-// Unused
-static bool8 ForceShowFieldAutoScrollMessage(const u8 *str)
-{
-    sMessageBoxType = FIELD_MESSAGE_BOX_AUTO_SCROLL;
-    ExpandStringAndStartDrawFieldMessageBox(str);
-    return TRUE;
-}
-
-// Unused
-// Same as ShowFieldMessage, but instead of accepting a string argument,
-// it just prints whatever that's already in gStringVar4
-static bool8 ShowFieldMessageFromBuffer(void)
-{
-    if (sMessageBoxType != FIELD_MESSAGE_BOX_HIDDEN)
-        return FALSE;
-    sMessageBoxType = FIELD_MESSAGE_BOX_NORMAL;
-    StartDrawFieldMessageBox();
-    return TRUE;
-}
-
 static void ExpandStringAndStartDrawFieldMessageBox(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
-    AddTextPrinterDiffStyle(TRUE);
-    CreateTask_DrawFieldMessageBox();
-}
-
-static void StartDrawFieldMessageBox(void)
-{
     AddTextPrinterDiffStyle(TRUE);
     CreateTask_DrawFieldMessageBox();
 }
@@ -131,12 +104,4 @@ bool8 IsFieldMessageBoxHidden(void)
         return TRUE;
     else
         return FALSE;
-}
-
-// Unused
-static void ReplaceFieldMessageWithFrame(void)
-{
-    DestroyTask_DrawFieldMessageBox();
-    DrawStdWindowFrame(0, TRUE);
-    sMessageBoxType = FIELD_MESSAGE_BOX_HIDDEN;
 }

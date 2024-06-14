@@ -1641,7 +1641,6 @@ static u8 HandleInput_OnButtons(void)
     u8 input;
     s8 cursorArea;
     s8 cursorPosition;
-    s8 prevPos;
 
     do
     {

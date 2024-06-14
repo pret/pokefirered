@@ -1345,9 +1345,6 @@ static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite)
 
 static EWRAM_DATA struct UnkUtil *sUnkUtil = NULL;
 
-static void UnkUtil_CpuRun(struct UnkUtilData *unkStruct);
-static void UnkUtil_DmaRun(struct UnkUtilData *unkStruct);
-
 void UnkUtil_Init(struct UnkUtil *util, struct UnkUtilData *data, u32 max)
 {
     sUnkUtil = util;
@@ -1367,64 +1364,5 @@ void UnkUtil_Run(void)
             data->func(data);
         }
         sUnkUtil->numActive = 0;
-    }
-}
-
-// Unused
-static bool8 UnkUtil_CpuAdd(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
-{
-    struct UnkUtilData *data;
-
-    if (sUnkUtil->numActive >= sUnkUtil->max)
-        return FALSE;
-
-    data = &sUnkUtil->data[sUnkUtil->numActive++];
-    data->size = width * 2;
-    data->dest = dest + 2 * (dTop * 32 + dLeft);
-    data->src = src + 2 * (sTop * unkArg + sLeft);
-    data->height = height;
-    data->unk = unkArg;
-    data->func = UnkUtil_CpuRun;
-    return TRUE;
-}
-
-// Functionally unused
-static void UnkUtil_CpuRun(struct UnkUtilData *data)
-{
-    u16 i;
-
-    for (i = 0; i < data->height; i++)
-    {
-        CpuCopy16(data->src, data->dest, data->size);
-        data->dest += 64;
-        data->src += (data->unk * 2);
-    }
-}
-
-// Unused
-static bool8 UnkUtil_DmaAdd(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
-{
-    struct UnkUtilData *data;
-
-    if (sUnkUtil->numActive >= sUnkUtil->max)
-        return FALSE;
-
-    data = &sUnkUtil->data[sUnkUtil->numActive++];
-    data->size = width * 2;
-    data->dest = dest + ((dTop * 32) + dLeft) * 2;
-    data->height = height;
-    data->func = UnkUtil_DmaRun;
-    return TRUE;
-}
-
-// Functionally unused
-static void UnkUtil_DmaRun(struct UnkUtilData *data)
-{
-    u16 i;
-
-    for (i = 0; i < data->height; i++)
-    {
-        Dma3FillLarge_(0, data->dest, data->size, 16);
-        data->dest += 64;
     }
 }

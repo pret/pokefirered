@@ -40,17 +40,6 @@ u8 RouletteFlash_Add(struct RouletteFlashUtil *flash, u8 id, const struct Roulet
     return id;
 }
 
-static u8 RouletteFlash_Remove(struct RouletteFlashUtil *flash, u8 id)
-{
-    if (id >= ARRAY_COUNT(flash->palettes))
-        return 0xFF;
-    if (!flash->palettes[id].available)
-        return 0xFF;
-
-    memset(&flash->palettes[id], 0, sizeof(flash->palettes[id]));
-    return id;
-}
-
 static u8 RouletteFlash_FadePalette(struct RouletteFlashPalette *pal)
 {
     u8 i;

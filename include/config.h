@@ -1,7 +1,6 @@
 #ifndef GUARD_CONFIG_H
 #define GUARD_CONFIG_H
 
-#define BUGFIX
 // In the Generation 3 games, Asserts were used in various debug builds.
 // Ruby/Sapphire and Emerald do not have these asserts while Fire Red
 // still has them in the ROM. This is because the developers forgot
@@ -52,14 +51,12 @@
 
 // Crashes may occur due to section reordering in the modern build,
 // so we force BUGFIX here.
-#if MODERN
 #ifndef BUGFIX
 #define BUGFIX
 #endif // BUGFIX
 #ifndef UBFIX
 #define UBFIX
 #endif // UBFIX
-#endif // MODERN
 
 // Generation constants used in configs to define behavior
 #define GEN_1 0

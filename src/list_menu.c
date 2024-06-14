@@ -247,52 +247,6 @@ void RedrawListMenu(u8 listTaskId)
     CopyWindowToVram(list->template.windowId, COPYWIN_GFX);
 }
 
-static void ChangeListMenuPals(u8 listTaskId, u8 cursorPal, u8 fillValue, u8 cursorShadowPal)
-{
-    struct ListMenu *list = (struct ListMenu *)gTasks[listTaskId].data;
-
-    list->template.cursorPal = cursorPal;
-    list->template.fillValue = fillValue;
-    list->template.cursorShadowPal = cursorShadowPal;
-}
-
-static void ChangeListMenuCoords(u8 listTaskId, u8 x, u8 y)
-{
-    struct ListMenu *list = (struct ListMenu *)gTasks[listTaskId].data;
-
-    SetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_LEFT, x);
-    SetWindowAttribute(list->template.windowId, WINDOW_TILEMAP_TOP, y);
-}
-
-static s32 ListMenuTestInput(struct ListMenuTemplate *template, u32 cursorPos, u32 itemsAbove, u16 keys, u16 *newCursorPos, u16 *newItemsAbove)
-{
-    struct ListMenu list;
-
-    list.template = *template;
-    list.cursorPos = cursorPos;
-    list.itemsAbove = itemsAbove;
-    list.unk_1C = 0;
-    list.unk_1D = 0;
-    if (keys == DPAD_UP)
-        ListMenuChangeSelection(&list, FALSE, 1, FALSE);
-    if (keys == DPAD_DOWN)
-        ListMenuChangeSelection(&list, FALSE, 1, TRUE);
-
-    if (newCursorPos != NULL)
-        *newCursorPos = list.cursorPos;
-    if (newItemsAbove != NULL)
-        *newItemsAbove = list.itemsAbove;
-    return LIST_NOTHING_CHOSEN;
-}
-
-static void ListMenuGetCurrentItemArrayId(u8 listTaskId, u16 *arrayId)
-{
-    struct ListMenu *list = (struct ListMenu *)gTasks[listTaskId].data;
-
-    if (arrayId != NULL)
-        *arrayId = list->cursorPos + list->itemsAbove;
-}
-
 void ListMenuGetScrollAndRow(u8 listTaskId, u16 *cursorPos, u16 *itemsAbove)
 {
     struct ListMenu *list = (struct ListMenu *)gTasks[listTaskId].data;
@@ -622,50 +576,6 @@ void ListMenuDefaultCursorMoveFunc(s32 itemIndex, bool8 onInit, struct ListMenu 
 {
     if (!onInit)
         PlaySE(SE_SELECT);
-}
-
-static s32 ListMenuGetTemplateField(u8 taskId, u8 field)
-{
-    struct ListMenu *data = (struct ListMenu *)gTasks[taskId].data;
-
-    switch (field)
-    {
-    case LISTFIELD_MOVECURSORFUNC:
-    case LISTFIELD_MOVECURSORFUNC2:
-        return (s32)(data->template.moveCursorFunc);
-    case LISTFIELD_TOTALITEMS:
-        return data->template.totalItems;
-    case LISTFIELD_MAXSHOWED:
-        return data->template.maxShowed;
-    case LISTFIELD_WINDOWID:
-        return data->template.windowId;
-    case LISTFIELD_HEADERX:
-        return data->template.header_X;
-    case LISTFIELD_ITEMX:
-        return data->template.item_X;
-    case LISTFIELD_CURSORX:
-        return data->template.cursor_X;
-    case LISTFIELD_UPTEXTY:
-        return data->template.upText_Y;
-    case LISTFIELD_CURSORPAL:
-        return data->template.cursorPal;
-    case LISTFIELD_FILLVALUE:
-        return data->template.fillValue;
-    case LISTFIELD_CURSORSHADOWPAL:
-        return data->template.cursorShadowPal;
-    case LISTFIELD_LETTERSPACING:
-        return data->template.lettersSpacing;
-    case LISTFIELD_ITEMVERTICALPADDING:
-        return data->template.itemVerticalPadding;
-    case LISTFIELD_SCROLLMULTIPLE:
-        return data->template.scrollMultiple;
-    case LISTFIELD_FONTID:
-        return data->template.fontId;
-    case LISTFIELD_CURSORKIND:
-        return data->template.cursorKind;
-    default:
-        return -1;
-    }
 }
 
 void ListMenuSetTemplateField(u8 taskId, u8 field, s32 value)

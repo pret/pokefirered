@@ -41,9 +41,6 @@ struct PaletteStruct
     u8 countdown2;
 };
 
-static void PaletteStruct_Copy(struct PaletteStruct *, u32 *);
-static void PaletteStruct_Blend(struct PaletteStruct *, u32 *);
-static void PaletteStruct_TryEnd(struct PaletteStruct *);
 static void PaletteStruct_Reset(u8 paletteNum);
 static u8 PaletteStruct_GetPalNum(u16);
 static u8 UpdateNormalPaletteFade(void);
@@ -189,144 +186,6 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
     }
 }
 
-// Unused
-static bool8 BeginPlttFade(u32 selectedPalettes, u8 delay, u8 startY, u8 targetY, u16 blendColor)
-{
-    ReadPlttIntoBuffers();
-    return BeginNormalPaletteFade(selectedPalettes, delay, startY, targetY, blendColor);
-}
-
-// Unused
-static void PaletteStruct_Run(u8 a1, u32 *unkFlags)
-{
-    u8 i;
-
-    for (i = 0; i < NUM_PALETTE_STRUCTS; ++i)
-    {
-        struct PaletteStruct *palstruct = &sPaletteStructs[i];
-
-        if (palstruct->active)
-        {
-            if (palstruct->template->pst_field_8_0 == a1)
-            {
-                u8 srcIndex = palstruct->srcIndex;
-                u8 srcCount = palstruct->template->srcCount;
-
-                if (srcIndex == srcCount)
-                {
-                    PaletteStruct_TryEnd(palstruct);
-                    if (!palstruct->active)
-                        continue;
-                }
-                if (palstruct->countdown1 == 0)
-                    PaletteStruct_Copy(palstruct, unkFlags);
-                else
-                    palstruct->countdown1--;
-                PaletteStruct_Blend(palstruct, unkFlags);
-            }
-        }
-    }
-}
-
-static void PaletteStruct_Copy(struct PaletteStruct *palStruct, u32 *unkFlags)
-{
-    s32 srcIndex;
-    s32 srcCount;
-    u8 i = 0;
-    u16 srcOffset = palStruct->srcIndex * palStruct->template->size;
-
-    if (!palStruct->template->pst_field_8_0)
-    {
-        while (i < palStruct->template->size)
-        {
-            gPlttBufferUnfaded[palStruct->destOffset] = palStruct->template->src[srcOffset];
-            gPlttBufferFaded[palStruct->destOffset] = palStruct->template->src[srcOffset];
-            i++;
-            palStruct->destOffset++;
-            srcOffset++;
-        }
-    }
-    else
-    {
-        while (i < palStruct->template->size)
-        {
-            gPlttBufferFaded[palStruct->destOffset] = palStruct->template->src[srcOffset];
-            i++;
-            palStruct->destOffset++;
-            srcOffset++;
-        }
-    }
-    palStruct->destOffset = palStruct->baseDestOffset;
-    palStruct->countdown1 = palStruct->template->time1;
-    palStruct->srcIndex++;
-    srcIndex = palStruct->srcIndex;
-    srcCount = palStruct->template->srcCount;
-    if (srcIndex >= srcCount)
-    {
-        if (palStruct->countdown2)
-            palStruct->countdown2--;
-        palStruct->srcIndex = 0;
-    }
-    *unkFlags |= 1 << (palStruct->baseDestOffset >> 4);
-}
-
-static void PaletteStruct_Blend(struct PaletteStruct *palStruct, u32 *unkFlags)
-{
-    if (gPaletteFade.active && ((1 << (palStruct->baseDestOffset >> 4)) & gPaletteFade_selectedPalettes))
-    {
-        if (!palStruct->template->pst_field_8_0)
-        {
-            if (gPaletteFade.delayCounter != gPaletteFade_delay)
-                BlendPalette(palStruct->baseDestOffset,
-                             palStruct->template->size,
-                             gPaletteFade.y,
-                             gPaletteFade.blendColor);
-        }
-        else
-        {
-            if (!gPaletteFade.delayCounter)
-            {
-                if (palStruct->countdown1 != palStruct->template->time1)
-                {
-                    u32 srcOffset = palStruct->srcIndex * palStruct->template->size;
-                    u8 i;
-
-                    for (i = 0; i < palStruct->template->size; i++)
-                        gPlttBufferFaded[palStruct->baseDestOffset + i] = palStruct->template->src[srcOffset + i];
-                }
-            }
-        }
-    }
-}
-
-static void PaletteStruct_TryEnd(struct PaletteStruct *palStruct)
-{
-    if (!palStruct->countdown2)
-    {
-        s32 state = palStruct->template->state;
-
-        if (state == 0)
-        {
-            palStruct->srcIndex = 0;
-            palStruct->countdown1 = palStruct->template->time1;
-            palStruct->countdown2 = palStruct->template->time2;
-            palStruct->destOffset = palStruct->baseDestOffset;
-        }
-        else
-        {
-            if (state < 0)
-                return;
-            if (state > 2)
-                return;
-            PaletteStruct_ResetById(palStruct->template->id);
-        }
-    }
-    else
-    {
-        palStruct->countdown2--;
-    }
-}
-
 void PaletteStruct_ResetById(u16 id)
 {
     u8 paletteNum = PaletteStruct_GetPalNum(id);
@@ -364,20 +223,6 @@ void ResetPaletteFadeControl(void)
     gPaletteFade.softwareFadeFinishingCounter = 0;
     gPaletteFade.objPaletteToggle = 0;
     gPaletteFade.deltaY = 2;
-}
-
-static void PaletteStruct_SetUnusedFlag(u16 id)
-{
-    u8 paletteNum = PaletteStruct_GetPalNum(id);
-    if (paletteNum != NUM_PALETTE_STRUCTS)
-        sPaletteStructs[paletteNum].flag = TRUE;
-}
-
-static void PaletteStruct_ClearUnusedFlag(u16 id)
-{
-    u8 paletteNum = PaletteStruct_GetPalNum(id);
-    if (paletteNum != NUM_PALETTE_STRUCTS)
-        sPaletteStructs[paletteNum].flag = FALSE;
 }
 
 static u8 PaletteStruct_GetPalNum(u16 id)

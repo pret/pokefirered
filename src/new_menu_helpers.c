@@ -625,19 +625,6 @@ void Menu_LoadStdPalAt(u16 offset)
     LoadPalette(gStandardMenuPalette, offset, PLTT_SIZEOF(10));
 }
 
-// Unused
-static const u16 *GetStdMenuPalette(void)
-{
-    return gStandardMenuPalette;
-}
-
-static u16 GetStdPalColor(u8 colorNum)
-{
-    if (colorNum > 15)
-        colorNum = 0;
-    return gStandardMenuPalette[colorNum];
-}
-
 void DisplayItemMessageOnField(u8 taskId, u8 fontId, const u8 *string, TaskFunc callback)
 {
     LoadStdWindowFrameGfx();
@@ -657,7 +644,6 @@ void DisplayYesNoMenuDefaultNo(void)
 
 u8 GetTextSpeedSetting(void)
 {
-    u32 speed;
     if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_FAST)
         gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
     return sTextSpeedFrameDelays[gSaveBlock2Ptr->optionsTextSpeed];
@@ -686,11 +672,6 @@ void RemoveStartMenuWindow(void)
         RemoveWindow(sStartMenuWindowId);
         sStartMenuWindowId = 0xFF;
     }
-}
-
-static u16 GetDlgWindowBaseTileNum(void)
-{
-    return DLG_WINDOW_BASE_TILE_NUM;
 }
 
 u16 GetStdWindowBaseTileNum(void)

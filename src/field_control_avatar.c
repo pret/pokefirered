@@ -679,11 +679,6 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     return FALSE;
 }
 
-static void Unref_ClearHappinessStepCounter(void)
-{
-    VarSet(VAR_HAPPINESS_STEP_COUNTER, 0);
-}
-
 static void UpdateHappinessStepCounter(void)
 {
     u16 *ptr = GetVarPointer(VAR_HAPPINESS_STEP_COUNTER);
@@ -1138,36 +1133,6 @@ bool8 dive_warp(struct MapPosition *position, u16 metatileBehavior)
         }
     }
     return FALSE;
-}
-
-static u8 TrySetDiveWarp(void)
-{
-    s16 x, y;
-    u8 metatileBehavior;
-
-    PlayerGetDestCoords(&x, &y);
-    metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && !MetatileBehavior_IsUnableToEmerge(metatileBehavior))
-    {
-        if (SetDiveWarpEmerge(x - MAP_OFFSET, y - MAP_OFFSET) == TRUE)
-            return 1;
-    }
-    else if (MetatileBehavior_IsDiveable(metatileBehavior) == TRUE)
-    {
-        if (SetDiveWarpDive(x - MAP_OFFSET, y - MAP_OFFSET) == TRUE)
-            return 2;
-    }
-    return 0;
-}
-
-static const u8 *GetObjectEventScriptPointerPlayerFacing(void)
-{
-    u8 direction;
-    struct MapPosition position;
-
-    direction = GetPlayerMovementDirection();
-    GetInFrontOfPlayerPosition(&position);
-    return GetInteractedObjectEventScript(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), direction);
 }
 
 int SetCableClubWarp(void)

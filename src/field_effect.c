@@ -591,20 +591,6 @@ u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buf
     return CreateSprite(&spriteTemplate, x, y, subpriority);
 }
 
-// Unused
-static void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
-{
-    LZDecompressVram(gTrainerFrontPicTable[gender].data, dest);
-    LoadCompressedPalette(gTrainerFrontPicPaletteTable[gender].data, palOffset, PLTT_SIZE_4BPP);
-}
-
-// Unused
-static u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
-{
-    LoadSpritePalette(&sNewGameOakObjectPaletteInfo);
-    return CreateSprite(&sNewGameOakObjectTemplate, x, y, subpriority);
-}
-
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
     u16 spriteId = CreateMonPicSprite(species, FALSE, 0x8000, TRUE, x, y, 0, species);
@@ -650,27 +636,6 @@ void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
     curRed += (((0x1f - curRed) * r) >> 4);
     curGreen += (((0x1f - curGreen) * g) >> 4);
     curBlue += (((0x1f - curBlue) * b) >> 4);
-    outPal = curRed;
-    outPal |= curGreen << 5;
-    outPal |= curBlue << 10;
-    gPlttBufferFaded[i] = outPal;
-}
-
-// r, g, b are between 0 and 16
-static void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
-{
-    int curRed;
-    int curGreen;
-    int curBlue;
-    u16 outPal;
-
-    outPal = gPlttBufferUnfaded[i];
-    curRed = outPal & 0x1f;
-    curGreen = (outPal & (0x1f << 5)) >> 5;
-    curBlue = (outPal & (0x1f << 10)) >> 10;
-    curRed -= ((curRed * r) >> 4);
-    curGreen -= ((curGreen * g) >> 4);
-    curBlue -= ((curBlue * b) >> 4);
     outPal = curRed;
     outPal |= curGreen << 5;
     outPal |= curBlue << 10;
@@ -827,7 +792,6 @@ static void Task_HallOfFameRecord(u8 taskId)
 
 static void HallOfFameRecordEffect_Init(struct Task *task)
 {
-    u8 taskId;
     task->tState++;
     task->tGlowEffectSpriteId = CreateGlowingPokeballsEffect(task->tNumMons, task->tFirstBallX, task->tFirstBallY, FALSE);
 }

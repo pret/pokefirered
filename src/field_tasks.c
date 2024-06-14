@@ -32,20 +32,18 @@
  */
 
 static void DummyPerStepCallback(u8 taskId);
-static void AshGrassPerStepCallback(u8 taskId);
 static void IcefallCaveIcePerStepCallback(u8 taskId);
-static void CrackedFloorPerStepCallback(u8 taskId);
 
 static const TaskFunc sPerStepCallbacks[] =
 {
     [STEP_CB_DUMMY]             = DummyPerStepCallback,
-    [STEP_CB_ASH]               = AshGrassPerStepCallback,
+    [STEP_CB_ASH]               = DummyPerStepCallback,
     [STEP_CB_FORTREE_BRIDGE]    = DummyPerStepCallback,
     [STEP_CB_PACIFIDLOG_BRIDGE] = DummyPerStepCallback,
     [STEP_CB_ICE]               = IcefallCaveIcePerStepCallback,
     [STEP_CB_TRUCK]             = DummyPerStepCallback,
     [STEP_CB_SECRET_BASE]       = DummyPerStepCallback,
-    [STEP_CB_CRACKED_FLOOR]     = CrackedFloorPerStepCallback
+    [STEP_CB_CRACKED_FLOOR]     = DummyPerStepCallback
 };
 
 // The positions of each map space with crackable ice in Icefall Cave.
@@ -103,7 +101,7 @@ static void Task_RunTimeBasedEvents(u8 taskId)
     if (!ArePlayerFieldControlsLocked() && !QL_IS_PLAYBACK_STATE)
     {
         RunTimeBasedEvents(data);
-        UpdateAmbientCry(&tAmbientCryState, &tAmbientCryDelay);
+        UpdateAmbientCry(&tAmbientCryState, (u16*) &tAmbientCryDelay);
     }
 }
 
@@ -202,7 +200,6 @@ static void IcefallCaveIcePerStepCallback(u8 taskId)
 {
     s16 x, y;
     u8 tileBehavior;
-    u16 *iceStepCount;
     s16 *data = gTasks[taskId].data;
     switch (tState)
     {
@@ -281,99 +278,3 @@ static void IcefallCaveIcePerStepCallback(u8 taskId)
 #undef tIceX
 #undef tIceY
 #undef tDelay
-
-#define tPrevX data[1]
-#define tPrevY data[2]
-
-// Unused. For some reason this was not dummied out like the other RSE-exclusive step callbacks.
-static void AshGrassPerStepCallback(u8 taskId)
-{
-    s16 x, y;
-    u16 *ashGatherCount;
-    s16 *data = gTasks[taskId].data;
-    PlayerGetDestCoords(&x, &y);
-
-    // End if player hasn't moved
-    if (x == tPrevX && y == tPrevY)
-        return;
-
-    tPrevX = x;
-    tPrevY = y;
-    if (MetatileBehavior_IsAshGrass((u8)MapGridGetMetatileBehaviorAt(x, y)))
-    {
-        // Remove ash from grass
-        if (MapGridGetMetatileIdAt(x, y) == METATILE_Fallarbor_AshGrass)
-            StartAshFieldEffect(x, y, METATILE_Fallarbor_NormalGrass, 4);
-        else
-            StartAshFieldEffect(x, y, METATILE_Lavaridge_NormalGrass, 4);
-    }
-}
-
-#undef tPrevX
-#undef tPrevY
-
-// Unused. For some reason these were not dummied out like the other RSE-exclusive step callbacks.
-static void SetCrackedFloorHoleMetatile(s16 x, s16 y)
-{
-    MapGridSetMetatileIdAt(x, y, MapGridGetMetatileIdAt(x, y) == METATILE_RSCave_CrackedFloor ? METATILE_RSCave_CrackedFloor_Hole : METATILE_Pacifidlog_SkyPillar_CrackedFloor_Hole);
-    CurrentMapDrawMetatileAt(x, y);
-}
-
-#define tPrevX       data[2]
-#define tPrevY       data[3]
-#define tFloor1Delay data[4]
-#define tFloor1X     data[5]
-#define tFloor1Y     data[6]
-#define tFloor2Delay data[7]
-#define tFloor2X     data[8]
-#define tFloor2Y     data[9]
-
-// Unused. See above.
-static void CrackedFloorPerStepCallback(u8 taskId)
-{
-    s16 x, y;
-    u16 behavior;
-    s16 *data = gTasks[taskId].data;
-    PlayerGetDestCoords(&x, &y);
-    behavior = MapGridGetMetatileBehaviorAt(x, y);
-
-    // Update up to 2 previous cracked floor spaces
-    if (tFloor1Delay != 0 && (--tFloor1Delay) == 0)
-        SetCrackedFloorHoleMetatile(tFloor1X, tFloor1Y);
-    if (tFloor2Delay != 0 && (--tFloor2Delay) == 0)
-        SetCrackedFloorHoleMetatile(tFloor2X, tFloor2Y);
-
-    // End if player hasn't moved
-    if (x == tPrevX && y == tPrevY)
-        return;
-
-    tPrevX = x;
-    tPrevY = y;
-    if (MetatileBehavior_IsCrackedFloor(behavior))
-    {
-        if (GetPlayerSpeed() != PLAYER_SPEED_FASTEST)
-            VarSet(VAR_ICE_STEP_COUNT, 0); // this var does double duty
-
-        if (tFloor1Delay == 0)
-        {
-            tFloor1Delay = 3;
-            tFloor1X = x;
-            tFloor1Y = y;
-        }
-        else if (tFloor2Delay == 0)
-        {
-            tFloor2Delay = 3;
-            tFloor2X = x;
-            tFloor2Y = y;
-        }
-    }
-}
-
-#undef tPrevX
-#undef tPrevY
-#undef tFloor1Delay
-#undef tFloor1X
-#undef tFloor1Y
-#undef tFloor2Delay
-#undef tFloor2X
-#undef tFloor2Y

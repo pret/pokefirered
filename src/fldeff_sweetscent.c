@@ -16,12 +16,6 @@ static void FieldCallback_SweetScent(void);
 static void TrySweetScentEncounter(u8 taskId);
 static void FailSweetScentEncounter(u8 taskId);
 
-static void Unused_StartSweetscentFldeff(void)
-{
-	gPartyMenu.slotId = 0;
-	FieldCallback_SweetScent();
-}
-
 bool8 SetUpFieldMove_SweetScent(void)
 {
     gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;

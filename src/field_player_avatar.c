@@ -940,61 +940,6 @@ static void PlayerApplyTileForcedMovement(u8 metatileBehavior)
     }
 }
 
-static void PlayerIdleWheelie(u8 direction)
-{
-    PlayerSetAnimId(GetAcroWheelieFaceDirectionMovementAction(direction), 1);
-}
-
-static void PlayerStartWheelie(u8 direction)
-{
-    PlayerSetAnimId(GetAcroPopWheelieFaceDirectionMovementAction(direction), 1);
-}
-
-static void PlayerEndWheelie(u8 direction)
-{
-    PlayerSetAnimId(GetAcroEndWheelieFaceDirectionMovementAction(direction), 1);
-}
-
-static void PlayerStandingHoppingWheelie(u8 direction)
-{
-    PlaySE(SE_BIKE_HOP);
-    PlayerSetAnimId(GetAcroWheelieHopFaceDirectionMovementAction(direction), 1);
-}
-
-static void PlayerMovingHoppingWheelie(u8 direction)
-{
-    PlaySE(SE_BIKE_HOP);
-    PlayerSetAnimId(GetAcroWheelieHopMovementAction(direction), 2);
-}
-
-static void PlayerLedgeHoppingWheelie(u8 direction)
-{
-    PlaySE(SE_BIKE_HOP);
-    PlayerSetAnimId(GetAcroWheelieJumpMovementAction(direction), 8);
-}
-
-static void PlayerAcroTurnJump(u8 direction)
-{
-    PlaySE(SE_BIKE_HOP);
-    PlayerSetAnimId(GetJumpInPlaceTurnAroundMovementAction(direction), 1);
-}
-
-static void PlayerAcroWheelieCollide(u8 direction)
-{
-    PlaySE(SE_WALL_HIT);
-    PlayerSetAnimId(GetAcroWheelieInPlaceMovementAction(direction), 2);
-}
-
-static void PlayerAcroPopWheelie(u8 direction)
-{
-    PlayerSetAnimId(GetAcroPopWheelieMoveMovementAction(direction), 2);
-}
-
-static void PlayerAcroWheelieMove(u8 direction)
-{
-    PlayerSetAnimId(GetAcroWheelieMoveMovementAction(direction), 2);
-}
-
 static bool8 (*const sArrowWarpMetatileBehaviorChecks[])(u8) = {
     MetatileBehavior_IsSouthArrowWarp,
     MetatileBehavior_IsNorthArrowWarp,
@@ -1354,11 +1299,6 @@ void StartPlayerAvatarFishAnim(u8 direction)
 
 // Stubbed from R/S
 void PlayerUseAcroBikeOnBumpySlope(u8 direction)
-{
-
-}
-
-static void SetPlayerAvatarWatering(void)
 {
 
 }
@@ -1776,11 +1716,8 @@ static bool8 Fishing5(struct Task *task)
 // Determine if fish bites
 static bool8 Fishing6(struct Task *task)
 {
-    bool8 bite;
-
     AlignFishingAnimationFrames(&gSprites[gPlayerAvatar.spriteId]);
     task->tStep++;
-    bite = FALSE;
 
     if (!DoesCurrentMapHaveFishingMons() || Random() & 1)
     {

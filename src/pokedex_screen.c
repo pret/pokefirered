@@ -1556,7 +1556,6 @@ struct PokedexListItem
 static void ItemPrintFunc_OrderedListMenu(u8 windowId, u32 itemId, u8 y)
 {
     u16 species = itemId;
-    bool8 seen = (itemId >> 16) & 1;  // not used but required to match
     bool8 caught = (itemId >> 17) & 1;
     u8 type1;
     DexScreen_PrintMonDexNo(sPokedexScreenData->numericalOrderWindowId, FONT_SMALL, species, 12, y);
@@ -1573,7 +1572,6 @@ static void ItemPrintFunc_OrderedListMenu(u8 windowId, u32 itemId, u8 y)
 static void Task_DexScreen_CategorySubmenu(u8 taskId)
 {
     int pageFlipCmd;
-    u8 *ptr;
     switch (sPokedexScreenData->state)
     {
     case 0:
@@ -3006,7 +3004,7 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
 
 void DexScreen_DrawMonFootprint(u8 windowId, u16 species, u8 x, u8 y)
 {
-    u16 i, j, unused, tileIdx;
+    u16 i, j, tileIdx;
     u8 footprintPixel, footprintTile;
     u8 * buffer;
     u8 * footprint;
@@ -3015,7 +3013,6 @@ void DexScreen_DrawMonFootprint(u8 windowId, u16 species, u8 x, u8 y)
         return;
     footprint = (u8 *)(gSpeciesInfo[species].footprint);
     buffer = gDecompressionBuffer;
-    unused = 0;
     tileIdx = 0;
 
     // Expand 1bpp to 4bpp
@@ -3101,11 +3098,10 @@ u8 DexScreen_DrawMonAreaPage(void)
     u8 width, height;
     bool8 monIsCaught;
     s16 left, top;
-    u16 natDexNum, species;
+    u16 species;
     u16 kantoMapVoff;
 
     species = sPokedexScreenData->dexSpecies;
-    natDexNum = SpeciesToNationalDexNum(species);
     monIsCaught = DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE);
     width = 28;
     height = 14;

@@ -1282,7 +1282,7 @@ static void PrintNameOnCardBack(void)
 static void BufferHofDebutTime(void)
 {
     u8 buffer[10];
-    u8 *txtPtr;
+    u8 UNUSED *txtPtr;
 
     if (sTrainerCardDataPtr->hasHofResult)
     {
@@ -1933,27 +1933,4 @@ static void CreateTrainerCardTrainerPic(void)
                     8, 2);
         }
     }
-}
-
-// Unused
-static void Unref_InitTrainerCard(void (*callback)(void))
-{
-    ShowPlayerTrainerCard(callback);
-    SetMainCallback2(CB2_InitTrainerCard);
-}
-
-// Unused
-static void Unref_InitTrainerCardLink(void (*callback)(void))
-{
-    memcpy(gTrainerCards, &sLinkPlayerTrainerCardTemplate1, sizeof(sLinkPlayerTrainerCardTemplate1));
-    ShowTrainerCardInLink(CARD_TYPE_FRLG, callback);
-    SetMainCallback2(CB2_InitTrainerCard);
-}
-
-// Unused
-static void Unref_InitTrainerCardLink2(void (*callback)(void))
-{
-    memcpy(gTrainerCards, &sLinkPlayerTrainerCardTemplate2, sizeof(sLinkPlayerTrainerCardTemplate2));
-    ShowTrainerCardInLink(CARD_TYPE_FRLG, callback);
-    SetMainCallback2(CB2_InitTrainerCard);
 }

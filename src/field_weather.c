@@ -580,7 +580,6 @@ static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 bl
                 struct RGBColor color1;
                 struct RGBColor color2;
                 u8 r1, g1, b1;
-                u8 r2, g2, b2;
 
                 color1 = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
                 r1 = color1.r;
@@ -1017,44 +1016,6 @@ bool8 Weather_UpdateBlend(void)
         return TRUE;
 
     return FALSE;
-}
-
-// Unused. Uses the same numbering scheme as the coord events
-static void SetFieldWeather(u8 weather)
-{
-    switch (weather)
-    {
-    case COORD_EVENT_WEATHER_SUNNY_CLOUDS:
-        SetWeather(WEATHER_SUNNY_CLOUDS);
-        break;
-    case COORD_EVENT_WEATHER_SUNNY:
-        SetWeather(WEATHER_SUNNY);
-        break;
-    case COORD_EVENT_WEATHER_RAIN:
-        SetWeather(WEATHER_RAIN);
-        break;
-    case COORD_EVENT_WEATHER_SNOW:
-        SetWeather(WEATHER_SNOW);
-        break;
-    case COORD_EVENT_WEATHER_RAIN_THUNDERSTORM:
-        SetWeather(WEATHER_RAIN_THUNDERSTORM);
-        break;
-    case COORD_EVENT_WEATHER_FOG_HORIZONTAL:
-        SetWeather(WEATHER_FOG_HORIZONTAL);
-        break;
-    case COORD_EVENT_WEATHER_FOG_DIAGONAL:
-        SetWeather(WEATHER_FOG_DIAGONAL);
-        break;
-    case COORD_EVENT_WEATHER_VOLCANIC_ASH:
-        SetWeather(WEATHER_VOLCANIC_ASH);
-        break;
-    case COORD_EVENT_WEATHER_SANDSTORM:
-        SetWeather(WEATHER_SANDSTORM);
-        break;
-    case COORD_EVENT_WEATHER_SHADE:
-        SetWeather(WEATHER_SHADE);
-        break;
-    }
 }
 
 u8 GetCurrentWeather(void)

@@ -1650,7 +1650,6 @@ static void PrintECRowsWin2(u8 row, u8 remrow)
 {
     int i, j;
     u16 easyChatWord;
-    u8 *str;
     int y;
     u8 y_;
     int ecWordIdx;

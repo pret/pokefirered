@@ -2260,12 +2260,10 @@ void AnimTask_SwallowDeformMon(u8 taskId)
 
 void AnimTask_TransformMon(u8 taskId)
 {
-    int i, j;
     u8 position;
     struct BattleAnimBgData animBg;
     u8 *dest;
     u8 *src;
-    u16 *bgTilemap;
     u16 stretch;
 
     switch (gTasks[taskId].data[0])
@@ -4694,9 +4692,6 @@ static void AnimMeteorMashStar_Step(struct Sprite *sprite)
 // arg 4: duration
 static void AnimMeteorMashStar(struct Sprite *sprite)
 {
-    s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-    s16 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
-
     if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
     {
         sprite->data[0] = sprite->x - gBattleAnimArgs[0];
@@ -4947,9 +4942,7 @@ static void AnimTask_OdorSleuthMovementWaitFinish(u8 taskId)
 }
 
 static void MoveOdorSleuthClone(struct Sprite *sprite)
-{
-    int zero = 0;
-    
+{    
     if (++sprite->data[1] > 1)
     {
         sprite->data[1] = 0;

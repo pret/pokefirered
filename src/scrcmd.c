@@ -529,21 +529,29 @@ bool8 ScrCmd_checkpcitem(struct ScriptContext * ctx)
 
 bool8 ScrCmd_adddecoration(struct ScriptContext * ctx)
 {
+    u32 UNUSED decorId = VarGet(ScriptReadHalfword(ctx));
+
     return FALSE;
 }
 
 bool8 ScrCmd_removedecoration(struct ScriptContext * ctx)
 {
+    u32 UNUSED decorId = VarGet(ScriptReadHalfword(ctx));
+
     return FALSE;
 }
 
 bool8 ScrCmd_checkdecorspace(struct ScriptContext * ctx)
 {
+    u32 UNUSED decorId = VarGet(ScriptReadHalfword(ctx));
+
     return FALSE;
 }
 
 bool8 ScrCmd_checkdecor(struct ScriptContext * ctx)
 {
+    u32 UNUSED decorId = VarGet(ScriptReadHalfword(ctx));
+
     return FALSE;
 }
 
@@ -1452,12 +1460,6 @@ bool8 ScrCmd_multichoicedefault(struct ScriptContext * ctx)
 
 bool8 ScrCmd_drawbox(struct ScriptContext * ctx)
 {
-    /*u8 left = ScriptReadByte(ctx);
-    u8 top = ScriptReadByte(ctx);
-    u8 right = ScriptReadByte(ctx);
-    u8 bottom = ScriptReadByte(ctx);
-
-    MenuDrawTextWindow(left, top, right, bottom);*/
     return FALSE;
 }
 
@@ -1482,6 +1484,11 @@ bool8 ScrCmd_multichoicegrid(struct ScriptContext * ctx)
 
 bool8 ScrCmd_erasebox(struct ScriptContext * ctx)
 {
+    u8 UNUSED left = ScriptReadByte(ctx);
+    u8 UNUSED top = ScriptReadByte(ctx);
+    u8 UNUSED right = ScriptReadByte(ctx);
+    u8 UNUSED bottom = ScriptReadByte(ctx);
+
     return FALSE;
 }
 
@@ -1515,6 +1522,8 @@ bool8 ScrCmd_hidemonpic(struct ScriptContext * ctx)
 
 bool8 ScrCmd_showcontestpainting(struct ScriptContext * ctx)
 {
+    u8 UNUSED contestWinnerId = ScriptReadByte(ctx);
+
     return FALSE;
 }
 
@@ -1622,6 +1631,9 @@ bool8 ScrCmd_bufferitemnameplural(struct ScriptContext * ctx)
 
 bool8 ScrCmd_bufferdecorationname(struct ScriptContext * ctx)
 {
+    u8 UNUSED stringVarIndex = ScriptReadByte(ctx);
+    u16 UNUSED decorId = VarGet(ScriptReadHalfword(ctx));
+
     return FALSE;
 }
 
@@ -1778,6 +1790,8 @@ bool8 ScrCmd_hidemoneybox(struct ScriptContext * ctx)
 
 bool8 ScrCmd_updatemoneybox(struct ScriptContext * ctx)
 {
+    u8 UNUSED x = ScriptReadByte(ctx);
+    u8 UNUSED y = ScriptReadByte(ctx);
     u8 ignore = ScriptReadByte(ctx);
 
     if (!ignore)
@@ -1797,12 +1811,16 @@ bool8 ScrCmd_showcoinsbox(struct ScriptContext * ctx)
 
 bool8 ScrCmd_hidecoinsbox(struct ScriptContext * ctx)
 {
+    u8 UNUSED x = ScriptReadByte(ctx);
+    u8 UNUSED y = ScriptReadByte(ctx);
     HideCoinsWindow();
     return FALSE;
 }
 
 bool8 ScrCmd_updatecoinsbox(struct ScriptContext * ctx)
 {
+    u8 UNUSED x = ScriptReadByte(ctx);
+    u8 UNUSED y = ScriptReadByte(ctx);
     PrintCoinsString(GetCoins());
     return FALSE;
 }

@@ -723,21 +723,9 @@ static void VsSeekerResetInBagStepCounter(void)
     gSaveBlock1Ptr->trainerRematchStepCounter &= 0xFF00;
 }
 
-static void VsSeekerSetStepCounterInBagFull(void)
-{
-    gSaveBlock1Ptr->trainerRematchStepCounter &= 0xFF00;
-    gSaveBlock1Ptr->trainerRematchStepCounter |= 100;
-}
-
 static void VsSeekerResetChargingStepCounter(void)
 {
     gSaveBlock1Ptr->trainerRematchStepCounter &= 0x00FF;
-}
-
-static void VsSeekerSetStepCounterFullyCharged(void)
-{
-    gSaveBlock1Ptr->trainerRematchStepCounter &= 0x00FF;
-    gSaveBlock1Ptr->trainerRematchStepCounter |= (100 << 8);
 }
 
 void Task_VsSeeker_0(u8 taskId)

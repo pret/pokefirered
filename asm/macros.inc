@@ -160,10 +160,6 @@
 	.endm
 
 	.macro abspath relative
-	.if REVISION == 0
-	.ascii "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/"
-	.else
 	.ascii "C:/WORK/POKeFRLG/Src/pm_lgfr_ose/source/"
-	.endif
 	.asciz "\relative"
 	.endm

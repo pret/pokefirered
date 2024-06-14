@@ -1253,9 +1253,7 @@ static void IntroCB_GF_RevealLogo(struct IntroSequenceData * this)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             DestroySprite(this->gameFreakLogoArtSprite);
-        #if REVISION >= 1
             GFScene_CreatePresentsSprite();
-        #endif
             this->timer = 0;
             this->state++;
         }
@@ -2099,14 +2097,12 @@ static struct Sprite *GFScene_CreateLogoSprite(void)
     return &gSprites[spriteId];
 }
 
-#if REVISION >= 1
 static void GFScene_CreatePresentsSprite(void)
 {
     int i;
     for (i = 0; i < 2; i++)
         gSprites[CreateSprite(&sSpriteTemplate_Presents, 104 + 32 * i, 108, 5)].oam.tileNum += i * 4;
 }
-#endif
 
 #define tState  data[0]
 #define tTimer  data[1]

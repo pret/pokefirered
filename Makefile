@@ -37,8 +37,7 @@ EXE :=
 endif
 
 GAME_VERSION  ?= FIRERED
-GAME_LANGUAGE ?= ENGLISH
-GAME_REVISION ?= 0
+REVISION     ?= 0
 MAKER_CODE   := 01
 MODERN       ?= 1
 TEST         ?= 0
@@ -58,25 +57,6 @@ BUILD_NAME  := leafgreen
 else
 $(error unknown version $(GAME_VERSION))
 endif
-endif
-
-# Revision
-ifeq ($(GAME_REVISION),0)
-BUILD_NAME  := $(BUILD_NAME)
-else
-ifeq ($(GAME_REVISION),1)
-BUILD_NAME  := $(BUILD_NAME)_rev1
-else
-$(error unknown revision $(GAME_REVISION))
-endif
-endif
-
-# Language
-ifeq ($(GAME_LANGUAGE),ENGLISH)
-BUILD_NAME  := $(BUILD_NAME)
-GAME_CODE   := $(GAME_CODE)E
-else
-$(error unknown language $(GAME_LANGUAGE))
 endif
 
 ifeq (agbcc,$(MAKECMDGOALS))
@@ -150,7 +130,7 @@ SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 TEST_BUILDDIR = $(OBJ_DIR)/$(TEST_SUBDIR)
 
-ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN) --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1
+ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN) --defsym $(GAME_VERSION)=1
 
 ifeq ($(MODERN),0)
 CC1             := tools/agbcc/bin/agbcc$(EXE)
@@ -185,7 +165,7 @@ ifeq ($(TEST),1)
 OBJ_DIR := $(TEST_OBJ_DIR_NAME)
 endif
 
-CPPFLAGS := -iquote include -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN) -DTESTING=$(TEST) -D$(GAME_VERSION) -DREVISION=$(GAME_REVISION) -D$(GAME_LANGUAGE)
+CPPFLAGS := -iquote include -iquote $(GFLIB_SUBDIR) -Wno-trigraphs -DMODERN=$(MODERN) -DTESTING=$(TEST) -D$(GAME_VERSION)
 ifneq ($(MODERN),1)
 CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef
 endif
@@ -525,7 +505,7 @@ LDFLAGS = -Map ../../$(MAP)
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS) libagbsyscall
 	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ <objects> <lib>"
 	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
-	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
+	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
 $(ROM): $(ELF)
 	$(OBJCOPY) -O binary $< $@
@@ -543,7 +523,7 @@ $(OBJ_DIR)/ld_script_test.ld: $(LD_SCRIPT_TEST) $(LD_SCRIPT_DEPS)
 $(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tools check-tools
 	@echo "cd $(OBJ_DIR) && $(LD) -T ld_script_test.ld -o ../../$@ <objects> <test-objects> <lib>"
 	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o ../../$@ $(OBJS_REL) $(TEST_OBJS_REL) $(LIB)
-	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) -d0 --silent
+	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) -d0 --silent
 	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS)\0"
 
 ifeq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)

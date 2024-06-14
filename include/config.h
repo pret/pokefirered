@@ -41,12 +41,7 @@
 #endif // GAME_VERSION
 
 // rev1 renamed the source folder for reasons
-#if REVISION == 0
-#define CODE_ROOT "C:/WORK/POKeFRLG/src/pm_lgfr_ose/source/"
-#else
 #define CODE_ROOT "C:/WORK/POKeFRLG/Src/pm_lgfr_ose/source/"
-#endif // REVISION
-
 #define ABSPATH(x) (CODE_ROOT x)
 
 // Crashes may occur due to section reordering in the modern build,

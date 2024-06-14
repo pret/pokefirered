@@ -1625,11 +1625,7 @@ static void DaycarePrintMonLvl(struct DayCare *daycare, u8 windowId, u32 daycare
     u8 lvlText[12];
     u8 intText[8];
 
-#if REVISION == 0
-    strcpy((char *)lvlText, (const char *)gText_Lv);
-#else
     StringCopy(lvlText, gText_Lv);
-#endif
     level = GetLevelAfterDaycareSteps(&daycare->mons[daycareSlotId].mon, daycare->mons[daycareSlotId].steps);
     ConvertIntToDecimalStringN(intText, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringAppend(lvlText, intText);

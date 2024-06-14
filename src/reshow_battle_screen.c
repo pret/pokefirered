@@ -8,6 +8,7 @@
 #include "battle_interface.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
+#include "reshow_battle_screen.h"
 
 static void CB2_ReshowBattleScreenAfterMenu(void);
 static void ReshowBattleScreen_TurnOnDisplay(void);
@@ -213,7 +214,7 @@ static bool8 LoadBattlerSpriteGfx(u8 battler)
     return TRUE;
 }
 
-void CreateBattlerSprite(u8 battler)
+void CreateBattlerSprite(u32 battler)
 {
     if (battler < gBattlersCount)
     {

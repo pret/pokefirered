@@ -335,6 +335,8 @@ u8 GetSeason(void)
             return SEASON_AUTUMN;
         case 3:
             return SEASON_WINTER;
+        default:
+            return SEASON_SPRING;
     }
 }
 

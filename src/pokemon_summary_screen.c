@@ -2561,7 +2561,6 @@ static void PokeSum_PrintPageName(const u8 * str)
 
 static void PokeSum_PrintControlsString(const u8 * str)
 {
-    u8 v0;
     s32 width;
     u8 r1;
 
@@ -2652,16 +2651,15 @@ static void PrintSkillsPage(void)
     u8 statFontId, x, yDiff;
     switch (sMonSummaryScreen->skillsPageMode)
     {
-        case PSS_SKILL_PAGE_STATS:
-        case PSS_SKILL_PAGE_EVS:
-            x = 13;
-            yDiff = 0;
-            statFontId = FONT_NORMAL;
-            break;
         case PSS_SKILL_PAGE_IVS:
             x = 10;
             yDiff = 1;
             statFontId = FONT_SMALL;
+            break;
+        default:
+            x = 13;
+            yDiff = 0;
+            statFontId = FONT_NORMAL;
             break;
     }
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], statFontId, x + sMonSkillsPrinterXpos->curHpStr, 4 - yDiff, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.statValueStrBufs[PSS_STAT_HP]);
@@ -3408,7 +3406,6 @@ static void PokeSum_SetHelpContext(void)
 
 static u8 PokeSum_BufferOtName_IsEqualToCurrentOwner(struct Pokemon * mon)
 {
-    u8 i;
     u8 multiplayerId;
     u32 trainerId = 0;
 
@@ -5346,10 +5343,4 @@ static bool32 MapSecIsInKantoOrSevii(u8 mapSec)
     if (mapSec >= MAPSECS_KANTO && mapSec < MAPSEC_NONE)
         return TRUE;
     return FALSE;
-}
-
-// Unused
-static void ShowPokemonSummaryScreen_NullParty(void)
-{
-    ShowPokemonSummaryScreen(NULL, 0, 0, CB2_ReturnToField, PSS_MODE_NORMAL);
 }

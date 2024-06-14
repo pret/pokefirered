@@ -1301,12 +1301,6 @@ static void Task_RegionMap(u8 taskId)
     }
 }
 
-// Unused
-static void SetMainMapTask(TaskFunc taskFunc)
-{
-    sRegionMap->mainTask = taskFunc;
-}
-
 static TaskFunc GetMainMapTask(void)
 {
     return sRegionMap->mainTask;
@@ -1542,12 +1536,6 @@ static u8 GetRegionMapPlayerIsOn(void)
 static void SetSelectedRegionMap(u8 region)
 {
     sRegionMap->selectedRegion = region;
-}
-
-// Unused
-static void SetRegionMapPlayerIsOn(u8 region)
-{
-    sRegionMap->playersRegion = region;
 }
 
 static void InitSwitchMapMenu(u8 whichMap, u8 taskId, TaskFunc taskFunc)

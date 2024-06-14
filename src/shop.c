@@ -146,8 +146,8 @@ static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 
 static const struct YesNoFuncTable sShopMenuActions_BuyQuit[] =
 {
-    BuyMenuTryMakePurchase,
-    BuyMenuReturnToItemList
+    { BuyMenuTryMakePurchase  },
+    { BuyMenuReturnToItemList }
 };
 
 static const struct WindowTemplate sShopMenuWindowTemplate =
@@ -222,16 +222,8 @@ static u8 CreateShopMenu(u8 martType)
 
 static u8 GetMartTypeFromItemList(u32 martType)
 {
-    u16 i;
-
     if (martType != MART_TYPE_REGULAR)
         return martType;
-
-    // for (i = 0; i < sShopData.itemCount && sShopData.itemList[i] != 0; i++)
-    // {
-    //     if (ItemId_GetPocket(sShopData.itemList[i]) == POCKET_TM_CASE)
-    //         return MART_TYPE_TMHM;
-    // }
     return MART_TYPE_REGULAR;
 }
 

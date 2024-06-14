@@ -421,6 +421,10 @@ void SortSprites(void)
             // Although this doesn't result in a bug in the ROM,
             // the behavior is undefined.
             j--;
+#ifdef UBFIX
+            if (j == 0)
+                break;
+#endif
 
             sprite1 = &gSprites[gSpriteOrder[j - 1]];
             sprite2 = &gSprites[gSpriteOrder[j]];

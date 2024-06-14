@@ -57,7 +57,6 @@ static void UpdateScanlineEffectRegBuffer(s16 y);
 static void ScheduleStopScanlineEffect(void);
 static void LoadMainTitleScreenPalsAndResetBgs(void);
 static void CB2_FadeOutTransitionToSaveClearScreen(void);
-static void CB2_GoToResetRtcScreen(void);
 static void CB2_FadeOutTransitionToResetRtcScreen(void);
 static void CB2_FadeOutTransitionToBerryFix(void);
 static void LoadSpriteGfxAndPals(void);

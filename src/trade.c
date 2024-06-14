@@ -777,7 +777,6 @@ static const u8 sSelectedMonLevelGenderCoords[][2] = {
 
 static void InitTradeMenu(void)
 {
-    static u16 dummy;
 
     ResetSpriteData();
     FreeAllSpritePalettes();
@@ -797,7 +796,6 @@ static void InitTradeMenu(void)
     {
         int i;
         DeactivateAllTextPrinters();
-        dummy = 590; // ?
         for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         {
             ClearWindowTilemap(i);

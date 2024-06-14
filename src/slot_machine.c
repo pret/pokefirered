@@ -1571,7 +1571,6 @@ static bool32 OneReelBiasCheck(s32 reelId, s32 reelPos, s32 biasIcon)
     s32 secondStoppedPos, firstStoppedPos;
     s32 i;
 
-    firstStoppedPos++; firstStoppedPos--;
     firstStoppedPos = sSlotMachineState->reelPositions[sSlotMachineState->reelStopOrder[0]] + 1;
     secondStoppedPos = sSlotMachineState->reelPositions[sSlotMachineState->reelStopOrder[1]] + 1;
     reelPos++;

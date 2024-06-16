@@ -1,7 +1,6 @@
 #ifndef GUARD_MALLOC_H
 #define GUARD_MALLOC_H
 
-#define HEAP_SIZE 0x1C000
 #define malloc Alloc
 #define calloc(ct, sz) AllocZeroed((ct) * (sz))
 #define free Free
@@ -18,7 +17,7 @@
 
 struct MemBlock {
     // Whether this block is currently allocated.
-    bool16 flag:1;
+    bool16 allocated:1;
 
     u16 unused_00:4;
 
@@ -26,7 +25,7 @@ struct MemBlock {
     u16 locationHi:11;
 
     // Magic number used for error checking. Should equal MALLOC_SYSTEM_ID.
-    u16 magic_number;
+    u16 magic;
 
     // Size of the block (not including this header struct).
     u32 size:18;
@@ -44,6 +43,9 @@ struct MemBlock {
     u8 data[0];
 };
 
+#define HEAP_SIZE 0x1C000
+extern u8 gHeap[];
+
 #if TESTING || !defined(NDEBUG)
 
 #define Alloc(size) Alloc_(size, __FILE__ ":" STR(__LINE__))
@@ -56,7 +58,6 @@ struct MemBlock {
 
 #endif
 
-extern u8 gHeap[];
 void *Alloc_(u32 size, const char *location);
 void *AllocZeroed_(u32 size, const char *location);
 void Free(void *pointer);

@@ -9,17 +9,15 @@ static u32 sHeapSize;
 
 ALIGNED(4) EWRAM_DATA u8 gHeap[HEAP_SIZE] = {0};
 
-static EWRAM_DATA struct MemBlock *head = NULL;
-static EWRAM_DATA struct MemBlock *pos = NULL;
-static EWRAM_DATA struct MemBlock *splitBlock = NULL;
-
 void PutMemBlockHeader(void *block, struct MemBlock *prev, struct MemBlock *next, u32 size)
 {
     struct MemBlock *header = (struct MemBlock *)block;
 
-    header->flag = FALSE;
-    header->magic_number = MALLOC_SYSTEM_ID;
+    header->allocated = FALSE;
+    header->locationHi = 0;
+    header->magic = MALLOC_SYSTEM_ID;
     header->size = size;
+    header->locationLo = 0;
     header->prev = prev;
     header->next = next;
 }
@@ -31,47 +29,55 @@ void PutFirstMemBlockHeader(void *block, u32 size)
 
 void *AllocInternal(void *heapStart, u32 size, const char *location)
 {
+    struct MemBlock *pos = (struct MemBlock *)heapStart;
+    struct MemBlock *head = pos;
+    struct MemBlock *splitBlock;
     u32 foundBlockSize;
-
-    head = (struct MemBlock *)heapStart;
-    pos = head;
 
     // Alignment
     if (size & 3)
         size = 4 * ((size / 4) + 1);
 
-    for (;;) {
+    for (;;)
+    {
         // Loop through the blocks looking for unused block that's big enough.
 
-        if (!pos->flag) {
+        if (!pos->allocated)
+        {
             foundBlockSize = pos->size;
 
-            if (foundBlockSize >= size) {
-                if (foundBlockSize - size < 2 * sizeof(struct MemBlock)) {
+            if (foundBlockSize >= size)
+            {
+                if (foundBlockSize - size < 2 * sizeof(struct MemBlock))
+                {
                     // The block isn't much bigger than the requested size,
                     // so just use it.
-                    pos->flag = TRUE;
-                    return pos->data;
-                } else {
+                    pos->allocated = TRUE;
+                }
+                else
+                {
                     // The block is significantly bigger than the requested
                     // size, so split the rest into a separate block.
-                    int splitBlockSize = foundBlockSize;
-                    splitBlockSize -= sizeof(struct MemBlock);
-                    splitBlockSize -= size;
+                    foundBlockSize -= sizeof(struct MemBlock);
+                    foundBlockSize -= size;
 
                     splitBlock = (struct MemBlock *)(pos->data + size);
 
-                    pos->flag = TRUE;
+                    pos->allocated = TRUE;
                     pos->size = size;
 
-                    PutMemBlockHeader(splitBlock, pos, pos->next, splitBlockSize);
+                    PutMemBlockHeader(splitBlock, pos, pos->next, foundBlockSize);
 
                     pos->next = splitBlock;
 
                     if (splitBlock->next != head)
                         splitBlock->next->prev = splitBlock;
-                    return pos->data;
                 }
+
+                pos->locationHi = ((uintptr_t)location) >> 14;
+                pos->locationLo = (uintptr_t)location;
+
+                return pos->data;
             }
         }
 
@@ -82,7 +88,7 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
             const struct MemBlock *block = head;
             do
             {
-                if (block->flag)
+                if (block->allocated)
                 {
                     const char *location = MemBlockLocation(block);
                     if (location)
@@ -103,43 +109,47 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
     }
 }
 
-void FreeInternal(void *heapStart, void *p)
+void FreeInternal(void *heapStart, void *pointer)
 {
-    AGB_ASSERT_EX(p != NULL, ABSPATH("gflib/malloc.c"), 195);
+    AGB_ASSERT_EX(pointer != NULL, ABSPATH("gflib/malloc.c"), 195);
 
-    if (p) {
+    if (pointer)
+    {
         struct MemBlock *head = (struct MemBlock *)heapStart;
-        struct MemBlock *pos = (struct MemBlock *)((u8 *)p - sizeof(struct MemBlock));
-        AGB_ASSERT_EX(pos->magic_number == MALLOC_SYSTEM_ID, ABSPATH("gflib/malloc.c"), 204);
-        AGB_ASSERT_EX(pos->flag == TRUE, ABSPATH("gflib/malloc.c"), 205);
-        pos->flag = FALSE;
+        struct MemBlock *block = (struct MemBlock *)((u8 *)pointer - sizeof(struct MemBlock));
+        AGB_ASSERT_EX(block->magic == MALLOC_SYSTEM_ID, ABSPATH("gflib/malloc.c"), 204);
+        AGB_ASSERT_EX(block->allocated == TRUE, ABSPATH("gflib/malloc.c"), 205);
+        block->allocated = FALSE;
 
         // If the freed block isn't the last one, merge with the next block
         // if it's not in use.
-        if (pos->next != head) {
-            if (!pos->next->flag) {
-                AGB_ASSERT_EX(pos->next->magic_number == MALLOC_SYSTEM_ID, ABSPATH("gflib/malloc.c"), 211);
-                pos->size += sizeof(struct MemBlock) + pos->next->size;
-                pos->next->magic_number = 0;
-                pos->next = pos->next->next;
-                if (pos->next != head)
-                    pos->next->prev = pos;
+        if (block->next != head)
+        {
+            if (!block->next->allocated)
+            {
+                block->size += sizeof(struct MemBlock) + block->next->size;
+                block->next->magic = 0;
+                block->next = block->next->next;
+                if (block->next != head)
+                    block->next->prev = block;
             }
         }
 
         // If the freed block isn't the first one, merge with the previous block
         // if it's not in use.
-        if (pos != head) {
-            if (!pos->prev->flag) {
-                AGB_ASSERT_EX(pos->prev->magic_number == MALLOC_SYSTEM_ID, ABSPATH("gflib/malloc.c"), 228);
+        if (block != head)
+        {
+            if (!block->prev->allocated)
+            {
+                AGB_ASSERT_EX(block->prev->magic == MALLOC_SYSTEM_ID, ABSPATH("gflib/malloc.c"), 228);
 
-                pos->prev->next = pos->next;
+                block->prev->next = block->next;
 
-                if (pos->next != head)
-                    pos->next->prev = pos->prev;
+                if (block->next != head)
+                    block->next->prev = block->prev;
 
-                pos->magic_number = 0;
-                pos->prev->size += sizeof(struct MemBlock) + pos->size;
+                block->magic = 0;
+                block->prev->size += sizeof(struct MemBlock) + block->size;
             }
         }
     }
@@ -149,7 +159,8 @@ void *AllocZeroedInternal(void *heapStart, u32 size, const char *location)
 {
     void *mem = AllocInternal(heapStart, size, location);
 
-    if (mem != NULL) {
+    if (mem != NULL)
+    {
         if (size & 3)
             size = 4 * ((size / 4) + 1);
 
@@ -164,16 +175,16 @@ bool32 CheckMemBlockInternal(void *heapStart, void *pointer)
     struct MemBlock *head = (struct MemBlock *)heapStart;
     struct MemBlock *block = (struct MemBlock *)((u8 *)pointer - sizeof(struct MemBlock));
 
-    if (block->magic_number != MALLOC_SYSTEM_ID)
+    if (block->magic != MALLOC_SYSTEM_ID)
         return FALSE;
 
-    if (block->next->magic_number != MALLOC_SYSTEM_ID)
+    if (block->next->magic != MALLOC_SYSTEM_ID)
         return FALSE;
 
     if (block->next != head && block->next->prev != block)
         return FALSE;
 
-    if (block->prev->magic_number != MALLOC_SYSTEM_ID)
+    if (block->prev->magic != MALLOC_SYSTEM_ID)
         return FALSE;
 
     if (block->prev != head && block->prev->next != block)
@@ -191,16 +202,6 @@ void InitHeap(void *heapStart, u32 heapSize)
     sHeapSize = heapSize;
     PutFirstMemBlockHeader(heapStart, heapSize);
 }
-
-// void *Alloc(u32 size)
-// {
-//     return AllocInternal(sHeapStart, size);
-// }
-
-// void *AllocZeroed(u32 size)
-// {
-//     return AllocZeroedInternal(sHeapStart, size);
-// }
 
 void *Alloc_(u32 size, const char *location)
 {
@@ -242,7 +243,7 @@ const struct MemBlock *HeapHead(void)
 
 const char *MemBlockLocation(const struct MemBlock *block)
 {
-    if (!block->flag)
+    if (!block->allocated)
         return NULL;
 
     return (const char *)(ROM_START | (block->locationHi << 14) | block->locationLo);

@@ -36,23 +36,23 @@ static bool8 IsPosInIncomingConnectingMap(u8, s32, s32, const struct MapConnecti
 static bool8 IsCoordInIncomingConnectingMap(s32, s32, s32, s32);
 static u32 GetAttributeByMetatileIdAndMapLayout(const struct MapLayout *, u16, u8);
 
-#define GetBorderBlockAt(x, y) ({                                                                 \
-    u16 block;                                                                                    \
-    s32 xprime;                                                                                   \
-    s32 yprime;                                                                                   \
-                                                                                                  \
-    const struct MapLayout *mapLayout = gMapHeader.mapLayout;                                     \
-                                                                                                  \
-    xprime = x - MAP_OFFSET;                                                                      \
-    xprime += 8 * mapLayout->borderWidth;                                                         \
-    xprime %= mapLayout->borderWidth;                                                             \
-                                                                                                  \
-    yprime = y - MAP_OFFSET;                                                                      \
-    yprime += 8 * mapLayout->borderHeight;                                                        \
-    yprime %= mapLayout->borderHeight;                                                            \
-                                                                                                  \
-    block = mapLayout->border[xprime + yprime * mapLayout->borderWidth] | MAPGRID_COLLISION_MASK; \
-})
+static inline u16 GetBorderBlockAt(s32 x, s32 y)
+{
+    s32 xprime;
+    s32 yprime;
+
+    const struct MapLayout *mapLayout = gMapHeader.mapLayout;
+
+    xprime = x - MAP_OFFSET;
+    xprime += 8 * mapLayout->borderWidth;
+    xprime %= mapLayout->borderWidth;
+
+    yprime = y - MAP_OFFSET;
+    yprime += 8 * mapLayout->borderHeight;
+    yprime %= mapLayout->borderHeight;
+
+    return mapLayout->border[xprime + yprime * mapLayout->borderWidth] | MAPGRID_COLLISION_MASK;
+}
 
 #define AreCoordsWithinMapGridBounds(x, y) (x >= 0 && x < VMap.Xsize && y >= 0 && y < VMap.Ysize)
 

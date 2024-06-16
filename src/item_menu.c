@@ -1029,11 +1029,6 @@ void ItemMenu_SetExitCallback(MainCallback cb)
     sBagMenuDisplay->exitCB = cb;
 }
 
-static u8 GetSelectedItemIndex(u8 pocket)
-{
-    return gBagMenuState.cursorPos[pocket] + gBagMenuState.itemsAbove[pocket];
-}
-
 static void Task_BagMenu_HandleInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -1654,19 +1649,6 @@ void Task_ReturnToBagFromContextMenu(u8 taskId)
     PocketCalculateInitialCursorPosAndItemsAbove(gBagMenuState.pocket);
     Bag_BuildListMenuTemplate(gBagMenuState.pocket);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagMenuState.cursorPos[gBagMenuState.pocket], gBagMenuState.itemsAbove[gBagMenuState.pocket]);
-    ScheduleBgCopyTilemapToVram(0);
-    bag_menu_print_cursor_(data[0], 1);
-    Task_RedrawArrowsAndReturnToBagMenuSelect(taskId);
-}
-
-static void Task_UnusedReturnToBag(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-    u16 itemsAbove;
-    u16 cursorPos;
-    ListMenuGetScrollAndRow(data[0], &cursorPos, &itemsAbove);
-    PrintItemDescriptionOnMessageWindow(cursorPos + itemsAbove);
-    PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
     bag_menu_print_cursor_(data[0], 1);
     Task_RedrawArrowsAndReturnToBagMenuSelect(taskId);

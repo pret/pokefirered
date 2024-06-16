@@ -939,8 +939,6 @@ static void Task_HofPC_HandleInput(u8 taskId)
 }
 static void Task_HofPC_HandlePaletteOnExit(u8 taskId)
 {
-    struct HallofFameTeam* fameTeam;
-
     CpuCopy16(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
     BeginPCScreenEffect_TurnOff(0, 0, 0);
     gTasks[taskId].func = Task_HofPC_HandleExit;

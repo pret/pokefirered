@@ -130,7 +130,8 @@ static void CreateBerryPouchSprite(void);
 static void StartBerryPouchSpriteWobbleAnim(void);
 static void SpriteCB_BerryPouchWaitWobbleAnim(struct Sprite *sprite);
 
-static const struct BgTemplate sBgTemplates[] = {
+static const struct BgTemplate sBgTemplates[] = 
+{
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -158,7 +159,8 @@ static const struct BgTemplate sBgTemplates[] = {
     }
 };
 
-static const TaskFunc sBerryPouchContextMenuTasks[] = {
+static const TaskFunc sBerryPouchContextMenuTasks[] = 
+{
     Task_NormalContextMenu,
     Task_ContextMenu_FromPartyGiveMenu,
     Task_ContextMenu_Sell,
@@ -166,22 +168,25 @@ static const TaskFunc sBerryPouchContextMenuTasks[] = {
     Task_NormalContextMenu
 };
 
-static const struct YesNoFuncTable sYesNoFuncs_Toss = {
+static const struct YesNoFuncTable sYesNoFuncs_Toss = 
+{
     .yesFunc = Task_TossYes,
     .noFunc  = Task_TossNo
 };
 
-static const struct YesNoFuncTable sYesNoFuncs_Sell = {
+static const struct YesNoFuncTable sYesNoFuncs_Sell = 
+{
     .yesFunc = Task_SellYes,
     .noFunc  = Task_SellNo
 };
 
-static const struct MenuAction sContextMenuActions[] = {
-    {gOtherText_Use,  Task_BerryPouch_Use},
-    {gOtherText_Toss, Task_BerryPouch_Toss},
-    {gOtherText_Give, Task_BerryPouch_Give},
-    {gOtherText_Exit, Task_BerryPouch_Exit},
-    {gString_Dummy,   NULL}
+static const struct MenuAction sContextMenuActions[] = 
+{
+    {gOtherText_Use,  {Task_BerryPouch_Use}},
+    {gOtherText_Toss, {Task_BerryPouch_Toss}},
+    {gOtherText_Give, {Task_BerryPouch_Give}},
+    {gOtherText_Exit, {Task_BerryPouch_Exit}},
+    {gString_Dummy,   {NULL}}
 };
 
 static const u8 sOptions_UseGiveTossExit[] = {
@@ -719,11 +724,9 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
 
 static void BerryPouchItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
-    u16 unused;
     u16 itemQuantity;
     if (itemId != -2 && sResources->listMenuNumItems != itemId)
     {
-        unused = BagGetItemIdByPocketPosition(POCKET_BERRY_POUCH, itemId);
         itemQuantity = BagGetQuantityByPocketPosition(POCKET_BERRY_POUCH, itemId);
         ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
@@ -1458,11 +1461,6 @@ static u8 GetOrCreateVariableWindow(u8 winIdx)
         retval = sVariableWindowIds[winIdx];
     }
     return retval;
-}
-
-static void VariableWindowSetAltFrameTileAndPalette(u8 winIdx)
-{
-    DrawStdFrameWithCustomTileAndPalette(sVariableWindowIds[winIdx], FALSE, 0x001, 14);
 }
 
 static void DestroyVariableWindow(u8 winIdx)

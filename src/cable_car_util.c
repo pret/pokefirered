@@ -1,6 +1,6 @@
 #include "global.h"
 
-static void CableCarUtil_FillWrapped(void *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
+static void UNUSED CableCarUtil_FillWrapped(void *dest, u16 value, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i;
     u8 j;
@@ -18,7 +18,7 @@ static void CableCarUtil_FillWrapped(void *dest, u16 value, u8 left, u8 top, u8 
     }
 }
 
-static void CableCarUtil_CopyWrapped(void *dest, const u16 *src, u8 left, u8 top, u8 width, u8 height)
+static void UNUSED CableCarUtil_CopyWrapped(void *dest, const u16 *src, u8 left, u8 top, u8 width, u8 height)
 {
     u8 i;
     u8 j;

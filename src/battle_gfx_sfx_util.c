@@ -143,7 +143,7 @@ void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
 }
 
 // Unused
-static void DoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 arg1)
+static void UNUSED DoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 arg1)
 {
     sprite->animPaused = 1;
     sprite->callback = SpriteCallbackDummy;
@@ -437,7 +437,7 @@ void FreeTrainerFrontPicPalette(u16 frontPicId)
 }
 
 // not used
-static void BattleLoadAllHealthBoxesGfxAtOnce(void)
+static void UNUSED BattleLoadAllHealthBoxesGfxAtOnce(void)
 {
     u8 numberOfBattlers = 0;
     u8 i;
@@ -789,7 +789,7 @@ void BattleStopLowHpSound(void)
 }
 
 // not used
-static u8 GetMonHPBarLevel(struct Pokemon *mon)
+static u8 UNUSED GetMonHPBarLevel(struct Pokemon *mon)
 {
     u16 hp = GetMonData(mon, MON_DATA_HP);
     u16 maxHP = GetMonData(mon, MON_DATA_MAX_HP);

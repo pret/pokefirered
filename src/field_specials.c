@@ -2222,7 +2222,6 @@ static void Task_RunPokemonLeagueLightingEffect(u8 taskId)
 
 static void Task_CancelPokemonLeagueLightingEffect(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
     if (FlagGet(FLAG_TEMP_4) != FALSE)
     {
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(POKEMON_LEAGUE_CHAMPIONS_ROOM))

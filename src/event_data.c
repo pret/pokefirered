@@ -66,15 +66,6 @@ void ClearDailyFlags(void)
     memset(gSaveBlock1Ptr->flags + (DAILY_FLAGS_START / 8), 0, DAILY_FLAGS_SIZE);
 }
 
-// Unused
-static void DisableNationalPokedex_RSE(void)
-{
-    u16 *ptr = GetVarPointer(VAR_0x403C);
-    gSaveBlock2Ptr->pokedex.unused = 0;
-    *ptr = 0;
-    FlagClear(FLAG_0x838);
-}
-
 // The magic numbers used here (0xDA and 0x0302) correspond to those
 // used in RSE for enabling the national Pokedex
 void EnableNationalPokedex_RSE(void)
@@ -84,17 +75,6 @@ void EnableNationalPokedex_RSE(void)
     gSaveBlock2Ptr->pokedex.unused = 0xDA;
     *ptr = 0x0302;
     FlagSet(FLAG_0x838);
-}
-
-// Unused
-static bool32 IsNationalPokedexEnabled_RSE(void)
-{
-    if (gSaveBlock2Ptr->pokedex.unused == 0xDA
-            && VarGet(VAR_0x403C) == 0x0302
-            && FlagGet(FLAG_0x838))
-        return TRUE;
-
-    return FALSE;
 }
 
 void DisableNationalPokedex(void)

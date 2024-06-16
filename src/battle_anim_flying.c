@@ -698,7 +698,6 @@ static void AnimFallingFeather_Step(struct Sprite *sprite)
                     }
                 }
                 data->unk0_0d = 0;
-                data->unk2;
             }
             data->unk0_1 = 0;
             break;
@@ -1271,7 +1270,7 @@ static void AnimSkyAttackBird_Step(struct Sprite *sprite)
 }
 
 // Unused
-static void AnimTask_SetAttackerVisibility(u8 taskId)
+static void UNUSED AnimTask_SetAttackerVisibility(u8 taskId)
 {
     if (gBattleAnimArgs[0] == 0)
     {

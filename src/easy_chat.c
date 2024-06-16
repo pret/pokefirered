@@ -322,13 +322,6 @@ void BufferRandomHobbyOrLifestyleString(void)
     CopyEasyChatWord(gStringVar2, easyChatWord);
 }
 
-static bool8 IsTrendySayingUnlocked(u8 additionalPhraseId)
-{
-    int byteOffset = additionalPhraseId / 8;
-    int shift = additionalPhraseId % 8;
-    return (gSaveBlock1Ptr->additionalPhrases[byteOffset] >> shift) & 1;
-}
-
 void EnableRareWord(u8 additionalPhraseId)
 {
     if (additionalPhraseId < 33)
@@ -337,70 +330,6 @@ void EnableRareWord(u8 additionalPhraseId)
         int shift = additionalPhraseId % 8;
         gSaveBlock1Ptr->additionalPhrases[byteOffset] |= 1 << shift;
     }
-}
-
-static u8 GetNumUnlockedTrendySayings(void)
-{
-    u8 i;
-    u8 numAdditionalPhrasesUnlocked;
-
-    for (i = 0, numAdditionalPhrasesUnlocked = 0; i < 33; i++)
-    {
-        if (IsTrendySayingUnlocked(i))
-            numAdditionalPhrasesUnlocked++;
-    }
-
-    return numAdditionalPhrasesUnlocked;
-}
-
-static u16 UnlockRandomTrendySaying(void)
-{
-    u16 i;
-    u16 additionalPhraseId;
-    u8 numAdditionalPhrasesUnlocked = GetNumUnlockedTrendySayings();
-    if (numAdditionalPhrasesUnlocked == 33)
-        return EC_WORD_UNDEFINED;
-
-    additionalPhraseId = Random() % (33 - numAdditionalPhrasesUnlocked);
-    for (i = 0; i < 33; i++)
-    {
-        if (!IsTrendySayingUnlocked(i))
-        {
-            if (additionalPhraseId)
-            {
-                additionalPhraseId--;
-            }
-            else
-            {
-                EnableRareWord(i);
-                return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
-            }
-        }
-    }
-
-    return EC_WORD_UNDEFINED;
-}
-
-static u16 GetRandomUnlockedTrendySaying(void)
-{
-    u16 i;
-    u16 additionalPhraseId = GetNumUnlockedTrendySayings();
-    if (additionalPhraseId == 0)
-        return EC_WORD_UNDEFINED;
-
-    additionalPhraseId = Random() % additionalPhraseId;
-    for (i = 0; i < 33; i++)
-    {
-        if (IsTrendySayingUnlocked(i))
-        {
-            if (additionalPhraseId)
-                additionalPhraseId--;
-            else
-                return EC_WORD(EC_GROUP_TRENDY_SAYING, i);
-        }
-    }
-
-    return EC_WORD_UNDEFINED;
 }
 
 static bool8 EC_IsNationalPokedexEnabled(void)
@@ -530,21 +459,6 @@ u8 GetSelectedGroupByIndex(u8 index)
         return EC_NUM_GROUPS;
     else
         return sEasyChatSelectionData->groups[index];
-}
-
-// Unused
-static u8 *BufferEasyChatWordGroupName(u8 *dest, u8 groupId, u16 totalChars)
-{
-    u16 i;
-    u8 *str = StringCopy(dest, sEasyChatGroupNamePointers[groupId]);
-    for (i = str - dest; i < totalChars; i++)
-    {
-        *str = CHAR_SPACE;
-        str++;
-    }
-
-    *str = EOS;
-    return str;
 }
 
 const u8 *GetEasyChatWordGroupName(u8 groupId)

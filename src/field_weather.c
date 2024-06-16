@@ -196,7 +196,7 @@ void SetCurrentAndNextWeather(u8 weather)
     gWeatherPtr->nextWeather = weather;
 }
 
-static void SetCurrentAndNextWeatherNoDelay(u8 weather)
+static void UNUSED SetCurrentAndNextWeatherNoDelay(u8 weather)
 {
     PlayRainStoppingSoundEffect();
     gWeatherPtr->currWeather = weather;
@@ -576,9 +576,7 @@ static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 bl
         {
             for (i = 0; i < 16; i++)
             {
-                u32 offset;
                 struct RGBColor color1;
-                struct RGBColor color2;
                 u8 r1, g1, b1;
 
                 color1 = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
@@ -870,14 +868,6 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
 void ApplyWeatherGammaShiftToPal(u8 paletteIndex)
 {
     ApplyGammaShift(paletteIndex, 1, gWeatherPtr->gammaIndex);
-}
-
-static u8 IsWeatherFadingIn(void)
-{
-    if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_SCREEN_FADING_IN)
-        return gWeatherPtr->fadeInActive;
-    else
-        return 0;
 }
 
 void LoadCustomWeatherSpritePalette(const u16 *palette)

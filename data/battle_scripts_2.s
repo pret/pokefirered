@@ -1,6 +1,5 @@
 #include "constants/moves.h"
 #include "constants/battle.h"
-#include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
 #include "constants/battle_anim.h"
 #include "constants/items.h"

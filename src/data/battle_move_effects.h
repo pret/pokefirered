@@ -1204,7 +1204,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectIonDeluge,
     },
 
-    [EFFECT_FREEZE_DRY] =
+    [EFFECT_SUPER_EFFECTIVE_ON_ARG] =
     {
         .battleScript = BattleScript_EffectHit,
     },
@@ -1488,11 +1488,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStrengthSap,
     },
 
-    [EFFECT_MIND_BLOWN] =
-    {
-        .battleScript = BattleScript_EffectHit,
-    },
-
     [EFFECT_PURIFY] =
     {
         .battleScript = BattleScript_EffectPurify,
@@ -1639,11 +1634,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectPhotonGeyser,
     },
 
-    [EFFECT_SHELL_SIDE_ARM] =
-    {
-        .battleScript = BattleScript_EffectShellSideArm,
-    },
-
     [EFFECT_TERRAIN_PULSE] =
     {
         .battleScript = BattleScript_EffectHit,
@@ -1708,6 +1698,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     },
 
     [EFFECT_MAX_HP_50_RECOIL] =
+    {
+        .battleScript = BattleScript_EffectHit,
+    },
+
+    [EFFECT_MIND_BLOWN] =
     {
         .battleScript = BattleScript_EffectHit,
     },
@@ -1876,5 +1871,26 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectTidyUp,
         .encourageEncore = TRUE,
+    },
+
+    [EFFECT_SPICY_EXTRACT] =
+    {
+        .battleScript = BattleScript_EffectSpicyExtract,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_TERA_BLAST] =
+    {
+        .battleScript = BattleScript_EffectPhotonGeyser,
+    },
+
+    [EFFECT_TERA_STARSTORM] =
+    {
+        .battleScript = BattleScript_EffectPhotonGeyser,
+    },
+
+    [EFFECT_DRAGON_DARTS] =
+    {
+        .battleScript = BattleScript_EffectHit,
     },
 };

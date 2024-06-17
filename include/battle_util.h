@@ -68,6 +68,10 @@ enum {
 #define IS_WHOLE_SIDE_ALIVE(battler)    ((IsBattlerAlive(battler) && IsBattlerAlive(BATTLE_PARTNER(battler))))
 #define IS_ALIVE_AND_PRESENT(battler)   (IsBattlerAlive(battler) && IsBattlerSpritePresent(battler))
 
+// Lowest and highest percentages used for damage roll calculations
+#define DMG_ROLL_PERCENT_LO 85
+#define DMG_ROLL_PERCENT_HI 100
+
 // for Natural Gift and Fling
 struct TypePower
 {
@@ -178,7 +182,7 @@ bool32 IsBattlerGrounded(u32 battler);
 u8 AtkCanceller_UnableToUseMove2(void);
 void SetAtkCancellerForCalledMove(void);
 bool32 BlocksPrankster(u16 move, u32 battlerPrankster, u32 battlerDef, bool32 checkTarget);
-bool32 IsBattlerProtected(u32 battler, u32 move);
+bool32 IsBattlerProtected(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 IsMoveMakingContact(u32 move, u32 battlerAtk);
 bool32 IsHealBlockPreventingMove(u32 battler, u32 move);
 bool32 IsBelchPreventingMove(u32 battler, u32 move);
@@ -200,7 +204,7 @@ uq4_12_t CalcTypeEffectivenessMultiplier(u32 move, u32 moveType, u32 battlerAtk,
 uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef);
 bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect);
 uq4_12_t GetTypeModifier(u32 atkType, u32 defType);
-u8 GetBattlerType(u32 battler, u8 typeIndex);
+u8 GetBattlerType(u32 battler, u8 typeIndex, bool32 ignoreTera);
 u32 GetIllusionMonSpecies(u32 battler);
 struct Pokemon *GetIllusionMonPtr(u32 battler);
 void ClearIllusionMon(u32 battler);
@@ -258,5 +262,7 @@ u32 CalcRolloutBasePower(u32 battlerAtk, u32 basePower, u32 rolloutTimer);
 u32 CalcFuryCutterBasePower(u32 basePower, u32 furyCutterCounter);
 s32 CalculateMoveDamageVars(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, s32 fixedBasePower, uq4_12_t typeEffectivenessModifier,
                                           u32 weather, bool32 isCrit, u32 holdEffectAtk, u32 holdEffectDef, u32 abilityAtk, u32 abilityDef);
+bool32 CanTargetPartner(u32 battlerAtk, u32 battlerDef);
+bool32 TargetFullyImmuneToCurrMove(u32 BattlerAtk, u32 battlerDef);
 
 #endif // GUARD_BATTLE_UTIL_H

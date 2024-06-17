@@ -367,7 +367,7 @@ struct Evolution
     u16 targetSpecies;
 };
 
-struct SpeciesInfo /*0x8C*/
+struct SpeciesInfo /*0xC4*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -377,7 +377,7 @@ struct SpeciesInfo /*0x8C*/
  /* 0x05 */ u8 baseSpDefense;
  /* 0x06 */ u8 types[2];
  /* 0x08 */ u8 catchRate;
- /* 0x09 */ u8 padding1;
+ /* 0x09 */ u8 forceTeraType;
  /* 0x0A */ u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
  /* 0x0C */ u16 evYield_HP:2;
             u16 evYield_Attack:2;
@@ -395,6 +395,7 @@ struct SpeciesInfo /*0x8C*/
  /* 0x16 */ u8 eggGroups[2];
  /* 0x18 */ u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
  /* 0x1E */ u8 safariZoneFleeRate;
+
             // Pokédex data
  /* 0x1F */ u8 categoryName[13];
  /* 0x1F */ u8 speciesName[POKEMON_NAME_LENGTH + 1];
@@ -442,12 +443,13 @@ struct SpeciesInfo /*0x8C*/
  /* 0x7A */ u32 isLegendary:1;
             u32 isMythical:1;
             u32 isUltraBeast:1;
+            u32 isParadox:1;
             u32 isTotem:1;
-            u32 isParadoxForm:1;
             u32 isMegaEvolution:1;
             u32 isPrimalReversion:1;
             u32 isUltraBurst:1;
             u32 isGigantamax:1;
+            u32 isTeraForm:1;
             u32 isAlolanForm:1;
             u32 isGalarianForm:1;
             u32 isHisuianForm:1;
@@ -455,14 +457,23 @@ struct SpeciesInfo /*0x8C*/
             u32 cannotBeTraded:1;
             u32 allPerfectIVs:1;
             u32 dexForceRequired:1; // This species will be taken into account for Pokédex ratings even if they have the "isMythical" flag set.
-            u32 tmIlliterate:1; // This species will be unable to learn the universal moves.
-            u32 padding4:15;
+            u32 tmIlliterate:1;     // This species will be unable to learn the universal moves.
+            u32 isFrontierBanned:1; // This species is not allowed to participate in Battle Frontier facilities.
+            u32 padding4:14;
             // Move Data
  /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
  /* 0x84 */ const u16 *teachableLearnset;
- /* 0x88 */ const struct Evolution *evolutions;
- /* 0x84 */ const u16 *formSpeciesIdTable;
- /* 0x84 */ const struct FormChange *formChangeTable;
+ /* 0x88 */ const u16 *eggMoveLearnset;
+ /* 0x8C */ const struct Evolution *evolutions;
+ /* 0x90 */ const u16 *formSpeciesIdTable;
+ /* 0x94 */ const struct FormChange *formChangeTable;
+#if OW_POKEMON_OBJECT_EVENTS
+ /* 0x98 */ struct ObjectEventGraphicsInfo overworldData;
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+ /* 0xBC */ const void* overworldPalette;
+ /* 0xC0 */ const void* overworldShinyPalette;
+#endif //OW_PKMN_OBJECTS_SHARE_PALETTES
+#endif //OW_POKEMON_OBJECT_EVENTS
 };
 
 struct BattleMove

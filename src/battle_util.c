@@ -9577,12 +9577,118 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
     return uq4_12_multiply_by_int_half_down(modifier, defStat);
 }
 
-static u32 GetWeather(void)
+bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect)
 {
-    if (gBattleWeather == B_WEATHER_NONE || !WEATHER_HAS_EFFECT)
-        return B_WEATHER_NONE;
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
+         && gMovesInfo[move].additionalEffects[i].self == TRUE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 MoveHasAdditionalEffectWithChance(u32 move, u32 moveEffect, u32 chance)
+{
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
+         && gMovesInfo[move].additionalEffects[i].chance == chance)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
+{
+    return (gMovesInfo[move].argument == argument) && MoveHasAdditionalEffectSelf(move, moveEffect);
+}
+
+// Photon geyser & light that burns the sky
+u8 GetCategoryBasedOnStats(u32 battler)
+{
+    u32 attack = gBattleMons[battler].attack;
+    u32 spAttack = gBattleMons[battler].spAttack;
+
+    attack = attack * gStatStageRatios[gBattleMons[battler].statStages[STAT_ATK]][0];
+    attack = attack / gStatStageRatios[gBattleMons[battler].statStages[STAT_ATK]][1];
+
+    spAttack = spAttack * gStatStageRatios[gBattleMons[battler].statStages[STAT_SPATK]][0];
+    spAttack = spAttack / gStatStageRatios[gBattleMons[battler].statStages[STAT_SPATK]][1];
+
+    if (spAttack >= attack)
+        return DAMAGE_CATEGORY_SPECIAL;
     else
-        return gBattleWeather;
+        return DAMAGE_CATEGORY_PHYSICAL;
+}
+
+static u32 GetFlingPowerFromItemId(u32 itemId)
+{
+    if (IsItemTMHM(itemId))
+    {
+        u32 power = gMovesInfo[ItemIdToBattleMoveId(itemId)].power;
+        if (power > 1)
+            return power;
+        return 10; // Status moves and moves with variable power always return 10 power.
+    }
+    else
+        return ItemId_GetFlingPower(itemId);
+}
+
+bool32 CanFling(u32 battler)
+{
+    u16 item = gBattleMons[battler].item;
+
+    if (item == ITEM_NONE
+      || (B_KLUTZ_FLING_INTERACTION >= GEN_5 && GetBattlerAbility(battler) == ABILITY_KLUTZ)
+      || gFieldStatuses & STATUS_FIELD_MAGIC_ROOM
+      || gDisableStructs[battler].embargoTimer != 0
+      || GetFlingPowerFromItemId(item) == 0
+      || !CanBattlerGetOrLoseItem(battler, item))
+        return FALSE;
+
+    return TRUE;
+}
+
+static void SetRandomMultiHitCounter()
+{
+    if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LOADED_DICE)
+        gMultiHitCounter = RandomUniform(RNG_LOADED_DICE, 4, 5);
+    else if (B_MULTI_HIT_CHANCE >= GEN_5)
+        gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 7, 7, 3, 3); // 35%: 2 hits, 35%: 3 hits, 15% 4 hits, 15% 5 hits.
+    else
+        gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 3, 3, 1, 1); // 37.5%: 2 hits, 37.5%: 3 hits, 12.5% 4 hits, 12.5% 5 hits.
+}
+
+bool32 ShouldGetStatBadgeBoost(u16 badgeFlag, u32 battler)
+{
+    if (B_BADGE_BOOST == GEN_3)
+    {
+        if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_BATTLE_TOWER))
+            return FALSE;
+        else if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+            return FALSE;
+        else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
+            return FALSE;
+        else if (FlagGet(badgeFlag))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool32 IsBattlerWeatherAffected(u32 battler, u32 weatherFlags)
+{
+    if (gBattleWeather & weatherFlags && WEATHER_HAS_EFFECT)
+    {
+        // given weather is active -> check if its sun, rain against utility umbrella ( since only 1 weather can be active at once)
+        if (gBattleWeather & (B_WEATHER_SUN | B_WEATHER_RAIN) && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA)
+            return FALSE; // utility umbrella blocks sun, rain effects
+
+        return TRUE;
+    }
+    return FALSE;
 }
 
 #define DAMAGE_APPLY_MODIFIER(modifier) do {               \
@@ -9708,6 +9814,14 @@ static inline s32 DoFutureSightAttackDamageCalc(u32 move, u32 battlerAtk, u32 ba
 
 #undef DAMAGE_APPLY_MODIFIER
 
+static u32 GetWeather(void)
+{
+    if (gBattleWeather == B_WEATHER_NONE || !WEATHER_HAS_EFFECT)
+        return B_WEATHER_NONE;
+    else
+        return gBattleWeather;
+}
+
 s32 CalculateMoveDamage(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, s32 fixedBasePower, bool32 isCrit, bool32 randomFactor, bool32 updateFlags)
 {
     struct Pokemon *party = GetSideParty(GetBattlerSide(gBattlerAttacker));
@@ -9724,318 +9838,6 @@ s32 CalculateMoveDamage(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveType, 
         return DoMoveDamageCalc(move, battlerAtk, battlerDef, moveType, fixedBasePower, isCrit, randomFactor,
                             updateFlags, CalcTypeEffectivenessMultiplier(move, moveType, battlerAtk, battlerDef, GetBattlerAbility(battlerDef), updateFlags),
                             GetWeather());
-    }
-}
-
-bool32 MoveHasAdditionalEffectSelf(u32 move, u32 moveEffect)
-{
-    u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
-    {
-        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
-         && gMovesInfo[move].additionalEffects[i].self == TRUE)
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 MoveHasAdditionalEffectWithChance(u32 move, u32 moveEffect, u32 chance)
-{
-    u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
-    {
-        if (gMovesInfo[move].additionalEffects[i].moveEffect == moveEffect
-         && gMovesInfo[move].additionalEffects[i].chance == chance)
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 MoveHasAdditionalEffectSelfArg(u32 move, u32 moveEffect, u32 argument)
-{
-    return (gMovesInfo[move].argument == argument) && MoveHasAdditionalEffectSelf(move, moveEffect);
-}
-
-// Photon geyser & light that burns the sky
-u8 GetCategoryBasedOnStats(u32 battler)
-{
-    u32 attack = gBattleMons[battler].attack;
-    u32 spAttack = gBattleMons[battler].spAttack;
-
-    attack = attack * gStatStageRatios[gBattleMons[battler].statStages[STAT_ATK]][0];
-    attack = attack / gStatStageRatios[gBattleMons[battler].statStages[STAT_ATK]][1];
-
-    spAttack = spAttack * gStatStageRatios[gBattleMons[battler].statStages[STAT_SPATK]][0];
-    spAttack = spAttack / gStatStageRatios[gBattleMons[battler].statStages[STAT_SPATK]][1];
-
-    if (spAttack >= attack)
-        return DAMAGE_CATEGORY_SPECIAL;
-    else
-        return DAMAGE_CATEGORY_PHYSICAL;
-}
-
-static u32 GetFlingPowerFromItemId(u32 itemId)
-{
-    if (IsItemTMHM(itemId))
-    {
-        u32 power = gMovesInfo[ItemIdToBattleMoveId(itemId)].power;
-        if (power > 1)
-            return power;
-        return 10; // Status moves and moves with variable power always return 10 power.
-    }
-    else
-        return ItemId_GetFlingPower(itemId);
-}
-
-bool32 CanFling(u32 battler)
-{
-    u16 item = gBattleMons[battler].item;
-
-    if (item == ITEM_NONE
-      || (B_KLUTZ_FLING_INTERACTION >= GEN_5 && GetBattlerAbility(battler) == ABILITY_KLUTZ)
-      || gFieldStatuses & STATUS_FIELD_MAGIC_ROOM
-      || gDisableStructs[battler].embargoTimer != 0
-      || GetFlingPowerFromItemId(item) == 0
-      || !CanBattlerGetOrLoseItem(battler, item))
-        return FALSE;
-
-    return TRUE;
-}
-
-static void SetRandomMultiHitCounter()
-{
-    if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LOADED_DICE)
-        gMultiHitCounter = RandomUniform(RNG_LOADED_DICE, 4, 5);
-    else if (B_MULTI_HIT_CHANCE >= GEN_5)
-        gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 7, 7, 3, 3); // 35%: 2 hits, 35%: 3 hits, 15% 4 hits, 15% 5 hits.
-    else
-        gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 3, 3, 1, 1); // 37.5%: 2 hits, 37.5%: 3 hits, 12.5% 4 hits, 12.5% 5 hits.
-}
-
-bool32 ShouldGetStatBadgeBoost(u16 badgeFlag, u32 battler)
-{
-    if (B_BADGE_BOOST == GEN_3)
-    {
-        if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_BATTLE_TOWER))
-            return FALSE;
-        else if (GetBattlerSide(battler) != B_SIDE_PLAYER)
-            return FALSE;
-        else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-            return FALSE;
-        else if (FlagGet(badgeFlag))
-            return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 IsBattlerWeatherAffected(u32 battler, u32 weatherFlags)
-{
-    if (gBattleWeather & weatherFlags && WEATHER_HAS_EFFECT)
-    {
-        // given weather is active -> check if its sun, rain against utility umbrella ( since only 1 weather can be active at once)
-        if (gBattleWeather & (B_WEATHER_SUN | B_WEATHER_RAIN) && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA)
-            return FALSE; // utility umbrella blocks sun, rain effects
-
-        return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 DoesSpeciesUseHoldItemToChangeForm(u16 species, u16 heldItemId)
-{
-    // TODO: Form changes
-    // u32 i;
-    // const struct FormChange *formChanges = GetSpeciesFormChanges(species);
-
-    // if (formChanges != NULL)
-    // {
-    //     for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
-    //     {
-    //         switch (formChanges[i].method)
-    //         {
-    //         case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
-    //         case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
-    //         case FORM_CHANGE_BATTLE_ULTRA_BURST:
-    //         case FORM_CHANGE_ITEM_HOLD:
-    //             if (formChanges[i].param1 == heldItemId)
-    //                 return TRUE;
-    //             break;
-    //         }
-    //     }
-    // }
-    return FALSE;
-}
-
-bool32 CanBattlerGetOrLoseItem(u32 battler, u16 itemId)
-{
-    u16 species = gBattleMons[battler].species;
-    u16 holdEffect = ItemId_GetHoldEffect(itemId);
-
-    // Mail can be stolen now
-    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-        return FALSE;
-    else if (DoesSpeciesUseHoldItemToChangeForm(species, itemId))
-        return FALSE;
-    else if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
-        return FALSE;
-    else
-        return TRUE;
-}
-
-bool32 MoveIsAffectedBySheerForce(u32 move)
-{
-    u32 i;
-    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
-    {
-        if (gMovesInfo[move].additionalEffects[i].chance > 0)
-            return TRUE;
-    }
-    return FALSE;
-}
-
-u8 GetBattlerGender(u32 battler)
-{
-    return GetGenderFromSpeciesAndPersonality(gBattleMons[battler].species,
-                                              gBattleMons[battler].personality);
-}
-
-bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2)
-{
-    u8 gender1 = GetBattlerGender(battler1);
-    u8 gender2 = GetBattlerGender(battler2);
-
-    return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 != gender2);
-}
-
-bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2)
-{
-    u8 gender1 = GetBattlerGender(battler1);
-    u8 gender2 = GetBattlerGender(battler2);
-
-    return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 == gender2);
-}
-
-u32 GetBattlerHoldEffectParam(u32 battler)
-{
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
-        return gEnigmaBerries[battler].holdEffectParam;
-    else
-        return ItemId_GetHoldEffectParam(gBattleMons[battler].item);
-}
-u8 IsMonDisobedient(void)
-{
-    s32 rnd;
-    s32 calc;
-    u8 obedienceLevel = 0;
-
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
-        return 0;
-    if (BattlerHasAi(gBattlerAttacker))
-        return 0;
-    if ((gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_POKEDUDE)))
-        return 0;
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
-        return 0; // TODO: might not be reached? remove?
-
-    if (IsBattlerModernFatefulEncounter(gBattlerAttacker)) // only false if illegal Mew or Deoxys
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            return 0;
-        if (!IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
-            return 0;
-        if (FlagGet(FLAG_BADGE08_GET))
-            return 0;
-
-        obedienceLevel = 10;
-
-        if (FlagGet(FLAG_BADGE02_GET))
-            obedienceLevel = 30;
-        if (FlagGet(FLAG_BADGE04_GET))
-            obedienceLevel = 50;
-        if (FlagGet(FLAG_BADGE06_GET))
-            obedienceLevel = 70;
-    }
-
-    if (gBattleMons[gBattlerAttacker].level <= obedienceLevel)
-        return 0;
-    rnd = (Random() & 255);
-    calc = (gBattleMons[gBattlerAttacker].level + obedienceLevel) * rnd >> 8;
-    if (calc < obedienceLevel)
-        return 0;
-
-    // is not obedient
-    if (gCurrentMove == MOVE_RAGE)
-        gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_RAGE;
-    if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP && (gCurrentMove == MOVE_SNORE || gCurrentMove == MOVE_SLEEP_TALK))
-    {
-        gBattlescriptCurrInstr = BattleScript_IgnoresWhileAsleep;
-        return 1;
-    }
-
-    rnd = (Random() & 255);
-    calc = (gBattleMons[gBattlerAttacker].level + obedienceLevel) * rnd >> 8;
-    if (calc < obedienceLevel && gCurrentMove != MOVE_FOCUS_PUNCH) // Additional check for focus punch in FR
-    {
-        calc = CheckMoveLimitations(gBattlerAttacker, gBitTable[gCurrMovePos], MOVE_LIMITATIONS_ALL);
-        if (calc == 0xF) // all moves cannot be used
-        {
-            // Randomly select, then print a disobedient string
-            // B_MSG_LOAFING, B_MSG_WONT_OBEY, B_MSG_TURNED_AWAY, or B_MSG_PRETEND_NOT_NOTICE
-            gBattleCommunication[MULTISTRING_CHOOSER] = Random() & (NUM_LOAF_STRINGS - 1);
-            gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAroundMsg;
-            return 1;
-        }
-        else // use a random move
-        {
-            do
-            {
-                gCurrMovePos = gChosenMovePos = Random() & (MAX_MON_MOVES - 1);
-            } while (gBitTable[gCurrMovePos] & calc);
-
-            gCalledMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
-            gBattlescriptCurrInstr = BattleScript_IgnoresAndUsesRandomMove;
-            gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
-            gHitMarker |= HITMARKER_DISOBEDIENT_MOVE;
-            return 2;
-        }
-    }
-    else
-    {
-        obedienceLevel = gBattleMons[gBattlerAttacker].level - obedienceLevel;
-
-        calc = (Random() & 255);
-        if (calc < obedienceLevel && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY) && gBattleMons[gBattlerAttacker].ability != ABILITY_VITAL_SPIRIT && gBattleMons[gBattlerAttacker].ability != ABILITY_INSOMNIA)
-        {
-            // try putting asleep
-            int i;
-            for (i = 0; i < gBattlersCount; i++)
-            {
-                if (gBattleMons[i].status2 & STATUS2_UPROAR)
-                    break;
-            }
-            if (i == gBattlersCount)
-            {
-                gBattlescriptCurrInstr = BattleScript_IgnoresAndFallsAsleep;
-                return 1;
-            }
-        }
-        calc -= obedienceLevel;
-        if (calc < obedienceLevel)
-        {
-            gBattleMoveDamage = CalculateMoveDamage(MOVE_NONE, gBattlerAttacker, gBattlerAttacker, TYPE_MYSTERY, 40, FALSE, FALSE, TRUE);
-            gBattlerTarget = gBattlerAttacker;
-            gBattlescriptCurrInstr = BattleScript_IgnoresAndHitsItself;
-            gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
-            return 2;
-        }
-        else
-        {
-            // Randomly select, then print a disobedient string
-            // B_MSG_LOAFING, B_MSG_WONT_OBEY, B_MSG_TURNED_AWAY, or B_MSG_PRETEND_NOT_NOTICE
-            gBattleCommunication[MULTISTRING_CHOOSER] = Random() & (NUM_LOAF_STRINGS - 1);
-            gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAroundMsg;
-            return 1;
-        }
     }
 }
 
@@ -10252,11 +10054,422 @@ static uq4_12_t GetInverseTypeMultiplier(uq4_12_t multiplier)
     }
 }
 
+uq4_12_t GetTypeEffectiveness(struct Pokemon *mon, u8 moveType)
+{
+    uq4_12_t modifier = UQ_4_12(1.0);
+    u16 abilityDef = GetMonAbility(mon);
+    u16 speciesDef = GetMonData(mon, MON_DATA_SPECIES);
+    u8 type1 = gSpeciesInfo[speciesDef].types[0];
+    u8 type2 = gSpeciesInfo[speciesDef].types[1];
+
+    if (moveType != TYPE_MYSTERY)
+    {
+        MulByTypeEffectiveness(&modifier, MOVE_POUND, moveType, 0, type1, 0, FALSE);
+        if (type2 != type1)
+            MulByTypeEffectiveness(&modifier, MOVE_POUND, moveType, 0, type2, 0, FALSE);
+
+        if ((modifier <= UQ_4_12(1.0)  &&  abilityDef == ABILITY_WONDER_GUARD)
+         || (moveType == TYPE_FIRE     &&  abilityDef == ABILITY_FLASH_FIRE)
+         || (moveType == TYPE_GRASS    &&  abilityDef == ABILITY_SAP_SIPPER)
+         || (moveType == TYPE_GROUND   && (abilityDef == ABILITY_LEVITATE
+                                       ||  abilityDef == ABILITY_EARTH_EATER))
+         || (moveType == TYPE_WATER    && (abilityDef == ABILITY_WATER_ABSORB
+                                       || abilityDef == ABILITY_DRY_SKIN
+                                       || abilityDef == ABILITY_STORM_DRAIN))
+         || (moveType == TYPE_ELECTRIC && (abilityDef == ABILITY_LIGHTNING_ROD // TODO: Add Gen 3/4 config check
+                                       || abilityDef == ABILITY_VOLT_ABSORB
+                                       || abilityDef == ABILITY_MOTOR_DRIVE)))
+        {
+            modifier = UQ_4_12(0.0);
+        }
+    }
+    return modifier;
+}
+
 uq4_12_t GetTypeModifier(u32 atkType, u32 defType)
 {
     if (B_FLAG_INVERSE_BATTLE != 0 && FlagGet(B_FLAG_INVERSE_BATTLE))
         return GetInverseTypeMultiplier(gTypeEffectivenessTable[atkType][defType]);
     return gTypeEffectivenessTable[atkType][defType];
+}
+
+s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp)
+{
+    s32 dmg = 0;
+    uq4_12_t modifier = UQ_4_12(1.0);
+
+    modifier = uq4_12_multiply(modifier, GetTypeModifier(hazardType, type1));
+    if (type2 != type1)
+        modifier = uq4_12_multiply(modifier, GetTypeModifier(hazardType, type2));
+
+    switch (modifier)
+    {
+    case UQ_4_12(0.0):
+        dmg = 0;
+        break;
+    case UQ_4_12(0.25):
+        dmg = maxHp / 32;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(0.5):
+        dmg = maxHp / 16;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(1.0):
+        dmg = maxHp / 8;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(2.0):
+        dmg = maxHp / 4;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    case UQ_4_12(4.0):
+        dmg = maxHp / 2;
+        if (dmg == 0)
+            dmg = 1;
+        break;
+    }
+
+    return dmg;
+}
+
+s32 GetStealthHazardDamage(u8 hazardType, u32 battler)
+{
+    u8 type1 = gBattleMons[battler].type1;
+    u8 type2 = gBattleMons[battler].type2;
+    u32 maxHp = gBattleMons[battler].maxHP;
+
+    return GetStealthHazardDamageByTypesAndHP(hazardType, type1, type2, maxHp);
+}
+
+bool32 IsPartnerMonFromSameTrainer(u32 battler)
+{
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT && gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        return FALSE;
+    else if (GetBattlerSide(battler) == B_SIDE_PLAYER && gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        return FALSE;
+    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+bool32 DoesSpeciesUseHoldItemToChangeForm(u16 species, u16 heldItemId)
+{
+    u32 i;
+    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+
+    if (formChanges != NULL)
+    {
+        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
+        {
+            switch (formChanges[i].method)
+            {
+            case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
+            case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
+            case FORM_CHANGE_BATTLE_ULTRA_BURST:
+            case FORM_CHANGE_ITEM_HOLD:
+                if (formChanges[i].param1 == heldItemId)
+                    return TRUE;
+                break;
+            }
+        }
+    }
+    return FALSE;
+}
+
+bool32 CanMegaEvolve(u32 battler)
+{
+    u32 itemId, holdEffect;
+    struct Pokemon *mon;
+    u32 battlerPosition = GetBattlerPosition(battler);
+    u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
+    struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]))->mega);
+
+    // Check if Player has a Mega Ring
+    if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
+     && !CheckBagHasItem(ITEM_MEGA_RING, 1))
+        return FALSE;
+
+    // Check if trainer already mega evolved a pokemon.
+    if (mega->alreadyEvolved[battlerPosition])
+        return FALSE;
+
+    // Cannot use z move and mega evolve on same turn
+    if (gBattleStruct->zmove.toBeUsed[battler])
+        return FALSE;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+     && IsPartnerMonFromSameTrainer(battler)
+     && (mega->alreadyEvolved[partnerPosition] || (mega->toEvolve & gBitTable[BATTLE_PARTNER(battler)])))
+        return FALSE;
+
+    // Check if mon is currently held by Sky Drop
+    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
+        return FALSE;
+
+    // Gets mon data.
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
+    else
+        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
+
+    itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+
+    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
+        holdEffect = gEnigmaBerries[battler].holdEffect;
+    else
+        holdEffect = ItemId_GetHoldEffect(itemId);
+
+    // Check if there is an entry in the evolution table for regular Mega Evolution.
+    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM) != SPECIES_NONE)
+    {
+        // Can Mega Evolve via Mega Stone.
+        if (holdEffect == HOLD_EFFECT_MEGA_STONE)
+            return TRUE;
+    }
+
+    // Check if there is an entry in the evolution table for Wish Mega Evolution.
+    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE) != SPECIES_NONE)
+    {
+        // Can't Wish Mega Evolve if holding a Z Crystal.
+        if (holdEffect != HOLD_EFFECT_Z_CRYSTAL)
+            return TRUE;
+    }
+
+    // No checks passed, the mon CAN'T mega evolve.
+    return FALSE;
+}
+
+bool32 CanUltraBurst(u32 battler)
+{
+    u32 itemId, holdEffect;
+    struct Pokemon *mon;
+    u32 battlerPosition = GetBattlerPosition(battler);
+    u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
+
+    // Check if Player has a Z Ring
+    if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
+     && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
+        return FALSE;
+
+    // Check if trainer already ultra bursted a pokemon.
+    if (gBattleStruct->burst.alreadyBursted[battlerPosition])
+        return FALSE;
+
+    // Cannot use z move and ultra burst on same turn
+    if (gBattleStruct->zmove.toBeUsed[battler])
+        return FALSE;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+     && IsPartnerMonFromSameTrainer(battler)
+     && (gBattleStruct->burst.alreadyBursted[partnerPosition] || (gBattleStruct->burst.toBurst & gBitTable[BATTLE_PARTNER(battler)])))
+        return FALSE;
+
+    // Check if mon is currently held by Sky Drop
+    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
+        return FALSE;
+
+    // Gets mon data.
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
+    else
+        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
+
+    itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+
+    // Check if there is an entry in the evolution table for Ultra Burst.
+    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_ULTRA_BURST) != SPECIES_NONE)
+    {
+        if (itemId == ITEM_ENIGMA_BERRY_E_READER)
+            holdEffect = gEnigmaBerries[battler].holdEffect;
+        else
+            holdEffect = ItemId_GetHoldEffect(itemId);
+
+        // Can Ultra Burst via Z Crystal.
+        if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
+            return TRUE;
+    }
+
+    // No checks passed, the mon CAN'T ultra burst.
+    return FALSE;
+}
+
+bool32 CanBattlerGetOrLoseItem(u32 battler, u16 itemId)
+{
+    u16 species = gBattleMons[battler].species;
+    u16 holdEffect = ItemId_GetHoldEffect(itemId);
+
+    // Mail can be stolen now
+    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
+        return FALSE;
+    else if (DoesSpeciesUseHoldItemToChangeForm(species, itemId))
+        return FALSE;
+    else if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+bool32 MoveIsAffectedBySheerForce(u32 move)
+{
+    u32 i;
+    for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+    {
+        if (gMovesInfo[move].additionalEffects[i].chance > 0)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+u8 GetBattlerGender(u32 battler)
+{
+    return GetGenderFromSpeciesAndPersonality(gBattleMons[battler].species,
+                                              gBattleMons[battler].personality);
+}
+
+bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2)
+{
+    u8 gender1 = GetBattlerGender(battler1);
+    u8 gender2 = GetBattlerGender(battler2);
+
+    return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 != gender2);
+}
+
+bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2)
+{
+    u8 gender1 = GetBattlerGender(battler1);
+    u8 gender2 = GetBattlerGender(battler2);
+
+    return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 == gender2);
+}
+
+u32 GetBattlerHoldEffectParam(u32 battler)
+{
+    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
+        return gEnigmaBerries[battler].holdEffectParam;
+    else
+        return ItemId_GetHoldEffectParam(gBattleMons[battler].item);
+}
+u8 IsMonDisobedient(void)
+{
+    s32 rnd;
+    s32 calc;
+    u8 obedienceLevel = 0;
+
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+        return 0;
+    if (BattlerHasAi(gBattlerAttacker))
+        return 0;
+    if ((gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_POKEDUDE)))
+        return 0;
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
+        return 0; // TODO: might not be reached? remove?
+
+    if (IsBattlerModernFatefulEncounter(gBattlerAttacker)) // only false if illegal Mew or Deoxys
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+            return 0;
+        if (!IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
+            return 0;
+        if (FlagGet(FLAG_BADGE08_GET))
+            return 0;
+
+        obedienceLevel = 10;
+
+        if (FlagGet(FLAG_BADGE02_GET))
+            obedienceLevel = 30;
+        if (FlagGet(FLAG_BADGE04_GET))
+            obedienceLevel = 50;
+        if (FlagGet(FLAG_BADGE06_GET))
+            obedienceLevel = 70;
+    }
+
+    if (gBattleMons[gBattlerAttacker].level <= obedienceLevel)
+        return 0;
+    rnd = (Random() & 255);
+    calc = (gBattleMons[gBattlerAttacker].level + obedienceLevel) * rnd >> 8;
+    if (calc < obedienceLevel)
+        return 0;
+
+    // is not obedient
+    if (gCurrentMove == MOVE_RAGE)
+        gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_RAGE;
+    if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP && (gCurrentMove == MOVE_SNORE || gCurrentMove == MOVE_SLEEP_TALK))
+    {
+        gBattlescriptCurrInstr = BattleScript_IgnoresWhileAsleep;
+        return 1;
+    }
+
+    rnd = (Random() & 255);
+    calc = (gBattleMons[gBattlerAttacker].level + obedienceLevel) * rnd >> 8;
+    if (calc < obedienceLevel && gCurrentMove != MOVE_FOCUS_PUNCH) // Additional check for focus punch in FR
+    {
+        calc = CheckMoveLimitations(gBattlerAttacker, gBitTable[gCurrMovePos], MOVE_LIMITATIONS_ALL);
+        if (calc == 0xF) // all moves cannot be used
+        {
+            // Randomly select, then print a disobedient string
+            // B_MSG_LOAFING, B_MSG_WONT_OBEY, B_MSG_TURNED_AWAY, or B_MSG_PRETEND_NOT_NOTICE
+            gBattleCommunication[MULTISTRING_CHOOSER] = Random() & (NUM_LOAF_STRINGS - 1);
+            gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAroundMsg;
+            return 1;
+        }
+        else // use a random move
+        {
+            do
+            {
+                gCurrMovePos = gChosenMovePos = Random() & (MAX_MON_MOVES - 1);
+            } while (gBitTable[gCurrMovePos] & calc);
+
+            gCalledMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+            gBattlescriptCurrInstr = BattleScript_IgnoresAndUsesRandomMove;
+            gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
+            gHitMarker |= HITMARKER_DISOBEDIENT_MOVE;
+            return 2;
+        }
+    }
+    else
+    {
+        obedienceLevel = gBattleMons[gBattlerAttacker].level - obedienceLevel;
+
+        calc = (Random() & 255);
+        if (calc < obedienceLevel && !(gBattleMons[gBattlerAttacker].status1 & STATUS1_ANY) && gBattleMons[gBattlerAttacker].ability != ABILITY_VITAL_SPIRIT && gBattleMons[gBattlerAttacker].ability != ABILITY_INSOMNIA)
+        {
+            // try putting asleep
+            int i;
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (gBattleMons[i].status2 & STATUS2_UPROAR)
+                    break;
+            }
+            if (i == gBattlersCount)
+            {
+                gBattlescriptCurrInstr = BattleScript_IgnoresAndFallsAsleep;
+                return 1;
+            }
+        }
+        calc -= obedienceLevel;
+        if (calc < obedienceLevel)
+        {
+            gBattleMoveDamage = CalculateMoveDamage(MOVE_NONE, gBattlerAttacker, gBattlerAttacker, TYPE_MYSTERY, 40, FALSE, FALSE, TRUE);
+            gBattlerTarget = gBattlerAttacker;
+            gBattlescriptCurrInstr = BattleScript_IgnoresAndHitsItself;
+            gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+            return 2;
+        }
+        else
+        {
+            // Randomly select, then print a disobedient string
+            // B_MSG_LOAFING, B_MSG_WONT_OBEY, B_MSG_TURNED_AWAY, or B_MSG_PRETEND_NOT_NOTICE
+            gBattleCommunication[MULTISTRING_CHOOSER] = Random() & (NUM_LOAF_STRINGS - 1);
+            gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAroundMsg;
+            return 1;
+        }
+    }
 }
 
 u8 GetBattlerType(u32 battler, u8 typeIndex, bool32 ignoreTera)
@@ -10918,59 +11131,6 @@ bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes)
     return ret;
 }
 
-s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp)
-{
-    s32 dmg = 0;
-    uq4_12_t modifier = UQ_4_12(1.0);
-
-    modifier = uq4_12_multiply(modifier, GetTypeModifier(hazardType, type1));
-    if (type2 != type1)
-        modifier = uq4_12_multiply(modifier, GetTypeModifier(hazardType, type2));
-
-    switch (modifier)
-    {
-    case UQ_4_12(0.0):
-        dmg = 0;
-        break;
-    case UQ_4_12(0.25):
-        dmg = maxHp / 32;
-        if (dmg == 0)
-            dmg = 1;
-        break;
-    case UQ_4_12(0.5):
-        dmg = maxHp / 16;
-        if (dmg == 0)
-            dmg = 1;
-        break;
-    case UQ_4_12(1.0):
-        dmg = maxHp / 8;
-        if (dmg == 0)
-            dmg = 1;
-        break;
-    case UQ_4_12(2.0):
-        dmg = maxHp / 4;
-        if (dmg == 0)
-            dmg = 1;
-        break;
-    case UQ_4_12(4.0):
-        dmg = maxHp / 2;
-        if (dmg == 0)
-            dmg = 1;
-        break;
-    }
-
-    return dmg;
-}
-
-s32 GetStealthHazardDamage(u8 hazardType, u32 battler)
-{
-    u8 type1 = gBattleMons[battler].type1;
-    u8 type2 = gBattleMons[battler].type2;
-    u32 maxHp = gBattleMons[battler].maxHP;
-
-    return GetStealthHazardDamageByTypesAndHP(hazardType, type1, type2, maxHp);
-}
-
 bool32 DoBattlersShareType(u32 battler1, u32 battler2)
 {
     s32 i;
@@ -10999,135 +11159,6 @@ bool32 MoveHasChargeTurnAdditionalEffect(u32 move)
         if (gMovesInfo[move].additionalEffects[i].onChargeTurnOnly)
             return TRUE;
     }
-    return FALSE;
-}
-
-bool32 IsPartnerMonFromSameTrainer(u32 battler)
-{
-    if (GetBattlerSide(battler) == B_SIDE_OPPONENT && gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-        return FALSE;
-    else if (GetBattlerSide(battler) == B_SIDE_PLAYER && gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-        return FALSE;
-    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-        return FALSE;
-    else
-        return TRUE;
-}
-
-bool32 CanMegaEvolve(u32 battler)
-{
-    u32 itemId, holdEffect;
-    struct Pokemon *mon;
-    u32 battlerPosition = GetBattlerPosition(battler);
-    u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
-    struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]))->mega);
-
-    // Check if Player has a Mega Ring
-    if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
-     && !CheckBagHasItem(ITEM_MEGA_RING, 1))
-        return FALSE;
-
-    // Check if trainer already mega evolved a pokemon.
-    if (mega->alreadyEvolved[battlerPosition])
-        return FALSE;
-
-    // Cannot use z move and mega evolve on same turn
-    if (gBattleStruct->zmove.toBeUsed[battler])
-        return FALSE;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-     && IsPartnerMonFromSameTrainer(battler)
-     && (mega->alreadyEvolved[partnerPosition] || (mega->toEvolve & gBitTable[BATTLE_PARTNER(battler)])))
-        return FALSE;
-
-    // Check if mon is currently held by Sky Drop
-    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
-        return FALSE;
-
-    // Gets mon data.
-    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
-    else
-        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
-
-    itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
-
-    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-        holdEffect = gEnigmaBerries[battler].holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(itemId);
-
-    // Check if there is an entry in the evolution table for regular Mega Evolution.
-    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM) != SPECIES_NONE)
-    {
-        // Can Mega Evolve via Mega Stone.
-        if (holdEffect == HOLD_EFFECT_MEGA_STONE)
-            return TRUE;
-    }
-
-    // Check if there is an entry in the evolution table for Wish Mega Evolution.
-    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE) != SPECIES_NONE)
-    {
-        // Can't Wish Mega Evolve if holding a Z Crystal.
-        if (holdEffect != HOLD_EFFECT_Z_CRYSTAL)
-            return TRUE;
-    }
-
-    // No checks passed, the mon CAN'T mega evolve.
-    return FALSE;
-}
-
-bool32 CanUltraBurst(u32 battler)
-{
-    u32 itemId, holdEffect;
-    struct Pokemon *mon;
-    u32 battlerPosition = GetBattlerPosition(battler);
-    u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
-
-    // Check if Player has a Z Ring
-    if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
-     && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
-        return FALSE;
-
-    // Check if trainer already ultra bursted a pokemon.
-    if (gBattleStruct->burst.alreadyBursted[battlerPosition])
-        return FALSE;
-
-    // Cannot use z move and ultra burst on same turn
-    if (gBattleStruct->zmove.toBeUsed[battler])
-        return FALSE;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-     && IsPartnerMonFromSameTrainer(battler)
-     && (gBattleStruct->burst.alreadyBursted[partnerPosition] || (gBattleStruct->burst.toBurst & gBitTable[BATTLE_PARTNER(battler)])))
-        return FALSE;
-
-    // Check if mon is currently held by Sky Drop
-    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
-        return FALSE;
-
-    // Gets mon data.
-    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
-    else
-        mon = &gPlayerParty[gBattlerPartyIndexes[battler]];
-
-    itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
-
-    // Check if there is an entry in the evolution table for Ultra Burst.
-    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_ULTRA_BURST) != SPECIES_NONE)
-    {
-        if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-            holdEffect = gEnigmaBerries[battler].holdEffect;
-        else
-            holdEffect = ItemId_GetHoldEffect(itemId);
-
-        // Can Ultra Burst via Z Crystal.
-        if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
-            return TRUE;
-    }
-
-    // No checks passed, the mon CAN'T ultra burst.
     return FALSE;
 }
 

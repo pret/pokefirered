@@ -29,5 +29,6 @@ void EggHatch(void);
 u8 GetEggStepsToSubtract(void);
 bool8 ShouldEggHatch(void);
 u8 GetEggCyclesToSubtract(void);
+u8 GetEggMovesBySpecies(u16 species, u16 *eggMoves);
 
 #endif // GUARD_DAYCARE_H

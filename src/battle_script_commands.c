@@ -340,6 +340,8 @@ static bool8 IsFinalStrikeEffect(u16 move);
 static void TryUpdateRoundTurnOrder(void);
 static void BestowItem(u32 battlerAtk, u32 battlerDef);
 static void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBattler);
+static void RemoveAllWeather(void);
+static void RemoveAllTerrains(void);
 static bool8 CanBurnHitThaw(u16 move);
 static bool32 ChangeOrderTargetAfterAttacker(void);
 static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount, u16 usedMove);
@@ -473,7 +475,7 @@ static void Cmd_setatkhptozero(void);
 static void Cmd_jumpifnexttargetvalid(void);
 static void Cmd_tryhealhalfhealth(void);
 static void Cmd_trymirrormove(void);
-static void Cmd_setrain(void);
+static void Cmd_setfieldweather(void);
 static void Cmd_setreflect(void);
 static void Cmd_setseeded(void);
 static void Cmd_manipulatedamage(void);
@@ -732,7 +734,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifnexttargetvalid,                   //0x7A // done
     Cmd_tryhealhalfhealth,                       //0x7B // done
     Cmd_trymirrormove,                           //0x7C // done
-    Cmd_setrain,                                 //0x7D // done
+    Cmd_setfieldweather,                                 //0x7D // done
     Cmd_setreflect,                              //0x7E // done
     Cmd_setseeded,                               //0x7F // done
     Cmd_manipulatedamage,                        //0x80 // done
@@ -8466,6 +8468,30 @@ bool32 CanUseLastResort(u8 battler)
     return (knownMovesCount >= 2 && usedMovesCount >= knownMovesCount - 1);
 }
 
+static void RemoveAllWeather(void)
+{
+    gWishFutureKnock.weatherDuration = 0;
+
+    if (gBattleWeather & B_WEATHER_RAIN)
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_RAIN;
+    else if(gBattleWeather & B_WEATHER_SANDSTORM)
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_SANDSTORM;
+    else if(gBattleWeather & B_WEATHER_SUN)
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_SUN;
+    else if(gBattleWeather & B_WEATHER_HAIL)
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_HAIL;
+    else if(gBattleWeather & B_WEATHER_STRONG_WINDS)
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_STRONG_WINDS;
+    else if(gBattleWeather & B_WEATHER_SNOW)
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_SNOW;
+    else if(gBattleWeather & B_WEATHER_FOG)
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_FOG;
+    else
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_COUNT;  // failsafe
+
+    gBattleWeather = 0;    // remove the weather
+}
+
 static void RemoveAllTerrains(void)
 {
     gFieldTimers.terrainTimer = 0;
@@ -11072,19 +11098,39 @@ static void Cmd_trymirrormove(void)
     }
 }
 
-static void Cmd_setrain(void)
+static void Cmd_setfieldweather(void)
 {
-    CMD_ARGS();
+    CMD_ARGS(u8 weather);
 
-    if (!TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_RAIN, FALSE))
+    u8 weather = cmd->weather;
+
+    if (!TryChangeBattleWeather(gBattlerAttacker, weather, FALSE))
     {
         gMoveResultFlags |= MOVE_RESULT_MISSED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
     }
-    else
+
+    switch (weather)
     {
+    case ENUM_WEATHER_RAIN:
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_RAIN;
+        break;
+    case ENUM_WEATHER_SUN:
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
+        break;
+    case ENUM_WEATHER_SANDSTORM:
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SANDSTORM;
+        break;
+    case ENUM_WEATHER_HAIL:
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_HAIL;
+        break;
+    case ENUM_WEATHER_SNOW:
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SNOW;
+        break;
     }
+
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
@@ -16916,6 +16962,13 @@ void BS_TryUpdateRecoilTracker(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+void BS_TryUpdateLeadersCrestTracker(void)
+{
+    NATIVE_ARGS();
+    TryUpdateEvolutionTracker(EVO_DEFEAT_WITH_ITEM, 1, MOVE_NONE);
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
 void BS_TryTidyUp(void)
 {
     NATIVE_ARGS(u8 clear, const u8 *jumpInstr);
@@ -17013,6 +17066,21 @@ void BS_TryQuash(void)
                 SwapTurnOrder(i, j);
         }
     }
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_RemoveWeather(void)
+{
+    NATIVE_ARGS();
+    RemoveAllWeather();
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_ApplyTerastallization(void)
+{
+    NATIVE_ARGS();
+    // TODO: Tera
+    // ApplyBattlerVisualsForTeraAnim(gBattlerAttacker);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

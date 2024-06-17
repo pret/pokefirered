@@ -710,8 +710,9 @@
 	.byte 0x7c
 	.endm
 
-	.macro setrain
+	.macro setfieldweather weather:req
 	.byte 0x7d
+	.byte \weather
 	.endm
 
 	.macro setreflect
@@ -1351,6 +1352,22 @@
 	.endm
 
 @ callnative macros
+	.macro savetarget
+	callnative BS_SaveTarget
+	.endm
+
+	.macro restoretarget
+	callnative BS_RestoreTarget
+	.endm
+	
+	.macro saveattacker
+	callnative BS_SaveAttacker
+	.endm
+	
+	.macro restoreattacker
+	callnative BS_RestoreAttacker
+	.endm
+	
 	.macro metalburstdamagecalculator failInstr:req
 	callnative BS_CalcMetalBurstDmg
 	.4byte \failInstr
@@ -1409,10 +1426,6 @@
 
 	.macro tryrevertweatherform
 	callnative BS_TryRevertWeatherForm
-	.endm
-
-	.macro setsnow
-	callnative BS_SetSnow
 	.endm
 
 	.macro applysaltcure battler:req
@@ -1628,6 +1641,10 @@
 	callnative BS_TryUpdateRecoilTracker
 	.endm
 
+	.macro tryupdateleaderscresttracker
+	callnative BS_TryUpdateLeadersCrestTracker
+	.endm
+
 	.macro trytidyup clear:req, jumpInstr:req
 	callnative BS_TryTidyUp
 	.byte \clear
@@ -1637,7 +1654,7 @@
 	.macro trygulpmissile
 	callnative BS_TryGulpMissile
 	.endm
-	
+
 	.macro tryactivategulpmissile
 	callnative BS_TryActivateGulpMissile
 	.endm
@@ -1645,6 +1662,14 @@
 	.macro tryquash failInstr:req
 	callnative BS_TryQuash
 	.4byte \failInstr
+	.endm
+
+	.macro removeweather
+	callnative BS_RemoveWeather
+	.endm
+	
+	.macro applyterastallization
+	callnative BS_ApplyTerastallization
 	.endm
 
 @ various command changed to more readable macros
@@ -1767,14 +1792,6 @@
 
 	.macro switchinabilities battler:req
 	various \battler, VARIOUS_SWITCHIN_ABILITIES
-	.endm
-
-	.macro savetarget
-	various BS_TARGET, VARIOUS_SAVE_TARGET
-	.endm
-
-	.macro restoretarget
-	various BS_TARGET, VARIOUS_RESTORE_TARGET
 	.endm
 
 	.macro instanthpdrop battler:req
@@ -2211,10 +2228,6 @@
 	.4byte \failInstr
 	.endm
 
-	.macro shellsidearmcheck
-	various BS_ATTACKER, VARIOUS_SHELL_SIDE_ARM_CHECK
-	.endm
-
 	.macro jumpifteanoberry jumpInstr:req
 	various BS_ATTACKER, VARIOUS_TEATIME_TARGETS
 	.4byte \jumpInstr
@@ -2280,11 +2293,6 @@
 
 	.macro activateterrainchangeabilities battler:req
 	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
-	.endm
-
-	.macro jumpifleafguardprotected battler:req, jumpInstr:req
-	various \battler, VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED
-	.4byte \jumpInstr
 	.endm
 
 @ various remaining from pokefirered
@@ -2399,10 +2407,6 @@
 	manipulatedamage DMG_CURR_ATTACKER_HP
 	.endm
 
-	.macro dmg_1_2_attackerhp
-	manipulatedamage DMG_1_2_ATTACKER_HP
-	.endm
-
 	.macro jumpifflowerveil jumpInstr:req
 	jumpifnottype BS_TARGET, TYPE_GRASS, 1f
 	jumpifability BS_TARGET_SIDE, ABILITY_FLOWER_VEIL, \jumpInstr
@@ -2431,6 +2435,11 @@
 	1:
 	subbyte gBattlerAttacker, 0x2
 	goto \jumpInstr
+	.endm
+
+	.macro jumpifleafguardprotected battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_LEAF_GUARD_PROTECTED
+	.4byte \jumpInstr
 	.endm
 
 	.macro jumpifsafeguard jumpInstr:req

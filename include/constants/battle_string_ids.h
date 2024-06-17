@@ -1330,8 +1330,14 @@
 #define STRINGID_TRAINER1MON1COMEBACK 731
 #define STRINGID_TRAINER1MON2COMEBACK 732
 #define STRINGID_TRAINER1MON1AND2COMEBACK 733
+#define STRINGID_PKMNTERASTALLIZEDINTO                734
+#define STRINGID_BOOSTERENERGYACTIVATES               735
+#define STRINGID_FOGCREPTUP                           736
+#define STRINGID_FOGISDEEP                            737
+#define STRINGID_FOGLIFTED                            738
+#define STRINGID_PKMNMADESHELLGLEAM                   739
 
-#define BATTLESTRINGS_COUNT     734
+#define BATTLESTRINGS_COUNT     740
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -1393,6 +1399,17 @@
 #define B_MSG_STARTED_SUNLIGHT  4
 #define B_MSG_STARTED_HAIL      5
 #define B_MSG_STARTED_SNOW      6
+#define B_MSG_STARTED_FOG       7
+
+// gWeatherEndsStringIds
+#define B_MSG_WEATHER_END_RAIN         0
+#define B_MSG_WEATHER_END_SANDSTORM    1
+#define B_MSG_WEATHER_END_SUN          2
+#define B_MSG_WEATHER_END_HAIL         3
+#define B_MSG_WEATHER_END_STRONG_WINDS 4
+#define B_MSG_WEATHER_END_SNOW         5
+#define B_MSG_WEATHER_END_FOG          6
+#define B_MSG_WEATHER_END_COUNT        7
 
 // gRainContinuesStringIds
 #define B_MSG_RAIN_CONTINUES     0
@@ -1498,7 +1515,10 @@
 #define B_MSG_WONT_OBEY          1
 #define B_MSG_TURNED_AWAY        2
 #define B_MSG_PRETEND_NOT_NOTICE 3
-#define NUM_LOAF_STRINGS         4 // For randomly selecting a disobey string
+#define B_MSG_INCAPABLE_OF_POWER 4
+// For randomly selecting a disobey string
+// Skips the one used for Battle Palace
+#define NUM_LOAF_STRINGS 4
 
 // gSafariGetNearStringIds
 #define B_MSG_CREPT_CLOSER    0

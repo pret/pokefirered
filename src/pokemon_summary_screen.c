@@ -2244,15 +2244,15 @@ static void ApplyNatureColor(u8 *str, u8 stat)
     const u8 red[] = _("{COLOR 1}");
     const u8 none[] = _("");
     u8 nature = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HIDDEN_NATURE);
-    const s8 *natureMods = gNatureStatTable[nature];
-    s8 mod = natureMods[stat - 1];
     u8 tmp[20];
 
     StringCopy(tmp, str);
 
-    if (mod > 0)
+    if (gNaturesInfo[nature].statUp == gNaturesInfo[nature].statDown)
+        StringCopy(str, none);
+    else if (gNaturesInfo[nature].statUp == stat)
         StringCopy(str, red);
-    else if (mod < 0)
+    else if (gNaturesInfo[nature].statDown == stat)
         StringCopy(str, blue);
     else
         StringCopy(str, none);
@@ -2782,7 +2782,7 @@ static void PokeSum_PrintTrainerMemo_Mon_HeldByOT(void)
 
     DynamicPlaceholderTextUtil_Reset();
     nature = GetNature(&sMonSummaryScreen->currentMon);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gNatureNamePointers[nature]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gNaturesInfo[nature].name);
     level = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MET_LEVEL);
 
     if (level == 0)
@@ -2856,7 +2856,7 @@ static void PokeSum_PrintTrainerMemo_Mon_NotHeldByOT(void)
 
     DynamicPlaceholderTextUtil_Reset();
     nature = GetNature(&sMonSummaryScreen->currentMon);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gNatureNamePointers[nature]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gNaturesInfo[nature].name);
 
     level = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MET_LEVEL);
 

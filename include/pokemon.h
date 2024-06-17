@@ -588,6 +588,14 @@ struct Ability
     u8 failsOnImposter:1; // doesn't work on an Imposter mon; when can we actually use this?
 };
 
+struct NatureInfo
+{
+    const u8 *name;
+    u8 statUp;
+    u8 statDown;
+    u8 backAnim;
+};
+
 #define SPINDA_SPOT_WIDTH 16
 #define SPINDA_SPOT_HEIGHT 16
 
@@ -656,7 +664,7 @@ extern const struct SpriteTemplate gSpriteTemplates_Battlers[];
 extern const u8 gPPUpGetMask[];
 extern const u32 sExpCandyExperienceTable[];
 extern const struct Ability gAbilitiesInfo[];
-extern const s8 gNatureStatTable[][5];
+extern const struct NatureInfo gNaturesInfo[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);

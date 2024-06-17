@@ -48,7 +48,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-static void SpriteCB_UnusedDebugSprite(struct Sprite *sprite);
 static void HandleEndTurn_ContinueBattle(void);
 static void HandleEndTurn_BattleWon(void);
 static void HandleEndTurn_BattleLost(void);
@@ -63,7 +62,6 @@ static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
 static void BattleMainCB1(void);
 static void CB2_QuitPokedudeBattle(void);
-static void SpriteCB_UnusedDebugSprite_Step(struct Sprite *sprite);
 static void CB2_EndLinkBattle(void);
 static void EndLinkBattleInSteps(void);
 static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite);
@@ -103,7 +101,7 @@ EWRAM_DATA u16 gBattle_WIN0H = 0;
 EWRAM_DATA u16 gBattle_WIN0V = 0;
 EWRAM_DATA u16 gBattle_WIN1H = 0;
 EWRAM_DATA u16 gBattle_WIN1V = 0;
-EWRAM_DATA u8 gDisplayedStringBattle[490] = {0};    // Increased in size to fit Brock's defeat text, which is 477 characters long (PewterCity_Gym_Text_BrockDefeat)
+EWRAM_DATA u8 gDisplayedStringBattle[478] = {0};    // Increased in size to fit Brock's defeat text, which is 477 characters long (PewterCity_Gym_Text_BrockDefeat)
 EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT + 13] = {0};   // expanded for stupidly long z move names
@@ -112,7 +110,6 @@ EWRAM_DATA u8 gBattleTerrain = 0;
 EWRAM_DATA struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE] = {0};
 EWRAM_DATA u8 *gBattleAnimBgTileBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTilemapBuffer = NULL;
-static EWRAM_DATA u16 *sUnknownDebugSpriteDataBuffer = NULL;
 EWRAM_DATA u32 gBattleControllerExecFlags = 0;
 EWRAM_DATA u8 gBattlersCount = 0;
 EWRAM_DATA u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT] = {0};
@@ -142,7 +139,6 @@ EWRAM_DATA u8 gAbsentBattlerFlags = 0;
 EWRAM_DATA u8 gCritMultiplier = 0;
 EWRAM_DATA u8 gMultiHitCounter = 0;
 EWRAM_DATA const u8 *gBattlescriptCurrInstr = NULL;
-EWRAM_DATA u32 gUnusedBattleMainVar = 0;
 EWRAM_DATA u8 gChosenActionByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
 EWRAM_DATA u16 gLastPrintedMoves[MAX_BATTLERS_COUNT] = {0};
@@ -218,17 +214,6 @@ u8 gNumberOfMovesToChoose;
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
     &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
-};
-
-const struct SpriteTemplate gUnknownDebugSprite =
-{
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &gDummyOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_UnusedDebugSprite,
 };
 
 static const u8 sText_ShedinjaJpnName[] = _("ヌケニン"); // Nukenin
@@ -1724,58 +1709,6 @@ static void CB2_QuitPokedudeBattle(void)
         FreeRestoreBattleData();
         FreeAllWindowBuffers();
         SetMainCallback2(gMain.savedCallback);
-    }
-}
-
-static void SpriteCB_UnusedDebugSprite(struct Sprite *sprite)
-{
-    sprite->data[0] = 0;
-    sprite->callback = SpriteCB_UnusedDebugSprite_Step;
-}
-
-static void SpriteCB_UnusedDebugSprite_Step(struct Sprite *sprite)
-{
-    switch (sprite->data[0])
-    {
-    case 0:
-        sUnknownDebugSpriteDataBuffer = AllocZeroed(0x1000);
-        ++sprite->data[0];
-        sprite->data[1] = 0;
-        sprite->data[2] = 0x281;
-        sprite->data[3] = 0;
-        sprite->data[4] = 1;
-        // fall through
-    case 1:
-        if (--sprite->data[4] == 0)
-        {
-            s32 i, r2, r0;
-
-            sprite->data[4] = 2;
-            r2 = sprite->data[1] + sprite->data[3] * 32;
-            r0 = sprite->data[2] - sprite->data[3] * 32;
-            for (i = 0; i <= 29; i += 2)
-            {
-                *(&sUnknownDebugSpriteDataBuffer[r2] + i) = 0x3D;
-                *(&sUnknownDebugSpriteDataBuffer[r0] + i) = 0x3D;
-            }
-            if (++sprite->data[3] == 21)
-            {
-                ++sprite->data[0];
-                sprite->data[1] = 32;
-            }
-        }
-        break;
-    case 2:
-        if (--sprite->data[1] == 20)
-        {
-            if (sUnknownDebugSpriteDataBuffer != NULL)
-            {
-                memset(sUnknownDebugSpriteDataBuffer, 0, 0x1000);
-                FREE_AND_SET_NULL(sUnknownDebugSpriteDataBuffer);
-            }
-            SetMainCallback2(CB2_InitBattle);
-        }
-        break;
     }
 }
 

@@ -26,10 +26,7 @@ struct BattleBackground
     const void *palette;
 };
 
-static void CB2_unused(void);
 static u8 GetBattleTerrainOverride(void);
-
-static const u8 sUnused[] = {1, 2};
 
 static const struct OamData sVsLetter_V_OamData = {
     .y = 0,
@@ -613,23 +610,6 @@ static const struct {
     {MAP_BATTLE_SCENE_LANCE,    BATTLE_TERRAIN_LANCE},
     {MAP_BATTLE_SCENE_LINK,     BATTLE_TERRAIN_LINK}
 };
-
-// Unused
-void CreateUnknownDebugSprite(void)
-{
-    u8 spriteId;
-
-    ResetSpriteData();
-    spriteId = CreateSprite(&gUnknownDebugSprite, 0, 0, 0);
-    gSprites[spriteId].invisible = TRUE;
-    SetMainCallback2(CB2_unused);
-}
-
-static void CB2_unused(void)
-{
-    AnimateSprites();
-    BuildOamBuffer();
-}
 
 static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
 {

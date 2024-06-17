@@ -43,7 +43,6 @@ struct MultiPartnerMenuPokemon
 #define BOUNCE_MON          0x0
 #define BOUNCE_HEALTHBOX    0x1
 
-extern const struct SpriteTemplate gUnknownDebugSprite;
 extern const struct OamData gOamData_BattlerOpponent;
 extern const struct OamData gOamData_BattlerPlayer;
 extern const u8 gStatusConditionString_PoisonJpn[8];

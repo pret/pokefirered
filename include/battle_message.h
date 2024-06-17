@@ -234,7 +234,7 @@ extern struct BattleMsgData *gBattleMsgDataPtr;
 
 #define TEXT_BUFF_ARRAY_COUNT   16
 
-extern u8 gDisplayedStringBattle[490];
+extern u8 gDisplayedStringBattle[478];
 extern u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT + 13];

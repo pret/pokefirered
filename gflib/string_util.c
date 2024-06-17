@@ -4,11 +4,11 @@
 #include "strings.h"
 #include "union_room_chat.h"
 
-EWRAM_DATA u8 gStringVar1[32] = {};
-EWRAM_DATA u8 gStringVar2[20] = {};
-EWRAM_DATA u8 gStringVar3[20] = {};
+EWRAM_DATA u8 gStringVar1[256] = {};
+EWRAM_DATA u8 gStringVar2[256] = {};
+EWRAM_DATA u8 gStringVar3[256] = {};
 EWRAM_DATA u8 gStringVar4[1000] = {};
-EWRAM_DATA u8 gUnknownStringVar[16] = {0};
+EWRAM_DATA static u8 gUnknownStringVar[16] = {0};
 
 static const u8 sDigits[] = __("0123456789ABCDEF");
 

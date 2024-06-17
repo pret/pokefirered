@@ -856,22 +856,22 @@ bool32 IsBattlerMarkedForControllerExec(u32 battler)
         return (gBattleControllerExecFlags & (gBitTable[battler])) != 0;
 }
 
-void MarkBattlerForControllerExec(u8 battlerId)
+void MarkBattlerForControllerExec(u32 battler)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        gBattleControllerExecFlags |= gBitTable[battlerId] << (32 - MAX_BATTLERS_COUNT);
+        gBattleControllerExecFlags |= gBitTable[battler] << (32 - MAX_BATTLERS_COUNT);
     else
-        gBattleControllerExecFlags |= gBitTable[battlerId];
+        gBattleControllerExecFlags |= gBitTable[battler];
 }
 
-void MarkBattlerReceivedLinkData(u8 battlerId)
+void MarkBattlerReceivedLinkData(u32 battler)
 {
     s32 i;
 
     for (i = 0; i < GetLinkPlayerCount(); i++)
-        gBattleControllerExecFlags |= gBitTable[battlerId] << (i << 2);
+        gBattleControllerExecFlags |= gBitTable[battler] << (i << 2);
 
-    gBattleControllerExecFlags &= ~((1 << 28) << battlerId);
+    gBattleControllerExecFlags &= ~((1 << 28) << battler);
 }
 
 const u8* CancelMultiTurnMoves(u32 battler)
@@ -1055,7 +1055,7 @@ void ResetSentPokesToOpponentValue(void)
         gSentPokesToOpponent[(i & BIT_FLANK) >> 1] = bits;
 }
 
-void OpponentSwitchInResetSentPokesToOpponentValue(u8 battler)
+void OpponentSwitchInResetSentPokesToOpponentValue(u32 battler)
 {
     s32 i = 0;
     u32 bits = 0;
@@ -1074,7 +1074,7 @@ void OpponentSwitchInResetSentPokesToOpponentValue(u8 battler)
     }
 }
 
-void UpdateSentPokesToOpponentValue(u8 battler)
+void UpdateSentPokesToOpponentValue(u32 battler)
 {
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
     {
@@ -1341,11 +1341,11 @@ bool32 AreAllMovesUnusable(u32 battler)
     return (unusable == ALL_MOVES_MASK);
 }
 
-u8 GetImprisonedMovesCount(u8 battlerId, u16 move)
+u8 GetImprisonedMovesCount(u32 battler, u16 move)
 {
     s32 i;
     u8 imprisonedMoves = 0;
-    u8 battlerSide = GetBattlerSide(battlerId);
+    u32 battlerSide = GetBattlerSide(battler);
 
     for (i = 0; i < gBattlersCount; i++)
     {
@@ -2780,7 +2780,7 @@ bool32 HandleWishPerishSongOnTurnEnd(void)
 
 #define FAINTED_ACTIONS_MAX_CASE 7
 
-bool8 HandleFaintedMonActions(void)
+bool32 HandleFaintedMonActions(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         return FALSE;

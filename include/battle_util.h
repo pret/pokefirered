@@ -22,37 +22,31 @@
 #define MOVE_LIMITATION_PLACEHOLDER             (1 << 15)
 #define MOVE_LIMITATIONS_ALL                    0xFFFF
 
-#define ABILITYEFFECT_ON_SWITCHIN                0
-#define ABILITYEFFECT_ENDTURN                    1
-#define ABILITYEFFECT_MOVES_BLOCK                2
-#define ABILITYEFFECT_ABSORBING                  3
-#define ABILITYEFFECT_MOVE_END_ATTACKER          4
-#define ABILITYEFFECT_MOVE_END                   5
-#define ABILITYEFFECT_IMMUNITY                   6
-#define ABILITYEFFECT_SYNCHRONIZE                7
-#define ABILITYEFFECT_ATK_SYNCHRONIZE            8
-#define ABILITYEFFECT_TRACE1                     9
-#define ABILITYEFFECT_TRACE2                     10
-#define ABILITYEFFECT_MOVE_END_OTHER             11
-#define ABILITYEFFECT_NEUTRALIZINGGAS            12
-#define ABILITYEFFECT_FIELD_SPORT                13 // Only used if B_SPORT_TURNS >= GEN_6
-#define ABILITYEFFECT_ON_WEATHER                 14
-#define ABILITYEFFECT_ON_TERRAIN                 15
-#define ABILITYEFFECT_SWITCH_IN_TERRAIN          16
-#define ABILITYEFFECT_SWITCH_IN_WEATHER          17
-#define ABILITYEFFECT_OPPORTUNIST                18
-#define ABILITYEFFECT_SWITCH_IN_STATUSES         19
-// pokefirered
-#define ABILITYEFFECT_CHECK_OTHER_SIDE           20
-#define ABILITYEFFECT_CHECK_BATTLER_SIDE         21
-#define ABILITYEFFECT_INTIMIDATE1                22
-#define ABILITYEFFECT_INTIMIDATE2                23
-#define ABILITYEFFECT_TRACE                      24
-#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BATTLER 25
-#define ABILITYEFFECT_CHECK_ON_FIELD             26
-#define ABILITYEFFECT_ON_DAMAGE                  27
-#define ABILITYEFFECT_FORECAST                   28
-#define ABILITYEFFECT_COUNT_OTHER_SIDE           29
+enum {
+    ABILITYEFFECT_ON_SWITCHIN,
+    ABILITYEFFECT_ENDTURN,
+    ABILITYEFFECT_MOVES_BLOCK,
+    ABILITYEFFECT_WOULD_BLOCK,         // Checks immunity without triggering a script
+    ABILITYEFFECT_ABSORBING,
+    ABILITYEFFECT_WOULD_ABSORB,        // Checks immunity without triggering a script
+    ABILITYEFFECT_MOVE_END_ATTACKER,
+    ABILITYEFFECT_MOVE_END,
+    ABILITYEFFECT_IMMUNITY,
+    ABILITYEFFECT_SYNCHRONIZE,
+    ABILITYEFFECT_ATK_SYNCHRONIZE,
+    ABILITYEFFECT_TRACE1,
+    ABILITYEFFECT_TRACE2,
+    ABILITYEFFECT_MOVE_END_OTHER,
+    ABILITYEFFECT_NEUTRALIZINGGAS,
+    ABILITYEFFECT_FIELD_SPORT,         // Only used if B_SPORT_TURNS >= GEN_6
+    ABILITYEFFECT_ON_WEATHER,
+    ABILITYEFFECT_ON_TERRAIN,
+    ABILITYEFFECT_SWITCH_IN_TERRAIN,
+    ABILITYEFFECT_SWITCH_IN_WEATHER,
+    ABILITYEFFECT_OPPORTUNIST,
+    ABILITYEFFECT_SWITCH_IN_STATUSES,
+};
+
 // Special cases
 #define ABILITYEFFECT_MUD_SPORT                  252 // Only used if B_SPORT_TURNS >= GEN_6
 #define ABILITYEFFECT_WATER_SPORT                253 // Only used if B_SPORT_TURNS >= GEN_6
@@ -114,7 +108,6 @@ enum
 };
 
 extern const struct TypePower gNaturalGiftTable[];
-extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];
 
 void HandleAction_UseMove(void);
 void HandleAction_Switch(void);

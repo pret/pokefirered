@@ -410,12 +410,15 @@
 #define B_ANIM_WONDER_ROOM              46
 #define B_ANIM_MAGIC_ROOM               47
 #define B_ANIM_TAILWIND                 48
+#define B_ANIM_FOG_CONTINUES            49
+#define B_ANIM_TERA_CHARGE              50
+#define B_ANIM_TERA_ACTIVATE            51
 // pokefirered
-#define B_ANIM_MON_SCARED               49
-#define B_ANIM_GHOST_GET_OUT            50
-#define B_ANIM_SILPH_SCOPED             51
-#define B_ANIM_ROCK_THROW               52
-#define B_ANIM_SAFARI_REACTION          53
+#define B_ANIM_MON_SCARED               (B_ANIM_TERA_ACTIVATE   + 1)
+#define B_ANIM_GHOST_GET_OUT            (B_ANIM_MON_SCARED      + 1)
+#define B_ANIM_SILPH_SCOPED             (B_ANIM_GHOST_GET_OUT   + 1)
+#define B_ANIM_ROCK_THROW               (B_ANIM_SILPH_SCOPED    + 1)
+#define B_ANIM_SAFARI_REACTION          (B_ANIM_ROCK_THROW      + 1)
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

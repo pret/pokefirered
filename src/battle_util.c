@@ -7799,80 +7799,6 @@ u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc)
     return count;
 }
 
-// This function is the body of "jumpifstat", but can be used dynamically in a function
-bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind)
-{
-    bool32 ret = FALSE;
-    u8 statValue = gBattleMons[battler].statStages[statId];
-
-    // Because this command is used as a way of checking if a stat can be lowered/raised,
-    // we need to do some modification at run-time.
-    if (GetBattlerAbility(battler) == ABILITY_CONTRARY)
-    {
-        if (cmpKind == CMP_GREATER_THAN)
-            cmpKind = CMP_LESS_THAN;
-        else if (cmpKind == CMP_LESS_THAN)
-            cmpKind = CMP_GREATER_THAN;
-
-        if (cmpTo == MIN_STAT_STAGE)
-            cmpTo = MAX_STAT_STAGE;
-        else if (cmpTo == MAX_STAT_STAGE)
-            cmpTo = MIN_STAT_STAGE;
-    }
-
-    switch (cmpKind)
-    {
-    case CMP_EQUAL:
-        if (statValue == cmpTo)
-            ret = TRUE;
-        break;
-    case CMP_NOT_EQUAL:
-        if (statValue != cmpTo)
-            ret = TRUE;
-        break;
-    case CMP_GREATER_THAN:
-        if (statValue > cmpTo)
-            ret = TRUE;
-        break;
-    case CMP_LESS_THAN:
-        if (statValue < cmpTo)
-            ret = TRUE;
-        break;
-    case CMP_COMMON_BITS:
-        if (statValue & cmpTo)
-            ret = TRUE;
-        break;
-    case CMP_NO_COMMON_BITS:
-        if (!(statValue & cmpTo))
-            ret = TRUE;
-        break;
-    }
-
-    return ret;
-}
-
-u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect)
-{
-    bool8 hasSereneGrace = (battlerAbility == ABILITY_SERENE_GRACE);
-    bool8 hasRainbow = (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_RAINBOW) != 0;
-    u16 secondaryEffectChance = additionalEffect->chance;
-
-    if (hasRainbow && hasSereneGrace && additionalEffect->moveEffect == MOVE_EFFECT_FLINCH)
-        return secondaryEffectChance * 2;
-
-    if (hasSereneGrace)
-        secondaryEffectChance *= 2;
-    if (hasRainbow && additionalEffect->moveEffect != MOVE_EFFECT_SECRET_POWER)
-        secondaryEffectChance *= 2;
-
-    return secondaryEffectChance;
-}
-
-bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect)
-{
-    return additionalEffect->chance == 0 || CalcSecondaryEffectChance(battler, battlerAbility, additionalEffect) >= 100;
-}
-
 u32 IsAbilityOnSide(u32 battler, u32 ability)
 {
     if (IsBattlerAlive(battler) && GetBattlerAbility(battler) == ability)
@@ -7985,29 +7911,6 @@ static bool32 TryRemoveScreens(u32 battler)
     }
 
     return removed;
-}
-
-// Gets move target before redirection effects etc. are applied
-// Possible return values are defined in battle.h following MOVE_TARGET_SELECTED
-u32 GetBattlerMoveTargetType(u32 battler, u32 move)
-{
-    if (gMovesInfo[move].effect == EFFECT_EXPANDING_FORCE
-        && IsBattlerTerrainAffected(battler, STATUS_FIELD_PSYCHIC_TERRAIN))
-        return MOVE_TARGET_BOTH;
-    else
-        return gMovesInfo[move].target;
-}
-
-bool32 CanTargetBattler(u32 battlerAtk, u32 battlerDef, u16 move)
-{
-    if (gMovesInfo[move].effect == EFFECT_HIT_ENEMY_HEAL_ALLY
-      && GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef)
-      && gStatuses3[battlerAtk] & STATUS3_HEAL_BLOCK)
-        return FALSE;   // Pokémon affected by Heal Block cannot target allies with Pollen Puff
-    if ((IsDynamaxed(battlerAtk) || gBattleStruct->dynamax.playerSelect)
-      && GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef))
-        return FALSE;
-    return TRUE;
 }
 
 bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
@@ -8138,24 +8041,6 @@ void SetAtkCancellerForCalledMove(void)
 {
     gBattleStruct->atkCancellerTracker = CANCELLER_HEAL_BLOCKED;
     gBattleStruct->isAtkCancelerForCalledMove = TRUE;
-}
-
-bool32 BlocksPrankster(u16 move, u32 battlerPrankster, u32 battlerDef, bool32 checkTarget)
-{
-    if (B_PRANKSTER_DARK_TYPES < GEN_7)
-        return FALSE;
-    if (!gProtectStructs[battlerPrankster].pranksterElevated)
-        return FALSE;
-    if (GetBattlerSide(battlerPrankster) == GetBattlerSide(battlerDef))
-        return FALSE;
-    if (checkTarget && (GetBattlerMoveTargetType(battlerPrankster, move) & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_DEPENDS)))
-        return FALSE;
-    if (!IS_BATTLER_OF_TYPE(battlerDef, TYPE_DARK))
-        return FALSE;
-    if (gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE)
-        return FALSE;
-
-    return TRUE;
 }
 
 u32 GetMoveTargetCount(u32 move, u32 battlerAtk, u32 battlerDef)
@@ -9611,16 +9496,6 @@ bool32 CanFling(u32 battler)
     return TRUE;
 }
 
-static void SetRandomMultiHitCounter()
-{
-    if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LOADED_DICE)
-        gMultiHitCounter = RandomUniform(RNG_LOADED_DICE, 4, 5);
-    else if (B_MULTI_HIT_CHANCE >= GEN_5)
-        gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 7, 7, 3, 3); // 35%: 2 hits, 35%: 3 hits, 15% 4 hits, 15% 5 hits.
-    else
-        gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 3, 3, 1, 1); // 37.5%: 2 hits, 37.5%: 3 hits, 12.5% 4 hits, 12.5% 5 hits.
-}
-
 bool32 ShouldGetStatBadgeBoost(u16 badgeFlag, u32 battler)
 {
     if (B_BADGE_BOOST == GEN_3)
@@ -9633,19 +9508,6 @@ bool32 ShouldGetStatBadgeBoost(u16 badgeFlag, u32 battler)
             return FALSE;
         else if (FlagGet(badgeFlag))
             return TRUE;
-    }
-    return FALSE;
-}
-
-bool32 IsBattlerWeatherAffected(u32 battler, u32 weatherFlags)
-{
-    if (gBattleWeather & weatherFlags && WEATHER_HAS_EFFECT)
-    {
-        // given weather is active -> check if its sun, rain against utility umbrella ( since only 1 weather can be active at once)
-        if (gBattleWeather & (B_WEATHER_SUN | B_WEATHER_RAIN) && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA)
-            return FALSE; // utility umbrella blocks sun, rain effects
-
-        return TRUE;
     }
     return FALSE;
 }
@@ -10274,28 +10136,6 @@ bool32 CanBattlerGetOrLoseItem(u32 battler, u16 itemId)
         return TRUE;
 }
 
-u8 GetBattlerGender(u32 battler)
-{
-    return GetGenderFromSpeciesAndPersonality(gBattleMons[battler].species,
-                                              gBattleMons[battler].personality);
-}
-
-bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2)
-{
-    u8 gender1 = GetBattlerGender(battler1);
-    u8 gender2 = GetBattlerGender(battler2);
-
-    return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 != gender2);
-}
-
-bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2)
-{
-    u8 gender1 = GetBattlerGender(battler1);
-    u8 gender2 = GetBattlerGender(battler2);
-
-    return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 == gender2);
-}
-
 u32 GetBattlerHoldEffectParam(u32 battler)
 {
     if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
@@ -10510,106 +10350,6 @@ u32 GetBattlerAffectionHearts(u32 battler)
         return AFFECTION_NO_HEARTS;
 
     return GetMonAffectionHearts(&party[gBattlerPartyIndexes[battler]]);
-}
-
-void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon)
-{
-    gBattleMons[battler].level = GetMonData(mon, MON_DATA_LEVEL);
-    gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
-    gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
-    gBattleMons[battler].attack = GetMonData(mon, MON_DATA_ATK);
-    gBattleMons[battler].defense = GetMonData(mon, MON_DATA_DEF);
-    gBattleMons[battler].speed = GetMonData(mon, MON_DATA_SPEED);
-    gBattleMons[battler].spAttack = GetMonData(mon, MON_DATA_SPATK);
-    gBattleMons[battler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
-}
-
-void CopyMonAbilityAndTypesToBattleMon(u32 battler, struct Pokemon *mon)
-{
-    gBattleMons[battler].ability = GetMonAbility(mon);
-    gBattleMons[battler].type1 = gSpeciesInfo[gBattleMons[battler].species].types[0];
-    gBattleMons[battler].type2 = gSpeciesInfo[gBattleMons[battler].species].types[1];
-    gBattleMons[battler].type3 = TYPE_MYSTERY;
-}
-
-void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
-{
-    CalculateMonStats(mon);
-    if (IsDynamaxed(battler) && gChosenActionByBattler[battler] != B_ACTION_SWITCH)
-        ApplyDynamaxHPMultiplier(battler, mon);
-    CopyMonLevelAndBaseStatsToBattleMon(battler, mon);
-    CopyMonAbilityAndTypesToBattleMon(battler, mon);
-}
-
-bool32 TestIfSheerForceAffected(u32 battler, u16 move)
-{
-    return GetBattlerAbility(battler) == ABILITY_SHEER_FORCE && MoveIsAffectedBySheerForce(move);
-}
-
-void TryRestoreHeldItems(void)
-{
-    u32 i;
-    u16 lostItem = ITEM_NONE;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9 || gBattleStruct->itemLost[i].stolen)
-        {
-            lostItem = gBattleStruct->itemLost[i].originalItem;
-            if (lostItem != ITEM_NONE && ItemId_GetPocket(lostItem) != POCKET_BERRY_POUCH)
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);  // Restore stolen non-berry items
-        }
-    }
-}
-
-bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
-{
-    u8 stealerSide = GetBattlerSide(battlerStealing);
-
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
-        return FALSE;
-
-    // Check if the battler trying to steal should be able to
-    if (stealerSide == B_SIDE_OPPONENT
-        && !(gBattleTypeFlags &
-             (BATTLE_TYPE_EREADER_TRAINER
-              | BATTLE_TYPE_TRAINER_TOWER
-              | BATTLE_TYPE_LINK
-              | BATTLE_TYPE_RECORDED_LINK
-              | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
-              )))
-    {
-        return FALSE;
-    }
-    else if (!(gBattleTypeFlags &
-          (BATTLE_TYPE_EREADER_TRAINER
-           | BATTLE_TYPE_BATTLE_TOWER
-           | BATTLE_TYPE_LINK
-           | BATTLE_TYPE_RECORDED_LINK))
-        && (gWishFutureKnock.knockedOffMons[stealerSide] & gBitTable[gBattlerPartyIndexes[battlerStealing]]))
-    {
-        return FALSE;
-    }
-
-    if (!CanBattlerGetOrLoseItem(battlerItem, item)      // Battler with item cannot have it stolen
-      ||!CanBattlerGetOrLoseItem(battlerStealing, item)) // Stealer cannot take the item
-        return FALSE;
-
-    return TRUE;
-}
-
-void TrySaveExchangedItem(u32 battler, u16 stolenItem)
-{
-    // Because BtlController_EmitSetMonData does SetMonData, we need to save the stolen item only if it matches the battler's original
-    // So, if the player steals an item during battle and has it stolen from it, it will not end the battle with it (naturally)
-    if (B_TRAINERS_KNOCK_OFF_ITEMS == FALSE)
-        return;
-    // If regular trainer battle and mon's original item matches what is being stolen, save it to be restored at end of battle
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
-      && !(gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-      && GetBattlerSide(battler) == B_SIDE_PLAYER
-      && stolenItem == gBattleStruct->itemLost[gBattlerPartyIndexes[battler]].originalItem)
-        gBattleStruct->itemLost[gBattlerPartyIndexes[battler]].stolen = TRUE;
 }
 
 // Returns SPECIES_NONE if no form change is possible
@@ -10860,60 +10600,6 @@ bool32 TryChangeBattleWeather(u32 battler, u32 weatherEnumId, bool32 viaAbility)
     return FALSE;
 }
 
-u16 GetUsedHeldItem(u32 battler)
-{
-    return gBattleStruct->usedHeldItems[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)];
-}
-
-void RemoveConfusionStatus(u32 battler)
-{
-    gBattleMons[battler].status2 &= ~STATUS2_CONFUSION;
-    gStatuses4[battler] &= ~STATUS4_INFINITE_CONFUSION;
-}
-
-void BufferStatChange(u32 battler, u8 statId, u8 stringId)
-{
-    bool32 hasContrary = (GetBattlerAbility(battler) == ABILITY_CONTRARY);
-
-    PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
-    if (stringId == STRINGID_STATFELL)
-    {
-        if (hasContrary)
-            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE)
-        else
-            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL)
-    }
-    else if (stringId == STRINGID_STATROSE)
-    {
-        if (hasContrary)
-            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL)
-        else
-            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE)
-    }
-    else
-    {
-        PREPARE_STRING_BUFFER(gBattleTextBuff2, stringId)
-    }
-}
-
-bool32 TryRoomService(u32 battler)
-{
-    if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && CompareStat(battler, STAT_SPEED, MIN_STAT_STAGE, CMP_GREATER_THAN))
-    {
-        BufferStatChange(battler, STAT_SPEED, STRINGID_STATFELL);
-        gEffectBattler = gBattleScripting.battler = battler;
-        SET_STATCHANGER(STAT_SPEED, 1, TRUE);
-        gBattleScripting.animArg1 = 14 + STAT_SPEED;
-        gBattleScripting.animArg2 = 0;
-        gLastUsedItem = gBattleMons[battler].item;
-        return TRUE;
-    }
-    else
-    {
-        return FALSE;
-    }
-}
-
 u8 TryHandleSeed(u32 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute)
 {
     if (gFieldStatuses & terrainFlag && CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN))
@@ -10944,25 +10630,6 @@ static u32 GetBattlerItemHoldEffectParam(u32 battler, u32 item)
         return gEnigmaBerries[battler].holdEffectParam;
     else
         return ItemId_GetHoldEffectParam(item);
-}
-
-static bool32 CanBeInfinitelyConfused(u32 battler)
-{
-    if  (gBattleMons[battler].ability == ABILITY_OWN_TEMPO
-         || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN)
-         || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD)
-    {
-        return FALSE;
-    }
-    return TRUE;
-}
-
-bool32 IsGen6ExpShareEnabled(void)
-{
-    if (I_EXP_SHARE_FLAG <= TEMP_FLAGS_END)
-        return FALSE;
-
-    return FlagGet(I_EXP_SHARE_FLAG);
 }
 
 // Sort an array of battlers by speed
@@ -11023,21 +10690,70 @@ bool32 CanBattlerEscape(u32 battler) // no ability check
         return TRUE;
 }
 
-bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes)
+void TryRestoreHeldItems(void)
 {
-    bool32 ret = TRUE;
-    u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
-    if (toxicSpikes && holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS && !IS_BATTLER_OF_TYPE(battler, TYPE_POISON))
+    u32 i;
+    u16 lostItem = ITEM_NONE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        ret = FALSE;
-        RecordItemEffectBattle(battler, holdEffect);
+        if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9 || gBattleStruct->itemLost[i].stolen)
+        {
+            lostItem = gBattleStruct->itemLost[i].originalItem;
+            if (lostItem != ITEM_NONE && ItemId_GetPocket(lostItem) != POCKET_BERRY_POUCH)
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);  // Restore stolen non-berry items
+        }
     }
-    else if (holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS)
+}
+
+bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
+{
+    u8 stealerSide = GetBattlerSide(battlerStealing);
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
+        return FALSE;
+
+    // Check if the battler trying to steal should be able to
+    if (stealerSide == B_SIDE_OPPONENT
+        && !(gBattleTypeFlags &
+             (BATTLE_TYPE_EREADER_TRAINER
+              | BATTLE_TYPE_TRAINER_TOWER
+              | BATTLE_TYPE_LINK
+              | BATTLE_TYPE_RECORDED_LINK
+              | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
+              )))
     {
-        ret = FALSE;
-        RecordItemEffectBattle(battler, holdEffect);
+        return FALSE;
     }
-    return ret;
+    else if (!(gBattleTypeFlags &
+          (BATTLE_TYPE_EREADER_TRAINER
+           | BATTLE_TYPE_BATTLE_TOWER
+           | BATTLE_TYPE_LINK
+           | BATTLE_TYPE_RECORDED_LINK))
+        && (gWishFutureKnock.knockedOffMons[stealerSide] & gBitTable[gBattlerPartyIndexes[battlerStealing]]))
+    {
+        return FALSE;
+    }
+
+    if (!CanBattlerGetOrLoseItem(battlerItem, item)      // Battler with item cannot have it stolen
+      ||!CanBattlerGetOrLoseItem(battlerStealing, item)) // Stealer cannot take the item
+        return FALSE;
+
+    return TRUE;
+}
+
+void TrySaveExchangedItem(u32 battler, u16 stolenItem)
+{
+    // Because BtlController_EmitSetMonData does SetMonData, we need to save the stolen item only if it matches the battler's original
+    // So, if the player steals an item during battle and has it stolen from it, it will not end the battle with it (naturally)
+    if (B_TRAINERS_KNOCK_OFF_ITEMS == FALSE)
+        return;
+    // If regular trainer battle and mon's original item matches what is being stolen, save it to be restored at end of battle
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+      && !(gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+      && GetBattlerSide(battler) == B_SIDE_PLAYER
+      && stolenItem == gBattleStruct->itemLost[gBattlerPartyIndexes[battler]].originalItem)
+        gBattleStruct->itemLost[gBattlerPartyIndexes[battler]].stolen = TRUE;
 }
 
 bool32 DoBattlersShareType(u32 battler1, u32 battler2)
@@ -11058,6 +10774,295 @@ bool32 DoBattlersShareType(u32 battler1, u32 battler2)
     }
 
     return FALSE;
+}
+
+bool32 IsBattlerAffectedByHazards(u32 battler, bool32 toxicSpikes)
+{
+    bool32 ret = TRUE;
+    u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
+    if (toxicSpikes && holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS && !IS_BATTLER_OF_TYPE(battler, TYPE_POISON))
+    {
+        ret = FALSE;
+        RecordItemEffectBattle(battler, holdEffect);
+    }
+    else if (holdEffect == HOLD_EFFECT_HEAVY_DUTY_BOOTS)
+    {
+        ret = FALSE;
+        RecordItemEffectBattle(battler, holdEffect);
+    }
+    return ret;
+}
+
+bool32 TestIfSheerForceAffected(u32 battler, u16 move)
+{
+    return GetBattlerAbility(battler) == ABILITY_SHEER_FORCE && MoveIsAffectedBySheerForce(move);
+}
+
+// This function is the body of "jumpifstat", but can be used dynamically in a function
+bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind)
+{
+    bool32 ret = FALSE;
+    u8 statValue = gBattleMons[battler].statStages[statId];
+
+    // Because this command is used as a way of checking if a stat can be lowered/raised,
+    // we need to do some modification at run-time.
+    if (GetBattlerAbility(battler) == ABILITY_CONTRARY)
+    {
+        if (cmpKind == CMP_GREATER_THAN)
+            cmpKind = CMP_LESS_THAN;
+        else if (cmpKind == CMP_LESS_THAN)
+            cmpKind = CMP_GREATER_THAN;
+
+        if (cmpTo == MIN_STAT_STAGE)
+            cmpTo = MAX_STAT_STAGE;
+        else if (cmpTo == MAX_STAT_STAGE)
+            cmpTo = MIN_STAT_STAGE;
+    }
+
+    switch (cmpKind)
+    {
+    case CMP_EQUAL:
+        if (statValue == cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_NOT_EQUAL:
+        if (statValue != cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_GREATER_THAN:
+        if (statValue > cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_LESS_THAN:
+        if (statValue < cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_COMMON_BITS:
+        if (statValue & cmpTo)
+            ret = TRUE;
+        break;
+    case CMP_NO_COMMON_BITS:
+        if (!(statValue & cmpTo))
+            ret = TRUE;
+        break;
+    }
+
+    return ret;
+}
+
+void BufferStatChange(u32 battler, u8 statId, u8 stringId)
+{
+    bool32 hasContrary = (GetBattlerAbility(battler) == ABILITY_CONTRARY);
+
+    PREPARE_STAT_BUFFER(gBattleTextBuff1, statId);
+    if (stringId == STRINGID_STATFELL)
+    {
+        if (hasContrary)
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE)
+        else
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL)
+    }
+    else if (stringId == STRINGID_STATROSE)
+    {
+        if (hasContrary)
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATFELL)
+        else
+            PREPARE_STRING_BUFFER(gBattleTextBuff2, STRINGID_STATROSE)
+    }
+    else
+    {
+        PREPARE_STRING_BUFFER(gBattleTextBuff2, stringId)
+    }
+}
+
+bool32 TryRoomService(u32 battler)
+{
+    if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && CompareStat(battler, STAT_SPEED, MIN_STAT_STAGE, CMP_GREATER_THAN))
+    {
+        BufferStatChange(battler, STAT_SPEED, STRINGID_STATFELL);
+        gEffectBattler = gBattleScripting.battler = battler;
+        SET_STATCHANGER(STAT_SPEED, 1, TRUE);
+        gBattleScripting.animArg1 = 14 + STAT_SPEED;
+        gBattleScripting.animArg2 = 0;
+        gLastUsedItem = gBattleMons[battler].item;
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+bool32 BlocksPrankster(u16 move, u32 battlerPrankster, u32 battlerDef, bool32 checkTarget)
+{
+    if (B_PRANKSTER_DARK_TYPES < GEN_7)
+        return FALSE;
+    if (!gProtectStructs[battlerPrankster].pranksterElevated)
+        return FALSE;
+    if (GetBattlerSide(battlerPrankster) == GetBattlerSide(battlerDef))
+        return FALSE;
+    if (checkTarget && (GetBattlerMoveTargetType(battlerPrankster, move) & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_DEPENDS)))
+        return FALSE;
+    if (!IS_BATTLER_OF_TYPE(battlerDef, TYPE_DARK))
+        return FALSE;
+    if (gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE)
+        return FALSE;
+
+    return TRUE;
+}
+
+u16 GetUsedHeldItem(u32 battler)
+{
+    return gBattleStruct->usedHeldItems[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)];
+}
+
+bool32 IsBattlerWeatherAffected(u32 battler, u32 weatherFlags)
+{
+    if (gBattleWeather & weatherFlags && WEATHER_HAS_EFFECT)
+    {
+        // given weather is active -> check if its sun, rain against utility umbrella ( since only 1 weather can be active at once)
+        if (gBattleWeather & (B_WEATHER_SUN | B_WEATHER_RAIN) && GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA)
+            return FALSE; // utility umbrella blocks sun, rain effects
+
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// Gets move target before redirection effects etc. are applied
+// Possible return values are defined in battle.h following MOVE_TARGET_SELECTED
+u32 GetBattlerMoveTargetType(u32 battler, u32 move)
+{
+    if (gMovesInfo[move].effect == EFFECT_EXPANDING_FORCE
+        && IsBattlerTerrainAffected(battler, STATUS_FIELD_PSYCHIC_TERRAIN))
+        return MOVE_TARGET_BOTH;
+    else
+        return gMovesInfo[move].target;
+}
+
+bool32 CanTargetBattler(u32 battlerAtk, u32 battlerDef, u16 move)
+{
+    if (gMovesInfo[move].effect == EFFECT_HIT_ENEMY_HEAL_ALLY
+      && GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef)
+      && gStatuses3[battlerAtk] & STATUS3_HEAL_BLOCK)
+        return FALSE;   // Pokémon affected by Heal Block cannot target allies with Pollen Puff
+    if ((IsDynamaxed(battlerAtk) || gBattleStruct->dynamax.playerSelect)
+      && GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef))
+        return FALSE;
+    return TRUE;
+}
+
+static void SetRandomMultiHitCounter()
+{
+    if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LOADED_DICE)
+        gMultiHitCounter = RandomUniform(RNG_LOADED_DICE, 4, 5);
+    else if (B_MULTI_HIT_CHANCE >= GEN_5)
+        gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 7, 7, 3, 3); // 35%: 2 hits, 35%: 3 hits, 15% 4 hits, 15% 5 hits.
+    else
+        gMultiHitCounter = RandomWeighted(RNG_HITS, 0, 0, 3, 3, 1, 1); // 37.5%: 2 hits, 37.5%: 3 hits, 12.5% 4 hits, 12.5% 5 hits.
+}
+
+void CopyMonLevelAndBaseStatsToBattleMon(u32 battler, struct Pokemon *mon)
+{
+    gBattleMons[battler].level = GetMonData(mon, MON_DATA_LEVEL);
+    gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
+    gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+    gBattleMons[battler].attack = GetMonData(mon, MON_DATA_ATK);
+    gBattleMons[battler].defense = GetMonData(mon, MON_DATA_DEF);
+    gBattleMons[battler].speed = GetMonData(mon, MON_DATA_SPEED);
+    gBattleMons[battler].spAttack = GetMonData(mon, MON_DATA_SPATK);
+    gBattleMons[battler].spDefense = GetMonData(mon, MON_DATA_SPDEF);
+}
+
+void CopyMonAbilityAndTypesToBattleMon(u32 battler, struct Pokemon *mon)
+{
+    gBattleMons[battler].ability = GetMonAbility(mon);
+    gBattleMons[battler].type1 = gSpeciesInfo[gBattleMons[battler].species].types[0];
+    gBattleMons[battler].type2 = gSpeciesInfo[gBattleMons[battler].species].types[1];
+    gBattleMons[battler].type3 = TYPE_MYSTERY;
+}
+
+void RecalcBattlerStats(u32 battler, struct Pokemon *mon)
+{
+    CalculateMonStats(mon);
+    if (IsDynamaxed(battler) && gChosenActionByBattler[battler] != B_ACTION_SWITCH)
+        ApplyDynamaxHPMultiplier(battler, mon);
+    CopyMonLevelAndBaseStatsToBattleMon(battler, mon);
+    CopyMonAbilityAndTypesToBattleMon(battler, mon);
+}
+
+void RemoveConfusionStatus(u32 battler)
+{
+    gBattleMons[battler].status2 &= ~STATUS2_CONFUSION;
+    gStatuses4[battler] &= ~STATUS4_INFINITE_CONFUSION;
+}
+
+static bool32 CanBeInfinitelyConfused(u32 battler)
+{
+    if  (gBattleMons[battler].ability == ABILITY_OWN_TEMPO
+         || IsBattlerTerrainAffected(battler, STATUS_FIELD_MISTY_TERRAIN)
+         || gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+u8 GetBattlerGender(u32 battler)
+{
+    return GetGenderFromSpeciesAndPersonality(gBattleMons[battler].species,
+                                              gBattleMons[battler].personality);
+}
+
+bool32 AreBattlersOfOppositeGender(u32 battler1, u32 battler2)
+{
+    u8 gender1 = GetBattlerGender(battler1);
+    u8 gender2 = GetBattlerGender(battler2);
+
+    return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 != gender2);
+}
+
+bool32 AreBattlersOfSameGender(u32 battler1, u32 battler2)
+{
+    u8 gender1 = GetBattlerGender(battler1);
+    u8 gender2 = GetBattlerGender(battler2);
+
+    return (gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS && gender1 == gender2);
+}
+
+u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect)
+{
+    bool8 hasSereneGrace = (battlerAbility == ABILITY_SERENE_GRACE);
+    bool8 hasRainbow = (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_RAINBOW) != 0;
+    u16 secondaryEffectChance = additionalEffect->chance;
+
+    if (hasRainbow && hasSereneGrace && additionalEffect->moveEffect == MOVE_EFFECT_FLINCH)
+        return secondaryEffectChance * 2;
+
+    if (hasSereneGrace)
+        secondaryEffectChance *= 2;
+    if (hasRainbow && additionalEffect->moveEffect != MOVE_EFFECT_SECRET_POWER)
+        secondaryEffectChance *= 2;
+
+    return secondaryEffectChance;
+}
+
+bool32 MoveEffectIsGuaranteed(u32 battler, u32 battlerAbility, const struct AdditionalEffect *additionalEffect)
+{
+    return additionalEffect->chance == 0 || CalcSecondaryEffectChance(battler, battlerAbility, additionalEffect) >= 100;
+}
+
+bool32 IsAlly(u32 battlerAtk, u32 battlerDef)
+{
+    return (GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef));
+}
+
+bool32 IsGen6ExpShareEnabled(void)
+{
+    if (I_EXP_SHARE_FLAG <= TEMP_FLAGS_END)
+        return FALSE;
+
+    return FlagGet(I_EXP_SHARE_FLAG);
 }
 
 bool32 MoveHasAdditionalEffect(u32 move, u32 moveEffect)

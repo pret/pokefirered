@@ -774,36 +774,42 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
     }
 }
 
-void InitBattlerHealthboxCoords(u8 battler)
+void GetBattlerHealthboxCoords(u8 battler, s16 *x, s16 *y)
 {
-    s16 x = 0, y = 0;
+    *x = 0, *y = 0;
 
     if (!WhichBattleCoords(battler))
     {
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
-            x = 44, y = 30;
+            *x = 44, *y = 30;
         else
-            x = 158, y = 88;
+            *x = 158, *y = 88;
     }
     else
     {
         switch (GetBattlerPosition(battler))
         {
         case B_POSITION_PLAYER_LEFT:
-            x = 159, y = 75;
+            *x = 159, *y = 75;
             break;
         case B_POSITION_PLAYER_RIGHT:
-            x = 171, y = 100;
+            *x = 171, *y = 100;
             break;
         case B_POSITION_OPPONENT_LEFT:
-            x = 44, y = 19;
+            *x = 44, *y = 19;
             break;
         case B_POSITION_OPPONENT_RIGHT:
-            x = 32, y = 44;
+            *x = 32, *y = 44;
             break;
         }
     }
+}
 
+void InitBattlerHealthboxCoords(u8 battler)
+{
+    s16 x, y;
+
+    GetBattlerHealthboxCoords(battler, &x, &y);
     UpdateSpritePos(gHealthboxSpriteIds[battler], x, y);
 }
 

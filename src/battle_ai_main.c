@@ -8,7 +8,7 @@
 #include "battle_controllers.h"
 #include "battle_setup.h"
 #include "battle_z_move.h"
-// #include "battle_terastal.h"
+#include "battle_terastal.h"
 #include "data.h"
 // #include "debug.h"
 #include "event_data.h"
@@ -403,7 +403,7 @@ static void SetBattlerAiGimmickData(u32 battler, struct AiLogicData *aiData)
     if (party != NULL)
     {
         aiData->shouldDynamax[battler] = CanDynamax(battler) && (party[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]].shouldDynamax);
-        aiData->shouldTerastal[battler] = FALSE; // TODO: Tera CanTerastallize(battler) && (party[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]].shouldTerastal);
+        aiData->shouldTerastal[battler] = CanTerastallize(battler) && (party[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]].shouldTerastal);
     }
     else
     {
@@ -2440,11 +2440,11 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             switch (move)
             {
             case MOVE_TRICK_OR_TREAT:
-                if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST) || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove) /* || IsTerastallized(battlerDef) */) // TODO: Tera
+                if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_GHOST) || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove) || IsTerastallized(battlerDef))
                     ADJUST_SCORE(-10);
                 break;
             case MOVE_FORESTS_CURSE:
-                if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS) || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove) /* || IsTerastallized(battlerDef) */) // TODO: Tera
+                if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_GRASS) || PartnerMoveIsSameAsAttacker(BATTLE_PARTNER(battlerAtk), battlerDef, move, aiData->partnerMove) || IsTerastallized(battlerDef))
                     ADJUST_SCORE(-10);
                 break;
             }
@@ -3006,7 +3006,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case EFFECT_SOAK:
                 if (atkPartnerAbility == ABILITY_WONDER_GUARD
                  && IS_BATTLER_OF_TYPE(battlerAtkPartner, TYPE_WATER)
-                 /* && !IsTerastallized(battlerAtkPartner) */) // TODO: Tera
+                 && !IsTerastallized(battlerAtkPartner))
                 {
                     RETURN_SCORE_PLUS(WEAK_EFFECT);
                 }

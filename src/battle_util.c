@@ -650,7 +650,7 @@ void HandleAction_NothingIsFainted(void)
 
 void HandleAction_ActionFinished(void)
 {
-    u32 i, j/* , moveType */;
+    u32 i, j, moveType;
     bool32 afterYouActive = gSpecialStatuses[gBattlerByTurnOrder[gCurrentTurnActionNumber + 1]].afterYou;
     *(gBattleStruct->monToSwitchIntoId + gBattlerByTurnOrder[gCurrentTurnActionNumber]) = gSelectedMonPartyId = PARTY_SIZE;
     gCurrentTurnActionNumber++;
@@ -661,16 +661,15 @@ void HandleAction_ActionFinished(void)
                     | HITMARKER_OBEYS | HITMARKER_WAKE_UP_CLEAR | HITMARKER_SYNCHRONISE_EFFECT
                     | HITMARKER_CHARGING | HITMARKER_NEVER_SET | HITMARKER_IGNORE_DISGUISE);
 
-    // TODO: Tera
     // check if Stellar type boost should be used up
-    // GET_MOVE_TYPE(gCurrentMove, moveType);
-    // if (IsTerastallized(gBattlerAttacker)
-    //     && GetBattlerTeraType(gBattlerAttacker) == TYPE_STELLAR
-    //     && gMovesInfo[gCurrentMove].category != DAMAGE_CATEGORY_STATUS
-    //     && IsTypeStellarBoosted(gBattlerAttacker, moveType))
-    // {
-    //     ExpendTypeStellarBoost(gBattlerAttacker, moveType);
-    // }
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+    if (IsTerastallized(gBattlerAttacker)
+        && GetBattlerTeraType(gBattlerAttacker) == TYPE_STELLAR
+        && gMovesInfo[gCurrentMove].category != DAMAGE_CATEGORY_STATUS
+        && IsTypeStellarBoosted(gBattlerAttacker, moveType))
+    {
+        ExpendTypeStellarBoost(gBattlerAttacker, moveType);
+    }
 
     gCurrentMove = 0;
     gBattleMoveDamage = 0;
@@ -1202,7 +1201,7 @@ bool32 IsBelchPreventingMove(u32 battler, u32 move)
 u32 TrySetCantSelectMoveBattleScript(u32 battler)
 {
     u32 limitations = 0;
-    u8 moveId = gBattleResources->bufferB[battler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST | RET_DYNAMAX/*  | RET_TERASTAL */); // TODO: Tera
+    u8 moveId = gBattleResources->bufferB[battler][2] & ~(RET_MEGA_EVOLUTION | RET_ULTRA_BURST | RET_DYNAMAX | RET_TERASTAL);
     u32 move = gBattleMons[battler].moves[moveId];
     u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
     u16 *choicedMove = &gBattleStruct->choicedMove[battler];
@@ -4427,15 +4426,14 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
-        // TODO: Tera
-        // case ABILITY_TERAFORM_ZERO:
-        //     if (!gSpecialStatuses[battler].switchInAbilityDone
-        //      && gBattleMons[battler].species == SPECIES_TERAPAGOS_STELLAR)
-        //     {
-        //         gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-        //         BattleScriptPushCursorAndCallback(BattleScript_ActivateTeraformZero);
-        //         effect++;
-        //     }
+        case ABILITY_TERAFORM_ZERO:
+            if (!gSpecialStatuses[battler].switchInAbilityDone
+             && gBattleMons[battler].species == SPECIES_TERAPAGOS_STELLAR)
+            {
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_ActivateTeraformZero);
+                effect++;
+            }
         case ABILITY_SCHOOLING:
             if (gBattleMons[battler].level < 20)
                 break;
@@ -4627,19 +4625,18 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
-        // TODO: Tera
-        // case ABILITY_TERA_SHIFT:
-        //     if (!gSpecialStatuses[battler].switchInAbilityDone
-        //      && gBattleMons[battler].species == SPECIES_TERAPAGOS_NORMAL
-        //      && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_SWITCH))
-        //     {
-        //         gBattlerAttacker = battler;
-        //         gBattleScripting.abilityPopupOverwrite = gLastUsedAbility = ABILITY_TERA_SHIFT;
-        //         gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-        //         BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeWithStringEnd3);
-        //         effect++;
-        //     }
-        //     break;
+        case ABILITY_TERA_SHIFT:
+            if (!gSpecialStatuses[battler].switchInAbilityDone
+             && gBattleMons[battler].species == SPECIES_TERAPAGOS_NORMAL
+             && TryBattleFormChange(battler, FORM_CHANGE_BATTLE_SWITCH))
+            {
+                gBattlerAttacker = battler;
+                gBattleScripting.abilityPopupOverwrite = gLastUsedAbility = ABILITY_TERA_SHIFT;
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeWithStringEnd3);
+                effect++;
+            }
+            break;
         }
         break;
     case ABILITYEFFECT_ENDTURN:
@@ -8718,11 +8715,10 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
         if (RandomPercentage(RNG_FICKLE_BEAM, 30))
             basePower *= 2;
         break;
-    // TODO: Tera
-    // case EFFECT_TERA_BLAST:
-    //     if (IsTerastallized(battlerAtk) && GetBattlerTeraType(battlerAtk) == TYPE_STELLAR)
-    //         basePower = 100;
-    //     break;
+    case EFFECT_TERA_BLAST:
+        if (IsTerastallized(battlerAtk) && GetBattlerTeraType(battlerAtk) == TYPE_STELLAR)
+            basePower = 100;
+        break;
     case EFFECT_LAST_RESPECTS:
         basePower += (basePower * min(100, GetBattlerSideFaintCounter(battlerAtk)));
         break;
@@ -9091,18 +9087,17 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         break;
     }
 
-    // TODO: Tera
     // Terastallization boosts weak, non-priority, non-multi hit moves after modifiers to 60 BP.
-    // if (IsTerastallized(battlerAtk)
-    //     && (moveType == GetBattlerTeraType(battlerAtk)
-    //     || (GetBattlerTeraType(battlerAtk) == TYPE_STELLAR && IsTypeStellarBoosted(battlerAtk, moveType)))
-    //     && uq4_12_multiply_by_int_half_down(modifier, basePower) < 60
-    //     && gMovesInfo[move].strikeCount < 2
-    //     && gMovesInfo[move].effect != EFFECT_MULTI_HIT
-    //     && gMovesInfo[move].priority == 0)
-    // {
-    //     return 60;
-    // }
+    if (IsTerastallized(battlerAtk)
+        && (moveType == GetBattlerTeraType(battlerAtk)
+        || (GetBattlerTeraType(battlerAtk) == TYPE_STELLAR && IsTypeStellarBoosted(battlerAtk, moveType)))
+        && uq4_12_multiply_by_int_half_down(modifier, basePower) < 60
+        && gMovesInfo[move].strikeCount < 2
+        && gMovesInfo[move].effect != EFFECT_MULTI_HIT
+        && gMovesInfo[move].priority == 0)
+    {
+        return 60;
+    }
 
     return uq4_12_multiply_by_int_half_down(modifier, basePower);
 }
@@ -9806,10 +9801,9 @@ static inline s32 DoMoveDamageCalcVars(u32 move, u32 battlerAtk, u32 battlerDef,
         dmg /= 100;
     }
 
-    // TODO: Tera
-    // if (IsTerastallized(battlerAtk))
-    //     DAMAGE_APPLY_MODIFIER(GetTeraMultiplier(battlerAtk, moveType));
-    // else
+    if (IsTerastallized(battlerAtk))
+        DAMAGE_APPLY_MODIFIER(GetTeraMultiplier(battlerAtk, moveType));
+    else
         DAMAGE_APPLY_MODIFIER(GetSameTypeAttackBonusModifier(battlerAtk, moveType, move, abilityAtk));
     DAMAGE_APPLY_MODIFIER(typeEffectivenessModifier);
     DAMAGE_APPLY_MODIFIER(GetBurnOrFrostBiteModifier(battlerAtk, move, abilityAtk));
@@ -9965,7 +9959,7 @@ static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 move
         mod = UQ_4_12(2.0);
     if (moveType == TYPE_GROUND && defType == TYPE_FLYING && IsBattlerGrounded(battlerDef) && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);
-    if (FALSE/* moveType == TYPE_STELLAR && IsTerastallized(battlerDef) */) // TODO: Tera
+    if (moveType == TYPE_STELLAR && IsTerastallized(battlerDef))
         mod = UQ_4_12(2.0);
 
     // B_WEATHER_STRONG_WINDS weakens Super Effective moves against Flying-type Pokémon
@@ -9975,7 +9969,7 @@ static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 move
             mod = UQ_4_12(1.0);
     }
 
-    if (gBattleStruct->distortedTypeMatchups & gBitTable[battlerDef] /* || (gBattleStruct->aiCalcInProgress && ShouldTeraShellDistortTypeMatchups(move, battlerDef)) */) // TODO: Tera
+    if (gBattleStruct->distortedTypeMatchups & gBitTable[battlerDef] || (gBattleStruct->aiCalcInProgress && ShouldTeraShellDistortTypeMatchups(move, battlerDef)))
     {
         mod = UQ_4_12(0.5);
         if (recordAbilities)
@@ -10409,14 +10403,13 @@ bool32 IsBattlerUltraBursted(u32 battler)
     return (gSpeciesInfo[gBattleMons[battler].species].isUltraBurst);
 }
 
-// TODO: Tera
-// bool32 IsBattlerInTeraForm(u32 battler)
-// {
-//     // While Transform does copy stats and visuals, it shouldn't be counted as a true Tera Form.
-//     if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
-//         return FALSE;
-//     return (gSpeciesInfo[gBattleMons[battler].species].isTeraForm);
-// }
+bool32 IsBattlerInTeraForm(u32 battler)
+{
+    // While Transform does copy stats and visuals, it shouldn't be counted as a true Tera Form.
+    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
+        return FALSE;
+    return (gSpeciesInfo[gBattleMons[battler].species].isTeraForm);
+}
 
 // Returns SPECIES_NONE if no form change is possible
 u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
@@ -10508,11 +10501,10 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
                     if (gBattleMons[battler].status1 & formChanges[i].param1)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
-                // TODO: Tera
-                // case FORM_CHANGE_BATTLE_TERASTALLIZATION:
-                //     if (GetBattlerTeraType(battler) == formChanges[i].param1)
-                //         targetSpecies = formChanges[i].targetSpecies;
-                //     break;
+                case FORM_CHANGE_BATTLE_TERASTALLIZATION:
+                    if (GetBattlerTeraType(battler) == formChanges[i].param1)
+                        targetSpecies = formChanges[i].targetSpecies;
+                    break;
                 }
             }
         }
@@ -10528,7 +10520,7 @@ bool32 CanBattlerFormChange(u32 battler, u16 method)
         && B_TRANSFORM_FORM_CHANGES >= GEN_5)
         return FALSE;
     // Mega Evolved and Ultra Bursted Pokémon should always revert to normal upon fainting or ending the battle.
-    if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler)/*  || IsBattlerInTeraForm(battler) */) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE)) // TODO: Tera
+    if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler) || IsBattlerInTeraForm(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
         return TRUE;
     else if (IsBattlerPrimalReverted(battler) && (method == FORM_CHANGE_END_BATTLE))
         return TRUE;
@@ -10568,7 +10560,7 @@ bool32 TryBattleFormChange(u32 battler, u16 method)
         bool32 restoreSpecies = FALSE;
 
         // Mega Evolved and Ultra Bursted Pokémon should always revert to normal upon fainting or ending the battle, so no need to add it to the form change tables.
-        if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler) /* || IsBattlerInTeraForm(battler) */) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE)) // TODO: Tera
+        if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler) || IsBattlerInTeraForm(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
             restoreSpecies = TRUE;
 
         // Unlike Megas, Primal Reversion isn't canceled on fainting.
@@ -11347,22 +11339,21 @@ bool8 IsMonBannedFromSkyBattles(u16 species)
 
 u8 GetBattlerType(u32 battler, u8 typeIndex, bool32 ignoreTera)
 {
-    // u32 teraType = GetBattlerTeraType(battler); // TODO: Tera
+    u32 teraType = GetBattlerTeraType(battler);
     u16 types[3] = {0};
     types[0] = gBattleMons[battler].type1;
     types[1] = gBattleMons[battler].type2;
     types[2] = gBattleMons[battler].type3;
 
     // Handle Terastallization
-    // TODO: Tera
-    // if (IsTerastallized(battler) && teraType != TYPE_STELLAR && !ignoreTera)
-    //     return GetBattlerTeraType(battler);
+    if (IsTerastallized(battler) && teraType != TYPE_STELLAR && !ignoreTera)
+        return GetBattlerTeraType(battler);
 
     // Handle Roost's Flying-type suppression
     if (typeIndex == 0 || typeIndex == 1)
     {
         if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_ROOST
-            /* && !IsTerastallized(battler) */) // TODO: Tera
+            && !IsTerastallized(battler))
         {
             if (types[0] == TYPE_FLYING && types[1] == TYPE_FLYING)
                 return B_ROOST_PURE_FLYING >= GEN_5 ? TYPE_NORMAL : TYPE_MYSTERY;
@@ -11377,9 +11368,8 @@ u8 GetBattlerType(u32 battler, u8 typeIndex, bool32 ignoreTera)
 void RemoveBattlerType(u32 battler, u8 type)
 {
     u32 i;
-    // TODO: Tera
-    // if (IsTerastallized(battler)) // don't remove type if Terastallized
-    //     return;
+    if (IsTerastallized(battler)) // don't remove type if Terastallized
+        return;
     for (i = 0; i < 3; i++)
     {
         if (*(u8 *)(&gBattleMons[battler].type1 + i) == type)

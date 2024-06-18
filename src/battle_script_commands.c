@@ -1175,7 +1175,7 @@ bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType)
          && (gBattleMons[battler].type1 != moveType || gBattleMons[battler].type2 != moveType
              || (gBattleMons[battler].type3 != moveType && gBattleMons[battler].type3 != TYPE_MYSTERY))
          && move != MOVE_STRUGGLE
-         /* && !IsTerastallized(battler) */) // TODO: Tera
+         && !IsTerastallized(battler))
     {
         SET_BATTLER_TYPE(battler, moveType);
         return TRUE;
@@ -1183,19 +1183,18 @@ bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType)
     return FALSE;
 }
 
-// TODO: Tera
-// bool32 ShouldTeraShellDistortTypeMatchups(u32 move, u32 battlerDef)
-// {
-//     if (!(gBattleStruct->distortedTypeMatchups & gBitTable[battlerDef])
-//      && GetBattlerAbility(battlerDef) == ABILITY_TERA_SHELL
-//      && gBattleMons[battlerDef].species == SPECIES_TERAPAGOS_TERASTAL
-//      && !IS_MOVE_STATUS(move)
-//      && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-//      && gBattleMons[battlerDef].hp == gBattleMons[battlerDef].maxHP)
-//         return TRUE;
+bool32 ShouldTeraShellDistortTypeMatchups(u32 move, u32 battlerDef)
+{
+    if (!(gBattleStruct->distortedTypeMatchups & gBitTable[battlerDef])
+     && GetBattlerAbility(battlerDef) == ABILITY_TERA_SHELL
+     && gBattleMons[battlerDef].species == SPECIES_TERAPAGOS_TERASTAL
+     && !IS_MOVE_STATUS(move)
+     && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+     && gBattleMons[battlerDef].hp == gBattleMons[battlerDef].maxHP)
+        return TRUE;
 
-//     return FALSE;
-// }
+    return FALSE;
+}
 
 bool32 IsMoveNotAllowedInSkyBattles(u32 move)
 {
@@ -1874,14 +1873,13 @@ static void Cmd_ppreduce(void)
     gHitMarker &= ~HITMARKER_NO_PPDEDUCT;
     gBattlescriptCurrInstr = cmd->nextInstr;
 
-    // TODO: Tera
-    // if (ShouldTeraShellDistortTypeMatchups(gCurrentMove, gBattlerTarget))
-    // {
-    //     gBattleStruct->distortedTypeMatchups |= gBitTable[gBattlerTarget];
-    //     gBattlerAbility = gBattlerTarget;
-    //     BattleScriptPushCursor();
-    //     gBattlescriptCurrInstr = BattleScript_TeraShellDistortingTypeMatchups;
-    // }
+    if (ShouldTeraShellDistortTypeMatchups(gCurrentMove, gBattlerTarget))
+    {
+        gBattleStruct->distortedTypeMatchups |= gBitTable[gBattlerTarget];
+        gBattlerAbility = gBattlerTarget;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_TeraShellDistortingTypeMatchups;
+    }
 }
 
 // The chance is 1/N for each stage.
@@ -3829,16 +3827,15 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     gBattlescriptCurrInstr = BattleScript_EffectPsychicNoise;
                 }
                 break;
-            // TODO: Tera
-            // case MOVE_EFFECT_TERA_BLAST:
-            //     if (IsTerastallized(gEffectBattler)
-            //         && GetBattlerTeraType(gEffectBattler) == TYPE_STELLAR
-            //         && !NoAliveMonsForEitherParty())
-            //     {
-            //         BattleScriptPush(gBattlescriptCurrInstr + 1);
-            //         gBattlescriptCurrInstr = BattleScript_LowerAtkSpAtk;
-            //     }
-            //     break;
+            case MOVE_EFFECT_TERA_BLAST:
+                if (IsTerastallized(gEffectBattler)
+                    && GetBattlerTeraType(gEffectBattler) == TYPE_STELLAR
+                    && !NoAliveMonsForEitherParty())
+                {
+                    BattleScriptPush(gBattlescriptCurrInstr + 1);
+                    gBattlescriptCurrInstr = BattleScript_LowerAtkSpAtk;
+                }
+                break;
             }
         }
     }
@@ -9669,7 +9666,7 @@ static void Cmd_various(void)
         VARIOUS_ARGS(const u8 *failInstr);
         if ((GetBattlerType(gBattlerTarget, 0, FALSE) == gMovesInfo[gCurrentMove].type
             && GetBattlerType(gBattlerTarget, 1, FALSE) == gMovesInfo[gCurrentMove].type)
-            /* || IsTerastallized(gBattlerTarget) */) // TODO: Tera
+            || IsTerastallized(gBattlerTarget))
         {
             gBattlescriptCurrInstr = cmd->failInstr;
         }
@@ -10002,7 +9999,7 @@ static void Cmd_various(void)
     case VARIOUS_TRY_THIRD_TYPE:
     {
         VARIOUS_ARGS(const u8 *failInstr);
-        if (IS_BATTLER_OF_TYPE(battler, gMovesInfo[gCurrentMove].argument)/*  || IsTerastallized(battler) */) // TODO: Tera
+        if (IS_BATTLER_OF_TYPE(battler, gMovesInfo[gCurrentMove].argument) || IsTerastallized(battler))
         {
             gBattlescriptCurrInstr = cmd->failInstr;
         }
@@ -12111,12 +12108,11 @@ static void Cmd_tryconversiontypechange(void)
     u8 moveChecked = 0;
     u8 moveType = 0;
 
-    // TODO: Tera
-    // if (IsTerastallized(gBattlerAttacker))
-    // {
-    //     gBattlescriptCurrInstr = cmd->failInstr;
-    //     return;
-    // }
+    if (IsTerastallized(gBattlerAttacker))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
 
     if (B_UPDATED_CONVERSION >= GEN_6)
     {
@@ -12889,15 +12885,14 @@ static void Cmd_settypetorandomresistance(void)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
-    // TODO: Tera
-    // else if (IsTerastallized(gBattlerAttacker))
-    // {
-    //     gBattlescriptCurrInstr = cmd->failInstr;
-    // }
-    // else if (gLastHitByType[gBattlerAttacker] == TYPE_STELLAR)
-    // {
-    //     gBattlescriptCurrInstr = cmd->failInstr;
-    // }
+    else if (IsTerastallized(gBattlerAttacker))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
+    else if (gLastHitByType[gBattlerAttacker] == TYPE_STELLAR)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
     else
     {
         u32 i, resistTypes = 0;
@@ -14848,7 +14843,7 @@ static void Cmd_settypetoterrain(void)
         break;
     }
 
-    if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, terrainType) /* && !IsTerastallized(gBattlerAttacker) */) // TODO: Tera
+    if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, terrainType) && !IsTerastallized(gBattlerAttacker))
     {
         SET_BATTLER_TYPE(gBattlerAttacker, terrainType);
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, terrainType);
@@ -16479,11 +16474,10 @@ void BS_TryReflectType(void)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
-    // TODO: Tera
-    // else if (IsTerastallized(gBattlerAttacker))
-    // {
-    //     gBattlescriptCurrInstr = cmd->failInstr;
-    // }
+    else if (IsTerastallized(gBattlerAttacker))
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+    }
     else if (IS_BATTLER_TYPELESS(gBattlerTarget))
     {
         gBattlescriptCurrInstr = cmd->failInstr;
@@ -16848,9 +16842,8 @@ void BS_AllySwitchFailChance(void)
 void BS_SetPhotonGeyserCategory(void)
 {
     NATIVE_ARGS();
-    // TODO: Tera
-    // if (!((gMovesInfo[gCurrentMove].effect == EFFECT_TERA_BLAST && !IsTerastallized(gBattlerAttacker))
-    //         || (gMovesInfo[gCurrentMove].effect == EFFECT_TERA_STARSTORM && !(IsTerastallized(gBattlerAttacker) && gBattleMons[gBattlerAttacker].species == SPECIES_TERAPAGOS_STELLAR))))
+    if (!((gMovesInfo[gCurrentMove].effect == EFFECT_TERA_BLAST && !IsTerastallized(gBattlerAttacker))
+            || (gMovesInfo[gCurrentMove].effect == EFFECT_TERA_STARSTORM && !(IsTerastallized(gBattlerAttacker) && gBattleMons[gBattlerAttacker].species == SPECIES_TERAPAGOS_STELLAR))))
         gBattleStruct->swapDamageCategory = (GetCategoryBasedOnStats(gBattlerAttacker) == DAMAGE_CATEGORY_PHYSICAL);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -17047,8 +17040,7 @@ void BS_RemoveWeather(void)
 void BS_ApplyTerastallization(void)
 {
     NATIVE_ARGS();
-    // TODO: Tera
-    // ApplyBattlerVisualsForTeraAnim(gBattlerAttacker);
+    ApplyBattlerVisualsForTeraAnim(gBattlerAttacker);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

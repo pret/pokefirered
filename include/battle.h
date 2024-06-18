@@ -1,19 +1,41 @@
 #ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
-#include "global.h"
 #include "constants/battle.h"
 #include "constants/form_change_types.h"
-#include "constants/battle_script_commands.h"
+#include "battle_main.h"
+#include "battle_message.h"
 #include "battle_util.h"
 #include "battle_script_commands.h"
-#include "battle_main.h"
 #include "battle_ai_switch_items.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_util2.h"
 #include "battle_bg.h"
-#include "battle_dynamax.h"
 #include "pokeball.h"
+// #include "battle_debug.h"
+#include "battle_dynamax.h"
+// #include "battle_terastal.h"
+#include "random.h" // for rng_value_t
+
+// Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
+//
+// For example accuracycheck is defined as:
+//
+//     .macro accuracycheck failInstr:req, move:req
+//     .byte 0x1
+//     .4byte \failInstr
+//     .2byte \move
+//     .endm
+//
+// Which corresponds to:
+//
+//     CMD_ARGS(const u8 *failInstr, u16 move);
+//
+// The arguments can be accessed as cmd->failInstr and cmd->move.
+// gBattlescriptCurrInstr = cmd->nextInstr; advances to the next instruction.
+#define CMD_ARGS(...) const struct __attribute__((packed)) { u8 opcode; RECURSIVELY(R_FOR_EACH(APPEND_SEMICOLON, __VA_ARGS__)) const u8 nextInstr[0]; } *const cmd UNUSED = (const void *)gBattlescriptCurrInstr
+#define VARIOUS_ARGS(...) CMD_ARGS(u8 battler, u8 id, ##__VA_ARGS__)
+#define NATIVE_ARGS(...) CMD_ARGS(void (*func)(void), ##__VA_ARGS__)
 
 /*
     Banks are a name given to what could be called a 'battlerId' or 'monControllerId'.

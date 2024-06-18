@@ -261,6 +261,9 @@ extern const u8 gText_BattleTowerBan_Newline2[];
 extern const u8 gText_BattleTowerBan_Is1[];
 extern const u8 gText_BattleTowerBan_Is2[];
 
+// battle_script_commands
+extern const u8 gText_BattleYesNoChoice[];
+
 extern const u8 gText_SafariBalls[];
 extern const u8 gText_HighlightRed_Left[];
 

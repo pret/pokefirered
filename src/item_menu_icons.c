@@ -2,9 +2,11 @@
 #include "gflib.h"
 #include "decompress.h"
 #include "graphics.h"
+#include "item.h"
 #include "item_menu_icons.h"
 #include "constants/item.h"
 #include "constants/items.h"
+#include "battle_main.h"
 
 enum {
     TAG_BAG = 100,
@@ -328,14 +330,14 @@ u8 AddItemIconObject(u16 tilesTag, u16 paletteTag, u16 itemId)
     if (!TryAllocItemIconTilesBuffers())
         return MAX_SPRITES;
 
-    LZDecompressWram(GetItemIconGfxPtr(itemId, ITEMICON_TILES), sItemIconTilesBuffer);
+    LZDecompressWram(GetItemIconPic(itemId), sItemIconTilesBuffer);
     CopyItemIconPicTo4x4Buffer(sItemIconTilesBuffer, sItemIconTilesBufferPadded);
     spriteSheet.data = sItemIconTilesBufferPadded;
     spriteSheet.size = 0x200;
     spriteSheet.tag = tilesTag;
     LoadSpriteSheet(&spriteSheet);
 
-    spritePalette.data = GetItemIconGfxPtr(itemId, ITEMICON_PAL);
+    spritePalette.data = GetItemIconPalette(itemId);
     spritePalette.tag = paletteTag;
     LoadCompressedSpritePalette(&spritePalette);
 
@@ -359,14 +361,14 @@ u8 AddItemIconObjectWithCustomObjectTemplate(const struct SpriteTemplate * origT
     if (!TryAllocItemIconTilesBuffers())
         return MAX_SPRITES;
 
-    LZDecompressWram(GetItemIconGfxPtr(itemId, ITEMICON_TILES), sItemIconTilesBuffer);
+    LZDecompressWram(GetItemIconPic(itemId), sItemIconTilesBuffer);
     CopyItemIconPicTo4x4Buffer(sItemIconTilesBuffer, sItemIconTilesBufferPadded);
     spriteSheet.data = sItemIconTilesBufferPadded;
     spriteSheet.size = 0x200;
     spriteSheet.tag = tilesTag;
     LoadSpriteSheet(&spriteSheet);
 
-    spritePalette.data = GetItemIconGfxPtr(itemId, ITEMICON_PAL);
+    spritePalette.data = GetItemIconPalette(itemId);
     spritePalette.tag = paletteTag;
     LoadCompressedSpritePalette(&spritePalette);
 
@@ -411,14 +413,6 @@ void DestroyItemMenuIcon(u8 idx)
     }
 }
 
-// attrId is either ITEMICON_TILES or ITEMICON_PAL
-const u32 *GetItemIconGfxPtr(u16 itemId, u8 attrId)
-{
-    if (itemId > ITEMS_COUNT)
-        itemId = ITEM_NONE;
-    return sItemIconTable[itemId][attrId];
-}
-
 void CreateBerryPouchItemIcon(u16 itemId, u8 idx)
 {
     u8 * spriteIds = &sItemMenuIconSpriteIds[SPR_ITEM_ICON];
@@ -437,4 +431,32 @@ void CreateBerryPouchItemIcon(u16 itemId, u8 idx)
             gSprites[spriteId].y2 = 147; // This value is the only difference from CreateItemMenuIcon
         }
     }
+}
+
+const void *GetItemIconPic(u16 itemId)
+{
+    if (itemId == ITEM_FIELD_ARROW)
+        return gItemIcon_ReturnToFieldArrow; // Use last icon, the "return to field" arrow
+    if (itemId >= ITEMS_COUNT)
+        return gItemsInfo[0].iconPic;
+    if (itemId >= ITEM_TM01 && itemId < ITEM_HM01 + NUM_HIDDEN_MACHINES)
+    {
+        if (itemId < ITEM_TM01 + NUM_TECHNICAL_MACHINES)
+            return gItemIcon_TM;
+        return gItemIcon_HM;
+    }
+
+    return gItemsInfo[itemId].iconPic;
+}
+
+const void *GetItemIconPalette(u16 itemId)
+{
+    if (itemId == ITEM_FIELD_ARROW)
+        return gItemIconPalette_ReturnToFieldArrow;
+    if (itemId >= ITEMS_COUNT)
+        return gItemsInfo[0].iconPalette;
+    if (itemId >= ITEM_TM01 && itemId < ITEM_HM01 + NUM_HIDDEN_MACHINES)
+        return gTypesInfo[gMovesInfo[gItemsInfo[itemId].secondaryId].type].paletteTMHM;
+
+    return gItemsInfo[itemId].iconPalette;
 }

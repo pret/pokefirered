@@ -592,8 +592,6 @@ static void LoadItemIconGfx(u8 id, const u32 * tiles, const u32 * pal);
 static void SetItemIconAffineAnim(u8 id, u8 affineAnimNo);
 static void SetItemIconCallback(u8 id, u8 command, u8 cursorArea, u8 cursorPos);
 static void SetItemIconActive(u8 id, bool8 show);
-static const u32 *GetItemIconPic(u16 itemId);
-static const u32 *GetItemIconPalette(u16 itemId);
 static void DrawItemInfoWindow(u32 x);
 static void SpriteCB_ItemIcon_WaitAnim(struct Sprite *sprite);
 static void SpriteCB_ItemIcon_ToHand(struct Sprite *sprite);
@@ -1124,16 +1122,6 @@ static void SetItemIconActive(u8 id, bool8 show)
 
     gStorage->itemIcons[id].active = show;
     gStorage->itemIcons[id].sprite->invisible = (show == FALSE);
-}
-
-static const u32 *GetItemIconPic(u16 itemId)
-{
-    return GetItemIconGfxPtr(itemId, ITEMICON_TILES);
-}
-
-static const u32 *GetItemIconPalette(u16 itemId)
-{
-    return GetItemIconGfxPtr(itemId, ITEMICON_PAL);
 }
 
 void PrintItemDescription(void)

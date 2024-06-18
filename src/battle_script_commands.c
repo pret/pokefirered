@@ -15925,6 +15925,44 @@ static bool8 CanAbilityPreventStatLoss(u16 abilityDef)
     return FALSE;
 }
 
+static bool8 CanBurnHitThaw(u16 move)
+{
+    u8 i;
+
+    if (B_BURN_HIT_THAW >= GEN_6)
+    {
+        for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
+        {
+            if (gMovesInfo[move].additionalEffects[i].moveEffect == MOVE_EFFECT_BURN)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void BS_CheckParentalBondCounter(void)
+{
+    NATIVE_ARGS(u8 counter, const u8 *jumpInstr);
+    // Some effects should only happen on the first or second strike of Parental Bond,
+    // so a way to check this in battle scripts is useful
+    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == cmd->counter && gBattleMons[gBattlerTarget].hp != 0)
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+void BS_JumpIfCantLoseItem(void)
+{
+    NATIVE_ARGS(u8 battler, const u8 *jumpInstr);
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    u16 item = gBattleMons[battler].item;
+
+    if (item == ITEM_NONE || !CanBattlerGetOrLoseItem(battler, item))
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
 void BS_GetBattlerSide(void)
 {
     NATIVE_ARGS(u8 battler);
@@ -16069,44 +16107,6 @@ static void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 fai
         value /= sExperienceScalingFactors[faintedLevel + expGetterLevel + 10];
         *expAmount = value + 1;
     }
-}
-
-static bool8 CanBurnHitThaw(u16 move)
-{
-    u8 i;
-
-    if (B_BURN_HIT_THAW >= GEN_6)
-    {
-        for (i = 0; i < gMovesInfo[move].numAdditionalEffects; i++)
-        {
-            if (gMovesInfo[move].additionalEffects[i].moveEffect == MOVE_EFFECT_BURN)
-                return TRUE;
-        }
-    }
-    return FALSE;
-}
-
-void BS_CheckParentalBondCounter(void)
-{
-    NATIVE_ARGS(u8 counter, const u8 *jumpInstr);
-    // Some effects should only happen on the first or second strike of Parental Bond,
-    // so a way to check this in battle scripts is useful
-    if (gSpecialStatuses[gBattlerAttacker].parentalBondState == cmd->counter && gBattleMons[gBattlerTarget].hp != 0)
-        gBattlescriptCurrInstr = cmd->jumpInstr;
-    else
-        gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_JumpIfCantLoseItem(void)
-{
-    NATIVE_ARGS(u8 battler, const u8 *jumpInstr);
-    u8 battler = GetBattlerForBattleScript(cmd->battler);
-    u16 item = gBattleMons[battler].item;
-
-    if (item == ITEM_NONE || !CanBattlerGetOrLoseItem(battler, item))
-        gBattlescriptCurrInstr = cmd->jumpInstr;
-    else
-        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_ItemRestoreHP(void)
@@ -16303,23 +16303,6 @@ void BS_TryRevertWeatherForm(void)
         BattleScriptPush(cmd->nextInstr);
         gBattlescriptCurrInstr = BattleScript_TargetFormChangeWithStringNoPopup;
         return;
-    }
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_SetSnow(void)
-{
-    NATIVE_ARGS();
-
-    if (!TryChangeBattleWeather(gBattlerAttacker, ENUM_WEATHER_SNOW, FALSE))
-    {
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_FAILED;
-
-    }
-    else
-    {
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SNOW;
     }
     gBattlescriptCurrInstr = cmd->nextInstr;
 }

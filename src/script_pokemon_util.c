@@ -6,6 +6,7 @@
 #include "daycare.h"
 #include "event_data.h"
 #include "load_save.h"
+#include "item.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "pokedex.h"
@@ -50,6 +51,10 @@ void HealPlayerParty(void)
         arg[3] = 0;
         SetMonData(&gPlayerParty[i], MON_DATA_STATUS, arg);
     }
+
+    // Recharge Tera Orb, if possible.
+    if (B_FLAG_TERA_ORB_CHARGED != 0 && CheckBagHasItem(ITEM_TERA_ORB, 1))
+        FlagSet(B_FLAG_TERA_ORB_CHARGED);
 }
 
 void CanHyperTrain(struct ScriptContext *ctx)

@@ -191,4 +191,6 @@ s32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese);
 u8 CreateTextCursorSprite(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);
 void DestroyTextCursorSprite(u8 spriteId);
 
+u8 *PrependFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width);
+
 #endif // GUARD_TEXT_H

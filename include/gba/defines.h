@@ -67,6 +67,10 @@
 
 #define ROM_HEADER_SIZE   0xC0
 
+// Dimensions of a tile in pixels
+#define TILE_WIDTH  8
+#define TILE_HEIGHT 8
+
 #define DISPLAY_WIDTH  240
 #define DISPLAY_HEIGHT 160
 

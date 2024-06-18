@@ -1612,3 +1612,54 @@ static void DecompressGlyph_Bold(u16 glyphId)
     gGlyphInfo.width = 8;
     gGlyphInfo.height = 12;
 }
+
+static const s8 sNarrowerFontIds[] =
+{
+    [FONT_SMALL] = -1, // FONT_SMALL_NARROW,
+    [FONT_NORMAL] = -1, // FONT_NARROW,
+    // [FONT_SHORT] = FONT_SHORT_NARROW,
+    // [FONT_SHORT_COPY_1] = FONT_SHORT_NARROW,
+    // [FONT_SHORT_COPY_2] = FONT_SHORT_NARROW,
+    // [FONT_SHORT_COPY_3] = FONT_SHORT_NARROW,
+    [FONT_BRAILLE] = -1,
+    // [FONT_NARROW] = FONT_NARROWER,
+    // [FONT_SMALL_NARROW] = FONT_SMALL_NARROWER,
+    [FONT_BOLD] = -1,
+    // [FONT_NARROWER] = -1,
+    // [FONT_SMALL_NARROWER] = -1,
+    // [FONT_SHORT_NARROW] = -1,
+};
+
+// If the narrowest font ID doesn't fit the text, we still return that
+// ID because clipping is better than crashing.
+u32 GetFontIdToFit(const u8 *string, u32 fontId, u32 letterSpacing, u32 widthPx)
+{
+    for (;;)
+    {
+        s32 narrowerFontId = sNarrowerFontIds[fontId];
+        if (narrowerFontId == -1)
+            return fontId;
+        if (GetStringWidth(fontId, string, letterSpacing) <= widthPx)
+            return fontId;
+        fontId = narrowerFontId;
+    }
+}
+
+u8 *PrependFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width)
+{
+
+    u32 fitFontId = GetFontIdToFit(start, fontId, 0, width);
+    if (fitFontId != fontId)
+    {
+        memmove(&start[3], &start[0], end - start);
+        start[0] = EXT_CTRL_CODE_BEGIN;
+        start[1] = EXT_CTRL_CODE_FONT;
+        start[2] = fitFontId;
+        end[3] = EOS;
+        return end + 3;
+    }
+    else
+    {
+        return end;
+    }
+}

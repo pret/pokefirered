@@ -446,6 +446,7 @@
 // Trainer party defines
 #define TRAINER_MON_MALE    1
 #define TRAINER_MON_FEMALE  2
+#define TRAINER_MON_RANDOM_GENDER 3
 
 // All trainer parties specify the IV, level, and species for each Pokémon in the
 // party. Some trainer parties also specify held items and custom moves for each

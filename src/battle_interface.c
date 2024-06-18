@@ -1242,7 +1242,8 @@ void HideTriggerSprites(void)
     HideMegaTriggerSprite();
     HideBurstTriggerSprite();
     HideZMoveTriggerSprite();
-    HideDynamaxTriggerSprite(); 
+    HideDynamaxTriggerSprite();
+    HideTeraTriggerSprite(); 
 }
 
 void DestroyMegaTriggerSprite(void)

@@ -1303,6 +1303,8 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_MegaParticles, 0x0180, ANIM_TAG_MEGA_PARTICLES},
     {gBattleAnimSpriteGfx_NecrozmaStar, 0x200, ANIM_TAG_ULTRA_BURST_SYMBOL},
     {gBattleAnimSpriteGfx_StraightBeam, 0x180, ANIM_TAG_STRAIGHT_BEAM},
+    {gBattleAnimSpriteGfx_TeraCrystal, 0x800, ANIM_TAG_TERA_CRYSTAL},
+    {gBattleAnimSpriteGfx_TeraShatter, 0x0180, ANIM_TAG_TERA_SHATTER},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1601,6 +1603,8 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_MegaParticles, ANIM_TAG_MEGA_PARTICLES},
     {gBattleAnimSpritePal_NecrozmaStar, ANIM_TAG_ULTRA_BURST_SYMBOL},
     {gBattleAnimSpritePal_StraightBeam, ANIM_TAG_STRAIGHT_BEAM},
+    {gBattleAnimSpritePal_TeraCrystal, ANIM_TAG_TERA_CRYSTAL},
+    {gBattleAnimSpritePal_TeraShatter, ANIM_TAG_TERA_SHATTER},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =

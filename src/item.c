@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "berry.h"
 #include "event_data.h"
+#include "graphics.h"
 #include "item.h"
 #include "item_use.h"
 #include "item_menu.h"
@@ -11,6 +12,7 @@
 #include "strings.h"
 #include "constants/hold_effects.h"
 #include "constants/item_effects.h"
+#include "constants/item.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 

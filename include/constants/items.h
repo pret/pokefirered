@@ -4,38 +4,38 @@
 #define ITEM_NONE 0
 
 // Poké Balls
-#define ITEM_MASTER_BALL 1
-#define ITEM_ULTRA_BALL 2
-#define ITEM_GREAT_BALL 3
-#define ITEM_POKE_BALL 4
-#define ITEM_SAFARI_BALL 5
-#define ITEM_NET_BALL 6
-#define ITEM_DIVE_BALL 7
+#define ITEM_POKE_BALL 1
+#define ITEM_GREAT_BALL 2
+#define ITEM_ULTRA_BALL 3
+#define ITEM_MASTER_BALL 4
+#define ITEM_PREMIER_BALL 5
+#define ITEM_HEAL_BALL 6
+#define ITEM_NET_BALL 7
 #define ITEM_NEST_BALL 8
-#define ITEM_REPEAT_BALL 9
-#define ITEM_TIMER_BALL 10
-#define ITEM_LUXURY_BALL 11
-#define ITEM_PREMIER_BALL 12
-#define ITEM_HEAL_BALL 13
-#define ITEM_DUSK_BALL 14
-#define ITEM_QUICK_BALL 15
-#define ITEM_LEVEL_BALL 16
-#define ITEM_LURE_BALL 17
-#define ITEM_MOON_BALL 18
-#define ITEM_FRIEND_BALL 19
-#define ITEM_LOVE_BALL 20
-#define ITEM_FAST_BALL 21
-#define ITEM_HEAVY_BALL 22
-#define ITEM_DREAM_BALL 23
+#define ITEM_DIVE_BALL 9
+#define ITEM_DUSK_BALL 10
+#define ITEM_TIMER_BALL 11
+#define ITEM_QUICK_BALL 12
+#define ITEM_REPEAT_BALL 13
+#define ITEM_LUXURY_BALL 14
+#define ITEM_LEVEL_BALL 15
+#define ITEM_LURE_BALL 16
+#define ITEM_MOON_BALL 17
+#define ITEM_FRIEND_BALL 18
+#define ITEM_LOVE_BALL 19
+#define ITEM_FAST_BALL 20
+#define ITEM_HEAVY_BALL 21
+#define ITEM_DREAM_BALL 22
+#define ITEM_SAFARI_BALL 23
 #define ITEM_SPORT_BALL 24
 #define ITEM_PARK_BALL 25
 #define ITEM_BEAST_BALL 26
 #define ITEM_CHERISH_BALL 27
 
-// // Note: If moving ball IDs around, updating FIRST_BALL/LAST_BALL is not sufficient
-// //       Several places expect the ball IDs to be first and contiguous (e.g. MON_DATA_POKEBALL)
-// //       If adding new balls, it's easiest to insert them after the last ball and increment the below IDs (and removing ITEM_034 for example)
-#define FIRST_BALL ITEM_MASTER_BALL
+// Note: If moving ball IDs around, updating FIRST_BALL/LAST_BALL is not sufficient
+//       Several places expect the ball IDs to be first and contiguous (e.g. MON_DATA_POKEBALL)
+//       If adding new balls, it's easiest to insert them after the last ball and increment the below IDs (and removing ITEM_034 for example)
+#define FIRST_BALL ITEM_POKE_BALL
 #define LAST_BALL  ITEM_CHERISH_BALL
 
 // Medicine
@@ -1058,14 +1058,12 @@
 #define EXP_30000 5
 
 // Item type IDs (used to determine the exit callback)
-// enum {
-//     ITEM_TYPE_MAIL,
-//     ITEM_TYPE_PARTY_MENU,
-//     ITEM_TYPE_FIELD,
-//     ITEM_TYPE_UNUSED, // Used for Pokeblock case in RSE
-//     ITEM_TYPE_BAG_MENU, // No exit callback, stays in bag menu
-//     ITEM_TYPE_PARTY_MENU_MOVES,
-// };
+#define ITEM_USE_MAIL             0
+#define ITEM_USE_PARTY_MENU       1
+#define ITEM_USE_FIELD            2
+#define ITEM_USE_UNUSED           3
+#define ITEM_USE_BAG_MENU         4 // No exit callback, stays in bag menu
+#define ITEM_USE_PARTY_MENU_MOVES 5
 
 // Item battle script IDs (need to be non-zero)
 #define EFFECT_ITEM_RESTORE_HP              1

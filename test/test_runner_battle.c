@@ -2349,7 +2349,7 @@ void UseItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemContext c
 {
     s32 i;
     s32 battlerId = battler - gBattleMons;
-    bool32 requirePartyIndex = ItemId_GetType(ctx.itemId) == ITEM_TYPE_PARTY_MENU || ItemId_GetType(ctx.itemId) == ITEM_TYPE_PARTY_MENU_MOVES;
+    bool32 requirePartyIndex = ItemId_GetType(ctx.itemId) == ITEM_USE_PARTY_MENU || ItemId_GetType(ctx.itemId) == ITEM_USE_PARTY_MENU_MOVES;
     // Check general bad use.
     INVALID_IF(DATA.turnState == TURN_CLOSED, "USE_ITEM outside TURN");
     INVALID_IF(DATA.actionBattlers & (1 << battlerId), "Multiple battler actions");
@@ -2359,7 +2359,7 @@ void UseItem(u32 sourceLine, struct BattlePokemon *battler, struct ItemContext c
     INVALID_IF(requirePartyIndex && ctx.partyIndex >= ((battlerId & BIT_SIDE) == B_SIDE_PLAYER ? DATA.playerPartySize : DATA.opponentPartySize), \
                 "USE_ITEM to invalid party index");
     // Check move slot items.
-    if (ItemId_GetType(ctx.itemId) == ITEM_TYPE_PARTY_MENU_MOVES)
+    if (ItemId_GetType(ctx.itemId) == ITEM_USE_PARTY_MENU_MOVES)
     {
         INVALID_IF(!ctx.explicitMove, "%S requires an explicit move", ItemId_GetName(ctx.itemId));
         for (i = 0; i < MAX_MON_MOVES; i++)

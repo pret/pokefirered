@@ -1467,7 +1467,7 @@ static void Task_ItemMenuAction_Use(u8 taskId)
         PutWindowTilemap(0);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
-        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_TYPE_PARTY_MENU)
+        if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_USE_PARTY_MENU)
             Task_PrintThereIsNoPokemon(taskId);
         else
             ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
@@ -1678,13 +1678,13 @@ static void Task_ItemMenuAction_BattleUse(u8 taskId)
     PutWindowTilemap(1);
     CopyWindowToVram(0, COPYWIN_MAP);   
 
-    if (type == ITEM_TYPE_BAG_MENU) {
+    if (type == ITEM_USE_BAG_MENU) {
         ItemUseInBattle_BagMenu(taskId);
     }
-    else if (type == ITEM_TYPE_PARTY_MENU) {
+    else if (type == ITEM_USE_PARTY_MENU) {
         ItemUseInBattle_PartyMenu(taskId);
     }
-    else if (type == ITEM_TYPE_PARTY_MENU_MOVES) {
+    else if (type == ITEM_USE_PARTY_MENU_MOVES) {
         ItemUseInBattle_PartyMenuChooseMove(taskId);
     }
 }

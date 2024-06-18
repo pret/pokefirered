@@ -3,6 +3,7 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "item_menu_icons.h"
+#include "constants/item.h"
 #include "constants/items.h"
 
 enum {

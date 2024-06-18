@@ -79,11 +79,11 @@ static void Task_UseFameCheckerFromField(u8 taskId);
 #define tUsingRegisteredKeyItem  data[3]
 
 static void (*const sExitCallbackByItemType[])(void) = {
-    [ITEM_TYPE_PARTY_MENU - 1] = CB2_ShowPartyMenuForItemUse,
-    [ITEM_TYPE_FIELD      - 1] = CB2_ReturnToField,
-    [ITEM_TYPE_UNUSED     - 1] = NULL,
-    [ITEM_TYPE_BAG_MENU   - 1] = NULL,
-    [ITEM_TYPE_PARTY_MENU_MOVES - 1] = CB2_ShowPartyMenuForItemUse
+    [ITEM_USE_PARTY_MENU - 1] = CB2_ShowPartyMenuForItemUse,
+    [ITEM_USE_FIELD      - 1] = CB2_ReturnToField,
+    [ITEM_USE_UNUSED     - 1] = NULL,
+    [ITEM_USE_BAG_MENU   - 1] = NULL,
+    [ITEM_USE_PARTY_MENU_MOVES - 1] = CB2_ShowPartyMenuForItemUse
 };
 
 static void SetUpItemUseCallback(u8 taskId)
@@ -101,7 +101,7 @@ static void SetUpItemUseCallback(u8 taskId)
     else
     {
         ItemMenu_SetExitCallback(sExitCallbackByItemType[itemType]);
-        if (itemType == ITEM_TYPE_FIELD - 1)
+        if (itemType == ITEM_USE_FIELD - 1)
             Bag_BeginCloseWin0Animation();
         ItemMenu_StartFadeToExitCallback(taskId);
     }

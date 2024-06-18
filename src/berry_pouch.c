@@ -1078,17 +1078,17 @@ static void Task_BerryPouch_Use(u8 taskId)
             ItemUseOutOfBattle_CannotUse(taskId);
             return;
         }
-        if (type == ITEM_TYPE_BAG_MENU) {
+        if (type == ITEM_USE_BAG_MENU) {
             ItemUseInBattle_BagMenu(taskId);
         }
-        else if (type == ITEM_TYPE_PARTY_MENU) {
+        else if (type == ITEM_USE_PARTY_MENU) {
             ItemUseInBattle_PartyMenu(taskId);
         }
-        else if (type == ITEM_TYPE_PARTY_MENU_MOVES) {
+        else if (type == ITEM_USE_PARTY_MENU_MOVES) {
             ItemUseInBattle_PartyMenuChooseMove(taskId);
         }
     }
-    else if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_TYPE_PARTY_MENU) {
+    else if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_USE_PARTY_MENU) {
         Task_Give_PrintThereIsNoPokemon(taskId);
     }
     else {

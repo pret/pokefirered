@@ -7,8 +7,8 @@ ASSUMPTIONS
     ASSUME(gMovesInfo[MOVE_MUD_SHOT].type == TYPE_GROUND);
     ASSUME(gItemsInfo[ITEM_SHUCA_BERRY].holdEffect == HOLD_EFFECT_RESIST_BERRY);
     ASSUME(gItemsInfo[ITEM_SHUCA_BERRY].holdEffectParam == TYPE_GROUND);
-    ASSUME(gItemsInfo[ITEM_SHUCA_BERRY].pocket == POCKET_BERRY_POUCH);
-    ASSUME(gItemsInfo[ITEM_ORAN_BERRY].pocket == POCKET_BERRY_POUCH);
+    ASSUME(gItemsInfo[ITEM_SHUCA_BERRY].pocket == POCKET_BERRIES);
+    ASSUME(gItemsInfo[ITEM_ORAN_BERRY].pocket == POCKET_BERRIES);
 }
 
 AI_SINGLE_BATTLE_TEST("AI: Belch has nonzero score after eating a berry")

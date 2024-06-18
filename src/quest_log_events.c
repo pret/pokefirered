@@ -1081,7 +1081,7 @@ static const u16 *LoadEvent_UsedItem(const u16 *eventData)
     {
     case POCKET_ITEMS:
     case POCKET_POKE_BALLS:
-    case POCKET_BERRY_POUCH:
+    case POCKET_BERRIES:
         StringCopy(gStringVar1, ItemId_GetName(rItemId));
         if (rItemId == ITEM_ESCAPE_ROPE)
         {
@@ -1102,7 +1102,7 @@ static const u16 *LoadEvent_UsedItem(const u16 *eventData)
         StringCopy(gStringVar1, ItemId_GetName(rItemId));
         StringExpandPlaceholders(gStringVar4, gText_QuestLog_UsedTheKeyItem);
         break;
-    case POCKET_TM_CASE:
+    case POCKET_TM_HM:
         QuestLog_GetSpeciesName(rSpecies, gStringVar1, 0);
         StringCopy(gStringVar2, gMovesInfo[ItemIdToBattleMoveId(rItemId)].name);
         if (rItemParam != 0xFFFF)

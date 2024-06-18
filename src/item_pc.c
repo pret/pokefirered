@@ -522,7 +522,7 @@ static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
         {
             itemId = ItemPc_GetItemIdBySlotId(itemIndex);
             CreateItemMenuIcon(itemId, sStateDataPtr->itemMenuIconSlot);
-            if (ItemId_GetPocket(itemId) == POCKET_TM_CASE)
+            if (ItemId_GetPocket(itemId) == POCKET_TM_HM)
                 desc = gMovesInfo[ItemIdToBattleMoveId(itemId)].name;
             else
                 desc = ItemId_GetDescription(itemId);

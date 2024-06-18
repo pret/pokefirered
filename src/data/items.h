@@ -8110,7 +8110,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "heals paralysis "
             "\nin battle."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -8128,7 +8128,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "awakens Pokémon\n"
             "in battle."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -8146,7 +8146,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "heals poisoning "
             "\nin battle."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -8164,7 +8164,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "heals a burn in "
             "\nbattle."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -8182,7 +8182,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "defrosts\nPokémon "
             "in battle."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -8201,7 +8201,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "restores 10 PP\nin "
             "battle."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU_MOVES,
         .fieldUseFunc = ItemUseOutOfBattle_PPRecovery,
         .battleUsage = EFFECT_ITEM_RESTORE_PP,
@@ -8220,7 +8220,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "restores 10 HP\nin "
             "battle."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_RESTORE_HP,
@@ -8238,7 +8238,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "heals confusion "
             "\nin battle."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -8256,7 +8256,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "heals any status\n"
             "problem in battle."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_CURE_STATUS,
@@ -8284,7 +8284,7 @@ const struct Item gItemsInfo[] =
                 "restores 30 HP\nin "
                 "battle."),
         #endif
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Medicine,
         .battleUsage = EFFECT_ITEM_RESTORE_HP,
@@ -8300,7 +8300,7 @@ const struct Item gItemsInfo[] =
         .holdEffect = HOLD_EFFECT_CONFUSE_SPICY,
         .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8314,7 +8314,7 @@ const struct Item gItemsInfo[] =
         .holdEffect = HOLD_EFFECT_CONFUSE_DRY,
         .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8328,7 +8328,7 @@ const struct Item gItemsInfo[] =
         .holdEffect = HOLD_EFFECT_CONFUSE_SWEET,
         .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8342,7 +8342,7 @@ const struct Item gItemsInfo[] =
         .holdEffect = HOLD_EFFECT_CONFUSE_BITTER,
         .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8356,7 +8356,7 @@ const struct Item gItemsInfo[] =
         .holdEffect = HOLD_EFFECT_CONFUSE_SOUR,
         .holdEffectParam = CONFUSE_BERRY_HEAL_FRACTION,
         .description = sFigyBerryDesc,
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8371,7 +8371,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Razz."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8386,7 +8386,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Bluk."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8401,7 +8401,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Nanab."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8416,7 +8416,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Wepear."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8431,7 +8431,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Pinap."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8446,7 +8446,7 @@ const struct Item gItemsInfo[] =
             "Makes a Pokémon "
             "friendly but\nlowers "
             "base HP."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_PomegBerry,
@@ -8462,7 +8462,7 @@ const struct Item gItemsInfo[] =
             "Makes a Pokémon "
             "friendly but\nlowers "
             "base Attack."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_KelpsyBerry,
@@ -8478,7 +8478,7 @@ const struct Item gItemsInfo[] =
             "Makes a Pokémon "
             "friendly but\nlowers "
             "base Defense."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_QualotBerry,
@@ -8494,7 +8494,7 @@ const struct Item gItemsInfo[] =
             "Makes a Pokémon "
             "friendly but\nlowers "
             "base Sp. Atk."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_HondewBerry,
@@ -8510,7 +8510,7 @@ const struct Item gItemsInfo[] =
             "Makes a Pokémon "
             "friendly but\nlowers "
             "base Sp. Def."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_GrepaBerry,
@@ -8526,7 +8526,7 @@ const struct Item gItemsInfo[] =
             "Makes a Pokémon "
             "friendly but\nlowers "
             "base Speed."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceEV,
         .effect = gItemEffect_TamatoBerry,
@@ -8542,7 +8542,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Cornn."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8557,7 +8557,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Magost."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8572,7 +8572,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Rabuta."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8587,7 +8587,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Nomel."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8602,7 +8602,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Spelon."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8617,7 +8617,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Pamtre."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8632,7 +8632,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Watmel."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8647,7 +8647,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Durin."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8662,7 +8662,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow Belue."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8679,7 +8679,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Normal\n"
             "move."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8696,7 +8696,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Fire "
             "\nmove if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8713,7 +8713,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Water "
             "\nmove if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8730,7 +8730,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a\nElectric "
             "move if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8747,7 +8747,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Grass "
             "\nmove if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8764,7 +8764,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Ice "
             "\nmove if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8781,7 +8781,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a\nFighting "
             "move if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8798,7 +8798,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Poison\n"
             "move if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8815,7 +8815,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Ground\n"
             "move if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8832,7 +8832,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Flying\n"
             "move if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8849,7 +8849,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a\nPsychic "
             "move if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8866,7 +8866,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Bug "
             "\nmove if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8883,7 +8883,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Rock "
             "\nmove if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8900,7 +8900,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Ghost "
             "\nmove if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8917,7 +8917,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Dragon\n"
             "move if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8934,7 +8934,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Dark "
             "\nmove if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8951,7 +8951,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Steel "
             "\nmove if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8968,7 +8968,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "weakens a Fairy "
             "\nmove if weak to it."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -8985,7 +8985,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "raises Attack in\n"
             "a pinch."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9002,7 +9002,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "raises Defense\nin "
             "a pinch."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9019,7 +9019,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "raises Speed in "
             "\na pinch."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9036,7 +9036,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "raises Sp. Atk\nin "
             "a pinch."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9053,7 +9053,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "raises Sp. Def\nin "
             "a pinch."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9070,7 +9070,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "ups the\ncritical"
             "hit rate in a pinch."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9087,7 +9087,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "sharply boosts a\n"
             "stat in a pinch."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9103,7 +9103,7 @@ const struct Item gItemsInfo[] =
             "A hold item that "
             "heals from super\n"
             "effective moves."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9120,7 +9120,7 @@ const struct Item gItemsInfo[] =
             "When held, it ups "
             "the Accuracy of\na "
             "move in a pinch."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9137,7 +9137,7 @@ const struct Item gItemsInfo[] =
             "It allows a Pokémon "
             "in a pinch\nto move "
             "first just once."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9153,7 +9153,7 @@ const struct Item gItemsInfo[] =
             "If hit by a physical "
             "move, it\nwill hurt "
             "the attacker a bit."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9169,7 +9169,7 @@ const struct Item gItemsInfo[] =
             "If hit by a special "
             "move, it will\nhurt "
             "the attacker a bit."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9185,7 +9185,7 @@ const struct Item gItemsInfo[] =
             "If hit by a physical "
             "move, it\nraises the "
             "Defense a bit."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9201,7 +9201,7 @@ const struct Item gItemsInfo[] =
             "If hit by a special "
             "move, it\nraises the "
             "Sp. Def. a bit."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 10,
@@ -9216,7 +9216,7 @@ const struct Item gItemsInfo[] =
             "{POKEBLOCK} ingredient. "
             "Plant in\nloamy soil "
             "to grow a mystery."),
-        .pocket = POCKET_BERRY_POUCH,
+        .pocket = POCKET_BERRIES,
         .type = ITEM_USE_BAG_MENU, // Type handled by ItemUseOutOfBattle_EnigmaBerry
         .fieldUseFunc = ItemUseOutOfBattle_EnigmaBerry,
         .battleUsage = EFFECT_ITEM_ENIGMA_BERRY_EREADER,
@@ -9234,7 +9234,7 @@ const struct Item gItemsInfo[] =
             "the user\nflinch if "
             "hit by the foe."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_FOCUS_PUNCH,
@@ -9249,7 +9249,7 @@ const struct Item gItemsInfo[] =
             "the foe with\nlong, "
             "sharp claws."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_DRAGON_CLAW,
@@ -9264,7 +9264,7 @@ const struct Item gItemsInfo[] =
             "ultrasonic wave "
             "that\nmay confuse."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_WATER_PULSE,
@@ -9279,7 +9279,7 @@ const struct Item gItemsInfo[] =
             "Sp. Def by\nfocusing "
             "the mind."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_CALM_MIND,
@@ -9294,7 +9294,7 @@ const struct Item gItemsInfo[] =
             "makes the foe\nflee  "
             "to end the battle."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_ROAR,
@@ -9309,7 +9309,7 @@ const struct Item gItemsInfo[] =
             "with a toxin that\n"
             "gradually worsens."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_TOXIC,
@@ -9324,7 +9324,7 @@ const struct Item gItemsInfo[] =
             "that damages\nall "
             "types except Ice."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_HAIL,
@@ -9339,7 +9339,7 @@ const struct Item gItemsInfo[] =
             "to boost both "
             "\nAttack & Defense."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_BULK_UP,
@@ -9354,7 +9354,7 @@ const struct Item gItemsInfo[] =
             "in a row to\nstrike "
             "the foe."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_BULLET_SEED,
@@ -9369,7 +9369,7 @@ const struct Item gItemsInfo[] =
             "varies among "
             "\ndifferent Pokémon."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_HIDDEN_POWER,
@@ -9384,7 +9384,7 @@ const struct Item gItemsInfo[] =
             "Fire-type\nmoves "
             "for 5 turns."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SUNNY_DAY,
@@ -9399,7 +9399,7 @@ const struct Item gItemsInfo[] =
             "it can only\nuse "
             "attack moves."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_TAUNT,
@@ -9418,7 +9418,7 @@ const struct Item gItemsInfo[] =
             "\nfreeze the foe."),
         #endif
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_ICE_BEAM,
@@ -9437,7 +9437,7 @@ const struct Item gItemsInfo[] =
             "may freeze the foe."),
         #endif
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_BLIZZARD,
@@ -9452,7 +9452,7 @@ const struct Item gItemsInfo[] =
             "recharging\nthe "
             "next turn."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_HYPER_BEAM,
@@ -9467,7 +9467,7 @@ const struct Item gItemsInfo[] =
             "light that\nlowers "
             "Sp. Atk damage."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_LIGHT_SCREEN,
@@ -9482,7 +9482,7 @@ const struct Item gItemsInfo[] =
             "but may fail\nif used "
             "in succession."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_PROTECT,
@@ -9497,7 +9497,7 @@ const struct Item gItemsInfo[] =
             "Water-type\nmoves "
             "for 5 turns."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_RAIN_DANCE,
@@ -9512,7 +9512,7 @@ const struct Item gItemsInfo[] =
             "HP of the\ndamage  "
             "this move inflicts."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_GIGA_DRAIN,
@@ -9527,7 +9527,7 @@ const struct Item gItemsInfo[] =
             "abnormality with\na "
             "mystical power."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SAFEGUARD,
@@ -9542,7 +9542,7 @@ const struct Item gItemsInfo[] =
             "likes you, the\nmore "
             "powerful this move."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_FRUSTRATION,
@@ -9557,7 +9557,7 @@ const struct Item gItemsInfo[] =
             "the 1st turn,\nthen "
             "attacks next turn."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SOLAR_BEAM,
@@ -9572,7 +9572,7 @@ const struct Item gItemsInfo[] =
             "a hard tail.\nIt may "
             "lower Defense."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_IRON_TAIL,
@@ -9587,7 +9587,7 @@ const struct Item gItemsInfo[] =
             "attack that\nmay "
             "cause paralysis."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_THUNDERBOLT,
@@ -9602,7 +9602,7 @@ const struct Item gItemsInfo[] =
             "with a\nthunderbolt. "
             "It may paralyze."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_THUNDER,
@@ -9617,7 +9617,7 @@ const struct Item gItemsInfo[] =
             "that has no effect\n"
             "on flying foes."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_EARTHQUAKE,
@@ -9632,7 +9632,7 @@ const struct Item gItemsInfo[] =
             "likes you, the\nmore "
             "powerful this move."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_RETURN,
@@ -9647,7 +9647,7 @@ const struct Item gItemsInfo[] =
             "the 1st turn,\nthen "
             "strikes next turn."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_DIG,
@@ -9662,7 +9662,7 @@ const struct Item gItemsInfo[] =
             "attack that\nmay "
             "lower Sp. Def."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_PSYCHIC,
@@ -9677,7 +9677,7 @@ const struct Item gItemsInfo[] =
             "at the foe. It\nmay "
             "lower Sp. Def."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SHADOW_BALL,
@@ -9692,7 +9692,7 @@ const struct Item gItemsInfo[] =
             "like Light\nScreen "
             "and causes damage."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_BRICK_BREAK,
@@ -9707,7 +9707,7 @@ const struct Item gItemsInfo[] =
             "copies to\nenhance "
             "elusiveness."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_DOUBLE_TEAM,
@@ -9722,7 +9722,7 @@ const struct Item gItemsInfo[] =
             "light that\nweakens "
             "physical attacks."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_REFLECT,
@@ -9737,7 +9737,7 @@ const struct Item gItemsInfo[] =
             "jolt of\nelectricity "
             "that never misses."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SHOCK_WAVE,
@@ -9752,7 +9752,7 @@ const struct Item gItemsInfo[] =
             "fire that may\nburn "
             "the foe."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_FLAMETHROWER,
@@ -9767,7 +9767,7 @@ const struct Item gItemsInfo[] =
             "foe. It may\npoison "
             "the foe."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SLUDGE_BOMB,
@@ -9782,7 +9782,7 @@ const struct Item gItemsInfo[] =
             "that hits the\nfoe "
             "over several turns."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SANDSTORM,
@@ -9797,7 +9797,7 @@ const struct Item gItemsInfo[] =
             "attack that may "
             "\nburn the foe."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_FIRE_BLAST,
@@ -9812,7 +9812,7 @@ const struct Item gItemsInfo[] =
             "moving with\nrocks. "
             "May lower Speed."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_ROCK_TOMB,
@@ -9827,7 +9827,7 @@ const struct Item gItemsInfo[] =
             "attack that\ncan't "
             "be avoided."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_AERIAL_ACE,
@@ -9842,7 +9842,7 @@ const struct Item gItemsInfo[] =
             "from using the\nsame "
             "move in a row."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_TORMENT,
@@ -9857,7 +9857,7 @@ const struct Item gItemsInfo[] =
             "poisoned,\nburned, "
             "or paralyzed."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_FACADE,
@@ -9872,7 +9872,7 @@ const struct Item gItemsInfo[] =
             "attack\ndepending "
             "on the location."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SECRET_POWER,
@@ -9887,7 +9887,7 @@ const struct Item gItemsInfo[] =
             "2 turns to\nrestore "
             "health and status."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_REST,
@@ -9902,7 +9902,7 @@ const struct Item gItemsInfo[] =
             "attack a foe of\nthe "
             "opposite gender."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_ATTRACT,
@@ -9917,7 +9917,7 @@ const struct Item gItemsInfo[] =
             "it may steal the\n"
             "foe's held item."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_THIEF,
@@ -9932,7 +9932,7 @@ const struct Item gItemsInfo[] =
             "edged wings and "
             "\nslams into the foe."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_STEEL_WING,
@@ -9947,7 +9947,7 @@ const struct Item gItemsInfo[] =
             "with the foe\non the "
             "turn this is used."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SKILL_SWAP,
@@ -9962,7 +9962,7 @@ const struct Item gItemsInfo[] =
             "of the move\nthe foe "
             "is trying to use."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SNATCH,
@@ -9977,7 +9977,7 @@ const struct Item gItemsInfo[] =
             "attack, but\nsharply "
             "lowers Sp. Atk."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_OVERHEAT,
@@ -9989,7 +9989,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10001,7 +10001,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10013,7 +10013,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10025,7 +10025,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10037,7 +10037,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10049,7 +10049,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10061,7 +10061,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10073,7 +10073,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10085,7 +10085,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10097,7 +10097,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10109,7 +10109,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10121,7 +10121,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10133,7 +10133,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10145,7 +10145,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10157,7 +10157,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10169,7 +10169,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10181,7 +10181,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10193,7 +10193,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10205,7 +10205,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10217,7 +10217,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10229,7 +10229,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10241,7 +10241,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10253,7 +10253,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10265,7 +10265,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10277,7 +10277,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10289,7 +10289,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10301,7 +10301,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10313,7 +10313,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10325,7 +10325,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10337,7 +10337,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10349,7 +10349,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10361,7 +10361,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10373,7 +10373,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10385,7 +10385,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10397,7 +10397,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10409,7 +10409,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10421,7 +10421,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10433,7 +10433,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10445,7 +10445,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10457,7 +10457,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10469,7 +10469,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10481,7 +10481,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10493,7 +10493,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10505,7 +10505,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10517,7 +10517,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10529,7 +10529,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10541,7 +10541,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10553,7 +10553,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10565,7 +10565,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10577,7 +10577,7 @@ const struct Item gItemsInfo[] =
     //     .price = 3000,
     //     .description = sQuestionMarksDesc, // Todo
     //     .importance = I_REUSABLE_TMS,
-    //     .pocket = POCKET_TM_CASE,
+    //     .pocket = POCKET_TM_HM,
     //     .type = ITEM_USE_PARTY_MENU,
     //     .fieldUseFunc = NULL,
     //     .secondaryId = MOVE_NONE, // Todo
@@ -10592,7 +10592,7 @@ const struct Item gItemsInfo[] =
             "with sharp blades\n"
             "or claws."),
         .importance = 1,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_CUT,
@@ -10607,7 +10607,7 @@ const struct Item gItemsInfo[] =
             "first turn, then "
             "\nattacks next turn."),
         .importance = 1,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_FLY,
@@ -10622,7 +10622,7 @@ const struct Item gItemsInfo[] =
             "wave, then crashes\n"
             "it down on the foe."),
         .importance = 1,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_SURF,
@@ -10637,7 +10637,7 @@ const struct Item gItemsInfo[] =
             "power, then slams\n"
             "the foe."),
         .importance = 1,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_STRENGTH,
@@ -10652,7 +10652,7 @@ const struct Item gItemsInfo[] =
             "blast of light\nthat "
             "reduces accuracy."),
         .importance = 1,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_FLASH,
@@ -10667,7 +10667,7 @@ const struct Item gItemsInfo[] =
             "tough attack\nthat "
             "may lower Defense."),
         .importance = 1,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_ROCK_SMASH,
@@ -10682,7 +10682,7 @@ const struct Item gItemsInfo[] =
             "with enough power\n"
             "to climb waterfalls."),
         .importance = 1,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_WATERFALL,
@@ -10697,7 +10697,7 @@ const struct Item gItemsInfo[] =
             "the 1st turn,\nthen "
             "attacks next turn."),
         .importance = 1,
-        .pocket = POCKET_TM_CASE,
+        .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = NULL,
         .secondaryId = MOVE_DIVE,

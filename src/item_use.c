@@ -93,7 +93,7 @@ static void SetUpItemUseCallback(u8 taskId)
         itemType = gTasks[taskId].data[4] - 1;
     else
         itemType = ItemId_GetType(gSpecialVar_ItemId) - 1;
-    if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
+    if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRIES)
     {
         BerryPouch_SetExitCallback(sExitCallbackByItemType[itemType]);
         BerryPouch_StartFadeToExitCallback(taskId);
@@ -154,7 +154,7 @@ static void Task_ItemUse_CloseMessageBoxAndReturnToField(u8 taskId)
 
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId)
 {
-    if (ItemId_GetPocket(itemId) == POCKET_TM_CASE)
+    if (ItemId_GetPocket(itemId) == POCKET_TM_HM)
         return 1;
     else if (ItemId_GetFieldFunc(itemId) == ItemUseOutOfBattle_EvolutionStone)
         return 2;
@@ -875,7 +875,7 @@ void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId)
 
 static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
 {
-    if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
+    if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRIES)
     {
         BerryPouch_SetExitCallback(EnterPartyFromItemMenuInBattle);
         BerryPouch_StartFadeToExitCallback(taskId);
@@ -1117,7 +1117,7 @@ void ItemUseOutOfBattle_Honey(u8 taskId)
 
 void ItemUseOutOfBattle_CannotUse(u8 taskId)
 {
-    if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
+    if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRIES)
     {
         StringExpandPlaceholders(gStringVar4, gText_OakForbidsUseOfItemHere);
         DisplayItemMessageInBerryPouch(taskId, FONT_MALE, gStringVar4, Task_BerryPouch_DestroyDialogueWindowAndRefreshListMenu);

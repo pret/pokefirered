@@ -1829,10 +1829,10 @@ static void BufferBagFullCantTakeItemMessage(u16 itemId)
     default:
         string = gText_MenuBag;
         break;
-    case POCKET_TM_CASE:
+    case POCKET_TM_HM:
         string = ItemId_GetName(ITEM_TM_CASE);
         break;
-    case POCKET_BERRY_POUCH:
+    case POCKET_BERRIES:
         string = ItemId_GetName(ITEM_BERRY_POUCH);
         break;
     }
@@ -4362,7 +4362,7 @@ void CB2_ShowPartyMenuForItemUse(void)
                 break;
             }
         }
-        if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
+        if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRIES)
             callback = CB2_ReturnToBerryPouchMenu;
         task = Task_SetSacredAshCB;
         msgId = PARTY_MSG_NONE;
@@ -4374,11 +4374,11 @@ void CB2_ShowPartyMenuForItemUse(void)
         default:
             msgId = PARTY_MSG_USE_ON_WHICH_MON;
             break;
-        case POCKET_TM_CASE:
+        case POCKET_TM_HM:
             msgId = PARTY_MSG_TEACH_WHICH_MON;
             callback = CB2_ReturnToTMCaseMenu;
             break;
-        case POCKET_BERRY_POUCH:
+        case POCKET_BERRIES:
             msgId = PARTY_MSG_USE_ON_WHICH_MON;
             callback = CB2_ReturnToBerryPouchMenu;
             break;
@@ -4424,7 +4424,7 @@ static void CB2_DoUseItemAnim(void)
 
 static void CB2_UseItem(void)
 {
-    if (ItemId_GetPocket(gSpecialVar_ItemId) == POCKET_TM_CASE && PSA_IsCancelDisabled() == TRUE)
+    if (ItemId_GetPocket(gSpecialVar_ItemId) == POCKET_TM_HM && PSA_IsCancelDisabled() == TRUE)
     {
         GiveMoveToMon(&gPlayerParty[gPartyMenu.slotId], ItemIdToBattleMoveId(gSpecialVar_ItemId));
         AdjustFriendship(&gPlayerParty[gPartyMenu.slotId], FRIENDSHIP_EVENT_LEARN_TMHM);
@@ -5306,7 +5306,7 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc func)
 
 u16 ItemIdToBattleMoveId(u16 item)
 {
-    return (ItemId_GetPocket(item) == POCKET_TM_CASE) ? gItemsInfo[item].secondaryId : MOVE_NONE;
+    return (ItemId_GetPocket(item) == POCKET_TM_HM) ? gItemsInfo[item].secondaryId : MOVE_NONE;
 }
 
 bool8 MonKnowsMove(struct Pokemon *mon, u16 move)
@@ -6167,10 +6167,10 @@ void CB2_ChooseMonToGiveItem(void)
     default:
         callback = CB2_ReturnToBagMenu;
         break;
-    case POCKET_TM_CASE:
+    case POCKET_TM_HM:
         callback = CB2_ReturnToTMCaseMenu;
         break;
-    case POCKET_BERRY_POUCH:
+    case POCKET_BERRIES:
         callback = CB2_ReturnToBerryPouchMenu;
         break;
     }
@@ -6615,7 +6615,7 @@ void EnterPartyFromItemMenuInBattle(void)
     {
         MainCallback callback;
 
-        if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)
+        if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRIES)
             callback = CB2_ReturnToBerryPouchMenu;
         else
             callback = CB2_BagMenuFromBattle;

@@ -198,8 +198,6 @@ static const struct SpriteTemplate sSpriteTemplate_ItemIcon = {
     .callback = SpriteCallbackDummy
 };
 
-#include "data/item_icon_table.h"
-
 void ResetItemMenuIconState(void)
 {
     u16 i;

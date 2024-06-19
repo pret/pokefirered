@@ -1378,3 +1378,10 @@ const u8 gText_NextFusionMon[] = _("Choose {PKMN} to fuse with.");
 
 const u8 gText_ExpShareOn[] = _("The Exp. Share has been turned on.{PAUSE_UNTIL_PRESS}");
 const u8 gText_ExpShareOff[] = _("The Exp. Share has been turned off.{PAUSE_UNTIL_PRESS}");
+
+// stats
+const u8 gText_Attack[] = _("ATTACK");
+const u8 gText_Defense[] = _("DEFENSE");
+const u8 gText_Speed[] = _("SPEED");
+const u8 gText_SpAtk[] = _("SP. ATK");
+const u8 gText_SpDef[] = _("SP. DEF");

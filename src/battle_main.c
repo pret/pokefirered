@@ -3470,6 +3470,10 @@ static void HandleTurnActionSelectionState(void)
                     BtlController_EmitEndBounceEffect(battler, BUFFER_A);
                     MarkBattlerForControllerExec(battler);
                     return;
+                case B_ACTION_DEBUG:
+                    BtlController_EmitDebugMenu(battler, BUFFER_A);
+                    MarkBattlerForControllerExec(battler);
+                    break;
                 }
 
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
@@ -3611,6 +3615,9 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_OLDMAN_THROW:
                     gBattleCommunication[battler]++;
+                    break;
+                case B_ACTION_DEBUG:
+                    gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
                     break;
                 }
             }

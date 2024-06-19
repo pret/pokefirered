@@ -30,7 +30,7 @@
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
-// #include "battle_debug.h"
+#include "battle_debug.h"
 #include "data.h"
 #include "pokemon_summary_screen.h"
 #include "constants/songs.h"

@@ -106,6 +106,7 @@ static void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler
     [CONTROLLER_LINKSTANDBYMSG]           = OakOldManHandleLinkStandbyMsg,              // done
     [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,                        // done
     [CONTROLLER_ENDLINKBATTLE]            = OakOldManHandleEndLinkBattle,               // done
+    [CONTROLLER_DEBUGMENU]                = BtlController_Empty,
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop,                // done
 };
 

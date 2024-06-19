@@ -1604,4 +1604,11 @@ extern const u8 gText_NextFusionMon[];
 extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
 
+// stats
+extern const u8 gText_Attack[];
+extern const u8 gText_Defense[];
+extern const u8 gText_SpAtk[];
+extern const u8 gText_SpDef[];
+extern const u8 gText_Speed[];
+
 #endif //GUARD_STRINGS_H

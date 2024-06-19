@@ -140,7 +140,7 @@ static const struct WindowTemplate sTimeWindowTemplate = {
     .width = 10,
     .height = 4,
     .paletteNum = 15,
-    .baseBlock = 0x198
+    .baseBlock = 0x1A8
 };
 
 static const struct WindowTemplate sTimeSafariWindowTemplate = {
@@ -234,6 +234,9 @@ static void AppendToStartMenuItems(u8 newEntry)
 
 static void SetUpStartMenu_NormalField(void)
 {
+#if DEBUG_OVERWORLD_MENU == TRUE
+    AppendToStartMenuItems(STARTMENU_DEBUG);
+#endif
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AppendToStartMenuItems(STARTMENU_POKEDEX);
     if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
@@ -242,11 +245,7 @@ static void SetUpStartMenu_NormalField(void)
     AppendToStartMenuItems(STARTMENU_PLAYER);
     AppendToStartMenuItems(STARTMENU_SAVE);
     AppendToStartMenuItems(STARTMENU_OPTION);
-#if DEBUG_OVERWORLD_MENU == TRUE
-    AppendToStartMenuItems(STARTMENU_DEBUG);
-#else
     AppendToStartMenuItems(STARTMENU_EXIT);
-#endif
 }
 
 static void SetUpStartMenu_SafariZone(void)

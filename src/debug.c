@@ -4374,50 +4374,35 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
 #undef tInput
 #undef tDigit
 
-// #define SOUND_LIST_BGM
-//         X(MUS_CAUGHT) 
+#define SOUND_LIST_BGM \
+        X(MUS_CAUGHT)  \
 
-// #define SOUND_LIST_SE 
-//         X(SE_USE_ITEM)
+#define SOUND_LIST_SE  \
+        X(SE_USE_ITEM) \
 
-// // Create BGM list
-// #define X(songId) static const u8 sBGMName_##songId[] = _(#songId);
-// SOUND_LIST_BGM
-// #undef X
+// Create BGM list
+#define X(songId) static const u8 sBGMName_##songId[] = _(#songId);
+SOUND_LIST_BGM
+#undef X
 
-// #define X(songId) sBGMName_##songId,
-// static const u8 *const sBGMNames[] =
-// {
-// SOUND_LIST_BGM
-// };
-// #undef X
-
-// // Create SE list
-// #define X(songId) static const u8 sSEName_##songId[] = _(#songId);
-// SOUND_LIST_SE
-// #undef X
-
-// #define X(songId) sSEName_##songId,
-// static const u8 *const sSENames[] =
-// {
-// SOUND_LIST_SE
-// };
-// #undef X
-
-
-static const u8 sBGMName_MUS_Caught[] = _("Caught");
-
+#define X(songId) sBGMName_##songId,
 static const u8 *const sBGMNames[] =
 {
-sBGMName_MUS_Caught,
+SOUND_LIST_BGM
 };
+#undef X
 
-static const u8 sSEName_SE_UseItem[] = _("UseItem");
+// Create SE list
+#define X(songId) static const u8 sSEName_##songId[] = _(#songId);
+SOUND_LIST_SE
+#undef X
 
+#define X(songId) sSEName_##songId,
 static const u8 *const sSENames[] =
 {
-sSEName_SE_UseItem,
+SOUND_LIST_SE
 };
+#undef X
 
 // *******************************
 // Actions Party/Boxes

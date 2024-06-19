@@ -247,6 +247,14 @@ void RedrawListMenu(u8 listTaskId)
     CopyWindowToVram(list->template.windowId, COPYWIN_GFX);
 }
 
+void ListMenuGetCurrentItemArrayId(u8 listTaskId, u16 *arrayId)
+{
+    struct ListMenu *list = (void *) gTasks[listTaskId].data;
+
+    if (arrayId != NULL)
+        *arrayId = list->cursorPos + list->itemsAbove;
+}
+
 void ListMenuGetScrollAndRow(u8 listTaskId, u16 *cursorPos, u16 *itemsAbove)
 {
     struct ListMenu *list = (struct ListMenu *)gTasks[listTaskId].data;

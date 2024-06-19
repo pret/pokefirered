@@ -1679,6 +1679,38 @@
 	.2byte \quantity
 	.endm
 
+	.macro _dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req argv:vararg
+	.byte 0xe3
+	.2byte \left
+	.2byte \top
+	.byte \ignoreBPress
+	.byte \maxBeforeScroll
+	.byte \shouldSort
+	.2byte \initialSelected
+	.byte \callbacks
+	.byte (.Ldynmultichoice_\@_2 - .Ldynmultichoice_\@_1) / 4
+.Ldynmultichoice_\@_1:
+	.4byte \argv
+.Ldynmultichoice_\@_2:
+	.endm
+
+	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made.
+	@ Lists of options are provided in argv.
+	@ If ignoreBPress is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	.macro dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, initialSelected:req, callbacks:req argv:vararg
+	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, FALSE, \initialSelected, \callbacks, \argv
+	.endm
+
+	.macro dynmultipush name:req, id:req
+	.byte 0xe4
+	.4byte \name
+	.2byte \id
+	.endm
+
+	.macro dynmultistack left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req
+	_dynmultichoice \left, \top, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
+	.endm
+
 
 @ Supplementary
 
@@ -1931,6 +1963,58 @@
 	@ Sets VAR_RESULT to TRUE if it succeeds, and FALSE otherwise.
 	.macro togglegigantamaxfactor slot:req
 	callnative ToggleGigantamaxFactor
+	.2byte \slot
+	.endm
+
+	@ Sets VAR_RESULT to one of the arguments (via setorcopyvar).
+	.macro randomelement element:req, elements:vararg
+	.set _randomelement_n, 0
+	.irp el, \element, \elements
+	.set _randomelement_n, _randomelement_n + 1
+	.endr
+		random _randomelement_n
+
+	.set _randomelement_n, 0
+	.irp el, \element, \elements
+		goto_if_ne VAR_RESULT, _randomelement_n, 1f
+		setorcopyvar VAR_RESULT, \el
+		goto 2f
+	1:
+	.set _randomelement_n, _randomelement_n + 1
+	.endr
+	2:
+	.endm
+
+	@ Sets VAR_RESULT to TRUE with probability 'percent', and FALSE
+	@ with probability '100% - percent'.
+	.macro randompercentage percent:req
+		random 100
+		goto_if_lt VAR_RESULT, \percent, 1f
+		setvar VAR_RESULT, FALSE
+		goto 2f
+	1:
+		setvar VAR_RESULT, TRUE
+	2:
+	.endm
+
+	@ Inflicts \status1 to the Pokémon in \slot.
+	@ If \slot is greater or equal than PARTY_SIZE, the status is inflicted on each of the Player's Pokémon.
+	.macro setstatus1 status1:req, slot:req
+	callnative Script_SetStatus1
+	.2byte \status1
+	.2byte \slot
+	.endm
+
+	@ Sets VAR_RESULT to the Pokémon in \slot's Tera Type
+	.macro checkteratype slot:req
+	callnative CheckTeraType
+	.2byte \slot
+	.endm
+
+	@ Sets the Pokémon in \slot's Tera Type
+	.macro setteratype type:req, slot:req
+	callnative SetTeraType
+	.byte \type
 	.2byte \slot
 	.endm
 

@@ -43,6 +43,10 @@ static void Task_DestroyTrainerApproachTask(u8 taskId);
 static void SpriteCB_TrainerIcons(struct Sprite *sprite);
 static void SetIconSpriteData(struct Sprite *sprite, u16 fldEffId, u8 spriteAnimNum);
 
+// IWRAM common
+u16 gWhichTrainerToFaceAfterBattle;
+u8 gNoOfApproachingTrainers;
+
 static const u16 sGfx_Emoticons[] = INCBIN_U16("graphics/misc/emoticons.4bpp");
 
 // u8 func(struct ObjectEvent * trainerObj, s16 range, s16 x, s16 y)

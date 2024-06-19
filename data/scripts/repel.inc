@@ -108,7 +108,7 @@ EventScript_ChooseWhichSpray::
 	waitmessage
 	callnative DrawSprayMenu
 	waitstate
-	compare VAR_RESULT, 127 @ TODO: MULTI_B_PRESSED
+	compare VAR_RESULT, SCR_MENU_CANCEL
 	goto_if_ne EventScript_ChooseWhichSpray_3
 EventScript_ChooseWhichSpray_1:
 	closemessage

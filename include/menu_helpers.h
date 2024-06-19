@@ -14,6 +14,7 @@ struct YesNoFuncTable
     TaskFunc noFunc;
 };
 
+void ResetAllBgsCoordinates(void);
 bool16 RunTextPrinters_CheckActive(u8 textPrinterId);
 bool8 IsActiveOverworldLinkBusy(void);
 bool8 MenuHelpers_ShouldWaitForLinkRecv(void);

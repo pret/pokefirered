@@ -59,6 +59,7 @@ static void PlayerHandleBattleAnimation(u32 battler);
 static void PlayerHandleLinkStandbyMsg(u32 battler);
 static void PlayerHandleResetActionMoveSelection(u32 battler);
 static void PlayerHandleEndLinkBattle(u32 battler);
+static void PlayerHandleBattleDebug(u32 battler);
 
 static void PlayerBufferRunCommand(u32 battler);
 static void HandleInputChooseTarget(u32 battler);
@@ -138,6 +139,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
     [CONTROLLER_LINKSTANDBYMSG]           = PlayerHandleLinkStandbyMsg,                 // done
     [CONTROLLER_RESETACTIONMOVESELECTION] = PlayerHandleResetActionMoveSelection,       // done
     [CONTROLLER_ENDLINKBATTLE]            = PlayerHandleEndLinkBattle,                  // done
+    [CONTROLLER_DEBUGMENU]                = PlayerHandleBattleDebug,
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop,                // done
 };
 
@@ -270,6 +272,13 @@ static void HandleInputChooseAction(u32 battler)
     {
         SwapHpBarsWithHpText();
     }
+#if DEBUG_BATTLE_MENU == TRUE
+    else if (JOY_NEW(SELECT_BUTTON))
+    {
+        BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_DEBUG, 0);
+        PlayerBufferExecCompleted(battler);
+    }
+#endif
 }
 
 static void HandleInputChooseTarget(u32 battler)
@@ -2065,4 +2074,19 @@ static void PlayerHandleEndLinkBattle(u32 battler)
     BeginFastPaletteFade(3);
     PlayerBufferExecCompleted(battler);
     gBattlerControllerFuncs[battler] = SetBattleEndCallbacks;
+}
+
+static void Controller_WaitForDebug(u32 battler)
+{
+    if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
+    {
+        PlayerBufferExecCompleted(battler);
+    }
+}
+
+static void PlayerHandleBattleDebug(u32 battler)
+{
+    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+    SetMainCallback2(CB2_BattleDebugMenu);
+    gBattlerControllerFuncs[battler] = Controller_WaitForDebug;
 }

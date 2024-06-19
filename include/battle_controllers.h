@@ -198,6 +198,7 @@ enum
     CONTROLLER_LINKSTANDBYMSG,
     CONTROLLER_RESETACTIONMOVESELECTION,
     CONTROLLER_ENDLINKBATTLE,
+    CONTROLLER_DEBUGMENU,
     /*new controllers should go here*/
     CONTROLLER_TERMINATOR_NOP,
     CONTROLLER_CMDS_COUNT
@@ -258,6 +259,7 @@ void BtlController_EmitBattleAnimation(u32 battler, u32 bufferId, u8 animationId
 void BtlController_EmitLinkStandbyMsg(u32 battler, u32 bufferId, u8 mode, bool32 record);
 void BtlController_EmitResetActionMoveSelection(u32 battler, u32 bufferId, u8 caseId);
 void BtlController_EmitEndLinkBattle(u32 battler, u32 bufferId, u8 battleOutcome);
+void BtlController_EmitDebugMenu(u32 battler, u32 bufferId);
 
 void BattleControllerComplete(u32 battler); // Can be used for all the controllers.
 void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.

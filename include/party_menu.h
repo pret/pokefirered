@@ -27,6 +27,7 @@ extern u8 gSelectedOrderFromParty[3];
 extern u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2];
 
 extern void (*gItemUseCB)(u8, TaskFunc);
+extern const struct SpriteTemplate gSpriteTemplate_StatusIcons;
 
 void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCursorPos, u8 messageId, TaskFunc task, MainCallback callback);
 void AnimatePartySlot(u8 slot, u8 animNum);
@@ -43,6 +44,7 @@ u8 GetMonAilment(struct Pokemon *mon);
 void DisplayPartyMenuStdMessage(u32 stringId);
 void LoadHeldItemIcons(void);
 void DrawHeldItemIconsForTrade(u8 *partyCounts, u8 *partySpriteIds, u8 whichParty);
+void LoadPartyMenuAilmentGfx(void);
 void SpriteCB_BounceConfirmCancelButton(u8 spriteId, u8 spriteId2, u8 animNum);
 void CB2_SelectBagItemToGive(void);
 void CB2_GiveHoldItem(void);

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gflib.h"
+#include "debug.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"

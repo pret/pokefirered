@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "battle_anim.h"
+#include "battle_debug.h"
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "battle_z_move.h"

@@ -659,6 +659,7 @@ extern const u8 gStartMenuDesc_Option[];
 extern const u8 gStartMenuDesc_Exit[];
 extern const u8 gStartMenuDesc_Retire[];
 extern const u8 gStartMenuDesc_Player[];
+extern const u8 gStartMenuDesc_Debug[];
 extern const u8 gText_SaveError_PleaseExchangeBackupMemory[];
 extern const u8 gText_SavingDontTurnOffThePower2[];
 extern const u8 gSaveStatName_Player[];
@@ -1602,5 +1603,12 @@ extern const u8 gText_NextFusionMon[];
 // Exp. Share
 extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
+
+// stats
+extern const u8 gText_Attack[];
+extern const u8 gText_Defense[];
+extern const u8 gText_SpAtk[];
+extern const u8 gText_SpDef[];
+extern const u8 gText_Speed[];
 
 #endif //GUARD_STRINGS_H

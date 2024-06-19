@@ -17,15 +17,6 @@
 
 #define TAG_VS_LETTERS 10000
 
-struct BattleBackground
-{
-    const void *tileset;
-    const void *tilemap;
-    const void *entryTileset;
-    const void *entryTilemap;
-    const void *palette;
-};
-
 static u8 GetBattleTerrainOverride(void);
 
 static const struct OamData sVsLetter_V_OamData = {
@@ -434,7 +425,8 @@ static const u32 sBattleTerrainPalette_Plain[] = INCBIN_U32("graphics/battle_ter
 static const u32 sBattleTerrainTiles_Indoor[] = INCBIN_U32("graphics/battle_terrain/indoor/terrain.4bpp.lz");
 static const u32 sBattleTerrainTilemap_Indoor[] = INCBIN_U32("graphics/battle_terrain/indoor/terrain.bin.lz");
 
-static const struct BattleBackground sBattleTerrainTable[] = {
+const struct BattleBackground sBattleTerrainTable[] =
+{
     [BATTLE_TERRAIN_GRASS] =
     {
         .tileset = sBattleTerrainTiles_Grass,

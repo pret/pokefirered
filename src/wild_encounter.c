@@ -1,5 +1,6 @@
 #include "global.h"
 #include "random.h"
+#include "battle_debug.h"
 #include "wild_encounter.h"
 #include "event_data.h"
 #include "fieldmap.h"

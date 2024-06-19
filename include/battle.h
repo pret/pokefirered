@@ -12,7 +12,7 @@
 #include "battle_util2.h"
 #include "battle_bg.h"
 #include "pokeball.h"
-// #include "battle_debug.h"
+#include "battle_debug.h"
 #include "battle_dynamax.h"
 #include "battle_terastal.h"
 #include "random.h" // for rng_value_t
@@ -70,6 +70,7 @@
 #define B_ACTION_FINISHED                  12
 #define B_ACTION_CANCEL_PARTNER            12 // when choosing an action
 #define B_ACTION_NOTHING_FAINTED           13 // when choosing an action
+#define B_ACTION_DEBUG                     20
 #define B_ACTION_NONE                      0xFF
 
 

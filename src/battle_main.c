@@ -5,6 +5,7 @@
 #include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
+#include "debug.h"
 #include "battle_interface.h"
 #include "battle_main.h"
 #include "battle_message.h"
@@ -3469,6 +3470,10 @@ static void HandleTurnActionSelectionState(void)
                     BtlController_EmitEndBounceEffect(battler, BUFFER_A);
                     MarkBattlerForControllerExec(battler);
                     return;
+                case B_ACTION_DEBUG:
+                    BtlController_EmitDebugMenu(battler, BUFFER_A);
+                    MarkBattlerForControllerExec(battler);
+                    break;
                 }
 
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
@@ -3610,6 +3615,9 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_OLDMAN_THROW:
                     gBattleCommunication[battler]++;
+                    break;
+                case B_ACTION_DEBUG:
+                    gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
                     break;
                 }
             }

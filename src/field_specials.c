@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "quest_log.h"
 #include "list_menu.h"
+#include "debug.h"
 #include "diploma.h"
 #include "script.h"
 #include "field_player_avatar.h"

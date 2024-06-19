@@ -10,7 +10,7 @@
 #include "battle_z_move.h"
 #include "battle_terastal.h"
 #include "data.h"
-// #include "debug.h"
+#include "debug.h"
 #include "event_data.h"
 #include "item.h"
 #include "pokemon.h"

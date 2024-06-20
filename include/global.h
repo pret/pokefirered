@@ -1,10 +1,10 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
-#include "config.h"
-#include "gba/gba.h"
 #include <string.h>
 #include <limits.h>
+#include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
+#include "gba/gba.h"
 #include "fpmath.h"
 #include "metaprogram.h"
 #include "constants/global.h"
@@ -12,8 +12,11 @@
 #include "constants/vars.h"
 #include "constants/species.h"
 #include "constants/pokedex.h"
-#include "constants/easy_chat.h"
+#include "constants/maps.h"
+#include "constants/pokemon.h"
 #include "constants/rgb.h"
+#include "constants/easy_chat.h"
+#include "constants/items.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");

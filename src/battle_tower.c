@@ -1135,7 +1135,7 @@ static void PopulateBravoTrainerBattleTowerLostData(void)
     gSaveBlock2Ptr->battleTower.defeatedBySpecies = gBattleMons[1].species;
     gSaveBlock2Ptr->battleTower.firstMonSpecies = gBattleMons[0].species;
 
-    for (i = 0; i < POKEMON_NAME_LENGTH; i++)
+    for (i = 0; i < VANILLA_POKEMON_NAME_LENGTH; i++)
         gSaveBlock2Ptr->battleTower.firstMonNickname[i] = gBattleMons[0].nickname[i];
 }
 

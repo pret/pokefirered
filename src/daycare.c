@@ -376,10 +376,17 @@ static const s16 sEggShardVelocities[][2] =
 
 static u8 *DayCare_GetMonNickname(struct Pokemon *mon, u8 *dest)
 {
-    u8 nickname[POKEMON_NAME_LENGTH * 2];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
 
     GetMonData(mon, MON_DATA_NICKNAME, nickname);
     return StringCopy_Nickname(dest, nickname);
+}
+
+u8 *GetMonNicknameVanilla(struct Pokemon *mon, u8 *dest)
+{
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
+    GetMonData(mon, MON_DATA_NICKNAME, nickname);
+    return StringCopyN(dest, nickname, VANILLA_POKEMON_NAME_LENGTH);
 }
 
 static u8 *DayCare_GetBoxMonNickname(struct BoxPokemon *mon, u8 *dest)
@@ -517,7 +524,7 @@ static void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycar
         u8 mailId;
 
         StringCopy(daycareMon->mail.OT_name, gSaveBlock2Ptr->playerName);
-        DayCare_GetMonNickname(mon, daycareMon->mail.monName);
+        GetMonNicknameVanilla(mon, daycareMon->mail.monName);
         StripExtCtrlCodes(daycareMon->mail.monName);
         daycareMon->mail.gameLanguage = GAME_LANGUAGE;
         daycareMon->mail.monLanguage = GetMonData(mon, MON_DATA_LANGUAGE);
@@ -707,7 +714,7 @@ static void ClearDaycareMonMail(struct DayCareMail *mail)
 
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
         mail->OT_name[i] = 0;
-    for (i = 0; i < POKEMON_NAME_LENGTH + 1; i++)
+    for (i = 0; i < VANILLA_POKEMON_NAME_LENGTH + 1; i++)
         mail->monName[i] = 0;
 
     ClearMailStruct(&mail->message);
@@ -1907,7 +1914,7 @@ static void AddHatchedMonToParty(u8 id)
     GetSetPokedexFlag(natDexNum, FLAG_SET_SEEN);
     GetSetPokedexFlag(natDexNum, FLAG_SET_CAUGHT);
 
-    DayCare_GetMonNickname(mon, gStringVar1);
+    GetMonNickname(mon, gStringVar1);
 
     // A met level of 0 is interpreted on the summary screen as "hatched at"
     metLevel = 0;

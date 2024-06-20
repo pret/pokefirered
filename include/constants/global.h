@@ -65,7 +65,8 @@
 // string lengths
 #define ITEM_NAME_LENGTH ((I_EXPANDED_ITEM_NAMES == TRUE) ? 20 : 14)
 #define ITEM_NAME_PLURAL_LENGTH ITEM_NAME_LENGTH + 2 // 2 is used for the instance where a word's suffix becomes y->ies
-#define POKEMON_NAME_LENGTH 10
+#define POKEMON_NAME_LENGTH 12
+#define VANILLA_POKEMON_NAME_LENGTH 10
 #define POKEMON_NAME_BUFFER_SIZE max(20, POKEMON_NAME_LENGTH + 1) // Frequently used buffer size. Larger than necessary
 #define PLAYER_NAME_LENGTH   7
 #define MAIL_WORDS_COUNT 9
@@ -76,7 +77,7 @@
 #define WONDER_NEWS_TEXT_LENGTH 40
 #define WONDER_CARD_BODY_TEXT_LINES 4
 #define WONDER_NEWS_BODY_TEXT_LINES 10
-#define TYPE_NAME_LENGTH 6
+#define TYPE_NAME_LENGTH ((B_EXPANDED_TYPE_NAMES == TRUE) ? 8 : 6)
 #define ABILITY_NAME_LENGTH ((B_EXPANDED_ABILITY_NAMES == TRUE) ? 16 : 12)
 #define TRAINER_NAME_LENGTH 10
 

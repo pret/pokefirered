@@ -82,8 +82,8 @@ gBattleAnims_General::
 	.4byte General_MonHit     		        @ TODO: B_ANIM_MAGIC_ROOM
 	.4byte General_MonHit	                @ TODO: B_ANIM_TAILWIND
 	.4byte General_MonHit					@ TODO: B_ANIM_FOG_CONTINUES
-	.4byte General_TeraCharge				@ TODO: B_ANIM_TERA_CHARGE
-	.4byte General_TeraActivate 			@ TODO: B_ANIM_TERA_ACTIVATE
+	.4byte General_TeraCharge				@ B_ANIM_TERA_CHARGE
+	.4byte General_TeraActivate 			@ B_ANIM_TERA_ACTIVATE
 	.4byte General_MonScared                @ B_ANIM_MON_SCARED
 	.4byte General_GhostGetOut              @ B_ANIM_GHOST_GET_OUT
 	.4byte General_SilphScoped              @ B_ANIM_SILPH_SCOPED

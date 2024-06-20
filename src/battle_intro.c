@@ -64,7 +64,7 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
 
 s32 GetAnimBgAttribute(u8 bgId, u8 attributeId)
 {
-    u16 bgCnt;
+    u32 bgCnt;
 
     if (bgId < 4)
     {

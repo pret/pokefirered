@@ -2,7 +2,7 @@
 #include "blend_palette.h"
 #include "palette.h"
 
-void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor)
+void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
 {
     u16 i;
     for (i = 0; i < numEntries; i++)

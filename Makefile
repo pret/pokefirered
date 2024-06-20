@@ -147,7 +147,7 @@ override CFLAGS += -fanalyzer
 endif
 # Only throw an error for unused elements if its RH-Hideout's repo
 ifeq ($(UNUSED_ERROR),0)
-ifneq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
+ifneq ($(GITHUB_REPOSITORY_OWNER),cawtds)
 override CFLAGS += -Wno-error=unused-variable -Wno-error=unused-const-variable -Wno-error=unused-parameter -Wno-error=unused-function -Wno-error=unused-but-set-parameter -Wno-error=unused-but-set-variable -Wno-error=unused-value -Wno-error=unused-local-typedefs
 endif
 endif

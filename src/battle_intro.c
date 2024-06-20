@@ -7,8 +7,6 @@
 #include "task.h"
 #include "trig.h"
 
-static EWRAM_DATA u32 sBgCnt = 0;
-
 extern const u8 gBattleAnimRegOffsBgCnt[];
 extern const u8 gBattleIntroRegOffsBgCnt[];
 
@@ -35,7 +33,7 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
 {
     if (bgId < 4)
     {
-        sBgCnt = GetGpuReg(gBattleAnimRegOffsBgCnt[bgId]);
+        u32 sBgCnt = GetGpuReg(gBattleAnimRegOffsBgCnt[bgId]);
         switch (attributeId)
         {
         case BG_ANIM_SCREEN_SIZE:

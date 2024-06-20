@@ -7,7 +7,7 @@
 #include "task.h"
 #include "trig.h"
 
-static EWRAM_DATA u16 sBgCnt = 0;
+static EWRAM_DATA u32 sBgCnt = 0;
 
 extern const u8 gBattleAnimRegOffsBgCnt[];
 extern const u8 gBattleIntroRegOffsBgCnt[];

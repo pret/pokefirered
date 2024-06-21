@@ -184,7 +184,7 @@ struct PokemonSummaryScreenData
         u8 ALIGNED(4) expPointsStrBuf[9];
         u8 ALIGNED(4) expToNextLevelStrBuf[9];
 
-        u8 ALIGNED(4) abilityNameStrBuf[ABILITY_NAME_LENGTH];
+        u8 ALIGNED(4) abilityNameStrBuf[ABILITY_NAME_LENGTH + 1];
         u8 ALIGNED(4) abilityDescStrBuf[52];
     } summary;
 
@@ -2715,7 +2715,7 @@ static void PokeSum_PrintMoveName(u8 i)
     if (i == 4)
         curPP = maxPP;
 
-    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], FONT_NORMAL, 3, GetMoveNamePrinterYpos(i), sPrintMoveTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.moveNameStrBufs[i]);
+    AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], FONT_NORMAL, 0, GetMoveNamePrinterYpos(i), sPrintMoveTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.moveNameStrBufs[i]);
 
     if (sMonSummaryScreen->moveIds[i] == 0 || (curPP == maxPP))
       colorIdx = 0;
@@ -3017,12 +3017,12 @@ static void PokeSum_PrintTrainerMemo_Egg(void)
 static void PokeSum_PrintExpPoints_NextLv(void)
 {
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], FONT_NORMAL,
-                                 26, 7,
+                                 9, 7,
                                  sLevelNickTextColors[0], TEXT_SKIP_DRAW,
                                  gText_PokeSum_ExpPoints);
 
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], FONT_NORMAL,
-                                 26, 20,
+                                 9, 20,
                                  sLevelNickTextColors[0], TEXT_SKIP_DRAW,
                                  gText_PokeSum_NextLv);
 }
@@ -3075,7 +3075,7 @@ static void PokeSum_PrintAbilityNameAndDesc(void)
     FillWindowPixelBuffer(sMonSummaryScreen->windowIds[5], 0);
 
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[5], FONT_NORMAL,
-                                 66, 1, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.abilityNameStrBuf);
+                                 49, 1, sLevelNickTextColors[0], TEXT_SKIP_DRAW, sMonSummaryScreen->summary.abilityNameStrBuf);
 
     AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[5], FONT_NORMAL,
                                  2, 15, sLevelNickTextColors[0], TEXT_SKIP_DRAW,

@@ -1,3 +1,4 @@
+#include "config/battle.h"
 #include "constants/battle.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_string_ids.h"

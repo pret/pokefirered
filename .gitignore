@@ -62,3 +62,4 @@ prefabs.json
 *.js
 *.sym
 src/data/map_group_count.h
+!/tools/mgba/mgba-rom-test.exe

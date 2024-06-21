@@ -774,7 +774,7 @@ static void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
     shadowSprite->x2 = battlerSprite->x2;
 }
 
-static void SpriteCB_Follower(struct Sprite *sprite)
+static void UNUSED SpriteCB_Follower(struct Sprite *sprite)
 {
     if (sprite->animDelayCounter == 0)
     {

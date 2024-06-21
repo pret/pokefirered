@@ -33,14 +33,12 @@ jobs:
         env:
           GAME_VERSION: FIRERED
           MODERN: 1
-          COMPARE: 0
         run: make -j${nproc} -O all
 
       - name: Leafgreen
         env:
           GAME_VERSION: LEAFGREEN
           MODERN: 1
-          COMPARE: 0
         run: make -j${nproc} -O all
 
       - name: Test

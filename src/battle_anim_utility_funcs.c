@@ -291,7 +291,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     u16 species;
     s32 newSpriteId;
     u16 var0;
-    u16 bg1Cnt;
+    u32 bg1Cnt;
     u8 spriteId;
     struct BattleAnimBgData animBgData;
 
@@ -351,7 +351,7 @@ static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
 {
     struct BattleAnimBgData animBgData;
     struct Sprite *sprite;
-    u16 bg1Cnt;
+    u32 bg1Cnt;
 
     gTasks[taskId].data[10] += 4;
     gBattle_BG1_Y -= 4;
@@ -731,7 +731,7 @@ void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 scrollSpeed, u8 battler1
 {
     u16 species;
     u8 spriteId, newSpriteId = 0;
-    u16 bg1Cnt;
+    u32 bg1Cnt;
     struct BattleAnimBgData animBgData;
     u8 battler2 = BATTLE_PARTNER(battler1);
 
@@ -819,7 +819,7 @@ static void UpdateMonScrollingBgMask(u8 taskId)
                                            | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
                 if (!IsContest())
                 {
-                    u16 bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
+                    u32 bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
                     ((vBgCnt *)&bg1Cnt)->charBaseBlock = 0;
                     SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
                 }

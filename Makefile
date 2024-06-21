@@ -42,7 +42,7 @@ MAKER_CODE   := 01
 MODERN       ?= 1
 TEST         ?= 0
 ANALYZE      ?= 0
-UNUSED_ERROR ?= 0
+UNUSED_ERROR ?= 1
 
 # game version
 ifeq ($(GAME_VERSION),FIRERED)
@@ -526,7 +526,7 @@ $(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tool
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) -d0 --silent
 	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS)\0"
 
-ifeq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
+ifeq ($(GITHUB_REPOSITORY_OWNER),cawtds)
 TEST_SKIP_IS_FAIL := \x01
 else
 TEST_SKIP_IS_FAIL := \x00

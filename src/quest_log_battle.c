@@ -93,7 +93,7 @@ void TrySetQuestLogBattleEvent(void)
 
 void TrySetQuestLogLinkBattleEvent(void)
 {
-    s32 partnerIdx;
+    s32 partnerIdx = 0;
     s32 opponentIdxs[2];
     u16 eventId;
     s32 i;

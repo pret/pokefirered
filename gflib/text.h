@@ -20,6 +20,11 @@ enum {
     FONT_FEMALE,
     FONT_BRAILLE,
     FONT_BOLD,
+    FONT_NARROW,
+    FONT_SMALL_NARROW, // Very similar to FONT_SMALL, some glyphs are narrower
+    FONT_NARROWER,
+    FONT_SMALL_NARROWER,
+    FONT_SHORT_NARROW,
 };
 
 // Return values for font functions
@@ -125,7 +130,7 @@ extern const struct FontInfo *gFonts;
 struct GlyphWidthFunc
 {
     u32 fontId;
-    s32 (*func)(u16 glyphId, bool32 isJapanese);
+    u32 (*func)(u16 glyphId, bool32 isJapanese);
 };
 
 typedef struct {
@@ -166,6 +171,11 @@ u16 FontFunc_NormalCopy2(struct TextPrinter *textPrinter);
 u16 FontFunc_Male(struct TextPrinter *textPrinter);
 u16 FontFunc_Female(struct TextPrinter *textPrinter);
 u16 FontFunc_Braille(struct TextPrinter *textPrinter);
+u16 FontFunc_Narrow(struct TextPrinter *textPrinter);
+u16 FontFunc_SmallNarrow(struct TextPrinter *textPrinter);
+u16 FontFunc_Narrower(struct TextPrinter *textPrinter);
+u16 FontFunc_SmallNarrower(struct TextPrinter *textPrinter);
+u16 FontFunc_ShortNarrow(struct TextPrinter *textPrinter);
 
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter);
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter);
@@ -175,7 +185,7 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
 bool16 TextPrinterWait(struct TextPrinter *textPrinter);
 void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex);
 u16 RenderText(struct TextPrinter *textPrinter);
-s32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32);
+u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32);
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing);
 u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str);
 u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y);
@@ -187,10 +197,11 @@ u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension);
 void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese);
 void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese);
 void DecompressGlyph_Female(u16 glyphId, bool32 isJapanese);
-s32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese);
+u32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese);
 u8 CreateTextCursorSprite(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);
 void DestroyTextCursorSprite(u8 spriteId);
 
+u32 GetFontIdToFit(const u8 *string, u32 widestFontId, u32 letterSpacing, u32 widthPx);
 u8 *PrependFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width);
 
 #endif // GUARD_TEXT_H

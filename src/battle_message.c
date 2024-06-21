@@ -3829,6 +3829,15 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     printerTemplate.fgColor = sTextOnWindowsInfo_Normal[windowId].fgColor;
     printerTemplate.bgColor = sTextOnWindowsInfo_Normal[windowId].bgColor;
     printerTemplate.shadowColor = sTextOnWindowsInfo_Normal[windowId].shadowColor;
+
+    if (B_WIN_MOVE_NAME_1 <= windowId && windowId <= B_WIN_MOVE_NAME_4)
+    {
+        // We cannot check the actual width of the window because
+        // B_WIN_MOVE_NAME_1 and B_WIN_MOVE_NAME_3 are 16 wide for
+        // Z-move details.
+        printerTemplate.fontId = GetFontIdToFit(text, printerTemplate.fontId, printerTemplate.letterSpacing, 8 * TILE_WIDTH);
+    }
+
     if (windowId == B_WIN_OAK_OLD_MAN)
         gTextFlags.useAlternateDownArrow = FALSE;
     else

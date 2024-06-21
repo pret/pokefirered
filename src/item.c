@@ -19,6 +19,8 @@
 EWRAM_DATA struct BagPocket gBagPockets[NUM_BAG_POCKETS] = {};
 
 void SortAndCompactBagPocket(struct BagPocket * pocket);
+static const u8 *ItemId_GetPluralName(u16);
+static bool32 DoesItemHavePluralName(u16);
 
 // Item descriptions and data
 #include "constants/moves.h"
@@ -81,6 +83,25 @@ void SetBagPocketsPointers(void)
 void CopyItemName(u16 itemId, u8 * dest)
 {
     StringCopy(dest, ItemId_GetName(itemId));
+}
+
+const u8 sText_s[] =_("s");
+
+u8 *CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
+{
+    if (quantity == 1)
+    {
+        return StringCopy(dst, ItemId_GetName(itemId));
+    }
+    else if (DoesItemHavePluralName(itemId))
+    {
+        return StringCopy(dst, ItemId_GetPluralName(itemId));
+    }
+    else
+    {
+        u8 *end = StringCopy(dst, ItemId_GetName(itemId));
+        return StringCopy(end, sText_s);
+    }
 }
 
 s8 BagPocketGetFirstEmptySlot(u8 pocketId)
@@ -615,6 +636,16 @@ const u8 * ItemId_GetName(u16 itemId)
 u16 ItemId_GetPrice(u16 itemId)
 {
     return gItemsInfo[SanitizeItemId(itemId)].price;
+}
+
+static bool32 DoesItemHavePluralName(u16 itemId)
+{
+    return (gItemsInfo[SanitizeItemId(itemId)].pluralName[0] != '\0');
+}
+
+static const u8 *ItemId_GetPluralName(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].pluralName;
 }
 
 u8 ItemId_GetHoldEffect(u16 itemId)

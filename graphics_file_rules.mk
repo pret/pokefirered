@@ -36,6 +36,23 @@ JPCONTESTGFXDIR := graphics/contest/japanese
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
 
+
+### Fonts ###
+$(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/narrower.latfont: $(FONTGFXDIR)/latin_narrower.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/small_narrower.latfont: $(FONTGFXDIR)/latin_small_narrower.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/short_narrow.latfont: $(FONTGFXDIR)/latin_short_narrow.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/latin_small.latfont: $(FONTGFXDIR)/latin_small.png
 	$(GFX) $< $@
 

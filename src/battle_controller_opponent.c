@@ -17,6 +17,7 @@
 #include "battle_gfx_sfx_util.h"
 #include "battle_ai_switch_items.h"
 #include "battle_z_move.h"
+#include "link.h"
 #include "party_menu.h"
 #include "trainer_tower.h"
 #include "constants/battle_ai.h"
@@ -268,7 +269,17 @@ static void SwitchIn_TryShinyAnim(u32 battler)
 void OpponentBufferExecCompleted(u32 battler)
 {
     gBattlerControllerFuncs[battler] = OpponentBufferRunCommand;
-    gBattleControllerExecFlags &= ~gBitTable[battler];
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+    {
+        u8 playerId = GetMultiplayerId();
+
+        PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
+        gBattleResources->bufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
+    }
+    else
+    {
+        gBattleControllerExecFlags &= ~gBitTable[battler];
+    }
 }
 
 static void OpponentHandleLoadMonSprite(u32 battler)
@@ -293,7 +304,7 @@ static u32 OpponentGetTrainerPicId(u32 battlerId) // TODO: trainer refactoring
     else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
         trainerPicId = GetEreaderTrainerFrontSpriteId();
     else
-        trainerPicId = gTrainers[gTrainerBattleOpponent_A].trainerPic;
+        trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
 
     return trainerPicId;
 }
@@ -362,13 +373,6 @@ static void OpponentHandleChooseMove(u32 battler)
         default:
             {
                 u16 chosenMove = moveInfo->moves[chosenMoveId];
-                bool32 isSecondTrainer = (GetBattlerPosition(battler) == B_POSITION_OPPONENT_RIGHT) && (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT;
-                u16 trainerId = isSecondTrainer ? gTrainerBattleOpponent_B : gTrainerBattleOpponent_A;
-                const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
-                bool32 shouldDynamax = FALSE;
-                if (party != NULL)
-                    shouldDynamax = party[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]].shouldDynamax;
-
                 if (GetBattlerMoveTargetType(battler, chosenMove) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                     gBattlerTarget = battler;
                 if (GetBattlerMoveTargetType(battler, chosenMove) & MOVE_TARGET_BOTH)
@@ -386,8 +390,11 @@ static void OpponentHandleChooseMove(u32 battler)
                 else if (CanUltraBurst(battler))
                     BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_ULTRA_BURST) | (gBattlerTarget << 8));
                 // If opponent can Dynamax and is allowed in the partydata, do it.
-                else if (CanDynamax(battler) && shouldDynamax)
+                else if (CanDynamax(battler) && AI_DATA->shouldDynamax[battler])
                     BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_DYNAMAX) | (gBattlerTarget << 8));
+                // If opponent can Terastal and is allowed in the partydata, do it.
+                else if (CanTerastallize(battler) && AI_DATA->shouldTerastal[battler])
+                    BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_TERASTAL) | (gBattlerTarget << 8));
                 else
                     BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
             }

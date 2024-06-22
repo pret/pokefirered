@@ -72,6 +72,8 @@
 #define TILE_SIZE_4BPP 32
 #define TILE_SIZE_8BPP 64
 
+#define BG_TILE_ADDR_4BPP(n)   (void *)(BG_VRAM + (TILE_SIZE_4BPP * (n)))
+
 #define TILE_OFFSET_4BPP(n) ((n) * TILE_SIZE_4BPP)
 #define TILE_OFFSET_8BPP(n) ((n) * TILE_SIZE_8BPP)
 

@@ -43,8 +43,20 @@
 
     #define NIGHT_HOUR_BEGIN   20
     #define NIGHT_HOUR_END     4
-//Gen 5 currently not included as the seasons change the times of day
-#elif OW_TIMES_OF_DAY <= GEN_6
+//Gen 5 seasons change the times of day
+#elif OW_TIMES_OF_DAY == GEN_5
+    #define MORNING_HOUR_BEGIN GetGen5MorningBegin()
+    #define MORNING_HOUR_END   GetGen5DayBegin()
+
+    #define DAY_HOUR_BEGIN     GetGen5DayBegin()
+    #define DAY_HOUR_END       GetGen5EveningBegin()
+
+    #define EVENING_HOUR_BEGIN GetGen5EveningBegin()
+    #define EVENING_HOUR_END   GetGen5NightBegin()
+
+    #define NIGHT_HOUR_BEGIN   GetGen5NightBegin()
+    #define NIGHT_HOUR_END     GetGen5MorningBegin()
+#elif OW_TIMES_OF_DAY == GEN_6
     #define MORNING_HOUR_BEGIN 4
     #define MORNING_HOUR_END   11
 
@@ -92,8 +104,6 @@
 #define SEASON_SUMMER   1
 #define SEASON_AUTUMN   2
 #define SEASON_WINTER   3
-#define NUM_SEASONS     4
-#define DAYS_PER_SEASON 5
 
 extern struct Time gLocalTime;
 
@@ -129,5 +139,69 @@ u8 GetCurrentHour(void);
 u8 GetCurrentMinute(void);
 u8 GetSeason(void);
 u8 GetSeasonDay(void);
+
+static inline s32 GetGen5MorningBegin()
+{
+    switch (GetSeason())
+    {
+        case SEASON_SPRING:
+        default:
+            return 5;
+        case SEASON_SUMMER:
+            return 4;
+        case SEASON_AUTUMN:
+            return 6;
+        case SEASON_WINTER:
+            return 7;
+    }
+}
+
+static inline s32 GetGen5DayBegin()
+{
+    switch (GetSeason())
+    {
+        case SEASON_SPRING:
+        default:
+            return 10;
+        case SEASON_SUMMER:
+            return 9;
+        case SEASON_AUTUMN:
+            return 10;
+        case SEASON_WINTER:
+            return 11;
+    }
+}
+
+static inline s32 GetGen5EveningBegin()
+{
+    switch (GetSeason())
+    {
+        case SEASON_SPRING:
+        default:
+            return 17;
+        case SEASON_SUMMER:
+            return 19;
+        case SEASON_AUTUMN:
+            return 18;
+        case SEASON_WINTER:
+            return 17;
+    }
+}
+
+static inline s32 GetGen5NightBegin()
+{
+    switch (GetSeason())
+    {
+        case SEASON_SPRING:
+        default:
+            return 20;
+        case SEASON_SUMMER:
+            return 21;
+        case SEASON_AUTUMN:
+            return 20;
+        case SEASON_WINTER:
+            return 19;
+    }
+}
 
 #endif // GUARD_RTC_UTIL_H

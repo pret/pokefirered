@@ -333,7 +333,7 @@ static void DrawTimeWindow(void)
             StringCopy(gStringVar1, gText_SeasonWinter);
             break;
     }
-    ConvertIntToDecimalStringN(gStringVar2, GetSeasonDay(), STR_CONV_MODE_RIGHT_ALIGN, 1);
+    ConvertIntToDecimalStringN(gStringVar2, GetSeasonDay(), STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_MenuDay);
     AddTextPrinterParameterized(sTimeWindowId, FONT_NORMAL, gStringVar4, 4, 18, 0xFF, NULL);
 

@@ -321,30 +321,34 @@ u8 GetCurrentMinute(void)
 
 u8 GetSeason(void)
 {
-    u8 seasonIndex;
-
-    RtcCalcLocalTime();
-    seasonIndex = (gLocalTime.days / DAYS_PER_SEASON) % NUM_SEASONS;
-    switch (seasonIndex)
+    RtcGetInfo(&sRtc);
+    switch(ConvertBcdToBinary(sRtc.month))
     {
-        case 0:
-            return SEASON_SPRING;
-        case 1:
-            return SEASON_SUMMER;
-        case 2:
-            return SEASON_AUTUMN;
-        case 3:
-            return SEASON_WINTER;
+        case MONTH_JAN:
+        case MONTH_MAY:
+        case MONTH_SEP:
         default:
             return SEASON_SPRING;
+        case MONTH_FEB:
+        case MONTH_JUN:
+        case MONTH_OCT:
+            return SEASON_SUMMER;
+        case MONTH_MAR:
+        case MONTH_JUL:
+        case MONTH_NOV:
+            return SEASON_AUTUMN;
+        case MONTH_APR:
+        case MONTH_AUG:
+        case MONTH_DEC:
+            return SEASON_WINTER;
     }
 }
 
 u8 GetSeasonDay(void)
 {
-    RtcCalcLocalTime();
+    RtcGetInfo(&sRtc);
 
-    return (gLocalTime.days % DAYS_PER_SEASON) + 1;
+    return ConvertBcdToBinary(sRtc.day);
 }
 
 void RtcCalcLocalTime(void)

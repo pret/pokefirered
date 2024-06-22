@@ -208,7 +208,6 @@ static void Nop(void)
 void LaunchBattleAnimation(u32 animType, u16 animId)
 {
     s32 i;
-    bool8 isMoveAnim = (animId == ANIM_TYPE_MOVE);
 
     if (gTestRunnerEnabled)
     {
@@ -233,7 +232,7 @@ void LaunchBattleAnimation(u32 animType, u16 animId)
             gAnimBattlerSpecies[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
     }
 
-    if (!isMoveAnim)
+    if (animType != ANIM_TYPE_MOVE)
         gAnimMoveIndex = 0;
     else
         gAnimMoveIndex = animId;
@@ -267,7 +266,7 @@ void LaunchBattleAnimation(u32 animType, u16 animId)
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
         sAnimSpriteIndexArray[i] = 0xFFFF;
 
-    if (isMoveAnim)
+    if (animType == ANIM_TYPE_MOVE)
     {
         for (i = 0; gMovesWithQuietBGM[i] != 0xFFFF; i++)
         {

@@ -9,7 +9,7 @@
 #include "test_runner.h"
 #include "test/test.h"
 
-#define TIMEOUT_SECONDS 70
+#define TIMEOUT_SECONDS 55
 
 void CB2_TestRunner(void);
 

@@ -1280,10 +1280,11 @@ static void Task_GiveExpWithExpBar(u8 taskId)
 {
     u8 level;
     u16 species;
-    s32 currExp, newExpPoints, expOnNextLvl;
+    s32 currExp, expOnNextLvl, newExpPoints;
+
     if (gTasks[taskId].tExpTask_frames < 13)
     {
-        ++gTasks[taskId].tExpTask_frames;
+        gTasks[taskId].tExpTask_frames++;
     }
     else
     {
@@ -1300,6 +1301,7 @@ static void Task_GiveExpWithExpBar(u8 taskId)
             currExp = GetMonData(&gPlayerParty[monId], MON_DATA_EXP);
             species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES);
             expOnNextLvl = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1];
+
             if (currExp + gainedExp >= expOnNextLvl)
             {
                 SetMonData(&gPlayerParty[monId], MON_DATA_EXP, &expOnNextLvl);
@@ -1316,7 +1318,7 @@ static void Task_GiveExpWithExpBar(u8 taskId)
                 }
 
                 gainedExp -= expOnNextLvl - currExp;
-                BtlController_EmitTwoReturnValues(battler, 1, RET_VALUE_LEVELED_UP, gainedExp);
+                BtlController_EmitTwoReturnValues(battler, BUFFER_B, RET_VALUE_LEVELED_UP, gainedExp);
                 gTasks[taskId].func = Task_LaunchLvlUpAnim;
             }
             else
@@ -1336,7 +1338,7 @@ static void Task_LaunchLvlUpAnim(u8 taskId)
     u8 monIndex = gTasks[taskId].tExpTask_monId;
 
     if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[BATTLE_PARTNER(battler)])
-        battler = BATTLE_PARTNER(battler);
+        battler ^= BIT_FLANK;
 
     InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_LVL_UP);
     gTasks[taskId].func = Task_UpdateLvlInHealthbox;
@@ -1361,7 +1363,7 @@ static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId)
 {
     s32 battlerId = gTasks[taskId].tExpTask_battler;
 
-    if (IsBattlerSpriteVisible((u8)battlerId) == TRUE)
+    if (IsBattlerSpriteVisible((u8)battlerId) == TRUE && !gTestRunnerEnabled)
     {
         gTasks[taskId].func = Task_CreateLevelUpVerticalStripes;
         gTasks[taskId].data[15] = 0;

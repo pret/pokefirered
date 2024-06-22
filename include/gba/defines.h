@@ -11,7 +11,7 @@
 #define EWRAM_DATA __attribute__((section("__DATA,ewram_data")))
 #else
 #define IWRAM_DATA __attribute__((section("iwram_data")))
-#define EWRAM_DATA __attribute__((section(".sbss")))
+#define EWRAM_DATA __attribute__((section("ewram_data")))
 #endif
 
 #if MODERN

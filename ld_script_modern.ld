@@ -10,14 +10,14 @@ MEMORY
 
 SECTIONS {
 
-    .ewram.sbss 0x2000000 (NOLOAD) :
+    ewram 0x2000000 (NOLOAD) :
     ALIGN(4)
     {
         gHeap = .;
 
         . = 0x1C000;
 
-        *(.sbss);
+        *(ewram_data);
     } > EWRAM
 
     iwram 0x3000000 (NOLOAD) :

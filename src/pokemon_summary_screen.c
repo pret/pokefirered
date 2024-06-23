@@ -1,5 +1,7 @@
 #include "global.h"
 #include "gflib.h"
+#include "graphics.h"
+#include "decompress.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "help_system.h"
@@ -243,6 +245,7 @@ struct PokemonSummaryScreenData
     u8 ALIGNED(4) lastPageFlipDirection; /* 0x3300 */
     u8 ALIGNED(4) unk3304; /* 0x3304 */
     u8 ALIGNED(4) skillsPageMode;
+    u8 categoryIconSpriteId;
 };
 
 struct Struct203B144
@@ -962,6 +965,64 @@ static const u16 * const sHpBarPals[] =
     sPokeSummary_HpBarPalRed,
 };
 
+#define TAG_CATEGORY_ICONS 30004
+
+static const struct OamData sOamData_CategoryIcons =
+{
+    .size = SPRITE_SIZE(16x16),
+    .shape = SPRITE_SHAPE(16x16),
+    .priority = 0,
+};
+
+const struct CompressedSpriteSheet gSpriteSheet_CategoryIcons =
+{
+    .data = gCategoryIcons_Gfx,
+    .size = 16*16*3/2,
+    .tag = TAG_CATEGORY_ICONS,
+};
+
+const struct SpritePalette gSpritePal_CategoryIcons =
+{
+    .data = gCategoryIcons_Pal,
+    .tag = TAG_CATEGORY_ICONS
+};
+
+static const union AnimCmd sSpriteAnim_CategoryIcon0[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_CategoryIcon1[] =
+{
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_CategoryIcon2[] =
+{
+    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_CategoryIcons[] =
+{
+    sSpriteAnim_CategoryIcon0,
+    sSpriteAnim_CategoryIcon1,
+    sSpriteAnim_CategoryIcon2,
+};
+
+const struct SpriteTemplate gSpriteTemplate_CategoryIcons =
+{
+    .tileTag = TAG_CATEGORY_ICONS,
+    .paletteTag = TAG_CATEGORY_ICONS,
+    .oam = &sOamData_CategoryIcons,
+    .anims = sSpriteAnimTable_CategoryIcons,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
 
 #define FREE_AND_SET_NULL_IF_SET(ptr) \
 {                                     \
@@ -1031,6 +1092,7 @@ void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, 
     sMonSummaryScreen->skillsPageBgNum = 2;
     sMonSummaryScreen->infoAndMovesPageBgNum = 1;
     sMonSummaryScreen->flippingPages = FALSE;
+    sMonSummaryScreen->categoryIconSpriteId = 0xFF;
 
     sMonSummaryScreen->unk3228 = 0;
     sMonSummaryScreen->unk322C = 1;
@@ -2495,6 +2557,10 @@ static u8 PokeSum_HandleCreateSprites(void)
     case 8:
         PokeSum_CreateMonIconSprite();
         break;
+    case 9:
+        LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
+        LoadSpritePalette(&gSpritePal_CategoryIcons);
+        break;
     default:
         PokeSum_CreateMonPicSprite();
         return TRUE;
@@ -3027,12 +3093,33 @@ static void PokeSum_PrintExpPoints_NextLv(void)
                                  gText_PokeSum_NextLv);
 }
 
+// code
+static u8 ShowCategoryIcon(u32 category)
+{
+    if (sMonSummaryScreen->categoryIconSpriteId == 0xFF)
+        sMonSummaryScreen->categoryIconSpriteId = CreateSprite(&gSpriteTemplate_CategoryIcons, 90, 63, 0);
+
+    gSprites[sMonSummaryScreen->categoryIconSpriteId].invisible = FALSE;
+    StartSpriteAnim(&gSprites[sMonSummaryScreen->categoryIconSpriteId], category);
+    return sMonSummaryScreen->categoryIconSpriteId;
+}
+
+static void DestroyCategoryIcon(void)
+{
+    if (sMonSummaryScreen->categoryIconSpriteId != 0xFF)
+        DestroySprite(&gSprites[sMonSummaryScreen->categoryIconSpriteId]);
+    sMonSummaryScreen->categoryIconSpriteId = 0xFF;
+}
+
 static void PokeSum_PrintSelectedMoveStats(void)
 {
     if (sMoveSelectionCursorPos < 5)
     {
         if (sMonSummaryScreen->mode != PSS_MODE_SELECT_MOVE && sMoveSelectionCursorPos == 4)
+        {
+            gSprites[sMonSummaryScreen->categoryIconSpriteId].invisible = TRUE;
             return;
+        }
 
         AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], FONT_NORMAL,
                                      57, 1,
@@ -3049,6 +3136,8 @@ static void PokeSum_PrintSelectedMoveStats(void)
                                      0, 0,
                                      sLevelNickTextColors[0], TEXT_SKIP_DRAW,
                                      gMovesInfo[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].description);
+
+        ShowCategoryIcon(GetBattleMoveCategory(sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]));
     }
 }
 
@@ -3817,6 +3906,7 @@ static void Task_HandleInput_SelectMove(u8 taskId)
                 sMoveSwapCursorPos = 0;
             }
 
+            DestroyCategoryIcon();
             ShoworHideMoveSelectionCursor(TRUE);
             sMonSummaryScreen->pageFlipDirection = 0;
             PokeSum_RemoveWindows(sMonSummaryScreen->curPageIndex);

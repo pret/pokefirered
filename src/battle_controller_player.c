@@ -1579,20 +1579,8 @@ static void MoveSelectionDisplayMoveType(u32 battler)
     }
 
     end = StringCopy(txtPtr, gTypesInfo[type].name);
-    PrependFontIdToFit(txtPtr, end, FONT_NORMAL, WindowWidthPx(B_WIN_MOVE_TYPE) - 25);
+    PrependFontIdToFit(txtPtr, end, FONT_SMALL, WindowWidthPx(B_WIN_MOVE_TYPE) - 25);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
-
-    // old
-    // u8 *txtPtr;
-    // struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-
-    // txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
-    // *txtPtr++ = EXT_CTRL_CODE_BEGIN;
-    // *txtPtr++ = EXT_CTRL_CODE_FONT;
-    // *txtPtr++ = FONT_SMALL;
-    // txtPtr = StringCopy(txtPtr, gText_MoveInterfaceDynamicColors);
-    // StringCopy(txtPtr, gTypesInfo[gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type].name);
-    // BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)

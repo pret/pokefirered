@@ -69,7 +69,7 @@ SECTIONS {
         asm/*.o(.text*);
     } > ROM =0
 
-    script_data :
+    script_data (READONLY):
     ALIGN(4)
     {
 		data/*.o(script_data);

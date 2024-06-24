@@ -272,7 +272,6 @@ u32 gOamMatrixAllocBitmap;
 u8 gReservedSpritePaletteCount;
 
 EWRAM_DATA struct Sprite gSprites[MAX_SPRITES + 1] = {0};
-EWRAM_DATA u16 gSpritePriorities[MAX_SPRITES] = {0};
 EWRAM_DATA static u8 sSpriteOrder[MAX_SPRITES] = {0};
 EWRAM_DATA bool8 gShouldProcessSpriteCopyRequests = 0;
 EWRAM_DATA u8 gSpriteCopyRequestCount = 0;

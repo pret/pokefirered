@@ -595,13 +595,13 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y)
 
     if (item != INDEX_CANCEL)
     {
-        ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(item), 0, 4);
-        x = 4 - StringLength(gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(item), 0, 6);
+        x = 6 - StringLength(gStringVar1);
         loc = gStringVar4;
         while (x-- != 0)
             *loc++ = 0;
         StringExpandPlaceholders(loc, gText_PokedollarVar1);
-        BuyMenuPrint(windowId, FONT_SMALL, gStringVar4, 0x69, y, 0, 0, TEXT_SKIP_DRAW, 1);
+        BuyMenuPrint(windowId, FONT_SMALL, gStringVar4, 0x61, y, 0, 0, TEXT_SKIP_DRAW, 1);
     }
 }
 

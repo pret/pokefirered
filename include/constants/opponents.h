@@ -748,14 +748,13 @@
 #define TRAINER_CHAMPION_REMATCH_BULBASAUR       740
 #define TRAINER_CHAMPION_REMATCH_CHARMANDER      741
 #define TRAINER_CUE_BALL_PAXTON                  742
-#define TRAINER_TEST_BATTLE                      743
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is 
 //       only space for 25 additional trainers before trainer flag space overflows.
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT                           744
-#define MAX_TRAINERS_COUNT                       769
+#define TRAINERS_COUNT                           743
+#define MAX_TRAINERS_COUNT                       768
 #define TRAINER_PARTNER(partner)           (MAX_TRAINERS_COUNT + partner)
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

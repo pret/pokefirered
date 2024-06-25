@@ -1,15 +1,3 @@
-Route2_EventScript_TestBattle::
-	trainerbattle_single TRAINER_TEST_BATTLE, Route3_Text_RobinIntro, Route3_Text_RobinDefeat
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route2_EventScript_TestBattleRematch
-	msgbox Route3_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route2_EventScript_TestBattleRematch::
-	trainerbattle_rematch TRAINER_TEST_BATTLE, Route3_Text_RobinRematchIntro, Route3_Text_RobinDefeat
-	msgbox Route3_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route3_EventScript_Ben::
 	trainerbattle_single TRAINER_YOUNGSTER_BEN, Route3_Text_BenIntro, Route3_Text_BenDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle

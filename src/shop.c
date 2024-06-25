@@ -144,10 +144,10 @@ static const struct MenuAction sShopMenuActions_BuySellQuit[] =
     {gText_ShopQuit, {.void_u8 = Task_HandleShopMenuQuit}}
 };
 
-static const struct YesNoFuncTable sShopMenuActions_BuyQuit[] =
+static const struct YesNoFuncTable sShopMenuActions_BuyQuit =
 {
-    { BuyMenuTryMakePurchase  },
-    { BuyMenuReturnToItemList }
+    .yesFunc = BuyMenuTryMakePurchase, 
+    .noFunc = BuyMenuReturnToItemList,
 };
 
 static const struct WindowTemplate sShopMenuWindowTemplate =
@@ -964,7 +964,7 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 
 static void CreateBuyMenuConfirmPurchaseWindow(u8 taskId)
 {
-    BuyMenuConfirmPurchase(taskId, sShopMenuActions_BuyQuit);
+    BuyMenuConfirmPurchase(taskId, &sShopMenuActions_BuyQuit);
 }
 
 static void BuyMenuTryMakePurchase(u8 taskId)
@@ -1006,6 +1006,7 @@ static void BuyMenuReturnToItemList(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
+    DebugPrintfLevel(MGBA_LOG_ERROR, "no");
     ClearDialogWindowAndFrameToTransparent(2, FALSE);
     BuyMenuPrintCursor(tListTaskId, 1);
     RecolorItemDescriptionBox(0);

@@ -1006,7 +1006,6 @@ static void BuyMenuReturnToItemList(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    DebugPrintfLevel(MGBA_LOG_ERROR, "no");
     ClearDialogWindowAndFrameToTransparent(2, FALSE);
     BuyMenuPrintCursor(tListTaskId, 1);
     RecolorItemDescriptionBox(0);

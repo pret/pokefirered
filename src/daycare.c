@@ -202,12 +202,19 @@ static const union AnimCmd sSpriteAnim_EggHatch3[] =
     ANIMCMD_END
 };
 
+enum {
+    EGG_ANIM_NORMAL,
+    EGG_ANIM_CRACKED_1,
+    EGG_ANIM_CRACKED_2,
+    EGG_ANIM_CRACKED_3,
+};
+
 static const union AnimCmd *const sSpriteAnimTable_EggHatch[] =
 {
-    sSpriteAnim_EggHatch0,
-    sSpriteAnim_EggHatch1,
-    sSpriteAnim_EggHatch2,
-    sSpriteAnim_EggHatch3,
+    [EGG_ANIM_NORMAL]    = sSpriteAnim_EggHatch0,
+    [EGG_ANIM_CRACKED_1] = sSpriteAnim_EggHatch1,
+    [EGG_ANIM_CRACKED_2] = sSpriteAnim_EggHatch2,
+    [EGG_ANIM_CRACKED_3] = sSpriteAnim_EggHatch3,
 };
 
 static const struct SpriteSheet sEggHatch_Sheet =
@@ -2264,7 +2271,7 @@ static void SpriteCB_Egg_0(struct Sprite* sprite)
         if (sprite->data[0] == 15)
         {
             PlaySE(SE_BALL);
-            StartSpriteAnim(sprite, 1);
+            StartSpriteAnim(sprite, EGG_ANIM_CRACKED_1);
             CreateRandomEggShardSprite();
         }
     }
@@ -2287,7 +2294,7 @@ static void SpriteCB_Egg_1(struct Sprite* sprite)
             if (sprite->data[0] == 15)
             {
                 PlaySE(SE_BALL);
-                StartSpriteAnim(sprite, 2);
+                StartSpriteAnim(sprite, EGG_ANIM_CRACKED_2);
             }
         }
     }
@@ -2314,7 +2321,11 @@ static void SpriteCB_Egg_2(struct Sprite* sprite)
             if (sprite->data[0] == 15)
             {
                 PlaySE(SE_BALL);
-                StartSpriteAnim(sprite, 2);
+            #ifdef BUGFIX
+                StartSpriteAnim(sprite, EGG_ANIM_CRACKED_3);
+            #else
+                StartSpriteAnim(sprite, EGG_ANIM_CRACKED_2);
+            #endif
                 CreateRandomEggShardSprite();
                 CreateRandomEggShardSprite();
             }

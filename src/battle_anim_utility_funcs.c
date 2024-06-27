@@ -86,7 +86,9 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
         selectedPalettes = 0;
         // fall through
     case ANIM_ATTACKER:
+#ifdef UBFIX
     default:
+#endif
         animBattlers[0] = gBattleAnimAttacker;
         break;
     case 3:

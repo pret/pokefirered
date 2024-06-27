@@ -650,6 +650,9 @@ static void SetPositionFromConnection(const struct MapConnection *connection, in
         gSaveBlock1Ptr->pos.x -= connection->offset;
         gSaveBlock1Ptr->pos.y = mapHeader->mapLayout->height;
         break;
+    default:
+        DebugPrintfLevel(MGBA_LOG_WARN, "SetPositionFromConnection was passed an invalid direction (%d)!", direction);
+        break;
     }
 }
 
@@ -671,14 +674,21 @@ bool8 CameraMove(s32 x, s32 y)
         old_x = gSaveBlock1Ptr->pos.x;
         old_y = gSaveBlock1Ptr->pos.y;
         connection = GetIncomingConnection(direction, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
-        SetPositionFromConnection(connection, direction, x, y);
-        LoadMapFromCameraTransition(connection->mapGroup, connection->mapNum);
-        gCamera.active = TRUE;
-        gCamera.x = old_x - gSaveBlock1Ptr->pos.x;
-        gCamera.y = old_y - gSaveBlock1Ptr->pos.y;
-        gSaveBlock1Ptr->pos.x += x;
-        gSaveBlock1Ptr->pos.y += y;
-        MoveMapViewToBackup(direction);
+        if (connection)
+        {
+            SetPositionFromConnection(connection, direction, x, y);
+            LoadMapFromCameraTransition(connection->mapGroup, connection->mapNum);
+            gCamera.active = TRUE;
+            gCamera.x = old_x - gSaveBlock1Ptr->pos.x;
+            gCamera.y = old_y - gSaveBlock1Ptr->pos.y;
+            gSaveBlock1Ptr->pos.x += x;
+            gSaveBlock1Ptr->pos.y += y;
+            MoveMapViewToBackup(direction);
+        }
+        else
+        {
+            DebugPrintfLevel(MGBA_LOG_WARN, "GetIncomingConnection returned an invalid connection inside CameraMove!");
+        }
     }
     return gCamera.active;
 }

@@ -4852,7 +4852,7 @@ static void UpdateExpBarObjs(void)
 {
     u8 numWholeExpBarTiles = 0;
     u8 i;
-    u8 level;
+    u8 level = 0;
     u32 exp;
     u32 totalExpToNextLevel;
     u32 curExpToNextLevel;
@@ -4866,8 +4866,9 @@ static void UpdateExpBarObjs(void)
         return;
 
     exp = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_EXP);
-    level = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_LEVEL);
     species = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES);
+    while(level < MAX_LEVEL && exp > gExperienceTables[gSpeciesInfo[species].growthRate][level + 1])
+        level++;
 
     if (level < 100)
     {

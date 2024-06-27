@@ -3125,6 +3125,12 @@ static u8 ShowCategoryIcon(u32 category)
     return sMonSummaryScreen->categoryIconSpriteId;
 }
 
+static void HideCategoryIcon()
+{
+    if (sMonSummaryScreen->categoryIconSpriteId != 0xFF)
+        gSprites[sMonSummaryScreen->categoryIconSpriteId].invisible = TRUE;
+}
+
 static void DestroyCategoryIcon(void)
 {
     if (sMonSummaryScreen->categoryIconSpriteId != 0xFF)
@@ -3138,7 +3144,7 @@ static void PokeSum_PrintSelectedMoveStats(void)
     {
         if (sMonSummaryScreen->mode != PSS_MODE_SELECT_MOVE && sMoveSelectionCursorPos == 4)
         {
-            gSprites[sMonSummaryScreen->categoryIconSpriteId].invisible = TRUE;
+            HideCategoryIcon();
             return;
         }
 
@@ -4182,6 +4188,7 @@ static void Task_InputHandler_SelectOrForgetMove(u8 taskId)
                                      0, 0,
                                      sLevelNickTextColors[0], TEXT_SKIP_DRAW,
                                      gText_PokeSum_HmMovesCantBeForgotten);
+        HideCategoryIcon();
         CopyWindowToVram(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], 2);
         CopyBgTilemapBufferToVram(0);
         CopyBgTilemapBufferToVram(3);

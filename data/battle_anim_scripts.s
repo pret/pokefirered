@@ -59,33 +59,33 @@ gBattleAnims_General::
 	.4byte General_IngrainHeal              @ B_ANIM_INGRAIN_HEAL
 	.4byte General_WishHeal                 @ B_ANIM_WISH_HEAL
 	.4byte General_MegaEvolution            @ B_ANIM_MEGA_EVOLUTION
-	.4byte General_FormChange               @ TODO: B_ANIM_ILLUSION_OFF
+	.4byte General_IllusionOff              @ B_ANIM_ILLUSION_OFF
 	.4byte General_FormChange               @ B_ANIM_FORM_CHANGE
 	.4byte General_SlideOffScreen           @ B_ANIM_SLIDE_OFFSCREEN
 	.4byte General_RestoreBg                @ B_ANIM_RESTORE_BG
-	.4byte General_StatsChange              @ TODO: B_ANIM_TOTEM_FLARE
-	.4byte General_MonHit                   @ TODO: B_ANIM_GULP_MISSILE
-	.4byte General_StatsChange              @ TODO: B_ANIM_STRONG_WINDS
-	.4byte General_MegaEvolution            @ TODO: B_ANIM_PRIMAL_REVERSION
-	.4byte General_StatsChange              @ TODO: B_ANIM_AQUA_RING_HEAL
-	.4byte General_StatsChange	            @ TODO: B_ANIM_BEAK_BLAST_SETUP
-	.4byte General_StatsChange         	    @ TODO: B_ANIM_SHELL_TRAP_SETUP
-	.4byte General_StatsChange        	    @ TODO: B_ANIM_ZMOVE_ACTIVATE
-	.4byte General_MonHit            		@ TODO: B_ANIM_AFFECTION_HANGED_ON
-	.4byte General_Hail                     @ TODO: B_ANIM_SNOW_CONTINUES
+	.4byte General_TotemFlare               @ B_ANIM_TOTEM_FLARE
+	.4byte General_GulpMissile              @ B_ANIM_GULP_MISSILE
+	.4byte General_StrongWinds              @ B_ANIM_STRONG_WINDS
+	.4byte General_PrimalReversion          @ B_ANIM_PRIMAL_REVERSION
+	.4byte General_AquaRingHeal             @ B_ANIM_AQUA_RING_HEAL
+	.4byte General_BeakBlastSetUp           @ B_ANIM_BEAK_BLAST_SETUP
+	.4byte General_ShellTrapSetUp           @ B_ANIM_SHELL_TRAP_SETUP
+	.4byte General_ZMoveActivate            @ B_ANIM_ZMOVE_ACTIVATE
+	.4byte General_AffectionHangedOn        @ B_ANIM_AFFECTION_HANGED_ON
+	.4byte General_Snow                     @ B_ANIM_SNOW_CONTINUES
 	.4byte General_UltraBurst               @ B_ANIM_ULTRA_BURST
-	.4byte General_MonHit 		           	@ TODO: B_ANIM_SALT_CURE_DAMAGE
+	.4byte General_SaltCureDamage           @ B_ANIM_SALT_CURE_DAMAGE
 	.4byte General_DynamaxGrowth            @ B_ANIM_DYNAMAX_GROWTH
-	.4byte General_MonHit                   @ TODO: B_ANIM_MAX_SET_WEATHER
-	.4byte General_MonHit            		@ TODO: B_ANIM_SYRUP_BOMB_SPEED_DROP
-	.4byte General_MonHit		            @ TODO: B_ANIM_RAINBOW
-	.4byte General_MonHit     		        @ TODO: B_ANIM_SEA_OF_FIRE
-	.4byte General_MonHit     		        @ TODO: B_ANIM_SWAMP
-	.4byte General_MonHit     		        @ TODO: B_ANIM_TRICK_ROOM
-	.4byte General_MonHit     		        @ TODO: B_ANIM_WONDER_ROOM
-	.4byte General_MonHit     		        @ TODO: B_ANIM_MAGIC_ROOM
-	.4byte General_MonHit	                @ TODO: B_ANIM_TAILWIND
-	.4byte General_MonHit					@ TODO: B_ANIM_FOG_CONTINUES
+	.4byte General_SetWeather               @ B_ANIM_MAX_SET_WEATHER
+	.4byte General_SyrupBombSpeedDrop       @ B_ANIM_SYRUP_BOMB_SPEED_DROP
+	.4byte General_Rainbow            		@ B_ANIM_RAINBOW
+	.4byte General_SeaOfFire                @ B_ANIM_SEA_OF_FIRE
+	.4byte General_Swamp                    @ B_ANIM_SWAMP
+	.4byte General_TrickRoom                @ B_ANIM_TRICK_ROOM
+	.4byte General_WonderRoom               @ B_ANIM_WONDER_ROOM
+	.4byte General_MagicRoom                @ B_ANIM_MAGIC_ROOM
+	.4byte General_Tailwind                 @ B_ANIM_TAILLWIND
+	.4byte General_Fog                      @ B_ANIM_FOG_CONTINUES
 	.4byte General_TeraCharge				@ B_ANIM_TERA_CHARGE
 	.4byte General_TeraActivate 			@ B_ANIM_TERA_ACTIVATE
 	.4byte General_MonScared                @ B_ANIM_MON_SCARED
@@ -104,6 +104,112 @@ gBattleAnims_Special::
 	.4byte Special_SubstituteToMon          @ B_ANIM_SUBSTITUTE_TO_MON
 	.4byte Special_MonToSubstitute          @ B_ANIM_MON_TO_SUBSTITUTE
 	.4byte Special_CriticalCaptureBallThrow @ B_ANIM_CRITICAL_CAPTURE_THROW
+
+General_MonScared:
+	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
+	waitforvisualfinish
+	loadspritegfx ANIM_TAG_SWEAT_BEAD
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, 2, 0, 10, RGB(0, 23, 25)
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 10, 1
+	delay 20
+	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 0, 1
+	playsewithpan SE_M_SKETCH, SOUND_PAN_TARGET
+	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 1, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_StretchTargetUp, 3
+	waitforvisualfinish
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, 2, 10, 0, RGB(0, 23, 25)
+	waitforvisualfinish
+	end
+
+General_GhostGetOut:
+	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
+	waitforvisualfinish
+	fadetobg BG_GHOST
+	waitbgfadeout
+	monbg_static ANIM_ATTACKER
+	createvisualtask AnimTask_GhostGetOut, 2
+	waitbgfadein
+	loopsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET, 20, 3
+	waitforvisualfinish
+	clearmonbg_static ANIM_ATTACKER
+	delay 1
+	loadspritegfx ANIM_TAG_SWEAT_BEAD
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, -1, 0, 6, RGB(21, 22, 26)
+	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 0, 1
+	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 1, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_StretchTargetUp, 3
+	waitforvisualfinish
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, -1, 6, 0, RGB(21, 22, 26)
+	waitforvisualfinish
+	restorebg
+	waitbgfadein
+	end
+
+General_SilphScoped:
+	monbg ANIM_ATTACKER
+	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
+	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
+	createvisualtask AnimTask_TransformMon, 2, 255
+	waitsound
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	end
+
+General_SafariRockThrow:
+	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 0
+	waitforvisualfinish
+	loadspritegfx ANIM_TAG_ROCKS
+	loadspritegfx ANIM_TAG_IMPACT
+	delay 0
+	waitplaysewithpan SE_M_JUMP_KICK, SOUND_PAN_ATTACKER, 22
+	createsprite gSafariRockTemplate, ANIM_TARGET, 3, -17, 14, 8, 0
+	delay 50
+	monbg ANIM_DEF_PARTNER
+	setalpha 12, 8
+	delay 0
+	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, -4, -20, 1, 2
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	blendoff
+	waitforvisualfinish
+	end
+
+General_SafariReaction:
+	createvisualtask AnimTask_SafariGetReaction, 2
+	waitforvisualfinish
+	jumpreteq B_MSG_MON_WATCHING, SafariReaction_WatchingCarefully
+	jumpreteq B_MSG_MON_ANGRY, SafariReaction_Angry
+	jumpreteq B_MSG_MON_EATING, SafariReaction_Eating
+	end
+
+SafariReaction_WatchingCarefully:
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, 96, 0, 2
+	waitforvisualfinish
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, -96, 0, 2
+	end
+
+SafariReaction_Angry:
+	loadspritegfx ANIM_TAG_ANGER
+	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, 20, -20
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	delay 12
+	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, -20, -20
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
+	end
+
+SafariReaction_Eating:
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 8, 136, 0, 2
+	waitforvisualfinish
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 8, 136, 0, 2
+	end
 
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 4 @@@@@@@@@@@@@@@@@@@@@@@
 Move_ROOST::
@@ -27355,112 +27461,6 @@ General_WishHeal:
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 10, 0, RGB_BLACK
 	end
 
-General_MonScared:
-	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
-	waitforvisualfinish
-	loadspritegfx ANIM_TAG_SWEAT_BEAD
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, 2, 0, 10, RGB(0, 23, 25)
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 10, 1
-	delay 20
-	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 0, 1
-	playsewithpan SE_M_SKETCH, SOUND_PAN_TARGET
-	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 1, 1
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
-	createvisualtask AnimTask_StretchTargetUp, 3
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, 2, 10, 0, RGB(0, 23, 25)
-	waitforvisualfinish
-	end
-
-General_GhostGetOut:
-	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
-	waitforvisualfinish
-	fadetobg BG_GHOST
-	waitbgfadeout
-	monbg_static ANIM_ATTACKER
-	createvisualtask AnimTask_GhostGetOut, 2
-	waitbgfadein
-	loopsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET, 20, 3
-	waitforvisualfinish
-	clearmonbg_static ANIM_ATTACKER
-	delay 1
-	loadspritegfx ANIM_TAG_SWEAT_BEAD
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, -1, 0, 6, RGB(21, 22, 26)
-	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 0, 1
-	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 1, 1
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
-	createvisualtask AnimTask_StretchTargetUp, 3
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, -1, 6, 0, RGB(21, 22, 26)
-	waitforvisualfinish
-	restorebg
-	waitbgfadein
-	end
-
-General_SilphScoped:
-	monbg ANIM_ATTACKER
-	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
-	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
-	createvisualtask AnimTask_TransformMon, 2, 0, 0, 1
-	waitsound
-	waitforvisualfinish
-	clearmonbg ANIM_ATTACKER
-	end
-
-General_SafariRockThrow:
-	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 0
-	waitforvisualfinish
-	loadspritegfx ANIM_TAG_ROCKS
-	loadspritegfx ANIM_TAG_IMPACT
-	delay 0
-	waitplaysewithpan SE_M_JUMP_KICK, SOUND_PAN_ATTACKER, 22
-	createsprite gSafariRockTemplate, ANIM_TARGET, 3, -17, 14, 8, 0
-	delay 50
-	monbg ANIM_DEF_PARTNER
-	setalpha 12, 8
-	delay 0
-	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 2, -4, -20, 1, 2
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	blendoff
-	waitforvisualfinish
-	end
-
-General_SafariReaction:
-	createvisualtask AnimTask_SafariGetReaction, 2
-	waitforvisualfinish
-	jumpreteq B_MSG_MON_WATCHING, SafariReaction_WatchingCarefully
-	jumpreteq B_MSG_MON_ANGRY, SafariReaction_Angry
-	jumpreteq B_MSG_MON_EATING, SafariReaction_Eating
-	end
-
-SafariReaction_WatchingCarefully:
-	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
-	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, 96, 0, 2
-	waitforvisualfinish
-	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
-	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, -96, 0, 2
-	end
-
-SafariReaction_Angry:
-	loadspritegfx ANIM_TAG_ANGER
-	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, 20, -20
-	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
-	waitforvisualfinish
-	delay 12
-	createsprite gAngerMarkSpriteTemplate, ANIM_TARGET, 2, 1, -20, -20
-	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
-	end
-
-SafariReaction_Eating:
-	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
-	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 8, 136, 0, 2
-	waitforvisualfinish
-	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
-	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 8, 136, 0, 2
-	end
-
 General_IllusionOff:
 	monbg ANIM_TARGET
 	createvisualtask AnimTask_TransformMon, 2, 1, 0
@@ -27909,10 +27909,12 @@ Special_BallThrow:
 	createvisualtask AnimTask_ThrowBall, 2
 	createvisualtask AnimTask_IsBallBlockedByTrainerOrDodged, 2
 	jumpreteq -1, BallThrowTrainerBlock
+	jumpreteq -2, BallThrowGhostDodged
 BallThrowEnd:
 	waitforvisualfinish
 	createvisualtask AnimTask_FreeBallGfx, 2
 	end
+
 BallThrowTrainerBlock:
 	loadspritegfx ANIM_TAG_IMPACT
 	delay 25
@@ -27924,6 +27926,14 @@ BallThrowTrainerBlock:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
+	goto BallThrowEnd
+
+BallThrowGhostDodged:
+	delay 16
+	createvisualtask AnimTask_WindUpLunge, 2, ANIM_TARGET, 48, 6, 16, 48, -48, 16
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	waitplaysewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET, 48
+	waitforvisualfinish
 	goto BallThrowEnd
 
 Special_BallThrowWithTrainer:
@@ -27949,6 +27959,7 @@ Special_CriticalCaptureBallThrow:
 	createvisualtask AnimTask_ThrowBall, 2
 	createvisualtask AnimTask_IsBallBlockedByTrainerOrDodged, 2
 	jumpreteq -1, BallThrowTrainerBlock
+	jumpreteq -2, BallThrowGhostDodged
 	goto BallThrowEnd
 
 @@@@@@@@@@ Z MOVES @@@@@@@@@@

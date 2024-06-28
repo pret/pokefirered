@@ -2282,7 +2282,7 @@ static void SpriteCB_Star(struct Sprite *sprite)
     sprite->sStar_SparkleTimer++;
     if (sprite->sStar_SparkleTimer % sStarSparklesSpawnRate)
     {
-        LoadWordFromTwoHalfwords((u16*)&sprite->sStar_SparkleRngSeed, (uintptr_t *)&random);
+        LoadWordFromTwoHalfwords((u16*)&sprite->sStar_SparkleRngSeed, &random);
         random = ISO_RANDOMIZE1(random);
         StoreWordInTwoHalfwords((u16*)&sprite->sStar_SparkleRngSeed, random);
         random >>= 16;

@@ -23,13 +23,19 @@ enum {
 };
 
 enum {
+#ifndef UBFIX
     GROUPTYPE_NONE = -1,
+#endif // UBFIX
     GROUPTYPE_TRADE,
     GROUPTYPE_BATTLE,
     GROUPTYPE_UNION,
     GROUPTYPE_TOTAL,
     NUM_GROUPTYPES
 };
+
+#ifdef UBFIX
+#define GROUPTYPE_NONE 0xFF
+#endif // UBFIX
 
 static struct
 {

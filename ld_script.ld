@@ -408,9 +408,9 @@ SECTIONS {
     SUBALIGN(4)
     {
         src/main.o(.rodata);
-        src/bg.o(.rodata);
-        src/malloc.o(.rodata);
-        src/malloc.o(.rodata.str1.4);
+        gflib/bg.o(.rodata);
+        gflib/malloc.o(.rodata);
+        gflib/malloc.o(.rodata.str1.4);
         src/text_printer.o(.rodata);
         src/window.o(.rodata);
         src/text.o(.rodata);

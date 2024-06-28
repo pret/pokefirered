@@ -13,15 +13,8 @@
 static EWRAM_DATA u8 *sPlttBufferBak = NULL;
 
 static void FieldCallback_SweetScent(void);
-static void StartSweetScentFieldEffect(void);
 static void TrySweetScentEncounter(u8 taskId);
 static void FailSweetScentEncounter(u8 taskId);
-
-static void Unused_StartSweetscentFldeff(void)
-{
-	gPartyMenu.slotId = 0;
-	FieldCallback_SweetScent();
-}
 
 bool8 SetUpFieldMove_SweetScent(void)
 {
@@ -46,7 +39,7 @@ bool8 FldEff_SweetScent(void)
     return FALSE;
 }
 
-static void StartSweetScentFieldEffect(void)
+void StartSweetScentFieldEffect(void)
 {
     u8 taskId;
 

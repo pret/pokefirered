@@ -86,6 +86,9 @@ void AnimTask_BlendBattleAnimPalExclude(u8 taskId)
         selectedPalettes = 0;
         // fall through
     case ANIM_ATTACKER:
+#ifdef UBFIX
+    default:
+#endif
         animBattlers[0] = gBattleAnimAttacker;
         break;
     case 3:
@@ -290,7 +293,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     u16 species;
     s32 newSpriteId;
     u16 var0;
-    u16 bg1Cnt;
+    u32 bg1Cnt;
     u8 spriteId;
     struct BattleAnimBgData animBgData;
 
@@ -350,7 +353,7 @@ static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
 {
     struct BattleAnimBgData animBgData;
     struct Sprite *sprite;
-    u16 bg1Cnt;
+    u32 bg1Cnt;
 
     gTasks[taskId].data[10] += 4;
     gBattle_BG1_Y -= 4;
@@ -730,7 +733,7 @@ void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 scrollSpeed, u8 battler1
 {
     u16 species;
     u8 spriteId, newSpriteId = 0;
-    u16 bg1Cnt;
+    u32 bg1Cnt;
     struct BattleAnimBgData animBgData;
     u8 battler2 = BATTLE_PARTNER(battler1);
 
@@ -818,7 +821,7 @@ static void UpdateMonScrollingBgMask(u8 taskId)
                                            | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
                 if (!IsContest())
                 {
-                    u16 bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
+                    u32 bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
                     ((vBgCnt *)&bg1Cnt)->charBaseBlock = 0;
                     SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
                 }
@@ -838,6 +841,12 @@ static void UpdateMonScrollingBgMask(u8 taskId)
 void AnimTask_GetBattleTerrain(u8 taskId)
 {
     gBattleAnimArgs[0] = gBattleTerrain;
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_GetFieldTerrain(u8 taskId)
+{
+    gBattleAnimArgs[0] = gFieldStatuses & STATUS_FIELD_TERRAIN_ANY;
     DestroyAnimVisualTask(taskId);
 }
 
@@ -967,4 +976,31 @@ static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
         gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = (u8)gTasks[taskId].data[0] & 1;
         DestroyTask(taskId);
     }
+}
+
+void AnimTask_IsDoubleBattle(u8 taskId)
+{
+    gBattleAnimArgs[7] = (IsDoubleBattle() && !IsContest());
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_CanBattlerSwitch(u8 taskId)
+{
+    gBattleAnimArgs[ARG_RET_ID] = CanBattlerSwitch(GetAnimBattlerId(gBattleAnimArgs[0]));
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_SetInvisible(u8 taskId)
+{
+    u32 battlerId = GetAnimBattlerId(gBattleAnimArgs[0]);
+    u32 spriteId = gBattlerSpriteIds[battlerId];
+
+    gSprites[spriteId].invisible = gBattleSpritesDataPtr->battlerData[battlerId].invisible = gBattleAnimArgs[1];
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_SetAnimTargetToAttackerOpposite(u8 taskId)
+{
+    gBattleAnimTarget = BATTLE_OPPOSITE(gBattleAnimAttacker);
+    DestroyAnimVisualTask(taskId);
 }

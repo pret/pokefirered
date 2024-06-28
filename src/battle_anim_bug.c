@@ -8,13 +8,9 @@ static void AnimLeechLifeNeedle(struct Sprite *sprite);
 static void AnimTranslateWebThread(struct Sprite *sprite);
 static void AnimTranslateWebThread_Step(struct Sprite *sprite);
 static void AnimStringWrap(struct Sprite *sprite);
-static void AnimStringWrap_Step(struct Sprite *sprite);
-static void AnimSpiderWeb(struct Sprite *sprite);
 static void AnimSpiderWeb_Step(struct Sprite *sprite);
 static void AnimSpiderWeb_End(struct Sprite *sprite);
 static void AnimTranslateStinger(struct Sprite *sprite);
-static void AnimMissileArc(struct Sprite *sprite);
-static void AnimMissileArc_Step(struct Sprite *sprite);
 static void AnimTailGlowOrb(struct Sprite *sprite);
 
 static const union AffineAnimCmd sAffineAnim_MegahornHorn_0[] =
@@ -293,7 +289,7 @@ static void AnimStringWrap(struct Sprite *sprite)
     sprite->callback = AnimStringWrap_Step;
 }
 
-static void AnimStringWrap_Step(struct Sprite *sprite)
+void AnimStringWrap_Step(struct Sprite *sprite)
 {
     if (++sprite->data[0] == 3)
     {
@@ -306,7 +302,7 @@ static void AnimStringWrap_Step(struct Sprite *sprite)
     }
 }
 
-static void AnimSpiderWeb(struct Sprite *sprite)
+void AnimSpiderWeb(struct Sprite *sprite)
 {
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
@@ -396,7 +392,7 @@ static void AnimTranslateStinger(struct Sprite *sprite)
 // arg 3: target y pixel offset
 // arg 4: duration
 // arg 5: wave amplitude
-static void AnimMissileArc(struct Sprite *sprite)
+void AnimMissileArc(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, 1);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
@@ -410,7 +406,7 @@ static void AnimMissileArc(struct Sprite *sprite)
     sprite->invisible = TRUE;
 }
 
-static void AnimMissileArc_Step(struct Sprite *sprite)
+void AnimMissileArc_Step(struct Sprite *sprite)
 {
     sprite->invisible = FALSE;
 
@@ -421,7 +417,7 @@ static void AnimMissileArc_Step(struct Sprite *sprite)
     else
     {
         s16 tempData[8];
-        u16 *data = sprite->data;
+        s16 *data = sprite->data;
         u16 x1 = sprite->x;
         s16 x2 = sprite->x2;
         u16 y1 = sprite->y;

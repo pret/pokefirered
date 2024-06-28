@@ -1,5 +1,13 @@
 #ifndef GUARD_CONSTANTS_GLOBAL_H
 #define GUARD_CONSTANTS_GLOBAL_H
+
+#include "config/battle.h"
+#include "config/debug.h"
+#include "config/item.h"
+// #include "config/level_caps.h"
+#include "config/pokemon.h"
+#include "config/overworld.h"
+
 // Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
 // In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
 // In Gen 4 only, migrated Pokemon with Diamond, Pearl, or Platinum's ID show as "----------".
@@ -17,6 +25,8 @@
 #define VERSION_PLATINUM 12
 #define VERSION_GAMECUBE 15
 
+#define NUM_VERSIONS 15
+
 #define LANGUAGE_JAPANESE 1
 #define LANGUAGE_ENGLISH  2
 #define LANGUAGE_FRENCH   3
@@ -26,17 +36,19 @@
 #define LANGUAGE_SPANISH  7
 #define NUM_LANGUAGES     7
 
-#ifdef ENGLISH
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
-#endif
+
+// party sizes
+#define PARTY_SIZE 6
+#define MULTI_PARTY_SIZE (PARTY_SIZE / 2)
 
 // capacities of various saveblock objects
 #define DAYCARE_MON_COUNT   2
 #define PC_ITEMS_COUNT      30
 #define BAG_ITEMS_COUNT     42
 #define BAG_KEYITEMS_COUNT  30
-#define BAG_POKEBALLS_COUNT 13
-#define BAG_TMHM_COUNT      58
+#define BAG_POKEBALLS_COUNT 27
+#define BAG_TMHM_COUNT      108
 #define BAG_BERRIES_COUNT   43
 #define OBJECT_EVENTS_COUNT 16
 #define OBJECT_EVENT_TEMPLATES_COUNT 64
@@ -47,35 +59,33 @@
 #define UNION_ROOM_KB_ROW_COUNT 10
 #define GIFT_RIBBONS_COUNT 11
 
-#define POCKET_ITEMS        1
-#define POCKET_KEY_ITEMS    2
-#define POCKET_POKE_BALLS   3
-#define POCKET_TM_CASE      4
-#define POCKET_BERRY_POUCH  5
-#define NUM_BAG_POCKETS 5
-
 // Contests
 #define CONTEST_CATEGORIES_COUNT  5
 
 // string lengths
-#define ITEM_NAME_LENGTH 14
-#define POKEMON_NAME_LENGTH 10
+#define ITEM_NAME_LENGTH ((I_EXPANDED_ITEM_NAMES == TRUE) ? 20 : 14)
+#define ITEM_NAME_PLURAL_LENGTH ITEM_NAME_LENGTH + 2 // 2 is used for the instance where a word's suffix becomes y->ies
+#define POKEMON_NAME_LENGTH 12
+#define VANILLA_POKEMON_NAME_LENGTH 10
+#define POKEMON_NAME_BUFFER_SIZE max(20, POKEMON_NAME_LENGTH + 1) // Frequently used buffer size. Larger than necessary
 #define PLAYER_NAME_LENGTH   7
 #define MAIL_WORDS_COUNT 9
 #define EASY_CHAT_BATTLE_WORDS_COUNT 6
-#define MOVE_NAME_LENGTH 12
+#define MOVE_NAME_LENGTH ((B_EXPANDED_MOVE_NAMES == TRUE) ? 16 : 12)
 #define NUM_QUESTIONNAIRE_WORDS 4
 #define WONDER_CARD_TEXT_LENGTH 40
 #define WONDER_NEWS_TEXT_LENGTH 40
 #define WONDER_CARD_BODY_TEXT_LINES 4
 #define WONDER_NEWS_BODY_TEXT_LINES 10
+#define TYPE_NAME_LENGTH ((B_EXPANDED_TYPE_NAMES == TRUE) ? 8 : 6)
+#define ABILITY_NAME_LENGTH ((B_EXPANDED_ABILITY_NAMES == TRUE) ? 16 : 12)
+#define TRAINER_NAME_LENGTH 10
 
 #define MAX_STAMP_CARD_STAMPS 7
 
 #define TRAINER_ID_LENGTH 4
 #define MAX_MON_MOVES 4
-#define PARTY_SIZE 6
-#define MULTI_PARTY_SIZE (PARTY_SIZE / 2)
+#define ALL_MOVES_MASK ((1 << MAX_MON_MOVES) - 1)
 
 #define QUEST_LOG_SCENE_COUNT 4
 

@@ -148,7 +148,8 @@ enum {
 
 struct PokemonJump_MonInfo
 {
-    u16 species;
+    u16 species:15;
+    u16 isShiny:1;
     u32 otId;
     u32 personality;
 };
@@ -264,7 +265,6 @@ struct PokemonJump
     struct PokemonJump_Player *player;
 };
 
-static void Task_StaticCountdown(u8 taskId);
 static void Task_StaticCountdown_Init(u8 taskId);
 static void Task_StaticCountdown_Free(u8 taskId);
 static void Task_StaticCountdown_Start(u8 taskId);
@@ -549,56 +549,6 @@ static const TaskFunc sStaticCountdownFuncs[][4] =
 #define sTaskId         data[3]
 #define sId             data[4] // Never read
 #define sNumberSpriteId data[5] // Never read
-
-// Unused
-static u8 CreateStaticCountdownTask(u8 funcSetId, u8 taskPriority)
-{
-    u8 taskId = CreateTask(Task_StaticCountdown, taskPriority);
-    struct Task *task = &gTasks[taskId];
-
-    task->tState = STATE_IDLE;
-    task->tFuncSetId = funcSetId;
-    sStaticCountdownFuncs[funcSetId][FUNC_INIT](taskId);
-    return taskId;
-}
-
-// Unused
-static bool32 StartStaticCountdown(void)
-{
-    u8 taskId = FindTaskIdByFunc(Task_StaticCountdown);
-    if (taskId == TASK_NONE)
-        return FALSE;
-
-    gTasks[taskId].tState = STATE_START;
-    return TRUE;
-}
-
-// Unused
-static bool32 IsStaticCountdownRunning(void)
-{
-    return FuncIsActiveTask(Task_StaticCountdown);
-}
-
-static void Task_StaticCountdown(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    switch (tState)
-    {
-    // STATE_IDLE does nothing; wait until started
-    case STATE_START:
-        sStaticCountdownFuncs[tFuncSetId][FUNC_START](taskId);
-        tState = STATE_RUN;
-        break;
-    case STATE_RUN:
-        sStaticCountdownFuncs[tFuncSetId][FUNC_RUN](taskId);
-        break;
-    case STATE_END:
-        sStaticCountdownFuncs[tFuncSetId][FUNC_FREE](taskId);
-        DestroyTask(taskId);
-        break;
-    }
-}
 
 static void StaticCountdown_CreateSprites(u8 taskId, s16 *data)
 {
@@ -997,6 +947,7 @@ static void InitJumpMonInfo(struct PokemonJump_MonInfo *monInfo, struct Pokemon 
     monInfo->species = GetMonData(mon, MON_DATA_SPECIES);
     monInfo->otId = GetMonData(mon, MON_DATA_OT_ID);
     monInfo->personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    monInfo->isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 }
 
 static void VBlankCB_PokemonJump(void)
@@ -2707,7 +2658,8 @@ void IsPokemonJumpSpeciesInParty(void)
 struct MonInfoPacket
 {
     u8 id;
-    u16 species;
+    u16 species:15;
+    u16 isShiny:1;
     u32 personality;
     u32 otId;
 };
@@ -2719,6 +2671,7 @@ static void SendPacket_MonInfo(struct PokemonJump_MonInfo *monInfo)
     packet.species = monInfo->species;
     packet.otId = monInfo->otId;
     packet.personality = monInfo->personality;
+    packet.isShiny = monInfo->isShiny;
     Rfu_SendPacket(&packet);
 }
 
@@ -2735,27 +2688,11 @@ static bool32 RecvPacket_MonInfo(int multiplayerId, struct PokemonJump_MonInfo *
         monInfo->species = packet.species;
         monInfo->otId = packet.otId;
         monInfo->personality = packet.personality;
+        monInfo->isShiny = packet.isShiny;
         return TRUE;
     }
 
     return FALSE;
-}
-
-struct UnusedPacket
-{
-    u8 id;
-    u32 data;
-    u32 filler;
-};
-
-// Data packet that's never sent
-// No function to read it either
-static void SendPacket_Unused(u32 data)
-{
-    struct UnusedPacket packet;
-    packet.id = PACKET_UNUSED;
-    packet.data = data;
-    Rfu_SendPacket(&packet);
 }
 
 struct LeaderStatePacket
@@ -3588,7 +3525,7 @@ static void CreateJumpMonSprites(void)
     {
         struct PokemonJump_MonInfo *info = GetMonInfoByMultiplayerId(i);
 
-        y = gMonFrontPicCoords[info->species].y_offset;
+        y = gSpeciesInfo[info->species].frontPicYOffset;
         CreateJumpMonSprite(sPokemonJumpGfx, info, *xCoords, y + 112, i);
         CreateStarSprite(sPokemonJumpGfx, *xCoords, 112, i);
         xCoords++;
@@ -4152,7 +4089,7 @@ static void CreateJumpMonSprite(struct PokemonJumpGfx *jumpGfx, struct PokemonJu
     if (buffer && unusedBuffer)
     {
         HandleLoadSpecialPokePic(
-            &gMonFrontPicTable[monInfo->species],
+            TRUE,
             buffer,
             monInfo->species,
             monInfo->personality);
@@ -4162,7 +4099,7 @@ static void CreateJumpMonSprite(struct PokemonJumpGfx *jumpGfx, struct PokemonJu
         spriteSheet.size = MON_PIC_SIZE;
         LoadSpriteSheet(&spriteSheet);
 
-        spritePalette.data = GetMonSpritePalFromSpeciesAndPersonality(monInfo->species, monInfo->otId, monInfo->personality);
+        spritePalette.data = GetMonSpritePalFromSpeciesAndPersonality(monInfo->species, FALSE, monInfo->personality);
         spritePalette.tag = multiplayerId;
         LoadCompressedSpritePalette(&spritePalette);
 

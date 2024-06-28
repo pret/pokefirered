@@ -83,18 +83,18 @@ static const u8 *const sItemStorageActionDescriptionPtrs[] = {
 };
 
 static const struct MenuAction sMenuActions_TopMenu[] = {
-    {gText_ItemStorage, Task_PlayerPcItemStorage},
-    {gText_Mailbox, Task_PlayerPcMailbox},
-    {gText_TurnOff, Task_PlayerPcTurnOff}
+    {gText_ItemStorage, {Task_PlayerPcItemStorage}},
+    {gText_Mailbox, {Task_PlayerPcMailbox}},
+    {gText_TurnOff, {Task_PlayerPcTurnOff}}
 };
 
 static const u8 sItemOrder_BedroomPC[] = { 0, 1, 2 };
 static const u8 sItemOrder_PlayerPC[] = { 0, 1, 2 };
 
 static const struct MenuAction sMenuActions_ItemPc[] = {
-    {gText_WithdrawItem2, Task_PlayerPcWithdrawItem},
-    {gText_DepositItem2, Task_PlayerPcDepositItem},
-    {gFameCheckerText_Cancel, Task_PlayerPcCancel}
+    {gText_WithdrawItem2, {Task_PlayerPcWithdrawItem}},
+    {gText_DepositItem2, {Task_PlayerPcDepositItem}},
+    {gFameCheckerText_Cancel, {Task_PlayerPcCancel}}
 };
 
 static const struct ItemSlot gNewGamePCItems[] = {
@@ -103,10 +103,10 @@ static const struct ItemSlot gNewGamePCItems[] = {
 };
 
 static const struct MenuAction sMenuActions_MailSubmenu[] = {
-    {gOtherText_Read, Task_PlayerPcReadMail},
-    {gOtherText_MoveToBag, Task_PlayerPcMoveMailToBag},
-    {gOtherText_Give2, Task_PlayerPcGiveMailToMon},
-    {gOtherText_Exit, Task_PlayerPcExitMailSubmenu}
+    {gOtherText_Read, {Task_PlayerPcReadMail}},
+    {gOtherText_MoveToBag, {Task_PlayerPcMoveMailToBag}},
+    {gOtherText_Give2, {Task_PlayerPcGiveMailToMon}},
+    {gOtherText_Exit, {Task_PlayerPcExitMailSubmenu}}
 };
 
 static const struct WindowTemplate sWindowTemplate_TopMenu_3Items = {
@@ -494,7 +494,6 @@ static void Task_MailboxPcHandleInput(u8 taskId)
 static void Task_PrintWhatToDoWithSelectedMail(u8 taskId)
 {
     s32 length;
-    s32 i;
     u8 *ptr;
     StringCopy(gStringVar1, SELECTED_MAIL.playerName);
     length = StringLength(gStringVar1);

@@ -97,7 +97,7 @@ static const struct SpriteFrameImage sSpriteFrameImages_FldEff_CutGrass[] = {
 };
 
 const struct SpritePalette gFldEffPalette_CutGrass[] = {
-    gFieldEffectPal_CutGrass, 4096
+    {gFieldEffectPal_CutGrass, 4096}
 };
 
 static const struct SpriteTemplate sSpriteTemplate_FldEff_CutGrass = {
@@ -201,11 +201,9 @@ bool8 FldEff_CutGrass(void)
 {
     u8 i, j;
     s16 x, y;
-    u8 pos;
 
     i = 0;
     PlaySE(SE_M_CUT);
-    pos = gFieldEffectArguments[1] - 1;
     PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
 
     for (i = 0; i < CUT_SIDE; i++)

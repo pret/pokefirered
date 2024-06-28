@@ -137,7 +137,57 @@ static const struct FontInfo gFontInfos[] =
         .fgColor = 1,
         .bgColor = 2,
         .shadowColor = 15,
-    }
+    },
+    [FONT_NARROW] = {
+        .fontFunction = FontFunc_Narrow,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 16,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SMALL_NARROW] = {
+        .fontFunction = FontFunc_SmallNarrow,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 8,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_NARROWER] = {
+        .fontFunction = FontFunc_Narrower,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 16,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SMALL_NARROWER] = {
+        .fontFunction = FontFunc_SmallNarrower,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 8,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SHORT_NARROW] = {
+        .fontFunction = FontFunc_ShortNarrow,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
 };
 
 static const u8 gMenuCursorDimensions[][2] = 
@@ -625,19 +675,6 @@ void Menu_LoadStdPalAt(u16 offset)
     LoadPalette(gStandardMenuPalette, offset, PLTT_SIZEOF(10));
 }
 
-// Unused
-static const u16 *GetStdMenuPalette(void)
-{
-    return gStandardMenuPalette;
-}
-
-static u16 GetStdPalColor(u8 colorNum)
-{
-    if (colorNum > 15)
-        colorNum = 0;
-    return gStandardMenuPalette[colorNum];
-}
-
 void DisplayItemMessageOnField(u8 taskId, u8 fontId, const u8 *string, TaskFunc callback)
 {
     LoadStdWindowFrameGfx();
@@ -657,7 +694,6 @@ void DisplayYesNoMenuDefaultNo(void)
 
 u8 GetTextSpeedSetting(void)
 {
-    u32 speed;
     if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_FAST)
         gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
     return sTextSpeedFrameDelays[gSaveBlock2Ptr->optionsTextSpeed];
@@ -686,11 +722,6 @@ void RemoveStartMenuWindow(void)
         RemoveWindow(sStartMenuWindowId);
         sStartMenuWindowId = 0xFF;
     }
-}
-
-static u16 GetDlgWindowBaseTileNum(void)
-{
-    return DLG_WINDOW_BASE_TILE_NUM;
 }
 
 u16 GetStdWindowBaseTileNum(void)

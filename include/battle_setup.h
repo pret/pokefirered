@@ -3,7 +3,10 @@
 
 #include "global.h"
 
+extern u16 gPartnerTrainerId;
+
 void StartWildBattle(void);
+void StartDoubleWildBattle(void);
 void StartRoamerBattle(void);
 void StartOldManTutorialBattle(void);
 void StartScriptedWildBattle(void);
@@ -33,5 +36,6 @@ void ShowTrainerCantBattleSpeech(void);
 void PlayTrainerEncounterMusic(void);
 const u8 *GetTrainerALoseText(void);
 const u8 *GetTrainerWonSpeech(void);
+void BattleSetup_StartTrainerBattle_Debug(void);
 
 #endif // GUARD_BATTLE_SETUP_H

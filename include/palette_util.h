@@ -72,7 +72,6 @@ void RouletteFlash_Enable(struct RouletteFlashUtil *, u16);
 void RouletteFlash_Stop(struct RouletteFlashUtil *, u16);
 void InitPulseBlend(struct PulseBlend *);
 int InitPulseBlendPaletteSettings(struct PulseBlend *, const struct PulseBlendSettings *);
-static void ClearPulseBlendPalettesSettings(struct PulseBlendPalette *);
 void UnloadUsedPulseBlendPalettes(struct PulseBlend *, u16, u8);
 void MarkUsedPulseBlendPalettes(struct PulseBlend *, u16, u8);
 void UnmarkUsedPulseBlendPalettes(struct PulseBlend *, u16, u8);

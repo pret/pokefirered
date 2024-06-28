@@ -1,16 +1,22 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
-#include "config.h"
-#include "gba/gba.h"
 #include <string.h>
+#include <limits.h>
+#include "config.h" // we need to define config before gba headers as print stuff needs the functions nulled before defines.
+#include "gba/gba.h"
+#include "fpmath.h"
+#include "metaprogram.h"
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
 #include "constants/species.h"
 #include "constants/pokedex.h"
-#include "constants/easy_chat.h"
+#include "constants/maps.h"
+#include "constants/pokemon.h"
 #include "constants/rgb.h"
+#include "constants/easy_chat.h"
+#include "constants/items.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -51,13 +57,13 @@
 #define Q_8_8(n) ((s16)((n) * 256))
 
 // Converts a number from Q8.8 fixed-point format
-#define Q_8_8_TO_INT(n) ((s16)((n) >> 8))
+// #define Q_8_8_TO_INT(n) ((s16)((n) >> 8))
 
 // Converts a number to Q4.12 fixed-point format
-#define Q_4_12(n)  ((s16)((n) * 4096))
+// #define Q_4_12(n)  ((s16)((n) * 4096))
 
 // Converts a number from Q4.12 fixed-point format
-#define Q_4_12_TO_INT(n) ((s16)((n) >> 12))
+// #define Q_4_12_TO_INT(n) ((s16)((n) >> 12))
 
 // Converts a number to QN.S fixed-point format (16-bits)
 #define Q_N_S(s, n) ((s16)((n) * (1 << (s))))
@@ -85,6 +91,12 @@
 #else
 #define SAFE_DIV(a, b) ((a) / (b))
 #endif
+
+// The below macro does a%n, but (to match) will switch to a&(n-1) if n is a power of 2.
+// There are cases where GF does a&(n-1) where we would really like to have a%n, because
+// if n is changed to a value that isn't a power of 2 then a&(n-1) is unlikely to work as
+// intended, and a%n for powers of 2 isn't always optimized to use &.
+#define MOD(a, n)(((n) & ((n)-1)) ? ((a) % (n)) : ((a) & ((n)-1)))
 
 // Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
@@ -131,9 +143,27 @@ extern u8 gStringVar4[];
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_ADDITIONAL_PHRASE_BYTES ROUND_BITS_TO_BYTES(NUM_ADDITIONAL_PHRASES)
 
+// Calls m0/m1/.../m8 depending on how many arguments are passed.
+// #define VARARG_8(m, ...) CAT(m, NARG_8(__VA_ARGS__))(__VA_ARGS__)
+
+// This returns the number of arguments passed to it (up to 8).
+// #define NARG_8(...) NARG_8_(_, ##__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+// #define NARG_8_(_, a, b, c, d, e, f, g, h, N, ...) N
+
+// #define CAT(a, b) CAT_(a, b)
+// #define CAT_(a, b) a ## b
+
+// #define STR(a) STR_(a)
+// #define STR_(a) #a
+
+// Converts a string to a compound literal, essentially making it a pointer to const u8
+// #define COMPOUND_STRING(str) (const u8[]) _(str)
+
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
+
+#define FEATURE_FLAG_ASSERT(flag, id) STATIC_ASSERT(flag > TEMP_FLAGS_END || flag == 0, id)
 
 struct Coords8
 {
@@ -293,7 +323,7 @@ struct BattleTowerData // Leftover from R/S
     /*0x03D8, 0x0488*/ u16 firstMonSpecies; // species of the first pokemon in the player's battle tower party
     /*0x03DA, 0x048A*/ u16 defeatedBySpecies; // species of the pokemon that defated the player
     /*0x03DC, 0x048C*/ u8 defeatedByTrainerName[8];
-    /*0x03E4, 0x0494*/ u8 firstMonNickname[POKEMON_NAME_LENGTH]; // nickname of the first pokemon in the player's battle tower party
+    /*0x03E4, 0x0494*/ u8 firstMonNickname[VANILLA_POKEMON_NAME_LENGTH]; // nickname of the first pokemon in the player's battle tower party
     /*0x03F0, 0x04A0*/ struct BattleTowerEReaderTrainer ereaderTrainer;
     /*0x04AC, 0x055C*/ u8 battleTowerLevelType:1; // 0 = level 50; 1 = level 100
     /*0x04AC, 0x055C*/ u8 unk_554:1;
@@ -343,7 +373,7 @@ struct SaveBlock2
     /*0xAF0*/ struct BerryCrush berryCrush;
     /*0xB00*/ struct PokemonJumpRecords pokeJump;
     /*0xB10*/ struct BerryPickingResults berryPick;
-    /*0xB20*/ u8 filler_B20[0x400];
+    // /*0xB20*/ u8 filler_B20[0x400];
     /*0xF20*/ u32 encryptionKey;
 }; // size: 0xF24
 
@@ -795,13 +825,13 @@ struct SaveBlock1
     /*0x30D0*/ struct Roamer roamer;
     /*0x30EC*/ struct EnigmaBerry enigmaBerry;
     /*0x3120*/ struct MysteryGiftSave mysteryGift;
-    /*0x348C*/ u8 unused_348C[400];
+    // /*0x348C*/ u8 unused_348C[400];
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ struct RecordMixingGift recordMixingGift; // unused
     /*0x3A18*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH + 1];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
-    /*0x3A94*/ u8 unused_3A94[64];
+    // /*0x3A94*/ u8 unused_3A94[64];
     /*0x3AD4*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3BA8*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C98*/ struct DaycareMon route5DayCareMon;

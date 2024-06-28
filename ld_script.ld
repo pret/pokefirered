@@ -1,6 +1,13 @@
 gNumMusicPlayers = 4;
 gMaxLines = 0;
 
+MEMORY
+{
+    EWRAM (rwx) : ORIGIN = 0x2000000, LENGTH = 256K
+    IWRAM (rwx) : ORIGIN = 0x3000000, LENGTH = 32K
+    ROM    (rx) : ORIGIN = 0x8000000, LENGTH = 32M
+}
+
 SECTIONS {
     . = 0x2000000;
 
@@ -17,8 +24,8 @@ SECTIONS {
         *libc.a:impure.o(.data);
         *libc.a:locale.o(.data);
         *libc.a:mallocr.o(.data);
-        . = 0x40000;
-    }
+        /*. = 0x40000;*/
+    } > EWRAM
 
     . = 0x3000000;
 
@@ -39,8 +46,8 @@ SECTIONS {
         *libc.a:sbrkr.o(COMMON);
         end = .;
 
-        . = 0x8000;
-    }
+        /*. = 0x8000;*/
+    } > IWRAM
 
     . = 0x8000000;
 
@@ -64,6 +71,7 @@ SECTIONS {
         src/string_util.o(.text);
         src/link.o(.text);
         src/multiboot.o(.text);
+        src/rtc.o(.text);
         src/main_menu.o(.text);
         src/battle_controllers.o(.text);
         src/decompress.o(.text);
@@ -107,6 +115,8 @@ SECTIONS {
         src/event_data.o(.text);
         src/coord_event_weather.o(.text);
         src/field_tasks.o(.text);
+        src/clock.o(.text);
+        src/reset_rtc_screen.o(.text);
         src/start_menu.o(.text);
         src/tileset_anims.o(.text);
         src/palette.o(.text);
@@ -179,6 +189,7 @@ SECTIONS {
         src/battle_anim_ground.o(.text);
         src/battle_anim_normal.o(.text);
         src/battle_anim_utility_funcs.o(.text);
+        src/battle_anim_new.o(.text);
         src/battle_intro.o(.text);
         src/bike.o(.text);
         src/easy_chat.o(.text);
@@ -189,11 +200,12 @@ SECTIONS {
         src/heal_location.o(.text);
         src/region_map.o(.text);
         src/image_processing_effects.o(.text);
-        src/battle_ai_script_commands.o(.text);
+        src/wallclock.o(.text);
         src/fldeff_rocksmash.o(.text);
         src/fldeff_dig.o(.text);
         src/fldeff_flash.o(.text);
         src/post_battle_event_funcs.o(.text);
+        src/time_events.o(.text);
         src/prof_pc.o(.text);
         src/hof_pc.o(.text);
         src/field_specials.o(.text);
@@ -276,6 +288,8 @@ SECTIONS {
         src/itemfinder.o(.text);
         src/buy_menu_helpers.o(.text);
         src/slot_machine.o(.text);
+        src/battle_ai_main.o(.text);
+		src/battle_ai_util.o(.text);
         src/roamer.o(.text);
         src/mystery_gift_menu.o(.text);
         src/ereader_screen.o(.text);
@@ -307,7 +321,7 @@ SECTIONS {
         src/berry_powder.o(.text);
         src/minigame_countdown.o(.text);
         src/berry_fix_program.o(.text);
-    } =0
+    } > ROM =0
 
     script_data :
     ALIGN(4)
@@ -317,9 +331,8 @@ SECTIONS {
         data/battle_scripts_1.o(script_data);
         data/field_effect_scripts.o(script_data);
         data/battle_scripts_2.o(script_data);
-        data/battle_ai_scripts.o(script_data);
         data/mystery_event_script_cmd_table.o(script_data);
-    } =0
+    } > ROM =0
 
     lib_text :
     ALIGN(4)
@@ -331,6 +344,7 @@ SECTIONS {
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
         src/agb_flash_le.o(.text);
+        src/siirtc.o(.text);
         src/librfu_stwi.o(.text);
         src/librfu_intr.o(.text);
         src/librfu_rfu.o(.text);
@@ -388,7 +402,7 @@ SECTIONS {
         *libc.a:libcfunc.o(.text);
         *libc.a:lseekr.o(.text);
         *libc.a:readr.o(.text);
-    } =0
+    } > ROM =0
 
     .rodata :
     SUBALIGN(4)
@@ -404,7 +418,10 @@ SECTIONS {
         src/bg_regs.o(.rodata);
         src/string_util.o(.rodata);
         src/link.o(.rodata);
+        src/rtc.o(.rodata);
+        src/reset_rtc_screen.o(.rodata);
         src/main_menu.o(.rodata);
+        src/battle_controllers.o(.rodata);
         src/data.o(.rodata);
         src/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);
@@ -413,6 +430,7 @@ SECTIONS {
         src/battle_controller_player.o(.rodata);
         src/battle_anim_smokescreen.o(.rodata);
         src/battle_controller_opponent.o(.rodata);
+        src/battle_ai_switch_items.o(.rodata);
         src/battle_controller_link_opponent.o(.rodata);
         src/pokemon.o(.rodata);
         src/trig.o(.rodata);
@@ -490,6 +508,7 @@ SECTIONS {
         src/battle_anim_ground.o(.rodata);
         src/battle_anim_normal.o(.rodata);
         src/battle_anim_utility_funcs.o(.rodata);
+        src/battle_anim_new.o(.rodata);
         src/battle_intro.o(.rodata);
         src/bike.o(.rodata);
         src/easy_chat.o(.rodata);
@@ -498,8 +517,9 @@ SECTIONS {
         src/heal_location.o(.rodata);
         src/region_map.o(.rodata);
         src/image_processing_effects.o(.rodata);
-        src/battle_ai_script_commands.o(.rodata);
+        src/wallclock.o(.rodata);
         src/fldeff_flash.o(.rodata);
+        src/time_events.o(.rodata);
         src/field_specials.o(.rodata);
         src/battle_records.o(.rodata);
         src/evolution_scene.o(.rodata);
@@ -570,6 +590,8 @@ SECTIONS {
         src/itemfinder.o(.rodata);
         src/buy_menu_helpers.o(.rodata);
         src/slot_machine.o(.rodata);
+        src/battle_ai_main.o(.rodata);
+		src/battle_ai_util.o(.rodata);
         src/roamer.o(.rodata);
         src/mystery_gift_menu.o(.rodata);
         src/ereader_screen.o(.rodata);
@@ -601,14 +623,13 @@ SECTIONS {
         src/berry_fix_program.o(.rodata);
         src/keyboard_text.o(.rodata);
         src/trainer_tower_sets.o(.rodata);
-        src/move_descriptions.o(.rodata);
 
         /* These should not be moved to C files */
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
-    } =0
+    } > ROM =0
 
     song_data :
     ALIGN(4)
@@ -960,7 +981,7 @@ SECTIONS {
         sound/songs/midi/mus_trainer_tower.o(.rodata);
         sound/songs/midi/mus_slow_pallet.o(.rodata);
         sound/songs/midi/mus_teachy_tv_menu.o(.rodata);
-    }
+    } > ROM =0
 
     lib_rodata :
     SUBALIGN(4)
@@ -969,6 +990,7 @@ SECTIONS {
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
+        src/siirtc.o(.rodata);
         src/librfu_rfu.o(.rodata);
         src/librfu_sio32id.o(.rodata);
         src/isagbprn.o(.rodata);
@@ -1013,7 +1035,7 @@ SECTIONS {
         *libc.a:readr.o(.rodata);
 
         . = ALIGN(4);
-    } =0
+    } > ROM =0
 
     multiboot_data :
     ALIGN(4)
@@ -1021,14 +1043,14 @@ SECTIONS {
         data/multiboot_ereader.o(.rodata);
         data/multiboot_berry_glitch_fix.o(.rodata);
         data/multiboot_pokemon_colosseum.o(.rodata);
-    } =0
+    } > ROM =0
 
     . = 0x08D00000;
     gfx_data :
     ALIGN(4)
     {
         src/graphics.o(.rodata);
-    } =0
+    } > ROM =0
 
     extra :
     ALIGN(4)
@@ -1036,7 +1058,7 @@ SECTIONS {
         src/*.o(.text);
         src/*.o(.rodata);
         data/*.o(.rodata);
-    } = 0
+    } > ROM =0
 
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }

@@ -10,27 +10,6 @@
 #define AILMENT_PKRS  6
 #define AILMENT_FNT   7
 
-#define TUTOR_MOVE_MEGA_PUNCH      0
-#define TUTOR_MOVE_SWORDS_DANCE    1
-#define TUTOR_MOVE_MEGA_KICK       2
-#define TUTOR_MOVE_BODY_SLAM       3
-#define TUTOR_MOVE_DOUBLE_EDGE     4
-#define TUTOR_MOVE_COUNTER         5
-#define TUTOR_MOVE_SEISMIC_TOSS    6
-#define TUTOR_MOVE_MIMIC           7
-#define TUTOR_MOVE_METRONOME       8
-#define TUTOR_MOVE_SOFT_BOILED     9
-#define TUTOR_MOVE_DREAM_EATER     10
-#define TUTOR_MOVE_THUNDER_WAVE    11
-#define TUTOR_MOVE_EXPLOSION       12
-#define TUTOR_MOVE_ROCK_SLIDE      13
-#define TUTOR_MOVE_SUBSTITUTE      14
-#define TUTOR_MOVE_COUNT           15 // regular tutor move count
-
-#define TUTOR_MOVE_FRENZY_PLANT    15
-#define TUTOR_MOVE_BLAST_BURN      16
-#define TUTOR_MOVE_HYDRO_CANNON    17
-
 #define FIELD_MOVE_FLASH        0
 #define FIELD_MOVE_CUT          1
 #define FIELD_MOVE_FLY          2
@@ -70,8 +49,8 @@
 #define PARTY_ACTION_CANT_SWITCH        2
 #define PARTY_ACTION_USE_ITEM           3
 #define PARTY_ACTION_ABILITY_PREVENTS   4
-#define PARTY_ACTION_GIVE_ITEM          5  
-#define PARTY_ACTION_GIVE_PC_ITEM       6
+#define PARTY_ACTION_GIVE_ITEM          5
+#define PARTY_ACTION_GIVE_PC_ITEM       6   // Unused. Not possible to give non-mail items directly from PC
 #define PARTY_ACTION_GIVE_MAILBOX_MAIL  7
 #define PARTY_ACTION_SWITCH             8
 #define PARTY_ACTION_SWITCHING          9
@@ -79,7 +58,8 @@
 #define PARTY_ACTION_CHOOSE_AND_CLOSE   11
 #define PARTY_ACTION_MOVE_TUTOR         12
 #define PARTY_ACTION_MINIGAME           13
-#define PARTY_ACTION_REUSABLE_ITEM      14
+#define PARTY_ACTION_REUSABLE_ITEM      14  // Unused. The only reusable items are handled separately
+#define PARTY_ACTION_CHOOSE_FAINTED_MON 15
 
 // IDs for DisplayPartyMenuStdMessage, to display the message at the bottom of the party menu
 #define PARTY_MSG_CHOOSE_MON                0
@@ -109,6 +89,8 @@
 #define PARTY_MSG_BOOST_PP_WHICH_MOVE       24
 #define PARTY_MSG_DO_WHAT_WITH_ITEM         25
 #define PARTY_MSG_DO_WHAT_WITH_MAIL         26
+#define PARTY_MSG_WHICH_APPLIANCE           27
+#define PARTY_MSG_CHOOSE_SECOND_FUSION      28
 #define PARTY_MSG_NONE                      127
 
 // IDs for DisplayPartyPokemonDescriptionText, to display a message in the party pokemon's box
@@ -123,10 +105,12 @@
 #define PARTYBOX_DESC_NOT_ABLE_2  8
 #define PARTYBOX_DESC_LEARNED     9
 
-#define SELECTWINDOW_ACTIONS  0
-#define SELECTWINDOW_ITEM     1
-#define SELECTWINDOW_MAIL     2
-#define SELECTWINDOW_MOVES    3
+#define SELECTWINDOW_ACTIONS        0
+#define SELECTWINDOW_ITEM           1
+#define SELECTWINDOW_MAIL           2
+#define SELECTWINDOW_MOVES          3
+#define SELECTWINDOW_CATALOG        4
+#define SELECTWINDOW_ZYGARDECUBE    5
 
 enum
 {

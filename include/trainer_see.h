@@ -3,6 +3,9 @@
 
 #include "global.h"
 
+extern u16 gWhichTrainerToFaceAfterBattle;
+extern u8 gNoOfApproachingTrainers;
+
 bool8 CheckForTrainersWantingBattle(void);
 void MovementAction_RevealTrainer_RunTrainerSeeFuncList(struct ObjectEvent *var);
 u8 FldEff_ExclamationMarkIcon1(void);

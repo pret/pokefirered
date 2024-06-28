@@ -10,7 +10,6 @@
 bool32 sIsInSaveFailedScreen;
 
 static EWRAM_DATA u16 sSaveType = SAVE_NORMAL;
-static EWRAM_DATA u16 sUnused = 0;
 static EWRAM_DATA u8 sSaveFailedScreenState = 0;
 
 static void BlankPalettes(void);

@@ -124,7 +124,6 @@ static void Sio32IDIntr(void)
     u32 regSIODATA32;
     u16 delay;
     u32 rfuSIO32IdUnk0_times_16;
-    u16 negRfuSIO32IdUnk6;
 
     regSIODATA32 = REG_SIODATA32;
     if (gRfuSIO32Id.MS_mode != AGB_CLK_MASTER)

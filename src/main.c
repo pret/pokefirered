@@ -4,6 +4,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "m4a.h"
+#include "rtc.h"
 #include "random.h"
 #include "gba/flash_internal.h"
 #include "help_system.h"
@@ -14,6 +15,7 @@
 #include "battle_controllers.h"
 #include "scanline_effect.h"
 #include "save_failed_screen.h"
+#include "test_runner.h"
 #include "quest_log.h"
 
 extern u32 intr_main[];
@@ -24,18 +26,16 @@ static void VCountIntr(void);
 static void SerialIntr(void);
 static void IntrDummy(void);
 
-const u8 gGameVersion = GAME_VERSION;
+// Defined in the linker script so that the test build can override it.
+extern void gInitialMainCB2(void);
 
+const u8 gGameVersion = GAME_VERSION;
 const u8 gGameLanguage = GAME_LANGUAGE;
 
 #if MODERN
 const char BuildDateTime[] = __DATE__ " " __TIME__;
 #else
-#if REVISION == 0
-const char BuildDateTime[] = "2004 04 26 11:20";
-#else
 const char BuildDateTime[] = "2004 07 20 09:30";
-#endif //REVISION
 #endif //MODERN
 
 const IntrFunc gIntrTableTemplate[] =
@@ -67,6 +67,7 @@ IntrFunc gIntrTable[INTR_COUNT];
 bool8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
 u8 gPcmDmaCounter;
+void *gAgbMainLoop_sp;
 
 // These variables are not defined in RS or Emerald, and are never read.
 // They were likely used to debug the audio engine and VCount interrupt.
@@ -130,6 +131,7 @@ void AgbMain()
     m4aSoundInit();
     EnableVCountIntrAtLine150();
     InitRFU();
+    RtcInit();
     CheckForFlashMemory();
     InitMainCallbacks();
     InitMapMusic();
@@ -151,13 +153,16 @@ void AgbMain()
 #endif
 #endif
 
-#if REVISION == 1
     if (gFlashMemoryPresent != TRUE)
         SetMainCallback2(NULL);
-#endif
 
     gLinkTransferringData = FALSE;
+    gAgbMainLoop_sp = __builtin_frame_address(0);
+    AgbMainLoop();
+}
 
+void AgbMainLoop(void)
+{
     for (;;)
     {
         ReadKeys();
@@ -209,7 +214,7 @@ static void InitMainCallbacks(void)
     gMain.vblankCounter1 = 0;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
-    SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
+    SetMainCallback2(gInitialMainCB2);
     gSaveBlock2Ptr = &gSaveBlock2;
     gSaveBlock1Ptr = &gSaveBlock1;
     gSaveBlock2.encryptionKey = 0;
@@ -218,7 +223,11 @@ static void InitMainCallbacks(void)
 
 static void CallCallbacks(void)
 {
+#if TESTING || DEBUG_BATTLE_MENU == TRUE // test framework not working with help system
+    if (!RunSaveFailedScreen())
+#else
     if (!RunSaveFailedScreen() && !RunHelpSystemCallback())
+#endif
     {
         if (gMain.callback1)
             gMain.callback1();
@@ -236,15 +245,35 @@ void SetMainCallback2(MainCallback callback)
 
 void StartTimer1(void)
 {
-    REG_TM1CNT_H = 0x80;
+    if (HQ_RANDOM)
+    {
+        REG_TM2CNT_L = 0;
+        REG_TM2CNT_H = TIMER_ENABLE | TIMER_COUNTUP;
+    }
+
+    REG_TM1CNT_H = TIMER_ENABLE;
 }
 
 void SeedRngAndSetTrainerId(void)
 {
-    u16 val = REG_TM1CNT_L;
-    SeedRng(val);
-    REG_TM1CNT_H = 0;
-    gTrainerId = val;
+    u32 val;
+
+    if (HQ_RANDOM)
+    {
+        REG_TM1CNT_H = 0;
+        REG_TM2CNT_H = 0;
+        val = ((u32)REG_TM2CNT_L) << 16;
+        val |= REG_TM1CNT_L;
+        SeedRng(val);
+        gTrainerId = Random();
+    }
+    else
+    {
+        u16 val = REG_TM1CNT_L;
+        SeedRng(val);
+        REG_TM1CNT_H = 0;
+        gTrainerId = val;
+    }
 }
 
 u16 GetGeneratedTrainerIdLower(void)
@@ -387,7 +416,10 @@ static void VBlankIntr(void)
 #endif
 
     TryReceiveLinkBattleData();
-    Random();
+
+    if (!gTestRunnerEnabled && (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_RECORDED))))
+        AdvanceRandom();
+    // Random(); // old
     UpdateWirelessStatusIndicatorSprite();
 
     INTR_CHECK |= INTR_FLAG_VBLANK;
@@ -463,6 +495,7 @@ void DoSoftReset(void)
     DmaStop(1);
     DmaStop(2);
     DmaStop(3);
+    SiiRtcProtect();
     SoftReset(RESET_ALL & ~RESET_SIO_REGS);
 }
 

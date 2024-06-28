@@ -2,20 +2,30 @@
 #include "gflib.h"
 #include "berry.h"
 #include "event_data.h"
+#include "graphics.h"
 #include "item.h"
 #include "item_use.h"
+#include "item_menu.h"
 #include "load_save.h"
+#include "party_menu.h"
 #include "quest_log.h"
 #include "strings.h"
 #include "constants/hold_effects.h"
+#include "constants/item_effects.h"
+#include "constants/item.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 
 EWRAM_DATA struct BagPocket gBagPockets[NUM_BAG_POCKETS] = {};
 
 void SortAndCompactBagPocket(struct BagPocket * pocket);
+static const u8 *ItemId_GetPluralName(u16);
+static bool32 DoesItemHavePluralName(u16);
 
 // Item descriptions and data
+#include "constants/moves.h"
+#include "pokemon_summary_screen.h"
+#include "data/pokemon/item_effects.h"
 #include "data/items.h"
 
 u16 GetBagItemQuantity(u16 * ptr)
@@ -64,22 +74,33 @@ void SetBagPocketsPointers(void)
     gBagPockets[POCKET_KEY_ITEMS - 1].capacity = BAG_KEYITEMS_COUNT;
     gBagPockets[POCKET_POKE_BALLS - 1].itemSlots = gSaveBlock1Ptr->bagPocket_PokeBalls;
     gBagPockets[POCKET_POKE_BALLS - 1].capacity = BAG_POKEBALLS_COUNT;
-    gBagPockets[POCKET_TM_CASE - 1].itemSlots = gSaveBlock1Ptr->bagPocket_TMHM;
-    gBagPockets[POCKET_TM_CASE - 1].capacity = BAG_TMHM_COUNT;
-    gBagPockets[POCKET_BERRY_POUCH - 1].itemSlots = gSaveBlock1Ptr->bagPocket_Berries;
-    gBagPockets[POCKET_BERRY_POUCH - 1].capacity = BAG_BERRIES_COUNT;
+    gBagPockets[POCKET_TM_HM - 1].itemSlots = gSaveBlock1Ptr->bagPocket_TMHM;
+    gBagPockets[POCKET_TM_HM - 1].capacity = BAG_TMHM_COUNT;
+    gBagPockets[POCKET_BERRIES - 1].itemSlots = gSaveBlock1Ptr->bagPocket_Berries;
+    gBagPockets[POCKET_BERRIES - 1].capacity = BAG_BERRIES_COUNT;
 }
 
 void CopyItemName(u16 itemId, u8 * dest)
 {
-    if (itemId == ITEM_ENIGMA_BERRY)
+    StringCopy(dest, ItemId_GetName(itemId));
+}
+
+const u8 sText_s[] =_("s");
+
+u8 *CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
+{
+    if (quantity == 1)
     {
-        StringCopy(dest, GetBerryInfo(ITEM_TO_BERRY(ITEM_ENIGMA_BERRY))->name);
-        StringAppend(dest, gText_Berry);
+        return StringCopy(dst, ItemId_GetName(itemId));
+    }
+    else if (DoesItemHavePluralName(itemId))
+    {
+        return StringCopy(dst, ItemId_GetPluralName(itemId));
     }
     else
     {
-        StringCopy(dest, ItemId_GetName(itemId));
+        u8 *end = StringCopy(dst, ItemId_GetName(itemId));
+        return StringCopy(end, sText_s);
     }
 }
 
@@ -141,7 +162,7 @@ bool8 CheckBagHasItem(u16 itemId, u16 count)
 
 bool8 HasAtLeastOneBerry(void)
 {
-    u8 itemId;
+    u16 itemId;
     bool8 exists;
 
     exists = CheckBagHasItem(ITEM_BERRY_POUCH, 1);
@@ -230,7 +251,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
         }
     }
 
-    if (pocket == POCKET_TM_CASE - 1 && !CheckBagHasItem(ITEM_TM_CASE, 1))
+    if (pocket == POCKET_TM_HM - 1 && !CheckBagHasItem(ITEM_TM_CASE, 1))
     {
         idx = BagPocketGetFirstEmptySlot(POCKET_KEY_ITEMS - 1);
         if (idx == -1)
@@ -239,7 +260,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
         SetBagItemQuantity(&gBagPockets[POCKET_KEY_ITEMS - 1].itemSlots[idx].quantity, 1);
     }
 
-    if (pocket == POCKET_BERRY_POUCH - 1 && !CheckBagHasItem(ITEM_BERRY_POUCH, 1))
+    if (pocket == POCKET_BERRIES - 1 && !CheckBagHasItem(ITEM_BERRY_POUCH, 1))
     {
         idx = BagPocketGetFirstEmptySlot(POCKET_KEY_ITEMS - 1);
         if (idx == -1)
@@ -609,72 +630,165 @@ u16 SanitizeItemId(u16 itemId)
 
 const u8 * ItemId_GetName(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].name;
+    return gItemsInfo[SanitizeItemId(itemId)].name;
 }
 
-// Unused
-u16 ItemId_GetId(u16 itemId)
+u32 ItemId_GetPrice(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].itemId;
+    return gItemsInfo[SanitizeItemId(itemId)].price;
 }
 
-u16 ItemId_GetPrice(u16 itemId)
+static bool32 DoesItemHavePluralName(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].price;
+    return (gItemsInfo[SanitizeItemId(itemId)].pluralName[0] != '\0');
+}
+
+static const u8 *ItemId_GetPluralName(u16 itemId)
+{
+    return gItemsInfo[SanitizeItemId(itemId)].pluralName;
 }
 
 u8 ItemId_GetHoldEffect(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].holdEffect;
+    return gItemsInfo[SanitizeItemId(itemId)].holdEffect;
 }
 
 u8 ItemId_GetHoldEffectParam(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].holdEffectParam;
+    return gItemsInfo[SanitizeItemId(itemId)].holdEffectParam;
 }
 
 const u8 * ItemId_GetDescription(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].description;
+    return gItemsInfo[SanitizeItemId(itemId)].description;
 }
 
 u8 ItemId_GetImportance(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].importance;
-}
-
-// Unused
-u8 ItemId_GetRegistrability(u16 itemId)
-{
-    return gItems[SanitizeItemId(itemId)].registrability;
+    return gItemsInfo[SanitizeItemId(itemId)].importance;
 }
 
 u8 ItemId_GetPocket(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].pocket;
+    return gItemsInfo[SanitizeItemId(itemId)].pocket;
 }
 
 u8 ItemId_GetType(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].type;
+    return gItemsInfo[SanitizeItemId(itemId)].type;
 }
 
 ItemUseFunc ItemId_GetFieldFunc(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].fieldUseFunc;
+    return gItemsInfo[SanitizeItemId(itemId)].fieldUseFunc;
 }
 
 bool8 ItemId_GetBattleUsage(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].battleUsage;
+    u16 item = SanitizeItemId(itemId);    
+    if (item == ITEM_ENIGMA_BERRY)
+    {
+        switch (GetItemEffectType(gSpecialVar_ItemId))
+        {
+            case ITEM_EFFECT_X_ITEM:
+                return EFFECT_ITEM_INCREASE_STAT;
+            case ITEM_EFFECT_HEAL_HP:
+                return EFFECT_ITEM_RESTORE_HP;
+            case ITEM_EFFECT_CURE_POISON:
+            case ITEM_EFFECT_CURE_SLEEP:
+            case ITEM_EFFECT_CURE_BURN:
+            case ITEM_EFFECT_CURE_FREEZE:
+            case ITEM_EFFECT_CURE_PARALYSIS:
+            case ITEM_EFFECT_CURE_ALL_STATUS:
+            case ITEM_EFFECT_CURE_CONFUSION:
+            case ITEM_EFFECT_CURE_INFATUATION:
+                return EFFECT_ITEM_CURE_STATUS;
+            case ITEM_EFFECT_HEAL_PP:
+                return EFFECT_ITEM_RESTORE_PP;
+            default:
+                return 0;
+        }
+    }
+    else
+        return gItemsInfo[item].battleUsage;
 }
 
-ItemUseFunc ItemId_GetBattleFunc(u16 itemId)
+u16 ItemId_GetSecondaryId(u16 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].battleUseFunc;
+    return gItemsInfo[SanitizeItemId(itemId)].secondaryId;
 }
 
-u8 ItemId_GetSecondaryId(u16 itemId)
+u32 ItemId_GetFlingPower(u32 itemId)
 {
-    return gItems[SanitizeItemId(itemId)].secondaryId;
+    return gItemsInfo[SanitizeItemId(itemId)].flingPower;
+}
+
+const u8 *ItemId_GetEffect(u32 itemId)
+{
+    if (itemId == ITEM_ENIGMA_BERRY)
+    {
+        return gSaveBlock1Ptr->enigmaBerry.itemEffect;
+    }
+    else
+    {
+        return gItemsInfo[SanitizeItemId(itemId)].effect;
+    }
+}
+
+
+u32 GetItemStatus1Mask(u16 itemId)
+{
+    const u8 *effect = ItemId_GetEffect(itemId);
+    switch (effect[3])
+    {
+        case ITEM3_PARALYSIS:
+            return STATUS1_PARALYSIS;
+        case ITEM3_FREEZE:
+            return STATUS1_FREEZE | STATUS1_FROSTBITE;
+        case ITEM3_BURN:
+            return STATUS1_BURN;
+        case ITEM3_POISON:
+            return STATUS1_PSN_ANY | STATUS1_TOXIC_COUNTER;
+        case ITEM3_SLEEP:
+            return STATUS1_SLEEP;
+        case ITEM3_STATUS_ALL:
+            return STATUS1_ANY | STATUS1_TOXIC_COUNTER;
+    }
+    return 0;
+}
+
+u32 GetItemStatus2Mask(u16 itemId)
+{
+    const u8 *effect = ItemId_GetEffect(itemId);
+    if (effect[3] & ITEM3_STATUS_ALL)
+        return STATUS2_INFATUATION | STATUS2_CONFUSION;
+    else if (effect[0] & ITEM0_INFATUATION)
+        return STATUS2_INFATUATION;
+    else if (effect[3] & ITEM3_CONFUSION)
+        return STATUS2_CONFUSION;
+    else
+        return 0;
+}
+
+bool8 IsItemTM(u16 itemId)
+{
+    itemId = SanitizeItemId(itemId);
+    return ITEM_TM01 <= itemId && itemId <= ITEM_TM100;
+}
+
+bool8 IsItemHM(u16 itemId)
+{
+    itemId = SanitizeItemId(itemId);
+    return ITEM_HM01 <= itemId && itemId <= ITEM_HM08;
+}
+
+bool8 IsItemTMHM(u16 itemId)
+{
+    return IsItemTM(itemId) || IsItemHM(itemId);
+}
+
+bool8 IsItemBall(u16 itemId)
+{
+    itemId = SanitizeItemId(itemId);
+    return FIRST_BALL <= itemId && itemId <= LAST_BALL;
 }

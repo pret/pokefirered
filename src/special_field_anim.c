@@ -16,49 +16,49 @@ static void Task_DrawTeleporterCable(u8 taskId);
 #define ESCALATOR_STAGES     3
 #define LAST_ESCALATOR_STAGE (ESCALATOR_STAGES - 1)
 
-static const u16 sEscalatorMetatiles_BottomNextRail[ESCALATOR_STAGES] = 
+static const s16 sEscalatorMetatiles_BottomNextRail[ESCALATOR_STAGES] = 
 {
     METATILE_PokemonCenter_Escalator_BottomNextRail_Transition2, 
     METATILE_PokemonCenter_Escalator_BottomNextRail_Transition1, 
     METATILE_PokemonCenter_Escalator_BottomNextRail_Normal
 };
 
-static const u16 sEscalatorMetatiles_BottomRail[ESCALATOR_STAGES] = 
+static const s16 sEscalatorMetatiles_BottomRail[ESCALATOR_STAGES] = 
 {
     METATILE_PokemonCenter_Escalator_BottomRail_Transition2, 
     METATILE_PokemonCenter_Escalator_BottomRail_Transition1, 
     METATILE_PokemonCenter_Escalator_BottomRail_Normal
 };
 
-static const u16 sEscalatorMetatiles_BottomNext[ESCALATOR_STAGES] = 
+static const s16 sEscalatorMetatiles_BottomNext[ESCALATOR_STAGES] = 
 {
     METATILE_PokemonCenter_Escalator_BottomNext_Transition2, 
     METATILE_PokemonCenter_Escalator_BottomNext_Transition1, 
     METATILE_PokemonCenter_Escalator_BottomNext_Normal
 };
 
-static const u16 sEscalatorMetatiles_Bottom[ESCALATOR_STAGES] = 
+static const s16 sEscalatorMetatiles_Bottom[ESCALATOR_STAGES] = 
 {
     METATILE_PokemonCenter_Escalator_Bottom_Transition2, 
     METATILE_PokemonCenter_Escalator_Bottom_Transition1, 
     METATILE_PokemonCenter_Escalator_Bottom_Normal
 };
 
-static const u16 sEscalatorMetatiles_TopNext[ESCALATOR_STAGES] = 
+static const s16 sEscalatorMetatiles_TopNext[ESCALATOR_STAGES] = 
 {
     METATILE_PokemonCenter_Escalator_TopNext_Normal, 
     METATILE_PokemonCenter_Escalator_TopNext_Transition1, 
     METATILE_PokemonCenter_Escalator_TopNext_Transition2
 };
 
-static const u16 sEscalatorMetatiles_Top[ESCALATOR_STAGES] = 
+static const s16 sEscalatorMetatiles_Top[ESCALATOR_STAGES] = 
 {
     METATILE_PokemonCenter_Escalator_Top_Normal, 
     METATILE_PokemonCenter_Escalator_Top_Transition1, 
     METATILE_PokemonCenter_Escalator_Top_Transition2
 };
 
-static const u16 sEscalatorMetatiles_TopNextRail[ESCALATOR_STAGES] = 
+static const s16 sEscalatorMetatiles_TopNextRail[ESCALATOR_STAGES] = 
 {
     METATILE_PokemonCenter_Escalator_TopNextRail_Normal, 
     METATILE_PokemonCenter_Escalator_TopNextRail_Transition1, 

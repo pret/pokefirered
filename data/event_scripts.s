@@ -1,8 +1,11 @@
+#include "config.h"
+#include "config/battle.h"
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/decorations.h"
+#include "constants/item.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/maps.h"
@@ -40,8 +43,7 @@
 #include "constants/mystery_gift.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
-	.set FALSE, 0
-	.set TRUE,  1
+	.include "constants/constants.inc"
 
 	.section script_data, "aw", %progbits
 
@@ -806,6 +808,8 @@ gStdScriptsEnd::
 
 	.include "data/scripts/std_msgbox.inc"
 	.include "data/scripts/trainer_battle.inc"
+	
+	.include "data/scripts/debug.inc"
 
 @ Unused
 Text_WouldYouLikeToMixRecords::
@@ -1276,8 +1280,8 @@ EventScript_BufferPutAwayPocketName::
 	case POCKET_ITEMS,       EventScript_BufferPutAwayPocketItems
 	case POCKET_KEY_ITEMS,   EventScript_BufferPutAwayPocketKeyItems
 	case POCKET_POKE_BALLS,  EventScript_BufferPutAwayPocketPokeBalls
-	case POCKET_TM_CASE,     EventScript_BufferPutAwayPocketTMCase
-	case POCKET_BERRY_POUCH, EventScript_BufferPutAwayPocketBerryPouch
+	case POCKET_TM_HM,     EventScript_BufferPutAwayPocketTMCase
+	case POCKET_BERRIES, EventScript_BufferPutAwayPocketBerryPouch
 	end
 
 EventScript_BufferPutAwayPocketItems::

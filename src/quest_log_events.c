@@ -1016,14 +1016,18 @@ static void QuestLog_GetSpeciesName(u16 species, u8 *dest, u8 stringVarId)
     if (dest != NULL)
     {
         if (species != SPECIES_EGG)
-            GetSpeciesName(dest, species);
+        {
+            StringCopy(dest, GetSpeciesName(species));
+        }
         else
+        {
             StringCopy(dest, gText_EggNickname);
+        }
     }
     else
     {
         if (species != SPECIES_EGG)
-            DynamicPlaceholderTextUtil_SetPlaceholderPtr(stringVarId, gSpeciesNames[species]);
+            DynamicPlaceholderTextUtil_SetPlaceholderPtr(stringVarId, gSpeciesInfo[species].speciesName);
         else
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(stringVarId, gText_EggNickname);
     }
@@ -1077,7 +1081,7 @@ static const u16 *LoadEvent_UsedItem(const u16 *eventData)
     {
     case POCKET_ITEMS:
     case POCKET_POKE_BALLS:
-    case POCKET_BERRY_POUCH:
+    case POCKET_BERRIES:
         StringCopy(gStringVar1, ItemId_GetName(rItemId));
         if (rItemId == ITEM_ESCAPE_ROPE)
         {
@@ -1098,12 +1102,12 @@ static const u16 *LoadEvent_UsedItem(const u16 *eventData)
         StringCopy(gStringVar1, ItemId_GetName(rItemId));
         StringExpandPlaceholders(gStringVar4, gText_QuestLog_UsedTheKeyItem);
         break;
-    case POCKET_TM_CASE:
+    case POCKET_TM_HM:
         QuestLog_GetSpeciesName(rSpecies, gStringVar1, 0);
-        StringCopy(gStringVar2, gMoveNames[ItemIdToBattleMoveId(rItemId)]);
+        StringCopy(gStringVar2, gMovesInfo[ItemIdToBattleMoveId(rItemId)].name);
         if (rItemParam != 0xFFFF)
         {
-            StringCopy(gStringVar3, gMoveNames[rItemParam]);
+            StringCopy(gStringVar3, gMovesInfo[rItemParam].name);
             if (rItemId >= ITEM_HM01)
                 StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonReplacedMoveWithHM);
             else

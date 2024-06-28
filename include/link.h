@@ -172,9 +172,9 @@ struct LinkPlayer
 
 struct LinkPlayerBlock
 {
-    u8 magic1[16];
+    char magic1[16];
     struct LinkPlayer linkPlayer;
-    u8 magic2[16];
+    char magic2[16];
 };
 
 // circular queues
@@ -264,7 +264,6 @@ bool8 SendBlock(u8, const void *, u16);
 u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);
 void ResetBlockReceivedFlag(u8);
-void SetLinkDebugValues(u32, u32);
 u8 GetSavedPlayerCount(void);
 u8 GetLinkPlayerCount_2(void);
 bool8 IsLinkMaster(void);
@@ -274,7 +273,7 @@ bool8 IsLinkConnectionEstablished(void);
 void SetSuppressLinkErrorMessage(bool8);
 bool8 HasLinkErrorOccurred(void);
 void ResetSerial(void);
-u32 LinkMain1(u8 *, u16 *, u16[MAX_RFU_PLAYERS][CMD_LENGTH]);
+u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENGTH]);
 void RfuVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);

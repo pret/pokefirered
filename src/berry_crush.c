@@ -395,7 +395,6 @@ static struct BerryCrushGame *GetBerryCrushGame(void);
 static u32 QuitBerryCrush(MainCallback callback);
 static void ChooseBerry(void);
 static void BerryCrush_SetVBlankCallback(void);
-static void BerryCrush_InitVBlankCB(void);
 static void SaveResults(void);
 static void RunOrScheduleCommand(u16 command, u8 runMode, u8 *args);
 static void SetPaletteFadeArgs(u8 *args, bool8 communicateAfter, u32 selectedPals, s8 delay, u8 startY, u8 targetY, u16 palette);
@@ -1039,11 +1038,6 @@ static void ChooseBerry(void)
 static void BerryCrush_SetVBlankCallback(void)
 {
     SetVBlankCallback(VBlankCB);
-}
-
-static void BerryCrush_InitVBlankCB(void)
-{
-    SetVBlankCallback(NULL);
 }
 
 static void SaveResults(void)
@@ -2601,6 +2595,9 @@ static s32 HideGameDisplay(void)
             return 0;
         // fall through. The original author forgot to use "break" here
         // because this will call BeginNormalPaletteFade() twice.
+#ifdef BUGFIX
+        break;
+#endif
     case 2:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         UpdatePaletteFade();

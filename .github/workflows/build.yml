@@ -2,88 +2,53 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
   pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: devkitpro/devkitarm
     env:
       GAME_VERSION: FIRERED
-      GAME_LANGUAGE: ENGLISH
       GAME_REVISION: 0
-      MODERN: 0
-      COMPARE: 1
+      GAME_LANGUAGE: ENGLISH
+      MODERN: 1
+      COMPARE: 0
+      UNUSED_ERROR: 1
     steps:
       - name: Checkout
-        uses: actions/checkout@master
-
-      - name: Checkout agbcc
-        uses: actions/checkout@master
-        with:
-          path: 'agbcc'
-          repository: 'pret/agbcc'
-
-      - name: Checkout symbols
-        if: ${{ github.event_name == 'push' }}
-        uses: actions/checkout@master
-        with:
-          path: 'symbols'
-          ref: 'symbols'
+        uses: actions/checkout@v2
 
       - name: Install binutils
-        run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential libpng-dev libelf-dev
         # build-essential, git, and libpng-dev are already installed
         # gcc-arm-none-eabi is only needed for the modern build
         # as an alternative to dkP
 
-      - name: Install agbcc
-        run: |
-          ./build.sh
-          ./install.sh ../
-        working-directory: ./agbcc
-
-      - name: Compare FireRed
-        run: |
-          make -j${nproc} all syms
-
-      - name: Compare FireRed rev1
+      - name: Firered
         env:
-          GAME_REVISION: 1
-        run: |
-          make -j${nproc} all syms
+          GAME_VERSION: FIRERED
+          MODERN: 1
+        run: make -j${nproc} -O all
 
-      - name: Compare LeafGreen
+      - name: Leafgreen
         env:
           GAME_VERSION: LEAFGREEN
-        run: |
-          make -j${nproc} all syms
+          MODERN: 1
+        run: make -j${nproc} -O all
 
-      - name: Compare LeafGreen rev1
-        env:
-          GAME_VERSION: LEAFGREEN
-          GAME_REVISION: 1
-        run: |
-          make -j${nproc} all syms
-
-      - name: Build Modern
+      - name: Test
         env:
           MODERN: 1
-          COMPARE: 0
+          TEST: 1
         run: |
-          make -j${nproc} all
-
-      - name: Move symfiles
-        if: ${{ github.event_name == 'push' }}
-        run: |
-          cp *.sym symbols/
-          echo "SYMBOLS_COMMIT_MSG=$( git log --format=%s ${GITHUB_SHA} )" >> $GITHUB_ENV
-
-      - name: Update symfiles
-        if: ${{ github.event_name == 'push' }}
-        uses: EndBug/add-and-commit@v7
-        with:
-          branch: symbols
-          cwd: "./symbols"
-          add: "*.sym"
-          message: ${{ env.SYMBOLS_COMMIT_MSG }}
+          make -j${nproc} -O pokefirered-test.elf
+          make -j${nproc} check

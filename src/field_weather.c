@@ -53,14 +53,14 @@ static bool8 None_Finish(void);
 static void BuildGammaShiftTables(void);
 static void UpdateWeatherGammaShift(void);
 static void ApplyGammaShift(u8 startPalIndex, u8 numPalettes, s8 gammaIndex);
-static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaIndex, u8 blendCoeff, u16 blendColor);
-static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 blendColor);
+static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaIndex, u8 blendCoeff, u32 blendColor);
+static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u32 blendColor);
 static void FadeInScreenWithWeather(void);
 static bool8 FadeInScreen_RainShowShade(void);
 static bool8 FadeInScreen_Drought(void);
 static bool8 FadeInScreen_FogHorizontal(void);
 static void DoNothing(void);
-static void ApplyFogBlend(u8 blendCoeff, u16 blendColor);
+static void ApplyFogBlend(u8 blendCoeff, u32 blendColor);
 static bool8 LightenSpritePaletteInFog(u8 paletteIndex);
 
 struct Weather *const gWeatherPtr = &sWeather;
@@ -196,7 +196,7 @@ void SetCurrentAndNextWeather(u8 weather)
     gWeatherPtr->nextWeather = weather;
 }
 
-static void SetCurrentAndNextWeatherNoDelay(u8 weather)
+static void UNUSED SetCurrentAndNextWeatherNoDelay(u8 weather)
 {
     PlayRainStoppingSoundEffect();
     gWeatherPtr->currWeather = weather;
@@ -497,7 +497,7 @@ static void ApplyGammaShift(u8 startPalIndex, u8 numPalettes, s8 gammaIndex)
     }
 }
 
-static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaIndex, u8 blendCoeff, u16 blendColor)
+static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaIndex, u8 blendCoeff, u32 blendColor)
 {
     u16 palOffset;
     u16 curPalIndex;
@@ -548,7 +548,7 @@ static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaI
     }
 }
 
-static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 blendColor)
+static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u32 blendColor)
 {
     struct RGBColor color;
     u8 rBlend;
@@ -576,11 +576,8 @@ static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 bl
         {
             for (i = 0; i < 16; i++)
             {
-                u32 offset;
                 struct RGBColor color1;
-                struct RGBColor color2;
                 u8 r1, g1, b1;
-                u8 r2, g2, b2;
 
                 color1 = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
                 r1 = color1.r;
@@ -597,7 +594,7 @@ static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 bl
     }
 }
 
-static void ApplyFogBlend(u8 blendCoeff, u16 blendColor)
+static void ApplyFogBlend(u8 blendCoeff, u32 blendColor)
 {
     struct RGBColor color;
     u8 rBlend;
@@ -873,14 +870,6 @@ void ApplyWeatherGammaShiftToPal(u8 paletteIndex)
     ApplyGammaShift(paletteIndex, 1, gWeatherPtr->gammaIndex);
 }
 
-static u8 IsWeatherFadingIn(void)
-{
-    if (gWeatherPtr->palProcessingState == WEATHER_PAL_STATE_SCREEN_FADING_IN)
-        return gWeatherPtr->fadeInActive;
-    else
-        return 0;
-}
-
 void LoadCustomWeatherSpritePalette(const u16 *palette)
 {
     LoadPalette(palette, OBJ_PLTT_ID(gWeatherPtr->weatherPicSpritePalIndex), PLTT_SIZE_4BPP);
@@ -1017,44 +1006,6 @@ bool8 Weather_UpdateBlend(void)
         return TRUE;
 
     return FALSE;
-}
-
-// Unused. Uses the same numbering scheme as the coord events
-static void SetFieldWeather(u8 weather)
-{
-    switch (weather)
-    {
-    case COORD_EVENT_WEATHER_SUNNY_CLOUDS:
-        SetWeather(WEATHER_SUNNY_CLOUDS);
-        break;
-    case COORD_EVENT_WEATHER_SUNNY:
-        SetWeather(WEATHER_SUNNY);
-        break;
-    case COORD_EVENT_WEATHER_RAIN:
-        SetWeather(WEATHER_RAIN);
-        break;
-    case COORD_EVENT_WEATHER_SNOW:
-        SetWeather(WEATHER_SNOW);
-        break;
-    case COORD_EVENT_WEATHER_RAIN_THUNDERSTORM:
-        SetWeather(WEATHER_RAIN_THUNDERSTORM);
-        break;
-    case COORD_EVENT_WEATHER_FOG_HORIZONTAL:
-        SetWeather(WEATHER_FOG_HORIZONTAL);
-        break;
-    case COORD_EVENT_WEATHER_FOG_DIAGONAL:
-        SetWeather(WEATHER_FOG_DIAGONAL);
-        break;
-    case COORD_EVENT_WEATHER_VOLCANIC_ASH:
-        SetWeather(WEATHER_VOLCANIC_ASH);
-        break;
-    case COORD_EVENT_WEATHER_SANDSTORM:
-        SetWeather(WEATHER_SANDSTORM);
-        break;
-    case COORD_EVENT_WEATHER_SHADE:
-        SetWeather(WEATHER_SHADE);
-        break;
-    }
 }
 
 u8 GetCurrentWeather(void)

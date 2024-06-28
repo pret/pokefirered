@@ -206,7 +206,7 @@ static void DecompressGlyph_Braille(u16 glyph)
     gGlyphInfo.height = 16;
 }
 
-s32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese)
+u32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese)
 {
     return 16;
 }

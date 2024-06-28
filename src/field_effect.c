@@ -29,7 +29,7 @@
 #include "constants/songs.h"
 #include "constants/sound.h"
 
-extern struct CompressedSpritePalette gMonPaletteTable[]; // Intentionally declared (incorrectly) without const in order to match
+// extern struct CompressedSpritePalette gMonPaletteTable[]; // Intentionally declared (incorrectly) without const in order to match
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 
@@ -591,35 +591,20 @@ u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buf
     return CreateSprite(&spriteTemplate, x, y, subpriority);
 }
 
-// Unused
-static void LoadTrainerGfx_TrainerCard(u8 gender, u16 palOffset, u8 *dest)
-{
-    LZDecompressVram(gTrainerFrontPicTable[gender].data, dest);
-    LoadCompressedPalette(gTrainerFrontPicPaletteTable[gender].data, palOffset, PLTT_SIZE_4BPP);
-}
-
-// Unused
-static u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
-{
-    LoadSpritePalette(&sNewGameOakObjectPaletteInfo);
-    return CreateSprite(&sNewGameOakObjectTemplate, x, y, subpriority);
-}
-
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
-    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, 0, 0x8000, TRUE, x, y, 0, gMonPaletteTable[species].tag);
-    PreservePaletteInWeather(IndexOfSpritePaletteTag(gMonPaletteTable[species].tag) + 0x10);
+    u16 spriteId = CreateMonPicSprite(species, FALSE, 0x8000, TRUE, x, y, 0, species);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(species) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
     else
         return spriteId;
 }
 
-static u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority)
+static u8 CreateMonSprite_FieldMove(u16 species, bool32 isShiny, u32 personality, s16 x, s16 y, u8 subpriority)
 {
-    const struct CompressedSpritePalette * spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
-    u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, 1, x, y, 0, spritePalette->tag);
-    PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
+    u16 spriteId = CreateMonPicSprite(species, isShiny, personality, 1, x, y, 0, species);
+    PreservePaletteInWeather(IndexOfSpritePaletteTag(species) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;
     else
@@ -651,27 +636,6 @@ void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
     curRed += (((0x1f - curRed) * r) >> 4);
     curGreen += (((0x1f - curGreen) * g) >> 4);
     curBlue += (((0x1f - curBlue) * b) >> 4);
-    outPal = curRed;
-    outPal |= curGreen << 5;
-    outPal |= curBlue << 10;
-    gPlttBufferFaded[i] = outPal;
-}
-
-// r, g, b are between 0 and 16
-static void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
-{
-    int curRed;
-    int curGreen;
-    int curBlue;
-    u16 outPal;
-
-    outPal = gPlttBufferUnfaded[i];
-    curRed = outPal & 0x1f;
-    curGreen = (outPal & (0x1f << 5)) >> 5;
-    curBlue = (outPal & (0x1f << 10)) >> 10;
-    curRed -= ((curRed * r) >> 4);
-    curGreen -= ((curGreen * g) >> 4);
-    curBlue -= ((curBlue * b) >> 4);
     outPal = curRed;
     outPal |= curGreen << 5;
     outPal |= curBlue << 10;
@@ -828,7 +792,6 @@ static void Task_HallOfFameRecord(u8 taskId)
 
 static void HallOfFameRecordEffect_Init(struct Task *task)
 {
-    u8 taskId;
     task->tState++;
     task->tGlowEffectSpriteId = CreateGlowingPokeballsEffect(task->tNumMons, task->tFirstBallX, task->tFirstBallY, FALSE);
 }
@@ -2559,7 +2522,7 @@ static void VBlankCB_ShowMonEffect_Indoors(void);
 static void AnimateIndoorShowMonBg(struct Task *task);
 static bool8 SlideIndoorBannerOnscreen(struct Task *task);
 static bool8 SlideIndoorBannerOffscreen(struct Task *task);
-static u8 InitFieldMoveMonSprite(u32 species, u32 otId, u32 personality);
+static u8 InitFieldMoveMonSprite(u32 species, bool32 isShiny, u32 personality);
 static void SpriteCB_FieldMoveMonSlideOnscreen(struct Sprite *sprite);
 static void SpriteCB_FieldMoveMonWaitAfterCry(struct Sprite *sprite);
 static void SpriteCB_FieldMoveMonSlideOffscreen(struct Sprite *sprite);
@@ -2590,7 +2553,7 @@ u32 FldEff_FieldMoveShowMonInit(void)
     u32 r6 = gFieldEffectArguments[0] & 0x80000000;
     u8 partyIdx = gFieldEffectArguments[0];
     gFieldEffectArguments[0] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
-    gFieldEffectArguments[1] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_OT_ID);
+    gFieldEffectArguments[1] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_IS_SHINY, NULL);
     gFieldEffectArguments[2] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
     gFieldEffectArguments[0] |= r6;
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
@@ -2910,14 +2873,14 @@ static bool8 SlideIndoorBannerOffscreen(struct Task *task)
     return FALSE;
 }
 
-static u8 InitFieldMoveMonSprite(u32 species, u32 otId, u32 personality)
+static u8 InitFieldMoveMonSprite(u32 species, bool32 isShiny, u32 personality)
 {
     bool16 playCry;
     u8 monSprite;
     struct Sprite *sprite;
     playCry = (species & 0x80000000) >> 16;
     species &= 0x7fffffff;
-    monSprite = CreateMonSprite_FieldMove(species, otId, personality, 0x140, 0x50, 0);
+    monSprite = CreateMonSprite_FieldMove(species, isShiny, personality, 0x140, 0x50, 0);
     sprite = &gSprites[monSprite];
     sprite->callback = SpriteCallbackDummy;
     sprite->oam.priority = 0;

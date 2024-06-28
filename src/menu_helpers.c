@@ -149,13 +149,8 @@ void ResetVramOamAndBgCntRegs(void)
     CpuFill16(0, (void *) PLTT, PLTT_SIZE);
 }
 
-void ResetAllBgsCoordinatesAndBgCntRegs(void)
+void ResetAllBgsCoordinates(void)
 {
-    SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    SetGpuReg(REG_OFFSET_BG3CNT, 0);
-    SetGpuReg(REG_OFFSET_BG2CNT, 0);
-    SetGpuReg(REG_OFFSET_BG1CNT, 0);
-    SetGpuReg(REG_OFFSET_BG0CNT, 0);
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
@@ -164,6 +159,16 @@ void ResetAllBgsCoordinatesAndBgCntRegs(void)
     ChangeBgY(2, 0, 0);
     ChangeBgX(3, 0, 0);
     ChangeBgY(3, 0, 0);
+}
+
+void ResetAllBgsCoordinatesAndBgCntRegs(void)
+{
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    SetGpuReg(REG_OFFSET_BG3CNT, 0);
+    SetGpuReg(REG_OFFSET_BG2CNT, 0);
+    SetGpuReg(REG_OFFSET_BG1CNT, 0);
+    SetGpuReg(REG_OFFSET_BG0CNT, 0);
+    ResetAllBgsCoordinates();
 }
 
 bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax)

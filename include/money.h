@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+#define MAX_MONEY 999999
+
 u32 GetMoney(u32 *moneyPtr);
 void SetMoney(u32 *moneyPtr, u32 newValue);
 bool8 IsEnoughMoney(u32 *moneyPtr, u32 cost);

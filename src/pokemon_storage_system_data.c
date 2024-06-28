@@ -214,7 +214,7 @@ bool8 UpdateCursorPos(void)
 
 static void InitNewCursorPos(u8 newCursorArea, u8 newCursorPosition)
 {
-    u16 x, y;
+    u16 x = 0, y = 0;
 
     GetCursorCoordsByPos(newCursorArea, newCursorPosition, &x, &y);
     gStorage->newCursorArea = newCursorArea;
@@ -1057,7 +1057,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         gStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
         if (gStorage->displayMonSpecies != SPECIES_NONE)
         {
-            u32 otId = GetBoxMonData(boxMon, MON_DATA_OT_ID);
+            bool32 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY, NULL);
             sanityIsBagEgg = GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG);
             if (sanityIsBagEgg)
                 gStorage->displayMonIsEgg = TRUE;
@@ -1069,7 +1069,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             gStorage->displayMonLevel = GetLevelFromBoxMonExp(boxMon);
             gStorage->displayMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
             gStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
-            gStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(gStorage->displayMonSpecies, otId, gStorage->displayMonPersonality);
+            gStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(gStorage->displayMonSpecies, isShiny, gStorage->displayMonPersonality);
             gender = GetGenderFromSpeciesAndPersonality(gStorage->displayMonSpecies, gStorage->displayMonPersonality);
             gStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
         }
@@ -1110,7 +1110,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         // Buffer species name
         txtPtr = gStorage->displayMonSpeciesNameText;
         *(txtPtr)++ = CHAR_SLASH;
-        StringCopyPadded(txtPtr, gSpeciesNames[gStorage->displayMonSpecies], CHAR_SPACE, 5);
+        StringCopyPadded(txtPtr, gSpeciesInfo[gStorage->displayMonSpecies].speciesName, CHAR_SPACE, 5);
 
         // Buffer gender and level
         txtPtr = gStorage->displayMonGenderAndLevelText;
@@ -1641,7 +1641,6 @@ static u8 HandleInput_OnButtons(void)
     u8 input;
     s8 cursorArea;
     s8 cursorPosition;
-    s8 prevPos;
 
     do
     {

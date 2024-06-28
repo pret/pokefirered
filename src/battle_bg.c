@@ -8,6 +8,7 @@
 #include "link.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
+#include "sound.h"
 #include "text_window.h"
 #include "trig.h"
 #include "constants/maps.h"
@@ -16,19 +17,7 @@
 
 #define TAG_VS_LETTERS 10000
 
-struct BattleBackground
-{
-    const void *tileset;
-    const void *tilemap;
-    const void *entryTileset;
-    const void *entryTilemap;
-    const void *palette;
-};
-
-static void CB2_unused(void);
 static u8 GetBattleTerrainOverride(void);
-
-static const u8 sUnused[] = {1, 2};
 
 static const struct OamData sVsLetter_V_OamData = {
     .y = 0,
@@ -436,7 +425,8 @@ static const u32 sBattleTerrainPalette_Plain[] = INCBIN_U32("graphics/battle_ter
 static const u32 sBattleTerrainTiles_Indoor[] = INCBIN_U32("graphics/battle_terrain/indoor/terrain.4bpp.lz");
 static const u32 sBattleTerrainTilemap_Indoor[] = INCBIN_U32("graphics/battle_terrain/indoor/terrain.bin.lz");
 
-static const struct BattleBackground sBattleTerrainTable[] = {
+const struct BattleBackground sBattleTerrainTable[] =
+{
     [BATTLE_TERRAIN_GRASS] =
     {
         .tileset = sBattleTerrainTiles_Grass,
@@ -613,23 +603,6 @@ static const struct {
     {MAP_BATTLE_SCENE_LINK,     BATTLE_TERRAIN_LINK}
 };
 
-// Unused
-void CreateUnknownDebugSprite(void)
-{
-    u8 spriteId;
-
-    ResetSpriteData();
-    spriteId = CreateSprite(&gUnknownDebugSprite, 0, 0, 0);
-    gSprites[spriteId].invisible = TRUE;
-    SetMainCallback2(CB2_unused);
-}
-
-static void CB2_unused(void)
-{
-    AnimateSprites();
-    BuildOamBuffer();
-}
-
 static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
 {
     int i;
@@ -777,7 +750,7 @@ static void DrawLinkBattleParticipantPokeballs(u8 taskId, u8 multiplayerId, u8 b
     }
     else
     {
-        if (multiplayerId == gBattleStruct->multiplayerId)
+        if (multiplayerId == gBattleScripting.multiplayerId)
             pokeballStatuses = gTasks[taskId].data[3];
         else
             pokeballStatuses = gTasks[taskId].data[4];
@@ -800,7 +773,7 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
     {
         if (gBattleOutcome == B_OUTCOME_WON)
         {
-            switch (gLinkPlayers[gBattleStruct->multiplayerId].id)
+            switch (gLinkPlayers[gBattleScripting.multiplayerId].id)
             {
             case 0:
                 BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_LEFT);
@@ -822,7 +795,7 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
         }
         else
         {
-            switch (gLinkPlayers[gBattleStruct->multiplayerId].id)
+            switch (gLinkPlayers[gBattleScripting.multiplayerId].id)
             {
             case 0:
                 BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_RIGHT);
@@ -845,7 +818,7 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
     }
     else if (gBattleOutcome == B_OUTCOME_WON)
     {
-        if (gLinkPlayers[gBattleStruct->multiplayerId].id != 0)
+        if (gLinkPlayers[gBattleScripting.multiplayerId].id != 0)
         {
             BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_RIGHT);
             BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_LEFT);
@@ -858,7 +831,7 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
     }
     else
     {
-        if (gLinkPlayers[gBattleStruct->multiplayerId].id != 0)
+        if (gLinkPlayers[gBattleScripting.multiplayerId].id != 0)
         {
             BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_LEFT);
             BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_RIGHT);
@@ -910,7 +883,7 @@ void InitLinkBattleVsScreen(u8 taskId)
         }
         else
         {
-            u8 playerId = gBattleStruct->multiplayerId;
+            u8 playerId = gBattleScripting.multiplayerId;
             u8 opponentId = playerId ^ BIT_SIDE;
             u8 opponentId_copy = opponentId;
 
@@ -1002,7 +975,7 @@ void DrawBattleEntryBackground(void)
     {
         LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_GRASS);
     }
-    else if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
+    else if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK))
     {
         LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
     }
@@ -1048,7 +1021,7 @@ void DrawBattleEntryBackground(void)
 static u8 GetBattleTerrainOverride(void)
 {
     u8 battleScene;
-    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
+    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK))
     {
         return BATTLE_TERRAIN_LINK;
     }

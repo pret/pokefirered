@@ -14,6 +14,7 @@
 #include "decompress.h"
 #include "util.h"
 #include "trig.h"
+#include "load_save.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
 
@@ -992,12 +993,15 @@ void CB2_InitCopyrightScreenAfterBootup(void)
 {
     if (!SetUpCopyrightScreen())
     {
+        SeedRngAndSetTrainerId();
+        SetSaveBlocksPointers();
         ResetMenuAndMonGlobals();
         Save_ResetSaveCounters();
         LoadGameSave(SAVE_NORMAL);
         if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_INVALID)
             Sav2_ClearSetDefault();
         SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
+        InitHeap(gHeap, HEAP_SIZE);
     }
 }
 
@@ -1249,9 +1253,7 @@ static void IntroCB_GF_RevealLogo(struct IntroSequenceData * this)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             DestroySprite(this->gameFreakLogoArtSprite);
-        #if REVISION >= 1
             GFScene_CreatePresentsSprite();
-        #endif
             this->timer = 0;
             this->state++;
         }
@@ -2095,14 +2097,12 @@ static struct Sprite *GFScene_CreateLogoSprite(void)
     return &gSprites[spriteId];
 }
 
-#if REVISION >= 1
 static void GFScene_CreatePresentsSprite(void)
 {
     int i;
     for (i = 0; i < 2; i++)
         gSprites[CreateSprite(&sSpriteTemplate_Presents, 104 + 32 * i, 108, 5)].oam.tileNum += i * 4;
 }
-#endif
 
 #define tState  data[0]
 #define tTimer  data[1]
@@ -2282,9 +2282,9 @@ static void SpriteCB_Star(struct Sprite *sprite)
     sprite->sStar_SparkleTimer++;
     if (sprite->sStar_SparkleTimer % sStarSparklesSpawnRate)
     {
-        LoadWordFromTwoHalfwords(&sprite->sStar_SparkleRngSeed, &random);
+        LoadWordFromTwoHalfwords((u16*)&sprite->sStar_SparkleRngSeed, (uintptr_t *)&random);
         random = ISO_RANDOMIZE1(random);
-        StoreWordInTwoHalfwords(&sprite->sStar_SparkleRngSeed, random);
+        StoreWordInTwoHalfwords((u16*)&sprite->sStar_SparkleRngSeed, random);
         random >>= 16;
         GFScene_CreateStarSparkle(sprite->x, sprite->y + sprite->y2, random);
     }

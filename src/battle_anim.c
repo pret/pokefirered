@@ -1,14 +1,18 @@
 #include "global.h"
-#include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_bg.h"
 #include "decompress.h"
+#include "dma3.h"
+#include "gpu_regs.h"
 #include "graphics.h"
+#include "palette.h"
 #include "m4a.h"
+#include "sound.h"
 #include "task.h"
+#include "test_runner.h"
 #include "constants/battle_anim.h"
 
 /*
@@ -17,6 +21,11 @@
 */
 
 #define ANIM_SPRITE_INDEX_COUNT 8
+
+extern const u16 gMovesWithQuietBGM[];
+extern const u8 *const gBattleAnims_General[];
+extern const u8 *const gBattleAnims_Special[];
+extern const u8 *const gBattleAnims_StatusConditions[];
 
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
 EWRAM_DATA static const u8 *sBattleAnimScriptRetAddr = NULL;
@@ -36,7 +45,7 @@ EWRAM_DATA static u16 sSoundAnimFramesToWait = 0;
 EWRAM_DATA static u8 sMonAnimTaskIdArray[2] = {0};
 EWRAM_DATA u8 gAnimMoveTurn = 0;
 EWRAM_DATA static u8 sAnimBackgroundFadeState = 0;
-EWRAM_DATA static u16 sAnimMoveIndex = 0; // Set but unused.
+EWRAM_DATA u16 gAnimMoveIndex = 0;
 EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
@@ -184,7 +193,7 @@ void ClearBattleAnimationVars(void)
     sMonAnimTaskIdArray[1] = TASK_NONE;
     gAnimMoveTurn = 0;
     sAnimBackgroundFadeState = 0;
-    sAnimMoveIndex = 0;
+    gAnimMoveIndex = 0;
     gBattleAnimAttacker = 0;
     gBattleAnimTarget = 0;
     gAnimCustomPanning = 0;
@@ -194,12 +203,29 @@ void DoMoveAnim(u16 move)
 {
     gBattleAnimAttacker = gBattlerAttacker;
     gBattleAnimTarget = gBattlerTarget;
-    LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
+    LaunchBattleAnimation(ANIM_TYPE_MOVE, move);
 }
 
-void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim)
+static void Nop(void)
+{
+}
+
+void LaunchBattleAnimation(u32 animType, u16 animId)
 {
     s32 i;
+
+    if (gTestRunnerEnabled)
+    {
+        TestRunner_Battle_RecordAnimation(animType, animId);
+        // Play Transform and Ally Switch even in Headless as these move animations also change mon data.
+        if (gTestRunnerHeadless
+            && !(animType == ANIM_TYPE_MOVE && (animId == MOVE_TRANSFORM || animId == MOVE_ALLY_SWITCH)))
+        {
+            gAnimScriptCallback = Nop;
+            gAnimScriptActive = FALSE;
+            return;
+        }
+    }
 
     InitPrioritiesForVisibleBattlers();
     UpdateOamPriorityInAllHealthboxes(0);
@@ -211,17 +237,33 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
             gAnimBattlerSpecies[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
     }
 
-    if (!isMoveAnim)
-        sAnimMoveIndex = 0;
+    if (animType != ANIM_TYPE_MOVE)
+        gAnimMoveIndex = 0;
     else
-        sAnimMoveIndex = tableId;
+        gAnimMoveIndex = animId;
 
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;
 
     sMonAnimTaskIdArray[0] = TASK_NONE;
     sMonAnimTaskIdArray[1] = TASK_NONE;
-    sBattleAnimScriptPtr = animsTable[tableId];
+
+    switch (animType)
+    {
+    case ANIM_TYPE_GENERAL:
+    default:
+        sBattleAnimScriptPtr = gBattleAnims_General[animId];
+        break;
+    case ANIM_TYPE_MOVE:
+        sBattleAnimScriptPtr = GetMoveAnimationScript(animId);
+        break;
+    case ANIM_TYPE_STATUS:
+        sBattleAnimScriptPtr = gBattleAnims_StatusConditions[animId];
+        break;
+    case ANIM_TYPE_SPECIAL:
+        sBattleAnimScriptPtr = gBattleAnims_Special[animId];
+        break;
+    }
     gAnimScriptActive = TRUE;
     sAnimFramesToWait = 0;
     gAnimScriptCallback = RunAnimScriptCommand;
@@ -229,11 +271,11 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
         sAnimSpriteIndexArray[i] = 0xFFFF;
 
-    if (isMoveAnim)
+    if (animType == ANIM_TYPE_MOVE)
     {
         for (i = 0; gMovesWithQuietBGM[i] != 0xFFFF; i++)
         {
-            if (tableId == gMovesWithQuietBGM[i])
+            if (animId == gMovesWithQuietBGM[i])
             {
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 128);
                 break;
@@ -392,12 +434,13 @@ static void Cmd_createsprite(void)
     if (subpriority < 3)
         subpriority = 3;
 
-    CreateSpriteAndAnimate(
-        template,
+    if (CreateSpriteAndAnimate(template,
         GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2),
         GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET),
-        subpriority);
-    gAnimVisualTaskCount++;
+        subpriority) != MAX_SPRITES)
+    {
+        gAnimVisualTaskCount++;
+    }
 }
 
 static void Cmd_createvisualtask(void)
@@ -631,7 +674,6 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
 {
     struct BattleAnimBgData animBg;
     u8 battlerSpriteId;
-    struct Sprite *sprite;
 
     if (!toBG_2)
     {
@@ -896,7 +938,6 @@ static void Cmd_clearmonbg_static(void)
 
 static void Task_ClearMonBgStatic(u8 taskId)
 {
-    bool8 to_BG2;
     u8 position;
     u8 battlerId;
     
@@ -1017,15 +1058,6 @@ bool8 IsContest(void)
     return FALSE;
 }
 
-// Unused
-static bool8 IsSpeciesNotUnown(u16 species)
-{
-    if (species == SPECIES_UNOWN)
-        return FALSE;
-    else
-        return TRUE;
-}
-
 #define tBackgroundId   data[0]
 #define tState          data[10]
 
@@ -1044,13 +1076,12 @@ static void Cmd_fadetobg(void)
 
 static void Cmd_fadetobgfromset(void)
 {
-    u8 bg1, bg2, bg3;
+    u8 bg1, bg2;
     u8 taskId;
 
     sBattleAnimScriptPtr++;
     bg1 = sBattleAnimScriptPtr[0];
     bg2 = sBattleAnimScriptPtr[1];
-    bg3 = sBattleAnimScriptPtr[2];
     sBattleAnimScriptPtr += 3;
     taskId = CreateTask(Task_FadeToBg, 5);
 
@@ -1723,3 +1754,30 @@ static void Cmd_stopsound(void)
     m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
 }
+
+u8 GetAnimBattlerId(u8 wantedBattler)
+{
+    switch (wantedBattler)
+    {
+    case ANIM_ATTACKER:
+    default:
+        return gBattleAnimAttacker;
+    case ANIM_TARGET:
+        return gBattleAnimTarget;
+    case ANIM_ATK_PARTNER:
+        return BATTLE_PARTNER(gBattleAnimAttacker);
+    case ANIM_DEF_PARTNER:
+        return BATTLE_PARTNER(gBattleAnimTarget);
+    case ANIM_PLAYER_LEFT ... ANIM_OPPONENT_RIGHT:
+        return wantedBattler - MAX_BATTLERS_COUNT;
+    }
+}
+
+// battle_anim_throw.c
+
+bool32 IsCriticalCapture(void)
+{
+    return gBattleSpritesDataPtr->animationData->isCriticalCapture;
+}
+
+//

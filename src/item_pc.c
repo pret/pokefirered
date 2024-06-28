@@ -522,8 +522,8 @@ static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
         {
             itemId = ItemPc_GetItemIdBySlotId(itemIndex);
             CreateItemMenuIcon(itemId, sStateDataPtr->itemMenuIconSlot);
-            if (ItemId_GetPocket(itemId) == POCKET_TM_CASE)
-                desc = gMoveNames[ItemIdToBattleMoveId(itemId)];
+            if (ItemId_GetPocket(itemId) == POCKET_TM_HM)
+                desc = gMovesInfo[ItemIdToBattleMoveId(itemId)].name;
             else
                 desc = ItemId_GetDescription(itemId);
         }
@@ -1084,26 +1084,6 @@ static void ItemPc_InitWindows(void)
         sSubmenuWindowIds[i] = 0xFF;
 }
 
-static void unused_ItemPc_AddTextPrinterParameterized(u8 windowId, const u8 * string, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed)
-{
-    struct TextPrinterTemplate template;
-
-    template.currentChar = string;
-    template.windowId = windowId;
-    template.fontId = FONT_NORMAL_COPY_2;
-    template.x = x;
-    template.y = y;
-    template.currentX = x;
-    template.currentY = y;
-    template.fgColor = 2;
-    template.bgColor = 0;
-    template.shadowColor = 3;
-    template.unk = GetFontAttribute(FONT_NORMAL_COPY_2, FONTATTR_UNKNOWN);
-    template.letterSpacing = letterSpacing + GetFontAttribute(FONT_NORMAL_COPY_2, FONTATTR_LETTER_SPACING);
-    template.lineSpacing = lineSpacing + GetFontAttribute(FONT_NORMAL_COPY_2, FONTATTR_LINE_SPACING);
-    AddTextPrinter(&template, speed, NULL);
-}
-
 static void ItemPc_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx)
 {
     AddTextPrinterParameterized4(windowId, fontId, x, y, letterSpacing, lineSpacing, sTextColors[colorIdx], speed, str);
@@ -1131,11 +1111,6 @@ static void ItemPc_DestroySubwindow(u8 idx)
     ClearWindowTilemap(sSubmenuWindowIds[idx]); // redundant
     RemoveWindow(sSubmenuWindowIds[idx]);
     sSubmenuWindowIds[idx] = 0xFF;
-}
-
-static u8 ItemPc_GetSubwindow(u8 idx)
-{
-    return sSubmenuWindowIds[idx];
 }
 
 static void ItemPc_PrintOnWindow5WithContinueTask(u8 taskId, const u8 * str, TaskFunc taskFunc)

@@ -65,7 +65,7 @@ struct GFRomHeader
     const u8 (* abilityNames)[];
     const u8 *const * abilityDescriptions;
     const struct Item * items;
-    const struct BattleMove * moves;
+    const struct MoveInfo * moves;
     const struct CompressedSpriteSheet * ballGfx;
     const struct CompressedSpritePalette * ballPalettes;
     u32 gcnLinkFlagsOffset;
@@ -96,15 +96,15 @@ static const struct GFRomHeader sGFRomHeader = {
 #else
     .gameName = "pokemon green version",
 #endif
-    .monFrontPics = gMonFrontPicTable,
-    .monBackPics = gMonBackPicTable,
-    .monNormalPalettes = gMonPaletteTable,
-    .monShinyPalettes = gMonShinyPaletteTable,
-    .monIcons = gMonIconTable,
-    .monIconPaletteIds = gMonIconPaletteIndices,
+    // .monFrontPics = gMonFrontPicTable,
+    // .monBackPics = gMonBackPicTable,
+    // .monNormalPalettes = gMonPaletteTable,
+    // .monShinyPalettes = gMonShinyPaletteTable,
+    // .monIcons = gMonIconTable,
+    // .monIconPaletteIds = gMonIconPaletteIndices,
     .monIconPalettes = gMonIconPaletteTable,
-    .monSpeciesNames = gSpeciesNames,
-    .moveNames = gMoveNames,
+    // .monSpeciesNames = gSpeciesNames,
+    // .moveNames = gMoveNames,
     .decorations = gDecorations,
     .flagsOffset = offsetof(struct SaveBlock1, flags),
     .varsOffset = offsetof(struct SaveBlock1, vars),
@@ -147,10 +147,10 @@ static const struct GFRomHeader sGFRomHeader = {
     .externalEventDataOffset = offsetof(struct SaveBlock1, externalEventData),
     .unk18 = 0x00000000,
     .speciesInfo = gSpeciesInfo,
-    .abilityNames = gAbilityNames,
-    .abilityDescriptions = gAbilityDescriptionPointers,
-    .items = gItems,
-    .moves = gBattleMoves,
+    // .abilityNames = gAbilityNames,
+    // .abilityDescriptions = gAbilityDescriptionPointers,
+    .items = gItemsInfo,
+    .moves = gMovesInfo,
     .ballGfx = gBallSpriteSheets,
     .ballPalettes = gBallSpritePalettes,
     .gcnLinkFlagsOffset = offsetof(struct SaveBlock2, gcnLinkFlags),

@@ -3,6 +3,7 @@
 #include "bike.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
+#include "debug.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -294,6 +295,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         gFieldInputRecord.pressedSelectButton = TRUE;
         return TRUE;
     }
+
+#if DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == FALSE
+    if (input->input_field_1_2)
+    {
+        PlaySE(SE_WIN_OPEN);
+        FreezeObjectEvents();
+        Debug_ShowMainMenu();
+        return TRUE;
+    }
+#endif
 
     return FALSE;
 }
@@ -677,11 +688,6 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     if (SafariZoneTakeStep() == TRUE)
         return TRUE;
     return FALSE;
-}
-
-static void Unref_ClearHappinessStepCounter(void)
-{
-    VarSet(VAR_HAPPINESS_STEP_COUNTER, 0);
 }
 
 static void UpdateHappinessStepCounter(void)
@@ -1138,36 +1144,6 @@ bool8 dive_warp(struct MapPosition *position, u16 metatileBehavior)
         }
     }
     return FALSE;
-}
-
-static u8 TrySetDiveWarp(void)
-{
-    s16 x, y;
-    u8 metatileBehavior;
-
-    PlayerGetDestCoords(&x, &y);
-    metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && !MetatileBehavior_IsUnableToEmerge(metatileBehavior))
-    {
-        if (SetDiveWarpEmerge(x - MAP_OFFSET, y - MAP_OFFSET) == TRUE)
-            return 1;
-    }
-    else if (MetatileBehavior_IsDiveable(metatileBehavior) == TRUE)
-    {
-        if (SetDiveWarpDive(x - MAP_OFFSET, y - MAP_OFFSET) == TRUE)
-            return 2;
-    }
-    return 0;
-}
-
-static const u8 *GetObjectEventScriptPointerPlayerFacing(void)
-{
-    u8 direction;
-    struct MapPosition position;
-
-    direction = GetPlayerMovementDirection();
-    GetInFrontOfPlayerPosition(&position);
-    return GetInteractedObjectEventScript(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), direction);
 }
 
 int SetCableClubWarp(void)

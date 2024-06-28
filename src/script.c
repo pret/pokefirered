@@ -27,9 +27,7 @@ EWRAM_DATA u8 gWalkAwayFromSignInhibitTimer = 0;
 EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
 
 static u8 sGlobalScriptContextStatus;
-static u32 sUnusedVariable1;
 static struct ScriptContext sGlobalScriptContext;
-static u32 sUnusedVariable2;
 static struct ScriptContext sImmediateScriptContext;
 static bool8 sLockFieldControls;
 static u8 sMsgBoxWalkawayDisabled;

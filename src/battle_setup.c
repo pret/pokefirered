@@ -22,6 +22,7 @@
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_message_box.h"
+#include "trainer_see.h"
 #include "vs_seeker.h"
 #include "battle.h"
 #include "battle_transition.h"
@@ -59,7 +60,7 @@ struct TrainerBattleParameter
 
 static void DoSafariBattle(void);
 static void DoGhostBattle(void);
-static void DoStandardWildBattle(void);
+static void DoStandardWildBattle(bool32 isDouble);
 static void CB2_EndWildBattle(void);
 static u8 GetWildBattleTransition(void);
 static u8 GetTrainerBattleTransition(void);
@@ -72,6 +73,8 @@ static const u8 *GetTrainerCantBattleSpeech(void);
 
 static EWRAM_DATA u16 sTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent_A = 0;
+EWRAM_DATA u16 gTrainerBattleOpponent_B = 0;
+EWRAM_DATA u16 gPartnerTrainerId = 0;
 static EWRAM_DATA u16 sTrainerObjectEventLocalId = 0;
 static EWRAM_DATA u8 *sTrainerAIntroSpeech = NULL;
 static EWRAM_DATA u8 *sTrainerADefeatSpeech = NULL;
@@ -80,6 +83,8 @@ static EWRAM_DATA u8 *sTrainerCannotBattleSpeech = NULL;
 static EWRAM_DATA u8 *sTrainerBattleEndScript = NULL;
 static EWRAM_DATA u8 *sTrainerABattleScriptRetAddr = NULL;
 static EWRAM_DATA u16 sRivalBattleFlags = 0;
+EWRAM_DATA static bool8 sShouldCheckTrainerBScript = FALSE;
+EWRAM_DATA static u8 sNoOfPossibleTrainerRetScripts = 0;
 
 // The first transition is used if the enemy pokemon are lower level than our pokemon.
 // Otherwise, the second transition is used.
@@ -217,6 +222,46 @@ static void CreateBattleStartTask(u8 transition, u16 song) // song == 0 means de
     PlayMapChosenOrBattleBGM(song);
 }
 
+static void Task_BattleStart_Debug(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch (tState)
+    {
+    case 0:
+        if (!FldEffPoison_IsActive()) // is poison not active?
+        {
+            HelpSystem_Disable();
+            BattleTransition_StartOnField(tTransition);
+            // ClearMirageTowerPulseBlendEffect();
+            tState++; // go to case 1.
+        }
+        break;
+    case 1:
+        if (IsBattleTransitionDone() == TRUE)
+        {
+            HelpSystem_Enable();
+            CleanupOverworldWindowsAndTilemaps();
+            SetMainCallback2(CB2_InitBattle);
+            RestartWildEncounterImmunitySteps();
+            ClearPoisonStepCounter();
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+static void CreateBattleStartTask_Debug(u8 transition, u16 song)
+{
+    u8 taskId = CreateTask(Task_BattleStart_Debug, 1);
+
+    gTasks[taskId].tTransition = transition;
+    PlayMapChosenOrBattleBGM(song);
+}
+
+#undef tState
+#undef tTransition
+
 static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
 {
     if (mapGroup == MAP_GROUP(POKEMON_TOWER_1F)
@@ -240,16 +285,23 @@ void StartWildBattle(void)
     else if (CheckSilphScopeInPokemonTower(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
         DoGhostBattle();
     else
-        DoStandardWildBattle();
+        DoStandardWildBattle(FALSE);
 }
 
-static void DoStandardWildBattle(void)
+void StartDoubleWildBattle(void)
+{
+    DoStandardWildBattle(TRUE);
+}
+
+static void DoStandardWildBattle(bool32 isDouble)
 {
     LockPlayerFieldControls();
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
+    if (isDouble)
+        gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -399,25 +451,6 @@ void StartRegiBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-// Unused
-static void EndPokedudeBattle(void)
-{
-    LoadPlayerParty();
-    CB2_EndWildBattle();
-}
-
-// Unused
-static void StartPokedudeBattle(void)
-{
-    LockPlayerFieldControls();
-    FreezeObjectEvents();
-    StopPlayerAvatar();
-    gMain.savedCallback = EndPokedudeBattle;
-    SavePlayerParty();
-    InitPokedudePartyAndOpponent();
-    CreateBattleStartTask(GetWildBattleTransition(), 0);
-}
-
 static void CB2_EndWildBattle(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
@@ -562,49 +595,17 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     u8 i;
     u8 sum;
     u32 count = numMons;
+    const struct TrainerMon *party;
 
-    if (gTrainers[opponentId].partySize < count)
-        count = gTrainers[opponentId].partySize;
+    if (GetTrainerPartySizeFromId(opponentId) < count)
+        count = GetTrainerPartySizeFromId(opponentId);
+
     sum = 0;
-    switch (gTrainers[opponentId].partyFlags)
-    {
-    case 0:
-        {
-            const struct TrainerMonNoItemDefaultMoves *party;
 
-            party = gTrainers[opponentId].party.NoItemDefaultMoves;
-            for (i = 0; i < count; ++i)
-                sum += party[i].lvl;
-        }
-        break;
-    case F_TRAINER_PARTY_CUSTOM_MOVESET:
-        {
-            const struct TrainerMonNoItemCustomMoves *party;
+    party = GetTrainerPartyFromId(opponentId);
+    for (i = 0; i < count && party != NULL; i++)
+        sum += party[i].lvl;
 
-            party = gTrainers[opponentId].party.NoItemCustomMoves;
-            for (i = 0; i < count; ++i)
-                sum += party[i].lvl;
-        }
-        break;
-    case F_TRAINER_PARTY_HELD_ITEM:
-        {
-            const struct TrainerMonItemDefaultMoves *party;
-
-            party = gTrainers[opponentId].party.ItemDefaultMoves;
-            for (i = 0; i < count; ++i)
-                sum += party[i].lvl;
-        }
-        break;
-    case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
-        {
-            const struct TrainerMonItemCustomMoves *party;
-
-            party = gTrainers[opponentId].party.ItemCustomMoves;
-            for (i = 0; i < count; ++i)
-                sum += party[i].lvl;
-        }
-        break;
-    }
     return sum;
 }
 
@@ -626,29 +627,30 @@ static u8 GetTrainerBattleTransition(void)
     u8 transitionType;
     u8 enemyLevel;
     u8 playerLevel;
+    u32 trainerId = SanitizeTrainerId(gTrainerBattleOpponent_A);
 
-    if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
+    if (trainerId == TRAINER_SECRET_BASE)
         return B_TRANSITION_BLUE;
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR)
+    if (gTrainers[trainerId].trainerClass == TRAINER_CLASS_ELITE_FOUR)
     {
-        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LORELEI || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LORELEI_2)
+        if (trainerId == TRAINER_ELITE_FOUR_LORELEI || trainerId == TRAINER_ELITE_FOUR_LORELEI_2)
             return B_TRANSITION_LORELEI;
-        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_BRUNO || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_BRUNO_2)
+        if (trainerId == TRAINER_ELITE_FOUR_BRUNO || trainerId == TRAINER_ELITE_FOUR_BRUNO_2)
             return B_TRANSITION_BRUNO;
-        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_AGATHA || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_AGATHA_2)
+        if (trainerId == TRAINER_ELITE_FOUR_AGATHA || trainerId == TRAINER_ELITE_FOUR_AGATHA_2)
             return B_TRANSITION_AGATHA;
-        if (gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LANCE || gTrainerBattleOpponent_A == TRAINER_ELITE_FOUR_LANCE_2)
+        if (trainerId == TRAINER_ELITE_FOUR_LANCE || trainerId == TRAINER_ELITE_FOUR_LANCE_2)
             return B_TRANSITION_LANCE;
         return B_TRANSITION_BLUE;
     }
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION)
+    if (gTrainers[trainerId].trainerClass == TRAINER_CLASS_CHAMPION)
         return B_TRANSITION_BLUE;
-    if (gTrainers[gTrainerBattleOpponent_A].doubleBattle == TRUE)
+    if (gTrainers[trainerId].doubleBattle == TRUE)
         minPartyCount = 2; // double battles always at least have 2 pokemon.
     else
         minPartyCount = 1;
     transitionType = GetBattleTransitionTypeByMap();
-    enemyLevel = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent_A, minPartyCount);
+    enemyLevel = GetSumOfEnemyPartyLevel(trainerId, minPartyCount);
     playerLevel = GetSumOfPlayerPartyLevel(minPartyCount);
     if (enemyLevel < playerLevel)
         return sBattleTransitionTable_Trainer[transitionType][0];
@@ -871,12 +873,6 @@ void SetBattledTrainerFlag(void)
     FlagSet(GetTrainerAFlag());
 }
 
-// not used
-static void SetBattledTrainerFlag2(void)
-{
-    FlagSet(GetTrainerAFlag());
-}
-
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
     return FlagGet(TRAINER_FLAGS_START + trainerId);
@@ -890,6 +886,37 @@ void SetTrainerFlag(u16 trainerId)
 void ClearTrainerFlag(u16 trainerId)
 {
     FlagClear(TRAINER_FLAGS_START + trainerId);
+}
+
+void BattleSetup_StartTrainerBattle(void)
+{
+    if (gNoOfApproachingTrainers == 2)
+        gBattleTypeFlags = (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TRAINER);
+    else
+        gBattleTypeFlags = (BATTLE_TYPE_TRAINER);
+
+    sNoOfPossibleTrainerRetScripts = gNoOfApproachingTrainers;
+    gNoOfApproachingTrainers = 0;
+    sShouldCheckTrainerBScript = FALSE;
+    gWhichTrainerToFaceAfterBattle = 0;
+    gMain.savedCallback = CB2_EndTrainerBattle;
+
+    DoTrainerBattle();
+
+    ScriptContext_Stop();
+}
+
+void BattleSetup_StartTrainerBattle_Debug(void)
+{
+    sNoOfPossibleTrainerRetScripts = gNoOfApproachingTrainers;
+    gNoOfApproachingTrainers = 0;
+    sShouldCheckTrainerBScript = FALSE;
+    gWhichTrainerToFaceAfterBattle = 0;
+    gMain.savedCallback = CB2_EndTrainerBattle;
+
+    CreateBattleStartTask_Debug(GetWildBattleTransition(), 0);
+
+    ScriptContext_Stop();
 }
 
 void StartTrainerBattle(void)

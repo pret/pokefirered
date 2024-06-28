@@ -77,7 +77,7 @@ EWRAM_DATA u16 (*gShopTilemapBuffer2)[0x400] = {0};
 EWRAM_DATA u16 (*gShopTilemapBuffer3)[0x400] = {0};
 EWRAM_DATA u16 (*gShopTilemapBuffer4)[0x400] = {0};
 EWRAM_DATA struct ListMenuItem *sShopMenuListMenu = {0};
-static EWRAM_DATA u8 (*sShopMenuItemStrings)[13] = {0};
+static EWRAM_DATA u8 (*sShopMenuItemStrings)[ITEM_NAME_LENGTH + 2] = {0};
 EWRAM_DATA struct QuestLogEvent_Shop sHistory[2] = {0};
 
 //Function Declarations
@@ -144,10 +144,10 @@ static const struct MenuAction sShopMenuActions_BuySellQuit[] =
     {gText_ShopQuit, {.void_u8 = Task_HandleShopMenuQuit}}
 };
 
-static const struct YesNoFuncTable sShopMenuActions_BuyQuit[] =
+static const struct YesNoFuncTable sShopMenuActions_BuyQuit =
 {
-    BuyMenuTryMakePurchase,
-    BuyMenuReturnToItemList
+    .yesFunc = BuyMenuTryMakePurchase, 
+    .noFunc = BuyMenuReturnToItemList,
 };
 
 static const struct WindowTemplate sShopMenuWindowTemplate =
@@ -222,16 +222,8 @@ static u8 CreateShopMenu(u8 martType)
 
 static u8 GetMartTypeFromItemList(u32 martType)
 {
-    u16 i;
-
     if (martType != MART_TYPE_REGULAR)
         return martType;
-
-    for (i = 0; i < sShopData.itemCount && sShopData.itemList[i] != 0; i++)
-    {
-        if (ItemId_GetPocket(sShopData.itemList[i]) == POCKET_TM_CASE)
-            return MART_TYPE_TMHM;
-    }
     return MART_TYPE_REGULAR;
 }
 
@@ -603,13 +595,13 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y)
 
     if (item != INDEX_CANCEL)
     {
-        ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(item), 0, 4);
-        x = 4 - StringLength(gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(item), 0, 6);
+        x = 6 - StringLength(gStringVar1);
         loc = gStringVar4;
         while (x-- != 0)
             *loc++ = 0;
         StringExpandPlaceholders(loc, gText_PokedollarVar1);
-        BuyMenuPrint(windowId, FONT_SMALL, gStringVar4, 0x69, y, 0, 0, TEXT_SKIP_DRAW, 1);
+        BuyMenuPrint(windowId, FONT_SMALL, gStringVar4, 0x61, y, 0, 0, TEXT_SKIP_DRAW, 1);
     }
 }
 
@@ -621,7 +613,7 @@ static void LoadTmHmNameInMart(s32 item)
         StringCopy(gStringVar4, gText_NumberClear01);
         StringAppend(gStringVar4, gStringVar1);
         BuyMenuPrint(6, FONT_SMALL, gStringVar4, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);
-        StringCopy(gStringVar4, gMoveNames[ItemIdToBattleMoveId(item)]);
+        StringCopy(gStringVar4, gMovesInfo[ItemIdToBattleMoveId(item)].name);
         BuyMenuPrint(6, FONT_NORMAL, gStringVar4, 0, 0x10, 0, 0, 0, 1);
     }
     else
@@ -972,7 +964,7 @@ static void Task_BuyHowManyDialogueHandleInput(u8 taskId)
 
 static void CreateBuyMenuConfirmPurchaseWindow(u8 taskId)
 {
-    BuyMenuConfirmPurchase(taskId, sShopMenuActions_BuyQuit);
+    BuyMenuConfirmPurchase(taskId, &sShopMenuActions_BuyQuit);
 }
 
 static void BuyMenuTryMakePurchase(u8 taskId)

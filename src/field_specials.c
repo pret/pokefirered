@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "quest_log.h"
 #include "list_menu.h"
+#include "debug.h"
 #include "diploma.h"
 #include "script.h"
 #include "field_player_avatar.h"
@@ -18,6 +19,7 @@
 #include "field_camera.h"
 #include "field_effect.h"
 #include "event_object_movement.h"
+#include "item.h"
 #include "menu_indicators.h"
 #include "random.h"
 #include "mail_data.h"
@@ -31,6 +33,8 @@
 #include "mystery_gift.h"
 #include "naming_screen.h"
 #include "party_menu.h"
+#include "rtc.h"
+#include "wallclock.h"
 #include "dynamic_placeholder_text_util.h"
 #include "new_menu_helpers.h"
 #include "constants/songs.h"
@@ -91,6 +95,13 @@ void ShowDiploma(void)
 {
     QuestLog_CutRecording();
     SetMainCallback2(CB2_ShowDiploma);
+    LockPlayerFieldControls();
+}
+
+void Special_ViewWallClock(void)
+{
+    gMain.savedCallback = CB2_ReturnToField;
+    SetMainCallback2(CB2_ViewWallClock);
     LockPlayerFieldControls();
 }
 
@@ -160,6 +171,16 @@ void SetHiddenItemFlag(void)
     FlagSet(gSpecialVar_0x8004);
 }
 
+u16 GetWeekCount(void)
+{
+    u16 weekCount = gLocalTime.days / 7;
+    if (weekCount > 9999)
+    {
+        weekCount = 9999;
+    }
+    return weekCount;
+}
+
 u8 GetLeadMonFriendship(void)
 {
     struct Pokemon * pokemon = &gPlayerParty[GetLeadMonIndex()];
@@ -206,6 +227,20 @@ bool8 PlayerHasGrassPokemonInParty(void)
     return FALSE;
 }
 
+static bool8 IsPlayerInFrontOfPC(void)
+{
+    s16 x, y;
+    u32 tileInFront;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    tileInFront = MapGridGetMetatileIdAt(x, y);
+
+    return (tileInFront == METATILE_Building_PCOff
+         || tileInFront == METATILE_Building_PCOn
+         || tileInFront == METATILE_GenericBuilding1_PlayersPCOff
+         || tileInFront == METATILE_GenericBuilding1_PlayersPCOn);
+}
+
 #define tState data[0]
 #define tTimer data[1]
 
@@ -213,7 +248,7 @@ void AnimatePcTurnOn(void)
 {
     u8 taskId;
 
-    if (FuncIsActiveTask(Task_AnimatePcTurnOn) != TRUE)
+    if (FuncIsActiveTask(Task_AnimatePcTurnOn) != TRUE && IsPlayerInFrontOfPC() == TRUE)
     {
         taskId = CreateTask(Task_AnimatePcTurnOn, 8);
         gTasks[taskId].tState = 0;
@@ -290,6 +325,8 @@ void AnimatePcTurnOff()
     s8 deltaY = 0;
     u8 direction = GetPlayerFacingDirection();
 
+    if (IsPlayerInFrontOfPC() == FALSE)
+        return;
     switch (direction)
     {
     case DIR_NORTH:
@@ -685,7 +722,7 @@ void SampleResortGorgeousMonAndReward(void)
         VarSet(VAR_RESORT_GORGEOUS_REWARD, SampleResortGorgeousReward());
         VarSet(VAR_RESORT_GOREGEOUS_STEP_COUNTER, 0);
     }
-    StringCopy(gStringVar1, gSpeciesNames[VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON)]);
+    StringCopy(gStringVar1, gSpeciesInfo[VarGet(VAR_RESORT_GORGEOUS_REQUESTED_MON)].speciesName);
 }
 
 static u16 SampleResortGorgeousMon(void)
@@ -695,10 +732,10 @@ static u16 SampleResortGorgeousMon(void)
     for (i = 0; i < 100; i++)
     {
         species = (Random() % (NUM_SPECIES - 1)) + 1;
-        if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) == TRUE)
+        if (GetSetPokedexFlag(SpeciesToNationalDexNum(species), 0) == TRUE)
             return species;
     }
-    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), 0) != TRUE)
+    while (GetSetPokedexFlag(SpeciesToNationalDexNum(species), 0) != TRUE)
     {
         if (species == SPECIES_BULBASAUR)
             species = NUM_SPECIES - 1;
@@ -1536,7 +1573,7 @@ u16 GetStarterSpecies(void)
 
 void SetSeenMon(void)
 {
-    GetSetPokedexFlag(SpeciesToNationalPokedexNum(gSpecialVar_0x8004), 2);
+    GetSetPokedexFlag(SpeciesToNationalDexNum(gSpecialVar_0x8004), 2);
 }
 
 void ResetContextNpcTextColor(void)
@@ -1577,7 +1614,7 @@ static bool8 HasMonBeenRenamed(u8 idx)
     language = GetMonData(pokemon, MON_DATA_LANGUAGE, &language);
     if (language != LANGUAGE_ENGLISH)
         return TRUE;
-    else if (StringCompare(gSpeciesNames[GetMonData(pokemon, MON_DATA_SPECIES, NULL)], gStringVar1) != 0)
+    else if (StringCompare(gSpeciesInfo[GetMonData(pokemon, MON_DATA_SPECIES, NULL)].speciesName, gStringVar1) != 0)
         return TRUE;
     else
         return FALSE;
@@ -2056,9 +2093,9 @@ bool8 UsedPokemonCenterWarp(void)
 bool8 BufferTMHMMoveName(void)
 {
     // 8004 = item ID
-    if (gSpecialVar_0x8004 >= ITEM_TM01 && gSpecialVar_0x8004 <= ITEM_HM08)
+    if (IsItemTMHM(gSpecialVar_0x8004))
     {
-        StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_0x8004)]);
+        StringCopy(gStringVar1, gMovesInfo[ItemIdToBattleMoveId(gSpecialVar_0x8004)].name);
         return TRUE;
     }
     else
@@ -2186,7 +2223,6 @@ static void Task_RunPokemonLeagueLightingEffect(u8 taskId)
 
 static void Task_CancelPokemonLeagueLightingEffect(u8 taskId)
 {
-    s16 *data = gTasks[taskId].data;
     if (FlagGet(FLAG_TEMP_4) != FALSE)
     {
         if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(POKEMON_LEAGUE_CHAMPIONS_ROOM) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(POKEMON_LEAGUE_CHAMPIONS_ROOM))
@@ -2210,12 +2246,6 @@ void StopPokemonLeagueLightingEffectTask(void)
     }
 }
 
-static const u8 sCapeBrinkCompatibleSpecies[] = {
-    SPECIES_VENUSAUR,
-    SPECIES_CHARIZARD,
-    SPECIES_BLASTOISE
-};
-
 bool8 CapeBrinkGetMoveToTeachLeadPokemon(void)
 {
     // Returns:
@@ -2223,74 +2253,70 @@ bool8 CapeBrinkGetMoveToTeachLeadPokemon(void)
     //   8006 = Num moves known by lead mon
     //   8007 = Index of lead mon
     //   to specialvar = whether a move can be taught in the first place
-    u8 tutorMonId = 0;
-    u8 numMovesKnown = 0;
-    u8 leadMonSlot = GetLeadMonIndex();
-    u8 i;
-    gSpecialVar_0x8007 = leadMonSlot;
-    for (i = 0; i < NELEMS(sCapeBrinkCompatibleSpecies); i++)
-    {
-        if (GetMonData(&gPlayerParty[leadMonSlot], MON_DATA_SPECIES_OR_EGG, NULL) == sCapeBrinkCompatibleSpecies[i])
-        {
-            tutorMonId = i;
-            break;
-        }
-    }
-    if (i == NELEMS(sCapeBrinkCompatibleSpecies) || GetMonData(&gPlayerParty[leadMonSlot], MON_DATA_FRIENDSHIP) != 255)
+    u8 i, leadMonSlot, moveCount = 0;
+    u16 moveId, tutorFlag; 
+    struct Pokemon *leadMon;
+    
+    leadMonSlot = GetLeadMonIndex();
+    leadMon = &gPlayerParty[leadMonSlot];
+    
+    if (GetMonData(leadMon, MON_DATA_FRIENDSHIP) != 255)
         return FALSE;
-    if (tutorMonId == 0)
+
+    moveId = GetFirstPartnerMove(GetMonData(leadMon, MON_DATA_SPECIES_OR_EGG));
+    switch(moveId)
     {
-        StringCopy(gStringVar2, gMoveNames[MOVE_FRENZY_PLANT]);
-        gSpecialVar_0x8005 = MOVETUTOR_FRENZY_PLANT;
-        if (FlagGet(FLAG_TUTOR_FRENZY_PLANT) == TRUE)
+        case MOVE_FRENZY_PLANT:
+            tutorFlag = FLAG_TUTOR_FRENZY_PLANT;
+            break;
+        case MOVE_BLAST_BURN:
+            tutorFlag = FLAG_TUTOR_BLAST_BURN;
+            break;
+        case MOVE_HYDRO_CANNON:
+            tutorFlag = FLAG_TUTOR_HYDRO_CANNON;
+            break;
+        default:
             return FALSE;
     }
-    else if (tutorMonId == 1)
-    {
-        StringCopy(gStringVar2, gMoveNames[MOVE_BLAST_BURN]);
-        gSpecialVar_0x8005 = MOVETUTOR_BLAST_BURN;
-        if (FlagGet(FLAG_TUTOR_BLAST_BURN) == TRUE)
-            return FALSE;
-    }
-    else
-    {
-        StringCopy(gStringVar2, gMoveNames[MOVE_HYDRO_CANNON]);
-        gSpecialVar_0x8005 = MOVETUTOR_HYDRO_CANNON;
-        if (FlagGet(FLAG_TUTOR_HYDRO_CANNON) == TRUE)
-            return FALSE;
-    }
-    if (GetMonData(&gPlayerParty[leadMonSlot], MON_DATA_MOVE1) != MOVE_NONE)
-        numMovesKnown++;
-    if (GetMonData(&gPlayerParty[leadMonSlot], MON_DATA_MOVE2) != MOVE_NONE)
-        numMovesKnown++;
-    if (GetMonData(&gPlayerParty[leadMonSlot], MON_DATA_MOVE3) != MOVE_NONE)
-        numMovesKnown++;
-    if (GetMonData(&gPlayerParty[leadMonSlot], MON_DATA_MOVE4) != MOVE_NONE)
-        numMovesKnown++;
-    gSpecialVar_0x8006 = numMovesKnown;
+    
+    StringCopy(gStringVar2, gMovesInfo[moveId].name);
+    if (!I_REUSABLE_TMS && FlagGet(tutorFlag) == TRUE)
+        return FALSE;
+    
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        moveCount += (GetMonData(leadMon, MON_DATA_MOVE1 + i) != MOVE_NONE);
+    
+    gSpecialVar_0x8005 = moveId;
+    gSpecialVar_0x8006 = moveCount;
+    gSpecialVar_0x8007 = leadMonSlot;
+
     return TRUE;
 }
 
 bool8 HasLearnedAllMovesFromCapeBrinkTutor(void)
 {
     // 8005 is set by CapeBrinkGetMoveToTeachLeadPokemon
-    u8 r4 = 0;
-    if (gSpecialVar_0x8005 == MOVETUTOR_FRENZY_PLANT)
-        FlagSet(FLAG_TUTOR_FRENZY_PLANT);
-    else if (gSpecialVar_0x8005 == MOVETUTOR_BLAST_BURN)
-        FlagSet(FLAG_TUTOR_BLAST_BURN);
-    else
-        FlagSet(FLAG_TUTOR_HYDRO_CANNON);
-    if (FlagGet(FLAG_TUTOR_FRENZY_PLANT) == TRUE)
-        r4++;
-    if (FlagGet(FLAG_TUTOR_BLAST_BURN) == TRUE)
-        r4++;
-    if (FlagGet(FLAG_TUTOR_HYDRO_CANNON) == TRUE)
-        r4++;
-    if (r4 == 3)
-        return TRUE;
-    else
+    if (I_REUSABLE_TMS)
+    {
         return FALSE;
+    }
+
+    switch (gSpecialVar_0x8005)
+    {
+        case MOVE_FRENZY_PLANT:
+            FlagSet(FLAG_TUTOR_FRENZY_PLANT);
+            break;
+        case MOVE_BLAST_BURN:
+            FlagSet(FLAG_TUTOR_BLAST_BURN);
+            break;
+        case MOVE_HYDRO_CANNON:
+            FlagSet(FLAG_TUTOR_HYDRO_CANNON);
+            break;
+    }
+
+    return (FlagGet(FLAG_TUTOR_FRENZY_PLANT) == TRUE)
+        && (FlagGet(FLAG_TUTOR_BLAST_BURN) == TRUE)
+        && (FlagGet(FLAG_TUTOR_HYDRO_CANNON) == TRUE);
 }
 
 bool8 CutMoveRuinValleyCheck(void)
@@ -2552,4 +2578,45 @@ static void Task_WingFlapSound(u8 taskId)
     }
     if (data[0] == gSpecialVar_0x8004 - 1)
         DestroyTask(taskId);
+}
+
+bool8 InPokemonCenter(void)
+{
+    static const u16 sPokemonCenters[] =
+    {
+        MAP_VIRIDIAN_CITY_POKEMON_CENTER_1F,
+        MAP_PEWTER_CITY_POKEMON_CENTER_1F,
+        MAP_ROUTE4_POKEMON_CENTER_1F,
+        MAP_CERULEAN_CITY_POKEMON_CENTER_1F,
+        MAP_VERMILION_CITY_POKEMON_CENTER_1F,
+        MAP_ROUTE10_POKEMON_CENTER_1F,
+        MAP_LAVENDER_TOWN_POKEMON_CENTER_1F,
+        MAP_CELADON_CITY_POKEMON_CENTER_1F,
+        MAP_FUCHSIA_CITY_POKEMON_CENTER_1F,
+        MAP_SAFFRON_CITY_POKEMON_CENTER_1F,
+        MAP_CINNABAR_ISLAND_POKEMON_CENTER_1F,
+        MAP_INDIGO_PLATEAU_POKEMON_CENTER_1F,
+        MAP_ONE_ISLAND_POKEMON_CENTER_1F,
+        MAP_TWO_ISLAND_POKEMON_CENTER_1F,
+        MAP_THREE_ISLAND_POKEMON_CENTER_1F,
+        MAP_FOUR_ISLAND_POKEMON_CENTER_1F,
+        MAP_FIVE_ISLAND_POKEMON_CENTER_1F,
+        MAP_SIX_ISLAND_POKEMON_CENTER_1F,
+        MAP_SEVEN_ISLAND_POKEMON_CENTER_1F,
+        MAP_BATTLE_COLOSSEUM_2P,
+        MAP_TRADE_CENTER,
+        MAP_RECORD_CORNER,
+        MAP_BATTLE_COLOSSEUM_4P,
+        MAP_UNDEFINED
+    };
+
+    int i;
+    u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
+
+    for (i = 0; sPokemonCenters[i] != MAP_UNDEFINED; i++)
+    {
+        if (sPokemonCenters[i] == map)
+            return TRUE;
+    }
+    return FALSE;
 }

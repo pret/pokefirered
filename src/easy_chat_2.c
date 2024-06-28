@@ -410,7 +410,6 @@ static const struct EasyChatScreenTemplate sEasyChatScreenTemplates[] = {
 static bool8 EasyChat_AllocateResources(u8 type, u16 *words)
 {
     u8 templateId;
-    int i;
 
     sEasyChatScreen = malloc(sizeof(*sEasyChatScreen));
     if (sEasyChatScreen == NULL)
@@ -678,8 +677,6 @@ static u16 HandleJoypad_SelectWord(void)
 
 static u16 Cancel_HandleYesNoMenu(void)
 {
-    u8 var0;
-
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case MENU_B_PRESSED: // B Button
@@ -1282,11 +1279,6 @@ u8 GetECSelectWordRowsAbove(void)
 u8 GetECSelectWordNumRows(void)
 {
     return sEasyChatScreen->selectWordNumRows;
-}
-
-static u8 UnusedDummy(void)
-{
-    return 0;
 }
 
 bool32 ShouldDrawECUpArrow(void)

@@ -232,12 +232,6 @@ static void Task_EnableScriptAfterMusicFade(u8 taskId)
 #define DIR_WIPE_OUT 1 // From center to edges.
 #define tChildOffset data[0]
 
-static void DoInwardBarnDoorFade(void)
-{
-    u8 taskId = CreateTask(Task_BarnDoorWipe, 80);
-    gTasks[taskId].tDirection = DIR_WIPE_IN;
-}
-
 void DoOutwardBarnDoorWipe(void)
 {
     u8 taskId = CreateTask(Task_BarnDoorWipe, 80);

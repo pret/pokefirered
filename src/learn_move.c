@@ -643,10 +643,10 @@ static void MoveRelearnerStateMachine(void)
             else
             {
                 move = GetMonData(&gPlayerParty[sMoveRelearner->selectedPartyMember], MON_DATA_MOVE1 + sMoveRelearner->selectedMoveSlot);
-                StringCopy(gStringVar3, gMoveNames[move]);
+                StringCopy(gStringVar3, gMovesInfo[move].name);
                 RemoveMonPPBonus(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->selectedMoveSlot);
                 SetMonMoveSlot(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex], sMoveRelearner->selectedMoveSlot);
-                StringCopy(gStringVar2, gMoveNames[sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]]);
+                StringCopy(gStringVar2, gMovesInfo[sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]].name);
                 StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_1_2_and_Poof);
                 sMoveRelearner->state = 30;
                 gSpecialVar_0x8004 = TRUE;
@@ -755,7 +755,7 @@ static void MoveRelearnerInitListMenuBuffersEtc(void)
     sMoveRelearner->numLearnableMoves = GetMoveRelearnerMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves);
     count = GetMoveRelearnerMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves);
     for (i = 0; i < sMoveRelearner->numLearnableMoves; i++)
-        StringCopy(sMoveRelearner->listMenuStrbufs[i], gMoveNames[sMoveRelearner->learnableMoves[i]]);
+        StringCopy(sMoveRelearner->listMenuStrbufs[i], gMovesInfo[sMoveRelearner->learnableMoves[i]].name);
     GetMonData(&gPlayerParty[sMoveRelearner->selectedPartyMember], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(sMoveRelearner->listMenuStrbufs[sMoveRelearner->numLearnableMoves], gFameCheckerText_Cancel);
@@ -816,30 +816,30 @@ static void MoveLearnerInitListMenu(void)
 static void PrintMoveInfo(u16 move)
 {
     u8 buffer[50];
-    BlitMenuInfoIcon(2, gBattleMoves[move].type + 1, 1, 4);
+    BlitMenuInfoIcon(2, gMovesInfo[move].type + 1, 1, 4);
 
-    if (gBattleMoves[move].power < 2)
+    if (gMovesInfo[move].power < 2)
     {
         PrintTextOnWindow(3, gText_ThreeHyphens, 1, 4, 0, 0);
     }
     else
     {
-        ConvertIntToDecimalStringN(buffer, gBattleMoves[move].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(buffer, gMovesInfo[move].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintTextOnWindow(3, buffer, 1, 4, 0, 0);
     }
 
-    if (gBattleMoves[move].accuracy == 0)
+    if (gMovesInfo[move].accuracy == 0)
     {
         PrintTextOnWindow(3, gText_ThreeHyphens, 1, 18, 0, 1);
     }
     else
     {
-        ConvertIntToDecimalStringN(buffer, gBattleMoves[move].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        ConvertIntToDecimalStringN(buffer, gMovesInfo[move].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintTextOnWindow(3, buffer, 1, 18, 0, 1);
     }
-    ConvertIntToDecimalStringN(buffer, gBattleMoves[move].pp, STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(buffer, gMovesInfo[move].pp, STR_CONV_MODE_LEFT_ALIGN, 2);
     PrintTextOnWindow(4, buffer, 2, 2, 0, 0);
-    PrintTextOnWindow(5, gMoveDescriptionPointers[move - 1], 1, 0, 0, 0);
+    PrintTextOnWindow(5, gMovesInfo[move].description, 1, 0, 0, 0);
 }
 
 static void LoadMoveInfoUI(void)

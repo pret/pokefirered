@@ -7,8 +7,6 @@
 #include "task.h"
 #include "trig.h"
 
-static EWRAM_DATA u16 sBgCnt = 0;
-
 extern const u8 gBattleAnimRegOffsBgCnt[];
 extern const u8 gBattleIntroRegOffsBgCnt[];
 
@@ -35,7 +33,7 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
 {
     if (bgId < 4)
     {
-        sBgCnt = GetGpuReg(gBattleAnimRegOffsBgCnt[bgId]);
+        u32 sBgCnt = GetGpuReg(gBattleAnimRegOffsBgCnt[bgId]);
         switch (attributeId)
         {
         case BG_ANIM_SCREEN_SIZE:
@@ -66,7 +64,7 @@ void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
 
 s32 GetAnimBgAttribute(u8 bgId, u8 attributeId)
 {
-    u16 bgCnt;
+    u32 bgCnt;
 
     if (bgId < 4)
     {
@@ -324,7 +322,7 @@ static void BattleIntroSlide3(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 8));
         SetGpuReg(REG_OFFSET_BLDY, 0);
         gTasks[taskId].data[4] = BLDALPHA_BLEND(8, 8);
-        if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         {
             gTasks[taskId].data[2] = 16;
             ++gTasks[taskId].data[0];
@@ -468,10 +466,9 @@ static void BattleIntroSlideLink(u8 taskId)
 void CopyBattlerSpriteToBg(s32 bgId, u8 x, u8 y, u8 battlerPosition, u8 palno, u8 *tilesDest, u16 *tilemapDest, u16 tilesOffset)
 {
     s32 i, j;
-    u8 battler = GetBattlerAtPosition(battlerPosition);
     s32 offset = tilesOffset;
 
-    CpuCopy16(gMonSpritesGfxPtr->sprites[battlerPosition] + BG_SCREEN_SIZE * gBattleMonForms[battler], tilesDest, BG_SCREEN_SIZE);
+    CpuCopy16(gMonSpritesGfxPtr->sprites[battlerPosition], tilesDest, BG_SCREEN_SIZE);
     LoadBgTiles(bgId, tilesDest, 0x1000, tilesOffset);
     for (i = y; i < y + 8; ++i)
         for (j = x; j < x + 8; ++j)
@@ -480,7 +477,7 @@ void CopyBattlerSpriteToBg(s32 bgId, u8 x, u8 y, u8 battlerPosition, u8 palno, u
 }
 
 // Unused
-static void DrawBattlerOnBgDMA(u8 arg0, u8 arg1, u8 battlerPosition, u8 arg3, u8 arg4, u16 arg5, u8 arg6, u8 arg7)
+static void UNUSED DrawBattlerOnBgDMA(u8 arg0, u8 arg1, u8 battlerPosition, u8 arg3, u8 arg4, u16 arg5, u8 arg6, u8 arg7)
 {
     s32 i, j, offset;
 

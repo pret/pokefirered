@@ -1268,7 +1268,7 @@ static void LoadUnionRoomChatPanelGfx(void)
 
 static void LoadLinkMiscMenuGfx(void)
 {
-    u8 *ptr;
+    u8 UNUSED *ptr;
 
     LoadPalette(gUnionRoomChat_Bg_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     ptr = DecompressAndCopyTileDataToVram(2, gUnionRoomChat_Bg_Gfx, 0, 0, 0);

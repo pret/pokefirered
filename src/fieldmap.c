@@ -15,7 +15,7 @@ struct ConnectionFlags
 };
 
 struct BackupMapLayout VMap;
-EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
+EWRAM_DATA u16 sBackupMapData[VIRTUAL_MAP_SIZE] = {};
 EWRAM_DATA struct MapHeader gMapHeader = {};
 EWRAM_DATA struct Camera gCamera = {};
 static EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
@@ -36,23 +36,23 @@ static bool8 IsPosInIncomingConnectingMap(u8, s32, s32, const struct MapConnecti
 static bool8 IsCoordInIncomingConnectingMap(s32, s32, s32, s32);
 static u32 GetAttributeByMetatileIdAndMapLayout(const struct MapLayout *, u16, u8);
 
-#define GetBorderBlockAt(x, y) ({                                                                 \
-    u16 block;                                                                                    \
-    s32 xprime;                                                                                   \
-    s32 yprime;                                                                                   \
-                                                                                                  \
-    const struct MapLayout *mapLayout = gMapHeader.mapLayout;                                     \
-                                                                                                  \
-    xprime = x - MAP_OFFSET;                                                                      \
-    xprime += 8 * mapLayout->borderWidth;                                                         \
-    xprime %= mapLayout->borderWidth;                                                             \
-                                                                                                  \
-    yprime = y - MAP_OFFSET;                                                                      \
-    yprime += 8 * mapLayout->borderHeight;                                                        \
-    yprime %= mapLayout->borderHeight;                                                            \
-                                                                                                  \
-    block = mapLayout->border[xprime + yprime * mapLayout->borderWidth] | MAPGRID_COLLISION_MASK; \
-})
+static inline u16 GetBorderBlockAt(s32 x, s32 y)
+{
+    s32 xprime;
+    s32 yprime;
+
+    const struct MapLayout *mapLayout = gMapHeader.mapLayout;
+
+    xprime = x - MAP_OFFSET;
+    xprime += 8 * mapLayout->borderWidth;
+    xprime %= mapLayout->borderWidth;
+
+    yprime = y - MAP_OFFSET;
+    yprime += 8 * mapLayout->borderHeight;
+    yprime %= mapLayout->borderHeight;
+
+    return mapLayout->border[xprime + yprime * mapLayout->borderWidth] | MAPGRID_COLLISION_MASK;
+}
 
 #define AreCoordsWithinMapGridBounds(x, y) (x >= 0 && x < VMap.Xsize && y >= 0 && y < VMap.Ysize)
 
@@ -103,8 +103,8 @@ void InitMapFromSavedGame(void)
 static void InitMapLayoutData(struct MapHeader * mapHeader)
 {
     const struct MapLayout * mapLayout = mapHeader->mapLayout;
-    CpuFastFill16(MAPGRID_UNDEFINED, gBackupMapData, sizeof(gBackupMapData));
-    VMap.map = gBackupMapData;
+    CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
+    VMap.map = sBackupMapData;
     VMap.Xsize = mapLayout->width + MAP_OFFSET_W;
     VMap.Ysize = mapLayout->height + MAP_OFFSET_H;
     AGB_ASSERT_EX(VMap.Xsize * VMap.Ysize <= VIRTUAL_MAP_SIZE, ABSPATH("fieldmap.c"), 158);
@@ -462,7 +462,7 @@ void SaveMapView(void)
     for (i = y; i < y + MAP_OFFSET_H; i++)
     {
         for (j = x; j < x + MAP_OFFSET_W; j++)
-            *mapView++ = gBackupMapData[width * i + j];
+            *mapView++ = sBackupMapData[width * i + j];
     }
 }
 
@@ -507,7 +507,7 @@ static void LoadSavedMapView(void)
         {
             for (j = x; j < x + MAP_OFFSET_W; j++)
             {
-                gBackupMapData[j + width * i] = *mapView;
+                sBackupMapData[j + width * i] = *mapView;
                 mapView++;
             }
         }
@@ -562,7 +562,7 @@ static void MoveMapViewToBackup(u8 direction)
             desti = width * (y + y0);
             srci = (y + r8) * MAP_OFFSET_W + r9;
             src = &mapView[srci + i];
-            dest = &gBackupMapData[x0 + desti + j];
+            dest = &sBackupMapData[x0 + desti + j];
             *dest = *src;
             i++;
             j++;
@@ -650,6 +650,9 @@ static void SetPositionFromConnection(const struct MapConnection *connection, in
         gSaveBlock1Ptr->pos.x -= connection->offset;
         gSaveBlock1Ptr->pos.y = mapHeader->mapLayout->height;
         break;
+    default:
+        DebugPrintfLevel(MGBA_LOG_WARN, "SetPositionFromConnection was passed an invalid direction (%d)!", direction);
+        break;
     }
 }
 
@@ -671,14 +674,21 @@ bool8 CameraMove(s32 x, s32 y)
         old_x = gSaveBlock1Ptr->pos.x;
         old_y = gSaveBlock1Ptr->pos.y;
         connection = GetIncomingConnection(direction, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
-        SetPositionFromConnection(connection, direction, x, y);
-        LoadMapFromCameraTransition(connection->mapGroup, connection->mapNum);
-        gCamera.active = TRUE;
-        gCamera.x = old_x - gSaveBlock1Ptr->pos.x;
-        gCamera.y = old_y - gSaveBlock1Ptr->pos.y;
-        gSaveBlock1Ptr->pos.x += x;
-        gSaveBlock1Ptr->pos.y += y;
-        MoveMapViewToBackup(direction);
+        if (connection)
+        {
+            SetPositionFromConnection(connection, direction, x, y);
+            LoadMapFromCameraTransition(connection->mapGroup, connection->mapNum);
+            gCamera.active = TRUE;
+            gCamera.x = old_x - gSaveBlock1Ptr->pos.x;
+            gCamera.y = old_y - gSaveBlock1Ptr->pos.y;
+            gSaveBlock1Ptr->pos.x += x;
+            gSaveBlock1Ptr->pos.y += y;
+            MoveMapViewToBackup(direction);
+        }
+        else
+        {
+            DebugPrintfLevel(MGBA_LOG_WARN, "GetIncomingConnection returned an invalid connection inside CameraMove!");
+        }
     }
     return gCamera.active;
 }
@@ -801,13 +811,6 @@ void GetCameraFocusCoords(u16 *x, u16 *y)
 {
     *x = gSaveBlock1Ptr->pos.x + MAP_OFFSET;
     *y = gSaveBlock1Ptr->pos.y + MAP_OFFSET;
-}
-
-// Unused
-static void SetCameraCoords(u16 x, u16 y)
-{
-    gSaveBlock1Ptr->pos.x = x;
-    gSaveBlock1Ptr->pos.y = y;
 }
 
 void GetCameraCoords(u16 *x, u16 *y)

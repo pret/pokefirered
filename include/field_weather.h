@@ -118,8 +118,8 @@ struct Weather
     s16 droughtLastBrightnessStage;
     s16 droughtTimer;
     s16 droughtState;
-    u8 filler_744[0xD-4];
-    s8 loadDroughtPalsIndex;
+    u8 filler_744[9];
+    u8 loadDroughtPalsIndex;
     u8 loadDroughtPalsOffset;
 };
 

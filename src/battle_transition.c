@@ -616,12 +616,6 @@ void BattleTransition_StartOnField(u8 transitionId)
     LaunchBattleTransitionTask(transitionId);
 }
 
-// Unused
-static void BattleTransition_Start(u8 transitionId)
-{
-    LaunchBattleTransitionTask(transitionId);
-}
-
 #define tTransitionId   data[1]
 #define tTransitionDone data[15]
 
@@ -780,7 +774,7 @@ static bool8 Swirl_Init(struct Task *task)
     InitTransitionData();
     ScanlineEffect_Clear();
     BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 16, RGB_BLACK);
-    SetSinWave(gScanlineEffectRegBuffers[1], sTransitionData->cameraX, 0, 2, 0, DISPLAY_HEIGHT);
+    SetSinWave((s16*)gScanlineEffectRegBuffers[1], sTransitionData->cameraX, 0, 2, 0, DISPLAY_HEIGHT);
     SetVBlankCallback(VBlankCB_Swirl);
     SetHBlankCallback(HBlankCB_Swirl);
     EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_HBLANK);
@@ -793,7 +787,7 @@ static bool8 Swirl_End(struct Task *task)
     sTransitionData->vblankDma = FALSE;
     task->tSinIndex += 4;
     task->tAmplitude += 8;
-    SetSinWave(gScanlineEffectRegBuffers[0], sTransitionData->cameraX, task->tSinIndex, 2, task->tAmplitude, 160);
+    SetSinWave((s16*)gScanlineEffectRegBuffers[0], sTransitionData->cameraX, task->tSinIndex, 2, task->tAmplitude, 160);
     if (!gPaletteFade.active)
         DestroyTask(FindTaskIdByFunc(Task_Swirl));
     sTransitionData->vblankDma++;
@@ -953,7 +947,7 @@ static bool8 BigPokeball_SetGfx(struct Task *task)
         for (j = 0; j < 30; j++, bigPokeballMap++)
             SET_TILE(tilemap, i, j, *bigPokeballMap);
 
-    SetSinWave(gScanlineEffectRegBuffers[0], 0, task->tSinIndex, 132, task->tAmplitude, DISPLAY_HEIGHT);
+    SetSinWave((s16*)gScanlineEffectRegBuffers[0], 0, task->tSinIndex, 132, task->tAmplitude, DISPLAY_HEIGHT);
     task->tState++;
     return TRUE;
 }
@@ -973,7 +967,7 @@ static bool8 PatternWeave_Blend1(struct Task *task)
     task->tSinIndex += 12;
     task->tAmplitude -= 384;
     // Assign a very high frequency value so that 2 adjacent values in gScanlineEffectRegBuffers[0] will have different sign. 
-    SetSinWave(gScanlineEffectRegBuffers[0], 0, task->tSinIndex, 132, task->tAmplitude >> 8, DISPLAY_HEIGHT);
+    SetSinWave((s16*)gScanlineEffectRegBuffers[0], 0, task->tSinIndex, 132, task->tAmplitude >> 8, DISPLAY_HEIGHT);
     sTransitionData->vblankDma++;
     return FALSE;
 }
@@ -998,7 +992,7 @@ static bool8 PatternWeave_Blend2(struct Task *task)
     {
         task->tAmplitude = 0;
     }
-    SetSinWave(gScanlineEffectRegBuffers[0], 0, task->tSinIndex, 132, task->tAmplitude >> 8, DISPLAY_HEIGHT);
+    SetSinWave((s16*)gScanlineEffectRegBuffers[0], 0, task->tSinIndex, 132, task->tAmplitude >> 8, DISPLAY_HEIGHT);
     sTransitionData->vblankDma++;
     return FALSE;
 }
@@ -1015,7 +1009,7 @@ static bool8 PatternWeave_FinishAppear(struct Task *task)
     {
         task->tAmplitude = 0;
     }
-    SetSinWave(gScanlineEffectRegBuffers[0], 0, task->tSinIndex, 132, task->tAmplitude >> 8, DISPLAY_HEIGHT);
+    SetSinWave((s16*)gScanlineEffectRegBuffers[0], 0, task->tSinIndex, 132, task->tAmplitude >> 8, DISPLAY_HEIGHT);
     if (task->tAmplitude <= 0)
     {
         task->tState++;
@@ -1039,7 +1033,7 @@ static bool8 PatternWeave_CircularMask(struct Task *task)
         if (task->tRadius < 0)
             task->tRadius = 0;
     }
-    SetCircularMask(gScanlineEffectRegBuffers[0], DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, task->tRadius);
+    SetCircularMask((s16*)gScanlineEffectRegBuffers[0], DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, task->tRadius);
     if (task->tRadius == 0)
     {
         DmaStop(0);
@@ -1230,7 +1224,11 @@ static bool8 ClockwiseWipe_Init(struct Task *task)
 static bool8 ClockwiseWipe_TopRight(struct Task *task)
 {
     sTransitionData->vblankDma = FALSE;
+#ifdef UBFIX
+    InitBlackWipe(sTransitionData->data, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, sTransitionData->tWipeEndX, 0, 1, 1);
+#else
     InitBlackWipe(sTransitionData->data, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, sTransitionData->tWipeEndX, -1, 1, 1);
+#endif
     do
     {
         gScanlineEffectRegBuffers[0][sTransitionData->tWipeCurrY] = WIN_RANGE(DISPLAY_WIDTH / 2, sTransitionData->tWipeCurrX + 1);
@@ -2153,7 +2151,7 @@ static void Mugshots_CreateTrainerPics(struct Task *task)
                                                   sMugshotsOpponentCoords[mugshotId][0] - 32,
                                                   sMugshotsOpponentCoords[mugshotId][1] + 42,
                                                   0, gDecompressionBuffer);
-    task->tPlayerSpriteId = CreateTrainerSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender, TRUE),
+    task->tPlayerSpriteId = CreateTrainerSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender),
                                                 DISPLAY_WIDTH + 32,
                                                 106,
                                                 0, gDecompressionBuffer);

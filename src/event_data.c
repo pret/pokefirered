@@ -35,6 +35,9 @@ EWRAM_DATA u16 gSpecialVar_PrevTextColor = 0;
 EWRAM_DATA u16 gSpecialVar_0x8014 = 0;
 EWRAM_DATA u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {};
 
+#define NUM_DAILY_FLAGS   (DAILY_FLAGS_END - DAILY_FLAGS_START + 1)
+#define DAILY_FLAGS_SIZE    (NUM_DAILY_FLAGS / 8)
+
 u16 gLastQuestLogStoredFlagOrVarIdx;
 
 extern u16 *const gSpecialVars[];
@@ -57,13 +60,10 @@ void ClearTempFieldEventData(void)
     FlagClear(FLAG_SYS_INFORMED_OF_LOCAL_WIRELESS_PLAYER);
 }
 
-// Unused
-static void DisableNationalPokedex_RSE(void)
+
+void ClearDailyFlags(void)
 {
-    u16 *ptr = GetVarPointer(VAR_0x403C);
-    gSaveBlock2Ptr->pokedex.unused = 0;
-    *ptr = 0;
-    FlagClear(FLAG_0x838);
+    memset(gSaveBlock1Ptr->flags + (DAILY_FLAGS_START / 8), 0, DAILY_FLAGS_SIZE);
 }
 
 // The magic numbers used here (0xDA and 0x0302) correspond to those
@@ -75,17 +75,6 @@ void EnableNationalPokedex_RSE(void)
     gSaveBlock2Ptr->pokedex.unused = 0xDA;
     *ptr = 0x0302;
     FlagSet(FLAG_0x838);
-}
-
-// Unused
-static bool32 IsNationalPokedexEnabled_RSE(void)
-{
-    if (gSaveBlock2Ptr->pokedex.unused == 0xDA
-            && VarGet(VAR_0x403C) == 0x0302
-            && FlagGet(FLAG_0x838))
-        return TRUE;
-
-    return FALSE;
 }
 
 void DisableNationalPokedex(void)
@@ -176,11 +165,12 @@ void EnableResetRTC(void)
 
 bool32 CanResetRTC(void)
 {
-    if (!FlagGet(FLAG_SYS_RESET_RTC_ENABLE))
-        return FALSE;
-    if (VarGet(VAR_RESET_RTC_ENABLE) != 0x0920)
-        return FALSE;
     return TRUE;
+    // if (!FlagGet(FLAG_SYS_RESET_RTC_ENABLE))
+    //     return FALSE;
+    // if (VarGet(VAR_RESET_RTC_ENABLE) != 0x0920)
+    //     return FALSE;
+    // return TRUE;
 }
 
 u16 *GetVarPointer(u16 idx)
@@ -240,6 +230,14 @@ u16 VarGet(u16 idx)
     return *ptr;
 }
 
+u16 VarGetIfExist(u16 id)
+{
+    u16 *ptr = GetVarPointer(id);
+    if (!ptr)
+        return 65535;
+    return *ptr;
+}
+
 bool8 VarSet(u16 idx, u16 val)
 {
     u16 *ptr = GetVarPointer(idx);
@@ -289,6 +287,14 @@ bool8 FlagSet(u16 idx)
     u8 *ptr = GetFlagAddr(idx);
     if (ptr != NULL)
         *ptr |= 1 << (idx & 7);
+    return FALSE;
+}
+
+u8 FlagToggle(u16 id)
+{
+    u8 *ptr = GetFlagAddr(id);
+    if (ptr)
+        *ptr ^= 1 << (id & 7);
     return FALSE;
 }
 

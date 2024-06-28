@@ -79,7 +79,7 @@ static u32 GetMonSize(u16 species, u16 b)
     u32 height;
     u32 var;
 
-    height = GetPokedexHeightWeight(SpeciesToNationalPokedexNum(species), 0);
+    height = GetSpeciesHeight(species);
     var = TranslateBigMonSizeTableIndex(b);
     unk0 = sBigMonSizeTable[var].unk0;
     unk2 = sBigMonSizeTable[var].unk2;
@@ -90,11 +90,8 @@ static u32 GetMonSize(u16 species, u16 b)
 
 static void FormatMonSizeRecord(u8 *string, u32 size)
 {
-#ifdef UNITS_IMPERIAL
-    //Convert size from centimeters to inches
-    //In the Hoenn games, this conversion was performed using floating point values
-    size = size * 100 / 254;
-#endif
+    if (UNITS == UNITS_IMPERIAL)
+        size = size * 100 / 254;
 
     string = ConvertIntToDecimalStringN(string, size / 10, STR_CONV_MODE_LEFT_ALIGN, 8);
     string = StringAppend(string, gText_DecimalPoint);
@@ -149,7 +146,7 @@ static void GetMonSizeRecordInfo(u16 species, u16 *sizeRecord)
     u32 size = GetMonSize(species, *sizeRecord);
 
     FormatMonSizeRecord(gStringVar3, size);
-    StringCopy(gStringVar1, gSpeciesNames[species]);
+    StringCopy(gStringVar1, gSpeciesInfo[species].speciesName);
 }
 
 void InitHeracrossSizeRecord(void)

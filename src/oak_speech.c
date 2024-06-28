@@ -1121,19 +1121,34 @@ static void Task_OakSpeech_Init(u8 taskId)
     }
 }
 
-#define OakSpeechPrintMessage(str, speed) ({                                                                                                                 \
-    DrawDialogueFrame(WIN_INTRO_TEXTBOX, FALSE);                                                                                                             \
-    if (str != gStringVar4)                                                                                                                                  \
-    {                                                                                                                                                        \
-        StringExpandPlaceholders(gStringVar4, str);                                                                                                          \
-        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
-    }                                                                                                                                                        \
-    else                                                                                                                                                     \
-    {                                                                                                                                                        \
-        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);         \
-    }                                                                                                                                                        \
-    CopyWindowToVram(WIN_INTRO_TEXTBOX, COPYWIN_FULL);                                                                                                       \
-})
+static inline void OakSpeechPrintMessage(const u8 *str, u8 speed, bool32 isStringVar4)
+{
+    DrawDialogueFrame(WIN_INTRO_TEXTBOX, FALSE);
+    if (!isStringVar4)
+    {
+        StringExpandPlaceholders(gStringVar4, str);
+        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    }
+    else
+    {
+        AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    }
+    CopyWindowToVram(WIN_INTRO_TEXTBOX, COPYWIN_FULL);
+}
+
+// #define OakSpeechPrintMessage(str, speed) ({                                                                                                                 \
+//     DrawDialogueFrame(WIN_INTRO_TEXTBOX, FALSE);                                                                                                             \
+//     if (str != gStringVar4)                                                                                                                                  \
+//     {                                                                                                                                                        \
+//         StringExpandPlaceholders(gStringVar4, str);                                                                                                          \
+//         AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, gStringVar4, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY); \
+//     }                                                                                                                                                        \
+//     else                                                                                                                                                     \
+//     {                                                                                                                                                        \
+//         AddTextPrinterParameterized2(WIN_INTRO_TEXTBOX, FONT_MALE, str, speed, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);         \
+//     }                                                                                                                                                        \
+//     CopyWindowToVram(WIN_INTRO_TEXTBOX, COPYWIN_FULL);                                                                                                       \
+// })
 
 static void Task_OakSpeech_WelcomeToTheWorld(u8 taskId)
 {
@@ -1146,7 +1161,7 @@ static void Task_OakSpeech_WelcomeToTheWorld(u8 taskId)
         }
         else
         {
-            OakSpeechPrintMessage(gOakSpeech_Text_WelcomeToTheWorld, sOakSpeechResources->textSpeed);
+            OakSpeechPrintMessage(gOakSpeech_Text_WelcomeToTheWorld, sOakSpeechResources->textSpeed, FALSE);
             gTasks[taskId].func = Task_OakSpeech_ThisWorld;
         }
     }
@@ -1156,7 +1171,7 @@ static void Task_OakSpeech_ThisWorld(u8 taskId)
 {
     if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
-        OakSpeechPrintMessage(gOakSpeech_Text_ThisWorld, sOakSpeechResources->textSpeed);
+        OakSpeechPrintMessage(gOakSpeech_Text_ThisWorld, sOakSpeechResources->textSpeed, FALSE);
         gTasks[taskId].tTimer = 30;
         gTasks[taskId].func = Task_OakSpeech_ReleaseNidoranFFromPokeBall;
     }
@@ -1192,7 +1207,7 @@ static void Task_OakSpeech_IsInhabitedFarAndWide(u8 taskId)
         gTasks[taskId].tTimer++;
         if (gTasks[taskId].tTimer == 32)
         {
-            OakSpeechPrintMessage(gOakSpeech_Text_IsInhabitedFarAndWide, sOakSpeechResources->textSpeed);
+            OakSpeechPrintMessage(gOakSpeech_Text_IsInhabitedFarAndWide, sOakSpeechResources->textSpeed, FALSE);
             PlayCry_Normal(INTRO_SPECIES, 0);
         }
     }
@@ -1202,7 +1217,7 @@ static void Task_OakSpeech_IStudyPokemon(u8 taskId)
 {
     if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
-        OakSpeechPrintMessage(gOakSpeech_Text_IStudyPokemon, sOakSpeechResources->textSpeed);
+        OakSpeechPrintMessage(gOakSpeech_Text_IStudyPokemon, sOakSpeechResources->textSpeed, FALSE);
         gTasks[taskId].func = Task_OakSpeech_ReturnNidoranFToPokeBall;
     }
 }
@@ -1245,7 +1260,7 @@ static void Task_OakSpeech_TellMeALittleAboutYourself(u8 taskId)
         }
         else
         {
-            OakSpeechPrintMessage(gOakSpeech_Text_TellMeALittleAboutYourself, sOakSpeechResources->textSpeed);
+            OakSpeechPrintMessage(gOakSpeech_Text_TellMeALittleAboutYourself, sOakSpeechResources->textSpeed, FALSE);
             gTasks[taskId].func = Task_OakSpeech_FadeOutOak;
         }
     }
@@ -1278,7 +1293,7 @@ static void Task_OakSpeech_AskPlayerGender(u8 taskId)
         {
             tTrainerPicPosX = -60;
             ClearTrainerPic();
-            OakSpeechPrintMessage(gOakSpeech_Text_AskPlayerGender, sOakSpeechResources->textSpeed);
+            OakSpeechPrintMessage(gOakSpeech_Text_AskPlayerGender, sOakSpeechResources->textSpeed, FALSE);
             gTasks[taskId].func = Task_OakSpeech_ShowGenderOptions;
         }
     }
@@ -1361,7 +1376,7 @@ static void Task_OakSpeech_YourNameWhatIsIt(u8 taskId)
         else
         {
             tTrainerPicPosX = 0;
-            OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, sOakSpeechResources->textSpeed);
+            OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, sOakSpeechResources->textSpeed, FALSE);
             gTasks[taskId].func = Task_OakSpeech_FadeOutForPlayerNamingScreen;
         }
     }
@@ -1402,9 +1417,9 @@ static void Task_OakSpeech_RepeatNameQuestion(u8 taskId)
 {
     PrintNameChoiceOptions(taskId, sOakSpeechResources->hasPlayerBeenNamed);
     if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
-        OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, 0);
+        OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, 0, FALSE);
     else
-        OakSpeechPrintMessage(gOakSpeech_Text_YourRivalsNameWhatWasIt, 0);
+        OakSpeechPrintMessage(gOakSpeech_Text_YourRivalsNameWhatWasIt, 0, FALSE);
     gTasks[taskId].func = Task_OakSpeech_HandleRivalNameInput;
 }
 
@@ -1468,7 +1483,7 @@ static void Task_OakSpeech_ConfirmName(u8 taskId)
                 StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_SoYourNameIsPlayer);
             else
                 StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_ConfirmRivalName);
-            OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
+            OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed, TRUE);
             tNameNotConfirmed = FALSE;
             tTimer = 25;
         }
@@ -1504,7 +1519,7 @@ static void Task_OakSpeech_HandleConfirmNameInput(u8 taskId)
         else
         {
             StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_RememberRivalsName);
-            OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
+            OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed, TRUE);
             gTasks[taskId].func = Task_OakSpeech_FadeOutRivalPic;
         }
         break;
@@ -1559,7 +1574,7 @@ static void Task_OakSpeech_AskRivalsName(u8 taskId)
 
     if (tTrainerPicFadeState != 0)
     {
-        OakSpeechPrintMessage(gOakSpeech_Text_WhatWasHisName, sOakSpeechResources->textSpeed);
+        OakSpeechPrintMessage(gOakSpeech_Text_WhatWasHisName, sOakSpeechResources->textSpeed, FALSE);
         sOakSpeechResources->hasPlayerBeenNamed = TRUE;
         gTasks[taskId].func = Task_OakSpeech_MoveRivalDisplayNameOptions;
     }
@@ -1596,7 +1611,7 @@ static void Task_OakSpeech_LetsGo(u8 taskId)
     if (gTasks[taskId].tTrainerPicFadeState != 0)
     {
         StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_LetsGo);
-        OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
+        OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed, TRUE);
         gTasks[taskId].tTimer = 30;
         gTasks[taskId].func = Task_OakSpeech_FadeOutBGM;
     }
@@ -1884,8 +1899,8 @@ static void CreateNidoranFSprite(u8 taskId)
 {
     u8 spriteId;
 
-    DecompressPicFromTable(&gMonFrontPicTable[INTRO_SPECIES], MonSpritesGfxManager_GetSpritePtr(0), INTRO_SPECIES);
-    LoadCompressedSpritePaletteUsingHeap(&gMonPaletteTable[INTRO_SPECIES]);
+    LoadSpecialPokePic(MonSpritesGfxManager_GetSpritePtr(0), INTRO_SPECIES, 0, TRUE);
+    LoadCompressedSpritePaletteUsingHeapWithTag(GetMonSpritePalFromSpeciesAndPersonality(INTRO_SPECIES, 0, 0), INTRO_SPECIES);
     SetMultiuseSpriteTemplateToPokemon(INTRO_SPECIES, 0);
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 96, 96, 1);
     gSprites[spriteId].callback = SpriteCallbackDummy;

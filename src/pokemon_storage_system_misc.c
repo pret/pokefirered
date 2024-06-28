@@ -405,7 +405,7 @@ static void MultiMove_SetIconToBg(u8 x, u8 y)
 
     if (species != SPECIES_NONE)
     {
-        const u8 *iconGfx = GetMonIconPtr(species, personality, 1);
+        const u8 *iconGfx = GetMonIconPtr(species, personality);
         u8 palNum = GetValidMonIconPalIndex(species) + 8;
         BlitBitmapRectToWindow4BitTo8Bit(gStorage->multiMoveWindowId, iconGfx, 0, 0, 32, 32, 24 * x, 24 * y, 32, 32, palNum);
     }
@@ -592,8 +592,6 @@ static void LoadItemIconGfx(u8 id, const u32 * tiles, const u32 * pal);
 static void SetItemIconAffineAnim(u8 id, u8 affineAnimNo);
 static void SetItemIconCallback(u8 id, u8 command, u8 cursorArea, u8 cursorPos);
 static void SetItemIconActive(u8 id, bool8 show);
-static const u32 *GetItemIconPic(u16 itemId);
-static const u32 *GetItemIconPalette(u16 itemId);
 static void DrawItemInfoWindow(u32 x);
 static void SpriteCB_ItemIcon_WaitAnim(struct Sprite *sprite);
 static void SpriteCB_ItemIcon_ToHand(struct Sprite *sprite);
@@ -1126,16 +1124,6 @@ static void SetItemIconActive(u8 id, bool8 show)
     gStorage->itemIcons[id].sprite->invisible = (show == FALSE);
 }
 
-static const u32 *GetItemIconPic(u16 itemId)
-{
-    return GetItemIconGfxPtr(itemId, ITEMICON_TILES);
-}
-
-static const u32 *GetItemIconPalette(u16 itemId)
-{
-    return GetItemIconGfxPtr(itemId, ITEMICON_PAL);
-}
-
 void PrintItemDescription(void)
 {
     const u8 *description;
@@ -1345,9 +1333,6 @@ static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite)
 
 static EWRAM_DATA struct UnkUtil *sUnkUtil = NULL;
 
-static void UnkUtil_CpuRun(struct UnkUtilData *unkStruct);
-static void UnkUtil_DmaRun(struct UnkUtilData *unkStruct);
-
 void UnkUtil_Init(struct UnkUtil *util, struct UnkUtilData *data, u32 max)
 {
     sUnkUtil = util;
@@ -1367,64 +1352,5 @@ void UnkUtil_Run(void)
             data->func(data);
         }
         sUnkUtil->numActive = 0;
-    }
-}
-
-// Unused
-static bool8 UnkUtil_CpuAdd(u8 *dest, u16 dLeft, u16 dTop, const u8 *src, u16 sLeft, u16 sTop, u16 width, u16 height, u16 unkArg)
-{
-    struct UnkUtilData *data;
-
-    if (sUnkUtil->numActive >= sUnkUtil->max)
-        return FALSE;
-
-    data = &sUnkUtil->data[sUnkUtil->numActive++];
-    data->size = width * 2;
-    data->dest = dest + 2 * (dTop * 32 + dLeft);
-    data->src = src + 2 * (sTop * unkArg + sLeft);
-    data->height = height;
-    data->unk = unkArg;
-    data->func = UnkUtil_CpuRun;
-    return TRUE;
-}
-
-// Functionally unused
-static void UnkUtil_CpuRun(struct UnkUtilData *data)
-{
-    u16 i;
-
-    for (i = 0; i < data->height; i++)
-    {
-        CpuCopy16(data->src, data->dest, data->size);
-        data->dest += 64;
-        data->src += (data->unk * 2);
-    }
-}
-
-// Unused
-static bool8 UnkUtil_DmaAdd(void *dest, u16 dLeft, u16 dTop, u16 width, u16 height)
-{
-    struct UnkUtilData *data;
-
-    if (sUnkUtil->numActive >= sUnkUtil->max)
-        return FALSE;
-
-    data = &sUnkUtil->data[sUnkUtil->numActive++];
-    data->size = width * 2;
-    data->dest = dest + ((dTop * 32) + dLeft) * 2;
-    data->height = height;
-    data->func = UnkUtil_DmaRun;
-    return TRUE;
-}
-
-// Functionally unused
-static void UnkUtil_DmaRun(struct UnkUtilData *data)
-{
-    u16 i;
-
-    for (i = 0; i < data->height; i++)
-    {
-        Dma3FillLarge_(0, data->dest, data->size, 16);
-        data->dest += 64;
     }
 }

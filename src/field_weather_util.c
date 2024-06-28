@@ -31,12 +31,6 @@ void SetWeather(u32 weather)
     SetNextWeather(GetSav1Weather());
 }
 
-void SetWeather_Unused(u32 weather)
-{
-    SetSavedWeather(weather);
-    SetCurrentAndNextWeather(GetSav1Weather());
-}
-
 void DoCurrentWeather(void)
 {
     u8 weather = GetSav1Weather();

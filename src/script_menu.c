@@ -706,20 +706,21 @@ bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 mcId, u8 ignoreBpres
 
 static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos)
 {
+    DrawVerticalMultichoiceMenuInternal(left, top, mcId, ignoreBpress, initPos, sMultichoiceLists[mcId].list, sMultichoiceLists[mcId].count);
+}
+
+ void DrawVerticalMultichoiceMenuInternal(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos, const struct MenuAction *list, u8 count)
+{
     s32 i;
     s32 strWidth;
     s32 tmp;
     u8 width;
     u8 height;
-    u8 count;
     u8 windowId;
-    const struct MenuAction * list;
 
     if ((ignoreBpress & 2) || QL_AvoidDisplay(QL_DestroyAbortedDisplay) != TRUE)
     {
         ignoreBpress &= 1;
-        count = sMultichoiceLists[mcId].count;
-        list = sMultichoiceLists[mcId].list;
         strWidth = 0;
         for (i = 0; i < count; i++)
         {
@@ -869,15 +870,6 @@ bool8 ScriptMenu_YesNo(u8 unused, u8 stuff)
     return TRUE;
 }
 
-// Unused
-static bool8 IsScriptActive(void)
-{
-    if (gSpecialVar_Result == SCR_MENU_UNSET)
-        return FALSE;
-    else
-        return TRUE;
-}
-
 static void Task_YesNoMenu_HandleInput(u8 taskId)
 {
     s8 input;
@@ -980,7 +972,7 @@ bool8 CreatePCMenu(void)
 static void CreatePCMenuWindow(void)
 {
     u8 cursorWidth = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
-    u8 height = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT);
+    u8 UNUSED height = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT);
     u8 windowWidth;
     u8 numItems;
     u8 windowId;
@@ -1233,7 +1225,7 @@ void DrawSeagallopDestinationMenu(void)
     u8 top;
     u8 numItems;
     u8 cursorWidth;
-    u8 fontHeight;
+    u8 UNUSED fontHeight;
     u8 windowId;
     u8 i;
     gSpecialVar_Result = SCR_MENU_UNSET;

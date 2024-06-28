@@ -7,13 +7,9 @@
 
 static void AnimBonemerangProjectile(struct Sprite *sprite);
 static void AnimBoneHitProjectile(struct Sprite *sprite);
-static void AnimDirtScatter(struct Sprite *sprite);
-static void AnimMudSportDirt(struct Sprite *sprite);
-static void AnimDirtPlumeParticle(struct Sprite *sprite);
 static void AnimDigDirtMound(struct Sprite *sprite);
 static void AnimBonemerangProjectile_Step(struct Sprite *sprite);
 static void AnimBonemerangProjectile_End(struct Sprite *sprite);
-static void AnimMudSportDirtRising(struct Sprite *sprite);
 static void AnimMudSportDirtFalling(struct Sprite *sprite);
 static void AnimTask_DigBounceMovement(u8 taskId);
 static void AnimTask_DigDisappear(u8 taskId);
@@ -43,7 +39,7 @@ static const union AffineAnimCmd *const sAffineAnims_Bonemerang[] =
     sAffineAnim_Bonemerang,
 };
 
-static const union AffineAnimCmd *const sAffineAnims_SpinningBone[] =
+const union AffineAnimCmd *const gAffineAnims_SpinningBone[] =
 {
     sAffineAnim_SpinningBone,
 };
@@ -66,7 +62,7 @@ const struct SpriteTemplate gSpinningBoneSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjNormal_32x32,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
-    .affineAnims = sAffineAnims_SpinningBone,
+    .affineAnims = gAffineAnims_SpinningBone,
     .callback = AnimBoneHitProjectile,
 };
 
@@ -136,6 +132,28 @@ const struct SpriteTemplate gDirtMoundSpriteTemplate =
     .callback = AnimDigDirtMound,
 };
 
+const struct SpriteTemplate gMudBombSplash =
+{
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSludgeBombHitParticle,
+};
+
+const struct SpriteTemplate gMudBombToss =
+{
+    .tileTag = ANIM_TAG_MUD_SAND,
+    .paletteTag = ANIM_TAG_MUD_SAND,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = sAnims_MudSlapMud,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimThrowProjectile,
+};
+
 // Moves a bone projectile towards the target mon, which moves like
 // a boomerang. After hitting the target mon, it comes back to the user.
 static void AnimBonemerangProjectile(struct Sprite *sprite)
@@ -198,7 +216,7 @@ static void AnimBoneHitProjectile(struct Sprite *sprite)
 // arg 2: duration
 // arg 3: target x pixel offset
 // arg 4: target y pixel offset
-static void AnimDirtScatter(struct Sprite *sprite)
+void AnimDirtScatter(struct Sprite *sprite)
 {
     u8 targetXPos, targetYPos;
     s16 xOffset, yOffset;
@@ -224,7 +242,7 @@ static void AnimDirtScatter(struct Sprite *sprite)
 // arg 0: 0 = dirt is rising into the air, 1 = dirt is falling down
 // arg 1: initial x pixel offset
 // arg 2: initial y pixel offset
-static void AnimMudSportDirt(struct Sprite *sprite)
+void AnimMudSportDirt(struct Sprite *sprite)
 {
     ++sprite->oam.tileNum;
     if (gBattleAnimArgs[0] == 0)
@@ -243,7 +261,7 @@ static void AnimMudSportDirt(struct Sprite *sprite)
     }
 }
 
-static void AnimMudSportDirtRising(struct Sprite *sprite)
+void AnimMudSportDirtRising(struct Sprite *sprite)
 {
     if (++sprite->data[1] > 1)
     {
@@ -485,7 +503,7 @@ static void SetDigScanlineEffect(u8 useBG1, s16 y, s16 endY)
 // arg 3: target y offset
 // arg 4: wave amplitude
 // arg 5: duration
-static void AnimDirtPlumeParticle(struct Sprite *sprite)
+void AnimDirtPlumeParticle(struct Sprite *sprite)
 {
     s8 battler;
     s16 xOffset;
@@ -712,7 +730,7 @@ static void SetBattlersXOffsetForShake(struct Task *task)
 
 void AnimTask_IsPowerOver99(u8 taskId)
 {
-    gBattleAnimArgs[15] = gAnimMovePower > 99;
+    gBattleAnimArgs[ARG_RET_ID] = gAnimMovePower > 99;
     DestroyAnimVisualTask(taskId);
 }
 

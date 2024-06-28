@@ -1,13 +1,15 @@
 	.include "main.o"
-	.include "bg.o"
+  	.include "rtc.o"
+	.include "gflib/bg.o"
 	.include "text_printer.o"
 	.align 4
-	.include "window.o"
-	.include "text.o"
-	.include "sprite.o"
+	.include "gflib/window.o"
+	.include "gflib/text.o"
+    @ ../gflib/sprite.o
 	.include "link.o"
 	.align 4
 	.include "battle_main.o"
+	.include "battle_controllers.o"
 	.include "random.o"
 	.include "load_save.o"
 	.include "overworld.o"

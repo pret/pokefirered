@@ -18,9 +18,9 @@
                               || itemId == ITEM_FAB_MAIL            \
                               || itemId == ITEM_RETRO_MAIL))
 
-#define FIRST_MAIL_IDX ITEM_ORANGE_MAIL
+// #define FIRST_MAIL_IDX ITEM_ORANGE_MAIL
 
-#define ITEM_TO_MAIL(itemId) (itemId - FIRST_MAIL_IDX)
+// #define ITEM_TO_MAIL(itemId) (itemId - FIRST_MAIL_IDX)
 
 void ReadMail(struct Mail * mail, void (*savedCallback)(void), bool8 messageExists);
 

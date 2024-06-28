@@ -133,9 +133,6 @@ static void TogglePlaybackStateForOverworldLock(u8);
 static void ResetActions(u8, struct QuestLogAction *, u16);
 static bool8 RecordHeadAtEndOfEntryOrScriptContext2Enabled(void);
 static bool8 RecordHeadAtEndOfEntry(void);
-static bool8 InQuestLogDisabledLocation(void);
-static bool8 TrySetLinkQuestLogEvent(u16, const u16 *);
-static bool8 TrySetTrainerBattleQuestLogEvent(u16, const u16 *);
 
 static const struct WindowTemplate sWindowTemplates[WIN_COUNT] = {
     [WIN_TOP_BAR] = {
@@ -1742,26 +1739,4 @@ void QuestLogSetFlagOrVar(bool8 isFlag, u16 idx, u16 value)
     sFlagOrVarRecords[sFlagOrVarPlayhead].isFlag = isFlag;
     sFlagOrVarRecords[sFlagOrVarPlayhead].value = value;
     sFlagOrVarPlayhead++;
-}
-
-// Unused
-static void QuestLogResetFlagsOrVars(u8 state, struct FlagOrVarRecord * records, u16 size)
-{
-    s32 i;
-
-    if (state == 0 || state > QL_STATE_PLAYBACK)
-    {
-        gQuestLogPlaybackState = QL_PLAYBACK_STATE_STOPPED;
-    }
-    else
-    {
-        sFlagOrVarRecords = records;
-        sNumFlagsOrVars = size / 4;
-        sFlagOrVarPlayhead = 0;
-        if (state == QL_STATE_PLAYBACK)
-        {
-            for (i = 0; i < sMaxActionsInScene; i++)
-                sFlagOrVarRecords[i] = sDummyFlagOrVarRecord;
-        }
-    }
 }

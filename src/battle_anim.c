@@ -22,6 +22,11 @@
 
 #define ANIM_SPRITE_INDEX_COUNT 8
 
+extern const u16 gMovesWithQuietBGM[];
+extern const u8 *const gBattleAnims_General[];
+extern const u8 *const gBattleAnims_Special[];
+extern const u8 *const gBattleAnims_StatusConditions[];
+
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
 EWRAM_DATA static const u8 *sBattleAnimScriptRetAddr = NULL;
 EWRAM_DATA void (*gAnimScriptCallback)(void) = NULL;

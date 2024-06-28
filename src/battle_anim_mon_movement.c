@@ -28,6 +28,9 @@ static void AnimTask_SwayMon_Step(u8 taskId);
 static void AnimTask_ScaleMonAndRestore_Step(u8 taskId);
 static void AnimTask_RotateMonSpriteToSide_Step(u8 taskId);
 static void AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step(u8 taskId);
+static void AnimTask_RotateVerticallyStep(u8 taskId);
+static void AnimTask_DuckDownHop_Step1(u8 taskId);
+static void AnimTask_DuckDownHop_Step2(u8 taskId);
 
 const struct SpriteTemplate gHorizontalLungeSpriteTemplate =
 {
@@ -622,6 +625,70 @@ static void AnimTask_WindUpLunge_Step2(u8 taskId)
     }
 }
 
+// Task to facilitate a two-part translation animation, in which the sprite
+// is first translated linearly down.  Then, it hops in an arc.
+// Used for POUNCE.
+// arg 0: anim bank
+// arg 1: horizontal speed (subpixel)
+// arg 2: wave amplitude
+// arg 3: hop duration
+// arg 4: delay before starting hop
+// arg 5: target y offset for ducking
+// arg 6: ducking duration
+
+void AnimTask_DuckDownHop(u8 taskId)
+{
+    s16 wavePeriod = 0x8000 / gBattleAnimArgs[3];
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+    {
+        gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+    }
+    gTasks[taskId].data[0] = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+    gTasks[taskId].data[1] = (gBattleAnimArgs[1] << 8) / gBattleAnimArgs[3];
+    gTasks[taskId].data[2] = gBattleAnimArgs[2];
+    gTasks[taskId].data[3] = gBattleAnimArgs[3];
+    gTasks[taskId].data[4] = gBattleAnimArgs[4];
+    gTasks[taskId].data[5] = (gBattleAnimArgs[5] << 8) / gBattleAnimArgs[6];
+    gTasks[taskId].data[6] = gBattleAnimArgs[6];
+    gTasks[taskId].data[7] = wavePeriod;
+    gTasks[taskId].func = AnimTask_DuckDownHop_Step1;
+}
+
+static void AnimTask_DuckDownHop_Step1(u8 taskId)
+{
+    u8 spriteId;
+
+	spriteId = gTasks[taskId].data[0];
+	gTasks[taskId].data[12] += gTasks[taskId].data[5];
+	gSprites[spriteId].y2 = (gTasks[taskId].data[12] >> 8);
+	if (--gTasks[taskId].data[6] == 0)
+	{
+        gTasks[taskId].func = AnimTask_DuckDownHop_Step2;
+	}
+}
+
+static void AnimTask_DuckDownHop_Step2(u8 taskId)
+{
+    u8 spriteId;
+    if (gTasks[taskId].data[4] > 0)
+    {
+        gTasks[taskId].data[4]--;
+    }
+    else
+    {
+		spriteId = gTasks[taskId].data[0];
+		gTasks[taskId].data[11] += gTasks[taskId].data[1];
+		gSprites[spriteId].x2 = gTasks[taskId].data[11] >> 8;
+		gSprites[spriteId].y2 = Sin((u8)(gTasks[taskId].data[10] >> 8), gTasks[taskId].data[2]) + (gTasks[taskId].data[12] >> 8);
+		gTasks[taskId].data[10] += gTasks[taskId].data[7];
+        if (--gTasks[taskId].data[3] == 0)
+        {
+            DestroyAnimVisualTask(taskId);
+            return;
+        }
+    }
+}
+
 // To move a mon off-screen when pushed out by Roar/Whirlwind
 void AnimTask_SlideOffScreen(u8 taskId)
 {
@@ -869,35 +936,54 @@ static void AnimTask_RotateMonSpriteToSide_Step(u8 taskId)
     }
 }
 
-void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
+void SetupShakeBattlerBasedOnMovePowerOrDmg(u8 taskId, u8 animBattlerId)
 {
-    if (gBattleAnimArgs[0] == 0)
+    if (!gBattleAnimArgs[0])
     {
         gTasks[taskId].data[15] = gAnimMovePower / 12;
         if (gTasks[taskId].data[15] < 1)
+        {
             gTasks[taskId].data[15] = 1;
+        }
         if (gTasks[taskId].data[15] > 16)
+        {
             gTasks[taskId].data[15] = 16;
+        }
     }
     else
     {
         gTasks[taskId].data[15] = gAnimMoveDmg / 12;
         if (gTasks[taskId].data[15] < 1)
+        {
             gTasks[taskId].data[15] = 1;
+        }
         if (gTasks[taskId].data[15] > 16)
+        {
             gTasks[taskId].data[15] = 16;
+        }
     }
     gTasks[taskId].data[14] = gTasks[taskId].data[15] / 2;
     gTasks[taskId].data[13] = gTasks[taskId].data[14] + (gTasks[taskId].data[15] & 1);
     gTasks[taskId].data[12] = 0;
     gTasks[taskId].data[10] = gBattleAnimArgs[3];
     gTasks[taskId].data[11] = gBattleAnimArgs[4];
-    gTasks[taskId].data[7] = GetAnimBattlerSpriteId(ANIM_TARGET);
+    gTasks[taskId].data[7] = GetAnimBattlerSpriteId(animBattlerId);
     gTasks[taskId].data[8] = gSprites[gTasks[taskId].data[7]].x2;
     gTasks[taskId].data[9] = gSprites[gTasks[taskId].data[7]].y2;
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = gBattleAnimArgs[1];
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
+}
+
+void AnimTask_ShakeTargetPartnerBasedOnMovePowerOrDmg(u8 taskId)
+{
+    SetupShakeBattlerBasedOnMovePowerOrDmg(taskId, ANIM_DEF_PARTNER);
+    gTasks[taskId].func = AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step;
+}
+
+void AnimTask_ShakeTargetBasedOnMovePowerOrDmg(u8 taskId)
+{
+    SetupShakeBattlerBasedOnMovePowerOrDmg(taskId, ANIM_TARGET);
     gTasks[taskId].func = AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step;
 }
 
@@ -939,3 +1025,68 @@ static void AnimTask_ShakeTargetBasedOnMovePowerOrDmg_Step(u8 taskId)
         }
     }
 }
+
+#define tSpriteId   data[0]
+#define tRotSpeed   data[1]
+#define tRotCurr    data[2]
+#define tPhase      data[3]
+#define tFrames     data[4]
+#define tPlayerSide data[5]
+#define tRotMax     data[6] // Can't fully flip back sprites
+
+void AnimTask_RotateVertically(u8 taskId)
+{
+    u8 spriteId = GetAnimBattlerSpriteId(gBattleAnimArgs[0]);
+
+    PrepareBattlerSpriteForRotScale(spriteId, ST_OAM_OBJ_NORMAL);
+    gTasks[taskId].tSpriteId = spriteId;
+    gTasks[taskId].tRotCurr = 0;
+    gTasks[taskId].tPlayerSide = ((GetBattlerSide(GetAnimBattlerId(gBattleAnimArgs[0]))) == B_SIDE_PLAYER);
+    gTasks[taskId].tRotMax = gTasks[taskId].tPlayerSide ? 0x1FFF : 0x7FFE;
+    gTasks[taskId].tRotSpeed = gBattleAnimArgs[1];
+    gTasks[taskId].func = AnimTask_RotateVerticallyStep;
+}
+
+static void AnimTask_RotateVerticallyStep(u8 taskId)
+{
+    switch (gTasks[taskId].tPhase)
+    {
+    case 0: // flip upside-down
+        gTasks[taskId].tRotCurr = min(abs(gTasks[taskId].tRotCurr + gTasks[taskId].tRotSpeed), gTasks[taskId].tRotMax);
+        SetSpriteRotScale(gTasks[taskId].tSpriteId, 0x100, 0x100, gTasks[taskId].tRotCurr);
+        if (gTasks[taskId].tPlayerSide)
+            SetBattlerSpriteYOffsetFromRotation(gTasks[taskId].tSpriteId);
+
+        if (gTasks[taskId].tRotCurr == gTasks[taskId].tRotMax)
+            gTasks[taskId].tPhase++;
+        break;
+    case 1: // Wait a bit
+        if (++gTasks[taskId].tFrames >= 75)
+            gTasks[taskId].tPhase++;
+        break;
+    case 2: // rotate back
+        if (gTasks[taskId].tRotCurr < gTasks[taskId].tRotSpeed)
+            gTasks[taskId].tRotCurr = 0;
+        else
+            gTasks[taskId].tRotCurr = gTasks[taskId].tRotCurr - gTasks[taskId].tRotSpeed;
+        SetSpriteRotScale(gTasks[taskId].tSpriteId, 0x100, 0x100, gTasks[taskId].tRotCurr);
+        if (gTasks[taskId].tPlayerSide)
+            SetBattlerSpriteYOffsetFromRotation(gTasks[taskId].tSpriteId);
+
+        if (gTasks[taskId].tRotCurr == 0)
+            gTasks[taskId].tPhase++;
+        break;
+    case 3: // end
+        ResetSpriteRotScale(gTasks[taskId].tSpriteId);
+        DestroyAnimVisualTask(taskId);
+        break;
+    }
+}
+
+#undef tSpriteId
+#undef tRotSpeed
+#undef tRotCurr
+#undef tPhase
+#undef tFrames
+#undef tPlayerSide
+#undef tRotMax

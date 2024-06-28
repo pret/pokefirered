@@ -844,6 +844,12 @@ void AnimTask_GetBattleTerrain(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
+void AnimTask_GetFieldTerrain(u8 taskId)
+{
+    gBattleAnimArgs[0] = gFieldStatuses & STATUS_FIELD_TERRAIN_ANY;
+    DestroyAnimVisualTask(taskId);
+}
+
 void AnimTask_AllocBackupPalBuffer(u8 taskId)
 {
     gMonSpritesGfxPtr->multiUseBuffer = AllocZeroed(0x2000);
@@ -972,11 +978,29 @@ static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
     }
 }
 
+void AnimTask_IsDoubleBattle(u8 taskId)
+{
+    gBattleAnimArgs[7] = (IsDoubleBattle() && !IsContest());
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_CanBattlerSwitch(u8 taskId)
+{
+    gBattleAnimArgs[ARG_RET_ID] = CanBattlerSwitch(GetAnimBattlerId(gBattleAnimArgs[0]));
+    DestroyAnimVisualTask(taskId);
+}
+
 void AnimTask_SetInvisible(u8 taskId)
 {
     u32 battlerId = GetAnimBattlerId(gBattleAnimArgs[0]);
     u32 spriteId = gBattlerSpriteIds[battlerId];
 
     gSprites[spriteId].invisible = gBattleSpritesDataPtr->battlerData[battlerId].invisible = gBattleAnimArgs[1];
+    DestroyAnimVisualTask(taskId);
+}
+
+void AnimTask_SetAnimTargetToAttackerOpposite(u8 taskId)
+{
+    gBattleAnimTarget = BATTLE_OPPOSITE(gBattleAnimAttacker);
     DestroyAnimVisualTask(taskId);
 }

@@ -8,13 +8,9 @@ static void AnimLightning(struct Sprite *sprite);
 static void AnimUnusedSpinningFist(struct Sprite *sprite);
 static void AnimUnusedCirclingShock(struct Sprite *sprite);
 static void AnimThunderboltOrb(struct Sprite *sprite);
-static void AnimElectricity(struct Sprite *sprite);
 static void AnimElectricBoltSegment(struct Sprite *sprite);
-static void AnimThunderWave(struct Sprite *sprite);
-static void AnimElectricPuff(struct Sprite *sprite);
 static void AnimVoltTackleOrbSlide(struct Sprite *sprite);
 static void AnimVoltTackleBolt(struct Sprite *sprite);
-static void AnimGrowingShockWaveOrb(struct Sprite *sprite);
 static void AnimShockWaveProgressingBolt(struct Sprite *sprite);
 static void AnimLightning_Step(struct Sprite *sprite);
 static void AnimUnusedSpinningFist_Step(struct Sprite *sprite);
@@ -232,6 +228,17 @@ const struct SpriteTemplate gThunderWaveSpriteTemplate =
     .callback = AnimThunderWave,
 };
 
+const struct SpriteTemplate gAnchorShotChainTemplate =
+{
+    .tileTag = ANIM_TAG_CHAIN_LINK,
+    .paletteTag = ANIM_TAG_CHAIN_LINK,
+    .oam = &gOamData_AffineOff_ObjNormal_32x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimThunderWave
+};
+
 static const s8 sElectricChargingParticleCoordOffsets[][2] =
 {
     { 58, -60},
@@ -270,7 +277,7 @@ static const union AnimCmd sAnim_ElectricChargingParticles_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sAnims_ElectricChargingParticles[] =
+const union AnimCmd *const gAnims_ElectricChargingParticles[] =
 {
     sAnim_ElectricChargingParticles_0,
     sAnim_ElectricChargingParticles_1,
@@ -281,7 +288,7 @@ static const struct SpriteTemplate gElectricChargingParticlesSpriteTemplate =
     .tileTag = ANIM_TAG_ELECTRIC_ORBS,
     .paletteTag = ANIM_TAG_ELECTRIC_ORBS,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = sAnims_ElectricChargingParticles,
+    .anims = gAnims_ElectricChargingParticles,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
@@ -317,11 +324,29 @@ static const union AffineAnimCmd sAffineAnim_GrowingElectricOrb_2[] =
     AFFINEANIMCMD_END,
 };
 
+static const union AffineAnimCmd sAffineAnim_GrowingElectricOrb_4[] =
+{
+    AFFINEANIMCMD_FRAME(5, 5, 0, 0),
+    AFFINEANIMCMD_FRAME(0x2, 0x2, 0, 20),
+    AFFINEANIMCMD_FRAME(0x3, 0x3, 0, 15),
+    AFFINEANIMCMD_FRAME(0x1, 0x1, 0, 25),
+    AFFINEANIMCMD_FRAME(0xFFFC, 0xFFFC, 0, 5),
+    AFFINEANIMCMD_FRAME(0x3, 0x3, 0, 5),
+    AFFINEANIMCMD_FRAME(0xFFFB, 0xFFFB, 0, 5),
+    AFFINEANIMCMD_FRAME(0x4, 0x4, 0, 5),
+    AFFINEANIMCMD_END
+};
+
 const union AffineAnimCmd *const gAffineAnims_GrowingElectricOrb[] =
 {
     sAffineAnim_GrowingElectricOrb_0,
     sAffineAnim_GrowingElectricOrb_1,
     sAffineAnim_GrowingElectricOrb_2,
+};
+
+const union AffineAnimCmd *const gAffineAnims_GrowingElectricOrb2[] =
+{
+    sAffineAnim_GrowingElectricOrb_4,
 };
 
 const struct SpriteTemplate gGrowingChargeOrbSpriteTemplate =
@@ -335,6 +360,18 @@ const struct SpriteTemplate gGrowingChargeOrbSpriteTemplate =
     .callback = AnimGrowingChargeOrb,
 };
 
+// For Electro Ball - smaller orb.
+const struct SpriteTemplate gGrowingChargeOrb2SpriteTemplate =
+{
+    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_GrowingElectricOrb2,
+    .callback = AnimGrowingChargeOrb,
+};
+
 static const union AnimCmd sAnim_ElectricPuff[] =
 {
     ANIMCMD_FRAME(0, 3),
@@ -344,7 +381,7 @@ static const union AnimCmd sAnim_ElectricPuff[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sAnims_ElectricPuff[] =
+const union AnimCmd *const gAnims_ElectricPuff[] =
 {
     sAnim_ElectricPuff,
 };
@@ -354,7 +391,7 @@ const struct SpriteTemplate gElectricPuffSpriteTemplate =
     .tileTag = ANIM_TAG_ELECTRICITY,
     .paletteTag = ANIM_TAG_ELECTRICITY,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_ElectricPuff,
+    .anims = gAnims_ElectricPuff,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimElectricPuff,
@@ -436,7 +473,7 @@ const struct SpriteTemplate gGrowingShockWaveOrbSpriteTemplate =
     .callback = AnimGrowingShockWaveOrb,
 };
 
-static const struct SpriteTemplate sShockWaveProgressingBoltSpriteTemplate =
+const struct SpriteTemplate gShockWaveProgressingBoltSpriteTemplate =
 {
     .tileTag = ANIM_TAG_SPARK,
     .paletteTag = ANIM_TAG_SPARK,
@@ -445,6 +482,53 @@ static const struct SpriteTemplate sShockWaveProgressingBoltSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimShockWaveProgressingBolt,
+};
+
+const struct SpriteTemplate gFlashCannonGrayChargeTemplate =
+{
+    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_GrowingElectricOrb,
+    .callback = AnimGrowingChargeOrb
+};
+
+static const union AffineAnimCmd sSpriteAffineAnim_JudgmentBall[] =
+{
+	AFFINEANIMCMD_FRAME(16, 16, 0, 0),
+	AFFINEANIMCMD_FRAME(8, 8, 0, 15), //Half size
+	AFFINEANIMCMD_FRAME(0, 0, 0, 120), //Delay
+	AFFINEANIMCMD_FRAME(24, 24, 0, 5), //Normal size
+	AFFINEANIMCMD_FRAME(0, 0, 0, 10), //Delay
+	AFFINEANIMCMD_FRAME(-16, -16, 0, 15), //Revert to 1 px
+	AFFINEANIMCMD_END,
+};
+static const union AffineAnimCmd* const sSpriteAffineAnimTable_JudgmentBall[] =
+{
+	sSpriteAffineAnim_JudgmentBall,
+};
+const struct SpriteTemplate gJudgmentBlackChargeTemplate =
+{
+    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sSpriteAffineAnimTable_JudgmentBall,
+    .callback = AnimGrowingChargeOrb
+};
+
+const struct SpriteTemplate gSeedFlareGreenChargeTemplate =
+{
+    .tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+    .paletteTag = ANIM_TAG_LEAF,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gAffineAnims_GrowingElectricOrb,
+    .callback = AnimGrowingChargeOrb
 };
 
 static void AnimLightning(struct Sprite *sprite)
@@ -641,7 +725,7 @@ static void AnimSparkElectricityFlashing_Step(struct Sprite *sprite)
 }
 
 // Electricity arcs around the target. Used for Paralysis and various electric move hits
-static void AnimElectricity(struct Sprite *sprite)
+void AnimElectricity(struct Sprite *sprite)
 {
     InitSpritePosToAnimTarget(sprite, FALSE);
     sprite->oam.tileNum += gBattleAnimArgs[3] * 4;
@@ -746,7 +830,7 @@ static void AnimElectricBoltSegment(struct Sprite *sprite)
 }
 
 // The horizontal bands of electricity used in Thunder Wave
-static void AnimThunderWave(struct Sprite *sprite)
+void AnimThunderWave(struct Sprite *sprite)
 {
     u8 spriteId;
 
@@ -874,7 +958,7 @@ void AnimGrowingChargeOrb(struct Sprite *sprite)
 }
 
 // The quick electric burst at the end of Charge / during the Volt Tackle hit
-static void AnimElectricPuff(struct Sprite *sprite)
+void AnimElectricPuff(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[0] == ANIM_ATTACKER)
     {
@@ -1083,7 +1167,7 @@ static void AnimVoltTackleBolt(struct Sprite *sprite)
     }
 }
 
-static void AnimGrowingShockWaveOrb(struct Sprite *sprite)
+void AnimGrowingShockWaveOrb(struct Sprite *sprite)
 {
     switch (sprite->data[0])
     {
@@ -1177,7 +1261,7 @@ void AnimTask_ShockWaveProgressingBolt(u8 taskId)
 
 static bool8 CreateShockWaveBoltSprite(struct Task *task, u8 taskId)
 {
-    u8 spriteId = CreateSprite(&sShockWaveProgressingBoltSpriteTemplate, task->data[6], task->data[7], 35);
+    u8 spriteId = CreateSprite(&gShockWaveProgressingBoltSpriteTemplate, task->data[6], task->data[7], 35);
     if (spriteId != MAX_SPRITES)
     {
         gSprites[spriteId].oam.tileNum += task->data[4];

@@ -804,6 +804,17 @@ void InitBattleAnimBg(u32 bgId)
     CopyBgTilemapBufferToVram(bgId);
 }
 
+void ClearBattleAnimBg(u32 bgId)
+{
+    struct BattleAnimBgData bgAnimData;
+
+    GetBattleAnimBgData(&bgAnimData, bgId);
+    CpuFill32(0, bgAnimData.bgTiles, 0x2000);
+    LoadBgTiles(bgAnimData.bgId, bgAnimData.bgTiles, 0x2000, bgAnimData.tilesOffset);
+    FillBgTilemapBufferRect(bgAnimData.bgId, 0, 0, 0, 32, 64, 17);
+    CopyBgTilemapBufferToVram(bgAnimData.bgId);
+}
+
 void AnimLoadCompressedBgGfx(u32 bgId, const u32 *src, u32 tilesOffset)
 {
     CpuFill32(0, gBattleAnimBgTileBuffer, 0x2000);
@@ -821,6 +832,14 @@ void AnimLoadCompressedBgTilemap(u32 bgId, const u32 *src)
 {
     InitAnimBgTilemapBuffer(bgId, src);
     CopyBgTilemapBufferToVram(bgId);
+}
+
+void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *data, const void *src, bool32 largeScreen)
+{
+    InitAnimBgTilemapBuffer(data->bgId, src);
+    // if (IsContest() == TRUE)
+    //     RelocateBattleBgPal(data->paletteId, data->bgTilemap, 0, largeScreen);
+    CopyBgTilemapBufferToVram(data->bgId);
 }
 
 u8 GetBattleBgPaletteNum(void)

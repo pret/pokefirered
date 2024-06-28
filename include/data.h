@@ -113,9 +113,6 @@ extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 
-extern const u8 *const gBattleAnims_General[];
-extern const u8 *const gBattleAnims_Special[];
-
 extern const union AnimCmd *const gAnims_MonPic[];
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[];
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];

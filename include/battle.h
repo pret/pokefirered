@@ -15,6 +15,7 @@
 #include "battle_debug.h"
 #include "battle_dynamax.h"
 #include "battle_terastal.h"
+#include "battle_gimmick.h"
 #include "random.h" // for rng_value_t
 
 // Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
@@ -540,48 +541,30 @@ struct Illusion
 
 struct ZMoveData
 {
-    u8 viable:1;    // current move can become a z move
+    u8 viable:1;   // current move can become a z move
     u8 viewing:1;  // if player is viewing the z move name instead of regular moves
-    u8 active:1;   // is z move being used this turn
-    u8 zStatusActive:1;
-    u8 healReplacement:1;
-    u8 activeCategory:2;  // active z move category
-    u8 zUnused:1;
-    u8 triggerSpriteId;
+    u8 healReplacement:6;
     u8 possibleZMoves[MAX_BATTLERS_COUNT];
-    u16 chosenZMove;  // z move of move cursor is on
-    u8 effect;
-    u8 used[MAX_BATTLERS_COUNT];   //one per bank for multi-battles
-    u16 toBeUsed[MAX_BATTLERS_COUNT];  // z moves per battler to be used
     u16 baseMoves[MAX_BATTLERS_COUNT];
-    u8 categories[MAX_BATTLERS_COUNT];
 };
 
 struct DynamaxData
 {
-    bool8 playerSelect;
-    u8 triggerSpriteId;
-    u8 toDynamax; // flags using gBitTable
-    bool8 alreadyDynamaxed[NUM_BATTLE_SIDES];
-    bool8 dynamaxed[MAX_BATTLERS_COUNT];
     u8 dynamaxTurns[MAX_BATTLERS_COUNT];
-    u8 usingMaxMove[MAX_BATTLERS_COUNT];
-    u8 activeCategory;
-    u8 categories[MAX_BATTLERS_COUNT];
-    u16 baseMove[MAX_BATTLERS_COUNT]; // base move of Max Move
+    u16 baseMoves[MAX_BATTLERS_COUNT]; // base move of Max Move
     u16 lastUsedBaseMove;
     u16 levelUpHP;
 };
 
-struct TeraData
+struct BattleGimmickData
 {
-    bool8 toTera; // flags using gBitTable
-    bool8 isTerastallized[NUM_BATTLE_SIDES]; // stored as a bitfield for each side's party members
-    bool8 alreadyTerastallized[MAX_BATTLERS_COUNT];
-    bool8 playerSelect;
-    u32 stellarBoostFlags[NUM_BATTLE_SIDES]; // stored as a bitfield of flags for all types for each side
+    u8 usableGimmick[MAX_BATTLERS_COUNT];                // first usable gimmick that can be selected for each battler
+    bool8 playerSelect;                                  // used to toggle trigger and update battle UI
     u8 triggerSpriteId;
     u8 indicatorSpriteId[MAX_BATTLERS_COUNT];
+    u8 toActivate;                                       // stores whether a battler should transform at start of turn as bitfield
+    u8 activeGimmick[NUM_BATTLE_SIDES][PARTY_SIZE];      // stores the active gimmick for each party member
+    bool8 activated[MAX_BATTLERS_COUNT][GIMMICKS_COUNT]; // stores whether a trainer has used gimmick
 };
 
 struct LostItem
@@ -682,11 +665,9 @@ struct BattleStruct
     u8 activeAbilityPopUps; // as bits for each battler
     u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    // two per battler
     bool8 throwingPokeBall;
-    struct MegaEvolutionData mega;
-    struct UltraBurstData burst;
     struct ZMoveData zmove;
     struct DynamaxData dynamax;
-    struct TeraData tera;
+    struct BattleGimmickData gimmick;
     const u8 *trainerSlideMsg;
     bool8 trainerSlideLowHpMsgDone;
     u8 introState;
@@ -714,6 +695,9 @@ struct BattleStruct
     u8 blunderPolicy:1; // should blunder policy activate
     u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
     u8 bouncedMoveIsUsed:1;
+    u8 descriptionSubmenu:1; // For Move Description window in move selection screen
+    u8 ackBallUseBtn:1; // Used for the last used ball feature
+    u8 ballSwapped:1; // Used for the last used ball feature
     u8 ballSpriteIds[2];    // item gfx, window gfx
     u8 appearedInBattle; // Bitfield to track which Pokemon appeared in battle. Used for Burmy's form change
     u8 skyDropTargets[MAX_BATTLERS_COUNT]; // For Sky Drop, to account for if multiple Pokemon use Sky Drop in a double battle.
@@ -757,7 +741,10 @@ struct BattleStruct
     u8 quickDrawRandom[MAX_BATTLERS_COUNT];
     u8 shellSideArmCategory[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
     u8 boosterEnergyActivates;
-    u8 distortedTypeMatchups;    
+    u8 distortedTypeMatchups;
+    u8 categoryOverride; // for Z-Moves and Max Moves
+    u32 stellarBoostFlags[NUM_BATTLE_SIDES]; // stored as a bitfield of flags for all types for each side
+
     // pokefirered
     u8 field_DA; // battle tower related
     u8 lastAttackerToFaintOpponent;
@@ -1093,6 +1080,7 @@ extern u16 gBallToDisplay;
 extern struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT];
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern u8 gAbsentBattlerFlags;
+extern u8 gCategoryIconSpriteId;
 
 static inline u32 GetBattlerPosition(u32 battler)
 {

@@ -141,6 +141,16 @@ BattleScript_SilphScopeUnveiled::
 
 @ pokeemerald
 
+BattleScript_DamageToQuarterTargetHP::
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	typecalc
+	bichalfword gMoveResultFlags, MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE
+	damagetoquartertargethp
+	goto BattleScript_HitFromAtkAnimation
+
 BattleScript_Terastallization::
 	@ TODO: no string prints in S/V, but right now this helps with clarity
 	printstring STRINGID_PKMNSTORINGENERGY
@@ -6489,6 +6499,9 @@ BattleScript_PerishSongCountGoesDown::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
+BattleScript_AllStatsUpZMove::
+	printfromtable gZEffectStringIds
+	waitmessage B_WAIT_TIME_LONG
 BattleScript_AllStatsUp::
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_AllStatsUpAtk
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_AllStatsUpAtk

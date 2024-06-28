@@ -102,6 +102,7 @@ enum {
 
 // Special return values in gBattleResources->bufferB from Battle Controller functions.
 #define RET_VALUE_LEVELED_UP   11
+#define RET_GIMMICK        (1 << 7)
 #define RET_MEGA_EVOLUTION (1 << 7)
 #define RET_ULTRA_BURST    (1 << 6)
 #define RET_DYNAMAX        (1 << 5)

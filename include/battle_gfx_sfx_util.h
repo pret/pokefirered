@@ -32,6 +32,7 @@ void HandleLowHpMusicChange(struct Pokemon *mon, u8 battlerId);
 void BattleStopLowHpSound(void);
 void HandleBattleLowHpMusicChange(void);
 void SetBattlerSpriteAffineMode(u8 affineMode);
+void CreateEnemyShadowSprite(u32 battler);
 void LoadAndCreateEnemyShadowSprites(void);
 void SpriteCB_SetInvisible(struct Sprite *sprite);
 void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species);

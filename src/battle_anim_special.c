@@ -1464,7 +1464,7 @@ static void SpriteCB_ThrowBall_DoClick(struct Sprite *sprite)
     else if (sprite->data[4] == 95)
     {
         gDoingBattleAnim = FALSE;
-        UpdateOamPriorityInAllHealthboxes(1);
+        UpdateOamPriorityInAllHealthboxes(1, FALSE);
         m4aMPlayAllStop();
         PlaySE(MUS_CAUGHT_INTRO);
     }
@@ -1618,7 +1618,7 @@ static void SpriteCB_ThrowBall_RunBreakOut(struct Sprite *sprite)
         sprite->data[0] = 0;
         sprite->callback = BattleAnimObj_SignalEnd;
         gDoingBattleAnim = FALSE;
-        UpdateOamPriorityInAllHealthboxes(1);
+        UpdateOamPriorityInAllHealthboxes(1, FALSE);
     }
 }
 
@@ -1650,7 +1650,7 @@ static void TrainerBallBlock2(struct Sprite *sprite)
         sprite->data[0] = 0;
         sprite->callback = BattleAnimObj_SignalEnd;
         gDoingBattleAnim = FALSE;
-        UpdateOamPriorityInAllHealthboxes(1);
+        UpdateOamPriorityInAllHealthboxes(1, FALSE);
     }
 }
 
@@ -1681,7 +1681,7 @@ static void GhostBallDodge2(struct Sprite *sprite)
     sprite->data[0] = 0;
     sprite->callback = BattleAnimObj_SignalEnd;
     gDoingBattleAnim = FALSE;
-    UpdateOamPriorityInAllHealthboxes(1);
+    UpdateOamPriorityInAllHealthboxes(1, FALSE);
 }
 
 static void LoadBallParticleGfx(u8 ballId)

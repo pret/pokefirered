@@ -616,6 +616,7 @@ void SetHealthboxSpriteInvisible(u8 healthboxSpriteId)
     gSprites[healthboxSpriteId].invisible = TRUE;
     gSprites[gSprites[healthboxSpriteId].sHealthBarSpriteId].invisible = TRUE;
     gSprites[gSprites[healthboxSpriteId].sHealthboxOtherSpriteId].invisible = TRUE;
+    UpdateIndicatorVisibilityAndType(healthboxSpriteId, TRUE);
 }
 
 void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
@@ -623,6 +624,7 @@ void SetHealthboxSpriteVisible(u8 healthboxSpriteId)
     gSprites[healthboxSpriteId].invisible = FALSE;
     gSprites[gSprites[healthboxSpriteId].sHealthBarSpriteId].invisible = FALSE;
     gSprites[gSprites[healthboxSpriteId].sHealthboxOtherSpriteId].invisible = FALSE;
+    UpdateIndicatorVisibilityAndType(healthboxSpriteId, FALSE);
 }
 
 static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
@@ -642,7 +644,23 @@ void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBattlerO
 {
 }
 
-void UpdateOamPriorityInAllHealthboxes(u8 priority)
+static void TryToggleHealboxVisibility(u32 priority, u32 healthboxLeftSpriteId, u32 healthboxRightSpriteId, u32 healthbarSpriteId)
+{
+    bool32 invisible = FALSE;
+
+    if (priority == 0)  // start of anim -> make invisible
+        invisible = TRUE;
+    else if (priority == 1) // end of anim -> make visible
+        invisible = FALSE;
+
+    gSprites[healthboxLeftSpriteId].invisible = invisible;
+    gSprites[healthboxRightSpriteId].invisible = invisible;
+    gSprites[healthbarSpriteId].invisible = invisible;
+
+    UpdateIndicatorVisibilityAndType(healthboxLeftSpriteId, invisible);
+}
+
+void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes)
 {
     s32 i;
 
@@ -657,6 +675,9 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority)
         gSprites[healthbarSpriteId].oam.priority = priority;
 
         UpdateIndicatorOamPriority(healthbarSpriteId, priority);
+
+        if (B_HIDE_HEALTHBOX_IN_ANIMS == TRUE && hideHPBoxes && IsBattlerAlive(i))
+            TryToggleHealboxVisibility(priority, healthboxSpriteId, healthboxOtherSpriteId, healthbarSpriteId);
     }
 }
 
@@ -708,8 +729,6 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     u8 *objVram;
     u8 battler = gSprites[healthboxSpriteId].sBattlerId;
 
-
-    DebugPrintfLevel(MGBA_LOG_ERROR, "update: tile = %u", GetIndicatorTileTag(battler));
     // Don't print Lv char if mon has a gimmick with an indicator active.
     if (GetIndicatorTileTag(battler) != TAG_NONE)
     {
@@ -727,9 +746,6 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
         xPos = 5 * (3 - (objVram - (text + 2)));
         UpdateIndicatorVisibilityAndType(healthboxSpriteId, TRUE);
     }
-
-    objVram = ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
-    xPos = 5 * (3 - (objVram - (text + 2)));
 
     windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, xPos, 3, &windowId);
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;

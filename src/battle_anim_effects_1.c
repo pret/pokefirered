@@ -6578,39 +6578,6 @@ void PrepareDoubleTeamAnim(u32 taskId, u32 animBattler, bool32 forAllySwitch)
 void AnimTask_DoubleTeam(u8 taskId)
 {
     PrepareDoubleTeamAnim(taskId, ANIM_ATTACKER, FALSE);
-    // TODO: remove old if not needed anymore
-    // u16 i;
-    // int obj;
-    // u16 r3;
-    // u16 r4;
-    // struct Task* task = &gTasks[taskId];
-    
-    // task->data[0] = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-    // task->data[1] = AllocSpritePalette(ANIM_TAG_BENT_SPOON);
-    // r3 = OBJ_PLTT_ID(task->data[1]);
-    // r4 = OBJ_PLTT_ID2(gSprites[task->data[0]].oam.paletteNum);
-    // for (i = 1; i < 16; i++)
-    //     gPlttBufferUnfaded[r3 + i] = gPlttBufferUnfaded[r4 + i];
-
-    // BlendPalette(r3, 16, 11, RGB_BLACK);
-    // task->data[3] = 0;
-    // i = 0;
-    // while (i < 2 && (obj = CloneBattlerSpriteWithBlend(0)) >= 0)
-    // {
-    //     gSprites[obj].oam.paletteNum = task->data[1];
-    //     gSprites[obj].data[0] = 0;
-    //     gSprites[obj].data[1] = i << 7;
-    //     gSprites[obj].data[2] = taskId;
-    //     gSprites[obj].callback = AnimDoubleTeam;
-    //     task->data[3]++;
-    //     i++;
-    // }
-
-    // task->func = AnimTask_DoubleTeam_Step;
-    // if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
-    //     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
-    // else
-    //     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
 }
 
 static inline void SwapStructData(void *s1, void *s2, void *data, u32 size)
@@ -6622,12 +6589,21 @@ static inline void SwapStructData(void *s1, void *s2, void *data, u32 size)
 
 static void ReloadBattlerSprites(u32 battler, struct Pokemon *party)
 {
+    struct Pokemon *mon = &party[gBattlerPartyIndexes[battler]];
     BattleLoadMonSpriteGfx(&party[gBattlerPartyIndexes[battler]], battler);
     CreateBattlerSprite(battler);
     UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &party[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
-    // If battler is mega evolved / primal reversed, hide the sprite until the move animation finishes.
-    // TODO: mega indicator
-    // MegaIndicator_SetVisibilities(gHealthboxSpriteIds[battler], TRUE);
+    // If battler has an indicator for a gimmick, hide the sprite until the move animation finishes.
+    UpdateIndicatorVisibilityAndType(gHealthboxSpriteIds[battler], TRUE);
+    
+    // Try to recreate shadow sprite
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId < MAX_SPRITES)
+    {
+        DestroySprite(&gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId]);
+        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId = MAX_SPRITES;
+        CreateEnemyShadowSprite(battler);
+        SetBattlerShadowSpriteCallback(battler, GetMonData(mon, MON_DATA_SPECIES));
+    }
 }
 
 static void AnimTask_AllySwitchDataSwap(u8 taskId)

@@ -50,6 +50,7 @@ EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gAnimCustomPanning = 0;
+EWRAM_DATA static bool8 sAnimHideHpBoxes = FALSE;
 
 static void AddSpriteIndex(u16 index);
 static void ClearSpriteIndex(u16 index);
@@ -227,8 +228,36 @@ void LaunchBattleAnimation(u32 animType, u16 animId)
         }
     }
 
+    sAnimHideHpBoxes = !(animType == ANIM_TYPE_MOVE && animId == MOVE_TRANSFORM);
+    if (animType != ANIM_TYPE_MOVE)
+    {
+        switch (animId)
+        {
+        case B_ANIM_TURN_TRAP:
+        case B_ANIM_LEECH_SEED_DRAIN:
+        case B_ANIM_MON_HIT:
+        case B_ANIM_SNATCH_MOVE:
+        case B_ANIM_FUTURE_SIGHT_HIT:
+        case B_ANIM_DOOM_DESIRE_HIT:
+        case B_ANIM_WISH_HEAL:
+        case B_ANIM_MEGA_EVOLUTION:
+        case B_ANIM_PRIMAL_REVERSION:
+        case B_ANIM_ULTRA_BURST:
+        case B_ANIM_GULP_MISSILE:
+        case B_ANIM_RAINBOW:
+        case B_ANIM_SEA_OF_FIRE:
+        case B_ANIM_SWAMP:
+        case B_ANIM_TERA_CHARGE:
+            sAnimHideHpBoxes = TRUE;
+            break;
+        default:
+            sAnimHideHpBoxes = FALSE;
+            break;
+        }
+    }
+
     InitPrioritiesForVisibleBattlers();
-    UpdateOamPriorityInAllHealthboxes(0);
+    UpdateOamPriorityInAllHealthboxes(0, sAnimHideHpBoxes);
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         if (GetBattlerSide(i) != B_SIDE_PLAYER)
@@ -550,7 +579,8 @@ static void Cmd_end(void)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         InitPrioritiesForVisibleBattlers();
-        UpdateOamPriorityInAllHealthboxes(1);
+        UpdateOamPriorityInAllHealthboxes(1, sAnimHideHpBoxes);
+        sAnimHideHpBoxes = FALSE;
         gAnimScriptActive = FALSE;
     }
 }

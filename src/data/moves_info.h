@@ -18195,7 +18195,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Light That Burns The Sky"),
         .description = sNullDescription,
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_PHOTON_GEYSER,
         .power = 200,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,

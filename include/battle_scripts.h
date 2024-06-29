@@ -61,7 +61,6 @@ extern const u8 BattleScript_EncoredNoMore[];
 extern const u8 BattleScript_DestinyBondTakesLife[];
 extern const u8 BattleScript_SpikesOngBank1[];
 extern const u8 BattleScript_PerishSongTakesLife[];
-extern const u8 BattleScript_PerishSongCountGoesDown[];
 extern const u8 BattleScript_AllStatsUp[];
 extern const u8 BattleScript_RapidSpinAway[];
 extern const u8 BattleScript_WrapFree[];
@@ -541,6 +540,7 @@ extern const u8 BattleScript_DmgHazardsOnBattlerScripting[];
 extern const u8 BattleScript_DmgHazardsOnFaintedBattler[];
 extern const u8 BattleScript_PerishSongTakesLife[];
 extern const u8 BattleScript_PerishSongCountGoesDown[];
+extern const u8 BattleScript_AllStatsUpZMove[];
 extern const u8 BattleScript_AllStatsUp[];
 extern const u8 BattleScript_WrapFree[];
 extern const u8 BattleScript_LeechSeedFree[];
@@ -1270,6 +1270,7 @@ extern const u8 BattleScript_EffectShedTail[];
 extern const u8 BattleScript_EffectUpperHand[];
 extern const u8 BattleScript_EffectTidyUp[];
 extern const u8 BattleScript_EffectSpicyExtract[];
+extern const u8 BattleScript_DamageToQuarterTargetHP[];
 
 
 #endif // GUARD_BATTLE_SCRIPTS_H

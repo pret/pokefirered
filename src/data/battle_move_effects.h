@@ -1893,4 +1893,9 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
     },
+
+    [EFFECT_GUARDIAN_OF_ALOLA] =
+    {
+        .battleScript = BattleScript_DamageToQuarterTargetHP,
+    },
 };

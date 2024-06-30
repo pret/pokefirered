@@ -79,6 +79,7 @@ static void SetUpStartMenu_Link(void);
 static void SetUpStartMenu_UnionRoom(void);
 static void SetUpStartMenu_SafariZone(void);
 static void SetUpStartMenu_NormalField(void);
+static void SetUpStartMenu_Debug(void);
 static bool8 StartCB_HandleInput(void);
 static void StartMenu_FadeScreenIfLeavingOverworld(void);
 static bool8 StartMenuPokedexSanityCheck(void);
@@ -121,16 +122,16 @@ static void HideStartMenuDebug(void);
 static const u8 sText_MenuDebug[] = _("DEBUG");
 
 static const struct MenuAction sStartMenuActionTable[] = {
-    { gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback} },
-    { gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback} },
-    { gText_MenuBag, {.u8_void = StartMenuBagCallback} },
-    { gText_MenuPlayer, {.u8_void = StartMenuPlayerCallback} },
-    { gText_MenuSave, {.u8_void = StartMenuSaveCallback} },
-    { gText_MenuOption, {.u8_void = StartMenuOptionCallback} },
-    { gText_MenuExit, {.u8_void = StartMenuExitCallback} },
-    { gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback} },
-    { gText_MenuPlayer, {.u8_void = StartMenuLinkPlayerCallback} },
-    [STARTMENU_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
+    [STARTMENU_POKEDEX] = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
+    [STARTMENU_POKEMON] = {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
+    [STARTMENU_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBagCallback}},
+    [STARTMENU_PLAYER]  = {gText_MenuPlayer,  {.u8_void = StartMenuPlayerCallback}},
+    [STARTMENU_SAVE]    = {gText_MenuSave,    {.u8_void = StartMenuSaveCallback}},
+    [STARTMENU_OPTION]  = {gText_MenuOption,  {.u8_void = StartMenuOptionCallback}},
+    [STARTMENU_EXIT]    = {gText_MenuExit,    {.u8_void = StartMenuExitCallback}},
+    [STARTMENU_RETIRE]  = {gText_MenuRetire,  {.u8_void = StartMenuSafariZoneRetireCallback}},
+    [STARTMENU_PLAYER2] = {gText_MenuPlayer,  {.u8_void = StartMenuLinkPlayerCallback}},
+    [STARTMENU_DEBUG]   = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
 };
 
 static const struct WindowTemplate sTimeWindowTemplate = {
@@ -223,6 +224,8 @@ static void SetUpStartMenu(void)
         SetUpStartMenu_UnionRoom();
     else if (GetSafariZoneFlag() == TRUE)
         SetUpStartMenu_SafariZone();
+    else if (DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == TRUE)
+        SetUpStartMenu_Debug();
     else
         SetUpStartMenu_NormalField();
 }
@@ -232,11 +235,22 @@ static void AppendToStartMenuItems(u8 newEntry)
     AppendToList(sStartMenuOrder, &sNumStartMenuItems, newEntry);
 }
 
+static void SetUpStartMenu_Debug(void)
+{
+    AppendToStartMenuItems(STARTMENU_DEBUG);
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
+        AppendToStartMenuItems(STARTMENU_POKEDEX);
+    if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
+        AppendToStartMenuItems(STARTMENU_POKEMON);
+    AppendToStartMenuItems(STARTMENU_BAG);
+    AppendToStartMenuItems(STARTMENU_PLAYER);
+    AppendToStartMenuItems(STARTMENU_SAVE);
+    AppendToStartMenuItems(STARTMENU_OPTION);
+    AppendToStartMenuItems(STARTMENU_EXIT);
+}
+
 static void SetUpStartMenu_NormalField(void)
 {
-#if DEBUG_OVERWORLD_MENU == TRUE
-    AppendToStartMenuItems(STARTMENU_DEBUG);
-#endif
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AppendToStartMenuItems(STARTMENU_POKEDEX);
     if (FlagGet(FLAG_SYS_POKEMON_GET) == TRUE)
@@ -639,8 +653,7 @@ static bool8 StartMenuDebugCallback(void)
     FreezeObjectEvents();
     Debug_ShowMainMenu();
 #endif
-
-return TRUE;
+    return TRUE;
 }
 
 static bool8 StartMenuSafariZoneRetireCallback(void)

@@ -1179,7 +1179,7 @@ static void PrintPokedexOnCard(void)
 
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
-        ConvertIntToDecimalStringN(buffer, sTrainerCardDataPtr->trainerCard.rse.caughtMonsCount, 0, 3);
+        ConvertIntToDecimalStringN(buffer, sTrainerCardDataPtr->trainerCard.rse.caughtMonsCount, 0, 4);
         if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
         {
             x = -120 - 6 * StringLength(buffer);

@@ -4,7 +4,7 @@
 #include "config/battle.h"
 #include "config/debug.h"
 #include "config/item.h"
-// #include "config/level_caps.h"
+#include "config/level_caps.h"
 #include "config/pokemon.h"
 #include "config/overworld.h"
 
@@ -133,5 +133,10 @@
 #define CONNECTION_EAST     4
 #define CONNECTION_DIVE     5
 #define CONNECTION_EMERGE   6
+
+#if TESTING
+#include "config/test.h"
+#endif
+
 
 #endif //GUARD_CONSTANTS_GLOBAL_H

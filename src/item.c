@@ -187,36 +187,36 @@ bool8 HasAtLeastOneBerry(void)
 
 bool8 CheckBagHasSpace(u16 itemId, u16 count)
 {
-    u8 i;
-    u8 pocket;
-
-    if (ItemId_GetPocket(itemId) == 0)
+    if (ItemId_GetPocket(itemId) == POCKET_NONE)
         return FALSE;
 
-    pocket = ItemId_GetPocket(itemId) - 1;
-    // Check for item slots that contain the item
+    return GetFreeSpaceForItemInBag(itemId) >= count;
+}
+
+u32 GetFreeSpaceForItemInBag(u16 itemId)
+{
+    u8 i;
+    u8 pocket = ItemId_GetPocket(itemId) - 1;
+    u16 ownedCount;
+    u32 spaceForItem = 0;
+
+    if (ItemId_GetPocket(itemId) == POCKET_NONE)
+        return 0;
+
+    // Check space in any existing item slots that already contain this item
     for (i = 0; i < gBagPockets[pocket].capacity; i++)
     {
         if (gBagPockets[pocket].itemSlots[i].itemId == itemId)
         {
-            u16 quantity;
-            // Does this stack have room for more??
-            quantity = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
-            if (quantity + count <= 999)
-                return TRUE;
-            // RS and Emerald check whether there is enough of the
-            // item across all stacks.
-            // For whatever reason, FR/LG assume there's only one
-            // stack of the item.
-            else
-                return FALSE;
+            ownedCount = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
+            spaceForItem += max(0, MAX_BAG_ITEM_CAPACITY - ownedCount);
+        }
+        else if (gBagPockets[pocket].itemSlots[i].itemId == ITEM_NONE)
+        {
+            spaceForItem += MAX_BAG_ITEM_CAPACITY;
         }
     }
-
-    if (BagPocketGetFirstEmptySlot(pocket) != -1)
-        return TRUE;
-
-    return FALSE;
+    return spaceForItem;
 }
 
 bool8 AddBagItem(u16 itemId, u16 count)

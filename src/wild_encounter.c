@@ -51,9 +51,12 @@ static EWRAM_DATA struct WildEncounterData sWildEncounterData = {};
 static EWRAM_DATA bool8 sWildEncountersDisabled = FALSE;
 EWRAM_DATA bool8 gIsFishingEncounter = 0;
 EWRAM_DATA bool8 gIsSurfingEncounter = 0;
+EWRAM_DATA u8 gChainFishingDexNavStreak = 0;
+EWRAM_DATA static u16 sLastFishingSpecies = 0;
 
 static bool8 UnlockedTanobyOrAreNotInTanoby(void);
 static u32 GenerateUnownPersonalityByLetter(u8 letter);
+static void UpdateChainFishingSpeciesAndStreak(u32 species);
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *rate);
 static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, u16 species, u8 area);
@@ -444,13 +447,15 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo * wildMonInfo, u8 a
     return TRUE;
 }
 
-static u16 GenerateFishingEncounter(const struct WildPokemonInfo * info, u8 rod)
+static u16 GenerateFishingEncounter(const struct WildPokemonInfo * wildMonInfo, u8 rod)
 {
     u8 wildMonIndex = ChooseWildMonIndex_Fishing(rod);
-    u8 level = ChooseWildMonLevel(info->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
+    u16 wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
+    u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
-    CreateWildMon(info->wildPokemon[wildMonIndex].species, level, wildMonIndex);
-    return info->wildPokemon[wildMonIndex].species;
+    UpdateChainFishingSpeciesAndStreak(wildMonSpecies);
+    CreateWildMon(wildMonSpecies, level, wildMonIndex);
+    return wildMonSpecies;
 }
 
 static bool8 DoWildEncounterRateDiceRoll(u16 encounterRate)
@@ -715,6 +720,29 @@ bool8 DoesCurrentMapHaveFishingMons(void)
     if (gWildMonHeaders[headerIdx].fishingMonsInfo == NULL)
         return FALSE;
     return TRUE;
+}
+
+static void HandleChainFishingStreak(u32 species)
+{
+    if (species != sLastFishingSpecies)
+    {
+        gChainFishingDexNavStreak = 0;
+        return;
+    }
+
+    if (gChainFishingDexNavStreak >= FISHING_CHAIN_LENGTH_MAX)
+        return;
+
+    gChainFishingDexNavStreak++;
+}
+
+static void UpdateChainFishingSpeciesAndStreak(u32 species)
+{
+    if (!I_FISHING_CHAIN)
+        return;
+
+    HandleChainFishingStreak(species);
+    sLastFishingSpecies = species;
 }
 
 void FishingWildEncounter(u8 rod)

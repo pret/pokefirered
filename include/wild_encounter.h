@@ -10,6 +10,8 @@
 
 #define NUM_ALTERING_CAVE_TABLES 9
 
+#define FISHING_CHAIN_LENGTH_MAX 20
+
 struct WildPokemon
 {
     u8 minLevel;
@@ -36,6 +38,7 @@ struct WildPokemonHeader
 extern const struct WildPokemonHeader gWildMonHeaders[];
 extern bool8 gIsFishingEncounter;
 extern bool8 gIsSurfingEncounter;
+extern u8 gChainFishingDexNavStreak;
 
 void DisableWildEncounters(bool8 disabled);
 u8 PickWildMonNature(void);

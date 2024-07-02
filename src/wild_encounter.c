@@ -52,7 +52,7 @@ static EWRAM_DATA bool8 sWildEncountersDisabled = FALSE;
 EWRAM_DATA bool8 gIsFishingEncounter = 0;
 EWRAM_DATA bool8 gIsSurfingEncounter = 0;
 EWRAM_DATA u8 gChainFishingDexNavStreak = 0;
-EWRAM_DATA static u16 sLastFishingSpecies = 0;
+EWRAM_DATA static u16 sLastFishingSpecies = SPECIES_NONE;
 
 static bool8 UnlockedTanobyOrAreNotInTanoby(void);
 static u32 GenerateUnownPersonalityByLetter(u8 letter);

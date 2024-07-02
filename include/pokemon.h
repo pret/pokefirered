@@ -282,16 +282,29 @@ struct Pokemon
 
 struct MonSpritesGfxManager
 {
-    u8 numSprites:4;
-    u8 battlePosition:4;
-    u8 numFrames;
-    u8 active;
-    u8 mode;
+    u32 numSprites:4;
+    u32 numSprites2:4; // Never read
+    u32 battlePosition:4;
+    u32 numFrames:8;
+    u32 active:8;
+    u32 mode:4;
     u32 dataSize;
     u8 *spriteBuffer;
     u8 **spritePointers;
     struct SpriteTemplate *templates;
     struct SpriteFrameImage *frameImages;
+};
+
+enum {
+    MON_SPR_GFX_MODE_NORMAL,
+    MON_SPR_GFX_MODE_BATTLE,
+    MON_SPR_GFX_MODE_FULL_PARTY,
+};
+
+enum {
+    MON_SPR_GFX_MANAGER_A,
+    MON_SPR_GFX_MANAGER_B, // Nothing ever sets up this manager.
+    MON_SPR_GFX_MANAGERS_COUNT
 };
 
 struct BattleTowerPokemon
@@ -671,7 +684,7 @@ extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 // extern const u16 *const gLevelUpLearnsets[];
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
-extern const struct SpriteTemplate gSpriteTemplates_Battlers[];
+extern const struct SpriteTemplate gBattlerSpriteTemplates[];
 extern const u8 gPPUpGetMask[];
 extern const u32 sExpCandyExperienceTable[];
 extern const struct Ability gAbilitiesInfo[];
@@ -816,6 +829,9 @@ void SetMonPreventsSwitchingString(void);
 void SetWildMonHeldItem(void);
 bool8 IsMonShiny(struct Pokemon *mon);
 u8 *GetTrainerPartnerName(void);
+void BattleAnimateFrontSprite(struct Sprite *sprite, u16 species, bool8 noCry, u8 panMode);
+void DoMonFrontSpriteAnimation(struct Sprite *sprite, u16 species, bool8 noCry, u8 panModeAnimFlag);
+void BattleAnimateBackSprite(struct Sprite *sprite, u16 species);
 u8 GetPlayerPartyHighestLevel(void);
 u16 GetUnionRoomTrainerPic(void);
 u16 GetUnionRoomTrainerClass(void);
@@ -823,10 +839,11 @@ void CreateEnemyEventMon(void);
 u16 FacilityClassToPicIndex(u16 facilityClass);
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality);
+bool32 HasTwoFramesAnimation(u16 species);
 bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 bank);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mode);
-void DestroyMonSpritesGfxManager(void);
-u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId);
+void DestroyMonSpritesGfxManager(u8 managerId);
+u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
 u16 GetFormSpeciesId(u16 speciesId, u8 formId);
 u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId);
 u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);

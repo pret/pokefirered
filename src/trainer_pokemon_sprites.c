@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "decompress.h"
 #include "data.h"
+#include "trainer_pokemon_sprites.h"
 
 struct PicData
 {
@@ -21,6 +22,13 @@ static const struct PicData sDummyPicData = {};
 
 static const struct OamData sOamData_Normal =
 {
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64)
+};
+
+static const struct OamData sOamData_Affine =
+{
+    .affineMode = ST_OAM_AFFINE_NORMAL,
     .shape = SPRITE_SHAPE(64x64),
     .size = SPRITE_SIZE(64x64)
 };
@@ -145,6 +153,84 @@ u16 CreatePicSprite(u16 species, bool32 isShiny, u32 personality, bool8 isFrontP
     sCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
     sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
     LoadPicPaletteByTagOrSlot(species, isShiny, personality, paletteSlot, paletteTag, isTrainer);
+    spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
+    if (paletteTag == TAG_NONE)
+        gSprites[spriteId].oam.paletteNum = paletteSlot;
+    sSpritePics[i].frames = framePics;
+    sSpritePics[i].images = images;
+    sSpritePics[i].paletteTag = paletteTag;
+    sSpritePics[i].spriteId = spriteId;
+    sSpritePics[i].active = TRUE;
+    return spriteId;
+}
+
+u16 CreateMonPicSprite_Affine(u16 species, bool8 isShiny, u32 personality, u8 flags, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
+{
+    u8 *framePics;
+    struct SpriteFrameImage *images;
+    int j;
+    u8 i;
+    u8 spriteId;
+    u8 type;
+    species = SanitizeSpeciesId(species);
+
+    for (i = 0; i < PICS_COUNT; i++)
+    {
+        if (!sSpritePics[i].active)
+            break;
+    }
+    if (i == PICS_COUNT)
+        return 0xFFFF;
+
+    framePics = Alloc(MON_PIC_SIZE * MAX_MON_PIC_FRAMES);
+    if (!framePics)
+        return 0xFFFF;
+
+    if (flags & F_MON_PIC_NO_AFFINE)
+    {
+        flags &= ~F_MON_PIC_NO_AFFINE;
+        type = MON_PIC_AFFINE_NONE;
+    }
+    else
+    {
+        type = flags;
+    }
+    images = Alloc(sizeof(struct SpriteFrameImage) * MAX_MON_PIC_FRAMES);
+    if (!images)
+    {
+        Free(framePics);
+        return 0xFFFF;
+    }
+    if (DecompressPic(species, personality, flags, framePics, FALSE))
+    {
+        // debug trap?
+        return 0xFFFF;
+    }
+    for (j = 0; j < MAX_MON_PIC_FRAMES; j ++)
+    {
+        images[j].data = framePics + MON_PIC_SIZE * j;
+        images[j].size = MON_PIC_SIZE;
+    }
+    sCreatingSpriteTemplate.tileTag = TAG_NONE;
+    sCreatingSpriteTemplate.anims = gSpeciesInfo[species].frontAnimFrames;
+    sCreatingSpriteTemplate.images = images;
+    if (type == MON_PIC_AFFINE_FRONT)
+    {
+        sCreatingSpriteTemplate.affineAnims = gAffineAnims_BattleSpriteOpponentSide;
+        sCreatingSpriteTemplate.oam = &sOamData_Affine;
+    }
+    else if (type == MON_PIC_AFFINE_BACK)
+    {
+        sCreatingSpriteTemplate.affineAnims = gAffineAnims_BattleSpritePlayerSide;
+        sCreatingSpriteTemplate.oam = &sOamData_Affine;
+    }
+    else // MON_PIC_AFFINE_NONE
+    {
+        sCreatingSpriteTemplate.oam = &sOamData_Normal;
+        sCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    }
+    sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
+    LoadPicPaletteByTagOrSlot(species, isShiny, personality, paletteSlot, paletteTag, FALSE);
     spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
     if (paletteTag == TAG_NONE)
         gSprites[spriteId].oam.paletteNum = paletteSlot;

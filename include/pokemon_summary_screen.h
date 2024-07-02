@@ -10,6 +10,7 @@ void SummaryScreen_DestroyUnknownTask(void);
 u8 GetLastViewedMonIndex(void);
 void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, void (*callback)(void), u8 a4);
 void SetPokemonSummaryScreenMode(u8);
+void SummaryScreen_SetAnimDelayTaskId(u8 taskId);
 
 // The Pokemon Summary Screen can operate in different modes. Certain features,
 // such as move re-ordering, are available in the different modes.

@@ -22,6 +22,7 @@
 #include "pokemon_animation.h"
 #include "m4a.h"
 #include "pokedex.h"
+#include "pokemon_summary_screen.h"
 #include "strings.h"
 #include "overworld.h"
 #include "party_menu.h"
@@ -59,7 +60,7 @@ EWRAM_DATA u8 gEnemyPartyCount = 0;
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {};
 EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
-static EWRAM_DATA struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
+EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManagers[MON_SPR_GFX_MANAGERS_COUNT] = {NULL};
 
 static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
 static bool8 IsPokemonStorageFull(void);
@@ -890,7 +891,7 @@ static const u8 sHoldEffectToType[][2] =
     {HOLD_EFFECT_FAIRY_POWER, TYPE_FAIRY},
 };
 
-const struct SpriteTemplate gSpriteTemplates_Battlers[MAX_BATTLERS_COUNT] = 
+const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] = 
 {
     [B_POSITION_PLAYER_LEFT] = {
         .tileTag = TAG_NONE,
@@ -2027,31 +2028,28 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
 {
     if (gMonSpritesGfxPtr != NULL)
-    {
-        if (battlerPosition >= MAX_BATTLERS_COUNT)
-            battlerPosition = 0;
-
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
-    }
+    else if (sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_A])
+        gMultiuseSpriteTemplate = sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_A]->templates[battlerPosition];
+    else if (sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_B])
+        gMultiuseSpriteTemplate = sMonSpritesGfxManagers[MON_SPR_GFX_MANAGER_B]->templates[battlerPosition];
+    else
+        gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
+
+    gMultiuseSpriteTemplate.paletteTag = speciesTag;
+    if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
+        gMultiuseSpriteTemplate.anims = gAnims_MonPic;
     else
     {
-        if (sMonSpritesGfxManager)
-        {
-            if (battlerPosition >= (s8)sMonSpritesGfxManager->battlePosition) // why a cast?!? changing the unk0_2 type to s8 causes extra shifts, but a cast is the correct fix. why, compiler?
-                battlerPosition = 0;
+        if (speciesTag > SPECIES_SHINY_TAG)
+            speciesTag = speciesTag - SPECIES_SHINY_TAG;
 
-            gMultiuseSpriteTemplate = sMonSpritesGfxManager->templates[battlerPosition];
-        }
+        speciesTag = SanitizeSpeciesId(speciesTag);
+        if (gSpeciesInfo[speciesTag].frontAnimFrames != NULL)
+            gMultiuseSpriteTemplate.anims = gSpeciesInfo[speciesTag].frontAnimFrames;
         else
-        {
-            if (battlerPosition >= MAX_BATTLERS_COUNT)
-                battlerPosition = 0;
-
-            gMultiuseSpriteTemplate = gSpriteTemplates_Battlers[battlerPosition];
-        }
+            gMultiuseSpriteTemplate.anims = gSpeciesInfo[SPECIES_NONE].frontAnimFrames;
     }
-    gMultiuseSpriteTemplate.paletteTag = speciesTag;
-    gMultiuseSpriteTemplate.anims = gAnims_MonPic;
 }
 
 void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosition)
@@ -2067,7 +2065,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerSpriteId, u8 battlerPosit
         if (gMonSpritesGfxPtr != NULL)
             gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
         else
-            gMultiuseSpriteTemplate = gSpriteTemplates_Battlers[battlerPosition];
+            gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
         gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[trainerSpriteId];
     }
 }
@@ -2077,7 +2075,7 @@ void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPositio
     if (gMonSpritesGfxPtr != NULL)
         gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
     else
-        gMultiuseSpriteTemplate = gSpriteTemplates_Battlers[battlerPosition];
+        gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = trainerPicId;
     gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[trainerPicId];
@@ -5612,6 +5610,135 @@ u8 *GetTrainerPartnerName(void)
     return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
 }
 
+#define READ_PTR_FROM_TASK(taskId, dataId)                      \
+    (void *)(                                                   \
+    ((u16)(gTasks[taskId].data[dataId]) |                       \
+    ((u16)(gTasks[taskId].data[dataId + 1]) << 16)))
+
+#define STORE_PTR_IN_TASK(ptr, taskId, dataId)                 \
+{                                                              \
+    gTasks[taskId].data[dataId] = (u32)(ptr);                  \
+    gTasks[taskId].data[dataId + 1] = (u32)(ptr) >> 16;        \
+}
+
+#define sAnimId    data[2]
+#define sAnimDelay data[3]
+
+static void Task_AnimateAfterDelay(u8 taskId)
+{
+    if (--gTasks[taskId].sAnimDelay == 0)
+    {
+        LaunchAnimationTaskForFrontSprite(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].sAnimId);
+        DestroyTask(taskId);
+    }
+}
+
+// static void Task_PokemonSummaryAnimateAfterDelay(u8 taskId)
+// {
+//     if (--gTasks[taskId].sAnimDelay == 0)
+//     {
+//         StartMonSummaryAnimation(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].sAnimId);
+//         SummaryScreen_SetAnimDelayTaskId(TASK_NONE);
+//         DestroyTask(taskId);
+//     }
+// }
+
+void BattleAnimateFrontSprite(struct Sprite *sprite, u16 species, bool8 noCry, u8 panMode)
+{
+    if (gHitMarker & HITMARKER_NO_ANIMATIONS && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+        DoMonFrontSpriteAnimation(sprite, species, noCry, panMode | SKIP_FRONT_ANIM);
+    else
+        DoMonFrontSpriteAnimation(sprite, species, noCry, panMode);
+}
+
+void DoMonFrontSpriteAnimation(struct Sprite *sprite, u16 species, bool8 noCry, u8 panModeAnimFlag)
+{
+    s8 pan;
+    switch (panModeAnimFlag & (u8)~SKIP_FRONT_ANIM) // Exclude anim flag to get pan mode
+    {
+    case 0:
+        pan = -25;
+        break;
+    case 1:
+        pan = 25;
+        break;
+    default:
+        pan = 0;
+        break;
+    }
+    if (panModeAnimFlag & SKIP_FRONT_ANIM)
+    {
+        // No animation, only check if cry needs to be played
+        if (!noCry)
+            PlayCry_Normal(species, pan);
+        sprite->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        if (!noCry)
+        {
+            PlayCry_Normal(species, pan);
+            if (HasTwoFramesAnimation(species))
+                StartSpriteAnim(sprite, 1);
+        }
+        if (gSpeciesInfo[species].frontAnimDelay != 0)
+        {
+            // Animation has delay, start delay task
+            u8 taskId = CreateTask(Task_AnimateAfterDelay, 0);
+            STORE_PTR_IN_TASK(sprite, taskId, 0);
+            gTasks[taskId].sAnimId = gSpeciesInfo[species].frontAnimId;
+            gTasks[taskId].sAnimDelay = gSpeciesInfo[species].frontAnimDelay;
+        }
+        else
+        {
+            // No delay, start animation
+            LaunchAnimationTaskForFrontSprite(sprite, gSpeciesInfo[species].frontAnimId);
+        }
+        sprite->callback = SpriteCallbackDummy_2;
+    }
+}
+
+// void PokemonSummaryDoMonAnimation(struct Sprite *sprite, u16 species, bool8 oneFrame)
+// {
+//     if (!oneFrame && HasTwoFramesAnimation(species))
+//         StartSpriteAnim(sprite, 1);
+//     if (gSpeciesInfo[species].frontAnimDelay != 0)
+//     {
+//         // Animation has delay, start delay task
+//         u8 taskId = CreateTask(Task_PokemonSummaryAnimateAfterDelay, 0);
+//         STORE_PTR_IN_TASK(sprite, taskId, 0);
+//         gTasks[taskId].sAnimId = gSpeciesInfo[species].frontAnimId;
+//         gTasks[taskId].sAnimDelay = gSpeciesInfo[species].frontAnimDelay;
+//         SummaryScreen_SetAnimDelayTaskId(taskId);
+//         SetSpriteCB_MonAnimDummy(sprite);
+//     }
+//     else
+//     {
+//         // No delay, start animation
+//         StartMonSummaryAnimation(sprite, gSpeciesInfo[species].frontAnimId);
+//     }
+// }
+
+// void StopPokemonAnimationDelayTask(void)
+// {
+//     u8 delayTaskId = FindTaskIdByFunc(Task_PokemonSummaryAnimateAfterDelay);
+//     if (delayTaskId != TASK_NONE)
+//         DestroyTask(delayTaskId);
+// }
+
+void BattleAnimateBackSprite(struct Sprite *sprite, u16 species)
+{
+    if (gHitMarker & HITMARKER_NO_ANIMATIONS && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+    {
+        sprite->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        LaunchAnimationTaskForBackSprite(sprite, GetSpeciesBackAnimSet(species));
+        sprite->callback = SpriteCallbackDummy_2;
+    }
+}
+
 u8 GetPlayerPartyHighestLevel(void)
 {
     s32 slot;
@@ -5704,6 +5831,11 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
     }
 }
 
+bool32 HasTwoFramesAnimation(u16 species)
+{
+    return P_TWO_FRAME_FRONT_SPRITES && species != SPECIES_UNOWN;
+}
+
 bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 battlerId)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
@@ -5722,131 +5854,100 @@ bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 battlerId)
 #define ALLOC_FAIL_STRUCT (1 << 1)
 #define GFX_MANAGER_ACTIVE 0xA3 // Arbitrary value
 
-static void InitMonSpritesGfx_Mode1(struct MonSpritesGfxManager *structPtr, u8 battlePosition)
-{
-    u16 i = 0, j = 0;
-
-    if (battlePosition >= MAX_BATTLERS_COUNT)
-    {
-        for (i = 0; i < (s8)structPtr->numSprites; ++i)
-        {
-            structPtr->templates[i] = gSpriteTemplates_Battlers[i];
-            for (j = 0; j < structPtr->numFrames; ++j)
-                structPtr->frameImages[i * structPtr->numFrames + j].data = &structPtr->spritePointers[i][j * MON_PIC_SIZE];
-            structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->numFrames];
-        }
-    }
-    else
-    {
-        const struct SpriteTemplate *template = &gSpriteTemplates_Battlers[battlePosition];
-        
-        structPtr->templates[0] = *template;
-        for (j = 0; j < structPtr->numFrames; ++j)
-                structPtr->frameImages[j].data = &structPtr->spritePointers[0][j * MON_PIC_SIZE];
-        structPtr->templates[0].images = structPtr->frameImages;
-    }
-}
-
-// not used
-static void InitMonSpritesGfx_Mode0(struct MonSpritesGfxManager *structPtr)
+static void InitMonSpritesGfx_Battle(struct MonSpritesGfxManager* gfx)
 {
     u16 i, j;
-
-    for (i = 0; i < (s8)structPtr->numSprites; ++i)
+    for (i = 0; i < gfx->numSprites; i++)
     {
-        structPtr->templates[i] = sSpriteTemplate_64x64;
-        for (j = 0; j < structPtr->numFrames; ++j)
-            structPtr->frameImages[i * structPtr->numSprites + j].data = &structPtr->spritePointers[i][j * MON_PIC_SIZE];
-        structPtr->templates[i].images = &structPtr->frameImages[i * structPtr->numSprites]; // should be numFrames logically
-        structPtr->templates[i].anims = gAnims_MonPic;
-        structPtr->templates[i].paletteTag = i;
+        gfx->templates[i] = gBattlerSpriteTemplates[i];
+        for (j = 0; j < gfx->numFrames; j++)
+            gfx->frameImages[i * gfx->numFrames + j].data = &gfx->spritePointers[i][j * MON_PIC_SIZE];
+
+        gfx->templates[i].images = &gfx->frameImages[i * gfx->numFrames];
     }
 }
 
-struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mode)
+static void InitMonSpritesGfx_FullParty(struct MonSpritesGfxManager* gfx)
 {
-    s32 size;
-    u8 i, failureFlags = 0;
-
-    if (sMonSpritesGfxManager != NULL)
+    u16 i, j;
+    for (i = 0; i < gfx->numSprites; i++)
     {
-        if (sMonSpritesGfxManager->active == GFX_MANAGER_ACTIVE)
-            return NULL;
-        memset(sMonSpritesGfxManager, 0, sizeof(*sMonSpritesGfxManager));
-        sMonSpritesGfxManager = NULL;
+        gfx->templates[i] = sSpriteTemplate_64x64;
+        for (j = 0; j < gfx->numFrames; j++)
+            gfx->frameImages[i * gfx->numSprites + j].data = &gfx->spritePointers[i][j * MON_PIC_SIZE];
+
+        gfx->templates[i].images = &gfx->frameImages[i * gfx->numSprites];
+        gfx->templates[i].anims = gAnims_MonPic;
+        gfx->templates[i].paletteTag = i;
     }
-    sMonSpritesGfxManager = AllocZeroed(sizeof(*sMonSpritesGfxManager));
-    if (sMonSpritesGfxManager == NULL)
+}
+
+struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode)
+{
+    u8 i;
+    u8 failureFlags;
+    struct MonSpritesGfxManager *gfx;
+
+    failureFlags = 0;
+    managerId %= MON_SPR_GFX_MANAGERS_COUNT;
+    gfx = AllocZeroed(sizeof(*gfx));
+    if (gfx == NULL)
         return NULL;
 
     switch (mode)
     {
-    case 1:
-        if (battlePosition == MAX_BATTLERS_COUNT)
-        {
-            sMonSpritesGfxManager->numSprites = MAX_BATTLERS_COUNT;
-            sMonSpritesGfxManager->battlePosition = MAX_BATTLERS_COUNT;
-        }
-        else
-        {
-            if (battlePosition > MAX_BATTLERS_COUNT)
-                battlePosition = 0;
-            sMonSpritesGfxManager->numSprites = 1;
-            sMonSpritesGfxManager->battlePosition = 1;
-        }
-        sMonSpritesGfxManager->numFrames = MAX_MON_PIC_FRAMES;
-        sMonSpritesGfxManager->mode = 1;
+    case MON_SPR_GFX_MODE_FULL_PARTY:
+        gfx->numSprites = PARTY_SIZE + 1;
+        gfx->numSprites2 = PARTY_SIZE + 1;
+        gfx->numFrames = MAX_MON_PIC_FRAMES;
+        gfx->dataSize = 1;
+        gfx->mode = MON_SPR_GFX_MODE_FULL_PARTY;
         break;
-    case 0:
+ // case MON_SPR_GFX_MODE_BATTLE:
+    case MON_SPR_GFX_MODE_NORMAL:
     default:
-        if (!battlePosition)
-            battlePosition = 1;
-        if (battlePosition > 8)
-            battlePosition = 8;
-        sMonSpritesGfxManager->numSprites = (battlePosition << 16) >> 16;
-        sMonSpritesGfxManager->battlePosition = battlePosition;
-        sMonSpritesGfxManager->numFrames = 4;
-        sMonSpritesGfxManager->mode = 0;
+        gfx->numSprites = MAX_BATTLERS_COUNT;
+        gfx->numSprites2 = MAX_BATTLERS_COUNT;
+        gfx->numFrames = MAX_MON_PIC_FRAMES;
+        gfx->dataSize = 1;
+        gfx->mode = MON_SPR_GFX_MODE_NORMAL;
         break;
     }
 
     // Set up sprite / sprite pointer buffers
-    size = sMonSpritesGfxManager->numFrames * MON_PIC_SIZE;
-    sMonSpritesGfxManager->dataSize = size;
-    sMonSpritesGfxManager->spriteBuffer = AllocZeroed(sMonSpritesGfxManager->numSprites * size);
-    sMonSpritesGfxManager->spritePointers = AllocZeroed(sMonSpritesGfxManager->numSprites * 32); // ? Only * 4 is necessary, perhaps they were thinking bits.
-    if (sMonSpritesGfxManager->spriteBuffer == NULL ||  sMonSpritesGfxManager->spritePointers == NULL)
+    gfx->spriteBuffer = AllocZeroed(gfx->dataSize * MON_PIC_SIZE * MAX_MON_PIC_FRAMES * gfx->numSprites);
+    gfx->spritePointers = AllocZeroed(gfx->numSprites * 32); // ? Only * 4 is necessary, perhaps they were thinking bits.
+    if (gfx->spriteBuffer == NULL || gfx->spritePointers == NULL)
     {
         failureFlags |= ALLOC_FAIL_BUFFER;
     }
     else
     {
-        do
-        {
-            for (i = 0; i < (s8)sMonSpritesGfxManager->numSprites; ++i)
-                sMonSpritesGfxManager->spritePointers[i] = &sMonSpritesGfxManager->spriteBuffer[sMonSpritesGfxManager->dataSize * i];
-        } while (0);
+        for (i = 0; i < gfx->numSprites; i++)
+            gfx->spritePointers[i] = gfx->spriteBuffer + (gfx->dataSize * MON_PIC_SIZE * MAX_MON_PIC_FRAMES * i);
     }
 
     // Set up sprite structs
-    sMonSpritesGfxManager->templates = AllocZeroed(sizeof(struct SpriteTemplate) * sMonSpritesGfxManager->numSprites);
-    sMonSpritesGfxManager->frameImages = AllocZeroed(sMonSpritesGfxManager->numSprites * sizeof(struct SpriteFrameImage) * sMonSpritesGfxManager->numFrames);
-    if (sMonSpritesGfxManager->templates == NULL || sMonSpritesGfxManager->frameImages == NULL)
+    gfx->templates = AllocZeroed(sizeof(struct SpriteTemplate) * gfx->numSprites);
+    gfx->frameImages = AllocZeroed(sizeof(struct SpriteFrameImage) * gfx->numSprites * gfx->numFrames);
+    if (gfx->templates == NULL || gfx->frameImages == NULL)
     {
         failureFlags |= ALLOC_FAIL_STRUCT;
     }
     else
     {
-        for (i = 0; i < sMonSpritesGfxManager->numFrames * sMonSpritesGfxManager->numSprites; i++)
-                sMonSpritesGfxManager->frameImages[i].size = MON_PIC_SIZE;
-        switch (sMonSpritesGfxManager->mode)
+        for (i = 0; i < gfx->numFrames * gfx->numSprites; i++)
+            gfx->frameImages[i].size = MON_PIC_SIZE;
+
+        switch (gfx->mode)
         {
-        case 1:
-            InitMonSpritesGfx_Mode1(sMonSpritesGfxManager, battlePosition);
+        case MON_SPR_GFX_MODE_FULL_PARTY:
+            InitMonSpritesGfx_FullParty(gfx);
             break;
-        case 0:
+        case MON_SPR_GFX_MODE_NORMAL:
+        case MON_SPR_GFX_MODE_BATTLE:
         default:
-            InitMonSpritesGfx_Mode0(sMonSpritesGfxManager);
+            InitMonSpritesGfx_Battle(gfx);
             break;
         }
     }
@@ -5854,61 +5955,67 @@ struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mo
     // If either of the allocations failed free their respective members
     if (failureFlags & ALLOC_FAIL_STRUCT)
     {
-        TRY_FREE_AND_SET_NULL(sMonSpritesGfxManager->frameImages);
-        TRY_FREE_AND_SET_NULL(sMonSpritesGfxManager->templates);
+        TRY_FREE_AND_SET_NULL(gfx->frameImages);
+        TRY_FREE_AND_SET_NULL(gfx->templates);
     }
     if (failureFlags & ALLOC_FAIL_BUFFER)
     {
-        TRY_FREE_AND_SET_NULL(sMonSpritesGfxManager->spritePointers);
-        TRY_FREE_AND_SET_NULL(sMonSpritesGfxManager->spriteBuffer);
+        TRY_FREE_AND_SET_NULL(gfx->spritePointers);
+        TRY_FREE_AND_SET_NULL(gfx->spriteBuffer);
     }
 
     if (failureFlags)
     {
         // Clear, something failed to allocate
-        memset(sMonSpritesGfxManager, 0, sizeof(*sMonSpritesGfxManager));
-        FREE_AND_SET_NULL(sMonSpritesGfxManager);
+        memset(gfx, 0, sizeof(*gfx));
+        Free(gfx);
     }
     else
     {
-        sMonSpritesGfxManager->active = GFX_MANAGER_ACTIVE;
+        gfx->active = GFX_MANAGER_ACTIVE;
+        sMonSpritesGfxManagers[managerId] = gfx;
     }
-    return sMonSpritesGfxManager;
+
+    return sMonSpritesGfxManagers[managerId];
 }
 
-void DestroyMonSpritesGfxManager(void)
+void DestroyMonSpritesGfxManager(u8 managerId)
 {
-    if (sMonSpritesGfxManager != NULL)
+    struct MonSpritesGfxManager *gfx;
+
+    managerId %= MON_SPR_GFX_MANAGERS_COUNT;
+    gfx = sMonSpritesGfxManagers[managerId];
+    if (gfx == NULL)
+        return;
+
+    if (gfx->active != GFX_MANAGER_ACTIVE)
     {
-        if (sMonSpritesGfxManager->active != GFX_MANAGER_ACTIVE)
-        {
-            memset(sMonSpritesGfxManager, 0, sizeof(*sMonSpritesGfxManager));
-            sMonSpritesGfxManager = NULL;
-        }
-        else
-        {
-            TRY_FREE_AND_SET_NULL(sMonSpritesGfxManager->frameImages);
-            TRY_FREE_AND_SET_NULL(sMonSpritesGfxManager->templates);
-            TRY_FREE_AND_SET_NULL(sMonSpritesGfxManager->spritePointers);                    
-            TRY_FREE_AND_SET_NULL(sMonSpritesGfxManager->spriteBuffer);
-            memset(sMonSpritesGfxManager, 0, sizeof(*sMonSpritesGfxManager));
-            FREE_AND_SET_NULL(sMonSpritesGfxManager);
-        }
-
+        memset(gfx, 0, sizeof(*gfx));
+    }
+    else
+    {
+        TRY_FREE_AND_SET_NULL(gfx->frameImages);
+        TRY_FREE_AND_SET_NULL(gfx->templates);
+        TRY_FREE_AND_SET_NULL(gfx->spritePointers);
+        TRY_FREE_AND_SET_NULL(gfx->spriteBuffer);
+        memset(gfx, 0, sizeof(*gfx));
+        Free(gfx);
     }
 }
 
-u8 *MonSpritesGfxManager_GetSpritePtr(u8 spriteNum)
+u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum)
 {
-    if (sMonSpritesGfxManager->active != GFX_MANAGER_ACTIVE)
+    struct MonSpritesGfxManager *gfx = sMonSpritesGfxManagers[managerId % MON_SPR_GFX_MANAGERS_COUNT];
+    if (gfx->active != GFX_MANAGER_ACTIVE)
     {
         return NULL;
     }
     else
     {
-        if (spriteNum >= (s8)sMonSpritesGfxManager->numSprites)
+        if (spriteNum >= gfx->numSprites)
             spriteNum = 0;
-        return sMonSpritesGfxManager->spritePointers[spriteNum];
+
+        return gfx->spritePointers[spriteNum];
     }
 }
 

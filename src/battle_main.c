@@ -70,6 +70,7 @@ static void CB2_EndLinkBattle(void);
 static void EndLinkBattleInSteps(void);
 static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite);
 static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite);
+static void SpriteCB_WildMonAnimate(struct Sprite *sprite);
 static void SpriteCB_AnimFaintOpponent(struct Sprite *sprite);
 static void SpriteCB_BlinkVisible(struct Sprite *sprite);
 static void oac_poke_ally_(struct Sprite *sprite);
@@ -1902,12 +1903,20 @@ static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite)
     {
         StartHealthboxSlideIn(sprite->sBattler);
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[sprite->sBattler]);
-        sprite->callback = SpriteCallbackDummy_2;
+        sprite->callback = SpriteCB_WildMonAnimate;
         StartSpriteAnimIfDifferent(sprite, 0);
         if (WILD_DOUBLE_BATTLE)
             BeginNormalPaletteFade((0x10000 << sprite->sBattler) | (0x10000 << BATTLE_PARTNER(sprite->sBattler)), 0, 10, 0, RGB(8, 8, 8));
         else
             BeginNormalPaletteFade(0x20000, 0, 10, 0, RGB(8, 8, 8));
+    }
+}
+
+static void SpriteCB_WildMonAnimate(struct Sprite *sprite)
+{
+    if (!gPaletteFade.active)
+    {
+        BattleAnimateFrontSprite(sprite, sprite->sSpeciesId, FALSE, 1);
     }
 }
 
@@ -1988,6 +1997,19 @@ void SpriteCB_HideAsMoveTarget(struct Sprite *sprite)
     sprite->invisible = sprite->data[4];
     sprite->data[4] = FALSE;
     sprite->callback = SpriteCallbackDummy_2;
+}
+
+void SpriteCB_OpponentMonFromBall(struct Sprite *sprite)
+{
+    if (sprite->affineAnimEnded)
+    {
+        if (!(gHitMarker & HITMARKER_NO_ANIMATIONS) || gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+        {
+            if (HasTwoFramesAnimation(sprite->sSpeciesId))
+                StartSpriteAnim(sprite, 1);
+        }
+        BattleAnimateFrontSprite(sprite, sprite->sSpeciesId, TRUE, 1);
+    }
 }
 
 void SpriteCB_AllyMon(struct Sprite *sprite)
@@ -2117,6 +2139,12 @@ static void SpriteCB_BounceEffect(struct Sprite *sprite)
         index = sprite->sSinIndex;
     gSprites[bouncerSpriteId].y2 = Sin(index, sprite->sAmplitude) + sprite->sAmplitude;
     sprite->sSinIndex = (sprite->sSinIndex + sprite->sDelta) & 0xFF;
+}
+
+void SpriteCB_PlayerMonFromBall(struct Sprite *sprite)
+{
+    if (sprite->affineAnimEnded)
+        BattleAnimateBackSprite(sprite, sprite->sSpeciesId);
 }
 
 void SpriteCB_PlayerThrowInit(struct Sprite *sprite)

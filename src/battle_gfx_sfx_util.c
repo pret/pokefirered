@@ -979,7 +979,7 @@ void AllocateMonSpritesGfx(void)
     for (i = 0; i < MAX_BATTLERS_COUNT; ++i)
     {
         gMonSpritesGfxPtr->sprites[i] = gMonSpritesGfxPtr->firstDecompressed + (i * 0x2000);
-        *(gMonSpritesGfxPtr->templates + i) = gSpriteTemplates_Battlers[i];
+        *(gMonSpritesGfxPtr->templates + i) = gBattlerSpriteTemplates[i];
 
         for (j = 0; j < 4; ++j)
         {

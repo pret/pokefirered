@@ -1437,14 +1437,14 @@ static void UpdateSubmenuTwoOptionValue(u8 taskId, bool8 increment)
 #define sAnimId    data[2]
 #define sAnimDelay data[3]
 
-// static void Task_AnimateAfterDelay(u8 taskId)
-// {
-//     if (--gTasks[taskId].sAnimDelay == 0)
-//     {
-//         LaunchAnimationTaskForFrontSprite(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].sAnimId);
-//         DestroyTask(taskId);
-//     }
-// }
+static void Task_AnimateAfterDelay(u8 taskId)
+{
+    if (--gTasks[taskId].sAnimDelay == 0)
+    {
+        LaunchAnimationTaskForFrontSprite(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].sAnimId);
+        DestroyTask(taskId);
+    }
+}
 
 static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
 {
@@ -1460,22 +1460,22 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
     if (JOY_NEW(R_BUTTON) && (Frontsprite->callback == SpriteCallbackDummy))
     {
         PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
-        // if (HasTwoFramesAnimation(data->currentmonId))
-        //     StartSpriteAnim(Frontsprite, 1);
+        if (HasTwoFramesAnimation(data->currentmonId))
+            StartSpriteAnim(Frontsprite, 1);
 
-        // if (gSpeciesInfo[data->currentmonId].frontAnimDelay != 0)
-        // {
-        //     // Animation has delay, start delay task
-        //     u8 taskId = CreateTask(Task_AnimateAfterDelay, 0);
-        //     STORE_PTR_IN_TASK(Frontsprite, taskId, 0);
-        //     gTasks[taskId].sAnimId = data->animIdFront;
-        //     gTasks[taskId].sAnimDelay = gSpeciesInfo[data->currentmonId].frontAnimDelay;
-        // }
-        // else
-        // {
-        //     // No delay, start animation
-        //     LaunchAnimationTaskForFrontSprite(Frontsprite, data->animIdFront);
-        // }
+        if (gSpeciesInfo[data->currentmonId].frontAnimDelay != 0)
+        {
+            // Animation has delay, start delay task
+            u8 taskId = CreateTask(Task_AnimateAfterDelay, 0);
+            STORE_PTR_IN_TASK(Frontsprite, taskId, 0);
+            gTasks[taskId].sAnimId = data->animIdFront;
+            gTasks[taskId].sAnimDelay = gSpeciesInfo[data->currentmonId].frontAnimDelay;
+        }
+        else
+        {
+            // No delay, start animation
+            LaunchAnimationTaskForFrontSprite(Frontsprite, data->animIdFront);
+        }
     }
 
     if (JOY_NEW(START_BUTTON))

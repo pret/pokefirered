@@ -724,7 +724,7 @@ static void Task_NewGameScene(u8 taskId)
         break;
     case 1:
         sOakSpeechResources = AllocZeroed(sizeof(*sOakSpeechResources));
-        CreateMonSpritesGfxManager(1, 1);
+        CreateMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A, MON_SPR_GFX_MODE_NORMAL);
         break;
     case 2:
         SetGpuReg(REG_OFFSET_WIN0H, 0);
@@ -1792,7 +1792,7 @@ static void Task_OakSpeech_WaitForFade(u8 taskId)
 static void Task_OakSpeech_FreeResources(u8 taskId)
 {
     FreeAllWindowBuffers();
-    DestroyMonSpritesGfxManager();
+    DestroyMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A);
     Free(sOakSpeechResources);
     sOakSpeechResources = NULL;
     gTextFlags.canABSpeedUpPrint = FALSE;
@@ -1899,7 +1899,7 @@ static void CreateNidoranFSprite(u8 taskId)
 {
     u8 spriteId;
 
-    LoadSpecialPokePic(MonSpritesGfxManager_GetSpritePtr(0), INTRO_SPECIES, 0, TRUE);
+    LoadSpecialPokePic(MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, 0), INTRO_SPECIES, 0, TRUE);
     LoadCompressedSpritePaletteUsingHeapWithTag(GetMonSpritePalFromSpeciesAndPersonality(INTRO_SPECIES, 0, 0), INTRO_SPECIES);
     SetMultiuseSpriteTemplateToPokemon(INTRO_SPECIES, 0);
     spriteId = CreateSprite(&gMultiuseSpriteTemplate, 96, 96, 1);

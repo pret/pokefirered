@@ -23537,7 +23537,7 @@ Move_RAZOR_LEAF::
 	end
 
 Move_NATURE_POWER::
-	@ No actual animation, uses the animation of a move from sNaturePowerMoves instead
+	@ No actual animation, uses the animation of a move from gBattleTerrainInfo.naturePower instead
 
 Move_ANCIENT_POWER::
 	loadspritegfx ANIM_TAG_ROCKS

@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_gfx_sfx_util.h"
+#include "battle_terrain.h"
 #include "bg.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -42,7 +43,7 @@
 #include "constants/event_objects.h"
 
 #if DEBUG_POKEMON_SPRITE_VISUALIZER == TRUE
-extern const struct BattleBackground sBattleTerrainTable[];
+extern const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 extern const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2];
@@ -373,30 +374,18 @@ const u8 gBattleBackgroundNames[][30] =
     [MAP_BATTLE_SCENE_GYM]      = _("GYM                     "),
     [MAP_BATTLE_SCENE_MAGMA]    = _("MAGMA                   "),
     [MAP_BATTLE_SCENE_AQUA]     = _("AQUA                    "),
-    [MAP_BATTLE_SCENE_SIDNEY]   = _("SIDNEY                  "),
-    [MAP_BATTLE_SCENE_PHOEBE]   = _("PHOEBE                  "),
-    [MAP_BATTLE_SCENE_GLACIA]   = _("GLACIA                  "),
-    [MAP_BATTLE_SCENE_DRAKE]    = _("DRAKE                   "),
+    [MAP_BATTLE_SCENE_LORELEI]  = _("LORELEI                 "),
+    [MAP_BATTLE_SCENE_BRUNO]    = _("BRUNO                   "),
+    [MAP_BATTLE_SCENE_AGATHA]   = _("AGATHA                  "),
+    [MAP_BATTLE_SCENE_LANCE]    = _("LANCE                   "),
     [MAP_BATTLE_SCENE_FRONTIER] = _("FRONTIER                "),
     [MAP_BATTLE_SCENE_LEADER]   = _("LEADER                  "),
-    [MAP_BATTLE_SCENE_WALLACE]  = _("WALLACE                 "),
+    [MAP_BATTLE_SCENE_CHAMPION] = _("CHAMPION                "),
     [MAP_BATTLE_SCENE_GROUDON]  = _("GROUDON                 "),
     [MAP_BATTLE_SCENE_KYOGRE]   = _("KYOGRE                  "),
     [MAP_BATTLE_SCENE_RAYQUAZA] = _("RAYQUAZA                "),
 };
-const u8 gBattleBackgroundTerrainNames[][26] =
-{
-    [BATTLE_TERRAIN_GRASS]      = _("NORMAL - GRASS           "),
-    [BATTLE_TERRAIN_LONG_GRASS] = _("NORMAL - LONG GRASS      "),
-    [BATTLE_TERRAIN_SAND]       = _("NORMAL - SAND            "),
-    [BATTLE_TERRAIN_UNDERWATER] = _("NORMAL - UNDERWATER      "),
-    [BATTLE_TERRAIN_WATER]      = _("NORMAL - WATER           "),
-    [BATTLE_TERRAIN_POND]       = _("NORMAL - POND            "),
-    [BATTLE_TERRAIN_MOUNTAIN]   = _("NORMAL - MOUNTAIN        "),
-    [BATTLE_TERRAIN_CAVE]       = _("NORMAL - CAVE            "),
-    [BATTLE_TERRAIN_BUILDING]   = _("NORMAL - BUILDING        "),
-    [BATTLE_TERRAIN_PLAIN]      = _("NORMAL - PLAIN           "),
-};
+
 //Function declarations
 static void PrintDigitChars(struct PokemonSpriteVisualizer *data);
 static void SetUpModifyArrows(struct PokemonSpriteVisualizer *data);
@@ -830,77 +819,51 @@ static void LoadBattleBg(u8 battleBgType, u8 battleTerrain)
     {
     default:
     case MAP_BATTLE_SCENE_NORMAL:
-        LZDecompressVram(sBattleTerrainTable[battleTerrain].tileset, (void*)(BG_CHAR_ADDR(2)));
-        LZDecompressVram(sBattleTerrainTable[battleTerrain].tilemap, (void*)(BG_SCREEN_ADDR(26)));
-        LoadCompressedPalette(sBattleTerrainTable[battleTerrain].palette, 0x20, 0x60);
         break;
-        // TODO: debug
-    // case MAP_BATTLE_SCENE_GYM:
-    //     LZDecompressVram(gBattleTerrainTiles_Building, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_BuildingGym, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_MAGMA:
-    //     LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_StadiumMagma, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_AQUA:
-    //     LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_StadiumAqua, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_SIDNEY:
-    //     LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_StadiumSidney, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_PHOEBE:
-    //     LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_StadiumPhoebe, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_GLACIA:
-    //     LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_StadiumGlacia, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_DRAKE:
-    //     LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_StadiumDrake, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_FRONTIER:
-    //     LZDecompressVram(gBattleTerrainTiles_Building, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_Frontier, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_LEADER:
-    //     LZDecompressVram(gBattleTerrainTiles_Building, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Building, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_BuildingLeader, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_WALLACE:
-    //     LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_StadiumWallace, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_GROUDON:
-    //     LZDecompressVram(gBattleTerrainTiles_Cave, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Cave, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_Groudon, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_KYOGRE:
-    //     LZDecompressVram(gBattleTerrainTiles_Water, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Water, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_Kyogre, 0x20, 0x60);
-    //     break;
-    // case MAP_BATTLE_SCENE_RAYQUAZA:
-    //     LZDecompressVram(gBattleTerrainTiles_Rayquaza, (void*)(BG_CHAR_ADDR(2)));
-    //     LZDecompressVram(gBattleTerrainTilemap_Rayquaza, (void*)(BG_SCREEN_ADDR(26)));
-    //     LoadCompressedPalette(gBattleTerrainPalette_Rayquaza, 0x20, 0x60);
-    //     break;
+    case MAP_BATTLE_SCENE_GYM:
+        battleTerrain = BATTLE_TERRAIN_GYM;
+        break;
+    case MAP_BATTLE_SCENE_MAGMA:
+        // todo
+        break;
+    case MAP_BATTLE_SCENE_AQUA:
+        // todo
+        break;
+    case MAP_BATTLE_SCENE_LORELEI:
+        battleTerrain = BATTLE_TERRAIN_LORELEI;
+        break;
+    case MAP_BATTLE_SCENE_BRUNO:
+        battleTerrain = BATTLE_TERRAIN_BRUNO;
+        break;
+    case MAP_BATTLE_SCENE_AGATHA:
+        battleTerrain = BATTLE_TERRAIN_AGATHA;
+        break;
+    case MAP_BATTLE_SCENE_LANCE:
+        battleTerrain = BATTLE_TERRAIN_LANCE;
+        break;
+    case MAP_BATTLE_SCENE_FRONTIER:
+        // todo
+        break;
+    case MAP_BATTLE_SCENE_LEADER:
+        battleTerrain = BATTLE_TERRAIN_LEADER;
+        break;
+    case MAP_BATTLE_SCENE_CHAMPION:
+        battleTerrain = BATTLE_TERRAIN_CHAMPION;
+        break;
+    case MAP_BATTLE_SCENE_GROUDON:
+        battleTerrain = BATTLE_TERRAIN_CAVE;
+        break;
+    case MAP_BATTLE_SCENE_KYOGRE:
+        battleTerrain = BATTLE_TERRAIN_WATER;
+        break;
+    case MAP_BATTLE_SCENE_RAYQUAZA:
+        // todo
+        break;
     }
+    
+    LZDecompressVram(gBattleTerrainInfo[battleTerrain].background.tileset, (void*)(BG_CHAR_ADDR(2)));
+    LZDecompressVram(gBattleTerrainInfo[battleTerrain].background.tilemap, (void*)(BG_SCREEN_ADDR(26)));
+    LoadCompressedPalette(gBattleTerrainInfo[battleTerrain].background.palette, 0x20, 0x60);
 }
 static void PrintBattleBgName(u8 taskId)
 {
@@ -909,7 +872,7 @@ static void PrintBattleBgName(u8 taskId)
     u8 text[30+1];
 
     if (data->battleBgType == 0)
-        StringCopy(text, gBattleBackgroundTerrainNames[data->battleTerrain]);
+        StringCopy(text, gBattleTerrainInfo[data->battleTerrain].name);
     else
         StringCopy(text, gBattleBackgroundNames[data->battleBgType]);
     AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, 0, 24, 0, NULL);
@@ -1179,8 +1142,8 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             SetUpYPosModifyArrows(data);
 
             //Anim names
-            // data->animIdBack = GetSpeciesBackAnimSet(species) + 1;
-            // data->animIdFront = gSpeciesInfo[data->currentmonId].frontAnimId;
+            data->animIdBack = GetSpeciesBackAnimSet(species) + 1;
+            data->animIdFront = gSpeciesInfo[data->currentmonId].frontAnimId;
             UpdateMonAnimNames(taskId);
 
             //BattleNg Name
@@ -1332,8 +1295,8 @@ static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
                 else
                     modArrows->currValue = GetFormSpeciesId(data->currentmonId, formId - 1);
             }
-            // data->animIdBack = GetSpeciesBackAnimSet(modArrows->currValue) + 1;
-            // data->animIdFront = gSpeciesInfo[modArrows->currValue].frontAnimId;
+            data->animIdBack = GetSpeciesBackAnimSet(modArrows->currValue) + 1;
+            data->animIdFront = gSpeciesInfo[modArrows->currValue].frontAnimId;
             UpdateMonAnimNames(taskId);
             ResetOffsetSpriteValues(data);
 

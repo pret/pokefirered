@@ -453,7 +453,8 @@ static u16 GenerateFishingEncounter(const struct WildPokemonInfo * wildMonInfo, 
     u16 wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
     u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
-    UpdateChainFishingSpeciesAndStreak(wildMonSpecies);
+    if (I_FISHING_CHAIN)
+        UpdateChainFishingSpeciesAndStreak(wildMonSpecies);
     CreateWildMon(wildMonSpecies, level, wildMonIndex);
     return wildMonSpecies;
 }
@@ -722,7 +723,7 @@ bool8 DoesCurrentMapHaveFishingMons(void)
     return TRUE;
 }
 
-static void HandleChainFishingStreak(u32 species)
+static void UpdateChainFishingSpeciesAndStreak(u32 species)
 {
     if (species != sLastFishingSpecies)
     {
@@ -734,22 +735,14 @@ static void HandleChainFishingStreak(u32 species)
         return;
 
     gChainFishingDexNavStreak++;
-}
-
-static void UpdateChainFishingSpeciesAndStreak(u32 species)
-{
-    if (!I_FISHING_CHAIN)
-        return;
-
-    HandleChainFishingStreak(species);
     sLastFishingSpecies = species;
 }
 
 void FishingWildEncounter(u8 rod)
 {
+    gIsFishingEncounter = TRUE;
     GenerateFishingEncounter(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
     IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
-    gIsFishingEncounter = TRUE;
     StartWildBattle();
 }
 

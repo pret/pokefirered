@@ -20,7 +20,7 @@ static void QL_GfxTransition_StopSurfSouth(void);
 static void QL_GfxTransition_StopSurfNorth(void);
 static void QL_GfxTransition_StopSurfWest(void);
 static void QL_GfxTransition_StopSurfEast(void);
-static void QL_SetObjectGraphicsId(struct ObjectEvent *object, u8 graphicsId);
+static void QL_SetObjectGraphicsId(struct ObjectEvent *object, u16 graphicsId);
 
 static void (*const sQLGfxTransitions[])(void) = {
     [QL_PLAYER_GFX_NORMAL]      = QL_GfxTransition_Normal,
@@ -171,7 +171,7 @@ static void Task_QLVSSeekerMovement(u8 taskId)
     }
 }
 
-static void QL_SetObjectGraphicsId(struct ObjectEvent * object, u8 graphicsId)
+static void QL_SetObjectGraphicsId(struct ObjectEvent * object, u16 graphicsId)
 {
     ObjectEventSetGraphicsId(object, graphicsId);
 }

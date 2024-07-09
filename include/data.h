@@ -5,7 +5,7 @@
 #include "constants/moves.h"
 #include "constants/trainers.h"
 
-#define SPECIES_SHINY_TAG 500
+#define SPECIES_SHINY_TAG 5000
 #define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
 
 struct MonCoords
@@ -101,6 +101,19 @@ struct TypeInfo
     //u16 arceusForm;
 };
 
+struct FollowerMsgInfo
+{
+    const u8 *text;
+    const u8 *script;
+};
+
+struct FollowerMessagePool
+{
+    const struct FollowerMsgInfo *messages;
+    const u8 *script;
+    u16 length;
+};
+
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
@@ -134,6 +147,19 @@ extern const struct Trainer gTrainers[];
 extern const struct Trainer gBattlePartners[];
 
 extern const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT];
+
+// Follower text messages
+extern const struct FollowerMsgInfo gFollowerHappyMessages[];
+extern const struct FollowerMsgInfo gFollowerNeutralMessages[];
+extern const struct FollowerMsgInfo gFollowerSadMessages[];
+extern const struct FollowerMsgInfo gFollowerUpsetMessages[];
+extern const struct FollowerMsgInfo gFollowerAngryMessages[];
+extern const struct FollowerMsgInfo gFollowerPensiveMessages[];
+extern const struct FollowerMsgInfo gFollowerLoveMessages[];
+extern const struct FollowerMsgInfo gFollowerSurpriseMessages[];
+extern const struct FollowerMsgInfo gFollowerCuriousMessages[];
+extern const struct FollowerMsgInfo gFollowerMusicMessages[];
+extern const struct FollowerMsgInfo gFollowerPoisonedMessages[];
 
 
 static inline u16 SanitizeTrainerId(u16 trainerId)

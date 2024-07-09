@@ -400,33 +400,13 @@ void ApplyNewEncryptionKeyToGameStats(u32 newKey)
 
 static void LoadObjEventTemplatesFromHeader(void)
 {
-    u8 i, j;
-    for (i = 0, j = 0; i < gMapHeader.events->objectEventCount; i++)
-    {
-        if (gMapHeader.events->objectEvents[i].kind == OBJ_KIND_CLONE)
-        {
-            // load target object from the connecting map
-            u8 localId = gMapHeader.events->objectEvents[i].objUnion.clone.targetLocalId;
-            u8 mapNum = gMapHeader.events->objectEvents[i].objUnion.clone.targetMapNum;
-            u8 mapGroup = gMapHeader.events->objectEvents[i].objUnion.clone.targetMapGroup;
-            const struct MapHeader * connectionMap = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
+    // Clear map object templates
+    CpuFill32(0, gSaveBlock1Ptr->objectEventTemplates, sizeof(gSaveBlock1Ptr->objectEventTemplates));
 
-            gSaveBlock1Ptr->objectEventTemplates[j] = connectionMap->events->objectEvents[localId - 1];
-            gSaveBlock1Ptr->objectEventTemplates[j].localId = gMapHeader.events->objectEvents[i].localId;
-            gSaveBlock1Ptr->objectEventTemplates[j].x = gMapHeader.events->objectEvents[i].x;
-            gSaveBlock1Ptr->objectEventTemplates[j].y = gMapHeader.events->objectEvents[i].y;
-            gSaveBlock1Ptr->objectEventTemplates[j].objUnion.clone.targetLocalId = localId;
-            gSaveBlock1Ptr->objectEventTemplates[j].objUnion.clone.targetMapNum = mapNum;
-            gSaveBlock1Ptr->objectEventTemplates[j].objUnion.clone.targetMapGroup = mapGroup;
-            gSaveBlock1Ptr->objectEventTemplates[j].kind = OBJ_KIND_CLONE;
-            j++;
-        }
-        else
-        {
-            gSaveBlock1Ptr->objectEventTemplates[j] = gMapHeader.events->objectEvents[i];
-            j++;
-        }
-    }
+    // Copy map header events to save block
+    CpuCopy32(gMapHeader.events->objectEvents,
+              gSaveBlock1Ptr->objectEventTemplates,
+              gMapHeader.events->objectEventCount * sizeof(struct ObjectEventTemplate));
 }
 
 static void LoadSaveblockObjEventScripts(void)
@@ -466,7 +446,7 @@ void SetObjEventTemplateMovementType(u8 localId, u8 movementType)
         struct ObjectEventTemplate *objectEventTemplate = &savObjTemplates[i];
         if (objectEventTemplate->localId == localId)
         {
-            objectEventTemplate->objUnion.normal.movementType = movementType;
+            objectEventTemplate->movementType = movementType;
             return;
         }
     }
@@ -1920,6 +1900,10 @@ static bool32 ReturnToFieldLocal(u8 *state)
         QuestLog_InitPalettesBackup();
         ResumeMap(FALSE);
         ReloadObjectsAndRunReturnToFieldMapScript();
+        if (gFieldCallback == FieldCallback_UseFly)
+            RemoveFollowingPokemon();
+        else
+            UpdateFollowingPokemon();
         SetCameraToTrackPlayer();
         (*state)++;
         break;
@@ -2087,10 +2071,7 @@ static void ResumeMap(bool32 inLink)
     ResetAllPicSprites();
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
-    if (!inLink)
-        InitObjectEventPalettes(0);
-    else
-        InitObjectEventPalettes(1);
+    FreeAllSpritePalettes();
 
     FieldEffectActiveListClear();
     StartWeather();
@@ -2123,6 +2104,7 @@ static void InitObjectEventsLocal(void)
     SetPlayerAvatarTransitionFlags(player->transitionFlags);
     ResetInitialPlayerAvatarState();
     TrySpawnObjectEvents(0, 0);
+    UpdateFollowingPokemon();
     TryRunOnWarpIntoMapScript();
 }
 

@@ -721,12 +721,20 @@ static void Task_DoorWarp(u8 taskId)
     struct Task *task = &gTasks[taskId];
     s16 *xp = &task->data[2];
     s16 *yp = &task->data[3];
+    struct ObjectEvent *followerObject = GetFollowerObject();
+
     switch (task->data[0])
     {
     case 0:
         FreezeObjectEvents();
         PlayerGetDestCoords(xp, yp);
         PlaySE(GetDoorSoundEffect(*xp, *yp - 1));
+        if (followerObject)
+        {
+            // Put follower into pokeball
+            ClearObjectEventMovement(followerObject, &gSprites[followerObject->spriteId]);
+            ObjectEventSetHeldMovement(followerObject, MOVEMENT_ACTION_ENTER_POKEBALL);
+        }
         task->data[1] = FieldAnimateDoorOpen(*xp, *yp - 1);
         task->data[0] = 1;
         break;

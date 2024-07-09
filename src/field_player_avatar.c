@@ -1173,7 +1173,7 @@ bool8 MetatileAtCoordsIsWaterTile(s16 x, s16 y)
 
 void ClearPlayerAvatarInfo(void)
 {
-    gPlayerAvatar = (struct PlayerAvatar){};
+    memset(&gPlayerAvatar, 0, sizeof(struct PlayerAvatar));
 }
 
 void SetPlayerAvatarStateMask(u8 flags)
@@ -1195,7 +1195,7 @@ static const u8 sPlayerAvatarGfxToStateFlag[][3][GENDER_COUNT] = {
     }
 };
 
-u8 GetPlayerAvatarStateTransitionByGraphicsId(u8 graphicsId, u8 gender)
+u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
 {
     u8 i;
 
@@ -1204,10 +1204,10 @@ u8 GetPlayerAvatarStateTransitionByGraphicsId(u8 graphicsId, u8 gender)
         if (sPlayerAvatarGfxToStateFlag[gender][i][0] == graphicsId)
             return sPlayerAvatarGfxToStateFlag[gender][i][1];
     }
-    return 1;
+    return PLAYER_AVATAR_FLAG_ON_FOOT;
 }
 
-u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
+u16 GetPlayerAvatarGraphicsIdByCurrentState(void)
 {
     u8 i;
     u8 flags = gPlayerAvatar.flags;
@@ -1220,7 +1220,7 @@ u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
     return 0;
 }
 
-void SetPlayerAvatarExtraStateTransition(u8 graphicsId, u8 extras)
+void SetPlayerAvatarExtraStateTransition(u16 graphicsId, u8 extras)
 {
     u8 unk = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
 
@@ -1238,12 +1238,12 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     playerObjEventTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_GFX_NORMAL, gender);
     playerObjEventTemplate.x = x - 7;
     playerObjEventTemplate.y = y - 7;
-    playerObjEventTemplate.objUnion.normal.elevation = 0;
-    playerObjEventTemplate.objUnion.normal.movementType = MOVEMENT_TYPE_PLAYER;
-    playerObjEventTemplate.objUnion.normal.movementRangeX = 0;
-    playerObjEventTemplate.objUnion.normal.movementRangeY = 0;
-    playerObjEventTemplate.objUnion.normal.trainerType = TRAINER_TYPE_NONE;
-    playerObjEventTemplate.objUnion.normal.trainerRange_berryTreeId = 0;
+    playerObjEventTemplate.elevation = 0;
+    playerObjEventTemplate.movementType = MOVEMENT_TYPE_PLAYER;
+    playerObjEventTemplate.movementRangeX = 0;
+    playerObjEventTemplate.movementRangeY = 0;
+    playerObjEventTemplate.trainerType = TRAINER_TYPE_NONE;
+    playerObjEventTemplate.trainerRange_berryTreeId = 0;
     playerObjEventTemplate.script = NULL;
     playerObjEventTemplate.flagId = 0;
     objectEventId = SpawnSpecialObjectEvent(&playerObjEventTemplate);

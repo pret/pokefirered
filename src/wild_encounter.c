@@ -331,7 +331,6 @@ static void CreateWildMon(u16 species, u8 level, u8 slot)
     u8 unownLetter = NUM_UNOWN_FORMS;
 
     ZeroEnemyPartyMons();
-    checkCuteCharm = OW_CUTE_CHARM < GEN_9;
 
     switch (gSpeciesInfo[species].genderRatio)
     {
@@ -401,9 +400,9 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo * wildMonInfo, u8 a
     switch (area)
     {
     case WILD_AREA_LAND:
-        if (OW_MAGNET_PULL < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex, LAND_WILD_COUNT))
+        if (TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex, LAND_WILD_COUNT))
             break;
-        if (OW_STATIC < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_STATIC, &wildMonIndex, LAND_WILD_COUNT))
+        if (TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_STATIC, &wildMonIndex, LAND_WILD_COUNT))
             break;
         if (OW_LIGHTNING_ROD == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_LIGHTNING_ROD, &wildMonIndex, LAND_WILD_COUNT))
             break;
@@ -417,9 +416,9 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo * wildMonInfo, u8 a
         wildMonIndex = ChooseWildMonIndex_Land();
         break;
     case WILD_AREA_WATER:
-        if (OW_MAGNET_PULL < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex, WATER_WILD_COUNT))
+        if (TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_STEEL, ABILITY_MAGNET_PULL, &wildMonIndex, WATER_WILD_COUNT))
             break;
-        if (OW_STATIC < GEN_9 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_STATIC, &wildMonIndex, WATER_WILD_COUNT))
+        if (TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_STATIC, &wildMonIndex, WATER_WILD_COUNT))
             break;
         if (OW_LIGHTNING_ROD == GEN_8 && TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildMonInfo->wildPokemon, TYPE_ELECTRIC, ABILITY_LIGHTNING_ROD, &wildMonIndex, WATER_WILD_COUNT))
             break;
@@ -482,7 +481,7 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
 
         if (ability == ABILITY_STENCH)
             encounterRate /= 2;
-        else if (ability == ABILITY_ILLUMINATE && OW_ILLUMINATE < GEN_9)
+        else if (ability == ABILITY_ILLUMINATE)
             encounterRate *= 2;
         else if (ability == ABILITY_WHITE_SMOKE)
             encounterRate /= 2;
@@ -512,7 +511,7 @@ static u8 GetAbilityEncounterRateModType(void)
         u16 ability = GetMonAbility(&gPlayerParty[0]);
         if (ability == ABILITY_STENCH)
             sWildEncounterData.abilityEffect = 1;
-        else if (ability == ABILITY_ILLUMINATE && OW_ILLUMINATE < GEN_9)
+        else if (ability == ABILITY_ILLUMINATE)
             sWildEncounterData.abilityEffect = 2;
         else if (ability == ABILITY_WHITE_SMOKE)
             sWildEncounterData.abilityEffect = 1;

@@ -1127,9 +1127,9 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             gSprites[data->iconspriteId].oam.priority = 0;
 
             //Follower Sprite
-            // data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, VISUALIZER_FOLLOWER_X, VISUALIZER_FOLLOWER_Y, 0);
-            // gSprites[data->followerspriteId].oam.priority = 0;
-            // gSprites[data->followerspriteId].anims = sAnims_Follower;
+            data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, VISUALIZER_FOLLOWER_X, VISUALIZER_FOLLOWER_Y, 0);
+            gSprites[data->followerspriteId].oam.priority = 0;
+            gSprites[data->followerspriteId].anims = sAnims_Follower;
 
             //Modify Arrows
             SetUpModifyArrows(data);
@@ -1418,7 +1418,7 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
     if (JOY_NEW(L_BUTTON)  && (Backsprite->callback == SpriteCallbackDummy))
     {
         PlayCryInternal(data->currentmonId, 0, 120, 10, 0);
-        // LaunchAnimationTaskForBackSprite(Backsprite, data->animIdBack-1);
+        LaunchAnimationTaskForBackSprite(Backsprite, data->animIdBack-1);
     }
     if (JOY_NEW(R_BUTTON) && (Frontsprite->callback == SpriteCallbackDummy))
     {
@@ -1483,8 +1483,8 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
                 PrintDigitChars(data);
                 UpdateBattlerValue(data);
                 ReloadPokemonSprites(data);
-                // data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
-                // data->animIdFront = gSpeciesInfo[data->currentmonId].frontAnimId;
+                data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
+                data->animIdFront = gSpeciesInfo[data->currentmonId].frontAnimId;
                 UpdateMonAnimNames(taskId);
                 ResetOffsetSpriteValues(data);
             }
@@ -1499,8 +1499,8 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
                 PrintDigitChars(data);
                 UpdateBattlerValue(data);
                 ReloadPokemonSprites(data);
-                // data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
-                // data->animIdFront = gSpeciesInfo[data->currentmonId].frontAnimId;
+                data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
+                data->animIdFront = gSpeciesInfo[data->currentmonId].frontAnimId;
                 UpdateMonAnimNames(taskId);
                 ResetOffsetSpriteValues(data);
             }
@@ -1683,13 +1683,13 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     gSprites[data->iconspriteId].oam.priority = 0;
 
     //Follower Sprite
-    // data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species + (data->isShiny ? SPECIES_SHINY_TAG : 0),
-    //                                                     SpriteCB_Follower,
-    //                                                     VISUALIZER_FOLLOWER_X,
-    //                                                     VISUALIZER_FOLLOWER_Y,
-    //                                                     0);
-    // gSprites[data->followerspriteId].oam.priority = 0;
-    // gSprites[data->followerspriteId].anims = sAnims_Follower;
+    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species + (data->isShiny ? SPECIES_SHINY_TAG : 0),
+                                                        SpriteCB_Follower,
+                                                        VISUALIZER_FOLLOWER_X,
+                                                        VISUALIZER_FOLLOWER_Y,
+                                                        0);
+    gSprites[data->followerspriteId].oam.priority = 0;
+    gSprites[data->followerspriteId].anims = sAnims_Follower;
 
     //Modify Arrows
     LoadSpritePalette(&gSpritePalette_Arrow);

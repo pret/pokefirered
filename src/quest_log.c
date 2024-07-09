@@ -358,8 +358,8 @@ static void SetNPCInitialCoordsAtScene(u8 sceneNum)
             questLog->objectEventTemplates[i].y = (u8)gSaveBlock1Ptr->objectEventTemplates[i].y;
             questLog->objectEventTemplates[i].negy = FALSE;
         }
-        questLog->objectEventTemplates[i].elevation = gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.elevation;
-        questLog->objectEventTemplates[i].movementType = gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.movementType;
+        questLog->objectEventTemplates[i].elevation = gSaveBlock1Ptr->objectEventTemplates[i].elevation;
+        questLog->objectEventTemplates[i].movementType = gSaveBlock1Ptr->objectEventTemplates[i].movementType;
     }
 }
 
@@ -554,8 +554,8 @@ static void QL_LoadObjectsAndTemplates(u8 sceneNum)
             gSaveBlock1Ptr->objectEventTemplates[i].y = -(u8)questLog->objectEventTemplates[i].y;
         else
             gSaveBlock1Ptr->objectEventTemplates[i].y = questLog->objectEventTemplates[i].y;
-        gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.elevation = questLog->objectEventTemplates[i].elevation;
-        gSaveBlock1Ptr->objectEventTemplates[i].objUnion.normal.movementType = questLog->objectEventTemplates[i].movementType;
+        gSaveBlock1Ptr->objectEventTemplates[i].elevation = questLog->objectEventTemplates[i].elevation;
+        gSaveBlock1Ptr->objectEventTemplates[i].movementType = questLog->objectEventTemplates[i].movementType;
     }
 
     QL_LoadObjects(questLog, gSaveBlock1Ptr->objectEventTemplates);

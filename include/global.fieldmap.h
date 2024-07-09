@@ -107,31 +107,24 @@ struct BackupMapLayout
     u16 *map;
 };
 
-struct ObjectEventTemplate
+struct __attribute__((packed, aligned(4))) ObjectEventTemplate
 {
-    u8 localId;
-    u8 graphicsId;
-    u8 kind; // The "kind" field determines how to access objUnion union below.
-    s16 x, y;
-    union {
-        struct {
-            u8 elevation;
-            u8 movementType;
-            u16 movementRangeX:4;
-            u16 movementRangeY:4;
-            u16 trainerType;
-            u16 trainerRange_berryTreeId;
-        } normal;
-        struct {
-            u8 targetLocalId;
-            u8 padding[3];
-            u16 targetMapNum;
-            u16 targetMapGroup;
-        } clone;
-    } objUnion;
-    const u8 *script;
-    u16 flagId;
-};  /*size = 0x18*/
+    /*0x00*/ u8 localId;
+    /*0x01*/ u16 graphicsId;
+    /*0x03*/ u8 kind; // Always OBJ_KIND_NORMAL in Emerald.
+    /*0x04*/ s16 x;
+    /*0x06*/ s16 y;
+    /*0x08*/ u8 elevation;
+    /*0x09*/ u8 movementType;
+    /*0x0A*/ u16 movementRangeX:4;
+             u16 movementRangeY:4;
+             u16 unused:8;
+    /*0x0C*/ u16 trainerType;
+    /*0x0E*/ u16 trainerRange_berryTreeId;
+    /*0x10*/ const u8 *script;
+    /*0x14*/ u16 flagId;
+    /*0x16*/ u16 filler;
+}; // size = 0x18
 
 struct WarpEvent
 {
@@ -239,31 +232,33 @@ struct ObjectEvent
              /*25*/ u32 disableJumpLandingGroundEffect:1;
              /*26*/ u32 fixedPriority:1;
              /*27*/ u32 hideReflection:1;
-    /*0x04*/        u8 spriteId;
-    /*0x05*/        u8 graphicsId;
-    /*0x06*/        u8 movementType;
-    /*0x07*/        u8 trainerType;
-    /*0x08*/        u8 localId;
-    /*0x09*/        u8 mapNum;
-    /*0x0A*/        u8 mapGroup;
-    /*0x0B*/        u8 currentElevation:4;
+             /*28*/ u32 shiny:1; // OW mon shininess
+          /*29-31*/ u32 padding:3;
+    /*0x04*/        u16 graphicsId;
+    /*0x06*/        u8 spriteId;
+    /*0x07*/        u8 movementType;
+    /*0x08*/        u8 trainerType;
+    /*0x09*/        u8 localId;
+    /*0x0A*/        u8 mapNum;
+    /*0x0B*/        u8 mapGroup;
+    /*0x0C*/        u8 currentElevation:4;
                     u8 previousElevation:4;
-    /*0x0C*/        struct Coords16 initialCoords;
-    /*0x10*/        struct Coords16 currentCoords;
-    /*0x14*/        struct Coords16 previousCoords;
-    /*0x18*/        u8 facingDirection:4;
-                    u8 movementDirection:4;
+    /*0x0D*/        u8 fieldEffectSpriteId;
+    /*0x0E*/        struct Coords16 initialCoords;
+    /*0x12*/        struct Coords16 currentCoords;
+    /*0x16*/        struct Coords16 previousCoords;
+    /*0x1A*/        u16 facingDirection:4;
+                    u16 movementDirection:4;
                     u16 rangeX:4;
                     u16 rangeY:4;
-    /*0x1A*/        u8 fieldEffectSpriteId;
-    /*0x1B*/        u8 warpArrowSpriteId;
-    /*0x1C*/        u8 movementActionId;
-    /*0x1D*/        u8 trainerRange_berryTreeId;
-    /*0x1E*/        u8 currentMetatileBehavior;
-    /*0x1F*/        u8 previousMetatileBehavior;
-    /*0x20*/        u8 previousMovementDirection;
-    /*0x21*/        u8 directionSequenceIndex;
-    /*0x22*/        u8 playerCopyableMovement;
+    /*0x1C*/        u8 warpArrowSpriteId;
+    /*0x1D*/        u8 movementActionId;
+    /*0x1E*/        u8 trainerRange_berryTreeId;
+    /*0x1F*/        u8 currentMetatileBehavior;
+    /*0x20*/        u8 previousMetatileBehavior;
+    /*0x21*/        u8 previousMovementDirection;
+    /*0x22*/        u8 directionSequenceIndex;
+    /*0x23*/        u8 playerCopyableMovement;
     /*size = 0x24*/
 };
 
@@ -278,7 +273,7 @@ struct ObjectEventGraphicsInfo
     /*0x0C*/ u8 paletteSlot:4;
              u8 shadowSize:2;
              u8 inanimate:1;
-             u8 disableReflectionPaletteLoad:1;
+             u8 compressed:1;
     /*0x0D*/ u8 tracks;
     /*0x10*/ const struct OamData *oam;
     /*0x14*/ const struct SubspriteTable *subspriteTables;
@@ -306,6 +301,11 @@ enum {
 #define PLAYER_AVATAR_FLAG_CONTROLLABLE (1 << PLAYER_AVATAR_STATE_CONTROLLABLE)
 #define PLAYER_AVATAR_FLAG_FORCED       (1 << PLAYER_AVATAR_STATE_FORCED)
 #define PLAYER_AVATAR_FLAG_DASH         (1 << PLAYER_AVATAR_STATE_DASH)
+
+#define PLAYER_AVATAR_FLAG_BIKE        (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE)
+// Player avatar flags for which follower Pokémon are hidden
+#define FOLLOWER_INVISIBLE_FLAGS       (PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_UNDERWATER | \
+                                        PLAYER_AVATAR_FLAG_BIKE | PLAYER_AVATAR_FLAG_FORCED)
 
 enum {
     PLAYER_AVATAR_GFX_NORMAL,

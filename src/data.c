@@ -293,3 +293,5 @@ const union AnimCmd *const gAnims_MonPic[] =
 #include "data/trainer_parties.h"
 #include "data/trainers.h"
 #include "data/battle_partners.h"
+
+#include "data/text/follower_messages.h"

@@ -30,6 +30,7 @@ Route5_PokemonDayCare_EventScript_TryGiveMon::
 	msgbox Route5_PokemonDayCare_Text_ComeSeeMeInAWhile
 	waitmoncry
 	special PutMonInRoute5Daycare
+	callnative UpdateFollowingPokemon
 	incrementgamestat GAME_STAT_USED_DAYCARE
 	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
 	end

@@ -6,6 +6,7 @@
 #include "constants/map_scripts.h"
 #include "constants/layouts.h"
 #include "constants/maps.h"
+#include "constants/species.h"
 #include "constants/trainer_types.h"
 #include "constants/vars.h"
 #include "constants/weather.h"

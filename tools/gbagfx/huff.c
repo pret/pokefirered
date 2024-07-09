@@ -6,21 +6,21 @@
 #include "global.h"
 #include "huff.h"
 
-static int cmp_tree(const void *a0, const void *b0) {
+static int cmp_tree(const void * a0, const void * b0) {
     return ((struct HuffData *)a0)->value - ((struct HuffData *)b0)->value;
 }
 
 typedef int (*cmpfun)(const void *, const void *);
 
-int msort_r(void *data, size_t count, size_t size, cmpfun cmp, void *buffer) {
+int msort_r(void * data, size_t count, size_t size, cmpfun cmp, void * buffer) {
     /*
      * Out-of-place mergesort (stable sort)
      * Returns 1 on success, 0 on failure
      */
-    void *leftPtr;
-    void *rightPtr;
-    void *leftEnd;
-    void *rightEnd;
+    void * leftPtr;
+    void * rightPtr;
+    void * leftEnd;
+    void * rightEnd;
     int i;
 
     switch (count) {
@@ -85,8 +85,8 @@ int msort_r(void *data, size_t count, size_t size, cmpfun cmp, void *buffer) {
     return 1;
 }
 
-int msort(void *data, size_t count, size_t size, cmpfun cmp) {
-    void *buffer = malloc(count * size);
+int msort(void * data, size_t count, size_t size, cmpfun cmp) {
+    void * buffer = malloc(count * size);
     if (buffer == NULL) return 0;
     int result = msort_r(data, count, size, cmp, buffer);
     free(buffer);

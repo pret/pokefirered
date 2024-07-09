@@ -27,5 +27,7 @@ void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 void SpriteCB_PopOutOfAsh(struct Sprite *sprite);
 void SpriteCB_AshLaunch(struct Sprite *sprite);
 void FieldEffectActiveListClear(void);
+void FieldEffectFreePaletteIfUnused(u8 paletteNum);
+void FieldCallback_UseFly(void);
 
 #endif //GUARD_FIELD_EFFECTS_H

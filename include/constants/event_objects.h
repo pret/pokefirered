@@ -153,13 +153,15 @@
 #define OBJ_EVENT_GFX_DEOXYS_A 149
 #define OBJ_EVENT_GFX_DEOXYS_N 150
 #define OBJ_EVENT_GFX_SS_ANNE 151
+#define OBJ_EVENT_GFX_POKE_BALL  152
+#define OBJ_EVENT_GFX_OW_MON     153
 
-#define NUM_OBJ_EVENT_GFX     152
+#define NUM_OBJ_EVENT_GFX     154
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
 // More info about them in include/constants/vars.h
-#define OBJ_EVENT_GFX_VARS   240
+#define OBJ_EVENT_GFX_VARS   (NUM_OBJ_EVENT_GFX + 1)
 #define OBJ_EVENT_GFX_VAR_0  (OBJ_EVENT_GFX_VARS + 0x0) // 240
 #define OBJ_EVENT_GFX_VAR_1  (OBJ_EVENT_GFX_VARS + 0x1)
 #define OBJ_EVENT_GFX_VAR_2  (OBJ_EVENT_GFX_VARS + 0x2)
@@ -177,6 +179,16 @@
 #define OBJ_EVENT_GFX_VAR_E  (OBJ_EVENT_GFX_VARS + 0xE)
 #define OBJ_EVENT_GFX_VAR_F  (OBJ_EVENT_GFX_VARS + 0xF) // 255
 
+#define OBJ_EVENT_GFX_MON_BASE  0x200 // 512
+#define OBJ_EVENT_GFX_SPECIES_BITS 11
+#define OBJ_EVENT_GFX_SPECIES_MASK ((1 << OBJ_EVENT_GFX_SPECIES_BITS) - 1)
+
+// Used to call a specific species' follower graphics. Useful for static encounters.
+#define OBJ_EVENT_GFX_SPECIES(name) (OBJ_EVENT_GFX_MON_BASE + SPECIES_##name)
+
+#define OW_SPECIES(x) (((x)->graphicsId & OBJ_EVENT_GFX_SPECIES_MASK) - OBJ_EVENT_GFX_MON_BASE)
+#define OW_FORM(x) ((x)->graphicsId >> OBJ_EVENT_GFX_SPECIES_BITS)
+
 #define SHADOW_SIZE_S   0
 #define SHADOW_SIZE_M   1
 #define SHADOW_SIZE_L   2
@@ -188,6 +200,9 @@
 #define TRACKS_NONE       0
 #define TRACKS_FOOT       1
 #define TRACKS_BIKE_TIRE  2
+#define TRACKS_SLITHER    3
+#define TRACKS_SPOT       4
+#define TRACKS_BUG        5
 
 #define OBJ_KIND_NORMAL 0
 #define OBJ_KIND_CLONE  255
@@ -195,6 +210,7 @@
 // Special object event local ids
 #define OBJ_EVENT_ID_PLAYER  0xFF
 #define OBJ_EVENT_ID_CAMERA  0x7F
+#define OBJ_EVENT_ID_FOLLOWER 0xFE
 
 // Object event local ids referenced in C files
 #define LOCALID_UNION_ROOM_PLAYER_4 2
@@ -205,5 +221,83 @@
 #define LOCALID_UNION_ROOM_PLAYER_3 7
 #define LOCALID_UNION_ROOM_PLAYER_2 8
 #define LOCALID_UNION_ROOM_PLAYER_1 9
+
+#define OBJ_EVENT_PAL_TAG_PLAYER_RED                  0x1100
+#define OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION       0x1101
+#define OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION           0x1102
+#define OBJ_EVENT_PAL_TAG_NPC_BLUE                    0x1103
+#define OBJ_EVENT_PAL_TAG_NPC_PINK                    0x1104
+#define OBJ_EVENT_PAL_TAG_NPC_GREEN                   0x1105
+#define OBJ_EVENT_PAL_TAG_NPC_WHITE                   0x1106
+#define OBJ_EVENT_PAL_TAG_NPC_BLUE_REFLECTION         0x1107
+#define OBJ_EVENT_PAL_TAG_NPC_PINK_REFLECTION         0x1108
+#define OBJ_EVENT_PAL_TAG_NPC_GREEN_REFLECTION        0x1109
+#define OBJ_EVENT_PAL_TAG_NPC_WHITE_REFLECTION        0x110A
+#define OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP             0x110B
+#define OBJ_EVENT_PAL_TAG_RS_QUINTY_PLUMP_REFLECTION  0x110C
+#define OBJ_EVENT_PAL_TAG_RS_TRUCK                    0x110D
+#define OBJ_EVENT_PAL_TAG_RS_MACHOKE                  0x110E
+#define OBJ_EVENT_PAL_TAG_RS_POOCHYENA                0x110F
+#define OBJ_EVENT_PAL_TAG_PLAYER_GREEN                0x1110
+#define OBJ_EVENT_PAL_TAG_PLAYER_GREEN_REFLECTION     0x1111
+#define OBJ_EVENT_PAL_TAG_RS_MOVING_BOX               0x1112
+#define OBJ_EVENT_PAL_TAG_METEORITE                   0x1113
+#define OBJ_EVENT_PAL_TAG_SEAGALLOP                   0x1114
+#define OBJ_EVENT_PAL_TAG_SS_ANNE                     0x1115
+#define OBJ_EVENT_PAL_TAG_RS_PLAYER_UNDERWATER        0x1116
+#define OBJ_EVENT_PAL_TAG_RS_KYOGRE                   0x1117
+#define OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION        0x1118
+#define OBJ_EVENT_PAL_TAG_RS_GROUDON                  0x1119
+#define OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION       0x111A
+#define OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW         0x111B
+#define OBJ_EVENT_PAL_TAG_NPC_3                       0x111C // pokeball from expansion
+#define OBJ_EVENT_PAL_TAG_DYNAMIC                     0x111D
+
+#if OW_FOLLOWERS_POKEBALLS
+// Vanilla
+#define OBJ_EVENT_PAL_TAG_BALL_MASTER             0x1150
+#define OBJ_EVENT_PAL_TAG_BALL_ULTRA              0x1151
+#define OBJ_EVENT_PAL_TAG_BALL_GREAT              0x1152
+#define OBJ_EVENT_PAL_TAG_BALL_SAFARI             0x1153
+#define OBJ_EVENT_PAL_TAG_BALL_NET                0x1154
+#define OBJ_EVENT_PAL_TAG_BALL_DIVE               0x1155
+#define OBJ_EVENT_PAL_TAG_BALL_NEST               0x1156
+#define OBJ_EVENT_PAL_TAG_BALL_REPEAT             0x1157
+#define OBJ_EVENT_PAL_TAG_BALL_TIMER              0x1158
+#define OBJ_EVENT_PAL_TAG_BALL_LUXURY             0x1159
+#define OBJ_EVENT_PAL_TAG_BALL_PREMIER            0x115A
+// Gen IV/Sinnoh
+#define OBJ_EVENT_PAL_TAG_BALL_DUSK               0x115B
+#define OBJ_EVENT_PAL_TAG_BALL_HEAL               0x115C
+#define OBJ_EVENT_PAL_TAG_BALL_QUICK              0x115D
+#define OBJ_EVENT_PAL_TAG_BALL_CHERISH            0x115E
+#define OBJ_EVENT_PAL_TAG_BALL_PARK               0x115F
+// Gen II/Johto Apricorns
+#define OBJ_EVENT_PAL_TAG_BALL_FAST               0x1160
+#define OBJ_EVENT_PAL_TAG_BALL_LEVEL              0x1161
+#define OBJ_EVENT_PAL_TAG_BALL_LURE               0x1162
+#define OBJ_EVENT_PAL_TAG_BALL_HEAVY              0x1163
+#define OBJ_EVENT_PAL_TAG_BALL_LOVE               0x1164
+#define OBJ_EVENT_PAL_TAG_BALL_FRIEND             0x1165
+#define OBJ_EVENT_PAL_TAG_BALL_MOON               0x1166
+#define OBJ_EVENT_PAL_TAG_BALL_SPORT              0x1167
+// Gen V
+#define OBJ_EVENT_PAL_TAG_BALL_DREAM              0x1168
+// Gen VII
+#define OBJ_EVENT_PAL_TAG_BALL_BEAST              0x1169
+// Gen VIII
+#define OBJ_EVENT_PAL_TAG_BALL_STRANGE            0x116A
+#endif //OW_FOLLOWERS_POKEBALLS
+// Used as a placeholder follower graphic
+#define OBJ_EVENT_PAL_TAG_SUBSTITUTE              0x7611
+#define OBJ_EVENT_PAL_TAG_EMOTES                  0x8002
+// Not a real OW palette tag; used for the white flash applied to followers
+#define OBJ_EVENT_PAL_TAG_WHITE                   (OBJ_EVENT_PAL_TAG_NONE - 1)
+#define OBJ_EVENT_PAL_TAG_NONE                        0x11FF
+
+// This + localId is used as the tileTag
+// for compressed graphicsInfos
+// '(C)ompressed (E)vent'
+#define COMP_OW_TILE_TAG_BASE 0xCE00
 
 #endif // GUARD_CONSTANTS_EVENT_OBJECTS_H

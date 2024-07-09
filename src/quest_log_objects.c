@@ -93,8 +93,8 @@ void QL_LoadObjects(const struct QuestLogScene * questLog, const struct ObjectEv
             {
                 gObjectEvents[i].initialCoords.x = templates[j].x + MAP_OFFSET;
                 gObjectEvents[i].initialCoords.y = templates[j].y + MAP_OFFSET;
-                gObjectEvents[i].rangeX = templates[j].objUnion.normal.movementRangeX;
-                gObjectEvents[i].rangeY = templates[j].objUnion.normal.movementRangeY;
+                gObjectEvents[i].rangeX = templates[j].movementRangeX;
+                gObjectEvents[i].rangeY = templates[j].movementRangeY;
             }
         }
 

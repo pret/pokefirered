@@ -35,6 +35,7 @@
 #define FLDEFF_FLY_OUT                   31
 #define FLDEFF_FLY_IN                    32
 #define FLDEFF_QUESTION_MARK_ICON        33
+#define FLDEFF_EMOTE                     33 // shares a slot with FLDEFF_QUESTION_MARK_ICON
 #define FLDEFF_FEET_IN_FLOWING_WATER     34
 #define FLDEFF_BIKE_TIRE_TRACKS          35
 #define FLDEFF_SAND_DISGUISE             36
@@ -71,6 +72,9 @@
 #define FLDEFF_MOVE_DEOXYS_ROCK          67
 #define FLDEFF_DESTROY_DEOXYS_ROCK       68
 #define FLDEFF_PHOTO_FLASH               69
+#define FLDEFF_TRACKS_SLITHER            70
+#define FLDEFF_TRACKS_SPOT               71
+#define FLDEFF_TRACKS_BUG                72
 
 #define FLDEFF_PAL_TAG_GENERAL_0          0x1004
 #define FLDEFF_PAL_TAG_GENERAL_1          0x1005
@@ -114,5 +118,9 @@
 #define FLDEFFOBJ_ASH_LAUNCH               33
 #define FLDEFFOBJ_BUBBLES                  34
 #define FLDEFFOBJ_SMALL_SPARKLE            35
+#define FLDEFFOBJ_RAYQUAZA                 36
+#define FLDEFFOBJ_TRACKS_SLITHER           37
+#define FLDEFFOBJ_TRACKS_SPOT              38
+#define FLDEFFOBJ_TRACKS_BUG               39
 
 #endif // GUARD_CONSTANTS_FIELD_EFFECTS_H

@@ -501,29 +501,29 @@ void FieldEffectStop(struct Sprite *sprite, u8 fldeff)
 void FieldEffectFreeTilesIfUnused(u16 tileStart)
 {
     u8 i;
-    u16 tileTag = GetSpriteTileTagByTileStart(tileStart);
-    if (tileTag == TAG_NONE)
-        return;
-    for (i = 0; i < MAX_SPRITES; i++)
+    u16 tag = GetSpriteTileTagByTileStart(tileStart);
+
+    if (tag != TAG_NONE)
     {
-        if (gSprites[i].inUse && gSprites[i].usingSheet && tileStart == gSprites[i].sheetTileStart)
-            return;
+        for (i = 0; i < MAX_SPRITES; i++)
+            if (gSprites[i].inUse && gSprites[i].usingSheet && tileStart == gSprites[i].sheetTileStart)
+                return;
+        FreeSpriteTilesByTag(tag);
     }
-    FreeSpriteTilesByTag(tileTag);
 }
 
 void FieldEffectFreePaletteIfUnused(u8 paletteNum)
 {
     u8 i;
-    u16 paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
-    if (paletteTag == TAG_NONE)
-        return;
-    for (i = 0; i < MAX_SPRITES; i++)
+    u16 tag = GetSpritePaletteTagByPaletteNum(paletteNum);
+
+    if (tag != TAG_NONE)
     {
-        if (gSprites[i].inUse && gSprites[i].oam.paletteNum == paletteNum)
-            return;
+        for (i = 0; i < MAX_SPRITES; i++)
+            if (gSprites[i].inUse && gSprites[i].oam.paletteNum == paletteNum)
+                return;
+        FreeSpritePaletteByTag(tag);
     }
-    FreeSpritePaletteByTag(paletteTag);
 }
 
 void FieldEffectActiveListClear(void)

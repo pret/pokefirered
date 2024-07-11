@@ -36,6 +36,12 @@ struct SpriteCopyRequest
     u16 size;
 };
 
+struct OamDimensions32
+{
+    s32 width;
+    s32 height;
+};
+
 struct OamDimensions
 {
     s8 width;
@@ -195,6 +201,31 @@ static const AffineAnimCmdFunc sAffineAnimCmdFuncs[] =
     AffineAnimCmd_jump,
     AffineAnimCmd_end,
     AffineAnimCmd_frame,
+};
+
+static const struct OamDimensions32 sOamDimensions32[3][4] =
+{
+    [ST_OAM_SQUARE] =
+    {
+        [SPRITE_SIZE(8x8)]   = {  8,  8 },
+        [SPRITE_SIZE(16x16)] = { 16, 16 },
+        [SPRITE_SIZE(32x32)] = { 32, 32 },
+        [SPRITE_SIZE(64x64)] = { 64, 64 },
+    },
+    [ST_OAM_H_RECTANGLE] =
+    {
+        [SPRITE_SIZE(16x8)]  = { 16,  8 },
+        [SPRITE_SIZE(32x8)]  = { 32,  8 },
+        [SPRITE_SIZE(32x16)] = { 32, 16 },
+        [SPRITE_SIZE(64x32)] = { 64, 32 },
+    },
+    [ST_OAM_V_RECTANGLE] =
+    {
+        [SPRITE_SIZE(8x16)]  = {  8, 16 },
+        [SPRITE_SIZE(8x32)]  = {  8, 32 },
+        [SPRITE_SIZE(16x32)] = { 16, 32 },
+        [SPRITE_SIZE(32x64)] = { 32, 64 },
+    },
 };
 
 static const s32 sOamDimensionsCopy[3][4][2] =
@@ -1166,22 +1197,22 @@ static s32 GetAnchorCoord(s32 baseDim, s32 xformed, s32 modifier)
 
 static void UpdateSpriteMatrixAnchorPos(struct Sprite *sprite, s32 x, s32 y)
 {
-    s32 dim, baseDim, xFormed;
+    s32 dimension, var1, var2;
 
     u32 matrixNum = sprite->oam.matrixNum;
     if (x != NO_ANCHOR)
     {
-        dim = sOamDimensionsCopy[sprite->oam.shape][sprite->oam.size][0];
-        baseDim = dim << 8;
-        xFormed = (dim << 16) / gOamMatrices[matrixNum].a;
-        sprite->x2 = GetAnchorCoord(baseDim, xFormed, x);
+        dimension = sOamDimensions32[sprite->oam.shape][sprite->oam.size].width;
+        var1 = dimension << 8;
+        var2 = (dimension << 16) / gOamMatrices[matrixNum].a;
+        sprite->x2 = GetAnchorCoord(var1, var2, x);
     }
     if (y != NO_ANCHOR)
     {
-        dim = sOamDimensionsCopy[sprite->oam.shape][sprite->oam.size][1];
-        baseDim = dim << 8;
-        xFormed = (dim << 16) / gOamMatrices[matrixNum].d;
-        sprite->y2 = GetAnchorCoord(baseDim, xFormed, y);
+        dimension = sOamDimensions32[sprite->oam.shape][sprite->oam.size].height;
+        var1 = dimension << 8;
+        var2 = (dimension << 16) / gOamMatrices[matrixNum].d;
+        sprite->y2 = GetAnchorCoord(var1, var2, y);
     }
 }
 

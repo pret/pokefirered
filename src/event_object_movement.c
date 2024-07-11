@@ -1789,7 +1789,7 @@ static u8 LoadDynamicFollowerPaletteFromGraphicsId(u16 graphicsId, bool8 shiny, 
 }
 
 // Used to create a sprite using a graphicsId associated with object events.
-u8 CreateObjectGraphicsSprite(u16 graphicsId, SpriteCallback callback, s16 x, s16 y, u8 subpriority)
+u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority)
 {
     struct SpriteTemplate *spriteTemplate;
     const struct SubspriteTable *subspriteTables;
@@ -1993,7 +1993,6 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, u16 species, u8 fo
     ObjectEventSetGraphics(objEvent, graphicsInfo);
     objEvent->graphicsId = (OBJ_EVENT_GFX_MON_BASE + species) & OBJ_EVENT_GFX_SPECIES_MASK;
     objEvent->graphicsId |= form << OBJ_EVENT_GFX_SPECIES_BITS;
-    DebugPrintfLevel(MGBA_LOG_ERROR, "graphicsId = %u", objEvent->graphicsId);
     objEvent->shiny = shiny;
     if (graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC) // Use palette from species palette table
     {

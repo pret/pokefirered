@@ -1965,6 +1965,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
             spritePalette.data = (void*)gDecompressionBuffer;
         }
         paletteNum = LoadSpritePalette(&spritePalette);
+        ApplyGlobalFieldPaletteTint(paletteNum);
     }
     else
 #endif //OW_POKEMON_OBJECT_EVENTS == TRUE && OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
@@ -1979,6 +1980,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
         // Load compressed palette
         LoadCompressedSpritePaletteWithTag(palette, species);
         paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
+        ApplyGlobalFieldPaletteTint(paletteNum);
     }
 
     if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
@@ -2684,7 +2686,9 @@ static u8 UpdateSpritePalette(const struct SpritePalette *spritePalette, struct 
     sprite->inUse = FALSE;
     FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
     sprite->inUse = TRUE;
-    return sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
+    sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
+    ApplyGlobalFieldPaletteTint(sprite->oam.paletteNum);
+    return sprite->oam.paletteNum;
 }
 
 // Find and update based on template's paletteTag
@@ -2883,6 +2887,7 @@ static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette
     if (paletteNum != 0xFF) // don't load twice; return
         return paletteNum;
     paletteNum = LoadSpritePalette(spritePalette);
+    ApplyGlobalFieldPaletteTint(paletteNum);
     return paletteNum;
 }
 
@@ -3366,12 +3371,12 @@ void InitObjectEventPalettes(u8 reflectionType)
     sCurrentReflectionType = reflectionType;
     if (reflectionType == 1)
     {
-        PatchObjectPaletteRange(gObjectPaletteTagSets[sCurrentReflectionType], PALSLOT_PLAYER, PALSLOT_NPC_4 + 1);
+        PatchObjectPaletteRange(gObjectPaletteTagSets[sCurrentReflectionType], PALSLOT_PLAYER, OBJ_PALSLOT_COUNT);
         gReservedSpritePaletteCount = 8;
     }
     else
     {
-        PatchObjectPaletteRange(gObjectPaletteTagSets[sCurrentReflectionType], PALSLOT_PLAYER, PALSLOT_NPC_4_REFLECTION + 1);
+        PatchObjectPaletteRange(gObjectPaletteTagSets[sCurrentReflectionType], PALSLOT_PLAYER, OBJ_PALSLOT_COUNT);
     }
 }
 

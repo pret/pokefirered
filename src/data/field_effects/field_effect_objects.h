@@ -218,7 +218,7 @@ static const union AnimCmd *const sAnimTable_SurfBlob[] =
 const struct SpriteTemplate gFieldEffectObjectTemplate_SurfBlob =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .oam = &gObjectEventBaseOam_32x32,
     .anims = sAnimTable_SurfBlob,
     .images = sPicTable_SurfBlob,
@@ -1147,7 +1147,7 @@ static const union AnimCmd *const sAnimTable_Bird[] =
 const struct SpriteTemplate gFieldEffectObjectTemplate_Bird =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .oam = &gObjectEventBaseOam_64x64,
     .anims = sAnimTable_Bird,
     .images = sPicTable_Bird,

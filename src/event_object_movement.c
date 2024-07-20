@@ -2881,6 +2881,22 @@ u8 LoadObjectEventPalette(u16 paletteTag)
     return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i]);
 }
 
+u8 LoadPlayerObjectEventPalette(u8 gender)
+{
+    u16 paletteTag;
+    switch (gender)
+    {
+        default:
+        case MALE:
+            paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED;
+            break;
+        case FEMALE:
+            paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_GREEN;
+            break;
+    }
+    return LoadObjectEventPalette(paletteTag);
+}
+
 static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette)
 {
     u8 paletteNum = IndexOfSpritePaletteTag(spritePalette->tag);
@@ -3384,16 +3400,13 @@ u16 GetObjectPaletteTag(u8 palSlot)
 {
     u8 i;
 
-    if (palSlot < 10)
-    {
+    if (palSlot < PALSLOT_NPC_SPECIAL)
         return gObjectPaletteTagSets[sCurrentReflectionType][palSlot];
-    }
+
     for (i = 0; gSpecialObjectReflectionPaletteSets[i].tag != OBJ_EVENT_PAL_TAG_NONE; i++)
     {
         if (gSpecialObjectReflectionPaletteSets[i].tag == sCurrentSpecialObjectPaletteTag)
-        {
             return gSpecialObjectReflectionPaletteSets[i].data[sCurrentReflectionType];
-        }
     }
     return OBJ_EVENT_PAL_TAG_NONE;
 }

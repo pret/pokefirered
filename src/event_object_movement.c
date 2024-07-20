@@ -5352,7 +5352,6 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
             sprite->sTypeFuncId = 0; // return to shadowing state
             return FALSE;
         }
-        MoveObjectEventToMapCoords(objectEvent, targetX, targetY);
         ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_EXIT_POKEBALL);
         objectEvent->singleMovementActive = 1;
         sprite->sTypeFuncId = 2;
@@ -6842,7 +6841,7 @@ enum {
 
 void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 distance, u8 type)
 {
-    s16 displacements[NELEMS(sJumpInitDisplacements)];
+    s16 displacements[ARRAY_COUNT(sJumpInitDisplacements)];
     s16 x;
     s16 y;
 
@@ -6853,10 +6852,10 @@ void InitJump(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 directi
     MoveCoordsInDirection(direction, &x, &y, displacements[distance], displacements[distance]);
     ShiftObjectEventCoords(objectEvent, objectEvent->currentCoords.x + x, objectEvent->currentCoords.y + y);
     SetJumpSpriteData(sprite, direction, distance, type);
-    sprite->data[2] = 1;
-    sprite->animPaused = 0;
-    objectEvent->triggerGroundEffectsOnMove = 1;
-    objectEvent->disableCoveringGroundEffects = 1;
+    sprite->sActionFuncId = 1;
+    sprite->animPaused = FALSE;
+    objectEvent->triggerGroundEffectsOnMove = TRUE;
+    objectEvent->disableCoveringGroundEffects = TRUE;
 }
 
 void InitJumpRegular(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 direction, u8 distance, u8 type)
@@ -7332,6 +7331,8 @@ bool8 MovementAction_ExitPokeball_Step0(struct ObjectEvent *objectEvent, struct 
 {
     u32 direction = gObjectEvents[gPlayerAvatar.objectEventId].facingDirection;
     u16 graphicsId = objectEvent->graphicsId;
+
+    SetObjectEventCoords(objectEvent, gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.x, gObjectEvents[gPlayerAvatar.objectEventId].previousCoords.y);
     objectEvent->invisible = FALSE;
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
     {
@@ -10342,13 +10343,13 @@ void SetWalkSlowSpriteData(struct Sprite *sprite, u8 direction)
 
 bool8 UpdateWalkSlowAnim(struct Sprite *sprite)
 {
-    if (++sprite->tDelay < 3)
+    if (!(sprite->tDelay & 1))
     {
         Step1(sprite, sprite->tDirection);
         sprite->tStepNo++;
     }
-    else
-        sprite->tDelay = 0;
+
+    sprite->tDelay++;
 
     if (sprite->tStepNo > 15)
         return TRUE;

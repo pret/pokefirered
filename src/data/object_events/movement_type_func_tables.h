@@ -552,17 +552,17 @@ u8 (*const gMovementTypeFuncs_CopyPlayer[])(struct ObjectEvent *, struct Sprite 
 };
 
 bool8 (*const gCopyPlayerMovementFuncs[])(struct ObjectEvent *, struct Sprite *, u8, bool8(u8)) = {
-    CopyablePlayerMovement_None,
-    CopyablePlayerMovement_FaceDirection,
-    CopyablePlayerMovement_GoSpeed0,
-    CopyablePlayerMovement_GoSpeed1,
-    CopyablePlayerMovement_GoSpeed2,
-    CopyablePlayerMovement_Slide,
-    cph_IM_DIFFERENT,
-    CopyablePlayerMovement_GoSpeed4,
-    CopyablePlayerMovement_Jump,
-    CopyablePlayerMovement_None,
-    CopyablePlayerMovement_None,
+    [COPY_MOVE_NONE]          = CopyablePlayerMovement_None,
+    [COPY_MOVE_FACE]          = CopyablePlayerMovement_FaceDirection,
+    [COPY_MOVE_WALK]          = CopyablePlayerMovement_GoSpeed0,
+    [COPY_MOVE_WALK_FAST]     = CopyablePlayerMovement_GoSpeed1,
+    [COPY_MOVE_WALK_FASTER]   = CopyablePlayerMovement_GoSpeed2,
+    [COPY_MOVE_SLIDE]         = CopyablePlayerMovement_Slide,
+    [COPY_MOVE_JUMP_IN_PLACE] = cph_IM_DIFFERENT,
+    [COPY_MOVE_JUMP]          = CopyablePlayerMovement_GoSpeed4,
+    [COPY_MOVE_JUMP2]         = CopyablePlayerMovement_Jump,
+    [COPY_MOVE_EMPTY_1]       = CopyablePlayerMovement_None,
+    [COPY_MOVE_EMPTY_2]       = CopyablePlayerMovement_None,
 };
 
 u8 (*const gMovementTypeFuncs_CopyPlayerInGrass[])(struct ObjectEvent *, struct Sprite *) = {

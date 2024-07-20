@@ -905,7 +905,7 @@ void PlayerTurnInPlace(u8 direction)
 void PlayerJumpLedge(u8 direction)
 {
     PlaySE(SE_LEDGE);
-    PlayerSetAnimId(GetJump2MovementAction(direction), 8);
+    PlayerSetAnimId(GetJump2MovementAction(direction), COPY_MOVE_JUMP2);
 }
 
 // Shakes head for male player character,

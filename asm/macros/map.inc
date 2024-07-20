@@ -46,7 +46,6 @@
 	.byte \index
 	.2byte \gfx
 	.byte OBJ_KIND_CLONE
-	.space 1  @ Padding
 	.2byte \x, \y
 	.byte \target_local_id
 	.space 3  @ Padding

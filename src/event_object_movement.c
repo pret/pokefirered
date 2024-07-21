@@ -2796,7 +2796,6 @@ static u8 UpdateSpritePalette(const struct SpritePalette *spritePalette, struct 
     FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
     sprite->inUse = TRUE;
     sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
-    ApplyGlobalFieldPaletteTint(sprite->oam.paletteNum);
     return sprite->oam.paletteNum;
 }
 
@@ -2814,7 +2813,7 @@ static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct
 {
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
     u32 i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag);
-    if (i != 0xFF)
+    if (i != 0xFF && graphicsInfo->paletteSlot != PALSLOT_PLAYER)
         UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
 
     // If gfx size changes, we need to reallocate tiles

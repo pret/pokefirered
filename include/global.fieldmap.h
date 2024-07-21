@@ -111,7 +111,7 @@ struct __attribute__((packed, aligned(4))) ObjectEventTemplate
 {
     /*0x00*/ u8 localId;
     /*0x01*/ u16 graphicsId;
-    /*0x03*/ u8 kind; // Always OBJ_KIND_NORMAL in Emerald.
+    /*0x03*/ u8 kind; // The "kind" field determines how to access objUnion union below.
     /*0x04*/ s16 x;
     /*0x06*/ s16 y;
     union {

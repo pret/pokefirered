@@ -247,7 +247,7 @@ bool8 VarSet(u16 idx, u16 val)
     return TRUE;
 }
 
-u8 VarGetObjectEventGraphicsId(u8 idx)
+u16 VarGetObjectEventGraphicsId(u8 idx)
 {
     return VarGet(VAR_OBJ_GFX_ID_0 + idx);
 }

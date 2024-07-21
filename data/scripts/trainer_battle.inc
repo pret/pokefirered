@@ -8,8 +8,10 @@ EventScript_DoTrainerBattleFromApproach::
 EventScript_TryDoNormalTrainerBattle::
 	lock
 	faceplayer
+	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
+	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	specialvar VAR_RESULT, Script_HasTrainerBeenFought
 	goto_if_ne VAR_RESULT, FALSE, EventScript_NoTrainerBattle
 	special PlayTrainerEncounterMusic
@@ -42,8 +44,10 @@ EventScript_NoDoubleTrainerBattle::
 	gotopostbattlescript
 
 EventScript_DoNoIntroTrainerBattle::
+	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
+	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	special PlayTrainerEncounterMusic
 	goto_if_questlog EventScript_EndQuestLogBattle
 	dotrainerbattle
@@ -98,8 +102,10 @@ EventScript_EndQuestLogRematch::
 	end
 
 EventScript_RevealTrainer::
+	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
+	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
 	return
 
 Movement_RevealTrainer::

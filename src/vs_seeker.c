@@ -69,7 +69,7 @@ struct VsSeekerTrainerInfo
     u8 objectEventId;
     s16 xCoord;
     s16 yCoord;
-    u8 graphicsId;
+    u16 graphicsId;
 };
 
 struct VsSeekerStruct
@@ -103,7 +103,7 @@ static u8 ShouldTryRematchBattleInternal(const struct RematchData * vsSeekerData
 static u8 HasRematchTrainerAlreadyBeenFought(const struct RematchData * vsSeekerData, u16 trainerBattleOpponent);
 static int LookupVsSeekerOpponentInArray(const struct RematchData * array, u16 trainerId);
 static bool8 IsTrainerReadyForRematchInternal(const struct RematchData * array, u16 trainerIdx);
-static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId);
+static u8 GetRunningBehaviorFromGraphicsId(u16 graphicsId);
 static u16 GetTrainerFlagFromScript(const u8 * script);
 static int GetRematchIdx(const struct RematchData * vsSeekerData, u16 trainerFlagIdx);
 static bool32 IsThisTrainerRematchable(u32 localId);
@@ -641,11 +641,11 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
 
     for (i = 0; i < gMapHeader.events->objectEventCount; i++)
     {
-        if ((templates[i].objUnion.normal.trainerType == TRAINER_TYPE_NORMAL
-          || templates[i].objUnion.normal.trainerType == TRAINER_TYPE_BURIED) 
-         && (templates[i].objUnion.normal.movementType == MOVEMENT_TYPE_RAISE_HAND_AND_STOP
-          || templates[i].objUnion.normal.movementType == MOVEMENT_TYPE_RAISE_HAND_AND_JUMP
-          || templates[i].objUnion.normal.movementType == MOVEMENT_TYPE_RAISE_HAND_AND_SWIM))
+        if ((templates[i].trainerType == TRAINER_TYPE_NORMAL
+          || templates[i].trainerType == TRAINER_TYPE_BURIED) 
+         && (templates[i].movementType == MOVEMENT_TYPE_RAISE_HAND_AND_STOP
+          || templates[i].movementType == MOVEMENT_TYPE_RAISE_HAND_AND_JUMP
+          || templates[i].movementType == MOVEMENT_TYPE_RAISE_HAND_AND_SWIM))
         {
             movementType = GetRandomFaceDirectionMovementType();
             TryGetObjectEventIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
@@ -654,7 +654,7 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
             {
                 SetTrainerMovementType(objectEvent, movementType);
             }
-            templates[i].objUnion.normal.movementType = movementType;
+            templates[i].movementType = movementType;
         }
     }
 }
@@ -798,7 +798,7 @@ static void GatherNearbyTrainerInfo(void)
 
     for (objectEventIdx = 0; objectEventIdx < gMapHeader.events->objectEventCount; objectEventIdx++)
     {
-        if (templates[objectEventIdx].objUnion.normal.trainerType == TRAINER_TYPE_NORMAL || templates[objectEventIdx].objUnion.normal.trainerType == TRAINER_TYPE_BURIED)
+        if (templates[objectEventIdx].trainerType == TRAINER_TYPE_NORMAL || templates[objectEventIdx].trainerType == TRAINER_TYPE_BURIED)
         {
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].script = templates[objectEventIdx].script;
             sVsSeeker->trainerInfo[vsSeekerObjectIdx].trainerIdx = GetTrainerFlagFromScript(templates[objectEventIdx].script);
@@ -932,8 +932,8 @@ void ClearRematchStateByTrainerId(void)
 
         for (i = 0; i < gMapHeader.events->objectEventCount; i++)
         {
-            if ((objectEventTemplates[i].objUnion.normal.trainerType == TRAINER_TYPE_NORMAL 
-              || objectEventTemplates[i].objUnion.normal.trainerType == TRAINER_TYPE_BURIED)
+            if ((objectEventTemplates[i].trainerType == TRAINER_TYPE_NORMAL 
+              || objectEventTemplates[i].trainerType == TRAINER_TYPE_BURIED)
               && vsSeekerDataIdx == LookupVsSeekerOpponentInArray(sRematches, GetTrainerFlagFromScript(objectEventTemplates[i].script)))
             {
                 struct ObjectEvent *objectEvent;
@@ -1111,7 +1111,7 @@ static u8 GetRandomFaceDirectionMovementType()
     }
 }
 
-static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId)
+static u8 GetRunningBehaviorFromGraphicsId(u16 graphicsId)
 {
     switch (graphicsId)
     {

@@ -14,6 +14,7 @@
 #include "pokemon_storage_system.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_controllers.h"
+#include "event_object_movement.h"
 #include "evolution_scene.h"
 #include "field_weather.h"
 #include "battle_message.h"
@@ -34,6 +35,7 @@
 #include "constants/items.h"
 #include "constants/item_effects.h"
 #include "constants/cries.h"
+#include "constants/event_objects.h"
 #include "constants/form_change_types.h"
 #include "constants/pokemon.h"
 #include "constants/abilities.h"
@@ -804,6 +806,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_change_tables.h"
 #include "data/pokemon/form_change_table_pointers.h"
+#include "data/object_events/object_event_pic_tables_followers.h"
 
 #include "data/pokemon/species_info.h"
 

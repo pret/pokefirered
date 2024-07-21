@@ -10,7 +10,10 @@ extern u8 gDecompressionBuffer[0x4000];
 void LZDecompressWram(const void *src, void *dest);
 void LZDecompressVram(const void *src, void *dest);
 
+u32 IsLZ77Data(const void *ptr, u32 minSize, u32 maxSize);
+
 u16 LoadCompressedSpriteSheet(const struct CompressedSpriteSheet *src);
+u16 LoadCompressedSpriteSheetByTemplate(const struct SpriteTemplate *template, s32 offset);
 void LoadCompressedSpriteSheetOverrideBuffer(const struct CompressedSpriteSheet *src, void *buffer);
 bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet* src);
 
@@ -26,6 +29,6 @@ void HandleLoadSpecialPokePic(bool32 isFrontPic, void *dest, s32 species, u32 pe
 
 void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool8 isFrontPic);
 
-u32 GetDecompressedDataSize(const u8 *ptr);
+u32 GetDecompressedDataSize(const u32 *ptr);
 
 #endif // GUARD_DECOMPRESS_H

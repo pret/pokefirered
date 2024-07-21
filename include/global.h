@@ -37,6 +37,7 @@
 #define INCBIN_S8   INCBIN
 #define INCBIN_S16  INCBIN
 #define INCBIN_S32  INCBIN
+#define INCBIN_COMP INCBIN
 #endif // IDE support
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
@@ -91,6 +92,8 @@
 #else
 #define SAFE_DIV(a, b) ((a) / (b))
 #endif
+
+#define IS_POW_OF_TWO(n) (((n) & ((n)-1)) == 0)
 
 // The below macro does a%n, but (to match) will switch to a&(n-1) if n is a power of 2.
 // There are cases where GF does a&(n-1) where we would really like to have a%n, because
@@ -613,7 +616,7 @@ struct QuestLogObjectEvent
     /*0x02*/ u8 unused:3;
     /*0x03*/ u8 currentElevation:4;
     /*0x03*/ u8 previousElevation:4;
-    /*0x04*/ u8 graphicsId;
+    /*0x04*/ u16 graphicsId;
     /*0x05*/ u8 movementType;
     /*0x06*/ u8 trainerType;
     /*0x07*/ u8 localId;

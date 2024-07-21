@@ -173,7 +173,7 @@ const struct Subsprite gObjectEventSpriteOamTable_16x32_4[] = {
     }
 };
 
-const struct SubspriteTable gObjectEventSpriteOamTables_16x32[] = {
+const struct SubspriteTable sOamTables_16x32[] = {
     {0, NULL},
     {1, gObjectEventSpriteOamTable_16x32_0},
     {1, gObjectEventSpriteOamTable_16x32_1},
@@ -269,7 +269,7 @@ const struct Subsprite gObjectEventSpriteOamTable_32x32_4[] = {
     }
 };
 
-const struct SubspriteTable gObjectEventSpriteOamTables_32x32[] = {
+const struct SubspriteTable sOamTables_32x32[] = {
     {0, NULL},
     {1, gObjectEventSpriteOamTable_32x32_0},
     {1, gObjectEventSpriteOamTable_32x32_1},
@@ -485,7 +485,7 @@ const struct Subsprite gObjectEventSpriteOamTable_64x64_3[] = {
     }
 };
 
-const struct SubspriteTable gObjectEventSpriteOamTables_64x64[] = {
+const struct SubspriteTable sOamTables_64x64[] = {
     {0, NULL},
     {1, gObjectEventSpriteOamTable_64x64_0},
     {1, gObjectEventSpriteOamTable_64x64_1},

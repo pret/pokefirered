@@ -19,13 +19,14 @@ EventScript_PkmnCenterNurse_HealPkmn::
 	end
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterLeft
+	applymovement VAR_LAST_TALKED, Movement_PkmnCenterNurse_Turn @ Changed from Common_Movement_WalkInPlaceFasterLeft to force the follower to enter their Poké Ball
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special HealPlayerParty
+	callnative UpdateFollowingPokemon
 	return
 
 EventScript_PkmnCenterNurse_CheckTrainerTowerAndUnionRoom::
@@ -63,4 +64,8 @@ EventScript_PkmnCenterNurse_Goodbye::
 Movement_Bow::
 	nurse_joy_bow
 	delay_4
+	step_end
+
+Movement_PkmnCenterNurse_Turn:
+	walk_in_place_faster_left
 	step_end

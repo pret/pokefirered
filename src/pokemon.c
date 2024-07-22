@@ -20,6 +20,7 @@
 #include "battle_message.h"
 #include "battle_util.h"
 #include "link.h"
+#include "level_caps.h"
 #include "pokemon_animation.h"
 #include "m4a.h"
 #include "pokedex.h"
@@ -3585,8 +3586,17 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 {
                     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
                     dataUnsigned = sExpCandyExperienceTable[param - 1] + GetMonData(mon, MON_DATA_EXP, NULL);
-                    if (dataUnsigned > gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL])
+
+                    if (B_RARE_CANDY_CAP && B_EXP_CAP_TYPE == EXP_CAP_HARD)
+                    {
+                        u32 currentLevelCap = GetCurrentLevelCap();
+                        if (dataUnsigned > gExperienceTables[gSpeciesInfo[species].growthRate][currentLevelCap])
+                            dataUnsigned = gExperienceTables[gSpeciesInfo[species].growthRate][currentLevelCap];
+                    }
+                    else if (dataUnsigned > gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL])
+                    {
                         dataUnsigned = gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL];
+                    }
                 }
 
                 if (dataUnsigned != 0) // Failsafe
@@ -5127,37 +5137,24 @@ void PartySpreadPokerus(struct Pokemon *party)
     }
 }
 
-static void SetMonExpWithMaxLevelCheck(struct Pokemon *mon, int species, u8 unused, u32 data)
-{
-    if (data > gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL])
-    {
-        data = gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL];
-        SetMonData(mon, MON_DATA_EXP, &data);
-    }
-}
-
 bool8 TryIncrementMonLevel(struct Pokemon *mon)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
-    u8 newLevel = level + 1;
-    u32 exp = GetMonData(mon, MON_DATA_EXP, NULL);
-
-    if (level < MAX_LEVEL)
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u8 nextLevel = GetMonData(mon, MON_DATA_LEVEL, 0) + 1;
+    u32 expPoints = GetMonData(mon, MON_DATA_EXP, 0);
+    if (expPoints > gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL])
     {
-        if (exp > gExperienceTables[gSpeciesInfo[species].growthRate][newLevel])
-        {
-            SetMonData(mon, MON_DATA_LEVEL, &newLevel);
-            SetMonExpWithMaxLevelCheck(mon, species, newLevel, exp);
-            return TRUE;
-        }
-        else
-            return FALSE;
+        expPoints = gExperienceTables[gSpeciesInfo[species].growthRate][MAX_LEVEL];
+        SetMonData(mon, MON_DATA_EXP, &expPoints);
+    }
+    if (nextLevel > GetCurrentLevelCap() || expPoints < gExperienceTables[gSpeciesInfo[species].growthRate][nextLevel])
+    {
+        return FALSE;
     }
     else
     {
-        SetMonExpWithMaxLevelCheck(mon, species, level, exp);
-        return FALSE;
+        SetMonData(mon, MON_DATA_LEVEL, &nextLevel);
+        return TRUE;
     }
 }
 

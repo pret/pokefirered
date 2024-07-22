@@ -24,6 +24,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
+#include "level_caps.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
@@ -5616,7 +5617,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
     u8 holdEffectParam = ItemId_GetHoldEffectParam(*itemPtr);
 
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
-    if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL) 
+    if (!(B_RARE_CANDY_CAP && sInitialLevel >= GetCurrentLevelCap()))
     {
         GetMonLevelUpWindowStats(mon, sLevelUpStatsBefore);
         cannotUseEffect = ExecuteTableBasedItemEffect(mon, *itemPtr, gPartyMenu.slotId, 0);

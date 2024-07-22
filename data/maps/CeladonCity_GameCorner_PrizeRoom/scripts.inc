@@ -1,198 +1,301 @@
 CeladonCity_GameCorner_PrizeRoom_MapScripts::
 	.byte 0
 
+
 CeladonCity_GameCorner_PrizeRoom_EventScript_BaldingMan::
 	msgbox CeladonCity_GameCorner_PrizeRoom_Text_FancyThatPorygon, MSGBOX_NPC
 	end
+
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_OldMan::
 	msgbox CeladonCity_GameCorner_PrizeRoom_Text_RakedItInToday, MSGBOX_NPC
 	end
 
+
 CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons::
 	lock
 	faceplayer
-	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase
+	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_2
 	goto_if_questlog EventScript_ReleaseEnd
 	showcoinsbox 0, 0
 	msgbox CeladonCity_GameCorner_PrizeRoom_Text_WeExchangeCoinsForPrizes
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeMon
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeMon::
 	message CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize
 	waitmessage
 	multichoice 11, 0, MULTICHOICE_GAME_CORNER_POKEMON_PRIZES, FALSE
 	switch VAR_RESULT
-	case 0, CeladonCity_GameCorner_PrizeRoom_EventScript_Abra
-	case 1, CeladonCity_GameCorner_PrizeRoom_EventScript_Clefairy
-	case 2, CeladonCity_GameCorner_PrizeRoom_EventScript_DratiniPinsir
-	case 3, CeladonCity_GameCorner_PrizeRoom_EventScript_ScytherDratini
-	case 4, CeladonCity_GameCorner_PrizeRoom_EventScript_Porygon
-	case 5, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	case 127, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange::
-	hidecoinsbox 0, 0
-	release
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_Abra::
-	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_ABRA
-	setvar VAR_TEMP_2, 180
-	.else
-	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_ABRA
-	setvar VAR_TEMP_2, 120
-	.endif
-	.endif
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_Clefairy::
-	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_CLEFAIRY
-	setvar VAR_TEMP_2, 500
-	.else
-	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_CLEFAIRY
-	setvar VAR_TEMP_2, 750
-	.endif
-	.endif
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_DratiniPinsir::
-	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_DRATINI
-	setvar VAR_TEMP_2, 2800
-	.else
-	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_PINSIR
-	setvar VAR_TEMP_2, 2500
-	.endif
-	.endif
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_ScytherDratini::
-	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_SCYTHER
-	setvar VAR_TEMP_2, 5500
-	.else
-	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_DRATINI
-	setvar VAR_TEMP_2, 4600
-	.endif
-	.endif
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_Porygon::
-	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_PORYGON
-	setvar VAR_TEMP_2, 9999
-	.else
-	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_PORYGON
-	setvar VAR_TEMP_2, 6500
-	.endif
-	.endif
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon::
+	case 0, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_6
+	case 1, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_7
+	case 2, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_8
+	case 3, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_9
+	case 4, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_10
+	case 5, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_11
+	case 6, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_12
+	case 127, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_12
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_4:
 	bufferspeciesname STR_VAR_1, VAR_TEMP_1
 	msgbox CeladonCity_GameCorner_PrizeRoom_Text_YouWantPrize, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
+	compare VAR_RESULT, NO
+	goto_if_eq CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_14
 	checkcoins VAR_RESULT
-	goto_if_lt VAR_RESULT, VAR_TEMP_2, CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins
+	compare VAR_RESULT, VAR_TEMP_2
+	goto_if_lt CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_17
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	switch VAR_TEMP_1
-	case SPECIES_ABRA,     CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra
-	case SPECIES_CLEFAIRY, CeladonCity_GameCorner_PrizeRoom_EventScript_GiveClefairy
-	case SPECIES_DRATINI,  CeladonCity_GameCorner_PrizeRoom_EventScript_GiveDratini
-	case SPECIES_SCYTHER,  CeladonCity_GameCorner_PrizeRoom_EventScript_GiveScyther
-	case SPECIES_PORYGON,  CeladonCity_GameCorner_PrizeRoom_EventScript_GivePorygon
-	case SPECIES_PINSIR,   CeladonCity_GameCorner_PrizeRoom_EventScript_GivePinsir
+	case SPECIES_ABRA, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_21
+	case SPECIES_CLEFAIRY, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_22
+	case SPECIES_PINSIR, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_23
+	case SPECIES_SCYTHER, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_23
+	case SPECIES_DRATINI, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_24
+	case SPECIES_PORYGON, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_25
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_19:
+	switch VAR_RESULT
+	case 0, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_28
+	case 1, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_29
+	case 2, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_30
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_26:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
 	end
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra::
-	.ifdef FIRERED
-	givemon VAR_TEMP_1, 9
-	.else
-	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 7
-	.endif
-	.endif
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_2:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase
 	end
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_GiveClefairy::
-	.ifdef FIRERED
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_6:
+	setvar VAR_TEMP_1, SPECIES_ABRA
+	setvar VAR_TEMP_2, 150
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_7:
+	setvar VAR_TEMP_1, SPECIES_CLEFAIRY
+	setvar VAR_TEMP_2, 600
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_8:
+	setvar VAR_TEMP_1, SPECIES_PINSIR
+	setvar VAR_TEMP_2, 3000
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_9:
+	setvar VAR_TEMP_1, SPECIES_SCYTHER
+	setvar VAR_TEMP_2, 3000
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_10:
+	setvar VAR_TEMP_1, SPECIES_DRATINI
+	setvar VAR_TEMP_2, 5000
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_11:
+	setvar VAR_TEMP_1, SPECIES_PORYGON
+	setvar VAR_TEMP_2, 9999
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_12:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
+	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_14:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
+	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_17:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins
+	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_21:
 	givemon VAR_TEMP_1, 8
-	.else
-	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 12
-	.endif
-	.endif
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
-	end
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_19
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_GiveDratini::
-	.ifdef FIRERED
-	givemon VAR_TEMP_1, 18
-	.else
-	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 24
-	.endif
-	.endif
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
-	end
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_22:
+	givemon VAR_TEMP_1, 10
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_19
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_GiveScyther::
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_23:
+	givemon VAR_TEMP_1, 20
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_19
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_24:
+	givemon VAR_TEMP_1, 23
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_19
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_25:
 	givemon VAR_TEMP_1, 25
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
-	end
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_19
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_GivePorygon::
-	.ifdef FIRERED
-	givemon VAR_TEMP_1, 26
-	.else
-	.ifdef LEAFGREEN
-	givemon VAR_TEMP_1, 18
-	.endif
-	.endif
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
-	end
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_28:
+	call CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMon
+	compare VAR_RESULT, YES
+	goto_if_eq CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_31
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_26
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_GivePinsir::
-	givemon VAR_TEMP_1, 18
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
-	end
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_29:
+	call CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMon
+	compare VAR_RESULT, YES
+	goto_if_eq CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_34
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_33:
+	call EventScript_TransferredToPC
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_26
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon::
-	goto_if_eq VAR_RESULT, 0, CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMonParty
-	goto_if_eq VAR_RESULT, 1, CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMonPC
-	goto_if_eq VAR_RESULT, 2, CeladonCity_GameCorner_PrizeRoom_EventScript_PartyFull
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_PartyFull::
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_30:
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_NoMoreRoomForPokemon
-	hidecoinsbox 0, 0
-	release
-	end
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_26
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_NicknamePartyMon::
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_31:
 	getpartysize
 	subvar VAR_RESULT, 1
 	copyvar VAR_0x8004, VAR_RESULT
 	call EventScript_ChangePokemonNickname
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_26
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_34:
+	call EventScript_NameReceivedBoxMon
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons_33
+
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMon::
+	removecoins VAR_TEMP_2
+	updatecoinsbox 0, 5
+	bufferspeciesname STR_VAR_1, VAR_TEMP_1
+	playfanfare MUS_LEVEL_UP
+	message Text_PlayerObtainedTheMon
+	waitmessage
+	waitfanfare
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
+	return
+
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs::
+	lock
+	faceplayer
+	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_2
+	goto_if_questlog EventScript_ReleaseEnd
+	showcoinsbox 0, 0
+	msgbox CeladonCity_GameCorner_PrizeRoom_Text_WeExchangeCoinsForPrizes
+	message CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize
+	waitmessage
+	multichoice 11, 0, MULTICHOICE_GAME_CORNER_TMPRIZES, FALSE
+	switch VAR_RESULT
+	case 0, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_6
+	case 1, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_7
+	case 2, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_8
+	case 3, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_9
+	case 4, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_10
+	case 5, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_11
+	case 127, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_11
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_4:
+	msgbox CeladonCity_GameCorner_PrizeRoom_Text_YouWantTM, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_13
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize
+	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_2:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase
+	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_6:
+	setvar VAR_TEMP_1, ITEM_TM13
+	setvar VAR_TEMP_2, 4000
+	buffermovename STR_VAR_2, MOVE_ICE_BEAM
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_7:
+	setvar VAR_TEMP_1, ITEM_TM23
+	setvar VAR_TEMP_2, 3500
+	buffermovename STR_VAR_2, MOVE_IRON_TAIL
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_8:
+	setvar VAR_TEMP_1, ITEM_TM24
+	setvar VAR_TEMP_2, 4000
+	buffermovename STR_VAR_2, MOVE_THUNDERBOLT
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_9:
+	setvar VAR_TEMP_1, ITEM_TM30
+	setvar VAR_TEMP_2, 4500
+	buffermovename STR_VAR_2, MOVE_SHADOW_BALL
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_10:
+	setvar VAR_TEMP_1, ITEM_TM35
+	setvar VAR_TEMP_2, 4000
+	buffermovename STR_VAR_2, MOVE_FLAMETHROWER
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_11:
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
 	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs_13:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
+	end
+
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems::
+	lock
+	faceplayer
+	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_2
+	goto_if_questlog EventScript_ReleaseEnd
+	showcoinsbox 0, 0
+	msgbox CeladonCity_GameCorner_PrizeRoom_Text_WeExchangeCoinsForPrizes
+	message CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize
+	waitmessage
+	multichoice 10, 0, MULTICHOICE_GAME_CORNER_BATTLE_ITEM_PRIZES, FALSE
+	switch VAR_RESULT
+	case 0, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_6
+	case 1, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_7
+	case 2, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_8
+	case 3, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_9
+	case 4, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_10
+	case 5, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_11
+	case 127, CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_11
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_4:
+	bufferitemname STR_VAR_1, VAR_TEMP_1
+	msgbox CeladonCity_GameCorner_PrizeRoom_Text_YouWantPrize, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_13
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize
+	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_2:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase
+	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_6:
+	setvar VAR_TEMP_1, ITEM_SMOKE_BALL
+	setvar VAR_TEMP_2, 800
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_7:
+	setvar VAR_TEMP_1, ITEM_MIRACLE_SEED
+	setvar VAR_TEMP_2, 1000
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_8:
+	setvar VAR_TEMP_1, ITEM_CHARCOAL
+	setvar VAR_TEMP_2, 1000
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_9:
+	setvar VAR_TEMP_1, ITEM_MYSTIC_WATER
+	setvar VAR_TEMP_2, 1000
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_10:
+	setvar VAR_TEMP_1, ITEM_YELLOW_FLUTE
+	setvar VAR_TEMP_2, 1600
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_11:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
+	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems_13:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
+	end
+
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
@@ -200,184 +303,59 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase::
 	release
 	end
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins::
-	msgbox CeladonCity_GameCorner_PrizeRoom_Text_NeedMoreCoins
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMonParty::
-	removecoins VAR_TEMP_2
-	updatecoinsbox 0, 5
-	bufferspeciesname STR_VAR_1, VAR_TEMP_1
-	playfanfare MUS_LEVEL_UP
-	message Text_PlayerObtainedTheMon
-	waitmessage
-	waitfanfare
-	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, CeladonCity_GameCorner_PrizeRoom_EventScript_NicknamePartyMon
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_ReceivedMonPC::
-	removecoins VAR_TEMP_2
-	updatecoinsbox 0, 5
-	bufferspeciesname STR_VAR_1, VAR_TEMP_1
-	playfanfare MUS_LEVEL_UP
-	message Text_PlayerObtainedTheMon
-	waitmessage
-	waitfanfare
-	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, CeladonCity_GameCorner_PrizeRoom_EventScript_TransferredToPC
-	call EventScript_NameReceivedBoxMon
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_TransferredToPC
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_TransferredToPC::
-	call EventScript_TransferredToPC
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkTMs::
-	lock
-	faceplayer
-	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase
-	goto_if_questlog EventScript_ReleaseEnd
-	showcoinsbox 0, 0
-	msgbox CeladonCity_GameCorner_PrizeRoom_Text_WeExchangeCoinsForPrizes
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeTM
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeTM::
-	message CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize
-	waitmessage
-	multichoice 11, 0, MULTICHOICE_GAME_CORNER_TMPRIZES, FALSE
-	switch VAR_RESULT
-	case 0, CeladonCity_GameCorner_PrizeRoom_EventScript_TM13
-	case 1, CeladonCity_GameCorner_PrizeRoom_EventScript_TM23
-	case 2, CeladonCity_GameCorner_PrizeRoom_EventScript_TM24
-	case 3, CeladonCity_GameCorner_PrizeRoom_EventScript_TM30
-	case 4, CeladonCity_GameCorner_PrizeRoom_EventScript_TM35
-	case 5, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	case 127, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_TM13::
-	setvar VAR_TEMP_1, ITEM_TM13
-	setvar VAR_TEMP_2, 4000
-	buffermovename STR_VAR_2, MOVE_ICE_BEAM
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_TM23::
-	setvar VAR_TEMP_1, ITEM_TM23
-	setvar VAR_TEMP_2, 3500
-	buffermovename STR_VAR_2, MOVE_IRON_TAIL
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_TM24::
-	setvar VAR_TEMP_1, ITEM_TM24
-	setvar VAR_TEMP_2, 4000
-	buffermovename STR_VAR_2, MOVE_THUNDERBOLT
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_TM30::
-	setvar VAR_TEMP_1, ITEM_TM30
-	setvar VAR_TEMP_2, 4500
-	buffermovename STR_VAR_2, MOVE_SHADOW_BALL
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_TM35::
-	setvar VAR_TEMP_1, ITEM_TM35
-	setvar VAR_TEMP_2, 4000
-	buffermovename STR_VAR_2, MOVE_FLAMETHROWER
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM::
-	msgbox CeladonCity_GameCorner_PrizeRoom_Text_YouWantTM, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeItem::
-	bufferitemname STR_VAR_1, VAR_TEMP_1
-	msgbox CeladonCity_GameCorner_PrizeRoom_Text_YouWantPrize, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize
-	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize::
 	bufferitemname STR_VAR_1, VAR_TEMP_1
 	checkcoins VAR_RESULT
-	goto_if_lt VAR_RESULT, VAR_TEMP_2, CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins
+	compare VAR_RESULT, VAR_TEMP_2
+	goto_if_lt CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_2
+	switch VAR_TEMP_1
+	case ITEM_TM13, CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_6
+	case ITEM_TM23, CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_6
+	case ITEM_TM24, CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_6
+	case ITEM_TM30, CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_6
+	case ITEM_TM35, CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_6
 	checkitemspace VAR_TEMP_1
-	goto_if_eq VAR_RESULT, FALSE, CeladonCity_GameCorner_PrizeRoom_EventScript_BagFull
+	compare VAR_RESULT, 0
+	goto_if_eq CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_10
+CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_4:
 	removecoins VAR_TEMP_2
 	updatecoinsbox 0, 5
 	giveitem VAR_TEMP_1
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
 	end
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_BagFull::
+CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_2:
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins
+	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_6:
+	checkitem VAR_TEMP_1
+	compare VAR_RESULT, TRUE
+	goto_if_eq CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_8
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_4
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_8:
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	msgbox gText_YouAlreadyHaveThis
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
+	end
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_TryGivePrize_10:
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Text_TooBadBagFull
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
+	end
+
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_NotEnoughCoins::
+	msgbox CeladonCity_GameCorner_PrizeRoom_Text_NeedMoreCoins
+	goto CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
+	end
+
+
+CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange::
 	hidecoinsbox 0, 0
 	release
 	end
 
-CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkItems::
-	lock
-	faceplayer
-	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_PrizeRoom_EventScript_NeedCoinCase
-	goto_if_questlog EventScript_ReleaseEnd
-	showcoinsbox 0, 0
-	msgbox CeladonCity_GameCorner_PrizeRoom_Text_WeExchangeCoinsForPrizes
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeItem
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeItem::
-	message CeladonCity_GameCorner_PrizeRoom_Text_WhichPrize
-	waitmessage
-	multichoice 10, 0, MULTICHOICE_GAME_CORNER_BATTLE_ITEM_PRIZES, FALSE
-	switch VAR_RESULT
-	case 0, CeladonCity_GameCorner_PrizeRoom_EventScript_SmokeBall
-	case 1, CeladonCity_GameCorner_PrizeRoom_EventScript_MiracleSeed
-	case 2, CeladonCity_GameCorner_PrizeRoom_EventScript_Charcoal
-	case 3, CeladonCity_GameCorner_PrizeRoom_EventScript_MysticWater
-	case 4, CeladonCity_GameCorner_PrizeRoom_EventScript_YellowFlute
-	case 5, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	case 127, CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_SmokeBall::
-	setvar VAR_TEMP_1, ITEM_SMOKE_BALL
-	setvar VAR_TEMP_2, 800
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeItem
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_MiracleSeed::
-	setvar VAR_TEMP_1, ITEM_MIRACLE_SEED
-	setvar VAR_TEMP_2, 1000
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeItem
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_Charcoal::
-	setvar VAR_TEMP_1, ITEM_CHARCOAL
-	setvar VAR_TEMP_2, 1000
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeItem
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_MysticWater::
-	setvar VAR_TEMP_1, ITEM_MYSTIC_WATER
-	setvar VAR_TEMP_2, 1000
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeItem
-	end
-
-CeladonCity_GameCorner_PrizeRoom_EventScript_YellowFlute::
-	setvar VAR_TEMP_1, ITEM_YELLOW_FLUTE
-	setvar VAR_TEMP_2, 1600
-	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeItem
-	end

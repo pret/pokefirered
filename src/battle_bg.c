@@ -749,15 +749,22 @@ void DrawBattleEntryBackground(void)
     {
         LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
+    else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
     {
-        if (gGameVersion == VERSION_FIRE_RED)
+        switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES))
         {
+        case SPECIES_GROUDON:
             LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_CAVE);
-        }
-        else
-        {
+            break;
+        case SPECIES_KYOGRE:
             LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_WATER);
+            break;
+        default:
+            if (GetCurrentMapBattleScene() == MAP_BATTLE_SCENE_NORMAL)
+                LoadBattleTerrainEntryGfx(gBattleTerrain);
+            else
+                LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
+            break;
         }
     }
     else

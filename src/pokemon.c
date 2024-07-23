@@ -5348,10 +5348,21 @@ u16 SpeciesToPokedexNum(u16 species)
 
 static u16 GetBattleBGM(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
-        return MUS_VS_WILD;
-    if (gBattleTypeFlags & BATTLE_TYPE_REGI)
-        return MUS_RS_VS_TRAINER;
+    if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+    {
+        switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES))
+        {
+        case SPECIES_REGIROCK:
+        case SPECIES_REGICE:
+        case SPECIES_REGISTEEL:
+        case SPECIES_REGIGIGAS:
+        case SPECIES_REGIELEKI:
+        case SPECIES_REGIDRAGO:
+            return MUS_RS_VS_TRAINER;
+        default:
+            return MUS_VS_WILD;
+        }
+    }
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return MUS_RS_VS_TRAINER;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)

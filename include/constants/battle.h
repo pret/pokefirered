@@ -57,14 +57,14 @@
 #define BATTLE_TYPE_OLD_MAN_TUTORIAL   (1 << 9) // Used in pokeemerald as BATTLE_TYPE_WALLY_TUTORIAL.
 #define BATTLE_TYPE_ROAMER             (1 << 10)
 #define BATTLE_TYPE_EREADER_TRAINER    (1 << 11)
-#define BATTLE_TYPE_KYOGRE_GROUDON     (1 << 12)
+#define BATTLE_TYPE_REMOVED1           (1 << 12)
 #define BATTLE_TYPE_LEGENDARY          (1 << 13)
 #define BATTLE_TYPE_GHOST_UNVEILED     (1 << 13) // Re-use of BATTLE_TYPE_LEGENDARY, when combined with BATTLE_TYPE_GHOST
-#define BATTLE_TYPE_REGI               (1 << 14)
+#define BATTLE_TYPE_REMOVED2           (1 << 14)
 #define BATTLE_TYPE_GHOST              (1 << 15) // Used in pokeemerald as BATTLE_TYPE_TWO_OPPONENTS.
 #define BATTLE_TYPE_POKEDUDE           (1 << 16) // Used in pokeemerald as BATTLE_TYPE_DOME.
 #define BATTLE_TYPE_WILD_SCRIPTED      (1 << 17) // Used in pokeemerald as BATTLE_TYPE_PALACE.
-#define BATTLE_TYPE_LEGENDARY_FRLG     (1 << 18) // Used in pokeemerald as BATTLE_TYPE_ARENA.
+#define BATTLE_TYPE_REMOVED_3          (1 << 18) // Used in pokeemerald as BATTLE_TYPE_ARENA.
 #define BATTLE_TYPE_TRAINER_TOWER      (1 << 19) // Used in pokeemerald as BATTLE_TYPE_FACTORY.
 // pokeemerald
 #define BATTLE_TYPE_INGAME_PARTNER     (1 << 20)

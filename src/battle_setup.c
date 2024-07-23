@@ -403,25 +403,26 @@ void StartLegendaryBattle(void)
     
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_LEGENDARY_FRLG;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
     switch (species)
     {
     case SPECIES_MEWTWO:
+    case SPECIES_MEWTWO_MEGA_X:
+    case SPECIES_MEWTWO_MEGA_Y:
         CreateBattleStartTask(B_TRANSITION_BLUR, MUS_VS_MEWTWO);
         break;
-    case SPECIES_DEOXYS:
+    case SPECIES_DEOXYS_NORMAL:
+    case SPECIES_DEOXYS_ATTACK:
+    case SPECIES_DEOXYS_DEFENSE:
+    case SPECIES_DEOXYS_SPEED:
         CreateBattleStartTask(B_TRANSITION_BLUR, MUS_VS_DEOXYS);
         break;
-    case SPECIES_MOLTRES:
-    case SPECIES_ARTICUNO:
-    case SPECIES_ZAPDOS:
-    case SPECIES_HO_OH:
-    case SPECIES_LUGIA:
-        CreateBattleStartTask(B_TRANSITION_BLUR, MUS_VS_LEGEND);
-        break;
     default:
-        CreateBattleStartTask(B_TRANSITION_BLUR, MUS_RS_VS_TRAINER);
+        if (gSpeciesInfo[species].isLegendary || gSpeciesInfo[species].isMythical)
+            CreateBattleStartTask(B_TRANSITION_BLUR, MUS_VS_LEGEND);
+        else
+            CreateBattleStartTask(B_TRANSITION_BLUR, MUS_RS_VS_TRAINER);
         break;
     }
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
@@ -432,11 +433,8 @@ void StartGroudonKyogreBattle(void)
 {
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
-    if (gGameVersion == VERSION_FIRE_RED)
-        CreateBattleStartTask(B_TRANSITION_ANGLED_WIPES, MUS_RS_VS_TRAINER);
-    else // pointless, exactly the same
-        CreateBattleStartTask(B_TRANSITION_ANGLED_WIPES, MUS_RS_VS_TRAINER);
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
+    CreateBattleStartTask(B_TRANSITION_ANGLED_WIPES, MUS_RS_VS_TRAINER);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
@@ -445,7 +443,7 @@ void StartRegiBattle(void)
 {
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
-    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     CreateBattleStartTask(B_TRANSITION_BLUR, MUS_RS_VS_TRAINER);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);

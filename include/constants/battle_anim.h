@@ -573,8 +573,9 @@
 #define B_ANIM_FOG_CONTINUES            49
 #define B_ANIM_TERA_CHARGE              50
 #define B_ANIM_TERA_ACTIVATE            51
+#define B_ANIM_SIMPLE_HEAL              52
 // pokefirered
-#define B_ANIM_MON_SCARED               (B_ANIM_TERA_ACTIVATE   + 1)
+#define B_ANIM_MON_SCARED               (B_ANIM_SIMPLE_HEAL     + 1)
 #define B_ANIM_GHOST_GET_OUT            (B_ANIM_MON_SCARED      + 1)
 #define B_ANIM_SILPH_SCOPED             (B_ANIM_GHOST_GET_OUT   + 1)
 #define B_ANIM_ROCK_THROW               (B_ANIM_SILPH_SCOPED    + 1)

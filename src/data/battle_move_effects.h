@@ -1898,4 +1898,9 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_DamageToQuarterTargetHP,
     },
+
+    [EFFECT_SHELL_SIDE_ARM] =
+    {
+        .battleScript = BattleScript_EffectHit,
+    },
 };

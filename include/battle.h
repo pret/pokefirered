@@ -628,7 +628,6 @@ struct BattleStruct
     u16 abilityPreventingSwitchout;
     u8 hpScale;
     u16 synchronizeMoveEffect;
-    bool8 anyMonHasTransformed;
     u8 multipleSwitchInBattlers:4; // One bit per battler
     u8 multipleSwitchInState:2;
     u8 multipleSwitchInCursor:3;

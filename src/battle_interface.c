@@ -750,10 +750,10 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, xPos, 3, &windowId);
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;
 
-    if (GetBattlerSide(gSprites[healthboxSpriteId].sBattlerId) == B_SIDE_PLAYER)
+    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
         objVram = (void *)(OBJ_VRAM0);
-        if (!WhichBattleCoords(gSprites[healthboxSpriteId].sBattlerId))
+        if (!WhichBattleCoords(battler))
             objVram += spriteTileNum + 0x820;
         else
             objVram += spriteTileNum + 0x420;

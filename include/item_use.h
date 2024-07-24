@@ -57,6 +57,7 @@ enum {
     BALL_THROW_UNABLE_DISABLED_FLAG,
 };
 
+bool32 CanThrowBall(void);
 bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon);
 
 #endif //GUARD_ITEM_USE_H

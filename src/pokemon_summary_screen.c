@@ -36,6 +36,7 @@
 #include "battle_interface.h"
 #include "mon_markings.h"
 #include "pokemon_storage_system.h"
+#include "constants/battle_move_effects.h"
 #include "constants/sound.h"
 
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
@@ -3158,13 +3159,21 @@ static void PokeSum_PrintSelectedMoveStats(void)
                                      sLevelNickTextColors[0], TEXT_SKIP_DRAW,
                                      sMonSummaryScreen->summary.moveAccuracyStrBufs[sMoveSelectionCursorPos]);
 
-        AddTextPrinterParameterized4(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], FONT_NORMAL,
-                                     7, 42,
-                                     0, 0,
-                                     sLevelNickTextColors[0], TEXT_SKIP_DRAW,
-                                     gMovesInfo[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].description);
+        if (gMovesInfo[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].effect != EFFECT_PLACEHOLDER)
+            AddTextPrinterParameterized4(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], FONT_NORMAL,
+                                        7, 42,
+                                        0, 0,
+                                        sLevelNickTextColors[0], TEXT_SKIP_DRAW,
+                                        gMovesInfo[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].description);
+        else
+            AddTextPrinterParameterized4(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], FONT_NORMAL,
+                                        7, 42,
+                                        0, 0,
+                                        sLevelNickTextColors[0], TEXT_SKIP_DRAW,
+                                        gNotDoneYetDescription);
 
-        ShowCategoryIcon(GetBattleMoveCategory(sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]));
+        if (B_SHOW_CATEGORY_ICON == TRUE)
+            ShowCategoryIcon(GetBattleMoveCategory(sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]));
     }
 }
 

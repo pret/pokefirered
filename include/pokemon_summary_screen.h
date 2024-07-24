@@ -3,6 +3,11 @@
 
 #include "main.h"
 
+extern const u8 gNotDoneYetDescription[];
+extern const struct CompressedSpriteSheet gSpriteSheet_CategoryIcons;
+extern const struct SpritePalette gSpritePal_CategoryIcons;
+extern const struct SpriteTemplate gSpriteTemplate_CategoryIcons;
+
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *, u8, u8, MainCallback, u16);
 u8 GetMoveSlotToReplace(void);
 void SummaryScreen_SetUnknownTaskId(u8 a0);

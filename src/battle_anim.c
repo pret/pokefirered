@@ -60,7 +60,6 @@ static void Task_ClearMonBgStatic(u8 taskId);
 static void Task_FadeToBg(u8 taskId);
 static void Task_PanFromInitialToTarget(u8 taskId);
 static void Task_InitUpdateMonBg(u8 taskId);
-static void LoadMoveBg(u16 bgId);
 static void LoadDefaultBg(void);
 static void Task_LoopAndPlaySE(u8 taskId);
 static void Task_WaitAndPlaySE(u8 taskId);
@@ -1396,7 +1395,7 @@ static void Task_FadeToBg(u8 taskId)
     }
 }
 
-static void LoadMoveBg(u16 bgId)
+void LoadMoveBg(u16 bgId)
 {
     LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)(BG_SCREEN_ADDR(26)));
     LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)(BG_CHAR_ADDR(2)));
@@ -1405,7 +1404,10 @@ static void LoadMoveBg(u16 bgId)
 
 static void LoadDefaultBg(void)
 {
-    DrawMainBattleBackground();
+    if (B_TERRAIN_BG_CHANGE == TRUE && gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
+        DrawTerrainTypeBattleBackground();
+    else
+        DrawMainBattleBackground();
 }
 
 static void Cmd_restorebg(void)

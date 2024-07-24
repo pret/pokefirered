@@ -1848,7 +1848,7 @@ static bool32 Fishing_WaitForA(struct Task *task)
     if (task->tFrameCounter >= reelTimeouts[task->tFishingRod])
         task->tStep = FISHING_GOT_AWAY;
     else if (JOY_NEW(A_BUTTON))
-        task->tStep = FISHING_A_PRESS_NO_MINIGAME;
+        task->tStep = FISHING_CHECK_MORE_DOTS;
     return FALSE;
 }
 

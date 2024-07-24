@@ -1,6 +1,6 @@
 #include <stdarg.h>
 #include <stdio.h>
-#include "config.h"
+#include "config/general.h"
 #include "gba/gba.h"
 #include "malloc.h"
 #include "mini_printf.h"

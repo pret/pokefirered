@@ -1,5 +1,5 @@
-#ifndef GUARD_CONFIG_H
-#define GUARD_CONFIG_H
+#ifndef GUARD_CONFIG_GENERAL_H
+#define GUARD_CONFIG_GENERAL_H
 
 // In the Generation 3 games, Asserts were used in various debug builds.
 // Ruby/Sapphire and Emerald do not have these asserts while Fire Red
@@ -55,7 +55,7 @@
 #endif
 #endif
 
-// Generation constants used in configs to define behavior
+// Generation constants used in configs to define behavior.
 #define GEN_1 0
 #define GEN_2 1
 #define GEN_3 2
@@ -65,6 +65,7 @@
 #define GEN_7 6
 #define GEN_8 7
 #define GEN_9 8
+// Changing GEN_LATEST's value to a different Generation will change every default setting that uses it at once.
 #define GEN_LATEST GEN_9
 
 // General settings
@@ -72,6 +73,7 @@
 #define POKEDEX_PLUS_HGSS            FALSE   // If TRUE, enables the custom HGSS style Pokedex.
 #define SUMMARY_SCREEN_NATURE_COLORS TRUE    // If TRUE, nature-based stat boosts and reductions will be red and blue in the summary screen.
 #define HQ_RANDOM                    TRUE    // If TRUE, replaces the default RNG with an implementation of SFC32 RNG. May break code that relies on RNG.
+#define COMPETITIVE_PARTY_SYNTAX     TRUE    // If TRUE, parties are defined in "competitive syntax".
 
 // Measurement system constants to be used for UNITS
 #define UNITS_IMPERIAL               0       // Inches, feet, pounds
@@ -80,4 +82,7 @@
 #define UNITS                        UNITS_METRIC
 #define CHAR_DEC_SEPARATOR           CHAR_PERIOD // CHAR_PERIOD is used as a decimal separator only in the UK and the US. The rest of the world uses CHAR_COMMA.
 
-#endif // GUARD_CONFIG_H
+// Naming Screen
+#define AUTO_LOWERCASE_KEYBOARD      GEN_LATEST  // Starting in GEN_6, after entering the first uppercase character, the keyboard switches to lowercase letters.
+
+#endif // GUARD_CONFIG_GENERAL_H

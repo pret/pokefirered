@@ -1026,10 +1026,23 @@ void AnimTask_CreateSurfWave(u8 taskId)
         RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 1);
     }
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
-    if (gBattleAnimArgs[0] == 0)
-        LoadCompressedPalette(gBattleAnimBgPalette_Surf, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
-    else
+    switch (gBattleAnimArgs[0])
+    {
+    case ANIM_SURF_PAL_SURF:
+    default:
+        if (B_NEW_SURF_PARTICLE_PALETTE == TRUE)
+            LoadCompressedPalette(gBattleAnimSpritePal_NewSurf, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
+        else
+            LoadCompressedPalette(gBattleAnimBgPalette_Surf, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
+        break;
+    case ANIM_SURF_PAL_MUDDY_WATER:
         LoadCompressedPalette(gBattleAnimBgPalette_MuddyWater, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
+        break;
+    case ANIM_SURF_PAL_SLUDGE_WAVE:
+        LoadCompressedPalette(gBattleAnimBgPalette_SludgeWave, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
+        break;
+    }
+
     taskId2 = CreateTask(AnimTask_SurfWaveScanlineEffect, gTasks[taskId].priority + 1);
     gTasks[taskId].data[15] = taskId2;
     gTasks[taskId2].data[0] = 0;

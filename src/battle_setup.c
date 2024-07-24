@@ -449,6 +449,19 @@ void StartRegiBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
+static void DowngradeBadPoison(void)
+{
+    u8 i;
+    u32 status = STATUS1_POISON;
+    if (B_TOXIC_REVERSAL < GEN_5)
+        return;
+    for(i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES) && GetMonData(&gPlayerParty[i], MON_DATA_STATUS) == STATUS1_TOXIC_POISON)
+            SetMonData(&gPlayerParty[i], MON_DATA_STATUS, &status);
+    }
+}
+
 static void CB2_EndWildBattle(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
@@ -460,6 +473,7 @@ static void CB2_EndWildBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToField);
+        DowngradeBadPoison();
         gFieldCallback = FieldCB_SafariZoneRanOutOfBalls;
     }
 }
@@ -471,7 +485,10 @@ static void CB2_EndScriptedWildBattle(void)
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
         SetMainCallback2(CB2_WhiteOut);
     else
+    {
+        DowngradeBadPoison();
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    }
 }
 
 static void CB2_EndMarowakBattle(void)
@@ -489,6 +506,7 @@ static void CB2_EndMarowakBattle(void)
             gSpecialVar_Result = FALSE;
         else
             gSpecialVar_Result = TRUE;
+        DowngradeBadPoison();
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
 }
@@ -927,8 +945,33 @@ void StartTrainerBattle(void)
     ScriptContext_Stop();
 }
 
+static void SaveChangesToPlayerParty(void)
+{
+    u8 i = 0, j = 0;
+    u8 participatedPokemon = VarGet(B_VAR_SKY_BATTLE);
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if ((participatedPokemon >> i & 1) == 1)
+        {
+            gSaveBlock1Ptr->playerParty[i] = gPlayerParty[j];
+            j++;
+        }
+    }
+}
+
+static void HandleBattleVariantEndParty(void)
+{
+    if (B_FLAG_SKY_BATTLE == 0 || !FlagGet(B_FLAG_SKY_BATTLE))
+        return;
+    SaveChangesToPlayerParty();
+    LoadPlayerParty();
+    FlagClear(B_FLAG_SKY_BATTLE);
+}
+
 static void CB2_EndTrainerBattle(void)
 {
+    HandleBattleVariantEndParty();
+
     if (sTrainerBattleMode == TRAINER_BATTLE_EARLY_RIVAL)
     {
         if (IsPlayerDefeated(gBattleOutcome) == TRUE)
@@ -950,6 +993,7 @@ static void CB2_EndTrainerBattle(void)
         else
         {
             gSpecialVar_Result = FALSE;
+            DowngradeBadPoison();
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             SetBattledTrainerFlag();
             QuestLogEvents_HandleEndTrainerBattle();
@@ -960,6 +1004,7 @@ static void CB2_EndTrainerBattle(void)
     {
         if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         {
+            DowngradeBadPoison();
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         }
         else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
@@ -969,6 +1014,7 @@ static void CB2_EndTrainerBattle(void)
         else
         {
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+            DowngradeBadPoison();
             SetBattledTrainerFlag();
             QuestLogEvents_HandleEndTrainerBattle();
         }
@@ -979,6 +1025,7 @@ static void CB2_EndRematchBattle(void)
 {
     if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
     {
+        DowngradeBadPoison();
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
@@ -991,6 +1038,7 @@ static void CB2_EndRematchBattle(void)
         SetBattledTrainerFlag();
         ClearRematchStateOfLastTalked();
         ResetDeferredLinkEvent();
+        DowngradeBadPoison();
     }
 }
 

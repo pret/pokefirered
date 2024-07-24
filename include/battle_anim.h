@@ -455,6 +455,7 @@ void InitSpritePosToAnimTargetsCentre(struct Sprite *sprite, bool32 respectMonPi
 //
 void MoveBattlerSpriteToBG(u8 battlerId, u8);
 void ResetBattleAnimBg(u8);
+void LoadMoveBg(u16 bgId);
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
 void LaunchBattleAnimation(u32 animType, u16 animId);

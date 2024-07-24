@@ -51,12 +51,11 @@ static EWRAM_DATA struct WildEncounterData sWildEncounterData = {};
 static EWRAM_DATA bool8 sWildEncountersDisabled = FALSE;
 EWRAM_DATA bool8 gIsFishingEncounter = 0;
 EWRAM_DATA bool8 gIsSurfingEncounter = 0;
-EWRAM_DATA u8 gChainFishingDexNavStreak = 0;
-EWRAM_DATA static u16 sLastFishingSpecies = SPECIES_NONE;
+EWRAM_DATA u16 gChainFishingDexNavStreak = 0;
 
 static bool8 UnlockedTanobyOrAreNotInTanoby(void);
 static u32 GenerateUnownPersonalityByLetter(u8 letter);
-static void UpdateChainFishingSpeciesAndStreak(u32 species);
+static void UpdateChainFishingStreak();
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *rate);
 static u8 GetMaxLevelOfSpeciesInWildTable(const struct WildPokemon *wildMon, u16 species, u8 area);
@@ -452,8 +451,7 @@ static u16 GenerateFishingEncounter(const struct WildPokemonInfo * wildMonInfo, 
     u16 wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
     u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
-    if (I_FISHING_CHAIN)
-        UpdateChainFishingSpeciesAndStreak(wildMonSpecies);
+    UpdateChainFishingStreak();
     CreateWildMon(wildMonSpecies, level, wildMonIndex);
     return wildMonSpecies;
 }
@@ -722,19 +720,20 @@ bool8 DoesCurrentMapHaveFishingMons(void)
     return TRUE;
 }
 
-static void UpdateChainFishingSpeciesAndStreak(u32 species)
+u32 CalculateChainFishingShinyRolls(void)
 {
-    if (species != sLastFishingSpecies)
-    {
-        gChainFishingDexNavStreak = 0;
+    return (2 * min(gChainFishingDexNavStreak, FISHING_CHAIN_SHINY_STREAK_MAX));
+}
+
+static void UpdateChainFishingStreak()
+{
+    if (!I_FISHING_CHAIN)
         return;
-    }
 
     if (gChainFishingDexNavStreak >= FISHING_CHAIN_LENGTH_MAX)
         return;
 
     gChainFishingDexNavStreak++;
-    sLastFishingSpecies = species;
 }
 
 void FishingWildEncounter(u8 rod)

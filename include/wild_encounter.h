@@ -10,7 +10,8 @@
 
 #define NUM_ALTERING_CAVE_TABLES 9
 
-#define FISHING_CHAIN_LENGTH_MAX 20
+#define FISHING_CHAIN_LENGTH_MAX 999
+#define FISHING_CHAIN_SHINY_STREAK_MAX 20
 
 struct WildPokemon
 {
@@ -38,7 +39,7 @@ struct WildPokemonHeader
 extern const struct WildPokemonHeader gWildMonHeaders[];
 extern bool8 gIsFishingEncounter;
 extern bool8 gIsSurfingEncounter;
-extern u8 gChainFishingDexNavStreak;
+extern u16 gChainFishingDexNavStreak;
 
 void DisableWildEncounters(bool8 disabled);
 u8 PickWildMonNature(void);
@@ -56,5 +57,6 @@ void SeedWildEncounterRng(u16 randVal);
 void ResetEncounterRateModifiers(void);
 bool8 TryStandardWildEncounter(u32 currMetatileAttrs);
 bool8 TryDoDoubleWildBattle(void);
+u32 CalculateChainFishingShinyRolls(void);
 
 #endif // GUARD_WILD_ENCOUNTER_H

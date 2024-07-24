@@ -223,7 +223,7 @@
 #define B_HIDE_HEALTHBOX_IN_ANIMS   TRUE  // If set to TRUE, hides healthboxes during move animations.
 #define B_EXPANDED_MOVE_NAMES       TRUE  // If set to FALSE, move names are decreased from 16 characters to 12 characters.
 #define B_WAIT_TIME_MULTIPLIER      16    // This determines how long text pauses in battle last. Vanilla is 16. Lower values result in faster battles.
-#define B_QUICK_MOVE_CURSOR_TO_RUN  TRUE // If set to TRUE, pushing B in the battle options against a wild encounter will move the cursor to the run option
+#define B_QUICK_MOVE_CURSOR_TO_RUN  FALSE // If set to TRUE, pushing B in the battle options against a wild encounter will move the cursor to the run option
 #define B_MOVE_DESCRIPTION_BUTTON   L_BUTTON // If set to a button other than B_LAST_USED_BALL_BUTTON, pressing this button will open the move description menu
 
 // Catching settings

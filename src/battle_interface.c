@@ -2618,3 +2618,9 @@ static void Task_FreeAbilityPopUpGfx(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+void CategoryIcons_LoadSpritesGfx(void)
+{
+    LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
+    LoadSpritePalette(&gSpritePal_CategoryIcons);
+}

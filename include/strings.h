@@ -220,12 +220,14 @@ extern const u8 gText_WhatWillPlayerThrow[];
 
 // battle_controller_player
 extern const u8 gText_BattleSwitchWhich[];
+extern const u8 gText_BattleSwitchWhich5[];
 extern const u8 gText_MoveInterfaceDynamicColors[];
 extern const u8 gText_MoveInterfacePP[];
 extern const u8 gText_MoveInterfaceType[];
 extern const u8 gText_LinkStandby[];
 extern const u8 gText_BattleMenu[];
 extern const u8 gText_WhatWillPkmnDo[];
+extern const u8 gText_NewLine[];
 
 // battle_controller_oak_old_man
 extern const u8 gText_ForPetesSake[];

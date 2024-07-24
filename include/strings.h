@@ -1529,6 +1529,7 @@ extern const u8 gText_LevelUp_Minus[];
 extern const u8 gText_LevelUp_Plus[];
 
 // field_player_avatar
+extern const u8 gText_OhABite[];
 extern const u8 gText_PokemonOnHook[];
 extern const u8 gText_NotEvenANibble[];
 extern const u8 gText_ItGotAway[];

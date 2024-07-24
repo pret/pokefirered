@@ -72,6 +72,7 @@
 #define B_ACTION_CANCEL_PARTNER            12 // when choosing an action
 #define B_ACTION_NOTHING_FAINTED           13 // when choosing an action
 #define B_ACTION_DEBUG                     20
+#define B_ACTION_THROW_BALL                21 // R to throw last used ball
 #define B_ACTION_NONE                      0xFF
 
 
@@ -1077,6 +1078,7 @@ extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
 extern u16 gLastThrownBall;
 extern u16 gBallToDisplay;
+extern bool8 gLastUsedBallMenuPresent;
 extern struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT];
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern u8 gAbsentBattlerFlags;

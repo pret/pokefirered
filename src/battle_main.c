@@ -199,6 +199,7 @@ EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
 EWRAM_DATA u16 gBallToDisplay = 0;
+EWRAM_DATA bool8 gLastUsedBallMenuPresent = FALSE;
 EWRAM_DATA struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
 EWRAM_DATA u8 gCategoryIconSpriteId = 0;
@@ -388,6 +389,7 @@ static void (*const sTurnActionsFuncsTable[])(void) =
     [B_ACTION_TRY_FINISH]             = HandleAction_TryFinish,
     [B_ACTION_FINISHED]               = HandleAction_ActionFinished,
     [B_ACTION_NOTHING_FAINTED]        = HandleAction_NothingIsFainted,
+    [B_ACTION_THROW_BALL]             = HandleAction_ThrowBall,
 };
 
 static void (*const sEndTurnFuncsTable[])(void) =
@@ -3506,6 +3508,10 @@ static void HandleTurnActionSelectionState(void)
                         return;
                     }
                     break;
+                case B_ACTION_THROW_BALL:
+                    gBattleStruct->throwingPokeBall = TRUE;
+                    gBattleCommunication[battler]++;
+                    break;
                 case B_ACTION_CANCEL_PARTNER:
                     gBattleCommunication[battler] = STATE_WAIT_SET_BEFORE_ACTION;
                     gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(battler)))] = STATE_BEFORE_ACTION_CHOSEN;
@@ -4113,7 +4119,8 @@ static void SetActionsAndBattlersTurnOrder(void)
             for (battler = 0; battler < gBattlersCount; battler++)
             {
                 if (gChosenActionByBattler[battler] == B_ACTION_USE_ITEM
-                  || gChosenActionByBattler[battler] == B_ACTION_SWITCH)
+                  || gChosenActionByBattler[battler] == B_ACTION_SWITCH
+                  || gChosenActionByBattler[battler] == B_ACTION_THROW_BALL)
                 {
                     gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[battler];
                     gBattlerByTurnOrder[turnOrderId] = battler;
@@ -4123,7 +4130,8 @@ static void SetActionsAndBattlersTurnOrder(void)
             for (battler = 0; battler < gBattlersCount; battler++)
             {
                 if (gChosenActionByBattler[battler] != B_ACTION_USE_ITEM
-                  && gChosenActionByBattler[battler] != B_ACTION_SWITCH)
+                  && gChosenActionByBattler[battler] != B_ACTION_SWITCH
+                  && gChosenActionByBattler[battler] != B_ACTION_THROW_BALL)
                 {
                     gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[battler];
                     gBattlerByTurnOrder[turnOrderId] = battler;
@@ -4142,7 +4150,9 @@ static void SetActionsAndBattlersTurnOrder(void)
                     if (gActionsByTurnOrder[i] != B_ACTION_USE_ITEM
                         && gActionsByTurnOrder[j] != B_ACTION_USE_ITEM
                         && gActionsByTurnOrder[i] != B_ACTION_SWITCH
-                        && gActionsByTurnOrder[j] != B_ACTION_SWITCH)
+                        && gActionsByTurnOrder[j] != B_ACTION_SWITCH
+                        && gActionsByTurnOrder[i] != B_ACTION_THROW_BALL
+                        && gActionsByTurnOrder[j] != B_ACTION_THROW_BALL)
                     {
                         if (GetWhichBattlerFaster(battler1, battler2, FALSE) == -1)
                             SwapTurnOrder(i, j);

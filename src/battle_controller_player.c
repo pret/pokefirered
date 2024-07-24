@@ -301,6 +301,7 @@ static void HandleInputChooseAction(u32 battler)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
+        TryHideLastUsedBall();
 
         switch (gActionSelectionCursor[battler])
         {
@@ -428,7 +429,7 @@ static void HandleInputChooseTarget(u32 battler)
         else
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
-        // TryHideLastUsedBall();
+        TryHideLastUsedBall();
         HideGimmickTriggerSprite();
         PlayerBufferExecCompleted(battler);
     }
@@ -614,7 +615,7 @@ static void HandleInputShowTargets(u32 battler)
         else
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
         HideGimmickTriggerSprite();
-        // TryHideLastUsedBall();
+        TryHideLastUsedBall();
         PlayerBufferExecCompleted(battler);
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
@@ -722,7 +723,7 @@ void HandleInputChooseMove(u32 battler)
             else
                 BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
             HideGimmickTriggerSprite();
-            // TryHideLastUsedBall();
+            TryHideLastUsedBall();
             PlayerBufferExecCompleted(battler);
             break;
         case 1:

@@ -38,26 +38,33 @@ BattleScript_PayDayMoneyAndPickUpItems::
 
 BattleScript_LocalBattleLost::
 	jumpifbattletype BATTLE_TYPE_TRAINER_TOWER, BattleScript_BattleTowerLost
-	jumpifbattletype BATTLE_TYPE_EREADER_TRAINER, BattleScript_EReaderOrSecretBaseTrainerEnd
-	jumpifhalfword CMP_EQUAL, gTrainerBattleOpponent_A, TRAINER_SECRET_BASE, BattleScript_EReaderOrSecretBaseTrainerEnd
+	jumpifbattletype BATTLE_TYPE_EREADER_TRAINER, BattleScript_LocalBattleLostEnd
+	jumpifhalfword CMP_EQUAL, gTrainerBattleOpponent_A, TRAINER_SECRET_BASE, BattleScript_LocalBattleLostEnd
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, 0, BattleScript_RivalBattleLost
 BattleScript_LocalBattleLostPrintWhiteOut::
+.if B_WHITEOUT_MONEY >= GEN_4
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_LocalBattleLostEnd
 	printstring STRINGID_PLAYERWHITEOUT
 	waitmessage B_WAIT_TIME_LONG
 	getmoneyreward
 	printstring STRINGID_PLAYERWHITEOUT2
 	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_EReaderOrSecretBaseTrainerEnd
-
+	end2
 BattleScript_LocalBattleLostEnd::
 	printstring STRINGID_PLAYERLOSTAGAINSTENEMYTRAINER
 	waitmessage B_WAIT_TIME_LONG
 	getmoneyreward
 	printstring STRINGID_PLAYERPAIDPRIZEMONEY
 	waitmessage B_WAIT_TIME_LONG
-BattleScript_EReaderOrSecretBaseTrainerEnd::
 	end2
+.else
+	printstring STRINGID_PLAYERWHITEOUT
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_PLAYERWHITEOUT2
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_LocalBattleLostEnd::
+	end2
+.endif
 
 BattleScript_RivalBattleLost::
 	jumpifhasnohp BS_ATTACKER, BattleScript_RivalBattleLostSkipMonRecall

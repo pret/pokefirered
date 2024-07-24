@@ -246,7 +246,8 @@ static const u16 sWhiteOutMoneyLossBadgeFlagIDs[] = {
 static void DoWhiteOut(void)
 {
     RunScriptImmediately(EventScript_ResetEliteFourEnd);
-    RemoveMoney(&gSaveBlock1Ptr->money, ComputeWhiteOutMoneyLoss());
+    if (B_WHITEOUT_MONEY == GEN_3)
+        RemoveMoney(&gSaveBlock1Ptr->money, ComputeWhiteOutMoneyLoss());
     HealPlayerParty();
     Overworld_ResetStateAfterWhitingOut();
     Overworld_SetWhiteoutRespawnPoint();

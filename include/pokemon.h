@@ -28,8 +28,10 @@ enum {
     MON_DATA_IS_SHINY,
     MON_DATA_HIDDEN_NATURE,
     MON_DATA_HP_LOST,
+    MON_DATA_DAYS_SINCE_FORM_CHANGE,
     MON_DATA_ENCRYPT_SEPARATOR,
     MON_DATA_NICKNAME,
+    MON_DATA_NICKNAME10,
     MON_DATA_SPECIES,
     MON_DATA_HELD_ITEM,
     MON_DATA_MOVE1,
@@ -248,8 +250,9 @@ struct BoxPokemon
     u8 isBadEgg:1;
     u8 hasSpecies:1;
     u8 isEgg:1;
-    u8 blockBoxRS:1; // Unused, but Pokémon Box Ruby & Sapphire will refuse to deposit a Pokémon with this flag set
-    u8 unused_13:4;
+    u8 blockBoxRS:1; // Unused, but Pokémon Box Ruby & Sapphire will refuse to deposit a Pokémon with this flag set.
+    u8 daysSinceFormChange:3; // 7 days.
+    u8 unused_13:1;
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings:4;
     u8 compressedStatus:4;
@@ -793,7 +796,7 @@ bool32 IsSpeciesInKantoDex(u16 species);
 u16 KantoToNationalDexNum(u16 kantoNum);
 u16 NationalToKantoDexNum(u16 nationalNum);
 u16 HoennToNationalDexNum(u16 hoennNum);
-u16 SpeciesToCryId(u16 species);
+u16 GetCryIdBySpecies(u16 species);
 void DrawSpindaSpots(u32 species, u32 personality, u8 *dest, bool8 isFrontPic);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 bool8 GetPlayerFlankId(void);
@@ -866,5 +869,7 @@ const u8 *GetMoveAnimationScript(u16 moveId);
 u16 KantoNumToSpecies(u16 kantoNum);
 u16 HoennNumToSpecies(u16 hoennNum);
 u8 CopyMonToPC(struct Pokemon *mon);
+void UpdateDaysPassedSinceFormChange(u16 days);
+void TrySetDayLimitToFormChange(struct Pokemon *mon);
 
 #endif // GUARD_POKEMON_H

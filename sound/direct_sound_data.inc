@@ -302,6 +302,7 @@ DirectSoundWaveData_sc88pro_accordion::
 DirectSoundWaveData_unused_sc55_tom::
 	.incbin "sound/direct_sound_samples/unused_sc55_tom.bin"
 
+.if P_CRIES_ENABLED == TRUE
 .if P_FAMILY_BULBASAUR == TRUE
 	.align 2
 Cry_Bulbasaur::
@@ -6069,6 +6070,7 @@ Cry_Terapagos::
 Cry_Pecharunt::
 	.incbin "sound/direct_sound_samples/cries/pecharunt.bin"
 .endif @ P_FAMILY_PECHARUNT
+.endif @ P_CRIES_ENABLED
 
 
 	.align 2

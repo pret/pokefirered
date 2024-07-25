@@ -2,8 +2,10 @@
 #include "gba/m4a_internal.h"
 #include "gflib.h"
 #include "battle.h"
-#include "quest_log.h"
 #include "m4a.h"
+#include "pokemon.h"
+#include "quest_log.h"
+#include "constants/cries.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "task.h"
@@ -39,8 +41,6 @@ extern struct MusicPlayerInfo gMPlayInfo_SE2;
 extern struct MusicPlayerInfo gMPlayInfo_SE3;
 extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable_Reverse[];
-
-extern u16 SpeciesToCryId(u16);
 
 static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);
@@ -459,8 +459,8 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     // It creates 4 sets of 128 mini cry tables.
     // If you wish to expand pokemon, you need to
     // append new cases to the switch.
-    species = SpeciesToCryId(species);
-    if (species != 0)
+    species = GetCryIdBySpecies(species);
+    if (species != CRY_NONE)
     {
         species--;
         gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[species] : &gCryTable[species]);

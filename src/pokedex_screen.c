@@ -3038,7 +3038,11 @@ void DexScreen_DrawMonFootprint(u8 windowId, u16 species, u8 x, u8 y)
 
     if (!(DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE)))
         return;
+#if P_FOOTPRINTS
     footprint = (u8 *)(gSpeciesInfo[species].footprint);
+#else
+    return;
+#endif
     buffer = gDecompressionBuffer;
     tileIdx = 0;
 

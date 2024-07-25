@@ -7,6 +7,7 @@
 #include "help_system.h"
 #include "evolution_scene.h"
 #include "evolution_graphics.h"
+#include "item.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "m4a.h"
@@ -547,12 +548,19 @@ static void CB2_TradeEvolutionSceneUpdate(void)
 static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
 {
     u32 data = 0;
+    #if P_SHEDINJA_BALL >= GEN_4
+        u16 ball = ITEM_POKE_BALL;
+    #endif
     const struct Evolution *evolutions = GetSpeciesEvolutions(preEvoSpecies);
     if (evolutions == NULL)
     {
         return;
     }
-    if (evolutions[0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < PARTY_SIZE)
+    if (evolutions[0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < PARTY_SIZE
+    #if P_SHEDINJA_BALL >= GEN_4
+        && (CheckBagHasItem(ball, 1))
+    #endif
+    )
     {
         s32 i;
         struct Pokemon* shedinja = &gPlayerParty[gPlayerPartyCount];
@@ -563,6 +571,10 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_HELD_ITEM, &data);
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_MARKINGS, &data);
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_ENCRYPT_SEPARATOR, &data);
+    #if P_SHEDINJA_BALL >= GEN_4
+        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_POKEBALL, &ball);
+        RemoveBagItem(ball, 1);
+    #endif
 
         for (i = MON_DATA_COOL_RIBBON; i < MON_DATA_COOL_RIBBON + CONTEST_CATEGORIES_COUNT; i++)
             SetMonData(&gPlayerParty[gPlayerPartyCount], i, &data);

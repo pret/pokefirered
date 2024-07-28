@@ -72,6 +72,9 @@ bool8 CanWalkAwayToCancelMsgBox(void);
 void SetWalkingIntoSignVars(void);
 bool8 IsMsgBoxWalkawayDisabled(void);
 
+// srccmd.h
+void SetMovingNpcId(u16 npcId);
+
 extern const u8 *gRamScriptRetAddr;
 extern u8 gWalkAwayFromSignInhibitTimer;
 

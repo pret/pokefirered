@@ -1741,6 +1741,17 @@
 	.2byte \quantity
 	.endm
 
+	@ Sets the selected object to the id of the currently approaching trainer.
+	.macro selectapproachingtrainer
+	.byte 0xd5
+	.endm
+
+	@ Freezes all objects immediately except the player and the approaching trainers.
+	@ The player and trainers are frozen once their movement is finished.
+	.macro lockfortrainer
+	.byte 0xd6
+	.endm
+
 	.macro _dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req argv:vararg
 	.byte 0xe3
 	.2byte \left

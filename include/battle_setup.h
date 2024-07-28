@@ -1,8 +1,8 @@
 #ifndef GUARD_BATTLE_SETUP_H
 #define GUARD_BATTLE_SETUP_H
 
-#include "global.h"
-
+extern u16 gTrainerBattleOpponent_A;
+extern u16 gTrainerBattleOpponent_B;
 extern u16 gPartnerTrainerId;
 
 void StartWildBattle(void);
@@ -17,8 +17,11 @@ void StartGroudonKyogreBattle(void);
 void StartRegiBattle(void);
 u8 BattleSetup_GetTerrainId(void);
 u8 BattleSetup_GetBattleTowerBattleTransition(void);
+void ResetTrainerOpponentIds(void);
 const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data);
 void ConfigureAndSetUpOneTrainerBattle(u8 trainerEventObjId, const u8 *trainerScript);
+void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript);
+void SetUpTwoTrainersBattle(void);
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data);
 void SetUpTrainerMovement(void);
 u8 GetTrainerBattleMode(void);
@@ -27,7 +30,7 @@ void SetBattledTrainerFlag(void);
 bool8 HasTrainerBeenFought(u16 trainerId);
 void SetTrainerFlag(u16 trainerId);
 void ClearTrainerFlag(u16 trainerId);
-void StartTrainerBattle(void);
+void BattleSetup_StartTrainerBattle(void);
 void StartRematchBattle(void);
 void ShowTrainerIntroSpeech(void);
 const u8 *BattleSetup_GetScriptAddrAfterBattle(void);
@@ -35,6 +38,7 @@ const u8 *BattleSetup_GetTrainerPostBattleScript(void);
 void ShowTrainerCantBattleSpeech(void);
 void PlayTrainerEncounterMusic(void);
 const u8 *GetTrainerALoseText(void);
+const u8 *GetTrainerBLoseText(void);
 const u8 *GetTrainerWonSpeech(void);
 void BattleSetup_StartTrainerBattle_Debug(void);
 

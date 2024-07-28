@@ -546,13 +546,8 @@ u8 DoPokeballSendOutAnimation(u32 battler, s16 pan, u8 kindOfThrow)
 
 static void Task_DoPokeballSendOutAnim(u8 taskId)
 {
-    u16 throwCaseId;
-    u8 battlerId;
-    u16 itemId, ballId;
-    u8 ballSpriteId;
-    bool8 notSendOut = FALSE;
-    s16 x, y;
-    u32 gender;
+    u32 throwCaseId, battlerId, ballId, ballSpriteId;
+    bool32 notSendOut = FALSE;
     u32 throwXoffset = (B_ENEMY_THROW_BALLS >= GEN_6) ? 24 : 0;
     s32 throwYoffset = (B_ENEMY_THROW_BALLS >= GEN_6) ? -16 : 24;
 
@@ -564,20 +559,8 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
     throwCaseId = gTasks[taskId].tThrowId;
     battlerId = gTasks[taskId].tBattler;
-
-    if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
-        itemId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
-    else
-        itemId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_POKEBALL);
-
-    ballId = ItemIdToBallId(itemId);
+    ballId = ItemIdToBallId(GetBattlerPokeballItemId(battlerId));
     LoadBallGfx(ballId);
-
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        gender = gLinkPlayers[GetBattlerMultiplayerId(battlerId)].gender;
-    else
-        gender = gSaveBlock2Ptr->playerGender;
-
     ballSpriteId = CreateSprite(&gBallSpriteTemplates[ballId], 32, 80, 29);
     gSprites[ballSpriteId].data[0] = 0x80;
     gSprites[ballSpriteId].data[1] = 0;
@@ -585,22 +568,15 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
 
     switch (throwCaseId)
     {
-    case POKEBALL_PLAYER_SENDOUT:
-        if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
-        {
-            x = 32;
-            y = 64;
-        }
-        else
-        {
-            gender = !!gender; // something unknown got optimized out
-            x = 48;
-            y = 70;
-        }
-
+    case POKEBALL_PLAYER_SLIDEIN: // don't actually send out, trigger the slide-in animation
         gBattlerTarget = battlerId;
-        gSprites[ballSpriteId].x = x;
-        gSprites[ballSpriteId].y = y;
+        gSprites[ballSpriteId].callback = HandleBallAnimEnd;
+        gSprites[ballSpriteId].invisible = TRUE;
+        break;
+    case POKEBALL_PLAYER_SENDOUT:
+        gBattlerTarget = battlerId;
+        gSprites[ballSpriteId].x = (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE) ? 32 : 48;
+        gSprites[ballSpriteId].y = (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE) ? 64 : 70;
         gSprites[ballSpriteId].callback = SpriteCB_MonSendOut_1;
         DoPokeballSendOutSoundEffect(battlerId);
         break;
@@ -1084,6 +1060,13 @@ static void HandleBallAnimEnd(struct Sprite *sprite)
 {
     bool8 affineAnimEnded = FALSE;
     u8 battlerId = sprite->sBattler;
+
+    if (sprite->data[7] == POKEBALL_PLAYER_SLIDEIN)
+    {
+        gSprites[gBattlerSpriteIds[sprite->sBattler]].callback = SpriteCB_PlayerMonSlideIn;
+        AnimateSprite(&gSprites[gBattlerSpriteIds[sprite->sBattler]]);
+        gSprites[gBattlerSpriteIds[sprite->sBattler]].data[1] = 0x1000;
+    }
 
     gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
     if (sprite->animEnded)

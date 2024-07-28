@@ -90,6 +90,9 @@ s32 GetAnimBgAttribute(u8 bgId, u8 attributeId)
     return 0;
 }
 
+#define tState data[0]
+#define tTerrain data[1]
+
 void HandleIntroSlide(u8 terrain)
 {
     u8 taskId;
@@ -107,8 +110,9 @@ void HandleIntroSlide(u8 terrain)
     {
         taskId = CreateTask(sBattleIntroSlideFuncs[terrain], 0);
     }
-    gTasks[taskId].data[0] = 0;
-    gTasks[taskId].data[1] = terrain;
+
+    gTasks[taskId].tState = 0;
+    gTasks[taskId].tTerrain = terrain;
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].data[3] = 0;
     gTasks[taskId].data[4] = 0;

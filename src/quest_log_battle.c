@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_setup.h"
 #include "link.h"
 #include "overworld.h"
 #include "quest_log.h"

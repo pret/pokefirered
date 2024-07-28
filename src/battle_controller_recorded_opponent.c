@@ -396,7 +396,10 @@ static void RecordedOpponentHandleDrawTrainerPic(u32 battler)
 
         if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         {
-            trainerPicId = GetBattleTowerTrainerFrontSpriteId();
+            if (battler == B_POSITION_OPPONENT_LEFT)
+                trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_A);
+            else
+                trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_B);
         }
         else
         {

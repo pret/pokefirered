@@ -64,7 +64,6 @@ void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear);
 u8 RecordedBattle_GetBattlerAction(u32 actionType, u8 battlerId);
 u8 RecordedBattle_BufferNewBattlerData(u8 *dst);
 void RecordedBattle_RecordAllBattlerData(u8 *data);
-bool32 MoveRecordedBattleToSaveData(void);
 void SetPartiesFromRecordedSave(struct RecordedBattleSave *src);
 void SetVariablesForRecordedBattle(struct RecordedBattleSave *);
 void RecordedBattle_SaveParties(void);

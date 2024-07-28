@@ -367,24 +367,30 @@ static const struct SubspriteTable sStatusSummaryBar_SubspriteTable_Exit[] = {
 
 static const u16 sBattleInterface_Unused[] = INCBIN_U16("graphics/battle_interface/unused.4bpp");
 
-static const struct CompressedSpriteSheet sPartySummaryBarSpriteSheets[] = {
-    {gBattleInterface_PartySummaryBar_Gfx, 16 * TILE_SIZE_4BPP, TAG_PARTY_SUMMARY_BAR_PLAYER_TILE},
-    {gBattleInterface_PartySummaryBar_Gfx, 16 * TILE_SIZE_4BPP, TAG_PARTY_SUMMARY_BAR_OPPONENT_TILE}
+static const struct CompressedSpriteSheet sStatusSummaryBarSpriteSheet =
+{
+    .data = gBattleInterface_PartySummaryBar_Gfx,
+    .size = 16 * TILE_SIZE_4BPP,
+    .tag = TAG_PARTY_SUMMARY_BAR_TILE,
 };
 
-static const struct SpritePalette sPartySummaryBarSpritePals[] = {
-    {gBattleInterface_Healthbox_Pal, TAG_PARTY_SUMMARY_BAR_PLAYER_PAL},
-    {gBattleInterface_Healthbox_Pal, TAG_PARTY_SUMMARY_BAR_OPPONENT_PAL}
+static const struct SpritePalette sPartySummaryBarSpritePals =
+{
+    .data = gBattleInterface_Healthbox_Pal, 
+    .tag = TAG_PARTY_SUMMARY_BAR_PAL,
 };
 
-static const struct SpritePalette sPartySummaryBallSpritePals[] = {
-    {gBattleInterface_Healthbar_Pal, TAG_PARTY_SUMMARY_BALL_PLAYER_PAL},
-    {gBattleInterface_Healthbar_Pal, TAG_PARTY_SUMMARY_BALL_OPPONENT_PAL}
+static const struct SpritePalette sPartySummaryBallSpritePals =
+{
+    .data = gBattleInterface_Healthbar_Pal,
+    .tag = TAG_PARTY_SUMMARY_BALL_PAL,
 };
 
-static const struct SpriteSheet sPartySummaryBallSpriteSheets[] = {
-    {gBattleInterface_Gfx + B_INTERFACE_GFX_BALL_PARTY_SUMMARY, 4 * TILE_SIZE_4BPP, TAG_PARTY_SUMMARY_BALL_PLAYER_TILE},
-    {gBattleInterface_Gfx + B_INTERFACE_GFX_BALL_PARTY_SUMMARY, 4 * TILE_SIZE_4BPP, TAG_PARTY_SUMMARY_BALL_OPPONENT_TILE}
+static const struct SpriteSheet sPartySummaryBallSpriteSheets =
+{
+    .data = gBattleInterface_Gfx + B_INTERFACE_GFX_BALL_PARTY_SUMMARY,
+    .size = 4 * TILE_SIZE_4BPP,
+    .tag = TAG_PARTY_SUMMARY_BALL_TILE,
 };
 
 // Unused
@@ -402,15 +408,15 @@ static const struct OamData sOamData_PartySummaryBall = {
 
 static const struct SpriteTemplate sPartySummaryBarSpriteTemplates[] = {
     {
-        .tileTag = TAG_PARTY_SUMMARY_BAR_PLAYER_TILE,
-        .paletteTag = TAG_PARTY_SUMMARY_BAR_PLAYER_PAL,
+        .tileTag = TAG_PARTY_SUMMARY_BAR_TILE,
+        .paletteTag = TAG_PARTY_SUMMARY_BAR_PAL,
         .oam = &sOamData_Healthbox,
         .anims = gDummySpriteAnimTable,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCB_PartySummaryBar
     }, {
-        .tileTag = TAG_PARTY_SUMMARY_BAR_OPPONENT_TILE,
-        .paletteTag = TAG_PARTY_SUMMARY_BAR_OPPONENT_PAL,
+        .tileTag = TAG_PARTY_SUMMARY_BAR_TILE,
+        .paletteTag = TAG_PARTY_SUMMARY_BAR_PAL,
         .oam = &sOamData_Healthbox,
         .anims = gDummySpriteAnimTable,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -420,15 +426,15 @@ static const struct SpriteTemplate sPartySummaryBarSpriteTemplates[] = {
 
 static const struct SpriteTemplate sPartySummaryBallSpriteTemplates[] = {
     {
-        .tileTag = TAG_PARTY_SUMMARY_BALL_PLAYER_TILE,
-        .paletteTag = TAG_PARTY_SUMMARY_BALL_PLAYER_PAL,
+        .tileTag = TAG_PARTY_SUMMARY_BALL_TILE,
+        .paletteTag = TAG_PARTY_SUMMARY_BALL_PAL,
         .oam = &sOamData_PartySummaryBall,
         .anims = gDummySpriteAnimTable,
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCB_PartySummaryBall_OnBattleStart
     }, {
-        .tileTag = TAG_PARTY_SUMMARY_BALL_OPPONENT_TILE,
-        .paletteTag = TAG_PARTY_SUMMARY_BALL_OPPONENT_PAL,
+        .tileTag = TAG_PARTY_SUMMARY_BALL_TILE,
+        .paletteTag = TAG_PARTY_SUMMARY_BALL_PAL,
         .oam = &sOamData_PartySummaryBall,
         .anims = gDummySpriteAnimTable,
         .affineAnims = gDummySpriteAffineAnimTable,
@@ -1125,10 +1131,10 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
             nValidMons++;
     }
 
-    LoadCompressedSpriteSheetUsingHeap(&sPartySummaryBarSpriteSheets[isOpponent]);
-    LoadSpriteSheet(&sPartySummaryBallSpriteSheets[isOpponent]);
-    LoadSpritePalette(&sPartySummaryBarSpritePals[isOpponent]);
-    LoadSpritePalette(&sPartySummaryBallSpritePals[isOpponent]);
+    LoadCompressedSpriteSheetUsingHeap(&sStatusSummaryBarSpriteSheet);
+    LoadSpriteSheet(&sPartySummaryBallSpriteSheets);
+    LoadSpritePalette(&sPartySummaryBarSpritePals);
+    LoadSpritePalette(&sPartySummaryBallSpritePals);
 
     summaryBarSpriteId = CreateSprite(&sPartySummaryBarSpriteTemplates[isOpponent], x, y, 10);
     SetSubspriteTables(&gSprites[summaryBarSpriteId], sStatusSummaryBar_SubspriteTable_Enter);

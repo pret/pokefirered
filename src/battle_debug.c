@@ -697,8 +697,7 @@ void CB2_BattleDebugMenu(void)
         break;
     case 3:
         LoadPalette(sBgColor, 0, 2);
-        // LoadPalette(GetOverworldTextboxPalettePtr(), 0xf0, 16); // TODO: debug
-        LoadPalette(GetTextWindowPalette(2), 0xC0, 0x20);
+        LoadPalette(GetTextWindowPalette(2), 0xf0, 16);
         gMain.state++;
         break;
     case 4:
@@ -1213,6 +1212,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
         {
             data->currentSecondaryListItemId = listItemId;
             data->modifyWindowId = AddWindow(&sModifyWindowTemplate);
+            ClearStdWindowAndFrameToTransparent(data->modifyWindowId, TRUE); // FRLG change: fixes number background
             PutWindowTilemap(data->modifyWindowId);
             CopyWindowToVram(data->modifyWindowId, COPYWIN_FULL);
             SetUpModifyArrows(data);

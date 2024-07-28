@@ -1828,7 +1828,7 @@ u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *objectEventTemplate)
     return TrySpawnObjectEventTemplate(objectEventTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
 }
 
-int SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation)
+u32 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation)
 {
     struct ObjectEventTemplate objectEventTemplate;
 
@@ -10278,6 +10278,19 @@ void FreezeObjectEventsExceptOne(u8 noFreeze)
     {
         if (i != noFreeze && gObjectEvents[i].active && i != gPlayerAvatar.objectEventId)
             FreezeObjectEvent(&gObjectEvents[i]);
+    }
+}
+
+// Used to freeze other objects except two trainers approaching for battle
+void FreezeObjectEventsExceptTwo(u8 objectEventId1, u8 objectEventId2)
+{
+    u8 i;
+
+    for(i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if(i != objectEventId1 && i != objectEventId2 &&
+            gObjectEvents[i].active && i != gPlayerAvatar.objectEventId)
+                FreezeObjectEvent(&gObjectEvents[i]);
     }
 }
 

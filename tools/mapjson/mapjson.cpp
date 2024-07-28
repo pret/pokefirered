@@ -156,7 +156,10 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
     if (version == "firered")
         text << "\t.byte " << json_to_string(map_data, "floor_number") << "\n";
 
-     text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n\n";
+    text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n";
+
+    text << "\t.byte " << json_to_string(map_data, "rockSmashItemChance") << "\n";
+    text << "\t.byte " << json_to_string(map_data, "rockSmashItemList") << "\n\n";
 
     return text.str();
 }

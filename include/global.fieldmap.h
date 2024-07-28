@@ -207,6 +207,8 @@ struct MapHeader
                bool8 showMapName:6; // the last 5 bits are unused
     /* 0x1A */ s8 floorNum;
     /* 0x1B */ u8 battleType;
+    /* 0x1C */ u8 rockSmashItemChance;
+    /* 0x1D */ u8 rockSmashItemList;
 };
 
 struct ObjectEvent

@@ -92,6 +92,13 @@ EventScript_UseRockSmash::
 	end
 
 EventScript_RockSmashNoEncounter::
+	special RockSmashGetItem
+	goto_if_eq VAR_RESULT, TRUE, EventScript_RockSmashGetItem
+	releaseall
+	end
+
+EventScript_RockSmashGetItem::
+	giveitem VAR_0x8003, 1
 	releaseall
 	end
 

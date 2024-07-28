@@ -180,6 +180,7 @@ gSpecials::
 	def_special Script_UpdateTrainerFanClubGameClear
 	def_special Script_TryGainNewFanFromCounter
 	def_special RockSmashWildEncounter
+	def_special RockSmashGetItem
 	def_special NullFieldSpecial  @ Gabby and Ty specials
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial

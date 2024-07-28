@@ -8,14 +8,15 @@
 #include "random.h"
 #include "battle.h"
 #include "battle_ai_main.h"
+#include "battle_ai_switch_items.h"
 #include "battle_ai_util.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
-#include "battle_message.h"
-#include "battle_interface.h"
-#include "battle_tower.h"
 #include "battle_gfx_sfx_util.h"
-#include "battle_ai_switch_items.h"
+#include "battle_interface.h"
+#include "battle_message.h"
+#include "battle_setup.h"
+#include "battle_tower.h"
 #include "battle_z_move.h"
 #include "link.h"
 #include "party_menu.h"
@@ -136,32 +137,60 @@ static void Intro_DelayAndEnd(u32 battler)
 
 static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
 {
-    bool8 var = FALSE;
+    bool8 healthboxAnimDone = FALSE;
+    bool8 twoMons;
 
-    if (!IsDoubleBattle() || ((IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI))))
+    twoMons = TwoOpponentIntroMons(battler);
+    if (!twoMons || ((twoMons && (gBattleTypeFlags & BATTLE_TYPE_MULTI) && !BATTLE_TWO_VS_ONE_OPPONENT) || (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)))
     {
         if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy)
-            var = TRUE;
+            healthboxAnimDone = TRUE;
+        twoMons = FALSE;
     }
-    else if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy
-          && gSprites[gHealthboxSpriteIds[BATTLE_PARTNER(battler)]].callback == gSprites[gHealthboxSpriteIds[battler]].callback)
+    else
     {
-        var = TRUE;
+        if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy
+         && gSprites[gHealthboxSpriteIds[BATTLE_PARTNER(battler)]].callback == SpriteCallbackDummy)
+            healthboxAnimDone = TRUE;
+        twoMons = TRUE;
     }
-    if (IsCryPlayingOrClearCrySongs())
-        var = FALSE;
-    if (var && gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim && gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim)
+
+    if (healthboxAnimDone)
     {
-        gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = FALSE;
-        gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
-        gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim = FALSE;
-        gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim = FALSE;
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
-        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            m4aMPlayContinue(&gMPlayInfo_BGM);
+        if (twoMons == TRUE)
+        {
+            if (gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim
+             && gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim)
+            {
+                gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = FALSE;
+                gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
+                gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim = FALSE;
+                gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim = FALSE;
+                FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
+                FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+            }
+            else
+                return;
+        }
+        else if (gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim)
+        {
+            if (GetBattlerPosition(battler) == 3)
+            {
+                if (!gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim
+                 && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim)
+                {
+                    FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
+                    FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+                }
+                else
+                    return;
+            }
+                gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = FALSE;
+                gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
+        }
         else
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+            return;
+
         gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 3;
         gBattlerControllerFuncs[battler] = Intro_DelayAndEnd;
     }
@@ -169,30 +198,93 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
 
 static void Intro_TryShinyAnimShowHealthbox(u32 battler)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim && !gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive)
+    bool32 bgmRestored = FALSE;
+    bool32 battlerAnimsDone = FALSE;
+    bool32 twoMons;
+
+    if (!gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim
+     && !gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive
+     && !gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim)
         TryShinyAnimation(battler, &gEnemyParty[gBattlerPartyIndexes[battler]]);
-    if (!gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].ballAnimActive)
+
+    twoMons = TwoOpponentIntroMons(battler);
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+     && (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) || BATTLE_TWO_VS_ONE_OPPONENT)
+     && twoMons
+     && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim
+     && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].ballAnimActive
+     && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim)
         TryShinyAnimation(BATTLE_PARTNER(battler), &gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]);
+
     if (!gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].ballAnimActive)
     {
-        if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        if (!gBattleSpritesDataPtr->healthBoxesData[battler].healthboxSlideInStarted)
+        {
+            if (twoMons && (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) || BATTLE_TWO_VS_ONE_OPPONENT))
+            {
+                UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(battler)], &gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]], HEALTHBOX_ALL);
+                StartHealthboxSlideIn(BATTLE_PARTNER(battler));
+                SetHealthboxSpriteVisible(gHealthboxSpriteIds[BATTLE_PARTNER(battler)]);
+            }
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gEnemyParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
+            StartHealthboxSlideIn(battler);
+            SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
+        }
+        gBattleSpritesDataPtr->healthBoxesData[battler].healthboxSlideInStarted = TRUE;
+    }
+
+    if (!gBattleSpritesDataPtr->healthBoxesData[battler].waitForCry
+        && gBattleSpritesDataPtr->healthBoxesData[battler].healthboxSlideInStarted
+        && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].waitForCry
+        && !IsCryPlayingOrClearCrySongs())
+    {
+        if (!gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored)
+        {
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
+            {
+                if (GetBattlerPosition(battler) == 1)
+                    m4aMPlayContinue(&gMPlayInfo_BGM);
+            }
+            else
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+        }
+        gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored = TRUE;
+        bgmRestored = TRUE;
+    }
+
+    if (!twoMons || (twoMons && gBattleTypeFlags & BATTLE_TYPE_MULTI && !BATTLE_TWO_VS_ONE_OPPONENT))
+    {
+        if (gSprites[gBattleControllerData[battler]].callback == SpriteCallbackDummy
+            && gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
+        {
+            battlerAnimsDone = TRUE;
+        }
+    }
+    else
+    {
+        if (gSprites[gBattleControllerData[battler]].callback == SpriteCallbackDummy
+            && gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy
+            && gSprites[gBattleControllerData[BATTLE_PARTNER(battler)]].callback == SpriteCallbackDummy
+            && gSprites[gBattlerSpriteIds[BATTLE_PARTNER(battler)]].callback == SpriteCallbackDummy)
+        {
+            battlerAnimsDone = TRUE;
+        }
+    }
+
+    if (bgmRestored && battlerAnimsDone)
+    {
+        if (twoMons && (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) || BATTLE_TWO_VS_ONE_OPPONENT))
         {
             DestroySprite(&gSprites[gBattleControllerData[BATTLE_PARTNER(battler)]]);
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(battler)],
-                                     &gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]],
-                                     HEALTHBOX_ALL);
-            StartHealthboxSlideIn(BATTLE_PARTNER(battler));
-            SetHealthboxSpriteVisible(gHealthboxSpriteIds[BATTLE_PARTNER(battler)]);
             SetBattlerShadowSpriteCallback(BATTLE_PARTNER(battler), GetMonData(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]], MON_DATA_SPECIES));
         }
+
         DestroySprite(&gSprites[gBattleControllerData[battler]]);
-        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler],
-                                 &gEnemyParty[gBattlerPartyIndexes[battler]],
-                                 HEALTHBOX_ALL);
-        StartHealthboxSlideIn(battler);
-        SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
         SetBattlerShadowSpriteCallback(battler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES));
         gBattleSpritesDataPtr->animationData->introAnimActive = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored = FALSE;
+        gBattleSpritesDataPtr->healthBoxesData[battler].healthboxSlideInStarted = FALSE;
+
         gBattlerControllerFuncs[battler] = Intro_WaitForShinyAnimAndHealthbox;
     }
 }
@@ -298,11 +390,30 @@ static u32 OpponentGetTrainerPicId(u32 battlerId) // TODO: trainer refactoring
     u32 trainerPicId;
 
     if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-        trainerPicId = GetBattleTowerTrainerFrontSpriteId();
+    {
+        if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
+        {
+            if (battlerId == 1)
+                trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_A);
+            else
+                trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_B);
+        }
+        else
+        {
+            trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_A);
+        }
+    }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
         trainerPicId = GetTrainerTowerTrainerFrontSpriteId();
     else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
         trainerPicId = GetEreaderTrainerFrontSpriteId();
+    else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+    {
+        if (battlerId != 1)
+            trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_B);
+        else
+            trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
+    }
     else
         trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
 
@@ -336,7 +447,7 @@ static void OpponentHandleTrainerSlide(u32 battler)
 }
 
 static void OpponentHandleTrainerSlideBack(u32 battler)
-{    
+{
     BtlController_HandleTrainerSlideBack(battler, 35, FALSE);
 }
 

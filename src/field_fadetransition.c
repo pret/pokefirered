@@ -351,7 +351,7 @@ static void Task_ExitDoor(u8 taskId)
         }
         break;
     case 9:
-        if (FieldFadeTransitionBackgroundEffectIsFinished() && walkrun_is_standing_still() && !FieldIsDoorAnimationRunning() && !FuncIsActiveTask(Task_BarnDoorWipe))
+        if (FieldFadeTransitionBackgroundEffectIsFinished() && IsPlayerStandingStill() && !FieldIsDoorAnimationRunning() && !FuncIsActiveTask(Task_BarnDoorWipe))
         {
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)]);
             task->data[0] = 4;
@@ -367,7 +367,7 @@ static void Task_ExitDoor(u8 taskId)
         }
         break;
     case 2:
-        if (walkrun_is_standing_still())
+        if (IsPlayerStandingStill())
         {
             task->data[1] = FieldAnimateDoorClose(*x, *y);
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)]);
@@ -409,7 +409,7 @@ static void Task_ExitNonAnimDoor(u8 taskId)
         }
         break;
     case 2:
-        if (walkrun_is_standing_still())
+        if (IsPlayerStandingStill())
         {
             task->data[0] = 3;
         }
@@ -747,7 +747,7 @@ static void Task_DoorWarp(u8 taskId)
         }
         break;
     case 2:
-        if (walkrun_is_standing_still())
+        if (IsPlayerStandingStill())
         {
             task->data[1] = FieldAnimateDoorClose(*xp, *yp - 1);
             ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)]);

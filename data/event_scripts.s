@@ -886,10 +886,6 @@ Text_GiveNicknameToReceivedMon::
 	.string "Want to give a nickname to the\n"
 	.string "{STR_VAR_2} you received?$"
 
-gText_PkmnFainted3::
-	.string "{STR_VAR_1} fainted…\p"
-	.string "$"
-
 Text_WelcomeWantToHealPkmn::
 	.string "Welcome to our POKéMON CENTER!\p"
 	.string "Would you like me to heal your\n"

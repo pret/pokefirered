@@ -3178,12 +3178,22 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 }
                 break;
             case B_TXT_TRAINER2_LOSE_TEXT:
-                GetTrainerTowerOpponentLoseText(gStringVar4, 1);
-                toCpy = gStringVar4;
+                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
+                {
+                    GetTrainerTowerOpponentLoseText(gStringVar4, 1);
+                    toCpy = gStringVar4;
+                }
+                else
+                {
+                    toCpy = GetTrainerBLoseText();
+                }
                 break;
             case B_TXT_TRAINER2_WIN_TEXT:
-                GetTrainerTowerOpponentWinText(gStringVar4, 1);
-                toCpy = gStringVar4;
+                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
+                {
+                    GetTrainerTowerOpponentWinText(gStringVar4, 1);
+                    toCpy = gStringVar4;
+                }
                 break;
             case B_TXT_26: // ?
                 HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler)
@@ -3240,7 +3250,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                     // TODO: implement partner trainers?
                     // if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
                     //     toCpy = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
-                    toCpy = gTrainerClasses[TRAINER_CLASS_NONE].name;
+                    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+                        toCpy = gTrainerClasses[gPartnerTrainerId].name;
                     break;
                 case B_POSITION_OPPONENT_LEFT:
                     toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
@@ -3267,7 +3278,6 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 break;
             case B_TXT_DEF_NAME: // target name
                 HANDLE_NICKNAME_STRING_CASE(gBattlerTarget)
-                // GetBattlerNick(gBattlerTarget, text);
                 toCpy = text;
                 break;
             case B_TXT_DEF_TEAM1:
@@ -3284,12 +3294,15 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 break;
             }
 
-            // missing if (toCpy != NULL) check
-            while (*toCpy != EOS)
+            if (toCpy != NULL)
             {
-                dst[dstId++] = *toCpy;
-                toCpy++;
+                while (*toCpy != EOS)
+                {
+                    dst[dstId++] = *toCpy;
+                    toCpy++;
+                }
             }
+
             if (*src == B_TXT_TRAINER1_LOSE_TEXT || *src == B_TXT_TRAINER1_WIN_TEXT
              || *src == B_TXT_TRAINER2_LOSE_TEXT || *src == B_TXT_TRAINER2_WIN_TEXT)
             {

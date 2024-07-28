@@ -29,7 +29,7 @@ extern const u16 gBattleTowerBannedSpecies[];
 
 void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *);
 void ValidateEReaderTrainer(void);
-u8 GetBattleTowerTrainerFrontSpriteId(void);
+u8 GetBattleTowerTrainerFrontSpriteId(u16 trainerId);
 u8 GetEreaderTrainerFrontSpriteId(void);
 void CopyEReaderTrainerName5(u8 *dest);
 void GetBattleTowerTrainerName(u8 *text);

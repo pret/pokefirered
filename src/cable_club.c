@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "battle.h"
 #include "battle_records.h"
+#include "battle_setup.h"
 #include "cable_club.h"
 #include "event_data.h"
 #include "event_scripts.h"

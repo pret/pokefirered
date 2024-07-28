@@ -1,14 +1,15 @@
 #include "global.h"
-#include "task.h"
-#include "field_player_avatar.h"
-#include "event_object_movement.h"
-#include "script_movement.h"
 #include "event_data.h"
+#include "event_object_movement.h"
+#include "field_player_avatar.h"
+#include "script_movement.h"
+#include "task.h"
+#include "trainer_see.h"
 #include "constants/event_objects.h"
 
-bool8 walkrun_is_standing_still(void)
+bool8 IsPlayerStandingStill(void)
 {
-    if (gPlayerAvatar.tileTransitionState == 1)
+    if (gPlayerAvatar.tileTransitionState == T_TILE_TRANSITION)
         return FALSE;
     else
         return TRUE;
@@ -16,7 +17,7 @@ bool8 walkrun_is_standing_still(void)
 
 void Task_WaitPlayerStopMoving(u8 taskId)
 {
-    if (walkrun_is_standing_still())
+    if (IsPlayerStandingStill())
     {
         HandleEnforcedLookDirectionOnPlayerStopMoving();
         DestroyTask(taskId);
@@ -44,7 +45,7 @@ void Task_WaitPlayerAndTargetNPCStopMoving(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if (task->data[0] == 0 && walkrun_is_standing_still() == TRUE)
+    if (task->data[0] == 0 && IsPlayerStandingStill() == TRUE)
     {
         HandleEnforcedLookDirectionOnPlayerStopMoving();
         task->data[0] = 1;
@@ -112,3 +113,78 @@ void Script_ClearHeldMovement(void)
 {
     ObjectEventClearHeldMovementIfActive(&gObjectEvents[gSelectedObjectEvent]);
 }
+
+#define tPlayerFrozen data[0]
+#define tObjectFrozen data[1]
+#define tObjectId     data[2]
+
+// Freeze designated object and player once their movement is finished
+static void Task_FreezeObjectAndPlayer(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    u8 objectEventId = task->tObjectId;
+
+    if (!task->tPlayerFrozen && IsPlayerStandingStill() == TRUE)
+    {
+        HandleEnforcedLookDirectionOnPlayerStopMoving();
+        task->tPlayerFrozen = TRUE;
+    }
+    if (!task->tObjectFrozen && !gObjectEvents[objectEventId].singleMovementActive)
+    {
+        FreezeObjectEvent(&gObjectEvents[objectEventId]);
+        task->tObjectFrozen = TRUE;
+    }
+    if (task->tPlayerFrozen && task->tObjectFrozen)
+        DestroyTask(taskId);
+}
+
+// Freeze all objects immediately except the player and the approaching trainers.
+// The approaching trainers and player are frozen once their movement is finished
+void FreezeForApproachingTrainers(void)
+{
+    u8 trainerObjectId1, trainerObjectId2, taskId;
+    struct ObjectEvent *followerObj = GetFollowerObject();
+    trainerObjectId1 = GetChosenApproachingTrainerObjectEventId(0);
+
+    if (gNoOfApproachingTrainers == 2)
+    {
+        // Get second trainer, freeze all other objects
+        trainerObjectId2 = GetChosenApproachingTrainerObjectEventId(1);
+        FreezeObjectEventsExceptTwo(trainerObjectId1, trainerObjectId2);
+
+        // Start task to freeze trainer 1 (and player) after movement
+        taskId = CreateTask(Task_FreezeObjectAndPlayer, 80);
+        gTasks[taskId].tObjectId = trainerObjectId1;
+        if (!gObjectEvents[trainerObjectId1].singleMovementActive)
+        {
+            FreezeObjectEvent(&gObjectEvents[trainerObjectId1]);
+            gTasks[taskId].tObjectFrozen = TRUE;
+        }
+
+        // Start task to freeze trainer 2 after movement
+        taskId = CreateTask(Task_FreezeObjectAndPlayer, 81);
+        gTasks[taskId].tObjectId = trainerObjectId2;
+        if (!gObjectEvents[trainerObjectId2].singleMovementActive)
+        {
+            FreezeObjectEvent(&gObjectEvents[trainerObjectId2]);
+            gTasks[taskId].tObjectFrozen = TRUE;
+        }
+    }
+    else
+    {
+        FreezeObjectEventsExceptOne(trainerObjectId1);
+        taskId = CreateTask(Task_FreezeObjectAndPlayer, 80);
+        gTasks[taskId].tObjectId = trainerObjectId1;
+        if (!gObjectEvents[trainerObjectId1].singleMovementActive)
+        {
+            FreezeObjectEvent(&gObjectEvents[trainerObjectId1]);
+            gTasks[taskId].tObjectFrozen = TRUE;
+        }
+    }
+    if (followerObj) // Unfreeze follower so it can move behind player
+        UnfreezeObjectEvent(followerObj);
+}
+
+#undef tPlayerFrozen
+#undef tObjectFrozen
+#undef tObjectId

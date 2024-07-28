@@ -8,6 +8,7 @@
 #include "data.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_setup.h"
 #include "item.h"
 #include "event_data.h"
 #include "util.h"
@@ -3255,18 +3256,41 @@ u8 GetMonsStateToDoubles(void)
     s32 i;
     CalculatePlayerPartyCount();
 
+    if (OW_DOUBLE_APPROACH_WITH_ONE_MON)
+        return PLAYER_HAS_TWO_USABLE_MONS;
+
     if (gPlayerPartyCount == 1)
         return gPlayerPartyCount; // PLAYER_HAS_ONE_MON
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        // FRLG changed the order of these checks, but there's no point to doing that
-        // because of the requirement of all 3 of these checks.
-        if (GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
-         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
-         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
+         && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE)
             aliveCount++;
     }
+
+    return (aliveCount > 1) ? PLAYER_HAS_TWO_USABLE_MONS : PLAYER_HAS_ONE_USABLE_MON;
+}
+
+u8 GetMonsStateToDoubles_2(void)
+{
+    s32 aliveCount = 0;
+    s32 i;
+
+    if (OW_DOUBLE_APPROACH_WITH_ONE_MON)
+        return PLAYER_HAS_TWO_USABLE_MONS;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL);
+        if (species != SPECIES_EGG && species != SPECIES_NONE
+         && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
+            aliveCount++;
+    }
+
+    if (aliveCount == 1)
+        return PLAYER_HAS_ONE_MON; // may have more than one, but only one is alive
 
     return (aliveCount > 1) ? PLAYER_HAS_TWO_USABLE_MONS : PLAYER_HAS_ONE_USABLE_MON;
 }

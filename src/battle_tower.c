@@ -404,20 +404,19 @@ void SetEReaderTrainerGfxId(void)
     SetBattleTowerTrainerGfxId(BATTLE_TOWER_EREADER_TRAINER_ID);
 }
 
-u8 GetBattleTowerTrainerFrontSpriteId(void)
+u8 GetBattleTowerTrainerFrontSpriteId(u16 trainerId)
 {
-    if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
+    if (trainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
     {
         return gFacilityClassToPicIndex[gSaveBlock2Ptr->battleTower.ereaderTrainer.trainerClass];
     }
-    else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
+    else if (trainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
     {
-        // TODO: fix?
-        return gFacilityClassToPicIndex[sBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].trainerClass];
+        return gFacilityClassToPicIndex[sBattleTowerTrainers[trainerId].trainerClass];
     }
     else
     {
-        return gFacilityClassToPicIndex[gSaveBlock2Ptr->battleTower.records[gSaveBlock2Ptr->battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].trainerClass];
+        return gFacilityClassToPicIndex[gSaveBlock2Ptr->battleTower.records[trainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].trainerClass];
     }
 }
 

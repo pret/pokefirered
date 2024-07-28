@@ -456,4 +456,5 @@ gSpecials::
 	def_special GetSprayId
 	def_special GetLastUsedSprayType
 	def_special TrySkyBattle
+	def_special TryPrepareSecondApproachingTrainer
 gSpecialsEnd::

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "battle.h"
+#include "battle_setup.h"
 #include "link.h"
 #include "menu.h"
 #include "new_menu_helpers.h"

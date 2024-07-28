@@ -23,6 +23,7 @@
 #include "field_message_box.h"
 #include "new_menu_helpers.h"
 #include "script_menu.h"
+#include "trainer_see.h"
 #include "data.h"
 #include "field_specials.h"
 #include "constants/items.h"
@@ -1887,7 +1888,7 @@ bool8 ScrCmd_trainerbattle(struct ScriptContext * ctx)
 
 bool8 ScrCmd_dotrainerbattle(struct ScriptContext * ctx)
 {
-    StartTrainerBattle();
+    BattleSetup_StartTrainerBattle();
     return TRUE;
 }
 
@@ -2235,6 +2236,29 @@ bool8 ScrCmd_normalmsg(struct ScriptContext * ctx)
     return FALSE;
 }
 
+bool8 ScrCmd_selectapproachingtrainer(struct ScriptContext *ctx)
+{
+    gSelectedObjectEvent = GetCurrentApproachingTrainerObjectEventId();
+    return FALSE;
+}
+
+bool8 ScrCmd_lockfortrainer(struct ScriptContext *ctx)
+{
+    if (IsUpdateLinkStateCBActive())
+    {
+        return FALSE;
+    }
+    else
+    {
+        if (gObjectEvents[gSelectedObjectEvent].active)
+        {
+            FreezeForApproachingTrainers();
+            SetupNativeScript(ctx, IsFreezePlayerFinished);
+        }
+        return TRUE;
+    }
+}
+
 // This command will set a Pokémon's modernFatefulEncounter bit; there is no similar command to clear it.
 bool8 ScrCmd_setmonmodernfatefulencounter(struct ScriptContext * ctx)
 {
@@ -2261,4 +2285,9 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext * ctx)
     if (partyIndex < PARTY_SIZE)
         SetMonData(&gPlayerParty[partyIndex], MON_DATA_MET_LOCATION, &location);
     return FALSE;
+}
+
+void SetMovingNpcId(u16 npcId)
+{
+    sMovingNpcId = npcId;
 }

@@ -23,12 +23,23 @@
 	.align 2
 
 BattleScript_LocalTrainerBattleWon::
+	jumpifbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalTwoTrainersDefeated
 	printstring STRINGID_PLAYERDEFEATEDTRAINER1
+	goto BattleScript_LocalBattleWonLoseTexts
+BattleScript_LocalTwoTrainersDefeated::
+	printstring STRINGID_TWOENEMIESDEFEATED
+BattleScript_LocalBattleWonLoseTexts::
 	trainerslidein BS_ATTACKER
 	waitstate
 	printstring STRINGID_TRAINER1LOSETEXT
-	getmoneyreward
+	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalTrainerBattleWonGotMoney
+	trainerslideout B_POSITION_OPPONENT_LEFT
+	waitstate
+	trainerslidein BS_FAINTED
+	waitstate
+	printstring STRINGID_TRAINER2LOSETEXT
 BattleScript_LocalTrainerBattleWonGotMoney::
+	getmoneyreward
 	printstring STRINGID_PLAYERGOTMONEY
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_PayDayMoneyAndPickUpItems::

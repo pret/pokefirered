@@ -1,6 +1,10 @@
 #ifndef GUARD_EVENT_OBJECT_MOVEMENT_H
 #define GUARD_EVENT_OBJECT_MOVEMENT_H
 
+#if OW_POKEMON_OBJECT_EVENTS == FALSE && OW_FOLLOWERS_ENABLED == TRUE
+#error "OW_POKEMON_OBJECT_EVENTS needs to be TRUE in order for OW_FOLLOWERS_ENABLED to work."
+#endif
+
 // Palette slots for overworld NPCs.
 // The same standard set of palettes for overworld objects are normally always loaded at the same
 // time while walking around the overworld. The only exceptions are the palettes for the player and
@@ -108,7 +112,7 @@ struct ObjectEvent *GetFollowerObject(void);
 u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevation, u8 direction);
 u8 CreateObjectGraphicsSprite(u16 graphicsId, SpriteCallback callback, s16 x, s16 y, u8 subpriority);
 u8 TrySpawnObjectEvent(u8 localId, u8 mapNum, u8 mapGroup);
-int SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation);
+u32 SpawnSpecialObjectEventParameterized(u16 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation);
 u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *);
 void CameraObjectReset1(void);
 void CameraObjectReset2(void);
@@ -178,6 +182,7 @@ void FreezeObjectEvents(void);
 bool8 FreezeObjectEvent(struct ObjectEvent *);
 void UnfreezeObjectEvent(struct ObjectEvent *);
 void FreezeObjectEventsExceptOne(u8 objEventId);
+void FreezeObjectEventsExceptTwo(u8 objectEventId1, u8 objectEventId2);
 void SetVirtualObjectGraphics(u8 virtualObjId, u16 graphicsId);
 void SetVirtualObjectInvisibility(u8 virtualObjId, bool32 invisible);
 bool32 IsVirtualObjectInvisible(u8 virtualObjId);

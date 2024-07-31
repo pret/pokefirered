@@ -1992,9 +1992,21 @@ static void Task_OnBPressed(u8 taskId)
     case 0:
         if (IsMonBeingMoved())
         {
-            PlaySE(SE_FAILURE);
-            PrintStorageMessage(MSG_HOLDING_POKE);
-            gStorage->state = 1;
+            if (OW_PC_PRESS_B < GEN_4)
+            {
+                PlaySE(SE_FAILURE);
+                PrintStorageMessage(MSG_HOLDING_POKE);
+                gStorage->state = 1;
+            }
+            else if (CanPlaceMon())
+            {
+                PlaySE(SE_SELECT);
+                SetPokeStorageTask(Task_PlaceMon);
+            }
+            else
+            {
+                SetPokeStorageTask(Task_PokeStorageMain);
+            }
         }
         else if (IsActiveItemMoving())
             SetPokeStorageTask(Task_CloseBoxWhileHoldingItem);

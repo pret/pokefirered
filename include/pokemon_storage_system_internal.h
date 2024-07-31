@@ -16,9 +16,19 @@
 
 enum
 {
+#if OW_PC_MOVE_ORDER <= GEN_3
     OPTION_WITHDRAW,
     OPTION_DEPOSIT,
     OPTION_MOVE_MONS,
+#elif OW_PC_MOVE_ORDER >= GEN_4 && OW_PC_MOVE_ORDER <= GEN_6_XY
+    OPTION_DEPOSIT,
+    OPTION_WITHDRAW,
+    OPTION_MOVE_MONS,
+#elif OW_PC_MOVE_ORDER >= GEN_7
+    OPTION_MOVE_MONS,
+    OPTION_DEPOSIT,
+    OPTION_WITHDRAW,
+#endif
     OPTION_MOVE_ITEMS,
     OPTION_EXIT,
     OPTIONS_COUNT
@@ -494,6 +504,7 @@ void UnkUtil_Init(struct UnkUtil *arg0, struct UnkUtilData *arg1, u32 arg2);
 void UnkUtil_Run(void);
 void AddMenu(void);
 bool8 CanMovePartyMon(void);
+bool8 CanPlaceMon(void);
 bool8 CanShiftMon(void);
 bool8 DoMonPlaceChange(void);
 bool8 DoWallpaperGfxChange(void);

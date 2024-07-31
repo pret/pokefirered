@@ -624,6 +624,9 @@ static void SetMovedMonData(u8 boxId, u8 position)
 
 static void SetPlacedMonData(u8 boxId, u8 position)
 {
+    if (OW_PC_HEAL <= GEN_7)
+        HealPokemon(&gStorage->movingMon);
+    
     if (boxId == TOTAL_BOXES_COUNT)
         gPlayerParty[position] = gStorage->movingMon;
     else
@@ -716,6 +719,7 @@ bool8 TryHideReleaseMon(void)
 void ReleaseMon(void)
 {
     u8 boxId;
+    u16 item = ITEM_NONE;
 
     DestroyReleaseMonIcon();
     if (sIsMonBeingMoved)
@@ -723,11 +727,21 @@ void ReleaseMon(void)
     else
     {
         if (sCursorArea == CURSOR_AREA_IN_PARTY)
+        {
             boxId = TOTAL_BOXES_COUNT;
+            if (OW_PC_RELEASE_ITEM >= GEN_8)
+                item = GetMonData(&gPlayerParty[sCursorPosition], MON_DATA_HELD_ITEM);
+        }
         else
+        {
             boxId = StorageGetCurrentBox();
+            if (OW_PC_RELEASE_ITEM >= GEN_8)
+                item = GetBoxMonDataAt(boxId, sCursorPosition, MON_DATA_HELD_ITEM);
+        }
 
         PurgeMonOrBoxMon(boxId, sCursorPosition);
+        if (item != ITEM_NONE)
+            AddBagItem(item, 1);
     }
     TrySetDisplayMonData();
 }
@@ -944,6 +958,20 @@ bool8 CanMovePartyMon(void)
         return TRUE;
     else
         return FALSE;
+}
+
+bool8 CanPlaceMon(void)
+{
+    if (sIsMonBeingMoved)
+    {
+        if (sCursorArea == CURSOR_AREA_IN_PARTY && GetMonData(&gPlayerParty[sCursorPosition], MON_DATA_SPECIES) == SPECIES_NONE)
+            return TRUE;
+        else if (sCursorArea == CURSOR_AREA_IN_BOX && GetBoxMonDataAt(StorageGetCurrentBox(), sCursorPosition, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+            return TRUE;
+        else
+            return FALSE;
+    }
+    return FALSE;
 }
 
 bool8 CanShiftMon(void)

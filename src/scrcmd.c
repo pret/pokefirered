@@ -61,6 +61,8 @@ static EWRAM_DATA u16 sMovingNpcMapGroup = 0;
 static EWRAM_DATA u16 sMovingNpcMapNum = 0;
 static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
+static bool8 sIsScriptedWildDouble;
+
 struct ScriptContext * sQuestLogScriptContextPtr;
 u8 gSelectedObjectEvent;
 
@@ -1928,20 +1930,38 @@ bool8 ScrCmd_cleartrainerflag(struct ScriptContext * ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setwildbattle(struct ScriptContext * ctx)
+bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 {
     u16 species = ScriptReadHalfword(ctx);
     u8 level = ScriptReadByte(ctx);
     u16 item = ScriptReadHalfword(ctx);
+    u16 species2 = ScriptReadHalfword(ctx);
+    u8 level2 = ScriptReadByte(ctx);
+    u16 item2 = ScriptReadHalfword(ctx);
 
-    CreateScriptedWildMon(species, level, item);
+    if(species2 == SPECIES_NONE)
+    {
+        CreateScriptedWildMon(species, level, item);
+        sIsScriptedWildDouble = FALSE;
+    }
+    else
+    {
+        CreateScriptedDoubleWildMon(species, level, item, species2, level2, item2);
+        sIsScriptedWildDouble = TRUE;
+    }
+
     return FALSE;
 }
 
 bool8 ScrCmd_dowildbattle(struct ScriptContext * ctx)
 {
-    StartScriptedWildBattle();
+    if (sIsScriptedWildDouble == FALSE)
+        BattleSetup_StartScriptedWildBattle();
+    else
+        BattleSetup_StartScriptedDoubleWildBattle();
+
     ScriptContext_Stop();
+
     return TRUE;
 }
 

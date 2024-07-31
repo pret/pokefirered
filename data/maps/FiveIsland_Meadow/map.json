@@ -146,5 +146,10 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "FiveIsland_Meadow_EventScript_WarehouseDoor"
     }
-  ]
+  ],
+  "rockItemList1": false,
+  "rockItemList2": false,
+  "rockItemList3": false,
+  "rockItemList4": false,
+  "rockItemList5": false
 }

@@ -472,6 +472,9 @@
       "script": "OneIsland_KindleRoad_EventScript_RouteSign"
     }
   ],
-  "rockSmashItemChance": 25,
-  "rockSmashItemList": 3
+  "rockItemList1": false,
+  "rockItemList2": false,
+  "rockItemList3": true,
+  "rockItemList4": false,
+  "rockItemList5": false
 }

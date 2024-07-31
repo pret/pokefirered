@@ -431,5 +431,10 @@
       "script": "SaffronCity_EventScript_TrainerFanClubSign"
     }
   ],
-  "connections_no_include": true
+  "connections_no_include": true,
+  "rockItemList1": false,
+  "rockItemList2": false,
+  "rockItemList3": false,
+  "rockItemList4": false,
+  "rockItemList5": false
 }

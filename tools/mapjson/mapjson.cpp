@@ -151,15 +151,17 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
              << "allow_cycling=" << json_to_string(map_data, "allow_cycling") << ", "
              << "allow_escaping=" << json_to_string(map_data, "allow_escaping") << ", "
              << "allow_running=" << json_to_string(map_data, "allow_running") << ", "
-             << "show_map_name=" << json_to_string(map_data, "show_map_name") << "\n";
+             << "show_map_name=" << json_to_string(map_data, "show_map_name") << ", "
+             << "rockList1=" << json_to_string(map_data, "rockItemList1") << ", "
+             << "rockList2=" << json_to_string(map_data, "rockItemList2") << ", "
+             << "rockList3=" << json_to_string(map_data, "rockItemList3") << ", "
+             << "rockList4=" << json_to_string(map_data, "rockItemList4") << ", "
+             << "rockList5=" << json_to_string(map_data, "rockItemList5") << "\n";
 
     if (version == "firered")
         text << "\t.byte " << json_to_string(map_data, "floor_number") << "\n";
 
-    text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n";
-
-    text << "\t.byte " << json_to_string(map_data, "rockSmashItemChance") << "\n";
-    text << "\t.byte " << json_to_string(map_data, "rockSmashItemList") << "\n\n";
+    text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n\n";
 
     return text.str();
 }

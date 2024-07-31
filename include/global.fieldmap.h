@@ -204,11 +204,16 @@ struct MapHeader
     /* 0x18 */ bool8 bikingAllowed;
     /* 0x19 */ bool8 allowEscaping:1; // Escape Rope and Dig
                bool8 allowRunning:1;
-               bool8 showMapName:6; // the last 5 bits are unused
+               bool8 showMapName:1; // the last 5 bits are unused
+               bool8 rockList1:1;
+               bool8 rockList2:1;
+               bool8 rockList3:1;
+               bool8 rockList4:1;
+               bool8 rockList5:1;
     /* 0x1A */ s8 floorNum;
     /* 0x1B */ u8 battleType;
-    /* 0x1C */ u8 rockSmashItemChance;
-    /* 0x1D */ u8 rockSmashItemList;
+    //* 0x1C */ u8 rockSmashItemChance;
+    //* 0x1D */ u8 rockSmashItemList;
 };
 
 struct ObjectEvent

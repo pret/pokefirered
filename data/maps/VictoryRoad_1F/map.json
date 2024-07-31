@@ -162,5 +162,10 @@
       "quantity": 1,
       "underfoot": false
     }
-  ]
+  ],
+  "rockItemList1": false,
+  "rockItemList2": false,
+  "rockItemList3": false,
+  "rockItemList4": false,
+  "rockItemList5": false
 }

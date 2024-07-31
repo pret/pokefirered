@@ -65,5 +65,10 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route12_FishingHouse_EventScript_MagikarpRecordSign"
     }
-  ]
+  ],
+  "rockItemList1": false,
+  "rockItemList2": false,
+  "rockItemList3": false,
+  "rockItemList4": false,
+  "rockItemList5": false
 }

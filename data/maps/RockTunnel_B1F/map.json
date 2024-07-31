@@ -416,6 +416,9 @@
   "bg_events": [
 
   ],
-  "rockSmashItemChance": 30,
-  "rockSmashItemList": 1
+  "rockItemList1": true,
+  "rockItemList2": false,
+  "rockItemList3": false,
+  "rockItemList4": false,
+  "rockItemList5": false
 }

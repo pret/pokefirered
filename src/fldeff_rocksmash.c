@@ -205,7 +205,7 @@ void RockSmashGetItem(void)
     u16 listIdx;
     
     // get chance of receiving an item after breaking a rock from MapHeader
-    if (randInt < header->rockSmashItemChance)
+    if (randInt < 30)
     {
         // determine which item is to be chosen
         randInt = Random() % 100;
@@ -227,26 +227,20 @@ void RockSmashGetItem(void)
             listIdx = 8;
         
         // choose item from respective list
-        switch (header->rockSmashItemList)
-        {
-            case 5:
-                gSpecialVar_0x8003 = itemList5[listIdx];
-                break;
-            case 4:
-                gSpecialVar_0x8003 = itemList4[listIdx];
-                break;
-            case 3:
-                gSpecialVar_0x8003 = itemList3[listIdx];
-                break;
-            case 2:
-                gSpecialVar_0x8003 = itemList2[listIdx];
-                break;
-            case 1:
-            default:
-                gSpecialVar_0x8003 = itemList1[listIdx];
-                break;
-        }
         gSpecialVar_Result = TRUE;
+        if (header->rockList1)
+            gSpecialVar_0x8003 = itemList1[listIdx];
+        else if (header->rockList2)
+            gSpecialVar_0x8003 = itemList2[listIdx];
+        else if (header->rockList3)
+            gSpecialVar_0x8003 = itemList3[listIdx];
+        else if (header->rockList4)
+            gSpecialVar_0x8003 = itemList4[listIdx];
+        else if (header->rockList5)
+            gSpecialVar_0x8003 = itemList5[listIdx];
+        else {
+            gSpecialVar_Result = FALSE;
+        }        
     }
     else
         gSpecialVar_Result = FALSE;

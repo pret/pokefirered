@@ -282,5 +282,10 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "FourIsland_EventScript_LoreleisHouseSign"
     }
-  ]
+  ],
+  "rockItemList1": false,
+  "rockItemList2": false,
+  "rockItemList3": false,
+  "rockItemList4": true,
+  "rockItemList5": false
 }

@@ -135,5 +135,10 @@
   ],
   "bg_events": [
 
-  ]
+  ],
+  "rockItemList1": false,
+  "rockItemList2": true,
+  "rockItemList3": false,
+  "rockItemList4": false,
+  "rockItemList5": false
 }

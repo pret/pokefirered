@@ -201,5 +201,10 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "CeladonCity_DepartmentStore_3F_EventScript_Poster"
     }
-  ]
+  ],
+  "rockItemList1": false,
+  "rockItemList2": false,
+  "rockItemList3": false,
+  "rockItemList4": false,
+  "rockItemList5": false
 }

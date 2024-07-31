@@ -1,8 +1,10 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
 
-#include "global.h"
-#include "constants/battle_string_ids.h"
+#define TEXT_BUFF_ARRAY_COUNT   max(16, \
+                                max(MOVE_NAME_LENGTH + 2, /* +2 to hold the "!" and EOS. */ \
+                                max(POKEMON_NAME_LENGTH + 1, \
+                                    ABILITY_NAME_LENGTH + 1)))
 
 // for 0xFD
 
@@ -216,8 +218,24 @@ struct BattleMsgData
     u8 hpScale;
     u8 itemEffectBattler;
     u8 moveType;
-    u16 abilities[4];
-    u8 textBuffs[3][0x10];
+    u16 abilities[MAX_BATTLERS_COUNT];
+    u8 textBuffs[3][TEXT_BUFF_ARRAY_COUNT];
+};
+
+enum
+{
+    TRAINER_SLIDE_LAST_SWITCHIN,
+    TRAINER_SLIDE_LAST_LOW_HP,
+    TRAINER_SLIDE_FIRST_DOWN,
+    TRAINER_SLIDE_LAST_HALF_HP,
+    TRAINER_SLIDE_FIRST_CRITICAL_HIT,
+    TRAINER_SLIDE_FIRST_SUPER_EFFECTIVE_HIT,
+    TRAINER_SLIDE_FIRST_STAB_MOVE,
+    TRAINER_SLIDE_PLAYER_MON_UNAFFECTED,
+    TRAINER_SLIDE_MEGA_EVOLUTION,
+    TRAINER_SLIDE_Z_MOVE,
+    TRAINER_SLIDE_BEFORE_FIRST_TURN,
+    TRAINER_SLIDE_DYNAMAX,
 };
 
 void BufferStringBattle(u32 battler, u16 stringID);
@@ -228,11 +246,10 @@ void SetPpNumbersPaletteInMoveSelection(u32 battler);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId_flags);
 bool8 BattleStringShouldBeColored(u16);
+u32 ShouldDoTrainerSlide(u32 battler, u32 which); // return 1 for TrainerA, 2 forTrainerB
 void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
-
-#define TEXT_BUFF_ARRAY_COUNT   16
 
 extern u8 gDisplayedStringBattle[478];
 extern u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT];

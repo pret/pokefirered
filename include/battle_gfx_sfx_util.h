@@ -15,7 +15,6 @@ void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId);
 void DecompressTrainerBackPic(u16 backPicId, u8 battler);
 void DecompressTrainerBackPalette(u16 a1, u8 a2);
 void BattleGfxSfxDummy3(u8 gender);
-void FreeTrainerFrontPicPaletteAndTile(u16 frontPicId);
 void FreeTrainerFrontPicPalette(u16 frontPicId);
 bool8 BattleLoadAllHealthBoxesGfx(u8 state);
 void LoadBattleBarGfx(u8 arg0);

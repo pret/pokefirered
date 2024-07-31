@@ -115,7 +115,6 @@ struct FollowerMessagePool
     u16 length;
 };
 
-extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
@@ -128,6 +127,7 @@ extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 
 extern const union AnimCmd *const gAnims_MonPic[];
+extern const union AnimCmd *const sAnims_Trainer[];
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[];
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];
 extern const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[];

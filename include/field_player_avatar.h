@@ -5,7 +5,7 @@
 
 void ClearPlayerAvatarInfo(void);
 void SetPlayerAvatarExtraStateTransition(u16 graphicsId, u8 extras);
-u8 GetPlayerAvatarGenderByGraphicsId(u8);
+u8 GetPlayerAvatarGenderByGraphicsId(u16 graphicsId);
 bool8 TestPlayerAvatarFlags(u8);
 void PlayerGetDestCoords(s16 *, s16 *);
 u8 GetPlayerFacingDirection(void);

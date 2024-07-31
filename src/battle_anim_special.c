@@ -14,6 +14,7 @@
 #include "task.h"
 #include "trig.h"
 #include "util.h"
+#include "constants/battle_string_ids.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/songs.h"

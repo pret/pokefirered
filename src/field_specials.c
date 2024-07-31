@@ -8,6 +8,7 @@
 #include "script.h"
 #include "field_player_avatar.h"
 #include "overworld.h"
+#include "field_player_avatar.h"
 #include "field_message_box.h"
 #include "event_data.h"
 #include "strings.h"
@@ -1583,9 +1584,31 @@ void ResetContextNpcTextColor(void)
     gSpecialVar_TextColor = NPC_TEXT_COLOR_DEFAULT;
 }
 
+static u8 GetFollowerGender(void)
+{
+    struct Pokemon *firstLiveMon = GetFirstLiveMon();
+    if (firstLiveMon == NULL)
+        return MON_GENDERLESS;
+    return GetMonGender(firstLiveMon);
+}
+
+static u8 GetFollowerTextColor(void)
+{
+    switch (GetFollowerGender())
+    {
+    case MON_FEMALE:
+        return NPC_TEXT_COLOR_FEMALE;
+    case MON_MALE:
+        return NPC_TEXT_COLOR_MALE;
+    case MON_GENDERLESS:
+    default:
+        return NPC_TEXT_COLOR_NEUTRAL;
+    }
+}
+
 u8 ContextNpcGetTextColor(void)
 {
-    u8 gfxId;
+    u16 gfxId;
     if (gSpecialVar_TextColor != NPC_TEXT_COLOR_DEFAULT)
     {
         // A text color has been specified, use that
@@ -1600,7 +1623,18 @@ u8 ContextNpcGetTextColor(void)
     {
         // An object is selected and no color has been specified.
         // Use the text color normally associated with this object's sprite.
-        gfxId = gObjectEvents[gSelectedObjectEvent].graphicsId;
+        struct MapPosition position;
+        u8 objEventId;
+        GetInFrontOfPlayerPosition(&position);
+        objEventId = GetObjectEventIdByPosition(position.x, position.y, position.elevation);
+        if (objEventId < OBJECT_EVENTS_COUNT)
+            gfxId = gObjectEvents[objEventId].graphicsId;
+        else
+            gfxId = gObjectEvents[gSelectedObjectEvent].graphicsId;
+        
+        if (gfxId >= OBJ_EVENT_GFX_MON_BASE)
+            return GetFollowerTextColor();
+
         if (gfxId >= OBJ_EVENT_GFX_VAR_0)
             gfxId = VarGetObjectEventGraphicsId(gfxId - OBJ_EVENT_GFX_VAR_0);
         return GetColorFromTextColorTable(gfxId);

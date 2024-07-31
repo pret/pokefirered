@@ -681,18 +681,18 @@ void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes)
 
     for (i = 0; i < gBattlersCount; i++)
     {
-        u8 healthboxSpriteId = gHealthboxSpriteIds[i];
-        u8 healthboxOtherSpriteId = gSprites[gHealthboxSpriteIds[i]].sHealthboxOtherSpriteId;
+        u8 healthboxLeftSpriteId = gHealthboxSpriteIds[i];
+        u8 healthboxRightSpriteId = gSprites[gHealthboxSpriteIds[i]].oam.affineParam;
         u8 healthbarSpriteId = gSprites[gHealthboxSpriteIds[i]].sHealthBarSpriteId;
 
-        gSprites[healthboxSpriteId].oam.priority = priority;
-        gSprites[healthboxOtherSpriteId].oam.priority = priority;
+        gSprites[healthboxLeftSpriteId].oam.priority = priority;
+        gSprites[healthboxRightSpriteId].oam.priority = priority;
         gSprites[healthbarSpriteId].oam.priority = priority;
 
-        UpdateIndicatorOamPriority(healthbarSpriteId, priority);
+        UpdateIndicatorOamPriority(healthboxLeftSpriteId, priority);
 
         if (B_HIDE_HEALTHBOX_IN_ANIMS == TRUE && hideHPBoxes && IsBattlerAlive(i))
-            TryToggleHealboxVisibility(priority, healthboxSpriteId, healthboxOtherSpriteId, healthbarSpriteId);
+            TryToggleHealboxVisibility(priority, healthboxLeftSpriteId, healthboxRightSpriteId, healthbarSpriteId);
     }
 }
 

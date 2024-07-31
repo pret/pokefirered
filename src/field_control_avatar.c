@@ -42,7 +42,6 @@
 static void QuestLogOverrideJoyVars(struct FieldInput *input, u16 *newKeys, u16 *heldKeys);
 static void Task_QuestLogPlayback_OpenStartMenu(u8 taskId);
 static void GetPlayerPosition(struct MapPosition * position);
-static void GetInFrontOfPlayerPosition(struct MapPosition * position);
 static u16 GetPlayerCurMetatileBehavior(void);
 static bool8 TryStartInteractionScript(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
 static const u8 *GetInteractionScript(struct MapPosition * position, u8 metatileBehavior, u8 playerDirection);
@@ -371,7 +370,7 @@ static void GetPlayerPosition(struct MapPosition *position)
     position->elevation = PlayerGetElevation();
 }
 
-static void GetInFrontOfPlayerPosition(struct MapPosition *position)
+void GetInFrontOfPlayerPosition(struct MapPosition *position)
 {
     s16 x, y;
 

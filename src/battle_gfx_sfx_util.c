@@ -21,6 +21,7 @@ static bool8 ShouldAnimBeDoneRegardlessOfSubstitute(u8 animId);
 static void Task_ClearBitWhenBattleTableAnimDone(u8 taskId);
 static void Task_ClearBitWhenSpecialAnimDone(u8 taskId);
 static void ClearSpritesBattlerHealthboxAnimData(void);
+static void SpriteCB_TrainerSlideVertical(struct Sprite *sprite);
 
 static const struct CompressedSpriteSheet sSpriteSheet_SinglesPlayerHealthbox =
 {
@@ -154,15 +155,32 @@ static void UNUSED DoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 arg1)
     AnimateSprite(sprite);
 }
 
+#define sSpeedX data[0]
+
 void SpriteCB_TrainerSlideIn(struct Sprite *sprite)
 {
     if (!(gIntroSlideFlags & 1))
     {
-        sprite->x2 += sprite->data[0];
+        sprite->x2 += sprite->sSpeedX;
         if (sprite->x2 == 0)
-            sprite->callback = SpriteCallbackDummy;
+        {
+            if (sprite->y2 != 0)
+                sprite->callback = SpriteCB_TrainerSlideVertical;
+            else
+                sprite->callback = SpriteCallbackDummy;
+        }
     }
 }
+
+// Slide up to 0 if necessary (used by multi battle intro)
+static void SpriteCB_TrainerSlideVertical(struct Sprite *sprite)
+{
+    sprite->y2 -= 2;
+    if (sprite->y2 == 0)
+        sprite->callback = SpriteCallbackDummy;
+}
+
+#undef sSpeedX
 
 void InitAndLaunchChosenStatusAnimation(u32 battler, bool8 isStatus2, u32 status)
 {
@@ -408,17 +426,12 @@ void DecompressGhostFrontPic(struct Pokemon *unused, u8 battlerId)
     Free(buffer);
 }
 
-void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId)
+void DecompressTrainerFrontPic(u16 frontPicId, u8 battler)
 {
-    struct SpriteSheet sheet;
-    u8 position = GetBattlerPosition(battlerId);
+    u8 position = GetBattlerPosition(battler);
 
     DecompressPicFromTable(&gTrainerFrontPicTable[frontPicId], gMonSpritesGfxPtr->sprites[position]);
-    sheet.data = gMonSpritesGfxPtr->sprites[position];
-    sheet.size = gTrainerFrontPicTable[frontPicId].size;
-    sheet.tag = gTrainerFrontPicTable[frontPicId].tag;
-    LoadSpriteSheet(&sheet);
-    LoadCompressedSpritePaletteUsingHeap(&gTrainerFrontPicPaletteTable[frontPicId]);
+    LoadCompressedSpritePalette(&gTrainerFrontPicPaletteTable[frontPicId]);
 }
 
 void DecompressTrainerBackPic(u16 backPicId, u8 battler)
@@ -437,12 +450,6 @@ void DecompressTrainerBackPalette(u16 index, u8 palette)
 
 void BattleGfxSfxDummy3(u8 gender)
 {
-}
-
-void FreeTrainerFrontPicPaletteAndTile(u16 frontPicId)
-{
-    FreeSpritePaletteByTag(gTrainerFrontPicPaletteTable[frontPicId].tag);
-    FreeSpriteTilesByTag(gTrainerFrontPicTable[frontPicId].tag);
 }
 
 void FreeTrainerFrontPicPalette(u16 frontPicId)

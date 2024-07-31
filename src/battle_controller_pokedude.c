@@ -17,6 +17,7 @@
 #include "battle_message.h"
 #include "reshow_battle_screen.h"
 #include "teachy_tv.h"
+#include "constants/battle_string_ids.h"
 #include "constants/songs.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"

@@ -20,6 +20,7 @@
 #include "recorded_battle.h"
 #include "test_runner.h"
 #include "constants/abilities.h"
+#include "constants/battle_string_ids.h"
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/trainers.h"
@@ -2864,7 +2865,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 {
     u32 dstId = 0; // if they used dstId, why not use srcId as well?
     const u8 *toCpy = NULL;
-    u8 text[30];
+    // This buffer may hold either the name of a trainer, Pokémon, or item.
+    u8 text[max(max(max(32, TRAINER_NAME_LENGTH + 1), POKEMON_NAME_LENGTH + 1), ITEM_NAME_LENGTH)];
     u8 multiplayerId;
     s32 i;
 
@@ -3953,6 +3955,244 @@ u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp)
             return 1;
         if (currentPp > maxPp / 2)
             return 3;
+    }
+
+    return 0;
+}
+
+struct TrainerSlide
+{
+    u16 trainerId;
+    bool8 isFrontierTrainer;
+    const u8 *msgLastSwitchIn;
+    const u8 *msgLastLowHp;
+    const u8 *msgFirstDown;
+    const u8 *msgLastHalfHp;
+    const u8 *msgFirstCriticalHit;
+    const u8 *msgFirstSuperEffectiveHit;
+    const u8 *msgFirstSTABMove;
+    const u8 *msgPlayerMonUnaffected;
+    const u8 *msgMegaEvolution;
+    const u8 *msgZMove;
+    const u8 *msgBeforeFirstTurn;
+    const u8 *msgDynamax;
+};
+
+static const struct TrainerSlide sTrainerSlides[] =
+{
+    /* Put any trainer slide-in messages inside this array.
+    Example:
+    {
+        .trainerId = TRAINER_WALLY_VR_2,
+        .isFrontierTrainer = FALSE,
+        .msgLastSwitchIn = sText_AarghAlmostHadIt,
+        .msgLastLowHp = sText_BoxIsFull,
+        .msgFirstDown = sText_123Poof,
+        .msgLastHalfHp = sText_ShootSoClose,
+        .msgFirstCriticalHit = sText_CriticalHit,
+        .msgFirstSuperEffectiveHit = sText_SuperEffective,
+        .msgFirstSTABMove = sText_ABoosted,
+        .msgPlayerMonUnaffected = sText_ButNoEffect,
+        .msgMegaEvolution = sText_PowderExplodes,
+        .msgZMove = sText_Electromagnetism,
+        .msgBeforeFirstTurn = sText_GravityIntensified,
+        .msgDynamax = sText_TargetWokeUp,
+    },
+    */
+};
+
+static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)
+{
+    u32 i, count = 0;
+
+    for (i = firstId; i < lastId; i++)
+    {
+        u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG, NULL);
+        if (species != SPECIES_NONE
+            && species != SPECIES_EGG
+            && (!onlyAlive || GetMonData(&gEnemyParty[i], MON_DATA_HP, NULL)))
+            count++;
+    }
+
+    return count;
+}
+
+enum
+{
+    LESS_THAN,
+    EQUAL,
+    GREATER_THAN,
+    LESS_THAN_OR_EQUAL,
+    GREATER_THAN_OR_EQUAL,
+    NOT_EQUAL,
+};
+
+u32 BattlerHPPercentage(u32 battler, u32 operation, u32 threshold)
+{
+    switch (operation)
+    {
+    case LESS_THAN:
+        return gBattleMons[battler].hp < (gBattleMons[battler].maxHP / threshold);
+    case EQUAL:
+        return gBattleMons[battler].hp == (gBattleMons[battler].maxHP / threshold);
+    case GREATER_THAN:
+        return gBattleMons[battler].hp > (gBattleMons[battler].maxHP / threshold);
+    case LESS_THAN_OR_EQUAL:
+        return gBattleMons[battler].hp <= (gBattleMons[battler].maxHP / threshold);
+    case GREATER_THAN_OR_EQUAL:
+        return gBattleMons[battler].hp >= (gBattleMons[battler].maxHP / threshold);
+    case NOT_EQUAL:
+    default:
+        return gBattleMons[battler].hp != (gBattleMons[battler].maxHP / threshold);
+    }
+}
+
+u32 ShouldDoTrainerSlide(u32 battler, u32 which)
+{
+    u32 i, firstId, lastId, trainerId, retValue = 1;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) || GetBattlerSide(battler) != B_SIDE_OPPONENT)
+        return 0;
+
+    // Two opponents support.
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+    {
+        if (gBattlerPartyIndexes[battler] >= 3)
+        {
+            firstId = 3, lastId = PARTY_SIZE;
+            trainerId = gTrainerBattleOpponent_B;
+            retValue = 2;
+        }
+        else
+        {
+            firstId = 0, lastId = 3;
+            trainerId = gTrainerBattleOpponent_A;
+        }
+    }
+    else
+    {
+        firstId = 0, lastId = PARTY_SIZE;
+        trainerId = gTrainerBattleOpponent_A;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(sTrainerSlides); i++)
+    {
+        if (trainerId == sTrainerSlides[i].trainerId
+            && (((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && sTrainerSlides[i].isFrontierTrainer)
+                || (!(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && !sTrainerSlides[i].isFrontierTrainer)))
+        {
+            gBattleScripting.battler = battler;
+            switch (which)
+            {
+            case TRAINER_SLIDE_LAST_SWITCHIN:
+                if (sTrainerSlides[i].msgLastSwitchIn != NULL && !CanBattlerSwitch(battler))
+                {
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastSwitchIn;
+                    return retValue;
+                }
+                break;
+            case TRAINER_SLIDE_LAST_LOW_HP:
+                if (sTrainerSlides[i].msgLastLowHp != NULL
+                    && GetEnemyMonCount(firstId, lastId, TRUE) == 1
+                    && BattlerHPPercentage(battler, LESS_THAN_OR_EQUAL, 4)
+                    && !gBattleStruct->trainerSlideLowHpMsgDone)
+                {
+                    gBattleStruct->trainerSlideLowHpMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastLowHp;
+                    return retValue;
+                }
+                break;
+            case TRAINER_SLIDE_FIRST_DOWN:
+                if (sTrainerSlides[i].msgFirstDown != NULL && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1)
+                {
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstDown;
+                    return retValue;
+                }
+                break;
+            case TRAINER_SLIDE_LAST_HALF_HP:
+                if (sTrainerSlides[i].msgLastHalfHp != NULL
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1
+                 && BattlerHPPercentage(battler, LESS_THAN_OR_EQUAL, 2) && BattlerHPPercentage(battler, GREATER_THAN, 4)
+                 && !gBattleStruct->trainerSlideHalfHpMsgDone)
+                {
+                    gBattleStruct->trainerSlideHalfHpMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastHalfHp;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_FIRST_CRITICAL_HIT:
+                if (sTrainerSlides[i].msgFirstCriticalHit != NULL && gBattleStruct->trainerSlideFirstCriticalHitMsgState == 1)
+                {
+                    gBattleStruct->trainerSlideFirstCriticalHitMsgState = 2;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstCriticalHit;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_FIRST_SUPER_EFFECTIVE_HIT:
+                if (sTrainerSlides[i].msgFirstSuperEffectiveHit != NULL
+                    && gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState == 1
+                    && gBattleMons[battler].hp)
+                {
+                    gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState = 2;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstSuperEffectiveHit;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_FIRST_STAB_MOVE:
+                if (sTrainerSlides[i].msgFirstSTABMove != NULL
+                 && gBattleStruct->trainerSlideFirstSTABMoveMsgState == 1
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
+                {
+                    gBattleStruct->trainerSlideFirstSTABMoveMsgState = 2;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstSTABMove;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_PLAYER_MON_UNAFFECTED:
+                if (sTrainerSlides[i].msgPlayerMonUnaffected != NULL
+                 && gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState == 1
+                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
+                {
+                    gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState = 2;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgPlayerMonUnaffected;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_MEGA_EVOLUTION:
+                if (sTrainerSlides[i].msgMegaEvolution != NULL && !gBattleStruct->trainerSlideMegaEvolutionMsgDone)
+                {
+                    gBattleStruct->trainerSlideMegaEvolutionMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgMegaEvolution;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_Z_MOVE:
+                if (sTrainerSlides[i].msgZMove != NULL && !gBattleStruct->trainerSlideZMoveMsgDone)
+                {
+                    gBattleStruct->trainerSlideZMoveMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgZMove;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_BEFORE_FIRST_TURN:
+                if (sTrainerSlides[i].msgBeforeFirstTurn != NULL && !gBattleStruct->trainerSlideBeforeFirstTurnMsgDone)
+                {
+                    gBattleStruct->trainerSlideBeforeFirstTurnMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgBeforeFirstTurn;
+                    return TRUE;
+                }
+                break;
+            case TRAINER_SLIDE_DYNAMAX:
+                if (sTrainerSlides[i].msgDynamax != NULL && !gBattleStruct->trainerSlideDynamaxMsgDone)
+                {
+                    gBattleStruct->trainerSlideDynamaxMsgDone = TRUE;
+                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgDynamax;
+                    return TRUE;
+                }
+                break;
+            }
+            break;
+        }
     }
 
     return 0;

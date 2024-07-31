@@ -4,7 +4,7 @@
 #include "text.h"
 #include "event_data.h"
 #include "string_util.h"
-#include "battle_message.h"
+#include "battle.h"
 #include "data.h"
 #include "pokedex.h"
 #include "overworld.h"

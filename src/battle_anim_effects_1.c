@@ -6699,19 +6699,6 @@ static void AnimTask_DoubleTeam_Step(u8 taskId)
         else
             DestroyAnimVisualTask(taskId);
     }
-    // TODO: remove old if not needed anymore
-    // struct Task* task = &gTasks[taskId];
-    
-    // if (!task->data[3])
-    // {
-    //     if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
-    //         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);
-    //     else
-    //         SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG2_ON);
-
-    //     FreeSpritePaletteByTag(ANIM_TAG_BENT_SPOON);
-    //     DestroyAnimVisualTask(taskId);
-    // }
 }
 
 static void AnimDoubleTeam(struct Sprite* sprite)

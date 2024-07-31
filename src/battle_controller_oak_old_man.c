@@ -15,6 +15,7 @@
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "reshow_battle_screen.h"
+#include "constants/battle_string_ids.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 

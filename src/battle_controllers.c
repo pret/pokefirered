@@ -22,6 +22,7 @@
 #include "text.h"
 #include "util.h"
 #include "constants/abilities.h"
+#include "constants/battle_string_ids.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
 
@@ -2000,10 +2001,7 @@ static void Controller_HandleTrainerSlideBack(u32 battler)
     if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
     {
         if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        {
-            FreeTrainerFrontPicPaletteAndTile(gSprites[gBattlerSpriteIds[battler]].oam.affineParam);
-            gSprites[gBattlerSpriteIds[battler]].oam.tileNum = gSprites[gBattlerSpriteIds[battler]].data[5];
-        }
+            FreeTrainerFrontPicPalette(gSprites[gBattlerSpriteIds[battler]].oam.affineParam);
         FreeSpriteOamMatrix(&gSprites[gBattlerSpriteIds[battler]]);
         DestroySprite(&gSprites[gBattlerSpriteIds[battler]]);
         BattleControllerComplete(battler);
@@ -2271,8 +2269,6 @@ void BtlController_HandleDrawTrainerPic(u32 battler, u32 trainerPicId, bool32 is
         gSprites[gBattlerSpriteIds[battler]].x2 = -DISPLAY_WIDTH;
         gSprites[gBattlerSpriteIds[battler]].sSpeedX = 2;
         gSprites[gBattlerSpriteIds[battler]].oam.affineParam = trainerPicId;
-        gSprites[gBattlerSpriteIds[battler]].data[5] = gSprites[gBattlerSpriteIds[battler]].oam.tileNum;
-        gSprites[gBattlerSpriteIds[battler]].oam.tileNum = GetSpriteTileStartByTag(gTrainerFrontPicTable[trainerPicId].tag);
     }
     else // Player's side
     {
@@ -2775,7 +2771,7 @@ static void SpriteCB_FreePlayerSpriteLoadMonSprite(struct Sprite *sprite)
 
 static void SpriteCB_FreeOpponentSprite(struct Sprite *sprite)
 {
-    FreeTrainerFrontPicPaletteAndTile(sprite->oam.affineParam);
+    FreeTrainerFrontPicPalette(sprite->oam.affineParam);
     FreeSpriteOamMatrix(sprite);
     DestroySprite(sprite);
 }

@@ -1127,9 +1127,9 @@ u8 GetPlayerAvatarGraphicsIdByStateId(u8 state)
     return GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gPlayerAvatar.gender);
 }
 
-u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId)
+u8 GetPlayerAvatarGenderByGraphicsId(u16 graphicsId)
 {
-    switch (gfxId)
+    switch (graphicsId)
     {
     case OBJ_EVENT_GFX_GREEN_NORMAL:
     case OBJ_EVENT_GFX_GREEN_BIKE:

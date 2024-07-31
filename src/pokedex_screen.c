@@ -3548,9 +3548,12 @@ static void Task_DexScreen_RegisterMonToPokedex(u8 taskId)
         sPokedexScreenData->state = 8;
         break;
     case 8:
-        FreeAllWindowBuffers(); // fixed crash after catching mon and pokedex is shown
-        DexScreen_DrawMonDexPage(TRUE);
-        sPokedexScreenData->state = 9;
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            FreeAllWindowBuffers(); // fixed crash after catching mon and pokedex is shown
+            DexScreen_DrawMonDexPage(TRUE);
+            sPokedexScreenData->state = 9;
+        }
         break;
     case 9:
         sPokedexScreenData->data[0] = 0;

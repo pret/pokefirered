@@ -9826,61 +9826,61 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
-    case VARIOUS_HANDLE_TRAINER_SLIDE_MSG: // unused for now
+    case VARIOUS_HANDLE_TRAINER_SLIDE_MSG:
     {
         VARIOUS_ARGS(u8 case_);
-        // if (cmd->case_ == 0)
-        // {
-        //     // Save sprite IDs, because trainer slide in will overwrite gBattlerSpriteIds variable.
-        //     gBattleScripting.savedDmg = (gBattlerSpriteIds[battler] & 0xFF) | (gBattlerSpriteIds[BATTLE_PARTNER(battler)] << 8);
-        //     HideBattlerShadowSprite(battler);
-        // }
-        // else if (cmd->case_ == 1)
-        // {
-        //     BtlController_EmitPrintString(battler, BUFFER_A, STRINGID_TRAINERSLIDE);
-        //     MarkBattlerForControllerExec(battler);
-        // }
-        // else
-        // {
-        //     gBattlerSpriteIds[BATTLE_PARTNER(battler)] = gBattleScripting.savedDmg >> 8;
-        //     gBattlerSpriteIds[battler] = gBattleScripting.savedDmg & 0xFF;
-        //     if (IsBattlerAlive(battler))
-        //     {
-        //         SetBattlerShadowSpriteCallback(battler, gBattleMons[battler].species);
-        //         BattleLoadMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battler]], battler);
-        //     }
-        //     i = BATTLE_PARTNER(battler);
-        //     if (IsBattlerAlive(i))
-        //     {
-        //         SetBattlerShadowSpriteCallback(i, gBattleMons[i].species);
-        //         BattleLoadMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[i]], i);
-        //     }
-        // }
+        if (cmd->case_ == 0)
+        {
+            // Save sprite IDs, because trainer slide in will overwrite gBattlerSpriteIds variable.
+            gBattleScripting.savedDmg = (gBattlerSpriteIds[battler] & 0xFF) | (gBattlerSpriteIds[BATTLE_PARTNER(battler)] << 8);
+            HideBattlerShadowSprite(battler);
+        }
+        else if (cmd->case_ == 1)
+        {
+            BtlController_EmitPrintString(battler, BUFFER_A, STRINGID_TRAINERSLIDE);
+            MarkBattlerForControllerExec(battler);
+        }
+        else
+        {
+            gBattlerSpriteIds[BATTLE_PARTNER(battler)] = gBattleScripting.savedDmg >> 8;
+            gBattlerSpriteIds[battler] = gBattleScripting.savedDmg & 0xFF;
+            if (IsBattlerAlive(battler))
+            {
+                SetBattlerShadowSpriteCallback(battler, gBattleMons[battler].species);
+                BattleLoadMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[battler]], battler);
+            }
+            i = BATTLE_PARTNER(battler);
+            if (IsBattlerAlive(i))
+            {
+                SetBattlerShadowSpriteCallback(i, gBattleMons[i].species);
+                BattleLoadMonSpriteGfx(&gEnemyParty[gBattlerPartyIndexes[i]], i);
+            }
+        }
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
-    case VARIOUS_TRY_TRAINER_SLIDE_MSG_FIRST_OFF: // unused for now
+    case VARIOUS_TRY_TRAINER_SLIDE_MSG_FIRST_OFF:
     {
         VARIOUS_ARGS();
-        // if ((i = ShouldDoTrainerSlide(battler, TRAINER_SLIDE_FIRST_DOWN)))
-        // {
-        //     gBattleScripting.battler = battler;
-        //     BattleScriptPush(cmd->nextInstr);
-        //     gBattlescriptCurrInstr = (i == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
-        //     return;
-        // }
+        if ((i = ShouldDoTrainerSlide(battler, TRAINER_SLIDE_FIRST_DOWN)))
+        {
+            gBattleScripting.battler = battler;
+            BattleScriptPush(cmd->nextInstr);
+            gBattlescriptCurrInstr = (i == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
+            return;
+        }
         break;
     }
-    case VARIOUS_TRY_TRAINER_SLIDE_MSG_LAST_ON: // unused for now
+    case VARIOUS_TRY_TRAINER_SLIDE_MSG_LAST_ON:
     {
         VARIOUS_ARGS();
-        // if ((i = ShouldDoTrainerSlide(battler, TRAINER_SLIDE_LAST_SWITCHIN)))
-        // {
-        //     gBattleScripting.battler = battler;
-        //     BattleScriptPush(cmd->nextInstr);
-        //     gBattlescriptCurrInstr = (i == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
-        //     return;
-        // }
+        if ((i = ShouldDoTrainerSlide(battler, TRAINER_SLIDE_LAST_SWITCHIN)))
+        {
+            gBattleScripting.battler = battler;
+            BattleScriptPush(cmd->nextInstr);
+            gBattlescriptCurrInstr = (i == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
+            return;
+        }
         break;
     }
     case VARIOUS_SET_AURORA_VEIL:
@@ -16555,52 +16555,45 @@ void BS_SetPledgeStatus(void)
 void BS_TryTrainerSlideZMoveMsg(void)
 {
     NATIVE_ARGS();
-    // TODO: trainer slide
-    // s32 shouldSlide;
+    s32 shouldSlide;
 
-    // if ((shouldSlide = ShouldDoTrainerSlide(gBattlerAttacker, TRAINER_SLIDE_Z_MOVE)))
-    // {
-    //     gBattleScripting.battler = gBattlerAttacker;
-    //     BattleScriptPush(cmd->nextInstr);
-    //     gBattlescriptCurrInstr = (shouldSlide == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
-    // }
-    // else
-    //     gBattlescriptCurrInstr = cmd->nextInstr;
-    gBattlescriptCurrInstr = cmd->nextInstr;
+    if ((shouldSlide = ShouldDoTrainerSlide(gBattlerAttacker, TRAINER_SLIDE_Z_MOVE)))
+    {
+        gBattleScripting.battler = gBattlerAttacker;
+        BattleScriptPush(cmd->nextInstr);
+        gBattlescriptCurrInstr = (shouldSlide == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
+    }
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_TryTrainerSlideMegaEvolutionMsg(void)
 {
     NATIVE_ARGS();
-    // TODO: trainer slide
-    // s32 shouldSlide;
+    s32 shouldSlide;
 
-    // if ((shouldSlide = ShouldDoTrainerSlide(gBattlerAttacker, TRAINER_SLIDE_MEGA_EVOLUTION)))
-    // {
-    //     gBattleScripting.battler = gBattlerAttacker;
-    //     BattleScriptPush(cmd->nextInstr);
-    //     gBattlescriptCurrInstr = (shouldSlide == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
-    // }
-    // else
-    //     gBattlescriptCurrInstr = cmd->nextInstr;
-    gBattlescriptCurrInstr = cmd->nextInstr;
+    if ((shouldSlide = ShouldDoTrainerSlide(gBattlerAttacker, TRAINER_SLIDE_MEGA_EVOLUTION)))
+    {
+        gBattleScripting.battler = gBattlerAttacker;
+        BattleScriptPush(cmd->nextInstr);
+        gBattlescriptCurrInstr = (shouldSlide == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
+    }
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_TryTrainerSlideDynamaxMsg(void)
 {
     NATIVE_ARGS();
-    // TODO: trainer slide
-    // s32 shouldSlide;
+    s32 shouldSlide;
 
-    // if ((shouldSlide = ShouldDoTrainerSlide(gBattlerAttacker, TRAINER_SLIDE_DYNAMAX)))
-    // {
-    //     gBattleScripting.battler = gBattlerAttacker;
-    //     BattleScriptPush(cmd->nextInstr);
-    //     gBattlescriptCurrInstr = (shouldSlide == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
-    // }
-    // else
-    //     gBattlescriptCurrInstr = cmd->nextInstr;
-    gBattlescriptCurrInstr = cmd->nextInstr;
+    if ((shouldSlide = ShouldDoTrainerSlide(gBattleScripting.battler, TRAINER_SLIDE_DYNAMAX)))
+    {
+        BattleScriptPush(cmd->nextInstr);
+        gBattlescriptCurrInstr = (shouldSlide == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
+    }
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_TryHealPulse(void)

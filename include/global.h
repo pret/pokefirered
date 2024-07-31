@@ -212,6 +212,16 @@ struct Time
     /*0x04*/ s8 seconds;
 };
 
+
+struct SaveBlock3
+{
+#if OW_USE_FAKE_RTC
+    struct Time fakeRTC;
+#endif
+};
+
+extern struct SaveBlock3 *gSaveBlock3Ptr;
+
 struct Pokedex
 {
     /*0x00*/ u8 order;

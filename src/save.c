@@ -17,6 +17,8 @@ static u8 CopySaveSlotData(u16 sectorId, const struct SaveSectorLocation *locati
 static u8 GetSaveValidStatus(const struct SaveSectorLocation *locations);
 static u8 ReadFlashSector(u8 sectorId, struct SaveSector *sector);
 static u16 CalculateChecksum(void *data, u16 size);
+static void CopyToSaveBlock3(u32, struct SaveSector *);
+static void CopyFromSaveBlock3(u32, struct SaveSector *);
 
 /*
  * Sector Layout:
@@ -72,6 +74,7 @@ struct
 
 // These will produce an error if a save struct is larger than the space
 // alloted for it in the flash.
+STATIC_ASSERT(sizeof(struct SaveBlock3) <= SAVE_BLOCK_3_CHUNK_SIZE * NUM_SECTORS_PER_SLOT, SaveBlock3FreeSpace);
 STATIC_ASSERT(sizeof(struct SaveBlock2) <= SECTOR_DATA_SIZE, SaveBlock2FreeSpace);
 STATIC_ASSERT(sizeof(struct SaveBlock1) <= SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLOCK1_END - SECTOR_ID_SAVEBLOCK1_START + 1), SaveBlock1FreeSpace);
 STATIC_ASSERT(sizeof(struct PokemonStorage) <= SECTOR_DATA_SIZE * (SECTOR_ID_PKMN_STORAGE_END - SECTOR_ID_PKMN_STORAGE_START + 1), PokemonStorageFreeSpace);
@@ -188,6 +191,8 @@ static u8 HandleWriteSector(u16 sectorId, const struct SaveSectorLocation *locat
 
     for (i = 0; i < size; i++)
         gSaveDataBufferPtr->data[i] = data[i];
+
+    CopyFromSaveBlock3(sectorId, gSaveDataBufferPtr);
 
     gSaveDataBufferPtr->checksum = CalculateChecksum(data, size);
     return TryWriteSector(sectorNum, gSaveDataBufferPtr->data);
@@ -309,6 +314,8 @@ static u8 HandleReplaceSector(u16 sectorId, const struct SaveSectorLocation *loc
     gSaveDataBufferPtr->counter = gSaveCounter;
     for (i = 0; i < size; i++)
         gSaveDataBufferPtr->data[i] = data[i];
+
+    CopyFromSaveBlock3(sectorId, gSaveDataBufferPtr);
 
     gSaveDataBufferPtr->checksum = CalculateChecksum(data, size);
 
@@ -444,6 +451,7 @@ static u8 CopySaveSlotData(u16 sectorId, const struct SaveSectorLocation *locati
             u16 j;
             for (j = 0; j < locations[id].size; j++)
                 locations[id].data[j] = gSaveDataBufferPtr->data[j];
+            CopyToSaveBlock3(id, gSaveDataBufferPtr);
         }
     }
 
@@ -932,4 +940,23 @@ void Task_LinkFullSave(u8 taskId)
         }
         break;
     }
+}
+
+static u32 SaveBlock3Size(u32 sectorId)
+{
+    s32 begin = sectorId * SAVE_BLOCK_3_CHUNK_SIZE;
+    s32 end = (sectorId + 1) * SAVE_BLOCK_3_CHUNK_SIZE;
+    return max(0, min(end, (s32)sizeof(gSaveblock3)) - begin);
+}
+
+static void CopyToSaveBlock3(u32 sectorId, struct SaveSector *sector)
+{
+    u32 size = SaveBlock3Size(sectorId);
+    memcpy((u8 *)&gSaveblock3 + (sectorId * SAVE_BLOCK_3_CHUNK_SIZE), sector->saveBlock3Chunk, size);
+}
+
+static void CopyFromSaveBlock3(u32 sectorId, struct SaveSector *sector)
+{
+    u32 size = SaveBlock3Size(sectorId);
+    memcpy(sector->saveBlock3Chunk, (u8 *)&gSaveblock3 + (sectorId * SAVE_BLOCK_3_CHUNK_SIZE), size);
 }

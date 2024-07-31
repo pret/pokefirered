@@ -174,8 +174,8 @@ Debug_CheckSaveBlock::
 	msgbox Debug_SaveBlock1Size, MSGBOX_DEFAULT
 	callnative CheckSaveBlock2Size
 	msgbox Debug_SaveBlock2Size, MSGBOX_DEFAULT
-	@callnative CheckSaveBlock3Size
-	@msgbox Debug_SaveBlock3Size, MSGBOX_DEFAULT
+	callnative CheckSaveBlock3Size
+	msgbox Debug_SaveBlock3Size, MSGBOX_DEFAULT
 	callnative CheckPokemonStorageSize
 	msgbox Debug_PokemonStorageSize, MSGBOX_DEFAULT
 	release

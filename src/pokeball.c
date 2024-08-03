@@ -546,7 +546,7 @@ u8 DoPokeballSendOutAnimation(u32 battler, s16 pan, u8 kindOfThrow)
 
 static void Task_DoPokeballSendOutAnim(u8 taskId)
 {
-    u32 throwCaseId, battlerId, ballId, ballSpriteId;
+    u32 throwCaseId, ballId, battlerId, ballSpriteId;
     bool32 notSendOut = FALSE;
     u32 throwXoffset = (B_ENEMY_THROW_BALLS >= GEN_6) ? 24 : 0;
     s32 throwYoffset = (B_ENEMY_THROW_BALLS >= GEN_6) ? -16 : 24;
@@ -990,7 +990,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
         if ((battlerId == GetBattlerAtPosition(B_POSITION_PLAYER_LEFT) || battlerId == GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
          && IsDoubleBattle() && gBattleSpritesDataPtr->animationData->introAnimActive)
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
             {
                 if (IsBGMPlaying())
                     m4aMPlayStop(&gMPlayInfo_BGM);
@@ -1033,6 +1033,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
         gSprites[gBattlerSpriteIds[sprite->sBattler]].callback = SpriteCB_OpponentMonFromBall;
     else
         gSprites[gBattlerSpriteIds[sprite->sBattler]].callback = SpriteCB_PlayerMonFromBall;
+
     AnimateSprite(&gSprites[gBattlerSpriteIds[sprite->sBattler]]);
     gSprites[gBattlerSpriteIds[sprite->sBattler]].data[1] = 0x1000;
 }
@@ -1207,6 +1208,8 @@ static void SpriteCB_MonSendOut_2(struct Sprite *sprite)
         }
     }
 }
+
+#undef HIBYTE
 
 static void SpriteCB_ReleaseMon2FromBall(struct Sprite *sprite)
 {

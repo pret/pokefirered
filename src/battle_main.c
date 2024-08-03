@@ -62,7 +62,9 @@ static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
 static void CB2_InitBattleInternal(void);
 static void CB2_PreInitMultiBattle(void);
+static void CB2_PreInitIngamePlayerPartnerBattle(void);
 static void CB2_HandleStartMultiBattle(void);
+static void CB2_HandleStartMultiPartnerBattle(void);
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer);
 static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
@@ -115,6 +117,7 @@ EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT + 13] = {0};   // expanded 
 EWRAM_DATA u32 gBattleTypeFlags = 0;
 EWRAM_DATA u8 gBattleTerrain = 0;
 EWRAM_DATA struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE] = {0};
+EWRAM_DATA static struct MultiPartnerMenuPokemon* sMultiPartnerPartyBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTileBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTilemapBuffer = NULL;
 EWRAM_DATA u32 gBattleControllerExecFlags = 0;
@@ -448,7 +451,7 @@ void CB2_InitBattle(void)
         }
         else
         {
-            // SetMainCallback2(CB2_PreInitIngamePlayerPartnerBattle);
+            SetMainCallback2(CB2_PreInitIngamePlayerPartnerBattle);
         }
         gBattleCommunication[MULTIUSE_STATE] = 0;
     }
@@ -554,7 +557,11 @@ static void CB2_InitBattleInternal(void)
     SetVBlankCallback(VBlankCB_Battle);
     SetUpBattleVars();
 
-    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+    if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+        SetMainCallback2(CB2_HandleStartMultiPartnerBattle);
+    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        SetMainCallback2(CB2_HandleStartMultiPartnerBattle);
+    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         SetMainCallback2(CB2_HandleStartMultiBattle);
     else
         SetMainCallback2(CB2_HandleStartBattle);
@@ -987,6 +994,35 @@ static void PrepareOwnMultiPartnerBuffer(void)
     memcpy(gBattleStruct->multiBuffer.multiBattleMons, gMultiPartnerParty, sizeof(gMultiPartnerParty));
 }
 
+static void SetMultiPartnerMenuParty(u8 offset)
+{
+    s32 i, j;
+    u8 *cur;
+
+    for (i = 0; i < MULTI_PARTY_SIZE; i++)
+    {
+        gMultiPartnerParty[i].species     = GetMonData(&gPlayerParty[offset + i], MON_DATA_SPECIES);
+        gMultiPartnerParty[i].heldItem    = GetMonData(&gPlayerParty[offset + i], MON_DATA_HELD_ITEM);
+        GetMonData(&gPlayerParty[offset + i], MON_DATA_NICKNAME, gMultiPartnerParty[i].nickname);
+        gMultiPartnerParty[i].level       = GetMonData(&gPlayerParty[offset + i], MON_DATA_LEVEL);
+        gMultiPartnerParty[i].hp          = GetMonData(&gPlayerParty[offset + i], MON_DATA_HP);
+        gMultiPartnerParty[i].maxhp       = GetMonData(&gPlayerParty[offset + i], MON_DATA_MAX_HP);
+        gMultiPartnerParty[i].status      = GetMonData(&gPlayerParty[offset + i], MON_DATA_STATUS);
+        gMultiPartnerParty[i].personality = GetMonData(&gPlayerParty[offset + i], MON_DATA_PERSONALITY);
+        gMultiPartnerParty[i].gender      = GetMonGender(&gPlayerParty[offset + i]);
+        StripExtCtrlCodes(gMultiPartnerParty[i].nickname);
+        if (GetMonData(&gPlayerParty[offset + i], MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
+        {
+            for (cur = gMultiPartnerParty[i].nickname, j = 0; cur[j] != EOS; j++)
+                ;
+            while (j < 6)
+                cur[j++] = 0;
+            cur[j] = EOS;
+        }
+    }
+    memcpy(sMultiPartnerPartyBuffer, gMultiPartnerParty, sizeof(gMultiPartnerParty));
+}
+
 static void CB2_PreInitMultiBattle(void)
 {
     s32 i;
@@ -1062,41 +1098,41 @@ static void CB2_PreInitMultiBattle(void)
     }
 }
 
-// static void CB2_PreInitIngamePlayerPartnerBattle(void)
-// {
-//     u32 *savedBattleTypeFlags;
-//     void (**savedCallback)(void);
+static void CB2_PreInitIngamePlayerPartnerBattle(void)
+{
+    u32 *savedBattleTypeFlags;
+    void (**savedCallback)(void);
 
-//     savedCallback = &gBattleStruct->savedCallback;
-//     savedBattleTypeFlags = &gBattleStruct->savedBattleTypeFlags;
+    savedCallback = &gBattleStruct->savedCallback;
+    savedBattleTypeFlags = &gBattleStruct->savedBattleTypeFlags;
 
-//     RunTasks();
-//     AnimateSprites();
-//     BuildOamBuffer();
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
 
-//     switch (gBattleCommunication[MULTIUSE_STATE])
-//     {
-//     case 0:
-//         sMultiPartnerPartyBuffer = Alloc(sizeof(gMultiPartnerParty));
-//         SetMultiPartnerMenuParty(MULTI_PARTY_SIZE);
-//         gBattleCommunication[MULTIUSE_STATE]++;
-//         *savedCallback = gMain.savedCallback;
-//         *savedBattleTypeFlags = gBattleTypeFlags;
-//         gMain.savedCallback = CB2_PreInitIngamePlayerPartnerBattle;
-//         ShowPartyMenuToShowcaseMultiBattleParty();
-//         break;
-//     case 1:
-//         if (!gPaletteFade.active)
-//         {
-//             gBattleCommunication[MULTIUSE_STATE] = 2;
-//             gBattleTypeFlags = *savedBattleTypeFlags;
-//             gMain.savedCallback = *savedCallback;
-//             SetMainCallback2(CB2_InitBattleInternal);
-//             FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
-//         }
-//         break;
-//     }
-// }
+    switch (gBattleCommunication[MULTIUSE_STATE])
+    {
+    case 0:
+        sMultiPartnerPartyBuffer = Alloc(sizeof(gMultiPartnerParty));
+        SetMultiPartnerMenuParty(MULTI_PARTY_SIZE);
+        gBattleCommunication[MULTIUSE_STATE]++;
+        *savedCallback = gMain.savedCallback;
+        *savedBattleTypeFlags = gBattleTypeFlags;
+        gMain.savedCallback = CB2_PreInitIngamePlayerPartnerBattle;
+        ShowPartyMenuToShowcaseMultiBattleParty();
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+        {
+            gBattleCommunication[MULTIUSE_STATE] = 2;
+            gBattleTypeFlags = *savedBattleTypeFlags;
+            gMain.savedCallback = *savedCallback;
+            SetMainCallback2(CB2_InitBattleInternal);
+            FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
+        }
+        break;
+    }
+}
 
 static void CB2_HandleStartMultiBattle(void)
 {
@@ -1357,6 +1393,255 @@ static void CB2_HandleStartMultiBattle(void)
     case 14:
         if (--gBattleCommunication[1] == 0)
             ++gBattleCommunication[0];
+        break;
+    }
+}
+
+static void CB2_HandleStartMultiPartnerBattle(void)
+{
+    u8 playerMultiplayerId;
+    u8 partnerMultiplayerId;
+
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+
+    playerMultiplayerId = GetMultiplayerId();
+    gBattleScripting.multiplayerId = playerMultiplayerId;
+    partnerMultiplayerId = playerMultiplayerId ^ BIT_SIDE;
+
+    switch (gBattleCommunication[MULTIUSE_STATE])
+    {
+    case 0:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            ShowBg(0);
+            ShowBg(1);
+            ShowBg(2);
+            ShowBg(3);
+            BattleInterfaceSetWindowPals();
+            gBattleCommunication[MULTIUSE_STATE] = 1;
+        }
+        if (gWirelessCommType)
+            LoadWirelessStatusIndicatorSpriteGfx();
+        // fall through
+    case 1:
+        // if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        // {
+        //     if (gReceivedRemoteLinkPlayers)
+        //     {
+        //         u8 language;
+
+        //         gLinkPlayers[0].id = 0;
+        //         gLinkPlayers[1].id = 2;
+        //         gLinkPlayers[2].id = 1;
+        //         gLinkPlayers[3].id = 3;
+        //         GetFrontierTrainerName(gLinkPlayers[2].name, gTrainerBattleOpponent_A);
+        //         GetFrontierTrainerName(gLinkPlayers[3].name, gTrainerBattleOpponent_B);
+        //         GetBattleTowerTrainerLanguage(&language, gTrainerBattleOpponent_A);
+        //         gLinkPlayers[2].language = language;
+        //         GetBattleTowerTrainerLanguage(&language, gTrainerBattleOpponent_B);
+        //         gLinkPlayers[3].language = language;
+
+        //         if (IsLinkTaskFinished())
+        //         {
+        //             // 0x300
+        //             *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureLo) = 0;
+        //             *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureHi) = 3;
+        //             BufferPartyVsScreenHealth_AtStart();
+        //             SetPlayerBerryDataInBattleStruct();
+        //             SendBlock(BitmaskAllOtherLinkPlayers(), &gBattleStruct->multiBuffer.linkBattlerHeader, sizeof(gBattleStruct->multiBuffer.linkBattlerHeader));
+        //             gBattleCommunication[MULTIUSE_STATE] = 2;
+        //         }
+
+        //         if (gWirelessCommType)
+        //             CreateWirelessStatusIndicatorSprite(0, 0);
+        //     }
+        // }
+        // else
+        // {
+            if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
+                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
+            gBattleCommunication[MULTIUSE_STATE] = 13;
+            SetAllPlayersBerryData();
+        // }
+        break;
+    case 2:
+        if ((GetBlockReceivedStatus() & 3) == 3)
+        {
+            u8 taskId;
+
+            ResetBlockReceivedFlags();
+            LinkBattleComputeBattleTypeFlags(2, playerMultiplayerId);
+            SetAllPlayersBerryData();
+            taskId = CreateTask(InitLinkBattleVsScreen, 0);
+            gTasks[taskId].data[1] = 0x10E;
+            gTasks[taskId].data[2] = 0x5A;
+            gTasks[taskId].data[5] = 0;
+            gTasks[taskId].data[3] = 0x145;
+            gTasks[taskId].data[4] = 0x145;
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 3:
+        // Link battle, send/receive party Pokémon in groups
+        if (IsLinkTaskFinished())
+        {
+            // Send Pokémon 1-2
+            SendBlock(BitmaskAllOtherLinkPlayers(), gPlayerParty, sizeof(struct Pokemon) * 2);
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 4:
+        if ((GetBlockReceivedStatus() & 3) == 3)
+        {
+            // Recv partner's Pokémon 1-2, and copy partner's and own Pokémon into party positions
+            ResetBlockReceivedFlags();
+            if (gLinkPlayers[playerMultiplayerId].id != 0)
+            {
+                memcpy(gPlayerParty, gBlockRecvBuffer[partnerMultiplayerId], sizeof(struct Pokemon) * 2);
+                memcpy(&gPlayerParty[MULTI_PARTY_SIZE], gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon) * 2);
+            }
+            else
+            {
+                memcpy(gPlayerParty, gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon) * 2);
+                memcpy(&gPlayerParty[MULTI_PARTY_SIZE], gBlockRecvBuffer[partnerMultiplayerId], sizeof(struct Pokemon) * 2);
+            }
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 5:
+        if (IsLinkTaskFinished())
+        {
+            // Send Pokémon 3
+            SendBlock(BitmaskAllOtherLinkPlayers(), &gPlayerParty[2], sizeof(struct Pokemon));
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 6:
+        if ((GetBlockReceivedStatus() & 3) == 3)
+        {
+            // Recv partner's Pokémon 3, and copy partner's and own Pokémon into party positions
+            ResetBlockReceivedFlags();
+            if (gLinkPlayers[playerMultiplayerId].id != 0)
+            {
+                memcpy(&gPlayerParty[2], gBlockRecvBuffer[partnerMultiplayerId], sizeof(struct Pokemon));
+                memcpy(&gPlayerParty[2 + MULTI_PARTY_SIZE], gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon));
+            }
+            else
+            {
+                memcpy(&gPlayerParty[2], gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon));
+                memcpy(&gPlayerParty[2 + MULTI_PARTY_SIZE], gBlockRecvBuffer[partnerMultiplayerId], sizeof(struct Pokemon));
+            }
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 7:
+        if (IsLinkTaskFinished())
+        {
+            // Send enemy Pokémon 1-2 to partner
+            SendBlock(BitmaskAllOtherLinkPlayers(), gEnemyParty, sizeof(struct Pokemon) * 2);
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 8:
+        if ((GetBlockReceivedStatus() & 3) == 3)
+        {
+            // Recv enemy Pokémon 1-2 (if not master)
+            ResetBlockReceivedFlags();
+            if (GetMultiplayerId() != 0)
+                memcpy(gEnemyParty, gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 9:
+        if (IsLinkTaskFinished())
+        {
+            // Send enemy Pokémon 3-4 to partner
+            SendBlock(BitmaskAllOtherLinkPlayers(), &gEnemyParty[2], sizeof(struct Pokemon) * 2);
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 10:
+        if ((GetBlockReceivedStatus() & 3) == 3)
+        {
+            // Recv enemy Pokémon 3-4 (if not master)
+            ResetBlockReceivedFlags();
+            if (GetMultiplayerId() != 0)
+                memcpy(&gEnemyParty[2], gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 11:
+        if (IsLinkTaskFinished())
+        {
+            // Send enemy Pokémon 5-6 to partner
+            SendBlock(BitmaskAllOtherLinkPlayers(), &gEnemyParty[4], sizeof(struct Pokemon) * 2);
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 12:
+        if ((GetBlockReceivedStatus() & 3) == 3)
+        {
+            // Recv enemy Pokémon 5-6 (if not master)
+            ResetBlockReceivedFlags();
+            if (GetMultiplayerId() != 0)
+                memcpy(&gEnemyParty[4], gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
+
+            TryCorrectShedinjaLanguage(&gPlayerParty[0]);
+            TryCorrectShedinjaLanguage(&gPlayerParty[1]);
+            TryCorrectShedinjaLanguage(&gPlayerParty[2]);
+            TryCorrectShedinjaLanguage(&gPlayerParty[3]);
+            TryCorrectShedinjaLanguage(&gPlayerParty[4]);
+            TryCorrectShedinjaLanguage(&gPlayerParty[5]);
+            TryCorrectShedinjaLanguage(&gEnemyParty[0]);
+            TryCorrectShedinjaLanguage(&gEnemyParty[1]);
+            TryCorrectShedinjaLanguage(&gEnemyParty[2]);
+            TryCorrectShedinjaLanguage(&gEnemyParty[3]);
+            TryCorrectShedinjaLanguage(&gEnemyParty[4]);
+            TryCorrectShedinjaLanguage(&gEnemyParty[5]);
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 13:
+        InitBattleControllers();
+        RecordedBattle_SetTrainerInfo();
+        gBattleCommunication[SPRITES_INIT_STATE1] = 0;
+        gBattleCommunication[SPRITES_INIT_STATE2] = 0;
+        if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+            gBattleCommunication[MULTIUSE_STATE] = 14;
+        else
+            gBattleCommunication[MULTIUSE_STATE] = 16;
+        break;
+    case 14:
+        // Send rng seed for recorded battle
+        if (IsLinkTaskFinished())
+        {
+            SendBlock(BitmaskAllOtherLinkPlayers(), &gRecordedBattleRngSeed, sizeof(gRecordedBattleRngSeed));
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 15:
+        // Receive rng seed for recorded battle (only read it if partner is the link master)
+        if ((GetBlockReceivedStatus() & 3) == 3)
+        {
+            ResetBlockReceivedFlags();
+            if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
+                memcpy(&gRecordedBattleRngSeed, gBlockRecvBuffer[partnerMultiplayerId], sizeof(gRecordedBattleRngSeed));
+            gBattleCommunication[MULTIUSE_STATE]++;
+        }
+        break;
+    case 16:
+        // Finish, start battle
+        if (BattleInitAllSprites(&gBattleCommunication[SPRITES_INIT_STATE1], &gBattleCommunication[SPRITES_INIT_STATE2]))
+        {
+            // TrySetLinkBattleTowerEnemyPartyLevel();
+            gPreBattleCallback1 = gMain.callback1;
+            gMain.callback1 = BattleMainCB1;
+            SetMainCallback2(BattleMainCB2);
+            if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+                gBattleTypeFlags |= BATTLE_TYPE_LINK_IN_BATTLE;
+        }
         break;
     }
 }

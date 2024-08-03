@@ -474,7 +474,7 @@ static void CB2_ReturnFromChooseBattleTowerParty(void)
         gSpecialVar_Result = FALSE;
         break;
     default:
-        ReducePlayerPartyToThree();
+        ReducePlayerPartyToSelectedMons();
         gSpecialVar_Result = TRUE;
         break;
     }
@@ -482,24 +482,25 @@ static void CB2_ReturnFromChooseBattleTowerParty(void)
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
-void ReducePlayerPartyToThree(void)
+void ReducePlayerPartyToSelectedMons(void)
 {
-    struct Pokemon * party = AllocZeroed(3 * sizeof(struct Pokemon));
+    struct Pokemon party[MAX_FRONTIER_PARTY_SIZE];
     int i;
 
-    // copy the selected pokemon according to the order.
-    for (i = 0; i < 3; i++)
+    CpuFill32(0, party, sizeof party);
+
+    // copy the selected Pokémon according to the order.
+    for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
         if (gSelectedOrderFromParty[i]) // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
             party[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1]; // index is 0 based, not literal
 
     CpuFill32(0, gPlayerParty, sizeof gPlayerParty);
 
-    // overwrite the first 3 with the order copied to.
-    for (i = 0; i < 3; i++)
+    // overwrite the first 4 with the order copied to.
+    for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
         gPlayerParty[i] = party[i];
 
     CalculatePlayerPartyCount();
-    Free(party);
 }
 
 void Script_GetChosenMonOffensiveEVs(void)

@@ -993,6 +993,15 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_AllyMon,
     },
+    [TRAINER_BACK_PIC_STEVEN] = {
+        .tileTag = TAG_NONE,
+        .paletteTag = 0,
+        .oam = &gOamData_BattlerPlayer,
+        .anims = NULL,
+        .images = gTrainerBackPicTable_Steven,
+        .affineAnims = gAffineAnims_BattleSpritePlayerSide,
+        .callback = SpriteCB_AllyMon,
+    },
 };
 
 // Classes dummied out
@@ -5685,10 +5694,17 @@ bool8 IsMonShiny(struct Pokemon *mon)
     return GetMonData(mon, MON_DATA_IS_SHINY, NULL);
 }
 
-u8 *GetTrainerPartnerName(void)
+const u8 *GetTrainerPartnerName(void)
 {
-    u8 id = GetMultiplayerId();
-    return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+    {
+        return GetTrainerNameFromId(gPartnerTrainerId);
+    }
+    else
+    {
+        u8 id = GetMultiplayerId();
+        return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
+    }
 }
 
 #define READ_PTR_FROM_TASK(taskId, dataId)                      \
@@ -5713,16 +5729,6 @@ static void Task_AnimateAfterDelay(u8 taskId)
         DestroyTask(taskId);
     }
 }
-
-// static void Task_PokemonSummaryAnimateAfterDelay(u8 taskId)
-// {
-//     if (--gTasks[taskId].sAnimDelay == 0)
-//     {
-//         StartMonSummaryAnimation(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].sAnimId);
-//         SummaryScreen_SetAnimDelayTaskId(TASK_NONE);
-//         DestroyTask(taskId);
-//     }
-// }
 
 void BattleAnimateFrontSprite(struct Sprite *sprite, u16 species, bool8 noCry, u8 panMode)
 {
@@ -5778,34 +5784,6 @@ void DoMonFrontSpriteAnimation(struct Sprite *sprite, u16 species, bool8 noCry, 
         sprite->callback = SpriteCallbackDummy_2;
     }
 }
-
-// void PokemonSummaryDoMonAnimation(struct Sprite *sprite, u16 species, bool8 oneFrame)
-// {
-//     if (!oneFrame && HasTwoFramesAnimation(species))
-//         StartSpriteAnim(sprite, 1);
-//     if (gSpeciesInfo[species].frontAnimDelay != 0)
-//     {
-//         // Animation has delay, start delay task
-//         u8 taskId = CreateTask(Task_PokemonSummaryAnimateAfterDelay, 0);
-//         STORE_PTR_IN_TASK(sprite, taskId, 0);
-//         gTasks[taskId].sAnimId = gSpeciesInfo[species].frontAnimId;
-//         gTasks[taskId].sAnimDelay = gSpeciesInfo[species].frontAnimDelay;
-//         SummaryScreen_SetAnimDelayTaskId(taskId);
-//         SetSpriteCB_MonAnimDummy(sprite);
-//     }
-//     else
-//     {
-//         // No delay, start animation
-//         StartMonSummaryAnimation(sprite, gSpeciesInfo[species].frontAnimId);
-//     }
-// }
-
-// void StopPokemonAnimationDelayTask(void)
-// {
-//     u8 delayTaskId = FindTaskIdByFunc(Task_PokemonSummaryAnimateAfterDelay);
-//     if (delayTaskId != TASK_NONE)
-//         DestroyTask(delayTaskId);
-// }
 
 void BattleAnimateBackSprite(struct Sprite *sprite, u16 species)
 {

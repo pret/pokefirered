@@ -25,6 +25,10 @@ struct MonCoords
 
 #define MAX_TRAINER_ITEMS 4
 
+#define TRAINER_PIC_WIDTH 64
+#define TRAINER_PIC_HEIGHT 64
+#define TRAINER_PIC_SIZE (TRAINER_PIC_WIDTH * TRAINER_PIC_HEIGHT / 2)
+
 enum {
     BATTLER_AFFINE_NORMAL,
     BATTLER_AFFINE_EMERGE,
@@ -140,6 +144,7 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_Pokedude[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_OldMan[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_RSBrendan[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_RSMay[];
+extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[];
 
 
 extern const union AnimCmd sAnim_GeneralFrame0[];

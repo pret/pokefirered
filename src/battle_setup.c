@@ -1,5 +1,6 @@
 #include "global.h"
 #include "task.h"
+#include "battle_setup.h"
 #include "help_system.h"
 #include "overworld.h"
 #include "item.h"
@@ -62,8 +63,6 @@ static void DoSafariBattle(void);
 static void DoGhostBattle(void);
 static void DoStandardWildBattle(bool32 isDouble);
 static void CB2_EndWildBattle(void);
-static u8 GetWildBattleTransition(void);
-static u8 GetTrainerBattleTransition(void);
 static void CB2_EndScriptedWildBattle(void);
 static void CB2_EndMarowakBattle(void);
 static bool32 IsPlayerDefeated(u32 battleOutcome);
@@ -681,7 +680,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
     return sum;
 }
 
-static u8 GetWildBattleTransition(void)
+u8 GetWildBattleTransition(void)
 {
     u8 transitionType = GetBattleTransitionTypeByMap();
     u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
@@ -693,7 +692,7 @@ static u8 GetWildBattleTransition(void)
         return sBattleTransitionTable_Wild[transitionType][1];
 }
 
-static u8 GetTrainerBattleTransition(void)
+u8 GetTrainerBattleTransition(void)
 {
     u8 minPartyCount;
     u8 transitionType;
@@ -880,7 +879,8 @@ static void SetMapVarsToTrainer(void)
 
 const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
 {
-    InitTrainerBattleVariables();
+    if (TrainerBattleLoadArg8(data) != TRAINER_BATTLE_SET_TRAINER_B)
+        InitTrainerBattleVariables();
     sTrainerBattleMode = TrainerBattleLoadArg8(data);
     switch (sTrainerBattleMode)
     {
@@ -916,6 +916,12 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     case TRAINER_BATTLE_EARLY_RIVAL:
         TrainerBattleLoadArgs(sEarlyRivalBattleParams, data);
         return EventScript_DoNoIntroTrainerBattle;
+    case TRAINER_BATTLE_SET_TRAINER_A:
+        TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
+        return sTrainerBattleEndScript;
+    case TRAINER_BATTLE_SET_TRAINER_B:
+        TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
+        return sTrainerBattleEndScript;
     default:
         if (gApproachingTrainerId == 0)
         {

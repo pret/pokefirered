@@ -2825,6 +2825,10 @@ static const u8 *BattleStringGetPlayerName(u8 *text, u8 battler)
         {
             toCpy = gLinkPlayers[2].name;
         }
+        else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        {
+            toCpy = gBattlePartners[gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
+        }
         else
         {
             toCpy = gSaveBlock2Ptr->playerName;
@@ -2922,12 +2926,10 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_PARTNER_CLASS:
                 // TODO: trainer name
                 // toCpy = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
-                toCpy = gText_TODO;
+                toCpy = gTrainerClasses[gBattlePartners[gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerClass].name;;
                 break;
             case B_TXT_PARTNER_NAME:
-                // TODO: trainer name
-                // toCpy = BattleStringGetPlayerName(text, GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT));
-                toCpy = gText_TODO;
+                toCpy = BattleStringGetPlayerName(text, GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT));
                 break;
             case B_TXT_COPY_VAR_1:
                 toCpy = gStringVar1;

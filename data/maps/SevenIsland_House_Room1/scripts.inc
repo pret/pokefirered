@@ -98,7 +98,7 @@ SevenIsland_House_Room1_EventScript_TrainerVisiting::
 	call EventScript_AskSaveGame
 	goto_if_eq VAR_RESULT, 0, SevenIsland_House_Room1_EventScript_DeclineBattle
 	special SavePlayerParty
-	special ReducePlayerPartyToThree
+	special ReducePlayerPartyToSelectedMons
 	msgbox SevenIsland_House_Room1_Text_DontHoldAnythingBack
 	closemessage
 	call_if_eq VAR_FACING, DIR_NORTH, SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth

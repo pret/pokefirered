@@ -107,40 +107,6 @@ static void LinkPartnerBufferRunCommand(u32 battler)
     }
 }
 
-static void Intro_DelayAndEnd(u32 battler)
-{
-    if (--gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay == (u8)-1)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 0;
-        LinkPartnerBufferExecCompleted(battler);
-    }
-}
-
-static void Intro_WaitForHealthbox(u32 battler)
-{
-    bool32 finished = FALSE;
-
-    if (!IsDoubleBattle() || (IsDoubleBattle() && (gBattleTypeFlags & BATTLE_TYPE_MULTI)))
-    {
-        if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy)
-            finished = TRUE;
-    }
-    else if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy
-         && gSprites[gHealthboxSpriteIds[BATTLE_PARTNER(battler)]].callback == SpriteCallbackDummy)
-    {
-        finished = TRUE;
-    }
-
-    if (IsCryPlayingOrClearCrySongs())
-        finished = FALSE;
-
-    if (finished)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 3;
-        gBattlerControllerFuncs[battler] = Intro_DelayAndEnd;
-    }
-}
-
 static void WaitForMonAnimAfterLoad(u32 battler)
 {
     if (gSprites[gBattlerSpriteIds[battler]].animEnded && gSprites[gBattlerSpriteIds[battler]].x2 == 0)
@@ -260,37 +226,6 @@ static void LinkPartnerHandleTrainerSlideBack(u32 battler)
 static void LinkPartnerHandleHealthBarUpdate(u32 battler)
 {
     BtlController_HandleHealthBarUpdate(battler, FALSE);
-}
-
-// Also used by the link partner.
-void Controller_PlayerPartnerShowIntroHealthbox(u32 battler)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive
-        && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].ballAnimActive
-        && gSprites[gBattleControllerData[battler]].callback == SpriteCallbackDummy
-        && gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy
-        && ++gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay != 1)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 0;
-        TryShinyAnimation(battler, &gPlayerParty[gBattlerPartyIndexes[battler]]);
-
-        if (IsDoubleBattle() && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-        {
-            DestroySprite(&gSprites[gBattleControllerData[BATTLE_PARTNER(battler)]]);
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(battler)], &gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]], HEALTHBOX_ALL);
-            StartHealthboxSlideIn(BATTLE_PARTNER(battler));
-            SetHealthboxSpriteVisible(gHealthboxSpriteIds[BATTLE_PARTNER(battler)]);
-        }
-
-        DestroySprite(&gSprites[gBattleControllerData[battler]]);
-        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
-        StartHealthboxSlideIn(battler);
-        SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
-
-        gBattleSpritesDataPtr->animationData->introAnimActive = FALSE;
-
-        gBattlerControllerFuncs[battler] = Intro_WaitForHealthbox;
-    }
 }
 
 static void LinkPartnerHandleIntroTrainerBallThrow(u32 battler)

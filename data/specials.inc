@@ -256,7 +256,7 @@ gSpecials::
 	def_special ChooseBattleTowerPlayerParty
 	def_special ValidateEReaderTrainer
 	def_special NullFieldSpecial
-	def_special ReducePlayerPartyToThree
+	def_special ReducePlayerPartyToSelectedMons
 	def_special BedroomPC
 	def_special PlayerPC
 	def_special ShowTownMap
@@ -348,7 +348,7 @@ gSpecials::
 	def_special NullFieldSpecial
 	def_special Dummy_TryEnableBravoTrainerBattleTower
 	def_special DoesPartyHaveEnigmaBerry
-	def_special NullFieldSpecial
+	def_special DoSpecialTrainerBattle
 	def_special SetPostgameFlags
 	def_special StartMarowakBattle
 	def_special ForcePlayerOntoBike

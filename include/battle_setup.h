@@ -42,5 +42,7 @@ const u8 *GetTrainerALoseText(void);
 const u8 *GetTrainerBLoseText(void);
 const u8 *GetTrainerWonSpeech(void);
 void BattleSetup_StartTrainerBattle_Debug(void);
+u8 GetWildBattleTransition(void);
+u8 GetTrainerBattleTransition(void);
 
 #endif // GUARD_BATTLE_SETUP_H

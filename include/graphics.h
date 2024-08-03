@@ -2685,6 +2685,7 @@ extern const u32 gTrainerPalette_LeafBackPic[];
 extern const u32 gTrainerPalette_RedBackPic[];
 extern const u32 gTrainerPalette_PokedudeBackPic[];
 extern const u32 gTrainerPalette_OldManBackPic[];
+extern const u32 gTrainerPalette_Steven[];
 extern const u32 gTrainerPalette_RSPokemonBreederM[];
 extern const u32 gTrainerPalette_RSPokemonBreederF[];
 extern const u32 gTrainerPalette_RSPokemonRangerM[];
@@ -4935,6 +4936,7 @@ extern const u8 gTrainerBackPic_Pokedude[];
 extern const u8 gTrainerBackPic_OldMan[];
 extern const u8 gTrainerBackPic_RSBrendan[];
 extern const u8 gTrainerBackPic_RSMay[];
+extern const u8 gTrainerBackPic_Steven[];
 
 // mail
 extern const u16 gFile_graphics_mail_orange_palette_pal[];

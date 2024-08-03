@@ -129,9 +129,56 @@ static void InitSinglePlayerBtlControllers(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
-        // TODO:
-        DebugPrintfLevel(MGBA_LOG_ERROR, "BATTLE_TYPE_INGAME_PARTNER not implemented");
-        return;
+        gBattleMainFunc = BeginBattleIntro;
+
+        if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+        {
+            gBattlerControllerFuncs[0] = SetControllerToRecordedPlayer;
+            gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
+
+            gBattlerControllerFuncs[1] = SetControllerToOpponent;
+            gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
+
+            gBattlerControllerFuncs[2] = SetControllerToPlayerPartner;
+            gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
+
+            gBattlerControllerFuncs[3] = SetControllerToOpponent;
+            gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
+        }
+        else
+        {
+            gBattlerControllerFuncs[0] = SetControllerToPlayer;
+            gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
+
+            gBattlerControllerFuncs[1] = SetControllerToOpponent;
+            gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
+
+            gBattlerControllerFuncs[2] = SetControllerToPlayerPartner;
+            gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
+
+            gBattlerControllerFuncs[3] = SetControllerToOpponent;
+            gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
+        }
+
+        gBattlersCount = MAX_BATTLERS_COUNT;
+
+        BufferBattlePartyCurrentOrderBySide(0, 0);
+        BufferBattlePartyCurrentOrderBySide(1, 0);
+        BufferBattlePartyCurrentOrderBySide(2, 1);
+        BufferBattlePartyCurrentOrderBySide(3, 1);
+
+        gBattlerPartyIndexes[0] = 0;
+        gBattlerPartyIndexes[1] = 0;
+        if (BATTLE_TWO_VS_ONE_OPPONENT || WILD_DOUBLE_BATTLE)
+        {
+            gBattlerPartyIndexes[2] = 3;
+            gBattlerPartyIndexes[3] = 1;
+        }
+        else
+        {
+            gBattlerPartyIndexes[2] = 3;
+            gBattlerPartyIndexes[3] = 3;
+        }
     }
     else if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
@@ -141,9 +188,8 @@ static void InitSinglePlayerBtlControllers(void)
             gBattlerControllerFuncs[0] = SetControllerToSafari;
         else if (gBattleTypeFlags & (BATTLE_TYPE_OLD_MAN_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
             gBattlerControllerFuncs[0] = SetControllerToOakOrOldMan;
-        // TODO:
-        // else if (IsAiVsAiBattle())
-        //     gBattlerControllerFuncs[0] = SetControllerToPlayerPartner;
+        else if (IsAiVsAiBattle())
+            gBattlerControllerFuncs[0] = SetControllerToPlayerPartner;
         else
             gBattlerControllerFuncs[0] = SetControllerToPlayer;
 
@@ -195,20 +241,18 @@ static void InitSinglePlayerBtlControllers(void)
     {
         gBattleMainFunc = BeginBattleIntro;
 
-        // TODO: Partner battle
-        // if (IsAiVsAiBattle())
-        //     gBattlerControllerFuncs[0] = SetControllerToPlayerPartner;
-        // else
+        if (IsAiVsAiBattle())
+            gBattlerControllerFuncs[0] = SetControllerToPlayerPartner;
+        else
             gBattlerControllerFuncs[0] = SetControllerToPlayer;
         gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
 
         gBattlerControllerFuncs[1] = SetControllerToOpponent;
         gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
 
-        // TODO: Partner battle
-        // if (IsAiVsAiBattle())
-        //     gBattlerControllerFuncs[2] = SetControllerToPlayerPartner;
-        // else
+        if (IsAiVsAiBattle())
+            gBattlerControllerFuncs[2] = SetControllerToPlayerPartner;
+        else
             gBattlerControllerFuncs[2] = SetControllerToPlayer;
         gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
 

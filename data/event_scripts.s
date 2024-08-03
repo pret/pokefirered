@@ -2,6 +2,7 @@
 #include "config/battle.h"
 #include "constants/global.h"
 #include "constants/flags.h"
+#include "constants/battle_tower.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/decorations.h"

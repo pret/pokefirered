@@ -1392,3 +1392,6 @@ const u8 gText_Defense[] = _("DEFENSE");
 const u8 gText_Speed[] = _("SPEED");
 const u8 gText_SpAtk[] = _("SP. ATK");
 const u8 gText_SpDef[] = _("SP. DEF");
+
+const u8 gText_AM[] = _("AM");
+const u8 gText_PM[] = _("PM");

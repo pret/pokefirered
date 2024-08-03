@@ -116,7 +116,6 @@ static void CB2_WhileSavingAfterLinkBattle(void);
 static void task50_after_link_battle_save(u8 taskId);
 static void PrintSaveStats(void);
 static void CloseSaveStatsWindow(void);
-static void CloseStartMenu(void);
 static void HideStartMenuDebug(void);
 
 static const u8 sText_MenuDebug[] = _("DEBUG");
@@ -1120,7 +1119,7 @@ static void CloseSaveStatsWindow(void)
     RemoveWindow(sSaveStatsWindowId);
 }
 
-static void CloseStartMenu(void)
+void CloseStartMenu(void)
 {
     PlaySE(SE_SELECT);
     ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);

@@ -17,6 +17,7 @@
 #include "new_menu_helpers.h"
 #include "overworld.h"
 #include "party_menu.h"
+#include "pokemon_storage_system.h"
 #include "quest_log.h"
 #include "script.h"
 #include "special_field_anim.h"
@@ -722,7 +723,7 @@ bool8 FldEff_PokecenterHeal(void)
     u8 nPokemon;
     struct Task *task;
 
-    nPokemon = CalculatePlayerPartyCount();
+    nPokemon = (OW_IGNORE_EGGS_ON_HEAL <= GEN_3) ? CalculatePlayerPartyCount() : CountPartyNonEggMons();
     task = &gTasks[CreateTask(Task_PokecenterHeal, 0xFF)];
     task->tNumMons = nPokemon;
     task->tFirstBallX = 93;

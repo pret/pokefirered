@@ -1096,3 +1096,11 @@ void SlightlyDarkenPalsInWeather(u16 *palbuf, u16 *unused, u32 size)
         break;
     }
 }
+
+bool32 IsWeatherAlphaBlend(void)
+{
+    return (gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL
+         || gWeatherPtr->currWeather == WEATHER_FOG_DIAGONAL
+         || gWeatherPtr->currWeather == WEATHER_UNDERWATER_BUBBLES
+         || gWeatherPtr->currWeather == WEATHER_UNDERWATER);
+}

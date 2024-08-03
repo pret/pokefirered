@@ -1616,4 +1616,8 @@ extern const u8 gText_SpAtk[];
 extern const u8 gText_SpDef[];
 extern const u8 gText_Speed[];
 
+// Map name pop-up
+extern const u8 gText_AM[];
+extern const u8 gText_PM[];
+
 #endif //GUARD_STRINGS_H

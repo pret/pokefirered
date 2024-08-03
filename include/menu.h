@@ -24,6 +24,8 @@ struct MenuAction
     } func;
 };
 
+extern EWRAM_DATA u8 gPopupTaskId;
+
 // menu2
 void AddTextPrinterParameterized3(u8 windowId, u8 fontId, u8 x, u8 y, const u8 * color, s8 speed, const u8 * str);
 void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, const u8 *color, s8 speed, const u8 *str);
@@ -70,5 +72,14 @@ void DrawStdFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 bas
 void ClearDialogWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram);
 void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 tileNum, u8 paletteNum);
 struct WindowTemplate SetWindowTemplateFields(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock);
+void SetWindowTemplateFields2(struct WindowTemplate *template, u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock);
+void RemoveMapNamePopUpWindow(void);
+u8 GetMapNamePopUpWindowId(void);
+u8 AddMapNamePopUpWindow(void);
+u8 AddSecondaryPopUpWindow(void);
+u8 GetSecondaryPopUpWindowId(void);
+void RemoveSecondaryPopUpWindow(void);
+void HBlankCB_DoublePopupWindow(void);
+void InitPopupWindows(void);
 
 #endif // GUARD_MENU_H

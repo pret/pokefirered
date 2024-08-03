@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gflib.h"
+#include "field_weather.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "strings.h"
@@ -27,6 +28,8 @@ static EWRAM_DATA u16 sTileNum = 0;
 static EWRAM_DATA u8 sPaletteNum = 0;
 static EWRAM_DATA u8 sYesNoWindowId = 0;
 static EWRAM_DATA u8 sTopBarWindowId = 0;
+static EWRAM_DATA u8 sMapNamePopupWindowId = 0;
+static EWRAM_DATA u8 sSecondaryPopupWindowId = 0;
 
 static void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
 static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
@@ -478,6 +481,17 @@ struct WindowTemplate SetWindowTemplateFields(u8 bg, u8 left, u8 top, u8 width, 
     return template;
 }
 
+void SetWindowTemplateFields2(struct WindowTemplate *template, u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
+{
+    template->bg = bg;
+    template->tilemapLeft = left;
+    template->tilemapTop = top;
+    template->width = width;
+    template->height = height;
+    template->paletteNum = paletteNum;
+    template->baseBlock = baseBlock;
+}
+
 void CreateYesNoMenu(const struct WindowTemplate *window, u8 fontId, u8 left, u8 top, u16 baseTileNum, u8 paletteNum, u8 initialCursorPos)
 {
     struct TextPrinterTemplate textSubPrinter;
@@ -672,4 +686,83 @@ s8 Menu_ProcessInputGridLayout(void)
         return MENU_NOTHING_CHOSEN;
     }
     return MENU_NOTHING_CHOSEN;
+}
+
+u16 AddWindowParameterized(u8 bg, u8 left, u8 top, u8 width, u8 height, u8 paletteNum, u16 baseBlock)
+{
+    struct WindowTemplate template;
+    SetWindowTemplateFields2(&template, bg, left, top, width, height, paletteNum, baseBlock);
+    return AddWindow(&template);
+}
+
+void InitPopupWindows(void)
+{
+    sMapNamePopupWindowId = WINDOW_NONE;
+    if (OW_POPUP_GENERATION == GEN_5)
+        sSecondaryPopupWindowId = WINDOW_NONE;
+}
+
+u8 AddMapNamePopUpWindow(void)
+{
+    if (sMapNamePopupWindowId == WINDOW_NONE)
+    {
+        if (OW_POPUP_GENERATION == GEN_5)
+            sMapNamePopupWindowId = AddWindowParameterized(0, 0, 0, 30, 3, 14, 0x107);
+        else
+            sMapNamePopupWindowId = AddWindowParameterized(0, 1, 1, 10, 3, 14, 0x107);
+    }
+    return sMapNamePopupWindowId;
+}
+
+u8 GetMapNamePopUpWindowId(void)
+{
+    return sMapNamePopupWindowId;
+}
+
+void RemoveMapNamePopUpWindow(void)
+{
+    if (sMapNamePopupWindowId != WINDOW_NONE)
+    {
+        RemoveWindow(sMapNamePopupWindowId);
+        sMapNamePopupWindowId = WINDOW_NONE;
+    }
+}
+
+void HBlankCB_DoublePopupWindow(void)
+{
+    u16 offset = gTasks[gPopupTaskId].data[2];
+    u16 scanline = REG_VCOUNT;
+
+    if (scanline < 80 || scanline > 160)
+    {
+        REG_BG0VOFS = offset;
+        if(OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
+            REG_BLDALPHA = BLDALPHA_BLEND(15, 5);
+    }
+    else
+    {
+        REG_BG0VOFS = 512 - offset;
+    }
+}
+
+// BW map pop-ups
+u8 AddSecondaryPopUpWindow(void)
+{
+    if (sSecondaryPopupWindowId == WINDOW_NONE)
+        sSecondaryPopupWindowId = AddWindowParameterized(0, 0, 17, 30, 3, 14, 0x161);
+    return sSecondaryPopupWindowId;
+}
+
+u8 GetSecondaryPopUpWindowId(void)
+{
+    return sSecondaryPopupWindowId;
+}
+
+void RemoveSecondaryPopUpWindow(void)
+{
+    if (sSecondaryPopupWindowId != WINDOW_NONE)
+    {
+        RemoveWindow(sSecondaryPopupWindowId);
+        sSecondaryPopupWindowId = WINDOW_NONE;
+    }
 }

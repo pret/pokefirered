@@ -14,6 +14,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 var1, u8 var2, u8 var3);
 bool8 CreatePCMenu(void);
 void ScriptMenu_DisplayPCStartupPrompt(void);
 void DrawVerticalMultichoiceMenuInternal(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos, const struct MenuAction *list, u8 count);
+int ConvertPixelWidthToTileWidth(int width);
 
 bool8 (*ScriptMenu_HidePokemonPic(void))(void);
 void QL_DestroyAbortedDisplay(void);

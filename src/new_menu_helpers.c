@@ -428,6 +428,7 @@ void InitStandardTextBoxWindows(void)
     InitWindows(sStandardTextBox_WindowTemplates);
     sStartMenuWindowId = 0xFF;
     MapNamePopupWindowIdSetDummy();
+    InitPopupWindows();
 }
 
 void FreeAllOverworldWindowBuffers(void)

@@ -93,6 +93,37 @@ void SetGpuReg(u8 regOffset, u16 value)
 	}
 }
 
+void SetGpuReg_ForcedBlank(u8 regOffset, u16 value)
+{
+    if (regOffset < GPU_REG_BUF_SIZE)
+    {
+        GPU_REG_BUF(regOffset) = value;
+
+        if (REG_DISPCNT & DISPCNT_FORCED_BLANK)
+        {
+            CopyBufferedValueToGpuReg(regOffset);
+        }
+        else
+        {
+            s32 i;
+
+            sGpuRegBufferLocked = TRUE;
+
+            for (i = 0; i < GPU_REG_BUF_SIZE && sGpuRegWaitingList[i] != EMPTY_SLOT; i++)
+            {
+                if (sGpuRegWaitingList[i] == regOffset)
+                {
+                    sGpuRegBufferLocked = FALSE;
+                    return;
+                }
+            }
+
+            sGpuRegWaitingList[i] = regOffset;
+            sGpuRegBufferLocked = FALSE;
+        }
+    }
+}
+
 u16 GetGpuReg(u8 regOffset)
 {
 	if (regOffset == REG_OFFSET_DISPSTAT)

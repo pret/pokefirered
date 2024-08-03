@@ -142,6 +142,7 @@ void delay(u8, u8, u32);
 void UpdateSpritePaletteWithWeather(u8 palIdx);
 void ResetPreservedPalettesInWeather(void);
 void PreservePaletteInWeather(u8 palIdx);
+bool32 IsWeatherAlphaBlend(void);
 
 void SetNextWeather(u8 weather);
 void SetCurrentAndNextWeather(u8 weather);

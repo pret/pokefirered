@@ -1325,3 +1325,9 @@ u16 GetSelectedSeagallopDestination(void)
     }
     return SEAGALLOP_VERMILION_CITY;
 }
+
+int ConvertPixelWidthToTileWidth(int width)
+{
+    return (((width + 9) / 8) + 1) > MAX_MULTICHOICE_WIDTH ? MAX_MULTICHOICE_WIDTH : (((width + 9) / 8) + 1);
+}
+

@@ -200,7 +200,7 @@ struct PokemonSummaryScreenData
     u8 ALIGNED(4) curPageIndex; /* 0x3214 */
     u8 ALIGNED(4) unk3218; /* 0x3218 */
     u8 ALIGNED(4) isBoxMon; /* 0x321C */
-    u8 ALIGNED(4) monTypes[2]; /* 0x3220 */
+    u8 ALIGNED(4) monTypes[3]; /* 0x3220 */
 
     u8 ALIGNED(4) pageFlipDirection; /* 0x3224 */
     u8 ALIGNED(4) unk3228; /* 0x3228 */
@@ -2188,6 +2188,7 @@ static void BufferMonInfo(void)
 
     sMonSummaryScreen->monTypes[0] = gSpeciesInfo[dexNum].types[0];
     sMonSummaryScreen->monTypes[1] = gSpeciesInfo[dexNum].types[1];
+    sMonSummaryScreen->monTypes[2] = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_TERA_TYPE);
 
     GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_NICKNAME, tempStr);
     StringCopyN_Multibyte(sMonSummaryScreen->summary.nicknameStrBuf, tempStr, POKEMON_NAME_LENGTH);
@@ -3665,6 +3666,8 @@ static void PokeSum_PrintMonTypeIcons(void)
 
             if (sMonSummaryScreen->monTypes[0] != sMonSummaryScreen->monTypes[1])
                 BlitMenuInfoIcon(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], sMonSummaryScreen->monTypes[1] + 1, 83, 35);
+            if (P_SHOW_TERA_TYPE == GEN_9 && sMonSummaryScreen->monTypes[2] != TYPE_NONE)
+                BlitMenuInfoIcon(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE], sMonSummaryScreen->monTypes[2] + 1, 83, 5);
         }
         break;
     case PSS_PAGE_SKILLS:

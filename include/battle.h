@@ -574,6 +574,13 @@ struct LostItem
     u16 stolen:1;
 };
 
+#if HQ_RANDOM == TRUE
+struct BattleVideo {
+    u32 battleTypeFlags;
+    rng_value_t rngSeed;
+};
+#endif
+
 struct BattleStruct
 {
     u8 turnEffectsTracker;
@@ -643,7 +650,12 @@ struct BattleStruct
     u16 lastTakenMoveFrom[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT]; // a 2-D array [target][attacker]
     union {
         struct LinkBattlerHeader linkBattlerHeader;
-        struct MultiPartnerMenuPokemon multiBattleMons[3];
+
+        #if HQ_RANDOM == FALSE
+        u32 battleVideo[2];
+        #else
+        struct BattleVideo battleVideo;
+        #endif
     } multiBuffer;
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
@@ -1061,7 +1073,6 @@ extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
 extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
-extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 extern u8 gPartyCriticalHits[PARTY_SIZE];
 extern const struct BattleMoveEffect gBattleMoveEffects[];
 extern u32 gFieldStatuses;

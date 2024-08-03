@@ -57,20 +57,6 @@ enum {
     FIRST_TURN_EVENTS_END,
 };
 
-extern const struct OamData gOamData_BattlerOpponent;
-extern const struct OamData gOamData_BattlerPlayer;
-extern const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES];
-extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];
-
-extern const u8 gStatusConditionString_PoisonJpn[8];
-extern const u8 gStatusConditionString_SleepJpn[8];
-extern const u8 gStatusConditionString_ParalysisJpn[8];
-extern const u8 gStatusConditionString_BurnJpn[8];
-extern const u8 gStatusConditionString_IceJpn[8];
-extern const u8 gStatusConditionString_ConfusionJpn[8];
-extern const u8 gStatusConditionString_LoveJpn[8];
-extern const u8 *const gStatusConditionStringsTable[7][2];
-
 void CB2_InitBattle(void);
 void BattleMainCB2(void);
 void CB2_QuitRecordedBattle(void);
@@ -121,8 +107,23 @@ void ModifyPersonalityForNature(u32 *personality, u32 newNature);
 u32 GeneratePersonalityForGender(u32 gender, u32 species);
 void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon *partyEntry);
 
+extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 
+extern const struct OamData gOamData_BattlerOpponent;
+extern const struct OamData gOamData_BattlerPlayer;
+extern const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES];
+extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];
 
 extern const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES];
+
+extern const u8 gStatusConditionString_PoisonJpn[8];
+extern const u8 gStatusConditionString_SleepJpn[8];
+extern const u8 gStatusConditionString_ParalysisJpn[8];
+extern const u8 gStatusConditionString_BurnJpn[8];
+extern const u8 gStatusConditionString_IceJpn[8];
+extern const u8 gStatusConditionString_ConfusionJpn[8];
+extern const u8 gStatusConditionString_LoveJpn[8];
+
+extern const u8 *const gStatusConditionStringsTable[7][2];
 
 #endif // GUARD_BATTLE_MAIN_H

@@ -196,7 +196,7 @@ u16 GetObjectPaletteTag(u8 paletteIndex);
 void SetSpritePosToMapCoords(s16 x, s16 y, s16 *x2, s16 *y2);
 void UpdateObjectEventSpriteInvisibility(struct Sprite *sprite, bool8 invisible);
 u8 ElevationToPriority(u8 elevation);
-void ObjectEventUpdateElevation(struct ObjectEvent *pObject);
+void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *sprite);
 void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *sprite, u8 offset);
 void CopyObjectGraphicsInfoToSpriteTemplate(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables);
 u8 AddCameraObject(u8 trackedSpriteId);

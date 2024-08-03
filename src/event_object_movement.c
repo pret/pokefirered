@@ -6081,6 +6081,12 @@ static u8 GetCollisionInDirection(struct ObjectEvent *objectEvent, u8 direction)
 u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
 {
     u8 direction = dir;
+
+#if OW_FLAG_NO_COLLISION != 0
+    if (FlagGet(OW_FLAG_NO_COLLISION))
+        return COLLISION_NONE;
+#endif
+
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
         return COLLISION_OUTSIDE_RANGE;
     else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))
@@ -9833,7 +9839,7 @@ static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, 
     if (objEvent->fixedPriority)
         return;
 
-    ObjectEventUpdateElevation(objEvent);
+    ObjectEventUpdateElevation(objEvent, sprite);
     if (objEvent->localId == OBJ_EVENT_ID_FOLLOWER)
     {
         // keep subspriteMode synced with player's
@@ -9860,13 +9866,20 @@ u8 ElevationToPriority(u8 elevation)
     return sElevationToPriority[elevation];
 }
 
-void ObjectEventUpdateElevation(struct ObjectEvent *objEvent)
+// Returns current elevation, or 15 for bridges
+void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     u8 curElevation = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
     u8 prevElevation = MapGridGetElevationAt(objEvent->previousCoords.x, objEvent->previousCoords.y);
 
     if (curElevation == 15 || prevElevation == 15)
+    {
+        // Ignore subsprite priorities under bridges
+        // so all subsprites will display below it
+        if (OW_LARGE_OW_SUPPORT && sprite != NULL)
+            sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
         return;
+    }
 
     objEvent->currentElevation = curElevation;
 
@@ -10218,6 +10231,8 @@ static void DoGroundEffects_OnBeginStep(struct ObjectEvent *objEvent, struct Spr
 #endif
     {
         flags = 0;
+        if (OW_LARGE_OW_SUPPORT && !sprite->oam.affineMode)
+            sprite->subspriteMode = SUBSPRITES_ON;
         UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnBeginStep(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);

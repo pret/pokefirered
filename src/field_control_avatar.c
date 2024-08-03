@@ -783,6 +783,9 @@ void RestartWildEncounterImmunitySteps(void)
 
 static bool8 CheckStandardWildEncounter(u32 metatileAttributes)
 {
+    if (FlagGet(OW_FLAG_NO_ENCOUNTER))
+        return FALSE;
+
     return TryStandardWildEncounter(metatileAttributes);
 }
 

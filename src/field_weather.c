@@ -65,29 +65,30 @@ static bool8 LightenSpritePaletteInFog(u8 paletteIndex);
 
 struct Weather *const gWeatherPtr = &sWeather;
 
-static const struct WeatherCallbacks sWeatherFuncs[] = {
-    {None_Init, None_Main, None_Init, None_Finish},
-    {Clouds_InitVars, Clouds_Main, Clouds_InitAll, Clouds_Finish},
-    {Sunny_InitVars, Sunny_Main, Sunny_InitAll, Sunny_Finish},
-    {Rain_InitVars, Rain_Main, Rain_InitAll, Rain_Finish},
-    {Snow_InitVars, Snow_Main, Snow_InitAll, Snow_Finish},
-    {Thunderstorm_InitVars, Thunderstorm_Main, Thunderstorm_InitAll, Thunderstorm_Finish},
-    {FogHorizontal_InitVars, FogHorizontal_Main, FogHorizontal_InitAll, FogHorizontal_Finish},
-    {Ash_InitVars, Ash_Main, Ash_InitAll, Ash_Finish},
-    {Sandstorm_InitVars, Sandstorm_Main, Sandstorm_InitAll, Sandstorm_Finish},
-    {FogDiagonal_InitVars, FogDiagonal_Main, FogDiagonal_InitAll, FogDiagonal_Finish},
-    {FogHorizontal_InitVars, FogHorizontal_Main, FogHorizontal_InitAll, FogHorizontal_Finish},
-    {Shade_InitVars, Shade_Main, Shade_InitAll, Shade_Finish},
-    {Drought_InitVars, Drought_Main, Drought_InitAll, Drought_Finish},
-    {Downpour_InitVars, Thunderstorm_Main, Downpour_InitAll, Thunderstorm_Finish},
-    {Bubbles_InitVars, Bubbles_Main, Bubbles_InitAll, Bubbles_Finish},
+static const struct WeatherCallbacks sWeatherFuncs[] =
+{
+    [WEATHER_NONE]               = {None_Init,              None_Main,          None_Init,             None_Finish},
+    [WEATHER_SUNNY_CLOUDS]       = {Clouds_InitVars,        Clouds_Main,        Clouds_InitAll,        Clouds_Finish},
+    [WEATHER_SUNNY]              = {Sunny_InitVars,         Sunny_Main,         Sunny_InitAll,         Sunny_Finish},
+    [WEATHER_RAIN]               = {Rain_InitVars,          Rain_Main,          Rain_InitAll,          Rain_Finish},
+    [WEATHER_SNOW]               = {Snow_InitVars,          Snow_Main,          Snow_InitAll,          Snow_Finish},
+    [WEATHER_RAIN_THUNDERSTORM]  = {Thunderstorm_InitVars,  Thunderstorm_Main,  Thunderstorm_InitAll,  Thunderstorm_Finish},
+    [WEATHER_FOG_HORIZONTAL]     = {FogHorizontal_InitVars, FogHorizontal_Main, FogHorizontal_InitAll, FogHorizontal_Finish},
+    [WEATHER_VOLCANIC_ASH]       = {Ash_InitVars,           Ash_Main,           Ash_InitAll,           Ash_Finish},
+    [WEATHER_SANDSTORM]          = {Sandstorm_InitVars,     Sandstorm_Main,     Sandstorm_InitAll,     Sandstorm_Finish},
+    [WEATHER_FOG_DIAGONAL]       = {FogDiagonal_InitVars,   FogDiagonal_Main,   FogDiagonal_InitAll,   FogDiagonal_Finish},
+    [WEATHER_UNDERWATER]         = {FogHorizontal_InitVars, FogHorizontal_Main, FogHorizontal_InitAll, FogHorizontal_Finish},
+    [WEATHER_SHADE]              = {Shade_InitVars,         Shade_Main,         Shade_InitAll,         Shade_Finish},
+    [WEATHER_DROUGHT]            = {Drought_InitVars,       Drought_Main,       Drought_InitAll,       Drought_Finish},
+    [WEATHER_DOWNPOUR]           = {Downpour_InitVars,      Thunderstorm_Main,  Downpour_InitAll,      Thunderstorm_Finish},
+    [WEATHER_UNDERWATER_BUBBLES] = {Bubbles_InitVars,       Bubbles_Main,       Bubbles_InitAll,       Bubbles_Finish},
 };
 
 static void (*const sWeatherPalStateFuncs[])(void) = {
-    UpdateWeatherGammaShift,
-    FadeInScreenWithWeather,
-    DoNothing,
-    DoNothing
+    [WEATHER_PAL_STATE_CHANGING_WEATHER]  = UpdateWeatherGammaShift,
+    [WEATHER_PAL_STATE_SCREEN_FADING_IN]  = FadeInScreenWithWeather,
+    [WEATHER_PAL_STATE_SCREEN_FADING_OUT] = DoNothing,
+    [WEATHER_PAL_STATE_IDLE]              = DoNothing,
 };
 
 static const u8 sBasePaletteGammaTypes[32] = {

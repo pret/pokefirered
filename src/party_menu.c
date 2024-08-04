@@ -58,6 +58,7 @@
 #include "text_window.h"
 #include "tm_case.h"
 #include "trade.h"
+#include "trainer_pokemon_sprites.h"
 #include "union_room.h"
 #include "constants/abilities.h"
 #include "constants/battle.h"
@@ -409,6 +410,7 @@ static void Task_ReplaceMoveWithTMHM(u8 taskId);
 static void CB2_UseEvolutionStone(void);
 static bool8 MonCanEvolve(void);
 static u8 CanTeachMove(struct Pokemon *mon, u16 move);
+static void TryItemHoldFormChange(struct Pokemon *mon);
 
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleRestoreWhichMoveInput(u8 taskId);
@@ -1805,6 +1807,7 @@ static void GiveItemToMon(struct Pokemon *mon, u16 item)
     itemBytes[0] = item;
     itemBytes[1] = item >> 8;
     SetMonData(mon, MON_DATA_HELD_ITEM, itemBytes);
+    TryItemHoldFormChange(&gPlayerParty[gPartyMenu.slotId]);
 }
 
 static u8 TryTakeMonItem(struct Pokemon *mon)
@@ -1817,6 +1820,7 @@ static u8 TryTakeMonItem(struct Pokemon *mon)
         return 1;
     item = ITEM_NONE;
     SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+    TryItemHoldFormChange(&gPlayerParty[gPartyMenu.slotId]);
     return 2;
 }
 
@@ -7639,6 +7643,20 @@ static void CursorCB_ChangeAbility(u8 taskId)
 {
     gSpecialVar_Result = 1;
     TryMultichoiceFormChange(taskId);
+}
+
+static void TryItemHoldFormChange(struct Pokemon *mon)
+{
+    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_ITEM_HOLD, 0);
+    if (targetSpecies != SPECIES_NONE)
+    {
+        PlayCry_NormalNoDucking(targetSpecies, 0, CRY_VOLUME_RS, CRY_VOLUME_RS);
+        SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
+        DestroyMonIcon(&gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId]);
+        CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY, NULL), &sPartyMenuBoxes[gPartyMenu.slotId], 1);
+        CalculateMonStats(mon);
+        UpdatePartyMonHeldItemSprite(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
+    }
 }
 
 static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)

@@ -1253,24 +1253,26 @@ static u8 Debug_CheckToggleFlags(u8 id)
             result = FlagGet(FLAG_SYS_B_DASH);
             break;
         case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_LOCATIONS:
-            result = FlagGet(FLAG_WORLD_MAP_PALLET_TOWN)/*  && // TODO: debug
-                FlagGet(FLAG_VISITED_OLDALE_TOWN) &&
-                FlagGet(FLAG_VISITED_DEWFORD_TOWN) &&
-                FlagGet(FLAG_VISITED_LAVARIDGE_TOWN) &&
-                FlagGet(FLAG_VISITED_FALLARBOR_TOWN) &&
-                FlagGet(FLAG_VISITED_VERDANTURF_TOWN) &&
-                FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) &&
-                FlagGet(FLAG_VISITED_PETALBURG_CITY) &&
-                FlagGet(FLAG_VISITED_SLATEPORT_CITY) &&
-                FlagGet(FLAG_VISITED_MAUVILLE_CITY) &&
-                FlagGet(FLAG_VISITED_RUSTBORO_CITY) &&
-                FlagGet(FLAG_VISITED_FORTREE_CITY) &&
-                FlagGet(FLAG_VISITED_LILYCOVE_CITY) &&
-                FlagGet(FLAG_VISITED_MOSSDEEP_CITY) &&
-                FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) &&
-                FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) &&
-                FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) &&
-                FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER) */;
+            result = FlagGet(FLAG_WORLD_MAP_PALLET_TOWN) &&
+                FlagGet(FLAG_WORLD_MAP_VIRIDIAN_CITY) &&
+                FlagGet(FLAG_WORLD_MAP_PEWTER_CITY) &&
+                FlagGet(FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F) &&
+                FlagGet(FLAG_WORLD_MAP_CERULEAN_CITY) &&
+                FlagGet(FLAG_WORLD_MAP_VERMILION_CITY) &&
+                FlagGet(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F) &&
+                FlagGet(FLAG_WORLD_MAP_LAVENDER_TOWN) &&
+                FlagGet(FLAG_WORLD_MAP_CELADON_CITY) &&
+                FlagGet(FLAG_WORLD_MAP_FUCHSIA_CITY) &&
+                FlagGet(FLAG_WORLD_MAP_SAFFRON_CITY) &&
+                FlagGet(FLAG_WORLD_MAP_CINNABAR_ISLAND) &&
+                FlagGet(FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR) &&
+                FlagGet(FLAG_WORLD_MAP_ONE_ISLAND) &&
+                FlagGet(FLAG_WORLD_MAP_TWO_ISLAND) &&
+                FlagGet(FLAG_WORLD_MAP_THREE_ISLAND) &&
+                FlagGet(FLAG_WORLD_MAP_FOUR_ISLAND) &&
+                FlagGet(FLAG_WORLD_MAP_FIVE_ISLAND) &&
+                FlagGet(FLAG_WORLD_MAP_SIX_ISLAND) &&
+                FlagGet(FLAG_WORLD_MAP_SEVEN_ISLAND);
             break;
         case DEBUG_FLAGVAR_MENU_ITEM_TOGGLE_BADGES_ALL:
             result = FlagGet(FLAG_BADGE01_GET) &&
@@ -2737,51 +2739,54 @@ static void DebugAction_FlagsVars_RunningShoes(u8 taskId)
 
 static void DebugAction_FlagsVars_ToggleFlyFlags(u8 taskId)
 {
-    // TODO: debug
-    // if (FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER))
-    // {
-    //     PlaySE(SE_PC_OFF);
-    //     FlagClear(FLAG_VISITED_LITTLEROOT_TOWN);
-    //     FlagClear(FLAG_VISITED_OLDALE_TOWN);
-    //     FlagClear(FLAG_VISITED_DEWFORD_TOWN);
-    //     FlagClear(FLAG_VISITED_LAVARIDGE_TOWN);
-    //     FlagClear(FLAG_VISITED_FALLARBOR_TOWN);
-    //     FlagClear(FLAG_VISITED_VERDANTURF_TOWN);
-    //     FlagClear(FLAG_VISITED_PACIFIDLOG_TOWN);
-    //     FlagClear(FLAG_VISITED_PETALBURG_CITY);
-    //     FlagClear(FLAG_VISITED_SLATEPORT_CITY);
-    //     FlagClear(FLAG_VISITED_MAUVILLE_CITY);
-    //     FlagClear(FLAG_VISITED_RUSTBORO_CITY);
-    //     FlagClear(FLAG_VISITED_FORTREE_CITY);
-    //     FlagClear(FLAG_VISITED_LILYCOVE_CITY);
-    //     FlagClear(FLAG_VISITED_MOSSDEEP_CITY);
-    //     FlagClear(FLAG_VISITED_SOOTOPOLIS_CITY);
-    //     FlagClear(FLAG_VISITED_EVER_GRANDE_CITY);
-    //     FlagClear(FLAG_LANDMARK_POKEMON_LEAGUE);
-    //     FlagClear(FLAG_LANDMARK_BATTLE_FRONTIER);
-    // }
-    // else
-    // {
-    //     PlaySE(SE_PC_LOGIN);
-    //     FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
-    //     FlagSet(FLAG_VISITED_OLDALE_TOWN);
-    //     FlagSet(FLAG_VISITED_DEWFORD_TOWN);
-    //     FlagSet(FLAG_VISITED_LAVARIDGE_TOWN);
-    //     FlagSet(FLAG_VISITED_FALLARBOR_TOWN);
-    //     FlagSet(FLAG_VISITED_VERDANTURF_TOWN);
-    //     FlagSet(FLAG_VISITED_PACIFIDLOG_TOWN);
-    //     FlagSet(FLAG_VISITED_PETALBURG_CITY);
-    //     FlagSet(FLAG_VISITED_SLATEPORT_CITY);
-    //     FlagSet(FLAG_VISITED_MAUVILLE_CITY);
-    //     FlagSet(FLAG_VISITED_RUSTBORO_CITY);
-    //     FlagSet(FLAG_VISITED_FORTREE_CITY);
-    //     FlagSet(FLAG_VISITED_LILYCOVE_CITY);
-    //     FlagSet(FLAG_VISITED_MOSSDEEP_CITY);
-    //     FlagSet(FLAG_VISITED_SOOTOPOLIS_CITY);
-    //     FlagSet(FLAG_VISITED_EVER_GRANDE_CITY);
-    //     FlagSet(FLAG_LANDMARK_POKEMON_LEAGUE);
-    //     FlagSet(FLAG_LANDMARK_BATTLE_FRONTIER);
-    // }
+    if (FlagGet(FLAG_WORLD_MAP_SEVEN_ISLAND))
+    {
+        PlaySE(SE_PC_OFF);
+        FlagClear(FLAG_WORLD_MAP_PALLET_TOWN);
+        FlagClear(FLAG_WORLD_MAP_VIRIDIAN_CITY);
+        FlagClear(FLAG_WORLD_MAP_PEWTER_CITY);
+        FlagClear(FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F);
+        FlagClear(FLAG_WORLD_MAP_CERULEAN_CITY);
+        FlagClear(FLAG_WORLD_MAP_VERMILION_CITY);
+        FlagClear(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F);
+        FlagClear(FLAG_WORLD_MAP_LAVENDER_TOWN);
+        FlagClear(FLAG_WORLD_MAP_CELADON_CITY);
+        FlagClear(FLAG_WORLD_MAP_FUCHSIA_CITY);
+        FlagClear(FLAG_WORLD_MAP_SAFFRON_CITY);
+        FlagClear(FLAG_WORLD_MAP_CINNABAR_ISLAND);
+        FlagClear(FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR);
+        FlagClear(FLAG_WORLD_MAP_ONE_ISLAND);
+        FlagClear(FLAG_WORLD_MAP_TWO_ISLAND);
+        FlagClear(FLAG_WORLD_MAP_THREE_ISLAND);
+        FlagClear(FLAG_WORLD_MAP_FOUR_ISLAND);
+        FlagClear(FLAG_WORLD_MAP_FIVE_ISLAND);
+        FlagClear(FLAG_WORLD_MAP_SIX_ISLAND);
+        FlagClear(FLAG_WORLD_MAP_SEVEN_ISLAND);
+    }
+    else
+    {
+        PlaySE(SE_PC_LOGIN);
+        FlagSet(FLAG_WORLD_MAP_PALLET_TOWN);
+        FlagSet(FLAG_WORLD_MAP_VIRIDIAN_CITY);
+        FlagSet(FLAG_WORLD_MAP_PEWTER_CITY);
+        FlagSet(FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F);
+        FlagSet(FLAG_WORLD_MAP_CERULEAN_CITY);
+        FlagSet(FLAG_WORLD_MAP_VERMILION_CITY);
+        FlagSet(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F);
+        FlagSet(FLAG_WORLD_MAP_LAVENDER_TOWN);
+        FlagSet(FLAG_WORLD_MAP_CELADON_CITY);
+        FlagSet(FLAG_WORLD_MAP_FUCHSIA_CITY);
+        FlagSet(FLAG_WORLD_MAP_SAFFRON_CITY);
+        FlagSet(FLAG_WORLD_MAP_CINNABAR_ISLAND);
+        FlagSet(FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR);
+        FlagSet(FLAG_WORLD_MAP_ONE_ISLAND);
+        FlagSet(FLAG_WORLD_MAP_TWO_ISLAND);
+        FlagSet(FLAG_WORLD_MAP_THREE_ISLAND);
+        FlagSet(FLAG_WORLD_MAP_FOUR_ISLAND);
+        FlagSet(FLAG_WORLD_MAP_FIVE_ISLAND);
+        FlagSet(FLAG_WORLD_MAP_SIX_ISLAND);
+        FlagSet(FLAG_WORLD_MAP_SEVEN_ISLAND);
+    }
 }
 
 static void DebugAction_FlagsVars_ToggleBadgeFlags(u8 taskId)

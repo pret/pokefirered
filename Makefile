@@ -335,7 +335,7 @@ LD_SCRIPT_DEPS :=
 endif
 
 $(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS)
-	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< -o ../../$@ $(OBJS_REL) $(LIB)
+	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 $(ROM): $(ELF)

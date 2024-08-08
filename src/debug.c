@@ -474,7 +474,7 @@ extern const u8 Debug_CheckROMSpace[];
 extern const u8 Debug_BoxFilledMessage[];
 extern const u8 Debug_ShowExpansionVersion[];
 
-extern const u8 FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon[];
+extern const u8 TwoIsland_House_EventScript_ChooseMonToTutor[];
 
 #include "data/map_group_count.h"
 
@@ -4414,7 +4414,7 @@ SOUND_LIST_SE
 
 static void DebugAction_Party_MoveReminder(u8 taskId)
 {
-    // Debug_DestroyMenu_Full_Script(taskId, FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon);
+    Debug_DestroyMenu_Full_Script(taskId, TwoIsland_House_EventScript_ChooseMonToTutor);
 }
 
 static void DebugAction_Party_HatchAnEgg(u8 taskId)

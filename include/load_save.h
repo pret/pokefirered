@@ -9,6 +9,7 @@ extern struct SaveBlock2 gSaveBlock2;
 extern struct SaveBlock3 gSaveblock3;
 extern struct PokemonStorage gPokemonStorage;
 
+void ClearSav3(void);
 void ClearSav2(void);
 void ClearSav1(void);
 void CheckForFlashMemory(void);

@@ -25,7 +25,7 @@
 #include "battle_message.h"
 #include "pokedex.h"
 #include "palette.h"
-// #include "international_string_util.h"
+#include "international_string_util.h"
 #include "safari_zone.h"
 #include "battle_anim.h"
 #include "constants/battle_anim.h"
@@ -284,7 +284,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
 
             if (zEffect == Z_EFFECT_CURSE)
             {
-                if (moveInfo->monType1 == TYPE_GHOST || moveInfo->monType2 == TYPE_GHOST || moveInfo->monType3 == TYPE_GHOST)
+                if (moveInfo->monTypes[0] == TYPE_GHOST || moveInfo->monTypes[1] == TYPE_GHOST || moveInfo->monTypes[2] == TYPE_GHOST)
                     zEffect = Z_EFFECT_RECOVER_HP;
                 else
                     zEffect = Z_EFFECT_ATK_UP_1;
@@ -415,9 +415,7 @@ static void ZMoveSelectionDisplayPpNumber(u32 battler)
 static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
 {
     u8 *txtPtr, *end;
-    u8 zMoveType;
-
-    GET_MOVE_TYPE(zMove, zMoveType);
+    u32 zMoveType = GetMoveType(zMove);
 
     txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
     *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;

@@ -133,11 +133,7 @@ struct ChooseMoveStruct
     u8 currentPp[MAX_MON_MOVES];
     u8 maxPp[MAX_MON_MOVES];
     u16 species;
-    u8 monType1;
-    u8 monType2;
-    u8 monType3;
-    struct MegaEvolutionData mega;
-    struct UltraBurstData burst;
+    u8 monTypes[3];
     struct ZMoveData zmove;
 };
 

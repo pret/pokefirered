@@ -198,6 +198,7 @@ enum RandomTag
     RNG_TRACE,
     RNG_FICKLE_BEAM,
     RNG_AI_ABILITY,
+    RNG_AI_HASBADODDS,
     RNG_SHELL_SIDE_ARM,
 };
 

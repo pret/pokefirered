@@ -62,6 +62,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .isMythical = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sVictiniLevelUpLearnset,
         .teachableLearnset = sVictiniTeachableLearnset,
     },
@@ -9863,7 +9864,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .levelUpLearnset = sBisharpLevelUpLearnset,
         .teachableLearnset = sBisharpTeachableLearnset,
-        .evolutions = EVOLUTION({EVO_DEFEAT_WITH_ITEM, ITEM_LEADERS_CREST, SPECIES_KINGAMBIT}),
+        .evolutions = EVOLUTION({EVO_DEFEAT_THREE_WITH_ITEM, ITEM_LEADERS_CREST, SPECIES_KINGAMBIT}),
     },
 
 #if P_GEN_9_CROSS_EVOS
@@ -10795,6 +10796,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             gShinyOverworldPalette_Cobalion
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sCobalionLevelUpLearnset,
         .teachableLearnset = sCobalionTeachableLearnset,
     },
@@ -10858,6 +10860,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             gShinyOverworldPalette_Terrakion
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sTerrakionLevelUpLearnset,
         .teachableLearnset = sTerrakionTeachableLearnset,
     },
@@ -10921,6 +10924,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             gShinyOverworldPalette_Virizion
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sVirizionLevelUpLearnset,
         .teachableLearnset = sVirizionTeachableLearnset,
     },
@@ -10985,6 +10989,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             gShinyOverworldPalette_TornadusIncarnate
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sTornadusLevelUpLearnset,
         .teachableLearnset = sTornadusTeachableLearnset,
         .formSpeciesIdTable = sTornadusFormSpeciesIdTable,
@@ -11040,6 +11045,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .iconPalIndex = 1,
         FOOTPRINT(Tornadus)
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sTornadusLevelUpLearnset,
         .teachableLearnset = sTornadusTeachableLearnset,
         .formSpeciesIdTable = sTornadusFormSpeciesIdTable,
@@ -11106,6 +11112,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             gShinyOverworldPalette_ThundurusIncarnate
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sThundurusLevelUpLearnset,
         .teachableLearnset = sThundurusTeachableLearnset,
         .formSpeciesIdTable = sThundurusFormSpeciesIdTable,
@@ -11162,6 +11169,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .iconPalIndex = 0,
         FOOTPRINT(Thundurus)
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sThundurusLevelUpLearnset,
         .teachableLearnset = sThundurusTeachableLearnset,
         .formSpeciesIdTable = sThundurusFormSpeciesIdTable,
@@ -11228,6 +11236,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sReshiramLevelUpLearnset,
         .teachableLearnset = sReshiramTeachableLearnset,
     },
@@ -11292,6 +11301,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sZekromLevelUpLearnset,
         .teachableLearnset = sZekromTeachableLearnset,
     },
@@ -11356,6 +11366,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             gShinyOverworldPalette_LandorusIncarnate
         )
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sLandorusLevelUpLearnset,
         .teachableLearnset = sLandorusTeachableLearnset,
         .formSpeciesIdTable = sLandorusFormSpeciesIdTable,
@@ -11411,6 +11422,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .iconPalIndex = 0,
         FOOTPRINT(Landorus)
         .isLegendary = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sLandorusLevelUpLearnset,
         .teachableLearnset = sLandorusTeachableLearnset,
         .formSpeciesIdTable = sLandorusFormSpeciesIdTable,
@@ -11480,6 +11492,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .isLegendary = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sKyuremLevelUpLearnset,
         .teachableLearnset = sKyuremTeachableLearnset,
         .formSpeciesIdTable = sKyuremFormSpeciesIdTable,
@@ -11544,6 +11557,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .isLegendary = TRUE,
         .cannotBeTraded = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sKyuremWhiteLevelUpLearnset,
         .teachableLearnset = sKyuremTeachableLearnset,
         .formSpeciesIdTable = sKyuremFormSpeciesIdTable,
@@ -11607,6 +11621,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .isLegendary = TRUE,
         .cannotBeTraded = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sKyuremBlackLevelUpLearnset,
         .teachableLearnset = sKyuremTeachableLearnset,
         .formSpeciesIdTable = sKyuremFormSpeciesIdTable,
@@ -11673,6 +11688,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .isMythical = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sKeldeoLevelUpLearnset,
         .teachableLearnset = sKeldeoTeachableLearnset,
         .formSpeciesIdTable = sKeldeoFormSpeciesIdTable,
@@ -11730,6 +11746,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Keldeo)
         .isMythical = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sKeldeoLevelUpLearnset,
         .teachableLearnset = sKeldeoTeachableLearnset,
         .formSpeciesIdTable = sKeldeoFormSpeciesIdTable,
@@ -11802,6 +11819,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .isMythical = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sMeloettaLevelUpLearnset,
         .teachableLearnset = sMeloettaTeachableLearnset,
         .formSpeciesIdTable = sMeloettaFormSpeciesIdTable,
@@ -11871,6 +11889,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         )
         .isMythical = TRUE,
         .isFrontierBanned = TRUE,
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT,
         .levelUpLearnset = sMeloettaLevelUpLearnset,
         .teachableLearnset = sMeloettaTeachableLearnset,
         .formSpeciesIdTable = sMeloettaFormSpeciesIdTable,
@@ -11879,66 +11898,67 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
 #endif //P_FAMILY_MELOETTA
 
 #if P_FAMILY_GENESECT
-#define GENESECT_SPECIES_INFO(form)                                     \
-    {                                                                   \
-        .baseHP        = 71,                                            \
-        .baseAttack    = 120,                                           \
-        .baseDefense   = 95,                                            \
-        .baseSpeed     = 99,                                            \
-        .baseSpAttack  = 120,                                           \
-        .baseSpDefense = 95,                                            \
-        .types = MON_TYPES(TYPE_BUG, TYPE_STEEL),                       \
-        .catchRate = 3,                                                 \
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 300 : 270,        \
-        .evYield_Attack = 1,                                            \
-        .evYield_Speed = 1,                                             \
-        .evYield_SpAttack = 1,                                          \
-        .genderRatio = MON_GENDERLESS,                                  \
-        .eggCycles = 120,                                               \
-        .friendship = 0,                                                \
-        .growthRate = GROWTH_SLOW,                                      \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),      \
-        .abilities = { ABILITY_DOWNLOAD, ABILITY_NONE, ABILITY_NONE },  \
-        .bodyColor = BODY_COLOR_PURPLE,                                 \
-        .speciesName = _("Genesect"),                                   \
-        .cryId = CRY_GENESECT,                                          \
-        .natDexNum = NATIONAL_DEX_GENESECT,                             \
-        .categoryName = _("Paleozoic"),                                 \
-        .height = 15,                                                   \
-        .weight = 825,                                                  \
-        .description = gGenesectPokedexText,                            \
-        .pokemonScale = 268,                                            \
-        .pokemonOffset = 2,                                             \
-        .trainerScale = 271,                                            \
-        .trainerOffset = 0,                                             \
-        .frontPic = gMonFrontPic_Genesect,                              \
-        .frontPicSize = MON_COORDS_SIZE(56, 64),                        \
-        .frontPicYOffset = 0,                                           \
-        .frontAnimFrames = sAnims_Genesect,                             \
-        .frontAnimId = ANIM_H_VIBRATE,                                  \
-        .backPic = gMonBackPic_Genesect,                                \
-        .backPicSize = MON_COORDS_SIZE(64, 48),                         \
-        .backPicYOffset = 8,                                            \
-        .backAnimId = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,                \
-        .palette = gMonPalette_##form,                                  \
-        .shinyPalette = gMonShinyPalette_##form,                        \
-        .iconSprite = gMonIcon_Genesect,                                \
-        .iconPalIndex = 2,                                              \
-        FOOTPRINT(Genesect)                                             \
-        OVERWORLD(                                                      \
-            sPicTable_Genesect,                                         \
-            SIZE_32x32,                                                 \
-            SHADOW_SIZE_M,                                              \
-            TRACKS_FOOT,                                                \
-            gOverworldPalette_Genesect,                                 \
-            gShinyOverworldPalette_Genesect                             \
-        )                                                               \
-        .levelUpLearnset = sGenesectLevelUpLearnset,                    \
-        .teachableLearnset = sGenesectTeachableLearnset,                \
-        .formSpeciesIdTable = sGenesectFormSpeciesIdTable,              \
-        .formChangeTable = sGenesectFormChangeTable,                    \
-        .isMythical = TRUE,                                             \
-        .isFrontierBanned = TRUE,                                       \
+#define GENESECT_SPECIES_INFO(form)                                                 \
+    {                                                                               \
+        .baseHP        = 71,                                                        \
+        .baseAttack    = 120,                                                       \
+        .baseDefense   = 95,                                                        \
+        .baseSpeed     = 99,                                                        \
+        .baseSpAttack  = 120,                                                       \
+        .baseSpDefense = 95,                                                        \
+        .types = MON_TYPES(TYPE_BUG, TYPE_STEEL),                                   \
+        .catchRate = 3,                                                             \
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 300 : 270,                    \
+        .evYield_Attack = 1,                                                        \
+        .evYield_Speed = 1,                                                         \
+        .evYield_SpAttack = 1,                                                      \
+        .genderRatio = MON_GENDERLESS,                                              \
+        .eggCycles = 120,                                                           \
+        .friendship = 0,                                                            \
+        .growthRate = GROWTH_SLOW,                                                  \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),                  \
+        .abilities = { ABILITY_DOWNLOAD, ABILITY_NONE, ABILITY_NONE },              \
+        .bodyColor = BODY_COLOR_PURPLE,                                             \
+        .speciesName = _("Genesect"),                                               \
+        .cryId = CRY_GENESECT,                                                      \
+        .natDexNum = NATIONAL_DEX_GENESECT,                                         \
+        .categoryName = _("Paleozoic"),                                             \
+        .height = 15,                                                               \
+        .weight = 825,                                                              \
+        .description = gGenesectPokedexText,                                        \
+        .pokemonScale = 268,                                                        \
+        .pokemonOffset = 2,                                                         \
+        .trainerScale = 271,                                                        \
+        .trainerOffset = 0,                                                         \
+        .frontPic = gMonFrontPic_Genesect,                                          \
+        .frontPicSize = MON_COORDS_SIZE(56, 64),                                    \
+        .frontPicYOffset = 0,                                                       \
+        .frontAnimFrames = sAnims_Genesect,                                         \
+        .frontAnimId = ANIM_H_VIBRATE,                                              \
+        .backPic = gMonBackPic_Genesect,                                            \
+        .backPicSize = MON_COORDS_SIZE(64, 48),                                     \
+        .backPicYOffset = 8,                                                        \
+        .backAnimId = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,                            \
+        .palette = gMonPalette_##form,                                              \
+        .shinyPalette = gMonShinyPalette_##form,                                    \
+        .iconSprite = gMonIcon_Genesect,                                            \
+        .iconPalIndex = 2,                                                          \
+        FOOTPRINT(Genesect)                                                         \
+        OVERWORLD(                                                                  \
+            sPicTable_Genesect,                                                     \
+            SIZE_32x32,                                                             \
+            SHADOW_SIZE_M,                                                          \
+            TRACKS_FOOT,                                                            \
+            gOverworldPalette_Genesect,                                             \
+            gShinyOverworldPalette_Genesect                                         \
+        )                                                                           \
+        .levelUpLearnset = sGenesectLevelUpLearnset,                                \
+        .teachableLearnset = sGenesectTeachableLearnset,                            \
+        .formSpeciesIdTable = sGenesectFormSpeciesIdTable,                          \
+        .formChangeTable = sGenesectFormChangeTable,                                \
+        .isMythical = TRUE,                                                         \
+        .isFrontierBanned = TRUE,                                                   \
+        .perfectIVCount = LEGENDARY_PERFECT_IV_COUNT, \
     }
 
     [SPECIES_GENESECT]             = GENESECT_SPECIES_INFO(Genesect),

@@ -813,8 +813,8 @@ static const u8 sBallCatchBonuses[] =
     [ITEM_SAFARI_BALL - ITEM_ULTRA_BALL] = 15
 };
 
-// unknown unused data
-static const u32 sUnused = 0xFF7EAE60;
+// unused
+ALIGNED(4) static const u8 sJPText_Turn[] = _("ターン");
 
 static void Cmd_attackcanceler(void)
 {

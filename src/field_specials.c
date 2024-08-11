@@ -36,6 +36,7 @@
 #include "naming_screen.h"
 #include "party_menu.h"
 #include "rtc.h"
+#include "tilesets.h"
 #include "wallclock.h"
 #include "dynamic_placeholder_text_util.h"
 #include "new_menu_helpers.h"
@@ -237,10 +238,8 @@ static bool8 IsPlayerInFrontOfPC(void)
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     tileInFront = MapGridGetMetatileIdAt(x, y);
 
-    return (tileInFront == METATILE_Building_PCOff
-         || tileInFront == METATILE_Building_PCOn
-         || tileInFront == METATILE_GenericBuilding1_PlayersPCOff
-         || tileInFront == METATILE_GenericBuilding1_PlayersPCOn);
+    return (gMapHeader.mapLayout->secondaryTileset == &gTileset_PokemonCenter && (tileInFront == METATILE_Building_PCOn || tileInFront == METATILE_Building_PCOff))
+        || (gMapHeader.mapLayout->secondaryTileset == &gTileset_GenericBuilding1 && (tileInFront == METATILE_GenericBuilding1_PlayersPCOn || tileInFront == METATILE_GenericBuilding1_PlayersPCOff));
 }
 
 #define tState data[0]

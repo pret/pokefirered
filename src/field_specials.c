@@ -230,7 +230,19 @@ bool8 PlayerHasGrassPokemonInParty(void)
     return FALSE;
 }
 
-static bool8 IsPlayerInFrontOfPC(void)
+static bool32 IsBuildingPCTile(u32 tileId)
+{
+    return gMapHeader.mapLayout->primaryTileset == &gTileset_Building 
+        && (tileId == METATILE_Building_PCOn || tileId == METATILE_Building_PCOff);
+}
+
+static bool32 IsPlayerHousePCTile(u32 tileId)
+{
+    return (gMapHeader.mapLayout->secondaryTileset == &gTileset_GenericBuilding1 
+        && (tileId == METATILE_GenericBuilding1_PlayersPCOn || tileId == METATILE_GenericBuilding1_PlayersPCOff));
+}
+
+static bool32 IsPlayerInFrontOfPC(void)
 {
     s16 x, y;
     u32 tileInFront;
@@ -238,8 +250,7 @@ static bool8 IsPlayerInFrontOfPC(void)
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     tileInFront = MapGridGetMetatileIdAt(x, y);
 
-    return (gMapHeader.mapLayout->secondaryTileset == &gTileset_PokemonCenter && (tileInFront == METATILE_Building_PCOn || tileInFront == METATILE_Building_PCOff))
-        || (gMapHeader.mapLayout->secondaryTileset == &gTileset_GenericBuilding1 && (tileInFront == METATILE_GenericBuilding1_PlayersPCOn || tileInFront == METATILE_GenericBuilding1_PlayersPCOff));
+    return IsBuildingPCTile(tileInFront) || IsPlayerHousePCTile(tileInFront);
 }
 
 #define tState data[0]

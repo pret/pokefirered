@@ -3540,7 +3540,7 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
     SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
     sprite->oam.priority = ElevationToPriority(objEvent->previousElevation);
 
-    if (!linkPlayerObjEvent->movementMode != MOVEMENT_MODE_FREE)
+    if (linkPlayerObjEvent->movementMode == MOVEMENT_MODE_FREE)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(linkDirection(objEvent)));
     else
         StartSpriteAnimIfDifferent(sprite, GetMoveDirectionAnimNum(linkDirection(objEvent)));

@@ -491,7 +491,7 @@ static void StatsChangeAnimation_Step2(u8 taskId)
     }
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;
-     if (sAnimStatsChangeData->data[0] == 1)
+    if (sAnimStatsChangeData->data[0] == 1)
     {
         gBattle_BG1_X = 64;
         gTasks[taskId].data[1] = -3;

@@ -5552,11 +5552,18 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
 bool8 FollowablePlayerMovement_GoSpeed1(struct ObjectEvent *objectEvent, struct Sprite *sprite, u8 playerDirection, bool8 tileCallback(u8))
 {
     u32 direction;
+    u32 movementType = objectEvent->movementType;
     s16 x;
     s16 y;
 
     direction = playerDirection;
-    direction = GetCopyDirection(gInitialMovementTypeFacingDirections[objectEvent->movementType], objectEvent->directionSequenceIndex, direction);
+    if (objectEvent->movementType == MOVEMENT_TYPE_FOLLOW_PLAYER)
+    {
+        objectEvent->directionSequenceIndex = GetPlayerFacingDirection();
+        movementType = gObjectEvents[gPlayerAvatar.objectEventId].movementType;
+    }
+    direction = GetCopyDirection(gInitialMovementTypeFacingDirections[movementType], objectEvent->directionSequenceIndex, direction);
+
     ObjectEventMoveDestCoords(objectEvent, direction, &x, &y);
     ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFastMovementAction(direction));
     if (GetCollisionAtCoords(objectEvent, x, y, direction) || (tileCallback != NULL && !tileCallback(MapGridGetMetatileBehaviorAt(x, y))))

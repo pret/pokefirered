@@ -331,21 +331,7 @@ static void DrawTimeWindow(void)
     StringExpandPlaceholders(gStringVar4, gText_MenuTime);
     AddTextPrinterParameterized(sTimeWindowId, FONT_NORMAL, gStringVar4, 4, 1, 0xFF, NULL);
 
-    switch (GetSeason())
-    {
-        case SEASON_SPRING:
-            StringCopy(gStringVar1, gText_SeasonSpring);
-            break;
-        case SEASON_SUMMER:
-            StringCopy(gStringVar1, gText_SeasonSummer);
-            break;
-        case SEASON_AUTUMN:
-            StringCopy(gStringVar1, gText_SeasonAutumn);
-            break;
-        case SEASON_WINTER:
-            StringCopy(gStringVar1, gText_SeasonWinter);
-            break;
-    }
+    StringCopy(gStringVar1, GetSeasonName(GetSeason()));
     ConvertIntToDecimalStringN(gStringVar2, GetSeasonDay(), STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_MenuDay);
     AddTextPrinterParameterized(sTimeWindowId, FONT_NORMAL, gStringVar4, 4, 18, 0xFF, NULL);

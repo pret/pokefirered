@@ -45,17 +45,17 @@
     #define NIGHT_HOUR_END     4
 //Gen 5 seasons change the times of day
 #elif OW_TIMES_OF_DAY == GEN_5
-    #define MORNING_HOUR_BEGIN GetGen5MorningBegin()
-    #define MORNING_HOUR_END   GetGen5DayBegin()
+    #define MORNING_HOUR_BEGIN GetGen5TimeOfDayStart(TIME_MORNING)
+    #define MORNING_HOUR_END   GetGen5TimeOfDayStart(TIME_DAY)
 
-    #define DAY_HOUR_BEGIN     GetGen5DayBegin()
-    #define DAY_HOUR_END       GetGen5EveningBegin()
+    #define DAY_HOUR_BEGIN     GetGen5TimeOfDayStart(TIME_DAY)
+    #define DAY_HOUR_END       GetGen5TimeOfDayStart(TIME_EVENING)
 
-    #define EVENING_HOUR_BEGIN GetGen5EveningBegin()
-    #define EVENING_HOUR_END   GetGen5NightBegin()
+    #define EVENING_HOUR_BEGIN GetGen5TimeOfDayStart(TIME_EVENING)
+    #define EVENING_HOUR_END   GetGen5TimeOfDayStart(TIME_NIGHT)
 
-    #define NIGHT_HOUR_BEGIN   GetGen5NightBegin()
-    #define NIGHT_HOUR_END     GetGen5MorningBegin()
+    #define NIGHT_HOUR_BEGIN   GetGen5TimeOfDayStart(TIME_NIGHT)
+    #define NIGHT_HOUR_END     GetGen5TimeOfDayStart(TIME_MORNING)
 #elif OW_TIMES_OF_DAY == GEN_6
     #define MORNING_HOUR_BEGIN 4
     #define MORNING_HOUR_END   11
@@ -95,15 +95,19 @@
     #define NIGHT_HOUR_END     6
 #endif
 
-#define TIME_MORNING           0
-#define TIME_DAY               1
-#define TIME_EVENING           2
-#define TIME_NIGHT             3
+enum TimeOfDay {
+    TIME_MORNING,
+    TIME_DAY,
+    TIME_EVENING,
+    TIME_NIGHT,
+};
 
-#define SEASON_SPRING   0
-#define SEASON_SUMMER   1
-#define SEASON_AUTUMN   2
-#define SEASON_WINTER   3
+enum Season {
+    SEASON_SPRING,
+    SEASON_SUMMER,
+    SEASON_AUTUMN,
+    SEASON_WINTER,
+};
 
 extern struct Time gLocalTime;
 
@@ -129,7 +133,7 @@ void FormatHexDate(u8 *dest, s32 year, s32 month, s32 day);
 void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct Time *t);
 void RtcCalcLocalTime(void);
 bool8 IsBetweenHours(s32 hours, s32 begin, s32 end);
-u8 GetTimeOfDay(void);
+enum TimeOfDay GetTimeOfDay(void);
 void RtcInitLocalTimeOffset(s32 hour, s32 minute);
 void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds);
 void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2);
@@ -138,71 +142,9 @@ u32 RtcGetLocalDayCount(void);
 void FormatDecimalTimeWithoutSeconds(u8 *dest, s8 hour, s8 minute, bool32 is24Hour);
 u8 GetCurrentHour(void);
 u8 GetCurrentMinute(void);
-u8 GetSeason(void);
+enum Season GetSeason(void);
+const u8* GetSeasonName(enum Season);
 u8 GetSeasonDay(void);
-
-static inline s32 GetGen5MorningBegin()
-{
-    switch (GetSeason())
-    {
-        case SEASON_SPRING:
-        default:
-            return 5;
-        case SEASON_SUMMER:
-            return 4;
-        case SEASON_AUTUMN:
-            return 6;
-        case SEASON_WINTER:
-            return 7;
-    }
-}
-
-static inline s32 GetGen5DayBegin()
-{
-    switch (GetSeason())
-    {
-        case SEASON_SPRING:
-        default:
-            return 10;
-        case SEASON_SUMMER:
-            return 9;
-        case SEASON_AUTUMN:
-            return 10;
-        case SEASON_WINTER:
-            return 11;
-    }
-}
-
-static inline s32 GetGen5EveningBegin()
-{
-    switch (GetSeason())
-    {
-        case SEASON_SPRING:
-        default:
-            return 17;
-        case SEASON_SUMMER:
-            return 19;
-        case SEASON_AUTUMN:
-            return 18;
-        case SEASON_WINTER:
-            return 17;
-    }
-}
-
-static inline s32 GetGen5NightBegin()
-{
-    switch (GetSeason())
-    {
-        case SEASON_SPRING:
-        default:
-            return 20;
-        case SEASON_SUMMER:
-            return 21;
-        case SEASON_AUTUMN:
-            return 20;
-        case SEASON_WINTER:
-            return 19;
-    }
-}
+u32 GetGen5TimeOfDayStart(enum TimeOfDay);
 
 #endif // GUARD_RTC_UTIL_H

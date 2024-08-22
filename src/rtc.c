@@ -15,6 +15,10 @@ static u16 sSavedIme;
 struct Time gLocalTime;
 
 // const rom
+static const u8 sText_SpringName[] = _("Spring");
+static const u8 sText_SummerName[] = _("Summer");
+static const u8 sText_AutumnName[] = _("Autumn");
+static const u8 sText_WinterName[] = _("Winter");
 
 static const struct SiiRtcInfo sRtcDummy = {0, MONTH_JAN, 1}; // 2000 Jan 1
 
@@ -32,6 +36,33 @@ static const s32 sNumDaysInMonths[12] =
     31,
     30,
     31,
+};
+
+static const u32 sTimeOfDayStarts[SEASON_WINTER + 1][TIME_NIGHT + 1] = {
+    [SEASON_SPRING] = {
+        [TIME_MORNING] = 5,
+        [TIME_DAY] = 10,
+        [TIME_EVENING] = 17,
+        [TIME_NIGHT] = 20,
+    },
+    [SEASON_SUMMER] = {
+        [TIME_MORNING] = 4,
+        [TIME_DAY] = 9,
+        [TIME_EVENING] = 19,
+        [TIME_NIGHT] = 21,
+    },
+    [SEASON_AUTUMN] = {
+        [TIME_MORNING] = 6,
+        [TIME_DAY] = 10,
+        [TIME_EVENING] = 18,
+        [TIME_NIGHT] = 20,
+    },
+    [SEASON_WINTER] = {
+        [TIME_MORNING] = 7,
+        [TIME_DAY] = 11,
+        [TIME_EVENING] = 17,
+        [TIME_NIGHT] = 19,
+    },
 };
 
 void RtcDisableInterrupts(void)
@@ -319,7 +350,7 @@ bool8 IsBetweenHours(s32 hours, s32 begin, s32 end)
         return hours >= begin && hours < end;
 }
 
-u8 GetTimeOfDay(void)
+enum TimeOfDay GetTimeOfDay(void)
 {
     RtcCalcLocalTime();
     if (IsBetweenHours(gLocalTime.hours, MORNING_HOUR_BEGIN, MORNING_HOUR_END))
@@ -343,7 +374,7 @@ u8 GetCurrentMinute(void)
     return gLocalTime.minutes;
 }
 
-u8 GetSeason(void)
+enum Season GetSeason(void)
 {
     RtcGetInfo(&sRtc);
     switch(ConvertBcdToBinary(sRtc.month))
@@ -365,6 +396,22 @@ u8 GetSeason(void)
         case MONTH_AUG:
         case MONTH_DEC:
             return SEASON_WINTER;
+    }
+}
+
+const u8* GetSeasonName(enum Season season)
+{
+    switch (season)
+    {
+        case SEASON_SPRING:
+        default:
+            return sText_SpringName;
+        case SEASON_SUMMER:
+            return sText_SummerName;
+        case SEASON_AUTUMN:
+            return sText_AutumnName;
+        case SEASON_WINTER:
+            return sText_WinterName;
     }
 }
 
@@ -461,4 +508,9 @@ void FormatDecimalTimeWithoutSeconds(u8 *txtPtr, s8 hour, s8 minute, bool32 is24
 
     *txtPtr++ = EOS;
     *txtPtr = EOS;
+}
+
+u32 GetGen5TimeOfDayStart(enum TimeOfDay timeOfDay)
+{
+    return sTimeOfDayStarts[GetSeason()][timeOfDay];
 }

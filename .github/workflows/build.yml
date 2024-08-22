@@ -18,7 +18,6 @@ jobs:
       GAME_VERSION: FIRERED
       GAME_REVISION: 0
       GAME_LANGUAGE: ENGLISH
-      MODERN: 1
       COMPARE: 0
       UNUSED_ERROR: 1
     steps:
@@ -36,18 +35,15 @@ jobs:
       - name: Firered
         env:
           GAME_VERSION: FIRERED
-          MODERN: 1
         run: make -j${nproc} -O all
 
       - name: Leafgreen
         env:
           GAME_VERSION: LEAFGREEN
-          MODERN: 1
         run: make -j${nproc} -O all
 
       - name: Test
         env:
-          MODERN: 1
           TEST: 1
         run: |
           make -j${nproc} -O pokefirered-test.elf

@@ -47,16 +47,24 @@ struct CreditsOverworldCmd
 #define MUSIC_DISABLE_STOP 1
 #define MUSIC_DISABLE_KEEP 2
 
-extern const struct Coords32 gDirectionToVectors[];
-
-extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
-extern MainCallback gFieldCallback;
 
 extern struct WarpData gLastUsedWarp;
+extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 
-extern u8 gExitStairsMovementDisabled;
-extern u8 gFieldLinkPlayerCount;
+extern u16 *gBGTilemapBuffers1;
+extern u16 *gBGTilemapBuffers2;
+extern u16 *gBGTilemapBuffers3;
+extern u16 gHeldKeyCodeToSend;
+extern MainCallback gFieldCallback;
+extern bool8 (* gFieldCallback2)(void);
 extern u8 gLocalLinkPlayerId;
+extern u8 gFieldLinkPlayerCount;
+extern u8 gExitStairsMovementDisabled;
+
+extern u8 gDisableMapMusicChangeOnMapLoad;
+extern u8 gGlobalFieldTintMode;
+
+extern const struct Coords32 gDirectionToVectors[];
 
 void IncrementGameStat(u8 index);
 
@@ -114,11 +122,6 @@ void SetWarpDestinationToFixedHoleWarp(s16 x, s16 y);
 void ResetInitialPlayerAvatarState(void);
 void CleanupOverworldWindowsAndTilemaps(void);
 u32 ComputeWhiteOutMoneyLoss(void);
-
-extern u8 gDisableMapMusicChangeOnMapLoad;
-extern u8 gGlobalFieldTintMode;
-
-extern bool8 (* gFieldCallback2)(void);
 
 void SetLastHealLocationWarp(u8 healLocaionId);
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum);
@@ -179,10 +182,5 @@ void StoreInitialPlayerAvatarState(void);
 void UpdateEscapeWarp(s16 x, s16 y);
 bool8 SetDiveWarpEmerge(u16 x, u16 y);
 bool8 SetDiveWarpDive(u16 x, u16 y);
-
-extern u16 *gBGTilemapBuffers1;
-extern u16 *gBGTilemapBuffers2;
-extern u16 *gBGTilemapBuffers3;
-extern u16 gHeldKeyCodeToSend;
 
 #endif //GUARD_OVERWORLD_H

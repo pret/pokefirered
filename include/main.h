@@ -5,10 +5,6 @@ typedef void (*MainCallback)(void);
 typedef void (*IntrCallback)(void);
 typedef void (*IntrFunc)(void);
 
-#include "global.h"
-
-extern IntrFunc gIntrTable[];
-
 struct Main
 {
     /*0x000*/ MainCallback callback1;
@@ -44,12 +40,19 @@ struct Main
     /*0x439*/ u8 field_439_x4:1;
 };
 
-extern struct Main gMain;
-extern bool8 gSoftResetDisabled;
-extern bool8 gLinkVSyncDisabled;
+#define GAME_CODE_LENGTH 4
+extern const char RomHeaderGameCode[GAME_CODE_LENGTH];
+extern const char RomHeaderSoftwareVersion;
 
 extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
+
+extern u16 gKeyRepeatStartDelay;
+extern u8 gLinkTransferringData;
+extern struct Main gMain;
+extern bool8 gSoftResetDisabled;
+extern IntrFunc gIntrTable[];
+extern bool8 gLinkVSyncDisabled;
 
 void AgbMain(void);
 void AgbMainLoop(void);
@@ -68,12 +71,5 @@ void ClearTrainerTowerVBlankCounter(void);
 void StartTimer1(void);
 void SeedRngAndSetTrainerId(void);
 u16 GetGeneratedTrainerIdLower(void);
-
-#define GAME_CODE_LENGTH 4
-extern const char RomHeaderGameCode[GAME_CODE_LENGTH];
-extern const char RomHeaderSoftwareVersion;
-
-extern u8 gLinkTransferringData;
-extern u16 gKeyRepeatStartDelay;
 
 #endif // GUARD_MAIN_H

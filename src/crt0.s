@@ -14,7 +14,7 @@ start_vector:
 	msr cpsr_cf, r0
 	ldr sp, sp_usr
 	ldr r1, =INTR_VECTOR
-	adr r0, intr_main
+	adr r0, IntrMain
 	str r0, [r1]
 	ldr r1, =AgbMain
 	mov lr, pc
@@ -29,8 +29,7 @@ sp_irq: .word IWRAM_END - 0x60
 
 	.arm
 	.align 2, 0
-	.global intr_main
-intr_main:
+IntrMain::
 	mov r3, #REG_BASE
 	add r3, r3, #OFFSET_REG_IE
 	ldr r2, [r3]
@@ -118,6 +117,22 @@ intr_return:
 	strh r2, [r3, #0]
 	strh r1, [r3, #REG_IME - REG_IE]
 	msr spsr_cf, r0
+	bx lr
+
+.thumb
+@ Called from C code to reinitialize working memory after a link connection failure
+ReInitializeEWRAM::
+	ldr r0, =__ewram_lma
+	ldr r1, =__ewram_start
+	ldr r2, =__ewram_end
+	cmp r1, r2
+	beq EndReinitializeEWRAM
+	subs r2, r1
+	movs r3, #1
+	lsls r3, r3, #26
+	orrs r2, r2, r3
+	swi 0x0B
+EndReinitializeEWRAM:
 	bx lr
 
 	.pool

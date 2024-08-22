@@ -1,7 +1,13 @@
 #include "global.h"
+
 #include "gba/flash_internal.h"
-#include "gflib.h"
+
+#include "dma3.h"
+#include "gpu_regs.h"
+#include "malloc.h"
+
 #include "battle_controllers.h"
+#include "crt0.h"
 #include "help_system.h"
 #include "intro.h"
 #include "link.h"
@@ -16,10 +22,9 @@
 #include "rtc.h"
 #include "save_failed_screen.h"
 #include "scanline_effect.h"
+#include "sound.h"
 #include "test_runner.h"
 #include "trainer_tower.h"
-
-extern u32 intr_main[];
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
@@ -33,11 +38,7 @@ extern void gInitialMainCB2(void);
 const u8 gGameVersion = GAME_VERSION;
 const u8 gGameLanguage = GAME_LANGUAGE;
 
-#if MODERN
-const char BuildDateTime[] = __DATE__ " " __TIME__;
-#else
 const char BuildDateTime[] = "2004 07 20 09:30";
-#endif //MODERN
 
 const IntrFunc gIntrTableTemplate[] =
 {
@@ -354,7 +355,7 @@ void InitIntrHandlers(void)
     for (i = 0; i < INTR_COUNT; i++)
         gIntrTable[i] = gIntrTableTemplate[i];
 
-    DmaCopy32(3, intr_main, IntrMain_Buffer, sizeof(IntrMain_Buffer));
+    DmaCopy32(3, IntrMain, IntrMain_Buffer, sizeof(IntrMain_Buffer));
 
     INTR_VECTOR = IntrMain_Buffer;
 

@@ -1,17 +1,22 @@
 #include "global.h"
-#include "gflib.h"
-#include "m4a.h"
+
+#include "gpu_regs.h"
+#include "malloc.h"
+
+#include "crt0.h"
 #include "load_save.h"
-#include "save.h"
+#include "m4a.h"
+#include "main.h"
 #include "new_game.h"
 #include "overworld.h"
+#include "save.h"
 
 void ReloadSave(void)
 {
     u16 imeBackup = REG_IME;
-    
     REG_IME = 0;
     RegisterRamReset(RESET_EWRAM);
+    ReInitializeEWRAM();
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_FORCED_BLANK);
     REG_IME = imeBackup;
     gMain.inBattle = FALSE;

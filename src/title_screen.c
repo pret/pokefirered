@@ -1,22 +1,29 @@
 #include "global.h"
-#include "gflib.h"
-#include "task.h"
-#include "new_menu_helpers.h"
-#include "m4a.h"
-#include "scanline_effect.h"
+
+#include "bg.h"
+#include "gpu_regs.h"
+#include "malloc.h"
+
+#include "berry_fix_program.h"
+#include "clear_save_data_screen.h"
+#include "decompress.h"
+#include "event_data.h"
 #include "graphics.h"
 #include "help_system.h"
 #include "intro.h"
 #include "load_save.h"
-#include "new_game.h"
-#include "random.h"
-#include "save.h"
-#include "event_data.h"
+#include "m4a.h"
 #include "main_menu.h"
-#include "clear_save_data_screen.h"
+#include "new_game.h"
+#include "new_menu_helpers.h"
+#include "palette.h"
+#include "random.h"
 #include "reset_rtc_screen.h"
-#include "berry_fix_program.h"
-#include "decompress.h"
+#include "save.h"
+#include "scanline_effect.h"
+#include "sound.h"
+#include "task.h"
+
 #include "constants/songs.h"
 
 enum TitleScreenScene
@@ -747,20 +754,6 @@ static void SetTitleScreenScene_Cry(s16 *data)
     case 2:
         if (!gPaletteFade.active)
         {
-            // These are commented out as they’ve been relocated to intro.c.
-            // This also allows RTC reset to work without file corruption.
-            // It also has the side effect of allowing you to run flags
-            // and functions as early as the intro.
-
-            // SeedRngAndSetTrainerId();
-            // SetSaveBlocksPointers();
-            // ResetMenuAndMonGlobals();
-            // Save_ResetSaveCounters();
-            // Save_LoadGameData(SAVE_NORMAL);
-            // if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_INVALID)
-            //     Sav2_ClearSetDefault();
-            // SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
-            // InitHeap(gHeap, HEAP_SIZE);
             SetMainCallback2(CB2_InitMainMenu);
             DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
         }

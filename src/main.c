@@ -1,22 +1,23 @@
 #include "global.h"
+#include "gba/flash_internal.h"
 #include "gflib.h"
+#include "battle_controllers.h"
+#include "help_system.h"
+#include "intro.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
 #include "m4a.h"
-#include "rtc.h"
-#include "random.h"
-#include "gba/flash_internal.h"
-#include "help_system.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
 #include "play_time.h"
-#include "intro.h"
-#include "battle_controllers.h"
-#include "scanline_effect.h"
-#include "save_failed_screen.h"
-#include "test_runner.h"
 #include "quest_log.h"
+#include "random.h"
+#include "rtc.h"
+#include "save_failed_screen.h"
+#include "scanline_effect.h"
+#include "test_runner.h"
+#include "trainer_tower.h"
 
 extern u32 intr_main[];
 
@@ -212,6 +213,7 @@ static void UpdateLinkAndCallCallbacks(void)
 static void InitMainCallbacks(void)
 {
     gMain.vblankCounter1 = 0;
+    gTrainerTowerVBlankCounter = NULL;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
     SetMainCallback2(gInitialMainCB2);
@@ -395,8 +397,10 @@ static void VBlankIntr(void)
     else if (!gLinkVSyncDisabled)
         LinkVSync();
 
-    if (gMain.vblankCounter1)
-        (*gMain.vblankCounter1)++;
+    gMain.vblankCounter1++;
+
+    if (gTrainerTowerVBlankCounter && *gTrainerTowerVBlankCounter < 0xFFFFFFFF)
+        (*gTrainerTowerVBlankCounter)++;
 
     if (gMain.vblankCallback)
         gMain.vblankCallback();
@@ -478,14 +482,14 @@ static void WaitForVBlank(void)
         ;
 }
 
-void SetVBlankCounter1Ptr(u32 *ptr)
+void SetTrainerTowerVBlankCounter(u32 *ptr)
 {
-    gMain.vblankCounter1 = ptr;
+    gTrainerTowerVBlankCounter = ptr;
 }
 
-void DisableVBlankCounter1(void)
+void ClearTrainerTowerVBlankCounter(void)
 {
-    gMain.vblankCounter1 = NULL;
+    gTrainerTowerVBlankCounter = NULL;
 }
 
 void DoSoftReset(void)

@@ -23,7 +23,7 @@ struct Main
 
     /*0x01C*/ vu16 intrCheck;
 
-    /*0x020*/ u32 *vblankCounter1;
+    /*0x020*/ u32 vblankCounter1;
     /*0x024*/ u32 vblankCounter2;
 
     /*0x028*/ u16 heldKeysRaw;           // held keys without L=A remapping
@@ -63,8 +63,8 @@ void InitFlashTimer(void);
 void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
 void RestoreSerialTimer3IntrHandlers(void);
-void SetVBlankCounter1Ptr(u32 *ptr);
-void DisableVBlankCounter1(void);
+void SetTrainerTowerVBlankCounter(u32 *ptr);
+void ClearTrainerTowerVBlankCounter(void);
 void StartTimer1(void);
 void SeedRngAndSetTrainerId(void);
 u16 GetGeneratedTrainerIdLower(void);

@@ -1945,7 +1945,7 @@ static void HandleChooseActionAfterDma3(u32 battler)
         gBattle_BG0_Y = DISPLAY_HEIGHT;
         if (gBattleStruct->aiDelayTimer != 0)
         {
-            gBattleStruct->aiDelayFrames = *gMain.vblankCounter1 - gBattleStruct->aiDelayTimer;
+            gBattleStruct->aiDelayFrames = gMain.vblankCounter1 - gBattleStruct->aiDelayTimer;
             gBattleStruct->aiDelayTimer = 0;
             #if DEBUG_AI_DELAY_TIMER
             {

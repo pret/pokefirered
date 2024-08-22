@@ -1,6 +1,9 @@
 #ifndef GUARD_TRAINER_TOWER_H
 #define GUARD_TRAINER_TOWER_H
 
+
+extern u32 *gTrainerTowerVBlankCounter;
+
 void PrintTrainerTowerRecords(void);
 void InitTrainerTowerBattleStruct(void);
 void FreeTrainerTowerBattleStruct(void);

@@ -1,14 +1,15 @@
 #include "global.h"
-#include "save.h"
-#include "decompress.h"
-#include "overworld.h"
-#include "load_save.h"
-#include "task.h"
-#include "link.h"
-#include "save_failed_screen.h"
-#include "fieldmap.h"
-#include "pokemon_storage_system.h"
 #include "gba/flash_internal.h"
+#include "decompress.h"
+#include "fieldmap.h"
+#include "link.h"
+#include "load_save.h"
+#include "overworld.h"
+#include "pokemon_storage_system.h"
+#include "save.h"
+#include "save_failed_screen.h"
+#include "task.h"
+#include "trainer_tower.h"
 
 static u8 HandleWriteSector(u16 sectorId, const struct SaveSectorLocation *locations);
 static u8 TryWriteSector(u8 sectorNum, u8 *data);
@@ -645,10 +646,10 @@ static void UpdateSaveAddresses(void)
 u8 HandleSavingData(u8 saveType)
 {
     u8 i;
-    u32 *backupPtr = gMain.vblankCounter1;
+    u32 *backupPtr = gTrainerTowerVBlankCounter;
     u8 *tempAddr;
 
-    gMain.vblankCounter1 = NULL;
+    gTrainerTowerVBlankCounter = NULL;
     UpdateSaveAddresses();
     switch (saveType)
     {
@@ -686,7 +687,7 @@ u8 HandleSavingData(u8 saveType)
         WriteSaveSectorOrSlot(FULL_SAVE_SLOT, gRamSaveSectorLocations);
         break;
     }
-    gMain.vblankCounter1 = backupPtr;
+    gTrainerTowerVBlankCounter = backupPtr;
     return 0;
 }
 

@@ -74,19 +74,21 @@ static void Task_RunPerStepCallback(u8 taskId)
 #define tAmbientCryState data[1]
 #define tAmbientCryDelay data[2]
 
+#define TIME_UPDATE_INTERVAL (1 << 12)
+
 static void RunTimeBasedEvents(s16 *data)
 {
     switch (tState)
     {
         case 0:
-            if (*gMain.vblankCounter1 & 0x1000)
+            if (gMain.vblankCounter1 & TIME_UPDATE_INTERVAL)
             {
                 DoTimeBasedEvents();
                 tState++;
             }
             break;
         case 1:
-            if (!(*gMain.vblankCounter1 & 0x1000))
+            if (!(gMain.vblankCounter1 & TIME_UPDATE_INTERVAL))
             {
                 tState--;
             }

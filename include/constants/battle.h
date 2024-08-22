@@ -57,28 +57,40 @@
 #define BATTLE_TYPE_OLD_MAN_TUTORIAL   (1 << 9) // Used in pokeemerald as BATTLE_TYPE_WALLY_TUTORIAL.
 #define BATTLE_TYPE_ROAMER             (1 << 10)
 #define BATTLE_TYPE_EREADER_TRAINER    (1 << 11)
-#define BATTLE_TYPE_REMOVED1           (1 << 12)
+#define BATTLE_TYPE_RAID               (1 << 12)
 #define BATTLE_TYPE_LEGENDARY          (1 << 13)
-#define BATTLE_TYPE_GHOST_UNVEILED     (1 << 13) // Re-use of BATTLE_TYPE_LEGENDARY, when combined with BATTLE_TYPE_GHOST
-#define BATTLE_TYPE_REMOVED2           (1 << 14)
-#define BATTLE_TYPE_GHOST              (1 << 15) // Used in pokeemerald as BATTLE_TYPE_TWO_OPPONENTS.
-#define BATTLE_TYPE_POKEDUDE           (1 << 16) // Used in pokeemerald as BATTLE_TYPE_DOME.
-#define BATTLE_TYPE_WILD_SCRIPTED      (1 << 17) // Used in pokeemerald as BATTLE_TYPE_PALACE.
-#define BATTLE_TYPE_REMOVED_3          (1 << 18) // Used in pokeemerald as BATTLE_TYPE_ARENA.
-#define BATTLE_TYPE_TRAINER_TOWER      (1 << 19) // Used in pokeemerald as BATTLE_TYPE_FACTORY.
-// pokeemerald
-#define BATTLE_TYPE_INGAME_PARTNER     (1 << 20)
-#define BATTLE_TYPE_TOWER_LINK_MULTI   (1 << 21)
-#define BATTLE_TYPE_TWO_OPPONENTS      (1 << 22)
-#define BATTLE_TYPE_RECORDED           (1 << 23)
-#define BATTLE_TYPE_RECORDED_LINK      (1 << 24)
-#define BATTLE_TYPE_RECORDED_IS_MASTER (1 << 25)
-#define BATTLE_TYPE_FRONTIER           (BATTLE_TYPE_BATTLE_TOWER)
+#define BATTLE_TYPE_GHOST              (1 << 13)
+#define BATTLE_TYPE_WILD_SCRIPTED      (1 << 14)
+#define BATTLE_TYPE_TWO_OPPONENTS      (1 << 15) // Used in pokefirered as BATTLE_TYPE_GHOST.
+#define BATTLE_TYPE_DOME               (1 << 16) // Used in pokefirered as BATTLE_TYPE_POKEDUDE.
+#define BATTLE_TYPE_PALACE             (1 << 17) // Used in pokefirered as BATTLE_TYPE_WILD_SCRIPTED.
+#define BATTLE_TYPE_ARENA              (1 << 18) // Used in pokefirered as BATTLE_TYPE_LEGENDARY_FRLG.
+#define BATTLE_TYPE_FACTORY            (1 << 19) // Used in pokefirered as BATTLE_TYPE_TRAINER_TOWER.
+#define BATTLE_TYPE_PIKE               (1 << 20)
+#define BATTLE_TYPE_PYRAMID            (1 << 21)
+#define BATTLE_TYPE_INGAME_PARTNER     (1 << 22)
+#define BATTLE_TYPE_TOWER_LINK_MULTI   (1 << 23)
+#define BATTLE_TYPE_RECORDED           (1 << 24)
+#define BATTLE_TYPE_RECORDED_LINK      (1 << 25)
+#define BATTLE_TYPE_TRAINER_HILL       (1 << 26)
+#define BATTLE_TYPE_TRAINER_TOWER      (BATTLE_TYPE_TRAINER_HILL)
+#define BATTLE_TYPE_SECRET_BASE        (1 << 27)
+#define BATTLE_TYPE_GHOST_UNVEILED     (1 << 28)
+#define BATTLE_TYPE_POKEDUDE           (1 << 29)
+#define BATTLE_TYPE_30                 (1 << 30)
+#define BATTLE_TYPE_RECORDED_IS_MASTER (1 << 31)
+
+#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
+#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_PIKE)
+#define BATTLE_TYPE_RECORDED_INVALID        ((BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_FIRST_BATTLE                  \
+                                             | BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_ROAMER | BATTLE_TYPE_EREADER_TRAINER    \
+                                             | BATTLE_TYPE_LEGENDARY                                                            \
+                                             | BATTLE_TYPE_RECORDED | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE))
 
 #define IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && !((flags) & BATTLE_TYPE_GHOST_UNVEILED))
 #define IS_BATTLE_TYPE_GHOST_WITH_SCOPE(flags) ((flags) & BATTLE_TYPE_GHOST && (flags) & BATTLE_TYPE_GHOST_UNVEILED)
 #define WILD_DOUBLE_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER))))
-#define RECORDED_WILD_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_RECORDED) && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER)))
+#define RECORDED_WILD_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_RECORDED) && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FRONTIER)))
 #define BATTLE_TWO_VS_ONE_OPPONENT ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gTrainerBattleOpponent_B == 0xFFFF))
 #define BATTLE_TYPE_HAS_AI          (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER | BATTLE_TYPE_INGAME_PARTNER)
 
@@ -133,7 +145,7 @@
 #define STATUS2_WRAPPED               (1 << 13)
 #define STATUS2_POWDER                (1 << 14)
 #define STATUS2_INFATUATION           (1 << 16 | 1 << 17 | 1 << 18 | 1 << 19)  // 4 bits, one for every battler
-#define STATUS2_INFATUATED_WITH(battler) (gBitTable[battler] << 16)
+#define STATUS2_INFATUATED_WITH(battler) (1u << (battler + 16))
 #define STATUS2_DEFENSE_CURL          (1 << 20)
 #define STATUS2_TRANSFORMED           (1 << 21)
 #define STATUS2_RECHARGE              (1 << 22)
@@ -162,7 +174,7 @@
 #define STATUS3_YAWN_TURN(num)          (((num) << 11) & STATUS3_YAWN)
 #define STATUS3_IMPRISONED_OTHERS       (1 << 13)
 #define STATUS3_GRUDGE                  (1 << 14)
-#define STATUS3_CANT_SCORE_A_CRIT       (1 << 15) // unused?
+#define STATUS3___UNUSED                (1 << 15)
 #define STATUS3_GASTRO_ACID             (1 << 16)
 #define STATUS3_EMBARGO                 (1 << 17)
 #define STATUS3_UNDERWATER              (1 << 18)
@@ -189,11 +201,10 @@
 #define STATUS4_SYRUP_BOMB              (1 << 5)
 #define STATUS4_GLAIVE_RUSH             (1 << 6)
 
-// Not really sure what a "hitmarker" is.
 #define HITMARKER_WAKE_UP_CLEAR         (1 << 4) // Cleared when waking up. Never set or checked.
 #define HITMARKER_IGNORE_BIDE           (1 << 5)
 #define HITMARKER_DESTINYBOND           (1 << 6)
-#define HITMARKER_NO_ANIMATIONS         (1 << 7)  // set from battleSceneOff. Never changed during battle
+#define HITMARKER_NO_ANIMATIONS         (1 << 7)   // set from battleSceneOff. Never changed during battle
 #define HITMARKER_IGNORE_SUBSTITUTE     (1 << 8)
 #define HITMARKER_NO_ATTACKSTRING       (1 << 9)
 #define HITMARKER_ATTACKSTRING_PRINTED  (1 << 10)
@@ -214,10 +225,9 @@
 #define HITMARKER_OBEYS                 (1 << 25)
 #define HITMARKER_NEVER_SET             (1 << 26) // Cleared as part of a large group. Never set or checked
 #define HITMARKER_CHARGING              (1 << 27)
-#define HITMARKER_FAINTED(battler)      (gBitTable[battler] << 28)
-#define HITMARKER_FAINTED2(battler)     ((1 << 28) << battler)
+#define HITMARKER_FAINTED(battler)      (1u << (battler + 28))
+#define HITMARKER_FAINTED2(battler)     HITMARKER_FAINTED(battler)
 #define HITMARKER_STRING_PRINTED        (1 << 29)
-
 
 // Per-side statuses that affect an entire party
 #define SIDE_STATUS_REFLECT                 (1 << 0)
@@ -456,6 +466,9 @@
 #define BATTLE_RUN_FORBIDDEN      1
 #define BATTLE_RUN_FAILURE        2
 
+#define B_WIN_TYPE_NORMAL 0
+#define B_WIN_TYPE_ARENA  1
+
 // Window Ids for sTextOnWindowsInfo_Normal
 #define B_WIN_MSG                 0
 #define B_WIN_ACTION_PROMPT       1 // "What will {x} do?"
@@ -486,6 +499,19 @@
 
 #define B_TEXT_FLAG_NPC_CONTEXT_FONT    (1 << 6)
 #define B_TEXT_FLAG_WINDOW_CLEAR        (1 << 7)
+
+// The following are duplicate id values for windows that Battle Arena uses differently.
+#define ARENA_WIN_PLAYER_NAME      15
+#define ARENA_WIN_VS               16
+#define ARENA_WIN_OPPONENT_NAME    17
+#define ARENA_WIN_MIND             18
+#define ARENA_WIN_SKILL            19
+#define ARENA_WIN_BODY             20
+#define ARENA_WIN_JUDGMENT_TITLE   21
+#define ARENA_WIN_JUDGMENT_TEXT    22
+
+// Flag for BattlePutTextOnWindow. Never set
+#define B_WIN_COPYTOVRAM (1 << 7)
 
 // Indicator for the party summary bar to display an empty slot.
 #define HP_EMPTY_SLOT 0xFFFF

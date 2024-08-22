@@ -218,9 +218,9 @@ static void InitMainCallbacks(void)
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
     SetMainCallback2(gInitialMainCB2);
-    gSaveBlock2Ptr = &gSaveBlock2;
-    gSaveBlock1Ptr = &gSaveBlock1;
-    gSaveBlock2.encryptionKey = 0;
+    gSaveBlock2Ptr = &gSaveblock2.block;
+    gSaveBlock1Ptr = &gSaveblock1.block;
+    gSaveblock2.block.encryptionKey = 0;
     gQuestLogPlaybackState = QL_PLAYBACK_STATE_STOPPED;
 }
 

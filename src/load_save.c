@@ -1,6 +1,9 @@
 #include "global.h"
+
 #include "gba/flash_internal.h"
-#include "gflib.h"
+
+#include "malloc.h"
+
 #include "berry_powder.h"
 #include "item.h"
 #include "load_save.h"
@@ -11,9 +14,8 @@
 #include "random.h"
 #include "save_location.h"
 #include "trainer_tower.h"
-#include "constants/event_objects.h"
 
-#define SAVEBLOCK_MOVE_RANGE    128
+#include "constants/event_objects.h"
 
 struct LoadedSaveData
 {
@@ -27,14 +29,9 @@ struct LoadedSaveData
 
 // EWRAM DATA
 EWRAM_DATA struct SaveBlock3 gSaveblock3 = {};
-EWRAM_DATA struct SaveBlock2 gSaveBlock2 = {0};
-EWRAM_DATA u8 gSaveBlock2_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
-
-EWRAM_DATA struct SaveBlock1 gSaveBlock1 = {0};
-EWRAM_DATA u8 gSaveBlock1_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
-
-EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
-EWRAM_DATA u8 gSaveBlock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+EWRAM_DATA struct SaveBlock2ASLR gSaveblock2 = {0};
+EWRAM_DATA struct SaveBlock1ASLR gSaveblock1 = {0};
+EWRAM_DATA struct PokemonStorageASLR gPokemonStorage = {0};
 
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 EWRAM_DATA u32 gLastEncryptionKey = 0;
@@ -66,12 +63,12 @@ void ClearSav3(void)
 
 void ClearSav2(void)
 {
-    CpuFill16(0, &gSaveBlock2, sizeof(struct SaveBlock2) + sizeof(gSaveBlock2_DMA));
+    CpuFill16(0, &gSaveblock2, sizeof(struct SaveBlock2ASLR));
 }
 
 void ClearSav1(void)
 {
-    CpuFill16(0, &gSaveBlock1, sizeof(struct SaveBlock1) + sizeof(gSaveBlock1_DMA));
+    CpuFill16(0, &gSaveblock1, sizeof(struct SaveBlock1ASLR));
 }
 
 void SetSaveBlocksPointers(void)
@@ -82,8 +79,8 @@ void SetSaveBlocksPointers(void)
 
     offset = (Random()) & ((SAVEBLOCK_MOVE_RANGE - 1) & ~3);
 
-    gSaveBlock2Ptr = (void *)(&gSaveBlock2) + offset;
-    *sav1_LocalVar = (void *)(&gSaveBlock1) + offset;
+    gSaveBlock2Ptr = (void *)(&gSaveblock2) + offset;
+    *sav1_LocalVar = (void *)(&gSaveblock1) + offset;
     gPokemonStoragePtr = (void *)(&gPokemonStorage) + offset;
 
     SetBagPocketsPointers();

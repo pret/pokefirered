@@ -51,6 +51,8 @@ struct PokemonStorage
     /*0x8432*/ struct Pokemon fusions[MAX_FUSION_STORAGE];
 };
 
+extern struct PokemonStorage *gPokemonStoragePtr;
+
 u8 *GetBoxNamePtr(u8 boxNumber);
 struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 monPosition);
 void SetBoxMonNickAt(u8 boxId, u8 monPosition, const u8 *newNick);

@@ -43,9 +43,11 @@ struct CreditsOverworldCmd
 };
 
 /* gDisableMapMusicChangeOnMapLoad */
-#define MUSIC_DISABLE_OFF 0
-#define MUSIC_DISABLE_STOP 1
-#define MUSIC_DISABLE_KEEP 2
+enum {
+    MUSIC_DISABLE_OFF,
+    MUSIC_DISABLE_STOP,
+    MUSIC_DISABLE_KEEP,
+};
 
 
 extern struct WarpData gLastUsedWarp;

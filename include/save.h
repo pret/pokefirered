@@ -82,7 +82,6 @@ enum
 };
 
 extern u32 gDamagedSaveSectors;
-extern struct SaveSector *gSaveDataBufferPtr; // the pointer is in fast IWRAM but points to the slower EWRAM.
 extern u16 gSaveFileStatus;
 extern void (*gGameContinueCallback)(void);
 extern u16 gSaveAttemptStatus;

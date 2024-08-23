@@ -1069,9 +1069,9 @@ static void ItemPc_InitWindows(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowGfx(0, 0x3C0, BG_PLTT_ID(14));
+    LoadUserWindowBorderGfx(0, 0x3C0, BG_PLTT_ID(14));
     LoadStdWindowGfx(0, 0x3A3, BG_PLTT_ID(12));
-    LoadMenuMessageWindowGfx(0, 0x3AC, BG_PLTT_ID(11));
+    LoadMessageBoxGfx(0, 0x3AC, BG_PLTT_ID(11));
     LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i < 3; i++)

@@ -1,9 +1,10 @@
 #include "global.h"
+
 #include "gflib.h"
-#include "scanline_effect.h"
-#include "task.h"
-#include "save.h"
+
 #include "event_data.h"
+#include "help_system.h"
+#include "pokedex.h"
 #include "menu.h"
 #include "rtc.h"
 #include "link.h"
@@ -11,12 +12,13 @@
 #include "overworld.h"
 #include "quest_log.h"
 #include "mystery_gift_menu.h"
+#include "save.h"
+#include "scanline_effect.h"
 #include "strings.h"
-#include "title_screen.h"
-#include "help_system.h"
-#include "pokedex.h"
+#include "task.h"
 #include "text_window.h"
-#include "text_window_graphics.h"
+#include "title_screen.h"
+
 #include "constants/songs.h"
 
 enum MainMenuType
@@ -738,7 +740,7 @@ static void PrintBadgeCount(void)
 static void LoadUserFrameToBg(u8 bgId)
 {
     LoadBgTiles(bgId, GetUserWindowGraphics(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1B1);
-    LoadPalette(GetUserWindowGraphics(gSaveBlock2Ptr->optionsWindowFrameType)->palette, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
+    LoadPalette(GetUserWindowGraphics(gSaveBlock2Ptr->optionsWindowFrameType)->pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
     MainMenu_EraseWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
 }
 

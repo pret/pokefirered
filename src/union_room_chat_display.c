@@ -1307,7 +1307,7 @@ static void LoadWin1(void)
 static void LoadWin3(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
-    LoadUserWindowGfx(3, 1, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfx(3, 1, BG_PLTT_ID(13));
     LoadStdWindowGfx(3, 0xA, BG_PLTT_ID(2));
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(14),  PLTT_SIZE_4BPP);
 }

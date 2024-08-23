@@ -163,8 +163,8 @@ void BuyMenuInitWindows(bool32 isSellingTM)
     else
         InitWindows(sShopBuyMenuWindowTemplatesTM);
     DeactivateAllTextPrinters();
-    LoadUserWindowGfx(0, 0x1, BG_PLTT_ID(13));
-    LoadMenuMessageWindowGfx(0, 0x13, BG_PLTT_ID(14));
+    LoadUserWindowBorderGfx(0, 0x1, BG_PLTT_ID(13));
+    LoadMessageBoxGfx(0, 0x13, BG_PLTT_ID(14));
     LoadStdWindowGfx(0, 0xA, BG_PLTT_ID(15));
     PutWindowTilemap(0);
     PutWindowTilemap(4);

@@ -398,7 +398,7 @@ static void MoveRelearnerLoadBgGfx(void)
         FillWindowPixelBuffer(7, PIXEL_FILL(1));
         FillBgTilemapBufferRect(0, 0x000, 0, 0, 30, 20, 15);
         SetBgTilemapBuffer(1, sMoveRelearner->bg1TilemapBuffer);
-        LoadUserWindowGfx(0, 1, BG_PLTT_ID(14));
+        LoadUserWindowBorderGfx(0, 1, BG_PLTT_ID(14));
         ListMenuLoadStdPalAt(BG_PLTT_ID(13), 1);
         LoadPalette(gMoveRelearner_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         DecompressAndLoadBgGfxUsingHeap(1, gMoveRelearner_Gfx, 0, 0, 0);

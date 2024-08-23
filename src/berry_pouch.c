@@ -1427,8 +1427,8 @@ static void BerryPouchInitWindows(void)
     u8 i;
     InitWindows(sWindowTemplates_Main);
     DeactivateAllTextPrinters();
-    LoadUserWindowGfx(0, 0x001, BG_PLTT_ID(14));
-    LoadMenuMessageWindowGfx(0, 0x013, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfx(0, 0x001, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 0x013, BG_PLTT_ID(13));
     LoadStdWindowGfx(0, 0x00A, BG_PLTT_ID(12));
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     for (i = 0; i < 3; i++)

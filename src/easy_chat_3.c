@@ -1363,7 +1363,7 @@ static void EC_AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *st
 static void PrintECInstructionsText(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
-    LoadUserWindowGfx(1, 1, BG_PLTT_ID(14));
+    LoadUserWindowBorderGfx(1, 1, BG_PLTT_ID(14));
     DrawTextBorderOuter(1, 1, 14);
     PrintECInterfaceTextById(0);
     PutWindowTilemap(1);

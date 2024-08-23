@@ -1489,8 +1489,8 @@ static void InitWindowTemplatesAndPals(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowGfx(0, 0x5B, BG_PLTT_ID(14));
-    LoadMenuMessageWindowGfx(0, 0x64, BG_PLTT_ID(11));
+    LoadUserWindowBorderGfx(0, 0x5B, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 0x64, BG_PLTT_ID(11));
     LoadStdWindowGfx(0, 0x78, BG_PLTT_ID(13));
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(10), PLTT_SIZE_4BPP);

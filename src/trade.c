@@ -803,7 +803,7 @@ static void InitTradeMenu(void)
         }
         FillBgTilemapBufferRect(0, 0, 0, 0, 30, 20, 15);
         LoadStdWindowGfx(0, 0x014, BG_PLTT_ID(12));
-        LoadUserWindowGfx(2, 0x001, BG_PLTT_ID(14));
+        LoadUserWindowBorderGfx(2, 0x001, BG_PLTT_ID(14));
         LoadMonIconPalettes();
         sTradeMenu->bufferPartyState = 0;
         sTradeMenu->callbackId = CB_MAIN_MENU;

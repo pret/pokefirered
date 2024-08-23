@@ -2046,7 +2046,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         LoadPalette(sBgPal_MatchLines, BG_PLTT_ID(PALSLOT_LINE_BET), sizeof(sBgPal_MatchLines));
         LoadPalette(sCombosWindow_Pal, BG_PLTT_ID(7), sizeof(sCombosWindow_Pal));
         SetBackdropColor(RGB(30, 30, 31), pal);
-        LoadUserWindowGfx2(0, 0x00A, BG_PLTT_ID(13));
+        LoadUserWindowBorderGfx_(0, 0x00A, BG_PLTT_ID(13));
         LoadStdWindowGfxOnBg(0, 0x001, BG_PLTT_ID(15));
 
         SetBgTilemapBuffer(0, ptr->bg0TilemapBuffer);

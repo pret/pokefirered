@@ -534,7 +534,7 @@ static void Task_InitPokeStorage(u8 taskId)
         PutWindowTilemap(0);
         ClearWindowTilemap(1);
         CpuFill32(0, (void *)VRAM, 0x200);
-        LoadUserWindowGfx(1, 0xB, BG_PLTT_ID(14));
+        LoadUserWindowBorderGfx(1, 0xB, BG_PLTT_ID(14));
         break;
     case 3:
         ResetAllBgCoords();

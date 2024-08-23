@@ -1,5 +1,10 @@
 #include "global.h"
-#include "gflib.h"
+
+#include "bg.h"
+#include "gpu_regs.h"
+#include "malloc.h"
+#include "string_util.h"
+
 #include "dodrio_berry_picking.h"
 #include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
@@ -10,13 +15,15 @@
 #include "menu.h"
 #include "minigame_countdown.h"
 #include "new_menu_helpers.h"
+#include "palette.h"
 #include "random.h"
 #include "save.h"
 #include "script.h"
+#include "sound.h"
 #include "strings.h"
 #include "task.h"
 #include "text_window.h"
-#include "text_window_graphics.h"
+
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "constants/items.h"
@@ -4111,7 +4118,7 @@ static void ResetBerryAndStatusBarSprites(void)
 static void LoadWindowFrameGfx(u8 frameId)
 {
     LoadBgTiles(BG_INTERFACE, GetUserWindowGraphics(frameId)->tiles, 0x120, 1);
-    LoadPalette(GetUserWindowGraphics(frameId)->palette, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
+    LoadPalette(GetUserWindowGraphics(frameId)->pal, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
 }
 
 static void DBP_LoadStdWindowGfx(void)

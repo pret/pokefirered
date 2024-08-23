@@ -202,8 +202,8 @@ void InitBagWindows(void)
     else
         InitWindows(sDefaultBagWindowsDeposit);
     DeactivateAllTextPrinters();
-    LoadUserWindowGfx(0, 0x64, BG_PLTT_ID(14));
-    LoadMenuMessageWindowGfx(0, 0x6D, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfx(0, 0x64, BG_PLTT_ID(14));
+    LoadMessageBoxGfx(0, 0x6D, BG_PLTT_ID(13));
     LoadStdWindowGfx(0, 0x81, BG_PLTT_ID(12));
     LoadPalette(sBagWindowPalF, BG_PLTT_ID(15), sizeof(sBagWindowPalF));
     for (i = 0; i < 3; i++)

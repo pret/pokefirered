@@ -665,7 +665,7 @@ static void LoadWallClockGraphics(void)
     InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowGfx2(0, 0x250, 0xd0);
+    LoadUserWindowBorderGfx_(0, 0x250, 0xd0);
     ClearScheduledBgCopiesToVram();
     ScanlineEffect_Stop();
     ResetTasks();
@@ -846,7 +846,7 @@ static void Task_SetClock_AskConfirm(u8 taskId)
     AddTextPrinterParameterized(0, 1, gText_IsThisTheCorrectTime, 0, 1, 0, NULL);
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
-    LoadUserWindowGfx2(0, 0x140, 0xE0);
+    LoadUserWindowBorderGfx_(0, 0x140, 0xE0);
     CreateYesNoMenu(&sYesNoWinTemplate, 3, 0, 2, 0x140, 0xE, 0);
     gTasks[taskId].func = Task_SetClock_HandleConfirmInput;
 }

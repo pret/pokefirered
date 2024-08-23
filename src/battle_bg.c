@@ -445,8 +445,8 @@ void InitBattleBgsVideo(void)
 
 void LoadBattleMenuWindowGfx(void)
 {
-    LoadUserWindowGfx(2, 0x012, BG_PLTT_ID(1));
-    LoadUserWindowGfx(2, 0x022, BG_PLTT_ID(1));
+    LoadUserWindowBorderGfx(2, 0x012, BG_PLTT_ID(1));
+    LoadUserWindowBorderGfx(2, 0x022, BG_PLTT_ID(1));
 
     gPlttBufferUnfaded[BG_PLTT_ID(5) + 12] = RGB( 9,  9,  9);
     gPlttBufferUnfaded[BG_PLTT_ID(5) + 13] = RGB( 9,  9,  9);
@@ -457,7 +457,7 @@ void LoadBattleMenuWindowGfx(void)
     if (gBattleTypeFlags & (BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_POKEDUDE))
     {
         Menu_LoadStdPalAt(BG_PLTT_ID(7));
-        LoadMenuMessageWindowGfx(0, 0x030, BG_PLTT_ID(7));
+        LoadMessageBoxGfx(0, 0x030, BG_PLTT_ID(7));
 
         gPlttBufferUnfaded[BG_PLTT_ID(7) + 6] = RGB( 0,  0,  0);
         CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(7) + 6], &gPlttBufferFaded[BG_PLTT_ID(7) + 6], PLTT_SIZEOF(1));

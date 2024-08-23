@@ -341,7 +341,7 @@ void InitPokemonSpecialAnimScene(struct PokemonSpecialAnimScene * buffer, u16 an
     FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 0, 32, 32);
     LoadBgGfxByAnimType(animType);
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    LoadUserWindowGfx(0, 0x000, BG_PLTT_ID(14));
+    LoadUserWindowBorderGfx(0, 0x000, BG_PLTT_ID(14));
     CopyWindowToVram(0, COPYWIN_FULL);
     ShowBg(0);
     ShowBg(3);

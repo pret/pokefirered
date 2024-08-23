@@ -392,7 +392,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
         SetBgTilemapBuffer(1, Alloc(BG_SCREEN_SIZE));
         SetBgTilemapBuffer(0, Alloc(BG_SCREEN_SIZE));
 
-        LoadUserWindowGfx2(0, 10, BG_PLTT_ID(14));
+        LoadUserWindowBorderGfx_(0, 10, BG_PLTT_ID(14));
         LoadStdWindowGfxOnBg(0,  1, BG_PLTT_ID(15));
         DecompressAndLoadBgGfxUsingHeap(3, sTextboxBorder_Gfx, 0x100, 0, 0);
         InitWindows(sMainWindows);

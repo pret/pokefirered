@@ -26,11 +26,7 @@ const struct FlashSetupInfo MX29L010 =
                0  // appears to be unused
         },
         { 3, 1 }, // wait state setup data
-#if defined(GERMAN) && defined(SAPPHIRE)
-        { { 0xBF, 0xD4 } } // ID
-#else
         { { 0xC2, 0x09 } } // ID
-#endif
     }
 };
 
@@ -157,7 +153,7 @@ static u16 ProgramByte(u8 *src, u8 *dest)
     return WaitForFlashWrite(1, dest, *src);
 }
 
-u16 ProgramFlashSector_MX(u16 sectorNum, void *src)
+u16 ProgramFlashSector_MX(u16 sectorNum, u8 *src)
 {
     u16 result;
     u8 *dest;

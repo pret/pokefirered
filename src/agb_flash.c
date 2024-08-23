@@ -9,7 +9,7 @@ static u16 sSavedIme;
 u8 gFlashTimeoutFlag;
 u8 (*PollFlashStatus)(u8 *);
 u16 (*WaitForFlashWrite)(u8 phase, u8 *addr, u8 lastData);
-u16 (*ProgramFlashSector)(u16 sectorNum, void *src);
+u16 (*ProgramFlashSector)(u16 sectorNum, u8 *src);
 const struct FlashType *gFlash;
 u16 (*ProgramFlashByte)(u16 sectorNum, u32 offset, u8 data);
 u16 gFlashNumRemainingBytes;
@@ -127,7 +127,6 @@ void SetReadFlash1(u16 *dest)
     }
 }
 
-
 // Using volatile here to make sure the flash memory will ONLY be read as bytes, to prevent any compiler optimizations.
 void ReadFlash_Core(vu8 *src, u8 *dest, u32 size)
 {
@@ -137,7 +136,7 @@ void ReadFlash_Core(vu8 *src, u8 *dest, u32 size)
     }
 }
 
-void ReadFlash(u16 sectorNum, u32 offset, void *dest, u32 size)
+void ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size)
 {
     u8 *src;
     u16 i;
@@ -219,7 +218,7 @@ u32 VerifyFlashSector(u16 sectorNum, u8 *src)
     tgt = FLASH_BASE + (sectorNum << gFlash->sector.shift);
     size = gFlash->sector.size;
 
-    return verifyFlashSector_Core(src, tgt, size); // return 0 if verified.
+    return verifyFlashSector_Core(src, tgt, size);
 }
 
 u32 VerifyFlashSectorNBytes(u16 sectorNum, u8 *src, u32 n)
@@ -263,7 +262,7 @@ u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src)
     u8 i;
     u32 result;
 
-    for (i = 0; i < 3; i++) // 3 attempts
+    for (i = 0; i < 3; i++)
     {
         result = ProgramFlashSector(sectorNum, src);
         if (result != 0)
@@ -274,21 +273,21 @@ u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src)
             break;
     }
 
-    return result; // return 0 if verified and programmed.
+    return result;
 }
 
-u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, void *dataSrc, u32 n)
+u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *src, u32 n)
 {
     u8 i;
     u32 result;
 
     for (i = 0; i < 3; i++)
     {
-        result = ProgramFlashSector(sectorNum, dataSrc);
+        result = ProgramFlashSector(sectorNum, src);
         if (result != 0)
             continue;
 
-        result = VerifyFlashSectorNBytes(sectorNum, dataSrc, n);
+        result = VerifyFlashSectorNBytes(sectorNum, src, n);
         if (result == 0)
             break;
     }

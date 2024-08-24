@@ -5535,7 +5535,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     else if (PlayerGetCopyableMovement() == COPY_MOVE_JUMP2)
     {
         // If *player* jumps, make step take twice as long
-        ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowMovementAction(direction));
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowerMovementAction(direction));
     }
     else
     {
@@ -10499,13 +10499,13 @@ void SetWalkSlowSpriteData(struct Sprite *sprite, u8 direction)
 
 bool8 UpdateWalkSlowAnim(struct Sprite *sprite)
 {
-    if (!(sprite->tDelay & 1))
+    if (++sprite->tDelay < 3)
     {
         Step1(sprite, sprite->tDirection);
         sprite->tStepNo++;
     }
-
-    sprite->tDelay++;
+    else
+        sprite->tDelay = 0;
 
     if (sprite->tStepNo > 15)
         return TRUE;

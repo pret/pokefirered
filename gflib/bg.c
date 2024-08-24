@@ -344,14 +344,14 @@ void ResetBgsAndClearDma3BusyFlags(bool32 enableWindowTileAutoAlloc)
     int i;
     ResetBgs();
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < NUM_BACKGROUNDS; i++)
     {
         sDmaBusyBitfield[i] = 0;
     }
 
     gWindowTileAutoAllocEnabled = enableWindowTileAutoAlloc;
 
-    for (i = 0; i < 0x100; i++)
+    for (i = 0; i < ARRAY_COUNT(gpu_tile_allocation_map_bg); i++)
     {
         gpu_tile_allocation_map_bg[i] = 0;
     }

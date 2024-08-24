@@ -1,14 +1,17 @@
 #include "global.h"
+
+#include "gpu_regs.h"
+
 #include "battle.h"
 #include "battle_anim.h"
 #include "data.h"
 #include "decompress.h"
-#include "gflib.h"
 #include "graphics.h"
 #include "palette.h"
 #include "pokemon_icon.h"
 #include "random.h"
 #include "scanline_effect.h"
+#include "sound.h"
 #include "task.h"
 #include "trig.h"
 #include "util.h"

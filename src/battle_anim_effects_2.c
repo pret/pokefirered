@@ -1,13 +1,17 @@
 #include "global.h"
+
+#include "gpu_regs.h"
+#include "malloc.h"
+
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "decompress.h"
-#include "gflib.h"
 #include "graphics.h"
 #include "math_util.h"
 #include "palette.h"
 #include "random.h"
 #include "scanline_effect.h"
+#include "sound.h"
 #include "trig.h"
 #include "util.h"
 #include "constants/songs.h"

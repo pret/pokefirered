@@ -1,13 +1,17 @@
 #include "global.h"
+
+#include "gpu_regs.h"
+#include "malloc.h"
+
 #include "battle_anim.h"
-#include "scanline_effect.h"
-#include "gflib.h"
+#include "decompress.h"
 #include "graphics.h"
 #include "item_menu_icons.h"
 #include "palette.h"
+#include "scanline_effect.h"
+#include "sound.h"
 #include "trig.h"
 #include "util.h"
-#include "decompress.h"
 #include "constants/songs.h"
 
 static void AnimConfuseRayBallBounce(struct Sprite *sprite);

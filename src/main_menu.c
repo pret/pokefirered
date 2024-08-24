@@ -18,7 +18,6 @@
 #include "task.h"
 #include "text_window.h"
 #include "title_screen.h"
-
 #include "constants/songs.h"
 
 enum MainMenuType

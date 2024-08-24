@@ -1,8 +1,8 @@
 #ifndef GUARD_RECORDED_BATTLE_H
 #define GUARD_RECORDED_BATTLE_H
 
-#include "constants/battle.h"
 #include "random.h"
+#include "constants/battle.h"
 
 #define BATTLER_RECORD_SIZE 664
 

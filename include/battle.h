@@ -1,8 +1,6 @@
 #ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
-#include "constants/battle.h"
-#include "constants/form_change_types.h"
 #include "battle_main.h"
 #include "battle_message.h"
 #include "battle_util.h"
@@ -11,12 +9,14 @@
 #include "battle_gfx_sfx_util.h"
 #include "battle_util2.h"
 #include "battle_bg.h"
-#include "pokeball.h"
 #include "battle_debug.h"
 #include "battle_dynamax.h"
 #include "battle_terastal.h"
 #include "battle_gimmick.h"
+#include "pokeball.h"
 #include "random.h" // for rng_value_t
+#include "constants/battle.h"
+#include "constants/form_change_types.h"
 
 // Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
 //

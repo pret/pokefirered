@@ -1,8 +1,8 @@
 #ifndef GUARD_BATTLE_TERRAIN_H
 #define GUARD_BATTLE_TERRAIN_H
 
-#include "constants/battle.h"
 #include "battle_bg.h"
+#include "constants/battle.h"
 
 struct BattleTerrain {
     u8 name[26];

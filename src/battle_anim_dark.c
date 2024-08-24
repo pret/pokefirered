@@ -1,7 +1,10 @@
 #include "global.h"
-#include "gflib.h"
+
+#include "gpu_regs.h"
+
 #include "battle_anim.h"
 #include "graphics.h"
+#include "palette.h"
 #include "scanline_effect.h"
 #include "trig.h"
 #include "util.h"

@@ -23,7 +23,6 @@
 #include "strings.h"
 #include "task.h"
 #include "text_window.h"
-
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "constants/items.h"

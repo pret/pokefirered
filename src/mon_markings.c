@@ -6,7 +6,6 @@
 #include "graphics.h"
 #include "sound.h"
 #include "text_window.h"
-
 #include "constants/songs.h"
 
 #define ANIM_CURSOR (NUM_MON_MARKINGS * 2)

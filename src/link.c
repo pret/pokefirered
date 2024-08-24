@@ -28,7 +28,6 @@
 #include "strings.h"
 #include "task.h"
 #include "trade.h"
-
 #include "constants/battle.h"
 #include "constants/songs.h"
 

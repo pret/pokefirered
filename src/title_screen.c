@@ -23,7 +23,6 @@
 #include "scanline_effect.h"
 #include "sound.h"
 #include "task.h"
-
 #include "constants/songs.h"
 
 enum TitleScreenScene

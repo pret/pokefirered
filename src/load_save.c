@@ -14,7 +14,6 @@
 #include "random.h"
 #include "save_location.h"
 #include "trainer_tower.h"
-
 #include "constants/event_objects.h"
 
 struct LoadedSaveData

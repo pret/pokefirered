@@ -38,7 +38,6 @@
 #include "task.h"
 #include "text_window.h"
 #include "trainer_pokemon_sprites.h"
-
 #include "constants/items.h"
 #include "constants/event_objects.h"
 

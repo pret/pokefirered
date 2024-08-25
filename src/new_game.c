@@ -73,8 +73,8 @@ static void SetDefaultOptions(void)
 
 static void ClearPokedexFlags(void)
 {
-    memset(&gSaveBlock2Ptr->pokedex.owned, 0, sizeof(gSaveBlock2Ptr->pokedex.owned));
-    memset(&gSaveBlock1Ptr->seen1, 0, sizeof(gSaveBlock1Ptr->seen1));
+    memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
+    memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
 }
 
 static void ClearBattleTower(void)
@@ -120,6 +120,7 @@ void NewGameInitData(void)
     ZeroEnemyPartyMons();
     ClearBattleTower();
     ClearSav1();
+    ClearSav3();
     ClearMailData();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->gcnLinkFlags = 0;

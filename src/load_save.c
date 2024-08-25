@@ -16,6 +16,8 @@
 #include "trainer_tower.h"
 #include "constants/event_objects.h"
 
+char (*abc)[sizeof(struct QuestLogScene)] = 1;
+
 struct LoadedSaveData
 {
  /*0x0000*/ struct ItemSlot items[BAG_ITEMS_COUNT];

@@ -10,6 +10,8 @@
 #define SPRITE_TAG_WAKE  4000
 #define SPRITE_TAG_SMOKE 4001
 
+#define PALTAG_SMOKE_WAKE 3000
+
 static void Task_SSAnneInit(u8 taskId);
 static void Task_SSAnneRun(u8 taskId);
 static void Task_SSAnneFinish(u8 taskId);
@@ -21,10 +23,32 @@ static void SmokeSpriteCallback(struct Sprite *sprite);
 static const u16 sWakeTiles[] = INCBIN_U16("graphics/ss_anne/wake.4bpp");
 static const u16 sSmokeTiles[] = INCBIN_U16("graphics/ss_anne/smoke.4bpp");
 
+static const u16 sWakeSmokePalette[] = INCBIN_U16("graphics/ss_anne/wake.gbapal");
+
 static const struct SpriteSheet sSpriteSheets[] = {
-    {(const void *)sWakeTiles, sizeof(sWakeTiles), SPRITE_TAG_WAKE},
-    {(const void *)sSmokeTiles, sizeof(sSmokeTiles), SPRITE_TAG_SMOKE},
-    {0}
+    {
+        .data = (const void *)sWakeTiles, 
+        .size = sizeof(sWakeTiles), 
+        .tag = SPRITE_TAG_WAKE,
+    },
+    {
+        .data = (const void *)sSmokeTiles, 
+        .size = sizeof(sSmokeTiles), 
+        .tag = SPRITE_TAG_SMOKE,
+    },
+    {
+        .data = NULL
+    }
+};
+
+static const struct SpritePalette sSpritePalettes[] = {
+    {
+        .data = (const void *)sWakeSmokePalette, 
+        .tag = PALTAG_SMOKE_WAKE
+    },
+    {
+        .data = NULL
+    }
 };
 
 static const union AnimCmd sWakeAnim[] = {
@@ -43,13 +67,13 @@ static const struct OamData sWakeOamData = {
 };
 
 static const struct SpriteTemplate sWakeSpriteTemplate = {
-    SPRITE_TAG_WAKE,
-    0xFFFF,
-    &sWakeOamData,
-    sWakeAnimTable,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    WakeSpriteCallback
+    .tileTag = SPRITE_TAG_WAKE,
+    .paletteTag = PALTAG_SMOKE_WAKE,
+    .oam = &sWakeOamData,
+    .anims = sWakeAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = WakeSpriteCallback,
 };
 
 static const union AnimCmd sSmokeAnim[] = {
@@ -70,13 +94,13 @@ static const struct OamData sSmokeOamData = {
 };
 
 static const struct SpriteTemplate sSmokeSpriteTemplate = {
-    SPRITE_TAG_SMOKE,
-    0xFFFF,
-    &sSmokeOamData,
-    sSmokeAnimTable,
-    NULL,
-    gDummySpriteAffineAnimTable,
-    SmokeSpriteCallback
+    .tileTag = SPRITE_TAG_SMOKE,
+    .paletteTag = PALTAG_SMOKE_WAKE,
+    .oam = &sSmokeOamData,
+    .anims = sSmokeAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SmokeSpriteCallback,
 };
 
 void DoSSAnneDepartureCutscene(void)
@@ -95,6 +119,7 @@ static void Task_SSAnneInit(u8 taskId)
     if (--data[0] == 0)
     {
         LoadSpriteSheets(sSpriteSheets);
+        LoadSpritePalette(sSpritePalettes);
         CreateWakeBehindBoat();
         gTasks[taskId].func = Task_SSAnneRun;
     }
@@ -136,6 +161,7 @@ static void Task_SSAnneFinish(u8 taskId)
     {
         FreeSpriteTilesByTag(SPRITE_TAG_WAKE);
         FreeSpriteTilesByTag(SPRITE_TAG_SMOKE);
+        FreeSpritePaletteByTag(PALTAG_SMOKE_WAKE);
         DestroyTask(taskId);
         ScriptContext_Enable();
     }
@@ -153,7 +179,6 @@ static void CreateWakeBehindBoat(void)
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 80;
     spriteId = CreateSprite(&sWakeSpriteTemplate, x, 109, 0xFF);
     gSprites[spriteId].oam.priority = 2;
-    gSprites[spriteId].oam.paletteNum = 10;
 }
 
 static void WakeSpriteCallback(struct Sprite *sprite)
@@ -178,17 +203,12 @@ static void CreateSmokeSprite(void)
     u8 objectEventId;
     struct ObjectEvent * boatObject;
     u16 x;
-    u8 spriteId;
 
     TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 49;
     if ((s16)x >= -32)
-    {
-        spriteId = CreateSprite(&sSmokeSpriteTemplate, x, 78, 8);
-        if (spriteId != MAX_SPRITES)
-            gSprites[spriteId].oam.paletteNum = 10;
-    }
+        CreateSprite(&sSmokeSpriteTemplate, x, 78, 8);
 }
 
 static void SmokeSpriteCallback(struct Sprite *sprite)

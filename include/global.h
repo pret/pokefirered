@@ -232,7 +232,7 @@ struct Pokedex
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
     /*0x0C*/ u32 unknown3;
     /*0x10*/ u8 owned[DEX_FLAGS_NO];
-    /*0x44*/ u8 seen[DEX_FLAGS_NO];
+    /*0x44*/ u8 filler1[DEX_FLAGS_NO];
 };
 
 struct PokemonJumpRecords
@@ -841,7 +841,7 @@ struct SaveBlock1
     // /*0x348C*/ u8 unused_348C[400];
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ struct RecordMixingGift recordMixingGift; // unused
-    /*0x3A18*/ u8 seen2[DEX_FLAGS_NO];
+    /*0x3A18*/ u8 unused_3A18[DEX_FLAGS_NO];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH + 1];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
     // /*0x3A94*/ u8 unused_3A94[64];

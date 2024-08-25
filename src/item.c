@@ -29,12 +29,12 @@ static bool32 DoesItemHavePluralName(u16);
 
 u16 GetBagItemQuantity(u16 * ptr)
 {
-    return gSaveBlock2Ptr->encryptionKey ^ *ptr;
+    return *ptr;
 }
 
 void SetBagItemQuantity(u16 * ptr, u16 value)
 {
-    *ptr = value ^ gSaveBlock2Ptr->encryptionKey;
+    *ptr = value;
 }
 
 u16 GetPcItemQuantity(u16 * ptr)
@@ -45,24 +45,6 @@ u16 GetPcItemQuantity(u16 * ptr)
 void SetPcItemQuantity(u16 * ptr, u16 value)
 {
     *ptr = value ^ 0;
-}
-
-void ApplyNewEncryptionKeyToBagItems(u32 key)
-{
-    u32 i, j;
-
-    for (i = 0; i < NUM_BAG_POCKETS; i++)
-    {
-        for (j = 0; j < gBagPockets[i].capacity; j++)
-        {
-            ApplyNewEncryptionKeyToHword(&gBagPockets[i].itemSlots[j].quantity, key);
-        }
-    }
-}
-
-void ApplyNewEncryptionKeyToBagItems_(u32 key)
-{
-    ApplyNewEncryptionKeyToBagItems(key);
 }
 
 void SetBagPocketsPointers(void)

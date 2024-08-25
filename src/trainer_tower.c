@@ -1076,12 +1076,12 @@ void PrintTrainerTowerRecords(void)
 
 static u32 GetTrainerTowerRecordTime(u32 *counter)
 {
-    return *counter ^ gSaveBlock2Ptr->encryptionKey;
+    return *counter;
 }
 
 static void SetTrainerTowerRecordTime(u32 *counter, u32 value)
 {
-    *counter = value ^ gSaveBlock2Ptr->encryptionKey;
+    *counter = value;
 }
 
 void ResetTrainerTowerResults(void)

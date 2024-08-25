@@ -10,12 +10,12 @@ EWRAM_DATA static u8 sMoneyBoxWindowId = 0;
 
 u32 GetMoney(u32 *moneyPtr)
 {
-    return *moneyPtr ^ gSaveBlock2Ptr->encryptionKey;
+    return *moneyPtr;
 }
 
 void SetMoney(u32 *moneyPtr, u32 newValue)
 {
-    *moneyPtr = gSaveBlock2Ptr->encryptionKey ^ newValue;
+    *moneyPtr = newValue;
 }
 
 bool8 IsEnoughMoney(u32 *moneyPtr, u32 cost)

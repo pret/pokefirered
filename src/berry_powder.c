@@ -16,17 +16,12 @@ static EWRAM_DATA u8 sBerryPowderVendorWindowId = 0;
 
 u32 DecryptBerryPowder(u32 *powder)
 {
-    return *powder ^ gSaveBlock2Ptr->encryptionKey;
+    return *powder;
 }
 
 void SetBerryPowder(u32 *powder, u32 amount)
 {
-    *powder = amount ^ gSaveBlock2Ptr->encryptionKey;
-}
-
-void ApplyNewEncryptionKeyToBerryPowder(u32 encryptionKey)
-{
-    ApplyNewEncryptionKeyToWord(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, encryptionKey);
+    *powder = amount;
 }
 
 static bool8 HasEnoughBerryPowder(u32 cost)

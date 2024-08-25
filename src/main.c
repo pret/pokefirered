@@ -220,7 +220,6 @@ static void InitMainCallbacks(void)
     SetMainCallback2(gInitialMainCB2);
     gSaveBlock2Ptr = &gSaveblock2.block;
     gSaveBlock1Ptr = &gSaveblock1.block;
-    gSaveblock2.block.encryptionKey = 0;
     gQuestLogPlaybackState = QL_PLAYBACK_STATE_STOPPED;
 }
 

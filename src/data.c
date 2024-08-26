@@ -1,12 +1,15 @@
 #include "global.h"
-#include "gflib.h"
+
+#include "malloc.h"
+
 #include "battle.h"
+#include "battle_transition.h"
 #include "data.h"
 #include "graphics.h"
 #include "constants/abilities.h"
+#include "constants/battle_ai.h"
 #include "constants/items.h"
 #include "constants/moves.h"
-#include "constants/battle_ai.h"
 #include "constants/trainers.h"
 
 #define BATTLER_OFFSET(i) (gHeap + 0x8000 + MON_PIC_SIZE * (i))
@@ -235,8 +238,6 @@ const union AnimCmd *const sAnims_Trainer[] ={
 
 #define TRAINER_SPRITE(trainerPic, sprite, size) [TRAINER_PIC_##trainerPic] = {sprite, size, TRAINER_PIC_##trainerPic}
 #define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {pal, TRAINER_PIC_##trainerPic}
-
-#include "data/trainer_graphics/front_pic_tables.h"
 
 #include "data/trainer_parties.h"
 #include "data/trainers.h"

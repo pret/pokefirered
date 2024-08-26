@@ -1,21 +1,27 @@
 #include "global.h"
-#include "sprite.h"
-#include "task.h"
-#include "overworld.h"
-#include "malloc.h"
-#include "palette.h"
-#include "trig.h"
-#include "random.h"
-#include "sound.h"
-#include "decompress.h"
+
+
 #include "gpu_regs.h"
+#include "malloc.h"
+#include "sprite.h"
+
+#include "battle_setup.h"
 #include "battle_transition.h"
+#include "data.h"
+#include "decompress.h"
+#include "event_object_movement.h"
+#include "field_camera.h"
 #include "field_effect.h"
 #include "field_weather.h"
-#include "field_camera.h"
-#include "trainer_pokemon_sprites.h"
+#include "overworld.h"
+#include "palette.h"
+#include "random.h"
 #include "scanline_effect.h"
-#include "event_object_movement.h"
+#include "sound.h"
+#include "task.h"
+#include "trainer_pokemon_sprites.h"
+#include "trig.h"
+
 #include "constants/songs.h"
 
 #define PALTAG_UNUSED_MUGSHOT 0x100A
@@ -148,14 +154,9 @@ static void Task_Slice(u8 taskId);
 static void Task_WhiteBarsFade(u8 taskId);
 static void Task_GridSquares(u8 taskId);
 static void Task_AngledWipes(u8 taskId);
-static void Task_Lorelei(u8 taskId);
-static void Task_Bruno(u8 taskId);
-static void Task_Agatha(u8 taskId);
-static void Task_Lance(u8 taskId);
-static void Task_Blue(u8 taskId);
+static void Task_Mugshot(u8 taskId);
 static void Task_Spiral(u8 taskId);
 static void Task_Intro(u8 taskId);
-static void DoMugshotTransition(u8 taskId);
 static void Task_BattleTransition_Intro(u8 taskId);
 
 static void SpriteCB_MugshotTrainerPic(struct Sprite *sprite);
@@ -237,11 +238,7 @@ static const TaskFunc sTasks_Main[] =
     [B_TRANSITION_WHITE_BARS_FADE] = Task_WhiteBarsFade,
     [B_TRANSITION_GRID_SQUARES]    = Task_GridSquares,
     [B_TRANSITION_ANGLED_WIPES]    = Task_AngledWipes,
-    [B_TRANSITION_LORELEI]         = Task_Lorelei,
-    [B_TRANSITION_BRUNO]           = Task_Bruno,
-    [B_TRANSITION_AGATHA]          = Task_Agatha,
-    [B_TRANSITION_LANCE]           = Task_Lance,
-    [B_TRANSITION_BLUE]            = Task_Blue,
+    [B_TRANSITION_MUGSHOT]         = Task_Mugshot,
     [B_TRANSITION_SPIRAL]          = Task_Spiral,
 };
 
@@ -355,33 +352,6 @@ static const TransitionStateFunc sMugshot_Funcs[] =
     Mugshot_InitFadeWhiteToBlack,
     Mugshot_FadeToBlack,
     Mugshot_End,
-};
-
-static const u8 sMugshotsTrainerPicIDsTable[MUGSHOTS_COUNT] =
-{
-    [MUGSHOT_LORELEI] = TRAINER_PIC_ELITE_FOUR_LORELEI,
-    [MUGSHOT_BRUNO]   = TRAINER_PIC_ELITE_FOUR_BRUNO,
-    [MUGSHOT_AGATHA]  = TRAINER_PIC_ELITE_FOUR_AGATHA,
-    [MUGSHOT_LANCE]   = TRAINER_PIC_ELITE_FOUR_LANCE,
-    [MUGSHOT_BLUE]    = TRAINER_PIC_CHAMPION_RIVAL,
-};
-
-static const s16 sMugshotsOpponentRotationScales[MUGSHOTS_COUNT][2] =
-{
-    [MUGSHOT_LORELEI] = {0x200, 0x200},
-    [MUGSHOT_BRUNO]   = {0x200, 0x200},
-    [MUGSHOT_AGATHA]  = {0x200, 0x200},
-    [MUGSHOT_LANCE]   = {0x200, 0x200},
-    [MUGSHOT_BLUE]    = {0x200, 0x200},
-};
-
-static const s16 sMugshotsOpponentCoords[MUGSHOTS_COUNT][2] =
-{
-    [MUGSHOT_LORELEI] = {  -8,  0 },
-    [MUGSHOT_BRUNO]   = { -10,  0 },
-    [MUGSHOT_AGATHA]  = {   0,  0 },
-    [MUGSHOT_LANCE]   = { -32,  0 },
-    [MUGSHOT_BLUE]    = {   0,  0 },
 };
 
 static const TransitionSpriteCallback sMugshotTrainerPicFuncs[] =
@@ -580,22 +550,22 @@ static const u16 sMugshotPal_Bruno[] = INCBIN_U16("graphics/battle_transitions/b
 static const u16 sMugshotPal_Agatha[] = INCBIN_U16("graphics/battle_transitions/agatha_bg.gbapal");
 static const u16 sMugshotPal_Lance[] = INCBIN_U16("graphics/battle_transitions/lance_bg.gbapal");
 static const u16 sMugshotPal_Blue[] = INCBIN_U16("graphics/battle_transitions/blue_bg.gbapal");
-static const u16 sMugshotPal_Red[] = INCBIN_U16("graphics/battle_transitions/red_bg.gbapal");
-static const u16 sMugshotPal_Green[] = INCBIN_U16("graphics/battle_transitions/green_bg.gbapal");
+static const u16 sMugshotPal_PlayerRed[] = INCBIN_U16("graphics/battle_transitions/red_bg.gbapal");
+static const u16 sMugshotPal_PlayerGreen[] = INCBIN_U16("graphics/battle_transitions/green_bg.gbapal");
 
-static const u16 *const sOpponentMugshotsPals[MUGSHOTS_COUNT] =
+static const u16 *const sOpponentMugshotsPals[MUGSHOT_COLOR_COUNT] =
 {
-    [MUGSHOT_LORELEI] = sMugshotPal_Lorelei,
-    [MUGSHOT_BRUNO]   = sMugshotPal_Bruno,
-    [MUGSHOT_AGATHA]  = sMugshotPal_Agatha,
-    [MUGSHOT_LANCE]   = sMugshotPal_Lance,
-    [MUGSHOT_BLUE]    = sMugshotPal_Blue,
+    [MUGSHOT_COLOR_PURPLE] = sMugshotPal_Lorelei,
+    [MUGSHOT_COLOR_GREEN]  = sMugshotPal_Bruno,
+    [MUGSHOT_COLOR_PINK]   = sMugshotPal_Agatha,
+    [MUGSHOT_COLOR_BLUE]   = sMugshotPal_Lance,
+    [MUGSHOT_COLOR_YELLOW] = sMugshotPal_Blue,
 };
 
 static const u16 *const sPlayerMugshotsPals[GENDER_COUNT] =
 {
-    [MALE]   = sMugshotPal_Red,
-    [FEMALE] = sMugshotPal_Green,
+    [MALE]   = sMugshotPal_PlayerRed,
+    [FEMALE] = sMugshotPal_PlayerGreen,
 };
 
 static const u16 sUnusedTrainerPalette[] = INCBIN_U16("graphics/battle_transitions/unused_trainer.gbapal");
@@ -1831,7 +1801,6 @@ static void VBlankCB_Spiral(void)
 #define tFadeSpread       data[4]
 #define tOpponentSpriteId data[13]
 #define tPlayerSpriteId   data[14]
-#define tMugshotId        data[15]
 
 // Sprite data for trainer sprites in mugshots
 #define sState      data[0]
@@ -1840,37 +1809,7 @@ static void VBlankCB_Spiral(void)
 #define sDone       data[6]
 #define sSlideDir   data[7]
 
-static void Task_Lorelei(u8 taskId)
-{
-    gTasks[taskId].tMugshotId = MUGSHOT_LORELEI;
-    DoMugshotTransition(taskId);
-}
-
-static void Task_Bruno(u8 taskId)
-{
-    gTasks[taskId].tMugshotId = MUGSHOT_BRUNO;
-    DoMugshotTransition(taskId);
-}
-
-static void Task_Agatha(u8 taskId)
-{
-    gTasks[taskId].tMugshotId = MUGSHOT_AGATHA;
-    DoMugshotTransition(taskId);
-}
-
-static void Task_Lance(u8 taskId)
-{
-    gTasks[taskId].tMugshotId = MUGSHOT_LANCE;
-    DoMugshotTransition(taskId);
-}
-
-static void Task_Blue(u8 taskId)
-{
-    gTasks[taskId].tMugshotId = MUGSHOT_BLUE;
-    DoMugshotTransition(taskId);
-}
-
-static void DoMugshotTransition(u8 taskId)
+static void Task_Mugshot(u8 taskId)
 {
     while (sMugshot_Funcs[gTasks[taskId].tState](&gTasks[taskId]));
 }
@@ -1901,10 +1840,15 @@ static bool8 Mugshot_SetGfx(struct Task *task)
     s16 i, j;
     u16 *tilemap, *tileset;
     const u16 *mugshotsMap = sMugshotsTilemap;
+    u8 mugshotColor = GetTrainerMugshotColorFromId(gTrainerBattleOpponent_A);
     
     GetBg0TilesDst(&tilemap, &tileset);
     CpuCopy16(sMugshotBanner_Gfx, tileset, sizeof(sMugshotBanner_Gfx));
-    LoadPalette(sOpponentMugshotsPals[task->tMugshotId], BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+
+    if (mugshotColor >= ARRAY_COUNT(sOpponentMugshotsPals))
+        mugshotColor = MUGSHOT_COLOR_PURPLE;
+
+    LoadPalette(sOpponentMugshotsPals[mugshotColor], BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     LoadPalette(sPlayerMugshotsPals[gSaveBlock2Ptr->playerGender], BG_PLTT_ID(15) + 10, PLTT_SIZEOF(16 - 10));
     
     for (i = 0; i < 20; i++)
@@ -2143,13 +2087,13 @@ static void HBlankCB_Mugshots(void)
 static void Mugshots_CreateTrainerPics(struct Task *task)
 {
     struct Sprite *opponentSprite, *playerSprite;
-    s16 mugshotId;
+    u32 trainerId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
+    s16 opponentRotationScales = gTrainerSprites[trainerId].mugshotRotation;
 
     gReservedSpritePaletteCount = 10;
-    mugshotId = task->tMugshotId;
-    task->tOpponentSpriteId = CreateTrainerSprite(sMugshotsTrainerPicIDsTable[mugshotId],
-                                                  sMugshotsOpponentCoords[mugshotId][0] - 32,
-                                                  sMugshotsOpponentCoords[mugshotId][1] + 42,
+    task->tOpponentSpriteId = CreateTrainerSprite(trainerId,
+                                                  gTrainerSprites[trainerId].mugshotCoords.x - 32,
+                                                  gTrainerSprites[trainerId].mugshotCoords.y + 42,
                                                   0, gDecompressionBuffer);
     task->tPlayerSpriteId = CreateTrainerSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender),
                                                 DISPLAY_WIDTH + 32,
@@ -2178,7 +2122,7 @@ static void Mugshots_CreateTrainerPics(struct Task *task)
     CalcCenterToCornerVec(opponentSprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
     CalcCenterToCornerVec(playerSprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
 
-    SetOamMatrixRotationScaling(opponentSprite->oam.matrixNum, sMugshotsOpponentRotationScales[mugshotId][0], sMugshotsOpponentRotationScales[mugshotId][1], 0);
+    SetOamMatrixRotationScaling(opponentSprite->oam.matrixNum, opponentRotationScales, opponentRotationScales, 0);
     SetOamMatrixRotationScaling(playerSprite->oam.matrixNum, -512, 512, 0);
 }
 
@@ -2274,7 +2218,6 @@ static s16 IsTrainerPicSlideDone(s16 spriteId)
 #undef tFadeSpread
 #undef tOpponentSpriteId
 #undef tPlayerSpriteId
-#undef tMugshotId
 
 //--------------------
 // B_TRANSITION_SLICE

@@ -700,23 +700,10 @@ u8 GetTrainerBattleTransition(void)
     u8 playerLevel;
     u32 trainerId = SanitizeTrainerId(gTrainerBattleOpponent_A);
 
-    if (trainerId == TRAINER_SECRET_BASE)
-        return B_TRANSITION_BLUE;
-    if (gTrainers[trainerId].trainerClass == TRAINER_CLASS_ELITE_FOUR)
-    {
-        if (trainerId == TRAINER_ELITE_FOUR_LORELEI || trainerId == TRAINER_ELITE_FOUR_LORELEI_2)
-            return B_TRANSITION_LORELEI;
-        if (trainerId == TRAINER_ELITE_FOUR_BRUNO || trainerId == TRAINER_ELITE_FOUR_BRUNO_2)
-            return B_TRANSITION_BRUNO;
-        if (trainerId == TRAINER_ELITE_FOUR_AGATHA || trainerId == TRAINER_ELITE_FOUR_AGATHA_2)
-            return B_TRANSITION_AGATHA;
-        if (trainerId == TRAINER_ELITE_FOUR_LANCE || trainerId == TRAINER_ELITE_FOUR_LANCE_2)
-            return B_TRANSITION_LANCE;
-        return B_TRANSITION_BLUE;
-    }
-    if (gTrainers[trainerId].trainerClass == TRAINER_CLASS_CHAMPION)
-        return B_TRANSITION_BLUE;
-    if (gTrainers[trainerId].doubleBattle == TRUE)
+    if (DoesTrainerHaveMugshot(trainerId))
+        return B_TRANSITION_MUGSHOT;
+
+    if (IsTrainerDoubleBattle(trainerId))
         minPartyCount = 2; // double battles always at least have 2 pokemon.
     else
         minPartyCount = 1;

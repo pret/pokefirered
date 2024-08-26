@@ -397,14 +397,14 @@ static void RecordedPlayerHandleDrawTrainerPic(u32 battler)
         }
         else
         {
-            yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
+            yPos = (8 - gTrainerBacksprites[trainerPicId].coordinates.size) * 4 + 80;
         }
 
     }
     else
     {
         xPos = 80;
-        yPos = (8 - gTrainerBackPicCoords[trainerPicId].size) * 4 + 80;
+        yPos = (8 - gTrainerBacksprites[trainerPicId].coordinates.size) * 4 + 80;
     }
 
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
@@ -494,7 +494,7 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(u32 battler)
     else
         trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_RED;
 
-    trainerPal = gTrainerBackPicPaletteTable[trainerPicId].data;
+    trainerPal = gTrainerBacksprites[trainerPicId].palette.data;
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F9, trainerPal, 24, Intro_TryShinyAnimShowHealthbox, StartAnimLinearTranslation);
 }
 

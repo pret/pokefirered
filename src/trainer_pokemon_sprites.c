@@ -4,6 +4,12 @@
 #include "data.h"
 #include "trainer_pokemon_sprites.h"
 
+#define PICS_COUNT 8
+
+// Needs to be large enough to store either a decompressed Pokémon pic or trainer pic
+#define PIC_SPRITE_SIZE max(MON_PIC_SIZE, TRAINER_PIC_SIZE)
+#define MAX_PIC_FRAMES  max(MAX_MON_PIC_FRAMES, MAX_TRAINER_PIC_FRAMES)
+
 struct PicData
 {
     u8 *frames;
@@ -12,8 +18,6 @@ struct PicData
     u8 spriteId;
     u8 active;
 };
-
-#define PICS_COUNT 8
 
 static EWRAM_DATA struct SpriteTemplate sCreatingSpriteTemplate = {};
 static EWRAM_DATA struct PicData sSpritePics[PICS_COUNT] = {};
@@ -59,7 +63,7 @@ static bool16 DecompressPic(u16 species, u32 personality, bool8 isFrontPic, u8 *
         if (isFrontPic)
             DecompressPicFromTable(&gTrainerFrontPicTable[species], dest);
         else
-            DecompressPicFromTable(&gTrainerBackPicTable[species], dest);
+            DecompressPicFromTable(&gTrainerBacksprites[species].backPic, dest);
     }
     return FALSE;
 }
@@ -126,11 +130,11 @@ u16 CreatePicSprite(u16 species, bool32 isShiny, u32 personality, bool8 isFrontP
     if (i == PICS_COUNT)
         return 0xFFFF;
 
-    framePics = Alloc(4 * 0x800);
+    framePics = Alloc(PIC_SPRITE_SIZE * MAX_PIC_FRAMES);
     if (!framePics)
         return 0xFFFF;
 
-    images = Alloc(4 * sizeof(struct SpriteFrameImage));
+    images = Alloc(sizeof(struct SpriteFrameImage) * MAX_PIC_FRAMES);
     if (!images)
     {
         Free(framePics);
@@ -143,8 +147,8 @@ u16 CreatePicSprite(u16 species, bool32 isShiny, u32 personality, bool8 isFrontP
     }
     for (j = 0; j < 4; j ++)
     {
-        images[j].data = framePics + 0x800 * j;
-        images[j].size = 0x800;
+        images[j].data = framePics + PIC_SPRITE_SIZE * j;
+        images[j].size = PIC_SPRITE_SIZE;
     }
     sCreatingSpriteTemplate.tileTag = TAG_NONE;
     sCreatingSpriteTemplate.oam = &sOamData_Normal;
@@ -280,7 +284,7 @@ u16 CreateTrainerCardSprite(u16 species, bool32 isShiny, u32 personality, bool8 
 {
     u8 *framePics;
 
-    framePics = Alloc(4 * 0x800);
+    framePics = Alloc(TRAINER_PIC_SIZE * MAX_TRAINER_PIC_FRAMES);
     if (framePics && !DecompressPic(species, personality, isFrontPic, framePics, isTrainer))
     {
         BlitBitmapRectToWindow(windowId, framePics, 0, 0, 0x40, 0x40, destX, destY, 0x40, 0x40);

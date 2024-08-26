@@ -1,3 +1,7 @@
+#include "constants/trainers.h"
+
+#include "data.h"
+
 const u32 gTrainerFrontPic_AquaLeaderArchie[] = INCBIN_U32("graphics/trainers/front_pics/aqua_leader_archie_front_pic.4bpp.lz");
 const u32 gTrainerPalette_AquaLeaderArchie[] = INCBIN_U32("graphics/trainers/palettes/aqua_leader_archie.gbapal.lz");
 
@@ -456,3 +460,140 @@ const u32 gTrainerPalette_LeafBackPic[] = INCBIN_U32("graphics/trainers/palettes
 const u32 gTrainerPalette_PokedudeBackPic[] = INCBIN_U32("graphics/trainers/palettes/pokedude_back_pic.gbapal.lz");
 const u32 gTrainerPalette_OldManBackPic[] = INCBIN_U32("graphics/trainers/palettes/old_man_back_pic.gbapal.lz");
 const u32 gTrainerPalette_Steven[] = INCBIN_U32("graphics/trainers/palettes/steven.gbapal.lz");
+
+
+static const union AnimCmd sAnimCmd_Kanto[] = {
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(2, 6),
+    ANIMCMD_FRAME(3, 6),
+    ANIMCMD_FRAME(4, 24),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnimCmd_OldManPokedude[] = {
+    ANIMCMD_FRAME(1, 24),
+    ANIMCMD_FRAME(2, 9),
+    ANIMCMD_FRAME(3, 24),
+    ANIMCMD_FRAME(0, 9),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnimCmd_Hoenn[] =
+{
+    ANIMCMD_FRAME(0, 24),
+    ANIMCMD_FRAME(1, 9),
+    ANIMCMD_FRAME(2, 24),
+    ANIMCMD_FRAME(0, 9),
+    ANIMCMD_FRAME(3, 50),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnimCmd_Point_HGSS[] =
+{
+    ANIMCMD_FRAME(3, 9),
+    ANIMCMD_FRAME(0, 9),
+    ANIMCMD_FRAME(2, 24),
+    ANIMCMD_FRAME(2, 24),
+    ANIMCMD_FRAME(3, 50),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sBackAnims_Kanto[] = {
+    sAnim_GeneralFrame0,
+    sAnimCmd_Kanto,
+};
+
+const union AnimCmd *const sBackAnims_OldManPokedude[] = {
+    sAnim_GeneralFrame0,
+    sAnimCmd_OldManPokedude
+};
+
+static const union AnimCmd *const sBackAnims_Hoenn[] =
+{
+    sAnim_GeneralFrame3,
+    sAnimCmd_Hoenn,
+    sAnimCmd_Point_HGSS,
+};
+
+#define BACK_PIC_TABLE_ENTRY(backPicData, entryId) \
+    {.data = backPicData + TRAINER_PIC_SIZE * entryId, .size = TRAINER_PIC_SIZE}
+
+const struct SpriteFrameImage gTrainerBackPicTable_Red[] =
+{
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Red, 0),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Red, 1),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Red, 2),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Red, 3),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Red, 4),
+};
+
+const struct SpriteFrameImage gTrainerBackPicTable_Leaf[] =
+{
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Leaf, 0),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Leaf, 1),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Leaf, 2),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Leaf, 3),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Leaf, 4),
+};
+
+const struct SpriteFrameImage gTrainerBackPicTable_Pokedude[] =
+{
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Pokedude, 0),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Pokedude, 1),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Pokedude, 2),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Pokedude, 3),
+};
+
+const struct SpriteFrameImage gTrainerBackPicTable_OldMan[] =
+{
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_OldMan, 0),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_OldMan, 1),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_OldMan, 2),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_OldMan, 3),
+};
+
+const struct SpriteFrameImage gTrainerBackPicTable_RSBrendan[] =
+{
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSBrendan, 0),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSBrendan, 1),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSBrendan, 2),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSBrendan, 3),
+};
+
+const struct SpriteFrameImage gTrainerBackPicTable_RSMay[] =
+{
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSMay, 0),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSMay, 1),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSMay, 2),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSMay, 3),
+};
+
+const struct SpriteFrameImage gTrainerBackPicTable_Steven[] =
+{
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Steven, 0),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Steven, 1),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Steven, 2),
+    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Steven, 3),
+};
+
+
+#define TRAINER_BACK_SPRITE(trainerId, yOffset, backPicData, backPicTable, paletteData, anim)                                    \
+    [trainerId] =                                                                                                               \
+    {                                                                                                                           \
+        .coordinates = {.size = 8, .y_offset = yOffset},                                                                        \
+        .backPic = {.data = (const u32 *)backPicData, .size = TRAINER_PIC_SIZE * ARRAY_COUNT(backPicTable), .tag = trainerId},  \
+        .palette = {.data = paletteData, .tag = trainerId},                                                                     \
+        .animation = anim,                                                                                                      \
+    }
+
+const struct TrainerBacksprite gTrainerBacksprites[] =
+{
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_RED, 5, gTrainerBackPic_Red, gTrainerBackPicTable_Red, gTrainerPalette_RedBackPic, sBackAnims_Kanto),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_LEAF, 5, gTrainerBackPic_Leaf, gTrainerBackPicTable_Leaf, gTrainerPalette_LeafBackPic, sBackAnims_Kanto),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN, 4, gTrainerBackPic_RSBrendan, gTrainerBackPicTable_RSBrendan, gTrainerPalette_RSBrendan1, sBackAnims_Hoenn),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY, 4, gTrainerBackPic_RSMay, gTrainerBackPicTable_RSMay, gTrainerPalette_RSMay1, sBackAnims_Hoenn),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_POKEDUDE, 4, gTrainerBackPic_Pokedude, gTrainerBackPicTable_Pokedude, gTrainerPalette_PokedudeBackPic, sBackAnims_OldManPokedude),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_OLD_MAN, 4, gTrainerBackPic_OldMan, gTrainerBackPicTable_OldMan, gTrainerPalette_OldManBackPic, sBackAnims_OldManPokedude),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_STEVEN, 4, gTrainerBackPic_Steven, gTrainerBackPicTable_Steven, gTrainerPalette_Steven, sBackAnims_Hoenn),
+};

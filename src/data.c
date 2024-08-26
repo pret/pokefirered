@@ -43,71 +43,13 @@ const struct SpriteFrameImage gBattlerPicTable_OpponentRight[] =
     {BATTLER_OFFSET(15), MON_PIC_SIZE},
 };
 
-const struct SpriteFrameImage gTrainerBackPicTable_Red[] =
-{
-    {gTrainerBackPic_Red + 0x0000, 0x0800},
-    {gTrainerBackPic_Red + 0x0800, 0x0800},
-    {gTrainerBackPic_Red + 0x1000, 0x0800},
-    {gTrainerBackPic_Red + 0x1800, 0x0800},
-    {gTrainerBackPic_Red + 0x2000, 0x0800},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_Leaf[] =
-{
-    {gTrainerBackPic_Leaf + 0x0000, 0x0800},
-    {gTrainerBackPic_Leaf + 0x0800, 0x0800},
-    {gTrainerBackPic_Leaf + 0x1000, 0x0800},
-    {gTrainerBackPic_Leaf + 0x1800, 0x0800},
-    {gTrainerBackPic_Leaf + 0x2000, 0x0800},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_Pokedude[] =
-{
-    {gTrainerBackPic_Pokedude + 0x0000, 0x0800},
-    {gTrainerBackPic_Pokedude + 0x0800, 0x0800},
-    {gTrainerBackPic_Pokedude + 0x1000, 0x0800},
-    {gTrainerBackPic_Pokedude + 0x1800, 0x0800},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_OldMan[] =
-{
-    {gTrainerBackPic_OldMan + 0x0000, 0x0800},
-    {gTrainerBackPic_OldMan + 0x0800, 0x0800},
-    {gTrainerBackPic_OldMan + 0x1000, 0x0800},
-    {gTrainerBackPic_OldMan + 0x1800, 0x0800},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_RSBrendan[] =
-{
-    {gTrainerBackPic_RSBrendan + 0x0000, 0x0800},
-    {gTrainerBackPic_RSBrendan + 0x0800, 0x0800},
-    {gTrainerBackPic_RSBrendan + 0x1000, 0x0800},
-    {gTrainerBackPic_RSBrendan + 0x1800, 0x0800},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_RSMay[] =
-{
-    {gTrainerBackPic_RSMay + 0x0000, 0x0800},
-    {gTrainerBackPic_RSMay + 0x0800, 0x0800},
-    {gTrainerBackPic_RSMay + 0x1000, 0x0800},
-    {gTrainerBackPic_RSMay + 0x1800, 0x0800},
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_Steven[] =
-{
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-};
-
 const union AnimCmd sAnim_GeneralFrame0[] =
 {
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_GeneralFrame3[] =
+const union AnimCmd sAnim_GeneralFrame3[] =
 {
     ANIMCMD_FRAME(3, 0),
     ANIMCMD_END,
@@ -291,16 +233,10 @@ const union AnimCmd *const sAnims_Trainer[] ={
     sAnim_GeneralFrame0,
 };
 
-#define SPECIES_SPRITE(species, sprite) [SPECIES_##species] = {sprite, 0x800, SPECIES_##species}
-#define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
-#define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
-
 #define TRAINER_SPRITE(trainerPic, sprite, size) [TRAINER_PIC_##trainerPic] = {sprite, size, TRAINER_PIC_##trainerPic}
 #define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {pal, TRAINER_PIC_##trainerPic}
 
 #include "data/trainer_graphics/front_pic_tables.h"
-#include "data/trainer_graphics/back_pic_anims.h"
-#include "data/trainer_graphics/back_pic_tables.h"
 
 #include "data/trainer_parties.h"
 #include "data/trainers.h"

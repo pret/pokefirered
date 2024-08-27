@@ -248,12 +248,8 @@ void SetMainCallback2(MainCallback callback)
 
 void StartTimer1(void)
 {
-    if (HQ_RANDOM)
-    {
-        REG_TM2CNT_L = 0;
-        REG_TM2CNT_H = TIMER_ENABLE | TIMER_COUNTUP;
-    }
-
+    REG_TM2CNT_L = 0;
+    REG_TM2CNT_H = TIMER_ENABLE | TIMER_COUNTUP;
     REG_TM1CNT_H = TIMER_ENABLE;
 }
 
@@ -261,22 +257,12 @@ void SeedRngAndSetTrainerId(void)
 {
     u32 val;
 
-    if (HQ_RANDOM)
-    {
-        REG_TM1CNT_H = 0;
-        REG_TM2CNT_H = 0;
-        val = ((u32)REG_TM2CNT_L) << 16;
-        val |= REG_TM1CNT_L;
-        SeedRng(val);
-        gTrainerId = Random();
-    }
-    else
-    {
-        u16 val = REG_TM1CNT_L;
-        SeedRng(val);
-        REG_TM1CNT_H = 0;
-        gTrainerId = val;
-    }
+    REG_TM1CNT_H = 0;
+    REG_TM2CNT_H = 0;
+    val = ((u32)REG_TM2CNT_L) << 16;
+    val |= REG_TM1CNT_L;
+    SeedRng(val);
+    gTrainerId = Random();
 }
 
 u16 GetGeneratedTrainerIdLower(void)

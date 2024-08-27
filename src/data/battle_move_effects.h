@@ -1831,7 +1831,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_FICKLE_BEAM] =
     {
-        .battleScript = BattleScript_EffectHit,
+        .battleScript = BattleScript_EffectFickleBeam,
     },
 
     [EFFECT_BLIZZARD] =

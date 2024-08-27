@@ -1207,8 +1207,8 @@ static void ClearObjectEvent(struct ObjectEvent *objectEvent)
 {
     *objectEvent = (struct ObjectEvent){};
     objectEvent->localId = 0xFF;
-    objectEvent->mapNum = MAP_NUM(UNDEFINED);
-    objectEvent->mapGroup = MAP_GROUP(UNDEFINED);
+    objectEvent->mapNum = MAP_NUM(MAP_UNDEFINED);
+    objectEvent->mapGroup = MAP_GROUP(MAP_UNDEFINED);
     objectEvent->movementActionId = MOVEMENT_ACTION_NONE;
 }
 
@@ -7989,8 +7989,8 @@ static void CalcWhetherObjectIsOffscreen(struct ObjectEvent *objectEvent, struct
     x2 = graphicsInfo->width + (s16)x;
     y2 = graphicsInfo->height + (s16)y;
     
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SSANNE_EXTERIOR)
-         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SSANNE_EXTERIOR)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SSANNE_EXTERIOR)
+         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SSANNE_EXTERIOR)
          && objectEvent->localId == 1)
     {
         var = -32;

@@ -248,12 +248,12 @@ CeladonCity_GameCorner_EventScript_SlotMachine::
 	goto_if_eq VAR_RESULT, NO, CeladonCity_GameCorner_EventScript_DontPlaySlotMachine
 	setfieldeffectargument 0, OBJ_EVENT_ID_PLAYER
 .ifdef BUGFIX
-	setfieldeffectargument 1, MAP_NUM(CELADON_CITY_GAME_CORNER)
-	setfieldeffectargument 2, MAP_GROUP(CELADON_CITY_GAME_CORNER)
+	setfieldeffectargument 1, MAP_NUM(MAP_CELADON_CITY_GAME_CORNER)
+	setfieldeffectargument 2, MAP_GROUP(MAP_CELADON_CITY_GAME_CORNER)
 .else
 	@ Map num/group were provided in the wrong order
-	setfieldeffectargument 1, MAP_GROUP(CELADON_CITY_GAME_CORNER)
-	setfieldeffectargument 2, MAP_NUM(CELADON_CITY_GAME_CORNER)
+	setfieldeffectargument 1, MAP_GROUP(MAP_CELADON_CITY_GAME_CORNER)
+	setfieldeffectargument 2, MAP_NUM(MAP_CELADON_CITY_GAME_CORNER)
 .endif
 	dofieldeffect FLDEFF_SMILEY_FACE_ICON
 	waitfieldeffect FLDEFF_SMILEY_FACE_ICON

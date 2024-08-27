@@ -589,7 +589,7 @@ void TrySetObtainedItemQuestLogEvent(u16 itemId)
      || itemId == ITEM_RUBY
      || itemId == ITEM_SAPPHIRE)
     {
-        if (itemId != ITEM_TOWN_MAP || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_RIVALS_HOUSE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_RIVALS_HOUSE)))
+        if (itemId != ITEM_TOWN_MAP || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PALLET_TOWN_RIVALS_HOUSE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PALLET_TOWN_RIVALS_HOUSE)))
         {
             struct QuestLogEvent_StoryItem * data = malloc(sizeof(*data));
             data->itemId = itemId;

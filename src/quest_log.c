@@ -472,8 +472,8 @@ void TryStartQuestLogPlayback(u8 taskId)
 
 static void Task_BeginQuestLogPlayback(u8 taskId)
 {
-    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(ROUTE1);
-    gSaveBlock1Ptr->location.mapNum =  MAP_NUM(ROUTE1);
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_ROUTE1);
+    gSaveBlock1Ptr->location.mapNum =  MAP_NUM(MAP_ROUTE1);
     gSaveBlock1Ptr->location.warpId = WARP_ID_NONE;
     sCurrentSceneNum = 0;
     gDisableMapMusicChangeOnMapLoad = 1;

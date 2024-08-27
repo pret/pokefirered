@@ -243,7 +243,7 @@ enum BerryFunctionsMenu
 
 // *******************************
 // Constants
-#define DEBUG_MENU_FONT FONT_SMALL
+#define DEBUG_MENU_FONT FONT_SHORT
 
 #define DEBUG_MENU_WIDTH_MAIN 17
 #define DEBUG_MENU_HEIGHT_MAIN 9

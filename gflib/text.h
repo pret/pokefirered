@@ -25,6 +25,7 @@ enum {
     FONT_NARROWER,
     FONT_SMALL_NARROWER,
     FONT_SHORT_NARROW,
+    FONT_SHORT
 };
 
 // Return values for font functions
@@ -167,6 +168,7 @@ void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);
 u16 FontFunc_Small(struct TextPrinter *textPrinter);
 u16 FontFunc_NormalCopy1(struct TextPrinter *textPrinter);
 u16 FontFunc_Normal(struct TextPrinter *textPrinter);
+u16 FontFunc_Short(struct TextPrinter *textPrinter);
 u16 FontFunc_NormalCopy2(struct TextPrinter *textPrinter);
 u16 FontFunc_Male(struct TextPrinter *textPrinter);
 u16 FontFunc_Female(struct TextPrinter *textPrinter);

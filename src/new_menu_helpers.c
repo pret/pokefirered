@@ -188,18 +188,34 @@ static const struct FontInfo gFontInfos[] =
         .bgColor = 1,
         .shadowColor = 3,
     },
+    [FONT_SHORT] = {
+        .fontFunction = FontFunc_Short,
+        .maxLetterWidth = 6,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
 };
 
 static const u8 gMenuCursorDimensions[][2] = 
 {
-    [FONT_SMALL]         = { 8,  13 },
-    [FONT_NORMAL_COPY_1] = { 8,  14 },
-    [FONT_NORMAL]        = { 8,  14 },
-    [FONT_NORMAL_COPY_2] = { 8,  14 },
-    [FONT_MALE]          = { 8,  14 },
-    [FONT_FEMALE]        = { 8,  14 },
-    [FONT_BRAILLE]       = { 8,  16 },
-    [FONT_BOLD]          = {}
+    [FONT_SMALL]            = { 8,  13 },
+    [FONT_NORMAL_COPY_1]    = { 8,  14 },
+    [FONT_NORMAL]           = { 8,  14 },
+    [FONT_NORMAL_COPY_2]    = { 8,  14 },
+    [FONT_MALE]             = { 8,  14 },
+    [FONT_FEMALE]           = { 8,  14 },
+    [FONT_BRAILLE]          = { 8,  16 },
+    [FONT_BOLD]             = {},
+    [FONT_NARROW]           = { 8,  15 },
+    [FONT_SMALL_NARROW]     = { 8,   8 },
+    [FONT_NARROWER]         = { 8,  15 },
+    [FONT_SMALL_NARROWER]   = { 8,   8 },
+    [FONT_SHORT_NARROW]     = { 8,  14 },
+    [FONT_SHORT]            = { 8,  14 },
 };
 
 static u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);

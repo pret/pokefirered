@@ -24,6 +24,7 @@ extern const struct OamData gOamData_AffineOff_ObjNormal_16x16;
 
 static void DecompressGlyph_NormalCopy1(u16 glyphId, bool32 isJapanese);
 static void DecompressGlyph_NormalCopy2(u16 glyphId, bool32 isJapanese);
+static void DecompressGlyph_Short(u16 glyphId, bool32 isJapanese);
 static void DecompressGlyph_Male(u16 glyphId, bool32 isJapanese);
 static void DecompressGlyph_Bold(u16 glyphId);
 static void DecompressGlyph_Narrow(u16, bool32);
@@ -42,6 +43,7 @@ static u32 GetGlyphWidth_SmallNarrow(u16, bool32);
 static u32 GetGlyphWidth_Narrower(u16, bool32);
 static u32 GetGlyphWidth_SmallNarrower(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrow(u16, bool32);
+static u32 GetGlyphWidth_Short(u16, bool32);
 static void SpriteCB_TextCursor(struct Sprite *sprite);
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
@@ -91,18 +93,19 @@ static const u8 sWindowVerticalScrollSpeeds[] = {
 };
 
 static const struct GlyphWidthFunc sGlyphWidthFuncs[] = {
-    { FONT_SMALL,         GetGlyphWidth_Small },
-    { FONT_NORMAL_COPY_1, GetGlyphWidth_NormalCopy1 },
-    { FONT_NORMAL,        GetGlyphWidth_Normal },
-    { FONT_NORMAL_COPY_2, GetGlyphWidth_NormalCopy2 },
-    { FONT_MALE,          GetGlyphWidth_Male },
-    { FONT_FEMALE,        GetGlyphWidth_Female },
-    { FONT_BRAILLE,       GetGlyphWidth_Braille },
-    { FONT_NARROW,         GetGlyphWidth_Narrow },
-    { FONT_SMALL_NARROW,   GetGlyphWidth_SmallNarrow },
-    { FONT_NARROWER,       GetGlyphWidth_Narrower },
-    { FONT_SMALL_NARROWER, GetGlyphWidth_SmallNarrower },
-    { FONT_SHORT_NARROW,   GetGlyphWidth_ShortNarrow },
+    { FONT_SMALL,           GetGlyphWidth_Small },
+    { FONT_NORMAL_COPY_1,   GetGlyphWidth_NormalCopy1 },
+    { FONT_NORMAL,          GetGlyphWidth_Normal },
+    { FONT_NORMAL_COPY_2,   GetGlyphWidth_NormalCopy2 },
+    { FONT_MALE,            GetGlyphWidth_Male },
+    { FONT_FEMALE,          GetGlyphWidth_Female },
+    { FONT_BRAILLE,         GetGlyphWidth_Braille },
+    { FONT_NARROW,          GetGlyphWidth_Narrow },
+    { FONT_SMALL_NARROW,    GetGlyphWidth_SmallNarrow },
+    { FONT_NARROWER,        GetGlyphWidth_Narrower },
+    { FONT_SMALL_NARROWER,  GetGlyphWidth_SmallNarrower },
+    { FONT_SHORT_NARROW,    GetGlyphWidth_ShortNarrow },
+    { FONT_SHORT,           GetGlyphWidth_Short },
 };
 
 static const struct SpriteSheet sSpriteSheets_TextCursor[] =
@@ -459,6 +462,18 @@ u16 FontFunc_Normal(struct TextPrinter *textPrinter)
     {
         textPrinter->subUnion.sub.glyphId = FONT_NORMAL;
         subStruct->hasGlyphIdBeenSet = 1;
+    }
+    return RenderText(textPrinter);
+}
+
+u16 FontFunc_Short(struct TextPrinter *textPrinter)
+{
+    struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
+
+    if (subStruct->hasGlyphIdBeenSet == FALSE)
+    {
+        textPrinter->subUnion.sub.glyphId = FONT_SHORT;
+        subStruct->hasGlyphIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
 }
@@ -952,6 +967,9 @@ u16 RenderText(struct TextPrinter *textPrinter)
             break;
         case FONT_SHORT_NARROW:
             DecompressGlyph_ShortNarrow(currChar, textPrinter->japanese);
+            break;
+        case FONT_SHORT:
+            DecompressGlyph_Short(currChar, textPrinter->japanese);
             break;
         }
 
@@ -1456,6 +1474,50 @@ static u32 GetGlyphWidth_NormalCopy1(u16 glyphId, bool32 isJapanese)
         return gFontNormalCopy1LatinGlyphWidths[glyphId];
 }
 
+static void DecompressGlyph_Short(u16 glyphId, bool32 isJapanese)
+{
+    const u16 *glyphs;
+
+    if (isJapanese == TRUE)
+    {
+        glyphs = gFontShortJapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
+        DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+        DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+        DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo.pixels + 0x40));
+        DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo.pixels + 0x60));
+        gGlyphInfo.width = gFontShortJapaneseGlyphWidths[glyphId];
+        gGlyphInfo.height = 14;
+    }
+    else
+    {
+        glyphs = gFontShortLatinGlyphs + (0x20 * glyphId);
+        gGlyphInfo.width = gFontShortLatinGlyphWidths[glyphId];
+
+        if (gGlyphInfo.width <= 8)
+        {
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo.pixels + 0x40));
+        }
+        else
+        {
+            DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
+            DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
+            DecompressGlyphTile(glyphs + 0x10, (u16 *)(gGlyphInfo.pixels + 0x40));
+            DecompressGlyphTile(glyphs + 0x18, (u16 *)(gGlyphInfo.pixels + 0x60));
+        }
+
+        gGlyphInfo.height = 14;
+    }
+}
+
+static u32 GetGlyphWidth_Short(u16 glyphId, bool32 isJapanese)
+{
+    if (isJapanese == TRUE)
+        return gFontShortJapaneseGlyphWidths[glyphId];
+    else
+        return gFontShortLatinGlyphWidths[glyphId];
+}
+
 void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
 {
     const u16 *glyphs;
@@ -1945,7 +2007,7 @@ static const s8 sNarrowerFontIds[] =
 {
     [FONT_SMALL] = FONT_SMALL_NARROW, // FONT_SMALL_NARROW,
     [FONT_NORMAL] = FONT_NARROW, // FONT_NARROW,
-    // [FONT_SHORT] = FONT_SHORT_NARROW,
+    [FONT_SHORT] = FONT_SHORT_NARROW,
     // [FONT_SHORT_COPY_1] = FONT_SHORT_NARROW,
     // [FONT_SHORT_COPY_2] = FONT_SHORT_NARROW,
     // [FONT_SHORT_COPY_3] = FONT_SHORT_NARROW,

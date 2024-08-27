@@ -38,6 +38,15 @@ contest_types := cool beauty cute smart tough
 
 
 ### Fonts ###
+$(FONTGFXDIR)/latin_small.latfont: $(FONTGFXDIR)/latin_small.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/latin_normal.latfont: $(FONTGFXDIR)/latin_normal.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
 	$(GFX) $< $@
 
@@ -53,37 +62,34 @@ $(FONTGFXDIR)/small_narrower.latfont: $(FONTGFXDIR)/latin_small_narrower.png
 $(FONTGFXDIR)/short_narrow.latfont: $(FONTGFXDIR)/latin_short_narrow.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/latin_small.latfont: $(FONTGFXDIR)/latin_small.png
-	$(GFX) $< $@
-
 $(FONTGFXDIR)/japanese_small.fwjpnfont: $(FONTGFXDIR)/japanese_small.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/japanese_tall.fwjpnfont: $(FONTGFXDIR)/japanese_tall.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/latin_normal.latfont: $(FONTGFXDIR)/latin_normal.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/japanese_normal.fwjpnfont: $(FONTGFXDIR)/japanese_normal.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/latin_male.latfont: $(FONTGFXDIR)/latin_male.png
+$(FONTGFXDIR)/japanese_bold.fwjpnfont: $(FONTGFXDIR)/japanese_bold.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/japanese_male.fwjpnfont: $(FONTGFXDIR)/japanese_male.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/latin_female.latfont: $(FONTGFXDIR)/latin_female.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/japanese_female.fwjpnfont: $(FONTGFXDIR)/japanese_female.png
+$(FONTGFXDIR)/short.fwjpnfont: $(FONTGFXDIR)/japanese_short.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/braille.fwjpnfont: $(FONTGFXDIR)/braille.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/japanese_bold.fwjpnfont: $(FONTGFXDIR)/japanese_bold.png
+$(FONTGFXDIR)/japanese_male.fwjpnfont: $(FONTGFXDIR)/japanese_male.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/japanese_tall.fwjpnfont: $(FONTGFXDIR)/japanese_tall.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/japanese_female.fwjpnfont: $(FONTGFXDIR)/japanese_female.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/latin_male.latfont: $(FONTGFXDIR)/latin_male.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/latin_female.latfont: $(FONTGFXDIR)/latin_female.png
 	$(GFX) $< $@
 
 graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal

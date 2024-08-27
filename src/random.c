@@ -8,7 +8,6 @@
 rng_value_t gRngValue;
 rng_value_t gRng2Value;
 
-#if HQ_RANDOM == TRUE
 
 EWRAM_DATA static volatile bool8 sRngLoopUnlocked;
 
@@ -111,39 +110,6 @@ void AdvanceRandom(void)
 #define LOOP_RANDOM_END sRngLoopUnlocked = TRUE;
 
 #define LOOP_RANDOM ((u16)(_SFC32_Next(state) >> 16))
-
-#else
-EWRAM_DATA static u32 sRandCount = 0;
-
-u16 Random(void)
-{
-    gRngValue = ISO_RANDOMIZE1(gRngValue);
-    sRandCount++;
-    return gRngValue >> 16;
-}
-
-void SeedRng(u16 seed)
-{
-    gRngValue = seed;
-}
-
-void SeedRng2(u16 seed)
-{
-    gRng2Value = seed;
-}
-
-u16 Random2(void)
-{
-    gRng2Value = ISO_RANDOMIZE1(gRng2Value);
-    return gRng2Value >> 16;
-}
-
-#define LOOP_RANDOM_START
-#define LOOP_RANDOM_END
-
-#define LOOP_RANDOM (Random())
-
-#endif
 
 #define SHUFFLE_IMPL \
     u32 tmp; \

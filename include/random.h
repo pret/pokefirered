@@ -7,25 +7,21 @@
 #define ISO_RANDOMIZE1(val)(RAND_MULT * (val) + 24691)
 #define ISO_RANDOMIZE2(val)(RAND_MULT * (val) + 12345)
 
-/* Some functions have been added to support HQ_RANDOM.
+/* Some functions have been added to support Expansion's RNG implementation.
 *
-* If using HQ_RANDOM, you cannot call Random() in interrupt handlers safely.
-* AdvanceRandom() is provided to handle burning numbers in the VBlank handler
-* if you choose to do that, and can be used regardless of HQ_RANDOM setting.
+* LocalRandom(*val) provides a higher-quality replacement for uses of
+* ISO_RANDOMIZE in vanilla Emerald. You can use LocalRandomSeed(u32) to
+* create a local state.
+*
+* It is no longer possible to call Random() in interrupt handlers safely.
+* AdvanceRandom() is provided to handle burning numbers in VBlank handlers.
 * If you need to use random numbers in the VBlank handler, a local state
 * should be used instead.
 *
-* LocalRandom(*val) allows you to have local random states that are the same
-* type as the global states regardless of HQ_RANDOM setting, which is useful
-* if you want to be able to set them from or assign them to gRngValue.
-* LocalRandomSeed(u32) returns a properly seeded rng_value_t.
-*
-* Random2_32() was added to HQ_RANDOM because the output of the generator is
-* always 32 bits and Random()/Random2() are just wrappers in that mode. It is
-* also available in non-HQ mode for consistency.
+* Random2_32() was added, even though it is not used directly, because the
+* underlying RNG always outputs 32 bits.
 */
 
-#if HQ_RANDOM == TRUE
 struct Sfc32State {
     u32 a;
     u32 b;
@@ -71,40 +67,6 @@ static inline u16 Random2(void)
 }
 
 void AdvanceRandom(void);
-#else
-typedef u32 rng_value_t;
-
-#define RNG_VALUE_EMPTY 0
-
-//Returns a 16-bit pseudorandom number
-u16 Random(void);
-u16 Random2(void);
-
-//Sets the initial seed value of the pseudorandom number generator
-void SeedRng(u16 seed);
-void SeedRng2(u16 seed);
-
-//Returns a 32-bit pseudorandom number
-#define Random32() (Random() | (Random() << 16))
-#define Random2_32() (Random2() | (Random2() << 16))
-
-static inline u16 LocalRandom(rng_value_t *val)
-{
-    *val = ISO_RANDOMIZE1(*val);
-    return *val >> 16;
-}
-
-static inline void AdvanceRandom(void)
-{
-    Random();
-}
-
-static inline rng_value_t LocalRandomSeed(u32 seed)
-{
-    return seed;
-}
-
-#endif
 
 extern rng_value_t gRngValue;
 extern rng_value_t gRng2Value;
@@ -174,12 +136,14 @@ enum RandomTag
     RNG_G_MAX_BEFUDDLE,
     RNG_G_MAX_REPLENISH,
     RNG_G_MAX_SNOOZE,
+    RNG_HARVEST,
     RNG_HITS,
     RNG_HOLD_EFFECT_FLINCH,
     RNG_INFATUATION,
     RNG_LOADED_DICE,
     RNG_METRONOME,
     RNG_PARALYSIS,
+    RNG_PICKUP,
     RNG_POISON_POINT,
     RNG_POISON_TOUCH,
     RNG_RAMPAGE_TURNS,

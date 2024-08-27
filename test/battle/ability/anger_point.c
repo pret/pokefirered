@@ -37,7 +37,7 @@ SINGLE_BATTLE_TEST("Anger Point does not trigger when already at maximum Attack 
         MESSAGE("Primeape cut its own HP and maximized ATTACK!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FROST_BREATH, opponent);
         MESSAGE("A critical hit!");
-        NONE_OF {    
+        NONE_OF {
             ABILITY_POPUP(player, ABILITY_ANGER_POINT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
             MESSAGE("Primeape's Anger Point maxed its Attack!");
@@ -47,7 +47,9 @@ SINGLE_BATTLE_TEST("Anger Point does not trigger when already at maximum Attack 
     }
 }
 
-SINGLE_BATTLE_TEST("Anger Point does not trigger when a substitute takes the hit")
+TO_DO_BATTLE_TEST("Anger Point triggers when a substitute takes the hit (Gen4)");
+
+SINGLE_BATTLE_TEST("Anger Point does not trigger when a substitute takes the hit (Gen5+)")
 {
     ASSUME(gMovesInfo[MOVE_FROST_BREATH].alwaysCriticalHit);
     ASSUME(gMovesInfo[MOVE_SUBSTITUTE].effect == EFFECT_SUBSTITUTE);
@@ -62,7 +64,7 @@ SINGLE_BATTLE_TEST("Anger Point does not trigger when a substitute takes the hit
         MESSAGE("Primeape made a SUBSTITUTE!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FROST_BREATH, opponent);
         MESSAGE("A critical hit!");
-        NONE_OF {    
+        NONE_OF {
             ABILITY_POPUP(player, ABILITY_ANGER_POINT);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
             MESSAGE("Primeape's Anger Point maxed its Attack!");

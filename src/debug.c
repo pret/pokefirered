@@ -243,7 +243,7 @@ enum BerryFunctionsMenu
 
 // *******************************
 // Constants
-#define DEBUG_MENU_FONT FONT_NORMAL
+#define DEBUG_MENU_FONT FONT_SMALL
 
 #define DEBUG_MENU_WIDTH_MAIN 17
 #define DEBUG_MENU_HEIGHT_MAIN 9
@@ -2307,26 +2307,26 @@ static void DebugAction_Util_CheatStart(u8 taskId)
 static void DebugAction_Util_ExpansionVersion(u8 taskId)
 {
     Debug_DestroyMenu_Full(taskId);
-    // LockPlayerFieldControls();
-    // ScriptContext_SetupScript(Debug_ShowExpansionVersion);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(Debug_ShowExpansionVersion);
 }
 
-// void BufferExpansionVersion(struct ScriptContext *ctx)
-// {
-//     static const u8 sText_Released[] = _("\nRelease Build");
-//     static const u8 sText_Unreleased[] = _("\nDevelopment Build");
-//     u8 *string = gStringVar1;
-//     *string++ = CHAR_v;
-//     string = ConvertIntToDecimalStringN(string, EXPANSION_VERSION_MAJOR, STR_CONV_MODE_LEFT_ALIGN, 3);
-//     *string++ = CHAR_PERIOD;
-//     string = ConvertIntToDecimalStringN(string, EXPANSION_VERSION_MINOR, STR_CONV_MODE_LEFT_ALIGN, 3);
-//     *string++ = CHAR_PERIOD;
-//     string = ConvertIntToDecimalStringN(string, EXPANSION_VERSION_PATCH, STR_CONV_MODE_LEFT_ALIGN, 3);
-//     if (EXPANSION_TAGGED_RELEASE)
-//         string = StringCopy(string, sText_Released);
-//     else
-//         string = StringCopy(string, sText_Unreleased);
-// }
+void BufferExpansionVersion(struct ScriptContext *ctx)
+{
+    static const u8 sText_Released[] = _("\nRelease Build");
+    static const u8 sText_Unreleased[] = _("\nDevelopment Build");
+    u8 *string = gStringVar1;
+    *string++ = CHAR_v;
+    string = ConvertIntToDecimalStringN(string, 0, STR_CONV_MODE_LEFT_ALIGN, 3);
+    *string++ = CHAR_PERIOD;
+    string = ConvertIntToDecimalStringN(string, 0, STR_CONV_MODE_LEFT_ALIGN, 3);
+    *string++ = CHAR_PERIOD;
+    string = ConvertIntToDecimalStringN(string, 0, STR_CONV_MODE_LEFT_ALIGN, 3);
+    if (FALSE)
+        string = StringCopy(string, sText_Released);
+    else
+        string = StringCopy(string, sText_Unreleased);
+}
 
 // *******************************
 // Actions Scripts

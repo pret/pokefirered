@@ -1,4 +1,5 @@
 #include "global.h"
+#include "blit.h"
 #include "window.h"
 #include "text.h"
 
@@ -278,4 +279,27 @@ void CopyGlyphToWindow(struct TextPrinter *textPrinter)
 
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
 {
+    struct Window *window;
+    struct Bitmap pixels_data;
+    struct GlyphInfo *glyph;
+    u8 *glyphHeight;
+
+    if (sLastTextBgColor != TEXT_COLOR_TRANSPARENT)
+    {
+        window = &gWindows[textPrinter->printerTemplate.windowId];
+        pixels_data.pixels = window->tileData;
+        pixels_data.width = window->window.width << 3;
+        pixels_data.height = window->window.height << 3;
+
+        glyph = &gGlyphInfo;
+        glyphHeight = &glyph->height;
+
+        FillBitmapRect4Bit(
+            &pixels_data,
+            textPrinter->printerTemplate.currentX,
+            textPrinter->printerTemplate.currentY,
+            width,
+            *glyphHeight,
+            sLastTextBgColor);
+    }
 }

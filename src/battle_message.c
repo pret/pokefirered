@@ -975,9 +975,6 @@ const u8 gText_Unused_8F[] = _("8F");
 static const u8 sText_PkmnTerastallizedInto[] = _("{B_ATK_NAME_WITH_PREFIX} terastallized\ninto the {B_BUFF1} type!");
 
 
-const u8 gText_TODO[] = _("TODO");
-// merged end
-
 const u8 *const gStatNamesTable[] = {
     sText_HP2,
     sText_Attack2,

@@ -258,14 +258,14 @@ DebugText_DaycareOnePokemon:
 DebugText_DaycarePokemonNotCompatible:
 	.string "Your Pokémon at Daycare can't\nhave babies together!$"
 
-@Debug_ShowExpansionVersion::
-@	callnative BufferExpansionVersion
-@	msgbox Debug_ExpansionVersion, MSGBOX_DEFAULT
-@	release
-@	end
+Debug_ShowExpansionVersion::
+	callnative BufferExpansionVersion
+	msgbox Debug_ExpansionVersion, MSGBOX_DEFAULT
+	release
+	end
 
 Debug_ExpansionVersion:
-	.string "pokeemerald-expansion {STR_VAR_1}$"
+	.string "pokefirered {STR_VAR_1}$"
 
 Debug_EventScript_InflictStatus1::
 	lockall

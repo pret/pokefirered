@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle_anim.h"
+#include "item_icon.h"
 #include "sprite.h"
 #include "random.h"
 #include "gpu_regs.h"
@@ -98,6 +99,7 @@ static void SpriteCB_GlacialLance_Step1(struct Sprite* sprite);
 static void SpriteCB_GlacialLance_Step2(struct Sprite* sprite);
 static void SpriteCB_GlacialLance(struct Sprite* sprite);
 static void SpriteCB_TripleArrowKick(struct Sprite* sprite);
+static void AnimMakingItRain(struct Sprite *sprite);
 
 // const data
 // general
@@ -106,6 +108,14 @@ static const union AffineAnimCmd sSquishTargetAffineAnimCmds[] =
     AFFINEANIMCMD_FRAME(0, 64, 0, 16), //Flatten
     AFFINEANIMCMD_FRAME(0, 0, 0, 64),
     AFFINEANIMCMD_FRAME(0, -64, 0, 16),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd sSquishTargetShortAffineAnimCmds[] =
+{
+    AFFINEANIMCMD_FRAME(0, 64, 0, 4), //Flatten
+    AFFINEANIMCMD_FRAME(0, 0, 0, 16),
+    AFFINEANIMCMD_FRAME(0, -64, 0, 4),
     AFFINEANIMCMD_END,
 };
 
@@ -4274,11 +4284,9 @@ const union AffineAnimCmd sSpriteAffineAnim_HydroCannonBall[] = {
 	AFFINEANIMCMD_FRAME(16, 16, 0, 16), //Double in size
 	AFFINEANIMCMD_END
 };
-
 const union AffineAnimCmd* const sSpriteAffineAnimTable_HydroCannonBall[] = {
 	sSpriteAffineAnim_HydroCannonBall,
 };
-
 const struct SpriteTemplate gSpriteTemplate_ChloroblastShot = {
     .tileTag = ANIM_TAG_HYDRO_PUMP,
     .paletteTag = ANIM_TAG_HYDRO_PUMP,
@@ -4800,6 +4808,17 @@ const struct SpriteTemplate gUltraBurstSymbolSpriteTemplate =
     .images = NULL,
     .affineAnims = gAffineAnims_LusterPurgeCircle,
     .callback = AnimSpriteOnMonPos
+};
+
+const struct SpriteTemplate gAxeKickSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_HANDS_AND_FEET,
+    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = &gAnims_HandsAndFeet[2],
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimBounceBallLand,
 };
 
 // Z MOVES
@@ -7216,6 +7235,51 @@ const struct SpriteTemplate gBitterBladeImpactTemplate =
     .callback = AnimClawSlash
 };
 
+// Make It Rain
+const struct SpriteTemplate gMakingItRainTemplate =
+{
+    .tileTag = ANIM_TAG_COIN,
+    .paletteTag = ANIM_TAG_COIN,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
+    .anims = gCoinAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimMakingItRain,
+};
+
+const struct SpriteTemplate gRedExplosionSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_RED_EXPLOSION,
+    .paletteTag = ANIM_TAG_RED_EXPLOSION,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gExplosionAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSpriteOnMonPos,
+};
+
+const struct SpriteTemplate gBloodMoonOnslaughtSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_BEAM,
+    .paletteTag = ANIM_TAG_BEAM,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sArrowRaidOnslaughtAffineAnimTable,
+    .callback = AnimAssistPawprint
+};
+
+const struct SpriteTemplate gMoonUpSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_BLOOD_MOON,
+    .paletteTag = ANIM_TAG_BLOOD_MOON,
+    .oam = &gOamData_AffineOff_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimWeatherBallUp,
+};
+
 // functions
 //general
 void AnimTask_IsTargetPartner(u8 taskId)
@@ -7232,7 +7296,7 @@ static u8 LoadBattleAnimTarget(u8 arg)
 {
     u8 battler;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
     {
         switch (gBattleAnimArgs[arg])
         {
@@ -7263,7 +7327,7 @@ static u8 LoadBattleAnimTarget(u8 arg)
 
 static u8 GetProperCentredCoord(u8 battler, u8 coordType)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
         return (GetBattlerSpriteCoord2(battler, coordType) + GetBattlerSpriteCoord2(BATTLE_PARTNER(battler), coordType)) / 2;
 
     return GetBattlerSpriteCoord(battler, coordType);
@@ -7453,14 +7517,14 @@ static void SpriteCB_SpriteToCentreOfSide(struct Sprite *sprite)
 
         if (gBattleAnimArgs[2] == 0) //Attacker
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            if (IsDoubleBattle())
                 InitSpritePosToAnimAttackersCentre(sprite, var);
             else
                 InitSpritePosToAnimAttacker(sprite, var);
         }
         else
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+            if (IsDoubleBattle())
                 InitSpritePosToAnimTargetsCentre(sprite, var);
             else
                 InitSpritePosToAnimTarget(sprite, var);
@@ -7544,7 +7608,7 @@ static void SpriteCB_GrowingSuperpower(struct Sprite *sprite)
 
 static void SpriteCB_CentredSpiderWeb(struct Sprite *sprite)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
         InitSpritePosToAnimTargetsCentre(sprite, FALSE);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
@@ -7558,14 +7622,14 @@ static void SpriteCB_CoreEnforcerHits(struct Sprite *sprite)
 
     if (gBattleAnimArgs[2] == 0)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        if (IsDoubleBattle())
             InitSpritePosToAnimAttackersCentre(sprite, FALSE);
         else
             InitSpritePosToAnimAttacker(sprite, FALSE);
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        if (IsDoubleBattle())
             InitSpritePosToAnimTargetsCentre(sprite, FALSE);
         else
             InitSpritePosToAnimTarget(sprite, FALSE);
@@ -7577,7 +7641,7 @@ static void SpriteCB_CoreEnforcerHits(struct Sprite *sprite)
 
 static void SpriteCB_CoreEnforcerBeam(struct Sprite *sprite)
 {
-    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+    if (!IsDoubleBattle())
     {
         AnimSolarBeamBigOrb(sprite);
     }
@@ -7849,14 +7913,14 @@ void SpriteCB_RandomCentredHits(struct Sprite *sprite)
 
     if (gBattleAnimArgs[0] == 0)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        if (IsDoubleBattle())
             InitSpritePosToAnimAttackersCentre(sprite, FALSE);
         else
             InitSpritePosToAnimAttacker(sprite, FALSE);
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        if (IsDoubleBattle())
             InitSpritePosToAnimTargetsCentre(sprite, FALSE);
         else
             InitSpritePosToAnimTarget(sprite, FALSE);
@@ -8161,7 +8225,7 @@ static void SpriteCB_BeamUpStep(struct Sprite *sprite)
 
 static void SpriteCB_CentredElectricity(struct Sprite *sprite)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
         InitSpritePosToAnimTargetsCentre(sprite, FALSE);
     else
         InitSpritePosToAnimTarget(sprite, FALSE);
@@ -8542,6 +8606,15 @@ void AnimTask_SquishTarget(u8 taskId)
     u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
 
     PrepareAffineAnimInTaskData(task, spriteId, sSquishTargetAffineAnimCmds);
+    task->func = AnimTask_WaitAffineAnim;
+}
+
+void AnimTask_SquishTargetShort(u8 taskId)
+{
+    struct Task* task = &gTasks[taskId];
+    u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
+
+    PrepareAffineAnimInTaskData(task, spriteId, sSquishTargetShortAffineAnimCmds);
     task->func = AnimTask_WaitAffineAnim;
 }
 
@@ -9190,5 +9263,35 @@ void AnimTask_SyrupBomb(u8 taskId)
 void AnimTask_StickySyrup(u8 taskId)
 {
     gBattleAnimArgs[0] = gAnimDisableStructPtr->syrupBombIsShiny;
+    DestroyAnimVisualTask(taskId);
+}
+
+static void AnimMakingItRain(struct Sprite *sprite)
+{
+    if (gBattleAnimArgs[3] != 0)
+        SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->x, &sprite->y);   //coin shower on target
+
+    sprite->x += gBattleAnimArgs[0];
+    sprite->y += 14;
+    StartSpriteAnim(sprite, gBattleAnimArgs[1]);
+    AnimateSprite(sprite);
+    sprite->data[0] = 0;
+    sprite->data[1] = 0;
+    sprite->data[2] = 4;
+    sprite->data[3] = 16;
+    sprite->data[4] = -70;
+    sprite->data[5] = gBattleAnimArgs[2];
+    StoreSpriteCallbackInData6(sprite, AnimFallingRock_Step);
+    sprite->callback = TranslateSpriteInEllipse;
+    sprite->callback(sprite);
+}
+
+void AnimTask_RandomBool(u8 taskId)
+{
+    if (RandomPercentage(RNG_NONE, 50))
+        gBattleAnimArgs[ARG_RET_ID] = TRUE;
+    else
+        gBattleAnimArgs[ARG_RET_ID] = FALSE;
+
     DestroyAnimVisualTask(taskId);
 }

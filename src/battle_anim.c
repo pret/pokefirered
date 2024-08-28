@@ -116,6 +116,7 @@ static void Cmd_stopsound(void);
 static void Cmd_createvisualtaskontargets(void);
 static void Cmd_createspriteontargets(void);
 static void Cmd_createspriteontargets_onpos(void);
+static void Cmd_jumpifmovetypeequal(void);
 static void Cmd_createdragondartsprite(void);
 
 #include "data/battle_anim.h"
@@ -173,7 +174,8 @@ static void (*const sScriptCmdTable[])(void) =
     Cmd_createvisualtaskontargets,  // 0x30
     Cmd_createspriteontargets,      // 0x31
     Cmd_createspriteontargets_onpos, // 0x32
-    Cmd_createdragondartsprite,     // 0x33
+    Cmd_jumpifmovetypeequal,         // 0x33
+    Cmd_createdragondartsprite,      // 0x34
 };
 
 void ClearBattleAnimationVars(void)
@@ -2021,6 +2023,16 @@ static void Cmd_stopsound(void)
     m4aMPlayStop(&gMPlayInfo_SE1);
     m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
+}
+
+static void Cmd_jumpifmovetypeequal(void)
+{
+    const u8 *type = sBattleAnimScriptPtr + 1;
+    sBattleAnimScriptPtr += 2;
+    if (*type != GetMoveType(gCurrentMove))
+        sBattleAnimScriptPtr += 4;
+    else
+        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
 static void Cmd_createdragondartsprite(void)

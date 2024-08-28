@@ -315,8 +315,14 @@
 .Lsprite_\@_2:
 	.endm
 
-.macro createdragondartsprite anim_battler:req, subpriority_offset:req, argv:vararg
+	.macro jumpifmovetypeequal type:req, jumpInstr:req
 	.byte 0x33
+	.byte \type
+	.4byte \jumpInstr
+	.endm
+
+	.macro createdragondartsprite anim_battler:req, subpriority_offset:req, argv:vararg
+	.byte 0x34
 	.if \anim_battler == ANIM_TARGET
 	.byte ANIMSPRITE_IS_TARGET | (\subpriority_offset & 0x7F)
 	.else
@@ -327,16 +333,16 @@
 	.2byte \argv
 .Lsprite_\@_2:
 	.endm
-	
+
 @ useful macros
 	.macro jumpreteq value:req, ptr:req
 	jumpargeq ARG_RET_ID, \value, \ptr
 	.endm
-	
+
 	.macro jumprettrue ptr:req
 	jumpreteq TRUE, \ptr
 	.endm
-	
+
 	.macro jumpretfalse ptr:req
 	jumpreteq FALSE, \ptr
 	.endm

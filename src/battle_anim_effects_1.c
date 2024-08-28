@@ -3005,6 +3005,50 @@ const struct SpriteTemplate gWoodHammerHammerSpriteTemplate =
     .callback = AnimWoodHammerHammer,
 };
 
+const struct SpriteTemplate gIvyCudgelSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_IVY_CUDGEL_GRASS,
+    .paletteTag = ANIM_TAG_IVY_CUDGEL_GRASS,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gWoodHammerHammerAffineAnims,
+    .callback = AnimWoodHammerHammer,
+};
+
+const struct SpriteTemplate gIvyCudgelFireSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_IVY_CUDGEL_GRASS,
+    .paletteTag = ANIM_TAG_IVY_CUDGEL_FIRE,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gWoodHammerHammerAffineAnims,
+    .callback = AnimWoodHammerHammer,
+};
+
+const struct SpriteTemplate gIvyCudgelRockSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_IVY_CUDGEL_GRASS,
+    .paletteTag = ANIM_TAG_IVY_CUDGEL_ROCK,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gWoodHammerHammerAffineAnims,
+    .callback = AnimWoodHammerHammer,
+};
+
+const struct SpriteTemplate gIvyCudgelWaterSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_IVY_CUDGEL_GRASS,
+    .paletteTag = ANIM_TAG_IVY_CUDGEL_WATER,
+    .oam = &gOamData_AffineDouble_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gWoodHammerHammerAffineAnims,
+    .callback = AnimWoodHammerHammer,
+};
+
 const struct SpriteTemplate gJudgmentGrayOutwardSpikesTemplate =
 {
     .tileTag = ANIM_TAG_GREEN_SPIKE,
@@ -3102,6 +3146,17 @@ const struct SpriteTemplate gPsyshockSmokeSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSpriteOnMonPos,
+};
+
+const struct SpriteTemplate gChainBindingSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_PURPLE_CHAIN,
+    .paletteTag = ANIM_TAG_PURPLE_CHAIN,
+    .oam = &gOamData_AffineNormal_ObjNormal_64x32,
+    .anims = sAnims_ConstrictBinding,
+    .images = NULL,
+    .affineAnims = sAffineAnims_ConstrictBinding,
+    .callback = AnimConstrictBinding,
 };
 
 // functions
@@ -7216,6 +7271,14 @@ static const union AffineAnimCmd sCompressTargetHorizontallyAffineAnimCmds[] =
 	AFFINEANIMCMD_END,
 };
 
+static const union AffineAnimCmd sCompressTargetHorizontallyAffineAnimCmdsFast[] =
+{
+	AFFINEANIMCMD_FRAME(32, 0, 0, 16), //Compress
+	AFFINEANIMCMD_FRAME(0, 0, 0, 32),
+	AFFINEANIMCMD_FRAME(-32, 0, 0, 16),
+	AFFINEANIMCMD_END,
+};
+
 static void AnimTask_CompressTargetStep(u8 taskId)
 {
 	struct Task* task = &gTasks[taskId];
@@ -7229,6 +7292,14 @@ void AnimTask_CompressTargetHorizontally(u8 taskId)
 	struct Task* task = &gTasks[taskId];
 	u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
 	PrepareAffineAnimInTaskData(task, spriteId, sCompressTargetHorizontallyAffineAnimCmds);
+	task->func = AnimTask_CompressTargetStep;
+}
+
+void AnimTask_CompressTargetHorizontallyFast(u8 taskId)
+{
+	struct Task* task = &gTasks[taskId];
+	u8 spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
+	PrepareAffineAnimInTaskData(task, spriteId, sCompressTargetHorizontallyAffineAnimCmdsFast);
 	task->func = AnimTask_CompressTargetStep;
 }
 

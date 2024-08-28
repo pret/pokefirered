@@ -32,9 +32,10 @@
 #include "strings.h"
 #include "teachy_tv.h"
 #include "tm_case.h"
+#include "constants/item_menu.h"
 #include "constants/items.h"
-#include "constants/songs.h"
 #include "constants/quest_log.h"
+#include "constants/songs.h"
 
 #define FREE_IF_SET(ptr) ({ if (ptr) Free(ptr); })
 
@@ -48,8 +49,8 @@ struct BagMenuAlloc
     u16 contextMenuSelectedItem;
     u8 pocketScrollArrowsTask;
     u8 pocketSwitchArrowsTask;
-    u8 nItems[3];
-    u8 maxShowed[3];
+    u8 nItems[NUM_BAG_POCKETS_NO_CASES];
+    u8 maxShowed[NUM_BAG_POCKETS_NO_CASES];
     u8 data[4];
 };
 
@@ -58,8 +59,8 @@ struct BagSlots
     struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
     struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
-    u16 itemsAbove[3];
-    u16 cursorPos[3];
+    u16 itemsAbove[NUM_BAG_POCKETS_NO_CASES];
+    u16 cursorPos[NUM_BAG_POCKETS_NO_CASES];
     u16 registeredItem;
     u16 pocket;
 };
@@ -833,7 +834,7 @@ void ResetBagCursorPositions(void)
     u8 i;
     gBagMenuState.pocket = POCKET_ITEMS - 1;
     gBagMenuState.bagOpen = FALSE;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_BAG_POCKETS_NO_CASES; i++)
     {
         gBagMenuState.itemsAbove[i] = 0;
         gBagMenuState.cursorPos[i] = 0;
@@ -858,7 +859,7 @@ void PocketCalculateInitialCursorPosAndItemsAbove(u8 pocketId)
 static void CalculateInitialCursorPosAndItemsAbove(void)
 {
     u8 i;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_BAG_POCKETS_NO_CASES; i++)
     {
         PocketCalculateInitialCursorPosAndItemsAbove(i);
     }
@@ -869,7 +870,7 @@ static void UpdatePocketScrollPositions(void)
     u8 i;
     u8 j;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_BAG_POCKETS_NO_CASES; i++)
     {
         if (gBagMenuState.itemsAbove[i] > 3)
         {
@@ -1012,7 +1013,7 @@ void Pocket_CalculateNItemsAndMaxShowed(u8 pocketId)
 static void All_CalculateNItemsAndMaxShowed(void)
 {
     u8 i;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_BAG_POCKETS_NO_CASES; i++)
         Pocket_CalculateNItemsAndMaxShowed(i);
 }
 
@@ -2067,7 +2068,7 @@ static void BackUpPlayerBag(void)
     memcpy(sBackupPlayerBag->bagPocket_PokeBalls, gSaveBlock1Ptr->bagPocket_PokeBalls, BAG_POKEBALLS_COUNT * sizeof(struct ItemSlot));
     sBackupPlayerBag->registeredItem = gSaveBlock1Ptr->registeredItem;
     sBackupPlayerBag->pocket = gBagMenuState.pocket;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_BAG_POCKETS_NO_CASES; i++)
     {
         sBackupPlayerBag->itemsAbove[i] = gBagMenuState.itemsAbove[i];
         sBackupPlayerBag->cursorPos[i] = gBagMenuState.cursorPos[i];
@@ -2087,7 +2088,7 @@ static void RestorePlayerBag(void)
     memcpy(gSaveBlock1Ptr->bagPocket_PokeBalls, sBackupPlayerBag->bagPocket_PokeBalls, BAG_POKEBALLS_COUNT * sizeof(struct ItemSlot));
     gSaveBlock1Ptr->registeredItem = sBackupPlayerBag->registeredItem;
     gBagMenuState.pocket = sBackupPlayerBag->pocket;
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < NUM_BAG_POCKETS_NO_CASES; i++)
     {
         gBagMenuState.itemsAbove[i] = sBackupPlayerBag->itemsAbove[i];
         gBagMenuState.cursorPos[i] = sBackupPlayerBag->cursorPos[i];

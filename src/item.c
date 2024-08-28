@@ -11,8 +11,8 @@
 #include "quest_log.h"
 #include "strings.h"
 #include "constants/hold_effects.h"
-#include "constants/item_effects.h"
 #include "constants/item.h"
+#include "constants/item_effects.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 
@@ -345,7 +345,7 @@ void ClearBag(void)
 {
     u16 i;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < NUM_BAG_POCKETS; i++)
     {
         ClearItemSlots(gBagPockets[i].itemSlots, gBagPockets[i].capacity);
     }

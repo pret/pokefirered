@@ -18,9 +18,10 @@
 #include "reshow_battle_screen.h"
 #include "teachy_tv.h"
 #include "constants/battle_string_ids.h"
-#include "constants/songs.h"
+#include "constants/item_menu.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
+#include "constants/songs.h"
 
 struct PokedudeTextScriptHeader
 {

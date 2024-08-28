@@ -26,10 +26,11 @@
 #include "money.h"
 #include "quest_log.h"
 #include "script.h"
-#include "constants/songs.h"
-#include "constants/items.h"
-#include "constants/game_stat.h"
 #include "constants/field_weather.h"
+#include "constants/game_stat.h"
+#include "constants/item_menu.h"
+#include "constants/items.h"
+#include "constants/songs.h"
 
 #define tItemCount data[1]
 #define tItemId data[5]

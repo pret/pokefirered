@@ -9,6 +9,7 @@
 #define POCKET_TM_HM       4
 #define POCKET_BERRIES     5
 #define NUM_BAG_POCKETS    5
+#define NUM_BAG_POCKETS_NO_CASES 3 // number of pockets without considering TM case or berry pouch
 
 #define ITEMS_POCKET       0
 #define KEYITEMS_POCKET    1

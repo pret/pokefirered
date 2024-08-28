@@ -22,8 +22,9 @@
 #include "text_window.h"
 #include "tilemap_util.h"
 #include "trig.h"
-#include "constants/items.h"
 #include "constants/help_system.h"
+#include "constants/item_menu.h"
+#include "constants/items.h"
 #include "constants/songs.h"
 
 EWRAM_DATA struct PokemonStorageSystemData *gStorage = NULL;

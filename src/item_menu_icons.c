@@ -203,18 +203,18 @@ void ResetItemMenuIconState(void)
         sItemMenuIconSpriteIds[i] = SPRITE_NONE;
 }
 
-void AddBagVisualSprite(u8 animNum)
+void AddBagVisualSprite(u8 bagPocketId)
 {
     sItemMenuIconSpriteIds[SPR_BAG] = CreateSprite(&sSpriteTemplate_Bag, 40, 68, 0);
-    SetBagVisualPocketId(animNum);
+    SetBagVisualPocketId(bagPocketId);
 }
 
-void SetBagVisualPocketId(u8 animNum)
+void SetBagVisualPocketId(u8 bagPocketId)
 {
     struct Sprite *sprite = &gSprites[sItemMenuIconSpriteIds[SPR_BAG]];
     sprite->y2 = -5;
     sprite->callback = SpriteCB_BagVisualSwitchingPockets;
-    StartSpriteAnim(sprite, animNum);
+    StartSpriteAnim(sprite, bagPocketId);
 }
 
 static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite)
@@ -244,34 +244,34 @@ static void SpriteCB_ShakeBagSprite(struct Sprite *sprite)
     }
 }
 
-void AddBagItemIconSprite(u16 itemId, u8 idx)
+void AddBagItemIconSprite(u16 itemId, u8 id)
 {
     u8 *spriteIds = &sItemMenuIconSpriteIds[SPR_ITEM_ICON];
     u8 spriteId;
 
-    if (spriteIds[idx] == SPRITE_NONE)
+    if (spriteIds[id] == SPRITE_NONE)
     {
         // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
-        FreeSpriteTilesByTag(TAG_ITEM_ICON + idx);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON + idx);
-        spriteId = AddItemIconSprite(TAG_ITEM_ICON + idx, TAG_ITEM_ICON + idx, itemId);
+        FreeSpriteTilesByTag(TAG_ITEM_ICON + id);
+        FreeSpritePaletteByTag(TAG_ITEM_ICON + id);
+        spriteId = AddItemIconSprite(TAG_ITEM_ICON + id, TAG_ITEM_ICON + id, itemId);
         if (spriteId != MAX_SPRITES)
         {
-            spriteIds[idx] = spriteId;
+            spriteIds[id] = spriteId;
             gSprites[spriteId].x2 = 24;
             gSprites[spriteId].y2 = 140;
         }
     }
 }
 
-void RemoveBagItemIconSprite(u8 idx)
+void RemoveBagItemIconSprite(u8 id)
 {
     u8 *spriteIds = &sItemMenuIconSpriteIds[SPR_ITEM_ICON];
 
-    if (spriteIds[idx] != SPRITE_NONE)
+    if (spriteIds[id] != SPRITE_NONE)
     {
-        DestroySpriteAndFreeResources(&gSprites[spriteIds[idx]]);
-        spriteIds[idx] = SPRITE_NONE;
+        DestroySpriteAndFreeResources(&gSprites[spriteIds[id]]);
+        spriteIds[id] = SPRITE_NONE;
     }
 }
 
@@ -320,20 +320,20 @@ void UpdateItemMenuSwapLinePos(s16 x, u16 y)
     }
 }
 
-void CreateBerryPouchItemIcon(u16 itemId, u8 idx)
+void CreateBerryPouchItemIcon(u16 itemId, u8 id)
 {
     u8 *spriteIds = &sItemMenuIconSpriteIds[SPR_ITEM_ICON];
     u8 spriteId;
 
-    if (spriteIds[idx] == SPRITE_NONE)
+    if (spriteIds[id] == SPRITE_NONE)
     {
         // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
-        FreeSpriteTilesByTag(TAG_ITEM_ICON + idx);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON + idx);
-        spriteId = AddItemIconSprite(TAG_ITEM_ICON + idx, TAG_ITEM_ICON + idx, itemId);
+        FreeSpriteTilesByTag(TAG_ITEM_ICON + id);
+        FreeSpritePaletteByTag(TAG_ITEM_ICON + id);
+        spriteId = AddItemIconSprite(TAG_ITEM_ICON + id, TAG_ITEM_ICON + id, itemId);
         if (spriteId != MAX_SPRITES)
         {
-            spriteIds[idx] = spriteId;
+            spriteIds[id] = spriteId;
             gSprites[spriteId].x2 = 24;
             gSprites[spriteId].y2 = 147; // This value is the only difference from AddBagItemIconSprite
         }

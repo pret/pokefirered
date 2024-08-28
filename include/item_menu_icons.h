@@ -7,15 +7,16 @@ extern const struct CompressedSpritePalette gSpritePalette_Bag;
 extern const struct CompressedSpriteSheet gBagSwapSpriteSheet;
 extern const struct CompressedSpritePalette gBagSwapSpritePalette;
 
-void ResetItemMenuIconState(void);
-void CreateItemMenuSwapLine(void);
-void RemoveBagItemIconSprite(bool8 a0);
-void AddBagItemIconSprite(u16 itemId, bool8 a0);
-void CreateBerryPouchItemIcon(u16 itemId, u8 idx);
-void UpdateItemMenuSwapLinePos(s16 x, u16 y);
-void SetItemMenuSwapLineInvisibility(bool8 invisible);
-void SetBagVisualPocketId(u8);
+void AddBagVisualSprite(u8 bagPocketId);
+void SetBagVisualPocketId(u8 bagPocketId);
 void ShakeBagSprite(void);
-void AddBagVisualSprite(u8 animNum);
+void AddBagItemIconSprite(u16 itemId, u8 id);
+void RemoveBagItemIconSprite(u8 id);
+void CreateItemMenuSwapLine(void);
+void SetItemMenuSwapLineInvisibility(bool8 invisible);
+void UpdateItemMenuSwapLinePos(s16 x, u16 y);
+
+void ResetItemMenuIconState(void);
+void CreateBerryPouchItemIcon(u16 itemId, u8 id);
 
 #endif // GUARD_ITEM_MENU_ICONS_H

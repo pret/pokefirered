@@ -714,7 +714,7 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
         PlaySE(SE_BAG_CURSOR);
         StartBerryPouchSpriteWobbleAnim();
     }
-    DestroyItemMenuIcon(sResources->itemMenuIconId ^ 1);
+    RemoveBagItemIconSprite(sResources->itemMenuIconId ^ 1);
     if (sResources->listMenuNumItems != itemIndex)
         CreateBerryPouchItemIcon(BagGetItemIdByPocketPosition(POCKET_BERRIES, itemIndex), sResources->itemMenuIconId);
     else

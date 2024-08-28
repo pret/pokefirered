@@ -475,7 +475,7 @@ static bool8 LoadBagMenuGraphics(void)
         gMain.state++;
         break;
     case 15:
-        CreateBagSprite(gBagMenuState.pocket);
+        AddBagVisualSprite(gBagMenuState.pocket);
         gMain.state++;
         break;
     case 16:
@@ -484,7 +484,7 @@ static bool8 LoadBagMenuGraphics(void)
         gMain.state++;
         break;
     case 17:
-        CreateSwapLine();
+        CreateItemMenuSwapLine();
         gMain.state++;
         break;
     case 18:
@@ -685,11 +685,11 @@ static void BagListMenuMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMe
     }
     if (sBagMenuDisplay->itemOriginalLocation == 0xFF)
     {
-        DestroyItemMenuIcon(sBagMenuDisplay->itemMenuIcon ^ 1);
+        RemoveBagItemIconSprite(sBagMenuDisplay->itemMenuIcon ^ 1);
         if (sBagMenuDisplay->nItems[gBagMenuState.pocket] != itemIndex)
-            CreateItemMenuIcon(BagGetItemIdByPocketPosition(gBagMenuState.pocket + 1, itemIndex), sBagMenuDisplay->itemMenuIcon);
+            AddBagItemIconSprite(BagGetItemIdByPocketPosition(gBagMenuState.pocket + 1, itemIndex), sBagMenuDisplay->itemMenuIcon);
         else
-            CreateItemMenuIcon(ITEMS_COUNT, sBagMenuDisplay->itemMenuIcon);
+            AddBagItemIconSprite(ITEMS_COUNT, sBagMenuDisplay->itemMenuIcon);
         sBagMenuDisplay->itemMenuIcon ^= 1;
         if (!sBagMenuDisplay->inhibitItemDescriptionPrint)
             PrintItemDescriptionOnMessageWindow(itemIndex);
@@ -1154,7 +1154,7 @@ static void SwitchPockets(u8 taskId, s16 direction, bool16 a2)
         ClearWindowTilemap(2);
         DestroyListMenuTask(data[0], &gBagMenuState.cursorPos[gBagMenuState.pocket], &gBagMenuState.itemsAbove[gBagMenuState.pocket]);
         ScheduleBgCopyTilemapToVram(0);
-        DestroyItemMenuIcon(sBagMenuDisplay->itemMenuIcon ^ 1);
+        RemoveBagItemIconSprite(sBagMenuDisplay->itemMenuIcon ^ 1);
         BagDestroyPocketScrollArrowPair();
     }
     FillBgTilemapBufferRect_Palette0(1, 0x02D, 11, 1, 18, 12);
@@ -1224,8 +1224,8 @@ static void BeginMovingItemInPocket(u8 taskId, s16 itemIndex)
     StringExpandPlaceholders(gStringVar4, gOtherText_WhereShouldTheStrVar1BePlaced);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     BagPrintTextOnWindow(1, FONT_NORMAL, gStringVar4, 0, 3, 2, 0, 0, 0);
-    UpdateSwapLinePos(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
-    SetSwapLineInvisibility(FALSE);
+    UpdateItemMenuSwapLinePos(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    SetItemMenuSwapLineInvisibility(FALSE);
     BagDestroyPocketSwitchArrowPair();
     bag_menu_print_cursor_(data[0], 2);
     gTasks[taskId].func = Task_MoveItemInPocket_HandleInput;
@@ -1241,7 +1241,7 @@ static void Task_MoveItemInPocket_HandleInput(u8 taskId)
         return;
     input = ListMenu_ProcessInput(data[0]);
     ListMenuGetScrollAndRow(data[0], &gBagMenuState.cursorPos[gBagMenuState.pocket], &gBagMenuState.itemsAbove[gBagMenuState.pocket]);
-    UpdateSwapLinePos(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    UpdateItemMenuSwapLinePos(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
     if (JOY_NEW(SELECT_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -1283,7 +1283,7 @@ static void ExecuteMoveItemInPocket(u8 taskId, u32 itemIndex)
             gBagMenuState.itemsAbove[gBagMenuState.pocket]--;
         Bag_BuildListMenuTemplate(gBagMenuState.pocket);
         data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagMenuState.cursorPos[gBagMenuState.pocket], gBagMenuState.itemsAbove[gBagMenuState.pocket]);
-        SetSwapLineInvisibility(TRUE);
+        SetItemMenuSwapLineInvisibility(TRUE);
         CreatePocketSwitchArrowPair();
         gTasks[taskId].func = Task_BagMenu_HandleInput;
     }
@@ -1297,7 +1297,7 @@ static void AbortMovingItemInPocket(u8 taskId, u32 itemIndex)
         gBagMenuState.itemsAbove[gBagMenuState.pocket]--;
     Bag_BuildListMenuTemplate(gBagMenuState.pocket);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagMenuState.cursorPos[gBagMenuState.pocket], gBagMenuState.itemsAbove[gBagMenuState.pocket]);
-    SetSwapLineInvisibility(TRUE);
+    SetItemMenuSwapLineInvisibility(TRUE);
     CreatePocketSwitchArrowPair();
     gTasks[taskId].func = Task_BagMenu_HandleInput;
 }

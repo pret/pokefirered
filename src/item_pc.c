@@ -343,7 +343,7 @@ static bool8 ItemPc_DoGfxSetup(void)
         gMain.state++;
         break;
     case 14:
-        CreateSwapLine();
+        CreateItemMenuSwapLine();
         gMain.state++;
         break;
     case 15:
@@ -518,11 +518,11 @@ static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
 
     if (sStateDataPtr->moveModeOrigPos == 0xFF)
     {
-        DestroyItemMenuIcon(sStateDataPtr->itemMenuIconSlot ^ 1);
+        RemoveBagItemIconSprite(sStateDataPtr->itemMenuIconSlot ^ 1);
         if (itemIndex != -2)
         {
             itemId = ItemPc_GetItemIdBySlotId(itemIndex);
-            CreateItemMenuIcon(itemId, sStateDataPtr->itemMenuIconSlot);
+            AddBagItemIconSprite(itemId, sStateDataPtr->itemMenuIconSlot);
             if (ItemId_GetPocket(itemId) == POCKET_TM_HM)
                 desc = gMovesInfo[ItemIdToBattleMoveId(itemId)].name;
             else
@@ -530,7 +530,7 @@ static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
         }
         else
         {
-            CreateItemMenuIcon(ITEMS_COUNT, sStateDataPtr->itemMenuIconSlot);
+            AddBagItemIconSprite(ITEMS_COUNT, sStateDataPtr->itemMenuIconSlot);
             desc = gText_ReturnToPC;
         }
         sStateDataPtr->itemMenuIconSlot ^= 1;
@@ -775,8 +775,8 @@ static void ItemPc_MoveItemModeInit(u8 taskId, s16 pos)
     StringExpandPlaceholders(gStringVar4, gOtherText_WhereShouldTheStrVar1BePlaced);
     FillWindowPixelBuffer(1, 0x00);
     ItemPc_AddTextPrinterParameterized(1, FONT_NORMAL, gStringVar4, 0, 3, 2, 3, 0, 0);
-    UpdateSwapLinePos(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
-    SetSwapLineInvisibility(FALSE);
+    UpdateItemMenuSwapLinePos(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    SetItemMenuSwapLineInvisibility(FALSE);
     ItemPc_PrintOrRemoveCursor(data[0], 2);
     gTasks[taskId].func = Task_ItemPcMoveItemModeRun;
 }
@@ -787,7 +787,7 @@ static void Task_ItemPcMoveItemModeRun(u8 taskId)
 
     ListMenu_ProcessInput(data[0]);
     ListMenuGetScrollAndRow(data[0], &sListMenuState.scroll, &sListMenuState.row);
-    UpdateSwapLinePos(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
+    UpdateItemMenuSwapLinePos(-32, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
     if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -815,7 +815,7 @@ static void ItemPc_InsertItemIntoNewSlot(u8 taskId, u32 pos)
             sListMenuState.row--;
         ItemPc_BuildListMenuTemplate();
         data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
-        SetSwapLineInvisibility(TRUE);
+        SetItemMenuSwapLineInvisibility(TRUE);
         gTasks[taskId].func = Task_ItemPcMain;
     }
 }
@@ -829,7 +829,7 @@ static void ItemPc_MoveItemModeCancel(u8 taskId, u32 pos)
         sListMenuState.row--;
     ItemPc_BuildListMenuTemplate();
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
-    SetSwapLineInvisibility(TRUE);
+    SetItemMenuSwapLineInvisibility(TRUE);
     gTasks[taskId].func = Task_ItemPcMain;
 }
 

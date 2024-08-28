@@ -573,11 +573,11 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
     FillWindowPixelBuffer(5, PIXEL_FILL(0));
     if (sShopData.martType != MART_TYPE_TMHM)
     {
-        DestroyItemMenuIcon(sShopData.itemSlot ^ 1);
+        RemoveBagItemIconSprite(sShopData.itemSlot ^ 1);
         if (item != INDEX_CANCEL)
-            CreateItemMenuIcon(item, sShopData.itemSlot);
+            AddBagItemIconSprite(item, sShopData.itemSlot);
         else
-            CreateItemMenuIcon(ITEMS_COUNT, sShopData.itemSlot);
+            AddBagItemIconSprite(ITEMS_COUNT, sShopData.itemSlot);
 
         sShopData.itemSlot ^= 1;
         BuyMenuPrint(5, FONT_NORMAL, description, 0, 3, 2, 1, 0, 0);

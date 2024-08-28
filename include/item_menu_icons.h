@@ -8,14 +8,14 @@ extern const struct CompressedSpriteSheet gBagSwapSpriteSheet;
 extern const struct CompressedSpritePalette gBagSwapSpritePalette;
 
 void ResetItemMenuIconState(void);
-void CreateSwapLine(void);
-void DestroyItemMenuIcon(bool8 a0);
-void CreateItemMenuIcon(u16 itemId, bool8 a0);
+void CreateItemMenuSwapLine(void);
+void RemoveBagItemIconSprite(bool8 a0);
+void AddBagItemIconSprite(u16 itemId, bool8 a0);
 void CreateBerryPouchItemIcon(u16 itemId, u8 idx);
-void UpdateSwapLinePos(s16 x, u16 y);
-void SetSwapLineInvisibility(bool8 invisible);
+void UpdateItemMenuSwapLinePos(s16 x, u16 y);
+void SetItemMenuSwapLineInvisibility(bool8 invisible);
 void SetBagVisualPocketId(u8);
 void ShakeBagSprite(void);
-void CreateBagSprite(u8 animNum);
+void AddBagVisualSprite(u8 animNum);
 
 #endif // GUARD_ITEM_MENU_ICONS_H

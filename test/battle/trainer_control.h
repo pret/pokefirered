@@ -14,7 +14,7 @@
 #line 2
         .trainerName = _("Test1"),
 #line 3
-        .trainerClass = TRAINER_CLASS_PLAYER,
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 4
         .trainerPic = TRAINER_PIC_RED,
         .encounterMusic_gender = 

@@ -240,7 +240,17 @@ const union AnimCmd *const sAnims_Trainer[] ={
 #define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {pal, TRAINER_PIC_##trainerPic}
 
 #include "data/trainer_parties.h"
+
+const struct Trainer gTrainers[] =
+{
 #include "data/trainers.h"
+};
+
+#include "data/partner_parties.h"
+
+const struct Trainer gBattlePartners[] =
+{
 #include "data/battle_partners.h"
+};
 
 #include "data/text/follower_messages.h"

@@ -8631,7 +8631,7 @@ void CoreEnforcerLoadBeamTarget(struct Sprite *sprite)
 
 void AnimTask_CreateBestowItem(u8 taskId)
 {
-    u8 iconSpriteId = AddItemIconObject(ANIM_TAG_ITEM_BAG, ANIM_TAG_ITEM_BAG, gLastUsedItem);
+    u8 iconSpriteId = AddItemIconSprite(ANIM_TAG_ITEM_BAG, ANIM_TAG_ITEM_BAG, gLastUsedItem);
 
     if (iconSpriteId != MAX_SPRITES)
     {

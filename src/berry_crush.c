@@ -2689,7 +2689,7 @@ static void CreateBerrySprites(struct BerryCrushGame * game, struct BerryCrushGa
 
     for (i = 0; i < game->playerCount; i++)
     {
-        spriteId = AddItemIconObjectWithCustomObjectTemplate(
+        spriteId = AddCustomItemIconSprite(
             &sSpriteTemplate_PlayerBerry,
             sPlayerBerrySpriteTags[i],
             sPlayerBerrySpriteTags[i],

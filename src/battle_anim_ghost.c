@@ -1548,7 +1548,7 @@ void AnimTask_PoltergeistItem(u8 taskId)
     u8 x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
     u8 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + (GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_HEIGHT) / 2);
 
-    task->data[0] = AddItemIconObject(ANIM_TAG_ITEM_BAG, ANIM_TAG_ITEM_BAG, gLastUsedItem);
+    task->data[0] = AddItemIconSprite(ANIM_TAG_ITEM_BAG, ANIM_TAG_ITEM_BAG, gLastUsedItem);
     gSprites[task->data[0]].x = x + 4;
     gSprites[task->data[0]].y = y + 4;
     gSprites[task->data[0]].data[0] = x + 4;

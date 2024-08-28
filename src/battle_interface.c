@@ -2734,7 +2734,7 @@ void TryAddLastUsedBallItemSprites(void)
     // ball
     if (gBattleStruct->ballSpriteIds[0] == MAX_SPRITES)
     {
-        gBattleStruct->ballSpriteIds[0] = AddItemIconObject(102, 102, gBallToDisplay);
+        gBattleStruct->ballSpriteIds[0] = AddItemIconSprite(102, 102, gBallToDisplay);
         gSprites[gBattleStruct->ballSpriteIds[0]].x = LAST_USED_BALL_X_0;
         gSprites[gBattleStruct->ballSpriteIds[0]].y = LAST_USED_BALL_Y;
         gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;   // restore
@@ -2901,7 +2901,7 @@ static void Task_BounceBall(u8 taskId)
     case 2: //Create New Icon
         if (!sprite->inUse)
         {
-            gBattleStruct->ballSpriteIds[0] = AddItemIconObject(102, 102, gBallToDisplay);
+            gBattleStruct->ballSpriteIds[0] = AddItemIconSprite(102, 102, gBallToDisplay);
             gSprites[gBattleStruct->ballSpriteIds[0]].x = LAST_USED_BALL_X_F;
             gSprites[gBattleStruct->ballSpriteIds[0]].y = LAST_USED_BALL_Y_BNC;
             task->sState++;

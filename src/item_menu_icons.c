@@ -299,7 +299,7 @@ void CreateItemMenuIcon(u16 itemId, u8 idx)
         // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
         FreeSpriteTilesByTag(TAG_ITEM_ICON + idx);
         FreeSpritePaletteByTag(TAG_ITEM_ICON + idx);
-        spriteId = AddItemIconObject(TAG_ITEM_ICON + idx, TAG_ITEM_ICON + idx, itemId);
+        spriteId = AddItemIconSprite(TAG_ITEM_ICON + idx, TAG_ITEM_ICON + idx, itemId);
         if (spriteId != MAX_SPRITES)
         {
             spriteIds[idx] = spriteId;
@@ -330,7 +330,7 @@ void CreateBerryPouchItemIcon(u16 itemId, u8 idx)
         // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
         FreeSpriteTilesByTag(TAG_ITEM_ICON + idx);
         FreeSpritePaletteByTag(TAG_ITEM_ICON + idx);
-        spriteId = AddItemIconObject(TAG_ITEM_ICON + idx, TAG_ITEM_ICON + idx, itemId);
+        spriteId = AddItemIconSprite(TAG_ITEM_ICON + idx, TAG_ITEM_ICON + idx, itemId);
         if (spriteId != MAX_SPRITES)
         {
             spriteIds[idx] = spriteId;

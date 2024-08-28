@@ -4,7 +4,7 @@
 #include "decompress.h"
 #include "dynamic_placeholder_text_util.h"
 #include "item.h"
-#include "item_menu_icons.h"
+#include "item_icon.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "pokemon_special_anim_internal.h"

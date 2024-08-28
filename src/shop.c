@@ -16,7 +16,7 @@
 #include "overworld.h"
 #include "field_fadetransition.h"
 #include "scanline_effect.h"
-#include "item_menu_icons.h"
+#include "item_icon.h"
 #include "decompress.h"
 #include "menu_indicators.h"
 #include "field_player_avatar.h"

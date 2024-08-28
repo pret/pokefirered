@@ -10,7 +10,7 @@
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
 #include "scanline_effect.h"
-#include "item_menu_icons.h"
+#include "item_icon.h"
 #include "list_menu.h"
 #include "graphics.h"
 #include "berry.h"

@@ -1,7 +1,10 @@
 #ifndef GUARD_ITEM_MENU_ICONS
 #define GUARD_ITEM_MENU_ICONS
 
-#include "global.h"
+extern u8 *gItemIconDecompressionBuffer;
+extern u8 *gItemIcon4x4Buffer;
+
+extern const struct SpriteTemplate gItemIconSpriteTemplate;
 
 extern const struct CompressedSpriteSheet gSpriteSheet_BagMale;
 extern const struct CompressedSpriteSheet gSpriteSheet_BagFemale;
@@ -24,7 +27,6 @@ void SetBagVisualPocketId(u8);
 void ShakeBagSprite(void);
 void CreateBagSprite(u8 animNum);
 
-// item_icon.c
 const void *GetItemIconPic(u16 itemId);
 const void *GetItemIconPalette(u16 itemId);
 

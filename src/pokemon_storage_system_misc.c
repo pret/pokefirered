@@ -3,7 +3,7 @@
 #include "gflib.h"
 #include "decompress.h"
 #include "item.h"
-#include "item_menu_icons.h"
+#include "item_icon.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "pokemon_icon.h"

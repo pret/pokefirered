@@ -3,7 +3,7 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "item.h"
-#include "item_menu_icons.h"
+#include "item_icon.h"
 #include "constants/item.h"
 #include "constants/items.h"
 #include "battle_main.h"
@@ -38,8 +38,8 @@ enum {
 };
 
 static EWRAM_DATA u8 sItemMenuIconSpriteIds[SPR_COUNT] = {0};
-static EWRAM_DATA void *sItemIconTilesBuffer = NULL;
-static EWRAM_DATA void *sItemIconTilesBufferPadded = NULL;
+EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
+EWRAM_DATA u8 *gItemIcon4x4Buffer = NULL;
 
 static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite);
 static void SpriteCB_ShakeBagSprite(struct Sprite *sprite);
@@ -188,7 +188,7 @@ static const union AnimCmd *const sAnims_ItemIcon[] = {
     sAnim_ItemIcon
 };
 
-static const struct SpriteTemplate sSpriteTemplate_ItemIcon = {
+const struct SpriteTemplate gItemIconSpriteTemplate = {
     .tileTag = TAG_ITEM_ICON,
     .paletteTag = TAG_ITEM_ICON,
     .oam = &sOamData_ItemIcon,
@@ -294,17 +294,14 @@ void UpdateSwapLinePos(s16 x, u16 y)
 
 static bool8 TryAllocItemIconTilesBuffers(void)
 {
-    void ** ptr1, ** ptr2;
-
-    ptr1 = &sItemIconTilesBuffer;
-    *ptr1 = Alloc(0x120);
-    if (*ptr1 == NULL)
+    gItemIconDecompressionBuffer = Alloc(0x120);
+    if (gItemIconDecompressionBuffer == NULL)
         return FALSE;
-    ptr2 = &sItemIconTilesBufferPadded;
-    *ptr2 = AllocZeroed(0x200);
-    if (*ptr2 == NULL)
+
+    gItemIcon4x4Buffer = AllocZeroed(0x200);
+    if (gItemIcon4x4Buffer == NULL)
     {
-        Free(*ptr1);
+        Free(gItemIconDecompressionBuffer);
         return FALSE;
     }
     return TRUE;
@@ -328,9 +325,9 @@ u8 AddItemIconObject(u16 tilesTag, u16 paletteTag, u16 itemId)
     if (!TryAllocItemIconTilesBuffers())
         return MAX_SPRITES;
 
-    LZDecompressWram(GetItemIconPic(itemId), sItemIconTilesBuffer);
-    CopyItemIconPicTo4x4Buffer(sItemIconTilesBuffer, sItemIconTilesBufferPadded);
-    spriteSheet.data = sItemIconTilesBufferPadded;
+    LZDecompressWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+    spriteSheet.data = gItemIcon4x4Buffer;
     spriteSheet.size = 0x200;
     spriteSheet.tag = tilesTag;
     LoadSpriteSheet(&spriteSheet);
@@ -339,13 +336,13 @@ u8 AddItemIconObject(u16 tilesTag, u16 paletteTag, u16 itemId)
     spritePalette.tag = paletteTag;
     LoadCompressedSpritePalette(&spritePalette);
 
-    CpuCopy16(&sSpriteTemplate_ItemIcon, &template, sizeof(struct SpriteTemplate));
+    CpuCopy16(&gItemIconSpriteTemplate, &template, sizeof(struct SpriteTemplate));
     template.tileTag = tilesTag;
     template.paletteTag = paletteTag;
     spriteId = CreateSprite(&template, 0, 0, 0);
 
-    Free(sItemIconTilesBuffer);
-    Free(sItemIconTilesBufferPadded);
+    Free(gItemIconDecompressionBuffer);
+    Free(gItemIcon4x4Buffer);
     return spriteId;
 }
 
@@ -359,9 +356,9 @@ u8 AddItemIconObjectWithCustomObjectTemplate(const struct SpriteTemplate * origT
     if (!TryAllocItemIconTilesBuffers())
         return MAX_SPRITES;
 
-    LZDecompressWram(GetItemIconPic(itemId), sItemIconTilesBuffer);
-    CopyItemIconPicTo4x4Buffer(sItemIconTilesBuffer, sItemIconTilesBufferPadded);
-    spriteSheet.data = sItemIconTilesBufferPadded;
+    LZDecompressWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
+    spriteSheet.data = gItemIcon4x4Buffer;
     spriteSheet.size = 0x200;
     spriteSheet.tag = tilesTag;
     LoadSpriteSheet(&spriteSheet);
@@ -375,8 +372,8 @@ u8 AddItemIconObjectWithCustomObjectTemplate(const struct SpriteTemplate * origT
     template.paletteTag = paletteTag;
     spriteId = CreateSprite(&template, 0, 0, 0);
 
-    Free(sItemIconTilesBuffer);
-    Free(sItemIconTilesBufferPadded);
+    Free(gItemIconDecompressionBuffer);
+    Free(gItemIcon4x4Buffer);
     return spriteId;
 }
 

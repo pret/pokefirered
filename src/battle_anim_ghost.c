@@ -6,7 +6,7 @@
 #include "battle_anim.h"
 #include "decompress.h"
 #include "graphics.h"
-#include "item_menu_icons.h"
+#include "item_icon.h"
 #include "palette.h"
 #include "scanline_effect.h"
 #include "sound.h"

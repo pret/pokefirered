@@ -11,7 +11,7 @@
 #include "graphics.h"
 #include "item.h"
 #include "item_menu.h"
-#include "item_menu_icons.h"
+#include "item_icon.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "list_menu.h"

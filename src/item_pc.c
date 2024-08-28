@@ -7,6 +7,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_icon.h"
+#include "item_menu_icons.h"
 #include "list_menu.h"
 #include "item_pc.h"
 #include "item_use.h"

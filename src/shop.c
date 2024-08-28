@@ -13,6 +13,7 @@
 #include "task.h"
 #include "item.h"
 #include "item_menu.h"
+#include "item_menu_icons.h"
 #include "overworld.h"
 #include "field_fadetransition.h"
 #include "scanline_effect.h"

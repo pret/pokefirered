@@ -3280,15 +3280,12 @@ u8 CameraObjectGetFollowedObjectId(void)
 
 void CameraObjectReset2(void)
 {
+    struct Sprite *cameraObject = FindCameraObject();
 #ifdef UBFIX
-    struct Sprite* cameraObject = FindCameraObject();
-
     if (cameraObject == NULL)
         return;
-    cameraObject->data[1] = 2;
-#else
-    FindCameraObject()->data[1] = 2;
 #endif
+    cameraObject->data[1] = 2;
 }
 
 u8 CopySprite(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)

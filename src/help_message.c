@@ -59,7 +59,7 @@ void DrawHelpMessageWindowTilesById(u8 windowId)
     width = (u8)GetWindowAttribute(windowId, WINDOW_WIDTH);
     height = (u8)GetWindowAttribute(windowId, WINDOW_HEIGHT);
     
-    buffer = (u8 *)Alloc(32 * width * height);
+    buffer = (u8 *)Alloc(TILE_SIZE_4BPP * width * height);
 
     if (buffer != NULL)
     {
@@ -74,13 +74,13 @@ void DrawHelpMessageWindowTilesById(u8 windowId)
                 else // Middle row
                     tileId = 5; 
                 CpuCopy32(
-                    &ptr[tileId * 32],
-                    &buffer[(i * width + j) * 32],
-                    32
+                    &ptr[tileId * TILE_SIZE_4BPP],
+                    &buffer[(i * width + j) * TILE_SIZE_4BPP],
+                    TILE_SIZE_4BPP
                 );
             }
         }
-        CopyToWindowPixelBuffer(windowId, buffer, width * height * 32, 0);
+        CopyToWindowPixelBuffer(windowId, buffer, width * height * TILE_SIZE_4BPP, 0);
         Free(buffer);
     }
 }

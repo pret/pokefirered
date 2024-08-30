@@ -53,6 +53,8 @@
 #define BG_TILE_V_FLIP(n)   (0x800 + (n))
 #define BG_TILE_H_V_FLIP(n) (0xC00 + (n))
 
+#define NUM_BACKGROUNDS 4
+
 // text-mode BG
 #define OBJ_VRAM0      (void *)(VRAM + 0x10000)
 #define OBJ_VRAM0_SIZE 0x8000
@@ -66,11 +68,18 @@
 
 #define ROM_HEADER_SIZE   0xC0
 
+// Dimensions of a tile in pixels
+#define TILE_WIDTH  8
+#define TILE_HEIGHT 8
+
 #define DISPLAY_WIDTH  240
 #define DISPLAY_HEIGHT 160
 
-#define TILE_SIZE_4BPP 32
-#define TILE_SIZE_8BPP 64
+// Size of different tile formats in bytes
+#define TILE_SIZE(bpp)((bpp) * TILE_WIDTH * TILE_HEIGHT / 8)
+#define TILE_SIZE_1BPP TILE_SIZE(1) // 8
+#define TILE_SIZE_4BPP TILE_SIZE(4) // 32
+#define TILE_SIZE_8BPP TILE_SIZE(8) // 64
 
 #define BG_TILE_ADDR_4BPP(n)   (void *)(BG_VRAM + (TILE_SIZE_4BPP * (n)))
 

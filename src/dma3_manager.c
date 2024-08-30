@@ -1,15 +1,13 @@
 #include "global.h"
 #include "dma3.h"
 
-#define MAX_DMA_REQUESTS 128
-
 static struct {
     /* 0x00 */ const u8 *src;
     /* 0x04 */ u8 *dest;
     /* 0x08 */ u16 size;
     /* 0x0A */ u16 mode;
     /* 0x0C */ u32 value;
-} gDma3Requests[128];
+} gDma3Requests[MAX_DMA_REQUESTS];
 
 static volatile bool8 gDma3ManagerLocked;
 static u8 gDma3RequestCursor;
@@ -111,11 +109,11 @@ s16 RequestDma3Copy(const void *src, void *dest, u16 size, u8 mode)
             gDma3ManagerLocked = FALSE;
             return (s16)cursor;
         }
-        if(++cursor >= 0x80) // loop back to start.
+        if(++cursor >= MAX_DMA_REQUESTS) // loop back to start.
         {
             cursor = 0;
         }
-        if(++var >= 0x80) // max checks were made. all resulted in failure.
+        if(++var >= MAX_DMA_REQUESTS) // max checks were made. all resulted in failure.
         {
             break;
         }
@@ -149,11 +147,11 @@ s16 RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
             gDma3ManagerLocked = FALSE;
             return (s16)cursor;
         }
-        if(++cursor >= 0x80) // loop back to start.
+        if(++cursor >= MAX_DMA_REQUESTS) // loop back to start.
         {
             cursor = 0;
         }
-        if(++var >= 0x80) // max checks were made. all resulted in failure.
+        if(++var >= MAX_DMA_REQUESTS) // max checks were made. all resulted in failure.
         {
             break;
         }
@@ -168,7 +166,7 @@ s16 WaitDma3Request(s16 index)
 
     if (index == -1)
     {
-        for (; current < 0x80; current ++)
+        for (; current < MAX_DMA_REQUESTS; current ++)
             if (gDma3Requests[current].size)
                 return -1;
 

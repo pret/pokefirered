@@ -589,7 +589,9 @@
 #define B_ANIM_ROCK_THROW               (B_ANIM_SILPH_SCOPED    + 1)
 #define B_ANIM_SAFARI_REACTION          (B_ANIM_ROCK_THROW      + 1)
 
-// special animations table (gBattleAnims_Special)
+#define NUM_B_ANIMS_GENERAL             (B_ANIM_SAFARI_REACTION + 1)
+
+// special animations table (sBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
 #define B_ANIM_SWITCH_OUT_PLAYER_MON    1
 #define B_ANIM_SWITCH_OUT_OPPONENT_MON  2
@@ -599,7 +601,9 @@
 #define B_ANIM_MON_TO_SUBSTITUTE        6
 #define B_ANIM_CRITICAL_CAPTURE_THROW   7
 
-// status animation table (gBattleAnims_StatusConditions)
+#define NUM_B_ANIMS_SPECIAL             8
+
+// status animation table (sBattleAnims_StatusConditions)
 #define B_ANIM_STATUS_PSN               0
 #define B_ANIM_STATUS_CONFUSION         1
 #define B_ANIM_STATUS_BRN               2
@@ -610,6 +614,8 @@
 #define B_ANIM_STATUS_CURSED            7
 #define B_ANIM_STATUS_NIGHTMARE         8
 #define B_ANIM_STATUS_WRAPPED           9 // does not actually exist
+
+#define NUM_B_ANIMS_STATUS              10
 
 // Most tasks return a value to gBattleAnimArgs[7].
 #define ARG_RET_ID 7

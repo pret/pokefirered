@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_anim_scripts.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_bg.h"
@@ -21,11 +22,7 @@
 */
 
 #define ANIM_SPRITE_INDEX_COUNT 8
-
-extern const u16 gMovesWithQuietBGM[];
-extern const u8 *const gBattleAnims_General[];
-extern const u8 *const gBattleAnims_Special[];
-extern const u8 *const gBattleAnims_StatusConditions[];
+#define QUIET_MOVES_END 0xFFFF
 
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
 EWRAM_DATA static const u8 *sBattleAnimScriptRetAddr = NULL;
@@ -178,6 +175,101 @@ static void (*const sScriptCmdTable[])(void) =
     Cmd_createdragondartsprite,      // 0x34
 };
 
+static const u16 sMovesWithQuietBGM[] =
+{
+    MOVE_SING,
+    MOVE_PERISH_SONG,
+    MOVE_GRASS_WHISTLE
+};
+
+static const u8* const sBattleAnims_StatusConditions[NUM_B_ANIMS_STATUS] =
+{
+    [B_ANIM_STATUS_PSN]         = Status_Poison,
+    [B_ANIM_STATUS_CONFUSION]   = Status_Confusion,
+    [B_ANIM_STATUS_BRN]         = Status_Burn,
+    [B_ANIM_STATUS_INFATUATION] = Status_Infatuation,
+    [B_ANIM_STATUS_SLP]         = Status_Sleep,
+    [B_ANIM_STATUS_PRZ]         = Status_Paralysis,
+    [B_ANIM_STATUS_FRZ]         = Status_Freeze,
+    [B_ANIM_STATUS_CURSED]      = Status_Curse,
+    [B_ANIM_STATUS_NIGHTMARE]   = Status_Nightmare,
+    [B_ANIM_STATUS_WRAPPED]     = Status_Powder,
+};
+
+static const u8* const sBattleAnims_General[NUM_B_ANIMS_GENERAL] =
+{
+    [B_ANIM_STATS_CHANGE]           = General_StatsChange,
+    [B_ANIM_SUBSTITUTE_FADE]        = General_SubstituteFade,
+    [B_ANIM_SUBSTITUTE_APPEAR]      = General_SubstituteAppear,
+    [B_ANIM_BAIT_THROW]             = General_BaitThrow,
+    [B_ANIM_ITEM_KNOCKOFF]          = General_ItemKnockoff,
+    [B_ANIM_TURN_TRAP]              = General_TurnTrap,
+    [B_ANIM_HELD_ITEM_EFFECT]       = General_HeldItemEffect,
+    [B_ANIM_SMOKEBALL_ESCAPE]       = General_SmokeballEscape,
+    [B_ANIM_HANGED_ON]              = General_HangedOn,
+    [B_ANIM_RAIN_CONTINUES]         = General_Rain,
+    [B_ANIM_SUN_CONTINUES]          = General_Sun,
+    [B_ANIM_SANDSTORM_CONTINUES]    = General_Sandstorm,
+    [B_ANIM_HAIL_CONTINUES]         = General_Hail,
+    [B_ANIM_LEECH_SEED_DRAIN]       = General_LeechSeedDrain,
+    [B_ANIM_MON_HIT]                = General_MonHit,
+    [B_ANIM_ITEM_STEAL]             = General_ItemSteal,
+    [B_ANIM_SNATCH_MOVE]            = General_SnatchMove,
+    [B_ANIM_FUTURE_SIGHT_HIT]       = General_FutureSightHit,
+    [B_ANIM_DOOM_DESIRE_HIT]        = General_DoomDesireHit,
+    [B_ANIM_FOCUS_PUNCH_SETUP]      = General_FocusPunchSetUp,
+    [B_ANIM_INGRAIN_HEAL]           = General_IngrainHeal,
+    [B_ANIM_WISH_HEAL]              = General_WishHeal,
+    [B_ANIM_MEGA_EVOLUTION]         = General_MegaEvolution,
+    [B_ANIM_ILLUSION_OFF]           = General_IllusionOff,
+    [B_ANIM_FORM_CHANGE]            = General_FormChange,
+    [B_ANIM_SLIDE_OFFSCREEN]        = General_SlideOffScreen,
+    [B_ANIM_RESTORE_BG]             = General_RestoreBg,
+    [B_ANIM_TOTEM_FLARE]            = General_TotemFlare,
+    [B_ANIM_GULP_MISSILE]           = General_GulpMissile,
+    [B_ANIM_STRONG_WINDS]           = General_StrongWinds,
+    [B_ANIM_PRIMAL_REVERSION]       = General_PrimalReversion,
+    [B_ANIM_AQUA_RING_HEAL]         = General_AquaRingHeal,
+    [B_ANIM_BEAK_BLAST_SETUP]       = General_BeakBlastSetUp,
+    [B_ANIM_SHELL_TRAP_SETUP]       = General_ShellTrapSetUp,
+    [B_ANIM_ZMOVE_ACTIVATE]         = General_ZMoveActivate,
+    [B_ANIM_AFFECTION_HANGED_ON]    = General_AffectionHangedOn,
+    [B_ANIM_SNOW_CONTINUES]         = General_Snow,
+    [B_ANIM_ULTRA_BURST]            = General_UltraBurst,
+    [B_ANIM_SALT_CURE_DAMAGE]       = General_SaltCureDamage,
+    [B_ANIM_DYNAMAX_GROWTH]         = General_DynamaxGrowth,
+    [B_ANIM_MAX_SET_WEATHER]        = General_SetWeather,
+    [B_ANIM_SYRUP_BOMB_SPEED_DROP]  = General_SyrupBombSpeedDrop,
+    [B_ANIM_RAINBOW]                = General_Rainbow,
+    [B_ANIM_SEA_OF_FIRE]            = General_SeaOfFire,
+    [B_ANIM_SWAMP]                  = General_Swamp,
+    [B_ANIM_TRICK_ROOM]             = General_TrickRoom,
+    [B_ANIM_WONDER_ROOM]            = General_WonderRoom,
+    [B_ANIM_MAGIC_ROOM]             = General_MagicRoom,
+    [B_ANIM_TAILWIND]               = General_Tailwind,
+    [B_ANIM_FOG_CONTINUES]          = General_Fog,
+    [B_ANIM_TERA_CHARGE]            = General_TeraCharge,
+    [B_ANIM_TERA_ACTIVATE]          = General_TeraActivate,
+    [B_ANIM_SIMPLE_HEAL]            = General_SimpleHeal,
+    [B_ANIM_MON_SCARED]             = General_MonScared,
+	[B_ANIM_GHOST_GET_OUT]          = General_GhostGetOut,
+	[B_ANIM_SILPH_SCOPED]           = General_SilphScoped,
+	[B_ANIM_ROCK_THROW]             = General_SafariRockThrow,
+	[B_ANIM_SAFARI_REACTION]        = General_SafariReaction,
+};
+
+static const u8* const sBattleAnims_Special[NUM_B_ANIMS_SPECIAL] =
+{
+    [B_ANIM_LVL_UP]                     = Special_LevelUp,
+    [B_ANIM_SWITCH_OUT_PLAYER_MON]      = Special_SwitchOutPlayerMon,
+    [B_ANIM_SWITCH_OUT_OPPONENT_MON]    = Special_SwitchOutOpponentMon,
+    [B_ANIM_BALL_THROW]                 = Special_BallThrow,
+    [B_ANIM_BALL_THROW_WITH_TRAINER]    = Special_BallThrowWithTrainer,
+    [B_ANIM_SUBSTITUTE_TO_MON]          = Special_SubstituteToMon,
+    [B_ANIM_MON_TO_SUBSTITUTE]          = Special_MonToSubstitute,
+    [B_ANIM_CRITICAL_CAPTURE_THROW]     = Special_CriticalCaptureBallThrow,
+};
+
 void ClearBattleAnimationVars(void)
 {
     s32 i;
@@ -290,16 +382,16 @@ void LaunchBattleAnimation(u32 animType, u16 animId)
     {
     case ANIM_TYPE_GENERAL:
     default:
-        sBattleAnimScriptPtr = gBattleAnims_General[animId];
+        sBattleAnimScriptPtr = sBattleAnims_General[animId];
         break;
     case ANIM_TYPE_MOVE:
         sBattleAnimScriptPtr = GetMoveAnimationScript(animId);
         break;
     case ANIM_TYPE_STATUS:
-        sBattleAnimScriptPtr = gBattleAnims_StatusConditions[animId];
+        sBattleAnimScriptPtr = sBattleAnims_StatusConditions[animId];
         break;
     case ANIM_TYPE_SPECIAL:
-        sBattleAnimScriptPtr = gBattleAnims_Special[animId];
+        sBattleAnimScriptPtr = sBattleAnims_Special[animId];
         break;
     }
     gAnimScriptActive = TRUE;
@@ -311,9 +403,9 @@ void LaunchBattleAnimation(u32 animType, u16 animId)
 
     if (animType == ANIM_TYPE_MOVE)
     {
-        for (i = 0; gMovesWithQuietBGM[i] != 0xFFFF; i++)
+        for (i = 0; i < ARRAY_COUNT(sMovesWithQuietBGM); i++)
         {
-            if (animId == gMovesWithQuietBGM[i])
+            if (animId == sMovesWithQuietBGM[i])
             {
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 128);
                 break;

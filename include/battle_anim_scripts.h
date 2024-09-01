@@ -1,6 +1,7 @@
 #ifndef GUARD_BATTLE_ANIM_SCRIPTS_H
 #define GUARD_BATTLE_ANIM_SCRIPTS_H
 
+// move animations
 extern const u8 Move_NONE[];
 extern const u8 Move_POUND[];
 extern const u8 Move_KARATE_CHOP[];
@@ -936,5 +937,88 @@ extern const u8 Move_G_MAX_STEELSURGE[];
 extern const u8 Move_G_MAX_DEPLETION[];
 extern const u8 Move_G_MAX_ONE_BLOW[];
 extern const u8 Move_G_MAX_RAPID_FLOW[];
+
+// status animations
+extern const u8 Status_Poison[];
+extern const u8 Status_Confusion[];
+extern const u8 Status_Burn[];
+extern const u8 Status_Infatuation[];
+extern const u8 Status_Sleep[];
+extern const u8 Status_Paralysis[];
+extern const u8 Status_Freeze[];
+extern const u8 Status_Curse[];
+extern const u8 Status_Nightmare[];
+extern const u8 Status_Powder[];
+
+// general animations
+extern const u8 General_StatsChange[];
+extern const u8 General_SubstituteFade[];
+extern const u8 General_SubstituteAppear[];
+extern const u8 General_BaitThrow[];
+extern const u8 General_ItemKnockoff[];
+extern const u8 General_TurnTrap[];
+extern const u8 General_HeldItemEffect[];
+extern const u8 General_SmokeballEscape[];
+extern const u8 General_HangedOn[];
+extern const u8 General_Rain[];
+extern const u8 General_Sun[];
+extern const u8 General_Sandstorm[];
+extern const u8 General_Hail[];
+extern const u8 General_LeechSeedDrain[];
+extern const u8 General_MonHit[];
+extern const u8 General_ItemSteal[];
+extern const u8 General_SnatchMove[];
+extern const u8 General_FutureSightHit[];
+extern const u8 General_DoomDesireHit[];
+extern const u8 General_FocusPunchSetUp[];
+extern const u8 General_IngrainHeal[];
+extern const u8 General_WishHeal[];
+extern const u8 General_MegaEvolution[];
+extern const u8 General_IllusionOff[];
+extern const u8 General_FormChange[];
+extern const u8 General_SlideOffScreen[];
+extern const u8 General_RestoreBg[];
+extern const u8 General_TotemFlare[];
+extern const u8 General_GulpMissile[];
+extern const u8 General_StrongWinds[];
+extern const u8 General_PrimalReversion[];
+extern const u8 General_AquaRingHeal[];
+extern const u8 General_BeakBlastSetUp[];
+extern const u8 General_ShellTrapSetUp[];
+extern const u8 General_ZMoveActivate[];
+extern const u8 General_AffectionHangedOn[];
+extern const u8 General_Snow[];
+extern const u8 General_UltraBurst[];
+extern const u8 General_SaltCureDamage[];
+extern const u8 General_DynamaxGrowth[];
+extern const u8 General_SetWeather[];
+extern const u8 General_SyrupBombSpeedDrop[];
+extern const u8 General_Rainbow[];
+extern const u8 General_SeaOfFire[];
+extern const u8 General_Swamp[];
+extern const u8 General_TrickRoom[];
+extern const u8 General_WonderRoom[];
+extern const u8 General_MagicRoom[];
+extern const u8 General_Tailwind[];
+extern const u8 General_Fog[];
+extern const u8 General_TeraCharge[];
+extern const u8 General_TeraActivate[];
+extern const u8 General_SimpleHeal[];
+extern const u8 General_MonScared[];
+extern const u8 General_GhostGetOut[];
+extern const u8 General_SilphScoped[];
+extern const u8 General_SafariRockThrow[];
+extern const u8 General_SafariReaction[];
+
+// special animations
+extern const u8 Special_LevelUp[];
+extern const u8 Special_SwitchOutPlayerMon[];
+extern const u8 Special_SwitchOutOpponentMon[];
+extern const u8 Special_BallThrow[];
+extern const u8 Special_BallThrowWithTrainer[];
+extern const u8 Special_SubstituteToMon[];
+extern const u8 Special_MonToSubstitute[];
+extern const u8 Special_CriticalCaptureBallThrow[];
+
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_H

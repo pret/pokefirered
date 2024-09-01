@@ -948,7 +948,6 @@ extern const u8 Status_Paralysis[];
 extern const u8 Status_Freeze[];
 extern const u8 Status_Curse[];
 extern const u8 Status_Nightmare[];
-extern const u8 Status_Powder[];
 
 // general animations
 extern const u8 General_StatsChange[];

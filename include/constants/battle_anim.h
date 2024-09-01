@@ -613,9 +613,8 @@
 #define B_ANIM_STATUS_FRZ               6
 #define B_ANIM_STATUS_CURSED            7
 #define B_ANIM_STATUS_NIGHTMARE         8
-#define B_ANIM_STATUS_WRAPPED           9 // does not actually exist
 
-#define NUM_B_ANIMS_STATUS              10
+#define NUM_B_ANIMS_STATUS              9
 
 // Most tasks return a value to gBattleAnimArgs[7].
 #define ARG_RET_ID 7

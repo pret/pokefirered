@@ -193,7 +193,6 @@ static const u8* const sBattleAnims_StatusConditions[NUM_B_ANIMS_STATUS] =
     [B_ANIM_STATUS_FRZ]         = Status_Freeze,
     [B_ANIM_STATUS_CURSED]      = Status_Curse,
     [B_ANIM_STATUS_NIGHTMARE]   = Status_Nightmare,
-    [B_ANIM_STATUS_WRAPPED]     = Status_Powder,
 };
 
 static const u8* const sBattleAnims_General[NUM_B_ANIMS_GENERAL] =

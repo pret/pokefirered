@@ -214,8 +214,6 @@ void InitAndLaunchChosenStatusAnimation(u32 battler, bool8 isStatus2, u32 status
             LaunchStatusAnimation(battler, B_ANIM_STATUS_CURSED);
         else if (status & STATUS2_NIGHTMARE)
             LaunchStatusAnimation(battler, B_ANIM_STATUS_NIGHTMARE);
-        else if (status & STATUS2_WRAPPED)
-            LaunchStatusAnimation(battler, B_ANIM_STATUS_WRAPPED); // this animation doesn't actually exist
         else // no animation
             gBattleSpritesDataPtr->healthBoxesData[battler].statusAnimActive = 0;
     }

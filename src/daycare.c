@@ -12,7 +12,6 @@
 #include "constants/moves.h"
 #include "level_caps.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "script.h"
 #include "strings.h"
 #include "party_menu.h"
@@ -2214,7 +2213,7 @@ static void CB2_EggHatch_1(void)
         if (!IsTextPrinterActive(sEggHatchData->windowId))
         {
             LoadUserWindowBorderGfx_(sEggHatchData->windowId, 0x140, BG_PLTT_ID(14));
-            CreateYesNoMenu(&sYesNoWinTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x140, 14, 0);
+            CreateYesNoMenuAtPos(&sYesNoWinTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x140, 14, 0);
             sEggHatchData->CB2_state++;
         }
         break;

@@ -5,7 +5,6 @@
 #include "text_window.h"
 #include "money.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
 #include "menu.h"
 #include "shop.h"
 #include "palette.h"
@@ -185,7 +184,7 @@ void BuyMenuPrint(u8 windowId, u8 font, const u8 *text, u8 x, u8 y, u8 letterSpa
 
 void BuyMenuDisplayMessage(u8 taskId, const u8 *text, TaskFunc callback)
 {
-    DisplayMessageAndContinueTask(taskId, 2, 0x13, 0xE, GetMartFontId(), GetTextSpeedSetting(), text, callback);
+    DisplayMessageAndContinueTask(taskId, 2, 0x13, 0xE, GetMartFontId(), GetPlayerTextSpeedDelay(), text, callback);
     ScheduleBgCopyTilemapToVram(0);
 }
 

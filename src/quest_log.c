@@ -22,7 +22,6 @@
 #include "quest_log_objects.h"
 #include "quest_log_player.h"
 #include "quest_log.h"
-#include "new_menu_helpers.h"
 #include "strings.h"
 #include "constants/event_objects.h"
 #include "constants/maps.h"

@@ -8,7 +8,6 @@
 #include "strings.h"
 #include "menu.h"
 #include "heal_location.h"
-#include "new_menu_helpers.h"
 #include "event_object_movement.h"
 #include "field_fadetransition.h"
 #include "event_scripts.h"

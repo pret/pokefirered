@@ -3,7 +3,6 @@
 #include "dynamic_placeholder_text_util.h"
 #include "graphics.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "scanline_effect.h"
 #include "strings.h"
 #include "text_window.h"
@@ -955,7 +954,7 @@ static void PlaceYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
         AddTextPrinterParameterized(sWork->yesNoMenuWinId, FONT_NORMAL, gText_Yes, 8, 2, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(sWork->yesNoMenuWinId, FONT_NORMAL, gText_No, 8, 16, TEXT_SKIP_DRAW, NULL);
         DrawTextBorderOuter(sWork->yesNoMenuWinId, 1, 13);
-        Menu_InitCursor(sWork->yesNoMenuWinId, FONT_NORMAL, 0, 2, 14, 2, initialCursorPos);
+        InitMenuNormal(sWork->yesNoMenuWinId, FONT_NORMAL, 0, 2, 14, 2, initialCursorPos);
     }
 }
 
@@ -1195,8 +1194,8 @@ static void PrintKeyboardSwapTextsOnWin3(void)
 {
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     DrawTextBorderOuter(3, 1, 13);
-    PrintMenuTable(3, FONT_NORMAL, 14, 5, sKeyboardSwapTexts);
-    Menu_InitCursor(3, FONT_NORMAL, 0, 0, 14, 5, GetCurrentKeyboardPage());
+    PrintMenuActionTextsAtTop(3, FONT_NORMAL, 14, 5, sKeyboardSwapTexts);
+    InitMenuNormal(3, FONT_NORMAL, 0, 0, 14, 5, GetCurrentKeyboardPage());
     PutWindowTilemap(3);
 }
 

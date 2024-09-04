@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gflib.h"
 #include "task.h"
-#include "new_menu_helpers.h"
 #include "scanline_effect.h"
 #include "m4a.h"
 #include "dynamic_placeholder_text_util.h"

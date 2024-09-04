@@ -22,7 +22,6 @@
 #include "menu.h"
 #include "mystery_gift.h"
 #include "mystery_gift_menu.h"
-#include "new_menu_helpers.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "pokemon_jump.h"
@@ -3405,7 +3404,7 @@ static u8 CreateTask_ListenForWonderDistributor(struct RfuIncomingPlayerList * m
 
 static bool32 UR_PrintFieldMessage(const u8 *src)
 {
-    LoadStdWindowFrameGfx();
+    LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, 1);
     StringExpandPlaceholders(gStringVar4, src);
     AddTextPrinterWithCustomSpeedForMessage(FALSE, 1);
@@ -3414,7 +3413,7 @@ static bool32 UR_PrintFieldMessage(const u8 *src)
 
 static bool32 UR_RunTextPrinters(void)
 {
-    if (!RunTextPrinters_CheckPrinter0Active())
+    if (!RunTextPrintersAndIsPrinter0Active())
         return TRUE;
     else
         return FALSE;
@@ -3425,14 +3424,14 @@ static bool8 PrintOnTextbox(u8 *textState, const u8 *str)
     switch (*textState)
     {
     case 0:
-        LoadStdWindowFrameGfx();
+        LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, 1);
         StringExpandPlaceholders(gStringVar4, str);
-        AddTextPrinterForMessage(TRUE);
+        AddTextPrinterForMessage_2(TRUE);
         (*textState)++;
         break;
     case 1:
-        if (!RunTextPrinters_CheckPrinter0Active())
+        if (!RunTextPrintersAndIsPrinter0Active())
         {
             *textState = 0;
             return TRUE;

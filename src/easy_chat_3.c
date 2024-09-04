@@ -5,7 +5,6 @@
 #include "easy_chat.h"
 #include "graphics.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "strings.h"
 #include "text_window.h"
 
@@ -1402,7 +1401,7 @@ static void PrintECInterfaceTextById(u8 direction)
 
 static void EC_CreateYesNoMenuWithInitialCursorPos(u8 initialCursorPos)
 {
-    CreateYesNoMenu(&sEasyChatYesNoWindowTemplate, FONT_NORMAL_COPY_1, 0, 2, 0x001, 14, initialCursorPos);
+    CreateYesNoMenuAtPos(&sEasyChatYesNoWindowTemplate, FONT_NORMAL_COPY_1, 0, 2, 0x001, 14, initialCursorPos);
 }
 
 static void CreatePhraseFrameWindow(void)

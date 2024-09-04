@@ -10,7 +10,6 @@
 #include "link_rfu.h"
 #include "menu.h"
 #include "minigame_countdown.h"
-#include "new_menu_helpers.h"
 #include "pokemon_jump.h"
 #include "random.h"
 #include "save.h"
@@ -3430,7 +3429,7 @@ static void CreatePokeJumpYesNoMenu(u16 left, u16 top, u8 cursorPos)
     window.paletteNum = 2;
     window.baseBlock = 0x2B;
 
-    CreateYesNoMenu(&window, FONT_NORMAL, 0, 2, 0x00a, 13, a);
+    CreateYesNoMenuAtPos(&window, FONT_NORMAL, 0, 2, 0x00a, 13, a);
 }
 
 // "Points" for jump score and "times" for number of jumps in a row

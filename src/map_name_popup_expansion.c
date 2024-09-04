@@ -8,7 +8,6 @@
 #include "main.h"
 #include "menu.h"
 #include "map_name_popup_expansion.h"
-#include "new_menu_helpers.h"
 #include "palette.h"
 #include "region_map.h"
 #include "rtc.h"

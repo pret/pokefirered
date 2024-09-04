@@ -5,7 +5,6 @@
 #include "item.h"
 #include "item_icon.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "pokemon_icon.h"
 #include "pokemon_storage_system_internal.h"
 #include "text_window.h"

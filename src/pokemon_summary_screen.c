@@ -11,7 +11,6 @@
 #include "overworld.h"
 #include "constants/songs.h"
 #include "strings.h"
-#include "new_menu_helpers.h"
 #include "menu.h"
 #include "constants/items.h"
 #include "pokemon_sprite_visualizer.h"

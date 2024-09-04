@@ -6,7 +6,6 @@
 #include "text_window.h"
 #include "menu.h"
 #include "help_system.h"
-#include "new_menu_helpers.h"
 #include "event_scripts.h"
 #include "scanline_effect.h"
 #include "pokeball.h"
@@ -758,7 +757,7 @@ static void Task_NewGameScene(u8 taskId)
         LoadPalette(GetTextWindowPalette(2) + 15, BG_PLTT_ID(0), PLTT_SIZEOF(1));
         break;
     case 5:
-        sOakSpeechResources->textSpeed = GetTextSpeedSetting();
+        sOakSpeechResources->textSpeed = GetPlayerTextSpeedDelay();
         gTextFlags.canABSpeedUpPrint = TRUE;
         DecompressAndCopyTileDataToVram(1, sControlsGuide_PikachuIntro_Background_Tiles, 0, 0, 0);
         break;
@@ -770,7 +769,7 @@ static void Task_NewGameScene(u8 taskId)
         CopyBgTilemapBufferToVram(1);
         break;
     case 7:
-        CreateTopBarWindowLoadPalette(0, 30, 0, 13, 0x1C4);
+        HofPCTopBar_AddWindow(0, 30, 0, 13, 0x1C4);
         FillBgTilemapBufferRect_Palette0(1, 0xD00F, 0,  0, 30, 2);
         FillBgTilemapBufferRect_Palette0(1, 0xD002, 0,  2, 30, 1);
         FillBgTilemapBufferRect_Palette0(1, 0xD00E, 0, 19, 30, 1);
@@ -796,7 +795,7 @@ static void Task_NewGameScene(u8 taskId)
 
 static void ControlsGuide_LoadPage1(void)
 {
-    TopBarWindowPrintTwoStrings(gText_Controls, gText_ABUTTONNext, FALSE, 0, TRUE);
+    HofPCTopBar_PrintPair(gText_Controls, gText_ABUTTONNext, FALSE, 0, TRUE);
     sOakSpeechResources->windowIds[0] = AddWindow(sControlsGuide_WindowTemplates[sOakSpeechResources->currentPage]);
     PutWindowTilemap(sOakSpeechResources->windowIds[0]);
     FillWindowPixelBuffer(sOakSpeechResources->windowIds[0], PIXEL_FILL(0));
@@ -816,7 +815,7 @@ static void Task_ControlsGuide_LoadPage(u8 taskId)
     }
     else
     {
-        TopBarWindowPrintString(gText_ABUTTONNext_BBUTTONBack, 0, TRUE);
+        HofPCTopBar_Print(gText_ABUTTONNext_BBUTTONBack, 0, TRUE);
         for (currWindow = CONTROLS_GUIDE_PAGES_2_3_WINDOW_TOP; currWindow < NUM_CONTROLS_GUIDE_PAGES_2_3_WINDOWS; currWindow++)
         {
             sOakSpeechResources->windowIds[currWindow] = AddWindow(&sControlsGuide_WindowTemplates[sOakSpeechResources->currentPage][currWindow]);
@@ -950,8 +949,8 @@ static void Task_PikachuIntro_LoadPage1(u8 taskId)
     else
     {
         PlayBGM(MUS_NEW_GAME_INTRO);
-        ClearTopBarWindow();
-        TopBarWindowPrintString(gText_ABUTTONNext, 0, 1);
+        HofPCTopBar_Clear();
+        HofPCTopBar_Print(gText_ABUTTONNext, 0, 1);
         sOakSpeechResources->pikachuIntroTilemap = MallocAndDecompress(sPikachuIntro_Background_Tilemap, &size);
         CopyToBgTilemapBufferRect(1, sOakSpeechResources->pikachuIntroTilemap, 0, 2, 30, 19);
         CopyBgTilemapBufferToVram(1);
@@ -1026,13 +1025,13 @@ static void Task_PikachuIntro_HandleInput(u8 taskId)
             AddTextPrinterParameterized4(tTextboxWindowId, FONT_NORMAL, 3, 5, 1, 0, sTextColor_DarkGray, 0, sPikachuIntro_Strings[sOakSpeechResources->currentPage]);
             if (sOakSpeechResources->currentPage == PIKACHU_INTRO_PAGE_1)
             {
-                ClearTopBarWindow();
-                TopBarWindowPrintString(gText_ABUTTONNext, 0, 1);
+                HofPCTopBar_Clear();
+                HofPCTopBar_Print(gText_ABUTTONNext, 0, 1);
             }
             else
             {
-                ClearTopBarWindow();
-                TopBarWindowPrintString(gText_ABUTTONNext_BBUTTONBack, 0, 1);
+                HofPCTopBar_Clear();
+                HofPCTopBar_Print(gText_ABUTTONNext_BBUTTONBack, 0, 1);
             }
             gMain.state++;
         }
@@ -1082,7 +1081,7 @@ static void Task_PikachuIntro_Clear(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
-        DestroyTopBarWindow();
+        HofPCTopBar_RemoveWindow();
         FillWindowPixelBuffer(tTextboxWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(tTextboxWindowId);
         CopyWindowToVram(tTextboxWindowId, COPYWIN_FULL);
@@ -1305,7 +1304,7 @@ static void Task_OakSpeech_ShowGenderOptions(u8 taskId)
     {
         gTasks[taskId].tMenuWindowId = AddWindow(&sIntro_WindowTemplates[WIN_INTRO_BOYGIRL]);
         PutWindowTilemap(gTasks[taskId].tMenuWindowId);
-        DrawStdFrameWithCustomTileAndPalette(gTasks[taskId].tMenuWindowId, TRUE, GetStdWindowBaseTileNum(), 14);
+        DrawStdFrameWithCustomTileAndPalette(gTasks[taskId].tMenuWindowId, TRUE, GetStandardFrameBaseTileNum(), 14);
         FillWindowPixelBuffer(gTasks[taskId].tMenuWindowId, PIXEL_FILL(1));
         sOakSpeechResources->textColor[0] = 1;
         sOakSpeechResources->textColor[1] = 2;
@@ -1315,7 +1314,7 @@ static void Task_OakSpeech_ShowGenderOptions(u8 taskId)
         sOakSpeechResources->textColor[1] = 2;
         sOakSpeechResources->textColor[2] = 3;
         AddTextPrinterParameterized3(gTasks[taskId].tMenuWindowId, FONT_NORMAL, 8, 17, sOakSpeechResources->textColor, 0, gText_Girl);
-        Menu_InitCursor(gTasks[taskId].tMenuWindowId, FONT_NORMAL, 0, 1, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, 2, 0);
+        InitMenuNormal(gTasks[taskId].tMenuWindowId, FONT_NORMAL, 0, 1, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, 2, 0);
         CopyWindowToVram(gTasks[taskId].tMenuWindowId, COPYWIN_FULL);
         gTasks[taskId].func = Task_OakSpeech_HandleGenderInput;
     }
@@ -1323,7 +1322,7 @@ static void Task_OakSpeech_ShowGenderOptions(u8 taskId)
 
 static void Task_OakSpeech_HandleGenderInput(u8 taskId)
 {
-    s8 input = Menu_ProcessInputNoWrapAround();
+    s8 input = Menu_ProcessInputNoWrap();
     switch (input)
     {
     case 0: // BOY
@@ -1495,7 +1494,7 @@ static void Task_OakSpeech_ConfirmName(u8 taskId)
             }
             else
             {
-                CreateYesNoMenu(&sIntro_WindowTemplates[WIN_INTRO_YESNO], FONT_NORMAL, 0, 2, GetStdWindowBaseTileNum(), 14, 0);
+                CreateYesNoMenuAtPos(&sIntro_WindowTemplates[WIN_INTRO_YESNO], FONT_NORMAL, 0, 2, GetStandardFrameBaseTileNum(), 14, 0);
                 gTasks[taskId].func = Task_OakSpeech_HandleConfirmNameInput;
             }
         }
@@ -2137,7 +2136,7 @@ static void PrintNameChoiceOptions(u8 taskId, u8 hasPlayerBeenNamed)
 
     tMenuWindowId = AddWindow(&sIntro_WindowTemplates[WIN_INTRO_NAMES]);
     PutWindowTilemap(tMenuWindowId);
-    DrawStdFrameWithCustomTileAndPalette(tMenuWindowId, 1, GetStdWindowBaseTileNum(), 14);
+    DrawStdFrameWithCustomTileAndPalette(tMenuWindowId, 1, GetStandardFrameBaseTileNum(), 14);
     FillWindowPixelBuffer(gTasks[taskId].tMenuWindowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(tMenuWindowId, FONT_NORMAL, gOtherText_NewName, 8, 1, 0, NULL);
     if (hasPlayerBeenNamed == FALSE)
@@ -2146,7 +2145,7 @@ static void PrintNameChoiceOptions(u8 taskId, u8 hasPlayerBeenNamed)
         textPtrs = sRivalNameChoices;
     for (i = 0; i < ARRAY_COUNT(sRivalNameChoices); i++)
         AddTextPrinterParameterized(tMenuWindowId, FONT_NORMAL, textPtrs[i], 8, 16 * (i + 1) + 1, 0, NULL);
-    Menu_InitCursor(tMenuWindowId, FONT_NORMAL, 0, 1, 16, 5, 0);
+    InitMenuNormal(tMenuWindowId, FONT_NORMAL, 0, 1, 16, 5, 0);
     CopyWindowToVram(tMenuWindowId, COPYWIN_FULL);
 }
 

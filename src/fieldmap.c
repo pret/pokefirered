@@ -2,7 +2,7 @@
 #include "gflib.h"
 #include "overworld.h"
 #include "script.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "quest_log.h"
 #include "fieldmap.h"
 

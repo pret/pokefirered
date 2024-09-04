@@ -22,7 +22,6 @@
 #include "menu.h"
 #include "menu_indicators.h"
 #include "money.h"
-#include "new_menu_helpers.h"
 #include "overworld.h"
 #include "party_menu.h"
 #include "pokemon_storage_system.h"
@@ -1022,7 +1021,7 @@ void DisplayItemMessageInBag(u8 taskId, u8 fontId, const u8 * string, TaskFunc f
     s16 *data = gTasks[taskId].data;
     data[10] = OpenBagWindow(5);
     FillWindowPixelBuffer(data[10], PIXEL_FILL(1));
-    DisplayMessageAndContinueTask(taskId, data[10], 0x06D, 0x0D, fontId, GetTextSpeedSetting(), string, followUpFunc);
+    DisplayMessageAndContinueTask(taskId, data[10], 0x06D, 0x0D, fontId, GetPlayerTextSpeedDelay(), string, followUpFunc);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -1414,7 +1413,7 @@ static void OpenContextMenu(u8 taskId)
         }
     }
     r6 = ShowBagWindow(10, sContextMenuNumItems - 1);
-    AddItemMenuActionTextPrinters(
+    PrintMenuActionTexts(
         r6,
         FONT_NORMAL,
         GetMenuCursorDimensionByFont(FONT_NORMAL, 0),
@@ -1425,7 +1424,7 @@ static void OpenContextMenu(u8 taskId)
         sItemMenuContextActions,
         sContextMenuItemsPtr
     );
-    Menu_InitCursor(r6, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumItems, 0);
+    InitMenuNormal(r6, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumItems, 0);
     r4 = ShowBagWindow(6, 0);
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
@@ -1443,7 +1442,7 @@ static void Task_FieldItemContextMenuHandleInput(u8 taskId)
     s8 input;
     if (IsActiveOverworldLinkBusy() != TRUE)
     {
-        input = Menu_ProcessInputNoWrapAround();
+        input = Menu_ProcessInputNoWrap();
         switch (input)
         {
         case -1:

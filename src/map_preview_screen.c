@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gflib.h"
 #include "quest_log.h"
-#include "new_menu_helpers.h"
 #include "region_map.h"
 #include "menu.h"
 #include "field_fadetransition.h"

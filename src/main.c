@@ -14,7 +14,7 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "m4a.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "overworld.h"
 #include "play_time.h"
 #include "quest_log.h"

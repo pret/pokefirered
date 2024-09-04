@@ -21,7 +21,6 @@
 #include "text_window.h"
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
-#include "new_menu_helpers.h"
 #include "event_object_movement.h"
 #include "event_object_lock.h"
 #include "script.h"
@@ -353,7 +352,7 @@ static s8 PrintStartMenuItems(s8 *cursor_p, u8 nitems)
     {
         if (sStartMenuOrder[i] == STARTMENU_PLAYER || sStartMenuOrder[i] == STARTMENU_PLAYER2)
         {
-            Menu_PrintFormatIntlPlayerName(GetStartMenuWindowId(), sStartMenuActionTable[sStartMenuOrder[i]].text, 8, i * 15);
+            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuActionTable[sStartMenuOrder[i]].text, 8, i * 15);
         }
         else
         {
@@ -383,8 +382,8 @@ static s8 DoDrawStartMenu(void)
         sDrawStartMenuState[0]++;
         break;
     case 2:
-        LoadStdWindowFrameGfx();
-        DrawStdWindowFrame(CreateStartMenuWindow(sNumStartMenuItems), FALSE);
+        LoadMessageBoxAndBorderGfx();
+        DrawStdWindowFrame(AddStartMenuWindow(sNumStartMenuItems), FALSE);
         sDrawStartMenuState[0]++;
         break;
     case 3:
@@ -401,7 +400,7 @@ static s8 DoDrawStartMenu(void)
             sDrawStartMenuState[0]++;
         break;
     case 6:
-        sStartMenuCursorPos = Menu_InitCursor(GetStartMenuWindowId(), FONT_NORMAL, 0, 0, 15, sNumStartMenuItems, sStartMenuCursorPos);
+        sStartMenuCursorPos = InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 0, 15, sNumStartMenuItems, sStartMenuCursorPos);
         if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
         {
 #if DEBUG_OVERWORLD_MENU != TRUE
@@ -717,7 +716,7 @@ static void StartMenu_PrepareForSave(void)
 
 static u8 RunSaveDialogCB(void)
 {
-    if (RunTextPrinters_CheckPrinter0Active() == TRUE)
+    if (RunTextPrintersAndIsPrinter0Active() == TRUE)
         return 0;
     sSaveDialogIsPrinting = FALSE;
     return sSaveDialogCB();
@@ -735,7 +734,7 @@ static void PrintSaveTextWithFollowupFunc(const u8 *str, bool8 (*saveDialogCB)(v
 {
     StringExpandPlaceholders(gStringVar4, str);
     LoadMessageBoxAndFrameGfx(0, TRUE);
-    AddTextPrinterForMessage(TRUE);
+    AddTextPrinterForMessage_2(TRUE);
     sSaveDialogIsPrinting = TRUE;
     sSaveDialogCB = saveDialogCB;
 }
@@ -868,7 +867,7 @@ static u8 SaveDialogCB_AskOverwritePrintYesNoMenu(void)
 
 static u8 SaveDialogCB_AskReplacePreviousFilePrintYesNoMenu(void)
 {
-    DisplayYesNoMenuDefaultNo();
+    DisplayYesNoMenuWithDefault();
     sSaveDialogCB = SaveDialogCB_AskOverwriteOrReplacePreviousFileHandleInput;
     return SAVECB_RETURN_CONTINUE;
 }
@@ -924,7 +923,7 @@ static u8 SaveDialogCB_PrintSaveResult(void)
 
 static u8 SaveDialogCB_WaitPrintSuccessAndPlaySE(void)
 {
-    if (!RunTextPrinters_CheckPrinter0Active())
+    if (!RunTextPrintersAndIsPrinter0Active())
     {
         PlaySE(SE_SAVE);
         sSaveDialogCB = SaveDialogCB_ReturnSuccess;
@@ -944,7 +943,7 @@ static u8 SaveDialogCB_ReturnSuccess(void)
 
 static u8 SaveDialogCB_WaitPrintErrorAndPlaySE(void)
 {
-    if (!RunTextPrinters_CheckPrinter0Active())
+    if (!RunTextPrintersAndIsPrinter0Active())
     {
         PlaySE(SE_BOO);
         sSaveDialogCB = SaveDialogCB_ReturnError;
@@ -1081,7 +1080,7 @@ static void PrintSaveStats(void)
     x = (u32)(112 - GetStringWidth(FONT_NORMAL, gStringVar4, -1)) / 2;
     AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 2, 14, sTextColor_StatName, -1, gSaveStatName_Player);
     SaveStatToString(SAVE_STAT_NAME, gStringVar4, 2);
-    Menu_PrintFormatIntlPlayerName(sSaveStatsWindowId, gStringVar4, 60, 14);
+    PrintPlayerNameOnWindow(sSaveStatsWindowId, gStringVar4, 60, 14);
     AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 2, 28, sTextColor_StatName, -1, gSaveStatName_Badges);
     SaveStatToString(SAVE_STAT_BADGES, gStringVar4, 2);
     AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 60, 28, sTextColor_StatValue, -1, gStringVar4);

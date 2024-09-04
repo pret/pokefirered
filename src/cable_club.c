@@ -11,8 +11,8 @@
 #include "link.h"
 #include "load_save.h"
 #include "m4a.h"
+#include "menu.h"
 #include "mystery_gift.h"
-#include "new_menu_helpers.h"
 #include "overworld.h"
 #include "quest_log.h"
 #include "script.h"
@@ -88,7 +88,7 @@ static void CreateLinkupTask(u8 minPlayers, u8 maxPlayers)
 static void PrintNumPlayersInLink(u16 windowId, s32 numPlayers)
 {
     ConvertIntToDecimalStringN(gStringVar1, numPlayers, STR_CONV_MODE_LEFT_ALIGN, 1);
-    SetStdWindowBorderStyle(windowId, FALSE);
+    SetStandardWindowBorderStyle(windowId, FALSE);
     StringExpandPlaceholders(gStringVar4, gText_NumPlayerLink);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(windowId, COPYWIN_FULL);

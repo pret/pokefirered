@@ -13,7 +13,6 @@
 #include "m4a.h"
 #include "event_data.h"
 #include "trade_scene.h"
-#include "new_menu_helpers.h"
 #include "menu.h"
 #include "overworld.h"
 #include "pokedex.h"
@@ -1347,7 +1346,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
             if (!IsTextPrinterActive(0) && !IsSEPlaying())
             {
                 LoadUserWindowBorderGfx_(0, 0xA8, BG_PLTT_ID(14));
-                CreateYesNoMenu(&gTradeEvolutionSceneYesNoWindowTemplate, FONT_NORMAL_COPY_2, 0, 2, 0xA8, 14, 0);
+                CreateYesNoMenuAtPos(&gTradeEvolutionSceneYesNoWindowTemplate, FONT_NORMAL_COPY_2, 0, 2, 0xA8, 14, 0);
                 sEvoCursorPos = 0;
                 gTasks[taskId].tLearnMoveState++;
                 sEvoCursorPos = 0;

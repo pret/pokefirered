@@ -14,7 +14,6 @@
 #include "m4a.h"
 #include "menu.h"
 #include "minigame_countdown.h"
-#include "new_menu_helpers.h"
 #include "palette.h"
 #include "random.h"
 #include "save.h"

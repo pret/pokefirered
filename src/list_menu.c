@@ -3,7 +3,6 @@
 #include "menu.h"
 #include "list_menu.h"
 #include "menu_indicators.h"
-#include "new_menu_helpers.h"
 #include "text_window.h"
 #include "task.h"
 #include "graphics.h"
@@ -30,13 +29,6 @@ struct ListMenuOverride
     bool8 enabled:1;
 };
 
-struct MoveMenuInfoIcon
-{
-    u8 width;
-    u8 height;
-    u16 offset;
-};
-
 static EWRAM_DATA struct MysteryGiftLinkMenuStruct sMysteryGiftLinkMenu = {0};
 
 struct ListMenuOverride gListMenuOverride;
@@ -48,35 +40,6 @@ static void ListMenuPrintEntries(struct ListMenu *list, u16 startIndex, u16 yOff
 static void ListMenuDrawCursor(struct ListMenu *list);
 static void ListMenuCallSelectionChangedCallback(struct ListMenu *list, u8 onInit);
 static u8 ListMenuAddCursorObject(struct ListMenu *list, u32 cursorKind);
-
-static const struct MoveMenuInfoIcon sMenuInfoIcons[] =
-{   // { width, height, offset }
-    [MENU_INFO_ICON_CAUGHT] = { 12, 12, 0x00 },
-    [TYPE_NORMAL + 1]   = { 32, 12, 0x20 },
-    [TYPE_FIGHTING + 1] = { 32, 12, 0x64 },
-    [TYPE_FLYING + 1]   = { 32, 12, 0x60 },
-    [TYPE_POISON + 1]   = { 32, 12, 0x80 },
-    [TYPE_GROUND + 1]   = { 32, 12, 0x48 },
-    [TYPE_ROCK + 1]     = { 32, 12, 0x44 },
-    [TYPE_BUG + 1]      = { 32, 12, 0x6C },
-    [TYPE_GHOST + 1]    = { 32, 12, 0x68 },
-    [TYPE_STEEL + 1]    = { 32, 12, 0x88 },
-    [TYPE_MYSTERY + 1]  = { 32, 12, 0xA4 },
-    [TYPE_FIRE + 1]     = { 32, 12, 0x24 },
-    [TYPE_WATER + 1]    = { 32, 12, 0x28 },
-    [TYPE_GRASS + 1]    = { 32, 12, 0x2C },
-    [TYPE_ELECTRIC + 1] = { 32, 12, 0x40 },
-    [TYPE_PSYCHIC + 1]  = { 32, 12, 0x84 },
-    [TYPE_ICE + 1]      = { 32, 12, 0x4C },
-    [TYPE_DRAGON + 1]   = { 32, 12, 0xA0 },
-    [TYPE_DARK + 1]     = { 32, 12, 0x8C },
-    [TYPE_FAIRY + 1]    = { 32, 12, 0x0C },
-    [MENU_INFO_ICON_TYPE]      = { 40, 12, 0xA8 },
-    [MENU_INFO_ICON_POWER]     = { 40, 12, 0xC0 },
-    [MENU_INFO_ICON_ACCURACY]  = { 40, 12, 0xC8 },
-    [MENU_INFO_ICON_PP]        = { 40, 12, 0xE0 },
-    [MENU_INFO_ICON_EFFECT]    = { 40, 12, 0xE8 },
-};
 
 static void ListMenuDummyTask(u8 taskId)
 {
@@ -642,36 +605,4 @@ void ListMenuSetTemplateField(u8 taskId, u8 field, s32 value)
         data->template.cursorKind = value;
         break;
     }
-}
-
-void ListMenu_LoadMonIconPalette(u8 palOffset, u16 speciesId)
-{
-    LoadPalette(GetValidMonIconPalettePtr(speciesId), palOffset, PLTT_SIZE_4BPP);
-}
-
-void ListMenu_DrawMonIconGraphics(u8 windowId, u16 speciesId, u32 personality, u16 x, u16 y)
-{
-    BlitBitmapToWindow(windowId, GetMonIconPtr(speciesId, personality), x, y, 32, 32);
-}
-
-void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)
-{
-    const u16 *palette;
-
-    switch (palId)
-    {
-    case 0:
-    default:
-        palette = gMenuInfoElements1_Pal;
-        break;
-    case 1:
-        palette = gMenuInfoElements2_Pal;
-        break;
-    }
-    LoadPalette(palette, palOffset, PLTT_SIZE_4BPP);
-}
-
-void BlitMenuInfoIcon(u8 windowId, u8 iconId, u16 x, u16 y)
-{
-    BlitBitmapRectToWindow(windowId, &gMenuInfoElements_Gfx[sMenuInfoIcons[iconId].offset * TILE_SIZE_4BPP], 0, 0, 128, 128, x, y, sMenuInfoIcons[iconId].width, sMenuInfoIcons[iconId].height);
 }

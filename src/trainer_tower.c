@@ -11,7 +11,6 @@
 #include "overworld.h"
 #include "item.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/layouts.h"
@@ -903,7 +902,7 @@ static void ShowResultsBoard(void)
 
     ValidateOrResetCurTrainerTowerRecord();
     windowId = AddWindow(sTimeBoardWindowTemplate);
-    LoadStdWindowFrameGfx();
+    LoadMessageBoxAndBorderGfx();
     DrawStdWindowFrame(windowId, FALSE);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_TimeBoard, 74, 0, TEXT_SKIP_DRAW, NULL);
 

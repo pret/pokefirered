@@ -4,7 +4,6 @@
 #include "task.h"
 #include "script_menu.h"
 #include "quest_log.h"
-#include "new_menu_helpers.h"
 #include "event_data.h"
 #include "script.h"
 #include "strings.h"
@@ -733,14 +732,14 @@ static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpres
             left = 28 - width;
         height = GetMCWindowHeight(count);
         windowId = CreateWindowFromRect(left, top, width, height);
-        SetStdWindowBorderStyle(windowId, FALSE);
+        SetStandardWindowBorderStyle(windowId, FALSE);
         if (mcId == MULTICHOICE_GAME_CORNER_TMPRIZES
          || mcId == MULTICHOICE_BIKE_SHOP
          || mcId == MULTICHOICE_GAME_CORNER_BATTLE_ITEM_PRIZES)
-            MultichoiceList_PrintItems(windowId, FONT_NORMAL, 8, 2, 14, count, list, 0, 2);
+            PrintMenuActionTextsWithSpacing(windowId, FONT_NORMAL, 8, 2, 14, count, list, 0, 2);
         else
-            MultichoiceList_PrintItems(windowId, FONT_NORMAL, 8, 2, 14, count, list, 0, 2);
-        Menu_InitCursor(windowId, FONT_NORMAL, 0, 2, 14, count, initPos);
+            PrintMenuActionTextsWithSpacing(windowId, FONT_NORMAL, 8, 2, 14, count, list, 0, 2);
+        InitMenuNormal(windowId, FONT_NORMAL, 0, 2, 14, count, initPos);
         CreateMCMenuInputHandlerTask(ignoreBpress, count, windowId, mcId);
         ScheduleBgCopyTilemapToVram(0);
     }
@@ -811,7 +810,7 @@ static void Task_MultichoiceMenu_HandleInput(u8 taskId)
         else
         {
             if (tWrapAround == FALSE)
-                input = Menu_ProcessInputNoWrapAround();
+                input = Menu_ProcessInputNoWrap();
             else
                 input = Menu_ProcessInput();
             if (JOY_NEW(DPAD_UP | DPAD_DOWN))
@@ -919,7 +918,7 @@ bool8 ScriptMenu_MultichoiceGrid(u8 left, u8 top, u8 multichoiceId, bool8 ignore
     taskId = CreateTask(Hask_MultichoiceGridMenu_HandleInput, 80);
     gTasks[taskId].tIgnoreBPress = ignoreBpress;
     gTasks[taskId].tWindowId = CreateWindowFromRect(left, top, width * columnCount, rowCount * 2);
-    SetStdWindowBorderStyle(gTasks[taskId].tWindowId, FALSE);
+    SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, FALSE);
     MultichoiceGrid_PrintItems(gTasks[taskId].tWindowId, FONT_NORMAL_COPY_1, width * 8, 16, columnCount, rowCount, list);
     MultichoiceGrid_InitCursor(gTasks[taskId].tWindowId, FONT_NORMAL_COPY_1, 0, 1, width * 8, columnCount, rowCount, 0);
     ScheduleBgCopyTilemapToVram(0);
@@ -993,7 +992,7 @@ static void CreatePCMenuWindow(void)
     {
         numItems = 5;
         windowId = CreateWindowFromRect(0, 0, windowWidth, 10);
-        SetStdWindowBorderStyle(windowId, FALSE);
+        SetStandardWindowBorderStyle(windowId, FALSE);
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_ProfOakSPc, cursorWidth, 34, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_HallOfFame_2, cursorWidth, 50, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, cursorWidth, 66, TEXT_SKIP_DRAW, NULL);
@@ -1005,7 +1004,7 @@ static void CreatePCMenuWindow(void)
         else
             numItems = 3;
         windowId = CreateWindowFromRect(0, 0, windowWidth, numItems * 2);
-        SetStdWindowBorderStyle(windowId, FALSE);
+        SetStandardWindowBorderStyle(windowId, FALSE);
         if (FlagGet(FLAG_SYS_POKEDEX_GET))
             AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_ProfOakSPc, cursorWidth, 34, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, cursorWidth, 2 + 16 * (numItems - 1), TEXT_SKIP_DRAW, NULL);
@@ -1015,8 +1014,8 @@ static void CreatePCMenuWindow(void)
     else
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeoneSPc, cursorWidth, 2 , TEXT_SKIP_DRAW, NULL);
     StringExpandPlaceholders(gStringVar4, gText_SPc);
-    Menu_PrintFormatIntlPlayerName(windowId, gStringVar4, cursorWidth, 18);
-    Menu_InitCursor(windowId, FONT_NORMAL, 0, 2, 16, numItems, 0);
+    PrintPlayerNameOnWindow(windowId, gStringVar4, cursorWidth, 18);
+    InitMenuNormal(windowId, FONT_NORMAL, 0, 2, 16, numItems, 0);
     CreateMCMenuInputHandlerTask(FALSE, numItems, windowId, MULTICHOICE_NONE);
     ScheduleBgCopyTilemapToVram(0);
 }
@@ -1064,7 +1063,7 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     gTasks[taskId].tSpriteId = spriteId;
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].oam.priority = 0;
-    SetStdWindowBorderStyle(gTasks[taskId].tWindowId, TRUE);
+    SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, TRUE);
     ScheduleBgCopyTilemapToVram(0);
     return TRUE;
 }
@@ -1162,7 +1161,7 @@ bool8 OpenMuseumFossilPic(void)
     gTasks[taskId].tWindowId = CreateWindowFromRect(gSpecialVar_0x8005, gSpecialVar_0x8006, 8, 8);
     gTasks[taskId].tState = 0;
     gTasks[taskId].tSpriteId = spriteId;
-    SetStdWindowBorderStyle(gTasks[taskId].tWindowId, TRUE);
+    SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, TRUE);
     ScheduleBgCopyTilemapToVram(0);
     return TRUE;
 }
@@ -1178,7 +1177,7 @@ bool8 CloseMuseumFossilPic(void)
 
 static u8 CreateWindowFromRect(u8 left, u8 top, u8 width, u8 height)
 {
-    struct WindowTemplate template = SetWindowTemplateFields(0, left + 1, top + 1, width, height, 15, 0x038);
+    struct WindowTemplate template = CreateWindowTemplate(0, left + 1, top + 1, width, height, 15, 0x038);
     u8 windowId = AddWindow(&template);
     PutWindowTilemap(windowId);
     return windowId;
@@ -1251,7 +1250,7 @@ void DrawSeagallopDestinationMenu(void)
     cursorWidth = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
     fontHeight = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT);
     windowId = CreateWindowFromRect(17, top, 11, numItems * 2);
-    SetStdWindowBorderStyle(windowId, FALSE);
+    SetStandardWindowBorderStyle(windowId, FALSE);
     
     // -2 excludes "Other" and "Exit", appended after the loop
     for (i = 0; i < numItems - 2; i++)
@@ -1269,7 +1268,7 @@ void DrawSeagallopDestinationMenu(void)
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Other, cursorWidth, i * 16 + 2, TEXT_SKIP_DRAW, NULL);
     i++;
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gOtherText_Exit, cursorWidth, i * 16 + 2, TEXT_SKIP_DRAW, NULL);
-    Menu_InitCursor(windowId, FONT_NORMAL, 0, 2, 16, numItems, 0);
+    InitMenuNormal(windowId, FONT_NORMAL, 0, 2, 16, numItems, 0);
     CreateMCMenuInputHandlerTask(FALSE, numItems, windowId, MULTICHOICE_NONE);
     ScheduleBgCopyTilemapToVram(0);
 }

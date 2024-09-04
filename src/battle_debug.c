@@ -830,7 +830,7 @@ static void Task_ShowAiPoints(u8 taskId)
         break;
     // Put text
     case 1:
-        winTemplate = SetWindowTemplateFields(1, 0, 4, 30, 14, 15, 0x200);
+        winTemplate = CreateWindowTemplate(1, 0, 4, 30, 14, 15, 0x200);
         data->aiMovesWindowId = AddWindow(&winTemplate);
         PutWindowTilemap(data->aiMovesWindowId);
         PutMovesPointsText(data);
@@ -1011,7 +1011,7 @@ static void Task_ShowAiKnowledge(u8 taskId)
         break;
     // Put text
     case 1:
-        winTemplate = SetWindowTemplateFields(1, 0, 4, 27, 14, 15, 0x200);
+        winTemplate = CreateWindowTemplate(1, 0, 4, 27, 14, 15, 0x200);
         data->aiMovesWindowId = AddWindow(&winTemplate);
         PutWindowTilemap(data->aiMovesWindowId);
         PutAiInfoText(data);
@@ -1075,7 +1075,7 @@ static void Task_ShowAiParty(u8 taskId)
         break;
     // Put text
     case 1:
-        winTemplate = SetWindowTemplateFields(1, 0, 3, 29, 16, 15, 0x150);
+        winTemplate = CreateWindowTemplate(1, 0, 3, 29, 16, 15, 0x150);
         data->aiMovesWindowId = AddWindow(&winTemplate);
         PutWindowTilemap(data->aiMovesWindowId);
         PutAiPartyText(data);

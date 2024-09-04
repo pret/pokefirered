@@ -8,7 +8,6 @@
 #include "berry_pouch.h"
 #include "item_menu.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
 #include "scanline_effect.h"
 #include "item_icon.h"
 #include "item_menu_icons.h"
@@ -1028,8 +1027,8 @@ static void CreateNormalContextMenu(u8 taskId)
         sContextMenuNumOptions = 4;
     }
     windowId = GetOrCreateVariableWindow(sContextMenuNumOptions + 9);
-    AddItemMenuActionTextPrinters(windowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING), GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumOptions, sContextMenuActions, sContextMenuOptions);
-    Menu_InitCursor(windowId, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumOptions, 0);
+    PrintMenuActionTexts(windowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING), GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumOptions, sContextMenuActions, sContextMenuOptions);
+    InitMenuNormal(windowId, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumOptions, 0);
     windowId2 = GetOrCreateVariableWindow(6);
     CopySelectedListMenuItemName(data[1], gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
@@ -1047,7 +1046,7 @@ static void Task_NormalContextMenu_HandleInput(u8 taskId)
     s8 input;
     if (IsActiveOverworldLinkBusy() != TRUE)
     {
-        input = Menu_ProcessInputNoWrapAround();
+        input = Menu_ProcessInputNoWrap();
         switch (input)
         {
         case -2:
@@ -1496,7 +1495,7 @@ void DisplayItemMessageInBerryPouch(u8 taskId, u8 fontId, const u8 * str, TaskFu
 {
     if (sVariableWindowIds[5] == 0xFF)
         sVariableWindowIds[5] = AddWindow(&sWindowTemplates_Variable[5]);
-    DisplayMessageAndContinueTask(taskId, sVariableWindowIds[5], 0x013, 0xD, fontId, GetTextSpeedSetting(), str, followUpFunc);
+    DisplayMessageAndContinueTask(taskId, sVariableWindowIds[5], 0x013, 0xD, fontId, GetPlayerTextSpeedDelay(), str, followUpFunc);
     ScheduleBgCopyTilemapToVram(2);
 }
 

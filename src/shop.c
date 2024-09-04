@@ -6,7 +6,6 @@
 #include "graphics.h"
 #include "strings.h"
 #include "list_menu.h"
-#include "new_menu_helpers.h"
 #include "party_menu.h"
 #include "field_specials.h"
 #include "field_weather.h"
@@ -214,9 +213,9 @@ static u8 CreateShopMenu(u8 martType)
         sShopData.fontId = FONT_FEMALE;
 
     sShopMenuWindowId = AddWindow(&sShopMenuWindowTemplate);
-    SetStdWindowBorderStyle(sShopMenuWindowId, 0);
-    PrintTextArray(sShopMenuWindowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, 16, 3, sShopMenuActions_BuySellQuit);
-    Menu_InitCursor(sShopMenuWindowId, FONT_NORMAL, 0, 2, 16, 3, 0);
+    SetStandardWindowBorderStyle(sShopMenuWindowId, 0);
+    PrintMenuActionTextsAtPos(sShopMenuWindowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, 16, 3, sShopMenuActions_BuySellQuit);
+    InitMenuNormal(sShopMenuWindowId, FONT_NORMAL, 0, 2, 16, 3, 0);
     PutWindowTilemap(sShopMenuWindowId);
     CopyWindowToVram(sShopMenuWindowId, COPYWIN_MAP);
     return CreateTask(Task_ShopMenu, 8);
@@ -249,7 +248,7 @@ static void SetShopMenuCallback(void (*callback)(void))
 
 static void Task_ShopMenu(u8 taskId)
 {
-    s8 input = Menu_ProcessInputNoWrapAround();
+    s8 input = Menu_ProcessInputNoWrap();
 
     switch (input)
     {

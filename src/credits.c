@@ -4,7 +4,6 @@
 #include "task.h"
 #include "overworld.h"
 #include "event_data.h"
-#include "new_menu_helpers.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "strings.h"

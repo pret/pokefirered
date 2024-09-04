@@ -3,7 +3,7 @@
 #include "constants/songs.h"
 #include "task.h"
 #include "event_object_movement.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "item_use.h"
 #include "event_scripts.h"
 #include "event_data.h"

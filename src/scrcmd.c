@@ -21,7 +21,6 @@
 #include "event_object_movement.h"
 #include "event_object_lock.h"
 #include "field_message_box.h"
-#include "new_menu_helpers.h"
 #include "script_menu.h"
 #include "trainer_see.h"
 #include "data.h"
@@ -1582,7 +1581,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext * ctx)
     if (msg == NULL)
         msg = (u8 *)ctx->data[0];
 
-    LoadStdWindowFrameGfx();
+    LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, 1);
     AddTextPrinterParameterized(0, FONT_BRAILLE, msg, 0, 1, 0, NULL);
     return FALSE;

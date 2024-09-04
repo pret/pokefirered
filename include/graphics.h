@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+extern const u16 gMessageBox_Gfx[];
+
 // pokeballs
 extern const u32 gBallGfx_Poke[];
 extern const u32 gBallPal_Poke[];

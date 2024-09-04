@@ -1,6 +1,5 @@
 #include "global.h"
 #include "bg.h"
-#include "new_menu_helpers.h"
 #include "clock.h"
 #include "decompress.h"
 #include "event_data.h"
@@ -847,7 +846,7 @@ static void Task_SetClock_AskConfirm(u8 taskId)
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
     LoadUserWindowBorderGfx_(0, 0x140, 0xE0);
-    CreateYesNoMenu(&sYesNoWinTemplate, 3, 0, 2, 0x140, 0xE, 0);
+    CreateYesNoMenuAtPos(&sYesNoWinTemplate, 3, 0, 2, 0x140, 0xE, 0);
     gTasks[taskId].func = Task_SetClock_HandleConfirmInput;
 }
 

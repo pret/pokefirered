@@ -3,7 +3,6 @@
 #include "task.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
 #include "link.h"
 #include "overworld.h"
 #include "mail_data.h"
@@ -62,7 +61,7 @@ static void Task_CallYesOrNoCallback(u8 taskId)
 
 void CreateYesNoMenuWithCallbacks(u8 taskId, const struct WindowTemplate *template, u8 fontId, u8 left, u8 top, u16 tileStart, u8 palette, const struct YesNoFuncTable *yesNo)
 {
-    CreateYesNoMenu(template, fontId, left, top, tileStart, palette, 0);
+    CreateYesNoMenuAtPos(template, fontId, left, top, tileStart, palette, 0);
     sYesNo = yesNo;
     gTasks[taskId].func = Task_CallYesOrNoCallback;
 }

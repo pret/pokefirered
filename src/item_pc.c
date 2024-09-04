@@ -14,7 +14,6 @@
 #include "menu.h"
 #include "menu_helpers.h"
 #include "menu_indicators.h"
-#include "new_menu_helpers.h"
 #include "party_menu.h"
 #include "pc_screen_effect.h"
 #include "scanline_effect.h"
@@ -840,8 +839,8 @@ static void Task_ItemPcSubmenuInit(u8 taskId)
 
     ItemPc_SetBorderStyleOnWindow(4);
     windowId = ItemPc_GetOrCreateSubwindow(0);
-    PrintTextArray(4, FONT_NORMAL, 8, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, sItemPcSubmenuOptions);
-    Menu_InitCursor(4, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, 0);
+    PrintMenuActionTextsAtPos(4, FONT_NORMAL, 8, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, sItemPcSubmenuOptions);
+    InitMenuNormal(4, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, 3, 0);
     CopyItemName(ItemPc_GetItemIdBySlotId(data[1]), gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
     ItemPc_AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
@@ -851,7 +850,7 @@ static void Task_ItemPcSubmenuInit(u8 taskId)
 
 static void Task_ItemPcSubmenuRun(u8 taskId)
 {
-    s8 input = Menu_ProcessInputNoWrapAround();
+    s8 input = Menu_ProcessInputNoWrap();
     switch (input)
     {
     case -1:
@@ -1116,6 +1115,6 @@ static void ItemPc_DestroySubwindow(u8 idx)
 
 static void ItemPc_PrintOnWindow5WithContinueTask(u8 taskId, const u8 * str, TaskFunc taskFunc)
 {
-    DisplayMessageAndContinueTask(taskId, 5, 0x3AC, 0x0B, FONT_NORMAL, GetTextSpeedSetting(), str, taskFunc);
+    DisplayMessageAndContinueTask(taskId, 5, 0x3AC, 0x0B, FONT_NORMAL, GetPlayerTextSpeedDelay(), str, taskFunc);
     ScheduleBgCopyTilemapToVram(0);
 }

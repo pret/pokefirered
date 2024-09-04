@@ -165,20 +165,6 @@ u8 GetLastTextColor(u8 colorType);
 void CopyGlyphToWindow(struct TextPrinter *x);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);
 
-u16 FontFunc_Small(struct TextPrinter *textPrinter);
-u16 FontFunc_NormalCopy1(struct TextPrinter *textPrinter);
-u16 FontFunc_Normal(struct TextPrinter *textPrinter);
-u16 FontFunc_Short(struct TextPrinter *textPrinter);
-u16 FontFunc_NormalCopy2(struct TextPrinter *textPrinter);
-u16 FontFunc_Male(struct TextPrinter *textPrinter);
-u16 FontFunc_Female(struct TextPrinter *textPrinter);
-u16 FontFunc_Braille(struct TextPrinter *textPrinter);
-u16 FontFunc_Narrow(struct TextPrinter *textPrinter);
-u16 FontFunc_SmallNarrow(struct TextPrinter *textPrinter);
-u16 FontFunc_Narrower(struct TextPrinter *textPrinter);
-u16 FontFunc_SmallNarrower(struct TextPrinter *textPrinter);
-u16 FontFunc_ShortNarrow(struct TextPrinter *textPrinter);
-
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter);
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter);
 void TextPrinterClearDownArrow(struct TextPrinter *textPrinter);
@@ -194,16 +180,20 @@ u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y);
 u8 GetKeypadIconTileOffset(u8 keypadIconId);
 u8 GetKeypadIconWidth(u8 keypadIconId);
 u8 GetKeypadIconHeight(u8 keypadIconId);
+void SetDefaultFontsPointer(void);
 u8 GetFontAttribute(u8 fontId, u8 attributeId);
 u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension);
 void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese);
 void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese);
 void DecompressGlyph_Female(u16 glyphId, bool32 isJapanese);
-u32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese);
 u8 CreateTextCursorSprite(u8 sheetId, u16 x, u16 y, u8 priority, u8 subpriority);
 void DestroyTextCursorSprite(u8 spriteId);
 
 u32 GetFontIdToFit(const u8 *string, u32 widestFontId, u32 letterSpacing, u32 widthPx);
 u8 *PrependFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width);
+
+// braille.c
+u16 FontFunc_Braille(struct TextPrinter *textPrinter);
+u32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese);
 
 #endif // GUARD_TEXT_H

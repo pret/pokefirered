@@ -6,7 +6,7 @@
 #include "item_menu.h"
 #include "link.h"
 #include "m4a.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "party_menu.h"
 #include "pokeball.h"
 #include "strings.h"
@@ -1714,7 +1714,7 @@ static void MoveSelectionDisplayMoveDescription(u32 battler)
     u8 cat_start[] = _("{CLEAR_TO 0x03}");
     u8 pwr_start[] = _("{CLEAR_TO 0x38}");
     u8 acc_start[] = _("{CLEAR_TO 0x6D}");
-    LoadStdWindowFrameGfx();
+    LoadMessageBoxAndBorderGfx();
     DrawStdWindowFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
     if (pwr < 2)
         StringCopy(pwr_num, gText_BattleSwitchWhich5);

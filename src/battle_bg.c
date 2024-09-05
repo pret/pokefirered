@@ -9,7 +9,7 @@
 #include "decompress.h"
 #include "graphics.h"
 #include "link.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "overworld.h"
 #include "sound.h"
 #include "text_window.h"

@@ -448,5 +448,4 @@ static bool32 SharesPalWithAnyActive(u32 id)
 static u8 GetTilesPerImage(u32 shape, u32 size)
 {
     return 1 << GetSpanPerImage(shape, size);
-    // return sTilesPerImage[shape][size];
 }

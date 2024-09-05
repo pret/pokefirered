@@ -7,7 +7,6 @@
 #include "text_window.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
 #include "list_menu.h"
 #include "item.h"
 #include "item_menu.h"
@@ -969,7 +968,7 @@ static void Task_SelectedTMHM_Field(u8 taskId)
     }
 
     // Print context window actions
-    AddItemMenuActionTextPrinters(sTMCaseDynamicResources->contextMenuWindowId,
+    PrintMenuActionTexts(sTMCaseDynamicResources->contextMenuWindowId,
                                   FONT_NORMAL,
                                   GetMenuCursorDimensionByFont(FONT_NORMAL, 0),
                                   2,
@@ -979,7 +978,7 @@ static void Task_SelectedTMHM_Field(u8 taskId)
                                   sMenuActions,
                                   sTMCaseDynamicResources->menuActionIndices);
 
-    Menu_InitCursor(sTMCaseDynamicResources->contextMenuWindowId, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sTMCaseDynamicResources->numMenuActions, 0);
+    InitMenuNormal(sTMCaseDynamicResources->contextMenuWindowId, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sTMCaseDynamicResources->numMenuActions, 0);
     
     // Print label text next to the context window
     strbuf = Alloc(256);
@@ -1004,7 +1003,7 @@ static void Task_ContextMenu_HandleInput(u8 taskId)
 
     if (IsActiveOverworldLinkBusy() != TRUE)
     {
-        input = Menu_ProcessInputNoWrapAround();
+        input = Menu_ProcessInputNoWrap();
         switch (input)
         {
         case MENU_B_PRESSED:
@@ -1524,7 +1523,7 @@ static void TMCase_SetWindowBorder2(u8 windowId)
 
 static void PrintMessageWithFollowupTask(u8 taskId, u8 fontId, const u8 * str, TaskFunc func)
 {
-    DisplayMessageAndContinueTask(taskId, WIN_MESSAGE, 0x64, 0x0B, fontId, GetTextSpeedSetting(), str, func);
+    DisplayMessageAndContinueTask(taskId, WIN_MESSAGE, 0x64, 0x0B, fontId, GetPlayerTextSpeedDelay(), str, func);
     ScheduleBgCopyTilemapToVram(1);
 }
 

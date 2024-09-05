@@ -1,6 +1,5 @@
 #include "global.h"
 #include "reset_rtc_screen.h"
-#include "new_menu_helpers.h"
 #include "event_data.h"
 #include "main.h"
 #include "menu.h"
@@ -572,7 +571,7 @@ static void InitResetRtcScreenBgAndWindows(void)
     ShowBg(0);
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadStdWindowFrameGfx();
+    LoadMessageBoxAndBorderGfx();
 }
 
 static void CB2_ResetRtcScreen(void)

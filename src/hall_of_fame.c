@@ -10,7 +10,6 @@
 #include "hall_of_fame.h"
 #include "quest_log.h"
 #include "pc_screen_effect.h"
-#include "new_menu_helpers.h"
 #include "strings.h"
 #include "credits.h"
 #include "event_data.h"
@@ -764,7 +763,7 @@ static void Task_HofPC_CopySaveData(u8 taskId)
     u16 i;
     struct HallofFameTeam* savedTeams;
 
-    CreateTopBarWindowLoadPalette(0, 30, 0, 0x0C, 0x226);
+    HofPCTopBar_AddWindow(0, 30, 0, 0x0C, 0x226);
     if (LoadGameSave(SAVE_HALL_OF_FAME) != SAVE_STATUS_OK)
     {
         gTasks[taskId].func = Task_HofPC_PrintDataIsCorrupted;
@@ -846,9 +845,9 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_HOFNumber);
 
     if (gTasks[taskId].data[0] <= 0)
-        TopBarWindowPrintTwoStrings(gStringVar4, gText_UPDOWNPick_ABUTTONBBUTTONCancel, 0, 0, TRUE);
+        HofPCTopBar_PrintPair(gStringVar4, gText_UPDOWNPick_ABUTTONBBUTTONCancel, 0, 0, TRUE);
     else
-        TopBarWindowPrintTwoStrings(gStringVar4, gText_UPDOWNPick_ABUTTONNext_BBUTTONBack, 0, 0, TRUE);
+        HofPCTopBar_PrintPair(gStringVar4, gText_UPDOWNPick_ABUTTONNext_BBUTTONBack, 0, 0, TRUE);
 
     gTasks[taskId].func = Task_HofPC_PrintMonInfo;
 }
@@ -951,7 +950,7 @@ static void Task_HofPC_HandleExit(u8 taskId)
         HideBg(0);
         HideBg(1);
         HideBg(3);
-        DestroyTopBarWindow();
+        HofPCTopBar_RemoveWindow();
         FreeAllWindowBuffers();
         UnsetBgTilemapBuffer(1);
         UnsetBgTilemapBuffer(3);
@@ -969,7 +968,7 @@ static void Task_HofPC_HandleExit(u8 taskId)
 
 static void Task_HofPC_PrintDataIsCorrupted(u8 taskId)
 {
-    TopBarWindowPrintString(gText_ABUTTONExit, 8, TRUE);
+    HofPCTopBar_Print(gText_ABUTTONExit, 8, TRUE);
     DrawDialogueFrame(0, 0);
     AddTextPrinterParameterized2(0, FONT_NORMAL, gText_HOFCorrupted, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(0, COPYWIN_FULL);

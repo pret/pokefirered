@@ -4,7 +4,6 @@
 #include "task.h"
 #include "scanline_effect.h"
 #include "libgcnmultiboot.h"
-#include "new_menu_helpers.h"
 #include "link.h"
 #include "menu.h"
 #include "random.h"

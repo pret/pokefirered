@@ -19,7 +19,6 @@
 #include "battle_interface.h"
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
-#include "new_menu_helpers.h"
 #include "trade_scene.h"
 #include "constants/songs.h"
 #include "constants/moves.h"
@@ -1350,7 +1349,7 @@ static void CB2_TradeMenu(void)
 
     SetGpuReg(REG_OFFSET_BG2HOFS, sTradeMenu->bg2hofs++);
     SetGpuReg(REG_OFFSET_BG3HOFS, sTradeMenu->bg3hofs--);
-    RunTextPrinters_CheckPrinter0Active();
+    RunTextPrintersAndIsPrinter0Active();
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
@@ -1841,8 +1840,8 @@ static void CB_ProcessMenuInput(void)
             // Selected pokemon in player's party
             DrawTextBorderOuter(1, 1, 14);
             FillWindowPixelBuffer(1, PIXEL_FILL(1));
-            PrintMenuTable(1, FONT_NORMAL_COPY_2, 16, ARRAY_COUNT(sMenuAction_SummaryTrade), sMenuAction_SummaryTrade);
-            Menu_InitCursor(1, FONT_NORMAL_COPY_2, 0, 0, 16, 2, 0);
+            PrintMenuActionTextsAtTop(1, FONT_NORMAL_COPY_2, 16, ARRAY_COUNT(sMenuAction_SummaryTrade), sMenuAction_SummaryTrade);
+            InitMenuNormal(1, FONT_NORMAL_COPY_2, 0, 0, 16, 2, 0);
             PutWindowTilemap(1);
             CopyWindowToVram(1, COPYWIN_FULL);
             sTradeMenu->callbackId = CB_SELECTED_MON;
@@ -1856,7 +1855,7 @@ static void CB_ProcessMenuInput(void)
         else if (sTradeMenu->cursorPosition == PARTY_SIZE * 2)
         {
             // Selected Cancel
-            CreateYesNoMenu(&sWindowTemplate_YesNo, FONT_NORMAL_COPY_2, 0, 2, 0x001, 14, 0);
+            CreateYesNoMenuAtPos(&sWindowTemplate_YesNo, FONT_NORMAL_COPY_2, 0, 2, 0x001, 14, 0);
             sTradeMenu->callbackId = CB_CANCEL_TRADE_PROMPT;
             DrawBottomRowText(sActionTexts[TEXT_CANCEL_TRADE], (void *)OBJ_VRAM0 + sTradeMenu->bottomTextTileStart * 32, 24);
         }
@@ -1881,7 +1880,7 @@ static void RedrawChooseAPokemonWindow(void)
 
 static void CB_ProcessSelectedMonInput(void)
 {
-    switch (Menu_ProcessInputNoWrapAround())
+    switch (Menu_ProcessInputNoWrap())
     {
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
@@ -2077,7 +2076,7 @@ static void CB_InitConfirmTradePrompt(void)
     sTradeMenu->timer++;
     if (sTradeMenu->timer > 120)
     {
-        CreateYesNoMenu(&sWindowTemplate_YesNo, FONT_NORMAL_COPY_2, 0, 2, 1, 14, 0);
+        CreateYesNoMenuAtPos(&sWindowTemplate_YesNo, FONT_NORMAL_COPY_2, 0, 2, 1, 14, 0);
         sTradeMenu->timer = 0;
         sTradeMenu->callbackId = CB_CONFIRM_TRADE_PROMPT;
     }

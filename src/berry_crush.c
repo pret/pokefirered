@@ -18,7 +18,6 @@
 #include "math_util.h"
 #include "menu.h"
 #include "minigame_countdown.h"
-#include "new_menu_helpers.h"
 #include "overworld.h"
 #include "random.h"
 #include "save.h"

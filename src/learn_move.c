@@ -6,7 +6,6 @@
 #include "trig.h"
 #include "field_fadetransition.h"
 #include "overworld.h"
-#include "new_menu_helpers.h"
 #include "menu.h"
 #include "list_menu.h"
 #include "event_data.h"
@@ -470,7 +469,7 @@ static void CB2_MoveRelearner(void)
 static void StringExpandPlaceholdersAndPrintTextOnWindow7Color2(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
-    PrintTextOnWindow(7, gStringVar4, 0, 2, GetTextSpeedSetting(), 2);
+    PrintTextOnWindow(7, gStringVar4, 0, 2, GetPlayerTextSpeedDelay(), 2);
 }
 
 static void MoveRelearnerStateMachine(void)
@@ -506,7 +505,7 @@ static void MoveRelearnerStateMachine(void)
         MoveRelearnerMenuHandleInput();
         break;
     case MENU_STATE_PRINT_TEACH_MOVE_PROMPT:
-        CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x001, 14, 0);
+        CreateYesNoMenuAtPos(&sMoveRelearnerYesNoMenuTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x001, 14, 0);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_TEACH_MOVE_CONFIRM :
@@ -531,7 +530,7 @@ static void MoveRelearnerStateMachine(void)
         }
         break;
     case MENU_STATE_PRINT_GIVE_UP_PROMPT:
-        CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x001, 14, 0);
+        CreateYesNoMenuAtPos(&sMoveRelearnerYesNoMenuTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x001, 14, 0);
         sMoveRelearner->state++;
         break;
     case MENU_STATE_GIVE_UP_CONFIRM:
@@ -552,7 +551,7 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state++;
         break;
     case MENU_STATE_WAIT_FOR_TRYING_TO_LEARN:
-        CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x001, 14, 0);
+        CreateYesNoMenuAtPos(&sMoveRelearnerYesNoMenuTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x001, 14, 0);
         sMoveRelearner->state = 18;
         break;
     case MENU_STATE_CONFIRM_DELETE_OLD_MOVE:
@@ -573,7 +572,7 @@ static void MoveRelearnerStateMachine(void)
         sMoveRelearner->state++;
         break;
     case MENU_STATE_WAIT_FOR_STOP_TEACHING:
-        CreateYesNoMenu(&sMoveRelearnerYesNoMenuTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x001, 14, 0);
+        CreateYesNoMenuAtPos(&sMoveRelearnerYesNoMenuTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x001, 14, 0);
         sMoveRelearner->state = 26;
         break;
     case MENU_STATE_CONFIRM_STOP_TEACHING:

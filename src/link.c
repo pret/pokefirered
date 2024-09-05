@@ -16,7 +16,6 @@
 #include "link_rfu.h"
 #include "m4a.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "overworld.h"
 #include "palette.h"
 #include "quest_log.h"

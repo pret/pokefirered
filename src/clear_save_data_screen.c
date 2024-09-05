@@ -110,7 +110,7 @@ static void Task_DrawClearSaveDataScreen(u8 taskId)
         CopyWindowToVram(1, COPYWIN_GFX);
         break;
     case 5:
-        CreateYesNoMenu(&sWindowTemplates[0], FONT_NORMAL, 0, 2, 0x001, 15, 1);
+        CreateYesNoMenuAtPos(&sWindowTemplates[0], FONT_NORMAL, 0, 2, 0x001, 15, 1);
         CopyBgTilemapBufferToVram(0);
         break;
     default:

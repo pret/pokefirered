@@ -13,7 +13,7 @@
 #include "trainer_tower.h"
 #include "battle_setup.h"
 #include "field_specials.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "battle_controllers.h"
 #include "graphics.h"
 #include "battle_ai_switch_items.h"
@@ -3888,7 +3888,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
         else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             speed = sRecordedBattleTextSpeeds[GetTextSpeedInRecordedBattle()];
         else
-            speed = GetTextSpeedSetting();
+            speed = GetPlayerTextSpeedDelay();
         gTextFlags.canABSpeedUpPrint = TRUE;
     }
     else

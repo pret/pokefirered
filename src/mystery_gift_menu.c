@@ -4,7 +4,6 @@
 #include "scanline_effect.h"
 #include "text_window.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "mystery_gift_menu.h"
 #include "title_screen.h"
 #include "list_menu.h"
@@ -646,7 +645,7 @@ s8 DoMysteryGiftYesNo(u8 * textState, u16 * windowId, bool8 yesNoBoxPlacement, c
             windowTemplate.tilemapTop = 9;
         else
             windowTemplate.tilemapTop = 15;
-        CreateYesNoMenu(&windowTemplate, FONT_NORMAL, 0, 2, 10, 14, 0);
+        CreateYesNoMenuAtPos(&windowTemplate, FONT_NORMAL, 0, 2, 10, 14, 0);
         (*textState)++;
         break;
     case 2:

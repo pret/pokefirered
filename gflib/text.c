@@ -22,6 +22,18 @@
 
 extern const struct OamData gOamData_AffineOff_ObjNormal_16x16;
 
+static u16 FontFunc_Small(struct TextPrinter *textPrinter);
+static u16 FontFunc_NormalCopy1(struct TextPrinter *textPrinter);
+static u16 FontFunc_Normal(struct TextPrinter *textPrinter);
+static u16 FontFunc_Short(struct TextPrinter *textPrinter);
+static u16 FontFunc_NormalCopy2(struct TextPrinter *textPrinter);
+static u16 FontFunc_Male(struct TextPrinter *textPrinter);
+static u16 FontFunc_Female(struct TextPrinter *textPrinter);
+static u16 FontFunc_Narrow(struct TextPrinter *textPrinter);
+static u16 FontFunc_SmallNarrow(struct TextPrinter *textPrinter);
+static u16 FontFunc_Narrower(struct TextPrinter *textPrinter);
+static u16 FontFunc_SmallNarrower(struct TextPrinter *textPrinter);
+static u16 FontFunc_ShortNarrow(struct TextPrinter *textPrinter);
 static void DecompressGlyph_NormalCopy1(u16 glyphId, bool32 isJapanese);
 static void DecompressGlyph_NormalCopy2(u16 glyphId, bool32 isJapanese);
 static void DecompressGlyph_Short(u16 glyphId, bool32 isJapanese);
@@ -156,6 +168,167 @@ struct
 
 const u8 gKeypadIconTiles[] = INCBIN_U8("graphics/fonts/keypad_icons.4bpp");
 
+static const struct FontInfo sFontInfos[] = 
+{
+    [FONT_SMALL] = {
+        .fontFunction = FontFunc_Small,
+        .maxLetterWidth = 8,
+        .maxLetterHeight = 13,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_NORMAL_COPY_1] = {
+        .fontFunction = FontFunc_NormalCopy1,
+        .maxLetterWidth = 8,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_NORMAL] = {
+        .fontFunction = FontFunc_Normal,
+        .maxLetterWidth = 10,
+        .maxLetterHeight = 14,
+        .letterSpacing = 1,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_NORMAL_COPY_2] = {
+        .fontFunction = FontFunc_NormalCopy2,
+        .maxLetterWidth = 10,
+        .maxLetterHeight = 14,
+        .letterSpacing = 1,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_MALE] = {
+        .fontFunction = FontFunc_Male,
+        .maxLetterWidth = 10,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_FEMALE] = {
+        .fontFunction = FontFunc_Female,
+        .maxLetterWidth = 10,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_BRAILLE] = {
+        .fontFunction = FontFunc_Braille,
+        .maxLetterWidth = 8,
+        .maxLetterHeight = 16,
+        .letterSpacing = 0,
+        .lineSpacing = 2,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_BOLD] = {
+        .fontFunction = NULL,
+        .maxLetterWidth = 8,
+        .maxLetterHeight = 8,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 1,
+        .bgColor = 2,
+        .shadowColor = 15,
+    },
+    [FONT_NARROW] = {
+        .fontFunction = FontFunc_Narrow,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 16,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SMALL_NARROW] = {
+        .fontFunction = FontFunc_SmallNarrow,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 8,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_NARROWER] = {
+        .fontFunction = FontFunc_Narrower,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 16,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SMALL_NARROWER] = {
+        .fontFunction = FontFunc_SmallNarrower,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 8,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SHORT_NARROW] = {
+        .fontFunction = FontFunc_ShortNarrow,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SHORT] = {
+        .fontFunction = FontFunc_Short,
+        .maxLetterWidth = 6,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+};
+
+static const u8 gMenuCursorDimensions[][2] = 
+{
+    [FONT_SMALL]            = { 8,  13 },
+    [FONT_NORMAL_COPY_1]    = { 8,  14 },
+    [FONT_NORMAL]           = { 8,  14 },
+    [FONT_NORMAL_COPY_2]    = { 8,  14 },
+    [FONT_MALE]             = { 8,  14 },
+    [FONT_FEMALE]           = { 8,  14 },
+    [FONT_BRAILLE]          = { 8,  16 },
+    [FONT_BOLD]             = {},
+    [FONT_NARROW]           = { 8,  15 },
+    [FONT_SMALL_NARROW]     = { 8,   8 },
+    [FONT_NARROWER]         = { 8,  15 },
+    [FONT_SMALL_NARROWER]   = { 8,   8 },
+    [FONT_SHORT_NARROW]     = { 8,  14 },
+    [FONT_SHORT]            = { 8,  14 },
+};
 
 static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/japanese_bold.fwjpnfont");
 
@@ -430,7 +603,7 @@ void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
     }
 }
 
-u16 FontFunc_Small(struct TextPrinter *textPrinter)
+static u16 FontFunc_Small(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -442,7 +615,7 @@ u16 FontFunc_Small(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_NormalCopy1(struct TextPrinter *textPrinter)
+static u16 FontFunc_NormalCopy1(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -454,7 +627,7 @@ u16 FontFunc_NormalCopy1(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_Normal(struct TextPrinter *textPrinter)
+static u16 FontFunc_Normal(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -466,7 +639,7 @@ u16 FontFunc_Normal(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_Short(struct TextPrinter *textPrinter)
+static u16 FontFunc_Short(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -478,7 +651,7 @@ u16 FontFunc_Short(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_NormalCopy2(struct TextPrinter *textPrinter)
+static u16 FontFunc_NormalCopy2(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -490,7 +663,7 @@ u16 FontFunc_NormalCopy2(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_Male(struct TextPrinter *textPrinter)
+static u16 FontFunc_Male(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -502,7 +675,7 @@ u16 FontFunc_Male(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_Female(struct TextPrinter *textPrinter)
+static u16 FontFunc_Female(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -514,7 +687,7 @@ u16 FontFunc_Female(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_Narrow(struct TextPrinter *textPrinter)
+static u16 FontFunc_Narrow(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -526,7 +699,7 @@ u16 FontFunc_Narrow(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_SmallNarrow(struct TextPrinter *textPrinter)
+static u16 FontFunc_SmallNarrow(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -538,7 +711,7 @@ u16 FontFunc_SmallNarrow(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_Narrower(struct TextPrinter *textPrinter)
+static u16 FontFunc_Narrower(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -550,7 +723,7 @@ u16 FontFunc_Narrower(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_SmallNarrower(struct TextPrinter *textPrinter)
+static u16 FontFunc_SmallNarrower(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -562,7 +735,7 @@ u16 FontFunc_SmallNarrower(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-u16 FontFunc_ShortNarrow(struct TextPrinter *textPrinter)
+static u16 FontFunc_ShortNarrow(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
 
@@ -1408,6 +1581,50 @@ u8 GetKeypadIconWidth(u8 keypadIconId)
 u8 GetKeypadIconHeight(u8 keypadIconId)
 {
     return sKeypadIcons[keypadIconId].height;
+}
+
+void SetDefaultFontsPointer(void)
+{
+    SetFontsPointer(sFontInfos);
+}
+
+u8 GetFontAttribute(u8 fontId, u8 attributeId)
+{
+    int result = 0;
+
+    switch (attributeId)
+    {
+    case FONTATTR_MAX_LETTER_WIDTH:
+        result = sFontInfos[fontId].maxLetterWidth;
+        break;
+    case FONTATTR_MAX_LETTER_HEIGHT:
+        result = sFontInfos[fontId].maxLetterHeight;
+        break;
+    case FONTATTR_LETTER_SPACING:
+        result = sFontInfos[fontId].letterSpacing;
+        break;
+    case FONTATTR_LINE_SPACING:
+        result = sFontInfos[fontId].lineSpacing;
+        break;
+    case FONTATTR_UNKNOWN:
+        result = sFontInfos[fontId].unk;
+        break;
+    case FONTATTR_COLOR_FOREGROUND:
+        result = sFontInfos[fontId].fgColor;
+        break;
+    case FONTATTR_COLOR_BACKGROUND:
+        result = sFontInfos[fontId].bgColor;
+        break;
+    case FONTATTR_COLOR_SHADOW:
+        result = sFontInfos[fontId].shadowColor;
+        break;
+    }
+    return result;
+}
+
+u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension)
+{
+    return gMenuCursorDimensions[fontId][whichDimension];
 }
 
 void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese)

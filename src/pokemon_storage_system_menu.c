@@ -5,7 +5,6 @@
 #include "field_weather.h"
 #include "help_system.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "overworld.h"
 #include "pokemon_storage_system_internal.h"
 #include "script.h"
@@ -209,7 +208,7 @@ static void Task_PCMainMenu(u8 taskId)
     case STATE_LOAD:
         SetHelpContext(HELPCONTEXT_BILLS_PC);
         CreatePCMainMenu(task->tSelectedOption, &task->tWindowId);
-        LoadStdWindowFrameGfx();
+        LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, FALSE);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
@@ -350,8 +349,8 @@ static void CreatePCMainMenu(u8 whichMenu, s16 *windowIdPtr)
     s16 windowId = AddWindow(&sWindowTemplate_MainMenu);
 
     DrawStdWindowFrame(windowId, FALSE);
-    PrintTextArray(windowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, 16, ARRAY_COUNT(sMainMenuTexts), (void *)sMainMenuTexts);
-    Menu_InitCursor(windowId, FONT_NORMAL, 0, 2, 16, ARRAY_COUNT(sMainMenuTexts), whichMenu);
+    PrintMenuActionTextsAtPos(windowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, 16, ARRAY_COUNT(sMainMenuTexts), (void *)sMainMenuTexts);
+    InitMenuNormal(windowId, FONT_NORMAL, 0, 2, 16, ARRAY_COUNT(sMainMenuTexts), whichMenu);
     *windowIdPtr = windowId;
 }
 

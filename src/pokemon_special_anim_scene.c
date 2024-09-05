@@ -6,7 +6,6 @@
 #include "item.h"
 #include "item_icon.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "pokemon_special_anim_internal.h"
 #include "random.h"
 #include "strings.h"
@@ -386,7 +385,7 @@ void PSA_PrintMessage(u8 messageId)
     struct PokemonSpecialAnimScene * scene = PSA_GetSceneWork();
     u16 itemId = PSA_GetItemId();
     u16 strWidth = 0;
-    u8 textSpeed = GetTextSpeedSetting();
+    u8 textSpeed = GetPlayerTextSpeedDelay();
     struct Pokemon * pokemon = PSA_GetPokemon();
     u16 level;
     u8 *str;

@@ -4,7 +4,6 @@
 #include "m4a.h"
 #include "scanline_effect.h"
 #include "task.h"
-#include "new_menu_helpers.h"
 #include "event_data.h"
 #include "help_system.h"
 #include "menu_indicators.h"
@@ -3179,8 +3178,8 @@ u8 DexScreen_DrawMonAreaPage(void)
 
     // Draw the mon icon
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[11], PIXEL_FILL(0));
-    ListMenu_LoadMonIconPalette(BG_PLTT_ID(10), species);
-    ListMenu_DrawMonIconGraphics(sPokedexScreenData->windowIds[11], species, DexScreen_GetDefaultPersonality(species), 0, 0);
+    LoadMonIconPalAtOffset(BG_PLTT_ID(10), species);
+    DrawMonIconAtPos(sPokedexScreenData->windowIds[11], species, DexScreen_GetDefaultPersonality(species), 0, 0);
     PutWindowTilemap(sPokedexScreenData->windowIds[11]);
     CopyWindowToVram(sPokedexScreenData->windowIds[11], COPYWIN_GFX);
 

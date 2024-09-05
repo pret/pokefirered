@@ -11,7 +11,6 @@
 #include "mail_data.h"
 #include "menu.h"
 #include "naming_screen.h"
-#include "new_menu_helpers.h"
 #include "pc_screen_effect.h"
 #include "pokemon_icon.h"
 #include "pokemon_storage_system_internal.h"
@@ -2607,7 +2606,7 @@ static void PrintStorageMessage(u8 id)
 
 static void ShowYesNoWindow(s8 cursorPos)
 {
-    CreateYesNoMenu(&sYesNoWindowTemplate, FONT_NORMAL_COPY_1, 0, 2, 11, 14, 1);
+    CreateYesNoMenuAtPos(&sYesNoWindowTemplate, FONT_NORMAL_COPY_1, 0, 2, 11, 14, 1);
     Menu_MoveCursorNoWrapAround(cursorPos);
 }
 

@@ -2,7 +2,7 @@
 #include "gflib.h"
 #include "event_data.h"
 #include "graphics.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "pokemon_icon.h"
 #include "pokemon_storage_system_internal.h"
 #include "strings.h"

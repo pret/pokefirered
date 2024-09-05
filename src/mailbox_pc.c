@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gflib.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "list_menu.h"
 #include "player_pc.h"
 #include "strings.h"
@@ -61,7 +60,7 @@ u8 MailboxPC_GetAddWindow(u8 winIdx)
     if (sWindowIds[winIdx] == 0xFF)
     {
         sWindowIds[winIdx] = AddWindow(&sWindowTemplates[winIdx]);
-        SetStdWindowBorderStyle(sWindowIds[winIdx], 0);
+        SetStandardWindowBorderStyle(sWindowIds[winIdx], 0);
     }
     return sWindowIds[winIdx];
 }

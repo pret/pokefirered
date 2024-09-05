@@ -13,7 +13,6 @@
 #include "menu.h"
 #include "overworld.h"
 #include "naming_screen.h"
-#include "new_menu_helpers.h"
 #include "pokemon_icon.h"
 #include "pokemon_storage_system.h"
 #include "strings.h"
@@ -744,7 +743,7 @@ static void DisplaySentToPCMessage(void)
     StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
     DrawDialogueFrame(0, FALSE);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetTextSpeedSetting(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, GetPlayerTextSpeedDelay(), NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 

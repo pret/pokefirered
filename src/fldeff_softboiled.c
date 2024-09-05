@@ -2,7 +2,6 @@
 #include "gflib.h"
 #include "party_menu.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "constants/songs.h"
 
 static void Task_SoftboiledRestoreHealth(u8 taskId);

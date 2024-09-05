@@ -2,7 +2,6 @@
 #include "gflib.h"
 #include "dynamic_placeholder_text_util.h"
 #include "menu.h"
-#include "new_menu_helpers.h"
 #include "overworld.h"
 #include "pokedex.h"
 #include "scanline_effect.h"

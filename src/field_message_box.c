@@ -1,7 +1,7 @@
 #include "global.h"
 #include "field_message_box.h"
 #include "gflib.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "quest_log.h"
 #include "script.h"
 #include "text_window.h"
@@ -30,7 +30,7 @@ static void Task_DrawFieldMessageBox(u8 taskId)
             LoadQuestLogWindowTiles(0, 0x200);
         }
         else if (!IsMsgSignpost())
-            LoadStdWindowFrameGfx();
+            LoadMessageBoxAndBorderGfx();
         else
             LoadSignpostWindowFrameGfx();
         task->data[0]++;
@@ -40,7 +40,7 @@ static void Task_DrawFieldMessageBox(u8 taskId)
         task->data[0]++;
         break;
     case 2:
-        if (RunTextPrinters_CheckPrinter0Active() != TRUE)
+        if (RunTextPrintersAndIsPrinter0Active() != TRUE)
         {
             sMessageBoxType = FIELD_MESSAGE_BOX_HIDDEN;
             DestroyTask(taskId);
@@ -82,7 +82,7 @@ bool8 ShowFieldAutoScrollMessage(const u8 *str)
 static void ExpandStringAndStartDrawFieldMessageBox(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
-    AddTextPrinterDiffStyle(TRUE);
+    AddTextPrinterForMessage(TRUE);
     CreateTask_DrawFieldMessageBox();
 }
 

@@ -1,7 +1,7 @@
 #include "task.h"
 #include "gflib.h"
 #include "menu_helpers.h"
-#include "new_menu_helpers.h"
+#include "menu.h"
 #include "scanline_effect.h"
 #include "decompress.h"
 #include "list_menu.h"
@@ -676,7 +676,7 @@ static void TeachyTvSetupPostBattleWindowAndObj(u8 taskId)
 static void TeachyTvInitTextPrinter(const u8 *text)
 {
     gTextFlags.autoScroll = 0;
-    AddTextPrinterParameterized2(0, FONT_MALE, text, GetTextSpeedSetting(), 0, 1, 0xC, 3);
+    AddTextPrinterParameterized2(0, FONT_MALE, text, GetPlayerTextSpeedDelay(), 0, 1, 0xC, 3);
 }
 
 static void TeachyTvFree(void)

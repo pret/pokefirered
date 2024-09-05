@@ -8,7 +8,6 @@
 #include "region_map.h"
 #include "party_menu.h"
 #include "field_effect.h"
-#include "new_menu_helpers.h"
 #include "menu.h"
 #include "strings.h"
 #include "map_preview_screen.h"

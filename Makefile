@@ -89,8 +89,14 @@ else
   PATH_MODERNCC := PATH="$(PATH)" $(MODERNCC)
   CC1 := $(shell $(PATH_MODERNCC) --print-prog-name=cc1) -quiet
   override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
-  LIBPATH := -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_MODERNCC) -mthumb -print-file-name=libc.a))"
-  LIB := $(LIBPATH) -lgcc -lc -lnosys
+  LIBPATH := -L $(shell dirname $(shell $(PATH_MODERNCC) -print-file-name=libgcc.a)) -L $(shell dirname $(shell $(PATH_MODERNCC) -print-file-name=libc.a))
+  LIB := $(LIBPATH) -lc -lgcc
+  ifneq ($(DEVKITARM),)
+    ifeq ($(TOOLCHAIN),$(DEVKITARM))
+      LIB += -lsysbase -lc
+    endif
+  endif
+  LIB += -lnosys
 endif
 # Enable debug info if set
 ifeq ($(DINFO),1)
@@ -194,7 +200,6 @@ endif
 syms: $(SYM)
 
 clean: tidy clean-tools clean-generated clean-assets
-#	@$(MAKE) clean -C libagbsyscall
 
 clean-assets:
 	rm -f $(MID_SUBDIR)/*.s
@@ -371,15 +376,11 @@ LD_SCRIPT := ld_script_modern.ld
 LD_SCRIPT_DEPS :=
 endif
 
-$(OBJ_DIR)/ld_script.ld: $(LD_SCRIPT) $(LD_SCRIPT_DEPS)
-	sed "s#tools/#tools/#g" $(LD_SCRIPT) > $(OBJ_DIR)/ld_script.ld
-
 # Final rules
 
 # Elf from object files
-$(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
-	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ <objects> <lib>"
-	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
+$(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS)
+	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 # Builds the rom from the elf file

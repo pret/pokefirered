@@ -25,12 +25,12 @@ BUILD_DIR := build
 ifeq ($(GAME_VERSION),FIRERED)
   TITLE       := POKEMON FIRE
   GAME_CODE   := BPR
-  BUILD_NAME   := firered
+  BUILD_NAME  := firered
 else
 ifeq ($(GAME_VERSION),LEAFGREEN)
   TITLE       := POKEMON LEAF
   GAME_CODE   := BPG
-  BUILD_NAME   := leafgreen
+  BUILD_NAME  := leafgreen
 else
   $(error unknown version $(GAME_VERSION))
 endif

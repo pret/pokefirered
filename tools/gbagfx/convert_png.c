@@ -62,7 +62,7 @@ static unsigned char *ConvertBitDepth(unsigned char *src, int srcBitDepth, int d
 
         for (j = 8 - srcBitDepth; j >= 0; j -= srcBitDepth)
         {
-            unsigned char pixel = (srcByte >> j) % (1 << destBitDepth);
+            unsigned char pixel = ((srcByte >> j) % (1 << srcBitDepth)) % (1 << destBitDepth);
             *dest |= pixel << destBit;
             destBit -= destBitDepth;
             if (destBit < 0)
@@ -130,7 +130,6 @@ void ReadPng(char *path, struct Image *image)
             FATAL_ERROR("Bit depth of image must be 1, 2, 4, or 8.\n");
         image->pixels = ConvertBitDepth(image->pixels, bit_depth, image->bitDepth, image->width * image->height);
         free(src);
-        image->bitDepth = bit_depth;
     }
 }
 

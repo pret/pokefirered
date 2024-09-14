@@ -9,6 +9,8 @@ MODERN        ?= 0
 # Compares the ROM to a checksum of the original - only makes sense using when non-modern
 COMPARE       ?= 0
 
+KEEP_TEMPS    ?= 0
+
 ifeq (modern,$(MAKECMDGOALS))
   MODERN := 1
 endif

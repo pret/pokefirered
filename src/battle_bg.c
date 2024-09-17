@@ -398,18 +398,12 @@ static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
 
 static void LoadBattleTerrainGfx(u16 terrain)
 {
-    u32 palettes = 0;
     if (terrain >= NELEMS(gBattleTerrainInfo))
         terrain = BATTLE_TERRAIN_PLAIN;
     // Copy to bg3
     LZDecompressVram(gBattleTerrainInfo[terrain].background.tileset, (void *)BG_CHAR_ADDR(2));
     LZDecompressVram(gBattleTerrainInfo[terrain].background.tilemap, (void *)BG_SCREEN_ADDR(26));
     LoadCompressedPalette(gBattleTerrainInfo[terrain].background.palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
-
-    palettes ^= (1 << 2);
-    palettes ^= (1 << 3);
-    palettes ^= (1 << 4);
-    UpdatePalettesWithTime(palettes);
 }
 
 static void LoadBattleTerrainEntryGfx(u16 terrain)

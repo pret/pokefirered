@@ -51,10 +51,10 @@ MtEmber_Exterior_EventScript_BattleGrunt1::
 MtEmber_Exterior_EventScript_DefeatedBothGrunts::
 	msgbox MtEmber_Exterior_Text_WellRegroupDontStepInsideThere
 	closemessage
-	fadescreen FADE_TO_BLACK
+	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject LOCALID_GRUNT1
 	removeobject LOCALID_GRUNT2
-	fadescreen FADE_FROM_BLACK
+	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 

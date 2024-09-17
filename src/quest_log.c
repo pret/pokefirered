@@ -1246,6 +1246,15 @@ static bool8 RestoreScreenAfterPlayback(u8 taskId)
 
     CopyPaletteInvertedTint(&gPlttBufferUnfaded[BG_PLTT_ID(0) + 1], &gPlttBufferFaded[BG_PLTT_ID(0) + 1], 0xDF, 15 - tTimer);
     CopyPaletteInvertedTint(&gPlttBufferUnfaded[OBJ_PLTT_ID(0)], &gPlttBufferFaded[OBJ_PLTT_ID(0)], 0x100, 15 - tTimer);
+                            
+    gTimeUpdateCounter = 0;
+    UpdateTimeOfDay();
+    
+    if (MapHasNaturalLight(gMapHeader.mapType))
+    {
+        UpdateAltBgPalettes(PALETTES_BG);
+        UpdatePalettesWithTime(PALETTES_ALL);
+    }
     FillWindowPixelRect(sWindowIds[WIN_TOP_BAR],
                         0x00, 0,
                         sWindowTemplates[WIN_TOP_BAR].height * 8 - 1 - tTimer,

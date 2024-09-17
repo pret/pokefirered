@@ -216,6 +216,12 @@ gScriptCmdTable::
 	.4byte ScrCmd_bufferitemnameplural           @ 0xd4
 	.4byte ScrCmd_selectapproachingtrainer       @ 0xd5
 	.4byte ScrCmd_lockfortrainer                 @ 0xd6
+	.4byte ScrCmd_nop1							 @ 0xd7
+	.4byte ScrCmd_nop1							 @ 0xd8
+	.4byte ScrCmd_nop1							 @ 0xd9
+	.4byte ScrCmd_nop1							 @ 0xda
+	.4byte ScrCmd_nop1							 @ 0xdb
+	.4byte ScrCmd_fadescreenswapbuffers          @ 0xdc
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

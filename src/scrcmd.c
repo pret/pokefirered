@@ -3,6 +3,7 @@
 #include "clock.h"
 #include "rtc.h"
 #include "script.h"
+#include "decompress.h"
 #include "mystery_event_script.h"
 #include "event_data.h"
 #include "event_scripts.h"
@@ -642,6 +643,32 @@ bool8 ScrCmd_fadescreenspeed(struct ScriptContext * ctx)
     u8 speed = ScriptReadByte(ctx);
 
     FadeScreen(mode, speed);
+    SetupNativeScript(ctx, IsPaletteNotActive);
+    return TRUE;
+}
+
+bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
+{
+    u8 mode = ScriptReadByte(ctx);
+    u8 nowait = ScriptReadByte(ctx);
+
+    switch (mode)
+    {
+    case FADE_TO_BLACK:
+    case FADE_TO_WHITE:
+    default:
+        CpuCopy32(gPlttBufferUnfaded, gDecompressionBuffer, PLTT_SIZE);
+        FadeScreen(mode, 0);
+        break;
+    case FADE_FROM_BLACK:
+    case FADE_FROM_WHITE:
+        CpuCopy32(gDecompressionBuffer, gPlttBufferUnfaded, PLTT_SIZE);
+        FadeScreen(mode, 0);
+        break;
+    }
+
+    if (nowait)
+        return FALSE;
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }

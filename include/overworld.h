@@ -27,6 +27,11 @@
 #define MOVEMENT_MODE_FROZEN 1
 #define MOVEMENT_MODE_SCRIPTED 2
 
+#define TIME_OF_DAY_NIGHT       0
+#define TIME_OF_DAY_TWILIGHT    1
+#define TIME_OF_DAY_DAY         2
+#define TIME_OF_DAY_MAX         TIME_OF_DAY_DAY
+
 struct LinkPlayerObjectEvent
 {
     u8 active;
@@ -49,6 +54,14 @@ enum {
     MUSIC_DISABLE_KEEP,
 };
 
+struct __attribute__((packed)) TimeBlendSettings {
+  u16 weight:9;
+  u16 time1:3;
+  u16 time0:3;
+  u16 unused:1;
+  u16 altWeight;
+};
+
 
 extern struct WarpData gLastUsedWarp;
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
@@ -65,6 +78,10 @@ extern u8 gExitStairsMovementDisabled;
 
 extern u8 gDisableMapMusicChangeOnMapLoad;
 extern u8 gGlobalFieldTintMode;
+extern u8 gTimeOfDay;
+extern u16 gTimeUpdateCounter;
+
+extern struct TimeBlendSettings currentTimeBlend;
 
 extern const struct Coords32 gDirectionToVectors[];
 
@@ -178,10 +195,15 @@ u16 SetLinkWaitingForScript(void);
 void SetMainCallback1(MainCallback cb);
 void CB1_Overworld(void);
 void CB2_ReturnToFieldContinueScript(void);
+u8 UpdateTimeOfDay(void);
+bool8 MapHasNaturalLight(u8 mapType);
+void UpdateAltBgPalettes(u16 palettes);
+void UpdatePalettesWithTime(u32);
 u8 GetLastUsedWarpMapSectionId(void);
 void StoreInitialPlayerAvatarState(void);
 void UpdateEscapeWarp(s16 x, s16 y);
 bool8 SetDiveWarpEmerge(u16 x, u16 y);
 bool8 SetDiveWarpDive(u16 x, u16 y);
+u8 UpdateSpritePaletteWithTime(u8 paletteNum);
 
 #endif //GUARD_OVERWORLD_H

@@ -79,7 +79,8 @@ typedef void (*TilesetCB)(void);
 
 struct Tileset
 {
-    /*0x00*/ bool8 isCompressed;
+    /*0x00*/ bool8 isCompressed:1;
+    /*0x00*/ u8 swapPalettes:7; // bitmask determining whether palette has an alternate, night-time palette
     /*0x01*/ bool8 isSecondary;
     /*0x04*/ const u32 *tiles;
     /*0x08*/ const u16 (*palettes)[16];

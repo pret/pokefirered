@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gflib.h"
+#include "overworld.h"
 #include "palette_util.h"
 #include "util.h"
 
@@ -374,6 +375,8 @@ void UpdatePulseBlend(struct PulseBlend *pulseBlend)
                 if (--pulseBlendPalette->delayCounter == 0xFF)
                 {
                     pulseBlendPalette->delayCounter = pulseBlendPalette->pulseBlendSettings.delay;
+                    CpuFastCopy(gPlttBufferUnfaded + pulseBlendPalette->pulseBlendSettings.paletteOffset, gPlttBufferFaded + pulseBlendPalette->pulseBlendSettings.paletteOffset, PLTT_SIZE_4BPP);
+                    UpdatePalettesWithTime(1 << (pulseBlendPalette->pulseBlendSettings.paletteOffset >> 4));
                     BlendPalette(pulseBlendPalette->pulseBlendSettings.paletteOffset, pulseBlendPalette->pulseBlendSettings.numColors, pulseBlendPalette->blendCoeff, pulseBlendPalette->pulseBlendSettings.blendColor);
                     switch (pulseBlendPalette->pulseBlendSettings.fadeType)
                     {

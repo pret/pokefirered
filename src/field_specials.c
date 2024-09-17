@@ -20,6 +20,7 @@
 #include "battle_tower.h"
 #include "field_camera.h"
 #include "field_effect.h"
+#include "field_weather.h"
 #include "event_object_movement.h"
 #include "item.h"
 #include "menu_indicators.h"
@@ -2476,6 +2477,7 @@ static void MoveDeoxysObject(u8 num)
 {
     u8 mapObjId;
     LoadPalette(sDeoxysObjectPals[num], OBJ_PLTT_ID(10), PLTT_SIZEOF(4));
+    UpdateSpritePaletteWithWeather(10, FALSE);
     ApplyGlobalFieldPaletteTint(10);
     TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
     if (num == 0)

@@ -1764,6 +1764,15 @@
 	.byte 0xd6
 	.endm
 
+	@ Equivalent to fadescreen but copies gPlttBufferUnfaded to gDecompressionBuffer on the fade out
+	@ and the reverse on the fade in, in effect saving gPlttBufferUnfaded to restore it.
+	@ If nowait set, does not wait for the fade to complete
+	.macro fadescreenswapbuffers mode:req, nowait=0
+	.byte 0xdc
+	.byte \mode
+	.byte \nowait
+	.endm
+
 	.macro _dynmultichoice left:req, top:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req argv:vararg
 	.byte 0xe3
 	.2byte \left

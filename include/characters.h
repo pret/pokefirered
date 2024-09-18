@@ -279,4 +279,71 @@
 #define PLACEHOLDER_ID_GROUDON       0xC
 #define PLACEHOLDER_ID_KYOGRE        0xD
 
+// Note that while all dot combinations are represented in
+// the Braille font, they are not all meaningful characters.
+// Only those that have direct single-character translations are listed.
+#define BRAILLE_CHAR_SPACE           0x00
+#define BRAILLE_CHAR_A               0x01
+//
+#define BRAILLE_CHAR_C               0x03
+#define BRAILLE_CHAR_COMMA           0x04
+#define BRAILLE_CHAR_B               0x05
+#define BRAILLE_CHAR_I               0x06
+#define BRAILLE_CHAR_F               0x07
+//
+#define BRAILLE_CHAR_E               0x09
+//
+#define BRAILLE_CHAR_D               0x0B
+#define BRAILLE_CHAR_COLON           0x0C
+#define BRAILLE_CHAR_H               0x0D
+#define BRAILLE_CHAR_J               0x0E
+#define BRAILLE_CHAR_G               0x0F
+#define BRAILLE_CHAR_APOSTROPHE      0x10
+#define BRAILLE_CHAR_K               0x11
+#define BRAILLE_CHAR_SLASH           0x12
+#define BRAILLE_CHAR_M               0x13
+#define BRAILLE_CHAR_SEMICOLON       0x14
+#define BRAILLE_CHAR_L               0x15
+#define BRAILLE_CHAR_S               0x16
+#define BRAILLE_CHAR_P               0x17
+//
+#define BRAILLE_CHAR_O               0x19
+//
+#define BRAILLE_CHAR_N               0x1B
+#define BRAILLE_CHAR_EXCL_MARK       0x1C
+#define BRAILLE_CHAR_R               0x1D
+#define BRAILLE_CHAR_T               0x1E
+#define BRAILLE_CHAR_Q               0x1F
+//
+#define BRAILLE_CHAR_PERIOD          0x2C
+//
+#define BRAILLE_CHAR_W               0x2E
+//
+#define BRAILLE_CHAR_HYPHEN          0x30
+#define BRAILLE_CHAR_U               0x31
+//
+#define BRAILLE_CHAR_X               0x33
+#define BRAILLE_CHAR_QUESTION_MARK   0x34 // Also double quote left
+#define BRAILLE_CHAR_V               0x35
+//
+#define BRAILLE_CHAR_DBL_QUOTE_RIGHT 0x38
+#define BRAILLE_CHAR_Z               0x39
+#define BRAILLE_CHAR_NUMBER          0x3A
+#define BRAILLE_CHAR_Y               0x3B
+#define BRAILLE_CHAR_PAREN           0x3C
+//
+#define NUM_BRAILLE_CHARS            0x40
+
+// Digits must be preceded by BRAILLE_CHAR_NUMBER
+#define BRAILLE_CHAR_1 BRAILLE_CHAR_A
+#define BRAILLE_CHAR_2 BRAILLE_CHAR_B
+#define BRAILLE_CHAR_3 BRAILLE_CHAR_C
+#define BRAILLE_CHAR_4 BRAILLE_CHAR_D
+#define BRAILLE_CHAR_5 BRAILLE_CHAR_E
+#define BRAILLE_CHAR_6 BRAILLE_CHAR_F
+#define BRAILLE_CHAR_7 BRAILLE_CHAR_G
+#define BRAILLE_CHAR_8 BRAILLE_CHAR_H
+#define BRAILLE_CHAR_9 BRAILLE_CHAR_I
+#define BRAILLE_CHAR_0 BRAILLE_CHAR_J
+
 #endif // GUARD_CHARACTERS_H

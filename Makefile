@@ -1,17 +1,20 @@
-TOOLCHAIN := $(DEVKITARM)
-COMPARE ?= 0
+include config.mk
 
+# Default make rule
+all: rom
+
+# Toolchain selection
+TOOLCHAIN := $(DEVKITARM)
 # don't use dkP's base_tools anymore
 # because the redefinition of $(CC) conflicts
 # with when we want to use $(CC) to preprocess files
 # thus, manually create the variables for the bin
 # files, or use arm-none-eabi binaries on the system
 # if dkP is not installed on this system
-
 ifneq (,$(TOOLCHAIN))
-ifneq ($(wildcard $(TOOLCHAIN)/bin),)
-export PATH := $(TOOLCHAIN)/bin:$(PATH)
-endif
+  ifneq ($(wildcard $(TOOLCHAIN)/bin),)
+    export PATH := $(TOOLCHAIN)/bin:$(PATH)
+  endif
 endif
 
 PREFIX := arm-none-eabi-
@@ -20,14 +23,9 @@ OBJDUMP := $(PREFIX)objdump
 AS := $(PREFIX)as
 LD := $(PREFIX)ld
 
-# note: the makefile must be set up so MODERNCC is never called
-# if MODERN=0
-MODERNCC := $(PREFIX)gcc
-
-ifeq ($(OS),Windows_NT)
-EXE := .exe
-else
 EXE :=
+ifeq ($(OS),Windows_NT)
+  EXE := .exe
 endif
 
 # use arm-none-eabi-cpp for macOS
@@ -47,42 +45,20 @@ else
   CPP := $(PREFIX)cpp
 endif
 
-include config.mk
-
-GCC_VER = $(shell $(CC) -dumpversion)
-
-ifeq ($(MODERN),0)
-CC1             := tools/agbcc/bin/agbcc$(EXE)
-override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
-LIBPATH := -L ../../tools/agbcc/lib
-else
-CC1             := $(shell $(MODERNCC) --print-prog-name=cc1) -quiet
-override CFLAGS += -mthumb -mthumb-interwork -O2 -mcpu=arm7tdmi -mabi=apcs-gnu -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
-LIBPATH := -L $(shell dirname $(shell $(MODERNCC) --print-file-name=libgcc.a)) -L $(shell dirname $(shell $(MODERNCC) --print-file-name=libc.a))
-endif
-
-CPPFLAGS := -iquote include -D$(GAME_VERSION) -DREVISION=$(GAME_REVISION) -D$(GAME_LANGUAGE) -DMODERN=$(MODERN)
-ifeq ($(MODERN),0)
-CPPFLAGS += -I tools/agbcc -I tools/agbcc/include -nostdinc -undef
-endif
-
-SHELL := /bin/bash -o pipefail
-
 ROM := poke$(BUILD_NAME).gba
-OBJ_DIR := build/$(BUILD_NAME)
+OBJ_DIR := $(BUILD_DIR)/$(BUILD_NAME)
 
-ELF = $(ROM:.gba=.elf)
-MAP = $(ROM:.gba=.map)
-SYM = $(ROM:.gba=.sym)
+ELF := $(ROM:.gba=.elf)
+MAP := $(ROM:.gba=.map)
+SYM := $(ROM:.gba=.sym)
 
+# Commonly used directories
 C_SUBDIR = src
-DATA_C_SUBDIR = src/data
 ASM_SUBDIR = asm
+DATA_SRC_SUBDIR = src/data
 DATA_ASM_SUBDIR = data
 SONG_SUBDIR = sound/songs
 MID_SUBDIR = sound/songs/midi
-SAMPLE_SUBDIR = sound/direct_sound_samples
-CRY_SUBDIR = sound/direct_sound_samples/cries
 
 C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
@@ -90,32 +66,61 @@ DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 
+SHELL := bash -o pipefail
+
+# Set flags for tools
 ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym MODERN=$(MODERN)
 
-LDFLAGS = -Map ../../$(MAP)
+INCLUDE_DIRS := include
+INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
+INCLUDE_SCANINC_ARGS := $(INCLUDE_DIRS:%=-I %)
 
-LIB := $(LIBPATH) -lc -lgcc
-ifneq ($(MODERN),0)
-ifneq ($(DEVKITARM),)
-ifeq ($(TOOLCHAIN),$(DEVKITARM))
-LIB += -lsysbase -lc
+O_LEVEL ?= 2
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -D$(GAME_VERSION) -DREVISION=$(GAME_REVISION) -D$(GAME_LANGUAGE) -DMODERN=$(MODERN)
+ifeq ($(MODERN),0)
+  CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef
+  CC1 := tools/agbcc/bin/agbcc$(EXE)
+  override CFLAGS += -mthumb-interwork -Wimplicit -Wparentheses -Werror -O$(O_LEVEL) -fhex-asm
+  LIBPATH := -L ../../tools/agbcc/lib
+  LIB := $(LIBPATH) -lgcc -lc
+else
+  # Note: The makefile must be set up to not call these if modern == 0
+  MODERNCC := $(PREFIX)gcc
+  PATH_MODERNCC := PATH="$(PATH)" $(MODERNCC)
+  CC1 := $(shell $(PATH_MODERNCC) --print-prog-name=cc1) -quiet
+  override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
+  LIBPATH := -L $(shell dirname $(shell $(PATH_MODERNCC) -print-file-name=libgcc.a)) -L $(shell dirname $(shell $(PATH_MODERNCC) -print-file-name=libc.a))
+  LIB := $(LIBPATH) -lc -lgcc
+  ifneq ($(DEVKITARM),)
+    ifeq ($(TOOLCHAIN),$(DEVKITARM))
+      LIB += -lsysbase -lc
+    endif
+  endif
+  LIB += -lnosys
 endif
-endif
-LIB += -lnosys
+# Enable debug info if set
+ifeq ($(DINFO),1)
+  override CFLAGS += -g
 endif
 
-SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
-GFX := tools/gbagfx/gbagfx
-AIF := tools/aif2pcm/aif2pcm
-MID := tools/mid2agb/mid2agb
-SCANINC := tools/scaninc/scaninc
-PREPROC := tools/preproc/preproc
-RAMSCRGEN := tools/ramscrgen/ramscrgen
-FIX := tools/gbafix/gbafix
-MAPJSON := tools/mapjson/mapjson
-JSONPROC := tools/jsonproc/jsonproc
+# Variable filled out in other make files
+AUTO_GEN_TARGETS :=
+include make_tools.mk
+# Tool executables
+GFX       := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
+AIF       := $(TOOLS_DIR)/aif2pcm/aif2pcm$(EXE)
+MID       := $(TOOLS_DIR)/mid2agb/mid2agb$(EXE)
+SCANINC   := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
+PREPROC   := $(TOOLS_DIR)/preproc/preproc$(EXE)
+RAMSCRGEN := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
+FIX       := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
+MAPJSON   := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
+JSONPROC  := $(TOOLS_DIR)/jsonproc/jsonproc$(EXE)
 
 PERL := perl
+SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
+
+MAKEFLAGS += --no-print-directory
 
 # Clear the default suffixes
 .SUFFIXES:
@@ -124,25 +129,41 @@ PERL := perl
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
-# Secondary expansion is required for dependency variables in object rules.
-.SECONDEXPANSION:
+ALL_BUILDS := firered firered_rev1 leafgreen leafgreen_rev1
+ALL_BUILDS += $(ALL_BUILDS:%=%_modern)
 
-$(shell mkdir -p $(C_BUILDDIR) $(ASM_BUILDDIR) $(DATA_ASM_BUILDDIR) $(SONG_BUILDDIR) $(MID_BUILDDIR))
+RULES_NO_SCAN += clean clean-assets tidy generated clean-generated
+.PHONY: all rom modern compare $(ALL_BUILDS) $(ALL_BUILDS:%=compare_%)
+.PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
-# Build tools when building the rom
-# Disable dependency scanning for clean/tidy/tools
-ifeq (,$(filter-out all compare syms modern,$(MAKECMDGOALS)))
-$(call infoshell, $(MAKE) tools)
-else
-NODEP := 1
+# Check if we need to scan dependencies based on the chosen rule OR user preference
+NODEP ?= 0
+# Check if we need to pre-build tools and generate assets based on the chosen rule.
+SETUP_PREREQS ?= 1
+# Disable dependency scanning for rules that don't need it.
+ifneq (,$(MAKECMDGOALS))
+  ifeq (,$(filter-out $(RULES_NO_SCAN),$(MAKECMDGOALS)))
+    NODEP := 1
+    SETUP_PREREQS := 0
+  endif
 endif
 
-C_SRCS := $(wildcard $(C_SUBDIR)/*.c)
+ifeq ($(SETUP_PREREQS),1)
+  # If set on: Default target or a rule requiring a scan
+  # Forcibly execute `make tools` since we need them for what we are doing.
+  $(call infoshell, $(MAKE) -f make_tools.mk)
+  # Oh and also generate mapjson sources before we use `SCANINC`.
+  $(call infoshell, $(MAKE) generated)
+endif
+
+# Collect sources
+C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
+C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
-C_ASM_SRCS += $(wildcard $(C_SUBDIR)/*.s $(C_SUBDIR)/*/*.s $(C_SUBDIR)/*/*/*.s)
+C_ASM_SRCS := $(wildcard $(C_SUBDIR)/*.s $(C_SUBDIR)/*/*.s $(C_SUBDIR)/*/*/*.s)
 C_ASM_OBJS := $(patsubst $(C_SUBDIR)/%.s,$(C_BUILDDIR)/%.o,$(C_ASM_SRCS))
 
 ASM_SRCS := $(wildcard $(ASM_SUBDIR)/*.s)
@@ -160,186 +181,37 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 MID_SRCS := $(wildcard $(MID_SUBDIR)/*.mid)
 MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
 
-OBJS := $(C_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
+OBJS     := $(C_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
-TOOLDIRS := $(filter-out tools/agbcc tools/binutils tools/analyze_source,$(wildcard tools/*))
-TOOLBASE = $(TOOLDIRS:tools/%=%)
-TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
+SUBDIRS  := $(sort $(dir $(OBJS)))
+$(shell mkdir -p $(SUBDIRS))
 
-ALL_BUILDS := firered firered_rev1 leafgreen leafgreen_rev1
-ALL_BUILDS += $(ALL_BUILDS:%=%_modern)
+# Pretend rules that are actually flags defer to `make all`
+modern: all
+compare: all
 
-.PHONY: all rom tools clean-tools mostlyclean clean compare tidy syms $(TOOLDIRS) $(ALL_BUILDS) $(ALL_BUILDS:%=compare_%) modern
-
-MAKEFLAGS += --no-print-directory
-
-AUTO_GEN_TARGETS :=
-
-all: tools rom
-
-syms: $(SYM)
-
+# Other rules
 rom: $(ROM)
 ifeq ($(COMPARE),1)
 	@$(SHA1) $(BUILD_NAME).sha1
 endif
 
-tools: $(TOOLDIRS)
+syms: $(SYM)
 
-$(TOOLDIRS):
-	@$(MAKE) -C $@
+clean: tidy clean-tools clean-generated clean-assets
 
-# For contributors to make sure a change didn't affect the contents of the ROM.
-compare:
-	@$(MAKE) COMPARE=1
-
-mostlyclean: tidy
-	rm -f $(SAMPLE_SUBDIR)/*.bin
-	rm -f $(CRY_SUBDIR)/*.bin
-	$(RM) $(SONG_OBJS) $(MID_SUBDIR)/*.s
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
-	$(RM) $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
-	$(RM) $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
+clean-assets:
+	rm -f $(MID_SUBDIR)/*.s
+	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
+	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc
+	find sound -iname '*.bin' -exec rm {} +
+	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
-	$(RM) $(AUTO_GEN_TARGETS)
-
-clean-tools:
-	@$(foreach tooldir,$(TOOLDIRS),$(MAKE) clean -C $(tooldir);)
-
-clean: mostlyclean clean-tools
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
-	$(RM) -r build
-
-include graphics_file_rules.mk
-include tileset_rules.mk
-include map_data_rules.mk
-include spritesheet_rules.mk
-include json_data_rules.mk
-include songs.mk
-
-%.s: ;
-%.png: ;
-%.pal: ;
-%.aif: ;
-
-%.1bpp: %.png  ; $(GFX) $< $@
-%.4bpp: %.png  ; $(GFX) $< $@
-%.8bpp: %.png  ; $(GFX) $< $@
-%.gbapal: %.pal ; $(GFX) $< $@
-%.gbapal: %.png ; $(GFX) $< $@
-%.lz: % ; $(GFX) $< $@
-%.rl: % ; $(GFX) $< $@
-$(CRY_SUBDIR)/%.bin: $(CRY_SUBDIR)/%.aif ; $(AIF) $< $@ --compress
-sound/%.bin: sound/%.aif ; $(AIF) $< $@
-sound/songs/%.s: sound/songs/%.mid
-	$(MID) $< $@
-
-ifeq ($(MODERN),0)
-$(C_BUILDDIR)/agb_flash.o: CFLAGS := -O -mthumb-interwork
-$(C_BUILDDIR)/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
-$(C_BUILDDIR)/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
-
-$(C_BUILDDIR)/m4a.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
-
-$(C_BUILDDIR)/isagbprn.o: CC1 := tools/agbcc/bin/old_agbcc$(EXE)
-$(C_BUILDDIR)/isagbprn.o: CFLAGS := -mthumb-interwork
-
-$(C_BUILDDIR)/trainer_tower.o: CFLAGS += -ffreestanding
-$(C_BUILDDIR)/battle_anim_flying.o: CFLAGS += -ffreestanding
-
-$(C_BUILDDIR)/librfu_intr.o: CC1 := tools/agbcc/bin/agbcc_arm$(EXE)
-$(C_BUILDDIR)/librfu_intr.o: CFLAGS := -O2 -mthumb-interwork -quiet
-else
-$(C_BUILDDIR)/berry_crush_2.o: CFLAGS += -Wno-address-of-packed-member
-$(C_BUILDDIR)/berry_crush_3.o: CFLAGS += -Wno-address-of-packed-member
-$(C_BUILDDIR)/braille_text.o: CFLAGS += -Wno-address-of-packed-member
-$(C_BUILDDIR)/text.o: CFLAGS += -Wno-address-of-packed-member
-$(C_BUILDDIR)/battle_tower.o: CFLAGS += -Wno-div-by-zero
-$(C_BUILDDIR)/librfu_intr.o: override CFLAGS += -marm -mthumb-interwork -O2 -mtune=arm7tdmi -march=armv4t -mabi=apcs-gnu -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
-endif
-
-ifeq ($(NODEP),1)
-$(C_BUILDDIR)/%.o: c_dep :=
-else
-$(C_BUILDDIR)/%.o: c_dep = $(shell [[ -f $(C_SUBDIR)/$*.c ]] && $(SCANINC) -I include -I tools/agbcc/include $(C_SUBDIR)/$*.c)
-endif
-
-ifeq ($(DINFO),1)
-override CFLAGS += -g
-endif
-
-$(C_BUILDDIR)/%.o : $(C_SUBDIR)/%.c $$(c_dep)
-	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
-	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
-	@echo -e ".text\n\t.align\t2, 0 @ Don't pad with nop\n" >> $(C_BUILDDIR)/$*.s
-	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
-
-ifeq ($(NODEP),1)
-$(C_BUILDDIR)/%.o: c_asm_dep :=
-else
-$(C_BUILDDIR)/%.o: c_asm_dep = $(shell [[ -f $(C_SUBDIR)/$*.s ]] && $(SCANINC) -I "" $(C_SUBDIR)/$*.s)
-endif
-
-$(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s $$(c_asm_dep)
-	$(AS) $(ASFLAGS) -o $@ $<
-
-ifeq ($(NODEP),1)
-$(DATA_ASM_BUILDDIR)/%.o: data_dep :=
-else
-$(DATA_ASM_BUILDDIR)/%.o: data_dep = $(shell $(SCANINC) -I . $(DATA_ASM_SUBDIR)/$*.s)
-endif
-
-ifeq ($(NODEP),1)
-$(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
-	$(AS) $(ASFLAGS) -o $@ $<
-else
-define ASM_DEP
-$1: $2 $$(shell $(SCANINC) -I include -I "" $2)
-	$$(AS) $$(ASFLAGS) -o $$@ $$<
-endef
-$(foreach src, $(ASM_SRCS), $(eval $(call ASM_DEP,$(patsubst $(ASM_SUBDIR)/%.s,$(ASM_BUILDDIR)/%.o, $(src)),$(src))))
-endif
-
-ifeq ($(NODEP),1)
-$(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
-	$(PREPROC) $< charmap.txt | $(CPP) -I include - | $(AS) $(ASFLAGS) -o $@
-else
-define DATA_ASM_DEP
-$1: $2 $$(shell $(SCANINC) -I include -I "" $2)
-	$$(PREPROC) $$< charmap.txt | $$(CPP) -I include - | $$(AS) $$(ASFLAGS) -o $$@
-endef
-$(foreach src, $(REGULAR_DATA_ASM_SRCS), $(eval $(call DATA_ASM_DEP,$(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o, $(src)),$(src))))
-endif
-
-$(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
-	$(AS) $(ASFLAGS) -I sound -o $@ $<
-
-$(OBJ_DIR)/sym_bss.ld: sym_bss.txt
-	$(RAMSCRGEN) .bss $< ENGLISH > $@
-
-$(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
-	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
-
-$(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
-	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
-
-ifeq ($(MODERN),0)
-LD_SCRIPT := ld_script.ld
-LD_SCRIPT_DEPS := $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
-else
-LD_SCRIPT := ld_script_modern.ld
-LD_SCRIPT_DEPS :=
-endif
-
-$(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS)
-	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
-	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
-
-$(ROM): $(ELF)
-	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+	$(RM) -r $(BUILD_DIR)
 
 # "friendly" target names for convenience sake
 firered:                ; @$(MAKE) GAME_VERSION=FIRERED
@@ -357,11 +229,160 @@ firered_rev1_modern:   ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=1 MODERN=1
 leafgreen_modern:      ; @$(MAKE) GAME_VERSION=LEAFGREEN MODERN=1
 leafgreen_rev1_modern: ; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=1 MODERN=1
 
-modern: ; @$(MAKE) MODERN=1
+# Other rules
+include graphics_file_rules.mk
+include tileset_rules.mk
+include map_data_rules.mk
+include spritesheet_rules.mk
+include json_data_rules.mk
+include audio_rules.mk
 
-###################
-### Symbol file ###
-###################
+generated: $(AUTO_GEN_TARGETS)
 
+%.s:   ;
+%.png: ;
+%.pal: ;
+%.aif: ;
+
+%.1bpp:   %.png  ; $(GFX) $< $@
+%.4bpp:   %.png  ; $(GFX) $< $@
+%.8bpp:   %.png  ; $(GFX) $< $@
+%.gbapal: %.pal  ; $(GFX) $< $@
+%.gbapal: %.png  ; $(GFX) $< $@
+%.lz:     %      ; $(GFX) $< $@
+%.rl:     %      ; $(GFX) $< $@
+
+# NOTE: Tools must have been built prior (FIXME)
+generated: tools $(AUTO_GEN_TARGETS)
+clean-generated:
+	-rm -f $(AUTO_GEN_TARGETS)
+
+ifeq ($(MODERN),0)
+$(C_BUILDDIR)/agb_flash.o: CFLAGS := -O -mthumb-interwork
+$(C_BUILDDIR)/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
+$(C_BUILDDIR)/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
+
+$(C_BUILDDIR)/m4a.o: CC1 := $(TOOLS_DIR)/agbcc/bin/old_agbcc$(EXE)
+
+$(C_BUILDDIR)/isagbprn.o: CC1 := $(TOOLS_DIR)/agbcc/bin/old_agbcc$(EXE)
+$(C_BUILDDIR)/isagbprn.o: CFLAGS := -mthumb-interwork
+
+$(C_BUILDDIR)/trainer_tower.o: CFLAGS += -ffreestanding
+$(C_BUILDDIR)/battle_anim_flying.o: CFLAGS += -ffreestanding
+
+$(C_BUILDDIR)/librfu_intr.o: CC1 := $(TOOLS_DIR)/agbcc/bin/agbcc_arm$(EXE)
+$(C_BUILDDIR)/librfu_intr.o: CFLAGS := -O2 -mthumb-interwork -quiet
+else
+$(C_BUILDDIR)/berry_crush_2.o: CFLAGS += -Wno-address-of-packed-member
+$(C_BUILDDIR)/berry_crush_3.o: CFLAGS += -Wno-address-of-packed-member
+$(C_BUILDDIR)/braille_text.o: CFLAGS += -Wno-address-of-packed-member
+$(C_BUILDDIR)/text.o: CFLAGS += -Wno-address-of-packed-member
+$(C_BUILDDIR)/battle_tower.o: CFLAGS += -Wno-div-by-zero
+$(C_BUILDDIR)/librfu_intr.o: override CFLAGS += -marm -mthumb-interwork -O2 -mtune=arm7tdmi -march=armv4t -mabi=apcs-gnu -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
+endif
+
+# Dependency rules (for the *.c & *.s sources to .o files)
+# Have to be explicit or else missing files won't be reported.
+
+# As a side effect, they're evaluated immediately instead of when the rule is invoked.
+# It doesn't look like $(shell) can be deferred so there might not be a better way (Icedude_907: there is soon).
+
+# For C dependencies.
+# Args: $1 = Output file without extension (build/assets/src/data), $2 = Input file (src/data.c)
+define C_DEP
+$(call C_DEP_IMPL,$1,$2,$1)
+endef
+# Internal implementation details.
+# $1: Output file without extension, $2 input file, $3 temp path (if keeping)
+define C_DEP_IMPL
+$1.o: $2
+ifneq ($(KEEP_TEMPS),1)
+	@echo "$$(CC1) <flags> -o $$@ $$<"
+	@$$(CPP) $$(CPPFLAGS) $$< | $$(PREPROC) -i $$< charmap.txt | $$(CC1) $$(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $$(AS) $$(ASFLAGS) -o $$@ -
+else
+	@$$(CPP) $$(CPPFLAGS) $$< -o $3.i
+	@$$(PREPROC) $3.i charmap.txt | $$(CC1) $$(CFLAGS) -o $3.s
+	@echo -e ".text\n\t.align\t2, 0 @ Don't pad with nop\n" >> $3.s
+	$$(AS) $$(ASFLAGS) -o $$@ $3.s
+endif
+$1.d: $2
+	$(SCANINC) -M $1.d $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $2
+ifneq ($(NODEP),1)
+$1.o: $1.d
+-include $1.d
+endif
+endef
+
+# Create generic rules if no dependency scanning, else create the real rules
+ifeq ($(NODEP),1)
+$(eval $(call C_DEP,$(C_BUILDDIR)/%,$(C_SUBDIR)/%.c))
+else
+$(foreach src,$(C_SRCS),$(eval $(call C_DEP,$(OBJ_DIR)/$(basename $(src)),$(src))))
+endif
+
+# Similar methodology for Assembly files
+# $1: Output path without extension, $2: Input file (`*.s`)
+define ASM_DEP
+$1.o: $2
+	$$(AS) $$(ASFLAGS) -o $$@ $$<
+$(call ASM_SCANINC,$1,$2)
+endef
+# As above but first doing a preprocessor pass
+define ASM_DEP_PREPROC
+$1.o: $2
+	$$(PREPROC) $$< charmap.txt | $$(CPP) $(INCLUDE_SCANINC_ARGS) - | $$(PREPROC) -ie $$< charmap.txt | $$(AS) $$(ASFLAGS) -o $$@
+$(call ASM_SCANINC,$1,$2)
+endef
+
+define ASM_SCANINC
+ifneq ($(NODEP),1)
+$1.o: $1.d
+$1.d: $2
+	$(SCANINC) -M $1.d $(INCLUDE_SCANINC_ARGS) -I "" $2
+-include $1.d
+endif
+endef
+
+# Dummy rules or real rules
+ifeq ($(NODEP),1)
+$(eval $(call ASM_DEP,$(ASM_BUILDDIR)/%,$(ASM_SUBDIR)/%.s))
+$(eval $(call ASM_DEP_PREPROC,$(C_BUILDDIR)/%,$(C_SUBDIR)/%.s))
+$(eval $(call ASM_DEP_PREPROC,$(DATA_ASM_BUILDDIR)/%,$(DATA_ASM_SUBDIR)/%.s))
+else
+$(foreach src, $(ASM_SRCS), $(eval $(call ASM_DEP,$(src:%.s=$(OBJ_DIR)/%),$(src))))
+$(foreach src, $(C_ASM_SRCS), $(eval $(call ASM_DEP_PREPROC,$(src:%.s=$(OBJ_DIR)/%),$(src))))
+$(foreach src, $(REGULAR_DATA_ASM_SRCS), $(eval $(call ASM_DEP_PREPROC,$(src:%.s=$(OBJ_DIR)/%),$(src))))
+endif
+
+$(OBJ_DIR)/sym_bss.ld: sym_bss.txt
+	$(RAMSCRGEN) .bss $< ENGLISH > $@
+
+$(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
+	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
+
+$(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
+	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
+
+# Linker script
+ifeq ($(MODERN),0)
+LD_SCRIPT := ld_script.ld
+LD_SCRIPT_DEPS := $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
+else
+LD_SCRIPT := ld_script_modern.ld
+LD_SCRIPT_DEPS :=
+endif
+
+# Final rules
+
+# Elf from object files
+$(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS)
+	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
+	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
+
+# Builds the rom from the elf file
+$(ROM): $(ELF)
+	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+
+# Symbol file (`make syms`)
 $(SYM): $(ELF)
 	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@

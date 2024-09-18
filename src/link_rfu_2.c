@@ -1831,7 +1831,7 @@ static void ReceiveRfuLinkPlayers(const struct SioInfo *sioInfo)
 
 // Could be relocated to top of file, but would also require relocating assert strings
 static const char sASCII_PokemonSioInfo[] = "PokemonSioInfo";
-static const u8 sText_Akito[] = _("　あきと"); // Presumably "Akito Mori", one of Game Freak's programmers
+ALIGNED(4) static const u8 sText_Akito[] = _("あきと"); // Presumably "Akito Mori", one of Game Freak's programmers
 static const char sASCII_LinkLossDisconnect[] = "LINK LOSS DISCONNECT!";
 static const char sASCII_LinkLossRecoveryNow[] = "LINK LOSS RECOVERY NOW";
 ALIGNED(4) static const char sASCII_30Spaces[] = {"                              "};

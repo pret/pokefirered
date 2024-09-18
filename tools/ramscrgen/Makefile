@@ -1,4 +1,4 @@
-CXX := g++
+CXX ?= g++
 
 CXXFLAGS := -std=c++11 -O2 -Wall -Wno-switch -Werror
 
@@ -8,10 +8,16 @@ HEADERS := ramscrgen.h sym_file.h elf.h char_util.h
 
 .PHONY: all clean
 
-all: ramscrgen
+ifeq ($(OS),Windows_NT)
+EXE := .exe
+else
+EXE :=
+endif
+
+all: ramscrgen$(EXE)
 	@:
 
-ramscrgen: $(SRCS) $(HEADERS)
+ramscrgen$(EXE): $(SRCS) $(HEADERS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LDFLAGS)
 
 clean:

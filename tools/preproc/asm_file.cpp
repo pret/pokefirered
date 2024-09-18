@@ -26,33 +26,13 @@
 #include "char_util.h"
 #include "utf8.h"
 #include "string_parser.h"
+#include "../../include/characters.h"
+#include "io.h"
 
-AsmFile::AsmFile(std::string filename) : m_filename(filename)
+AsmFile::AsmFile(std::string filename, bool isStdin, bool doEnum) : m_filename(filename)
 {
-    FILE *fp = std::fopen(filename.c_str(), "rb");
-
-    if (fp == NULL)
-        FATAL_ERROR("Failed to open \"%s\" for reading.\n", filename.c_str());
-
-    std::fseek(fp, 0, SEEK_END);
-
-    m_size = std::ftell(fp);
-
-    if (m_size < 0)
-        FATAL_ERROR("File size of \"%s\" is less than zero.\n", filename.c_str());
-    else if (m_size == 0)
-        return; // Empty file
-
-    m_buffer = new char[m_size + 1];
-
-    std::rewind(fp);
-
-    if (std::fread(m_buffer, m_size, 1, fp) != 1)
-        FATAL_ERROR("Failed to read \"%s\".\n", filename.c_str());
-
-    m_buffer[m_size] = 0;
-
-    std::fclose(fp);
+    m_buffer = ReadFileToBuffer(filename.c_str(), isStdin, &m_size);
+    m_doEnum = doEnum;
 
     m_pos = 0;
     m_lineNum = 1;
@@ -64,6 +44,7 @@ AsmFile::AsmFile(std::string filename) : m_filename(filename)
 AsmFile::AsmFile(AsmFile&& other) : m_filename(std::move(other.m_filename))
 {
     m_buffer = other.m_buffer;
+    m_doEnum = other.m_doEnum;
     m_pos = other.m_pos;
     m_size = other.m_size;
     m_lineNum = other.m_lineNum;
@@ -173,6 +154,8 @@ Directive AsmFile::GetDirective()
         return Directive::String;
     else if (CheckForDirective(".braille"))
         return Directive::Braille;
+    else if (CheckForDirective("enum"))
+        return Directive::Enum;
     else
         return Directive::Unknown;
 }
@@ -283,7 +266,7 @@ int AsmFile::ReadString(unsigned char* s)
 
         while (length < padLength)
         {
-            s[length++] = 0;
+            s[length++] = CHAR_SPACE;
         }
     }
 
@@ -292,40 +275,92 @@ int AsmFile::ReadString(unsigned char* s)
     return length;
 }
 
+void AsmFile::VerifyStringLength(int length)
+{
+    if (length == kMaxStringLength)
+        RaiseError("mapped string longer than %d bytes", kMaxStringLength);
+}
+
 int AsmFile::ReadBraille(unsigned char* s)
 {
     static std::map<char, unsigned char> encoding =
     {
-        { 'A', 0x01 },
-        { 'B', 0x05 },
-        { 'C', 0x03 },
-        { 'D', 0x0B },
-        { 'E', 0x09 },
-        { 'F', 0x07 },
-        { 'G', 0x0F },
-        { 'H', 0x0D },
-        { 'I', 0x06 },
-        { 'J', 0x0E },
-        { 'K', 0x11 },
-        { 'L', 0x15 },
-        { 'M', 0x13 },
-        { 'N', 0x1B },
-        { 'O', 0x19 },
-        { 'P', 0x17 },
-        { 'Q', 0x1F },
-        { 'R', 0x1D },
-        { 'S', 0x16 },
-        { 'T', 0x1E },
-        { 'U', 0x31 },
-        { 'V', 0x35 },
-        { 'W', 0x2E },
-        { 'X', 0x33 },
-        { 'Y', 0x3B },
-        { 'Z', 0x39 },
-        { ' ', 0x00 },
-        { ',', 0x04 },
-        { '.', 0x2C },
-        { '$', 0xFF },
+        { 'A', BRAILLE_CHAR_A },
+        { 'B', BRAILLE_CHAR_B },
+        { 'C', BRAILLE_CHAR_C },
+        { 'D', BRAILLE_CHAR_D },
+        { 'E', BRAILLE_CHAR_E },
+        { 'F', BRAILLE_CHAR_F },
+        { 'G', BRAILLE_CHAR_G },
+        { 'H', BRAILLE_CHAR_H },
+        { 'I', BRAILLE_CHAR_I },
+        { 'J', BRAILLE_CHAR_J },
+        { 'K', BRAILLE_CHAR_K },
+        { 'L', BRAILLE_CHAR_L },
+        { 'M', BRAILLE_CHAR_M },
+        { 'N', BRAILLE_CHAR_N },
+        { 'O', BRAILLE_CHAR_O },
+        { 'P', BRAILLE_CHAR_P },
+        { 'Q', BRAILLE_CHAR_Q },
+        { 'R', BRAILLE_CHAR_R },
+        { 'S', BRAILLE_CHAR_S },
+        { 'T', BRAILLE_CHAR_T },
+        { 'U', BRAILLE_CHAR_U },
+        { 'V', BRAILLE_CHAR_V },
+        { 'W', BRAILLE_CHAR_W },
+        { 'X', BRAILLE_CHAR_X },
+        { 'Y', BRAILLE_CHAR_Y },
+        { 'Z', BRAILLE_CHAR_Z },
+        { 'a', BRAILLE_CHAR_A },
+        { 'b', BRAILLE_CHAR_B },
+        { 'c', BRAILLE_CHAR_C },
+        { 'd', BRAILLE_CHAR_D },
+        { 'e', BRAILLE_CHAR_E },
+        { 'f', BRAILLE_CHAR_F },
+        { 'g', BRAILLE_CHAR_G },
+        { 'h', BRAILLE_CHAR_H },
+        { 'i', BRAILLE_CHAR_I },
+        { 'j', BRAILLE_CHAR_J },
+        { 'k', BRAILLE_CHAR_K },
+        { 'l', BRAILLE_CHAR_L },
+        { 'm', BRAILLE_CHAR_M },
+        { 'n', BRAILLE_CHAR_N },
+        { 'o', BRAILLE_CHAR_O },
+        { 'p', BRAILLE_CHAR_P },
+        { 'q', BRAILLE_CHAR_Q },
+        { 'r', BRAILLE_CHAR_R },
+        { 's', BRAILLE_CHAR_S },
+        { 't', BRAILLE_CHAR_T },
+        { 'u', BRAILLE_CHAR_U },
+        { 'v', BRAILLE_CHAR_V },
+        { 'w', BRAILLE_CHAR_W },
+        { 'x', BRAILLE_CHAR_X },
+        { 'y', BRAILLE_CHAR_Y },
+        { 'z', BRAILLE_CHAR_Z },
+        { '0', BRAILLE_CHAR_0 },
+        { '1', BRAILLE_CHAR_1 },
+        { '2', BRAILLE_CHAR_2 },
+        { '3', BRAILLE_CHAR_3 },
+        { '4', BRAILLE_CHAR_4 },
+        { '5', BRAILLE_CHAR_5 },
+        { '6', BRAILLE_CHAR_6 },
+        { '7', BRAILLE_CHAR_7 },
+        { '8', BRAILLE_CHAR_8 },
+        { '9', BRAILLE_CHAR_9 },
+        { ' ', BRAILLE_CHAR_SPACE },
+        { ',', BRAILLE_CHAR_COMMA },
+        { '.', BRAILLE_CHAR_PERIOD },
+        { '?', BRAILLE_CHAR_QUESTION_MARK },
+        { '!', BRAILLE_CHAR_EXCL_MARK },
+        { ':', BRAILLE_CHAR_COLON },
+        { ';', BRAILLE_CHAR_SEMICOLON },
+        { '-', BRAILLE_CHAR_HYPHEN },
+        { '/', BRAILLE_CHAR_SLASH },
+        { '(', BRAILLE_CHAR_PAREN },
+        { ')', BRAILLE_CHAR_PAREN },
+        { '\'', BRAILLE_CHAR_APOSTROPHE },
+        { '#', BRAILLE_CHAR_NUMBER },
+        { '$', EOS },
     };
 
     SkipWhitespace();
@@ -337,14 +372,13 @@ int AsmFile::ReadBraille(unsigned char* s)
 
     m_pos++;
 
+    bool inNumber = false;
     while (m_buffer[m_pos] != '"')
     {
-        if (length == kMaxStringLength)
-            RaiseError("mapped string longer than %d bytes", kMaxStringLength);
-
         if (m_buffer[m_pos] == '\\' && m_buffer[m_pos + 1] == 'n')
         {
-            s[length++] = 0xFE;
+            VerifyStringLength(length);
+            s[length++] = CHAR_NEWLINE;
             m_pos += 2;
         }
         else
@@ -359,6 +393,21 @@ int AsmFile::ReadBraille(unsigned char* s)
                     RaiseError("character '\\x%02X' not valid in braille string", m_buffer[m_pos]);
             }
 
+            if (!inNumber && c >= '0' && c <= '9' )
+            {
+                // Output number indicator at start of a number
+                inNumber = true;
+                VerifyStringLength(length);
+                s[length++] = BRAILLE_CHAR_NUMBER;
+            }
+            else if (inNumber && encoding[c] == BRAILLE_CHAR_SPACE)
+            {
+                // Number ends at a space.
+                // Non-number characters encountered before a space will simply be output as is.
+                inNumber = false;
+            }
+
+            VerifyStringLength(length);
             s[length++] = encoding[c];
             m_pos++;
         }
@@ -460,6 +509,88 @@ void AsmFile::OutputLine()
     }
 }
 
+// parses an assumed C `enum`. Returns false if `enum { ...` is not matched
+bool AsmFile::ParseEnum()
+{
+    if (!m_doEnum)
+        return false;
+
+    long fallbackPosition = m_pos;
+    std::string headerFilename = "";
+    long currentHeaderLine = SkipWhitespaceAndEol();
+    std::string enumName = ReadIdentifier();
+    currentHeaderLine += SkipWhitespaceAndEol();
+    std::string enumBase = "0";
+    long enumCounter = 0;
+    long symbolCount = 0;
+
+    if (m_buffer[m_pos] != '{') // assume assembly macro, otherwise assume enum and report errors accordingly
+    {
+        m_pos = fallbackPosition - 4;
+        return false;
+    }
+
+    currentHeaderLine += FindLastLineNumber(headerFilename);
+    m_pos++;
+    for (;;)
+    {
+        currentHeaderLine += SkipWhitespaceAndEol();
+        std::string currentIdentName = ReadIdentifier();
+        if (!currentIdentName.empty())
+        {
+            std::printf("# %ld \"%s\"\n", currentHeaderLine, headerFilename.c_str());
+            currentHeaderLine += SkipWhitespaceAndEol();
+            if (m_buffer[m_pos] == '=')
+            {
+                m_pos++;
+                SkipWhitespace();
+                enumBase.clear();
+                for (;;)
+                {
+                    if (m_pos == m_size)
+                        RaiseError("unexpected EOF");
+                    if (m_buffer[m_pos] == ',')
+                        break;
+                    if (m_buffer[m_pos] == '\n')
+                    {
+                        currentHeaderLine++;
+                        enumBase.push_back(' ');
+                    }
+                    else
+                    {
+                        enumBase.push_back(m_buffer[m_pos]);
+                    }
+                    m_pos++;
+                }
+                enumCounter = 0;
+            }
+            std::printf(".equiv %s, (%s) + %ld\n", currentIdentName.c_str(), enumBase.c_str(), enumCounter);
+            enumCounter++;
+            symbolCount++;
+        }
+        else if (symbolCount == 0)
+        {
+            RaiseError("%s:%ld: empty enum is invalid", headerFilename.c_str(), currentHeaderLine);
+        }
+
+        if (m_buffer[m_pos] != ',')
+        {
+            currentHeaderLine += SkipWhitespaceAndEol();
+            if (m_buffer[m_pos++] == '}' && m_buffer[m_pos++] == ';')
+            {
+                ExpectEmptyRestOfLine();
+                break;
+            }
+            else
+            {
+                RaiseError("unterminated enum from included file %s:%ld", headerFilename.c_str(), currentHeaderLine);
+            }
+        }
+        m_pos++;
+    }
+    return true;
+}
+
 // Asserts that the rest of the line is empty and moves to the next one.
 void AsmFile::ExpectEmptyRestOfLine()
 {
@@ -531,4 +662,131 @@ void AsmFile::RaiseError(const char* format, ...)
 void AsmFile::RaiseWarning(const char* format, ...)
 {
     DO_REPORT("warning");
+}
+
+// Skips Whitespace including newlines and returns the amount of newlines skipped
+int AsmFile::SkipWhitespaceAndEol()
+{
+    int newlines = 0;
+    while (m_buffer[m_pos] == '\t' || m_buffer[m_pos] == ' ' || m_buffer[m_pos] == '\n')
+    {
+        if (m_buffer[m_pos] == '\n')
+            newlines++;
+        m_pos++;
+    }
+    return newlines;
+}
+
+// returns the last line indicator and its corresponding file name without modifying the token index
+int AsmFile::FindLastLineNumber(std::string& filename)
+{
+    long pos = m_pos;
+    long linebreaks = 0;
+    while (m_buffer[pos] != '#' && pos >= 0)
+    {
+        if (m_buffer[pos] == '\n')
+            linebreaks++;
+        pos--;
+    }
+
+    if (pos < 0)
+        RaiseError("line indicator for header file not found before `enum`");
+    
+    pos++;
+    while (m_buffer[pos] == ' ' || m_buffer[pos] == '\t')
+        pos++;
+
+    if (!IsAsciiDigit(m_buffer[pos]))
+        RaiseError("malformatted line indicator found before `enum`, expected line number");
+    
+    unsigned n = 0;
+    int digit = 0;
+    while ((digit = ConvertDigit(m_buffer[pos++], 10)) != -1)
+        n = 10 * n + digit;
+
+    while (m_buffer[pos] == ' ' || m_buffer[pos] == '\t')
+        pos++;
+
+    if (m_buffer[pos++] != '"')
+        RaiseError("malformatted line indicator found before `enum`, expected filename");
+
+    while (m_buffer[pos] != '"')
+    {
+        unsigned char c = m_buffer[pos++];
+
+        if (c == 0)
+        {
+            if (pos >= m_size)
+                RaiseError("unexpected EOF in line indicator");
+            else
+                RaiseError("unexpected null character in line indicator");
+        }
+
+        if (!IsAsciiPrintable(c))
+            RaiseError("unexpected character '\\x%02X' in line indicator", c);
+
+        if (c == '\\')
+        {
+            c = m_buffer[pos];
+            RaiseError("unexpected escape '\\%c' in line indicator", c);
+        }
+
+        filename += c;
+    }
+    
+    return n + linebreaks - 1;
+}
+
+std::string AsmFile::ReadIdentifier()
+{
+    long start = m_pos;
+    if (!IsIdentifierStartingChar(m_buffer[m_pos]))
+        return std::string();
+
+    m_pos++;
+
+    while (IsIdentifierChar(m_buffer[m_pos]))
+        m_pos++;
+
+    return std::string(&m_buffer[start], m_pos - start);
+}
+
+long AsmFile::ReadInteger(std::string filename, long line)
+{
+    bool negate = false;
+    int radix = 10;
+    if (!IsAsciiDigit(m_buffer[m_pos]))
+    {
+        if (m_buffer[m_pos++] == '-')
+            negate = true;
+        else
+            RaiseError("expected number in included file %s:%ld", filename.c_str(), line);
+    }
+
+    if (m_buffer[m_pos] == '0' && m_buffer[m_pos + 1] == 'x')
+    {
+        radix = 16;
+        m_pos += 2;
+    }
+    else if (m_buffer[m_pos] == '0' && m_buffer[m_pos + 1] == 'b')
+    {
+        radix = 2;
+        m_pos += 2;
+    }
+    else if (m_buffer[m_pos] == '0' && IsAsciiDigit(m_buffer[m_pos+1]))
+    {
+        radix = 8;
+        m_pos++;
+    }
+
+    long n = 0;
+    int digit;
+
+    while ((digit = ConvertDigit(m_buffer[m_pos], radix)) != -1)
+    {
+        n = n * radix + digit;
+        m_pos++;
+    }
+
+    return negate ? -n : n;
 }

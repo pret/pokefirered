@@ -280,5 +280,14 @@
       "quantity": 1,
       "underfoot": false
     }
+  ],
+  "heal_locations": [
+    {
+      "id": "SPAWN_ROUTE10",
+      "x": 13,
+      "y": 21,
+      "respawn_map": "MAP_ROUTE10_POKEMON_CENTER_1F",
+      "respawn_npc": 1
+    }
   ]
 }

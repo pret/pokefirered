@@ -117,5 +117,14 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_EventScript_PokemonNetCenterSign"
     }
+  ],
+  "heal_locations": [
+    {
+      "id": "SPAWN_ONE_ISLAND",
+      "x": 14,
+      "y": 6,
+      "respawn_map": "MAP_ONE_ISLAND_POKEMON_CENTER_1F",
+      "respawn_npc": 1
+    }
   ]
 }

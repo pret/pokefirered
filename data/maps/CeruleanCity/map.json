@@ -413,5 +413,14 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
     }
+  ],
+  "heal_locations": [
+    {
+      "id": "SPAWN_CERULEAN_CITY",
+      "x": 22,
+      "y": 20,
+      "respawn_map": "MAP_CERULEAN_CITY_POKEMON_CENTER_1F",
+      "respawn_npc": 1
+    }
   ]
 }

@@ -162,5 +162,14 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "PalletTown_EventScript_TrainerTips"
     }
+  ],
+  "heal_locations": [
+    {
+      "id": "SPAWN_PALLET_TOWN",
+      "x": 6,
+      "y": 8,
+      "respawn_map": "MAP_PALLET_TOWN_PLAYERS_HOUSE_1F",
+      "respawn_npc": 1
+    }
   ]
 }

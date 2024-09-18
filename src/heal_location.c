@@ -6,7 +6,7 @@
 
 static void SetWhiteoutRespawnHealerNpcAsLastTalked(u32 healLocationIdx);
 
-// Arrays described here because porymap will overrwrite the below data file
+// Arrays described here because mapjson will overrwrite the below data file
 
 // sSpawnPoints
 // This array defines the fly points for unlocked spawns.

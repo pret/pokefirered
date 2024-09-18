@@ -292,5 +292,14 @@
       "quantity": 1,
       "underfoot": false
     }
+  ],
+  "heal_locations": [
+    {
+      "id": "SPAWN_PEWTER_CITY",
+      "x": 17,
+      "y": 26,
+      "respawn_map": "MAP_PEWTER_CITY_POKEMON_CENTER_1F",
+      "respawn_npc": 3
+    }
   ]
 }

@@ -274,5 +274,14 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianCity_EventScript_GymDoor"
     }
+  ],
+  "heal_locations": [
+    {
+      "id": "SPAWN_VIRIDIAN_CITY",
+      "x": 26,
+      "y": 27,
+      "respawn_map": "MAP_VIRIDIAN_CITY_POKEMON_CENTER_1F",
+      "respawn_npc": 1
+    }
   ]
 }

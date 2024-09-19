@@ -401,8 +401,8 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
 
         // Scene changes if last heal location was the player's house
         loc = GetHealLocation(SPAWN_PALLET_TOWN);
-        if (gSaveBlock1Ptr->lastHealLocation.mapGroup == loc->group
-         && gSaveBlock1Ptr->lastHealLocation.mapNum == loc->map
+        if (gSaveBlock1Ptr->lastHealLocation.mapGroup == loc->mapGroup
+         && gSaveBlock1Ptr->lastHealLocation.mapNum == loc->mapNum
          && gSaveBlock1Ptr->lastHealLocation.warpId == WARP_ID_NONE
          && gSaveBlock1Ptr->lastHealLocation.x == loc->x
          && gSaveBlock1Ptr->lastHealLocation.y == loc->y)

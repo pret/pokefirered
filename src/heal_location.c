@@ -31,7 +31,7 @@ static u32 GetHealLocationIndexFromMapGroupAndNum(u16 mapGroup, u16 mapNum)
     u32 i;
 
     for (i = 0; i < NELEMS(sSpawnPoints); i++) {
-        if (sSpawnPoints[i].group == mapGroup && sSpawnPoints[i].map == mapNum)
+        if (sSpawnPoints[i].mapGroup == mapGroup && sSpawnPoints[i].mapNum == mapNum)
         {
             return i + 1;
         }

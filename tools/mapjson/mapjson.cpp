@@ -382,10 +382,10 @@ void process_heal_locations(const vector<string> &map_filepaths, string output_f
         string map_json_text = read_text_file(filepath);
         Json map_data = Json::parse(map_json_text, err);
         if (map_data == Json())
-            FATAL_ERROR("%s\n", err.c_str());
+            FATAL_ERROR("Failed to read '%s' while generating '%s': %s\n", filepath.c_str(), output_file.c_str(), err.c_str());
 
         // Skip if no heal locations present
-        if (map_data.object_items().find("heal_locations") == map_data.object_items().end() || map_data["heal_locations"].array_items().size() < 0)
+        if (map_data.object_items().find("heal_locations") == map_data.object_items().end() || map_data["heal_locations"].array_items().size() <= 0)
             continue;
 
         string map_id = json_to_string(map_data, "id");

@@ -435,7 +435,7 @@ static u32 GetAttributeByMetatileIdAndMapLayout(const struct MapLayout *mapLayou
 
     if (metatile < NUM_METATILES_IN_PRIMARY)
     {
-        attributes = mapLayout->primaryTileset->metatileAttributes;
+        attributes = GetPrimaryTileset(mapLayout)->metatileAttributes;
         return ExtractMetatileAttribute(attributes[metatile], attributeType);
     }
     else if (metatile < NUM_METATILES_TOTAL)
@@ -912,7 +912,7 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
 
 void CopyPrimaryTilesetToVram(const struct MapLayout *mapLayout)
 {
-    CopyTilesetToVram(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
+    CopyTilesetToVram(GetPrimaryTileset(mapLayout), NUM_TILES_IN_PRIMARY, 0);
 }
 
 void CopySecondaryTilesetToVram(const struct MapLayout *mapLayout)
@@ -927,7 +927,7 @@ void CopySecondaryTilesetToVramUsingHeap(const struct MapLayout *mapLayout)
 
 static void LoadPrimaryTilesetPalette(const struct MapLayout *mapLayout)
 {
-    LoadTilesetPalette(mapLayout->primaryTileset, BG_PLTT_ID(0), NUM_PALS_IN_PRIMARY * PLTT_SIZE_4BPP);
+    LoadTilesetPalette(GetPrimaryTileset(mapLayout), BG_PLTT_ID(0), NUM_PALS_IN_PRIMARY * PLTT_SIZE_4BPP);
 }
 
 void LoadSecondaryTilesetPalette(const struct MapLayout *mapLayout)
@@ -939,7 +939,7 @@ void CopyMapTilesetsToVram(struct MapLayout const *mapLayout)
 {
     if (mapLayout)
     {
-        CopyTilesetToVramUsingHeap(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
+        CopyTilesetToVramUsingHeap(GetPrimaryTileset(mapLayout), NUM_TILES_IN_PRIMARY, 0);
         CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
     }
 }

@@ -1555,7 +1555,7 @@ bool8 MapHasNaturalLight(u8 mapType)
 // Update & mix day / night bg palettes (into unfaded)
 void UpdateAltBgPalettes(u16 palettes)
 {
-    const struct Tileset *primary = gMapHeader.mapLayout->primaryTileset;
+    const struct Tileset *primary = GetPrimaryTileset(gMapHeader.mapLayout);
     const struct Tileset *secondary = gMapHeader.mapLayout->secondaryTileset;
     u32 i = 1;
     if (QL_IS_PLAYBACK_STATE)

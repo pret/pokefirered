@@ -201,3 +201,12 @@ const u32 gMetatileAttributes_PokemonLeague[] = INCBIN_U32("data/tilesets/second
 
 const u16 gMetatiles_HallOfFame[] = INCBIN_U16("data/tilesets/secondary/hall_of_fame/metatiles.bin");
 const u32 gMetatileAttributes_HallOfFame[] = INCBIN_U32("data/tilesets/secondary/hall_of_fame/metatile_attributes.bin");
+
+const u16 gMetatiles_GeneralWinter[] = INCBIN_U16("data/tilesets/primary/general_winter/metatiles.bin");
+const u32 gMetatileAttributes_GeneralWinter[] = INCBIN_U32("data/tilesets/primary/general_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_GeneralAutumn[] = INCBIN_U16("data/tilesets/primary/general_autumn/metatiles.bin");
+const u32 gMetatileAttributes_GeneralAutumn[] = INCBIN_U32("data/tilesets/primary/general_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_GeneralSummer[] = INCBIN_U16("data/tilesets/primary/general_summer/metatiles.bin");
+const u32 gMetatileAttributes_GeneralSummer[] = INCBIN_U32("data/tilesets/primary/general_summer/metatile_attributes.bin");

@@ -6,6 +6,7 @@
 #include "event_object_movement.h"
 #include "menu.h"
 #include "overworld.h"
+#include "rtc.h"
 #include "task.h"
 
 EWRAM_DATA bool8 gBikeCameraAheadPanback = FALSE;
@@ -223,6 +224,16 @@ void DrawDoorMetatileAt(int x, int y, const u16 *tiles)
     }
 }
 
+extern const struct Tileset gTilsetsPerSeason[][SEASON_WINTER + 1];
+extern const struct Tileset gTileset_General;
+
+const struct Tileset* GetPrimaryTileset(const struct MapLayout* mapLayout)
+{
+    if (mapLayout->primaryTileset == &gTileset_General)
+        return &gTilsetsPerSeason[0][GetSeason()];
+    return mapLayout->primaryTileset;
+}
+
 static void DrawMetatileAt(const struct MapLayout *mapLayout, u16 offset, int x, int y)
 {
     u16 metatileId = MapGridGetMetatileIdAt(x, y);
@@ -231,7 +242,7 @@ static void DrawMetatileAt(const struct MapLayout *mapLayout, u16 offset, int x,
     if (metatileId > NUM_METATILES_TOTAL)
         metatileId = 0;
     if (metatileId < NUM_METATILES_IN_PRIMARY)
-        metatiles = mapLayout->primaryTileset->metatiles;
+        metatiles = GetPrimaryTileset(mapLayout)->metatiles;
     else
     {
         metatiles = mapLayout->secondaryTileset->metatiles;

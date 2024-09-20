@@ -1229,7 +1229,7 @@ static void TeachyTvLoadBg3Map(u16 *buffer)
     palIndicesBuffer = Alloc(16);
     memset(palIndicesBuffer, 0xFF, 16);
 
-    TeachyTvLoadMapTilesetToBuffer(layout->primaryTileset, tilesetsBuffer, NUM_TILES_IN_PRIMARY);
+    TeachyTvLoadMapTilesetToBuffer(GetPrimaryTileset(layout), tilesetsBuffer, NUM_TILES_IN_PRIMARY);
     TeachyTvLoadMapTilesetToBuffer(layout->secondaryTileset, tilesetsBuffer + NUM_TILES_IN_PRIMARY * TILE_SIZE_4BPP, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY);
 
     for (i = 0; i < 9; i++)
@@ -1259,7 +1259,7 @@ static void TeachyTvLoadBg3Map(u16 *buffer)
     {
         memset(mapTilesRowBuffer, 0, 0x80);
         if (blockIndicesBuffer[i] < NUM_METATILES_IN_PRIMARY)
-            TeachyTvComputeMapTilesFromTilesetAndMetaTiles((const void *)layout->primaryTileset->metatiles + blockIndicesBuffer[i] * 16, mapTilesRowBuffer, tilesetsBuffer);
+            TeachyTvComputeMapTilesFromTilesetAndMetaTiles((const void *)GetPrimaryTileset(layout)->metatiles + blockIndicesBuffer[i] * 16, mapTilesRowBuffer, tilesetsBuffer);
         else
             TeachyTvComputeMapTilesFromTilesetAndMetaTiles((const void *)layout->secondaryTileset->metatiles + (blockIndicesBuffer[i] - NUM_METATILES_IN_PRIMARY) * 16, mapTilesRowBuffer, tilesetsBuffer);
         CpuFastCopy(mapTilesRowBuffer, bgTilesBuffer + i * 0x40, 0x80);

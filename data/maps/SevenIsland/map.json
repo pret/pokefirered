@@ -112,7 +112,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_SEVEN_ISLAND",
+      "id": "HEAL_LOCATION_SEVEN_ISLAND",
       "x": 12,
       "y": 4,
       "respawn_map": "MAP_SEVEN_ISLAND_POKEMON_CENTER_1F",

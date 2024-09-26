@@ -165,7 +165,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_PALLET_TOWN",
+      "id": "HEAL_LOCATION_PALLET_TOWN",
       "x": 6,
       "y": 8,
       "respawn_map": "MAP_PALLET_TOWN_PLAYERS_HOUSE_1F",

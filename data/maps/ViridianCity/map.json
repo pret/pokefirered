@@ -277,7 +277,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_VIRIDIAN_CITY",
+      "id": "HEAL_LOCATION_VIRIDIAN_CITY",
       "x": 26,
       "y": 27,
       "respawn_map": "MAP_VIRIDIAN_CITY_POKEMON_CENTER_1F",

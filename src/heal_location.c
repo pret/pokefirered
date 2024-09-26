@@ -37,13 +37,13 @@ static u32 GetHealLocationIndexFromMapGroupAndNum(u16 mapGroup, u16 mapNum)
         }
     }
 
-    return 0;
+    return HEAL_LOCATION_NONE;
 }
 
 static const struct HealLocation * GetHealLocationPointerFromMapGroupAndNum(u16 mapGroup, u16 mapNum)
 {
     u32 i = GetHealLocationIndexFromMapGroupAndNum(mapGroup, mapNum);
-    if (i == 0)
+    if (i == HEAL_LOCATION_NONE)
         return NULL;
 
     return &sSpawnPoints[i - 1];
@@ -51,7 +51,7 @@ static const struct HealLocation * GetHealLocationPointerFromMapGroupAndNum(u16 
 
 const struct HealLocation * GetHealLocation(u32 idx)
 {
-    if (idx == 0)
+    if (idx == HEAL_LOCATION_NONE)
         return NULL;
     if (idx > NELEMS(sSpawnPoints))
         return NULL;
@@ -76,9 +76,14 @@ void SetWhiteoutRespawnWarpAndHealerNpc(struct WarpData * warp)
     else
     {
         healLocationIdx = GetHealLocationIndexFromMapGroupAndNum(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum);
+#ifdef BUGFIX
+        // Avoid out of bounds read
+        if (healLocationIdx == HEAL_LOCATION_NONE)
+            return;
+#endif
         warp->mapGroup = sWhiteoutRespawnHealCenterMapIdxs[healLocationIdx - 1][0];
         warp->mapNum = sWhiteoutRespawnHealCenterMapIdxs[healLocationIdx - 1][1];
-        warp->warpId = 0xFF;
+        warp->warpId = WARP_ID_NONE;
 
         if (sWhiteoutRespawnHealCenterMapIdxs[healLocationIdx - 1][0] == MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_1F) && sWhiteoutRespawnHealCenterMapIdxs[healLocationIdx - 1][1] == MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_1F))
         {

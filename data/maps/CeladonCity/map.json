@@ -403,7 +403,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_CELADON_CITY",
+      "id": "HEAL_LOCATION_CELADON_CITY",
       "x": 48,
       "y": 12,
       "respawn_map": "MAP_CELADON_CITY_POKEMON_CENTER_1F",

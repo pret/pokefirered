@@ -155,7 +155,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_LAVENDER_TOWN",
+      "id": "HEAL_LOCATION_LAVENDER_TOWN",
       "x": 6,
       "y": 6,
       "respawn_map": "MAP_LAVENDER_TOWN_POKEMON_CENTER_1F",

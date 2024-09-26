@@ -207,7 +207,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_TWO_ISLAND",
+      "id": "HEAL_LOCATION_TWO_ISLAND",
       "x": 21,
       "y": 8,
       "respawn_map": "MAP_TWO_ISLAND_POKEMON_CENTER_1F",

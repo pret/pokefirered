@@ -416,7 +416,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_CERULEAN_CITY",
+      "id": "HEAL_LOCATION_CERULEAN_CITY",
       "x": 22,
       "y": 20,
       "respawn_map": "MAP_CERULEAN_CITY_POKEMON_CENTER_1F",

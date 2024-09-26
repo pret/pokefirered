@@ -193,7 +193,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_ROUTE4",
+      "id": "HEAL_LOCATION_ROUTE4",
       "x": 12,
       "y": 6,
       "respawn_map": "MAP_ROUTE4_POKEMON_CENTER_1F",

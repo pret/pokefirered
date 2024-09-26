@@ -432,7 +432,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_SAFFRON_CITY",
+      "id": "HEAL_LOCATION_SAFFRON_CITY",
       "x": 24,
       "y": 39,
       "respawn_map": "MAP_SAFFRON_CITY_POKEMON_CENTER_1F",

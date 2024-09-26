@@ -4,7 +4,7 @@ FuchsiaCity_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 FuchsiaCity_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_FUCHSIA_CITY
+	setrespawn HEAL_LOCATION_FUCHSIA_CITY
 	end
 
 FuchsiaCity_PokemonCenter_1F_EventScript_Nurse::

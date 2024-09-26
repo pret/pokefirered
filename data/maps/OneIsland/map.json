@@ -120,7 +120,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_ONE_ISLAND",
+      "id": "HEAL_LOCATION_ONE_ISLAND",
       "x": 14,
       "y": 6,
       "respawn_map": "MAP_ONE_ISLAND_POKEMON_CENTER_1F",

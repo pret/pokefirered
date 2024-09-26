@@ -388,7 +388,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_THREE_ISLAND",
+      "id": "HEAL_LOCATION_THREE_ISLAND",
       "x": 14,
       "y": 28,
       "respawn_map": "MAP_THREE_ISLAND_POKEMON_CENTER_1F",

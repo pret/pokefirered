@@ -8,7 +8,7 @@ PalletTown_PlayersHouse_2F_OnTransition::
 	end
 
 PalletTown_PlayersHouse_2F_EventScript_SetRespawn::
-	setrespawn SPAWN_PALLET_TOWN
+	setrespawn HEAL_LOCATION_PALLET_TOWN
 	return
 
 PalletTown_PlayersHouse_2F_OnWarp::

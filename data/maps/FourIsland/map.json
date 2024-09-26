@@ -283,7 +283,7 @@
   ],
   "heal_locations": [
     {
-      "id": "SPAWN_FOUR_ISLAND",
+      "id": "HEAL_LOCATION_FOUR_ISLAND",
       "x": 18,
       "y": 21,
       "respawn_map": "MAP_FOUR_ISLAND_POKEMON_CENTER_1F",

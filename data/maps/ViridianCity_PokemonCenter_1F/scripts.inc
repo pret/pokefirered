@@ -4,7 +4,7 @@ ViridianCity_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 ViridianCity_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_VIRIDIAN_CITY
+	setrespawn HEAL_LOCATION_VIRIDIAN_CITY
 	end
 
 ViridianCity_PokemonCenter_1F_EventScript_Nurse::

@@ -6,7 +6,7 @@ IndigoPlateau_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 IndigoPlateau_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_INDIGO_PLATEAU
+	setrespawn HEAL_LOCATION_INDIGO_PLATEAU
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	call_if_eq VAR_RESULT, TRUE, IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor
 	end

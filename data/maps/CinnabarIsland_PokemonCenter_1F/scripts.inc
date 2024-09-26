@@ -6,7 +6,7 @@ CinnabarIsland_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 CinnabarIsland_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_CINNABAR_ISLAND
+	setrespawn HEAL_LOCATION_CINNABAR_ISLAND
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_Nurse::

@@ -4,7 +4,7 @@ TwoIsland_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 TwoIsland_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_TWO_ISLAND
+	setrespawn HEAL_LOCATION_TWO_ISLAND
 	end
 
 TwoIsland_PokemonCenter_1F_EventScript_Nurse::

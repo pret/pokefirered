@@ -4,7 +4,7 @@ SaffronCity_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 SaffronCity_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_SAFFRON_CITY
+	setrespawn HEAL_LOCATION_SAFFRON_CITY
 	end
 
 SaffronCity_PokemonCenter_1F_EventScript_Nurse::

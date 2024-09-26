@@ -4,7 +4,7 @@ SevenIsland_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 SevenIsland_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_SEVEN_ISLAND
+	setrespawn HEAL_LOCATION_SEVEN_ISLAND
 	end
 
 SevenIsland_PokemonCenter_1F_EventScript_Nurse::

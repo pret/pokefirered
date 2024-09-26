@@ -7,7 +7,7 @@ SixIsland_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 SixIsland_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_SIX_ISLAND
+	setrespawn HEAL_LOCATION_SIX_ISLAND
 	call_if_eq VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F, 0, SixIsland_PokemonCenter_1F_EventScript_ShowRival
 	end
 

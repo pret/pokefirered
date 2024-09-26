@@ -611,7 +611,7 @@ void SetWarpDestinationToHealLocation(u8 healLocationId)
 {
     const struct HealLocation *warp = GetHealLocation(healLocationId);
     if (warp)
-        SetWarpDestination(warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpDestination(warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
 
 void SetWarpDestinationToLastHealLocation(void)
@@ -628,7 +628,7 @@ void SetLastHealLocationWarp(u8 healLocationId)
 {
     const struct HealLocation *healLocation = GetHealLocation(healLocationId);
     if (healLocation)
-        SetWarpData(&gSaveBlock1Ptr->lastHealLocation, healLocation->group, healLocation->map, -1, healLocation->x, healLocation->y);
+        SetWarpData(&gSaveBlock1Ptr->lastHealLocation, healLocation->mapGroup, healLocation->mapNum, -1, healLocation->x, healLocation->y);
 }
 
 void UpdateEscapeWarp(s16 x, s16 y)
@@ -690,7 +690,7 @@ void SetContinueGameWarpToHealLocation(u8 healLocationId)
 {
     const struct HealLocation *warp = GetHealLocation(healLocationId);
     if (warp)
-        SetWarpData(&gSaveBlock1Ptr->continueGameWarp, warp->group, warp->map, -1, warp->x, warp->y);
+        SetWarpData(&gSaveBlock1Ptr->continueGameWarp, warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
 
 void SetContinueGameWarpToDynamicWarp(int unused)

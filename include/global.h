@@ -125,7 +125,8 @@ extern u8 gStringVar4[];
 
 #define DIV_ROUND_UP(val, roundBy)(((val) / (roundBy)) + (((val) % (roundBy)) ? 1 : 0))
 
-#define ROUND_BITS_TO_BYTES(numBits) DIV_ROUND_UP(numBits, 8)
+#define BITS_PER_BYTE 8
+#define ROUND_BITS_TO_BYTES(numBits) DIV_ROUND_UP(numBits, BITS_PER_BYTE)
 
 #define DEX_FLAGS_NO ROUND_BITS_TO_BYTES(NUM_SPECIES)
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)

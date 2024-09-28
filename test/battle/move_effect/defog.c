@@ -383,3 +383,21 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes everything it can"
         }
     }
 }
+
+SINGLE_BATTLE_TEST("Defog is used on the correct side if opposing mon is behind a substitute with Screen up")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_LIGHT_SCREEN); }
+        TURN { MOVE(opponent, MOVE_SUBSTITUTE); MOVE(player, MOVE_DEFOG); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_LIGHT_SCREEN, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUBSTITUTE, opponent);
+        MESSAGE("Wobbuffet used Defog!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DEFOG, player);
+        MESSAGE("Foe Wobbuffet's evasiveness fell!");
+        MESSAGE("Foe's Light Screen wore off!");
+    }
+}

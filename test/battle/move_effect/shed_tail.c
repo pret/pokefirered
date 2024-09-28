@@ -85,3 +85,16 @@ SINGLE_BATTLE_TEST("Shed Tail's HP cost doesn't trigger effects that trigger on 
         NOT MESSAGE("Wobbuffet's Air Balloon popped!");
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI will use Shed Tail to pivot to another mon while in damage stalemate with player")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); Ability(ABILITY_RUN_AWAY); Moves(MOVE_TACKLE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); Ability(ABILITY_RUN_AWAY); Moves(MOVE_CONFUSION, MOVE_SHED_TAIL); }
+        OPPONENT(SPECIES_SCIZOR) { Speed(101); Moves(MOVE_CELEBRATE, MOVE_X_SCISSOR); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); EXPECT_MOVE(opponent, MOVE_CONFUSION); }
+        TURN { MOVE(player, MOVE_TACKLE); EXPECT_MOVE(opponent, MOVE_SHED_TAIL); }
+    }
+}

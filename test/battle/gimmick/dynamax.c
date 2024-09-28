@@ -400,6 +400,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves deal 1/4 damage through protect", s16 da
     }
 }
 
+//  This test will fail if it's the first test a thread runs
 SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't bypass Max Guard")
 {
     GIVEN {
@@ -1463,8 +1464,8 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't execute effects on fainted battler
 
 SINGLE_BATTLE_TEST("(DYNAMAX) Moxie clones can be triggered by Max Moves fainting opponents")
 {
-    ASSUME(gMovesInfo[MOVE_WATERFALL].power > 0);
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_WATERFALL].power > 0);
         PLAYER(SPECIES_GYARADOS) { Ability(ABILITY_MOXIE); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WYNAUT);
@@ -1474,5 +1475,56 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Moxie clones can be triggered by Max Moves faintin
         MESSAGE("Foe Wobbuffet fainted!");
         ABILITY_POPUP(player, ABILITY_MOXIE);
         MESSAGE("Gyarados's Moxie raised its Attack!");
+    }
+}
+
+//  This test will fail if it's the first test a thread runs
+SINGLE_BATTLE_TEST("(DYNAMAX) Max Attacks prints a message when hitting into Max Guard")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_GROWL, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_TACKLE, gimmick: GIMMICK_DYNAMAX); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Max Guard!");
+        MESSAGE("Foe Wobbuffet used Max Strike!");
+    }
+}
+
+SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't bypass absorbing abilities")
+{
+    u32 move, ability, species;
+    PARAMETRIZE { move = MOVE_SPARK; ability = ABILITY_VOLT_ABSORB; species = SPECIES_LANTURN; }
+    PARAMETRIZE { move = MOVE_WATER_GUN; ability = ABILITY_WATER_ABSORB; species = SPECIES_LANTURN; }
+    PARAMETRIZE { move = MOVE_EMBER; ability = ABILITY_FLASH_FIRE; species = SPECIES_HEATRAN; }
+    PARAMETRIZE { move = MOVE_SPARK; ability = ABILITY_LIGHTNING_ROD; species = SPECIES_PIKACHU; }
+    PARAMETRIZE { move = MOVE_WATER_GUN; ability = ABILITY_STORM_DRAIN; species = SPECIES_GASTRODON; }
+    PARAMETRIZE { move = MOVE_EMBER; ability = ABILITY_WELL_BAKED_BODY; species = SPECIES_DACHSBUN; }
+    PARAMETRIZE { move = MOVE_SPARK; ability = ABILITY_MOTOR_DRIVE; species = SPECIES_ELECTIVIRE; }
+    PARAMETRIZE { move = MOVE_WATER_GUN; ability = ABILITY_DRY_SKIN; species = SPECIES_PARASECT; }
+    PARAMETRIZE { move = MOVE_MUD_BOMB; ability = ABILITY_EARTH_EATER; species = SPECIES_ORTHWORM; }
+    PARAMETRIZE { move = MOVE_VINE_WHIP; ability = ABILITY_SAP_SIPPER; species = SPECIES_MILTANK; }
+    
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_SPARK].type == TYPE_ELECTRIC);
+        ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+        ASSUME(gMovesInfo[MOVE_MUD_BOMB].type == TYPE_GROUND);
+        ASSUME(gMovesInfo[MOVE_VINE_WHIP].type == TYPE_GRASS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(species) { Ability(ability); }
+    } WHEN {
+        TURN { MOVE(player, move, gimmick: GIMMICK_DYNAMAX); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_LIGHTNING, player);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_FLARE, player);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_GEYSER, player);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_QUAKE, player);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_OVERGROWTH, player);
+            HP_BAR(opponent);
+        }
+        ABILITY_POPUP(opponent, ability);
     }
 }

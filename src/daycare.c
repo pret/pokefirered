@@ -10,7 +10,7 @@
 #include "event_data.h"
 #include "random.h"
 #include "constants/moves.h"
-#include "level_caps.h"
+#include "caps.h"
 #include "menu.h"
 #include "script.h"
 #include "strings.h"

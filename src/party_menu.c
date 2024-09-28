@@ -24,7 +24,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
-#include "level_caps.h"
+#include "caps.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"

@@ -21,7 +21,7 @@
 #include "battle_message.h"
 #include "battle_util.h"
 #include "link.h"
-#include "level_caps.h"
+#include "caps.h"
 #include "pokemon_animation.h"
 #include "m4a.h"
 #include "pokedex.h"

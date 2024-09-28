@@ -10,8 +10,6 @@
 #include "util.h"
 #include "constants/battle_anim.h"
 
-#define IS_DOUBLE_BATTLE() (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-
 static u8 GetBattlerSpriteFinal_Y(u8 battlerId, u16 species, bool8 a3);
 static void PlayerThrowBall_AnimTranslateLinear_WithFollowup(struct Sprite *sprite);
 static void AnimFastTranslateLinearWaitEnd(struct Sprite *sprite);
@@ -736,11 +734,6 @@ bool8 IsBattlerSpritePresent(u8 battlerId)
         }
     }
     return TRUE;
-}
-
-bool8 IsDoubleBattle(void)
-{
-    return IS_DOUBLE_BATTLE();
 }
 
 #define BG_ANIM_PAL_1        8

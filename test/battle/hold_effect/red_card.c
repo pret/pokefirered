@@ -468,4 +468,4 @@ SINGLE_BATTLE_TEST("Red Card does not activate if holder is switched in mid-turn
     }
 }
 
-// SINGLE_BATTLE_TEST("Red Card activates but fails if the attacker has Dynamaxed")
+TO_DO_BATTLE_TEST("Red Card activates but fails if the attacker has Dynamaxed");

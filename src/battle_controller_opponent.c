@@ -1051,7 +1051,7 @@ static void OpponentHandleLoadMonSprite(void)
 
 static void OpponentHandleSwitchInAnim(void)
 {
-    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = 6;
+    *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
     gBattlerPartyIndexes[gActiveBattler] = gBattleBufferA[gActiveBattler][1];
     StartSendOutAnim(gActiveBattler, gBattleBufferA[gActiveBattler][2]);
     gBattlerControllerFuncs[gActiveBattler] = SwitchIn_TryShinyAnim;

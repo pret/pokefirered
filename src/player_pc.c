@@ -194,7 +194,7 @@ static void Task_TopMenuHandleInput(u8 taskId)
     {
     case -2:
         break;
-    case -1:
+    case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
         ClearStdWindowAndFrameToTransparent(tWindowId, FALSE);
         ClearWindowTilemap(tWindowId);
@@ -471,7 +471,7 @@ static void Task_MailboxPcHandleInput(u8 taskId)
         ListMenuGetScrollAndRow(tListMenuTaskId, &gPlayerPcMenuManager.cursorPos, &gPlayerPcMenuManager.itemsAbove);
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
             break;
         case -2:
             PlaySE(SE_SELECT);
@@ -540,7 +540,7 @@ static void Task_MailSubmenuHandleInput(u8 taskId)
     s8 input = Menu_ProcessInput_other();
     switch (input)
     {
-    case -1:
+    case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
         Task_PlayerPcExitMailSubmenu(taskId);
         break;
@@ -618,7 +618,7 @@ static void Task_MoveToBagYesNoMenuHandleInput(u8 taskId)
     case 0:
         Task_TryPutMailInBag_DestroyMsgIfSuccessful(taskId);
         break;
-    case -1:
+    case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
         // fallthrough
     case 1:

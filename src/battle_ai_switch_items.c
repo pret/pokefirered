@@ -458,8 +458,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
     invalidMons = 0;
     while (invalidMons != 0x3F) // All mons are invalid.
     {
-        bestDmg = 0;
-        bestMonId = 6;
+        bestDmg = TYPE_MUL_NO_EFFECT;
+        bestMonId = PARTY_SIZE;
         // Find the mon whose type is the most suitable offensively.
         for (i = 0; i < PARTY_SIZE; ++i)
         {
@@ -513,7 +513,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     gMoveResultFlags = 0;
     gCritMultiplier = 1;
     bestDmg = 0;
-    bestMonId = 6;
+    bestMonId = PARTY_SIZE;
     // If we couldn't find the best mon in terms of typing, find the one that deals most damage.
     for (i = 0; i < PARTY_SIZE; ++i)
     {

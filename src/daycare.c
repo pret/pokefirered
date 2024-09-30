@@ -1964,7 +1964,7 @@ static void CB2_EggHatch_1(void)
             DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar3, species, gender, personality, EggHatchSetMonNickname);
             break;
         case 1:
-        case -1:
+        case MENU_B_PRESSED:
             sEggHatchData->CB2_state++;
         }
         break;

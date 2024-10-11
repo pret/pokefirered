@@ -8,7 +8,7 @@ static void SetWhiteoutRespawnHealerNpcAsLastTalked(u32 healLocationIdx);
 
 // Arrays described here because mapjson will overrwrite the below data file
 
-// sSpawnPoints
+// sHealLocations
 // This array defines the fly points for unlocked spawns.
 
 // sWhiteoutRespawnHealCenterMapIdxs
@@ -30,8 +30,8 @@ static u32 GetHealLocationIndexFromMapGroupAndNum(u16 mapGroup, u16 mapNum)
 {
     u32 i;
 
-    for (i = 0; i < NELEMS(sSpawnPoints); i++) {
-        if (sSpawnPoints[i].mapGroup == mapGroup && sSpawnPoints[i].mapNum == mapNum)
+    for (i = 0; i < ARRAY_COUNT(sHealLocations); i++) {
+        if (sHealLocations[i].mapGroup == mapGroup && sHealLocations[i].mapNum == mapNum)
         {
             return i + 1;
         }
@@ -46,16 +46,16 @@ static const struct HealLocation * GetHealLocationPointerFromMapGroupAndNum(u16 
     if (i == HEAL_LOCATION_NONE)
         return NULL;
 
-    return &sSpawnPoints[i - 1];
+    return &sHealLocations[i - 1];
 }
 
 const struct HealLocation * GetHealLocation(u32 idx)
 {
     if (idx == HEAL_LOCATION_NONE)
         return NULL;
-    if (idx > NELEMS(sSpawnPoints))
+    if (idx > ARRAY_COUNT(sHealLocations))
         return NULL;
-    return &sSpawnPoints[idx - 1];
+    return &sHealLocations[idx - 1];
 }
 
 void SetWhiteoutRespawnWarpAndHealerNpc(struct WarpData * warp)

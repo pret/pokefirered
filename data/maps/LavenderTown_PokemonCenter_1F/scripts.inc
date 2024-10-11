@@ -4,7 +4,7 @@ LavenderTown_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 LavenderTown_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_LAVENDER_TOWN
+	setrespawn HEAL_LOCATION_LAVENDER_TOWN
 	end
 
 LavenderTown_PokemonCenter_1F_EventScript_Nurse::

@@ -435,5 +435,14 @@
       "quantity": 1,
       "underfoot": false
     }
+  ],
+  "heal_locations": [
+    {
+      "id": "HEAL_LOCATION_FUCHSIA_CITY",
+      "x": 25,
+      "y": 32,
+      "respawn_map": "MAP_FUCHSIA_CITY_POKEMON_CENTER_1F",
+      "respawn_npc": 1
+    }
   ]
 }

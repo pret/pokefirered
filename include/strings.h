@@ -1019,10 +1019,11 @@ extern const u8 gText_NickHatchPrompt[];
 // trainer card
 extern const u8 gText_WaitingTrainerFinishReading[];
 extern const u8 gText_TrainerCardName[];
-extern const u8 gText_TrainerCardIDNo[];
+extern const u8 gText_TrainerCardSeed[];
+extern const u8 gText_TrainerCardGameHash[];
+extern const u8 gText_TrainerCardMapHash[];
 extern const u8 gText_TrainerCardMoney[];
 extern const u8 gText_TrainerCardYen[];
-extern const u8 gText_TrainerCardPokedex[];
 extern const u8 gText_TrainerCardNull[];
 extern const u8 gText_Colon2[];
 extern const u8 gText_TrainerCardTime[];

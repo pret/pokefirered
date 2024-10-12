@@ -3614,16 +3614,6 @@
                 "species": "SPECIES_MAGNEMITE"
               },
               {
-                "min_level": 22,
-                "max_level": 22,
-                "species": "SPECIES_PIKACHU"
-              },
-              {
-                "min_level": 24,
-                "max_level": 24,
-                "species": "SPECIES_PIKACHU"
-              },
-              {
                 "min_level": 31,
                 "max_level": 31,
                 "species": "SPECIES_MAGNETON"
@@ -3634,19 +3624,9 @@
                 "species": "SPECIES_MAGNETON"
               },
               {
-                "min_level": 26,
-                "max_level": 26,
-                "species": "SPECIES_PIKACHU"
-              },
-              {
                 "min_level": 32,
                 "max_level": 32,
                 "species": "SPECIES_ELECTABUZZ"
-              },
-              {
-                "min_level": 26,
-                "max_level": 26,
-                "species": "SPECIES_PIKACHU"
               },
               {
                 "min_level": 35,

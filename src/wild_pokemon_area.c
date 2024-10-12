@@ -9,6 +9,8 @@
 #include "constants/region_map_sections.h"
 #include "constants/maps.h"
 
+// TODO(poke-challenge): This might be the code to update the wild pokemon locations.
+
 struct RoamerPair
 {
     u16 roamer;

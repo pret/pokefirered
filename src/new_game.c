@@ -29,6 +29,7 @@
 #include "berry_powder.h"
 #include "pokemon_jump.h"
 #include "event_scripts.h"
+#include "pokemon_groups.h"
 
 // this file's functions
 static void ResetMiniGamesResults(void);
@@ -149,6 +150,11 @@ void NewGameInitData(void)
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
     ResetTrainerTowerResults();
+
+    // Set starters now that the game seed has been set.
+    VarSet(VAR_GRASS_STARTER, GetSpeciesFromGroup(SPECIES_BULBASAUR, 0));
+    VarSet(VAR_FIRE_STARTER, GetSpeciesFromGroup(SPECIES_CHARMANDER, 0));
+    VarSet(VAR_WATER_STARTER, GetSpeciesFromGroup(SPECIES_SQUIRTLE, 0));
 }
 
 static void ResetMiniGamesResults(void)

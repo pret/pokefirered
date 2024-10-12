@@ -16,6 +16,7 @@
 #include "constants/maps.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
+#include "pokemon_groups.h"
 
 #define MAX_ENCOUNTER_RATE 1600
 
@@ -230,6 +231,7 @@ static void GenerateWildMon(u16 species, u8 level, u8 slot)
     ZeroEnemyPartyMons();
     if (species != SPECIES_UNOWN)
     {
+        species = GetSpeciesFromGroup(species, 0, &personality);
         CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, Random() % NUM_NATURES);
     }
     else

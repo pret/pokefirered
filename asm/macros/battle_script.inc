@@ -79,7 +79,7 @@
 
 	.macro waitmessage param0:req
 	.byte 0x12
-	.2byte \param0
+	.2byte 0x01
 	.endm
 
 	.macro printfromtable ptr:req
@@ -325,7 +325,7 @@
 
 	.macro pause param0:req
 	.byte 0x39
-	.2byte \param0
+	.2byte 0x01
 	.endm
 
 	.macro waitstate

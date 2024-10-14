@@ -90,28 +90,17 @@ static bool32 IsNationalPokedexEnabled_RSE(void)
 
 void DisableNationalPokedex(void)
 {
-    u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
-    gSaveBlock2Ptr->pokedex.nationalMagic = 0;
-    *nationalDexVar = 0;
-    FlagClear(FLAG_SYS_NATIONAL_DEX);
+  // No-op because it can't be disabled in this mod.
 }
 
 void EnableNationalPokedex(void)
 {
-    u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
-    gSaveBlock2Ptr->pokedex.nationalMagic = 0xB9;
-    *nationalDexVar = 0x6258;
-    FlagSet(FLAG_SYS_NATIONAL_DEX);
+  // No-op because it's always enabled in this mod.
 }
 
 bool32 IsNationalPokedexEnabled(void)
 {
-    if (gSaveBlock2Ptr->pokedex.nationalMagic == 0xB9
-            && VarGet(VAR_NATIONAL_DEX) == 0x6258
-            && FlagGet(FLAG_SYS_NATIONAL_DEX))
-        return TRUE;
-
-    return FALSE;
+  return TRUE;
 }
 
 void DisableMysteryGift(void)

@@ -659,7 +659,7 @@ u8 GetTextSpeedSetting(void)
 {
     u32 speed;
     if (gSaveBlock2Ptr->optionsTextSpeed > OPTIONS_TEXT_SPEED_FAST)
-        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
+        gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
     return sTextSpeedFrameDelays[gSaveBlock2Ptr->optionsTextSpeed];
 }
 

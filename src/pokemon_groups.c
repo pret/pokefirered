@@ -123,7 +123,6 @@ const u16 gGroup_BugStage1[] =
   SPECIES_LEDYBA,
   SPECIES_SPINARAK,
   SPECIES_WURMPLE,
-  //SPECIES_WURMPLE,
   SPECIES_YANMA,
 };
 
@@ -1474,12 +1473,11 @@ u16 GetSpeciesFromGroup(u16 species, u16 manual_random) {
     //
     // Don't take route into account, so that rival
     // has the same starter throughout the game.
-    gSpeciesNames[(species + 2) / 3];
-
-    // combinedHash = HashCombine(GameHash(), (species + 2) / 3 * 31);
     combinedHash = HashCombine(GameHash(), Hash(gSpeciesNames[(species + 2) / 3]));
     return IndexInto(group, combinedHash);
   }
+
+  random = (manual_random ? manual_random : Random()) % 50;
 
   if (random == 0) {
     // 2% chance that the player found the "rare" species
@@ -1490,11 +1488,11 @@ u16 GetSpeciesFromGroup(u16 species, u16 manual_random) {
   } else if (random <= 17) {
     // 34% chance the player found the less-common mapping
     // to `species`.
-    combinedHash = HashCombine(GameHash(), MapHash() + species);
+    combinedHash = HashCombine(GameHash(), MapHash() + (31 * species));
   } else {
     // 64% chance the player found the more-common mapping
     // to `species`.
-    combinedHash = HashCombine(MapHash() , GameHash() - species);
+    combinedHash = HashCombine(MapHash(), GameHash() - (31 * species));
   }
 
   return IndexInto(group, combinedHash);

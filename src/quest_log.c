@@ -447,27 +447,8 @@ static bool8 TryRecordActionSequence(struct QuestLogAction * actions)
 
 void TryStartQuestLogPlayback(u8 taskId)
 {
-    u8 i;
-
-    QL_EnableRecordingSteps();
-    sNumScenes = 0;
-    for (i = 0; i < QUEST_LOG_SCENE_COUNT; i++)
-    {
-        if (gSaveBlock1Ptr->questLog[i].startType != 0)
-            sNumScenes++;
-    }
-
-    if (sNumScenes != 0)
-    {
-        gHelpSystemEnabled = FALSE;
-        Task_BeginQuestLogPlayback(taskId);
-        DestroyTask(taskId);
-    }
-    else
-    {
-        SetMainCallback2(CB2_ContinueSavedGame);
-        DestroyTask(taskId);
-    }
+    SetMainCallback2(CB2_ContinueSavedGame);
+    DestroyTask(taskId);
 }
 
 static void Task_BeginQuestLogPlayback(u8 taskId)

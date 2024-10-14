@@ -334,16 +334,12 @@ static const u8 sTextColor_DarkGray[] = { 0, 2, 3, 0 };
 enum
 {
     PIKACHU_INTRO_PAGE_1,
-    PIKACHU_INTRO_PAGE_2,
-    PIKACHU_INTRO_PAGE_3,
     NUM_PIKACHU_INTRO_PAGES,
 };
 
 static const u8 *const sPikachuIntro_Strings[NUM_PIKACHU_INTRO_PAGES] =
 {
     [PIKACHU_INTRO_PAGE_1] = gPikachuIntro_Text_Page1,
-    [PIKACHU_INTRO_PAGE_2] = gPikachuIntro_Text_Page2,
-    [PIKACHU_INTRO_PAGE_3] = gPikachuIntro_Text_Page3
 };
 
 #define GFX_TAG_PLATFORM     0x1000
@@ -774,7 +770,6 @@ static void Task_NewGameScene(u8 taskId)
         FillBgTilemapBufferRect_Palette0(1, 0xD00F, 0,  0, 30, 2);
         FillBgTilemapBufferRect_Palette0(1, 0xD002, 0,  2, 30, 1);
         FillBgTilemapBufferRect_Palette0(1, 0xD00E, 0, 19, 30, 1);
-        ControlsGuide_LoadPage1();
         gPaletteFade.bufferTransferDisabled = FALSE;
         gTasks[taskId].tTextCursorSpriteId = CreateTextCursorSprite(0, 230, 149, 0, 0);
         BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
@@ -786,7 +781,7 @@ static void Task_NewGameScene(u8 taskId)
         ShowBg(1);
         SetVBlankCallback(VBlankCB_NewGameScene);
         PlayBGM(MUS_NEW_GAME_INSTRUCT);
-        gTasks[taskId].func = Task_ControlsGuide_HandleInput;
+        gTasks[taskId].func = Task_PikachuIntro_LoadPage1;
         gMain.state = 0;
         return;
     }

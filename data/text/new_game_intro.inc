@@ -159,32 +159,14 @@ gOakSpeech_Text_AskPlayerGender::
     .string "Or are you a girl?$"
 
 gPikachuIntro_Text_Page1::
-    .string "In the world which you are about to\n"
-    .string "enter, you will embark on a grand\n"
-    .string "adventure with you as the hero.\n"
+    .string "Welcome to the POKéMON Challenge!\n"
     .string "\n"
-    .string "Speak to people and check things\n"
-    .string "wherever you go, be it towns, roads,\n"
-    .string "or caves. Gather information and\n"
-    .string "hints from every source.$"
-
-gPikachuIntro_Text_Page2::
-    .string "New paths will open to you by helping\n"
-    .string "people in need, overcoming challenges,\n"
-    .string "and solving mysteries.\n"
+    .string "POKéMON, items, and more will be\n"
+    .string "randomized based on the name you\n"
+    .string "give your rival in the next scene.\n"
     .string "\n"
-    .string "At times, you will be challenged by\n"
-    .string "others and attacked by wild creatures.\n"
-    .string "Be brave and keep pushing on.$"
-
-gPikachuIntro_Text_Page3::
-    .string "Through your adventure, we hope\n"
-    .string "that you will interact with all sorts\n"
-    .string "of people and achieve personal growth.\n"
-    .string "That is our biggest objective.\n"
-    .string "\n"
-    .string "Press the A Button, and let your\n"
-    .string "adventure begin!$"
+    .string "Make sure to input the same rival\n"
+    .string "name as your friends!$"
 
 gOakSpeech_Text_WelcomeToTheWorld::
     .string "Hello, there!\n"
@@ -223,13 +205,16 @@ gOakSpeech_Text_WhatWasHisName::
     .string "This is my grandson.\p"
     .string "He's been your rival since you both\n"
     .string "were babies.\p"
-    .string "…Erm, what was his name now?$"
+    .string "…Erm, what was his name now?\n"
+    .string "(THIS RANDOMIZES THE GAME!)$"
 
 gOakSpeech_Text_YourRivalsNameWhatWasIt::
-    .string "Your rival's name, what was it now?$"
+    .string "Your rival's name, what was it now?\n$"
+    .string "(THIS RANDOMIZES THE GAME!)$"
 
 gOakSpeech_Text_ConfirmRivalName::
-    .string "…Er, was it {RIVAL}?$"
+    .string "…Er, was it {RIVAL}?\n"
+    .string "(THIS RANDOMIZES THE GAME!)$"
 
 gOakSpeech_Text_RememberRivalsName::
     .string "That's right! I remember now!\n"

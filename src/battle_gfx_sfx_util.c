@@ -158,6 +158,27 @@ static void DoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 arg1)
     AnimateSprite(sprite);
 }
 
+// Slide up to 0 if necessary (used by multi battle intro)
+// From https://github.com/pret/pokeemerald/commit/9c144896d404751d0d5e41ffbb1fa2153d1e14af#diff-1e33c3dd8be8f19905a1f76a329e2347042673054e6201d12971bf06fab862a0R404
+static void SpriteCB_TrainerSlideVertical(struct Sprite *sprite)
+{
+    sprite->y2 -= 2;
+    if (sprite->y2 == 0)
+        sprite->callback = SpriteCallbackDummy;
+}
+
+void SpriteCB_TrainerSpawn(struct Sprite *sprite)
+{
+    if (!(gIntroSlideFlags & 1))
+    {
+        sprite->x2 = 0;
+        if (sprite->y2 != 0)
+            sprite->callback = SpriteCB_TrainerSlideVertical;
+        else
+            sprite->callback = SpriteCallbackDummy;
+    }
+}
+
 void SpriteCB_TrainerSlideIn(struct Sprite *sprite)
 {
     if (!(gIntroSlideFlags & 1))

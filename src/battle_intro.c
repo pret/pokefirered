@@ -17,19 +17,7 @@ static void BattleIntroSlide2(u8 taskId);
 static void BattleIntroSlide3(u8 taskId);
 static void BattleIntroSlideLink(u8 taskId);
 
-static const TaskFunc sBattleIntroSlideFuncs[] =
-{
-    BattleIntroSlide1, // BATTLE_TERRAIN_GRASS
-    BattleIntroSlide1, // BATTLE_TERRAIN_LONG_GRASS
-    BattleIntroSlide2, // BATTLE_TERRAIN_SAND
-    BattleIntroSlide2, // BATTLE_TERRAIN_UNDERWATER
-    BattleIntroSlide2, // BATTLE_TERRAIN_WATER
-    BattleIntroSlide1, // BATTLE_TERRAIN_POND
-    BattleIntroSlide1, // BATTLE_TERRAIN_MOUNTAIN
-    BattleIntroSlide1, // BATTLE_TERRAIN_CAVE
-    BattleIntroSlide3, // BATTLE_TERRAIN_BUILDING
-    BattleIntroSlide3, // BATTLE_TERRAIN_PLAIN
-};
+static void BattleIntroNoSlide(u8);
 
 void SetAnimBgAttribute(u8 bgId, u8 attributeId, u8 value)
 {
@@ -107,7 +95,7 @@ void HandleIntroSlide(u8 terrain)
     }
     else
     {
-        taskId = CreateTask(sBattleIntroSlideFuncs[terrain], 0);
+        taskId = CreateTask(BattleIntroNoSlide, 0);
     }
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = terrain;
@@ -130,6 +118,54 @@ void BattleIntroSlideEnd(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
+}
+
+static void BattleIntroNoSlide(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        {
+            gTasks[taskId].data[2] = 16;
+            gTasks[taskId].data[0]++;
+            gIntroSlideFlags &= ~1;
+        }
+        else
+        {
+            gTasks[taskId].data[2] = 1;
+            gTasks[taskId].data[0]++;
+            gIntroSlideFlags &= ~1;
+        }
+        break;
+    case 1:
+        gTasks[taskId].data[2]--;
+        if (gTasks[taskId].data[2] == 0)
+        {
+            gTasks[taskId].data[0]++;
+            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR);
+            gScanlineEffect.state = 3;
+        }
+        break;
+    case 2:
+        gBattle_WIN0V -= 0xFF * 2;
+        if ((gBattle_WIN0V & 0xFF00) == 0)
+        {
+            gTasks[taskId].data[0]++;
+        }
+        break;
+    case 3:
+        gTasks[taskId].data[0]++;
+        CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+        SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
+        SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+        SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
+        SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+        break;
+    case 4:
+        BattleIntroSlideEnd(taskId);
+        break;
+    }
 }
 
 static void BattleIntroSlide1(u8 taskId)

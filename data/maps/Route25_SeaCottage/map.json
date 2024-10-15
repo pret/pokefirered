@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_BILL_HUMAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BILL",
       "x": 7,
@@ -30,6 +31,7 @@
       "flag": "FLAG_HIDE_BILL_HUMAN_SEA_COTTAGE"
     },
     {
+      "local_id": "LOCALID_BILL_CLEFAIRY",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CLEFAIRY",
       "x": 10,

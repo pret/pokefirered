@@ -1,5 +1,3 @@
-.set LOCALID_RIVAL, 1
-
 SSAnne_2F_Corridor_MapScripts::
 	.byte 0
 
@@ -26,16 +24,16 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger::
 	playse SE_EXIT
 	delay 5
 	playbgm MUS_ENCOUNTER_RIVAL, 0
-	addobject LOCALID_RIVAL
+	addobject LOCALID_SS_ANNE_RIVAL
 	delay 10
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_SS_ANNE_RIVAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 20
 	call_if_eq VAR_TEMP_1, 0, SSAnne_2F_Corridor_EventScript_RivalApproachLeft
 	call_if_eq VAR_TEMP_1, 1, SSAnne_2F_Corridor_EventScript_RivalApproachMid
 	call_if_eq VAR_TEMP_1, 2, SSAnne_2F_Corridor_EventScript_RivalApproachRight
 	msgbox SSAnne_2F_Corridor_Text_RivalIntro
-	setvar VAR_LAST_TALKED, LOCALID_RIVAL
+	setvar VAR_LAST_TALKED, LOCALID_SS_ANNE_RIVAL
 	call_if_eq VAR_STARTER_MON, 2, SSAnne_2F_Corridor_EventScript_RivalSquirtle
 	call_if_eq VAR_STARTER_MON, 1, SSAnne_2F_Corridor_EventScript_RivalBulbasaur
 	call_if_eq VAR_STARTER_MON, 0, SSAnne_2F_Corridor_EventScript_RivalCharmander
@@ -47,25 +45,25 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger::
 	call_if_eq VAR_TEMP_1, 1, SSAnne_2F_Corridor_EventScript_RivalExitMid
 	call_if_eq VAR_TEMP_1, 2, SSAnne_2F_Corridor_EventScript_RivalExitRight
 	fadedefaultbgm
-	removeobject LOCALID_RIVAL
+	removeobject LOCALID_SS_ANNE_RIVAL
 	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1
 	releaseall
 	end
 
 SSAnne_2F_Corridor_EventScript_RivalApproachLeft::
-	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachLeft
+	applymovement LOCALID_SS_ANNE_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachLeft
 	waitmovement 0
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalApproachMid::
-	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachMid
+	applymovement LOCALID_SS_ANNE_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachMid
 	applymovement LOCALID_PLAYER, SSAnne_2F_Corridor_Movement_PlayerFaceRivalMid
 	waitmovement 0
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalApproachRight::
 	applymovement LOCALID_PLAYER, SSAnne_2F_Corridor_Movement_PlayerFaceRivalRight
-	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachRight
+	applymovement LOCALID_SS_ANNE_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachRight
 	waitmovement 0
 	return
 
@@ -82,17 +80,17 @@ SSAnne_2F_Corridor_EventScript_RivalCharmander::
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalExitLeft::
-	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalExitLeft
+	applymovement LOCALID_SS_ANNE_RIVAL, SSAnne_2F_Corridor_Movement_RivalExitLeft
 	waitmovement 0
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalExitMid::
-	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalExitMid
+	applymovement LOCALID_SS_ANNE_RIVAL, SSAnne_2F_Corridor_Movement_RivalExitMid
 	waitmovement 0
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalExitRight::
-	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalExitRight
+	applymovement LOCALID_SS_ANNE_RIVAL, SSAnne_2F_Corridor_Movement_RivalExitRight
 	waitmovement 0
 	return
 

@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_PALLET_SIGN_LADY",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 3,
@@ -55,6 +56,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PALLET_PROF_OAK",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PROF_OAK",
       "x": 10,
@@ -169,7 +171,7 @@
       "x": 6,
       "y": 8,
       "respawn_map": "MAP_PALLET_TOWN_PLAYERS_HOUSE_1F",
-      "respawn_npc": 1
+      "respawn_npc": "LOCALID_MOM"
     }
   ]
 }

@@ -1,7 +1,3 @@
-.set LOCALID_OLD_MAN,      3
-.set LOCALID_TUTORIAL_MAN, 4
-.set LOCALID_WOMAN,        5
-
 ViridianCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, ViridianCity_OnTransition
 	.byte 0
@@ -88,7 +84,7 @@ ViridianCity_EventScript_OldMan::
 	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1, ViridianCity_EventScript_OldManGymLeaderReturned
 	msgbox ViridianCity_Text_GymClosedWonderWhoLeaderIs
 	closemessage
-	applymovement LOCALID_OLD_MAN, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_VIRIDIAN_OLD_MAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -180,7 +176,7 @@ ViridianCity_EventScript_Woman::
 ViridianCity_EventScript_WomanRoadBlocked::
 	msgbox ViridianCity_Text_GrandpaHasntHadCoffeeYet
 	closemessage
-	applymovement LOCALID_WOMAN, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_VIRIDIAN_WOMAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

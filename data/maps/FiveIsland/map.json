@@ -110,7 +110,7 @@
       "x": 18,
       "y": 7,
       "respawn_map": "MAP_FIVE_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": 1
+      "respawn_npc": "LOCALID_FIVE_ISLAND_NURSE"
     }
   ]
 }

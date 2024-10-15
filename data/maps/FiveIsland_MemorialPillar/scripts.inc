@@ -1,5 +1,3 @@
-.set LOCALID_MEMORIAL_MAN, 1
-
 FiveIsland_MemorialPillar_MapScripts::
 	.byte 0
 

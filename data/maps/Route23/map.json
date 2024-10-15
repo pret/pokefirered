@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_CASCADE_BADGE_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 15,
@@ -41,6 +42,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_THUNDER_BADGE_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 8,
@@ -55,6 +57,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_RAINBOW_BADGE_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 14,
@@ -69,6 +72,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_SOUL_BADGE_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 16,
@@ -83,6 +87,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MARSH_BADGE_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 10,
@@ -97,6 +102,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_VOLCANO_BADGE_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 14,
@@ -111,6 +117,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_EARTH_BADGE_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 6,

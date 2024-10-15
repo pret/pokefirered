@@ -159,7 +159,7 @@
       "x": 6,
       "y": 6,
       "respawn_map": "MAP_LAVENDER_TOWN_POKEMON_CENTER_1F",
-      "respawn_npc": 1
+      "respawn_npc": "LOCALID_LAVENDER_NURSE"
     }
   ]
 }

@@ -442,7 +442,7 @@
       "x": 25,
       "y": 32,
       "respawn_map": "MAP_FUCHSIA_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": 1
+      "respawn_npc": "LOCALID_FUCHSIA_NURSE"
     }
   ]
 }

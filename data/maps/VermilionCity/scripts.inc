@@ -1,5 +1,3 @@
-.equ LOCALID_FERRY_SAILOR, 6
-
 VermilionCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, VermilionCity_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, VermilionCity_OnFrame
@@ -191,7 +189,7 @@ VermilionCity_EventScript_ExitedTicketCheck::
 
 VermilionCity_EventScript_CheckTicket::
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_VERMILION_FERRY_SAILOR, Common_Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto_if_eq VAR_MAP_SCENE_VERMILION_CITY, 3, VermilionCity_EventScript_CheckSeagallopPresentTrigger

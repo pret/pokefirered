@@ -1,10 +1,3 @@
-.set LOCALID_QUINN, 1
-.set LOCALID_AVERY, 3
-.set LOCALID_RAMON, 4
-.set LOCALID_DEREK, 5
-.set LOCALID_DUSTY, 6
-.set LOCALID_ZAC,   7
-
 CinnabarIsland_Gym_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, CinnabarIsland_Gym_OnLoad
 	.byte 0

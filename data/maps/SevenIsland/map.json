@@ -116,7 +116,7 @@
       "x": 12,
       "y": 4,
       "respawn_map": "MAP_SEVEN_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": 1
+      "respawn_npc": "LOCALID_SEVEN_ISLAND_NURSE"
     }
   ]
 }

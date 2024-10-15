@@ -1,5 +1,3 @@
-.set LOCALID_BRUNO, 1
-
 PokemonLeague_BrunosRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_BrunosRoom_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_BrunosRoom_OnLoad

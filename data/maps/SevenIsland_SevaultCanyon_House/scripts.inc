@@ -1,17 +1,17 @@
-.set LOCALID_BALDING_MAN, 1
+.set DID_CHANSEY_DANCE, FLAG_TEMP_2
 
 SevenIsland_SevaultCanyon_House_MapScripts::
 	.byte 0
 
-SevenIsland_SevaultCanyon_House_EventScript_BaldingMan::
+SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan::
 	lock
-	goto_if_set FLAG_TEMP_2, SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced
+	goto_if_set DID_CHANSEY_DANCE, SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced
 	playbgm MUS_SCHOOL, 0
-	applymovement LOCALID_BALDING_MAN, SevenIsland_SevaultCanyon_House_Movement_ChanseyDance
+	applymovement LOCALID_CHANSEY_DANCE_MAN, SevenIsland_SevaultCanyon_House_Movement_ChanseyDance
 	waitmovement 0
 	fadedefaultbgm
 	delay 30
-	applymovement LOCALID_BALDING_MAN, Common_Movement_FacePlayer
+	applymovement LOCALID_CHANSEY_DANCE_MAN, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn
 	textcolor NPC_TEXT_COLOR_NEUTRAL
@@ -29,7 +29,7 @@ SevenIsland_SevaultCanyon_House_EventScript_BaldingMan::
 	delay 30
 	call EventScript_OutOfCenterPartyHeal
 	msgbox SevenIsland_SevaultCanyon_House_Text_YoureAllChipperNow
-	setflag FLAG_TEMP_2
+	setflag DID_CHANSEY_DANCE
 	release
 	end
 
@@ -39,7 +39,7 @@ SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown::
 	return
 
 SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced::
-	applymovement LOCALID_BALDING_MAN, Common_Movement_FacePlayer
+	applymovement LOCALID_CHANSEY_DANCE_MAN, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn
 	release

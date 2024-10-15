@@ -41,6 +41,7 @@
       "flag": "FLAG_HIDE_CELADON_ROCKETS"
     },
     {
+      "local_id": "LOCALID_CELADON_FAT_MAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 38,
@@ -55,6 +56,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CELADON_POLIWRATH",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLIWRATH",
       "x": 36,
@@ -407,7 +409,7 @@
       "x": 48,
       "y": 12,
       "respawn_map": "MAP_CELADON_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": 1
+      "respawn_npc": "LOCALID_CELADON_NURSE"
     }
   ]
 }

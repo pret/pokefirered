@@ -1206,7 +1206,7 @@ static const u8 sPlayerDirectionToCopyDirection[][4] = {
 static void ClearObjectEvent(struct ObjectEvent *objectEvent)
 {
     *objectEvent = (struct ObjectEvent){};
-    objectEvent->localId = 0xFF;
+    objectEvent->localId = LOCALID_PLAYER;
     objectEvent->mapNum = MAP_NUM(MAP_UNDEFINED);
     objectEvent->mapGroup = MAP_GROUP(MAP_UNDEFINED);
     objectEvent->movementActionId = MOVEMENT_ACTION_NONE;
@@ -1317,7 +1317,7 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     s16 x;
     s16 y;
     bool8 isClone = FALSE;
-    u8 localId = 0;
+    u8 localId = LOCALID_NONE;
     s16 x2 = 0;
     s16 y2 = 0;
     s16 x3 = 0;
@@ -7977,7 +7977,7 @@ static void CalcWhetherObjectIsOffscreen(struct ObjectEvent *objectEvent, struct
     u16 x, y;
     u16 x2, y2;
     const struct ObjectEventGraphicsInfo *graphicsInfo;
-    s16 var;
+    s16 minX;
 
     objectEvent->offScreen = FALSE;
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
@@ -7995,20 +7995,20 @@ static void CalcWhetherObjectIsOffscreen(struct ObjectEvent *objectEvent, struct
     y2 = graphicsInfo->height + (s16)y;
     
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SSANNE_EXTERIOR)
-         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SSANNE_EXTERIOR)
-         && objectEvent->localId == 1)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SSANNE_EXTERIOR)
+     && objectEvent->localId == LOCALID_SS_ANNE)
     {
-        var = -32;
+        minX = -32;
     }
     else
     {
-        var = -16;
+        minX = -16;
     }
-    if ((s16)x >= 256 || (s16)x2 < var)
+    if ((s16)x >= (DISPLAY_WIDTH + 16) || (s16)x2 < minX)
     {
         objectEvent->offScreen = TRUE;
     }
-    if ((s16)y >= 176 || (s16)y2 < -16)
+    if ((s16)y >= (DISPLAY_HEIGHT + 16) || (s16)y2 < -16)
     {
         objectEvent->offScreen = TRUE;
     }

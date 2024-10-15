@@ -44,6 +44,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_SILPH_CO_GIOVANNI",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_GIOVANNI",
       "x": 6,
@@ -58,6 +59,7 @@
       "flag": "FLAG_HIDE_SILPH_ROCKETS"
     },
     {
+      "local_id": "LOCALID_SILPH_CO_11F_GRUNT1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 16,
@@ -86,6 +88,7 @@
       "flag": "FLAG_HIDE_SILPH_CO_11F_ZINC"
     },
     {
+      "local_id": "LOCALID_SILPH_CO_11F_GRUNT2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 2,

@@ -1,5 +1,3 @@
-.set LOCALID_LANCE, 1
-
 PokemonLeague_LancesRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_LancesRoom_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_LancesRoom_OnLoad

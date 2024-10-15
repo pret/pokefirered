@@ -2407,15 +2407,15 @@ static void MoveDeoxysObject(u8 num)
     u8 mapObjId;
     LoadPalette(sDeoxysObjectPals[num], OBJ_PLTT_ID(10), PLTT_SIZEOF(4));
     ApplyGlobalFieldPaletteTint(10);
-    TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
+    TryGetObjectEventIdByLocalIdAndMap(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &mapObjId);
     if (num == 0)
         PlaySE(SE_M_CONFUSE_RAY);
     else
         PlaySE(SE_DEOXYS_MOVE);
     CreateTask(Task_WaitDeoxysFieldEffect, 8);
-    gFieldEffectArguments[0] = 1;
-    gFieldEffectArguments[1] = 56;
-    gFieldEffectArguments[2] = 2;
+    gFieldEffectArguments[0] = LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK;
+    gFieldEffectArguments[1] =  MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR);
+    gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR);
     gFieldEffectArguments[3] = sDeoxysCoords[num][0];
     gFieldEffectArguments[4] = sDeoxysCoords[num][1];
     if (num == 0)
@@ -2423,7 +2423,7 @@ static void MoveDeoxysObject(u8 num)
     else
         gFieldEffectArguments[5] = 5;
     FieldEffectStart(FLDEFF_MOVE_DEOXYS_ROCK);
-    SetObjEventTemplateCoords(1, sDeoxysCoords[num][0], sDeoxysCoords[num][1]);
+    SetObjEventTemplateCoords(LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK, sDeoxysCoords[num][0], sDeoxysCoords[num][1]);
 }
 
 static void Task_WaitDeoxysFieldEffect(u8 taskId)

@@ -117,7 +117,7 @@ EventScript_CancelSail::
 
 VermilionCity_EventScript_WalkUpPier::
 	closemessage
-	applymovement LOCALID_FERRY_SAILOR, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_VERMILION_FERRY_SAILOR, Common_Movement_FaceOriginalDirection
 	applymovement LOCALID_PLAYER, VermilionCity_Movement_WalkUp
 	waitmovement 0
 	releaseall
@@ -134,12 +134,12 @@ EventScript_SeviiDestinationsPage1::
 	specialvar VAR_0x8006, GetSelectedSeagallopDestination
 	switch VAR_0x8006
 	case SEAGALLOP_VERMILION_CITY, EventScript_SailToVermilionCity
-	case SEAGALLOP_ONE_ISLAND,	 EventScript_SailToOneIsland
-	case SEAGALLOP_TWO_ISLAND,	 EventScript_SailToTwoIsland
+	case SEAGALLOP_ONE_ISLAND,     EventScript_SailToOneIsland
+	case SEAGALLOP_TWO_ISLAND,     EventScript_SailToTwoIsland
 	case SEAGALLOP_THREE_ISLAND,   EventScript_SailToThreeIsland
-	case SEAGALLOP_FOUR_ISLAND,	EventScript_SailToFourIsland
-	case SEAGALLOP_MORE,		   EventScript_SeviiDestinationsPage2
-	case SCR_MENU_CANCEL,		  EventScript_CancelSail
+	case SEAGALLOP_FOUR_ISLAND,    EventScript_SailToFourIsland
+	case SEAGALLOP_MORE,           EventScript_SeviiDestinationsPage2
+	case SCR_MENU_CANCEL,          EventScript_CancelSail
 	end
 
 EventScript_SeviiDestinationsPage2::
@@ -152,8 +152,8 @@ EventScript_SeviiDestinationsPage2::
 	case SEAGALLOP_FIVE_ISLAND,  EventScript_SailToFiveIsland
 	case SEAGALLOP_SIX_ISLAND,   EventScript_SailToSixIsland
 	case SEAGALLOP_SEVEN_ISLAND, EventScript_SailToSevenIsland
-	case SEAGALLOP_MORE,		 EventScript_SeviiDestinationsPage1
-	case SCR_MENU_CANCEL,		EventScript_CancelSail
+	case SEAGALLOP_MORE,         EventScript_SeviiDestinationsPage1
+	case SCR_MENU_CANCEL,        EventScript_CancelSail
 	end
 
 EventScript_SailToVermilionCity::

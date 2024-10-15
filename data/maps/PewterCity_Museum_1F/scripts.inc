@@ -1,6 +1,3 @@
-.set LOCALID_SCIENTIST1, 1
-.set LOCALID_OLD_AMBER,  4
-
 PewterCity_Museum_1F_MapScripts::
 	.byte 0
 
@@ -22,14 +19,14 @@ PewterCity_Museum_1F_EventScript_Scientist1BehindCounter::
 
 PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter::
 	msgbox PewterCity_Museum_1F_Text_AmberContainsGeneticMatter
-	applymovement LOCALID_SCIENTIST1, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_MUSEUM_SCIENTIST1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
 PewterCity_Museum_1F_EventScript_ExplainAmber::
 	msgbox PewterCity_Museum_1F_Text_AmberIsFossilizedSap
-	applymovement LOCALID_SCIENTIST1, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_MUSEUM_SCIENTIST1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

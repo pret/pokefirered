@@ -1,9 +1,3 @@
-.equ LOCALID_GRUNT1, 5
-.equ LOCALID_GRUNT2, 1
-.equ LOCALID_GRUNT3, 2
-.equ LOCALID_ADMIN1, 3
-.equ LOCALID_ADMIN2, 4
-
 .equ PLAYER_X_POS, VAR_0x8004
 .equ PLAYER_Y_POS, VAR_0x8005
 
@@ -43,7 +37,7 @@ FiveIsland_RocketWarehouse_EventScript_Computer::
 
 FiveIsland_RocketWarehouse_EventScript_Admin2Trigger::
 	lockall
-	applymovement LOCALID_ADMIN2, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_WAREHOUSE_ADMIN2, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	setvar VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1
 	releaseall
@@ -88,10 +82,10 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2::
 	msgbox FiveIsland_RocketWarehouse_Text_Admin2PostBattle
 	closemessage
 	fadescreen FADE_TO_BLACK
-	removeobject LOCALID_GRUNT2
-	removeobject LOCALID_GRUNT3
-	removeobject LOCALID_ADMIN2
-	removeobject LOCALID_ADMIN1
+	removeobject LOCALID_WAREHOUSE_GRUNT2
+	removeobject LOCALID_WAREHOUSE_GRUNT3
+	removeobject LOCALID_WAREHOUSE_ADMIN2
+	removeobject LOCALID_WAREHOUSE_ADMIN1
 	setflag FLAG_HIDE_FIVE_ISLAND_ROCKETS
 	fadescreen FADE_FROM_BLACK
 	setvar VAR_MAP_SCENE_ROCKET_WAREHOUSE, 1
@@ -143,27 +137,27 @@ FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1::
 	return
 
 FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitchFar::
-	applymovement LOCALID_ADMIN1, FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitchFar
+	applymovement LOCALID_WAREHOUSE_ADMIN1, FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitchFar
 	waitmovement 0
 	return
 
 FiveIsland_RocketWarehouse_EventScript_AdminWalkToSwitch::
-	applymovement LOCALID_ADMIN1, FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitch
+	applymovement LOCALID_WAREHOUSE_ADMIN1, FiveIsland_RocketWarehouse_Movement_AdminWalkToSwitch
 	waitmovement 0
 	return
 
 FiveIsland_RocketWarehouse_EventScript_AdminFaceSwitch::
-	applymovement LOCALID_ADMIN1, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_WAREHOUSE_ADMIN1, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerLeft::
-	applymovement LOCALID_ADMIN1, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_WAREHOUSE_ADMIN1, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 FiveIsland_RocketWarehouse_EventScript_AdminFacePlayerDown::
-	applymovement LOCALID_ADMIN1, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_WAREHOUSE_ADMIN1, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 

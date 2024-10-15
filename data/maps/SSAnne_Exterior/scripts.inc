@@ -1,5 +1,3 @@
-.set LOCALID_SS_ANNE, 1
-
 SSAnne_Exterior_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SSAnne_Exterior_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SSAnne_Exterior_OnFrame

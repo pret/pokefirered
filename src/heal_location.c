@@ -2,6 +2,7 @@
 #include "heal_location.h"
 #include "event_data.h"
 #include "constants/maps.h"
+#include "constants/map_event_ids.h"
 #include "constants/heal_locations.h"
 
 static void SetWhiteoutRespawnHealerNpcAsLastTalked(u32 healLocationIdx);

@@ -124,7 +124,7 @@ CinnabarIsland_EventScript_BillApproachPlayer1::
 CinnabarIsland_EventScript_BillApproachPlayer2::
 	applymovement LOCALID_BILL, CinnabarIsland_Movement_BillApproachPlayer2
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -162,7 +162,7 @@ CinnabarIsland_Movement_BillExitToPokeCenter::
 	step_end
 
 CinnabarIsland_EventScript_BillReturnToPokeCenter::
-	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_Movement_PlayerWatchBillExit
+	applymovement LOCALID_PLAYER, CinnabarIsland_Movement_PlayerWatchBillExit
 	applymovement LOCALID_BILL, CinnabarIsland_Movement_BillApproachDoor
 	waitmovement 0
 	opendoor 14, 11
@@ -212,7 +212,7 @@ CinnabarIsland_EventScript_SailToOneIsland::
 
 CinnabarIsland_EventScript_ApproachShore::
 	applymovement LOCALID_BILL, CinnabarIsland_Movement_ApproachShore
-	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_Movement_ApproachShore
+	applymovement LOCALID_PLAYER, CinnabarIsland_Movement_ApproachShore
 	waitmovement 0
 	return
 
@@ -229,13 +229,13 @@ CinnabarIsland_EventScript_BoatArriveExitedPokeCenter::
 
 CinnabarIsland_EventScript_BoardBoat::
 	applymovement LOCALID_BILL, CinnabarIsland_Movement_BillBoardBoat
-	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_Movement_PlayerBoardBoat
+	applymovement LOCALID_PLAYER, CinnabarIsland_Movement_PlayerBoardBoat
 	waitmovement 0
 	return
 
 CinnabarIsland_EventScript_BoardBoatExitedPokeCenter::
 	applymovement LOCALID_BILL, CinnabarIsland_Movement_BillBoardBoatFromShore
-	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_Movement_PlayerBoardBoatFromShore
+	applymovement LOCALID_PLAYER, CinnabarIsland_Movement_PlayerBoardBoatFromShore
 	waitmovement 0
 	return
 
@@ -313,12 +313,12 @@ CinnabarIsland_Movement_PlayerBoardBoatFromShore::
 @ Triggered when VAR_TEMP_1 is 0
 CinnabarIsland_EventScript_GymDoorLocked::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	msgbox CinnabarIsland_Text_DoorIsLocked
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_Movement_ForcePlayerFromDoor
+	applymovement LOCALID_PLAYER, CinnabarIsland_Movement_ForcePlayerFromDoor
 	waitmovement 0
 	releaseall
 	end

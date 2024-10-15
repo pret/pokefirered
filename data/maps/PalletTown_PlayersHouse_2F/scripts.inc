@@ -16,7 +16,7 @@ PalletTown_PlayersHouse_2F_OnWarp::
 	.2byte 0
 
 PalletTown_PlayersHouse_2F_FirstWarpIn::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 1
 	end
 

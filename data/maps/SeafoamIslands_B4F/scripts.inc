@@ -60,7 +60,7 @@ SeafoamIslands_B4F_OnWarp::
 	.2byte 0
 
 SeafoamIslands_B4F_EventScript_WarpInOnCurrent::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	special ForcePlayerToStartSurfing
 	end
 
@@ -72,7 +72,7 @@ SeafoamIslands_B4F_OnFrame::
 @ The current the player is forced in on from B3F
 SeafoamIslands_B4F_EventScript_EnterOnCurrent::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, SeafoamIslands_B4F_Movement_EnterOnCurrent
+	applymovement LOCALID_PLAYER, SeafoamIslands_B4F_Movement_EnterOnCurrent
 	waitmovement 0
 	setvar VAR_MAP_SCENE_SEAFOAM_ISLANDS_B4F, 0
 	releaseall
@@ -104,12 +104,12 @@ SeafoamIslands_B4F_EventScript_AddBoulderPresent::
 	return
 
 SeafoamIslands_B4F_EventScript_RideCurrentFar::
-	applymovement OBJ_EVENT_ID_PLAYER, SeafoamIslands_B4F_Movement_RideCurrentFar
+	applymovement LOCALID_PLAYER, SeafoamIslands_B4F_Movement_RideCurrentFar
 	waitmovement 0
 	return
 
 SeafoamIslands_B4F_EventScript_RideCurrentClose::
-	applymovement OBJ_EVENT_ID_PLAYER, SeafoamIslands_B4F_Movement_RideCurrentClose
+	applymovement LOCALID_PLAYER, SeafoamIslands_B4F_Movement_RideCurrentClose
 	waitmovement 0
 	return
 
@@ -142,7 +142,7 @@ SeafoamIslands_B4F_Movement_RideCurrentClose::
 @ Triggers blocking re-entry to B3F
 SeafoamIslands_B4F_EventScript_UpwardCurrent::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, SeafoamIslands_B4F_Movement_WalkUp
+	applymovement LOCALID_PLAYER, SeafoamIslands_B4F_Movement_WalkUp
 	waitmovement 0
 	releaseall
 	end

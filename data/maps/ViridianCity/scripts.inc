@@ -43,12 +43,12 @@ ViridianCity_EventScript_TryUnlockGym::
 ViridianCity_EventScript_GymDoorLocked::
 	lockall
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	msgbox ViridianCity_Text_GymDoorsAreLocked
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_JumpDownLedge
+	applymovement LOCALID_PLAYER, ViridianCity_Movement_JumpDownLedge
 	waitmovement 0
 	releaseall
 	end
@@ -194,7 +194,7 @@ ViridianCity_EventScript_RoadBlocked::
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox ViridianCity_Text_ThisIsPrivateProperty
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_WalkDown
+	applymovement LOCALID_PLAYER, ViridianCity_Movement_WalkDown
 	waitmovement 0
 	releaseall
 	end
@@ -208,7 +208,7 @@ ViridianCity_EventScript_TutorialTriggerLeft::
 	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	call ViridianCity_EventScript_DoTutorialBattle
 	release
@@ -219,7 +219,7 @@ ViridianCity_EventScript_TutorialTriggerRight::
 	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	call ViridianCity_EventScript_DoTutorialBattle
 	release

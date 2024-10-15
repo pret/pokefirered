@@ -26,7 +26,7 @@ ViridianCity_Mart_EventScript_ParcelScene::
 	msgbox ViridianCity_Mart_Text_YouCameFromPallet
 	closemessage
 	applymovement LOCALID_CLERK, ViridianCity_Mart_Movement_FacePlayer
-	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
+	applymovement LOCALID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
 	waitmovement 0
 	msgbox ViridianCity_Mart_Text_TakeThisToProfOak
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1

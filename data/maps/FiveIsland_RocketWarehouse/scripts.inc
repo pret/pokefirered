@@ -100,7 +100,7 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin2::
 	end
 
 FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin2::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -138,7 +138,7 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedAdmin1::
 
 FiveIsland_RocketWarehouse_EventScript_PlayerFaceAdmin1::
 	goto_if_eq PLAYER_X_POS, 27, EventScript_Return
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 

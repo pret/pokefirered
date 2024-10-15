@@ -85,7 +85,7 @@ SilphCo_11F_EventScript_BattleGiovanni::
 
 SilphCo_11F_EventScript_GiovanniApproachLeft::
 	applymovement LOCALID_GIOVANNI, SilphCo_11F_Movement_GiovanniApproachLeft
-	applymovement OBJ_EVENT_ID_PLAYER, SilphCo_11F_Movement_PlayerFaceGiovanni
+	applymovement LOCALID_PLAYER, SilphCo_11F_Movement_PlayerFaceGiovanni
 	waitmovement 0
 	return
 

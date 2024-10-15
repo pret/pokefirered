@@ -26,7 +26,7 @@ TwoIsland_JoyfulGameCorner_OnWarp::
 	.2byte 0
 
 TwoIsland_JoyfulGameCorner_EventScript_TurnPlayerNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 TwoIsland_JoyfulGameCorner_OnFrame::
@@ -65,13 +65,13 @@ TwoIsland_JoyfulGameCorner_EventScript_HelpFindLostelleScene::
 	waitmovement 0
 	applymovement LOCALID_DADDY, TwoIsland_JoyfulGameCorner_Movement_DaddyApproachPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox TwoIsland_JoyfulGameCorner_Text_PleaseHelpFindLostelle
 	closemessage
 	playse SE_RS_DOOR
 	waitse
-	applymovement OBJ_EVENT_ID_PLAYER, TwoIsland_JoyfulGameCorner_Movement_PlayerFaceDaddy
+	applymovement LOCALID_PLAYER, TwoIsland_JoyfulGameCorner_Movement_PlayerFaceDaddy
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
 	addobject LOCALID_BIKER

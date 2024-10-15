@@ -95,23 +95,23 @@ ThreeIsland_EventScript_BikerArgumentScene::
 	return
 
 ThreeIsland_EventScript_PlayerFaceUp::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 @ Unused
 ThreeIsland_EventScript_PlayerFaceDown::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PlayerFaceLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PlayerFaceRight::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
@@ -286,20 +286,20 @@ ThreeIsland_EventScript_PaxtonApproachMidLeft::
 ThreeIsland_EventScript_PaxtonApproachMid::
 	applymovement LOCALID_BIKER3, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMid
-	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
+	applymovement LOCALID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PaxtonApproachMidRight::
 	applymovement LOCALID_BIKER3, Common_Movement_WalkInPlaceFasterDown
-	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
+	applymovement LOCALID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachMidRight
 	waitmovement 0
 	return
 
 ThreeIsland_EventScript_PaxtonApproachRight::
 	applymovement LOCALID_BIKER3, Common_Movement_WalkInPlaceFasterDown
-	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
+	applymovement LOCALID_PLAYER, ThreeIsland_Movement_PlayerFacePaxton
 	applymovement LOCALID_PAXTON, ThreeIsland_Movement_PaxtonApproachRight
 	waitmovement 0
 	return
@@ -307,7 +307,7 @@ ThreeIsland_EventScript_PaxtonApproachRight::
 ThreeIsland_EventScript_LeaveBikersAlone::
 	msgbox ThreeIsland_Text_ThatsSmart
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, ThreeIsland_Movement_PlayerLeaveBikers
+	applymovement LOCALID_PLAYER, ThreeIsland_Movement_PlayerLeaveBikers
 	waitmovement 0
 	applymovement LOCALID_BIKER1, ThreeIsland_Movement_Biker1ReturnToPack
 	waitmovement 0

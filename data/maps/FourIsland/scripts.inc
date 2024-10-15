@@ -41,7 +41,7 @@ FourIsland_EventScript_RivalScene::
 	waitmovement 0
 	msgbox FourIsland_Text_RivalAlreadyGotEggBeSmellingYa
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, FourIsland_Movement_PlayerWatchRivalExit
+	applymovement LOCALID_PLAYER, FourIsland_Movement_PlayerWatchRivalExit
 	applymovement LOCALID_RIVAL, FourIsland_Movement_RivalExit
 	waitmovement 0
 	fadedefaultbgm

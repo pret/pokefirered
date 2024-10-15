@@ -23,7 +23,7 @@ SevenIsland_SevaultCanyon_House_EventScript_BaldingMan::
 	call_if_ne VAR_FACING, DIR_SOUTH, SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown
 	delay 30
 	playbgm MUS_SCHOOL, 0
-	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_SevaultCanyon_House_Movement_ChanseyDance
+	applymovement LOCALID_PLAYER, SevenIsland_SevaultCanyon_House_Movement_ChanseyDance
 	waitmovement 0
 	fadedefaultbgm
 	delay 30
@@ -34,7 +34,7 @@ SevenIsland_SevaultCanyon_House_EventScript_BaldingMan::
 	end
 
 SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 

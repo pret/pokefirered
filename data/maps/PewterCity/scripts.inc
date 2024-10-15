@@ -31,30 +31,30 @@ PewterCity_EventScript_GymGuide::
 	end
 
 PewterCity_EventScript_WalkToGymEast::
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWaitForGuideEast
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWaitForGuideEast
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideMoveToLeadEast
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToGymEast
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToGymEast
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideWalkToGymEast
 	waitmovement 0
 	return
 
 @ Unused
 PewterCity_EventScript_WalkToGymWest::
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWaitForGuideWest
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWaitForGuideWest
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideMoveToLeadWest
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToGymWest
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToGymWest
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideWalkToGymWest
 	waitmovement 0
 	return
 
 @ Unused
 PewterCity_EventScript_WalkToGymNorth::
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWaitForGuideNorth
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWaitForGuideNorth
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideMoveToLeadNorth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToGymNorth
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToGymNorth
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideWalkToGymNorth
 	waitmovement 0
 	return
@@ -303,7 +303,7 @@ PewterCity_EventScript_GymGuideTrigger::
 PewterCity_EventScript_WalkToGymTop::
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideMoveToLeadTop
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToGymTop
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToGymTop
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideWalkToGymTop
 	waitmovement 0
 	return
@@ -311,7 +311,7 @@ PewterCity_EventScript_WalkToGymTop::
 PewterCity_EventScript_WalkToGymMid::
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideMoveToLeadMid
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToGymMid
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToGymMid
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideWalkToGymMid
 	waitmovement 0
 	return
@@ -319,7 +319,7 @@ PewterCity_EventScript_WalkToGymMid::
 PewterCity_EventScript_WalkToGymBottom::
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideMoveToLeadBottom
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToGymBottom
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToGymBottom
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideWalkToGymBottom
 	waitmovement 0
 	return
@@ -328,7 +328,7 @@ PewterCity_EventScript_WalkToGymBottom::
 PewterCity_EventScript_WalkToGymRight::
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideApproachPlayerRight
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToGymRight
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToGymRight
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GuideWalkToGymRight
 	waitmovement 0
 	return
@@ -458,25 +458,25 @@ PewterCity_EventScript_MuseumGuide::
 
 PewterCity_EventScript_LeadToMuseumNorth::
 	applymovement LOCALID_MUSEUM_GUIDE, PewterCity_Movement_GuideWalkToMuseumNorth
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToMuseumNorth
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToMuseumNorth
 	waitmovement 0
 	return
 
 PewterCity_EventScript_LeadToMuseumSouth::
 	applymovement LOCALID_MUSEUM_GUIDE, PewterCity_Movement_GuideWalkToMuseumSouth
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToMuseumSouth
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToMuseumSouth
 	waitmovement 0
 	return
 
 PewterCity_EventScript_LeadToMuseumWest::
 	applymovement LOCALID_MUSEUM_GUIDE, PewterCity_Movement_GuideWalkToMuseumWest
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToMuseumWest
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToMuseumWest
 	waitmovement 0
 	return
 
 PewterCity_EventScript_LeadToMuseumEast::
 	applymovement LOCALID_MUSEUM_GUIDE, PewterCity_Movement_GuideWalkToMuseumEast
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_PlayerWalkToMuseumEast
+	applymovement LOCALID_PLAYER, PewterCity_Movement_PlayerWalkToMuseumEast
 	waitmovement 0
 	return
 
@@ -740,7 +740,7 @@ PewterCity_EventScript_AideApproachPlayer0::
 
 PewterCity_EventScript_AideApproachPlayer1::
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -748,7 +748,7 @@ PewterCity_EventScript_AideApproachPlayer2::
 	closemessage
 	applymovement LOCALID_AIDE, PewterCity_Movement_AideApproachPlayerMid
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -756,7 +756,7 @@ PewterCity_EventScript_AideApproachPlayer3::
 	closemessage
 	applymovement LOCALID_AIDE, PewterCity_Movement_AideApproachPlayerBottom
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 

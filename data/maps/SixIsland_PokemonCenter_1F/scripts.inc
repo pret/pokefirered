@@ -34,7 +34,7 @@ SixIsland_PokemonCenter_1F_EventScript_RivalScene::
 	waitmovement 0
 	msgbox SixIsland_PokemonCenter_1F_Text_RivalImpossibleToGetAllMonsAroundHere
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit
+	applymovement LOCALID_PLAYER, SixIsland_PokemonCenter_1F_Movement_PlayerWatchRivalExit
 	applymovement LOCALID_RIVAL, SixIsland_PokemonCenter_1F_Movement_RivalExit
 	waitmovement 0
 	fadedefaultbgm

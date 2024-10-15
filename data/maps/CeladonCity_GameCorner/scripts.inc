@@ -246,7 +246,7 @@ CeladonCity_GameCorner_EventScript_SlotMachine::
 	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_EventScript_SlotMachineNoCoinCase
 	msgbox CeladonCity_GameCorner_Text_SlotMachineWantToPlay, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, CeladonCity_GameCorner_EventScript_DontPlaySlotMachine
-	setfieldeffectargument 0, OBJ_EVENT_ID_PLAYER
+	setfieldeffectargument 0, LOCALID_PLAYER
 .ifdef BUGFIX
 	setfieldeffectargument 1, MAP_NUM(MAP_CELADON_CITY_GAME_CORNER)
 	setfieldeffectargument 2, MAP_GROUP(MAP_CELADON_CITY_GAME_CORNER)

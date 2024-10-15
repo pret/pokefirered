@@ -59,12 +59,12 @@ SSAnne_2F_Corridor_EventScript_RivalApproachLeft::
 
 SSAnne_2F_Corridor_EventScript_RivalApproachMid::
 	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachMid
-	applymovement OBJ_EVENT_ID_PLAYER, SSAnne_2F_Corridor_Movement_PlayerFaceRivalMid
+	applymovement LOCALID_PLAYER, SSAnne_2F_Corridor_Movement_PlayerFaceRivalMid
 	waitmovement 0
 	return
 
 SSAnne_2F_Corridor_EventScript_RivalApproachRight::
-	applymovement OBJ_EVENT_ID_PLAYER, SSAnne_2F_Corridor_Movement_PlayerFaceRivalRight
+	applymovement LOCALID_PLAYER, SSAnne_2F_Corridor_Movement_PlayerFaceRivalRight
 	applymovement LOCALID_RIVAL, SSAnne_2F_Corridor_Movement_RivalApproachRight
 	waitmovement 0
 	return

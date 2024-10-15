@@ -10,7 +10,7 @@ PokemonLeague_HallOfFame_OnWarp::
 	.2byte 0
 
 PokemonLeague_HallOfFame_EventScript_TurnPlayerNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_HallOfFame_OnFrame::
@@ -20,16 +20,16 @@ PokemonLeague_HallOfFame_OnFrame::
 PokemonLeague_HallOfFame_EventScript_EnterRoom::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_HallOfFame_Movement_EnterRoom
+	applymovement LOCALID_PLAYER, PokemonLeague_HallOfFame_Movement_EnterRoom
 	waitmovement 0
 	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterLeft
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 18
 	msgbox PokemonLeague_HallOfFame_Text_OakCongratulations
 	closemessage
 	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterUp
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	dofieldeffect FLDEFF_HALL_OF_FAME_RECORD

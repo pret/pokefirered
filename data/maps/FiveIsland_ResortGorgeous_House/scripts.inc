@@ -68,14 +68,14 @@ FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerNorth::
 	applymovement LOCALID_SELPHY, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerNorth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
 FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerSouth::
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerSouth
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
@@ -83,7 +83,7 @@ FiveIsland_ResortGorgeous_House_EventScript_ButlerApproachPlayerEast::
 	applymovement LOCALID_SELPHY, Common_Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_BUTLER, FiveIsland_ResortGorgeous_House_Movement_ButlerApproachPlayerEast
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 

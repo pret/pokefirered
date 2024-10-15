@@ -34,13 +34,13 @@ IndigoPlateau_Exterior_EventScript_Credits::
 	special SpawnCameraObject
 	addobject LOCALID_RIVAL
 	applymovement LOCALID_RIVAL, IndigoPlateau_Exterior_Movement_RivalExitBuilding
-	applymovement OBJ_EVENT_ID_PLAYER, IndigoPlateau_Exterior_Movement_PushPlayerOutOfWay
+	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PushPlayerOutOfWay
 	waitmovement 0
 	closedoor 11, 6
 	waitdooranim
 
 	@ Rival runs off
-	applymovement OBJ_EVENT_ID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerWatchRivalLeave
+	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerWatchRivalLeave
 	applymovement LOCALID_RIVAL, IndigoPlateau_Exterior_Movement_RivalLeave
 	waitmovement 0
 	delay 100
@@ -56,23 +56,23 @@ IndigoPlateau_Exterior_EventScript_Credits::
 	delay 160
 
 	@ Oak looks at player, then walks off
-	applymovement OBJ_EVENT_ID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerWatchOakLeave
+	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerWatchOakLeave
 	applymovement LOCALID_PROF_OAK, IndigoPlateau_Exterior_Movement_OakLeave
 	waitmovement 0
 	delay 100
 
 	@ Player begin to leave
-	applymovement OBJ_EVENT_ID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerBeginLeave
+	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerBeginLeave
 	waitmovement 0
 	delay 155
-	applymovement OBJ_EVENT_ID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerFaceLeague
+	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerFaceLeague
 	waitmovement 0
 	delay 90
 
 	@ Player runs off
-	applymovement OBJ_EVENT_ID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerTurnAround
+	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerTurnAround
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerLeave
+	applymovement LOCALID_PLAYER, IndigoPlateau_Exterior_Movement_PlayerLeave
 	waitmovement 0
 
 	@ Reset the map state and roll the credits

@@ -11,7 +11,7 @@ VermilionCity_OnFrame::
 
 VermilionCity_EventScript_ExitSSAnne::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, VermilionCity_Movement_ExitSSAnne
+	applymovement LOCALID_PLAYER, VermilionCity_Movement_ExitSSAnne
 	waitmovement 0
 	setvar VAR_MAP_SCENE_VERMILION_CITY, 3
 	releaseall
@@ -192,7 +192,7 @@ VermilionCity_EventScript_ExitedTicketCheck::
 VermilionCity_EventScript_CheckTicket::
 	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_FERRY_SAILOR, Common_Movement_WalkInPlaceFasterLeft
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto_if_eq VAR_MAP_SCENE_VERMILION_CITY, 3, VermilionCity_EventScript_CheckSeagallopPresentTrigger
 	msgbox VermilionCity_Text_DoYouHaveATicket

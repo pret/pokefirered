@@ -10,7 +10,7 @@ FiveIsland_ResortGorgeous_OnWarp::
 	.2byte 0
 
 FiveIsland_ResortGorgeous_EventScript_TurnPlayerNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 FiveIsland_ResortGorgeous_OnFrame::

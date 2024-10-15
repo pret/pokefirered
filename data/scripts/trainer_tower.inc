@@ -362,7 +362,7 @@ TrainerTower_EventScript_IneligibleForDoubleBattle::
 	playse SE_DING_DONG
 	msgbox TrainerTower_Lobby_Text_NeedTwoMonsForDouble
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Movement_PushPlayerBack
+	applymovement LOCALID_PLAYER, TrainerTower_Movement_PushPlayerBack
 	waitmovement 0
 	releaseall
 	end

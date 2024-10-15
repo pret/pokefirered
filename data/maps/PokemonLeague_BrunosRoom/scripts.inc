@@ -30,7 +30,7 @@ PokemonLeague_BrunosRoom_OnWarp::
 	.2byte 0
 
 PokemonLeague_BrunosRoom_EventScript_TurnPlayerNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_BrunosRoom_OnFrame::

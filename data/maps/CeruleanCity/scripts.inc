@@ -85,13 +85,13 @@ CeruleanCity_EventScript_RivalCharmander::
 	return
 
 CeruleanCity_EventScript_RivalStartExit::
-	applymovement OBJ_EVENT_ID_PLAYER, CeruleanCity_Movement_PlayerWatchRivalExit
+	applymovement LOCALID_PLAYER, CeruleanCity_Movement_PlayerWatchRivalExit
 	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalStartExit
 	waitmovement 0
 	return
 
 CeruleanCity_EventScript_RivalStartExitRight::
-	applymovement OBJ_EVENT_ID_PLAYER, CeruleanCity_Movement_PlayerWatchRivalExitRight
+	applymovement LOCALID_PLAYER, CeruleanCity_Movement_PlayerWatchRivalExitRight
 	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalStartExitRight
 	waitmovement 0
 	return
@@ -206,7 +206,7 @@ CeruleanCity_EventScript_GruntTriggerTop::
 	setvar VAR_TEMP_1, 0
 	applymovement LOCALID_GRUNT, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	goto CeruleanCity_EventScript_GruntTrigger
 	end
@@ -216,7 +216,7 @@ CeruleanCity_EventScript_GruntTriggerBottom::
 	setvar VAR_TEMP_1, 1
 	applymovement LOCALID_GRUNT, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	goto CeruleanCity_EventScript_GruntTrigger
 	end

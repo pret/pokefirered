@@ -2,7 +2,7 @@
 #include "gflib.h"
 
 u8 gWindowClearTile;
-void *gWindowBgTilemapBuffers[4];
+void *gWindowBgTilemapBuffers[NUM_BACKGROUNDS];
 
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
 
@@ -25,7 +25,7 @@ bool16 InitWindows(const struct WindowTemplate *templates)
     u8 *allocatedTilemapBuffer;
     int allocatedBaseBlock;
 
-    for (i = 0; i < 4; ++i)
+    for (i = 0; i < NUM_BACKGROUNDS; ++i)
     {
         bgTilemapBuffer = GetBgTilemapBuffer(i);
         if (bgTilemapBuffer != NULL)
@@ -71,7 +71,7 @@ bool16 InitWindows(const struct WindowTemplate *templates)
             }
         }
 
-        allocatedTilemapBuffer = Alloc((u16)(0x20 * (templates[i].width * templates[i].height)));
+        allocatedTilemapBuffer = Alloc((u16)(TILE_SIZE_4BPP * (templates[i].width * templates[i].height)));
 
         if (allocatedTilemapBuffer == NULL)
         {
@@ -114,7 +114,7 @@ u16 AddWindow(const struct WindowTemplate *template)
     }
 
     if (win == WINDOWS_MAX)
-        return 0xFF;
+        return WINDOW_NONE;
 
     bgLayer = template->bg;
     allocatedBaseBlock = 0;
@@ -124,7 +124,7 @@ u16 AddWindow(const struct WindowTemplate *template)
         allocatedBaseBlock = BgTileAllocOp(bgLayer, 0, template->width * template->height, BG_TILE_FIND_FREE_SPACE);
 
         if (allocatedBaseBlock == -1)
-            return 0xFF;
+            return WINDOW_NONE;
     }
 
     if (gWindowBgTilemapBuffers[bgLayer] == NULL)
@@ -136,7 +136,7 @@ u16 AddWindow(const struct WindowTemplate *template)
             allocatedTilemapBuffer = Alloc(bgSize);
 
             if (allocatedTilemapBuffer == NULL)
-                return 0xFF;
+                return WINDOW_NONE;
 
             for (i = 0; i < bgSize; ++i)
                 allocatedTilemapBuffer[i] = 0;
@@ -146,7 +146,7 @@ u16 AddWindow(const struct WindowTemplate *template)
         }
     }
 
-    allocatedTilemapBuffer = Alloc((u16)(0x20 * (template->width * template->height)));
+    allocatedTilemapBuffer = Alloc((u16)(TILE_SIZE_4BPP * (template->width * template->height)));
 
     if (allocatedTilemapBuffer == NULL)
     {
@@ -155,7 +155,7 @@ u16 AddWindow(const struct WindowTemplate *template)
             Free(gWindowBgTilemapBuffers[bgLayer]);
             gWindowBgTilemapBuffers[bgLayer] = allocatedTilemapBuffer;
         }
-        return 0xFF;
+        return WINDOW_NONE;
     }
 
     gWindows[win].tileData = allocatedTilemapBuffer;
@@ -201,7 +201,7 @@ void FreeAllWindowBuffers(void)
 {
     int i;
 
-    for (i = 0; i < 4; ++i)
+    for (i = 0; i < NUM_BACKGROUNDS; ++i)
     {
         if (gWindowBgTilemapBuffers[i] != NULL && gWindowBgTilemapBuffers[i] != nullsub_8)
         {
@@ -223,7 +223,7 @@ void FreeAllWindowBuffers(void)
 void CopyWindowToVram(u8 windowId, u8 mode)
 {
     struct Window windowLocal = gWindows[windowId];
-    u16 windowSize = 32 * (windowLocal.window.width * windowLocal.window.height);
+    u16 windowSize = TILE_SIZE_4BPP * (windowLocal.window.width * windowLocal.window.height);
 
     switch (mode)
     {
@@ -328,8 +328,8 @@ void BlitBitmapRectToWindow(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u
     sourceRect.height = srcHeight;
 
     destRect.pixels = gWindows[windowId].tileData;
-    destRect.width = 8 * gWindows[windowId].window.width;
-    destRect.height = 8 * gWindows[windowId].window.height;
+    destRect.width = TILE_WIDTH * gWindows[windowId].window.width;
+    destRect.height = TILE_HEIGHT * gWindows[windowId].window.height;
 
     BlitBitmapRect4Bit(&sourceRect, &destRect, srcX, srcY, destX, destY, rectWidth, rectHeight, 0);
 }
@@ -344,8 +344,8 @@ void BlitBitmapRectToWindowWithColorKey(u8 windowId, const u8 *pixels, u16 srcX,
     sourceRect.height = srcHeight;
 
     destRect.pixels = gWindows[windowId].tileData;
-    destRect.width = 8 * gWindows[windowId].window.width;
-    destRect.height = 8 * gWindows[windowId].window.height;
+    destRect.width = TILE_WIDTH * gWindows[windowId].window.width;
+    destRect.height = TILE_HEIGHT * gWindows[windowId].window.height;
 
     BlitBitmapRect4Bit(&sourceRect, &destRect, srcX, srcY, destX, destY, rectWidth, rectHeight, colorKey);
 }
@@ -355,8 +355,8 @@ void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16
     struct Bitmap pixelRect;
 
     pixelRect.pixels = gWindows[windowId].tileData;
-    pixelRect.width = 8 * gWindows[windowId].window.width;
-    pixelRect.height = 8 * gWindows[windowId].window.height;
+    pixelRect.width = TILE_WIDTH * gWindows[windowId].window.width;
+    pixelRect.height = TILE_HEIGHT * gWindows[windowId].window.height;
 
     FillBitmapRect4Bit(&pixelRect, x, y, width, height, fillValue);
 }
@@ -364,15 +364,15 @@ void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16
 void CopyToWindowPixelBuffer(u8 windowId, const void *src, u16 size, u16 tileOffset)
 {
     if (size != 0)
-        CpuCopy16(src, gWindows[windowId].tileData + (0x20 * tileOffset), size);
+        CpuCopy16(src, gWindows[windowId].tileData + (TILE_SIZE_4BPP * tileOffset), size);
     else
-        LZ77UnCompWram(src, gWindows[windowId].tileData + (0x20 * tileOffset));
+        LZ77UnCompWram(src, gWindows[windowId].tileData + (TILE_SIZE_4BPP * tileOffset));
 }
 
 void FillWindowPixelBuffer(u8 windowId, u8 fillValue)
 {
     int fillSize = gWindows[windowId].window.width * gWindows[windowId].window.height;
-    CpuFastFill8(fillValue, gWindows[windowId].tileData, 0x20 * fillSize);
+    CpuFastFill8(fillValue, gWindows[windowId].tileData, TILE_SIZE_4BPP * fillSize);
 }
 
 #define MOVE_TILES_DOWN(a)                                                      \
@@ -402,7 +402,7 @@ void ScrollWindow(u8 windowId, u8 direction, u8 distance, u8 fillValue)
     struct WindowTemplate window = gWindows[windowId].window;
     u8 *tileData = gWindows[windowId].tileData;
     u32 fillValue32 = (fillValue << 24) | (fillValue << 16) | (fillValue << 8) | fillValue;
-    s32 size = window.height * window.width * 32;
+    s32 size = window.height * window.width * TILE_SIZE_4BPP;
     u32 width = window.width;
     s32 i;
     s32 srcOffset, destOffset;
@@ -411,7 +411,7 @@ void ScrollWindow(u8 windowId, u8 direction, u8 distance, u8 fillValue)
     switch (direction)
     {
     case 0:
-        for (i = 0; i < size; i += 32)
+        for (i = 0; i < size; i += TILE_SIZE_4BPP)
         {
             distanceLoop = distance;
             MOVE_TILES_DOWN(0)
@@ -426,7 +426,7 @@ void ScrollWindow(u8 windowId, u8 direction, u8 distance, u8 fillValue)
         break;
     case 1:
         tileData += size - 4;
-        for (i = 0; i < size; i += 32)
+        for (i = 0; i < size; i += TILE_SIZE_4BPP)
         {
             distanceLoop = distance;
             MOVE_TILES_UP(0)

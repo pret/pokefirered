@@ -4,7 +4,7 @@
 // The number 1103515245 comes from the example implementation
 // of rand and srand in the ISO C standard.
 
-u32 gRngValue;
+COMMON_DATA u32 gRngValue = 0;
 
 u16 Random(void)
 {

@@ -172,7 +172,7 @@
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 50,
       "y": 18,
-      "target_local_id": 10,
+      "target_local_id": "LOCALID_ROUTE9_CUT_TREE",
       "target_map": "MAP_ROUTE9"
     },
     {
@@ -191,6 +191,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CERULEAN_CAVE_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
       "x": 1,

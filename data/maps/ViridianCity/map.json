@@ -133,6 +133,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_VIRIDIAN_BORDER_TREE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 18,

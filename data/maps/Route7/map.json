@@ -31,7 +31,7 @@
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": -8,
       "y": 12,
-      "target_local_id": 10,
+      "target_local_id": "LOCALID_CELADON_BORDER_TREE",
       "target_map": "MAP_CELADON_CITY"
     }
   ],

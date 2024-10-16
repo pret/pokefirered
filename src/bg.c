@@ -43,7 +43,7 @@ static struct BgConfig2 sGpuBgConfigs2[4];
 static u32 sDmaBusyBitfield[4];
 static u8 gpu_tile_allocation_map_bg[0x100];
 
-bool32 gWindowTileAutoAllocEnabled;
+COMMON_DATA bool32 gWindowTileAutoAllocEnabled = 0;
 
 static const struct BgConfig sZeroedBgControlStruct = { 0 };
 

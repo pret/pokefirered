@@ -1,4 +1,0 @@
-gMultibootStart
-gMultibootStatus
-gMultibootSize
-gMultibootParam

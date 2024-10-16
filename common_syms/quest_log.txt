@@ -1,4 +1,0 @@
-gQuestLogPlaybackState
-sMaxActionsInScene
-gQuestLogFieldInput
-sCurSceneActions

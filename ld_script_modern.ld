@@ -30,6 +30,7 @@ SECTIONS {
 
         /* COMMON starts at 0x30022A8 */
         *(COMMON);
+        *(common_data);
         end = .;
         __end__ = .;
     } > IWRAM

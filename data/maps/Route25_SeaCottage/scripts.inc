@@ -1,6 +1,3 @@
-.equ LOCALID_BILL_HUMAN,    1
-.equ LOCALID_BILL_CLEFAIRY, 2
-
 .equ BILL_IN_TELEPORTER,     FLAG_TEMP_2
 .equ RETURN_AFTER_SS_TICKET, FLAG_TEMP_3
 
@@ -159,7 +156,7 @@ Route25_SeaCottage_EventScript_RunCellSeparator::
 	clearflag BILL_IN_TELEPORTER
 	setflag FLAG_HELPED_BILL_IN_SEA_COTTAGE
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, Route25_SeaCottage_Movement_CameraPanToTeleporters
+	applymovement LOCALID_CAMERA, Route25_SeaCottage_Movement_CameraPanToTeleporters
 	waitmovement 0
 	delay 35
 	playse SE_PIN
@@ -194,7 +191,7 @@ Route25_SeaCottage_EventScript_RunCellSeparator::
 	applymovement LOCALID_BILL_HUMAN, Route25_SeaCottage_Movement_BillExitTeleporter
 	waitmovement 0
 	waitfanfare
-	applymovement OBJ_EVENT_ID_CAMERA, Route25_SeaCottage_Movement_CameraPanBackFromTeleporters
+	applymovement LOCALID_CAMERA, Route25_SeaCottage_Movement_CameraPanBackFromTeleporters
 	waitmovement 0
 	playse SE_CONTEST_CURTAIN_FALL
 	closedoor 3, 3

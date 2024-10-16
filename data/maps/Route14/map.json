@@ -195,6 +195,7 @@
       "flag": "FLAG_TEMP_13"
     },
     {
+      "local_id": "LOCALID_ROUTE14_BORDER_TREE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 1,

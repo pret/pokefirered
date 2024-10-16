@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_DOME_FOSSIL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
       "x": 13,
@@ -30,6 +31,7 @@
       "flag": "FLAG_HIDE_DOME_FOSSIL"
     },
     {
+      "local_id": "LOCALID_HELIX_FOSSIL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
       "x": 14,
@@ -44,6 +46,7 @@
       "flag": "FLAG_HIDE_HELIX_FOSSIL"
     },
     {
+      "local_id": "LOCALID_MIGUEL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 13,

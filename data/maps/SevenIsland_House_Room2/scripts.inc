@@ -13,7 +13,7 @@ SevenIsland_House_Room2_OnFrame::
 
 SevenIsland_House_Room2_EventScript_BattleVisitingTrainer::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room2_Movement_PlayerEnterRoom
+	applymovement LOCALID_PLAYER, SevenIsland_House_Room2_Movement_PlayerEnterRoom
 	waitmovement 0
 	special BufferEReaderTrainerGreeting
 	msgbox gStringVar4
@@ -27,7 +27,7 @@ SevenIsland_House_Room2_EventScript_BattleVisitingTrainer::
 	call_if_eq VAR_RESULT, 2, SevenIsland_House_Room2_EventScript_BattleLost
 	closemessage
 	special HealPlayerParty
-	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room2_Movement_PlayerExitRoom
+	applymovement LOCALID_PLAYER, SevenIsland_House_Room2_Movement_PlayerExitRoom
 	waitmovement 0
 	special LoadPlayerParty
 	setvar VAR_TEMP_1, 1

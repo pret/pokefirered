@@ -1,6 +1,3 @@
-.equ LOCALID_DAISY,    1
-.equ LOCALID_TOWN_MAP, 2
-
 .equ RECEIVED_TOWN_MAP, VAR_TEMP_1
 
 PalletTown_RivalsHouse_MapScripts::

@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ONE_ISLAND_BILL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BILL",
       "x": 12,
@@ -124,7 +125,7 @@
       "x": 14,
       "y": 6,
       "respawn_map": "MAP_ONE_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": 1
+      "respawn_npc": "LOCALID_ONE_ISLAND_NURSE"
     }
   ]
 }

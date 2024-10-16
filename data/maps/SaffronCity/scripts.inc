@@ -1,5 +1,3 @@
-.set LOCALID_DOOR_GUARD_GRUNT, 6
-
 SaffronCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_OnTransition
 	.byte 0
@@ -10,7 +8,7 @@ SaffronCity_OnTransition::
 	end
 
 SaffronCity_EventScript_MoveDoorGuardGrunt::
-	setobjectxyperm LOCALID_DOOR_GUARD_GRUNT, 33, 31
+	setobjectxyperm LOCALID_SAFFRON_DOOR_GUARD_GRUNT, 33, 31
 	return
 
 SaffronCity_EventScript_RocketGrunt1::
@@ -44,7 +42,7 @@ SaffronCity_EventScript_RocketGrunt7::
 SaffronCity_EventScript_DoorGuardGrunt::
 	lock
 	goto_if_set FLAG_RESCUED_MR_FUJI, SaffronCity_EventScript_DoorGuardAsleep
-	applymovement LOCALID_DOOR_GUARD_GRUNT, Common_Movement_FacePlayer
+	applymovement LOCALID_SAFFRON_DOOR_GUARD_GRUNT, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox SaffronCity_Text_ImASecurityGuard
 	release

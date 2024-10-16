@@ -1,5 +1,3 @@
-.equ LOCALID_OLD_WOMAN, 1
-
 .equ TRAINER_VISITING, VAR_TEMP_1
 
 SevenIsland_House_Room1_MapScripts::
@@ -15,14 +13,14 @@ SevenIsland_House_Room1_OnTransition::
 
 SevenIsland_House_Room1_EventScript_SetTrainerVisitingLayout::
 	setvar TRAINER_VISITING, TRUE
-	setobjectxyperm LOCALID_OLD_WOMAN, 4, 2
-	setobjectmovementtype LOCALID_OLD_WOMAN, MOVEMENT_TYPE_FACE_DOWN
+	setobjectxyperm LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, 4, 2
+	setobjectmovementtype LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, MOVEMENT_TYPE_FACE_DOWN
 	setmaplayoutindex LAYOUT_SEVEN_ISLAND_HOUSE_ROOM1_DOOR_OPEN
 	return
 
 SevenIsland_House_Room1_EventScript_MoveOldWomanToDoor::
-	setobjectxyperm LOCALID_OLD_WOMAN, 3, 2
-	setobjectmovementtype LOCALID_OLD_WOMAN, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, 3, 2
+	setobjectmovementtype LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 SevenIsland_House_Room1_OnFrame::
@@ -34,12 +32,12 @@ SevenIsland_House_Room1_OnFrame::
 SevenIsland_House_Room1_EventScript_OldWomanCommentOnBattle::
 	lockall
 	textcolor NPC_TEXT_COLOR_FEMALE
-	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerReEnterRoom
+	applymovement LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerReEnterRoom
 	waitmovement 0
-	applymovement LOCALID_OLD_WOMAN, SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer
+	applymovement LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN, SevenIsland_House_Room1_Movement_OldWomanWalkBehindPlayer
 	waitmovement 0
-	copyobjectxytoperm LOCALID_OLD_WOMAN
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	copyobjectxytoperm LOCALID_SEVEN_ISLAND_HOUSE_OLD_WOMAN
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	call_if_eq VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 1, SevenIsland_House_Room1_EventScript_BattleWonComment
 	call_if_eq VAR_MAP_SCENE_SEVEN_ISLAND_HOUSE_ROOM1, 2, SevenIsland_House_Room1_EventScript_BattleLostComment
@@ -124,19 +122,19 @@ SevenIsland_House_Room1_EventScript_ChooseParty::
 
 SevenIsland_House_Room1_EventScript_EnterBattleRoomNorth::
 	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft
-	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth
+	applymovement LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomNorth
 	waitmovement 0
 	return
 
 SevenIsland_House_Room1_EventScript_EnterBattleRoomEast::
 	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideRight
-	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast
+	applymovement LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomEast
 	waitmovement 0
 	return
 
 SevenIsland_House_Room1_EventScript_EnterBattleRoomWest::
 	applymovement VAR_LAST_TALKED, SevenIsland_House_Room1_Movement_OldWomanMoveAsideLeft
-	applymovement OBJ_EVENT_ID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest
+	applymovement LOCALID_PLAYER, SevenIsland_House_Room1_Movement_PlayerEnterBattleRoomWest
 	waitmovement 0
 	return
 

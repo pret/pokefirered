@@ -1,5 +1,3 @@
-.set LOCALID_SS_ANNE, 1
-
 SSAnne_Exterior_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SSAnne_Exterior_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SSAnne_Exterior_OnFrame
@@ -23,7 +21,7 @@ SSAnne_Exterior_ExitSSAnne::
 	special DoSSAnneDepartureCutscene
 	waitstate
 	removeobject LOCALID_SS_ANNE
-	applymovement OBJ_EVENT_ID_PLAYER, SSAnne_Exterior_Movement_Exit
+	applymovement LOCALID_PLAYER, SSAnne_Exterior_Movement_Exit
 	waitmovement 0
 	setvar VAR_MAP_SCENE_VERMILION_CITY, 2
 	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 0
@@ -33,12 +31,12 @@ SSAnne_Exterior_ExitSSAnne::
 	end
 
 SSAnne_Exterior_WalkDown::
-	applymovement OBJ_EVENT_ID_PLAYER, SSAnne_Exterior_Movement_WalkDown
+	applymovement LOCALID_PLAYER, SSAnne_Exterior_Movement_WalkDown
 	waitmovement 0
 	return
 
 SSAnne_Exterior_WalkInPlaceDown::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 

@@ -310,7 +310,7 @@ static const struct WindowTemplate sWindowTemplate_TradingBoardMain = {
 };
 
 static const struct ListMenuItem sListMenuItems_TradeBoard[] = {
-    {gText_UR_EmptyString, -3},
+    {gText_UR_EmptyString, LIST_HEADER},
     {gText_UR_EmptyString, 0},
     {gText_UR_EmptyString, 1},
     {gText_UR_EmptyString, 2},

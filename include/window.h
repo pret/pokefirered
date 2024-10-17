@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+#define WINDOWS_MAX 32
+
 #define PIXEL_FILL(num) ((num) | ((num) << 4))
 
 enum
@@ -35,8 +37,6 @@ struct WindowTemplate
     u8 paletteNum;
     u16 baseBlock;
 };
-
-#define WINDOWS_MAX 32
 
 #define DUMMY_WIN_TEMPLATE          \
 {                                   \

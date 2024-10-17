@@ -410,7 +410,7 @@ bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
         FillBgTilemapBufferRect(1, 0x000, 0, 0, 32, 32, 17);
         FillBgTilemapBufferRect(2, 0x000, 0, 0, 32, 32, 17);
         MG_DrawCheckerboardPattern();
-        PrintMysteryGiftOrEReaderTopMenu(isEReader, FALSE);
+        PrintMysteryGiftOrEReaderHeader(isEReader, FALSE);
         gMain.state++;
         break;
     case 2:
@@ -463,7 +463,7 @@ void MainCB_FreeAllBuffersAndReturnToInitTitleScreen(void)
     SetMainCallback2(CB2_InitTitleScreen);
 }
 
-void PrintMysteryGiftOrEReaderTopMenu(bool8 isEReader, bool32 useCancel)
+void PrintMysteryGiftOrEReaderHeader(bool8 isEReader, bool32 useCancel)
 {
     const u8 * options;
     s32 width;
@@ -1153,7 +1153,7 @@ static void Task_MysteryGift(u8 taskId)
             if (PrintMysteryGiftMenuMessage(&data->textState, gText_DontHaveCardNewOneInput))
             {
                 data->state = MG_STATE_SOURCE_PROMPT;
-                PrintMysteryGiftOrEReaderTopMenu(FALSE, TRUE);
+                PrintMysteryGiftOrEReaderHeader(FALSE, TRUE);
             }
         }
         else
@@ -1161,7 +1161,7 @@ static void Task_MysteryGift(u8 taskId)
             if (PrintMysteryGiftMenuMessage(&data->textState, gText_DontHaveNewsNewOneInput))
             {
                 data->state = MG_STATE_SOURCE_PROMPT;
-                PrintMysteryGiftOrEReaderTopMenu(FALSE, TRUE);
+                PrintMysteryGiftOrEReaderHeader(FALSE, TRUE);
             }
         }
         break;
@@ -1196,7 +1196,7 @@ static void Task_MysteryGift(u8 taskId)
             else
             {
                 data->state = MG_STATE_TO_MAIN_MENU;
-                PrintMysteryGiftOrEReaderTopMenu(FALSE, FALSE);
+                PrintMysteryGiftOrEReaderHeader(FALSE, FALSE);
             }
             break;
         }
@@ -1372,7 +1372,7 @@ static void Task_MysteryGift(u8 taskId)
             {
                 // Did not receive card/news, return to main menu
                 data->state = MG_STATE_TO_MAIN_MENU;
-                PrintMysteryGiftOrEReaderTopMenu(FALSE, FALSE);
+                PrintMysteryGiftOrEReaderHeader(FALSE, FALSE);
             }
             else
             {
@@ -1384,7 +1384,7 @@ static void Task_MysteryGift(u8 taskId)
         if (SaveOnMysteryGiftMenu(&data->textState))
         {
             data->state = MG_STATE_TO_MAIN_MENU;
-            PrintMysteryGiftOrEReaderTopMenu(FALSE, FALSE);
+            PrintMysteryGiftOrEReaderHeader(FALSE, FALSE);
         }
         break;
     case MG_STATE_LOAD_GIFT:
@@ -1496,7 +1496,7 @@ static void Task_MysteryGift(u8 taskId)
         if (PrintThrownAway(&data->textState, data->isWonderNews))
         {
             data->state = MG_STATE_TO_MAIN_MENU;
-            PrintMysteryGiftOrEReaderTopMenu(FALSE, FALSE);
+            PrintMysteryGiftOrEReaderHeader(FALSE, FALSE);
         }
         break;
     case MG_STATE_GIFT_INPUT_EXIT:
@@ -1581,7 +1581,7 @@ static void Task_MysteryGift(u8 taskId)
             else
             {
                 data->state = MG_STATE_TO_MAIN_MENU;
-                PrintMysteryGiftOrEReaderTopMenu(FALSE, FALSE);
+                PrintMysteryGiftOrEReaderHeader(FALSE, FALSE);
             }
         }
         break;
@@ -1590,7 +1590,7 @@ static void Task_MysteryGift(u8 taskId)
         if (PrintMysteryGiftMenuMessage(&data->textState, gText_CommunicationError))
         {
             data->state = MG_STATE_TO_MAIN_MENU;
-            PrintMysteryGiftOrEReaderTopMenu(FALSE, FALSE);
+            PrintMysteryGiftOrEReaderHeader(FALSE, FALSE);
         }
         break;
     case MG_STATE_EXIT:

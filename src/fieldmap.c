@@ -440,7 +440,7 @@ static u32 GetAttributeByMetatileIdAndMapLayout(const struct MapLayout *mapLayou
     }
     else if (metatile < NUM_METATILES_TOTAL)
     {
-        attributes = mapLayout->secondaryTileset->metatileAttributes;
+        attributes = GetSecondaryTileset(mapLayout)->metatileAttributes;
         return ExtractMetatileAttribute(attributes[metatile - NUM_METATILES_IN_PRIMARY], attributeType);
     }
     else
@@ -917,12 +917,12 @@ void CopyPrimaryTilesetToVram(const struct MapLayout *mapLayout)
 
 void CopySecondaryTilesetToVram(const struct MapLayout *mapLayout)
 {
-    CopyTilesetToVram(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+    CopyTilesetToVram(GetSecondaryTileset(mapLayout), NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
 }
 
 void CopySecondaryTilesetToVramUsingHeap(const struct MapLayout *mapLayout)
 {
-    CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+    CopyTilesetToVramUsingHeap(GetSecondaryTileset(mapLayout), NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
 }
 
 static void LoadPrimaryTilesetPalette(const struct MapLayout *mapLayout)
@@ -932,7 +932,7 @@ static void LoadPrimaryTilesetPalette(const struct MapLayout *mapLayout)
 
 void LoadSecondaryTilesetPalette(const struct MapLayout *mapLayout)
 {
-    LoadTilesetPalette(mapLayout->secondaryTileset, BG_PLTT_ID(NUM_PALS_IN_PRIMARY), (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * PLTT_SIZE_4BPP);
+    LoadTilesetPalette(GetSecondaryTileset(mapLayout), BG_PLTT_ID(NUM_PALS_IN_PRIMARY), (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * PLTT_SIZE_4BPP);
 }
 
 void CopyMapTilesetsToVram(struct MapLayout const *mapLayout)
@@ -940,7 +940,7 @@ void CopyMapTilesetsToVram(struct MapLayout const *mapLayout)
     if (mapLayout)
     {
         CopyTilesetToVramUsingHeap(GetPrimaryTileset(mapLayout), NUM_TILES_IN_PRIMARY, 0);
-        CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+        CopyTilesetToVramUsingHeap(GetSecondaryTileset(mapLayout), NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
     }
 }
 

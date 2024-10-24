@@ -1230,7 +1230,7 @@ static void TeachyTvLoadBg3Map(u16 *buffer)
     memset(palIndicesBuffer, 0xFF, 16);
 
     TeachyTvLoadMapTilesetToBuffer(GetPrimaryTileset(layout), tilesetsBuffer, NUM_TILES_IN_PRIMARY);
-    TeachyTvLoadMapTilesetToBuffer(layout->secondaryTileset, tilesetsBuffer + NUM_TILES_IN_PRIMARY * TILE_SIZE_4BPP, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY);
+    TeachyTvLoadMapTilesetToBuffer(GetSecondaryTileset(layout), tilesetsBuffer + NUM_TILES_IN_PRIMARY * TILE_SIZE_4BPP, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY);
 
     for (i = 0; i < 9; i++)
     {
@@ -1261,7 +1261,7 @@ static void TeachyTvLoadBg3Map(u16 *buffer)
         if (blockIndicesBuffer[i] < NUM_METATILES_IN_PRIMARY)
             TeachyTvComputeMapTilesFromTilesetAndMetaTiles((const void *)GetPrimaryTileset(layout)->metatiles + blockIndicesBuffer[i] * 16, mapTilesRowBuffer, tilesetsBuffer);
         else
-            TeachyTvComputeMapTilesFromTilesetAndMetaTiles((const void *)layout->secondaryTileset->metatiles + (blockIndicesBuffer[i] - NUM_METATILES_IN_PRIMARY) * 16, mapTilesRowBuffer, tilesetsBuffer);
+            TeachyTvComputeMapTilesFromTilesetAndMetaTiles((const void *)GetSecondaryTileset(layout)->metatiles + (blockIndicesBuffer[i] - NUM_METATILES_IN_PRIMARY) * 16, mapTilesRowBuffer, tilesetsBuffer);
         CpuFastCopy(mapTilesRowBuffer, bgTilesBuffer + i * 0x40, 0x80);
     }
 
@@ -1290,9 +1290,9 @@ static void TeachyTvPushBackNewMapPalIndexArrayEntry(const struct MapLayout *mSt
 {
     const u16 * metaTileEntryAddr;
     if (mapEntry < NUM_METATILES_IN_PRIMARY)
-        metaTileEntryAddr = &mStruct->primaryTileset->metatiles[8 * mapEntry];
+        metaTileEntryAddr = &GetPrimaryTileset(mStruct)->metatiles[8 * mapEntry];
     else
-        metaTileEntryAddr = &mStruct->secondaryTileset->metatiles[8 * (mapEntry - NUM_METATILES_IN_PRIMARY)];
+        metaTileEntryAddr = &GetSecondaryTileset(mStruct)->metatiles[8 * (mapEntry - NUM_METATILES_IN_PRIMARY)];
     buf1[0] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[0]) << 12) + 4 * offset;
     buf1[1] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[1]) << 12) + 4 * offset + 1;
     buf1[32] = (TeachyTvComputePalIndexArrayEntryByMetaTile(palIndexArray, metaTileEntryAddr[2]) << 12) + 4 * offset + 2;
@@ -1390,9 +1390,9 @@ static void TeachyTvLoadMapPalette(const struct MapLayout * mStruct, const u8 * 
         if (palIndexArray[i] == 0xFF)
             break;
         if (palIndexArray[i] >= NUM_PALS_IN_PRIMARY)
-            dest = mStruct->secondaryTileset->palettes[palIndexArray[i]];
+            dest = GetSecondaryTileset(mStruct)->palettes[palIndexArray[i]];
         else
-            dest = mStruct->primaryTileset->palettes[palIndexArray[i]];
+            dest = GetPrimaryTileset(mStruct)->palettes[palIndexArray[i]];
         LoadPalette(dest, BG_PLTT_ID(15 - i), PLTT_SIZE_4BPP);
     }
 }

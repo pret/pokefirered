@@ -408,5 +408,6 @@ extern struct PlayerAvatar gPlayerAvatar;
 extern struct Camera gCamera;
 
 const struct Tileset* GetPrimaryTileset(const struct MapLayout* mapLayout);
+const struct Tileset* GetSecondaryTileset(const struct MapLayout* mapLayout);
 
 #endif // GUARD_GLOBAL_FIELDMAP_H

@@ -201,8 +201,8 @@ static void _InitSecondaryTilesetAnimation(void)
     sSecondaryTilesetAnimCounter = 0;
     sSecondaryTilesetAnimCounterMax = 0;
     sSecondaryTilesetAnimCallback = NULL;
-    if (gMapHeader.mapLayout->secondaryTileset && gMapHeader.mapLayout->secondaryTileset->callback)
-        gMapHeader.mapLayout->secondaryTileset->callback();
+    if (GetSecondaryTileset(gMapHeader.mapLayout) && GetSecondaryTileset(gMapHeader.mapLayout)->callback)
+        GetSecondaryTileset(gMapHeader.mapLayout)->callback();
 }
 
 static void QueueAnimTiles_General_Flower(u16 timer)

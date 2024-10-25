@@ -1615,7 +1615,7 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_DRATINI"
+                "species": "SPECIES_GYARADOS"
               },
               {
                 "min_level": 15,
@@ -1625,7 +1625,7 @@
               {
                 "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_DRAGONAIR"
+                "species": "SPECIES_STARMIE"
               }
             ]
           }
@@ -1769,7 +1769,7 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_DRATINI"
+                "species": "SPECIES_GYARADOS"
               },
               {
                 "min_level": 15,
@@ -1779,7 +1779,7 @@
               {
                 "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_DRAGONAIR"
+                "species": "SPECIES_STARMIE"
               }
             ]
           }
@@ -1923,7 +1923,7 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_DRATINI"
+                "species": "SPECIES_GYARADOS"
               },
               {
                 "min_level": 15,
@@ -1933,7 +1933,7 @@
               {
                 "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_DRAGONAIR"
+                "species": "SPECIES_STARMIE"
               }
             ]
           }
@@ -2077,7 +2077,7 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_DRATINI"
+                "species": "SPECIES_GYARADOS"
               },
               {
                 "min_level": 15,
@@ -2087,7 +2087,7 @@
               {
                 "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_DRAGONAIR"
+                "species": "SPECIES_STARMIE"
               }
             ]
           }
@@ -3614,6 +3614,16 @@
                 "species": "SPECIES_MAGNEMITE"
               },
               {
+                "min_level": 22,
+                "max_level": 22,
+                "species": "SPECIES_PLUSLE"
+              },
+              {
+                "min_level": 24,
+                "max_level": 24,
+                "species": "SPECIES_PLUSLE"
+              },
+              {
                 "min_level": 31,
                 "max_level": 31,
                 "species": "SPECIES_MAGNETON"
@@ -3624,9 +3634,19 @@
                 "species": "SPECIES_MAGNETON"
               },
               {
+                "min_level": 26,
+                "max_level": 26,
+                "species": "SPECIES_PLUSLE"
+              },
+              {
                 "min_level": 32,
                 "max_level": 32,
                 "species": "SPECIES_ELECTABUZZ"
+              },
+              {
+                "min_level": 26,
+                "max_level": 26,
+                "species": "SPECIES_PLUSLE"
               },
               {
                 "min_level": 35,
@@ -14137,7 +14157,7 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_DRATINI"
+                "species": "SPECIES_GYARADOS"
               },
               {
                 "min_level": 15,
@@ -14147,7 +14167,7 @@
               {
                 "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_DRAGONAIR"
+                "species": "SPECIES_STARMIE"
               }
             ],
             "encounter_rate": 20
@@ -14291,7 +14311,7 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_DRATINI"
+                "species": "SPECIES_GYARADOS"
               },
               {
                 "min_level": 15,
@@ -14301,7 +14321,7 @@
               {
                 "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_DRAGONAIR"
+                "species": "SPECIES_STARMIE"
               }
             ],
             "encounter_rate": 20
@@ -14445,7 +14465,7 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_DRATINI"
+                "species": "SPECIES_GYARADOS"
               },
               {
                 "min_level": 15,
@@ -14455,7 +14475,7 @@
               {
                 "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_DRAGONAIR"
+                "species": "SPECIES_STARMIE"
               }
             ],
             "encounter_rate": 20
@@ -14599,7 +14619,7 @@
               {
                 "min_level": 15,
                 "max_level": 25,
-                "species": "SPECIES_DRATINI"
+                "species": "SPECIES_GYARADOS"
               },
               {
                 "min_level": 15,
@@ -14609,7 +14629,7 @@
               {
                 "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_DRAGONAIR"
+                "species": "SPECIES_STARMIE"
               }
             ],
             "encounter_rate": 20
@@ -16138,12 +16158,12 @@
               {
                 "min_level": 22,
                 "max_level": 22,
-                "species": "SPECIES_PIKACHU"
+                "species": "SPECIES_PLUSLE"
               },
               {
                 "min_level": 24,
                 "max_level": 24,
-                "species": "SPECIES_PIKACHU"
+                "species": "SPECIES_PLUSLE"
               },
               {
                 "min_level": 31,
@@ -16158,7 +16178,7 @@
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_PIKACHU"
+                "species": "SPECIES_PLUSLE"
               },
               {
                 "min_level": 31,
@@ -16168,7 +16188,7 @@
               {
                 "min_level": 26,
                 "max_level": 26,
-                "species": "SPECIES_PIKACHU"
+                "species": "SPECIES_PLUSLE"
               },
               {
                 "min_level": 34,
@@ -25146,3 +25166,4 @@
     }
   ]
 }
+

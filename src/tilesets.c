@@ -58,6 +58,7 @@ const struct Tileset* GetPrimaryTileset(const struct MapLayout* mapLayout)
     }
     return mapLayout->primaryTileset;
 }
+
 const struct Tileset* GetSecondaryTileset(const struct MapLayout* mapLayout)
 {
     u32 i;

@@ -7,6 +7,7 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
+#include "rtc.h"
 #include "constants/field_effects.h"
 #include "constants/event_objects.h"
 #include "constants/songs.h"
@@ -397,7 +398,23 @@ u32 FldEff_TallGrass(void)
     x = gFieldEffectArguments[0];
     y = gFieldEffectArguments[1];
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);
+    switch(gLoadedSeason)
+    {
+        case SEASON_SPRING:
+        default:
+            spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);
+            break;
+        case SEASON_SUMMER:
+            spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_TallGrassSummer, x, y, 0);
+            break;
+        case SEASON_AUTUMN:
+            spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_TallGrassAutumn, x, y, 0);
+            break;
+        case SEASON_WINTER:
+            spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_TallGrassWinter, x, y, 0);
+            break;
+    }
+
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];

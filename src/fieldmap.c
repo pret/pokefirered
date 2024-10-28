@@ -1,10 +1,11 @@
 #include "global.h"
 #include "gflib.h"
-#include "overworld.h"
-#include "script.h"
-#include "menu.h"
-#include "quest_log.h"
 #include "fieldmap.h"
+#include "menu.h"
+#include "overworld.h"
+#include "quest_log.h"
+#include "rtc.h"
+#include "script.h"
 
 struct ConnectionFlags
 {

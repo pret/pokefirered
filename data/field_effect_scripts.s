@@ -1,3 +1,4 @@
+#include "constants/field_effects.h"
 	.include "asm/macros/field_effect_script.inc"
 	.section script_data, "aw", %progbits
 	.align 2
@@ -93,7 +94,7 @@ gFldEffScript_Shadow::
 	end 
 
 gFldEffScript_TallGrass::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_TallGrass
+	loadfadedpal_callnative_by_fldeff FLDEFF_TALL_GRASS, FldEff_TallGrass
 	end 
 
 gFldEffScript_Ripple::
@@ -124,7 +125,7 @@ gFldEffScript_UseSecretPowerCave::
 	end 
 
 gFldEffScript_JumpTallGrass::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_JumpTallGrass
+	loadfadedpal_callnative_by_fldeff FLDEFF_JUMP_TALL_GRASS, FldEff_TallGrass
 	end 
 
 gFldEffScript_SandFootprints::

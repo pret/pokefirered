@@ -76,6 +76,8 @@
 #define FLDEFF_TRACKS_SPOT               71
 #define FLDEFF_TRACKS_BUG                72
 
+#define FLDEFF_COUNT                     73
+
 #define FLDEFF_PAL_TAG_GENERAL_0          0x1004
 #define FLDEFF_PAL_TAG_GENERAL_1          0x1005
 #define FLDEFF_PAL_TAG_POKEBALL_TRAIL     0x1009

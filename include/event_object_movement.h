@@ -225,7 +225,12 @@ void FieldEffectFreeTilesIfUnused(u16 tileStart);
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1;
-extern const struct SpriteTemplate * const gFieldEffectObjectTemplatePointers[];
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1Summer;
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1Autumn;
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1Winter;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrassSummer;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrassAutumn;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrassWinter;
 extern const struct OamData gObjectEventBaseOam_32x32;
 extern const struct OamData gObjectEventBaseOam_64x64;
 extern const struct SubspriteTable sOamTables_32x32[];

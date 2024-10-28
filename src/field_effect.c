@@ -20,6 +20,7 @@
 #include "party_menu.h"
 #include "pokemon_storage_system.h"
 #include "quest_log.h"
+#include "rtc.h"
 #include "script.h"
 #include "special_field_anim.h"
 #include "task.h"
@@ -47,8 +48,10 @@ static bool8 FieldEffectCmd_end(const u8 **script, u32 *result);
 static bool8 FieldEffectCmd_loadgfx_callnative(const u8 **script, u32 *result);
 static bool8 FieldEffectCmd_loadtiles_callnative(const u8 **script, u32 *result);
 static bool8 FieldEffectCmd_loadfadedpal_callnative(const u8 **script, u32 *result);
+static bool8 FieldEffectCmd_loadfadedpal_callnative_by_fldeff(const u8 **script, u32 *result);
 static void FieldEffectScript_LoadTiles(const u8 **script);
 static void FieldEffectScript_LoadFadedPal(const u8 **script);
+static void FieldEffectScript_LoadFadedPalByFldeff(const u8 **script);
 static void FieldEffectScript_LoadPal(const u8 **script);
 static void FieldEffectScript_CallNative(const u8 **script, u32 *result);
 static void Task_PokecenterHeal(u8 taskId);
@@ -87,7 +90,26 @@ static bool8 (*const sFldEffScrcmdTable[])(const u8 **script, u32 *result) = {
     FieldEffectCmd_end,
     FieldEffectCmd_loadgfx_callnative,
     FieldEffectCmd_loadtiles_callnative,
-    FieldEffectCmd_loadfadedpal_callnative
+    FieldEffectCmd_loadfadedpal_callnative,
+    FieldEffectCmd_loadfadedpal_callnative_by_fldeff
+};
+
+static const struct SpritePalette* const gFieldEffectPalettes[FLDEFF_COUNT][SEASON_WINTER + 1] =
+{
+    [FLDEFF_TALL_GRASS] =
+    {
+        [SEASON_SPRING] = &gSpritePalette_GeneralFieldEffect1,
+        [SEASON_SUMMER] = &gSpritePalette_GeneralFieldEffect1Summer,
+        [SEASON_AUTUMN] = &gSpritePalette_GeneralFieldEffect1Autumn,
+        [SEASON_WINTER] = &gSpritePalette_GeneralFieldEffect1Winter,
+    },
+    [FLDEFF_JUMP_TALL_GRASS] =
+    {
+        [SEASON_SPRING] = &gSpritePalette_GeneralFieldEffect1,
+        [SEASON_SUMMER] = &gSpritePalette_GeneralFieldEffect1Summer,
+        [SEASON_AUTUMN] = &gSpritePalette_GeneralFieldEffect1Autumn,
+        [SEASON_WINTER] = &gSpritePalette_GeneralFieldEffect1Winter,
+    },
 };
 
 static const struct OamData sNewGameOakOamAttributes = {
@@ -418,6 +440,15 @@ static bool8 FieldEffectCmd_loadfadedpal_callnative(const u8 **script, u32 *resu
     return TRUE;
 }
 
+static bool8 FieldEffectCmd_loadfadedpal_callnative_by_fldeff(const u8 **script, u32 *result)
+{
+    (*script)++;
+    FieldEffectScript_LoadFadedPalByFldeff(script);
+    FieldEffectScript_CallNative(script, result);
+    return TRUE;
+}
+
+
 static u32 FieldEffectScript_ReadWord(const u8 **script)
 {
     return T2_READ_32(*script);
@@ -462,6 +493,26 @@ static void FieldEffectScript_LoadFadedPal(const u8 **script)
         ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(spritePalette->tag));
     UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(spritePalette->tag), TRUE);
     *script += sizeof(u32);
+}
+
+static const struct SpritePalette* GetFieldEffectPalette(u32 fldEff)
+{
+    if (gFieldEffectPalettes[fldEff][gLoadedSeason] != NULL)
+        return gFieldEffectPalettes[fldEff][gLoadedSeason];
+    return gFieldEffectPalettes[fldEff][SEASON_SPRING];
+}
+
+static void FieldEffectScript_LoadFadedPalByFldeff(const u8 **script)
+{
+    u8 fldEff = *script[0];
+    const struct SpritePalette* spritePalette = GetFieldEffectPalette(fldEff);
+
+    u8 idx = IndexOfSpritePaletteTag(spritePalette->tag);
+    LoadSpritePalette(spritePalette);
+    if (idx == 0xFF)
+        ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(spritePalette->tag));
+    UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(spritePalette->tag), TRUE);
+    *script += sizeof(u8);
 }
 
 static void FieldEffectScript_LoadPal(const u8 **script)

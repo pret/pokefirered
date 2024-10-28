@@ -40,3 +40,10 @@
 	.4byte \palette_address
 	.4byte \function_address
 	.endm
+
+	@ TODO: refactor field effects/field moves
+	.macro loadfadedpal_callnative_by_fldeff fldeff, function_address
+	.byte 8
+	.byte \fldeff
+	.4byte \function_address
+	.endm

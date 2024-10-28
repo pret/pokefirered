@@ -14,6 +14,8 @@ static u16 sSavedIme;
 // iwram common
 struct Time gLocalTime;
 
+EWRAM_DATA enum Season gLoadedSeason = SEASON_SPRING;
+
 // const rom
 static const u8 sText_SpringName[] = _("Spring");
 static const u8 sText_SummerName[] = _("Summer");
@@ -513,4 +515,10 @@ void FormatDecimalTimeWithoutSeconds(u8 *txtPtr, s8 hour, s8 minute, bool32 is24
 u32 GetGen5TimeOfDayStart(enum TimeOfDay timeOfDay)
 {
     return sTimeOfDayStarts[GetSeason()][timeOfDay];
+}
+
+void UpdateLoadedSeason()
+{
+    DebugPrintfLevel(MGBA_LOG_ERROR, "UpdateLoadedSeason");
+    gLoadedSeason = GetSeason();
 }

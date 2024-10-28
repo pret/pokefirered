@@ -1956,6 +1956,7 @@ static bool32 LoadMapInStepsLink(u8 *state)
     switch (*state)
     {
     case 0:
+        UpdateLoadedSeason();
         InitOverworldBgs();
         ScriptContext_Init();
         UnlockPlayerFieldControls();
@@ -2033,6 +2034,7 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 inLink)
     switch (*state)
     {
     case 0:
+        UpdateLoadedSeason();
         InitOverworldBgs();
         FieldClearVBlankHBlankCallbacks();
         LoadMapFromWarp(inLink);

@@ -41,17 +41,14 @@ static const struct Tileset* const gSeasonTilesetsSecondary[][SEASON_WINTER + 1]
 const struct Tileset* GetPrimaryTileset(const struct MapLayout* mapLayout)
 {
     u32 i;
-    enum Season season;
-
     if (!OW_SEASONS)
         return mapLayout->primaryTileset;
 
-    season = GetSeason();
     for (i = 0; gSeasonTilesetsPrimary[i][SEASON_SPRING] != NULL; i++) {
         if (mapLayout->primaryTileset == gSeasonTilesetsPrimary[i][SEASON_SPRING])
         {
-            if (gSeasonTilesetsPrimary[i][season] != NULL)
-                return gSeasonTilesetsPrimary[i][season];
+            if (gSeasonTilesetsPrimary[i][gLoadedSeason] != NULL)
+                return gSeasonTilesetsPrimary[i][gLoadedSeason];
             else
                 return mapLayout->primaryTileset;
         }
@@ -62,17 +59,15 @@ const struct Tileset* GetPrimaryTileset(const struct MapLayout* mapLayout)
 const struct Tileset* GetSecondaryTileset(const struct MapLayout* mapLayout)
 {
     u32 i;
-    enum Season season;
 
     if (!OW_SEASONS)
         return mapLayout->secondaryTileset;
 
-    season = GetSeason();
     for (i = 0; gSeasonTilesetsSecondary[i][SEASON_SPRING] != NULL; i++) {
         if (mapLayout->secondaryTileset == gSeasonTilesetsSecondary[i][SEASON_SPRING])
         {
-            if (gSeasonTilesetsSecondary[i][season] != NULL)
-                return gSeasonTilesetsSecondary[i][season];
+            if (gSeasonTilesetsSecondary[i][gLoadedSeason] != NULL)
+                return gSeasonTilesetsSecondary[i][gLoadedSeason];
             else
                 return mapLayout->secondaryTileset;
         }

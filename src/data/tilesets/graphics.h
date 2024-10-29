@@ -1806,3 +1806,22 @@ const u16 gTilesetPalettes_FuchsiaCityWinter[][16] =
 };
 
 const u32 gTilesetTiles_FuchsiaCityWinter[] = INCBIN_U32("data/tilesets/secondary/fuchsia_city_winter/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_SeviiIslands123Winter[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/palettes/12.gbapal"),
+};
+
+const u32 gTilesetTiles_SeviiIslands123Winter[] = INCBIN_U32("data/tilesets/secondary/sevii_islands_123winter/tiles.4bpp.lz");

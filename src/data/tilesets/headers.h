@@ -977,3 +977,14 @@ const struct Tileset gTileset_FuchsiaCityWinter =
     .metatileAttributes = gMetatileAttributes_FuchsiaCityWinter,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_SeviiIslands123Winter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SeviiIslands123Winter,
+    .palettes = gTilesetPalettes_SeviiIslands123Winter,
+    .metatiles = gMetatiles_SeviiIslands123Winter,
+    .metatileAttributes = gMetatileAttributes_SeviiIslands123Winter,
+    .callback = NULL,
+};

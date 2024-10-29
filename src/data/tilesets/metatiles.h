@@ -264,3 +264,6 @@ const u32 gMetatileAttributes_FuchsiaCityAutumn[] = INCBIN_U32("data/tilesets/se
 
 const u16 gMetatiles_FuchsiaCityWinter[] = INCBIN_U16("data/tilesets/secondary/fuchsia_city_winter/metatiles.bin");
 const u32 gMetatileAttributes_FuchsiaCityWinter[] = INCBIN_U32("data/tilesets/secondary/fuchsia_city_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_SeviiIslands123Winter[] = INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/metatiles.bin");
+const u32 gMetatileAttributes_SeviiIslands123Winter[] = INCBIN_U32("data/tilesets/secondary/sevii_islands_123winter/metatile_attributes.bin");

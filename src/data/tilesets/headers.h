@@ -944,3 +944,36 @@ const struct Tileset gTileset_CeladonCityWinter =
     .metatileAttributes = gMetatileAttributes_CeladonCityWinter,
     .callback = InitTilesetAnim_CeladonCity,
 };
+
+const struct Tileset gTileset_FuchsiaCitySummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_FuchsiaCitySummer,
+    .palettes = gTilesetPalettes_FuchsiaCitySummer,
+    .metatiles = gMetatiles_FuchsiaCitySummer,
+    .metatileAttributes = gMetatileAttributes_FuchsiaCitySummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_FuchsiaCityAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_FuchsiaCityAutumn,
+    .palettes = gTilesetPalettes_FuchsiaCityAutumn,
+    .metatiles = gMetatiles_FuchsiaCityAutumn,
+    .metatileAttributes = gMetatileAttributes_FuchsiaCityAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_FuchsiaCityWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_FuchsiaCityWinter,
+    .palettes = gTilesetPalettes_FuchsiaCityWinter,
+    .metatiles = gMetatiles_FuchsiaCityWinter,
+    .metatileAttributes = gMetatileAttributes_FuchsiaCityWinter,
+    .callback = NULL,
+};

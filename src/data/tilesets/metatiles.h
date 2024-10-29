@@ -255,3 +255,12 @@ const u32 gMetatileAttributes_CeladonCityAutumn[] = INCBIN_U32("data/tilesets/se
 
 const u16 gMetatiles_CeladonCityWinter[] = INCBIN_U16("data/tilesets/secondary/celadon_city_winter/metatiles.bin");
 const u32 gMetatileAttributes_CeladonCityWinter[] = INCBIN_U32("data/tilesets/secondary/celadon_city_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_FuchsiaCitySummer[] = INCBIN_U16("data/tilesets/secondary/fuchsia_city_summer/metatiles.bin");
+const u32 gMetatileAttributes_FuchsiaCitySummer[] = INCBIN_U32("data/tilesets/secondary/fuchsia_city_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_FuchsiaCityAutumn[] = INCBIN_U16("data/tilesets/secondary/fuchsia_city_autumn/metatiles.bin");
+const u32 gMetatileAttributes_FuchsiaCityAutumn[] = INCBIN_U32("data/tilesets/secondary/fuchsia_city_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_FuchsiaCityWinter[] = INCBIN_U16("data/tilesets/secondary/fuchsia_city_winter/metatiles.bin");
+const u32 gMetatileAttributes_FuchsiaCityWinter[] = INCBIN_U32("data/tilesets/secondary/fuchsia_city_winter/metatile_attributes.bin");

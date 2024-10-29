@@ -911,3 +911,36 @@ const struct Tileset gTileset_SaffronCityWinter =
     .metatileAttributes = gMetatileAttributes_SaffronCityWinter,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_CeladonCitySummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CeladonCitySummer,
+    .palettes = gTilesetPalettes_CeladonCitySummer,
+    .metatiles = gMetatiles_CeladonCitySummer,
+    .metatileAttributes = gMetatileAttributes_CeladonCitySummer,
+    .callback = InitTilesetAnim_CeladonCity,
+};
+
+const struct Tileset gTileset_CeladonCityAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CeladonCityAutumn,
+    .palettes = gTilesetPalettes_CeladonCityAutumn,
+    .metatiles = gMetatiles_CeladonCityAutumn,
+    .metatileAttributes = gMetatileAttributes_CeladonCityAutumn,
+    .callback = InitTilesetAnim_CeladonCity,
+};
+
+const struct Tileset gTileset_CeladonCityWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CeladonCityWinter,
+    .palettes = gTilesetPalettes_CeladonCityWinter,
+    .metatiles = gMetatiles_CeladonCityWinter,
+    .metatileAttributes = gMetatileAttributes_CeladonCityWinter,
+    .callback = InitTilesetAnim_CeladonCity,
+};

@@ -779,3 +779,36 @@ const struct Tileset gTileset_GeneralSummer =
     .metatileAttributes = gMetatileAttributes_GeneralSummer,
     .callback = InitTilesetAnim_General,
 };
+
+const struct Tileset gTileset_PalletTownSummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PalletTownSummer,
+    .palettes = gTilesetPalettes_PalletTownSummer,
+    .metatiles = gMetatiles_PalletTownSummer,
+    .metatileAttributes = gMetatileAttributes_PalletTownSummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_PalletTownAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PalletTownAutumn,
+    .palettes = gTilesetPalettes_PalletTownAutumn,
+    .metatiles = gMetatiles_PalletTownAutumn,
+    .metatileAttributes = gMetatileAttributes_PalletTownAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_PalletTownWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PalletTownWinter,
+    .palettes = gTilesetPalettes_PalletTownWinter,
+    .metatiles = gMetatiles_PalletTownWinter,
+    .metatileAttributes = gMetatileAttributes_PalletTownWinter,
+    .callback = NULL,
+};

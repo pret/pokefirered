@@ -519,6 +519,5 @@ u32 GetGen5TimeOfDayStart(enum TimeOfDay timeOfDay)
 
 void UpdateLoadedSeason()
 {
-    DebugPrintfLevel(MGBA_LOG_ERROR, "UpdateLoadedSeason");
     gLoadedSeason = GetSeason();
 }

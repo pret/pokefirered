@@ -812,3 +812,36 @@ const struct Tileset gTileset_PalletTownWinter =
     .metatileAttributes = gMetatileAttributes_PalletTownWinter,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_ViridianForestAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ViridianForestAutumn,
+    .palettes = gTilesetPalettes_ViridianForestAutumn,
+    .metatiles = gMetatiles_ViridianForestAutumn,
+    .metatileAttributes = gMetatileAttributes_ViridianForestAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_ViridianForestSummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ViridianForestSummer,
+    .palettes = gTilesetPalettes_ViridianForestSummer,
+    .metatiles = gMetatiles_ViridianForestSummer,
+    .metatileAttributes = gMetatileAttributes_ViridianForestSummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_ViridianForestWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ViridianForestWinter,
+    .palettes = gTilesetPalettes_ViridianForestWinter,
+    .metatiles = gMetatiles_ViridianForestWinter,
+    .metatileAttributes = gMetatileAttributes_ViridianForestWinter,
+    .callback = NULL,
+};

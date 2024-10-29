@@ -41,6 +41,12 @@ static const struct Tileset* const gSeasonTilesetsSecondary[][SEASON_WINTER + 1]
         [SEASON_AUTUMN] = &gTileset_PalletTownAutumn,
         [SEASON_WINTER] = &gTileset_PalletTownWinter,
     },
+    {
+        [SEASON_SPRING] = &gTileset_ViridianForest,
+        [SEASON_SUMMER] = &gTileset_ViridianForestSummer,
+        [SEASON_AUTUMN] = &gTileset_ViridianForestAutumn,
+        [SEASON_WINTER] = &gTileset_ViridianForestWinter,
+    },
     SEASON_TILESETS_TERMINATOR
 };
 

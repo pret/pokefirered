@@ -219,3 +219,12 @@ const u32 gMetatileAttributes_PalletTownAutumn[] = INCBIN_U32("data/tilesets/sec
 
 const u16 gMetatiles_PalletTownWinter[] = INCBIN_U16("data/tilesets/secondary/pallet_town_winter/metatiles.bin");
 const u32 gMetatileAttributes_PalletTownWinter[] = INCBIN_U32("data/tilesets/secondary/pallet_town_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_ViridianForestAutumn[] = INCBIN_U16("data/tilesets/secondary/viridian_forest_autumn/metatiles.bin");
+const u32 gMetatileAttributes_ViridianForestAutumn[] = INCBIN_U32("data/tilesets/secondary/viridian_forest_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_ViridianForestSummer[] = INCBIN_U16("data/tilesets/secondary/viridian_forest_summer/metatiles.bin");
+const u32 gMetatileAttributes_ViridianForestSummer[] = INCBIN_U32("data/tilesets/secondary/viridian_forest_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_ViridianForestWinter[] = INCBIN_U16("data/tilesets/secondary/viridian_forest_winter/metatiles.bin");
+const u32 gMetatileAttributes_ViridianForestWinter[] = INCBIN_U32("data/tilesets/secondary/viridian_forest_winter/metatile_attributes.bin");

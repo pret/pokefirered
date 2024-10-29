@@ -878,3 +878,36 @@ const struct Tileset gTileset_LavenderTownWinter =
     .metatileAttributes = gMetatileAttributes_LavenderTownWinter,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_SaffronCitySummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SaffronCitySummer,
+    .palettes = gTilesetPalettes_SaffronCitySummer,
+    .metatiles = gMetatiles_SaffronCitySummer,
+    .metatileAttributes = gMetatileAttributes_SaffronCitySummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_SaffronCityAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SaffronCityAutumn,
+    .palettes = gTilesetPalettes_SaffronCityAutumn,
+    .metatiles = gMetatiles_SaffronCityAutumn,
+    .metatileAttributes = gMetatileAttributes_SaffronCityAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_SaffronCityWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SaffronCityWinter,
+    .palettes = gTilesetPalettes_SaffronCityWinter,
+    .metatiles = gMetatiles_SaffronCityWinter,
+    .metatileAttributes = gMetatileAttributes_SaffronCityWinter,
+    .callback = NULL,
+};

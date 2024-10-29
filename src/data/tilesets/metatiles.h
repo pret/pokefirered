@@ -237,3 +237,12 @@ const u32 gMetatileAttributes_LavenderTownAutumn[] = INCBIN_U32("data/tilesets/s
 
 const u16 gMetatiles_LavenderTownWinter[] = INCBIN_U16("data/tilesets/secondary/lavender_town_winter/metatiles.bin");
 const u32 gMetatileAttributes_LavenderTownWinter[] = INCBIN_U32("data/tilesets/secondary/lavender_town_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_SaffronCitySummer[] = INCBIN_U16("data/tilesets/secondary/saffron_city_summer/metatiles.bin");
+const u32 gMetatileAttributes_SaffronCitySummer[] = INCBIN_U32("data/tilesets/secondary/saffron_city_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_SaffronCityAutumn[] = INCBIN_U16("data/tilesets/secondary/saffron_city_autumn/metatiles.bin");
+const u32 gMetatileAttributes_SaffronCityAutumn[] = INCBIN_U32("data/tilesets/secondary/saffron_city_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_SaffronCityWinter[] = INCBIN_U16("data/tilesets/secondary/saffron_city_winter/metatiles.bin");
+const u32 gMetatileAttributes_SaffronCityWinter[] = INCBIN_U32("data/tilesets/secondary/saffron_city_winter/metatile_attributes.bin");

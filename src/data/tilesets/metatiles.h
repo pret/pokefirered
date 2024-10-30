@@ -267,3 +267,12 @@ const u32 gMetatileAttributes_FuchsiaCityWinter[] = INCBIN_U32("data/tilesets/se
 
 const u16 gMetatiles_SeviiIslands123Winter[] = INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/metatiles.bin");
 const u32 gMetatileAttributes_SeviiIslands123Winter[] = INCBIN_U32("data/tilesets/secondary/sevii_islands_123winter/metatile_attributes.bin");
+
+const u16 gMetatiles_BerryForestSummer[] = INCBIN_U16("data/tilesets/secondary/berry_forest_summer/metatiles.bin");
+const u32 gMetatileAttributes_BerryForestSummer[] = INCBIN_U32("data/tilesets/secondary/berry_forest_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_BerryForestAutumn[] = INCBIN_U16("data/tilesets/secondary/berry_forest_autumn/metatiles.bin");
+const u32 gMetatileAttributes_BerryForestAutumn[] = INCBIN_U32("data/tilesets/secondary/berry_forest_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_BerryForestWinter[] = INCBIN_U16("data/tilesets/secondary/berry_forest_winter/metatiles.bin");
+const u32 gMetatileAttributes_BerryForestWinter[] = INCBIN_U32("data/tilesets/secondary/berry_forest_winter/metatile_attributes.bin");

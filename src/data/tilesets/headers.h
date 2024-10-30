@@ -1021,3 +1021,25 @@ const struct Tileset gTileset_BerryForestWinter =
     .metatileAttributes = gMetatileAttributes_BerryForestWinter,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_SeviiIslands123Summer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SeviiIslands123Summer,
+    .palettes = gTilesetPalettes_SeviiIslands123Summer,
+    .metatiles = gMetatiles_SeviiIslands123Summer,
+    .metatileAttributes = gMetatileAttributes_SeviiIslands123Summer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_SeviiIslands123Autumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SeviiIslands123Autumn,
+    .palettes = gTilesetPalettes_SeviiIslands123Autumn,
+    .metatiles = gMetatiles_SeviiIslands123Autumn,
+    .metatileAttributes = gMetatileAttributes_SeviiIslands123Autumn,
+    .callback = NULL,
+};

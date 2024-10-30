@@ -276,3 +276,9 @@ const u32 gMetatileAttributes_BerryForestAutumn[] = INCBIN_U32("data/tilesets/se
 
 const u16 gMetatiles_BerryForestWinter[] = INCBIN_U16("data/tilesets/secondary/berry_forest_winter/metatiles.bin");
 const u32 gMetatileAttributes_BerryForestWinter[] = INCBIN_U32("data/tilesets/secondary/berry_forest_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_SeviiIslands123Summer[] = INCBIN_U16("data/tilesets/secondary/sevii_islands_123summer/metatiles.bin");
+const u32 gMetatileAttributes_SeviiIslands123Summer[] = INCBIN_U32("data/tilesets/secondary/sevii_islands_123summer/metatile_attributes.bin");
+
+const u16 gMetatiles_SeviiIslands123Autumn[] = INCBIN_U16("data/tilesets/secondary/sevii_islands_123autumn/metatiles.bin");
+const u32 gMetatileAttributes_SeviiIslands123Autumn[] = INCBIN_U32("data/tilesets/secondary/sevii_islands_123autumn/metatile_attributes.bin");

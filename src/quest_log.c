@@ -22,6 +22,7 @@
 #include "quest_log_objects.h"
 #include "quest_log_player.h"
 #include "quest_log.h"
+#include "rtc.h"
 #include "strings.h"
 #include "constants/event_objects.h"
 #include "constants/maps.h"
@@ -445,6 +446,7 @@ void TryStartQuestLogPlayback(u8 taskId)
 {
     u8 i;
 
+    UpdateLoadedSeason();
     QL_EnableRecordingSteps();
     sNumScenes = 0;
     for (i = 0; i < QUEST_LOG_SCENE_COUNT; i++)

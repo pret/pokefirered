@@ -77,6 +77,11 @@ bool8 MetatileBehavior_IsSand(u8 metatileBehavior)
         return FALSE;
 }
 
+bool8 MetatileBehavior_IsSnow(u8 metatileBehavior)
+{
+    return metatileBehavior == MB_SNOW;
+}
+
 bool8 MetatileBehavior_IsSandOrShallowFlowingWater(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_SAND || metatileBehavior == MB_SHALLOW_WATER)

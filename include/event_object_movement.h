@@ -78,6 +78,7 @@ typedef void (*MovementAction)(u8 direction);
 #define GROUND_EFFECT_FLAG_SHORT_GRASS           (1 << 17)
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
+#define GROUND_EFFECT_FLAG_SNOW                  (1 << 20)
 
 struct PairedPalettes
 {

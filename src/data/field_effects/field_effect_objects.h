@@ -3,6 +3,7 @@ const struct SpritePalette gSpritePalette_GeneralFieldEffect1 = { .data = gField
 const struct SpritePalette gSpritePalette_GeneralFieldEffect1Summer = { .data = gFieldEffectObjectPalette1Summer, .tag = FLDEFF_PAL_TAG_GENERAL_1 };
 const struct SpritePalette gSpritePalette_GeneralFieldEffect1Autumn = { .data = gFieldEffectObjectPalette1Autumn, .tag = FLDEFF_PAL_TAG_GENERAL_1 };
 const struct SpritePalette gSpritePalette_GeneralFieldEffect1Winter = { .data = gFieldEffectObjectPalette1Winter, .tag = FLDEFF_PAL_TAG_GENERAL_1 };
+const struct SpritePalette gSpritePalette_GeneralFieldEffect2 = { .data = gFieldEffectObjectPalette2, .tag = FLDEFF_PAL_TAG_GENERAL_2 };
 
 static const union AnimCmd sAnim_Shadow[] =
 {
@@ -458,6 +459,23 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_SandFootprints =
     .oam = &gObjectEventBaseOam_16x16,
     .anims = sAnimTable_SandFootprints,
     .images = sPicTable_SandFootprints,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateFootprintsTireTracksFieldEffect,
+};
+
+static const struct SpriteFrameImage sPicTable_SnowFootprints[] =
+{
+    overworld_frame(gFieldEffectObjectPic_SnowFootprints, 2, 2, 0),
+    overworld_frame(gFieldEffectObjectPic_SnowFootprints, 2, 2, 1),
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_SnowFootprints =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_2,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_SandFootprints,
+    .images = sPicTable_SnowFootprints,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateFootprintsTireTracksFieldEffect,
 };

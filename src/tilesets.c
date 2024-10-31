@@ -16,7 +16,7 @@
         [SEASON_WINTER] = NULL, \
     }
 
-static const struct Tileset* const gSeasonTilesetsPrimary[][SEASON_WINTER + 1] =
+static const struct Tileset* const sSeasonTilesetsPrimary[][SEASON_WINTER + 1] =
 {
     {
         [SEASON_SPRING] = &gTileset_General,
@@ -33,7 +33,7 @@ static const struct Tileset* const gSeasonTilesetsPrimary[][SEASON_WINTER + 1] =
     SEASON_TILESETS_TERMINATOR
 };
 
-static const struct Tileset* const gSeasonTilesetsSecondary[][SEASON_WINTER + 1] =
+static const struct Tileset* const sSeasonTilesetsSecondary[][SEASON_WINTER + 1] =
 {
     {
         [SEASON_SPRING] = &gTileset_PalletTown,
@@ -92,11 +92,11 @@ const struct Tileset* GetPrimaryTileset(const struct MapLayout* mapLayout)
     if (!OW_SEASONS)
         return mapLayout->primaryTileset;
 
-    for (i = 0; gSeasonTilesetsPrimary[i][SEASON_SPRING] != NULL; i++) {
-        if (mapLayout->primaryTileset == gSeasonTilesetsPrimary[i][SEASON_SPRING])
+    for (i = 0; sSeasonTilesetsPrimary[i][SEASON_SPRING] != NULL; i++) {
+        if (mapLayout->primaryTileset == sSeasonTilesetsPrimary[i][SEASON_SPRING])
         {
-            if (gSeasonTilesetsPrimary[i][gLoadedSeason] != NULL)
-                return gSeasonTilesetsPrimary[i][gLoadedSeason];
+            if (sSeasonTilesetsPrimary[i][gLoadedSeason] != NULL)
+                return sSeasonTilesetsPrimary[i][gLoadedSeason];
             else
                 return mapLayout->primaryTileset;
         }
@@ -111,11 +111,11 @@ const struct Tileset* GetSecondaryTileset(const struct MapLayout* mapLayout)
     if (!OW_SEASONS)
         return mapLayout->secondaryTileset;
 
-    for (i = 0; gSeasonTilesetsSecondary[i][SEASON_SPRING] != NULL; i++) {
-        if (mapLayout->secondaryTileset == gSeasonTilesetsSecondary[i][SEASON_SPRING])
+    for (i = 0; sSeasonTilesetsSecondary[i][SEASON_SPRING] != NULL; i++) {
+        if (mapLayout->secondaryTileset == sSeasonTilesetsSecondary[i][SEASON_SPRING])
         {
-            if (gSeasonTilesetsSecondary[i][gLoadedSeason] != NULL)
-                return gSeasonTilesetsSecondary[i][gLoadedSeason];
+            if (sSeasonTilesetsSecondary[i][gLoadedSeason] != NULL)
+                return sSeasonTilesetsSecondary[i][gLoadedSeason];
             else
                 return mapLayout->secondaryTileset;
         }

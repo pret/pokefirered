@@ -22,5 +22,6 @@ void LoadBattleTextboxAndBackground(void);
 void BattleInitBgsAndWindows(void);
 void DrawMainBattleBackground(void);
 void DrawTerrainTypeBattleBackground(void);
+const void* GetBattleBackgroundPalette(u16 terrain);
 
 #endif // GUARD_BATTLE_BG_H

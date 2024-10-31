@@ -5,6 +5,24 @@ static const u32 gBattleTerrainTilemap_Grass[] = INCBIN_U32("graphics/battle_ter
 static const u32 gBattleTerrainAnimTiles_Grass[] = INCBIN_U32("graphics/battle_terrain/grass/anim.4bpp.lz");
 static const u32 gBattleTerrainAnimTilemap_Grass[] = INCBIN_U32("graphics/battle_terrain/grass/anim.bin.lz");
 
+static const u32 gBattleTerrainPalette_GrassSummer[] = INCBIN_U32("graphics/battle_terrain/grass_summer/terrain.gbapal.lz");
+static const u32 gBattleTerrainTiles_GrassSummer[] = INCBIN_U32("graphics/battle_terrain/grass_summer/terrain.4bpp.lz");
+static const u32 gBattleTerrainTilemap_GrassSummer[] = INCBIN_U32("graphics/battle_terrain/grass_summer/terrain.bin.lz");
+static const u32 gBattleTerrainAnimTiles_GrassSummer[] = INCBIN_U32("graphics/battle_terrain/grass_summer/anim.4bpp.lz");
+static const u32 gBattleTerrainAnimTilemap_GrassSummer[] = INCBIN_U32("graphics/battle_terrain/grass_summer/anim.bin.lz");
+
+static const u32 gBattleTerrainPalette_GrassAutumn[] = INCBIN_U32("graphics/battle_terrain/grass_autumn/terrain.gbapal.lz");
+static const u32 gBattleTerrainTiles_GrassAutumn[] = INCBIN_U32("graphics/battle_terrain/grass_autumn/terrain.4bpp.lz");
+static const u32 gBattleTerrainTilemap_GrassAutumn[] = INCBIN_U32("graphics/battle_terrain/grass_autumn/terrain.bin.lz");
+static const u32 gBattleTerrainAnimTiles_GrassAutumn[] = INCBIN_U32("graphics/battle_terrain/grass_autumn/anim.4bpp.lz");
+static const u32 gBattleTerrainAnimTilemap_GrassAutumn[] = INCBIN_U32("graphics/battle_terrain/grass_autumn/anim.bin.lz");
+
+static const u32 gBattleTerrainPalette_GrassWinter[] = INCBIN_U32("graphics/battle_terrain/grass_winter/terrain.gbapal.lz");
+static const u32 gBattleTerrainTiles_GrassWinter[] = INCBIN_U32("graphics/battle_terrain/grass_winter/terrain.4bpp.lz");
+static const u32 gBattleTerrainTilemap_GrassWinter[] = INCBIN_U32("graphics/battle_terrain/grass_winter/terrain.bin.lz");
+static const u32 gBattleTerrainAnimTiles_GrassWinter[] = INCBIN_U32("graphics/battle_terrain/grass_winter/anim.4bpp.lz");
+static const u32 gBattleTerrainAnimTilemap_GrassWinter[] = INCBIN_U32("graphics/battle_terrain/grass_winter/anim.bin.lz");
+
 static const u32 gBattleTerrainPalette_LongGrass[] = INCBIN_U32("graphics/battle_terrain/longgrass/terrain.gbapal.lz");
 static const u32 gBattleTerrainTiles_LongGrass[] = INCBIN_U32("graphics/battle_terrain/longgrass/terrain.4bpp.lz");
 static const u32 gBattleTerrainTilemap_LongGrass[] = INCBIN_U32("graphics/battle_terrain/longgrass/terrain.bin.lz");

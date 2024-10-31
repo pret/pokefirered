@@ -1043,3 +1043,36 @@ const struct Tileset gTileset_SeviiIslands123Autumn =
     .metatileAttributes = gMetatileAttributes_SeviiIslands123Autumn,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_IndigoPlateauSummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_IndigoPlateauSummer,
+    .palettes = gTilesetPalettes_IndigoPlateauSummer,
+    .metatiles = gMetatiles_IndigoPlateauSummer,
+    .metatileAttributes = gMetatileAttributes_IndigoPlateauSummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_IndigoPlateauAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_IndigoPlateauAutumn,
+    .palettes = gTilesetPalettes_IndigoPlateauAutumn,
+    .metatiles = gMetatiles_IndigoPlateauAutumn,
+    .metatileAttributes = gMetatileAttributes_IndigoPlateauAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_IndigoPlateauWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_IndigoPlateauWinter,
+    .palettes = gTilesetPalettes_IndigoPlateauWinter,
+    .metatiles = gMetatiles_IndigoPlateauWinter,
+    .metatileAttributes = gMetatileAttributes_IndigoPlateauWinter,
+    .callback = NULL,
+};

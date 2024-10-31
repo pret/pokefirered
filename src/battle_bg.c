@@ -397,8 +397,9 @@ static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
     return BATTLE_TERRAIN_PLAIN;
 }
 
-static const void* const sSeasonBattleBackgrounds[][SEASON_WINTER + 1] =
+static const void* const sSeasonBattleBackgrounds[BATTLE_TERRAIN_COUNT][SEASON_WINTER + 1] =
 {
+    [BATTLE_TERRAIN_GRASS] = 
     {
         [SEASON_SPRING] = &gBattleTerrainPalette_Grass,
         [SEASON_SUMMER] = &gBattleTerrainPalette_GrassSummer,
@@ -412,12 +413,11 @@ static const void* const sSeasonBattleBackgrounds[][SEASON_WINTER + 1] =
 
 const void* GetBattleBackgroundPalette(u16 terrain)
 {
-    u8 i;
-    for (i = 0; sSeasonBattleBackgrounds[i][SEASON_SPRING] != NULL; i++)
-    {
-        if (sSeasonBattleBackgrounds[i][SEASON_SPRING] == gBattleTerrainInfo[terrain].background.palette)
-            return sSeasonBattleBackgrounds[i][gLoadedSeason];
-    }
+    if (!OW_SEASONS)
+        return gBattleTerrainInfo[terrain].background.palette;
+
+    if (sSeasonBattleBackgrounds[terrain][gLoadedSeason] != NULL)
+        return sSeasonBattleBackgrounds[terrain][gLoadedSeason];
     return gBattleTerrainInfo[terrain].background.palette;
 }
 

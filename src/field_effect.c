@@ -495,8 +495,12 @@ static void FieldEffectScript_LoadFadedPal(const u8 **script)
     *script += sizeof(u32);
 }
 
+// TODO: field effect refactoring
 static const struct SpritePalette* GetFieldEffectPalette(u32 fldEff)
 {
+    if (!OW_SEASONS)
+        return gFieldEffectPalettes[fldEff][SEASON_SPRING];
+
     if (gFieldEffectPalettes[fldEff][gLoadedSeason] != NULL)
         return gFieldEffectPalettes[fldEff][gLoadedSeason];
     return gFieldEffectPalettes[fldEff][SEASON_SPRING];

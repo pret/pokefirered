@@ -405,9 +405,6 @@ static const void* const sSeasonBattleBackgrounds[BATTLE_TERRAIN_COUNT][SEASON_W
         [SEASON_SUMMER] = &gBattleTerrainPalette_GrassSummer,
         [SEASON_AUTUMN] = &gBattleTerrainPalette_GrassAutumn,
         [SEASON_WINTER] = &gBattleTerrainPalette_GrassWinter,
-    },
-    {
-        [SEASON_SPRING] = NULL,
     }
 };
 

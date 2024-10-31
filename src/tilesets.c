@@ -72,6 +72,12 @@ static const struct Tileset* const sSeasonTilesetsSecondary[][SEASON_WINTER + 1]
         [SEASON_WINTER] = &gTileset_FuchsiaCityWinter,
     },
     {
+        [SEASON_SPRING] = &gTileset_IndigoPlateau,
+        [SEASON_SUMMER] = &gTileset_IndigoPlateauSummer,
+        [SEASON_AUTUMN] = &gTileset_IndigoPlateauAutumn,
+        [SEASON_WINTER] = &gTileset_IndigoPlateauWinter,
+    },
+    {
         [SEASON_SPRING] = &gTileset_SeviiIslands123,
         [SEASON_SUMMER] = &gTileset_SeviiIslands123Summer,
         [SEASON_AUTUMN] = &gTileset_SeviiIslands123Autumn,
@@ -111,6 +117,7 @@ const struct Tileset* GetSecondaryTileset(const struct MapLayout* mapLayout)
     if (!OW_SEASONS)
         return mapLayout->secondaryTileset;
 
+    DebugPrintfLevel(MGBA_LOG_ERROR, "get secondary");
     for (i = 0; sSeasonTilesetsSecondary[i][SEASON_SPRING] != NULL; i++) {
         if (mapLayout->secondaryTileset == sSeasonTilesetsSecondary[i][SEASON_SPRING])
         {

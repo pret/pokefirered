@@ -195,8 +195,12 @@
       "flag": "FLAG_HIDE_ROUTE9_BURN_HEAL"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

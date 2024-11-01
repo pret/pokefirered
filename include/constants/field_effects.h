@@ -75,9 +75,13 @@
 #define FLDEFF_TRACKS_SLITHER            70
 #define FLDEFF_TRACKS_SPOT               71
 #define FLDEFF_TRACKS_BUG                72
+#define FLDEFF_SNOW_FOOTPRINTS           73
+
+#define FLDEFF_COUNT                     74
 
 #define FLDEFF_PAL_TAG_GENERAL_0          0x1004
 #define FLDEFF_PAL_TAG_GENERAL_1          0x1005
+#define FLDEFF_PAL_TAG_GENERAL_2          0x1006
 #define FLDEFF_PAL_TAG_POKEBALL_TRAIL     0x1009
 #define FLDEFF_PAL_TAG_ASH                0x100D
 #define FLDEFF_PAL_TAG_SMALL_SPARKLE      0x100F
@@ -122,5 +126,6 @@
 #define FLDEFFOBJ_TRACKS_SLITHER           37
 #define FLDEFFOBJ_TRACKS_SPOT              38
 #define FLDEFFOBJ_TRACKS_BUG               39
+#define FLDEFFOBJ_SNOW_FOOTPRINTS          40
 
 #endif // GUARD_CONSTANTS_FIELD_EFFECTS_H

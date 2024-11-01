@@ -35,7 +35,6 @@
       "direction": "right"
     }
   ],
-  "connections_no_include": true,
   "object_events": [
     {
       "type": "object",
@@ -355,7 +354,9 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",
@@ -429,5 +430,6 @@
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "SaffronCity_EventScript_TrainerFanClubSign"
     }
-  ]
+  ],
+  "connections_no_include": true
 }

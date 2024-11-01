@@ -192,8 +192,8 @@ static void _InitPrimaryTilesetAnimation(void)
     sPrimaryTilesetAnimCounter = 0;
     sPrimaryTilesetAnimCounterMax = 0;
     sPrimaryTilesetAnimCallback = NULL;
-    if (gMapHeader.mapLayout->primaryTileset && gMapHeader.mapLayout->primaryTileset->callback)
-        gMapHeader.mapLayout->primaryTileset->callback();
+    if (GetPrimaryTileset(gMapHeader.mapLayout) && GetPrimaryTileset(gMapHeader.mapLayout)->callback)
+        GetPrimaryTileset(gMapHeader.mapLayout)->callback();
 }
 
 static void _InitSecondaryTilesetAnimation(void)
@@ -201,8 +201,8 @@ static void _InitSecondaryTilesetAnimation(void)
     sSecondaryTilesetAnimCounter = 0;
     sSecondaryTilesetAnimCounterMax = 0;
     sSecondaryTilesetAnimCallback = NULL;
-    if (gMapHeader.mapLayout->secondaryTileset && gMapHeader.mapLayout->secondaryTileset->callback)
-        gMapHeader.mapLayout->secondaryTileset->callback();
+    if (GetSecondaryTileset(gMapHeader.mapLayout) && GetSecondaryTileset(gMapHeader.mapLayout)->callback)
+        GetSecondaryTileset(gMapHeader.mapLayout)->callback();
 }
 
 static void QueueAnimTiles_General_Flower(u16 timer)

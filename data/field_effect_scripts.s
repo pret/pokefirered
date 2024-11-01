@@ -1,3 +1,4 @@
+#include "constants/field_effects.h"
 	.include "asm/macros/field_effect_script.inc"
 	.section script_data, "aw", %progbits
 	.align 2
@@ -75,6 +76,7 @@ gFieldEffectScriptPointers::
 	.4byte gFieldEffectScript_TracksSlither      @ FLDEFF_TRACKS_SLITHER
 	.4byte gFieldEffectScript_TracksBug          @ FLDEFF_TRACKS_BUG
 	.4byte gFieldEffectScript_TracksSpot         @ FLDEFF_TRACKS_SPOT
+	.4byte gFieldEffectScript_SnowFootprints     @ FLDEFF_SNOW_FOOTPRINTS
 
 gFldEffScript_ExclamationMarkIcon::
 	callnative FldEff_ExclamationMarkIcon1
@@ -93,7 +95,7 @@ gFldEffScript_Shadow::
 	end 
 
 gFldEffScript_TallGrass::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_TallGrass
+	loadfadedpal_callnative_by_fldeff FLDEFF_TALL_GRASS, FldEff_TallGrass
 	end 
 
 gFldEffScript_Ripple::
@@ -124,7 +126,7 @@ gFldEffScript_UseSecretPowerCave::
 	end 
 
 gFldEffScript_JumpTallGrass::
-	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect1, FldEff_JumpTallGrass
+	loadfadedpal_callnative_by_fldeff FLDEFF_JUMP_TALL_GRASS, FldEff_TallGrass
 	end 
 
 gFldEffScript_SandFootprints::
@@ -359,3 +361,7 @@ gFieldEffectScript_TracksSpot::
 gFieldEffectScript_TracksSlither::
 	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect0, FldEff_TracksSlither
 	end
+
+gFieldEffectScript_SnowFootprints::
+	loadfadedpal_callnative gSpritePalette_GeneralFieldEffect2, FldEff_SnowFootprints
+	end 

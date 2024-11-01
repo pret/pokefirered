@@ -110,6 +110,7 @@ enum Season {
 };
 
 extern struct Time gLocalTime;
+extern enum Season gLoadedSeason;
 
 void RtcDisableInterrupts(void);
 void RtcRestoreInterrupts(void);
@@ -146,5 +147,6 @@ enum Season GetSeason(void);
 const u8* GetSeasonName(enum Season);
 u8 GetSeasonDay(void);
 u32 GetGen5TimeOfDayStart(enum TimeOfDay);
+void UpdateLoadedSeason();
 
 #endif // GUARD_RTC_UTIL_H

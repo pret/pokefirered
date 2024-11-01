@@ -1,10 +1,11 @@
 #include "global.h"
 #include "gflib.h"
-#include "overworld.h"
-#include "script.h"
-#include "menu.h"
-#include "quest_log.h"
 #include "fieldmap.h"
+#include "menu.h"
+#include "overworld.h"
+#include "quest_log.h"
+#include "rtc.h"
+#include "script.h"
 
 struct ConnectionFlags
 {
@@ -435,12 +436,12 @@ static u32 GetAttributeByMetatileIdAndMapLayout(const struct MapLayout *mapLayou
 
     if (metatile < NUM_METATILES_IN_PRIMARY)
     {
-        attributes = mapLayout->primaryTileset->metatileAttributes;
+        attributes = GetPrimaryTileset(mapLayout)->metatileAttributes;
         return ExtractMetatileAttribute(attributes[metatile], attributeType);
     }
     else if (metatile < NUM_METATILES_TOTAL)
     {
-        attributes = mapLayout->secondaryTileset->metatileAttributes;
+        attributes = GetSecondaryTileset(mapLayout)->metatileAttributes;
         return ExtractMetatileAttribute(attributes[metatile - NUM_METATILES_IN_PRIMARY], attributeType);
     }
     else
@@ -912,35 +913,35 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
 
 void CopyPrimaryTilesetToVram(const struct MapLayout *mapLayout)
 {
-    CopyTilesetToVram(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
+    CopyTilesetToVram(GetPrimaryTileset(mapLayout), NUM_TILES_IN_PRIMARY, 0);
 }
 
 void CopySecondaryTilesetToVram(const struct MapLayout *mapLayout)
 {
-    CopyTilesetToVram(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+    CopyTilesetToVram(GetSecondaryTileset(mapLayout), NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
 }
 
 void CopySecondaryTilesetToVramUsingHeap(const struct MapLayout *mapLayout)
 {
-    CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+    CopyTilesetToVramUsingHeap(GetSecondaryTileset(mapLayout), NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
 }
 
 static void LoadPrimaryTilesetPalette(const struct MapLayout *mapLayout)
 {
-    LoadTilesetPalette(mapLayout->primaryTileset, BG_PLTT_ID(0), NUM_PALS_IN_PRIMARY * PLTT_SIZE_4BPP);
+    LoadTilesetPalette(GetPrimaryTileset(mapLayout), BG_PLTT_ID(0), NUM_PALS_IN_PRIMARY * PLTT_SIZE_4BPP);
 }
 
 void LoadSecondaryTilesetPalette(const struct MapLayout *mapLayout)
 {
-    LoadTilesetPalette(mapLayout->secondaryTileset, BG_PLTT_ID(NUM_PALS_IN_PRIMARY), (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * PLTT_SIZE_4BPP);
+    LoadTilesetPalette(GetSecondaryTileset(mapLayout), BG_PLTT_ID(NUM_PALS_IN_PRIMARY), (NUM_PALS_TOTAL - NUM_PALS_IN_PRIMARY) * PLTT_SIZE_4BPP);
 }
 
 void CopyMapTilesetsToVram(struct MapLayout const *mapLayout)
 {
     if (mapLayout)
     {
-        CopyTilesetToVramUsingHeap(mapLayout->primaryTileset, NUM_TILES_IN_PRIMARY, 0);
-        CopyTilesetToVramUsingHeap(mapLayout->secondaryTileset, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
+        CopyTilesetToVramUsingHeap(GetPrimaryTileset(mapLayout), NUM_TILES_IN_PRIMARY, 0);
+        CopyTilesetToVramUsingHeap(GetSecondaryTileset(mapLayout), NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, NUM_TILES_IN_PRIMARY);
     }
 }
 

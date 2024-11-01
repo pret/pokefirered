@@ -232,13 +232,13 @@ bool8 PlayerHasGrassPokemonInParty(void)
 
 static bool32 IsBuildingPCTile(u32 tileId)
 {
-    return gMapHeader.mapLayout->primaryTileset == &gTileset_Building 
+    return GetPrimaryTileset(gMapHeader.mapLayout) == &gTileset_Building 
         && (tileId == METATILE_Building_PCOn || tileId == METATILE_Building_PCOff);
 }
 
 static bool32 IsPlayerHousePCTile(u32 tileId)
 {
-    return (gMapHeader.mapLayout->secondaryTileset == &gTileset_GenericBuilding1 
+    return (GetSecondaryTileset(gMapHeader.mapLayout) == &gTileset_GenericBuilding1 
         && (tileId == METATILE_GenericBuilding1_PlayersPCOn || tileId == METATILE_GenericBuilding1_PlayersPCOff));
 }
 

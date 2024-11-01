@@ -862,7 +862,7 @@ static void LoadBattleBg(u8 battleBgType, u8 battleTerrain)
     
     LZDecompressVram(gBattleTerrainInfo[battleTerrain].background.tileset, (void*)(BG_CHAR_ADDR(2)));
     LZDecompressVram(gBattleTerrainInfo[battleTerrain].background.tilemap, (void*)(BG_SCREEN_ADDR(26)));
-    LoadCompressedPalette(gBattleTerrainInfo[battleTerrain].background.palette, 0x20, 0x60);
+    LoadCompressedPalette(GetBattleBackgroundPalette(battleTerrain), 0x20, 0x60);
 }
 static void PrintBattleBgName(u8 taskId)
 {

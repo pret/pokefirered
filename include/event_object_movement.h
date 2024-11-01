@@ -78,6 +78,7 @@ typedef void (*MovementAction)(u8 direction);
 #define GROUND_EFFECT_FLAG_SHORT_GRASS           (1 << 17)
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
+#define GROUND_EFFECT_FLAG_SNOW                  (1 << 20)
 
 struct PairedPalettes
 {
@@ -225,7 +226,12 @@ void FieldEffectFreeTilesIfUnused(u16 tileStart);
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1;
-extern const struct SpriteTemplate * const gFieldEffectObjectTemplatePointers[];
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1Summer;
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1Autumn;
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1Winter;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrassSummer;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrassAutumn;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrassWinter;
 extern const struct OamData gObjectEventBaseOam_32x32;
 extern const struct OamData gObjectEventBaseOam_64x64;
 extern const struct SubspriteTable sOamTables_32x32[];

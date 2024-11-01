@@ -7,6 +7,7 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
+#include "rtc.h"
 #include "constants/field_effects.h"
 #include "constants/event_objects.h"
 #include "constants/songs.h"
@@ -397,7 +398,23 @@ u32 FldEff_TallGrass(void)
     x = gFieldEffectArguments[0];
     y = gFieldEffectArguments[1];
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);
+    switch(gLoadedSeason)
+    {
+        case SEASON_SPRING:
+        default:
+            spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);
+            break;
+        case SEASON_SUMMER:
+            spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_TallGrassSummer, x, y, 0);
+            break;
+        case SEASON_AUTUMN:
+            spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_TallGrassAutumn, x, y, 0);
+            break;
+        case SEASON_WINTER:
+            spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_TallGrassWinter, x, y, 0);
+            break;
+    }
+
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
@@ -652,6 +669,24 @@ u32 FldEff_SandFootprints(void)
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
         sprite->data[7] = FLDEFF_SAND_FOOTPRINTS;
+        StartSpriteAnim(sprite, gFieldEffectArguments[4]);
+    }
+    return 0;
+}
+
+u32 FldEff_SnowFootprints(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SNOW_FOOTPRINTS], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectArguments[3];
+        sprite->data[7] = FLDEFF_SNOW_FOOTPRINTS;
         StartSpriteAnim(sprite, gFieldEffectArguments[4]);
     }
     return 0;

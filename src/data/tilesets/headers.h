@@ -746,3 +746,333 @@ const struct Tileset gTileset_HallOfFame =
     .callback = NULL,
 };
 
+
+const struct Tileset gTileset_GeneralWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_GeneralWinter,
+    .palettes = gTilesetPalettes_GeneralWinter,
+    .metatiles = gMetatiles_GeneralWinter,
+    .metatileAttributes = gMetatileAttributes_GeneralWinter,
+    .callback = InitTilesetAnim_General,
+};
+
+const struct Tileset gTileset_GeneralAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_GeneralAutumn,
+    .palettes = gTilesetPalettes_GeneralAutumn,
+    .metatiles = gMetatiles_GeneralAutumn,
+    .metatileAttributes = gMetatileAttributes_GeneralAutumn,
+    .callback = InitTilesetAnim_General,
+};
+
+const struct Tileset gTileset_GeneralSummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_GeneralSummer,
+    .palettes = gTilesetPalettes_GeneralSummer,
+    .metatiles = gMetatiles_GeneralSummer,
+    .metatileAttributes = gMetatileAttributes_GeneralSummer,
+    .callback = InitTilesetAnim_General,
+};
+
+const struct Tileset gTileset_PalletTownSummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PalletTownSummer,
+    .palettes = gTilesetPalettes_PalletTownSummer,
+    .metatiles = gMetatiles_PalletTownSummer,
+    .metatileAttributes = gMetatileAttributes_PalletTownSummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_PalletTownAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PalletTownAutumn,
+    .palettes = gTilesetPalettes_PalletTownAutumn,
+    .metatiles = gMetatiles_PalletTownAutumn,
+    .metatileAttributes = gMetatileAttributes_PalletTownAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_PalletTownWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PalletTownWinter,
+    .palettes = gTilesetPalettes_PalletTownWinter,
+    .metatiles = gMetatiles_PalletTownWinter,
+    .metatileAttributes = gMetatileAttributes_PalletTownWinter,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_ViridianForestAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ViridianForestAutumn,
+    .palettes = gTilesetPalettes_ViridianForestAutumn,
+    .metatiles = gMetatiles_ViridianForestAutumn,
+    .metatileAttributes = gMetatileAttributes_ViridianForestAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_ViridianForestSummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ViridianForestSummer,
+    .palettes = gTilesetPalettes_ViridianForestSummer,
+    .metatiles = gMetatiles_ViridianForestSummer,
+    .metatileAttributes = gMetatileAttributes_ViridianForestSummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_ViridianForestWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ViridianForestWinter,
+    .palettes = gTilesetPalettes_ViridianForestWinter,
+    .metatiles = gMetatiles_ViridianForestWinter,
+    .metatileAttributes = gMetatileAttributes_ViridianForestWinter,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_LavenderTownSummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LavenderTownSummer,
+    .palettes = gTilesetPalettes_LavenderTownSummer,
+    .metatiles = gMetatiles_LavenderTownSummer,
+    .metatileAttributes = gMetatileAttributes_LavenderTownSummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_LavenderTownAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LavenderTownAutumn,
+    .palettes = gTilesetPalettes_LavenderTownAutumn,
+    .metatiles = gMetatiles_LavenderTownAutumn,
+    .metatileAttributes = gMetatileAttributes_LavenderTownAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_LavenderTownWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LavenderTownWinter,
+    .palettes = gTilesetPalettes_LavenderTownWinter,
+    .metatiles = gMetatiles_LavenderTownWinter,
+    .metatileAttributes = gMetatileAttributes_LavenderTownWinter,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_SaffronCitySummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SaffronCitySummer,
+    .palettes = gTilesetPalettes_SaffronCitySummer,
+    .metatiles = gMetatiles_SaffronCitySummer,
+    .metatileAttributes = gMetatileAttributes_SaffronCitySummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_SaffronCityAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SaffronCityAutumn,
+    .palettes = gTilesetPalettes_SaffronCityAutumn,
+    .metatiles = gMetatiles_SaffronCityAutumn,
+    .metatileAttributes = gMetatileAttributes_SaffronCityAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_SaffronCityWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SaffronCityWinter,
+    .palettes = gTilesetPalettes_SaffronCityWinter,
+    .metatiles = gMetatiles_SaffronCityWinter,
+    .metatileAttributes = gMetatileAttributes_SaffronCityWinter,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_CeladonCitySummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CeladonCitySummer,
+    .palettes = gTilesetPalettes_CeladonCitySummer,
+    .metatiles = gMetatiles_CeladonCitySummer,
+    .metatileAttributes = gMetatileAttributes_CeladonCitySummer,
+    .callback = InitTilesetAnim_CeladonCity,
+};
+
+const struct Tileset gTileset_CeladonCityAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CeladonCityAutumn,
+    .palettes = gTilesetPalettes_CeladonCityAutumn,
+    .metatiles = gMetatiles_CeladonCityAutumn,
+    .metatileAttributes = gMetatileAttributes_CeladonCityAutumn,
+    .callback = InitTilesetAnim_CeladonCity,
+};
+
+const struct Tileset gTileset_CeladonCityWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CeladonCityWinter,
+    .palettes = gTilesetPalettes_CeladonCityWinter,
+    .metatiles = gMetatiles_CeladonCityWinter,
+    .metatileAttributes = gMetatileAttributes_CeladonCityWinter,
+    .callback = InitTilesetAnim_CeladonCity,
+};
+
+const struct Tileset gTileset_FuchsiaCitySummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_FuchsiaCitySummer,
+    .palettes = gTilesetPalettes_FuchsiaCitySummer,
+    .metatiles = gMetatiles_FuchsiaCitySummer,
+    .metatileAttributes = gMetatileAttributes_FuchsiaCitySummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_FuchsiaCityAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_FuchsiaCityAutumn,
+    .palettes = gTilesetPalettes_FuchsiaCityAutumn,
+    .metatiles = gMetatiles_FuchsiaCityAutumn,
+    .metatileAttributes = gMetatileAttributes_FuchsiaCityAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_FuchsiaCityWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_FuchsiaCityWinter,
+    .palettes = gTilesetPalettes_FuchsiaCityWinter,
+    .metatiles = gMetatiles_FuchsiaCityWinter,
+    .metatileAttributes = gMetatileAttributes_FuchsiaCityWinter,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_SeviiIslands123Winter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SeviiIslands123Winter,
+    .palettes = gTilesetPalettes_SeviiIslands123Winter,
+    .metatiles = gMetatiles_SeviiIslands123Winter,
+    .metatileAttributes = gMetatileAttributes_SeviiIslands123Winter,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_BerryForestSummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_BerryForestSummer,
+    .palettes = gTilesetPalettes_BerryForestSummer,
+    .metatiles = gMetatiles_BerryForestSummer,
+    .metatileAttributes = gMetatileAttributes_BerryForestSummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_BerryForestAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_BerryForestAutumn,
+    .palettes = gTilesetPalettes_BerryForestAutumn,
+    .metatiles = gMetatiles_BerryForestAutumn,
+    .metatileAttributes = gMetatileAttributes_BerryForestAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_BerryForestWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_BerryForestWinter,
+    .palettes = gTilesetPalettes_BerryForestWinter,
+    .metatiles = gMetatiles_BerryForestWinter,
+    .metatileAttributes = gMetatileAttributes_BerryForestWinter,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_SeviiIslands123Summer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SeviiIslands123Summer,
+    .palettes = gTilesetPalettes_SeviiIslands123Summer,
+    .metatiles = gMetatiles_SeviiIslands123Summer,
+    .metatileAttributes = gMetatileAttributes_SeviiIslands123Summer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_SeviiIslands123Autumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SeviiIslands123Autumn,
+    .palettes = gTilesetPalettes_SeviiIslands123Autumn,
+    .metatiles = gMetatiles_SeviiIslands123Autumn,
+    .metatileAttributes = gMetatileAttributes_SeviiIslands123Autumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_IndigoPlateauSummer =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_IndigoPlateauSummer,
+    .palettes = gTilesetPalettes_IndigoPlateauSummer,
+    .metatiles = gMetatiles_IndigoPlateauSummer,
+    .metatileAttributes = gMetatileAttributes_IndigoPlateauSummer,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_IndigoPlateauAutumn =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_IndigoPlateauAutumn,
+    .palettes = gTilesetPalettes_IndigoPlateauAutumn,
+    .metatiles = gMetatiles_IndigoPlateauAutumn,
+    .metatileAttributes = gMetatileAttributes_IndigoPlateauAutumn,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_IndigoPlateauWinter =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_IndigoPlateauWinter,
+    .palettes = gTilesetPalettes_IndigoPlateauWinter,
+    .metatiles = gMetatiles_IndigoPlateauWinter,
+    .metatileAttributes = gMetatileAttributes_IndigoPlateauWinter,
+    .callback = NULL,
+};

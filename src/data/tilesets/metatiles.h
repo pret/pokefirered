@@ -201,3 +201,93 @@ const u32 gMetatileAttributes_PokemonLeague[] = INCBIN_U32("data/tilesets/second
 
 const u16 gMetatiles_HallOfFame[] = INCBIN_U16("data/tilesets/secondary/hall_of_fame/metatiles.bin");
 const u32 gMetatileAttributes_HallOfFame[] = INCBIN_U32("data/tilesets/secondary/hall_of_fame/metatile_attributes.bin");
+
+const u16 gMetatiles_GeneralWinter[] = INCBIN_U16("data/tilesets/primary/general_winter/metatiles.bin");
+const u32 gMetatileAttributes_GeneralWinter[] = INCBIN_U32("data/tilesets/primary/general_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_GeneralAutumn[] = INCBIN_U16("data/tilesets/primary/general_autumn/metatiles.bin");
+const u32 gMetatileAttributes_GeneralAutumn[] = INCBIN_U32("data/tilesets/primary/general_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_GeneralSummer[] = INCBIN_U16("data/tilesets/primary/general_summer/metatiles.bin");
+const u32 gMetatileAttributes_GeneralSummer[] = INCBIN_U32("data/tilesets/primary/general_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_PalletTownSummer[] = INCBIN_U16("data/tilesets/secondary/pallet_town_summer/metatiles.bin");
+const u32 gMetatileAttributes_PalletTownSummer[] = INCBIN_U32("data/tilesets/secondary/pallet_town_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_PalletTownAutumn[] = INCBIN_U16("data/tilesets/secondary/pallet_town_autumn/metatiles.bin");
+const u32 gMetatileAttributes_PalletTownAutumn[] = INCBIN_U32("data/tilesets/secondary/pallet_town_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_PalletTownWinter[] = INCBIN_U16("data/tilesets/secondary/pallet_town_winter/metatiles.bin");
+const u32 gMetatileAttributes_PalletTownWinter[] = INCBIN_U32("data/tilesets/secondary/pallet_town_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_ViridianForestAutumn[] = INCBIN_U16("data/tilesets/secondary/viridian_forest_autumn/metatiles.bin");
+const u32 gMetatileAttributes_ViridianForestAutumn[] = INCBIN_U32("data/tilesets/secondary/viridian_forest_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_ViridianForestSummer[] = INCBIN_U16("data/tilesets/secondary/viridian_forest_summer/metatiles.bin");
+const u32 gMetatileAttributes_ViridianForestSummer[] = INCBIN_U32("data/tilesets/secondary/viridian_forest_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_ViridianForestWinter[] = INCBIN_U16("data/tilesets/secondary/viridian_forest_winter/metatiles.bin");
+const u32 gMetatileAttributes_ViridianForestWinter[] = INCBIN_U32("data/tilesets/secondary/viridian_forest_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_LavenderTownSummer[] = INCBIN_U16("data/tilesets/secondary/lavender_town_summer/metatiles.bin");
+const u32 gMetatileAttributes_LavenderTownSummer[] = INCBIN_U32("data/tilesets/secondary/lavender_town_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_LavenderTownAutumn[] = INCBIN_U16("data/tilesets/secondary/lavender_town_autumn/metatiles.bin");
+const u32 gMetatileAttributes_LavenderTownAutumn[] = INCBIN_U32("data/tilesets/secondary/lavender_town_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_LavenderTownWinter[] = INCBIN_U16("data/tilesets/secondary/lavender_town_winter/metatiles.bin");
+const u32 gMetatileAttributes_LavenderTownWinter[] = INCBIN_U32("data/tilesets/secondary/lavender_town_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_SaffronCitySummer[] = INCBIN_U16("data/tilesets/secondary/saffron_city_summer/metatiles.bin");
+const u32 gMetatileAttributes_SaffronCitySummer[] = INCBIN_U32("data/tilesets/secondary/saffron_city_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_SaffronCityAutumn[] = INCBIN_U16("data/tilesets/secondary/saffron_city_autumn/metatiles.bin");
+const u32 gMetatileAttributes_SaffronCityAutumn[] = INCBIN_U32("data/tilesets/secondary/saffron_city_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_SaffronCityWinter[] = INCBIN_U16("data/tilesets/secondary/saffron_city_winter/metatiles.bin");
+const u32 gMetatileAttributes_SaffronCityWinter[] = INCBIN_U32("data/tilesets/secondary/saffron_city_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_CeladonCitySummer[] = INCBIN_U16("data/tilesets/secondary/celadon_city_summer/metatiles.bin");
+const u32 gMetatileAttributes_CeladonCitySummer[] = INCBIN_U32("data/tilesets/secondary/celadon_city_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_CeladonCityAutumn[] = INCBIN_U16("data/tilesets/secondary/celadon_city_autumn/metatiles.bin");
+const u32 gMetatileAttributes_CeladonCityAutumn[] = INCBIN_U32("data/tilesets/secondary/celadon_city_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_CeladonCityWinter[] = INCBIN_U16("data/tilesets/secondary/celadon_city_winter/metatiles.bin");
+const u32 gMetatileAttributes_CeladonCityWinter[] = INCBIN_U32("data/tilesets/secondary/celadon_city_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_FuchsiaCitySummer[] = INCBIN_U16("data/tilesets/secondary/fuchsia_city_summer/metatiles.bin");
+const u32 gMetatileAttributes_FuchsiaCitySummer[] = INCBIN_U32("data/tilesets/secondary/fuchsia_city_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_FuchsiaCityAutumn[] = INCBIN_U16("data/tilesets/secondary/fuchsia_city_autumn/metatiles.bin");
+const u32 gMetatileAttributes_FuchsiaCityAutumn[] = INCBIN_U32("data/tilesets/secondary/fuchsia_city_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_FuchsiaCityWinter[] = INCBIN_U16("data/tilesets/secondary/fuchsia_city_winter/metatiles.bin");
+const u32 gMetatileAttributes_FuchsiaCityWinter[] = INCBIN_U32("data/tilesets/secondary/fuchsia_city_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_SeviiIslands123Winter[] = INCBIN_U16("data/tilesets/secondary/sevii_islands_123winter/metatiles.bin");
+const u32 gMetatileAttributes_SeviiIslands123Winter[] = INCBIN_U32("data/tilesets/secondary/sevii_islands_123winter/metatile_attributes.bin");
+
+const u16 gMetatiles_BerryForestSummer[] = INCBIN_U16("data/tilesets/secondary/berry_forest_summer/metatiles.bin");
+const u32 gMetatileAttributes_BerryForestSummer[] = INCBIN_U32("data/tilesets/secondary/berry_forest_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_BerryForestAutumn[] = INCBIN_U16("data/tilesets/secondary/berry_forest_autumn/metatiles.bin");
+const u32 gMetatileAttributes_BerryForestAutumn[] = INCBIN_U32("data/tilesets/secondary/berry_forest_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_BerryForestWinter[] = INCBIN_U16("data/tilesets/secondary/berry_forest_winter/metatiles.bin");
+const u32 gMetatileAttributes_BerryForestWinter[] = INCBIN_U32("data/tilesets/secondary/berry_forest_winter/metatile_attributes.bin");
+
+const u16 gMetatiles_SeviiIslands123Summer[] = INCBIN_U16("data/tilesets/secondary/sevii_islands_123summer/metatiles.bin");
+const u32 gMetatileAttributes_SeviiIslands123Summer[] = INCBIN_U32("data/tilesets/secondary/sevii_islands_123summer/metatile_attributes.bin");
+
+const u16 gMetatiles_SeviiIslands123Autumn[] = INCBIN_U16("data/tilesets/secondary/sevii_islands_123autumn/metatiles.bin");
+const u32 gMetatileAttributes_SeviiIslands123Autumn[] = INCBIN_U32("data/tilesets/secondary/sevii_islands_123autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_IndigoPlateauSummer[] = INCBIN_U16("data/tilesets/secondary/indigo_plateau_summer/metatiles.bin");
+const u32 gMetatileAttributes_IndigoPlateauSummer[] = INCBIN_U32("data/tilesets/secondary/indigo_plateau_summer/metatile_attributes.bin");
+
+const u16 gMetatiles_IndigoPlateauAutumn[] = INCBIN_U16("data/tilesets/secondary/indigo_plateau_autumn/metatiles.bin");
+const u32 gMetatileAttributes_IndigoPlateauAutumn[] = INCBIN_U32("data/tilesets/secondary/indigo_plateau_autumn/metatile_attributes.bin");
+
+const u16 gMetatiles_IndigoPlateauWinter[] = INCBIN_U16("data/tilesets/secondary/indigo_plateau_winter/metatiles.bin");
+const u32 gMetatileAttributes_IndigoPlateauWinter[] = INCBIN_U32("data/tilesets/secondary/indigo_plateau_winter/metatile_attributes.bin");

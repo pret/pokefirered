@@ -11,6 +11,7 @@
 #include "link.h"
 #include "menu.h"
 #include "overworld.h"
+#include "rtc.h"
 #include "sound.h"
 #include "text_window.h"
 #include "trig.h"
@@ -396,6 +397,27 @@ static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
     return BATTLE_TERRAIN_PLAIN;
 }
 
+static const void* const sSeasonBattleBackgrounds[BATTLE_TERRAIN_COUNT][SEASON_WINTER + 1] =
+{
+    [BATTLE_TERRAIN_GRASS] = 
+    {
+        [SEASON_SPRING] = &gBattleTerrainPalette_Grass,
+        [SEASON_SUMMER] = &gBattleTerrainPalette_GrassSummer,
+        [SEASON_AUTUMN] = &gBattleTerrainPalette_GrassAutumn,
+        [SEASON_WINTER] = &gBattleTerrainPalette_GrassWinter,
+    }
+};
+
+const void* GetBattleBackgroundPalette(u16 terrain)
+{
+    if (!OW_SEASONS)
+        return gBattleTerrainInfo[terrain].background.palette;
+
+    if (sSeasonBattleBackgrounds[terrain][gLoadedSeason] != NULL)
+        return sSeasonBattleBackgrounds[terrain][gLoadedSeason];
+    return gBattleTerrainInfo[terrain].background.palette;
+}
+
 static void LoadBattleTerrainGfx(u16 terrain)
 {
     if (terrain >= NELEMS(gBattleTerrainInfo))
@@ -403,7 +425,7 @@ static void LoadBattleTerrainGfx(u16 terrain)
     // Copy to bg3
     LZDecompressVram(gBattleTerrainInfo[terrain].background.tileset, (void *)BG_CHAR_ADDR(2));
     LZDecompressVram(gBattleTerrainInfo[terrain].background.tilemap, (void *)BG_SCREEN_ADDR(26));
-    LoadCompressedPalette(gBattleTerrainInfo[terrain].background.palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+    LoadCompressedPalette(GetBattleBackgroundPalette(terrain), BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
 }
 
 static void LoadBattleTerrainEntryGfx(u16 terrain)
@@ -863,7 +885,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         break;
     case 5:
         battleScene = GetBattleTerrainOverride();
-        LoadCompressedPalette(gBattleTerrainInfo[battleScene].background.palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(GetBattleBackgroundPalette(battleScene), BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
         break;
     case 6:
         LoadBattleMenuWindowGfx();

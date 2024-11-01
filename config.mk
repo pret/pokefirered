@@ -11,6 +11,9 @@ COMPARE       ?= 0
 
 KEEP_TEMPS    ?= 0
 
+# If you use Flash 1Mbit, change "?= SRAM" to "?= FLASH_1MB"
+SAVE_TYPE     ?= SRAM
+
 ifeq (modern,$(MAKECMDGOALS))
   MODERN := 1
 endif

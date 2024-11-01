@@ -21,10 +21,12 @@ void SetReadFlash1(u16 *dest);
 
 void SwitchFlashBank(u8 bankNum)
 {
+#ifndef SRAM
     FLASH_WRITE(0x5555, 0xAA);
     FLASH_WRITE(0x2AAA, 0x55);
     FLASH_WRITE(0x5555, 0xB0);
     FLASH_WRITE(0x0000, bankNum);
+#endif
 }
 
 #define DELAY()                  \
@@ -36,6 +38,7 @@ do {                             \
 
 u16 ReadFlashId(void)
 {
+#ifndef SRAM
     u16 flashId;
     u16 readFlash1Buffer[0x20];
     u8 (*readFlash1)(u8 *);
@@ -60,6 +63,9 @@ u16 ReadFlashId(void)
     DELAY();
 
     return flashId;
+#else
+    return 4962; // (0x13 << 8) | 0x62
+#endif
 }
 
 void FlashTimerIntr(void)

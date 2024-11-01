@@ -288,7 +288,7 @@ int main(int argc, char *argv[])
 
     // update complement check & total checksum
     header.complement = 0;
-    header.checksum = 0;    // must be 0
+    //header.checksum = 0;    // must be 0
     header.complement = HeaderComplement();
     //header.checksum = checksum_without_header + HeaderChecksum();
 

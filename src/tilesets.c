@@ -117,7 +117,6 @@ const struct Tileset* GetSecondaryTileset(const struct MapLayout* mapLayout)
     if (!OW_SEASONS)
         return mapLayout->secondaryTileset;
 
-    DebugPrintfLevel(MGBA_LOG_ERROR, "get secondary");
     for (i = 0; sSeasonTilesetsSecondary[i][SEASON_SPRING] != NULL; i++) {
         if (mapLayout->secondaryTileset == sSeasonTilesetsSecondary[i][SEASON_SPRING])
         {

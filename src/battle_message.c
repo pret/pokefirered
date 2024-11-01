@@ -40,7 +40,11 @@ struct BattleWindowText
     u8 shadowColor;
 };
 
-static EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] = {};
+#if TESTING
+EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] = {0};
+#else
+static EWRAM_DATA u16 sBattlerAbilities[MAX_BATTLERS_COUNT] = {0};
+#endif
 EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
 // merged
@@ -307,7 +311,7 @@ static const u8 sText_PkmnsXHadNoEffectOnY[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX
 const u8 gText_StatSharply[] = _("sharply ");
 const u8 gText_StatRose[] = _("rose!");
 static const u8 sText_StatHarshly[] = _("harshly ");
-static const u8 sText_StatFell[] = _("fell!");
+const u8 sText_StatFell[] = _("fell!");
 static const u8 sText_AttackersStatRose[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
 const u8 gText_DefendersStatRose[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
 static const u8 sText_UsingItemTheStatOfPkmnRose[] = _("Using {B_LAST_ITEM}, the {B_BUFF1}\nof {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}");
@@ -420,16 +424,16 @@ static const u8 sText_PkmnGoodComeBack[] = _("{B_BUFF1}, good!\nCome back!");
 static const u8 sText_Trainer1WithdrewPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwithdrew {B_BUFF1}!");
 static const u8 sText_LinkTrainer1WithdrewPkmn[] = _("{B_LINK_OPPONENT1_NAME} withdrew\n{B_BUFF1}!");
 static const u8 sText_LinkTrainer2WithdrewPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} withdrew\n{B_BUFF1}!");
-static const u8 sText_WildPkmnPrefix[] = _("Wild ");
-static const u8 sText_FoePkmnPrefix[] = _("Foe ");
+static const u8 sText_WildPkmnPrefix[] = _("The wild ");
+static const u8 sText_FoePkmnPrefix[] = _("The opposing ");
 static const u8 sText_WildPkmnPrefixLower[] = _("the wild ");
 static const u8 sText_FoePkmnPrefixLower[] = _("the opposing ");
 static const u8 sText_EmptyString8[] = _("");
-static const u8 sText_FoePkmnPrefix2[] = _("Foe");
+static const u8 sText_FoePkmnPrefix2[] = _("Opposing");
 static const u8 sText_AllyPkmnPrefix[] = _("Ally");
-static const u8 sText_FoePkmnPrefix3[] = _("Foe");
+static const u8 sText_FoePkmnPrefix3[] = _("Opposing");
 static const u8 sText_AllyPkmnPrefix2[] = _("Ally");
-static const u8 sText_FoePkmnPrefix4[] = _("Foe");
+static const u8 sText_FoePkmnPrefix4[] = _("Opposing");
 static const u8 sText_AllyPkmnPrefix3[] = _("Ally");
 static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF3}!");
 static const u8 sText_ExclamationMark[] = _("!");
@@ -629,8 +633,8 @@ static const u8 sText_HealBlockPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX} was
 static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ITEM} is\nreacting to {B_ATK_TRAINER_NAME}'s Mega Ring!");
 static const u8 sText_FerventWishReached[] = _("{B_ATK_TRAINER_NAME}'s fervent wish\nhas reached {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_MegaEvoEvolved[] = _("{B_ATK_NAME_WITH_PREFIX} has Mega Evolved into\nMega {B_BUFF1}!");
-static const u8 sText_drastically[] = _("drastically ");
-static const u8 sText_severely[] = _("severely ");
+const u8 sText_drastically[] = _("drastically ");
+const u8 sText_severely[] = _("severely ");
 static const u8 sText_Infestation[] = _("{B_DEF_NAME_WITH_PREFIX} has been afflicted\nwith an infestation by {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_NoEffectOnTarget[] = _("It had no effect\non {B_DEF_NAME_WITH_PREFIX}!");
 static const u8 sText_BurstingFlames[] = _("The bursting flames\nhit {B_SCR_ACTIVE_NAME_WITH_PREFIX}!");

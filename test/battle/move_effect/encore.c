@@ -102,7 +102,7 @@ SINGLE_BATTLE_TEST("Encore has no effect if no previous move")
     } WHEN {
         TURN { MOVE(opponent, MOVE_ENCORE); MOVE(player, MOVE_CELEBRATE); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Encore!");
+        MESSAGE("The opposing Wobbuffet used Encore!");
         MESSAGE("But it failed!");
     }
 }

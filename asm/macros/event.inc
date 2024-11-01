@@ -1051,7 +1051,7 @@
 	.endm
 
 	@ creates a mon for a given party and slot
-	@ otherwise 
+	@ otherwise
 	.macro createmon side:req, slot:req, species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
 	callnative ScrCmd_createmon
 	.byte \side	 @ 0 - player, 1 - opponent

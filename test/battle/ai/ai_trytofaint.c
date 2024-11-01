@@ -43,7 +43,7 @@ AI_SINGLE_BATTLE_TEST("AI will choose a priority move if it is slower then the t
         TURN { MOVE(player, MOVE_STRENGTH); EXPECT_MOVE(opponent, MOVE_STRENGTH); }
         TURN { MOVE(player, MOVE_STRENGTH); EXPECT_MOVE(opponent, MOVE_QUICK_ATTACK); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet fainted!");
     }
 }
 

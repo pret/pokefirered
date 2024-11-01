@@ -122,13 +122,13 @@ DOUBLE_BATTLE_TEST("Forecast transforms all Castforms present in weather")
         MESSAGE("Castform transformed!");
         ABILITY_POPUP(opponentLeft, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, opponentLeft);
-        MESSAGE("Foe Castform transformed!");
+        MESSAGE("The opposing Castform transformed!");
         ABILITY_POPUP(playerRight, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, playerRight);
         MESSAGE("Castform transformed!");
         ABILITY_POPUP(opponentRight, ABILITY_FORECAST);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, opponentRight);
-        MESSAGE("Foe Castform transformed!");
+        MESSAGE("The opposing Castform transformed!");
     } THEN {
         switch (move)
         {

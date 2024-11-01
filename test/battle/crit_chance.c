@@ -1,11 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS
-{
-    ASSUME(B_CRIT_CHANCE >= GEN_7);
-}
-
 SINGLE_BATTLE_TEST("Crit Chance: Side effected by Lucky Chant blocks critical hits")
 {
     GIVEN {
@@ -135,6 +130,7 @@ SINGLE_BATTLE_TEST("Crit Chance: Focus Energy increases the user's critical hit 
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_7);
         ASSUME(gMovesInfo[MOVE_FOCUS_ENERGY].effect == EFFECT_FOCUS_ENERGY);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -152,6 +148,7 @@ SINGLE_BATTLE_TEST("Crit Chance: High crit rate increases the critical hit ratio
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_7);
         ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -167,6 +164,7 @@ SINGLE_BATTLE_TEST("Crit Chance: Super Luck increases the critical hit ratio by 
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_7);
         PLAYER(SPECIES_TOGEPI) { Ability(ABILITY_SUPER_LUCK); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -181,6 +179,7 @@ SINGLE_BATTLE_TEST("Crit Chance: Scope Lens increases the critical hit ratio by 
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_7);
         ASSUME(gItemsInfo[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SCOPE_LENS); };
         OPPONENT(SPECIES_WOBBUFFET);
@@ -195,6 +194,7 @@ SINGLE_BATTLE_TEST("Crit Chance: Scope Lens increases the critical hit ratio by 
 SINGLE_BATTLE_TEST("Crit Chance: High crit rate, Super Luck and Scope Lens cause the move to result in a critical hit")
 {
     GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_7);
         ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
         ASSUME(gItemsInfo[ITEM_SCOPE_LENS].holdEffect == HOLD_EFFECT_SCOPE_LENS);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SUPER_LUCK); Item(ITEM_SCOPE_LENS); };
@@ -215,11 +215,12 @@ SINGLE_BATTLE_TEST("Crit Chance: Signature items Leek and Lucky Punch increase t
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
 
     PARAMETRIZE { species = SPECIES_FARFETCHD; item = ITEM_LEEK; }
-    PARAMETRIZE { species = SPECIES_FARFETCHD_GALARIAN; item = ITEM_LEEK; }
+    PARAMETRIZE { species = SPECIES_FARFETCHD_GALAR; item = ITEM_LEEK; }
     PARAMETRIZE { species = SPECIES_SIRFETCHD; item = ITEM_LEEK; }
     PARAMETRIZE { species = SPECIES_CHANSEY; item = ITEM_LUCKY_PUNCH; }
 
     GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_7);
         ASSUME(gItemsInfo[ITEM_LEEK].holdEffect == HOLD_EFFECT_LEEK);
         ASSUME(gItemsInfo[ITEM_LUCKY_PUNCH].holdEffect == HOLD_EFFECT_LUCKY_PUNCH);
         PLAYER(SPECIES_WOBBUFFET);
@@ -236,6 +237,7 @@ SINGLE_BATTLE_TEST("Crit Chance: Dire Hit increases a battler's critical hit cha
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_7);
         ASSUME(gItemsInfo[ITEM_DIRE_HIT].battleUsage == EFFECT_ITEM_SET_FOCUS_ENERGY);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -244,7 +246,7 @@ SINGLE_BATTLE_TEST("Crit Chance: Dire Hit increases a battler's critical hit cha
         TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_ENERGY, player);
-        MESSAGE("Wobbuffet used Dire Hit to get pumped!");
+        MESSAGE("Wobbuffet used the Dire Hit to get pumped!");
         MESSAGE("Wobbuffet used Scratch!");
         MESSAGE("A critical hit!");
     }
@@ -254,6 +256,7 @@ SINGLE_BATTLE_TEST("Crit Chance: Focus Energy increases critical hit ratio by tw
 {
     PASSES_RANDOMLY(8, 8, RNG_CRITICAL_HIT);
     GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_7);
         ASSUME(gMovesInfo[MOVE_SLASH].criticalHitStage == 1);
         ASSUME(gMovesInfo[MOVE_FOCUS_ENERGY].effect == EFFECT_FOCUS_ENERGY);
         PLAYER(SPECIES_WOBBUFFET);
@@ -286,6 +289,7 @@ DOUBLE_BATTLE_TEST("Crit Chance: Dragon Cheer increases critical hit ratio by on
 {
     PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
     GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_7);
         ASSUME(gMovesInfo[MOVE_TACKLE].criticalHitStage == 0);
         ASSUME(gMovesInfo[MOVE_DRAGON_CHEER].effect == EFFECT_DRAGON_CHEER);
         PLAYER(SPECIES_WOBBUFFET);
@@ -306,6 +310,7 @@ DOUBLE_BATTLE_TEST("Crit Chance: Dragon Cheer increases critical hit ratio by tw
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
+        ASSUME(B_CRIT_CHANCE >= GEN_7);
         ASSUME(gMovesInfo[MOVE_TACKLE].criticalHitStage == 0);
         ASSUME(gMovesInfo[MOVE_DRAGON_CHEER].effect == EFFECT_DRAGON_CHEER);
         PLAYER(SPECIES_WOBBUFFET);

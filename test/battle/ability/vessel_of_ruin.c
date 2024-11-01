@@ -70,6 +70,6 @@ SINGLE_BATTLE_TEST("Vessel of Ruin's message displays correctly after all battle
         SEND_IN_MESSAGE("Wobbuffet");
         MESSAGE("2 sent out Ting-Lu!");
         ABILITY_POPUP(opponent, ABILITY_VESSEL_OF_RUIN);
-        MESSAGE("Foe Ting-Lu's Vessel of Ruin weakened the Sp. Atk of all surrounding Pokémon!");
+        MESSAGE("The opposing Ting-Lu's Vessel of Ruin weakened the Sp. Atk of all surrounding Pokémon!");
     }
 }

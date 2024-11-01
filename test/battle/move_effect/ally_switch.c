@@ -54,11 +54,11 @@ DOUBLE_BATTLE_TEST("Ally Switch changes the position of battlers")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
         MESSAGE("Wobbuffet and Wynaut switched places!");
 
-        MESSAGE("Foe Kadabra used Screech!");
+        MESSAGE("The opposing Kadabra used Screech!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         MESSAGE("Wynaut's Defense harshly fell!");
 
-        MESSAGE("Foe Abra used Screech!");
+        MESSAGE("The opposing Abra used Screech!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         MESSAGE("Wynaut's Defense harshly fell!");
     } THEN {
@@ -84,7 +84,7 @@ DOUBLE_BATTLE_TEST("Ally Switch does not redirect the target of Snipe Shot")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
         MESSAGE("Wobbuffet and Wynaut switched places!");
 
-        MESSAGE("Foe Kadabra used Snipe Shot!");
+        MESSAGE("The opposing Kadabra used Snipe Shot!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SNIPE_SHOT, opponentLeft);
         HP_BAR(playerRight);
     }
@@ -109,7 +109,7 @@ DOUBLE_BATTLE_TEST("Ally Switch does not redirect moves done by pokemon with Sta
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
         MESSAGE("Wobbuffet and Wynaut switched places!");
 
-        MESSAGE("Foe Kadabra used Tackle!");
+        MESSAGE("The opposing Kadabra used Tackle!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
         HP_BAR((ability == ABILITY_STALWART || ability == ABILITY_PROPELLER_TAIL) ? playerLeft : playerRight);
     }

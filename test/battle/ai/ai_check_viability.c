@@ -167,7 +167,7 @@ AI_SINGLE_BATTLE_TEST("AI can choose Counter or Mirror Coat if the predicted mov
         TURN { MOVE(player, playerMove); EXPECT_MOVE(opponent, opponentMove); }
         TURN { MOVE(player, playerMove); EXPECT_MOVE(opponent, MOVE_STRENGTH); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet fainted!");
     }
 }
 

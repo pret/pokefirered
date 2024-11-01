@@ -18,8 +18,8 @@ SINGLE_BATTLE_TEST("Confusion adds a 50/33% chance to hit self with 40 power")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
         HP_BAR(player, captureDamage: &damage[0]);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFUSE_RAY, player);
-        MESSAGE("Foe Wobbuffet became confused!");
-        MESSAGE("Foe Wobbuffet is confused!");
+        MESSAGE("The opposing Wobbuffet became confused!");
+        MESSAGE("The opposing Wobbuffet is confused!");
         MESSAGE("It hurt itself in its confusion!");
         HP_BAR(opponent, captureDamage: &damage[1]);
     } THEN {

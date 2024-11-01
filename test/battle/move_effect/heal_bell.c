@@ -30,7 +30,7 @@ DOUBLE_BATTLE_TEST("Heal Bell cures the entire party")
         int i;
 
         ANIMATION(ANIM_TYPE_MOVE, move, playerLeft);
-        NOT MESSAGE("Wobbuffet is hurt by poison!");
+        NOT MESSAGE("Wobbuffet was hurt by its poisoning!");
         for (i = 0; i < 6; i++)
             EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_STATUS), STATUS1_NONE);
     }
@@ -55,9 +55,9 @@ DOUBLE_BATTLE_TEST("Heal Bell does not cure soundproof partners")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAL_BELL, playerLeft);
         if (ability == ABILITY_SOUNDPROOF) {
-            MESSAGE("Exploud is hurt by poison!");
+            MESSAGE("Exploud was hurt by its poisoning!");
         } else {
-            NOT MESSAGE("Exploud is hurt by poison!");
+            NOT MESSAGE("Exploud was hurt by its poisoning!");
         }
     }
 }
@@ -81,7 +81,7 @@ SINGLE_BATTLE_TEST("Heal Bell cures inactive soundproof Pokemon")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAL_BELL, player);
         SEND_IN_MESSAGE("Exploud");
-        NOT MESSAGE("Exploud is hurt by poison!");
+        NOT MESSAGE("Exploud was hurt by its poisoning!");
     }
 }
 
@@ -96,6 +96,6 @@ SINGLE_BATTLE_TEST("Heal Bell cures a soundproof user")
         TURN { MOVE(player, MOVE_HEAL_BELL, target: player); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAL_BELL, player);
-        NOT MESSAGE("Exploud is hurt by poison!");
+        NOT MESSAGE("Exploud was hurt by its poisoning!");
     }
 }

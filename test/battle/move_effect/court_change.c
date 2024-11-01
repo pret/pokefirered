@@ -21,24 +21,24 @@ DOUBLE_BATTLE_TEST("Court Change swaps entry hazards used by the opponent")
         TURN { MOVE(playerLeft, MOVE_COURT_CHANGE); }
         TURN { SWITCH(playerLeft, 2); SWITCH(opponentLeft, 2); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Sticky Web!");
-        MESSAGE("Foe Wobbuffet used Stealth Rock!");
-        MESSAGE("Foe Wobbuffet used Spikes!");
-        MESSAGE("Foe Wobbuffet used Toxic Spikes!");
+        MESSAGE("The opposing Wobbuffet used Sticky Web!");
+        MESSAGE("The opposing Wobbuffet used Stealth Rock!");
+        MESSAGE("The opposing Wobbuffet used Spikes!");
+        MESSAGE("The opposing Wobbuffet used Toxic Spikes!");
         MESSAGE("Wynaut used Court Change!");
-        MESSAGE("Wynaut swapped the battle effects affecting each side!");
+        MESSAGE("Wynaut swapped the battle effects affecting each side of the field!");
         SEND_IN_MESSAGE("Wynaut");
         NONE_OF {
-            MESSAGE("Wynaut is hurt by spikes!");
+            MESSAGE("Wynaut was hurt by the spikes!");
             MESSAGE("Pointed stones dug into Wynaut!");
             MESSAGE("Wynaut was poisoned!");
-            MESSAGE("Wynaut was caught in a Sticky Web!");
+            MESSAGE("Wynaut was caught in a sticky web!");
         }
         MESSAGE("2 sent out Wobbuffet!");
-        MESSAGE("Foe Wobbuffet is hurt by spikes!");
-        MESSAGE("Pointed stones dug into Foe Wobbuffet!");
-        MESSAGE("Foe Wobbuffet was poisoned!");
-        MESSAGE("Foe Wobbuffet was caught in a Sticky Web!");
+        MESSAGE("The opposing Wobbuffet was hurt by the spikes!");
+        MESSAGE("Pointed stones dug into the opposing Wobbuffet!");
+        MESSAGE("The opposing Wobbuffet was poisoned!");
+        MESSAGE("The opposing Wobbuffet was caught in a sticky web!");
     }
 }
 
@@ -61,19 +61,19 @@ DOUBLE_BATTLE_TEST("Court Change swaps entry hazards used by the player")
         MESSAGE("Wobbuffet used Stealth Rock!");
         MESSAGE("Wobbuffet used Spikes!");
         MESSAGE("Wobbuffet used Toxic Spikes!");
-        MESSAGE("Foe Wynaut used Court Change!");
-        MESSAGE("Foe Wynaut swapped the battle effects affecting each side!");
+        MESSAGE("The opposing Wynaut used Court Change!");
+        MESSAGE("The opposing Wynaut swapped the battle effects affecting each side of the field!");
         SEND_IN_MESSAGE("Wobbuffet");
-        MESSAGE("Wobbuffet is hurt by spikes!");
+        MESSAGE("Wobbuffet was hurt by the spikes!");
         MESSAGE("Pointed stones dug into Wobbuffet!");
         MESSAGE("Wobbuffet was poisoned!");
-        MESSAGE("Wobbuffet was caught in a Sticky Web!");
+        MESSAGE("Wobbuffet was caught in a sticky web!");
         MESSAGE("2 sent out Wynaut!");
         NONE_OF {
-            MESSAGE("Foe Wynaut is hurt by spikes!");
-            MESSAGE("Pointed stones dug into Foe Wynaut!");
-            MESSAGE("Foe Wynaut was poisoned!");
-            MESSAGE("Foe Wynaut was caught in a Sticky Web!");
+            MESSAGE("The opposing Wynaut was hurt by the spikes!");
+            MESSAGE("Pointed stones dug into the opposing Wynaut!");
+            MESSAGE("The opposing Wynaut was poisoned!");
+            MESSAGE("The opposing Wynaut was caught in a sticky web!");
         }
     }
 }
@@ -98,21 +98,21 @@ DOUBLE_BATTLE_TEST("Court Change used by the player swaps Mist, Safeguard, Auror
         TURN { }
     } SCENE {
         MESSAGE("Wynaut used Snowscape!");
-        MESSAGE("Foe Wobbuffet used Mist!");
-        MESSAGE("Foe Wobbuffet used Safeguard!");
-        MESSAGE("Foe Wobbuffet used Aurora Veil!");
-        MESSAGE("Foe Wobbuffet used Reflect!");
-        MESSAGE("Foe Wobbuffet used Light Screen!");
-        MESSAGE("Foe Wobbuffet used Tailwind!");
+        MESSAGE("The opposing Wobbuffet used Mist!");
+        MESSAGE("The opposing Wobbuffet used Safeguard!");
+        MESSAGE("The opposing Wobbuffet used Aurora Veil!");
+        MESSAGE("The opposing Wobbuffet used Reflect!");
+        MESSAGE("The opposing Wobbuffet used Light Screen!");
+        MESSAGE("The opposing Wobbuffet used Tailwind!");
         MESSAGE("Wynaut used Court Change!");
-        MESSAGE("Wynaut swapped the battle effects affecting each side!");
-        // The effects now end for the player side.
-        MESSAGE("Ally's Mist wore off!");
-        MESSAGE("Ally's party is no longer protected by Safeguard!");
-        MESSAGE("Ally's Reflect wore off!");
-        MESSAGE("Ally's Aurora Veil wore off!");
-        MESSAGE("Your team's tailwind petered out!");
-        MESSAGE("Ally's Light Screen wore off!");
+        MESSAGE("Wynaut swapped the battle effects affecting each side of the field!");
+        // The effects now end for the player side.        
+        MESSAGE("Your team's Mist wore off!");
+        MESSAGE("Your team is no longer protected by Safeguard!");
+        MESSAGE("Your team's Reflect wore off!");
+        MESSAGE("Your team's Aurora Veil wore off!");
+        MESSAGE("Your team's Tailwind petered out!");
+        MESSAGE("Your team's Light Screen wore off!");
     }
 }
 
@@ -141,15 +141,15 @@ DOUBLE_BATTLE_TEST("Court Change used by the opponent swaps Mist, Safeguard, Aur
         MESSAGE("Wobbuffet used Reflect!");
         MESSAGE("Wobbuffet used Light Screen!");
         MESSAGE("Wobbuffet used Tailwind!");
-        MESSAGE("Foe Wynaut used Court Change!");
-        MESSAGE("Foe Wynaut swapped the battle effects affecting each side!");
+        MESSAGE("The opposing Wynaut used Court Change!");
+        MESSAGE("The opposing Wynaut swapped the battle effects affecting each side of the field!");
         // The effects now end for the player side.
-        MESSAGE("Foe's Mist wore off!");
-        MESSAGE("Foe's party is no longer protected by Safeguard!");
-        MESSAGE("Foe's Reflect wore off!");
-        MESSAGE("Foe's Aurora Veil wore off!");
-        MESSAGE("The opposing team's tailwind petered out!");
-        MESSAGE("Foe's Light Screen wore off!");
+        MESSAGE("The opposing team's Mist wore off!");
+        MESSAGE("The opposing team is no longer protected by Safeguard!");
+        MESSAGE("The opposing team's Reflect wore off!");
+        MESSAGE("The opposing team's Aurora Veil wore off!");
+        MESSAGE("The opposing team's Tailwind petered out!");
+        MESSAGE("The opposing team's Light Screen wore off!");
     }
 }
 

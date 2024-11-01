@@ -60,9 +60,9 @@ SINGLE_BATTLE_TEST("Teatime causes the user to consume its Berry, ignoring HP re
     } WHEN {
         TURN { MOVE(opponent, MOVE_TEATIME); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Teatime!");
+        MESSAGE("The opposing Wobbuffet used Teatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
-        MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        MESSAGE("Using Liechi Berry, the Attack of the opposing Wobbuffet rose!");
     }
 }
 
@@ -76,7 +76,7 @@ SINGLE_BATTLE_TEST("Teatime causes other Pokemon to consume their Berry even if 
     } SCENE {
         MESSAGE("Wobbuffet used Teatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
-        MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        MESSAGE("Using Liechi Berry, the Attack of the opposing Wobbuffet rose!");
     }
 }
 
@@ -88,7 +88,7 @@ SINGLE_BATTLE_TEST("Teatime causes other Pokemon to consume their Berry even if 
     } WHEN {
         TURN { MOVE(opponent, MOVE_TEATIME); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Teatime!");
+        MESSAGE("The opposing Wobbuffet used Teatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
         MESSAGE("Using Liechi Berry, the Attack of Wobbuffet rose!");
     }
@@ -113,13 +113,13 @@ DOUBLE_BATTLE_TEST("Teatime causes all Pokémon to consume their berry")
         {
             MESSAGE("Wobbuffet used Teatime!");
         } else {
-            MESSAGE("Foe Wobbuffet used Teatime!");
+            MESSAGE("The opposing Wobbuffet used Teatime!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, user);
         MESSAGE("Using Liechi Berry, the Attack of Wobbuffet rose!");
-        MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        MESSAGE("Using Liechi Berry, the Attack of the opposing Wobbuffet rose!");
         MESSAGE("Using Liechi Berry, the Attack of Wobbuffet rose!");
-        MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        MESSAGE("Using Liechi Berry, the Attack of the opposing Wobbuffet rose!");
     }
 }
 
@@ -151,7 +151,7 @@ SINGLE_BATTLE_TEST("Teatime does not affect Pokémon in the semi-invulnerable tu
         MESSAGE("Wobbuffet used Teatime!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, player);
-            MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+            MESSAGE("Using Liechi Berry, the Attack of the opposing Wobbuffet rose!");
         }
     }
 }
@@ -177,7 +177,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Volt Absorb if it has been affected by Elec
             MOVE(opponent, MOVE_TEATIME);
         }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Teatime!");
+        MESSAGE("The opposing Wobbuffet used Teatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
         if (shouldTriggerAbility)
         {
@@ -188,7 +188,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Volt Absorb if it has been affected by Elec
             NOT ABILITY_POPUP(player, ABILITY_VOLT_ABSORB);
             MESSAGE("Using Liechi Berry, the Attack of Jolteon rose!");
         }
-        MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        MESSAGE("Using Liechi Berry, the Attack of the opposing Wobbuffet rose!");
     }
 }
 
@@ -213,7 +213,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Lightning Rod if it has been affected by El
             MOVE(opponent, MOVE_TEATIME);
         }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Teatime!");
+        MESSAGE("The opposing Wobbuffet used Teatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
         if (shouldTriggerAbility)
         {
@@ -227,7 +227,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Lightning Rod if it has been affected by El
             }
             MESSAGE("Using Liechi Berry, the Attack of Pikachu rose!");
         }
-        MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        MESSAGE("Using Liechi Berry, the Attack of the opposing Wobbuffet rose!");
     }
 }
 
@@ -252,7 +252,7 @@ SINGLE_BATTLE_TEST("Teatime triggers Motor Drive if it has been affected by Elec
             MOVE(opponent, MOVE_TEATIME);
         }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Teatime!");
+        MESSAGE("The opposing Wobbuffet used Teatime!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TEATIME, opponent);
         if (shouldTriggerAbility)
         {
@@ -266,6 +266,6 @@ SINGLE_BATTLE_TEST("Teatime triggers Motor Drive if it has been affected by Elec
             }
             MESSAGE("Using Liechi Berry, the Attack of Electivire rose!");
         }
-        MESSAGE("Using Liechi Berry, the Attack of Foe Wobbuffet rose!");
+        MESSAGE("Using Liechi Berry, the Attack of the opposing Wobbuffet rose!");
     }
 }

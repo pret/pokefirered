@@ -232,7 +232,7 @@ SINGLE_BATTLE_TEST("Powder doesn't prevent a Fire move from thawing its user out
         TURN { MOVE(opponent, MOVE_POWDER); MOVE(player, MOVE_FLAME_WHEEL); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_POWDER, opponent);
-        MESSAGE("Wobbuffet was defrosted by Flame Wheel!");
+        MESSAGE("Wobbuffet's Flame Wheel melted the ice!");
         STATUS_ICON(player, none: TRUE);
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAME_WHEEL, player);

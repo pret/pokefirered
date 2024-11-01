@@ -23,8 +23,8 @@ SINGLE_BATTLE_TEST("Freeze is thawed by opponent's Fire-type attacks")
     } WHEN {
         TURN { MOVE(opponent, MOVE_EMBER); MOVE(player, MOVE_CELEBRATE); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Ember!");
-        MESSAGE("Wobbuffet was defrosted!");
+        MESSAGE("The opposing Wobbuffet used Ember!");
+        MESSAGE("Wobbuffet thawed out!");
         STATUS_ICON(player, none: TRUE);
     }
 }
@@ -38,7 +38,7 @@ SINGLE_BATTLE_TEST("Freeze is thawed by user's Flame Wheel")
     } WHEN {
         TURN { MOVE(player, MOVE_FLAME_WHEEL); }
     } SCENE {
-        MESSAGE("Wobbuffet was defrosted by Flame Wheel!");
+        MESSAGE("Wobbuffet's Flame Wheel melted the ice!");
         STATUS_ICON(player, none: TRUE);
         MESSAGE("Wobbuffet used Flame Wheel!");
     }

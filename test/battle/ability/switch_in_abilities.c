@@ -101,8 +101,8 @@ DOUBLE_BATTLE_TEST("Switch-in abilities trigger in Speed Order after post-KO swi
         PLAYER(SPECIES_GYARADOS) { Speed(spdPlayer2); Ability(ABILITY_INTIMIDATE); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(1); }
-        OPPONENT(SPECIES_WEEZING_GALARIAN) { Speed(spdOpponent1); Ability(ABILITY_MISTY_SURGE); }
-        OPPONENT(SPECIES_VULPIX_ALOLAN) { Speed(spdOpponent2); Ability(ABILITY_SNOW_WARNING); }
+        OPPONENT(SPECIES_WEEZING_GALAR) { Speed(spdOpponent1); Ability(ABILITY_MISTY_SURGE); }
+        OPPONENT(SPECIES_VULPIX_ALOLA) { Speed(spdOpponent2); Ability(ABILITY_SNOW_WARNING); }
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_EXPLOSION); SEND_OUT(playerLeft, 2); SEND_OUT(opponentLeft, 2); SEND_OUT(playerRight, 3); SEND_OUT(opponentRight, 3); }
         TURN { ; }

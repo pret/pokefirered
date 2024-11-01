@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Upper Hand succeeds if the target is using a priority attack
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_UPPER_HAND, player);
         HP_BAR(opponent);
-        MESSAGE("Foe Wobbuffet flinched!");
+        MESSAGE("The opposing Wobbuffet flinched and couldn't move!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EXTREME_SPEED, opponent);
     }
 }
@@ -75,7 +75,7 @@ SINGLE_BATTLE_TEST("Upper Hand succeeds if the target's move is boosted in prior
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_UPPER_HAND, player);
         HP_BAR(opponent);
-        MESSAGE("Foe Comfey flinched!");
+        MESSAGE("The opposing Comfey flinched and couldn't move!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAINING_KISS, opponent);
     }
 }

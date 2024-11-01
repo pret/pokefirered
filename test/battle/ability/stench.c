@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Stench has a 10% chance to flinch")
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet flinched!");
+        MESSAGE("The opposing Wobbuffet flinched and couldn't move!");
     }
 }
 
@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Stench does not stack with King's Rock")
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet flinched!");
+        MESSAGE("The opposing Wobbuffet flinched and couldn't move!");
     }
 }
 
@@ -51,7 +51,7 @@ DOUBLE_BATTLE_TEST("Stench only triggers if target takes damage")
             MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
         }
     } SCENE {
-        NONE_OF { MESSAGE("Wynaut flinched!"); }
+        NONE_OF { MESSAGE("Wynaut flinched and couldn't move!"); }
     }
 }
 
@@ -72,9 +72,9 @@ DOUBLE_BATTLE_TEST("Stench doesn't trigger if partner uses a move")
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, playerLeft);
-        MESSAGE("Foe Grimer flinched!");
+        MESSAGE("The opposing Grimer flinched and couldn't move!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentRight);
-        NOT MESSAGE("Wynaut flinched!");
+        NOT MESSAGE("Wynaut flinched and couldn't move!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
     }
 }

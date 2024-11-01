@@ -16,13 +16,13 @@ SINGLE_BATTLE_TEST("Primordial Sea blocks damaging Fire-type moves")
         TURN { MOVE(opponent, MOVE_EMBER); }
         TURN { MOVE(opponent, MOVE_EMBER); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Ember!");
+        MESSAGE("The opposing Wobbuffet used Ember!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponent);
-        MESSAGE("The Fire-type attack fizzled out\nin the heavy rain!");
+        MESSAGE("The Fire-type attack fizzled out in the heavy rain!");
         NOT HP_BAR(player);
-        MESSAGE("Foe Wobbuffet used Ember!");
+        MESSAGE("The opposing Wobbuffet used Ember!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponent);
-        MESSAGE("The Fire-type attack fizzled out\nin the heavy rain!");
+        MESSAGE("The Fire-type attack fizzled out in the heavy rain!");
         NOT HP_BAR(player);
     } THEN {
         EXPECT_EQ(player->hp, player->maxHP);
@@ -42,10 +42,10 @@ DOUBLE_BATTLE_TEST("Primordial Sea blocks damaging Fire-type moves and prints th
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_ERUPTION); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Eruption!");
+        MESSAGE("The opposing Wobbuffet used Eruption!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ERUPTION, opponentLeft);
-        MESSAGE("The Fire-type attack fizzled out\nin the heavy rain!");
-        NOT MESSAGE("The Fire-type attack fizzled out\nin the heavy rain!");
+        MESSAGE("The Fire-type attack fizzled out in the heavy rain!");
+        NOT MESSAGE("The Fire-type attack fizzled out in the heavy rain!");
     } THEN {
         EXPECT_EQ(playerLeft->hp, playerLeft->maxHP);
         EXPECT_EQ(playerRight->hp, playerRight->maxHP);
@@ -60,7 +60,7 @@ SINGLE_BATTLE_TEST("Primordial Sea does not block a move if pokemon is asleep an
     } WHEN {
         TURN { MOVE(opponent, MOVE_EMBER); }
     } SCENE {
-        NOT MESSAGE("The Fire-type attack fizzled out\nin the heavy rain!");
-        MESSAGE("Foe Wobbuffet is fast asleep.");
+        NOT MESSAGE("The Fire-type attack fizzled out in the heavy rain!");
+        MESSAGE("The opposing Wobbuffet is fast asleep.");
     }
 }

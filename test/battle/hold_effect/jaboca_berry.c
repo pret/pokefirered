@@ -27,11 +27,11 @@ SINGLE_BATTLE_TEST("Jaboca Berry causes the attacker to lose 1/8 of its max HP i
         if (move == MOVE_TACKLE) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
             HP_BAR(player, captureDamage: &damage);
-            MESSAGE("Wobbuffet was hurt by Foe Wobbuffet's Jaboca Berry!");
+            MESSAGE("Wobbuffet was hurt by the opposing Wobbuffet's Jaboca Berry!");
         } else {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
-                MESSAGE("Wobbuffet was hurt by Foe Wobbuffet's Jaboca Berry!");
+                MESSAGE("Wobbuffet was hurt by the opposing Wobbuffet's Jaboca Berry!");
             }
         }
     } THEN {
@@ -54,7 +54,7 @@ SINGLE_BATTLE_TEST("Jaboca Berry tirggers before Bug Bite can steal it")
         HP_BAR(opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
         HP_BAR(player);
-        MESSAGE("Wyanut was hurt by Foe Wobbuffet's Jaboca Berry!");
-        NOT MESSAGE("Wynaut stole and ate Foe Wobbuffet's Jaboca Berry!");
+        MESSAGE("Wyanut was hurt by the opposing Wobbuffet's Jaboca Berry!");
+        NOT MESSAGE("Wynaut stole and ate the opposing its target's Jaboca Berry!");
     }
 }

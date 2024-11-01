@@ -478,9 +478,6 @@ static void OpponentHandleChooseMove(u32 battler)
         case AI_CHOICE_FLEE:
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_RUN, 0);
             break;
-        case AI_CHOICE_SWITCH:
-            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, 0xFFFF);
-            break;
         case 6:
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 15, gBattlerTarget);
             break;
@@ -492,7 +489,7 @@ static void OpponentHandleChooseMove(u32 battler)
                 if (GetBattlerMoveTargetType(battler, chosenMove) & MOVE_TARGET_BOTH)
                 {
                     gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-                    if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
+                    if (gAbsentBattlerFlags & (1u << gBattlerTarget))
                         gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
                 }
                 // If opponent can and should use a gimmick (considering trainer data), do it
@@ -523,7 +520,7 @@ static void OpponentHandleChooseMove(u32 battler)
 
         if (GetBattlerMoveTargetType(battler, move) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (battler << 8));
-        else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        else if (IsDoubleBattle())
         {
             do {
                 target = GetBattlerAtPosition(Random() & 2);

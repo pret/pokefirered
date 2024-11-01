@@ -194,6 +194,8 @@
 #define SHADOW_SIZE_L   2
 #define SHADOW_SIZE_XL  3
 
+#define SHADOW_SIZE_XL_BATTLE_ONLY  SHADOW_SIZE_XL    // Battle-only definition for XL shadow size.
+
 #define F_INANIMATE                        (1 << 6)
 #define F_DISABLE_REFLECTION_PALETTE_LOAD  (1 << 7)
 

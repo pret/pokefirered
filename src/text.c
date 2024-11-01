@@ -12,6 +12,7 @@
 #include "quest_log.h"
 #include "sound.h"
 #include "string_util.h"
+#include "strings.h"
 #include "text.h"
 #include "window.h"
 #include "constants/songs.h"
@@ -1237,6 +1238,16 @@ u32 (*GetFontWidthFunc(u8 glyphId))(u16 _glyphId, bool32 _isJapanese)
     return NULL;
 }
 
+s32 GetGlyphWidth(u16 glyphId, bool32 isJapanese, u8 fontId)
+{
+    u32 (*func)(u16 fontId, bool32 isJapanese);
+
+    func = GetFontWidthFunc(fontId);
+    if (func == NULL)
+        return 0;
+    return func(glyphId, isJapanese);
+}
+
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
     bool8 isJapanese;
@@ -1396,6 +1407,28 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     if (lineWidth > width)
         return lineWidth;
     return width;
+}
+
+s32 GetStringLineWidth(u8 fontId, const u8 *str, s16 letterSpacing, u32 lineNum, u32 strSize)
+{
+    u32 strWidth = 0, strLen, currLine;
+    u8 strCopy[strSize];
+
+    for (currLine = 1; currLine <= lineNum; currLine++)
+    {
+        strWidth = GetStringWidth(fontId, str, letterSpacing);
+        strLen = StringLineLength(str);
+        memset(strCopy, EOS, strSize);
+        if (currLine == lineNum && strLen != 0)
+        {
+            StringCopyN(strCopy, str, strLen);
+            strWidth = GetStringWidth(fontId, strCopy, letterSpacing);
+            strLen = StringLineLength(strCopy);
+            StringAppend(strCopy, gText_EmptyString3);
+        }
+        str += strLen + 1;
+    }
+    return strWidth;
 }
 
 u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)

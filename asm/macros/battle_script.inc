@@ -1351,7 +1351,6 @@
 	.4byte \func
 	.endm
 
-@ callnative macros
 	.macro savetarget
 	callnative BS_SaveTarget
 	.endm
@@ -1725,6 +1724,19 @@
 	callnative BS_JumpIfBlockedBySoundproof
 	.byte \battler
 	.4byte \failInstr
+	.endm
+
+	.macro jumpifcommanderactive jumpInstr:req
+	callnative BS_JumpIfCommanderActive
+	.4byte \jumpInstr
+	.endm
+
+	.macro checkpokeflute
+	callnative BS_CheckPokeFlute
+	.endm
+
+	.macro waitfanfare
+	callnative BS_WaitFanfare
 	.endm
 
 @ various command changed to more readable macros
@@ -2320,14 +2332,6 @@
 @ various remaining from pokefirered
 	.macro getbattlersforrecall
 	various BS_ATTACKER, VARIOUS_GET_BATTLERS_FOR_RECALL
-	.endm
-
-	.macro checkpokeflute battler:req
-	various \battler, VARIOUS_CHECK_POKEFLUTE
-	.endm
-
-	.macro waitfanfare battler:req
-	various \battler, VARIOUS_WAIT_FANFARE
 	.endm
 
 @ helpful macros

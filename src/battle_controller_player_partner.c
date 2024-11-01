@@ -342,35 +342,29 @@ static void PlayerPartnerHandleChooseMove(u32 battler)
     chosenMoveId = gBattleStruct->aiMoveOrAction[battler];
     gBattlerTarget = gBattleStruct->aiChosenTarget[battler];
 
-    if (chosenMoveId == AI_CHOICE_SWITCH)
+    if (gMovesInfo[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
+        gBattlerTarget = battler;
+    else if (gMovesInfo[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
     {
-        BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, 0xFFFF);
+        gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        if (gAbsentBattlerFlags & (1u << gBattlerTarget))
+            gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+    }
+    // If partner can and should use a gimmick (considering trainer data), do it
+    if (gBattleStruct->gimmick.usableGimmick[battler] != GIMMICK_NONE
+        && !(gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_Z_MOVE
+        && !ShouldUseZMove(battler, gBattlerTarget, moveInfo->moves[chosenMoveId])))
+    {
+        BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_GIMMICK) | (gBattlerTarget << 8));
     }
     else
     {
-        if (gMovesInfo[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
-            gBattlerTarget = battler;
-        if (gMovesInfo[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
-        {
-            gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
-                gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        }
-        // If partner can and should use a gimmick (considering trainer data), do it
-        if (gBattleStruct->gimmick.usableGimmick[battler] != GIMMICK_NONE
-         && !(gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_Z_MOVE
-         && !ShouldUseZMove(battler, gBattlerTarget, moveInfo->moves[chosenMoveId])))
-        {
-            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_GIMMICK) | (gBattlerTarget << 8));
-        }
-        else
-        {
-            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
-        }
+        BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
     }
 
     PlayerPartnerBufferExecCompleted(battler);
 }
+
 
 static void PlayerPartnerHandleChoosePokemon(u32 battler)
 {

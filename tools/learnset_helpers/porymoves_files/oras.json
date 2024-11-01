@@ -88631,7 +88631,7 @@
       "MOVE_ZEN_HEADBUTT"
     ]
   },
-  "MEOWSTIC_MALE": {
+  "MEOWSTIC_M": {
     "LevelMoves": [
       {
         "Level": 1,
@@ -94735,7 +94735,7 @@
       "MOVE_ZEN_HEADBUTT"
     ]
   },
-  "WORMADAM_SANDY_CLOAK": {
+  "WORMADAM_SANDY": {
     "LevelMoves": [
       {
         "Level": 1,
@@ -94840,7 +94840,7 @@
       "MOVE_UPROAR"
     ]
   },
-  "WORMADAM_TRASH_CLOAK": {
+  "WORMADAM_TRASH": {
     "LevelMoves": [
       {
         "Level": 1,
@@ -95859,7 +95859,7 @@
       "MOVE_ZEN_HEADBUTT"
     ]
   },
-  "FLOETTE_ETERNAL_FLOWER": {
+  "FLOETTE_ETERNAL": {
     "LevelMoves": [
       {
         "Level": 1,
@@ -95967,7 +95967,7 @@
       "MOVE_WORRY_SEED"
     ]
   },
-  "MEOWSTIC_FEMALE": {
+  "MEOWSTIC_F": {
     "LevelMoves": [
       {
         "Level": 1,

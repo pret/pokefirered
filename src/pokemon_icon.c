@@ -229,9 +229,12 @@ const u8 *GetMonIconTiles(u16 species, u32 personality)
     if (species > NUM_SPECIES)
         species = SPECIES_NONE;
 
+#if P_GENDER_DIFFERENCES
     if (gSpeciesInfo[species].iconSpriteFemale != NULL && IsPersonalityFemale(species, personality))
         iconSprite = gSpeciesInfo[species].iconSpriteFemale;
-    else if (gSpeciesInfo[species].iconSprite != NULL)
+    else
+#endif
+    if (gSpeciesInfo[species].iconSprite != NULL)
         iconSprite = gSpeciesInfo[species].iconSprite;
     else
         iconSprite = gSpeciesInfo[SPECIES_NONE].iconSprite;
@@ -278,9 +281,11 @@ void LoadMonIconPalettePersonality(u16 species, u32 personality)
 {
     u8 palIndex;
     species = SanitizeSpeciesId(species);
+#if P_GENDER_DIFFERENCES
     if (gSpeciesInfo[species].iconSpriteFemale != NULL && IsPersonalityFemale(species, personality))
         palIndex = gSpeciesInfo[species].iconPalIndexFemale;
     else
+#endif
         palIndex = gSpeciesInfo[species].iconPalIndex;
     if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == 0xFF)
         LoadSpritePalette(&gMonIconPaletteTable[palIndex]);

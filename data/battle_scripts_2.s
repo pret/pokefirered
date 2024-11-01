@@ -31,25 +31,6 @@ BattleScript_GhostBallDodge::
 	waitmessage B_WAIT_TIME_LONG
 	finishaction
 
-BattleScript_UsePokeFlute::
-	checkpokeflute BS_ATTACKER
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 1, BattleScript_PokeFluteWakeUp
-	printstring STRINGID_POKEFLUTECATCHY
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_PokeFluteEnd
-
-BattleScript_PokeFluteWakeUp::
-	printstring STRINGID_POKEFLUTE
-	waitmessage B_WAIT_TIME_LONG
-	fanfare MUS_POKE_FLUTE
-	waitfanfare BS_ATTACKER
-	printstring STRINGID_MONHEARINGFLUTEAWOKE
-	waitmessage B_WAIT_TIME_LONG
-	updatestatusicon BS_PLAYER2
-	waitstate
-BattleScript_PokeFluteEnd::
-	finishaction
-
 @ pokemerald 	
 	.align 2
 gBattlescriptsForUsingItem::
@@ -64,6 +45,7 @@ gBattlescriptsForUsingItem::
 	.4byte BattleScript_ItemRestoreHP                @ EFFECT_ITEM_REVIVE
 	.4byte BattleScript_ItemRestorePP                @ EFFECT_ITEM_RESTORE_PP
 	.4byte BattleScript_ItemIncreaseAllStats         @ EFFECT_ITEM_INCREASE_ALL_STATS
+	.4byte BattleScript_UsePokeFlute                 @ EFFECT_ITEM_USE_POKE_FLUTE
 
 	.align 2
 gBattlescriptsForSafariActions::
@@ -113,7 +95,7 @@ BattleScript_UseItemMessage:
 	printfromtable gTrainerUsedItemStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
-	
+
 BattleScript_ItemRestoreHPRet:
 	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
@@ -178,6 +160,25 @@ BattleScript_ItemIncreaseStat::
 	waitmessage B_WAIT_TIME_LONG
 	end
 
+BattleScript_UsePokeFlute::
+	checkpokeflute
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 1, BattleScript_PokeFluteWakeUp
+	printstring STRINGID_POKEFLUTECATCHY
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_PokeFluteEnd
+
+BattleScript_PokeFluteWakeUp::
+	printstring STRINGID_POKEFLUTE
+	waitmessage B_WAIT_TIME_LONG
+	fanfare MUS_POKE_FLUTE
+	waitfanfare
+	printstring STRINGID_MONHEARINGFLUTEAWOKE
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_PLAYER2
+	waitstate
+BattleScript_PokeFluteEnd::
+	finishaction
+
 BattleScript_ItemSetMist::
 	call BattleScript_UseItemMessage
 	setmist
@@ -232,7 +233,6 @@ BattleScript_SafariBallThrow::
 BattleScript_SuccessBallThrow::
 	setbyte sMON_CAUGHT, TRUE
 	incrementgamestat GAME_STAT_POKEMON_CAPTURES
-BattleScript_PrintCaughtMonInfo::
 	printstring STRINGID_GOTCHAPKMNCAUGHTPLAYER
 	jumpifbyte CMP_NOT_EQUAL, sEXP_CATCH, TRUE, BattleScript_TryPrintCaughtMonInfo
 	setbyte sGIVEEXP_STATE, 0
@@ -291,10 +291,10 @@ BattleScript_RunByUsingItem::
 
 BattleScript_TrainerASlideMsgRet::
 	handletrainerslidemsg BS_SCRIPTING, 0
-	trainerslidein B_POSITION_OPPONENT_LEFT
+	trainerslidein BS_OPPONENT1
 	handletrainerslidemsg BS_SCRIPTING, 1
 	waitstate
-	trainerslideout B_POSITION_OPPONENT_LEFT
+	trainerslideout BS_OPPONENT1
 	waitstate
 	handletrainerslidemsg BS_SCRIPTING, 2
 	return
@@ -305,10 +305,10 @@ BattleScript_TrainerASlideMsgEnd2::
 
 BattleScript_TrainerBSlideMsgRet::
 	handletrainerslidemsg BS_SCRIPTING, 0
-	trainerslidein B_POSITION_OPPONENT_RIGHT
+	trainerslidein BS_OPPONENT2
 	handletrainerslidemsg BS_SCRIPTING, 1
 	waitstate
-	trainerslideout B_POSITION_OPPONENT_RIGHT
+	trainerslideout BS_OPPONENT2
 	waitstate
 	handletrainerslidemsg BS_SCRIPTING, 2
 	return

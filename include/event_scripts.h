@@ -1208,6 +1208,8 @@ extern const u8 Text_MonSentToBoxInSomeonesPC[];
 extern const u8 Text_MonSentToBoxInBillsPC[];
 extern const u8 Text_MonSentToBoxSomeonesBoxFull[];
 extern const u8 Text_MonSentToBoxBillsBoxFull[];
+extern const u8 gText_PkmnTransferredLanettesPCBoxFull[];
+extern const u8 gText_PkmnTransferredLanettesPC[];
 
 extern const u8 EventScript_BagItemCanBeRegistered[];
 

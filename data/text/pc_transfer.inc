@@ -22,6 +22,18 @@ Text_MonSentToBoxBillsBoxFull::
     .string "{STR_VAR_2} was transferred to\n"
     .string "BOX “{STR_VAR_1}.”$"
 
+gText_PkmnTransferredLanettesPC::
+	.string "{STR_VAR_2} was transferred to\n"
+	.string "LANETTE'S PC.\p"
+	.string "It was placed in \n"
+	.string "BOX “{STR_VAR_1}.”$"
+
+gText_PkmnTransferredLanettesPCBoxFull::
+	.string "BOX “{STR_VAR_3}” on\n"
+	.string "LANETTE'S PC was full.\p"
+	.string "{STR_VAR_2} was transferred to\n"
+	.string "BOX “{STR_VAR_1}.”$"
+
 Text_PlayerObtainedTheMon::
     .string "{PLAYER} obtained\n"
     .string "the {STR_VAR_1}!$"

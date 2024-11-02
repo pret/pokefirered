@@ -259,7 +259,7 @@ static const u8 sText_XFoundOneY[] = _("{B_ATK_NAME_WITH_PREFIX} found\none {B_L
 static const u8 sText_SoothingAroma[] = _("A soothing aroma wafted\nthrough the area!");
 static const u8 sText_ItemsCantBeUsedNow[] = _("Items can't be used now.{PAUSE 64}");
 static const u8 sText_ForXCommaYZ[] = _("For {B_SCR_ACTIVE_NAME_WITH_PREFIX},\n{B_LAST_ITEM} {B_BUFF1}");
-static const u8 sText_PkmnUsedXToGetPumped[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} used\n{B_LAST_ITEM} to get pumped!");
+static const u8 sText_PkmnUsedXToGetPumped[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} used the {B_LAST_ITEM} to get pumped!");
 static const u8 sText_PkmnLostFocus[] = _("{B_ATK_NAME_WITH_PREFIX} lost its\nfocus and couldn't move!");
 static const u8 sText_PkmnWasDraggedOut[] = _("{B_DEF_NAME_WITH_PREFIX} was\ndragged out!\p");
 static const u8 sText_TheWallShattered[] = _("The wall shattered!");
@@ -383,7 +383,7 @@ static const u8 sText_PkmnLoafing[] = _("{B_ATK_NAME_WITH_PREFIX} is\nloafing ar
 static const u8 sText_PkmnWontObey[] = _("{B_ATK_NAME_WITH_PREFIX} won't\nobey!");
 static const u8 sText_PkmnTurnedAway[] = _("{B_ATK_NAME_WITH_PREFIX} turned away!");
 static const u8 sText_PkmnPretendNotNotice[] = _("{B_ATK_NAME_WITH_PREFIX} pretended\nnot to notice!");
-static const u8 sText_EnemyAboutToSwitchPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} is\nabout to use {B_BUFF2}.\pWill {B_PLAYER_NAME} change\nPOKéMON?");
+static const u8 sText_EnemyAboutToSwitchPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} is about to send out {B_BUFF2}.\pWill you switch your Pokémon?");
 static const u8 sText_PkmnLearnedMove2[] = _("{B_ATK_NAME_WITH_PREFIX} learned\n{B_BUFF1}!");
 static const u8 sText_PlayerDefeatedLinkTrainerTrainer1[] = _("Player defeated\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!\p");
 static const u8 sText_CreptCloser[] = _("{B_PLAYER_NAME} crept closer to\n{B_OPPONENT_MON1_NAME}!");
@@ -413,14 +413,14 @@ static const u8 sText_LinkTrainerMultiSentOutPkmn[] = _("{B_LINK_SCR_TRAINER_NAM
 static const u8 sText_GoPkmn[] = _("Go! {B_PLAYER_MON1_NAME}!");
 static const u8 sText_GoTwoPkmn[] = _("Go! {B_PLAYER_MON1_NAME} and\n{B_PLAYER_MON2_NAME}!");
 static const u8 sText_GoPkmn2[] = _("Go! {B_BUFF1}!");
-static const u8 sText_DoItPkmn[] = _("Do it! {B_BUFF1}!");
+static const u8 sText_DoItPkmn[] = _("You're in charge, {B_BUFF1}!");
 static const u8 sText_GoForItPkmn[] = _("Go for it, {B_BUFF1}!");
-static const u8 sText_YourFoesWeakGetEmPkmn[] = _("Your foe's weak!\nGet 'em, {B_BUFF1}!");
+static const u8 sText_YourFoesWeakGetEmPkmn[] = _("Your opponent's weak! Get 'em, {B_BUFF1}!");
 static const u8 sText_LinkPartnerSentOutPkmnGoPkmn[] = _("{B_LINK_PARTNER_NAME} sent out {B_LINK_PLAYER_MON2_NAME}!\nGo! {B_LINK_PLAYER_MON1_NAME}!");
-static const u8 sText_PkmnThatsEnough[] = _("{B_BUFF1}, that's enough!\nCome back!");
+static const u8 sText_PkmnThatsEnough[] = _("{B_BUFF1}, that's enough! Come back!");
 static const u8 sText_PkmnComeBack[] = _("{B_BUFF1}, come back!");
-static const u8 sText_PkmnOkComeBack[] = _("{B_BUFF1}, OK!\nCome back!");
-static const u8 sText_PkmnGoodComeBack[] = _("{B_BUFF1}, good!\nCome back!");
+static const u8 sText_PkmnOkComeBack[] = _("OK, {B_BUFF1}! Come back!");
+static const u8 sText_PkmnGoodComeBack[] = _("Good job, {B_BUFF1}! Come back!");
 static const u8 sText_Trainer1WithdrewPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwithdrew {B_BUFF1}!");
 static const u8 sText_LinkTrainer1WithdrewPkmn[] = _("{B_LINK_OPPONENT1_NAME} withdrew\n{B_BUFF1}!");
 static const u8 sText_LinkTrainer2WithdrewPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} withdrew\n{B_BUFF1}!");
@@ -2938,7 +2938,9 @@ static const u8 *BattleStringGetOpponentClassByTrainerId(u16 trainerId)
 {
     const u8 *toCpy;
 
-    if (trainerId == TRAINER_UNION_ROOM)
+    if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
+        toCpy = gTrainerClasses[GetSecretBaseTrainerNameIndex()].name;
+    else if (trainerId == TRAINER_UNION_ROOM)
         toCpy = gTrainerClasses[GetUnionRoomTrainerClass()].name;
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         toCpy = gTrainerClasses[GetBattleTowerTrainerClassNameId()].name;
@@ -3198,18 +3200,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 toCpy = gAbilitiesInfo[sBattlerAbilities[gEffectBattler]].name;
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name
-                if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
-                    toCpy = gTrainerClasses[GetSecretBaseTrainerNameIndex()].name;
-                else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-                    toCpy = gTrainerClasses[GetUnionRoomTrainerClass()].name;
-                else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-                    toCpy = gTrainerClasses[GetBattleTowerTrainerClassNameId()].name;
-                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
-                    toCpy = gTrainerClasses[GetTrainerTowerOpponentClass()].name;
-                else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-                    toCpy = gTrainerClasses[GetEreaderTrainerClassId()].name;
-                else
-                    toCpy = gTrainerClasses[gTrainers[gTrainerBattleOpponent_A].trainerClass].name;
+                toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
                 break;
             case B_TXT_TRAINER1_NAME: // trainer1 name
                 toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_A, text, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
@@ -3475,7 +3466,7 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 {
     u32 srcID = 1;
     u32 value = 0;
-    u8 nickname[POKEMON_NAME_LENGTH + 2];
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
     u16 hword;
 
     *dst = EOS;

@@ -72,9 +72,6 @@ endif
 
 CPP := $(PREFIX)cpp
 
-ARMCC := $(PREFIX)gcc
-PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
-
 ROM_NAME := $(FILE_NAME).gba
 OBJ_DIR_NAME := $(BUILD_DIR)/$(BUILD_NAME)
 OBJ_DIR_NAME_TEST := $(BUILD_DIR)/$(BUILD_NAME)-test
@@ -82,8 +79,8 @@ OBJ_DIR_NAME_DEBUG := $(BUILD_DIR)/$(BUILD_NAME)-debug
 
 ELF_NAME := $(ROM_NAME:.gba=.elf)
 MAP_NAME := $(ROM_NAME:.gba=.map)
-TESTELF = $(ROM:.gba=-test.elf)
-HEADLESSELF = $(ROM:.gba=-test-headless.elf)
+TESTELF = $(ROM_NAME:.gba=-test.elf)
+HEADLESSELF = $(ROM_NAME:.gba=-test-headless.elf)
 
 # Pick our active variables
 ROM := $(ROM_NAME)
@@ -103,7 +100,6 @@ MAP := $(ROM:.gba=.map)
 SYM := $(ROM:.gba=.sym)
 
 # Commonly used directories
-
 C_SUBDIR = src
 ASM_SUBDIR = asm
 DATA_SRC_SUBDIR = src/data
@@ -111,7 +107,6 @@ DATA_ASM_SUBDIR = data
 SONG_SUBDIR = sound/songs
 MID_SUBDIR = sound/songs/midi
 TEST_SUBDIR = test
-# CRY_SUBDIR = sound/direct_sound_samples/cries
 
 C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
@@ -120,7 +115,7 @@ SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 TEST_BUILDDIR = $(OBJ_DIR)/$(TEST_SUBDIR)
 
-SHELL := /bin/bash -o pipefail
+SHELL := bash -o pipefail
 
 # Set flags for tools
 ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=1 --defsym $(GAME_VERSION)=1
@@ -329,8 +324,8 @@ tidydebug:
 
 # Other rules
 include graphics_file_rules.mk
-include tileset_rules.mk
 include map_data_rules.mk
+include tileset_rules.mk
 include spritesheet_rules.mk
 include json_data_rules.mk
 include audio_rules.mk

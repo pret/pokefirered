@@ -1267,16 +1267,13 @@ static void Task_InputHandler_Info(u8 taskId)
             {
                 sMonSummaryScreen->state3270 = PSS_STATE3270_ATEXIT_FADEOUT;
             }
-#if DEBUG_POKEMON_SPRITE_VISUALIZER == TRUE
-            else if (JOY_NEW(SELECT_BUTTON) && !gMain.inBattle)
+            else if (DEBUG_POKEMON_SPRITE_VISUALIZER && JOY_NEW(SELECT_BUTTON) && !gMain.inBattle)
             {
                 sMonSummaryScreen->savedCallback = CB2_Pokemon_Sprite_Visualizer;
                 // StopPokemonAnimations();
                 PlaySE(SE_SELECT);
-                // CloseSummaryScreen(taskId);
                 sMonSummaryScreen->state3270 = PSS_STATE3270_ATEXIT_FADEOUT;
             }
-#endif
         }
         break;
     case PSS_STATE3270_FLIPPAGES:

@@ -1,4 +1,3 @@
-.if DEBUG_OVERWORLD_MENU == TRUE
 Debug_MessageEnd:
 	waitmessage
 	waitbuttonpress
@@ -418,5 +417,3 @@ Debug_EventScript_InflictStatus1_Text_Freeze:
 
 Debug_EventScript_InflictStatus1_Text_Frostbite:
 	.string "Frostbite$"
-
-.endif

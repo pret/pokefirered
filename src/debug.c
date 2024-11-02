@@ -70,7 +70,6 @@
 #include "constants/weather.h"
 #include "save.h"
 
-#if DEBUG_OVERWORLD_MENU == TRUE
 // *******************************
 enum DebugMenu
 {
@@ -4449,5 +4448,3 @@ static void DebugAction_Party_ClearParty(u8 taskId)
     ScriptContext_Enable();
     Debug_DestroyMenu_Full(taskId);
 }
-
-#endif //DEBUG_OVERWORLD_MENU == TRUE

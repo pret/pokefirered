@@ -2947,7 +2947,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
     // This buffer may hold either the name of a trainer, Pokémon, or item.
     u8 text[max(max(max(32, TRAINER_NAME_LENGTH + 1), POKEMON_NAME_LENGTH + 1), ITEM_NAME_LENGTH)];
     u8 multiplayerId;
-    u8 fontId = FONT_SMALL;
+    u8 fontId = FONT_NORMAL;
     s16 letterSpacing = 0;
     u32 lineNum = 1;
 
@@ -3582,7 +3582,7 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
     [B_WIN_MSG] = {
         .fillValue = PIXEL_FILL(0xf),
-        .fontId = FONT_SMALL,
+        .fontId = FONT_NORMAL,
         .x = 2,
         .y = 2,
         .letterSpacing = 0,
@@ -3922,7 +3922,6 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     else {
         printerTemplate.fontId = sTextOnWindowsInfo_Normal[windowId].fontId;
     }
-    DebugPrintfLevel(MGBA_LOG_ERROR, "windowId = %u, fontId = %u", printerTemplate.fontId);
     switch (windowId)
     {
     case B_WIN_VS_PLAYER:

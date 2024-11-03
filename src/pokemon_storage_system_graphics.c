@@ -9,6 +9,8 @@
 #include "task.h"
 #include "trig.h"
 
+#define GENDER_MASK 0x7FFF
+
 static void SpriteCB_BoxMonIconScrollOut(struct Sprite *sprite);
 static void SetBoxSpeciesAndPersonalities(u8 boxId);
 static void MovePartySpriteToNextSlot(struct Sprite *sprite, u16 idx);
@@ -967,7 +969,8 @@ static u16 TryLoadMonIconTiles(u16 species, u32 personality)
     gStorage->iconSpeciesList[i] = species;
     gStorage->numIconsPerSpecies[i]++;
     offset = 16 * i;
-    CpuCopy32(GetMonIconTiles(species, personality), (void *)(OBJ_VRAM0) + offset * 32, 0x200);
+    species &= GENDER_MASK;
+    CpuCopy32(GetMonIconTiles(species, personality), (void *)(OBJ_VRAM0) + offset * TILE_SIZE_4BPP, 0x200);
 
     return offset;
 }
@@ -975,10 +978,20 @@ static u16 TryLoadMonIconTiles(u16 species, u32 personality)
 static void RemoveSpeciesFromIconList(u16 species)
 {
     u16 i;
+    bool8 hasFemale = FALSE;
 
     for (i = 0; i < MAX_MON_ICONS; i++)
     {
-        if (gStorage->iconSpeciesList[i] == species)
+        if (gStorage->iconSpeciesList[i] == (species | 0x8000))
+        {
+            hasFemale = TRUE;
+            break;
+        }
+    }
+
+    for (i = 0; i < MAX_MON_ICONS; i++)
+    {
+        if (gStorage->iconSpeciesList[i] == species && !hasFemale)
         {
             if (--gStorage->numIconsPerSpecies[i] == 0)
                 gStorage->iconSpeciesList[i] = SPECIES_NONE;

@@ -157,14 +157,14 @@ u8 CreateMonIconNoPersonality(u16 species, SpriteCallback callback, s16 x, s16 y
 {
     u8 spriteId;
     struct MonIconSpriteTemplate iconTemplate =
-        {
-            .oam = &sMonIconOamData,
-            .image = NULL,
-            .anims = sMonIconAnims,
-            .affineAnims = sMonIconAffineAnims,
-            .callback = callback,
-            .paletteTag = POKE_ICON_BASE_PAL_TAG + gSpeciesInfo[species].iconPalIndex,
-        };
+    {
+        .oam = &sMonIconOamData,
+        .image = NULL,
+        .anims = sMonIconAnims,
+        .affineAnims = sMonIconAffineAnims,
+        .callback = callback,
+        .paletteTag = POKE_ICON_BASE_PAL_TAG + gSpeciesInfo[species].iconPalIndex,
+    };
 
     iconTemplate.image = GetMonIconTiles(species, 0);
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);

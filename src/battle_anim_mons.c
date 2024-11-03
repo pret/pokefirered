@@ -1852,10 +1852,9 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
 {
     u16 species;
     u32 personality;
-    u16 letter;
-    u16 unownSpecies;
     s32 ret;
-    u8 coordsSize, yOffset;
+    u8 size;
+    u8 y_offset;
     struct BattleSpriteInfo *spriteInfo;
 
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
@@ -1871,26 +1870,19 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             species = spriteInfo[battlerId].transformSpecies;
             personality = gTransformedPersonalities[battlerId];
         }
+
+        species = SanitizeSpeciesId(species);
         if (species == SPECIES_UNOWN)
-        {
-            letter = GET_UNOWN_LETTER(personality);
-            if (!letter)
-                unownSpecies = SPECIES_UNOWN;
-            else
-                unownSpecies = letter + SPECIES_UNOWN_B - 1;
-            coordsSize = gSpeciesInfo[unownSpecies].backPicSize;
-            yOffset = gSpeciesInfo[unownSpecies].backPicYOffset;
-        }
-        else if (species > NUM_SPECIES)
-        {
-            coordsSize = gSpeciesInfo[SPECIES_NONE].backPicSize;
-            yOffset = gSpeciesInfo[SPECIES_NONE].backPicYOffset;
-        }
+            species = GetUnownSpeciesId(personality);
+
+    #if P_GENDER_DIFFERENCES
+        if (gSpeciesInfo[species].backPicFemale != NULL && IsPersonalityFemale(species, personality))
+            size = gSpeciesInfo[species].backPicSizeFemale;
         else
-        {
-            coordsSize = gSpeciesInfo[species].backPicSize;
-            yOffset = gSpeciesInfo[species].backPicYOffset;
-        }
+    #endif
+            size = gSpeciesInfo[species].backPicSize;
+
+        y_offset = gSpeciesInfo[species].backPicYOffset;
     }
     else
     {
@@ -1906,44 +1898,37 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             personality = gTransformedPersonalities[battlerId];
         }
 
+        species = SanitizeSpeciesId(species);
         if (species == SPECIES_UNOWN)
-        {
-            letter = GET_UNOWN_LETTER(personality);
-            if (!letter)
-                unownSpecies = SPECIES_UNOWN;
-            else
-                unownSpecies = letter + SPECIES_UNOWN_B - 1;
-            coordsSize = gSpeciesInfo[unownSpecies].frontPicSize;
-            yOffset = gSpeciesInfo[unownSpecies].frontPicYOffset;
-        }
-        else if (species > NUM_SPECIES)
-        {
-            coordsSize = gSpeciesInfo[SPECIES_NONE].frontPicSize;
-            yOffset = gSpeciesInfo[SPECIES_NONE].frontPicYOffset;
-        }
+            species = GetUnownSpeciesId(personality);
+
+    #if P_GENDER_DIFFERENCES
+        if (gSpeciesInfo[species].frontPicFemale != NULL && IsPersonalityFemale(species, personality))
+            size = gSpeciesInfo[species].frontPicSizeFemale;
         else
-        {
-            coordsSize = gSpeciesInfo[species].frontPicSize;
-            yOffset = gSpeciesInfo[species].frontPicYOffset;
-        }
+    #endif
+            size = gSpeciesInfo[species].frontPicSize;
+
+        y_offset = gSpeciesInfo[species].frontPicYOffset;
     }
+
     switch (attr)
     {
     case BATTLER_COORD_ATTR_HEIGHT:
-        return GET_MON_COORDS_HEIGHT(coordsSize);
+        return GET_MON_COORDS_HEIGHT(size);
     case BATTLER_COORD_ATTR_WIDTH:
-        return GET_MON_COORDS_WIDTH(coordsSize);
+        return GET_MON_COORDS_WIDTH(size);
     case BATTLER_COORD_ATTR_LEFT:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) - (GET_MON_COORDS_WIDTH(coordsSize) / 2);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) - (GET_MON_COORDS_WIDTH(size) / 2);
     case BATTLER_COORD_ATTR_RIGHT:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) + (GET_MON_COORDS_WIDTH(coordsSize) / 2);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X_2) + (GET_MON_COORDS_WIDTH(size) / 2);
     case BATTLER_COORD_ATTR_TOP:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) - (GET_MON_COORDS_HEIGHT(coordsSize) / 2);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) - (GET_MON_COORDS_HEIGHT(size) / 2);
     case BATTLER_COORD_ATTR_BOTTOM:
-        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) + (GET_MON_COORDS_HEIGHT(coordsSize) / 2);
+        return GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y_PIC_OFFSET) + (GET_MON_COORDS_HEIGHT(size) / 2);
     case BATTLER_COORD_ATTR_RAW_BOTTOM:
         ret = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_Y) + 31;
-        return ret - yOffset;
+        return ret - y_offset;
     default:
         return 0;
     }

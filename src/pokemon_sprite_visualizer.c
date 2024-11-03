@@ -1964,11 +1964,18 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     gSprites[data->iconspriteId].oam.priority = 0;
 
     //Follower Sprite
-    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species + (data->isShiny ? SPECIES_SHINY_TAG : 0),
+    u16 graphicsId = (OBJ_EVENT_GFX_MON_BASE + species) & OBJ_EVENT_GFX_SPECIES_MASK;
+    struct FollowerSpriteVisualizerData followerData;
+    followerData.currentmonId = graphicsId;
+    followerData.isFemale = data->isFemale;
+    followerData.isShiny = data->isShiny;
+    graphicsId |= data->isFemale << OBJ_EVENT_GFX_SPECIES_BITS;
+    data->followerspriteId = CreateObjectGraphicsFollowerSpriteForVisualizer(graphicsId,
                                                         SpriteCB_Follower,
                                                         VISUALIZER_FOLLOWER_X,
                                                         VISUALIZER_FOLLOWER_Y,
-                                                        0);
+                                                        0,
+                                                        &followerData);
     gSprites[data->followerspriteId].oam.priority = 0;
     gSprites[data->followerspriteId].anims = sAnims_Follower;
 

@@ -931,12 +931,12 @@ static const u8 sText_DefeatedOpponentByReferee[] = _("{B_PLAYER_MON1_NAME} defe
 static const u8 sText_LostToOpponentByReferee[] = _("{B_PLAYER_MON1_NAME} lost to the opponent\n{B_OPPONENT_MON1_NAME} in a REFEREE's decision!");
 static const u8 sText_TiedOpponentByReferee[] = _("{B_PLAYER_MON1_NAME} tied the opponent\n{B_OPPONENT_MON1_NAME} in a REFEREE's decision!");
 static const u8 sText_RefCommenceBattle[] = _("REFEREE: {B_PLAYER_MON1_NAME} VS {B_OPPONENT_MON1_NAME}!\nCommence battling!");
-static const u8 sText_QuestionForfeitMatch[] = _("Would you like to forfeit the match\nand quit now?");
-static const u8 sText_ForfeitedMatch[] = _("{B_PLAYER_NAME} forfeited the match!");
+static const u8 sText_QuestionForfeitMatch[] = _("Would you like to forfeit the match and quit now?");
+static const u8 sText_ForfeitedMatch[] = _("The match was forfeited.");
 static const u8 sText_Trainer1WinText[] = _("{B_TRAINER1_WIN_TEXT}");
 static const u8 sText_Trainer2WinText[] = _("{B_TRAINER2_WIN_TEXT}");
 static const u8 sText_Trainer1Fled[] = _( "{PLAY_SE SE_FLEE}{B_TRAINER1_CLASS} {B_TRAINER1_NAME} fled!");
-static const u8 sText_PlayerLostAgainstTrainer1[] = _("Player lost against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
+static const u8 sText_PlayerLostAgainstTrainer1[] = _("You lost to {B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
 static const u8 sText_PlayerBattledToDrawTrainer1[] = _("Player battled to a draw against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
 const u8 gText_RecordBattleToPass[] = _("Would you like to record your battle\non your FRONTIER PASS?");
 const u8 gText_BattleRecordedOnPass[] = _("{B_PLAYER_NAME}'s battle result was recorded\non the FRONTIER PASS.");
@@ -2947,7 +2947,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
     // This buffer may hold either the name of a trainer, Pokémon, or item.
     u8 text[max(max(max(32, TRAINER_NAME_LENGTH + 1), POKEMON_NAME_LENGTH + 1), ITEM_NAME_LENGTH)];
     u8 multiplayerId;
-    u8 fontId = FONT_NORMAL;
+    u8 fontId = FONT_SMALL;
     s16 letterSpacing = 0;
     u32 lineNum = 1;
 
@@ -3582,7 +3582,7 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
 static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
     [B_WIN_MSG] = {
         .fillValue = PIXEL_FILL(0xf),
-        .fontId = FONT_NORMAL,
+        .fontId = FONT_SMALL,
         .x = 2,
         .y = 2,
         .letterSpacing = 0,
@@ -3922,6 +3922,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     else {
         printerTemplate.fontId = sTextOnWindowsInfo_Normal[windowId].fontId;
     }
+    DebugPrintfLevel(MGBA_LOG_ERROR, "windowId = %u, fontId = %u", printerTemplate.fontId);
     switch (windowId)
     {
     case B_WIN_VS_PLAYER:

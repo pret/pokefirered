@@ -697,7 +697,7 @@ static const union AnimCmd sSweetScentPetalAnimCmds3[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sSweetScentPetalAnimCmdTable[] =    
+static const union AnimCmd *const gSweetScentPetalAnimCmdTable[] =    
 {
     sSweetScentPetalAnimCmds1,
     sSweetScentPetalAnimCmds2,
@@ -709,7 +709,7 @@ const struct SpriteTemplate gSweetScentPetalSpriteTemplate =
     .tileTag = ANIM_TAG_PINK_PETAL,
     .paletteTag = ANIM_TAG_PINK_PETAL,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = sSweetScentPetalAnimCmdTable,
+    .anims = gSweetScentPetalAnimCmdTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSweetScentPetal,
@@ -1274,6 +1274,17 @@ const struct SpriteTemplate gTeraCrystalSpreadSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimTask_TeraCrystalShatter,
+};
+
+const struct SpriteTemplate gPinkPetalVortexTemplate =
+{
+    .tileTag = ANIM_TAG_PINK_PETAL,
+    .paletteTag = ANIM_TAG_PINK_PETAL,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gSweetScentPetalAnimCmdTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimParticleInVortex
 };
 
 // Task data for AnimTask_TeraCrystalShatter

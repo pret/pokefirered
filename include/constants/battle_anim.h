@@ -416,6 +416,7 @@
 #define ANIM_TAG_BEAM                       (ANIM_SPRITES_START + 402)
 #define ANIM_TAG_RED_EXPLOSION              (ANIM_SPRITES_START + 403)
 #define ANIM_TAG_PURPLE_CHAIN               (ANIM_SPRITES_START + 404)
+#define ANIM_TAG_PINKVIO_ORB                (ANIM_SPRITES_START + 405)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -527,6 +528,7 @@
 #define BG_STEEL_BEAM_PLAYER 79
 #define BG_CHLOROBLAST 80
 #define BG_RAINBOW 81
+#define BG_SWAMP 82
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_STATS_CHANGE             0

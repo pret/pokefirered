@@ -21,6 +21,7 @@ static void AnimTask_MeditateStretchAttacker_Step(u8 taskId);
 static void AnimTask_Teleport_Step(u8 taskId);
 static void AnimTask_ImprisonOrbs_Step(u8 taskId);
 static void AnimTask_SkillSwap_Step(u8 taskId);
+static void AnimTask_HeartSwap_Step(u8);
 static void AnimTask_ExtrasensoryDistortion_Step(u8 taskId);
 static void AnimTask_TransparentCloneGrowAndShrink_Step(u8 taskId);
 static void AnimateZenHeadbutt(struct Sprite *sprite);
@@ -348,6 +349,18 @@ static const struct SpriteTemplate sSkillSwapOrbSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLUEGREEN_ORB,
     .paletteTag = ANIM_TAG_BLUEGREEN_ORB,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = sAffineAnims_SkillSwapOrb,
+    .callback = AnimSkillSwapOrb,
+};
+
+// Pink version of the Skill Swap orbs
+const struct SpriteTemplate gHeartSwapOrbSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_PINKVIO_ORB,
+    .paletteTag = ANIM_TAG_PINKVIO_ORB,
     .oam = &gOamData_AffineNormal_ObjNormal_16x16,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -961,6 +974,55 @@ void AnimTask_SkillSwap(u8 taskId)
     task->func = AnimTask_SkillSwap_Step;
 }
 
+// Copy of Skill Swap's function to get position of the user and target
+// arg 0: move target
+void AnimTask_HeartSwap(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    if (IsContest())
+    {
+        if (gBattleAnimArgs[0] == ANIM_TARGET)
+        {
+            task->data[10] = -10;
+            task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_RIGHT) - 8;
+            task->data[12] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_TOP) + 8;
+            task->data[13] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_RIGHT) - 8;
+            task->data[14] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_TOP) + 8;
+        }
+        else
+        {
+            task->data[10] = 10;
+            task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_LEFT) + 8;
+            task->data[12] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_BOTTOM) - 8;
+            task->data[13] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_LEFT) + 8;
+            task->data[14] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_BOTTOM) - 8;
+        }
+    }
+    else
+    {
+        if (gBattleAnimArgs[0] == ANIM_TARGET)
+        {
+            task->data[10] = -10;
+            task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_LEFT) + 8;
+            task->data[12] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_TOP) + 8;
+            task->data[13] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_LEFT) + 8;
+            task->data[14] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_TOP) + 8;
+        }
+        else
+        {
+            task->data[10] = 10;
+            task->data[11] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_RIGHT) - 8;
+            task->data[12] = GetBattlerSpriteCoordAttr(gBattleAnimAttacker, BATTLER_COORD_ATTR_BOTTOM) - 8;
+            task->data[13] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_RIGHT) - 8;
+            task->data[14] = GetBattlerSpriteCoordAttr(gBattleAnimTarget, BATTLER_COORD_ATTR_BOTTOM) - 8;
+        }
+    }
+
+    task->data[1] = 6;
+    task->func = AnimTask_HeartSwap_Step;
+}
+
 static void AnimTask_SkillSwap_Step(u8 taskId)
 {
     u8 spriteId;
@@ -985,6 +1047,42 @@ static void AnimTask_SkillSwap_Step(u8 taskId)
 
             if (++task->data[2] == 12)
                 ++task->data[0];
+        }
+        break;
+    case 1:
+        if (++task->data[1] > 17)
+            DestroyAnimVisualTask(taskId);
+        break;
+    }
+}
+
+// Copy of Skill Swap's function to vault the series of orbs between the user and target
+// CreateSprite modified so it uses the pink orbs instead of the blue/green ones
+static void AnimTask_HeartSwap_Step(u8 taskId)
+{
+    u8 spriteId;
+    struct Task *task = &gTasks[taskId];
+
+    switch (task->data[0])
+    {
+    case 0:
+        if (++task->data[1] > 6)
+        {
+            task->data[1] = 0;
+            spriteId = CreateSprite(&gHeartSwapOrbSpriteTemplate, task->data[11], task->data[12], 0);
+            if (spriteId != MAX_SPRITES)
+            {
+                gSprites[spriteId].data[0] = 16;
+                gSprites[spriteId].data[2] = task->data[13];
+                gSprites[spriteId].data[4] = task->data[14];
+                gSprites[spriteId].data[5] = task->data[10];
+
+                InitAnimArcTranslation(&gSprites[spriteId]);
+                StartSpriteAffineAnim(&gSprites[spriteId], task->data[2] & 3);
+            }
+
+            if (++task->data[2] == 12)
+                task->data[0]++;
         }
         break;
     case 1:

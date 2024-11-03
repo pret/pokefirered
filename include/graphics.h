@@ -6335,6 +6335,8 @@ extern const u32 gBattleAnimSpritePal_IvyCudgelGrass[];
 extern const u32 gBattleAnimSpritePal_IvyCudgelFire[];
 extern const u32 gBattleAnimSpritePal_IvyCudgelRock[];
 extern const u32 gBattleAnimSpritePal_IvyCudgelWater[];
+extern const u32 gBattleAnimSpriteGfx_PinkVioletOrb[];
+extern const u32 gBattleAnimSpritePal_PinkVioletOrb[];
 
 extern const u32 gBattleAnimBgImage_Dark[];
 extern const u32 gBattleAnimBgImage_Ghost[];
@@ -6515,5 +6517,10 @@ extern const u32 gBattleAnimBgImage_Sandstorm[];
 extern const u32 gBattleAnimBgImage_Rainbow[];
 extern const u32 gBattleAnimBGPalette_Rainbow[];
 extern const u32 gBattleAnimBgTilemap_Rainbow[];
+
+// Pledge Effect field status - Swamp
+extern const u32 gBattleAnimBgImage_Swamp[];
+extern const u32 gBattleAnimBGPalette_Swamp[];
+extern const u32 gBattleAnimBgTilemap_Swamp[];
 
 #endif //GUARD_GRAPHICS_H

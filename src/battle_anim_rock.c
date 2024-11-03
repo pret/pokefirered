@@ -360,6 +360,29 @@ const struct SpriteTemplate gSeedFlareGreenWavesTemplate =
     .callback = AnimFlyingSandCrescent
 };
 
+// Make It Rain
+const struct SpriteTemplate gMakingItRainTemplate =
+{
+    .tileTag = ANIM_TAG_COIN,
+    .paletteTag = ANIM_TAG_COIN,
+    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
+    .anims = gCoinAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFallingRock,
+};
+
+const struct SpriteTemplate gFallingSeedSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SEED,
+    .paletteTag = ANIM_TAG_SEED,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimFallingRock,
+};
+
 static void AnimStealthRock(struct Sprite *sprite)
 {
     s16 x, y;
@@ -402,17 +425,21 @@ static void AnimStealthRockStep2(struct Sprite *sprite)
 void AnimFallingRock(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[3] != 0)
-        SetAverageBattlerPositions(gBattleAnimTarget, 0, &sprite->x, &sprite->y);
+        SetAverageBattlerPositions(gBattleAnimTarget, FALSE, &sprite->x, &sprite->y);
+
     sprite->x += gBattleAnimArgs[0];
     sprite->y += 14;
+
     StartSpriteAnim(sprite, gBattleAnimArgs[1]);
     AnimateSprite(sprite);
+
     sprite->data[0] = 0;
     sprite->data[1] = 0;
     sprite->data[2] = 4;
     sprite->data[3] = 16;
     sprite->data[4] = -70;
     sprite->data[5] = gBattleAnimArgs[2];
+
     StoreSpriteCallbackInData6(sprite, AnimFallingRock_Step);
     sprite->callback = TranslateSpriteInEllipse;
     sprite->callback(sprite);
@@ -421,11 +448,13 @@ void AnimFallingRock(struct Sprite *sprite)
 void AnimFallingRock_Step(struct Sprite *sprite)
 {
     sprite->x += sprite->data[5];
+
     sprite->data[0] = 192;
     sprite->data[1] = sprite->data[5];
     sprite->data[2] = 4;
     sprite->data[3] = 32;
     sprite->data[4] = -24;
+
     StoreSpriteCallbackInData6(sprite, DestroySpriteAndMatrix);
     sprite->callback = TranslateSpriteInEllipse;
     sprite->callback(sprite);

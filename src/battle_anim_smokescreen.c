@@ -1,13 +1,11 @@
 #include "global.h"
 #include "battle_gfx_sfx_util.h"
+#include "battle_interface.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "util.h"
 
 #define TAG_SMOKESCREEN 55019
-
-#define PALTAG_SHADOW 55039
-#define GFXTAG_SHADOW 55129
 
 static void SpriteCB_SmokescreenImpactMain(struct Sprite *);
 static void SpriteCB_SmokescreenImpact(struct Sprite *);
@@ -88,39 +86,6 @@ static const struct SpriteTemplate sSmokescreenImpactSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_SmokescreenImpact
-};
-
-const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow =
-{
-    .data = gEnemyMonShadow_Gfx, .size = 0x80, .tag = GFXTAG_SHADOW
-};
-
-static const struct OamData sOamData_EnemyShadow =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(32x8),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(32x8),
-    .tileNum = 0,
-    .priority = 3,
-    .paletteNum = 0,
-    .affineParam = 0
-};
-
-const struct SpriteTemplate gSpriteTemplate_EnemyShadow =
-{
-    .tileTag = GFXTAG_SHADOW,
-    .paletteTag = PALTAG_SHADOW,
-    .oam = &sOamData_EnemyShadow,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_SetInvisible
 };
 
 #define sActiveSprites data[0]

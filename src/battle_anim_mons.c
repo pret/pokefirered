@@ -766,7 +766,7 @@ void GetBattleAnimBgData(struct BattleAnimBgData *animBgData, u32 bgId)
     }
 }
 
-void GetBattleAnimBgDataByPriorityRank(struct BattleAnimBgData *animBgData, u8 unused)
+void GetBgDataForTransform(struct BattleAnimBgData *animBgData, u8 unused)
 {
     animBgData->bgTiles = gBattleAnimBgTileBuffer;
     animBgData->bgTilemap = (u16 *)gBattleAnimBgTilemapBuffer;

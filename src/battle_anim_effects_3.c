@@ -2357,6 +2357,56 @@ void AnimTask_SwallowDeformMon(u8 taskId)
     }
 }
 
+void AnimTask_HideSwapSprite(u8 taskId)
+{
+    u8 position;
+    struct BattleAnimBgData animBg;
+    u8 *dest;
+    u8 *src;
+
+    u8 spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        gTasks[taskId].data[11] = gSprites[spriteId].x; // Save battler position
+        gSprites[spriteId].x = -64; // hide it from screen to avoid the blip/glitch effect when swapping the sprite.
+        gTasks[taskId].data[10] = gBattleAnimArgs[0];
+        gTasks[taskId].data[0]++;
+        break;
+    case 1:
+        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10], gBattleAnimArgs[1], FALSE);
+        GetBgDataForTransform(&animBg, gBattleAnimAttacker);
+
+        if (IsContest())
+            position = 0;
+        else
+            position = GetBattlerPosition(gBattleAnimAttacker);
+
+        src = gMonSpritesGfxPtr->sprites[position];
+        dest = animBg.bgTiles;
+        CpuCopy32(src, dest, MON_PIC_SIZE);
+        LoadBgTiles(1, animBg.bgTiles, 0x800, animBg.tilesOffset);
+
+        gTasks[taskId].data[0]++;
+        break;
+    case 2:
+        gSprites[spriteId].x = gTasks[taskId].data[11]; // restores battler position
+        if (!IsContest())
+        {
+            if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT)
+            {
+                if (gTasks[taskId].data[10] == 0)
+                    SetBattlerShadowSpriteCallback(gBattleAnimAttacker, gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies);
+            }
+        }
+
+        DestroyAnimVisualTask(taskId);
+        break;
+    }
+}
+
+
 #define megaEvo data[10]
 #define trackEnemyPersonality data[11]
 #define ghostUnveil data[12]
@@ -2396,7 +2446,7 @@ void AnimTask_TransformMon(u8 taskId)
         break;
     case 2:
         HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].megaEvo, gTasks[taskId].trackEnemyPersonality, gTasks[taskId].ghostUnveil);
-        GetBattleAnimBgDataByPriorityRank(&animBg, gBattleAnimAttacker);
+        GetBgDataForTransform(&animBg, gBattleAnimAttacker);
         if (IsContest())
             position = 0;
         else

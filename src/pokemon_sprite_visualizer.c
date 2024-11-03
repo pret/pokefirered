@@ -43,6 +43,7 @@
 
 extern const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
+extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadowsSized;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 extern const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2];
 extern const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] ;
@@ -384,6 +385,14 @@ const u8 gBattleBackgroundNames[][30] =
     [MAP_BATTLE_SCENE_RAYQUAZA] = _("RAYQUAZA                "),
 };
 
+const u8 sShadowSizeLabels[][4] =
+{
+    [SHADOW_SIZE_S]                 = _(" S"),
+    [SHADOW_SIZE_M]                 = _(" M"),
+    [SHADOW_SIZE_L]                 = _(" L"),
+    [SHADOW_SIZE_XL_BATTLE_ONLY]    = _(" XL"),
+};
+
 //Function declarations
 static void PrintDigitChars(struct PokemonSpriteVisualizer *data);
 static void SetUpModifyArrows(struct PokemonSpriteVisualizer *data);
@@ -414,17 +423,27 @@ static void PrintInstructionsOnWindow(struct PokemonSpriteVisualizer *data)
 {
     u8 fontId = 0;
     u8 x = 2;
-    u8 textInstructions[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Exit  {A_BUTTON} Submenu 1$");
-    u8 textInstructionsGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Exit  {A_BUTTON} Submenu 1$");
-    u8 textInstructionsSubmenuOne[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Back  {A_BUTTON} Submenu 2$");
-    u8 textInstructionsSubmenuOneGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Back  {A_BUTTON} Submenu 2$");
+    u8 textInstructions[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Exit  {A_BUTTON} Anims and BG$");
+    u8 textInstructionsGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Exit  {A_BUTTON} Anims and BG$");
+    u8 textInstructionsSubmenuOne[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Back  {A_BUTTON} Sprite Coords$");
+    u8 textInstructionsSubmenuOneGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Back  {A_BUTTON} Sprite Coords$");
+#if B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE
+    u8 textInstructionsSubmenuTwo[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Back  {A_BUTTON} Shadow Coords$");
+    u8 textInstructionsSubmenuTwoGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Back  {A_BUTTON} Shadow Coords$");
+    u8 textInstructionsSubmenuThree[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Back");
+    u8 textInstructionsSubmenuThreeGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Back$");
+#else
     u8 textInstructionsSubmenuTwo[] = _("{START_BUTTON} Shiny\n{B_BUTTON} Back$");
     u8 textInstructionsSubmenuTwoGender[] = _("{START_BUTTON} Shiny {SELECT_BUTTON} Gender\n{B_BUTTON} Back$");
+    u8 textInstructionsSubmenuThree[] = _("$");
+    u8 textInstructionsSubmenuThreeGender[] = _("$");
+#endif
 
 
     u8 textBottom[] = _("BACK:\nFRONT:\nBG:$");
     u8 textBottomForms[] = _("BACK:\nFRONT:\nBG:\nFORMS:$");
     u8 textBottomSubmenuTwo[] = _("B coords:\nF coords:\nF elev:");
+    u8 textBottomSubmenuThree[] = _("X coords:\nY coords:\nSize:");
     u16 species = data->modifyArrows.currValue;
 
     u8 textL[] = _("{L_BUTTON}");
@@ -453,11 +472,18 @@ static void PrintInstructionsOnWindow(struct PokemonSpriteVisualizer *data)
         else
             AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsSubmenuTwo, x, 0, 0, NULL);
     }
+    else if (data->currentSubmenu == 3)
+    {
+        if (SpeciesHasGenderDifferences(species))
+            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsSubmenuThreeGender, x, 0, 0, NULL);
+        else
+            AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsSubmenuThree, x, 0, 0, NULL);
+    }
     CopyWindowToVram(WIN_INSTRUCTIONS, COPYWIN_FULL);
 
     //Bottom left text
     FillWindowPixelBuffer(WIN_BOTTOM_LEFT, PIXEL_FILL(0));
-    if (data->currentSubmenu != 2)
+    if (data->currentSubmenu < 2)
     {
         AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textL, 30, 0, 0, NULL);
         AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textR, 30, 12, 0, NULL);
@@ -466,8 +492,10 @@ static void PrintInstructionsOnWindow(struct PokemonSpriteVisualizer *data)
         else
             AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottom, 0, 0, 0, NULL);
     }
-    else
+    else if (data->currentSubmenu == 2)
         AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottomSubmenuTwo, 0, 0, 0, NULL);
+    else if (data->currentSubmenu == 3)
+        AddTextPrinterParameterized(WIN_BOTTOM_LEFT, fontId, textBottomSubmenuThree, 0, 0, 0, NULL);
 }
 
 static void VBlankCB(void)
@@ -723,6 +751,20 @@ static void ResetOffsetSpriteValues(struct PokemonSpriteVisualizer *data)
     data->offsetsSpriteValues.offset_front_elevation = 0;
 }
 
+static void ResetShadowSettings(struct PokemonSpriteVisualizer *data, u16 species)
+{
+    if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3 || P_GBA_STYLE_SPECIES_GFX == TRUE)
+        return;
+
+    data->shadowSettings.definedX = gSpeciesInfo[species].enemyShadowXOffset;
+    data->shadowSettings.definedY = gSpeciesInfo[species].enemyShadowYOffset;
+    data->shadowSettings.definedSize = gSpeciesInfo[species].enemyShadowSize;
+
+    data->shadowSettings.overrideX = data->shadowSettings.definedX;
+    data->shadowSettings.overrideY = data->shadowSettings.definedY;
+    data->shadowSettings.overrideSize = data->shadowSettings.definedSize;
+}
+
 static u8 GetBattlerSpriteFinal_YCustom(u16 species, s8 offset_picCoords, s8 offset_elevation)
 {
     u16 offset;
@@ -746,22 +788,43 @@ static u8 GetBattlerSpriteFinal_YCustom(u16 species, s8 offset_picCoords, s8 off
 
 static void UpdateShadowSpriteInvisible(struct PokemonSpriteVisualizer *data)
 {
+    if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
+        return;
+
     if (data->constSpriteValues.frontElevation + data->offsetsSpriteValues.offset_front_elevation == 0)
-        gSprites[data->frontShadowSpriteId].invisible = TRUE;
+        gSprites[data->frontShadowSpriteIdPrimary].invisible = TRUE;
     else
-        gSprites[data->frontShadowSpriteId].invisible = FALSE;
+        gSprites[data->frontShadowSpriteIdPrimary].invisible = FALSE;
 }
+
+#define tFrontSpriteId  data[0]
+#define tSpriteSide     data[1]
+#define tShadowXOffset  data[2]
+#define tShadowYOffset  data[3]
+
+#define SPRITE_SIDE_LEFT    0
+#define SPRITE_SIDE_RIGHT   1
+
 
 static void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
 {
-    u8 frontSpriteId = shadowSprite->data[0];
+    u8 frontSpriteId = shadowSprite->tFrontSpriteId;
     struct Sprite *battlerSprite = &gSprites[frontSpriteId];
 
-    shadowSprite->x = battlerSprite->x;
+    s8 xOffset = 0, yOffset = 0;
+    if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
+    {
+        xOffset = shadowSprite->tShadowXOffset + (shadowSprite->tSpriteSide == SPRITE_SIDE_LEFT ? -16 : 16);
+        yOffset = shadowSprite->tShadowYOffset + 16;
+
+        shadowSprite->y = battlerSprite->y + yOffset;
+    }
+
+    shadowSprite->x = battlerSprite->x + xOffset;
     shadowSprite->x2 = battlerSprite->x2;
 }
 
-static void UNUSED SpriteCB_Follower(struct Sprite *sprite)
+static void SpriteCB_Follower(struct Sprite *sprite)
 {
     if (sprite->animDelayCounter == 0)
     {
@@ -792,22 +855,58 @@ static void UNUSED SpriteCB_Follower(struct Sprite *sprite)
 
 static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonSpriteVisualizer *data, u16 species)
 {
-    u8 x, y;
     bool8 invisible = FALSE;
     species = SanitizeSpeciesId(species);
-    if (gSpeciesInfo[species].enemyMonElevation == 0)
-        invisible = TRUE;
-    LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
-    LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
-    x = sBattlerCoords[0][1].x;
-    y = sBattlerCoords[0][1].y;
 
-    data->frontShadowSpriteId = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y + 29, 0xC8);
-    gSprites[data->frontShadowSpriteId].data[0] = data->frontspriteId;
+    if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
+    {
+        invisible = gSpeciesInfo[species].suppressEnemyShadow;
 
-    gSprites[data->frontShadowSpriteId].callback = SpriteCB_EnemyShadowCustom;
-    gSprites[data->frontShadowSpriteId].oam.priority = 0;
-    gSprites[data->frontShadowSpriteId].invisible = invisible;
+        LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadowsSized);
+        LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
+        u8 x = sBattlerCoords[0][1].x;
+        u8 y = sBattlerCoords[0][1].y;
+        s8 xOffset = data->shadowSettings.overrideX;
+        s8 yOffset = data->shadowSettings.overrideY;
+        u8 size = data->shadowSettings.overrideSize;
+
+        data->frontShadowSpriteIdPrimary = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y, 0xC8);
+        gSprites[data->frontShadowSpriteIdPrimary].tFrontSpriteId = data->frontspriteId;
+        gSprites[data->frontShadowSpriteIdPrimary].tSpriteSide = SPRITE_SIDE_LEFT;
+        gSprites[data->frontShadowSpriteIdPrimary].tShadowXOffset = (u8)xOffset;
+        gSprites[data->frontShadowSpriteIdPrimary].tShadowYOffset = (u8)yOffset;
+        gSprites[data->frontShadowSpriteIdPrimary].callback = SpriteCB_EnemyShadowCustom;
+        gSprites[data->frontShadowSpriteIdPrimary].oam.priority = 0;
+        gSprites[data->frontShadowSpriteIdPrimary].oam.tileNum += 8 * size;
+        gSprites[data->frontShadowSpriteIdPrimary].invisible = invisible;
+
+        data->frontShadowSpriteIdSecondary = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y, 0xC8);
+        gSprites[data->frontShadowSpriteIdSecondary].tFrontSpriteId = data->frontspriteId;
+        gSprites[data->frontShadowSpriteIdSecondary].tSpriteSide = SPRITE_SIDE_RIGHT;
+        gSprites[data->frontShadowSpriteIdSecondary].tShadowXOffset = (u8)xOffset;
+        gSprites[data->frontShadowSpriteIdSecondary].tShadowYOffset = (u8)yOffset;
+        gSprites[data->frontShadowSpriteIdSecondary].callback = SpriteCB_EnemyShadowCustom;
+        gSprites[data->frontShadowSpriteIdSecondary].oam.priority = 0;
+        gSprites[data->frontShadowSpriteIdSecondary].oam.tileNum += (8 * size) + 4;
+        gSprites[data->frontShadowSpriteIdSecondary].invisible = invisible;
+    }
+    else
+    {
+        if (gSpeciesInfo[species].enemyMonElevation == 0)
+            invisible = TRUE;
+
+        LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
+        LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
+        u8 x = sBattlerCoords[0][1].x;
+        u8 y = sBattlerCoords[0][1].y;
+
+        data->frontShadowSpriteIdPrimary = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y + 29, 0xC8);
+        gSprites[data->frontShadowSpriteIdPrimary].data[0] = data->frontspriteId;
+
+        gSprites[data->frontShadowSpriteIdPrimary].callback = SpriteCB_EnemyShadowCustom;
+        gSprites[data->frontShadowSpriteIdPrimary].oam.priority = 0;
+        gSprites[data->frontShadowSpriteIdPrimary].invisible = invisible;
+    }
 }
 
 //Battle background functions
@@ -1005,6 +1104,55 @@ static void UpdateYPosOffsetText(struct PokemonSpriteVisualizer *data)
     AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNew, x_new_text, y, 0, NULL);
     ConvertIntToDecimalStringN(text, newFrontElevation , STR_CONV_MODE_LEFT_ALIGN, 2);
     AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_new_val, y, 0, NULL);
+}
+
+#define ABS(val)    (val < 0 ? val * -1 : val)
+#define ITOA_SIGNED(buf, val)                                                       \
+{                                                                                   \
+    buf[0] = val < 0 ? CHAR_HYPHEN : CHAR_SPACER;                                   \
+    ConvertIntToDecimalStringN(&text[1], ABS(val), STR_CONV_MODE_LEFT_ALIGN, 2);    \
+}
+
+static void UpdateShadowSettingsText(struct PokemonSpriteVisualizer *data)
+{
+    if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3 || P_GBA_STYLE_SPECIES_GFX == TRUE)
+        return;
+
+    u8 text[16];
+    u8 fontId = 0;
+    u8 textConst[] = _("const val:");
+    u8 textNew[] = _("new val:");
+    u8 x_const_val = 50;
+    u8 x_new_text = 70;
+    u8 x_new_val = 110;
+    u8 y = 0;
+
+    FillWindowPixelBuffer(WIN_BOTTOM_RIGHT, PIXEL_FILL(0));
+
+    // X offset
+    y = 0;
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textConst, 0, y, 0, NULL);
+    ITOA_SIGNED(text, data->shadowSettings.definedX);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_const_val, y, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNew, x_new_text, y, 0, NULL);
+    ITOA_SIGNED(text, data->shadowSettings.overrideX);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_new_val, y, 0, NULL);
+
+    // Y offset
+    y = 12;
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textConst, 0, y, 0, NULL);
+    ITOA_SIGNED(text, data->shadowSettings.definedY);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_const_val, y, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNew, x_new_text, y, 0, NULL);
+    ITOA_SIGNED(text, data->shadowSettings.overrideY);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, text, x_new_val, y, 0, NULL);
+
+    // Shadow Size
+    y = 24;
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textConst, 0, y, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, sShadowSizeLabels[data->shadowSettings.definedSize], x_const_val, y, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, textNew, x_new_text, y, 0, NULL);
+    AddTextPrinterParameterized(WIN_BOTTOM_RIGHT, fontId, sShadowSizeLabels[data->shadowSettings.overrideSize], x_new_val, y, 0, NULL);
 }
 
 static void ResetPokemonSpriteVisualizerWindows(void)
@@ -1297,6 +1445,7 @@ static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
             data->animIdFront = gSpeciesInfo[modArrows->currValue].frontAnimId;
             UpdateMonAnimNames(taskId);
             ResetOffsetSpriteValues(data);
+            ResetShadowSettings(data, modArrows->currValue);
 
             UpdateBattlerValue(data);
             ReloadPokemonSprites(data);
@@ -1382,6 +1531,79 @@ static void UpdateSubmenuTwoOptionValue(u8 taskId, bool8 increment)
     }
 
     UpdateYPosOffsetText(data);
+}
+
+static void UpdateShadowSettingsValue(u8 taskId, bool8 increment)
+{
+    if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3 || P_GBA_STYLE_SPECIES_GFX == TRUE)
+        return;
+
+    struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
+    u8 option = data->submenuYpos[2];
+    s8 *offset;
+    s16 *leftTarget, *rightTarget;
+    if (option == 0)
+    {
+        offset = &data->shadowSettings.overrideX;
+        leftTarget = &gSprites[data->frontShadowSpriteIdPrimary].tShadowXOffset;
+        rightTarget = &gSprites[data->frontShadowSpriteIdSecondary].tShadowXOffset;
+    }
+    else
+    {
+        offset = &data->shadowSettings.overrideY;
+        leftTarget = &gSprites[data->frontShadowSpriteIdPrimary].tShadowYOffset;
+        rightTarget = &gSprites[data->frontShadowSpriteIdSecondary].tShadowYOffset;
+    }
+
+    *offset = *offset + (increment ? 1 : -1);
+    if (*offset > 20)
+        *offset = -20;
+    else if (*offset < -20)
+        *offset = 20;
+    UpdateShadowSettingsText(data);
+
+    *leftTarget = (s16)*offset;
+    *rightTarget = (s16)*offset;
+}
+
+static void UpdateShadowSizeValue(u8 taskId, bool8 increment)
+{
+    if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3 || P_GBA_STYLE_SPECIES_GFX == TRUE)
+        return;
+
+    struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
+    s8 update;
+
+    if (increment)
+    {
+        if (data->shadowSettings.overrideSize == SHADOW_SIZE_XL_BATTLE_ONLY)
+        {
+            update = -data->shadowSettings.overrideSize;
+            data->shadowSettings.overrideSize = SHADOW_SIZE_S;
+        }
+        else
+        {
+            update = 1;
+            data->shadowSettings.overrideSize += 1;
+        }
+    }
+    else
+    {
+        if (data->shadowSettings.overrideSize == SHADOW_SIZE_S)
+        {
+            update = SHADOW_SIZE_XL_BATTLE_ONLY;
+            data->shadowSettings.overrideSize = update;
+        }
+        else
+        {
+            update = -1;
+            data->shadowSettings.overrideSize -= 1;
+        }
+    }
+
+    UpdateShadowSettingsText(data);
+    gSprites[data->frontShadowSpriteIdPrimary].oam.tileNum += (8 * update);
+    gSprites[data->frontShadowSpriteIdSecondary].oam.tileNum += (8 * update);
 }
 
 #define READ_PTR_FROM_TASK(taskId, dataId)                      \
@@ -1480,6 +1702,7 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
                 data->isFemale = FALSE;
                 PrintDigitChars(data);
                 UpdateBattlerValue(data);
+                ResetShadowSettings(data, data->currentmonId);
                 ReloadPokemonSprites(data);
                 data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
                 data->animIdFront = gSpeciesInfo[data->currentmonId].frontAnimId;
@@ -1496,6 +1719,7 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
                 data->isFemale = FALSE;
                 PrintDigitChars(data);
                 UpdateBattlerValue(data);
+                ResetShadowSettings(data, data->currentmonId);
                 ReloadPokemonSprites(data);
                 data->animIdBack = GetSpeciesBackAnimSet(data->currentmonId) + 1;
                 data->animIdFront = gSpeciesInfo[data->currentmonId].frontAnimId;
@@ -1534,6 +1758,8 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
             SetArrowInvisibility(data);
             SetConstSpriteValues(data);
             UpdateYPosOffsetText(data);
+
+            gSprites[data->followerspriteId].invisible = TRUE;
         }
         else if (JOY_NEW(B_BUTTON))
         {
@@ -1584,13 +1810,22 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
     }
     else if (data->currentSubmenu == 2) //Submenu 2
     {
-        if (JOY_NEW(B_BUTTON))
+        if (JOY_NEW(A_BUTTON) && B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
+        {
+            data->currentSubmenu = 3;
+            PrintInstructionsOnWindow(data);
+            SetArrowInvisibility(data);
+            UpdateShadowSettingsText(data);
+        }
+        else if (JOY_NEW(B_BUTTON))
         {
             data->currentSubmenu = 1;
 
             SetArrowInvisibility(data);
             PrintInstructionsOnWindow(data);
             UpdateMonAnimNames(taskId);
+
+            gSprites[data->followerspriteId].invisible = FALSE;
         }
         else if (JOY_NEW(DPAD_DOWN))
         {
@@ -1620,6 +1855,50 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
             UpdateSubmenuTwoOptionValue(taskId, TRUE);
         }
     }
+    else if (data->currentSubmenu == 3) // Submenu 3
+    {
+        if (JOY_NEW(B_BUTTON))
+        {
+            data->currentSubmenu = 2;
+            PrintInstructionsOnWindow(data);
+            SetArrowInvisibility(data);
+            SetConstSpriteValues(data);
+            UpdateYPosOffsetText(data);
+        }
+        else if (JOY_NEW(DPAD_DOWN))
+        {
+            data->submenuYpos[2] += 1;
+            if (data->submenuYpos[2] >= 3)
+                data->submenuYpos[2] = 0;
+
+            data->yPosModifyArrows.currentDigit = data->submenuYpos[2];
+            gSprites[data->yPosModifyArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->yPosModifyArrows.currentDigit * 12;
+        }
+        else if (JOY_NEW(DPAD_UP))
+        {
+            if (data->submenuYpos[2] == 0)
+                data->submenuYpos[2] = 2;
+            else
+                data->submenuYpos[2] -= 1;
+
+            data->yPosModifyArrows.currentDigit = data->submenuYpos[2];
+            gSprites[data->yPosModifyArrows.arrowSpriteId[0]].y = OPTIONS_ARROW_Y + data->yPosModifyArrows.currentDigit * 12;
+        }
+        else if (JOY_NEW(DPAD_LEFT))
+        {
+            if (data->submenuYpos[2] < 2)
+                UpdateShadowSettingsValue(taskId, FALSE);
+            else
+                UpdateShadowSizeValue(taskId, FALSE);
+        }
+        else if (JOY_NEW(DPAD_RIGHT))
+        {
+            if (data->submenuYpos[2] < 2)
+                UpdateShadowSettingsValue(taskId, TRUE);
+            else
+                UpdateShadowSizeValue(taskId, TRUE);
+        }
+    }
 }
 #undef sDelay
 #undef sAnimId
@@ -1636,6 +1915,10 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     DestroySprite(&gSprites[data->backspriteId]);
     DestroySprite(&gSprites[data->iconspriteId]);
     DestroySprite(&gSprites[data->followerspriteId]);
+
+    DestroySprite(&gSprites[data->frontShadowSpriteIdPrimary]);
+    if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
+        DestroySprite(&gSprites[data->frontShadowSpriteIdSecondary]);
 
     FreeMonSpritesGfx();
     ResetSpriteData();

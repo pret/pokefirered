@@ -6650,12 +6650,26 @@ static void ReloadBattlerSprites(u32 battler, struct Pokemon *party)
     UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &party[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
     // If battler has an indicator for a gimmick, hide the sprite until the move animation finishes.
     UpdateIndicatorVisibilityAndType(gHealthboxSpriteIds[battler], TRUE);
-    
+
     // Try to recreate shadow sprite
-    if (gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId < MAX_SPRITES)
+    if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
     {
-        DestroySprite(&gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId]);
-        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteId = MAX_SPRITES;
+        // Both of these *should* be true, but use an OR just to be certain
+        if (gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary < MAX_SPRITES
+            || gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdSecondary < MAX_SPRITES)
+        {
+            DestroySprite(&gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary]);
+            DestroySprite(&gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdSecondary]);
+            gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary = MAX_SPRITES;
+            gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdSecondary = MAX_SPRITES;
+            CreateEnemyShadowSprite(battler);
+            SetBattlerShadowSpriteCallback(battler, GetMonData(mon, MON_DATA_SPECIES));
+        }
+    }
+    else if (gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary < MAX_SPRITES)
+    {
+        DestroySprite(&gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary]);
+        gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary = MAX_SPRITES;
         CreateEnemyShadowSprite(battler);
         SetBattlerShadowSpriteCallback(battler, GetMonData(mon, MON_DATA_SPECIES));
     }

@@ -4259,6 +4259,7 @@ extern const u32 gBattleStatMask2_Tilemap[];
 extern const u32 gSmokescreenImpactTiles[];
 extern const u32 gSmokescreenImpactPalette[];
 extern const u32 gEnemyMonShadow_Gfx[];
+extern const u32 gEnemyMonShadowsSized_Gfx[];
 
 // battle anim particle gfx
 extern const u32 gBattleAnimSpriteGfx_Bone[];

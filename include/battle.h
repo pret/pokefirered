@@ -955,7 +955,10 @@ struct BattleHealthboxInfo
     u8 animationState;
     u8 partyStatusDelayTimer;
     u8 matrixNum;
-    u8 shadowSpriteId;
+
+    u8 shadowSpriteIdPrimary;
+    u8 shadowSpriteIdSecondary;
+
     u8 soundTimer;
     u8 introEndDelay;
 };

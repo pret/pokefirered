@@ -528,7 +528,7 @@ u8 GetBattlerAtPosition(u8 position);
 bool8 IsBattlerSpritePresent(u8 battlerId);
 void GetBattleAnimBg1Data(struct BattleAnimBgData *animBgData);
 void GetBattleAnimBgData(struct BattleAnimBgData *animBgData, u32 bgId);
-void GetBattleAnimBgDataByPriorityRank(struct BattleAnimBgData *animBgData, u8 unused);
+void GetBgDataForTransform(struct BattleAnimBgData *animBgData, u8 unused);
 void InitBattleAnimBg(u32 bgId);
 void AnimLoadCompressedBgGfx(u32 bgId, const u32 *src, u32 tilesOffset);
 void InitAnimBgTilemapBuffer(u32 bgId, const void *src);

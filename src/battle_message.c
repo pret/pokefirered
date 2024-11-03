@@ -2950,6 +2950,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
     u8 fontId = FONT_NORMAL;
     s16 letterSpacing = 0;
     u32 lineNum = 1;
+    u32 displayedLineNums = 1;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
         multiplayerId = gRecordedBattleMultiplayerId;
@@ -3360,8 +3361,12 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
 
                 if (dstWidth + toCpyWidth > BATTLE_MSG_MAX_WIDTH)
                 {
-                    dst[lastValidSkip] = lineNum == 1 ? CHAR_NEWLINE : CHAR_PROMPT_SCROLL;
+                    dst[lastValidSkip] = displayedLineNums == 1 ? CHAR_NEWLINE : CHAR_PROMPT_SCROLL;
                     dstWidth = GetStringLineWidth(fontId, dst, letterSpacing, lineNum, dstSize);
+                    if (displayedLineNums == 1)
+                        displayedLineNums++;
+                    else
+                        displayedLineNums = 1;
                     lineNum++;
                 }
                 while (*toCpy != EOS)
@@ -3384,15 +3389,20 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
             dst[dstID] = *src;
             if (dstWidth + toCpyWidth > BATTLE_MSG_MAX_WIDTH)
             {
-                dst[lastValidSkip] = lineNum == 1 ? CHAR_NEWLINE : CHAR_PROMPT_SCROLL;
+                dst[lastValidSkip] = displayedLineNums  == 1 ? CHAR_NEWLINE : CHAR_PROMPT_SCROLL;
+                if (displayedLineNums == 1)
+                    displayedLineNums++;
+                else
+                    displayedLineNums = 1;
                 lineNum++;
                 dstWidth = 0;
             }
             switch (*src)
             {
-            case CHAR_NEWLINE:
             case CHAR_PROMPT_SCROLL:
             case CHAR_PROMPT_CLEAR:
+                displayedLineNums = 1;
+            case CHAR_NEWLINE:
                 lineNum++;
                 dstWidth = 0;
                 //fallthrough

@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
     } SCENE {
         if (species == SPECIES_GASTLY && type == TYPE_NORMAL)
-            MESSAGE("It doesn't affect Foe Gastly…");
+            MESSAGE("It doesn't affect the opposing Gastly…");
         else
             MESSAGE("It's super effective!");
     }
@@ -180,7 +180,7 @@ SINGLE_BATTLE_TEST("Flying-type Tera Blast does not have its priority boosted by
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_QUICK_ATTACK); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Quick Attack!");
+        MESSAGE("The opposing Wobbuffet used Quick Attack!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, opponent);
         MESSAGE("Talonflame used Tera Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);

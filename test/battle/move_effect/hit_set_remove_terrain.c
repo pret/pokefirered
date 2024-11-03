@@ -45,7 +45,7 @@ SINGLE_BATTLE_TEST("Steel Roller and Ice Spinner can remove a terrain from the f
             MESSAGE("The electricity disappeared from the battlefield.");
             break;
         case MOVE_PSYCHIC_TERRAIN:
-            MESSAGE("The weirdness disappeared from the battlefield.");
+            MESSAGE("The weirdness disappeared from the battlefield!");
             break;
         case MOVE_GRASSY_TERRAIN:
             MESSAGE("The grass disappeared from the battlefield.");

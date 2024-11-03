@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter prevents intimidate")
         ABILITY_POPUP(player, ABILITY_INTIMIDATE);
         NONE_OF { ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player); }
         ABILITY_POPUP(opponent, ABILITY_HYPER_CUTTER);
-        MESSAGE("Foe Krabby's Hyper Cutter prevents Attack loss!");
+        MESSAGE("The opposing Krabby's Hyper Cutter prevents Attack loss!");
         HP_BAR(player, captureDamage: &turnTwoHit);
     } THEN {
         EXPECT_EQ(turnOneHit, turnTwoHit);
@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter prevents Attack stage reduction from moves")
         TURN { MOVE(player, MOVE_GROWL); }
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_HYPER_CUTTER);
-        MESSAGE("Foe Krabby's Hyper Cutter prevents Attack loss!");
+        MESSAGE("The opposing Krabby's Hyper Cutter prevents Attack loss!");
     }
 }
 
@@ -50,7 +50,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Attack reduction from burn")
         TURN { MOVE(player, MOVE_WILL_O_WISP); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WILL_O_WISP, player);
-        MESSAGE("Foe Krabby was burned!");
+        MESSAGE("The opposing Krabby was burned!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
     }
@@ -68,10 +68,10 @@ SINGLE_BATTLE_TEST("Hyper Cutter is ignored by Mold Breaker")
         ABILITY_POPUP(player, ABILITY_MOLD_BREAKER);
         MESSAGE("Pinsir breaks the mold!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, player);
-        MESSAGE("Foe Krabby's Attack fell!");
+        MESSAGE("The opposing Krabby's Attack fell!");
         NONE_OF {
             ABILITY_POPUP(opponent, ABILITY_HYPER_CUTTER);
-            MESSAGE("Foe Krabby's Hyper Cutter prevents Attack loss!");
+            MESSAGE("The opposing Krabby's Hyper Cutter prevents Attack loss!");
         }
     }
 }
@@ -87,8 +87,8 @@ SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Attack stage reduction from mov
         TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUPERPOWER, opponent);
-        MESSAGE("Foe Krabby's Attack fell!");
-        MESSAGE("Foe Krabby's Defense fell!");
+        MESSAGE("The opposing Krabby's Attack fell!");
+        MESSAGE("The opposing Krabby's Defense fell!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 1);
     }
@@ -105,9 +105,9 @@ SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Topsy-Turvy")
         TURN { MOVE(opponent, MOVE_SWORDS_DANCE); MOVE(player, MOVE_TOPSY_TURVY); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWORDS_DANCE, opponent);
-        MESSAGE("Foe Krabby's Attack sharply rose!");
+        MESSAGE("The opposing Krabby's Attack sharply rose!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOPSY_TURVY, player);
-        MESSAGE("Foe Krabby's stat changes were all reversed!");
+        MESSAGE("All stat changes on the opposing Krabby were inverted!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE - 2);
     }
@@ -124,7 +124,7 @@ SINGLE_BATTLE_TEST("Hyper Cutter doesn't prevent Spectral Thief from resetting p
         TURN { MOVE(opponent, MOVE_SWORDS_DANCE); MOVE(player, MOVE_SPECTRAL_THIEF); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWORDS_DANCE, opponent);
-        MESSAGE("Foe Krabby's Attack sharply rose!");
+        MESSAGE("The opposing Krabby's Attack sharply rose!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, player);
         MESSAGE("Wobbuffet stole the target's boosted stats!");
     } THEN {

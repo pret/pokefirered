@@ -3,10 +3,10 @@
  * To run all the tests use:
  *     make check -j
  * To run specific tests, e.g. Spikes ones, use:
- *     make check TESTS='Spikes'
+ *     make check TESTS="Spikes"
  * To build a ROM (pokemerald-test.elf) that can be opened in mgba to
  * view specific tests, e.g. Spikes ones, use:
- *     make pokeemerald-test.elf TESTS='Spikes'
+ *     make pokeemerald-test.elf TESTS="Spikes"
  *
  * Manually testing a battle mechanic often follows this pattern:
  * 1. Create a party which can activate the mechanic.
@@ -41,7 +41,7 @@
  *           TURN { MOVE(player, MOVE_STUN_SPORE); } // 3.
  *       } SCENE {
  *           ANIMATION(ANIM_TYPE_MOVE, MOVE_STUN_SPORE, player);
- *           MESSAGE("Foe Wobbuffet is paralyzed! It may be unable to move!"); // 4
+ *           MESSAGE("The opposing Wobbuffet is paralyzed, so it may be unable to move!"); // 4
  *           STATUS_ICON(opponent, paralysis: TRUE); // 4.
  *       }
  *   }
@@ -55,7 +55,7 @@
  * start with the same prefix, e.g. Stun Spore tests should start with
  * "Stun Spore", this allows just the Stun Spore-related tests to be run
  * with:
- *     make check TESTS='Stun Spore'
+ *     make check TESTS="Stun Spore"
  *
  * GIVEN initializes the parties, PLAYER and OPPONENT add a Pokémon to
  * their respective parties. They can both accept a block which further
@@ -95,7 +95,7 @@
  *           TURN { MOVE(player, MOVE_STUN_SPORE); } // 3.
  *       } SCENE {
  *           NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_STUN_SPORE, player); // 4.
- *           MESSAGE("It doesn't affect Foe Oddish…"); // 5.
+ *           MESSAGE("It doesn't affect the opposing Oddish…"); // 5.
  *       }
  *   }
  *
@@ -256,7 +256,7 @@
  *         } WHEN {
  *             TURN { MOVE(player, MOVE_CELEBRATE); }
  *         } SCENE {
- *             MESSAGE("Wobbuffet is paralyzed! It can't move!");
+ *             MESSAGE("Wobbuffet is paralyzed, so it may be unable to move!");
  *         }
  *     }
  * All BattleRandom calls involving tag will return the same number, so
@@ -328,7 +328,7 @@
  *
  * MOVE(battler, move | moveSlot:, [gimmick:], [hit:], [criticalHit:], [target:], [allowed:], [WITH_RNG(tag, value])
  * Used when the battler chooses Fight. Either the move ID or move slot
- * must be specified. gimmick: GIMMICK_MEGA causes the battler to Mega 
+ * must be specified. gimmick: GIMMICK_MEGA causes the battler to Mega
  * Evolve if able, hit: FALSE causes the move to miss, criticalHit: TRUE
  * causes the move to land a critical hit, target: is used in double
  * battles to choose the target (when necessary), and allowed: FALSE is
@@ -413,7 +413,7 @@
  * Spaces in pattern match newlines (\n, \l, and \p) in the message.
  * Often used to check that a battler took its turn but it failed, e.g.:
  *     MESSAGE("Wobbuffet used Dream Eater!");
- *     MESSAGE("Foe Wobbuffet wasn't affected!");
+ *     MESSAGE("The opposing Wobbuffet wasn't affected!");
  *
  * STATUS_ICON(battler, status1 | none: | sleep: | poison: | burn: | freeze: | paralysis:, badPoison:)
  * Causes the test to fail if the battler's status is not changed to the
@@ -432,7 +432,7 @@
  * following command succeeds.
  *     // Our Wobbuffet does not Celebrate before the foe's.
  *     NOT MESSAGE("Wobbuffet used Celebrate!");
- *     MESSAGE("Foe Wobbuffet used Celebrate!");
+ *     MESSAGE("The opposing Wobbuffet used Celebrate!");
  * WARNING: NOT is an alias of NONE_OF, so it behaves surprisingly when
  *          applied to multiple commands wrapped in braces.
  *
@@ -440,7 +440,7 @@
  * Causes the test to fail unless one of the SCENE commands succeeds.
  *     ONE_OF {
  *         MESSAGE("Wobbuffet used Celebrate!");
- *         MESSAGE("Wobbuffet is paralyzed! It can't move!");
+ *         MESSAGE("Wobbuffet is paralyzed, so it may be unable to move!");
  *     }
  *
  * NONE_OF
@@ -449,9 +449,9 @@
  *     // Our Wobbuffet does not move before the foe's.
  *     NONE_OF {
  *         MESSAGE("Wobbuffet used Celebrate!");
- *         MESSAGE("Wobbuffet is paralyzed! It can't move!");
+ *         MESSAGE("Wobbuffet is paralyzed, so it may be unable to move!");
  *     }
- *     MESSAGE("Foe Wobbuffet used Celebrate!");
+ *     MESSAGE("The opposing Wobbuffet used Celebrate!");
  *
  * PLAYER_PARTY and OPPONENT_PARTY
  * Refer to the party members defined in GIVEN, e.g.:
@@ -645,6 +645,15 @@ struct AILogLine
     s16 score;
 };
 
+// Data which is updated by the test runner during a battle and needs to
+// be reset between trials.
+struct BattleTrialData
+{
+    u8 lastActionTurn;
+    u8 queuedEvent;
+    u8 aiActionsPlayed[MAX_BATTLERS_COUNT];
+};
+
 struct BattleTestData
 {
     u8 stack[BATTLE_TEST_STACK_SIZE];
@@ -676,20 +685,19 @@ struct BattleTestData
     u8 battleRecordSourceLineOffsets[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u16 recordIndexes[MAX_BATTLERS_COUNT];
     struct BattlerTurn battleRecordTurns[MAX_TURNS][MAX_BATTLERS_COUNT];
-    u8 lastActionTurn;
 
     u8 queuedEventsCount;
     u8 queueGroupType;
     u8 queueGroupStart;
-    u8 queuedEvent;
     struct QueuedEvent queuedEvents[MAX_QUEUED_EVENTS];
     u8 expectedAiActionIndex[MAX_BATTLERS_COUNT];
-    u8 aiActionsPlayed[MAX_BATTLERS_COUNT];
     struct ExpectedAIAction expectedAiActions[MAX_BATTLERS_COUNT][MAX_EXPECTED_ACTIONS];
     struct ExpectedAiScore expectedAiScores[MAX_BATTLERS_COUNT][MAX_TURNS][MAX_AI_SCORE_COMPARISION_PER_TURN]; // Max 4 comparisions per turn
     struct AILogLine aiLogLines[MAX_BATTLERS_COUNT][MAX_MON_MOVES][MAX_AI_LOG_LINES];
     u8 aiLogPrintedForMove[MAX_BATTLERS_COUNT]; // Marks ai score log as printed for move, so the same log isn't displayed multiple times.
     u16 flagId;
+
+    struct BattleTrialData trial;
 };
 
 struct BattleTestRunnerState
@@ -727,6 +735,8 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 #define APPEND_COMMA_TRUE(a) , a, TRUE
 #define R_APPEND_TRUE(...) __VA_OPT__(FIRST(__VA_ARGS__), TRUE RECURSIVELY(R_FOR_EACH(APPEND_COMMA_TRUE, EXCEPT_1(__VA_ARGS__))))
 
+#define AI_TRAINER_NAME "{PKMN} TRAINER LEAF"
+
 /* Test */
 
 #define TO_DO_BATTLE_TEST(_name) \
@@ -738,7 +748,7 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 #define BATTLE_TEST_ARGS_SINGLE(_name, _type, ...) \
     struct CAT(Result, __LINE__) { RECURSIVELY(R_FOR_EACH(APPEND_SEMICOLON, __VA_ARGS__)) }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *); \
-    __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
+    __attribute__((section(".tests"), used)) static const struct Test CAT(sTest, __LINE__) = \
     { \
         .name = _name, \
         .filename = __FILE__, \
@@ -756,7 +766,7 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 #define BATTLE_TEST_ARGS_DOUBLE(_name, _type, ...) \
     struct CAT(Result, __LINE__) { RECURSIVELY(R_FOR_EACH(APPEND_SEMICOLON, __VA_ARGS__)) }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *); \
-    __attribute__((section(".tests"))) static const struct Test CAT(sTest, __LINE__) = \
+    __attribute__((section(".tests"), used)) static const struct Test CAT(sTest, __LINE__) = \
     { \
         .name = _name, \
         .filename = __FILE__, \
@@ -944,7 +954,10 @@ struct MoveContext
     u16 gimmick:4;
     u16 explicitGimmick:1;
     u16 allowed:1;
+    // End of word
     u16 explicitAllowed:1;
+    u16 partyIndex:3; // Used for moves where you select a party member without swiching, such as Revival Blessing
+    u16 explicitPartyIndex:1;
     u16 notExpected:1; // Has effect only with EXPECT_MOVE
     u16 explicitNotExpected:1;
     struct BattlePokemon *target;
@@ -1004,11 +1017,11 @@ void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
                                      MESSAGE(name ", good! Come back!");          \
                                  }
 
-#define SEND_IN_MESSAGE(name)    ONE_OF {                                            \
-                                     MESSAGE("Go! " name "!");                       \
-                                     MESSAGE("Do it! " name "!");                    \
-                                     MESSAGE("Go for it, " name "!");                \
-                                     MESSAGE("Your foe's weak! Get 'em, " name "!"); \
+#define SEND_IN_MESSAGE(name)    ONE_OF {                                                   \
+                                     MESSAGE("Go! " name "!");                              \
+                                     MESSAGE("You're in charge, " name "!");                \
+                                     MESSAGE("Go for it, " name "!");                       \
+                                     MESSAGE("Your opponent's weak! Get 'em, " name "!");   \
                                  }
 
 enum QueueGroupType

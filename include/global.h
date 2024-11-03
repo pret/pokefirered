@@ -136,7 +136,7 @@
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
-extern u8 gStringVar4[];
+extern u8 gStringVar4[1000];
 
 #define DIV_ROUND_UP(val, roundBy)(((val) / (roundBy)) + (((val) % (roundBy)) ? 1 : 0))
 

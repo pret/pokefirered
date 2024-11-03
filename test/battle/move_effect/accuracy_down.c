@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Sand Attack lowers Accuracy by 1 stage")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SAND_ATTACK, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("Foe Wobbuffet's accuracy fell!");
+        MESSAGE("The opposing Wobbuffet's accuracy fell!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
     }
 }

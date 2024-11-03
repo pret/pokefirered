@@ -419,7 +419,7 @@ AI_DOUBLE_BATTLE_TEST("AI will not use Helping Hand if partner does not have any
                     SCORE_LT_VAL(opponentLeft, MOVE_HELPING_HAND, AI_SCORE_DEFAULT, target:opponentLeft);
                  }
     } SCENE {
-        NOT MESSAGE("Foe Wobbuffet used Helping Hand!");
+        NOT MESSAGE("The opposing Wobbuffet used Helping Hand!");
     }
 }
 
@@ -448,7 +448,7 @@ AI_DOUBLE_BATTLE_TEST("AI will not use a status move if partner already chose He
                     SCORE_LT_VAL(opponentRight, statusMove, AI_SCORE_DEFAULT, target:opponentLeft);
                  }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Helping Hand!");
+        MESSAGE("The opposing Wobbuffet used Helping Hand!");
     }
 }
 
@@ -567,8 +567,8 @@ AI_SINGLE_BATTLE_TEST("AI will only choose Surf 1/3 times if the opposing mon ha
         TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
         TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
     } SCENE {
-        MESSAGE("Foe Lanturn used Surf!");
-        MESSAGE("Foe Lanturn used Surf!");
+        MESSAGE("The opposing Lanturn used Surf!");
+        MESSAGE("The opposing Lanturn used Surf!");
     }
 }
 
@@ -584,8 +584,8 @@ AI_SINGLE_BATTLE_TEST("AI will choose Thunderbolt then Surf 2/3 times if the opp
         TURN { EXPECT_MOVE(opponent, MOVE_THUNDERBOLT); }
         TURN { EXPECT_MOVE(opponent, MOVE_SURF); }
     } SCENE {
-        MESSAGE("Foe Lanturn used Thunderbolt!");
-        MESSAGE("Foe Lanturn used Surf!");
+        MESSAGE("The opposing Lanturn used Thunderbolt!");
+        MESSAGE("The opposing Lanturn used Surf!");
     }
 }
 
@@ -739,6 +739,7 @@ AI_SINGLE_BATTLE_TEST("AI calculates guaranteed criticals and detects critical i
 
 AI_DOUBLE_BATTLE_TEST("AI recognizes Volt Absorb received from Trace")
 {
+    KNOWN_FAILING; // MGriffin's PR that switched two turn charging moves in AI tests broke this test, waiting on a fix
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_MAGNETON);

@@ -51,7 +51,7 @@ DOUBLE_BATTLE_TEST("Focus Punch activation is based on Speed")
     }
     SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, opponentRight);
-        MESSAGE("Foe Wynaut is tightening its focus!");
+        MESSAGE("The opposing Wynaut is tightening its focus!");
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, playerRight);
         MESSAGE("Wynaut is tightening its focus!");
@@ -60,9 +60,9 @@ DOUBLE_BATTLE_TEST("Focus Punch activation is based on Speed")
         MESSAGE("Wobbuffet is tightening its focus!");
 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FOCUS_PUNCH_SETUP, opponentLeft);
-        MESSAGE("Foe Wobbuffet is tightening its focus!");
+        MESSAGE("The opposing Wobbuffet is tightening its focus!");
 
-        MESSAGE("Foe Wynaut used Focus Punch!");
+        MESSAGE("The opposing Wynaut used Focus Punch!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FOCUS_PUNCH, opponentRight);
         HP_BAR(playerLeft);
 
@@ -71,7 +71,7 @@ DOUBLE_BATTLE_TEST("Focus Punch activation is based on Speed")
         HP_BAR(opponentLeft);
 
         MESSAGE("Wobbuffet lost its focus and couldn't move!");
-        MESSAGE("Foe Wobbuffet lost its focus and couldn't move!");
+        MESSAGE("The opposing Wobbuffet lost its focus and couldn't move!");
     }
 }
 

@@ -6,7 +6,7 @@ const u8 gFallbackPokedexText[] = _(
     "at this time.");
 
 // Gen 1 families
-const u8 gRaticateAlolanPokedexText[] = _(
+const u8 gRaticateAlolaPokedexText[] = _(
     "It forms a group of Rattata, which it \n"
     "assumes command of. Each group\n"
     "has its own territory, and disputes\n"
@@ -24,7 +24,7 @@ const u8 gPikachuPokedexText[] = _(
     "energy in a burst, the electric power is\n"
     "equal to a lightning bolt.");
 
-const u8 gMarowakAlolanPokedexText[] = _(
+const u8 gMarowakAlolaPokedexText[] = _(
     "The cursed flames that light up the bone\n"
     "carried by this Pokémon are said\n"
     "to cause both mental and physical\n"
@@ -73,9 +73,9 @@ const u8 gGenesectPokedexText[] = _(
 // Gen 6 families
 const u8 gGreninjaPokedexText[] = _(
     "It appears and vanishes with a ninja's\n"
-    "grace. It toys with its enemies using swift\n"
-    "movements, while slicing them with throwing\n"
-    "stars made of compressed water.");
+    "grace. It toys with its enemies using\n"
+    "swift movements, while slicing them with\n"
+    "throwing stars made of compressed water.");
 
 const u8 gScatterbugPokedexText[] = _(
     "When under attack from bird Pokémon,\n"
@@ -207,7 +207,7 @@ const u8 gKommoOPokedexText[] = _(
 // Gen 8 families
 const u8 gAlcremieVanillaCreamPokedexText[] = _(
     "If Alcremie is content, the secreted cream\n"
-    "from its hands becomes sweeter and richer."
+    "from its hands becomes sweeter and richer.\n"
     "When it trusts a Trainer, it will treat\n"
     "them to berries it's decorated with cream.");
 
@@ -279,8 +279,8 @@ const u8 gOgerponWellspringMaskPokedexText[] = _(
 
 const u8 gOgerponHearthflameMaskPokedexText[] = _(
     "This form is the most aggressive,\n"
-    "bombarding enemies with the\n"
-    "intensity of flames blazing within a hearth.");
+    "bombarding enemies with the intensity\n"
+    "of flames blazing within a hearth.");
 
 const u8 gOgerponCornerstoneMaskPokedexText[] = _(
     "In this form, it draws on the power\n"

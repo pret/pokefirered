@@ -108,7 +108,7 @@ SINGLE_BATTLE_TEST("U-turn switches the user out after Ice Face activates")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, player);
         HP_BAR(opponent);
         ABILITY_POPUP(opponent, ABILITY_ICE_FACE);
-        MESSAGE("Foe Eiscue transformed!");
+        MESSAGE("The opposing Eiscue transformed!");
         SEND_IN_MESSAGE("Wynaut");
     }
 }

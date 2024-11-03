@@ -134,7 +134,7 @@ void SetTeraType(struct ScriptContext *ctx)
  * if side/slot are assigned, it will create the mon at the assigned party location
  * if slot == PARTY_SIZE, it will give the mon to first available party or storage slot
  */
-static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 ggMaxFactor, u8 teraType)
+static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, enum PokeBall ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 ggMaxFactor, u8 teraType)
 {
     u16 nationalDexNum;
     int sentToPc;
@@ -213,8 +213,8 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     SetMonData(&mon, MON_DATA_ABILITY_NUM, &abilityNum);
 
     // ball
-    if (ball > LAST_BALL)
-        ball = ITEM_POKE_BALL;
+    if (ball > POKEBALL_COUNT)
+        ball = BALL_POKE;
     SetMonData(&mon, MON_DATA_POKEBALL, &ball);
 
     // held item
@@ -283,7 +283,7 @@ u32 ScriptGiveMon(u16 species, u8 level, u16 item)
 
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
 
-/* Give or create a mon to either player or opponent 
+/* Give or create a mon to either player or opponent
  */
 void ScrCmd_createmon(struct ScriptContext *ctx)
 {

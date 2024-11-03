@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Innards Out deal dmg on fainting equal to the amount of dmg 
     } WHEN {
         TURN { MOVE(opponent, MOVE_PSYCHIC); SEND_OUT(player, 1); if (hp == 100) { SEND_OUT(opponent, 1); } }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Psychic!");
+        MESSAGE("The opposing Wobbuffet used Psychic!");
         HP_BAR(player, hp);
         ABILITY_POPUP(player, ABILITY_INNARDS_OUT);
         HP_BAR(opponent, hp);
@@ -38,8 +38,8 @@ SINGLE_BATTLE_TEST("Innards Out does not trigger after Gastro Acid has been used
         TURN { MOVE(opponent, MOVE_GASTRO_ACID); }
         TURN { MOVE(opponent, MOVE_PSYCHIC); SEND_OUT(player, 1); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Gastro Acid!");
-        MESSAGE("Foe Wobbuffet used Psychic!");
+        MESSAGE("The opposing Wobbuffet used Gastro Acid!");
+        MESSAGE("The opposing Wobbuffet used Psychic!");
         HP_BAR(player);
         NONE_OF {
             ABILITY_POPUP(player, ABILITY_INNARDS_OUT);
@@ -59,7 +59,7 @@ SINGLE_BATTLE_TEST("Innards Out does not damage Magic Guard Pokemon")
     } WHEN {
         TURN { MOVE(opponent, MOVE_PSYCHIC); SEND_OUT(player, 1); }
     } SCENE {
-        MESSAGE("Foe Clefable used Psychic!");
+        MESSAGE("The opposing Clefable used Psychic!");
         HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_INNARDS_OUT);
         NOT HP_BAR(opponent);

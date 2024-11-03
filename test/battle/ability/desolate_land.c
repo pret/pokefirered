@@ -16,13 +16,13 @@ SINGLE_BATTLE_TEST("Desolate Land blocks damaging Water-type moves")
         TURN { MOVE(opponent, MOVE_WATER_GUN); }
         TURN { MOVE(opponent, MOVE_WATER_GUN); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Water Gun!");
+        MESSAGE("The opposing Wobbuffet used Water Gun!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
-        MESSAGE("The Water-type attack evaporated in the harsh sunlight!");
+        MESSAGE("The Water-type attack evaporated in the extremely harsh sunlight!");
         NOT HP_BAR(player);
-        MESSAGE("Foe Wobbuffet used Water Gun!");
+        MESSAGE("The opposing Wobbuffet used Water Gun!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
-        MESSAGE("The Water-type attack evaporated in the harsh sunlight!");
+        MESSAGE("The Water-type attack evaporated in the extremely harsh sunlight!");
         NOT HP_BAR(player);
     } THEN {
         EXPECT_EQ(player->hp, player->maxHP);
@@ -42,10 +42,10 @@ DOUBLE_BATTLE_TEST("Desolate Land blocks damaging Water-type moves and prints th
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_SURF); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Surf!");
+        MESSAGE("The opposing Wobbuffet used Surf!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, opponentLeft);
-        MESSAGE("The Water-type attack evaporated in the harsh sunlight!");
-        NOT MESSAGE("The Water-type attack evaporated in the harsh sunlight!");
+        MESSAGE("The Water-type attack evaporated in the extremely harsh sunlight!");
+        NOT MESSAGE("The Water-type attack evaporated in the extremely harsh sunlight!");
     } THEN {
         EXPECT_EQ(playerLeft->hp, playerLeft->maxHP);
         EXPECT_EQ(playerRight->hp, playerRight->maxHP);
@@ -61,7 +61,7 @@ SINGLE_BATTLE_TEST("Desolate Land does not block a move if pokemon is asleep and
     } WHEN {
         TURN { MOVE(opponent, MOVE_WATER_GUN); }
     } SCENE {
-        NOT MESSAGE("The Water-type attack evaporated in the harsh sunlight!");
-        MESSAGE("Foe Wobbuffet is fast asleep.");
+        NOT MESSAGE("The Water-type attack evaporated in the extremely harsh sunlight!");
+        MESSAGE("The opposing Wobbuffet is fast asleep.");
     }
 }

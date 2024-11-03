@@ -46,5 +46,4 @@ jobs:
         env:
           TEST: 1
         run: |
-          make -j${nproc} -O pokefirered-test.elf
           make -j${nproc} check

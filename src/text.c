@@ -12,6 +12,7 @@
 #include "quest_log.h"
 #include "sound.h"
 #include "string_util.h"
+#include "strings.h"
 #include "text.h"
 #include "window.h"
 #include "constants/songs.h"
@@ -1237,18 +1238,28 @@ u32 (*GetFontWidthFunc(u8 glyphId))(u16 _glyphId, bool32 _isJapanese)
     return NULL;
 }
 
+s32 GetGlyphWidth(u16 glyphId, bool32 isJapanese, u8 fontId)
+{
+    u32 (*func)(u16 fontId, bool32 isJapanese);
+
+    func = GetFontWidthFunc(fontId);
+    if (func == NULL)
+        return 0;
+    return func(glyphId, isJapanese);
+}
+
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
-    bool8 isJapanese;
+    bool32 isJapanese;
     int minGlyphWidth;
-    u32 (*func)(u16 glyphId, bool32 isJapanese);
+    u32 (*func)(u16 fontId, bool32 isJapanese);
     int localLetterSpacing;
     u32 lineWidth;
     const u8 *bufferPointer;
     int glyphWidth;
-    u32 width;
+    s32 width;
 
-    isJapanese = FALSE;
+    isJapanese = 0;
     minGlyphWidth = 0;
 
     func = GetFontWidthFunc(fontId);
@@ -1262,7 +1273,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 
     width = 0;
     lineWidth = 0;
-    bufferPointer = NULL;
+    bufferPointer = 0;
 
     while (*str != EOS)
     {
@@ -1276,17 +1287,17 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case PLACEHOLDER_BEGIN:
             switch (*++str)
             {
-                case PLACEHOLDER_ID_STRING_VAR_1:
-                    bufferPointer = gStringVar1;
-                    break;
-                case PLACEHOLDER_ID_STRING_VAR_2:
-                    bufferPointer = gStringVar2;
-                    break;
-                case PLACEHOLDER_ID_STRING_VAR_3:
-                    bufferPointer = gStringVar3;
-                    break;
-                default:
-                    return 0;
+            case PLACEHOLDER_ID_STRING_VAR_1:
+                bufferPointer = gStringVar1;
+                break;
+            case PLACEHOLDER_ID_STRING_VAR_2:
+                bufferPointer = gStringVar2;
+                break;
+            case PLACEHOLDER_ID_STRING_VAR_3:
+                bufferPointer = gStringVar3;
+                break;
+            default:
+                return 0;
             }
         case CHAR_DYNAMIC:
             if (bufferPointer == NULL)
@@ -1295,14 +1306,19 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             {
                 glyphWidth = func(*bufferPointer++, isJapanese);
                 if (minGlyphWidth > 0)
-                    lineWidth += minGlyphWidth > glyphWidth ? minGlyphWidth : glyphWidth;
+                {
+                    if (glyphWidth < minGlyphWidth)
+                        glyphWidth = minGlyphWidth;
+                    lineWidth += glyphWidth;
+                }
                 else
-                    lineWidth += isJapanese ? glyphWidth + localLetterSpacing : glyphWidth;
+                {
+                    lineWidth += glyphWidth;
+                    if (isJapanese && str[1] != EOS)
+                        lineWidth += localLetterSpacing;
+                }
             }
-            bufferPointer = NULL;
-            break;
-        case CHAR_PROMPT_SCROLL:
-        case CHAR_PROMPT_CLEAR:
+            bufferPointer = 0;
             break;
         case EXT_CTRL_CODE_BEGIN:
             switch (*++str)
@@ -1321,10 +1337,6 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             case EXT_CTRL_CODE_SHIFT_RIGHT:
             case EXT_CTRL_CODE_SHIFT_DOWN:
                 ++str;
-            case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
-            case EXT_CTRL_CODE_WAIT_SE:
-            case EXT_CTRL_CODE_FILL_WINDOW:
                 break;
             case EXT_CTRL_CODE_FONT:
                 func = GetFontWidthFunc(*++str);
@@ -1352,6 +1364,11 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 break;
             case EXT_CTRL_CODE_ENG:
                 isJapanese = FALSE;
+                break;
+            case EXT_CTRL_CODE_RESET_FONT:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
+            case EXT_CTRL_CODE_WAIT_SE:
+            case EXT_CTRL_CODE_FILL_WINDOW:
             default:
                 break;
             }
@@ -1367,12 +1384,17 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             {
                 if (glyphWidth < minGlyphWidth)
                     glyphWidth = minGlyphWidth;
+                lineWidth += glyphWidth;
             }
-            else if (isJapanese)
+            else
             {
-                glyphWidth += localLetterSpacing;
+                lineWidth += glyphWidth;
+                if (isJapanese && str[1] != EOS)
+                    lineWidth += localLetterSpacing;
             }
-            lineWidth += glyphWidth;
+            break;
+        case CHAR_PROMPT_SCROLL:
+        case CHAR_PROMPT_CLEAR:
             break;
         default:
             glyphWidth = func(*str, isJapanese);
@@ -1384,9 +1406,9 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             }
             else
             {
-                if (fontId != FONT_BRAILLE && isJapanese)
-                    glyphWidth += localLetterSpacing;
                 lineWidth += glyphWidth;
+                if (isJapanese && str[1] != EOS)
+                    lineWidth += localLetterSpacing;
             }
             break;
         }
@@ -1396,6 +1418,28 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     if (lineWidth > width)
         return lineWidth;
     return width;
+}
+
+s32 GetStringLineWidth(u8 fontId, const u8 *str, s16 letterSpacing, u32 lineNum, u32 strSize)
+{
+    u32 strWidth = 0, strLen, currLine;
+    u8 strCopy[strSize];
+
+    for (currLine = 1; currLine <= lineNum; currLine++)
+    {
+        strWidth = GetStringWidth(fontId, str, letterSpacing);
+        strLen = StringLineLength(str);
+        memset(strCopy, EOS, strSize);
+        if (currLine == lineNum && strLen != 0)
+        {
+            StringCopyN(strCopy, str, strLen);
+            strWidth = GetStringWidth(fontId, strCopy, letterSpacing);
+            strLen = StringLineLength(strCopy);
+            StringAppend(strCopy, gText_EmptyString3);
+        }
+        str += strLen + 1;
+    }
+    return strWidth;
 }
 
 u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)

@@ -40,7 +40,7 @@ WILD_BATTLE_TEST("Higher leveled Pokemon give more exp", s32 exp)
         TURN { MOVE(player, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("Wobbuffet used Tackle!");
-        MESSAGE("Wild Caterpie fainted!");
+        MESSAGE("The wild Caterpie fainted!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } FINALLY {
         EXPECT_GT(results[1].exp, results[0].exp);
@@ -61,7 +61,7 @@ WILD_BATTLE_TEST("Lucky Egg boosts gained exp points by 50%", s32 exp)
         TURN { MOVE(player, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("Wobbuffet used Tackle!");
-        MESSAGE("Wild Caterpie fainted!");
+        MESSAGE("The wild Caterpie fainted!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } FINALLY {
         EXPECT_MUL_EQ(results[1].exp, Q_4_12(1.5), results[0].exp);
@@ -84,7 +84,7 @@ WILD_BATTLE_TEST("Exp is scaled to player and opponent's levels", s32 exp)
         TURN { MOVE(player, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("Wobbuffet used Tackle!");
-        MESSAGE("Wild Caterpie fainted!");
+        MESSAGE("The wild Caterpie fainted!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } FINALLY {
         EXPECT_GT(results[0].exp, results[1].exp);
@@ -108,7 +108,7 @@ WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
         TURN { MOVE(player, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("Wobbuffet used Tackle!");
-        MESSAGE("Wild Blissey fainted!");
+        MESSAGE("The wild Blissey fainted!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } THEN {
         EXPECT(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL) > 1);
@@ -136,7 +136,7 @@ WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not partici
         TURN { MOVE(player, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("Wobbuffet used Tackle!");
-        MESSAGE("Wild Caterpie fainted!");
+        MESSAGE("The wild Caterpie fainted!");
         // This message should appear only for gen6> exp share.
         NOT MESSAGE("The rest of your team gained EXP. Points thanks to the Exp. Share!");
     } THEN {

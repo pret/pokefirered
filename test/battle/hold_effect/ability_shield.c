@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Ability Shield prevents Neutralizing Gas")
         TURN { }
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_NEUTRALIZING_GAS);
-        MESSAGE("Neutralizing Gas filled the area!");
+        MESSAGE("Neutralizing gas filled the area!");
         if (item == ITEM_ABILITY_SHIELD) {
             ABILITY_POPUP(player, ABILITY_DROUGHT);
             MESSAGE("Torkoal's Drought intensified the sun's rays!");

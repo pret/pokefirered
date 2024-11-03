@@ -222,7 +222,7 @@ static void SetUpStartMenu(void)
         SetUpStartMenu_UnionRoom();
     else if (GetSafariZoneFlag() == TRUE)
         SetUpStartMenu_SafariZone();
-    else if (DEBUG_OVERWORLD_MENU == TRUE && DEBUG_OVERWORLD_IN_MENU == TRUE)
+    else if (DEBUG_OVERWORLD_MENU && DEBUG_OVERWORLD_IN_MENU)
         SetUpStartMenu_Debug();
     else
         SetUpStartMenu_NormalField();
@@ -401,12 +401,8 @@ static s8 DoDrawStartMenu(void)
         break;
     case 6:
         sStartMenuCursorPos = InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 0, 15, sNumStartMenuItems, sStartMenuCursorPos);
-        if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
-        {
-#if DEBUG_OVERWORLD_MENU != TRUE
+        if (DEBUG_OVERWORLD_MENU != TRUE && !MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
             DrawHelpMessageWindowWithText(sStartMenuDescPointers[sStartMenuOrder[sStartMenuCursorPos]]);
-#endif
-        }
         CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
         return TRUE;
     }
@@ -487,22 +483,16 @@ static bool8 StartCB_HandleInput(void)
     {
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = Menu_MoveCursor(-1);
-        if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
-        {
-#if DEBUG_OVERWORLD_MENU != TRUE
+        if (DEBUG_OVERWORLD_MENU != TRUE && !MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
             PrintTextOnHelpMessageWindow(sStartMenuDescPointers[sStartMenuOrder[sStartMenuCursorPos]], 2);
-#endif
-        }
     }
     if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = Menu_MoveCursor(+1);
-        if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
+        if (DEBUG_OVERWORLD_MENU != TRUE && !MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
         {
-#if DEBUG_OVERWORLD_MENU != TRUE
             PrintTextOnHelpMessageWindow(sStartMenuDescPointers[sStartMenuOrder[sStartMenuCursorPos]], 2);
-#endif
         }
     }
     if (JOY_NEW(A_BUTTON))
@@ -517,9 +507,8 @@ static bool8 StartCB_HandleInput(void)
     if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         DestroySafariZoneStatsWindow();
-#if DEBUG_OVERWORLD_MENU != TRUE
-        DestroyHelpMessageWindow_();
-#endif
+        if (DEBUG_OVERWORLD_MENU != TRUE)
+            DestroyHelpMessageWindow_();
         CloseStartMenu();
         return TRUE;
     }
@@ -621,9 +610,8 @@ static bool8 StartMenuOptionCallback(void)
 static bool8 StartMenuExitCallback(void)
 {
     DestroySafariZoneStatsWindow();
-#if DEBUG_OVERWORLD_MENU != TRUE
-    DestroyHelpMessageWindow_();
-#endif
+    if (DEBUG_OVERWORLD_MENU != TRUE)
+        DestroyHelpMessageWindow_();
     CloseStartMenu();
     return TRUE;
 }
@@ -633,19 +621,19 @@ static bool8 StartMenuDebugCallback(void)
     DestroySafariZoneStatsWindow();
     HideStartMenuDebug(); // Hide start menu without enabling movement
 
-#if DEBUG_OVERWORLD_MENU == TRUE
-    FreezeObjectEvents();
-    Debug_ShowMainMenu();
-#endif
+    if (DEBUG_OVERWORLD_MENU == TRUE)
+    {
+        FreezeObjectEvents();
+        Debug_ShowMainMenu();
+    }
     return TRUE;
 }
 
 static bool8 StartMenuSafariZoneRetireCallback(void)
 {
     DestroySafariZoneStatsWindow();
-#if DEBUG_OVERWORLD_MENU != TRUE
-    DestroyHelpMessageWindow_();
-#endif
+    if (DEBUG_OVERWORLD_MENU != TRUE)
+        DestroyHelpMessageWindow_();
     CloseStartMenu();
     SafariZoneRetirePrompt();
     return TRUE;
@@ -815,9 +803,8 @@ static u8 SaveDialogCB_PrintAskSaveText(void)
 {
     ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
-#if DEBUG_OVERWORLD_MENU != TRUE
-    DestroyHelpMessageWindow(0);
-#endif
+    if (DEBUG_OVERWORLD_MENU != TRUE)
+        DestroyHelpMessageWindow(0);
     PrintSaveStats();
     PrintSaveTextWithFollowupFunc(gText_WouldYouLikeToSaveTheGame, SaveDialogCB_AskSavePrintYesNoMenu);
     return SAVECB_RETURN_CONTINUE;

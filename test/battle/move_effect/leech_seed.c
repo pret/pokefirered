@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Leech Seed doesn't affect Grass-type Pokémon")
         TURN { MOVE(player, MOVE_LEECH_SEED); }
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_LEECH_SEED, player);
-        MESSAGE("It doesn't affect Foe Oddish…");
+        MESSAGE("It doesn't affect the opposing Oddish…");
     }
 }
 TO_DO_BATTLE_TEST("Leech Seed doesn't affect already seeded targets")

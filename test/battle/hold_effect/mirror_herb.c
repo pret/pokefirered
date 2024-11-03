@@ -60,7 +60,7 @@ DOUBLE_BATTLE_TEST("Mirror Herb does not trigger for Ally's Soul Heart's stat ra
         TURN { MOVE(playerRight, MOVE_TACKLE, target:opponentLeft); }
     } SCENE {
         MESSAGE("Wynaut used Tackle!");
-        MESSAGE("Foe Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet fainted!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);

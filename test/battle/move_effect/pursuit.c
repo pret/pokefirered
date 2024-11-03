@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Pursuited mon correctly switches out after it got hit and ac
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PURSUIT, opponent);
         ABILITY_POPUP(player, ABILITY_TANGLING_HAIR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("Foe Wynaut's Speed fell!");
+        MESSAGE("The opposing Wynaut's Speed fell!");
         SEND_IN_MESSAGE("Wobbuffet");
     }
 }

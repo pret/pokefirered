@@ -22,17 +22,17 @@ SINGLE_BATTLE_TEST("Smelling Salts does not cure paralyzed pokemons behind subst
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SMELLING_SALTS, player);
         if (ability == ABILITY_INNER_FOCUS)
         {
-            MESSAGE("The SUBSTITUTE took damage for Foe Seismitoad!");
+            MESSAGE("The substitute took damage for the opposing Seismitoad!");
             NONE_OF
             {
-                MESSAGE("Foe Seismitoad's SUBSTITUTE faded!"); // Smelling Salts does 86 damage, the sub has 122 HP, if hitting a sub it shouldn't get boosted damage.
-                MESSAGE("Foe Seismitoad was healed of paralysis!");
+                MESSAGE("The opposing Seismitoad's substitute faded!"); // Smelling Salts does 86 damage, the sub has 122 HP, if hitting a sub it shouldn't get boosted damage.
+                MESSAGE("The opposing Seismitoad was cured of paralysis!");
                 STATUS_ICON(opponent, none: TRUE);
             }
         }
         else
         {
-            MESSAGE("Foe Seismitoad was healed of paralysis!");
+            MESSAGE("The opposing Seismitoad was cured of paralysis!");
             STATUS_ICON(opponent, none: TRUE);
         }
     }
@@ -52,12 +52,12 @@ SINGLE_BATTLE_TEST("Smelling Salts get incread power vs. paralyzed targets")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SMELLING_SALTS, player);
         if (status1 == STATUS1_PARALYSIS)
         {
-            MESSAGE("Foe Lotad fainted!");
+            MESSAGE("The opposing Lotad fainted!");
         }
         else
         {
-            NOT MESSAGE("Foe Lotad fainted!");
-            MESSAGE("Foe Lotad used Celebrate!");
+            NOT MESSAGE("The opposing Lotad fainted!");
+            MESSAGE("The opposing Lotad used Celebrate!");
         }
     }
 }

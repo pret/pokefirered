@@ -26,6 +26,7 @@ SECTIONS {
     {
         src/*.o(.sbss);
         test/*.o(.sbss);
+        . = ALIGN(4);
     } > EWRAM
 
     .iwram ORIGIN(IWRAM) : AT (__iwram_lma)
@@ -33,6 +34,7 @@ SECTIONS {
     {
         __iwram_start = .;
         *(.iwram*);
+        . = ALIGN(4);
         __iwram_end = .;
     } > IWRAM
 
@@ -48,10 +50,12 @@ SECTIONS {
 
         src/m4a.o(.bss.code);
 
+        src/*.o(common_data);
         src/*.o(COMMON);
         data/*.o(COMMON);
         test/*.o(COMMON);
         *libc.a:sbrkr.o(COMMON);
+        . = ALIGN(4);
 
 	/* .persistent starts at 0x3007F00 */
 	/* WARNING: This is the end of the IRQ stack, if there's too

@@ -143,9 +143,9 @@ SINGLE_BATTLE_TEST("Move Raging Bull changes it's type depending on the Tauros F
     u16 speciesPlayer;
     u16 speciesOpponent;
 
-    PARAMETRIZE { speciesPlayer = SPECIES_TAUROS_PALDEAN_COMBAT_BREED; speciesOpponent = SPECIES_CHARIZARD; }
-    PARAMETRIZE { speciesPlayer = SPECIES_TAUROS_PALDEAN_BLAZE_BREED; speciesOpponent = SPECIES_BLASTOISE; }
-    PARAMETRIZE { speciesPlayer = SPECIES_TAUROS_PALDEAN_AQUA_BREED; speciesOpponent = SPECIES_VENUSAUR; }
+    PARAMETRIZE { speciesPlayer = SPECIES_TAUROS_PALDEA_COMBAT; speciesOpponent = SPECIES_CHARIZARD; }
+    PARAMETRIZE { speciesPlayer = SPECIES_TAUROS_PALDEA_BLAZE; speciesOpponent = SPECIES_BLASTOISE; }
+    PARAMETRIZE { speciesPlayer = SPECIES_TAUROS_PALDEA_AQUA; speciesOpponent = SPECIES_VENUSAUR; }
 
     GIVEN {
         PLAYER(speciesPlayer);

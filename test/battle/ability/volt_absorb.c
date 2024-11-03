@@ -51,7 +51,7 @@ SINGLE_BATTLE_TEST("Volt Absorb is only triggered once on multi strike moves")
         ASSUME(gMovesInfo[MOVE_FURY_SWIPES].type == TYPE_NORMAL);
         ASSUME(gMovesInfo[MOVE_FURY_SWIPES].effect == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); HP(1); MaxHP(100); }
-        OPPONENT(SPECIES_GRAVELER_ALOLAN) { Ability(ABILITY_GALVANIZE); }
+        OPPONENT(SPECIES_GRAVELER_ALOLA) { Ability(ABILITY_GALVANIZE); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_FURY_SWIPES); }
     } SCENE {
@@ -69,7 +69,7 @@ DOUBLE_BATTLE_TEST("Volt Absorb does not stop Electric Typed Explosion from dama
         ASSUME(gMovesInfo[MOVE_EXPLOSION].type == TYPE_NORMAL);
         PLAYER(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); HP(1); MaxHP(100); }
         PLAYER(SPECIES_ABRA);
-        OPPONENT(SPECIES_GRAVELER_ALOLAN) { Ability(ABILITY_GALVANIZE); }
+        OPPONENT(SPECIES_GRAVELER_ALOLA) { Ability(ABILITY_GALVANIZE); }
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_EXPLOSION); }

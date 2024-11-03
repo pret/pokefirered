@@ -142,8 +142,8 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased if a substitute was hi
         HP_BAR(opponent, captureDamage: &timesGotHit[0]);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUBSTITUTE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CRUNCH, opponent);
-        MESSAGE("The SUBSTITUTE took damage for Wobbuffet!");
-        MESSAGE("Wobbuffet's SUBSTITUTE faded!");
+        MESSAGE("The substitute took damage for Wobbuffet!");
+        MESSAGE("Wobbuffet's substitute faded!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
         HP_BAR(opponent, captureDamage: &timesGotHit[1]);
     } THEN {
@@ -241,7 +241,7 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased if move had no affect"
         for (turns = 0; turns < 2; turns++) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
             HP_BAR(opponent, captureDamage: &timesGotHit[turns]);
-            MESSAGE("Foe Regirock used Tackle!");
+            MESSAGE("The opposing Regirock used Tackle!");
             MESSAGE("It doesn't affect Gastly…");
         }
     } THEN {

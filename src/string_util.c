@@ -136,6 +136,28 @@ u16 StringLength(const u8 *str)
     return length;
 }
 
+u16 StringLineLength(const u8 *str)
+{
+    u16 i = 0, length = 0;
+
+    while (str[length] != EOS)
+    {
+        switch (str[length])
+        {
+        case CHAR_PROMPT_SCROLL:
+        case CHAR_PROMPT_CLEAR:
+        case CHAR_NEWLINE:
+            return length;
+        default:
+            i++;
+            length++;
+            break;
+        }
+    }
+
+    return length;
+}
+
 s32 StringCompare(const u8 *str1, const u8 *str2)
 {
     while (*str1 == *str2)

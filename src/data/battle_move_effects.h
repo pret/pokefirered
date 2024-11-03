@@ -856,7 +856,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectEndeavor,
     },
 
-    [EFFECT_ERUPTION] =
+    [EFFECT_POWER_BASED_ON_USER_HP] =
     {
         .battleScript = BattleScript_EffectHit,
     },
@@ -969,7 +969,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
-    [EFFECT_VARY_POWER_BASED_ON_HP] =
+    [EFFECT_POWER_BASED_ON_TARGET_HP] =
     {
         .battleScript = BattleScript_EffectHit,
     },
@@ -1903,4 +1903,9 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
     },
+
+    [EFFECT_ORDER_UP] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        },
 };

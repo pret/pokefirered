@@ -23,12 +23,12 @@ SINGLE_BATTLE_TEST("Maranga Berry raises the holder's Sp. Def by one stage when 
         HP_BAR(opponent);
         if (move == MOVE_SWIFT) {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
-            MESSAGE("Using Maranga Berry, the Sp. Def of Foe Wobbuffet rose!");
+            MESSAGE("Using Maranga Berry, the Sp. Def of the opposing Wobbuffet rose!");
         }
         else {
             NONE_OF {
                 ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
-                MESSAGE("Using Maranga Berry, the Sp. Def of Foe Wobbuffet rose!");
+                MESSAGE("Using Maranga Berry, the Sp. Def of the opposing Wobbuffet rose!");
             }
         }
     } THEN {
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Maranga Berry raises the holder's Sp. Def by two stages with
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SWIFT, player);
         HP_BAR(opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
-        MESSAGE("Using Maranga Berry, the Sp. Def of Foe Applin sharply rose!");
+        MESSAGE("Using Maranga Berry, the Sp. Def of the opposing Applin sharply rose!");
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 2);
     }

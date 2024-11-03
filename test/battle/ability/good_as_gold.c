@@ -13,7 +13,7 @@ SINGLE_BATTLE_TEST("Good as Gold protects from status moves")
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, player);
         ABILITY_POPUP(opponent, ABILITY_GOOD_AS_GOLD);
-        MESSAGE("It doesn't affect Foe Gholdengo…");
+        MESSAGE("It doesn't affect the opposing Gholdengo…");
     }
 }
 
@@ -29,7 +29,7 @@ SINGLE_BATTLE_TEST("Good as Gold doesn't protect the user from it's own moves")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_NASTY_PLOT, opponent);
         NONE_OF {
             ABILITY_POPUP(opponent, ABILITY_GOOD_AS_GOLD);
-            MESSAGE("It doesn't affect Foe Gholdengo…");
+            MESSAGE("It doesn't affect the opposing Gholdengo…");
         }
     }
 }
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Good as Gold doesn't protect from moves that target the fiel
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, player);
         NONE_OF {
             ABILITY_POPUP(opponent, ABILITY_GOOD_AS_GOLD);
-            MESSAGE("It doesn't affect Foe Gholdengo…");
+            MESSAGE("It doesn't affect the opposing Gholdengo…");
         }
     }
 }
@@ -65,6 +65,6 @@ DOUBLE_BATTLE_TEST("Good as Gold protects from partner's status moves")
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_HELPING_HAND, opponentRight);
         ABILITY_POPUP(opponentLeft, ABILITY_GOOD_AS_GOLD);
-        MESSAGE("It doesn't affect Foe Gholdengo…");
+        MESSAGE("It doesn't affect the opposing Gholdengo…");
     }
 }

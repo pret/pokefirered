@@ -14,6 +14,6 @@ SINGLE_BATTLE_TEST("Smack Down does not ground mons behind substitutes")
     } WHEN {
         TURN { MOVE(opponent, MOVE_SUBSTITUTE); MOVE(player, MOVE_SMACK_DOWN); }
     } SCENE {
-        NOT MESSAGE("Foe Skarmory fell straight down!");
+        NOT MESSAGE("The opposing Skarmory fell straight down!");
     }
 }

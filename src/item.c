@@ -8,6 +8,7 @@
 #include "item_menu.h"
 #include "load_save.h"
 #include "party_menu.h"
+#include "pokeball.h"
 #include "quest_log.h"
 #include "strings.h"
 #include "constants/hold_effects.h"
@@ -168,11 +169,11 @@ bool8 HasAtLeastOneBerry(void)
 
 bool8 HasAtLeastOnePokeBall(void)
 {
-    u16 i;
+    u16 ballId;
 
-    for (i = FIRST_BALL; i <= LAST_BALL; i++)
+    for (ballId = BALL_STRANGE; ballId < POKEBALL_COUNT; ballId++)
     {
-        if (CheckBagHasItem(i, 1) == TRUE)
+        if (CheckBagHasItem(ballId, 1) == TRUE)
             return TRUE;
     }
     return FALSE;

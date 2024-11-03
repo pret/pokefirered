@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Air Balloon prevents the holder from taking damage from grou
         TURN { MOVE(opponent, MOVE_EARTHQUAKE); }
     } SCENE {
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
-        MESSAGE("Foe Wobbuffet used Earthquake!");
+        MESSAGE("The opposing Wobbuffet used Earthquake!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
         MESSAGE("It doesn't affect Wobbuffet…");
     }
@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Air Balloon pops when the holder is hit by a move that is no
         TURN { MOVE(opponent, MOVE_TACKLE); }
     } SCENE {
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
-        MESSAGE("Foe Wobbuffet used Tackle!");
+        MESSAGE("The opposing Wobbuffet used Tackle!");
         MESSAGE("Wobbuffet's Air Balloon popped!");
     }
 }
@@ -48,9 +48,9 @@ SINGLE_BATTLE_TEST("Air Balloon no longer prevents the holder from taking damage
         TURN { MOVE(opponent, MOVE_EARTHQUAKE); }
     } SCENE {
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
-        MESSAGE("Foe Wobbuffet used Tackle!");
+        MESSAGE("The opposing Wobbuffet used Tackle!");
         MESSAGE("Wobbuffet's Air Balloon popped!");
-        MESSAGE("Foe Wobbuffet used Earthquake!");
+        MESSAGE("The opposing Wobbuffet used Earthquake!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
         NOT MESSAGE("It doesn't affect Wobbuffet…");
     }
@@ -68,7 +68,7 @@ SINGLE_BATTLE_TEST("Air Balloon can not be restored with Recycle after it has be
         }
     } SCENE {
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
-        MESSAGE("Foe Wobbuffet used Tackle!");
+        MESSAGE("The opposing Wobbuffet used Tackle!");
         MESSAGE("Wobbuffet's Air Balloon popped!");
         MESSAGE("Wobbuffet used Recycle!");
         MESSAGE("But it failed!");
@@ -117,6 +117,6 @@ SINGLE_BATTLE_TEST("Air Balloon pops before it can be stolen with Thief or Covet
     } SCENE {
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
         MESSAGE("Wobbuffet's Air Balloon popped!");
-        NOT MESSAGE("Foe Wobbuffet stole Wobbuffet's Air Balloon!");
+        NOT MESSAGE("The opposing Wobbuffet stole Wobbuffet's Air Balloon!");
     }
 }

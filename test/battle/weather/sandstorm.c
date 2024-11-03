@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Sandstorm deals 1/16 damage per turn")
     } WHEN {
         TURN {MOVE(player, MOVE_SANDSTORM);}
     } SCENE {
-        MESSAGE("Foe Wobbuffet is buffeted by the sandstorm!");
+        MESSAGE("The opposing Wobbuffet is buffeted by the sandstorm!");
         HP_BAR(opponent, captureDamage: &sandstormDamage);
    } THEN { EXPECT_EQ(sandstormDamage, opponent->maxHP / 16); }
 }
@@ -54,13 +54,13 @@ SINGLE_BATTLE_TEST("Sandstorm damage does not hurt Ground, Rock, and Steel-type 
         switch (mon)
         {
         case SPECIES_SANDSLASH:
-            NOT MESSAGE("Foe Sandslash is buffeted by the sandstorm!");
+            NOT MESSAGE("The opposing Sandslash is buffeted by the sandstorm!");
             break;
         case SPECIES_NOSEPASS:
-            NOT MESSAGE("Foe Nosepass is buffeted by the sandstorm!");
+            NOT MESSAGE("The opposing Nosepass is buffeted by the sandstorm!");
             break;
         case SPECIES_REGISTEEL:
-            NOT MESSAGE("Foe Registeel is buffeted by the sandstorm!");
+            NOT MESSAGE("The opposing Registeel is buffeted by the sandstorm!");
             break;
         }
     }

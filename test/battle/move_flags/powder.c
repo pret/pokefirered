@@ -12,6 +12,6 @@ SINGLE_BATTLE_TEST("Powder moves are blocked by Grass-type Pokémon")
         TURN { MOVE(player, MOVE_STUN_SPORE); }
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_STUN_SPORE, player);
-        MESSAGE("It doesn't affect Foe Oddish…");
+        MESSAGE("It doesn't affect the opposing Oddish…");
     }
 }

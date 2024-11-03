@@ -3803,7 +3803,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_NORMAL,
         .accuracy = 0,
         .pp = 30,
-        .target = MOVE_TARGET_USER,
+        .target = B_UPDATED_MOVE_DATA >= GEN_5 ? MOVE_TARGET_SELECTED : MOVE_TARGET_USER,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .zMove = { .effect = Z_EFFECT_RECOVER_HP },
@@ -6067,7 +6067,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "The higher the\nuser's HP, "
             "the\nmore damage\ncaused."),
-        .effect = EFFECT_ERUPTION,
+        .effect = EFFECT_POWER_BASED_ON_USER_HP,
         .power = 150,
         .type = TYPE_FIRE,
         .accuracy = 100,
@@ -6888,7 +6888,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Inflicts more\ndamage if the "
             "\nuser's HP is high."),
-        .effect = EFFECT_ERUPTION,
+        .effect = EFFECT_POWER_BASED_ON_USER_HP,
         .power = 150,
         .type = TYPE_WATER,
         .accuracy = 100,
@@ -7988,15 +7988,14 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Wring Out"),
         .description = sWringOutDescription,
-        .effect = EFFECT_VARY_POWER_BASED_ON_HP,
-        .power = 1,
+        .effect = EFFECT_POWER_BASED_ON_TARGET_HP,
+        .power = 120,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 5,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
-        .argument = 120,
         .makesContact = TRUE,
         .battleAnimScript = Move_WRING_OUT,
     },
@@ -9718,15 +9717,14 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Crush Grip"),
         .description = sWringOutDescription,
-        .effect = EFFECT_VARY_POWER_BASED_ON_HP,
-        .power = 1,
+        .effect = EFFECT_POWER_BASED_ON_TARGET_HP,
+        .power = 120,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 5,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .argument = 120,
         .makesContact = TRUE,
         .battleAnimScript = Move_CRUSH_GRIP,
     },
@@ -15593,7 +15591,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "The higher the\nuser's HP "
             "the more\ndamage caused."),
-        .effect = EFFECT_ERUPTION,
+        .effect = EFFECT_POWER_BASED_ON_USER_HP,
         .power = 150,
         .type = TYPE_DRAGON,
         .accuracy = 100,
@@ -16362,7 +16360,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Boosts a user's\nstats "
             "depending on\nTatsugiri."),
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_ORDER_UP
+        .effect = EFFECT_ORDER_UP,
         .power = 80,
         .type = TYPE_DRAGON,
         .accuracy = 100,
@@ -16372,6 +16370,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .mirrorMoveBanned = TRUE,
         .metronomeBanned = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_ORDER_UP,
+            .self = TRUE,
+            .chance = 100,
+        }),
         .battleAnimScript = Move_ORDER_UP,
     },
 
@@ -17548,15 +17551,14 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Hard Press"),
         .description = sWringOutDescription,
-        .effect = EFFECT_VARY_POWER_BASED_ON_HP,
-        .power = 1,
+        .effect = EFFECT_POWER_BASED_ON_TARGET_HP,
+        .power = 100,
         .type = TYPE_STEEL,
         .accuracy = 100,
         .pp = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
-        .argument = 100,
         .makesContact = TRUE,
         .battleAnimScript = Move_HARD_PRESS,
     },

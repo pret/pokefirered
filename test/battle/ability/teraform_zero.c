@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("Teraform Zero can be replaced")
     } WHEN {
         TURN { MOVE(opponent, MOVE_WORRY_SEED); MOVE(player, MOVE_REST, gimmick: GIMMICK_TERA); }
     } SCENE {
-        MESSAGE("Foe Whimsicott used Worry Seed!");
+        MESSAGE("The opposing Whimsicott used Worry Seed!");
         MESSAGE("Terapagos acquired Insomnia!");
         MESSAGE("Terapagos used Rest!");
         ABILITY_POPUP(player, ABILITY_INSOMNIA);
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Teraform Zero cannot be swapped")
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_SKILL_SWAP); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Skill Swap!");
+        MESSAGE("The opposing Wobbuffet used Skill Swap!");
         MESSAGE("But it failed!");
     }
 }
@@ -77,7 +77,7 @@ SINGLE_BATTLE_TEST("Teraform Zero cannot be copied")
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_ROLE_PLAY); }
     } SCENE {
-        MESSAGE("Foe Wobbuffet used Role Play!");
+        MESSAGE("The opposing Wobbuffet used Role Play!");
         MESSAGE("But it failed!");
     }
 }

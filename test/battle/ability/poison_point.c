@@ -18,13 +18,13 @@ SINGLE_BATTLE_TEST("Poison Point inflicts poison on contact")
         if (gMovesInfo[move].makesContact) {
             ABILITY_POPUP(opponent, ABILITY_POISON_POINT);
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
-            MESSAGE("Wobbuffet was poisoned by Foe Nidoran♂'s Poison Point!");
+            MESSAGE("Wobbuffet was poisoned by the opposing Nidoran♂'s Poison Point!");
             STATUS_ICON(player, poison: TRUE);
         } else {
             NONE_OF {
                 ABILITY_POPUP(opponent, ABILITY_POISON_POINT);
                 ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
-                MESSAGE("Wobbuffet was poisoned by Foe Nidoran♂'s Poison Point!");
+                MESSAGE("Wobbuffet was poisoned by the opposing Nidoran♂'s Poison Point!");
                 STATUS_ICON(player, poison: TRUE);
             }
         }
@@ -45,7 +45,7 @@ SINGLE_BATTLE_TEST("Poison Point triggers 30% of the time")
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_POISON_POINT);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
-        MESSAGE("Wobbuffet was poisoned by Foe Nidoran♂'s Poison Point!");
+        MESSAGE("Wobbuffet was poisoned by the opposing Nidoran♂'s Poison Point!");
         STATUS_ICON(player, poison: TRUE);
     }
 }

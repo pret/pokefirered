@@ -7,6 +7,7 @@
                                 max(MOVE_NAME_LENGTH + 2, /* +2 to hold the "!" and EOS. */ \
                                 max(POKEMON_NAME_LENGTH + 1, \
                                     ABILITY_NAME_LENGTH + 1)))
+#define BATTLE_MSG_MAX_WIDTH    208
 
 // for 0xFD
 
@@ -70,20 +71,25 @@
 #define B_TXT_DEF_NAME 0x39
 #define B_TXT_DEF_TEAM1 0x3A // Your/The opposing
 #define B_TXT_DEF_TEAM2 0x3B // your/the opposing
+#define B_TXT_ATK_NAME_WITH_PREFIX2 0x3E //lowercase
+#define B_TXT_DEF_NAME_WITH_PREFIX2 0x3F //lowercase
+#define B_TXT_EFF_NAME_WITH_PREFIX2 0x40 //lowercase
+#define B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX2 0x41 //lowercase
 
 // for B_TXT_BUFF1, B_TXT_BUFF2 and B_TXT_BUFF3
 
-#define B_BUFF_STRING                   0
-#define B_BUFF_NUMBER                   1
-#define B_BUFF_MOVE                     2
-#define B_BUFF_TYPE                     3
-#define B_BUFF_MON_NICK_WITH_PREFIX     4
-#define B_BUFF_STAT                     5
-#define B_BUFF_SPECIES                  6
-#define B_BUFF_MON_NICK                 7
-#define B_BUFF_NEGATIVE_FLAVOR          8
-#define B_BUFF_ABILITY                  9
-#define B_BUFF_ITEM                     10
+#define B_BUFF_STRING                       0
+#define B_BUFF_NUMBER                       1
+#define B_BUFF_MOVE                         2
+#define B_BUFF_TYPE                         3
+#define B_BUFF_MON_NICK_WITH_PREFIX         4
+#define B_BUFF_STAT                         5
+#define B_BUFF_SPECIES                      6
+#define B_BUFF_MON_NICK                     7
+#define B_BUFF_NEGATIVE_FLAVOR              8
+#define B_BUFF_ABILITY                      9
+#define B_BUFF_ITEM                         10
+#define B_BUFF_MON_NICK_WITH_PREFIX_LOWER   11 // lowercase prefix
 
 #define B_BUFF_PLACEHOLDER_BEGIN        0xFD
 #define B_BUFF_EOS                      0xFF
@@ -200,6 +206,15 @@
     textVar[4] = B_BUFF_EOS;                                                \
 }
 
+#define PREPARE_MON_NICK_WITH_PREFIX_LOWER_BUFFER(textVar, battler, partyId)    \
+{                                                                               \
+    textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                      \
+    textVar[1] = B_BUFF_MON_NICK_WITH_PREFIX_LOWER;                             \
+    textVar[2] = battler;                                                       \
+    textVar[3] = partyId;                                                       \
+    textVar[4] = B_BUFF_EOS;                                                    \
+}
+
 #define PREPARE_MON_NICK_BUFFER(textVar, battler, partyId)      \
 {                                                               \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                      \
@@ -242,7 +257,7 @@ enum
 
 void BufferStringBattle(u32 battler, u16 stringID);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
-u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst);
+u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize);
 void BattleHandleAddTextPrinter(const u8 *text, u8 arg1);
 void SetPpNumbersPaletteInMoveSelection(u32 battler);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
@@ -279,6 +294,12 @@ extern const u8 gText_BattleTowerBan_Newline1[];
 extern const u8 gText_BattleTowerBan_Newline2[];
 extern const u8 gText_BattleTowerBan_Is1[];
 extern const u8 gText_BattleTowerBan_Is2[];
+
+extern const u8 gText_StatSharply[];
+extern const u8 gText_StatRose[];
+extern const u8 sText_StatFell[];
+extern const u8 sText_drastically[];
+extern const u8 sText_severely[];
 
 // battle_script_commands
 extern const u8 gText_BattleYesNoChoice[];

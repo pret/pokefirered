@@ -29,7 +29,7 @@ static void FieldCallback_SweetScent(void)
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
 }
 
-bool8 FldEff_SweetScent(void)
+u32 FldEff_SweetScent(void)
 {
     u8 taskId;
 

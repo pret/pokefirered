@@ -120,7 +120,7 @@ static void FieldCallback_UseRockSmash(void)
     ScriptContext_SetupScript(EventScript_FldEffRockSmash);
 }
 
-bool8 FldEff_UseRockSmash(void)
+u32 FldEff_UseRockSmash(void)
 {
     u8 taskId = CreateFieldEffectShowMon();
 

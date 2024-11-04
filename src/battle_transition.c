@@ -1110,10 +1110,12 @@ static bool8 PokeballsTrail_End(struct Task *task)
     return FALSE;
 }
 
-bool8 FldEff_PokeballTrail(void)
+u32 FldEff_Pokeball(void)
 {
-    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Pokeball, gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
+    u8 spriteId;
     
+    FieldEffectScript_LoadPal(&gSpritePalette_Pokeball);
+    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Pokeball, gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
     gSprites[spriteId].oam.priority = 0;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].sSide = gFieldEffectArguments[2];

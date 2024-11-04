@@ -23,11 +23,11 @@ bool8 SetUpFieldMove_Cut(void);
 
 // dig
 bool8 SetUpFieldMove_Dig(void);
-bool8 FldEff_UseDig(void);
+u32 FldEff_UseDig(void);
 
 // rocksmash
 bool8 SetUpFieldMove_RockSmash(void);
-bool8 FldEff_UseRockSmash(void);
+u32 FldEff_UseRockSmash(void);
 
 // berrytree
 void nullsub_56(void);
@@ -38,11 +38,11 @@ bool32 FldEffPoison_IsActive(void);
 
 // strength
 bool8 SetUpFieldMove_Strength(void);
-bool8 FldEff_UseStrength(void);
+u32 FldEff_UseStrength(void);
 
 // teleport
 bool8 SetUpFieldMove_Teleport(void);
-bool8 FldEff_UseTeleport(void);
+u32 FldEff_UseTeleport(void);
 
 // softboiled
 bool8 SetUpFieldMove_SoftBoiled(void);
@@ -51,7 +51,7 @@ void Task_TryUseSoftboiledOnPartyMon(u8 taskId);
 
 // sweetscent
 bool8 SetUpFieldMove_SweetScent(void);
-bool8 FldEff_SweetScent(void);
+u32 FldEff_SweetScent(void);
 void StartSweetScentFieldEffect(void);
 
 #endif // GUARD_FLDEFF_H

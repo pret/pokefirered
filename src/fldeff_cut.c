@@ -96,8 +96,9 @@ static const struct SpriteFrameImage sSpriteFrameImages_FldEff_CutGrass[] = {
     {gFieldEffectObjectPic_CutGrass, 0x20}
 };
 
-const struct SpritePalette gFldEffPalette_CutGrass[] = {
-    {gFieldEffectPal_CutGrass, 4096}
+const struct SpritePalette gFldEffPalette_CutGrass = {
+    .data = gFieldEffectPal_CutGrass, 
+    .tag = 4096
 };
 
 static const struct SpriteTemplate sSpriteTemplate_FldEff_CutGrass = {
@@ -166,7 +167,7 @@ static void FieldCallback_CutGrass(void)
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
 }
 
-bool8 FldEff_UseCutOnGrass(void)
+u32 FldEff_UseCutOnGrass(void)
 {
     u8 taskId = CreateFieldEffectShowMon();
     FLDEFF_SET_FUNC_TO_DATA(FieldMoveCallback_CutGrass);
@@ -180,7 +181,7 @@ static void FieldCallback_CutTree(void)
     ScriptContext_SetupScript(EventScript_FldEffCut);
 }
 
-bool8 FldEff_UseCutOnTree(void)
+u32 FldEff_UseCutOnTree(void)
 {
     u8 taskId = CreateFieldEffectShowMon();
     FLDEFF_SET_FUNC_TO_DATA(FieldMoveCallback_CutTree);
@@ -197,12 +198,12 @@ static void FieldMoveCallback_CutGrass(void)
         FieldEffectStart(FLDEFF_CUT_GRASS);
 }
 
-bool8 FldEff_CutGrass(void)
+u32 FldEff_CutGrass(void)
 {
     u8 i, j;
     s16 x, y;
 
-    i = 0;
+    FieldEffectScript_LoadFadedPal(&gFldEffPalette_CutGrass);
     PlaySE(SE_M_CUT);
     PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
 

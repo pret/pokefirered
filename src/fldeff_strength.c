@@ -31,7 +31,7 @@ static void FieldCB_UseStrength(void)
     ScriptContext_SetupScript(EventScript_FldEffStrength);
 }
 
-bool8 FldEff_UseStrength(void)
+u32 FldEff_UseStrength(void)
 {
     u8 taskId = CreateFieldEffectShowMon();
     FLDEFF_SET_FUNC_TO_DATA(ShowMonCB_UseStrength);

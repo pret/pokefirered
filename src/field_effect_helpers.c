@@ -388,34 +388,6 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
 #undef sMapGroup
 #undef sYOffset
 
-static const struct SpritePalette* const gFieldEffectPalettes[FLDEFF_COUNT][SEASON_WINTER + 1] =
-{
-    [FLDEFF_TALL_GRASS] =
-    {
-        [SEASON_SPRING] = &gSpritePalette_GeneralFieldEffect1,
-        [SEASON_SUMMER] = &gSpritePalette_GeneralFieldEffect1Summer,
-        [SEASON_AUTUMN] = &gSpritePalette_GeneralFieldEffect1Autumn,
-        [SEASON_WINTER] = &gSpritePalette_GeneralFieldEffect1Winter,
-    },
-    [FLDEFF_JUMP_TALL_GRASS] =
-    {
-        [SEASON_SPRING] = &gSpritePalette_GeneralFieldEffect1,
-        [SEASON_SUMMER] = &gSpritePalette_GeneralFieldEffect1Summer,
-        [SEASON_AUTUMN] = &gSpritePalette_GeneralFieldEffect1Autumn,
-        [SEASON_WINTER] = &gSpritePalette_GeneralFieldEffect1Winter,
-    },
-};
-
-static const struct SpritePalette* GetFieldEffectPalette(u32 fldEff)
-{
-    if (!OW_SEASONS)
-        return gFieldEffectPalettes[fldEff][SEASON_SPRING];
-
-    if (gFieldEffectPalettes[fldEff][gLoadedSeason] != NULL)
-        return gFieldEffectPalettes[fldEff][gLoadedSeason];
-    return gFieldEffectPalettes[fldEff][SEASON_SPRING];
-}
-
 u32 FldEff_TallGrass(void)
 {
     s16 x;

@@ -409,6 +409,15 @@ $(FIELDEFFECTSGFXDIR)/pics/underwater_bubbles.4bpp: %.4bpp: %.png
 $(FIELDEFFECTSGFXDIR)/pics/bike_tire_tracks.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
+$(FIELDEFFECTSGFXDIR)/pics/slither_tracks.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(FIELDEFFECTSGFXDIR)/pics/bug_tracks.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(FIELDEFFECTSGFXDIR)/pics/spot_tracks.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
 $(FIELDEFFECTSGFXDIR)/pics/sand_disguise.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 

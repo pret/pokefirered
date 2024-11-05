@@ -1902,7 +1902,7 @@ u32 FldEff_LavaridgeGymWarp(void)
 
     FieldEffectScript_LoadFadedPal(&gSpritePalette_Ash);
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ASH_LAUNCH], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_AshLaunch, gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
     gSprites[spriteId].coordOffsetEnabled = TRUE;
 
@@ -1998,7 +1998,7 @@ u32 FldEff_PopOutOfAsh(void)
 
     FieldEffectScript_LoadFadedPal(&gSpritePalette_Ash);
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_ASH_PUFF], gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_AshPuff, gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     gSprites[spriteId].oam.priority = gFieldEffectArguments[3];
     gSprites[spriteId].coordOffsetEnabled = TRUE;
 
@@ -3099,7 +3099,7 @@ static void SpriteCB_NPCFlyOut(struct Sprite *sprite);
 
 u32 FldEff_NpcFlyOut(void)
 {
-    u8 spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BIRD], 0x78, 0, 1);
+    u8 spriteId = CreateSprite(&gFieldEffectObjectTemplate_Bird, 0x78, 0, 1);
     struct Sprite *sprite = &gSprites[spriteId];
 
     sprite->oam.paletteNum = LoadPlayerObjectEventPalette(gSaveBlock2Ptr->playerGender);
@@ -3299,7 +3299,7 @@ static u8 CreateFlyBirdSprite(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
-    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BIRD], 255, 180, 1);
+    spriteId = CreateSprite(&gFieldEffectObjectTemplate_Bird, 255, 180, 1);
     sprite = &gSprites[spriteId];
     sprite->oam.paletteNum = LoadPlayerObjectEventPalette(gSaveBlock2Ptr->playerGender);
     sprite->oam.priority = 1;

@@ -10081,7 +10081,8 @@ void GroundEffect_FlowingWater(struct ObjectEvent *objEvent, struct Sprite *spri
     StartFieldEffectForObjectEvent(FLDEFF_FEET_IN_FLOWING_WATER, objEvent);
 }
 
-static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite, u32 fldEff) = {
+static void (*const sGroundEffectTracksFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite, u32 fldEff) =
+{
     [TRACKS_NONE]      =  DoTracksGroundEffect_None,
     [TRACKS_FOOT]      =  DoTracksGroundEffect_Footprints,
     [TRACKS_BIKE_TIRE] =  DoTracksGroundEffect_BikeTireTracks,

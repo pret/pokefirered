@@ -680,22 +680,6 @@ static const u8 *const sDescriptionStringTable[] =
     [PARTYBOX_DESC_LEARNED]    = gText_Learned,
 };
 
-static const u8 *const sFieldMoveDescriptionTable[] =
-{
-    [FIELD_MOVE_FLASH]       = gText_LightUpDarkness,
-    [FIELD_MOVE_CUT]         = gText_CutATreeOrGrass,
-    [FIELD_MOVE_FLY]         = gText_FlyToAKnownTown,
-    [FIELD_MOVE_STRENGTH]    = gText_MoveHeavyBoulders,
-    [FIELD_MOVE_SURF]        = gText_TravelOnWater,
-    [FIELD_MOVE_ROCK_SMASH]  = gText_ShatterACrackedRock,
-    [FIELD_MOVE_WATERFALL]   = gText_ClimbAWaterfall,
-    [FIELD_MOVE_TELEPORT]    = gText_ReturnToAHealingSpot,
-    [FIELD_MOVE_DIG]         = gText_EscapeFromHere,
-    [FIELD_MOVE_MILK_DRINK]  = gText_ShareHp,
-    [FIELD_MOVE_SOFT_BOILED] = gText_ShareHp,
-    [FIELD_MOVE_SWEET_SCENT] = gText_LureWildPokemon,
-};
-
 static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/party_menu/hold_icons.4bpp");
 static const u16 sHeldItemPalette[] = INCBIN_U16("graphics/party_menu/hold_icons.gbapal");
 
@@ -1138,43 +1122,6 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_SPIN_TRADE]    = NELEMS(sPartyMenuAction_TradeSummaryCancel2),
     [ACTIONS_ROTOM_CATALOG] = NELEMS(sPartyMenuAction_RotomCatalog),
     [ACTIONS_ZYGARDE_CUBE]  = NELEMS(sPartyMenuAction_ZygardeCube),
-};
-
-static const u16 sFieldMoves[FIELD_MOVE_END + 1] =
-{
-    [FIELD_MOVE_FLASH]          = MOVE_FLASH, 
-    [FIELD_MOVE_CUT]            = MOVE_CUT, 
-    [FIELD_MOVE_FLY]            = MOVE_FLY, 
-    [FIELD_MOVE_STRENGTH]       = MOVE_STRENGTH, 
-    [FIELD_MOVE_SURF]           = MOVE_SURF, 
-    [FIELD_MOVE_ROCK_SMASH]     = MOVE_ROCK_SMASH, 
-    [FIELD_MOVE_WATERFALL]      = MOVE_WATERFALL, 
-    [FIELD_MOVE_TELEPORT]       = MOVE_TELEPORT,
-    [FIELD_MOVE_DIG]            = MOVE_DIG, 
-    [FIELD_MOVE_MILK_DRINK]     = MOVE_MILK_DRINK, 
-    [FIELD_MOVE_SOFT_BOILED]    = MOVE_SOFT_BOILED, 
-    [FIELD_MOVE_SWEET_SCENT]    = MOVE_SWEET_SCENT, 
-    [FIELD_MOVE_END]            = FIELD_MOVE_END // this may be misuse of enum. same in emerald
-};
-
-static struct
-{
-    bool8 (*fieldMoveFunc)(void);
-    u8 msgId;
-} const sFieldMoveCursorCallbacks[] =
-{
-    [FIELD_MOVE_FLASH]        = {SetUpFieldMove_Flash,       PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_CUT]          = {SetUpFieldMove_Cut,         PARTY_MSG_NOTHING_TO_CUT},
-    [FIELD_MOVE_FLY]          = {SetUpFieldMove_Fly,         PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_STRENGTH]     = {SetUpFieldMove_Strength,    PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_SURF]         = {SetUpFieldMove_Surf,        PARTY_MSG_CANT_SURF_HERE},
-    [FIELD_MOVE_ROCK_SMASH]   = {SetUpFieldMove_RockSmash,   PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_WATERFALL]    = {SetUpFieldMove_Waterfall,   PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_TELEPORT]     = {SetUpFieldMove_Teleport,    PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_DIG]          = {SetUpFieldMove_Dig,         PARTY_MSG_CANT_USE_HERE},
-    [FIELD_MOVE_MILK_DRINK]   = {SetUpFieldMove_SoftBoiled,  PARTY_MSG_NOT_ENOUGH_HP},
-    [FIELD_MOVE_SOFT_BOILED]  = {SetUpFieldMove_SoftBoiled,  PARTY_MSG_NOT_ENOUGH_HP},
-    [FIELD_MOVE_SWEET_SCENT]  = {SetUpFieldMove_SweetScent,  PARTY_MSG_CANT_USE_HERE},
 };
 
 static const u8 *const sUnionRoomTradeMessages[] =

@@ -103,7 +103,7 @@ static void Task_FieldEffectShowMon_Cleanup(u8 taskId)
     DestroyTask(taskId);
 }
 
-bool8 SetUpFieldMove_RockSmash(void)
+bool32 SetUpFieldMove_RockSmash(void)
 {
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_ROCK_SMASH_ROCK) == TRUE)
     {

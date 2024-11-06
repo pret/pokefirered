@@ -162,7 +162,7 @@ static const u16 sCaveTransitionPalette_Exit[] = INCBIN_U16("graphics/cave_trans
 static const u32 sCaveTransitionTilemap[] = INCBIN_U32("graphics/cave_transition/tilemap.bin.lz");
 static const u32 sCaveTransitionTiles[] = INCBIN_U32("graphics/cave_transition/tiles.4bpp.lz");
 
-bool8 SetUpFieldMove_Flash(void)
+bool32 SetUpFieldMove_Flash(void)
 {
     if (gMapHeader.cave != TRUE)
         return FALSE;

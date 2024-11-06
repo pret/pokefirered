@@ -10192,7 +10192,6 @@ static void DoTracksGroundEffect_SlitherTracks(struct ObjectEvent *objEvent, str
         gFieldEffectArguments[1] = objEvent->previousCoords.y;
         gFieldEffectArguments[2] = 149;
         gFieldEffectArguments[3] = 2;
-        DebugPrintfLevel(MGBA_LOG_ERROR, "tracksTransition = %u", slitherTracks_Transitions[objEvent->previousMovementDirection][objEvent->facingDirection - 5]);
         gFieldEffectArguments[4] = slitherTracks_Transitions[objEvent->previousMovementDirection][objEvent->facingDirection - 5];
         gFieldEffectArguments[5] = objEvent->previousMetatileBehavior;
         FieldEffectStart(FLDEFF_TRACKS_SLITHER);

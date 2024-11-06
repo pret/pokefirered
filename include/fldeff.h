@@ -12,22 +12,23 @@ extern struct MapPosition gPlayerFacingPosition;
 bool8 CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId);
 u8 CreateFieldEffectShowMon(void);
 
+// field move setups
+bool32 SetUpFieldMove_Cut(void);
+bool32 SetUpFieldMove_Fly(void);
+bool32 SetUpFieldMove_Surf(void);
+bool32 SetUpFieldMove_Strength(void);
+bool32 SetUpFieldMove_Flash(void);
+bool32 SetUpFieldMove_RockSmash(void);
+bool32 SetUpFieldMove_Waterfall(void);
+bool32 SetUpFieldMove_Dig(void);
+bool32 SetUpFieldMove_Teleport(void);
+bool32 SetUpFieldMove_SoftBoiled(void);
+bool32 SetUpFieldMove_SweetScent(void);
+
 // flash
 u8 MapTransitionIsExit(u8 lightLevel, u8 mapType);
 u8 MapTransitionIsEnter(u8 mapType1, u8 mapType2);
-bool8 SetUpFieldMove_Flash(void);
 void CB2_DoChangeMap(void);
-
-// cut
-bool8 SetUpFieldMove_Cut(void);
-
-// dig
-bool8 SetUpFieldMove_Dig(void);
-u32 FldEff_UseDig(void);
-
-// rocksmash
-bool8 SetUpFieldMove_RockSmash(void);
-u32 FldEff_UseRockSmash(void);
 
 // berrytree
 void nullsub_56(void);
@@ -36,22 +37,11 @@ void nullsub_56(void);
 void FldEffPoison_Start(void);
 bool32 FldEffPoison_IsActive(void);
 
-// strength
-bool8 SetUpFieldMove_Strength(void);
-u32 FldEff_UseStrength(void);
-
-// teleport
-bool8 SetUpFieldMove_Teleport(void);
-u32 FldEff_UseTeleport(void);
-
 // softboiled
-bool8 SetUpFieldMove_SoftBoiled(void);
 void ChooseMonForSoftboiled(u8 taskId);
 void Task_TryUseSoftboiledOnPartyMon(u8 taskId);
 
 // sweetscent
-bool8 SetUpFieldMove_SweetScent(void);
-u32 FldEff_SweetScent(void);
 void StartSweetScentFieldEffect(void);
 
 #endif // GUARD_FLDEFF_H

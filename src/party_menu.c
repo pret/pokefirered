@@ -13,6 +13,7 @@
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_effect.h"
+#include "field_moves.h"
 #include "field_player_avatar.h"
 #include "field_fadetransition.h"
 #include "field_weather.h"
@@ -63,6 +64,7 @@
 #include "constants/battle.h"
 #include "constants/easy_chat.h"
 #include "constants/field_effects.h"
+#include "constants/field_moves.h"
 #include "constants/item_effects.h"
 #include "constants/item_menu.h"
 #include "constants/items.h"
@@ -178,9 +180,6 @@ static void CursorCB_CatalogFan(u8);
 static void CursorCB_CatalogMower(u8);
 static void CursorCB_ChangeForm(u8);
 static void CursorCB_ChangeAbility(u8);
-static bool8 SetUpFieldMove_Fly(void);
-static bool8 SetUpFieldMove_Waterfall(void);
-static bool8 SetUpFieldMove_Surf(void);
 static void CB2_InitPartyMenu(void);
 static void CB2_ReloadPartyMenu(void);
 static void ResetPartyMenu(void);
@@ -2703,7 +2702,7 @@ static u8 DisplaySelectionWindow(u8 windowType)
         const u8 *text;
         u8 fontColorsId = (sPartyMenuInternal->actions[i] >= CURSOR_OPTION_FIELD_MOVES) ? 4 : 3;
         if (sPartyMenuInternal->actions[i] >= CURSOR_OPTION_FIELD_MOVES)
-            text = gMovesInfo[sFieldMoves[sPartyMenuInternal->actions[i] - CURSOR_OPTION_FIELD_MOVES]].name;
+            text = gMovesInfo[gFieldMovesInfo[sPartyMenuInternal->actions[i] - CURSOR_OPTION_FIELD_MOVES].moveId].name;
         else
             text = sCursorOptions[sPartyMenuInternal->actions[i]].text;
         
@@ -2785,7 +2784,7 @@ static void ToggleFieldMoveDescriptionWindow(u8 action)
             ptr->windowId[2] = AddWindow(&sFieldMoveDescriptionWindowTemplate);
         DrawHelpMessageWindowTilesById(ptr->windowId[2]);
         letterSpacing = GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING);
-        AddTextPrinterParameterized4(ptr->windowId[2], FONT_NORMAL, 3, 6, letterSpacing, 0, sFontColorTable[5], 0, sFieldMoveDescriptionTable[action - CURSOR_OPTION_FIELD_MOVES]);
+        AddTextPrinterParameterized4(ptr->windowId[2], FONT_NORMAL, 3, 6, letterSpacing, 0, sFontColorTable[5], 0, gFieldMovesInfo[action - CURSOR_OPTION_FIELD_MOVES].description);
         PutWindowTilemap(ptr->windowId[2]);
         ScheduleBgCopyTilemapToVram(2);
     }
@@ -3110,9 +3109,9 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     // Add field moves to action list
     for (i = 0; i < MAX_MON_MOVES; ++i)
     {
-        for (j = 0; sFieldMoves[j] != FIELD_MOVE_END; ++j)
+        for (j = 0; j < FIELD_MOVE_COUNT; ++j)
         {
-            if (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == sFieldMoves[j])
+            if (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == gFieldMovesInfo[j].moveId)
             {
                 AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + CURSOR_OPTION_FIELD_MOVES);
                 break;
@@ -4055,7 +4054,7 @@ static void CursorCB_FieldMove(u8 taskId)
     const struct MapHeader *mapHeader;
 
     PlaySE(SE_SELECT);
-    if (sFieldMoveCursorCallbacks[fieldMove].fieldMoveFunc == NULL)
+    if (gFieldMovesInfo[fieldMove].fieldMoveFunc == NULL)
         return;
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
@@ -4064,18 +4063,17 @@ static void CursorCB_FieldMove(u8 taskId)
         if (fieldMove == FIELD_MOVE_MILK_DRINK || fieldMove == FIELD_MOVE_SOFT_BOILED)
             DisplayPartyMenuStdMessage(PARTY_MSG_CANT_USE_HERE);
         else
-            DisplayPartyMenuStdMessage(sFieldMoveCursorCallbacks[fieldMove].msgId);
+            DisplayPartyMenuStdMessage(gFieldMovesInfo[fieldMove].partyMessageId);
         gTasks[taskId].func = Task_CancelAfterAorBPress;
     }
     else
     {
-        // All field moves before WATERFALL are HMs.
-        if (fieldMove <= FIELD_MOVE_WATERFALL && FlagGet(FLAG_BADGE01_GET + fieldMove) != TRUE)
+        if (!gFieldMovesInfo[fieldMove].isUnlockedFunc())
         {
             DisplayPartyMenuMessage(gText_CantUseUntilNewBadge, TRUE);
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
         }
-        else if (sFieldMoveCursorCallbacks[fieldMove].fieldMoveFunc() == TRUE)
+        else if (gFieldMovesInfo[fieldMove].fieldMoveFunc() == TRUE)
         {
             switch (fieldMove)
             {
@@ -4120,7 +4118,7 @@ static void CursorCB_FieldMove(u8 taskId)
                 DisplayCantUseFlashMessage();
                 break;
             default:
-                DisplayPartyMenuStdMessage(sFieldMoveCursorCallbacks[fieldMove].msgId);
+                DisplayPartyMenuStdMessage(gFieldMovesInfo[fieldMove].partyMessageId);
                 break;
             }
             gTasks[taskId].func = Task_CancelAfterAorBPress;
@@ -4205,7 +4203,7 @@ static void FieldCallback_Surf(void)
     FieldEffectStart(FLDEFF_USE_SURF);
 }
 
-static bool8 SetUpFieldMove_Surf(void)
+bool32 SetUpFieldMove_Surf(void)
 {
     s16 x, y;
     
@@ -4243,7 +4241,7 @@ static void DisplayCantUseSurfMessage(void)
     }
 }
 
-static bool8 SetUpFieldMove_Fly(void)
+bool32 SetUpFieldMove_Fly(void)
 {
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
         return TRUE;
@@ -4262,7 +4260,7 @@ static void FieldCallback_Waterfall(void)
     FieldEffectStart(FLDEFF_USE_WATERFALL);
 }
 
-static bool8 SetUpFieldMove_Waterfall(void)
+bool32 SetUpFieldMove_Waterfall(void)
 {
     s16 x, y;
 

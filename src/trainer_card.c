@@ -1149,7 +1149,7 @@ static void PrintMoneyOnCard(void)
     u8 *txtPtr;
     u8 x;
 
-    ConvertIntToDecimalStringN(buffer, GameHash(), STR_CONV_MODE_LEADING_ZEROS, 5);
+    ConvertUIntToHexStringN(buffer, GameHash(), STR_CONV_MODE_LEADING_ZEROS, 8);
     if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
     {
         x = -122 - 6 * StringLength(buffer);
@@ -1177,7 +1177,7 @@ static void PrintPokedexOnCard(void)
     u8 buffer[10];
     u8 x;
 
-    ConvertIntToDecimalStringN(buffer, MapHash(), STR_CONV_MODE_LEADING_ZEROS, 5);
+    ConvertUIntToHexStringN(buffer, MapHash(), STR_CONV_MODE_LEADING_ZEROS, 8);
     if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
     {
         x = -122 - 6 * StringLength(buffer);

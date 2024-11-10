@@ -32,16 +32,16 @@ u16 IndexInto(const u16 *group, u32 hash) {
   return group[(hash % group[0]) + 1];
 }
 
-u16 GameHash() {
-  static u64 gGameHash;
+u32 GameHash() {
+  static u32 gGameHash;
   if (gGameHash == 0) {
     gGameHash = Hash(gSaveBlock1Ptr->rivalName);
   }
   return gGameHash;
 }
 
-u16 MapHash() {
-  static u64 gMapHash;
+u32 MapHash() {
+  static u32 gMapHash;
   static u8 gLastRegionMapSectionId;
   if (gLastRegionMapSectionId != gMapHeader.regionMapSectionId) {
     u8 mapName[32];
@@ -56,7 +56,7 @@ u16 MapHash() {
 u16 GetSpeciesFromGroup(u16 species, u16 manual_random) {
   const u16 *group;
   s8 random;
-  u64 combinedHash;
+  u32 combinedHash;
 
   if (species >= sizeof(gMonGroups) || gMonGroups[species] == NULL) {
     return species;

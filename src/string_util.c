@@ -277,6 +277,66 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
     return dest;
 }
 
+u8 *ConvertUIntToHexStringN(u8 *dest, u32 value, enum StringConvertMode mode, u8 n)
+{
+    enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
+    u8 i;
+    s32 powerOfSixteen;
+    s32 largestPowerOfSixteen = 1;
+
+    for (i = 1; i < n; i++)
+        largestPowerOfSixteen *= 16;
+
+    state = WAITING_FOR_NONZERO_DIGIT;
+
+    if (mode == STR_CONV_MODE_RIGHT_ALIGN)
+        state = WRITING_SPACES;
+
+    if (mode == STR_CONV_MODE_LEADING_ZEROS)
+        state = WRITING_DIGITS;
+
+    for (powerOfSixteen = largestPowerOfSixteen; powerOfSixteen > 0; powerOfSixteen /= 16)
+    {
+        u8 *out;
+        u8 c;
+        u32 digit = value / powerOfSixteen;
+        u32 temp = value % powerOfSixteen;
+
+        if (state == WRITING_DIGITS)
+        {
+            out = dest++;
+
+            if (digit <= 0xF)
+                c = sDigits[digit];
+            else
+                c = CHAR_QUESTION_MARK;
+
+            *out = c;
+        }
+        else if (digit != 0 || powerOfSixteen == 1)
+        {
+            state = WRITING_DIGITS;
+            out = dest++;
+
+            if (digit <= 0xF)
+                c = sDigits[digit];
+            else
+                c = CHAR_QUESTION_MARK;
+
+            *out = c;
+        }
+        else if (state == WRITING_SPACES)
+        {
+            *dest++ = CHAR_SPACE;
+        }
+
+        value = temp;
+    }
+
+    *dest = EOS;
+    return dest;
+}
+
 u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 {
     for (;;)

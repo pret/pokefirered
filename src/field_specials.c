@@ -2056,7 +2056,7 @@ bool8 UsedPokemonCenterWarp(void)
 bool8 BufferTMHMMoveName(void)
 {
     // 8004 = item ID
-    if (gSpecialVar_0x8004 >= ITEM_TM01 && gSpecialVar_0x8004 <= ITEM_HM08)
+    if (gSpecialVar_0x8004 >= ITEM_HM01 && gSpecialVar_0x8004 <= ITEM_TM92)
     {
         StringCopy(gStringVar1, gMoveNames[ItemIdToBattleMoveId(gSpecialVar_0x8004)]);
         return TRUE;

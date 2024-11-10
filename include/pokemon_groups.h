@@ -3,8 +3,9 @@
 
 #include "global.h"
 
-u16 GameHash();
-u16 MapHash();
+u32 GameHash();
+u32 MapHash();
+u32 HashCombine(u32 h1, u32 h2);
 u16 GetSpeciesFromGroup(u16 species, u16 manual_random);
 
 #endif // GUARD_POKEMON_GROUPS_H

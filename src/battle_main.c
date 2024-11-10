@@ -1530,6 +1530,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
     // For GetSpeciesFromGroup().
     u16 species;
     u16 manual_random;
+    u16 accumulator = trainerNum;
 
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
@@ -1540,9 +1541,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
         ZeroEnemyPartyMons();
         for (i = 0; i < gTrainers[trainerNum].partySize; i++)
         {
+            accumulator += (i * 11);
+
             // This is probably overcomplicated.
             // 49 is used to avoid "rare" route-specific pokemon.
-            manual_random = ((trainerNum * (i+1)) % 49) + 1;
+            manual_random = (accumulator % 49) + 1;
 
             if (gTrainers[trainerNum].doubleBattle == TRUE)
                 personalityValue = 0x80;

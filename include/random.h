@@ -10,6 +10,8 @@ extern u32 gRng2Value;
 u16 Random(void);
 u16 Random2(void);
 
+u16 SeededRandom(u16 seed);
+
 //Returns a 32-bit pseudorandom number
 #define Random32() (Random() | (Random() << 16))
 

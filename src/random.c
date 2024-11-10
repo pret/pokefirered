@@ -12,6 +12,11 @@ u16 Random(void)
     return gRngValue >> 16;
 }
 
+
+u16 SeededRandom(u16 seed) {
+    return ISO_RANDOMIZE1(seed);
+}
+
 void SeedRng(u16 seed)
 {
     gRngValue = seed;

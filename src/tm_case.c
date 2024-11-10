@@ -678,17 +678,19 @@ static void InitTMCaseListMenuItems(void)
 static void GetTMNumberAndMoveString(u8 * dest, u16 itemId)
 {
     StringCopy(gStringVar4, gText_FontSmall);
-    if (itemId >= ITEM_HM01)
+    if (itemId >= ITEM_TM01)
     {
-        StringAppend(gStringVar4, sText_ClearTo18);
+        // TMs
         StringAppend(gStringVar4, gText_NumberClear01);
-        ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_HM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 1);
+        ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringAppend(gStringVar4, gStringVar1);
     }
     else
     {
+        // HMs
+        StringAppend(gStringVar4, sText_ClearTo18);
         StringAppend(gStringVar4, gText_NumberClear01);
-        ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+        ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_HM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 1);
         StringAppend(gStringVar4, gStringVar1);
     }
     StringAppend(gStringVar4, sText_SingleSpace);
@@ -1630,7 +1632,7 @@ static u8 CreateDiscSprite(u16 itemId)
     }
     else
     {
-        tmIdx = itemId - ITEM_TM01;
+        tmIdx = itemId - ITEM_HM01;
         SetDiscSpriteAnim(&gSprites[spriteId], tmIdx);
         TintDiscpriteByType(gBattleMoves[ItemIdToBattleMoveId(itemId)].type);
         SetDiscSpritePosition(&gSprites[spriteId], tmIdx);
@@ -1640,7 +1642,7 @@ static u8 CreateDiscSprite(u16 itemId)
 
 static void SetDiscSpriteAnim(struct Sprite *sprite, u8 tmIdx)
 {
-    if (tmIdx >= NUM_TECHNICAL_MACHINES)
+    if (tmIdx < NUM_HIDDEN_MACHINES)
         StartSpriteAnim(sprite, ANIM_HM);
     else
         StartSpriteAnim(sprite, ANIM_TM);
@@ -1665,10 +1667,8 @@ static void SetDiscSpritePosition(struct Sprite *sprite, u8 tmIdx)
     }
     else
     {
-        if (tmIdx >= NUM_TECHNICAL_MACHINES)
-            tmIdx -= NUM_TECHNICAL_MACHINES;
-        else
-            tmIdx += NUM_HIDDEN_MACHINES;
+        if (tmIdx >= NUM_HIDDEN_MACHINES)
+            tmIdx -= NUM_HIDDEN_MACHINES;
 
         x = DISC_BASE_X - Q_24_8_TO_INT(Q_24_8(14 * tmIdx) / (NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES));
         y = DISC_BASE_Y + Q_24_8_TO_INT(Q_24_8(8 * tmIdx) / (NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES));
@@ -1700,7 +1700,7 @@ static void SpriteCB_SwapDisc(struct Sprite *sprite)
             {
                 sprite->sState++;
                 TintDiscpriteByType(gBattleMoves[ItemIdToBattleMoveId(sprite->sItemId)].type);
-                sprite->sItemId -= ITEM_TM01;
+                sprite->sItemId -= ITEM_HM01;
                 SetDiscSpriteAnim(sprite, sprite->sItemId);
                 SetDiscSpritePosition(sprite, sprite->sItemId);
             }

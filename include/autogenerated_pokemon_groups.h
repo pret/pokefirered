@@ -563,12 +563,11 @@ const u16 gGroup_Legendary[] =
 
 const u16 gGroup_Uber[] =
 {
-  /*SIZE=*/9,
+  /*SIZE=*/8,
   SPECIES_MEWTWO,
   SPECIES_MEW,
   SPECIES_LUGIA,
   SPECIES_HO_OH,
-  SPECIES_SHEDINJA,
   SPECIES_KYOGRE,
   SPECIES_GROUDON,
   SPECIES_RAYQUAZA,
@@ -577,15 +576,21 @@ const u16 gGroup_Uber[] =
 
 const u16 gGroup_Unused[] =
 {
-  /*SIZE=*/9,
+  /*SIZE=*/7,
   SPECIES_PICHU,
   SPECIES_CLEFFA,
   SPECIES_IGGLYBUFF,
   SPECIES_TOGEPI,
   SPECIES_UNOWN,
-  SPECIES_WOBBUFFET,
   SPECIES_SMEARGLE,
   SPECIES_AZURILL,
+};
+
+const u16 gGroup_UnusedBanned[] =
+{
+  /*SIZE=*/3,
+  SPECIES_WOBBUFFET,
+  SPECIES_SHEDINJA,
   SPECIES_WYNAUT,
 };
 
@@ -793,7 +798,7 @@ const u16* const gMonGroups[] =
   [SPECIES_SLOWKING] = gGroup_SafariZone,
   [SPECIES_MISDREAVUS] = gGroup_Spooky2,
   [SPECIES_UNOWN] = gGroup_Unused,
-  [SPECIES_WOBBUFFET] = gGroup_Unused,
+  [SPECIES_WOBBUFFET] = gGroup_UnusedBanned,
   [SPECIES_GIRAFARIG] = gGroup_Overworld,
   [SPECIES_PINECO] = gGroup_Bug1,
   [SPECIES_FORRETRESS] = gGroup_Bug3,
@@ -883,7 +888,7 @@ const u16* const gMonGroups[] =
   [SPECIES_SLAKING] = gGroup_Powerful,
   [SPECIES_NINCADA] = gGroup_Bug2,
   [SPECIES_NINJASK] = gGroup_Bug3,
-  [SPECIES_SHEDINJA] = gGroup_Uber,
+  [SPECIES_SHEDINJA] = gGroup_UnusedBanned,
   [SPECIES_WHISMUR] = gGroup_Cave1,
   [SPECIES_LOUDRED] = gGroup_Cave2,
   [SPECIES_EXPLOUD] = gGroup_CeruleanCave,
@@ -951,7 +956,7 @@ const u16* const gMonGroups[] =
   [SPECIES_TROPIUS] = gGroup_Overworld,
   [SPECIES_CHIMECHO] = gGroup_Overworld,
   [SPECIES_ABSOL] = gGroup_Overworld,
-  [SPECIES_WYNAUT] = gGroup_Unused,
+  [SPECIES_WYNAUT] = gGroup_UnusedBanned,
   [SPECIES_SNORUNT] = gGroup_Cave2,
   [SPECIES_GLALIE] = gGroup_Powerful,
   [SPECIES_SPHEAL] = gGroup_LeggedWater1,

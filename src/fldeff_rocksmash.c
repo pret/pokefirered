@@ -52,7 +52,7 @@ static void Task_FieldEffectShowMon_Init(u8 taskId)
     if (!ObjectEventIsMovementOverridden(&gObjectEvents[mapObjId])
      || ObjectEventClearHeldMovementIfFinished(&gObjectEvents[mapObjId]))
     {
-        if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
+        if (gMapHeader.mapType == MAP_TYPE_UNDERWATER || gFieldEffectArguments[3])
         {
             // Leftover from RS, inhibits the player anim while underwater.
             FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);

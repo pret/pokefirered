@@ -1387,6 +1387,7 @@ static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 };
 
 #include "data/pokemon/tmhm_learnsets.h"
+#include "data/pokemon/gen4_tmhm_learnsets.h"
 #include "data/pokemon/trainer_class_lookups.h"
 #include "data/pokemon/cry_ids.h"
 #include "data/pokemon/experience_tables.h"
@@ -5707,20 +5708,27 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
 
 u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
 {
+    u32 mask;
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
-    if (species == SPECIES_EGG)
-    {
+
+    if (species == SPECIES_EGG) {
         return 0;
-    }
-    else if (tm < 32)
-    {
-        u32 mask = 1 << tm;
+    } else if (tm < 32) {
+        // Gen III HM01-TM24
+        mask = 1 << tm;
         return sTMHMLearnsets[species][0] & mask;
-    }
-    else
-    {
-        u32 mask = 1 << (tm - 32);
+    } else if (tm < 58) {
+        // Gen III TM25-TM50
+        mask = 1 << (tm - 32);
         return sTMHMLearnsets[species][1] & mask;
+    } else if (tm < 90) {
+        // Gen IV TM51-TM82
+        mask = 1 << (tm - 58);
+        return sGen4TMHMLearnsets[species][0] & mask;
+    } else {
+        // Gen IV TM83-TM92
+        mask = 1 << (tm - 90);
+        return sGen4TMHMLearnsets[species][1] & mask;
     }
 }
 

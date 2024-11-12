@@ -91,7 +91,7 @@ FourIsland_EventScript_ItemStarPiece::
   end
 
 FourIsland_IcefallCave_1F_EventScript_ItemHM07::
-  finditem -1
+  finditem ITEM_HM07
   end
 
 FourIsland_IcefallCave_1F_EventScript_ItemUltraBall::
@@ -211,7 +211,7 @@ PokemonMansion_B1F_EventScript_ItemFullRestore::
   end
 
 PokemonMansion_B1F_EventScript_ItemSecretKey::
-  finditem -2
+  finditem ITEM_SECRET_KEY
   end
 
 PokemonMansion_B1F_EventScript_ItemTM14::
@@ -427,7 +427,7 @@ SafariZone_North_EventScript_ItemTM47::
   end
 
 SafariZone_West_EventScript_ItemGoldTeeth::
-  finditem -1
+  finditem ITEM_GOLD_TEETH
   end
 
 SafariZone_West_EventScript_ItemMaxPotion::
@@ -515,7 +515,7 @@ SilphCo_4F_EventScript_ItemTM41::
   end
 
 SilphCo_5F_EventScript_ItemCardKey::
-  finditem -1
+  finditem ITEM_CARD_KEY
   end
 
 SilphCo_5F_EventScript_ItemProtein::

@@ -1764,6 +1764,12 @@
 	.byte 0xd6
 	.endm
 
+	@ Checks if effect can be used
+	.macro checkfieldmoveusable effect:req
+	.byte 0xd7
+	.2byte \effect
+	.endm
+
 	@ Equivalent to fadescreen but copies gPlttBufferUnfaded to gDecompressionBuffer on the fade out
 	@ and the reverse on the fade in, in effect saving gPlttBufferUnfaded to restore it.
 	@ If nowait set, does not wait for the fade to complete

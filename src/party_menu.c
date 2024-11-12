@@ -13,7 +13,7 @@
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_effect.h"
-#include "field_moves.h"
+#include "field_move.h"
 #include "field_player_avatar.h"
 #include "field_fadetransition.h"
 #include "field_weather.h"
@@ -64,7 +64,7 @@
 #include "constants/battle.h"
 #include "constants/easy_chat.h"
 #include "constants/field_effects.h"
-#include "constants/field_moves.h"
+#include "constants/field_move.h"
 #include "constants/item_effects.h"
 #include "constants/item_menu.h"
 #include "constants/items.h"
@@ -3109,9 +3109,12 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     // Add field moves to action list
     for (i = 0; i < MAX_MON_MOVES; ++i)
     {
+        u16 moveId = GetMonData(&mons[slotId], i + MON_DATA_MOVE1);
+        if (moveId == MOVE_NONE)
+            continue;
         for (j = 0; j < FIELD_MOVE_COUNT; ++j)
         {
-            if (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == gFieldMovesInfo[j].moveId)
+            if (moveId == gFieldMovesInfo[j].moveId)
             {
                 AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + CURSOR_OPTION_FIELD_MOVES);
                 break;
@@ -4068,7 +4071,7 @@ static void CursorCB_FieldMove(u8 taskId)
     }
     else
     {
-        if (!gFieldMovesInfo[fieldMove].isUnlockedFunc())
+        if (gFieldMovesInfo[fieldMove].isUnlockedFunc != NULL && !gFieldMovesInfo[fieldMove].isUnlockedFunc())
         {
             DisplayPartyMenuMessage(gText_CantUseUntilNewBadge, TRUE);
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
@@ -4209,7 +4212,7 @@ bool32 SetUpFieldMove_Surf(void)
     
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     if (MetatileBehavior_IsFastWater(MapGridGetMetatileBehaviorAt(x, y)) != TRUE
-     && PartyHasMonWithSurf() == TRUE
+     && !TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING)
      && IsPlayerFacingSurfableFishableWater() == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
@@ -7676,5 +7679,19 @@ static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
     SetMonData(mon, MON_DATA_PP1 + slotTo, &pp0);
     SetMonData(mon, MON_DATA_PP1 + slotFrom, &pp1);
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+}
+
+u32 Party_FirstMonWithMove(u16 moveId)
+{
+    u8 i;
+    
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
+            break;
+        if (MonKnowsMove(&gPlayerParty[i], moveId))
+            return i;
+    }
+    return PARTY_SIZE;
 }
 

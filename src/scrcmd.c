@@ -14,6 +14,7 @@
 #include "quest_log.h"
 #include "map_preview_screen.h"
 #include "fieldmap.h"
+#include "field_move.h"
 #include "field_weather.h"
 #include "field_tasks.h"
 #include "field_fadetransition.h"
@@ -40,6 +41,7 @@
 #include "field_door.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
+#include "constants/field_move.h"
 #include "constants/maps.h"
 #include "constants/sound.h"
 
@@ -1821,6 +1823,41 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext * ctx)
             break;
         }
     }
+    return FALSE;
+}
+
+bool8 ScrCmd_checkfieldmoveusable(struct ScriptContext* ctx)
+{
+    u32 partyIndex;
+    enum FieldMove fieldMove = ScriptReadHalfword(ctx);
+    u16 moveId = gFieldMovesInfo[fieldMove].moveId;
+    u16 species = SPECIES_NONE;
+    gSpecialVar_Result = FALSE;
+
+    if (!FieldMove_IsUnlocked(fieldMove))
+        return FALSE;
+
+    partyIndex = Party_FirstMonWithMove(moveId);
+    if (partyIndex != PARTY_SIZE)
+    {
+        gFieldEffectArguments[0] = partyIndex;
+        gSpecialVar_0x8004 = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
+        gSpecialVar_Result = TRUE;
+        GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, gStringVar1);
+        StringGet_Nickname(gStringVar1);
+        StringCopy(gStringVar2, gMovesInfo[moveId].name);
+    }
+    else if (OW_FIELD_MOVES_WITHOUT_HMS)
+    {
+        species = FieldMove_GetDefaultSpecies(fieldMove);
+        gFieldEffectArguments[0] = species | NOT_IN_PARTY_MASK;
+        gSpecialVar_0x8004 = species;
+        gSpecialVar_Result = TRUE;
+        StringCopy(gStringVar1, COMPOUND_STRING("PROF. OAK's "));
+        StringAppend(gStringVar1, gSpeciesInfo[species].speciesName);
+        StringCopy(gStringVar2, gMovesInfo[moveId].name);
+    }
+
     return FALSE;
 }
 

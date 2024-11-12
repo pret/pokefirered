@@ -2361,7 +2361,7 @@ static void ObjectEventEmote(struct ObjectEvent *objEvent, u8 emotion)
     emotion %= FOLLOWER_EMOTION_LENGTH;
     ObjectEventGetLocalIdAndMap(objEvent, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
     gFieldEffectArguments[7] = emotion;
-    FieldEffectStart(FLDEFF_EMOTE);
+    FieldEffectStart(FLDEFF_QUESTION_MARK_ICON_AND_EMOTE);
 }
 
 // Find and return direction of metatile behavior within distance
@@ -8627,7 +8627,7 @@ static bool8 MovementAction_EmoteExclamationMark_Step0(struct ObjectEvent *objec
 static bool8 MovementAction_EmoteQuestionMark_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     ObjectEventGetLocalIdAndMap(objectEvent, &gFieldEffectArguments[0], &gFieldEffectArguments[1], &gFieldEffectArguments[2]);
-    FieldEffectStart(FLDEFF_QUESTION_MARK_ICON);
+    FieldEffectStart(FLDEFF_QUESTION_MARK_ICON_AND_EMOTE);
     sprite->data[2] = 1;
     return TRUE;
 }

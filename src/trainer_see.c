@@ -946,7 +946,7 @@ u32 FldEff_QuestionMarkIcon(void)
         spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emote, 0, 0, 0x52);
         if (spriteId == MAX_SPRITES)
             return 0;
-        SetIconSpriteData(&gSprites[spriteId], FLDEFF_EMOTE, emotion); // Set animation based on emotion
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_QUESTION_MARK_ICON_AND_EMOTE, emotion); // Set animation based on emotion
         UpdateSpritePaletteByTemplate(&sSpriteTemplate_Emote, &gSprites[spriteId]);
         return 0;
     }
@@ -954,7 +954,7 @@ u32 FldEff_QuestionMarkIcon(void)
 
     if (spriteId != MAX_SPRITES)
     {
-        SetIconSpriteData(&gSprites[spriteId], FLDEFF_QUESTION_MARK_ICON, 4);
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_QUESTION_MARK_ICON_AND_EMOTE, 4);
         UpdateSpritePaletteByTemplate(&sSpriteTemplate_Emoticons, &gSprites[spriteId]);
     }
 

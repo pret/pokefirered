@@ -1,9 +1,9 @@
 #include "global.h"
 #include "event_data.h"
-#include "field_moves.h"
+#include "field_move.h"
 #include "fldeff.h"
 #include "pokemon.h"
-#include "constants/field_moves.h"
+#include "constants/field_move.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 
@@ -14,11 +14,6 @@ static bool32 FieldMoveUnlocked_Strength(void);
 static bool32 FieldMoveUnlocked_Flash(void);
 static bool32 FieldMoveUnlocked_RockSmash(void);
 static bool32 FieldMoveUnlocked_Waterfall(void);
-static bool32 FieldMoveUnlocked_Teleport(void);
-static bool32 FieldMoveUnlocked_Dig(void);
-static bool32 FieldMoveUnlocked_MilkDrink(void);
-static bool32 FieldMoveUnlocked_SoftBoiled(void);
-static bool32 FieldMoveUnlocked_SweetScent(void);
 
 static const u8 sText_ShareHp[] = _("Share HP.");
 
@@ -94,10 +89,50 @@ const struct FieldMoveInfo gFieldMovesInfo[FIELD_MOVE_COUNT] =
         .fieldMoveFunc = SetUpFieldMove_Waterfall,
         .questLogText = COMPOUND_STRING("{STR_VAR_1} used the Hidden Move\nWATERFALL to scale a raging torrent."),
     },
+    [FIELD_MOVE_WHIRLPOOL] =
+    {
+        .defaultSpecies = SPECIES_SHELLDER,
+        .isUnlockedFunc = NULL,
+        .moveId = MOVE_NONE,
+        .partyMessageId = PARTY_MSG_CANT_USE_HERE,
+        .description = COMPOUND_STRING("N/A"),
+        .fieldMoveFunc = NULL,
+        .questLogText = COMPOUND_STRING("N/A"),
+    },
+    [FIELD_MOVE_DIVE] =
+    {
+        .defaultSpecies = SPECIES_SEEL,
+        .isUnlockedFunc = NULL,
+        .moveId = MOVE_NONE,
+        .partyMessageId = PARTY_MSG_CANT_USE_HERE,
+        .description = COMPOUND_STRING("N/A"),
+        .fieldMoveFunc = NULL,
+        .questLogText = COMPOUND_STRING("N/A"),
+    },
+    [FIELD_MOVE_DEFOG] =
+    {
+        .defaultSpecies = SPECIES_BUTTERFREE,
+        .isUnlockedFunc = NULL,
+        .moveId = MOVE_NONE,
+        .partyMessageId = PARTY_MSG_CANT_USE_HERE,
+        .description = COMPOUND_STRING("N/A"),
+        .fieldMoveFunc = NULL,
+        .questLogText = COMPOUND_STRING("N/A"),
+    },
+    [FIELD_MOVE_ROCK_CLIMB] =
+    {
+        .defaultSpecies = SPECIES_SANDSHREW,
+        .isUnlockedFunc = NULL,
+        .moveId = MOVE_NONE,
+        .partyMessageId = PARTY_MSG_CANT_USE_HERE,
+        .description = COMPOUND_STRING("N/A"),
+        .fieldMoveFunc = NULL,
+        .questLogText = COMPOUND_STRING("N/A"),
+    },
     [FIELD_MOVE_TELEPORT] =
     {
         .defaultSpecies = SPECIES_ABRA,
-        .isUnlockedFunc = FieldMoveUnlocked_Teleport,
+        .isUnlockedFunc = NULL,
         .moveId = MOVE_TELEPORT,
         .partyMessageId = PARTY_MSG_CANT_USE_HERE,
         .description = COMPOUND_STRING("Return to a healing spot."),
@@ -107,7 +142,7 @@ const struct FieldMoveInfo gFieldMovesInfo[FIELD_MOVE_COUNT] =
     [FIELD_MOVE_DIG] =
     {
         .defaultSpecies = SPECIES_DIGLETT,
-        .isUnlockedFunc = FieldMoveUnlocked_Dig,
+        .isUnlockedFunc = NULL,
         .moveId = MOVE_DIG,
         .partyMessageId = PARTY_MSG_CANT_USE_HERE,
         .description = COMPOUND_STRING("Escape from here."),
@@ -117,7 +152,7 @@ const struct FieldMoveInfo gFieldMovesInfo[FIELD_MOVE_COUNT] =
     [FIELD_MOVE_MILK_DRINK] =
     {
         .defaultSpecies = SPECIES_MILTANK,
-        .isUnlockedFunc = FieldMoveUnlocked_MilkDrink,
+        .isUnlockedFunc = NULL,
         .moveId = MOVE_MILK_DRINK,
         .partyMessageId = PARTY_MSG_NOT_ENOUGH_HP,
         .description = sText_ShareHp,
@@ -127,7 +162,7 @@ const struct FieldMoveInfo gFieldMovesInfo[FIELD_MOVE_COUNT] =
     [FIELD_MOVE_SOFT_BOILED] =
     {
         .defaultSpecies = SPECIES_CHANSEY,
-        .isUnlockedFunc = FieldMoveUnlocked_SoftBoiled,
+        .isUnlockedFunc = NULL,
         .moveId = MOVE_SOFT_BOILED,
         .partyMessageId = PARTY_MSG_NOT_ENOUGH_HP,
         .description = sText_ShareHp,
@@ -137,7 +172,7 @@ const struct FieldMoveInfo gFieldMovesInfo[FIELD_MOVE_COUNT] =
     [FIELD_MOVE_SWEET_SCENT] =
     {
         .defaultSpecies = SPECIES_ODDISH,
-        .isUnlockedFunc = FieldMoveUnlocked_SweetScent,
+        .isUnlockedFunc = NULL,
         .moveId = MOVE_SWEET_SCENT,
         .partyMessageId = PARTY_MSG_CANT_USE_HERE,
         .description = COMPOUND_STRING("Lure wild POKéMON."),
@@ -146,12 +181,22 @@ const struct FieldMoveInfo gFieldMovesInfo[FIELD_MOVE_COUNT] =
     },
 };
 
-u16 FieldMove_GetDefaultSpecies(u32 fieldMove)
+u16 FieldMove_GetDefaultSpecies(enum FieldMove fieldMove)
 {
     if (fieldMove >= FIELD_MOVE_COUNT)
         return SPECIES_NONE;
     
     return SanitizeSpeciesId(gFieldMovesInfo[fieldMove].defaultSpecies);
+}
+
+bool32 FieldMove_IsUnlocked(enum FieldMove fieldMove)
+{
+    if (fieldMove >= FIELD_MOVE_COUNT)
+        return FALSE;
+    if (gFieldMovesInfo[fieldMove].isUnlockedFunc == NULL)
+        return TRUE;
+
+    return gFieldMovesInfo[fieldMove].isUnlockedFunc();
 }
 
 static bool32 FieldMoveUnlocked_Cut(void)
@@ -187,30 +232,4 @@ static bool32 FieldMoveUnlocked_RockSmash(void)
 static bool32 FieldMoveUnlocked_Waterfall(void)
 {
     return FlagGet(FLAG_BADGE07_GET);
-}
-
-static bool32 FieldMoveUnlocked_Teleport(void)
-{
-    return TRUE;
-}
-
-static bool32 FieldMoveUnlocked_Dig(void)
-{
-    return TRUE;
-}
-
-static bool32 FieldMoveUnlocked_MilkDrink(void)
-{
-    return TRUE;
-}
-
-
-static bool32 FieldMoveUnlocked_SoftBoiled(void)
-{
-    return TRUE;
-}
-
-static bool32 FieldMoveUnlocked_SweetScent(void)
-{
-    return TRUE;
 }

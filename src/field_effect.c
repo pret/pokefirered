@@ -71,80 +71,80 @@ static const u16 sRockFragment_BottomRight[] = INCBIN_U16("graphics/field_effect
 
 static const u32 (*const sFieldEffectFuncs[FLDEFF_COUNT]) (void) =
 {
-    [FLDEFF_EXCLAMATION_MARK_ICON] =     FldEff_ExclamationMarkIcon,
-    [FLDEFF_USE_CUT_ON_GRASS] =          FldEff_UseCutOnGrass,
-    [FLDEFF_USE_CUT_ON_TREE] =           FldEff_UseCutOnTree,
-    [FLDEFF_SHADOW] =                    FldEff_Shadow,
-    [FLDEFF_TALL_GRASS] =                FldEff_TallGrass,
-    [FLDEFF_RIPPLE] =                    FldEff_Ripple,
-    [FLDEFF_FIELD_MOVE_SHOW_MON] =       FldEff_FieldMoveShowMon,
-    [FLDEFF_ASH] =                       FldEff_Ash,
-    [FLDEFF_SURF_BLOB] =                 FldEff_SurfBlob,
-    [FLDEFF_USE_SURF] =                  FldEff_UseSurf,
-    [FLDEFF_DUST] =                      FldEff_Dust,
-    [FLDEFF_USE_SECRET_POWER_CAVE] =     FldEff_Nop,
-    [FLDEFF_JUMP_TALL_GRASS] =           FldEff_JumpTallGrass,
-    [FLDEFF_SAND_FOOTPRINTS] =           FldEff_SandFootprints,
-    [FLDEFF_JUMP_BIG_SPLASH] =           FldEff_JumpBigSplash,
-    [FLDEFF_SPLASH] =                    FldEff_Splash,
-    [FLDEFF_JUMP_SMALL_SPLASH] =         FldEff_JumpSmallSplash,
-    [FLDEFF_LONG_GRASS] =                FldEff_LongGrass,
-    [FLDEFF_JUMP_LONG_GRASS] =           FldEff_JumpLongGrass,
-    [FLDEFF_UNUSED_GRASS] =              FldEff_UnusedGrass,
-    [FLDEFF_UNUSED_GRASS_2] =            FldEff_UnusedGrass2,
-    [FLDEFF_UNUSED_SAND] =               FldEff_UnusedSand,
-    [FLDEFF_UNUSED_WATER_SURFACING] =    FldEff_UnusedWaterSurfacing,
-    [FLDEFF_BERRY_TREE_GROWTH_SPARKLE] = FldEff_BerryTreeGrowthSparkle,
-    [FLDEFF_DEEP_SAND_FOOTPRINTS] =      FldEff_DeepSandFootprints,
-    [FLDEFF_POKECENTER_HEAL] =           FldEff_PokecenterHeal,
-    [FLDEFF_USE_SECRET_POWER_TREE] =     FldEff_Nop,
-    [FLDEFF_USE_SECRET_POWER_SHRUB] =    FldEff_Nop,
-    [FLDEFF_TREE_DISGUISE] =             FldEff_TreeDisguise,
-    [FLDEFF_MOUNTAIN_DISGUISE] =         FldEff_MountainDisguise,
-    [FLDEFF_NPCFLY_OUT] =                FldEff_NpcFlyOut,
-    [FLDEFF_FLY_OUT] =                   FldEff_FlyOut,
-    [FLDEFF_FLY_IN] =                    FldEff_FlyIn,
-    [FLDEFF_QUESTION_MARK_ICON] =        FldEff_QuestionMarkIcon,
-    [FLDEFF_FEET_IN_FLOWING_WATER] =     FldEff_FeetInFlowingWater,
-    [FLDEFF_BIKE_TIRE_TRACKS] =          FldEff_BikeTireTracks,
-    [FLDEFF_SAND_DISGUISE] =             FldEff_SandDisguise,
-    [FLDEFF_USE_ROCK_SMASH] =            FldEff_UseRockSmash,
-    [FLDEFF_USE_DIG] =                   FldEff_UseDig,
-    [FLDEFF_SAND_PILE] =                 FldEff_SandPile,
-    [FLDEFF_USE_STRENGTH] =              FldEff_UseStrength,
-    [FLDEFF_SHORT_GRASS] =               FldEff_ShortGrass,
-    [FLDEFF_HOT_SPRINGS_WATER] =         FldEff_HotSpringsWater,
-    [FLDEFF_USE_WATERFALL] =             FldEff_UseWaterfall,
-    [FLDEFF_USE_DIVE] =                  FldEff_UseDive,
-    [FLDEFF_POKEBALL] =                  FldEff_Pokeball,
-    [FLDEFF_X_ICON] =                    FldEff_XIcon,
-    [FLDEFF_NOP_47] =                    FldEff_Nop,
-    [FLDEFF_NOP_48] =                    FldEff_Nop,
-    [FLDEFF_POP_OUT_OF_ASH] =            FldEff_PopOutOfAsh,
-    [FLDEFF_LAVARIDGE_GYM_WARP] =        FldEff_LavaridgeGymWarp,
-    [FLDEFF_SWEET_SCENT] =               FldEff_SweetScent,
-    [FLDEFF_SAND_PILLAR] =               FldEff_Nop,
-    [FLDEFF_BUBBLES] =                   FldEff_Bubbles,
-    [FLDEFF_SPARKLE] =                   FldEff_Sparkle,
-    [FLDEFF_SECRET_POWER_CAVE] =         FldEff_Nop,
-    [FLDEFF_SECRET_POWER_TREE] =         FldEff_Nop,
-    [FLDEFF_SECRET_POWER_SHRUB] =        FldEff_Nop,
-    [FLDEFF_CUT_GRASS] =                 FldEff_CutGrass,
-    [FLDEFF_FIELD_MOVE_SHOW_MON_INIT] =  FldEff_FieldMoveShowMonInit,
-    [FLDEFF_USE_FLY_ANCIENT_TOMB] =      FldEff_Nop,
-    [FLDEFF_PCTURN_ON] =                 FldEff_Nop,
-    [FLDEFF_HALL_OF_FAME_RECORD] =       FldEff_HallOfFameRecord,
-    [FLDEFF_USE_TELEPORT] =              FldEff_UseTeleport,
-    [FLDEFF_SMILEY_FACE_ICON] =          FldEff_SmileyFaceIcon,
-    [FLDEFF_USE_VS_SEEKER] =             FldEff_UseVsSeeker,
-    [FLDEFF_DOUBLE_EXCL_MARK_ICON] =     FldEff_DoubleExclMarkIcon,
-    [FLDEFF_MOVE_DEOXYS_ROCK] =          FldEff_MoveDeoxysRock,
-    [FLDEFF_DESTROY_DEOXYS_ROCK] =       FldEff_DestroyDeoxysRock,
-    [FLDEFF_PHOTO_FLASH] =               FldEff_PhotoFlash,
-    [FLDEFF_TRACKS_SLITHER] =            FldEff_TracksSlither,
-    [FLDEFF_TRACKS_BUG] =                FldEff_TracksBug,
-    [FLDEFF_TRACKS_SPOT] =               FldEff_TracksSpot,
-    [FLDEFF_SNOW_FOOTPRINTS] =           FldEff_SnowFootprints,
+    [FLDEFF_EXCLAMATION_MARK_ICON] =        FldEff_ExclamationMarkIcon,
+    [FLDEFF_USE_CUT_ON_GRASS] =             FldEff_UseCutOnGrass,
+    [FLDEFF_USE_CUT_ON_TREE] =              FldEff_UseCutOnTree,
+    [FLDEFF_SHADOW] =                       FldEff_Shadow,
+    [FLDEFF_TALL_GRASS] =                   FldEff_TallGrass,
+    [FLDEFF_RIPPLE] =                       FldEff_Ripple,
+    [FLDEFF_FIELD_MOVE_SHOW_MON] =          FldEff_FieldMoveShowMon,
+    [FLDEFF_ASH] =                          FldEff_Ash,
+    [FLDEFF_SURF_BLOB] =                    FldEff_SurfBlob,
+    [FLDEFF_USE_SURF] =                     FldEff_UseSurf,
+    [FLDEFF_DUST] =                         FldEff_Dust,
+    [FLDEFF_USE_SECRET_POWER_CAVE] =        FldEff_Nop,
+    [FLDEFF_JUMP_TALL_GRASS] =              FldEff_JumpTallGrass,
+    [FLDEFF_SAND_FOOTPRINTS] =              FldEff_SandFootprints,
+    [FLDEFF_JUMP_BIG_SPLASH] =              FldEff_JumpBigSplash,
+    [FLDEFF_SPLASH] =                       FldEff_Splash,
+    [FLDEFF_JUMP_SMALL_SPLASH] =            FldEff_JumpSmallSplash,
+    [FLDEFF_LONG_GRASS] =                   FldEff_LongGrass,
+    [FLDEFF_JUMP_LONG_GRASS] =              FldEff_JumpLongGrass,
+    [FLDEFF_UNUSED_GRASS] =                 FldEff_UnusedGrass,
+    [FLDEFF_UNUSED_GRASS_2] =               FldEff_UnusedGrass2,
+    [FLDEFF_UNUSED_SAND] =                  FldEff_UnusedSand,
+    [FLDEFF_UNUSED_WATER_SURFACING] =       FldEff_UnusedWaterSurfacing,
+    [FLDEFF_BERRY_TREE_GROWTH_SPARKLE] =    FldEff_BerryTreeGrowthSparkle,
+    [FLDEFF_DEEP_SAND_FOOTPRINTS] =         FldEff_DeepSandFootprints,
+    [FLDEFF_POKECENTER_HEAL] =              FldEff_PokecenterHeal,
+    [FLDEFF_USE_SECRET_POWER_TREE] =        FldEff_Nop,
+    [FLDEFF_USE_SECRET_POWER_SHRUB] =       FldEff_Nop,
+    [FLDEFF_TREE_DISGUISE] =                FldEff_TreeDisguise,
+    [FLDEFF_MOUNTAIN_DISGUISE] =            FldEff_MountainDisguise,
+    [FLDEFF_NPCFLY_OUT] =                   FldEff_NpcFlyOut,
+    [FLDEFF_FLY_OUT] =                      FldEff_FlyOut,
+    [FLDEFF_FLY_IN] =                       FldEff_FlyIn,
+    [FLDEFF_QUESTION_MARK_ICON_AND_EMOTE] = FldEff_QuestionMarkIcon,
+    [FLDEFF_FEET_IN_FLOWING_WATER] =        FldEff_FeetInFlowingWater,
+    [FLDEFF_BIKE_TIRE_TRACKS] =             FldEff_BikeTireTracks,
+    [FLDEFF_SAND_DISGUISE] =                FldEff_SandDisguise,
+    [FLDEFF_USE_ROCK_SMASH] =               FldEff_UseRockSmash,
+    [FLDEFF_USE_DIG] =                      FldEff_UseDig,
+    [FLDEFF_SAND_PILE] =                    FldEff_SandPile,
+    [FLDEFF_USE_STRENGTH] =                 FldEff_UseStrength,
+    [FLDEFF_SHORT_GRASS] =                  FldEff_ShortGrass,
+    [FLDEFF_HOT_SPRINGS_WATER] =            FldEff_HotSpringsWater,
+    [FLDEFF_USE_WATERFALL] =                FldEff_UseWaterfall,
+    [FLDEFF_USE_DIVE] =                     FldEff_UseDive,
+    [FLDEFF_POKEBALL] =                     FldEff_Pokeball,
+    [FLDEFF_X_ICON] =                       FldEff_XIcon,
+    [FLDEFF_NOP_47] =                       FldEff_Nop,
+    [FLDEFF_NOP_48] =                       FldEff_Nop,
+    [FLDEFF_POP_OUT_OF_ASH] =               FldEff_PopOutOfAsh,
+    [FLDEFF_LAVARIDGE_GYM_WARP] =           FldEff_LavaridgeGymWarp,
+    [FLDEFF_SWEET_SCENT] =                  FldEff_SweetScent,
+    [FLDEFF_SAND_PILLAR] =                  FldEff_Nop,
+    [FLDEFF_BUBBLES] =                      FldEff_Bubbles,
+    [FLDEFF_SPARKLE] =                      FldEff_Sparkle,
+    [FLDEFF_SECRET_POWER_CAVE] =            FldEff_Nop,
+    [FLDEFF_SECRET_POWER_TREE] =            FldEff_Nop,
+    [FLDEFF_SECRET_POWER_SHRUB] =           FldEff_Nop,
+    [FLDEFF_CUT_GRASS] =                    FldEff_CutGrass,
+    [FLDEFF_FIELD_MOVE_SHOW_MON_INIT] =     FldEff_FieldMoveShowMonInit,
+    [FLDEFF_USE_FLY_ANCIENT_TOMB] =         FldEff_Nop,
+    [FLDEFF_PCTURN_ON] =                    FldEff_Nop,
+    [FLDEFF_HALL_OF_FAME_RECORD] =          FldEff_HallOfFameRecord,
+    [FLDEFF_USE_TELEPORT] =                 FldEff_UseTeleport,
+    [FLDEFF_SMILEY_FACE_ICON] =             FldEff_SmileyFaceIcon,
+    [FLDEFF_USE_VS_SEEKER] =                FldEff_UseVsSeeker,
+    [FLDEFF_DOUBLE_EXCL_MARK_ICON] =        FldEff_DoubleExclMarkIcon,
+    [FLDEFF_MOVE_DEOXYS_ROCK] =             FldEff_MoveDeoxysRock,
+    [FLDEFF_DESTROY_DEOXYS_ROCK] =          FldEff_DestroyDeoxysRock,
+    [FLDEFF_PHOTO_FLASH] =                  FldEff_PhotoFlash,
+    [FLDEFF_TRACKS_SLITHER] =               FldEff_TracksSlither,
+    [FLDEFF_TRACKS_BUG] =                   FldEff_TracksBug,
+    [FLDEFF_TRACKS_SPOT] =                  FldEff_TracksSpot,
+    [FLDEFF_SNOW_FOOTPRINTS] =              FldEff_SnowFootprints,
 };
 
 static const struct OamData sNewGameOakOamAttributes = {
@@ -2542,14 +2542,25 @@ u32 FldEff_FieldMoveShowMon(void)
     return 0;
 }
 
+#define SHOW_MON_CRY_NO_DUCKING (1 << 31)
+
 u32 FldEff_FieldMoveShowMonInit(void)
 {
-    u32 r6 = gFieldEffectArguments[0] & 0x80000000;
+    u32 noDucking = gFieldEffectArguments[0] & SHOW_MON_CRY_NO_DUCKING;
     u8 partyIdx = gFieldEffectArguments[0];
-    gFieldEffectArguments[0] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
-    gFieldEffectArguments[1] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_IS_SHINY, NULL);
-    gFieldEffectArguments[2] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
-    gFieldEffectArguments[0] |= r6;
+    if (gFieldEffectArguments[0] & NOT_IN_PARTY_MASK)
+    {
+        gFieldEffectArguments[0] &= ~NOT_IN_PARTY_MASK;
+        gFieldEffectArguments[1] = FALSE;
+        gFieldEffectArguments[2] = SHINY_ODDS;
+    }
+    else
+    {
+        gFieldEffectArguments[0] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_SPECIES);
+        gFieldEffectArguments[1] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_IS_SHINY, NULL);
+        gFieldEffectArguments[2] = GetMonData(&gPlayerParty[partyIdx], MON_DATA_PERSONALITY);
+    }
+    gFieldEffectArguments[0] |= noDucking;
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
     return 0;
@@ -2872,9 +2883,9 @@ static u8 InitFieldMoveMonSprite(u32 species, bool32 isShiny, u32 personality)
     bool16 playCry;
     u8 monSprite;
     struct Sprite *sprite;
-    playCry = (species & 0x80000000) >> 16;
-    species &= 0x7fffffff;
-    monSprite = CreateMonSprite_FieldMove(species, isShiny, personality, 0x140, 0x50, 0);
+    playCry = (species & SHOW_MON_CRY_NO_DUCKING) >> 16;
+    species &= ~SHOW_MON_CRY_NO_DUCKING;
+    monSprite = CreateMonSprite_FieldMove(species, isShiny, personality, 320, 80, 0);
     sprite = &gSprites[monSprite];
     sprite->callback = SpriteCallbackDummy;
     sprite->oam.priority = 0;
@@ -2982,7 +2993,7 @@ static void UseSurfEffect_3(struct Task *task)
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (ObjectEventCheckHeldMovementStatus(objectEvent))
     {
-        gFieldEffectArguments[0] = task->data[15] | 0x80000000;
+        gFieldEffectArguments[0] = task->data[15] | SHOW_MON_CRY_NO_DUCKING;
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         task->data[0]++;
     }

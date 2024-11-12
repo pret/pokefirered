@@ -470,8 +470,7 @@
 #define MOVE_WRING_OUT 464
 #define MOVE_X_SCISSOR 465
 #define MOVE_ZEN_HEADBUTT 466
-// Accidentally put this at the end.
-#define MOVE_ACUPRESSURE 467
+#define MOVE_ACUPRESSURE 467  // Accidentally put this at the end.
 
 #define MOVES_COUNT 468
 

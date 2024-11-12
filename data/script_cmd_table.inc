@@ -125,7 +125,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_nop1                           @ 0x79
 	.4byte ScrCmd_giveegg                        @ 0x7a
 	.4byte ScrCmd_setmonmove                     @ 0x7b
-	.4byte ScrCmd_checkpartymove                 @ 0x7c
+	.4byte ScrCmd_checkfieldmoveusable           @ 0x7c
 	.4byte ScrCmd_bufferspeciesname              @ 0x7d
 	.4byte ScrCmd_bufferleadmonspeciesname       @ 0x7e
 	.4byte ScrCmd_bufferpartymonnick             @ 0x7f
@@ -216,7 +216,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_bufferitemnameplural           @ 0xd4
 	.4byte ScrCmd_selectapproachingtrainer       @ 0xd5
 	.4byte ScrCmd_lockfortrainer                 @ 0xd6
-	.4byte ScrCmd_checkfieldmoveusable      	 @ 0xd7
+	.4byte ScrCmd_nop1					      	 @ 0xd7
 	.4byte ScrCmd_nop1							 @ 0xd8
 	.4byte ScrCmd_nop1							 @ 0xd9
 	.4byte ScrCmd_nop1							 @ 0xda

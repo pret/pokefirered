@@ -1127,12 +1127,12 @@
 	.2byte \move
 	.endm
 
-	@ Checks if at least one Pokemon in the player's party knows the specified move. If so, VAR_RESULT is set to the
-	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE.
-	@ VAR_0x8004 is also set to this Pokemon's species.
-	.macro checkpartymove move:req
+	@ Checks if field move can be used. If so, VAR_RESULT is set to TRUE, gFieldEffectArguments[0] to masked
+	@ species or party index of the Pokemon, VAR_0x8004 to species, STR_VAR_1 to the Pokemon's name,
+	@ and STR_VAR_2 to the move's name.
+	.macro checkfieldmoveusable fieldMove:req
 	.byte 0x7c
-	.2byte \move
+	.2byte \fieldMove
 	.endm
 
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).
@@ -1762,12 +1762,6 @@
 	@ The player and trainers are frozen once their movement is finished.
 	.macro lockfortrainer
 	.byte 0xd6
-	.endm
-
-	@ Checks if effect can be used
-	.macro checkfieldmoveusable effect:req
-	.byte 0xd7
-	.2byte \effect
 	.endm
 
 	@ Equivalent to fadescreen but copies gPlttBufferUnfaded to gDecompressionBuffer on the fade out

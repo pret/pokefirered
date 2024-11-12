@@ -1805,33 +1805,11 @@ bool8 ScrCmd_setmonmove(struct ScriptContext * ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_checkpartymove(struct ScriptContext * ctx)
-{
-    u8 i;
-    u16 moveId = ScriptReadHalfword(ctx);
-
-    gSpecialVar_Result = PARTY_SIZE;
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
-        if (!species)
-            break;
-        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && MonKnowsMove(&gPlayerParty[i], moveId) == TRUE)
-        {
-            gSpecialVar_Result = i;
-            gSpecialVar_0x8004 = species;
-            break;
-        }
-    }
-    return FALSE;
-}
-
 bool8 ScrCmd_checkfieldmoveusable(struct ScriptContext* ctx)
 {
     u32 partyIndex;
     enum FieldMove fieldMove = ScriptReadHalfword(ctx);
     u16 moveId = gFieldMovesInfo[fieldMove].moveId;
-    u16 species = SPECIES_NONE;
     gSpecialVar_Result = FALSE;
 
     if (!FieldMove_IsUnlocked(fieldMove))
@@ -1849,7 +1827,7 @@ bool8 ScrCmd_checkfieldmoveusable(struct ScriptContext* ctx)
     }
     else if (OW_FIELD_MOVES_WITHOUT_HMS)
     {
-        species = FieldMove_GetDefaultSpecies(fieldMove);
+        u16 species = FieldMove_GetDefaultSpecies(fieldMove);
         gFieldEffectArguments[0] = species | NOT_IN_PARTY_MASK;
         gSpecialVar_0x8004 = species;
         gSpecialVar_Result = TRUE;

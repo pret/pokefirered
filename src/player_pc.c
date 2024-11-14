@@ -146,6 +146,16 @@ void NewGameInitPCItems(void)
     for (i = 0, ClearPCItemSlots(); NEW_GAME_PC_ITEMS(i, PC_ITEM_ID) && NEW_GAME_PC_ITEMS(i, PC_QUANTITY) &&
                                     AddPCItem(NEW_GAME_PC_ITEMS(i, PC_ITEM_ID), NEW_GAME_PC_ITEMS(i, PC_QUANTITY)) == TRUE; i++)
         ;
+    
+  AddBagItem(ITEM_POKE_BALL, 50);
+  AddBagItem(ITEM_GREAT_BALL, 20);
+  AddBagItem(ITEM_ULTRA_BALL, 5);
+  AddBagItem(ITEM_POTION, 10);
+  AddBagItem(ITEM_SUPER_POTION, 5);
+  AddBagItem(ITEM_FULL_HEAL, 10);
+  AddBagItem(ITEM_REVIVE, 5);
+  AddBagItem(ITEM_ESCAPE_ROPE, 3);
+  AddBagItem(ITEM_EXP_SHARE, 1);
 }
 
 void BedroomPC(void)

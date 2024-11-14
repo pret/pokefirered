@@ -355,8 +355,36 @@ const u8 gMoveDescription_ShockWave[] = _("A rapid jolt of\nelectricity strikes\
 const u8 gMoveDescription_WaterPulse[] = _("An attack with a\npulsing blast of\nwater. It may also\nconfuse the foe.");
 const u8 gMoveDescription_DoomDesire[] = _("A move that attacks\nthe foe with a\nblast of light two\nturns after use.");
 const u8 gMoveDescription_PsychoBoost[] =     _("An intense attack\nthat also sharply\nreduces the user's\nSP. ATK stat.");
+
 // TODO(poke-challenge): Maybe replace this with proper descriptions.
 const u8 gMoveDescription_Gen4Placeholder[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_Roost[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_FocusBlast[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_EnergyBall[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_Brine[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_Fling[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_ChargeBeam[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_DragonPulse[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_DrainPunch[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_Embargo[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_ShadowClaw[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_Payback[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_GigaImpact[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_RockPolish[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_StoneEdge[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_Avalanche[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_GyroBall[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_StealthRock[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_Captivate[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_DarkPulse[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_XScissor[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_NaturalGift[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_PoisonJab[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_GrassKnot[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_Pluck[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_UTurn[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_FlashCannon[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_TrickRoom[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,

@@ -307,7 +307,7 @@ pokes = [
 
   ('UNOWN', 'Unused'),
 
-  ('WOBBUFFET', 'Unused'),
+  ('WOBBUFFET', 'UnusedBanned'),
 
   ('GIRAFARIG', 'Overworld'),
 
@@ -447,7 +447,7 @@ pokes = [
 
   ('NINCADA', 'Bug2'),
   ('NINJASK', 'Bug3'),
-  ('SHEDINJA', 'Uber'),
+  ('SHEDINJA', 'UnusedBanned'),
 
   ('WHISMUR', 'Cave1'),
   ('LOUDRED', 'Cave2'),
@@ -558,7 +558,7 @@ pokes = [
 
   ('ABSOL', 'Overworld'),
 
-  ('WYNAUT', 'Unused'),
+  ('WYNAUT', 'UnusedBanned'),
 
   ('SNORUNT', 'Cave2'),
   ('GLALIE', 'Powerful'),

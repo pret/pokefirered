@@ -50,12 +50,24 @@ CeladonCity_DepartmentStore_5F_EventScript_ClerkVitamins::
 
 	.align 2
 CeladonCity_DepartmentStore_5F_Vitamins::
-	.2byte ITEM_HP_UP
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_IRON
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
+	.2byte ITEM_SITRUS_BERRY
+	.2byte ITEM_LUM_BERRY
+	.2byte ITEM_DEEP_SEA_SCALE
+	.2byte ITEM_DEEP_SEA_TOOTH
+	.2byte ITEM_FOCUS_BAND
+	.2byte ITEM_KINGS_ROCK
+	.2byte ITEM_LEFTOVERS
+	.2byte ITEM_LIGHT_BALL
+	.2byte ITEM_LUCKY_PUNCH
+	.2byte ITEM_MENTAL_HERB
+	.2byte ITEM_METAL_POWDER
+	.2byte ITEM_QUICK_CLAW
+	.2byte ITEM_SCOPE_LENS
+	.2byte ITEM_SHELL_BELL
+	.2byte ITEM_SMOKE_BALL
+	.2byte ITEM_STICK
+	.2byte ITEM_THICK_CLUB
+	.2byte ITEM_WHITE_HERB
 	.2byte ITEM_NONE
 	release
 	end

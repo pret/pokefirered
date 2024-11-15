@@ -2999,7 +2999,7 @@ u8 IsRunningFromBattleImpossible(void)
     u8 side;
     s32 i;
 
-    if (VarGet(FLAG_SYS_SPECIAL_WILD_BATTLE)) {
+    if (FlagGet(FLAG_SYS_SPECIAL_WILD_BATTLE)) {
       return BATTLE_RUN_FAILURE;
     }
 

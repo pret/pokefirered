@@ -1633,6 +1633,13 @@
 	.2byte \quantity
 	.endm
 
+  @ Writes the name of the specified TM's move to the specified buffer.
+  @ UB if the item isn't a TM.
+  .macro buffertmmovename stringVarId:req, itemVarId:req
+  .byte 0xd5
+  stringvar \stringVarId
+  .2byte \itemVarId
+  .endm
 
 @ Supplementary
 
@@ -1785,7 +1792,21 @@
 	@ message indicates there is no room, and VAR_RESULT is set to FALSE. 
 	@ Otherwise VAR_RESULT is set to TRUE, and the message indicates they have received the item(s).
 	.macro giveitem item:req, amount=1
-	setorcopyvar VAR_0x8000, \item
+  .if (\item == -1)
+    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_1
+  .elseif (\item == -2)
+    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_2
+  .elseif (\item == -3)
+    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_3
+  .elseif (\item == -4)
+    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_4
+  .elseif (\item == -5)
+    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_5
+  .elseif (\item == -6)
+    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_6
+  .else
+    setorcopyvar VAR_0x8000, \item
+  .endif
 	setorcopyvar VAR_0x8001, \amount
 	callstd STD_OBTAIN_ITEM
 	.endm

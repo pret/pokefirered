@@ -42,13 +42,13 @@ u32 GameHash() {
 
 u32 MapHash() {
   static u32 gMapHash;
-  static u8 gLastRegionMapSectionId;
-  if (gLastRegionMapSectionId != gMapHeader.regionMapSectionId) {
+  static const struct MapLayout* gLastRegionMapLayout;
+  if (gLastRegionMapLayout != gMapHeader.mapLayout) {
     u8 mapName[32];
     memset(mapName, 0, 32);
     GetMapNameGeneric(mapName, gMapHeader.regionMapSectionId);
-    gMapHash = Hash(mapName);
-    gLastRegionMapSectionId = gMapHeader.regionMapSectionId;
+    gMapHash = HashCombine(Hash(mapName), (u32)gMapHeader.mapLayout);
+    gLastRegionMapLayout = gMapHeader.mapLayout;
   }
   return gMapHash;
 }

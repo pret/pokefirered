@@ -9470,7 +9470,7 @@ static void Cmd_handleballthrow(void)
     gActiveBattler = gBattlerAttacker;
     gBattlerTarget = gBattlerAttacker ^ BIT_SIDE;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_GHOST)
+    if ((gBattleTypeFlags & BATTLE_TYPE_GHOST) || (VarGet(FLAG_SYS_SPECIAL_WILD_BATTLE)))
     {
         BtlController_EmitBallThrowAnim(BUFFER_A, BALL_GHOST_DODGE);
         MarkBattlerForControllerExec(gActiveBattler);

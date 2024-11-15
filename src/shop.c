@@ -27,7 +27,6 @@
 #include "script.h"
 #include "random.h"
 #include "event_data.h"
-#include "pokemon_groups.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 #include "constants/game_stat.h"
@@ -240,34 +239,21 @@ static u8 GetMartTypeFromItemList(u32 martType)
 
 static void SetShopItemsForSale(const u16 *items)
 {
-  u32 i;
-  u16 seed1;
-  u16 seed2;
-
-  // Hack to randomize TMs in the department store.
-  // The first item is supposed to be TM05.
-  if (items[0] == ITEM_TM05) {
-    seed1 = (GameHash() >> 16) & 0xffff;
-    seed2 = GameHash() & 0xffff;
-    for (i = 0; i < 6; i += 2) {
-      VarSet(VAR_DEPT_STORE_TM_1 + i, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-      VarSet(VAR_DEPT_STORE_TM_2 + i, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-      seed1 = SeededRandom(seed1);
-      seed2 = SeededRandom(seed2);
+    // Hack to randomize TMs in the department store.
+    // The first item is supposed to be TM05.
+    if (items[0] == ITEM_TM05) {
+          items = GetVarPointer(VAR_MAP_ITEM_1);
     }
-    VarSet(VAR_DEPT_STORE_END, ITEM_NONE);
-    items = GetVarPointer(VAR_DEPT_STORE_TM_1);
-  }
 
-  sShopData.itemList = items;
-  sShopData.itemCount = 0;
-  if (sShopData.itemList[0] == 0)
-    return;
+    sShopData.itemList = items;
+    sShopData.itemCount = 0;
+    if (sShopData.itemList[0] == 0)
+        return;
 
-  while (sShopData.itemList[sShopData.itemCount])
-  {
-    ++sShopData.itemCount;
-  }
+    while (sShopData.itemList[sShopData.itemCount])
+    {
+        ++sShopData.itemCount;
+    }
 }
 
 static void SetShopMenuCallback(void (*callback)(void))

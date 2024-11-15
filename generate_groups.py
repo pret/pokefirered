@@ -259,11 +259,11 @@ pokes = [
   ('CHINCHOU', 'Fish1'),
   ('LANTURN', 'Fish2'),
 
-  ('PICHU', 'Unused'),
-  ('CLEFFA', 'Unused'),
-  ('IGGLYBUFF', 'Unused'),
+  ('PICHU', 'GameCorner'),
+  ('CLEFFA', 'GameCorner'),
+  ('IGGLYBUFF', 'GameCorner'),
 
-  ('TOGEPI', 'Unused'),
+  ('TOGEPI', 'GameCorner'),
   ('TOGETIC', 'Rare2Percent'),
 
   ('NATU', 'Overworld'),
@@ -305,9 +305,9 @@ pokes = [
 
   ('MISDREAVUS', 'Spooky2'),
 
-  ('UNOWN', 'Unused'),
+  ('UNOWN', 'BannedOrUnused'),
 
-  ('WOBBUFFET', 'UnusedBanned'),
+  ('WOBBUFFET', 'BannedOrUnused'),
 
   ('GIRAFARIG', 'Overworld'),
 
@@ -364,7 +364,7 @@ pokes = [
   ('PORYGON2', 'Urban2'),
 
   ('STANTLER', 'Normal2'),
-  ('SMEARGLE', 'Unused'),
+  ('SMEARGLE', 'BannedOrUnused'),
 
   ('TYROGUE', 'Cave1'),
 
@@ -447,7 +447,7 @@ pokes = [
 
   ('NINCADA', 'Bug2'),
   ('NINJASK', 'Bug3'),
-  ('SHEDINJA', 'UnusedBanned'),
+  ('SHEDINJA', 'BannedOrUnused'),
 
   ('WHISMUR', 'Cave1'),
   ('LOUDRED', 'Cave2'),
@@ -456,7 +456,7 @@ pokes = [
   ('MAKUHITA', 'Cave1'),
   ('HARIYAMA', 'Cave2'),
 
-  ('AZURILL', 'Unused'),
+  ('AZURILL', 'GameCorner'),
 
   ('NOSEPASS', 'Cave1'),
 
@@ -558,7 +558,7 @@ pokes = [
 
   ('ABSOL', 'Overworld'),
 
-  ('WYNAUT', 'UnusedBanned'),
+  ('WYNAUT', 'BannedOrUnused'),
 
   ('SNORUNT', 'Cave2'),
   ('GLALIE', 'Powerful'),
@@ -691,6 +691,7 @@ groups = {
   'Fish2': [],
   'LeggedWater1': [],
   'LeggedWater2': [],
+  'GameCorner': [],
   'Rare2Percent': [],
 }
 

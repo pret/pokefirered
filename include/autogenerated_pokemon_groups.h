@@ -395,6 +395,16 @@ const u16 gGroup_LeggedWater2[] =
   SPECIES_SEALEO,
 };
 
+const u16 gGroup_GameCorner[] =
+{
+  /*SIZE=*/5,
+  SPECIES_PICHU,
+  SPECIES_CLEFFA,
+  SPECIES_IGGLYBUFF,
+  SPECIES_TOGEPI,
+  SPECIES_AZURILL,
+};
+
 const u16 gGroup_Rare2Percent[] =
 {
   /*SIZE=*/19,
@@ -574,22 +584,12 @@ const u16 gGroup_Uber[] =
   SPECIES_DEOXYS,
 };
 
-const u16 gGroup_Unused[] =
+const u16 gGroup_BannedOrUnused[] =
 {
-  /*SIZE=*/7,
-  SPECIES_PICHU,
-  SPECIES_CLEFFA,
-  SPECIES_IGGLYBUFF,
-  SPECIES_TOGEPI,
+  /*SIZE=*/5,
   SPECIES_UNOWN,
-  SPECIES_SMEARGLE,
-  SPECIES_AZURILL,
-};
-
-const u16 gGroup_UnusedBanned[] =
-{
-  /*SIZE=*/3,
   SPECIES_WOBBUFFET,
+  SPECIES_SMEARGLE,
   SPECIES_SHEDINJA,
   SPECIES_WYNAUT,
 };
@@ -768,10 +768,10 @@ const u16* const gMonGroups[] =
   [SPECIES_CROBAT] = gGroup_SafariZone,
   [SPECIES_CHINCHOU] = gGroup_Fish1,
   [SPECIES_LANTURN] = gGroup_Fish2,
-  [SPECIES_PICHU] = gGroup_Unused,
-  [SPECIES_CLEFFA] = gGroup_Unused,
-  [SPECIES_IGGLYBUFF] = gGroup_Unused,
-  [SPECIES_TOGEPI] = gGroup_Unused,
+  [SPECIES_PICHU] = gGroup_GameCorner,
+  [SPECIES_CLEFFA] = gGroup_GameCorner,
+  [SPECIES_IGGLYBUFF] = gGroup_GameCorner,
+  [SPECIES_TOGEPI] = gGroup_GameCorner,
   [SPECIES_TOGETIC] = gGroup_Rare2Percent,
   [SPECIES_NATU] = gGroup_Overworld,
   [SPECIES_XATU] = gGroup_SafariZone,
@@ -797,8 +797,8 @@ const u16* const gMonGroups[] =
   [SPECIES_MURKROW] = gGroup_Bird1,
   [SPECIES_SLOWKING] = gGroup_SafariZone,
   [SPECIES_MISDREAVUS] = gGroup_Spooky2,
-  [SPECIES_UNOWN] = gGroup_Unused,
-  [SPECIES_WOBBUFFET] = gGroup_UnusedBanned,
+  [SPECIES_UNOWN] = gGroup_BannedOrUnused,
+  [SPECIES_WOBBUFFET] = gGroup_BannedOrUnused,
   [SPECIES_GIRAFARIG] = gGroup_Overworld,
   [SPECIES_PINECO] = gGroup_Bug1,
   [SPECIES_FORRETRESS] = gGroup_Bug3,
@@ -831,7 +831,7 @@ const u16* const gMonGroups[] =
   [SPECIES_DONPHAN] = gGroup_SafariZone,
   [SPECIES_PORYGON2] = gGroup_Urban2,
   [SPECIES_STANTLER] = gGroup_Normal2,
-  [SPECIES_SMEARGLE] = gGroup_Unused,
+  [SPECIES_SMEARGLE] = gGroup_BannedOrUnused,
   [SPECIES_TYROGUE] = gGroup_Cave1,
   [SPECIES_HITMONTOP] = gGroup_Cave2,
   [SPECIES_SMOOCHUM] = gGroup_Urban1,
@@ -888,13 +888,13 @@ const u16* const gMonGroups[] =
   [SPECIES_SLAKING] = gGroup_Powerful,
   [SPECIES_NINCADA] = gGroup_Bug2,
   [SPECIES_NINJASK] = gGroup_Bug3,
-  [SPECIES_SHEDINJA] = gGroup_UnusedBanned,
+  [SPECIES_SHEDINJA] = gGroup_BannedOrUnused,
   [SPECIES_WHISMUR] = gGroup_Cave1,
   [SPECIES_LOUDRED] = gGroup_Cave2,
   [SPECIES_EXPLOUD] = gGroup_CeruleanCave,
   [SPECIES_MAKUHITA] = gGroup_Cave1,
   [SPECIES_HARIYAMA] = gGroup_Cave2,
-  [SPECIES_AZURILL] = gGroup_Unused,
+  [SPECIES_AZURILL] = gGroup_GameCorner,
   [SPECIES_NOSEPASS] = gGroup_Cave1,
   [SPECIES_SKITTY] = gGroup_Normal1,
   [SPECIES_DELCATTY] = gGroup_Normal2,
@@ -956,7 +956,7 @@ const u16* const gMonGroups[] =
   [SPECIES_TROPIUS] = gGroup_Overworld,
   [SPECIES_CHIMECHO] = gGroup_Overworld,
   [SPECIES_ABSOL] = gGroup_Overworld,
-  [SPECIES_WYNAUT] = gGroup_UnusedBanned,
+  [SPECIES_WYNAUT] = gGroup_BannedOrUnused,
   [SPECIES_SNORUNT] = gGroup_Cave2,
   [SPECIES_GLALIE] = gGroup_Powerful,
   [SPECIES_SPHEAL] = gGroup_LeggedWater1,

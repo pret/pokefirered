@@ -66,7 +66,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
-    gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_HELP;
+    gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_LR;
 }
 
 static void ClearPokedexFlags(void)
@@ -156,6 +156,8 @@ void NewGameInitData(void)
     VarSet(VAR_FIRE_STARTER, GetSpeciesFromGroup(SPECIES_CHARMANDER, 0));
     VarSet(VAR_WATER_STARTER, GetSpeciesFromGroup(SPECIES_SQUIRTLE, 0));
 
+    // Overwrite options.
+    SetDefaultOptions();
 }
 
 static void ResetMiniGamesResults(void)

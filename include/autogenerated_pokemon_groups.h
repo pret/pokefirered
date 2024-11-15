@@ -405,12 +405,19 @@ const u16 gGroup_GameCorner[] =
   SPECIES_AZURILL,
 };
 
+const u16 gGroup_Gift[] =
+{
+  /*SIZE=*/1,
+  SPECIES_UNOWN,
+};
+
 const u16 gGroup_Rare2Percent[] =
 {
-  /*SIZE=*/19,
+  /*SIZE=*/20,
   SPECIES_EEVEE,
   SPECIES_DRATINI,
   SPECIES_TOGETIC,
+  SPECIES_SMEARGLE,
   SPECIES_LARVITAR,
   SPECIES_SLAKOTH,
   SPECIES_TRAPINCH,
@@ -584,12 +591,10 @@ const u16 gGroup_Uber[] =
   SPECIES_DEOXYS,
 };
 
-const u16 gGroup_BannedOrUnused[] =
+const u16 gGroup_Banned[] =
 {
-  /*SIZE=*/5,
-  SPECIES_UNOWN,
+  /*SIZE=*/3,
   SPECIES_WOBBUFFET,
-  SPECIES_SMEARGLE,
   SPECIES_SHEDINJA,
   SPECIES_WYNAUT,
 };
@@ -797,8 +802,8 @@ const u16* const gMonGroups[] =
   [SPECIES_MURKROW] = gGroup_Bird1,
   [SPECIES_SLOWKING] = gGroup_SafariZone,
   [SPECIES_MISDREAVUS] = gGroup_Spooky2,
-  [SPECIES_UNOWN] = gGroup_BannedOrUnused,
-  [SPECIES_WOBBUFFET] = gGroup_BannedOrUnused,
+  [SPECIES_UNOWN] = gGroup_Gift,
+  [SPECIES_WOBBUFFET] = gGroup_Banned,
   [SPECIES_GIRAFARIG] = gGroup_Overworld,
   [SPECIES_PINECO] = gGroup_Bug1,
   [SPECIES_FORRETRESS] = gGroup_Bug3,
@@ -831,7 +836,7 @@ const u16* const gMonGroups[] =
   [SPECIES_DONPHAN] = gGroup_SafariZone,
   [SPECIES_PORYGON2] = gGroup_Urban2,
   [SPECIES_STANTLER] = gGroup_Normal2,
-  [SPECIES_SMEARGLE] = gGroup_BannedOrUnused,
+  [SPECIES_SMEARGLE] = gGroup_Rare2Percent,
   [SPECIES_TYROGUE] = gGroup_Cave1,
   [SPECIES_HITMONTOP] = gGroup_Cave2,
   [SPECIES_SMOOCHUM] = gGroup_Urban1,
@@ -888,7 +893,7 @@ const u16* const gMonGroups[] =
   [SPECIES_SLAKING] = gGroup_Powerful,
   [SPECIES_NINCADA] = gGroup_Bug2,
   [SPECIES_NINJASK] = gGroup_Bug3,
-  [SPECIES_SHEDINJA] = gGroup_BannedOrUnused,
+  [SPECIES_SHEDINJA] = gGroup_Banned,
   [SPECIES_WHISMUR] = gGroup_Cave1,
   [SPECIES_LOUDRED] = gGroup_Cave2,
   [SPECIES_EXPLOUD] = gGroup_CeruleanCave,
@@ -956,7 +961,7 @@ const u16* const gMonGroups[] =
   [SPECIES_TROPIUS] = gGroup_Overworld,
   [SPECIES_CHIMECHO] = gGroup_Overworld,
   [SPECIES_ABSOL] = gGroup_Overworld,
-  [SPECIES_WYNAUT] = gGroup_BannedOrUnused,
+  [SPECIES_WYNAUT] = gGroup_Banned,
   [SPECIES_SNORUNT] = gGroup_Cave2,
   [SPECIES_GLALIE] = gGroup_Powerful,
   [SPECIES_SPHEAL] = gGroup_LeggedWater1,

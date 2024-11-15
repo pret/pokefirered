@@ -305,9 +305,9 @@ pokes = [
 
   ('MISDREAVUS', 'Spooky2'),
 
-  ('UNOWN', 'BannedOrUnused'),
+  ('UNOWN', 'Gift'),
 
-  ('WOBBUFFET', 'BannedOrUnused'),
+  ('WOBBUFFET', 'Banned'),
 
   ('GIRAFARIG', 'Overworld'),
 
@@ -364,7 +364,7 @@ pokes = [
   ('PORYGON2', 'Urban2'),
 
   ('STANTLER', 'Normal2'),
-  ('SMEARGLE', 'BannedOrUnused'),
+  ('SMEARGLE', 'Rare2Percent'),
 
   ('TYROGUE', 'Cave1'),
 
@@ -447,7 +447,7 @@ pokes = [
 
   ('NINCADA', 'Bug2'),
   ('NINJASK', 'Bug3'),
-  ('SHEDINJA', 'BannedOrUnused'),
+  ('SHEDINJA', 'Banned'),
 
   ('WHISMUR', 'Cave1'),
   ('LOUDRED', 'Cave2'),
@@ -558,7 +558,7 @@ pokes = [
 
   ('ABSOL', 'Overworld'),
 
-  ('WYNAUT', 'BannedOrUnused'),
+  ('WYNAUT', 'Banned'),
 
   ('SNORUNT', 'Cave2'),
   ('GLALIE', 'Powerful'),
@@ -692,6 +692,7 @@ groups = {
   'LeggedWater1': [],
   'LeggedWater2': [],
   'GameCorner': [],
+  'Gift': [],
   'Rare2Percent': [],
 }
 

@@ -138,9 +138,13 @@ to determine which Pokémon are catchable in each route.
 | --- |
 |![](https://www.serebii.net/pokedex-swsh/icon/172.png "PICHU") ![](https://www.serebii.net/pokedex-swsh/icon/173.png "CLEFFA") ![](https://www.serebii.net/pokedex-swsh/icon/174.png "IGGLYBUFF") ![](https://www.serebii.net/pokedex-swsh/icon/175.png "TOGEPI") ![](https://www.serebii.net/pokedex-swsh/icon/298.png "AZURILL") |
 
+| Gift |
+| --- |
+|![](https://www.serebii.net/pokedex-swsh/icon/201.png "UNOWN") |
+
 | Rare2Percent |
 | --- |
-|![](https://www.serebii.net/pokedex-swsh/icon/133.png "EEVEE") ![](https://www.serebii.net/pokedex-swsh/icon/147.png "DRATINI") ![](https://www.serebii.net/pokedex-swsh/icon/176.png "TOGETIC") ![](https://www.serebii.net/pokedex-swsh/icon/246.png "LARVITAR") ![](https://www.serebii.net/pokedex-swsh/icon/287.png "SLAKOTH") ![](https://www.serebii.net/pokedex-swsh/icon/328.png "TRAPINCH") ![](https://www.serebii.net/pokedex-swsh/icon/333.png "SWABLU") ![](https://www.serebii.net/pokedex-swsh/icon/351.png "CASTFORM") ![](https://www.serebii.net/pokedex-swsh/icon/371.png "BAGON") ![](https://www.serebii.net/pokedex-swsh/icon/374.png "BELDUM") ![](https://www.serebii.net/pokedex-swsh/icon/001.png "BULBASAUR") ![](https://www.serebii.net/pokedex-swsh/icon/152.png "CHIKORITA") ![](https://www.serebii.net/pokedex-swsh/icon/252.png "TREECKO") ![](https://www.serebii.net/pokedex-swsh/icon/004.png "CHARMANDER") ![](https://www.serebii.net/pokedex-swsh/icon/155.png "CYNDAQUIL") ![](https://www.serebii.net/pokedex-swsh/icon/255.png "TORCHIC") ![](https://www.serebii.net/pokedex-swsh/icon/007.png "SQUIRTLE") ![](https://www.serebii.net/pokedex-swsh/icon/158.png "TOTODILE") ![](https://www.serebii.net/pokedex-swsh/icon/258.png "MUDKIP") |
+|![](https://www.serebii.net/pokedex-swsh/icon/133.png "EEVEE") ![](https://www.serebii.net/pokedex-swsh/icon/147.png "DRATINI") ![](https://www.serebii.net/pokedex-swsh/icon/176.png "TOGETIC") ![](https://www.serebii.net/pokedex-swsh/icon/235.png "SMEARGLE") ![](https://www.serebii.net/pokedex-swsh/icon/246.png "LARVITAR") ![](https://www.serebii.net/pokedex-swsh/icon/287.png "SLAKOTH") ![](https://www.serebii.net/pokedex-swsh/icon/328.png "TRAPINCH") ![](https://www.serebii.net/pokedex-swsh/icon/333.png "SWABLU") ![](https://www.serebii.net/pokedex-swsh/icon/351.png "CASTFORM") ![](https://www.serebii.net/pokedex-swsh/icon/371.png "BAGON") ![](https://www.serebii.net/pokedex-swsh/icon/374.png "BELDUM") ![](https://www.serebii.net/pokedex-swsh/icon/001.png "BULBASAUR") ![](https://www.serebii.net/pokedex-swsh/icon/152.png "CHIKORITA") ![](https://www.serebii.net/pokedex-swsh/icon/252.png "TREECKO") ![](https://www.serebii.net/pokedex-swsh/icon/004.png "CHARMANDER") ![](https://www.serebii.net/pokedex-swsh/icon/155.png "CYNDAQUIL") ![](https://www.serebii.net/pokedex-swsh/icon/255.png "TORCHIC") ![](https://www.serebii.net/pokedex-swsh/icon/007.png "SQUIRTLE") ![](https://www.serebii.net/pokedex-swsh/icon/158.png "TOTODILE") ![](https://www.serebii.net/pokedex-swsh/icon/258.png "MUDKIP") |
 
 | GrassStarter1 |
 | --- |
@@ -198,7 +202,7 @@ to determine which Pokémon are catchable in each route.
 | --- |
 |![](https://www.serebii.net/pokedex-swsh/icon/150.png "MEWTWO") ![](https://www.serebii.net/pokedex-swsh/icon/151.png "MEW") ![](https://www.serebii.net/pokedex-swsh/icon/249.png "LUGIA") ![](https://www.serebii.net/pokedex-swsh/icon/250.png "HO_OH") ![](https://www.serebii.net/pokedex-swsh/icon/382.png "KYOGRE") ![](https://www.serebii.net/pokedex-swsh/icon/383.png "GROUDON") ![](https://www.serebii.net/pokedex-swsh/icon/384.png "RAYQUAZA") ![](https://www.serebii.net/pokedex-swsh/icon/386.png "DEOXYS") |
 
-| BannedOrUnused |
+| Banned |
 | --- |
-|![](https://www.serebii.net/pokedex-swsh/icon/201.png "UNOWN") ![](https://www.serebii.net/pokedex-swsh/icon/202.png "WOBBUFFET") ![](https://www.serebii.net/pokedex-swsh/icon/235.png "SMEARGLE") ![](https://www.serebii.net/pokedex-swsh/icon/292.png "SHEDINJA") ![](https://www.serebii.net/pokedex-swsh/icon/360.png "WYNAUT") |
+|![](https://www.serebii.net/pokedex-swsh/icon/202.png "WOBBUFFET") ![](https://www.serebii.net/pokedex-swsh/icon/292.png "SHEDINJA") ![](https://www.serebii.net/pokedex-swsh/icon/360.png "WYNAUT") |
 

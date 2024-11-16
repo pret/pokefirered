@@ -61,12 +61,12 @@ extern const struct SpriteTemplate gFieldEffectObjectTemplate_BugTracks;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_SpotTracks;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_SnowFootprints;
 
-u32 FieldEffectStart(u8);
-bool8 FieldEffectActiveListContains(u8 id);
+u32 FieldEffectStart(enum FieldEffect fldeff);
+bool8 FieldEffectActiveListContains(enum FieldEffect fldeff);
 void CreateTeleportFieldEffectTask(void);
-void FieldEffectActiveListRemove(u8 id);
+void FieldEffectActiveListRemove(enum FieldEffect fldeff);
 void StartEscapeRopeFieldEffect(void);
-void FieldEffectStop(struct Sprite *sprite, u8 id);
+void FieldEffectStop(struct Sprite *sprite, enum FieldEffect fldeff);
 u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
 void FieldCB_FallWarpExit(void);
 void StartEscalatorWarp(u8 metatileBehavior, u8 priority);

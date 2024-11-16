@@ -4,7 +4,7 @@
 
 enum FieldEffect
 {
-    
+    FLDEFF_NONE,
     FLDEFF_EXCLAMATION_MARK_ICON,
     FLDEFF_USE_CUT_ON_GRASS,
     FLDEFF_USE_CUT_ON_TREE,

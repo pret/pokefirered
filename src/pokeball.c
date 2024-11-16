@@ -767,7 +767,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
     }
     sprite->callback = HandleBallAnimEnd;
 
-    if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
+    if (gMain.inBattle)
     {
         struct Pokemon *mon;
         u16 species;

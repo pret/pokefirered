@@ -55,4 +55,6 @@ bool32 IsNationalPokedexEnabled(void);
 void EnableNationalPokedex_RSE(void);
 void ClearTempFieldEventData(void);
 
+#define MAX_AUTOFIRE_COOLDOWN 30
+
 #endif // GUARD_EVENT_DATA_H

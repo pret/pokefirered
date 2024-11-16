@@ -2999,6 +2999,10 @@ u8 IsRunningFromBattleImpossible(void)
     u8 side;
     s32 i;
 
+    if (FlagGet(FLAG_SYS_SPECIAL_WILD_BATTLE)) {
+      return BATTLE_RUN_FAILURE;
+    }
+
     if (gBattleMons[gActiveBattler].item == ITEM_ENIGMA_BERRY)
         holdEffect = gEnigmaBerries[gActiveBattler].holdEffect;
     else

@@ -356,12 +356,6 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
     s16 x, y;
     u32 gender;
 
-    if (gTasks[taskId].tFrames == 0)
-    {
-        gTasks[taskId].tFrames++;
-        return;
-    }
-
     throwCaseId = gTasks[taskId].tThrowId;
     battlerId = gTasks[taskId].tBattler;
 
@@ -401,7 +395,7 @@ static void Task_DoPokeballSendOutAnim(u8 taskId)
         gBattlerTarget = battlerId;
         gSprites[ballSpriteId].x = x;
         gSprites[ballSpriteId].y = y;
-        gSprites[ballSpriteId].callback = SpriteCB_PlayerMonSendOut_1;
+        gSprites[ballSpriteId].callback = SpriteCB_ReleaseMonFromBall;
         break;
     case POKEBALL_OPPONENT_SENDOUT:
         gSprites[ballSpriteId].x = GetBattlerSpriteCoord(battlerId, BATTLER_COORD_X);
@@ -768,7 +762,9 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
     StartSpriteAnim(sprite, 1);
     ballId = ItemIdToBallId(GetBattlerPokeballItemId(battlerId));
     AnimateBallOpenParticles(sprite->x, sprite->y - 5, 1, 28, ballId);
-    sprite->data[0] = LaunchBallFadeMonTask(TRUE, sprite->sBattler, 14, ballId);
+    if (GetBattlerSide(battlerId) != B_SIDE_PLAYER) {
+        sprite->data[0] = LaunchBallFadeMonTask(TRUE, sprite->sBattler, 14, ballId);
+    }
     sprite->callback = HandleBallAnimEnd;
 
     if (gMain.inBattle)

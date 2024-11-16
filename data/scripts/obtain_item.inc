@@ -150,27 +150,15 @@ EventScript_HiddenItemScript::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	waitse
 	goto_if_eq VAR_0x8005, 0, EventScript_TryPickUpHiddenCoins
-	call EventScript_TryPickUpHiddenItem
-	goto_if_eq VAR_0x8007, TRUE, EventScript_PickedUpHiddenItem
-	goto_if_eq VAR_0x8007, FALSE, EventScript_NoRoomForHiddenItem
+	// Disable all hidden items that aren't coins..
 	end
 
 EventScript_TryPickUpHiddenItem::
-	additem VAR_0x8005, VAR_0x8006
-	copyvar VAR_0x8007, VAR_RESULT
-	bufferitemname STR_VAR_2, VAR_0x8005
-	checkitemtype VAR_0x8005
-	call EventScript_BufferPocketNameTryFanfare
+	// Disable all hidden items that aren't coins.
 	return
 
 EventScript_PickedUpHiddenItem::
-	call_if_eq VAR_0x8006, 1, EventScript_FoundSingleItem
-	call_if_ne VAR_0x8006, 1, EventScript_FoundMultipleItems
-	waitfanfare
-	waitmessage
-	msgbox Text_PutItemAway
-	special SetHiddenItemFlag
-	releaseall
+	// Disable all hidden items that aren't coins.
 	end
 
 EventScript_FoundSingleItem::
@@ -188,10 +176,7 @@ EventScript_FoundMultipleItems::
 	return
 
 EventScript_NoRoomForHiddenItem::
-	msgbox Text_FoundOneItem
-	msgbox Text_TooBadBagFull
-	setvar VAR_RESULT, 0
-	releaseall
+	// Disable all hidden items that aren't coins.
 	end
 
 EventScript_TryPickUpHiddenCoins::

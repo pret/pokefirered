@@ -171,7 +171,7 @@ u16 FontFunc_Braille(struct TextPrinter *textPrinter);
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter);
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter);
 void TextPrinterClearDownArrow(struct TextPrinter *textPrinter);
-bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter);
+bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter, u16 cooldown);
 bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
 bool16 TextPrinterWait(struct TextPrinter *textPrinter);
 void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex);

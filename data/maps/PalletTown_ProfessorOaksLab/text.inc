@@ -60,22 +60,13 @@ PalletTown_ProfessorOaksLab_Text_RivalLeaveItToMeGramps::
 
 PalletTown_ProfessorOaksLab_Text_RivalTellSisNotToGiveYouMap::
     .string "{PLAYER}, I hate to say it, but you\n"
-    .string "won't be necessary for this.\p"
-    .string "I know! I'll borrow a TOWN MAP\n"
-    .string "from my sis!\p"
-    .string "I'll tell her not to lend you one,\n"
-    .string "{PLAYER}! Hahaha!\p"
-    .string "Don't bother coming around to\n"
-    .string "my place after this!$"
+    .string "won't be necessary for this, scrub.$"
 
 PalletTown_ProfessorOaksLab_Text_OakThreeMonsChooseOne::
     .string "OAK: {RIVAL}?\n"
     .string "Let me think…\p"
-    .string "Oh, that's right, I told you to\n"
-    .string "come! Just wait!\p"
     .string "Here, {PLAYER}.\p"
     .string "There are three POKéMON here.\p"
-    .string "Haha!\p"
     .string "The POKéMON are held inside\n"
     .string "these POKé BALLS.\p"
     .string "When I was young, I was a serious\n"
@@ -109,13 +100,13 @@ PalletTown_ProfessorOaksLab_Text_OakChoosingGrassStarter::
 PalletTown_ProfessorOaksLab_Text_OakChoosingWaterStarter::
     .string "I see! {STR_VAR_1} is your choice.\n"
     .string "It's one worth raising.\p"
-    .string "So, {PLAYER}, you want to go with\n"
+    .string "So, {PLAYER}, you've decided on the\n"
     .string "the WATER POKéMON {STR_VAR_1}?$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingFireStarter::
     .string "I see! {STR_VAR_1} is your choice.\n"
-    .string "It's one worth raising.\p"
-    .string "So, {PLAYER}, you want to go with\n"
+    .string "You should raise it patiently.\p"
+    .string "So, {PLAYER}, you're claiming the\n"
     .string "the FIRE POKéMON {STR_VAR_1}?$"
 
 PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic::
@@ -138,12 +129,6 @@ PalletTown_ProfessorOaksLab_Text_OakBattleMonForItToGrow::
     .string "It has to battle for it to grow.$"
 
 PalletTown_ProfessorOaksLab_Text_OakHaveSomethingForMe::
-    .string "OAK: Oh, {PLAYER}!\n"
-    .string "How is my old POKéMON?\p"
-    .string "Well, it seems to be growing more\n"
-    .string "attached to you.\p"
-    .string "You must be talented as a POKéMON\n"
-    .string "TRAINER.\p"
     .string "What's that?\n"
     .string "You have something for me?$"
 
@@ -151,21 +136,14 @@ PalletTown_ProfessorOaksLab_Text_DeliveredOaksParcel::
     .string "{PLAYER} delivered OAK'S PARCEL.$"
 
 PalletTown_ProfessorOaksLab_Text_OakCustomBallIOrdered::
-    .string "Ah! \n"
-    .string "It's the custom POKé BALL!\p"
-    .string "I had it on order.\n"
-    .string "Thank you!$"
+    .string "Ah! Thank you!$"
 
 PalletTown_ProfessorOaksLab_Text_OakHaveRequestForYouTwo::
-    .string "OAK: Oh, right!\n"
     .string "I have a request for you two.$"
 
 PalletTown_ProfessorOaksLab_Text_OakPokedexOnDesk::
     .string "On the desk there is my invention,\n"
-    .string "the POKéDEX!\p"
-    .string "It automatically records data on\n"
-    .string "POKéMON you've seen or caught.\p"
-    .string "It's a high-tech encyclopedia!$"
+    .string "the POKéDEX!$"
 
 PalletTown_ProfessorOaksLab_Text_OakTakeTheseWithYou::
     .string "OAK: {PLAYER} and {RIVAL}.\n"
@@ -196,13 +174,6 @@ PalletTown_ProfessorOaksLab_Text_OakExplainCatching::
     .string "You have to be lucky!$"
 
 PalletTown_ProfessorOaksLab_Text_OakCompleteMonGuideWasMyDream::
-    .string "To make a complete guide on all\n"
-    .string "the POKéMON in the world…\p"
-    .string "That was my dream!\p"
-    .string "But, I'm too old.\n"
-    .string "I can't get the job done.\p"
-    .string "So, I want you two to fulfill my\n"
-    .string "dream for me.\p"
     .string "Get moving, you two.\p"
     .string "This is a great undertaking in\n"
     .string "POKéMON history!$"

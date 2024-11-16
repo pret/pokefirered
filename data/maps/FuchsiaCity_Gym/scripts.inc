@@ -22,7 +22,7 @@ FuchsiaCity_Gym_EventScript_GiveTM06::
 	msgbox FuchsiaCity_Gym_Text_KogaExplainSoulBadge
 	checkitemspace ITEM_TM06
 	goto_if_eq VAR_RESULT, FALSE, FuchsiaCity_Gym_EventScript_NoRoomForTM06
-	giveitem_msg FuchsiaCity_Gym_Text_ReceivedTM06FromKoga, ITEM_TM06
+	giveitem -1
 	setflag FLAG_GOT_TM06_FROM_KOGA
 	msgbox FuchsiaCity_Gym_Text_KogaExplainTM06
 	release

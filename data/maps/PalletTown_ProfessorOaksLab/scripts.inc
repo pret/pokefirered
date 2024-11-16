@@ -96,12 +96,12 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexScene::
 	call_if_eq VAR_FACING, DIR_WEST, PalletTown_ProfessorOaksLab_EventScript_OakBringDexesToDeskWest
 	addobject LOCALID_POKEDEX_1
 	addobject LOCALID_POKEDEX_2
-	delay 30
+	delay 1
 	msgbox PalletTown_ProfessorOaksLab_Text_OakNowTheseUnitsCanRecordMoreData
 	closemessage
 	removeobject LOCALID_POKEDEX_1
 	removeobject LOCALID_POKEDEX_2
-	delay 30
+	delay 1
 	call_if_eq VAR_FACING, DIR_NORTH, PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverNorth
 	call_if_eq VAR_FACING, DIR_SOUTH, PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverSouth
 	call_if_eq VAR_FACING, DIR_EAST, PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverEast
@@ -222,10 +222,10 @@ PalletTown_ProfessorOaksLab_ChooseStarterScene::
 	fadedefaultbgm
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalFedUpWithWaiting
 	closemessage
-	delay 60
+	delay 1
 	msgbox PalletTown_ProfessorOaksLab_Text_OakThreeMonsChooseOne
 	closemessage
-	delay 30
+	delay 1
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalReact
 	waitmovement 0
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalNoFairWhatAboutMe
@@ -623,7 +623,7 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene::
 	fadedefaultbgm
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalWhatDidYouCallMeFor
 	closemessage
-	delay 30
+	delay 1
 	playse SE_PIN
 	applymovement LOCALID_PROF_OAK, Common_Movement_ExclamationMark
 	waitmovement 0
@@ -641,20 +641,20 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene::
 	call_if_eq VAR_FACING, DIR_WEST, PalletTown_ProfessorOaksLab_EventScript_DexSceneOakWalkToDeskWest
 	msgbox PalletTown_ProfessorOaksLab_Text_OakPokedexOnDesk
 	closemessage
-	delay 40
+	delay 1
 	msgbox PalletTown_ProfessorOaksLab_Text_OakTakeTheseWithYou
 	closemessage
 	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	removeobject LOCALID_POKEDEX_1
-	delay 10
+	delay 1
 	removeobject LOCALID_POKEDEX_2
-	delay 25
+	delay 1
 	call_if_eq VAR_FACING, DIR_NORTH, PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverNorth
 	call_if_eq VAR_FACING, DIR_SOUTH, PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverSouth
 	call_if_eq VAR_FACING, DIR_EAST, PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverEast
 	call_if_eq VAR_FACING, DIR_WEST, PalletTown_ProfessorOaksLab_EventScript_OakBringDexesOverWest
-	delay 10
+	delay 1
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message PalletTown_ProfessorOaksLab_Text_ReceivedPokedexFromOak
@@ -664,12 +664,8 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene::
 	setflag FLAG_SYS_POKEDEX_GET
 	special SetUnlockedPokedexFlags
 	setvar VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 1
-	msgbox PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese
-	giveitem_msg PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls, ITEM_POKE_BALL, 5
-	msgbox PalletTown_ProfessorOaksLab_Text_OakExplainCatching
 	famechecker FAMECHECKER_OAK, 1
 	msgbox PalletTown_ProfessorOaksLab_Text_OakCompleteMonGuideWasMyDream
-	msgbox PalletTown_ProfessorOaksLab_Text_RivalLeaveItToMeGramps
 	call_if_eq VAR_FACING, DIR_NORTH, PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerNorth
 	call_if_eq VAR_FACING, DIR_SOUTH, PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerSouth
 	call_if_eq VAR_FACING, DIR_EAST, PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerEastWest
@@ -685,7 +681,7 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene::
 	fadedefaultbgm
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 2
-	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2  // This skips the tutorial.
 	setvar VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 1
 	setvar VAR_MAP_SCENE_ROUTE22, 1
 	release
@@ -797,7 +793,7 @@ PalletTown_ProfessorOaksLab_EventScript_RatePokedex::
 
 PalletTown_ProfessorOaksLab_EventScript_DexCompleted::
 	closemessage
-	delay 40
+	delay 1
 	message PokedexRating_Text_Wroooaaarrr
 	waitmessage
 	call_if_eq VAR_FACING, DIR_NORTH, PalletTown_ProfessorOaksLab_EventScript_OakExcitedNorth
@@ -807,7 +803,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexCompleted::
 	applymovement LOCALID_PROF_OAK, Common_Movement_FacePlayer
 	waitmovement 0
 	closemessage
-	delay 70
+	delay 1
 	msgbox PokedexRating_Text_ThankYouMadeDreamReality
 	setflag SHOWED_OAK_COMPLETE_DEX
 	release
@@ -914,7 +910,7 @@ PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene::
 	closemessage
 	goto_if_lt VAR_0x8009, 60, PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene
 	goto_if_unset FLAG_WORLD_MAP_ONE_ISLAND, PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene
-	delay 30
+	delay 1
 	msgbox PalletTown_ProfessorOaksLab_Text_OakFavorToAskYouPlayer
 	goto PalletTown_ProfessorOaksLab_EventScript_NationalDexScene
 	end
@@ -983,7 +979,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterSouth::
 PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalSouth::
 	applymovement LOCALID_PROF_OAK, Common_Movement_FacePlayer
 	waitmovement 0
-	delay 15
+	delay 1
 	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
@@ -991,7 +987,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalSouth::
 PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalWest::
 	applymovement LOCALID_PROF_OAK, Common_Movement_FacePlayer
 	waitmovement 0
-	delay 15
+	delay 1
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
@@ -1000,7 +996,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalWest::
 PalletTown_ProfessorOaksLab_EventScript_DexSceneOakFacePlayerAndRivalEast::
 	applymovement LOCALID_PROF_OAK, Common_Movement_FacePlayer
 	waitmovement 0
-	delay 15
+	delay 1
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0

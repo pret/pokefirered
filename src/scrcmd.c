@@ -34,6 +34,8 @@
 #include "field_effect.h"
 #include "fieldmap.h"
 #include "field_door.h"
+#include "event_data.h"
+#include "constants/moves.h"
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/sound.h"
@@ -1311,6 +1313,12 @@ bool8 ScrCmd_closemessage(struct ScriptContext * ctx)
 
 static bool8 WaitForAorBPress(void)
 {
+    VarSet(VAR_AUTOFIRE_COOLDOWN, VarGet(VAR_AUTOFIRE_COOLDOWN) - 1);
+    if (VarGet(VAR_AUTOFIRE_COOLDOWN) <= 0) {
+        VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
+        return TRUE;
+    }
+
     if (JOY_NEW(A_BUTTON))
         return TRUE;
     if (JOY_NEW(B_BUTTON))
@@ -1673,6 +1681,114 @@ bool8 ScrCmd_buffermovename(struct ScriptContext * ctx)
     StringCopy(sScriptStringVars[stringVarIndex], gMoveNames[moveId]);
     return FALSE;
 }
+
+// Keep in sync with sTMHMMoves!
+static const u16 sTMMoves[] =
+{
+    MOVE_FOCUS_PUNCH,
+    MOVE_DRAGON_CLAW,
+    MOVE_WATER_PULSE,
+    MOVE_CALM_MIND,
+    MOVE_ROAR,
+    MOVE_TOXIC,
+    MOVE_HAIL,
+    MOVE_BULK_UP,
+    MOVE_BULLET_SEED,
+    MOVE_HIDDEN_POWER,
+    MOVE_SUNNY_DAY,
+    MOVE_TAUNT,
+    MOVE_ICE_BEAM,
+    MOVE_BLIZZARD,
+    MOVE_HYPER_BEAM,
+    MOVE_LIGHT_SCREEN,
+    MOVE_PROTECT,
+    MOVE_RAIN_DANCE,
+    MOVE_GIGA_DRAIN,
+    MOVE_SAFEGUARD,
+    MOVE_FRUSTRATION,
+    MOVE_SOLAR_BEAM,
+    MOVE_IRON_TAIL,
+    MOVE_THUNDERBOLT,
+    MOVE_THUNDER,
+    MOVE_EARTHQUAKE,
+    MOVE_RETURN,
+    MOVE_DIG,
+    MOVE_PSYCHIC,
+    MOVE_SHADOW_BALL,
+    MOVE_BRICK_BREAK,
+    MOVE_DOUBLE_TEAM,
+    MOVE_REFLECT,
+    MOVE_SHOCK_WAVE,
+    MOVE_FLAMETHROWER,
+    MOVE_SLUDGE_BOMB,
+    MOVE_SANDSTORM,
+    MOVE_FIRE_BLAST,
+    MOVE_ROCK_TOMB,
+    MOVE_AERIAL_ACE,
+    MOVE_TORMENT,
+    MOVE_FACADE,
+    MOVE_SECRET_POWER,
+    MOVE_REST,
+    MOVE_ATTRACT,
+    MOVE_THIEF,
+    MOVE_STEEL_WING,
+    MOVE_SKILL_SWAP,
+    MOVE_SNATCH,
+    MOVE_OVERHEAT,
+
+    MOVE_ROOST,
+    MOVE_FOCUS_BLAST,
+    MOVE_ENERGY_BALL,
+    MOVE_FALSE_SWIPE,
+    MOVE_BRINE,
+    MOVE_FLING,
+    MOVE_CHARGE_BEAM,
+    MOVE_ENDURE,
+    MOVE_DRAGON_PULSE,
+    MOVE_DRAIN_PUNCH,
+    MOVE_WILL_O_WISP,
+    MOVE_SILVER_WIND,
+    MOVE_EMBARGO,
+    MOVE_EXPLOSION,
+    MOVE_SHADOW_CLAW,
+    MOVE_PAYBACK,
+    MOVE_RECYCLE,
+    MOVE_GIGA_IMPACT,
+    MOVE_ROCK_POLISH,
+    MOVE_FLASH,
+    MOVE_STONE_EDGE,
+    MOVE_AVALANCHE,
+    MOVE_THUNDER_WAVE,
+    MOVE_GYRO_BALL,
+    MOVE_SWORDS_DANCE,
+    MOVE_STEALTH_ROCK,
+    MOVE_PSYCH_UP,
+    MOVE_CAPTIVATE,
+    MOVE_DARK_PULSE,
+    MOVE_ROCK_SLIDE,
+    MOVE_X_SCISSOR,
+    MOVE_SLEEP_TALK,
+    MOVE_NATURAL_GIFT,
+    MOVE_POISON_JAB,
+    MOVE_DREAM_EATER,
+    MOVE_GRASS_KNOT,
+    MOVE_SWAGGER,
+    MOVE_PLUCK,
+    MOVE_U_TURN,
+    MOVE_SUBSTITUTE,
+    MOVE_FLASH_CANNON,
+    MOVE_TRICK_ROOM,
+};
+
+bool8 ScrCmd_buffertmmovename(struct ScriptContext * ctx)
+{
+    u8 stringVarIndex = ScriptReadByte(ctx);
+    u16 itemVarId = VarGet(ScriptReadHalfword(ctx));
+
+    StringCopy(sScriptStringVars[stringVarIndex], gMoveNames[sTMMoves[VarGet(itemVarId) - ITEM_TM01]]);
+    return FALSE;
+}
+
 
 bool8 ScrCmd_buffernumberstring(struct ScriptContext * ctx)
 {

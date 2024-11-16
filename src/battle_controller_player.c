@@ -18,6 +18,7 @@
 #include "battle_message.h"
 #include "battle_script_commands.h"
 #include "reshow_battle_screen.h"
+#include "event_data.h"
 #include "constants/battle_anim.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -222,7 +223,9 @@ static void HandleInputChooseAction(void)
 
     DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
-    if (JOY_NEW(A_BUTTON))
+
+    // Make L autofire A in battles.
+    if (JOY_NEW(A_BUTTON) || JOY_HELD(L_BUTTON))
     {
         PlaySE(SE_SELECT);
 
@@ -242,6 +245,24 @@ static void HandleInputChooseAction(void)
             break;
         }
         PlayerBufferExecCompleted();
+    }
+    // Make R automatically run. Need to press it twice.
+    else if (JOY_NEW(R_BUTTON) || JOY_HELD(R_BUTTON))
+    {
+        if (gActionSelectionCursor[gActiveBattler] != 3)
+        {
+            PlaySE(SE_SELECT);
+            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] = 3;
+            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+        }
+
+        VarSet(VAR_AUTOFIRE_COOLDOWN, VarGet(VAR_AUTOFIRE_COOLDOWN) - 1);
+        if (VarGet(VAR_AUTOFIRE_COOLDOWN) <= 0) {
+            VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
+            PlayerBufferExecCompleted();
+        }
     }
     else if (JOY_NEW(DPAD_LEFT))
     {
@@ -335,7 +356,8 @@ static void HandleInputChooseTarget(void)
         }
         while (i < gBattlersCount);
     }
-    if (JOY_NEW(A_BUTTON))
+    // Make L autofire A in battles.
+    if (JOY_NEW(A_BUTTON) || JOY_HELD(L_BUTTON))
     {
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_HideAsMoveTarget;
@@ -440,7 +462,8 @@ void HandleInputChooseMove(void)
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
 
     PreviewDeterminativeMoveTargets();
-    if (JOY_NEW(A_BUTTON))
+    // Make L autofire A in battles.
+    if (JOY_NEW(A_BUTTON) || JOY_HELD(L_BUTTON))
     {
         u8 moveTarget;
 
@@ -583,7 +606,8 @@ static u32 HandleMoveInputUnused(void)
 {
     u32 var = 0;
 
-    if (JOY_NEW(A_BUTTON))
+    // Make L autofire A in battles.
+    if (JOY_NEW(A_BUTTON) || JOY_HELD(L_BUTTON))
     {
         PlaySE(SE_SELECT);
         var = 1;
@@ -634,7 +658,8 @@ static void HandleMoveSwitching(void)
     struct ChooseMoveStruct moveStruct;
     u8 totalPPBonuses;
 
-    if (JOY_NEW(A_BUTTON | SELECT_BUTTON))
+    // Make L autofire A in battles.
+    if (JOY_NEW(A_BUTTON) || JOY_HELD(L_BUTTON))
     {
         PlaySE(SE_SELECT);
 
@@ -1007,10 +1032,18 @@ static void CompleteOnHealthbarDone(void)
     }
 }
 
-void CompleteOnInactiveTextPrinter(void)
+static void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(0)) {
         PlayerBufferExecCompleted();
+        return;
+    }
+
+    VarSet(VAR_AUTOFIRE_COOLDOWN, VarGet(VAR_AUTOFIRE_COOLDOWN) - 1);
+    if (VarGet(VAR_AUTOFIRE_COOLDOWN) <= 0) {
+        VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
+        PlayerBufferExecCompleted();
+    }
 }
 
 #define tExpTask_monId      data[0]
@@ -1280,12 +1313,6 @@ static void FreeMonSpriteAfterSwitchOutAnim(void)
         SetHealthboxSpriteInvisible(gHealthboxSpriteIds[gActiveBattler]);
         PlayerBufferExecCompleted();
     }
-}
-
-static void CompleteOnInactiveTextPrinter2(void)
-{
-    if (!IsTextPrinterActive(0))
-        PlayerBufferExecCompleted();
 }
 
 static void OpenPartyMenuToChooseMon(void)
@@ -2382,7 +2409,9 @@ static void PlayerHandlePrintString(void)
         BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
     else
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
-    gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
+    // Add a little extra cooldown to account for fade-in time.
+    VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN + 10);
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter;
 }
 
 static void PlayerHandlePrintSelectionString(void)

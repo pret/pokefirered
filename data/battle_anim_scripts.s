@@ -19,7 +19,6 @@ gMovesWithQuietBGM::
 	.2byte 0xFFFF
 
 	.align 2
-@ TODO(poke-challenge): Add all moves here.
 gBattleAnims_Moves::
 	.4byte Move_NONE
 	.4byte Move_POUND

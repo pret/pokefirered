@@ -5722,7 +5722,6 @@ static void Cmd_drawlvlupbox(void)
             VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
             BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
             // Draw page 2 of level up box
-            PlaySE(SE_SELECT);
             DrawLevelUpWindow2();
             CopyWindowToVram(B_WIN_LEVEL_UP_BOX, COPYWIN_GFX);
             gBattleScripting.drawlvlupboxState++;
@@ -5734,7 +5733,6 @@ static void Cmd_drawlvlupbox(void)
             VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
             BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
             // Close level up box
-            PlaySE(SE_SELECT);
             HandleBattleWindow(18, 7, 29, 19, WINDOW_BG1 | WINDOW_CLEAR);
             gBattleScripting.drawlvlupboxState++;
         }

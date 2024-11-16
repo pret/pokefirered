@@ -249,12 +249,13 @@ static void HandleInputChooseAction(void)
     // Make R automatically run. Need to press it twice.
     else if (JOY_NEW(R_BUTTON) || JOY_HELD(R_BUTTON))
     {
-        PlaySE(SE_SELECT);
-
-        PlaySE(SE_SELECT);
-        ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
-        gActionSelectionCursor[gActiveBattler] = 3;
-        ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+        if (gActionSelectionCursor[gActiveBattler] != 3)
+        {
+            PlaySE(SE_SELECT);
+            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] = 3;
+            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+        }
 
         VarSet(VAR_AUTOFIRE_COOLDOWN, VarGet(VAR_AUTOFIRE_COOLDOWN) - 1);
         if (VarGet(VAR_AUTOFIRE_COOLDOWN) <= 0) {

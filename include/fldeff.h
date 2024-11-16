@@ -13,17 +13,17 @@ bool8 CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId);
 u8 CreateFieldEffectShowMon(void);
 
 // field move setups
-bool32 SetUpFieldMove_Cut(void);
-bool32 SetUpFieldMove_Fly(void);
-bool32 SetUpFieldMove_Surf(void);
-bool32 SetUpFieldMove_Strength(void);
-bool32 SetUpFieldMove_Flash(void);
-bool32 SetUpFieldMove_RockSmash(void);
-bool32 SetUpFieldMove_Waterfall(void);
-bool32 SetUpFieldMove_Dig(void);
-bool32 SetUpFieldMove_Teleport(void);
-bool32 SetUpFieldMove_SoftBoiled(void);
-bool32 SetUpFieldMove_SweetScent(void);
+bool32 FieldMove_SetUpCut(void);
+bool32 FieldMove_SetUpFly(void);
+bool32 FieldMove_SetUpSurf(void);
+bool32 FieldMove_SetUpStrength(void);
+bool32 FieldMove_SetUpFlash(void);
+bool32 FieldMove_SetUpRockSmash(void);
+bool32 FieldMove_SetUpWaterfall(void);
+bool32 FieldMove_SetUpDig(void);
+bool32 FieldMove_SetUpTeleport(void);
+bool32 FieldMove_SetUpSoftBoiled(void);
+bool32 FieldMove_SetUpSweetScent(void);
 
 // flash
 u8 MapTransitionIsExit(u8 lightLevel, u8 mapType);

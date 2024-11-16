@@ -8,7 +8,7 @@
 static void FieldCallback_Teleport(void);
 static void StartTeleportFieldEffect(void);
 
-bool32 SetUpFieldMove_Teleport(void)
+bool32 FieldMove_SetUpTeleport(void)
 {
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
     {

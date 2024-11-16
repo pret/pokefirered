@@ -4057,7 +4057,7 @@ static void CursorCB_FieldMove(u8 taskId)
     const struct MapHeader *mapHeader;
 
     PlaySE(SE_SELECT);
-    if (gFieldMovesInfo[fieldMove].fieldMoveFunc == NULL)
+    if (gFieldMovesInfo[fieldMove].setUpFunc == NULL)
         return;
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
@@ -4076,7 +4076,7 @@ static void CursorCB_FieldMove(u8 taskId)
             DisplayPartyMenuMessage(gText_CantUseUntilNewBadge, TRUE);
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
         }
-        else if (gFieldMovesInfo[fieldMove].fieldMoveFunc() == TRUE)
+        else if (gFieldMovesInfo[fieldMove].setUpFunc() == TRUE)
         {
             switch (fieldMove)
             {
@@ -4206,7 +4206,7 @@ static void FieldCallback_Surf(void)
     FieldEffectStart(FLDEFF_USE_SURF);
 }
 
-bool32 SetUpFieldMove_Surf(void)
+bool32 FieldMove_SetUpSurf(void)
 {
     s16 x, y;
     
@@ -4244,7 +4244,7 @@ static void DisplayCantUseSurfMessage(void)
     }
 }
 
-bool32 SetUpFieldMove_Fly(void)
+bool32 FieldMove_SetUpFly(void)
 {
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
         return TRUE;
@@ -4263,7 +4263,7 @@ static void FieldCallback_Waterfall(void)
     FieldEffectStart(FLDEFF_USE_WATERFALL);
 }
 
-bool32 SetUpFieldMove_Waterfall(void)
+bool32 FieldMove_SetUpWaterfall(void)
 {
     s16 x, y;
 

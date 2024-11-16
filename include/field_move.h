@@ -9,7 +9,7 @@ struct FieldMoveInfo {
     u16 moveId;
     u8 partyMessageId;
     const u8* description;
-    bool32 (*fieldMoveFunc)(void);
+    bool32 (*setUpFunc)(void);
     const u8* questLogText;
 };
 

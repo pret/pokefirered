@@ -12,7 +12,7 @@ static void CantUseSoftboiledOnMon(u8 taskId);
 extern const u8 gText_CantBeUsedOnPkmn[];
 extern const u8 gText_PkmnHPRestoredByVar2[];
 
-bool32 SetUpFieldMove_SoftBoiled(void)
+bool32 FieldMove_SetUpSoftBoiled(void)
 {
     u16 maxHp = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_MAX_HP);
     u16 curHp = GetMonData(&gPlayerParty[GetCursorSelectionMonId()], MON_DATA_HP);

@@ -11,7 +11,7 @@
 static void FieldCB_UseStrength(void);
 static void ShowMonCB_UseStrength(void);
 
-bool32 SetUpFieldMove_Strength(void)
+bool32 FieldMove_SetUpStrength(void)
 {
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) != TRUE)
     {

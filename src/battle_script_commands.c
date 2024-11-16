@@ -5717,8 +5717,10 @@ static void Cmd_drawlvlupbox(void)
         }
         break;
     case 6:
-        if (gMain.newKeys != 0)
-        {
+        VarSet(VAR_AUTOFIRE_COOLDOWN, VarGet(VAR_AUTOFIRE_COOLDOWN) - 1);
+        if (gMain.newKeys != 0 || VarGet(VAR_AUTOFIRE_COOLDOWN) <= 0) {
+            VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
             // Draw page 2 of level up box
             PlaySE(SE_SELECT);
             DrawLevelUpWindow2();
@@ -5727,8 +5729,10 @@ static void Cmd_drawlvlupbox(void)
         }
         break;
     case 8:
-        if (gMain.newKeys != 0)
-        {
+        VarSet(VAR_AUTOFIRE_COOLDOWN, VarGet(VAR_AUTOFIRE_COOLDOWN) - 1);
+        if (gMain.newKeys != 0 || VarGet(VAR_AUTOFIRE_COOLDOWN) <= 0) {
+            VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
             // Close level up box
             PlaySE(SE_SELECT);
             HandleBattleWindow(18, 7, 29, 19, WINDOW_BG1 | WINDOW_CLEAR);

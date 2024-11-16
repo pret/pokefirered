@@ -18,6 +18,7 @@
 #include "battle_message.h"
 #include "battle_script_commands.h"
 #include "reshow_battle_screen.h"
+#include "event_data.h"
 #include "constants/battle_anim.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -1282,10 +1283,20 @@ static void FreeMonSpriteAfterSwitchOutAnim(void)
     }
 }
 
+#define MAX_AUTOFIRE_COOLDOWN 40
+
 static void CompleteOnInactiveTextPrinter2(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(0)) {
         PlayerBufferExecCompleted();
+        return;
+    }
+
+    VarSet(VAR_AUTOFIRE_COOLDOWN, VarGet(VAR_AUTOFIRE_COOLDOWN) - 1);
+    if (VarGet(VAR_AUTOFIRE_COOLDOWN) == 0) {
+        VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
+        PlayerBufferExecCompleted();
+    }
 }
 
 static void OpenPartyMenuToChooseMon(void)
@@ -2382,6 +2393,7 @@ static void PlayerHandlePrintString(void)
         BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
     else
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
+    VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnInactiveTextPrinter2;
 }
 

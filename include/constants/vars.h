@@ -88,7 +88,7 @@
 #define VAR_GRASS_STARTER                  0x4029
 #define VAR_WATER_STARTER                  0x402A
 #define VAR_FIRE_STARTER                   0x402B
-#define VAR_0x402C                         0x402C
+#define VAR_AUTOFIRE_COOLDOWN             0x402C
 #define VAR_0x402D                         0x402D
 #define VAR_0x402E                         0x402E
 

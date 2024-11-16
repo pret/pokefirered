@@ -100,13 +100,13 @@ PalletTown_ProfessorOaksLab_Text_OakChoosingGrassStarter::
 PalletTown_ProfessorOaksLab_Text_OakChoosingWaterStarter::
     .string "I see! {STR_VAR_1} is your choice.\n"
     .string "It's one worth raising.\p"
-    .string "So, {PLAYER}, you want to go with\n"
+    .string "So, {PLAYER}, you've decided on the\n"
     .string "the WATER POKéMON {STR_VAR_1}?$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingFireStarter::
     .string "I see! {STR_VAR_1} is your choice.\n"
-    .string "It's one worth raising.\p"
-    .string "So, {PLAYER}, you want to go with\n"
+    .string "You should raise it patiently.\p"
+    .string "So, {PLAYER}, you're claiming the\n"
     .string "the FIRE POKéMON {STR_VAR_1}?$"
 
 PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic::

@@ -158,6 +158,9 @@ void NewGameInitData(void)
 
     // Overwrite options.
     SetDefaultOptions();
+
+    // Init autofire.
+    VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
 }
 
 static void ResetMiniGamesResults(void)

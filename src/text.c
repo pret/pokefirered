@@ -473,6 +473,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
     const u8 *arrowTiles;
+    return;
 
     if (gTextFlags.autoScroll == 0)
     {
@@ -532,10 +533,10 @@ void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
     CopyWindowToVram(textPrinter->printerTemplate.windowId, 0x2);
 }
 
-bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
+bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter, u16 cooldown)
 {
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
-    u8 delay = (gQuestLogState == QL_STATE_PLAYBACK) ? 50 : 120;
+    u8 delay = (gQuestLogState == QL_STATE_PLAYBACK) ? 50 : cooldown;
 
     if (subStruct->autoScrollDelay == delay)
     {
@@ -550,37 +551,23 @@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 
 bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 {
-    bool8 result = FALSE;
-    if (gTextFlags.autoScroll != 0)
+    bool8 result = TextPrinterWaitAutoMode(textPrinter, VAR_AUTOFIRE_COOLDOWN);
+    TextPrinterDrawDownArrow(textPrinter);
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        result = TextPrinterWaitAutoMode(textPrinter);
-    }
-    else
-    {
-        TextPrinterDrawDownArrow(textPrinter);
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
-        {
-            result = TRUE;
-            PlaySE(SE_SELECT);
-        }
+        result = TRUE;
+        PlaySE(SE_SELECT);
     }
     return result;
 }
 
 bool16 TextPrinterWait(struct TextPrinter *textPrinter)
 {
-    bool16 result = FALSE;
-    if (gTextFlags.autoScroll != 0)
+    bool8 result = TextPrinterWaitAutoMode(textPrinter, VAR_AUTOFIRE_COOLDOWN);
+    if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        result = TextPrinterWaitAutoMode(textPrinter);
-    }
-    else
-    {
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
-        {
-            result = TRUE;
-            PlaySE(SE_SELECT);
-        }
+        result = TRUE;
+        PlaySE(SE_SELECT);
     }
     return result;
 }

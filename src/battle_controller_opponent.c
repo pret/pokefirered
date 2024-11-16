@@ -16,6 +16,7 @@
 #include "battle_ai_script_commands.h"
 #include "battle_ai_switch_items.h"
 #include "trainer_tower.h"
+#include "event_data.h"
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -336,8 +337,16 @@ static void FreeMonSpriteAfterSwitchOutAnim(void)
 
 static void CompleteOnInactiveTextPrinter(void)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActive(0)) {
         OpponentBufferExecCompleted();
+        return;
+    }
+
+    VarSet(VAR_AUTOFIRE_COOLDOWN, VarGet(VAR_AUTOFIRE_COOLDOWN) - 1);
+    if (VarGet(VAR_AUTOFIRE_COOLDOWN) <= 0) {
+        VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
+        OpponentBufferExecCompleted();
+    }
 }
 
 static void DoHitAnimBlinkSpriteEffect(void)

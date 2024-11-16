@@ -34,6 +34,7 @@
 #include "field_effect.h"
 #include "fieldmap.h"
 #include "field_door.h"
+#include "event_data.h"
 #include "constants/moves.h"
 #include "constants/event_objects.h"
 #include "constants/maps.h"
@@ -1312,6 +1313,12 @@ bool8 ScrCmd_closemessage(struct ScriptContext * ctx)
 
 static bool8 WaitForAorBPress(void)
 {
+    VarSet(VAR_AUTOFIRE_COOLDOWN, VarGet(VAR_AUTOFIRE_COOLDOWN) - 1);
+    if (VarGet(VAR_AUTOFIRE_COOLDOWN) <= 0) {
+        VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
+        return TRUE;
+    }
+
     if (JOY_NEW(A_BUTTON))
         return TRUE;
     if (JOY_NEW(B_BUTTON))

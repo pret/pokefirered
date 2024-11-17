@@ -707,10 +707,10 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
 
     if (GetBattlerSide(battlerAtk) == B_SIDE_PLAYER)
     {
-        if (B_TRANSFORM_SHINY >= GEN_4 && trackEnemyPersonality)
+        if (B_TRANSFORM_SHINY >= GEN_4 && trackEnemyPersonality && !megaEvo)
         {
-            personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
-            isShiny = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_IS_SHINY);
+            personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_PERSONALITY);
+            isShiny = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_IS_SHINY);
         }
         else
         {
@@ -721,14 +721,14 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
         HandleLoadSpecialPokePic(FALSE,
                                     gMonSpritesGfxPtr->sprites[position],
                                     targetSpecies,
-                                    gTransformedPersonalities[battlerAtk]);
+                                    personalityValue);
     }
     else
     {
-        if (B_TRANSFORM_SHINY >= GEN_4 && trackEnemyPersonality)
+        if (B_TRANSFORM_SHINY >= GEN_4 && trackEnemyPersonality && !megaEvo)
         {
-            personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
-            isShiny = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_IS_SHINY);
+            personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_PERSONALITY);
+            isShiny = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_IS_SHINY);
         }
         else
         {
@@ -739,7 +739,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
         HandleLoadSpecialPokePic(TRUE,
                                     gMonSpritesGfxPtr->sprites[position],
                                     targetSpecies,
-                                    gTransformedPersonalities[battlerAtk]);
+                                    personalityValue);
     }
     src = gMonSpritesGfxPtr->sprites[position];
     dst = (void *)(OBJ_VRAM0 + gSprites[gBattlerSpriteIds[battlerAtk]].oam.tileNum * 32);

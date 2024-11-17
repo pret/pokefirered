@@ -52,7 +52,7 @@ static void Task_FieldEffectShowMon_Init(u8 taskId)
     if (!ObjectEventIsMovementOverridden(&gObjectEvents[mapObjId])
      || ObjectEventClearHeldMovementIfFinished(&gObjectEvents[mapObjId]))
     {
-        if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
+        if (gMapHeader.mapType == MAP_TYPE_UNDERWATER || gFieldEffectArguments[3])
         {
             // Leftover from RS, inhibits the player anim while underwater.
             FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
@@ -103,7 +103,7 @@ static void Task_FieldEffectShowMon_Cleanup(u8 taskId)
     DestroyTask(taskId);
 }
 
-bool8 SetUpFieldMove_RockSmash(void)
+bool32 FieldMove_SetUpRockSmash(void)
 {
     if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_ROCK_SMASH_ROCK) == TRUE)
     {
@@ -120,7 +120,7 @@ static void FieldCallback_UseRockSmash(void)
     ScriptContext_SetupScript(EventScript_FldEffRockSmash);
 }
 
-bool8 FldEff_UseRockSmash(void)
+u32 FldEff_UseRockSmash(void)
 {
     u8 taskId = CreateFieldEffectShowMon();
 

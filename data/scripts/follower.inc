@@ -16,7 +16,7 @@ EventScript_Follower::
 	playfirstmoncry
 	getfolloweraction
 EventScript_FollowerEnd::
-	waitfieldeffect FLDEFF_EMOTE
+	waitfieldeffect FLDEFF_QUESTION_MARK_ICON_AND_EMOTE
 	release
 	end
 
@@ -35,7 +35,7 @@ EventScript_FollowerLovesYou::
 EventScript_FollowerGeneric:: @ similar to Std_MsgboxDefault
 	faceplayer
 EventScript_FollowerGenericSkipFace:
-	waitfieldeffect FLDEFF_EMOTE
+	waitfieldeffect FLDEFF_QUESTION_MARK_ICON_AND_EMOTE
 	message 0x0
 	waitmessage
 	waitbuttonpress
@@ -45,7 +45,7 @@ EventScript_FollowerJump::
 	faceplayer
 	applymovement OBJ_EVENT_ID_FOLLOWER, FollowerSplashMovement
 	waitmovement OBJ_EVENT_ID_FOLLOWER
-	waitfieldeffect FLDEFF_EMOTE
+	waitfieldeffect FLDEFF_QUESTION_MARK_ICON_AND_EMOTE
 	message 0x0
 	waitmessage
 	waitbuttonpress

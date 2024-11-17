@@ -16,7 +16,7 @@ static void FieldCallback_SweetScent(void);
 static void TrySweetScentEncounter(u8 taskId);
 static void FailSweetScentEncounter(u8 taskId);
 
-bool8 SetUpFieldMove_SweetScent(void)
+bool32 FieldMove_SetUpSweetScent(void)
 {
     gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
     gPostMenuFieldCallback = FieldCallback_SweetScent;
@@ -29,7 +29,7 @@ static void FieldCallback_SweetScent(void)
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
 }
 
-bool8 FldEff_SweetScent(void)
+u32 FldEff_SweetScent(void)
 {
     u8 taskId;
 

@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "scanline_effect.h"
 #include "decompress.h"
+#include "field_effect.h"
 #include "list_menu.h"
 #include "item_menu.h"
 #include "item.h"
@@ -1109,7 +1110,7 @@ static void TeachyTvGrassAnimationMain(u8 taskId, s16 x, s16 y, u8 subpriority, 
 
     if (sResources->grassAnimDisabled != 1 && TeachyTvGrassAnimationCheckIfNeedsToGenerateGrassObj(x - 0x10, y))
     {
-        spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], 0, 0, subpriority);
+        spriteId = CreateSprite(&gFieldEffectObjectTemplate_TallGrass, 0, 0, subpriority);
         obj = &gSprites[spriteId];
         obj->x2 = x;
         obj->y2 = y + 8;

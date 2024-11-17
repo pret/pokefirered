@@ -32,6 +32,5 @@ extern const struct SpritePalette gSpritePalette_Pokeball;
 
 bool8 IsBattleTransitionDone(void);
 void BattleTransition_StartOnField(u8 transitionId);
-bool8 FldEff_PokeballTrail(void);
 
 #endif // GUARD_BATTLE_TRANSITION_H

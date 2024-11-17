@@ -5,6 +5,7 @@
 #include "constants/battle_tower.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
+#include "constants/field_move.h"
 #include "constants/decorations.h"
 #include "constants/item.h"
 #include "constants/items.h"

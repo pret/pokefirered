@@ -11,7 +11,7 @@
 static void FieldCB_UseStrength(void);
 static void ShowMonCB_UseStrength(void);
 
-bool8 SetUpFieldMove_Strength(void)
+bool32 FieldMove_SetUpStrength(void)
 {
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) || CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER) != TRUE)
     {
@@ -31,11 +31,10 @@ static void FieldCB_UseStrength(void)
     ScriptContext_SetupScript(EventScript_FldEffStrength);
 }
 
-bool8 FldEff_UseStrength(void)
+u32 FldEff_UseStrength(void)
 {
     u8 taskId = CreateFieldEffectShowMon();
     FLDEFF_SET_FUNC_TO_DATA(ShowMonCB_UseStrength);
-    GetMonNickname(&gPlayerParty[gFieldEffectArguments[0]], gStringVar1);
     return FALSE;
 }
 

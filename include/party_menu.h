@@ -97,5 +97,6 @@ void ItemUseCB_FormChange_ConsumedOnUse(u8 taskId, TaskFunc task);
 void ItemUseCB_RotomCatalog(u8 taskId, TaskFunc task);
 void ItemUseCB_ZygardeCube(u8 taskId, TaskFunc task);
 void ItemUseCB_Fusion(u8 taskId, TaskFunc task);
+u32 Party_FirstMonWithMove(u16 moveId);
 
 #endif // GUARD_PARTY_MENU_H

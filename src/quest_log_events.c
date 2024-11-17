@@ -5,6 +5,7 @@
 #include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
 #include "event_scripts.h"
+#include "field_move.h"
 #include "menu_helpers.h"
 #include "item.h"
 #include "link.h"
@@ -13,6 +14,7 @@
 #include "pokemon_storage_system.h"
 #include "region_map.h"
 #include "strings.h"
+#include "constants/field_move.h"
 #include "constants/maps.h"
 #include "constants/trainers.h"
 #include "constants/items.h"
@@ -421,22 +423,6 @@ static const u8 sGymCityMapSecs[NUM_BADGES] = {
     MAPSEC_SAFFRON_CITY,
     MAPSEC_CINNABAR_ISLAND,
     MAPSEC_VIRIDIAN_CITY,
-};
-
-static const u8 *const sUsedFieldMoveTexts[] =
-{
-    [FIELD_MOVE_FLASH]       = gText_QuestLog_UsedFlash,
-    [FIELD_MOVE_CUT]         = gText_QuestLog_UsedCut,
-    [FIELD_MOVE_FLY]         = gText_QuestLog_UsedFly,
-    [FIELD_MOVE_STRENGTH]    = gText_QuestLog_UsedStrength,
-    [FIELD_MOVE_SURF]        = gText_QuestLog_UsedSurf,
-    [FIELD_MOVE_ROCK_SMASH]  = gText_QuestLog_UsedRockSmash,
-    [FIELD_MOVE_WATERFALL]   = gText_QuestLog_UsedWaterfall,
-    [FIELD_MOVE_TELEPORT]    = gText_QuestLog_UsedTeleportToLocation,
-    [FIELD_MOVE_DIG]         = gText_QuestLog_UsedDigInLocation,
-    [FIELD_MOVE_MILK_DRINK]  = gText_QuestLog_UsedMilkDrink,
-    [FIELD_MOVE_SOFT_BOILED] = gText_QuestLog_UsedSoftboiled,
-    [FIELD_MOVE_SWEET_SCENT] = gText_QuestLog_UsedSweetScent
 };
 
 static const u16 sWorldMapFlags[] =
@@ -2072,7 +2058,7 @@ static const u16 *LoadEvent_UsedFieldMove(const u16 *eventData)
             StringCopy(gStringVar3, gText_PokemonCenter);
     }
 
-    StringExpandPlaceholders(gStringVar4, sUsedFieldMoveTexts[r5[0]]);
+    StringExpandPlaceholders(gStringVar4, gFieldMovesInfo[r5[0]].questLogText);
     return (const u16 *)(r5 + 2);
 }
 

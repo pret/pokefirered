@@ -896,7 +896,7 @@ static const struct SpriteTemplate sSpriteTemplate_Emote =
     .callback = SpriteCB_TrainerIcons
 };
 
-u8 FldEff_ExclamationMarkIcon1(void)
+u32 FldEff_ExclamationMarkIcon(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emoticons, 0, 0, 0x53);
 
@@ -906,7 +906,7 @@ u8 FldEff_ExclamationMarkIcon1(void)
     return 0;
 }
 
-u8 FldEff_DoubleExclMarkIcon(void)
+u32 FldEff_DoubleExclMarkIcon(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emoticons, 0, 0, 0x52);
 
@@ -916,7 +916,7 @@ u8 FldEff_DoubleExclMarkIcon(void)
     return 0;
 }
 
-u8 FldEff_XIcon(void)
+u32 FldEff_XIcon(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emoticons, 0, 0, 0x52);
 
@@ -926,7 +926,7 @@ u8 FldEff_XIcon(void)
     return 0;
 }
 
-u8 FldEff_SmileyFaceIcon(void)
+u32 FldEff_SmileyFaceIcon(void)
 {
     u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emoticons, 0, 0, 0x52);
 
@@ -936,7 +936,7 @@ u8 FldEff_SmileyFaceIcon(void)
     return 0;
 }
 
-u8 FldEff_QuestionMarkIcon(void)
+u32 FldEff_QuestionMarkIcon(void)
 {
     u8 spriteId;
     if (gFieldEffectArguments[7] >= 0)
@@ -946,14 +946,17 @@ u8 FldEff_QuestionMarkIcon(void)
         spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emote, 0, 0, 0x52);
         if (spriteId == MAX_SPRITES)
             return 0;
-        SetIconSpriteData(&gSprites[spriteId], FLDEFF_EMOTE, emotion); // Set animation based on emotion
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_QUESTION_MARK_ICON_AND_EMOTE, emotion); // Set animation based on emotion
         UpdateSpritePaletteByTemplate(&sSpriteTemplate_Emote, &gSprites[spriteId]);
         return 0;
     }
     spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emoticons, 0, 0, 0x52);
 
     if (spriteId != MAX_SPRITES)
-        SetIconSpriteData(&gSprites[spriteId], FLDEFF_QUESTION_MARK_ICON, 4);
+    {
+        SetIconSpriteData(&gSprites[spriteId], FLDEFF_QUESTION_MARK_ICON_AND_EMOTE, 4);
+        UpdateSpritePaletteByTemplate(&sSpriteTemplate_Emoticons, &gSprites[spriteId]);
+    }
 
     return 0;
 }

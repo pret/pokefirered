@@ -9,7 +9,7 @@
 static void FieldCallback_Dig(void);
 static void StartDigFieldEffect(void);
 
-bool8 SetUpFieldMove_Dig(void)
+bool32 FieldMove_SetUpDig(void)
 {
     if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
@@ -27,7 +27,7 @@ static void FieldCallback_Dig(void)
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
 }
 
-bool8 FldEff_UseDig(void)
+u32 FldEff_UseDig(void)
 {
     u8 taskId = CreateFieldEffectShowMon();
 

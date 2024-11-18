@@ -85,7 +85,7 @@ static void FailSweetScentEncounter(u8 taskId)
     if (!gPaletteFade.active)
     {
         CpuFastCopy(sPlttBufferBak, gPlttBufferUnfaded, PLTT_SIZE);
-        WeatherProcessingIdle();
+        SetWeatherPalStateIdle();
         Free(sPlttBufferBak);
         ScriptContext_SetupScript(EventScript_FailSweetScent);
         DestroyTask(taskId);

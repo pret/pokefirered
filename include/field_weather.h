@@ -18,6 +18,8 @@ enum {
     PALTAG_WEATHER = TAG_WEATHER_START,
 };
 
+#define NUM_WEATHER_COLOR_MAPS 19
+
 struct Weather
 {
     union
@@ -38,12 +40,10 @@ struct Weather
             struct Sprite *sandstormSprites2[NUM_SWIRL_SANDSTORM_SPRITES];
         } s2;
     } sprites;
-    u8 gammaShifts[19][32];
-    u8 altGammaShifts[19][32];
-    s8 gammaIndex;
-    s8 gammaTargetIndex;
-    u8 gammaStepDelay;
-    u8 gammaStepFrameCounter;
+    s8 colorMapIndex;
+    s8 targetColorMapIndex;
+    u8 colorMapStepDelay;
+    u8 colorMapStepCounter;
     u16 fadeDestColor;
     u8 palProcessingState;
     u8 fadeScreenCounter;
@@ -58,7 +58,8 @@ struct Weather
     u8 weatherGfxLoaded;
     bool8 weatherChangeComplete;
     u8 weatherPicSpritePalIndex;
-    u8 altGammaSpritePalIndex;
+    u8 contrastColorMapSpritePalIndex;
+    // Rain
     u16 rainSpriteVisibleCounter;
     u8 curRainSpriteIndex;
     u8 targetRainSpriteCount;
@@ -67,34 +68,40 @@ struct Weather
     u8 isDownpour;
     u8 rainStrength;
     bool8 cloudSpritesCreated;
+    // Snow
     u16 snowflakeVisibleCounter;
     u16 snowflakeTimer;
     u8 snowflakeSpriteCount;
     u8 targetSnowflakeSpriteCount;
-    u16 thunderDelay;
-    u16 thunderCounter;
+    // Thunderstorm
+    u16 thunderTimer;
+    u16 thunderSETimer;
     bool8 thunderAllowEnd;
-    bool8 thunderSkipShort;
-    u8 thunderShortRetries;
-    bool8 thunderTriggered;
+    bool8 thunderLongBolt;
+    u8 thunderShortBolts;
+    bool8 thunderEnqueued;
+    // Horizontal fog
     u16 fogHScrollPosX;
     u16 fogHScrollCounter;
     u16 fogHScrollOffset;
     u8 lightenedFogSpritePals[6];
     u8 lightenedFogSpritePalsCount;
     bool8 fogHSpritesCreated;
+    // Ash
     u16 ashBaseSpritesX;
     u16 ashUnused;
     bool8 ashSpritesCreated;
+    // Sandstorm
     u32 sandstormXOffset;
     u32 sandstormYOffset;
-    u8 filler_70C[2];
+    u16 sandstormUnused;
     u16 sandstormBaseSpritesX;
     u16 sandstormPosY;
     u16 sandstormWaveIndex;
     u16 sandstormWaveCounter;
     bool8 sandstormSpritesCreated;
     bool8 sandstormSwirlSpritesCreated;
+    // Diagonal fog
     u16 fogDBaseSpritesX;
     u16 fogDPosY;
     u16 fogDScrollXCounter;
@@ -102,11 +109,13 @@ struct Weather
     u16 fogDXOffset;
     u16 fogDYOffset;
     bool8 fogDSpritesCreated;
+    // Bubbles
     u16 bubblesDelayCounter;
     u16 bubblesDelayIndex;
     u16 bubblesCoordsIndex;
     u16 bubblesSpriteCount;
     bool8 bubblesSpritesCreated;
+
     u16 currBlendEVA;
     u16 currBlendEVB;
     u16 targetBlendEVA;
@@ -114,11 +123,12 @@ struct Weather
     u8 blendUpdateCounter;
     u8 blendFrameCounter;
     u8 blendDelay;
+    // Drought
     s16 droughtBrightnessStage;
     s16 droughtLastBrightnessStage;
     s16 droughtTimer;
     s16 droughtState;
-    u8 filler_744[9];
+    u8 droughtUnused[9];
     u8 loadDroughtPalsIndex;
     u8 loadDroughtPalsOffset;
 };
@@ -155,9 +165,9 @@ bool8 LoadDroughtWeatherPalettes(void);
 void DroughtStateInit(void);
 void DroughtStateRun(void);
 void SetRainStrengthFromSoundEffect(u16 soundEffect);
-void WeatherShiftGammaIfPalStateIdle(s8 gammaIndex);
-void WeatherBeginGammaFade(u8 gammaIndex, u8 gammaTargetIndex, u8 gammaStepDelay);
-void ApplyWeatherGammaShiftToPal(u8 paletteIndex);
+void ApplyWeatherColorMapIfIdle(s8 colorMapIndex);
+void ApplyWeatherColorMapIfIdle_Gradual(u8 colorMapIndex, u8 targetColorMapIndex, u8 colorMapStepDelay);
+void ApplyWeatherColorMapToPal(u8 paletteIndex);
 void StartWeather(void);
 void ResumePausedWeather(void);
 void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes);

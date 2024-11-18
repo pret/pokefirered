@@ -139,7 +139,7 @@ extern struct Weather *const gWeatherPtr;
 void FadeScreen(u8 mode, s8 delay);
 
 void SetSavedWeather(u32);
-u8 GetSav1Weather(void);
+u8 GetSavedWeather(void);
 
 void DoCurrentWeather(void);
 void SetSavedWeatherFromCurrMapHeader(void);
@@ -170,19 +170,8 @@ void ApplyWeatherColorMapIfIdle(s8 colorMapIndex);
 void ApplyWeatherColorMapIfIdle_Gradual(u8 colorMapIndex, u8 targetColorMapIndex, u8 colorMapStepDelay);
 void ApplyWeatherColorMapToPal(u8 paletteIndex);
 void StartWeather(void);
+void SetWeather(u32 weather);
 void ResumePausedWeather(void);
 void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes);
-
-extern const u16 gCloudsWeatherPalette[];
-extern const u16 gSandstormWeatherPalette[];
-extern const u8 gWeatherFogDiagonalTiles[];
-extern const u8 gWeatherFogHorizontalTiles[];
-extern const u8 gWeatherCloudTiles[];
-extern const u8 gWeatherSnow1Tiles[];
-extern const u8 gWeatherSnow2Tiles[];
-extern const u8 gWeatherBubbleTiles[];
-extern const u8 gWeatherAshTiles[];
-extern const u8 gWeatherRainTiles[];
-extern const u8 gWeatherSandstormTiles[];
 
 #endif // GUARD_WEATHER_H

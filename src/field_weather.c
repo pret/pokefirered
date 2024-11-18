@@ -4,7 +4,6 @@
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_weather.h"
-#include "field_weather_util.h"
 #include "field_weather_effects.h"
 #include "overworld.h"
 #include "task.h"
@@ -198,7 +197,7 @@ void StartWeather(void)
         sPaletteColorMapTypes = sBasePaletteColorMapTypes;
 
         gWeatherPtr->contrastColorMapSpritePalIndex = index;
-        gWeatherPtr->weatherPicSpritePalIndex = index;
+        gWeatherPtr->weatherPicSpritePalIndex = AllocSpritePalette(PALTAG_WEATHER_2);
         gWeatherPtr->rainSpriteCount = 0;
         gWeatherPtr->curRainSpriteIndex = 0;
         gWeatherPtr->cloudSpritesCreated = FALSE;

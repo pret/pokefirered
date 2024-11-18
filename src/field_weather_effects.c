@@ -5,12 +5,15 @@
 #include "fieldmap.h"
 #include "field_weather.h"
 #include "field_weather_effects.h"
+#include "overworld.h"
 #include "random.h"
 #include "script.h"
 #include "constants/weather.h"
 #include "constants/songs.h"
 #include "task.h"
 #include "trig.h"
+
+EWRAM_DATA static u8 sCurrentAbnormalWeather = 0;
 
 const u16 gCloudsWeatherPalette[] = INCBIN_U16("graphics/weather/cloud.gbapal");
 const u16 gSandstormWeatherPalette[] = INCBIN_U16("graphics/weather/sandstorm.gbapal");
@@ -2390,3 +2393,199 @@ static void UpdateBubbleSprite(struct Sprite *sprite)
 #undef tScrollXCounter
 #undef tScrollXDir
 #undef tCounter
+
+//------------------------------------------------------------------------------
+
+static void UNUSED UnusedSetCurrentAbnormalWeather(u32 weather, u32 unknown)
+{
+    sCurrentAbnormalWeather = weather;
+    // sUnusedWeatherRelated = unknown;
+}
+
+#define tState         data[0]
+#define tWeatherA      data[1]
+#define tWeatherB      data[2]
+#define tDelay         data[15]
+
+static void Task_DoAbnormalWeather(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch (tState)
+    {
+    case 0:
+        if (tDelay-- <= 0)
+        {
+            SetNextWeather(tWeatherA);
+            sCurrentAbnormalWeather = tWeatherA;
+            tDelay = 600;
+            tState++;
+        }
+        break;
+    case 1:
+        if (tDelay-- <= 0)
+        {
+            SetNextWeather(tWeatherB);
+            sCurrentAbnormalWeather = tWeatherB;
+            tDelay = 600;
+            tState = 0;
+        }
+        break;
+    }
+}
+
+static void CreateAbnormalWeatherTask(void)
+{
+    u8 taskId = CreateTask(Task_DoAbnormalWeather, 0);
+    s16 *data = gTasks[taskId].data;
+
+    tDelay = 600;
+    if (sCurrentAbnormalWeather == WEATHER_DOWNPOUR)
+    {
+        // Currently Downpour, next will be Drought
+        tWeatherA = WEATHER_DROUGHT;
+        tWeatherB = WEATHER_DOWNPOUR;
+    }
+    else if (sCurrentAbnormalWeather == WEATHER_DROUGHT)
+    {
+        // Currently Drought, next will be Downpour
+        tWeatherA = WEATHER_DOWNPOUR;
+        tWeatherB = WEATHER_DROUGHT;
+    }
+    else
+    {
+        // Default to starting with Downpour
+        sCurrentAbnormalWeather = WEATHER_DOWNPOUR;
+        tWeatherA = WEATHER_DROUGHT;
+        tWeatherB = WEATHER_DOWNPOUR;
+    }
+}
+
+#undef tState
+#undef tWeatherA
+#undef tWeatherB
+#undef tDelay
+
+static u8 TranslateWeatherNum(u8 weather);
+static void UpdateRainCounter(u8 newWeather, u8 oldWeather);
+
+void SetSavedWeather(u32 weather)
+{
+    u8 oldWeather = gSaveBlock1Ptr->weather;
+    gSaveBlock1Ptr->weather = TranslateWeatherNum(weather);
+    UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
+}
+
+u8 GetSavedWeather(void)
+{
+    return gSaveBlock1Ptr->weather;
+}
+
+void SetSavedWeatherFromCurrMapHeader(void)
+{
+    u8 oldWeather = gSaveBlock1Ptr->weather;
+    gSaveBlock1Ptr->weather = TranslateWeatherNum(gMapHeader.weather);
+    UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
+}
+
+void SetWeather(u32 weather)
+{
+    SetSavedWeather(weather);
+    SetNextWeather(GetSavedWeather());
+}
+
+void DoCurrentWeather(void)
+{
+    u8 weather = GetSavedWeather();
+
+    if (weather == WEATHER_ABNORMAL)
+    {
+        if (!FuncIsActiveTask(Task_DoAbnormalWeather))
+            CreateAbnormalWeatherTask();
+        weather = sCurrentAbnormalWeather;
+    }
+    else
+    {
+        if (FuncIsActiveTask(Task_DoAbnormalWeather))
+            DestroyTask(FindTaskIdByFunc(Task_DoAbnormalWeather));
+        sCurrentAbnormalWeather = WEATHER_DOWNPOUR;
+    }
+    SetNextWeather(weather);
+}
+
+void ResumePausedWeather(void)
+{
+    u8 weather = GetSavedWeather();
+
+    if (weather == WEATHER_ABNORMAL)
+    {
+        if (!FuncIsActiveTask(Task_DoAbnormalWeather))
+            CreateAbnormalWeatherTask();
+        weather = sCurrentAbnormalWeather;
+    }
+    else
+    {
+        if (FuncIsActiveTask(Task_DoAbnormalWeather))
+            DestroyTask(FindTaskIdByFunc(Task_DoAbnormalWeather));
+        sCurrentAbnormalWeather = WEATHER_DOWNPOUR;
+    }
+    SetCurrentAndNextWeather(weather);
+}
+
+#define WEATHER_CYCLE_LENGTH  4
+
+static const u8 sWeatherCycleRoute119[WEATHER_CYCLE_LENGTH] =
+{
+    WEATHER_SUNNY,
+    WEATHER_RAIN,
+    WEATHER_RAIN_THUNDERSTORM,
+    WEATHER_RAIN,
+};
+
+static const u8 sWeatherCycleRoute123[WEATHER_CYCLE_LENGTH] =
+{
+    WEATHER_SUNNY,
+    WEATHER_SUNNY,
+    WEATHER_RAIN,
+    WEATHER_SUNNY,
+};
+
+static u8 TranslateWeatherNum(u8 weather)
+{
+    switch (weather)
+    {
+    case WEATHER_NONE:               return WEATHER_NONE;
+    case WEATHER_SUNNY_CLOUDS:       return WEATHER_SUNNY_CLOUDS;
+    case WEATHER_SUNNY:              return WEATHER_SUNNY;
+    case WEATHER_RAIN:               return WEATHER_RAIN;
+    case WEATHER_SNOW:               return WEATHER_SNOW;
+    case WEATHER_RAIN_THUNDERSTORM:  return WEATHER_RAIN_THUNDERSTORM;
+    case WEATHER_FOG_HORIZONTAL:     return WEATHER_FOG_HORIZONTAL;
+    case WEATHER_VOLCANIC_ASH:       return WEATHER_VOLCANIC_ASH;
+    case WEATHER_SANDSTORM:          return WEATHER_SANDSTORM;
+    case WEATHER_FOG_DIAGONAL:       return WEATHER_FOG_DIAGONAL;
+    case WEATHER_UNDERWATER:         return WEATHER_UNDERWATER;
+    case WEATHER_SHADE:              return WEATHER_SHADE;
+    case WEATHER_DROUGHT:            return WEATHER_DROUGHT;
+    case WEATHER_DOWNPOUR:           return WEATHER_DOWNPOUR;
+    case WEATHER_UNDERWATER_BUBBLES: return WEATHER_UNDERWATER_BUBBLES;
+    case WEATHER_ABNORMAL:           return WEATHER_ABNORMAL;
+    case WEATHER_ROUTE119_CYCLE:     return sWeatherCycleRoute119[gSaveBlock1Ptr->weatherCycleStage];
+    case WEATHER_ROUTE123_CYCLE:     return sWeatherCycleRoute123[gSaveBlock1Ptr->weatherCycleStage];
+    default:                         return WEATHER_NONE;
+    }
+}
+
+void UpdateWeatherPerDay(u16 increment)
+{
+    u16 weatherStage = gSaveBlock1Ptr->weatherCycleStage + increment;
+    weatherStage %= WEATHER_CYCLE_LENGTH;
+    gSaveBlock1Ptr->weatherCycleStage = weatherStage;
+}
+
+static void UpdateRainCounter(u8 newWeather, u8 oldWeather)
+{
+    if (newWeather != oldWeather
+     && (newWeather == WEATHER_RAIN || newWeather == WEATHER_RAIN_THUNDERSTORM))
+        IncrementGameStat(GAME_STAT_GOT_RAINED_ON);
+}

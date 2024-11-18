@@ -78,7 +78,6 @@
 	.endm
 
 	@ Defines a weather coord event for map data. Any coord event is treated as a weather coord event if its script is NULL.
-	@ NOTE: In FRLG, the weather handling functions are dummied out. See src/coord_event_weather.c
 	.macro coord_weather_event x:req, y:req, elevation:req, weather:req
 	coord_event \x, \y, \elevation, \weather, 0, NULL
 	.endm

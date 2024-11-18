@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "battle_anim.h"
 #include "event_object_movement.h"
+#include "fieldmap.h"
 #include "field_weather.h"
 #include "field_weather_effects.h"
 #include "random.h"
@@ -41,11 +42,12 @@ static const struct Coords16 sCloudSpriteMapCoords[] = {
 
 static const struct SpriteSheet sCloudSpriteSheet = {
     .data = gWeatherCloudTiles,
-    .size = 0x0800,
+    .size = sizeof(gWeatherCloudTiles),
     .tag = GFXTAG_CLOUD
 };
 
-static const struct OamData sCloudSpriteOamData = {
+static const struct OamData sCloudSpriteOamData =
+{
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_BLEND,
@@ -61,18 +63,21 @@ static const struct OamData sCloudSpriteOamData = {
     .affineParam = 0,
 };
 
-static const union AnimCmd sCloudSpriteAnimCmd[] = {
+static const union AnimCmd sCloudSpriteAnimCmd[] =
+{
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sCloudSpriteAnimCmds[] = {
+static const union AnimCmd *const sCloudSpriteAnimCmds[] =
+{
     sCloudSpriteAnimCmd,
 };
 
-static const struct SpriteTemplate sCloudSpriteTemplate = {
+static const struct SpriteTemplate sCloudSpriteTemplate =
+{
     .tileTag = GFXTAG_CLOUD,
-    .paletteTag = PALTAG_WEATHER,
+    .paletteTag = PALTAG_WEATHER_2,
     .oam = &sCloudSpriteOamData,
     .anims = sCloudSpriteAnimCmds,
     .images = NULL,
@@ -142,6 +147,7 @@ void Sunny_InitVars(void)
 {
     gWeatherPtr->targetColorMapIndex = 0;
     gWeatherPtr->colorMapStepDelay = 20;
+    Weather_SetBlendCoeffs(8, 12);
 }
 
 void Sunny_InitAll(void)
@@ -176,7 +182,7 @@ static void CreateCloudSprites(void)
         {
             gWeatherPtr->sprites.s1.cloudSprites[i] = &gSprites[spriteId];
             sprite = gWeatherPtr->sprites.s1.cloudSprites[i];
-            SetSpritePosToMapCoords(sCloudSpriteMapCoords[i].x + 7, sCloudSpriteMapCoords[i].y + 7, &sprite->x, &sprite->y);
+            SetSpritePosToMapCoords(sCloudSpriteMapCoords[i].x + MAP_OFFSET, sCloudSpriteMapCoords[i].y + MAP_OFFSET, &sprite->x, &sprite->y);
             sprite->coordOffsetEnabled = TRUE;
         }
         else
@@ -275,7 +281,7 @@ bool8 Drought_Finish(void)
 
 void StartDroughtWeatherBlend(void)
 {
-    CreateTask(UpdateDroughtBlend, 0x50);
+    CreateTask(UpdateDroughtBlend, 80);
 }
 
 #define tState      data[0]
@@ -348,7 +354,8 @@ static void UpdateRainSprite(struct Sprite *sprite);
 static bool8 UpdateVisibleRainSprites(void);
 static void DestroyRainSprites(void);
 
-static const struct Coords16 sRainSpriteCoords[] = {
+static const struct Coords16 sRainSpriteCoords[] =
+{
     {  0,   0},
     {  0, 160},
     {  0,  64},
@@ -375,7 +382,8 @@ static const struct Coords16 sRainSpriteCoords[] = {
     { 48,  96},
 };
 
-static const struct OamData sRainSpriteOamData = {
+static const struct OamData sRainSpriteOamData =
+{
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
@@ -391,32 +399,37 @@ static const struct OamData sRainSpriteOamData = {
     .affineParam = 0,
 };
 
-static const union AnimCmd sRainSpriteFallAnimCmd[] = {
+static const union AnimCmd sRainSpriteFallAnimCmd[] =
+{
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sRainSpriteSplashAnimCmd[] = {
+static const union AnimCmd sRainSpriteSplashAnimCmd[] =
+{
     ANIMCMD_FRAME(8, 3),
     ANIMCMD_FRAME(32, 2),
     ANIMCMD_FRAME(40, 2),
     ANIMCMD_END,
 };
 
-static const union AnimCmd sRainSpriteHeavySplashAnimCmd[] = {
+static const union AnimCmd sRainSpriteHeavySplashAnimCmd[] =
+{
     ANIMCMD_FRAME(8, 3),
     ANIMCMD_FRAME(16, 3),
     ANIMCMD_FRAME(24, 4),
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sRainSpriteAnimCmds[] = {
+static const union AnimCmd *const sRainSpriteAnimCmds[] =
+{
     sRainSpriteFallAnimCmd,
     sRainSpriteSplashAnimCmd,
     sRainSpriteHeavySplashAnimCmd,
 };
 
-static const struct SpriteTemplate sRainSpriteTemplate = {
+static const struct SpriteTemplate sRainSpriteTemplate =
+{
     .tileTag = GFXTAG_RAIN,
     .paletteTag = PALTAG_WEATHER,
     .oam = &sRainSpriteOamData,
@@ -427,7 +440,8 @@ static const struct SpriteTemplate sRainSpriteTemplate = {
 };
 
 // Q28.4 fixed-point format values
-static const s16 sRainSpriteMovement[][2] = {
+static const s16 sRainSpriteMovement[][2] =
+{
     {-0x68,  0xD0},
     {-0xA0, 0x140},
 };
@@ -435,14 +449,16 @@ static const s16 sRainSpriteMovement[][2] = {
 // First byte is the number of frames a raindrop falls before it splashes.
 // Second byte is the maximum number of frames a raindrop can "wait" before
 // it appears and starts falling. (This is only for the initial raindrop spawn.)
-static const u16 sRainSpriteFallingDurations[][2] = {
+static const u16 sRainSpriteFallingDurations[][2] =
+{
     {18, 7},
     {12, 10},
 };
 
-static const struct SpriteSheet sRainSpriteSheet = {
+static const struct SpriteSheet sRainSpriteSheet =
+{
     .data = gWeatherRainTiles,
-    .size = 0x0600,
+    .size = sizeof(gWeatherRainTiles),
     .tag = GFXTAG_RAIN,
 };
 
@@ -574,8 +590,8 @@ static void UpdateRainSprite(struct Sprite *sprite)
         sprite->y = sprite->tPosY >> 4;
 
         if (sprite->tActive
-            && (sprite->x >= -8 && sprite->x <= DISPLAY_WIDTH + 8)
-            && sprite->y >= -16 && sprite->y <= DISPLAY_HEIGHT + 16)
+         && (sprite->x >= -8 && sprite->x <= DISPLAY_WIDTH + 8)
+         && sprite->y >= -16 && sprite->y <= DISPLAY_HEIGHT + 16)
             sprite->invisible = FALSE;
         else
             sprite->invisible = TRUE;
@@ -699,12 +715,12 @@ static bool8 UpdateVisibleRainSprites(void)
         gWeatherPtr->rainSpriteVisibleCounter = 0;
         if (gWeatherPtr->curRainSpriteIndex < gWeatherPtr->targetRainSpriteCount)
         {
-            gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->curRainSpriteIndex++]->tActive = 1;
+            gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->curRainSpriteIndex++]->tActive = TRUE;
         }
         else
         {
             gWeatherPtr->curRainSpriteIndex--;
-            gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->curRainSpriteIndex]->tActive = 0;
+            gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->curRainSpriteIndex]->tActive = FALSE;
             gWeatherPtr->sprites.s1.rainSprites[gWeatherPtr->curRainSpriteIndex]->invisible = TRUE;
         }
     }

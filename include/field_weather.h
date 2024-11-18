@@ -16,6 +16,7 @@ enum {
 };
 enum {
     PALTAG_WEATHER = TAG_WEATHER_START,
+    PALTAG_WEATHER_2
 };
 
 #define NUM_WEATHER_COLOR_MAPS 19

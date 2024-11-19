@@ -825,6 +825,31 @@ u8 LoadGameSave(u8 saveType)
     return result;
 }
 
+u16 GetSaveBlocksPointersBaseOffset(void)
+{
+    u16 i, slotOffset;
+    struct SaveSector* sector;
+
+    sector = gReadWriteSector = &gSaveDataBuffer;
+    if (gFlashMemoryPresent != TRUE)
+        return 0;
+    UpdateSaveAddresses();
+    GetSaveValidStatus(gRamSaveSectorLocations);
+    slotOffset = NUM_SECTORS_PER_SLOT * (gSaveCounter % NUM_SAVE_SLOTS);
+    for (i = 0; i < NUM_SECTORS_PER_SLOT; i++)
+    {
+        ReadFlashSector(i + slotOffset, gReadWriteSector);
+
+        // Base offset for SaveBlock2 is calculated using the trainer id
+        if (gReadWriteSector->id == SECTOR_ID_SAVEBLOCK2)
+            return sector->data[offsetof(struct SaveBlock2, playerTrainerId[0])] +
+                   sector->data[offsetof(struct SaveBlock2, playerTrainerId[1])] +
+                   sector->data[offsetof(struct SaveBlock2, playerTrainerId[2])] +
+                   sector->data[offsetof(struct SaveBlock2, playerTrainerId[3])];
+    }
+    return 0;
+}
+
 u32 TryReadSpecialSaveSector(u8 sectorId, u8 *dst)
 {
     s32 i;

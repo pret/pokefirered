@@ -3,7 +3,7 @@
 
 	.global Start
 Start:
-	b start_vector
+	b Init
 
 	.global RomHeaderNintendoLogo
 RomHeaderNintendoLogo:

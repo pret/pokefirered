@@ -454,19 +454,19 @@ void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
 
     if (result->seconds < 0)
     {
-        result->seconds += 60;
+        result->seconds += SECONDS_PER_MINUTE;
         --result->minutes;
     }
 
     if (result->minutes < 0)
     {
-        result->minutes += 60;
+        result->minutes += MINUTES_PER_HOUR;
         --result->hours;
     }
 
     if (result->hours < 0)
     {
-        result->hours += 24;
+        result->hours += HOURS_PER_DAY;
         --result->days;
     }
 }

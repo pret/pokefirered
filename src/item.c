@@ -99,7 +99,7 @@ s8 BagPocketGetFirstEmptySlot(u8 pocketId)
     return -1;
 }
 
-bool8 IsPocketNotEmpty(u8 pocketId)
+bool8 IsBagPocketNonEmpty(u8 pocketId)
 {
     u8 i;
 

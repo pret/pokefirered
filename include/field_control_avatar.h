@@ -37,5 +37,6 @@ int ProcessPlayerFieldInput(struct FieldInput *input);
 void FieldInput_HandleCancelSignpost(struct FieldInput * input);
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys);
 void HandleBoulderActivateVictoryRoadSwitch(u16 x, u16 y);
+const u8 *GetObjectEventScriptPointerPlayerFacing(void);
 
 #endif //GUARD_FIELD_CONTROL_AVATAR_H

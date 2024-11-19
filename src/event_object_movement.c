@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "battle_anim.h"
 #include "battle_util.h"
+#include "berry.h"
 #include "data.h"
 #include "debug.h"
 #include "decompress.h"
@@ -121,6 +122,7 @@ static void MovementType_WanderAround(struct Sprite *);
 static void MovementType_WanderUpAndDown(struct Sprite *);
 static void MovementType_WanderLeftAndRight(struct Sprite *);
 static void MovementType_FaceDirection(struct Sprite *);
+static void MovementType_BerryTreeGrowth(struct Sprite *);
 static void MovementType_FaceDownAndUp(struct Sprite *);
 static void MovementType_FaceLeftAndRight(struct Sprite *);
 static void MovementType_FaceUpAndLeft(struct Sprite *);
@@ -172,6 +174,8 @@ static void MovementType_RaiseHandAndJump(struct Sprite *);
 static void MovementType_RaiseHandAndSwim(struct Sprite *);
 static void MovementType_WanderAroundSlower(struct Sprite *);
 static void MovementType_FollowPlayer(struct Sprite *);
+
+static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
 
 enum {
     MOVE_SPEED_NORMAL, // walking
@@ -270,7 +274,7 @@ static void (*const sMovementTypeCallbacks[MOVEMENT_TYPES_COUNT])(struct Sprite 
     [MOVEMENT_TYPE_FACE_LEFT]                             = MovementType_FaceDirection,
     [MOVEMENT_TYPE_FACE_RIGHT]                            = MovementType_FaceDirection,
     [MOVEMENT_TYPE_PLAYER]                                = MovementType_Player,
-    [MOVEMENT_TYPE_BERRY_TREE_GROWTH]                     = NULL,
+    [MOVEMENT_TYPE_BERRY_TREE_GROWTH]                     = MovementType_BerryTreeGrowth,
     [MOVEMENT_TYPE_FACE_DOWN_AND_UP]                      = MovementType_FaceDownAndUp,
     [MOVEMENT_TYPE_FACE_LEFT_AND_RIGHT]                   = MovementType_FaceLeftAndRight,
     [MOVEMENT_TYPE_FACE_UP_AND_LEFT]                      = MovementType_FaceUpAndLeft,
@@ -714,7 +718,7 @@ static const u16 *const gObjectPaletteTagSets[] = {
     sObjectPaletteTags3,
 };
 
-//#include "data/object_events/berry_tree_graphics_tables.h"
+#include "data/object_events/berry_tree_graphics_tables.h"
 #include "data/field_effects/field_effect_objects.h"
 
 static const s16 gMovementDelaysMedium[] = {32, 64,  96, 128};
@@ -2955,6 +2959,50 @@ void PlayerObjectTurn(struct PlayerAvatar *playerAvatar, u8 direction)
     ObjectEventTurn(&gObjectEvents[playerAvatar->objectEventId], direction);
 }
 
+static void SetBerryTreeGraphicsById(struct ObjectEvent *objectEvent, u8 berryId, u8 berryStage)
+{
+    const u16 graphicsId = gBerryTreeObjectEventGraphicsIdTable[berryStage];
+    const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
+    struct Sprite *sprite = &gSprites[objectEvent->spriteId];
+    UpdateSpritePalette(&sObjectEventSpritePalettes[gBerryTreePaletteSlotTablePointers[berryId][berryStage]-2], sprite);
+    sprite->oam.shape = graphicsInfo->oam->shape;
+    sprite->oam.size = graphicsInfo->oam->size;
+    sprite->images = gBerryTreePicTablePointers[berryId];
+    sprite->anims = graphicsInfo->anims;
+    sprite->subspriteTables = graphicsInfo->subspriteTables;
+    objectEvent->inanimate = graphicsInfo->inanimate;
+    objectEvent->graphicsId = graphicsId;
+    SetSpritePosToMapCoords(objectEvent->currentCoords.x, objectEvent->currentCoords.y, &sprite->x, &sprite->y);
+    sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+    sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
+    sprite->x += 8;
+    sprite->y += 16 + sprite->centerToCornerVecY;
+    if (objectEvent->trackedByCamera)
+        CameraObjectReset1();
+}
+
+static void SetBerryTreeGraphics(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    u8 berryStage;
+    u8 berryId;
+
+    objectEvent->invisible = TRUE;
+    sprite->invisible = TRUE;
+    berryStage = GetStageByBerryTreeId(objectEvent->trainerRange_berryTreeId);
+    if (berryStage != BERRY_STAGE_NO_BERRY)
+    {
+        objectEvent->invisible = FALSE;
+        sprite->invisible = FALSE;
+        berryId = GetBerryTypeByBerryTreeId(objectEvent->trainerRange_berryTreeId) - 1;
+        berryStage--;
+        if (berryId > ITEM_TO_BERRY(LAST_BERRY_INDEX))
+            berryId = 0;
+
+        SetBerryTreeGraphicsById(objectEvent, berryId, berryStage);
+        StartSpriteAnim(sprite, berryStage);
+    }
+}
+
 const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u16 graphicsId)
 {
     u32 form = 0;
@@ -4132,6 +4180,133 @@ static bool8 MovementType_FaceDirection_Step1(struct ObjectEvent *objectEvent, s
 static bool8 MovementType_FaceDirection_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     objectEvent->singleMovementActive = FALSE;
+    return FALSE;
+}
+
+static bool8 ObjectEventCB2_BerryTree(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+extern bool8 (*const gMovementTypeFuncs_BerryTreeGrowth[])(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+
+enum {
+    BERRYTREEFUNC_NORMAL,
+    BERRYTREEFUNC_MOVE,
+    BERRYTREEFUNC_SPARKLE_START,
+    BERRYTREEFUNC_SPARKLE,
+    BERRYTREEFUNC_SPARKLE_END,
+};
+
+#define sTimer          data[2]
+#define sBerryTreeFlags data[7]
+
+#define BERRY_FLAG_SET_GFX     (1 << 0)
+#define BERRY_FLAG_SPARKLING   (1 << 1)
+#define BERRY_FLAG_JUST_PICKED (1 << 2)
+
+void MovementType_BerryTreeGrowth(struct Sprite *sprite)
+{
+    struct ObjectEvent *objectEvent;
+
+    objectEvent = &gObjectEvents[sprite->sObjEventId];
+    if (!(sprite->sBerryTreeFlags & BERRY_FLAG_SET_GFX))
+    {
+        SetBerryTreeGraphics(objectEvent, sprite);
+        sprite->sBerryTreeFlags |= BERRY_FLAG_SET_GFX;
+    }
+    UpdateObjectEventCurrentMovement(objectEvent, sprite, ObjectEventCB2_BerryTree);
+}
+static bool8 ObjectEventCB2_BerryTree(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    return gMovementTypeFuncs_BerryTreeGrowth[sprite->sTypeFuncId](objectEvent, sprite);
+}
+
+// BERRYTREEFUNC_NORMAL
+bool8 MovementType_BerryTreeGrowth_Normal(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    u8 berryStage;
+    ClearObjectEventMovement(objectEvent, sprite);
+    objectEvent->invisible = TRUE;
+    sprite->invisible = TRUE;
+    berryStage = GetStageByBerryTreeId(objectEvent->trainerRange_berryTreeId);
+    if (berryStage == BERRY_STAGE_NO_BERRY)
+    {
+        if (!(sprite->sBerryTreeFlags & BERRY_FLAG_JUST_PICKED) && sprite->animNum == BERRY_STAGE_FLOWERING)
+        {
+            gFieldEffectArguments[0] = objectEvent->currentCoords.x;
+            gFieldEffectArguments[1] = objectEvent->currentCoords.y;
+            gFieldEffectArguments[2] = sprite->subpriority - 1;
+            gFieldEffectArguments[3] = sprite->oam.priority;
+            FieldEffectStart(FLDEFF_BERRY_TREE_GROWTH_SPARKLE);
+            sprite->animNum = berryStage;
+        }
+        return FALSE;
+    }
+    objectEvent->invisible = FALSE;
+    sprite->invisible = FALSE;
+    berryStage--;
+    if (sprite->animNum != berryStage)
+    {
+        sprite->sTypeFuncId = BERRYTREEFUNC_SPARKLE_START;
+        return TRUE;
+    }
+    SetBerryTreeGraphics(objectEvent, sprite);
+    ObjectEventSetSingleMovement(objectEvent, sprite, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+    sprite->sTypeFuncId = BERRYTREEFUNC_MOVE;
+    return TRUE;
+}
+
+// BERRYTREEFUNC_MOVE
+bool8 MovementType_BerryTreeGrowth_Move(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    if (ObjectEventExecSingleMovementAction(objectEvent, sprite))
+    {
+        sprite->sTypeFuncId = BERRYTREEFUNC_NORMAL;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// BERRYTREEFUNC_SPARKLE_START
+bool8 MovementType_BerryTreeGrowth_SparkleStart(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    objectEvent->singleMovementActive = TRUE;
+    sprite->sTypeFuncId = BERRYTREEFUNC_SPARKLE;
+    sprite->sTimer = 0;
+    sprite->sBerryTreeFlags |= BERRY_FLAG_SPARKLING;
+    gFieldEffectArguments[0] = objectEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objectEvent->currentCoords.y;
+    gFieldEffectArguments[2] = sprite->subpriority - 1;
+    gFieldEffectArguments[3] = sprite->oam.priority;
+    FieldEffectStart(FLDEFF_BERRY_TREE_GROWTH_SPARKLE);
+    return TRUE;
+}
+
+// BERRYTREEFUNC_SPARKLE
+bool8 MovementType_BerryTreeGrowth_Sparkle(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    sprite->sTimer++;
+    objectEvent->invisible = (sprite->sTimer & 2) >> 1;
+    sprite->animPaused = TRUE;
+    if (sprite->sTimer > 64)
+    {
+        SetBerryTreeGraphics(objectEvent, sprite);
+        sprite->sTypeFuncId = BERRYTREEFUNC_SPARKLE_END;
+        sprite->sTimer = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// BERRYTREEFUNC_SPARKLE_END
+bool8 MovementType_BerryTreeGrowth_SparkleEnd(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    sprite->sTimer++;
+    objectEvent->invisible = (sprite->sTimer & 2) >> 1;
+    sprite->animPaused = TRUE;
+    if (sprite->sTimer > 64)
+    {
+        sprite->sTypeFuncId = BERRYTREEFUNC_NORMAL;
+        sprite->sBerryTreeFlags &= ~BERRY_FLAG_SPARKLING;
+        return TRUE;
+    }
     return FALSE;
 }
 
@@ -6269,13 +6444,22 @@ bool8 IsBerryTreeSparkling(u8 localId, u8 mapNum, u8 mapGroup)
     u8 objectEventId;
 
     if (!TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId)
-        && gSprites[gObjectEvents[objectEventId].spriteId].data[7] & 2)
-    {
+        && gSprites[gObjectEvents[objectEventId].spriteId].sBerryTreeFlags & BERRY_FLAG_SPARKLING)
         return TRUE;
-    }
 
     return FALSE;
 }
+
+void SetBerryTreeJustPicked(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 objectEventId;
+
+    if (!TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId))
+        gSprites[gObjectEvents[objectEventId].spriteId].sBerryTreeFlags |= BERRY_FLAG_JUST_PICKED;
+}
+
+#undef sTimer
+#undef sBerryTreeFlags
 
 void MoveCoords(u8 direction, s16 *x, s16 *y)
 {

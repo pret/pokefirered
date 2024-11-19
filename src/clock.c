@@ -7,7 +7,7 @@
 // #include "dewford_trend.h"
 // #include "tv.h"
 #include "field_weather.h"
-// #include "berry.h"
+#include "berry.h"
 #include "main.h"
 #include "overworld.h"
 #include "wallclock.h"
@@ -68,7 +68,7 @@ static void UpdatePerMinute(struct Time *localTime)
     {
         if (minutes >= 0)
         {
-            // BerryTreeTimeUpdate(minutes);
+            BerryTreeTimeUpdate(minutes);
             gSaveBlock2Ptr->lastBerryTreeUpdate = *localTime;
         }
     }

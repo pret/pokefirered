@@ -268,6 +268,7 @@ static const TaskFunc sItemContextTaskFuncs[] = {
     [ITEMMENULOCATION_ITEMPC] = Task_ItemContext_Deposit,
     [ITEMMENULOCATION_PCBOX]  = Task_ItemContext_PcBoxGive,
     [ITEMMENULOCATION_BATTLE] = Task_ItemContext_FieldOrBattle,
+    [ITEMMENULOCATION_BERRY_TREE_MULCH] = Task_ItemContext_FieldOrBattle,
     [ITEMMENULOCATION_OLD_MAN] = NULL
 };
 
@@ -2398,4 +2399,17 @@ static void Task_Bag_TeachyTvTMs(u8 taskId)
         }
         data[8]++;
     }
+}
+
+// Choosing berry to plant
+void CB2_ChooseBerry(void)
+{
+    // probably bugged
+    InitBerryPouch(BERRYPOUCH_FROMBERRYTREE, CB2_ReturnToFieldContinueScript, FALSE);
+}
+
+// Choosing mulch to use
+void CB2_ChooseMulch(void)
+{
+    GoToBagMenu(ITEMMENULOCATION_BERRY_TREE_MULCH, ITEMS_POCKET, CB2_ReturnToFieldContinueScript);
 }

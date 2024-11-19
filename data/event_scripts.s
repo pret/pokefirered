@@ -3,6 +3,7 @@
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/battle_tower.h"
+#include "constants/berry.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/field_move.h"
@@ -1198,6 +1199,7 @@ EventScript_DelayedLookAround::
 
 	.include "data/scripts/silphco_doors.inc"
 	.include "data/scripts/pc_transfer.inc"
+	.include "data/scripts/berry_tree.inc"
 
 EventScript_GetInGameTradeSpeciesInfo::
 	copyvar VAR_0x8004, VAR_0x8008

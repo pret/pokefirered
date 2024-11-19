@@ -29,13 +29,13 @@ gSpecials::
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
+	def_special PlayerHasMulch
+	def_special Bag_ChooseMulch
+	def_special CanWaterBerryPlot
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
+	def_special ObjectEventInteractionWaterBerryTree
+	def_special PlayerHasBerries
 	def_special TryBattleLinkup
 	def_special TryTradeLinkup
 	def_special TryRecordMixLinkup
@@ -51,13 +51,13 @@ gSpecials::
 	def_special LoadPlayerParty
 	def_special ChooseHalfPartyForBattle
 	def_special Script_ShowLinkTrainerCard
-	def_special NullFieldSpecial  @ Berry Tree specials
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
-	def_special NullFieldSpecial
+	def_special ObjectEventInteractionGetBerryTreeData
+	def_special ObjectEventInteractionGetBerryName
+	def_special ObjectEventInteractionGetBerryCountString
+	def_special Bag_ChooseBerry
+	def_special ObjectEventInteractionPlantBerryTree
+	def_special ObjectEventInteractionPickBerryTree
+	def_special ObjectEventInteractionRemoveBerryTree
 	def_special IsEnigmaBerryValid
 	def_special GetTrainerBattleMode
 	def_special ShowTrainerIntroSpeech

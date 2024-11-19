@@ -12392,7 +12392,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_WailmerPail,
         .iconPic = gItemIcon_WailmerPail,
         .iconPalette = gItemIconPalette_WailmerPail,
     },

@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "berry.h"
 #include "berry_pouch.h"
 #include "berry_powder.h"
 #include "bike.h"
@@ -42,9 +43,8 @@
 #include "constants/songs.h"
 #include "constants/field_weather.h"
 
-static EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
+EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
-static void FieldCB_UseItemOnField(void);
 static void Task_WaitFadeIn_CallItemUseOnFieldCB(u8 taskId);
 static void Task_ItemUse_CloseMessageBoxAndReturnToField(u8 taskId);
 static void Task_ItemUseWaitForFade(u8 taskId);
@@ -73,6 +73,9 @@ static void UseTownMapFromBag(void);
 static void Task_UseTownMapFromField(u8 taskId);
 static void UseFameCheckerFromBag(void);
 static void Task_UseFameCheckerFromField(u8 taskId);
+static void ItemUseOnFieldCB_WailmerPailBerry(u8);
+static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8);
+static bool8 TryToWaterSudowoodo(void);
 
 
 // Below is set TRUE by UseRegisteredKeyItemOnField
@@ -118,7 +121,7 @@ static void SetUpItemUseOnFieldCallback(u8 taskId)
         sItemUseOnFieldCB(taskId);
 }
 
-static void FieldCB_UseItemOnField(void)
+void FieldCB_UseItemOnField(void)
 {
     FadeInFromBlack();
     CreateTask(Task_WaitFadeIn_CallItemUseOnFieldCB, 8);
@@ -432,6 +435,53 @@ void ItemUseOutOfBattle_PowderJar(u8 taskId)
         DisplayItemMessageInBag(taskId, FONT_NORMAL, gStringVar4, Task_ReturnToBagFromContextMenu);
     else
         DisplayItemMessageOnField(taskId, FONT_NORMAL, gStringVar4, Task_ItemUse_CloseMessageBoxAndReturnToField);
+}
+
+void ItemUseOutOfBattle_WailmerPail(u8 taskId)
+{
+    if (TryToWaterSudowoodo() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_WailmerPailSudowoodo;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else if (TryToWaterBerryTree() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_WailmerPailBerry;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        PrintNotTheTimeToUseThat(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
+}
+
+static void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(BerryTree_EventScript_ItemUseWailmerPail);
+    DestroyTask(taskId);
+}
+
+static bool8 TryToWaterSudowoodo(void)
+{
+    // s16 x, y;
+    // u8 elevation;
+    // u8 objId;
+    // GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    // elevation = PlayerGetElevation();
+    // objId = GetObjectEventIdByPosition(x, y, elevation);
+    // if (objId == OBJECT_EVENTS_COUNT || gObjectEvents[objId].graphicsId != OBJ_EVENT_GFX_SUDOWOODO)
+    //     return FALSE;
+    // else
+    //     return TRUE;
+    return FALSE;
+}
+
+static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
+{
+    // LockPlayerFieldControls();
+    // ScriptContext_SetupScript(BattleFrontier_OutsideEast_EventScript_WaterSudowoodo);
+    DestroyTask(taskId);
 }
 
 void ItemUseOutOfBattle_PokeFlute(u8 taskId)

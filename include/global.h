@@ -12,6 +12,7 @@
 #include "constants/vars.h"
 #include "constants/species.h"
 #include "constants/pokedex.h"
+#include "constants/berry.h"
 #include "constants/maps.h"
 #include "constants/pokemon.h"
 #include "constants/rgb.h"
@@ -382,7 +383,8 @@ struct SaveBlock2
     /*0xAF0*/ struct BerryCrush berryCrush;
     /*0xB00*/ struct PokemonJumpRecords pokeJump;
     /*0xB10*/ struct BerryPickingResults berryPick;
-    /*0x???*/ u8 filler_90[0x4D4];
+    /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT]; // moved to SaveBlock2 due to QuestLogScene taking up SaveBlock1
+    /*0x???*/ u8 filler_90[212];
 }; // size: 0xF24
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;

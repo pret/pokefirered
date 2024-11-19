@@ -154,9 +154,12 @@
 #define OBJ_EVENT_GFX_DEOXYS_N 150
 #define OBJ_EVENT_GFX_SS_ANNE 151
 #define OBJ_EVENT_GFX_POKE_BALL  152
-#define OBJ_EVENT_GFX_OW_MON     153
+#define OBJ_EVENT_GFX_BERRY_TREE                  153
+#define OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES     154
+#define OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES      155
+#define OBJ_EVENT_GFX_OW_MON     156
 
-#define NUM_OBJ_EVENT_GFX     154
+#define NUM_OBJ_EVENT_GFX     157
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
@@ -256,8 +259,11 @@
 #define OBJ_EVENT_PAL_TAG_RS_GROUDON                  0x1119
 #define OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION       0x111A
 #define OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW         0x111B
-#define OBJ_EVENT_PAL_TAG_NPC_3                       0x111C // pokeball from expansion
-#define OBJ_EVENT_PAL_TAG_DYNAMIC                     0x111D
+#define OBJ_EVENT_PAL_TAG_NPC_1                       0x111C // emerald
+#define OBJ_EVENT_PAL_TAG_NPC_2                       0x111D // emerald
+#define OBJ_EVENT_PAL_TAG_NPC_3                       0x111E // emerald
+#define OBJ_EVENT_PAL_TAG_NPC_4                       0x111F // emerald
+#define OBJ_EVENT_PAL_TAG_DYNAMIC                     0x1120
 
 #if OW_FOLLOWERS_POKEBALLS
 // Vanilla

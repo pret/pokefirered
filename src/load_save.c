@@ -35,11 +35,11 @@ EWRAM_DATA struct PokemonStorageASLR gPokemonStorage = {0};
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 
 // IWRAM common
-bool32 gFlashMemoryPresent;
-struct SaveBlock1 *gSaveBlock1Ptr;
-struct SaveBlock2 *gSaveBlock2Ptr;
+bool32 gFlashMemoryPresent = 0;
+struct SaveBlock1 *gSaveBlock1Ptr = NULL;
+struct SaveBlock2 *gSaveBlock2Ptr = NULL;
 IWRAM_INIT struct SaveBlock3 *gSaveBlock3Ptr = &gSaveblock3;
-struct PokemonStorage *gPokemonStoragePtr;
+struct PokemonStorage *gPokemonStoragePtr = NULL;
 
 void CheckForFlashMemory(void)
 {
@@ -69,13 +69,12 @@ void ClearSav1(void)
     CpuFill16(0, &gSaveblock1, sizeof(struct SaveBlock1ASLR));
 }
 
-void SetSaveBlocksPointers(void)
+void SetSaveBlocksPointers(u16 offset)
 {
-    u32 offset;
     struct SaveBlock1** sav1_LocalVar = &gSaveBlock1Ptr;
     void *oldSave = (void *)gSaveBlock1Ptr;
 
-    offset = (Random()) & ((SAVEBLOCK_MOVE_RANGE - 1) & ~3);
+    offset = (offset + Random()) & (SAVEBLOCK_MOVE_RANGE - 4);
 
     gSaveBlock2Ptr = (void *)(&gSaveblock2) + offset;
     *sav1_LocalVar = (void *)(&gSaveblock1) + offset;
@@ -109,8 +108,11 @@ void MoveSaveBlocks_ResetHeap(void)
     *pokemonStorageCopy = *gPokemonStoragePtr;
 
     // change saveblocks' pointers
-    SetSaveBlocksPointers(); // unlike Emerald, this does not use
-                             // the trainer ID sum for an offset.
+    SetSaveBlocksPointers(
+      saveBlock2Copy->playerTrainerId[0] +
+      saveBlock2Copy->playerTrainerId[1] +
+      saveBlock2Copy->playerTrainerId[2] +
+      saveBlock2Copy->playerTrainerId[3]);
 
     // restore saveblock data since the pointers changed
     *gSaveBlock2Ptr = *saveBlock2Copy;

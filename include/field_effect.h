@@ -43,7 +43,7 @@ extern const struct SpriteTemplate gFieldEffectObjectTemplate_UnusedSand;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_WaterSurfacing;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_ReflectionDistortion;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_DeepSandFootprints;
-/*extern const struct SpriteTemplate gFieldEffectObjectTemplate_Sparkle;*/
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_Sparkle;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_TreeDisguise;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_MountainDisguise;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_Bird;

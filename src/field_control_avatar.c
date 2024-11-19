@@ -1146,6 +1146,16 @@ const u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position)
     return GetCoordEventScriptAtPosition(&gMapHeader, position->x - MAP_OFFSET, position->y - MAP_OFFSET, position->elevation);
 }
 
+const u8 *GetObjectEventScriptPointerPlayerFacing(void)
+{
+    u8 direction;
+    struct MapPosition position;
+
+    direction = GetPlayerMovementDirection();
+    GetInFrontOfPlayerPosition(&position);
+    return GetInteractedObjectEventScript(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), direction);
+}
+
 static const struct BgEvent *GetBackgroundEventAtPosition(struct MapHeader *mapHeader, u16 x, u16 y, u8 elevation)
 {
     u8 i;

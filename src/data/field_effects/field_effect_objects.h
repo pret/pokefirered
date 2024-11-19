@@ -1060,7 +1060,6 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ReflectionDistortion =
     .callback = SpriteCallbackDummy,
 };
 
-/*
 static const struct SpriteFrameImage sPicTable_Sparkle[] = {
     overworld_frame(gFieldEffectObjectPic_Sparkle, 2, 2, 0),
     overworld_frame(gFieldEffectObjectPic_Sparkle, 2, 2, 1),
@@ -1101,15 +1100,14 @@ static const union AnimCmd *const sAnimTable_Sparkle[] =
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_Sparkle = {
-    .tileTag = 0xFFFF,
-    .paletteTag = 0xFFFF,
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_2,
     .oam = &gObjectEventBaseOam_16x16,
     .anims = sAnimTable_Sparkle,
     .images = sPicTable_Sparkle,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = WaitFieldEffectSpriteAnim,
 };
-*/
 
 static const struct SpriteFrameImage sPicTable_TreeDisguise[] =
 {

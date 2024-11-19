@@ -1173,6 +1173,10 @@ extern const u8 EventScript_TryDoRematchBattle[];
 extern const u8 EventScript_DoTrainerBattleFromApproach[];
 extern const u8 EventScript_TestSignpostMsg[];
 
+extern const u8 BerryTreeScript[];
+extern const u8 BerryTree_EventScript_ItemUsePlantBerry[];
+extern const u8 BerryTree_EventScript_ItemUseWailmerPail[];
+
 // new_game
 extern const u8 EventScript_ResetAllMapFlags[];
 

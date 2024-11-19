@@ -1508,19 +1508,18 @@ void UpdateBubblesFieldEffect(struct Sprite *sprite)
 
 u32 FldEff_BerryTreeGrowthSparkle(void)
 {
-    /*u8 spriteId;
-    struct Sprite *sprite;
+    u8 spriteId;
 
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 4);
     spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_Sparkle, gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     if (spriteId != MAX_SPRITES)
     {
-        sprite = &gSprites[spriteId];
+        struct Sprite *sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gFieldEffectArguments[3];
-        sprite->oam.paletteNum = 5;
-        sprite->data[0] = FLDEFF_BERRY_TREE_GROWTH_SPARKLE;
-    }*/
+        UpdateSpritePaletteByTemplate(&gFieldEffectObjectTemplate_Sparkle, sprite);
+        sprite->sWaitFldEff = FLDEFF_BERRY_TREE_GROWTH_SPARKLE;
+    }
     return 0;
 }
 

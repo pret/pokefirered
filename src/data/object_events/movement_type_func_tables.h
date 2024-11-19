@@ -28,6 +28,11 @@ static bool8 MovementType_WanderLeftAndRight_Step6(struct ObjectEvent *objectEve
 static bool8 MovementType_FaceDirection_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_FaceDirection_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_FaceDirection_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite);
+static bool8 MovementType_BerryTreeGrowth_Normal(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementType_BerryTreeGrowth_Move(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementType_BerryTreeGrowth_SparkleStart(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementType_BerryTreeGrowth_Sparkle(struct ObjectEvent *, struct Sprite *);
+static bool8 MovementType_BerryTreeGrowth_SparkleEnd(struct ObjectEvent *, struct Sprite *);
 static bool8 MovementType_FaceDownAndUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_FaceDownAndUp_Step1(struct ObjectEvent *objectEvent, struct Sprite *sprite);
 static bool8 MovementType_FaceDownAndUp_Step2(struct ObjectEvent *objectEvent, struct Sprite *sprite);
@@ -232,6 +237,14 @@ u8 (*const gMovementTypeFuncs_FaceDirection[])(struct ObjectEvent *, struct Spri
     MovementType_FaceDirection_Step0,
     MovementType_FaceDirection_Step1,
     MovementType_FaceDirection_Step2,
+};
+
+u8 (*const gMovementTypeFuncs_BerryTreeGrowth[])(struct ObjectEvent *, struct Sprite *) = {
+    MovementType_BerryTreeGrowth_Normal,
+    MovementType_BerryTreeGrowth_Move,
+    MovementType_BerryTreeGrowth_SparkleStart,
+    MovementType_BerryTreeGrowth_Sparkle,
+    MovementType_BerryTreeGrowth_SparkleEnd,
 };
 
 u8 (*const gMovementTypeFuncs_FaceDownAndUp[])(struct ObjectEvent *, struct Sprite *) = {

@@ -38,6 +38,7 @@ void ItemUseOutOfBattle_TeachyTv(u8 taskId);
 void ItemUseOutOfBattle_TmCase(u8 taskId);
 void ItemUseOutOfBattle_TownMap(u8 taskId);
 void ItemUseOutOfBattle_VsSeeker(u8 taskId);
+void ItemUseOutOfBattle_WailmerPail(u8);
 void ItemUseOutOfBattle_ZygardeCube(u8 taskId);
 void ItemUseOutOfBattle_CannotUse(u8 taskId);
 void ItemUseInBattle_BagMenu(u8 taskId);
@@ -48,6 +49,7 @@ u8 CanUseEscapeRopeOnCurrMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8);
 void ItemUse_SetQuestLogEvent(u8, struct Pokemon *, u16, u16);
+void FieldCB_UseItemOnField(void);
 
 enum {
     BALL_THROW_UNABLE_TWO_MONS,
@@ -59,5 +61,7 @@ enum {
 
 bool32 CanThrowBall(void);
 bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon);
+
+extern void (*sItemUseOnFieldCB)(u8 taskId);
 
 #endif //GUARD_ITEM_USE_H

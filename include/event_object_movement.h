@@ -1,6 +1,8 @@
 #ifndef GUARD_EVENT_OBJECT_MOVEMENT_H
 #define GUARD_EVENT_OBJECT_MOVEMENT_H
 
+#include "constants/event_object_movement.h"
+
 #if OW_POKEMON_OBJECT_EVENTS == FALSE && OW_FOLLOWERS_ENABLED == TRUE
 #error "OW_POKEMON_OBJECT_EVENTS needs to be TRUE in order for OW_FOLLOWERS_ENABLED to work."
 #endif
@@ -272,5 +274,9 @@ bool8 FollowablePlayerMovement_GoSpeed2(struct ObjectEvent *, struct Sprite *, u
 bool8 FollowablePlayerMovement_Slide(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 bool8 FollowablePlayerMovement_JumpInPlace(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
 bool8 FollowablePlayerMovement_GoSpeed4(struct ObjectEvent *, struct Sprite *, u8, bool8(u8));
+
+u8 GetObjectEventBerryTreeId(u8 objectEventId);
+void SetBerryTreeJustPicked(u8 mapId, u8 mapNumber, u8 mapGroup);
+bool8 IsBerryTreeSparkling(u8 localId, u8 mapNum, u8 mapGroup);
 
 #endif // GUARD_EVENT_OBJECT_MOVEMENT_H

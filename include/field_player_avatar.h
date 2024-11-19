@@ -58,6 +58,8 @@ void PlayerJumpLedge(u8 direction);
 void PlayerShakeHeadOrWalkInPlace(void);
 void player_step(u8 direction, u16 newKeys, u16 heldKeys);
 bool32 PlayerIsMovingOnRockStairs(u8 direction);
+void SetPlayerAvatarWatering(u8 direction);
+u8 GetPlayerAvatarFlags(void);
 void UpdatePlayerAvatarTransitionState(void);
 void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender);
 void PlayerUseAcroBikeOnBumpySlope(u8 direction);

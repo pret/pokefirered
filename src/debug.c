@@ -442,6 +442,12 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId);
 static void DebugAction_Sound_MUS(u8 taskId);
 static void DebugAction_Sound_MUS_SelectId(u8 taskId);
 
+static void DebugAction_BerryFunctions_ClearAll(u8 taskId);
+static void DebugAction_BerryFunctions_Ready(u8 taskId);
+static void DebugAction_BerryFunctions_NextStage(u8 taskId);
+static void DebugAction_BerryFunctions_Pests(u8 taskId);
+static void DebugAction_BerryFunctions_Weeds(u8 taskId);
+
 extern const u8 Debug_FlagsNotSetOverworldConfigMessage[];
 extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
 extern const u8 Debug_FlagsAndVarNotSetBattleConfigMessage[];
@@ -469,6 +475,9 @@ extern const u8 Debug_CheckSaveBlock[];
 extern const u8 Debug_CheckROMSpace[];
 extern const u8 Debug_BoxFilledMessage[];
 extern const u8 Debug_ShowExpansionVersion[];
+
+extern const u8 Debug_BerryPestsDisabled[];
+extern const u8 Debug_BerryWeedsDisabled[];
 
 extern const u8 TwoIsland_House_EventScript_ChooseMonToTutor[];
 
@@ -959,6 +968,15 @@ static void (*const sDebugMenu_Actions_Sound[])(u8) =
 {
     [DEBUG_SOUND_MENU_ITEM_SE]  = DebugAction_Sound_SE,
     [DEBUG_SOUND_MENU_ITEM_MUS] = DebugAction_Sound_MUS,
+};
+
+static void (*const sDebugMenu_Actions_BerryFunctions[])(u8) =
+{
+    [DEBUG_BERRY_FUNCTIONS_MENU_CLEAR_ALL]  = DebugAction_BerryFunctions_ClearAll,
+    [DEBUG_BERRY_FUNCTIONS_MENU_READY]      = DebugAction_BerryFunctions_Ready,
+    [DEBUG_BERRY_FUNCTIONS_MENU_NEXT_STAGE] = DebugAction_BerryFunctions_NextStage,
+    [DEBUG_BERRY_FUNCTIONS_MENU_PESTS]      = DebugAction_BerryFunctions_Pests,
+    [DEBUG_BERRY_FUNCTIONS_MENU_WEEDS]      = DebugAction_BerryFunctions_Weeds,
 };
 
 // *******************************
@@ -1795,6 +1813,25 @@ static void DebugTask_HandleMenuInput_Sound(u8 taskId)
     }
 }
 
+static void DebugTask_HandleMenuInput_BerryFunctions(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+
+    if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_BerryFunctions[input]) != NULL)
+            func(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ReShowMainMenu();
+    }
+}
+
 // *******************************
 // Open sub-menus
 static void DebugAction_OpenUtilitiesMenu(u8 taskId)
@@ -1843,6 +1880,7 @@ static void DebugAction_OpenSoundMenu(u8 taskId)
 static void DebugAction_Util_BerryFunctions(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_BerryFunctions, sDebugMenu_ListTemplate_BerryFunctions);
 }
 
 // *******************************
@@ -4404,6 +4442,111 @@ static const u8 *const sSENames[] =
 SOUND_LIST_SE
 };
 #undef X
+
+// *******************************
+// Actions BerryFunctions
+
+static void DebugAction_BerryFunctions_ClearAll(u8 taskId)
+{
+    u8 i;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            RemoveBerryTree(GetObjectEventBerryTreeId(i));
+            SetBerryTreeJustPicked(gObjectEvents[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_Ready(u8 taskId)
+{
+    u8 i;
+    struct BerryTree *tree;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            tree = &gSaveBlock2Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            if (tree->stage != BERRY_STAGE_NO_BERRY)
+            {
+                tree->stage = BERRY_STAGE_BERRIES - 1;
+                BerryTreeGrow(tree);
+            }
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_NextStage(u8 taskId)
+{
+    u8 i;
+    struct BerryTree *tree;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            tree = &gSaveBlock2Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            BerryTreeGrow(tree);
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_Pests(u8 taskId)
+{
+    u8 i;
+
+    if (!OW_BERRY_PESTS)
+    {
+        Debug_DestroyMenu_Full_Script(taskId, Debug_BerryPestsDisabled);
+        return;
+    }
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            if (gSaveBlock2Ptr->berryTrees[GetObjectEventBerryTreeId(i)].stage != BERRY_STAGE_PLANTED)
+                gSaveBlock2Ptr->berryTrees[GetObjectEventBerryTreeId(i)].pests = TRUE;
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
+
+static void DebugAction_BerryFunctions_Weeds(u8 taskId)
+{
+    u8 i;
+
+    if (!OW_BERRY_WEEDS)
+    {
+        Debug_DestroyMenu_Full_Script(taskId, Debug_BerryWeedsDisabled);
+        return;
+    }
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
+        {
+            gSaveBlock2Ptr->berryTrees[GetObjectEventBerryTreeId(i)].weeds = TRUE;
+        }
+    }
+
+    ScriptContext_Enable();
+    Debug_DestroyMenu_Full(taskId);
+}
 
 // *******************************
 // Actions Party/Boxes

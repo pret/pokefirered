@@ -94,37 +94,6 @@ void EnableVCountIntrAtLine150(void);
 
 void AgbMain()
 {
-#if MODERN
-    // Modern compilers are liberal with the stack on entry to this function,
-    // so RegisterRamReset may crash if it resets IWRAM.
-    RegisterRamReset(RESET_ALL & ~RESET_IWRAM);
-    asm("mov\tr1, #0xC0\n"
-        "\tlsl\tr1, r1, #0x12\n"
-        "\tmov\tr2, #0xFC\n"
-        "\tlsl\tr2, r2, #0x7\n"
-        "\tadd\tr2, r1, r2\n"
-        "\tmov\tr0, #0\n"
-        "\tmov\tr3, r0\n"
-        "\tmov\tr4, r0\n"
-        "\tmov\tr5, r0\n"
-        ".LCU%=:\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tcmp\tr1, r2\n"
-        "\tbcc\t.LCU%=\n"
-        :
-        :
-        : "r0", "r1", "r2", "r3", "r4", "r5", "memory"
-    );
-#else
-    RegisterRamReset(RESET_ALL);
-#endif //MODERN
     *(vu16 *)BG_PLTT = RGB_WHITE;
     InitGpuRegManager();
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;

@@ -6,18 +6,22 @@
 #include "palette.h"
 #include "text.h"
 #include "berry_pouch.h"
+#include "event_scripts.h"
 #include "item_menu.h"
 #include "menu_helpers.h"
 #include "scanline_effect.h"
 #include "item_icon.h"
 #include "item_menu_icons.h"
+#include "item_use.h"
 #include "list_menu.h"
 #include "graphics.h"
 #include "berry.h"
 #include "item.h"
 #include "item_use.h"
+#include "overworld.h"
 #include "party_menu.h"
 #include "text_window.h"
+#include "script.h"
 #include "strings.h"
 #include "string_util.h"
 #include "sound.h"
@@ -165,7 +169,8 @@ static const TaskFunc sBerryPouchContextMenuTasks[] =
     Task_ContextMenu_FromPartyGiveMenu,
     Task_ContextMenu_Sell,
     Task_ContextMenu_FromPokemonPC,
-    Task_NormalContextMenu
+    Task_NormalContextMenu,
+    [BERRYPOUCH_FROMBERRYTREE] =             BerryPouch_StartFadeToExitCallback,
 };
 
 static const struct YesNoFuncTable sYesNoFuncs_Toss = 
@@ -644,7 +649,7 @@ static bool8 BerryPouchLoadGfx(void)
 
 static bool8 AllocateListMenuBuffers(void)
 {
-    sListMenuItems = Alloc(NUM_BERRIES * sizeof(struct ListMenuItem));
+    sListMenuItems = Alloc((LAST_BERRY_INDEX - FIRST_BERRY_INDEX) * sizeof(struct ListMenuItem));
     if (sListMenuItems == NULL)
         return FALSE;
     sListMenuStrbuf = Alloc(sResources->listMenuNumItems * 27);
@@ -1063,6 +1068,14 @@ static void Task_NormalContextMenu_HandleInput(u8 taskId)
     }
 }
 
+static void ItemUseOnFieldCB_Berry(u8 taskId)
+{
+    RemoveBagItem(gSpecialVar_ItemId, 1);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(BerryTree_EventScript_ItemUsePlantBerry);
+    DestroyTask(taskId);
+}
+
 static void Task_BerryPouch_Use(u8 taskId)
 {
     DestroyVariableWindow(sContextMenuNumOptions + 9);
@@ -1087,6 +1100,16 @@ static void Task_BerryPouch_Use(u8 taskId)
         else if (type == ITEM_USE_PARTY_MENU_MOVES) {
             ItemUseInBattle_PartyMenuChooseMove(taskId);
         }
+    }
+    else if (IsPlayerFacingEmptyBerryTreePatch() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Berry;
+        gFieldCallback = FieldCB_UseItemOnField;
+        
+        // gBagMenu->newScreenCallback = CB2_ReturnToField;
+        // Task_FadeAndCloseBagMenu(taskId);
+        sResources->exitCallback = CB2_ReturnToField;
+        BerryPouch_StartFadeToExitCallback(taskId);
     }
     else if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_USE_PARTY_MENU) {
         Task_Give_PrintThereIsNoPokemon(taskId);

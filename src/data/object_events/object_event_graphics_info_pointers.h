@@ -63,6 +63,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Gentleman;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sailor;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Captain;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nurse;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTree;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeEarlyStages;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTreeLateStages;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CableClubReceptionist;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnionRoomReceptionist;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedMaleReceptionist;
@@ -310,4 +313,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SS_ANNE]                  = &gObjectEventGraphicsInfo_SSAnne,
     [OBJ_EVENT_GFX_POKE_BALL] =                &gObjectEventGraphicsInfo_PokeBall,
     [OBJ_EVENT_GFX_OW_MON] =                   &gObjectEventGraphicsInfo_Follower,
+    [OBJ_EVENT_GFX_BERRY_TREE] =               &gObjectEventGraphicsInfo_BerryTree,
+    [OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES] =  &gObjectEventGraphicsInfo_BerryTreeEarlyStages,
+    [OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES] =   &gObjectEventGraphicsInfo_BerryTreeLateStages,
 };

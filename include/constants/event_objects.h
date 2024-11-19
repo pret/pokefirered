@@ -259,8 +259,11 @@
 #define OBJ_EVENT_PAL_TAG_RS_GROUDON                  0x1119
 #define OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION       0x111A
 #define OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW         0x111B
-#define OBJ_EVENT_PAL_TAG_NPC_3                       0x111C // pokeball from expansion
-#define OBJ_EVENT_PAL_TAG_DYNAMIC                     0x111D
+#define OBJ_EVENT_PAL_TAG_NPC_1                       0x111C // emerald
+#define OBJ_EVENT_PAL_TAG_NPC_2                       0x111D // emerald
+#define OBJ_EVENT_PAL_TAG_NPC_3                       0x111E // emerald
+#define OBJ_EVENT_PAL_TAG_NPC_4                       0x111F // emerald
+#define OBJ_EVENT_PAL_TAG_DYNAMIC                     0x1120
 
 #if OW_FOLLOWERS_POKEBALLS
 // Vanilla

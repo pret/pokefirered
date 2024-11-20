@@ -111,6 +111,7 @@ enum Season {
 
 extern struct Time gLocalTime;
 extern enum Season gLoadedSeason;
+extern const s32 sNumDaysInMonths[12];
 
 void RtcDisableInterrupts(void);
 void RtcRestoreInterrupts(void);

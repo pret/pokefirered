@@ -1922,7 +1922,7 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 inLink)
             (*state)++;
         break;
     case 14:
-        // Seed the random items in this map.
+        // Seed the random TMs in this map.
         // There are 92 TMs including Gen IV ones.
         hash = HashCombine(GameHash(), MapHash());
 

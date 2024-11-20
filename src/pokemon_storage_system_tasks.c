@@ -22,6 +22,8 @@
 #include "text_window.h"
 #include "tilemap_util.h"
 #include "trig.h"
+#include "random.h"
+#include "pokemon_groups.h"
 #include "constants/items.h"
 #include "constants/help_system.h"
 #include "constants/songs.h"
@@ -430,6 +432,21 @@ void EnterPokeStorage(u8 boxOption)
 
 void CB2_ReturnToPokeStorage(void)
 {
+    u16 i;
+    u16 s;
+    u8 boxId = StorageGetCurrentBox();
+    i = 0;
+    s = GameHash();
+    for (i = 0; i < 14; ++i) {
+      if (i == boxId && !StringCompareN(GetBoxNamePtr(boxId), gSpeciesNames[(s % NUM_SPECIES)], BOX_NAME_LENGTH)) {
+        FlagSet(FLAG_CHALLENGE_NOT_OVER);
+        FlagSet(FLAG_EXT1 + i);
+        PlayCry_Normal(s % NUM_SPECIES, 0);
+        break;
+      }
+      s = SeededRandom(s);
+    }
+
     ResetTasks();
     gStorage = Alloc(sizeof(struct PokemonStorageSystemData));
     if (gStorage == NULL)

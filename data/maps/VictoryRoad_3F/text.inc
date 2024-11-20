@@ -1,25 +1,15 @@
-Text_DoubleEdgeTeach::
-    .string "You should be proud of yourself,\n"
-    .string "having battled your way through\l"
-    .string "VICTORY ROAD so courageously.\p"
-    .string "In recognition of your feat,\n"
-    .string "I'll teach you DOUBLE-EDGE.\p"
-    .string "Would you like me to teach that\n"
-    .string "technique?$"
+Text_TMGive::
+    .string "Yo! Want a TM?$"
 
-Text_DoubleEdgeDeclined::
-    .string "I'll teach you the technique\n"
-    .string "anytime.$"
+Text_TMDeclined::
+    .string "Suit yourself.$"
 
 Text_DoubleEdgeWhichMon::
     .string "Which POKéMON should I teach\n"
     .string "DOUBLE-EDGE?$"
 
-Text_DoubleEdgeTaught::
-    .string "Keep that drive going for the\n"
-    .string "POKéMON LEAGUE!\p"
-    .string "Take a run at them and knock 'em\n"
-    .string "out!$"
+Text_TMGot::
+    .string "Enjoy your TM!$"
 
 VictoryRoad_3F_Text_GeorgeIntro::
     .string "I heard rumors of a child prodigy.$"

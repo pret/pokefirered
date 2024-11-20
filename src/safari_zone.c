@@ -4,6 +4,9 @@
 #include "overworld.h"
 #include "script.h"
 #include "event_data.h"
+#include "sound.h"
+#include "start_menu.h"
+#include "constants/songs.h"
 #include "field_screen_effect.h"
 
 EWRAM_DATA u8 gNumSafariBalls = 0;
@@ -41,6 +44,20 @@ void ExitSafariMode(void)
 
 bool8 SafariZoneTakeStep(void)
 {
+    u16 i;
+    u16 limit = 5;
+    for (i = 0; i < 14; ++i) {
+      if (FlagGet(FLAG_EXT1+i)) limit += (i/2)+1;
+    }
+    if ((limit < 61) && FlagGet(FLAG_CHALLENGE_NOT_OVER) && (gSaveBlock2Ptr->playTimeHours >= limit))
+    {
+        PlaySE(SE_DING_DONG);
+        FlagClear(FLAG_CHALLENGE_NOT_OVER);
+        ExitSafariMode();
+        ScriptContext_SetupScript(SafariZone_EventScript_ChallengeDone);
+        return TRUE;
+    }
+
     if (GetSafariZoneFlag() == FALSE)
         return FALSE;
     gSafariZoneStepCounter--;

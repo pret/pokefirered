@@ -34,3 +34,11 @@ SafariZone_EventScript_OutOfBalls::
 	msgbox SafariZone_Text_OutOfBalls
 	goto SafariZone_EventScript_Exit
 	end
+
+SafariZone_EventScript_ChallengeDone::
+	lockall
+	playse SE_DING_DONG
+	msgbox SafariZone_Text_ChallengeTimesUp
+	warp MAP_CELADON_CITY_DEPARTMENT_STORE_1F, 10, 10
+	waitstate
+	end

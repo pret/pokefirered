@@ -12,3 +12,8 @@ CeladonCity_DepartmentStore_1F_EventScript_LayoutSign::
 CeladonCity_DepartmentStore_1F_EventScript_FloorSign::
 	msgbox CeladonCity_DepartmentStore_1F_Text_ServiceCounter, MSGBOX_SIGN
 	end
+
+CeladonCity_DepartmentStore_1F_EventScript_Police::
+	msgbox CeladonCity_DepartmentStore_1F_Text_Police, MSGBOX_NPC
+	end
+

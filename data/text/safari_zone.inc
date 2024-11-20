@@ -9,6 +9,13 @@ SafariZone_Text_TimesUp::
 	.string "Time's up!\p"
 	.string "PA: Your SAFARI GAME is over!$"
 
+SafariZone_Text_ChallengeTimesUp::
+	.string "The POKéMON challenge is over!\p"
+	.string "You will now be transported\n"
+	.string "to the department store.\p"
+	.string "You are still permitted to buy\n"
+	.string "and use TMs and other items.$"
+
 SafariZone_Text_OutOfBalls::
 	.string "PA: Ding-dong!\p"
 	.string "You are out of SAFARI BALLS!\p"

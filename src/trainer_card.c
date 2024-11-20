@@ -16,6 +16,9 @@
 #include "help_system.h"
 #include "trainer_pokemon_sprites.h"
 #include "new_menu_helpers.h"
+#include "pokemon_groups.h"
+#include "data.h"
+#include "random.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
 #include "constants/trainers.h"
@@ -558,7 +561,7 @@ static void Task_TrainerCard(u8 taskId)
             sTrainerCardDataPtr->timeColonNeedDraw = FALSE;
         }
 
-        if (JOY_NEW(A_BUTTON))
+        if (JOY_HELD(L_BUTTON) && JOY_HELD(R_BUTTON) && JOY_HELD(SELECT_BUTTON))
         {
             SetHelpContext(HELPCONTEXT_TRAINER_CARD_BACK);
             FlipTrainerCard();
@@ -1296,10 +1299,13 @@ static void BufferHofDebutTime(void)
 
 static void PrintHofDebutTimeOnCard(void)
 {
-    if (sTrainerCardDataPtr->hasHofResult)
-    {
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], sTrainerCardHofDebutXPositions[sTrainerCardDataPtr->cardType], 35, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_HallOfFameDebut);
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 164, 35, sTrainerCardStatColors, TEXT_SKIP_DRAW, sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_HOF_TIME]);
+    u16 i;
+    u16 s = GameHash();
+    for (i = 0; i < 7; ++i) {
+      AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 45, 35+(10*i), sTrainerCardTextColors, TEXT_SKIP_DRAW, gSpeciesNames[(s % NUM_SPECIES)]);
+      s = SeededRandom(s);
+      AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 120, 35+(10*i), sTrainerCardTextColors, TEXT_SKIP_DRAW, gSpeciesNames[(s % NUM_SPECIES)]);
+      s = SeededRandom(s);
     }
 }
 

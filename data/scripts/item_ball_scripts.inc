@@ -575,23 +575,23 @@ SSAnne_1F_Room2_EventScript_ItemTM31::
   end
 
 SSAnne_2F_Room2_EventScript_ItemStardust::
-  finditem -2
+  finditem -1
   end
 
 SSAnne_2F_Room4_EventScript_ItemXAttack::
-  finditem -3
+  finditem -1
   end
 
 SSAnne_B1F_Room2_EventScript_ItemTM44::
-  finditem -4
+  finditem -1
   end
 
 SSAnne_B1F_Room3_EventScript_ItemEther::
-  finditem -5
+  finditem -1
   end
 
 SSAnne_B1F_Room5_EventScript_ItemSuperPotion::
-  finditem -6
+  finditem -1
   end
 
 SSAnne_Kitchen_EventScript_ItemGreatBall::

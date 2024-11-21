@@ -9,8 +9,8 @@ void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
 {
     int nBadges;
     int flagId;
-    u16 h;
-    u16 m;
+    s16 h;
+    s16 m;
     u16 i;
 
     u8 *dest = dest0;
@@ -57,8 +57,16 @@ void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
     case SAVE_STAT_TIME_REMAINING:
         h = gSaveBlock2Ptr->playTimeHours;
         m = gSaveBlock2Ptr->playTimeMinutes;
-        h = m == 0 ? (5-h) : (4-h);
-        m = m == 0 ? 0 : (60-m);
+        if (m == 0) {
+          h = 5-h;
+        } else {
+          h = 4-h;
+          m = 60-m;
+        }
+        if (h < 0) {
+          h = 0;
+          m = 0;
+        }
         for (i = 0; i < 14; ++i) {
           if (FlagGet(FLAG_EXT1+i)) h += (i/2)+1;
         }

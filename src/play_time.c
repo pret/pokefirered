@@ -1,4 +1,5 @@
 #include "play_time.h"
+#include "event_data.h"
 
 static u8 sPlayTimeCounterState;
 
@@ -32,24 +33,24 @@ void PlayTimeCounter_Stop(void)
 
 void PlayTimeCounter_Update(void)
 {
-    if (sPlayTimeCounterState == RUNNING)
+    if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) || (sPlayTimeCounterState != RUNNING)) {
+        return;
+    }
+    gSaveBlock2Ptr->playTimeVBlanks++;
+    if (gSaveBlock2Ptr->playTimeVBlanks > 59)
     {
-        gSaveBlock2Ptr->playTimeVBlanks++;
-        if (gSaveBlock2Ptr->playTimeVBlanks > 59)
+        gSaveBlock2Ptr->playTimeVBlanks = 0;
+        gSaveBlock2Ptr->playTimeSeconds++;
+        if (gSaveBlock2Ptr->playTimeSeconds > 59)
         {
-            gSaveBlock2Ptr->playTimeVBlanks = 0;
-            gSaveBlock2Ptr->playTimeSeconds++;
-            if (gSaveBlock2Ptr->playTimeSeconds > 59)
+            gSaveBlock2Ptr->playTimeSeconds = 0;
+            gSaveBlock2Ptr->playTimeMinutes++;
+            if (gSaveBlock2Ptr->playTimeMinutes > 59)
             {
-                gSaveBlock2Ptr->playTimeSeconds = 0;
-                gSaveBlock2Ptr->playTimeMinutes++;
-                if (gSaveBlock2Ptr->playTimeMinutes > 59)
-                {
-                    gSaveBlock2Ptr->playTimeMinutes = 0;
-                    gSaveBlock2Ptr->playTimeHours++;
-                    if (gSaveBlock2Ptr->playTimeHours > 999)
-                        PlayTimeCounter_SetToMax();
-                }
+                gSaveBlock2Ptr->playTimeMinutes = 0;
+                gSaveBlock2Ptr->playTimeHours++;
+                if (gSaveBlock2Ptr->playTimeHours > 999)
+                    PlayTimeCounter_SetToMax();
             }
         }
     }

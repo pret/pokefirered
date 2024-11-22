@@ -10339,7 +10339,7 @@ static void DoTracksGroundEffect_FootprintsB(struct ObjectEvent *objEvent, struc
             FieldEffectStart(FLDEFF_TRACKS_SPOT);
             break;
         case GROUND_EFFECT_SNOW:
-            FieldEffectStart(FLDEFF_TRACKS_SPOT);
+            FieldEffectStart(FLDEFF_SNOW_TRACKS_SPOT);
             break;
 
     }
@@ -10361,7 +10361,7 @@ static void DoTracksGroundEffect_FootprintsC(struct ObjectEvent *objEvent, struc
             FieldEffectStart(FLDEFF_TRACKS_BUG);
             break;
         case GROUND_EFFECT_SNOW:
-            FieldEffectStart(FLDEFF_TRACKS_BUG);
+            FieldEffectStart(FLDEFF_SNOW_TRACKS_BUG);
             break;
 
     }
@@ -10399,7 +10399,7 @@ static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent *objEvent, st
                 FieldEffectStart(FLDEFF_BIKE_TIRE_TRACKS);
                 break;
             case GROUND_EFFECT_SNOW:
-                FieldEffectStart(FLDEFF_BIKE_TIRE_TRACKS);
+                FieldEffectStart(FLDEFF_SNOW_BIKE_TIRE_TRACKS);
                 break;
 
         }
@@ -10438,7 +10438,7 @@ static void DoTracksGroundEffect_SlitherTracks(struct ObjectEvent *objEvent, str
                 FieldEffectStart(FLDEFF_TRACKS_SLITHER);
                 break;
             case GROUND_EFFECT_SNOW:
-                FieldEffectStart(FLDEFF_TRACKS_SLITHER);
+                FieldEffectStart(FLDEFF_SNOW_TRACKS_SLITHER);
                 break;
 
         }

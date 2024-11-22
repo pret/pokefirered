@@ -842,6 +842,25 @@ u32 FldEff_TracksSlither(void)
     return spriteId;
 }
 
+u32 FldEff_SnowTracksSlither(void)
+{
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect2);
+    SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
+    spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_SnowSlitherTracks, gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->oam.priority = gFieldEffectArguments[3];
+        sprite->data[7] = FLDEFF_SNOW_TRACKS_SLITHER;
+        StartSpriteAnim(sprite, gFieldEffectArguments[4]);
+    }
+    return spriteId;
+}
+
 void (*const gFadeFootprintsTireTracksFuncs[])(struct Sprite *sprite) = {
     FadeFootprintsTireTracks_Step0,
     FadeFootprintsTireTracks_Step1

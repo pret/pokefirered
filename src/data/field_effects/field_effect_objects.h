@@ -658,6 +658,16 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_SlitherTracks = {
     .callback = UpdateFootprintsTireTracksFieldEffect,
 };
 
+const struct SpriteTemplate gFieldEffectObjectTemplate_SnowSlitherTracks = {
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_GENERAL_2,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_BikeTireTracks,
+    .images = sPicTable_SlitherTracks,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateFootprintsTireTracksFieldEffect,
+};
+
 static const struct SpriteFrameImage sPicTable_JumpBigSplash[] =
 {
     overworld_frame(gFieldEffectObjectPic_JumpBigSplash, 2, 2, 0),

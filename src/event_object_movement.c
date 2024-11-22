@@ -9805,7 +9805,7 @@ static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent *objEvent)
 
 static void GetGroundEffectFlags_Reflection(struct ObjectEvent *objEvent, u32 *flags)
 {
-    u32 reflectionFlags[2] = { GROUND_EFFECT_FLAG_REFLECTION, GROUND_EFFECT_FLAG_ICE_REFLECTION };
+    u32 reflectionFlags[2] = { GROUND_EFFECT_FLAG_ICE_REFLECTION, GROUND_EFFECT_FLAG_WATER_REFLECTION };
     u8 type = ObjectEventCheckForReflectiveSurface(objEvent);
 
     if (type)
@@ -10476,27 +10476,27 @@ void GroundEffect_Seaweed(struct ObjectEvent *objEvent, struct Sprite *sprite)
 }
 
 static void (*const sGroundEffectFuncs[])(struct ObjectEvent *objEvent, struct Sprite *sprite) = {
-    GroundEffect_SpawnOnTallGrass,
-    GroundEffect_StepOnTallGrass,
-    GroundEffect_SpawnOnLongGrass,
-    GroundEffect_StepOnLongGrass,
-    GroundEffect_WaterReflection,
-    GroundEffect_IceReflection,
-    GroundEffect_FlowingWater,
-    GroundEffect_SandTracks,
-    GroundEffect_DeepSandTracks,
-    GroundEffect_Ripple,
-    GroundEffect_StepOnPuddle,
-    GroundEffect_SandHeap,
-    GroundEffect_JumpOnTallGrass,
-    GroundEffect_JumpOnLongGrass,
-    GroundEffect_JumpOnShallowWater,
-    GroundEffect_JumpOnWater,
-    GroundEffect_JumpLandingDust,
-    GroundEffect_ShortGrass,
-    GroundEffect_HotSprings,
-    GroundEffect_Seaweed,
-    GroundEffects_Snow,
+    [GROUND_EFFECT_TALL_GRASS_ON_SPAWN]   = GroundEffect_SpawnOnTallGrass,
+    [GROUND_EFFECT_TALL_GRASS_ON_MOVE]    = GroundEffect_StepOnTallGrass,
+    [GROUND_EFFECT_LONG_GRASS_ON_SPAWN]   = GroundEffect_SpawnOnLongGrass,
+    [GROUND_EFFECT_LONG_GRASS_ON_MOVE]    = GroundEffect_StepOnLongGrass,
+    [GROUND_EFFECT_WATER_REFLECTION]      = GroundEffect_WaterReflection,
+    [GROUND_EFFECT_ICE_REFLECTION]        = GroundEffect_IceReflection,
+    [GROUND_EFFECT_SHALLOW_FLOWING_WATER] = GroundEffect_FlowingWater,
+    [GROUND_EFFECT_SAND]                  = GroundEffect_SandTracks,
+    [GROUND_EFFECT_DEEP_SAND]             = GroundEffect_DeepSandTracks,
+    [GROUND_EFFECT_RIPPLES]               = GroundEffect_Ripple,
+    [GROUND_EFFECT_PUDDLE]                = GroundEffect_StepOnPuddle,
+    [GROUND_EFFECT_SAND_PILE]             = GroundEffect_SandHeap,
+    [GROUND_EFFECT_LAND_IN_TALL_GRASS]    = GroundEffect_JumpOnTallGrass,
+    [GROUND_EFFECT_LAND_IN_LONG_GRASS]    = GroundEffect_JumpOnLongGrass,
+    [GROUND_EFFECT_LAND_IN_SHALLOW_WATER] = GroundEffect_JumpOnShallowWater,
+    [GROUND_EFFECT_LAND_IN_DEEP_WATER]    = GroundEffect_JumpOnWater,
+    [GROUND_EFFECT_LAND_ON_NORMAL_GROUND] = GroundEffect_JumpLandingDust,
+    [GROUND_EFFECT_SHORT_GRASS]           = GroundEffect_ShortGrass,
+    [GROUND_EFFECT_HOT_SPRINGS]           = GroundEffect_HotSprings,
+    [GROUND_EFFECT_SEAWEED]               = GroundEffect_Seaweed,
+    [GROUND_EFFECT_SNOW]                  = GroundEffects_Snow,
 };
 
 static void DoFlaggedGroundEffects(struct ObjectEvent *objEvent, struct Sprite *sprite, u32 flags)

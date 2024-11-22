@@ -60,7 +60,10 @@ extern const struct SpriteTemplate gFieldEffectObjectTemplate_SlitherTracks;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_BugTracks;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_SpotTracks;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_SnowFootprints;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_SnowBikeTireTracks;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_SnowSlitherTracks;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_SnowBugTracks;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_SnowSpotTracks;
 
 u32 FieldEffectStart(enum FieldEffect fldeff);
 bool8 FieldEffectActiveListContains(enum FieldEffect fldeff);
@@ -150,6 +153,10 @@ u32 FldEff_TracksSlither(void);
 u32 FldEff_TracksBug(void);
 u32 FldEff_TracksSpot(void);
 u32 FldEff_SnowFootprints(void);
+u32 FldEff_SnowBikeTireTracks(void);
 u32 FldEff_SnowTracksSlither(void);
+u32 FldEff_SnowTracksSlither(void);
+u32 FldEff_SnowTracksBug(void);
+u32 FldEff_SnowTracksSpot(void);
 
 #endif //GUARD_FIELD_EFFECTS_H

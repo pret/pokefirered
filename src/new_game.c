@@ -130,7 +130,7 @@ void NewGameInitData(void)
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
-    InitTimeBasedEvents();
+    InitTimeBasedEvents(); // remove if wallclock
     ResetFameChecker();
     SetMoney(&gSaveBlock1Ptr->money, 3000);
     ResetGameStats();

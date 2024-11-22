@@ -15,6 +15,18 @@
 
 enum
 {
+    WEEKDAY_SUN,
+    WEEKDAY_MON,
+    WEEKDAY_TUE,
+    WEEKDAY_WED,
+    WEEKDAY_THU,
+    WEEKDAY_FRI,
+    WEEKDAY_SAT,
+    WEEKDAY_COUNT,
+};
+
+enum
+{
     MONTH_JAN = 1,
     MONTH_FEB,
     MONTH_MAR,

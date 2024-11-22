@@ -5,6 +5,7 @@
 #include "malloc.h"
 
 #include "berry_powder.h"
+#include "fake_rtc.h"
 #include "item.h"
 #include "load_save.h"
 #include "overworld.h"
@@ -57,6 +58,7 @@ void CheckForFlashMemory(void)
 void ClearSav3(void)
 {
     CpuFill16(0, &gSaveblock3, sizeof(struct SaveBlock3));
+    FakeRtc_Reset();
 }
 
 void ClearSav2(void)

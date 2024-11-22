@@ -260,7 +260,7 @@ void RtcReset(void)
 {
     if (OW_USE_FAKE_RTC)
     {
-        memset(FakeRtc_GetCurrentTime(), 0, sizeof(struct Time));
+        FakeRtc_Reset();
         return;
     }
 

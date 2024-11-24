@@ -158,6 +158,7 @@ void NewGameInitPCItems(void)
   AddBagItem(ITEM_EXP_SHARE, 6);
   AddBagItem(ITEM_TOWN_MAP, 1);
   AddBagItem(ITEM_TEACHY_TV, 1);
+  AddBagItem(ITEM_OLD_ROD, 1);
 }
 
 void BedroomPC(void)

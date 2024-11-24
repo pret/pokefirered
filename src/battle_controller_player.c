@@ -246,7 +246,7 @@ static void HandleInputChooseAction(void)
         }
         PlayerBufferExecCompleted();
     }
-    // Make R automatically run. Need to press it twice.
+    // Make R automatically run. Need to hold it down.
     else if (JOY_NEW(R_BUTTON) || JOY_HELD(R_BUTTON))
     {
         if (gActionSelectionCursor[gActiveBattler] != 3)

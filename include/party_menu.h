@@ -83,4 +83,14 @@ void ShowPartyMenuToShowcaseMultiBattleParty(void);
 void ChooseMonForDaycare(void);
 void ChoosePartyMonByMenuType(u8 menuType);
 
+enum
+{
+    NOT_CLOSE_TO_CAP,
+    ONE_AWAY_FROM_CAP,
+    AT_NEXT_BADGE_CAP,
+    AT_CAP
+};
+
+u8 CheckLevelCap(u8 partyIdx);
+
 #endif // GUARD_PARTY_MENU_H

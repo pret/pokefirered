@@ -2022,6 +2022,9 @@ static void Cmd_printstring(void)
     if (gBattleControllerExecFlags == 0)
     {
         u16 var = T2_READ_16(gBattlescriptCurrInstr + 1);
+        if ((var == STRINGID_PKMNGREWTOLV) && (CheckLevelCap(gPlayerParty[gBattleStruct->expGetterMonId].level) == AT_CAP)) {
+          var = STRINGID_PKMNGREWTOLVCAP;
+        }
         PrepareStringBattle(var, gBattlerAttacker);
         gBattlescriptCurrInstr += 3;
         gBattleCommunication[MSG_DISPLAY] = 1;
@@ -3111,45 +3114,6 @@ static void Cmd_jumpiftype(void)
         gBattlescriptCurrInstr += 7;
 }
 
-static const u8 NOT_CLOSE_TO_CAP = 0;
-static const u8 ONE_AWAY_FROM_CAP = 1;
-static const u8 AT_NEXT_BADGE_CAP = 2;
-static const u8 AT_CAP = 3;
-
-static u8 CheckLevelCap(u8 partyIdx) {
-  u8 i;
-
-  u8 monsInRange = 0;
-  u8 monsInNextRange = 0;
-  u8 level = gPlayerParty[partyIdx].level;
-
-  u8 requiredMonsInRange = BadgeCount();
-  if (requiredMonsInRange > 5) {
-    requiredMonsInRange = 5;
-  }
-
-  for (i = 0; i < gPlayerPartyCount; ++i) {
-    if (i == partyIdx) {
-      continue;
-    }
-    if (gPlayerParty[i].level >= (level-4)) {
-      monsInNextRange++;
-    }
-    if (gPlayerParty[i].level >= (level-5)) {
-      monsInRange++;
-    }
-  }
-
-  if (monsInRange < requiredMonsInRange) {
-    return AT_CAP;
-  } else if (monsInNextRange < requiredMonsInRange) {
-    return ONE_AWAY_FROM_CAP;
-  } else if (monsInRange < (requiredMonsInRange+1)) {
-    return AT_NEXT_BADGE_CAP;
-  }
-  return NOT_CLOSE_TO_CAP;
-}
-
 static void Cmd_getexp(void)
 {
     u16 item;
@@ -3307,7 +3271,7 @@ static void Cmd_getexp(void)
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId);
 
 
-                    checkLevelCapResult = CheckLevelCap(gBattleStruct->expGetterMonId);
+                    checkLevelCapResult = CheckLevelCap(gPlayerParty[gBattleStruct->expGetterMonId].level);
                     if (checkLevelCapResult == AT_CAP) {
                         // Zero out EXP, and print the level cap string.
                         gBattleMoveDamage = 0;

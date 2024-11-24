@@ -57,6 +57,7 @@ static const u8 sText_PkmnGainedNoEXPOverleveled[] = _("{B_BUFF1}'s at the level
 static const u8 sText_EmptyString4[] = _("");
 static const u8 sText_ABoosted[] = _(" a boosted");
 static const u8 sText_PkmnGrewToLv[] = _("{B_BUFF1} grew to\nLV. {B_BUFF2}!{WAIT_SE}\p");
+static const u8 sText_PkmnGrewToLvCap[] = _("{B_BUFF1} hit the\nlevel cap! (LV. {B_BUFF2}){WAIT_SE}\p");
 static const u8 sText_PkmnLearnedMove[] = _("{B_BUFF1} learned\n{B_BUFF2}!{WAIT_SE}\p");
 static const u8 sText_TryToLearnMove1[] = _("{B_BUFF1} is trying to\nlearn {B_BUFF2}.\p");
 static const u8 sText_TryToLearnMove2[] = _("But, {B_BUFF1} can't learn\nmore than four moves.\p");
@@ -894,7 +895,8 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_TRAINER1MON1AND2COMEBACK - BATTLESTRINGS_TABLE_START]      = sText_Trainer1RecallBoth,
     [STRINGID_PKMNGAINEDNOEXPOVERLEVELED - BATTLESTRINGS_TABLE_START]    = sText_PkmnGainedNoEXPOverleveled,
     [STRINGID_PKMNGAINEDEXPALMOSTATCAP - BATTLESTRINGS_TABLE_START]      = sText_PkmnGainedEXPAlmostAtCap,
-    [STRINGID_PKMNGAINEDEXPATNEXTBADGECAP - BATTLESTRINGS_TABLE_START]   = sText_PkmnGainedEXPAtNextBadgeCap
+    [STRINGID_PKMNGAINEDEXPATNEXTBADGECAP - BATTLESTRINGS_TABLE_START]   = sText_PkmnGainedEXPAtNextBadgeCap,
+    [STRINGID_PKMNGREWTOLVCAP - BATTLESTRINGS_TABLE_START]               = sText_PkmnGrewToLvCap,
 };
 
 const u16 gMissStringIds[] =

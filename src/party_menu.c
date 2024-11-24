@@ -30,6 +30,7 @@
 #include "mail.h"
 #include "mail_data.h"
 #include "main.h"
+#include "main_menu.h"
 #include "menu.h"
 #include "menu_helpers.h"
 #include "new_menu_helpers.h"
@@ -419,6 +420,47 @@ void (*gItemUseCB)(u8, TaskFunc);
 #include "data/pokemon/tutor_learnsets.h"
 #include "data/party_menu.h"
 
+u8 CheckLevelCap(u8 level) {
+  u8 i;
+  bool8 seenLevel = FALSE;
+
+  u8 monsInRange = 0;
+  u8 monsInNextRange = 0;
+
+  u8 requiredMonsInRange = BadgeCount();
+  if (requiredMonsInRange > 5) {
+    requiredMonsInRange = 5;
+  }
+
+
+  for (i = 0; i < gPlayerPartyCount; ++i) {
+    if (gPlayerParty[i].level == level) {
+      // The first time we see `level` assume it's
+      // the pokemon we're checking.
+      if (!seenLevel) {
+        seenLevel = TRUE;
+        continue;
+      }
+    }
+    if (gPlayerParty[i].level >= (level-4)) {
+      monsInNextRange++;
+    }
+    if (gPlayerParty[i].level >= (level-5)) {
+      monsInRange++;
+    }
+  }
+
+  if (monsInRange < requiredMonsInRange) {
+    return AT_CAP;
+  } else if (monsInNextRange < requiredMonsInRange) {
+    return ONE_AWAY_FROM_CAP;
+  } else if (monsInRange < (requiredMonsInRange+1)) {
+    return AT_NEXT_BADGE_CAP;
+  }
+  return NOT_CLOSE_TO_CAP;
+}
+
+
 void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCursorPos, u8 messageId, TaskFunc task, MainCallback callback)
 {
     u16 i;
@@ -753,7 +795,13 @@ static void RenderPartyMenuBox(u8 slot)
     {
         if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) == SPECIES_NONE)
         {
+
+            ConvertIntToDecimalStringN(gStringVar2, slot, STR_CONV_MODE_LEFT_ALIGN, 3);
+            StringCopy(gStringVar1, gText_RequiredAtBadge);
+            StringAppend(gStringVar1, gStringVar2);
+
             DrawEmptySlot(sPartyMenuBoxes[slot].windowId);
+            DisplayPartyPokemonBarDetail(sPartyMenuBoxes[slot].windowId, gStringVar1, 0, sPartyMenuBoxes[slot].infoRects->dimensions);
             CopyWindowToVram(sPartyMenuBoxes[slot].windowId, COPYWIN_GFX);
         }
         else
@@ -2332,8 +2380,14 @@ static void DisplayPartyPokemonLevelCheck(struct Pokemon *mon, struct PartyMenuB
 static void DisplayPartyPokemonLevel(u8 level, struct PartyMenuBox *menuBox)
 {
     ConvertIntToDecimalStringN(gStringVar2, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringCopy(gStringVar1, gText_Lv);
-    StringAppend(gStringVar1, gStringVar2);
+    if (CheckLevelCap(level) == AT_CAP) {
+        StringCopy(gStringVar1, gText_LevelCap);
+        StringAppend(gStringVar1, gText_Lv);
+        StringAppend(gStringVar1, gStringVar2);
+    } else {
+        StringCopy(gStringVar1, gText_Lv);
+        StringAppend(gStringVar1, gStringVar2);
+    }
     DisplayPartyPokemonBarDetail(menuBox->windowId, gStringVar1, 0, &menuBox->infoRects->dimensions[4]);
 }
 

@@ -387,8 +387,9 @@
 #define STRINGID_PKMNGAINEDNOEXPOVERLEVELED 386
 #define STRINGID_PKMNGAINEDEXPALMOSTATCAP 387
 #define STRINGID_PKMNGAINEDEXPATNEXTBADGECAP 388
+#define STRINGID_PKMNGREWTOLVCAP 389
 
-#define BATTLESTRINGS_COUNT     389
+#define BATTLESTRINGS_COUNT     390
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

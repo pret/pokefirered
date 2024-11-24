@@ -1926,8 +1926,8 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 inLink)
         // There are 92 TMs including Gen IV ones.
         hash = HashCombine(GameHash(), MapHash());
 
-        seed1 = (hash >> 16) & 0xffff;
-        seed2 = hash & 0xffff;
+        seed1 = SeededRandom((hash >> 16) & 0xffff);
+        seed2 = SeededRandom(hash & 0xffff);
         VarSet(VAR_MAP_ITEM_1, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
         VarSet(VAR_MAP_ITEM_2, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
 

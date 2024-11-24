@@ -44,11 +44,12 @@ u32 MapHash() {
   static u32 gMapHash;
   static const struct MapLayout* gLastMapLayout;
   static const struct MapEvents* gLastEvents;
+  u16 seed1;
+  u16 seed2;
   if ((gLastMapLayout != gMapHeader.mapLayout) || (gLastEvents != gMapHeader.events)) {
-    u8 mapName[32];
-    memset(mapName, 0, 32);
-    GetMapNameGeneric(mapName, gMapHeader.regionMapSectionId);
-    gMapHash = HashCombine(Hash(mapName), HashCombine((u32)gMapHeader.mapLayout, (u32)gMapHeader.events));
+    seed1 = SeededRandom(((u32)gMapHeader.mapLayout ^ (u32)gMapHeader.events) & 0xffff);
+    seed2 = SeededRandom(seed1);
+    gMapHash = ((u32)(seed1) << 16) | seed2;
     gLastMapLayout = gMapHeader.mapLayout;
     gLastEvents = gMapHeader.events;
   }

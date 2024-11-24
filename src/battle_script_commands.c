@@ -3111,20 +3111,43 @@ static void Cmd_jumpiftype(void)
         gBattlescriptCurrInstr += 7;
 }
 
-static bool8 AtLevelCap(u8 partyIdx) {
+static const u8 NOT_CLOSE_TO_CAP = 0;
+static const u8 ONE_AWAY_FROM_CAP = 1;
+static const u8 AT_NEXT_BADGE_CAP = 2;
+static const u8 AT_CAP = 3;
+
+static u8 CheckLevelCap(u8 partyIdx) {
   u8 i;
 
-  // Start at -1 to exclude ourselves.
-  u8 otherMonsInRange = 0;
+  u8 monsInRange = 0;
+  u8 monsInNextRange = 0;
   u8 level = gPlayerParty[partyIdx].level;
 
+  u8 requiredMonsInRange = BadgeCount();
+  if (requiredMonsInRange > 5) {
+    requiredMonsInRange = 5;
+  }
+
   for (i = 0; i < gPlayerPartyCount; ++i) {
-    if ((i != partyIdx) && (gPlayerParty[i].level >= (level-4))) {
-      otherMonsInRange++;
+    if (i == partyIdx) {
+      continue;
+    }
+    if (gPlayerParty[i].level >= (level-4)) {
+      monsInNextRange++;
+    }
+    if (gPlayerParty[i].level >= (level-5)) {
+      monsInRange++;
     }
   }
 
-  return otherMonsInRange < BadgeCount();
+  if (monsInRange < requiredMonsInRange) {
+    return AT_CAP;
+  } else if (monsInNextRange < requiredMonsInRange) {
+    return ONE_AWAY_FROM_CAP;
+  } else if (monsInRange < (requiredMonsInRange+1)) {
+    return AT_NEXT_BADGE_CAP;
+  }
+  return NOT_CLOSE_TO_CAP;
 }
 
 static void Cmd_getexp(void)
@@ -3133,6 +3156,7 @@ static void Cmd_getexp(void)
     s32 i; // also used as stringId
     u8 holdEffect;
     s32 sentIn;
+    u8 checkLevelCapResult;
     s32 viaExpShare = 0;
     u16 *exp = &gBattleStruct->expValue;
 
@@ -3282,16 +3306,25 @@ static void Cmd_getexp(void)
                     // Buffer the Pokemon name because it will always be printed.
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId);
 
-                    if (AtLevelCap(gBattleStruct->expGetterMonId)) {
+
+                    checkLevelCapResult = CheckLevelCap(gBattleStruct->expGetterMonId);
+                    if (checkLevelCapResult == AT_CAP) {
                         // Zero out EXP, and print the level cap string.
                         gBattleMoveDamage = 0;
                         PrepareStringBattle(STRINGID_PKMNGAINEDNOEXPOVERLEVELED, gBattleStruct->expGetterBattlerId);
                     } else {
-                        // buffer 'gained' or 'gained a boosted'
-                        PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
-                        PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
-
-                        PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                        if (checkLevelCapResult == AT_NEXT_BADGE_CAP) {
+                          PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
+                          PrepareStringBattle(STRINGID_PKMNGAINEDEXPATNEXTBADGECAP, gBattleStruct->expGetterBattlerId);
+                        } else if (checkLevelCapResult == ONE_AWAY_FROM_CAP) {
+                          PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
+                          PrepareStringBattle(STRINGID_PKMNGAINEDEXPALMOSTATCAP, gBattleStruct->expGetterBattlerId);
+                        } else {
+                          // buffer 'gained' or 'gained a boosted'
+                          PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
+                          PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
+                          PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                        }
                         MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
                     }
                 }

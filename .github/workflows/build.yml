@@ -22,7 +22,7 @@ jobs:
       UNUSED_ERROR: 1
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install binutils
         run: |

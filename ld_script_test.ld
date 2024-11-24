@@ -109,7 +109,7 @@ SECTIONS {
         *libgcc.a:*.o(.rodata*);
         *libc.a:*.o(.rodata*);
         *libc.a:*.o(.data*);
-        src/isagbprn.o(.rodata);
+        src/libisagbprn.o(.rodata);
     } > ROM =0
 
     .data.iwram :

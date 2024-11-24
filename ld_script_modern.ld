@@ -19,6 +19,7 @@ SECTIONS {
     {
         __ewram_start = .;
         *(.ewram*)
+        . = ALIGN(4);
         __ewram_end = .;
     } > EWRAM
 
@@ -33,6 +34,7 @@ SECTIONS {
     {
         __iwram_start = .;
         *(.iwram*);
+        . = ALIGN(4);
         __iwram_end = .;
     } > IWRAM
 
@@ -46,6 +48,7 @@ SECTIONS {
 
         src/m4a.o(.bss.code);
 
+        src/*.o(common_data);
         src/*.o(COMMON);
         *libc.a:*.o(COMMON);
         *libnosys.a:*.o(COMMON);
@@ -88,7 +91,7 @@ SECTIONS {
         *libgcc.a:*.o(.text*);
         *libc.a:*.o(.text*);
         *libnosys.a:*.o(.text*);
-        src/isagbprn.o(.text);
+        src/libisagbprn.o(.text);
     } > ROM =0
 
     .rodata :
@@ -118,7 +121,7 @@ SECTIONS {
         *libgcc.a:*.o(.rodata*);
         *libc.a:*.o(.rodata*);
         *libc.a:*.o(.data*);
-        src/isagbprn.o(.rodata);
+        src/libisagbprn.o(.rodata);
     } > ROM =0
 
     multiboot_data :

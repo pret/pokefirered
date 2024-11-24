@@ -1545,6 +1545,7 @@ static void fprint_species(FILE *f, const char *prefix, struct String s)
         static const unsigned char *male = (unsigned char *)u8"♂";
         static const unsigned char *female = (unsigned char *)u8"♀";
         static const unsigned char *e_diacritic = (unsigned char *)u8"é";
+        static const unsigned char *right_single_quotation_mark = (unsigned char *)u8"’";
         for (int i = 0; i < s.string_n; i++)
         {
             unsigned char c = s.string[i];
@@ -1562,7 +1563,7 @@ static void fprint_species(FILE *f, const char *prefix, struct String s)
                 underscore = false;
                 fputc(c - 'a' + 'A', f);
             }
-            else if (c == '\'' || c == '%')
+            else if (c == '\'' || c == '%' || is_utf8_character(s, &i, right_single_quotation_mark))
             {
                 // Do nothing.
             }

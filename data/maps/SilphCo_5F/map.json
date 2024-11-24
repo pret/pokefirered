@@ -4,7 +4,7 @@
   "layout": "LAYOUT_SILPH_CO_5F",
   "music": "MUS_SILPH",
   "region_map_section": "MAPSEC_SILPH_CO",
-  "requires_flash": false,
+  "requires_flash": true,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
   "allow_cycling": false,

@@ -1,5 +1,5 @@
 CeladonCity_EventScript_ItemEther::
-  finditem -1
+  finditem -4
   end
 
 CeruleanCave_1F_EventScript_ItemFullRestore::
@@ -107,7 +107,7 @@ FourIsland_IcefallCave_B1F_EventScript_ItemNeverMeltIce::
   end
 
 FuchsiaCity_WardensHouse_EventScript_ItemRareCandy::
-  finditem -1
+  finditem -4
   end
 
 MtEmber_Exterior_EventScript_ItemDireHit::
@@ -355,7 +355,7 @@ Route11_EventScript_ItemXDefend::
   end
 
 Route12_EventScript_ItemIron::
-  finditem -1
+  finditem -5
   end
 
 Route12_EventScript_ItemTM48::
@@ -371,7 +371,7 @@ Route24_EventScript_ItemTM45::
   end
 
 Route25_EventScript_ItemTM43::
-  finditem -1
+  finditem -2
   end
 
 Route2_EventScript_ItemEther::
@@ -651,7 +651,7 @@ VictoryRoad_3F_EventScript_ItemTM50::
   end
 
 ViridianCity_EventScript_ItemPotion::
-  finditem -1
+  finditem -4
   end
 
 ViridianForest_EventScript_ItemAntidote::

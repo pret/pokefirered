@@ -181,7 +181,7 @@ struct PokemonSummaryScreenData
 
         u8 ALIGNED(4) moveCurPpStrBufs[5][11];
         u8 ALIGNED(4) moveMaxPpStrBufs[5][11];
-        u8 ALIGNED(4) moveNameStrBufs[5][MOVE_NAME_LENGTH + 1];
+        u8 ALIGNED(4) moveNameStrBufs[5][MOVE_NAME_LENGTH + 6];
         u8 ALIGNED(4) movePowerStrBufs[5][5];
         u8 ALIGNED(4) moveAccuracyStrBufs[5][5];
 

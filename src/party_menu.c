@@ -454,7 +454,7 @@ u8 CheckLevelCap(u8 level) {
     return AT_CAP;
   } else if (monsInNextRange < requiredMonsInRange) {
     return ONE_AWAY_FROM_CAP;
-  } else if (monsInRange < (requiredMonsInRange+1)) {
+  } else if ((requiredMonsInRange < 5) && (monsInRange < (requiredMonsInRange+1))) {
     return AT_NEXT_BADGE_CAP;
   }
   return NOT_CLOSE_TO_CAP;

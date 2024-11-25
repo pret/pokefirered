@@ -1807,10 +1807,6 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
     u8 i;
     u8 objectCount;
 
-    const u32 hash = HashCombine(GameHash(), MapHash());
-    u16 randX = SeededRandom(hash && 0xffff);
-    u16 randY = SeededRandom((hash >> 16) & 0xffff);
-
     if (gMapHeader.events != NULL)
     {
         s16 left = gSaveBlock1Ptr->pos.x - 2;
@@ -1827,21 +1823,26 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
             s16 npcX = template->x + MAP_OFFSET;
             s16 npcY = template->y + MAP_OFFSET;
 
+            u32 hash;
+            u16 randX;
+            u16 randY;
             u8 j;
             s16 tempX;
             s16 tempY;
-            u32 mt;
 
             // `cave` is repurposed to mean "don't randomize items".
             // It's used to make sure key items are still attainable.
             if (gMapHeader.allowRunning && !gMapHeader.cave &&
                 (GetObjectEventGraphicsInfo(template->graphicsId) == &gObjectEventGraphicsInfo_ItemBall)) {
+              hash = HashCombine(GameHash(), ((u32)(SeededRandom(template->flagId)) << 16) | SeededRandom(template->localId));
+              randX = hash && 0xffff;
+              randY = (hash >> 16) & 0xffff;
               for (j = 0; j < 5; ++j) {
                 randX = SeededRandom(randX);
                 randY = SeededRandom(randY);
 
-                tempX = (randX % gMapHeader.mapLayout->width) + MAP_OFFSET;
-                tempY = (randY % gMapHeader.mapLayout->height) + MAP_OFFSET;
+                tempX = ((randX % (gMapHeader.mapLayout->width - 2)) + 1) + MAP_OFFSET;
+                tempY = ((randY % (gMapHeader.mapLayout->height - 2)) + 1) + MAP_OFFSET;
 
                 if (MapGridGetCollisionAt(tempX, tempY) == COLLISION_NONE &&
                     GetMapBorderIdAt(tempX, tempY) == CONNECTION_NONE) {

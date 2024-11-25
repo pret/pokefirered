@@ -545,17 +545,44 @@ struct MapHeader const *const GetDestinationWarpMapHeader(void)
     return Overworld_GetMapHeaderByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
 }
 
+static void SetMapHashAndSeedItems() {
+  u32 hash;
+  u16 seed1;
+  u16 seed2;
+
+  // Seed the random TMs in this map.
+  // There are 92 TMs including Gen IV ones.
+  hash = HashCombine(GameHash(), MapHash());
+
+  seed1 = SeededRandom((hash >> 16) & 0xffff);
+  seed2 = SeededRandom(hash & 0xffff);
+  VarSet(VAR_MAP_ITEM_1, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
+  VarSet(VAR_MAP_ITEM_2, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
+
+  seed1 = SeededRandom(seed1);
+  seed2 = SeededRandom(seed2);
+  VarSet(VAR_MAP_ITEM_3, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
+  VarSet(VAR_MAP_ITEM_4, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
+
+  seed1 = SeededRandom(seed1);
+  seed2 = SeededRandom(seed2);
+  VarSet(VAR_MAP_ITEM_5, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
+  VarSet(VAR_MAP_ITEM_6, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
+}
+
 static void LoadCurrentMapData(void)
 {
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     gSaveBlock1Ptr->mapLayoutId = gMapHeader.mapLayoutId;
     gMapHeader.mapLayout = GetMapLayout();
+    SetMapHashAndSeedItems();
 }
 
 static void LoadSaveblockMapHeader(void)
 {
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     gMapHeader.mapLayout = GetMapLayout();
+    SetMapHashAndSeedItems();
 }
 
 static void SetPlayerCoordsFromWarp(void)
@@ -1832,10 +1859,6 @@ static bool32 LoadMapInStepsLink(u8 *state)
 
 static bool32 LoadMapInStepsLocal(u8 *state, bool32 inLink)
 {
-    u32 hash;
-    u16 seed1;
-    u16 seed2;
-
     switch (*state)
     {
     case 0:
@@ -1917,25 +1940,6 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 inLink)
             (*state)++;
         break;
     case 14:
-        // Seed the random TMs in this map.
-        // There are 92 TMs including Gen IV ones.
-        hash = HashCombine(GameHash(), MapHash());
-
-        seed1 = SeededRandom((hash >> 16) & 0xffff);
-        seed2 = SeededRandom(hash & 0xffff);
-        VarSet(VAR_MAP_ITEM_1, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-        VarSet(VAR_MAP_ITEM_2, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-
-        seed1 = SeededRandom(seed1);
-        seed2 = SeededRandom(seed2);
-        VarSet(VAR_MAP_ITEM_3, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-        VarSet(VAR_MAP_ITEM_4, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-
-        seed1 = SeededRandom(seed1);
-        seed2 = SeededRandom(seed2);
-        VarSet(VAR_MAP_ITEM_5, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-        VarSet(VAR_MAP_ITEM_6, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-
         return TRUE;
     }
     return FALSE;

@@ -34,6 +34,10 @@
 #include "mon_markings.h"
 #include "pokemon_storage_system.h"
 #include "constants/sound.h"
+#include "battle.h"
+
+const u8 sPhysStr[] =_("\nphys");
+const u8 sSpecStr[] =_("\nspec");
 
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
 extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);
@@ -2271,6 +2275,11 @@ static void BufferMonMoveI(u8 i)
     sMonSummaryScreen->numMoves++;
     sMonSummaryScreen->moveTypes[i] = gBattleMoves[sMonSummaryScreen->moveIds[i]].type;
     StringCopy(sMonSummaryScreen->summary.moveNameStrBufs[i], gMoveNames[sMonSummaryScreen->moveIds[i]]);
+    if (IS_MOVE_PHYSICAL(sMonSummaryScreen->moveIds[i])) {
+        StringAppend(sMonSummaryScreen->summary.moveNameStrBufs[i], sPhysStr);
+    } else if (IS_MOVE_SPECIAL(sMonSummaryScreen->moveIds[i])) {
+        StringAppend(sMonSummaryScreen->summary.moveNameStrBufs[i], sSpecStr);
+    }
 
     if (i >= 4 && sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
     {

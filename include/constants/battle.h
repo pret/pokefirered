@@ -335,7 +335,7 @@
 #define B_WIN_PP                  7
 #define B_WIN_MOVE_TYPE           8
 #define B_WIN_PP_REMAINING        9
-#define B_WIN_DUMMY              10
+#define B_WIN_PSS_ICON           10
 #define B_WIN_SWITCH_PROMPT      11 // "Switch which?"
 #define B_WIN_LEVEL_UP_BOX       12
 #define B_WIN_LEVEL_UP_BANNER    13

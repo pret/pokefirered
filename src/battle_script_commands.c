@@ -26,6 +26,7 @@
 #include "reshow_battle_screen.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
+#include "main_menu.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
@@ -2021,6 +2022,9 @@ static void Cmd_printstring(void)
     if (gBattleControllerExecFlags == 0)
     {
         u16 var = T2_READ_16(gBattlescriptCurrInstr + 1);
+        if ((var == STRINGID_PKMNGREWTOLV) && (CheckLevelCap(gPlayerParty[gBattleStruct->expGetterMonId].level) == AT_CAP)) {
+          var = STRINGID_PKMNGREWTOLVCAP;
+        }
         PrepareStringBattle(var, gBattlerAttacker);
         gBattlescriptCurrInstr += 3;
         gBattleCommunication[MSG_DISPLAY] = 1;
@@ -3116,6 +3120,7 @@ static void Cmd_getexp(void)
     s32 i; // also used as stringId
     u8 holdEffect;
     s32 sentIn;
+    u8 checkLevelCapResult;
     s32 viaExpShare = 0;
     u16 *exp = &gBattleStruct->expValue;
 
@@ -3262,13 +3267,30 @@ static void Cmd_getexp(void)
                         gBattleStruct->expGetterBattlerId = 0;
                     }
 
+                    // Buffer the Pokemon name because it will always be printed.
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId);
-                    // buffer 'gained' or 'gained a boosted'
-                    PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
-                    PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
 
-                    PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
-                    MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
+
+                    checkLevelCapResult = CheckLevelCap(gPlayerParty[gBattleStruct->expGetterMonId].level);
+                    if (checkLevelCapResult == AT_CAP) {
+                        // Zero out EXP, and print the level cap string.
+                        gBattleMoveDamage = 0;
+                        PrepareStringBattle(STRINGID_PKMNGAINEDNOEXPOVERLEVELED, gBattleStruct->expGetterBattlerId);
+                    } else {
+                        if (checkLevelCapResult == AT_NEXT_BADGE_CAP) {
+                          PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
+                          PrepareStringBattle(STRINGID_PKMNGAINEDEXPATNEXTBADGECAP, gBattleStruct->expGetterBattlerId);
+                        } else if (checkLevelCapResult == ONE_AWAY_FROM_CAP) {
+                          PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
+                          PrepareStringBattle(STRINGID_PKMNGAINEDEXPALMOSTATCAP, gBattleStruct->expGetterBattlerId);
+                        } else {
+                          // buffer 'gained' or 'gained a boosted'
+                          PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
+                          PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
+                          PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                        }
+                        MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
+                    }
                 }
                 gBattleStruct->sentInPokes >>= 1;
                 gBattleScripting.getexpState++;
@@ -5207,32 +5229,26 @@ static void Cmd_yesnoboxlearnmove(void)
             {
                 u16 moveId = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MOVE1 + movePosition);
                 
-                if (IsHMMove2(moveId))
+                // We allow HM moves to be forgotten in the challenge.
+
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+
+                PREPARE_MOVE_BUFFER(gBattleTextBuff2, moveId)
+
+                RemoveMonPPBonus(&gPlayerParty[gBattleStruct->expGetterMonId], movePosition);
+                SetMonMoveSlot(&gPlayerParty[gBattleStruct->expGetterMonId], gMoveToLearn, movePosition);
+
+                if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId && MOVE_IS_PERMANENT(0, movePosition))
                 {
-                    PrepareStringBattle(STRINGID_HMMOVESCANTBEFORGOTTEN, gActiveBattler);
-                    gBattleScripting.learnMoveState = 5;
+                    RemoveBattleMonPPBonus(&gBattleMons[0], movePosition);
+                    SetBattleMonMoveSlot(&gBattleMons[0], gMoveToLearn, movePosition);
                 }
-                else
+                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+                    && gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId
+                    && MOVE_IS_PERMANENT(2, movePosition))
                 {
-                    gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-
-                    PREPARE_MOVE_BUFFER(gBattleTextBuff2, moveId)
-
-                    RemoveMonPPBonus(&gPlayerParty[gBattleStruct->expGetterMonId], movePosition);
-                    SetMonMoveSlot(&gPlayerParty[gBattleStruct->expGetterMonId], gMoveToLearn, movePosition);
-
-                    if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId && MOVE_IS_PERMANENT(0, movePosition))
-                    {
-                        RemoveBattleMonPPBonus(&gBattleMons[0], movePosition);
-                        SetBattleMonMoveSlot(&gBattleMons[0], gMoveToLearn, movePosition);
-                    }
-                    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-                        && gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId
-                        && MOVE_IS_PERMANENT(2, movePosition))
-                    {
-                        RemoveBattleMonPPBonus(&gBattleMons[2], movePosition);
-                        SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, movePosition);
-                    }
+                    RemoveBattleMonPPBonus(&gBattleMons[2], movePosition);
+                    SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, movePosition);
                 }
             }
         }
@@ -5722,7 +5738,6 @@ static void Cmd_drawlvlupbox(void)
             VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
             BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
             // Draw page 2 of level up box
-            PlaySE(SE_SELECT);
             DrawLevelUpWindow2();
             CopyWindowToVram(B_WIN_LEVEL_UP_BOX, COPYWIN_GFX);
             gBattleScripting.drawlvlupboxState++;
@@ -5734,7 +5749,6 @@ static void Cmd_drawlvlupbox(void)
             VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
             BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
             // Close level up box
-            PlaySE(SE_SELECT);
             HandleBattleWindow(18, 7, 29, 19, WINDOW_BG1 | WINDOW_CLEAR);
             gBattleScripting.drawlvlupboxState++;
         }

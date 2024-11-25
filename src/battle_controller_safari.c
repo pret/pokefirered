@@ -12,8 +12,10 @@
 #include "pokeball.h"
 #include "util.h"
 #include "strings.h"
+#include "event_data.h"
 #include "constants/songs.h"
 #include "constants/battle_anim.h"
+#include "constants/vars.h"
 
 static void SafariHandleGetMonData(void);
 static void SafariHandleGetRawMonData(void);
@@ -161,7 +163,8 @@ static void SafariBufferRunCommand(void)
 
 static void HandleInputChooseAction(void)
 {
-    if (JOY_NEW(A_BUTTON))
+    // Make L autofire A in battles.
+    if (JOY_NEW(A_BUTTON) || JOY_HELD(L_BUTTON))
     {
         PlaySE(SE_SELECT);
 
@@ -181,6 +184,23 @@ static void HandleInputChooseAction(void)
             break;
         }
         SafariBufferExecCompleted();
+    }
+    else if (JOY_NEW(R_BUTTON) || JOY_HELD(R_BUTTON))
+    {
+        if (gActionSelectionCursor[gActiveBattler] != 3)
+        {
+            PlaySE(SE_SELECT);
+            ActionSelectionDestroyCursorAt(gActionSelectionCursor[gActiveBattler]);
+            gActionSelectionCursor[gActiveBattler] = 3;
+            ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
+        }
+
+        VarSet(VAR_AUTOFIRE_COOLDOWN, VarGet(VAR_AUTOFIRE_COOLDOWN) - 1);
+        if (VarGet(VAR_AUTOFIRE_COOLDOWN) <= 0) {
+            VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
+            SafariBufferExecCompleted();
+        }
     }
     else if (JOY_NEW(DPAD_LEFT))
     {

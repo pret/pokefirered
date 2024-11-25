@@ -34,6 +34,10 @@
 #include "mon_markings.h"
 #include "pokemon_storage_system.h"
 #include "constants/sound.h"
+#include "battle.h"
+
+const u8 sPhysStr[] =_("\nphys");
+const u8 sSpecStr[] =_("\nspec");
 
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
 extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);
@@ -177,7 +181,7 @@ struct PokemonSummaryScreenData
 
         u8 ALIGNED(4) moveCurPpStrBufs[5][11];
         u8 ALIGNED(4) moveMaxPpStrBufs[5][11];
-        u8 ALIGNED(4) moveNameStrBufs[5][MOVE_NAME_LENGTH + 1];
+        u8 ALIGNED(4) moveNameStrBufs[5][MOVE_NAME_LENGTH + 6];
         u8 ALIGNED(4) movePowerStrBufs[5][5];
         u8 ALIGNED(4) moveAccuracyStrBufs[5][5];
 
@@ -2271,6 +2275,11 @@ static void BufferMonMoveI(u8 i)
     sMonSummaryScreen->numMoves++;
     sMonSummaryScreen->moveTypes[i] = gBattleMoves[sMonSummaryScreen->moveIds[i]].type;
     StringCopy(sMonSummaryScreen->summary.moveNameStrBufs[i], gMoveNames[sMonSummaryScreen->moveIds[i]]);
+    if (IS_MOVE_PHYSICAL(sMonSummaryScreen->moveIds[i])) {
+        StringAppend(sMonSummaryScreen->summary.moveNameStrBufs[i], sPhysStr);
+    } else if (IS_MOVE_SPECIAL(sMonSummaryScreen->moveIds[i])) {
+        StringAppend(sMonSummaryScreen->summary.moveNameStrBufs[i], sSpecStr);
+    }
 
     if (i >= 4 && sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
     {
@@ -3765,13 +3774,7 @@ static void UpdateCurrentMonBufferFromPartyOrBox(struct Pokemon * mon)
 
 static u8 PokeSum_CanForgetSelectedMove(void)
 {
-    u16 move;
-
-    move = GetMonMoveBySlotId(&sMonSummaryScreen->currentMon, sMoveSelectionCursorPos);
-
-    if (IsMoveHm(move) == TRUE && sMonSummaryScreen->mode != PSS_MODE_FORGET_MOVE)
-        return FALSE;
-
+    // Allow forgetting HMs.
     return TRUE;
 }
 

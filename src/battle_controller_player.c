@@ -107,6 +107,7 @@ static void Task_GiveExpWithExpBar(u8 taskId);
 static void Task_CreateLevelUpVerticalStripes(u8 taskId);
 static void StartSendOutAnim(u8 battlerId, bool8 dontClearSubstituteBit);
 static void EndDrawPartyStatusSummary(void);
+static void MoveSelectionDisplaySplitIcon(void);
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
@@ -173,6 +174,9 @@ static const u8 sTargetIdentities[] = { B_POSITION_PLAYER_LEFT, B_POSITION_PLAYE
 
 // unknown unused data
 static const u8 sUnused[] = { 0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58 };
+
+static const u16 sSplitIcons_Pal[] = INCBIN_U16("graphics/battle_interface/split_icons_battle.gbapal");
+static const u8 sSplitIcons_Gfx[] = INCBIN_U8("graphics/battle_interface/split_icons_battle.4bpp");
 
 void BattleControllerDummy(void)
 {
@@ -246,7 +250,7 @@ static void HandleInputChooseAction(void)
         }
         PlayerBufferExecCompleted();
     }
-    // Make R automatically run. Need to press it twice.
+    // Make R automatically run. Need to hold it down.
     else if (JOY_NEW(R_BUTTON) || JOY_HELD(R_BUTTON))
     {
         if (gActionSelectionCursor[gActiveBattler] != 3)
@@ -1112,7 +1116,9 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
     exp -= currLvlExp;
     expToNextLvl = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - currLvlExp;
     SetBattleBarStruct(battlerId, gHealthboxSpriteIds[battlerId], expToNextLvl, exp, -gainedExp);
-    PlaySE(SE_EXP);
+    if (gainedExp > 0) {
+      PlaySE(SE_EXP);
+    }
     gTasks[taskId].func = Task_GiveExpWithExpBar;
 }
 
@@ -1438,6 +1444,7 @@ static void MoveSelectionDisplayMoveType(void)
     txtPtr = StringCopy(txtPtr, gText_MoveInterfaceDynamicColors);
     StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
+    MoveSelectionDisplaySplitIcon();
 }
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
@@ -2987,3 +2994,15 @@ static void PreviewDeterminativeMoveTargets(void)
         BeginNormalPaletteFade(bitMask, 8, startY, 0, RGB_WHITE);
     }
 }
+
+static void MoveSelectionDisplaySplitIcon(void){
+	struct ChooseMoveStruct *moveInfo;
+	u32 moveCategory;
+	moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][MAX_BATTLERS_COUNT]);
+    moveCategory = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].category;
+	LoadPalette(sSplitIcons_Pal, 10 * 0x10, 0x20);
+	BlitBitmapToWindow(B_WIN_PSS_ICON, sSplitIcons_Gfx + 0x80 * moveCategory, 0, 0, 16, 16);
+	PutWindowTilemap(B_WIN_PSS_ICON);
+	CopyWindowToVram(B_WIN_PSS_ICON, 3);
+}
+

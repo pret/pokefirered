@@ -15,6 +15,7 @@
 #include "script.h"
 #include "trainer_see.h"
 #include "trig.h"
+#include "pokemon_groups.h"
 #include "constants/maps.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
@@ -1309,30 +1310,36 @@ static u8 GetObjectEventIdByLocalId(u8 localId)
     return OBJECT_EVENTS_COUNT;
 }
 
-static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *template, u8 mapNum, u8 mapGroup)
+static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *template, u8 mapNum, u8 mapGroup, s16 x, s16 y)
 {
     struct ObjectEvent *objectEvent;
     const struct MapHeader *mapHeader;
     u8 objectEventId;
-    s16 x;
-    s16 y;
     bool8 isClone = FALSE;
     u8 localId = 0;
     s16 x2 = 0;
     s16 y2 = 0;
     s16 x3 = 0;
     s16 y3 = 0;
-    
+
+    // Fallback to the default params in some places.
+    // This seems to be used for making items appear based
+    // on the story; e.g. silph scope.
+    if (x == -1 && y == -1) {
+      x = template->x;
+      y = template->y;
+    }
+
     if (template->kind == OBJ_KIND_CLONE)
     {
         isClone = TRUE;
         localId = template->objUnion.clone.targetLocalId;
         mapNum = template->objUnion.clone.targetMapNum;
         mapGroup = template->objUnion.clone.targetMapGroup;
-        x2 = template->x;
-        y2 = template->y;
-        x3 = template->x;
-        y3 = template->y;
+        x2 = x;
+        y2 = y;
+        x3 = x;
+        y3 = y;
         mapHeader = Overworld_GetMapHeaderByGroupAndId(mapGroup, mapNum);
         template = &(mapHeader->events->objectEvents[localId - 1]);
     }
@@ -1352,9 +1359,10 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     }
     else
     {
-        x = template->x + MAP_OFFSET;
-        y = template->y + MAP_OFFSET;
+        x = x + MAP_OFFSET;
+        y = y + MAP_OFFSET;
     }
+
     objectEvent->active = TRUE;
     objectEvent->triggerGroundEffectsOnMove = TRUE;
     objectEvent->graphicsId = template->graphicsId;
@@ -1465,6 +1473,7 @@ static void SetHideObstacleFlag(const struct ObjectEventTemplate *template)
         FlagSet(template->flagId);
 }
 
+/* Not used.
 u8 Unref_TryInitLocalObjectEvent(u8 localId)
 {
     u8 i;
@@ -1485,6 +1494,7 @@ u8 Unref_TryInitLocalObjectEvent(u8 localId)
 
     return OBJECT_EVENTS_COUNT;
 }
+*/
 
 static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *objectEventId)
 // Looks for an empty slot.
@@ -1549,7 +1559,7 @@ void Unref_RemoveAllObjectEventsExceptPlayer(void)
     }
 }
 
-static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
+static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY, s16 x, s16 y)
 {
     u8 spriteId;
     u8 objectEventId;
@@ -1557,7 +1567,7 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     struct ObjectEvent *objectEvent;
     const struct ObjectEventGraphicsInfo *graphicsInfo;
 
-    objectEventId = InitObjectEventStateFromTemplate(objectEventTemplate, mapNum, mapGroup);
+    objectEventId = InitObjectEventStateFromTemplate(objectEventTemplate, mapNum, mapGroup, x, y);
     if (objectEventId == OBJECT_EVENTS_COUNT)
         return OBJECT_EVENTS_COUNT;
 
@@ -1599,7 +1609,7 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     return objectEventId;
 }
 
-static u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
+static u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEventTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY, s16 x, s16 y)
 {
     u8 objectEventId;
     struct SpriteTemplate spriteTemplate;
@@ -1611,7 +1621,7 @@ static u8 TrySpawnObjectEventTemplate(const struct ObjectEventTemplate *objectEv
     MakeObjectTemplateFromObjectEventTemplate(objectEventTemplate, &spriteTemplate, &subspriteTables);
     spriteFrameImage.size = graphicsInfo->size;
     spriteTemplate.images = &spriteFrameImage;
-    objectEventId = TrySetupObjectEventSprite(objectEventTemplate, &spriteTemplate, mapNum, mapGroup, cameraX, cameraY);
+    objectEventId = TrySetupObjectEventSprite(objectEventTemplate, &spriteTemplate, mapNum, mapGroup, cameraX, cameraY, x, y);
     if (objectEventId == OBJECT_EVENTS_COUNT)
         return OBJECT_EVENTS_COUNT;
 
@@ -1628,7 +1638,7 @@ u8 SpawnSpecialObjectEvent(struct ObjectEventTemplate *objectEventTemplate)
     s16 cameraY;
 
     GetObjectEventMovingCameraOffset(&cameraX, &cameraY);
-    return TrySpawnObjectEventTemplate(objectEventTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
+    return TrySpawnObjectEventTemplate(objectEventTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY, -1, -1);
 }
 
 int SpawnSpecialObjectEventParameterized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 elevation)
@@ -1661,7 +1671,7 @@ u8 TrySpawnObjectEvent(u8 localId, u8 mapNum, u8 mapGroup)
         return OBJECT_EVENTS_COUNT;
 
     GetObjectEventMovingCameraOffset(&cameraX, &cameraY);
-    return TrySpawnObjectEventTemplate(objectEventTemplate, mapNum, mapGroup, cameraX, cameraY);
+    return TrySpawnObjectEventTemplate(objectEventTemplate, mapNum, mapGroup, cameraX, cameraY, -1, -1);
 }
 
 void CopyObjectGraphicsInfoToSpriteTemplate(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables)
@@ -1809,12 +1819,43 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
         for (i = 0; i < objectCount; i++)
         {
             struct ObjectEventTemplate *template = &gSaveBlock1Ptr->objectEventTemplates[i];
+
             s16 npcX = template->x + MAP_OFFSET;
             s16 npcY = template->y + MAP_OFFSET;
 
+            u32 hash;
+            u16 randX;
+            u16 randY;
+            u8 j;
+            s16 tempX;
+            s16 tempY;
+
+            // `cave` is repurposed to mean "don't randomize items".
+            // It's used to make sure key items are still attainable.
+            if (gMapHeader.allowRunning && !gMapHeader.cave &&
+                (GetObjectEventGraphicsInfo(template->graphicsId) == &gObjectEventGraphicsInfo_ItemBall)) {
+              hash = HashCombine(GameHash(), ((u32)(SeededRandom(template->flagId)) << 16) | SeededRandom(template->localId));
+              randX = hash && 0xffff;
+              randY = (hash >> 16) & 0xffff;
+              for (j = 0; j < 5; ++j) {
+                randX = SeededRandom(randX);
+                randY = SeededRandom(randY);
+
+                tempX = ((randX % (gMapHeader.mapLayout->width - 2)) + 1) + MAP_OFFSET;
+                tempY = ((randY % (gMapHeader.mapLayout->height - 2)) + 1) + MAP_OFFSET;
+
+                if (MapGridGetCollisionAt(tempX, tempY) == COLLISION_NONE &&
+                    GetMapBorderIdAt(tempX, tempY) == CONNECTION_NONE) {
+                  npcX = tempX;
+                  npcY = tempY;
+                  break;
+                }
+              }
+            }
+
             if (top <= npcY && bottom >= npcY && left <= npcX && right >= npcX
                 && !FlagGet(template->flagId))
-                TrySpawnObjectEventTemplate(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
+                TrySpawnObjectEventTemplate(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY, npcX - MAP_OFFSET, npcY - MAP_OFFSET);
         }
     }
 }

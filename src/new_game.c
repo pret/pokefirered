@@ -161,6 +161,8 @@ void NewGameInitData(void)
 
     // Init autofire.
     VarSet(VAR_AUTOFIRE_COOLDOWN, MAX_AUTOFIRE_COOLDOWN);
+
+    FlagSet(FLAG_CHALLENGE_NOT_OVER);
 }
 
 static void ResetMiniGamesResults(void)

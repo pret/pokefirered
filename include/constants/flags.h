@@ -531,21 +531,21 @@
 
 // Unused?
 #define FLAG_0x1FF               0x1FF
-#define FLAG_0x200               0x200
-#define FLAG_0x201               0x201
-#define FLAG_0x202               0x202
-#define FLAG_0x203               0x203
-#define FLAG_0x204               0x204
-#define FLAG_0x205               0x205
-#define FLAG_0x206               0x206
-#define FLAG_0x207               0x207
-#define FLAG_0x208               0x208
-#define FLAG_0x209               0x209
-#define FLAG_0x20A               0x20A
-#define FLAG_0x20B               0x20B
-#define FLAG_0x20C               0x20C
-#define FLAG_0x20D               0x20D
-#define FLAG_0x20E               0x20E
+#define FLAG_CHALLENGE_NOT_OVER  0x200
+#define FLAG_EXT1                0x201
+#define FLAG_EXT2                0x202
+#define FLAG_EXT3                0x203
+#define FLAG_EXT4                0x204
+#define FLAG_EXT5                0x205
+#define FLAG_EXT6                0x206
+#define FLAG_EXT7                0x207
+#define FLAG_EXT8                0x208
+#define FLAG_EXT9                0x209
+#define FLAG_EXT10               0x20A
+#define FLAG_EXT11               0x20B
+#define FLAG_EXT12               0x20C
+#define FLAG_EXT13               0x20D
+#define FLAG_EXT14               0x20E
 #define FLAG_0x20F               0x20F
 #define FLAG_0x210               0x210
 #define FLAG_0x211               0x211

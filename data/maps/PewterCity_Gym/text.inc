@@ -41,13 +41,10 @@ PewterCity_Gym_Text_ReceivedTM39FromBrock::
     .string "from BROCK.$"
 
 PewterCity_Gym_Text_ExplainTM39::
-    .string "A TM, Technical Machine, contains a\n"
-    .string "technique for POKéMON.\p"
     .string "Using a TM teaches the move it\n"
     .string "contains to a POKéMON.\p"
-    .string "A TM is normally good for only one\n"
-    .string "use, but in this ROM hack you can\n"
-    .string "them as much as you want.$"
+    .string "Each TM has infinite uses\n"
+    .string "in this ROM hack.$"
 
 PewterCity_Gym_Text_BrockPostBattle::
     .string "There are all kinds of TRAINERS in\n"

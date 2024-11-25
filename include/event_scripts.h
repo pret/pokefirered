@@ -1131,6 +1131,7 @@ extern const u8 SafariZone_EventScript_TimesUp[];
 extern const u8 SafariZone_EventScript_RetirePrompt[];
 extern const u8 SafariZone_EventScript_OutOfBallsMidBattle[];
 extern const u8 SafariZone_EventScript_OutOfBalls[];
+extern const u8 SafariZone_EventScript_ChallengeDone[];
 
 extern const u8 EventScript_ItemfinderDigUpUnderfootItem[];
 

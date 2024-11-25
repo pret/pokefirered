@@ -976,7 +976,7 @@ static void PrintSaveStats(void)
     // Print time.
     y = 14;
     AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_NORMAL, 2, y, sTextColor_StatName, -1, gSaveStatName_Time);
-    SaveStatToString(SAVE_STAT_TIME, gStringVar4, 2);
+    SaveStatToString(SAVE_STAT_TIME_REMAINING, gStringVar4, 2);
     AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_NORMAL, 81, y, sTextColor_StatValue, -1, gStringVar4);
 
     // Print location.

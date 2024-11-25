@@ -21,6 +21,7 @@
 #include "scanline_effect.h"
 #include "strings.h"
 #include "menu_indicators.h"
+#include "battle.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/quest_log.h"
@@ -1539,6 +1540,9 @@ static void DrawMoveInfoLabels(void)
     CopyWindowToVram(WIN_MOVE_INFO_LABELS, COPYWIN_GFX);
 }
 
+const u8 sPStr[] = _("P");
+const u8 sSStr[] = _("S");
+
 static void PrintMoveInfo(u16 itemId)
 {
     u8 i;
@@ -1557,6 +1561,13 @@ static void PrintMoveInfo(u16 itemId)
         // Draw type icon
         move = ItemIdToBattleMoveId(itemId);
         BlitMenuInfoIcon(WIN_MOVE_INFO, gBattleMoves[move].type + 1, 0, 0);
+
+        // Draw P for physical or S for special
+        if (IS_MOVE_PHYSICAL(move)) {
+            TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL_COPY_2, sPStr, 33, 0, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
+        } else if (IS_MOVE_SPECIAL(move)) {
+            TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL_COPY_2, sSStr, 33, 0, 0, 0, TEXT_SKIP_DRAW, COLOR_MOVE_INFO);
+        }
 
         // Print power
         if (gBattleMoves[move].power < 2)

@@ -4,7 +4,7 @@
   "layout": "LAYOUT_ROCK_TUNNEL_B1F",
   "music": "MUS_MT_MOON",
   "region_map_section": "MAPSEC_ROCK_TUNNEL",
-  "requires_flash": true,
+  "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
   "allow_cycling": true,

@@ -9,6 +9,9 @@ void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
 {
     int nBadges;
     int flagId;
+    s16 h;
+    s16 m;
+    u16 i;
 
     u8 *dest = dest0;
     *dest++ = EXT_CTRL_CODE_BEGIN;
@@ -50,6 +53,27 @@ void SaveStatToString(u8 gameStatId, u8 *dest0, u8 color)
         *dest++ = nBadges + CHAR_0;
         *dest++ = 10; // 'こ'
         *dest++ = EOS;
+        break;
+    case SAVE_STAT_TIME_REMAINING:
+        h = gSaveBlock2Ptr->playTimeHours;
+        m = gSaveBlock2Ptr->playTimeMinutes;
+        if (m == 0) {
+          h = 5-h;
+        } else {
+          h = 4-h;
+          m = 60-m;
+        }
+        if (h < 0) {
+          h = 0;
+          m = 0;
+        }
+        for (i = 0; i < 14; ++i) {
+          if (FlagGet(FLAG_EXT1+i)) h += (i/2)+1;
+        }
+        if (h >= 60) h = 99;
+        dest = ConvertIntToDecimalStringN(dest, h, STR_CONV_MODE_LEFT_ALIGN, 3);
+        *dest++ = CHAR_COLON;
+        dest = ConvertIntToDecimalStringN(dest, m, STR_CONV_MODE_LEADING_ZEROS, 2);
         break;
     }
 }

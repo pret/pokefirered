@@ -4,7 +4,7 @@
   "layout": "LAYOUT_POKEMON_MANSION_B1F",
   "music": "MUS_POKE_MANSION",
   "region_map_section": "MAPSEC_POKEMON_MANSION",
-  "requires_flash": false,
+  "requires_flash": true,
   "weather": "WEATHER_SHADE",
   "map_type": "MAP_TYPE_INDOOR",
   "allow_cycling": false,

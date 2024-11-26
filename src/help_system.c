@@ -51,8 +51,8 @@ struct HelpSystemState
     u8 scrollSub;
 };
 
-struct HelpSystemState gHelpSystemState;
-u16 gHelpContextIdBackup;
+COMMON_DATA struct HelpSystemState gHelpSystemState = {0};
+COMMON_DATA u16 gHelpContextIdBackup = 0;
 
 static bool32 IsCurrentMapInArray(const u16 * mapIdxs);
 static void BuildMainTopicsListAndMoveToH00(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);

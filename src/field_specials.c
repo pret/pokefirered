@@ -50,8 +50,8 @@ static EWRAM_DATA u16 sListMenuLastScrollPosition = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
 
-struct ListMenuTemplate sFieldSpecialsListMenuTemplate;
-u16 sFieldSpecialsListMenuScrollBuffer;
+COMMON_DATA struct ListMenuTemplate sFieldSpecialsListMenuTemplate = {0};
+COMMON_DATA u16 sFieldSpecialsListMenuScrollBuffer = 0;
 
 static void Task_AnimatePcTurnOn(u8 taskId);
 static void PcTurnOnUpdateMetatileId(bool16 flag);

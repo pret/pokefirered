@@ -1529,7 +1529,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
     // For GetSpeciesFromGroup().
     u16 species;
-    u16 manual_random;
+    u16 manualRandom;
     u16 accumulator = trainerNum * 17;
 
     if (trainerNum == TRAINER_SECRET_BASE)
@@ -1545,7 +1545,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
             // This is probably overcomplicated.
             // 49 is used to avoid "rare" route-specific pokemon.
-            manual_random = (accumulator % 49) + 1;
+            manualRandom = (accumulator % 49) + 1;
 
             if (gTrainers[trainerNum].doubleBattle == TRUE)
                 personalityValue = 0x80;
@@ -1569,8 +1569,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
 
-                species = GetSpeciesFromGroup(partyData[i].species, manual_random);
-                CreateMon(&party[i], species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                species = GetSpeciesFromGroup(partyData[i].species, manualRandom);
+                CreateMon(&party[i], species, ScaledTrainerLevel(partyData[i].lvl), fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
             }
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
@@ -1582,8 +1582,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                species = GetSpeciesFromGroup(partyData[i].species, manual_random);
-                CreateMon(&party[i], species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                species = GetSpeciesFromGroup(partyData[i].species, manualRandom);
+                CreateMon(&party[i], species, ScaledTrainerLevel(partyData[i].lvl), fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
@@ -1601,8 +1601,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                species = GetSpeciesFromGroup(partyData[i].species, manual_random);
-                CreateMon(&party[i], species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                species = GetSpeciesFromGroup(partyData[i].species, manualRandom);
+                CreateMon(&party[i], species, ScaledTrainerLevel(partyData[i].lvl), fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
@@ -1616,8 +1616,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                species = GetSpeciesFromGroup(partyData[i].species, manual_random);
-                CreateMon(&party[i], species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                species = GetSpeciesFromGroup(partyData[i].species, manualRandom);
+                CreateMon(&party[i], species, ScaledTrainerLevel(partyData[i].lvl), fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
                 for (j = 0; j < MAX_MON_MOVES; j++)

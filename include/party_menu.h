@@ -91,6 +91,8 @@ enum
     AT_CAP
 };
 
+u8 ScaledTrainerLevel(u8 level);
+u8 ScaledWildLevel(u8 level);
 u8 CheckLevelCap(u8 partyIdx);
 
 #endif // GUARD_PARTY_MENU_H

@@ -6,9 +6,7 @@ CeladonCity_DepartmentStore_Roof_EventScript_ThirstyGirl::
 	special QuestLog_CutRecording
 	lock
 	faceplayer
-	call CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks
-	goto_if_eq VAR_TEMP_1, 0, CeladonCity_DepartmentStore_Roof_EventScript_IWantDrink
-	goto CeladonCity_DepartmentStore_Roof_EventScript_AskGiveDrink
+	goto CeladonCity_DepartmentStore_Roof_EventScript_IWantDrink
 	end
 
 CeladonCity_DepartmentStore_Roof_EventScript_CheckPlayerHasDrinks::

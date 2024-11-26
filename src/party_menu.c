@@ -420,6 +420,27 @@ void (*gItemUseCB)(u8, TaskFunc);
 #include "data/pokemon/tutor_learnsets.h"
 #include "data/party_menu.h"
 
+
+u8 ScaledTrainerLevel(u8 level) {
+  return (BadgeCount() + 1) / 2 + level;
+}
+
+u8 ScaledWildLevel(u8 level) {
+  u8 i;
+  u16 sum;
+
+  if (BadgeCount() == 0) {
+    return level;
+  }
+
+  sum = level;
+  for (i = 0; i < gPlayerPartyCount; ++i) {
+    sum += gPlayerParty[i].level;
+  }
+
+  return sum / (gPlayerPartyCount + 1);
+}
+
 u8 CheckLevelCap(u8 level) {
   u8 i;
   bool8 seenLevel = FALSE;
@@ -431,7 +452,6 @@ u8 CheckLevelCap(u8 level) {
   if (requiredMonsInRange > 5) {
     requiredMonsInRange = 5;
   }
-
 
   for (i = 0; i < gPlayerPartyCount; ++i) {
     if (gPlayerParty[i].level == level) {

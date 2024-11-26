@@ -1,7 +1,6 @@
 CeladonCity_DepartmentStore_Roof_Text_ImThirstyGiveHerDrink::
-    .string "I'm thirsty!\n"
-    .string "I want something to drink!\p"
-    .string "{FONT_NORMAL}Give her a drink?$"
+    .string "I don't have any TMs for you...\n"
+    .string "I'm still thirsty though!$"
 
 CeladonCity_DepartmentStore_Roof_Text_GiveWhichDrink::
     .string "Give her which drink?$"

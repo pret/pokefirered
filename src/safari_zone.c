@@ -8,6 +8,7 @@
 #include "start_menu.h"
 #include "constants/songs.h"
 #include "field_screen_effect.h"
+#include "script_pokemon_util.h"
 
 EWRAM_DATA u8 gNumSafariBalls = 0;
 EWRAM_DATA u16 gSafariZoneStepCounter = 0;
@@ -54,6 +55,7 @@ bool8 SafariZoneTakeStep(void)
         PlaySE(SE_DING_DONG);
         FlagClear(FLAG_CHALLENGE_NOT_OVER);
         ExitSafariMode();
+        HealPlayerParty();
         ScriptContext_SetupScript(SafariZone_EventScript_ChallengeDone);
         return TRUE;
     }

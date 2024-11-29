@@ -2,6 +2,8 @@
 #define GUARD_CONSTANTS_ITEMS_H
 
 #define ITEM_NONE 0
+
+// Balls
 #define ITEM_MASTER_BALL 1
 #define ITEM_ULTRA_BALL 2
 #define ITEM_GREAT_BALL 3
@@ -14,6 +16,8 @@
 #define ITEM_TIMER_BALL 10
 #define ITEM_LUXURY_BALL 11
 #define ITEM_PREMIER_BALL 12
+
+// Pokemon Items
 #define ITEM_POTION 13
 #define ITEM_ANTIDOTE 14
 #define ITEM_BURN_HEAL 15
@@ -104,6 +108,8 @@
 #define ITEM_064 100
 #define ITEM_065 101
 #define ITEM_066 102
+
+// Unusable
 #define ITEM_TINY_MUSHROOM 103
 #define ITEM_BIG_MUSHROOM 104
 #define ITEM_069 105
@@ -122,6 +128,8 @@
 #define ITEM_076 118
 #define ITEM_077 119
 #define ITEM_078 120
+
+// Mails
 #define ITEM_ORANGE_MAIL 121
 #define ITEM_HARBOR_MAIL 122
 #define ITEM_GLITTER_MAIL 123
@@ -134,6 +142,8 @@
 #define ITEM_DREAM_MAIL 130
 #define ITEM_FAB_MAIL 131
 #define ITEM_RETRO_MAIL 132
+
+// Berries
 #define ITEM_CHERI_BERRY 133
 #define ITEM_CHESTO_BERRY 134
 #define ITEM_PECHA_BERRY 135
@@ -187,6 +197,7 @@
 
 #define MAX_BERRY_INDEX ITEM_UNUSED_BERRY_3
 
+// Battle Held items
 #define ITEM_BRIGHT_POWDER 179
 #define ITEM_WHITE_HERB 180
 #define ITEM_MACHO_BRACE 181
@@ -262,11 +273,15 @@
 #define ITEM_0FB 251
 #define ITEM_0FC 252
 #define ITEM_0FD 253
+
+// Contest held items
 #define ITEM_RED_SCARF 254
 #define ITEM_BLUE_SCARF 255
 #define ITEM_PINK_SCARF 256
 #define ITEM_GREEN_SCARF 257
 #define ITEM_YELLOW_SCARF 258
+
+// Key Items
 #define ITEM_MACH_BIKE 259
 #define ITEM_COIN_CASE 260
 #define ITEM_ITEMFINDER 261
@@ -297,6 +312,8 @@
 #define ITEM_ROOT_FOSSIL 286
 #define ITEM_CLAW_FOSSIL 287
 #define ITEM_DEVON_SCOPE 288
+
+// TMs/HMs
 #define ITEM_TM01 289
 #define ITEM_TM02 290
 #define ITEM_TM03 291
@@ -355,8 +372,6 @@
 #define ITEM_HM06 344
 #define ITEM_HM07 345
 #define ITEM_HM08 346
-#define ITEM_15B 347
-#define ITEM_15C 348
 
 #define ITEM_TM01_FOCUS_PUNCH ITEM_TM01
 #define ITEM_TM02_DRAGON_CLAW ITEM_TM02
@@ -416,6 +431,10 @@
 #define ITEM_HM06_ROCK_SMASH ITEM_HM06
 #define ITEM_HM07_WATERFALL ITEM_HM07
 #define ITEM_HM08_DIVE ITEM_HM08
+
+// Unknown
+#define ITEM_15B 347
+#define ITEM_15C 348
 
 // FireRed/LeafGreen
 #define ITEM_OAKS_PARCEL 349

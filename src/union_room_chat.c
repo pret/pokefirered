@@ -594,7 +594,7 @@ static void ChatEntryRoutine_AskQuitChatting(void)
         input = UnionRoomChat_ProcessInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
             sWork->routineState = 3;
@@ -633,7 +633,7 @@ static void ChatEntryRoutine_AskQuitChatting(void)
         input = UnionRoomChat_ProcessInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             UnionRoomChat_StartDisplaySubtask(CHATDISPLAYROUTINE_DESTROYSTDMSGANDYESNO, 0);
             sWork->routineState = 3;
@@ -926,7 +926,7 @@ static void ChatEntryRoutine_SaveAndExit(void)
         input = UnionRoomChat_ProcessInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             sWork->routineState = 12;
             break;
@@ -951,7 +951,7 @@ static void ChatEntryRoutine_SaveAndExit(void)
         input = UnionRoomChat_ProcessInput();
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
         case 1:
             sWork->routineState = 12;
             break;

@@ -736,7 +736,7 @@ static void Task_ItemPcMain(u8 taskId)
         ListMenuGetScrollAndRow(data[0], &sListMenuState.scroll, &sListMenuState.row);
         switch (input)
         {
-        case -1:
+        case MENU_B_PRESSED:
             break;
         case -2:
             PlaySE(SE_SELECT);
@@ -853,7 +853,7 @@ static void Task_ItemPcSubmenuRun(u8 taskId)
     s8 input = Menu_ProcessInputNoWrapAround();
     switch (input)
     {
-    case -1:
+    case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
         Task_ItemPcCancel(taskId);
         break;

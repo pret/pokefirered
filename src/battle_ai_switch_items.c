@@ -380,7 +380,7 @@ void AI_TrySwitchOrUseItem(void)
                     }
                     for (monToSwitchId = 0; monToSwitchId < PARTY_SIZE; ++monToSwitchId)
                     {
-                        if ((!GetMonData(&gEnemyParty[monToSwitchId], MON_DATA_HP) == 0)
+                        if ((GetMonData(&gEnemyParty[monToSwitchId], MON_DATA_HP) != 0)
                          && (monToSwitchId != gBattlerPartyIndexes[battlerIn1])
                          && (monToSwitchId != gBattlerPartyIndexes[battlerIn2])
                          && (monToSwitchId != *(gBattleStruct->monToSwitchIntoId + battlerIn1))

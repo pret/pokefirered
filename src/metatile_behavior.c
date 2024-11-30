@@ -40,9 +40,9 @@ bool8 MetatileBehavior_IsJumpEast(u8 metatileBehavior)
 bool8 MetatileBehavior_IsJumpWest(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_JUMP_WEST)
-            return TRUE;
-        else
-            return FALSE;
+        return TRUE;
+    else
+        return FALSE;
 }
 
 bool8 MetatileBehavior_IsJumpNorth(u8 metatileBehavior)

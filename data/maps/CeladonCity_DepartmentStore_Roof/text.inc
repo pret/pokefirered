@@ -55,9 +55,10 @@ CeladonCity_DepartmentStore_Roof_Text_MySisterIsImmature::
     .string "But, she's so immature, she drives\n"
     .string "me nuts!$"
 
+
 CeladonCity_DepartmentStore_Roof_Text_ImThirstyIWantDrink::
-    .string "I'm thirsty!\n"
-    .string "I want something to drink!$"
+    .string "I don't have any TMs for you...\n"
+    .string "I'm still thirsty though!$"
 
 CeladonCity_DepartmentStore_Roof_Text_FloorSign::
     .string "ROOFTOP SQUARE:\n"

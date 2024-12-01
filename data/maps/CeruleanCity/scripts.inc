@@ -185,7 +185,7 @@ CeruleanCity_EventScript_GruntDefeated::
 	msgbox CeruleanCity_Text_OkayIllReturnStolenTM
 	checkitemspace ITEM_TM28
 	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_EventScript_NoRoomForTM28
-	giveitem_msg CeruleanCity_Text_RecoveredTM28FromGrunt, ITEM_TM28
+	giveitem_msg CeruleanCity_Text_RecoveredTM28FromGrunt, -1
 	msgbox CeruleanCity_Text_BetterGetMovingBye
 	closemessage
 	fadescreen FADE_TO_BLACK

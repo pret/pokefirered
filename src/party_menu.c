@@ -152,6 +152,7 @@ static void CursorCB_Summary(u8 taskId);
 static void CursorCB_Switch(u8 taskId);
 static void CursorCB_Cancel1(u8 taskId);
 static void CursorCB_Item(u8 taskId);
+static void CursorCB_ExpShare(u8 taskId);
 static void CursorCB_Give(u8 taskId);
 static void CursorCB_TakeItem(u8 taskId);
 static void CursorCB_Mail(u8 taskId);
@@ -3097,6 +3098,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     if (ItemIsMail(GetMonData(&mons[slotId], MON_DATA_HELD_ITEM)))
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_MAIL);
     else
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_EXP_SHARE);
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_ITEM);
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_CANCEL1);
 }
@@ -3526,6 +3528,28 @@ static void CursorCB_Item(u8 taskId)
     gTasks[taskId].func = Task_HandleSelectionMenuInput;
 }
 
+void GiveHoldItem(u8 taskId, u16 item) {
+  DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], item, FALSE, FALSE);
+  GiveItemToMon(&gPlayerParty[gPartyMenu.slotId], item);
+  RemoveBagItem(item, 1);
+  gTasks[taskId].func = Task_UpdateHeldItemSprite;
+}
+
+static void CursorCB_ExpShare(u8 taskId)
+{
+    sPartyMenuItemId = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_HELD_ITEM);
+    if (sPartyMenuItemId == ITEM_NONE) {
+      PlaySE(SE_SELECT);
+      // gSpecialVar_ItemId = ITEM_EXP_SHARE;
+      // CB2_GiveHoldItem();
+      PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+      PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+      GiveHoldItem(taskId, ITEM_EXP_SHARE);
+    } else if (sPartyMenuItemId == ITEM_EXP_SHARE) {
+      CursorCB_TakeItem(taskId);
+    }
+}
+
 static void CursorCB_Give(u8 taskId)
 {
     PlaySE(SE_SELECT);
@@ -3569,15 +3593,9 @@ void CB2_GiveHoldItem(void)
 
 static void Task_GiveHoldItem(u8 taskId)
 {
-    u16 item;
-
     if (!gPaletteFade.active)
     {
-        item = gSpecialVar_ItemId;
-        DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], item, FALSE, FALSE);
-        GiveItemToMon(&gPlayerParty[gPartyMenu.slotId], item);
-        RemoveBagItem(item, 1);
-        gTasks[taskId].func = Task_UpdateHeldItemSprite;
+        GiveHoldItem(taskId, gSpecialVar_ItemId);
     }
 }
 

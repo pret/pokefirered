@@ -91,6 +91,7 @@ extern const u8 gText_MenuPokemon[];
 extern const u8 gOtherText_Use[];
 extern const u8 gOtherText_Toss[];
 extern const u8 gOtherText_Give[];
+extern const u8 gOtherText_ExpShare[];
 extern const u8 gOtherText_Exit[];
 extern const u8 gText_ThreeHyphens[];
 extern const u8 gText_SevenHyphens[];

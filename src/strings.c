@@ -123,6 +123,7 @@ const u8 gOtherText_Use[] = _("USE");
 const u8 gOtherText_Toss[] = _("TOSS");
 const u8 gOtherText_Register[] = _("REGISTER");
 const u8 gOtherText_Give[] = _("GIVE");
+const u8 gOtherText_ExpShare[] = _("EXP SHARE");
 const u8 gMenuText_Confirm[] = _("けってい");
 const u8 gOtherText_Walk[] = _("WALK");
 const u8 gFameCheckerText_Cancel[] = _("CANCEL");

@@ -30,23 +30,12 @@ static u16 GetAnimTypeByItemId(u16 itemId);
 
 void StartUseItemAnim_Normal(u8 slotId, u16 itemId, MainCallback callback)
 {
-    struct PokemonSpecialAnim * ptr = AllocPSA(slotId, itemId, callback);
-    if (ptr == NULL)
-        SetMainCallback2(callback);
-    else
-        SetUpUseItemAnim_Normal(ptr);
+    SetMainCallback2(callback);
 }
 
 void StartUseItemAnim_ForgetMoveAndLearnTMorHM(u8 slotId, u16 itemId, u16 moveId, MainCallback callback)
 {
-    struct PokemonSpecialAnim * ptr = AllocPSA(slotId, itemId, callback);
-    if (ptr == NULL)
-        SetMainCallback2(callback);
-    else
-    {
-        StringCopy(ptr->nameOfMoveForgotten, gMoveNames[moveId]);
-        SetUpUseItemAnim_ForgetMoveAndLearnTMorHM(ptr);
-    }
+    SetMainCallback2(callback);
 }
 
 void StartUseItemAnim_CantEvolve(u8 slotId, u16 itemId, MainCallback callback)

@@ -37,31 +37,22 @@ u32 GameHash() {
   if (gGameHash == 0) {
     gGameHash = Hash(gSaveBlock1Ptr->rivalName);
   }
-  return gGameHash;
+  return gGameHash + 1;
 }
 
 u32 MapHash() {
   static u32 gMapHash;
-  static s8 gLastMapGroup;
-  static s8 gLastMapNum;
-
-  u16 seed1;
-  u16 seed2;
+  static s8 gLastMap;
 
   struct WarpData* location = &gSaveBlock1Ptr->location;
+  const u16 map = (location->mapGroup << 8) | location->mapNum;
 
-  const u16 eventCounts = ((u16)(gMapHeader.events->objectEventCount & 0xf) << 12) |
-    ((u16)(gMapHeader.events->objectEventCount & 0xf) << 8) |
-    ((u16)(gMapHeader.events->objectEventCount & 0xf) << 4) |
-    ((u16)(gMapHeader.events->objectEventCount) & 0xf);
-
-  if ((gLastMapGroup != location->mapGroup) || (gLastMapNum != location->mapNum)) {
-    seed1 = SeededRandom(((u16)(location->mapGroup) << 16) | location->mapNum);
-    seed2 = SeededRandom(eventCounts);
-    gMapHash = ((u32)(seed1) << 16) | seed2;
-    gLastMapGroup = location->mapGroup;
-    gLastMapNum = location->mapNum;
+  if (map != gLastMap) {
+    gMapHash = SeededRandom(map * 97);
+    gMapHash = (gMapHash << 16) | SeededRandom(gMapHash);
+    gLastMap =  map;
   }
+
   return gMapHash;
 }
 

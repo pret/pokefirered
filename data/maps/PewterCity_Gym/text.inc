@@ -37,8 +37,8 @@ PewterCity_Gym_Text_TakeThisWithYou::
     .string "Take this with you.$"
 
 PewterCity_Gym_Text_ReceivedTM39FromBrock::
-    .string "{PLAYER} received a TM\n"
-    .string "from BROCK.$"
+    .string "{PLAYER} received a RARE CANDY\n"
+    .string "and TM from BROCK.$"
 
 PewterCity_Gym_Text_ExplainTM39::
     .string "Using a TM teaches the move it\n"

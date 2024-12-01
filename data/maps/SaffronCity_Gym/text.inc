@@ -31,8 +31,8 @@ SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis::
     .string "Wait, please take this TM with you.$"
 
 SaffronCity_Gym_Text_ReceivedTM04FromSabrina::
-    .string "{PLAYER} received a TM\n"
-    .string "from SABRINA.$"
+    .string "{PLAYER} received a RARE CANDY\n"
+    .string "and TM from SABRINA.$"
 
 SaffronCity_Gym_Text_ExplainTM04::
     .string "I hope you like it!$"

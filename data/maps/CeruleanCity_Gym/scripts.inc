@@ -22,6 +22,7 @@ CeruleanCity_Gym_EventScript_GiveTM03::
 	msgbox CeruleanCity_Gym_Text_ExplainCascadeBadge
 	checkitemspace ITEM_TM03
 	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_Gym_EventScript_NoRoomForTM03
+	giveitem ITEM_RARE_CANDY
 	giveitem -1
 	setflag FLAG_GOT_TM03_FROM_MISTY
 	msgbox CeruleanCity_Gym_Text_ExplainTM03

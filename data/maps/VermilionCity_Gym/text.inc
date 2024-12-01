@@ -24,8 +24,8 @@ VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis::
     .string "Take this!$"
 
 VermilionCity_Gym_Text_ReceivedTM34FromLtSurge::
-    .string "{PLAYER} received a TM\n"
-    .string "from LT. SURGE.$"
+    .string "{PLAYER} received a RARE CANDY\n"
+    .string "and TM from LT. SURGE.$"
 
 VermilionCity_Gym_Text_ExplainTM34::
     .string "I hope you like it!$"

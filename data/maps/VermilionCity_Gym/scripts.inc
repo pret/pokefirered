@@ -229,6 +229,7 @@ VermilionCity_Gym_EventScript_GiveTM34::
 	msgbox VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis
 	checkitemspace ITEM_TM34
 	goto_if_eq VAR_RESULT, FALSE, VermilionCity_Gym_EventScript_NoRoomForTM34
+	giveitem ITEM_RARE_CANDY
 	giveitem -1
 	setflag FLAG_GOT_TM34_FROM_SURGE
 	msgbox VermilionCity_Gym_Text_ExplainTM34

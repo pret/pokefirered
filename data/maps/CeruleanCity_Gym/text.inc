@@ -22,8 +22,8 @@ CeruleanCity_Gym_Text_ExplainCascadeBadge::
     .string "You can also have my favorite TM.$"
 
 CeruleanCity_Gym_Text_ReceivedTM03FromMisty::
-    .string "{PLAYER} received a TM\n"
-    .string "from MISTY.$"
+    .string "{PLAYER} received a RARE CANDY\n"
+    .string "and TM from MISTY.$"
 
 CeruleanCity_Gym_Text_BetterMakeRoomForThis::
     .string "You better make room for this!$"

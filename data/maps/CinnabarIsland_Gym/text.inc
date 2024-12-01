@@ -25,8 +25,8 @@ CinnabarIsland_Gym_Text_ExplainVolcanoBadge::
     .string "Here, you can have this, too!$"
 
 CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine::
-    .string "{PLAYER} received a TM\n"
-    .string "from BLAINE.$"
+    .string "{PLAYER} received a RARE CANDY\n"
+    .string "and TM from BLAINE.$"
 
 CinnabarIsland_Gym_Text_BlainePostBattle::
     .string "I hope you like it!$"

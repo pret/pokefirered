@@ -18,12 +18,12 @@ Other changes:
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
  - Gift Pokémon are replaced with Unowns. 
  - Game Corner prize Pokémon are replaced with baby Pokémon.
- - The Department Store vitamin desk now sells select battle items instead (notably excluding Choice Band).
+ - The Department Store vitamin desk now sells select battle items instead (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
  - TMs are reusable.
  - HMs are deletable without the Move Deleter.
- - Trade and happiness evolutions have been replaced with Sun Stone, or Moon Stone in cases where one Pokémon can evovle into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
+ - Trade and happiness evolutions have been replaced with Sun Stone, or Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
  - Hidden items have been removed.
- - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be.
+ - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
  - Flash is no longer required in Rock Tunnel.
  - Player gets 10x the number of steps in the Safari Zone.
  - Shiny Pokémon odds are increased 10x.
@@ -36,16 +36,16 @@ Other changes:
 
 ## Level band / level cap
 
-A 5 level band is in place. A portion the player's team must be within 5 levels, inclusive, of each other;
+A 5 level band is in place. A portion of the player's team must be within 5 levels, inclusive, of each other;
 e.g. a range of 30-35 is valid but 30-36 isn’t. The number of Pokémon that must be within the band is equal
 to the number of badges the player has plus 1. For example, the player has 3 badges, they must have 4 Pokémon
-within 5 levels (inclusive) of each other. If the highest leveled Pokémon exceeds the 5 level band, it will
-stop gaining experience until it is back within the band. Other party Pokémon holding an EXP share will still
-gain EXP, but the Pokémon outside of the band won’t gain EXP (and the EXP it would have gained won’t be
-distributed to the other party Pokémon).
+within 5 levels (inclusive) of each other. If the highest leveled Pokémon exceeds the top of the band (also called
+the _level cap_), it will stop gaining experience until it is back within the band. Other party Pokémon holding an
+EXP share will still gain EXP, but the Pokémon outside of the band won’t gain EXP (and the EXP it would have gained
+won’t be distributed to the other party Pokémon).
 
-The game will issue warnings when a Pokémon is near the current level cap (i.e. the top of the band), or the cap
-at the next badge. The latter warning can be disabled in the OPTION menu.
+The game will issue warnings when a Pokémon is near the current level cap, or the cap at the next badge. The latter
+warning can be disabled in the OPTION menu.
 
 ## Level scaling
 

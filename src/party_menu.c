@@ -425,7 +425,7 @@ void (*gItemUseCB)(u8, TaskFunc);
 u8 ScaledTrainerLevel(u8 level, u8 index) {
   const u8 badgeCount = BadgeCount();
   if (index % 2 == 0) {
-    level += (badgeCount) / 2;
+    level += badgeCount / 2;
   } else {
     level += (badgeCount + 1) / 2;
   }

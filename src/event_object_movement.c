@@ -1807,6 +1807,12 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
     u8 i;
     u8 objectCount;
 
+    u8 s = 0;
+    s16 xs[6];
+    s16 ys[6];
+    memset(xs, 0, 6 * sizeof(s16));
+    memset(ys, 0, 6 * sizeof(s16));
+
     if (gMapHeader.events != NULL)
     {
         s16 left = gSaveBlock1Ptr->pos.x - 2;
@@ -1823,33 +1829,76 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
             s16 npcX = template->x + MAP_OFFSET;
             s16 npcY = template->y + MAP_OFFSET;
 
-            u32 hash;
-            u16 randX;
-            u16 randY;
-            u8 j;
-            s16 tempX;
-            s16 tempY;
-
             // `cave` is repurposed to mean "don't randomize items".
             // It's used to make sure key items are still attainable.
             if (gMapHeader.allowRunning && !gMapHeader.cave &&
                 (GetObjectEventGraphicsInfo(template->graphicsId) == &gObjectEventGraphicsInfo_ItemBall)) {
-              hash = HashCombine(GameHash(), ((u32)(SeededRandom(template->flagId)) << 16) | SeededRandom(template->localId));
-              randX = hash && 0xffff;
-              randY = (hash >> 16) & 0xffff;
-              for (j = 0; j < 5; ++j) {
+              const u32 hashPart1 = (u32)SeededRandom(3797 * (template->flagId % 17 + 1)) << 16;
+              const u32 hashPart2 = SeededRandom(7193 * (template->localId % 9 + 1));
+              const u32 hash = HashCombine(GameHash(), (hashPart1 << 16) | (hashPart2 & 0xffff));
+
+              u16 randX = hash & 0xffff;
+              u16 randY = (hash >> 16) & 0xffff;
+
+              u8 j;
+              u8 k;
+              s16 tempX;
+              s16 tempY;
+
+              bool8 validLocation;
+
+              for (j = 0; j < 16; ++j) {
                 randX = SeededRandom(randX);
                 randY = SeededRandom(randY);
 
-                tempX = ((randX % (gMapHeader.mapLayout->width - 2)) + 1) + MAP_OFFSET;
-                tempY = ((randY % (gMapHeader.mapLayout->height - 2)) + 1) + MAP_OFFSET;
+                tempX = ((randX % (gMapHeader.mapLayout->width - 2)) + 1);
+                tempY = ((randY % (gMapHeader.mapLayout->height - 2)) + 1);
 
-                if (MapGridGetCollisionAt(tempX, tempY) == COLLISION_NONE &&
-                    GetMapBorderIdAt(tempX, tempY) == CONNECTION_NONE) {
-                  npcX = tempX;
-                  npcY = tempY;
-                  break;
+                // Make sure the player can walk on this tile. These functions expect offset values.
+                validLocation = (MapGridGetCollisionAt(tempX + MAP_OFFSET, tempY + MAP_OFFSET) == COLLISION_NONE) &&
+                                (GetMapBorderIdAt(tempX + MAP_OFFSET, tempY + MAP_OFFSET) == CONNECTION_NONE);
+
+                if (!validLocation) {
+                  continue;
                 }
+
+                // Make sure there aren't other events on this tile.
+                for (k = 0; k < objectCount; ++k) {
+                  struct ObjectEventTemplate *other = &gSaveBlock1Ptr->objectEventTemplates[i];
+                  if (other == template) {
+                    continue;
+                  }
+                  validLocation &= (tempX != other->x) && (tempY != other->y);
+                }
+                if (!validLocation) {
+                  continue;
+                }
+
+                // Make sure items aren't in a line, or too close to other items.
+                // (This is necessary because the hash function is bad).
+                for (k = 0; k < s; ++k) {
+                  validLocation &= (tempX != xs[k]) && (tempY != ys[k]);
+                  validLocation &= !((xs[k]-4 <= tempX && tempX <= xs[k]+4) && (ys[k]-4 <= tempY && tempY <= ys[k]+4));
+                }
+                if (!validLocation) {
+                  continue;
+                }
+
+                for (k = 0; k < gMapHeader.events->warpCount; ++k) {
+                  const struct WarpEvent* warp = &gMapHeader.events->warps[k];
+                  validLocation &= (tempX != warp->x) && (tempY != warp->y);
+                }
+                if (!validLocation) {
+                  continue;
+                }
+
+                // Location is valid. We need to add the offset.
+                xs[s] = tempX;
+                ys[s] = tempY;
+                s++;
+                npcX = tempX + MAP_OFFSET;
+                npcY = tempY + MAP_OFFSET;
+                break;
               }
             }
 

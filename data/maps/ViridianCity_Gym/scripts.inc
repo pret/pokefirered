@@ -29,6 +29,7 @@ ViridianCity_Gym_EventScript_GiveTM26::
 	msgbox ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis
 	checkitemspace ITEM_TM26
 	goto_if_eq VAR_RESULT, FALSE, ViridianCity_Gym_EventScript_NoRoomForTM26
+	giveitem ITEM_RARE_CANDY
 	giveitem -1
 	setflag FLAG_GOT_TM26_FROM_GIOVANNI
 	msgbox ViridianCity_Gym_Text_ExplainTM26

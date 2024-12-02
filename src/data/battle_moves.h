@@ -5306,7 +5306,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
      // Not implemented.
     [MOVE_DEFOG] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -5421,7 +5421,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_EMBARGO] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -5549,7 +5549,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_GASTRO_ACID] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -5593,7 +5593,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_GRAVITY] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -5608,7 +5608,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_GUARD_SWAP] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -5681,7 +5681,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not  implemented.
     [MOVE_HEAL_BLOCK] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -5696,7 +5696,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not  implemented.
     [MOVE_HEAL_ORDER] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_BUG,
         .accuracy = 0,
@@ -5711,7 +5711,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not  implemented.
     [MOVE_HEALING_WISH] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -5726,7 +5726,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not  implemented.
     [MOVE_HEART_SWAP] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -5841,7 +5841,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_LUCKY_CHANT] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -5856,7 +5856,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_LUNAR_DANCE] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -5899,7 +5899,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_MAGNET_RISE] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_ELECTRIC,
         .accuracy = 0,
@@ -5914,7 +5914,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_ME_FIRST] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -5943,7 +5943,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_MIRACLE_EYE] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -6103,7 +6103,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_POWER_SWAP] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -6118,7 +6118,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_POWER_TRICK] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -6161,7 +6161,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented.
     [MOVE_PSYCHO_SHIFT] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_PSYCHIC,
         .accuracy = 0,
@@ -6390,7 +6390,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SWITCHEROO] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_DARK,
         .accuracy = 0,
@@ -6448,7 +6448,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TRICK_ROOM] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,
@@ -6535,7 +6535,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WORRY_SEED] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_GRASS,
         .accuracy = 0,
@@ -6593,7 +6593,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     // Not implemented. 
     [MOVE_ACUPRESSURE] =
     {
-        .effect = EFFECT_PROTECT,
+        .effect = EFFECT_METRONOME,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,

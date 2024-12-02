@@ -39,8 +39,8 @@ ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis::
     .string "LEAGUE challenge.$"
 
 ViridianCity_Gym_Text_ReceivedTM26FromGiovanni::
-    .string "{PLAYER} received a TM\n"
-    .string "from GIOVANNI.$"
+    .string "{PLAYER} received a RARE CANDY\n"
+    .string "and TM from GIOVANNI.$"
 
 ViridianCity_Gym_Text_ExplainTM26::
     .string "I hope you like it!$"

@@ -694,6 +694,8 @@ void FadeScreen(u8 mode, s8 delay)
     bool8 fadeOut;
     bool8 useWeatherPal;
 
+    delay = -128;
+
     switch (mode)
     {
     case FADE_FROM_BLACK:

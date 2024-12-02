@@ -151,14 +151,18 @@ void NewGameInitPCItems(void)
   AddBagItem(ITEM_GREAT_BALL, 25);
   AddBagItem(ITEM_ULTRA_BALL, 10);
   AddBagItem(ITEM_POTION, 10);
-  AddBagItem(ITEM_SUPER_POTION, 5);
+  AddBagItem(ITEM_SUPER_POTION, 10);
   AddBagItem(ITEM_FULL_HEAL, 10);
-  AddBagItem(ITEM_REVIVE, 5);
-  AddBagItem(ITEM_ESCAPE_ROPE, 3);
+  AddBagItem(ITEM_ELIXIR, 10);
+  AddBagItem(ITEM_REVIVE, 10);
+  AddBagItem(ITEM_ESCAPE_ROPE, 5);
   AddBagItem(ITEM_EXP_SHARE, 6);
   AddBagItem(ITEM_TOWN_MAP, 1);
   AddBagItem(ITEM_TEACHY_TV, 1);
   AddBagItem(ITEM_OLD_ROD, 1);
+  AddBagItem(ITEM_TM_CASE, 1);
+
+  gSaveBlock1Ptr->registeredItem = ITEM_TM_CASE;
 }
 
 void BedroomPC(void)

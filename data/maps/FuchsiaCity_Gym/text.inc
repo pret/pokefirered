@@ -33,8 +33,8 @@ FuchsiaCity_Gym_Text_KogaExplainSoulBadge::
     .string "Take this, too!$"
 
 FuchsiaCity_Gym_Text_ReceivedTM06FromKoga::
-    .string "{PLAYER} received a TM\n"
-    .string "from KOGA.$"
+    .string "{PLAYER} received a RARE CANDY\n"
+    .string "and TM from KOGA.$"
 
 FuchsiaCity_Gym_Text_KogaExplainTM06::
     .string "I hope you like it!$"

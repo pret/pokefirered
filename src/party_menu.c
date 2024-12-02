@@ -152,6 +152,7 @@ static void CursorCB_Summary(u8 taskId);
 static void CursorCB_Switch(u8 taskId);
 static void CursorCB_Cancel1(u8 taskId);
 static void CursorCB_Item(u8 taskId);
+static void CursorCB_ExpShare(u8 taskId);
 static void CursorCB_Give(u8 taskId);
 static void CursorCB_TakeItem(u8 taskId);
 static void CursorCB_Mail(u8 taskId);
@@ -421,24 +422,64 @@ void (*gItemUseCB)(u8, TaskFunc);
 #include "data/party_menu.h"
 
 
-u8 ScaledTrainerLevel(u8 level) {
-  return (BadgeCount() + 1) / 2 + level;
+u8 ScaledTrainerLevel(u8 level, u8 index) {
+  const u8 badgeCount = BadgeCount();
+  if (index % 2 == 0) {
+    level += badgeCount / 2;
+  } else {
+    level += (badgeCount + 1) / 2;
+  }
+  return level;
+}
+
+void SortDesc(u8 arr[], u8 n) {
+    u8 i, j, temp;
+    for (i = 0; i < n - 1; i++) {
+        // Last i elements are already in place
+        for (j = 0; j < n - i - 1; j++) {
+            if (arr[j] < arr[j + 1]) {
+                // Swap elements
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
 }
 
 u8 ScaledWildLevel(u8 level) {
-  u8 i;
-  u16 sum;
+  u8 numMons, levelSum, i;
+  u8 partyLevels[6];
 
-  if (BadgeCount() == 0) {
-    return level;
-  }
-
-  sum = level;
   for (i = 0; i < gPlayerPartyCount; ++i) {
-    sum += gPlayerParty[i].level;
+    partyLevels[i] = gPlayerParty[i].level;
+  }
+  SortDesc(partyLevels, gPlayerPartyCount);
+
+  // Decrease wild level if it's higher than
+  // the player's highest level.
+  if (level > partyLevels[0]) {
+    level = level * 2 / 3;
   }
 
-  return sum / (gPlayerPartyCount + 1);
+  // Denominator is the number of Pokemon that
+  // contribute to the level cap.
+  numMons = BadgeCount() + 1;
+  if (numMons > gPlayerPartyCount) {
+    numMons = gPlayerPartyCount;
+  }
+
+  // Numerator is sum of party levels, but with the
+  // player's highest Pokemon replaced with the level
+  // the wild Pokemon should be at.
+  levelSum = level;
+
+  // Start at 1 to exclude the player's highest mon.
+  for (i = 1; i < numMons; ++i) {
+    levelSum += partyLevels[i];
+  }
+
+  return levelSum / numMons;
 }
 
 u8 CheckLevelCap(u8 level) {
@@ -3057,6 +3098,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     if (ItemIsMail(GetMonData(&mons[slotId], MON_DATA_HELD_ITEM)))
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_MAIL);
     else
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_EXP_SHARE);
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_ITEM);
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_CANCEL1);
 }
@@ -3486,6 +3528,28 @@ static void CursorCB_Item(u8 taskId)
     gTasks[taskId].func = Task_HandleSelectionMenuInput;
 }
 
+void GiveHoldItem(u8 taskId, u16 item) {
+  DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], item, FALSE, FALSE);
+  GiveItemToMon(&gPlayerParty[gPartyMenu.slotId], item);
+  RemoveBagItem(item, 1);
+  gTasks[taskId].func = Task_UpdateHeldItemSprite;
+}
+
+static void CursorCB_ExpShare(u8 taskId)
+{
+    sPartyMenuItemId = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_HELD_ITEM);
+    if (sPartyMenuItemId == ITEM_NONE) {
+      PlaySE(SE_SELECT);
+      // gSpecialVar_ItemId = ITEM_EXP_SHARE;
+      // CB2_GiveHoldItem();
+      PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+      PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+      GiveHoldItem(taskId, ITEM_EXP_SHARE);
+    } else if (sPartyMenuItemId == ITEM_EXP_SHARE) {
+      CursorCB_TakeItem(taskId);
+    }
+}
+
 static void CursorCB_Give(u8 taskId)
 {
     PlaySE(SE_SELECT);
@@ -3529,15 +3593,9 @@ void CB2_GiveHoldItem(void)
 
 static void Task_GiveHoldItem(u8 taskId)
 {
-    u16 item;
-
     if (!gPaletteFade.active)
     {
-        item = gSpecialVar_ItemId;
-        DisplayGaveHeldItemMessage(&gPlayerParty[gPartyMenu.slotId], item, FALSE, FALSE);
-        GiveItemToMon(&gPlayerParty[gPartyMenu.slotId], item);
-        RemoveBagItem(item, 1);
-        gTasks[taskId].func = Task_UpdateHeldItemSprite;
+        GiveHoldItem(taskId, gSpecialVar_ItemId);
     }
 }
 

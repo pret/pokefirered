@@ -35,8 +35,8 @@ CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
     .string "Please also take this with you.$"
 
 CeladonCity_Gym_Text_ReceivedTM19FromErika::
-    .string "{PLAYER} received a TM\n"
-    .string "from ERIKA.$"
+    .string "{PLAYER} received a RARE CANDY\n"
+    .string "and TM from ERIKA.$"
 
 CeladonCity_Gym_Text_ExplainTM19::
     .string "I hope you like it!$"

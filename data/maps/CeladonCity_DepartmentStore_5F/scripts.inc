@@ -50,8 +50,11 @@ CeladonCity_DepartmentStore_5F_EventScript_ClerkVitamins::
 
 	.align 2
 CeladonCity_DepartmentStore_5F_Vitamins::
+	.2byte ITEM_PP_UP
 	.2byte ITEM_SITRUS_BERRY
 	.2byte ITEM_LUM_BERRY
+	.2byte ITEM_CHESTO_BERRY
+	.2byte ITEM_PERSIM_BERRY
 	.2byte ITEM_DEEP_SEA_SCALE
 	.2byte ITEM_DEEP_SEA_TOOTH
 	.2byte ITEM_FOCUS_BAND

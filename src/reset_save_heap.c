@@ -21,7 +21,7 @@ void ReloadSave(void)
     LoadGameSave(SAVE_NORMAL);
     if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_INVALID)
         Sav2_ClearSetDefault();
-    SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
+    SetPokemonCryStereo(gSaveBlock2Ptr->optionsCapWarning);
     InitHeap(gHeap, HEAP_SIZE);
     SetMainCallback2(CB2_ContinueSavedGame);
 }

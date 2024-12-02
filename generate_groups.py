@@ -93,11 +93,11 @@ pokes = [
 
   ('ABRA', 'Overworld'),
   ('KADABRA', 'CeruleanCave'),
-  ('ALAKAZAM', 'Powerful'),
+  ('ALAKAZAM', 'NotCatchable'),
 
   ('MACHOP', 'Cave1'),
   ('MACHOKE', 'Cave2'),
-  ('MACHAMP', 'Powerful'),
+  ('MACHAMP', 'NotCatchable'),
 
   ('BELLSPROUT', 'GrassRareBug1'),
   ('WEEPINBELL', 'GrassRareBug2'),
@@ -135,7 +135,7 @@ pokes = [
 
   ('GASTLY', 'Spooky1'),
   ('HAUNTER', 'Spooky2'),
-  ('GENGAR', 'Powerful'),
+  ('GENGAR', 'NotCatchable'),
 
   ('ONIX', 'Cave2'),
 
@@ -224,7 +224,7 @@ pokes = [
 
   ('DRATINI', 'Rare2Percent'),
   ('DRAGONAIR', 'CeruleanCave'),
-  ('DRAGONITE', 'Powerful'),
+  ('DRAGONITE', 'NotCatchable'),
 
   ('MEWTWO', 'Uber'),
 
@@ -325,7 +325,7 @@ pokes = [
 
   ('QWILFISH', 'Fish1'),
 
-  ('SCIZOR', 'Powerful'),
+  ('SCIZOR', 'NotCatchable'),
 
   ('SHUCKLE', 'Cave1'),
 
@@ -356,7 +356,7 @@ pokes = [
   ('HOUNDOUR', 'Overworld'),
   ('HOUNDOOM', 'SafariZone'),
 
-  ('KINGDRA', 'Powerful'),
+  ('KINGDRA', 'NotCatchable'),
 
   ('PHANPY', 'Overworld'),
   ('DONPHAN', 'SafariZone'),
@@ -378,7 +378,7 @@ pokes = [
 
   ('MILTANK', 'Overworld'),
 
-  ('BLISSEY', 'Powerful'),
+  ('BLISSEY', 'NotCatchable'),
 
   ('RAIKOU', 'Legendary'),
   ('ENTEI', 'Legendary'),
@@ -386,7 +386,7 @@ pokes = [
 
   ('LARVITAR', 'Rare2Percent'),
   ('PUPITAR', 'CeruleanCave'),
-  ('TYRANITAR', 'Powerful'),
+  ('TYRANITAR', 'NotCatchable'),
 
   ('LUGIA', 'Uber'),
   ('HO_OH', 'Uber'),
@@ -433,7 +433,7 @@ pokes = [
 
   ('RALTS', 'Overworld'),
   ('KIRLIA', 'CeruleanCave'),
-  ('GARDEVOIR', 'Powerful'),
+  ('GARDEVOIR', 'NotCatchable'),
 
   ('SURSKIT', 'LeggedWater1'),
   ('MASQUERAIN', 'LeggedWater2'),
@@ -443,7 +443,7 @@ pokes = [
 
   ('SLAKOTH', 'Rare2Percent'),
   ('VIGOROTH', 'CeruleanCave'),
-  ('SLAKING', 'Powerful'),
+  ('SLAKING', 'NotCatchable'),
 
   ('NINCADA', 'Bug2'),
   ('NINJASK', 'Bug3'),
@@ -508,13 +508,13 @@ pokes = [
 
   ('TRAPINCH', 'Rare2Percent'),
   ('VIBRAVA', 'CeruleanCave'),
-  ('FLYGON', 'Powerful'),
+  ('FLYGON', 'NotCatchable'),
 
   ('CACNEA', 'GrassRareBug1'),
   ('CACTURNE', 'GrassRareBug2'),
 
   ('SWABLU', 'Rare2Percent'),
-  ('ALTARIA', 'Powerful'),
+  ('ALTARIA', 'NotCatchable'),
 
   ('ZANGOOSE', 'Overworld'),
 
@@ -540,7 +540,7 @@ pokes = [
   ('ARMALDO', 'CeruleanCave'),
 
   ('FEEBAS', 'Fish1'),
-  ('MILOTIC', 'Powerful'),
+  ('MILOTIC', 'NotCatchable'),
 
   ('CASTFORM', 'Rare2Percent'),
 
@@ -561,7 +561,7 @@ pokes = [
   ('WYNAUT', 'Banned'),
 
   ('SNORUNT', 'Cave2'),
-  ('GLALIE', 'Powerful'),
+  ('GLALIE', 'NotCatchable'),
 
   ('SPHEAL', 'LeggedWater1'),
   ('SEALEO', 'LeggedWater2'),
@@ -577,11 +577,11 @@ pokes = [
 
   ('BAGON', 'Rare2Percent'),
   ('SHELGON', 'CeruleanCave'),
-  ('SALAMENCE', 'Powerful'),
+  ('SALAMENCE', 'NotCatchable'),
 
   ('BELDUM', 'Rare2Percent'),
   ('METANG', 'CeruleanCave'),
-  ('METAGROSS', 'Powerful'),
+  ('METAGROSS', 'NotCatchable'),
 
   ('REGIROCK', 'Legendary'),
   ('REGICE', 'Legendary'),
@@ -691,9 +691,10 @@ groups = {
   'Fish2': [],
   'LeggedWater1': [],
   'LeggedWater2': [],
+  'Rare2Percent': [],
   'GameCorner': [],
   'Gift': [],
-  'Rare2Percent': [],
+  'CeruleanCave': [],
 }
 
 for pokedex_num in range (1, 387):
@@ -713,44 +714,123 @@ for group_name, pokes_with_id in groups.items():
   if group_name == 'NULL':
       continue
 
-  md += '| ' + group_name + ' |\n| --- |\n|'
+  not_starter_group = 'Starter' not in group_name
+
+  if not_starter_group:
+    md += '| ' + group_name + ' |\n| --- |\n|'
   c = 'const u16 gGroup_' + group_name + '[] =\n{\n  /*SIZE=*/' + str(len(pokes_with_id)) + ',\n'
 
   for (poke_id, poke_name) in pokes_with_id:
-    md += '![](https://www.serebii.net/pokedex-swsh/icon/' + str(poke_id).rjust(3, '0') + '.png "' + poke_name + '") '
+    if not_starter_group:
+      dex_num = str(poke_id).rjust(3, '0')
+      image_url = 'https://www.serebii.net/pokedex-swsh/icon/' + dex_num + '.png'
+      link_url = 'https://www.serebii.net/pokedex-dp/' + dex_num + '.shtml'
+      md += '[![](' + image_url + " '" + poke_name + "')](" + link_url + ')'
     c += '  SPECIES_' + poke_name + ',\n'
 
-  md += '|\n\n'
+  if not_starter_group:
+    md += '|\n\n'
   c_top += c + '};\n\n'
 
 with open('README.md', 'w') as md_file:
   md_file.write('''# Pokémon Challenge
 
-A fork of https://github.com/pret/pokefirered that deterministically
-seeds wild Pokémon, trainer Pokémon, and items based on the Rival
-name specified at the beginning of the game.
+A fork of https://github.com/pret/pokefirered that is meant to be played by multiple players in a timed challenge. The game doesn't support link battles -- players can battle using [Pokémon Showdown](https://pokemonshowdown.com/). 
 
-NOTE: This ROM hack and README are a work-in-progress.
+Major changes:
+ - **Deterministic game seed:** Wild Pokémon, trainer Pokémon, and overworld items are randomized based on the Rival name specified at the beginning of the game. All non-key overworld items contain TMs.
+ - **Time limit:** After 5 hours pass, the player is locked in the Celadon Department Store. A PC and free Move Relearner are added to the Department Store. The game clock doesn't decrease while the START menu is active, including when the player is using the Pokémon summary screen, bag, etc. outside of battle.
+ - **Level band:** Pokémon stop gaining experience if they become too overleveled compared to the rest of the team.
+ - **Level scaling:** Wild and trainer Pokémon levels increase based on the player's party Pokémon levels and badge count.
+ - **Starting items:** Start the game with balls, healing items, the Old Rod, 6 Exp Shares, and more.
+ - **Move tutors & gift TMs:** Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
 
 Other changes:
- - Faster movement and text
- - Physical/special split
- - Gen IV learnsets (though some moves aren't implemented properly)
- - Modified overworld Pokémon encounters
+ - Faster movement and text.
+ - Physical/special split.
+ - Gen IV HG/SS learnsets (though some moves aren't implemented properly).
+ - Gym leaders give the player Rare Candy in addition to a TM upon earning a badge.
+ - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
+ - Gift Pokémon are replaced with Unowns. 
+ - Game Corner prize Pokémon are replaced with baby Pokémon.
+ - The Department Store vitamin desk now sells select battle items instead (notably excluding Choice Band).
+ - TMs are reusable.
+ - HMs are deletable without the Move Deleter.
+ - Trade and happiness evolutions have been replaced with Sun Stone, or Moon Stone in cases where one Pokémon can evovle into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
+ - Hidden items have been removed.
+ - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be.
+ - Flash is no longer required in Rock Tunnel.
+ - Player gets 10x the number of steps in the Safari Zone.
+ - Shiny Pokémon odds are increased 10x.
+ - Party menu shortcut for giving/taking Exp Shares.
+ - Some early events are skipped; e.g. the Old Man.
  - Slightly modified wild encounters:
-   - In the Power Plant, Pikachu is replaced with Plusle
-   - In the Safari Zone, Dratini is replaced with Gyarados
-   - In the Safari Zone, Dragonair is replaced with Starmie
+   - In the Power Plant, Pikachu is replaced with Plusle.
+   - In the Safari Zone, Dratini is replaced with Gyarados.
+   - In the Safari Zone, Dragonair is replaced with Starmie.
 
-## Pokémon groups
+## Level band / level cap
 
-Each Pokémon belongs to a group. Based on the Rival name specified at the
-beginning of the game, Pokémon encountered in the normal FireRed game are
-deterministically replaced with Pokémon from their group, as described below.
+A 5 level band is in place. A portion the player's team must be within 5 levels, inclusive, of each other;
+e.g. a range of 30-35 is valid but 30-36 isn’t. The number of Pokémon that must be within the band is equal
+to the number of badges the player has plus 1. For example, the player has 3 badges, they must have 4 Pokémon
+within 5 levels (inclusive) of each other. If the highest leveled Pokémon exceeds the 5 level band, it will
+stop gaining experience until it is back within the band. Other party Pokémon holding an EXP share will still
+gain EXP, but the Pokémon outside of the band won’t gain EXP (and the EXP it would have gained won’t be
+distributed to the other party Pokémon).
+
+The game will issue warnings when a Pokémon is near the current level cap (i.e. the top of the band), or the cap
+at the next badge. The latter warning can be disabled in the OPTION menu.
+
+## Level scaling
 
 ### Wild encounters
 
-For every game map (i.e. route, dungeon room) in the game, each Pokémon species
+Wild Pokémon levels are scaled based on party Pokémon levels and the level that the wild Pokémon is
+supposed to be at. This is done by replacing the highest party Pokémon level with the level that the
+wild Pokémon is supposed to be at, and then taking the average level of party Pokémon that are required
+to be within the level band, rounded down (floored).
+
+#### Example
+
+Input:
+ - **Number of badges:** 3
+ - **Required Pokémon in band:** 3 + 1 = 4
+ - **Party Pokémon levels:** 25, 24, 22, 21, 12
+ - **Level the wild Pokémon is supposed to be at:** 14
+
+Output:
+ - **Scaled level:** ⌊(14 + 24 + 22 + 21) / 4⌋ = ⌊81 / 4⌋ = 20
+
+### Trainer battles
+
+Trainer Pokémon levels are increased based on the number of badges the player has. For each odd numbered badge,
+even numbered trainer Pokémon levels are increased by 1. For each even numbered badge, odd numbered trainer 
+Pokémon levels are increased by 1.
+
+#### Example
+
+| Player badge count  | Trainer party levels     |
+| ------------------- | ------------------------ |
+| 0 (vanilla FireRed) |   10,   10,   11,   11   |
+| 1                   |   10, **11**, 11, **12** |
+| 2                   | **11**, 11, **12**, 12   |
+| 3                   |   11, **12**, 12, **13** |
+| 4                   | **12**, 12, **13**, 13   |
+| 5                   |   12, **13**, 13, **14** |
+| 6                   | **13**, 13, **14**, 14   |
+| 7                   |   13, **14**, 14, **15** |
+| 8                   | **14**, 14, **15**, 15   |
+
+## Pokémon randomization
+
+Each Pokémon belongs to a group. Based on the Rival name specified at the
+beginning of the game, Pokémon encountered in the normal FireRed game are
+replaced with Pokémon from their group, as described below.
+
+### Wild encounters
+
+For every map (i.e. route, dungeon room) in the game, each Pokémon species
 that is normally discoverable in the wild is deterministically replaced with 2
 species from its group. For example, Pidgey might be replaced by {Taillow, Hoothoot} 
 in Route 1, and {Doduo, Pidgey} in Route 2. There's a ~66% and ~33% chance of
@@ -760,7 +840,9 @@ Additionally, each non-water game map is deterministically assigned a single
 "rare" Pokémon from the `Rare2Percent` group. There is a 2% chance of encountering
 the "rare" Pokémon in each map.
 
-**Example:** In the original game, there's a 50% chance of encountering Pidgey
+#### Example
+
+In the original game, there's a 50% chance of encountering Pidgey
 in Route 1. In our first example above, there will be a ~33% chance of encountering
 Taillow and 17% chance of encountering Hoothoot. There will also be a fixed 2% chance
 of encountering the "rare" species assigned to the route; e.g. Dratini.
@@ -771,14 +853,8 @@ Trainer Pokémon are deterministically replaced with a single Pokémon from thei
 
 ### Group list
 
-NOTE: Groups above `Rare2Percent` in the list below contain species that can be found in
-the wild before the Elite Four. Groups after `Rare2Percent` contain species that can only
-be encountered in trainer battles or in the postgame. This can be useful when attempting
-to determine which Pokémon are catchable in each route.
-
 ''' + md)
 
 with open('include/autogenerated_pokemon_groups.h', 'w') as c_file:
   c_file.write(c_top + c_bottom + '\n#endif\n')
 
-# print(markdown.markdown('<style>table, th, td {border: 1px solid;}</style>' + md, extensions=['tables']))

@@ -14,6 +14,7 @@ Other changes:
  - Faster movement and text.
  - Physical/special split.
  - Gen IV HG/SS learnsets (though some moves aren't implemented properly).
+ - Starter Pokémon are randomized based on the game seed. There is still one grass, water, and fire starter, and they will be chosen from the gen 1-3 starters.
  - Gym leaders give the player Rare Candy in addition to a TM upon earning a badge.
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
  - Gift Pokémon are replaced with Unowns. 

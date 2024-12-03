@@ -10,7 +10,7 @@ ViridianForest_Text_RickIntro::
     .string "Let's battle 'em!$"
 
 ViridianForest_Text_RickDefeat::
-    .string "No!\nCATERPIE can't hack it!$"
+    .string "I found many bugs in this game!$"
 
 ViridianForest_Text_RickPostBattle::
     .string "Ssh! You'll scare the bugs away.\n"
@@ -22,8 +22,8 @@ ViridianForest_Text_DougIntro::
     .string "POKéMON TRAINER!$"
 
 ViridianForest_Text_DougDefeat::
-    .string "Huh?\n"
-    .string "I ran out of POKéMON!$"
+    .string "I found the TM CASE\n"
+    .string "bug in this game!$"
 
 ViridianForest_Text_DougPostBattle::
     .string "That totally stinks! I'm going to\n"

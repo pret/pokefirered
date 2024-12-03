@@ -3,7 +3,7 @@
 A fork of https://github.com/pret/pokefirered that is meant to be played by multiple players in a timed challenge. The game doesn't support link battles -- players can battle using [Pokémon Showdown](https://pokemonshowdown.com/). 
 
 Major changes:
- - **Deterministic game seed:** Wild Pokémon, trainer Pokémon, and overworld items are randomized based on the Rival name specified at the beginning of the game. All non-key overworld items contain TMs.
+ - **Deterministic game seed:** Wild Pokémon, trainer Pokémon, and overworld items are randomized based on the Rival name specified at the beginning of the game. All non-key overworld items contain TMs. Some items may be randomly placed on water or in unreachable areas.
  - **Time limit:** After 5 hours pass, the player is locked in the Celadon Department Store. A PC and free Move Relearner are added to the Department Store. The game clock doesn't decrease while the START menu is active, including when the player is using the Pokémon summary screen, bag, etc. outside of battle.
  - **Level band:** Pokémon stop gaining experience if they become too overleveled compared to the rest of the team.
  - **Level scaling:** Wild and trainer Pokémon levels increase based on the player's party Pokémon levels and badge count.
@@ -11,12 +11,12 @@ Major changes:
  - **Move tutors & gift TMs:** Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
 
 Other changes:
- - Faster movement and text.
- - Physical/special split.
- - Gen IV HG/SS learnsets (though some moves aren't implemented properly).
+ - Faster movement and text. Hold B to use normal walking speed.
+ - Gen IV HG/SS learnsets. Many Gen IV moves aren't implemented properly, and instead have the same effect as Metronome.
  - Starter Pokémon are randomized based on the game seed. There is still one grass, water, and fire starter, and they will be chosen from the gen 1-3 starters.
  - Gym leaders give the player Rare Candy in addition to a TM upon earning a badge.
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
+ - Physical/special split.
  - Gift Pokémon are replaced with Unowns. 
  - Game Corner prize Pokémon are replaced with baby Pokémon.
  - The Department Store vitamin desk now sells select battle items instead (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
@@ -29,6 +29,7 @@ Other changes:
  - Player gets 10x the number of steps in the Safari Zone.
  - Shiny Pokémon odds are increased 10x.
  - Party menu shortcut for giving/taking Exp Shares.
+ - Pewter, Cerulean, and Vermillion Marts sell Revives.
  - Some early events are skipped; e.g. the Old Man.
  - Slightly modified wild encounters:
    - In the Power Plant, Pikachu is replaced with Plusle.
@@ -67,6 +68,12 @@ Input:
 
 Output:
  - **Scaled level:** ⌊(14 + 24 + 22 + 21) / 4⌋ = ⌊81 / 4⌋ = 20
+
+#### Exception for high level Pokémon 
+
+To disincentivize players from rushing to later routes to catch all of their Pokémon, wild Pokémon that
+are supposed to be at a higher level than the player's highest Pokémon will have their level multiplied
+by 0.67 before it is plugged into the scaling formula.
 
 ### Trainer battles
 

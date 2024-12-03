@@ -158,7 +158,6 @@ void NewGameInitPCItems(void)
   AddBagItem(ITEM_ESCAPE_ROPE, 5);
   AddBagItem(ITEM_EXP_SHARE, 6);
   AddBagItem(ITEM_TOWN_MAP, 1);
-  AddBagItem(ITEM_TEACHY_TV, 1);
   AddBagItem(ITEM_OLD_ROD, 1);
   AddBagItem(ITEM_TM_CASE, 1);
 

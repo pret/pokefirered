@@ -456,9 +456,9 @@ u8 ScaledWildLevel(u8 level) {
   }
   SortDesc(partyLevels, gPlayerPartyCount);
 
-  // Decrease wild level if it's higher than
-  // the player's highest level.
-  if (level > partyLevels[0]) {
+  // Decrease wild level if it's at least the
+  // level of the player's highest level.
+  if (level >= partyLevels[0]) {
     level = level * 2 / 3;
   }
 

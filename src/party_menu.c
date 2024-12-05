@@ -5152,8 +5152,10 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 item = gSpecialVar_ItemId;
     bool8 noEffect;
+    u32 level = GetMonData(mon, MON_DATA_LEVEL);
 
-    if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL)
+
+    if (level != MAX_LEVEL && CheckLevelCap(level) != AT_CAP)
         noEffect = PokemonItemUseNoEffect(mon, item, gPartyMenu.slotId, 0);
     else
         noEffect = TRUE;

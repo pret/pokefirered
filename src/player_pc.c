@@ -161,7 +161,7 @@ void NewGameInitPCItems(void)
   AddBagItem(ITEM_OLD_ROD, 1);
   AddBagItem(ITEM_TM_CASE, 1);
 
-  gSaveBlock1Ptr->registeredItem = ITEM_TM_CASE;
+  gSaveBlock1Ptr->registeredItem = ITEM_OLD_ROD;
 }
 
 void BedroomPC(void)

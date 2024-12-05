@@ -740,7 +740,7 @@ A fork of https://github.com/pret/pokefirered that is meant to be played by mult
 Major changes:
  - **Deterministic game seed:** Wild Pokémon, trainer Pokémon, and overworld items are randomized based on the Rival name specified at the beginning of the game. All non-key overworld items contain TMs. Some items may be randomly placed on water or in unreachable areas.
  - **Time limit:** After 5 hours pass, the player is locked in the Celadon Department Store. A PC and free Move Relearner are added to the Department Store. The game clock doesn't decrease while the START menu is active, including when the player is using the Pokémon summary screen, bag, etc. outside of battle.
- - **Level band:** Pokémon stop gaining experience if they become too overleveled compared to the rest of the team.
+ - **Level band:** Pokémon stop gaining experience if they become too overleveled compared to the rest of the team. Rare candies also stop working.
  - **Level scaling:** Wild and trainer Pokémon levels increase based on the player's party Pokémon levels and badge count.
  - **Starting items:** Start the game with balls, healing items, the Old Rod, 6 Exp Shares, and more.
  - **Move tutors & gift TMs:** Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
@@ -754,16 +754,17 @@ Other changes:
  - Physical/special split.
  - Gift Pokémon are replaced with Unowns.
  - Game Corner prize Pokémon are replaced with baby Pokémon.
- - The Department Store vitamin desk now sells select battle items instead (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
- - TMs are reusable.
+ - The Department Store desks on 5F now sell select battle items instead of their usual ones (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
+ - TMs are reusable, and aren't sellable.
  - HMs are deletable without the Move Deleter.
  - Trade and happiness evolutions have been replaced with Sun Stone, or Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
- - Hidden items have been removed.
+ - Hidden items have been removed, except for Coins in the Game Corner.
  - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
  - Flash is no longer required in Rock Tunnel.
  - Player gets 10x the number of steps in the Safari Zone.
  - Shiny Pokémon odds are increased 10x.
  - Party menu shortcut for giving/taking Exp Shares.
+ - The Arena Trap ability has been removed from the game.
  - Pewter, Cerulean, and Vermillion Marts sell Revives.
  - Some early events are skipped; e.g. the Old Man.
  - Slightly modified wild encounters:
@@ -807,8 +808,8 @@ Output:
 #### Exception for high level Pokémon
 
 To disincentivize players from rushing to later routes to catch all of their Pokémon, wild Pokémon that
-are supposed to be at a higher level than the player's highest Pokémon will have their level multiplied
-by 0.67 before it is plugged into the scaling formula.
+are supposed to be at level greater than or equal to the player's highest Pokémon will have their level
+multiplied by 0.67 before it is plugged into the scaling formula.
 
 ### Trainer battles
 

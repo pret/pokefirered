@@ -4,7 +4,7 @@
   "layout": "LAYOUT_ROCKET_HIDEOUT_B4F",
   "music": "MUS_ROCKET_HIDEOUT",
   "region_map_section": "MAPSEC_ROCKET_HIDEOUT",
-  "requires_flash": false,
+  "requires_flash": true,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
   "allow_cycling": false,

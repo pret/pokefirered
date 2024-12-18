@@ -30,6 +30,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_EEVEE_POKEBALL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 7,

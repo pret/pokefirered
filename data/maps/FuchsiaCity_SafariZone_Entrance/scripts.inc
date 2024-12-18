@@ -12,11 +12,11 @@ FuchsiaCity_SafariZone_Entrance_OnFrame::
 FuchsiaCity_SafariZone_Entrance_EventScript_ExitWalkIn::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ApproachCounter
+	applymovement LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ApproachCounter
 	waitmovement 0
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit2
+	applymovement LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit2
 	waitmovement 0
 	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
@@ -29,7 +29,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_ExitWarpIn::
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit
+	applymovement LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit
 	waitmovement 0
 	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
@@ -44,7 +44,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_ExitEarly::
 	goto_if_eq VAR_RESULT, NO, FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_PleaseReturnSafariBalls
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit
+	applymovement LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_Exit
 	waitmovement 0
 	special ExitSafariMode
 	setvar VAR_MAP_SCENE_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 0
@@ -54,7 +54,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_ExitEarly::
 FuchsiaCity_SafariZone_Entrance_EventScript_ReturnToSafariZone::
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_GoodLuck
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ReEnter
+	applymovement LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ReEnter
 	waitmovement 0
 	warp MAP_SAFARI_ZONE_CENTER, 26, 30
 	waitstate
@@ -100,7 +100,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_EntryTriggerLeft::
 FuchsiaCity_SafariZone_Entrance_EventScript_AskEnterSafariZone::
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_WelcomeToSafariZone
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	showmoneybox 0, 0
 	msgbox FuchsiaCity_SafariZone_Entrance_Text_PlaySafariGameFor500, MSGBOX_YESNO
@@ -134,17 +134,17 @@ FuchsiaCity_SafariZone_Entrance_EventScript_TryEnterSafariZone::
 	end
 
 FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneRight::
-	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneRight
+	applymovement LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneRight
 	waitmovement 0
 	return
 
 FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneMid::
-	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneMid
+	applymovement LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneMid
 	waitmovement 0
 	return
 
 FuchsiaCity_SafariZone_Entrance_EventScript_EnterSafariZoneLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneLeft
+	applymovement LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_EnterSafariZoneLeft
 	waitmovement 0
 	return
 
@@ -165,7 +165,7 @@ FuchsiaCity_SafariZone_Entrance_EventScript_NotEnoughMoney::
 FuchsiaCity_SafariZone_Entrance_EventScript_ForcePlayerBack::
 	closemessage
 	hidemoneybox
-	applymovement OBJ_EVENT_ID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ForceBack
+	applymovement LOCALID_PLAYER, FuchsiaCity_SafariZone_Entrance_Movement_ForceBack
 	waitmovement 0
 	releaseall
 	end

@@ -30,6 +30,7 @@
       "flag": "FLAG_HIDE_TOWER_FUJI"
     },
     {
+      "local_id": "LOCALID_POKEMON_TOWER_GRUNT1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 9,
@@ -44,6 +45,7 @@
       "flag": "FLAG_HIDE_TOWER_ROCKET_1"
     },
     {
+      "local_id": "LOCALID_POKEMON_TOWER_GRUNT2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 13,
@@ -58,6 +60,7 @@
       "flag": "FLAG_HIDE_TOWER_ROCKET_2"
     },
     {
+      "local_id": "LOCALID_POKEMON_TOWER_GRUNT3",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 9,

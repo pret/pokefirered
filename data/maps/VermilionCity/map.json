@@ -97,6 +97,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_VERMILION_FERRY_SAILOR",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SAILOR",
       "x": 24,
@@ -307,7 +308,7 @@
       "x": 15,
       "y": 7,
       "respawn_map": "MAP_VERMILION_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": 1
+      "respawn_npc": "LOCALID_VERMILION_NURSE"
     }
   ]
 }

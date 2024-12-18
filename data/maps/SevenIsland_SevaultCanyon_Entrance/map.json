@@ -115,7 +115,7 @@
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
       "x": 7,
       "y": -2,
-      "target_local_id": 1,
+      "target_local_id": "LOCALID_SWORDS_DANCE_TUTOR",
       "target_map": "MAP_SEVEN_ISLAND"
     }
   ],

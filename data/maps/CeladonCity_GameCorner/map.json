@@ -156,6 +156,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_GAME_CORNER_GRUNT",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 11,

@@ -25,12 +25,12 @@ Route7_EastEntrance_EventScript_GuardTriggerBottom::
 
 Route7_EastEntrance_EventScript_GuardTrigger::
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	goto_if_set FLAG_GOT_TEA, Route7_EastEntrance_EventScript_GiveTea
 	msgbox Route7_EastEntrance_Text_ThirstyOnGuardDuty
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Route7_EastEntrance_Movement_BlockPlayerEntry
+	applymovement LOCALID_PLAYER, Route7_EastEntrance_Movement_BlockPlayerEntry
 	waitmovement 0
 	releaseall
 	end
@@ -52,17 +52,17 @@ Route7_EastEntrance_EventScript_GuardDrinkTea::
 	end
 
 Route7_EastEntrance_WalkToGuardTop::
-	applymovement OBJ_EVENT_ID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardTop
+	applymovement LOCALID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardTop
 	waitmovement 0
 	return
 
 Route7_EastEntrance_WalkToGuardMid::
-	applymovement OBJ_EVENT_ID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardMid
+	applymovement LOCALID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardMid
 	waitmovement 0
 	return
 
 Route7_EastEntrance_WalkToGuardBottom::
-	applymovement OBJ_EVENT_ID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardBottom
+	applymovement LOCALID_PLAYER, Route7_EastEntrance_Movement_WalkToGuardBottom
 	waitmovement 0
 	return
 

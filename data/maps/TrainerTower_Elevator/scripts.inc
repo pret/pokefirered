@@ -44,7 +44,7 @@ TrainerTower_Elevator_EventScript_SelectLobby::
 	setvar VAR_ELEVATOR_FLOOR, 3
 	special CloseElevatorCurrentFloorWindow
 	delay 25
-	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Elevator_Movement_ExitElevator
+	applymovement LOCALID_PLAYER, TrainerTower_Elevator_Movement_ExitElevator
 	waitmovement 0
 	warp MAP_TRAINER_TOWER_LOBBY, 17, 8
 	waitstate

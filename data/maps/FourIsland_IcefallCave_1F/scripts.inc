@@ -19,7 +19,7 @@ FourIsland_IcefallCave_1F_OnFrame::
 FourIsland_IcefallCave_1F_EventScript_FallDownHole::
 	lockall
 	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, FourIsland_IcefallCave_1F_Movement_SetInvisible
+	applymovement LOCALID_PLAYER, FourIsland_IcefallCave_1F_Movement_SetInvisible
 	waitmovement 0
 	playse SE_FALL
 	delay 60

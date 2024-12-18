@@ -49,12 +49,12 @@ SeafoamIslands_B3F_EventScript_AddBoulderPresent::
 	return
 
 SeafoamIslands_B3F_EventScript_RideCurrentFar::
-	applymovement OBJ_EVENT_ID_PLAYER, SeafoamIslands_B3F_Movement_RideCurrentFar
+	applymovement LOCALID_PLAYER, SeafoamIslands_B3F_Movement_RideCurrentFar
 	waitmovement 0
 	return
 
 SeafoamIslands_B3F_EventScript_RideCurrentClose::
-	applymovement OBJ_EVENT_ID_PLAYER, SeafoamIslands_B3F_Movement_RideCurrentClose
+	applymovement LOCALID_PLAYER, SeafoamIslands_B3F_Movement_RideCurrentClose
 	waitmovement 0
 	return
 

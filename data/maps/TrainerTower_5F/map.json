@@ -30,6 +30,7 @@
       "flag": "FLAG_TEMP_6"
     },
     {
+      "local_id": "LOCALID_TOWER_TRAINER_DOUBLES1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 10,
@@ -44,6 +45,7 @@
       "flag": "FLAG_TEMP_2"
     },
     {
+      "local_id": "LOCALID_TOWER_TRAINER_SINGLES",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 15,
@@ -58,6 +60,7 @@
       "flag": "FLAG_TEMP_3"
     },
     {
+      "local_id": "LOCALID_TOWER_TRAINER_KNOCKOUT",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_2",
       "x": 10,
@@ -72,6 +75,7 @@
       "flag": "FLAG_TEMP_4"
     },
     {
+      "local_id": "LOCALID_TOWER_TRAINER_DOUBLES2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_3",
       "x": 11,

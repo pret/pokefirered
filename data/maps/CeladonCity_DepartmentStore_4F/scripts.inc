@@ -27,6 +27,7 @@ CeladonCity_DepartmentStore_4F_EventScript_Clerk::
 	.align 2
 CeladonCity_DepartmentStore_4F_Items::
 	.2byte ITEM_POKE_DOLL
+	.2byte ITEM_TRADE_STONE
 	.2byte ITEM_SUN_STONE
 	.2byte ITEM_MOON_STONE
 	.2byte ITEM_FIRE_STONE

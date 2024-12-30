@@ -59,6 +59,7 @@ PowerPlant_EventScript_Zapdos::
 	end
 
 PowerPlant_EventScript_DefeatedZapdos::
+	giveitem ITEM_RARE_CANDY
 	setflag FLAG_FOUGHT_ZAPDOS
 	goto EventScript_RemoveStaticMon
 	end

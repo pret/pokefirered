@@ -48,6 +48,7 @@ MtEmber_Summit_EventScript_Moltres::
 	end
 
 MtEmber_Summit_EventScript_DefeatedMoltres::
+	giveitem ITEM_RARE_CANDY
 	setflag FLAG_FOUGHT_MOLTRES
 	goto EventScript_RemoveStaticMon
 	end

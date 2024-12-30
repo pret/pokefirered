@@ -59,7 +59,7 @@ pokes = [
   ('JIGGLYPUFF', 'Spooky1'),
   ('WIGGLYTUFF', 'Spooky2'),
 
-  ('ZUBAT', 'Spooky1'),
+  ('ZUBAT', 'Cave1'),
   ('GOLBAT', 'Spooky1'),
 
   ('ODDISH', 'GrassBugField1'),
@@ -804,12 +804,13 @@ groups = {
 
 for pokedex_num in range (1, 494):
   (poke_name, group_name) = pokes[pokedex_num]
-  if group_name == 'NULL' or group_name == 'NotInGame':
+  if group_name == 'NULL':
     continue
   if group_name not in groups:
     groups[group_name] = []
   groups[group_name].append((pokedex_num, poke_name))
-  c_bottom += '  [SPECIES_' + poke_name + '] = gGroup_' + group_name + ',\n'
+  if group_name != 'NotInGame':
+    c_bottom += '  [SPECIES_' + poke_name + '] = gGroup_' + group_name + ',\n'
 c_bottom += '};\n'
 
 for starter_group in ['GrassStarter1', 'FireStarter1', 'WaterStarter1']:
@@ -827,6 +828,8 @@ for group_name, pokes_with_id in groups.items():
     md += '| ' + group_name + ' |\n| --- |\n|'
   if group_name != "NotInGame":
     c = 'const u16 gGroup_' + group_name + '[] =\n{\n  /*SIZE=*/' + str(len(pokes_with_id)) + ',\n'
+  else:
+    c = ''
 
   for (poke_id, poke_name) in pokes_with_id:
     if not_starter_group:
@@ -839,7 +842,8 @@ for group_name, pokes_with_id in groups.items():
 
   if not_starter_group:
     md += '|\n\n'
-  c_top += c + '};\n\n'
+  if group_name != "NotInGame":
+    c_top += c + '};\n\n'
 
 with open('README.md', 'w') as md_file:
   md_file.write('''# Pokémon Challenge
@@ -851,6 +855,7 @@ Major changes:
  - **Time limit:** After 5 hours pass, the player is locked in the Celadon Department Store. A PC and free Move Relearner are added to the Department Store. The game clock doesn't decrease while the START menu is active, including when the player is using the Pokémon summary screen, bag, etc. outside of battle.
  - **Level band:** Pokémon stop gaining experience if they become too overleveled compared to the rest of the team. Rare candies also stop working.
  - **Level scaling:** Wild and trainer Pokémon levels increase based on the player's party Pokémon levels and badge count.
+ - **Gen 4 Pokemon:** Most Gen 4 Pokémon in Gen 1-3 families are added (e.g. Munchlax, Weavile). The full list is at the bottom of this page.
  - **Starting items:** Start the game with balls, healing items, the Old Rod, 6 Exp Shares, and more.
  - **Move tutors & gift TMs:** Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
 
@@ -858,7 +863,8 @@ Other changes:
  - Faster movement and text. Hold B to use normal walking speed.
  - Gen IV HG/SS learnsets. Many Gen IV moves aren't implemented properly, and instead have the same effect as Metronome.
  - Starter Pokémon are randomized based on the game seed. There is still one grass, water, and fire starter, and they will be chosen from the gen 1-3 starters.
- - Gym leaders give the player Rare Candy in addition to a TM upon earning a badge.
+ - Gym leaders give the player a Rare Candy in addition to a TM upon earning a badge.
+ - Legendary birds give the player a Rare Candy upon defeat.
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
  - Physical/special split.
  - Gift Pokémon are replaced with Dunsparce.
@@ -866,7 +872,7 @@ Other changes:
  - The Department Store desks on 5F now sell select battle items instead of their usual ones (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
  - TMs are reusable, and aren't sellable.
  - HMs are deletable without the Move Deleter.
- - Trade and happiness evolutions have been replaced with Sun Stone, or Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
+ - Trade and happiness evolutions have been replaced with a new "Trade+ Stone", or Sun Stone & Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
  - Hidden items have been removed, except for Coins in the Game Corner.
  - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
  - Flash is no longer required in Rock Tunnel.
@@ -879,7 +885,6 @@ Other changes:
  - Slightly modified wild encounters:
    - In the Power Plant, Pikachu is replaced with Plusle.
    - In the Safari Zone, Dragonair is replaced with Dratini.
-   - In Cerulean Cave, Wobbuffet is replaced with Dragonair.
 
 ## Level band / level cap
 
@@ -923,7 +928,7 @@ multiplied by 0.67 before it is plugged into the scaling formula.
 ### Trainer battles
 
 Trainer Pokémon levels are increased based on the number of badges the player has. For each odd numbered badge,
-even numbered trainer Pokémon levels are increased by 1. For each even numbered badge, odd numbered trainer
+odd numbered trainer Pokémon levels are increased by 1. For each even numbered badge, even numbered trainer
 Pokémon levels are increased by 1.
 
 #### Example
@@ -931,14 +936,14 @@ Pokémon levels are increased by 1.
 | Player badge count  | Trainer party levels     |
 | ------------------- | ------------------------ |
 | 0 (vanilla FireRed) |   10,   10,   11,   11   |
-| 1                   |   10, **11**, 11, **12** |
-| 2                   | **11**, 11, **12**, 12   |
-| 3                   |   11, **12**, 12, **13** |
-| 4                   | **12**, 12, **13**, 13   |
-| 5                   |   12, **13**, 13, **14** |
-| 6                   | **13**, 13, **14**, 14   |
-| 7                   |   13, **14**, 14, **15** |
-| 8                   | **14**, 14, **15**, 15   |
+| 1                   | **11**, 10, **12**, 11   |
+| 2                   |   11, **11**, 12, **12** |
+| 3                   | **12**, 11, **13**, 12   |
+| 4                   |   12, **12**, 13, **13** |
+| 5                   | **13**, 12, **14**, 13   |
+| 6                   |   13, **13**, 14, **14** |
+| 7                   | **14**, 13, **15**, 14   |
+| 8                   |   14, **14**, 15, **15** |
 
 ## Pokémon randomization
 
@@ -948,22 +953,27 @@ replaced with Pokémon from their group, as described below.
 
 ### Wild encounters
 
-For every map (i.e. route, dungeon room) in the game, each Pokémon species
-that is normally discoverable in the wild is deterministically replaced with 2
-species from its group. For example, Pidgey might be replaced by {Taillow, Hoothoot}
-in Route 1, and {Doduo, Pidgey} in Route 2. There's a ~66% and ~33% chance of
-encountering the 2 replacements, respectively.
+For every map (e.g. route, dungeon room) in the game: 
+  - Each species with an encounter rate less than or equal to 20% is is deterministically
+  replaced with 1 species from its group.
+  - Each Pokémon species with an encounter rate greater than 20% is deterministically
+  replaced with 2 species from its group. There is a ~66% and ~33% chance of encountering
+  the 2 replacements, respectively.
+
+For example, Pidgey might be replaced by {Taillow, Hoothoot} in Route 1, {Doduo, Pidgey}
+in Route 2, and {Delibird} in Route 25. 
 
 Additionally, each non-water game map is deterministically assigned a single
-"rare" Pokémon from the `EarlyBoost` group. There is a 2% chance of encountering
-the "rare" Pokémon in each map.
+Pokémon from the `EarlyBoost` group. The chance of finding one of these Pokémon 
+starts at 4%, and decreases by 0.5% for each badge you have.
 
 #### Example
 
 In the original game, there's a 50% chance of encountering Pidgey
 in Route 1. In our first example above, there will be a ~33% chance of encountering
-Taillow and 17% chance of encountering Hoothoot. There will also be a fixed 2% chance
-of encountering the "rare" species assigned to the route; e.g. Bulbasaur.
+Taillow and 17% chance of encountering Hoothoot. At the beginning of the game, there
+will also be a 4% chance of encountering the `EarlyBoost` species assigned to the route;
+e.g. Bulbasaur.
 
 ### Trainer battles
 

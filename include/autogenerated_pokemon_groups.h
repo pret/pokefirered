@@ -76,7 +76,8 @@ const u16 gGroup_NormalFlying2[] =
 
 const u16 gGroup_Cave1[] =
 {
-  /*SIZE=*/16,
+  /*SIZE=*/17,
+  SPECIES_ZUBAT,
   SPECIES_DIGLETT,
   SPECIES_MACHOP,
   SPECIES_GEODUDE,
@@ -193,10 +194,9 @@ const u16 gGroup_GrassBugField2[] =
 
 const u16 gGroup_Spooky1[] =
 {
-  /*SIZE=*/17,
+  /*SIZE=*/16,
   SPECIES_CLEFAIRY,
   SPECIES_JIGGLYPUFF,
-  SPECIES_ZUBAT,
   SPECIES_GOLBAT,
   SPECIES_GASTLY,
   SPECIES_CUBONE,
@@ -597,7 +597,7 @@ const u16* const gMonGroups[] =
   [SPECIES_NINETALES] = gGroup_SafariZone,
   [SPECIES_JIGGLYPUFF] = gGroup_Spooky1,
   [SPECIES_WIGGLYTUFF] = gGroup_Spooky2,
-  [SPECIES_ZUBAT] = gGroup_Spooky1,
+  [SPECIES_ZUBAT] = gGroup_Cave1,
   [SPECIES_GOLBAT] = gGroup_Spooky1,
   [SPECIES_ODDISH] = gGroup_GrassBugField1,
   [SPECIES_GLOOM] = gGroup_GrassBugField2,

@@ -178,6 +178,7 @@ SeafoamIslands_B4F_EventScript_Articuno::
 	end
 
 SeafoamIslands_B4F_EventScript_DefeatedArticuno::
+	giveitem ITEM_RARE_CANDY
 	setflag FLAG_FOUGHT_ARTICUNO
 	goto EventScript_RemoveStaticMon
 	end

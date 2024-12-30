@@ -424,10 +424,10 @@ void (*gItemUseCB)(u8, TaskFunc);
 
 u8 ScaledTrainerLevel(u8 level, u8 index) {
   const u8 badgeCount = BadgeCount();
-  if (index % 2 == 0) {
-    level += badgeCount / 2;
-  } else {
+  if (index % 2 == 1) {
     level += (badgeCount + 1) / 2;
+  } else {
+    level += (badgeCount) / 2;
   }
   return level;
 }
@@ -5153,9 +5153,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc func)
     u16 item = gSpecialVar_ItemId;
     bool8 noEffect;
     u32 level = GetMonData(mon, MON_DATA_LEVEL);
+    u8 checkLevelCapResult = CheckLevelCap(level);
 
-
-    if (level != MAX_LEVEL && CheckLevelCap(level) != AT_CAP)
+    if (level != MAX_LEVEL && checkLevelCapResult != AT_CAP && checkLevelCapResult != ONE_AWAY_FROM_CAP)
         noEffect = PokemonItemUseNoEffect(mon, item, gPartyMenu.slotId, 0);
     else
         noEffect = TRUE;

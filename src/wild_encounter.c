@@ -225,23 +225,16 @@ static bool8 UnlockedTanobyOrAreNotInTanoby(void)
     return FALSE;
 }
 
-static void GenerateWildMon(u16 species, u8 level, u8 slot)
+static void GenerateWildMon(u16 species, u8 level, u8 slot, u8 encounterRate)
 {
-    u32 personality;
-    s8 chamber;
     ZeroEnemyPartyMons();
     level = ScaledWildLevel(level);
-    if (species != SPECIES_WEAVILE)
-    {
-        species = GetSpeciesFromGroup(species, 0);
-        CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, Random() % NUM_NATURES);
+    if (encounterRate > 20) {
+      species = GetSpeciesFromGroup(species, RAND_INPUT_PICK_2);
+    } else {
+      species = GetSpeciesFromGroup(species, RAND_INPUT_PICK_1);
     }
-    else
-    {
-        chamber = gSaveBlock1Ptr->location.mapNum - MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER);
-        personality = GenerateUnownPersonalityByLetter(sUnownLetterSlots[chamber][slot]);
-        CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, TRUE, personality, FALSE, 0);
-    }
+    CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, Random() % NUM_NATURES);
 }
 
 static u32 GenerateUnownPersonalityByLetter(u8 letter)
@@ -270,14 +263,45 @@ enum
 #define WILD_CHECK_REPEL    0x1
 #define WILD_CHECK_KEEN_EYE 0x2
 
+const u8 sLandSlots[12] = {
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_0,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_1,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_2,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_3,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_4,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_5,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_6,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_7,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_8,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_9,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_10,
+  ENCOUNTER_CHANCE_LAND_MONS_SLOT_11,
+};
+
+const u8 sWaterSlots[5] = {
+  ENCOUNTER_CHANCE_WATER_MONS_SLOT_0,
+  ENCOUNTER_CHANCE_WATER_MONS_SLOT_1,
+  ENCOUNTER_CHANCE_WATER_MONS_SLOT_2,
+  ENCOUNTER_CHANCE_WATER_MONS_SLOT_3,
+  ENCOUNTER_CHANCE_WATER_MONS_SLOT_4,
+};
+
 static bool8 TryGenerateWildMon(const struct WildPokemonInfo * info, u8 area, u8 flags)
 {
     u8 slot = 0;
     u8 level;
+    bool8 isLand = FALSE;
+
+    u8 encounterRate = 0;
+    u8 curr = 0;
+    u8 last = 0;
+    u8 i;
+
     switch (area)
     {
     case WILD_AREA_LAND:
         slot = ChooseWildMonIndex_Land();
+        isLand = TRUE;
         break;
     case WILD_AREA_WATER:
         slot = ChooseWildMonIndex_WaterRock();
@@ -291,7 +315,26 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo * info, u8 area, u8
     {
         return FALSE;
     }
-    GenerateWildMon(info->wildPokemon[slot].species, level, slot);
+
+    if (isLand) {
+      for (i = 0; i < 12; ++i) {
+        curr = sLandSlots[i];
+        if (info->wildPokemon[i].species == info->wildPokemon[slot].species) {
+          encounterRate += curr - last;
+        }
+        last = curr;
+      }
+    } else {
+      for (i = 0; i < 5; ++i) {
+        curr = sWaterSlots[i];
+        if (info->wildPokemon[i].species == info->wildPokemon[slot].species) {
+          encounterRate += curr - last;
+        }
+        last = curr;
+      }
+    }
+
+    GenerateWildMon(info->wildPokemon[slot].species, level, slot, encounterRate);
     return TRUE;
 }
 
@@ -299,7 +342,8 @@ static u16 GenerateFishingEncounter(const struct WildPokemonInfo * info, u8 rod)
 {
     u8 slot = ChooseWildMonIndex_Fishing(rod);
     u8 level = ChooseWildMonLevel(&info->wildPokemon[slot]);
-    GenerateWildMon(info->wildPokemon[slot].species, level, slot);
+    // Map fish to a single pokemon, regardless of catch rate.
+    GenerateWildMon(info->wildPokemon[slot].species, level, slot, /*encounterRate=*/1);
     return info->wildPokemon[slot].species;
 }
 
@@ -527,6 +571,7 @@ void FishingWildEncounter(u8 rod)
     StartWildBattle();
 }
 
+// Looks like this is only used to generate cries in the overworld.
 u16 GetLocalWildMon(bool8 *isWaterMon)
 {
     u16 headerId;

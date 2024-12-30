@@ -7,6 +7,7 @@ Major changes:
  - **Time limit:** After 5 hours pass, the player is locked in the Celadon Department Store. A PC and free Move Relearner are added to the Department Store. The game clock doesn't decrease while the START menu is active, including when the player is using the Pokémon summary screen, bag, etc. outside of battle.
  - **Level band:** Pokémon stop gaining experience if they become too overleveled compared to the rest of the team. Rare candies also stop working.
  - **Level scaling:** Wild and trainer Pokémon levels increase based on the player's party Pokémon levels and badge count.
+ - **Gen 4 Pokemon:** Most Gen 4 Pokémon in Gen 1-3 families are added (e.g. Munchlax, Weavile). The full list is at the bottom of this page.
  - **Starting items:** Start the game with balls, healing items, the Old Rod, 6 Exp Shares, and more.
  - **Move tutors & gift TMs:** Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
 
@@ -14,15 +15,16 @@ Other changes:
  - Faster movement and text. Hold B to use normal walking speed.
  - Gen IV HG/SS learnsets. Many Gen IV moves aren't implemented properly, and instead have the same effect as Metronome.
  - Starter Pokémon are randomized based on the game seed. There is still one grass, water, and fire starter, and they will be chosen from the gen 1-3 starters.
- - Gym leaders give the player Rare Candy in addition to a TM upon earning a badge.
+ - Gym leaders give the player a Rare Candy in addition to a TM upon earning a badge.
+ - Legendary birds give the player a Rare Candy upon defeat.
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
  - Physical/special split.
- - Gift Pokémon are replaced with Unowns.
+ - Gift Pokémon are replaced with Dunsparce.
  - Game Corner prize Pokémon are replaced with baby Pokémon.
  - The Department Store desks on 5F now sell select battle items instead of their usual ones (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
  - TMs are reusable, and aren't sellable.
  - HMs are deletable without the Move Deleter.
- - Trade and happiness evolutions have been replaced with Sun Stone, or Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
+ - Trade and happiness evolutions have been replaced with a new "Trade+ Stone", or Sun Stone & Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
  - Hidden items have been removed, except for Coins in the Game Corner.
  - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
  - Flash is no longer required in Rock Tunnel.
@@ -35,7 +37,6 @@ Other changes:
  - Slightly modified wild encounters:
    - In the Power Plant, Pikachu is replaced with Plusle.
    - In the Safari Zone, Dragonair is replaced with Dratini.
-   - In Cerulean Cave, Wobbuffet is replaced with Dragonair.
 
 ## Level band / level cap
 
@@ -79,7 +80,7 @@ multiplied by 0.67 before it is plugged into the scaling formula.
 ### Trainer battles
 
 Trainer Pokémon levels are increased based on the number of badges the player has. For each odd numbered badge,
-even numbered trainer Pokémon levels are increased by 1. For each even numbered badge, odd numbered trainer
+odd numbered trainer Pokémon levels are increased by 1. For each even numbered badge, even numbered trainer
 Pokémon levels are increased by 1.
 
 #### Example
@@ -87,14 +88,14 @@ Pokémon levels are increased by 1.
 | Player badge count  | Trainer party levels     |
 | ------------------- | ------------------------ |
 | 0 (vanilla FireRed) |   10,   10,   11,   11   |
-| 1                   |   10, **11**, 11, **12** |
-| 2                   | **11**, 11, **12**, 12   |
-| 3                   |   11, **12**, 12, **13** |
-| 4                   | **12**, 12, **13**, 13   |
-| 5                   |   12, **13**, 13, **14** |
-| 6                   | **13**, 13, **14**, 14   |
-| 7                   |   13, **14**, 14, **15** |
-| 8                   | **14**, 14, **15**, 15   |
+| 1                   | **11**, 10, **12**, 11   |
+| 2                   |   11, **11**, 12, **12** |
+| 3                   | **12**, 11, **13**, 12   |
+| 4                   |   12, **12**, 13, **13** |
+| 5                   | **13**, 12, **14**, 13   |
+| 6                   |   13, **13**, 14, **14** |
+| 7                   | **14**, 13, **15**, 14   |
+| 8                   |   14, **14**, 15, **15** |
 
 ## Pokémon randomization
 
@@ -104,22 +105,27 @@ replaced with Pokémon from their group, as described below.
 
 ### Wild encounters
 
-For every map (i.e. route, dungeon room) in the game, each Pokémon species
-that is normally discoverable in the wild is deterministically replaced with 2
-species from its group. For example, Pidgey might be replaced by {Taillow, Hoothoot}
-in Route 1, and {Doduo, Pidgey} in Route 2. There's a ~66% and ~33% chance of
-encountering the 2 replacements, respectively.
+For every map (e.g. route, dungeon room) in the game: 
+  - Each species with an encounter rate less than or equal to 20% is is deterministically
+  replaced with 1 species from its group.
+  - Each Pokémon species with an encounter rate greater than 20% is deterministically
+  replaced with 2 species from its group. There is a ~66% and ~33% chance of encountering
+  the 2 replacements, respectively.
+
+For example, Pidgey might be replaced by {Taillow, Hoothoot} in Route 1, {Doduo, Pidgey}
+in Route 2, and {Delibird} in Route 25. 
 
 Additionally, each non-water game map is deterministically assigned a single
-"rare" Pokémon from the `EarlyBoost` group. There is a 2% chance of encountering
-the "rare" Pokémon in each map.
+Pokémon from the `EarlyBoost` group. The chance of finding one of these Pokémon 
+starts at 4%, and decreases by 0.5% for each badge you have.
 
 #### Example
 
 In the original game, there's a 50% chance of encountering Pidgey
 in Route 1. In our first example above, there will be a ~33% chance of encountering
-Taillow and 17% chance of encountering Hoothoot. There will also be a fixed 2% chance
-of encountering the "rare" species assigned to the route; e.g. Bulbasaur.
+Taillow and 17% chance of encountering Hoothoot. At the beginning of the game, there
+will also be a 4% chance of encountering the `EarlyBoost` species assigned to the route;
+e.g. Bulbasaur.
 
 ### Trainer battles
 
@@ -141,7 +147,7 @@ Trainer Pokémon are deterministically replaced with a single Pokémon from thei
 
 | Cave1 |
 | --- |
-|[![](https://www.serebii.net/pokedex-swsh/icon/050.png 'DIGLETT')](https://www.serebii.net/pokedex-dp/050.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/066.png 'MACHOP')](https://www.serebii.net/pokedex-dp/066.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/074.png 'GEODUDE')](https://www.serebii.net/pokedex-dp/074.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/206.png 'DUNSPARCE')](https://www.serebii.net/pokedex-dp/206.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/207.png 'GLIGAR')](https://www.serebii.net/pokedex-dp/207.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/213.png 'SHUCKLE')](https://www.serebii.net/pokedex-dp/213.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/215.png 'SNEASEL')](https://www.serebii.net/pokedex-dp/215.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/220.png 'SWINUB')](https://www.serebii.net/pokedex-dp/220.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/236.png 'TYROGUE')](https://www.serebii.net/pokedex-dp/236.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/293.png 'WHISMUR')](https://www.serebii.net/pokedex-dp/293.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/296.png 'MAKUHITA')](https://www.serebii.net/pokedex-dp/296.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/299.png 'NOSEPASS')](https://www.serebii.net/pokedex-dp/299.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/304.png 'ARON')](https://www.serebii.net/pokedex-dp/304.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/307.png 'MEDITITE')](https://www.serebii.net/pokedex-dp/307.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/347.png 'ANORITH')](https://www.serebii.net/pokedex-dp/347.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/361.png 'SNORUNT')](https://www.serebii.net/pokedex-dp/361.shtml)|
+|[![](https://www.serebii.net/pokedex-swsh/icon/041.png 'ZUBAT')](https://www.serebii.net/pokedex-dp/041.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/050.png 'DIGLETT')](https://www.serebii.net/pokedex-dp/050.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/066.png 'MACHOP')](https://www.serebii.net/pokedex-dp/066.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/074.png 'GEODUDE')](https://www.serebii.net/pokedex-dp/074.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/206.png 'DUNSPARCE')](https://www.serebii.net/pokedex-dp/206.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/207.png 'GLIGAR')](https://www.serebii.net/pokedex-dp/207.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/213.png 'SHUCKLE')](https://www.serebii.net/pokedex-dp/213.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/215.png 'SNEASEL')](https://www.serebii.net/pokedex-dp/215.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/220.png 'SWINUB')](https://www.serebii.net/pokedex-dp/220.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/236.png 'TYROGUE')](https://www.serebii.net/pokedex-dp/236.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/293.png 'WHISMUR')](https://www.serebii.net/pokedex-dp/293.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/296.png 'MAKUHITA')](https://www.serebii.net/pokedex-dp/296.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/299.png 'NOSEPASS')](https://www.serebii.net/pokedex-dp/299.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/304.png 'ARON')](https://www.serebii.net/pokedex-dp/304.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/307.png 'MEDITITE')](https://www.serebii.net/pokedex-dp/307.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/347.png 'ANORITH')](https://www.serebii.net/pokedex-dp/347.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/361.png 'SNORUNT')](https://www.serebii.net/pokedex-dp/361.shtml)|
 
 | Cave2 |
 | --- |
@@ -165,7 +171,7 @@ Trainer Pokémon are deterministically replaced with a single Pokémon from thei
 
 | Spooky1 |
 | --- |
-|[![](https://www.serebii.net/pokedex-swsh/icon/035.png 'CLEFAIRY')](https://www.serebii.net/pokedex-dp/035.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/039.png 'JIGGLYPUFF')](https://www.serebii.net/pokedex-dp/039.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/041.png 'ZUBAT')](https://www.serebii.net/pokedex-dp/041.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/042.png 'GOLBAT')](https://www.serebii.net/pokedex-dp/042.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/092.png 'GASTLY')](https://www.serebii.net/pokedex-dp/092.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/104.png 'CUBONE')](https://www.serebii.net/pokedex-dp/104.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/140.png 'KABUTO')](https://www.serebii.net/pokedex-dp/140.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/198.png 'MURKROW')](https://www.serebii.net/pokedex-dp/198.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/200.png 'MISDREAVUS')](https://www.serebii.net/pokedex-dp/200.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/302.png 'SABLEYE')](https://www.serebii.net/pokedex-dp/302.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/303.png 'MAWILE')](https://www.serebii.net/pokedex-dp/303.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/327.png 'SPINDA')](https://www.serebii.net/pokedex-dp/327.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/337.png 'LUNATONE')](https://www.serebii.net/pokedex-dp/337.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/343.png 'BALTOY')](https://www.serebii.net/pokedex-dp/343.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/353.png 'SHUPPET')](https://www.serebii.net/pokedex-dp/353.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/355.png 'DUSKULL')](https://www.serebii.net/pokedex-dp/355.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/374.png 'BELDUM')](https://www.serebii.net/pokedex-dp/374.shtml)|
+|[![](https://www.serebii.net/pokedex-swsh/icon/035.png 'CLEFAIRY')](https://www.serebii.net/pokedex-dp/035.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/039.png 'JIGGLYPUFF')](https://www.serebii.net/pokedex-dp/039.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/042.png 'GOLBAT')](https://www.serebii.net/pokedex-dp/042.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/092.png 'GASTLY')](https://www.serebii.net/pokedex-dp/092.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/104.png 'CUBONE')](https://www.serebii.net/pokedex-dp/104.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/140.png 'KABUTO')](https://www.serebii.net/pokedex-dp/140.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/198.png 'MURKROW')](https://www.serebii.net/pokedex-dp/198.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/200.png 'MISDREAVUS')](https://www.serebii.net/pokedex-dp/200.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/302.png 'SABLEYE')](https://www.serebii.net/pokedex-dp/302.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/303.png 'MAWILE')](https://www.serebii.net/pokedex-dp/303.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/327.png 'SPINDA')](https://www.serebii.net/pokedex-dp/327.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/337.png 'LUNATONE')](https://www.serebii.net/pokedex-dp/337.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/343.png 'BALTOY')](https://www.serebii.net/pokedex-dp/343.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/353.png 'SHUPPET')](https://www.serebii.net/pokedex-dp/353.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/355.png 'DUSKULL')](https://www.serebii.net/pokedex-dp/355.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/374.png 'BELDUM')](https://www.serebii.net/pokedex-dp/374.shtml)|
 
 | Spooky2 |
 | --- |
@@ -213,5 +219,5 @@ Trainer Pokémon are deterministically replaced with a single Pokémon from thei
 
 | NotInGame |
 | --- |
-||
+|[![](https://www.serebii.net/pokedex-swsh/icon/151.png 'MEW')](https://www.serebii.net/pokedex-dp/151.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/173.png 'CLEFFA')](https://www.serebii.net/pokedex-dp/173.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/174.png 'IGGLYBUFF')](https://www.serebii.net/pokedex-dp/174.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/201.png 'UNOWN')](https://www.serebii.net/pokedex-dp/201.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/202.png 'WOBBUFFET')](https://www.serebii.net/pokedex-dp/202.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/235.png 'SMEARGLE')](https://www.serebii.net/pokedex-dp/235.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/243.png 'RAIKOU')](https://www.serebii.net/pokedex-dp/243.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/244.png 'ENTEI')](https://www.serebii.net/pokedex-dp/244.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/245.png 'SUICUNE')](https://www.serebii.net/pokedex-dp/245.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/249.png 'LUGIA')](https://www.serebii.net/pokedex-dp/249.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/250.png 'HO_OH')](https://www.serebii.net/pokedex-dp/250.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/251.png 'CELEBI')](https://www.serebii.net/pokedex-dp/251.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/292.png 'SHEDINJA')](https://www.serebii.net/pokedex-dp/292.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/351.png 'CASTFORM')](https://www.serebii.net/pokedex-dp/351.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/360.png 'WYNAUT')](https://www.serebii.net/pokedex-dp/360.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/370.png 'LUVDISC')](https://www.serebii.net/pokedex-dp/370.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/377.png 'REGIROCK')](https://www.serebii.net/pokedex-dp/377.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/378.png 'REGICE')](https://www.serebii.net/pokedex-dp/378.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/379.png 'REGISTEEL')](https://www.serebii.net/pokedex-dp/379.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/380.png 'LATIAS')](https://www.serebii.net/pokedex-dp/380.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/381.png 'LATIOS')](https://www.serebii.net/pokedex-dp/381.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/382.png 'KYOGRE')](https://www.serebii.net/pokedex-dp/382.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/383.png 'GROUDON')](https://www.serebii.net/pokedex-dp/383.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/384.png 'DUSKNOIR')](https://www.serebii.net/pokedex-dp/384.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/385.png 'JIRACHI')](https://www.serebii.net/pokedex-dp/385.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/386.png 'DEOXYS')](https://www.serebii.net/pokedex-dp/386.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/433.png 'CHINGLING')](https://www.serebii.net/pokedex-dp/433.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/438.png 'BONSLY')](https://www.serebii.net/pokedex-dp/438.shtml)[![](https://www.serebii.net/pokedex-swsh/icon/458.png 'MANTYKE')](https://www.serebii.net/pokedex-dp/458.shtml)|
 

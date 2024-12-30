@@ -152,9 +152,9 @@ void NewGameInitData(void)
     ResetTrainerTowerResults();
 
     // Set starters now that the game seed has been set.
-    VarSet(VAR_GRASS_STARTER, GetSpeciesFromGroup(SPECIES_BULBASAUR, 0));
-    VarSet(VAR_FIRE_STARTER, GetSpeciesFromGroup(SPECIES_CHARMANDER, 0));
-    VarSet(VAR_WATER_STARTER, GetSpeciesFromGroup(SPECIES_SQUIRTLE, 0));
+    VarSet(VAR_GRASS_STARTER, GetSpeciesFromGroup(SPECIES_BULBASAUR, RAND_INPUT_PICK_2));
+    VarSet(VAR_FIRE_STARTER, GetSpeciesFromGroup(SPECIES_CHARMANDER, RAND_INPUT_PICK_2));
+    VarSet(VAR_WATER_STARTER, GetSpeciesFromGroup(SPECIES_SQUIRTLE, RAND_INPUT_PICK_2));
 
     // Overwrite options.
     SetDefaultOptions();

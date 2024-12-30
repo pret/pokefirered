@@ -549,25 +549,30 @@ static void SetMapHashAndSeedItems() {
   u32 hash;
   u16 seed1;
   u16 seed2;
+  u16 seed3;
+  u16 seed4;
+  u16 seed5;
+  u16 seed6;
+  u16 range = NUM_TECHNICAL_MACHINES + 2;
 
-  // Seed the random TMs in this map.
-  // There are 92 TMs including Gen IV ones.
+  // Seed the random TM/HMs in this map.
+  // There are 94 TM/HMs including Gen IV TMs, Waterfall, and Dive.
   hash = HashCombine(GameHash(), MapHash());
 
   seed1 = SeededRandom((hash >> 16) & 0xffff);
   seed2 = SeededRandom(hash & 0xffff);
-  VarSet(VAR_MAP_ITEM_1, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-  VarSet(VAR_MAP_ITEM_2, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
+  VarSet(VAR_MAP_ITEM_1, (seed1+1) % range + ITEM_HM07);
+  VarSet(VAR_MAP_ITEM_2, (seed2+2) % range + ITEM_HM07);
 
-  seed1 = SeededRandom(seed1);
-  seed2 = SeededRandom(seed2);
-  VarSet(VAR_MAP_ITEM_3, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-  VarSet(VAR_MAP_ITEM_4, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
+  seed3 = SeededRandom(seed1 + seed2);
+  seed4 = SeededRandom(seed1 - seed2);
+  VarSet(VAR_MAP_ITEM_3, (seed3+3) % range + ITEM_HM07);
+  VarSet(VAR_MAP_ITEM_4, (seed4+4) % range + ITEM_HM07);
 
-  seed1 = SeededRandom(seed1);
-  seed2 = SeededRandom(seed2);
-  VarSet(VAR_MAP_ITEM_5, (seed1 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
-  VarSet(VAR_MAP_ITEM_6, (seed2 % NUM_TECHNICAL_MACHINES) + ITEM_TM01);
+  seed5 = SeededRandom(seed3 + seed4);
+  seed6 = SeededRandom(seed3 - seed4);
+  VarSet(VAR_MAP_ITEM_5, (seed5+5) % range + ITEM_HM07);
+  VarSet(VAR_MAP_ITEM_6, (seed6+6) % range + ITEM_HM07);
 }
 
 static void LoadCurrentMapData(void)

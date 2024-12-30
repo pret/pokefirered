@@ -156,6 +156,8 @@ void NewGameInitPCItems(void)
   AddBagItem(ITEM_ELIXIR, 10);
   AddBagItem(ITEM_REVIVE, 10);
   AddBagItem(ITEM_ESCAPE_ROPE, 5);
+  AddBagItem(ITEM_MAX_REVIVE, 3);
+  AddBagItem(ITEM_FULL_RESTORE, 3);
   AddBagItem(ITEM_EXP_SHARE, 6);
   AddBagItem(ITEM_TOWN_MAP, 1);
   AddBagItem(ITEM_OLD_ROD, 1);

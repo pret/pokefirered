@@ -32,6 +32,7 @@ Other changes:
  - Shiny Pokémon odds are increased 10x.
  - Party menu shortcut for giving/taking Exp Shares.
  - The Arena Trap ability has been removed from the game.
+ - Safari Balls are 53% more effective, which makes them 15% more effective than Ultra Balls.
  - Pewter, Cerulean, and Vermillion Marts sell Revives.
  - Some early events are skipped; e.g. the Old Man.
  - Slightly modified wild encounters:
@@ -106,11 +107,13 @@ replaced with Pokémon from their group, as described below.
 ### Wild encounters
 
 For every map (e.g. route, dungeon room) in the game: 
-  - Each species with an encounter rate less than or equal to 20% is is deterministically
-  replaced with 1 species from its group.
-  - Each Pokémon species with an encounter rate greater than 20% is deterministically
-  replaced with 2 species from its group. There is a ~66% and ~33% chance of encountering
-  the 2 replacements, respectively.
+  - Non-fishing Pokémon with an encounter rate less than or equal to 20% are
+  deterministically replaced with 1 species from their group.
+  - Non-fishing Pokémon Pokémon species with an encounter rate greater than 20%
+  are deterministically replaced with 2 species from their group. There is a ~66%
+  and ~33% chance of encountering the 2 replacements, respectively.
+  - All fishing Pokémon are deterministically replaced with 1 species from their
+  group, regardless of encounter rate.
 
 For example, Pidgey might be replaced by {Taillow, Hoothoot} in Route 1, {Doduo, Pidgey}
 in Route 2, and {Delibird} in Route 25. 

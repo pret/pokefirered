@@ -1006,7 +1006,7 @@ void DrawBattleEntryBackground(void)
     {
         LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
+    else if (gBattleTypeFlags & BATTLE_TYPE_PORYGON_Z_GALLADE)
     {
         if (gGameVersion == VERSION_FIRE_RED)
         {

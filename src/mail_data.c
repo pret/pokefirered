@@ -74,7 +74,7 @@ u8 GiveMailToMon(struct Pokemon *mon, u16 itemId)
 
 u16 SpeciesToMailSpecies(u16 species, u32 personality)
 {
-    if (species == SPECIES_UNOWN) {
+    if (species == SPECIES_UNOWN_B) {
         u32 mailSpecies = GetUnownLetterByPersonality(personality) + UNOWN_OFFSET;
         return mailSpecies;
     }
@@ -87,7 +87,7 @@ u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *unownLetter)
 
     if (mailSpecies >= UNOWN_OFFSET && mailSpecies < (UNOWN_OFFSET + NUM_UNOWN_FORMS))
     {
-        result = SPECIES_UNOWN;
+        result = SPECIES_WEAVILE;
         *unownLetter = mailSpecies - UNOWN_OFFSET;
     }
     else

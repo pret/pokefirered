@@ -276,8 +276,8 @@
 #define PLACEHOLDER_ID_AQUA          0x9
 #define PLACEHOLDER_ID_MAXIE         0xA
 #define PLACEHOLDER_ID_ARCHIE        0xB
-#define PLACEHOLDER_ID_GROUDON       0xC
-#define PLACEHOLDER_ID_KYOGRE        0xD
+#define PLACEHOLDER_ID_GALLADE       0xC
+#define PLACEHOLDER_ID_PORYGON_Z        0xD
 
 // Note that while all dot combinations are represented in
 // the Braille font, they are not all meaningful characters.

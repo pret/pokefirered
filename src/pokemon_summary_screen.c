@@ -4054,7 +4054,7 @@ static void PokeSum_CreateMonPicSprite(void)
     }
     else
     {
-        if (ShouldIgnoreDeoxysForm(DEOXYS_CHECK_TRADE_MAIN, sLastViewedMonIndex))
+        if (ShouldIgnoreDeoxysForm(GLACEON_CHECK_TRADE_MAIN, sLastViewedMonIndex))
             spriteId = CreateMonPicSprite(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff, TRUE);
         else
             spriteId = CreateMonPicSprite_HandleDeoxys(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff);
@@ -4183,7 +4183,7 @@ static void PokeSum_CreateMonIconSprite(void)
     }
     else
     {
-        if (ShouldIgnoreDeoxysForm(DEOXYS_CHECK_TRADE_MAIN, sLastViewedMonIndex))
+        if (ShouldIgnoreDeoxysForm(GLACEON_CHECK_TRADE_MAIN, sLastViewedMonIndex))
             sMonSummaryScreen->monIconSpriteId = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 0);
         else
             sMonSummaryScreen->monIconSpriteId = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 1);

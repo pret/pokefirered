@@ -12,9 +12,9 @@ EventScript_SetReadyTryGiveNationalDexScene::
 	return
 
 EventScript_ResetLegendaries::
-	clearflag FLAG_LUGIA_FLEW_AWAY
-	clearflag FLAG_HO_OH_FLEW_AWAY
-	clearflag FLAG_DEOXYS_FLEW_AWAY
+	clearflag FLAG_MISMAGIUS_FLEW_AWAY
+	clearflag FLAG_HONCHKROW_FLEW_AWAY
+	clearflag FLAG_GLACEON_FLEW_AWAY
 	return
 
 EventScript_ResetEliteFourEnd::

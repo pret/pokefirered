@@ -1963,7 +1963,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 5,
     },
 
-    [NATIONAL_DEX_MEW] =
+    [NATIONAL_DEX_BUDEW] =
     {
         .categoryName = _("NEW SPECIES"),
         .height = 4,
@@ -2249,7 +2249,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_CLEFFA] =
+    [NATIONAL_DEX_MIME_JR] =
     {
         .categoryName = _("STAR SHAPE"),
         .height = 3,
@@ -2262,7 +2262,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_IGGLYBUFF] =
+    [NATIONAL_DEX_AMBIPOM] =
     {
         .categoryName = _("BALLOON"),
         .height = 3,
@@ -2613,7 +2613,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_UNOWN] =
+    [NATIONAL_DEX_WEAVILE] =
     {
         .categoryName = _("SYMBOL"),
         .height = 5,
@@ -2626,7 +2626,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_WOBBUFFET] =
+    [NATIONAL_DEX_GLISCOR] =
     {
         .categoryName = _("PATIENT"),
         .height = 13,
@@ -3055,7 +3055,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_SMEARGLE] =
+    [NATIONAL_DEX_PROBOPASS] =
     {
         .categoryName = _("PAINTER"),
         .height = 12,
@@ -3159,7 +3159,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 3,
     },
 
-    [NATIONAL_DEX_RAIKOU] =
+    [NATIONAL_DEX_ROSERADE] =
     {
         .categoryName = _("THUNDER"),
         .height = 19,
@@ -3172,7 +3172,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 6,
     },
 
-    [NATIONAL_DEX_ENTEI] =
+    [NATIONAL_DEX_TANGROWTH] =
     {
         .categoryName = _("VOLCANO"),
         .height = 21,
@@ -3185,7 +3185,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 7,
     },
 
-    [NATIONAL_DEX_SUICUNE] =
+    [NATIONAL_DEX_YANMEGA] =
     {
         .categoryName = _("AURORA"),
         .height = 20,
@@ -3237,7 +3237,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 7,
     },
 
-    [NATIONAL_DEX_LUGIA] =
+    [NATIONAL_DEX_MISMAGIUS] =
     {
         .categoryName = _("DIVING"),
         .height = 52,
@@ -3250,7 +3250,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 18,
     },
 
-    [NATIONAL_DEX_HO_OH] =
+    [NATIONAL_DEX_HONCHKROW] =
     {
         .categoryName = _("RAINBOW"),
         .height = 38,
@@ -3263,7 +3263,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 16,
     },
 
-    [NATIONAL_DEX_CELEBI] =
+    [NATIONAL_DEX_FROSLASS] =
     {
         .categoryName = _("TIME TRAVEL"),
         .height = 6,
@@ -3796,7 +3796,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_SHEDINJA] =
+    [NATIONAL_DEX_ELECTIVIRE] =
     {
         .categoryName = _("SHED"),
         .height = 8,
@@ -4563,7 +4563,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 7,
     },
 
-    [NATIONAL_DEX_CASTFORM] =
+    [NATIONAL_DEX_MAGMORTAR] =
     {
         .categoryName = _("WEATHER"),
         .height = 3,
@@ -4680,7 +4680,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_WYNAUT] =
+    [NATIONAL_DEX_TOGEKISS] =
     {
         .categoryName = _("BRIGHT"),
         .height = 6,
@@ -4810,7 +4810,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_LUVDISC] =
+    [NATIONAL_DEX_HAPPINY] =
     {
         .categoryName = _("RENDEZVOUS"),
         .height = 6,
@@ -4901,7 +4901,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 4,
     },
 
-    [NATIONAL_DEX_REGIROCK] =
+    [NATIONAL_DEX_MUNCHLAX] =
     {
         .categoryName = _("ROCK PEAK"),
         .height = 17,
@@ -4914,7 +4914,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 1,
     },
 
-    [NATIONAL_DEX_REGICE] =
+    [NATIONAL_DEX_LICKILICKY] =
     {
         .categoryName = _("ICEBERG"),
         .height = 18,
@@ -4927,7 +4927,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 3,
     },
 
-    [NATIONAL_DEX_REGISTEEL] =
+    [NATIONAL_DEX_MAGNEZONE] =
     {
         .categoryName = _("IRON"),
         .height = 19,
@@ -4940,7 +4940,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 6,
     },
 
-    [NATIONAL_DEX_LATIAS] =
+    [NATIONAL_DEX_RHYPERIOR] =
     {
         .categoryName = _("EON"),
         .height = 14,
@@ -4953,7 +4953,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_LATIOS] =
+    [NATIONAL_DEX_MAMOSWINE] =
     {
         .categoryName = _("EON"),
         .height = 20,
@@ -4966,7 +4966,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 3,
     },
 
-    [NATIONAL_DEX_KYOGRE] =
+    [NATIONAL_DEX_PORYGON_Z] =
     {
         .categoryName = _("SEA BASIN"),
         .height = 45,
@@ -4979,7 +4979,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 13,
     },
 
-    [NATIONAL_DEX_GROUDON] =
+    [NATIONAL_DEX_GALLADE] =
     {
         .categoryName = _("CONTINENT"),
         .height = 35,
@@ -4992,7 +4992,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 12,
     },
 
-    [NATIONAL_DEX_RAYQUAZA] =
+    [NATIONAL_DEX_DUSKNOIR] =
     {
         .categoryName = _("SKY HIGH"),
         .height = 70,
@@ -5005,7 +5005,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 9,
     },
 
-    [NATIONAL_DEX_JIRACHI] =
+    [NATIONAL_DEX_LEAFEON] =
     {
         .categoryName = _("WISH"),
         .height = 3,
@@ -5018,7 +5018,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_DEOXYS] =
+    [NATIONAL_DEX_GLACEON] =
     {
         .categoryName = _("DNA"),
         .height = 17,

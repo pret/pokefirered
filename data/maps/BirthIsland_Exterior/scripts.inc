@@ -1,5 +1,5 @@
-.set LOCALID_DEOXYS_ROCK, 1
-.set LOCALID_DEOXYS,      2
+.set LOCALID_GLACEON_ROCK, 1
+.set LOCALID_GLACEON,      2
 
 BirthIsland_Exterior_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BirthIsland_Exterior_OnTransition
@@ -13,22 +13,22 @@ BirthIsland_Exterior_OnReturnToField::
 
 BirthIsland_Exterior_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_DEOXYS_N
-	setvar VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0
-	setvar VAR_DEOXYS_INTERACTION_NUM, 0
-	call_if_set FLAG_FOUGHT_DEOXYS, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
-	call_if_unset FLAG_FOUGHT_DEOXYS, BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_GLACEON_N
+	setvar VAR_GLACEON_INTERACTION_STEP_COUNTER, 0
+	setvar VAR_GLACEON_INTERACTION_NUM, 0
+	call_if_set FLAG_FOUGHT_GLACEON, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
+	call_if_unset FLAG_FOUGHT_GLACEON, BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle
 	end
 
 BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle::
-	setflag FLAG_HIDE_DEOXYS
+	setflag FLAG_HIDE_GLACEON
 	setflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
 	return
 
 BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle::
-	goto_if_set FLAG_DEOXYS_FLEW_AWAY, EventScript_Return
+	goto_if_set FLAG_GLACEON_FLEW_AWAY, EventScript_Return
 	clearflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
-	clearflag FLAG_SYS_DEOXYS_AWAKENED
+	clearflag FLAG_SYS_GLACEON_AWAKENED
 	return
 
 BirthIsland_Exterior_OnResume::
@@ -38,7 +38,7 @@ BirthIsland_Exterior_OnResume::
 BirthIsland_Exterior_EventScript_TryRemoveDeoxys::
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, EventScript_Return
-	removeobject LOCALID_DEOXYS
+	removeobject LOCALID_GLACEON
 	return
 
 BirthIsland_Exterior_EventScript_Triangle::
@@ -68,22 +68,22 @@ BirthIsland_Exterior_EventScript_NotSolved3::
 	end
 
 BirthIsland_Exterior_EventScript_Deoxys::
-	addobject LOCALID_DEOXYS
+	addobject LOCALID_GLACEON
 	waitse
-	setfieldeffectargument 0, LOCALID_DEOXYS_ROCK
+	setfieldeffectargument 0, LOCALID_GLACEON_ROCK
 	setfieldeffectargument 1, MAP_NUM(BIRTH_ISLAND_EXTERIOR)
 	setfieldeffectargument 2, MAP_GROUP(BIRTH_ISLAND_EXTERIOR)
-	dofieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
-	playbgm MUS_ENCOUNTER_DEOXYS, 0
-	waitfieldeffect FLDEFF_DESTROY_DEOXYS_ROCK
-	applymovement LOCALID_DEOXYS, Movement_DeoxysApproach
+	dofieldeffect FLDEFF_DESTROY_GLACEON_ROCK
+	playbgm MUS_ENCOUNTER_GLACEON, 0
+	waitfieldeffect FLDEFF_DESTROY_GLACEON_ROCK
+	applymovement LOCALID_GLACEON, Movement_DeoxysApproach
 	waitmovement 0
 	waitse
-	playmoncry SPECIES_DEOXYS, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_GLACEON, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	setvar VAR_LAST_TALKED, LOCALID_DEOXYS
-	seteventmon SPECIES_DEOXYS, 30
+	setvar VAR_LAST_TALKED, LOCALID_GLACEON
+	seteventmon SPECIES_GLACEON, 30
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special StartLegendaryBattle
 	waitstate
@@ -92,18 +92,18 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BirthIsland_Exterior_EventScript_RanFromDeoxys
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BirthIsland_Exterior_EventScript_RanFromDeoxys
-	setflag FLAG_FOUGHT_DEOXYS
+	setflag FLAG_FOUGHT_GLACEON
 	release
 	end
 
 BirthIsland_Exterior_EventScript_DefeatedDeoxys::
-	setflag FLAG_DEOXYS_FLEW_AWAY
-	setvar VAR_0x8004, SPECIES_DEOXYS
+	setflag FLAG_GLACEON_FLEW_AWAY
+	setvar VAR_0x8004, SPECIES_GLACEON
 	goto EventScript_MonFlewAway
 	end
 
 BirthIsland_Exterior_EventScript_RanFromDeoxys::
-	setvar VAR_0x8004, SPECIES_DEOXYS
+	setvar VAR_0x8004, SPECIES_GLACEON
 	goto EventScript_MonFlewAway
 	end
 

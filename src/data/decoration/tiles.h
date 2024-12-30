@@ -526,7 +526,7 @@ const u16 DecorGfx_DUSKULL_DOLL[] = {
     OBJ_EVENT_GFX_ITEM_BALL
 };
 
-const u16 DecorGfx_WYNAUT_DOLL[] = {
+const u16 DecorGfx_TOGEKISS_DOLL[] = {
     OBJ_EVENT_GFX_ITEM_BALL
 };
 
@@ -630,14 +630,14 @@ const u16 DecorGfx_WAILMER_DOLL[] = {
     OBJ_EVENT_GFX_ITEM_BALL
 };
 
-const u16 DecorGfx_REGIROCK_DOLL[] = {
+const u16 DecorGfx_MUNCHLAX_DOLL[] = {
     OBJ_EVENT_GFX_ITEM_BALL
 };
 
-const u16 DecorGfx_REGICE_DOLL[] = {
+const u16 DecorGfx_LICKILICKY_DOLL[] = {
     OBJ_EVENT_GFX_ITEM_BALL
 };
 
-const u16 DecorGfx_REGISTEEL_DOLL[] = {
+const u16 DecorGfx_MAGNEZONE_DOLL[] = {
     OBJ_EVENT_GFX_ITEM_BALL
 };

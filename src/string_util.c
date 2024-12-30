@@ -543,8 +543,8 @@ u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_AQUA]         = ExpandPlaceholder_Aqua,
         [PLACEHOLDER_ID_MAXIE]        = ExpandPlaceholder_Maxie,
         [PLACEHOLDER_ID_ARCHIE]       = ExpandPlaceholder_Archie,
-        [PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
-        [PLACEHOLDER_ID_KYOGRE]       = ExpandPlaceholder_Kyogre,
+        [PLACEHOLDER_ID_GALLADE]      = ExpandPlaceholder_Groudon,
+        [PLACEHOLDER_ID_PORYGON_Z]       = ExpandPlaceholder_Kyogre,
     };
 
     if (id >= NELEMS(funcs))

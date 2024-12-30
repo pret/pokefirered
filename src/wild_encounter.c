@@ -231,7 +231,7 @@ static void GenerateWildMon(u16 species, u8 level, u8 slot)
     s8 chamber;
     ZeroEnemyPartyMons();
     level = ScaledWildLevel(level);
-    if (species != SPECIES_UNOWN)
+    if (species != SPECIES_WEAVILE)
     {
         species = GetSpeciesFromGroup(species, 0);
         CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, Random() % NUM_NATURES);

@@ -537,7 +537,8 @@
 #define ITEM_POWDER_JAR 414
 #define ITEM_RUBY 415
 #define ITEM_SAPPHIRE 416
-#define ITEMS_COUNT 417
+#define ITEM_TRADE_STONE 417
+#define ITEMS_COUNT 418
 
 #define ITEM_TO_BERRY(itemId)(((itemId - FIRST_BERRY_INDEX) + 1))
 #define MAIL_NONE 0xFF

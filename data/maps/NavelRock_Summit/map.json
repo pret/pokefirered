@@ -17,7 +17,7 @@
   "object_events": [
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_HO_OH",
+      "graphics_id": "OBJ_EVENT_GFX_HONCHKROW",
       "x": 9,
       "y": 6,
       "elevation": 0,
@@ -27,7 +27,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "0x0",
-      "flag": "FLAG_HIDE_HO_OH"
+      "flag": "FLAG_HIDE_HONCHKROW"
     }
   ],
   "warp_events": [

@@ -45,29 +45,29 @@ static const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
 };
 
 // One entry for each of the four Castform forms.
-const struct MonCoords gCastformFrontSpriteCoords[NUM_CASTFORM_FORMS] =
+const struct MonCoords gCastformFrontSpriteCoords[NUM_MAGMORTAR_FORMS] =
 {
-    [CASTFORM_NORMAL] = { .size = MON_COORDS_SIZE(32, 32), .y_offset = 17 },
-    [CASTFORM_FIRE]   = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
-    [CASTFORM_WATER]  = { .size = MON_COORDS_SIZE(32, 48), .y_offset =  9 },
-    [CASTFORM_ICE]    = { .size = MON_COORDS_SIZE(64, 48), .y_offset =  8 },
+    [MAGMORTAR_NORMAL] = { .size = MON_COORDS_SIZE(32, 32), .y_offset = 17 },
+    [MAGMORTAR_FIRE]   = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
+    [MAGMORTAR_WATER]  = { .size = MON_COORDS_SIZE(32, 48), .y_offset =  9 },
+    [MAGMORTAR_ICE]    = { .size = MON_COORDS_SIZE(64, 48), .y_offset =  8 },
 };
 
-static const u8 sCastformElevations[NUM_CASTFORM_FORMS] =
+static const u8 sCastformElevations[NUM_MAGMORTAR_FORMS] =
 {
-    [CASTFORM_NORMAL] = 13,
-    [CASTFORM_FIRE]   = 14,
-    [CASTFORM_WATER]  = 13,
-    [CASTFORM_ICE]    = 13,
+    [MAGMORTAR_NORMAL] = 13,
+    [MAGMORTAR_FIRE]   = 14,
+    [MAGMORTAR_WATER]  = 13,
+    [MAGMORTAR_ICE]    = 13,
 };
 
 // Y position of the backsprite for each of the four Castform forms.
-static const u8 sCastformBackSpriteYCoords[NUM_CASTFORM_FORMS] =
+static const u8 sCastformBackSpriteYCoords[NUM_MAGMORTAR_FORMS] =
 {
-    [CASTFORM_NORMAL] = 0,
-    [CASTFORM_FIRE]   = 0,
-    [CASTFORM_WATER]  = 0,
-    [CASTFORM_ICE]    = 0,
+    [MAGMORTAR_NORMAL] = 0,
+    [MAGMORTAR_FIRE]   = 0,
+    [MAGMORTAR_WATER]  = 0,
+    [MAGMORTAR_ICE]    = 0,
 };
 
 // Placeholders for pokemon sprites to be created for a move animation effect (e.g. Role Play / Snatch)
@@ -155,25 +155,7 @@ static u8 GetBattlerYDelta(u8 battlerId, u16 species)
 
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
-        if (species == SPECIES_UNOWN)
-        {
-            spriteInfo = gBattleSpritesDataPtr->battlerData;
-            if (!spriteInfo[battlerId].transformSpecies)
-                personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
-            else
-                personality = gTransformedPersonalities[battlerId];
-            letter = GET_UNOWN_LETTER(personality);
-            if (!letter)
-                coordSpecies = species;
-            else
-                coordSpecies = letter + SPECIES_UNOWN_B - 1;
-            ret = gMonBackPicCoords[coordSpecies].y_offset;
-        }
-        else if (species == SPECIES_CASTFORM)
-        {
-            ret = sCastformBackSpriteYCoords[gBattleMonForms[battlerId]];
-        }
-        else if (species > NUM_SPECIES)
+        if (species > NUM_SPECIES)
         {
             ret = gMonBackPicCoords[0].y_offset;
         }
@@ -184,25 +166,7 @@ static u8 GetBattlerYDelta(u8 battlerId, u16 species)
     }
     else
     {
-        if (species == SPECIES_UNOWN)
-        {
-            spriteInfo = gBattleSpritesDataPtr->battlerData;
-            if (!spriteInfo[battlerId].transformSpecies)
-                personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
-            else
-                personality = gTransformedPersonalities[battlerId];
-            letter = GET_UNOWN_LETTER(personality);
-            if (!letter)
-                coordSpecies = species;
-            else
-                coordSpecies = letter + SPECIES_UNOWN_B - 1;
-            ret = gMonFrontPicCoords[coordSpecies].y_offset;
-        }
-        else if (species == SPECIES_CASTFORM)
-        {
-            ret = gCastformFrontSpriteCoords[gBattleMonForms[battlerId]].y_offset;
-        }
-        else if (species > NUM_SPECIES)
+        if (species > NUM_SPECIES)
         {
             ret = gMonFrontPicCoords[0].y_offset;
         }
@@ -220,9 +184,7 @@ static u8 GetBattlerElevation(u8 battlerId, u16 species)
 
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
     {
-        if (species == SPECIES_CASTFORM)
-            ret = sCastformElevations[gBattleMonForms[battlerId]];
-        else if (species > NUM_SPECIES)
+        if (species > NUM_SPECIES)
             ret = gEnemyMonElevation[0];
         else
             ret = gEnemyMonElevation[species];
@@ -1196,7 +1158,7 @@ static bool8 ShouldRotScaleSpeciesBeFlipped(void)
     /*
     if (IsContest())
     {
-        if (gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].data[2] == SPECIES_UNOWN)
+        if (gSprites[GetAnimBattlerSpriteId(ANIM_ATTACKER)].data[2] == SPECIES_UNOWN_B)
             return FALSE;
         else
             return TRUE;
@@ -1953,7 +1915,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 templat
     if (!isBackpic)
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), OBJ_PLTT_ID(palette), PLTT_SIZE_4BPP);
-        if (ignoreDeoxys == TRUE || ShouldIgnoreDeoxysForm(DEOXYS_CHECK_BATTLE_ANIM, battlerId) == TRUE || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != 0)
+        if (ignoreDeoxys == TRUE || ShouldIgnoreDeoxysForm(GLACEON_CHECK_BATTLE_ANIM, battlerId) == TRUE || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != 0)
             LoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
                                                 gMonSpritesGfxPtr->multiUseBuffer,
                                                 species,
@@ -1969,7 +1931,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 templat
     else
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, trainerId, personality), OBJ_PLTT_ID(palette), PLTT_SIZE_4BPP);
-        if (ignoreDeoxys == TRUE || ShouldIgnoreDeoxysForm(DEOXYS_CHECK_BATTLE_ANIM, battlerId) == TRUE || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != 0)
+        if (ignoreDeoxys == TRUE || ShouldIgnoreDeoxysForm(GLACEON_CHECK_BATTLE_ANIM, battlerId) == TRUE || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != 0)
             LoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species],
                                                 gMonSpritesGfxPtr->multiUseBuffer,
                                                 species,
@@ -2019,11 +1981,11 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             species = spriteInfo[battlerId].transformSpecies;
             personality = gTransformedPersonalities[battlerId];
         }
-        if (species == SPECIES_UNOWN)
+        if (species == SPECIES_UNOWN_B)
         {
             letter = GET_UNOWN_LETTER(personality);
             if (!letter)
-                unownSpecies = SPECIES_UNOWN;
+                unownSpecies = SPECIES_WEAVILE;
             else
                 unownSpecies = letter + SPECIES_UNOWN_B - 1;
             coords = &gMonBackPicCoords[unownSpecies];
@@ -2051,20 +2013,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             personality = gTransformedPersonalities[battlerId];
         }
 
-        if (species == SPECIES_UNOWN)
-        {
-            letter = GET_UNOWN_LETTER(personality);
-            if (!letter)
-                unownSpecies = SPECIES_UNOWN;
-            else
-                unownSpecies = letter + SPECIES_UNOWN_B - 1;
-            coords = &gMonFrontPicCoords[unownSpecies];
-        }
-        else if (species == SPECIES_CASTFORM)
-        {
-            coords = &gCastformFrontSpriteCoords[gBattleMonForms[battlerId]];
-        }
-        else if (species > NUM_SPECIES)
+        if (species > NUM_SPECIES)
         {
             coords = &gMonFrontPicCoords[0];
         }

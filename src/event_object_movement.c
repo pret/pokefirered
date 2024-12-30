@@ -464,10 +464,10 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 #define OBJ_EVENT_PAL_TAG_SEAGALLOP                   0x1114
 #define OBJ_EVENT_PAL_TAG_SS_ANNE                     0x1115
 #define OBJ_EVENT_PAL_TAG_RS_PLAYER_UNDERWATER        0x1116
-#define OBJ_EVENT_PAL_TAG_RS_KYOGRE                   0x1117
-#define OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION        0x1118
-#define OBJ_EVENT_PAL_TAG_RS_GROUDON                  0x1119
-#define OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION       0x111A
+#define OBJ_EVENT_PAL_TAG_RS_PORYGON_Z                   0x1117
+#define OBJ_EVENT_PAL_TAG_RS_PORYGON_Z_REFLECTION        0x1118
+#define OBJ_EVENT_PAL_TAG_RS_GALLADE                  0x1119
+#define OBJ_EVENT_PAL_TAG_RS_GALLADE_REFLECTION       0x111A
 #define OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW         0x111B
 #define OBJ_EVENT_PAL_TAG_NONE                        0x11FF
 
@@ -579,17 +579,17 @@ static const u16 sRSSubmarineShadowReflectionPaletteTags[] = {
 };
 
 static const u16 sRSKyogreReflectionPaletteTags[] = {
-    OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION,
-    OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION,
-    OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION,
-    OBJ_EVENT_PAL_TAG_RS_KYOGRE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_PORYGON_Z_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_PORYGON_Z_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_PORYGON_Z_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_PORYGON_Z_REFLECTION,
 };
 
 static const u16 sRSGroudonReflectionPaletteTags[] = {
-    OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION,
-    OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION,
-    OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION,
-    OBJ_EVENT_PAL_TAG_RS_GROUDON_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_GALLADE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_GALLADE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_GALLADE_REFLECTION,
+    OBJ_EVENT_PAL_TAG_RS_GALLADE_REFLECTION,
 };
 
 static const u16 sGreenNPCReflectionPaletteTags[] = {
@@ -608,8 +608,8 @@ static const struct PairedPalettes gSpecialObjectReflectionPaletteSets[] = {
     {OBJ_EVENT_PAL_TAG_RS_MOVING_BOX,       sRSMovingBoxReflectionPaletteTags},
     {OBJ_EVENT_PAL_TAG_METEORITE,           sMeteoriteReflectionPaletteTags},
     {OBJ_EVENT_PAL_TAG_SEAGALLOP,           sSeagallopReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_RS_KYOGRE,           sRSKyogreReflectionPaletteTags},
-    {OBJ_EVENT_PAL_TAG_RS_GROUDON,          sRSGroudonReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_RS_PORYGON_Z,           sRSKyogreReflectionPaletteTags},
+    {OBJ_EVENT_PAL_TAG_RS_GALLADE,          sRSGroudonReflectionPaletteTags},
     {OBJ_EVENT_PAL_TAG_NPC_GREEN,           sGreenNPCReflectionPaletteTags},
     {OBJ_EVENT_PAL_TAG_RS_SUBMARINE_SHADOW, sRSSubmarineShadowReflectionPaletteTags},
     {OBJ_EVENT_PAL_TAG_NONE, NULL},

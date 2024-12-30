@@ -572,7 +572,7 @@ const u16 gEggMoves[] = {
               MOVE_WISH,
               MOVE_CHARGE),
 
-    egg_moves(CLEFFA,
+    egg_moves(MIME_JR,
               MOVE_PRESENT,
               MOVE_METRONOME,
               MOVE_AMNESIA,
@@ -582,7 +582,7 @@ const u16 gEggMoves[] = {
               MOVE_WISH,
               MOVE_SUBSTITUTE),
 
-    egg_moves(IGGLYBUFF,
+    egg_moves(AMBIPOM,
               MOVE_PERISH_SONG,
               MOVE_PRESENT,
               MOVE_FAINT_ATTACK,
@@ -1046,7 +1046,7 @@ const u16 gEggMoves[] = {
               MOVE_WHIRLPOOL,
               MOVE_SPARK),
 
-    egg_moves(LUVDISC,
+    egg_moves(HAPPINY,
               MOVE_SPLASH,
               MOVE_SUPERSONIC,
               MOVE_WATER_SPORT,
@@ -1260,7 +1260,7 @@ const u16 gEggMoves[] = {
               MOVE_STOMP,
               MOVE_SMELLING_SALT),
 
-    egg_moves(CASTFORM,
+    egg_moves(MAGMORTAR,
               MOVE_FUTURE_SIGHT,
               MOVE_PSYCH_UP),
 

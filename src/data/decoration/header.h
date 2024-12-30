@@ -828,14 +828,14 @@ const struct Decoration gDecorations[] = {
         DecorDesc_DUSKULL_DOLL,
         DecorGfx_DUSKULL_DOLL
     }, {
-        DECOR_WYNAUT_DOLL,
-        _("WYNAUT DOLL"),
+        DECOR_TOGEKISS_DOLL,
+        _("TOGEKISS DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
         3000,
-        DecorDesc_WYNAUT_DOLL,
-        DecorGfx_WYNAUT_DOLL
+        DecorDesc_TOGEKISS_DOLL,
+        DecorGfx_TOGEKISS_DOLL
     }, {
         DECOR_BALTOY_DOLL,
         _("BALTOY DOLL"),
@@ -1062,30 +1062,30 @@ const struct Decoration gDecorations[] = {
         DecorDesc_WAILMER_DOLL,
         DecorGfx_WAILMER_DOLL
     }, {
-        DECOR_REGIROCK_DOLL,
-        _("REGIROCK DOLL"),
+        DECOR_MUNCHLAX_DOLL,
+        _("MUNCHLAX DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
         10000,
-        DecorDesc_REGIROCK_DOLL,
-        DecorGfx_REGIROCK_DOLL
+        DecorDesc_MUNCHLAX_DOLL,
+        DecorGfx_MUNCHLAX_DOLL
     }, {
-        DECOR_REGICE_DOLL,
-        _("REGICE DOLL"),
+        DECOR_LICKILICKY_DOLL,
+        _("LICKILICKY DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
         10000,
-        DecorDesc_REGICE_DOLL,
-        DecorGfx_REGICE_DOLL
+        DecorDesc_LICKILICKY_DOLL,
+        DecorGfx_LICKILICKY_DOLL
     }, {
-        DECOR_REGISTEEL_DOLL,
-        _("REGISTEEL DOLL"),
+        DECOR_MAGNEZONE_DOLL,
+        _("MAGNEZONE DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
         10000,
-        DecorDesc_REGISTEEL_DOLL,
-        DecorGfx_REGISTEEL_DOLL}
+        DecorDesc_MAGNEZONE_DOLL,
+        DecorGfx_MAGNEZONE_DOLL}
 };

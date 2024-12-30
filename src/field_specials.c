@@ -2366,7 +2366,7 @@ static void Task_DoDeoxysTriangleInteraction(u8 taskId)
 {
     u16 r5;
     u16 r6;
-    if (FlagGet(FLAG_SYS_DEOXYS_AWAKENED) == TRUE)
+    if (FlagGet(FLAG_SYS_GLACEON_AWAKENED) == TRUE)
     {
         gSpecialVar_Result = 3;
         ScriptContext_Enable();
@@ -2374,19 +2374,19 @@ static void Task_DoDeoxysTriangleInteraction(u8 taskId)
     }
     else
     {
-        r5 = VarGet(VAR_DEOXYS_INTERACTION_NUM);
-        r6 = VarGet(VAR_DEOXYS_INTERACTION_STEP_COUNTER);
-        VarSet(VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0);
+        r5 = VarGet(VAR_GLACEON_INTERACTION_NUM);
+        r6 = VarGet(VAR_GLACEON_INTERACTION_STEP_COUNTER);
+        VarSet(VAR_GLACEON_INTERACTION_STEP_COUNTER, 0);
         if (r5 != 0 && sDeoxysStepCaps[r5 - 1] < r6)
         {
             MoveDeoxysObject(0);
-            VarSet(VAR_DEOXYS_INTERACTION_NUM, 0);
+            VarSet(VAR_GLACEON_INTERACTION_NUM, 0);
             gSpecialVar_Result = 0;
             DestroyTask(taskId);
         }
         else if (r5 == 10)
         {
-            FlagSet(FLAG_SYS_DEOXYS_AWAKENED);
+            FlagSet(FLAG_SYS_GLACEON_AWAKENED);
             gSpecialVar_Result = 2;
             ScriptContext_Enable();
             DestroyTask(taskId);
@@ -2395,7 +2395,7 @@ static void Task_DoDeoxysTriangleInteraction(u8 taskId)
         {
             r5++;
             MoveDeoxysObject(r5);
-            VarSet(VAR_DEOXYS_INTERACTION_NUM, r5);
+            VarSet(VAR_GLACEON_INTERACTION_NUM, r5);
             gSpecialVar_Result = 1;
             DestroyTask(taskId);
         }
@@ -2411,7 +2411,7 @@ static void MoveDeoxysObject(u8 num)
     if (num == 0)
         PlaySE(SE_M_CONFUSE_RAY);
     else
-        PlaySE(SE_DEOXYS_MOVE);
+        PlaySE(SE_GLACEON_MOVE);
     CreateTask(Task_WaitDeoxysFieldEffect, 8);
     gFieldEffectArguments[0] = 1;
     gFieldEffectArguments[1] = 56;
@@ -2422,13 +2422,13 @@ static void MoveDeoxysObject(u8 num)
         gFieldEffectArguments[5] = 60;
     else
         gFieldEffectArguments[5] = 5;
-    FieldEffectStart(FLDEFF_MOVE_DEOXYS_ROCK);
+    FieldEffectStart(FLDEFF_MOVE_GLACEON_ROCK);
     SetObjEventTemplateCoords(1, sDeoxysCoords[num][0], sDeoxysCoords[num][1]);
 }
 
 static void Task_WaitDeoxysFieldEffect(u8 taskId)
 {
-    if (!FieldEffectActiveListContains(FLDEFF_MOVE_DEOXYS_ROCK))
+    if (!FieldEffectActiveListContains(FLDEFF_MOVE_GLACEON_ROCK))
     {
         ScriptContext_Enable();
         DestroyTask(taskId);
@@ -2437,20 +2437,20 @@ static void Task_WaitDeoxysFieldEffect(u8 taskId)
 
 void IncrementBirthIslandRockStepCount(void)
 {
-    u16 count = VarGet(VAR_DEOXYS_INTERACTION_STEP_COUNTER);
+    u16 count = VarGet(VAR_GLACEON_INTERACTION_STEP_COUNTER);
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BIRTH_ISLAND_EXTERIOR))
     {
         count++;
         if (count > 99)
-            VarSet(VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0);
+            VarSet(VAR_GLACEON_INTERACTION_STEP_COUNTER, 0);
         else
-            VarSet(VAR_DEOXYS_INTERACTION_STEP_COUNTER, count);
+            VarSet(VAR_GLACEON_INTERACTION_STEP_COUNTER, count);
     }
 }
 
 void SetDeoxysTrianglePalette(void)
 {
-    u8 num = VarGet(VAR_DEOXYS_INTERACTION_NUM);
+    u8 num = VarGet(VAR_GLACEON_INTERACTION_NUM);
     LoadPalette(sDeoxysObjectPals[num], OBJ_PLTT_ID(10), PLTT_SIZEOF(4));
     ApplyGlobalFieldPaletteTint(10);
 }

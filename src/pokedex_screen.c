@@ -362,7 +362,6 @@ static const struct ListMenuTemplate sListMenuTemplate_KantoDexModeSelect = {
 
 static const struct ListMenuItem sListMenuItems_NatDexModeSelect[] = {
     {gText_PokemonList,                  LIST_HEADER},
-    {gText_NumericalModeKanto,           DEX_MODE(NUMERICAL_KANTO)},
     {gText_NumericalModeNational,        DEX_MODE(NUMERICAL_NATIONAL)},
     {gText_PokemonHabitats,              LIST_HEADER},
     {gText_DexCategory_GrasslandPkmn,    DEX_CATEGORY_GRASSLAND},
@@ -2200,7 +2199,7 @@ static u32 DexScreen_GetDefaultPersonality(int species)
     {
     case SPECIES_SPINDA:
         return gSaveBlock2Ptr->pokedex.spindaPersonality;
-    case SPECIES_UNOWN:
+    case SPECIES_UNOWN_B:
         return gSaveBlock2Ptr->pokedex.unownPersonality;
     default:
         return 0;
@@ -2237,13 +2236,8 @@ s8 DexScreen_GetSetPokedexFlag(u16 nationalDexNo, u8 caseId, bool8 indexIsSpecie
     switch (caseId)
     {
     case FLAG_GET_SEEN:
-        if (gSaveBlock2Ptr->pokedex.seen[index] & mask)
-        {
-            // Anticheat
-            if ((gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen1[index] & mask)
-                && (gSaveBlock2Ptr->pokedex.seen[index] & mask) == (gSaveBlock1Ptr->seen2[index] & mask))
-                retVal = 1;
-        }
+        // Let players see which Pokemon are in the game.
+        retVal = TRUE;
         break;
     case FLAG_GET_CAUGHT:
         if (gSaveBlock2Ptr->pokedex.owned[index] & mask)

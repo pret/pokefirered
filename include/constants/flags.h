@@ -166,10 +166,10 @@
 #define FLAG_HIDE_SELPHYS_BUTLER                           0x096
 #define FLAG_HIDE_FOUR_ISLAND_RIVAL                        0x097
 #define FLAG_HIDE_SIX_ISLAND_POKECENTER_RIVAL              0x098
-#define FLAG_HIDE_DEOXYS                                   0x099
+#define FLAG_HIDE_GLACEON                                   0x099
 #define FLAG_HIDE_BIRTH_ISLAND_METEORITE                   0x09A
-#define FLAG_HIDE_LUGIA                                    0x09B
-#define FLAG_HIDE_HO_OH                                    0x09C
+#define FLAG_HIDE_MISMAGIUS                                    0x09B
+#define FLAG_HIDE_HONCHKROW                                    0x09C
 #define FLAG_HIDE_POSTGAME_GOSSIPERS                       0x09D
 #define FLAG_HIDE_FAME_CHECKER_ERIKA_JOURNALS              0x09E
 #define FLAG_HIDE_FAME_CHECKER_KOGA_JOURNAL                0x09F
@@ -764,7 +764,7 @@
 #define FLAG_LEARNED_ALL_MOVES_AT_CAPE_BRINK             0x2E1
 #define FLAG_GOT_NUGGET_FROM_DUNSPARCE_TUNNEL            0x2E2
 #define FLAG_USED_CUT_ON_RUIN_VALLEY_BRAILLE             0x2E3
-#define FLAG_FOUGHT_DEOXYS                               0x2E4
+#define FLAG_FOUGHT_GLACEON                               0x2E4
 #define FLAG_0x2E5                                       0x2E5
 #define FLAG_0x2E6                                       0x2E6
 #define FLAG_0x2E7                                       0x2E7
@@ -778,12 +778,12 @@
 #define FLAG_GOT_HM06                                    0x2EF
 #define FLAG_SHOWN_MYSTIC_TICKET                         0x2F0
 #define FLAG_SHOWN_AURORA_TICKET                         0x2F1
-#define FLAG_FOUGHT_LUGIA                                0x2F2
-#define FLAG_FOUGHT_HO_OH                                0x2F3
+#define FLAG_FOUGHT_MISMAGIUS                                0x2F2
+#define FLAG_FOUGHT_HONCHKROW                                0x2F3
 #define FLAG_OAK_SAW_DEX_COMPLETION                      0x2F4
-#define FLAG_LUGIA_FLEW_AWAY                             0x2F5
-#define FLAG_HO_OH_FLEW_AWAY                             0x2F6
-#define FLAG_DEOXYS_FLEW_AWAY                            0x2F7
+#define FLAG_MISMAGIUS_FLEW_AWAY                             0x2F5
+#define FLAG_HONCHKROW_FLEW_AWAY                             0x2F6
+#define FLAG_GLACEON_FLEW_AWAY                            0x2F7
 #define FLAG_TALKED_TO_TEA_LADY_AFTER_HOF                0x2F8
 #define FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION            0x2F9
 #define FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE                0x2FA
@@ -1403,7 +1403,7 @@
 #define FLAG_SYS_SEVII_MAP_123                                      (SYS_FLAGS + 0x45)
 #define FLAG_SYS_SEVII_MAP_4567                                     (SYS_FLAGS + 0x46)
 #define FLAG_SYS_GOT_BERRY_POUCH                                    (SYS_FLAGS + 0x47)
-#define FLAG_SYS_DEOXYS_AWAKENED                                    (SYS_FLAGS + 0x48)
+#define FLAG_SYS_GLACEON_AWAKENED                                    (SYS_FLAGS + 0x48)
 #define FLAG_SYS_UNLOCKED_TANOBY_RUINS                              (SYS_FLAGS + 0x49)
 #define FLAG_ENABLE_SHIP_NAVEL_ROCK                                 (SYS_FLAGS + 0x4A)
 #define FLAG_ENABLE_SHIP_BIRTH_ISLAND                               (SYS_FLAGS + 0x4B)

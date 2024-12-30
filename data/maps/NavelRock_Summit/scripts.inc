@@ -1,4 +1,4 @@
-.set LOCALID_HO_OH, 1
+.set LOCALID_HONCHKROW, 1
 
 NavelRock_Summit_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Summit_OnTransition
@@ -6,20 +6,20 @@ NavelRock_Summit_MapScripts::
 	.byte 0
 
 NavelRock_Summit_OnTransition::
-	call_if_set FLAG_FOUGHT_HO_OH, NavelRock_Summit_EventScript_HideHoOh
-	call_if_unset FLAG_FOUGHT_HO_OH, NavelRock_Summit_EventScript_TryShowHoOh
+	call_if_set FLAG_FOUGHT_HONCHKROW, NavelRock_Summit_EventScript_HideHoOh
+	call_if_unset FLAG_FOUGHT_HONCHKROW, NavelRock_Summit_EventScript_TryShowHoOh
 	end
 
 NavelRock_Summit_EventScript_HideHoOh::
 	setvar VAR_TEMP_1, 1
-	setflag FLAG_HIDE_HO_OH
+	setflag FLAG_HIDE_HONCHKROW
 	return
 
 NavelRock_Summit_EventScript_TryShowHoOh::
 	setvar VAR_TEMP_1, 1
-	goto_if_set FLAG_HO_OH_FLEW_AWAY, EventScript_Return
+	goto_if_set FLAG_HONCHKROW_FLEW_AWAY, EventScript_Return
 	setvar VAR_TEMP_1, 0
-	clearflag FLAG_HIDE_HO_OH
+	clearflag FLAG_HIDE_HONCHKROW
 	return
 
 NavelRock_Summit_OnResume::
@@ -29,7 +29,7 @@ NavelRock_Summit_OnResume::
 NavelRock_Summit_EventScript_TryRemoveHoOh::
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, EventScript_Return
-	removeobject LOCALID_HO_OH
+	removeobject LOCALID_HONCHKROW
 	return
 
 NavelRock_Summit_EventScript_HoOh::
@@ -41,14 +41,14 @@ NavelRock_Summit_EventScript_HoOh::
 	setvar VAR_0x8004, 3  @ Num loops
 	setvar VAR_0x8005, 35 @ Delay
 	special LoopWingFlapSound
-	applymovement LOCALID_HO_OH, Movement_HoOhAppear
+	applymovement LOCALID_HONCHKROW, Movement_HoOhAppear
 	applymovement OBJ_EVENT_ID_CAMERA, Movement_CameraPanUp
 	waitmovement 0
 	delay 50
 	setweather 0
 	doweather
 	waitse
-	playmoncry SPECIES_HO_OH, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_HONCHKROW, CRY_MODE_ENCOUNTER
 	delay 30
 	waitmoncry
 	delay 60
@@ -56,31 +56,31 @@ NavelRock_Summit_EventScript_HoOh::
 	setvar VAR_0x8005, 35 @ Delay
 	special LoopWingFlapSound
 	applymovement OBJ_EVENT_ID_CAMERA, Movement_CameraPanDown
-	applymovement LOCALID_HO_OH, Movement_HoOhApproach
+	applymovement LOCALID_HONCHKROW, Movement_HoOhApproach
 	waitmovement 0
 	special RemoveCameraObject
-	seteventmon SPECIES_HO_OH, 70
+	seteventmon SPECIES_HONCHKROW, 70
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	setvar VAR_LAST_TALKED, LOCALID_HO_OH
+	setvar VAR_LAST_TALKED, LOCALID_HONCHKROW
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Summit_EventScript_DefeatedHoOh
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NavelRock_Summit_EventScript_RanFromHoOh
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NavelRock_Summit_EventScript_RanFromHoOh
-	setflag FLAG_FOUGHT_HO_OH
+	setflag FLAG_FOUGHT_HONCHKROW
 	releaseall
 	end
 
 NavelRock_Summit_EventScript_DefeatedHoOh::
-	setflag FLAG_HO_OH_FLEW_AWAY
-	setvar VAR_0x8004, SPECIES_HO_OH
+	setflag FLAG_HONCHKROW_FLEW_AWAY
+	setvar VAR_0x8004, SPECIES_HONCHKROW
 	goto EventScript_MonFlewAway
 	end
 
 NavelRock_Summit_EventScript_RanFromHoOh::
-	setvar VAR_0x8004, SPECIES_HO_OH
+	setvar VAR_0x8004, SPECIES_HONCHKROW
 	goto EventScript_MonFlewAway
 	end
 

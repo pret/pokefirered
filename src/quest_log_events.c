@@ -1840,9 +1840,9 @@ static bool8 IsSpeciesFromSpecialEncounter(u16 species)
     case SPECIES_ZAPDOS:
     case SPECIES_MOLTRES:
     case SPECIES_MEWTWO:
-    case SPECIES_LUGIA:
-    case SPECIES_HO_OH:
-    case SPECIES_DEOXYS:
+    case SPECIES_MISMAGIUS:
+    case SPECIES_HONCHKROW:
+    case SPECIES_GLACEON:
         return TRUE;
     }
     return FALSE;

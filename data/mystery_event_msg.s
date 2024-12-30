@@ -210,7 +210,7 @@ MysteryEventScript_AuroraTicket::
 	lock
 	faceplayer
 	vgoto_if_set FLAG_RECEIVED_AURORA_TICKET, AuroraTicket_Obtained
-	vgoto_if_set FLAG_FOUGHT_DEOXYS, AuroraTicket_Obtained
+	vgoto_if_set FLAG_FOUGHT_GLACEON, AuroraTicket_Obtained
 	checkitem ITEM_AURORA_TICKET, 1
 	vgoto_if_eq VAR_RESULT, TRUE, AuroraTicket_Obtained
 	vmessage sText_AuroraTicket1
@@ -268,8 +268,8 @@ MysteryEventScript_MysticTicket::
 	lock
 	faceplayer
 	vgoto_if_set FLAG_RECEIVED_MYSTIC_TICKET, MysticTicket_Obtained
-	vgoto_if_set FLAG_FOUGHT_LUGIA, MysticTicket_Obtained
-	vgoto_if_set FLAG_FOUGHT_HO_OH, MysticTicket_Obtained
+	vgoto_if_set FLAG_FOUGHT_MISMAGIUS, MysticTicket_Obtained
+	vgoto_if_set FLAG_FOUGHT_HONCHKROW, MysticTicket_Obtained
 	checkitem ITEM_MYSTIC_TICKET, 1
 	vgoto_if_eq VAR_RESULT, TRUE, MysticTicket_Obtained
 	vmessage sText_MysticTicket2

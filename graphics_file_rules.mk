@@ -10,7 +10,7 @@ BATINTGFXDIR := graphics/battle_interface
 MASKSGFXDIR := graphics/battle_anims/masks
 BATTRANSGFXDIR := graphics/battle_transitions
 TYPESGFXDIR := graphics/types
-RAYQUAZAGFXDIR := graphics/rayquaza_scene
+DUSKNOIRGFXDIR := graphics/rayquaza_scene
 ROULETTEGFXDIR := graphics/roulette
 SLOTMACHINEGFXDIR := graphics/slot_machine
 PSSGFXDIR := graphics/pokemon_storage
@@ -35,31 +35,6 @@ JPCONTESTGFXDIR := graphics/contest/japanese
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
-
-CASTFORMGFXDIR := graphics/pokemon/castform
-$(CASTFORMGFXDIR)/front.4bpp: $(CASTFORMGFXDIR)/normal/front.4bpp \
-											$(CASTFORMGFXDIR)/sunny/front.4bpp \
-											$(CASTFORMGFXDIR)/rainy/front.4bpp \
-											$(CASTFORMGFXDIR)/snowy/front.4bpp
-	@cat $^ >$@
-
-$(CASTFORMGFXDIR)/back.4bpp: $(CASTFORMGFXDIR)/normal/back.4bpp \
-									 $(CASTFORMGFXDIR)/sunny/back.4bpp \
-									 $(CASTFORMGFXDIR)/rainy/back.4bpp \
-									 $(CASTFORMGFXDIR)/snowy/back.4bpp
-	@cat $^ >$@
-
-$(CASTFORMGFXDIR)/normal.gbapal: $(CASTFORMGFXDIR)/normal/normal.gbapal \
-									 $(CASTFORMGFXDIR)/sunny/normal.gbapal \
-									 $(CASTFORMGFXDIR)/rainy/normal.gbapal \
-									 $(CASTFORMGFXDIR)/snowy/normal.gbapal
-	@cat $^ >$@
-
-$(CASTFORMGFXDIR)/shiny.gbapal: $(CASTFORMGFXDIR)/normal/shiny.gbapal \
-									$(CASTFORMGFXDIR)/sunny/shiny.gbapal \
-									$(CASTFORMGFXDIR)/rainy/shiny.gbapal \
-									$(CASTFORMGFXDIR)/snowy/shiny.gbapal
-	@cat $^ >$@
 
 $(FONTGFXDIR)/latin_small.latfont: $(FONTGFXDIR)/latin_small.png
 	$(GFX) $< $@
@@ -214,23 +189,23 @@ $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
 $(INTERFACEGFXDIR)/bag_screen.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
 
-$(RAYQUAZAGFXDIR)/rayquaza.8bpp: %.8bpp: %.png
+$(DUSKNOIRGFXDIR)/rayquaza.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 227 -Wnum_tiles
 
-$(RAYQUAZAGFXDIR)/overcast.4bpp: %.4bpp: %.png
+$(DUSKNOIRGFXDIR)/overcast.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 313 -Wnum_tiles
 
-$(RAYQUAZAGFXDIR)/rayquaza_fly1.4bpp: %.4bpp: %.png
+$(DUSKNOIRGFXDIR)/rayquaza_fly1.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 124 -Wnum_tiles
 
-$(RAYQUAZAGFXDIR)/rayquaza_tail_fix.4bpp: $(RAYQUAZAGFXDIR)/rayquaza_tail.4bpp
+$(DUSKNOIRGFXDIR)/rayquaza_tail_fix.4bpp: $(DUSKNOIRGFXDIR)/rayquaza_tail.4bpp
 	cp $< $@
 	head -c 12 /dev/zero >> $@
 
-$(RAYQUAZAGFXDIR)/chase_streaks.4bpp: %.4bpp: %.png
+$(DUSKNOIRGFXDIR)/chase_streaks.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 19 -Wnum_tiles
 
-$(RAYQUAZAGFXDIR)/rayquaza_chase.4bpp: %.4bpp: %.png
+$(DUSKNOIRGFXDIR)/rayquaza_chase.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 155 -Wnum_tiles
 
 graphics/picture_frame/frame5.4bpp: %.4bpp: %.png

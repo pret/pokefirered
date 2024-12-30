@@ -3776,7 +3776,7 @@ static void Task_MoveDeoxysRock_Step(u8 taskId)
             sprite->y = data[3];
             ShiftStillObjectEventCoords(objectEvent);
             objectEvent->triggerGroundEffectsOnStop = TRUE;
-            FieldEffectActiveListRemove(FLDEFF_MOVE_DEOXYS_ROCK);
+            FieldEffectActiveListRemove(FLDEFF_MOVE_GLACEON_ROCK);
             DestroyTask(taskId);
         }
         break;
@@ -3870,7 +3870,7 @@ u32 FldEff_DestroyDeoxysRock(void)
         gTasks[taskId].tMapGroup = gFieldEffectArguments[2];
     }
     else
-        FieldEffectActiveListRemove(FLDEFF_DESTROY_DEOXYS_ROCK);
+        FieldEffectActiveListRemove(FLDEFF_DESTROY_GLACEON_ROCK);
 
     return FALSE;
 }
@@ -3959,7 +3959,7 @@ static void DestroyDeoxysRockEffect_WaitAndEnd(s16 *data, u8 taskId)
     {
         InstallCameraPanAheadCallback();
         RemoveObjectEventByLocalIdAndMap(tLocalId, tMapNum, tMapGroup);
-        FieldEffectActiveListRemove(FLDEFF_DESTROY_DEOXYS_ROCK);
+        FieldEffectActiveListRemove(FLDEFF_DESTROY_GLACEON_ROCK);
         DestroyTask(taskId);
     }
 }

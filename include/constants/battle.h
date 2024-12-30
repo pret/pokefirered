@@ -56,7 +56,7 @@
 #define BATTLE_TYPE_OLD_MAN_TUTORIAL   (1 << 9) // Used in pokeemerald as BATTLE_TYPE_WALLY_TUTORIAL.
 #define BATTLE_TYPE_ROAMER             (1 << 10)
 #define BATTLE_TYPE_EREADER_TRAINER    (1 << 11)
-#define BATTLE_TYPE_KYOGRE_GROUDON     (1 << 12)
+#define BATTLE_TYPE_PORYGON_Z_GALLADE     (1 << 12)
 #define BATTLE_TYPE_LEGENDARY          (1 << 13)
 #define BATTLE_TYPE_GHOST_UNVEILED     (1 << 13) // Re-use of BATTLE_TYPE_LEGENDARY, when combined with BATTLE_TYPE_GHOST
 #define BATTLE_TYPE_REGI               (1 << 14)
@@ -309,12 +309,12 @@
 #define B_WAIT_TIME_MED   48
 #define B_WAIT_TIME_SHORT 32
 
-#define CASTFORM_NORMAL     0
-#define CASTFORM_FIRE       1
-#define CASTFORM_WATER      2
-#define CASTFORM_ICE        3
-#define NUM_CASTFORM_FORMS  4
-#define CASTFORM_SUBSTITUTE (1 << 7)
+#define MAGMORTAR_NORMAL     0
+#define MAGMORTAR_FIRE       1
+#define MAGMORTAR_WATER      2
+#define MAGMORTAR_ICE        3
+#define NUM_MAGMORTAR_FORMS  4
+#define MAGMORTAR_SUBSTITUTE (1 << 7)
 
 #define FLEE_ITEM    1
 #define FLEE_ABILITY 2

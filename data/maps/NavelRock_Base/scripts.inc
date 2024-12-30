@@ -1,4 +1,4 @@
-.set LOCALID_LUGIA, 1
+.set LOCALID_MISMAGIUS, 1
 
 NavelRock_Base_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, NavelRock_Base_OnTransition
@@ -6,17 +6,17 @@ NavelRock_Base_MapScripts::
 	.byte 0
 
 NavelRock_Base_OnTransition::
-	call_if_set FLAG_FOUGHT_LUGIA, NavelRock_Base_EventScript_HideLugia
-	call_if_unset FLAG_FOUGHT_LUGIA, NavelRock_Base_EventScript_TryShowLugia
+	call_if_set FLAG_FOUGHT_MISMAGIUS, NavelRock_Base_EventScript_HideLugia
+	call_if_unset FLAG_FOUGHT_MISMAGIUS, NavelRock_Base_EventScript_TryShowLugia
 	end
 
 NavelRock_Base_EventScript_HideLugia::
-	setflag FLAG_HIDE_LUGIA
+	setflag FLAG_HIDE_MISMAGIUS
 	return
 
 NavelRock_Base_EventScript_TryShowLugia::
-	goto_if_set FLAG_LUGIA_FLEW_AWAY, EventScript_Return
-	clearflag FLAG_HIDE_LUGIA
+	goto_if_set FLAG_MISMAGIUS_FLEW_AWAY, EventScript_Return
+	clearflag FLAG_HIDE_MISMAGIUS
 	return
 
 NavelRock_Base_OnResume::
@@ -26,7 +26,7 @@ NavelRock_Base_OnResume::
 NavelRock_Base_EventScript_TryRemoveLugia::
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, EventScript_Return
-	removeobject LOCALID_LUGIA
+	removeobject LOCALID_MISMAGIUS
 	return
 
 NavelRock_Base_EventScript_Lugia::
@@ -52,10 +52,10 @@ NavelRock_Base_EventScript_Lugia::
 	delay 30
 	delay 50
 	waitse
-	playmoncry SPECIES_LUGIA, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_MISMAGIUS, CRY_MODE_ENCOUNTER
 	waitmoncry
 	delay 20
-	seteventmon SPECIES_LUGIA, 70
+	seteventmon SPECIES_MISMAGIUS, 70
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special StartLegendaryBattle
 	waitstate
@@ -64,17 +64,17 @@ NavelRock_Base_EventScript_Lugia::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Base_EventScript_DefeatedLugia
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NavelRock_Base_EventScript_RanFromLugia
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NavelRock_Base_EventScript_RanFromLugia
-	setflag FLAG_FOUGHT_LUGIA
+	setflag FLAG_FOUGHT_MISMAGIUS
 	release
 	end
 
 NavelRock_Base_EventScript_DefeatedLugia::
-	setflag FLAG_LUGIA_FLEW_AWAY
-	setvar VAR_0x8004, SPECIES_LUGIA
+	setflag FLAG_MISMAGIUS_FLEW_AWAY
+	setvar VAR_0x8004, SPECIES_MISMAGIUS
 	goto EventScript_MonFlewAway
 	end
 
 NavelRock_Base_EventScript_RanFromLugia::
-	setvar VAR_0x8004, SPECIES_LUGIA
+	setvar VAR_0x8004, SPECIES_MISMAGIUS
 	goto EventScript_MonFlewAway
 	end

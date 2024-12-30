@@ -342,8 +342,8 @@ EVIL_TEAM      = FD 08 @ "MAGMA"   / "AQUA"
 GOOD_TEAM      = FD 09 @ "AQUA"    / "MAGMA"
 EVIL_LEADER    = FD 0A @ "MAXIE"   / "ARCHIE"
 GOOD_LEADER    = FD 0B @ "ARCHIE"  / "MAXIE"
-EVIL_LEGENDARY = FD 0C @ "GROUDON" / "KYOGRE"
-GOOD_LEGENDARY = FD 0D @ "KYOGRE"  / "GROUDON"
+EVIL_LEGENDARY = FD 0C @ "GALLADE" / "PORYGON_Z"
+GOOD_LEGENDARY = FD 0D @ "PORYGON_Z"  / "GALLADE"
 
 @ battle macros
 
@@ -725,7 +725,7 @@ SE_SS_ANNE_HORN           = F9 00
 SE_HELP_OPEN              = FA 00
 SE_HELP_CLOSE             = FB 00
 SE_HELP_ERROR             = FC 00
-SE_DEOXYS_MOVE            = FD 00
+SE_GLACEON_MOVE            = FD 00
 SE_POKE_JUMP_SUCCESS      = FE 00
 SE_POKE_JUMP_FAILURE      = FF 00
 MUS_HEAL                  = 00 01
@@ -811,11 +811,11 @@ MUS_SEVII_123             = 4F 01
 MUS_SEVII_45              = 50 01
 MUS_SEVII_67              = 51 01
 MUS_POKE_FLUTE            = 52 01
-MUS_VS_DEOXYS             = 53 01
+MUS_VS_GLACEON             = 53 01
 MUS_VS_MEWTWO             = 54 01
 MUS_VS_LEGEND             = 55 01
 MUS_ENCOUNTER_GYM_LEADER  = 56 01
-MUS_ENCOUNTER_DEOXYS      = 57 01
+MUS_ENCOUNTER_GLACEON      = 57 01
 MUS_TRAINER_TOWER         = 58 01
 MUS_SLOW_PALLET           = 59 01
 MUS_TEACHY_TV_MENU        = 5A 01

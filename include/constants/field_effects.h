@@ -68,8 +68,8 @@
 #define FLDEFF_SMILEY_FACE_ICON          64
 #define FLDEFF_USE_VS_SEEKER             65
 #define FLDEFF_DOUBLE_EXCL_MARK_ICON     66
-#define FLDEFF_MOVE_DEOXYS_ROCK          67
-#define FLDEFF_DESTROY_DEOXYS_ROCK       68
+#define FLDEFF_MOVE_GLACEON_ROCK          67
+#define FLDEFF_DESTROY_GLACEON_ROCK       68
 #define FLDEFF_PHOTO_FLASH               69
 
 #define FLDEFF_PAL_TAG_GENERAL_0          0x1004

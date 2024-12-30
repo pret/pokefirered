@@ -39,7 +39,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
 '''
 
 with open('src/data/pokemon/gen4_tmhm_learnsets.h', 'w') as c_file:
-  for dex_no in range (1, 387):
+  for dex_no in range (1, 493):
     if dex_no not in mon2moves:
       s += '[' + str(dex_no) + '] = G4TMHM_LEARNSET(0),\n\n'
     else:

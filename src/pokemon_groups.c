@@ -88,13 +88,11 @@ u16 GetSpeciesFromGroup(u16 species, u16 manual_random) {
 
   random = (manual_random ? manual_random : Random()) % 50;
 
-  if ((random == 0) &&
-      (group != gGroup_Fish1) && (group != gGroup_Fish2) &&
-      (group != gGroup_LeggedWater1) && (group != gGroup_LeggedWater2)) {
+  if (random == 0 && group != gGroup_Water1 && group != gGroup_Water2) {
     // 2% chance that the player found the "rare" species
     // that is unique to the current (non-water) route. We
     // overwrite `group` and ignore `species`.
-    group = gGroup_Rare2Percent;
+    group = gGroup_EarlyBoost;
     combinedHash = HashCombine(GameHash(), MapHash());
   } else if (random <= 17) {
     // 34% chance the player found the less-common mapping

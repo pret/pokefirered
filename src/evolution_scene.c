@@ -577,7 +577,7 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(gEvolutionTable[preEvoSpecies][1].targetSpecies), FLAG_SET_SEEN);
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(gEvolutionTable[preEvoSpecies][1].targetSpecies), FLAG_SET_CAUGHT);
 
-        if (GetMonData(shedinja, MON_DATA_SPECIES) == SPECIES_SHEDINJA
+        if (GetMonData(shedinja, MON_DATA_SPECIES) == SPECIES_ELECTIVIRE
             && GetMonData(shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
             && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
                 SetMonData(shedinja, MON_DATA_NICKNAME, sText_ShedinjaJapaneseName);
@@ -640,7 +640,7 @@ static void Task_EvolutionScene(u8 taskId)
     // yet unlocked, such as Crobat.
     if (!IsNationalPokedexEnabled()
         && gTasks[taskId].tState == EVOSTATE_WAIT_CYCLE_MON_SPRITE
-        && gTasks[taskId].tPostEvoSpecies > SPECIES_MEW)
+        && gTasks[taskId].tPostEvoSpecies > SPECIES_BUDEW)
     {
         gTasks[taskId].tState = EVOSTATE_CANCEL;
         gTasks[taskId].tEvoWasStopped = TRUE;
@@ -1089,7 +1089,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
     // yet unlocked, such as Crobat.
     if (!IsNationalPokedexEnabled()
         && gTasks[taskId].tState == T_EVOSTATE_WAIT_CYCLE_MON_SPRITE
-        && gTasks[taskId].tPostEvoSpecies > SPECIES_MEW)
+        && gTasks[taskId].tPostEvoSpecies > SPECIES_BUDEW)
     {
         gTasks[taskId].tState = EVOSTATE_TRY_LEARN_MOVE;
         gTasks[taskId].tEvoWasStopped = TRUE;

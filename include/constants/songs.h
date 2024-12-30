@@ -256,7 +256,7 @@
 #define SE_HELP_OPEN              250 // SE_HELP_OP
 #define SE_HELP_CLOSE             251 // SE_HELP_CL
 #define SE_HELP_ERROR             252 // SE_HELP_NG
-#define SE_DEOXYS_MOVE            253 // SE_DEOMOV
+#define SE_GLACEON_MOVE            253 // SE_DEOMOV
 #define SE_POKE_JUMP_SUCCESS      254 // SE_EXCELLENT
 #define SE_POKE_JUMP_FAILURE      255 // SE_NAWAMISS
 // Music kept from RS
@@ -344,11 +344,11 @@
 #define MUS_SEVII_45              336 // MUS_NANA45
 #define MUS_SEVII_67              337 // MUS_NANA67
 #define MUS_POKE_FLUTE            338 // MUS_POKEFUE
-#define MUS_VS_DEOXYS             339 // MUS_VS_DEO
+#define MUS_VS_GLACEON             339 // MUS_VS_DEO
 #define MUS_VS_MEWTWO             340 // MUS_VS_MYU2
 #define MUS_VS_LEGEND             341 // MUS_VS_DEN
 #define MUS_ENCOUNTER_GYM_LEADER  342 // MUS_EXEYE
-#define MUS_ENCOUNTER_DEOXYS      343 // MUS_DEOEYE
+#define MUS_ENCOUNTER_GLACEON      343 // MUS_DEOEYE
 #define MUS_TRAINER_TOWER         344 // MUS_T_TOWER
 #define MUS_SLOW_PALLET           345 // MUS_SLOWMASARA
 #define MUS_TEACHY_TV_MENU        346 // MUS_TVNOIZE

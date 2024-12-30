@@ -41,11 +41,11 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange::
 CeladonCity_GameCorner_PrizeRoom_EventScript_Abra::
 	.ifdef FIRERED
 	setvar VAR_TEMP_1, SPECIES_PICHU
-	setvar VAR_TEMP_2, 180
+	setvar VAR_TEMP_2, 999
 	.else
 	.ifdef LEAFGREEN
 	setvar VAR_TEMP_1, SPECIES_PICHU
-	setvar VAR_TEMP_2, 120
+	setvar VAR_TEMP_2, 999
 	.endif
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
@@ -53,12 +53,12 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_Abra::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_Clefairy::
 	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_CLEFFA
-	setvar VAR_TEMP_2, 500
+	setvar VAR_TEMP_1, SPECIES_AZURILL
+	setvar VAR_TEMP_2, 1999
 	.else
 	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_CLEFFA
-	setvar VAR_TEMP_2, 750
+	setvar VAR_TEMP_1, SPECIES_AZURILL
+	setvar VAR_TEMP_2, 1999
 	.endif
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
@@ -66,12 +66,12 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_Clefairy::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_DratiniPinsir::
 	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_IGGLYBUFF
-	setvar VAR_TEMP_2, 2800
+	setvar VAR_TEMP_1, SPECIES_BUDEW
+	setvar VAR_TEMP_2, 2999
 	.else
 	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_IGGLYBUFF
-	setvar VAR_TEMP_2, 2500
+	setvar VAR_TEMP_1, SPECIES_BUDEW
+	setvar VAR_TEMP_2, 2999
 	.endif
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
@@ -79,12 +79,12 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_DratiniPinsir::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_ScytherDratini::
 	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_AZURILL
-	setvar VAR_TEMP_2, 5500
+	setvar VAR_TEMP_1, SPECIES_MIME_JR
+	setvar VAR_TEMP_2, 4999
 	.else
 	.ifdef LEAFGREEN
-	setvar VAR_TEMP_1, SPECIES_AZURILL
-	setvar VAR_TEMP_2, 4600
+	setvar VAR_TEMP_1, SPECIES_MIME_JR
+	setvar VAR_TEMP_2, 4999
 	.endif
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
@@ -97,7 +97,7 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_Porygon::
 	.else
 	.ifdef LEAFGREEN
 	setvar VAR_TEMP_1, SPECIES_TOGEPI
-	setvar VAR_TEMP_2, 6500
+	setvar VAR_TEMP_2, 9999
 	.endif
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon

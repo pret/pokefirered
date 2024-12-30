@@ -77,7 +77,7 @@
 // Step counter. Wraps around at 100. Used to
 // determine whether the player has reached the
 // triangle in time.
-#define VAR_DEOXYS_INTERACTION_STEP_COUNTER 0x4026
+#define VAR_GLACEON_INTERACTION_STEP_COUNTER 0x4026
 
 // Bits 0-11 are the number of mons in all boxes
 // with the species sanity bit set.
@@ -109,7 +109,7 @@
 #define VAR_RESORT_GORGEOUS_REWARD         0x403B
 #define VAR_0x403C                         0x403C // Set to 0x0302, never read
 #define VAR_HERACROSS_SIZE_RECORD          0x403D
-#define VAR_DEOXYS_INTERACTION_NUM         0x403E
+#define VAR_GLACEON_INTERACTION_NUM         0x403E
 #define VAR_0x403F                         0x403F
 #define VAR_MAGIKARP_SIZE_RECORD           0x4040
 #define VAR_0x4041                         0x4041

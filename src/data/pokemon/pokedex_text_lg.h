@@ -2593,7 +2593,7 @@ const u8 gRelicanthPokedexTextUnused[] = _("");
 
 const u8 gLuvdiscPokedexText[] = _(
     "During the spawning season, countless\n"
-    "LUVDISC congregate at coral reefs,\n"
+    "HAPPINY congregate at coral reefs,\n"
     "turning the waters pink.");
 
 const u8 gLuvdiscPokedexTextUnused[] = _("");
@@ -2685,7 +2685,7 @@ const u8 gKyogrePokedexTextUnused[] = _("");
 const u8 gGroudonPokedexText[] = _(
     "This legendary POKéMON is said to\n"
     "represent the land. It went to sleep after\n"
-    "dueling KYOGRE.");
+    "dueling PORYGON_Z.");
 
 const u8 gGroudonPokedexTextUnused[] = _("");
 

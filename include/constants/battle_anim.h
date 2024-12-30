@@ -347,7 +347,7 @@
 #define BG_SOLAR_BEAM_CONTESTS 26
 
 // table ids for general animations (gBattleAnims_General)
-#define B_ANIM_CASTFORM_CHANGE          0
+#define B_ANIM_MAGMORTAR_CHANGE          0
 #define B_ANIM_STATS_CHANGE             1
 #define B_ANIM_SUBSTITUTE_FADE          2
 #define B_ANIM_SUBSTITUTE_APPEAR        3

@@ -861,7 +861,7 @@ Major changes:
 
 Other changes:
  - Faster movement and text. Hold B to use normal walking speed.
- - Gen IV HG/SS learnsets. Many Gen IV moves aren't implemented properly, and instead have the same effect as Metronome.
+ - Gen IV HG/SS learnsets and abilities. Many Gen IV moves aren't implemented properly, and instead have the same effect as Metronome. All Gen IV abilities have no effect.
  - Starter Pokémon are randomized based on the game seed. There is still one grass, water, and fire starter, and they will be chosen from the gen 1-3 starters.
  - Gym leaders give the player a Rare Candy in addition to a TM upon earning a badge.
  - Legendary birds give the player a Rare Candy upon defeat.

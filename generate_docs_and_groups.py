@@ -414,7 +414,7 @@ pokes = [
   ('WURMPLE', 'GrassBug1'),
   ('SILCOON', 'GrassBug1'),
   ('BEAUTIFLY', 'GrassBug3'),
-  ('CASCOON', 'GrassBug1'),
+  ('CASCOON', 'Cave1'),
   ('DUSTOX', 'GrassBug3'),
 
   ('LOTAD', 'GrassBug2'),
@@ -483,7 +483,7 @@ pokes = [
 
   ('VOLBEAT', 'GrassBug1'),
 
-  ('ILLUMISE', 'GrassBug1'),
+  ('ILLUMISE', 'GrassBug2'),
 
   ('ROSELIA', 'GrassBug2'),
 
@@ -506,7 +506,7 @@ pokes = [
 
   ('SPINDA', 'NormalFlying1'),
 
-  ('TRAPINCH', 'Cave1'),
+  ('TRAPINCH', 'Overworld'),
   ('VIBRAVA', 'CeruleanCave'),
   ('FLYGON', 'NotCatchable'),
 

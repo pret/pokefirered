@@ -89,12 +89,12 @@ const u16 gGroup_Cave1[] =
   SPECIES_SNEASEL,
   SPECIES_SWINUB,
   SPECIES_TYROGUE,
+  SPECIES_CASCOON,
   SPECIES_WHISMUR,
   SPECIES_MAKUHITA,
   SPECIES_NOSEPASS,
   SPECIES_ARON,
   SPECIES_MEDITITE,
-  SPECIES_TRAPINCH,
   SPECIES_ANORITH,
   SPECIES_SNORUNT,
 };
@@ -124,7 +124,7 @@ const u16 gGroup_Cave2[] =
 
 const u16 gGroup_GrassBug1[] =
 {
-  /*SIZE=*/15,
+  /*SIZE=*/13,
   SPECIES_CATERPIE,
   SPECIES_METAPOD,
   SPECIES_WEEDLE,
@@ -136,15 +136,13 @@ const u16 gGroup_GrassBug1[] =
   SPECIES_PINECO,
   SPECIES_WURMPLE,
   SPECIES_SILCOON,
-  SPECIES_CASCOON,
   SPECIES_NINCADA,
   SPECIES_VOLBEAT,
-  SPECIES_ILLUMISE,
 };
 
 const u16 gGroup_GrassBug2[] =
 {
-  /*SIZE=*/19,
+  /*SIZE=*/20,
   SPECIES_ODDISH,
   SPECIES_VENONAT,
   SPECIES_BELLSPROUT,
@@ -160,6 +158,7 @@ const u16 gGroup_GrassBug2[] =
   SPECIES_LOTAD,
   SPECIES_SEEDOT,
   SPECIES_SHROOMISH,
+  SPECIES_ILLUMISE,
   SPECIES_ROSELIA,
   SPECIES_CACNEA,
   SPECIES_LILEEP,
@@ -327,7 +326,7 @@ const u16 gGroup_Water2[] =
 
 const u16 gGroup_Overworld[] =
 {
-  /*SIZE=*/35,
+  /*SIZE=*/36,
   SPECIES_EKANS,
   SPECIES_PIKACHU,
   SPECIES_SANDSHREW,
@@ -354,6 +353,7 @@ const u16 gGroup_Overworld[] =
   SPECIES_GULPIN,
   SPECIES_NUMEL,
   SPECIES_SPOINK,
+  SPECIES_TRAPINCH,
   SPECIES_ZANGOOSE,
   SPECIES_SEVIPER,
   SPECIES_SOLROCK,
@@ -808,7 +808,7 @@ const u16* const gMonGroups[] =
   [SPECIES_WURMPLE] = gGroup_GrassBug1,
   [SPECIES_SILCOON] = gGroup_GrassBug1,
   [SPECIES_BEAUTIFLY] = gGroup_GrassBug3,
-  [SPECIES_CASCOON] = gGroup_GrassBug1,
+  [SPECIES_CASCOON] = gGroup_Cave1,
   [SPECIES_DUSTOX] = gGroup_GrassBug3,
   [SPECIES_LOTAD] = gGroup_GrassBug2,
   [SPECIES_LOMBRE] = gGroup_GrassBug3,
@@ -852,7 +852,7 @@ const u16* const gMonGroups[] =
   [SPECIES_MANECTRIC] = gGroup_SafariZone,
   [SPECIES_PLUSLE] = gGroup_Urban1,
   [SPECIES_VOLBEAT] = gGroup_GrassBug1,
-  [SPECIES_ILLUMISE] = gGroup_GrassBug1,
+  [SPECIES_ILLUMISE] = gGroup_GrassBug2,
   [SPECIES_ROSELIA] = gGroup_GrassBug2,
   [SPECIES_GULPIN] = gGroup_Overworld,
   [SPECIES_SWALOT] = gGroup_SafariZone,
@@ -866,7 +866,7 @@ const u16* const gMonGroups[] =
   [SPECIES_SPOINK] = gGroup_Overworld,
   [SPECIES_GRUMPIG] = gGroup_SafariZone,
   [SPECIES_SPINDA] = gGroup_NormalFlying1,
-  [SPECIES_TRAPINCH] = gGroup_Cave1,
+  [SPECIES_TRAPINCH] = gGroup_Overworld,
   [SPECIES_VIBRAVA] = gGroup_CeruleanCave,
   [SPECIES_FLYGON] = gGroup_NotCatchable,
   [SPECIES_CACNEA] = gGroup_GrassBug2,

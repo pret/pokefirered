@@ -1950,7 +1950,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 4,
     },
 
-    [NATIONAL_DEX_MEWTWO] =
+    [NATIONAL_DEX_MIME_JR] =
     {
         .categoryName = _("GENETIC"),
         .height = 20,
@@ -2249,7 +2249,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_MIME_JR] =
+    [NATIONAL_DEX_CLEFFA] =
     {
         .categoryName = _("STAR SHAPE"),
         .height = 3,
@@ -2262,7 +2262,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_AMBIPOM] =
+    [NATIONAL_DEX_IGGLYBUFF] =
     {
         .categoryName = _("BALLOON"),
         .height = 3,
@@ -4056,7 +4056,7 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 
-    [NATIONAL_DEX_MINUN] =
+    [NATIONAL_DEX_AMBIPOM] =
     {
         .categoryName = _("CHEERING"),
         .height = 4,

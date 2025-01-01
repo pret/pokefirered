@@ -1897,25 +1897,17 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM87_SWAGGER)
                                         | G4TMHM(TM90_SUBSTITUTE)),
 
-  [SPECIES_MEWTWO] = G4TMHM_LEARNSET(G4TMHM(TM52_FOCUS_BLAST)
-                                        | G4TMHM(TM53_ENERGY_BALL)
-                                        | G4TMHM(TM56_FLING)
+  [SPECIES_MIME_JR] = G4TMHM_LEARNSET(G4TMHM(TM56_FLING)
                                         | G4TMHM(TM57_CHARGE_BEAM)
                                         | G4TMHM(TM58_ENDURE)
                                         | G4TMHM(TM60_DRAIN_PUNCH)
-                                        | G4TMHM(TM61_WILL_O_WISP)
-                                        | G4TMHM(TM63_EMBARGO)
                                         | G4TMHM(TM67_RECYCLE)
-                                        | G4TMHM(TM68_GIGA_IMPACT)
                                         | G4TMHM(TM70_FLASH)
-                                        | G4TMHM(TM71_STONE_EDGE)
-                                        | G4TMHM(TM72_AVALANCHE)
                                         | G4TMHM(TM73_THUNDER_WAVE)
                                         | G4TMHM(TM77_PSYCH_UP)
-                                        | G4TMHM(TM80_ROCK_SLIDE)
+                                        | G4TMHM(TM78_CAPTIVATE)
                                         | G4TMHM(TM82_SLEEP_TALK)
                                         | G4TMHM(TM83_NATURAL_GIFT)
-                                        | G4TMHM(TM84_POISON_JAB)
                                         | G4TMHM(TM85_DREAM_EATER)
                                         | G4TMHM(TM86_GRASS_KNOT)
                                         | G4TMHM(TM87_SWAGGER)
@@ -2186,10 +2178,8 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM87_SWAGGER)
                                         | G4TMHM(TM90_SUBSTITUTE)),
 
-  [SPECIES_MIME_JR] = G4TMHM_LEARNSET(G4TMHM(TM56_FLING)
-                                        | G4TMHM(TM57_CHARGE_BEAM)
+  [SPECIES_CLEFFA] = G4TMHM_LEARNSET(G4TMHM(TM56_FLING)
                                         | G4TMHM(TM58_ENDURE)
-                                        | G4TMHM(TM60_DRAIN_PUNCH)
                                         | G4TMHM(TM67_RECYCLE)
                                         | G4TMHM(TM70_FLASH)
                                         | G4TMHM(TM73_THUNDER_WAVE)
@@ -2200,10 +2190,9 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM85_DREAM_EATER)
                                         | G4TMHM(TM86_GRASS_KNOT)
                                         | G4TMHM(TM87_SWAGGER)
-                                        | G4TMHM(TM90_SUBSTITUTE)
-                                        | G4TMHM(TM92_TRICK_ROOM)),
+                                        | G4TMHM(TM90_SUBSTITUTE)),
 
-  [SPECIES_AMBIPOM] = G4TMHM_LEARNSET(G4TMHM(TM56_FLING)
+  [SPECIES_IGGLYBUFF] = G4TMHM_LEARNSET(G4TMHM(TM56_FLING)
                                         | G4TMHM(TM58_ENDURE)
                                         | G4TMHM(TM67_RECYCLE)
                                         | G4TMHM(TM70_FLASH)
@@ -4044,14 +4033,16 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM87_SWAGGER)
                                         | G4TMHM(TM90_SUBSTITUTE)),
 
-  [SPECIES_MINUN] = G4TMHM_LEARNSET(G4TMHM(TM56_FLING)
-                                        | G4TMHM(TM57_CHARGE_BEAM)
+  [SPECIES_AMBIPOM] = G4TMHM_LEARNSET(G4TMHM(TM56_FLING)
                                         | G4TMHM(TM58_ENDURE)
+                                        | G4TMHM(TM67_RECYCLE)
                                         | G4TMHM(TM70_FLASH)
                                         | G4TMHM(TM73_THUNDER_WAVE)
+                                        | G4TMHM(TM77_PSYCH_UP)
                                         | G4TMHM(TM78_CAPTIVATE)
                                         | G4TMHM(TM82_SLEEP_TALK)
                                         | G4TMHM(TM83_NATURAL_GIFT)
+                                        | G4TMHM(TM85_DREAM_EATER)
                                         | G4TMHM(TM86_GRASS_KNOT)
                                         | G4TMHM(TM87_SWAGGER)
                                         | G4TMHM(TM90_SUBSTITUTE)),

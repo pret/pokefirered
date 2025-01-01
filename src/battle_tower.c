@@ -146,7 +146,7 @@ static const u8 sFemaleTrainerGfx[] =
 
 const u16 gBattleTowerBannedSpecies[] = {
     SPECIES_BUDEW,
-    SPECIES_MEWTWO,
+    SPECIES_MIME_JR,
     SPECIES_HONCHKROW,
     SPECIES_MISMAGIUS,
     SPECIES_FROSLASS,

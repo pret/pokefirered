@@ -15,13 +15,13 @@ pokes = [
   ('WARTORTLE', 'WaterStarter2'),
   ('BLASTOISE', 'WaterStarter3'),
 
-  ('CATERPIE', 'ForestCave1'),
-  ('METAPOD', 'ForestCave2'),
-  ('BUTTERFREE', 'GrassBugField2'),
+  ('CATERPIE', 'GrassBug1'),
+  ('METAPOD', 'GrassBug1'),
+  ('BUTTERFREE', 'GrassBug3'),
 
-  ('WEEDLE', 'ForestCave1'),
-  ('KAKUNA', 'ForestCave2'),
-  ('BEEDRILL', 'GrassBugField2'),
+  ('WEEDLE', 'GrassBug1'),
+  ('KAKUNA', 'GrassBug1'),
+  ('BEEDRILL', 'GrassBug3'),
 
   ('PIDGEY', 'NormalFlying1'),
   ('PIDGEOTTO', 'NormalFlying2'),
@@ -62,14 +62,14 @@ pokes = [
   ('ZUBAT', 'Cave1'),
   ('GOLBAT', 'Spooky1'),
 
-  ('ODDISH', 'GrassBugField1'),
-  ('GLOOM', 'GrassBugField2'),
+  ('ODDISH', 'GrassBug2'),
+  ('GLOOM', 'GrassBug3'),
   ('VILEPLUME', 'SafariZone'),
 
-  ('PARAS', 'ForestCave2'),
+  ('PARAS', 'Cave1'),
   ('PARASECT', 'SafariZone'),
 
-  ('VENONAT', 'GrassBugField1'),
+  ('VENONAT', 'GrassBug2'),
   ('VENOMOTH', 'SafariZone'),
 
   ('DIGLETT', 'Cave1'),
@@ -99,8 +99,8 @@ pokes = [
   ('MACHOKE', 'Cave2'),
   ('MACHAMP', 'NotCatchable'),
 
-  ('BELLSPROUT', 'GrassBugField1'),
-  ('WEEPINBELL', 'GrassBugField2'),
+  ('BELLSPROUT', 'GrassBug2'),
+  ('WEEPINBELL', 'GrassBug3'),
   ('VICTREEBEL', 'SafariZone'),
 
   ('TENTACOOL', 'Water1'),
@@ -113,8 +113,8 @@ pokes = [
   ('PONYTA', 'Overworld'),
   ('RAPIDASH', 'SafariZone'),
 
-  ('SLOWPOKE', 'Overworld'),
-  ('SLOWBRO', 'SafariZone'),
+  ('SLOWPOKE', 'Water1'),
+  ('SLOWBRO', 'Water2'),
 
   ('MAGNEMITE', 'Urban1'),
   ('MAGNETON', 'Urban2'),
@@ -148,7 +148,7 @@ pokes = [
   ('VOLTORB', 'Urban1'),
   ('ELECTRODE', 'Urban2'),
 
-  ('EXEGGCUTE', 'GrassBugField1'),
+  ('EXEGGCUTE', 'GrassBug2'),
   ('EXEGGUTOR', 'SafariZone'),
 
   ('CUBONE', 'Spooky1'),
@@ -167,7 +167,7 @@ pokes = [
 
   ('CHANSEY', 'SafariZone'),
 
-  ('TANGELA', 'GrassBugField1'),
+  ('TANGELA', 'GrassBug2'),
 
   ('KANGASKHAN', 'SafariZone'),
 
@@ -182,7 +182,7 @@ pokes = [
 
   ('MR_MIME', 'Urban1'),
 
-  ('SCYTHER', 'GrassBugField1'),
+  ('SCYTHER', 'GrassBug2'),
 
   ('JYNX', 'Urban1'),
 
@@ -190,7 +190,7 @@ pokes = [
 
   ('MAGMAR', 'Urban1'),
 
-  ('PINSIR', 'GrassBugField1'),
+  ('PINSIR', 'GrassBug2'),
 
   ('TAUROS', 'SafariZone'),
 
@@ -226,7 +226,7 @@ pokes = [
   ('DRAGONAIR', 'CeruleanCave'),
   ('DRAGONITE', 'NotCatchable'),
 
-  ('MEWTWO', 'Legendary'),
+  ('MEWTWO', 'NotInGame'),
 
   ('MEW', 'NotInGame'),
 
@@ -248,11 +248,11 @@ pokes = [
   ('HOOTHOOT', 'NormalFlying1'),
   ('NOCTOWL', 'NormalFlying2'),
 
-  ('LEDYBA', 'ForestCave1'),
-  ('LEDIAN', 'GrassBugField1'),
+  ('LEDYBA', 'GrassBug1'),
+  ('LEDIAN', 'GrassBug2'),
 
-  ('SPINARAK', 'ForestCave1'),
-  ('ARIADOS', 'ForestCave2'),
+  ('SPINARAK', 'GrassBug1'),
+  ('ARIADOS', 'GrassBug2'),
 
   ('CROBAT', 'Spooky2'),
 
@@ -260,8 +260,8 @@ pokes = [
   ('LANTURN', 'Water2'),
 
   ('PICHU', 'EarlyBoost'),
-  ('CLEFFA', 'NotInGame'),
-  ('IGGLYBUFF', 'NotInGame'),
+  ('CLEFFA', 'Spooky1'),
+  ('IGGLYBUFF', 'Spooky1'),
 
   ('TOGEPI', 'EarlyBoost'),
   ('TOGETIC', 'Urban1'),
@@ -275,26 +275,26 @@ pokes = [
 
   ('BELLOSSOM', 'SafariZone'),
 
-  ('MARILL', 'Overworld'),
-  ('AZUMARILL', 'SafariZone'),
+  ('MARILL', 'Water1'),
+  ('AZUMARILL', 'Water2'),
 
   ('SUDOWOODO', 'Overworld'),
 
   ('POLITOED', 'NotCatchable'),
 
   ('HOPPIP', 'NormalFlying1'),
-  ('SKIPLOOM', 'GrassBugField1'),
-  ('JUMPLUFF', 'GrassBugField2'),
+  ('SKIPLOOM', 'GrassBug2'),
+  ('JUMPLUFF', 'GrassBug3'),
 
   ('AIPOM', 'NormalFlying1'),
 
-  ('SUNKERN', 'ForestCave1'),
-  ('SUNFLORA', 'GrassBugField1'),
+  ('SUNKERN', 'GrassBug1'),
+  ('SUNFLORA', 'GrassBug2'),
 
-  ('YANMA', 'ForestCave1'),
+  ('YANMA', 'GrassBug1'),
 
-  ('WOOPER', 'Overworld'),
-  ('QUAGSIRE', 'SafariZone'),
+  ('WOOPER', 'Water1'),
+  ('QUAGSIRE', 'Water2'),
 
   ('ESPEON', 'Eeveelution'),
   ('UMBREON', 'Eeveelution'),
@@ -311,8 +311,8 @@ pokes = [
 
   ('GIRAFARIG', 'Overworld'),
 
-  ('PINECO', 'ForestCave1'),
-  ('FORRETRESS', 'GrassBugField2'),
+  ('PINECO', 'GrassBug1'),
+  ('FORRETRESS', 'GrassBug3'),
 
   ('DUNSPARCE', 'Cave1'),
 
@@ -329,7 +329,7 @@ pokes = [
 
   ('SHUCKLE', 'Cave1'),
 
-  ('HERACROSS', 'GrassBugField1'),
+  ('HERACROSS', 'GrassBug2'),
 
   ('SNEASEL', 'Cave1'),
 
@@ -384,7 +384,7 @@ pokes = [
   ('ENTEI', 'NotInGame'),
   ('SUICUNE', 'NotInGame'),
 
-  ('LARVITAR', 'Cave2'),
+  ('LARVITAR', 'Spooky1'),
   ('PUPITAR', 'CeruleanCave'),
   ('TYRANITAR', 'NotCatchable'),
 
@@ -411,18 +411,18 @@ pokes = [
   ('ZIGZAGOON', 'NormalFlying1'),
   ('LINOONE', 'NormalFlying2'),
 
-  ('WURMPLE', 'ForestCave1'),
-  ('SILCOON', 'ForestCave2'),
-  ('BEAUTIFLY', 'GrassBugField2'),
-  ('CASCOON', 'ForestCave2'),
-  ('DUSTOX', 'ForestCave2'),
+  ('WURMPLE', 'GrassBug1'),
+  ('SILCOON', 'GrassBug1'),
+  ('BEAUTIFLY', 'GrassBug3'),
+  ('CASCOON', 'GrassBug1'),
+  ('DUSTOX', 'GrassBug3'),
 
-  ('LOTAD', 'GrassBugField1'),
-  ('LOMBRE', 'GrassBugField2'),
+  ('LOTAD', 'GrassBug2'),
+  ('LOMBRE', 'GrassBug3'),
   ('LUDICOLO', 'SafariZone'),
 
-  ('SEEDOT', 'GrassBugField1'),
-  ('NUZLEAF', 'GrassBugField2'),
+  ('SEEDOT', 'GrassBug2'),
+  ('NUZLEAF', 'GrassBug3'),
   ('SHIFTRY', 'SafariZone'),
 
   ('TAILLOW', 'NormalFlying1'),
@@ -438,15 +438,15 @@ pokes = [
   ('SURSKIT', 'Water1'),
   ('MASQUERAIN', 'Water2'),
 
-  ('SHROOMISH', 'GrassBugField1'),
-  ('BRELOOM', 'GrassBugField2'),
+  ('SHROOMISH', 'GrassBug2'),
+  ('BRELOOM', 'GrassBug3'),
 
   ('SLAKOTH', 'Overworld'),
   ('VIGOROTH', 'SafariZone'),
   ('SLAKING', 'NotCatchable'),
 
-  ('NINCADA', 'ForestCave1'),
-  ('NINJASK', 'GrassBugField2'),
+  ('NINCADA', 'GrassBug1'),
+  ('NINJASK', 'GrassBug3'),
   ('SHEDINJA', 'NotInGame'),
 
   ('WHISMUR', 'Cave1'),
@@ -479,13 +479,13 @@ pokes = [
 
   ('PLUSLE', 'Urban1'),
 
-  ('MINUN', 'Urban2'),
+  ('MINUN', 'NotInGame'),
 
-  ('VOLBEAT', 'ForestCave2'),
+  ('VOLBEAT', 'GrassBug1'),
 
-  ('ILLUMISE', 'ForestCave2'),
+  ('ILLUMISE', 'GrassBug1'),
 
-  ('ROSELIA', 'GrassBugField1'),
+  ('ROSELIA', 'GrassBug2'),
 
   ('GULPIN', 'Overworld'),
   ('SWALOT', 'SafariZone'),
@@ -504,14 +504,14 @@ pokes = [
   ('SPOINK', 'Overworld'),
   ('GRUMPIG', 'SafariZone'),
 
-  ('SPINDA', 'Spooky1'),
+  ('SPINDA', 'NormalFlying1'),
 
-  ('TRAPINCH', 'Overworld'),
+  ('TRAPINCH', 'Cave1'),
   ('VIBRAVA', 'CeruleanCave'),
   ('FLYGON', 'NotCatchable'),
 
-  ('CACNEA', 'GrassBugField1'),
-  ('CACTURNE', 'GrassBugField2'),
+  ('CACNEA', 'GrassBug2'),
+  ('CACTURNE', 'GrassBug3'),
 
   ('SWABLU', 'NormalFlying1'),
   ('ALTARIA', 'NormalFlying2'),
@@ -533,8 +533,8 @@ pokes = [
   ('BALTOY', 'Spooky1'),
   ('CLAYDOL', 'Spooky2'),
 
-  ('LILEEP', 'GrassBugField1'),
-  ('CRADILY', 'GrassBugField2'),
+  ('LILEEP', 'GrassBug2'),
+  ('CRADILY', 'GrassBug3'),
 
   ('ANORITH', 'Cave1'),
   ('ARMALDO', 'Cave2'),
@@ -575,11 +575,11 @@ pokes = [
 
   ('LUVDISC', 'NotInGame'),
 
-  ('BAGON', 'GrassBugField1'),
+  ('BAGON', 'GrassBug2'),
   ('SHELGON', 'CeruleanCave'),
   ('SALAMENCE', 'NotCatchable'),
 
-  ('BELDUM', 'Spooky1'),
+  ('BELDUM', 'Urban1'),
   ('METANG', 'CeruleanCave'),
   ('METAGROSS', 'NotCatchable'),
 
@@ -618,7 +618,7 @@ pokes = [
   ('LUXIO', 'NULL'),
   ('LUXRAY', 'NULL'),
   ('BUDEW', 'EarlyBoost'),
-  ('ROSERADE', 'GrassBugField2'),
+  ('ROSERADE', 'GrassBug3'),
   ('CRANIDOS', 'NULL'),
   ('RAMPARDOS', 'NULL'),
   ('SHIELDON', 'NULL'),
@@ -676,11 +676,11 @@ pokes = [
   ('MAGNEZONE', 'NotCatchable'),
   ('LICKILICKY', 'SafariZone'),
   ('RHYPERIOR', 'NotCatchable'),
-  ('TANGROWTH', 'GrassBugField2'),
+  ('TANGROWTH', 'GrassBug3'),
   ('ELECTIVIRE', 'Urban2'),
   ('MAGMORTAR', 'Urban2'),
   ('TOGEKISS', 'Urban2'),
-  ('YANMEGA', 'GrassBugField2'),
+  ('YANMEGA', 'GrassBug3'),
   ('LEAFEON', 'Eeveelution'),
   ('GLACEON', 'Eeveelution'),
   ('GLISCOR', 'Cave2'),
@@ -783,10 +783,9 @@ groups = {
   'NormalFlying2': [],
   'Cave1': [],
   'Cave2': [],
-  'ForestCave1': [],
-  'ForestCave2': [],
-  'GrassBugField1': [],
-  'GrassBugField2': [],
+  'GrassBug1': [],
+  'GrassBug2': [],
+  'GrassBug3': [],
   'Spooky1': [],
   'Spooky2': [],
   'Urban1': [],
@@ -867,6 +866,7 @@ Other changes:
  - Legendary birds give the player a Rare Candy upon defeat.
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
  - Physical/special split.
+ - Pokémon that evolve above level 45 now evolve at level 45 instead.
  - Gift Pokémon are replaced with Dunsparce.
  - Game Corner prize Pokémon are replaced with baby Pokémon.
  - The Department Store desks on 5F now sell select battle items instead of their usual ones (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
@@ -884,8 +884,10 @@ Other changes:
  - Pewter, Cerulean, and Vermillion Marts sell Revives.
  - Some early events are skipped; e.g. the Old Man.
  - Slightly modified wild encounters:
-   - In the Power Plant, Pikachu is replaced with Plusle.
-   - In the Safari Zone, Dragonair is replaced with Dratini.
+   - Dragonair -> Seadra
+   - Wobbuffet -> Dragonair
+   - Unown -> Zubat
+   - Smeargle -> Zubat
 
 ## Level band / level cap
 
@@ -957,7 +959,7 @@ replaced with Pokémon from their group, as described below.
 For every map (e.g. route, dungeon room) in the game: 
   - Non-fishing Pokémon with an encounter rate less than or equal to 20% are
   deterministically replaced with 1 species from their group.
-  - Non-fishing Pokémon Pokémon species with an encounter rate greater than 20%
+  - Non-fishing Pokémon with an encounter rate greater than 20%
   are deterministically replaced with 2 species from their group. There is a ~66%
   and ~33% chance of encountering the 2 replacements, respectively.
   - All fishing Pokémon are deterministically replaced with 1 species from their

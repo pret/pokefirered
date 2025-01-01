@@ -345,7 +345,7 @@
 #define MUS_SEVII_67              337 // MUS_NANA67
 #define MUS_POKE_FLUTE            338 // MUS_POKEFUE
 #define MUS_VS_GLACEON             339 // MUS_VS_DEO
-#define MUS_VS_MEWTWO             340 // MUS_VS_MYU2
+#define MUS_VS_MIME_JR             340 // MUS_VS_MYU2
 #define MUS_VS_LEGEND             341 // MUS_VS_DEN
 #define MUS_ENCOUNTER_GYM_LEADER  342 // MUS_EXEYE
 #define MUS_ENCOUNTER_GLACEON      343 // MUS_DEOEYE

@@ -78,7 +78,7 @@ pokes = [
   ('MEOWTH', 'Overworld'),
   ('PERSIAN', 'SafariZone'),
 
-  ('PSYDUCK', 'Water1'),
+  ('PSYDUCK', 'WaterIce1'),
   ('GOLDUCK', 'SafariZone'),
 
   ('MANKEY', 'Overworld'),
@@ -87,8 +87,8 @@ pokes = [
   ('GROWLITHE', 'Overworld'),
   ('ARCANINE', 'SafariZone'),
 
-  ('POLIWAG', 'Water1'),
-  ('POLIWHIRL', 'SafariZone'),
+  ('POLIWAG', 'WaterIce1'),
+  ('POLIWHIRL', 'WaterIce2'),
   ('POLIWRATH', 'NotCatchable'),
 
   ('ABRA', 'Overworld'),
@@ -103,8 +103,8 @@ pokes = [
   ('WEEPINBELL', 'GrassBug3'),
   ('VICTREEBEL', 'SafariZone'),
 
-  ('TENTACOOL', 'Water1'),
-  ('TENTACRUEL', 'Water2'),
+  ('TENTACOOL', 'WaterIce1'),
+  ('TENTACRUEL', 'WaterIce2'),
 
   ('GEODUDE', 'Cave1'),
   ('GRAVELER', 'Cave2'),
@@ -113,8 +113,8 @@ pokes = [
   ('PONYTA', 'Overworld'),
   ('RAPIDASH', 'SafariZone'),
 
-  ('SLOWPOKE', 'Water1'),
-  ('SLOWBRO', 'Water2'),
+  ('SLOWPOKE', 'WaterIce1'),
+  ('SLOWBRO', 'WaterIce2'),
 
   ('MAGNEMITE', 'Urban1'),
   ('MAGNETON', 'Urban2'),
@@ -124,14 +124,14 @@ pokes = [
   ('DODUO', 'NormalFlying2'),
   ('DODRIO', 'NormalFlying2'),
 
-  ('SEEL', 'Water1'),
-  ('DEWGONG', 'Water2'),
+  ('SEEL', 'WaterIce1'),
+  ('DEWGONG', 'WaterIce2'),
 
   ('GRIMER', 'Urban1'),
   ('MUK', 'Urban2'),
 
-  ('SHELLDER', 'Water1'),
-  ('CLOYSTER', 'Water2'),
+  ('SHELLDER', 'WaterIce1'),
+  ('CLOYSTER', 'WaterIce2'),
 
   ('GASTLY', 'Spooky1'),
   ('HAUNTER', 'Spooky2'),
@@ -142,8 +142,8 @@ pokes = [
   ('DROWZEE', 'Overworld'),
   ('HYPNO', 'SafariZone'),
 
-  ('KRABBY', 'Water1'),
-  ('KINGLER', 'Water2'),
+  ('KRABBY', 'WaterIce1'),
+  ('KINGLER', 'WaterIce2'),
 
   ('VOLTORB', 'Urban1'),
   ('ELECTRODE', 'Urban2'),
@@ -171,14 +171,14 @@ pokes = [
 
   ('KANGASKHAN', 'SafariZone'),
 
-  ('HORSEA', 'Water1'),
-  ('SEADRA', 'Water2'),
+  ('HORSEA', 'WaterIce1'),
+  ('SEADRA', 'WaterIce2'),
 
-  ('GOLDEEN', 'Water1'),
-  ('SEAKING', 'Water2'),
+  ('GOLDEEN', 'WaterIce1'),
+  ('SEAKING', 'WaterIce2'),
 
-  ('STARYU', 'Water1'),
-  ('STARMIE', 'Water2'),
+  ('STARYU', 'WaterIce1'),
+  ('STARMIE', 'WaterIce2'),
 
   ('MR_MIME', 'Urban1'),
 
@@ -194,22 +194,22 @@ pokes = [
 
   ('TAUROS', 'SafariZone'),
 
-  ('MAGIKARP', 'Water1'),
-  ('GYARADOS', 'Water2'),
+  ('MAGIKARP', 'WaterIce1'),
+  ('GYARADOS', 'WaterIce2'),
 
-  ('LAPRAS', 'SafariZone'),
+  ('LAPRAS', 'WaterIce2'),
 
   ('DITTO', 'Urban1'),
 
   ('EEVEE', 'Urban1'),
-  ('VAPOREON', 'Eeveelution'),
-  ('JOLTEON', 'Eeveelution'),
-  ('FLAREON', 'Eeveelution'),
+  ('VAPOREON', 'WaterIce2'),
+  ('JOLTEON', 'Urban2'),
+  ('FLAREON', 'Urban2'),
 
   ('PORYGON', 'Urban1'),
 
-  ('OMANYTE', 'Water1'),
-  ('OMASTAR', 'Water2'),
+  ('OMANYTE', 'WaterIce1'),
+  ('OMASTAR', 'WaterIce2'),
 
   ('KABUTO', 'Spooky1'),
   ('KABUTOPS', 'Spooky2'),
@@ -222,7 +222,7 @@ pokes = [
   ('ZAPDOS', 'Legendary'),
   ('MOLTRES', 'Legendary'),
 
-  ('DRATINI', 'Water1'),
+  ('DRATINI', 'WaterIce1'),
   ('DRAGONAIR', 'CeruleanCave'),
   ('DRAGONITE', 'NotCatchable'),
 
@@ -256,8 +256,8 @@ pokes = [
 
   ('CROBAT', 'Spooky2'),
 
-  ('CHINCHOU', 'Water1'),
-  ('LANTURN', 'Water2'),
+  ('CHINCHOU', 'WaterIce1'),
+  ('LANTURN', 'WaterIce2'),
 
   ('PICHU', 'EarlyBoost'),
   ('CLEFFA', 'Spooky1'),
@@ -275,8 +275,8 @@ pokes = [
 
   ('BELLOSSOM', 'SafariZone'),
 
-  ('MARILL', 'Water1'),
-  ('AZUMARILL', 'Water2'),
+  ('MARILL', 'WaterIce1'),
+  ('AZUMARILL', 'WaterIce2'),
 
   ('SUDOWOODO', 'Overworld'),
 
@@ -293,11 +293,11 @@ pokes = [
 
   ('YANMA', 'GrassBug1'),
 
-  ('WOOPER', 'Water1'),
-  ('QUAGSIRE', 'Water2'),
+  ('WOOPER', 'WaterIce1'),
+  ('QUAGSIRE', 'WaterIce2'),
 
-  ('ESPEON', 'Eeveelution'),
-  ('UMBREON', 'Eeveelution'),
+  ('ESPEON', 'Spooky2'),
+  ('UMBREON', 'Cave2'),
 
   ('MURKROW', 'Spooky1'),
 
@@ -323,7 +323,7 @@ pokes = [
   ('SNUBBULL', 'NormalFlying1'),
   ('GRANBULL', 'NormalFlying2'),
 
-  ('QWILFISH', 'Water1'),
+  ('QWILFISH', 'WaterIce1'),
 
   ('SCIZOR', 'SafariZone'),
 
@@ -342,14 +342,14 @@ pokes = [
   ('SWINUB', 'Cave1'),
   ('PILOSWINE', 'Cave2'),
 
-  ('CORSOLA', 'Water1'),
+  ('CORSOLA', 'WaterIce1'),
 
-  ('REMORAID', 'Water1'),
-  ('OCTILLERY', 'Water2'),
+  ('REMORAID', 'WaterIce1'),
+  ('OCTILLERY', 'WaterIce2'),
 
   ('DELIBIRD', 'NormalFlying1'),
 
-  ('MANTINE', 'Water1'),
+  ('MANTINE', 'WaterIce1'),
 
   ('SKARMORY', 'NormalFlying2'),
 
@@ -428,15 +428,15 @@ pokes = [
   ('TAILLOW', 'NormalFlying1'),
   ('SWELLOW', 'NormalFlying2'),
 
-  ('WINGULL', 'Water1'),
-  ('PELIPPER', 'Water2'),
+  ('WINGULL', 'WaterIce1'),
+  ('PELIPPER', 'WaterIce2'),
 
   ('RALTS', 'Overworld'),
   ('KIRLIA', 'SafariZone'),
   ('GARDEVOIR', 'NotCatchable'),
 
-  ('SURSKIT', 'Water1'),
-  ('MASQUERAIN', 'Water2'),
+  ('SURSKIT', 'WaterIce1'),
+  ('MASQUERAIN', 'WaterIce2'),
 
   ('SHROOMISH', 'GrassBug2'),
   ('BRELOOM', 'GrassBug3'),
@@ -490,11 +490,11 @@ pokes = [
   ('GULPIN', 'Overworld'),
   ('SWALOT', 'SafariZone'),
 
-  ('CARVANHA', 'Water1'),
-  ('SHARPEDO', 'Water2'),
+  ('CARVANHA', 'WaterIce1'),
+  ('SHARPEDO', 'WaterIce2'),
 
-  ('WAILMER', 'Water1'),
-  ('WAILORD', 'Water2'),
+  ('WAILMER', 'WaterIce1'),
+  ('WAILORD', 'WaterIce2'),
 
   ('NUMEL', 'Overworld'),
   ('CAMERUPT', 'SafariZone'),
@@ -524,11 +524,11 @@ pokes = [
 
   ('SOLROCK', 'Overworld'),
 
-  ('BARBOACH', 'Water1'),
-  ('WHISCASH', 'Water2'),
+  ('BARBOACH', 'WaterIce1'),
+  ('WHISCASH', 'WaterIce2'),
 
-  ('CORPHISH', 'Water1'),
-  ('CRAWDAUNT', 'Water2'),
+  ('CORPHISH', 'WaterIce1'),
+  ('CRAWDAUNT', 'WaterIce2'),
 
   ('BALTOY', 'Spooky1'),
   ('CLAYDOL', 'Spooky2'),
@@ -539,8 +539,8 @@ pokes = [
   ('ANORITH', 'Cave1'),
   ('ARMALDO', 'Cave2'),
 
-  ('FEEBAS', 'Water1'),
-  ('MILOTIC', 'Water2'),
+  ('FEEBAS', 'WaterIce1'),
+  ('MILOTIC', 'WaterIce2'),
 
   ('CASTFORM', 'NotInGame'),
 
@@ -563,15 +563,15 @@ pokes = [
   ('SNORUNT', 'Cave1'),
   ('GLALIE', 'Cave2'),
 
-  ('SPHEAL', 'Water1'),
-  ('SEALEO', 'Water2'),
+  ('SPHEAL', 'WaterIce1'),
+  ('SEALEO', 'WaterIce2'),
   ('WALREIN', 'SafariZone'),
 
-  ('CLAMPERL', 'Water1'),
-  ('HUNTAIL', 'Water2'),
-  ('GOREBYSS', 'Water2'),
+  ('CLAMPERL', 'WaterIce1'),
+  ('HUNTAIL', 'WaterIce2'),
+  ('GOREBYSS', 'WaterIce2'),
 
-  ('RELICANTH', 'Water1'),
+  ('RELICANTH', 'WaterIce1'),
 
   ('LUVDISC', 'NotInGame'),
 
@@ -681,8 +681,8 @@ pokes = [
   ('MAGMORTAR', 'Urban2'),
   ('TOGEKISS', 'Urban2'),
   ('YANMEGA', 'GrassBug3'),
-  ('LEAFEON', 'Eeveelution'),
-  ('GLACEON', 'Eeveelution'),
+  ('LEAFEON', 'GrassBug3'),
+  ('GLACEON', 'WaterIce2'),
   ('GLISCOR', 'Cave2'),
   ('MAMOSWINE', 'NotCatchable'),
   ('PORYGON_Z', 'NotCatchable'),
@@ -790,13 +790,12 @@ groups = {
   'Spooky2': [],
   'Urban1': [],
   'Urban2': [],
-  'Water1': [],
-  'Water2': [],
+  'WaterIce1': [],
+  'WaterIce2': [],
   'Overworld': [],
   'SafariZone': [],
   'CeruleanCave': [],
   'NotCatchable': [],
-  'Eeveelution': [],
   'Legendary': [],
   'NotInGame': [],
 }

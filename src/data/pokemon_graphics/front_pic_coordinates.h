@@ -750,7 +750,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
-    [SPECIES_MEWTWO] =
+    [SPECIES_MIME_JR] =
     {
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
@@ -865,12 +865,12 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(32, 40),
         .y_offset = 12,
     },
-    [SPECIES_MIME_JR] =
+    [SPECIES_CLEFFA] =
     {
         .size = MON_COORDS_SIZE(32, 32),
         .y_offset = 20,
     },
-    [SPECIES_AMBIPOM] =
+    [SPECIES_IGGLYBUFF] =
     {
         .size = MON_COORDS_SIZE(32, 32),
         .y_offset = 18,
@@ -1770,7 +1770,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(40, 48),
         .y_offset = 14,
     },
-    [SPECIES_MINUN] =
+    [SPECIES_AMBIPOM] =
     {
         .size = MON_COORDS_SIZE(48, 48),
         .y_offset = 12,

@@ -45,7 +45,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_MEWTWO",
+      "graphics_id": "OBJ_EVENT_GFX_MIME_JR",
       "x": 7,
       "y": 12,
       "elevation": 3,
@@ -55,7 +55,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeruleanCave_B1F_EventScript_Mewtwo",
-      "flag": "FLAG_HIDE_MEWTWO"
+      "flag": "FLAG_HIDE_MIME_JR"
     },
     {
       "type": "object",

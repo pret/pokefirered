@@ -292,7 +292,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ZAPDOS]                   = &gObjectEventGraphicsInfo_Zapdos,
     [OBJ_EVENT_GFX_MOLTRES]                  = &gObjectEventGraphicsInfo_Moltres,
     [OBJ_EVENT_GFX_ARTICUNO]                 = &gObjectEventGraphicsInfo_Articuno,
-    [OBJ_EVENT_GFX_MEWTWO]                   = &gObjectEventGraphicsInfo_Mewtwo,
+    [OBJ_EVENT_GFX_MIME_JR]                   = &gObjectEventGraphicsInfo_Mewtwo,
     [OBJ_EVENT_GFX_BUDEW]                      = &gObjectEventGraphicsInfo_Mew,
     [OBJ_EVENT_GFX_TANGROWTH]                    = &gObjectEventGraphicsInfo_Entei,
     [OBJ_EVENT_GFX_YANMEGA]                  = &gObjectEventGraphicsInfo_Suicune,

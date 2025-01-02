@@ -150,6 +150,7 @@ void NewGameInitPCItems(void)
   AddBagItem(ITEM_POKE_BALL, 50);
   AddBagItem(ITEM_GREAT_BALL, 25);
   AddBagItem(ITEM_ULTRA_BALL, 10);
+  AddBagItem(ITEM_REPEL, 20);
   AddBagItem(ITEM_POTION, 10);
   AddBagItem(ITEM_SUPER_POTION, 10);
   AddBagItem(ITEM_FULL_HEAL, 10);

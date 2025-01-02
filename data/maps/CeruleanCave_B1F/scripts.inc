@@ -14,11 +14,11 @@ CeruleanCave_B1F_EventScript_TryRemoveMewtwo::
 	return
 
 CeruleanCave_B1F_OnTransition::
-	call_if_unset FLAG_FOUGHT_MEWTWO, CeruleanCave_B1F_EventScript_ShowMewtwo
+	call_if_unset FLAG_FOUGHT_MIME_JR, CeruleanCave_B1F_EventScript_ShowMewtwo
 	end
 
 CeruleanCave_B1F_EventScript_ShowMewtwo::
-	clearflag FLAG_HIDE_MEWTWO
+	clearflag FLAG_HIDE_MIME_JR
 	return
 
 CeruleanCave_B1F_EventScript_Mewtwo::
@@ -27,14 +27,14 @@ CeruleanCave_B1F_EventScript_Mewtwo::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_MEWTWO, CRY_MODE_ENCOUNTER
+	playmoncry SPECIES_ALAKAZAM, CRY_MODE_ENCOUNTER
 	message CeruleanCave_B1F_Text_Mew
 	waitmessage
 	waitmoncry
 	delay 20
 	playbgm MUS_ENCOUNTER_GYM_LEADER, 0
 	waitbuttonpress
-	setwildbattle SPECIES_MEWTWO, 70
+	setwildbattle SPECIES_ALAKAZAM, 70
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	special StartLegendaryBattle
 	waitstate
@@ -43,16 +43,16 @@ CeruleanCave_B1F_EventScript_Mewtwo::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, CeruleanCave_B1F_EventScript_DefeatedMewtwo
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, CeruleanCave_B1F_EventScript_RanFromMewtwo
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, CeruleanCave_B1F_EventScript_RanFromMewtwo
-	setflag FLAG_FOUGHT_MEWTWO
+	setflag FLAG_FOUGHT_MIME_JR
 	release
 	end
 
 CeruleanCave_B1F_EventScript_DefeatedMewtwo::
-	setflag FLAG_FOUGHT_MEWTWO
+	setflag FLAG_FOUGHT_MIME_JR
 	goto EventScript_RemoveStaticMon
 	end
 
 CeruleanCave_B1F_EventScript_RanFromMewtwo::
-	setvar VAR_0x8004, SPECIES_MEWTWO
+	setvar VAR_0x8004, SPECIES_MIME_JR
 	goto EventScript_MonFlewAway
 	end

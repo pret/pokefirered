@@ -750,7 +750,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 6,
     },
-    [SPECIES_MEWTWO] =
+    [SPECIES_MIME_JR] =
     {
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 1,
@@ -865,12 +865,12 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(48, 48),
         .y_offset = 11,
     },
-    [SPECIES_MIME_JR] =
+    [SPECIES_CLEFFA] =
     {
         .size = MON_COORDS_SIZE(48, 40),
         .y_offset = 15,
     },
-    [SPECIES_AMBIPOM] =
+    [SPECIES_IGGLYBUFF] =
     {
         .size = MON_COORDS_SIZE(48, 48),
         .y_offset = 11,
@@ -1770,7 +1770,7 @@ const struct MonCoords gMonBackPicCoords[] =
         .size = MON_COORDS_SIZE(56, 48),
         .y_offset = 8,
     },
-    [SPECIES_MINUN] =
+    [SPECIES_AMBIPOM] =
     {
         .size = MON_COORDS_SIZE(56, 48),
         .y_offset = 8,

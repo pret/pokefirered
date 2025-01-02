@@ -142,7 +142,7 @@
 #define FLAG_HIDE_THREE_ISLAND_ANTIBIKERS                  0x07E
 #define FLAG_0x07F                                         0x07F
 #define FLAG_HIDE_ROUTE_16_SNORLAX                         0x080
-#define FLAG_HIDE_MEWTWO                                   0x081
+#define FLAG_HIDE_MIME_JR                                   0x081
 #define FLAG_HIDE_ARTICUNO                                 0x082
 #define FLAG_HIDE_TOWER_ROCKET_2                           0x083
 #define FLAG_HIDE_TOWER_ROCKET_3                           0x084
@@ -724,7 +724,7 @@
 #define NUM_WONDER_CARD_FLAGS                            (1 + FLAG_WONDER_CARD_UNUSED_17 - FLAG_RECEIVED_AURORA_TICKET)
 
 #define FLAG_GOT_POWDER_JAR                              0x2BB
-#define FLAG_FOUGHT_MEWTWO                               0x2BC
+#define FLAG_FOUGHT_MIME_JR                               0x2BC
 #define FLAG_FOUGHT_MOLTRES                              0x2BD
 #define FLAG_FOUGHT_ARTICUNO                             0x2BE
 #define FLAG_FOUGHT_ZAPDOS                               0x2BF

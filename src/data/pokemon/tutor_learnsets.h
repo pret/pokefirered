@@ -1068,7 +1068,7 @@ static const u16 sTutorLearnsets[] =
                         | TUTOR(MOVE_THUNDER_WAVE)
                         | TUTOR(MOVE_SUBSTITUTE),
 
-    [SPECIES_MEWTWO] = TUTOR(MOVE_MEGA_PUNCH)
+    [SPECIES_MIME_JR] = TUTOR(MOVE_MEGA_PUNCH)
                      | TUTOR(MOVE_MEGA_KICK)
                      | TUTOR(MOVE_BODY_SLAM)
                      | TUTOR(MOVE_DOUBLE_EDGE)
@@ -1236,7 +1236,7 @@ static const u16 sTutorLearnsets[] =
                     | TUTOR(MOVE_THUNDER_WAVE)
                     | TUTOR(MOVE_SUBSTITUTE),
 
-    [SPECIES_MIME_JR] = TUTOR(MOVE_MEGA_PUNCH)
+    [SPECIES_CLEFFA] = TUTOR(MOVE_MEGA_PUNCH)
                      | TUTOR(MOVE_MEGA_KICK)
                      | TUTOR(MOVE_BODY_SLAM)
                      | TUTOR(MOVE_DOUBLE_EDGE)
@@ -1249,7 +1249,7 @@ static const u16 sTutorLearnsets[] =
                      | TUTOR(MOVE_THUNDER_WAVE)
                      | TUTOR(MOVE_SUBSTITUTE),
 
-    [SPECIES_AMBIPOM] = TUTOR(MOVE_MEGA_PUNCH)
+    [SPECIES_IGGLYBUFF] = TUTOR(MOVE_MEGA_PUNCH)
                         | TUTOR(MOVE_MEGA_KICK)
                         | TUTOR(MOVE_BODY_SLAM)
                         | TUTOR(MOVE_DOUBLE_EDGE)
@@ -2350,7 +2350,7 @@ static const u16 sTutorLearnsets[] =
                      | TUTOR(MOVE_THUNDER_WAVE)
                      | TUTOR(MOVE_SUBSTITUTE),
 
-    [SPECIES_MINUN] = TUTOR(MOVE_MEGA_PUNCH)
+    [SPECIES_AMBIPOM] = TUTOR(MOVE_MEGA_PUNCH)
                     | TUTOR(MOVE_MEGA_KICK)
                     | TUTOR(MOVE_BODY_SLAM)
                     | TUTOR(MOVE_DOUBLE_EDGE)

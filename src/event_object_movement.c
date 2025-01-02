@@ -1864,7 +1864,7 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
 
                 // Make sure there aren't other events on this tile.
                 for (k = 0; k < objectCount; ++k) {
-                  struct ObjectEventTemplate *other = &gSaveBlock1Ptr->objectEventTemplates[i];
+                  struct ObjectEventTemplate *other = &gSaveBlock1Ptr->objectEventTemplates[k];
                   if (other == template) {
                     continue;
                   }

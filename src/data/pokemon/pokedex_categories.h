@@ -57,7 +57,7 @@ static const u16 sDexCategory_GrasslandPkmn_Page9[] = {
 };
 
 static const u16 sDexCategory_GrasslandPkmn_Page10[] = {
-    SPECIES_AMBIPOM,
+    SPECIES_IGGLYBUFF,
     SPECIES_JIGGLYPUFF,
     SPECIES_WIGGLYTUFF,
 };
@@ -116,7 +116,7 @@ static const u16 sDexCategory_GrasslandPkmn_Page19[] = {
 
 static const u16 sDexCategory_GrasslandPkmn_Page20[] = {
     SPECIES_PLUSLE,
-    SPECIES_MINUN,
+    SPECIES_AMBIPOM,
 };
 
 static const u16 sDexCategory_GrasslandPkmn_Page21[] = {
@@ -570,7 +570,7 @@ static const u16 sDexCategory_MountainPkmn_Page3[] = {
 };
 
 static const u16 sDexCategory_MountainPkmn_Page4[] = {
-    SPECIES_MIME_JR,
+    SPECIES_CLEFFA,
     SPECIES_CLEFAIRY,
     SPECIES_CLEFABLE,
 };
@@ -806,7 +806,7 @@ static const u16 sDexCategory_RarePkmn_Page6[] = {
 };
 
 static const u16 sDexCategory_RarePkmn_Page7[] = {
-    SPECIES_MEWTWO,
+    SPECIES_MIME_JR,
 };
 
 static const u16 sDexCategory_RarePkmn_Page8[] = {

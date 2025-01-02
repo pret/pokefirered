@@ -572,7 +572,7 @@ const u16 gEggMoves[] = {
               MOVE_WISH,
               MOVE_CHARGE),
 
-    egg_moves(MIME_JR,
+    egg_moves(CLEFFA,
               MOVE_PRESENT,
               MOVE_METRONOME,
               MOVE_AMNESIA,
@@ -582,7 +582,7 @@ const u16 gEggMoves[] = {
               MOVE_WISH,
               MOVE_SUBSTITUTE),
 
-    egg_moves(AMBIPOM,
+    egg_moves(IGGLYBUFF,
               MOVE_PERISH_SONG,
               MOVE_PRESENT,
               MOVE_FAINT_ATTACK,
@@ -1139,7 +1139,7 @@ const u16 gEggMoves[] = {
               MOVE_SUBSTITUTE,
               MOVE_WISH),
 
-    egg_moves(MINUN,
+    egg_moves(AMBIPOM,
               MOVE_SUBSTITUTE,
               MOVE_WISH),
 

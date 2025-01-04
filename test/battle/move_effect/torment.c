@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_TORMENT].effect == EFFECT_TORMENT);
+    ASSUME(GetMoveEffect(MOVE_TORMENT) == EFFECT_TORMENT);
 }
 
 SINGLE_BATTLE_TEST("Torment prevents consecutive move uses")

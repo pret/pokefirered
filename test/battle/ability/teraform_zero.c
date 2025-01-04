@@ -39,8 +39,8 @@ DOUBLE_BATTLE_TEST("Teraform Zero can be supressed")
 SINGLE_BATTLE_TEST("Teraform Zero can be replaced")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WORRY_SEED].effect == EFFECT_WORRY_SEED);
-        ASSUME(gMovesInfo[MOVE_REST].effect == EFFECT_REST);
+        ASSUME(GetMoveEffect(MOVE_WORRY_SEED) == EFFECT_WORRY_SEED);
+        ASSUME(GetMoveEffect(MOVE_REST) == EFFECT_REST);
         PLAYER(SPECIES_TERAPAGOS);
         OPPONENT(SPECIES_WHIMSICOTT) { Ability(ABILITY_PRANKSTER); }
     } WHEN {
@@ -57,7 +57,7 @@ SINGLE_BATTLE_TEST("Teraform Zero can be replaced")
 SINGLE_BATTLE_TEST("Teraform Zero cannot be swapped")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SKILL_SWAP].effect == EFFECT_SKILL_SWAP);
+        ASSUME(GetMoveEffect(MOVE_SKILL_SWAP) == EFFECT_SKILL_SWAP);
         PLAYER(SPECIES_TERAPAGOS);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -71,7 +71,7 @@ SINGLE_BATTLE_TEST("Teraform Zero cannot be swapped")
 SINGLE_BATTLE_TEST("Teraform Zero cannot be copied")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ROLE_PLAY].effect == EFFECT_ROLE_PLAY);
+        ASSUME(GetMoveEffect(MOVE_ROLE_PLAY) == EFFECT_ROLE_PLAY);
         PLAYER(SPECIES_TERAPAGOS);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

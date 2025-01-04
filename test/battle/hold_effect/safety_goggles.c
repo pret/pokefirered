@@ -9,7 +9,7 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Safety Goggles block powder and spore moves")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_STUN_SPORE].powderMove);
+        ASSUME(IsPowderMove(MOVE_STUN_SPORE));
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_ABRA) { Item(ITEM_SAFETY_GOGGLES); }
     } WHEN {

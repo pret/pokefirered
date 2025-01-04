@@ -3,13 +3,13 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_TERA_STARSTORM].effect == EFFECT_TERA_STARSTORM);
+    ASSUME(GetMoveEffect(MOVE_TERA_STARSTORM) == EFFECT_TERA_STARSTORM);
 }
 
 SINGLE_BATTLE_TEST("Tera Starstorm changes from Normal-type to Stellar-type if used by Terapagos-Stellar")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TERA_STARSTORM].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_TERA_STARSTORM) == TYPE_NORMAL);
         PLAYER(SPECIES_TERAPAGOS_STELLAR);
         OPPONENT(SPECIES_MISDREAVUS);
     } WHEN {
@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Tera Starstorm changes from Normal-type to Stellar-type if u
 DOUBLE_BATTLE_TEST("Tera Starstorm targets both opponents in a double battle if used by Terapagos-Stellar")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TERA_STARSTORM].target == MOVE_TARGET_SELECTED);
+        ASSUME(GetMoveTarget(MOVE_TERA_STARSTORM) == MOVE_TARGET_SELECTED);
         PLAYER(SPECIES_TERAPAGOS_STELLAR);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("Tera Starstorm becomes a physical move if the user is Terapa
     PARAMETRIZE { tera = GIMMICK_NONE; }
     PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TERA_STARSTORM].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(GetMoveCategory(MOVE_TERA_STARSTORM) == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_TERAPAGOS_STELLAR) { Attack(100); SpAttack(50); }
         OPPONENT(SPECIES_WOBBUFFET) { Defense(200); SpDefense(200); }
     } WHEN {
@@ -63,7 +63,7 @@ SINGLE_BATTLE_TEST("Tera Starstorm becomes a physical move if the user is Terapa
 SINGLE_BATTLE_TEST("Tera Starstorm remains Normal-type if used by Pokemon other than Terapagos")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TERA_STARSTORM].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_TERA_STARSTORM) == TYPE_NORMAL);
         ASSUME(gSpeciesInfo[SPECIES_MISDREAVUS].types[0] == TYPE_GHOST);
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_MISDREAVUS);

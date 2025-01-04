@@ -3,12 +3,12 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_ELECTRIC_TERRAIN].effect == EFFECT_ELECTRIC_TERRAIN);
-    ASSUME(gMovesInfo[MOVE_PSYCHIC_TERRAIN].effect == EFFECT_PSYCHIC_TERRAIN);
-    ASSUME(gMovesInfo[MOVE_GRASSY_TERRAIN].effect == EFFECT_GRASSY_TERRAIN);
-    ASSUME(gMovesInfo[MOVE_MISTY_TERRAIN].effect == EFFECT_MISTY_TERRAIN);
-    ASSUME(gMovesInfo[MOVE_STEEL_ROLLER].effect == EFFECT_HIT_SET_REMOVE_TERRAIN);
-    ASSUME(gMovesInfo[MOVE_ICE_SPINNER].effect == EFFECT_HIT_SET_REMOVE_TERRAIN);
+    ASSUME(GetMoveEffect(MOVE_ELECTRIC_TERRAIN) == EFFECT_ELECTRIC_TERRAIN);
+    ASSUME(GetMoveEffect(MOVE_PSYCHIC_TERRAIN) == EFFECT_PSYCHIC_TERRAIN);
+    ASSUME(GetMoveEffect(MOVE_GRASSY_TERRAIN) == EFFECT_GRASSY_TERRAIN);
+    ASSUME(GetMoveEffect(MOVE_MISTY_TERRAIN) == EFFECT_MISTY_TERRAIN);
+    ASSUME(GetMoveEffect(MOVE_STEEL_ROLLER) == EFFECT_HIT_SET_REMOVE_TERRAIN);
+    ASSUME(GetMoveEffect(MOVE_ICE_SPINNER) == EFFECT_HIT_SET_REMOVE_TERRAIN);
 }
 
 SINGLE_BATTLE_TEST("Steel Roller and Ice Spinner can remove a terrain from the field")
@@ -83,7 +83,7 @@ SINGLE_BATTLE_TEST("Ice Spinner doesn't fail if there is no terrain on the field
     }
 }
 
-AI_SINGLE_BATTLE_TEST("Steel Roller will not be chosen by the AI if it might fail")
+AI_SINGLE_BATTLE_TEST("AI will not choose Steel Roller if it might fail")
 {
     u32 move;
 
@@ -104,7 +104,7 @@ AI_SINGLE_BATTLE_TEST("Steel Roller will not be chosen by the AI if it might fai
     }
 }
 
-AI_SINGLE_BATTLE_TEST("Ice Spinner can be chosen by the AI regardless if there is a terrain or not")
+AI_SINGLE_BATTLE_TEST("AI will can choose Ice Spinner regardless if there is a terrain or not")
 {
     u32 move;
 

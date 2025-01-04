@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_STRENGTH_SAP].effect == EFFECT_STRENGTH_SAP);
+    ASSUME(GetMoveEffect(MOVE_STRENGTH_SAP) == EFFECT_STRENGTH_SAP);
 }
 
 SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on target's Attack Stat", s16 hp)
@@ -69,8 +69,8 @@ SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on tar
     }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WORK_UP].effect == EFFECT_ATTACK_SPATK_UP);
-        ASSUME(gMovesInfo[MOVE_GROWL].effect == EFFECT_ATTACK_DOWN);
+        ASSUME(GetMoveEffect(MOVE_WORK_UP) == EFFECT_ATTACK_SPATK_UP);
+        ASSUME(GetMoveEffect(MOVE_GROWL) == EFFECT_ATTACK_DOWN);
         PLAYER(SPECIES_WOBBUFFET) { HP(50); }
         OPPONENT(SPECIES_WOBBUFFET) { Attack(60); }
     } WHEN {
@@ -117,7 +117,7 @@ SINGLE_BATTLE_TEST("Strength Sap lowers Attack by 1 and restores HP based on tar
 SINGLE_BATTLE_TEST("Strength Sap fails if target is at -6 Atk")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_CHARM].effect == EFFECT_ATTACK_DOWN_2);
+        ASSUME(GetMoveEffect(MOVE_CHARM) == EFFECT_ATTACK_DOWN_2);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -163,36 +163,5 @@ SINGLE_BATTLE_TEST("Strength Sap restores more HP if Big Root is held", s16 hp)
         MESSAGE("The opposing Wobbuffet had its energy drained!");
     } FINALLY {
         EXPECT_GT(abs(results[1].hp), abs(results[0].hp));
-    }
-}
-
-SINGLE_BATTLE_TEST("Strength Sap makes attacker lose HP if target's ability is Liquid Ooze")
-{
-    s16 lostHp;
-    s32 atkStat;
-
-    PARAMETRIZE { atkStat = 100; }
-    PARAMETRIZE { atkStat = 490; } // Checks that attacker can faint with no problems.
-
-    GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Attack(atkStat); Ability(ABILITY_LIQUID_OOZE); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_STRENGTH_SAP); if (atkStat == 490) { SEND_OUT(player, 1); } }
-    } SCENE {
-        MESSAGE("Wobbuffet used Strength Sap!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRENGTH_SAP, player);
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
-        MESSAGE("The opposing Wobbuffet's Attack fell!");
-        ABILITY_POPUP(opponent, ABILITY_LIQUID_OOZE);
-        HP_BAR(player, captureDamage: &lostHp);
-        MESSAGE("Wobbuffet sucked up the liquid ooze!");
-        if (atkStat >= 490) {
-            MESSAGE("Wobbuffet fainted!");
-            SEND_IN_MESSAGE("Wobbuffet");
-        }
-    } THEN {
-        EXPECT_EQ(lostHp, atkStat);
     }
 }

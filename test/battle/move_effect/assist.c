@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_ASSIST].effect == EFFECT_ASSIST);
+    ASSUME(GetMoveEffect(MOVE_ASSIST) == EFFECT_ASSIST);
 }
 
 TO_DO_BATTLE_TEST("Assist randomly calls a move from any party member");

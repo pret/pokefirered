@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_CORROSIVE_GAS].effect == EFFECT_CORROSIVE_GAS);
+    ASSUME(GetMoveEffect(MOVE_CORROSIVE_GAS) == EFFECT_CORROSIVE_GAS);
 }
 
 SINGLE_BATTLE_TEST("Corrosive Gas destroys the target's item or fails if the target has no item")
@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Corrosive Gas doesn't destroy the item of a Pokemon with the
 SINGLE_BATTLE_TEST("Items lost to Corrosive Gas cannot be restored by Recycle")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_RECYCLE].effect == EFFECT_RECYCLE);
+        ASSUME(GetMoveEffect(MOVE_RECYCLE) == EFFECT_RECYCLE);
         PLAYER(SPECIES_WOBBUFFET) {Speed(15); }
         OPPONENT(SPECIES_WOBBUFFET) {Item(ITEM_ORAN_BERRY); Speed(10); }
     } WHEN {

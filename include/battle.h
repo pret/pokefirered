@@ -1110,7 +1110,6 @@ extern u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT];
 extern u32 gSideStatuses[NUM_BATTLE_SIDES];
 extern u32 gHitMarker;
 extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
-extern u16 gMoveResultFlags;
 extern u8 gCurrentActionFuncId;
 extern u8 gCurrMovePos;
 extern u8 gChosenMovePos;

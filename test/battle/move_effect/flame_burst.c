@@ -3,14 +3,14 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_FLAME_BURST].additionalEffects->moveEffect == MOVE_EFFECT_FLAME_BURST);
+    ASSUME(GetMoveAdditionalEffectById(MOVE_FLAME_BURST, 0)->moveEffect == MOVE_EFFECT_FLAME_BURST);
 }
 
 //  Flame Burst AoE is supposed to hit through Substitute
 DOUBLE_BATTLE_TEST("Flame Burst Substitute")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SUBSTITUTE].effect == EFFECT_SUBSTITUTE);
+        ASSUME(GetMoveEffect(MOVE_SUBSTITUTE) == EFFECT_SUBSTITUTE);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WYNAUT);

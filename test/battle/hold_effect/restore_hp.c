@@ -37,7 +37,7 @@ DOUBLE_BATTLE_TEST("Restore HP Item effects do not miss timing after a recoil mo
     PARAMETRIZE { item = ITEM_SITRUS_BERRY; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TAKE_DOWN].recoil == 25);
+        ASSUME(GetMoveRecoil(MOVE_TAKE_DOWN) == 25);
         ASSUME(gItemsInfo[ITEM_ORAN_BERRY].holdEffect == HOLD_EFFECT_RESTORE_HP);
         ASSUME(gItemsInfo[ITEM_BERRY_JUICE].holdEffect == HOLD_EFFECT_RESTORE_HP);
         ASSUME(gItemsInfo[ITEM_SITRUS_BERRY].holdEffect == HOLD_EFFECT_RESTORE_PCT_HP);

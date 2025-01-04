@@ -298,9 +298,9 @@ extern const u8 gText_BattleTowerBan_Is2[];
 
 extern const u8 gText_StatSharply[];
 extern const u8 gText_StatRose[];
-extern const u8 sText_StatFell[];
-extern const u8 sText_drastically[];
-extern const u8 sText_severely[];
+extern const u8 gText_StatFell[];
+extern const u8 gText_drastically[];
+extern const u8 gText_severely[];
 
 // battle_script_commands
 extern const u8 gText_BattleYesNoChoice[];

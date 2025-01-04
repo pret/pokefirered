@@ -10,14 +10,14 @@ SINGLE_BATTLE_TEST("Mummy/Lingering Aroma replace the attacker's ability on cont
     PARAMETRIZE { move = MOVE_AQUA_JET; ability = ABILITY_LINGERING_AROMA; species = SPECIES_OINKOLOGNE; }
     PARAMETRIZE { move = MOVE_WATER_GUN; ability = ABILITY_LINGERING_AROMA; species = SPECIES_OINKOLOGNE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_AQUA_JET].makesContact);
-        ASSUME(!gMovesInfo[MOVE_WATER_GUN].makesContact);
+        ASSUME(MoveMakesContact(MOVE_AQUA_JET));
+        ASSUME(!MoveMakesContact(MOVE_WATER_GUN));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Ability(ability); }
     } WHEN {
         TURN { MOVE(player, move); }
     } SCENE {
-        if (gMovesInfo[move].makesContact) {
+        if (MoveMakesContact(move)) {
             ABILITY_POPUP(opponent, ability);
             if (ability == ABILITY_MUMMY)
                 MESSAGE("Wobbuffet acquired Mummy!");
@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Mummy and Lingering Aroma don't replace each other")
     PARAMETRIZE { ability1 = ABILITY_MUMMY; species1 = SPECIES_YAMASK; ability2 = ABILITY_LINGERING_AROMA; species2 = SPECIES_OINKOLOGNE; }
     PARAMETRIZE { ability1 = ability2 = ABILITY_LINGERING_AROMA; species1 = species2 = SPECIES_OINKOLOGNE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_AQUA_JET].makesContact);
+        ASSUME(MoveMakesContact(MOVE_AQUA_JET));
         PLAYER(species1) { Ability(ability1); Speed(2); }
         OPPONENT(species2) { Ability(ability2); Speed(1); }
     } WHEN {

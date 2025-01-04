@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_STEEL_BEAM].effect == EFFECT_MAX_HP_50_RECOIL);
+    ASSUME(GetMoveEffect(MOVE_STEEL_BEAM) == EFFECT_MAX_HP_50_RECOIL);
 }
 
 SINGLE_BATTLE_TEST("Steel Beam makes the user lose 1/2 of its Max HP")

@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_FILLET_AWAY].effect == EFFECT_FILLET_AWAY);
+    ASSUME(GetMoveEffect(MOVE_FILLET_AWAY) == EFFECT_FILLET_AWAY);
 }
 
 SINGLE_BATTLE_TEST("Fillet Away cuts the user's HP in half")

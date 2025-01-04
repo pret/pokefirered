@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_BODY_PRESS].effect == EFFECT_BODY_PRESS);
-    ASSUME(gMovesInfo[MOVE_BODY_PRESS].category == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(GetMoveEffect(MOVE_BODY_PRESS) == EFFECT_BODY_PRESS);
+    ASSUME(GetMoveCategory(MOVE_BODY_PRESS) == DAMAGE_CATEGORY_PHYSICAL);
 }
 
 SINGLE_BATTLE_TEST("Body Press uses physical defense stat of target", s16 damage)
@@ -15,8 +15,8 @@ SINGLE_BATTLE_TEST("Body Press uses physical defense stat of target", s16 damage
     PARAMETRIZE { move = MOVE_BODY_PRESS; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DRILL_PECK].power == gMovesInfo[MOVE_BODY_PRESS].power);
-        ASSUME(gMovesInfo[MOVE_CHARM].effect == EFFECT_ATTACK_DOWN_2);
+        ASSUME(GetMovePower(MOVE_DRILL_PECK) == GetMovePower(MOVE_BODY_PRESS));
+        ASSUME(GetMoveEffect(MOVE_CHARM) == EFFECT_ATTACK_DOWN_2);
         PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_SHELLDER);
     } WHEN {
@@ -55,8 +55,8 @@ SINGLE_BATTLE_TEST("Body Press's damage depends on the user's Defense and not At
     PARAMETRIZE { move = MOVE_SWORDS_DANCE; }
     PARAMETRIZE { move = MOVE_CELEBRATE; } // Nothing, stats are default
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_IRON_DEFENSE].effect == EFFECT_DEFENSE_UP_2);
-        ASSUME(gMovesInfo[MOVE_SWORDS_DANCE].effect == EFFECT_ATTACK_UP_2);
+        ASSUME(GetMoveEffect(MOVE_IRON_DEFENSE) == EFFECT_DEFENSE_UP_2);
+        ASSUME(GetMoveEffect(MOVE_SWORDS_DANCE) == EFFECT_ATTACK_UP_2);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Attack(150); Defense(150); }
     } WHEN {
@@ -79,7 +79,7 @@ SINGLE_BATTLE_TEST("Body Press uses Defense Stat even in Wonder Room", s16 damag
     PARAMETRIZE { move = MOVE_WONDER_ROOM; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WONDER_ROOM].effect == EFFECT_WONDER_ROOM);
+        ASSUME(GetMoveEffect(MOVE_WONDER_ROOM) == EFFECT_WONDER_ROOM);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { SpDefense(50); Defense(150); }
     } WHEN {
@@ -102,8 +102,8 @@ SINGLE_BATTLE_TEST("Body Press uses Special Defense stat Stages in Wonder Room",
     PARAMETRIZE { move = MOVE_AMNESIA; }
     PARAMETRIZE { move = MOVE_CELEBRATE; } // Nothing, stats are default
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_IRON_DEFENSE].effect == EFFECT_DEFENSE_UP_2);
-        ASSUME(gMovesInfo[MOVE_AMNESIA].effect == EFFECT_SPECIAL_DEFENSE_UP_2);
+        ASSUME(GetMoveEffect(MOVE_IRON_DEFENSE) == EFFECT_DEFENSE_UP_2);
+        ASSUME(GetMoveEffect(MOVE_AMNESIA) == EFFECT_SPECIAL_DEFENSE_UP_2);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { SpDefense(150); Defense(150); }
     } WHEN {

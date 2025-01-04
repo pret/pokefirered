@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_BATON_PASS].effect == EFFECT_BATON_PASS);
+    ASSUME(GetMoveEffect(MOVE_BATON_PASS) == EFFECT_BATON_PASS);
 }
 
 // This softlocked the game before.
@@ -39,9 +39,6 @@ TO_DO_BATTLE_TEST("Baton Pass doesn't pass ability changes");
 //
 TO_DO_BATTLE_TEST("Baton Pass passes confusion status");                                                    // test/battle/status2/confusion.c
 
-TO_DO_BATTLE_TEST("Baton Pass passes Cursed status");                                                       // test/battle/move_effect/curse.c
-TO_DO_BATTLE_TEST("Baton Pass doesn't pass Disable's effect");                                              // test/battle/move_effect/disable.c
-TO_DO_BATTLE_TEST("Baton Pass passes Dragon Cheer's effect");                                               // test/battle/move_effect/dragon_cheer.c
 TO_DO_BATTLE_TEST("Baton Pass passes Fairy lock's escape prevention effect");                               // test/battle/move_effect/fairy_lock.c
 TO_DO_BATTLE_TEST("Baton Pass passes Focus Energy's effect");                                               // test/battle/move_effect/focus_energy.c
 TO_DO_BATTLE_TEST("Baton Pass passes Heal Block's effect");                                                 // test/battle/move_effect/heal_block.c

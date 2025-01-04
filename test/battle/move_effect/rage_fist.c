@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_RAGE_FIST].effect == EFFECT_RAGE_FIST);
-    ASSUME(gMovesInfo[MOVE_RAGE_FIST].power == 50);
+    ASSUME(GetMoveEffect(MOVE_RAGE_FIST) == EFFECT_RAGE_FIST);
+    ASSUME(GetMovePower(MOVE_RAGE_FIST) == 50);
 }
 
 SINGLE_BATTLE_TEST("Rage Fist base power is increased by 50 if the user takes damage")
@@ -37,7 +37,7 @@ SINGLE_BATTLE_TEST("Rage Fist base power is increased by each multi hit")
     s16 timesGotHit[2];
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_BULLET_SEED].effect == EFFECT_MULTI_HIT);
+        ASSUME(GetMoveEffect(MOVE_BULLET_SEED) == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {
@@ -130,7 +130,7 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased if a substitute was hi
     s16 timesGotHit[2];
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_CRUNCH].category == DAMAGE_CATEGORY_PHYSICAL); // Substitute doesn't fade otherwise
+        ASSUME(GetMoveCategory(MOVE_CRUNCH) == DAMAGE_CATEGORY_PHYSICAL); // Substitute doesn't fade otherwise
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {

@@ -3,11 +3,11 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_RAGING_BULL].effect == EFFECT_RAGING_BULL);
-    ASSUME(gMovesInfo[MOVE_SNOWSCAPE].effect == EFFECT_SNOWSCAPE);
-    ASSUME(gMovesInfo[MOVE_LIGHT_SCREEN].effect == EFFECT_LIGHT_SCREEN);
-    ASSUME(gMovesInfo[MOVE_REFLECT].effect == EFFECT_REFLECT);
-    ASSUME(gMovesInfo[MOVE_AURORA_VEIL].effect == EFFECT_AURORA_VEIL);
+    ASSUME(GetMoveEffect(MOVE_RAGING_BULL) == EFFECT_RAGING_BULL);
+    ASSUME(GetMoveEffect(MOVE_SNOWSCAPE) == EFFECT_SNOWSCAPE);
+    ASSUME(GetMoveEffect(MOVE_LIGHT_SCREEN) == EFFECT_LIGHT_SCREEN);
+    ASSUME(GetMoveEffect(MOVE_REFLECT) == EFFECT_REFLECT);
+    ASSUME(GetMoveEffect(MOVE_AURORA_VEIL) == EFFECT_AURORA_VEIL);
 }
 
 SINGLE_BATTLE_TEST("Raging Bull removes Light Screen, Reflect and Aurora Veil from the target's side of the field")

@@ -5,7 +5,7 @@ ASSUMPTIONS
 {
     ASSUME(gItemsInfo[ITEM_SITRUS_BERRY].holdEffect == HOLD_EFFECT_RESTORE_PCT_HP);
     ASSUME(I_SITRUS_BERRY_HEAL >= GEN_4);
-    ASSUME(gMovesInfo[MOVE_SUNNY_DAY].effect == EFFECT_SUNNY_DAY);
+    ASSUME(GetMoveEffect(MOVE_SUNNY_DAY) == EFFECT_SUNNY_DAY);
 }
 
 SINGLE_BATTLE_TEST("Harvest has a 50% chance to restore a Berry at the end of the turn")
@@ -61,7 +61,7 @@ SINGLE_BATTLE_TEST("Harvest doesn't always restore a Berry if Cloud Nine/Air Loc
 SINGLE_BATTLE_TEST("Harvest restores a Berry even after being switched out and back in")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_PARTING_SHOT].effect == EFFECT_PARTING_SHOT);
+        ASSUME(GetMoveEffect(MOVE_PARTING_SHOT) == EFFECT_PARTING_SHOT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); MaxHP(500); HP(251); Item(ITEM_SITRUS_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -80,7 +80,7 @@ SINGLE_BATTLE_TEST("Harvest restores a Berry even after being switched out and b
 SINGLE_BATTLE_TEST("Harvest restores a Berry consumed by Fling")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FLING].effect == EFFECT_FLING);
+        ASSUME(GetMoveEffect(MOVE_FLING) == EFFECT_FLING);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); Item(ITEM_SITRUS_BERRY); }
     } WHEN {
@@ -97,7 +97,7 @@ SINGLE_BATTLE_TEST("Harvest restores a Berry consumed by Fling")
 SINGLE_BATTLE_TEST("Harvest restores a Berry consumed by Natural Gift")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_NATURAL_GIFT].effect == EFFECT_NATURAL_GIFT);
+        ASSUME(GetMoveEffect(MOVE_NATURAL_GIFT) == EFFECT_NATURAL_GIFT);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); Item(ITEM_SITRUS_BERRY); }
     } WHEN {
@@ -209,7 +209,7 @@ DOUBLE_BATTLE_TEST("Harvest order is affected by speed")
 SINGLE_BATTLE_TEST("Harvest doesn't restore a Berry when transfered to another Pokémon")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
+        ASSUME(GetMoveEffect(MOVE_TRICK) == EFFECT_TRICK);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); Item(ITEM_SITRUS_BERRY); }
     } WHEN {
@@ -226,7 +226,7 @@ SINGLE_BATTLE_TEST("Harvest doesn't restore a Berry when transfered to another P
 SINGLE_BATTLE_TEST("Harvest can restore a Berry that was transferred from another Pokémon")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
+        ASSUME(GetMoveEffect(MOVE_TRICK) == EFFECT_TRICK);
         PLAYER(SPECIES_TORKOAL) { Ability(ABILITY_DROUGHT); Item(ITEM_SITRUS_BERRY); }
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); HP(100); MaxHP(500); }
     } WHEN {
@@ -245,7 +245,7 @@ SINGLE_BATTLE_TEST("Harvest can restore a Berry that was transferred from anothe
 SINGLE_BATTLE_TEST("Harvest can only restore the newest berry consumed that was transferred from another Pokémon instead of its original Berry")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TRICK].effect == EFFECT_TRICK);
+        ASSUME(GetMoveEffect(MOVE_TRICK) == EFFECT_TRICK);
         ASSUME(gItemsInfo[ITEM_APICOT_BERRY].holdEffect == HOLD_EFFECT_SP_DEFENSE_UP);
         PLAYER(SPECIES_TORKOAL) { Ability(ABILITY_DROUGHT); Item(ITEM_SITRUS_BERRY); }
         OPPONENT(SPECIES_EXEGGUTOR) { Ability(ABILITY_HARVEST); HP(100); MaxHP(500); Item(ITEM_APICOT_BERRY); }

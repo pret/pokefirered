@@ -3,13 +3,13 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_PLASMA_FISTS].effect == EFFECT_PLASMA_FISTS);
+    ASSUME(MoveHasAdditionalEffect(MOVE_PLASMA_FISTS, MOVE_EFFECT_ION_DELUGE) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Ion Duldge turns normal moves into electric for the remainder of the current turn")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ION_DELUGE].effect == EFFECT_ION_DELUGE);
+        ASSUME(GetMoveEffect(MOVE_ION_DELUGE) == EFFECT_ION_DELUGE);
         PLAYER(SPECIES_KRABBY);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -42,6 +42,26 @@ SINGLE_BATTLE_TEST("Plasma Fists turns normal moves into electric for the remain
         MESSAGE("The opposing Wobbuffet used Tackle!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
         MESSAGE("It's super effective!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        NOT MESSAGE("It's super effective!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Plasma Fists does not set up Ion Deluge if it does not connect")
+{
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_PHANPY].types[0] == TYPE_GROUND || gSpeciesInfo[SPECIES_PHANPY].types[1] == TYPE_GROUND);
+        PLAYER(SPECIES_KRABBY);
+        OPPONENT(SPECIES_PHANPY);
+    } WHEN {
+        TURN { MOVE(player, MOVE_PLASMA_FISTS); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Krabby used Plasma Fists!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_PLASMA_FISTS, player);
+            MESSAGE("A deluge of ions showers the battlefield!");
+        }
+        MESSAGE("The opposing Phanpy used Tackle!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
         NOT MESSAGE("It's super effective!");
     }

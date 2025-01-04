@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_LAST_RESPECTS].effect == EFFECT_LAST_RESPECTS);
+    ASSUME(GetMoveEffect(MOVE_LAST_RESPECTS) == EFFECT_LAST_RESPECTS);
 }
 
 SINGLE_BATTLE_TEST("Last Respects power is multiplied by the amount of fainted mon in the user's side - Player", s16 damage)

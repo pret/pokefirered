@@ -18,25 +18,6 @@ SINGLE_BATTLE_TEST("Psychic Terrain protects grounded battlers from priority mov
     }
 }
 
-SINGLE_BATTLE_TEST("Psychic Terrain activates Psychic Seed and Mimicry")
-{
-    GIVEN {
-        ASSUME(gItemsInfo[ITEM_PSYCHIC_SEED].holdEffect == HOLD_EFFECT_SEEDS);
-        ASSUME(gItemsInfo[ITEM_PSYCHIC_SEED].holdEffectParam == HOLD_EFFECT_PARAM_PSYCHIC_TERRAIN);
-        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_PSYCHIC_SEED); }
-        OPPONENT(SPECIES_STUNFISK_GALAR) { Ability(ABILITY_MIMICRY); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Using Psychic Seed, the Sp. Def of Wobbuffet rose!");
-        ABILITY_POPUP(opponent);
-        MESSAGE("The opposing Stunfisk's type changed to Psychic!");
-    } THEN {
-        EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].types[0], TYPE_PSYCHIC);
-    }
-}
-
 SINGLE_BATTLE_TEST("Psychic Terrain increases power of Psychic-type moves by 30/50 percent", s16 damage)
 {
     bool32 terrain;

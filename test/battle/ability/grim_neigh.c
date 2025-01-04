@@ -7,7 +7,7 @@ DOUBLE_BATTLE_TEST("Grim Neigh raises Sp. Attack by one stage after directly cau
     PARAMETRIZE { species = SPECIES_SPECTRIER;            ability = ABILITY_GRIM_NEIGH;          abilityPopUp = ABILITY_GRIM_NEIGH; }
     PARAMETRIZE { species = SPECIES_CALYREX_SHADOW; ability = ABILITY_AS_ONE_SHADOW_RIDER; abilityPopUp = ABILITY_GRIM_NEIGH; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DISCHARGE].target == MOVE_TARGET_FOES_AND_ALLY);
+        ASSUME(GetMoveTarget(MOVE_DISCHARGE) == MOVE_TARGET_FOES_AND_ALLY);
         PLAYER(species) { Ability(ability); }
         PLAYER(SPECIES_SNORUNT) { HP(1); }
         OPPONENT(SPECIES_GLALIE) { HP(1); }
@@ -80,9 +80,8 @@ DOUBLE_BATTLE_TEST("Grim Neigh does not increase damage done by the same move th
     PARAMETRIZE { species = SPECIES_SPECTRIER;            ability = ABILITY_GRIM_NEIGH;          abilityPopUp = ABILITY_GRIM_NEIGH; }
     PARAMETRIZE { species = SPECIES_CALYREX_SHADOW; ability = ABILITY_AS_ONE_SHADOW_RIDER; abilityPopUp = ABILITY_GRIM_NEIGH; }
 
-    KNOWN_FAILING; // Requires simultaneous damage implementation
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DISCHARGE].target == MOVE_TARGET_FOES_AND_ALLY);
+        ASSUME(GetMoveTarget(MOVE_DISCHARGE) == MOVE_TARGET_FOES_AND_ALLY);
         PLAYER(species) { Ability(ability); }
         PLAYER(SPECIES_ABRA) { HP(1); }
         OPPONENT(SPECIES_GLALIE);
@@ -94,6 +93,7 @@ DOUBLE_BATTLE_TEST("Grim Neigh does not increase damage done by the same move th
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DISCHARGE, playerLeft);
         HP_BAR(opponentLeft, captureDamage: &damage[0]);
         HP_BAR(playerRight);
+        HP_BAR(opponentRight, captureDamage: &damage[1]);
         MESSAGE("Abra fainted!");
         ABILITY_POPUP(playerLeft, abilityPopUp);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
@@ -101,7 +101,6 @@ DOUBLE_BATTLE_TEST("Grim Neigh does not increase damage done by the same move th
             MESSAGE("Spectrier's Grim Neigh raised its Sp. Atk!");
         else
             MESSAGE("Calyrex's Grim Neigh raised its Sp. Atk!");
-        HP_BAR(opponentRight, captureDamage: &damage[1]);
     } THEN {
         EXPECT_EQ(playerLeft->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 1);
         EXPECT_EQ(damage[0], damage[1]);

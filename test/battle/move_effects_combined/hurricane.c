@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_HURRICANE].effect == EFFECT_THUNDER);
-    ASSUME(gMovesInfo[MOVE_HURRICANE].accuracy == 70);
+    ASSUME(GetMoveEffect(MOVE_HURRICANE) == EFFECT_THUNDER);
+    ASSUME(GetMoveAccuracy(MOVE_HURRICANE) == 70);
 }
 
 SINGLE_BATTLE_TEST("Hurricane's accuracy is lowered to 50% in Sunlight")
@@ -39,10 +39,10 @@ SINGLE_BATTLE_TEST("Hurricane can hit airborne targets (Fly, Bounce)")
     PARAMETRIZE { move = MOVE_FLY; }
     PARAMETRIZE { move = MOVE_BOUNCE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FLY].effect == EFFECT_SEMI_INVULNERABLE);
-        ASSUME(UNCOMPRESS_BITS(HIHALF(gMovesInfo[MOVE_FLY].argument)) == STATUS3_ON_AIR);
-        ASSUME(gMovesInfo[MOVE_BOUNCE].effect == EFFECT_SEMI_INVULNERABLE);
-        ASSUME(UNCOMPRESS_BITS(HIHALF(gMovesInfo[MOVE_BOUNCE].argument)) == STATUS3_ON_AIR);
+        ASSUME(GetMoveEffect(MOVE_FLY) == EFFECT_SEMI_INVULNERABLE);
+        ASSUME(GetMoveTwoTurnAttackStatus(MOVE_FLY) == STATUS3_ON_AIR);
+        ASSUME(GetMoveEffect(MOVE_BOUNCE) == EFFECT_SEMI_INVULNERABLE);
+        ASSUME(GetMoveTwoTurnAttackStatus(MOVE_BOUNCE) == STATUS3_ON_AIR);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Moves(move); }
     } WHEN {
@@ -57,8 +57,8 @@ SINGLE_BATTLE_TEST("Hurricane can hit airborne targets (Fly, Bounce)")
 DOUBLE_BATTLE_TEST("Hurricane can hit airborne targets (Sky Drop)")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SKY_DROP].effect == EFFECT_SKY_DROP);
-        ASSUME(UNCOMPRESS_BITS(HIHALF(gMovesInfo[MOVE_SKY_DROP].argument)) == STATUS3_ON_AIR);
+        ASSUME(GetMoveEffect(MOVE_SKY_DROP) == EFFECT_SKY_DROP);
+        ASSUME(GetMoveTwoTurnAttackStatus(MOVE_SKY_DROP) == STATUS3_ON_AIR);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

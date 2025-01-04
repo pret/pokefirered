@@ -29,7 +29,7 @@
  *
  *   ASSUMPTIONS
  *   {
- *       ASSUME(gMovesInfo[MOVE_STUN_SPORE].effect == EFFECT_PARALYZE);
+ *       ASSUME(GetMoveEffect(MOVE_STUN_SPORE) == EFFECT_PARALYZE);
  *   }
  *
  *   SINGLE_BATTLE_TEST("Stun Spore inflicts paralysis")
@@ -87,7 +87,7 @@
  *   SINGLE_BATTLE_TEST("Stun Spore does not affect Grass-types")
  *   {
  *       GIVEN {
- *           ASSUME(gMovesInfo[MOVE_STUN_SPORE].powderMove);
+ *           ASSUME(IsPowderMove(MOVE_STUN_SPORE));
  *           ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
  *           PLAYER(SPECIES_ODDISH); // 1.
  *           OPPONENT(SPECIES_ODDISH); // 2.
@@ -129,7 +129,7 @@
  *        PARAMETRIZE { raiseAttack = FALSE; }
  *        PARAMETRIZE { raiseAttack = TRUE; }
  *        GIVEN {
- *            ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+ *            ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
  *            PLAYER(SPECIES_WOBBUFFET);
  *            OPPONENT(SPECIES_WOBBUFFET);
  *        } WHEN {
@@ -176,7 +176,7 @@
  * Pokémon we can observe the damage of a physical attack with and
  * without the burn. To document that this test assumes the attack is
  * physical we can use:
- *     ASSUME(gMovesInfo[MOVE_WHATEVER].category == DAMAGE_CATEGORY_PHYSICAL);
+ *     ASSUME(GetMoveCategory(MOVE_WHATEVER) == DAMAGE_CATEGORY_PHYSICAL);
  *
  * ASSUMPTIONS
  * Should be placed immediately after any #includes and contain any
@@ -186,7 +186,7 @@
  * move_effect_poison_hit.c should be:
  *     ASSUMPTIONS
  *     {
- *         ASSUME(gMovesInfo[MOVE_POISON_STING].effect == EFFECT_POISON_HIT);
+ *         ASSUME(GetMoveEffect(MOVE_POISON_STING) == EFFECT_POISON_HIT);
  *     }
  *
  * SINGLE_BATTLE_TEST(name, results...) and DOUBLE_BATTLE_TEST(name, results...)
@@ -228,7 +228,7 @@
  *         PARAMETRIZE { hp = 99; }
  *         PARAMETRIZE { hp = 33; }
  *         GIVEN {
- *             ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+ *             ASSUME(GetMoveType(MOVE_EMBER) == TYPE_FIRE);
  *             PLAYER(SPECIES_CHARMANDER) { Ability(ABILITY_BLAZE); MaxHP(99); HP(hp); }
  *             OPPONENT(SPECIES_WOBBUFFET);
  *         } WHEN {
@@ -265,7 +265,7 @@
  *
  * If the tag is not provided, runs the test 50 times and computes an
  * approximate pass ratio.
- *     PASSES_RANDOMLY(gMovesInfo[move].accuracy, 100);
+ *     PASSES_RANDOMLY(GetMoveAccuracy(move), 100);
  * Note that this mode of PASSES_RANDOMLY makes the tests run very
  * slowly and should be avoided where possible. If the mechanic you are
  * testing is missing its tag, you should add it.
@@ -286,6 +286,16 @@
  * Example:
  *     GIVEN {
  *         FLAG_SET(FLAG_SYS_EXAMPLE_FLAG);
+ *
+ * WITH_CONFIG(configTag, value)
+ * Runs the test with a specified config override. `configTag` must be
+ * of `enum GenConfigTag`
+ * Example:
+ *     GIVEN {
+ *         WITH_CONFIG(GEN_CONFIG_GALE_WINGS, GEN_6);
+ *     }
+ * The `value` may be inferred from a local variable, e.g. set by
+ * PARAMETRIZE.
  *
  * PLAYER(species) and OPPONENT(species)
  * Adds the species to the player's or opponent's party respectively.
@@ -488,6 +498,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "data.h"
+#include "generational_changes.h"
 #include "item.h"
 #include "random.h"
 #include "recorded_battle.h"
@@ -682,6 +693,7 @@ struct BattleTestData
 
     struct RecordedBattleSave recordedBattle;
     u8 battleRecordTypes[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
+    u8 battleRecordTurnNumbers[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u8 battleRecordSourceLineOffsets[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u16 recordIndexes[MAX_BATTLERS_COUNT];
     struct BattlerTurn battleRecordTurns[MAX_TURNS][MAX_BATTLERS_COUNT];
@@ -715,6 +727,7 @@ struct BattleTestRunnerState
     u16 observedRatio;
     u16 trialRatio;
     bool8 runRandomly:1;
+    bool8 didRunRandomly:1;
     bool8 runGiven:1;
     bool8 runWhen:1;
     bool8 runScene:1;
@@ -740,7 +753,7 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 /* Test */
 
 #define TO_DO_BATTLE_TEST(_name) \
-    TEST("TODO: " _name) \
+    TEST(_name) \
     { \
         TO_DO; \
     }
@@ -820,6 +833,7 @@ struct moveWithPP {
 #define AI_LOG AILogScores(__LINE__)
 
 #define FLAG_SET(flagId) SetFlagForTest(__LINE__, flagId)
+#define WITH_CONFIG(configTag, value) TestSetConfig(__LINE__, configTag, value)
 
 #define PLAYER(species) for (OpenPokemon(__LINE__, B_SIDE_PLAYER, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
 #define OPPONENT(species) for (OpenPokemon(__LINE__, B_SIDE_OPPONENT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
@@ -853,6 +867,7 @@ struct moveWithPP {
 #define Shadow(isShadow) Shadow_(__LINE__, shadow)
 
 void SetFlagForTest(u32 sourceLine, u16 flagId);
+void TestSetConfig(u32 sourceLine, enum GenConfigTag configTag, u32 value);
 void ClearFlagAfterTest(void);
 void OpenPokemon(u32 sourceLine, u32 side, u32 species);
 void ClosePokemon(u32 sourceLine);

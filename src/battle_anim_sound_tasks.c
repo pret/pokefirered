@@ -243,39 +243,59 @@ void SoundTask_PlayNormalCry(u8 taskId)
 #define tSpecies data[1]
 #define tPan     data[2]
 #define tState   data[9]
+#define tLastCry data[10] // If it's not the last cry, don't try to restore the BGM, because another is coming
 
 void SoundTask_PlayCryWithEcho(u8 taskId)
 {
     u16 species;
-    s8 pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
+    s8 pan;
+
+    gTasks[taskId].tLastCry = gBattleAnimArgs[0];
+    pan = BattleAnimAdjustPanning(SOUND_PAN_ATTACKER);
+
     species = (GetIllusionMonSpecies(gBattleAnimAttacker) != SPECIES_NONE) ? GetIllusionMonSpecies(gBattleAnimAttacker) : gAnimBattlerSpecies[gBattleAnimAttacker];
+
     gTasks[taskId].tSpecies = species;
     gTasks[taskId].tPan = pan;
+
     if (species != SPECIES_NONE)
-    {
-        PlayCry_ByMode(species, pan, CRY_MODE_ECHO_START);
         gTasks[taskId].func = SoundTask_PlayCryWithEcho_Step;
-    }
     else
-    {
         DestroyAnimVisualTask(taskId);
-    }
 }
 
 static void SoundTask_PlayCryWithEcho_Step(u8 taskId)
 {
+    u16 species = gTasks[taskId].tSpecies;
+    s8 pan = gTasks[taskId].tPan;
 
-    if (gTasks[taskId].tState < 2)
+    // Note the cases are not in order of execution
+    switch (gTasks[taskId].tState)
     {
+    case 2:
+        PlayCry_DuckNoRestore(species, pan, CRY_MODE_ECHO_START);
         gTasks[taskId].tState++;
-    }
-    else if (!IsCryPlaying())
-    {
-        u16 species = gTasks[taskId].tSpecies;
-        s8 pan = gTasks[taskId].tPan;
-        
-        PlayCry_ByMode(species, pan, CRY_MODE_ECHO_END);
+        break;
+    case 1:
+    case 3:
+    case 4:
+        gTasks[taskId].tState++;
+        break;
+    case 5:
+        if (IsCryPlaying())
+            break;
+    case 0:
+        StopCryAndClearCrySongs();
+        gTasks[taskId].tState++;
+        break;
+    default:
+        if (!gTasks[taskId].tLastCry)
+            PlayCry_DuckNoRestore(species, pan, CRY_MODE_ECHO_END);
+        else
+            PlayCry_ByMode(species, pan, CRY_MODE_ECHO_END);
+
         DestroyAnimVisualTask(taskId);
+        break;
     }
 }
 

@@ -3,13 +3,13 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_BEAK_BLAST].effect == EFFECT_BEAK_BLAST);
+    ASSUME(GetMoveEffect(MOVE_BEAK_BLAST) == EFFECT_BEAK_BLAST);
 }
 
 DOUBLE_BATTLE_TEST("Beak Blast's charging message is shown before other moves are used")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_BEAK_BLAST].priority < 0);
+        ASSUME(GetMovePriority(MOVE_BEAK_BLAST) < 0);
         PLAYER(SPECIES_WYNAUT) { Speed(10); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(5); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
@@ -36,8 +36,8 @@ DOUBLE_BATTLE_TEST("Beak Blast's charging message is shown before other moves ar
 DOUBLE_BATTLE_TEST("Beak Blast burns all who make contact with the pokemon")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_BEAK_BLAST].priority < 0);
-        ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
+        ASSUME(GetMovePriority(MOVE_BEAK_BLAST) < 0);
+        ASSUME(MoveMakesContact(MOVE_TACKLE));
         PLAYER(SPECIES_WYNAUT) { Speed(10); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(5); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(3); }
@@ -80,9 +80,9 @@ SINGLE_BATTLE_TEST("Beak Blast burns only when contact moves are used")
     PARAMETRIZE { move = MOVE_LEER; burn = FALSE; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
-        ASSUME(!gMovesInfo[MOVE_WATER_GUN].makesContact);
-        ASSUME(!gMovesInfo[MOVE_LEER].makesContact);
+        ASSUME(MoveMakesContact(MOVE_TACKLE));
+        ASSUME(!MoveMakesContact(MOVE_WATER_GUN));
+        ASSUME(!MoveMakesContact(MOVE_LEER));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -113,4 +113,5 @@ SINGLE_BATTLE_TEST("Beak Blast burns only when contact moves are used")
 }
 
 TO_DO_BATTLE_TEST("Beak Blast's charging message is shown regardless if it would've missed");
+TO_DO_BATTLE_TEST("Beak Blast fails if it's forced by Encore after choosing a different move");
 TO_DO_BATTLE_TEST("Bulletproof is immune to Beak Blast but not to the burn it causes");

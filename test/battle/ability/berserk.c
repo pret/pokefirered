@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Berserk activates only if the target had more than 50% of it
     PARAMETRIZE { hp = 254; activates = TRUE; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].power != 0);
+        ASSUME(!IsBattleMoveStatus(MOVE_TACKLE));
         PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); MaxHP(maxHp); HP(hp); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -37,7 +37,7 @@ SINGLE_BATTLE_TEST("Berserk raises Sp.Atk by 1")
 {
     u16 maxHp = 500;
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].power != 0);
+        ASSUME(!IsBattleMoveStatus(MOVE_TACKLE));
         PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); MaxHP(maxHp); HP(maxHp / 2 + 1); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -57,7 +57,7 @@ SINGLE_BATTLE_TEST("Berserk activates after all hits from a multi-hit move")
     u32 j;
     u16 maxHp = 500;
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DOUBLE_SLAP].effect == EFFECT_MULTI_HIT);
+        ASSUME(GetMoveEffect(MOVE_DOUBLE_SLAP) == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); MaxHP(maxHp); HP(maxHp / 2 + 1); }
         OPPONENT(SPECIES_SHELLDER) { Ability(ABILITY_SKILL_LINK); } // Always hits 5 times.
     } WHEN {

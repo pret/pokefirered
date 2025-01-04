@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_FURY_CUTTER].effect == EFFECT_FURY_CUTTER);
+    ASSUME(GetMoveEffect(MOVE_FURY_CUTTER) == EFFECT_FURY_CUTTER);
 }
 
 SINGLE_BATTLE_TEST("Fury Cutter power doubles with each use, up to 160 power")

@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_STICKY_WEB].effect == EFFECT_STICKY_WEB);
+    ASSUME(GetMoveEffect(MOVE_STICKY_WEB) == EFFECT_STICKY_WEB);
 }
 
 SINGLE_BATTLE_TEST("Sticky Web lowers Speed by 1 on switch-in")
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Sticky Web can only be set up 1 time")
 DOUBLE_BATTLE_TEST("Sticky Web lowers Speed by 1 in a double battle after Explosion fainting both mons")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_EXPLOSION].effect == EFFECT_EXPLOSION);
+        ASSUME(GetMoveEffect(MOVE_EXPLOSION) == EFFECT_EXPLOSION);
         PLAYER(SPECIES_WOBBUFFET) {Speed(5);}
         PLAYER(SPECIES_WOBBUFFET) {HP(1500); Speed(10);}
         PLAYER(SPECIES_WOBBUFFET) {Speed(10);}
@@ -197,7 +197,7 @@ DOUBLE_BATTLE_TEST("Sticky Web has correct interactions with Mirror Armor - no o
     PARAMETRIZE {hasReplacement = FALSE;}
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_MEMENTO].effect == EFFECT_MEMENTO);
+        ASSUME(GetMoveEffect(MOVE_MEMENTO) == EFFECT_MEMENTO);
         PLAYER(SPECIES_SQUIRTLE) {Speed(5); }
         PLAYER(SPECIES_CHARMANDER) {Speed(5); }
         PLAYER(SPECIES_CORVIKNIGHT) {Ability(ABILITY_MIRROR_ARMOR); Item(ITEM_IRON_BALL); Speed(5); } // Iron Ball, so that flying type Corviknight is affected by Sticky Web.
@@ -269,5 +269,33 @@ SINGLE_BATTLE_TEST("Sticky Web is placed on the correct side after Memento")
         MESSAGE("Wobbuffet fainted!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, opponent);
         MESSAGE("A sticky web has been laid out on the ground around your team!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Sticky Web setter has their speed lowered with Mirror Armor even after Ally Switch")
+{
+    GIVEN {
+        PLAYER(SPECIES_SQUIRTLE);
+        PLAYER(SPECIES_CHARMANDER);
+        PLAYER(SPECIES_CORVIKNIGHT) { Ability(ABILITY_MIRROR_ARMOR); Item(ITEM_IRON_BALL); } // Iron Ball, so that flying type Corviknight is affected by Sticky Web.
+        OPPONENT(SPECIES_CATERPIE);
+        OPPONENT(SPECIES_NATU);
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_STICKY_WEB); }
+        TURN { MOVE(opponentRight, MOVE_ALLY_SWITCH); }
+        TURN { SWITCH(playerRight, 2); }
+    } SCENE {
+        // Turn 1 - set up sticky web
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, opponentLeft);
+        MESSAGE("A sticky web has been laid out on the ground around your team!");
+        // Turn 2 - ally switch
+        MESSAGE("The opposing Natu used Ally Switch!");
+        // turn 3 - send our corviknight
+        SEND_IN_MESSAGE("Corviknight");
+        MESSAGE("Corviknight was caught in a sticky web!");
+        ABILITY_POPUP(playerRight, ABILITY_MIRROR_ARMOR);
+        // sticky web setter - caterpie (now opponentRight) gets speed lowered
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
+        MESSAGE("The opposing Caterpie's Speed fell!");
     }
 }

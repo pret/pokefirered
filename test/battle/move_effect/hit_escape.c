@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_U_TURN].effect == EFFECT_HIT_ESCAPE);
+    ASSUME(GetMoveEffect(MOVE_U_TURN) == EFFECT_HIT_ESCAPE);
 }
 
 SINGLE_BATTLE_TEST("U-turn switches the user out")
@@ -98,7 +98,7 @@ SINGLE_BATTLE_TEST("U-turn switches the user out if Wimp Out fails to activate")
 SINGLE_BATTLE_TEST("U-turn switches the user out after Ice Face activates")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_U_TURN].category == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(GetMoveCategory(MOVE_U_TURN) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_BEEDRILL);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_EISCUE) { Ability(ABILITY_ICE_FACE); }

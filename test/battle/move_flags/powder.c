@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Powder moves are blocked by Grass-type Pokémon")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_STUN_SPORE].powderMove);
+        ASSUME(IsPowderMove(MOVE_STUN_SPORE));
         ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_ODDISH);

@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(MoveHasAdditionalEffect(MOVE_PSYCHIC_NOISE, MOVE_EFFECT_PSYCHIC_NOISE));
-    ASSUME(gMovesInfo[MOVE_RECOVER].effect == EFFECT_RESTORE_HP);
+    ASSUME(GetMoveEffect(MOVE_RECOVER) == EFFECT_RESTORE_HP);
 }
 
 SINGLE_BATTLE_TEST("Psychic Noise blocks healing moves for 2 turns")

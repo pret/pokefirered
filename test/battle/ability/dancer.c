@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Dancer can copy a dance move immediately after it was used and allow the user of Dancer to still use its move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_QUIVER_DANCE].danceMove == TRUE);
+        ASSUME(IsDanceMove(MOVE_QUIVER_DANCE));
         PLAYER(SPECIES_WOBBUFFET)
         OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); }
     } WHEN {
@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Dancer can copy a dance move immediately after it was used a
 SINGLE_BATTLE_TEST("Dancer can copy Teeter Dance")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TEETER_DANCE].danceMove == TRUE);
+        ASSUME(IsDanceMove(MOVE_TEETER_DANCE));
         PLAYER(SPECIES_WOBBUFFET)
         OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Item(ITEM_LUM_BERRY); }
     } WHEN {
@@ -37,7 +37,7 @@ SINGLE_BATTLE_TEST("Dancer can copy Teeter Dance")
 DOUBLE_BATTLE_TEST("Dancer can copy Teeter Dance and confuse both opposing targets")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TEETER_DANCE].danceMove == TRUE);
+        ASSUME(IsDanceMove(MOVE_TEETER_DANCE));
         ASSUME(gItemsInfo[ITEM_LUM_BERRY].holdEffect == HOLD_EFFECT_CURE_STATUS);
         PLAYER(SPECIES_WOBBUFFET)
         PLAYER(SPECIES_WYNAUT) { Item(ITEM_LUM_BERRY); }
@@ -57,7 +57,7 @@ DOUBLE_BATTLE_TEST("Dancer can copy Teeter Dance and confuse both opposing targe
 DOUBLE_BATTLE_TEST("Dancer triggers from slowest to fastest")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DRAGON_DANCE].danceMove == TRUE);
+        ASSUME(IsDanceMove(MOVE_DRAGON_DANCE));
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_DANCER); Speed(10); }
         PLAYER(SPECIES_WYNAUT) { Speed(50); }
         OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Speed(20); }
@@ -83,7 +83,7 @@ SINGLE_BATTLE_TEST("Dancer doesn't trigger if the original user flinches")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffectWithChance(MOVE_FAKE_OUT, MOVE_EFFECT_FLINCH, 100));
-        ASSUME(gMovesInfo[MOVE_DRAGON_DANCE].danceMove == TRUE);
+        ASSUME(IsDanceMove(MOVE_DRAGON_DANCE));
         PLAYER(SPECIES_WOBBUFFET)
         OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); }
     } WHEN {
@@ -102,7 +102,7 @@ DOUBLE_BATTLE_TEST("Dancer still triggers if another dancer flinches")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffectWithChance(MOVE_FAKE_OUT, MOVE_EFFECT_FLINCH, 100));
-        ASSUME(gMovesInfo[MOVE_DRAGON_DANCE].danceMove == TRUE);
+        ASSUME(IsDanceMove(MOVE_DRAGON_DANCE));
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_DANCER); Speed(10); }
         PLAYER(SPECIES_WYNAUT) { Speed(5); }
         OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Speed(20); }
@@ -130,8 +130,8 @@ DOUBLE_BATTLE_TEST("Dancer still triggers if another dancer flinches")
 SINGLE_BATTLE_TEST("Dancer-called attacks have their type updated")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_REVELATION_DANCE].danceMove == TRUE);
-        ASSUME(gMovesInfo[MOVE_REVELATION_DANCE].effect == EFFECT_REVELATION_DANCE);
+        ASSUME(IsDanceMove(MOVE_REVELATION_DANCE));
+        ASSUME(GetMoveEffect(MOVE_REVELATION_DANCE) == EFFECT_REVELATION_DANCE);
         PLAYER(SPECIES_TANGROWTH);
         OPPONENT(SPECIES_ORICORIO_BAILE);
     } WHEN {
@@ -149,8 +149,8 @@ SINGLE_BATTLE_TEST("Dancer-called attacks have their type updated")
 DOUBLE_BATTLE_TEST("Dancer doesn't trigger on a snatched move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DRAGON_DANCE].danceMove == TRUE);
-        ASSUME(gMovesInfo[MOVE_SNATCH].effect == EFFECT_SNATCH);
+        ASSUME(IsDanceMove(MOVE_DRAGON_DANCE));
+        ASSUME(GetMoveEffect(MOVE_SNATCH) == EFFECT_SNATCH);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_ORICORIO);
@@ -173,9 +173,9 @@ DOUBLE_BATTLE_TEST("Dancer doesn't trigger on a snatched move")
 DOUBLE_BATTLE_TEST("Dancer triggers on Instructed dance moves")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DRAGON_DANCE].danceMove == TRUE);
-        ASSUME(gMovesInfo[MOVE_DRAGON_DANCE].instructBanned == FALSE);
-        ASSUME(gMovesInfo[MOVE_INSTRUCT].effect == EFFECT_INSTRUCT);
+        ASSUME(IsDanceMove(MOVE_DRAGON_DANCE));
+        ASSUME(!IsMoveInstructBanned(MOVE_DRAGON_DANCE));
+        ASSUME(GetMoveEffect(MOVE_INSTRUCT) == EFFECT_INSTRUCT);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_ORICORIO);
@@ -200,9 +200,9 @@ DOUBLE_BATTLE_TEST("Dancer triggers on Instructed dance moves")
 DOUBLE_BATTLE_TEST("Dancer-called move doesn't update move to be Instructed")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DRAGON_DANCE].danceMove == TRUE);
-        ASSUME(gMovesInfo[MOVE_TACKLE].instructBanned == FALSE);
-        ASSUME(gMovesInfo[MOVE_INSTRUCT].effect == EFFECT_INSTRUCT);
+        ASSUME(IsDanceMove(MOVE_DRAGON_DANCE));
+        ASSUME(!IsMoveInstructBanned(MOVE_TACKLE));
+        ASSUME(GetMoveEffect(MOVE_INSTRUCT) == EFFECT_INSTRUCT);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_ORICORIO);
@@ -228,8 +228,8 @@ DOUBLE_BATTLE_TEST("Dancer-called move doesn't update move to be Instructed")
 DOUBLE_BATTLE_TEST("Dancer doesn't call a move that didn't execute due to Powder")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FIERY_DANCE].danceMove == TRUE);
-        ASSUME(gMovesInfo[MOVE_FIERY_DANCE].type == TYPE_FIRE);
+        ASSUME(IsDanceMove(MOVE_FIERY_DANCE));
+        ASSUME(GetMoveType(MOVE_FIERY_DANCE) == TYPE_FIRE);
         PLAYER(SPECIES_VOLCARONA);
         PLAYER(SPECIES_ORICORIO);
         OPPONENT(SPECIES_WYNAUT);

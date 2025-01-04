@@ -210,6 +210,50 @@ TEST("givemon [simple]")
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL), 100);
 }
 
+TEST("givemon respects perfectIVCount")
+{
+    ZeroPlayerPartyMons();
+    u32 perfectIVs[6] = {0};
+
+    ASSUME(gSpeciesInfo[SPECIES_MEW].perfectIVCount == 3);
+    ASSUME(gSpeciesInfo[SPECIES_CELEBI].perfectIVCount == 3);
+    ASSUME(gSpeciesInfo[SPECIES_JIRACHI].perfectIVCount == 3);
+    ASSUME(gSpeciesInfo[SPECIES_MANAPHY].perfectIVCount == 3);
+    ASSUME(gSpeciesInfo[SPECIES_VICTINI].perfectIVCount == 3);
+    ASSUME(gSpeciesInfo[SPECIES_DIANCIE].perfectIVCount == 3);
+
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_MEW, 100;
+        givemon SPECIES_CELEBI, 100;
+        givemon SPECIES_JIRACHI, 100;
+        givemon SPECIES_MANAPHY, 100;
+        givemon SPECIES_VICTINI, 100;
+        givemon SPECIES_DIANCIE, 100;
+    );
+
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_MEW);
+    EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_SPECIES), SPECIES_CELEBI);
+    EXPECT_EQ(GetMonData(&gPlayerParty[2], MON_DATA_SPECIES), SPECIES_JIRACHI);
+    EXPECT_EQ(GetMonData(&gPlayerParty[3], MON_DATA_SPECIES), SPECIES_MANAPHY);
+    EXPECT_EQ(GetMonData(&gPlayerParty[4], MON_DATA_SPECIES), SPECIES_VICTINI);
+    EXPECT_EQ(GetMonData(&gPlayerParty[5], MON_DATA_SPECIES), SPECIES_DIANCIE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gPlayerParty[2], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gPlayerParty[3], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gPlayerParty[4], MON_DATA_LEVEL), 100);
+    EXPECT_EQ(GetMonData(&gPlayerParty[5], MON_DATA_LEVEL), 100);
+    for (u32 j = 0; j < 6; j++)
+    {
+        for (u32 k = 0; k < NUM_STATS; k++)
+        {
+            if (GetMonData(&gPlayerParty[j], MON_DATA_HP_IV + k) == MAX_PER_STAT_IVS)
+                perfectIVs[j]++;
+        }
+        EXPECT_GE(perfectIVs[j], 3);
+    }
+}
+
 TEST("givemon [moves]")
 {
     ZeroPlayerPartyMons();

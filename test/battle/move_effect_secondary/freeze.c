@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(MoveHasAdditionalEffect(MOVE_POWDER_SNOW, MOVE_EFFECT_FREEZE_OR_FROSTBITE) == TRUE);
-    ASSUME(gMovesInfo[MOVE_BLIZZARD].accuracy == 70);
+    ASSUME(GetMoveAccuracy(MOVE_BLIZZARD) == 70);
 }
 
 #if B_USE_FROSTBITE == TRUE
@@ -92,7 +92,7 @@ SINGLE_BATTLE_TEST("Freezing Glare shouldn't freeze Psychic-types")
     GIVEN {
         ASSUME(gSpeciesInfo[SPECIES_ARTICUNO_GALAR].types[0] == TYPE_PSYCHIC);
         ASSUME(MoveHasAdditionalEffect(MOVE_FREEZING_GLARE, MOVE_EFFECT_FREEZE_OR_FROSTBITE) == TRUE);
-        ASSUME(gMovesInfo[MOVE_FREEZING_GLARE].type == TYPE_PSYCHIC);
+        ASSUME(GetMoveType(MOVE_FREEZING_GLARE) == TYPE_PSYCHIC);
         PLAYER(SPECIES_ARTICUNO_GALAR);
         OPPONENT(SPECIES_ARTICUNO_GALAR);
     } WHEN {

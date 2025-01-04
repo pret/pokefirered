@@ -124,7 +124,6 @@ SINGLE_BATTLE_TEST("Shield Dust does not block self-targeting effects, primary o
 DOUBLE_BATTLE_TEST("Shield Dust does or does not block Sparkling Aria depending on number of targets hit")
 {
     u32 moveToUse;
-    KNOWN_FAILING;
     PARAMETRIZE { moveToUse = MOVE_FINAL_GAMBIT; }
     PARAMETRIZE { moveToUse = MOVE_TACKLE; }
     GIVEN {
@@ -148,9 +147,23 @@ DOUBLE_BATTLE_TEST("Shield Dust does or does not block Sparkling Aria depending 
     }
 }
 
+DOUBLE_BATTLE_TEST("Shield Dust blocks Sparkling Aria if all other targets avoid getting hit by")
+{
+    KNOWN_FAILING;  //  #4636
+    GIVEN {
+        PLAYER(SPECIES_PRIMARINA);
+        PLAYER(SPECIES_VIVILLON) { Ability(ABILITY_SHIELD_DUST); Status1(STATUS1_BURN); }
+        OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
+        OPPONENT(SPECIES_WYNAUT) { Status1(STATUS1_BURN); }
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_FLY, target:playerLeft); MOVE(opponentRight, MOVE_PROTECT); MOVE(playerRight, MOVE_CELEBRATE); MOVE(playerLeft, MOVE_SPARKLING_ARIA); }
+    } SCENE {
+        NOT MESSAGE("Vivillon's burn was cured!");
+    }
+}
+
 SINGLE_BATTLE_TEST("Shield Dust blocks Sparkling Aria in singles")
 {
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_VIVILLON) { Ability(ABILITY_SHIELD_DUST); Status1(STATUS1_BURN); }

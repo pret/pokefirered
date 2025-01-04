@@ -143,7 +143,7 @@ SINGLE_BATTLE_TEST("Booster Energy increases special attack by 30% if it is the 
     PARAMETRIZE { species = SPECIES_IRON_MOTH; ability = ABILITY_QUARK_DRIVE; item = ITEM_BOOSTER_ENERGY; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ROUND].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(GetMoveCategory(MOVE_ROUND) == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(species) { Attack(100); Defense(100); Speed(100); SpAttack(110); SpDefense(100); Ability(ability); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(100); };
     } WHEN {
@@ -169,7 +169,7 @@ SINGLE_BATTLE_TEST("Booster Energy increases special defense by 30% if it is the
     PARAMETRIZE { species = SPECIES_IRON_MOTH; ability = ABILITY_QUARK_DRIVE; item = ITEM_BOOSTER_ENERGY; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ROUND].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(GetMoveCategory(MOVE_ROUND) == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(species) { Attack(100); Defense(100); Speed(100); SpAttack(100); SpDefense(110); Ability(ability); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(100); };
     } WHEN {
@@ -207,5 +207,30 @@ SINGLE_BATTLE_TEST("Booster Energy can't be tricked if a Paradox species is invo
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TRICK, opponent);
         MESSAGE("But it failed!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Booster Energy triggers correctly for all battlers if multiple fainted the previous turn")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_CATERPIE) { HP(1); }
+        PLAYER(SPECIES_GOUGING_FIRE) { Item(ITEM_BOOSTER_ENERGY); }
+        PLAYER(SPECIES_IRON_MOTH) { Item(ITEM_BOOSTER_ENERGY); }
+        OPPONENT(SPECIES_CATERPIE) { HP(1); }
+        OPPONENT(SPECIES_CATERPIE) { HP(1); }
+        OPPONENT(SPECIES_FLUTTER_MANE) { Item(ITEM_BOOSTER_ENERGY); }
+        OPPONENT(SPECIES_CATERPIE);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_EXPLOSION);
+               SEND_OUT(opponentRight, 3);
+               SEND_OUT(opponentLeft, 2);
+               SEND_OUT(playerRight, 3);
+               SEND_OUT(playerLeft, 2); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, playerLeft);
+        ABILITY_POPUP(playerLeft, ABILITY_PROTOSYNTHESIS);
+        ABILITY_POPUP(playerRight, ABILITY_QUARK_DRIVE);
+        ABILITY_POPUP(opponentLeft, ABILITY_PROTOSYNTHESIS);
     }
 }

@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_TECHNO_BLAST].effect == EFFECT_CHANGE_TYPE_ON_ITEM);
-    ASSUME(gMovesInfo[MOVE_TECHNO_BLAST].argument == HOLD_EFFECT_DRIVE);
+    ASSUME(GetMoveEffect(MOVE_TECHNO_BLAST) == EFFECT_CHANGE_TYPE_ON_ITEM);
+    ASSUME(GetMoveEffectArg_HoldEffect(MOVE_TECHNO_BLAST) == HOLD_EFFECT_DRIVE);
 }
 
 SINGLE_BATTLE_TEST("Techno Blast changes type depending on the drive the user holds")

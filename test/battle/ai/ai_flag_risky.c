@@ -9,7 +9,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI will blindly Mirror Coat against specia
     PARAMETRIZE { aiRiskyFlag = AI_FLAG_RISKY; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_MIRROR_COAT].effect == EFFECT_MIRROR_COAT);
+        ASSUME(GetMoveEffect(MOVE_MIRROR_COAT) == EFFECT_MIRROR_COAT);
         ASSUME(gSpeciesInfo[SPECIES_GROVYLE].baseSpAttack == 85);
         ASSUME(gSpeciesInfo[SPECIES_GROVYLE].baseAttack == 65);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiRiskyFlag);
@@ -28,7 +28,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI will blindly Counter against physical a
     PARAMETRIZE { aiRiskyFlag = AI_FLAG_RISKY; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_COUNTER].effect == EFFECT_COUNTER);
+        ASSUME(GetMoveEffect(MOVE_COUNTER) == EFFECT_COUNTER);
         ASSUME(gSpeciesInfo[SPECIES_MARSHTOMP].baseAttack == 85);
         ASSUME(gSpeciesInfo[SPECIES_MARSHTOMP].baseSpAttack == 60);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiRiskyFlag);
@@ -47,7 +47,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI will prioritize Revenge if slower")
     PARAMETRIZE { aiRiskyFlag = AI_FLAG_RISKY; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_REVENGE].effect == EFFECT_REVENGE);
+        ASSUME(GetMoveEffect(MOVE_REVENGE) == EFFECT_REVENGE);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiRiskyFlag);
         PLAYER(SPECIES_GROVYLE) { Level(20); Speed(4); Moves(MOVE_ENERGY_BALL); }
         OPPONENT(SPECIES_CASTFORM) { Level(19); Speed(3); Moves(MOVE_TACKLE, MOVE_REVENGE); }

@@ -3,9 +3,9 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_SUNSTEEL_STRIKE].ignoresTargetAbility);
-    ASSUME(gMovesInfo[MOVE_MOONGEIST_BEAM].ignoresTargetAbility);
-    ASSUME(gMovesInfo[MOVE_PHOTON_GEYSER].ignoresTargetAbility);
+    ASSUME(MoveIgnoresTargetAbility(MOVE_SUNSTEEL_STRIKE));
+    ASSUME(MoveIgnoresTargetAbility(MOVE_MOONGEIST_BEAM));
+    ASSUME(MoveIgnoresTargetAbility(MOVE_PHOTON_GEYSER));
 }
 
 SINGLE_BATTLE_TEST("ignoresTargetAbility moves do not ignore the attacker's own ability", s16 damage)
@@ -20,19 +20,19 @@ SINGLE_BATTLE_TEST("ignoresTargetAbility moves do not ignore the attacker's own 
     PARAMETRIZE { move = MOVE_PHOTON_GEYSER; ability = ABILITY_UNAWARE; }
 
     ASSUME(gAbilitiesInfo[ABILITY_UNAWARE].breakable);
-    ASSUME(gMovesInfo[MOVE_IRON_DEFENSE].effect == EFFECT_DEFENSE_UP_2);
-    ASSUME(gMovesInfo[MOVE_AMNESIA].effect == EFFECT_SPECIAL_DEFENSE_UP_2);
+    ASSUME(GetMoveEffect(MOVE_IRON_DEFENSE) == EFFECT_DEFENSE_UP_2);
+    ASSUME(GetMoveEffect(MOVE_AMNESIA) == EFFECT_SPECIAL_DEFENSE_UP_2);
 
     GIVEN {
         PLAYER(SPECIES_CLEFABLE) { Speed(1); Ability(ability); }
         OPPONENT(SPECIES_ARON) { Speed(2); }
     } WHEN {
-        if (gMovesInfo[move].category == DAMAGE_CATEGORY_PHYSICAL)
+        if (GetMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL)
             TURN { MOVE(opponent, MOVE_IRON_DEFENSE); MOVE(player, move); }
         else
             TURN { MOVE(opponent, MOVE_AMNESIA); MOVE(player, move); }
     } SCENE {
-        if (gMovesInfo[move].category == DAMAGE_CATEGORY_PHYSICAL)
+        if (GetMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL)
             ANIMATION(ANIM_TYPE_MOVE, MOVE_IRON_DEFENSE, opponent);
         else
             ANIMATION(ANIM_TYPE_MOVE, MOVE_AMNESIA, opponent);

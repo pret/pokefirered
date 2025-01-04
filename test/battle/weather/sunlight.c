@@ -4,8 +4,8 @@
 // Please add Sunlight interactions with move, item and ability effects on their respective files.
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
-    ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
+    ASSUME(GetMoveType(MOVE_EMBER) == TYPE_FIRE);
+    ASSUME(GetMoveType(MOVE_WATER_GUN) == TYPE_WATER);
 }
 
 SINGLE_BATTLE_TEST("Sunlight multiplies the power of Fire-type moves by 1.5x", s16 damage)

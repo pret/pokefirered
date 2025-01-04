@@ -5,8 +5,8 @@ SINGLE_BATTLE_TEST("Poison Touch has a 30% chance to poison when attacking with 
 {
     PASSES_RANDOMLY(3, 10, RNG_POISON_TOUCH);
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].power > 0);
-        ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
+        ASSUME(GetMovePower(MOVE_TACKLE) > 0);
+        ASSUME(MoveMakesContact(MOVE_TACKLE));
         PLAYER(SPECIES_GRIMER) { Ability(ABILITY_POISON_TOUCH); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -27,15 +27,15 @@ SINGLE_BATTLE_TEST("Poison Touch only applies when using contact moves")
     PARAMETRIZE { move = MOVE_TACKLE; }
     PARAMETRIZE { move = MOVE_SWIFT; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
-        ASSUME(!gMovesInfo[MOVE_SWIFT].makesContact);
+        ASSUME(MoveMakesContact(MOVE_TACKLE));
+        ASSUME(!MoveMakesContact(MOVE_SWIFT));
         PLAYER(SPECIES_GRIMER) { Ability(ABILITY_POISON_TOUCH); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, move); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, player);
-        if (gMovesInfo[move].makesContact) {
+        if (MoveMakesContact(move)) {
             ABILITY_POPUP(player, ABILITY_POISON_TOUCH);
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
             MESSAGE("The opposing Wobbuffet was poisoned by Grimer's Poison Touch!");
@@ -54,8 +54,8 @@ SINGLE_BATTLE_TEST("Poison Touch only applies when using contact moves")
 SINGLE_BATTLE_TEST("Poison Touch applies between multi-hit move hits")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ARM_THRUST].effect == EFFECT_MULTI_HIT);
-        ASSUME(gMovesInfo[MOVE_ARM_THRUST].makesContact);
+        ASSUME(GetMoveEffect(MOVE_ARM_THRUST) == EFFECT_MULTI_HIT);
+        ASSUME(MoveMakesContact(MOVE_ARM_THRUST));
         ASSUME(gItemsInfo[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
         PLAYER(SPECIES_GRIMER) { Ability(ABILITY_POISON_TOUCH); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_PECHA_BERRY); };

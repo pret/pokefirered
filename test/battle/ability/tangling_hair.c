@@ -3,9 +3,9 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_TACKLE].effect == EFFECT_HIT);
-    ASSUME(gMovesInfo[MOVE_TACKLE].power > 0);
-    ASSUME(gMovesInfo[MOVE_TACKLE].makesContact == TRUE);
+    ASSUME(GetMoveEffect(MOVE_TACKLE) == EFFECT_HIT);
+    ASSUME(GetMovePower(MOVE_TACKLE) > 0);
+    ASSUME(MoveMakesContact(MOVE_TACKLE) == TRUE);
 }
 
 
@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Tangling Hair drops opposing mon's speed if ability user got
     PARAMETRIZE { move = MOVE_SWIFT; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SWIFT].makesContact == FALSE);
+        ASSUME(MoveMakesContact(MOVE_SWIFT) == FALSE);
         PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); }
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {

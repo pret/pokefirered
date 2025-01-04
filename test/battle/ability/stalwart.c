@@ -24,8 +24,8 @@ DOUBLE_BATTLE_TEST("Stalwart stops Lightning Rod and Storm Drain from redirectin
     PARAMETRIZE { ability = ABILITY_STORM_DRAIN; species = SPECIES_LUMINEON; }
     PARAMETRIZE { ability = ABILITY_LIGHTNING_ROD; species = SPECIES_RAICHU; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SPARK].type == TYPE_ELECTRIC);
-        ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
+        ASSUME(GetMoveType(MOVE_SPARK) == TYPE_ELECTRIC);
+        ASSUME(GetMoveType(MOVE_WATER_GUN) == TYPE_WATER);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_STALWART); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Ability(ability); }

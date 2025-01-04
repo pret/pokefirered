@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_MEDITATE].effect == EFFECT_ATTACK_UP);
+    ASSUME(GetMoveEffect(MOVE_MEDITATE) == EFFECT_ATTACK_UP);
 }
 
 SINGLE_BATTLE_TEST("Meditate raises Attack by 1 stage", s16 damage)
@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Meditate raises Attack by 1 stage", s16 damage)
     PARAMETRIZE { raiseAttack = FALSE; }
     PARAMETRIZE { raiseAttack = TRUE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

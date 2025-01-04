@@ -58,3 +58,19 @@ SINGLE_BATTLE_TEST("Enigma Berry does nothing if Heal Block applies")
         }
     }
 }
+
+DOUBLE_BATTLE_TEST("Enigma Berry doesn't trigger if partner was hit")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT) { Item(ITEM_ENIGMA_BERRY); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponentRight);
+    } THEN {
+        EXPECT(opponentRight->item == ITEM_ENIGMA_BERRY);
+    }
+}

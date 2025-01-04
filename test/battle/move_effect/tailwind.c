@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_TAILWIND].effect == EFFECT_TAILWIND);
+    ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
 }
 
 SINGLE_BATTLE_TEST("Tailwind applies for 4 turns")

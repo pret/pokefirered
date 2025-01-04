@@ -8,7 +8,7 @@ DOUBLE_BATTLE_TEST("Moxie/Chilling Neigh raises Attack by one stage after direct
     PARAMETRIZE { species = SPECIES_GLASTRIER;         ability = ABILITY_CHILLING_NEIGH;   abilityPopUp = ABILITY_CHILLING_NEIGH; }
     PARAMETRIZE { species = SPECIES_CALYREX_ICE; ability = ABILITY_AS_ONE_ICE_RIDER; abilityPopUp = ABILITY_CHILLING_NEIGH; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_EARTHQUAKE].target == MOVE_TARGET_FOES_AND_ALLY);
+        ASSUME(GetMoveTarget(MOVE_EARTHQUAKE) == MOVE_TARGET_FOES_AND_ALLY);
         PLAYER(species) { Ability(ability); }
         PLAYER(SPECIES_SNORUNT) { HP(1); }
         OPPONENT(SPECIES_GLALIE) { HP(1); }
@@ -84,7 +84,7 @@ SINGLE_BATTLE_TEST("Moxie/Chilling Neigh does not trigger when already at maximu
     PARAMETRIZE { species = SPECIES_GLASTRIER;         ability = ABILITY_CHILLING_NEIGH;   abilityPopUp = ABILITY_CHILLING_NEIGH; }
     PARAMETRIZE { species = SPECIES_CALYREX_ICE; ability = ABILITY_AS_ONE_ICE_RIDER; abilityPopUp = ABILITY_CHILLING_NEIGH; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_BELLY_DRUM].effect == EFFECT_BELLY_DRUM);
+        ASSUME(GetMoveEffect(MOVE_BELLY_DRUM) == EFFECT_BELLY_DRUM);
         PLAYER(species) { Ability(ability); }
         OPPONENT(SPECIES_SNORUNT) { HP(1); }
         OPPONENT(SPECIES_SNORUNT);
@@ -122,9 +122,8 @@ DOUBLE_BATTLE_TEST("Moxie/Chilling Neigh does not increase damage done by the sa
     PARAMETRIZE { species = SPECIES_GLASTRIER;         ability = ABILITY_CHILLING_NEIGH;   abilityPopUp = ABILITY_CHILLING_NEIGH; }
     PARAMETRIZE { species = SPECIES_CALYREX_ICE;       ability = ABILITY_AS_ONE_ICE_RIDER; abilityPopUp = ABILITY_CHILLING_NEIGH; }
 
-    KNOWN_FAILING; // Requires simultaneous damage implementation
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_EARTHQUAKE].target == MOVE_TARGET_FOES_AND_ALLY);
+        ASSUME(GetMoveTarget(MOVE_EARTHQUAKE) == MOVE_TARGET_FOES_AND_ALLY);
         PLAYER(species) { Ability(ability); }
         PLAYER(SPECIES_ABRA) { HP(1); }
         OPPONENT(SPECIES_GLALIE);
@@ -136,6 +135,7 @@ DOUBLE_BATTLE_TEST("Moxie/Chilling Neigh does not increase damage done by the sa
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, playerLeft);
         HP_BAR(opponentLeft, captureDamage: &damage[0]);
         HP_BAR(playerRight);
+        HP_BAR(opponentRight, captureDamage: &damage[1]);
         MESSAGE("Abra fainted!");
         ABILITY_POPUP(playerLeft, abilityPopUp);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
@@ -145,7 +145,6 @@ DOUBLE_BATTLE_TEST("Moxie/Chilling Neigh does not increase damage done by the sa
             MESSAGE("Glastrier's Chilling Neigh raised its Attack!");
         else
             MESSAGE("Calyrex's Chilling Neigh raised its Attack!");
-        HP_BAR(opponentRight, captureDamage: &damage[1]);
     } THEN {
         EXPECT_EQ(playerLeft->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
         EXPECT_EQ(damage[0], damage[1]);

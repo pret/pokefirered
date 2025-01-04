@@ -46,7 +46,7 @@ SINGLE_BATTLE_TEST("Sap Sipper does not increase Attack if already maxed")
 {
     GIVEN {
         PLAYER(SPECIES_MARILL) { Ability(ABILITY_SAP_SIPPER); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_BELLY_DRUM); MOVE(opponent, MOVE_VINE_WHIP); }
     } SCENE {
@@ -61,7 +61,7 @@ SINGLE_BATTLE_TEST("Sap Sipper does not increase Attack if already maxed")
 SINGLE_BATTLE_TEST("Sap Sipper blocks multi-hit grass type moves")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_BULLET_SEED].effect == EFFECT_MULTI_HIT);
+        ASSUME(GetMoveEffect(MOVE_BULLET_SEED) == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_MARILL) { Ability(ABILITY_SAP_SIPPER); }
         OPPONENT(SPECIES_SHELLDER) { Ability(ABILITY_SKILL_LINK); }
     } WHEN {

@@ -12,6 +12,8 @@
 #define IWRAM_INIT __attribute__((section(".iwram")))
 #define EWRAM_INIT __attribute__((section(".ewram")))
 
+#define ARM_FUNC __attribute__((target("arm")))
+
 #if MODERN
 #define NOINLINE __attribute__((noinline))
 #else

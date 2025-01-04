@@ -76,7 +76,6 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 static bool8 ShouldSkipFriendshipChange(void);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 
-#include "data/moves_info.h"
 #include "data/abilities.h"
 
 // NOTE: The order of the elements in the 3 arrays below is irrelevant.
@@ -6500,21 +6499,6 @@ u16 GetFirstPartnerMove(u16 species)
         default:
             return MOVE_NONE;
     }
-}
-
-const u8 *GetMoveName(u16 moveId)
-{
-    return gMovesInfo[moveId].name;
-}
-
-const u8 *GetMoveAnimationScript(u16 moveId)
-{
-    if (gMovesInfo[moveId].battleAnimScript == NULL)
-    {
-        DebugPrintfLevel(MGBA_LOG_WARN, "No animation for moveId=%u", moveId);
-        return gMovesInfo[MOVE_NONE].battleAnimScript;
-    }
-    return gMovesInfo[moveId].battleAnimScript;
 }
 
 void UpdateDaysPassedSinceFormChange(u16 days)

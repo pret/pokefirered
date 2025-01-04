@@ -23,6 +23,7 @@
 #include "fieldmap.h"
 #include "event_object_movement.h"
 #include "money.h"
+#include "move.h"
 #include "quest_log.h"
 #include "script.h"
 #include "text_window.h"

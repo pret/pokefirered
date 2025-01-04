@@ -7,6 +7,7 @@
 #include "mystery_gift.h"
 #include "menu.h"
 #include "mail.h"
+#include "move.h"
 #include "pokedex.h"
 #include "random.h"
 #include "strings.h"
@@ -157,7 +158,7 @@ static const u8 *GetEasyChatWord(u8 groupId, u16 index)
         return gSpeciesInfo[index].speciesName;
     case EC_GROUP_MOVE_1:
     case EC_GROUP_MOVE_2:
-        return gMovesInfo[index].name;
+        return GetMoveName(index);
     default:
         return sEasyChatGroups[groupId].wordData.words[index].text;
     }

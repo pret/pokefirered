@@ -4,6 +4,7 @@
 #include "script.h"
 #include "overworld.h"
 #include "party_menu.h"
+#include "move.h"
 #include "field_fadetransition.h"
 #include "pokemon_summary_screen.h"
 #include "event_data.h"
@@ -64,7 +65,7 @@ void BufferMoveDeleterNicknameAndMove(void)
     u16 move = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
 
     GetMonNickname(mon, gStringVar1);
-    StringCopy(gStringVar2, gMovesInfo[move].name);
+    StringCopy(gStringVar2, GetMoveName(move));
 }
 
 static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)

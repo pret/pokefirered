@@ -92,7 +92,7 @@ void SwitchPartyOrder(u32 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
-s8 GetMovePriority(u32 battlerId, u16 move);
+s8 GetBattleMovePriority(u32 battlerId, u16 move);
 s8 GetChosenMovePriority(u32 battlerId);
 u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect);
 u32 GetBattlerTotalSpeedStat(u32 battler);

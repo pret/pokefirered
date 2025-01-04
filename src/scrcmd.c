@@ -23,6 +23,7 @@
 #include "event_object_movement.h"
 #include "event_object_lock.h"
 #include "field_message_box.h"
+#include "move.h"
 #include "script_menu.h"
 #include "trainer_see.h"
 #include "data.h"

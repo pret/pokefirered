@@ -78,20 +78,7 @@
 
 // Special indicator value for shellBellDmg in SpecialStatus
 #define IGNORE_SHELL_BELL 0xFFFF
-
-
-// For defining EFFECT_HIT etc. with battle TV scores and flags etc.
-struct __attribute__((packed, aligned(2))) BattleMoveEffect
-{
-    const u8 *battleScript;
-    u16 encourageEncore:1;
-    u16 twoTurnEffect:1;
-    u16 semiInvulnerableEffect:1;
-    u16 usesProtectCounter:1;
-    u16 padding:12;
-};
-
-#define GET_MOVE_BATTLESCRIPT(move) gBattleMoveEffects[gMovesInfo[move].effect].battleScript
+#define GET_MOVE_BATTLESCRIPT(move) gBattleMoveEffects[gMovesInfo[move].effect].battleScript // TODO: remove
 
 extern const struct Trainer gTrainers[];
 
@@ -126,17 +113,15 @@ struct DisableStruct
     u8 disableTimer:4;
     u8 encoreTimer:4;
     u8 perishSongTimer:4;
-    u8 furyCutterCounter;
     u8 rolloutTimer:4;
     u8 rolloutTimerStartValue:4;
-    u8 chargeTimer:4;
     u8 tauntTimer:4;
+    u8 furyCutterCounter;
     u8 battlerPreventingEscape;
     u8 battlerWithSureHit;
     u8 isFirstTurn;
-    u8 truantCounter:1;
-    u8 truantSwitchInHack:1;
     u8 mimickedMoves:4;
+    u8 chargeTimer:4;
     u8 rechargeTimer;
     u8 autotomizeCount;
     u8 slowStartTimer;
@@ -149,6 +134,8 @@ struct DisableStruct
     u8 wrapTurns;
     u8 tormentTimer:4; // used for G-Max Meltdown
     u8 usedMoves:4;
+    u8 truantCounter:1;
+    u8 truantSwitchInHack:1;
     u8 noRetreat:1;
     u8 tarShot:1;
     u8 octolock:1;
@@ -163,6 +150,7 @@ struct DisableStruct
     u8 weatherAbilityDone:1;
     u8 terrainAbilityDone:1;
     u8 usedProteanLibero:1;
+    u16 overwrittenAbility;   // abilities overwritten during battle (keep separate from battle history in case of switching)
 };
 
 extern struct DisableStruct gDisableStructs[MAX_BATTLERS_COUNT];
@@ -237,10 +225,10 @@ struct SpecialStatus
     u8 statLowered:1;
     u8 lightningRodRedirected:1;
     u8 restoredBattlerSprite: 1;
-    u8 traced:1;
     u8 faintedHasReplacement:1;
     u8 focusBanded:1;
     u8 focusSashed:1;
+    u8 unused:2;
     // End of byte
     u8 sturdied:1;
     u8 stormDrainRedirected:1;
@@ -266,43 +254,41 @@ struct SpecialStatus
     u8 emergencyExited:1;
     u8 afterYou:1;
     u8 preventLifeOrbDamage:1; // So that Life Orb doesn't activate various effects.
-    // pokeemrald
-    u8 intimidatedMon:1;          // 0x8
-    u8 ppNotAffectedByPressure:1;
-    s32 dmg;
+    u8 distortedTypeMatchups:1;
+    u8 teraShellAbilityDone:1;
+    u8 criticalHit:1;
 };
 
 extern struct SpecialStatus gSpecialStatuses[MAX_BATTLERS_COUNT];
 
 struct SideTimer
 {
-    /*0x00*/ u8 reflectTimer;
-    /*0x01*/ u8 reflectBattlerId;
-    /*0x02*/ u8 lightscreenTimer;
-    /*0x03*/ u8 lightscreenBattlerId;
-    /*0x04*/ u8 mistTimer;
-    /*0x05*/ u8 mistBattlerId;
-    /*0x06*/ u8 safeguardTimer;
-    /*0x07*/ u8 safeguardBattlerId;
-    /*0x08*/ u8 followmeTimer;
-    /*0x09*/ u8 followmeTarget;
-    /*0x0A*/ u8 spikesAmount;
-    /*0x0B*/ u8 fieldB;
-    // pokeemerald
-    u8 retaliateTimer;
+    u8 reflectTimer;
+    u8 reflectBattlerId;
+    u8 lightscreenTimer;
+    u8 lightscreenBattlerId;
+    u8 mistTimer;
+    u8 mistBattlerId;
+    u8 safeguardTimer;
+    u8 safeguardBattlerId;
+    u8 spikesAmount;
+    u8 toxicSpikesAmount;
     u8 stealthRockAmount;
     u8 stickyWebAmount;
     u8 stickyWebBattlerId;
     u8 stickyWebBattlerSide; // Used for Court Change
-    u8 tailwindTimer;
-    u8 tailwindBattlerId;
     u8 auroraVeilTimer;
     u8 auroraVeilBattlerId;
-    u8 toxicSpikesAmount;
-    u8 followmePowder:1; // Rage powder, does not affect grass type pokemon.
-    u8 steelsurgeAmount;
+    u8 tailwindTimer;
+    u8 tailwindBattlerId;
     u8 luckyChantTimer;
     u8 luckyChantBattlerId;
+    u8 steelsurgeAmount;
+    // Timers below this point are not swapped by Court Change
+    u8 followmeTimer;
+    u8 followmeTarget:3;
+    u8 followmePowder:1; // Rage powder, does not affect grass type pokemon.
+    u8 retaliateTimer;
     u8 damageNonTypesTimer;
     u8 damageNonTypesType;
     u8 rainbowTimer;
@@ -745,7 +731,6 @@ struct BattleStruct
     u8 effectsBeforeUsingMoveDone:1; // Mega Evo and Focus Punch/Shell Trap effects.
     u8 spriteIgnore0Hp:1;
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
-    u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
     u8 battleBondTransformed[NUM_BATTLE_SIDES]; // Bitfield for each party.
     u8 storedHealingWish:4; // Each battler as a bit.
     u8 storedLunarDance:4; // Each battler as a bit.
@@ -779,13 +764,33 @@ struct BattleStruct
     u8 shellSideArmCategory[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT];
     u8 speedTieBreaks; // MAX_BATTLERS_COUNT! values.
     u8 boosterEnergyActivates;
-    u8 distortedTypeMatchups;
     u8 categoryOverride; // for Z-Moves and Max Moves
     u8 commandingDondozo;
-    u16 commanderActive[NUM_BATTLE_SIDES];
+    u16 commanderActive[MAX_BATTLERS_COUNT];
     u32 stellarBoostFlags[NUM_BATTLE_SIDES]; // stored as a bitfield of flags for all types for each side
+    u8 redCardActivates:1;
+    u8 padding1:7;
     u8 usedEjectItem;
-    u8 usedMicleBerry;
+    u8 monCausingSleepClause[NUM_BATTLE_SIDES]; // Stores which pokemon on a given side is causing Sleep Clause to be active as the mon's index in the party
+    u8 sleepClauseEffectExempt:4; // Stores whether effect should be exempt from triggering Sleep Clause (Effect Spore)
+    u8 usedMicleBerry:4;
+    u8 pursuitTarget:4; // Each battler as a bit.
+    u8 pursuitSwitchByMove:1;
+    u8 pursuitStoredSwitch; // Stored id for the Pursuit target's switch
+    s32 battlerExpReward;
+
+    // Simultaneous hp reduction for spread moves
+    s32 moveDamage[MAX_BATTLERS_COUNT];
+    s32 critChance[MAX_BATTLERS_COUNT];
+    u16 moveResultFlags[MAX_BATTLERS_COUNT];
+    u8 missStringId[MAX_BATTLERS_COUNT];
+    u8 noResultString[MAX_BATTLERS_COUNT];
+    u8 doneDoublesSpreadHit:1;
+    u8 calculatedDamageDone:1;
+    u8 calculatedSpreadMoveAccuracy:1;
+    u8 printedStrongWindsWeakenedAttack:1;
+    u8 numSpreadTargets:2;
+    u8 padding2:2;
 
     // pokefirered
     u8 field_DA; // battle tower related
@@ -798,27 +803,49 @@ extern struct BattleStruct *gBattleStruct;
 #define F_DYNAMIC_TYPE_IGNORE_PHYSICALITY  (1 << 6) // If set, the dynamic type's physicality won't be used for certain move effects.
 #define F_DYNAMIC_TYPE_SET                 (1 << 7) // Set for all dynamic types to distinguish a dynamic type of Normal (0) from no dynamic type.
 
-#define GET_MOVE_TYPE(move, typeArg)                                  \
-{                                                                     \
-    if (gBattleStruct->dynamicMoveType)                               \
-        typeArg = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK; \
-    else                                                              \
-        typeArg = gMovesInfo[move].type;                            \
+static inline bool32 IsBattleMovePhysical(u32 move)
+{
+    return GetBattleMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL;
 }
 
-#define IS_MOVE_PHYSICAL(move)(GetBattleMoveCategory(move) == DAMAGE_CATEGORY_PHYSICAL)
-#define IS_MOVE_SPECIAL(move)(GetBattleMoveCategory(move) == DAMAGE_CATEGORY_SPECIAL)
-#define IS_MOVE_STATUS(move)(gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
+static inline bool32 IsBattleMoveSpecial(u32 move)
+{
+    return GetBattleMoveCategory(move) == DAMAGE_CATEGORY_SPECIAL;
+}
 
-#define IS_MOVE_RECOIL(move)(gMovesInfo[move].recoil > 0 || gMovesInfo[move].effect == EFFECT_RECOIL_IF_MISS)
+static inline bool32 IsBattleMoveStatus(u32 move)
+{
+    return GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS;
+}
 
-#define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
-#define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0) || (gBattleStruct->enduredDamage & gBitTable[gBattlerTarget]))
-#define BATTLER_TURN_DAMAGED(battlerId) ((gSpecialStatuses[battlerId].physicalDmg != 0 || gSpecialStatuses[battlerId].specialDmg != 0) || (gBattleStruct->enduredDamage & gBitTable[battler]))
+static inline bool32 IsBattleMoveRecoil(u32 move)
+{
+    return GetMoveRecoil(move) > 0 || GetMoveEffect(move) == EFFECT_RECOIL_IF_MISS;
+}
 
-#define IS_BATTLER_OF_TYPE(battlerId, type)((GetBattlerType(battlerId, 0, FALSE) == type || GetBattlerType(battlerId, 1, FALSE) == type || (GetBattlerType(battlerId, 2, FALSE) != TYPE_MYSTERY && GetBattlerType(battlerId, 2, FALSE) == type)))
-#define IS_BATTLER_OF_BASE_TYPE(battlerId, type)((GetBattlerType(battlerId, 0, TRUE) == type || GetBattlerType(battlerId, 1, TRUE) == type || (GetBattlerType(battlerId, 2, TRUE) != TYPE_MYSTERY && GetBattlerType(battlerId, 2, TRUE) == type)))
-#define IS_BATTLER_TYPELESS(battlerId)(GetBattlerType(battlerId, 0, FALSE) == TYPE_MYSTERY && GetBattlerType(battlerId, 1, FALSE) == TYPE_MYSTERY && GetBattlerType(battlerId, 2, FALSE) == TYPE_MYSTERY)
+/* Checks if 'battlerId' is any of the types.
+ * Passing multiple types is more efficient than calling this multiple
+ * times with one type because it shares the 'GetBattlerTypes' result. */
+#define _IS_BATTLER_ANY_TYPE(battlerId, ignoreTera, ...) \
+    ({ \
+        u32 types[3]; \
+        GetBattlerTypes(battlerId, ignoreTera, types); \
+        RECURSIVELY(R_FOR_EACH(_IS_BATTLER_ANY_TYPE_HELPER, __VA_ARGS__)) FALSE; \
+    })
+
+#define _IS_BATTLER_ANY_TYPE_HELPER(type) (types[0] == type) || (types[1] == type) || (types[2] == type) ||
+
+#define IS_BATTLER_ANY_TYPE(battlerId, ...) _IS_BATTLER_ANY_TYPE(battlerId, FALSE, __VA_ARGS__)
+#define IS_BATTLER_OF_TYPE IS_BATTLER_ANY_TYPE
+#define IS_BATTLER_ANY_BASE_TYPE(battlerId, ...) _IS_BATTLER_ANY_TYPE(battlerId, TRUE, __VA_ARGS__)
+#define IS_BATTLER_OF_BASE_TYPE IS_BATTLER_ANY_BASE_TYPE
+
+#define IS_BATTLER_TYPELESS(battlerId) \
+    ({ \
+        u32 types[3]; \
+        GetBattlerTypes(battlerId, FALSE, types); \
+        types[0] == TYPE_MYSTERY && types[1] == TYPE_MYSTERY && types[2] == TYPE_MYSTERY; \
+    })
 
 #define SET_BATTLER_TYPE(battlerId, type)              \
 {                                                      \
@@ -855,6 +882,8 @@ extern struct BattleStruct *gBattleStruct;
 
 #define SET_STATCHANGER(statId, stage, goesDown)(gBattleScripting.statChanger = (statId) + ((stage) << 3) + (goesDown << 7))
 #define SET_STATCHANGER2(dst, statId, stage, goesDown)(dst = (statId) + ((stage) << 3) + (goesDown << 7))
+
+#define DO_ACCURACY_CHECK 2 // Don't skip the accuracy check before the move might be absorbed
 
 // NOTE: The members of this struct have hard-coded offsets
 //       in include/constants/battle_script_commands.h
@@ -1104,7 +1133,6 @@ extern u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
 extern u8 gPartyCriticalHits[PARTY_SIZE];
-extern const struct BattleMoveEffect gBattleMoveEffects[];
 extern u32 gFieldStatuses;
 extern u8 gPlayerDpadHoldFrames;
 extern u8 gBattlerAbility;
@@ -1122,6 +1150,18 @@ extern struct QueuedStatBoost gQueuedStatBoosts[MAX_BATTLERS_COUNT];
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern u8 gAbsentBattlerFlags;
 extern u8 gCategoryIconSpriteId;
+
+static inline bool32 IsBattlerTurnDamaged(u32 battler)
+{
+    return gSpecialStatuses[battler].physicalDmg != 0
+        || gSpecialStatuses[battler].specialDmg != 0
+        || gBattleStruct->enduredDamage & (1u << battler);
+}
+
+static inline bool32 IsBattlerAtMaxHp(u32 battler)
+{
+    return gBattleMons[battler].hp == gBattleMons[battler].maxHP;
+}
 
 static inline u32 GetBattlerPosition(u32 battler)
 {
@@ -1152,6 +1192,30 @@ static inline struct Pokemon *GetBattlerParty(u32 battler)
 static inline bool32 IsDoubleBattle(void)
 {
     return gBattleTypeFlags & BATTLE_TYPE_DOUBLE;
+}
+
+static inline bool32 IsSpreadMove(u32 moveTarget)
+{
+    return IsDoubleBattle() && (moveTarget == MOVE_TARGET_BOTH || moveTarget == MOVE_TARGET_FOES_AND_ALLY);
+}
+
+static inline bool32 IsDoubleSpreadMove(void)
+{
+    return gBattleStruct->numSpreadTargets > 1
+        && !(gHitMarker & (HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE | HITMARKER_UNABLE_TO_USE_MOVE))
+        && IsSpreadMove(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove));
+}
+
+static inline bool32 IsBattlerInvalidForSpreadMove(u32 battlerAtk, u32 battlerDef, u32 moveTarget)
+{
+    return battlerDef == battlerAtk
+        || !IsBattlerAlive(battlerDef)
+        || (battlerDef == BATTLE_PARTNER(battlerAtk) && (moveTarget == MOVE_TARGET_BOTH));
+}
+
+static inline bool32 MoveResultHasEffect(u32 battler)
+{
+    return !(gBattleStruct->moveResultFlags[battler] & MOVE_RESULT_NO_EFFECT);
 }
 
 

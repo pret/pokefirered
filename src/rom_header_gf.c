@@ -4,6 +4,7 @@
 #include "decoration.h"
 #include "battle_main.h"
 #include "item.h"
+#include "move.h"
 #include "pokeball.h"
 #include "pokedex.h"
 

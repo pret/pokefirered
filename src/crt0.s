@@ -14,15 +14,15 @@ Init::
 	mov r0, #PSR_SYS_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_sys
-@ Prepare for interrupt handling
-	ldr r1, =INTR_VECTOR
-	adr r0, IntrMain
-	str r0, [r1]
 @ Dispatch memory reset request to hardware
 	mov r0, #255 @ RESET_ALL
 	svc #1 << 16
 @ Fill RAM areas with appropriate data
 	bl InitializeWorkingMemory
+@ Prepare for interrupt handling
+	ldr r1, =INTR_VECTOR
+	adr r0, IntrMain
+	str r0, [r1]
 @ Jump to AgbMain
 	ldr r1, =AgbMain + 1
 	mov lr, pc

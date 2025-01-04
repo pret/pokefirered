@@ -67,7 +67,6 @@ u16 gKeyRepeatContinueDelay;
 u8 gSoftResetDisabled;
 IntrFunc gIntrTable[INTR_COUNT];
 bool8 gLinkVSyncDisabled;
-u32 IntrMain_Buffer[0x200];
 u8 gPcmDmaCounter;
 void *gAgbMainLoop_sp;
 
@@ -309,9 +308,7 @@ void InitIntrHandlers(void)
     for (i = 0; i < INTR_COUNT; i++)
         gIntrTable[i] = gIntrTableTemplate[i];
 
-    DmaCopy32(3, IntrMain, IntrMain_Buffer, sizeof(IntrMain_Buffer));
-
-    INTR_VECTOR = IntrMain_Buffer;
+    INTR_VECTOR = IntrMain;
 
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);

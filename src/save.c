@@ -2,6 +2,7 @@
 
 #include "gba/flash_internal.h"
 
+#include "agb_flash.h"
 #include "decompress.h"
 #include "fieldmap.h"
 #include "link.h"

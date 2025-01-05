@@ -79,7 +79,7 @@ SoundMain_5:
 	.align 2, 0
 lt_SOUND_INFO_PTR:        .word SOUND_INFO_PTR
 lt_ID_NUMBER:             .word ID_NUMBER
-lt_SoundMainRAM:   		  .word SoundMainRAM + 1
+lt_SoundMainRAM:          .word SoundMainRAM + 1
 lt_REG_VCOUNT:            .word REG_VCOUNT
 lt_o_SoundInfo_pcmBuffer: .word o_SoundInfo_pcmBuffer
 lt_PCM_DMA_BUF_SIZE:      .word PCM_DMA_BUF_SIZE
@@ -1913,7 +1913,6 @@ _081DDD90:
 	.align 2, 0 @ Don't pad with nop.
 
 	.bss
-	.align 3
 sDecodingBuffer: @ Used as a buffer for audio decoded from compressed DPCM
 	.space 0x40
 	.size sDecodingBuffer, .-sDecodingBuffer

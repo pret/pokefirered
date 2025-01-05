@@ -3,6 +3,8 @@
 #include "decompress.h"
 #include "pokemon.h"
 
+EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[0x4000] = {0};
+
 void LZDecompressWram(const void *src, void *dest)
 {
     LZ77UnCompWram(src, dest);

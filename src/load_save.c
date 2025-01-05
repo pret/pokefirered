@@ -4,6 +4,7 @@
 
 #include "malloc.h"
 
+#include "agb_flash.h"
 #include "berry_powder.h"
 #include "fake_rtc.h"
 #include "item.h"

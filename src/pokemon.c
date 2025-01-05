@@ -26,6 +26,7 @@
 #include "m4a.h"
 #include "pokedex.h"
 #include "pokemon_summary_screen.h"
+#include "test_runner.h"
 #include "strings.h"
 #include "overworld.h"
 #include "party_menu.h"
@@ -901,7 +902,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
     [B_POSITION_PLAYER_LEFT] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gBattlerPicTable_PlayerLeft,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -910,7 +911,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
     [B_POSITION_OPPONENT_LEFT] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerOpponent,
+        .oam = &gOamData_BattleSpriteOpponentSide,
         .anims = NULL, 
         .images = gBattlerPicTable_OpponentLeft,
         .affineAnims = gAffineAnims_BattleSpriteOpponentSide,
@@ -919,7 +920,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
     [B_POSITION_PLAYER_RIGHT] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gBattlerPicTable_PlayerRight,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -928,7 +929,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
     [B_POSITION_OPPONENT_RIGHT] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerOpponent,
+        .oam = &gOamData_BattleSpriteOpponentSide,
         .anims = NULL, 
         .images = gBattlerPicTable_OpponentRight,
         .affineAnims = gAffineAnims_BattleSpriteOpponentSide,
@@ -941,7 +942,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_RED] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Red,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -950,7 +951,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_LEAF] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Leaf,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -959,7 +960,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_RSBrendan,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -968,7 +969,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_RSMay,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -977,7 +978,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_POKEDUDE] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Pokedude,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -986,7 +987,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_OLD_MAN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_OldMan,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -995,7 +996,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_STEVEN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
         .images = gTrainerBackPicTable_Steven,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -4755,7 +4756,7 @@ void HealBoxPokemon(struct BoxPokemon *boxMon)
 u16 GetCryIdBySpecies(u16 species)
 {
     species = SanitizeSpeciesId(species);
-    if (P_CRIES_ENABLED == FALSE || gSpeciesInfo[species].cryId >= CRY_COUNT)
+    if (P_CRIES_ENABLED == FALSE || gSpeciesInfo[species].cryId >= CRY_COUNT || gTestRunnerHeadless)
         return CRY_NONE;
     return gSpeciesInfo[species].cryId;
 }
@@ -5948,7 +5949,7 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 
 bool32 HasTwoFramesAnimation(u16 species)
 {
-    return P_TWO_FRAME_FRONT_SPRITES && species != SPECIES_UNOWN;
+    return P_TWO_FRAME_FRONT_SPRITES && species != SPECIES_UNOWN && !gTestRunnerHeadless;
 }
 
 bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 battlerId)

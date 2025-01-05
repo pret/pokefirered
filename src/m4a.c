@@ -1,22 +1,23 @@
 #include <string.h>
 #include "gba/m4a_internal.h"
+#include "global.h"
 
 extern const u8 gCgb3Vol[];
 
 #define BSS_CODE __attribute__((section(".bss.code")))
 
-struct SoundInfo gSoundInfo;
-struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES];
-struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES];
-MPlayFunc gMPlayJumpTable[36];
-struct CgbChannel gCgbChans[4];
-struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES * 2];
-struct PokemonCrySong gPokemonCrySong;
-struct MusicPlayerInfo gMPlayInfo_BGM;
-struct MusicPlayerInfo gMPlayInfo_SE1;
-struct MusicPlayerInfo gMPlayInfo_SE2;
-struct MusicPlayerInfo gMPlayInfo_SE3;
-u8 gMPlayMemAccArea[0x10];
+COMMON_DATA struct SoundInfo gSoundInfo = {0};
+COMMON_DATA struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES] = {0};
+COMMON_DATA struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES] = {0};
+COMMON_DATA struct MusicPlayerInfo gMPlayInfo_BGM = {0};
+COMMON_DATA MPlayFunc gMPlayJumpTable[36] = {0};
+COMMON_DATA struct CgbChannel gCgbChans[4] = {0};
+COMMON_DATA struct MusicPlayerInfo gMPlayInfo_SE1 = {0};
+COMMON_DATA struct MusicPlayerInfo gMPlayInfo_SE2 = {0};
+COMMON_DATA struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES * 2] = {0};
+COMMON_DATA struct PokemonCrySong gPokemonCrySong = {0};
+COMMON_DATA u8 gMPlayMemAccArea[0x10] = {0};
+COMMON_DATA struct MusicPlayerInfo gMPlayInfo_SE3 = {0};
 
 u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
 {
@@ -79,7 +80,7 @@ void m4aSoundInit(void)
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++)
     {
         struct MusicPlayerInfo *mplayInfo = gMPlayTable[i].info;
-        MPlayOpen(mplayInfo, gMPlayTable[i].track, gMPlayTable[i].unk_8);
+        MPlayOpen(mplayInfo, gMPlayTable[i].track, gMPlayTable[i].numTracks);
         mplayInfo->unk_B = gMPlayTable[i].unk_A;
         mplayInfo->memAccArea = gMPlayMemAccArea;
     }
@@ -1519,7 +1520,11 @@ void ply_xxx(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 
 void ply_xwave(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
-    u32 wav = 0;
+    u32 wav;
+
+#ifdef UBFIX
+    wav = 0;
+#endif
 
     READ_XCMD_BYTE(wav, 0) // UB: uninitialized variable
     READ_XCMD_BYTE(wav, 1)
@@ -1586,7 +1591,11 @@ void ply_xswee(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 
 void ply_xcmd_0C(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
-    u32 unk = 0;
+    u32 unk;
+
+#ifdef UBFIX
+    unk = 0;
+#endif
 
     READ_XCMD_BYTE(unk, 0) // UB: uninitialized variable
     READ_XCMD_BYTE(unk, 1)
@@ -1606,7 +1615,11 @@ void ply_xcmd_0C(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tra
 
 void ply_xcmd_0D(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
-    u32 unk = 0;
+    u32 unk;
+
+#ifdef UBFIX
+    unk = 0;
+#endif
 
     READ_XCMD_BYTE(unk, 0) // UB: uninitialized variable
     READ_XCMD_BYTE(unk, 1)

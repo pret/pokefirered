@@ -787,8 +787,8 @@ Cry_SlowbroMega::
 .endif @ P_MEGA_EVOLUTIONS
 .if P_GALARIAN_FORMS == TRUE
 	.align 2
-Cry_SlowpokeGalarian::
-	.incbin "sound/direct_sound_samples/cries/slowpoke_galarian.bin"
+Cry_SlowpokeGalar::
+	.incbin "sound/direct_sound_samples/cries/slowpoke_galar.bin"
 
 .endif @ P_GALARIAN_FORMS
 .endif @ P_FAMILY_SLOWPOKE
@@ -4175,8 +4175,8 @@ Cry_Floette::
 	.incbin "sound/direct_sound_samples/cries/floette.bin"
 
 	.align 2
-Cry_FloetteEternalFlower::
-	.incbin "sound/direct_sound_samples/cries/floette_eternal_flower.bin"
+Cry_FloetteEternal::
+	.incbin "sound/direct_sound_samples/cries/floette_eternal.bin"
 
 	.align 2
 Cry_Florges::
@@ -5272,21 +5272,21 @@ Cry_Stonjourner::
 
 .if P_FAMILY_EISCUE == TRUE
 	.align 2
-Cry_EiscueIceFace::
+Cry_EiscueIce::
 	.incbin "sound/direct_sound_samples/cries/eiscue_ice_face.bin"
 
 	.align 2
-Cry_EiscueNoiceFace::
+Cry_EiscueNoice::
 	.incbin "sound/direct_sound_samples/cries/eiscue_noice_face.bin"
 .endif @ P_FAMILY_EISCUE
 
 .if P_FAMILY_INDEEDEE == TRUE
 	.align 2
-Cry_IndeedeeMale::
+Cry_IndeedeeM::
 	.incbin "sound/direct_sound_samples/cries/indeedee_male.bin"
 
 	.align 2
-Cry_IndeedeeFemale::
+Cry_IndeedeeF::
 	.incbin "sound/direct_sound_samples/cries/indeedee_female.bin"
 .endif @ P_FAMILY_INDEEDEE
 
@@ -5360,21 +5360,21 @@ Cry_Dragapult::
 
 .if P_FAMILY_ZACIAN == TRUE
 	.align 2
-Cry_ZacianHeroOfManyBattles::
+Cry_ZacianHero::
 	.incbin "sound/direct_sound_samples/cries/zacian_hero_of_many_battles.bin"
 
 	.align 2
-Cry_ZacianCrownedSword::
+Cry_ZacianCrowned::
 	.incbin "sound/direct_sound_samples/cries/zacian_crowned_sword.bin"
 .endif @ P_FAMILY_ZACIAN
 
 .if P_FAMILY_ZAMAZENTA == TRUE
 	.align 2
-Cry_ZamazentaHeroOfManyBattles::
+Cry_ZamazentaHero::
 	.incbin "sound/direct_sound_samples/cries/zamazenta_hero_of_many_battles.bin"
 
 	.align 2
-Cry_ZamazentaCrownedShield::
+Cry_ZamazentaCrowned::
 	.incbin "sound/direct_sound_samples/cries/zamazenta_crowned_shield.bin"
 .endif @ P_FAMILY_ZAMAZENTA
 
@@ -5394,12 +5394,12 @@ Cry_Kubfu::
 	.incbin "sound/direct_sound_samples/cries/kubfu.bin"
 
 	.align 2
-Cry_UrshifuSingleStrikeStyle::
-	.incbin "sound/direct_sound_samples/cries/urshifu_single_strike_style.bin"
+Cry_UrshifuSingleStrike::
+	.incbin "sound/direct_sound_samples/cries/urshifu_single_strike.bin"
 
 	.align 2
-Cry_UrshifuRapidStrikeStyle::
-	.incbin "sound/direct_sound_samples/cries/urshifu_rapid_strike_style.bin"
+Cry_UrshifuRapidStrike::
+	.incbin "sound/direct_sound_samples/cries/urshifu_rapid_strike.bin"
 .endif @ P_FAMILY_KUBFU
 
 .if P_FAMILY_ZARUDE == TRUE
@@ -5439,12 +5439,12 @@ Cry_Calyrex::
 
 .if P_FUSION_FORMS == TRUE
 	.align 2
-Cry_CalyrexIceRider::
-	.incbin "sound/direct_sound_samples/cries/calyrex_ice_rider.bin"
+Cry_CalyrexIce::
+	.incbin "sound/direct_sound_samples/cries/calyrex_ice.bin"
 
 	.align 2
-Cry_CalyrexShadowRider::
-	.incbin "sound/direct_sound_samples/cries/calyrex_shadow_rider.bin"
+Cry_CalyrexShadow::
+	.incbin "sound/direct_sound_samples/cries/calyrex_shadow.bin"
 
 .endif @ P_FUSION_FORMS
 .endif @ P_FAMILY_CALYREX
@@ -5507,12 +5507,12 @@ Cry_Lechonk::
 	.incbin "sound/direct_sound_samples/cries/lechonk.bin"
 
 	.align 2
-Cry_OinkologneMale::
-	.incbin "sound/direct_sound_samples/cries/oinkologne_male.bin"
+Cry_OinkologneM::
+	.incbin "sound/direct_sound_samples/cries/oinkologne_m.bin"
 
 	.align 2
-Cry_OinkologneFemale::
-	.incbin "sound/direct_sound_samples/cries/oinkologne_female.bin"
+Cry_OinkologneF::
+	.incbin "sound/direct_sound_samples/cries/oinkologne_f.bin"
 .endif @ P_FAMILY_LECHONK
 
 .if P_FAMILY_TAROUNTULA == TRUE
@@ -5555,12 +5555,12 @@ Cry_Tandemaus::
 	.incbin "sound/direct_sound_samples/cries/tandemaus.bin"
 
 	.align 2
-Cry_MausholdFamilyOfThree::
-	.incbin "sound/direct_sound_samples/cries/maushold_family_of_three.bin"
+Cry_MausholdThree::
+	.incbin "sound/direct_sound_samples/cries/maushold_three.bin"
 
 	.align 2
-Cry_MausholdFamilyOfFour::
-	.incbin "sound/direct_sound_samples/cries/maushold_family_of_four.bin"
+Cry_MausholdFour::
+	.incbin "sound/direct_sound_samples/cries/maushold_four.bin"
 .endif @ P_FAMILY_TANDEMAUS
 
 .if P_FAMILY_FIDOUGH == TRUE

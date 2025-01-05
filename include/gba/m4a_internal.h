@@ -213,7 +213,7 @@ struct SoundInfo
     ExtVolPitFunc ExtVolPit;
     u8 gap2[16];
     struct SoundChannel chans[MAX_DIRECTSOUND_CHANNELS];
-    s8 pcmBuffer[PCM_DMA_BUF_SIZE * 2];
+    s8 ALIGNED(4) pcmBuffer[PCM_DMA_BUF_SIZE * 2];
 };
 
 struct SongHeader
@@ -349,7 +349,7 @@ struct MusicPlayer
 {
     struct MusicPlayerInfo *info;
     struct MusicPlayerTrack *track;
-    u8 unk_8;
+    u8 numTracks;
     u16 unk_A;
 };
 

@@ -65,10 +65,7 @@ u16 ReadFlashId(void);
 void StartFlashTimer(u8 phase);
 void SetReadFlash1(u16 *dest);
 void StopFlashTimer(void);
-u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
-u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src);
 void ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size);
-u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *dataSrc, u32 n);
 
 u16 WaitForFlashWrite_Common(u8 phase, u8 *addr, u8 lastData);
 
@@ -76,8 +73,5 @@ u16 EraseFlashChip_MX(void);
 u16 EraseFlashSector_MX(u16 sectorNum);
 u16 ProgramFlashByte_MX(u16 sectorNum, u32 offset, u8 data);
 u16 ProgramFlashSector_MX(u16 sectorNum, u8 *src);
-
-// agb_flash_1m
-u16 IdentifyFlash(void);
 
 #endif // GUARD_GBA_FLASH_INTERNAL_H

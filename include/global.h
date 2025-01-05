@@ -737,7 +737,7 @@ struct TrainerTower
 struct TrainerNameRecord
 {
     u32 trainerId;
-    u8 trainerName[PLAYER_NAME_LENGTH + 1];
+    u8 ALIGNED(2) trainerName[PLAYER_NAME_LENGTH + 1];
 };
 
 // For external event data storage. The majority of these may have never been used.

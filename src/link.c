@@ -61,41 +61,41 @@ static u16 sRecvNonzeroCheck;
 static u8 sChecksumAvailable;
 static u8 sHandshakePlayerCount;
 
-u16 gLinkPartnersHeldKeys[6];
-u32 gLinkDebugSeed;
-struct LinkPlayerBlock gLocalLinkPlayerBlock;
-bool8 gLinkErrorOccurred;
-u32 gLinkDebugFlags;
-u32 gLinkFiller1;
-bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS];
-u8 gBlockReceivedStatus[MAX_LINK_PLAYERS];
-u32 gLinkFiller2;
-u16 gLinkHeldKeys;
-u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
-u32 gLinkStatus;
-bool8 gLinkDummy1; // Never read
-bool8 gLinkDummy2; // Never read
-bool8 gReadyToExitStandby[MAX_LINK_PLAYERS];
-bool8 gReadyToCloseLink[MAX_LINK_PLAYERS];
-u16 gReadyCloseLinkType;
-u8 gSuppressLinkErrorMessage;
-u8 gWirelessCommType;
-u8 gSavedLinkPlayerCount;
-u16 gSendCmd[CMD_LENGTH];
-u8 gSavedMultiplayerId;
-bool8 gReceivedRemoteLinkPlayers;
-struct LinkTestBGInfo gLinkTestBGInfo;
-void (*gLinkCallback)(void);
-u8 gShouldAdvanceLinkState;
-u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
-u8 gBlockRequestType;
-u32 gLinkFiller3; // file
-u32 gLinkFiller4; // boundary
-u32 gLinkFiller5; // here?
-u8 gLastSendQueueCount;
-struct Link gLink;
-u8 gLastRecvQueueCount;
-u16 gLinkSavedIme;
+COMMON_DATA u16 gLinkPartnersHeldKeys[6];
+COMMON_DATA u32 gLinkDebugSeed;
+COMMON_DATA struct LinkPlayerBlock gLocalLinkPlayerBlock;
+COMMON_DATA bool8 gLinkErrorOccurred;
+COMMON_DATA u32 gLinkDebugFlags;
+COMMON_DATA u32 gLinkFiller1;
+COMMON_DATA bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS];
+COMMON_DATA u8 gBlockReceivedStatus[MAX_LINK_PLAYERS];
+COMMON_DATA u32 gLinkFiller2;
+COMMON_DATA u16 gLinkHeldKeys;
+COMMON_DATA u16 ALIGNED(4) gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH] = {0};
+COMMON_DATA u32 gLinkStatus;
+COMMON_DATA bool8 gLinkDummy1; // Never read
+COMMON_DATA bool8 gLinkDummy2; // Never read
+COMMON_DATA bool8 gReadyToExitStandby[MAX_LINK_PLAYERS];
+COMMON_DATA bool8 gReadyToCloseLink[MAX_LINK_PLAYERS];
+COMMON_DATA u16 gReadyCloseLinkType;
+COMMON_DATA u8 gSuppressLinkErrorMessage;
+COMMON_DATA u8 gWirelessCommType;
+COMMON_DATA u8 gSavedLinkPlayerCount;
+COMMON_DATA u16 gSendCmd[CMD_LENGTH];
+COMMON_DATA u8 gSavedMultiplayerId;
+COMMON_DATA bool8 gReceivedRemoteLinkPlayers;
+COMMON_DATA struct LinkTestBGInfo gLinkTestBGInfo;
+COMMON_DATA void (*gLinkCallback)(void);
+COMMON_DATA u8 gShouldAdvanceLinkState;
+COMMON_DATA u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
+COMMON_DATA u8 gBlockRequestType;
+COMMON_DATA u32 gLinkFiller3; // file
+COMMON_DATA u32 gLinkFiller4; // boundary
+COMMON_DATA u32 gLinkFiller5; // here?
+COMMON_DATA u8 gLastSendQueueCount;
+COMMON_DATA struct Link gLink;
+COMMON_DATA u8 gLastRecvQueueCount;
+COMMON_DATA u16 gLinkSavedIme;
 
 EWRAM_DATA u32 gBerryBlenderKeySendAttempts = 0;
 EWRAM_DATA u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2] = {};

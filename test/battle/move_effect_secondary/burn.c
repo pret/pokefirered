@@ -43,7 +43,7 @@ DOUBLE_BATTLE_TEST("Lava Plume inflicts burn to all adjacent battlers")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_LAVA_PLUME, MOVE_EFFECT_BURN) == TRUE);
-        ASSUME(gMovesInfo[MOVE_LAVA_PLUME].target == MOVE_TARGET_FOES_AND_ALLY);
+        ASSUME(GetMoveTarget(MOVE_LAVA_PLUME) == MOVE_TARGET_FOES_AND_ALLY);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -53,12 +53,12 @@ DOUBLE_BATTLE_TEST("Lava Plume inflicts burn to all adjacent battlers")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LAVA_PLUME, playerLeft);
         HP_BAR(opponentLeft);
+        HP_BAR(playerRight);
+        HP_BAR(opponentRight);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponentLeft);
         STATUS_ICON(opponentLeft, burn: TRUE);
-        HP_BAR(playerRight);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, playerRight);
         STATUS_ICON(playerRight, burn: TRUE);
-        HP_BAR(opponentRight);
         STATUS_ICON(opponentRight, burn: TRUE);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponentRight);
     }
@@ -94,9 +94,9 @@ DOUBLE_BATTLE_TEST("Matcha Gatcha can burn both targets")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MATCHA_GOTCHA, playerLeft);
         HP_BAR(opponentLeft);
+        HP_BAR(opponentRight);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponentLeft);
         STATUS_ICON(opponentLeft, burn: TRUE);
-        HP_BAR(opponentRight);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponentRight);
         STATUS_ICON(opponentRight, burn: TRUE);
     }
@@ -111,7 +111,7 @@ SINGLE_BATTLE_TEST("Scald shouldn't burn a Water-type Pokémon")
     GIVEN {
         ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TYPE_WATER);
         ASSUME(MoveHasAdditionalEffect(MOVE_SCALD, MOVE_EFFECT_BURN) == TRUE);
-        ASSUME(gMovesInfo[MOVE_SCALD].type == TYPE_WATER);
+        ASSUME(GetMoveType(MOVE_SCALD) == TYPE_WATER);
         PLAYER(SPECIES_SQUIRTLE);
         OPPONENT(SPECIES_SQUIRTLE);
     } WHEN {

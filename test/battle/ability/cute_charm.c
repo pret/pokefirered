@@ -7,15 +7,15 @@ SINGLE_BATTLE_TEST("Cute Charm inflicts infatuation on contact")
     PARAMETRIZE { move = MOVE_TACKLE; }
     PARAMETRIZE { move = MOVE_SWIFT; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
-        ASSUME(!gMovesInfo[MOVE_SWIFT].makesContact);
+        ASSUME(MoveMakesContact(MOVE_TACKLE));
+        ASSUME(!MoveMakesContact(MOVE_SWIFT));
         PLAYER(SPECIES_WOBBUFFET) { Gender(MON_MALE); }
         OPPONENT(SPECIES_CLEFAIRY) { Gender(MON_FEMALE); Ability(ABILITY_CUTE_CHARM); }
     } WHEN {
         TURN { MOVE(player, move); }
         TURN { MOVE(player, move); }
     } SCENE {
-        if (gMovesInfo[move].makesContact) {
+        if (MoveMakesContact(move)) {
             ABILITY_POPUP(opponent, ABILITY_CUTE_CHARM);
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_INFATUATION, player);
             MESSAGE("The opposing Clefairy's Cute Charm infatuated Wobbuffet!");
@@ -51,7 +51,7 @@ SINGLE_BATTLE_TEST("Cute Charm triggers 30% of the time")
     PASSES_RANDOMLY(3, 10, RNG_CUTE_CHARM);
     GIVEN {
         ASSUME(B_ABILITY_TRIGGER_CHANCE >= GEN_4);
-        ASSUME(gMovesInfo[MOVE_TACKLE].makesContact);
+        ASSUME(MoveMakesContact(MOVE_TACKLE));
         PLAYER(SPECIES_WOBBUFFET) { Gender(MON_MALE); }
         OPPONENT(SPECIES_CLEFAIRY) { Gender(MON_FEMALE); Ability(ABILITY_CUTE_CHARM); }
     } WHEN {

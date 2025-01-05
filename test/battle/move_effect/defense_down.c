@@ -3,16 +3,16 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_TAIL_WHIP].effect == EFFECT_DEFENSE_DOWN);
+    ASSUME(GetMoveEffect(MOVE_TAIL_WHIP) == EFFECT_DEFENSE_DOWN);
 }
 
-SINGLE_BATTLE_TEST("Tail Whip lowers Defense", s16 damage)
+SINGLE_BATTLE_TEST("Tail Whip lowers Defense by 1 stage", s16 damage)
 {
     bool32 lowerDefense;
     PARAMETRIZE { lowerDefense = FALSE; }
     PARAMETRIZE { lowerDefense = TRUE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

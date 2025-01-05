@@ -19,25 +19,6 @@ SINGLE_BATTLE_TEST("Misty Terrain protects grounded battlers from non-volatile s
     }
 }
 
-SINGLE_BATTLE_TEST("Misty Terrain activates Misty Seed and Mimicry")
-{
-    GIVEN {
-        ASSUME(gItemsInfo[ITEM_MISTY_SEED].holdEffect == HOLD_EFFECT_SEEDS);
-        ASSUME(gItemsInfo[ITEM_MISTY_SEED].holdEffectParam == HOLD_EFFECT_PARAM_MISTY_TERRAIN);
-        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_MISTY_SEED); }
-        OPPONENT(SPECIES_STUNFISK_GALAR) { Ability(ABILITY_MIMICRY); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_MISTY_TERRAIN); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
-        MESSAGE("Using Misty Seed, the Sp. Def of Wobbuffet rose!");
-        ABILITY_POPUP(opponent);
-        MESSAGE("The opposing Stunfisk's type changed to Fairy!");
-    } THEN {
-        EXPECT_EQ(gBattleMons[B_POSITION_OPPONENT_LEFT].types[0], TYPE_FAIRY);
-    }
-}
-
 SINGLE_BATTLE_TEST("Misty Terrain does not increase the power of Fairy-type moves", s16 damage)
 {
     bool32 terrain;

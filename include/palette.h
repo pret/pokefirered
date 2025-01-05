@@ -76,8 +76,8 @@ extern const struct BlendSettings gTimeOfDayBlend[];
 
 extern struct PaletteFadeControl gPaletteFade;
 extern u32 gPlttBufferTransferPending;
-extern u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE];
-extern u16 gPlttBufferFaded[PLTT_BUFFER_SIZE];
+extern u16 ALIGNED(4) gPlttBufferUnfaded[PLTT_BUFFER_SIZE];
+extern u16 ALIGNED(4) gPlttBufferFaded[PLTT_BUFFER_SIZE];
 
 void LoadCompressedPalette(const u32 *src, u32 offset, u32 size);
 void LoadPalette(const void *src, u32 offset, u32 size);

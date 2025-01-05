@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_CONFIDE].effect == EFFECT_SPECIAL_ATTACK_DOWN);
+    ASSUME(GetMoveEffect(MOVE_CONFIDE) == EFFECT_SPECIAL_ATTACK_DOWN);
 }
 
 SINGLE_BATTLE_TEST("Confide lowers Special Attack", s16 damage)
@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Confide lowers Special Attack", s16 damage)
     PARAMETRIZE { lowerSpecialAttack = FALSE; }
     PARAMETRIZE { lowerSpecialAttack = TRUE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_GUST].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(GetMoveCategory(MOVE_GUST) == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

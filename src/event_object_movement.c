@@ -2598,7 +2598,7 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
         }
         if (multi < NUMBER_OF_MON_TYPES)
         {
-            multi = GetTypeEffectiveness(mon, multi);
+            multi = GetOverworldTypeEffectiveness(mon, multi);
             if (multi <= UQ_4_12(0.5))
                 condEmotes[condCount++] = (struct SpecialEmote) {.emotion = FOLLOWER_EMOTION_HAPPY, .index = 32};
             else if (multi >= UQ_4_12(2.0))

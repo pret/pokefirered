@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_HYDRO_STEAM].effect == EFFECT_HYDRO_STEAM);
+    ASSUME(GetMoveEffect(MOVE_HYDRO_STEAM) == EFFECT_HYDRO_STEAM);
 }
 
 SINGLE_BATTLE_TEST("Hydro Steam deals 1.5x damage under both Sunlight and Rain", s16 damage)

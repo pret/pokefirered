@@ -14,11 +14,11 @@ SINGLE_BATTLE_TEST("Steelworker increases Steel-type move damage", s16 damage)
     PARAMETRIZE { move = MOVE_FLASH_CANNON; ability = ABILITY_STEELWORKER; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].type != TYPE_STEEL);
-        ASSUME(gMovesInfo[MOVE_ANCHOR_SHOT].type == TYPE_STEEL);
-        ASSUME(gMovesInfo[MOVE_FLASH_CANNON].type == TYPE_STEEL);
-        ASSUME(gMovesInfo[MOVE_ANCHOR_SHOT].category == DAMAGE_CATEGORY_PHYSICAL);
-        ASSUME(gMovesInfo[MOVE_FLASH_CANNON].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(GetMoveType(MOVE_TACKLE) != TYPE_STEEL);
+        ASSUME(GetMoveType(MOVE_ANCHOR_SHOT) == TYPE_STEEL);
+        ASSUME(GetMoveType(MOVE_FLASH_CANNON) == TYPE_STEEL);
+        ASSUME(GetMoveCategory(MOVE_ANCHOR_SHOT) == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(GetMoveCategory(MOVE_FLASH_CANNON) == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_DHELMISE) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

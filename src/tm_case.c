@@ -14,6 +14,7 @@
 #include "money.h"
 #include "shop.h"
 #include "teachy_tv.h"
+#include "move.h"
 #include "pokemon_storage_system.h"
 #include "party_menu.h"
 #include "data.h"

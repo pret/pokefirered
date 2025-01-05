@@ -18,7 +18,7 @@ struct MonMarkingsMenu
     /*0x0028*/ struct Sprite *textSprite;
     /*0x002C*/ const u8 *frameTiles;
     /*0x0030*/ const u16 *framePalette;
-    /*0x0034*/ u8 windowSpriteTiles[0x1000];
+    /*0x0034*/ u8 ALIGNED(2) windowSpriteTiles[0x1000];
     /*0x1034*/ u8 unused[0x80];
     /*0x10B4*/ u8 tileLoadState;
 }; // 10b8

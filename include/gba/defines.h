@@ -11,6 +11,10 @@
 #define EWRAM_DATA __attribute__((section(".sbss")))
 #define IWRAM_INIT __attribute__((section(".iwram")))
 #define EWRAM_INIT __attribute__((section(".ewram")))
+#define COMMON_DATA __attribute__((section("common_data")))
+#define UNUSED __attribute__((unused))
+
+#define ARM_FUNC __attribute__((target("arm")))
 
 #if MODERN
 #define NOINLINE __attribute__((noinline))
@@ -91,9 +95,5 @@
 #define PLTT_SIZE_8BPP PLTT_SIZEOF(256)
 
 #define PLTT_OFFSET_4BPP(n) ((n) * PLTT_SIZE_4BPP)
-
-// Some functions are strictly inline asm
-#define NAKED __attribute__((naked))
-#define UNUSED __attribute__((unused))
 
 #endif // GUARD_GBA_DEFINES

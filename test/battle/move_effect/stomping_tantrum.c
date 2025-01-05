@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_STOMPING_TANTRUM].effect == EFFECT_STOMPING_TANTRUM);
+    ASSUME(GetMoveEffect(MOVE_STOMPING_TANTRUM) == EFFECT_STOMPING_TANTRUM);
 }
 
 SINGLE_BATTLE_TEST("Stomping Tatrum will deal double damage if user flinched on the previous turn")

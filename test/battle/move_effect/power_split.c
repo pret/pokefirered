@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_POWER_SPLIT].effect == EFFECT_POWER_SPLIT);
+    ASSUME(GetMoveEffect(MOVE_POWER_SPLIT) == EFFECT_POWER_SPLIT);
 }
 
 SINGLE_BATTLE_TEST("Power Split averages user and targets Atk and Sp. Atk stats")

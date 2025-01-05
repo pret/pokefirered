@@ -3,9 +3,9 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_WATER_PLEDGE].effect == EFFECT_PLEDGE);
-    ASSUME(gMovesInfo[MOVE_FIRE_PLEDGE].effect == EFFECT_PLEDGE);
-    ASSUME(gMovesInfo[MOVE_GRASS_PLEDGE].effect == EFFECT_PLEDGE);
+    ASSUME(GetMoveEffect(MOVE_WATER_PLEDGE) == EFFECT_PLEDGE);
+    ASSUME(GetMoveEffect(MOVE_FIRE_PLEDGE) == EFFECT_PLEDGE);
+    ASSUME(GetMoveEffect(MOVE_GRASS_PLEDGE) == EFFECT_PLEDGE);
 }
 
 DOUBLE_BATTLE_TEST("Water and Fire Pledge create a rainbow on the user's side of the field for four turns")
@@ -189,7 +189,7 @@ DOUBLE_BATTLE_TEST("The base power of a combined pledge move effect is 150")
     s16 combinedPledgeDamage;
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_HYPER_BEAM].power == 150);
+        ASSUME(GetMovePower(MOVE_HYPER_BEAM) == 150);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
         PLAYER(SPECIES_WYNAUT) { Speed(3); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(8); }
@@ -313,7 +313,7 @@ DOUBLE_BATTLE_TEST("Damage calculation: Combined pledge move")
     PARAMETRIZE { expectedDamage = 136; }
     PARAMETRIZE { expectedDamage = 135; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_GRASS_PLEDGE].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(GetMoveCategory(MOVE_GRASS_PLEDGE) == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
         PLAYER(SPECIES_WOBBUFFET) { HP(521); SpDefense(152); Speed(3); }
         OPPONENT(SPECIES_CHARIZARD) { Speed(8); }
@@ -344,7 +344,7 @@ DOUBLE_BATTLE_TEST("Pledge move combo interactions with Powder are correct")
     PARAMETRIZE { moveLeft = MOVE_GRASS_PLEDGE; moveRight = MOVE_FIRE_PLEDGE; speedLeft = 4; speedRight = 3; }
     PARAMETRIZE { moveLeft = MOVE_GRASS_PLEDGE; moveRight = MOVE_FIRE_PLEDGE; speedLeft = 3; speedRight = 4; } // FAIL 2
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FIRE_PLEDGE].type == TYPE_FIRE);
+        ASSUME(GetMoveType(MOVE_FIRE_PLEDGE) == TYPE_FIRE);
         PLAYER(SPECIES_WOBBUFFET) { Speed(speedLeft); }
         PLAYER(SPECIES_WYNAUT) { Speed(speedRight); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(8); }
@@ -885,7 +885,7 @@ DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move 
 DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move - Electrify")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ELECTRIFY].effect == EFFECT_ELECTRIFY);
+        ASSUME(GetMoveEffect(MOVE_ELECTRIFY) == EFFECT_ELECTRIFY);
         PLAYER(SPECIES_MAROWAK) { Ability(ABILITY_LIGHTNING_ROD); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -1002,7 +1002,7 @@ DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move 
 DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move - Motor Drive")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ELECTRIFY].effect == EFFECT_ELECTRIFY);
+        ASSUME(GetMoveEffect(MOVE_ELECTRIFY) == EFFECT_ELECTRIFY);
         PLAYER(SPECIES_ELECTIVIRE) { Ability(ABILITY_MOTOR_DRIVE); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -1027,7 +1027,7 @@ DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move 
 DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move - Volt Absorb")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ELECTRIFY].effect == EFFECT_ELECTRIFY);
+        ASSUME(GetMoveEffect(MOVE_ELECTRIFY) == EFFECT_ELECTRIFY);
         PLAYER(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

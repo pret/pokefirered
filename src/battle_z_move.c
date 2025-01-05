@@ -151,7 +151,7 @@ u32 GetUsableZMove(u32 battler, u32 move)
         if (zMove != MOVE_NONE)
             return zMove;  // Signature z move exists
 
-        if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && gMovesInfo[move].type == ItemId_GetSecondaryId(item))
+        if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && GetMoveType(move) == ItemId_GetSecondaryId(item))
             return GetTypeBasedZMove(move);
     }
 
@@ -195,7 +195,7 @@ bool32 IsViableZMove(u32 battler, u32 move)
         if (zMove != MOVE_NONE)
             return TRUE;
 
-        if (move != MOVE_NONE && gMovesInfo[move].type == ItemId_GetSecondaryId(item))
+        if (move != MOVE_NONE && GetMoveType(move) == ItemId_GetSecondaryId(item))
             return TRUE;
     }
 
@@ -209,13 +209,13 @@ void AssignUsableZMoves(u32 battler, u16 *moves)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves[i] != MOVE_NONE && IsViableZMove(battler, moves[i]))
-            gBattleStruct->zmove.possibleZMoves[battler] |= gBitTable[i];
+            gBattleStruct->zmove.possibleZMoves[battler] |= 1u << i;
     }
 }
 
 bool32 TryChangeZTrigger(u32 battler, u32 moveIndex)
 {
-    bool32 viableZMove = (gBattleStruct->zmove.possibleZMoves[battler] & gBitTable[moveIndex]) != 0;
+    bool32 viableZMove = (gBattleStruct->zmove.possibleZMoves[battler] & (1u << moveIndex)) != 0;
 
     if (gBattleStruct->zmove.viable && !viableZMove)
         HideGimmickTriggerSprite();   // Was a viable z move, now is not -> slide out
@@ -243,13 +243,13 @@ u32 GetSignatureZMove(u32 move, u32 species, u32 item)
 
 u32 GetTypeBasedZMove(u32 move)
 {
-    u32 moveType = gMovesInfo[move].type;
+    u32 moveType = GetMoveType(move);
 
     if (moveType >= NUMBER_OF_MON_TYPES)
         moveType = TYPE_MYSTERY;
 
     // Z-Weather Ball changes types, however Revelation Dance, -ate ability affected moves, and Hidden Power do not
-    if (gBattleStruct->dynamicMoveType && gMovesInfo[move].effect == EFFECT_WEATHER_BALL)
+    if (gBattleStruct->dynamicMoveType && GetMoveEffect(move) == EFFECT_WEATHER_BALL)
         moveType = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK;
 
     // Get Z-Move from type
@@ -276,9 +276,9 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
             BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
         }
 
-        if (IS_MOVE_STATUS(move))
+        if (IsBattleMoveStatus(move))
         {
-            u8 zEffect = gMovesInfo[move].zMove.effect;
+            u8 zEffect = GetMoveZEffect(move);
 
             gDisplayedStringBattle[0] = EOS;
 
@@ -388,9 +388,9 @@ static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
     u16 power = GetZMovePower(move);
 
     if (zMove >= MOVE_CATASTROPIKA)
-        power = gMovesInfo[zMove].power;
+        power = GetMovePower(zMove);
 
-    if (gMovesInfo[move].category != DAMAGE_CATEGORY_STATUS)
+    if (GetMoveCategory(move) != DAMAGE_CATEGORY_STATUS)
     {
         txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
         ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -415,7 +415,7 @@ static void ZMoveSelectionDisplayPpNumber(u32 battler)
 static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
 {
     u8 *txtPtr, *end;
-    u32 zMoveType = GetMoveType(zMove);
+    u32 zMoveType = GetBattleMoveType(zMove);
 
     txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
     *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
@@ -433,7 +433,7 @@ static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
 void SetZEffect(void)
 {
     u32 i;
-    u32 effect = gMovesInfo[gBattleStruct->zmove.baseMoves[gBattlerAttacker]].zMove.effect;
+    u32 effect = GetMoveZEffect(gBattleStruct->zmove.baseMoves[gBattlerAttacker]);
 
     if (effect == Z_EFFECT_CURSE)
     {
@@ -503,7 +503,7 @@ void SetZEffect(void)
     case Z_EFFECT_RECOVER_HP:
         if (gBattleMons[gBattlerAttacker].hp != gBattleMons[gBattlerAttacker].maxHP)
         {
-            gBattleMoveDamage = (-1) * gBattleMons[gBattlerAttacker].maxHP;
+            gBattleStruct->moveDamage[gBattlerAttacker] = (-1) * gBattleMons[gBattlerAttacker].maxHP;
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_RECOVER_HP;
             BattleScriptPush(gBattlescriptCurrInstr + Z_EFFECT_BS_LENGTH);
             gBattlescriptCurrInstr = BattleScript_RecoverHPZMove;
@@ -542,35 +542,25 @@ void SetZEffect(void)
 
 u32 GetZMovePower(u32 move)
 {
-    if (gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
+    if (GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS)
         return 0;
-    if (gMovesInfo[move].effect == EFFECT_OHKO)
+    if (GetMoveEffect(move) == EFFECT_OHKO)
         return 180;
 
-    if (gMovesInfo[move].zMove.powerOverride > 0)
-        return gMovesInfo[move].zMove.powerOverride;
-    else
-    {
-        if (gMovesInfo[move].power >= 140)
-            return 200;
-        else if (gMovesInfo[move].power >= 130)
-            return 195;
-        else if (gMovesInfo[move].power >= 120)
-            return 190;
-        else if (gMovesInfo[move].power >= 110)
-            return 185;
-        else if (gMovesInfo[move].power >= 100)
-            return 180;
-        else if (gMovesInfo[move].power >= 90)
-            return 175;
-        else if (gMovesInfo[move].power >= 80)
-            return 160;
-        else if (gMovesInfo[move].power >= 70)
-            return 140;
-        else if (gMovesInfo[move].power >= 60)
-            return 120;
-        else
-            return 100;
-    }
+    u32 power = GetMoveZPowerOverride(move);
+    if (power > 0)
+        return power;
+
+    power = GetMovePower(move);
+    if      (power >= 140) return 200;
+    else if (power >= 130) return 195;
+    else if (power >= 120) return 190;
+    else if (power >= 110) return 185;
+    else if (power >= 100) return 180;
+    else if (power >= 90)  return 175;
+    else if (power >= 80)  return 160;
+    else if (power >= 70)  return 140;
+    else if (power >= 60)  return 120;
+    else                   return 100;
 }
 

@@ -12,6 +12,7 @@
 #include "text_window.h"
 #include "pokemon_summary_screen.h"
 #include "graphics.h"
+#include "move.h"
 #include "strings.h"
 #include "constants/songs.h"
 #include "constants/moves.h"
@@ -642,10 +643,10 @@ static void MoveRelearnerStateMachine(void)
             else
             {
                 move = GetMonData(&gPlayerParty[sMoveRelearner->selectedPartyMember], MON_DATA_MOVE1 + sMoveRelearner->selectedMoveSlot);
-                StringCopy(gStringVar3, gMovesInfo[move].name);
+                StringCopy(gStringVar3, GetMoveName(move));
                 RemoveMonPPBonus(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->selectedMoveSlot);
                 SetMonMoveSlot(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex], sMoveRelearner->selectedMoveSlot);
-                StringCopy(gStringVar2, gMovesInfo[sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]].name);
+                StringCopy(gStringVar2, GetMoveName(sMoveRelearner->learnableMoves[sMoveRelearner->selectedIndex]));
                 StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_1_2_and_Poof);
                 sMoveRelearner->state = 30;
                 gSpecialVar_0x8004 = TRUE;

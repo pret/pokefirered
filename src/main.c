@@ -6,6 +6,7 @@
 #include "gpu_regs.h"
 #include "malloc.h"
 
+#include "agb_flash.h"
 #include "battle_controllers.h"
 #include "crt0.h"
 #include "help_system.h"
@@ -60,27 +61,17 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
-u16 gKeyRepeatStartDelay;
-u8 gLinkTransferringData;
-struct Main gMain;
-u16 gKeyRepeatContinueDelay;
-u8 gSoftResetDisabled;
-IntrFunc gIntrTable[INTR_COUNT];
-bool8 gLinkVSyncDisabled;
-u32 IntrMain_Buffer[0x200];
-u8 gPcmDmaCounter;
-void *gAgbMainLoop_sp;
+COMMON_DATA u16 gKeyRepeatStartDelay = 0;
+COMMON_DATA bool8 gLinkTransferringData = 0;
+COMMON_DATA struct Main gMain = {0};
+COMMON_DATA u16 gKeyRepeatContinueDelay = 0;
+COMMON_DATA bool8 gSoftResetDisabled = 0;
+COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};
+COMMON_DATA u8 gLinkVSyncDisabled = 0;
+COMMON_DATA s8 gPcmDmaCounter = 0;
+COMMON_DATA void *gAgbMainLoop_sp = NULL;
 
-// These variables are not defined in RS or Emerald, and are never read.
-// They were likely used to debug the audio engine and VCount interrupt.
-u8 sVcountAfterSound;
-u8 sVcountAtIntr;
-u8 sVcountBeforeSound;
-
-static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
-
-EWRAM_DATA u8 gDecompressionBuffer[0x4000] = {0};
-EWRAM_DATA u16 gTrainerId = 0;
+static EWRAM_DATA u16 sTrainerId = 0;
 
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);
@@ -108,13 +99,18 @@ void AgbMain()
     InitMapMusic();
     ClearDma3Requests();
     ResetBgs();
-    InitHeap(gHeap, HEAP_SIZE);
     SetDefaultFontsPointer();
+    InitHeap(gHeap, HEAP_SIZE);
 
     gSoftResetDisabled = FALSE;
     gHelpSystemEnabled = FALSE;
 
     SetNotInSaveFailedScreen();
+
+    if (gFlashMemoryPresent != TRUE)
+        SetMainCallback2(NULL);
+
+    gLinkTransferringData = FALSE;
 
 #ifndef NDEBUG
 #if (LOG_HANDLER == LOG_HANDLER_MGBA_PRINT)
@@ -123,11 +119,6 @@ void AgbMain()
     AGBPrintInit();
 #endif
 #endif
-
-    if (gFlashMemoryPresent != TRUE)
-        SetMainCallback2(NULL);
-
-    gLinkTransferringData = FALSE;
     gAgbMainLoop_sp = __builtin_frame_address(0);
     AgbMainLoop();
 }
@@ -231,12 +222,12 @@ void SeedRngAndSetTrainerId(void)
     val = ((u32)REG_TM2CNT_L) << 16;
     val |= REG_TM1CNT_L;
     SeedRng(val);
-    gTrainerId = Random();
+    sTrainerId = Random();
 }
 
 u16 GetGeneratedTrainerIdLower(void)
 {
-    return gTrainerId;
+    return sTrainerId;
 }
 
 void EnableVCountIntrAtLine150(void)
@@ -309,9 +300,7 @@ void InitIntrHandlers(void)
     for (i = 0; i < INTR_COUNT; i++)
         gIntrTable[i] = gIntrTableTemplate[i];
 
-    DmaCopy32(3, IntrMain, IntrMain_Buffer, sizeof(IntrMain_Buffer));
-
-    INTR_VECTOR = IntrMain_Buffer;
+    INTR_VECTOR = IntrMain;
 
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
@@ -367,14 +356,7 @@ static void VBlankIntr(void)
 
     gPcmDmaCounter = gSoundInfo.pcmDmaCounter;
 
-#ifndef NDEBUG
-    sVcountBeforeSound = REG_VCOUNT;
-#endif
     m4aSoundMain();
-#ifndef NDEBUG
-    sVcountAfterSound = REG_VCOUNT;
-#endif
-
     TryReceiveLinkBattleData();
 
     if (!gTestRunnerEnabled && (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_RECORDED))))
@@ -388,8 +370,7 @@ static void VBlankIntr(void)
 
 void InitFlashTimer(void)
 {
-    IntrFunc **func = (IntrFunc **)&sTimerIntrFunc;
-    SetFlashTimerIntr(2, *func);
+    SetFlashTimerIntr(2, gIntrTable + 0x7);
 }
 
 static void HBlankIntr(void)
@@ -403,9 +384,6 @@ static void HBlankIntr(void)
 
 static void VCountIntr(void)
 {
-#ifndef NDEBUG
-    sVcountAtIntr = REG_VCOUNT;
-#endif
     m4aSoundVSync();
     INTR_CHECK |= INTR_FLAG_VCOUNT;
     gMain.intrCheck |= INTR_FLAG_VCOUNT;

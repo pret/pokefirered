@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(B_PROTEAN_LIBERO == GEN_9);
+    ASSUME(B_DAUNTLESS_SHIELD == GEN_9);
 }
 
 SINGLE_BATTLE_TEST("Dauntless Shield raises Defense by one stage")

@@ -5,6 +5,7 @@
 #include "pokemon_special_anim_internal.h"
 #include "item_use.h"
 #include "task.h"
+#include "move.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 
@@ -44,7 +45,7 @@ void StartUseItemAnim_ForgetMoveAndLearnTMorHM(u8 slotId, u16 itemId, u16 moveId
         SetMainCallback2(callback);
     else
     {
-        StringCopy(ptr->nameOfMoveForgotten, gMovesInfo[moveId].name);
+        StringCopy(ptr->nameOfMoveForgotten, GetMoveName(moveId));
         SetUpUseItemAnim_ForgetMoveAndLearnTMorHM(ptr);
     }
 }
@@ -89,7 +90,7 @@ static struct PokemonSpecialAnim * AllocPSA(u8 slotId, u16 itemId, MainCallback 
     if (ptr->animType == 4)
     {
         moveId = ItemIdToBattleMoveId(itemId);
-        StringCopy(ptr->nameOfMoveToTeach, gMovesInfo[moveId].name);
+        StringCopy(ptr->nameOfMoveToTeach, GetMoveName(moveId));
     }
     return ptr;
 }

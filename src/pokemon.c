@@ -26,6 +26,7 @@
 #include "m4a.h"
 #include "pokedex.h"
 #include "pokemon_summary_screen.h"
+#include "test_runner.h"
 #include "strings.h"
 #include "overworld.h"
 #include "party_menu.h"
@@ -74,9 +75,7 @@ static void EncryptBoxMon(struct BoxPokemon *boxMon);
 static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 static bool8 ShouldSkipFriendshipChange(void);
-static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 
-#include "data/moves_info.h"
 #include "data/abilities.h"
 
 // NOTE: The order of the elements in the 3 arrays below is irrelevant.
@@ -903,7 +902,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
     [B_POSITION_PLAYER_LEFT] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gBattlerPicTable_PlayerLeft,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -912,7 +911,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
     [B_POSITION_OPPONENT_LEFT] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerOpponent,
+        .oam = &gOamData_BattleSpriteOpponentSide,
         .anims = NULL, 
         .images = gBattlerPicTable_OpponentLeft,
         .affineAnims = gAffineAnims_BattleSpriteOpponentSide,
@@ -921,7 +920,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
     [B_POSITION_PLAYER_RIGHT] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gBattlerPicTable_PlayerRight,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -930,7 +929,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
     [B_POSITION_OPPONENT_RIGHT] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerOpponent,
+        .oam = &gOamData_BattleSpriteOpponentSide,
         .anims = NULL, 
         .images = gBattlerPicTable_OpponentRight,
         .affineAnims = gAffineAnims_BattleSpriteOpponentSide,
@@ -943,7 +942,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_RED] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Red,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -952,7 +951,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_LEAF] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Leaf,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -961,7 +960,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_RSBrendan,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -970,7 +969,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_RSMay,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -979,7 +978,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_POKEDUDE] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_Pokedude,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -988,7 +987,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_OLD_MAN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL, 
         .images = gTrainerBackPicTable_OldMan,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -997,7 +996,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     [TRAINER_BACK_PIC_STEVEN] = {
         .tileTag = TAG_NONE,
         .paletteTag = 0,
-        .oam = &gOamData_BattlerPlayer,
+        .oam = &gOamData_BattleSpritePlayerSide,
         .anims = NULL,
         .images = gTrainerBackPicTable_Steven,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
@@ -1944,6 +1943,27 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
     return 0;
 }
 
+// Removes the selected index from the given IV list and shifts the remaining
+// elements to the left.
+void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
+{
+    s32 i, j;
+    u8 temp[NUM_STATS];
+
+    ivs[selectedIv] = 0xFF;
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        temp[i] = ivs[i];
+    }
+
+    j = 0;
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        if (temp[i] != 0xFF)
+            ivs[j++] = temp[i];
+    }
+}
+
 u8 CountAliveMonsInBattle(u8 caseId, u32 battler)
 {
     s32 i;
@@ -1954,18 +1974,26 @@ u8 CountAliveMonsInBattle(u8 caseId, u32 battler)
     case BATTLE_ALIVE_EXCEPT_BATTLER:
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
-            if (i != battler && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (i != battler && !(gAbsentBattlerFlags & (1u << i)))
+                retVal++;
+        }
+        break;
+    case BATTLE_ALIVE_EXCEPT_BATTLER_SIDE:
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        {
+            if (i != battler && i != BATTLE_PARTNER(battler) && !(gAbsentBattlerFlags & (1u << i)))
                 retVal++;
         }
         break;
     case BATTLE_ALIVE_SIDE:
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
-            if (GetBattlerSide(i) == GetBattlerSide(battler) && !(gAbsentBattlerFlags & gBitTable[i]))
+            if (GetBattlerSide(i) == GetBattlerSide(battler) && !(gAbsentBattlerFlags & (1u << i)))
                 retVal++;
         }
         break;
     }
+
     return retVal;
 }
 
@@ -4002,16 +4030,32 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     return retVal;
 }
 
-bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, u8 battleId)
+bool8 HealStatusConditions(struct Pokemon *mon, u32 healMask, u8 battlerId)
 {
-    u32 status = GetMonData(mon, MON_DATA_STATUS, NULL);
+    u32 status = GetMonData(mon, MON_DATA_STATUS, 0);
 
     if (status & healMask)
     {
         status &= ~healMask;
         SetMonData(mon, MON_DATA_STATUS, &status);
-        if (gMain.inBattle && battleId != MAX_BATTLERS_COUNT) {
-            gBattleMons[battleId].status1 &= ~healMask;
+        if (gMain.inBattle && battlerId != MAX_BATTLERS_COUNT)
+        {
+            gBattleMons[battlerId].status1 &= ~healMask;
+            if((healMask & STATUS1_SLEEP))
+            {
+                u32 i = 0;
+                u32 battlerSide = GetBattlerSide(battlerId);
+                struct Pokemon *party = GetSideParty(battlerSide);
+
+                for (i = 0; i < PARTY_SIZE; i++)
+                {
+                    if (&party[i] == mon)
+                    {
+                        TryDeactivateSleepClause(battlerSide, i);
+                        break;
+                    }
+                }
+            }
         }
         return FALSE;
     }
@@ -4712,7 +4756,7 @@ void HealBoxPokemon(struct BoxPokemon *boxMon)
 u16 GetCryIdBySpecies(u16 species)
 {
     species = SanitizeSpeciesId(species);
-    if (P_CRIES_ENABLED == FALSE || gSpeciesInfo[species].cryId >= CRY_COUNT)
+    if (P_CRIES_ENABLED == FALSE || gSpeciesInfo[species].cryId >= CRY_COUNT || gTestRunnerHeadless)
         return CRY_NONE;
     return gSpeciesInfo[species].cryId;
 }
@@ -5905,7 +5949,7 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 
 bool32 HasTwoFramesAnimation(u16 species)
 {
-    return P_TWO_FRAME_FRONT_SPRITES && species != SPECIES_UNOWN;
+    return P_TWO_FRAME_FRONT_SPRITES && species != SPECIES_UNOWN && !gTestRunnerHeadless;
 }
 
 bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 battlerId)
@@ -6120,25 +6164,6 @@ static bool8 ShouldSkipFriendshipChange(void)
     if (gMain.inBattle && gBattleTypeFlags & (BATTLE_TYPE_BATTLE_TOWER))
         return TRUE;
     return FALSE;
-}
-
-static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
-{
-    s32 i, j;
-    u8 temp[NUM_STATS];
-
-    ivs[selectedIv] = 0xFF;
-    for (i = 0; i < NUM_STATS; i++)
-    {
-        temp[i] = ivs[i];
-    }
-
-    j = 0;
-    for (i = 0; i < NUM_STATS; i++)
-    {
-        if (temp[i] != 0xFF)
-            ivs[j++] = temp[i];
-    }
 }
 
 u16 GetFormSpeciesId(u16 speciesId, u8 formId)
@@ -6500,21 +6525,6 @@ u16 GetFirstPartnerMove(u16 species)
         default:
             return MOVE_NONE;
     }
-}
-
-const u8 *GetMoveName(u16 moveId)
-{
-    return gMovesInfo[moveId].name;
-}
-
-const u8 *GetMoveAnimationScript(u16 moveId)
-{
-    if (gMovesInfo[moveId].battleAnimScript == NULL)
-    {
-        DebugPrintfLevel(MGBA_LOG_WARN, "No animation for moveId=%u", moveId);
-        return gMovesInfo[MOVE_NONE].battleAnimScript;
-    }
-    return gMovesInfo[moveId].battleAnimScript;
 }
 
 void UpdateDaysPassedSinceFormChange(u16 days)

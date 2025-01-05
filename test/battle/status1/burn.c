@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Burn reduces Attack by 50%", s16 damage)
     PARAMETRIZE { burned = FALSE; }
     PARAMETRIZE { burned = TRUE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET) { if (burned) Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

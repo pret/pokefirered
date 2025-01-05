@@ -134,4 +134,14 @@
 // param1: amount of days
 #define FORM_CHANGE_DAYS_PASSED                 23
 
+// Form change that activates before using a move.
+// param1: move to check
+// param2: ability to check, optional
+#define FORM_CHANGE_BATTLE_BEFORE_MOVE          24
+
+// Form change that activates before using a specific move category.
+// param1: move category to check
+// param2: ability to check, optional
+#define FORM_CHANGE_BATTLE_BEFORE_MOVE_CATEGORY 25
+
 #endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H

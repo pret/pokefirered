@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Sandstorm multiplies the special defense of Rock-types by 1.
     PARAMETRIZE { move = MOVE_SANDSTORM; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SWIFT].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(GetMoveCategory(MOVE_SWIFT) == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET) ;
         OPPONENT(SPECIES_NOSEPASS);
     } WHEN {
@@ -69,7 +69,7 @@ SINGLE_BATTLE_TEST("Sandstorm damage does not hurt Ground, Rock, and Steel-type 
 DOUBLE_BATTLE_TEST("Sandstorm deals damage based on turn order")
 {
     GIVEN {
-        PLAYER(SPECIES_PHANPY);
+        PLAYER(SPECIES_PHANPY) { Speed(4); }
         PLAYER(SPECIES_WYNAUT) { Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
         OPPONENT(SPECIES_WYNAUT) { Speed(3); }

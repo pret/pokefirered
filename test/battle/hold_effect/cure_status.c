@@ -265,3 +265,30 @@ SINGLE_BATTLE_TEST("Player Pokemon can be further poisoned with Toxic spikes aft
         STATUS_ICON(player, poison: TRUE);
     }
 }
+
+DOUBLE_BATTLE_TEST("Lum Berry correctly cures all battlers if multiple fainted the previous turn")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_CATERPIE) { HP(1); }
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LUM_BERRY); Status1(STATUS1_BURN); }
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LUM_BERRY); Status1(STATUS1_POISON); }
+        OPPONENT(SPECIES_CATERPIE) { HP(1); }
+        OPPONENT(SPECIES_CATERPIE) { HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_LUM_BERRY); Status1(STATUS1_PARALYSIS); }
+        OPPONENT(SPECIES_CATERPIE);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_EXPLOSION);
+               SEND_OUT(opponentRight, 3);
+               SEND_OUT(opponentLeft, 2);
+               SEND_OUT(playerRight, 3);
+               SEND_OUT(playerLeft, 2); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, playerLeft);
+    } THEN {
+        EXPECT_EQ(playerLeft->status1, STATUS1_NONE);
+        EXPECT_EQ(playerRight->status1, STATUS1_NONE);
+        EXPECT_EQ(opponentLeft->status1, STATUS1_NONE);
+
+    }
+}

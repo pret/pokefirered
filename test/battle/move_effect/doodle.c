@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_DOODLE].effect == EFFECT_DOODLE);
+    ASSUME(GetMoveEffect(MOVE_DOODLE) == EFFECT_DOODLE);
 }
 
 DOUBLE_BATTLE_TEST("Doodle gives the target's ability to user and ally")

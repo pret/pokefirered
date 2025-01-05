@@ -1,22 +1,16 @@
 #include "config/battle.h"
-#include "constants/moves.h"
 #include "constants/battle.h"
 #include "constants/battle_script_commands.h"
 #include "constants/battle_anim.h"
-#include "constants/items.h"
-#include "constants/abilities.h"
-#include "constants/species.h"
-#include "constants/pokemon.h"
+#include "constants/battle_string_ids.h"
+#include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
-#include "constants/battle_string_ids.h"
+	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
-@ Define these here since misc_constants.inc conflicts with the C headers
-	.set NULL, 0
-	.set FALSE, 0
-	.set TRUE, 1
+	.include "constants/constants.inc"
+
 	.section script_data, "aw", %progbits
-	.align 2
 
 @ pokefirered leftovers
 BattleScript_OldMan_Pokedude_CaughtMessage::
@@ -97,7 +91,7 @@ BattleScript_UseItemMessage:
 	return
 
 BattleScript_ItemRestoreHPRet:
-	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	clearmoveresultflags MOVE_RESULT_NO_EFFECT
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_SCRIPTING
 	datahpupdate BS_SCRIPTING
@@ -118,7 +112,7 @@ BattleScript_ItemRestoreHPEnd:
 
 BattleScript_ItemRestoreHP_Party::
 	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_ItemRestoreHP_SendOutRevivedBattler
-	bichalfword gMoveResultFlags, MOVE_RESULT_NO_EFFECT
+	clearmoveresultflags MOVE_RESULT_NO_EFFECT
 	printstring STRINGID_ITEMRESTOREDSPECIESHEALTH
 	waitmessage B_WAIT_TIME_LONG
 	return

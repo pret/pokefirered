@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_DREAM_EATER].effect == EFFECT_DREAM_EATER);
+    ASSUME(GetMoveEffect(MOVE_DREAM_EATER) == EFFECT_DREAM_EATER);
 }
 
 SINGLE_BATTLE_TEST("Dream Eater recovers 50% of the damage dealt")
@@ -54,3 +54,7 @@ SINGLE_BATTLE_TEST("Dream Eater fails if Heal Block applies")
         }
     }
 }
+
+TO_DO_BATTLE_TEST("Dream Eater works on targets with Comatose");
+TO_DO_BATTLE_TEST("Dream Eater fails if the target is behind a Substitute (Gen 1-4)");
+TO_DO_BATTLE_TEST("Dream Eater works if the target is behind a Substitute (Gen 5+)");

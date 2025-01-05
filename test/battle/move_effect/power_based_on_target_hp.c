@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_CRUSH_GRIP].effect == EFFECT_POWER_BASED_ON_TARGET_HP);
+    ASSUME(GetMoveEffect(MOVE_CRUSH_GRIP) == EFFECT_POWER_BASED_ON_TARGET_HP);
 }
 
 SINGLE_BATTLE_TEST("Crush Grip's damage is affected by the target's current HP", s16 damage)

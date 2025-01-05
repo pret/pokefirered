@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Ogerpon Masks increase the base power of moves by 20%", s16 
     PARAMETRIZE { species = SPECIES_OGERPON_CORNERSTONE; item = ITEM_HEARTHFLAME_MASK; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].power > 0);
+        ASSUME(GetMovePower(MOVE_TACKLE) > 0);
         PLAYER(species) { Item(item); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

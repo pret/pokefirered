@@ -4,7 +4,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_QUICK_ATTACK].priority > 0);
+    ASSUME(GetMovePriority(MOVE_QUICK_ATTACK) > 0);
 }
 
 DOUBLE_BATTLE_TEST("Dazzling, Queenly Majesty and Armor Tail protect the user from priority moves")

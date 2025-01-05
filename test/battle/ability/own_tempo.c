@@ -5,7 +5,7 @@ SINGLE_BATTLE_TEST("Own Tempo prevents Intimidate but no other stat down changes
 {
     GIVEN {
         ASSUME(B_UPDATED_INTIMIDATE >= GEN_8);
-        ASSUME(gMovesInfo[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
+        ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
         PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); };
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
     } WHEN {
@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Own Tempo prevents Intimidate but no other stat down changes
 SINGLE_BATTLE_TEST("Own Tempo prevents confusion from moves by the opponent")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
+        ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
     } WHEN {
@@ -60,7 +60,7 @@ SINGLE_BATTLE_TEST("Own Tempo is ignored by Mold Breaker")
 {
     KNOWN_FAILING; // Ideally the func CanBeConfused should be split into AttackerCanBeConfused and TargetCanBeConfused or we do it in the same func but have a check for when battlerAtk == battlerDef
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
+        ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
         PLAYER(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); }
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
     } WHEN {
@@ -77,7 +77,7 @@ SINGLE_BATTLE_TEST("Own Tempo cures confusion obtained from an opponent with Mol
 {
     KNOWN_FAILING;
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
+        ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
         PLAYER(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); };
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
     } WHEN {
@@ -96,8 +96,8 @@ SINGLE_BATTLE_TEST("Own Tempo cures confusion obtained from an opponent with Mol
 SINGLE_BATTLE_TEST("Own Tempo cures confusion if it's obtained via Skill Swap")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_CONFUSE_RAY].effect == EFFECT_CONFUSE);
-        ASSUME(gMovesInfo[MOVE_SKILL_SWAP].effect == EFFECT_SKILL_SWAP);
+        ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
+        ASSUME(GetMoveEffect(MOVE_SKILL_SWAP) == EFFECT_SKILL_SWAP);
         PLAYER(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

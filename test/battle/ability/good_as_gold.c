@@ -5,7 +5,7 @@
 SINGLE_BATTLE_TEST("Good as Gold protects from status moves")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TOXIC].category == DAMAGE_CATEGORY_STATUS);
+        ASSUME(GetMoveCategory(MOVE_TOXIC) == DAMAGE_CATEGORY_STATUS);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GHOLDENGO) { Ability(ABILITY_GOOD_AS_GOLD); }
     } WHEN {
@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Good as Gold protects from status moves")
 SINGLE_BATTLE_TEST("Good as Gold doesn't protect the user from it's own moves")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_NASTY_PLOT].category == DAMAGE_CATEGORY_STATUS);
+        ASSUME(GetMoveCategory(MOVE_NASTY_PLOT) == DAMAGE_CATEGORY_STATUS);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GHOLDENGO) { Ability(ABILITY_GOOD_AS_GOLD); }
     } WHEN {
@@ -37,8 +37,8 @@ SINGLE_BATTLE_TEST("Good as Gold doesn't protect the user from it's own moves")
 SINGLE_BATTLE_TEST("Good as Gold doesn't protect from moves that target the field")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_STEALTH_ROCK].category == DAMAGE_CATEGORY_STATUS);
-        ASSUME(gMovesInfo[MOVE_STEALTH_ROCK].target == MOVE_TARGET_OPPONENTS_FIELD);
+        ASSUME(GetMoveCategory(MOVE_STEALTH_ROCK) == DAMAGE_CATEGORY_STATUS);
+        ASSUME(GetMoveTarget(MOVE_STEALTH_ROCK) == MOVE_TARGET_OPPONENTS_FIELD);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GHOLDENGO) { Ability(ABILITY_GOOD_AS_GOLD); }
     } WHEN {
@@ -55,7 +55,7 @@ SINGLE_BATTLE_TEST("Good as Gold doesn't protect from moves that target the fiel
 DOUBLE_BATTLE_TEST("Good as Gold protects from partner's status moves")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_HELPING_HAND].category == DAMAGE_CATEGORY_STATUS);
+        ASSUME(GetMoveCategory(MOVE_HELPING_HAND) == DAMAGE_CATEGORY_STATUS);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GHOLDENGO) { Ability(ABILITY_GOOD_AS_GOLD); }

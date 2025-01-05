@@ -7,7 +7,7 @@ SINGLE_BATTLE_TEST("Purifying Salt halves damage from Ghost-type moves", s16 dam
     PARAMETRIZE { ability = ABILITY_STURDY; }
     PARAMETRIZE { ability = ABILITY_PURIFYING_SALT; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SHADOW_BALL].type == TYPE_GHOST);
+        ASSUME(GetMoveType(MOVE_SHADOW_BALL) == TYPE_GHOST);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GARGANACL) { Ability(ability); }
     } WHEN {
@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Purifying Salt halves damage from dynamic Ghost-type moves",
     PARAMETRIZE { ability = ABILITY_STURDY; }
     PARAMETRIZE { ability = ABILITY_PURIFYING_SALT; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TERA_BLAST].effect == EFFECT_TERA_BLAST);
+        ASSUME(GetMoveEffect(MOVE_TERA_BLAST) == EFFECT_TERA_BLAST);
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_GHOST); }
         OPPONENT(SPECIES_GARGANACL) { Ability(ability); }
     } WHEN {
@@ -61,10 +61,10 @@ SINGLE_BATTLE_TEST("Purifying Salt grants immunity to status effects")
     PARAMETRIZE { move = MOVE_TOXIC; status = STATUS1_TOXIC_POISON; }
     PARAMETRIZE { move = MOVE_POWDER_SNOW; status = STATUS1_FREEZE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WILL_O_WISP].effect == EFFECT_WILL_O_WISP);
-        ASSUME(gMovesInfo[MOVE_HYPNOSIS].effect == EFFECT_SLEEP);
-        ASSUME(gMovesInfo[MOVE_THUNDER_WAVE].effect == EFFECT_PARALYZE);
-        ASSUME(gMovesInfo[MOVE_TOXIC].effect == EFFECT_TOXIC);
+        ASSUME(GetMoveEffect(MOVE_WILL_O_WISP) == EFFECT_WILL_O_WISP);
+        ASSUME(GetMoveEffect(MOVE_HYPNOSIS) == EFFECT_SLEEP);
+        ASSUME(GetMoveEffect(MOVE_THUNDER_WAVE) == EFFECT_PARALYZE);
+        ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_TOXIC);
         ASSUME(MoveHasAdditionalEffect(MOVE_POWDER_SNOW, MOVE_EFFECT_FREEZE_OR_FROSTBITE) == TRUE);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_PURIFYING_SALT); }
         OPPONENT(SPECIES_WOBBUFFET);

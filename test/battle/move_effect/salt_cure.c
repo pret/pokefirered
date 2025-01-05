@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_SALT_CURE].effect == EFFECT_SALT_CURE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_SALT_CURE, MOVE_EFFECT_SALT_CURE) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Salt Cure inflicts 1/8 of the target's maximum HP as damage per turn")
@@ -115,5 +115,20 @@ SINGLE_BATTLE_TEST("Salt Cure residual damage does not inflict any damage agains
             HP_BAR(opponent);
             MESSAGE("The opposing Clefable is hurt by Salt Cure!");
         }
+    }
+}
+
+SINGLE_BATTLE_TEST("If Salt Cure faints the target, messages will be applied in the correct order")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(25); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SALT_CURE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SALT_CURE, player);
+        MESSAGE("The opposing Wobbuffet is being salt cured!");
+        MESSAGE("The opposing Wobbuffet is hurt by Salt Cure!");
+        MESSAGE("The opposing Wobbuffet fainted!");
     }
 }

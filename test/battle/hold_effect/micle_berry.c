@@ -4,8 +4,8 @@
 ASSUMPTIONS
 {
     ASSUME(gItemsInfo[ITEM_MICLE_BERRY].holdEffect == HOLD_EFFECT_MICLE_BERRY);
-    ASSUME(gMovesInfo[MOVE_DRAGON_RAGE].effect == EFFECT_FIXED_DAMAGE_ARG);
-    ASSUME(gMovesInfo[MOVE_DRAGON_RAGE].argument == 40);
+    ASSUME(GetMoveEffect(MOVE_DRAGON_RAGE) == EFFECT_FIXED_DAMAGE_ARG);
+    ASSUME(GetMoveFixedDamage(MOVE_DRAGON_RAGE) == 40);
 }
 
 SINGLE_BATTLE_TEST("Micle Berry raises the holder's accuracy by 1.2 when HP drops to 1/4 or below")
@@ -52,7 +52,7 @@ SINGLE_BATTLE_TEST("Micle Berry raises the holder's accuracy by 1.2")
 {
     PASSES_RANDOMLY(24, 25, RNG_ACCURACY);
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SUBMISSION].accuracy == 80);
+        ASSUME(GetMoveAccuracy(MOVE_SUBMISSION) == 80);
         PLAYER(SPECIES_WOBBUFFET) { MaxHP(160); HP(80); Item(ITEM_MICLE_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -68,7 +68,7 @@ SINGLE_BATTLE_TEST("Micle Berry raises the holder's accuracy by 1.2")
 SINGLE_BATTLE_TEST("Micle Berry increases the accuracy of the next used move across turns")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ROCK_SLIDE].accuracy == 90);
+        ASSUME(GetMoveAccuracy(MOVE_ROCK_SLIDE) == 90);
         PASSES_RANDOMLY(100, 100, RNG_ACCURACY);
         PLAYER(SPECIES_WOBBUFFET) { MaxHP(100); HP(26); Item(ITEM_MICLE_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -85,7 +85,7 @@ SINGLE_BATTLE_TEST("Micle Berry increases the accuracy of the next used move acr
 SINGLE_BATTLE_TEST("Micle Berry increases the accuracy of the next used move the same turn the berry was triggered")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ROCK_SLIDE].accuracy == 90);
+        ASSUME(GetMoveAccuracy(MOVE_ROCK_SLIDE) == 90);
         PASSES_RANDOMLY(100, 100, RNG_ACCURACY);
         PLAYER(SPECIES_WOBBUFFET) { MaxHP(100); HP(26); Item(ITEM_MICLE_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);

@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
-    ASSUME(gMovesInfo[MOVE_TACKLE].power > 0);
+    ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
+    ASSUME(GetMovePower(MOVE_TACKLE) > 0);
 }
 
 SINGLE_BATTLE_TEST("Pixilate turns a Normal-type move into a Fairy-type move")

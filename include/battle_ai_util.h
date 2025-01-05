@@ -44,7 +44,7 @@ void RestoreBattlerData(u32 battlerId);
 u32 GetAIChosenMove(u32 battlerId);
 u32 GetTotalBaseStat(u32 species);
 bool32 IsTruantMonVulnerable(u32 battlerAI, u32 opposingBattler);
-bool32 AtMaxHp(u32 battler);
+bool32 AI_BattlerAtMaxHp(u32 battler);
 u32 GetHealthPercentage(u32 battler);
 bool32 IsBattlerTrapped(u32 battler, bool32 switching);
 s32 AI_WhoStrikesFirst(u32 battlerAI, u32 battler2, u32 moveConsidered);
@@ -116,7 +116,7 @@ bool32 HasOnlyMovesWithCategory(u32 battlerId, u32 category, bool32 onlyOffensiv
 bool32 HasMoveWithCategory(u32 battler, u32 category);
 bool32 HasMoveWithType(u32 battler, u32 type);
 bool32 HasMoveEffect(u32 battlerId, u32 moveEffect);
-bool32 HasMoveEffectANDArg(u32 battlerId, u32 effect, u32 argument);
+bool32 IsPowerBasedOnStatus(u32 battlerId, u32 effect, u32 argument);
 bool32 HasMoveWithAdditionalEffect(u32 battlerId, u32 moveEffect);
 bool32 HasMoveWithCriticalHitChance(u32 battlerId);
 bool32 HasMoveWithMoveEffectExcept(u32 battlerId, u32 moveEffect, u32 exception);
@@ -185,6 +185,7 @@ bool32 PartnerMoveEffectIsTerrain(u32 battlerAtkPartner, u32 partnerMove);
 bool32 PartnerMoveIs(u32 battlerAtkPartner, u32 partnerMove, u32 moveCheck);
 bool32 PartnerMoveIsSameAsAttacker(u32 battlerAtkPartner, u32 battlerDef, u32 move, u32 partnerMove);
 bool32 PartnerMoveIsSameNoTarget(u32 battlerAtkPartner, u32 move, u32 partnerMove);
+bool32 PartnerMoveActivatesSleepClause(u32 move);
 bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move);
 
 // party logic

@@ -3,14 +3,14 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_SAND_ATTACK].effect == EFFECT_ACCURACY_DOWN);
+    ASSUME(GetMoveEffect(MOVE_SAND_ATTACK) == EFFECT_ACCURACY_DOWN);
 }
 
 SINGLE_BATTLE_TEST("Sand Attack lowers Accuracy by 1 stage")
 {
-    PASSES_RANDOMLY(gMovesInfo[MOVE_SCRATCH].accuracy * 3 / 4, 100, RNG_ACCURACY);
+    PASSES_RANDOMLY(GetMoveAccuracy(MOVE_SCRATCH) * 3 / 4, 100, RNG_ACCURACY);
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SCRATCH].accuracy == 100);
+        ASSUME(GetMoveAccuracy(MOVE_SCRATCH) == 100);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

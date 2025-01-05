@@ -1,13 +1,24 @@
 #ifndef GUARD_GBA_MACRO_H
 #define GUARD_GBA_MACRO_H
 
-#define CPU_FILL(value, dest, size, bit)                                          \
+#define CPU_FILL_UNCHECKED(value, dest, size, bit)                                          \
 {                                                                                 \
     vu##bit tmp = (vu##bit)(value);                                               \
     CpuSet((void *)&tmp,                                                          \
            dest,                                                                  \
            CPU_SET_##bit##BIT | CPU_SET_SRC_FIXED | ((size)/(bit/8) & 0x1FFFFF)); \
 }
+
+#if MODERN
+#define CPU_FILL(value, dest, size, bit) \
+    do \
+    { \
+        _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
+        CPU_FILL_UNCHECKED(value, dest, size, bit); \
+    } while (0)
+#else
+#define CPU_FILL(value, dest, size, bit) CPU_FILL_UNCHECKED(value, dest, size, bit)
+#endif
 
 #define CpuFill16(value, dest, size) CPU_FILL(value, dest, size, 16)
 #define CpuFill32(value, dest, size) CPU_FILL(value, dest, size, 32)

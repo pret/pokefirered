@@ -160,6 +160,7 @@ static void BattleTest_SetUp(void *data)
 {
     const struct BattleTest *test = data;
     memset(STATE, 0, sizeof(*STATE));
+    TestInitConfigData();
     InvokeTestFunction(test);
     STATE->parameters = STATE->parametersCount;
     if (STATE->parametersCount == 0 && test->resultsSize > 0)
@@ -322,8 +323,10 @@ static void BattleTest_Run(void *data)
 
     if (DATA.hasExplicitSpeeds)
     {
+        // TODO: If a battler is taking the default action maybe it
+        // should not require an explicit speed?
         if (DATA.explicitSpeeds[B_SIDE_PLAYER] != (1 << DATA.playerPartySize) - 1
-         && DATA.explicitSpeeds[B_SIDE_OPPONENT] != (1 << DATA.opponentPartySize) - 1)
+         || DATA.explicitSpeeds[B_SIDE_OPPONENT] != (1 << DATA.opponentPartySize) - 1)
         {
             Test_ExitWithResult(TEST_RESULT_INVALID, SourceLine(0), ":LSpeed required for all PLAYERs and OPPONENTs");
         }
@@ -363,6 +366,7 @@ u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi)
 
     if (tag == STATE->rngTag)
     {
+        STATE->didRunRandomly = TRUE;
         u32 n = hi - lo + 1;
         if (STATE->trials == 1)
         {
@@ -371,7 +375,7 @@ u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi)
         }
         else if (STATE->trials != n)
         {
-            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomUniform called with inconsistent trials %d and %d", STATE->trials, n);
+            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomUniform called from %p with tag %d and inconsistent trials %d and %d", __builtin_extract_return_addr(__builtin_return_address(0)), tag, STATE->trials, n);
         }
         STATE->trialRatio = Q_4_12(1) / STATE->trials;
         return STATE->runTrial + lo;
@@ -399,6 +403,7 @@ u32 RandomUniformExcept(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32
 
     if (tag == STATE->rngTag)
     {
+        STATE->didRunRandomly = TRUE;
         if (STATE->trials == 1)
         {
             u32 n = 0, i;
@@ -413,7 +418,7 @@ u32 RandomUniformExcept(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32
         while (reject(STATE->runTrial + lo + STATE->rngTrialOffset))
         {
             if (STATE->runTrial + lo + STATE->rngTrialOffset > hi)
-                Test_ExitWithResult(TEST_RESULT_INVALID, SourceLine(0), ":LRandomUniformExcept called with inconsistent reject");
+                Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomUniformExcept called from %p with tag %d and inconsistent reject", __builtin_extract_return_addr(__builtin_return_address(0)), tag);
             STATE->rngTrialOffset++;
         }
 
@@ -424,7 +429,7 @@ u32 RandomUniformExcept(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32
     while (reject(default_))
     {
         if (default_ == lo)
-            Test_ExitWithResult(TEST_RESULT_INVALID, SourceLine(0), ":LRandomUniformExcept rejected all values");
+            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomUniformExcept called from %p with tag %d rejected all values", __builtin_extract_return_addr(__builtin_return_address(0)), tag);
         default_--;
     }
     return default_;
@@ -447,6 +452,7 @@ u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
 
     if (tag == STATE->rngTag)
     {
+        STATE->didRunRandomly = TRUE;
         if (STATE->trials == 1)
         {
             STATE->trials = n;
@@ -454,7 +460,7 @@ u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
         }
         else if (STATE->trials != n)
         {
-            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomWeighted called with inconsistent trials %d and %d", STATE->trials, n);
+            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomWeighted called from %p with tag %d and inconsistent trials %d and %d", __builtin_extract_return_addr(__builtin_return_address(0)), tag, STATE->trials, n);
         }
         // TODO: Detect inconsistent sum.
         STATE->trialRatio = Q_4_12(weights[STATE->runTrial]) / sum;
@@ -488,7 +494,7 @@ u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
         while (weights[n-1] == 0)
         {
             if (n == 1)
-                Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomWeightedArray called with all zero weights");
+                Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomWeightedArray called from %p with tag %d and all zero weights", __builtin_extract_return_addr(__builtin_return_address(0)), tag);
             n--;
         }
         return n-1;
@@ -520,6 +526,7 @@ const void *RandomElementArray(enum RandomTag tag, const void *array, size_t siz
 
     if (tag == STATE->rngTag)
     {
+        STATE->didRunRandomly = TRUE;
         if (STATE->trials == 1)
         {
             STATE->trials = count;
@@ -527,7 +534,7 @@ const void *RandomElementArray(enum RandomTag tag, const void *array, size_t siz
         }
         else if (STATE->trials != count)
         {
-            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomElement called with inconsistent trials %d and %d", STATE->trials, count);
+            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomElement called from %p with tag %d and inconsistent trials %d and %d", __builtin_extract_return_addr(__builtin_return_address(0)), tag, STATE->trials, count);
         }
         STATE->trialRatio = Q_4_12(1) / count;
         return (const u8 *)array + size * STATE->runTrial;
@@ -1154,6 +1161,7 @@ static s32 TryMessage(s32 i, s32 n, const u8 *string)
                 switch (string[j])
                 {
                 case CHAR_SPACE:
+                // case CHAR_NBSP:
                 case CHAR_PROMPT_SCROLL:
                 case CHAR_PROMPT_CLEAR:
                 case CHAR_NEWLINE:
@@ -1347,6 +1355,7 @@ static void CB2_BattleTest_NextParameter(void)
     else
     {
         STATE->trials = 0;
+        STATE->didRunRandomly = FALSE;
         BattleTest_Run(gTestRunnerState.test->data);
     }
 }
@@ -1364,7 +1373,6 @@ static inline rng_value_t MakeRngValue(const u16 seed)
 
 static void CB2_BattleTest_NextTrial(void)
 {
-    ClearFlagAfterTest();
     TearDownBattle();
 
     SetMainCallback2(CB2_BattleTest_NextParameter);
@@ -1393,6 +1401,9 @@ static void CB2_BattleTest_NextTrial(void)
     }
     else
     {
+        if (STATE->rngTag && !STATE->didRunRandomly && STATE->expectedRatio != Q_4_12(0.0) && STATE->expectedRatio != Q_4_12(1.0))
+            Test_ExitWithResult(TEST_RESULT_INVALID, SourceLine(0), ":L%s:%d: PASSES_RANDOMLY specified but no Random* call with that tag executed", gTestRunnerState.test->filename, SourceLine(0));
+
         // This is a tolerance of +/- ~2%.
         if (abs(STATE->observedRatio - STATE->expectedRatio) <= Q_4_12(0.02))
             gTestRunnerState.result = TEST_RESULT_PASS;
@@ -1406,6 +1417,7 @@ static void BattleTest_TearDown(void *data)
     // Free resources that aren't cleaned up when the battle was
     // aborted unexpectedly.
     ClearFlagAfterTest();
+    TestFreeConfigData();
     if (STATE->tearDownBattle)
         TearDownBattle();
 }
@@ -1500,6 +1512,12 @@ void SetFlagForTest(u32 sourceLine, u16 flagId)
     INVALID_IF(DATA.flagId != 0, "FLAG can only be set once per test");
     DATA.flagId = flagId;
     FlagSet(flagId);
+}
+
+void TestSetConfig(u32 sourceLine, enum GenConfigTag configTag, u32 value)
+{
+    INVALID_IF(!STATE->runGiven, "WITH_CONFIG outside of GIVEN");
+    SetGenConfig(configTag, value);
 }
 
 void ClearFlagAfterTest(void)
@@ -1756,7 +1774,8 @@ void Moves_(u32 sourceLine, u16 moves[MAX_MON_MOVES])
             break;
         INVALID_IF(moves[i] >= MOVES_COUNT, "Illegal move: %d", moves[i]);
         SetMonData(DATA.currentMon, MON_DATA_MOVE1 + i, &moves[i]);
-        SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &gMovesInfo[moves[i]].pp);
+        u32 pp = GetMovePP(moves[i]);
+        SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &pp);
     }
     DATA.explicitMoves[DATA.currentSide] |= 1 << DATA.currentPartyIndex;
 }
@@ -1855,6 +1874,7 @@ static void PushBattlerAction(u32 sourceLine, s32 battlerId, u32 actionType, u32
     if (recordIndex >= BATTLER_RECORD_SIZE)
         Test_ExitWithResult(TEST_RESULT_INVALID, SourceLine(0), ":LToo many actions");
     DATA.battleRecordTypes[battlerId][recordIndex] = actionType;
+    DATA.battleRecordTurnNumbers[battlerId][recordIndex] = DATA.turns;
     DATA.battleRecordSourceLineOffsets[battlerId][recordIndex] = SourceLineOffset(sourceLine);
     DATA.recordedBattle.battleRecord[battlerId][recordIndex] = byte;
 }
@@ -1903,6 +1923,17 @@ void TestRunner_Battle_CheckBattleRecordActionType(u32 battlerId, u32 recordInde
 
             if (actualMacro)
             {
+                if (gBattleResults.battleTurnCounter != DATA.battleRecordTurnNumbers[battlerId][recordIndex])
+                {
+                    switch (DATA.battleRecordTypes[battlerId][recordIndex])
+                    {
+                    case RECORDED_PARTY_INDEX:
+                        Test_ExitWithResult(TEST_RESULT_INVALID, line, ":L%s:%d: %s not required (is the send out random?)", filename, line, actualMacro);
+                    default:
+                        Test_ExitWithResult(TEST_RESULT_INVALID, line, ":L%s:%d: %s not required", filename, line, actualMacro);
+                    }
+                }
+
                 switch (actionType)
                 {
                 case RECORDED_ACTION_TYPE:
@@ -2062,7 +2093,8 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
             {
                 INVALID_IF(DATA.explicitMoves[battlerId & BIT_SIDE] & (1 << DATA.currentMonIndexes[battlerId]), "Missing explicit %S", GetMoveName(ctx->move));
                 SetMonData(mon, MON_DATA_MOVE1 + i, &ctx->move);
-                SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &gMovesInfo[ctx->move].pp);
+                u32 pp = GetMovePP(ctx->move);
+                SetMonData(DATA.currentMon, MON_DATA_PP1 + i, &pp);
                 *moveSlot = i;
                 *moveId = ctx->move;
                 break;
@@ -2091,7 +2123,7 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
         // Check invalid item usage.
         INVALID_IF(ctx->gimmick == GIMMICK_MEGA && holdEffect != HOLD_EFFECT_MEGA_STONE && species != SPECIES_RAYQUAZA, "Cannot Mega Evolve without a Mega Stone");
         INVALID_IF(ctx->gimmick == GIMMICK_Z_MOVE && holdEffect != HOLD_EFFECT_Z_CRYSTAL, "Cannot use a Z-Move without a Z-Crystal");
-        INVALID_IF(ctx->gimmick == GIMMICK_Z_MOVE && ItemId_GetSecondaryId(item) != gMovesInfo[*moveId].type
+        INVALID_IF(ctx->gimmick == GIMMICK_Z_MOVE && ItemId_GetSecondaryId(item) != GetMoveType(*moveId)
                    && GetSignatureZMove(*moveId, species, item) == MOVE_NONE
                    && *moveId != MOVE_PHOTON_GEYSER, // exception because test won't recognize Ultra Necrozma pre-Burst
                    "Cannot turn %S into a Z-Move with %S", GetMoveName(ctx->move), ItemId_GetName(item));
@@ -2153,7 +2185,7 @@ void Move(u32 sourceLine, struct BattlePokemon *battler, struct MoveContext ctx)
     MoveGetIdAndSlot(battlerId, &ctx, &moveId, &moveSlot, sourceLine);
     target = MoveGetTarget(battlerId, moveId, &ctx, sourceLine);
 
-    if (gMovesInfo[moveId].effect == EFFECT_REVIVAL_BLESSING)
+    if (GetMoveEffect(moveId) == EFFECT_REVIVAL_BLESSING)
         requirePartyIndex = MoveGetFirstFainted(battlerId) != PARTY_SIZE;
 
     // Check party menu moves.
@@ -2415,7 +2447,7 @@ void SendOut(u32 sourceLine, struct BattlePokemon *battler, u32 partyIndex)
     s32 i;
     s32 battlerId = battler - gBattleMons;
     INVALID_IF(DATA.turnState == TURN_CLOSED, "SEND_OUT outside TURN");
-    INVALID_IF(partyIndex >= ((battlerId & BIT_SIDE) == B_SIDE_PLAYER ? DATA.playerPartySize : DATA.opponentPartySize), "SWITCH to invalid party index");
+    INVALID_IF(partyIndex >= ((battlerId & BIT_SIDE) == B_SIDE_PLAYER ? DATA.playerPartySize : DATA.opponentPartySize), "SEND_OUT of invalid party index");
     INVALID_IF(IsAITest() && (battlerId & BIT_SIDE) == B_SIDE_OPPONENT, "SEND_OUT is not allowed for opponent in AI tests. Use EXPECT_SEND_OUT instead");
     for (i = 0; i < STATE->battlersCount; i++)
     {

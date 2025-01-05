@@ -73,7 +73,6 @@ void SpriteCB_ShowAsMoveTarget(struct Sprite *sprite);
 void SpriteCB_HideAsMoveTarget(struct Sprite *sprite);
 void SpriteCB_OpponentMonFromBall(struct Sprite *sprite);
 void SpriteCB_BattleSpriteStartSlideLeft(struct Sprite *sprite);
-void SetIdleSpriteCallback(struct Sprite *sprite);
 void SpriteCB_FaintSlideAnim(struct Sprite *sprite);
 void DoBounceEffect(u8 battler, u8 which, s8 delta, s8 amplitude);
 void EndBounceEffect(u8 battler, u8 which);
@@ -92,7 +91,7 @@ void SwitchPartyOrder(u32 battlerId);
 void SwapTurnOrder(u8 id1, u8 id2);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
-s8 GetMovePriority(u32 battlerId, u16 move);
+s8 GetBattleMovePriority(u32 battlerId, u16 move);
 s8 GetChosenMovePriority(u32 battlerId);
 u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect);
 u32 GetBattlerTotalSpeedStat(u32 battler);
@@ -110,8 +109,8 @@ void CustomTrainerPartyAssignMoves(struct Pokemon *mon, const struct TrainerMon 
 
 extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 
-extern const struct OamData gOamData_BattlerOpponent;
-extern const struct OamData gOamData_BattlerPlayer;
+extern const struct OamData gOamData_BattleSpriteOpponentSide;
+extern const struct OamData gOamData_BattleSpritePlayerSide;
 extern const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES];
 extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];
 

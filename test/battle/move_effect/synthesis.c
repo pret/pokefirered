@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_SYNTHESIS].effect == EFFECT_SYNTHESIS);
+    ASSUME(GetMoveEffect(MOVE_SYNTHESIS) == EFFECT_SYNTHESIS);
 }
 
 SINGLE_BATTLE_TEST("Synthesis recovers 1/2 of the user's max HP")

@@ -5,6 +5,7 @@
 #include "pokemon_animation.h"
 #include "sprite.h"
 #include "task.h"
+#include "test_runner.h"
 #include "trig.h"
 #include "util.h"
 #include "data.h"
@@ -508,7 +509,10 @@ static void Task_HandleMonAnimation(u8 taskId)
         for (i = 2; i < ARRAY_COUNT(sprite->data); i++)
             sprite->data[i] = 0;
 
-        sprite->callback = sMonAnimFunctions[gTasks[taskId].tAnimId];
+        if (gTestRunnerHeadless)
+            sprite->callback = WaitAnimEnd;
+        else
+            sprite->callback = sMonAnimFunctions[gTasks[taskId].tAnimId];
         sIsSummaryAnim = FALSE;
 
         gTasks[taskId].tState++;

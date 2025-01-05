@@ -6,7 +6,7 @@
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves do not retain priority")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_QUICK_ATTACK].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_QUICK_ATTACK) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves do not retain priority")
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves are not affected by -ate abilities")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
         ASSUME(gSpeciesInfo[SPECIES_SWELLOW].types[1] == TYPE_FLYING);
         PLAYER(SPECIES_AURORUS) { Ability(ABILITY_REFRIGERATE); Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_SWELLOW);
@@ -38,8 +38,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves are not affected by -ate abilities")
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves are affected by Ion Deluge")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
-        ASSUME(gMovesInfo[MOVE_ION_DELUGE].effect == EFFECT_ION_DELUGE);
+        ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
+        ASSUME(GetMoveEffect(MOVE_ION_DELUGE) == EFFECT_ION_DELUGE);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_SWELLOW);
     } WHEN {
@@ -57,8 +57,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves deal 1/4 damage through protect", s16 damag
     PARAMETRIZE { protected = TRUE; }
     PARAMETRIZE { protected = FALSE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
-        ASSUME(gMovesInfo[MOVE_PROTECT].effect == EFFECT_PROTECT);
+        ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
+        ASSUME(GetMoveEffect(MOVE_PROTECT) == EFFECT_PROTECT);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -77,7 +77,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves deal 1/4 damage through protect", s16 damag
 SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_RESET_STATS clears a battler's negative stat stages")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_LEECH_SEED].zMove.effect == Z_EFFECT_RESET_STATS);
+        ASSUME(GetMoveZEffect(MOVE_LEECH_SEED) == Z_EFFECT_RESET_STATS);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_GRASSIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -96,8 +96,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_RESET_STATS clears a battler's negative st
 SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_ALL_STATS_UP raises all of a battler's stat stages by one")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_CELEBRATE].type == TYPE_NORMAL);
-        ASSUME(gMovesInfo[MOVE_CELEBRATE].zMove.effect == Z_EFFECT_ALL_STATS_UP_1);
+        ASSUME(GetMoveType(MOVE_CELEBRATE) == TYPE_NORMAL);
+        ASSUME(GetMoveZEffect(MOVE_CELEBRATE) == Z_EFFECT_ALL_STATS_UP_1);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -118,8 +118,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_BOOST_CRITS raises a battler's critical hi
 {
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FORESIGHT].type == TYPE_NORMAL);
-        ASSUME(gMovesInfo[MOVE_FORESIGHT].zMove.effect == Z_EFFECT_BOOST_CRITS);
+        ASSUME(GetMoveType(MOVE_FORESIGHT) == TYPE_NORMAL);
+        ASSUME(GetMoveZEffect(MOVE_FORESIGHT) == Z_EFFECT_BOOST_CRITS);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -136,8 +136,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_BOOST_CRITS raises a battler's critical hi
 DOUBLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_FOLLOW_ME redirects attacks to the user")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DESTINY_BOND].type == TYPE_GHOST);
-        ASSUME(gMovesInfo[MOVE_DESTINY_BOND].zMove.effect == Z_EFFECT_FOLLOW_ME);
+        ASSUME(GetMoveType(MOVE_DESTINY_BOND) == TYPE_GHOST);
+        ASSUME(GetMoveZEffect(MOVE_DESTINY_BOND) == Z_EFFECT_FOLLOW_ME);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_GHOSTIUM_Z); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -157,8 +157,8 @@ DOUBLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_FOLLOW_ME redirects attacks to the user")
 SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_RESTORE_REPLACEMENT_HP fully heals the replacement battler's HP")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_PARTING_SHOT].type == TYPE_DARK);
-        ASSUME(gMovesInfo[MOVE_PARTING_SHOT].zMove.effect == Z_EFFECT_RESTORE_REPLACEMENT_HP);
+        ASSUME(GetMoveType(MOVE_PARTING_SHOT) == TYPE_DARK);
+        ASSUME(GetMoveZEffect(MOVE_PARTING_SHOT) == Z_EFFECT_RESTORE_REPLACEMENT_HP);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_DARKINIUM_Z); }
         PLAYER(SPECIES_WYNAUT) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -181,11 +181,11 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_CURSE activates Z_EFFECT_RECOVER_HP or Z_E
     PARAMETRIZE { species = SPECIES_WOBBUFFET; }
     PARAMETRIZE { species = SPECIES_DUSCLOPS; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_CURSE].type == TYPE_GHOST);
+        ASSUME(GetMoveType(MOVE_CURSE) == TYPE_GHOST);
         ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] != TYPE_GHOST);
         ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[1] != TYPE_GHOST);
         ASSUME(gSpeciesInfo[SPECIES_DUSCLOPS].types[0] == TYPE_GHOST);
-        ASSUME(gMovesInfo[MOVE_CURSE].zMove.effect == Z_EFFECT_CURSE);
+        ASSUME(GetMoveZEffect(MOVE_CURSE) == Z_EFFECT_CURSE);
         PLAYER(species) { Item(ITEM_GHOSTIUM_Z); HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -218,8 +218,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_CURSE activates Z_EFFECT_RECOVER_HP or Z_E
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Mirror Move raises the user's attack by two stages and copies the last used non-status move as a Z-Move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].type == TYPE_FLYING);
-        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].zMove.effect == Z_EFFECT_ATK_UP_2);
+        ASSUME(GetMoveType(MOVE_MIRROR_MOVE) == TYPE_FLYING);
+        ASSUME(GetMoveZEffect(MOVE_MIRROR_MOVE) == Z_EFFECT_ATK_UP_2);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FLYINIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -240,8 +240,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Mirror Move raises the user's attack by two stage
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Mirror Move raises the user's attack by two stages and copies the last used status move regularly")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].type == TYPE_FLYING);
-        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].zMove.effect == Z_EFFECT_ATK_UP_2);
+        ASSUME(GetMoveType(MOVE_MIRROR_MOVE) == TYPE_FLYING);
+        ASSUME(GetMoveZEffect(MOVE_MIRROR_MOVE) == Z_EFFECT_ATK_UP_2);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FLYINIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -259,8 +259,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Mirror Move raises the user's attack by two stage
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Copycat raises the user's accuracy by one stage and copies the last used non-status move as a Z-Move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_COPYCAT].type == TYPE_NORMAL);
-        ASSUME(gMovesInfo[MOVE_COPYCAT].zMove.effect == Z_EFFECT_ACC_UP_1);
+        ASSUME(GetMoveType(MOVE_COPYCAT) == TYPE_NORMAL);
+        ASSUME(GetMoveZEffect(MOVE_COPYCAT) == Z_EFFECT_ACC_UP_1);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -281,8 +281,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Me First raises the user's speed by two stages an
     PARAMETRIZE { meFirst = TRUE; }
     PARAMETRIZE { meFirst = FALSE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ME_FIRST].type == TYPE_NORMAL);
-        ASSUME(gMovesInfo[MOVE_ME_FIRST].zMove.effect == Z_EFFECT_SPD_UP_2);
+        ASSUME(GetMoveType(MOVE_ME_FIRST) == TYPE_NORMAL);
+        ASSUME(GetMoveZEffect(MOVE_ME_FIRST) == Z_EFFECT_SPD_UP_2);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -313,7 +313,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Nature Power transforms into different Z-Moves ba
     PARAMETRIZE { terrainMove = MOVE_GRASSY_TERRAIN;    zMove = gTypesInfo[TYPE_GRASS].zMove; }
     PARAMETRIZE { terrainMove = MOVE_MISTY_TERRAIN;     zMove = gTypesInfo[TYPE_FAIRY].zMove; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_NATURE_POWER].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_NATURE_POWER) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -334,7 +334,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Hidden Power always transforms into Breakneck Bli
     PARAMETRIZE { iv = 21; }
     PARAMETRIZE { iv = 31; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_HIDDEN_POWER].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_HIDDEN_POWER) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); AttackIV(iv); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -354,7 +354,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Weather Ball transforms into different Z-Moves ba
     PARAMETRIZE { weatherMove = MOVE_SANDSTORM;   zMove = gTypesInfo[TYPE_ROCK].zMove; }
     PARAMETRIZE { weatherMove = MOVE_HAIL;        zMove = gTypesInfo[TYPE_ICE].zMove; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WEATHER_BALL].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_WEATHER_BALL) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -370,7 +370,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Weather Ball transforms into different Z-Moves ba
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Sleep Talk transforms a used non-status move into a Z-Move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SLEEP_TALK].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_SLEEP_TALK) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); Status1(STATUS1_SLEEP); Moves(MOVE_SLEEP_TALK, MOVE_ABSORB); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -385,7 +385,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Sleep Talk transforms a used non-status move into
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Sleep Talk turns Weather Ball into Breakneck Blitz even under rain")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SLEEP_TALK].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_SLEEP_TALK) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); Status1(STATUS1_SLEEP); Moves(MOVE_SLEEP_TALK, MOVE_WEATHER_BALL); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -400,7 +400,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Sleep Talk turns Weather Ball into Breakneck Blit
 SINGLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves and deals 25% of maximum HP to the user")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+        ASSUME(GetMoveType(MOVE_EMBER) == TYPE_FIRE);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FIRIUM_Z); }
         OPPONENT(SPECIES_VIVILLON);
     } WHEN {
@@ -417,8 +417,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves and deals 25% of ma
 DOUBLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves (from Z-Mirror Move)")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
-        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].type == TYPE_FLYING);
+        ASSUME(GetMoveType(MOVE_EMBER) == TYPE_FIRE);
+        ASSUME(GetMoveType(MOVE_MIRROR_MOVE) == TYPE_FLYING);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FLYINIUM_Z); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -436,8 +436,8 @@ DOUBLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves (from Z-Mirror Move
 SINGLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves but not boosts granted")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WILL_O_WISP].type == TYPE_FIRE);
-        ASSUME(gMovesInfo[MOVE_WILL_O_WISP].zMove.effect == Z_EFFECT_ATK_UP_1);
+        ASSUME(GetMoveType(MOVE_WILL_O_WISP) == TYPE_FIRE);
+        ASSUME(GetMoveZEffect(MOVE_WILL_O_WISP) == Z_EFFECT_ATK_UP_1);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FIRIUM_Z); }
         OPPONENT(SPECIES_VIVILLON);
     } WHEN {
@@ -455,7 +455,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves but not boosts gran
 DOUBLE_BATTLE_TEST("(Z-MOVE) Instruct fails if the target last used a Z-Move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -474,7 +474,7 @@ DOUBLE_BATTLE_TEST("(Z-MOVE) Instruct fails if the target last used a Z-Move")
 DOUBLE_BATTLE_TEST("(Z-MOVE) Dancer does not use a Z-Move if the battler has used a Z-Move the same turn")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_DANCER); Item(ITEM_NORMALIUM_Z); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -498,7 +498,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Light That Burns the Sky uses the battler's highest
     PARAMETRIZE { useSwordsDance = FALSE; }
     PARAMETRIZE { useSwordsDance = TRUE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SWORDS_DANCE].effect == EFFECT_ATTACK_UP_2);
+        ASSUME(GetMoveEffect(MOVE_SWORDS_DANCE) == EFFECT_ATTACK_UP_2);
         PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1000); MaxHP(1000); }; // hits hard lol
     } WHEN {
@@ -521,7 +521,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) 10,000,000 Volt Thunderbolt has an increased critic
     PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
     GIVEN {
         ASSUME(B_CRIT_CHANCE >= GEN_6);
-        ASSUME(gMovesInfo[MOVE_10_000_000_VOLT_THUNDERBOLT].criticalHitStage == 2);
+        ASSUME(GetMoveCriticalHitStage(MOVE_10_000_000_VOLT_THUNDERBOLT) == 2);
         PLAYER(SPECIES_PIKACHU_PARTNER) { Item(ITEM_PIKASHUNIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -536,7 +536,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) 10,000,000 Volt Thunderbolt has an increased critic
 SINGLE_BATTLE_TEST("(Z-MOVE) Stoked Sparksurfer paralyzes the target")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_STOKED_SPARKSURFER].additionalEffects[0].moveEffect == MOVE_EFFECT_PARALYSIS);
+        ASSUME(GetMoveAdditionalEffectById(MOVE_STOKED_SPARKSURFER, 0)->moveEffect == MOVE_EFFECT_PARALYSIS);
         PLAYER(SPECIES_RAICHU_ALOLA) { Item(ITEM_ALORAICHIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -551,7 +551,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Stoked Sparksurfer paralyzes the target")
 SINGLE_BATTLE_TEST("(Z-MOVE) Extreme Evoboost boosts all the user's stats by two stages")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_EXTREME_EVOBOOST].effect == EFFECT_EXTREME_EVOBOOST);
+        ASSUME(GetMoveEffect(MOVE_EXTREME_EVOBOOST) == EFFECT_EXTREME_EVOBOOST);
         PLAYER(SPECIES_EEVEE) { Item(ITEM_EEVIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -571,7 +571,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Extreme Evoboost boosts all the user's stats by two
 SINGLE_BATTLE_TEST("(Z-MOVE) Genesis Supernova sets up psychic terrain")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_GENESIS_SUPERNOVA].effect == EFFECT_HIT_SET_REMOVE_TERRAIN);
+        ASSUME(GetMoveEffect(MOVE_GENESIS_SUPERNOVA) == EFFECT_HIT_SET_REMOVE_TERRAIN);
         PLAYER(SPECIES_MEW) { Item(ITEM_MEWNIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -588,7 +588,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Genesis Supernova sets up psychic terrain")
 SINGLE_BATTLE_TEST("(Z-MOVE) Splintered Stormshards removes terrain")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SPLINTERED_STORMSHARDS].effect == EFFECT_HIT_SET_REMOVE_TERRAIN);
+        ASSUME(GetMoveEffect(MOVE_SPLINTERED_STORMSHARDS) == EFFECT_HIT_SET_REMOVE_TERRAIN);
         PLAYER(SPECIES_LYCANROC_DUSK) { Item(ITEM_LYCANIUM_Z); }
         OPPONENT(SPECIES_TAPU_LELE) { Ability(ABILITY_PSYCHIC_SURGE); HP(1000); MaxHP(1000); }
     } WHEN {
@@ -606,7 +606,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Splintered Stormshards removes terrain")
 SINGLE_BATTLE_TEST("(Z-MOVE) Clangorous Soulblaze boosts all the user's stats by one stage")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_CLANGOROUS_SOULBLAZE].additionalEffects[0].moveEffect == MOVE_EFFECT_ALL_STATS_UP);
+        ASSUME(GetMoveAdditionalEffectById(MOVE_CLANGOROUS_SOULBLAZE, 0)->moveEffect == MOVE_EFFECT_ALL_STATS_UP);
         PLAYER(SPECIES_KOMMO_O) { Item(ITEM_KOMMONIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -626,7 +626,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Clangorous Soulblaze boosts all the user's stats by
 SINGLE_BATTLE_TEST("(Z-MOVE) Guardian of Alola deals 75\% of the target's current HP")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_GUARDIAN_OF_ALOLA].effect == EFFECT_GUARDIAN_OF_ALOLA);
+        ASSUME(GetMoveEffect(MOVE_GUARDIAN_OF_ALOLA) == EFFECT_GUARDIAN_OF_ALOLA);
         PLAYER(SPECIES_TAPU_FINI) { Item(ITEM_TAPUNIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -662,7 +662,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Revelation Dance always transforms into Breakneck
     PARAMETRIZE { species = SPECIES_ORICORIO_POM_POM; }
     PARAMETRIZE { species = SPECIES_ORICORIO_SENSU; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_REVELATION_DANCE].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_REVELATION_DANCE) == TYPE_NORMAL);
         PLAYER(species) { Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

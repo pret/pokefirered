@@ -3,14 +3,14 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_PHOTON_GEYSER].effect == EFFECT_PHOTON_GEYSER);
+    ASSUME(GetMoveEffect(MOVE_PHOTON_GEYSER) == EFFECT_PHOTON_GEYSER);
 }
 
 SINGLE_BATTLE_TEST("Photon Geyser can be mirror coated if it is a special move")
 {
     GIVEN {
         // EFFECT_PHOTON_GEYSER requires the move data to be Special to work
-        ASSUME(gMovesInfo[MOVE_PHOTON_GEYSER].category == DAMAGE_CATEGORY_SPECIAL);
+        ASSUME(GetMoveCategory(MOVE_PHOTON_GEYSER) == DAMAGE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET) { Attack(100); SpAttack(110); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

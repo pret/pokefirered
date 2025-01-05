@@ -3,10 +3,10 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_SHELL_TRAP].effect == EFFECT_SHELL_TRAP);
-    ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
-    ASSUME(gMovesInfo[MOVE_WATER_GUN].category == DAMAGE_CATEGORY_SPECIAL);
-    ASSUME(gMovesInfo[MOVE_LEER].category == DAMAGE_CATEGORY_STATUS);
+    ASSUME(GetMoveEffect(MOVE_SHELL_TRAP) == EFFECT_SHELL_TRAP);
+    ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(GetMoveCategory(MOVE_WATER_GUN) == DAMAGE_CATEGORY_SPECIAL);
+    ASSUME(GetMoveCategory(MOVE_LEER) == DAMAGE_CATEGORY_STATUS);
 }
 
 SINGLE_BATTLE_TEST("Shell Trap activates only if hit by a physical move")
@@ -98,7 +98,7 @@ SINGLE_BATTLE_TEST("Shell Trap does not activate if battler faints before being 
 DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 1 and attacks both opponents")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
+        ASSUME(GetMoveTarget(MOVE_SHELL_TRAP) == MOVE_TARGET_BOTH);
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
@@ -122,7 +122,7 @@ DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 1 a
 DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 2 and attacks both opponents")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
+        ASSUME(GetMoveTarget(MOVE_SHELL_TRAP) == MOVE_TARGET_BOTH);
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
@@ -146,7 +146,7 @@ DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 2 a
 DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 3 and attacks both opponents")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
+        ASSUME(GetMoveTarget(MOVE_SHELL_TRAP) == MOVE_TARGET_BOTH);
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(7); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
@@ -170,7 +170,7 @@ DOUBLE_BATTLE_TEST("Shell Trap activates immediately after being hit on turn 3 a
 DOUBLE_BATTLE_TEST("Shell Trap targets correctly if one of the opponents has fainted")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SHELL_TRAP].target == MOVE_TARGET_BOTH);
+        ASSUME(GetMoveTarget(MOVE_SHELL_TRAP) == MOVE_TARGET_BOTH);
         PLAYER(SPECIES_GRENINJA) { Speed(60); }
         PLAYER(SPECIES_TURTONATOR) { Speed(10); }
         OPPONENT(SPECIES_BLASTOISE) { Speed(120); }

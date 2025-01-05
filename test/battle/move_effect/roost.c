@@ -3,28 +3,28 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_ROOST].effect == EFFECT_ROOST);
+    ASSUME(GetMoveEffect(MOVE_ROOST) == EFFECT_ROOST);
     ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] != TYPE_FLYING);
     ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[1] != TYPE_FLYING);
     // One attack of each type to verify typelessness
-    ASSUME(gMovesInfo[MOVE_POUND].type == TYPE_NORMAL);
-    ASSUME(gMovesInfo[MOVE_KARATE_CHOP].type == TYPE_FIGHTING);
-    ASSUME(gMovesInfo[MOVE_GUST].type == TYPE_FLYING);
-    ASSUME(gMovesInfo[MOVE_POISON_STING].type == TYPE_POISON);
-    ASSUME(gMovesInfo[MOVE_EARTHQUAKE].type == TYPE_GROUND);
-    ASSUME(gMovesInfo[MOVE_ROCK_THROW].type == TYPE_ROCK);
-    ASSUME(gMovesInfo[MOVE_LEECH_LIFE].type == TYPE_BUG);
-    ASSUME(gMovesInfo[MOVE_LICK].type == TYPE_GHOST);
-    ASSUME(gMovesInfo[MOVE_STEEL_WING].type == TYPE_STEEL);
-    ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
-    ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
-    ASSUME(gMovesInfo[MOVE_VINE_WHIP].type == TYPE_GRASS);
-    ASSUME(gMovesInfo[MOVE_THUNDER_SHOCK].type == TYPE_ELECTRIC);
-    ASSUME(gMovesInfo[MOVE_CONFUSION].type == TYPE_PSYCHIC);
-    ASSUME(gMovesInfo[MOVE_ICE_BEAM].type == TYPE_ICE);
-    ASSUME(gMovesInfo[MOVE_DRAGON_BREATH].type == TYPE_DRAGON);
-    ASSUME(gMovesInfo[MOVE_BITE].type == TYPE_DARK);
-    ASSUME(gMovesInfo[MOVE_DISARMING_VOICE].type == TYPE_FAIRY);
+    ASSUME(GetMoveType(MOVE_POUND) == TYPE_NORMAL);
+    ASSUME(GetMoveType(MOVE_KARATE_CHOP) == TYPE_FIGHTING);
+    ASSUME(GetMoveType(MOVE_GUST) == TYPE_FLYING);
+    ASSUME(GetMoveType(MOVE_POISON_STING) == TYPE_POISON);
+    ASSUME(GetMoveType(MOVE_EARTHQUAKE) == TYPE_GROUND);
+    ASSUME(GetMoveType(MOVE_ROCK_THROW) == TYPE_ROCK);
+    ASSUME(GetMoveType(MOVE_LEECH_LIFE) == TYPE_BUG);
+    ASSUME(GetMoveType(MOVE_LICK) == TYPE_GHOST);
+    ASSUME(GetMoveType(MOVE_STEEL_WING) == TYPE_STEEL);
+    ASSUME(GetMoveType(MOVE_EMBER) == TYPE_FIRE);
+    ASSUME(GetMoveType(MOVE_WATER_GUN) == TYPE_WATER);
+    ASSUME(GetMoveType(MOVE_VINE_WHIP) == TYPE_GRASS);
+    ASSUME(GetMoveType(MOVE_THUNDER_SHOCK) == TYPE_ELECTRIC);
+    ASSUME(GetMoveType(MOVE_CONFUSION) == TYPE_PSYCHIC);
+    ASSUME(GetMoveType(MOVE_ICE_BEAM) == TYPE_ICE);
+    ASSUME(GetMoveType(MOVE_DRAGON_BREATH) == TYPE_DRAGON);
+    ASSUME(GetMoveType(MOVE_BITE) == TYPE_DARK);
+    ASSUME(GetMoveType(MOVE_DISARMING_VOICE) == TYPE_FAIRY);
 }
 
 SINGLE_BATTLE_TEST("Roost fails when user is at full HP")

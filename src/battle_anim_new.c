@@ -9255,22 +9255,22 @@ void AnimTask_DynamaxGrowth(u8 taskId) // from CFRU
 
 void AnimTask_GetWeatherToSet(u8 taskId)
 {
-    switch (gMovesInfo[gCurrentMove].argument)
+    switch (GetMoveMaxEffect(gCurrentMove))
     {
         case MAX_EFFECT_SUN:
-            gBattleAnimArgs[ARG_RET_ID] = 1;
+            gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_SUN;
             break;
         case MAX_EFFECT_RAIN:
-            gBattleAnimArgs[ARG_RET_ID] = 2;
+            gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_RAIN;
             break;
         case MAX_EFFECT_SANDSTORM:
-            gBattleAnimArgs[ARG_RET_ID] = 3;
+            gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_SANDSTORM;
             break;
         case MAX_EFFECT_HAIL:
-            gBattleAnimArgs[ARG_RET_ID] = 4;
+            gBattleAnimArgs[ARG_RET_ID] = ANIM_WEATHER_HAIL;
             break;
     }
-	DestroyAnimVisualTask(taskId);
+    DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_SyrupBomb(u8 taskId)

@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_SONIC_BOOM].effect == EFFECT_FIXED_DAMAGE_ARG);
+    ASSUME(GetMoveEffect(MOVE_SONIC_BOOM) == EFFECT_FIXED_DAMAGE_ARG);
 }
 
 SINGLE_BATTLE_TEST("Sonic Boom deals fixed damage", s16 damage)
@@ -11,9 +11,9 @@ SINGLE_BATTLE_TEST("Sonic Boom deals fixed damage", s16 damage)
     u16 mon;
     PARAMETRIZE { mon = SPECIES_RATTATA; }
     PARAMETRIZE { mon = SPECIES_ARON; }
-    
+
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SONIC_BOOM].argument == 20);
+        ASSUME(GetMoveFixedDamage(MOVE_SONIC_BOOM) == 20);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(mon);
     } WHEN {

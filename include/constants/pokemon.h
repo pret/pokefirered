@@ -266,13 +266,16 @@ enum EvolutionMode {
 #define MON_PIC_HEIGHT 64
 #define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)
 
-// Most pokemon have 1 frame. There are 2 exceptions:
-// - Castform has 4 frames, 1 for each form
+// Most Pokémon have 2 frames (a default and an alternate for their animation).
+// There are 4 exceptions:
 // - Deoxys has 2 frames, 1 for each form
-#define MAX_MON_PIC_FRAMES 4
+// - Spinda has 1 frame, presumably to avoid the work of animating its spots
+// - Unown has 1 frame, presumably to avoid the work of animating all 28 of its forms
+#define MAX_MON_PIC_FRAMES 2
 
-#define BATTLE_ALIVE_EXCEPT_BATTLER  0
-#define BATTLE_ALIVE_SIDE            1
+#define BATTLE_ALIVE_EXCEPT_BATTLER      0
+#define BATTLE_ALIVE_EXCEPT_BATTLER_SIDE 1
+#define BATTLE_ALIVE_SIDE                2
 
 #define SKIP_FRONT_ANIM (1 << 7)
 

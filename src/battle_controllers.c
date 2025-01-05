@@ -76,7 +76,7 @@ void SetUpBattleVars(void)
     gBattleControllerExecFlags = 0;
     ClearBattleAnimationVars();
     BattleAI_SetupItems();
-	BattleAI_SetupFlags();
+    BattleAI_SetupFlags();
 }
 
 void InitBattleControllers(void)

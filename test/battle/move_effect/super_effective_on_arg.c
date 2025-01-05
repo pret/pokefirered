@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_FREEZE_DRY].effect == EFFECT_SUPER_EFFECTIVE_ON_ARG);
+    ASSUME(GetMoveEffect(MOVE_FREEZE_DRY) == EFFECT_SUPER_EFFECTIVE_ON_ARG);
 }
 
 SINGLE_BATTLE_TEST("Freeze Dry is super effective on water types")

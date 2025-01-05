@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_GUARD_SPLIT].effect == EFFECT_GUARD_SPLIT);
+    ASSUME(GetMoveEffect(MOVE_GUARD_SPLIT) == EFFECT_GUARD_SPLIT);
 }
 
 SINGLE_BATTLE_TEST("Guard Split averages users and targets Def and Sp. Def stats")

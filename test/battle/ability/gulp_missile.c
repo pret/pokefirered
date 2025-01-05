@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    // ASSUME(gMovesInfo[MOVE_AERIAL_ACE].category == DAMAGE_CATEGORY_PHYSICAL);
+    // ASSUME(GetMoveCategory(MOVE_AERIAL_ACE) == DAMAGE_CATEGORY_PHYSICAL);
 }
 
 SINGLE_BATTLE_TEST("(Gulp Missile) If base Cramorant hits target with Surf it transforms into Gulping form if max HP is over 1/2")
@@ -92,6 +92,7 @@ SINGLE_BATTLE_TEST("(Gulp Missile) Transformed Cramorant deal 1/4 of damage oppo
         MESSAGE("The opposing Wobbuffet's Defense fell!");
     } THEN {
         EXPECT_EQ(gulpMissileDamage, opponent->maxHP / 4);
+        EXPECT_EQ(opponent->statStages[STAT_DEF], DEFAULT_STAT_STAGE - 1);
     }
 }
 
@@ -131,5 +132,61 @@ SINGLE_BATTLE_TEST("(Gulp Missile) triggers even if the user is fainted by oppos
         HP_BAR(player);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
         STATUS_ICON(opponent, paralysis: TRUE);
+    }
+}
+
+SINGLE_BATTLE_TEST("(Gulp Missile) Transformed Cramorant Gulping lowers defense but is prevented by stat reduction preventing abilities")
+{
+    u32 species, ability;
+    PARAMETRIZE { species = SPECIES_METAGROSS; ability = ABILITY_CLEAR_BODY; }
+    PARAMETRIZE { species = SPECIES_CORVIKNIGHT; ability = ABILITY_MIRROR_ARMOR; }
+    PARAMETRIZE { species = SPECIES_CHATOT; ability = ABILITY_BIG_PECKS; }
+    GIVEN {
+        PLAYER(SPECIES_CRAMORANT) { Ability(ABILITY_GULP_MISSILE); }
+        OPPONENT(species) { Ability(ability); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, player);
+        HP_BAR(opponent);
+        ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        HP_BAR(player);
+        ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
+        ABILITY_POPUP(opponent, ability);
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
+    }
+}
+
+SINGLE_BATTLE_TEST("(Gulp Missile) Transformed Cramorant Gulping lowers defense and still triggers other effects after")
+{
+    // Make sure attacker and target are correct after triggering the ability
+    u32 ability;
+    PARAMETRIZE { ability = ABILITY_INFILTRATOR; }
+    PARAMETRIZE { ability = ABILITY_CLEAR_BODY; }
+    GIVEN {
+        ASSUME(MoveMakesContact(MOVE_TACKLE));
+        PLAYER(SPECIES_CRAMORANT) { Ability(ABILITY_GULP_MISSILE); Item(ITEM_ROCKY_HELMET); }
+        OPPONENT(SPECIES_DRAGAPULT) { Ability(ability); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, player);
+        HP_BAR(opponent);
+        ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        HP_BAR(player);
+        ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
+        HP_BAR(opponent);
+        if (ability == ABILITY_INFILTRATOR) {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+            MESSAGE("The opposing Dragapult's Defense fell!");
+        } else {
+            ABILITY_POPUP(opponent, ABILITY_CLEAR_BODY);
+        }
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+        HP_BAR(opponent);
     }
 }

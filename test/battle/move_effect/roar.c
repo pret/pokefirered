@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_ROAR].effect == EFFECT_ROAR);
+    ASSUME(GetMoveEffect(MOVE_ROAR) == EFFECT_ROAR);
 }
 
 SINGLE_BATTLE_TEST("Roar switches the target with a random non-fainted replacement")

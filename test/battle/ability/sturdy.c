@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Sturdy prevents OHKO moves")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FISSURE].effect == EFFECT_OHKO);
+        ASSUME(GetMoveEffect(MOVE_FISSURE) == EFFECT_OHKO);
         PLAYER(SPECIES_GEODUDE) { Ability(ABILITY_STURDY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

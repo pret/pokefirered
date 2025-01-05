@@ -45,7 +45,7 @@ bool32 IsGimmickSelected(u32 battler, enum Gimmick gimmick)
 {
     // There's no player select in tests, but some gimmicks need to test choice before they are fully activated.
     if (TESTING)
-        return (gBattleStruct->gimmick.toActivate & gBitTable[battler]) && gBattleStruct->gimmick.usableGimmick[battler] == gimmick;
+        return (gBattleStruct->gimmick.toActivate & (1u << battler)) && gBattleStruct->gimmick.usableGimmick[battler] == gimmick;
     else
         return gBattleStruct->gimmick.usableGimmick[battler] == gimmick && gBattleStruct->gimmick.playerSelect;
 }
@@ -65,9 +65,6 @@ enum Gimmick GetActiveGimmick(u32 battler)
 // Returns whether a trainer mon is intended to use an unrestrictive gimmick via .useGimmick (i.e Tera).
 bool32 ShouldTrainerBattlerUseGimmick(u32 battler, enum Gimmick gimmick)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
-        return FALSE;
-
     // There are no trainer party settings in battles, but the AI needs to know which gimmick to use.
     if (TESTING)
     {
@@ -99,10 +96,10 @@ bool32 ShouldTrainerBattlerUseGimmick(u32 battler, enum Gimmick gimmick)
 bool32 HasTrainerUsedGimmick(u32 battler, enum Gimmick gimmick)
 {
     // Check whether partner battler has used gimmick or plans to during turn.
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+    if (IsDoubleBattle()
         && IsPartnerMonFromSameTrainer(battler)
         && (gBattleStruct->gimmick.activated[BATTLE_PARTNER(battler)][gimmick]
-        || ((gBattleStruct->gimmick.toActivate & gBitTable[BATTLE_PARTNER(battler)]
+        || ((gBattleStruct->gimmick.toActivate & (1u << BATTLE_PARTNER(battler))
         && gBattleStruct->gimmick.usableGimmick[BATTLE_PARTNER(battler)] == gimmick))))
     {
         return TRUE;
@@ -118,7 +115,7 @@ bool32 HasTrainerUsedGimmick(u32 battler, enum Gimmick gimmick)
 void SetGimmickAsActivated(u32 battler, enum Gimmick gimmick)
 {
     gBattleStruct->gimmick.activated[battler][gimmick] = TRUE;
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && IsPartnerMonFromSameTrainer(battler))
+    if (IsDoubleBattle() && IsPartnerMonFromSameTrainer(battler))
         gBattleStruct->gimmick.activated[BATTLE_PARTNER(battler)][gimmick] = TRUE;
 }
 
@@ -147,7 +144,8 @@ void CreateGimmickTriggerSprite(u32 battler)
     // Exit if there shouldn't be a sprite produced.
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT
      || gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_NONE
-     || gimmick->triggerSheet == NULL)
+     || gimmick->triggerSheet == NULL
+     || HasTrainerUsedGimmick(battler, gBattleStruct->gimmick.usableGimmick[battler]))
     {
         return;
     }
@@ -158,7 +156,7 @@ void CreateGimmickTriggerSprite(u32 battler)
 
     if (gBattleStruct->gimmick.triggerSpriteId == 0xFF)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        if (IsDoubleBattle())
             gBattleStruct->gimmick.triggerSpriteId = CreateSprite(gimmick->triggerTemplate,
                                                                   gSprites[gHealthboxSpriteIds[battler]].x - DOUBLES_GIMMICK_TRIGGER_POS_X_SLIDE,
                                                                   gSprites[gHealthboxSpriteIds[battler]].y - DOUBLES_GIMMICK_TRIGGER_POS_Y_DIFF, 0);
@@ -207,7 +205,7 @@ static void SpriteCb_GimmickTrigger(struct Sprite *sprite)
     s32 xSlide, xPriority, xOptimal;
     s32 yDiff;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
     {
         xSlide = DOUBLES_GIMMICK_TRIGGER_POS_X_SLIDE;
         xPriority = DOUBLES_GIMMICK_TRIGGER_POS_X_PRIORITY;

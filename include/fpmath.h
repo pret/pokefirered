@@ -12,7 +12,8 @@ typedef u32 uq4_12_t;
 
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((q4_12_t)((n) * 4096))
-#define UQ_4_12(n)  ((uq4_12_t)((n) * 4096))
+#define UQ_4_12(n)  ((uq4_12_t)((n) * 4096 + 0.5))
+#define UQ_4_12_FLOORED(n)  ((uq4_12_t)((n) * 4096))
 
 // Converts a number to Q24.8 fixed-point format
 #define Q_24_8(n)  ((s32)((n) << 8))

@@ -8,7 +8,7 @@ static void STWI_stop_timer(void);
 static s32 STWI_restart_Command(void);
 static s32 STWI_reset_ClockCounter(void);
 
-struct STWIStatus *gSTWIStatus;
+COMMON_DATA struct STWIStatus *gSTWIStatus = NULL;
 
 void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam)
 {
@@ -40,7 +40,7 @@ void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, b
     gSTWIStatus->error = 0;
     gSTWIStatus->recoveryCount = 0;
     gSTWIStatus->sending = 0;
-    REG_RCNT = 0x100; // TODO: mystery bit? 
+    REG_RCNT = 0x100; // TODO: mystery bit?
     REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
     STWI_init_Callback_M();
     STWI_init_Callback_S();
@@ -594,7 +594,7 @@ static s32 STWI_start_Command(void)
 {
     u16 imeTemp;
 
-    // equivalent to gSTWIStatus->txPacket->rfuPacket32.command, 
+    // equivalent to gSTWIStatus->txPacket->rfuPacket32.command,
     // but the cast here is required to avoid register issue
     *(u32 *)gSTWIStatus->txPacket->rfuPacket8.data = 0x99660000 | (gSTWIStatus->reqLength << 8) | gSTWIStatus->reqActiveCommand;
     REG_SIODATA32 = gSTWIStatus->txPacket->rfuPacket32.command;

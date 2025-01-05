@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Two strike count turns a move into a 2-hit move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DOUBLE_KICK].strikeCount == 2);
+        ASSUME(GetMoveStrikeCount(MOVE_DOUBLE_KICK) == 2);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Three strike count turns a move into a 3-hit move")
     s16 thirdHit;
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TRIPLE_DIVE].strikeCount == 3);
+        ASSUME(GetMoveStrikeCount(MOVE_TRIPLE_DIVE) == 3);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -49,8 +49,8 @@ SINGLE_BATTLE_TEST("Surging Strikes hits 3 times with each hit being a critical 
     s16 thirdHit;
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SURGING_STRIKES].strikeCount == 3);
-        ASSUME(gMovesInfo[MOVE_SURGING_STRIKES].alwaysCriticalHit == TRUE);
+        ASSUME(GetMoveStrikeCount(MOVE_SURGING_STRIKES) == 3);
+        ASSUME(MoveAlwaysCrits(MOVE_SURGING_STRIKES));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

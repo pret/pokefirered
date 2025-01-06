@@ -894,6 +894,7 @@ hms = set([
 
 tm_counts = {}
 non_tm_counts = {}
+lower_to_upper_snake = {}
 
 for m in original_tms:
   move = m.lower().replace('_', '').replace('-', '')
@@ -902,6 +903,7 @@ for m in original_tms:
 
 for m, p in mod_moves.items():
   move = m.lower().replace('_', '').replace('-', '')
+  lower_to_upper_snake[move] = m
   if move in tm_counts or m in hms:
     continue
   count = subprocess.getoutput('grep -woP' + " '[\t]" + move + ":.*$' " + 'filtered_learnsets.ts | grep -P \'"(4|3T)\' | grep -v \'"4L[1-3]\' | wc -l')
@@ -915,7 +917,7 @@ print(' === TMS === ')
 i = 0
 for move, count in tm_counts.items():
   i += 1
-  print("TM%03d" % (int(i),) + ": " + move + ' (' + str(count) + ')')
+  print("TM%03d" % (int(i),) + ": " + lower_to_upper_snake[move] + ' (' + str(count) + ')')
 
 print('\n === NEW LV1 MOVES === ')
 i = 0
@@ -923,5 +925,5 @@ for move, count in non_tm_counts.items():
   if count == 0:
     continue
   i += 1
-  print(str(i) + ": " + move + ' (' + str(count) + ')')
+  print(str(i) + ": " + lower_to_upper_snake[move] + ' (' + str(count) + ')')
 

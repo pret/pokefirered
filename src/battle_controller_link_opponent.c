@@ -1,30 +1,46 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_ai_main.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "battle_setup.h"
-#include "gflib.h"
+#include "battle_tower.h"
+#include "bg.h"
 #include "data.h"
 #include "link.h"
+#include "main.h"
 #include "m4a.h"
+#include "palette.h"
 #include "pokeball.h"
+#include "pokemon.h"
+#include "recorded_battle.h"
+#include "reshow_battle_screen.h"
+#include "sound.h"
+#include "string_util.h"
 #include "task.h"
+#include "text.h"
 #include "util.h"
+#include "window.h"
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
-#include "constants/sound.h"
 #include "constants/trainers.h"
+#include "recorded_battle.h"
+#include "random.h"
 
 static void LinkOpponentHandleLoadMonSprite(u32 battler);
 static void LinkOpponentHandleSwitchInAnim(u32 battler);
 static void LinkOpponentHandleDrawTrainerPic(u32 battler);
+static void LinkOpponentHandleTrainerSlide(u32 battler);
 static void LinkOpponentHandleTrainerSlideBack(u32 battler);
+static void LinkOpponentHandleMoveAnimation(u32 battler);
+static void LinkOpponentHandlePrintString(u32 battler);
 static void LinkOpponentHandleHealthBarUpdate(u32 battler);
 static void LinkOpponentHandleIntroTrainerBallThrow(u32 battler);
 static void LinkOpponentHandleDrawPartyStatusSummary(u32 battler);
 static void LinkOpponentHandleBattleAnimation(u32 battler);
+static void LinkOpponentHandleLinkStandbyMsg(u32 battler);
 static void LinkOpponentHandleEndLinkBattle(u32 battler);
 
 static void LinkOpponentBufferRunCommand(u32 battler);
@@ -33,64 +49,64 @@ static void SwitchIn_HandleSoundAndEnd(u32 battler);
 
 static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
 {
-    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,             // done
-    [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,                        // done
-    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,             // done
-    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,          // done
-    [CONTROLLER_LOADMONSPRITE]            = LinkOpponentHandleLoadMonSprite,            // done
-    [CONTROLLER_SWITCHINANIM]             = LinkOpponentHandleSwitchInAnim,             // done
-    [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,        // done
-    [CONTROLLER_DRAWTRAINERPIC]           = LinkOpponentHandleDrawTrainerPic,           // done
-    [CONTROLLER_TRAINERSLIDE]             = BtlController_Empty,                        // done
-    [CONTROLLER_TRAINERSLIDEBACK]         = LinkOpponentHandleTrainerSlideBack,         // done
-    [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,         // done
-    [CONTROLLER_PALETTEFADE]              = BtlController_Empty,                        // done
-    [CONTROLLER_SUCCESSBALLTHROWANIM]     = BtlController_Empty,                        // done
-    [CONTROLLER_BALLTHROWANIM]            = BtlController_Empty,                        // done
-    [CONTROLLER_PAUSE]                    = BtlController_Empty,                        // done
-    [CONTROLLER_MOVEANIMATION]            = BtlController_HandleMoveAnimation,          // done
-    [CONTROLLER_PRINTSTRING]              = BtlController_HandlePrintString,            // done
-    [CONTROLLER_PRINTSTRINGPLAYERONLY]    = BtlController_Empty,                        // done
-    [CONTROLLER_CHOOSEACTION]             = BtlController_Empty,                        // done
-    [CONTROLLER_YESNOBOX]          = BtlController_Empty,                        // done
-    [CONTROLLER_CHOOSEMOVE]               = BtlController_Empty,                        // done
-    [CONTROLLER_OPENBAG]                  = BtlController_Empty,                        // done
-    [CONTROLLER_CHOOSEPOKEMON]            = BtlController_Empty,                        // done
-    [CONTROLLER_23]                       = BtlController_Empty,                        // done
-    [CONTROLLER_HEALTHBARUPDATE]          = LinkOpponentHandleHealthBarUpdate,          // done
-    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,                        // done
-    [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,       // done
-    [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,        // done
-    [CONTROLLER_STATUSXOR]                = BtlController_Empty,                        // done
-    [CONTROLLER_DATATRANSFER]             = BtlController_Empty,                        // done
-    [CONTROLLER_DMA3TRANSFER]             = BtlController_Empty,                        // done
-    [CONTROLLER_PLAYBGM]                  = BtlController_Empty,                        // done
-    [CONTROLLER_32]                       = BtlController_Empty,                        // done
-    [CONTROLLER_TWORETURNVALUES]          = BtlController_Empty,                        // done
-    [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,                        // done
-    [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,                        // done
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,                        // done
-    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,            // done
-    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,              // done
-    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,           // done
-    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,          // done
-    [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,           // done
-    [CONTROLLER_CANTSWITCH]               = BtlController_Empty,                        // done
-    [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,                 // done
-    [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,       // done
-    [CONTROLLER_FAINTINGCRY]              = BtlController_HandleFaintingCry,            // done
-    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,             // done
-    [CONTROLLER_INTROTRAINERBALLTHROW]    = LinkOpponentHandleIntroTrainerBallThrow,    // done
-    [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = LinkOpponentHandleDrawPartyStatusSummary,   // done
-    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_HandleHidePartyStatusSummary, // done
-    [CONTROLLER_ENDBOUNCE]                = BtlController_Empty,                        // done
-    [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_HandleSpriteInvisibility,     // done
-    [CONTROLLER_BATTLEANIMATION]          = LinkOpponentHandleBattleAnimation,          // done
-    [CONTROLLER_LINKSTANDBYMSG]           = BtlController_Empty,                        // done
-    [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,                        // done
-    [CONTROLLER_ENDLINKBATTLE]            = LinkOpponentHandleEndLinkBattle,            // done
+    [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
+    [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,
+    [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,
+    [CONTROLLER_SETRAWMONDATA]            = BtlController_HandleSetRawMonData,
+    [CONTROLLER_LOADMONSPRITE]            = LinkOpponentHandleLoadMonSprite,
+    [CONTROLLER_SWITCHINANIM]             = LinkOpponentHandleSwitchInAnim,
+    [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,
+    [CONTROLLER_DRAWTRAINERPIC]           = LinkOpponentHandleDrawTrainerPic,
+    [CONTROLLER_TRAINERSLIDE]             = LinkOpponentHandleTrainerSlide,
+    [CONTROLLER_TRAINERSLIDEBACK]         = LinkOpponentHandleTrainerSlideBack,
+    [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,
+    [CONTROLLER_PALETTEFADE]              = BtlController_Empty,
+    [CONTROLLER_SUCCESSBALLTHROWANIM]     = BtlController_Empty,
+    [CONTROLLER_BALLTHROWANIM]            = BtlController_Empty,
+    [CONTROLLER_PAUSE]                    = BtlController_Empty,
+    [CONTROLLER_MOVEANIMATION]            = LinkOpponentHandleMoveAnimation,
+    [CONTROLLER_PRINTSTRING]              = LinkOpponentHandlePrintString,
+    [CONTROLLER_PRINTSTRINGPLAYERONLY]    = BtlController_Empty,
+    [CONTROLLER_CHOOSEACTION]             = BtlController_Empty,
+    [CONTROLLER_YESNOBOX]                 = BtlController_Empty,
+    [CONTROLLER_CHOOSEMOVE]               = BtlController_Empty,
+    [CONTROLLER_OPENBAG]                  = BtlController_Empty,
+    [CONTROLLER_CHOOSEPOKEMON]            = BtlController_Empty,
+    [CONTROLLER_23]                       = BtlController_Empty,
+    [CONTROLLER_HEALTHBARUPDATE]          = LinkOpponentHandleHealthBarUpdate,
+    [CONTROLLER_EXPUPDATE]                = BtlController_Empty,
+    [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
+    [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,
+    [CONTROLLER_STATUSXOR]                = BtlController_Empty,
+    [CONTROLLER_DATATRANSFER]             = BtlController_Empty,
+    [CONTROLLER_DMA3TRANSFER]             = BtlController_Empty,
+    [CONTROLLER_PLAYBGM]                  = BtlController_Empty,
+    [CONTROLLER_32]                       = BtlController_Empty,
+    [CONTROLLER_TWORETURNVALUES]          = BtlController_Empty,
+    [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,
+    [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,
+    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,
+    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,
+    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,
+    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,
+    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,
+    [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
+    [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
+    [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
+    [CONTROLLER_PLAYFANFAREORBGM]         = BtlController_HandlePlayFanfareOrBGM,
+    [CONTROLLER_FAINTINGCRY]              = BtlController_HandleFaintingCry,
+    [CONTROLLER_INTROSLIDE]               = BtlController_HandleIntroSlide,
+    [CONTROLLER_INTROTRAINERBALLTHROW]    = LinkOpponentHandleIntroTrainerBallThrow,
+    [CONTROLLER_DRAWPARTYSTATUSSUMMARY]   = LinkOpponentHandleDrawPartyStatusSummary,
+    [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_HandleHidePartyStatusSummary,
+    [CONTROLLER_ENDBOUNCE]                = BtlController_Empty,
+    [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_HandleSpriteInvisibility,
+    [CONTROLLER_BATTLEANIMATION]          = LinkOpponentHandleBattleAnimation,
+    [CONTROLLER_LINKSTANDBYMSG]           = LinkOpponentHandleLinkStandbyMsg,
+    [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,
+    [CONTROLLER_ENDLINKBATTLE]            = LinkOpponentHandleEndLinkBattle,
     [CONTROLLER_DEBUGMENU]                = BtlController_Empty,
-    [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop                 // done
+    [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
 void SetControllerToLinkOpponent(u32 battler)
@@ -101,7 +117,7 @@ void SetControllerToLinkOpponent(u32 battler)
 
 static void LinkOpponentBufferRunCommand(u32 battler)
 {
-    if (gBattleControllerExecFlags & gBitTable[battler])
+    if (gBattleControllerExecFlags & (1u << battler))
     {
         if (gBattleResources->bufferA[battler][0] < ARRAY_COUNT(sLinkOpponentBufferCommands))
             sLinkOpponentBufferCommands[gBattleResources->bufferA[battler][0]](battler);
@@ -267,7 +283,7 @@ static void Intro_TryShinyAnimShowHealthbox(u32 battler)
 
 static void TryShinyAnimAfterMonAnim(u32 battler)
 {
-    if (gSprites[gBattlerSpriteIds[battler]].animEnded == TRUE
+    if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy
      && gSprites[gBattlerSpriteIds[battler]].x2 == 0)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim)
@@ -300,14 +316,19 @@ static void SwitchIn_HandleSoundAndEnd(u32 battler)
 {
     if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive && !IsCryPlayingOrClearCrySongs())
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
-        LinkOpponentBufferExecCompleted(battler);
+        if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy
+            || gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy_2)
+        {
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+            LinkOpponentBufferExecCompleted(battler);
+        }
     }
 }
 
 static void SwitchIn_ShowHealthbox(u32 battler)
 {
-    if (gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim)
+    if (gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim
+     && gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
     {
         gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = FALSE;
         gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
@@ -354,7 +375,7 @@ static void LinkOpponentBufferExecCompleted(u32 battler)
     }
     else
     {
-        gBattleControllerExecFlags &= ~gBitTable[battler];
+        gBattleControllerExecFlags &= ~(1u << battler);
     }
 }
 
@@ -426,9 +447,32 @@ static void LinkOpponentHandleDrawTrainerPic(u32 battler)
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, TRUE, xPos, 40, -1);
 }
 
+static void LinkOpponentHandleTrainerSlide(u32 battler)
+{
+    u32 trainerPicId;
+
+    if (battler == B_POSITION_OPPONENT_LEFT)
+        trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_A);
+    else
+        trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_B);
+
+    BtlController_HandleTrainerSlide(battler, trainerPicId);
+    LinkOpponentBufferExecCompleted(battler); // Possibly a bug, because execution should be completed after the slide in finishes. See Controller_WaitForTrainerPic.
+}
+
 static void LinkOpponentHandleTrainerSlideBack(u32 battler)
 {
     BtlController_HandleTrainerSlideBack(battler, 35, FALSE);
+}
+
+static void LinkOpponentHandleMoveAnimation(u32 battler)
+{
+    BtlController_HandleMoveAnimation(battler);
+}
+
+static void LinkOpponentHandlePrintString(u32 battler)
+{
+    BtlController_HandlePrintString(battler);
 }
 
 static void LinkOpponentHandleHealthBarUpdate(u32 battler)
@@ -451,13 +495,22 @@ static void LinkOpponentHandleBattleAnimation(u32 battler)
     BtlController_HandleBattleAnimation(battler, FALSE);
 }
 
+static void LinkOpponentHandleLinkStandbyMsg(u32 battler)
+{
+    // RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
+    LinkOpponentBufferExecCompleted(battler);
+}
+
 static void LinkOpponentHandleEndLinkBattle(u32 battler)
 {
+    // RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4]);
+
     if (gBattleResources->bufferA[battler][1] == B_OUTCOME_DREW)
         gBattleOutcome = gBattleResources->bufferA[battler][1];
     else
         gBattleOutcome = gBattleResources->bufferA[battler][1] ^ B_OUTCOME_DREW;
 
+    // gSaveBlock2Ptr->frontier.disableRecordBattle = gBattleResources->bufferA[battler][2];
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
     LinkOpponentBufferExecCompleted(battler);

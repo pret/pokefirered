@@ -36,7 +36,7 @@
 #define BAG_ITEMS_COUNT     42
 #define BAG_KEYITEMS_COUNT  30
 #define BAG_POKEBALLS_COUNT 13
-#define BAG_TMHM_COUNT      116
+#define BAG_TMHM_COUNT      178  // Was originally 58.
 #define BAG_BERRIES_COUNT   43
 #define OBJECT_EVENTS_COUNT 16
 #define OBJECT_EVENT_TEMPLATES_COUNT 64

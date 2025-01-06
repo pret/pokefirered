@@ -98,7 +98,7 @@ u16 GetSpeciesFromGroup(u16 species, u16 randInput) {
     random = Random() % 200;
   }
 
-  if (random < (8 - BadgeCount()) && group != gGroup_Water1 && group != gGroup_Water2) {
+  if (random < (8 - BadgeCount()) && group != gGroup_WaterIce1 && group != gGroup_WaterIce2) {
     // 0-4% chance that the player found the "rare" species
     // that is unique to the current (non-water) route. We
     // overwrite `group` and ignore `species`.

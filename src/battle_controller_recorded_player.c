@@ -72,7 +72,7 @@ static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 ba
     [CONTROLLER_PRINTSTRING]              = RecordedPlayerHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = BtlController_Empty,
     [CONTROLLER_CHOOSEACTION]             = RecordedPlayerHandleChooseAction,
-    [CONTROLLER_YESNOBOX]          = BtlController_Empty,
+    [CONTROLLER_YESNOBOX]                 = BtlController_Empty,
     [CONTROLLER_CHOOSEMOVE]               = RecordedPlayerHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = RecordedPlayerHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = RecordedPlayerHandleChoosePokemon,
@@ -121,7 +121,7 @@ void SetControllerToRecordedPlayer(u32 battler)
 
 static void RecordedPlayerBufferRunCommand(u32 battler)
 {
-    if (gBattleControllerExecFlags & gBitTable[battler])
+    if (gBattleControllerExecFlags & (1u << battler))
     {
         if (gBattleResources->bufferA[battler][0] < ARRAY_COUNT(sRecordedPlayerBufferCommands))
             sRecordedPlayerBufferCommands[gBattleResources->bufferA[battler][0]](battler);
@@ -351,7 +351,7 @@ static void RecordedPlayerBufferExecCompleted(u32 battler)
     }
     else
     {
-        gBattleControllerExecFlags &= ~gBitTable[battler];
+        gBattleControllerExecFlags &= ~(1u << battler);
     }
 }
 
@@ -430,17 +430,40 @@ static void RecordedPlayerHandlePrintString(u32 battler)
     BtlController_HandlePrintString(battler);
 }
 
+// static void ChooseActionInBattlePalace(u32 battler)
+// {
+//     if (gBattleCommunication[4] >= gBattlersCount / 2)
+//     {
+//         BtlController_EmitTwoReturnValues(battler, BUFFER_B, RecordedBattle_GetBattlerAction(RECORDED_BATTLE_PALACE_ACTION, battler), 0);
+//         RecordedPlayerBufferExecCompleted(battler);
+//     }
+// }
+
 static void RecordedPlayerHandleChooseAction(u32 battler)
 {
-    BtlController_EmitTwoReturnValues(battler, BUFFER_B, RecordedBattle_GetBattlerAction(RECORDED_ACTION_TYPE, battler), 0);
-    RecordedPlayerBufferExecCompleted(battler);
+    if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+    {
+        // gBattlerControllerFuncs[battler] = ChooseActionInBattlePalace;
+    }
+    else
+    {
+        BtlController_EmitTwoReturnValues(battler, BUFFER_B, RecordedBattle_GetBattlerAction(RECORDED_ACTION_TYPE, battler), 0);
+        RecordedPlayerBufferExecCompleted(battler);
+    }
 }
 
 static void RecordedPlayerHandleChooseMove(u32 battler)
 {
-    u8 moveId = RecordedBattle_GetBattlerAction(RECORDED_MOVE_SLOT, battler);
-    u8 target = RecordedBattle_GetBattlerAction(RECORDED_MOVE_TARGET, battler);
-    BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, moveId | (target << 8));
+    if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+    {
+        // BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, ChooseMoveAndTargetInBattlePalace(battler));
+    }
+    else
+    {
+        u8 moveId = RecordedBattle_GetBattlerAction(RECORDED_MOVE_SLOT, battler);
+        u8 target = RecordedBattle_GetBattlerAction(RECORDED_MOVE_TARGET, battler);
+        BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, moveId | (target << 8));
+    }
 
     RecordedPlayerBufferExecCompleted(battler);
 }

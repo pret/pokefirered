@@ -70,7 +70,7 @@ static void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler
     [CONTROLLER_PRINTSTRING]              = OakOldManHandlePrintString,                 // done
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = OakOldManHandlePrintSelectionString,        // done
     [CONTROLLER_CHOOSEACTION]             = OakOldManHandleChooseAction,                // done
-    [CONTROLLER_UNKNOWNYESNOBOX]          = BtlController_Empty,                        // done
+    [CONTROLLER_YESNOBOX]          = BtlController_Empty,                        // done
     [CONTROLLER_CHOOSEMOVE]               = OakOldManHandleChooseMove,                  // done
     [CONTROLLER_OPENBAG]                  = OakOldManHandleChooseItem,                  // done
     [CONTROLLER_CHOOSEPOKEMON]            = OakOldManHandleChoosePokemon,               // done
@@ -291,7 +291,7 @@ static void OpenPartyMenuToChooseMon(u32 battler)
         caseId = gTasks[gBattleControllerData[battler]].data[0];
         DestroyTask(gBattleControllerData[battler]);
         FreeAllWindowBuffers();
-        OpenPartyMenuInTutorialBattle(caseId);
+        OpenPartyMenuInBattle(caseId);
     }
 }
 

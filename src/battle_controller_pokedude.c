@@ -95,7 +95,7 @@ static void (*const sPokedudeBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler)
     [CONTROLLER_PRINTSTRING]              = BtlController_HandlePrintString,            // done
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = PokedudeHandlePrintSelectionString,         // done
     [CONTROLLER_CHOOSEACTION]             = PokedudeHandleChooseAction,                 // done
-    [CONTROLLER_UNKNOWNYESNOBOX]          = BtlController_Empty,                        // done
+    [CONTROLLER_YESNOBOX]          = BtlController_Empty,                        // done
     [CONTROLLER_CHOOSEMOVE]               = PokedudeHandleChooseMove,                   // done
     [CONTROLLER_OPENBAG]                  = PokedudeHandleChooseItem,                   // done
     [CONTROLLER_CHOOSEPOKEMON]            = PokedudeHandleChoosePokemon,                // done

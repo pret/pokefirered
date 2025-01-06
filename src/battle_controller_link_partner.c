@@ -49,7 +49,7 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battl
     [CONTROLLER_PRINTSTRING]              = BtlController_HandlePrintString,            // done
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = BtlController_Empty,                        // done
     [CONTROLLER_CHOOSEACTION]             = BtlController_Empty,                        // done
-    [CONTROLLER_UNKNOWNYESNOBOX]          = BtlController_Empty,                        // done
+    [CONTROLLER_YESNOBOX]          = BtlController_Empty,                        // done
     [CONTROLLER_CHOOSEMOVE]               = BtlController_Empty,                        // done
     [CONTROLLER_OPENBAG]                  = BtlController_Empty,                        // done
     [CONTROLLER_CHOOSEPOKEMON]            = BtlController_Empty,                        // done

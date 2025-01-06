@@ -24,7 +24,7 @@ extern struct BagStruct gBagMenuState;
 extern u16 gSpecialVar_ItemId;
 
 // Exported ROM declarations
-void CB2_SetUpReshowBattleScreenAfterMenu(void);
+void SetBagOpenFalse(void);
 void ResetBagCursorPositions(void);
 void InitPokedudeBag(u8);
 void CB2_BagMenuFromStartMenu(void);

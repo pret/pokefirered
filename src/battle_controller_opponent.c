@@ -68,7 +68,7 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler)
     [CONTROLLER_PRINTSTRING]              = BtlController_HandlePrintString,            // done
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = BtlController_Empty,                        // done
     [CONTROLLER_CHOOSEACTION]             = OpponentHandleChooseAction,                 // done
-    [CONTROLLER_UNKNOWNYESNOBOX]          = BtlController_Empty,                        // done
+    [CONTROLLER_YESNOBOX]          = BtlController_Empty,                        // done
     [CONTROLLER_CHOOSEMOVE]               = OpponentHandleChooseMove,                   // done
     [CONTROLLER_OPENBAG]                  = OpponentHandleChooseItem,                   // done
     [CONTROLLER_CHOOSEPOKEMON]            = OpponentHandleChoosePokemon,                // done

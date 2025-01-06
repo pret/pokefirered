@@ -78,7 +78,7 @@ void ClearSelectedPartyOrder(void);
 void ChooseMonForTradingBoard(u8 menuType, MainCallback callback);
 void ChooseMonForMoveTutor(void);
 void ChooseMonForWirelessMinigame(void);
-void OpenPartyMenuInTutorialBattle(u8 partyAction);
+void OpenPartyMenuInBattle(u8 partyAction);
 void Pokedude_OpenPartyMenuInBattle(void);
 void Pokedude_ChooseMonForInBattleItem(void);
 void EnterPartyFromItemMenuInBattle(void);

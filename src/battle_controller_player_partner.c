@@ -36,6 +36,8 @@ static void PlayerPartnerHandleLoadMonSprite(u32 battler);
 static void PlayerPartnerHandleSwitchInAnim(u32 battler);
 static void PlayerPartnerHandleDrawTrainerPic(u32 battler);
 static void PlayerPartnerHandleTrainerSlideBack(u32 battler);
+static void PlayerPartnerHandleMoveAnimation(u32 battler);
+static void PlayerPartnerHandlePrintString(u32 battler);
 static void PlayerPartnerHandleChooseAction(u32 battler);
 static void PlayerPartnerHandleChooseMove(u32 battler);
 static void PlayerPartnerHandleChoosePokemon(u32 battler);
@@ -66,11 +68,11 @@ static void (*const sPlayerPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 bat
     [CONTROLLER_SUCCESSBALLTHROWANIM]     = BtlController_Empty,
     [CONTROLLER_BALLTHROWANIM]            = BtlController_Empty,
     [CONTROLLER_PAUSE]                    = BtlController_Empty,
-    [CONTROLLER_MOVEANIMATION]            = BtlController_HandleMoveAnimation,
-    [CONTROLLER_PRINTSTRING]              = BtlController_HandlePrintString,
+    [CONTROLLER_MOVEANIMATION]            = PlayerPartnerHandleMoveAnimation,
+    [CONTROLLER_PRINTSTRING]              = PlayerPartnerHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = BtlController_Empty,
     [CONTROLLER_CHOOSEACTION]             = PlayerPartnerHandleChooseAction,
-    [CONTROLLER_YESNOBOX]          = BtlController_Empty,
+    [CONTROLLER_YESNOBOX]                 = BtlController_Empty,
     [CONTROLLER_CHOOSEMOVE]               = PlayerPartnerHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = BtlController_Empty,
     [CONTROLLER_CHOOSEPOKEMON]            = PlayerPartnerHandleChoosePokemon,
@@ -119,7 +121,7 @@ void SetControllerToPlayerPartner(u32 battler)
 
 static void PlayerPartnerBufferRunCommand(u32 battler)
 {
-    if (gBattleControllerExecFlags & gBitTable[battler])
+    if (gBattleControllerExecFlags & (1u << battler))
     {
         if (gBattleResources->bufferA[battler][0] < ARRAY_COUNT(sPlayerPartnerBufferCommands))
             sPlayerPartnerBufferCommands[gBattleResources->bufferA[battler][0]](battler);
@@ -272,7 +274,7 @@ static void PlayerPartnerBufferExecCompleted(u32 battler)
     }
     else
     {
-        gBattleControllerExecFlags &= ~gBitTable[battler];
+        gBattleControllerExecFlags &= ~(1u << battler);
     }
 }
 
@@ -328,6 +330,16 @@ static void PlayerPartnerHandleTrainerSlideBack(u32 battler)
     BtlController_HandleTrainerSlideBack(battler, 35, FALSE);
 }
 
+static void PlayerPartnerHandleMoveAnimation(u32 battler)
+{
+    BtlController_HandleMoveAnimation(battler);
+}
+
+static void PlayerPartnerHandlePrintString(u32 battler)
+{
+    BtlController_HandlePrintString(battler);
+}
+
 static void PlayerPartnerHandleChooseAction(u32 battler)
 {
     AI_TrySwitchOrUseItem(battler);
@@ -341,10 +353,11 @@ static void PlayerPartnerHandleChooseMove(u32 battler)
 
     chosenMoveId = gBattleStruct->aiMoveOrAction[battler];
     gBattlerTarget = gBattleStruct->aiChosenTarget[battler];
+    u32 moveTarget = GetBattlerMoveTargetType(battler, moveInfo->moves[chosenMoveId]);
 
-    if (gMovesInfo[moveInfo->moves[chosenMoveId]].target & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
+    if (moveTarget & (MOVE_TARGET_USER | MOVE_TARGET_USER_OR_SELECTED))
         gBattlerTarget = battler;
-    else if (gMovesInfo[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_BOTH)
+    else if (moveTarget & MOVE_TARGET_BOTH)
     {
         gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         if (gAbsentBattlerFlags & (1u << gBattlerTarget))
@@ -364,7 +377,6 @@ static void PlayerPartnerHandleChooseMove(u32 battler)
 
     PlayerPartnerBufferExecCompleted(battler);
 }
-
 
 static void PlayerPartnerHandleChoosePokemon(u32 battler)
 {
@@ -419,9 +431,9 @@ static void PlayerPartnerHandleIntroTrainerBallThrow(u32 battler)
     if (gPartnerTrainerId > TRAINER_PARTNER(PARTNER_NONE))
         trainerPal = gTrainerBacksprites[gBattlePartners[gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerPic].palette.data;
     else if (IsAiVsAiBattle())
-        trainerPal = gTrainerBacksprites[GetTrainerPicFromId(gPartnerTrainerId)].palette.data;
+        trainerPal = gTrainerSprites[GetTrainerPicFromId(gPartnerTrainerId)].palette.data;
     else
-        trainerPal = gTrainerBacksprites[GetBattleTowerTrainerFrontSpriteId(gPartnerTrainerId)].palette.data; // 2 vs 2 multi battle in Battle Frontier, load front sprite and pal.
+        trainerPal = gTrainerSprites[GetBattleTowerTrainerFrontSpriteId(gPartnerTrainerId)].palette.data; // 2 vs 2 multi battle in Battle Frontier, load front sprite and pal.
 
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F9, trainerPal, 24, Controller_PlayerPartnerShowIntroHealthbox, StartAnimLinearTranslation);
 }

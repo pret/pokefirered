@@ -699,7 +699,7 @@ static void OakOldManHandlePrintString(u32 battler)
     }
     else
     {
-        BufferStringBattle(battler, *stringId);
+        BufferStringBattle(*stringId, battler);
         if (BattleStringShouldBeColored(*stringId))
             BattlePutTextOnWindow(gDisplayedStringBattle, (B_WIN_MSG | B_TEXT_FLAG_NPC_CONTEXT_FONT));
         else

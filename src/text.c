@@ -21,6 +21,8 @@
 
 #define CURSOR_DELAY 8
 
+#define DARK_DOWN_ARROW_OFFSET 256
+
 extern const struct OamData gOamData_AffineOff_ObjNormal_16x16;
 
 static u16 FontFunc_Small(struct TextPrinter *textPrinter);
@@ -91,10 +93,7 @@ static const u8 sFontHalfRowOffsets[] =
     0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00
 };
 
-static const u8 sDownArrowTiles[]         = INCBIN_U8("graphics/fonts/down_arrow.4bpp");
-static const u8 sDarkDownArrowTiles[]     = INCBIN_U8("graphics/fonts/down_arrow_RS.4bpp");
-static const u8 sTinyArrowTiles[]         = INCBIN_U8("graphics/fonts/down_arrow_2.4bpp");
-static const u8 sTinyDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_RS_2.4bpp");
+static const u8 sDownArrowTiles[]             = INCBIN_U8("graphics/fonts/down_arrows.4bpp");
 static const u8 sDoubleArrowTiles1[]       = INCBIN_U8("graphics/fonts/down_arrow_3.4bpp");
 static const u8 sDoubleArrowTiles2[]       = INCBIN_U8("graphics/fonts/down_arrow_4.4bpp");
 
@@ -789,7 +788,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                     arrowTiles = sDownArrowTiles;
                     break;
                 case 1:
-                    arrowTiles = sDarkDownArrowTiles;
+                    arrowTiles = &sDownArrowTiles[DARK_DOWN_ARROW_OFFSET];
                     break;
             }
 
@@ -897,7 +896,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *c
                     arrowTiles = sDownArrowTiles;
                     break;
                 case 1:
-                    arrowTiles = sDarkDownArrowTiles;
+                    arrowTiles = &sDownArrowTiles[DARK_DOWN_ARROW_OFFSET];
                     break;
             }
 

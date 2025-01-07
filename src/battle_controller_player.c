@@ -1060,7 +1060,10 @@ void HandleMoveSwitching(u32 battler)
             }
         }
 
-        gBattlerControllerFuncs[battler] = HandleInputChooseMove;
+        if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+            gBattlerControllerFuncs[battler] = OakOldManHandleInputChooseMove;
+        else
+            gBattlerControllerFuncs[battler] = HandleInputChooseMove;
         gMoveSelectionCursor[battler] = gMultiUsePlayerCursor;
         MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
         MoveSelectionDisplayPpString(battler);

@@ -123,9 +123,9 @@ void SetControllerToOakOrOldMan(u32 battler)
 
 static void OakOldManBufferRunCommand(u32 battler)
 {
-    if (gBattleControllerExecFlags & gBitTable[battler])
+    if (gBattleControllerExecFlags & (1u << battler))
     {
-        if (gBattleResources->bufferA[battler][0] < NELEMS(sOakOldManBufferCommands))
+        if (gBattleResources->bufferA[battler][0] < ARRAY_COUNT(sOakOldManBufferCommands))
             sOakOldManBufferCommands[gBattleResources->bufferA[battler][0]](battler);
         else
             OakOldManBufferExecCompleted(battler);
@@ -277,7 +277,7 @@ static void OakOldManSetBattleEndCallbacks(u32 battler)
 void OakOldManHandleInputChooseMove(u32 battler)
 {
     HandleInputChooseMove(battler);
-    if (!(gBattleControllerExecFlags & gBitTable[battler]))
+    if (!(gBattleControllerExecFlags & (1u << battler)))
         OakOldManBufferExecCompleted(battler);
 }
 
@@ -660,7 +660,7 @@ static void OakOldManBufferExecCompleted(u32 battler)
     }
     else
     {
-        gBattleControllerExecFlags &= ~gBitTable[battler];
+        gBattleControllerExecFlags &= ~(1u << battler);
     }
 }
 

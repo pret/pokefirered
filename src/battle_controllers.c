@@ -1334,8 +1334,6 @@ static void UNUSED BtlController_EmitCmd32(u32 battler, u32 bufferId, u16 size, 
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, size + 3);
 }
 
-
-//TODO: compare values to pokeemerald?
 void BtlController_EmitTwoReturnValues(u32 battler, u32 bufferId, u8 ret8, u32 ret32)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_TWORETURNVALUES;

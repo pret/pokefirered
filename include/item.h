@@ -18,7 +18,9 @@ struct Item
     u8 pluralName[ITEM_NAME_PLURAL_LENGTH];
     u8 holdEffect;
     u8 holdEffectParam;
-    u8 importance;
+    u8 importance:2;
+    u8 notConsumed:1;
+    u8 padding:5;
     u8 pocket;
     u8 type;
     u8 battleUsage;
@@ -57,6 +59,7 @@ u8 ItemId_GetHoldEffectParam(u16 itemId);
 const u8 *ItemId_GetDescription(u16 itemId);
 bool32 ItemId_CopyDescription(u8 *a, u32 itemId, u32 c);
 u8 ItemId_GetImportance(u16 itemId);
+u8 ItemId_GetConsumability(u16 itemId);
 u8 ItemId_GetUnknownValue(u16 itemId);
 u8 ItemId_GetPocket(u16 itemId);
 u8 ItemId_GetType(u16 itemId);

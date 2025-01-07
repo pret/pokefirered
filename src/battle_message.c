@@ -2423,7 +2423,7 @@ static const u16 sGrammarMoveUsedTable[] =
 
 static const u8 sRecordedBattleTextSpeeds[] = {8, 4, 1, 0};
 
-void BufferStringBattle(u32 battler, u16 stringId)
+void BufferStringBattle(u16 stringId, u32 battler)
 {
     s32 i;
     const u8 *stringPtr = NULL;

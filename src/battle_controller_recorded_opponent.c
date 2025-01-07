@@ -74,7 +74,7 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 
     [CONTROLLER_PRINTSTRING]              = RecordedOpponentHandlePrintString,
     [CONTROLLER_PRINTSTRINGPLAYERONLY]    = BtlController_Empty,
     [CONTROLLER_CHOOSEACTION]             = RecordedOpponentHandleChooseAction,
-    [CONTROLLER_UNKNOWNYESNOBOX]          = BtlController_Empty,
+    [CONTROLLER_YESNOBOX]                 = BtlController_Empty,
     [CONTROLLER_CHOOSEMOVE]               = RecordedOpponentHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = RecordedOpponentHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = RecordedOpponentHandleChoosePokemon,
@@ -460,9 +460,16 @@ static void RecordedOpponentHandleChooseAction(u32 battler)
 
 static void RecordedOpponentHandleChooseMove(u32 battler)
 {
-    u8 moveId = RecordedBattle_GetBattlerAction(RECORDED_MOVE_SLOT, battler);
-    u8 target = RecordedBattle_GetBattlerAction(RECORDED_MOVE_TARGET, battler);
-    BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, moveId | (target << 8));
+    if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+    {
+        // BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, ChooseMoveAndTargetInBattlePalace(battler));
+    }
+    else
+    {
+        u8 moveId = RecordedBattle_GetBattlerAction(RECORDED_MOVE_SLOT, battler);
+        u8 target = RecordedBattle_GetBattlerAction(RECORDED_MOVE_TARGET, battler);
+        BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, moveId | (target << 8));
+    }
 
     RecordedOpponentBufferExecCompleted(battler);
 }

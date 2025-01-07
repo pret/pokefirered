@@ -158,7 +158,7 @@ enum
     CONTROLLER_PRINTSTRING,
     CONTROLLER_PRINTSTRINGPLAYERONLY,
     CONTROLLER_CHOOSEACTION,
-    CONTROLLER_UNKNOWNYESNOBOX,
+    CONTROLLER_YESNOBOX,
     CONTROLLER_CHOOSEMOVE,
     CONTROLLER_OPENBAG,
     CONTROLLER_CHOOSEPOKEMON,
@@ -307,17 +307,23 @@ void SetBattleEndCallbacks(u32 battler);
 void SetControllerToPlayer(u32 battler);
 void PlayerHandleBallThrowAnim(u32 battler);
 void SpriteCB_FreePlayerSpriteLoadMonSpriteOld(struct Sprite *sprite);
-void SetCB2ToReshowScreenAfterMenu(void);
-void SetCB2ToReshowScreenAfterMenu2(void);
+void CB2_SetUpReshowBattleScreenAfterMenu(void);
+void CB2_SetUpReshowBattleScreenAfterMenu2(void);
 void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);
 void ActionSelectionCreateCursorAt(u8 cursorPos, u8 unused);
 void ActionSelectionDestroyCursorAt(u8 cursorPos);
 void InitMoveSelectionsVarsAndStrings(u32 battler);
 void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
 void MoveSelectionDestroyCursorAt(u8 cursorPos);
-void HandleInputChooseMove(u32 battler);
 u32 LinkPlayerGetTrainerPicId(u32 multiplayerId);
 void PlayerHandleExpUpdate(u32 battler);
+void PlayerHandleChooseMove(u32 battler);
+void HandleInputChooseMove(u32 battler);
+void HandleInputChooseTarget(u32 battler);
+void HandleInputShowEntireFieldTargets(u32 battler);
+void HandleInputShowTargets(u32 battler);
+void HandleMoveSwitching(u32 battler);
+void HandleChooseMoveAfterDma3(u32 battler);
 
 // recorded player controller
 void SetControllerToRecordedPlayer(u32 battler);

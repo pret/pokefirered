@@ -782,5 +782,6 @@ u16 HoennNumToSpecies(u16 hoennNum);
 u8 CopyMonToPC(struct Pokemon *mon);
 void UpdateDaysPassedSinceFormChange(u16 days);
 void TrySetDayLimitToFormChange(struct Pokemon *mon);
+u32 CheckDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler);
 
 #endif // GUARD_POKEMON_H

@@ -73,11 +73,11 @@
 			safeguard: ["8M", "7M", "7V", "6M", "5M", "4E", "3E"],
 			skullbash: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			sludge: ["7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 6, level: 100, isHidden: true, moves: ["solarbeam", "frenzyplant", "synthesis", "grasspledge"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	charizard: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["9M", "4T"],
@@ -175,22 +175,22 @@
 			outrage: ["9M", "8M", "8V", "7E", "7V", "6E", "5T", "5E", "4E", "3E"],
 			rockslide: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			swordsdance: ["9M", "8M", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 70, moves: ["wingattack", "slash", "dragonrage", "firespin"], pokeball: "pokeball"},
-			{generation: 6, level: 36, gender: "M", moves: ["firefang", "flameburst", "airslash", "inferno"], pokeball: "cherishball"},
-			{generation: 6, level: 36, gender: "M", moves: ["firefang", "airslash", "dragonclaw", "dragonrage"], pokeball: "cherishball"},
-			{generation: 6, level: 36, shiny: true, gender: "M", moves: ["overheat", "solarbeam", "focusblast", "holdhands"], pokeball: "cherishball"},
-			{generation: 6, level: 100, isHidden: true, moves: ["flareblitz", "blastburn", "scaryface", "firepledge"], pokeball: "cherishball"},
-			{generation: 6, level: 36, gender: "M", nature: "Serious", moves: ["flamethrower", "ember", "firespin", "flameburst"], pokeball: "cherishball"},
-			{generation: 7, level: 40, nature: "Jolly", moves: ["dragonclaw", "dragonrage", "fly", "flareblitz"], pokeball: "cherishball"},
-			{generation: 7, level: 40, gender: "M", nature: "Jolly", moves: ["flareblitz", "dragonclaw", "fly", "dragonrage"], pokeball: "cherishball"},
-			{generation: 7, level: 40, gender: "M", nature: "Adamant", moves: ["flamethrower", "dragonrage", "slash", "seismictoss"], pokeball: "pokeball"},
-			{generation: 7, level: 50, moves: ["dragondance", "flareblitz", "fly", "earthquake"], pokeball: "cherishball"},
-			{generation: 8, level: 50, gender: "M", nature: "Adamant", moves: ["flamethrower", "dragontail", "slash", "seismictoss"], pokeball: "pokeball"},
-			{generation: 9, level: 50, nature: "Adamant", ivs: {hp: 20, atk: 31, def: 20, spa: 20, spd: 20, spe: 31}, moves: ["crunch", "flareblitz", "acrobatics", "bellydrum"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	
+	
 	blastoise: {
 			aquatail: ["9L30", "8L30", "7T", "7L33", "6T", "6L32", "5T", "5L32", "4T", "4L32"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -279,12 +279,12 @@
 			refresh: ["7E", "6E", "5E", "4E", "3E"],
 			waterspout: ["9E", "8E", "7E", "6E", "5E", "4E"],
 			yawn: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 70, moves: ["protect", "raindance", "skullbash", "hydropump"], pokeball: "pokeball"},
-			{generation: 6, level: 100, isHidden: true, moves: ["hydropump", "hydrocannon", "irondefense", "waterpledge"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	butterfree: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M", "3S0"],
 			aircutter: ["5D", "4T"],
@@ -344,16 +344,16 @@
 			twister: ["4T"],
 			uturn: ["8M", "8V", "7M", "6M", "5M", "4M"],
 			whirlwind: ["8L20", "8V", "7L29", "7V", "6L22", "5L22", "4L22", "3L23"],
-		},
-		eventData: [
-			{generation: 3, level: 30, moves: ["morningsun", "psychic", "sleeppowder", "aerialace"]},
-		],
-		encounters: [
-			{generation: 2, level: 7},
-			{generation: 4, level: 6},
-			{generation: 7, level: 9},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+			
+	
+	
 	beedrill: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			agility: ["8V", "7L38", "7V", "6L31", "5L31", "4L31", "3L40"],
@@ -414,15 +414,15 @@
 			twineedle: ["8V", "7L1", "7V", "6L16", "5L16", "4L16", "3L20", "3S0"],
 			uturn: ["8V", "7M", "6M", "5M", "4M"],
 			xscissor: ["8V", "7M", "6M", "5M", "4M"],
-		},
-		eventData: [
-			{generation: 3, level: 30, moves: ["batonpass", "sludgebomb", "twineedle", "swordsdance"]},
-		],
-		encounters: [
-			{generation: 2, level: 7},
-			{generation: 4, level: 6},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+	
+	
 	pidgeot: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			agility: ["8V", "7L32", "7V", "6L32", "5L32", "4L32", "3L48"],
@@ -482,14 +482,14 @@
 			pursuit: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			steelwing: ["7M", "7E", "7V", "6M", "6E", "5E", "5D", "4M", "4E", "3M", "3E"],
 			uproar: ["7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
-		},
-		eventData: [
-			{generation: 5, level: 61, gender: "M", nature: "Naughty", ivs: {hp: 30, atk: 30, def: 30, spa: 30, spd: 30, spe: 30}, abilities: ["keeneye"], moves: ["whirlwind", "wingattack", "skyattack", "mirrormove"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 7, level: 29},
-		],
-	},
+		
+		
+			
+	
+		
+			
+	
+	
 	raticate: {
 			assurance: ["7L19", "6L29", "5L29", "4L29"],
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
@@ -567,16 +567,16 @@
 			screech: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			swagger: ["7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			uproar: ["7T", "7E", "6T", "6E", "5T", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 34, moves: ["refresh", "superfang", "scaryface", "hyperfang"]},
-		],
-		encounters: [
-			{generation: 1, level: 15},
-			{generation: 2, level: 6},
-			{generation: 4, level: 13},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+			
+	
+	
 	fearow: {
 			aerialace: ["7M", "7L15", "6M", "6L17", "5M", "5L17", "4M", "4L17", "3M"],
 			agility: ["8V", "7L27", "7V", "6L29", "5L29", "4L29", "3L47"],
@@ -636,13 +636,13 @@
 			triattack: ["8V", "7E", "7V", "6E", "5E", "4E", "3E"],
 			uproar: ["7T", "7E", "6T", "6E", "5T", "5E", "4E"],
 			whirlwind: ["7E", "7V", "6E", "5E", "4E"],
-		},
-		encounters: [
-			{generation: 1, level: 19},
-			{generation: 2, level: 7},
-			{generation: 4, level: 7},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	arbok: {
 			acid: ["9L20", "8V", "7L20", "7V", "6L20", "5L20", "4L20", "3L38"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -714,15 +714,15 @@
 			slam: ["8V", "7E", "7V", "6E", "5E", "4E", "3E"],
 			spite: ["9M", "9E", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			switcheroo: ["9E", "7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 33, moves: ["refresh", "sludgebomb", "glare", "bite"]},
-		],
-		encounters: [
-			{generation: 2, level: 10},
-			{generation: 4, level: 10},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+	
+	
 	raichu: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			bodyslam: ["9M", "8M", "7V", "3T"],
@@ -794,8 +794,8 @@
 			tickle: ["9E", "8E", "7E", "6E", "5E", "4E"],
 			volttackle: ["9R", "9S6", "8R", "7R", "6E", "5E", "4E", "4S4", "4S5", "3E"],
 			wish: ["9E", "8E", "7E", "6E", "5E", "4E", "3E", "3S1"],
-		},
-	},
+		
+	
 	sandslash: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -873,12 +873,12 @@
 			rockslide: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			safeguard: ["8M", "7M", "7V", "6M", "5M", "4E", "3E"],
 			swordsdance: ["9M", "9L39", "8M", "8L39", "8V", "7M", "7L38", "7V", "6M", "6L38", "5M", "5L38", "4M", "4E", "3T", "3E"],
-		},
-		encounters: [
-			{generation: 2, level: 10},
-			{generation: 4, level: 10},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	nidoqueen: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -974,11 +974,11 @@
 			skullbash: ["8E", "7E", "7V", "6E", "5E", "4E"],
 			supersonic: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			takedown: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 6, level: 41, perfectIVs: 2, abilities: ["poisonpoint"], moves: ["tailwhip", "doublekick", "poisonsting", "bodyslam"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	nidoking: {
 			aquatail: ["7T", "7S0", "6T", "5T", "4T"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -1076,11 +1076,11 @@
 			suckerpunch: ["8E", "7E", "6E", "5E", "4T", "4E"],
 			supersonic: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			takedown: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 7, level: 68, abilities: ["poisonpoint"], moves: ["earthquake", "poisonjab", "throatchop", "aquatail"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	clefable: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			blizzard: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -1181,8 +1181,8 @@
 			splash: ["9L1", "8L1", "7E", "7V", "6E", "5E", "4E", "3E"],
 			substitute: ["9M", "8M", "7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			wish: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
-		},
-	},
+		
+	
 	ninetales: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			bodyslam: ["9M", "8M", "7V", "3T"],
@@ -1246,11 +1246,11 @@
 			powerswap: ["8M", "7E", "6E", "5E", "4E"],
 			psychup: ["9M", "7M", "6M", "5M", "4M", "4E", "3E"],
 			spite: ["9M", "9L12", "8L12", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 5, level: 50, gender: "M", nature: "Bold", ivs: {def: 31}, isHidden: true, moves: ["heatwave", "solarbeam", "psyshock", "willowisp"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	wigglytuff: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			blizzard: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -1342,11 +1342,11 @@
 			perishsong: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			present: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			wish: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 1, level: 22},
-		],
-	},
+		
+		
+			
+	
+	
 	crobat: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["8L27", "7L19", "6L19", "5L27", "4T", "4L27", "3L35"],
@@ -1420,12 +1420,12 @@
 			quickattack: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			whirlwind: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			zenheadbutt: ["8M", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
-		},
-		eventData: [
-			{generation: 4, level: 30, gender: "M", nature: "Timid", moves: ["heatwave", "airslash", "sludgebomb", "superfang"], pokeball: "cherishball"},
-			{generation: 7, level: 64, gender: "M", moves: ["airslash", "toxic", "darkpulse", "sludgebomb"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	vileplume: {
 			absorb: ["9L1", "8L1", "8V", "7V", "3L1"],
 			aromatherapy: ["8L1", "7L1", "6L1", "5L1", "4L1", "3L1"],
@@ -1479,8 +1479,8 @@
 			synthesis: ["9E", "8E", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			teeterdance: ["9E", "8E", "7E", "6E", "5E", "5D", "4E"],
 			tickle: ["9E", "8E", "7E", "6E", "5E", "4E"],
-		},
-	},
+		
+	
 	bellossom: {
 			absorb: ["9L1", "8L1", "7V", "3L1"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -1529,8 +1529,8 @@
 			toxic: ["9M", "9L1", "8L1", "7M", "7V", "6M", "5M", "4M", "3M"],
 			uproar: ["9M", "8M", "7T", "6T", "5T", "4T"],
 			worryseed: ["7T", "6T", "5T", "4T"],
-		},
-	},
+		
+	
 	parasect: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			aromatherapy: ["7L51", "6L51", "5L51", "4L47", "3L59"],
@@ -1600,12 +1600,12 @@
 			pursuit: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			screech: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			sweetscent: ["7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 1, level: 13},
-			{generation: 2, level: 5},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	venomoth: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["9M", "4T"],
@@ -1673,17 +1673,17 @@
 			screech: ["9E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			signalbeam: ["7T", "7L25", "7E", "6T", "6L35", "6E", "5T", "5L35", "5E", "4T", "4L35", "4E", "3E"],
 			toxicspikes: ["9M", "9E", "7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 32, abilities: ["shielddust"], moves: ["refresh", "silverwind", "substitute", "psychic"]},
-		],
-		encounters: [
-			{generation: 1, level: 30},
-			{generation: 2, level: 10},
-			{generation: 4, level: 8},
-			{generation: 6, level: 30},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+			
+			
+	
+	
 	dugtrio: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			astonish: ["9L1", "8L1", "7L7", "6L7", "5L7", "4L7"],
@@ -1747,16 +1747,16 @@
 			rockslide: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			screech: ["8M", "7E", "7V", "6E", "5E", "4E", "3E"],
 			uproar: ["9M", "8M", "7E", "6E", "5T", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 40, moves: ["charm", "earthquake", "sandstorm", "triattack"]},
-		],
-		encounters: [
-			{generation: 1, level: 15},
-			{generation: 2, level: 5},
-			{generation: 4, level: 19},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+			
+	
+	
 	persian: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			assurance: ["9L24", "8M", "8L24", "7L49", "6L49", "5L49", "4L49"],
@@ -1842,12 +1842,12 @@
 			punishment: ["7E", "6E", "5E", "4E"],
 			spite: ["9M", "9E", "8E", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			tailwhip: ["9E", "8E", "7E", "6E", "5E", "4E"],
-		},
-		encounters: [
-			{generation: 2, level: 18},
-			{generation: 4, level: 19},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	golduck: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			amnesia: ["9M", "9L36", "8M", "8L36", "8V", "7L41", "6L49", "5L49", "4L50"],
@@ -1937,18 +1937,18 @@
 			psychic: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "4E", "3E"],
 			refresh: ["7E", "6E", "5E", "4E", "3E"],
 			yawn: ["9E", "8E", "7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 33, moves: ["charm", "waterfall", "psychup", "brickbreak"]},
-			{generation: 7, level: 50, gender: "M", nature: "Timid", ivs: {hp: 31, atk: 30, def: 31, spa: 31, spd: 31, spe: 31}, isHidden: true, moves: ["hydropump", "scald", "encore", "protect"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 1, level: 15},
-			{generation: 2, level: 10},
-			{generation: 3, level: 25, pokeball: "safariball"},
-			{generation: 4, level: 10},
-		],
-	},
+		
+		
+			
+			
+	
+		
+			
+			
+			
+			
+	
+	
 	primeape: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			assurance: ["9L26", "7L26", "6L25", "5L25", "4L25"],
@@ -2044,15 +2044,15 @@
 			reversal: ["9M", "7E", "7V", "6E", "5E", "5D", "4E", "3E"],
 			rockslide: ["9M", "8V", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			smellingsalts: ["7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 34, abilities: ["vitalspirit"], moves: ["helpinghand", "crosschop", "focusenergy", "reversal"]},
-		],
-		encounters: [
-			{generation: 2, level: 15},
-			{generation: 4, level: 15},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+	
+	
 	arcanine: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -2115,13 +2115,13 @@
 			morningsun: ["9E", "8E", "7E", "6E", "5E", "4E"],
 			safeguard: ["8M", "7M", "7V", "6M", "5M", "4E", "3E"],
 			thrash: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 4, level: 50, abilities: ["intimidate"], moves: ["flareblitz", "thunderfang", "crunch", "extremespeed"], pokeball: "cherishball"},
-			{generation: 7, level: 50, abilities: ["intimidate"], moves: ["flareblitz", "extremespeed", "willowisp", "protect"], pokeball: "cherishball"},
-			{generation: 9, level: 50, shiny: true, gender: "F", nature: "Adamant", abilities: ["intimidate"], ivs: {hp: 31, atk: 31, def: 31, spa: 8, spd: 31, spe: 31}, moves: ["flareblitz", "extremespeed", "willowisp", "protect"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	poliwrath: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			blizzard: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -2201,11 +2201,11 @@
 			refresh: ["7E", "6E", "5E", "4E"],
 			splash: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			watersport: ["7L1", "7E", "6L1", "6E", "5L1", "5E", "4L1", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 42, moves: ["helpinghand", "hydropump", "raindance", "brickbreak"]},
-		],
-	},
+		
+		
+			
+	
+	
 	politoed: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			blizzard: ["9M", "8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -2267,11 +2267,11 @@
 			watergun: ["9L1", "8L1", "7V", "3L1"],
 			waterpulse: ["9M", "7T", "6T", "4M", "3M"],
 			whirlpool: ["9M", "8M", "7V", "4M"],
-		},
-		eventData: [
-			{generation: 5, level: 50, gender: "M", nature: "Calm", ivs: {hp: 31, atk: 13, def: 31, spa: 5, spd: 31, spe: 5}, isHidden: true, moves: ["scald", "icebeam", "perishsong", "protect"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	alakazam: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			bodyslam: ["8M", "7V", "3T"],
@@ -2359,11 +2359,11 @@
 			knockoff: ["7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			powertrick: ["7E", "6E", "5E", "4E"],
 			thunderpunch: ["8M", "8V", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3T", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 70, moves: ["futuresight", "calmmind", "psychic", "trick"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+	
+	
 	machamp: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			bodyslam: ["8M", "7V", "3T"],
@@ -2446,18 +2446,18 @@
 			rollingkick: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			smellingsalts: ["7E", "6E", "5E", "4E", "3E"],
 			thunderpunch: ["8M", "8V", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3T"],
-		},
-		eventData: [
-			{generation: 3, level: 38, gender: "M", nature: "Quiet", ivs: {hp: 9, atk: 23, def: 25, spa: 20, spd: 15, spe: 10}, abilities: ["guts"], moves: ["seismictoss", "foresight", "revenge", "vitalthrow"], pokeball: "pokeball"},
-			{generation: 6, level: 50, shiny: true, gender: "M", nature: "Adamant", ivs: {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31}, abilities: ["noguard"], moves: ["dynamicpunch", "stoneedge", "wideguard", "knockoff"], pokeball: "cherishball"},
-			{generation: 6, level: 39, gender: "M", nature: "Hardy", abilities: ["noguard"], moves: ["seismictoss", "dynamicpunch", "dig", "focusenergy"], pokeball: "cherishball"},
-			{generation: 7, level: 34, gender: "F", nature: "Brave", ivs: {atk: 31}, abilities: ["guts"], moves: ["strength", "bulkup", "quickguard", "doubleedge"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 1, level: 16},
-			{generation: 2, level: 5},
-		],
-	},
+		
+		
+			
+			
+			
+			
+	
+		
+			
+			
+	
+	
 	victreebel: {
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
 			bodyslam: ["9M", "7V", "3T"],
@@ -2517,8 +2517,8 @@
 			tickle: ["9E", "7E", "6E", "5E", "4E"],
 			weatherball: ["9M", "7E", "6E", "5E", "4E"],
 			worryseed: ["9E", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
-		},
-	},
+		
+	
 	tentacruel: {
 			acid: ["9L1", "8L1", "8V", "7L1", "7V", "6L1", "5L12", "4L12", "3L19"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -2581,15 +2581,15 @@
 			muddywater: ["9M", "8M", "7E", "6E", "5E", "4E"],
 			rapidspin: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			safeguard: ["8M", "7M", "7V", "6M", "5M", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 1, level: 20},
-			{generation: 2, level: 20},
-			{generation: 3, level: 20},
-			{generation: 4, level: 15},
-			{generation: 6, level: 21, maxEggMoves: 1},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+	
+	
 	golem: {
 			ancientpower: ["4T"],
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
@@ -2665,8 +2665,8 @@
 			hammerarm: ["9E", "7E", "6E", "5E", "4E"],
 			megapunch: ["9M", "9E", "7E", "7V", "6E", "5E", "4E", "3T", "3E"],
 			rockslide: ["9M", "8V", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
-		},
-	},
+		
+	
 	rapidash: {
 			agility: ["8M", "8L20", "8V", "7L37", "7V", "6L37", "5L37", "4L33", "3L38"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -2725,15 +2725,15 @@
 			hypnosis: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			morningsun: ["8E", "7E", "6E", "5E", "4E"],
 			thrash: ["8E", "7E", "7V", "6E", "5E", "5D", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 40, moves: ["batonpass", "solarbeam", "sunnyday", "flamethrower"]},
-		],
-		encounters: [
-			{generation: 2, level: 14, gender: "M"},
-			{generation: 3, level: 37},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+	
+	
 	slowbro: {
 			amnesia: ["9M", "9L27", "8M", "8L27", "8V", "7L43", "7V", "6L43", "5L43", "4L47", "3L36"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -2832,20 +2832,20 @@
 			snore: ["8M", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3T", "3E"],
 			stomp: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			zenheadbutt: ["9M", "9L24", "8M", "8L24", "7T", "7L32", "7E", "6T", "6L32", "6E", "5T", "5L32", "5E", "4T", "4L34", "4E"],
-		},
-		eventData: [
-			{generation: 6, level: 100, nature: "Quiet", abilities: ["oblivious"], moves: ["scald", "trickroom", "slackoff", "irontail"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 1, level: 15},
-			{generation: 1, level: 23},
-			{generation: 2, level: 20},
-			{generation: 3, level: 32},
-			{generation: 4, level: 15},
-			{generation: 5, level: 35},
-			{generation: 7, level: 15},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+			
+			
+			
+			
+			
+	
+	
 	slowking: {
 			aquatail: ["7T", "6T", "5T", "4T"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -2934,8 +2934,8 @@
 			whirlpool: ["9M", "8M", "7V", "4M"],
 			yawn: ["9L9", "8L9", "7L1", "6L1", "5L1", "4L1", "3L1"],
 			zenheadbutt: ["9M", "8M", "8L24", "7T", "7L32", "6T", "6L32", "5T", "5L32", "4T", "4L34"],
-		},
-	},
+		
+	
 	magnezone: {
 			barrier: ["7L1", "6L1", "5L1", "4L1"],
 			chargebeam: ["9M", "7M", "6M", "5M", "4M"],
@@ -2991,8 +2991,8 @@
 			thunderwave: ["9M", "9L1", "8M", "8L1", "7M", "7L1", "6M", "6L13", "5M", "5L15", "4M", "4L17"],
 			toxic: ["7M", "6M", "5M", "4M"],
 			zapcannon: ["9L64", "8L64", "7L1", "6L1", "5L66", "4L60"],
-		},
-	},
+		
+	
 	farfetchd: {
 			aerialace: ["8L20", "7M", "7L9", "6M", "6L9", "5M", "5L13", "4M", "4L13", "3M", "3S1"],
 			agility: ["8M", "8L60", "8V", "7L31", "7V", "6L31", "5L31", "4L31", "3L36"],
@@ -3061,16 +3061,16 @@
 			uturn: ["8M", "8V", "7M", "6M", "5M", "4M"],
 			wish: ["3S0"],
 			yawn: ["3S0"],
-		},
-		eventData: [
-			{generation: 3, level: 5, shiny: 1, moves: ["yawn", "wish"], pokeball: "pokeball"},
-			{generation: 3, level: 36, moves: ["batonpass", "slash", "swordsdance", "aerialace"]},
-		],
-		encounters: [
-			{generation: 1, level: 3},
-			{generation: 3, level: 3, gender: "M", nature: "Adamant", ivs: {hp: 20, atk: 25, def: 21, spa: 24, spd: 15, spe: 20}, abilities: ["keeneye"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+	
+		
+			
+			
+	
+	
 	dodrio: {
 			acupressure: ["9L30", "7L34", "6L28", "5L28", "4L28"],
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
@@ -3130,18 +3130,18 @@
 			mirrormove: ["7E", "6E", "5E", "4E"],
 			quickattack: ["9L5", "8V", "7L5", "7E", "7V", "6L5", "6E", "5L5", "5E", "4L5", "4E", "3E"],
 			supersonic: ["7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 34, moves: ["batonpass", "drillpeck", "agility", "triattack"]},
-		],
-		encounters: [
-			{generation: 1, level: 29},
-			{generation: 2, level: 10, gender: "F"},
-			{generation: 2, level: 30},
-			{generation: 3, level: 29, pokeball: "safariball"},
-			{generation: 4, level: 15, gender: "F", nature: "Impish", ivs: {hp: 20, atk: 20, def: 20, spa: 15, spd: 15, spe: 15}, abilities: ["runaway"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+			
+			
+			
+	
+	
 	dewgong: {
 			aquajet: ["9L31", "8V", "7L31", "6L31", "5L31", "4L31"],
 			aquaring: ["9L23", "7L23", "6L23", "5L23", "4L23"],
@@ -3203,15 +3203,15 @@
 			spitup: ["9E", "7E", "6E", "5E", "4E"],
 			stockpile: ["9E", "7E", "6E", "5E", "4E"],
 			swallow: ["9E", "7E", "6E", "5E", "4E"],
-		},
-		encounters: [
-			{generation: 1, level: 15},
-			{generation: 2, level: 5},
-			{generation: 3, level: 32},
-			{generation: 5, level: 30},
-			{generation: 6, level: 30, maxEggMoves: 1},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+	
+	
 	muk: {
 			acidarmor: ["9L46", "8V", "7L46", "7V", "6L43", "5L42", "4L44", "3L34"],
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
@@ -3290,17 +3290,17 @@
 			spitup: ["9E", "7E", "6E", "5E", "4E"],
 			stockpile: ["9E", "7E", "6E", "5E", "4E"],
 			swallow: ["9E", "7E", "6E", "5E", "4E"],
-		},
-		encounters: [
-			{generation: 1, level: 25},
-			{generation: 2, level: 5},
-			{generation: 3, level: 32},
-			{generation: 4, level: 15},
-			{generation: 5, level: 5},
-			{generation: 5, level: 35, isHidden: true},
-			{generation: 6, level: 30},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+			
+			
+	
+	
 	cloyster: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			aurorabeam: ["9L1", "8L1", "7L1", "7V", "6L1", "5L1", "4L1", "3L1"],
@@ -3356,11 +3356,11 @@
 			rockblast: ["9M", "8M", "7E", "6E", "5E", "4E"],
 			screech: ["8M", "7E", "7V", "6E", "5E", "4E", "3E"],
 			takedown: ["9M", "7E", "7V", "6E", "5E", "4E", "3E", "3S2"],
-		},
-		eventData: [
-			{generation: 5, level: 30, gender: "M", nature: "Naughty", abilities: ["skilllink"], moves: ["iciclespear", "rockblast", "hiddenpower", "razorshell"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+	
+	
 	gengar: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			bodyslam: ["9M", "8M", "7V", "3T"],
@@ -3455,18 +3455,18 @@
 			psywave: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			thunderpunch: ["9M", "8M", "8V", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
 			willowisp: ["9M", "8M", "8V", "7M", "6M", "5M", "4M", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 23, gender: "F", nature: "Hardy", ivs: {hp: 19, atk: 14, def: 0, spa: 14, spd: 17, spe: 27}, moves: ["spite", "curse", "nightshade", "confuseray"], pokeball: "pokeball"},
-			{generation: 6, level: 25, nature: "Timid", moves: ["psychic", "confuseray", "suckerpunch", "shadowpunch"], pokeball: "cherishball"},
-			{generation: 6, level: 25, moves: ["nightshade", "confuseray", "suckerpunch", "shadowpunch"], pokeball: "cherishball"},
-			{generation: 6, level: 50, moves: ["shadowball", "sludgebomb", "willowisp", "destinybond"], pokeball: "cherishball"},
-			{generation: 6, level: 25, shiny: true, moves: ["shadowball", "sludgewave", "confuseray", "astonish"], pokeball: "duskball"},
-			{generation: 6, level: 50, shiny: true, gender: "M", moves: ["meanlook", "hypnosis", "psychic", "hyperbeam"], pokeball: "cherishball"},
-			{generation: 6, level: 100, moves: ["meanlook", "hypnosis", "psychic", "hyperbeam"], pokeball: "cherishball"},
-			{generation: 8, level: 80, gender: "M", nature: "Naughty", abilities: ["cursedbody"], ivs: {hp: 30, atk: 30, def: 30, spa: 31, spd: 31, spe: 31}, moves: ["shadowball", "sludgebomb", "dazzlinggleam", "willowisp"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+	
+	
 	steelix: {
 			ancientpower: ["4T"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -3547,8 +3547,8 @@
 			rockblast: ["8M", "7E", "6E", "5E", "4E"],
 			rockslide: ["8M", "8L20", "8V", "7M", "7L34", "7V", "6M", "6L34", "5M", "5L34", "4M", "4E", "3T", "3E"],
 			rollout: ["8E", "7E", "6E", "5E", "4T", "4E"],
-		},
-	},
+		
+	
 	hypno: {
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
 			batonpass: ["9M", "3S0"],
@@ -3635,15 +3635,15 @@
 			psychocut: ["9E", "7E", "6E", "5E", "5D", "4E"],
 			roleplay: ["9E", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			thunderpunch: ["9M", "9E", "8V", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3T", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 34, abilities: ["insomnia"], moves: ["batonpass", "psychic", "meditate", "shadowball"]},
-		],
-		encounters: [
-			{generation: 2, level: 16},
-			{generation: 4, level: 16},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+	
+	
 	kingler: {
 			ancientpower: ["4T"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -3718,13 +3718,13 @@
 			slam: ["8L36", "8V", "7L35", "7E", "7V", "6L35", "6E", "5L35", "5E", "4L35", "4E", "3E"],
 			swordsdance: ["8M", "8L40", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			tickle: ["7E", "6E", "5E", "4E"],
-		},
-		encounters: [
-			{generation: 1, level: 15},
-			{generation: 3, level: 25},
-			{generation: 4, level: 22},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	electrode: {
 			charge: ["9M", "9L1", "7L1", "6L1", "5L1", "4L1", "3L1"],
 			chargebeam: ["9M", "9L16", "7M", "7L16", "6M", "6L16", "5M", "5L22", "4M", "4L26"],
@@ -3771,14 +3771,14 @@
 			thunderwave: ["9M", "8V", "7M", "7V", "6M", "5M", "4M", "3T"],
 			torment: ["7M", "6M", "5M", "4M", "3M"],
 			toxic: ["8V", "7M", "7V", "6M", "5M", "4M", "3M"],
-		},
-		encounters: [
-			{generation: 1, level: 3},
-			{generation: 2, level: 23},
-			{generation: 3, level: 3, nature: "Hasty", ivs: {hp: 19, atk: 16, def: 18, spa: 25, spd: 25, spe: 19}, abilities: ["static"], pokeball: "pokeball"},
-			{generation: 4, level: 23},
-		],
-	},
+		
+		
+			
+			
+			
+			
+	
+	
 	exeggutor: {
 			ancientpower: ["4T", "3S0"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -3850,11 +3850,11 @@
 			psychup: ["9M", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			reflect: ["9M", "9L5", "8M", "8L5", "8V", "7M", "7L7", "7V", "6M", "6L7", "5M", "5L7", "4M", "4L7", "4E", "3M", "3L7", "3E"],
 			synthesis: ["9L25", "8L25", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "5D", "4T", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 46, moves: ["refresh", "psychic", "hypnosis", "ancientpower"]},
-		],
-	},
+		
+		
+			
+	
+	
 	marowak: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -3940,16 +3940,16 @@
 			screech: ["8M", "7E", "7V", "6E", "5E", "4E", "3E"],
 			skullbash: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			swordsdance: ["8M", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 44, moves: ["sing", "earthquake", "swordsdance", "rockslide"]},
-		],
-		encounters: [
-			{generation: 1, level: 24},
-			{generation: 2, level: 12},
-			{generation: 4, level: 14},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+			
+	
+	
 	hitmonlee: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			blazekick: ["9L24", "8M", "8L24", "7L45", "6L45", "5L45", "4L41"],
@@ -4018,14 +4018,14 @@
 			thief: ["9M", "8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			toxic: ["8V", "7M", "7V", "6M", "5M", "4M", "3M"],
 			vacuumwave: ["9M", "4T"],
-		},
-		eventData: [
-			{generation: 3, level: 38, abilities: ["limber"], moves: ["refresh", "highjumpkick", "mindreader", "megakick"]},
-		],
-		encounters: [
-			{generation: 1, level: 30},
-		],
-	},
+		
+		
+			
+	
+		
+			
+	
+	
 	hitmonchan: {
 			agility: ["9M", "9L28", "8M", "8L28", "8V", "7L1", "7V", "6L6", "5L6", "4L6", "3L7"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -4098,14 +4098,14 @@
 			mindreader: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			rapidspin: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			vacuumwave: ["9M", "9E", "8E", "7E", "6E", "5E", "4T", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 38, abilities: ["keeneye"], moves: ["helpinghand", "skyuppercut", "mindreader", "megapunch"]},
-		],
-		encounters: [
-			{generation: 1, level: 30},
-		],
-	},
+		
+		
+			
+	
+		
+			
+	
+	
 	hitmontop: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M"],
 			agility: ["9M", "9L28", "8M", "8L28", "7L37", "7V", "6L37", "5L37", "4L37", "3L37"],
@@ -4166,11 +4166,11 @@
 			triplekick: ["9L0", "8L0", "7L33", "7V", "6L19", "5L19", "4L19", "3L20"],
 			twister: ["4T"],
 			vacuumwave: ["9M", "4T"],
-		},
-		eventData: [
-			{generation: 5, level: 55, gender: "M", nature: "Adamant", abilities: ["intimidate"], moves: ["fakeout", "closecombat", "suckerpunch", "helpinghand"]},
-		],
-	},
+		
+		
+			
+	
+	
 	lickilicky: {
 			aquatail: ["7T", "6T", "5T", "4T"],
 			attract: ["8M", "7M", "6M", "5M", "4M"],
@@ -4259,8 +4259,8 @@
 			smellingsalts: ["7E", "6E", "5E", "4E", "3E"],
 			snore: ["8M", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3T", "3E"],
 			substitute: ["8M", "8V", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
-		},
-	},
+		
+	
 	weezing: {
 			assurance: ["9L16", "8M", "8L16", "7L12", "6L12", "5L12", "4L15"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -4324,13 +4324,13 @@
 			screech: ["8M", "7E", "7V", "6E", "5E", "4E", "3E"],
 			spite: ["9M", "9E", "8E", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
 			willowisp: ["9M", "8M", "8V", "7M", "6M", "5M", "4M", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 2, level: 16},
-			{generation: 3, level: 32},
-			{generation: 4, level: 15, pokeball: "safariball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	rhydon: {
 			ancientpower: ["4T"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -4436,17 +4436,17 @@
 			skullbash: ["8E", "7E", "7V", "6E", "5E", "4E"],
 			swordsdance: ["9M", "8M", "7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			thunderfang: ["9M", "8M", "7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 46, moves: ["helpinghand", "megahorn", "scaryface", "earthquake"]},
-		],
-		encounters: [
-			{generation: 1, level: 15},
-			{generation: 2, level: 10},
-			{generation: 4, level: 41},
-			{generation: 6, level: 30},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+			
+			
+	
+	
 	rhyperior: {
 			ancientpower: ["4T"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -4533,8 +4533,8 @@
 			toxic: ["7M", "6M", "5M", "4M"],
 			uproar: ["9M", "8M", "7T", "6T", "5T", "4T"],
 			whirlpool: ["8M", "4M"],
-		},
-	},
+		
+	
 	blissey: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			avalanche: ["9M", "8M", "4M"],
@@ -4639,11 +4639,11 @@
 			mudbomb: ["7E", "6E", "5E", "4E"],
 			present: ["8E", "8S3", "7E", "7V", "6E", "5E", "4E", "3E"],
 			substitute: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
-		},
-		eventData: [
-			{generation: 5, level: 10, isHidden: true, moves: ["pound", "growl", "tailwhip", "refresh"]},
-		],
-	},
+		
+		
+			
+	
+	
 	tangrowth: {
 			absorb: ["8L1", "7L10", "6L10", "5L8", "4L8"],
 			aerialace: ["7M", "6M", "5M", "4M"],
@@ -4723,11 +4723,11 @@
 			naturepower: ["8E", "7M", "7E", "6E", "5E", "4E", "3E"],
 			powerswap: ["8M", "7E", "6E", "5E", "4E"],
 			reflect: ["8M", "8V", "7M", "7V", "6M", "5M", "4M", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 4, level: 50, gender: "M", nature: "Brave", moves: ["sunnyday", "morningsun", "ancientpower", "naturalgift"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	kangaskhan: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -4826,17 +4826,17 @@
 			whirlpool: ["8M", "4M"],
 			wish: ["3S0"],
 			yawn: ["3S0"],
-		},
-		eventData: [
-			{generation: 3, level: 5, shiny: 1, abilities: ["earlybird"], moves: ["yawn", "wish"], pokeball: "pokeball"},
-			{generation: 3, level: 10, abilities: ["earlybird"], moves: ["cometpunch", "leer", "bite"], pokeball: "pokeball"},
-			{generation: 3, level: 35, abilities: ["earlybird"], moves: ["sing", "earthquake", "tailwhip", "dizzypunch"]},
-			{generation: 6, level: 50, abilities: ["scrappy"], moves: ["fakeout", "return", "earthquake", "suckerpunch"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 1, level: 25},
-		],
-	},
+		
+		
+			
+			
+			
+			
+	
+		
+			
+	
+	
 	kingdra: {
 			agility: ["9M", "9L30", "8M", "8L30", "7L38", "7V", "6L23", "5L23", "4L23", "3L40", "3S0"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -4901,12 +4901,12 @@
 			razorwind: ["7E", "6E", "5E", "4E"],
 			signalbeam: ["7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
 			splash: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 50, abilities: ["swiftswim"], moves: ["leer", "watergun", "twister", "agility"], pokeball: "pokeball"},
-			{generation: 5, level: 50, gender: "M", nature: "Timid", ivs: {hp: 31, atk: 17, def: 8, spa: 31, spd: 11, spe: 31}, abilities: ["swiftswim"], moves: ["dracometeor", "muddywater", "dragonpulse", "protect"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	seaking: {
 			agility: ["8M", "8L20", "8V", "7L29", "7V", "6L29", "5L56", "4L56", "3L61"],
 			aquaring: ["8L25", "7L21", "6L21", "5L27", "4L27"],
@@ -4965,16 +4965,16 @@
 			mudsport: ["7E", "6E", "5E", "4E", "3E"],
 			psybeam: ["8E", "7E", "7V", "6E", "5E", "5D", "4E", "3E"],
 			sleeptalk: ["8M", "7M", "7E", "7V", "6M", "6E", "5T", "5E", "4M", "4E", "3T", "3E"],
-		},
-		encounters: [
-			{generation: 1, level: 23},
-			{generation: 2, level: 10},
-			{generation: 3, level: 20},
-			{generation: 4, level: 10},
-			{generation: 6, level: 26, maxEggMoves: 1},
-			{generation: 7, level: 10},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+			
+	
+	
 	starmie: {
 			avalanche: ["8M", "4M"],
 			blizzard: ["8M", "8V", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -5036,11 +5036,11 @@
 			watergun: ["8L1", "8V", "7L1", "7V", "6L1", "5L1", "4L1", "3L1"],
 			waterpulse: ["7T", "6T", "4M", "3M"],
 			whirlpool: ["8M", "7V", "4M"],
-		},
-		eventData: [
-			{generation: 3, level: 41, moves: ["refresh", "waterfall", "icebeam", "recover"]},
-		],
-	},
+		
+		
+			
+	
+	
 	mrmime: {
 			aerialace: ["7M", "6M", "5M", "4M"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -5144,14 +5144,14 @@
 			teeterdance: ["8L52", "7E", "6E", "5E", "5D", "4E"],
 			trick: ["8M", "7T", "7L36", "7E", "6T", "6L36", "6E", "5T", "5L36", "5E", "4T", "4L36", "4E", "3L36", "3E"],
 			wakeupslap: ["7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 42, abilities: ["soundproof"], moves: ["followme", "psychic", "encore", "thunderpunch"]},
-		],
-		encounters: [
-			{generation: 1, level: 6},
-		],
-	},
+		
+		
+			
+	
+		
+			
+	
+	
 	scizor: {
 			aerialace: ["9M", "7M", "6M", "6S5", "5M", "4M", "3M"],
 			agility: ["9M", "9L1", "8M", "8L1", "7L17", "7V", "6L17", "6S5", "6S6", "5L17", "4L17", "4S1", "3L21"],
@@ -5226,18 +5226,18 @@
 			reversal: ["9M", "8M", "7E", "7V", "6E", "5E", "4E", "3E"],
 			safeguard: ["8M", "7M", "7V", "6M", "5M", "4E", "3E"],
 			silverwind: ["7E", "6E", "5E", "4M", "4E", "3E", "3S1"],
-		},
-		eventData: [
-			{generation: 3, level: 50, gender: "M", abilities: ["swarm"], moves: ["furycutter", "metalclaw", "swordsdance", "slash"], pokeball: "pokeball"},
-			{generation: 4, level: 50, gender: "M", nature: "Adamant", abilities: ["swarm"], moves: ["xscissor", "swordsdance", "irondefense", "agility"], pokeball: "cherishball"},
-			{generation: 5, level: 100, gender: "M", abilities: ["technician"], moves: ["bulletpunch", "bugbite", "roost", "swordsdance"], pokeball: "cherishball"},
-			{generation: 5, level: 10, gender: "M", isHidden: true, moves: ["leer", "focusenergy", "pursuit", "steelwing"]},
-			{generation: 6, level: 50, gender: "M", moves: ["xscissor", "nightslash", "doublehit", "ironhead"], pokeball: "cherishball"},
-			{generation: 6, level: 25, nature: "Adamant", abilities: ["technician"], moves: ["aerialace", "falseswipe", "agility", "furycutter"], pokeball: "cherishball"},
-			{generation: 6, level: 25, moves: ["metalclaw", "falseswipe", "agility", "furycutter"], pokeball: "cherishball"},
-			{generation: 6, level: 50, abilities: ["technician"], moves: ["bulletpunch", "swordsdance", "roost", "uturn"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+	
+	
 	jynx: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			avalanche: ["8M", "7L39", "6L39", "5L39", "4M", "4L33"],
@@ -5324,15 +5324,15 @@
 			nastyplot: ["8M", "7E", "6E", "5E", "4E"],
 			psychup: ["7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			wish: ["8E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 1, level: 15},
-			{generation: 2, level: 10},
-			{generation: 3, level: 20, nature: "Mild", ivs: {hp: 18, atk: 17, def: 18, spa: 22, spd: 25, spe: 21}, abilities: ["oblivious"], pokeball: "pokeball"},
-			{generation: 4, level: 22},
-			{generation: 7, level: 9},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+	
+	
 	electivire: {
 			attract: ["8M", "7M", "6M", "5M", "4M"],
 			brickbreak: ["9M", "8M", "7M", "6M", "5M", "4M"],
@@ -5403,12 +5403,12 @@
 			karatechop: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			meditate: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			rollingkick: ["7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 4, level: 50, gender: "M", nature: "Adamant", moves: ["thunderpunch", "icepunch", "crosschop", "earthquake"], pokeball: "pokeball"},
-			{generation: 4, level: 50, gender: "M", nature: "Serious", moves: ["lightscreen", "thunderpunch", "discharge", "thunderbolt"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	magmortar: {
 			attract: ["8M", "7M", "6M", "5M", "4M"],
 			brickbreak: ["9M", "8M", "7M", "6M", "5M", "4M"],
@@ -5476,12 +5476,12 @@
 			megapunch: ["8M", "7E", "7V", "6E", "5E", "4E", "3T", "3E"],
 			screech: ["8M", "7E", "7V", "6E", "5E", "4E", "3E"],
 			thunderpunch: ["9M", "8M", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "5D", "4T", "4E", "3T", "3E"],
-		},
-		eventData: [
-			{generation: 4, level: 50, gender: "F", nature: "Modest", moves: ["flamethrower", "psychic", "hyperbeam", "solarbeam"], pokeball: "pokeball"},
-			{generation: 4, level: 50, gender: "M", nature: "Hardy", moves: ["confuseray", "firepunch", "lavaplume", "flamethrower"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	pinsir: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			bind: ["8L8", "8V", "7T", "7L4", "7V", "6T", "6L4", "5T", "5L4", "4L4", "3L7"],
@@ -5549,17 +5549,17 @@
 			visegrip: ["8L1", "8V", "7L1", "7V", "6L1", "5L1", "5D", "4L1", "3L1"],
 			vitalthrow: ["8L28", "7L18", "6L18", "5L22", "4L25"],
 			xscissor: ["8M", "8L32", "8V", "7M", "7L29", "6M", "6L29", "6S1", "5M", "5L29", "4M", "4L30"],
-		},
-		eventData: [
-			{generation: 3, level: 35, abilities: ["hypercutter"], moves: ["helpinghand", "guillotine", "falseswipe", "submission"]},
-			{generation: 6, level: 50, gender: "F", nature: "Adamant", moves: ["xscissor", "earthquake", "stoneedge", "return"], pokeball: "cherishball"},
-			{generation: 6, level: 50, nature: "Jolly", isHidden: true, moves: ["earthquake", "swordsdance", "feint", "quickattack"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 1, level: 15},
-			{generation: 1, level: 20},
-		],
-	},
+		
+		
+			
+			
+			
+	
+		
+			
+			
+	
+	
 	tauros: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			blizzard: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -5625,16 +5625,16 @@
 			waterpulse: ["7T", "6T", "4M", "3M"],
 			whirlpool: ["8M", "4M"],
 			zenheadbutt: ["9M", "9L30", "8M", "8L30", "7T", "7L35", "6T", "6L35", "5T", "5L35", "4T", "4L29"],
-		},
-		eventData: [
-			{generation: 3, level: 25, nature: "Docile", ivs: {hp: 14, atk: 19, def: 12, spa: 17, spd: 5, spe: 26}, abilities: ["intimidate"], moves: ["rage", "hornattack", "scaryface", "pursuit"], pokeball: "safariball"},
-			{generation: 3, level: 10, abilities: ["intimidate"], moves: ["tackle", "tailwhip", "rage", "hornattack"], pokeball: "pokeball"},
-			{generation: 3, level: 46, abilities: ["intimidate"], moves: ["refresh", "earthquake", "tailwhip", "bodyslam"]},
-		],
-		encounters: [
-			{generation: 1, level: 21},
-		],
-	},
+		
+		
+			
+			
+			
+	
+		
+			
+	
+	
 	gyarados: {
 			aquatail: ["9L32", "8L32", "7T", "7L30", "6T", "6L35", "5T", "5L35", "4T", "4L35"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -5701,20 +5701,20 @@
 			waterfall: ["9M", "9L21", "8M", "8L21", "8V", "7M", "7V", "6M", "6S0", "6S1", "5M", "4M", "3M"],
 			waterpulse: ["9M", "7T", "6T", "4M", "3M"],
 			whirlpool: ["9M", "9L4", "8M", "8L4", "7V", "4M"],
-		},
-		eventData: [
-			{generation: 6, level: 50, moves: ["waterfall", "earthquake", "icefang", "dragondance"], pokeball: "cherishball"},
-			{generation: 6, level: 20, shiny: true, moves: ["waterfall", "bite", "icefang", "ironhead"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 1, level: 15},
-			{generation: 2, level: 15},
-			{generation: 3, level: 5},
-			{generation: 4, level: 10},
-			{generation: 5, level: 1},
-			{generation: 7, level: 10},
-		],
-	},
+		
+		
+			
+			
+	
+		
+			
+			
+			
+			
+			
+			
+	
+	
 	lapras: {
 			ancientpower: ["9E", "8E", "7E", "6E", "5E", "4T", "4E"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -5787,30 +5787,30 @@
 			waterpulse: ["9M", "9L30", "8L30", "7T", "7L14", "6T", "6L14", "5L14", "4M", "4L14", "3M"],
 			whirlpool: ["9M", "8M", "7E", "7V", "6E", "5E", "4M", "4E"],
 			zenheadbutt: ["9M", "8M", "7T", "6T", "5T", "4T"],
-		},
-		eventData: [
-			{generation: 3, level: 44, moves: ["hydropump", "raindance", "blizzard", "healbell"]},
-		],
-		encounters: [
-			{generation: 1, level: 15},
-		],
-	},
+		
+		
+			
+	
+		
+			
+	
+	
 	ditto: {
 			transform: ["9L1", "8L1", "8V", "7L1", "7V", "7S0", "6L1", "5L1", "4L1", "3L1"],
-		},
-		eventData: [
-			{generation: 7, level: 10, moves: ["transform"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 1, level: 12},
-			{generation: 2, level: 10},
-			{generation: 3, level: 23},
-			{generation: 4, level: 10},
-			{generation: 5, level: 45},
-			{generation: 6, level: 30},
-			{generation: 7, level: 25},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+			
+			
+			
+			
+			
+	
+	
 	vaporeon: {
 			acidarmor: ["9L45", "8L45", "8V", "7L29", "7V", "6L29", "5L29", "4L64", "3L47"],
 			aquaring: ["9L35", "8L35", "7L25", "6L25", "5L25", "4L43"],
@@ -5872,13 +5872,13 @@
 			watergun: ["9L0", "8L0", "8V", "7L1", "7V", "6L9", "6S1", "5L9", "4L15", "3L16"],
 			waterpulse: ["9M", "9L25", "8L25", "7T", "7L17", "6T", "6L17", "5L17", "4M", "3M"],
 			whirlpool: ["9M", "8M", "7V", "4M"],
-		},
-		eventData: [
-			{generation: 5, level: 10, gender: "M", isHidden: true, moves: ["tailwhip", "tackle", "helpinghand", "sandattack"]},
-			{generation: 6, level: 10, moves: ["celebrate", "tailwhip", "sandattack", "watergun"], pokeball: "cherishball"},
-			{generation: 7, level: 50, gender: "F", isHidden: true, moves: ["scald", "icebeam", "raindance", "rest"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	jolteon: {
 			agility: ["9M", "9L45", "8M", "8L45", "8V", "7L29", "7V", "6L29", "5L29", "4L64", "3L47"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -5945,13 +5945,13 @@
 			tickle: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
 			wish: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
 			yawn: ["9E", "8E", "7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 5, level: 10, gender: "M", isHidden: true, moves: ["tailwhip", "tackle", "helpinghand", "sandattack"]},
-			{generation: 6, level: 10, moves: ["celebrate", "tailwhip", "sandattack", "thundershock"], pokeball: "cherishball"},
-			{generation: 7, level: 50, gender: "F", moves: ["thunderbolt", "shadowball", "lightscreen", "voltswitch"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	flareon: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			bite: ["9L25", "8L25", "7L17", "7V", "6L17", "5L17", "4L29", "3L30"],
@@ -6007,13 +6007,13 @@
 			tailwhip: ["9L1", "8L1", "8V", "7L1", "7V", "6L1", "6S1", "5L1", "5S0", "4L1", "3L1"],
 			toxic: ["8V", "7M", "7V", "6M", "5M", "4M", "3M"],
 			willowisp: ["9M", "8M", "8V", "7M", "7S2", "6M", "5M", "4M"],
-		},
-		eventData: [
-			{generation: 5, level: 10, gender: "M", isHidden: true, moves: ["tailwhip", "tackle", "helpinghand", "sandattack"]},
-			{generation: 6, level: 10, moves: ["celebrate", "tailwhip", "sandattack", "ember"], pokeball: "cherishball"},
-			{generation: 7, level: 50, gender: "F", isHidden: true, moves: ["flareblitz", "facade", "willowisp", "quickattack"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	espeon: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			bodyslam: ["9M", "8M", "3T"],
@@ -6073,14 +6073,14 @@
 			trick: ["9M", "8M", "7T", "6T", "5T", "4T"],
 			trickroom: ["9M", "8M", "7M", "6M", "5M", "4M"],
 			zenheadbutt: ["9M", "8M", "7T", "6T", "5T", "4T"],
-		},
-		eventData: [
-			{generation: 3, level: 70, moves: ["psybeam", "psychup", "psychic", "morningsun"], pokeball: "pokeball"},
-			{generation: 5, level: 10, gender: "M", isHidden: true, moves: ["tailwhip", "tackle", "helpinghand", "sandattack"]},
-			{generation: 6, level: 10, moves: ["celebrate", "tailwhip", "sandattack", "confusion"], pokeball: "cherishball"},
-			{generation: 7, level: 50, gender: "F", isHidden: true, moves: ["psychic", "dazzlinggleam", "shadowball", "reflect"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+	
+	
 	umbreon: {
 			assurance: ["9L25", "8M", "8L25", "7L25", "6L25", "5L25", "4L43"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -6140,14 +6140,14 @@
 			taunt: ["9M", "8M", "7M", "6M", "5M", "4M", "3M"],
 			torment: ["7M", "6M", "5M", "4M", "3M"],
 			toxic: ["9M", "7M", "7V", "7S3", "6M", "5M", "4M", "3M"],
-		},
-		eventData: [
-			{generation: 3, level: 70, moves: ["feintattack", "meanlook", "screech", "moonlight"], pokeball: "pokeball"},
-			{generation: 5, level: 10, gender: "M", isHidden: true, moves: ["tailwhip", "tackle", "helpinghand", "sandattack"]},
-			{generation: 6, level: 10, moves: ["celebrate", "tailwhip", "sandattack", "pursuit"], pokeball: "cherishball"},
-			{generation: 7, level: 50, gender: "F", moves: ["snarl", "toxic", "protect", "moonlight"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+	
+	
 	leafeon: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M"],
 			attract: ["8M", "7M", "6M", "5M", "4M"],
@@ -6204,13 +6204,13 @@
 			toxic: ["7M", "6M", "5M", "4M"],
 			worryseed: ["7T", "6T", "5T", "4T"],
 			xscissor: ["9M", "8M", "7M", "6M", "5M", "4M"],
-		},
-		eventData: [
-			{generation: 5, level: 10, gender: "M", isHidden: true, moves: ["tailwhip", "tackle", "helpinghand", "sandattack"]},
-			{generation: 6, level: 10, moves: ["celebrate", "tailwhip", "sandattack", "razorleaf"], pokeball: "cherishball"},
-			{generation: 7, level: 50, gender: "F", isHidden: true, moves: ["leafblade", "swordsdance", "sunnyday", "synthesis"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	glaceon: {
 			aquatail: ["7T", "6T", "5T", "4T"],
 			attract: ["8M", "7M", "6M", "5M", "4M"],
@@ -6262,13 +6262,13 @@
 			tailwhip: ["9L1", "8L1", "7L1", "6L1", "6S1", "5L1", "5S0", "4L1"],
 			toxic: ["7M", "6M", "5M", "4M"],
 			waterpulse: ["9M", "7T", "6T", "4M"],
-		},
-		eventData: [
-			{generation: 5, level: 10, gender: "M", isHidden: true, moves: ["tailwhip", "tackle", "helpinghand", "sandattack"]},
-			{generation: 6, level: 10, moves: ["celebrate", "tailwhip", "sandattack", "icywind"], pokeball: "cherishball"},
-			{generation: 7, level: 50, gender: "F", moves: ["blizzard", "shadowball", "hail", "auroraveil"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	porygonz: {
 			aerialace: ["7M", "6M", "5M", "4M"],
 			agility: ["9M", "9L30", "8M", "8L30", "7L12", "6L12", "5L12", "4L12"],
@@ -6331,8 +6331,8 @@
 			uproar: ["9M", "8M", "7T", "6T", "5T", "4T"],
 			zapcannon: ["9L60", "8L60", "7L1", "6L1", "5L62", "4L62"],
 			zenheadbutt: ["9M", "8M", "7T", "6T", "5T", "4T"],
-		},
-	},
+		
+	
 	omastar: {
 			ancientpower: ["8L30", "7L37", "7V", "6L37", "5L37", "4T", "4L37", "3L55"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -6405,8 +6405,8 @@
 			supersonic: ["8E", "7E", "7V", "6E", "5E", "5S0", "4E", "3E"],
 			toxicspikes: ["8M", "7E", "6E", "5E", "4E"],
 			wringout: ["7E", "6E", "5E", "4E"],
-		},
-	},
+		
+	
 	kabutops: {
 			absorb: ["8L1", "8V", "7L1", "7V", "6L1", "5L1", "4L1", "3L1"],
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
@@ -6493,8 +6493,8 @@
 			mudshot: ["8M", "8L25", "7L16", "7E", "6L16", "6E", "5L16", "5E", "4L16", "4E", "3L25"],
 			rapidspin: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			screech: ["8M", "7E", "6E", "5E", "4E"],
-		},
-	},
+		
+	
 	aerodactyl: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			agility: ["8M", "8L50", "8V", "7L17", "7V", "6L17", "5L17", "4L17", "3L8"],
@@ -6571,15 +6571,15 @@
 			twister: ["4T"],
 			whirlwind: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			wingattack: ["8L10", "8V", "7L1", "7V", "6L1", "5L1", "4L1", "3L1"],
-		},
-		eventData: [
-			{generation: 5, level: 15, gender: "M", abilities: ["pressure"], moves: ["steelwing", "icefang", "firefang", "thunderfang"], pokeball: "cherishball"},
-			{generation: 7, level: 50, isHidden: true, moves: ["ancientpower", "rockpolish", "wideguard", "celebrate"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 1, level: 30},
-		],
-	},
+		
+		
+			
+			
+	
+		
+			
+	
+	
 	snorlax: {
 			amnesia: ["9M", "9L36", "8M", "8L36", "8V", "7L9", "7V", "6L9", "5L9", "5D", "4L9", "3L5"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -6676,15 +6676,15 @@
 			pursuit: ["7E", "6E", "5E", "4E"],
 			substitute: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			whirlwind: ["7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 43, moves: ["refresh", "fissure", "curse", "bodyslam"]},
-			{generation: 7, level: 30, abilities: ["thickfat"], moves: ["sunnyday", "block", "bodyslam", "celebrate"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 1, level: 30},
-		],
-	},
+		
+		
+			
+			
+	
+		
+			
+	
+	
 	articuno: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			agility: ["9M", "9L20", "8M", "8L20", "8V", "7L36", "7V", "6L36", "5L36", "4L36", "4S3", "4S4", "3L25", "3S0", "3S1"],
@@ -6743,24 +6743,24 @@
 			twister: ["4T"],
 			uturn: ["9M", "8M", "8V", "7M", "6M", "5M", "4M"],
 			waterpulse: ["9M", "7T", "6T", "4M", "3M"],
-		},
-		eventData: [
-			{generation: 3, level: 50, shiny: 1, moves: ["mist", "agility", "mindreader", "icebeam"]},
-			{generation: 3, level: 70, moves: ["agility", "mindreader", "icebeam", "reflect"], pokeball: "pokeball"},
-			{generation: 3, level: 50, moves: ["icebeam", "healbell", "extrasensory", "haze"]},
-			{generation: 4, level: 60, shiny: 1, moves: ["agility", "icebeam", "reflect", "roost"]},
-			{generation: 4, level: 50, shiny: 1, moves: ["mist", "agility", "mindreader", "icebeam"]},
-			{generation: 6, level: 70, moves: ["icebeam", "reflect", "hail", "tailwind"]},
-			{generation: 6, level: 70, isHidden: true, moves: ["freezedry", "icebeam", "hail", "reflect"], pokeball: "cherishball"},
-			{generation: 7, level: 60, shiny: 1, moves: ["ancientpower", "freezedry", "reflect", "hail"]},
-			{generation: 8, level: 70, shiny: 1, moves: ["icebeam", "freezedry", "hurricane", "mist"]},
-			{generation: 9, level: 70, moves: ["sheercold", "blizzard", "hurricane", "haze"]},
-		],
-		encounters: [
-			{generation: 1, level: 50},
-		],
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	
+		
+			
+	
 		eventOnly: true,
-	},
+	
 	zapdos: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			agility: ["9M", "9L20", "8M", "8L20", "8V", "8S8", "7L43", "7V", "6L43", "6S5", "6S6", "5L43", "4L43", "4S3", "4S4", "3L25", "3S0", "3S1"],
@@ -6820,24 +6820,24 @@
 			toxic: ["8V", "7M", "7V", "6M", "5M", "4M", "3M"],
 			twister: ["4T"],
 			uturn: ["9M", "8M", "8V", "7M", "6M", "5M", "4M"],
-		},
-		eventData: [
-			{generation: 3, level: 50, shiny: 1, moves: ["thunderwave", "agility", "detect", "drillpeck"]},
-			{generation: 3, level: 70, moves: ["agility", "detect", "drillpeck", "charge"], pokeball: "pokeball"},
-			{generation: 3, level: 50, moves: ["thunderbolt", "extrasensory", "batonpass", "metalsound"]},
-			{generation: 4, level: 60, shiny: 1, moves: ["charge", "agility", "discharge", "roost"]},
-			{generation: 4, level: 50, shiny: 1, moves: ["thunderwave", "agility", "detect", "drillpeck"]},
-			{generation: 6, level: 70, moves: ["agility", "discharge", "raindance", "lightscreen"]},
-			{generation: 6, level: 70, isHidden: true, moves: ["discharge", "thundershock", "raindance", "agility"], pokeball: "cherishball"},
-			{generation: 7, level: 60, shiny: 1, moves: ["ancientpower", "discharge", "pluck", "raindance"]},
-			{generation: 8, level: 70, shiny: 1, moves: ["thunder", "drillpeck", "bravebird", "agility"]},
-			{generation: 9, level: 70, moves: ["zapcannon", "magneticflux", "detect", "thunder"]},
-		],
-		encounters: [
-			{generation: 1, level: 50},
-		],
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	
+		
+			
+	
 		eventOnly: true,
-	},
+	
 	moltres: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			agility: ["9M", "9L20", "8M", "8L20", "8V", "7L15", "7V", "6L15", "5L15", "4L15", "4S4", "3L25", "3S0", "3S1"],
@@ -6892,24 +6892,24 @@
 			uturn: ["9M", "8M", "8V", "7M", "6M", "5M", "4M"],
 			willowisp: ["9M", "8M", "8V", "7M", "6M", "5M", "4M", "3S2"],
 			wingattack: ["9L15", "8L15", "8V", "8S8", "7L1", "7V", "6L1", "5L1", "4L1", "3L1"],
-		},
-		eventData: [
-			{generation: 3, level: 50, shiny: 1, moves: ["firespin", "agility", "endure", "flamethrower"]},
-			{generation: 3, level: 70, moves: ["agility", "endure", "flamethrower", "safeguard"], pokeball: "pokeball"},
-			{generation: 3, level: 50, moves: ["extrasensory", "morningsun", "willowisp", "flamethrower"]},
-			{generation: 4, level: 60, shiny: 1, moves: ["flamethrower", "safeguard", "airslash", "roost"]},
-			{generation: 4, level: 50, shiny: 1, moves: ["firespin", "agility", "endure", "flamethrower"]},
-			{generation: 6, level: 70, moves: ["safeguard", "airslash", "sunnyday", "heatwave"]},
-			{generation: 6, level: 70, isHidden: true, moves: ["skyattack", "heatwave", "sunnyday", "safeguard"], pokeball: "cherishball"},
-			{generation: 7, level: 60, shiny: 1, moves: ["ancientpower", "flamethrower", "airslash", "sunnyday"]},
-			{generation: 8, level: 70, shiny: 1, moves: ["heatwave", "wingattack", "leer", "firespin"]},
-			{generation: 9, level: 70, moves: ["skyattack", "overheat", "endure", "hurricane"]},
-		],
-		encounters: [
-			{generation: 1, level: 50},
-		],
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	
+		
+			
+	
 		eventOnly: true,
-	},
+	
 	dragonite: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			agility: ["9M", "9L20", "8M", "8L20", "8V", "7L25", "7V", "6L25", "6S8", "5L25", "4L25", "3L38", "3S0"],
@@ -7007,24 +7007,24 @@
 			lightscreen: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4E", "3E"],
 			mist: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			supersonic: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 70, moves: ["agility", "safeguard", "wingattack", "outrage"], pokeball: "pokeball"},
-			{generation: 3, level: 55, moves: ["healbell", "hyperbeam", "dragondance", "earthquake"]},
-			{generation: 4, level: 50, gender: "M", nature: "Mild", moves: ["dracometeor", "thunderbolt", "outrage", "dragondance"], pokeball: "cherishball"},
-			{generation: 5, level: 100, gender: "M", isHidden: true, moves: ["extremespeed", "firepunch", "dragondance", "outrage"], pokeball: "cherishball"},
-			{generation: 5, level: 55, gender: "M", isHidden: true, moves: ["dragonrush", "safeguard", "wingattack", "thunderpunch"]},
-			{generation: 5, level: 55, gender: "M", isHidden: true, moves: ["dragonrush", "safeguard", "wingattack", "extremespeed"]},
-			{generation: 5, level: 50, gender: "M", nature: "Brave", ivs: {hp: 30, atk: 30, def: 30, spa: 30, spd: 30, spe: 30}, moves: ["fireblast", "safeguard", "outrage", "hyperbeam"], pokeball: "cherishball"},
-			{generation: 6, level: 55, gender: "M", isHidden: true, moves: ["dragondance", "outrage", "hurricane", "extremespeed"], pokeball: "cherishball"},
-			{generation: 6, level: 62, gender: "M", ivs: {hp: 31, def: 31, spa: 31, spd: 31}, moves: ["agility", "slam", "barrier", "hyperbeam"], pokeball: "cherishball"},
-			{generation: 8, level: 80, gender: "F", nature: "Jolly", abilities: ["innerfocus"], ivs: {hp: 30, atk: 31, def: 30, spa: 30, spd: 31, spe: 31}, moves: ["dragonclaw", "dracometeor", "hurricane", "dragondance"], pokeball: "pokeball"},
-		],
-		encounters: [
-			{generation: 5, level: 50},
-			{generation: 7, level: 10},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	
+		
+			
+			
+	
+	
 	meganium: {
 			ancientpower: ["4T"],
 			aromatherapy: ["7L60", "6L60", "5L60", "4L60"],
@@ -7096,11 +7096,11 @@
 			naturepower: ["7M", "7E", "6M", "6E", "5E", "4E", "3E"],
 			vinewhip: ["9E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			wringout: ["7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 6, level: 50, isHidden: true, moves: ["solarbeam", "sunnyday", "synthesis", "bodyslam"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+	
+	
 	typhlosion: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
@@ -7182,12 +7182,12 @@
 			quickattack: ["9L13", "7L13", "7E", "7V", "6L13", "6E", "5L13", "5E", "4L13", "4E", "3L19", "3E"],
 			reversal: ["9M", "9E", "7E", "7V", "6E", "5E", "4E", "3E", "3S1"],
 			thrash: ["7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 70, moves: ["quickattack", "flamewheel", "swift", "flamethrower"], pokeball: "pokeball"},
-			{generation: 6, level: 50, isHidden: true, moves: ["overheat", "flamewheel", "flamecharge", "swift"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	feraligatr: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			agility: ["9M", "9L1", "7L1", "6L30", "5L30", "4L30"],
@@ -7284,11 +7284,11 @@
 			rockslide: ["9M", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			thrash: ["9L37", "7L41", "7E", "7V", "6L41", "6E", "5L41", "5E", "4L22", "4E", "3E"],
 			watersport: ["7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 6, level: 50, isHidden: true, moves: ["icepunch", "crunch", "waterfall", "screech"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+	
+	
 	furret: {
 			amnesia: ["9M", "9L42", "7L42", "7V", "6L42", "5L42", "4L42", "3L59"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -7377,12 +7377,12 @@
 			slash: ["9E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			substitute: ["9M", "7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			trick: ["9M", "7T", "7E", "6T", "6E", "5T", "5E", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 2, level: 6},
-			{generation: 4, level: 6},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	noctowl: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["9M", "4T"],
@@ -7453,13 +7453,13 @@
 			supersonic: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			whirlwind: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			wingattack: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 2, level: 7},
-			{generation: 4, level: 5},
-			{generation: 7, level: 19},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	ledian: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			agility: ["7L33", "7V", "6L36", "5L36", "4L36", "3L51"],
@@ -7532,12 +7532,12 @@
 			psybeam: ["7E", "7V", "6E", "5E", "4E", "3E", "3S0"],
 			screech: ["7E", "6E", "5E", "4E"],
 			silverwind: ["7L19", "7E", "6L25", "6E", "5L25", "5E", "4M", "4L25", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 2, level: 7},
-			{generation: 4, level: 5},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	ariados: {
 			agility: ["9M", "9L31", "7L37", "7V", "6L37", "5L37", "4L37", "3L53"],
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
@@ -7593,16 +7593,16 @@
 			signalbeam: ["7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3E", "3S0"],
 			sonicboom: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			toxicspikes: ["9M", "7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 9, level: 65, gender: "M", nature: "Hardy", abilities: ["swarm"], ivs: {hp: 20, atk: 20, def: 20, spa: 20, spd: 20, spe: 20}, moves: ["toxicthread", "stickyweb", "crosspoison", "poisonjab"]},
-		],
-		encounters: [
-			{generation: 2, level: 7},
-			{generation: 4, level: 5},
-			{generation: 6, level: 19, maxEggMoves: 1},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+			
+	
+	
 	lanturn: {
 			aquaring: ["9L36", "8L36", "7L47", "6L47", "5L52", "4L47"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -7669,13 +7669,13 @@
 			psybeam: ["9M", "9E", "8E", "7E", "6E", "5E", "4E"],
 			screech: ["8M", "7E", "7V", "6E", "5E", "4E", "3E"],
 			whirlpool: ["9M", "8M", "7E", "7V", "6E", "5E", "4M", "4E"],
-		},
-		encounters: [
-			{generation: 4, level: 20},
-			{generation: 6, level: 26, maxEggMoves: 1},
-			{generation: 7, level: 10},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	togekiss: {
 			aerialace: ["7M", "6M", "5M", "4M"],
 			aircutter: ["4T"],
@@ -7757,11 +7757,11 @@
 			psychoshift: ["8E", "7E", "6E", "5E", "4E"],
 			psychup: ["7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			substitute: ["8M", "7M", "6M", "5M", "4M", "4E", "3T", "3E"],
-		},
-		eventData: [
-			{generation: 5, level: 10, gender: "M", isHidden: true, moves: ["extremespeed", "aurasphere", "airslash", "present"]},
-		],
-	},
+		
+		
+			
+	
+	
 	xatu: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["4T"],
@@ -7846,14 +7846,14 @@
 			steelwing: ["8M", "7M", "7E", "7V", "6M", "6E", "5E", "4M", "4E", "3M", "3E"],
 			suckerpunch: ["8E", "7E", "6E", "5E", "4T", "4E"],
 			zenheadbutt: ["8M", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
-		},
-		encounters: [
-			{generation: 2, level: 15},
-			{generation: 4, level: 16, gender: "M", nature: "Modest", ivs: {hp: 15, atk: 20, def: 15, spa: 20, spd: 20, spe: 20}, abilities: ["synchronize"], pokeball: "pokeball"},
-			{generation: 6, level: 24, maxEggMoves: 1},
-			{generation: 7, level: 21},
-		],
-	},
+		
+		
+			
+			
+			
+			
+	
+	
 	ampharos: {
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
 			bodyslam: ["9M", "3T"],
@@ -7923,8 +7923,8 @@
 			sandattack: ["7E", "6E", "5E", "4E"],
 			screech: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			takedown: ["9M", "9L18", "7L18", "7E", "7V", "6L18", "6E", "5L18", "5E", "4E", "3E"],
-		},
-	},
+		
+	
 	azumarill: {
 			aquaring: ["9L30", "8L30", "7L31", "6L31", "5L27", "4L27"],
 			aquatail: ["9L21", "8L21", "7T", "7L21", "6T", "6L21", "5T", "5L21", "4T", "4L47"],
@@ -7999,12 +7999,12 @@
 			substitute: ["9M", "8M", "7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			superpower: ["9L36", "8M", "8L36", "7T", "7L40", "7E", "6T", "6L37", "6E", "5T", "5L37", "5E", "4T", "4E"],
 			supersonic: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 5, level: 5},
-			{generation: 6, level: 16, maxEggMoves: 1},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	sudowoodo: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			block: ["9L12", "8L12", "7T", "7L29", "6T", "6L26", "5T", "5L22", "4T", "4L22", "3L33"],
@@ -8074,8 +8074,8 @@
 			torment: ["7M", "6M", "5M", "4M"],
 			toxic: ["7M", "7V", "6M", "5M", "4M", "3M"],
 			woodhammer: ["9L1", "8L1", "7L1", "6L1", "5L1", "4L1"],
-		},
-	},
+		
+	
 	jumpluff: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
@@ -8135,11 +8135,11 @@
 			psychup: ["7M", "6M", "5M", "4E", "3E"],
 			reflect: ["9M", "7M", "7V", "6M", "5M", "4E", "3E"],
 			worryseed: ["9E", "7T", "7L40", "7E", "6T", "6L40", "6E", "5T", "5L40", "5E", "4T", "4L34", "4E"],
-		},
-		eventData: [
-			{generation: 5, level: 27, gender: "M", isHidden: true, moves: ["falseswipe", "sleeppowder", "bulletseed", "leechseed"]},
-		],
-	},
+		
+		
+			
+	
+	
 	ambipom: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M"],
 			agility: ["9M", "9L29", "7L29", "6L29", "5L29", "4L29"],
@@ -8224,8 +8224,8 @@
 			screech: ["9L25", "7L25", "7E", "7V", "6L25", "6E", "5L25", "5E", "4L25", "4E", "3L43", "3E"],
 			slam: ["9E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			spite: ["9M", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
-		},
-	},
+		
+	
 	sunflora: {
 			absorb: ["9L7", "7L1", "7V", "6L1", "5L1", "4L1", "3L1"],
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
@@ -8285,8 +8285,8 @@
 			leechseed: ["9E", "7L13", "7E", "6L13", "6E", "5L13", "5E", "4L17", "4E", "3E"],
 			naturepower: ["7M", "7E", "6M", "6E", "5E", "4E", "3E"],
 			sweetscent: ["7E", "7V", "6E", "5E", "5D", "4E"],
-		},
-	},
+		
+	
 	yanmega: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M"],
 			aircutter: ["9M", "4T"],
@@ -8354,8 +8354,8 @@
 			signalbeam: ["7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			silverwind: ["7E", "6E", "5E", "4M", "4E", "3E"],
 			whirlwind: ["9E", "7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-	},
+		
+	
 	quagsire: {
 			amnesia: ["9M", "9L40", "8M", "8L40", "7L24", "7V", "6L24", "5L24", "4L24", "3L23"],
 			ancientpower: ["4T"],
@@ -8440,12 +8440,12 @@
 			spitup: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
 			stockpile: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
 			swallow: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 2, level: 15},
-			{generation: 4, level: 10},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	honchkrow: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M"],
 			aircutter: ["9M", "4T"],
@@ -8516,11 +8516,11 @@
 			skyattack: ["9E", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4E", "3T", "3E"],
 			whirlwind: ["9E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			wingattack: ["9L15", "7L15", "7E", "7V", "6L15", "6E", "5L15", "5E", "4L15", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 7, level: 65, gender: "M", abilities: ["superluck"], moves: ["nightslash", "skyattack", "heatwave", "icywind"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	mismagius: {
 			aerialace: ["7M", "6M", "5M", "4M"],
 			astonish: ["9L1", "7L1", "6L1", "5L1", "4L1"],
@@ -8593,8 +8593,8 @@
 			shadowsneak: ["9E", "7E", "6E", "5E", "4E"],
 			spite: ["9M", "9E", "7T", "7L5", "7E", "7V", "6T", "6L5", "6E", "5T", "5L5", "5E", "4T", "4L5", "4E", "3L6", "3S0"],
 			suckerpunch: ["9E", "7E", "6E", "5E", "4T", "4E"],
-		},
-	},
+		
+	
 	girafarig: {
 			agility: ["9M", "9L23", "7L23", "7V", "6L14", "5L14", "4L14", "3L31"],
 			amnesia: ["9M", "7E", "7V", "6E", "5E", "4E", "3E"],
@@ -8675,8 +8675,8 @@
 			uproar: ["9M", "9E", "7T", "6T", "5T", "4T"],
 			wish: ["9E", "7E", "6E", "5E", "4E", "3E"],
 			zenheadbutt: ["9M", "7T", "7L32", "6T", "6L32", "5T", "5L41", "4T", "4L41"],
-		},
-	},
+		
+	
 	forretress: {
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
 			bide: ["7L20", "7V", "6L20", "5L20", "4L17", "3L29"],
@@ -8749,11 +8749,11 @@
 			sandtomb: ["9M", "9E", "7E", "6E", "5E", "4E", "3E"],
 			swift: ["9M", "9E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			toxicspikes: ["9M", "9E", "7E", "6E", "5E", "5D", "4E"],
-		},
-		encounters: [
-			{generation: 6, level: 30},
-		],
-	},
+		
+		
+			
+	
+	
 	dunsparce: {
 			agility: ["9M", "8M", "7E", "6E", "5E", "4E"],
 			ancientpower: ["9L20", "8L20", "7L16", "7E", "7V", "6L19", "6E", "5L19", "5E", "4T", "4L41", "4E", "3E"],
@@ -8831,8 +8831,8 @@
 			waterpulse: ["7T", "6T", "4M", "3M"],
 			yawn: ["9L28", "8L28", "7L13", "6L16", "5L8", "4L9", "3L11"],
 			zenheadbutt: ["9M", "8M", "7T", "6T", "5T", "4T"],
-		},
-	},
+		
+	
 	gliscor: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -8915,8 +8915,8 @@
 			razorwind: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			sandtomb: ["9M", "7E", "6E", "5E", "4E", "3E"],
 			wingattack: ["9E", "7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-	},
+		
+	
 	granbull: {
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
 			bite: ["9L7", "7L7", "7V", "6L7", "5L7", "4L7", "3L13"],
@@ -9013,11 +9013,11 @@
 			smellingsalts: ["7E", "6E", "5E", "4E", "3E"],
 			snore: ["9E", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3T", "3E"],
 			thunderfang: ["9M", "9L1", "7L1", "7E", "6L1", "6E", "5L1", "5E", "4L1", "4E"],
-		},
-		encounters: [
-			{generation: 2, level: 15},
-		],
-	},
+		
+		
+			
+	
+	
 	qwilfish: {
 			aquajet: ["9E", "8E", "7E", "6E", "5E", "5D", "4E"],
 			aquatail: ["9L48", "8L56", "7T", "7L45", "6T", "6L45", "5T", "5L45", "4T", "4L45"],
@@ -9088,11 +9088,11 @@
 			watergun: ["9L8", "8L8", "7L1", "7V", "6L1", "5L13", "4L13", "3L13"],
 			waterpulse: ["9M", "9E", "8E", "7T", "7E", "6T", "6E", "5E", "4M", "3M"],
 			whirlpool: ["9M", "8M", "7V", "4M"],
-		},
-		eventData: [
-			{generation: 3, level: 10, gender: "M", moves: ["tackle", "poisonsting", "harden", "minimize"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+	
+	
 	shuckle: {
 			acupressure: ["8E", "7E", "6E", "5E", "4E"],
 			ancientpower: ["4T"],
@@ -9149,12 +9149,12 @@
 			toxic: ["8E", "7M", "7V", "6M", "5M", "4M", "3M", "3S1"],
 			withdraw: ["8L1", "7L1", "7V", "6L1", "5L1", "4L1", "3L1", "3S0"],
 			wrap: ["8L1", "7L9", "7V", "6L9", "5L9", "4L22", "3L9", "3S0"],
-		},
-		eventData: [
-			{generation: 3, level: 10, gender: "M", abilities: ["sturdy"], moves: ["constrict", "withdraw", "wrap"], pokeball: "pokeball"},
-			{generation: 3, level: 20, abilities: ["sturdy"], moves: ["substitute", "toxic", "sludgebomb", "encore"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	heracross: {
 			aerialace: ["9M", "9L15", "8L15", "7M", "7L10", "6M", "6L10", "5M", "5L10", "4M", "4L13"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -9223,12 +9223,12 @@
 			thief: ["9M", "8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			toxic: ["7M", "7V", "6M", "5M", "4M", "3M"],
 			vacuumwave: ["9M", "4T"],
-		},
-		eventData: [
-			{generation: 6, level: 50, gender: "F", nature: "Adamant", moves: ["bulletseed", "pinmissile", "closecombat", "megahorn"], pokeball: "cherishball"},
-			{generation: 6, level: 50, nature: "Adamant", abilities: ["guts"], moves: ["pinmissile", "bulletseed", "earthquake", "rockblast"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	weavile: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M"],
 			assurance: ["9L1", "8M", "8L1", "7L1", "6L1", "5L1", "4L1"],
@@ -9318,12 +9318,12 @@
 			pursuit: ["7E", "6E", "5E", "4E"],
 			reflect: ["8M", "7M", "7V", "6M", "5M", "4E", "3E"],
 			spite: ["9M", "9E", "8E", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 4, level: 30, gender: "M", nature: "Jolly", moves: ["fakeout", "iceshard", "nightslash", "brickbreak"], pokeball: "cherishball"},
-			{generation: 6, level: 48, gender: "M", perfectIVs: 2, moves: ["nightslash", "icepunch", "brickbreak", "xscissor"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	ursaring: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
@@ -9418,11 +9418,11 @@
 			sleeptalk: ["9M", "7M", "7E", "7V", "6M", "6E", "5T", "5E", "4M", "4E", "3T", "3E"],
 			takedown: ["9M", "7E", "7V", "6E", "5E", "4E", "3E"],
 			yawn: ["9E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 2, level: 25},
-		],
-	},
+		
+		
+			
+	
+	
 	magcargo: {
 			amnesia: ["9M", "9L36", "7L36", "7V", "6L32", "5L32", "4L31", "3L29"],
 			ancientpower: ["9L22", "7L22", "6L22", "5L28", "4T", "4L26"],
@@ -9491,15 +9491,15 @@
 			spitup: ["7E", "6E", "5E", "4E"],
 			stockpile: ["9E", "7E", "6E", "5E", "4E"],
 			swallow: ["7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 38, moves: ["refresh", "heatwave", "earthquake", "flamethrower"]},
-		],
-		encounters: [
-			{generation: 3, level: 25},
-			{generation: 6, level: 30},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+	
+	
 	mamoswine: {
 			ancientpower: ["9L1", "8L1", "7L1", "6L1", "5L1", "4T", "4L1"],
 			attract: ["8M", "7M", "6M", "5M", "4M"],
@@ -9569,12 +9569,12 @@
 			mudshot: ["9M", "8M", "7E", "6E", "5E", "4E", "3E", "3S0"],
 			rockslide: ["9M", "8M", "7M", "7V", "6M", "5M", "4M", "4E", "3T", "3E"],
 			takedown: ["9M", "9L40", "8L40", "7L28", "7E", "7V", "6L28", "6E", "5L28", "5E", "4L32", "4E", "3L28", "3E"],
-		},
-		eventData: [
-			{generation: 5, level: 34, gender: "M", isHidden: true, moves: ["hail", "icefang", "takedown", "doublehit"]},
-			{generation: 6, level: 50, shiny: true, gender: "M", nature: "Adamant", isHidden: true, moves: ["iciclespear", "earthquake", "iciclecrash", "rockslide"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	corsola: {
 			amnesia: ["8M", "7E", "7V", "6E", "5E", "4E", "3E"],
 			ancientpower: ["8L20", "7L17", "7V", "6L17", "5L20", "4T", "4L32", "3L45"],
@@ -9655,12 +9655,12 @@
 			toxic: ["7M", "7V", "6M", "5M", "4M", "3M"],
 			waterpulse: ["8E", "7T", "7E", "6T", "6E", "5E", "4M", "3M"],
 			whirlpool: ["8M", "7V", "4M"],
-		},
-		eventData: [
-			{generation: 3, level: 5, shiny: 1, moves: ["tackle", "mudsport"], pokeball: "pokeball", emeraldEventEgg: true},
-			{generation: 7, level: 50, gender: "F", nature: "Serious", abilities: ["hustle"], moves: ["tackle", "powergem"], pokeball: "ultraball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	octillery: {
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			aurorabeam: ["8L16", "7L1", "7V", "6L1", "5L1", "4L1", "3L22"],
@@ -9733,15 +9733,15 @@
 			supersonic: ["8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			thunderwave: ["8M", "7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			waterspout: ["8E", "7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 4, level: 50, gender: "F", nature: "Serious", abilities: ["suctioncups"], moves: ["octazooka", "icebeam", "signalbeam", "hyperbeam"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 4, level: 19},
-			{generation: 7, level: 10},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+	
+	
 	delibird: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			attract: ["8M", "7M", "7V", "6M", "5M", "4M", "3M"],
@@ -9802,12 +9802,12 @@
 			thief: ["9M", "8M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			toxic: ["7M", "7V", "6M", "5M", "4M", "3M"],
 			waterpulse: ["9M", "7T", "6T", "4M", "3M"],
-		},
-		eventData: [
-			{generation: 3, level: 10, gender: "M", moves: ["present"], pokeball: "pokeball"},
-			{generation: 6, level: 10, abilities: ["vitalspirit"], moves: ["present", "happyhour"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	mantine: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			agility: ["8M", "8L20", "7L32", "7V", "6L32", "5L19", "4L19", "3L29"],
@@ -9879,11 +9879,11 @@
 			watersport: ["7E", "6E", "5E", "4E"],
 			whirlpool: ["8M", "7V", "4M"],
 			wingattack: ["8L1", "7L14", "7V", "6L14", "5L14", "4L22", "3L36"],
-		},
-		eventData: [
-			{generation: 3, level: 10, gender: "M", moves: ["tackle", "bubble", "supersonic"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+	
+	
 	skarmory: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			agility: ["9M", "9L16", "8M", "8L16", "7L31", "7V", "6L12", "5L12", "4L12", "3L16"],
@@ -9956,8 +9956,8 @@
 			twister: ["4T"],
 			whirlwind: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
 			xscissor: ["9M", "8M", "7M", "6M", "5M", "4M"],
-		},
-	},
+		
+	
 	houndoom: {
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
 			beatup: ["9L26", "7L26", "6L26", "5L26", "4L28"],
@@ -10037,14 +10037,14 @@
 			spite: ["9M", "9E", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			thunderfang: ["9M", "9E", "7E", "6E", "5E", "4E"],
 			willowisp: ["9M", "7M", "6M", "5M", "4M", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 6, level: 50, nature: "Timid", abilities: ["flashfire"], moves: ["flamethrower", "darkpulse", "solarbeam", "sludgebomb"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 4, level: 20},
-		],
-	},
+		
+		
+			
+	
+		
+			
+	
+	
 	donphan: {
 			ancientpower: ["4T"],
 			assurance: ["9L15", "7L15", "6L15", "5L31", "4L31"],
@@ -10118,11 +10118,11 @@
 			headsmash: ["9E", "7E", "6E", "5E", "4E"],
 			iceshard: ["9E", "7E", "6E", "5E", "4E"],
 			snore: ["9E", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4T", "4E", "3T", "3E"],
-		},
-		encounters: [
-			{generation: 6, level: 24, maxEggMoves: 1},
-		],
-	},
+		
+		
+			
+	
+	
 	stantler: {
 			astonish: ["9L7", "7L7", "6L7", "5L7", "4L7", "3L11"],
 			attract: ["7M", "7V", "6M", "5M", "4M", "3M"],
@@ -10197,11 +10197,11 @@
 			trickroom: ["9M", "7M", "6M", "5M", "4M"],
 			uproar: ["9M", "7T", "6T", "5T", "4T"],
 			zenheadbutt: ["9M", "9L37", "7T", "7L38", "7E", "6T", "6L38", "6E", "5T", "5L38", "5E", "4T", "4L38", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 10, gender: "M", abilities: ["intimidate"], moves: ["tackle", "leer"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+	
+	
 	miltank: {
 			attract: ["8M", "7M", "7V", "6M", "6S0", "5M", "4M", "3M"],
 			bide: ["7L15", "7V", "6L15", "5L15", "4L15", "3L26"],
@@ -10283,11 +10283,11 @@
 			waterpulse: ["7T", "6T", "4M", "3M"],
 			whirlpool: ["8M", "4M"],
 			zenheadbutt: ["8M", "8L30", "7T", "7L29", "6T", "6L29", "5T", "5L29", "4T", "4L29"],
-		},
-		eventData: [
-			{generation: 6, level: 20, perfectIVs: 3, abilities: ["scrappy"], moves: ["rollout", "attract", "stomp", "milkdrink"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	tyranitar: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			ancientpower: ["4T"],
@@ -10392,20 +10392,20 @@
 			outrage: ["9M", "9E", "8M", "7T", "7E", "7V", "6T", "6E", "5T", "5E", "4E", "3E", "3S0"],
 			pursuit: ["7E", "7V", "6E", "5E", "4E", "3E"],
 			stomp: ["9E", "8E", "7E", "7V", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 70, moves: ["thrash", "scaryface", "crunch", "earthquake"], pokeball: "pokeball"},
-			{generation: 5, level: 100, gender: "M", moves: ["fireblast", "icebeam", "stoneedge", "crunch"], pokeball: "cherishball"},
-			{generation: 5, level: 55, gender: "M", isHidden: true, moves: ["payback", "crunch", "earthquake", "seismictoss"]},
-			{generation: 6, level: 50, moves: ["stoneedge", "crunch", "earthquake", "icepunch"], pokeball: "cherishball"},
-			{generation: 6, level: 50, nature: "Jolly", moves: ["rockslide", "earthquake", "crunch", "stoneedge"], pokeball: "cherishball"},
-			{generation: 6, level: 55, shiny: true, nature: "Adamant", ivs: {hp: 31, atk: 31, def: 31, spa: 14, spd: 31, spe: 0}, moves: ["crunch", "rockslide", "lowkick", "protect"], pokeball: "cherishball"},
-			{generation: 6, level: 100, moves: ["rockslide", "crunch", "icepunch", "lowkick"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 5, level: 50},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+			
+			
+	
+		
+			
+	
+	
 	sceptile: {
 			absorb: ["7L1", "6L1", "5L1", "4L1", "3L1"],
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
@@ -10500,11 +10500,11 @@
 			razorwind: ["7E", "6E", "5E", "4E"],
 			synthesis: ["9E", "8E", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
 			worryseed: ["9E", "8E", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
-		},
-		eventData: [
-			{generation: 5, level: 50, shiny: 1, moves: ["leafstorm", "dragonpulse", "focusblast", "rockslide"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	blaziken: {
 			aerialace: ["9M", "9L20", "8L20", "7M", "6M", "5M", "4M", "3M"],
 			attract: ["8M", "7M", "6M", "5M", "4M", "3M"],
@@ -10601,12 +10601,12 @@
 			rockslide: ["9M", "8M", "7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			smellingsalts: ["7E", "6E", "5E", "4E", "3E"],
 			swagger: ["7M", "6M", "5M", "4M", "4E", "3T", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 70, moves: ["blazekick", "slash", "mirrormove", "skyuppercut"], pokeball: "pokeball"},
-			{generation: 5, level: 50, shiny: 1, moves: ["flareblitz", "highjumpkick", "thunderpunch", "stoneedge"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	swampert: {
 			ancientpower: ["4T"],
 			aquatail: ["7T", "6T", "5T", "4T"],
@@ -10699,11 +10699,11 @@
 			uproar: ["9M", "8M", "7T", "7E", "6T", "6E", "5E", "4E", "3E"],
 			whirlpool: ["9M", "8M", "7L33", "7E", "6L33", "6E", "5L33", "5E", "4M", "4L33", "4E", "3L33"],
 			yawn: ["9E", "8E", "7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 5, level: 50, shiny: 1, moves: ["earthquake", "icebeam", "hydropump", "hammerarm"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	mightyena: {
 			assurance: ["9L24", "7L24", "6L24", "5L32", "4L32"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -10769,11 +10769,11 @@
 			suckerpunch: ["9L40", "7L43", "7E", "6L40", "6E", "5L49", "5E", "4T", "4L49", "4E"],
 			thunderfang: ["9M", "7E", "6E", "5E", "4E"],
 			yawn: ["9L34", "7L37", "7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 7, level: 64, gender: "M", abilities: ["intimidate"], moves: ["crunch", "firefang", "icefang", "thunderfang"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	linoone: {
 			attract: ["8M", "7M", "6M", "5M", "4M", "3M"],
 			bellydrum: ["8L43", "7L43", "6L43", "5L59", "4L53", "3L53"],
@@ -10851,15 +10851,15 @@
 			substitute: ["8M", "7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			tickle: ["8E", "7E", "6E", "5E", "4E", "3E"],
 			trick: ["8M", "7T", "7E", "6T", "6E", "5T", "5E", "5D", "4T", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 6, level: 50, moves: ["extremespeed", "helpinghand", "babydolleyes", "protect"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 4, level: 3},
-			{generation: 6, level: 17, maxEggMoves: 1},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+	
+	
 	beautifly: {
 			absorb: ["7L12", "6L1", "5L1", "4L1", "3L1"],
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
@@ -10911,8 +10911,8 @@
 			twister: ["4T"],
 			uturn: ["7M", "6M", "5M", "4M"],
 			whirlwind: ["7L30", "6L27", "5L27", "4L27", "3L27"],
-		},
-	},
+		
+	
 	dustox: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["4T"],
@@ -10964,8 +10964,8 @@
 			twister: ["4T"],
 			uturn: ["7M", "6M", "5M", "4M"],
 			whirlwind: ["7L30", "6L27", "5L27", "4L27", "3L27"],
-		},
-	},
+		
+	
 	ludicolo: {
 			absorb: ["9L1", "8L1", "3L1"],
 			astonish: ["9L1", "8L1", "7L1", "6L1", "5L1", "4L1", "3L1"],
@@ -11044,12 +11044,12 @@
 			synthesis: ["9E", "8E", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			tickle: ["9E", "8E", "7E", "6E", "5E", "4E"],
 			watergun: ["9L6", "8L6", "7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 5, level: 50, shiny: 1, abilities: ["swiftswim"], moves: ["fakeout", "hydropump", "icebeam", "gigadrain"], pokeball: "cherishball"},
-			{generation: 5, level: 30, gender: "M", nature: "Calm", abilities: ["swiftswim"], moves: ["scald", "gigadrain", "icebeam", "sunnyday"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	shiftry: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["9M", "9L1", "8L1", "4T"],
@@ -11141,8 +11141,8 @@
 			razorwind: ["7E", "6E", "5E", "4E", "3E"],
 			takedown: ["9M", "9E", "8E", "7E", "6E", "5E", "4E", "3E"],
 			worryseed: ["9E", "8E", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
-		},
-	},
+		
+	
 	swellow: {
 			aerialace: ["7M", "7L21", "6M", "6L21", "5M", "5L38", "4M", "4L38", "3M", "3L38"],
 			agility: ["7L33", "6L33", "5L49", "4L49", "3L49", "3S0"],
@@ -11201,14 +11201,14 @@
 			skyattack: ["7T", "7E", "6T", "6E", "5E", "4E", "3T", "3E"],
 			supersonic: ["7E", "6E", "5E", "4E", "3E"],
 			whirlwind: ["7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 43, moves: ["batonpass", "skyattack", "agility", "facade"]},
-		],
-		encounters: [
-			{generation: 4, level: 20},
-		],
-	},
+		
+		
+			
+	
+		
+			
+	
+	
 	pelipper: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["9M", "4T"],
@@ -11279,12 +11279,12 @@
 			mist: ["9L35", "8L35", "7L12", "7E", "6L12", "6E", "5L14", "5E", "4L16", "4E", "3L21", "3E"],
 			twister: ["9E", "8E", "7E", "6E", "5E", "5D", "4T", "4E", "3E"],
 			watersport: ["7E", "6E", "5E", "4E", "3E"],
-		},
-		encounters: [
-			{generation: 4, level: 15},
-			{generation: 6, level: 18, maxEggMoves: 1},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	gardevoir: {
 			attract: ["8M", "7M", "6M", "5M", "4M", "3M"],
 			bodyslam: ["9M", "8M", "3T"],
@@ -11368,12 +11368,12 @@
 			memento: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
 			shadowsneak: ["9E", "8E", "7E", "6E", "5E", "4E"],
 			willowisp: ["9M", "8M", "7M", "6M", "5M", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 5, level: 50, shiny: 1, abilities: ["trace"], moves: ["hypnosis", "thunderbolt", "focusblast", "psychic"], pokeball: "cherishball"},
-			{generation: 6, level: 50, shiny: true, gender: "F", abilities: ["synchronize"], moves: ["dazzlinggleam", "moonblast", "storedpower", "calmmind"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	gallade: {
 			aerialace: ["9M", "9L18", "8L18", "7M", "7L17", "6M", "5M", "4M"],
 			attract: ["8M", "7M", "6M", "5M", "4M"],
@@ -11460,8 +11460,8 @@
 			vacuumwave: ["9M", "4T"],
 			xscissor: ["9M", "8M", "7M", "6M", "5M", "4M"],
 			zenheadbutt: ["9M", "8M", "7T", "6T", "5T", "4T"],
-		},
-	},
+		
+	
 	masquerain: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["9M", "9L22", "7L22", "6L22", "4T"],
@@ -11529,11 +11529,11 @@
 			mudshot: ["9M", "9E", "7E", "6E", "5E", "4E", "3E"],
 			psybeam: ["9M", "9E", "7E", "6E", "5E", "4E", "3E"],
 			signalbeam: ["7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
-		},
-		encounters: [
-			{generation: 6, level: 21, maxEggMoves: 1},
-		],
-	},
+		
+		
+			
+	
+	
 	breloom: {
 			absorb: ["9L1", "7L1", "6L1", "5L1", "4L1", "3L1"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -11613,8 +11613,8 @@
 			swagger: ["7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			wakeupslap: ["7E", "6E", "5E", "4E"],
 			worryseed: ["9E", "7T", "7L22", "7E", "6T", "6L22", "6E", "5T", "5L29", "5E", "4T", "4L29", "4E"],
-		},
-	},
+		
+	
 	slaking: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "4S0", "3M"],
 			amnesia: ["9M", "9L17", "7L17", "6L17", "5L25", "4L25", "3L25"],
@@ -11701,11 +11701,11 @@
 			slash: ["9E", "7E", "6E", "5E", "4E", "3E"],
 			sleeptalk: ["9M", "7M", "7E", "6M", "6E", "5T", "5E", "4M", "4E", "3T", "3E"],
 			snore: ["9E", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3T", "3E"],
-		},
-		eventData: [
-			{generation: 4, level: 50, gender: "M", nature: "Adamant", moves: ["gigaimpact", "return", "shadowclaw", "aerialace"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	ninjask: {
 			aerialace: ["8L1", "7M", "6M", "5M", "4M", "3M"],
 			agility: ["8M", "8L15", "7L17", "6L17", "5L38", "4L38", "3L38"],
@@ -11771,8 +11771,8 @@
 			gust: ["8E", "7E", "6E", "5E", "4E", "3E"],
 			nightslash: ["8E", "7E", "6E", "5E", "5D", "4E"],
 			silverwind: ["7E", "6E", "5E", "4E", "3E"],
-		},
-	},
+		
+	
 	exploud: {
 			astonish: ["8L1", "7L1", "6L1", "5L1", "4L1", "3L1"],
 			attract: ["8M", "7M", "6M", "5M", "4M", "3M"],
@@ -11860,12 +11860,12 @@
 			snore: ["8M", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3T", "3E"],
 			swagger: ["7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			takedown: ["8E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 100, moves: ["roar", "rest", "sleeptalk", "hypervoice"], pokeball: "pokeball"},
-			{generation: 3, level: 50, moves: ["stomp", "screech", "hyperbeam", "roar"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	hariyama: {
 			armthrust: ["9L1", "7L1", "6L1", "5L1", "4L1", "3L1"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -11951,11 +11951,11 @@
 			helpinghand: ["9M", "9E", "7T", "7E", "6T", "6E", "5T", "5E", "5D", "4T", "4E", "3E"],
 			revenge: ["7E", "6E", "5E", "4E", "3E"],
 			wakeupslap: ["7L34", "7E", "6L34", "6E", "5L34", "5E", "4L34", "4E"],
-		},
-		encounters: [
-			{generation: 6, level: 22},
-		],
-	},
+		
+		
+			
+	
+	
 	probopass: {
 			ancientpower: ["4T"],
 			attract: ["7M", "6M", "5M", "4M"],
@@ -12020,8 +12020,8 @@
 			explosion: ["7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			magnitude: ["7E", "6E", "5E", "4E", "3E"],
 			rollout: ["9E", "7E", "6E", "5E", "4T", "4E", "3T", "3E"],
-		},
-	},
+		
+	
 	delcatty: {
 			attract: ["7M", "7L1", "6M", "6L1", "5M", "5L1", "4M", "4L1", "3M", "3L1", "3S0"],
 			blizzard: ["7M", "6M", "5M", "4M", "3M"],
@@ -12097,11 +12097,11 @@
 			uproar: ["7T", "7E", "6T", "6E", "5T", "5E", "4E", "3E"],
 			wish: ["7E", "6E", "5E", "4E", "3E"],
 			zenheadbutt: ["7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 18, abilities: ["cutecharm"], moves: ["sweetkiss", "secretpower", "attract", "shockwave"]},
-		],
-	},
+		
+		
+			
+	
+	
 	sableye: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			astonish: ["9L3", "8L3", "7L9", "6L9", "5L11", "4L11", "3L13"],
@@ -12197,15 +12197,15 @@
 			waterpulse: ["7T", "6T", "4M", "3M"],
 			willowisp: ["9M", "8M", "7M", "6M", "6S3", "6S4", "5M", "4M"],
 			zenheadbutt: ["9M", "9L42", "8M", "8L42", "7T", "7L34", "6T", "6L1", "5T", "5L53", "4T", "4L50"],
-		},
-		eventData: [
-			{generation: 3, level: 10, gender: "M", abilities: ["keeneye"], moves: ["leer", "scratch", "foresight", "nightshade"], pokeball: "pokeball"},
-			{generation: 3, level: 33, abilities: ["keeneye"], moves: ["helpinghand", "shadowball", "feintattack", "recover"]},
-			{generation: 5, level: 50, gender: "M", isHidden: true, moves: ["foulplay", "octazooka", "tickle", "trick"], pokeball: "cherishball"},
-			{generation: 6, level: 50, nature: "Relaxed", ivs: {hp: 31, spa: 31}, isHidden: true, moves: ["calmmind", "willowisp", "recover", "shadowball"], pokeball: "cherishball"},
-			{generation: 6, level: 100, nature: "Bold", isHidden: true, moves: ["willowisp", "recover", "taunt", "shockwave"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+	
+	
 	mawile: {
 			ancientpower: ["8E", "7E", "6E", "5E", "4T", "4E", "3E"],
 			astonish: ["8L1", "7L1", "6L1", "5L1", "4L1", "3L1", "3S0"],
@@ -12294,14 +12294,14 @@
 			torment: ["7M", "6M", "5M", "4M", "3M"],
 			toxic: ["7M", "6M", "5M", "4M", "3M"],
 			visegrip: ["7L17", "6L17", "5L21", "4L21", "3L21", "3S1"],
-		},
-		eventData: [
-			{generation: 3, level: 10, gender: "M", moves: ["astonish", "faketears"], pokeball: "pokeball"},
-			{generation: 3, level: 22, moves: ["sing", "falseswipe", "visegrip", "irondefense"]},
-			{generation: 6, level: 50, abilities: ["intimidate"], moves: ["ironhead", "playrough", "firefang", "suckerpunch"], pokeball: "cherishball"},
-			{generation: 6, level: 100, abilities: ["intimidate"], moves: ["suckerpunch", "protect", "playrough", "ironhead"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+	
+	
 	aggron: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			ancientpower: ["4T"],
@@ -12408,13 +12408,13 @@
 			screech: ["8M", "7E", "6E", "5E", "4E"],
 			smellingsalts: ["7E", "6E", "5E", "4E", "3E"],
 			stomp: ["8E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 100, moves: ["irontail", "protect", "metalsound", "doubleedge"], pokeball: "pokeball"},
-			{generation: 3, level: 50, moves: ["takedown", "irontail", "protect", "metalsound"], pokeball: "pokeball"},
-			{generation: 6, level: 50, nature: "Brave", abilities: ["rockhead"], moves: ["ironhead", "earthquake", "headsmash", "rockslide"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	medicham: {
 			attract: ["7M", "6M", "5M", "4M", "3M"],
 			bide: ["7L1", "6L1", "5L1", "4L1", "3L1"],
@@ -12506,12 +12506,12 @@
 			powerswap: ["9E", "7E", "6E", "5E", "4E"],
 			psychocut: ["9E", "7E", "6E", "5E", "4E"],
 			thunderpunch: ["9M", "9E", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3T", "3E"],
-		},
-		encounters: [
-			{generation: 4, level: 35},
-			{generation: 6, level: 34, maxEggMoves: 1},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	manectric: {
 			attract: ["8M", "7M", "6M", "5M", "4M", "3M"],
 			bite: ["8L20", "7L24", "6L24", "5L30", "4L30", "3L39", "3S0"],
@@ -12576,12 +12576,12 @@
 			switcheroo: ["8E", "7E", "6E", "5E", "4E"],
 			thunderfang: ["8M", "8L24", "7L19", "7E", "6L19", "6E", "5L33", "5E", "4L33", "4E"],
 			uproar: ["8M", "7T", "7E", "6T", "6E", "5T", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 44, moves: ["refresh", "thunder", "raindance", "bite"]},
-			{generation: 6, level: 50, nature: "Timid", abilities: ["lightningrod"], moves: ["overheat", "thunderbolt", "voltswitch", "protect"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	plusle: {
 			agility: ["9M", "9L37", "7L37", "6L37", "5L48", "4L44", "3L47"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -12646,12 +12646,12 @@
 			uproar: ["9M", "7T", "6T", "5T", "4T"],
 			watersport: ["3S0"],
 			wish: ["9E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 5, shiny: 1, moves: ["growl", "thunderwave", "watersport"], pokeball: "pokeball", emeraldEventEgg: true},
-			{generation: 3, level: 10, gender: "M", moves: ["growl", "thunderwave", "quickattack"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	volbeat: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["9M", "4T"],
@@ -12722,8 +12722,8 @@
 			uturn: ["9M", "7M", "6M", "5M", "4M"],
 			waterpulse: ["9M", "7T", "6T", "4M", "3M"],
 			zenheadbutt: ["9M", "9L29", "7T", "7L33", "6T", "6L33", "5T", "5L37", "4T", "4L37"],
-		},
-	},
+		
+	
 	illumise: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["9M", "4T"],
@@ -12796,8 +12796,8 @@
 			waterpulse: ["9M", "7T", "6T", "4M", "3M"],
 			wish: ["9L22", "7L22", "6L21", "5L21", "4L21", "3L21"],
 			zenheadbutt: ["9M", "9L33", "7T", "7L33", "6T", "6L33", "5T", "5L37", "4T", "4L37"],
-		},
-	},
+		
+	
 	roserade: {
 			attract: ["8M", "7M", "6M", "5M", "4M"],
 			bulletseed: ["8M", "4M"],
@@ -12851,8 +12851,8 @@
 			sleeppowder: ["8E", "7E", "6E", "5E", "5D", "4E"],
 			spikes: ["8M", "7E", "6E", "5E", "4E", "3E"],
 			synthesis: ["8L35", "7T", "7L46", "7E", "6T", "6L46", "6E", "5T", "5L46", "5E", "4T", "4L46", "4E", "3L57", "3E"],
-		},
-	},
+		
+	
 	swalot: {
 			amnesia: ["9M", "9L12", "7L12", "6L12", "5L17", "4L17", "3L17"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -12924,8 +12924,8 @@
 			dreameater: ["7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			painsplit: ["9M", "9L44", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			smog: ["9E", "7E", "6E", "5E", "4E", "3E"],
-		},
-	},
+		
+	
 	sharpedo: {
 			agility: ["8M", "8L40", "7L45", "6L45", "5L45", "4L45", "3L53"],
 			ancientpower: ["4T"],
@@ -12999,15 +12999,15 @@
 			doubleedge: ["8E", "7E", "6E", "5E", "4E", "3T", "3E"],
 			hydropump: ["8M", "7E", "6E", "6S1", "5E", "4E", "3E"],
 			thrash: ["8E", "7E", "6E", "5E", "5D", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 6, level: 50, nature: "Adamant", isHidden: true, moves: ["aquajet", "crunch", "icefang", "destinybond"], pokeball: "cherishball"},
-			{generation: 6, level: 43, gender: "M", perfectIVs: 2, moves: ["scaryface", "slash", "poisonfang", "crunch"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 7, level: 10},
-		],
-	},
+		
+		
+			
+			
+	
+		
+			
+	
+	
 	wailord: {
 			amnesia: ["8M", "8L44", "7L37", "6L37", "5L37", "4L37", "3L52", "3S0"],
 			astonish: ["8L1", "7L16", "6L16", "5L17", "4L17", "3L23"],
@@ -13074,18 +13074,18 @@
 			swagger: ["7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			thrash: ["8E", "7E", "6E", "5E", "4E", "3E"],
 			tickle: ["8E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 100, moves: ["rest", "waterspout", "amnesia", "hydropump"], pokeball: "pokeball"},
-			{generation: 3, level: 50, moves: ["waterpulse", "mist", "rest", "waterspout"], pokeball: "pokeball"},
-		],
-		encounters: [
-			{generation: 3, level: 25},
-			{generation: 4, level: 35},
-			{generation: 5, level: 30},
-			{generation: 7, level: 10},
-		],
-	},
+		
+		
+			
+			
+	
+		
+			
+			
+			
+			
+	
+	
 	camerupt: {
 			amnesia: ["9M", "9L19", "7L19", "6L19", "5L19", "4L25", "3L31"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -13159,14 +13159,14 @@
 			stomp: ["9E", "7E", "6E", "5E", "4E", "3E"],
 			swallow: ["9E", "7E", "6E", "5E", "4E"],
 			yawn: ["9E", "7L36", "7E", "6L36", "6E", "5L36", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 6, level: 43, gender: "M", perfectIVs: 2, abilities: ["solidrock"], moves: ["curse", "takedown", "rockslide", "yawn"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 6, level: 30},
-		],
-	},
+		
+		
+			
+	
+		
+			
+	
+	
 	torkoal: {
 			amnesia: ["9M", "9L52", "8M", "8L52", "7L40", "6L40", "5L49", "4L49", "3L40"],
 			attract: ["8M", "7M", "6M", "5M", "4M", "3M"],
@@ -13228,11 +13228,11 @@
 			willowisp: ["9M", "8M", "7M", "6M", "5M", "4M"],
 			withdraw: ["9L4", "8L4", "7L7", "6L7", "5L7", "4L7"],
 			yawn: ["9E", "8E", "8S0", "7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 8, level: 50, gender: "M", nature: "Bold", abilities: ["drought"], ivs: {hp: 31, atk: 12, def: 31, spa: 31, spd: 31, spe: 0}, moves: ["burningjealousy", "bodypress", "yawn", "protect"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	grumpig: {
 			attract: ["7M", "6M", "5M", "4M", "3M"],
 			bodyslam: ["9M", "3T"],
@@ -13317,11 +13317,11 @@
 			substitute: ["9M", "7M", "6M", "5M", "4M", "4E", "3T", "3E"],
 			trick: ["9M", "9E", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			zenheadbutt: ["9M", "9E", "7T", "7L26", "7E", "6T", "6L26", "6E", "5T", "5L26", "5E", "4T", "4L26", "4E"],
-		},
-		encounters: [
-			{generation: 6, level: 30},
-		],
-	},
+		
+		
+			
+	
+	
 	spinda: {
 			assist: ["7E", "6E", "5E", "4E", "3E"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -13410,11 +13410,11 @@
 			waterpulse: ["7T", "7E", "6T", "6E", "5E", "4M", "3M"],
 			wish: ["7E", "6E", "5E", "4E", "3E"],
 			zenheadbutt: ["7T", "6T", "5T", "4T"],
-		},
-		eventData: [
-			{generation: 3, level: 5, shiny: 1, moves: ["tackle", "uproar", "sing"], pokeball: "pokeball", emeraldEventEgg: true},
-		],
-	},
+		
+		
+			
+	
+	
 	flygon: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M"],
 			aircutter: ["9M", "4T"],
@@ -13491,12 +13491,12 @@
 			gust: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
 			mudshot: ["9M", "8M", "7E", "6E", "5E", "4E"],
 			quickattack: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 45, moves: ["sandtomb", "crunch", "dragonbreath", "screech"], pokeball: "pokeball"},
-			{generation: 4, level: 50, gender: "M", nature: "Naive", moves: ["dracometeor", "uturn", "earthquake", "dragonclaw"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+	
+	
 	cacturne: {
 			absorb: ["9L1", "7L1", "6L1", "5L1", "4L1", "3L1"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -13581,14 +13581,14 @@
 			seedbomb: ["9M", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
 			smellingsalts: ["7E", "6E", "5E", "4E"],
 			teeterdance: ["9E", "7E", "6E", "5E", "5D", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 45, moves: ["ingrain", "feintattack", "spikes", "needlearm"], pokeball: "pokeball"},
-		],
-		encounters: [
-			{generation: 6, level: 30},
-		],
-	},
+		
+		
+			
+	
+		
+			
+	
+	
 	altaria: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M", "3S1"],
 			aircutter: ["4T"],
@@ -13663,14 +13663,14 @@
 			powerswap: ["8M", "7E", "6E", "5E", "4E"],
 			pursuit: ["7E", "6E", "5E", "4E", "3E"],
 			rage: ["7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 45, moves: ["takedown", "dragonbreath", "dragondance", "refresh"], pokeball: "pokeball"},
-			{generation: 3, level: 36, moves: ["healbell", "dragonbreath", "solarbeam", "aerialace"]},
-			{generation: 5, level: 35, gender: "M", isHidden: true, moves: ["takedown", "naturalgift", "dragonbreath", "falseswipe"]},
-			{generation: 6, level: 100, nature: "Modest", isHidden: true, moves: ["hypervoice", "fireblast", "protect", "agility"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+	
+	
 	zangoose: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -13765,13 +13765,13 @@
 			toxic: ["7M", "6M", "5M", "4M", "3M"],
 			waterpulse: ["7T", "6T", "4M", "3M"],
 			xscissor: ["9M", "9L40", "7M", "7L40", "6M", "6L36", "5M", "5L36", "4M", "4L48"],
-		},
-		eventData: [
-			{generation: 3, level: 18, moves: ["leer", "quickattack", "swordsdance", "furycutter"], pokeball: "pokeball"},
-			{generation: 3, level: 10, gender: "M", moves: ["scratch", "leer", "quickattack", "swordsdance"], pokeball: "pokeball"},
-			{generation: 3, level: 28, moves: ["refresh", "brickbreak", "counter", "crushclaw"]},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	seviper: {
 			aquatail: ["7T", "6T", "5T", "5D", "4T"],
 			assurance: ["9E", "7E", "6E", "5E", "4E"],
@@ -13834,13 +13834,13 @@
 			wrap: ["9L1", "7L1", "6L1", "5L1", "4L1", "3L1", "3S0", "3S2"],
 			wringout: ["7L46", "7E", "6L49", "6E", "5L53", "5E", "4L55"],
 			xscissor: ["9M", "7M", "6M", "5M", "4M"],
-		},
-		eventData: [
-			{generation: 3, level: 18, moves: ["wrap", "lick", "bite", "poisontail"], pokeball: "pokeball"},
-			{generation: 3, level: 30, moves: ["poisontail", "screech", "glare", "crunch"], pokeball: "pokeball"},
-			{generation: 3, level: 10, gender: "M", moves: ["wrap", "lick", "bite"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	lunatone: {
 			ancientpower: ["4T"],
 			batonpass: ["8M", "3S1"],
@@ -13912,13 +13912,13 @@
 			toxic: ["7M", "6M", "5M", "4M", "3M"],
 			trickroom: ["8M", "7M", "6M", "5M", "4M"],
 			zenheadbutt: ["8M", "7T", "6T", "5T", "4T"],
-		},
-		eventData: [
-			{generation: 3, level: 10, moves: ["tackle", "harden", "confusion"], pokeball: "pokeball"},
-			{generation: 3, level: 25, moves: ["batonpass", "psychic", "raindance", "rocktomb"]},
-			{generation: 7, level: 30, moves: ["cosmicpower", "hiddenpower", "moonblast", "powergem"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	solrock: {
 			ancientpower: ["4T"],
 			batonpass: ["8M", "3S1"],
@@ -13993,13 +13993,13 @@
 			trickroom: ["8M", "7M", "6M", "5M", "4M"],
 			willowisp: ["8M", "7M", "6M", "5M", "4M"],
 			zenheadbutt: ["8M", "8L20", "7T", "6T", "5T", "5D", "4T"],
-		},
-		eventData: [
-			{generation: 3, level: 10, moves: ["tackle", "harden", "confusion"], pokeball: "pokeball"},
-			{generation: 3, level: 41, moves: ["batonpass", "psychic", "sunnyday", "cosmicpower"]},
-			{generation: 7, level: 30, moves: ["cosmicpower", "hiddenpower", "solarbeam", "stoneedge"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+	
+	
 	whiscash: {
 			amnesia: ["9M", "9L18", "8M", "8L18", "7L15", "6L15", "5L18", "4L18", "3L21"],
 			aquatail: ["9L24", "8L24", "7T", "7L28", "6T", "6L28", "5T", "5L39", "4T", "4L39", "4S0"],
@@ -14061,15 +14061,15 @@
 			takedown: ["9M", "9E", "8E", "7E", "6E", "5E", "4E"],
 			thrash: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
 			whirlpool: ["9M", "8M", "7E", "6E", "5E", "4M", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 4, level: 51, gender: "F", nature: "Gentle", abilities: ["oblivious"], moves: ["earthquake", "aquatail", "zenheadbutt", "gigaimpact"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 4, level: 10},
-			{generation: 7, level: 10},
-		],
-	},
+		
+		
+			
+	
+		
+			
+			
+	
+	
 	crawdaunt: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			ancientpower: ["4T"],
@@ -14147,15 +14147,15 @@
 			metalclaw: ["9M", "9E", "8E", "7E", "6E", "5E", "5D", "4E"],
 			mudsport: ["7E", "6E", "5E", "4E", "3E"],
 			superpower: ["8M", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 100, moves: ["taunt", "crabhammer", "swordsdance", "guillotine"], pokeball: "pokeball"},
-			{generation: 3, level: 50, moves: ["knockoff", "taunt", "crabhammer", "swordsdance"], pokeball: "pokeball"},
-		],
-		encounters: [
-			{generation: 7, level: 10},
-		],
-	},
+		
+		
+			
+			
+	
+		
+			
+	
+	
 	claydol: {
 			ancientpower: ["8L18", "7L19", "6L19", "5L21", "4T", "4L25", "3L25"],
 			calmmind: ["8M", "7M", "6M", "5M", "4M"],
@@ -14224,8 +14224,8 @@
 			trick: ["8M", "7T", "6T", "5T", "4T"],
 			trickroom: ["8M", "7M", "6M", "5M", "4M"],
 			zenheadbutt: ["8M", "7T", "6T", "5T", "4T"],
-		},
-	},
+		
+	
 	cradily: {
 			acid: ["8L1", "7L1", "6L1", "5L1", "4L1", "3L1"],
 			amnesia: ["8M", "8L28", "7L36", "6L29", "5L29", "4L29", "3L36"],
@@ -14296,8 +14296,8 @@
 			rockslide: ["8M", "7M", "6M", "5M", "5S0", "4M", "4E", "3T", "3E"],
 			tickle: ["8E", "7E", "6E", "5E", "4E"],
 			wringout: ["7L52", "7E", "6L52", "6E", "5L64", "5E", "4L64", "4E"],
-		},
-	},
+		
+	
 	armaldo: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			ancientpower: ["8L16", "7L21", "6L21", "5L31", "4T", "4L31", "3L37"],
@@ -14370,8 +14370,8 @@
 			sandattack: ["8E", "7E", "6E", "5E", "4E"],
 			screech: ["8M", "7E", "6E", "5E", "4E"],
 			swordsdance: ["8M", "7M", "6M", "5M", "4M", "4E", "3T", "3E"],
-		},
-	},
+		
+	
 	milotic: {
 			aquaring: ["9L12", "8L12", "7L17", "6L21", "5L49", "4L49"],
 			aquatail: ["9L32", "8L32", "7T", "7L31", "6T", "6L29", "5T", "5L29", "4T", "4L29"],
@@ -14432,15 +14432,15 @@
 			mist: ["9E", "8E", "7E", "6E", "5E", "4E"],
 			mudsport: ["7E", "6E", "5E", "4E", "3E"],
 			tickle: ["9E", "8E", "7E", "6E", "5E", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 35, moves: ["waterpulse", "twister", "recover", "raindance"], pokeball: "pokeball"},
-			{generation: 4, level: 50, gender: "F", nature: "Bold", moves: ["recover", "raindance", "icebeam", "hydropump"], pokeball: "cherishball"},
-			{generation: 4, level: 50, shiny: true, gender: "M", nature: "Timid", moves: ["raindance", "recover", "hydropump", "icywind"], pokeball: "cherishball"},
-			{generation: 5, level: 50, shiny: 1, moves: ["recover", "hydropump", "icebeam", "mirrorcoat"], pokeball: "cherishball"},
-			{generation: 5, level: 58, gender: "M", nature: "Lax", ivs: {hp: 30, atk: 30, def: 30, spa: 30, spd: 30, spe: 30}, moves: ["recover", "surf", "icebeam", "toxic"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+	
+	
 	kecleon: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			ancientpower: ["7L21", "6L1", "5L55", "4T", "4L55", "3L49"],
@@ -14540,8 +14540,8 @@
 			trick: ["7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E", "3E"],
 			trickroom: ["7M", "6M", "5M", "4M"],
 			waterpulse: ["7T", "6T", "4M", "3M"],
-		},
-	},
+		
+	
 	banette: {
 			attract: ["7M", "6M", "5M", "4M", "3M"],
 			bodyslam: ["3T"],
@@ -14619,15 +14619,15 @@
 			payback: ["7M", "6M", "5M", "4M", "4E"],
 			pursuit: ["7E", "6E", "5E", "4E"],
 			shadowsneak: ["9L19", "7L13", "7E", "6L13", "6E", "5L16", "5E", "4L20", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 37, abilities: ["insomnia"], moves: ["helpinghand", "feintattack", "shadowball", "curse"]},
-			{generation: 5, level: 37, gender: "F", isHidden: true, moves: ["feintattack", "hex", "shadowball", "cottonguard"]},
-		],
-		encounters: [
-			{generation: 5, level: 32},
-		],
-	},
+		
+		
+			
+			
+	
+		
+			
+	
+	
 	dusknoir: {
 			astonish: ["9L1", "8L1", "7L1", "6L1", "5L14", "4L14"],
 			attract: ["8M", "7M", "6M", "5M", "4M"],
@@ -14710,8 +14710,8 @@
 			memento: ["9E", "8E", "7E", "6E", "5E", "4E", "3E"],
 			ominouswind: ["7E", "6E", "5E", "4T", "4E"],
 			painsplit: ["9M", "9E", "8E", "7T", "7E", "6T", "6E", "5T", "5E", "5D", "4T", "4E", "3E"],
-		},
-	},
+		
+	
 	tropius: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			aircutter: ["9M", "4T"],
@@ -14782,11 +14782,11 @@
 			twister: ["4T"],
 			whirlwind: ["9L21", "7L21", "6L21", "5L27", "4L27", "3L27"],
 			worryseed: ["7T", "6T", "5T", "4T"],
-		},
-		eventData: [
-			{generation: 4, level: 53, gender: "F", nature: "Jolly", abilities: ["chlorophyll"], moves: ["airslash", "synthesis", "sunnyday", "solarbeam"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+	
+	
 	chimecho: {
 			astonish: ["9L1", "7L1", "6L1", "5L9", "4L9", "3L9", "3S0"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -14857,11 +14857,11 @@
 			wrap: ["9L1", "7L1", "6L1", "5L1", "5D", "4L1", "3L1", "3S0"],
 			yawn: ["9L13", "7L13", "6L13", "5L25", "4L25", "3L25"],
 			zenheadbutt: ["9M", "7T", "6T", "5T", "4T"],
-		},
-		eventData: [
-			{generation: 3, level: 10, gender: "M", moves: ["wrap", "growl", "astonish"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+	
+	
 	absol: {
 			aerialace: ["7M", "6M", "5M", "4M", "3M"],
 			assurance: ["8M", "7E", "6E", "5E", "4E"],
@@ -14960,14 +14960,14 @@
 			wish: ["3S0"],
 			xscissor: ["8M", "7M", "6M", "5M", "4M"],
 			zenheadbutt: ["8M", "7T", "7E", "6T", "6E", "5T", "5E", "4T", "4E"],
-		},
-		eventData: [
-			{generation: 3, level: 5, shiny: 1, abilities: ["pressure"], moves: ["scratch", "leer", "wish"], pokeball: "pokeball"},
-			{generation: 3, level: 5, shiny: 1, abilities: ["pressure"], moves: ["scratch", "leer", "spite"], pokeball: "pokeball"},
-			{generation: 3, level: 35, abilities: ["pressure"], moves: ["razorwind", "bite", "swordsdance", "spite"], pokeball: "pokeball"},
-			{generation: 3, level: 70, abilities: ["pressure"], moves: ["doubleteam", "slash", "futuresight", "perishsong"], pokeball: "pokeball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+	
+	
 	glalie: {
 			attract: ["8M", "7M", "6M", "5M", "4M", "3M"],
 			avalanche: ["9M", "8M", "4M"],
@@ -15030,8 +15030,8 @@
 			rollout: ["9E", "8E", "7E", "6E", "5E", "4T", "4E"],
 			spikes: ["9M", "8M", "7E", "6E", "5E", "4E", "3E"],
 			weatherball: ["9M", "9L50", "8M", "7E", "6E", "5E", "5D", "4E"],
-		},
-	},
+		
+	
 	froslass: {
 			astonish: ["9L1", "8L1", "7L19", "6L1", "5L1", "4L1"],
 			attract: ["8M", "7M", "6M", "5M", "4M"],
@@ -15094,8 +15094,8 @@
 			trick: ["9M", "8M", "7T", "6T", "5T", "4T"],
 			wakeupslap: ["7L37", "6L28", "5L28", "4L28"],
 			waterpulse: ["9M", "7T", "6T", "4M"],
-		},
-	},
+		
+	
 	walrein: {
 			aquatail: ["7T", "6T", "5T", "4T"],
 			attract: ["8M", "7M", "6M", "5M", "4M", "3M"],
@@ -15167,14 +15167,14 @@
 			swallow: ["8E", "7E", "6E", "5E", "4E", "3E"],
 			watersport: ["7E", "6E", "5E", "4E", "3E"],
 			yawn: ["8E", "7E", "6E", "5E", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 5, level: 50, abilities: ["thickfat"], moves: ["icebeam", "brine", "hail", "sheercold"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 5, level: 30},
-		],
-	},
+		
+		
+			
+	
+		
+			
+	
+	
 	huntail: {
 			aquatail: ["7T", "7L39", "6T", "6L39", "5T", "5L46", "4T", "4L46"],
 			attract: ["7M", "6M", "5M", "4M", "3M"],
@@ -15232,8 +15232,8 @@
 			mudsport: ["7E", "6E", "5E", "4E", "3E"],
 			refresh: ["7E", "6E", "5E", "4E", "3E"],
 			supersonic: ["7E", "6E", "5E", "4E", "3E"],
-		},
-	},
+		
+	
 	gorebyss: {
 			agility: ["7L9", "6L9", "5L10", "4L10", "3L15"],
 			amnesia: ["7L16", "6L16", "5L19", "4L19", "3L29"],
@@ -15283,8 +15283,8 @@
 			waterfall: ["7M", "6M", "5M", "4M", "3M"],
 			waterpulse: ["7T", "7L14", "6T", "6L14", "5L15", "4M", "4L15", "3M", "3L22"],
 			whirlpool: ["7L1", "6L1", "5L1", "4M", "4L1", "3L1"],
-		},
-	},
+		
+	
 	relicanth: {
 			amnesia: ["8M", "7E", "6E", "5E", "4E", "3E"],
 			ancientpower: ["8L10", "7L21", "6L1", "5L43", "4T", "4L43", "3L43"],
@@ -15349,8 +15349,8 @@
 			watersport: ["7E", "6E", "5E", "4E", "3E"],
 			whirlpool: ["8M", "4M"],
 			yawn: ["8L15", "7L35", "6L22", "5L22", "4L22", "3L22"],
-		},
-	},
+		
+	
 	salamence: {
 			aerialace: ["9M", "7M", "6M", "5M", "5S3", "4M", "3M", "3S1"],
 			aircutter: ["4T"],
@@ -15432,17 +15432,17 @@
 			shadowclaw: ["9M", "8M", "7M", "6M", "5M", "4M", "4E"],
 			thrash: ["9E", "8E", "7E", "6E", "6S3", "5E", "4E", "3E"],
 			twister: ["9E", "8E", "7E", "6E", "5E", "4T", "4E", "3E"],
-		},
-		eventData: [
-			{generation: 3, level: 50, moves: ["protect", "dragonbreath", "scaryface", "fly"], pokeball: "pokeball"},
-			{generation: 3, level: 50, moves: ["refresh", "dragonclaw", "dragondance", "aerialace"]},
-			{generation: 4, level: 50, gender: "M", nature: "Naughty", moves: ["hydropump", "stoneedge", "fireblast", "dragonclaw"], pokeball: "cherishball"},
-			{generation: 5, level: 50, shiny: 1, moves: ["dragondance", "dragonclaw", "outrage", "aerialace"], pokeball: "cherishball"},
-		],
-		encounters: [
-			{generation: 7, level: 9},
-		],
-	},
+		
+		
+			
+			
+			
+			
+	
+		
+			
+	
+	
 	metagross: {
 			aerialace: ["9M", "7M", "6M", "5M", "4M", "3M"],
 			agility: ["9M", "9L72", "8M", "8L72", "7L41", "6L38", "5L38", "5S4", "4L44", "3L66"],
@@ -15516,15 +15516,15 @@
 			toxic: ["7M", "6M", "5M", "4M", "3M"],
 			trick: ["9M", "8M", "7T", "6T", "5T", "4T"],
 			zenheadbutt: ["9M", "9L6", "8M", "8L6", "7T", "7L32", "6T", "6L29", "5T", "5L29", "5S2", "5S3", "4T", "4L62", "4S0"],
-		},
-		eventData: [
-			{generation: 4, level: 62, nature: "Brave", moves: ["bulletpunch", "meteormash", "hammerarm", "zenheadbutt"], pokeball: "cherishball"},
-			{generation: 5, level: 50, shiny: 1, moves: ["meteormash", "earthquake", "bulletpunch", "hammerarm"], pokeball: "cherishball"},
-			{generation: 5, level: 100, moves: ["bulletpunch", "zenheadbutt", "hammerarm", "icepunch"], pokeball: "cherishball"},
-			{generation: 5, level: 45, shiny: true, moves: ["meteormash", "zenheadbutt", "earthquake", "protect"], pokeball: "pokeball"},
-			{generation: 5, level: 45, isHidden: true, moves: ["irondefense", "agility", "hammerarm", "doubleedge"]},
-			{generation: 5, level: 45, isHidden: true, moves: ["psychic", "meteormash", "hammerarm", "doubleedge"]},
-			{generation: 5, level: 58, nature: "Serious", ivs: {hp: 30, atk: 30, def: 30, spa: 30, spd: 30, spe: 30}, moves: ["earthquake", "hyperbeam", "psychic", "meteormash"], pokeball: "cherishball"},
-			{generation: 7, level: 50, nature: "Jolly", ivs: {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31}, moves: ["ironhead", "icepunch", "bulletpunch", "stompingtantrum"], pokeball: "cherishball"},
-		],
-	},
+		
+		
+			
+			
+			
+			
+			
+			
+			
+			
+	
+	

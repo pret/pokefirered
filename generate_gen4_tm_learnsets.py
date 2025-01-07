@@ -29,7 +29,7 @@ s = '''
 // +--------------------------------------------------------+
 
 #define G4TMHM_LEARNSET(moves) {(u32)(moves), ((u64)(moves) >> 32)}                                                                                                                                                                             
-#define G4TMHM(tmhm) ((u64)1 << (ITEM_##tmhm - ITEM_TM51_ROOST))
+#define G4TMHM(tmhm) ((u64)1 << (ITEM_##tmhm - ITEM_TM051_ROOST))
 
 // This table is similar to the one in tmhm_learnsets.h.
 static const u32 sGen4TMHMLearnsets[][2] =

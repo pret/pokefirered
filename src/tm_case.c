@@ -679,11 +679,11 @@ static void InitTMCaseListMenuItems(void)
 static void GetTMNumberAndMoveString(u8 * dest, u16 itemId)
 {
     StringCopy(gStringVar4, gText_FontSmall);
-    if (itemId >= ITEM_TM01)
+    if (itemId >= ITEM_TM001)
     {
         // TMs
         StringAppend(gStringVar4, gText_NumberClear01);
-        ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+        ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM001 + 1, STR_CONV_MODE_LEADING_ZEROS, 3);
         StringAppend(gStringVar4, gStringVar1);
     }
     else
@@ -1332,10 +1332,10 @@ void Pokedude_InitTMCase(void)
     ClearItemSlots(gSaveBlock1Ptr->bagPocket_TMHM, ARRAY_COUNT(gSaveBlock1Ptr->bagPocket_TMHM));
     ClearItemSlots(gSaveBlock1Ptr->bagPocket_KeyItems, ARRAY_COUNT(gSaveBlock1Ptr->bagPocket_KeyItems));
     ResetTMCaseCursorPos();
-    AddBagItem(ITEM_TM01, 1);
-    AddBagItem(ITEM_TM03, 1);
-    AddBagItem(ITEM_TM09, 1);
-    AddBagItem(ITEM_TM35, 1);
+    AddBagItem(ITEM_TM001, 1);
+    AddBagItem(ITEM_TM003, 1);
+    AddBagItem(ITEM_TM009, 1);
+    AddBagItem(ITEM_TM035, 1);
     InitTMCase(TMCASE_POKEDUDE, CB2_ReturnToTeachyTV, 0);
 }
 

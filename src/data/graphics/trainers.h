@@ -660,14 +660,26 @@ static const union AnimCmd sAnimCmd_Point_HGSS[] =
     ANIMCMD_END,
 };
 
+static const union AnimCmd sAnimCmd_Point_HGSS_Red_Leaf[] =
+{
+    ANIMCMD_FRAME(0, 9),
+    ANIMCMD_FRAME(1, 9),
+    ANIMCMD_FRAME(3, 24),
+    ANIMCMD_FRAME(3, 24),
+    ANIMCMD_FRAME(0, 50),
+    ANIMCMD_END,
+};
+
 static const union AnimCmd *const sBackAnims_Kanto[] = {
     sAnim_GeneralFrame0,
     sAnimCmd_Kanto,
+    sAnimCmd_Point_HGSS_Red_Leaf,
 };
 
 const union AnimCmd *const sBackAnims_OldManPokedude[] = {
     sAnim_GeneralFrame0,
-    sAnimCmd_OldManPokedude
+    sAnimCmd_OldManPokedude,
+    sAnim_GeneralFrame0,
 };
 
 static const union AnimCmd *const sBackAnims_Hoenn[] =

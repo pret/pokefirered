@@ -1,19 +1,16 @@
 @ Note: ROM header data is empty space here.
-@       It's populated by gbafix using data provided in the Makefile. 
+@ It's populated by gbafix using data provided in the Makefile.
 
-	.global Start
-Start:
+Start::
 	b Init
 
-	.global RomHeaderNintendoLogo
-RomHeaderNintendoLogo:
+RomHeaderNintendoLogo::
 	.space 156
 
 RomHeaderGameTitle:
 	.space 12
 
-	.global RomHeaderGameCode
-RomHeaderGameCode:
+RomHeaderGameCode::
 	.space 4
 
 RomHeaderMakerCode:
@@ -31,8 +28,7 @@ RomHeaderDeviceType:
 RomHeaderReserved1:
 	.space 7
 
-	.global RomHeaderSoftwareVersion
-RomHeaderSoftwareVersion:
+RomHeaderSoftwareVersion::
 	.byte 0
 
 RomHeaderChecksum:

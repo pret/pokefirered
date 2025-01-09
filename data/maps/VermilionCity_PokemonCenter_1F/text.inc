@@ -18,14 +18,9 @@ VermilionCity_PokemonCenter_1F_Text_AllMonWeakToSpecificTypes::
     .string "universally strong POKéMON.$"
 
 VermilionCity_PokemonCenter_1F_Text_UrgeToBattleSomeoneAgain::
-    .string "The urge to battle with someone\n"
-    .string "you've tangled with before…\p"
-    .string "Have you ever had that urge?\n"
-    .string "I'm sure you have.\p"
-    .string "I wanted to battle certain people\n"
-    .string "again over and over, too.\p"
-    .string "So, I've been giving these away.\n"
-    .string "Please, take one!$"
+    .string "How many times do I hafta tell\n"
+    .string "youse guys…\p"
+    .string "I ain't got no VERSUS SEEKER!$"
 
 VermilionCity_PokemonCenter_1F_Text_UseDeviceForRematches::
     .string "Use that device and you'll find\n"

@@ -428,23 +428,24 @@ with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
   for line in in_file:
     if line[1].isalpha() and line.strip().endswith(': {'):
       mon = line.strip().replace(': {','')
+      s += line
     elif 'learnset:' in line:
       in_learnset = True
-    elif in_learnset and ('},' in line):
+      s += line
+    elif not in_learnset:
+      continue
+
+    if '"4' in line or '"3' in line:
+      s += line
+    elif '},' in line:
       in_learnset = False
-      if mon in included_mons and mon in evos and mon not in evolving_mons:
-        m = mon
-        while m in evos and m not in egg_moves:
-          m = evos[m]
+      s += line
+    elif mon in included_mons and mon in evos and mon not in evolving_mons:
+      m = mon
+      while m in evos and m not in egg_moves:
         for egg_move in egg_moves.get(m, []):
           s += egg_move
-          if 'bellydrum' in egg_move:
-            print('adding ' + egg_move + ' to ' + mon)
-
-    if mon not in included_mons or mon in evolving_mons:
-      continue
-    if not in_learnset or '"4' in line or '"3' in line:
-      s += line
+        m = evos[m]
       
 with open('filtered_learnsets.ts','w') as out_file:
   out_file.write(s)

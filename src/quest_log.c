@@ -1346,6 +1346,8 @@ void SaveQuestLogData(void)
 
 void QL_UpdateObject(struct Sprite *sprite)
 {
+    // index 0 is reserved for player, index 1 is reserved for follower
+    // other ObjectsEvents are at index localId + 1
     struct ObjectEvent *objectEvent = &gObjectEvents[sprite->data[0]];
     if (objectEvent->localId == OBJ_EVENT_ID_PLAYER)
     {
@@ -1361,12 +1363,21 @@ void QL_UpdateObject(struct Sprite *sprite)
         }
         QL_UpdateObjectEventCurrentMovement(objectEvent, sprite);
     }
+    else if (objectEvent->localId == OBJ_EVENT_ID_FOLLOWER)
+    {
+        if (sMovementScripts[1][0] != MOVEMENT_ACTION_NONE)
+        {
+            ObjectEventSetHeldMovement(objectEvent, sMovementScripts[1][0]);
+            sMovementScripts[1][0] = MOVEMENT_ACTION_NONE;
+        }
+        QL_UpdateObjectEventCurrentMovement(objectEvent, sprite);
+    }
     else
     {
         if (sMovementScripts[objectEvent->localId][0] != MOVEMENT_ACTION_NONE)
         {
-            ObjectEventSetHeldMovement(objectEvent, sMovementScripts[objectEvent->localId][0]);
-            sMovementScripts[objectEvent->localId][0] = MOVEMENT_ACTION_NONE;
+            ObjectEventSetHeldMovement(objectEvent, sMovementScripts[objectEvent->localId + 1][0]);
+            sMovementScripts[objectEvent->localId + 1][0] = MOVEMENT_ACTION_NONE;
         }
         QL_UpdateObjectEventCurrentMovement(objectEvent, sprite);
     }
@@ -1378,7 +1389,10 @@ void QuestLogRecordNPCStep(u8 localId, u8 mapNum, u8 mapGroup, u8 movementAction
     {
         sCurSceneActions[gQuestLogCurActionIdx].duration = sNextActionDelay;
         sCurSceneActions[gQuestLogCurActionIdx].type = QL_ACTION_MOVEMENT;
-        sCurSceneActions[gQuestLogCurActionIdx].data.a.localId = localId;
+        if (localId == OBJ_EVENT_ID_FOLLOWER)
+            sCurSceneActions[gQuestLogCurActionIdx].data.a.localId = 1;
+        else
+            sCurSceneActions[gQuestLogCurActionIdx].data.a.localId = localId + 1;
         sCurSceneActions[gQuestLogCurActionIdx].data.a.mapNum = mapNum;
         sCurSceneActions[gQuestLogCurActionIdx].data.a.mapGroup = mapGroup;
         sCurSceneActions[gQuestLogCurActionIdx].data.a.movementActionId = movementActionId;
@@ -1393,7 +1407,10 @@ void QuestLogRecordNPCStepWithDuration(u8 localId, u8 mapNum, u8 mapGroup, u8 mo
     {
         sCurSceneActions[gQuestLogCurActionIdx].duration = sNextActionDelay;
         sCurSceneActions[gQuestLogCurActionIdx].type = QL_ACTION_MOVEMENT;
-        sCurSceneActions[gQuestLogCurActionIdx].data.a.localId = localId;
+        if (localId == OBJ_EVENT_ID_FOLLOWER)
+            sCurSceneActions[gQuestLogCurActionIdx].data.a.localId = 1;
+        else
+            sCurSceneActions[gQuestLogCurActionIdx].data.a.localId = localId + 1;
         sCurSceneActions[gQuestLogCurActionIdx].data.a.mapNum = mapNum;
         sCurSceneActions[gQuestLogCurActionIdx].data.a.mapGroup = mapGroup;
         sCurSceneActions[gQuestLogCurActionIdx].data.a.movementActionId = movementActionId;

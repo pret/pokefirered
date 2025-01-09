@@ -1294,7 +1294,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
             ++sprite->data[7];
             if (IsContest())
                 sprite->data[5] = 80;
-            else if (GET_BATTLER_SIDE2(gBattleAnimTarget) != B_SIDE_PLAYER)
+            else if (GetBattlerSide(gBattleAnimTarget) != B_SIDE_PLAYER)
                 sprite->data[5] = 204;
             else
                 sprite->data[5] = 80;
@@ -1338,7 +1338,7 @@ static void MovePoisonGasCloud(struct Sprite *sprite)
             sprite->data[4] = sprite->y + 4;
             if (IsContest())
                 sprite->data[2] = -0x10;
-            else if (GET_BATTLER_SIDE2(gBattleAnimTarget) != B_SIDE_PLAYER)
+            else if (GetBattlerSide(gBattleAnimTarget) != B_SIDE_PLAYER)
                 sprite->data[2] = 0x100;
             else
                 sprite->data[2] = -0x10;

@@ -3086,11 +3086,11 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
             case B_TXT_ATK_PARTNER_NAME: // attacker partner name
                 if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
                     GetMonData(
-                        &gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker)) +
+                        &gPlayerParty[gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerSide(gBattlerAttacker)) +
                                                            2]], MON_DATA_NICKNAME, text);
                 else
                     GetMonData(
-                        &gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker)) +
+                        &gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(GetBattlerSide(gBattlerAttacker)) +
                                                           2]], MON_DATA_NICKNAME, text);
 
                 StringGet_Nickname(text);

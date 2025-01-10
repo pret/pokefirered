@@ -142,8 +142,7 @@ static void RecordTransactionForQuestLog(void);
 static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 {
     {gText_ShopBuy, {.void_u8 = Task_HandleShopMenuBuy}},
-    {gText_ShopSell, {.void_u8 = Task_HandleShopMenuSell}},
-    {gText_ShopQuit, {.void_u8 = Task_HandleShopMenuQuit}}
+    {gText_ShopQuit, {.void_u8 = Task_HandleShopMenuQuit}},
 };
 
 static const struct YesNoFuncTable sShopMenuActions_BuyQuit[] =
@@ -158,7 +157,7 @@ static const struct WindowTemplate sShopMenuWindowTemplate =
     .tilemapLeft = 2,
     .tilemapTop = 1,
     .width = 12,
-    .height = 6,
+    .height = 4,
     .paletteNum = 15,
     .baseBlock = 8
 };
@@ -215,8 +214,8 @@ static u8 CreateShopMenu(u8 martType)
 
     sShopMenuWindowId = AddWindow(&sShopMenuWindowTemplate);
     SetStdWindowBorderStyle(sShopMenuWindowId, 0);
-    PrintTextArray(sShopMenuWindowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, 16, 3, sShopMenuActions_BuySellQuit);
-    Menu_InitCursor(sShopMenuWindowId, FONT_NORMAL, 0, 2, 16, 3, 0);
+    PrintTextArray(sShopMenuWindowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, 16, 2, sShopMenuActions_BuySellQuit);
+    Menu_InitCursor(sShopMenuWindowId, FONT_NORMAL, 0, 2, 16, 2, 0);
     PutWindowTilemap(sShopMenuWindowId);
     CopyWindowToVram(sShopMenuWindowId, COPYWIN_MAP);
     return CreateTask(Task_ShopMenu, 8);

@@ -1529,7 +1529,6 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
     // For GetSpeciesFromGroup().
     u16 species;
-    u16 manualRandom;
     u16 accumulator = trainerNum * 97;
 
     if (trainerNum == TRAINER_SECRET_BASE)
@@ -1565,7 +1564,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
 
-                species = GetSpeciesFromGroup(partyData[i].species, RAND_INPUT_MANUAL(manualRandom));
+                species = GetSpeciesFromGroup(partyData[i].species, RAND_INPUT_MANUAL(accumulator));
                 CreateMon(&party[i], species, ScaledTrainerLevel(partyData[i].lvl, i), fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
             }
@@ -1578,7 +1577,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                species = GetSpeciesFromGroup(partyData[i].species, RAND_INPUT_MANUAL(manualRandom));
+                species = GetSpeciesFromGroup(partyData[i].species, RAND_INPUT_MANUAL(accumulator));
                 CreateMon(&party[i], species, ScaledTrainerLevel(partyData[i].lvl, i), fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
@@ -1597,7 +1596,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                species = GetSpeciesFromGroup(partyData[i].species, RAND_INPUT_MANUAL(manualRandom));
+                species = GetSpeciesFromGroup(partyData[i].species, RAND_INPUT_MANUAL(accumulator));
                 CreateMon(&party[i], species, ScaledTrainerLevel(partyData[i].lvl, i), fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
@@ -1612,7 +1611,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                species = GetSpeciesFromGroup(partyData[i].species, RAND_INPUT_MANUAL(manualRandom));
+                species = GetSpeciesFromGroup(partyData[i].species, RAND_INPUT_MANUAL(accumulator));
                 CreateMon(&party[i], species, ScaledTrainerLevel(partyData[i].lvl, i), fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 

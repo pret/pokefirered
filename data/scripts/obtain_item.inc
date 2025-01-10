@@ -8,13 +8,24 @@ EventScript_RestorePrevTextColor::
 	return
 
 Std_ObtainItem::
-	copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	additem VAR_0x8000, VAR_0x8001
-	copyvar VAR_0x8007, VAR_RESULT
-	call EventScript_ObtainItemMessage
-	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
-	return
+  copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
+  textcolor NPC_TEXT_COLOR_NEUTRAL
+  additem VAR_0x8000, VAR_0x8001
+  bufferitemnameplural STR_VAR_2, VAR_0x8000, VAR_0x8001
+	copyvar VAR_0x8004, VAR_0x8000
+	copyvar VAR_0x8005, VAR_0x8001
+  specialvar VAR_RESULT, BufferTMHMMoveName
+  copyvar VAR_0x8008, VAR_RESULT
+  call_if_eq VAR_0x8008, TRUE, EventScript_FoundTMHM
+  call_if_eq VAR_0x8008, FALSE, EventScript_FoundItem
+  call EventScript_PlayFanfareObtainedItem
+  waitfanfare
+  waitmessage
+	checkitemtype VAR_0x8000
+	call EventScript_BufferPocketNameTryFanfare
+	msgbox Text_PutItemAway
+  copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
+  return
 
 EventScript_ObtainItemMessage::
 	bufferitemnameplural STR_VAR_2, VAR_0x8000, VAR_0x8001

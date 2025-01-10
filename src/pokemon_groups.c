@@ -167,7 +167,7 @@ u16 GetSpeciesFromGroup(u16 species, u16 randInput) {
     // Manual random value was provided.
     // For the 2025 challenge this works completely differently than before.
     random = randInput % 200;
-    mapHash = MapHash() * randInput;
+    mapHash = MapHash() + randInput;
     if (random < 8) random += 8;
   } else {
     random = Random() % 200;

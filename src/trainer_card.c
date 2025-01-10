@@ -1128,10 +1128,17 @@ static void PrintNameOnCardFront(void)
     u8 buffer[2][32];
     u8 *txtPtr;
 
-    txtPtr = StringCopy(buffer[0], gText_TrainerCardName);
+    // u8 buffer[10];
+    // u8 *txtPtr;
+    // u8 x;
+    // ConvertUIntToHexStringN(txtPtr, MapHash(), STR_CONV_MODE_LEADING_ZEROS, 8);
+
+
+    txtPtr = StringCopy(buffer[0], gText_TrainerCardGameHash);
     txtPtr = buffer[1];
-    StringCopy(txtPtr, sTrainerCardDataPtr->trainerCard.rse.playerName);
-    ConvertInternationalString(txtPtr, sTrainerCardDataPtr->language);
+    ConvertUIntToHexStringN(txtPtr, GameHash(), STR_CONV_MODE_LEADING_ZEROS, 8);
+    // StringCopy(txtPtr, sTrainerCardDataPtr->trainerCard.rse.playerName);
+    // ConvertInternationalString(txtPtr, sTrainerCardDataPtr->language);
     StringAppend(buffer[0], txtPtr);
     AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], sTrainerCardFrontNameXPositions[sTrainerCardDataPtr->cardType], sTrainerCardFrontNameYPositions[sTrainerCardDataPtr->cardType], sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer[0]);
 }
@@ -1152,17 +1159,17 @@ static void PrintMoneyOnCard(void)
     u8 *txtPtr;
     u8 x;
 
-    ConvertUIntToHexStringN(buffer, GameHash(), STR_CONV_MODE_LEADING_ZEROS, 8);
+    ConvertUIntToHexStringN(buffer, MapHash(), STR_CONV_MODE_LEADING_ZEROS, 8);
     if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
     {
-        x = -122 - 6 * StringLength(buffer);
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 20, 56, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardGameHash);
+        x = -119 - 6 * StringLength(buffer);
+        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 20, 56, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardFineMapHash);
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], x, 56, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
     }
     else
     {
         x = 118 - 6 * StringLength(buffer);
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 16, 57, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardGameHash);
+        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 16, 57, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardFineMapHash);
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], x, 57, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
     }    
 }
@@ -1180,18 +1187,18 @@ static void PrintPokedexOnCard(void)
     u8 buffer[10];
     u8 x;
 
-    ConvertUIntToHexStringN(buffer, MapHash(), STR_CONV_MODE_LEADING_ZEROS, 8);
+    ConvertUIntToHexStringN(buffer, CoarseMapHash(), STR_CONV_MODE_LEADING_ZEROS, 8);
     if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
     {
-        x = -122 - 6 * StringLength(buffer);
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 20, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardMapHash);
+        x = -119 - 6 * StringLength(buffer);
+        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 20, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardCoarseMapHash);
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], x, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 138, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardNull);
     }
     else
     {
         x = 118 - 6 * StringLength(buffer);
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 16, 73, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardMapHash);
+        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 16, 73, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardCoarseMapHash);
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], x, 73, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
         AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 138, 73, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardNull);
     }

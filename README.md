@@ -23,7 +23,7 @@ Other changes:
  - Gift Pokémon are replaced with Dunsparce.
  - Game Corner prize Pokémon are replaced with baby Pokémon.
  - The Department Store desks on 5F now sell select battle items instead of their usual ones (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
- - TMs are reusable, and aren't sellable.
+ - Items aren't sellable.
  - HMs are deletable without the Move Deleter.
  - Trade and happiness evolutions have been replaced with a new "Trade+ Stone", or Sun Stone & Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
  - Hidden items have been removed, except for Coins in the Game Corner.

@@ -211,8 +211,8 @@ pokes = [
   ('OMANYTE', 'WaterIce1'),
   ('OMASTAR', 'WaterIce2'),
 
-  ('KABUTO', 'Spooky1'),
-  ('KABUTOPS', 'Spooky2'),
+  ('KABUTO', 'Water1'),
+  ('KABUTOPS', 'Water2'),
 
   ('AERODACTYL', 'SafariZone'),
 
@@ -520,7 +520,7 @@ pokes = [
 
   ('SEVIPER', 'Overworld'),
 
-  ('LUNATONE', 'Spooky1'),
+  ('LUNATONE', 'Cave1'),
 
   ('SOLROCK', 'Overworld'),
 

@@ -416,7 +416,7 @@ with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
     if mon not in included_mons:
       continue
 
-    if in_learnset and ('"4E' in line or '"3E' in line):
+    if in_learnset and ('"4E' in line or '"3E'):
       if mon not in egg_moves:
         egg_moves[mon] = []
       egg_moves[mon].append(line)
@@ -438,14 +438,14 @@ with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
     if '"4' in line or '"3' in line:
       s += line
     elif '},' in line:
+      if mon in included_mons and mon not in evolving_mons:
+        m = mon
+        while m != None:
+          for egg_move in egg_moves.get(m, []):
+            s += egg_move
+          m = evos.get(m)
       in_learnset = False
       s += line
-    elif mon in included_mons and mon in evos and mon not in evolving_mons:
-      m = mon
-      while m in evos and m not in egg_moves:
-        for egg_move in egg_moves.get(m, []):
-          s += egg_move
-        m = evos[m]
-      
+
 with open('filtered_learnsets.ts','w') as out_file:
   out_file.write(s)

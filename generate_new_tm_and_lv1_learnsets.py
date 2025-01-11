@@ -479,16 +479,22 @@ moves_l2u['feintattack'] = 'FAINT_ATTACK'
 moves_l2u['smellingsalts'] = 'SMELLING_SALT'
 moves_l2u['highjumpkick'] = 'HI_JUMP_KICK'
 
-tms_u2l = {}
-tms_l2u = {}
+new_tms_u2l = {}
+new_tms_l2u = {}
+old_tms_u2l = {}
+old_tms_l2u = {}
 moves_l2tmu = {}
-i = 93
-with open('new_tms.txt','r') as in_file:
+i = 1
+with open('all_tms.txt','r') as in_file:
   for line in in_file:
     u = line.strip()
     l = u.replace('_', '').lower()
-    tms_l2u[l] = u
-    tms_u2l[u] = l
+    if i < 93:
+      old_tms_l2u[l] = u
+      old_tms_u2l[u] = l
+    else:
+      new_tms_l2u[l] = u
+      new_tms_u2l[u] = l
     moves_l2tmu[l] = 'TM' + str(i).zfill(3) + '_' + u
     i += 1
 
@@ -514,9 +520,9 @@ with open('filtered_learnsets.ts','r') as in_file:
     if len(sp) == 0:
       continue
     move = sp[0]
-    if move in tms_l2u:
+    if move in new_tms_l2u:
       new_tm_ls[mon].append(move)
-    elif '"4L' not in line and '"4M' not in line:
+    elif move not in old_tms_l2u and '"4L' not in line and '"4M' not in line:
       lv1_ls[mon].append(move)
 
 mons = [
@@ -947,7 +953,7 @@ with open('src/data/pokemon/evolution.h','r') as evo_file:
 evolving_mons.add(None)
       
 s = ''
-with open('src/data/pokemon/level_up_learnsets.h', 'r') as h_file:
+with open('original_level_up_learnsets.h', 'r') as h_file:
   mon = None
   mon_added = False
   for line in h_file:

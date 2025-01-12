@@ -448,8 +448,6 @@ with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
         m = mon
         while m != None:
           merged_egg_moves = merged_egg_moves | egg_moves.get(m, {})
-          # for _, egg_move in egg_moves.get(m, {}).items():
-          #   s += egg_move
           m = evos.get(m)
       for _, egg_move in merged_egg_moves.items():
         s += egg_move

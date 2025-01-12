@@ -8,7 +8,7 @@ Major changes:
  - **Level band:** Pokémon stop gaining experience if they become too overleveled compared to the rest of the team. Rare candies also stop working.
  - **Level scaling:** Wild and trainer Pokémon levels increase based on the player's party Pokémon levels and badge count.
  - **Gen 4 Pokemon, Moves, Abilities, & Items:** Most Gen 4 Pokémon in Gen 1-3 families (e.g. Munchlax, Weavile) are added, with Gen IV HG/SS learnsets and abilities. Many Gen IV moves and abilities aren't implemented properly, and instead placeholder effects. The full Pokémon list at the bottom of this page.
- - **New TMs and learnsets:** 60+ TMs are added to the game. Non-TM Egg moves and level 40+ moves are now also learned at level 1. TMs can teach moves that were previously only learnable via breeding or TMs. 
+ - **New TMs and learnsets:** 60+ TMs are added to the game. Non-TM Egg moves and level 40+ moves are now also learned at level 1. TMs can teach moves that were previously only learnable via breeding or move tutors (NOTE: this is not currently supported for all moves, fix coming soon). 
 
 Other changes:
  - Faster movement and text. Hold B to use normal walking speed.

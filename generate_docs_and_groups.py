@@ -705,7 +705,7 @@ pokes = [
   ('DARKRAI', 'NULL'),
   ('SHAYMIN', 'NULL'),
   ('ARCEUS', 'NULL'),
- 
+
   ('OLD_UNOWN_B', 'NULL'),
   ('OLD_UNOWN_C', 'NULL'),
   ('OLD_UNOWN_D', 'NULL'),
@@ -853,14 +853,14 @@ Major changes:
  - **Time limit:** After 5 hours pass, the player is locked in the Celadon Department Store. A PC and free Move Relearner are added to the Department Store. The game clock doesn't decrease while the START menu is active, including when the player is using the Pokémon summary screen, bag, etc. outside of battle.
  - **Level band:** Pokémon stop gaining experience if they become too overleveled compared to the rest of the team. Rare candies also stop working.
  - **Level scaling:** Wild and trainer Pokémon levels increase based on the player's party Pokémon levels and badge count.
- - **Gen 4 Pokemon:** Most Gen 4 Pokémon in Gen 1-3 families are added (e.g. Munchlax, Weavile). The full list is at the bottom of this page.
- - **Starting items:** Start the game with balls, healing items, the Old Rod, 6 Exp Shares, and more.
- - **Move tutors & gift TMs:** Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
+ - **Gen 4 Pokemon, Moves, Abilities, & Items:** Most Gen 4 Pokémon in Gen 1-3 families (e.g. Munchlax, Weavile) are added, with Gen IV HG/SS learnsets and abilities. Many Gen IV moves and abilities aren't implemented properly, and instead placeholder effects. The full Pokémon list at the bottom of this page.
+ - **New TMs and learnsets:** 60+ TMs are added to the game. Non-TM Egg moves and level 40+ moves are now also learned at level 1. TMs can teach moves that were previously only learnable via breeding or TMs. 
 
 Other changes:
  - Faster movement and text. Hold B to use normal walking speed.
- - Gen IV HG/SS learnsets and abilities. Many Gen IV moves aren't implemented properly, and instead have the same effect as Metronome. All Gen IV abilities have no effect.
+ - Start the game with balls, healing items, the Old Rod, 6 Exp Shares, and more.
  - Starter Pokémon are randomized based on the game seed. There is still one grass, water, and fire starter, and they will be chosen from the gen 1-3 starters.
+ - Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
  - Gym leaders give the player a Rare Candy in addition to a TM upon earning a badge.
  - Legendary birds give the player a Rare Candy upon defeat.
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
@@ -955,7 +955,7 @@ replaced with Pokémon from their group, as described below.
 
 ### Wild encounters
 
-For every map (e.g. route, dungeon room) in the game: 
+For every "map set" (e.g. Route 1, Mt. Moon) in the game:
   - Non-fishing Pokémon with an encounter rate less than or equal to 20% are
   deterministically replaced with 1 species from their group.
   - Non-fishing Pokémon with an encounter rate greater than 20%
@@ -964,20 +964,40 @@ For every map (e.g. route, dungeon room) in the game:
   - All fishing Pokémon are deterministically replaced with 1 species from their
   group, regardless of encounter rate.
 
-For example, Pidgey might be replaced by {Taillow, Hoothoot} in Route 1, {Doduo, Pidgey}
-in Route 2, and {Delibird} in Route 25. 
+#### Map sets
 
-Additionally, each non-water game map is deterministically assigned a single
-Pokémon from the `EarlyBoost` group. The chance of finding one of these Pokémon 
-starts at 4%, and decreases by 0.5% for each badge you have.
+A "map set" gropus is a collection of game locations that use the same Pokémon
+replacement mappings. Note that this is a term specific to this ROM-hack, and is
+different than the "map group" concept in the FR/LG source code.
+
+The list of map sets is below. Any map that isn't in this list is in its own map set:
+- Mt. Moon 1F, B1F, B2F
+- Rock Tunnel 1F, B1F
+- Diglett's Cave North Entrace, South Entrance, B1F
+- Pokémon Tower 4F, 5F, 6F
+- Pokémon Tower 7F, 8F
+- Pokémon Mansion 1F, B1F
+- Pokémon Mansion 2F, 3F
+- Seafoam Islands 1F, B1F, B2F
+- Seafoam Islands B3F, B4F
+- Victory Road 1F, 2F, 3F
+- Mt. Ember Summit Path 1F, 2F, 3F
+
+#### Early boost
+
+Additionally, each non-water game map (not map set) is deterministically assigned a
+single Pokémon from the `EarlyBoost` group. The chance of finding one of these
+Pokémon starts at 4%, and decreases by 0.5% for each badge you have.
 
 #### Example
 
-In the original game, there's a 50% chance of encountering Pidgey
-in Route 1. In our first example above, there will be a ~33% chance of encountering
-Taillow and 17% chance of encountering Hoothoot. At the beginning of the game, there
-will also be a 4% chance of encountering the `EarlyBoost` species assigned to the route;
-e.g. Bulbasaur.
+![Mt. Moon map set example](map_set_example.png "Mt. Moon Map Set")
+
+In Mt. Moon, each species is replaced with 1 or 2 species from their group, depending
+on the catch rate. We see that Paras' second replacement is only encounterable on
+floor B1F, because that's the only floor where Paras has a catch rate >20% in the
+original game. The EarlyBoost Pokémon will have a rate of 0-4%, depending on the number
+of badges the player has (other rates will be adjusted acordingly).
 
 ### Trainer battles
 

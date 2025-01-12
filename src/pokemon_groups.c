@@ -77,40 +77,38 @@ u32 MapHashInternal(bool8 fine) {
 
       // Pokemon Tower.
       else if (map == MAP_POKEMON_TOWER_4F || map == MAP_POKEMON_TOWER_5F) {
-        // coarseMap = MAP_POKEMON_TOWER_3F;
+        coarseMap = MAP_POKEMON_TOWER_3F;
       }
       else if (map == MAP_POKEMON_TOWER_7F) {
-        // coarseMap = MAP_POKEMON_TOWER_6F;
+        coarseMap = MAP_POKEMON_TOWER_6F;
       }
 
       // Pokemon Mansion.
       else if (map == MAP_POKEMON_MANSION_B1F) {
-        // coarseMap = MAP_POKEMON_MANSION_1F;
+        coarseMap = MAP_POKEMON_MANSION_1F;
       }
       else if (map == MAP_POKEMON_MANSION_3F) {
-        // coarseMap = MAP_POKEMON_MANSION_2F;
+        coarseMap = MAP_POKEMON_MANSION_2F;
       }
 
       // Seafoam Islands.
       else if (map == MAP_SEAFOAM_ISLANDS_B1F || map == MAP_SEAFOAM_ISLANDS_B2F) {
-        // coarseMap = MAP_SEAFOAM_ISLANDS_1F;
+        coarseMap = MAP_SEAFOAM_ISLANDS_1F;
       }
       else if (map == MAP_SEAFOAM_ISLANDS_B4F) {
-        // coarseMap = MAP_SEAFOAM_ISLANDS_B3F;
+        coarseMap = MAP_SEAFOAM_ISLANDS_B3F;
       }
 
       // Victory Road.
       else if (map == MAP_VICTORY_ROAD_2F || map == MAP_VICTORY_ROAD_3F) {
-        // coarseMap = MAP_VICTORY_ROAD_1F;
+        coarseMap = MAP_VICTORY_ROAD_1F;
       }
 
       // Mt. Ember.
       else if (map == MAP_MT_EMBER_SUMMIT_PATH_2F || map == MAP_MT_EMBER_SUMMIT_PATH_3F) {
-        // coarseMap = MAP_MT_EMBER_SUMMIT_PATH_1F;
+        coarseMap = MAP_MT_EMBER_SUMMIT_PATH_1F;
       }
-      else if (map == MAP_MT_EMBER_RUBY_PATH_B5F || map == MAP_MT_EMBER_RUBY_PATH_B1F || map == MAP_MT_EMBER_RUBY_PATH_B2F || map == MAP_MT_EMBER_RUBY_PATH_B3F || map == MAP_MT_EMBER_RUBY_PATH_B1F_STAIRS || map == MAP_MT_EMBER_RUBY_PATH_B2F_STAIRS) {
-        // coarseMap = MAP_MT_EMBER_RUBY_PATH_1F;
-      }
+      // Ruby path is post game so is excluded.
     }
 
     gCoarseMapHash = SeededRandom(coarseMap * 97);

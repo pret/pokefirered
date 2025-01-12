@@ -1,3 +1,5 @@
+import re
+
 moves = [
   "POUND",
   "KARATE_CHOP",
@@ -498,6 +500,7 @@ with open('all_tms.txt','r') as in_file:
     moves_l2tmu[l] = 'TM' + str(i).zfill(3) + '_' + u
     i += 1
 
+regexp = re.compile(r'"4L[4-9][0-9]')
 new_tm_ls = {}
 lv1_ls = {}
 with open('filtered_learnsets.ts','r') as in_file:
@@ -506,8 +509,8 @@ with open('filtered_learnsets.ts','r') as in_file:
   for line in in_file:
     if line[1].isalpha() and line.strip().endswith(': {'):
       mon = line.strip().replace(': {','')
-      new_tm_ls[mon] = []
-      lv1_ls[mon] = []
+      new_tm_ls[mon] = set()
+      lv1_ls[mon] = set()
     elif 'learnset:' in line:
       in_learnset = True
     elif in_learnset:
@@ -521,9 +524,9 @@ with open('filtered_learnsets.ts','r') as in_file:
       continue
     move = sp[0]
     if move in new_tms_l2u:
-      new_tm_ls[mon].append(move)
-    elif move not in old_tms_l2u and '"4L' not in line and '"4M' not in line:
-      lv1_ls[mon].append(move)
+      new_tm_ls[mon].add(move)
+    elif move not in old_tms_l2u and (('"4L' not in line and '"4M' not in line) or regexp.search(line)):
+      lv1_ls[mon].add(move)
 
 mons = [
   "BULBASAUR",
@@ -931,14 +934,19 @@ static const u32 sNewTMHMLearnsets[][2] =
 
 with open('src/data/pokemon/new_tmhm_learnsets.h', 'w') as c_file:
   for mon in mons:
-    moves = new_tm_ls.get(mon.lower().replace('_', ''), [])
+    moves = new_tm_ls.get(mon.lower().replace('_', ''), set())
     if len(moves) == 0:
       s += '  [SPECIES_' + mon + '] = NTMHM_LEARNSET(0),\n\n'
       continue
-    s += '  [SPECIES_' + mon + '] = NTMHM_LEARNSET(NTMHM(' + moves_l2tmu[moves[0]] + ')'
-    for i in range (1, len(moves)):
-      s += '\n' + (40*' ') + '| NTMHM(' + moves_l2tmu[moves[i]] + ')'
-    s += '),\n\n'
+    it = iter(moves)
+    try:
+      move = next(it)
+      s += '  [SPECIES_' + mon + '] = NTMHM_LEARNSET(NTMHM(' + moves_l2tmu[move] + ')'
+      while True:
+        move = next(it)
+        s += '\n' + (40*' ') + '| NTMHM(' + moves_l2tmu[move] + ')'
+    except StopIteration:
+      s += '),\n\n'
   c_file.write(s + '};')
 
 evos = {}

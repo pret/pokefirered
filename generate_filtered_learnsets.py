@@ -1,3 +1,5 @@
+import re
+
 included_mons_input = [
   'BULBASAUR',
   'IVYSAUR',
@@ -401,6 +403,7 @@ included_mons = set()
 for mon in included_mons_input:
   included_mons.add(mon.lower().replace('_','').replace('-',''))
 
+regexp = re.compile(r'"4L[4-9][0-9]')
 egg_moves = {}
 with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
   mon = None
@@ -410,16 +413,18 @@ with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
       mon = line.strip().replace(': {','')
     elif 'learnset:' in line:
       in_learnset = True
+      continue
     elif in_learnset and ('},' in line):
       in_learnset = False
 
     if mon not in included_mons:
       continue
 
-    if in_learnset and ('"4E' in line or '"3E'):
+    if in_learnset and ('"4E' in line or '"3E' in line or regexp.search(line)):
       if mon not in egg_moves:
-        egg_moves[mon] = []
-      egg_moves[mon].append(line)
+        egg_moves[mon] = {}
+      move = line.split(':')[0].strip()
+      egg_moves[mon][move] = line
 
 s =''
 with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
@@ -438,12 +443,16 @@ with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
     if '"4' in line or '"3' in line:
       s += line
     elif '},' in line:
+      merged_egg_moves = {}
       if mon in included_mons and mon not in evolving_mons:
         m = mon
         while m != None:
-          for egg_move in egg_moves.get(m, []):
-            s += egg_move
+          merged_egg_moves = merged_egg_moves | egg_moves.get(m, {})
+          # for _, egg_move in egg_moves.get(m, {}).items():
+          #   s += egg_move
           m = evos.get(m)
+      for _, egg_move in merged_egg_moves.items():
+        s += egg_move
       in_learnset = False
       s += line
 

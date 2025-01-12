@@ -43,7 +43,7 @@ PewterCity_Gym_Text_ReceivedTM39FromBrock::
 PewterCity_Gym_Text_ExplainTM39::
     .string "Using a TM teaches the move it\n"
     .string "contains to a POKéMON.\p"
-    .string "Each TM has infinite uses\n"
+    .string "Each TM can only be used once\n"
     .string "in this ROM hack.$"
 
 PewterCity_Gym_Text_BrockPostBattle::

@@ -20,7 +20,7 @@ FuchsiaCity_Gym_EventScript_DefeatedKoga::
 
 FuchsiaCity_Gym_EventScript_GiveTM06::
 	msgbox FuchsiaCity_Gym_Text_KogaExplainSoulBadge
-	checkitemspace ITEM_TM06
+	checkitemspace ITEM_TM006
 	goto_if_eq VAR_RESULT, FALSE, FuchsiaCity_Gym_EventScript_NoRoomForTM06
 	giveitem ITEM_RARE_CANDY
 	giveitem -1

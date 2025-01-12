@@ -21,7 +21,7 @@ SaffronCity_Gym_EventScript_DefeatedSabrina::
 
 SaffronCity_Gym_EventScript_GiveTM04::
 	msgbox SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis
-	checkitemspace ITEM_TM04
+	checkitemspace ITEM_TM004
 	goto_if_eq VAR_RESULT, FALSE, SaffronCity_Gym_EventScript_NoRoomForTM04
 	giveitem ITEM_RARE_CANDY
 	giveitem -1

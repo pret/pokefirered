@@ -227,7 +227,7 @@ VermilionCity_Gym_EventScript_ShowOaksAide::
 
 VermilionCity_Gym_EventScript_GiveTM34::
 	msgbox VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis
-	checkitemspace ITEM_TM34
+	checkitemspace ITEM_TM034
 	goto_if_eq VAR_RESULT, FALSE, VermilionCity_Gym_EventScript_NoRoomForTM34
 	giveitem ITEM_RARE_CANDY
 	giveitem -1

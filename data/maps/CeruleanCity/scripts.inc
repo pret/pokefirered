@@ -183,7 +183,7 @@ CeruleanCity_EventScript_Grunt::
 
 CeruleanCity_EventScript_GruntDefeated::
 	msgbox CeruleanCity_Text_OkayIllReturnStolenTM
-	checkitemspace ITEM_TM28
+	checkitemspace ITEM_TM028
 	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_EventScript_NoRoomForTM28
 	giveitem -1
 	msgbox CeruleanCity_Text_BetterGetMovingBye

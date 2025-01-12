@@ -73,7 +73,7 @@ CinnabarIsland_Gym_EventScript_DefeatedBlaine::
 
 CinnabarIsland_Gym_EventScript_GiveTM38::
 	msgbox CinnabarIsland_Gym_Text_ExplainVolcanoBadge
-	checkitemspace ITEM_TM38
+	checkitemspace ITEM_TM038
 	goto_if_eq VAR_RESULT, FALSE, CinnabarIsland_Gym_EventScript_NoRoomForTM38
 	giveitem ITEM_RARE_CANDY
 	giveitem -1

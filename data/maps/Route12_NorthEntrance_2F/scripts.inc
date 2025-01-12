@@ -16,7 +16,7 @@ Route12_NorthEntrance_2F_EventScript_Lass::
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, Route12_NorthEntrance_2F_EventScript_TakeTMMale
 	call_if_eq VAR_RESULT, FEMALE, Route12_NorthEntrance_2F_EventScript_TakeTMFemale
-	checkitemspace ITEM_TM27
+	checkitemspace ITEM_TM027
 	goto_if_eq VAR_RESULT, FALSE, Route12_NorthEntrance_2F_EventScript_NoRoomForTM27
 	giveitem -1
 	msgbox Route12_NorthEntrance_2F_Text_ExplainTM27

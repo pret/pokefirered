@@ -142,8 +142,7 @@ static void RecordTransactionForQuestLog(void);
 static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 {
     {gText_ShopBuy, {.void_u8 = Task_HandleShopMenuBuy}},
-    {gText_ShopSell, {.void_u8 = Task_HandleShopMenuSell}},
-    {gText_ShopQuit, {.void_u8 = Task_HandleShopMenuQuit}}
+    {gText_ShopQuit, {.void_u8 = Task_HandleShopMenuQuit}},
 };
 
 static const struct YesNoFuncTable sShopMenuActions_BuyQuit[] =
@@ -158,7 +157,7 @@ static const struct WindowTemplate sShopMenuWindowTemplate =
     .tilemapLeft = 2,
     .tilemapTop = 1,
     .width = 12,
-    .height = 6,
+    .height = 4,
     .paletteNum = 15,
     .baseBlock = 8
 };
@@ -215,8 +214,8 @@ static u8 CreateShopMenu(u8 martType)
 
     sShopMenuWindowId = AddWindow(&sShopMenuWindowTemplate);
     SetStdWindowBorderStyle(sShopMenuWindowId, 0);
-    PrintTextArray(sShopMenuWindowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, 16, 3, sShopMenuActions_BuySellQuit);
-    Menu_InitCursor(sShopMenuWindowId, FONT_NORMAL, 0, 2, 16, 3, 0);
+    PrintTextArray(sShopMenuWindowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, 16, 2, sShopMenuActions_BuySellQuit);
+    Menu_InitCursor(sShopMenuWindowId, FONT_NORMAL, 0, 2, 16, 2, 0);
     PutWindowTilemap(sShopMenuWindowId);
     CopyWindowToVram(sShopMenuWindowId, COPYWIN_MAP);
     return CreateTask(Task_ShopMenu, 8);
@@ -241,7 +240,7 @@ static void SetShopItemsForSale(const u16 *items)
 {
     // Hack to randomize TMs in the department store.
     // The first item is supposed to be TM05.
-    if (items[0] == ITEM_TM05) {
+    if (items[0] == ITEM_TM005) {
           items = GetVarPointer(VAR_MAP_ITEM_1);
     }
 
@@ -625,7 +624,7 @@ static void LoadTmHmNameInMart(s32 item)
 {
     if (item != INDEX_CANCEL)
     {
-        ConvertIntToDecimalStringN(gStringVar1, item - ITEM_TM01 + 1, 2, 2);
+        ConvertIntToDecimalStringN(gStringVar1, item - ITEM_TM001 + 1, 2, 2);
         StringCopy(gStringVar4, gText_NumberClear01);
         StringAppend(gStringVar4, gStringVar1);
         BuyMenuPrint(6, FONT_SMALL, gStringVar4, 0, 0, 0, 0, TEXT_SKIP_DRAW, 1);

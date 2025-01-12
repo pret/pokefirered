@@ -1,3 +1,5 @@
+import re
+
 included_mons_input = [
   'BULBASAUR',
   'IVYSAUR',
@@ -401,6 +403,7 @@ included_mons = set()
 for mon in included_mons_input:
   included_mons.add(mon.lower().replace('_','').replace('-',''))
 
+regexp = re.compile(r'"4L[4-9][0-9]')
 egg_moves = {}
 with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
   mon = None
@@ -410,16 +413,18 @@ with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
       mon = line.strip().replace(': {','')
     elif 'learnset:' in line:
       in_learnset = True
+      continue
     elif in_learnset and ('},' in line):
       in_learnset = False
 
     if mon not in included_mons:
       continue
 
-    if in_learnset and ('"4E' in line or '"3E' in line):
+    if in_learnset and ('"4E' in line or '"3E' in line or regexp.search(line)):
       if mon not in egg_moves:
-        egg_moves[mon] = []
-      egg_moves[mon].append(line)
+        egg_moves[mon] = {}
+      move = line.split(':')[0].strip()
+      egg_moves[mon][move] = line
 
 s =''
 with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
@@ -428,23 +433,26 @@ with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
   for line in in_file:
     if line[1].isalpha() and line.strip().endswith(': {'):
       mon = line.strip().replace(': {','')
+      s += line
     elif 'learnset:' in line:
       in_learnset = True
-    elif in_learnset and ('},' in line):
-      in_learnset = False
-      if mon in included_mons and mon in evos and mon not in evolving_mons:
-        m = mon
-        while m in evos and m not in egg_moves:
-          m = evos[m]
-        for egg_move in egg_moves.get(m, []):
-          s += egg_move
-          if 'bellydrum' in egg_move:
-            print('adding ' + egg_move + ' to ' + mon)
-
-    if mon not in included_mons or mon in evolving_mons:
-      continue
-    if not in_learnset or '"4' in line or '"3' in line:
       s += line
-      
+    elif not in_learnset:
+      continue
+
+    if '"4' in line or '"3' in line:
+      s += line
+    elif '},' in line:
+      merged_egg_moves = {}
+      if mon in included_mons and mon not in evolving_mons:
+        m = mon
+        while m != None:
+          merged_egg_moves = merged_egg_moves | egg_moves.get(m, {})
+          m = evos.get(m)
+      for _, egg_move in merged_egg_moves.items():
+        s += egg_move
+      in_learnset = False
+      s += line
+
 with open('filtered_learnsets.ts','w') as out_file:
   out_file.write(s)

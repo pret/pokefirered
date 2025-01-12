@@ -9,14 +9,14 @@ Text_PutItemAway::
 	.string "in the {STR_VAR_3}.$"
 
 Text_FoundOneItem::
-	.string "{PLAYER} found one {STR_VAR_2}!$"
+	.string "{PLAYER} obtained a {STR_VAR_2}!$"
 
 Text_TooBadBagFull::
 	.string "Too bad!\n"
 	.string "The BAG is full…$"
 
 Text_FoundXCoins::
-	.string "{PLAYER} found\n"
+	.string "{PLAYER} obtained\n"
 	.string "{STR_VAR_1} {STR_VAR_2}!$"
 
 Text_PutCoinsAwayInCoinCase::
@@ -32,7 +32,7 @@ Text_NothingToPutThemIn::
 	.string "There's nothing to put them in…$"
 
 Text_FoundXItems::
-	.string "{PLAYER} found\n"
+	.string "{PLAYER} obtained\n"
 	.string "{STR_VAR_1} {STR_VAR_2}(s)!$"
 
 Text_ObtainedTheDecor::

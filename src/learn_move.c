@@ -135,9 +135,9 @@ struct LearnMoveGfxResources
     u8 unk_1C;
     u8 unk_1D;
     u8 unk_1E;
-    struct ListMenuItem listMenuItems[25];
-    u16 learnableMoves[25];
-    u8 listMenuStrbufs[25][13];
+    struct ListMenuItem listMenuItems[MAX_LEVEL_UP_MOVES];
+    u16 learnableMoves[MAX_LEVEL_UP_MOVES];
+    u8 listMenuStrbufs[MAX_LEVEL_UP_MOVES][13];
     bool8 scheduleMoveInfoUpdate;
     u8 selectedPartyMember;
     u8 selectedMoveSlot;

@@ -1388,6 +1388,7 @@ static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 
 #include "data/pokemon/tmhm_learnsets.h"
 #include "data/pokemon/gen4_tmhm_learnsets.h"
+#include "data/pokemon/new_tmhm_learnsets.h"
 #include "data/pokemon/trainer_class_lookups.h"
 #include "data/pokemon/cry_ids.h"
 #include "data/pokemon/experience_tables.h"
@@ -5725,10 +5726,18 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
         // Gen IV TM51-TM82
         mask = 1 << (tm - 58);
         return sGen4TMHMLearnsets[species][0] & mask;
-    } else {
+    } else if (tm < 100) {
         // Gen IV TM83-TM92
         mask = 1 << (tm - 90);
         return sGen4TMHMLearnsets[species][1] & mask;
+    } else if (tm < 132) {
+        // New TM92-TM124
+        mask = 1 << (tm - 100);
+        return sNewTMHMLearnsets[species][0] & mask;
+    } else {
+        // New TM124-TM124
+        mask = 1 << (tm - 132);
+        return sNewTMHMLearnsets[species][1] & mask;
     }
 }
 
@@ -5785,7 +5794,7 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
 u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 {
     u16 learnedMoves[MAX_MON_MOVES];
-    u16 moves[MAX_LEVEL_UP_MOVES];
+    static u16 moves[MAX_LEVEL_UP_MOVES];
     u8 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);

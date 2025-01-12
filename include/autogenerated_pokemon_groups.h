@@ -77,7 +77,7 @@ const u16 gGroup_NormalFlying2[] =
 
 const u16 gGroup_Cave1[] =
 {
-  /*SIZE=*/19,
+  /*SIZE=*/20,
   SPECIES_ZUBAT,
   SPECIES_PARAS,
   SPECIES_DIGLETT,
@@ -95,6 +95,7 @@ const u16 gGroup_Cave1[] =
   SPECIES_NOSEPASS,
   SPECIES_ARON,
   SPECIES_MEDITITE,
+  SPECIES_LUNATONE,
   SPECIES_ANORITH,
   SPECIES_SNORUNT,
 };
@@ -191,13 +192,12 @@ const u16 gGroup_GrassBug3[] =
 
 const u16 gGroup_Spooky1[] =
 {
-  /*SIZE=*/17,
+  /*SIZE=*/15,
   SPECIES_CLEFAIRY,
   SPECIES_JIGGLYPUFF,
   SPECIES_GOLBAT,
   SPECIES_GASTLY,
   SPECIES_CUBONE,
-  SPECIES_KABUTO,
   SPECIES_CLEFFA,
   SPECIES_IGGLYBUFF,
   SPECIES_MURKROW,
@@ -205,7 +205,6 @@ const u16 gGroup_Spooky1[] =
   SPECIES_LARVITAR,
   SPECIES_SABLEYE,
   SPECIES_MAWILE,
-  SPECIES_LUNATONE,
   SPECIES_BALTOY,
   SPECIES_SHUPPET,
   SPECIES_DUSKULL,
@@ -213,12 +212,11 @@ const u16 gGroup_Spooky1[] =
 
 const u16 gGroup_Spooky2[] =
 {
-  /*SIZE=*/13,
+  /*SIZE=*/12,
   SPECIES_CLEFABLE,
   SPECIES_WIGGLYTUFF,
   SPECIES_HAUNTER,
   SPECIES_MAROWAK,
-  SPECIES_KABUTOPS,
   SPECIES_CROBAT,
   SPECIES_ESPEON,
   SPECIES_CLAYDOL,
@@ -544,6 +542,18 @@ const u16 gGroup_WaterStarter3[] =
   SPECIES_SWAMPERT,
 };
 
+const u16 gGroup_Water1[] =
+{
+  /*SIZE=*/1,
+  SPECIES_KABUTO,
+};
+
+const u16 gGroup_Water2[] =
+{
+  /*SIZE=*/1,
+  SPECIES_KABUTOPS,
+};
+
 const u16* const gMonGroups[] =
 {
   [SPECIES_NONE] = NULL,
@@ -686,8 +696,8 @@ const u16* const gMonGroups[] =
   [SPECIES_PORYGON] = gGroup_Urban1,
   [SPECIES_OMANYTE] = gGroup_WaterIce1,
   [SPECIES_OMASTAR] = gGroup_WaterIce2,
-  [SPECIES_KABUTO] = gGroup_Spooky1,
-  [SPECIES_KABUTOPS] = gGroup_Spooky2,
+  [SPECIES_KABUTO] = gGroup_Water1,
+  [SPECIES_KABUTOPS] = gGroup_Water2,
   [SPECIES_AERODACTYL] = gGroup_SafariZone,
   [SPECIES_SNORLAX] = gGroup_SafariZone,
   [SPECIES_ARTICUNO] = gGroup_Legendary,
@@ -870,7 +880,7 @@ const u16* const gMonGroups[] =
   [SPECIES_ALTARIA] = gGroup_NormalFlying2,
   [SPECIES_ZANGOOSE] = gGroup_Overworld,
   [SPECIES_SEVIPER] = gGroup_Overworld,
-  [SPECIES_LUNATONE] = gGroup_Spooky1,
+  [SPECIES_LUNATONE] = gGroup_Cave1,
   [SPECIES_SOLROCK] = gGroup_Overworld,
   [SPECIES_BARBOACH] = gGroup_WaterIce1,
   [SPECIES_WHISCASH] = gGroup_WaterIce2,

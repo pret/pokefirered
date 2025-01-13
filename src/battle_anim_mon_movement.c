@@ -17,8 +17,10 @@ static void ReverseHorizontalLungeDirection(struct Sprite *sprite);
 static void DoVerticalDip(struct Sprite *sprite);
 static void ReverseVerticalDipDirection(struct Sprite *sprite);
 static void SlideMonToOriginalPos(struct Sprite *sprite);
+static void SlideMonToOriginalPosPartner(struct Sprite *sprite);
 static void SlideMonToOriginalPos_Step(struct Sprite *sprite);
 static void SlideMonToOffset(struct Sprite *sprite);
+static void SlideMonToOffsetPartner(struct Sprite *sprite);
 static void SlideMonToOffsetAndBack(struct Sprite *sprite);
 static void SlideMonToOffsetAndBack_End(struct Sprite *sprite);
 static void AnimTask_WindUpLunge_Step1(u8 taskId);
@@ -65,6 +67,17 @@ const struct SpriteTemplate gSlideMonToOriginalPosSpriteTemplate =
     .callback = SlideMonToOriginalPos,
 };
 
+const struct SpriteTemplate gSlideMonToOriginalPosPartnerSpriteTemplate =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SlideMonToOriginalPosPartner,
+};
+
 const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
 {
     .tileTag = 0,
@@ -74,6 +87,17 @@ const struct SpriteTemplate gSlideMonToOffsetSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SlideMonToOffset,
+};
+
+const struct SpriteTemplate gSlideMonToOffsetPartnerSpriteTemplate =
+{
+    .tileTag = 0,
+    .paletteTag = 0,
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SlideMonToOffsetPartner,
 };
 
 const struct SpriteTemplate gSlideMonToOffsetAndBackSpriteTemplate =
@@ -470,6 +494,36 @@ static void SlideMonToOriginalPos(struct Sprite *sprite)
     sprite->callback = SlideMonToOriginalPos_Step;
 }
 
+static void SlideMonToOriginalPosPartner(struct Sprite *sprite)
+{
+    u32 monSpriteId;
+    if (!gBattleAnimArgs[0])
+        monSpriteId = gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)];
+    else
+        monSpriteId = gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimTarget)];
+
+    sprite->data[0] = gBattleAnimArgs[2];
+    sprite->data[1] = gSprites[monSpriteId].x + gSprites[monSpriteId].x2;
+    sprite->data[2] = gSprites[monSpriteId].x;
+    sprite->data[3] = gSprites[monSpriteId].y + gSprites[monSpriteId].y2;
+    sprite->data[4] = gSprites[monSpriteId].y;
+    InitSpriteDataForLinearTranslation(sprite);
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
+    sprite->data[5] = gSprites[monSpriteId].x2;
+    sprite->data[6] = gSprites[monSpriteId].y2;
+    sprite->invisible = TRUE;
+
+    if (gBattleAnimArgs[1] == 1)
+        sprite->data[2] = 0;
+    else if (gBattleAnimArgs[1] == 2)
+        sprite->data[1] = 0;
+
+    sprite->data[7] = gBattleAnimArgs[1];
+    sprite->data[7] |= monSpriteId << 8;
+    sprite->callback = SlideMonToOriginalPos_Step;
+}
+
 static void SlideMonToOriginalPos_Step(struct Sprite *sprite)
 {
     u8 data7 = sprite->data[7];
@@ -515,6 +569,39 @@ static void SlideMonToOffset(struct Sprite *sprite)
         if (gBattleAnimArgs[3] == 1)
             gBattleAnimArgs[2] = -gBattleAnimArgs[2];
     }
+    sprite->data[0] = gBattleAnimArgs[4];
+    sprite->data[1] = gSprites[monSpriteId].x;
+    sprite->data[2] = gSprites[monSpriteId].x + gBattleAnimArgs[1];
+    sprite->data[3] = gSprites[monSpriteId].y;
+    sprite->data[4] = gSprites[monSpriteId].y + gBattleAnimArgs[2];
+    InitSpriteDataForLinearTranslation(sprite);
+    sprite->data[3] = 0;
+    sprite->data[4] = 0;
+    sprite->data[5] = monSpriteId;
+    sprite->invisible = TRUE;
+    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
+    sprite->callback = TranslateSpriteLinearByIdFixedPoint;
+}
+
+static void SlideMonToOffsetPartner(struct Sprite *sprite)
+{
+    u8 battler;
+    u8 monSpriteId;
+    if (!gBattleAnimArgs[0])
+        battler = BATTLE_PARTNER(gBattleAnimAttacker);
+    else
+        battler = BATTLE_PARTNER(gBattleAnimTarget);
+
+    monSpriteId = gBattlerSpriteIds[battler];
+    if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+    {
+        gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+        if (gBattleAnimArgs[3] == 1)
+        {
+            gBattleAnimArgs[2] = -gBattleAnimArgs[2];
+        }
+    }
+
     sprite->data[0] = gBattleAnimArgs[4];
     sprite->data[1] = gSprites[monSpriteId].x;
     sprite->data[2] = gSprites[monSpriteId].x + gBattleAnimArgs[1];

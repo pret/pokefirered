@@ -54,7 +54,7 @@ u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
         if (B_LEVEL_CAP_EXP_UP)
         {
             levelDifference = currentLevelCap - level;
-            if (levelDifference > ARRAY_COUNT(sExpScalingUp))
+            if (levelDifference > ARRAY_COUNT(sExpScalingUp) - 1)
                 return expValue + (expValue / sExpScalingUp[ARRAY_COUNT(sExpScalingUp) - 1]);
             else
                 return expValue + (expValue / sExpScalingUp[levelDifference]);
@@ -71,7 +71,7 @@ u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
     else if (B_EXP_CAP_TYPE == EXP_CAP_SOFT)
     {
         levelDifference = level - currentLevelCap;
-        if (levelDifference > ARRAY_COUNT(sExpScalingDown))
+        if (levelDifference > ARRAY_COUNT(sExpScalingDown) - 1)
             return expValue / sExpScalingDown[ARRAY_COUNT(sExpScalingDown) - 1];
         else
             return expValue / sExpScalingDown[levelDifference];

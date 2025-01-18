@@ -185,12 +185,11 @@ static void InitMainCallbacks(void)
 
 static void CallCallbacks(void)
 {
-// #if TESTING || DEBUG_BATTLE_MENU == TRUE // test framework not working with help system
-//     if (!RunSaveFailedScreen())
-// #else
-//     if (!RunSaveFailedScreen() && !RunHelpSystemCallback())
-// #endif
+#if TESTING || DEBUG_BATTLE_MENU == TRUE // test framework not working with help system
     if (!RunSaveFailedScreen())
+#else
+    if (!RunSaveFailedScreen() && !RunHelpSystemCallback())
+#endif
     {
         if (gMain.callback1)
             gMain.callback1();

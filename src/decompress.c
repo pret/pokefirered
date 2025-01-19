@@ -107,8 +107,6 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32
 
 static void DuplicateDeoxysTiles(void *pointer, s32 species)
 {
-    if (species == SPECIES_GLACEON)
-        CpuCopy32(pointer + 0x800, pointer, 0x800);
 }
 
 static void Unused_LZDecompressWramIndirect(const void **src, void *dest)

@@ -1961,12 +1961,6 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 cursor
             hasLiveMon += aliveMons[i];
     }
 
-    // Partner cant trade illegitimate Deoxys or Mew
-    partnerSpecies = GetMonData(&gEnemyParty[sTradeMenu->partnerCursorPosition % PARTY_SIZE], MON_DATA_SPECIES);
-    if ((partnerSpecies == SPECIES_GLACEON || partnerSpecies == SPECIES_BUDEW)
-        && !GetMonData(&gEnemyParty[sTradeMenu->partnerCursorPosition % PARTY_SIZE], MON_DATA_MODERN_FATEFUL_ENCOUNTER))
-        return PARTNER_MON_INVALID;
-
     if (hasLiveMon != 0)
         hasLiveMon = BOTH_MONS_VALID;
 
@@ -2788,12 +2782,6 @@ static u32 CanTradeSelectedMon(struct Pokemon * playerParty, int partyCount, int
         }
     }
 
-    if (species[monIdx] == SPECIES_GLACEON || species[monIdx] == SPECIES_BUDEW)
-    {
-        if (!GetMonData(&playerParty[monIdx], MON_DATA_MODERN_FATEFUL_ENCOUNTER))
-            return CANT_TRADE_INVALID_MON;
-    }
-
     // Make Eggs not count for numMonsLeft
     for (i = 0; i < partyCount; i++)
     {
@@ -2857,11 +2845,6 @@ s32 GetGameProgressForLinkTrade(void)
 
 static bool32 IsDeoxysOrMewUntradable(u16 species, bool8 isModernFatefulEncounter)
 {
-    if (species == SPECIES_GLACEON || species == SPECIES_BUDEW)
-    {
-        if (!isModernFatefulEncounter)
-            return TRUE;
-    }
     return FALSE;
 }
 

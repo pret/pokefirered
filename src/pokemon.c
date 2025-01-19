@@ -6163,38 +6163,11 @@ static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
     u16 statValue = 0;
     u8 nature;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_GLACEON)
-        return 0;
-
-    ivVal = GetMonData(mon, MON_DATA_HP_IV + statId, NULL);
-    evVal = GetMonData(mon, MON_DATA_HP_EV + statId, NULL);
-    statValue = ((sDeoxysBaseStats[statId] * 2 + ivVal + evVal / 4) * mon->level) / 100 + 5;
-    nature = GetNature(mon);
-    statValue = ModifyStatByNature(nature, statValue, (u8)statId);
-    return statValue;
+    return 0;
 }
 
 void SetDeoxysStats(void)
 {
-    s32 i, value;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        struct Pokemon *mon = &gPlayerParty[i];
-
-        if (GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_GLACEON)
-            continue;
-        value = GetMonData(mon, MON_DATA_ATK, NULL);
-        SetMonData(mon, MON_DATA_ATK, &value);
-        value = GetMonData(mon, MON_DATA_DEF, NULL);
-        SetMonData(mon, MON_DATA_DEF, &value);
-        value = GetMonData(mon, MON_DATA_SPEED, NULL);
-        SetMonData(mon, MON_DATA_SPEED, &value);
-        value = GetMonData(mon, MON_DATA_SPATK, NULL);
-        SetMonData(mon, MON_DATA_SPATK, &value);
-        value = GetMonData(mon, MON_DATA_SPDEF, NULL);
-        SetMonData(mon, MON_DATA_SPDEF, &value);
-    }
 }
 
 u16 GetUnionRoomTrainerPic(void)

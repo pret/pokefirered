@@ -830,8 +830,8 @@ void AnimLoadCompressedBgTilemap(u32 bgId, const u32 *src)
 void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *data, const void *src, bool32 largeScreen)
 {
     InitAnimBgTilemapBuffer(data->bgId, src);
-    // if (IsContest() == TRUE)
-    //     RelocateBattleBgPal(data->paletteId, data->bgTilemap, 0, largeScreen);
+    if (IsContest() == TRUE)
+        RelocateBattleBgPal(data->paletteId, data->bgTilemap, 0, largeScreen);
     CopyBgTilemapBufferToVram(data->bgId);
 }
 

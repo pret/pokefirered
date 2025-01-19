@@ -26,4 +26,6 @@ extern struct PlayerPCItemPageStruct gPlayerPcMenuManager;
 void NewGameInitPCItems(void);
 void Mailbox_ReturnToMailListAfterDeposit(void);
 
+void PlayerPC(void);
+
 #endif //GUARD_PLAYER_PC_H

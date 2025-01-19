@@ -164,6 +164,7 @@ const u8 gText_MenuPlayer[] = _("{PLAYER}");
 const u8 gText_MenuSave[] = _("SAVE");
 const u8 gText_MenuOption[] = _("OPTION");
 const u8 gText_MenuExit[] = _("EXIT");
+const u8 gText_MenuMobilePC[] = _("PC");
 const u8 gText_MenuRetire[] = _("RETIRE");
 const u8 gText_MenuSafariStats[] = _("{STR_VAR_1}/{STR_VAR_2}\nBALLS  {STR_VAR_3}");
 const u8 gText_TimesStrVar1[] = _("×{STR_VAR_1}");

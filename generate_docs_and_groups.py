@@ -211,8 +211,8 @@ pokes = [
   ('OMANYTE', 'WaterIce1'),
   ('OMASTAR', 'WaterIce2'),
 
-  ('KABUTO', 'Water1'),
-  ('KABUTOPS', 'Water2'),
+  ('KABUTO', 'WaterIce1'),
+  ('KABUTOPS', 'WaterIce2'),
 
   ('AERODACTYL', 'SafariZone'),
 
@@ -800,7 +800,22 @@ groups = {
   'NotInGame': [],
 }
 
-for pokedex_num in range (1, 494):
+def rel_nat_dex_pos(x):
+  # Machop, Gastly, Togetic, Trapinch, and Happiny
+  # are much better than their dex numbers suggest.
+  if x in set([66, 92, 176, 328, 440]):
+    return 0.9
+  if x <= 151:
+    return x / 151
+  if x <= 251:
+    # Johto dex is small and has good pokemon, so scale them.
+    return (x - 151) / (251 - 151) * 0.95 + 0.025
+  if x <= 386:
+    return (x - 251) / (386 - 251)
+  return (x - 386) / (494 - 386)
+
+sorted_dex_nums = sorted([x for x in range(1, 494)], key=rel_nat_dex_pos)
+for pokedex_num in sorted_dex_nums:
   (poke_name, group_name) = pokes[pokedex_num]
   if group_name == 'NULL':
     continue

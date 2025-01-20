@@ -1,14 +1,18 @@
 #include "global.h"
 #include "battle_gfx_sfx_util.h"
-#include "battle_interface.h"
+#include "data.h"
 #include "decompress.h"
 #include "graphics.h"
+#include "sprite.h"
 #include "util.h"
+// #include "constants/battle_palace.h"
 
 #define TAG_SMOKESCREEN 55019
 
 static void SpriteCB_SmokescreenImpactMain(struct Sprite *);
 static void SpriteCB_SmokescreenImpact(struct Sprite *);
+
+// The below data for smokescreen starts and ends with some data that belongs to battle_gfx_sfx_util.c
 
 static const struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet =
 {

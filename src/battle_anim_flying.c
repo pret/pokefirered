@@ -1174,7 +1174,7 @@ static void AnimDiveWaterSplash(struct Sprite *sprite)
         sprite->y2 = t2;
         if (sprite->data[2] == 24)
         {
-            TryResetSpriteAffineState(sprite);
+            ResetSpriteRotScale_PreserveAffine(sprite);
             DestroyAnimSprite(sprite);
         }
         break;

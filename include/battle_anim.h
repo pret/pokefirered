@@ -554,7 +554,7 @@ void PrepareBattlerSpriteForRotScale(u8 spriteId, u8 objMode);
 void ResetSpriteRotScale(u8 spriteId);
 void SetBattlerSpriteYOffsetFromRotation(u8 spriteId);
 void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 xScale, s16 yScale, u16 rotation);
-void TryResetSpriteAffineState(struct Sprite *sprite);
+void ResetSpriteRotScale_PreserveAffine(struct Sprite *sprite);
 u16 ArcTan2Neg(s16 a, s16 b);
 void SetGrayscaleOrOriginalPalette(u16 paletteNum, bool8 restoreOriginalColor);
 u32 GetBattlePalettesMask(bool8 battleBackground, bool8 attacker, bool8 target, bool8 attackerPartner, bool8 targetPartner, bool8 a6, bool8 a7);

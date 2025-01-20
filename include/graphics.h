@@ -4799,9 +4799,9 @@ extern const u32 gCureBubblesTilemap[];
 extern const u32 gBattleAnimBgTilemap_Attract[];
 extern const u32 gBattleAnimBgImage_Attract[];
 extern const u32 gBattleAnimBgPalette_Attract[];
-extern const u32 gBattleAnim_MorningSunGfx[];
-extern const u32 gBattleAnim_MorningSunTilemap[];
-extern const u32 gBattleAnim_MorningSunPal[];
+extern const u32 gBattleAnimMaskImage_LightBeam[];
+extern const u32 gBattleAnimMaskTilemap_LightBeam[];
+extern const u32 gBattleAnimMaskPalette_LightBeam[];
 
 // battle bg
 extern const u32 gBattleAnimBgImage_Dark[];

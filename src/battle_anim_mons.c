@@ -1183,7 +1183,7 @@ void TrySetSpriteRotScale(struct Sprite *sprite, bool8 recalcCenterVector, s16 x
     }
 }
 
-void TryResetSpriteAffineState(struct Sprite *sprite)
+void ResetSpriteRotScale_PreserveAffine(struct Sprite *sprite)
 {
     TrySetSpriteRotScale(sprite, TRUE, 0x100, 0x100, 0);
     sprite->affineAnimPaused = FALSE;

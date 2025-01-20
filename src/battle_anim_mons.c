@@ -1846,20 +1846,20 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 templat
     u16 sheet = LoadSpriteSheet(&sSpriteSheets_MoveEffectMons[templateId]);
     u16 palette = AllocSpritePalette(sSpriteTemplates_MoveEffectMons[templateId].paletteTag);
 
-    if (gMonSpritesGfxPtr != NULL && gMonSpritesGfxPtr->multiUseBuffer == NULL)
-        gMonSpritesGfxPtr->multiUseBuffer = AllocZeroed(0x2000);
+    if (gMonSpritesGfxPtr != NULL && gMonSpritesGfxPtr->buffer == NULL)
+        gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
     if (!isBackpic)
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(palette), PLTT_SIZE_4BPP);
-        LoadSpecialPokePic(gMonSpritesGfxPtr->multiUseBuffer, species, personality, TRUE);
+        LoadSpecialPokePic(gMonSpritesGfxPtr->buffer, species, personality, TRUE);
     }
     else
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(palette), PLTT_SIZE_4BPP);
-        LoadSpecialPokePic(gMonSpritesGfxPtr->multiUseBuffer, species, personality, FALSE);
+        LoadSpecialPokePic(gMonSpritesGfxPtr->buffer, species, personality, FALSE);
     }
-    RequestDma3Copy(gMonSpritesGfxPtr->multiUseBuffer, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800, 1);
-    FREE_AND_SET_NULL(gMonSpritesGfxPtr->multiUseBuffer);
+    RequestDma3Copy(gMonSpritesGfxPtr->buffer, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800, 1);
+    FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
     if (!isBackpic)
         spriteId = CreateSprite(&sSpriteTemplates_MoveEffectMons[templateId], x, y + gSpeciesInfo[species].frontPicYOffset, subpriority);
     else

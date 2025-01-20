@@ -853,13 +853,13 @@ void AnimTask_GetFieldTerrain(u8 taskId)
 
 void AnimTask_AllocBackupPalBuffer(u8 taskId)
 {
-    gMonSpritesGfxPtr->multiUseBuffer = AllocZeroed(0x2000);
+    gMonSpritesGfxPtr->buffer = AllocZeroed(0x2000);
     DestroyAnimVisualTask(taskId);
 }
 
 void AnimTask_FreeBackupPalBuffer(u8 taskId)
 {
-    FREE_AND_SET_NULL(gMonSpritesGfxPtr->multiUseBuffer);
+    FREE_AND_SET_NULL(gMonSpritesGfxPtr->buffer);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -877,7 +877,7 @@ void AnimTask_CopyPalUnfadedToBackup(u8 taskId)
         paletteIndex = gBattleAnimAttacker + 16;
     else if (gBattleAnimArgs[0] == 2)
         paletteIndex = gBattleAnimTarget + 16;
-    memcpy(&gMonSpritesGfxPtr->multiUseBuffer[gBattleAnimArgs[1] * 16], &gPlttBufferUnfaded[PLTT_ID(paletteIndex)], PLTT_SIZE_4BPP);
+    memcpy(&gMonSpritesGfxPtr->buffer[gBattleAnimArgs[1] * 16], &gPlttBufferUnfaded[PLTT_ID(paletteIndex)], PLTT_SIZE_4BPP);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -895,7 +895,7 @@ void AnimTask_CopyPalUnfadedFromBackup(u8 taskId)
         paletteIndex = gBattleAnimAttacker + 16;
     else if (gBattleAnimArgs[0] == 2)
         paletteIndex = gBattleAnimTarget + 16;
-    memcpy(&gPlttBufferUnfaded[PLTT_ID(paletteIndex)], &gMonSpritesGfxPtr->multiUseBuffer[gBattleAnimArgs[1] * 16], PLTT_SIZE_4BPP);
+    memcpy(&gPlttBufferUnfaded[PLTT_ID(paletteIndex)], &gMonSpritesGfxPtr->buffer[gBattleAnimArgs[1] * 16], PLTT_SIZE_4BPP);
     DestroyAnimVisualTask(taskId);
 }
 

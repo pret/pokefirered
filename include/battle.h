@@ -976,15 +976,12 @@ struct BattleSpriteData
 
 struct MonSpritesGfx
 {
-    void *firstDecompressed; // ptr to the decompressed sprite of the first pokemon
-    u8 *sprites[MAX_BATTLERS_COUNT];
+    void *firstDecompressed; // ptr to the decompressed sprite of the first Pokémon
+    u8 *spritesGfx[MAX_BATTLERS_COUNT];
     struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
-    struct SpriteFrameImage images[MAX_BATTLERS_COUNT][4];
-    u8 field_F4[0x80 - (4 * MAX_BATTLERS_COUNT)]; // unused, original - spritesGfx
-    // u8 *spritesGfx[MAX_BATTLERS_COUNT];
+    struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][4];
     u8 *barFontGfx;
-    void *field_178; // freed but never allocated
-    u16 *multiUseBuffer;
+    u16 *buffer;
 };
 
 struct PokedudeBattlerState

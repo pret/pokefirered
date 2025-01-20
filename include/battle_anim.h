@@ -493,8 +493,8 @@ void CopyBattlerSpriteToBg(s32 bgId, u8 x, u8 y, u8 battlerPosition, u8 palno, u
 void TryShinyAnimation(u8 battler, struct Pokemon *mon);
 u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 arg2, u8 ballId);
-void DoLoadHealthboxPalsForLevelUp(u8 *, u8 *, u8 battlerId);
-void DoFreeHealthboxPalsForLevelUp(u8 batterId);
+void LoadHealthboxPalsForLevelUp(u8 *, u8 *, u8 battlerId);
+void FreeHealthboxPalsForLevelUp(u8 batterId);
 void LaunchStatusAnimation(u8 battlerId, u8 statusAnimId);
 u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType);
 u8 GetBattlerSpriteCoord2(u8 battlerId, u8 coordType);

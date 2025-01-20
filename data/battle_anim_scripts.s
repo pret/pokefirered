@@ -16,7 +16,7 @@
 	.section script_data, "aw", %progbits
 
 gBattleAnimGeneral_MonScared::
-	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
+	createvisualtask AnimTask_SetAttackerTargetLeftPos, 2, 1
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_SWEAT_BEAD
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, 2, 0, 10, RGB(0, 23, 25)
@@ -33,7 +33,7 @@ gBattleAnimGeneral_MonScared::
 	end
 
 gBattleAnimGeneral_GhostGetOut::
-	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
+	createvisualtask AnimTask_SetAttackerTargetLeftPos, 2, 1
 	waitforvisualfinish
 	fadetobg BG_GHOST
 	waitbgfadeout
@@ -68,13 +68,13 @@ gBattleAnimGeneral_SilphScoped::
 	end
 
 gBattleAnimGeneral_SafariRockThrow::
-	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 0
+	createvisualtask AnimTask_SetAttackerTargetLeftPos, 2, 0
 	waitforvisualfinish
 	loadspritegfx ANIM_TAG_ROCKS
 	loadspritegfx ANIM_TAG_IMPACT
 	delay 0
 	waitplaysewithpan SE_M_JUMP_KICK, SOUND_PAN_ATTACKER, 22
-	createsprite gSafariRockTemplate, ANIM_TARGET, 3, -17, 14, 8, 0
+	createsprite sSafariRockSpriteTemplate, ANIM_TARGET, 3, -17, 14, 8, 0
 	delay 50
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
@@ -28155,7 +28155,7 @@ gBattleAnimGeneral_SubstituteAppear::
 	end
 
 gBattleAnimGeneral_BaitThrow::
-	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 0
+	createvisualtask AnimTask_SetAttackerTargetLeftPos, 2, 0
 	createvisualtask AnimTask_LoadBaitGfx, 2
 	delay 0
 	waitplaysewithpan SE_M_JUMP_KICK, SOUND_PAN_ATTACKER, 22
@@ -29049,7 +29049,7 @@ gBattleAnimSpecial_BallThrow::
 	delay 0
 	playsewithpan SE_BALL_THROW, 0
 	createvisualtask AnimTask_ThrowBall, 2
-	createvisualtask AnimTask_IsBallBlockedByTrainerOrDodged, 2
+	createvisualtask AnimTask_IsBallBlockedByTrainer, 2
 	jumpreteq -1, BallThrowTrainerBlock
 	jumpreteq -2, BallThrowGhostDodged
 BallThrowEnd:
@@ -29080,7 +29080,7 @@ BallThrowGhostDodged:
 gBattleAnimSpecial_BallThrowWithTrainer::
 	createvisualtask AnimTask_LoadBallGfx, 2
 	delay 0
-	createvisualtask AnimTask_ThrowBallSpecial, 2
+	createvisualtask AnimTask_ThrowBall_StandingTrainer, 2
 	waitforvisualfinish
 	createvisualtask AnimTask_FreeBallGfx, 2
 	end
@@ -29098,7 +29098,7 @@ gBattleAnimSpecial_CriticalCaptureBallThrow::
 	delay 0
 	playsewithpan SE_FALL, 0
 	createvisualtask AnimTask_ThrowBall, 2
-	createvisualtask AnimTask_IsBallBlockedByTrainerOrDodged, 2
+	createvisualtask AnimTask_IsBallBlockedByTrainer, 2
 	jumpreteq -1, BallThrowTrainerBlock
 	goto BallThrowEnd
 

@@ -2188,12 +2188,3 @@ static void Cmd_createdragondartsprite(void)
         subpriority) != MAX_SPRITES) // Don't increment the task count if the sprite couldn't be created(i.e. there are too many created sprites atm).
          gAnimVisualTaskCount++;
 }
-
-// battle_anim_throw.c
-
-bool32 IsCriticalCapture(void)
-{
-    return gBattleSpritesDataPtr->animationData->isCriticalCapture;
-}
-
-//

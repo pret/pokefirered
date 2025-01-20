@@ -2545,7 +2545,7 @@ static void SpriteCB_TrainerThrowObject_Main(struct Sprite *sprite)
 
 // Sprite callback for a trainer back pic to throw an object
 // (Wally throwing a ball, throwing Pokéblocks/balls in the Safari Zone)
-void SpriteCB_PlayerThrowInit(struct Sprite *sprite)
+void SpriteCB_TrainerThrowObject(struct Sprite *sprite)
 {
     StartSpriteAnim(sprite, 1);
     sprite->callback = SpriteCB_TrainerThrowObject_Main;

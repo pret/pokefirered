@@ -79,7 +79,7 @@ void EndBounceEffect(u8 battler, u8 which);
 void SpriteCB_PlayerMonFromBall(struct Sprite *sprite);
 void SpriteCB_PlayerMonSlideIn(struct Sprite *sprite);
 void SpriteCB_PlayerThrowInit(struct Sprite *sprite);
-void UpdatePlayerPosInThrowAnim(struct Sprite *sprite);
+void AnimSetCenterToCornerVecX(struct Sprite *sprite);
 void BeginBattleIntroDummy(void);
 void BeginBattleIntro(void);
 void SwitchInClearSetData(u32 battler);

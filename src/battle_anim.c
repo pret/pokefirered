@@ -1117,13 +1117,13 @@ void ResetBattleAnimBg(bool8 to_BG2)
 
     if (!to_BG2)
     {
-        InitBattleAnimBg(1);
+        ClearBattleAnimBg(1);
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
     }
     else
     {
-        InitBattleAnimBg(2);
+        ClearBattleAnimBg(2);
         gBattle_BG2_X = 0;
         gBattle_BG2_Y = 0;
     }

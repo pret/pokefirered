@@ -1541,7 +1541,7 @@ static void AnimTask_GhostGetOut_Step3(u8 taskId)
         SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
         break;
     case 3:
-        InitBattleAnimBg(2);
+        ClearBattleAnimBg(2);
         FillPalette(RGB_BLACK, BG_PLTT_ID(9), PLTT_SIZE_4BPP);
         SetAnimBgAttribute(2, BG_ANIM_CHAR_BASE_BLOCK, 0);
         task->data[1] = 12;

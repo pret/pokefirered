@@ -582,7 +582,7 @@ static void AnimTask_LoadSandstormBackground_Step(u8 taskId)
         break;
     case 3:
         GetBattleAnimBg1Data(&animBg);
-        InitBattleAnimBg(animBg.bgId);
+        ClearBattleAnimBg(animBg.bgId);
         ++gTasks[taskId].data[12];
         break;
     case 4:

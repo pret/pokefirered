@@ -383,7 +383,7 @@ static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
             sprite = &gSprites[gTasks[taskId].data[0]];
             DestroySprite(sprite);
             GetBattleAnimBg1Data(&animBgData);
-            InitBattleAnimBg(animBgData.bgId);
+            ClearBattleAnimBg(animBgData.bgId);
             if (gTasks[taskId].data[6] == 1)
                 ++gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority;
             gBattle_BG1_Y = 0;

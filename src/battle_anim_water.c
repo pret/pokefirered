@@ -1139,8 +1139,8 @@ static void AnimTask_CreateSurfWave_Step2(u8 taskId)
     u16 *BGptrY = &gBattle_BG1_Y;
     if (gTasks[taskId].data[0] == 0)
     {
-        InitBattleAnimBg(1);
-        InitBattleAnimBg(2);
+        ClearBattleAnimBg(1);
+        ClearBattleAnimBg(2);
         gTasks[taskId].data[0]++;
     }
     else

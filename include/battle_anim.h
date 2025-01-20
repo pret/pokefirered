@@ -594,4 +594,7 @@ void StartMonScrollingBgMask(u8 taskId, s32 unused, u16 arg2, u8 battler1, u8 ar
 void ClearBattleAnimBg(u32 bgId);
 void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *, const void *, bool32);
 
+// battle_anim_bug.c
+void AnimTranslateStinger(struct Sprite *sprite);
+
 #endif // GUARD_BATTLE_ANIM_H

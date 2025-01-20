@@ -1180,11 +1180,11 @@ void AllocateMonSpritesGfx(void)
 
         for (j = 0; j < MAX_MON_PIC_FRAMES; ++j)
         {
-            gMonSpritesGfxPtr->frameImages[i][j].data = gMonSpritesGfxPtr->spritesGfx[i] + (j * 0x800);
-            gMonSpritesGfxPtr->frameImages[i][j].size = 0x800;
+            gMonSpritesGfxPtr->images[i][j].data = gMonSpritesGfxPtr->spritesGfx[i] + (j * 0x800);
+            gMonSpritesGfxPtr->images[i][j].size = 0x800;
         }
 
-        gMonSpritesGfxPtr->templates[i].images = gMonSpritesGfxPtr->frameImages[i];
+        gMonSpritesGfxPtr->templates[i].images = gMonSpritesGfxPtr->images[i];
     }
     gMonSpritesGfxPtr->barFontGfx = AllocZeroed(0x1000);
 }

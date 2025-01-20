@@ -945,7 +945,7 @@ static void Cmd_monbg(void)
         else
             toBG_2 = TRUE;
 
-        MoveBattlerSpriteToBG(battlerId, toBG_2);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
         spriteId = gBattlerSpriteIds[battlerId];
         taskId = CreateTask(Task_InitUpdateMonBg, 10);
         gTasks[taskId].data[t1_MONBG_BATTLER] = spriteId;
@@ -976,7 +976,7 @@ static void Cmd_monbg(void)
         else
             toBG_2 = TRUE;
 
-        MoveBattlerSpriteToBG(battlerId, toBG_2);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
         spriteId = gBattlerSpriteIds[battlerId];
         taskId = CreateTask(Task_InitUpdateMonBg, 10);
         gTasks[taskId].data[t1_MONBG_BATTLER] = spriteId;
@@ -1032,7 +1032,7 @@ bool8 IsBattlerSpriteVisible(u8 battlerId)
     return FALSE;
 }
 
-void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2)
+void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 {
     struct BattleAnimBgData animBg;
     u8 battlerSpriteId;
@@ -1245,7 +1245,7 @@ static void Cmd_monbg_static(void)
         else
             toBG_2 = TRUE;
         
-        MoveBattlerSpriteToBG(battlerId, toBG_2);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
         gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
     }
 
@@ -1258,7 +1258,7 @@ static void Cmd_monbg_static(void)
         else
             toBG_2 = TRUE;
 
-        MoveBattlerSpriteToBG(battlerId, toBG_2);
+        MoveBattlerSpriteToBG(battlerId, toBG_2, FALSE);
         gSprites[gBattlerSpriteIds[battlerId]].invisible = FALSE;
     }
 

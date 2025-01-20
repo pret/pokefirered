@@ -562,10 +562,10 @@ static void AnimDefensiveWall(struct Sprite *sprite)
         bool8 toBG2 = (rank ^ var0) != 0;
 
         if (IsBattlerSpriteVisible(battler))
-            MoveBattlerSpriteToBG(battler, toBG2);
+            MoveBattlerSpriteToBG(battler, toBG2, FALSE);
         battler = BATTLE_PARTNER(battlerCopy);
         if (IsBattlerSpriteVisible(battler))
-            MoveBattlerSpriteToBG(battler, toBG2 ^ var0);
+            MoveBattlerSpriteToBG(battler, toBG2 ^ var0, FALSE);
     }
     if (!IsContest() && IsDoubleBattle())
     {

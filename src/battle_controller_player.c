@@ -1625,7 +1625,7 @@ static void Task_CreateLevelUpVerticalStripes(u8 taskId)
             u32 battlerIdAlt = battlerId;
             bool32 v6Alt = isOnBg2;
 
-            MoveBattlerSpriteToBG(battlerIdAlt, v6Alt);
+            MoveBattlerSpriteToBG(battlerIdAlt, v6Alt, FALSE);
         }
         ++data[15];
         break;

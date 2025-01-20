@@ -1739,7 +1739,7 @@ void *LoadPointerFromVars(s16 lo, s16 hi)
     return (void *)((u16)lo | ((u16)hi << 16));
 }
 
-void BattleAnimHelper_SetSpriteSquashParams(struct Task *task, u8 spriteId, s16 xScaleStart, s16 yScaleStart, s16 xScaleEnd, s16 yScaleEnd, u16 duration)
+void PrepareEruptAnimTaskData(struct Task *task, u8 spriteId, s16 xScaleStart, s16 yScaleStart, s16 xScaleEnd, s16 yScaleEnd, u16 duration)
 {
     task->data[8] = duration;
     task->data[15] = spriteId;
@@ -1751,10 +1751,11 @@ void BattleAnimHelper_SetSpriteSquashParams(struct Task *task, u8 spriteId, s16 
     task->data[12] = (yScaleEnd - yScaleStart) / duration;
 }
 
-u8 BattleAnimHelper_RunSpriteSquash(struct Task *task)
+u8 UpdateEruptAnimTask(struct Task *task)
 {
     if (!task->data[8])
         return 0;
+
     if (--task->data[8] != 0)
     {
         task->data[9] += task->data[11];

@@ -1269,7 +1269,7 @@ static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        BattleAnimHelper_SetSpriteSquashParams(task, task->data[15], 0x100, 0x100, 224, 0x200, 32);
+        PrepareEruptAnimTaskData(task, task->data[15], 0x100, 0x100, 224, 0x200, 32);
         task->data[0]++;
     case 1:
         if (++task->data[3] > 1)
@@ -1285,7 +1285,7 @@ static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
                 gSprites[task->data[15]].x2 = -3;
             }
         }
-        if (BattleAnimHelper_RunSpriteSquash(task) == 0)
+        if (UpdateEruptAnimTask(task) == 0)
         {
             SetBattlerSpriteYOffsetFromYScale(task->data[15]);
             gSprites[task->data[15]].x2 = 0;
@@ -1297,13 +1297,13 @@ static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
     case 2:
         if (++task->data[3] > 4)
         {
-            BattleAnimHelper_SetSpriteSquashParams(task, task->data[15], 224, 0x200, 384, 224, 8);
+            PrepareEruptAnimTaskData(task, task->data[15], 224, 0x200, 384, 224, 8);
             task->data[3] = 0;
             task->data[0]++;
         }
         break;
     case 3:
-        if (BattleAnimHelper_RunSpriteSquash(task) == 0)
+        if (UpdateEruptAnimTask(task) == 0)
         {
             task->data[3] = 0;
             task->data[4] = 0;
@@ -1323,7 +1323,7 @@ static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
                 gSprites[task->data[15]].y2 -= 2;
             if (task->data[4] == 10)
             {
-                BattleAnimHelper_SetSpriteSquashParams(task, task->data[15], 384, 224, 0x100, 0x100, 8);
+                PrepareEruptAnimTaskData(task, task->data[15], 384, 224, 0x100, 0x100, 8);
                 task->data[3] = 0;
                 task->data[4] = 0;
                 task->data[0]++;
@@ -1332,7 +1332,7 @@ static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
         break;
     case 6:
         gSprites[task->data[15]].y--;
-        if (BattleAnimHelper_RunSpriteSquash(task) == 0)
+        if (UpdateEruptAnimTask(task) == 0)
         {
             ResetSpriteRotScale(task->data[15]);
             gSprites[task->data[15]].y = task->data[5];

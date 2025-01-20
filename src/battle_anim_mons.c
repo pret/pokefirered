@@ -868,9 +868,9 @@ u8 GetBattleBgPaletteNum(void)
     return 2;
 }
 
-void ToggleBg3Mode(bool8 largeScreenSize)
+void UpdateAnimBg3ScreenSize(bool8 largeScreenSize)
 {
-    if (!largeScreenSize)
+    if (!largeScreenSize || IsContest())
     {
         SetAnimBgAttribute(3, BG_ANIM_SCREEN_SIZE, 0);
         SetAnimBgAttribute(3, BG_ANIM_AREA_OVERFLOW_MODE, 1);

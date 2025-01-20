@@ -670,7 +670,7 @@ void AnimTask_StartSlidingBg(u8 taskId)
 {
     u8 newTaskId;
 
-    ToggleBg3Mode(0);
+    UpdateAnimBg3ScreenSize(0);
     newTaskId = CreateTask(AnimTask_UpdateSlidingBg, 5);
     if (gBattleAnimArgs[2] && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
     {
@@ -696,7 +696,7 @@ static void AnimTask_UpdateSlidingBg(u8 taskId)
     {
         gBattle_BG3_X = 0;
         gBattle_BG3_Y = 0;
-        ToggleBg3Mode(1);
+        UpdateAnimBg3ScreenSize(1);
         DestroyTask(taskId);
     }
 }

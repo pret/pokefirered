@@ -960,14 +960,14 @@ void AnimTask_MoveSeismicTossBg(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        ToggleBg3Mode(0);
+        UpdateAnimBg3ScreenSize(0);
         gTasks[taskId].data[1] = 200;
     }
     gBattle_BG3_Y += gTasks[taskId].data[1] / 10;
     gTasks[taskId].data[1] -= 3;
     if (gTasks[taskId].data[0] == 120)
     {
-        ToggleBg3Mode(1);
+        UpdateAnimBg3ScreenSize(1);
         DestroyAnimVisualTask(taskId);
     }
     ++gTasks[taskId].data[0];
@@ -977,7 +977,7 @@ void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
 {
     if (gTasks[taskId].data[0] == 0)
     {
-        ToggleBg3Mode(0);
+        UpdateAnimBg3ScreenSize(0);
         ++gTasks[taskId].data[0];
         gTasks[taskId].data[2] = gBattle_BG3_Y;
     }
@@ -987,7 +987,7 @@ void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
     if (gBattleAnimArgs[7] == 0xFFF)
     {
         gBattle_BG3_Y = 0;
-        ToggleBg3Mode(1);
+        UpdateAnimBg3ScreenSize(1);
         DestroyAnimVisualTask(taskId);
     }
 }

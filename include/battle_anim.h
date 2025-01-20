@@ -535,7 +535,7 @@ void AnimLoadCompressedBgGfx(u32 bgId, const u32 *src, u32 tilesOffset);
 void InitAnimBgTilemapBuffer(u32 bgId, const void *src);
 void AnimLoadCompressedBgTilemap(u32 bgId, const u32 *src);
 u8 GetBattleBgPaletteNum(void);
-void ToggleBg3Mode(bool8 arg0);
+void UpdateAnimBg3ScreenSize(bool8 arg0);
 void Trade_MoveSelectedMonToTarget(struct Sprite *sprite);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void InitAnimLinearTranslation(struct Sprite *sprite);

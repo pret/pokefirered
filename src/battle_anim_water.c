@@ -1,16 +1,17 @@
 #include "global.h"
+#include "battle.h"
 #include "battle_anim.h"
-#include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "palette.h"
-#include "pokemon.h"
 #include "random.h"
 #include "scanline_effect.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
 #include "util.h"
+#include "constants/battle.h"
+#include "constants/rgb.h"
 
 static void AnimRainDrop(struct Sprite *);
 static void AnimRainDrop_Step(struct Sprite *);
@@ -20,6 +21,8 @@ static void AnimWaterBubbleProjectile_Step2(struct Sprite *);
 static void AnimWaterBubbleProjectile_Step3(struct Sprite *);
 static void AnimAuroraBeamRings(struct Sprite *);
 static void AnimAuroraBeamRings_Step(struct Sprite *);
+void AnimFlyUpTarget(struct Sprite *);
+static void AnimFlyUpTarget_Step(struct Sprite *);
 static void AnimToTargetInSinWave(struct Sprite *);
 static void AnimToTargetInSinWave_Step(struct Sprite *);
 static void AnimHydroCannonCharge(struct Sprite *);
@@ -49,14 +52,10 @@ static void CreateWaterSpoutLaunchDroplets(struct Task *, u8);
 static void CreateWaterSpoutRainDroplet(struct Task *, u8);
 static void AnimTask_WaterSport_Step(u8);
 static void CreateWaterSportDroplet(struct Task *);
-static void CreateWaterPulseRingBubbles(struct Sprite *, s32, s32);
+static void CreateWaterPulseRingBubbles(struct Sprite *, int, int);
 static void AnimAquaTail(struct Sprite *sprite);
 static void AnimKnockOffAquaTail(struct Sprite *sprite);
 static void AnimKnockOffAquaTailStep(struct Sprite *sprite);
-static void AnimFlyUpTarget_Step(struct Sprite *);
-
-static const u8 sUnusedWater_Gfx[] = INCBIN_U8("graphics/battle_anims/unused/water.4bpp");
-static const u8 sUnusedWater[] = INCBIN_U8("graphics/battle_anims/unused/water.bin");
 
 static const union AnimCmd sAnim_RainDrop[] =
 {
@@ -75,7 +74,7 @@ static const union AnimCmd *const sAnims_RainDrop[] =
     sAnim_RainDrop,
 };
 
-const struct SpriteTemplate gRainDropSpriteTemplate  =
+const struct SpriteTemplate gRainDropSpriteTemplate =
 {
     .tileTag = ANIM_TAG_RAIN_DROPS,
     .paletteTag = ANIM_TAG_RAIN_DROPS,
@@ -88,7 +87,7 @@ const struct SpriteTemplate gRainDropSpriteTemplate  =
 
 static const union AffineAnimCmd sAffineAnim_WaterBubbleProjectile[] =
 {
-    AFFINEANIMCMD_FRAME(-0x5, -0x5, 0, 10),
+    AFFINEANIMCMD_FRAME(0xFFFB, 0xFFFB, 0, 10),
     AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 10),
     AFFINEANIMCMD_JUMP(0),
 };
@@ -282,7 +281,7 @@ static const union AffineAnimCmd sAffineAnim_HydroCannonCharge[] =
 {
     AFFINEANIMCMD_FRAME(0x3, 0x3, 10, 50),
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 10),
-    AFFINEANIMCMD_FRAME(-0x14, -0x14, -10, 20),
+    AFFINEANIMCMD_FRAME(0xFFEC, 0xFFEC, -10, 20),
     AFFINEANIMCMD_END,
 };
 
@@ -434,14 +433,14 @@ static const union AnimCmd *const sAnims_WeatherBallWaterDown[] =
 static const union AffineAnimCmd sAffineAnim_WaterPulseRingBubble_0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
-    AFFINEANIMCMD_FRAME(-0xA, -0xA, 0, 15),
+    AFFINEANIMCMD_FRAME(0xFFF6, 0xFFF6, 0, 15),
     AFFINEANIMCMD_END,
 };
 
 static const union AffineAnimCmd sAffineAnim_WaterPulseRingBubble_1[] =
 {
     AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0, 0),
-    AFFINEANIMCMD_FRAME(-0x8, -0x8, 0, 15),
+    AFFINEANIMCMD_FRAME(0xFFF8, 0xFFF8, 0, 15),
     AFFINEANIMCMD_END,
 };
 
@@ -586,14 +585,14 @@ const struct SpriteTemplate gAquaTailHitSpriteTemplate =
 };
 
 static const union AnimCmd sAnimCmdAnimatedSpark2[] = {
-	ANIMCMD_FRAME((8 * 8) / (16 * 16) * 0, 8),
-	ANIMCMD_FRAME((8 * 8) / (16 * 16) * 1, 8),
-	ANIMCMD_FRAME((8 * 8) / (16 * 16) * 2, 8),
-	ANIMCMD_JUMP(0)
+    ANIMCMD_FRAME((8 * 8) / (16 * 16) * 0, 8),
+    ANIMCMD_FRAME((8 * 8) / (16 * 16) * 1, 8),
+    ANIMCMD_FRAME((8 * 8) / (16 * 16) * 2, 8),
+    ANIMCMD_JUMP(0)
 };
 
 static const union AnimCmd *const sAnimCmdTable_AnimatedSpark2[] = {
-	sAnimCmdAnimatedSpark2,
+    sAnimCmdAnimatedSpark2,
 };
 
 const struct SpriteTemplate gSparkBeamSpriteTemplate =
@@ -652,9 +651,9 @@ static void AnimKnockOffAquaTailStep(struct Sprite *sprite)
     sprite->data[2]++;
 }
 
-void AnimTask_CreateRaindrops(u8 taskId) 
+void AnimTask_CreateRaindrops(u8 taskId)
 {
-     u8 x, y;
+    u8 x, y;
 
     if (gTasks[taskId].data[0] == 0)
     {
@@ -665,30 +664,28 @@ void AnimTask_CreateRaindrops(u8 taskId)
     gTasks[taskId].data[0]++;
     if (gTasks[taskId].data[0] % gTasks[taskId].data[2] == 1)
     {
-        x = Random() % DISPLAY_WIDTH;
-        y = Random() % (DISPLAY_HEIGHT / 2);
+        x = Random2() % DISPLAY_WIDTH;
+        y = Random2() % (DISPLAY_HEIGHT / 2);
         CreateSprite(&gRainDropSpriteTemplate, x, y, 4);
     }
     if (gTasks[taskId].data[0] == gTasks[taskId].data[3])
         DestroyAnimVisualTask(taskId);
 }
 
-static void AnimRainDrop(struct Sprite *sprite) 
+static void AnimRainDrop(struct Sprite *sprite)
 {
     sprite->callback = AnimRainDrop_Step;
 }
 
-static void AnimRainDrop_Step(struct Sprite *sprite) 
+static void AnimRainDrop_Step(struct Sprite *sprite)
 {
-    if (++sprite->data[0] < 14) // Was 13 in emerald
+    if (++sprite->data[0] <= 13)
     {
-        sprite->x2 += 1;
+        sprite->x2++;
         sprite->y2 += 4;
     }
     if (sprite->animEnded)
-    {
         DestroySprite(sprite);
-    }
 }
 
 // For water bubbles that move to a dest, as in Bubble/Bubblebeam
@@ -803,6 +800,7 @@ void AnimTask_RotateAuroraRingColors(u8 taskId)
     gTasks[taskId].data[2] = OBJ_PLTT_ID(IndexOfSpritePaletteTag(ANIM_TAG_RAINBOW_RINGS));
     gTasks[taskId].func = AnimTask_RotateAuroraRingColors_Step;
 }
+
 static void AnimTask_RotateAuroraRingColors_Step(u8 taskId)
 {
     int i;
@@ -810,13 +808,13 @@ static void AnimTask_RotateAuroraRingColors_Step(u8 taskId)
 
     if (++gTasks[taskId].data[10] == 3)
     {
-        u16 tempPlt;
+        u16 rgbBuffer;
         gTasks[taskId].data[10] = 0;
         palIndex = gTasks[taskId].data[2] + 1;
-        tempPlt = gPlttBufferFaded[palIndex];
+        rgbBuffer = gPlttBufferFaded[palIndex];
         for (i = 1; i < 8; i++)
             gPlttBufferFaded[palIndex + i - 1] = gPlttBufferFaded[palIndex + i];
-        gPlttBufferFaded[palIndex + 7] = tempPlt;
+        gPlttBufferFaded[palIndex + 7] = rgbBuffer;
     }
     if (++gTasks[taskId].data[11] == gTasks[taskId].data[0])
         DestroyAnimVisualTask(taskId);
@@ -955,7 +953,7 @@ static void AnimHydroCannonBeam(struct Sprite *sprite)
     if ((u8)gBattleAnimArgs[5] == 0)
         coordType = BATTLER_COORD_Y_PIC_OFFSET;
     else
-        coordType = 1;
+        coordType = BATTLER_COORD_Y;
     InitSpritePosToAnimAttacker(sprite, animType);
     if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         gBattleAnimArgs[2] = -gBattleAnimArgs[2];
@@ -993,7 +991,7 @@ static void AnimSmallBubblePair_Step(struct Sprite *sprite)
     sprite->x2 = Sin(sprite->data[0], 4);
     sprite->data[1] += 48;
     sprite->y2 = -(sprite->data[1] >> 8);
-    if (sprite->data[7]-- == 0)
+    if (--sprite->data[7] == -1)
         DestroyAnimSprite(sprite);
 }
 
@@ -1001,7 +999,8 @@ void AnimTask_CreateSurfWave(u8 taskId)
 {
     struct BattleAnimBgData animBg;
     u8 taskId2;
-    u16 *x, *y; //These pointers are needed to match
+    u16 *x;
+    u16 *y;
 
     x = &gBattle_BG1_X;
     y = &gBattle_BG1_Y;
@@ -1021,9 +1020,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
     }
     else
     {
-        // Changed from Emerald
-        LZDecompressVram(gBattleAnimBgTilemap_SurfContest, animBg.bgTilemap);
-        RelocateBattleBgPal(animBg.paletteId, animBg.bgTilemap, 0, 1);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_SurfContest, TRUE);
     }
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_Surf, animBg.tilesOffset);
     switch (gBattleAnimArgs[0])
@@ -1036,7 +1033,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
             LoadCompressedPalette(gBattleAnimBgPalette_Surf, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
         break;
     case ANIM_SURF_PAL_MUDDY_WATER:
-        LoadCompressedPalette(gBattleAnimBgPalette_MuddyWater, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleAnimBackgroundImageMuddyWater_Pal, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
         break;
     case ANIM_SURF_PAL_SLUDGE_WAVE:
         LoadCompressedPalette(gBattleAnimBgPalette_SludgeWave, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
@@ -1090,13 +1087,11 @@ void AnimTask_CreateSurfWave(u8 taskId)
 
 static void AnimTask_CreateSurfWave_Step1(u8 taskId)
 {
-    u16 rgbBuffer;
-    u8 i;
-    u16 *BGptrX, *BGptrY;
     struct BattleAnimBgData animBg;
-
-    BGptrX = &gBattle_BG1_X;
-    BGptrY = &gBattle_BG1_Y;
+    u8 i;
+    u16 rgbBuffer;
+    u16 *BGptrX = &gBattle_BG1_X;
+    u16 *BGptrY = &gBattle_BG1_Y;
 
     *BGptrX += gTasks[taskId].data[0];
     *BGptrY += gTasks[taskId].data[1];
@@ -1104,18 +1099,18 @@ static void AnimTask_CreateSurfWave_Step1(u8 taskId)
     gTasks[taskId].data[2] += gTasks[taskId].data[1];
     if (++gTasks[taskId].data[5] == 4)
     {
-        rgbBuffer = gPlttBufferFaded[16 * animBg.paletteId + 7];
-        for (i = 6; i != 0; i--) // i > 0 generates the exact same code in this context
+        rgbBuffer = gPlttBufferFaded[BG_PLTT_ID(animBg.paletteId) + 7];
+        for (i = 6; i != 0; i--)
         {
-            gPlttBufferFaded[16 * animBg.paletteId + 1 + i] = gPlttBufferFaded[16 * animBg.paletteId + 1 + i - 1]; // 1 + i - 1 is needed to match for some bizarre reason
+            gPlttBufferFaded[BG_PLTT_ID(animBg.paletteId) + 1 + i] = gPlttBufferFaded[BG_PLTT_ID(animBg.paletteId) + 1 + i - 1]; // 1 + i - 1 is needed to match for some bizarre reason
         }
-        gPlttBufferFaded[16 * animBg.paletteId + 1] = rgbBuffer;
+        gPlttBufferFaded[BG_PLTT_ID(animBg.paletteId) + 1] = rgbBuffer;
         gTasks[taskId].data[5] = 0;
     }
     if (++gTasks[taskId].data[6] > 1)
     {
         gTasks[taskId].data[6] = 0;
-        if (++gTasks[taskId].data[3] < 14)
+        if (++gTasks[taskId].data[3] <= 13)
         {
             gTasks[gTasks[taskId].data[15]].data[1] = (s16)((gTasks[taskId].data[3]) | ((16 - gTasks[taskId].data[3]) << 8));
             gTasks[taskId].data[4]++;
@@ -1177,7 +1172,7 @@ static void AnimTask_SurfWaveScanlineEffect(u8 taskId)
         else
             gScanlineEffectRegBuffers[0][i] = gScanlineEffectRegBuffers[1][i] = task->data[2];
 
-        params.dmaDest = (vu16 *)REG_ADDR_BLDALPHA;
+        params.dmaDest = &REG_BLDALPHA;
         params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
         params.initState = 1;
         params.unused9 = 0;
@@ -1229,8 +1224,8 @@ static void AnimSmallDriftingBubbles(struct Sprite *sprite)
 
     sprite->oam.tileNum += 8;
     InitSpritePosToAnimTarget(sprite, TRUE);
-    randData = (Random() & 0xFF) | 256;
-    randData2 = (Random() & 0x1FF);
+    randData = (Random2() & 0xFF) | 256;
+    randData2 = (Random2() & 0x1FF);
     if (randData2 > 255)
         randData2 = 256 - randData2;
     sprite->data[1] = randData;
@@ -1269,7 +1264,7 @@ static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-        PrepareEruptAnimTaskData(task, task->data[15], 0x100, 0x100, 224, 0x200, 32);
+        PrepareEruptAnimTaskData(task, task->data[15], 0x100, 0x100, 0xE0, 0x200, 32);
         task->data[0]++;
     case 1:
         if (++task->data[3] > 1)
@@ -1297,7 +1292,7 @@ static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
     case 2:
         if (++task->data[3] > 4)
         {
-            PrepareEruptAnimTaskData(task, task->data[15], 224, 0x200, 384, 224, 8);
+            PrepareEruptAnimTaskData(task, task->data[15], 0xE0, 0x200, 0x180, 0xE0, 8);
             task->data[3] = 0;
             task->data[0]++;
         }
@@ -1323,7 +1318,7 @@ static void AnimTask_WaterSpoutLaunch_Step(u8 taskId)
                 gSprites[task->data[15]].y2 -= 2;
             if (task->data[4] == 10)
             {
-                PrepareEruptAnimTaskData(task, task->data[15], 384, 224, 0x100, 0x100, 8);
+                PrepareEruptAnimTaskData(task, task->data[15], 0x180, 0xE0, 0x100, 0x100, 8);
                 task->data[3] = 0;
                 task->data[4] = 0;
                 task->data[0]++;
@@ -1476,14 +1471,14 @@ static void AnimTask_WaterSpoutRain_Step(u8 taskId)
             gBattleAnimArgs[1] = 0;
             gBattleAnimArgs[2] = 12;
             taskId2 = CreateTask(AnimTask_HorizontalShake, 80);
-            if (taskId2 != 0xFF)
+            if (taskId2 != TASK_NONE)
             {
                 gTasks[taskId2].func(taskId2);
                 gAnimVisualTaskCount++;
             }
             gBattleAnimArgs[0] = ANIM_DEF_PARTNER;
             taskId2 = CreateTask(AnimTask_HorizontalShake, 80);
-            if (taskId2 != 0xFF)
+            if (taskId2 != TASK_NONE)
             {
                 gTasks[taskId2].func(taskId2);
                 gAnimVisualTaskCount++;
@@ -1668,9 +1663,9 @@ static void AnimWaterSportDroplet(struct Sprite *sprite)
         sprite->x += sprite->x2;
         sprite->y += sprite->y2;
         sprite->data[0] = 6;
-        sprite->data[2] = (Random() & 0x1F) - 16 + sprite->x;
-        sprite->data[4] = (Random() & 0x1F) - 16 + sprite->y;
-        sprite->data[5] = ~(Random() & 7);
+        sprite->data[2] = (Random2() & 0x1F) - 16 + sprite->x;
+        sprite->data[4] = (Random2() & 0x1F) - 16 + sprite->y;
+        sprite->data[5] = ~(Random2() & 7);
         InitAnimArcTranslation(sprite);
         sprite->callback = AnimWaterSportDroplet_Step;
     }
@@ -1755,51 +1750,45 @@ static void AnimWaterPulseRing_Step(struct Sprite *sprite)
     sprite->data[0]++;
 }
 
-static void CreateWaterPulseRingBubbles(struct Sprite *sprite, s32 xDiff, s32 yDiff)
+static void CreateWaterPulseRingBubbles(struct Sprite *sprite, int xDiff, int yDiff)
 {
-    s16 combinedX, combinedY;
-    s16 i, something;
+    s16 combinedX;
+    s16 combinedY;
+    s16 i;
+    s16 something;
     s16 unusedVar = 1; //unusedVar is needed to match
-    s16 somethingRandomX, somethingRandomY;
+    s16 randomSomethingY;
+    s16 randomSomethingX;
     u8 spriteId;
 
     something = sprite->data[0] / 2;
     combinedX = sprite->x + sprite->x2;
     combinedY = sprite->y + sprite->y2;
     if (yDiff < 0)
-        unusedVar *= -1; //Needed to Match
-    somethingRandomY = yDiff + (Random() % 10) - 5;
-    somethingRandomX = -xDiff + (Random() % 10) - 5;
+        unusedVar *= -1; //Needed to match
+    randomSomethingY = yDiff + (Random2() % 10) - 5;
+    randomSomethingX = -xDiff + (Random2() % 10) - 5;
 
-    for (i = 0; i < 1; i++)
+    for (i = 0; i <= 0; i++)
     {
         spriteId = CreateSprite(&gWaterPulseRingBubbleSpriteTemplate, combinedX, combinedY + something, 130);
         gSprites[spriteId].data[0] = 20;
-        gSprites[spriteId].data[1] = somethingRandomY;
+        gSprites[spriteId].data[1] = randomSomethingY;
         gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
-        if (somethingRandomX < 0)
-        {
-            gSprites[spriteId].data[2] = -somethingRandomX;
-        }
+        if (randomSomethingX < 0)
+            gSprites[spriteId].data[2] = -randomSomethingX;
         else
-        {
-            gSprites[spriteId].data[2] = somethingRandomX;
-        }
+            gSprites[spriteId].data[2] = randomSomethingX;
     }
-    for (i = 0; i < 1; i++)
+    for (i = 0; i <= 0; i++)
     {
         spriteId = CreateSprite(&gWaterPulseRingBubbleSpriteTemplate, combinedX, combinedY - something, 130);
         gSprites[spriteId].data[0] = 20;
-        gSprites[spriteId].data[1] = somethingRandomY;
+        gSprites[spriteId].data[1] = randomSomethingY;
         gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 1;
-        if (somethingRandomX > 0)
-        {
-            gSprites[spriteId].data[2] = -somethingRandomX;
-        }
+        if (randomSomethingX > 0)
+            gSprites[spriteId].data[2] = -randomSomethingX;
         else
-        {
-            gSprites[spriteId].data[2] = somethingRandomX;
-        }
+            gSprites[spriteId].data[2] = randomSomethingX;
     }
 }
-

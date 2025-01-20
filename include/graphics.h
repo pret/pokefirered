@@ -4829,7 +4829,7 @@ extern const u32 gBattleAnimBgPalette_Guillotine[];
 extern const u32 gBattleAnimBgPalette_Ice[];
 extern const u32 gBattleAnimBgPalette_Cosmic[];
 extern const u32 gBattleAnimBgPalette_InAir[];
-extern const u32 gBattleAnimBgPalette_MuddyWater[];
+extern const u32 gBattleAnimBackgroundImageMuddyWater_Pal[];
 extern const u32 gBattleAnimBgPalette_Sky[];
 extern const u32 gBattleAnimBgPalette_Aurora[];
 extern const u32 gBattleAnimBgPalette_Fissure[];

@@ -411,6 +411,45 @@ void InvertPlttBuffer(u32 selectedPalettes)
     }
 }
 
+void TintPlttBuffer(u32 selectedPalettes, s8 r, s8 g, s8 b)
+{
+    u16 paletteOffset = 0;
+
+    while (selectedPalettes)
+    {
+        if (selectedPalettes & 1)
+        {
+            u32 i;
+            for (i = 0; i < 16; i++)
+            {
+                struct PlttData *data = (struct PlttData *)&gPlttBufferFaded[paletteOffset + i];
+                data->r += r;
+                data->g += g;
+                data->b += b;
+            }
+        }
+        selectedPalettes >>= 1;
+        paletteOffset += 16;
+    }
+}
+
+void UnfadePlttBuffer(u32 selectedPalettes)
+{
+    u16 paletteOffset = 0;
+
+    while (selectedPalettes)
+    {
+        if (selectedPalettes & 1)
+        {
+            u8 i;
+            for (i = 0; i < 16; i++)
+                gPlttBufferFaded[paletteOffset + i] = gPlttBufferUnfaded[paletteOffset + i];
+        }
+        selectedPalettes >>= 1;
+        paletteOffset += 16;
+    }
+}
+
 void BeginFastPaletteFade(u32 submode)
 {
     gPaletteFade.deltaY = 2;

@@ -550,6 +550,7 @@ static void CB2_TradeEvolutionSceneUpdate(void)
 static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
 {
     u32 data = 0;
+    return;
     if (gEvolutionTable[preEvoSpecies][0].method == EVO_LEVEL_NINJASK && gPlayerPartyCount < PARTY_SIZE)
     {
         s32 i;
@@ -576,11 +577,6 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon* mon)
 
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(gEvolutionTable[preEvoSpecies][1].targetSpecies), FLAG_SET_SEEN);
         GetSetPokedexFlag(SpeciesToNationalPokedexNum(gEvolutionTable[preEvoSpecies][1].targetSpecies), FLAG_SET_CAUGHT);
-
-        if (GetMonData(shedinja, MON_DATA_SPECIES) == SPECIES_ELECTIVIRE
-            && GetMonData(shedinja, MON_DATA_LANGUAGE) == LANGUAGE_JAPANESE
-            && GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NINJASK)
-                SetMonData(shedinja, MON_DATA_NICKNAME, sText_ShedinjaJapaneseName);
     }
 }
 

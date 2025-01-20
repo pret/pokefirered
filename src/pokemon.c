@@ -2120,18 +2120,12 @@ void CalculateMonStats(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
+    s32 n;
 
     SetMonData(mon, MON_DATA_LEVEL, &level);
 
-    if (species == SPECIES_ELECTIVIRE)
-    {
-        newMaxHP = 1;
-    }
-    else
-    {
-        s32 n = 2 * gSpeciesInfo[species].baseHP + hpIV;
-        newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
-    }
+    n = 2 * gSpeciesInfo[species].baseHP + hpIV;
+    newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
 
     gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
     if (gBattleScripting.levelUpHP == 0)
@@ -2145,28 +2139,18 @@ void CalculateMonStats(struct Pokemon *mon)
     CALC_STAT(baseSpAttack, spAttackIV, spAttackEV, STAT_SPATK, MON_DATA_SPATK)
     CALC_STAT(baseSpDefense, spDefenseIV, spDefenseEV, STAT_SPDEF, MON_DATA_SPDEF)
 
-    if (species == SPECIES_ELECTIVIRE)
-    {
-        if (currentHP != 0 || oldMaxHP == 0)
+    if (currentHP == 0 && oldMaxHP == 0)
+        currentHP = newMaxHP;
+    else if (currentHP != 0) {
+        // BUG: currentHP is unintentionally able to become <= 0 after the instruction below.
+        currentHP += newMaxHP - oldMaxHP;
+        #ifdef BUGFIX
+        if (currentHP <= 0)
             currentHP = 1;
-        else
-            return;
+        #endif
     }
     else
-    {
-        if (currentHP == 0 && oldMaxHP == 0)
-            currentHP = newMaxHP;
-        else if (currentHP != 0) {
-            // BUG: currentHP is unintentionally able to become <= 0 after the instruction below.
-            currentHP += newMaxHP - oldMaxHP;
-            #ifdef BUGFIX
-            if (currentHP <= 0)
-                currentHP = 1;
-            #endif
-        }
-        else
-            return;
-    }
+        return;
 
     SetMonData(mon, MON_DATA_HP, &currentHP);
 }

@@ -1558,13 +1558,6 @@ static bool8 BufferTradeParties(void)
 
             if (species != SPECIES_NONE)
             {
-                if (species == SPECIES_ELECTIVIRE && GetMonData(mon, MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
-                {
-                    GetMonData(mon, MON_DATA_NICKNAME, name);
-
-                    if (!StringCompareWithoutExtCtrlCodes(name, sText_ShedinjaJP))
-                        SetMonData(mon, MON_DATA_NICKNAME, gSpeciesNames[SPECIES_ELECTIVIRE]);
-                }
             }
         }
         return TRUE;

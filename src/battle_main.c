@@ -1860,16 +1860,6 @@ u32 GetBattleBgTemplateData(u8 arrayId, u8 caseId)
 
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon)
 {
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
-    u8 language = LANGUAGE_JAPANESE;
-
-    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_ELECTIVIRE
-     && GetMonData(mon, MON_DATA_LANGUAGE) != language)
-    {
-        GetMonData(mon, MON_DATA_NICKNAME, nickname);
-        if (StringCompareWithoutExtCtrlCodes(nickname, sText_ShedinjaJpnName) == 0)
-            SetMonData(mon, MON_DATA_LANGUAGE, &language);
-    }
 }
 
 #define sBattler            data[0]

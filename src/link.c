@@ -1,6 +1,6 @@
 #include "global.h"
 
-#include "bg_regs.h"
+#include "io_reg.h"
 #include "gpu_regs.h"
 #include "malloc.h"
 #include "string_util.h"

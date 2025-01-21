@@ -1,6 +1,6 @@
 #include "global.h"
 #include "gflib.h"
-#include "bg_regs.h"
+#include "io_reg.h"
 #include "cable_club.h"
 #include "clock.h"
 #include "credits.h"

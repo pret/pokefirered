@@ -9,8 +9,6 @@ static const u32 sTMHMLearnsets[][2] =
     [SPECIES_NONE]        = TMHM_LEARNSET(0),
 
     [SPECIES_BULBASAUR]   = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM016_LIGHT_SCREEN)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM009_BULLET_SEED)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -51,8 +49,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_VENUSAUR]    = TMHM_LEARNSET(TMHM(TM005_ROAR)
-                                        | TMHM(TM016_LIGHT_SCREEN)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM009_BULLET_SEED)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -283,7 +279,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_PIDGEY]      = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM047_STEEL_WING)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
                                         | TMHM(TM017_PROTECT)
@@ -318,7 +313,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM02_FLY)),
 
     [SPECIES_PIDGEOT]     = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM047_STEEL_WING)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
                                         | TMHM(TM015_HYPER_BEAM)
@@ -518,7 +512,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_SANDSHREW]   = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -543,7 +536,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_SANDSLASH]   = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -1031,7 +1023,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_PARAS]       = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM009_BULLET_SEED)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -1054,7 +1045,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_PARASECT]    = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM009_BULLET_SEED)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -1078,7 +1068,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_VENONAT]     = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM019_GIGA_DRAIN)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
                                         | TMHM(TM017_PROTECT)
@@ -1098,7 +1087,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_VENOMOTH]    = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM019_GIGA_DRAIN)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
                                         | TMHM(TM015_HYPER_BEAM)
@@ -1217,8 +1205,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_PSYDUCK]     = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM016_LIGHT_SCREEN)
-                                        | TMHM(TM029_PSYCHIC)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM004_CALM_MIND)
                                         | TMHM(TM006_TOXIC)
@@ -1247,8 +1233,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_GOLDUCK]     = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM016_LIGHT_SCREEN)
-                                        | TMHM(TM029_PSYCHIC)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM004_CALM_MIND)
                                         | TMHM(TM006_TOXIC)
@@ -1335,7 +1319,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_GROWLITHE]   = TMHM_LEARNSET(TMHM(TM005_ROAR)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -1358,7 +1341,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_ARCANINE]    = TMHM_LEARNSET(TMHM(TM005_ROAR)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -1546,7 +1528,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_MACHOP]      = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM008_BULK_UP)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -1595,7 +1576,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_MACHAMP]     = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM008_BULK_UP)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -1621,7 +1601,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_BELLSPROUT]  = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM009_BULLET_SEED)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -1660,7 +1639,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_VICTREEBEL]  = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM009_BULLET_SEED)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -1681,7 +1659,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_TENTACOOL]   = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -1705,7 +1682,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_TENTACRUEL]  = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -1835,7 +1811,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM04_STRENGTH)),
 
     [SPECIES_SLOWPOKE]    = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM004_CALM_MIND)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
@@ -1867,7 +1842,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_SLOWBRO]     = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM004_CALM_MIND)
                                         | TMHM(TM006_TOXIC)
@@ -1938,8 +1912,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_FARFETCHD]   = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM047_STEEL_WING)
-                                        | TMHM(TM047_STEEL_WING)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
                                         | TMHM(TM017_PROTECT)
@@ -2281,7 +2253,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_KRABBY]      = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM028_DIG)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -2306,7 +2277,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_KINGLER]     = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM028_DIG)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -2703,7 +2673,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_TANGELA]     = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM009_BULLET_SEED)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -2725,8 +2694,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_KANGASKHAN]  = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM020_SAFEGUARD)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM005_ROAR)
                                         | TMHM(TM006_TOXIC)
@@ -2926,8 +2893,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_SCYTHER]     = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM016_LIGHT_SCREEN)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
                                         | TMHM(TM015_HYPER_BEAM)
@@ -3297,7 +3262,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_KABUTO]      = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM028_DIG)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -3323,7 +3287,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM07_WATERFALL)),
 
     [SPECIES_KABUTOPS]    = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM028_DIG)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -3353,8 +3316,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_AERODACTYL]  = TMHM_LEARNSET(TMHM(TM002_DRAGON_CLAW)
-                                        | TMHM(TM047_STEEL_WING)
-                                        | TMHM(TM047_STEEL_WING)
                                         | TMHM(TM005_ROAR)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -3488,7 +3449,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_DRATINI]     = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -3543,7 +3503,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM07_WATERFALL)),
 
     [SPECIES_DRAGONITE]   = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM002_DRAGON_CLAW)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM005_ROAR)
@@ -3760,7 +3719,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_TOTODILE]    = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM002_DRAGON_CLAW)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
@@ -3814,7 +3772,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_FERALIGATR]  = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM002_DRAGON_CLAW)
                                         | TMHM(TM002_DRAGON_CLAW)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM005_ROAR)
@@ -4230,7 +4187,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_NATU]        = TMHM_LEARNSET(TMHM(TM004_CALM_MIND)
-                                        | TMHM(TM047_STEEL_WING)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -4256,7 +4212,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_XATU]        = TMHM_LEARNSET(TMHM(TM004_CALM_MIND)
-                                        | TMHM(TM047_STEEL_WING)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -4284,8 +4239,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_MAREEP]      = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM033_REFLECT)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM017_PROTECT)
@@ -4326,8 +4279,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_AMPHAROS]    = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM033_REFLECT)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM015_HYPER_BEAM)
@@ -4371,7 +4322,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_MARILL]      = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
@@ -4397,7 +4347,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_AZUMARILL]   = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
@@ -4475,7 +4424,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_HOPPIP]      = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM009_BULLET_SEED)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -4510,7 +4458,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_JUMPLUFF]    = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM009_BULLET_SEED)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
@@ -4620,7 +4567,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_WOOPER]      = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -4647,7 +4593,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_QUAGSIRE]    = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
@@ -4809,7 +4754,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)),
 
     [SPECIES_WEAVILE]       = TMHM_LEARNSET(TMHM(TM040_AERIAL_ACE)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM045_ATTRACT)
                                         | TMHM(TM014_BLIZZARD)
                                         | TMHM(TM031_BRICK_BREAK)
@@ -4886,7 +4830,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_PINECO]      = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
                                         | TMHM(TM016_LIGHT_SCREEN)
@@ -4908,7 +4851,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_FORRETRESS]  = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
                                         | TMHM(TM015_HYPER_BEAM)
@@ -5011,7 +4953,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_SNUBBULL]    = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM005_ROAR)
                                         | TMHM(TM006_TOXIC)
@@ -5046,7 +4987,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_GRANBULL]    = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM005_ROAR)
                                         | TMHM(TM006_TOXIC)
@@ -5106,8 +5046,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_SCIZOR]      = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM016_LIGHT_SCREEN)
-                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
                                         | TMHM(TM015_HYPER_BEAM)
@@ -5174,7 +5112,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_SNEASEL]     = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM004_CALM_MIND)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
@@ -5866,7 +5803,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(TM006_TOXIC)),
 
     [SPECIES_TANGROWTH]       = TMHM_LEARNSET(TMHM(TM040_AERIAL_ACE)
-                                        | TMHM(TM033_REFLECT)
                                         | TMHM(TM045_ATTRACT)
                                         | TMHM(TM031_BRICK_BREAK)
                                         | TMHM(TM009_BULLET_SEED)
@@ -7111,8 +7047,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_TORKOAL]     = TMHM_LEARNSET(TMHM(TM006_TOXIC)
-                                        | TMHM(TM026_EARTHQUAKE)
-                                        | TMHM(TM026_EARTHQUAKE)
                                         | TMHM(TM010_HIDDEN_POWER)
                                         | TMHM(TM011_SUNNY_DAY)
                                         | TMHM(TM017_PROTECT)
@@ -7285,7 +7219,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_FEEBAS]      = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -7305,7 +7238,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM08_DIVE)),
 
     [SPECIES_MILOTIC]     = TMHM_LEARNSET(TMHM(TM003_WATER_PULSE)
-                                        | TMHM(TM016_LIGHT_SCREEN)
                                         | TMHM(TM006_TOXIC)
                                         | TMHM(TM007_HAIL)
                                         | TMHM(TM010_HIDDEN_POWER)
@@ -8556,8 +8488,6 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)),
 
     [SPECIES_ZANGOOSE]    = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
-                                        | TMHM(TM005_ROAR)
-                                        | TMHM(TM005_ROAR)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM005_ROAR)
                                         | TMHM(TM006_TOXIC)

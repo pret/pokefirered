@@ -2120,18 +2120,12 @@ void CalculateMonStats(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
+    s32 n;
 
     SetMonData(mon, MON_DATA_LEVEL, &level);
 
-    if (species == SPECIES_ELECTIVIRE)
-    {
-        newMaxHP = 1;
-    }
-    else
-    {
-        s32 n = 2 * gSpeciesInfo[species].baseHP + hpIV;
-        newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
-    }
+    n = 2 * gSpeciesInfo[species].baseHP + hpIV;
+    newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
 
     gBattleScripting.levelUpHP = newMaxHP - oldMaxHP;
     if (gBattleScripting.levelUpHP == 0)
@@ -2145,28 +2139,18 @@ void CalculateMonStats(struct Pokemon *mon)
     CALC_STAT(baseSpAttack, spAttackIV, spAttackEV, STAT_SPATK, MON_DATA_SPATK)
     CALC_STAT(baseSpDefense, spDefenseIV, spDefenseEV, STAT_SPDEF, MON_DATA_SPDEF)
 
-    if (species == SPECIES_ELECTIVIRE)
-    {
-        if (currentHP != 0 || oldMaxHP == 0)
+    if (currentHP == 0 && oldMaxHP == 0)
+        currentHP = newMaxHP;
+    else if (currentHP != 0) {
+        // BUG: currentHP is unintentionally able to become <= 0 after the instruction below.
+        currentHP += newMaxHP - oldMaxHP;
+        #ifdef BUGFIX
+        if (currentHP <= 0)
             currentHP = 1;
-        else
-            return;
+        #endif
     }
     else
-    {
-        if (currentHP == 0 && oldMaxHP == 0)
-            currentHP = newMaxHP;
-        else if (currentHP != 0) {
-            // BUG: currentHP is unintentionally able to become <= 0 after the instruction below.
-            currentHP += newMaxHP - oldMaxHP;
-            #ifdef BUGFIX
-            if (currentHP <= 0)
-                currentHP = 1;
-            #endif
-        }
-        else
-            return;
-    }
+        return;
 
     SetMonData(mon, MON_DATA_HP, &currentHP);
 }
@@ -2181,6 +2165,10 @@ void BoxMonToMon(struct BoxPokemon *src, struct Pokemon *dest)
     value = MAIL_NONE;
     SetMonData(dest, MON_DATA_MAIL, &value);
     CalculateMonStats(dest);
+    value = dest->box.unknown & 0x7ff;
+    SetMonData(dest, MON_DATA_HP, &value);
+    value = (dest->box.unknown & ~0x7ff) >> 9;
+    SetMonData(dest, MON_DATA_STATUS, &value);
 }
 
 static u8 GetLevelFromMonExp(struct Pokemon *mon)
@@ -3708,7 +3696,13 @@ static u8 SendMonToPC(struct Pokemon* mon)
             struct BoxPokemon* checkingMon = GetBoxedMonPtr(boxNo, boxPos);
             if (GetBoxMonData(checkingMon, MON_DATA_SPECIES, NULL) == SPECIES_NONE)
             {
-                MonRestorePP(mon);
+                if (mon->status & STATUS1_SLEEP) {
+                  mon->status = 1 << 2;
+                } else if (mon->status & STATUS1_PSN_ANY) {
+                  mon->status = STATUS1_POISON;
+                }
+                mon->box.unknown = mon->hp & 0x7ff;
+                mon->box.unknown |= (mon->status & 0x7c) << 9;
                 CopyMon(checkingMon, &mon->box, sizeof(mon->box));
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;
@@ -6163,38 +6157,11 @@ static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
     u16 statValue = 0;
     u8 nature;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE || GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_GLACEON)
-        return 0;
-
-    ivVal = GetMonData(mon, MON_DATA_HP_IV + statId, NULL);
-    evVal = GetMonData(mon, MON_DATA_HP_EV + statId, NULL);
-    statValue = ((sDeoxysBaseStats[statId] * 2 + ivVal + evVal / 4) * mon->level) / 100 + 5;
-    nature = GetNature(mon);
-    statValue = ModifyStatByNature(nature, statValue, (u8)statId);
-    return statValue;
+    return 0;
 }
 
 void SetDeoxysStats(void)
 {
-    s32 i, value;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        struct Pokemon *mon = &gPlayerParty[i];
-
-        if (GetMonData(mon, MON_DATA_SPECIES, NULL) != SPECIES_GLACEON)
-            continue;
-        value = GetMonData(mon, MON_DATA_ATK, NULL);
-        SetMonData(mon, MON_DATA_ATK, &value);
-        value = GetMonData(mon, MON_DATA_DEF, NULL);
-        SetMonData(mon, MON_DATA_DEF, &value);
-        value = GetMonData(mon, MON_DATA_SPEED, NULL);
-        SetMonData(mon, MON_DATA_SPEED, &value);
-        value = GetMonData(mon, MON_DATA_SPATK, NULL);
-        SetMonData(mon, MON_DATA_SPATK, &value);
-        value = GetMonData(mon, MON_DATA_SPDEF, NULL);
-        SetMonData(mon, MON_DATA_SPDEF, &value);
-    }
 }
 
 u16 GetUnionRoomTrainerPic(void)

@@ -14,6 +14,7 @@
 #include "constants/songs.h"
 #include "constants/field_weather.h"
 #include "constants/help_system.h"
+#include "start_menu.h"
 
 static EWRAM_DATA u8 sPreviousBoxOption = 0;
 static EWRAM_DATA struct ChooseBoxMenu *sChooseBoxMenu = NULL;
@@ -351,6 +352,18 @@ static void Task_PCMainMenu(u8 taskId)
     }
 }
 
+static bool8 sInStartMenuPC;
+
+void ShowPokemonStorageSystemPCFromStartMenu(void)
+{
+    u8 taskId = CreateTask(Task_PCMainMenu, 80);
+    gTasks[taskId].tState = STATE_ENTER_PC;
+    gTasks[taskId].tSelectedOption = 0;
+    gTasks[taskId].tInput = OPTION_MOVE_MONS;
+    sInStartMenuPC = TRUE;
+    LockPlayerFieldControls();
+}
+
 void ShowPokemonStorageSystemPC(void)
 {
     u8 taskId = CreateTask(Task_PCMainMenu, 80);
@@ -361,16 +374,23 @@ void ShowPokemonStorageSystemPC(void)
 
 static void FieldTask_ReturnToPcMenu(void)
 {
-    u8 taskId;
-    MainCallback vblankCb = gMain.vblankCallback;
+  u8 taskId;
+  MainCallback vblankCb = gMain.vblankCallback;
 
-    SetVBlankCallback(NULL);
-    taskId = CreateTask(Task_PCMainMenu, 80);
-    gTasks[taskId].tState = STATE_LOAD;
-    gTasks[taskId].tSelectedOption = sPreviousBoxOption;
-    Task_PCMainMenu(taskId);
-    SetVBlankCallback(vblankCb);
-    FadeInFromBlack();
+  if (sInStartMenuPC) {
+    sInStartMenuPC = FALSE;
+    CB2_ExitPokeStorage();
+    SetUpReturnToStartMenu();
+    return;
+  }
+
+  SetVBlankCallback(NULL);
+  taskId = CreateTask(Task_PCMainMenu, 80);
+  gTasks[taskId].tState = STATE_LOAD;
+  gTasks[taskId].tSelectedOption = sPreviousBoxOption;
+  Task_PCMainMenu(taskId);
+  SetVBlankCallback(vblankCb);
+  FadeInFromBlack();
 }
 
 static const struct WindowTemplate sWindowTemplate_MainMenu = {

@@ -116,6 +116,7 @@ struct BoxPokemon
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings;
     u16 checksum;
+    // Updated to store HP and status information for PC Pokemon.
     u16 unknown;
 
     union

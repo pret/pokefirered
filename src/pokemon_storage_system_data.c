@@ -628,7 +628,13 @@ static void SetPlacedMonData(u8 boxId, u8 position)
         gPlayerParty[position] = gStorage->movingMon;
     else
     {
-        BoxMonRestorePP(&gStorage->movingMon.box);
+        if (gStorage->movingMon.status & STATUS1_SLEEP) {
+          gStorage->movingMon.status = 1 << 2;
+        } else if (gStorage->movingMon.status & STATUS1_PSN_ANY) {
+          gStorage->movingMon.status = STATUS1_POISON;
+        }
+        gStorage->movingMon.box.unknown = gStorage->movingMon.hp & 0x7ff;
+        gStorage->movingMon.box.unknown |= (gStorage->movingMon.status & 0x7c) << 9;
         SetBoxMonAt(boxId, position, &gStorage->movingMon.box);
     }
 }

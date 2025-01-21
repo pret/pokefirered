@@ -30,9 +30,14 @@ u32 HashCombine(u32 h1, u32 h2)
   return h1 ^ (h2 + 0x9e3779b9 + (h1 << 6) + (h1 >> 2));
 }
 
+u16 Index(const u16 *group, u32 hash) {
+  // group[0] has the group size.
+  return (hash % group[0]) + 1;
+}
+
 u16 IndexInto(const u16 *group, u32 hash) {
   // group[0] has the group size.
-  return group[(hash % group[0]) + 1];
+  return group[Index(group, hash)];
 }
 
 u32 GameHash() {
@@ -135,6 +140,8 @@ u16 GetSpeciesFromGroup(u16 species, u16 randInput) {
   const u16 *group;
   u8 random;
   u32 combinedHash;
+  u32 tempCombinedHash1;
+  u32 tempCombinedHash2;
   u32 mapHash;
 
   if (species >= sizeof(gMonGroups) || gMonGroups[species] == NULL) {
@@ -172,18 +179,29 @@ u16 GetSpeciesFromGroup(u16 species, u16 randInput) {
     mapHash = CoarseMapHash();
   }
 
+  tempCombinedHash1 = HashCombine(GameHash(), mapHash * species);
+  tempCombinedHash2 = HashCombine(mapHash, GameHash() * species);
+
   if (random < (8 - BadgeCount()) && group != gGroup_WaterIce1 && group != gGroup_WaterIce2) {
     // 0-4% chance that the player found the "rare" species
     // that is unique to the current (non-water) route. We
     // overwrite `group` and ignore `species`.
     group = gGroup_EarlyBoost;
     combinedHash = HashCombine(GameHash(), mapHash);
-  } else if (randInput == RAND_INPUT_PICK_1 || random <= 134) {
+  } else if (random <= 134) {
     // 63-67% chance the player found the more common mapping to `species`.
-    combinedHash = HashCombine(GameHash(), mapHash + (31 * species));
+    if (randInput == RAND_INPUT_PICK_1 || Index(group, tempCombinedHash1) < Index(group, tempCombinedHash2)) {
+      combinedHash = tempCombinedHash1;
+    } else {
+      combinedHash = tempCombinedHash2;
+    }
   } else {
     // 33% chance the player found the less common mapping to `species`.
-    combinedHash = HashCombine(mapHash, GameHash() - (31 * species));
+    if (randInput == RAND_INPUT_PICK_1 || Index(group, tempCombinedHash1) >= Index(group, tempCombinedHash2)) {
+      combinedHash = tempCombinedHash1;
+    } else {
+      combinedHash = tempCombinedHash2;
+    }
   }
 
   return IndexInto(group, combinedHash);

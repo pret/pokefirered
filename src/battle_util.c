@@ -3104,12 +3104,8 @@ u8 GetMoveTarget(u16 move, u8 setTarget)
 
 static bool32 IsBattlerModernFatefulEncounter(u8 battlerId)
 {
-    if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
-        return TRUE;
-    if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_GLACEON
-        && GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_BUDEW)
-            return TRUE;
-    return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MODERN_FATEFUL_ENCOUNTER, NULL);
+    // This used prevent species replacing Mew and Deoxys from attacking.
+    return TRUE;
 }
 
 u8 IsMonDisobedient(void)

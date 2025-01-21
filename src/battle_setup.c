@@ -355,17 +355,9 @@ void StartLegendaryBattle(void)
     species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
     switch (species)
     {
-    case SPECIES_MIME_JR:
-        CreateBattleStartTask(B_TRANSITION_BLUR, MUS_VS_MIME_JR);
-        break;
-    case SPECIES_GLACEON:
-        CreateBattleStartTask(B_TRANSITION_BLUR, MUS_VS_GLACEON);
-        break;
     case SPECIES_MOLTRES:
     case SPECIES_ARTICUNO:
     case SPECIES_ZAPDOS:
-    case SPECIES_HONCHKROW:
-    case SPECIES_MISMAGIUS:
         CreateBattleStartTask(B_TRANSITION_BLUR, MUS_VS_LEGEND);
         break;
     default:

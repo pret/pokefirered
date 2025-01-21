@@ -466,17 +466,21 @@ static void BattleIntroSlideLink(u8 taskId)
     }
 }
 
-void CopyBattlerSpriteToBg(s32 bgId, u8 x, u8 y, u8 battlerPosition, u8 palno, u8 *tilesDest, u16 *tilemapDest, u16 tilesOffset)
+void DrawBattlerOnBg(int bgId, u8 x, u8 y, u8 battlerPosition, u8 paletteId, u8 *tiles, u16 *tilemap, u16 tilesOffset)
 {
-    s32 i, j;
-    s32 offset = tilesOffset;
-
-    CpuCopy16(gMonSpritesGfxPtr->spritesGfx[battlerPosition], tilesDest, BG_SCREEN_SIZE);
-    LoadBgTiles(bgId, tilesDest, 0x1000, tilesOffset);
-    for (i = y; i < y + 8; ++i)
-        for (j = x; j < x + 8; ++j)
-            tilemapDest[i * 32 + j] = offset++ | (palno << 12);
-    LoadBgTilemap(bgId, tilemapDest, BG_SCREEN_SIZE, 0);
+    int i, j;
+    int offset = tilesOffset;
+    CpuCopy16(gMonSpritesGfxPtr->spritesGfx[battlerPosition], tiles, BG_SCREEN_SIZE);
+    LoadBgTiles(bgId, tiles, 0x1000, tilesOffset);
+    for (i = y; i < y + 8; i++)
+    {
+        for (j = x; j < x + 8; j++)
+        {
+            tilemap[i * 32 + j] = offset | (paletteId << 12);
+            offset++;
+        }
+    }
+    LoadBgTilemap(bgId, tilemap, BG_SCREEN_SIZE, 0);
 }
 
 // Unused

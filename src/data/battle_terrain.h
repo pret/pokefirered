@@ -1,14 +1,5 @@
 #include "graphics/battle_terrain.h"
 
-#define TERRAIN_BACKGROUND(background)                       \
-{                                                           \
-    .tileset = gBattleTerrainTiles_##background,            \
-    .tilemap = gBattleTerrainTilemap_##background,          \
-    .entryTileset = gBattleTerrainAnimTiles_##background,   \
-    .entryTilemap = gBattleTerrainAnimTilemap_##background, \
-    .palette = gBattleTerrainPalette_##background,          \
-}
-
 const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT] =
 {
     [BATTLE_TERRAIN_GRASS] =
@@ -23,7 +14,14 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT] =
     #endif
         .secretPowerEffect = B_SECRET_POWER_EFFECT >= GEN_4 ? MOVE_EFFECT_SLEEP : MOVE_EFFECT_POISON,
         .camouflageType = TYPE_GRASS,
-        .background = TERRAIN_BACKGROUND(Grass),
+        .background =
+        {
+            .tileset = gBattleTerrainTiles_Grass,
+            .tilemap = gBattleTerrainTilemap_Grass,
+            .entryTileset = gBattleTerrainAnimTiles_Grass,
+            .entryTilemap = gBattleTerrainAnimTilemap_Grass,
+            .palette = gBattleTerrainPalette_Grass,
+        },
     },
     [BATTLE_TERRAIN_LONG_GRASS] =
     {
@@ -37,7 +35,14 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT] =
     #endif
         .secretPowerEffect = MOVE_EFFECT_SLEEP,
         .camouflageType = TYPE_GRASS,
-        .background = TERRAIN_BACKGROUND(LongGrass),
+        .background =
+        {
+            .tileset = gBattleTerrainTiles_LongGrass,
+            .tilemap = gBattleTerrainTilemap_LongGrass,
+            .entryTileset = gBattleTerrainAnimTiles_LongGrass,
+            .entryTilemap = gBattleTerrainAnimTilemap_LongGrass,
+            .palette = gBattleTerrainPalette_LongGrass,
+        },
     },
     [BATTLE_TERRAIN_SAND] =
     {
@@ -45,7 +50,14 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT] =
         .naturePower = B_NATURE_POWER_MOVES >= GEN_6 ? MOVE_EARTH_POWER : MOVE_EARTHQUAKE,
         .secretPowerEffect = MOVE_EFFECT_ACC_MINUS_1,
         .camouflageType = TYPE_GROUND,
-        .background = TERRAIN_BACKGROUND(Sand),
+        .background =
+        {
+            .tileset = gBattleTerrainTiles_Sand,
+            .tilemap = gBattleTerrainTilemap_Sand,
+            .entryTileset = gBattleTerrainAnimTiles_Sand,
+            .entryTilemap = gBattleTerrainAnimTilemap_Sand,
+            .palette = gBattleTerrainPalette_Sand,
+        },
     },
     [BATTLE_TERRAIN_UNDERWATER] =
     {
@@ -53,7 +65,14 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT] =
         .naturePower = MOVE_HYDRO_PUMP,
         .secretPowerEffect = B_SECRET_POWER_EFFECT >= GEN_6 ? MOVE_EFFECT_ATK_MINUS_1 : MOVE_EFFECT_DEF_MINUS_1,
         .camouflageType = TYPE_WATER,
-        .background = TERRAIN_BACKGROUND(Underwater),
+        .background =
+        {
+            .tileset = gBattleTerrainTiles_Underwater,
+            .tilemap = gBattleTerrainTilemap_Underwater,
+            .entryTileset = gBattleTerrainAnimTiles_Underwater,
+            .entryTilemap = gBattleTerrainAnimTilemap_Underwater,
+            .palette = gBattleTerrainPalette_Underwater,
+        },
     },
     [BATTLE_TERRAIN_WATER] =
     {
@@ -61,7 +80,14 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT] =
         .naturePower = B_NATURE_POWER_MOVES >= GEN_4 ? MOVE_HYDRO_PUMP : MOVE_SURF,
         .secretPowerEffect = MOVE_EFFECT_ATK_MINUS_1,
         .camouflageType = TYPE_WATER,
-        .background = TERRAIN_BACKGROUND(Water),
+        .background =
+        {
+            .tileset = gBattleTerrainTiles_Water,
+            .tilemap = gBattleTerrainTilemap_Water,
+            .entryTileset = gBattleTerrainAnimTiles_Water,
+            .entryTilemap = gBattleTerrainAnimTilemap_Water,
+            .palette = gBattleTerrainPalette_Water,
+        },
     },
     [BATTLE_TERRAIN_POND] =
     {
@@ -69,7 +95,14 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT] =
         .naturePower = B_NATURE_POWER_MOVES >= GEN_4 ? MOVE_HYDRO_PUMP : MOVE_BUBBLE_BEAM,
         .secretPowerEffect = B_SECRET_POWER_EFFECT >= GEN_4 ? MOVE_EFFECT_ATK_MINUS_1 : MOVE_EFFECT_SPD_MINUS_1,
         .camouflageType = TYPE_WATER,
-        .background = TERRAIN_BACKGROUND(Pond),
+        .background =
+        {
+            .tileset = gBattleTerrainTiles_Pond,
+            .tilemap = gBattleTerrainTilemap_Pond,
+            .entryTileset = gBattleTerrainAnimTiles_Pond,
+            .entryTilemap = gBattleTerrainAnimTilemap_Pond,
+            .palette = gBattleTerrainPalette_Pond,
+        },
     },
     [BATTLE_TERRAIN_MOUNTAIN] =
     {
@@ -89,7 +122,14 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_CONFUSION,
     #endif
         .camouflageType = B_CAMOUFLAGE_TYPES >= GEN_5 ? TYPE_GROUND : TYPE_ROCK,
-        .background = TERRAIN_BACKGROUND(Mountain),
+        .background =
+        {
+            .tileset = gBattleTerrainTiles_Mountain,
+            .tilemap = gBattleTerrainTilemap_Mountain,
+            .entryTileset = gBattleTerrainAnimTiles_Mountain,
+            .entryTilemap = gBattleTerrainAnimTilemap_Mountain,
+            .palette = gBattleTerrainPalette_Mountain,
+        },
     },
     [BATTLE_TERRAIN_CAVE] =
     {
@@ -105,7 +145,14 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT] =
     #endif
         .secretPowerEffect = MOVE_EFFECT_FLINCH,
         .camouflageType = TYPE_ROCK,
-        .background = TERRAIN_BACKGROUND(Cave),
+        .background =
+        {
+            .tileset = gBattleTerrainTiles_Cave,
+            .tilemap = gBattleTerrainTilemap_Cave,
+            .entryTileset = gBattleTerrainAnimTiles_Cave,
+            .entryTilemap = gBattleTerrainAnimTilemap_Cave,
+            .palette = gBattleTerrainPalette_Cave,
+        },
     },
     [BATTLE_TERRAIN_BUILDING] =
     {
@@ -113,7 +160,14 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_TERRAIN_COUNT] =
         .naturePower = B_NATURE_POWER_MOVES >= GEN_4 ? MOVE_TRI_ATTACK : MOVE_SWIFT,
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
-        .background = TERRAIN_BACKGROUND(Building),
+        .background =
+        {
+            .tileset = gBattleTerrainTiles_Building,
+            .tilemap = gBattleTerrainTilemap_Building,
+            .entryTileset = gBattleTerrainAnimTiles_Building,
+            .entryTilemap = gBattleTerrainAnimTilemap_Building,
+            .palette = gBattleTerrainPalette_Building,
+        },
     },
     [BATTLE_TERRAIN_PLAIN] =
     {

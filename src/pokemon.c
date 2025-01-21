@@ -2165,6 +2165,10 @@ void BoxMonToMon(struct BoxPokemon *src, struct Pokemon *dest)
     value = MAIL_NONE;
     SetMonData(dest, MON_DATA_MAIL, &value);
     CalculateMonStats(dest);
+    value = dest->box.unknown & 0x7ff;
+    SetMonData(dest, MON_DATA_HP, &value);
+    value = (dest->box.unknown & ~0x7ff) >> 9;
+    SetMonData(dest, MON_DATA_STATUS, &value);
 }
 
 static u8 GetLevelFromMonExp(struct Pokemon *mon)
@@ -3692,7 +3696,13 @@ static u8 SendMonToPC(struct Pokemon* mon)
             struct BoxPokemon* checkingMon = GetBoxedMonPtr(boxNo, boxPos);
             if (GetBoxMonData(checkingMon, MON_DATA_SPECIES, NULL) == SPECIES_NONE)
             {
-                MonRestorePP(mon);
+                if (mon->status & STATUS1_SLEEP) {
+                  mon->status = 1 << 2;
+                } else if (mon->status & STATUS1_PSN_ANY) {
+                  mon->status = STATUS1_POISON;
+                }
+                mon->box.unknown = mon->hp & 0x7ff;
+                mon->box.unknown |= (mon->status & 0x7c) << 9;
                 CopyMon(checkingMon, &mon->box, sizeof(mon->box));
                 gSpecialVar_MonBoxId = boxNo;
                 gSpecialVar_MonBoxPos = boxPos;

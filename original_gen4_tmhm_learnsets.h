@@ -46,8 +46,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_CHARMANDER] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM065_SHADOW_CLAW)
@@ -72,8 +70,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_CHARIZARD] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM052_FOCUS_BLAST)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -196,7 +192,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_RATTATA] = G4TMHM_LEARNSET(G4TMHM(TM057_CHARGE_BEAM)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM073_THUNDER_WAVE)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -209,7 +204,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_RATICATE] = G4TMHM_LEARNSET(G4TMHM(TM057_CHARGE_BEAM)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM073_THUNDER_WAVE)
@@ -224,7 +218,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SPEAROW] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM082_SLEEP_TALK)
@@ -235,7 +228,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_FEAROW] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -296,8 +288,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SANDSHREW] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM074_GYRO_BALL)
@@ -313,8 +303,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SANDSLASH] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
@@ -420,7 +408,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_CLEFABLE] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
@@ -440,8 +427,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_VULPIX] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM077_PSYCH_UP)
@@ -453,8 +438,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_NINETALES] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -529,7 +512,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_ODDISH] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM070_FLASH)
                                         | G4TMHM(TM075_SWORDS_DANCE)
@@ -554,7 +536,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_VILEPLUME] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM060_DRAIN_PUNCH)
@@ -570,7 +551,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
 
   [SPECIES_PARAS] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
                                         | G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM070_FLASH)
                                         | G4TMHM(TM075_SWORDS_DANCE)
@@ -583,7 +563,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_PARASECT] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -619,7 +598,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_DIGLETT] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM076_STEALTH_ROCK)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -630,7 +608,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_DUGTRIO] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM071_STONE_EDGE)
@@ -643,7 +620,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_MEOWTH] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM070_FLASH)
@@ -658,7 +634,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_PERSIAN] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM063_EMBARGO)
                                         | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM066_PAYBACK)
@@ -701,7 +676,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_MANKEY] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM066_PAYBACK)
@@ -715,7 +689,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_PRIMEAPE] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM066_PAYBACK)
@@ -836,7 +809,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_MACHOP] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM066_PAYBACK)
@@ -861,7 +833,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_MACHAMP] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM066_PAYBACK)
@@ -876,7 +847,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_BELLSPROUT] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM070_FLASH)
                                         | G4TMHM(TM075_SWORDS_DANCE)
@@ -899,7 +869,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_VICTREEBEL] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM070_FLASH)
@@ -935,7 +904,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_GEODUDE] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM069_ROCK_POLISH)
@@ -964,7 +932,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_GOLEM] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
@@ -999,7 +966,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SLOWPOKE] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM067_RECYCLE)
                                         | G4TMHM(TM070_FLASH)
@@ -1015,7 +981,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_SLOWBRO] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM055_BRINE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -1119,7 +1084,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_GRIMER] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM066_PAYBACK)
@@ -1132,7 +1096,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_MUK] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
@@ -1171,8 +1134,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_GASTLY] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM064_EXPLOSION)
-                                        | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM063_EMBARGO)
@@ -1208,8 +1169,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_GENGAR] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM064_EXPLOSION)
-                                        | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM053_ENERGY_BALL)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -1232,8 +1191,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_ONIX] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM064_EXPLOSION)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM059_DRAGON_PULSE)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM066_PAYBACK)
@@ -1285,7 +1242,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_KRABBY] = G4TMHM_LEARNSET(G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM055_BRINE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -1299,7 +1255,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_KINGLER] = G4TMHM_LEARNSET(G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM055_BRINE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -1337,7 +1292,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_EXEGGCUTE] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM070_FLASH)
@@ -1353,7 +1307,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_EXEGGUTOR] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -1370,8 +1323,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_CUBONE] = G4TMHM_LEARNSET(G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM075_SWORDS_DANCE)
@@ -1384,8 +1335,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_MAROWAK] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -1425,8 +1374,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_LICKITUNG] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM082_SLEEP_TALK)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM075_SWORDS_DANCE)
@@ -1441,7 +1388,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
 
   [SPECIES_KOFFING] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
-                                        | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM070_FLASH)
@@ -1454,7 +1400,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_WEEZING] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM066_PAYBACK)
@@ -1469,8 +1414,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_RHYHORN] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM059_DRAGON_PULSE)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM069_ROCK_POLISH)
@@ -1486,8 +1429,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_RHYDON] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM059_DRAGON_PULSE)
@@ -1508,7 +1449,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_CHANSEY] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM060_DRAIN_PUNCH)
@@ -1541,8 +1481,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_KANGASKHAN] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM090_SUBSTITUTE)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM060_DRAIN_PUNCH)
@@ -1578,7 +1516,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM091_FLASH_CANNON)),
 
   [SPECIES_GOLDEEN] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM083_NATURAL_GIFT)
@@ -1587,7 +1524,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SEAKING] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM082_SLEEP_TALK)
@@ -1649,8 +1585,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_SCYTHER] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM062_SILVER_WIND)
@@ -1665,7 +1599,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_JYNX] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM053_ENERGY_BALL)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -1711,8 +1644,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
 
   [SPECIES_PINSIR] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
                                         | G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -1756,10 +1687,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_LAPRAS] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
-                                        | G4TMHM(TM090_SUBSTITUTE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM059_DRAGON_PULSE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -1774,7 +1701,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
 [132] = G4TMHM_LEARNSET(0),
 
   [SPECIES_EEVEE] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM083_NATURAL_GIFT)
@@ -1791,7 +1717,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_JOLTEON] = G4TMHM_LEARNSET(G4TMHM(TM057_CHARGE_BEAM)
-                                        | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM070_FLASH)
@@ -1826,7 +1751,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_OMANYTE] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM069_ROCK_POLISH)
                                         | G4TMHM(TM074_GYRO_BALL)
@@ -1839,7 +1763,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_OMASTAR] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM069_ROCK_POLISH)
@@ -1895,8 +1818,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SNORLAX] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM090_SUBSTITUTE)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM067_RECYCLE)
@@ -2070,7 +1991,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_TOTODILE] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM075_SWORDS_DANCE)
@@ -2093,7 +2013,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_FERALIGATR] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM059_DRAGON_PULSE)
@@ -2109,7 +2028,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SENTRET] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
@@ -2122,7 +2040,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_FURRET] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
@@ -2262,7 +2179,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_CLEFFA] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM067_RECYCLE)
                                         | G4TMHM(TM070_FLASH)
@@ -2291,8 +2207,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_TOGEPI] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM070_FLASH)
                                         | G4TMHM(TM073_THUNDER_WAVE)
@@ -2323,7 +2237,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_NATU] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM070_FLASH)
@@ -2341,7 +2254,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_XATU] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -2408,7 +2320,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_MARILL] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM082_SLEEP_TALK)
@@ -2418,7 +2329,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_AZUMARILL] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -2455,7 +2365,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_HOPPIP] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM070_FLASH)
@@ -2482,7 +2391,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_JUMPLUFF] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -2534,7 +2442,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_YANMA] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM070_FLASH)
@@ -2629,7 +2536,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_MISDREAVUS] = G4TMHM_LEARNSET(G4TMHM(TM057_CHARGE_BEAM)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM063_EMBARGO)
@@ -2688,8 +2594,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_GIRAFARIG] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM067_RECYCLE)
@@ -2733,8 +2637,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM091_FLASH_CANNON)),
 
   [SPECIES_DUNSPARCE] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM073_THUNDER_WAVE)
@@ -2771,8 +2673,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_STEELIX] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM064_EXPLOSION)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM059_DRAGON_PULSE)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM066_PAYBACK)
@@ -2829,8 +2729,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SCIZOR] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -2860,8 +2758,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_HERACROSS] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
@@ -2895,7 +2791,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_TEDDIURSA] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM066_PAYBACK)
@@ -2908,7 +2803,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_URSARING] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
@@ -2949,7 +2843,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SWINUB] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM076_STEALTH_ROCK)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM080_ROCK_SLIDE)
@@ -2971,8 +2864,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_CORSOLA] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM069_ROCK_POLISH)
@@ -2986,7 +2877,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_REMORAID] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM073_THUNDER_WAVE)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM073_THUNDER_WAVE)
@@ -2997,7 +2887,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_OCTILLERY] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM073_THUNDER_WAVE)
                                         | G4TMHM(TM055_BRINE)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
@@ -3023,8 +2912,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_MANTINE] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -3053,7 +2940,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
 
   [SPECIES_HOUNDOUR] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
-                                        | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM063_EMBARGO)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -3065,7 +2951,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_HOUNDOOM] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM063_EMBARGO)
                                         | G4TMHM(TM066_PAYBACK)
@@ -3127,10 +3012,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_STANTLER] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM087_SWAGGER)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -3146,7 +3027,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_PROBOPASS] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM069_ROCK_POLISH)
@@ -3180,7 +3060,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SMOOCHUM] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM067_RECYCLE)
@@ -3217,12 +3096,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_MILTANK] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM082_SLEEP_TALK)
-                                        | G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -3238,7 +3111,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_BLISSEY] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
@@ -3292,7 +3164,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_YANMEGA] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM070_FLASH)
@@ -3352,7 +3223,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_MISMAGIUS] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
@@ -3452,9 +3322,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_TORCHIC] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM075_SWORDS_DANCE)
@@ -3480,9 +3347,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_BLAZIKEN] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
@@ -3552,7 +3416,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_ZIGZAGOON] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM073_THUNDER_WAVE)
@@ -3564,7 +3427,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_LINOONE] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
@@ -3649,7 +3511,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SEEDOT] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM070_FLASH)
@@ -3680,7 +3541,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SHIFTRY] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM053_ENERGY_BALL)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -3749,7 +3609,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_RALTS] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM067_RECYCLE)
@@ -3782,7 +3641,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_GARDEVOIR] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM053_ENERGY_BALL)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM057_CHARGE_BEAM)
@@ -3825,8 +3683,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SHROOMISH] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM070_FLASH)
                                         | G4TMHM(TM075_SWORDS_DANCE)
@@ -3838,8 +3694,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_BRELOOM] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM053_ENERGY_BALL)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -3857,7 +3711,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SLAKOTH] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -3879,7 +3732,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SLAKING] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
@@ -3893,8 +3745,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
 
   [SPECIES_NINCADA] = G4TMHM_LEARNSET(G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM062_SILVER_WIND)
-                                        | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM070_FLASH)
                                         | G4TMHM(TM081_X_SCISSOR)
                                         | G4TMHM(TM082_SLEEP_TALK)
@@ -3903,8 +3753,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_NINJASK] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM062_SILVER_WIND)
@@ -3934,7 +3782,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_WHISMUR] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM082_SLEEP_TALK)
@@ -3952,7 +3799,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_EXPLOUD] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -3999,7 +3845,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
 
   [SPECIES_NOSEPASS] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
-                                        | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM069_ROCK_POLISH)
                                         | G4TMHM(TM071_STONE_EDGE)
                                         | G4TMHM(TM073_THUNDER_WAVE)
@@ -4012,8 +3857,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SKITTY] = G4TMHM_LEARNSET(G4TMHM(TM057_CHARGE_BEAM)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM070_FLASH)
@@ -4028,8 +3871,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_DELCATTY] = G4TMHM_LEARNSET(G4TMHM(TM057_CHARGE_BEAM)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -4045,8 +3886,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SABLEYE] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM063_EMBARGO)
@@ -4064,12 +3903,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_MAWILE] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
-                                        | G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
@@ -4189,8 +4022,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_PLUSLE] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM090_SUBSTITUTE)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM070_FLASH)
@@ -4217,8 +4048,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_VOLBEAT] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM062_SILVER_WIND)
-                                        | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
@@ -4234,8 +4063,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_ILLUMISE] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM062_SILVER_WIND)
-                                        | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
@@ -4264,7 +4091,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_GULPIN] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM085_DREAM_EATER)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM082_SLEEP_TALK)
@@ -4274,7 +4100,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SWALOT] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM085_DREAM_EATER)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -4308,8 +4133,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_WAILMER] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM072_AVALANCHE)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -4319,8 +4142,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_WAILORD] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
-                                        | G4TMHM(TM087_SWAGGER)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM072_AVALANCHE)
@@ -4356,10 +4177,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM091_FLASH_CANNON)),
 
   [SPECIES_TORKOAL] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
-                                        | G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM068_GIGA_IMPACT)
@@ -4374,7 +4191,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SPOINK] = G4TMHM_LEARNSET(G4TMHM(TM057_CHARGE_BEAM)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM067_RECYCLE)
@@ -4391,7 +4207,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_GRUMPIG] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM053_ENERGY_BALL)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM057_CHARGE_BEAM)
@@ -4413,8 +4228,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_SPINDA] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM060_DRAIN_PUNCH)
                                         | G4TMHM(TM067_RECYCLE)
@@ -4524,8 +4337,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_TOGEKISS] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM077_PSYCH_UP)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM060_DRAIN_PUNCH)
                                         | G4TMHM(TM062_SILVER_WIND)
@@ -4698,7 +4509,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_LILEEP] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM069_ROCK_POLISH)
                                         | G4TMHM(TM070_FLASH)
@@ -4713,7 +4523,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_CRADILY] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM069_ROCK_POLISH)
@@ -4730,8 +4539,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_ANORITH] = G4TMHM_LEARNSET(G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM069_ROCK_POLISH)
                                         | G4TMHM(TM075_SWORDS_DANCE)
@@ -4745,8 +4552,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_ARMALDO] = G4TMHM_LEARNSET(G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM069_ROCK_POLISH)
@@ -4812,7 +4617,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_SHUPPET] = G4TMHM_LEARNSET(G4TMHM(TM057_CHARGE_BEAM)
-                                        | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM063_EMBARGO)
@@ -4830,7 +4634,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_BANETTE] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
@@ -4901,8 +4704,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_CHIMECHO] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
-                                        | G4TMHM(TM085_DREAM_EATER)
-                                        | G4TMHM(TM085_DREAM_EATER)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM067_RECYCLE)
@@ -4919,8 +4720,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_ABSOL] = G4TMHM_LEARNSET(G4TMHM(TM054_FALSE_SWIPE)
-                                        | G4TMHM(TM090_SUBSTITUTE)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM057_CHARGE_BEAM)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
@@ -4966,7 +4765,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SPHEAL] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM080_ROCK_SLIDE)
@@ -4985,7 +4783,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_WALREIN] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM072_AVALANCHE)
@@ -5024,10 +4821,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_RELICANTH] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
-                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM069_ROCK_POLISH)
@@ -5042,7 +4835,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_HAPPINY] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM060_DRAIN_PUNCH)
                                         | G4TMHM(TM067_RECYCLE)
@@ -5058,7 +4850,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_BAGON] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM059_DRAGON_PULSE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -5079,7 +4870,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SALAMENCE] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
-                                        | G4TMHM(TM065_SHADOW_CLAW)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM059_DRAGON_PULSE)
                                         | G4TMHM(TM065_SHADOW_CLAW)
@@ -5126,7 +4916,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM091_FLASH_CANNON)),
 
   [SPECIES_MUNCHLAX] = G4TMHM_LEARNSET(G4TMHM(TM056_FLING)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM067_RECYCLE)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -5137,8 +4926,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_LICKILICKY] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
-                                        | G4TMHM(TM082_SLEEP_TALK)
-                                        | G4TMHM(TM090_SUBSTITUTE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
@@ -5191,7 +4978,6 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM091_FLASH_CANNON)),
 
   [SPECIES_MAMOSWINE] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
-                                        | G4TMHM(TM080_ROCK_SLIDE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM071_STONE_EDGE)
                                         | G4TMHM(TM072_AVALANCHE)

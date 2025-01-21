@@ -503,6 +503,7 @@ with open('all_tms.txt','r') as in_file:
 regexp = re.compile(r'"4L[4-9][0-9]')
 new_tm_ls = {}
 lv1_ls = {}
+missing_old_tms = {}
 with open('filtered_learnsets.ts','r') as in_file:
   mon = None
   in_learnset = False
@@ -528,9 +529,9 @@ with open('filtered_learnsets.ts','r') as in_file:
     elif move not in old_tms_l2u and (('"4L' not in line and '"4M' not in line) or regexp.search(line)):
       lv1_ls[mon].add(move)
     if ('"4L' not in line) and ('"4T' in line or '"4E' in line) and (move in old_tms_l2u):
-      # TODO(poke-challenge): Update old TMHM learnsets to include these.
-      print(mon + ' is missing old TM: ' + move)
-
+      if mon not in missing_old_tms:
+        missing_old_tms[mon] = []
+      missing_old_tms[mon].append(move)
 
 mons = [
   "BULBASAUR",
@@ -938,7 +939,7 @@ static const u32 sNewTMHMLearnsets[][2] =
 
 with open('src/data/pokemon/new_tmhm_learnsets.h', 'w') as c_file:
   for mon in mons:
-    moves = new_tm_ls.get(mon.lower().replace('_', ''), set())
+    moves = sorted(new_tm_ls.get(mon.lower().replace('_', ''), set()))
     if len(moves) == 0:
       s += '  [SPECIES_' + mon + '] = NTMHM_LEARNSET(0),\n\n'
       continue
@@ -973,11 +974,36 @@ with open('original_level_up_learnsets.h', 'r') as h_file:
       mon = line.removeprefix('static const u16 s').removesuffix('LevelUpLearnset[] = {\n').lower()
       mon_added = False
     elif mon_added == False and mon not in evolving_mons:
-      for move in lv1_ls.get(mon, []):
+      for move in sorted(lv1_ls.get(mon, [])):
         s += '    LEVEL_UP_MOVE( 1, MOVE_' + moves_l2u[move] + '),\n'
       mon_added = True
     s += line
-
 with open('src/data/pokemon/level_up_learnsets.h', 'w') as h_file:
+  h_file.write(s)
+
+s = ''
+with open('original_tmhm_learnsets.h', 'r') as h_file:
+  for line in h_file:
+    s += line
+    if line.startswith('    [SPECIES_'):
+      mon = line.strip().split('SPECIES_')[1].split(']')[0].lower()
+      for move in missing_old_tms.get(mon, []):
+        tm = moves_l2tmu[move]
+        if tm < 'TM051':
+          s += '                                        | TMHM(' + tm + ')\n'
+with open('src/data/pokemon/tmhm_learnsets.h', 'w') as h_file:
+  h_file.write(s)
+
+s = ''
+with open('original_gen4_tmhm_learnsets.h', 'r') as h_file:
+  for line in h_file:
+    s += line
+    if line.startswith('  [SPECIES_'):
+      mon = line.strip().split('SPECIES_')[1].split(']')[0].lower()
+      for move in missing_old_tms.get(mon, []):
+        tm = moves_l2tmu[move]
+        if tm > 'TM051':
+          s += '                                        | G4TMHM(' + tm + ')\n'
+with open('src/data/pokemon/gen4_tmhm_learnsets.h', 'w') as h_file:
   h_file.write(s)
 

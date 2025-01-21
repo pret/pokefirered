@@ -1579,12 +1579,6 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 species = GetSpeciesFromGroup(partyData[i].species, RAND_INPUT_MANUAL(accumulator));
                 CreateMon(&party[i], species, ScaledTrainerLevel(partyData[i].lvl, i), fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-
-                for (j = 0; j < MAX_MON_MOVES; j++)
-                {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
-                }
                 break;
             }
             case F_TRAINER_PARTY_HELD_ITEM:
@@ -1614,12 +1608,6 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 species = GetSpeciesFromGroup(partyData[i].species, RAND_INPUT_MANUAL(accumulator));
                 CreateMon(&party[i], species, ScaledTrainerLevel(partyData[i].lvl, i), fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
-
-                for (j = 0; j < MAX_MON_MOVES; j++)
-                {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
-                }
                 break;
             }
             }

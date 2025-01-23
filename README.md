@@ -20,7 +20,8 @@ Other changes:
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
  - Physical/special split.
  - Pokémon that evolve above level 45 now evolve at level 45 instead.
- - Gift Pokémon are replaced with Dunsparce.
+ - Gain experience when you catch a Pokémon.
+ - Gift Pokémon are replaced with Spinda.
  - Game Corner prize Pokémon are replaced with baby Pokémon.
  - The Department Store desks on 5F now sell select battle items instead of their usual ones (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
  - Items aren't sellable.

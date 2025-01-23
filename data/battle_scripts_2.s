@@ -71,6 +71,8 @@ BattleScript_ThrowSafariBall::
 	handleballthrow
 
 BattleScript_SuccessBallThrow::
+	setbyte sGIVEEXP_STATE, 0
+	getexp BS_TARGET
 	jumpifhalfword CMP_EQUAL, gLastUsedItem, ITEM_SAFARI_BALL, BattleScript_SafariNoIncGameStat
 	incrementgamestat GAME_STAT_POKEMON_CAPTURES
 BattleScript_SafariNoIncGameStat::

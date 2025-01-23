@@ -42,9 +42,8 @@ Route10_PokemonCenter_1F_EventScript_Aide::
 	call Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo
 	goto_if_lt VAR_0x8006, REQUIRED_OWNED_MONS, Aide_EventScript_HaventCaughtEnough
 	msgbox Route10_PokemonCenter_1F_Text_GreatHereYouGo
-	checkitemspace ITEM_EVERSTONE
-	goto_if_eq VAR_RESULT, FALSE, Aide_EventScript_NoRoomForItem
-	giveitem_msg Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide, ITEM_EVERSTONE
+	msgbox Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide
+  addmoney 20000
 	setflag FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE
 	msgbox Route10_PokemonCenter_1F_Text_ExplainEverstone
 	release

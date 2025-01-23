@@ -214,7 +214,7 @@ pokes = [
   ('KABUTO', 'WaterIce1'),
   ('KABUTOPS', 'WaterIce2'),
 
-  ('AERODACTYL', 'SafariZone'),
+  ('AERODACTYL', 'Spooky1'),
 
   ('SNORLAX', 'SafariZone'),
 
@@ -881,7 +881,8 @@ Other changes:
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
  - Physical/special split.
  - Pokémon that evolve above level 45 now evolve at level 45 instead.
- - Gift Pokémon are replaced with Dunsparce.
+ - Gain experience when you catch a Pokémon.
+ - Gift Pokémon are replaced with Spinda.
  - Game Corner prize Pokémon are replaced with baby Pokémon.
  - The Department Store desks on 5F now sell select battle items instead of their usual ones (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
  - Items aren't sellable.
@@ -889,7 +890,7 @@ Other changes:
  - Trade and happiness evolutions have been replaced with a new "Trade+ Stone", or Sun Stone & Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
  - Hidden items have been removed, except for Coins in the Game Corner.
  - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
- - The PC is accessible from the start menu. Pokémon no longer heal when sent to the PC.
+ - The PC is accessible from the START menu. Pokémon no longer heal when sent to the PC.
  - Flash is no longer required in Rock Tunnel.
  - Player gets 10x the number of steps in the Safari Zone.
  - Shiny Pokémon odds are increased 10x.
@@ -977,13 +978,13 @@ For every "map set" (e.g. Route 1, Mt. Moon) in the game:
   - Non-fishing Pokémon with an encounter rate greater than 20%
   are deterministically replaced with 2 species from their group. There is a ~66%
   and ~33% chance of encountering the 2 replacements, respectively. More powerful
-  Pokémon are more likely to be the 33% replacement than the 66% one.
+  Pokémon are generally more likely to be the 33% replacement than the 66% one.
   - All fishing Pokémon are deterministically replaced with 1 species from their
   group, regardless of encounter rate.
 
 #### Map sets
 
-A "map set" gropus is a collection of game locations that use the same Pokémon
+A "map set" is a collection of game locations that use the same Pokémon
 replacement mappings. Note that this is a term specific to this ROM-hack, and is
 different than the "map group" concept in the FR/LG source code.
 

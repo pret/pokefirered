@@ -1538,6 +1538,7 @@ static bool8 RunFieldCallback(void)
         gFieldCallback = NULL;
     }
 
+    MaybeEndChallenge();
     return TRUE;
 }
 

@@ -58,7 +58,7 @@ SaffronCity_Dojo_EventScript_HitmonchanBall::
 
 SaffronCity_Dojo_EventScript_GiveHitmon::
 	hidemonpic
-	givemon SPECIES_DUNSPARCE, 25
+	givemon SPECIES_SPINDA, 25
 	goto_if_eq VAR_RESULT, 0, SaffronCity_Dojo_EventScript_ReceivedHitmonParty
 	goto_if_eq VAR_RESULT, 1, SaffronCity_Dojo_EventScript_ReceivedHitmonPC
 	goto_if_eq VAR_RESULT, 2, EventScript_NoMoreRoomForPokemon

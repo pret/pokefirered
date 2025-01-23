@@ -32,9 +32,8 @@ Route15_WestEntrance_2F_EventScript_Aide::
 	call Route15_WestEntrance_2F_EventScript_GetAideRequestInfo
 	goto_if_lt VAR_0x8006, REQUIRED_CAUGHT_MONS, Aide_EventScript_HaventCaughtEnough
 	msgbox Route15_WestEntrance_2F_Text_GreatHereYouGo
-	checkitemspace ITEM_EXP_SHARE
-	goto_if_eq VAR_RESULT, FALSE, Aide_EventScript_NoRoomForItem
-	giveitem_msg Route15_WestEntrance_2F_Text_ReceivedItemFromAide, ITEM_EXP_SHARE
+	addmoney 50000
+	msgbox Route15_WestEntrance_2F_Text_ReceivedItemFromAide
 	setflag FLAG_GOT_EXP_SHARE_FROM_OAKS_AIDE
 	msgbox Route15_WestEntrance_2F_Text_ExplainExpShare
 	release

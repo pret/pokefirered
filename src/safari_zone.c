@@ -43,30 +43,36 @@ void ExitSafariMode(void)
     gSafariZoneStepCounter = 0;
 }
 
+bool8 MaybeEndChallenge(void) {
+  u16 i;
+  u16 limit = 5;
+  for (i = 0; i < 14; ++i) {
+    if (FlagGet(FLAG_EXT1+i)) limit += (i/2)+1;
+  }
+  if ((limit < 19) && FlagGet(FLAG_CHALLENGE_NOT_OVER) && (gSaveBlock2Ptr->playTimeHours >= limit))
+  {
+    PlaySE(SE_DING_DONG);
+    FlagClear(FLAG_CHALLENGE_NOT_OVER);
+    ExitSafariMode();
+    HealPlayerParty();
+    ScriptContext_SetupScript(SafariZone_EventScript_ChallengeDone);
+    return TRUE;
+  }
+  return FALSE;
+}
+
 bool8 SafariZoneTakeStep(void)
 {
-    u16 i;
-    u16 limit = 5;
-    for (i = 0; i < 14; ++i) {
-      if (FlagGet(FLAG_EXT1+i)) limit += (i/2)+1;
+    if (MaybeEndChallenge()) {
+      return TRUE;
     }
-    if ((limit < 61) && FlagGet(FLAG_CHALLENGE_NOT_OVER) && (gSaveBlock2Ptr->playTimeHours >= limit))
-    {
-        PlaySE(SE_DING_DONG);
-        FlagClear(FLAG_CHALLENGE_NOT_OVER);
-        ExitSafariMode();
-        HealPlayerParty();
-        ScriptContext_SetupScript(SafariZone_EventScript_ChallengeDone);
-        return TRUE;
-    }
-
     if (GetSafariZoneFlag() == FALSE)
         return FALSE;
     gSafariZoneStepCounter--;
     if (gSafariZoneStepCounter == 0)
     {
-        ScriptContext_SetupScript(SafariZone_EventScript_TimesUp);
-        return TRUE;
+      ScriptContext_SetupScript(SafariZone_EventScript_TimesUp);
+      return TRUE;
     }
     return FALSE;
 }

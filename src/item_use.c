@@ -38,6 +38,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/field_weather.h"
+#include "play_time.h"
 
 static EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
@@ -323,6 +324,7 @@ static bool8 CanFish(void)
 
 static void ItemUseOnFieldCB_Rod(u8 taskId)
 {
+    PlayTimeCounter_Start();
     StartFishing(ItemId_GetSecondaryId(gSpecialVar_ItemId));
     DestroyTask(taskId);
 }

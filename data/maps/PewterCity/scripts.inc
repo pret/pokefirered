@@ -706,11 +706,8 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	message PewterCity_Text_ReceivedRunningShoesFromAide
 	waitmessage
 	waitfanfare
-	msgbox PewterCity_Text_SwitchedShoesWithRunningShoes
+  addmoney 1000
 	special DisableMsgBoxWalkaway
-	signmsg
-	msgbox PewterCity_Text_ExplainRunningShoes
-	normalmsg
 	call EventScript_RestorePrevTextColor
 	msgbox PewterCity_Text_MustBeGoingBackToLab
 	closemessage
@@ -719,11 +716,7 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideExit2
 	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideExit3
 	delay 30
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Text_RunningShoesLetterFromMom
-	closemessage
 	removeobject LOCALID_AIDE
-	setflag FLAG_SYS_B_DASH
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 2
 	return
 

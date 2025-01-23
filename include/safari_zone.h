@@ -18,4 +18,6 @@ void SafariZoneRetirePrompt(void);
 
 void CB2_EndSafariBattle(void);
 
+bool8 MaybeEndChallenge(void);
+
 #endif // GUARD_SAFARI_ZONE_H

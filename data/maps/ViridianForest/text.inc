@@ -30,12 +30,12 @@ ViridianForest_Text_DougPostBattle::
     .string "catch some stronger ones!$"
 
 ViridianForest_Text_SammyIntro::
-    .string "Hey, wait up!\n"
-    .string "What's the hurry? Why the rush?$"
+    .string "I just caught a POKéMON!\n"
+    .string "Is it a feature or a bug?$"
 
 ViridianForest_Text_SammyDefeat::
-    .string "I give!\n"
-    .string "You're good at this!$"
+    .string "I found the fishing rod\n"
+    .string "bug in this game!$"
 
 ViridianForest_Text_SammyPostBattle::
     .string "Sometimes, you can find stuff on\n"

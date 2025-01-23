@@ -889,7 +889,7 @@ Other changes:
  - Trade and happiness evolutions have been replaced with a new "Trade+ Stone", or Sun Stone & Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
  - Hidden items have been removed, except for Coins in the Game Corner.
  - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
- - The PC is accessible from the start menu. Pokémon no longer heal when sent to the PC.
+ - The PC is accessible from the START menu. Pokémon no longer heal when sent to the PC.
  - Flash is no longer required in Rock Tunnel.
  - Player gets 10x the number of steps in the Safari Zone.
  - Shiny Pokémon odds are increased 10x.
@@ -983,7 +983,7 @@ For every "map set" (e.g. Route 1, Mt. Moon) in the game:
 
 #### Map sets
 
-A "map set" gropus is a collection of game locations that use the same Pokémon
+A "map set" is a collection of game locations that use the same Pokémon
 replacement mappings. Note that this is a term specific to this ROM-hack, and is
 different than the "map group" concept in the FR/LG source code.
 

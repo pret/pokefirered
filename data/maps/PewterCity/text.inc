@@ -122,13 +122,13 @@ PewterCity_Text_OhPlayer::
 
 PewterCity_Text_AskedToDeliverThis::
     .string "I'm glad I caught up to you.\n"
-    .string "I'm PROF. OAK's AIDE.\p"
-    .string "I've been asked to deliver this,\n"
-    .string "so here you go.$"
+    .string "I'm PROF. OAK's RICH AIDE.\p"
+    .string "Me and the other aides will\n"
+    .string "pay you to catch POKéMON!$"
 
 PewterCity_Text_ReceivedRunningShoesFromAide::
-    .string "{PLAYER} received the\n"
-    .string "RUNNING SHOES from the AIDE.$"
+    .string "{PLAYER} received ¥1,000\n"
+    .string "from the RICH AIDE.$"
 
 PewterCity_Text_SwitchedShoesWithRunningShoes::
     .string "{PLAYER} switched shoes with the\n"
@@ -139,9 +139,8 @@ PewterCity_Text_ExplainRunningShoes::
     .string "But only where there's room to run!$"
 
 PewterCity_Text_MustBeGoingBackToLab::
-    .string "Well, I must be going back to\n"
-    .string "the LAB.\p"
-    .string "Bye-bye!$"
+    .string "The other aides are WAY richer\n"
+    .string "than I am... believe me!$"
 
 PewterCity_Text_RunningShoesLetterFromMom::
     .string "There's a letter attached…\p"

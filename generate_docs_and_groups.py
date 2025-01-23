@@ -214,7 +214,7 @@ pokes = [
   ('KABUTO', 'WaterIce1'),
   ('KABUTOPS', 'WaterIce2'),
 
-  ('AERODACTYL', 'SafariZone'),
+  ('AERODACTYL', 'Spooky1'),
 
   ('SNORLAX', 'SafariZone'),
 

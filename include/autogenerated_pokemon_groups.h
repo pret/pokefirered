@@ -192,7 +192,7 @@ const u16 gGroup_GrassBug3[] =
 
 const u16 gGroup_Spooky1[] =
 {
-  /*SIZE=*/15,
+  /*SIZE=*/16,
   SPECIES_CLEFAIRY,
   SPECIES_CLEFFA,
   SPECIES_IGGLYBUFF,
@@ -208,6 +208,7 @@ const u16 gGroup_Spooky1[] =
   SPECIES_DUSKULL,
   SPECIES_GASTLY,
   SPECIES_LARVITAR,
+  SPECIES_AERODACTYL,
 };
 
 const u16 gGroup_Spooky2[] =
@@ -376,7 +377,7 @@ const u16 gGroup_Overworld[] =
 
 const u16 gGroup_SafariZone[] =
 {
-  /*SIZE=*/48,
+  /*SIZE=*/47,
   SPECIES_PIDGEOT,
   SPECIES_LUDICOLO,
   SPECIES_ARBOK,
@@ -423,7 +424,6 @@ const u16 gGroup_SafariZone[] =
   SPECIES_WALREIN,
   SPECIES_TAUROS,
   SPECIES_BLISSEY,
-  SPECIES_AERODACTYL,
   SPECIES_SNORLAX,
 };
 
@@ -924,7 +924,7 @@ const u16* const gMonGroups[] =
   [SPECIES_LARVITAR] = gGroup_Spooky1,
   [SPECIES_KABUTOPS] = gGroup_WaterIce2,
   [SPECIES_PUPITAR] = gGroup_CeruleanCave,
-  [SPECIES_AERODACTYL] = gGroup_SafariZone,
+  [SPECIES_AERODACTYL] = gGroup_Spooky1,
   [SPECIES_TYRANITAR] = gGroup_NotCatchable,
   [SPECIES_SNORLAX] = gGroup_SafariZone,
   [SPECIES_ARTICUNO] = gGroup_Legendary,

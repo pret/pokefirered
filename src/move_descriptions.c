@@ -405,6 +405,7 @@ const u8 gMoveDescription_Pluck[] = _("This is a Gen IV\nmove. It might not\nwor
 const u8 gMoveDescription_UTurn[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
 const u8 gMoveDescription_FlashCannon[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
 const u8 gMoveDescription_TrickRoom[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
+const u8 gMoveDescription_Defog[] = _("This is a Gen IV\nmove. It might not\nwork in this hack,\nbut will online!");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,

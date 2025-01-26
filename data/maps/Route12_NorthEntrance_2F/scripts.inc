@@ -18,7 +18,7 @@ Route12_NorthEntrance_2F_EventScript_Lass::
 	call_if_eq VAR_RESULT, FEMALE, Route12_NorthEntrance_2F_EventScript_TakeTMFemale
 	checkitemspace ITEM_TM027
 	goto_if_eq VAR_RESULT, FALSE, Route12_NorthEntrance_2F_EventScript_NoRoomForTM27
-	giveitem -1
+	giveitem -10
 	msgbox Route12_NorthEntrance_2F_Text_ExplainTM27
 	setflag FLAG_GOT_TM27
 	release

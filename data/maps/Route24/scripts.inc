@@ -46,7 +46,7 @@ Route24_EventScript_RocketTrigger::
 	end
 
 Route24_EventScript_BattleRocket::
-	giveitem -6
+	giveitem -11
 	message Route24_Text_JoinTeamRocket
 	waitmessage
 	playbgm MUS_ENCOUNTER_ROCKET, 0

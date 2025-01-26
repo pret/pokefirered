@@ -39,6 +39,8 @@
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/sound.h"
+#include "pokemon_groups.h"
+#include "overworld.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -354,6 +356,13 @@ bool8 ScrCmd_setorcopyvar(struct ScriptContext * ctx)
     u16 * destPtr = GetVarPointer(ScriptReadHalfword(ctx));
     *destPtr = VarGet(ScriptReadHalfword(ctx));
     return FALSE;
+}
+
+bool8 ScrCmd_setvartoseededitem(struct ScriptContext * ctx) {
+  u16 * destPtr = GetVarPointer(ScriptReadHalfword(ctx));
+  s16 negativeIndex = ScriptReadHalfword(ctx);
+  *destPtr = SeededItemByIndex(-1 * negativeIndex - 1);
+  return FALSE;
 }
 
 static u8 Compare(u16 a, u16 b)

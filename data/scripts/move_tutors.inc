@@ -4,7 +4,7 @@ VictoryRoad_2F_EventScript_DoubleEdgeTutor::
 	goto_if_set FLAG_TUTOR_DOUBLE_EDGE, EventScript_DoubleEdgeTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -13
 	setflag FLAG_TUTOR_DOUBLE_EDGE
 	goto EventScript_DoubleEdgeTaught
 	end
@@ -25,7 +25,7 @@ EventScript_ThunderWaveTutor::
 	goto_if_set FLAG_TUTOR_THUNDER_WAVE, EventScript_ThunderWaveTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -14
 	setflag FLAG_TUTOR_THUNDER_WAVE
 	goto EventScript_ThunderWaveTaught
 	end
@@ -41,7 +41,7 @@ RockTunnel_B1F_EventScript_RockSlideTutor::
 	goto_if_set FLAG_TUTOR_ROCK_SLIDE, EventScript_RockSlideTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -15
 	setflag FLAG_TUTOR_ROCK_SLIDE
 	goto EventScript_RockSlideTaught
 	end
@@ -57,7 +57,7 @@ MtEmber_Exterior_EventScript_ExplosionTutor::
 	goto_if_set FLAG_TUTOR_EXPLOSION, EventScript_ExplosionTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -16
 	setflag FLAG_TUTOR_EXPLOSION
 	goto EventScript_ExplosionTaught
 	end
@@ -73,7 +73,7 @@ Route4_EventScript_MegaPunchTutor::
 	goto_if_set FLAG_TUTOR_MEGA_PUNCH, EventScript_MegaPunchTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -5
+  giveitem -17
 	setflag FLAG_TUTOR_MEGA_PUNCH
 	goto EventScript_MegaPunchTaught
 	end
@@ -89,7 +89,7 @@ Route4_EventScript_MegaKickTutor::
 	goto_if_set FLAG_TUTOR_MEGA_KICK, EventScript_MegaKickTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -18
 	setflag FLAG_TUTOR_MEGA_KICK
 	goto EventScript_MegaKickTaught
 	end
@@ -105,7 +105,7 @@ EventScript_DreamEaterTutor::
 	goto_if_set FLAG_TUTOR_DREAM_EATER, EventScript_DreamEaterTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -19
 	setflag FLAG_TUTOR_DREAM_EATER
 	goto EventScript_DreamEaterTaught
 	end
@@ -121,7 +121,7 @@ EventScript_SoftboiledTutor::
 	goto_if_set FLAG_TUTOR_SOFT_BOILED, EventScript_SoftboiledTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -20
 	setflag FLAG_TUTOR_SOFT_BOILED
 	goto EventScript_SoftboiledTaught
 	end
@@ -137,7 +137,7 @@ FuchsiaCity_EventScript_SubstituteTutor::
 	goto_if_set FLAG_TUTOR_SUBSTITUTE, EventScript_SubstituteTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -21
 	setflag FLAG_TUTOR_SUBSTITUTE
 	goto EventScript_SubstituteTaught
 	end
@@ -153,7 +153,7 @@ SevenIsland_EventScript_SwordsDanceTutor::
 	goto_if_set FLAG_TUTOR_SWORDS_DANCE, EventScript_SwordsDanceTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -22
 	setflag FLAG_TUTOR_SWORDS_DANCE
 	goto EventScript_SwordsDanceTaught
 	end
@@ -169,7 +169,7 @@ PewterCity_Museum_1F_EventScript_SeismicTossTutor::
 	goto_if_set FLAG_TUTOR_SEISMIC_TOSS, EventScript_SeismicTossTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -23
 	setflag FLAG_TUTOR_SEISMIC_TOSS
 	goto EventScript_SeismicTossTaught
 	end
@@ -185,7 +185,7 @@ EventScript_CounterTutor::
 	goto_if_set FLAG_TUTOR_COUNTER, EventScript_CounterTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -24
 	setflag FLAG_TUTOR_COUNTER
 	goto EventScript_CounterTaught
 	end
@@ -201,7 +201,7 @@ EventScript_MetronomeTutor::
 	goto_if_set FLAG_TUTOR_METRONOME, EventScript_MetronomeTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -25
 	setflag FLAG_TUTOR_METRONOME
 	goto EventScript_MetronomeTaught
 	end
@@ -215,7 +215,7 @@ EventScript_MimicTutor::
 	goto_if_set FLAG_TUTOR_MIMIC, EventScript_MimicTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -26
 	faceplayer
 	goto_if_eq VAR_RESULT, 0, EventScript_TMDeclined
 	removeitem ITEM_POKE_DOLL
@@ -244,7 +244,7 @@ FourIsland_House1_EventScript_BodySlamTutor::
 	goto_if_set FLAG_TUTOR_BODY_SLAM, EventScript_BodySlamTaught
 	msgbox Text_TMGive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_TMDeclined
-  giveitem -6
+  giveitem -27
 	setflag FLAG_TUTOR_BODY_SLAM
 	goto EventScript_BodySlamTaught
 	end

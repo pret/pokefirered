@@ -23,7 +23,7 @@ CeruleanCity_Gym_EventScript_GiveTM03::
 	checkitemspace ITEM_TM003
 	goto_if_eq VAR_RESULT, FALSE, CeruleanCity_Gym_EventScript_NoRoomForTM03
 	giveitem ITEM_RARE_CANDY
-	giveitem -1
+	giveitem -5
 	setflag FLAG_GOT_TM03_FROM_MISTY
 	msgbox CeruleanCity_Gym_Text_ExplainTM03
 	release

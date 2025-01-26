@@ -24,7 +24,7 @@ SaffronCity_Gym_EventScript_GiveTM04::
 	checkitemspace ITEM_TM004
 	goto_if_eq VAR_RESULT, FALSE, SaffronCity_Gym_EventScript_NoRoomForTM04
 	giveitem ITEM_RARE_CANDY
-	giveitem -1
+	giveitem -6
 	setflag FLAG_GOT_TM04_FROM_SABRINA
 	msgbox SaffronCity_Gym_Text_SabrinaPostBattle
 	release

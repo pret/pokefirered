@@ -24,7 +24,7 @@ CeladonCity_Gym_EventScript_GiveTM19::
 	checkitemspace ITEM_TM019
 	goto_if_eq VAR_RESULT, FALSE, CeladonCity_Gym_EventScript_NoRoomForTM19
 	giveitem ITEM_RARE_CANDY
-	giveitem -1
+	giveitem -8
 	setflag FLAG_GOT_TM19_FROM_ERIKA
 	msgbox CeladonCity_Gym_Text_ExplainTM19
 	release

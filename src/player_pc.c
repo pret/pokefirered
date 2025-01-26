@@ -22,6 +22,8 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/field_weather.h"
+#include "event_data.h"
+#include "coins.h"
 
 #define PC_ITEM_ID  0
 #define PC_QUANTITY 1
@@ -147,10 +149,10 @@ void NewGameInitPCItems(void)
                                     AddPCItem(NEW_GAME_PC_ITEMS(i, PC_ITEM_ID), NEW_GAME_PC_ITEMS(i, PC_QUANTITY)) == TRUE; i++)
         ;
     
-  AddBagItem(ITEM_POKE_BALL, 50);
-  AddBagItem(ITEM_GREAT_BALL, 25);
-  AddBagItem(ITEM_ULTRA_BALL, 10);
-  AddBagItem(ITEM_REPEL, 20);
+  AddBagItem(ITEM_POKE_BALL, 60);
+  AddBagItem(ITEM_GREAT_BALL, 40);
+  AddBagItem(ITEM_ULTRA_BALL, 20);
+  AddBagItem(ITEM_REPEL, 25);
   AddBagItem(ITEM_POTION, 10);
   AddBagItem(ITEM_SUPER_POTION, 10);
   AddBagItem(ITEM_FULL_HEAL, 10);
@@ -163,6 +165,10 @@ void NewGameInitPCItems(void)
   AddBagItem(ITEM_TOWN_MAP, 1);
   AddBagItem(ITEM_OLD_ROD, 1);
   AddBagItem(ITEM_TM_CASE, 1);
+
+  AddBagItem(ITEM_COIN_CASE, 1);
+  FlagSet(FLAG_GOT_COIN_CASE);
+  AddCoins(50);
 
   gSaveBlock1Ptr->registeredItem = ITEM_OLD_ROD;
 }

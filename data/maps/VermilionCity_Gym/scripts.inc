@@ -230,7 +230,7 @@ VermilionCity_Gym_EventScript_GiveTM34::
 	checkitemspace ITEM_TM034
 	goto_if_eq VAR_RESULT, FALSE, VermilionCity_Gym_EventScript_NoRoomForTM34
 	giveitem ITEM_RARE_CANDY
-	giveitem -1
+	giveitem -2
 	setflag FLAG_GOT_TM34_FROM_SURGE
 	msgbox VermilionCity_Gym_Text_ExplainTM34
 	release

@@ -1778,6 +1778,13 @@
 	goto_if_eq \dest
 	.endm
 
+	@ Sets `destination` to the seeded item at `negativeitemindex`
+	.macro setvartoseededitem destination:req, negativeitemindex:req
+	.byte 0xd6
+	.2byte \destination
+	.2byte \negativeitemindex
+	.endm
+
 	YES = 1
 	NO  = 0
 
@@ -1792,18 +1799,8 @@
 	@ message indicates there is no room, and VAR_RESULT is set to FALSE. 
 	@ Otherwise VAR_RESULT is set to TRUE, and the message indicates they have received the item(s).
 	.macro giveitem item:req, amount=1
-  .if (\item == -1)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_1
-  .elseif (\item == -2)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_2
-  .elseif (\item == -3)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_3
-  .elseif (\item == -4)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_4
-  .elseif (\item == -5)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_5
-  .elseif (\item == -6)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_6
+  .if (\item < 0)
+    setvartoseededitem VAR_0x8000, \item
   .else
     setorcopyvar VAR_0x8000, \item
   .endif
@@ -1814,18 +1811,8 @@
 	@ For picking up items in the overworld. Similar to giveitem, but with different language and
 	@ sets the flag of the last-talked to object (the item the player picked up).
 	.macro finditem item:req, amount=1
-  .if (\item == -1)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_1
-  .elseif (\item == -2)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_2
-  .elseif (\item == -3)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_3
-  .elseif (\item == -4)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_4
-  .elseif (\item == -5)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_5
-  .elseif (\item == -6)
-    setorcopyvar VAR_0x8000, VAR_MAP_ITEM_6
+  .if (\item < 0)
+    setvartoseededitem VAR_0x8000, \item
   .else
     setorcopyvar VAR_0x8000, \item
   .endif

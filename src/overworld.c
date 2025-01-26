@@ -545,6 +545,38 @@ struct MapHeader const *const GetDestinationWarpMapHeader(void)
     return Overworld_GetMapHeaderByGroupAndId(sWarpDestination.mapGroup, sWarpDestination.mapNum);
 }
 
+// From: https://stackoverflow.com/questions/6127503/shuffle-array-in-c.
+void Shuffle(u16 *array, u16 n, u16 rand)
+{
+  u16 i;
+  u16 j;
+  u16 t;
+  for (i = 0; i < n - 1; i++) {
+    rand = SeededRandom(rand);
+    j = i + rand / (0xffff / (n - i) + 1);
+    t = array[j];
+    array[j] = array[i];
+    array[i] = t;
+  }
+}
+
+#define NUM_SEEDED_ITEMS ((NUM_TECHNICAL_MACHINES + 2) * 2)
+
+u16 SeededItemByIndex(u16 index) {
+  static bool8 gSeeded;
+  static u16 gSeededItems[NUM_SEEDED_ITEMS];
+  u16 i;
+  if (!gSeeded) {
+    for (i = 0; i < NUM_SEEDED_ITEMS; ++i) {
+      gSeededItems[i] = i % (NUM_SEEDED_ITEMS / 2);
+    }
+    Shuffle(gSeededItems, NUM_SEEDED_ITEMS, GameHash() & 0xffff);
+    Shuffle(gSeededItems, NUM_SEEDED_ITEMS, (GameHash() >> 16) & 0xffff);
+    gSeeded = TRUE;
+  }
+  return ITEM_HM07 + gSeededItems[index % NUM_SEEDED_ITEMS];
+}
+
 static void SetMapHashAndSeedItems() {
   u32 hash;
   u16 seed1;

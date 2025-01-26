@@ -8,7 +8,7 @@ SaffronCity_MrPsychicsHouse_EventScript_MrPsychic::
 	msgbox SaffronCity_MrPsychicsHouse_Text_YouWantedThis
 	checkitemspace ITEM_TM029
 	goto_if_eq VAR_RESULT, FALSE, SaffronCity_MrPsychicsHouse_EventScript_NoRoomForTM29
-	giveitem -1
+	giveitem -9
 	msgbox SaffronCity_MrPsychicsHouse_Text_ExplainTM29
 	setflag FLAG_GOT_TM29_FROM_MR_PSYCHIC
 	release

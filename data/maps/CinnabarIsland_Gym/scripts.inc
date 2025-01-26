@@ -76,7 +76,7 @@ CinnabarIsland_Gym_EventScript_GiveTM38::
 	checkitemspace ITEM_TM038
 	goto_if_eq VAR_RESULT, FALSE, CinnabarIsland_Gym_EventScript_NoRoomForTM38
 	giveitem ITEM_RARE_CANDY
-	giveitem -1
+	giveitem -4
 	setflag FLAG_GOT_TM38_FROM_BLAINE
 	msgbox CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove
 	release

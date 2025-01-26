@@ -25,7 +25,7 @@ PewterCity_Gym_EventScript_GiveTM39::
 	checkitemspace ITEM_TM039
 	goto_if_eq VAR_RESULT, FALSE, PewterCity_Gym_EventScript_NoRoomForTM39
 	giveitem ITEM_RARE_CANDY
-	giveitem -1
+	giveitem -3
 	setflag FLAG_GOT_TM39_FROM_BROCK
 	msgbox PewterCity_Gym_Text_ExplainTM39
 	release

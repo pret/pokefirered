@@ -528,7 +528,7 @@ with open('filtered_learnsets.ts','r') as in_file:
       new_tm_ls[mon].add(move)
     elif move not in old_tms_l2u and (('"4L' not in line and '"4M' not in line) or regexp.search(line)):
       lv1_ls[mon].add(move)
-    if ('"4L' not in line) and ('"4T' in line or '"4E' in line) and (move in old_tms_l2u):
+    if move == 'defog' or (('"4L' not in line) and ('"4T' in line or '"4E' in line) and (move in old_tms_l2u)):
       if mon not in missing_old_tms:
         missing_old_tms[mon] = []
       missing_old_tms[mon].append(move)
@@ -997,6 +997,9 @@ with open('src/data/pokemon/tmhm_learnsets.h', 'w') as h_file:
 s = ''
 with open('original_gen4_tmhm_learnsets.h', 'r') as h_file:
   for line in h_file:
+    if 'TM070_FLASH' in line:
+      # The Flash TM is replaced with Defog.
+      continue
     s += line
     if line.startswith('  [SPECIES_'):
       mon = line.strip().split('SPECIES_')[1].split(']')[0].lower()

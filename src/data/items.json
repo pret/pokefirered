@@ -1491,7 +1491,7 @@
     {
       "english": "SUN STONE",
       "itemId": "ITEM_SUN_STONE",
-      "price": 2100,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt is as red as the sun.",
@@ -1507,7 +1507,7 @@
     {
       "english": "MOON STONE",
       "itemId": "ITEM_MOON_STONE",
-      "price": 0,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt is as black as the night sky.",
@@ -1523,7 +1523,7 @@
     {
       "english": "FIRE STONE",
       "itemId": "ITEM_FIRE_STONE",
-      "price": 2100,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt is colored orange.",
@@ -1539,7 +1539,7 @@
     {
       "english": "THUNDERSTONE",
       "itemId": "ITEM_THUNDER_STONE",
-      "price": 2100,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt has a thunderbolt pattern.",
@@ -1555,7 +1555,7 @@
     {
       "english": "WATER STONE",
       "itemId": "ITEM_WATER_STONE",
-      "price": 2100,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt is a clear light blue.",
@@ -1571,7 +1571,7 @@
     {
       "english": "LEAF STONE",
       "itemId": "ITEM_LEAF_STONE",
-      "price": 2100,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt has a leaf pattern.",
@@ -1667,7 +1667,7 @@
     {
       "english": "BIG MUSHROOM",
       "itemId": "ITEM_BIG_MUSHROOM",
-      "price": 5000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A large and rare mushroom.\\nIt is very popular among certain\\npeople.",
@@ -4627,7 +4627,7 @@
     {
       "english": "HM01",
       "itemId": "ITEM_HM01",
-      "price": 0,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "Attacks the foe with sharp blades\\nor claws. It can also cut down thin\\ntrees and grass outside of battle.",
@@ -4644,7 +4644,7 @@
     {
       "english": "HM02",
       "itemId": "ITEM_HM02",
-      "price": 0,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "The user flies up on the first turn,\\nthen attacks next turn. It can be\\nused to fly to any known town.",
@@ -4661,7 +4661,7 @@
     {
       "english": "HM03",
       "itemId": "ITEM_HM03",
-      "price": 0,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "Creates a huge wave, then crashes\\nit down on the foe. It can be used\\nfor traveling on water.",
@@ -4678,7 +4678,7 @@
     {
       "english": "HM04",
       "itemId": "ITEM_HM04",
-      "price": 0,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "The user builds enormous power,\\nthen slams the foe. It can be used\\nfor moving large, round boulders.",
@@ -4695,7 +4695,7 @@
     {
       "english": "HM05",
       "itemId": "ITEM_HM05",
-      "price": 0,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "Looses a powerful blast of light\\nthat reduces the foe's accuracy.\\nIt also lights up dark caves.",
@@ -4712,7 +4712,7 @@
     {
       "english": "HM06",
       "itemId": "ITEM_HM06",
-      "price": 0,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "Hits the foe with a rock-crushingly\\ntough attack. It can smash cracked\\nboulders.",
@@ -4729,7 +4729,7 @@
     {
       "english": "HM07",
       "itemId": "ITEM_HM07",
-      "price": 0,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A powerful charge attack. It can\\nbe used for climbing a torrential\\nwaterfall.",
@@ -4746,7 +4746,7 @@
     {
       "english": "HM08",
       "itemId": "ITEM_HM08",
-      "price": 0,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A 2-turn attack in which the user\\ndives underwater on the first turn,\\nthen strikes in the next turn.",
@@ -4831,7 +4831,7 @@
     {
       "english": "TM05",
       "itemId": "ITEM_TM005",
-      "price": 1000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A savage roar that causes the foe\\nto switch out of battle. In the\\nwild, ROAR ends the battle.",
@@ -4933,7 +4933,7 @@
     {
       "english": "TM11",
       "itemId": "ITEM_TM011",
-      "price": 2000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "The weather is turned sunny for\\nfive turns. Over that time, FIRE-\\ntype moves are powered up.",
@@ -4984,7 +4984,7 @@
     {
       "english": "TM14",
       "itemId": "ITEM_TM014",
-      "price": 5500,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A vicious snow-and-wind attack that\\nstrikes all foes in battle. It may\\ncause freezing.",
@@ -5001,7 +5001,7 @@
     {
       "english": "TM15",
       "itemId": "ITEM_TM015",
-      "price": 7500,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A harsh attack that inflicts severe\\ndamage on the foe. However, the\\nuser must rest the next turn.",
@@ -5052,7 +5052,7 @@
     {
       "english": "TM18",
       "itemId": "ITEM_TM018",
-      "price": 2000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A heavy rain is summoned for five\\nturns. Over that time, WATER-type\\nmoves are powered up.",
@@ -5103,7 +5103,7 @@
     {
       "english": "TM21",
       "itemId": "ITEM_TM021",
-      "price": 1000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "This attack move grows more\\npowerful the more the POKéMON\\ndislikes its TRAINER.",
@@ -5171,7 +5171,7 @@
     {
       "english": "TM25",
       "itemId": "ITEM_TM025",
-      "price": 5500,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "Strikes the foe with a huge\\nthunderbolt. It may cause\\nparalysis.",
@@ -5205,7 +5205,7 @@
     {
       "english": "TM27",
       "itemId": "ITEM_TM027",
-      "price": 1000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "This attack move grows more\\npowerful the more the POKéMON\\nlikes its TRAINER.",
@@ -5222,7 +5222,7 @@
     {
       "english": "TM28",
       "itemId": "ITEM_TM028",
-      "price": 2000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A 2-turn attack in which the user\\ndigs underground, then strikes.\\nIt can be used to exit dungeons.",
@@ -5239,7 +5239,7 @@
     {
       "english": "TM29",
       "itemId": "ITEM_TM029",
-      "price": 2000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A powerful blast of telekinetic\\nenergy strikes the foe. It may\\nlower the target's SP. DEF stat.",
@@ -5290,7 +5290,7 @@
     {
       "english": "TM32",
       "itemId": "ITEM_TM032",
-      "price": 2000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "The user begins moving so quickly\\nthat it creates illusory copies to\\nraise its evasiveness.",
@@ -5358,7 +5358,7 @@
     {
       "english": "TM36",
       "itemId": "ITEM_TM036",
-      "price": 1000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "Toxic sludge is hurled at the foe\\nwith great force. It may also\\npoison the target.",
@@ -5375,7 +5375,7 @@
     {
       "english": "TM37",
       "itemId": "ITEM_TM037",
-      "price": 2000,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "Summons a sandstorm that lasts for\\nfive turns. It damages all types\\nexcept ROCK, GROUND, and STEEL.",
@@ -5392,7 +5392,7 @@
     {
       "english": "TM38",
       "itemId": "ITEM_TM038",
-      "price": 5500,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "The foe is incinerated with an\\nintense flame. It may leave the\\ntarget with a burn.",
@@ -5949,7 +5949,7 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0,
-      "moveId": "Flash"
+      "moveId": "Defog"
     },
     {
       "english": "TM71",
@@ -7866,7 +7866,7 @@
     {
       "english": "TRADE+ STONE",
       "itemId": "ITEM_TRADE_STONE",
-      "price": 2100,
+      "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
       "description_english": "A peculiar stone that makes\\nmany species of POKéMON\\nevolve in this challenge.",

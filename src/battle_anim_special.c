@@ -951,7 +951,7 @@ static void SpriteCB_ThrowBall_Bounce(struct Sprite *sprite)
             sprite->data[3] += 257;
 
             bounceCount = sprite->data[3] >> 8;
-            if (bounceCount == 4)
+            if (bounceCount == 1)
                 lastBounce = TRUE;
 
             // Play a different sound effect for each pokeball bounce.
@@ -988,14 +988,14 @@ static void SpriteCB_ThrowBall_Bounce(struct Sprite *sprite)
         sprite->data[3] = 0;
         sprite->y += Cos(64, 40);
         sprite->y2 = 0;
-        if (gBattleSpritesDataPtr->animationData->ballThrowCaseId == BALL_NO_SHAKES)
+        if (gBattleSpritesDataPtr->animationData->ballThrowCaseId != BALL_3_SHAKES_SUCCESS)
         {
             sprite->data[5] = 0;
             sprite->callback = SpriteCB_ThrowBall_DelayThenBreakOut;
         }
         else
         {
-            sprite->callback = SpriteCB_ThrowBall_InitShake;
+            sprite->callback = SpriteCB_ThrowBall_InitClick;
             sprite->data[4] = 1;
             sprite->data[5] = 0;
         }

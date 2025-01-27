@@ -1102,8 +1102,13 @@ bool32 IsPageFlipInput(u8 direction)
     return FALSE;
 }
 
+static bool8 gDisablyNextCry;
+
 static void Task_InputHandler_Info(u8 taskId)
 {
+    static bool8 gRLHeld;
+    bool8 rlHeld;
+
     switch (sMonSummaryScreen->state3270) {
     case PSS_STATE3270_FADEIN:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, 0);
@@ -1169,7 +1174,14 @@ static void Task_InputHandler_Info(u8 taskId)
 
         if ((!FuncIsActiveTask(Task_PokeSum_FlipPages)) || FuncIsActiveTask(Task_PokeSum_SwitchDisplayedPokemon))
         {
-            if (JOY_NEW(DPAD_UP))
+            rlHeld = JOY_HELD(R_BUTTON) || JOY_HELD(L_BUTTON);
+            if (sMonSummaryScreen->curPageIndex == PSS_PAGE_SKILLS && rlHeld != gRLHeld) {
+                gRLHeld = rlHeld;
+                gDisablyNextCry = TRUE;
+                PokeSum_SeekToNextMon(taskId, 0);
+                return;
+            }
+            else if (JOY_NEW(DPAD_UP))
             {
                 PokeSum_SeekToNextMon(taskId, -1);
                 return;
@@ -2165,7 +2177,14 @@ static void BufferMonSkills(void)
 
     if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(R_BUTTON)){
       hp = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_IV);
-      ConvertIntToDecimalStringN(sMonSummaryScreen->summary.curHpStrBuf, hp, STR_CONV_MODE_LEFT_ALIGN, 3);
+      ConvertIntToDecimalStringN(tempStr, hp, STR_CONV_MODE_LEFT_ALIGN, 3);
+      StringCopy(sMonSummaryScreen->summary.curHpStrBuf, gText_IVs);
+      StringAppend(sMonSummaryScreen->summary.curHpStrBuf, tempStr);
+    } else if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(L_BUTTON)){
+      hp = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_EV);
+      ConvertIntToDecimalStringN(tempStr, hp, STR_CONV_MODE_LEFT_ALIGN, 3);
+      StringCopy(sMonSummaryScreen->summary.curHpStrBuf, gText_EVs);
+      StringAppend(sMonSummaryScreen->summary.curHpStrBuf, tempStr);
     } else {
       hp = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP);
       ConvertIntToDecimalStringN(sMonSummaryScreen->summary.curHpStrBuf, hp, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -2204,6 +2223,8 @@ static void BufferMonSkills(void)
     {
         if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(R_BUTTON)){
           statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ATK_IV);
+        } else if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(L_BUTTON)) {
+          statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ATK_EV);
         } else {
           statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ATK);
         }
@@ -2212,6 +2233,8 @@ static void BufferMonSkills(void)
 
         if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(R_BUTTON)){
           statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_DEF_IV);
+        } else if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(L_BUTTON)) {
+          statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_DEF_EV);
         } else {
           statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_DEF);
         }
@@ -2220,6 +2243,8 @@ static void BufferMonSkills(void)
 
         if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(R_BUTTON)){
           statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPATK_IV);
+        } else if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(L_BUTTON)) {
+          statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPATK_EV);
         } else {
           statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPATK);
         }
@@ -2228,6 +2253,8 @@ static void BufferMonSkills(void)
 
         if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(R_BUTTON)){
           statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPDEF_IV);
+        } else if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(L_BUTTON)) {
+          statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPDEF_EV);
         } else {
           statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPDEF);
         }
@@ -2236,6 +2263,8 @@ static void BufferMonSkills(void)
 
         if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(R_BUTTON)){
           statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPEED_IV);
+        } else if (!FlagGet(FLAG_CHALLENGE_NOT_OVER) && JOY_HELD(L_BUTTON)) {
+          statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPEED_EV);
         } else {
           statValue = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPEED);
         }
@@ -4890,6 +4919,8 @@ static void PokeSum_DestroySprites(void)
 
 static void PokeSum_CreateSprites(void)
 {
+    if (gDisablyNextCry) return;
+
     CreateBallIconObj();
     ShowOrHideBallIconObj(FALSE);
     PokeSum_CreateMonIconSprite();
@@ -5076,6 +5107,10 @@ static s8 SeekToNextMonInMultiParty(s8 direction)
 
 static void Task_PokeSum_SwitchDisplayedPokemon(u8 taskId)
 {
+    if (gDisablyNextCry && sMonSummaryScreen->switchMonTaskState == 0) {
+        sMonSummaryScreen->switchMonTaskState = 5;
+    }
+
     switch (sMonSummaryScreen->switchMonTaskState)
     {
     case 0:
@@ -5207,6 +5242,11 @@ static void PokeSum_UpdateWin1ActiveFlag(u8 curPageIndex)
 
 static void PokeSum_TryPlayMonCry(void)
 {
+    if (gDisablyNextCry) {
+        gDisablyNextCry = FALSE;
+        return;
+    }
+
     if (!GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_IS_EGG))
     {
         if (ShouldPlayNormalMonCry(&sMonSummaryScreen->currentMon) == TRUE)

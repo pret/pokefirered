@@ -258,35 +258,35 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ChoosePrizeTM::
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TM13::
 	copyvar VAR_TEMP_1, VAR_MAP_ITEM_1
-	setvar VAR_TEMP_2, 4000
+	setvar VAR_TEMP_2, 150
 	buffertmmovename STR_VAR_2, VAR_MAP_ITEM_1
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TM23::
 	copyvar VAR_TEMP_1, VAR_MAP_ITEM_2
-	setvar VAR_TEMP_2, 3500
+	setvar VAR_TEMP_2, 150
 	buffertmmovename STR_VAR_2, VAR_MAP_ITEM_2
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TM24::
 	copyvar VAR_TEMP_1, VAR_MAP_ITEM_3
-	setvar VAR_TEMP_2, 4000
+	setvar VAR_TEMP_2, 150
 	buffertmmovename STR_VAR_2, VAR_MAP_ITEM_3
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TM30::
 	copyvar VAR_TEMP_1, VAR_MAP_ITEM_4
-	setvar VAR_TEMP_2, 4500
+	setvar VAR_TEMP_2, 150
 	buffertmmovename STR_VAR_2, VAR_MAP_ITEM_4
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_TM35::
 	copyvar VAR_TEMP_1, VAR_MAP_ITEM_5
-	setvar VAR_TEMP_2, 4000
+	setvar VAR_TEMP_2, 150
 	buffertmmovename STR_VAR_2, VAR_MAP_ITEM_5
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeTM
 	end

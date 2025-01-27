@@ -872,8 +872,16 @@ Major changes:
  - **New TMs and learnsets:** 60+ TMs are added to the game. Non-TM Egg moves and level 40+ moves are now also learned at level 1. TMs can teach moves that were previously only learnable via breeding or move tutors (NOTE: this is not currently supported for all moves, fix coming soon). 
 
 Other changes:
- - Faster movement and text. Hold B to use normal walking speed.
+ - Faster movement, animations, and text. Hold B to use normal walking speed.
  - Start the game with balls, healing items, the Old Rod, 6 Exp Shares, and more.
+ - Gain experience for catching Pokémon.
+ - Oak's aides give large sums of money for completing the Pokédex:
+   - 1k for 1 unique species.
+   - 10k for 10 unique species.
+   - 20k for 20 unique species.
+   - 30k for 30 unique species.
+   - 40k for 40 unique species.
+   - 50k for 50 unique species.
  - Starter Pokémon are randomized based on the game seed. There is still one grass, water, and fire starter, and they will be chosen from the gen 1-3 starters.
  - Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
  - Gym leaders give the player a Rare Candy in addition to a TM upon earning a badge.
@@ -884,13 +892,15 @@ Other changes:
  - Gain experience when you catch a Pokémon.
  - Gift Pokémon are replaced with Spinda.
  - Game Corner prize Pokémon are replaced with baby Pokémon.
- - The Department Store desks on 5F now sell select battle items instead of their usual ones (notably excluding Choice Band). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc).
+ - (Work-in-progress) The Department Store desks on 5F now sell Gen III and IV battle items.
  - Items aren't sellable.
  - HMs are deletable without the Move Deleter.
  - Trade and happiness evolutions have been replaced with a new "Trade+ Stone", or Sun Stone & Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
- - Hidden items have been removed, except for Coins in the Game Corner.
  - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
  - The PC is accessible from the START menu. Pokémon no longer heal when sent to the PC.
+ - Start with a coin case containing 50 coins. Can no longer buy coins at the Game Corner.
+ - TMs can be bought at the Game Corner for 150 coins.
+ - Once the timer has elapsed, players can see their party's EVs and IVs by holding L and R respectively in the "Pokémon Skills" summary screen.
  - Flash is no longer required in Rock Tunnel.
  - Player gets 10x the number of steps in the Safari Zone.
  - Shiny Pokémon odds are increased 10x.
@@ -904,6 +914,8 @@ Other changes:
    - Wobbuffet -> Dragonair
    - Unown -> Zubat
    - Smeargle -> Zubat
+ - Surge's gym "puzzle" is simplified. Player always find the second switch on their first try.
+ - Misc. bugfixes included in the https://github.com/pret/pokefirered `firered_rev1_modern` build.
 
 ## Level band / level cap
 

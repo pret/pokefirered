@@ -163,7 +163,7 @@ VermilionCity_Gym_EventScript_FoundSwitchOne::
 	end
 
 VermilionCity_Gym_EventScript_TrySwitchTwo::
-	goto_if_eq SWITCH2_ID, TRASH_CAN_ID, VermilionCity_Gym_EventScript_FoundSwitchTwo
+	goto VermilionCity_Gym_EventScript_FoundSwitchTwo
 	msgbox VermilionCity_Gym_Text_OnlyTrashLocksWereReset
 	clearflag FOUND_FIRST_SWITCH
 	special SetVermilionTrashCans

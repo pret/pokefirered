@@ -341,6 +341,8 @@ extern const u8 gText_PartyMenu_OK[];
 extern const u8 gText_MaleSymbol[];
 extern const u8 gText_FemaleSymbol[];
 extern const u8 gText_Slash[];
+extern const u8 gText_EVs[];
+extern const u8 gText_IVs[];
 extern const u8 gText_OakImportantToGetToKnowPokemonThroughly[];
 extern const u8 gText_PkmnNotHolding[];
 extern const u8 gText_PCMailboxFull[];

@@ -6,7 +6,7 @@ CeladonCity_GameCorner_Text_CanExchangeCoinsNextDoor::
 CeladonCity_GameCorner_Text_WelcomeBuySomeCoins::
     .string "Welcome to ROCKET GAME CORNER!\p"
     .string "Do you need some game COINS?\n"
-    .string "Would you like to buy some?$"
+    .string "Then you've gotta play the slots!$"
 
 CeladonCity_GameCorner_Text_ComePlaySometime::
     .string "No?\n"

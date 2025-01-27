@@ -67,12 +67,12 @@
 #define ACC_CURR_MOVE 0
 
 // compare operands
-#define CMP_EQUAL               0x0
-#define CMP_NOT_EQUAL           0x1
-#define CMP_GREATER_THAN        0x2
-#define CMP_LESS_THAN           0x3
-#define CMP_COMMON_BITS         0x4
-#define CMP_NO_COMMON_BITS      0x5
+#define CMP_EQUAL               0
+#define CMP_NOT_EQUAL           1
+#define CMP_GREATER_THAN        2
+#define CMP_LESS_THAN           3
+#define CMP_COMMON_BITS         4
+#define CMP_NO_COMMON_BITS      5
 
 // TODO: documentation
 // atk76, various

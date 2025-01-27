@@ -86,7 +86,7 @@ static void Cmd_if_would_go_first(void);
 static void Cmd_if_would_not_go_first(void);
 static void Cmd_nullsub_2A(void);
 static void Cmd_nullsub_2B(void);
-static void Cmd_count_alive_pokemon(void);
+static void Cmd_count_usable_party_mons(void);
 static void Cmd_get_considered_move(void);
 static void Cmd_get_considered_move_effect(void);
 static void Cmd_get_ability(void);
@@ -190,7 +190,7 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_if_would_not_go_first,            // 0x29
     Cmd_nullsub_2A,                       // 0x2A
     Cmd_nullsub_2B,                       // 0x2B
-    Cmd_count_alive_pokemon,              // 0x2C
+    Cmd_count_usable_party_mons,          // 0x2C
     Cmd_get_considered_move,              // 0x2D
     Cmd_get_considered_move_effect,       // 0x2E
     Cmd_get_ability,                      // 0x2F
@@ -1021,7 +1021,7 @@ static void Cmd_get_how_powerful_move_is(void)
     }
     else
     {
-        AI_THINKING_STRUCT->funcResult = MOVE_POWER_DISCOURAGED; // Highly discouraged in terms of power.
+        AI_THINKING_STRUCT->funcResult = MOVE_POWER_OTHER; // Highly discouraged in terms of power.
     }
 
     sAIScriptPtr++;
@@ -1077,7 +1077,7 @@ static void Cmd_nullsub_2B(void)
 {
 }
 
-static void Cmd_count_alive_pokemon(void)
+static void Cmd_count_usable_party_mons(void)
 {
     u8 battlerId;
     u8 battlerOnField1, battlerOnField2;

@@ -3,7 +3,7 @@
 #include "text.h"
 
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
-static EWRAM_DATA struct TextPrinter sTextPrinters[NUM_TEXT_PRINTERS] = {0};
+static EWRAM_DATA struct TextPrinter sTextPrinters[WINDOWS_MAX] = {0};
 
 static u16 sFontHalfRowLookupTable[0x51];
 static u16 sLastTextBgColor;
@@ -41,7 +41,7 @@ void SetFontsPointer(const struct FontInfo *fonts)
 void DeactivateAllTextPrinters (void)
 {
     int printer;
-    for (printer = 0; printer < NUM_TEXT_PRINTERS; ++printer)
+    for (printer = 0; printer < WINDOWS_MAX; ++printer)
         sTextPrinters[printer].active = 0;
 }
 
@@ -116,7 +116,7 @@ void RunTextPrinters(void)
 {
     int i;
 
-    for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
+    for (i = 0; i < WINDOWS_MAX; ++i)
     {
         if (sTextPrinters[i].active)
         {

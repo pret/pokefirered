@@ -9680,60 +9680,8 @@ static void Cmd_trysetcaughtmondexflags(void)
 static void Cmd_displaydexinfo(void)
 {
     u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
-
-    switch (gBattleCommunication[0])
-    {
-    case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
-        gBattleCommunication[0]++;
-        break;
-    case 1:
-        if (!gPaletteFade.active)
-        {
-            FreeAllWindowBuffers();
-            gBattleCommunication[TASK_ID] = DexScreen_RegisterMonToPokedex(species);
-            gBattleCommunication[0]++;
-        }
-        break;
-    case 2:
-        if (!gPaletteFade.active
-            && gMain.callback2 == BattleMainCB2
-            && !gTasks[gBattleCommunication[TASK_ID]].isActive)
-        {
-            CpuFill32(0, (void *)VRAM, VRAM_SIZE);
-            SetVBlankCallback(VBlankCB_Battle);
-            gBattleCommunication[0]++;
-        }
-        break;
-    case 3:
-        InitBattleBgsVideo();
-        LoadBattleTextboxAndBackground();
-        gBattle_BG3_X = 256;
-        gBattleCommunication[0]++;
-        break;
-    case 4:
-        if (!IsDma3ManagerBusyWithBgCopy())
-        {
-            CreateMonPicSprite_HandleDeoxys(species,
-                                            gBattleMons[B_POSITION_OPPONENT_LEFT].otId,
-                                            gBattleMons[B_POSITION_OPPONENT_LEFT].personality,
-                                            TRUE,
-                                            120,
-                                            64,
-                                            0,
-                                            0xFFFF);
-            CpuFill32(0, gPlttBufferFaded, BG_PLTT_SIZE);
-            BeginNormalPaletteFade(0x1FFFF, 0, 16, 0, RGB_BLACK);
-            ShowBg(0);
-            ShowBg(3);
-            gBattleCommunication[0]++;
-        }
-        break;
-    case 5:
-        if (!gPaletteFade.active)
-            gBattlescriptCurrInstr++;
-        break;
-    }
+    gBattleCommunication[TASK_ID] = DexScreen_RegisterMonToPokedex(species);
+    gBattlescriptCurrInstr++;
 }
 
 void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags)

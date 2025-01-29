@@ -47,7 +47,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_Clerk::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart IndigoPlateau_PokemonCenter_1F_Items
-	msgbox Text_PleaseComeAgain
+	
 	release
 	end
 

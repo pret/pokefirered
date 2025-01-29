@@ -420,7 +420,7 @@ with open('../pokemon-showdown/data/learnsets.ts','r') as in_file:
     if mon not in included_mons:
       continue
 
-    if in_learnset and ('"4E' in line or '"3E' in line or regexp.search(line)):
+    if in_learnset and ('"4E' in line or '"3E' in line or '4L' in line):
       if mon not in egg_moves:
         egg_moves[mon] = {}
       move = line.split(':')[0].strip()

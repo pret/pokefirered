@@ -16,7 +16,7 @@ CinnabarIsland_Mart_EventScript_Clerk::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart CinnabarIsland_Mart_Items
-	msgbox Text_PleaseComeAgain
+	
 	release
 	end
 

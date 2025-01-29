@@ -20,7 +20,7 @@ CeladonCity_DepartmentStore_4F_EventScript_Clerk::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart CeladonCity_DepartmentStore_4F_Items
-	msgbox Text_PleaseComeAgain
+	
 	release
 	end
 

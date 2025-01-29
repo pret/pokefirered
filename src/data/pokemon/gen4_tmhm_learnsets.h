@@ -2129,6 +2129,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_LEDYBA] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
+                                        | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM060_DRAIN_PUNCH)
@@ -2142,6 +2143,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_LEDIAN] = G4TMHM_LEARNSET(G4TMHM(TM051_ROOST)
+                                        | G4TMHM(TM062_SILVER_WIND)
                                         | G4TMHM(TM052_FOCUS_BLAST)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -2157,6 +2159,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SPINARAK] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
+                                        | G4TMHM(TM084_POISON_JAB)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM083_NATURAL_GIFT)
@@ -2165,6 +2168,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_ARIADOS] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
+                                        | G4TMHM(TM084_POISON_JAB)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM082_SLEEP_TALK)
@@ -2758,6 +2762,8 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_QWILFISH] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
+                                        | G4TMHM(TM084_POISON_JAB)
+                                        | G4TMHM(TM084_POISON_JAB)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM064_EXPLOSION)
                                         | G4TMHM(TM066_PAYBACK)

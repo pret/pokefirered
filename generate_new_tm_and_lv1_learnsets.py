@@ -480,6 +480,7 @@ for m in moves:
 moves_l2u['feintattack'] = 'FAINT_ATTACK'
 moves_l2u['smellingsalts'] = 'SMELLING_SALT'
 moves_l2u['highjumpkick'] = 'HI_JUMP_KICK'
+moves_l2u['visegrip'] = 'VICE_GRIP'
 
 new_tms_u2l = {}
 new_tms_l2u = {}
@@ -526,9 +527,9 @@ with open('filtered_learnsets.ts','r') as in_file:
     move = sp[0]
     if move in new_tms_l2u:
       new_tm_ls[mon].add(move)
-    elif move not in old_tms_l2u and (('"4L' not in line and '"4M' not in line) or regexp.search(line)):
+    elif move not in old_tms_l2u and (('"4M' not in line) or regexp.search(line)):
       lv1_ls[mon].add(move)
-    if move == 'defog' or (('"4L' not in line) and ('"4T' in line or '"4E' in line) and (move in old_tms_l2u)):
+    if move == 'defog' or (('"4T' in line or '"4E' in line) and (move in old_tms_l2u)):
       if mon not in missing_old_tms:
         missing_old_tms[mon] = []
       missing_old_tms[mon].append(move)

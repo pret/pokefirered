@@ -868,8 +868,8 @@ Major changes:
  - **Time limit:** After 5 hours pass, the player is locked in the Celadon Department Store. A PC and free Move Relearner are added to the Department Store. The game clock doesn't decrease while the START menu is active, including when the player is using the Pokémon summary screen, bag, etc. outside of battle.
  - **Level band:** Pokémon stop gaining experience if they become too overleveled compared to the rest of the team. Rare candies also stop working.
  - **Level scaling:** Wild and trainer Pokémon levels increase based on the player's party Pokémon levels and badge count.
- - **Gen 4 Pokemon, Moves, Abilities, & Items:** Most Gen 4 Pokémon in Gen 1-3 families (e.g. Munchlax, Weavile) are added, with Gen IV HG/SS learnsets and abilities. Many Gen IV moves and abilities aren't implemented properly, and instead placeholder effects. The full Pokémon list at the bottom of this page.
- - **New TMs and learnsets:** 60+ TMs are added to the game. Non-TM Egg moves and level 40+ moves are now also learned at level 1. TMs can teach moves that were previously only learnable via breeding or move tutors (NOTE: this is not currently supported for all moves, fix coming soon). 
+ - **Gen 4 Pokemon, Moves, TMs, Abilities, & Items:** Most Gen 4 Pokémon in Gen 1-3 families (e.g. Munchlax, Weavile) are added, with Gen IV HG/SS learnsets and abilities. The Department Store sells Gen 4 battle items. Many Gen IV moves and abilities aren't implemented properly, and instead placeholder effects. The full Pokémon list at the bottom of this page.
+ - **New TMs and learnsets:** 60+ TMs are added to the game, see the full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/all_tms.txt). Fully evolved Pokémon learn non-TM pre-evolution and egg moves at level 1. TMs can teach moves that were previously only learnable via breeding or move tutors. I.e. if a move is on Smogon it can be learned in this game.
 
 Other changes:
  - Faster movement, animations, and text. Hold B to use normal walking speed.
@@ -892,7 +892,6 @@ Other changes:
  - Gain experience when you catch a Pokémon.
  - Gift Pokémon are replaced with Spinda.
  - Game Corner prize Pokémon are replaced with baby Pokémon.
- - (Work-in-progress) The Department Store desks on 5F now sell Gen III and IV battle items.
  - Items aren't sellable.
  - HMs are deletable without the Move Deleter.
  - Trade and happiness evolutions have been replaced with a new "Trade+ Stone", or Sun Stone & Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).

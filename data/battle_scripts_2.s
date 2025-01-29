@@ -77,7 +77,15 @@ BattleScript_SuccessBallThrow::
 	setbyte sGIVEEXP_STATE, 0
 	getexp BS_TARGET
 BattleScript_SafariNoIncGameStat::
+	trysetcaughtmondexflags BattleScript_CaughtPokemonSkipNewDex
+	setbyte gBattleCommunication, 0
+	displaydexinfo
+BattleScript_CaughtPokemonSkipNewDex::
+	setbyte gBattleCommunication, 0
 	givecaughtmon
+	goto BattleScript_CaughtPokemonDone
+
+BattleScript_CaughtPokemonDone::
 	setbyte gBattleOutcome, B_OUTCOME_CAUGHT
 	finishturn
 

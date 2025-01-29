@@ -266,12 +266,11 @@ static void Task_ShopMenu(u8 taskId)
 
     switch (input)
     {
-    case MENU_NOTHING_CHOSEN:
-        break;
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
         Task_HandleShopMenuQuit(taskId);
         break;
+    case MENU_NOTHING_CHOSEN:
     default:
         sShopMenuActions_BuySellQuit[Menu_GetCursorPos()].func.void_u8(taskId);
         break;
@@ -334,7 +333,7 @@ static void Task_ReturnToShopMenu(u8 taskId)
     if (IsWeatherNotFadingIn() != TRUE)
         return;
 
-    DisplayItemMessageOnField(taskId, GetMartFontId(), gText_AnythingElseICanHelp, ShowShopMenuAfterExitingBuyOrSellMenu);
+    Task_HandleShopMenuQuit(taskId);
 }
 
 static void ShowShopMenuAfterExitingBuyOrSellMenu(u8 taskId)
@@ -610,13 +609,13 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y)
 
     if (item != INDEX_CANCEL)
     {
-        ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(item), 0, 4);
-        x = 4 - StringLength(gStringVar1);
+        ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(item), 0, 5);
+        x = 5 - StringLength(gStringVar1);
         loc = gStringVar4;
         while (x-- != 0)
             *loc++ = 0;
         StringExpandPlaceholders(loc, gText_PokedollarVar1);
-        BuyMenuPrint(windowId, FONT_SMALL, gStringVar4, 0x69, y, 0, 0, TEXT_SKIP_DRAW, 1);
+        BuyMenuPrint(windowId, FONT_SMALL, gStringVar4, 0x67, y, 0, 0, TEXT_SKIP_DRAW, 1);
     }
 }
 

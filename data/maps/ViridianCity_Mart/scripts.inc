@@ -59,7 +59,7 @@ ViridianCity_Mart_EventScript_Clerk::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart ViridianCity_Mart_Items
-	msgbox Text_PleaseComeAgain
+	
 	release
 	end
 

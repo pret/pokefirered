@@ -4417,7 +4417,7 @@ static void CB2_UseItem(void)
     {
         GiveMoveToMon(&gPlayerParty[gPartyMenu.slotId], ItemIdToBattleMoveId(gSpecialVar_ItemId));
         AdjustFriendship(&gPlayerParty[gPartyMenu.slotId], FRIENDSHIP_EVENT_LEARN_TMHM);
-        if (ITEM_HM01 < gSpecialVar_ItemId || gSpecialVar_ItemId > ITEM_HM08)
+        if (gSpecialVar_ItemId < ITEM_HM01 || ITEM_HM08 < gSpecialVar_ItemId)
             RemoveBagItem(gSpecialVar_ItemId, 1);
         SetMainCallback2(gPartyMenu.exitCallback);
     }
@@ -4437,7 +4437,7 @@ static void CB2_UseTMHMAfterForgettingMove(void)
         SetMonMoveSlot(mon, ItemIdToBattleMoveId(gSpecialVar_ItemId), moveIdx);
         AdjustFriendship(mon, FRIENDSHIP_EVENT_LEARN_TMHM);
         ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, move);
-        if (ITEM_HM01 < gSpecialVar_ItemId || gSpecialVar_ItemId > ITEM_HM08)
+        if (gSpecialVar_ItemId < ITEM_HM01 || ITEM_HM08 < gSpecialVar_ItemId)
             RemoveBagItem(gSpecialVar_ItemId, 1);
         SetMainCallback2(gPartyMenu.exitCallback);
     }
@@ -4939,7 +4939,7 @@ static void Task_LearnedMove(u8 taskId)
     if (learnMoveMethod == LEARN_VIA_TMHM)
     {
         AdjustFriendship(mon, FRIENDSHIP_EVENT_LEARN_TMHM);
-        if (ITEM_HM01 < gSpecialVar_ItemId || gSpecialVar_ItemId > ITEM_HM08)
+        if (gSpecialVar_ItemId < ITEM_HM01 || ITEM_HM08 < gSpecialVar_ItemId)
             RemoveBagItem(item, 1);
     }
     GetMonNickname(mon, gStringVar1);

@@ -1,4 +1,4 @@
-.equ REQUIRED_OWNED_MONS, 20
+.equ REQUIRED_OWNED_MONS, 40
 
 Route10_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route10_PokemonCenter_1F_OnTransition

@@ -2,7 +2,7 @@ Route15_WestEntrance_2F_Text_GiveItemIfCaughtEnough::
     .string "I'm one of PROF. OAK's RICH AIDES.\n"
     .string "So, {PLAYER}, let me ask you...\p"
     .string "Have you gathered data on at least\n"
-    .string "{STR_VAR_1} kinds of POKéMON?$"
+    .string "100 kinds of POKéMON?$"
 
 Route15_WestEntrance_2F_Text_GreatHereYouGo::
     .string "Congratulations, here you go!$"

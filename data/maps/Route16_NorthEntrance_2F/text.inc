@@ -21,7 +21,7 @@ Route16_NorthEntrance_2F_Text_GiveAmuletCoinIfCaught40::
     .string "I'm one of PROF. OAK's RICH AIDES.\n"
     .string "So, {PLAYER}, let me ask you...\p"
     .string "Have you gathered data on at least\n"
-    .string "40 kinds of POKéMON?$"
+    .string "80 kinds of POKéMON?$"
 
 Route16_NorthEntrance_2F_Text_GreatHereYouGo::
     .string "Congratulations, here you go!$"

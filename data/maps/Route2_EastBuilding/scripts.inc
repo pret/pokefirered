@@ -1,4 +1,4 @@
-.equ REQUIRED_SEEN_MONS, 10
+.equ REQUIRED_SEEN_MONS, 20
 
 Route2_EastBuilding_MapScripts::
 	.byte 0

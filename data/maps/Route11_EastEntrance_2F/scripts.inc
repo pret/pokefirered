@@ -1,4 +1,4 @@
-.equ REQUIRED_CAUGHT_MONS, 30
+.equ REQUIRED_CAUGHT_MONS, 60
 
 Route11_EastEntrance_2F_MapScripts::
 	.byte 0

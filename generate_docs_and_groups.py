@@ -877,11 +877,11 @@ Other changes:
  - Gain experience for catching Pokémon.
  - Oak's aides give large sums of money for completing the Pokédex:
    - 1k for 1 unique species.
-   - 10k for 10 unique species.
-   - 20k for 20 unique species.
-   - 30k for 30 unique species.
-   - 40k for 40 unique species.
-   - 50k for 50 unique species.
+   - 10k for 20 unique species.
+   - 20k for 40 unique species.
+   - 30k for 60 unique species.
+   - 40k for 80 unique species.
+   - 50k for 100 unique species.
  - Starter Pokémon are randomized based on the game seed. There is still one grass, water, and fire starter, and they will be chosen from the gen 1-3 starters.
  - Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
  - Gym leaders give the player a Rare Candy in addition to a TM upon earning a badge.

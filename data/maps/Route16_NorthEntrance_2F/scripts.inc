@@ -1,4 +1,4 @@
-.equ REQUIRED_CAUGHT_MONS, 40
+.equ REQUIRED_CAUGHT_MONS, 80
 
 Route16_NorthEntrance_2F_MapScripts::
 	.byte 0

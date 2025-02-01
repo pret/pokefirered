@@ -1,4 +1,4 @@
-.equ REQUIRED_CAUGHT_MONS, 50
+.equ REQUIRED_CAUGHT_MONS, 100
 
 Route15_WestEntrance_2F_MapScripts::
 	.byte 0

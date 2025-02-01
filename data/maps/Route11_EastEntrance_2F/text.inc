@@ -2,7 +2,7 @@ Route11_EastEntrance_2F_Text_GiveItemfinderIfCaught30::
     .string "I'm one of PROF. OAK's RICH AIDES.\n"
     .string "So, {PLAYER}, let me ask you...\p"
     .string "Have you gathered data on at least\n"
-    .string "30 kinds of POKéMON?$"
+    .string "60 kinds of POKéMON?$"
 
 Route11_EastEntrance_2F_Text_GreatHereYouGo::
     .string "Congratulations, here you go!$"

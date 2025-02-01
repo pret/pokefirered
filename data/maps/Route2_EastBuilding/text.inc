@@ -2,7 +2,7 @@ Route2_EastBuilding_Text_GiveHM05IfSeen10Mons::
     .string "I'm one of PROF. OAK's RICH AIDES.\n"
     .string "So, {PLAYER}, let me ask you...\p"
     .string "Have you gathered data on at least\n"
-    .string "10 kinds of POKéMON?$"
+    .string "20 kinds of POKéMON?$"
 
 Route2_EastBuilding_Text_GreatHereYouGo::
     .string "Congratulations, here you go!$"

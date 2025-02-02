@@ -1160,7 +1160,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
 
         for (i = 0; i < gPlayerPartyCount; i++)
         {
-            if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) || GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_SPINDA)
                 continue;
             if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_BAD_EGG))
                 continue;

@@ -1694,6 +1694,8 @@ bool8 ScrCmd_buffermovename(struct ScriptContext * ctx)
 // Keep in sync with sTMHMMoves!
 static const u16 sTMMoves[] =
 {
+    MOVE_WATERFALL,
+    MOVE_DIVE,
     MOVE_FOCUS_PUNCH,
     MOVE_DRAGON_CLAW,
     MOVE_WATER_PULSE,
@@ -1859,7 +1861,7 @@ bool8 ScrCmd_buffertmmovename(struct ScriptContext * ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 itemVarId = VarGet(ScriptReadHalfword(ctx));
 
-    StringCopy(sScriptStringVars[stringVarIndex], gMoveNames[sTMMoves[VarGet(itemVarId) - ITEM_TM001]]);
+    StringCopy(sScriptStringVars[stringVarIndex], gMoveNames[sTMMoves[VarGet(itemVarId) - ITEM_HM07]]);
     return FALSE;
 }
 

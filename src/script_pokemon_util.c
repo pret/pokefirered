@@ -47,10 +47,24 @@ void HealPlayerParty(void)
 
 u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 unused3)
 {
+    if (species == SPECIES_EGG) {
+      return ScriptGiveEgg(SPECIES_SPINDA);
+    }
+
     u16 nationalDexNum;
     int sentToPc;
     u8 heldItem[2];
     struct Pokemon *mon = AllocZeroed(sizeof(struct Pokemon));
+
+    if (level == 42) {
+      if (species == SPECIES_PIKACHU) {
+        level = 1;
+      } else if (species == SPECIES_DITTO) {
+        level = 50;
+      } else if (species == SPECIES_EEVEE || species == SPECIES_LAPRAS) {
+        level = 20;
+      }
+    }
 
     CreateMon(mon, species, level, 32, 0, 0, OT_ID_PLAYER_ID, 0);
     heldItem[0] = item;

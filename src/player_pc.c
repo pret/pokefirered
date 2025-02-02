@@ -168,7 +168,7 @@ void NewGameInitPCItems(void)
 
   AddBagItem(ITEM_COIN_CASE, 1);
   FlagSet(FLAG_GOT_COIN_CASE);
-  AddCoins(50);
+  AddCoins(100);
 
   gSaveBlock1Ptr->registeredItem = ITEM_OLD_ROD;
 }

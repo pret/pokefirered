@@ -399,8 +399,6 @@ EventScript_BodySlamTaught::
 	release
 	end
 
-.set LOCALID_CAPE_BRINK_TUTOR, 1
-
 TwoIsland_CapeBrink_House_EventScript_StarterTutor::
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording

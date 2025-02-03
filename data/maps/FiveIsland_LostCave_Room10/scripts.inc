@@ -1,5 +1,3 @@
-.set LOCALID_SELPHY, 1
-
 FiveIsland_LostCave_Room10_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, FiveIsland_LostCave_Room10_OnResume
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FiveIsland_LostCave_Room10_OnFrame
@@ -20,10 +18,10 @@ FiveIsland_LostCave_Room10_OnFrame::
 FiveIsland_LostCave_Room10_EventScript_FindSelphyScene::
 	lockall
 	textcolor NPC_TEXT_COLOR_FEMALE
-	applymovement LOCALID_SELPHY, FiveIsland_LostCave_Room10_Movement_SelphyWander
+	applymovement LOCALID_LOST_CAVE_SELPHY, FiveIsland_LostCave_Room10_Movement_SelphyWander
 	waitmovement 0
 	delay 100
-	applymovement LOCALID_SELPHY, FiveIsland_LostCave_Room10_Movement_SelphyApproach
+	applymovement LOCALID_LOST_CAVE_SELPHY, FiveIsland_LostCave_Room10_Movement_SelphyApproach
 	waitmovement 0
 	msgbox FiveIsland_LostCave_Room10_Text_SelphyIntro
 	goto_if_questlog FiveIsland_LostCave_Room10_EventScript_SelphyQuestLog

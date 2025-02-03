@@ -1,6 +1,3 @@
-.set LOCALID_SCIENTIST1, 1
-.set LOCALID_OLD_AMBER,  4
-
 PewterCity_Museum_1F_MapScripts::
 	.byte 0
 
@@ -22,14 +19,14 @@ PewterCity_Museum_1F_EventScript_Scientist1BehindCounter::
 
 PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter::
 	msgbox PewterCity_Museum_1F_Text_AmberContainsGeneticMatter
-	applymovement LOCALID_SCIENTIST1, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_MUSEUM_SCIENTIST1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
 PewterCity_Museum_1F_EventScript_ExplainAmber::
 	msgbox PewterCity_Museum_1F_Text_AmberIsFossilizedSap
-	applymovement LOCALID_SCIENTIST1, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_MUSEUM_SCIENTIST1, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -37,7 +34,7 @@ PewterCity_Museum_1F_EventScript_ExplainAmber::
 PewterCity_Museum_1F_EventScript_EntranceTriggerLeft::
 	lockall
 	setvar VAR_TEMP_1, 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto PewterCity_Museum_1F_EventScript_EntranceTrigger
 	end
@@ -45,7 +42,7 @@ PewterCity_Museum_1F_EventScript_EntranceTriggerLeft::
 PewterCity_Museum_1F_EventScript_EntranceTriggerMid::
 	lockall
 	setvar VAR_TEMP_1, 1
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto PewterCity_Museum_1F_EventScript_EntranceTrigger
 	end
@@ -53,7 +50,7 @@ PewterCity_Museum_1F_EventScript_EntranceTriggerMid::
 PewterCity_Museum_1F_EventScript_EntranceTriggerRight::
 	lockall
 	setvar VAR_TEMP_1, 2
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto PewterCity_Museum_1F_EventScript_EntranceTrigger
 	end
@@ -66,7 +63,7 @@ PewterCity_Museum_1F_EventScript_EntranceTrigger::
 	msgbox PewterCity_Museum_1F_Text_ComeAgain
 	closemessage
 	hidemoneybox
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ForcePlayerExit
+	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Movement_ForcePlayerExit
 	waitmovement 0
 	releaseall
 	end
@@ -89,17 +86,17 @@ PewterCity_Museum_1F_EventScript_TryPayForTicket::
 	end
 
 PewterCity_Museum_1F_EventScript_PlayerApproachCounterLeft::
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ApproachCounterLeft
+	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Movement_ApproachCounterLeft
 	waitmovement 0
 	return
 
 PewterCity_Museum_1F_EventScript_PlayerApproachCounterMid::
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ApproachCounterMid
+	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Movement_ApproachCounterMid
 	waitmovement 0
 	return
 
 PewterCity_Museum_1F_EventScript_PlayerApproachCounterRight::
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ApproachCounterRight
+	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Movement_ApproachCounterRight
 	waitmovement 0
 	return
 
@@ -107,7 +104,7 @@ PewterCity_Museum_1F_EventScript_NotEnoughMoney::
 	msgbox PewterCity_Museum_1F_Text_DontHaveEnoughMoney
 	closemessage
 	hidemoneybox
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Movement_ForcePlayerExit
+	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Movement_ForcePlayerExit
 	waitmovement 0
 	releaseall
 	end

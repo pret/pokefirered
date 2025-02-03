@@ -1340,7 +1340,7 @@ void SaveQuestLogData(void)
 void QL_UpdateObject(struct Sprite *sprite)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[sprite->data[0]];
-    if (objectEvent->localId == OBJ_EVENT_ID_PLAYER)
+    if (objectEvent->localId == LOCALID_PLAYER)
     {
         if (sMovementScripts[0][0] != MOVEMENT_ACTION_NONE)
         {

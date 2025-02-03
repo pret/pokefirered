@@ -55,6 +55,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CINNABAR_BILL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BILL",
       "x": 20,
@@ -69,6 +70,7 @@
       "flag": "FLAG_HIDE_CINNABAR_BILL"
     },
     {
+      "local_id": "LOCALID_CINNABAR_SEAGALLOP",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SEAGALLOP",
       "x": 23,
@@ -171,7 +173,7 @@
       "x": 14,
       "y": 12,
       "respawn_map": "MAP_CINNABAR_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": 1
+      "respawn_npc": "LOCALID_CINNABAR_NURSE"
     }
   ]
 }

@@ -37,6 +37,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_CERULEAN_POLICEMAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
       "x": 31,
@@ -51,6 +52,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CERULEAN_GRUNT",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 33,
@@ -93,6 +95,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CERULEAN_SLOWBRO",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SLOWBRO",
       "x": 32,
@@ -107,6 +110,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CERULEAN_LASS",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
       "x": 33,
@@ -135,6 +139,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CERULEAN_RIVAL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 22,
@@ -167,10 +172,11 @@
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 50,
       "y": 18,
-      "target_local_id": 10,
+      "target_local_id": "LOCALID_ROUTE9_CUT_TREE",
       "target_map": "MAP_ROUTE9"
     },
     {
+      "local_id": "LOCALID_CERULEAN_WOMAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 12,
@@ -185,6 +191,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CERULEAN_CAVE_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
       "x": 1,
@@ -420,7 +427,7 @@
       "x": 22,
       "y": 20,
       "respawn_map": "MAP_CERULEAN_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": 1
+      "respawn_npc": "LOCALID_CERULEAN_NURSE"
     }
   ]
 }

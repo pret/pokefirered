@@ -301,14 +301,5 @@
       "quantity": 1,
       "underfoot": false
     }
-  ],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_VERMILION_CITY",
-      "x": 15,
-      "y": 7,
-      "respawn_map": "MAP_VERMILION_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_VERMILION_NURSE"
-    }
   ]
 }

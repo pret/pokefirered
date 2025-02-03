@@ -28,3 +28,13 @@ $(DATA_SRC_SUBDIR)/items.h: $(DATA_SRC_SUBDIR)/items.json $(DATA_SRC_SUBDIR)/ite
 	$(JSONPROC) $^ $@
 
 $(C_BUILDDIR)/item.o: c_dep += $(DATA_SRC_SUBDIR)/items.h
+
+AUTO_GEN_TARGETS += $(DATA_SRC_SUBDIR)/heal_locations.h
+$(DATA_SRC_SUBDIR)/heal_locations.h: $(DATA_SRC_SUBDIR)/heal_locations.json $(DATA_SRC_SUBDIR)/heal_locations.json.txt
+	$(JSONPROC) $^ $@
+
+$(C_BUILDDIR)/heal_location.o: c_dep += $(DATA_SRC_SUBDIR)/heal_locations.h
+
+AUTO_GEN_TARGETS += include/constants/heal_locations.h
+include/constants/heal_locations.h: $(DATA_SRC_SUBDIR)/heal_locations.json $(DATA_SRC_SUBDIR)/heal_locations.constants.json.txt
+	$(JSONPROC) $^ $@

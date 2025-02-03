@@ -450,17 +450,9 @@ void SortDesc(u8 arr[], u8 n) {
 u8 ScaledWildLevel(u8 level) {
   u8 badgeCount, levelSum, i, idx;
   u8 partyLevels[6];
-  bool8 seenDitto = FALSE;
 
   for (i = 0; i < gPlayerPartyCount; ++i) {
     partyLevels[i] = gPlayerParty[i].level;
-    if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_DITTO && level >= 50) {
-      if (seenDitto) {
-        // Player is using too many Game Corner Dittos.
-        return 2;
-      }
-      seenDitto = TRUE;
-    }
   }
   SortDesc(partyLevels, gPlayerPartyCount);
 

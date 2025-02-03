@@ -60,7 +60,8 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
       if (species == SPECIES_PIKACHU) {
         level = 1;
       } else if (species == SPECIES_DITTO) {
-        level = 50;
+        level = FlagGet(FLAG_BOUGHT_DITTO) ? 2 : 50;
+        FlagSet(FLAG_BOUGHT_DITTO);
       } else if (species == SPECIES_EEVEE || species == SPECIES_LAPRAS) {
         level = 20;
       }

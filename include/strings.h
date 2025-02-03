@@ -394,6 +394,7 @@ extern const u8 gText_PkmnAlreadySelected[];
 extern const u8 gText_PkmnCantSwitchOut[];
 extern const u8 gText_LevelCap[];
 extern const u8 gText_RequiredAtBadge[];
+extern const u8 gText_NoBadgeRequirement[];
 
 // credits
 extern const u8 gString_Dummy[];

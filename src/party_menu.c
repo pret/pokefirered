@@ -448,11 +448,19 @@ void SortDesc(u8 arr[], u8 n) {
 }
 
 u8 ScaledWildLevel(u8 level) {
-  u8 numMons, levelSum, i;
+  u8 badgeCount, levelSum, i, idx;
   u8 partyLevels[6];
+  bool8 seenDitto = FALSE;
 
   for (i = 0; i < gPlayerPartyCount; ++i) {
     partyLevels[i] = gPlayerParty[i].level;
+    if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_DITTO && level >= 50) {
+      if (seenDitto) {
+        // Player is using too many Game Corner Dittos.
+        return 2;
+      }
+      seenDitto = TRUE;
+    }
   }
   SortDesc(partyLevels, gPlayerPartyCount);
 
@@ -464,22 +472,22 @@ u8 ScaledWildLevel(u8 level) {
 
   // Denominator is the number of Pokemon that
   // contribute to the level cap.
-  numMons = BadgeCount() + 1;
-  if (numMons > gPlayerPartyCount) {
-    numMons = gPlayerPartyCount;
-  }
+  badgeCount = BadgeCount();
 
-  // Numerator is sum of party levels, but with the
-  // player's highest Pokemon replaced with the level
-  // the wild Pokemon should be at.
+  // Numerator is `level` plus the sum of party levels
+  // excluding mons at sorted party locations 1 and 6,
+  // weighted based on badge count.
   levelSum = level;
-
-  // Start at 1 to exclude the player's highest mon.
-  for (i = 1; i < numMons; ++i) {
-    levelSum += partyLevels[i];
+  for (i = 0; i < badgeCount; ++i) {
+    idx = 1 + (i % 4);
+    if (idx <= gPlayerPartyCount) {
+      levelSum += partyLevels[idx];
+    } else {
+      levelSum += level;
+    }
   }
 
-  return levelSum / numMons;
+  return levelSum / (badgeCount + 1);
 }
 
 u8 CheckLevelCap(u8 level) {
@@ -490,8 +498,8 @@ u8 CheckLevelCap(u8 level) {
   u8 monsInNextRange = 0;
 
   u8 requiredMonsInRange = BadgeCount();
-  if (requiredMonsInRange > 5) {
-    requiredMonsInRange = 5;
+  if (requiredMonsInRange > 4) {
+    requiredMonsInRange = 4;
   }
 
   for (i = 0; i < gPlayerPartyCount; ++i) {
@@ -857,9 +865,13 @@ static void RenderPartyMenuBox(u8 slot)
         if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) == SPECIES_NONE)
         {
 
-            ConvertIntToDecimalStringN(gStringVar2, slot, STR_CONV_MODE_LEFT_ALIGN, 3);
-            StringCopy(gStringVar1, gText_RequiredAtBadge);
-            StringAppend(gStringVar1, gStringVar2);
+            if (slot < 5) {
+                ConvertIntToDecimalStringN(gStringVar2, slot, STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringCopy(gStringVar1, gText_RequiredAtBadge);
+                StringAppend(gStringVar1, gStringVar2);
+            } else {
+                StringCopy(gStringVar1, gText_NoBadgeRequirement);
+            }
 
             DrawEmptySlot(sPartyMenuBoxes[slot].windowId);
             DisplayPartyPokemonBarDetail(sPartyMenuBoxes[slot].windowId, gStringVar1, 0, sPartyMenuBoxes[slot].infoRects->dimensions);

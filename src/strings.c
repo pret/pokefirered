@@ -260,6 +260,7 @@ const u8 gText_CantBeUsedOnPkmn[] = _("This can't be used on\nthat POKéMON.{PAU
 const u8 gText_PkmnCantSwitchOut[] = _("{STR_VAR_1} can't be switched\nout!{PAUSE_UNTIL_PRESS}");
 const u8 gText_LevelCap[] = _("CAP ");
 const u8 gText_RequiredAtBadge[] = _("required at badge ");
+const u8 gText_NoBadgeRequirement[] = _("no badge requirement");
 const u8 gText_PkmnAlreadyInBattle[] = _("{STR_VAR_1} is already\nin battle!{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnAlreadySelected[] = _("{STR_VAR_1} has already been\nselected.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnHasNoEnergy[] = _("{STR_VAR_1} has no energy\nleft to battle!{PAUSE_UNTIL_PRESS}");

@@ -3876,10 +3876,14 @@ static void Cmd_playanimation(void)
     argumentPtr = T2_READ_PTR(gBattlescriptCurrInstr + 3);
 
     if (gBattlescriptCurrInstr[2] == B_ANIM_STATS_CHANGE
-     || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
-     || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE
-     || gBattlescriptCurrInstr[2] == B_ANIM_SILPH_SCOPED)
+     || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE)
     {
+        // BtlController_EmitBattleAnimation(BUFFER_A, gBattlescriptCurrInstr[2], *argumentPtr);
+        // MarkBattlerForControllerExec(gActiveBattler);
+        gBattlescriptCurrInstr += 7;
+    }
+    else if (gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE
+          || gBattlescriptCurrInstr[2] == B_ANIM_SILPH_SCOPED) {
         BtlController_EmitBattleAnimation(BUFFER_A, gBattlescriptCurrInstr[2], *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr += 7;
@@ -3894,8 +3898,8 @@ static void Cmd_playanimation(void)
           || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES
           || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES)
     {
-        BtlController_EmitBattleAnimation(BUFFER_A, gBattlescriptCurrInstr[2], *argumentPtr);
-        MarkBattlerForControllerExec(gActiveBattler);
+        // BtlController_EmitBattleAnimation(BUFFER_A, gBattlescriptCurrInstr[2], *argumentPtr);
+        // MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr += 7;
     }
     else if (gStatuses3[gActiveBattler] & STATUS3_SEMI_INVULNERABLE)

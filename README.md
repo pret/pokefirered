@@ -53,6 +53,7 @@ Other changes:
    - Unown -> Zubat
    - Smeargle -> Zubat
  - Surge's gym "puzzle" is simplified. Player always find the second switch on their first try.
+ - Fishing rod hit rate is increased from 50% to 75%.
  - Misc. bugfixes included in the https://github.com/pret/pokefirered `firered_rev1_modern` build.
 
 ## Level band / level cap

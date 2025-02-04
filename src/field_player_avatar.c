@@ -1770,7 +1770,7 @@ static bool8 Fishing6(struct Task *task)
     task->tStep++;
     bite = FALSE;
 
-    if (!DoesCurrentMapHaveFishingMons() || Random() & 1)
+    if (!DoesCurrentMapHaveFishingMons() || (Random() % 4) == 0)
     {
         task->tStep = FISHING_NO_BITE;
     }

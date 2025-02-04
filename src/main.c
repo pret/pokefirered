@@ -301,15 +301,11 @@ static void ReadKeys(void)
     gMain.heldKeysRaw = keyInput;
     gMain.heldKeys = gMain.heldKeysRaw;
 
-    // Always remap L to A if the L=A option is enabled.
-    // if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
-    // {
-        if (JOY_NEW(L_BUTTON))
-            gMain.newKeys |= A_BUTTON;
+    if (JOY_NEW(L_BUTTON))
+        gMain.newKeys |= A_BUTTON;
 
-        if (JOY_HELD(L_BUTTON))
-            gMain.heldKeys |= A_BUTTON;
-    // }
+    if (JOY_HELD(L_BUTTON))
+        gMain.heldKeys |= A_BUTTON;
 
     if (JOY_NEW(gMain.watchedKeysMask))
         gMain.watchedKeysPressed = TRUE;

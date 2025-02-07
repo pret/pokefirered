@@ -51,5 +51,6 @@ void Thunderstorm_InitVars(void);
 void Thunderstorm_InitAll(void);
 void Downpour_InitVars(void);
 void Downpour_InitAll(void);
+u8 UpdateShadowColor(u16 color);
 
 #endif //GUARD_FIELD_WEATHER_EFFECTS_H

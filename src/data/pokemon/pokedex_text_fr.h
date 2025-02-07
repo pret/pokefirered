@@ -1088,12 +1088,12 @@ const u8 gMeganiumPokedexText[] = _(
 
 const u8 gMeganiumPokedexTextUnused[] = _("");
 
-const u8 gCyndaquilPokedexText[] = _(
+const u8 gFLAMEBEARPokedexText[] = _(
     "It usually stays hunched over. If it is\n"
     "angry or surprised, it shoots flames out\n"
     "of its back.");
 
-const u8 gCyndaquilPokedexTextUnused[] = _("");
+const u8 gFLAMEBEARPokedexTextUnused[] = _("");
 
 const u8 gQuilavaPokedexText[] = _(
     "This POKéMON is fully covered by\n"
@@ -1109,12 +1109,12 @@ const u8 gTyphlosionPokedexText[] = _(
 
 const u8 gTyphlosionPokedexTextUnused[] = _("");
 
-const u8 gTotodilePokedexText[] = _(
+const u8 gCRUISEPokedexText[] = _(
     "It is small but rough and tough. It won't\n"
     "hesitate to take a bite out of anything\n"
     "that moves.");
 
-const u8 gTotodilePokedexTextUnused[] = _("");
+const u8 gCRUISEPokedexTextUnused[] = _("");
 
 const u8 gCroconawPokedexText[] = _(
     "It opens its huge jaws wide when\n"

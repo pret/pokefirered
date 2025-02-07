@@ -4501,7 +4501,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
-    [SPECIES_CYNDAQUIL] =
+    [SPECIES_FLAMEBEAR] =
     {
         .baseHP = 39,
         .baseAttack = 52,
@@ -4588,7 +4588,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = FALSE,
     },
-    [SPECIES_TOTODILE] =
+    [SPECIES_CRUISE] =
     {
         .baseHP = 50,
         .baseAttack = 65,

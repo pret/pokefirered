@@ -31,7 +31,7 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall =
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_SHADOW,
     .oam = &gObjectEventBaseOam_16x8,
     .anims = sAnimTable_Shadow,
     .images = sPicTable_ShadowMedium,
@@ -42,7 +42,7 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium =
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_SHADOW,
     .oam = &gObjectEventBaseOam_32x8,
     .anims = sAnimTable_Shadow,
     .images = sPicTable_ShadowLarge,
@@ -53,7 +53,18 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge =
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowExtraLarge =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_SHADOW,
+    .oam = &gObjectEventBaseOam_64x32,
+    .anims = sAnimTable_Shadow,
+    .images = sPicTable_ShadowExtraLarge,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateShadowFieldEffect,
+};
+
+const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowNone =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_SHADOW,
     .oam = &gObjectEventBaseOam_64x32,
     .anims = sAnimTable_Shadow,
     .images = sPicTable_ShadowExtraLarge,

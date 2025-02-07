@@ -920,8 +920,8 @@ Cry_Meganium::
 	.incbin "sound/direct_sound_samples/cries/meganium.bin"
 
 	.align 2
-Cry_Cyndaquil::
-	.incbin "sound/direct_sound_samples/cries/cyndaquil.bin"
+Cry_FLAMEBEAR::
+	.incbin "sound/direct_sound_samples/cries/FLAMEBEAR.bin"
 
 	.align 2
 Cry_Quilava::
@@ -932,8 +932,8 @@ Cry_Typhlosion::
 	.incbin "sound/direct_sound_samples/cries/typhlosion.bin"
 
 	.align 2
-Cry_Totodile::
-	.incbin "sound/direct_sound_samples/cries/totodile.bin"
+Cry_CRUISE::
+	.incbin "sound/direct_sound_samples/cries/CRUISE.bin"
 
 	.align 2
 Cry_Croconaw::

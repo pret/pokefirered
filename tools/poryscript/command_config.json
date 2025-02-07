@@ -1,0 +1,97 @@
+{
+  "autovar_commands": {
+    "specialvar": {
+      "var_name_arg_position": 0
+    },
+    "getpartysize": {
+      "var_name": "VAR_RESULT"
+    },
+    "additem": {
+      "var_name": "VAR_RESULT"
+    },
+    "removeitem": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkitemspace": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkitem": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkitemtype": {
+      "var_name": "VAR_RESULT"
+    },
+    "addpcitem": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkpcitem": {
+      "var_name": "VAR_RESULT"
+    },
+    "adddecoration": {
+      "var_name": "VAR_RESULT"
+    },
+    "removedecoration": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkdecor": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkdecorspace": {
+      "var_name": "VAR_RESULT"
+    },
+    "yesnobox": {
+      "var_name": "VAR_RESULT"
+    },
+    "multichoice": {
+      "var_name": "VAR_RESULT"
+    },
+    "multichoicedefault": {
+      "var_name": "VAR_RESULT"
+    },
+    "multichoicegrid": {
+      "var_name": "VAR_RESULT"
+    },
+    "givemon": {
+      "var_name": "VAR_RESULT"
+    },
+    "giveegg": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkpartymove": {
+      "var_name": "VAR_RESULT"
+    },
+    "choosecontestmon": {
+      "var_name": "VAR_0x8004"
+    },
+    "random": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkmoney": {
+      "var_name": "VAR_RESULT"
+    },
+    "getpokenewsactive": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkplayergender": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkcoins": {
+      "var_name_arg_position": 0
+    },
+    "addcoins": {
+      "var_name": "VAR_RESULT"
+    },
+    "removecoins": {
+      "var_name": "VAR_RESULT"
+    },
+    "dowildbattle": {
+      "var_name": "VAR_RESULT"
+    },
+    "checkmodernfatefulencounter": {
+      "var_name": "VAR_RESULT"
+    },
+    "msgbox": {
+      "var_name": "VAR_RESULT"
+    }
+  }
+}

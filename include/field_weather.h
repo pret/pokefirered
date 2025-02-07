@@ -5,6 +5,7 @@
 #include "constants/field_weather.h"
 
 #define TAG_WEATHER_START 0x1200
+
 enum {
     GFXTAG_CLOUD = TAG_WEATHER_START,
     GFXTAG_FOG_H,
@@ -44,7 +45,8 @@ struct Weather
     s8 gammaTargetIndex;
     u8 gammaStepDelay;
     u8 gammaStepFrameCounter;
-    u16 fadeDestColor;
+    u16 fadeDestColor:15;
+    u16 noShadows:1;
     u8 palProcessingState;
     u8 fadeScreenCounter;
     bool8 readyForInit;
@@ -134,6 +136,7 @@ void DoCurrentWeather(void);
 void SetSavedWeatherFromCurrMapHeader(void);
 void SlightlyDarkenPalsInWeather(u16 *, u16 *, u32);
 void PlayRainStoppingSoundEffect(void);
+bool8 IsWeatherNotFadingIn(void);
 bool8 IsWeatherNotFadingIn(void);
 void SetWeatherScreenFadeOut(void);
 void WeatherProcessingIdle(void);

@@ -324,7 +324,7 @@ static const u16 sEasyChatWordsByLetter_C[] = {
     EC_WORD_CUTE,
     EC_WORD_CUTE_CHARM,
     EC_WORD_CUTENESS,
-    EC_POKEMON(CYNDAQUIL),
+    EC_POKEMON(FLAMEBEAR),
 };
 
 static const u16 sEasyChatWordsByLetter_D[] = {
@@ -1716,7 +1716,7 @@ static const u16 sEasyChatWordsByLetter_T[] = {
     EC_MOVE(TORMENT),
     EC_WORD_TORRENT,
     EC_WORD_TOTALLY,
-    EC_POKEMON(TOTODILE),
+    EC_POKEMON(CRUISE),
     EC_WORD_TOUGH,
     EC_WORD_TOUGHNESS,
     EC_WORD_TOURNAMENT,

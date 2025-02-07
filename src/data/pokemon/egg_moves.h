@@ -506,7 +506,7 @@ const u16 gEggMoves[] = {
               MOVE_INGRAIN,
               MOVE_GRASS_WHISTLE),
 
-    egg_moves(CYNDAQUIL,
+    egg_moves(FLAMEBEAR,
               MOVE_FURY_SWIPES,
               MOVE_QUICK_ATTACK,
               MOVE_REVERSAL,
@@ -516,7 +516,7 @@ const u16 gEggMoves[] = {
               MOVE_HOWL,
               MOVE_CRUSH_CLAW),
 
-    egg_moves(TOTODILE,
+    egg_moves(CRUISE,
               MOVE_CRUNCH,
               MOVE_THRASH,
               MOVE_HYDRO_PUMP,

@@ -8,6 +8,7 @@
 #include "task.h"
 #include "trig.h"
 #include "constants/field_weather.h"
+#include "constants/map_types.h"
 #include "constants/weather.h"
 #include "constants/songs.h"
 
@@ -218,7 +219,9 @@ static void Task_WeatherInit(u8 taskId)
 
 static void Task_WeatherMain(u8 taskId)
 {
-    if (gWeatherPtr->currWeather != gWeatherPtr->nextWeather)
+    u8 i;
+	
+	if (gWeatherPtr->currWeather != gWeatherPtr->nextWeather)
     {
         if (!sWeatherFuncs[gWeatherPtr->currWeather].finish()
             /*&& gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_SCREEN_FADING_OUT*/)
@@ -229,6 +232,12 @@ static void Task_WeatherMain(u8 taskId)
             gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_CHANGING_WEATHER;
             gWeatherPtr->currWeather = gWeatherPtr->nextWeather;
             gWeatherPtr->weatherChangeComplete = TRUE;
+			/*Set all NPCs to trigger ground in order to check for shadow
+            This is done because the weather can finish changing when the player is not moving
+            which may cause the shadow to not show*/
+            for (i = 0; i < NELEMS(gObjectEvents); i++) {
+                (&gObjectEvents[i])->triggerGroundEffectsOnMove = TRUE;
+            }
         }
     }
     else
@@ -242,6 +251,8 @@ static void Task_WeatherMain(u8 taskId)
 
 static void None_Init(void)
 {
+    Weather_SetBlendCoeffs(10, 10);
+    gWeatherPtr->noShadows = FALSE;
     gWeatherPtr->gammaTargetIndex = 0;
     gWeatherPtr->gammaStepDelay = 0;
 }
@@ -812,18 +823,18 @@ void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes)
     {
         gWeatherPtr->fadeDestColor = fadeColor;
         if (useWeatherPal)
-            gWeatherPtr->fadeScreenCounter = 0;
-        else
             BeginNormalPaletteFade(selectedPalettes, delay, 16, 0, fadeColor);
 
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_IN;
         gWeatherPtr->fadeInActive = 1;
         gWeatherPtr->fadeInCounter = 0;
-        Weather_SetBlendCoeffs(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
+        if (gMapHeader.mapType != MAP_TYPE_INDOOR && gWeatherPtr->currWeather == WEATHER_NONE)
+            Weather_SetBlendCoeffs(10, 10);
+        else
+            Weather_SetBlendCoeffs(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
         gWeatherPtr->readyForInit = TRUE;
     }
 }
-
 
 bool8 IsWeatherNotFadingIn(void)
 {

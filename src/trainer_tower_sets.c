@@ -5808,7 +5808,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_Unused1 = {
 					.friendship = 255
 				},
 				{
-					.species = SPECIES_TOTODILE,
+					.species = SPECIES_CRUISE,
 					.heldItem = ITEM_BRIGHT_POWDER,
 					.moves = {MOVE_SURF, MOVE_PROTECT, MOVE_TOXIC, MOVE_DOUBLE_TEAM},
 					.hpEV = 110,
@@ -5826,7 +5826,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_Unused1 = {
 					.spDefenseIV = 15,
 					.abilityNum = 0,
 					.personality = 0x2D, // MALE CALM
-					.nickname = _("TOTODILE"),
+					.nickname = _("CRUISE"),
 					.friendship = 255
 				},
 			}

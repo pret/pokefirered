@@ -65,3 +65,6 @@ PalletTown_Text_OakYouEnjoyingTraveling::
     .string "Good for you, good for you.\n"
     .string "Hohoho.$"
 
+PalletTown_Text_BagGirl::
+.string "Wait! Is that a new BAG?\n"
+.string "Did your mom buy it for you?$"

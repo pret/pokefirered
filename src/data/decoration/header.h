@@ -720,14 +720,14 @@ const struct Decoration gDecorations[] = {
         DecorDesc_TOGEPI_DOLL,
         DecorGfx_TOGEPI_DOLL
     }, {
-        DECOR_CYNDAQUIL_DOLL,
-        _("CYNDAQUIL DOLL"),
+        DECOR_FLAMEBEAR_DOLL,
+        _("FLAMEBEAR DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
         3000,
-        DecorDesc_CYNDAQUIL_DOLL,
-        DecorGfx_CYNDAQUIL_DOLL
+        DecorDesc_FLAMEBEAR_DOLL,
+        DecorGfx_FLAMEBEAR_DOLL
     }, {
         DECOR_CHIKORITA_DOLL,
         _("CHIKORITA DOLL"),
@@ -738,14 +738,14 @@ const struct Decoration gDecorations[] = {
         DecorDesc_CHIKORITA_DOLL,
         DecorGfx_CHIKORITA_DOLL
     }, {
-        DECOR_TOTODILE_DOLL,
-        _("TOTODILE DOLL"),
+        DECOR_CRUISE_DOLL,
+        _("CRUISE DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
         3000,
-        DecorDesc_TOTODILE_DOLL,
-        DecorGfx_TOTODILE_DOLL
+        DecorDesc_CRUISE_DOLL,
+        DecorGfx_CRUISE_DOLL
     }, {
         DECOR_JIGGLYPUFF_DOLL,
         _("JIGGLYPUFF DOLL"),

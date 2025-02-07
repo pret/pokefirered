@@ -142,7 +142,7 @@ static const u16 sDexCategory_GrasslandPkmn_Page24[] = {
 };
 
 static const u16 sDexCategory_GrasslandPkmn_Page25[] = {
-    SPECIES_CYNDAQUIL,
+    SPECIES_FLAMEBEAR,
     SPECIES_QUILAVA,
     SPECIES_TYPHLOSION,
 };
@@ -387,7 +387,7 @@ static const u16 sDexCategory_WatersEdgePkmn_Page13[] = {
 };
 
 static const u16 sDexCategory_WatersEdgePkmn_Page14[] = {
-    SPECIES_TOTODILE,
+    SPECIES_CRUISE,
     SPECIES_CROCONAW,
     SPECIES_FERALIGATR,
 };

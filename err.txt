@@ -1,0 +1,97 @@
+src/scrcmd.o: In function `ScrCmd_fadescreen':
+(.text+0xa76): undefined reference to `FadeScreen'
+src/scrcmd.o: In function `ScrCmd_fadescreenspeed':
+(.text+0xaa6): undefined reference to `FadeScreen'
+src/start_menu.o: In function `StartMenu_FadeScreenIfLeavingOverworld':
+(.text+0x67c): undefined reference to `FadeScreen'
+src/field_weather.o: In function `LoadCustomWeatherSpritePalette':
+(.text+0xe2c): undefined reference to `UpdateSpritePaletteWithWeather'
+src/field_fadetransition.o: In function `WarpFadeInScreen':
+(.text+0x76): undefined reference to `FadeScreen'
+src/field_fadetransition.o: In function `WarpFadeInScreen':
+(.text+0x88): undefined reference to `FadeScreen'
+src/field_fadetransition.o: In function `WarpFadeInScreenWithDelay':
+(.text+0xca): undefined reference to `FadeScreen'
+src/field_fadetransition.o: In function `WarpFadeInScreenWithDelay':
+(.text+0xdc): undefined reference to `FadeScreen'
+src/field_fadetransition.o: In function `FadeInFromBlack':
+(.text+0xf6): undefined reference to `FadeScreen'
+src/field_fadetransition.o:(.text+0x148): more undefined references to `FadeScreen' follow
+src/field_fadetransition.o: In function `FieldFadeTransitionBackgroundEffectIsFinished':
+(.text+0x906): undefined reference to `IsWeatherNotFadingIn'
+src/field_fadetransition.o: In function `Task_ReturnFromLinkRoomWarp':
+(.text+0xb9a): undefined reference to `FadeScreen'
+src/cable_club.o: In function `Task_StartWiredCableClubBattle':
+(.text+0xc18): undefined reference to `FadeScreen'
+src/cable_club.o: In function `Task_StartWirelessCableClubBattle':
+(.text+0xd5c): undefined reference to `FadeScreen'
+src/cable_club.o: In function `Task_StartWiredTrade':
+(.text+0x1142): undefined reference to `FadeScreen'
+src/cable_club.o: In function `Task_StartWirelessTrade':
+(.text+0x11da): undefined reference to `FadeScreen'
+src/field_effect.o: In function `FieldEffectScript_LoadFadedPal':
+(.text+0x208): undefined reference to `UpdateSpritePaletteWithWeather'
+src/field_effect.o: In function `Task_UseFly':
+(.text+0xee4): undefined reference to `IsWeatherNotFadingIn'
+src/field_effect.o: In function `FallWarpEffect_2':
+(.text+0x1124): undefined reference to `IsWeatherNotFadingIn'
+src/field_effect.o: In function `LavaridgeGymB1FWarpExitEffect_2':
+(.text+0x1e38): undefined reference to `IsWeatherNotFadingIn'
+src/field_effect.o: In function `EscapeRopeWarpInEffect_Init':
+(.text+0x2614): undefined reference to `IsWeatherNotFadingIn'
+src/field_effect.o: In function `TeleportInFieldEffectTask1':
+(.text+0x29cc): undefined reference to `IsWeatherNotFadingIn'
+src/pokemon_storage_system_menu.o:(.text+0x594): more undefined references to `IsWeatherNotFadingIn' follow
+src/pokemon_storage_system_menu.o: In function `Task_PCMainMenu':
+(.text+0x6e8): undefined reference to `FadeScreen'
+src/shop.o: In function `Task_HandleShopMenuBuy':
+(.text+0x1c2): undefined reference to `FadeScreen'
+src/shop.o: In function `Task_HandleShopMenuSell':
+(.text+0x1fe): undefined reference to `FadeScreen'
+src/shop.o: In function `Task_ReturnToShopMenu':
+(.text+0x2e2): undefined reference to `IsWeatherNotFadingIn'
+src/item_use.o: In function `Task_WaitFadeIn_CallItemUseOnFieldCB':
+(.text+0xe6): undefined reference to `IsWeatherNotFadingIn'
+src/item_use.o: In function `Task_ItemUseWaitForFade':
+(.text+0x20a): undefined reference to `IsWeatherNotFadingIn'
+src/item_use.o: In function `FieldUseFunc_TmCase':
+(.text+0x804): undefined reference to `FadeScreen'
+src/item_use.o: In function `FieldUseFunc_BerryPouch':
+(.text+0x89c): undefined reference to `FadeScreen'
+src/item_use.o: In function `FieldUseFunc_TeachyTv':
+(.text+0x97c): undefined reference to `FadeScreen'
+src/item_use.o: In function `FieldUseFunc_TownMap':
+(.text+0xcdc): undefined reference to `FadeScreen'
+src/item_use.o: In function `FieldUseFunc_FameChecker':
+(.text+0xd88): undefined reference to `FadeScreen'
+src/field_effect_helpers.o: In function `LoadObjectRegularReflectionPalette':
+(.text+0x1c0): undefined reference to `UpdateSpritePaletteWithWeather'
+src/field_effect_helpers.o: In function `LoadObjectHighBridgeReflectionPalette':
+(.text+0x1ec): undefined reference to `UpdateSpritePaletteWithWeather'
+src/player_pc.o: In function `Task_PlayerPcDepositItem':
+(.text+0x574): undefined reference to `FadeScreen'
+src/player_pc.o: In function `Task_ReturnToItemStorageSubmenu':
+(.text+0x58a): undefined reference to `IsWeatherNotFadingIn'
+src/player_pc.o: In function `Task_WithdrawItemBeginFade':
+(.text+0x6de): undefined reference to `FadeScreen'
+src/player_pc.o: In function `Task_PlayerPcReadMail':
+(.text+0xb5c): undefined reference to `FadeScreen'
+src/player_pc.o: In function `Task_WaitFadeAndReturnToMailboxPcInputHandler':
+(.text+0xbde): undefined reference to `IsWeatherNotFadingIn'
+src/player_pc.o: In function `Task_PlayerPcGiveMailToMon':
+(.text+0xdcc): undefined reference to `FadeScreen'
+src/credits.o: In function `RollCredits':
+(.text+0x496): undefined reference to `FadeScreen'
+src/map_preview_screen.o: In function `Task_RunMapPreviewScreenForest':
+(.text+0x366): undefined reference to `IsWeatherNotFadingIn'
+src/quest_log.o: In function `DoSceneEndTransition':
+(.text+0x10be): undefined reference to `FadeScreen'
+src/quest_log.o: In function `DoSkipToEndTransition':
+(.text+0x162e): undefined reference to `FadeScreen'
+src/union_room.o: In function `Task_RunScriptAndFadeToActivity':
+(.text+0x20e6): undefined reference to `FadeScreen'
+src/party_menu.o: In function `Task_FieldMoveWaitForFade':
+(.text+0x5e8a): undefined reference to `IsWeatherNotFadingIn'
+src/party_menu.o: In function `Task_PartyMenuWaitForFade':
+(.text+0x99be): undefined reference to `IsWeatherNotFadingIn'
+make: *** [Makefile:375: pokefirered.elf] Error 1

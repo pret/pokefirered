@@ -153,7 +153,8 @@
 #define OBJ_EVENT_GFX_DEOXYS_A 149
 #define OBJ_EVENT_GFX_DEOXYS_N 150
 #define OBJ_EVENT_GFX_SS_ANNE 151
-
+#define OBJ_EVENT_GFX_SS_TIDAL
+#define OBJ_EVENT_GFX_TRUCK
 #define NUM_OBJ_EVENT_GFX     152
 
 // These are dynamic object gfx ids.
@@ -181,6 +182,7 @@
 #define SHADOW_SIZE_M   1
 #define SHADOW_SIZE_L   2
 #define SHADOW_SIZE_XL  3
+#define SHADOW_SIZE_NONE 3
 
 #define F_INANIMATE                        (1 << 6)
 #define F_DISABLE_REFLECTION_PALETTE_LOAD  (1 << 7)

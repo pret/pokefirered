@@ -1117,7 +1117,7 @@ static const u16 sTutorLearnsets[] =
                        | TUTOR(MOVE_MIMIC)
                        | TUTOR(MOVE_SUBSTITUTE),
 
-    [SPECIES_CYNDAQUIL] = TUTOR(MOVE_BODY_SLAM)
+    [SPECIES_FLAMEBEAR] = TUTOR(MOVE_BODY_SLAM)
                         | TUTOR(MOVE_DOUBLE_EDGE)
                         | TUTOR(MOVE_MIMIC)
                         | TUTOR(MOVE_SUBSTITUTE),
@@ -1137,7 +1137,7 @@ static const u16 sTutorLearnsets[] =
                          | TUTOR(MOVE_ROCK_SLIDE)
                          | TUTOR(MOVE_SUBSTITUTE),
 
-    [SPECIES_TOTODILE] = TUTOR(MOVE_MEGA_PUNCH)
+    [SPECIES_CRUISE] = TUTOR(MOVE_MEGA_PUNCH)
                        | TUTOR(MOVE_SWORDS_DANCE)
                        | TUTOR(MOVE_MEGA_KICK)
                        | TUTOR(MOVE_BODY_SLAM)

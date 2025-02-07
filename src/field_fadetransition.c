@@ -793,6 +793,7 @@ static void Task_StairWarp(u8 taskId)
     s16 *data = gTasks[taskId].data;
     struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     struct Sprite *playerSpr = &gSprites[gPlayerAvatar.spriteId];
+    playerObj->noShadow = TRUE;
     switch (data[0])
     {
     case 0:

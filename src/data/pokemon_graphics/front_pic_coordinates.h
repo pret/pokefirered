@@ -775,10 +775,10 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 0,
     },
-    [SPECIES_CYNDAQUIL] =
+    [SPECIES_FLAMEBEAR] =
     {
         .size = MON_COORDS_SIZE(40, 40),
-        .y_offset = 14,
+        .y_offset = 2,
     },
     [SPECIES_QUILAVA] =
     {
@@ -790,7 +790,7 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(56, 64),
         .y_offset = 0,
     },
-    [SPECIES_TOTODILE] =
+    [SPECIES_CRUISE] =
     {
         .size = MON_COORDS_SIZE(40, 40),
         .y_offset = 15,

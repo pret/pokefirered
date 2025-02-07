@@ -124,6 +124,9 @@ static void Task_DrawEscalator(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 state;
+
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    playerObj->noShadow = TRUE;
     
     tDrawingEscalator = TRUE;
 
@@ -163,6 +166,7 @@ static void Task_DrawEscalator(u8 taskId)
         DrawWholeMapView();
         tTransitionStage = (tTransitionStage + 1) % ESCALATOR_STAGES;
         tDrawingEscalator = FALSE;
+        playerObj->noShadow = FALSE;
     }
 }
 

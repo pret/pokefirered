@@ -2015,13 +2015,13 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 2,
     },
 
-    [NATIONAL_DEX_CYNDAQUIL] =
+    [NATIONAL_DEX_FLAMEBEAR] =
     {
-        .categoryName = _("FIRE MOUSE"),
+        .categoryName = _("BEAR"),
         .height = 5,
         .weight = 79,
-        .description = gCyndaquilPokedexText,
-        .unusedDescription = gCyndaquilPokedexTextUnused,
+        .description = gFLAMEBEARPokedexText,
+        .unusedDescription = gFLAMEBEARPokedexTextUnused,
         .pokemonScale = 539,
         .pokemonOffset = 19,
         .trainerScale = 256,
@@ -2054,13 +2054,13 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 0,
     },
 
-    [NATIONAL_DEX_TOTODILE] =
+    [NATIONAL_DEX_CRUISE] =
     {
         .categoryName = _("BIG JAW"),
         .height = 6,
         .weight = 95,
-        .description = gTotodilePokedexText,
-        .unusedDescription = gTotodilePokedexTextUnused,
+        .description = gCRUISEPokedexText,
+        .unusedDescription = gCRUISEPokedexTextUnused,
         .pokemonScale = 487,
         .pokemonOffset = 20,
         .trainerScale = 256,

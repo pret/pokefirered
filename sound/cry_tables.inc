@@ -154,10 +154,10 @@ gCryTable::
 	cry Cry_Chikorita
 	cry Cry_Bayleef
 	cry Cry_Meganium
-	cry Cry_Cyndaquil
+	cry Cry_FLAMEBEAR
 	cry Cry_Quilava
 	cry Cry_Typhlosion
-	cry Cry_Totodile
+	cry Cry_CRUISE
 	cry Cry_Croconaw
 	cry Cry_Feraligatr
 	cry Cry_Sentret
@@ -545,10 +545,10 @@ gCryTable_Reverse::
 	cry_reverse Cry_Chikorita
 	cry_reverse Cry_Bayleef
 	cry_reverse Cry_Meganium
-	cry_reverse Cry_Cyndaquil
+	cry_reverse Cry_FLAMEBEAR
 	cry_reverse Cry_Quilava
 	cry_reverse Cry_Typhlosion
-	cry_reverse Cry_Totodile
+	cry_reverse Cry_CRUISE
 	cry_reverse Cry_Croconaw
 	cry_reverse Cry_Feraligatr
 	cry_reverse Cry_Sentret

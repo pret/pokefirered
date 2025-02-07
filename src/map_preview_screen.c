@@ -423,7 +423,7 @@ void MapPreview_StartForestTransition(u8 mapsec)
     taskId = CreateTask(Task_RunMapPreviewScreenForest, 0);
     gTasks[taskId].data[2] = GetBgAttribute(0, BG_ATTR_PRIORITY);
     gTasks[taskId].data[4] = GetGpuReg(REG_OFFSET_BLDCNT);
-    gTasks[taskId].data[5] = GetGpuReg(REG_OFFSET_BLDALPHA);
+    gTasks[taskId].data[5] = BLDALPHA_BLEND(10, 10);
     gTasks[taskId].data[3] = GetGpuReg(REG_OFFSET_DISPCNT);
     gTasks[taskId].data[6] = GetGpuReg(REG_OFFSET_WININ);
     gTasks[taskId].data[7] = GetGpuReg(REG_OFFSET_WINOUT);
@@ -432,7 +432,6 @@ void MapPreview_StartForestTransition(u8 mapsec)
     gTasks[taskId].data[9] = 0;
     SetBgAttribute(0, BG_ATTR_PRIORITY, 0);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR | WININ_WIN1_CLR);
     SetGpuRegBits(REG_OFFSET_WINOUT, WINOUT_WIN01_CLR);
     gTasks[taskId].data[11] = MapPreview_CreateMapNameWindow(mapsec);
@@ -492,6 +491,7 @@ static void Task_RunMapPreviewScreenForest(u8 taskId)
         if (!IsDma3ManagerBusyWithBgCopy())
         {
             FadeInFromBlack();
+            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 0));
             data[0]++;
         }
         break;

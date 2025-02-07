@@ -889,7 +889,6 @@ Other changes:
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
  - Physical/special split.
  - Pokémon that evolve above level 45 now evolve at level 45 instead.
- - Gain experience when you catch a Pokémon.
  - Gift Pokémon are replaced with Spinda.
  - Game Corner prize Pokémon are replaced with baby Pokémon.
  - Items aren't sellable.
@@ -897,9 +896,16 @@ Other changes:
  - Trade and happiness evolutions have been replaced with a new "Trade+ Stone", or Sun Stone & Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
  - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
  - The PC is accessible from the START menu. Pokémon no longer heal when sent to the PC.
- - Start with a coin case containing 50 coins. Can no longer buy coins at the Game Corner.
- - TMs can be bought at the Game Corner for 150 coins.
+ - Start with a coin case containing 50 coins. Can no longer buy coins at the Game Corner. Earn 50 pity coins when you run out of coins at the slot machines.
+ - The following prizes can be won at the Game Corner:
+    - 100 Coins each: TMs for weather moves and Trick Room.
+    - 150 Coins each: 6 random TMs, chosen based on the game seed.
+    - 150 Coins: Level 1 Pikachu that knows Surf and Fly.
+    - 150 Coins: Level 50 Ditto (can only be bought once -- subsequent ones are at level 2).
+    - 300 Coins: Level 20 Lapras.
+    - 500 Coins: Level 20 Eevee.
  - Once the timer has elapsed, players can see their party's EVs and IVs by holding L and R respectively in the "Pokémon Skills" summary screen.
+ - Repel works on all wild Pokémon, regardless of level.
  - Flash is no longer required in Rock Tunnel.
  - Player gets 10x the number of steps in the Safari Zone.
  - Shiny Pokémon odds are increased 10x.

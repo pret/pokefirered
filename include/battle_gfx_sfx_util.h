@@ -38,7 +38,7 @@ void SpriteCB_SetInvisible(struct Sprite *sprite);
 void SetBattlerShadowSpriteCallback(u8 battlerId, u16 species);
 void HideBattlerShadowSprite(u8 battlerId);
 void BattleInterfaceSetWindowPals(void);
-void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute);
+void ClearTemporarySpeciesSpriteData(u32 battler, bool32 dontClearTransform, bool32 dontClearSubstitute);
 void AllocateMonSpritesGfx(void);
 void FreeMonSpritesGfx(void);
 bool32 ShouldPlayNormalMonCry(struct Pokemon *mon);

@@ -278,8 +278,8 @@ void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
 
     gRecordedBattleRngSeed = src->rngSeed;
     gBattleTypeFlags = src->battleFlags | BATTLE_TYPE_RECORDED;
-    gTrainerBattleOpponent_A = src->opponentA;
-    gTrainerBattleOpponent_B = src->opponentB;
+    TRAINER_BATTLE_PARAM.opponentA = src->opponentA;
+    TRAINER_BATTLE_PARAM.opponentB = src->opponentB;
     gPartnerTrainerId = src->partnerId;
     gRecordedBattleMultiplayerId = src->multiplayerId;
     sBattleScene = src->battleScene;

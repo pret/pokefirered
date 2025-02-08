@@ -50,6 +50,7 @@
 
 	.section script_data, "aw", %progbits
 
+	.set ALLOCATE_SCRIPT_CMD_TABLE, 1
 	.include "data/script_cmd_table.inc"
 
 	.align 2

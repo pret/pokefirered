@@ -12,8 +12,6 @@ struct BattleBackground
     const void *palette;
 };
 
-extern const struct BgTemplate gBattleBgTemplates[];
-
 void InitBattleBgsVideo(void);
 void DrawBattleEntryBackground(void);
 void InitLinkBattleVsScreen(u8 taskId);

@@ -218,7 +218,7 @@ bool32 IsValidForBattle(struct Pokemon *mon);
 void BtlController_EmitGetMonData(u32 battler, u32 bufferId, u8 requestId, u8 monToCheck);
 void BtlController_EmitSetMonData(u32 battler, u32 bufferId, u8 requestId, u8 monToCheck, u8 bytes, void *data);
 void BtlController_EmitLoadMonSprite(u32 battler, u32 bufferId);
-void BtlController_EmitSwitchInAnim(u32 battler, u32 bufferId, u8 partyId, bool8 dontClearSubstituteBit);
+void BtlController_EmitSwitchInAnim(u32 battler, u32 bufferId, u8 partyId, bool8 dontClearTransform, bool8 dontClearSubstituteBit);
 void BtlController_EmitReturnMonToBall(u32 battler, u32 bufferId, bool8 skipAnim);
 void BtlController_EmitDrawTrainerPic(u32 battler, u32 bufferId);
 void BtlController_EmitTrainerSlide(u32 battler, u32 bufferId);
@@ -262,7 +262,7 @@ void BattleControllerComplete(u32 battler); // Can be used for all the controlle
 void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.
 void BtlController_TerminatorNop(u32 battler); // Dummy function at the end of the table.
 void BattleControllerDummy(u32 battler);
-void StartSendOutAnim(u32 battler, bool32 dontClearSubstituteBit, bool32 doSlideIn);
+void StartSendOutAnim(u32 battler, bool32 dontClearTransform, bool32 dontClearSubstituteBit, bool32 doSlideIn);
 void Controller_WaitForString(u32 battler);
 
 // handlers

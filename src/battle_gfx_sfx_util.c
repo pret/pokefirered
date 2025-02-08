@@ -1159,11 +1159,12 @@ void BattleInterfaceSetWindowPals(void)
     }
 }
 
-void ClearTemporarySpeciesSpriteData(u8 battlerId, bool8 dontClearSubstitute)
+void ClearTemporarySpeciesSpriteData(u32 battler, bool32 dontClearTransform, bool32 dontClearSubstitute)
 {
-    gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies = SPECIES_NONE;
+    if (!dontClearTransform)
+        gBattleSpritesDataPtr->battlerData[battler].transformSpecies = SPECIES_NONE;
     if (!dontClearSubstitute)
-        ClearBehindSubstituteBit(battlerId);
+        ClearBehindSubstituteBit(battler);
 }
 
 void AllocateMonSpritesGfx(void)

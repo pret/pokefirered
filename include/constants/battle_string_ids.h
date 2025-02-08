@@ -824,6 +824,17 @@
 #define B_MSG_WEATHER_END_FOG          6
 #define B_MSG_WEATHER_END_COUNT        7
 
+// gWeatherTurnStringIds
+#define B_MSG_WEATHER_TURN_RAIN         0
+#define B_MSG_WEATHER_TURN_DOWNPOUR     1
+#define B_MSG_WEATHER_TURN_SUN          2
+#define B_MSG_WEATHER_TURN_SANDSTORM    3
+#define B_MSG_WEATHER_TURN_HAIL         4
+#define B_MSG_WEATHER_TURN_SNOW         5
+#define B_MSG_WEATHER_TURN_FOG          6
+#define B_MSG_WEATHER_TURN_STRONG_WINDS 7
+#define B_MSG_WEATHER_TURN_COUNT        8
+
 // gRainContinuesStringIds
 #define B_MSG_RAIN_CONTINUES     0
 #define B_MSG_DOWNPOUR_CONTINUES 1

@@ -240,22 +240,6 @@ struct BattleMsgData
     u8 textBuffs[3][TEXT_BUFF_ARRAY_COUNT];
 };
 
-enum
-{
-    TRAINER_SLIDE_LAST_SWITCHIN,
-    TRAINER_SLIDE_LAST_LOW_HP,
-    TRAINER_SLIDE_FIRST_DOWN,
-    TRAINER_SLIDE_LAST_HALF_HP,
-    TRAINER_SLIDE_FIRST_CRITICAL_HIT,
-    TRAINER_SLIDE_FIRST_SUPER_EFFECTIVE_HIT,
-    TRAINER_SLIDE_FIRST_STAB_MOVE,
-    TRAINER_SLIDE_PLAYER_MON_UNAFFECTED,
-    TRAINER_SLIDE_MEGA_EVOLUTION,
-    TRAINER_SLIDE_Z_MOVE,
-    TRAINER_SLIDE_BEFORE_FIRST_TURN,
-    TRAINER_SLIDE_DYNAMAX,
-};
-
 void BufferStringBattle(u16 stringID, u32 battler);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize);
@@ -264,12 +248,10 @@ void SetPpNumbersPaletteInMoveSelection(u32 battler);
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 void BattlePutTextOnWindow(const u8 *text, u8 windowId_flags);
 bool8 BattleStringShouldBeColored(u16);
-u32 ShouldDoTrainerSlide(u32 battler, u32 which); // return 1 for TrainerA, 2 forTrainerB
 void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
 
-extern u8 gDisplayedStringBattle[478];
 extern u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT];
 extern u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT + 13];

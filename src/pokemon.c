@@ -44,6 +44,7 @@
 #include "constants/abilities.h"
 #include "constants/layouts.h"
 #include "constants/moves.h"
+#include "constants/regions.h"
 #include "constants/songs.h"
 #include "constants/item_effects.h"
 #include "constants/trainers.h"
@@ -4905,9 +4906,12 @@ s32 GetBattlerMultiplayerId(u16 id)
     return multiplayerId;
 }
 
-u8 GetTrainerEncounterMusicId(u16 trainerId)
+u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 {
-    return gTrainers[SanitizeTrainerId(trainerId)].encounterMusic_gender & (F_TRAINER_FEMALE - 1);
+    u32 sanitizedTrainerId = SanitizeTrainerId(trainerOpponentId);
+    enum DifficultyLevel difficulty = GetTrainerDifficultyLevel(sanitizedTrainerId);
+
+    return gTrainers[difficulty][sanitizedTrainerId].encounterMusic_gender & (F_TRAINER_FEMALE - 1);
 }
 
 u16 ModifyStatByNature(u8 nature, u16 stat, u8 statIndex)
@@ -4966,9 +4970,10 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             // Only if it's a trainer battle with league progression significance
             if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
                 return;
-            if (!(gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_LEADER
-                || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR
-                || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION))
+            u32 trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
+            if (!(trainerClass == TRAINER_CLASS_LEADER
+                || trainerClass == TRAINER_CLASS_ELITE_FOUR
+                || trainerClass == TRAINER_CLASS_CHAMPION))
                 return;
         }
 
@@ -5494,7 +5499,8 @@ static u16 GetBattleBGM(void)
         return MUS_RS_VS_TRAINER;
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)
+        u32 trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
+        switch (trainerClass)
         {
         case TRAINER_CLASS_CHAMPION:
             return MUS_VS_CHAMPION;
@@ -6568,4 +6574,78 @@ u32 CheckDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler)
     if (moveType != TYPE_NONE)
         return moveType;
     return GetMoveType(move);
+}
+
+uq4_12_t GetDynamaxLevelHPMultiplier(u32 dynamaxLevel, bool32 inverseMultiplier)
+{
+    if (inverseMultiplier)
+        return UQ_4_12(1.0/(1.5 + 0.05 * dynamaxLevel));
+    return UQ_4_12(1.5 + 0.05 * dynamaxLevel);
+}
+
+bool32 IsSpeciesRegionalForm(u32 species)
+{
+    return gSpeciesInfo[species].isAlolanForm
+        || gSpeciesInfo[species].isGalarianForm
+        || gSpeciesInfo[species].isHisuianForm
+        || gSpeciesInfo[species].isPaldeanForm;
+}
+
+bool32 IsSpeciesRegionalFormFromRegion(u32 species, u32 region)
+{
+    switch (region)
+    {
+    case REGION_ALOLA:  return gSpeciesInfo[species].isAlolanForm;
+    case REGION_GALAR:  return gSpeciesInfo[species].isGalarianForm;
+    case REGION_HISUI:  return gSpeciesInfo[species].isHisuianForm;
+    case REGION_PALDEA: return gSpeciesInfo[species].isPaldeanForm;
+    default:            return FALSE;
+    }
+}
+
+bool32 SpeciesHasRegionalForm(u32 species)
+{
+    u32 formId;
+    const u16 *formTable = GetSpeciesFormTable(species);
+    for (formId = 0; formTable != NULL && formTable[formId] != FORM_SPECIES_END; formId++)
+    {
+        if (IsSpeciesRegionalForm(formTable[formId]))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+u32 GetRegionalFormByRegion(u32 species, u32 region)
+{
+    u32 formId = 0;
+    u32 firstFoundSpecies = 0;
+    const u16 *formTable = GetSpeciesFormTable(species);
+
+    if (formTable != NULL)
+    {
+        for (formId = 0; formTable[formId] != FORM_SPECIES_END; formId++)
+        {
+            if (firstFoundSpecies == 0)
+                firstFoundSpecies = formTable[formId];
+            
+            if (IsSpeciesRegionalFormFromRegion(formTable[formId], region))
+                return formTable[formId];
+        }
+        if (firstFoundSpecies != 0)
+            return firstFoundSpecies;
+    }
+    return species;
+}
+
+bool32 IsSpeciesForeignRegionalForm(u32 species, u32 currentRegion)
+{
+    u32 i;
+    for (i = 0; i < REGIONS_COUNT; i++)
+    {
+        if (currentRegion != i && IsSpeciesRegionalFormFromRegion(species, i))
+            return TRUE;
+        else if (currentRegion == i && SpeciesHasRegionalForm(species) && !IsSpeciesRegionalFormFromRegion(species, i))
+            return TRUE;
+    }
+    return FALSE;
 }

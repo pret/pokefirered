@@ -1,11 +1,17 @@
 #include "global.h"
-#include "bg.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_controllers.h"
 #include "malloc.h"
-#include "party_menu.h"
 #include "pokemon.h"
 #include "trainer_tower.h"
+// #include "trainer_hill.h"
+#include "party_menu.h"
+#include "event_data.h"
+#include "constants/abilities.h"
+#include "random.h"
+#include "battle_scripts.h"
+#include "constants/battle_string_ids.h"
 
 void AllocateBattleResources(void)
 {
@@ -27,7 +33,6 @@ void AllocateBattleResources(void)
 
     gBattleResources = AllocZeroed(sizeof(*gBattleResources));
     gBattleResources->secretBase = AllocZeroed(sizeof(*gBattleResources->secretBase));
-    gBattleResources->flags = AllocZeroed(sizeof(*gBattleResources->flags));
     gBattleResources->battleScriptsStack = AllocZeroed(sizeof(*gBattleResources->battleScriptsStack));
     gBattleResources->battleCallbackStack = AllocZeroed(sizeof(*gBattleResources->battleCallbackStack));
     gBattleResources->beforeLvlUp = AllocZeroed(sizeof(*gBattleResources->beforeLvlUp));
@@ -65,7 +70,6 @@ void FreeBattleResources(void)
         FREE_AND_SET_NULL(gBattleStruct);
 
         FREE_AND_SET_NULL(gBattleResources->secretBase);
-        FREE_AND_SET_NULL(gBattleResources->flags);
         FREE_AND_SET_NULL(gBattleResources->battleScriptsStack);
         FREE_AND_SET_NULL(gBattleResources->battleCallbackStack);
         FREE_AND_SET_NULL(gBattleResources->beforeLvlUp);
@@ -87,7 +91,7 @@ void AdjustFriendshipOnBattleFaint(u8 battler)
 {
     u8 opposingBattlerId;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    if (IsDoubleBattle())
     {
         u8 opposingBattlerId2;
 
@@ -129,3 +133,95 @@ void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1)
             *(0 * 3 + i + (u8 *)(gBattleStruct->battlerPartyOrders)) = gBattlePartyCurrentOrder[i];
     }
 }
+
+// Called when a Pokémon is unable to attack during a Battle Palace battle.
+// Check if it was because they are frozen/asleep, and if so try to cure the status.
+// u32 BattlePalace_TryEscapeStatus(u8 battler)
+// {
+//     u32 effect = 0;
+
+//     do
+//     {
+//         switch (gBattleCommunication[MULTIUSE_STATE])
+//         {
+//         case 0:
+//             if (gBattleMons[battler].status1 & STATUS1_SLEEP)
+//             {
+//                 if (UproarWakeUpCheck(battler))
+//                 {
+//                     // Wake up from Uproar
+//                     gBattleMons[battler].status1 &= ~(STATUS1_SLEEP);
+//                     gBattleMons[battler].status2 &= ~(STATUS2_NIGHTMARE);
+//                     BattleScriptPushCursor();
+//                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP_UPROAR;
+//                     gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
+//                     effect = 2;
+//                 }
+//                 else
+//                 {
+//                     u32 toSub;
+
+//                     if (GetBattlerAbility(battler) == ABILITY_EARLY_BIRD)
+//                         toSub = 2;
+//                     else
+//                         toSub = 1;
+
+//                     // Reduce number of sleep turns
+//                     if ((gBattleMons[battler].status1 & STATUS1_SLEEP) < toSub)
+//                         gBattleMons[battler].status1 &= ~(STATUS1_SLEEP);
+//                     else
+//                         gBattleMons[battler].status1 -= toSub;
+
+//                     if (gBattleMons[battler].status1 & STATUS1_SLEEP)
+//                     {
+//                         // Still asleep
+//                         gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
+//                         effect = 2;
+//                     }
+//                     else
+//                     {
+//                         // Wake up
+//                         gBattleMons[battler].status2 &= ~(STATUS2_NIGHTMARE);
+//                         BattleScriptPushCursor();
+//                         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP;
+//                         gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
+//                         effect = 2;
+//                     }
+//                 }
+//             }
+//             gBattleCommunication[MULTIUSE_STATE]++;
+//             break;
+//         case 1:
+//             if (gBattleMons[battler].status1 & STATUS1_FREEZE)
+//             {
+//                 if (Random() % 5 != 0)
+//                 {
+//                     // Still frozen
+//                     gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
+//                 }
+//                 else
+//                 {
+//                     // Unfreeze
+//                     gBattleMons[battler].status1 &= ~(STATUS1_FREEZE);
+//                     BattleScriptPushCursor();
+//                     gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
+//                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
+//                 }
+//                 effect = 2;
+//             }
+//             gBattleCommunication[MULTIUSE_STATE]++;
+//             break;
+//         case 2:
+//             break;
+//         }
+//         // Loop until reaching the final state, or stop early if Pokémon was Asleep/Frozen
+//     } while (gBattleCommunication[MULTIUSE_STATE] != 2 && effect == 0);
+
+//     if (effect == 2)
+//     {
+//         BtlController_EmitSetMonData(battler, BUFFER_A, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battler].status1);
+//         MarkBattlerForControllerExec(battler);
+//     }
+
+//     return effect;
+// }

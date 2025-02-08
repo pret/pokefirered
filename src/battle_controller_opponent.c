@@ -434,13 +434,13 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
         if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
         {
             if (battlerId == 1)
-                trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_A);
+                trainerPicId = GetBattleTowerTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentA);
             else
-                trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_B);
+                trainerPicId = GetBattleTowerTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentB);
         }
         else
         {
-            trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_A);
+            trainerPicId = GetBattleTowerTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentA);
         }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
@@ -454,13 +454,13 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
     {
         if (battlerId != 1)
-            trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_B);
+            trainerPicId = GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentB);
         else
-            trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
+            trainerPicId = GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentA);
     }
     else
     {
-        trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
+        trainerPicId = GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentA);
     }
 
     return trainerPicId;

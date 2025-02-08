@@ -823,7 +823,7 @@ void StartSpecialBattle(void)
     {
     case 0: // battle tower battle
         gBattleTypeFlags = (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_TRAINER);
-        gTrainerBattleOpponent_A = 0;
+        TRAINER_BATTLE_PARAM.opponentA = 0;
 
         FillBattleTowerTrainerParty();
 
@@ -851,7 +851,7 @@ void StartSpecialBattle(void)
             CreateBattleTowerMon(&gEnemyParty[i], &gSaveBlock2Ptr->battleTower.ereaderTrainer.party[i]);
 
         gBattleTypeFlags = (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER);
-        gTrainerBattleOpponent_A = 0;
+        TRAINER_BATTLE_PARAM.opponentA = 0;
 
         CreateTask(Task_WaitBT, 1);
         PlayMapChosenOrBattleBGM(0);
@@ -1304,17 +1304,17 @@ static void FillPartnerParty(u16 trainerId)
     u32 otID;
     u8 trainerName[(PLAYER_NAME_LENGTH * 3) + 1];
     s32 ball = -1;
+    enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
 
     if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
     {
         for (i = 0; i < 3; i++)
             ZeroMonData(&gPlayerParty[i + 3]);
 
-        for (i = 0; i < 3 && i < gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].partySize; i++)
+        for (i = 0; i < 3 && i < gBattlePartners[difficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].partySize; i++)
         {
-            const struct TrainerMon *partyData = gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].party;
-            const u8 *partnerName = gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
-
+            const struct TrainerMon *partyData = gBattlePartners[difficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].party;
+            const u8 *partnerName = gBattlePartners[difficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
             for (k = 0; partnerName[k] != EOS && k < 3; k++)
             {
                 if (k == 0)
@@ -1384,9 +1384,9 @@ static void FillPartnerParty(u16 trainerId)
             }
             CalculateMonStats(&gPlayerParty[i + 3]);
 
-            StringCopy(trainerName, gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName);
+            StringCopy(trainerName, gBattlePartners[difficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName);
             SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_NAME, trainerName);
-            j = gBattlePartners[SanitizeTrainerId(trainerId - TRAINER_PARTNER(PARTNER_NONE))].encounterMusic_gender >> 7;
+            j = gBattlePartners[difficulty][SanitizeTrainerId(trainerId - TRAINER_PARTNER(PARTNER_NONE))].encounterMusic_gender >> 7;
             SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_GENDER, &j);
         }
     }
@@ -1432,7 +1432,7 @@ void DoSpecialTrainerBattle(void)
         }
         else if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_1) // Player + AI against one trainer
         {
-            gTrainerBattleOpponent_B = 0xFFFF;
+            TRAINER_BATTLE_PARAM.opponentB = 0xFFFF;
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
         }
         else // MULTI_BATTLE_2_VS_2

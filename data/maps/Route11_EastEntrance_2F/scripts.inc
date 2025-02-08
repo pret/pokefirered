@@ -67,7 +67,9 @@ Route11_EastEntrance_2F_EventScript_Aide::
 	goto_if_lt VAR_0x8006, REQUIRED_CAUGHT_MONS, Aide_EventScript_HaventCaughtEnough
 	msgbox Route11_EastEntrance_2F_Text_GreatHereYouGo
 	msgbox Route11_EastEntrance_2F_Text_ReceivedItemfinderFromAide
-  addmoney 30000
+	addmoney 20000
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
 	setflag FLAG_GOT_ITEMFINDER
 	msgbox Route11_EastEntrance_2F_Text_ExplainItemfinder
 	release

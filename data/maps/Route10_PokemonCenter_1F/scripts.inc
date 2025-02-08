@@ -43,7 +43,9 @@ Route10_PokemonCenter_1F_EventScript_Aide::
 	goto_if_lt VAR_0x8006, REQUIRED_OWNED_MONS, Aide_EventScript_HaventCaughtEnough
 	msgbox Route10_PokemonCenter_1F_Text_GreatHereYouGo
 	msgbox Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide
-  addmoney 20000
+	addmoney 10000
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
 	setflag FLAG_GOT_EVERSTONE_FROM_OAKS_AIDE
 	msgbox Route10_PokemonCenter_1F_Text_ExplainEverstone
 	release

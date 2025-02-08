@@ -34,6 +34,8 @@ Route16_NorthEntrance_2F_EventScript_Aide::
 	msgbox Route16_NorthEntrance_2F_Text_GreatHereYouGo
 	msgbox Route16_NorthEntrance_2F_Text_ReceivedAmuletCoinFromAide
 	addmoney 40000
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
 	setflag FLAG_GOT_AMULET_COIN_FROM_OAKS_AIDE
 	msgbox Route16_NorthEntrance_2F_Text_ExplainAmuletCoin
 	release

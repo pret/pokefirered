@@ -17,7 +17,9 @@ Route2_EastBuilding_EventScript_Aide::
 	goto_if_lt VAR_0x8006, REQUIRED_SEEN_MONS, Aide_EventScript_HaventCaughtEnough
 	msgbox Route2_EastBuilding_Text_GreatHereYouGo
 	msgbox Route2_EastBuilding_Text_ReceivedHM05FromAide
-  addmoney 10000
+	addmoney 5000
+	playfanfare MUS_OBTAIN_ITEM
+	waitfanfare
 	setflag FLAG_GOT_HM05
 	msgbox Route2_EastBuilding_Text_ExplainHM05
 	release

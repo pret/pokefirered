@@ -8,7 +8,7 @@ Route15_WestEntrance_2F_Text_GreatHereYouGo::
     .string "Congratulations, here you go!$"
 
 Route15_WestEntrance_2F_Text_ReceivedItemFromAide::
-    .string "{PLAYER} received ¥50,000\n"
+    .string "{PLAYER} received ¥75,000\n"
     .string "from the RICH AIDE.$"
 
 Route15_WestEntrance_2F_Text_ExplainExpShare::

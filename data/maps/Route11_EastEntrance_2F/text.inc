@@ -8,7 +8,7 @@ Route11_EastEntrance_2F_Text_GreatHereYouGo::
     .string "Congratulations, here you go!$"
 
 Route11_EastEntrance_2F_Text_ReceivedItemfinderFromAide::
-    .string "{PLAYER} received ¥30,000\n"
+    .string "{PLAYER} received ¥20,000\n"
     .string "from the RICH AIDE.$"
 
 Route11_EastEntrance_2F_Text_ExplainItemfinder::

@@ -1749,6 +1749,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
 
   [SPECIES_VAPOREON] = G4TMHM_LEARNSET(G4TMHM(TM055_BRINE)
                                         | G4TMHM(TM058_ENDURE)
+                                        | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM078_CAPTIVATE)
                                         | G4TMHM(TM082_SLEEP_TALK)
@@ -1768,6 +1769,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_FLAREON] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
+                                        | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -2350,6 +2352,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_BELLOSSOM] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
+                                        | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM060_DRAIN_PUNCH)
@@ -2516,6 +2519,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_ESPEON] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
+                                        | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM077_PSYCH_UP)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -2528,6 +2532,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_UMBREON] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
+                                        | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM066_PAYBACK)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM077_PSYCH_UP)
@@ -2556,6 +2561,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_SLOWKING] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
+                                        | G4TMHM(TM082_SLEEP_TALK)
                                         | G4TMHM(TM055_BRINE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM058_ENDURE)
@@ -5116,6 +5122,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM092_TRICK_ROOM)),
 
   [SPECIES_GALLADE] = G4TMHM_LEARNSET(G4TMHM(TM052_FOCUS_BLAST)
+                                        | G4TMHM(TM061_WILL_O_WISP)
                                         | G4TMHM(TM054_FALSE_SWIPE)
                                         | G4TMHM(TM056_FLING)
                                         | G4TMHM(TM057_CHARGE_BEAM)
@@ -5160,6 +5167,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
 
   [SPECIES_LEAFEON] = G4TMHM_LEARNSET(G4TMHM(TM053_ENERGY_BALL)
                                         | G4TMHM(TM058_ENDURE)
+                                        | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM075_SWORDS_DANCE)
                                         | G4TMHM(TM078_CAPTIVATE)
@@ -5171,6 +5179,7 @@ static const u32 sGen4TMHMLearnsets[][2] =
                                         | G4TMHM(TM090_SUBSTITUTE)),
 
   [SPECIES_GLACEON] = G4TMHM_LEARNSET(G4TMHM(TM058_ENDURE)
+                                        | G4TMHM(TM058_ENDURE)
                                         | G4TMHM(TM068_GIGA_IMPACT)
                                         | G4TMHM(TM072_AVALANCHE)
                                         | G4TMHM(TM078_CAPTIVATE)

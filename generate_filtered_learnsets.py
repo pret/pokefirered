@@ -392,12 +392,18 @@ included_mons_input = [
 evos = {}
 evolving_mons = set()
 with open('src/data/pokemon/evolution.h','r') as evo_file:
+  from_mon = None
   for line in evo_file:
     l = line.replace('{', '').replace('}', '').replace('SPECIES_', '').replace('[', '').replace(']', '').replace('=', ',').replace(' ', '').replace('_', '').lower()
     l_split = l.split(',')
     if len(l_split) == 5:
-      evos[l_split[3]] = l_split[0]
-      evolving_mons.add(l_split[0])
+      from_mon = l_split[0]
+      to_mon = l_split[3]
+      evos[to_mon] = from_mon
+      evolving_mons.add(from_mon)
+    elif len(l_split) == 4:
+      to_mon = l_split[2]
+      evos[to_mon] = from_mon
 
 included_mons = set()
 for mon in included_mons_input:

@@ -4750,6 +4750,7 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM02_FLY)),
 
     [SPECIES_SLOWKING]    = TMHM_LEARNSET(TMHM(TM001_FOCUS_PUNCH)
+                                        | TMHM(TM020_SAFEGUARD)
                                         | TMHM(TM003_WATER_PULSE)
                                         | TMHM(TM004_CALM_MIND)
                                         | TMHM(TM006_TOXIC)

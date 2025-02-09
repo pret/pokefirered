@@ -232,6 +232,7 @@ PalletTown_ProfessorOaksLab_ChooseStarterScene::
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalNoFairWhatAboutMe
 	msgbox PalletTown_ProfessorOaksLab_Text_OakBePatientRival
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
+	setflag FLAG_SYS_POKEDEX_GET
 	releaseall
 	end
 

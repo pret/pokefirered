@@ -123,7 +123,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     { gText_MenuOption, {.u8_void = StartMenuOptionCallback} },
     // { gText_MenuExit, {.u8_void = StartMenuExitCallback} },
     { gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback} },
-    { gText_MenuPlayer, {.u8_void = StartMenuLinkPlayerCallback} }
+    { gText_MenuPlayer, {.u8_void = StartMenuLinkPlayerCallback} },
 };
 
 static const struct WindowTemplate sSafariZoneStatsWindowTemplate = {
@@ -145,7 +145,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_Option,
     // gStartMenuDesc_Exit,
     gStartMenuDesc_Retire,
-    gStartMenuDesc_Player
+    gStartMenuDesc_Player,
 };
 
 static const struct BgTemplate sBGTemplates_AfterLinkSaveMessage[] = {
@@ -293,18 +293,15 @@ static s8 PrintStartMenuItems(s8 *cursor_p, u8 nitems)
     *cursor_p = i;
     return FALSE;
 }
+
 //**************************************************************
 //ICONS START MENU
 //**************************************************************
 
 #define TAG_ICONS_MENU 0x3333
 
-#define MENU_POS_RIGHT TRUE // Cambia la posición del menú a la derecha o izquierda de la pantalla
-
-#define INITIAL_POS_RIGHT_X 116 
-#define INITIAL_POS_LEFT_X 8 
-#define INITIAL_POS_Y 116
-#define ICON_SPACING 26 // Espaciado horizontal entre íconos
+#define INITIAL_POS_RIGHT_X 0
+#define INITIAL_POS_RIGHT_Y 140
 
 static const u16 sIconsMenuPal[] = INCBIN_U16("graphics/start_menu/menuIconPal.gbapal");
 static const u8 sIconMenuSprites[] = INCBIN_U8("graphics/start_menu/iconMenu.4bpp");
@@ -326,16 +323,17 @@ static const struct OamData gSpriteOamData32 =
     .affineParam = 0, 
 };
 
+
 static const struct SpriteSheet spriteSheetIconsMenu =
 {
-            .data = sIconMenuSprites,
-            .size = 3584,
-            .tag = TAG_ICONS_MENU,
+            .data = sIconMenuSprites, //GRÁFICO ----------
+            .size = 3584, //TAMAÑO DEL GRÁFICO
+            .tag = TAG_ICONS_MENU, //LUGAR DONDE SE CARGA EL GRÁFICO ----------
 };
 static const struct SpritePalette spritePaletteIconsMenu =
 {
             .data = sIconsMenuPal,
-            .tag = TAG_ICONS_MENU,
+            .tag = TAG_ICONS_MENU, //LUGAR DONDE SE CARGA LA PALETA ----------
 };
 
 static const union AnimCmd sAnimDex[] =
@@ -343,6 +341,7 @@ static const union AnimCmd sAnimDex[] =
     ANIMCMD_FRAME(0, 0),
     ANIMCMD_END,
 };
+
 
 static const union AnimCmd sAnimBall[] =
 {
@@ -388,61 +387,50 @@ static const union AnimCmd *const sAnimsIconMenu[] =
     [STARTMENU_PLAYER] = sAnimCard,
     [STARTMENU_SAVE] = sAnimSave,
     [STARTMENU_OPTION] = sAnimOption,
-    [STARTMENU_RETIRE] = sAnimRetire,
+    //[STARTMENU_RETIRE] = sAnimRetire,
 };
 
 static const struct SpriteTemplate spriteTemplateIconsMenu =
 {
-    .tileTag = TAG_ICONS_MENU,
-    .paletteTag = TAG_ICONS_MENU,
-    .oam = &gSpriteOamData32,
-    .anims = sAnimsIconMenu,
+    .tileTag = TAG_ICONS_MENU, //LUGAR DONDE SE CARGA EL GRÁFICO ----------
+    .paletteTag = TAG_ICONS_MENU, //LUGAR DONDE SE CARGA LA PALETA ----------
+    .oam = &gSpriteOamData32, //OAM DATA DEL ICONO ----------
+    .anims = sAnimsIconMenu, //TABLA DE ANIMACIÓN DEL ICONO ---------- 
     .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
+    .affineAnims = gDummySpriteAffineAnimTable, 
+    .callback = SpriteCallbackDummy, //ANIMACIÓN DEL ICONO ----------
 };
 
 static void MoveSelectSpriteIcon()
 {
-    u8 initialPosX = (MENU_POS_RIGHT) ? INITIAL_POS_RIGHT_X : INITIAL_POS_LEFT_X;
-    u8 initialPosY = INITIAL_POS_Y; // Posición inicial en Y
-
-    if (gSprites[sStartMenuSpritesId[sStartMenuCursorPos]].x != initialPosX)
-    {
-        if (MENU_POS_RIGHT)
-            gSprites[sStartMenuSpritesId[sStartMenuCursorPos]].x += initialPosX - gSprites[sStartMenuSpritesId[sStartMenuCursorPos]].x;
-        else
-            gSprites[sStartMenuSpritesId[sStartMenuCursorPos]].x = initialPosX;
-    } 
-    else 
-    {
-        if (MENU_POS_RIGHT)
-            gSprites[sStartMenuSpritesId[sStartMenuCursorPos]].y -= 8; // Desplazar hacia arriba
-        else
-            gSprites[sStartMenuSpritesId[sStartMenuCursorPos]].y += 8;
-    }
+    if(gSprites[sStartMenuSpritesId[sStartMenuCursorPos]].y != INITIAL_POS_RIGHT_Y)   //SABIENDO QUE ES CADA COSA OBVIO XD
+        gSprites[sStartMenuSpritesId[sStartMenuCursorPos]].y += INITIAL_POS_RIGHT_Y - gSprites[sStartMenuSpritesId[sStartMenuCursorPos]].y;  
+    else
+        gSprites[sStartMenuSpritesId[sStartMenuCursorPos]].y -= 14;         //desplazamiento del sprite de abajo arriba POR .Y
 }
-
 
 void LoadSpriteIconMenu()
 {
     s8 i;
     u8 id;
-    u8 x = (MENU_POS_RIGHT) ? INITIAL_POS_RIGHT_X : INITIAL_POS_LEFT_X;
-    u8 y = INITIAL_POS_Y;
-    
-    LoadSpriteSheet(&spriteSheetIconsMenu);
+    u8 x = 70;   //posicion inicial de dibujo de sprites x horizontal
+    u8 y = INITIAL_POS_RIGHT_Y; //posicion y vertical
+
+    if(sNumStartMenuItems ==4) x=70;  // para centrarlo segun cuantos flags iconos activados
+    if(sNumStartMenuItems ==5) x=60;
+    if(sNumStartMenuItems ==6) x=48;
+    if(sNumStartMenuItems ==7) x=32;
+
+    LoadSpriteSheet(&spriteSheetIconsMenu);     //IMAGENES 2023 BABEY
     LoadSpritePalette(&spritePaletteIconsMenu);
 
     for (i = 0; i < sNumStartMenuItems; i++)
     {
-        id = CreateSprite(&spriteTemplateIconsMenu, x, y, 0);
+        id = CreateSprite(&spriteTemplateIconsMenu, x, INITIAL_POS_RIGHT_Y, 0); //DEFINE POSICION INICIAL
+        x += 30;    //OFFSET
         StartSpriteAnim(&gSprites[id], sStartMenuOrder[i]);
-        x += ICON_SPACING; // Mover la posición x para el siguiente ícono
+        y -= 32;
         sStartMenuSpritesId[i] = id;
-
-        if(!MENU_POS_RIGHT)
-            gSprites[id].hFlip = TRUE;
     }
 }
 
@@ -571,14 +559,14 @@ void ShowStartMenu(void)
 
 static bool8 StartCB_HandleInput(void)
 {
-    if (JOY_NEW(DPAD_UP))
+    if (JOY_NEW(DPAD_LEFT))//MODIFICADO PARA STARTMENU MOV LATERAL
     {
         PlaySE(SE_SELECT);
         if(sStartMenuCursorPos > 0)
         {
-            MoveSelectSpriteIcon();
-            sStartMenuCursorPos -= 1;
-            MoveSelectSpriteIcon();
+        MoveSelectSpriteIcon();
+        sStartMenuCursorPos = (sStartMenuCursorPos > 0) ? sStartMenuCursorPos - 1 : sNumStartMenuItems - 1;
+        MoveSelectSpriteIcon();
         }
         // sStartMenuCursorPos = Menu_MoveCursor(-1);
         // if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
@@ -586,13 +574,13 @@ static bool8 StartCB_HandleInput(void)
         //     PrintTextOnHelpMessageWindow(sStartMenuDescPointers[sStartMenuOrder[sStartMenuCursorPos]], 2);
         // }
     }
-    if (JOY_NEW(DPAD_DOWN))
+    if (JOY_NEW(DPAD_RIGHT))//MODIFICADO PARA STARTMENU MOV LATERAL
     {
         PlaySE(SE_SELECT);
         if(sStartMenuCursorPos < sNumStartMenuItems - 1 ){
-            MoveSelectSpriteIcon();
-            sStartMenuCursorPos += 1;
-            MoveSelectSpriteIcon();
+        MoveSelectSpriteIcon();
+        sStartMenuCursorPos = (sStartMenuCursorPos < sNumStartMenuItems - 1 ) ? sStartMenuCursorPos+1 : 0;
+        MoveSelectSpriteIcon();
         }
         // sStartMenuCursorPos = Menu_MoveCursor(+1);
         // if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)

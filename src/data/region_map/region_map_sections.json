@@ -2,7 +2,7 @@
   "map_sections": [
     {
       "map_section": "MAPSEC_PALLET_TOWN",
-      "name": "PALLET TOWN",
+      "name": "SILENT TOWN",
       "x": 4,
       "y": 11,
       "width": 1,
@@ -10,7 +10,7 @@
     },
     {
       "map_section": "MAPSEC_VIRIDIAN_CITY",
-      "name": "VIRIDIAN CITY",
+      "name": "KANTO",
       "x": 4,
       "y": 8,
       "width": 1,
@@ -18,7 +18,7 @@
     },
     {
       "map_section": "MAPSEC_PEWTER_CITY",
-      "name": "PEWTER CITY",
+      "name": "PAGOTA CITY",
       "x": 4,
       "y": 4,
       "width": 1,
@@ -26,7 +26,7 @@
     },
     {
       "map_section": "MAPSEC_CERULEAN_CITY",
-      "name": "CERULEAN CITY",
+      "name": "WESTPORT CITY",
       "x": 14,
       "y": 3,
       "width": 1,

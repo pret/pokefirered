@@ -15,14 +15,9 @@
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": [
     {
-      "map": "MAP_VIRIDIAN_CITY",
-      "offset": -12,
-      "direction": "up"
-    },
-    {
       "map": "MAP_PALLET_TOWN",
       "offset": 0,
-      "direction": "down"
+      "direction": "right"
     }
   ],
   "object_events": [

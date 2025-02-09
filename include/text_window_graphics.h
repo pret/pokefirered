@@ -16,4 +16,6 @@ extern const struct TextWindowGraphics gUserFrames[];
 
 const struct TextWindowGraphics *GetUserWindowGraphics(u8 idx);
 
+const struct TextWindowGraphics * GetUserFrameGraphicsInfo(u8 idx);
+
 #endif //GUARD_TEXT_WINDOW_GRAPHICS_H

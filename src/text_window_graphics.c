@@ -63,3 +63,11 @@ const struct TextWindowGraphics *GetUserWindowGraphics(u8 idx)
     else
         return &gUserFrames[idx];
 }
+
+const struct TextWindowGraphics * GetUserFrameGraphicsInfo(u8 idx)
+{
+    if (idx >= 20) // if (idx >= NELEMS(gUserFrames))
+        return &gUserFrames[0];
+    else
+        return &gUserFrames[idx];
+}

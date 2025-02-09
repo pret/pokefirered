@@ -505,6 +505,8 @@ extern const u8 gText_SaveFileHasBeenDeleted[];
 extern const u8 gText_1MSubCircuitBoardNotInstalled[];
 extern const u8 gText_NewGame[];
 extern const u8 gText_Continue[];
+extern const u8 gText_Options[];
+extern const u8 gText_Team[];
 extern const u8 gText_MysteryGift[];
 extern const u8 gText_WirelessNotConnected[];
 extern const u8 gText_MysteryGiftCantUse[];
@@ -1544,5 +1546,26 @@ extern const u8 gText_PokeSum_EggOrigin_Trade[];
 extern const u8 gText_PokeSum_EggOrigin_NicePlace[];
 extern const u8 gText_PokeSum_EggOrigin_Spa[];
 extern const u8 gText_PokeSum_EggOrigin_Trade[];
+
+// main_menu
+extern const u8 gText_SaveFileCorruptedPrevWillBeLoaded[];
+extern const u8 gText_SaveFileHasBeenDeleted[];
+extern const u8 gText_1MSubCircuitBoardNotInstalled[];
+extern const u8 gText_SaveFileCorruptedPrevWillBeLoaded[];
+extern const u8 gText_NewGame[];
+extern const u8 gText_Continue[];
+extern const u8 gText_Options[];
+extern const u8 gText_TeamSpa[];
+extern const u8 gText_MysteryGift[];
+extern const u8 gText_WirelessAdapterIsNotConnected[];
+extern const u8 gText_MysteryGiftCantBeUsedWhileWirelessAdapterIsAttached[];
+extern const u8 gText_Player[];
+extern const u8 gText_Time[];
+extern const u8 gText_Colon[];
+extern const u8 gText_Pokedex[];
+extern const u8 gTextJPDummy_Hiki[];
+extern const u8 gText_Badges[];
+extern const u8 gTextJPDummy_Ko[];
+extern const u8 gText_Register[];
 
 #endif //GUARD_STRINGS_H

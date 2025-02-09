@@ -4,6 +4,7 @@
 #include "global.h"
 
 #define MAX_SPRITES 64
+#define SPRITE_INVALID_TAG 0xFFFF
 #define SPRITE_NONE 0xFF
 #define TAG_NONE 0xFFFF
 

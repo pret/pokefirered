@@ -153,14 +153,15 @@ void NewGameInitPCItems(void)
   AddBagItem(ITEM_GREAT_BALL, 40);
   AddBagItem(ITEM_ULTRA_BALL, 20);
   AddBagItem(ITEM_REPEL, 25);
-  AddBagItem(ITEM_POTION, 10);
+  AddBagItem(ITEM_POTION, 15);
   AddBagItem(ITEM_SUPER_POTION, 10);
+  AddBagItem(ITEM_HYPER_POTION, 5);
   AddBagItem(ITEM_FULL_HEAL, 10);
   AddBagItem(ITEM_ELIXIR, 10);
+  AddBagItem(ITEM_FULL_RESTORE, 1);
   AddBagItem(ITEM_REVIVE, 10);
+  AddBagItem(ITEM_MAX_REVIVE, 5);
   AddBagItem(ITEM_ESCAPE_ROPE, 5);
-  AddBagItem(ITEM_MAX_REVIVE, 3);
-  AddBagItem(ITEM_FULL_RESTORE, 3);
   AddBagItem(ITEM_EXP_SHARE, 6);
   AddBagItem(ITEM_TOWN_MAP, 1);
   AddBagItem(ITEM_OLD_ROD, 1);

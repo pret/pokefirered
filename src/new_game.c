@@ -66,7 +66,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = TRUE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
-    gSaveBlock2Ptr->expMessageMode = OPTIONS_EXP_MESSAGE_SHOW;
+    gSaveBlock2Ptr->expMessageMode = OPTIONS_EXP_MESSAGE_HIDE;
 }
 
 static void ClearPokedexFlags(void)

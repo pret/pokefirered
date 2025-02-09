@@ -16,11 +16,11 @@ Other changes:
  - Gain experience for catching Pokémon.
  - Oak's aides give large sums of money for completing the Pokédex:
    - 1k for 1 unique species.
-   - 10k for 20 unique species.
-   - 20k for 40 unique species.
-   - 30k for 60 unique species.
+   - 5k for 20 unique species.
+   - 10k for 40 unique species.
+   - 20k for 60 unique species.
    - 40k for 80 unique species.
-   - 50k for 100 unique species.
+   - 75k for 100 unique species.
  - Starter Pokémon are randomized based on the game seed. There is still one grass, water, and fire starter, and they will be chosen from the gen 1-3 starters.
  - Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
  - Gym leaders give the player a Rare Candy in addition to a TM upon earning a badge.
@@ -112,14 +112,14 @@ Pokémon levels are increased by 1.
 | Player badge count  | Trainer party levels     |
 | ------------------- | ------------------------ |
 | 0 (vanilla FireRed) |   10,   10,   11,   11   |
-| 1                   | **11**, 10, **12**, 11   |
-| 2                   |   11, **11**, 12, **12** |
-| 3                   | **12**, 11, **13**, 12   |
-| 4                   |   12, **12**, 13, **13** |
-| 5                   | **13**, 12, **14**, 13   |
-| 6                   |   13, **13**, 14, **14** |
-| 7                   | **14**, 13, **15**, 14   |
-| 8                   |   14, **14**, 15, **15** |
+| 1                   |   10, **11**, 11, **12** |
+| 2                   | **11**, 11, **12**, 12   |
+| 3                   |   11, **12**, 12, **13** |
+| 4                   | **12**, 12, **13**, 13   |
+| 5                   |   12, **13**, 13, **14** |
+| 6                   | **13**, 13, **14**, 14   |
+| 7                   |   13, **14**, 14, **15** |
+| 8                   | **14**, 14, **15**, 15   |
 
 ## Pokémon randomization
 

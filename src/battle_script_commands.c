@@ -3277,7 +3277,7 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage = 0;
                         PrepareStringBattle(STRINGID_PKMNGAINEDNOEXPOVERLEVELED, gBattleStruct->expGetterBattlerId);
                     } else {
-                        if ((gSaveBlock2Ptr->optionsCapWarning == OPTIONS_CAP_WARNING_ON) && (checkLevelCapResult == AT_NEXT_BADGE_CAP)) {
+                        if ((gSaveBlock2Ptr->optionsCapWarning == OPTIONS_CAP_WARNING_ON) && (checkLevelCapResult == AT_NEXT_BADGE_CAP) && (gPlayerParty[gBattleStruct->expGetterMonId].level > 7)) {
                           PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
                           PrepareStringBattle(STRINGID_PKMNGAINEDEXPATNEXTBADGECAP, gBattleStruct->expGetterBattlerId);
                         } else if (checkLevelCapResult == ONE_AWAY_FROM_CAP) {

@@ -424,10 +424,10 @@ void (*gItemUseCB)(u8, TaskFunc);
 
 u8 ScaledTrainerLevel(u8 level, u8 index) {
   const u8 badgeCount = BadgeCount();
-  if (index % 2 == 1) {
-    level += (badgeCount + 1) / 2;
+  if (index % 2 == 0) {
+    level += badgeCount / 2;
   } else {
-    level += (badgeCount) / 2;
+    level += (badgeCount + 1) / 2;
   }
   return level;
 }
@@ -448,34 +448,28 @@ void SortDesc(u8 arr[], u8 n) {
 }
 
 u8 ScaledWildLevel(u8 level) {
-  u8 badgeCount, levelSum, i, idx;
+  u8 badgeCount, i, idx;
   u8 partyLevels[6];
+  u16 levelSum;
 
   for (i = 0; i < gPlayerPartyCount; ++i) {
     partyLevels[i] = gPlayerParty[i].level;
   }
   SortDesc(partyLevels, gPlayerPartyCount);
 
-  // Decrease wild level if it's at least the
-  // level of the player's highest level.
   if (level >= partyLevels[0]) {
     level = level * 2 / 3;
   }
 
-  // Denominator is the number of Pokemon that
-  // contribute to the level cap.
   badgeCount = BadgeCount();
 
-  // Numerator is `level` plus the sum of party levels
-  // excluding mons at sorted party locations 1 and 6,
-  // weighted based on badge count.
   levelSum = level;
   for (i = 0; i < badgeCount; ++i) {
     idx = 1 + (i % 4);
-    if (idx <= gPlayerPartyCount) {
+    if (idx < gPlayerPartyCount) {
       levelSum += partyLevels[idx];
     } else {
-      levelSum += level;
+      levelSum += 2;
     }
   }
 

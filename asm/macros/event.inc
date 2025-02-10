@@ -1127,6 +1127,14 @@
 	.2byte \move
 	.endm
 
+	@ Checks if at least one Pokemon in the player's party knows the specified move. If so, VAR_RESULT is set to the
+	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE.
+	@ VAR_0x8004 is also set to this Pokemon's species.
+	.macro checkpartymove move:req
+	.byte SCR_OP_CHECKPARTYMOVE
+	.2byte \move
+	.endm
+
 	@ Checks if field move can be used. If so, VAR_RESULT is set to TRUE, gFieldEffectArguments[0] to masked
 	@ species or party index of the Pokemon, VAR_0x8004 to species, STR_VAR_1 to the Pokemon's name,
 	@ and STR_VAR_2 to the move's name.
@@ -1688,17 +1696,9 @@
 	.byte SCR_OP_NORMALMSG
 	.endm
 
-	@ Reads the value of the specified game stat and compares it to the specified value.
-	@ Sets the script comparisonResult to 0 if stat < value, 1 if stat == value, and 2 if stat > value.
-	.macro comparestat statId:req, value:req
-	.byte SCR_OP_COMPARESTAT
-	.byte \statId
-	.4byte \value
-	.endm
-
 	@ Sets the modernFatefulEncounter bit for the Pokemon in the specified slot of the player's party.
-	.macro setmonmodernfatefulencounter slot:req
-	.byte SCR_OP_SETMONMODERNFATEFULENCOUNTER
+	.macro setmodernfatefulencounter slot:req
+	.byte SCR_OP_SETMODERNFATEFULENCOUNTER
 	.2byte \slot
 	.endm
 

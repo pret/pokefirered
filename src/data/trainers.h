@@ -200,7 +200,7 @@
 #line 79
             TRAINER_ENCOUNTER_MUSIC_INTERVIEWER,
 #line 80
-        .doubleBattle = TRUE,
+        .doubleBattle = FALSE,
 #line 81
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
         .partySize = 1,

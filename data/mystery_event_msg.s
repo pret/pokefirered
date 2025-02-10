@@ -68,7 +68,7 @@ SurfPichu_FullParty:
 
 SurfPichu_GiveEgg:
 	giveegg SPECIES_PICHU
-	setmonmodernfatefulencounter VAR_EVENT_PICHU_SLOT
+	setmodernfatefulencounter VAR_EVENT_PICHU_SLOT
 	setmonmetlocation VAR_EVENT_PICHU_SLOT, METLOC_FATEFUL_ENCOUNTER
 	vgoto_if_eq VAR_EVENT_PICHU_SLOT, 1, SurfPichu_Slot1
 	vgoto_if_eq VAR_EVENT_PICHU_SLOT, 2, SurfPichu_Slot2

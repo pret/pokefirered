@@ -624,7 +624,6 @@ static const u8 sText_HarvestBerry[] = _("{B_ATK_NAME_WITH_PREFIX} harvested its
 static const u8 sText_LastAbilityRaisedBuff1[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ABILITY} raised its {B_BUFF1}!");
 static const u8 sText_MagicBounceActivates[] = _("{B_DEF_NAME_WITH_PREFIX} bounced the {B_ATK_NAME_WITH_PREFIX2} back!");
 static const u8 sText_ProteanTypeChange[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY} transformed it into the {B_BUFF1} type!");
-static const u8 sText_SymbiosisItemPass[] = _("{B_SCR_NAME_WITH_PREFIX} passed its {B_LAST_ITEM} to {B_ATK_NAME_WITH_PREFIX2} through {B_LAST_ABILITY}!");
 static const u8 sText_StealthRockDmg[] = _("Pointed stones dug into {B_SCR_NAME_WITH_PREFIX2}!");
 static const u8 sText_ToxicSpikesAbsorbed[] = _("The poison spikes disappeared from the ground around {B_ATK_TEAM2} team!");
 static const u8 sText_ToxicSpikesPoisoned[] = _("{B_SCR_NAME_WITH_PREFIX} was poisoned!");
@@ -1617,7 +1616,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_LASTABILITYRAISEDSTAT - BATTLESTRINGS_TABLE_START] = sText_LastAbilityRaisedBuff1,
     [STRINGID_MAGICBOUNCEACTIVATES - BATTLESTRINGS_TABLE_START] = sText_MagicBounceActivates,
     [STRINGID_PROTEANTYPECHANGE - BATTLESTRINGS_TABLE_START] = sText_ProteanTypeChange,
-    [STRINGID_SYMBIOSISITEMPASS - BATTLESTRINGS_TABLE_START] = sText_SymbiosisItemPass,
+    [STRINGID_SYMBIOSISITEMPASS - BATTLESTRINGS_TABLE_START] = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} passed its {B_LAST_ITEM} to {B_EFF_NAME_WITH_PREFIX2} through {B_LAST_ABILITY}!"),
     [STRINGID_STEALTHROCKDMG - BATTLESTRINGS_TABLE_START] = sText_StealthRockDmg,
     [STRINGID_TOXICSPIKESABSORBED - BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesAbsorbed,
     [STRINGID_TOXICSPIKESPOISONED - BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesPoisoned,

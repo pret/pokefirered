@@ -46,7 +46,7 @@ TEST("Script_HasNoEffect variables")
         checkpcitem ITEM_POTION, 1;
         checkdecorspace DECOR_SNORLAX_DOLL;
         checkdecor DECOR_SNORLAX_DOLL;
-        // checkpartymove MOVE_CELEBRATE;
+        checkpartymove MOVE_CELEBRATE;
         random 2;
         checkmoney 5000;
         checkplayergender;

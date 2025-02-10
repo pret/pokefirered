@@ -704,7 +704,7 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	message PewterCity_Text_ReceivedRunningShoesFromAide
 	waitmessage
-	addmoney 1000
+	addmoney 500
 	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	special DisableMsgBoxWalkaway

@@ -32,7 +32,7 @@ Route15_WestEntrance_2F_EventScript_Aide::
 	call Route15_WestEntrance_2F_EventScript_GetAideRequestInfo
 	goto_if_lt VAR_0x8006, REQUIRED_CAUGHT_MONS, Aide_EventScript_HaventCaughtEnough
 	msgbox Route15_WestEntrance_2F_Text_GreatHereYouGo
-	addmoney 75000
+	addmoney 80000
 	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
 	msgbox Route15_WestEntrance_2F_Text_ReceivedItemFromAide

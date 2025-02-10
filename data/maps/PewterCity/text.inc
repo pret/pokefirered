@@ -127,7 +127,7 @@ PewterCity_Text_AskedToDeliverThis::
     .string "pay you to catch POKéMON!$"
 
 PewterCity_Text_ReceivedRunningShoesFromAide::
-    .string "{PLAYER} received ¥1,000\n"
+    .string "{PLAYER} received ¥500\n"
     .string "from the RICH AIDE.$"
 
 PewterCity_Text_SwitchedShoesWithRunningShoes::

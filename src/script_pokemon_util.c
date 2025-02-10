@@ -263,7 +263,7 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     if (side == 0)
     {
         // set pokédex flags
-        nationalDexNum = SpeciesToNationalDexNum(species);
+        nationalDexNum = SpeciesToNationalPokedexNum(species);
         if (sentToPc != MON_CANT_GIVE)
         {
             GetSetPokedexFlag(nationalDexNum, FLAG_SET_SEEN);

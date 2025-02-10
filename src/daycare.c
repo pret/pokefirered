@@ -1911,7 +1911,7 @@ static void AddHatchedMonToParty(u8 id)
     StringCopy(name, GetSpeciesName(species));
     SetMonData(mon, MON_DATA_NICKNAME, name);
 
-    natDexNum = SpeciesToNationalDexNum(species);
+    natDexNum = SpeciesToNationalPokedexNum(species);
     GetSetPokedexFlag(natDexNum, FLAG_SET_SEEN);
     GetSetPokedexFlag(natDexNum, FLAG_SET_CAUGHT);
 

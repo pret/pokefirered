@@ -86,7 +86,7 @@ bool16 HasAllMons(void)
 
     for (i = NATIONAL_DEX_START; i < NATIONAL_DEX_END; i++)
     {
-        species = NationalDexNumToSpecies(i);
+        species = NationalPokedexNumToSpecies(i);
         if (!gSpeciesInfo[species].isMythical && !GetSetPokedexFlag(i, FLAG_GET_CAUGHT))
             return FALSE;
     }

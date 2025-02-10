@@ -231,7 +231,7 @@ const union AnimCmd *const gAnims_MonPic[] =
     sAnim_MonPic_3,
 };
 
-const union AnimCmd *const sAnims_Trainer[] ={
+const union AnimCmd *const gAnims_Trainer[] ={
     sAnim_GeneralFrame0,
     sAnim_GeneralFrame0,
 };

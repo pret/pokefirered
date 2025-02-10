@@ -636,7 +636,7 @@ static void FillBattleTowerTrainerParty(void)
 
 static u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 count)
 {
-    if (GetSetPokedexFlag(SpeciesToNationalDexNum(species), FLAG_GET_CAUGHT))
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
         if (count == 0)
             StringAppend(gStringVar1, gText_BattleTowerBan_Space);

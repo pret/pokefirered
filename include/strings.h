@@ -186,6 +186,8 @@ extern const u8 gText_Ghost[];
 
 // pokemon
 extern const u8 gText_DefendersStatRose[];
+extern const u8 gText_PkmnGettingPumped[];
+extern const u8 gText_PkmnShroudedInMist[];
 extern const u8 gBattleText_GetPumped[];
 extern const u8 gBattleText_MistShroud[];
 extern const u8 gText_BadEgg[];

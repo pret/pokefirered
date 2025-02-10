@@ -4,14 +4,17 @@
 #include "battle_ai_util.h"
 #include "constants/battle_ai.h"
 #include "battle_anim.h"
+// #include "battle_arena.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
+// #include "battle_tv.h"
 #include "battle_z_move.h"
 #include "bg.h"
 #include "data.h"
+// #include "frontier_util.h"
 #include "item.h"
 #include "link.h"
 #include "main.h"
@@ -35,6 +38,7 @@
 #include "constants/party_menu.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+// #include "trainer_hill.h"
 #include "test_runner.h"
 
 static void OpponentHandleLoadMonSprite(u32 battler);
@@ -658,7 +662,7 @@ static void OpponentHandleChoosePokemon(u32 battler)
     // Switching out
     else if (gBattleStruct->AI_monToSwitchIntoId[battler] == PARTY_SIZE)
     {
-        chosenMonId = GetMostSuitableMonToSwitchInto(battler, TRUE);
+        chosenMonId = GetMostSuitableMonToSwitchInto(battler, SWITCH_AFTER_KO);
         if (chosenMonId == PARTY_SIZE)
         {
             s32 battler1, battler2, firstId, lastId;

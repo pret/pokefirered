@@ -15,4 +15,15 @@ SINGLE_BATTLE_TEST("Hydration cures non-volatile Status conditions if it is rain
     }
 }
 
-TO_DO_BATTLE_TEST("Hydration doesn't cure status conditions if Cloud Nine/Air Lock is on the field");
+SINGLE_BATTLE_TEST("Hydration doesn't cure status conditions if Cloud Nine/Air Lock is on the field")
+{
+    GIVEN {
+        PLAYER(SPECIES_VAPOREON) { Ability(ABILITY_HYDRATION); Status1(STATUS1_BURN); }
+        OPPONENT(SPECIES_GOLDUCK) { Ability(ABILITY_CLOUD_NINE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAIN_DANCE); }
+    } SCENE {
+        NOT ABILITY_POPUP(player, ABILITY_HYDRATION);
+        MESSAGE("Vaporeon was hurt by its burn!");
+    }
+}

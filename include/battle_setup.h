@@ -75,5 +75,6 @@ const u8 *GetTrainerWonSpeech(void);
 void BattleSetup_StartTrainerBattle_Debug(void);
 u8 GetWildBattleTransition(void);
 u8 GetTrainerBattleTransition(void);
+void TrainerBattleLoadArgs(const u8 *data);
 
 #endif // GUARD_BATTLE_SETUP_H

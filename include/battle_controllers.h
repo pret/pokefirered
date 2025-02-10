@@ -176,10 +176,6 @@ enum
     CONTROLLER_CHOSENMONRETURNVALUE,
     CONTROLLER_ONERETURNVALUE,
     CONTROLLER_ONERETURNVALUE_DUPLICATE,
-    CONTROLLER_CLEARUNKVAR,
-    CONTROLLER_SETUNKVAR,
-    CONTROLLER_CLEARUNKFLAG,
-    CONTROLLER_TOGGLEUNKFLAG,
     CONTROLLER_HITANIMATION,
     CONTROLLER_CANTSWITCH,
     CONTROLLER_PLAYSE,
@@ -285,10 +281,6 @@ void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText);
 void DoStatusIconUpdate(u32 battler);
 void BtlController_HandleStatusIconUpdate(u32 battler);
 void BtlController_HandleStatusAnimation(u32 battler);
-void BtlController_HandleClearUnkVar(u32 battler);
-void BtlController_HandleSetUnkVar(u32 battler);
-void BtlController_HandleClearUnkFlag(u32 battler);
-void BtlController_HandleToggleUnkFlag(u32 battler);
 void BtlController_HandleHitAnimation(u32 battler);
 void BtlController_HandlePlaySE(u32 battler);
 void BtlController_HandlePlayFanfareOrBGM(u32 battler);
@@ -331,6 +323,7 @@ void SetControllerToRecordedPlayer(u32 battler);
 // opponent controller
 void SetControllerToOpponent(u32 battler);
 void OpponentBufferExecCompleted(u32 battler);
+void OpponentHandleTrainerSlide(u32 battler);
 
 // player partner controller
 void Controller_PlayerPartnerShowIntroHealthbox(u32 battler); // Also used by the link partner.

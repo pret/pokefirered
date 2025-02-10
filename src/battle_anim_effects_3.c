@@ -3431,47 +3431,21 @@ void AnimTask_RolePlaySilhouette(u8 taskId)
     }
     else
     {
+        struct Pokemon *mon = GetPartyBattlerData(gBattleAnimTarget);
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-        {
             isBackPic = FALSE;
-            personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
-            isShiny = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_IS_SHINY);
-            if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
-            {
-                if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
-                    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
-                else
-                    species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
-            }
-            else
-            {
-                species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies;
-            }
-
-            xOffset = 20;
-            priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
-        }
         else
-        {
             isBackPic = TRUE;
-            personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_PERSONALITY);
-            isShiny = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_IS_SHINY);
-            if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
-            {
-                if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
-                    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
-                else
-                    species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimTarget]], MON_DATA_SPECIES);
-            }
-            else
-            {
-                species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies;
-            }
+        personality = GetMonData(mon, MON_DATA_PERSONALITY);
+        isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+        if (gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies == SPECIES_NONE)
+            species = GetMonData(mon, MON_DATA_SPECIES);
+        else
+            species = gBattleSpritesDataPtr->battlerData[gBattleAnimTarget].transformSpecies;
 
-            xOffset = -20;
-            priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
-        }
+        xOffset = -20;
     }
+    priority = GetBattlerSpriteBGPriority(gBattleAnimAttacker);
 
     coord1 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X);
     coord2 = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y);
@@ -5341,28 +5315,22 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
         }
         else
         {
+            struct Pokemon *mon = GetPartyBattlerData(gBattleAnimAttacker);
+            personality = GetMonData(mon, MON_DATA_PERSONALITY);
+            isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+            if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
+                species = GetMonData(mon, MON_DATA_SPECIES);
+            else
+                species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
+
             if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
             {
-                personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-                isShiny = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_IS_SHINY);
-                if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
-                    species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-                else
-                    species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
-
                 subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority + 1;
                 isBackPic = FALSE;
                 x = DISPLAY_WIDTH + 32;
             }
             else
             {
-                personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_PERSONALITY);
-                isShiny = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_IS_SHINY);
-                if (gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies == SPECIES_NONE)
-                    species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-                else
-                    species = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies;
-
                 subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
                 isBackPic = TRUE;
                 x = -32;

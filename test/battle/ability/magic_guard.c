@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Magic Guard prevents recoil damage to the user")
 
 SINGLE_BATTLE_TEST("Magic Guard ignores immobilization that can be caused by paralysis")
 {
-    if (B_MAGIC_GUARD >= GEN_4)
+    if (B_MAGIC_GUARD == GEN_4)
         PASSES_RANDOMLY(1, 1, RNG_PARALYSIS);
     else
         PASSES_RANDOMLY(75, 100, RNG_PARALYSIS);

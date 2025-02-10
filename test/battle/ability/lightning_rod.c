@@ -71,3 +71,29 @@ DOUBLE_BATTLE_TEST("Lightning Rod forces single-target Electric-type moves to ta
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
     }
 }
+
+DOUBLE_BATTLE_TEST("Lightning Rod redirects an ally's attack")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_RAICHU) { Ability(ABILITY_LIGHTNING_ROD); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponentRight, MOVE_THUNDERBOLT, target: playerLeft); }
+    } SCENE {
+        MESSAGE("The opposing Wobbuffet used Thunderbolt!");
+        if (B_REDIRECT_ABILITY_ALLIES >= GEN_5)
+        {
+            NOT HP_BAR(playerLeft);
+            ABILITY_POPUP(opponentLeft, ABILITY_LIGHTNING_ROD);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
+            MESSAGE("The opposing Raichu's Sp. Atk rose!");
+        }
+        else
+        {
+            HP_BAR(playerLeft);
+        }
+    }
+}

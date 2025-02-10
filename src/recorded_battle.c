@@ -259,7 +259,7 @@ void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
     s32 i, j;
 
     SetPartiesFromRecordedSave(src);
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
         for (var = FALSE, j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
         {

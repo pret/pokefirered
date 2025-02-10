@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Eruption", s16 damage)
         PLAYER(SPECIES_TAUROS) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_PRESENT); }
+        TURN { MOVE(player, MOVE_ERUPTION); }
     } SCENE {
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
@@ -50,7 +50,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Water Spout", s16 damage)
         PLAYER(SPECIES_TAUROS) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_PRESENT); }
+        TURN { MOVE(player, MOVE_WATER_SPOUT); }
     } SCENE {
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
@@ -347,7 +347,7 @@ SINGLE_BATTLE_TEST("Sheer Force doesn't boost Comeuppance", s16 damage)
         EXPECT_NE(results[0].damage, 0);
     }
 }
-SINGLE_BATTLE_TEST("Sheer Force doesn't boost Comeuppance", s16 damage)
+SINGLE_BATTLE_TEST("Sheer Force doesn't boost Payback", s16 damage)
 {
     u16 ability = 0;
     PARAMETRIZE { ability = ABILITY_SHEER_FORCE; }

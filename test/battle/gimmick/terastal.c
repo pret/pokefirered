@@ -186,6 +186,25 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to prio
     }
 }
 
+SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to dynamic base power moves", s16 damage)
+{
+    bool32 tera;
+    PARAMETRIZE { tera = GIMMICK_NONE; }
+    PARAMETRIZE { tera = GIMMICK_TERA; }
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_WATER_SPOUT].effect == EFFECT_POWER_BASED_ON_USER_HP);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); TeraType(TYPE_WATER); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_WATER_SPOUT, gimmick: tera); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_SPOUT, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[1].damage);
+    }
+}
+
 // Defensive Type Checks
 
 SINGLE_BATTLE_TEST("(TERA) Terastallization changes type effectiveness", s16 damage)

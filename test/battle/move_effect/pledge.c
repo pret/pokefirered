@@ -886,7 +886,7 @@ DOUBLE_BATTLE_TEST("Pledge move combo doesn't trigger on opponent's Pledge move 
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_ELECTRIFY) == EFFECT_ELECTRIFY);
-        PLAYER(SPECIES_MAROWAK) { Ability(ABILITY_LIGHTNING_ROD); }
+        PLAYER(SPECIES_ELECTIVIRE) { Ability(ABILITY_MOTOR_DRIVE); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT);

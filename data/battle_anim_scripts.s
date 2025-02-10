@@ -18174,10 +18174,199 @@ PopulationBombContinue:
 gBattleAnimMove_RevivalBlessing::
 	goto gBattleAnimMove_LunarBlessing
 
+gBattleAnimMove_TeraStarstorm::
+	loadspritegfx ANIM_TAG_STARSTORM
+	loadspritegfx ANIM_TAG_YELLOW_STAR
+	loadspritegfx ANIM_TAG_IMPACT
+	fadetobg BG_COSMIC
+	waitbgfadein
+	playsewithpan SE_FALL, SOUND_PAN_ATTACKER
+	call TeraStarstormCreateBeam
+	delay 2
+	call TeraStarstormCreateBeam
+	delay 2
+	call TeraStarstormCreateBeam
+	delay 2
+	call TeraStarstormCreateBeam
+	delay 2
+	call TeraStarstormCreateBeam
+	delay 2
+	call TeraStarstormCreateBeam
+	delay 2
+	call TeraStarstormCreateBeam
+	delay 2
+	call TeraStarstormCreateBeam
+	delay 2
+	call TeraStarstormCreateBeam
+	delay 2
+	jumpifmovetypeequal TYPE_STELLAR, TeraStarstormStellar
+	goto TeraStarstormSingle
+TeraStarstormStellar:
+	jumpifdoublebattle TeraStarstormDouble
+TeraStarstormSingle:
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 10, 0, 30, 0, 1
+	delay 3
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 0, 0, 30, 0, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -10, 0, 30, 0, 1
+	delay 3
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, -5, 30, 0, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, 5, 30, 0, 1
+	delay 3
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -5, 5, 30, 0, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 10, -5, 30, 0, 1
+	delay 3
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 0, 0, 30, 0, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -10, 5, 30, 0, 1
+	delay 3
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, -5, 30, 0, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, 5, 30, 0, 1
+	delay 3
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -5, 5, 30, 0, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	delay 5
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	delay 5
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	waitforvisualfinish
+	restorebg
+	waitbgfadeout
+	end
+TeraStarstormDouble:
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 10, 0, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 10, 0, 30, 1, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 0, 0, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 0, 0, 30, 1, 1
+	delay 3
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -10, 0, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -10, 0, 30, 1, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, -5, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, -5, 30, 1, 1
+	delay 3
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, 5, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, 5, 30, 1, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -5, 5, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -5, 5, 30, 1, 1
+	delay 3
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -5, 10, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -5, 10, 30, 1, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 5, 5, 1, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 10, 0, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 10, 0, 30, 1, 1
+	delay 3
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 0, 0, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 0, 0, 30, 1, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 5, 5, 1, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -10, 0, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -10, 0, 30, 1, 1
+	delay 3
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, -5, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, -5, 30, 1, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 5, 5, 1, 1
+	delay 2
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, 5, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, 5, 5, 30, 1, 1
+	delay 3
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -5, 5, 30, 0, 1
+	createsprite gTeraStarSpriteTemplate, ANIM_BATTLER, 3, 0, 0, -5, 5, 30, 1, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 5, 5, 1, 1
+	delay 5
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 5, 5, 1, 1
+	delay 5
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 5, 5, 1, 1
+	delay 5
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 5, 1, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 5, 5, 1, 1
+	waitforvisualfinish
+	restorebg
+	waitbgfadeout
+	end
+
+TeraStarstormCreateBeam::
+	createsprite gTeraStarstormBeamSpriteTemplate, ANIM_BATTLER, 1, -3, 1, 0, 0, 20
+	createsprite gTeraStarstormBeamSpriteTemplate, ANIM_BATTLER, 1, 1, 0, 0, 0, 20
+	createsprite gTeraStarstormBeamSpriteTemplate, ANIM_BATTLER, 1, 3, -1, 0, 0, 20
+	createsprite gTeraStarstormBeamSpriteTemplate, ANIM_BATTLER, 1, -2, 0, 0, 0, 20
+	createsprite gTeraStarstormBeamSpriteTemplate, ANIM_BATTLER, 1, 0, 1, 0, 0, 20
+	createsprite gTeraStarstormBeamSpriteTemplate, ANIM_BATTLER, 1, -1, -1, 0, 0, 20
+	createsprite gTeraStarstormBeamSpriteTemplate, ANIM_BATTLER, 1, 2, 0, 0, 0, 20
+	return
+
+gBattleAnimMove_TachyonCutter::
+	loadspritegfx ANIM_TAG_CUT
+	loadspritegfx ANIM_TAG_BUBBLE
+	createsprite gTachyonCutterSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0
+	createsprite gTachyonCutterSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 1
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	end
+
+gBattleAnimMove_SaltCure::
+	loadspritegfx ANIM_TAG_SALT_PARTICLE
+	loadspritegfx ANIM_TAG_WATER_ORB
+	call SaltCureEffect
+	call SaltCureEffect
+	call SaltCureEffect
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	waitforvisualfinish
+	call gBattleAnimGeneral_SaltCureDamage
+	end
+
+SaltCureEffect:
+	createsprite gSaltCureSwirlSpriteTemplate, ANIM_TARGET, 2, 0, 28, 384, 50, 8, 50, ANIM_TARGET
+	delay 2
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createsprite gSaltCureSwirlSpriteTemplate, ANIM_TARGET, 2, 0, 32, 240, 40, 11, -46, ANIM_TARGET
+	delay 2
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createsprite gSaltCureSwirlSpriteTemplate, ANIM_TARGET, 2, 0, 33, 416, 40, 4, 42, ANIM_TARGET
+	delay 2
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createsprite gSaltCureSwirlSpriteTemplate, ANIM_TARGET, 2, 0, 31, 288, 45, 6, -42, ANIM_TARGET
+	delay 2
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createsprite gSaltCureSwirlSpriteTemplate, ANIM_TARGET, 2, 0, 28, 448, 45, 11, 46, ANIM_TARGET
+	delay 2
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	createsprite gSaltCureSwirlSpriteTemplate, ANIM_TARGET, 2, 0, 33, 464, 50, 10, -50, ANIM_TARGET
+	delay 2
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	return
+
 gBattleAnimMove_TeraBlast::
 gBattleAnimMove_OrderUp::
 gBattleAnimMove_GlaiveRush::
-gBattleAnimMove_SaltCure::
 gBattleAnimMove_TripleDive::
 gBattleAnimMove_Doodle::
 gBattleAnimMove_Ruination::
@@ -18191,9 +18380,7 @@ gBattleAnimMove_CombatTorque::
 gBattleAnimMove_MagicalTorque::
 gBattleAnimMove_Psyblade::
 gBattleAnimMove_MatchaGotcha::
-gBattleAnimMove_TeraStarstorm::
 gBattleAnimMove_MightyCleave::
-gBattleAnimMove_TachyonCutter::
 gBattleAnimMove_SupercellSlam::
 	end @to do
 
@@ -28887,7 +29074,41 @@ General_AffectionHangedOn_3Hearts:
 	end
 
 gBattleAnimGeneral_SaltCureDamage::
-	goto gBattleAnimStatus_Freeze
+	loadspritegfx ANIM_TAG_SALT_PARTICLE
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, -10, -10, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, 10, 20, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, -29, 0, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, 29, -20, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, -5, 10, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, 17, -12, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, -20, 0, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, -15, 15, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, 26, -5, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, 0, 0, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	delay 4
+	createsprite gSaltCureCrystalSpriteTemplate, ANIM_TARGET, 2, 20, 2, 1
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
+	waitforvisualfinish
+	end
 
 gBattleAnimGeneral_Rainbow::
 	call RainDrops

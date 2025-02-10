@@ -1379,3 +1379,14 @@ void AnimPsychoBoost(struct Sprite *sprite)
         break;
     }
 }
+
+const struct SpriteTemplate gTachyonCutterSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_CUT,
+    .paletteTag = ANIM_TAG_BUBBLE,
+    .oam = &gOamData_AffineOff_ObjBlend_32x32,
+    .anims = gCuttingSliceAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimCuttingSlice,
+};

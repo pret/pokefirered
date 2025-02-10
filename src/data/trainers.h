@@ -11,6 +11,8 @@
 #line 1
     [DIFFICULTY_NORMAL][TRAINER_NONE] =
     {
+#line 2
+        .trainerName = _("PH"),
 #line 3
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 4
@@ -28,6 +30,8 @@
 #line 9
     [DIFFICULTY_NORMAL][TRAINER_AQUA_LEADER] =
     {
+#line 10
+        .trainerName = _("PH"),
 #line 11
         .trainerClass = TRAINER_CLASS_AQUA_LEADER,
 #line 12
@@ -58,6 +62,8 @@
 #line 22
     [DIFFICULTY_NORMAL][TRAINER_AQUA_GRUNT_M] =
     {
+#line 23
+        .trainerName = _("PH"),
 #line 24
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
 #line 25
@@ -88,6 +94,8 @@
 #line 35
     [DIFFICULTY_NORMAL][TRAINER_AQUA_GRUNT_F] =
     {
+#line 36
+        .trainerName = _("PH"),
 #line 37
         .trainerClass = TRAINER_CLASS_TEAM_AQUA,
 #line 38
@@ -118,6 +126,8 @@
 #line 48
     [DIFFICULTY_NORMAL][TRAINER_RS_AROMA_LADY] =
     {
+#line 49
+        .trainerName = _("PH"),
 #line 50
         .trainerClass = TRAINER_CLASS_RS_AROMA_LADY,
 #line 51
@@ -148,6 +158,8 @@
 #line 61
     [DIFFICULTY_NORMAL][TRAINER_RS_RUIN_MANIAC] =
     {
+#line 62
+        .trainerName = _("PH"),
 #line 63
         .trainerClass = TRAINER_CLASS_RS_RUIN_MANIAC,
 #line 64
@@ -178,6 +190,8 @@
 #line 74
     [DIFFICULTY_NORMAL][TRAINER_INTERVIEWER] =
     {
+#line 75
+        .trainerName = _("PH"),
 #line 76
         .trainerClass = TRAINER_CLASS_INTERVIEWER,
 #line 77
@@ -208,6 +222,8 @@
 #line 87
     [DIFFICULTY_NORMAL][TRAINER_RS_TUBER_F] =
     {
+#line 88
+        .trainerName = _("PH"),
 #line 89
         .trainerClass = TRAINER_CLASS_RS_TUBER_F,
 #line 90
@@ -238,6 +254,8 @@
 #line 100
     [DIFFICULTY_NORMAL][TRAINER_RS_TUBER_M] =
     {
+#line 101
+        .trainerName = _("PH"),
 #line 102
         .trainerClass = TRAINER_CLASS_RS_TUBER_M,
 #line 103
@@ -268,6 +286,8 @@
 #line 113
     [DIFFICULTY_NORMAL][TRAINER_RS_COOLTRAINER_M] =
     {
+#line 114
+        .trainerName = _("PH"),
 #line 115
         .trainerClass = TRAINER_CLASS_RS_COOLTRAINER,
 #line 116
@@ -298,6 +318,8 @@
 #line 126
     [DIFFICULTY_NORMAL][TRAINER_RS_COOLTRAINER_F] =
     {
+#line 127
+        .trainerName = _("PH"),
 #line 128
         .trainerClass = TRAINER_CLASS_RS_COOLTRAINER,
 #line 129
@@ -328,6 +350,8 @@
 #line 139
     [DIFFICULTY_NORMAL][TRAINER_HEX_MANIAC] =
     {
+#line 140
+        .trainerName = _("PH"),
 #line 141
         .trainerClass = TRAINER_CLASS_HEX_MANIAC,
 #line 142
@@ -358,6 +382,8 @@
 #line 152
     [DIFFICULTY_NORMAL][TRAINER_RS_LADY] =
     {
+#line 153
+        .trainerName = _("PH"),
 #line 154
         .trainerClass = TRAINER_CLASS_RS_LADY,
 #line 155
@@ -388,6 +414,8 @@
 #line 165
     [DIFFICULTY_NORMAL][TRAINER_RS_BEAUTY] =
     {
+#line 166
+        .trainerName = _("PH"),
 #line 167
         .trainerClass = TRAINER_CLASS_RS_BEAUTY,
 #line 168
@@ -418,6 +446,8 @@
 #line 178
     [DIFFICULTY_NORMAL][TRAINER_RICH_BOY] =
     {
+#line 179
+        .trainerName = _("PH"),
 #line 180
         .trainerClass = TRAINER_CLASS_RICH_BOY,
 #line 181
@@ -448,6 +478,8 @@
 #line 191
     [DIFFICULTY_NORMAL][TRAINER_RS_POKEMANIAC] =
     {
+#line 192
+        .trainerName = _("PH"),
 #line 193
         .trainerClass = TRAINER_CLASS_RS_POKEMANIAC,
 #line 194
@@ -478,6 +510,8 @@
 #line 204
     [DIFFICULTY_NORMAL][TRAINER_RS_SWIMMER_M] =
     {
+#line 205
+        .trainerName = _("PH"),
 #line 206
         .trainerClass = TRAINER_CLASS_RS_SWIMMER_M,
 #line 207
@@ -508,6 +542,8 @@
 #line 217
     [DIFFICULTY_NORMAL][TRAINER_RS_BLACK_BELT] =
     {
+#line 218
+        .trainerName = _("PH"),
 #line 219
         .trainerClass = TRAINER_CLASS_RS_BLACK_BELT,
 #line 220
@@ -538,6 +574,8 @@
 #line 230
     [DIFFICULTY_NORMAL][TRAINER_GUITARIST] =
     {
+#line 231
+        .trainerName = _("PH"),
 #line 232
         .trainerClass = TRAINER_CLASS_GUITARIST,
 #line 233
@@ -568,6 +606,8 @@
 #line 243
     [DIFFICULTY_NORMAL][TRAINER_KINDLER] =
     {
+#line 244
+        .trainerName = _("PH"),
 #line 245
         .trainerClass = TRAINER_CLASS_KINDLER,
 #line 246
@@ -598,6 +638,8 @@
 #line 256
     [DIFFICULTY_NORMAL][TRAINER_RS_CAMPER] =
     {
+#line 257
+        .trainerName = _("PH"),
 #line 258
         .trainerClass = TRAINER_CLASS_RS_CAMPER,
 #line 259
@@ -628,6 +670,8 @@
 #line 269
     [DIFFICULTY_NORMAL][TRAINER_BUG_MANIAC] =
     {
+#line 270
+        .trainerName = _("PH"),
 #line 271
         .trainerClass = TRAINER_CLASS_BUG_MANIAC,
 #line 272
@@ -658,6 +702,8 @@
 #line 282
     [DIFFICULTY_NORMAL][TRAINER_RS_PSYCHIC_M] =
     {
+#line 283
+        .trainerName = _("PH"),
 #line 284
         .trainerClass = TRAINER_CLASS_RS_PSYCHIC,
 #line 285
@@ -688,6 +734,8 @@
 #line 295
     [DIFFICULTY_NORMAL][TRAINER_RS_PSYCHIC_F] =
     {
+#line 296
+        .trainerName = _("PH"),
 #line 297
         .trainerClass = TRAINER_CLASS_RS_PSYCHIC,
 #line 298
@@ -718,6 +766,8 @@
 #line 308
     [DIFFICULTY_NORMAL][TRAINER_RS_GENTLEMAN] =
     {
+#line 309
+        .trainerName = _("PH"),
 #line 310
         .trainerClass = TRAINER_CLASS_RS_GENTLEMAN,
 #line 311
@@ -908,6 +958,8 @@
 #line 386
     [DIFFICULTY_NORMAL][TRAINER_SCHOOL_KID_M] =
     {
+#line 387
+        .trainerName = _("PH"),
 #line 388
         .trainerClass = TRAINER_CLASS_SCHOOL_KID,
 #line 389
@@ -938,6 +990,8 @@
 #line 399
     [DIFFICULTY_NORMAL][TRAINER_SCHOOL_KID_F] =
     {
+#line 400
+        .trainerName = _("PH"),
 #line 401
         .trainerClass = TRAINER_CLASS_SCHOOL_KID,
 #line 402
@@ -968,6 +1022,8 @@
 #line 412
     [DIFFICULTY_NORMAL][TRAINER_SR_AND_JR] =
     {
+#line 413
+        .trainerName = _("PH"),
 #line 414
         .trainerClass = TRAINER_CLASS_SR_AND_JR,
 #line 415
@@ -998,6 +1054,8 @@
 #line 425
     [DIFFICULTY_NORMAL][TRAINER_POKEFAN_M] =
     {
+#line 426
+        .trainerName = _("PH"),
 #line 427
         .trainerClass = TRAINER_CLASS_POKEFAN,
 #line 428
@@ -1028,6 +1086,8 @@
 #line 438
     [DIFFICULTY_NORMAL][TRAINER_POKEFAN_F] =
     {
+#line 439
+        .trainerName = _("PH"),
 #line 440
         .trainerClass = TRAINER_CLASS_POKEFAN,
 #line 441
@@ -1058,6 +1118,8 @@
 #line 451
     [DIFFICULTY_NORMAL][TRAINER_EXPERT_M] =
     {
+#line 452
+        .trainerName = _("PH"),
 #line 453
         .trainerClass = TRAINER_CLASS_EXPERT,
 #line 454
@@ -1088,6 +1150,8 @@
 #line 464
     [DIFFICULTY_NORMAL][TRAINER_EXPERT_F] =
     {
+#line 465
+        .trainerName = _("PH"),
 #line 466
         .trainerClass = TRAINER_CLASS_EXPERT,
 #line 467
@@ -1118,6 +1182,8 @@
 #line 477
     [DIFFICULTY_NORMAL][TRAINER_RS_YOUNGSTER] =
     {
+#line 478
+        .trainerName = _("PH"),
 #line 479
         .trainerClass = TRAINER_CLASS_RS_YOUNGSTER,
 #line 480
@@ -1148,6 +1214,8 @@
 #line 490
     [DIFFICULTY_NORMAL][TRAINER_RS_CHAMPION] =
     {
+#line 491
+        .trainerName = _("PH"),
 #line 492
         .trainerClass = TRAINER_CLASS_RS_CHAMPION,
 #line 493
@@ -1178,6 +1246,8 @@
 #line 503
     [DIFFICULTY_NORMAL][TRAINER_RS_FISHERMAN] =
     {
+#line 504
+        .trainerName = _("PH"),
 #line 505
         .trainerClass = TRAINER_CLASS_RS_FISHERMAN,
 #line 506
@@ -1208,6 +1278,8 @@
 #line 516
     [DIFFICULTY_NORMAL][TRAINER_CYCLING_TRIATHLETE_M] =
     {
+#line 517
+        .trainerName = _("PH"),
 #line 518
         .trainerClass = TRAINER_CLASS_TRIATHLETE,
 #line 519
@@ -1238,6 +1310,8 @@
 #line 529
     [DIFFICULTY_NORMAL][TRAINER_CYCLING_TRIATHLETE_F] =
     {
+#line 530
+        .trainerName = _("PH"),
 #line 531
         .trainerClass = TRAINER_CLASS_TRIATHLETE,
 #line 532
@@ -1268,6 +1342,8 @@
 #line 542
     [DIFFICULTY_NORMAL][TRAINER_RUNNING_TRIATHLETE_M] =
     {
+#line 543
+        .trainerName = _("PH"),
 #line 544
         .trainerClass = TRAINER_CLASS_TRIATHLETE,
 #line 545
@@ -1298,6 +1374,8 @@
 #line 555
     [DIFFICULTY_NORMAL][TRAINER_RUNNING_TRIATHLETE_F] =
     {
+#line 556
+        .trainerName = _("PH"),
 #line 557
         .trainerClass = TRAINER_CLASS_TRIATHLETE,
 #line 558
@@ -1328,6 +1406,8 @@
 #line 568
     [DIFFICULTY_NORMAL][TRAINER_SWIMMING_TRIATHLETE_M] =
     {
+#line 569
+        .trainerName = _("PH"),
 #line 570
         .trainerClass = TRAINER_CLASS_TRIATHLETE,
 #line 571
@@ -1358,6 +1438,8 @@
 #line 581
     [DIFFICULTY_NORMAL][TRAINER_SWIMMING_TRIATHLETE_F] =
     {
+#line 582
+        .trainerName = _("PH"),
 #line 583
         .trainerClass = TRAINER_CLASS_TRIATHLETE,
 #line 584
@@ -1388,6 +1470,8 @@
 #line 594
     [DIFFICULTY_NORMAL][TRAINER_DRAGON_TAMER] =
     {
+#line 595
+        .trainerName = _("PH"),
 #line 596
         .trainerClass = TRAINER_CLASS_DRAGON_TAMER,
 #line 597
@@ -1418,6 +1502,8 @@
 #line 607
     [DIFFICULTY_NORMAL][TRAINER_RS_BIRD_KEEPER] =
     {
+#line 608
+        .trainerName = _("PH"),
 #line 609
         .trainerClass = TRAINER_CLASS_RS_BIRD_KEEPER,
 #line 610
@@ -1448,6 +1534,8 @@
 #line 620
     [DIFFICULTY_NORMAL][TRAINER_NINJA_BOY] =
     {
+#line 621
+        .trainerName = _("PH"),
 #line 622
         .trainerClass = TRAINER_CLASS_NINJA_BOY,
 #line 623
@@ -1478,6 +1566,8 @@
 #line 633
     [DIFFICULTY_NORMAL][TRAINER_BATTLE_GIRL] =
     {
+#line 634
+        .trainerName = _("PH"),
 #line 635
         .trainerClass = TRAINER_CLASS_BATTLE_GIRL,
 #line 636
@@ -1508,6 +1598,8 @@
 #line 646
     [DIFFICULTY_NORMAL][TRAINER_PARASOL_LADY] =
     {
+#line 647
+        .trainerName = _("PH"),
 #line 648
         .trainerClass = TRAINER_CLASS_PARASOL_LADY,
 #line 649
@@ -1538,6 +1630,8 @@
 #line 659
     [DIFFICULTY_NORMAL][TRAINER_RS_SWIMMER_F] =
     {
+#line 660
+        .trainerName = _("PH"),
 #line 661
         .trainerClass = TRAINER_CLASS_RS_SWIMMER_F,
 #line 662
@@ -1568,6 +1662,8 @@
 #line 672
     [DIFFICULTY_NORMAL][TRAINER_RS_PICNICKER] =
     {
+#line 673
+        .trainerName = _("PH"),
 #line 674
         .trainerClass = TRAINER_CLASS_RS_PICNICKER,
 #line 675
@@ -1598,6 +1694,8 @@
 #line 685
     [DIFFICULTY_NORMAL][TRAINER_RS_TWINS] =
     {
+#line 686
+        .trainerName = _("PH"),
 #line 687
         .trainerClass = TRAINER_CLASS_RS_TWINS,
 #line 688
@@ -1628,6 +1726,8 @@
 #line 698
     [DIFFICULTY_NORMAL][TRAINER_RS_SAILOR] =
     {
+#line 699
+        .trainerName = _("PH"),
 #line 700
         .trainerClass = TRAINER_CLASS_RS_SAILOR,
 #line 701
@@ -1658,6 +1758,8 @@
 #line 711
     [DIFFICULTY_NORMAL][TRAINER_BOARDER_M] =
     {
+#line 712
+        .trainerName = _("PH"),
 #line 713
         .trainerClass = TRAINER_CLASS_BOARDER,
 #line 714
@@ -1688,6 +1790,8 @@
 #line 724
     [DIFFICULTY_NORMAL][TRAINER_BOARDER_F] =
     {
+#line 725
+        .trainerName = _("PH"),
 #line 726
         .trainerClass = TRAINER_CLASS_BOARDER,
 #line 727
@@ -1718,6 +1822,8 @@
 #line 737
     [DIFFICULTY_NORMAL][TRAINER_COLLECTOR] =
     {
+#line 738
+        .trainerName = _("PH"),
 #line 739
         .trainerClass = TRAINER_CLASS_COLLECTOR,
 #line 740
@@ -1748,6 +1854,8 @@
 #line 750
     [DIFFICULTY_NORMAL][TRAINER_WALLY] =
     {
+#line 751
+        .trainerName = _("PH"),
 #line 752
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER,
 #line 753
@@ -1778,6 +1886,8 @@
 #line 763
     [DIFFICULTY_NORMAL][TRAINER_BRENDAN] =
     {
+#line 764
+        .trainerName = _("PH"),
 #line 765
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER,
 #line 766
@@ -1808,6 +1918,8 @@
 #line 776
     [DIFFICULTY_NORMAL][TRAINER_BRENDAN_2] =
     {
+#line 777
+        .trainerName = _("PH"),
 #line 778
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER,
 #line 779
@@ -1838,6 +1950,8 @@
 #line 789
     [DIFFICULTY_NORMAL][TRAINER_BRENDAN_3] =
     {
+#line 790
+        .trainerName = _("PH"),
 #line 791
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER,
 #line 792
@@ -1868,6 +1982,8 @@
 #line 802
     [DIFFICULTY_NORMAL][TRAINER_MAY] =
     {
+#line 803
+        .trainerName = _("PH"),
 #line 804
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER,
 #line 805
@@ -1898,6 +2014,8 @@
 #line 815
     [DIFFICULTY_NORMAL][TRAINER_MAY_2] =
     {
+#line 816
+        .trainerName = _("PH"),
 #line 817
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER,
 #line 818
@@ -1928,6 +2046,8 @@
 #line 828
     [DIFFICULTY_NORMAL][TRAINER_MAY_3] =
     {
+#line 829
+        .trainerName = _("PH"),
 #line 830
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER,
 #line 831
@@ -1958,6 +2078,8 @@
 #line 841
     [DIFFICULTY_NORMAL][TRAINER_RS_PKMN_BREEDER_M] =
     {
+#line 842
+        .trainerName = _("PH"),
 #line 843
         .trainerClass = TRAINER_CLASS_RS_PKMN_BREEDER,
 #line 844
@@ -1988,6 +2110,8 @@
 #line 854
     [DIFFICULTY_NORMAL][TRAINER_RS_PKMN_BREEDER_F] =
     {
+#line 855
+        .trainerName = _("PH"),
 #line 856
         .trainerClass = TRAINER_CLASS_RS_PKMN_BREEDER,
 #line 857
@@ -2018,6 +2142,8 @@
 #line 867
     [DIFFICULTY_NORMAL][TRAINER_RS_PKMN_RANGER_M] =
     {
+#line 868
+        .trainerName = _("PH"),
 #line 869
         .trainerClass = TRAINER_CLASS_RS_PKMN_RANGER,
 #line 870
@@ -2048,6 +2174,8 @@
 #line 880
     [DIFFICULTY_NORMAL][TRAINER_RS_PKMN_RANGER_F] =
     {
+#line 881
+        .trainerName = _("PH"),
 #line 882
         .trainerClass = TRAINER_CLASS_RS_PKMN_RANGER,
 #line 883
@@ -2078,6 +2206,8 @@
 #line 893
     [DIFFICULTY_NORMAL][TRAINER_MAGMA_LEADER] =
     {
+#line 894
+        .trainerName = _("PH"),
 #line 895
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
 #line 896
@@ -2108,6 +2238,8 @@
 #line 906
     [DIFFICULTY_NORMAL][TRAINER_MAGMA_GRUNT_M] =
     {
+#line 907
+        .trainerName = _("PH"),
 #line 908
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
 #line 909
@@ -2138,6 +2270,8 @@
 #line 919
     [DIFFICULTY_NORMAL][TRAINER_MAMGA_GRUNT_F] =
     {
+#line 920
+        .trainerName = _("PH"),
 #line 921
         .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
 #line 922
@@ -2168,6 +2302,8 @@
 #line 932
     [DIFFICULTY_NORMAL][TRAINER_RS_LASS] =
     {
+#line 933
+        .trainerName = _("PH"),
 #line 934
         .trainerClass = TRAINER_CLASS_RS_LASS,
 #line 935
@@ -2198,6 +2334,8 @@
 #line 945
     [DIFFICULTY_NORMAL][TRAINER_RS_BUG_CATCHER] =
     {
+#line 946
+        .trainerName = _("PH"),
 #line 947
         .trainerClass = TRAINER_CLASS_RS_BUG_CATCHER,
 #line 948
@@ -2228,6 +2366,8 @@
 #line 958
     [DIFFICULTY_NORMAL][TRAINER_RS_HIKER] =
     {
+#line 959
+        .trainerName = _("PH"),
 #line 960
         .trainerClass = TRAINER_CLASS_RS_HIKER,
 #line 961
@@ -2258,6 +2398,8 @@
 #line 971
     [DIFFICULTY_NORMAL][TRAINER_RS_YOUNG_COUPLE] =
     {
+#line 972
+        .trainerName = _("PH"),
 #line 973
         .trainerClass = TRAINER_CLASS_RS_YOUNG_COUPLE,
 #line 974
@@ -2299,6 +2441,8 @@
 #line 988
     [DIFFICULTY_NORMAL][TRAINER_OLD_COUPLE] =
     {
+#line 989
+        .trainerName = _("PH"),
 #line 990
         .trainerClass = TRAINER_CLASS_OLD_COUPLE,
 #line 991
@@ -2329,6 +2473,8 @@
 #line 1001
     [DIFFICULTY_NORMAL][TRAINER_RS_SIS_AND_BRO] =
     {
+#line 1002
+        .trainerName = _("PH"),
 #line 1003
         .trainerClass = TRAINER_CLASS_RS_SIS_AND_BRO,
 #line 1004
@@ -3787,6 +3933,8 @@
 #line 1581
     [DIFFICULTY_NORMAL][TRAINER_BUG_CATCHER_2] =
     {
+#line 1582
+        .trainerName = _("PH"),
 #line 1583
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
 #line 1584
@@ -4280,6 +4428,8 @@
 #line 1776
     [DIFFICULTY_NORMAL][TRAINER_LASS_2] =
     {
+#line 1777
+        .trainerName = _("PH"),
 #line 1778
         .trainerClass = TRAINER_CLASS_LASS,
 #line 1779
@@ -5311,6 +5461,8 @@
 #line 2184
     [DIFFICULTY_NORMAL][TRAINER_CAMPER_2] =
     {
+#line 2185
+        .trainerName = _("PH"),
 #line 2186
         .trainerClass = TRAINER_CLASS_CAMPER,
 #line 2187
@@ -6615,6 +6767,8 @@
 #line 2703
     [DIFFICULTY_NORMAL][TRAINER_SUPER_NERD_1] =
     {
+#line 2704
+        .trainerName = _("PH"),
 #line 2705
         .trainerClass = TRAINER_CLASS_SUPER_NERD,
 #line 2706
@@ -6667,6 +6821,8 @@
 #line 2724
     [DIFFICULTY_NORMAL][TRAINER_SUPER_NERD_2] =
     {
+#line 2725
+        .trainerName = _("PH"),
 #line 2726
         .trainerClass = TRAINER_CLASS_SUPER_NERD,
 #line 2727
@@ -6730,6 +6886,8 @@
 #line 2749
     [DIFFICULTY_NORMAL][TRAINER_SUPER_NERD_3] =
     {
+#line 2750
+        .trainerName = _("PH"),
 #line 2751
         .trainerClass = TRAINER_CLASS_SUPER_NERD,
 #line 2752
@@ -8078,6 +8236,8 @@
 #line 3309
     [DIFFICULTY_NORMAL][TRAINER_BIKER_1] =
     {
+#line 3310
+        .trainerName = _("PH"),
 #line 3311
         .trainerClass = TRAINER_CLASS_BIKER,
 #line 3312
@@ -8697,6 +8857,8 @@
 #line 3579
     [DIFFICULTY_NORMAL][TRAINER_BURGLAR_1] =
     {
+#line 3580
+        .trainerName = _("PH"),
 #line 3581
         .trainerClass = TRAINER_CLASS_BURGLAR,
 #line 3582
@@ -8738,6 +8900,8 @@
 #line 3596
     [DIFFICULTY_NORMAL][TRAINER_BURGLAR_2] =
     {
+#line 3597
+        .trainerName = _("PH"),
 #line 3598
         .trainerClass = TRAINER_CLASS_BURGLAR,
 #line 3599
@@ -8768,6 +8932,8 @@
 #line 3609
     [DIFFICULTY_NORMAL][TRAINER_BURGLAR_3] =
     {
+#line 3610
+        .trainerName = _("PH"),
 #line 3611
         .trainerClass = TRAINER_CLASS_BURGLAR,
 #line 3612
@@ -8992,6 +9158,8 @@
 #line 3698
     [DIFFICULTY_NORMAL][TRAINER_BURGLAR_4] =
     {
+#line 3699
+        .trainerName = _("PH"),
 #line 3700
         .trainerClass = TRAINER_CLASS_BURGLAR,
 #line 3701
@@ -11199,6 +11367,8 @@
 #line 4564
     [DIFFICULTY_NORMAL][TRAINER_GAMER_1] =
     {
+#line 4565
+        .trainerName = _("PH"),
 #line 4566
         .trainerClass = TRAINER_CLASS_GAMER,
 #line 4567
@@ -23191,6 +23361,8 @@
 #line 9490
     [DIFFICULTY_NORMAL][TRAINER_CHANNELER_1] =
     {
+#line 9491
+        .trainerName = _("PH"),
 #line 9492
         .trainerClass = TRAINER_CLASS_CHANNELER,
 #line 9493
@@ -23221,6 +23393,8 @@
 #line 9503
     [DIFFICULTY_NORMAL][TRAINER_CHANNELER_2] =
     {
+#line 9504
+        .trainerName = _("PH"),
 #line 9505
         .trainerClass = TRAINER_CLASS_CHANNELER,
 #line 9506
@@ -23251,6 +23425,8 @@
 #line 9516
     [DIFFICULTY_NORMAL][TRAINER_CHANNELER_3] =
     {
+#line 9517
+        .trainerName = _("PH"),
 #line 9518
         .trainerClass = TRAINER_CLASS_CHANNELER,
 #line 9519
@@ -23281,6 +23457,8 @@
 #line 9529
     [DIFFICULTY_NORMAL][TRAINER_CHANNELER_4] =
     {
+#line 9530
+        .trainerName = _("PH"),
 #line 9531
         .trainerClass = TRAINER_CLASS_CHANNELER,
 #line 9532
@@ -23311,6 +23489,8 @@
 #line 9542
     [DIFFICULTY_NORMAL][TRAINER_CHANNELER_5] =
     {
+#line 9543
+        .trainerName = _("PH"),
 #line 9544
         .trainerClass = TRAINER_CLASS_CHANNELER,
 #line 9545
@@ -23341,6 +23521,8 @@
 #line 9555
     [DIFFICULTY_NORMAL][TRAINER_CHANNELER_6] =
     {
+#line 9556
+        .trainerName = _("PH"),
 #line 9557
         .trainerClass = TRAINER_CLASS_CHANNELER,
 #line 9558
@@ -23393,6 +23575,8 @@
 #line 9576
     [DIFFICULTY_NORMAL][TRAINER_CHANNELER_7] =
     {
+#line 9577
+        .trainerName = _("PH"),
 #line 9578
         .trainerClass = TRAINER_CLASS_CHANNELER,
 #line 9579
@@ -23423,6 +23607,8 @@
 #line 9589
     [DIFFICULTY_NORMAL][TRAINER_CHANNELER_8] =
     {
+#line 9590
+        .trainerName = _("PH"),
 #line 9591
         .trainerClass = TRAINER_CLASS_CHANNELER,
 #line 9592
@@ -24903,6 +25089,8 @@
 #line 10176
     [DIFFICULTY_NORMAL][TRAINER_BUG_CATCHER_3] =
     {
+#line 10177
+        .trainerName = _("PH"),
 #line 10178
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
 #line 10179
@@ -24933,6 +25121,8 @@
 #line 10189
     [DIFFICULTY_NORMAL][TRAINER_BUG_CATCHER_4] =
     {
+#line 10190
+        .trainerName = _("PH"),
 #line 10191
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
 #line 10192
@@ -24963,6 +25153,8 @@
 #line 10202
     [DIFFICULTY_NORMAL][TRAINER_BUG_CATCHER_5] =
     {
+#line 10203
+        .trainerName = _("PH"),
 #line 10204
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
 #line 10205
@@ -24993,6 +25185,8 @@
 #line 10215
     [DIFFICULTY_NORMAL][TRAINER_BUG_CATCHER_6] =
     {
+#line 10216
+        .trainerName = _("PH"),
 #line 10217
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
 #line 10218
@@ -25023,6 +25217,8 @@
 #line 10228
     [DIFFICULTY_NORMAL][TRAINER_BUG_CATCHER_7] =
     {
+#line 10229
+        .trainerName = _("PH"),
 #line 10230
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
 #line 10231
@@ -25053,6 +25249,8 @@
 #line 10241
     [DIFFICULTY_NORMAL][TRAINER_BUG_CATCHER_8] =
     {
+#line 10242
+        .trainerName = _("PH"),
 #line 10243
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
 #line 10244
@@ -26539,6 +26737,8 @@
 #line 10841
     [DIFFICULTY_NORMAL][TRAINER_BIKER_2] =
     {
+#line 10842
+        .trainerName = _("PH"),
 #line 10843
         .trainerClass = TRAINER_CLASS_BIKER,
 #line 10844

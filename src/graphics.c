@@ -993,6 +993,12 @@ const u32 gBattleAnimSpritePal_Meteor[] = INCBIN_U32("graphics/battle_anims/spri
 const u32 gBattleAnimSpriteGfx_FlatRock[] = INCBIN_U32("graphics/battle_anims/sprites/flat_rock.4bpp.lz");
 const u32 gBattleAnimSpritePal_FlatRock[] = INCBIN_U32("graphics/battle_anims/sprites/flat_rock.gbapal.lz");
 
+const u32 gBattleAnimSpriteGfx_TeraStarstormBeam[] = INCBIN_U32("graphics/battle_anims/sprites/starstorm_beam.4bpp.lz");
+const u32 gBattleAnimSpritePal_TeraStarstormBeam[] = INCBIN_U32("graphics/battle_anims/sprites/starstorm_beam.gbapal.lz");
+
+const u32 gBattleAnimSpriteGfx_SaltParticle[] = INCBIN_U32("graphics/battle_anims/sprites/salt_particle.4bpp.lz");
+const u32 gBattleAnimSpritePal_SaltParticle[] = INCBIN_U32("graphics/battle_anims/sprites/salt_particle.gbapal.lz");
+
 const u16 gPPTextPalette[] = INCBIN_U16("graphics/interface/text_pp.gbapal");
 
 #include "data/graphics/trainers.h"

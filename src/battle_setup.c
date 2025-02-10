@@ -623,6 +623,43 @@ void TrainerBattleLoadArgs(const u8 *data)
     sTrainerBattleEndScript = (u8*)data + sizeof(TrainerBattleParameter);
 }
 
+void TrainerBattleLoadArgsTrainerA(const u8 *data)
+{
+    TrainerBattleParameter *temp = (TrainerBattleParameter*)data;
+
+    TRAINER_BATTLE_PARAM.playMusicA = temp->params.playMusicA;
+    TRAINER_BATTLE_PARAM.objEventLocalIdA = temp->params.objEventLocalIdA;
+    TRAINER_BATTLE_PARAM.opponentA = temp->params.opponentA;
+    TRAINER_BATTLE_PARAM.introTextA = temp->params.introTextA;
+    TRAINER_BATTLE_PARAM.defeatTextA = temp->params.defeatTextA;
+    TRAINER_BATTLE_PARAM.battleScriptRetAddrA = temp->params.battleScriptRetAddrA;
+}
+
+void TrainerBattleLoadArgsTrainerB(const u8 *data)
+{
+    TrainerBattleParameter *temp = (TrainerBattleParameter*)data;
+
+    TRAINER_BATTLE_PARAM.playMusicB = temp->params.playMusicB;
+    TRAINER_BATTLE_PARAM.objEventLocalIdB = temp->params.objEventLocalIdB;
+    TRAINER_BATTLE_PARAM.opponentB = temp->params.opponentB;
+    TRAINER_BATTLE_PARAM.introTextB = temp->params.introTextB;
+    TRAINER_BATTLE_PARAM.defeatTextB = temp->params.defeatTextB;
+    TRAINER_BATTLE_PARAM.battleScriptRetAddrB = temp->params.battleScriptRetAddrB;
+}
+
+// loads trainer A parameter to trainer B. Used for second trainer in trainer_see.c
+void TrainerBattleLoadArgsSecondTrainer(const u8 *data)
+{
+    TrainerBattleParameter *temp = (TrainerBattleParameter*)data;
+
+    TRAINER_BATTLE_PARAM.playMusicB = temp->params.playMusicA;
+    TRAINER_BATTLE_PARAM.objEventLocalIdB = temp->params.objEventLocalIdA;
+    TRAINER_BATTLE_PARAM.opponentB = temp->params.opponentA;
+    TRAINER_BATTLE_PARAM.introTextB = temp->params.introTextA;
+    TRAINER_BATTLE_PARAM.defeatTextB = temp->params.defeatTextA;
+    TRAINER_BATTLE_PARAM.battleScriptRetAddrB = temp->params.battleScriptRetAddrA;
+}
+
 void SetMapVarsToTrainerA(void)
 {
     if (TRAINER_BATTLE_PARAM.objEventLocalIdA != 0)
@@ -700,6 +737,12 @@ void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript)
 {
     gSelectedObjectEvent = trainerObjEventId;
     gSpecialVar_LastTalked = gObjectEvents[trainerObjEventId].localId;
+
+    if (gApproachingTrainerId == 0) 
+        TrainerBattleLoadArgs(trainerScript + 1);
+    else 
+        TrainerBattleLoadArgsSecondTrainer(trainerScript + 1);
+
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
 }
 

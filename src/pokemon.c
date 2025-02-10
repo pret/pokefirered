@@ -6467,18 +6467,18 @@ bool32 SpeciesHasGenderDifferences(u16 species)
 bool32 TryFormChange(u32 monId, u32 side, u16 method)
 {
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
-    u16 targetSpecies;
 
     if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_NONE
      || GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_EGG)
         return FALSE;
 
-    targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
+    u32 currentSpecies = GetMonData(&party[monId], MON_DATA_SPECIES);
+    u32 targetSpecies = GetFormChangeTargetSpecies(&party[monId], method, 0);
 
-    if (targetSpecies == SPECIES_NONE && gBattleStruct != NULL)
+    if (targetSpecies == currentSpecies && gBattleStruct != NULL && gBattleStruct->changedSpecies[side][monId] != SPECIES_NONE)
         targetSpecies = gBattleStruct->changedSpecies[side][monId];
 
-    if (targetSpecies != SPECIES_NONE)
+    if (targetSpecies != currentSpecies)
     {
         TryToSetBattleFormChangeMoves(&party[monId], method);
         SetMonData(&party[monId], MON_DATA_SPECIES, &targetSpecies);

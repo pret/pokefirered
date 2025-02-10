@@ -93,8 +93,8 @@ SINGLE_BATTLE_TEST("Shield Dust does not block self-targeting effects, primary o
     PARAMETRIZE { move = MOVE_METEOR_ASSAULT; }
 
     GIVEN {
+        ASSUME(gMovesInfo[MOVE_RAPID_SPIN].effect == EFFECT_RAPID_SPIN);
         ASSUME(MoveHasAdditionalEffectSelf(MOVE_POWER_UP_PUNCH, MOVE_EFFECT_ATK_PLUS_1) == TRUE);
-        ASSUME(MoveHasAdditionalEffectSelf(MOVE_RAPID_SPIN, MOVE_EFFECT_RAPID_SPIN) == TRUE);
         ASSUME(MoveHasAdditionalEffectSelf(MOVE_LEAF_STORM, MOVE_EFFECT_SP_ATK_MINUS_2) == TRUE);
         ASSUME(MoveHasAdditionalEffectSelf(MOVE_METEOR_ASSAULT, MOVE_EFFECT_RECHARGE) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
@@ -149,7 +149,6 @@ DOUBLE_BATTLE_TEST("Shield Dust does or does not block Sparkling Aria depending 
 
 DOUBLE_BATTLE_TEST("Shield Dust blocks Sparkling Aria if all other targets avoid getting hit by")
 {
-    KNOWN_FAILING;  //  #4636
     GIVEN {
         PLAYER(SPECIES_PRIMARINA);
         PLAYER(SPECIES_VIVILLON) { Ability(ABILITY_SHIELD_DUST); Status1(STATUS1_BURN); }

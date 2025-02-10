@@ -2,6 +2,7 @@
 #define GUARD_PLAYER_PC_H
 
 #include "global.h"
+#include "menu.h"
 #include "list_menu.h"
 
 // Exported type declarations

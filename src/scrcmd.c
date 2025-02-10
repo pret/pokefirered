@@ -2028,6 +2028,9 @@ bool8 ScrCmd_updatecoinsbox(struct ScriptContext * ctx)
 
 bool8 ScrCmd_trainerbattle(struct ScriptContext * ctx)
 {
+    Script_RequestEffects(SCREFF_V1 | SCREFF_TRAINERBATTLE);
+    
+    TrainerBattleLoadArgs(ctx->scriptPtr);
     ctx->scriptPtr = BattleSetup_ConfigureTrainerBattle(ctx->scriptPtr);
     return FALSE;
 }
@@ -2433,7 +2436,7 @@ bool8 ScrCmd_setmonmodernfatefulencounter(struct ScriptContext * ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_checkmonmodernfatefulencounter(struct ScriptContext * ctx)
+bool8 ScrCmd_checkmodernfatefulencounter(struct ScriptContext * ctx)
 {
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
 

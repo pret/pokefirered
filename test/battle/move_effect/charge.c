@@ -9,9 +9,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Charge doubles the damage of the next Electric move of the user")
 {
-    s16 normalDamage = 0;
-    s16 chargedUpDamage = 0;
-
+    s16 damage[2] = {0};
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -21,20 +19,18 @@ SINGLE_BATTLE_TEST("Charge doubles the damage of the next Electric move of the u
         TURN { MOVE(player, MOVE_THUNDERBOLT); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
-        HP_BAR(opponent, captureDamage: &normalDamage);
+        HP_BAR(opponent, captureDamage: &damage[0]);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHARGE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
-        HP_BAR(opponent, captureDamage: &chargedUpDamage);
+        HP_BAR(opponent, captureDamage: &damage[1]);
     } THEN {
-        EXPECT_MUL_EQ(normalDamage, Q_4_12(2.0), chargedUpDamage);
+        EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
     }
 }
 
 SINGLE_BATTLE_TEST("Charge's effect is kept until the user uses an Electric move (Gen 9+)")
 {
-    s16 normalDamage = 0;
-    s16 chargedUpDamage = 0;
-
+    s16 damage[2] = {0};
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -45,20 +41,19 @@ SINGLE_BATTLE_TEST("Charge's effect is kept until the user uses an Electric move
         TURN { MOVE(player, MOVE_THUNDERBOLT); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
-        HP_BAR(opponent, captureDamage: &normalDamage);
+        HP_BAR(opponent, captureDamage: &damage[0]);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHARGE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
-        HP_BAR(opponent, captureDamage: &chargedUpDamage);
+        HP_BAR(opponent, captureDamage: &damage[1]);
     } THEN {
-        EXPECT_MUL_EQ(normalDamage, Q_4_12(2.0), chargedUpDamage);
+        EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
     }
 }
 
 SINGLE_BATTLE_TEST("Charge's effect is removed if the user fails using an Electric move (Gen 9+)")
 {
     s16 damage[2];
-
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -81,8 +76,7 @@ SINGLE_BATTLE_TEST("Charge's effect is removed if the user fails using an Electr
 SINGLE_BATTLE_TEST("Charge's effect does not stack with Electromorphosis or Wind Power")
 {
     u32 species, ability;
-    s16 normalDamage = 0;
-    s16 chargedUpDamage = 0;
+    s16 damage[2];
 
     PARAMETRIZE { species = SPECIES_WATTREL; ability = ABILITY_WIND_POWER; }
     PARAMETRIZE { species = SPECIES_TADBULB; ability = ABILITY_ELECTROMORPHOSIS; }
@@ -97,22 +91,20 @@ SINGLE_BATTLE_TEST("Charge's effect does not stack with Electromorphosis or Wind
         TURN { MOVE(player, MOVE_THUNDERBOLT); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
-        HP_BAR(opponent, captureDamage: &normalDamage);
+        HP_BAR(opponent, captureDamage: &damage[0]);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHARGE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AIR_CUTTER, opponent);
         ABILITY_POPUP(player, ability);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
-        HP_BAR(opponent, captureDamage: &chargedUpDamage);
+        HP_BAR(opponent, captureDamage: &damage[1]);
     } THEN {
-        EXPECT_MUL_EQ(normalDamage, Q_4_12(2.0), chargedUpDamage);
+        EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
     }
 }
 
 SINGLE_BATTLE_TEST("Charge's effect is removed regardless if the next move is Electric or not (Gen 3-8)")
 {
-    s16 normalDamage = 0;
-    s16 chargedUpDamage = 0;
-
+    s16 damage[2];
     GIVEN {
         ASSUME(GetMoveType(MOVE_TACKLE) != TYPE_ELECTRIC);
         ASSUME(!IsBattleMoveStatus(MOVE_TACKLE));
@@ -125,26 +117,25 @@ SINGLE_BATTLE_TEST("Charge's effect is removed regardless if the next move is El
         TURN { MOVE(player, MOVE_THUNDERBOLT); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
-        HP_BAR(opponent, captureDamage: &normalDamage);
+        HP_BAR(opponent, captureDamage: &damage[0]);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CHARGE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
-        HP_BAR(opponent, captureDamage: &chargedUpDamage);
+        HP_BAR(opponent, captureDamage: &damage[1]);
     } THEN {
         if (B_CHARGE < GEN_9)
-            EXPECT_EQ(normalDamage, chargedUpDamage);
+            EXPECT_EQ(damage[0], damage[1]);
         else
-            EXPECT_MUL_EQ(normalDamage, Q_4_12(2.0), chargedUpDamage);
+            EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
     }
 }
 
 SINGLE_BATTLE_TEST("Charge will not expire if it flinches twice in a row")
 {
-    s16 normalDamage = 0;
-    s16 chargedUpDamage = 0;
-
+    s16 damage[2];
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
+         ASSUME(gMovesInfo[MOVE_IRON_HEAD].additionalEffects[0].moveEffect == MOVE_EFFECT_FLINCH); 
+         PLAYER(SPECIES_WOBBUFFET);
          OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_LUM_BERRY); }
     } WHEN {
          TURN { MOVE(player, MOVE_THUNDERBOLT); }
@@ -154,14 +145,14 @@ SINGLE_BATTLE_TEST("Charge will not expire if it flinches twice in a row")
          TURN { MOVE(player, MOVE_THUNDERBOLT); }
     } SCENE {
          ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
-         HP_BAR(opponent, captureDamage: &normalDamage);
+         HP_BAR(opponent, captureDamage: &damage[0]);
          ANIMATION(ANIM_TYPE_MOVE, MOVE_CHARGE, player);
          ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
-         HP_BAR(opponent, captureDamage: &chargedUpDamage);
+         HP_BAR(opponent, captureDamage: &damage[1]);
     } THEN {
         if (B_CHARGE < GEN_9)
-            EXPECT_EQ(normalDamage, chargedUpDamage);
+            EXPECT_EQ(damage[0], damage[1]);
         else
-            EXPECT_MUL_EQ(normalDamage, Q_4_12(2.0), chargedUpDamage);
+            EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
     }
 }

@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("Insomnia prevents yawn")
         PLAYER(SPECIES_DROWZEE) { Ability(ABILITY_INSOMNIA); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_SPORE); }
+        TURN { MOVE(opponent, MOVE_YAWN); }
         TURN {}
         TURN {}
     } SCENE {

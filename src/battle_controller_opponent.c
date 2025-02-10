@@ -40,7 +40,6 @@
 static void OpponentHandleLoadMonSprite(u32 battler);
 static void OpponentHandleSwitchInAnim(u32 battler);
 static void OpponentHandleDrawTrainerPic(u32 battler);
-static void OpponentHandleTrainerSlide(u32 battler);
 static void OpponentHandleTrainerSlideBack(u32 battler);
 static void OpponentHandleMoveAnimation(u32 battler);
 static void OpponentHandlePrintString(u32 battler);
@@ -97,10 +96,6 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler)
     [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,
-    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,
-    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,
-    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,
-    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
@@ -486,7 +481,7 @@ static void OpponentHandleDrawTrainerPic(u32 battler)
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, TRUE, xPos, (8 - gTrainerSprites[trainerPicId].frontPicCoords.size) * 4 + 40, -1);
 }
 
-static void OpponentHandleTrainerSlide(u32 battler)
+void OpponentHandleTrainerSlide(u32 battler)
 {
     u32 trainerPicId = OpponentGetTrainerPicId(battler);
     BtlController_HandleTrainerSlide(battler, trainerPicId);

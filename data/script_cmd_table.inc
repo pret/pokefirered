@@ -227,7 +227,7 @@ gScriptCmdTable::
     script_cmd_table_entry SCR_OP_NORMALMSG                      ScrCmd_normalmsg,                      requests_effects=1  @ 0xca
     script_cmd_table_entry SCR_OP_COMPARESTAT                    ScrCmd_comparestat,                    requests_effects=1  @ 0xcb
     script_cmd_table_entry SCR_OP_SETMONMODERNFATEFULENCOUNTER   ScrCmd_setmonmodernfatefulencounter,   requests_effects=1  @ 0xcc
-    script_cmd_table_entry SCR_OP_CHECKMONMODERNFATEFULENCOUNTER ScrCmd_checkmonmodernfatefulencounter, requests_effects=1  @ 0xcd
+    script_cmd_table_entry SCR_OP_CHECKMODERNFATEFULENCOUNTER    ScrCmd_checkmodernfatefulencounter,    requests_effects=1  @ 0xcd
     script_cmd_table_entry SCR_OP_TRYWONDERCARDSCRIPT            ScrCmd_trywondercardscript,            requests_effects=1  @ 0xce
     script_cmd_table_entry SCR_OP_SETWORLDMAPFLAG                ScrCmd_setworldmapflag,                requests_effects=1  @ 0xcf
     script_cmd_table_entry SCR_OP_WARPSPINENTER                  ScrCmd_warpspinenter,                  requests_effects=1  @ 0xd0

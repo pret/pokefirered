@@ -23,7 +23,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
-static u8 GetMaxPowerTier(u32 move);
+static u32 GetMaxPowerTier(u32 move);
 
 struct GMaxMove
 {
@@ -123,22 +123,22 @@ bool32 CanDynamax(u32 battler)
 // Returns whether a battler is transformed into a Gigantamax form.
 bool32 IsGigantamaxed(u32 battler)
 {
-    struct Pokemon *mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
+    struct Pokemon *mon = GetPartyBattlerData(battler);
     if ((gSpeciesInfo[gBattleMons[battler].species].isGigantamax) && GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR))
         return TRUE;
     return FALSE;
 }
 
 // Applies the HP Multiplier for Dynamaxed Pokemon and Raid Bosses.
-void ApplyDynamaxHPMultiplier(u32 battler, struct Pokemon* mon)
+void ApplyDynamaxHPMultiplier(struct Pokemon* mon)
 {
     if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA)
         return;
     else
     {
-        u32 scale = 150 + 5 * GetMonData(mon, MON_DATA_DYNAMAX_LEVEL);
-        u32 hp = (GetMonData(mon, MON_DATA_HP) * scale + 99) / 100;
-        u32 maxHP = (GetMonData(mon, MON_DATA_MAX_HP) * scale + 99) / 100;
+        uq4_12_t multiplier = GetDynamaxLevelHPMultiplier(GetMonData(mon, MON_DATA_DYNAMAX_LEVEL), FALSE);
+        u32 hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP) * multiplier) + UQ_4_12_ROUND);
+        u32 maxHP = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_MAX_HP) * multiplier) + UQ_4_12_ROUND);
         SetMonData(mon, MON_DATA_HP, &hp);
         SetMonData(mon, MON_DATA_MAX_HP, &maxHP);
     }
@@ -151,8 +151,9 @@ u16 GetNonDynamaxHP(u32 battler)
         return gBattleMons[battler].hp;
     else
     {
-        u16 mult = UQ_4_12_FLOORED(1.0/1.5); // placeholder
-        u16 hp = UQ_4_12_TO_INT((gBattleMons[battler].hp * mult) + UQ_4_12_ROUND);
+        struct Pokemon *mon = GetPartyBattlerData(battler);
+        uq4_12_t mult = GetDynamaxLevelHPMultiplier(GetMonData(mon, MON_DATA_DYNAMAX_LEVEL), TRUE);
+        u32 hp = UQ_4_12_TO_INT((gBattleMons[battler].hp * mult) + UQ_4_12_ROUND);
         return hp;
     }
 }
@@ -164,8 +165,9 @@ u16 GetNonDynamaxMaxHP(u32 battler)
         return gBattleMons[battler].maxHP;
     else
     {
-        u16 mult = UQ_4_12_FLOORED(1.0/1.5); // placeholder
-        u16 maxHP = UQ_4_12_TO_INT((gBattleMons[battler].maxHP * mult) + UQ_4_12_ROUND);
+        struct Pokemon *mon = GetPartyBattlerData(battler);
+        uq4_12_t mult = GetDynamaxLevelHPMultiplier(GetMonData(mon, MON_DATA_DYNAMAX_LEVEL), TRUE);
+        u32 maxHP = UQ_4_12_TO_INT((gBattleMons[battler].maxHP * mult) + UQ_4_12_ROUND);
         return maxHP;
     }
 }
@@ -195,14 +197,11 @@ void ActivateDynamax(u32 battler)
 // Unsets the flags used for Dynamaxing and reverts max HP if needed.
 void UndoDynamax(u32 battler)
 {
-    u8 side = GetBattlerSide(battler);
-    u8 monId = gBattlerPartyIndexes[battler];
-
     // Revert HP if battler is still Dynamaxed.
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX)
     {
-        struct Pokemon *mon = (side == B_SIDE_PLAYER) ? &gPlayerParty[monId] : &gEnemyParty[monId];
-        u16 mult = UQ_4_12_FLOORED(1.0/1.5); // placeholder
+        struct Pokemon *mon = GetPartyBattlerData(battler);
+        uq4_12_t mult = GetDynamaxLevelHPMultiplier(GetMonData(mon, MON_DATA_DYNAMAX_LEVEL), TRUE);
         gBattleMons[battler].hp = UQ_4_12_TO_INT((GetMonData(mon, MON_DATA_HP) * mult + 1) + UQ_4_12_ROUND); // round up
         SetMonData(mon, MON_DATA_HP, &gBattleMons[battler].hp);
         CalculateMonStats(mon);
@@ -254,12 +253,12 @@ static u16 GetTypeBasedMaxMove(u32 battler, u32 type)
     // Gigantamax check
     u32 i;
     u32 species = gBattleMons[battler].species;
-    u32 targetSpecies = SPECIES_NONE;
+    u32 targetSpecies = species;
 
     if (!gSpeciesInfo[species].isGigantamax)
         targetSpecies = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_GIGANTAMAX);
 
-    if (targetSpecies != SPECIES_NONE)
+    if (targetSpecies != species)
         species = targetSpecies;
 
     if (gSpeciesInfo[species].isGigantamax)
@@ -316,11 +315,11 @@ enum
 };
 
 // Gets the base power of a Max Move.
-u8 GetMaxMovePower(u32 move)
+u32 GetMaxMovePower(u32 move)
 {
-    u8 tier;
+    u32 tier;
     // G-Max Drum Solo, G-Max Hydrosnipe, and G-Max Fireball always have 160 base power.
-    if (GetMoveMaxEffect(GetMaxMove(gBattlerAttacker, move)) == MAX_EFFECT_FIXED_POWER)
+    if (MoveHasAdditionalEffect(move, MOVE_EFFECT_FIXED_POWER))
         return 160;
 
     // Exceptions to all other rules below:
@@ -368,7 +367,7 @@ u8 GetMaxMovePower(u32 move)
     }
 }
 
-static u8 GetMaxPowerTier(u32 move)
+static u32 GetMaxPowerTier(u32 move)
 {
     u32 strikeCount = GetMoveStrikeCount(move);
     if (strikeCount >= 2 && strikeCount <= 5)
@@ -469,550 +468,18 @@ void ChooseDamageNonTypesString(u8 type)
     }
 }
 
-// Returns the status effect that should be applied by a G-Max Move.
-static u32 GetMaxMoveStatusEffect(u32 move)
-{
-    u8 maxEffect = GetMoveMaxEffect(move);
-    switch (maxEffect)
-    {
-        // Status 1
-        case MAX_EFFECT_PARALYZE_FOES:
-            return STATUS1_PARALYSIS;
-        case MAX_EFFECT_POISON_FOES:
-            return STATUS1_POISON;
-        case MAX_EFFECT_POISON_PARALYZE_FOES:
-        {
-            static const u8 sStunShockEffects[] = {STATUS1_PARALYSIS, STATUS1_POISON};
-            return RandomElement(RNG_G_MAX_STUN_SHOCK, sStunShockEffects);
-        }
-        case MAX_EFFECT_EFFECT_SPORE_FOES:
-        {
-            static const u8 sBefuddleEffects[] = {STATUS1_PARALYSIS, STATUS1_POISON, STATUS1_SLEEP};
-            return RandomElement(RNG_G_MAX_BEFUDDLE, sBefuddleEffects);
-        }
-        // Status 2
-        case MAX_EFFECT_CONFUSE_FOES:
-        case MAX_EFFECT_CONFUSE_FOES_PAY_DAY:
-            return STATUS2_CONFUSION;
-        case MAX_EFFECT_INFATUATE_FOES:
-            return STATUS2_INFATUATION;
-        case MAX_EFFECT_MEAN_LOOK:
-            return STATUS2_ESCAPE_PREVENTION;
-        case MAX_EFFECT_TORMENT_FOES:
-            return STATUS2_TORMENT;
-        default:
-            return STATUS1_NONE;
-    }
-}
-
 // Updates Dynamax HP multipliers and healthboxes.
 void BS_UpdateDynamax(void)
 {
     NATIVE_ARGS();
     u32 battler = gBattleScripting.battler;
-    struct Pokemon *mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
+    struct Pokemon *mon = GetPartyBattlerData(battler);
 
     if (!IsGigantamaxed(battler)) // RecalcBattlerStats will get called on form change.
-        RecalcBattlerStats(battler, mon);
+        RecalcBattlerStats(battler, mon, GetActiveGimmick(battler) == GIMMICK_DYNAMAX);
 
     UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
     gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-// Activates the secondary effect of a Max Move.
-void BS_SetMaxMoveEffect(void)
-{
-    NATIVE_ARGS();
-    u16 effect = 0;
-    u8 maxEffect = GetMoveMaxEffect(gCurrentMove);
-
-    // Don't continue if the move didn't land.
-    if (gBattleStruct->moveResultFlags[gBattlerTarget] & MOVE_RESULT_NO_EFFECT)
-    {
-        gBattlescriptCurrInstr = cmd->nextInstr;
-        return;
-    }
-
-    switch (maxEffect)
-    {
-        case MAX_EFFECT_RAISE_TEAM_ATTACK:
-        case MAX_EFFECT_RAISE_TEAM_DEFENSE:
-        case MAX_EFFECT_RAISE_TEAM_SPEED:
-        case MAX_EFFECT_RAISE_TEAM_SP_ATK:
-        case MAX_EFFECT_RAISE_TEAM_SP_DEF:
-            if (!NoAliveMonsForEitherParty())
-            {
-                // Max Effects are ordered by stat ID.
-                SET_STATCHANGER(maxEffect, 1, FALSE);
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectRaiseStatAllies;
-                effect++;
-            }
-            break;
-        case MAX_EFFECT_LOWER_ATTACK:
-        case MAX_EFFECT_LOWER_DEFENSE:
-        case MAX_EFFECT_LOWER_SPEED:
-        case MAX_EFFECT_LOWER_SP_ATK:
-        case MAX_EFFECT_LOWER_SP_DEF:
-        case MAX_EFFECT_LOWER_SPEED_2_FOES:
-        case MAX_EFFECT_LOWER_EVASIVENESS_FOES:
-            if (!NoAliveMonsForEitherParty())
-            {
-                u8 statId = 0;
-                u8 stage = 1;
-                switch (maxEffect)
-                {
-                    case MAX_EFFECT_LOWER_SPEED_2_FOES:
-                        statId = STAT_SPEED;
-                        stage = 2;
-                        break;
-                    case MAX_EFFECT_LOWER_EVASIVENESS_FOES:
-                        statId = STAT_EVASION;
-                        break;
-                    default:
-                        // Max Effects are ordered by stat ID.
-                        statId = maxEffect - MAX_EFFECT_LOWER_ATTACK + 1;
-                        break;
-                }
-                SET_STATCHANGER(statId, stage, TRUE);
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectLowerStatFoes;
-                effect++;
-            }
-            break;
-        case MAX_EFFECT_SUN:
-        case MAX_EFFECT_RAIN:
-        case MAX_EFFECT_SANDSTORM:
-        case MAX_EFFECT_HAIL:
-        {
-            u8 weather = 0, msg = 0;
-            switch (maxEffect)
-            {
-                case MAX_EFFECT_SUN:
-                    weather = ENUM_WEATHER_SUN;
-                    msg = B_MSG_STARTED_SUNLIGHT;
-                    break;
-                case MAX_EFFECT_RAIN:
-                    weather = ENUM_WEATHER_RAIN;
-                    msg = B_MSG_STARTED_RAIN;
-                    break;
-                case MAX_EFFECT_SANDSTORM:
-                    weather = ENUM_WEATHER_SANDSTORM;
-                    msg = B_MSG_STARTED_SANDSTORM;
-                    break;
-                case MAX_EFFECT_HAIL:
-                    weather = ENUM_WEATHER_HAIL;
-                    msg = B_MSG_STARTED_HAIL;
-                    break;
-            }
-            if (TryChangeBattleWeather(gBattlerAttacker, weather, FALSE))
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = msg;
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectSetWeather;
-                effect++;
-            }
-            break;
-        }
-        case MAX_EFFECT_MISTY_TERRAIN:
-        case MAX_EFFECT_GRASSY_TERRAIN:
-        case MAX_EFFECT_ELECTRIC_TERRAIN:
-        case MAX_EFFECT_PSYCHIC_TERRAIN:
-        {
-            u32 statusFlag = 0;
-            switch (GetMoveEffectArg_MoveProperty(gCurrentMove))
-            {
-                case MAX_EFFECT_MISTY_TERRAIN:
-                    statusFlag = STATUS_FIELD_MISTY_TERRAIN;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_MISTY;
-                    break;
-                case MAX_EFFECT_GRASSY_TERRAIN:
-                    statusFlag = STATUS_FIELD_GRASSY_TERRAIN;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_GRASSY;
-                    break;
-                case MAX_EFFECT_ELECTRIC_TERRAIN:
-                    statusFlag = STATUS_FIELD_ELECTRIC_TERRAIN;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_ELECTRIC;
-                    break;
-                case MAX_EFFECT_PSYCHIC_TERRAIN:
-                    statusFlag = STATUS_FIELD_PSYCHIC_TERRAIN;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TERRAIN_SET_PSYCHIC;
-                    break;
-            }
-            if (!(gFieldStatuses & statusFlag) && statusFlag != 0)
-            {
-                gFieldStatuses &= ~STATUS_FIELD_TERRAIN_ANY;
-                gFieldStatuses |= statusFlag;
-                if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_TERRAIN_EXTENDER)
-                    gFieldTimers.terrainTimer = 8;
-                else
-                    gFieldTimers.terrainTimer = 5;
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectSetTerrain;
-                effect++;
-            }
-            break;
-        }
-        case MAX_EFFECT_VINE_LASH:
-        case MAX_EFFECT_CANNONADE:
-        case MAX_EFFECT_WILDFIRE:
-        case MAX_EFFECT_VOLCALITH:
-        {
-            u8 side = GetBattlerSide(gBattlerTarget);
-            if (!(gSideStatuses[side] & SIDE_STATUS_DAMAGE_NON_TYPES))
-            {
-                u32 moveType = GetMoveType(gCurrentMove);
-                gSideStatuses[side] |= SIDE_STATUS_DAMAGE_NON_TYPES;
-                gSideTimers[side].damageNonTypesTimer = 5; // damage is dealt for 4 turns, ends on 5th
-                gSideTimers[side].damageNonTypesType = moveType;
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                ChooseDamageNonTypesString(moveType);
-                gBattlescriptCurrInstr = BattleScript_DamageNonTypesStarts;
-                effect++;
-            }
-            break;
-        }
-        case MAX_EFFECT_STEALTH_ROCK:
-            if (!(gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_STEALTH_ROCK))
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_POINTEDSTONESFLOAT;
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectStonesurge;
-                effect++;
-            }
-            break;
-        case MAX_EFFECT_STEELSURGE:
-            if (!(gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_STEELSURGE))
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHARPSTEELFLOATS;
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectSteelsurge;
-                effect++;
-            }
-            break;
-        case MAX_EFFECT_DEFOG:
-            if (gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_SCREEN_ANY
-                || gSideStatuses[GetBattlerSide(gBattlerTarget)] & SIDE_STATUS_HAZARDS_ANY
-                || gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_HAZARDS_ANY
-                || gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
-            {
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_DefogTryHazards;
-                effect++;
-            }
-            break;
-        case MAX_EFFECT_AURORA_VEIL:
-            if (!(gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_AURORA_VEIL))
-            {
-                gSideStatuses[GetBattlerSide(gBattlerAttacker)] |= SIDE_STATUS_AURORA_VEIL;
-                if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LIGHT_CLAY)
-                    gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 8;
-                else
-                    gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilTimer = 5;
-                gSideTimers[GetBattlerSide(gBattlerAttacker)].auroraVeilBattlerId = gBattlerAttacker;
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_SAFEGUARD;
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectAuroraVeilSuccess;
-                effect++;
-            }
-            break;
-        case MAX_EFFECT_GRAVITY:
-            if (!(gFieldStatuses & STATUS_FIELD_GRAVITY))
-            {
-                gFieldStatuses |= STATUS_FIELD_GRAVITY;
-                gFieldTimers.gravityTimer = 5;
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectGravitySuccess;
-                effect++;
-            }
-            break;
-        case MAX_EFFECT_SANDBLAST_FOES:
-        case MAX_EFFECT_FIRE_SPIN_FOES:
-        {
-            // Affects both opponents, but doesn't print strings so we can handle it here.
-            u8 battler;
-            for (battler = 0; battler < MAX_BATTLERS_COUNT; ++battler)
-            {
-                if (GetBattlerSide(battler) != GetBattlerSide(gBattlerTarget))
-                    continue;
-                if (!(gBattleMons[battler].status2 & STATUS2_WRAPPED))
-                {
-                    gBattleMons[battler].status2 |= STATUS2_WRAPPED;
-                    if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_GRIP_CLAW)
-                #if B_BINDING_TURNS >= GEN_5
-                        gDisableStructs[battler].wrapTurns = 7;
-                    else
-                        gDisableStructs[battler].wrapTurns = (Random() % 2) + 4;
-                #else
-                        gDisableStructs[battler].wrapTurns = 5;
-                    else
-                        gDisableStructs[battler].wrapTurns = (Random() % 4) + 2;
-                #endif
-                    // The Wrap effect does not expire when the user switches, so here's some cheese.
-                    gBattleStruct->wrappedBy[battler] = gBattlerTarget;
-                    if (maxEffect == MAX_EFFECT_SANDBLAST_FOES)
-                        gBattleStruct->wrappedMove[battler] = MOVE_SAND_TOMB;
-                    else
-                        gBattleStruct->wrappedMove[battler] = MOVE_FIRE_SPIN;
-                }
-            }
-            break;
-        }
-        case MAX_EFFECT_YAWN_FOE:
-        {
-            static const u8 sSnoozeEffects[] = {TRUE, FALSE};
-            if (!(gStatuses3[gBattlerTarget] & STATUS3_YAWN)
-                && CanBeSlept(gBattlerTarget, GetBattlerAbility(gBattlerTarget), BLOCKED_BY_SLEEP_CLAUSE)
-                && RandomElement(RNG_G_MAX_SNOOZE, sSnoozeEffects)) // 50% chance of success
-            {
-                gStatuses3[gBattlerTarget] |= STATUS3_YAWN_TURN(2);
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectYawnSuccess;
-                effect++;
-            }
-            break;
-        }
-        case MAX_EFFECT_SPITE:
-            if (gLastMoves[gBattlerTarget] != MOVE_NONE
-                && gLastMoves[gBattlerTarget] != MOVE_UNAVAILABLE)
-            {
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectTryReducePP;
-                effect++;
-            }
-            break;
-        case MAX_EFFECT_PARALYZE_FOES:
-        case MAX_EFFECT_POISON_FOES:
-        case MAX_EFFECT_POISON_PARALYZE_FOES:
-        case MAX_EFFECT_EFFECT_SPORE_FOES:
-            BattleScriptPush(gBattlescriptCurrInstr + 1);
-            gBattlescriptCurrInstr = BattleScript_EffectStatus1Foes;
-            effect++;
-            break;
-        case MAX_EFFECT_CONFUSE_FOES_PAY_DAY:
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-            {
-                u16 payday = gPaydayMoney;
-                gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 100);
-                if (payday > gPaydayMoney)
-                    gPaydayMoney = 0xFFFF;
-                gBattleCommunication[CURSOR_POSITION] = 1; // add "Coins scattered." message
-            }
-            // fall through
-        case MAX_EFFECT_CONFUSE_FOES:
-        case MAX_EFFECT_INFATUATE_FOES:
-        case MAX_EFFECT_TORMENT_FOES:
-        case MAX_EFFECT_MEAN_LOOK:
-            BattleScriptPush(gBattlescriptCurrInstr + 1);
-            gBattlescriptCurrInstr = BattleScript_EffectStatus2Foes;
-            effect++;
-            break;
-        case MAX_EFFECT_CRIT_PLUS:
-            gBattleStruct->bonusCritStages[gBattlerAttacker]++;
-            gBattleStruct->bonusCritStages[BATTLE_PARTNER(gBattlerAttacker)]++;
-            BattleScriptPush(gBattlescriptCurrInstr + 1);
-            gBattlescriptCurrInstr = BattleScript_EffectRaiseCritAlliesAnim;
-            effect++;
-            break;
-        case MAX_EFFECT_HEAL_TEAM:
-            BattleScriptPush(gBattlescriptCurrInstr + 1);
-            gBattlescriptCurrInstr = BattleScript_EffectHealOneSixthAllies;
-            effect++;
-            break;
-        case MAX_EFFECT_AROMATHERAPY:
-            BattleScriptPush(gBattlescriptCurrInstr + 1);
-            gBattlescriptCurrInstr = BattleScript_EffectCureStatusAllies;
-            effect++;
-            break;
-        case MAX_EFFECT_RECYCLE_BERRIES:
-        {
-            static const u8 sReplenishEffects[] = {TRUE, FALSE};
-            if (RandomElement(RNG_G_MAX_REPLENISH, sReplenishEffects)) // 50% chance of success
-            {
-                BattleScriptPush(gBattlescriptCurrInstr + 1);
-                gBattlescriptCurrInstr = BattleScript_EffectRecycleBerriesAllies;
-                effect++;
-            }
-            break;
-        }
-    }
-
-    if (!effect)
-        gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-// Sets up sharp steel on the target's side.
-void BS_SetSteelsurge(void)
-{
-    NATIVE_ARGS(const u8 *failInstr);
-    u8 targetSide = GetBattlerSide(gBattlerTarget);
-    if (gSideStatuses[targetSide] & SIDE_STATUS_STEELSURGE)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-    else
-    {
-        gSideStatuses[targetSide] |= SIDE_STATUS_STEELSURGE;
-        gSideTimers[targetSide].steelsurgeAmount = 1;
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-}
-
-// Applies the status1 effect associated with a given G-Max Move.
-// Could be expanded to function for any move.
-void BS_TrySetStatus1(void)
-{
-    NATIVE_ARGS(const u8 *failInstr);
-    u8 effect = 0;
-    u32 status1 = GetMaxMoveStatusEffect(gCurrentMove);
-    switch (status1)
-    {
-        case STATUS1_POISON:
-            if (CanBePoisoned(gBattlerAttacker, gBattlerTarget, GetBattlerAbility(gBattlerTarget)))
-            {
-                gBattleMons[gBattlerTarget].status1 |= STATUS1_POISON;
-                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                effect++;
-            }
-            break;
-        case STATUS1_PARALYSIS:
-            if (CanBeParalyzed(gBattlerTarget, GetBattlerAbility(gBattlerTarget)))
-            {
-                gBattleMons[gBattlerTarget].status1 |= STATUS1_PARALYSIS;
-                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
-                effect++;
-            }
-            break;
-        case STATUS1_SLEEP:
-            if (CanBeSlept(gBattlerTarget, GetBattlerAbility(gBattlerTarget), BLOCKED_BY_SLEEP_CLAUSE))
-            {
-                if (B_SLEEP_TURNS >= GEN_5)
-                    gBattleMons[gBattlerTarget].status1 |=  STATUS1_SLEEP_TURN((Random() % 3) + 2);
-                else
-                    gBattleMons[gBattlerTarget].status1 |=  STATUS1_SLEEP_TURN((Random() % 4) + 3);
-
-                TryActivateSleepClause(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget]);
-                gBattleCommunication[MULTISTRING_CHOOSER] = 4;
-                effect++;
-            }
-            break;
-    }
-    if (effect)
-    {
-        gEffectBattler = gBattlerTarget;
-        BtlController_EmitSetMonData(gBattlerTarget, BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].status1), &gBattleMons[gBattlerTarget].status1);
-        MarkBattlerForControllerExec(gBattlerTarget);
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-    else
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-}
-
-// Applies the status2 effect associated with a given G-Max Move.
-void BS_TrySetStatus2(void)
-{
-    NATIVE_ARGS(const u8 *failInstr);
-    u8 effect = 0;
-    u32 status2 = GetMaxMoveStatusEffect(gCurrentMove);
-    switch (status2)
-    {
-        case STATUS2_CONFUSION:
-            if (CanBeConfused(gBattlerTarget))
-            {
-                gBattleMons[gBattlerTarget].status2 |= STATUS2_CONFUSION_TURN(((Random()) % 4) + 2);
-                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                gBattleCommunication[MULTIUSE_STATE] = 1;
-                effect++;
-            }
-            break;
-        case STATUS2_INFATUATION:
-        {
-            u8 atkGender = GetGenderFromSpeciesAndPersonality(gBattleMons[gBattlerAttacker].species, gBattleMons[gBattlerAttacker].personality);
-            u8 defGender = GetGenderFromSpeciesAndPersonality(gBattleMons[gBattlerTarget].species, gBattleMons[gBattlerTarget].personality);
-            if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_INFATUATION)
-                && gBattleMons[gBattlerTarget].ability != ABILITY_OBLIVIOUS
-                && !IsAbilityOnSide(gBattlerTarget, ABILITY_AROMA_VEIL)
-                && atkGender != defGender
-                && atkGender != MON_GENDERLESS
-                && defGender != MON_GENDERLESS)
-            {
-                gBattleMons[gBattlerTarget].status2 |= STATUS2_INFATUATED_WITH(gBattlerAttacker);
-                gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                gBattleCommunication[MULTIUSE_STATE] = 2;
-                effect++;
-            }
-            break;
-        }
-        case STATUS2_ESCAPE_PREVENTION:
-            if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_ESCAPE_PREVENTION))
-            {
-                gBattleMons[gBattlerTarget].status2 |= STATUS2_ESCAPE_PREVENTION;
-                gDisableStructs[gBattlerTarget].battlerPreventingEscape = gBattlerAttacker;
-                gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-                effect++;
-            }
-            break;
-        case STATUS2_TORMENT:
-            if (!(gBattleMons[gBattlerTarget].status2 & STATUS2_TORMENT)
-                && !IsAbilityOnSide(gBattlerTarget, ABILITY_AROMA_VEIL))
-            {
-                gBattleMons[gBattlerTarget].status2 |= STATUS2_TORMENT;
-                gDisableStructs[gBattlerTarget].tormentTimer = 3; // 3 turns excluding current turn
-                gBattleCommunication[MULTISTRING_CHOOSER] = 3;
-                effect++;
-            }
-            break;
-    }
-    if (effect)
-    {
-        gEffectBattler = gBattlerTarget;
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-    else
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-}
-
-// Heals one-sixth of the target's HP, including for Dynamaxed targets.
-void BS_HealOneSixth(void)
-{
-    NATIVE_ARGS(const u8* failInstr);
-    gBattleStruct->moveDamage[gBattlerTarget] = gBattleMons[gBattlerTarget].maxHP / 6;
-    if (gBattleStruct->moveDamage[gBattlerTarget] == 0)
-        gBattleStruct->moveDamage[gBattlerTarget] = 1;
-    gBattleStruct->moveDamage[gBattlerTarget] *= -1;
-
-    if (gBattleMons[gBattlerTarget].hp == gBattleMons[gBattlerTarget].maxHP)
-        gBattlescriptCurrInstr = cmd->failInstr;    // fail
-    else
-        gBattlescriptCurrInstr = cmd->nextInstr;    // can heal
-}
-
-// Recycles the target's item if it is specifically holding a berry.
-void BS_TryRecycleBerry(void)
-{
-    NATIVE_ARGS(const u8 *failInstr);
-    u16* usedHeldItem = &gBattleStruct->usedHeldItems[gBattlerPartyIndexes[gBattlerTarget]][GetBattlerSide(gBattlerTarget)];
-    if (gBattleMons[gBattlerTarget].item == ITEM_NONE
-        && gBattleStruct->changedItems[gBattlerTarget] == ITEM_NONE   // Will not inherit an item
-        && ItemId_GetPocket(*usedHeldItem) == POCKET_BERRIES)
-    {
-        gLastUsedItem = *usedHeldItem;
-        *usedHeldItem = ITEM_NONE;
-        gBattleMons[gBattlerTarget].item = gLastUsedItem;
-
-        BtlController_EmitSetMonData(gBattlerTarget, BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].item), &gBattleMons[gBattlerTarget].item);
-        MarkBattlerForControllerExec(gBattlerTarget);
-
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-    else
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
 }
 
 // Goes to the jump instruction if the target is Dynamaxed.

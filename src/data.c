@@ -231,7 +231,7 @@ const union AnimCmd *const gAnims_MonPic[] =
     sAnim_MonPic_3,
 };
 
-const union AnimCmd *const sAnims_Trainer[] ={
+const union AnimCmd *const gAnims_Trainer[] ={
     sAnim_GeneralFrame0,
     sAnim_GeneralFrame0,
 };
@@ -241,14 +241,14 @@ const union AnimCmd *const sAnims_Trainer[] ={
 
 #include "data/trainer_parties.h"
 
-const struct Trainer gTrainers[] =
+const struct Trainer gTrainers[DIFFICULTY_COUNT][TRAINERS_COUNT] =
 {
 #include "data/trainers.h"
 };
 
 #include "data/partner_parties.h"
 
-const struct Trainer gBattlePartners[] =
+const struct Trainer gBattlePartners[DIFFICULTY_COUNT][PARTNER_COUNT] =
 {
 #include "data/battle_partners.h"
 };

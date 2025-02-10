@@ -2118,7 +2118,7 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
         u32 item = GetMonData(mon, MON_DATA_HELD_ITEM);
         u32 holdEffect = ItemId_GetHoldEffect(item);
         u32 species = GetMonData(mon, MON_DATA_SPECIES);
-        u32 side = GetBattlerSide(battlerId);
+        u32 side = battlerId & BIT_SIDE;
 
         // Check invalid item usage.
         INVALID_IF(ctx->gimmick == GIMMICK_MEGA && holdEffect != HOLD_EFFECT_MEGA_STONE && species != SPECIES_RAYQUAZA, "Cannot Mega Evolve without a Mega Stone");

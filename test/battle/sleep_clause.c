@@ -507,7 +507,7 @@ DOUBLE_BATTLE_TEST("Sleep Clause: G-Max Befuddle can only sleep one opposing mon
 {
     GIVEN {
         FLAG_SET(B_FLAG_SLEEP_CLAUSE);
-        ASSUME(GetMoveMaxEffect(MOVE_G_MAX_BEFUDDLE) == MAX_EFFECT_EFFECT_SPORE_FOES);
+        ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_BEFUDDLE, MOVE_EFFECT_EFFECT_SPORE_SIDE));
         PLAYER(SPECIES_BUTTERFREE) { GigantamaxFactor(TRUE); }
         PLAYER(SPECIES_CATERPIE);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -1131,7 +1131,7 @@ DOUBLE_BATTLE_TEST("Sleep Clause: Sleep clause is deactivated when a sleeping mo
 {
     GIVEN {
         FLAG_SET(B_FLAG_SLEEP_CLAUSE);
-        ASSUME(GetMoveMaxEffect(MOVE_G_MAX_SWEETNESS) == MAX_EFFECT_AROMATHERAPY);
+        ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_SWEETNESS, MOVE_EFFECT_AROMATHERAPY));
         ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_SLEEP);
         PLAYER(SPECIES_APPLETUN) { GigantamaxFactor(TRUE); }
         PLAYER(SPECIES_WOBBUFFET);

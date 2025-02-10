@@ -106,7 +106,7 @@ DOUBLE_BATTLE_TEST("Court Change used by the player swaps Mist, Safeguard, Auror
         MESSAGE("The opposing Wobbuffet used Tailwind!");
         MESSAGE("Wynaut used Court Change!");
         MESSAGE("Wynaut swapped the battle effects affecting each side of the field!");
-        // The effects now end for the player side.        
+        // The effects now end for the player side.
         MESSAGE("Your team's Mist wore off!");
         MESSAGE("Your team is no longer protected by Safeguard!");
         MESSAGE("Your team's Reflect wore off!");
@@ -153,4 +153,66 @@ DOUBLE_BATTLE_TEST("Court Change used by the opponent swaps Mist, Safeguard, Aur
     }
 }
 
-TO_DO_BATTLE_TEST("Court Change used by the player swaps G-Max Steelsurge, G-Max Vine Lash, G-Max Wildfire, G-Max Cannonade");
+DOUBLE_BATTLE_TEST("Court Change used by the player swaps G-Max Steelsurge")
+{
+    GIVEN {
+        PLAYER(SPECIES_COPPERAJAH) { GigantamaxFactor(TRUE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_IRON_HEAD, target: opponentRight, gimmick: GIMMICK_DYNAMAX); }
+        TURN { MOVE(opponentLeft, MOVE_COURT_CHANGE); }
+        TURN { SWITCH(opponentLeft, 2); SWITCH(playerLeft, 2); }
+    } SCENE {
+        MESSAGE("Copperajah used G-Max Steelsurge!");
+        SEND_IN_MESSAGE("Wobbuffet");
+        MESSAGE("The sharp steel bit into Wobbuffet!");
+        NONE_OF {
+            MESSAGE("The sharp steel bit into the opposing Wynaut!");
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("Court Change used by the player swaps G-Max Vine Lash, G-Max Wildfire, G-Max Cannonade")
+{
+    u32 species, move;
+    PARAMETRIZE { species = SPECIES_VENUSAUR;  move = MOVE_VINE_WHIP; }
+    PARAMETRIZE { species = SPECIES_CHARIZARD; move = MOVE_EMBER; }
+    PARAMETRIZE { species = SPECIES_BLASTOISE; move = MOVE_WATER_GUN; }
+    GIVEN {
+        PLAYER(species) { GigantamaxFactor(TRUE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, move, target: opponentRight, gimmick: GIMMICK_DYNAMAX);
+            MOVE(opponentLeft, MOVE_COURT_CHANGE);
+        }
+    } SCENE {
+        switch (species) {
+            case SPECIES_VENUSAUR:
+                MESSAGE("Venusaur used G-Max Vine Lash!");
+                MESSAGE("Wobbuffet is hurt by G-Max Vine Lash's ferocious beating!");
+                break;
+            case SPECIES_CHARIZARD:
+                MESSAGE("Charizard used G-Max Wildfire!");
+                MESSAGE("Wobbuffet is burning up within G-Max Wildfire's flames!");
+                break;
+            case SPECIES_BLASTOISE:
+                MESSAGE("Blastoise used G-Max Cannonade!");
+                MESSAGE("Wobbuffet is hurt by G-Max Cannonade's vortex!");
+                break;
+        }
+        NONE_OF {
+            MESSAGE("The opposing Wynaut is hurt by G-Max Vine Lash's ferocious beating!");
+            MESSAGE("The opposing Wynaut is burning up within G-Max Wildfire's flames!");
+            MESSAGE("The opposing Wynaut is hurt by G-Max Cannonade's vortex!");
+        }
+    }
+}

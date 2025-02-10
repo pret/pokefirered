@@ -736,7 +736,7 @@ static void DoTrainerTowerBattle(void)
     if (CURR_FLOOR.challengeType == CHALLENGE_TYPE_DOUBLE)
         gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
 
-    gTrainerBattleOpponent_A = 0;
+    TRAINER_BATTLE_PARAM.opponentA = 0;
     BuildEnemyParty();
     CreateTask(Task_DoTrainerTowerBattle, 1);
     PlayMapChosenOrBattleBGM(0);

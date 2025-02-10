@@ -1,5 +1,5 @@
 === TRAINER_NONE ===
-Name: 
+Name: PH
 Class: Pkmn Trainer 1
 Pic: Hiker
 Gender: Male
@@ -7,7 +7,7 @@ Music: Male
 Double Battle: No
 
 === TRAINER_AQUA_LEADER ===
-Name: 
+Name: PH
 Class: Aqua Leader
 Pic: Aqua Leader Archie
 Gender: Male
@@ -20,7 +20,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_AQUA_GRUNT_M ===
-Name: 
+Name: PH
 Class: Team Aqua
 Pic: Aqua Grunt M
 Gender: Male
@@ -33,7 +33,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_AQUA_GRUNT_F ===
-Name: 
+Name: PH
 Class: Team Aqua
 Pic: Aqua Grunt F
 Gender: Male
@@ -46,7 +46,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_AROMA_LADY ===
-Name: 
+Name: PH
 Class: RS Aroma Lady
 Pic: RS Aroma Lady
 Gender: Male
@@ -59,7 +59,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_RUIN_MANIAC ===
-Name: 
+Name: PH
 Class: RS Ruin Maniac
 Pic: RS Ruin Maniac
 Gender: Male
@@ -72,12 +72,12 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_INTERVIEWER ===
-Name: 
+Name: PH
 Class: Interviewer
 Pic: Interviewer
 Gender: Male
 Music: Interviewer
-Double Battle: Yes
+Double Battle: No
 AI: Check Bad Move
 
 Ekans
@@ -85,7 +85,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_TUBER_F ===
-Name: 
+Name: PH
 Class: RS Tuber F
 Pic: RS Tuber F
 Gender: Male
@@ -98,7 +98,7 @@ Level: 38
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_TUBER_M ===
-Name: 
+Name: PH
 Class: RS Tuber M
 Pic: RS Tuber M
 Gender: Male
@@ -111,7 +111,7 @@ Level: 38
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_COOLTRAINER_M ===
-Name: 
+Name: PH
 Class: RS Cooltrainer
 Pic: RS Cooltrainer M
 Gender: Male
@@ -124,7 +124,7 @@ Level: 5
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_RS_COOLTRAINER_F ===
-Name: 
+Name: PH
 Class: RS Cooltrainer
 Pic: RS Cooltrainer F
 Gender: Male
@@ -137,7 +137,7 @@ Level: 5
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_HEX_MANIAC ===
-Name: 
+Name: PH
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Male
@@ -150,7 +150,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_LADY ===
-Name: 
+Name: PH
 Class: RS Lady
 Pic: RS Lady
 Gender: Male
@@ -163,7 +163,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_BEAUTY ===
-Name: 
+Name: PH
 Class: RS Beauty
 Pic: RS Beauty
 Gender: Male
@@ -176,7 +176,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RICH_BOY ===
-Name: 
+Name: PH
 Class: Rich Boy
 Pic: Rich Boy
 Gender: Male
@@ -189,7 +189,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_POKEMANIAC ===
-Name: 
+Name: PH
 Class: RS Pokemaniac
 Pic: RS Pokemaniac
 Gender: Male
@@ -202,7 +202,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_SWIMMER_M ===
-Name: 
+Name: PH
 Class: RS Swimmer M
 Pic: RS Swimmer M
 Gender: Male
@@ -215,7 +215,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_BLACK_BELT ===
-Name: 
+Name: PH
 Class: RS Black Belt
 Pic: RS Black Belt
 Gender: Male
@@ -228,7 +228,7 @@ Level: 5
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_GUITARIST ===
-Name: 
+Name: PH
 Class: Guitarist
 Pic: Guitarist
 Gender: Male
@@ -241,7 +241,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_KINDLER ===
-Name: 
+Name: PH
 Class: Kindler
 Pic: Kindler
 Gender: Male
@@ -254,7 +254,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_CAMPER ===
-Name: 
+Name: PH
 Class: RS Camper
 Pic: RS Camper
 Gender: Male
@@ -267,7 +267,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BUG_MANIAC ===
-Name: 
+Name: PH
 Class: Bug Maniac
 Pic: Bug Maniac
 Gender: Male
@@ -280,7 +280,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_PSYCHIC_M ===
-Name: 
+Name: PH
 Class: RS Psychic
 Pic: RS Psychic M
 Gender: Male
@@ -293,7 +293,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_PSYCHIC_F ===
-Name: 
+Name: PH
 Class: RS Psychic
 Pic: RS Psychic F
 Gender: Male
@@ -306,7 +306,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_GENTLEMAN ===
-Name: 
+Name: PH
 Class: RS Gentleman
 Pic: RS Gentleman
 Gender: Male
@@ -384,7 +384,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_SCHOOL_KID_M ===
-Name: 
+Name: PH
 Class: School Kid
 Pic: School Kid M
 Gender: Male
@@ -397,7 +397,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_SCHOOL_KID_F ===
-Name: 
+Name: PH
 Class: School Kid
 Pic: School Kid F
 Gender: Male
@@ -410,7 +410,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_SR_AND_JR ===
-Name: 
+Name: PH
 Class: Sr And Jr
 Pic: Sr And Jr
 Gender: Male
@@ -423,7 +423,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_POKEFAN_M ===
-Name: 
+Name: PH
 Class: Pokefan
 Pic: Pokefan M
 Gender: Male
@@ -436,7 +436,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_POKEFAN_F ===
-Name: 
+Name: PH
 Class: Pokefan
 Pic: Pokefan F
 Gender: Male
@@ -449,7 +449,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_EXPERT_M ===
-Name: 
+Name: PH
 Class: Expert
 Pic: Expert M
 Gender: Male
@@ -462,7 +462,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_EXPERT_F ===
-Name: 
+Name: PH
 Class: Expert
 Pic: Expert F
 Gender: Male
@@ -475,7 +475,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_YOUNGSTER ===
-Name: 
+Name: PH
 Class: RS Youngster
 Pic: RS Youngster
 Gender: Male
@@ -488,7 +488,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_CHAMPION ===
-Name: 
+Name: PH
 Class: RS Champion
 Pic: Champion Steven
 Gender: Male
@@ -501,7 +501,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_FISHERMAN ===
-Name: 
+Name: PH
 Class: RS Fisherman
 Pic: RS Fisherman
 Gender: Male
@@ -514,7 +514,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CYCLING_TRIATHLETE_M ===
-Name: 
+Name: PH
 Class: Triathlete
 Pic: Cycling Triathlete M
 Gender: Male
@@ -527,7 +527,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CYCLING_TRIATHLETE_F ===
-Name: 
+Name: PH
 Class: Triathlete
 Pic: Cycling Triathlete F
 Gender: Male
@@ -540,7 +540,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RUNNING_TRIATHLETE_M ===
-Name: 
+Name: PH
 Class: Triathlete
 Pic: Running Triathlete M
 Gender: Male
@@ -553,7 +553,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RUNNING_TRIATHLETE_F ===
-Name: 
+Name: PH
 Class: Triathlete
 Pic: Running Triathlete F
 Gender: Male
@@ -566,7 +566,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_SWIMMING_TRIATHLETE_M ===
-Name: 
+Name: PH
 Class: Triathlete
 Pic: Swimming Triathlete M
 Gender: Male
@@ -579,7 +579,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_SWIMMING_TRIATHLETE_F ===
-Name: 
+Name: PH
 Class: Triathlete
 Pic: Swimming Triathlete F
 Gender: Male
@@ -592,7 +592,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_DRAGON_TAMER ===
-Name: 
+Name: PH
 Class: Dragon Tamer
 Pic: Dragon Tamer
 Gender: Male
@@ -605,7 +605,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_BIRD_KEEPER ===
-Name: 
+Name: PH
 Class: RS Bird Keeper
 Pic: RS Bird Keeper
 Gender: Male
@@ -618,7 +618,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_NINJA_BOY ===
-Name: 
+Name: PH
 Class: Ninja Boy
 Pic: Ninja Boy
 Gender: Male
@@ -631,7 +631,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BATTLE_GIRL ===
-Name: 
+Name: PH
 Class: Battle Girl
 Pic: Battle Girl
 Gender: Male
@@ -644,7 +644,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_PARASOL_LADY ===
-Name: 
+Name: PH
 Class: Parasol Lady
 Pic: Parasol Lady
 Gender: Male
@@ -657,7 +657,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_SWIMMER_F ===
-Name: 
+Name: PH
 Class: RS Swimmer F
 Pic: RS Swimmer F
 Gender: Male
@@ -670,7 +670,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_PICNICKER ===
-Name: 
+Name: PH
 Class: RS Picnicker
 Pic: RS Picnicker
 Gender: Male
@@ -683,7 +683,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_TWINS ===
-Name: 
+Name: PH
 Class: RS Twins
 Pic: RS Twins
 Gender: Male
@@ -696,7 +696,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_SAILOR ===
-Name: 
+Name: PH
 Class: RS Sailor
 Pic: RS Sailor
 Gender: Male
@@ -709,7 +709,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BOARDER_M ===
-Name: 
+Name: PH
 Class: Boarder
 Pic: RS Youngster
 Gender: Male
@@ -722,7 +722,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BOARDER_F ===
-Name: 
+Name: PH
 Class: Boarder
 Pic: RS Youngster
 Gender: Male
@@ -735,7 +735,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_COLLECTOR ===
-Name: 
+Name: PH
 Class: Collector
 Pic: Collector
 Gender: Male
@@ -748,7 +748,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_WALLY ===
-Name: 
+Name: PH
 Class: Pkmn Trainer
 Pic: Wally
 Gender: Male
@@ -761,7 +761,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN ===
-Name: 
+Name: PH
 Class: Pkmn Trainer
 Pic: RS Brendan 1
 Gender: Male
@@ -774,7 +774,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_2 ===
-Name: 
+Name: PH
 Class: Pkmn Trainer
 Pic: RS Brendan 1
 Gender: Male
@@ -787,7 +787,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BRENDAN_3 ===
-Name: 
+Name: PH
 Class: Pkmn Trainer
 Pic: RS Brendan 1
 Gender: Male
@@ -800,7 +800,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MAY ===
-Name: 
+Name: PH
 Class: Pkmn Trainer
 Pic: RS May 1
 Gender: Male
@@ -813,7 +813,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MAY_2 ===
-Name: 
+Name: PH
 Class: Pkmn Trainer
 Pic: RS May 1
 Gender: Male
@@ -826,7 +826,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MAY_3 ===
-Name: 
+Name: PH
 Class: Pkmn Trainer
 Pic: RS May 1
 Gender: Male
@@ -839,7 +839,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_PKMN_BREEDER_M ===
-Name: 
+Name: PH
 Class: RS Pkmn Breeder
 Pic: RS Pokemon Breeder M
 Gender: Male
@@ -852,7 +852,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_PKMN_BREEDER_F ===
-Name: 
+Name: PH
 Class: RS Pkmn Breeder
 Pic: RS Pokemon Breeder F
 Gender: Male
@@ -865,7 +865,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_PKMN_RANGER_M ===
-Name: 
+Name: PH
 Class: RS Pkmn Ranger
 Pic: RS Pokemon Ranger M
 Gender: Male
@@ -878,7 +878,7 @@ Level: 5
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_RS_PKMN_RANGER_F ===
-Name: 
+Name: PH
 Class: RS Pkmn Ranger
 Pic: RS Pokemon Ranger F
 Gender: Male
@@ -891,7 +891,7 @@ Level: 5
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
 === TRAINER_MAGMA_LEADER ===
-Name: 
+Name: PH
 Class: Magma Leader
 Pic: Magma Leader Maxie
 Gender: Male
@@ -904,7 +904,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MAGMA_GRUNT_M ===
-Name: 
+Name: PH
 Class: Team Magma
 Pic: Magma Grunt M
 Gender: Male
@@ -917,7 +917,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MAMGA_GRUNT_F ===
-Name: 
+Name: PH
 Class: Team Magma
 Pic: Magma Grunt F
 Gender: Male
@@ -930,7 +930,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_LASS ===
-Name: 
+Name: PH
 Class: RS Lass
 Pic: RS Lass
 Gender: Male
@@ -943,7 +943,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_BUG_CATCHER ===
-Name: 
+Name: PH
 Class: RS Bug Catcher
 Pic: RS Bug Catcher
 Gender: Male
@@ -956,7 +956,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_HIKER ===
-Name: 
+Name: PH
 Class: RS Hiker
 Pic: RS Hiker
 Gender: Male
@@ -969,7 +969,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_YOUNG_COUPLE ===
-Name: 
+Name: PH
 Class: RS Young Couple
 Pic: RS Young Couple
 Gender: Male
@@ -986,7 +986,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_OLD_COUPLE ===
-Name: 
+Name: PH
 Class: Old Couple
 Pic: Old Couple
 Gender: Male
@@ -999,7 +999,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_RS_SIS_AND_BRO ===
-Name: 
+Name: PH
 Class: RS Sis And Bro
 Pic: RS Sis And Bro
 Gender: Male
@@ -1579,7 +1579,7 @@ Level: 20
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BUG_CATCHER_2 ===
-Name: 
+Name: PH
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -1774,7 +1774,7 @@ Level: 12
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_LASS_2 ===
-Name: 
+Name: PH
 Class: Lass
 Pic: Lass
 Gender: Male
@@ -2182,7 +2182,7 @@ Level: 16
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CAMPER_2 ===
-Name: 
+Name: PH
 Class: Camper
 Pic: Camper
 Gender: Male
@@ -2701,7 +2701,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Self Destruct
 
 === TRAINER_SUPER_NERD_1 ===
-Name: 
+Name: PH
 Class: Super Nerd
 Pic: Super Nerd
 Gender: Male
@@ -2722,7 +2722,7 @@ Level: 22
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_SUPER_NERD_2 ===
-Name: 
+Name: PH
 Class: Super Nerd
 Pic: Super Nerd
 Gender: Male
@@ -2747,7 +2747,7 @@ Level: 20
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_SUPER_NERD_3 ===
-Name: 
+Name: PH
 Class: Super Nerd
 Pic: Super Nerd
 Gender: Male
@@ -3307,7 +3307,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Tackle
 
 === TRAINER_BIKER_1 ===
-Name: 
+Name: PH
 Class: Biker
 Pic: Biker
 Gender: Male
@@ -3577,7 +3577,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Disable
 
 === TRAINER_BURGLAR_1 ===
-Name: 
+Name: PH
 Class: Burglar
 Pic: Burglar
 Gender: Male
@@ -3594,7 +3594,7 @@ Level: 29
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BURGLAR_2 ===
-Name: 
+Name: PH
 Class: Burglar
 Pic: Burglar
 Gender: Male
@@ -3607,7 +3607,7 @@ Level: 33
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BURGLAR_3 ===
-Name: 
+Name: PH
 Class: Burglar
 Pic: Burglar
 Gender: Male
@@ -3696,7 +3696,7 @@ Level: 34
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BURGLAR_4 ===
-Name: 
+Name: PH
 Class: Burglar
 Pic: Burglar
 Gender: Male
@@ -4562,7 +4562,7 @@ Level: 22
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_GAMER_1 ===
-Name: 
+Name: PH
 Class: Gamer
 Pic: Gamer
 Gender: Male
@@ -9488,7 +9488,7 @@ Level: 24
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CHANNELER_1 ===
-Name: 
+Name: PH
 Class: Channeler
 Pic: Channeler
 Gender: Male
@@ -9501,7 +9501,7 @@ Level: 23
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CHANNELER_2 ===
-Name: 
+Name: PH
 Class: Channeler
 Pic: Channeler
 Gender: Male
@@ -9514,7 +9514,7 @@ Level: 24
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CHANNELER_3 ===
-Name: 
+Name: PH
 Class: Channeler
 Pic: Channeler
 Gender: Male
@@ -9527,7 +9527,7 @@ Level: 22
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CHANNELER_4 ===
-Name: 
+Name: PH
 Class: Channeler
 Pic: Channeler
 Gender: Male
@@ -9540,7 +9540,7 @@ Level: 24
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CHANNELER_5 ===
-Name: 
+Name: PH
 Class: Channeler
 Pic: Channeler
 Gender: Male
@@ -9553,7 +9553,7 @@ Level: 22
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CHANNELER_6 ===
-Name: 
+Name: PH
 Class: Channeler
 Pic: Channeler
 Gender: Male
@@ -9574,7 +9574,7 @@ Level: 22
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CHANNELER_7 ===
-Name: 
+Name: PH
 Class: Channeler
 Pic: Channeler
 Gender: Male
@@ -9587,7 +9587,7 @@ Level: 24
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_CHANNELER_8 ===
-Name: 
+Name: PH
 Class: Channeler
 Pic: Channeler
 Gender: Male
@@ -10174,7 +10174,7 @@ Level: 33
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BUG_CATCHER_3 ===
-Name: 
+Name: PH
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -10187,7 +10187,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BUG_CATCHER_4 ===
-Name: 
+Name: PH
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -10200,7 +10200,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BUG_CATCHER_5 ===
-Name: 
+Name: PH
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -10213,7 +10213,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BUG_CATCHER_6 ===
-Name: 
+Name: PH
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -10226,7 +10226,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BUG_CATCHER_7 ===
-Name: 
+Name: PH
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -10239,7 +10239,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BUG_CATCHER_8 ===
-Name: 
+Name: PH
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -10839,7 +10839,7 @@ Level: 38
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_BIKER_2 ===
-Name: 
+Name: PH
 Class: Biker
 Pic: Biker
 Gender: Male

@@ -58,3 +58,46 @@ DOUBLE_BATTLE_TEST("Make It Rain lowers special attack by one stage if it hits b
         MESSAGE("Wobbuffet's Sp. Atk fell!");
     }
 }
+
+DOUBLE_BATTLE_TEST("Make It Rain lowers special attack by one stage if it hits both targets")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET)
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_MAKE_IT_RAIN); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MAKE_IT_RAIN, playerLeft);
+        HP_BAR(opponentLeft);
+        NONE_OF {
+            MESSAGE("Coins were scattered everywhere!");
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+            MESSAGE("Wobbuffet's Sp. Atk fell!");
+        }
+        HP_BAR(opponentRight);
+        MESSAGE("Coins were scattered everywhere!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        MESSAGE("Wobbuffet's Sp. Atk fell!");
+    }
+}
+DOUBLE_BATTLE_TEST("Make It Rain lowers special attack by one stage if second target Protects")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET)
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponentRight, MOVE_PROTECT); MOVE(playerLeft, MOVE_MAKE_IT_RAIN); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MAKE_IT_RAIN, playerLeft);
+        HP_BAR(opponentLeft);
+        NOT HP_BAR(opponentRight);
+        MESSAGE("Coins were scattered everywhere!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        MESSAGE("Wobbuffet's Sp. Atk fell!");
+    }
+}

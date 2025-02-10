@@ -1,9 +1,40 @@
 #ifndef GUARD_BATTLE_SETUP_H
 #define GUARD_BATTLE_SETUP_H
 
-extern u16 gTrainerBattleOpponent_A;
-extern u16 gTrainerBattleOpponent_B;
+/*
+the layout of the first byte can be confusing here
+isDoubleBattle is the least lsb. msb is in the mode.
+*/
+typedef union PACKED TrainerBattleParameter
+{
+    struct PACKED _TrainerBattleParameter
+    {
+        u8 isDoubleBattle:1;
+        u8 isRematch:1;
+        u8 playMusicA:1;
+        u8 playMusicB:1;
+        u8 mode:4;
+        u8 objEventLocalIdA;
+        u16 opponentA;
+        u8 *introTextA;
+        u8 *defeatTextA;
+        u8 *battleScriptRetAddrA;
+        u8 objEventLocalIdB;
+        u16 opponentB;
+        u8 *introTextB;
+        u8 *defeatTextB;
+        u8 *battleScriptRetAddrB;
+        u8 *victoryText;
+        u8 *cannotBattleText;
+        u16 rivalBattleFlags;
+    } params;
+    u8 data[sizeof(struct _TrainerBattleParameter)];
+} TrainerBattleParameter;
+
+extern TrainerBattleParameter gTrainerBattleParameter;
 extern u16 gPartnerTrainerId;
+
+#define TRAINER_BATTLE_PARAM gTrainerBattleParameter.params
 
 void StartWildBattle(void);
 void StartDoubleWildBattle(void);
@@ -44,5 +75,6 @@ const u8 *GetTrainerWonSpeech(void);
 void BattleSetup_StartTrainerBattle_Debug(void);
 u8 GetWildBattleTransition(void);
 u8 GetTrainerBattleTransition(void);
+void TrainerBattleLoadArgs(const u8 *data);
 
 #endif // GUARD_BATTLE_SETUP_H

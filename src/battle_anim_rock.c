@@ -1026,3 +1026,25 @@ void AnimTask_SeismicTossBgAccelerateDownAtEnd(u8 taskId)
         DestroyAnimVisualTask(taskId);
     }
 }
+
+const struct SpriteTemplate gSaltCureCrystalSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SALT_PARTICLE,
+    .paletteTag = ANIM_TAG_SALT_PARTICLE,
+    .oam = &gOamData_AffineNormal_ObjBlend_16x16,
+    .anims = gAnims_IceCrystalLarge,
+    .images = NULL,
+    .affineAnims = gAffineAnims_IceCrystalHit,
+    .callback = AnimIceEffectParticle,
+};
+
+const struct SpriteTemplate gSaltCureSwirlSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_SALT_PARTICLE,
+    .paletteTag = ANIM_TAG_SALT_PARTICLE,
+    .oam = &gOamData_AffineNormal_ObjBlend_16x16,
+    .anims = gAnims_WaterMudOrb,
+    .images = NULL,
+    .affineAnims = gAffineAnims_Whirlpool,
+    .callback = AnimParticleInVortex,
+};

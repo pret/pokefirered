@@ -1129,6 +1129,10 @@
 #undef P_FAMILY_PECHARUNT
 #define P_FAMILY_PECHARUNT               TRUE
 
+// Vars
+#undef B_VAR_DIFFICULTY
+#define B_VAR_DIFFICULTY     VAR_0x4034
+
 // Flags
 #undef B_FLAG_SLEEP_CLAUSE
 #define B_FLAG_SLEEP_CLAUSE              FLAG_SPECIAL_FLAG_UNUSED_0x4003

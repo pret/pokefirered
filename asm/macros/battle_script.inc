@@ -478,9 +478,10 @@
 	.byte \battler
 	.endm
 
-	.macro switchinanim battler:req, dontClearSubstitute:req
+	.macro switchinanim battler:req, dontClearTransform:req, dontClearSubstitute:req
 	.byte 0x4e
 	.byte \battler
+	.byte \dontClearTransform
 	.byte \dontClearSubstitute
 	.endm
 
@@ -1461,8 +1462,9 @@
 	.endm
 
 	@ Used by effects that may proc Symbiosis but do not call removeitem.
-	.macro trysymbiosis
+	.macro trysymbiosis battler:req
 	callnative BS_TrySymbiosis
+    .byte \battler
 	.endm
 
 	@ returns B_SIDE_x to gBattleCommunication[0]
@@ -1553,13 +1555,43 @@
 	.4byte \failInstr
 	.endm
 
-	.macro trysetstatus1, ptr:req
-	callnative BS_TrySetStatus1
+	.macro trysetparalysis, ptr:req
+	callnative BS_TrySetParalysis
 	.4byte \ptr
 	.endm
 
-	.macro trysetstatus2, ptr:req
-	callnative BS_TrySetStatus2
+	.macro trysetpoison, ptr:req
+	callnative BS_TrySetPoison
+	.4byte \ptr
+	.endm
+
+	.macro trysetpoisonparalysis, ptr:req
+	callnative BS_TrySetPoisonParalyzis
+	.4byte \ptr
+	.endm
+
+	.macro tryseteffectspore, ptr:req
+	callnative BS_TrySetEffectSpore
+	.4byte \ptr
+	.endm
+
+	.macro trysetconfusion, ptr:req
+	callnative BS_TrySetConfusion
+	.4byte \ptr
+	.endm
+
+	.macro trysetinfatuation, ptr:req
+	callnative BS_TrySetInfatuation
+	.4byte \ptr
+	.endm
+
+	.macro trysetescapeprevention, ptr:req
+	callnative BS_TrySetEscapePrevention
+	.4byte \ptr
+	.endm
+
+	.macro trysettorment, ptr:req
+	callnative BS_TrySetTorment
 	.4byte \ptr
 	.endm
 
@@ -1722,11 +1754,6 @@
 	.macro jumpifblockedbysoundproof battler:req, failInstr:req
 	callnative BS_JumpIfBlockedBySoundproof
 	.byte \battler
-	.4byte \failInstr
-	.endm
-
-	.macro tryhitswitchtarget failInstr:req
-	callnative BS_TryHitSwitchTarget
 	.4byte \failInstr
 	.endm
 
@@ -2337,11 +2364,11 @@
 	.endm
 
 	.macro swapsidestatuses
-	various BS_ATTACKER, VARIOUS_SWAP_SIDE_STATUSES
+	callnative BS_CourtChangeSwapSideStatuses
 	.endm
 
 	.macro swapstats stat:req
-	various BS_ATTACKER, VARIOUS_SWAP_STATS
+	callnative BS_SwapStats
 	.byte \stat
 	.endm
 

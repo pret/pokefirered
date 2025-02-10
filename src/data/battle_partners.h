@@ -9,13 +9,13 @@
 #line 1 "src/data/battle_partners.party"
 
 #line 1
-    [PARTNER_NONE] =
+    [DIFFICULTY_NORMAL][PARTNER_NONE] =
     {
 #line 3
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 4
         .trainerPic = TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN,
-        .encounterMusic_gender = 
+        .encounterMusic_gender =
 #line 6
             TRAINER_ENCOUNTER_MUSIC_MALE,
         .partySize = 0,
@@ -24,7 +24,7 @@
         },
     },
 #line 8
-    [PARTNER_STEVEN] =
+    [DIFFICULTY_NORMAL][PARTNER_STEVEN] =
     {
 #line 9
         .trainerName = _("STEVEN"),
@@ -32,7 +32,7 @@
         .trainerClass = TRAINER_CLASS_RIVAL_LATE,
 #line 11
         .trainerPic = TRAINER_BACK_PIC_STEVEN,
-        .encounterMusic_gender = 
+        .encounterMusic_gender =
 #line 13
             TRAINER_ENCOUNTER_MUSIC_MALE,
         .partySize = 3,

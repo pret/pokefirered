@@ -2692,8 +2692,8 @@ static void DebugAction_FlagsVars_PokedexFlags_Reset(u8 taskId)
         if (GetMonData(&gPlayerParty[partyId], MON_DATA_SANITY_HAS_SPECIES))
         {
             species = GetMonData(&gPlayerParty[partyId], MON_DATA_SPECIES);
-            GetSetPokedexFlag(SpeciesToNationalDexNum(species), FLAG_SET_CAUGHT);
-            GetSetPokedexFlag(SpeciesToNationalDexNum(species), FLAG_SET_SEEN);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT);
+            GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_SEEN);
         }
     }
 
@@ -2705,8 +2705,8 @@ static void DebugAction_FlagsVars_PokedexFlags_Reset(u8 taskId)
             if (GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SANITY_HAS_SPECIES))
             {
                 species = GetBoxMonData(&gPokemonStoragePtr->boxes[boxId][boxPosition], MON_DATA_SPECIES);
-                GetSetPokedexFlag(SpeciesToNationalDexNum(species), FLAG_SET_CAUGHT);
-                GetSetPokedexFlag(SpeciesToNationalDexNum(species), FLAG_SET_SEEN);
+                GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT);
+                GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_SEEN);
             }
         }
     }
@@ -4026,7 +4026,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     }
 
     //Pokedex entry
-    nationalDexNum = SpeciesToNationalDexNum(species);
+    nationalDexNum = SpeciesToNationalPokedexNum(species);
     switch(sentToPc)
     {
     case MON_GIVEN_TO_PARTY:

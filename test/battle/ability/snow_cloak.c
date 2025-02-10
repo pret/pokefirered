@@ -28,5 +28,30 @@ SINGLE_BATTLE_TEST("Snow Cloak increases evasion during hail")
     }
 }
 
-TO_DO_BATTLE_TEST("Snow Cloak doesn't prevent hail damage if Cloud Nine/Air Lock is on the field");
-TO_DO_BATTLE_TEST("Snow Cloak doesn't increase evasion if Cloud Nine/Air Lock is on the field");
+SINGLE_BATTLE_TEST("Snow Cloak doesn't increase evasion if Cloud Nine/Air Lock is on the field")
+{
+    PASSES_RANDOMLY(10, 10, RNG_ACCURACY);
+    GIVEN {
+        PLAYER(SPECIES_GLACEON) { Ability(ABILITY_SNOW_CLOAK); }
+        OPPONENT(SPECIES_GOLDUCK) { Ability(ABILITY_CLOUD_NINE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_HAIL); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        HP_BAR(player);
+    }
+}
+
+SINGLE_BATTLE_TEST("Snow Cloak increases evasion during snow")
+{
+    PASSES_RANDOMLY(4, 5, RNG_ACCURACY);
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_POUND].accuracy == 100);
+        PLAYER(SPECIES_GLACEON) { Ability(ABILITY_SNOW_CLOAK); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SNOWSCAPE); }
+        TURN { MOVE(opponent, MOVE_POUND); }
+    } SCENE {
+        HP_BAR(player);
+    }
+}

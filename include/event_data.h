@@ -23,6 +23,8 @@ extern u16 gSpecialVar_MonBoxPos;
 extern u16 gSpecialVar_TextColor;
 extern u16 gSpecialVar_PrevTextColor;
 
+extern const u16 gBadgeFlags[NUM_BADGES];
+
 void InitEventData(void);
 void ClearTempFieldEventData(void);
 void ClearDailyFlags(void);

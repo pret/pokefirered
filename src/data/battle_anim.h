@@ -12,7 +12,6 @@ const struct OamData gOamData_AffineOff_ObjNormal_8x8 =
     .paletteNum = 0,
 };
 
-
 const struct OamData gOamData_AffineOff_ObjNormal_16x16 =
 {
     .y = 0,
@@ -1467,6 +1466,8 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_Beam, 0x0800, ANIM_TAG_BEAM},
     {gBattleAnimSpriteGfx_PurpleChain, 0x1000, ANIM_TAG_PURPLE_CHAIN},
     {gBattleAnimSpriteGfx_PinkVioletOrb, 0x0080, ANIM_TAG_PINKVIO_ORB},
+    {gBattleAnimSpriteGfx_TeraStarstormBeam, 0x200, ANIM_TAG_STARSTORM},
+    {gBattleAnimSpriteGfx_SaltParticle, 0x400, ANIM_TAG_SALT_PARTICLE},
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1934,37 +1935,39 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_Beam, ANIM_TAG_BEAM},
     {gBattleAnimSpritePal_PurpleChain, ANIM_TAG_PURPLE_CHAIN},
     {gBattleAnimSpritePal_PinkVioletOrb, ANIM_TAG_PINKVIO_ORB},
+    {gBattleAnimSpritePal_TeraStarstormBeam, ANIM_TAG_STARSTORM},
+    {gBattleAnimSpritePal_SaltParticle, ANIM_TAG_SALT_PARTICLE},
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
 {
-    [BG_NONE]                = {gBattleAnimBgImage_Dark,       gBattleAnimBgPalette_Dark,       gBattleAnimBgTilemap_Dark},
-    [BG_DARK]                = {gBattleAnimBgImage_Dark,       gBattleAnimBgPalette_Dark,       gBattleAnimBgTilemap_Dark},
-    [BG_GHOST]               = {gBattleAnimBgImage_Ghost,      gBattleAnimBgPalette_Ghost,      gBattleAnimBgTilemap_Ghost},
-    [BG_PSYCHIC]             = {gBattleAnimBgImage_Psychic,    gBattleAnimBgPalette_Psychic,    gBattleAnimBgTilemap_Psychic},
-    [BG_IMPACT_OPPONENT]     = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_Impact,     gBattleAnimBgTilemap_ImpactOpponent},
-    [BG_IMPACT_PLAYER]       = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_Impact,     gBattleAnimBgTilemap_ImpactPlayer},
-    [BG_IMPACT_CONTESTS]     = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_Impact,     gBattleAnimBgTilemap_ImpactContests},
-    [BG_DRILL]               = {gBattleAnimBgImage_Drill,      gBattleAnimBgPalette_Drill,      gBattleAnimBgTilemap_Drill},
-    [BG_DRILL_CONTESTS]      = {gBattleAnimBgImage_Drill,      gBattleAnimBgPalette_Drill,      gBattleAnimBgTilemap_DrillContests},
-    [BG_HIGHSPEED_OPPONENT]  = {gBattleAnimBgImage_Highspeed,  gBattleAnimBgPalette_Highspeed,  gBattleAnimBgTilemap_HighspeedOpponent},
-    [BG_HIGHSPEED_PLAYER]    = {gBattleAnimBgImage_Highspeed,  gBattleAnimBgPalette_Highspeed,  gBattleAnimBgTilemap_HighspeedPlayer},
-    [BG_THUNDER]             = {gBattleAnimBgImage_Thunder,    gBattleAnimBgPalette_Thunder,    gBattleAnimBgTilemap_Thunder},
-    [BG_GUILLOTINE_OPPONENT] = {gBattleAnimBgImage_Guillotine, gBattleAnimBgPalette_Guillotine, gBattleAnimBgTilemap_GuillotineOpponent},
-    [BG_GUILLOTINE_PLAYER]   = {gBattleAnimBgImage_Guillotine, gBattleAnimBgPalette_Guillotine, gBattleAnimBgTilemap_GuillotinePlayer},
-    [BG_GUILLOTINE_CONTESTS] = {gBattleAnimBgImage_Guillotine, gBattleAnimBgPalette_Guillotine, gBattleAnimBgTilemap_GuillotineContests},
-    [BG_ICE]                 = {gBattleAnimBgImage_Ice,        gBattleAnimBgPalette_Ice,        gBattleAnimBgTilemap_Ice},
-    [BG_COSMIC]              = {gBattleAnimBgImage_Cosmic,     gBattleAnimBgPalette_Cosmic,     gBattleAnimBgTilemap_Cosmic},
-    [BG_IN_AIR]              = {gBattleAnimBgImage_InAir,      gBattleAnimBgPalette_InAir,      gBattleAnimBgTilemap_InAir},
-    [BG_SKY]                 = {gBattleAnimBgImage_Drill,      gBattleAnimBgPalette_Sky,        gBattleAnimBgTilemap_Drill},
-    [BG_SKY_CONTESTS]        = {gBattleAnimBgImage_Drill,      gBattleAnimBgPalette_Sky,        gBattleAnimBgTilemap_DrillContests},
-    [BG_AURORA]              = {gBattleAnimBgImage_Aurora,     gBattleAnimBgPalette_Aurora,     gBattleAnimBgTilemap_Aurora},
-    [BG_FISSURE]             = {gBattleAnimBgImage_Fissure,    gBattleAnimBgPalette_Fissure,    gBattleAnimBgTilemap_Fissure},
-    [BG_BUG_OPPONENT]        = {gBattleAnimBgImage_Highspeed,  gBattleAnimBgPalette_Bug,        gBattleAnimBgTilemap_HighspeedOpponent},
-    [BG_BUG_PLAYER]          = {gBattleAnimBgImage_Highspeed,  gBattleAnimBgPalette_Bug,        gBattleAnimBgTilemap_HighspeedPlayer},
-    [BG_SOLAR_BEAM_OPPONENT] = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactOpponent},
-    [BG_SOLAR_BEAM_PLAYER]   = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactPlayer},
-    [BG_SOLAR_BEAM_CONTESTS] = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactContests},
+    [BG_NONE]                      = {gBattleAnimBgImage_Dark,                    gBattleAnimBgPalette_Dark,                    gBattleAnimBgTilemap_Dark},
+    [BG_DARK]                      = {gBattleAnimBgImage_Dark,                    gBattleAnimBgPalette_Dark,                    gBattleAnimBgTilemap_Dark},
+    [BG_GHOST]                     = {gBattleAnimBgImage_Ghost,                   gBattleAnimBgPalette_Ghost,                   gBattleAnimBgTilemap_Ghost},
+    [BG_PSYCHIC]                   = {gBattleAnimBgImage_Psychic,                 gBattleAnimBgPalette_Psychic,                 gBattleAnimBgTilemap_Psychic},
+    [BG_IMPACT_OPPONENT]           = {gBattleAnimBgImage_Impact,                  gBattleAnimBgPalette_Impact,                  gBattleAnimBgTilemap_ImpactOpponent},
+    [BG_IMPACT_PLAYER]             = {gBattleAnimBgImage_Impact,                  gBattleAnimBgPalette_Impact,                  gBattleAnimBgTilemap_ImpactPlayer},
+    [BG_IMPACT_CONTESTS]           = {gBattleAnimBgImage_Impact,                  gBattleAnimBgPalette_Impact,                  gBattleAnimBgTilemap_ImpactContests},
+    [BG_DRILL]                     = {gBattleAnimBgImage_Drill,                   gBattleAnimBgPalette_Drill,                   gBattleAnimBgTilemap_Drill},
+    [BG_DRILL_CONTESTS]            = {gBattleAnimBgImage_Drill,                   gBattleAnimBgPalette_Drill,                   gBattleAnimBgTilemap_DrillContests},
+    [BG_HIGHSPEED_OPPONENT]        = {gBattleAnimBgImage_Highspeed,               gBattleAnimBgPalette_Highspeed,               gBattleAnimBgTilemap_HighspeedOpponent},
+    [BG_HIGHSPEED_PLAYER]          = {gBattleAnimBgImage_Highspeed,               gBattleAnimBgPalette_Highspeed,               gBattleAnimBgTilemap_HighspeedPlayer},
+    [BG_THUNDER]                   = {gBattleAnimBgImage_Thunder,                 gBattleAnimBgPalette_Thunder,                 gBattleAnimBgTilemap_Thunder},
+    [BG_GUILLOTINE_OPPONENT]       = {gBattleAnimBgImage_Guillotine,              gBattleAnimBgPalette_Guillotine,              gBattleAnimBgTilemap_GuillotineOpponent},
+    [BG_GUILLOTINE_PLAYER]         = {gBattleAnimBgImage_Guillotine,              gBattleAnimBgPalette_Guillotine,              gBattleAnimBgTilemap_GuillotinePlayer},
+    [BG_GUILLOTINE_CONTESTS]       = {gBattleAnimBgImage_Guillotine,              gBattleAnimBgPalette_Guillotine,              gBattleAnimBgTilemap_GuillotineContests},
+    [BG_ICE]                       = {gBattleAnimBgImage_Ice,                     gBattleAnimBgPalette_Ice,                     gBattleAnimBgTilemap_Ice},
+    [BG_COSMIC]                    = {gBattleAnimBgImage_Cosmic,                  gBattleAnimBgPalette_Cosmic,                  gBattleAnimBgTilemap_Cosmic},
+    [BG_IN_AIR]                    = {gBattleAnimBgImage_InAir,                   gBattleAnimBgPalette_InAir,                   gBattleAnimBgTilemap_InAir},
+    [BG_SKY]                       = {gBattleAnimBgImage_Drill,                   gBattleAnimBgPalette_Sky,                     gBattleAnimBgTilemap_Drill},
+    [BG_SKY_CONTESTS]              = {gBattleAnimBgImage_Drill,                   gBattleAnimBgPalette_Sky,                     gBattleAnimBgTilemap_DrillContests},
+    [BG_AURORA]                    = {gBattleAnimBgImage_Aurora,                  gBattleAnimBgPalette_Aurora,                  gBattleAnimBgTilemap_Aurora},
+    [BG_FISSURE]                   = {gBattleAnimBgImage_Fissure,                 gBattleAnimBgPalette_Fissure,                 gBattleAnimBgTilemap_Fissure},
+    [BG_BUG_OPPONENT]              = {gBattleAnimBgImage_Highspeed,               gBattleAnimBgPalette_Bug,                     gBattleAnimBgTilemap_HighspeedOpponent},
+    [BG_BUG_PLAYER]                = {gBattleAnimBgImage_Highspeed,               gBattleAnimBgPalette_Bug,                     gBattleAnimBgTilemap_HighspeedPlayer},
+    [BG_SOLAR_BEAM_OPPONENT]       = {gBattleAnimBgImage_Impact,                  gBattleAnimBgPalette_SolarBeam,               gBattleAnimBgTilemap_ImpactOpponent},
+    [BG_SOLAR_BEAM_PLAYER]         = {gBattleAnimBgImage_Impact,                  gBattleAnimBgPalette_SolarBeam,               gBattleAnimBgTilemap_ImpactPlayer},
+    [BG_SOLAR_BEAM_CONTESTS]       = {gBattleAnimBgImage_Impact,                  gBattleAnimBgPalette_SolarBeam,               gBattleAnimBgTilemap_ImpactContests},
     //new bgs
     [BG_MAGMA_STORM]               = {gBattleAnimBgImage_InAir,                   gBattleAnimBgPalette_MagmaStorm,              gBattleAnimBgTilemap_InAir},
     [BG_GIGA_IMPACT_OPPONENT]      = {gBattleAnimBgImage_GigaImpact,              gBattleAnimBgPalette_GigaImpact,              gBattleAnimBgTilemap_GigaImpactOpponent},

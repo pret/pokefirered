@@ -7,6 +7,7 @@
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
+// #include "battle_tv.h"
 #include "bg.h"
 #include "data.h"
 #include "item_menu.h"
@@ -63,7 +64,7 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 
     [CONTROLLER_SWITCHINANIM]             = RecordedOpponentHandleSwitchInAnim,
     [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,
     [CONTROLLER_DRAWTRAINERPIC]           = RecordedOpponentHandleDrawTrainerPic,
-    [CONTROLLER_TRAINERSLIDE]             = BtlController_Empty,
+    [CONTROLLER_TRAINERSLIDE]             = OpponentHandleTrainerSlide,
     [CONTROLLER_TRAINERSLIDEBACK]         = RecordedOpponentHandleTrainerSlideBack,
     [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,
     [CONTROLLER_PALETTEFADE]              = BtlController_Empty,
@@ -92,10 +93,6 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 
     [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,
-    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,
-    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,
-    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,
-    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
@@ -412,9 +409,9 @@ static void RecordedOpponentHandleDrawTrainerPic(u32 battler)
         if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         {
             if (battler == B_POSITION_OPPONENT_LEFT)
-                trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_A);
+                trainerPicId = GetBattleTowerTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentA);
             else
-                trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_B);
+                trainerPicId = GetBattleTowerTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentB);
         }
         else
         {
@@ -424,7 +421,7 @@ static void RecordedOpponentHandleDrawTrainerPic(u32 battler)
     else
     {
         xPos = 176;
-        if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
+        if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_UNION_ROOM)
         {
             trainerPicId = GetUnionRoomTrainerPic();
         }
@@ -487,9 +484,9 @@ static void RecordedOpponentHandleChooseItem(u32 battler)
 
 static void RecordedOpponentHandleChoosePokemon(u32 battler)
 {
-    *(gBattleStruct->monToSwitchIntoId + battler) = RecordedBattle_GetBattlerAction(RECORDED_PARTY_INDEX, battler);
+    gBattleStruct->monToSwitchIntoId[battler] = RecordedBattle_GetBattlerAction(RECORDED_PARTY_INDEX, battler);
     gSelectedMonPartyId = gBattleStruct->monToSwitchIntoId[battler]; // Revival Blessing
-    BtlController_EmitChosenMonReturnValue(battler, BUFFER_B, *(gBattleStruct->monToSwitchIntoId + battler), NULL);
+    BtlController_EmitChosenMonReturnValue(battler, BUFFER_B, gBattleStruct->monToSwitchIntoId[battler], NULL);
     RecordedOpponentBufferExecCompleted(battler);
 }
 

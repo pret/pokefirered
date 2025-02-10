@@ -1032,7 +1032,7 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
     {
         u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
         u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-        species = SpeciesToNationalDexNum(species);
+        species = SpeciesToNationalPokedexNum(species);
         GetSetPokedexFlag(species, FLAG_SET_SEEN);
         HandleSetPokedexFlag(species, FLAG_SET_CAUGHT, personality);
     }
@@ -1712,7 +1712,7 @@ static bool8 DoTradeAnim_Cable(void)
         gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].x2 = 0;
         gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].y2 = 0;
         StartSpriteAnim(&gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]], 0);
-        CreatePokeballSpriteToReleaseMon(sTradeAnim->monSpriteIds[TRADE_PARTNER], gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].oam.paletteNum, 120, 84, 2, 1, 20, 0xFFFFF);
+        CreatePokeballSpriteToReleaseMon(sTradeAnim->monSpriteIds[TRADE_PARTNER], gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].oam.paletteNum, 120, 84, 2, 1, 20, 0xFFFFF, sTradeAnim->monSpecies[TRADE_PARTNER]);
         FreeSpriteOamMatrix(&gSprites[sTradeAnim->bouncingPokeballSpriteId]);
         DestroySprite(&gSprites[sTradeAnim->bouncingPokeballSpriteId]);
         sTradeAnim->state++;
@@ -2212,7 +2212,7 @@ static bool8 DoTradeAnim_Wireless(void)
         gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].x2 = 0;
         gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].y2 = 0;
         StartSpriteAnim(&gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]], 0);
-        CreatePokeballSpriteToReleaseMon(sTradeAnim->monSpriteIds[TRADE_PARTNER], gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].oam.paletteNum, 120, 84, 2, 1, 20, 0xFFFFF);
+        CreatePokeballSpriteToReleaseMon(sTradeAnim->monSpriteIds[TRADE_PARTNER], gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].oam.paletteNum, 120, 84, 2, 1, 20, 0xFFFFF, sTradeAnim->monSpecies[TRADE_PARTNER]);
         FreeSpriteOamMatrix(&gSprites[sTradeAnim->bouncingPokeballSpriteId]);
         DestroySprite(&gSprites[sTradeAnim->bouncingPokeballSpriteId]);
         sTradeAnim->state++;

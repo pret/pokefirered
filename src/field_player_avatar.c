@@ -1046,6 +1046,8 @@ u8 player_get_pos_including_state_based_drift(s16 *x, s16 *y)
 
 u8 GetPlayerFacingDirection(void)
 {
+    Script_RequestEffects(SCREFF_V1);
+
     return gObjectEvents[gPlayerAvatar.objectEventId].facingDirection;
 }
 

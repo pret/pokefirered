@@ -624,7 +624,6 @@ static const u8 sText_HarvestBerry[] = _("{B_ATK_NAME_WITH_PREFIX} harvested its
 static const u8 sText_LastAbilityRaisedBuff1[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ABILITY} raised its {B_BUFF1}!");
 static const u8 sText_MagicBounceActivates[] = _("{B_DEF_NAME_WITH_PREFIX} bounced the {B_ATK_NAME_WITH_PREFIX2} back!");
 static const u8 sText_ProteanTypeChange[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY} transformed it into the {B_BUFF1} type!");
-static const u8 sText_SymbiosisItemPass[] = _("{B_SCR_NAME_WITH_PREFIX} passed its {B_LAST_ITEM} to {B_ATK_NAME_WITH_PREFIX2} through {B_LAST_ABILITY}!");
 static const u8 sText_StealthRockDmg[] = _("Pointed stones dug into {B_SCR_NAME_WITH_PREFIX2}!");
 static const u8 sText_ToxicSpikesAbsorbed[] = _("The poison spikes disappeared from the ground around {B_ATK_TEAM2} team!");
 static const u8 sText_ToxicSpikesPoisoned[] = _("{B_SCR_NAME_WITH_PREFIX} was poisoned!");
@@ -657,7 +656,6 @@ static const u8 sText_TargetElectrified[] = _("{B_DEF_NAME_WITH_PREFIX}'s moves 
 static const u8 sText_AssaultVestDoesntAllow[] = _("The effects of the {B_LAST_ITEM} prevent status moves from being used!\p");
 static const u8 sText_GravityPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX} can't use {B_CURRENT_MOVE} because of gravity!\p");
 static const u8 sText_HealBlockPreventsUsage[] = _("{B_ATK_NAME_WITH_PREFIX} was prevented from healing!\p");
-static const u8 sText_MegaEvoReacting[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ITEM} is reacting to {B_ATK_TRAINER_NAME}'s Mega Ring!"); //actually displays the type of mega ring in inventory, but we didnt implement them :(
 static const u8 sText_FerventWishReached[] = _("{B_ATK_TRAINER_NAME}'s fervent wish has reached {B_ATK_NAME_WITH_PREFIX2}!");
 static const u8 sText_MegaEvoEvolved[] = _("{B_ATK_NAME_WITH_PREFIX} has Mega Evolved into Mega {B_BUFF1}!");
 const u8 gText_drastically[] = _("drastically ");
@@ -1618,7 +1616,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_LASTABILITYRAISEDSTAT - BATTLESTRINGS_TABLE_START] = sText_LastAbilityRaisedBuff1,
     [STRINGID_MAGICBOUNCEACTIVATES - BATTLESTRINGS_TABLE_START] = sText_MagicBounceActivates,
     [STRINGID_PROTEANTYPECHANGE - BATTLESTRINGS_TABLE_START] = sText_ProteanTypeChange,
-    [STRINGID_SYMBIOSISITEMPASS - BATTLESTRINGS_TABLE_START] = sText_SymbiosisItemPass,
+    [STRINGID_SYMBIOSISITEMPASS - BATTLESTRINGS_TABLE_START] = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} passed its {B_LAST_ITEM} to {B_EFF_NAME_WITH_PREFIX2} through {B_LAST_ABILITY}!"),
     [STRINGID_STEALTHROCKDMG - BATTLESTRINGS_TABLE_START] = sText_StealthRockDmg,
     [STRINGID_TOXICSPIKESABSORBED - BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesAbsorbed,
     [STRINGID_TOXICSPIKESPOISONED - BATTLESTRINGS_TABLE_START] = sText_ToxicSpikesPoisoned,
@@ -1653,7 +1651,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_TERRAINBECOMESELECTRIC - BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesElectric,
     [STRINGID_TERRAINBECOMESPSYCHIC - BATTLESTRINGS_TABLE_START] = sText_TerrainBecomesPsychic,
     [STRINGID_TARGETELECTRIFIED - BATTLESTRINGS_TABLE_START] = sText_TargetElectrified,
-    [STRINGID_MEGAEVOREACTING - BATTLESTRINGS_TABLE_START] = sText_MegaEvoReacting,
+    [STRINGID_MEGAEVOREACTING - BATTLESTRINGS_TABLE_START] = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ITEM} is reacting to {B_ATK_TRAINER_NAME}'s Mega Ring!"), //actually displays the type of mega ring in inventory, but we didnt implement them :(
     [STRINGID_FERVENTWISHREACHED - BATTLESTRINGS_TABLE_START] = sText_FerventWishReached,
     [STRINGID_MEGAEVOEVOLVED - BATTLESTRINGS_TABLE_START] = sText_MegaEvoEvolved,
     [STRINGID_DRASTICALLY - BATTLESTRINGS_TABLE_START] = gText_drastically,
@@ -1881,6 +1879,18 @@ const u16 gWeatherEndsStringIds[B_MSG_WEATHER_END_COUNT] =
     [B_MSG_WEATHER_END_STRONG_WINDS] = STRINGID_STRONGWINDSDISSIPATED,
     [B_MSG_WEATHER_END_SNOW] = STRINGID_SNOWSTOPPED,
     [B_MSG_WEATHER_END_FOG] = STRINGID_FOGLIFTED,
+};
+
+const u16 gWeatherTurnStringIds[] =
+{
+    [B_MSG_WEATHER_TURN_RAIN]         = STRINGID_RAINCONTINUES,
+    [B_MSG_WEATHER_TURN_DOWNPOUR]     = STRINGID_DOWNPOURCONTINUES,
+    [B_MSG_WEATHER_TURN_SUN]          = STRINGID_SUNLIGHTSTRONG,
+    [B_MSG_WEATHER_TURN_SANDSTORM]    = STRINGID_SANDSTORMRAGES,
+    [B_MSG_WEATHER_TURN_HAIL]         = STRINGID_HAILCONTINUES,
+    [B_MSG_WEATHER_TURN_SNOW]         = STRINGID_SNOWCONTINUES,
+    [B_MSG_WEATHER_TURN_FOG]          = STRINGID_FOGISDEEP,
+    [B_MSG_WEATHER_TURN_STRONG_WINDS] = STRINGID_MYSTERIOUSAIRCURRENTBLOWSON,
 };
 
 const u16 gSandStormHailSnowContinuesStringIds[] =
@@ -2464,7 +2474,7 @@ void BufferStringBattle(u16 stringId, u32 battler)
                 }
                 else
                 {
-                    if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
+                    if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_UNION_ROOM)
                         stringPtr = sText_Trainer1WantsToBattle;
                     else if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
                         stringPtr = sText_LinkTrainerWantsToBattlePause;
@@ -2543,7 +2553,7 @@ void BufferStringBattle(u16 stringId, u32 battler)
             {
                 if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
                     stringPtr = sText_Trainer1SentOutPkmn;
-                else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
+                else if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_UNION_ROOM)
                     stringPtr = sText_Trainer1SentOutPkmn;
                 else
                     stringPtr = sText_LinkTrainerSentOutPkmn;
@@ -2564,7 +2574,7 @@ void BufferStringBattle(u16 stringId, u32 battler)
         }
         else
         {
-            if (gTrainerBattleOpponent_A == TRAINER_LINK_OPPONENT || gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
+            if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_LINK_OPPONENT || gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                     stringPtr = sText_LinkTrainer2WithdrewPkmn;
@@ -2595,7 +2605,7 @@ void BufferStringBattle(u16 stringId, u32 battler)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                     stringPtr = sText_LinkTrainerMultiSentOutPkmn;
-                else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
+                else if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_UNION_ROOM)
                     stringPtr = sText_Trainer1SentOutPkmn2;
                 else
                     stringPtr = sText_LinkTrainerSentOutPkmn2;
@@ -2626,7 +2636,7 @@ void BufferStringBattle(u16 stringId, u32 battler)
                 stringPtr = sText_GotAwaySafely;
             else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                 stringPtr = sText_TwoWildFled;
-            else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
+            else if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_UNION_ROOM)
                 stringPtr = sText_Trainer1Fled;
             else
                 stringPtr = sText_WildFled;
@@ -2651,7 +2661,7 @@ void BufferStringBattle(u16 stringId, u32 battler)
                     break;
                 }
             }
-            else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
+            else if (TRAINER_BATTLE_PARAM.opponentA == TRAINER_UNION_ROOM)
             {
                 switch (gBattleTextBuff1[0])
                 {
@@ -2841,9 +2851,10 @@ static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text,
     }
     else
     {
-        if (gTrainers[trainerId].trainerClass == TRAINER_CLASS_RIVAL_EARLY
-            || gTrainers[trainerId].trainerClass == TRAINER_CLASS_RIVAL_LATE
-            || gTrainers[trainerId].trainerClass == TRAINER_CLASS_CHAMPION)
+        u32 trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
+        if (trainerClass == TRAINER_CLASS_RIVAL_EARLY
+            || trainerClass == TRAINER_CLASS_RIVAL_LATE
+            || trainerClass == TRAINER_CLASS_CHAMPION)
             toCpy = GetExpandedPlaceholder(PLACEHOLDER_ID_RIVAL);
         else
             toCpy = GetTrainerNameFromId(trainerId);
@@ -2859,13 +2870,13 @@ static const u8 *BattleStringGetOpponentName(u8 *text, u8 multiplayerId, u8 batt
     switch (GetBattlerPosition(battler))
     {
     case B_POSITION_OPPONENT_LEFT:
-        toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_A, text, multiplayerId, battler);
+        toCpy = BattleStringGetOpponentNameByTrainerId(TRAINER_BATTLE_PARAM.opponentA, text, multiplayerId, battler);
         break;
     case B_POSITION_OPPONENT_RIGHT:
         if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI) && !BATTLE_TWO_VS_ONE_OPPONENT)
-            toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_B, text, multiplayerId, battler);
+            toCpy = BattleStringGetOpponentNameByTrainerId(TRAINER_BATTLE_PARAM.opponentB, text, multiplayerId, battler);
         else
-            toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_A, text, multiplayerId, battler);
+            toCpy = BattleStringGetOpponentNameByTrainerId(TRAINER_BATTLE_PARAM.opponentA, text, multiplayerId, battler);
         break;
     }
 
@@ -2896,7 +2907,8 @@ static const u8 *BattleStringGetPlayerName(u8 *text, u8 battler)
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
         {
-            toCpy = gBattlePartners[gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
+            enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(gPartnerTrainerId);
+            toCpy = gBattlePartners[difficulty][gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
         }
         else
         {
@@ -3010,15 +3022,16 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                     toCpy = gBattleTextBuff3;
                 break;
             case B_TXT_TRAINER2_CLASS:
-                toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_B);
+                toCpy = BattleStringGetOpponentClassByTrainerId(TRAINER_BATTLE_PARAM.opponentB);
                 break;
             case B_TXT_TRAINER2_NAME:
-                toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_B, text, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT));
+                toCpy = BattleStringGetOpponentNameByTrainerId(TRAINER_BATTLE_PARAM.opponentB, text, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT));
                 break;
             case B_TXT_PARTNER_CLASS:
                 // TODO: trainer name
                 // toCpy = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
-                toCpy = gTrainerClasses[gBattlePartners[gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerClass].name;;
+                enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(gPartnerTrainerId);
+                toCpy = gTrainerClasses[gBattlePartners[difficulty][gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerClass].name;;
                 break;
             case B_TXT_PARTNER_NAME:
                 toCpy = BattleStringGetPlayerName(text, GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT));
@@ -3183,10 +3196,10 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 toCpy = gAbilitiesInfo[sBattlerAbilities[gEffectBattler]].name;
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name
-                toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
+                toCpy = BattleStringGetOpponentClassByTrainerId(TRAINER_BATTLE_PARAM.opponentA);
                 break;
             case B_TXT_TRAINER1_NAME: // trainer1 name
-                toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_A, text, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
+                toCpy = BattleStringGetOpponentNameByTrainerId(TRAINER_BATTLE_PARAM.opponentA, text, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
                 break;
             case B_TXT_LINK_PLAYER_NAME: // link player name
                 toCpy = gLinkPlayers[multiplayerId].name;
@@ -3306,13 +3319,13 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                         toCpy = gTrainerClasses[gPartnerTrainerId].name;
                     break;
                 case B_POSITION_OPPONENT_LEFT:
-                    toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
+                    toCpy = BattleStringGetOpponentClassByTrainerId(TRAINER_BATTLE_PARAM.opponentA);
                     break;
                 case B_POSITION_OPPONENT_RIGHT:
                     if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
-                        toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_B);
+                        toCpy = BattleStringGetOpponentClassByTrainerId(TRAINER_BATTLE_PARAM.opponentB);
                     else
-                        toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
+                        toCpy = BattleStringGetOpponentClassByTrainerId(TRAINER_BATTLE_PARAM.opponentA);
                     break;
                 }
                 break;
@@ -4069,244 +4082,6 @@ u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp)
             return 1;
         if (currentPp > maxPp / 2)
             return 3;
-    }
-
-    return 0;
-}
-
-struct TrainerSlide
-{
-    u16 trainerId;
-    bool8 isFrontierTrainer;
-    const u8 *msgLastSwitchIn;
-    const u8 *msgLastLowHp;
-    const u8 *msgFirstDown;
-    const u8 *msgLastHalfHp;
-    const u8 *msgFirstCriticalHit;
-    const u8 *msgFirstSuperEffectiveHit;
-    const u8 *msgFirstSTABMove;
-    const u8 *msgPlayerMonUnaffected;
-    const u8 *msgMegaEvolution;
-    const u8 *msgZMove;
-    const u8 *msgBeforeFirstTurn;
-    const u8 *msgDynamax;
-};
-
-static const struct TrainerSlide sTrainerSlides[] =
-{
-    /* Put any trainer slide-in messages inside this array.
-    Example:
-    {
-        .trainerId = TRAINER_WALLY_VR_2,
-        .isFrontierTrainer = FALSE,
-        .msgLastSwitchIn = sText_AarghAlmostHadIt,
-        .msgLastLowHp = sText_BoxIsFull,
-        .msgFirstDown = sText_123Poof,
-        .msgLastHalfHp = sText_ShootSoClose,
-        .msgFirstCriticalHit = sText_CriticalHit,
-        .msgFirstSuperEffectiveHit = sText_SuperEffective,
-        .msgFirstSTABMove = sText_ABoosted,
-        .msgPlayerMonUnaffected = sText_ButNoEffect,
-        .msgMegaEvolution = sText_PowderExplodes,
-        .msgZMove = sText_Electromagnetism,
-        .msgBeforeFirstTurn = sText_GravityIntensified,
-        .msgDynamax = sText_TargetWokeUp,
-    },
-    */
-};
-
-static u32 GetEnemyMonCount(u32 firstId, u32 lastId, bool32 onlyAlive)
-{
-    u32 i, count = 0;
-
-    for (i = firstId; i < lastId; i++)
-    {
-        u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG, NULL);
-        if (species != SPECIES_NONE
-            && species != SPECIES_EGG
-            && (!onlyAlive || GetMonData(&gEnemyParty[i], MON_DATA_HP, NULL)))
-            count++;
-    }
-
-    return count;
-}
-
-enum
-{
-    LESS_THAN,
-    EQUAL,
-    GREATER_THAN,
-    LESS_THAN_OR_EQUAL,
-    GREATER_THAN_OR_EQUAL,
-    NOT_EQUAL,
-};
-
-u32 BattlerHPPercentage(u32 battler, u32 operation, u32 threshold)
-{
-    switch (operation)
-    {
-    case LESS_THAN:
-        return gBattleMons[battler].hp < (gBattleMons[battler].maxHP / threshold);
-    case EQUAL:
-        return gBattleMons[battler].hp == (gBattleMons[battler].maxHP / threshold);
-    case GREATER_THAN:
-        return gBattleMons[battler].hp > (gBattleMons[battler].maxHP / threshold);
-    case LESS_THAN_OR_EQUAL:
-        return gBattleMons[battler].hp <= (gBattleMons[battler].maxHP / threshold);
-    case GREATER_THAN_OR_EQUAL:
-        return gBattleMons[battler].hp >= (gBattleMons[battler].maxHP / threshold);
-    case NOT_EQUAL:
-    default:
-        return gBattleMons[battler].hp != (gBattleMons[battler].maxHP / threshold);
-    }
-}
-
-u32 ShouldDoTrainerSlide(u32 battler, u32 which)
-{
-    u32 i, firstId, lastId, trainerId, retValue = 1;
-
-    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) || GetBattlerSide(battler) != B_SIDE_OPPONENT)
-        return 0;
-
-    // Two opponents support.
-    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-    {
-        if (gBattlerPartyIndexes[battler] >= 3)
-        {
-            firstId = 3, lastId = PARTY_SIZE;
-            trainerId = gTrainerBattleOpponent_B;
-            retValue = 2;
-        }
-        else
-        {
-            firstId = 0, lastId = 3;
-            trainerId = gTrainerBattleOpponent_A;
-        }
-    }
-    else
-    {
-        firstId = 0, lastId = PARTY_SIZE;
-        trainerId = gTrainerBattleOpponent_A;
-    }
-
-    for (i = 0; i < ARRAY_COUNT(sTrainerSlides); i++)
-    {
-        if (trainerId == sTrainerSlides[i].trainerId
-            && (((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && sTrainerSlides[i].isFrontierTrainer)
-                || (!(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && !sTrainerSlides[i].isFrontierTrainer)))
-        {
-            gBattleScripting.battler = battler;
-            switch (which)
-            {
-            case TRAINER_SLIDE_LAST_SWITCHIN:
-                if (sTrainerSlides[i].msgLastSwitchIn != NULL && !CanBattlerSwitch(battler))
-                {
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastSwitchIn;
-                    return retValue;
-                }
-                break;
-            case TRAINER_SLIDE_LAST_LOW_HP:
-                if (sTrainerSlides[i].msgLastLowHp != NULL
-                    && GetEnemyMonCount(firstId, lastId, TRUE) == 1
-                    && BattlerHPPercentage(battler, LESS_THAN_OR_EQUAL, 4)
-                    && !gBattleStruct->trainerSlideLowHpMsgDone)
-                {
-                    gBattleStruct->trainerSlideLowHpMsgDone = TRUE;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastLowHp;
-                    return retValue;
-                }
-                break;
-            case TRAINER_SLIDE_FIRST_DOWN:
-                if (sTrainerSlides[i].msgFirstDown != NULL && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1)
-                {
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstDown;
-                    return retValue;
-                }
-                break;
-            case TRAINER_SLIDE_LAST_HALF_HP:
-                if (sTrainerSlides[i].msgLastHalfHp != NULL
-                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE) - 1
-                 && BattlerHPPercentage(battler, LESS_THAN_OR_EQUAL, 2) && BattlerHPPercentage(battler, GREATER_THAN, 4)
-                 && !gBattleStruct->trainerSlideHalfHpMsgDone)
-                {
-                    gBattleStruct->trainerSlideHalfHpMsgDone = TRUE;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgLastHalfHp;
-                    return TRUE;
-                }
-                break;
-            case TRAINER_SLIDE_FIRST_CRITICAL_HIT:
-                if (sTrainerSlides[i].msgFirstCriticalHit != NULL && gBattleStruct->trainerSlideFirstCriticalHitMsgState == 1)
-                {
-                    gBattleStruct->trainerSlideFirstCriticalHitMsgState = 2;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstCriticalHit;
-                    return TRUE;
-                }
-                break;
-            case TRAINER_SLIDE_FIRST_SUPER_EFFECTIVE_HIT:
-                if (sTrainerSlides[i].msgFirstSuperEffectiveHit != NULL
-                    && gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState == 1
-                    && gBattleMons[battler].hp)
-                {
-                    gBattleStruct->trainerSlideFirstSuperEffectiveHitMsgState = 2;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstSuperEffectiveHit;
-                    return TRUE;
-                }
-                break;
-            case TRAINER_SLIDE_FIRST_STAB_MOVE:
-                if (sTrainerSlides[i].msgFirstSTABMove != NULL
-                 && gBattleStruct->trainerSlideFirstSTABMoveMsgState == 1
-                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
-                {
-                    gBattleStruct->trainerSlideFirstSTABMoveMsgState = 2;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgFirstSTABMove;
-                    return TRUE;
-                }
-                break;
-            case TRAINER_SLIDE_PLAYER_MON_UNAFFECTED:
-                if (sTrainerSlides[i].msgPlayerMonUnaffected != NULL
-                 && gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState == 1
-                 && GetEnemyMonCount(firstId, lastId, TRUE) == GetEnemyMonCount(firstId, lastId, FALSE))
-                {
-                    gBattleStruct->trainerSlidePlayerMonUnaffectedMsgState = 2;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgPlayerMonUnaffected;
-                    return TRUE;
-                }
-                break;
-            case TRAINER_SLIDE_MEGA_EVOLUTION:
-                if (sTrainerSlides[i].msgMegaEvolution != NULL && !gBattleStruct->trainerSlideMegaEvolutionMsgDone)
-                {
-                    gBattleStruct->trainerSlideMegaEvolutionMsgDone = TRUE;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgMegaEvolution;
-                    return TRUE;
-                }
-                break;
-            case TRAINER_SLIDE_Z_MOVE:
-                if (sTrainerSlides[i].msgZMove != NULL && !gBattleStruct->trainerSlideZMoveMsgDone)
-                {
-                    gBattleStruct->trainerSlideZMoveMsgDone = TRUE;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgZMove;
-                    return TRUE;
-                }
-                break;
-            case TRAINER_SLIDE_BEFORE_FIRST_TURN:
-                if (sTrainerSlides[i].msgBeforeFirstTurn != NULL && !gBattleStruct->trainerSlideBeforeFirstTurnMsgDone)
-                {
-                    gBattleStruct->trainerSlideBeforeFirstTurnMsgDone = TRUE;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgBeforeFirstTurn;
-                    return TRUE;
-                }
-                break;
-            case TRAINER_SLIDE_DYNAMAX:
-                if (sTrainerSlides[i].msgDynamax != NULL && !gBattleStruct->trainerSlideDynamaxMsgDone)
-                {
-                    gBattleStruct->trainerSlideDynamaxMsgDone = TRUE;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgDynamax;
-                    return TRUE;
-                }
-                break;
-            }
-            break;
-        }
     }
 
     return 0;

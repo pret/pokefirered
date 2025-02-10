@@ -14,24 +14,14 @@
 #define AI_TYPE2_USER 3
 #define AI_TYPE_MOVE 4
 
-// type effectiveness
-#define AI_EFFECTIVENESS_x8     7
-#define AI_EFFECTIVENESS_x4     6
-#define AI_EFFECTIVENESS_x2     5
-#define AI_EFFECTIVENESS_x1     4
-#define AI_EFFECTIVENESS_x0_5   3
-#define AI_EFFECTIVENESS_x0_25  2
-#define AI_EFFECTIVENESS_x0_125 1
-#define AI_EFFECTIVENESS_x0     0
-
 // AI Flags. Most run specific functions to update score, new flags are used for internal logic in other scripts
 // See docs/ai_flags.md for more details.
 #define AI_FLAG_CHECK_BAD_MOVE              (1 << 0)  // AI will avoid using moves that are likely to fail or be ineffective in the current situation.
 #define AI_FLAG_TRY_TO_FAINT                (1 << 1)  // AI will prioritize KOing the player's mon if able.
 #define AI_FLAG_CHECK_VIABILITY             (1 << 2)  // AI damaging moves and move effects to determine the best available move in the current situation.
-#define AI_FLAG_FORCE_SETUP_FIRST_TURN      (1 << 3) // AI will prioritize using setup moves on the first turn at the expensve of all else. AI_FLAG_CHECK_VIABILITY will instead do this when the AI determines it makes sense.
+#define AI_FLAG_FORCE_SETUP_FIRST_TURN      (1 << 3)  // AI will prioritize using setup moves on the first turn at the expensve of all else. AI_FLAG_CHECK_VIABILITY will instead do this when the AI determines it makes sense.
 #define AI_FLAG_RISKY                       (1 << 4)  // AI will generally behave more recklessly, prioritizing damage over accuracy, explosions, etc.
-#define AI_FLAG_PREFER_STRONGEST_MOVE       (1 << 5)  // AI adds score bonus to any move the AI has that either OHKOs or 2HKOs the player.
+#define AI_FLAG_TRY_TO_2HKO                 (1 << 5)  // AI adds score bonus to any move the AI has that either OHKOs or 2HKOs the player.
 #define AI_FLAG_PREFER_BATON_PASS           (1 << 6)  // AI prefers raising its own stats and setting for / using Baton Pass.
 #define AI_FLAG_DOUBLE_BATTLE               (1 << 7)  // Automatically set for double battles, handles AI behaviour with partner.
 #define AI_FLAG_HP_AWARE                    (1 << 8)  // AI will favour certain move effects based on how much remaining HP it and the player's mon have.
@@ -50,12 +40,16 @@
 #define AI_FLAG_SEQUENCE_SWITCHING          (1 << 19)  // AI switches in mons in exactly party order, and never switches mid-battle.
 #define AI_FLAG_DOUBLE_ACE_POKEMON          (1 << 20)  // AI has *two* Ace Pokémon. The last two Pokémons in the party won't be used unless they're the last ones remaining. Goes well in battles where the trainer ID equals to twins, couples, etc.
 #define AI_FLAG_WEIGH_ABILITY_PREDICTION    (1 << 21)  // AI will predict player's ability based on aiRating
+#define AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE  (1 << 22)  // AI adds score to highest damage move regardless of accuracy or secondary effect
+#define AI_FLAG_PREDICT_SWITCH              (1 << 23)  // AI will predict the player's switches and switchins based on how it would handle the situation. Recommend using AI_FLAG_OMNISCIENT
+#define AI_FLAG_PREDICT_INCOMING_MON        (1 << 24)  // AI will score against the predicting incoming mon if it predicts the player to switch. Requires AI_FLAG_PREDICT_SWITCH
 
-#define AI_FLAG_COUNT                       22
+#define AI_FLAG_COUNT                       25
 
 // The following options are enough to have a basic/smart trainer. Any other addtion could make the trainer worse/better depending on the flag
 #define AI_FLAG_BASIC_TRAINER         (AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY)
 #define AI_FLAG_SMART_TRAINER         (AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_WEIGH_ABILITY_PREDICTION)
+#define AI_FLAG_PREDICTION            (AI_FLAG_PREDICT_SWITCH | AI_FLAG_PREDICT_INCOMING_MON)
 
 // 'other' ai logic flags
 #define AI_FLAG_DYNAMIC_FUNC          (1 << 28)  // Create custom AI functions for specific battles via "setdynamicaifunc" cmd

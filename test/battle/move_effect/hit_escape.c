@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_U_TURN) == EFFECT_HIT_ESCAPE);
 }
 
-SINGLE_BATTLE_TEST("U-turn switches the user out")
+SINGLE_BATTLE_TEST("Hit Escape: U-turn switches the user out")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("U-turn switches the user out")
     }
 }
 
-SINGLE_BATTLE_TEST("U-turn does not switch the user out if the battle ends")
+SINGLE_BATTLE_TEST("Hit Escape: U-turn does not switch the user out if the battle ends")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("U-turn does not switch the user out if the battle ends")
     }
 }
 
-SINGLE_BATTLE_TEST("U-turn does not switch the user out if no replacements")
+SINGLE_BATTLE_TEST("Hit Escape: U-turn does not switch the user out if no replacements")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -48,7 +48,7 @@ SINGLE_BATTLE_TEST("U-turn does not switch the user out if no replacements")
     }
 }
 
-SINGLE_BATTLE_TEST("U-turn does not switch the user out if replacements fainted")
+SINGLE_BATTLE_TEST("Hit Escape: U-turn does not switch the user out if replacements fainted")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -62,7 +62,7 @@ SINGLE_BATTLE_TEST("U-turn does not switch the user out if replacements fainted"
     }
 }
 
-SINGLE_BATTLE_TEST("U-turn does not switch the user out if Wimp Out activates")
+SINGLE_BATTLE_TEST("Hit Escape: U-turn does not switch the user out if Wimp Out activates")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -79,7 +79,7 @@ SINGLE_BATTLE_TEST("U-turn does not switch the user out if Wimp Out activates")
     }
 }
 
-SINGLE_BATTLE_TEST("U-turn switches the user out if Wimp Out fails to activate")
+SINGLE_BATTLE_TEST("Hit Escape: U-turn switches the user out if Wimp Out fails to activate")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -95,7 +95,7 @@ SINGLE_BATTLE_TEST("U-turn switches the user out if Wimp Out fails to activate")
     }
 }
 
-SINGLE_BATTLE_TEST("U-turn switches the user out after Ice Face activates")
+SINGLE_BATTLE_TEST("Hit Escape: U-turn switches the user out after Ice Face activates")
 {
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_U_TURN) == DAMAGE_CATEGORY_PHYSICAL);
@@ -113,7 +113,7 @@ SINGLE_BATTLE_TEST("U-turn switches the user out after Ice Face activates")
     }
 }
 
-SINGLE_BATTLE_TEST("Held items are consumed immediately after a mon switched in by U-turn and Intimidate activates after it: player side")
+SINGLE_BATTLE_TEST("Hit Escape: Held items are consumed immediately after a mon switched in by U-turn and Intimidate activates after it: player side")
 {
     GIVEN {
         PLAYER(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); };
@@ -136,7 +136,7 @@ SINGLE_BATTLE_TEST("Held items are consumed immediately after a mon switched in 
     }
 }
 
-SINGLE_BATTLE_TEST("Held items are consumed immediately after a mon switched in by U-turn and Intimidate activates after it: opposing side")
+SINGLE_BATTLE_TEST("Hit Escape: Held items are consumed immediately after a mon switched in by U-turn and Intimidate activates after it: opposing side")
 {
     GIVEN {
         PLAYER(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); };
@@ -159,7 +159,7 @@ SINGLE_BATTLE_TEST("Held items are consumed immediately after a mon switched in 
     }
 }
 
-SINGLE_BATTLE_TEST("Electric Seed boost is received by the right pokemon after U-turn and Intimidate")
+SINGLE_BATTLE_TEST("Hit Escape: Electric Seed boost is received by the right pokemon after U-turn and Intimidate")
 {
     GIVEN {
         PLAYER(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); };

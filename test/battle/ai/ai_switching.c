@@ -103,6 +103,37 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: U-Turn will send out Ace Mon i
     }
 }
 
+AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Eject Button will send out Ace Mon if it's the only one remaining")
+{
+    u32 aiSmartMonChoicesFlag;
+    PARAMETRIZE { aiSmartMonChoicesFlag = 0; }
+    PARAMETRIZE { aiSmartMonChoicesFlag = AI_FLAG_SMART_MON_CHOICES; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiSmartMonChoicesFlag | AI_FLAG_ACE_POKEMON);
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Item(ITEM_EJECT_BUTTON); };
+        OPPONENT(SPECIES_LINOONE);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); EXPECT_MOVE(opponent, MOVE_TACKLE); EXPECT_SEND_OUT(opponent, 1); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Eject Pack will send out Ace Mon if it's the only one remaining")
+{
+    u32 aiSmartMonChoicesFlag;
+    PARAMETRIZE { aiSmartMonChoicesFlag = 0; }
+    PARAMETRIZE { aiSmartMonChoicesFlag = AI_FLAG_SMART_MON_CHOICES; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiSmartMonChoicesFlag | AI_FLAG_ACE_POKEMON);
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
+        PLAYER(SPECIES_ARCANINE) { Ability(ABILITY_INTIMIDATE); Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Item(ITEM_EJECT_PACK); Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_LINOONE) { Moves(MOVE_HEADBUTT); }
+    } WHEN {
+        TURN { SWITCH(player, 1); EXPECT_MOVE(opponent, MOVE_TACKLE); EXPECT_SEND_OUT(opponent, 1); }
+    }
+}
+
 // General AI_FLAG_SMART_MON_CHOICES behaviour
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Number of hits to KO calculation checks whether incoming damage is less than recurring healing to avoid an infinite loop")
 {
@@ -422,7 +453,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: AI will switch in trapping mon
     u32 aiSmartMonChoicesFlag = 0; // Enables trapping behaviour after KOs
     PARAMETRIZE { aiSmartMonChoicesFlag = 0; } // No trapping behaviour
     PARAMETRIZE { aiSmartMonChoicesFlag = AI_FLAG_SMART_MON_CHOICES; } // Traps with mid battle switches
-    GIVEN{
+    GIVEN {
         ASSUME(gSpeciesInfo[SPECIES_MAWILE].types[0] == TYPE_STEEL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiSmartMonChoicesFlag);
         PLAYER(SPECIES_MAWILE) { Speed(2); Moves(MOVE_PROTECT, MOVE_TACKLE); }
@@ -443,7 +474,7 @@ AI_SINGLE_BATTLE_TEST("AI won't use trapping behaviour if player only has 1 mon 
     u32 aiSmartMonChoicesFlag = 0; // Enables trapping behaviour after KOs
     PARAMETRIZE { aiSmartMonChoicesFlag = 0; } // No trapping behaviour
     PARAMETRIZE { aiSmartMonChoicesFlag = AI_FLAG_SMART_MON_CHOICES; } // Traps with mid battle switches
-    GIVEN{
+    GIVEN {
         ASSUME(gSpeciesInfo[SPECIES_MAWILE].types[0] == TYPE_STEEL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiSmartMonChoicesFlag);
         PLAYER(SPECIES_MAWILE) { Speed(2); Moves(MOVE_PROTECT, MOVE_TACKLE); }
@@ -451,7 +482,20 @@ AI_SINGLE_BATTLE_TEST("AI won't use trapping behaviour if player only has 1 mon 
         OPPONENT(SPECIES_MAGNEZONE) { Speed(1); Ability(ABILITY_MAGNET_PULL); Moves(MOVE_SHOCK_WAVE); }
         OPPONENT(SPECIES_MEGANIUM) { Speed(3); Moves(MOVE_EARTH_POWER); }
     } WHEN {
-            TURN{ MOVE(player, MOVE_PROTECT); EXPECT_MOVE(opponent, MOVE_SELF_DESTRUCT); EXPECT_SEND_OUT(opponent, 2); }
+        TURN{ MOVE(player, MOVE_PROTECT); EXPECT_MOVE(opponent, MOVE_SELF_DESTRUCT); EXPECT_SEND_OUT(opponent, 2); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI will trap player using Trace if player has a trapper")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING);
+        PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_ARENA_TRAP); Moves(MOVE_ROCK_TOMB); }
+        PLAYER(SPECIES_DUGTRIO);
+        OPPONENT(SPECIES_GENGAR);
+        OPPONENT(SPECIES_PORYGON2) { Ability(ABILITY_TRACE); Item(ITEM_EVIOLITE); Moves(MOVE_ICE_BEAM); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ROCK_TOMB); EXPECT_SWITCH(opponent, 1); }
     }
 }
 
@@ -669,7 +713,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if player's m
     GIVEN {
         ASSUME(GetMoveType(MOVE_SOLAR_BEAM) == TYPE_GRASS);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
-        PLAYER(SPECIES_BELLOSSOM) { Moves(MOVE_SOLAR_BEAM); }
+        PLAYER(SPECIES_BELLOSSOM) { Moves(MOVE_SOLAR_BEAM, MOVE_THUNDERBOLT); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
         OPPONENT(SPECIES_AZUMARILL) { Moves(MOVE_PLAY_ROUGH); Ability(ABILITY_SAP_SIPPER); }
     } WHEN {

@@ -1554,7 +1554,7 @@ static u8 FC_PopulateListMenu(void)
         {
             if (sTrainerIdxs[fameCheckerIdx] < FC_NONTRAINER_START)
             {
-                sListMenuItems[nitems].label = gTrainers[sTrainerIdxs[fameCheckerIdx]].trainerName;
+                sListMenuItems[nitems].label = GetTrainerClassNameFromId(sTrainerIdxs[fameCheckerIdx]);
                 sListMenuItems[nitems].index = nitems;
             }
             else

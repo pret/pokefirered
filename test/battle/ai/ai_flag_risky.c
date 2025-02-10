@@ -74,12 +74,13 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: Mid-battle switches prioritize offensive o
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI prefers high damage moves at the expense of accuracy regardless of KO thresholds")
+AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY | AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE: AI prefers high damage moves at the expense of accuracy regardless of KO thresholds")
 {
     u32 aiRiskyFlag = 0;
 
     PARAMETRIZE { aiRiskyFlag = 0; }
     PARAMETRIZE { aiRiskyFlag = AI_FLAG_RISKY; }
+    PARAMETRIZE { aiRiskyFlag = AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE; }
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiRiskyFlag);

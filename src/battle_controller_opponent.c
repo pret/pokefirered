@@ -4,14 +4,17 @@
 #include "battle_ai_util.h"
 #include "constants/battle_ai.h"
 #include "battle_anim.h"
+// #include "battle_arena.h"
 #include "battle_controllers.h"
 #include "battle_message.h"
 #include "battle_interface.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
+// #include "battle_tv.h"
 #include "battle_z_move.h"
 #include "bg.h"
 #include "data.h"
+// #include "frontier_util.h"
 #include "item.h"
 #include "link.h"
 #include "main.h"
@@ -35,12 +38,12 @@
 #include "constants/party_menu.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+// #include "trainer_hill.h"
 #include "test_runner.h"
 
 static void OpponentHandleLoadMonSprite(u32 battler);
 static void OpponentHandleSwitchInAnim(u32 battler);
 static void OpponentHandleDrawTrainerPic(u32 battler);
-static void OpponentHandleTrainerSlide(u32 battler);
 static void OpponentHandleTrainerSlideBack(u32 battler);
 static void OpponentHandleMoveAnimation(u32 battler);
 static void OpponentHandlePrintString(u32 battler);
@@ -97,10 +100,6 @@ static void (*const sOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler)
     [CONTROLLER_CHOSENMONRETURNVALUE]     = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE]           = BtlController_Empty,
     [CONTROLLER_ONERETURNVALUE_DUPLICATE] = BtlController_Empty,
-    [CONTROLLER_CLEARUNKVAR]              = BtlController_HandleClearUnkVar,
-    [CONTROLLER_SETUNKVAR]                = BtlController_HandleSetUnkVar,
-    [CONTROLLER_CLEARUNKFLAG]             = BtlController_HandleClearUnkFlag,
-    [CONTROLLER_TOGGLEUNKFLAG]            = BtlController_HandleToggleUnkFlag,
     [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
@@ -434,13 +433,13 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
         if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
         {
             if (battlerId == 1)
-                trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_A);
+                trainerPicId = GetBattleTowerTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentA);
             else
-                trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_B);
+                trainerPicId = GetBattleTowerTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentB);
         }
         else
         {
-            trainerPicId = GetBattleTowerTrainerFrontSpriteId(gTrainerBattleOpponent_A);
+            trainerPicId = GetBattleTowerTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentA);
         }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
@@ -454,13 +453,13 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
     {
         if (battlerId != 1)
-            trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_B);
+            trainerPicId = GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentB);
         else
-            trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
+            trainerPicId = GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentA);
     }
     else
     {
-        trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
+        trainerPicId = GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentA);
     }
 
     return trainerPicId;
@@ -486,7 +485,7 @@ static void OpponentHandleDrawTrainerPic(u32 battler)
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, TRUE, xPos, (8 - gTrainerSprites[trainerPicId].frontPicCoords.size) * 4 + 40, -1);
 }
 
-static void OpponentHandleTrainerSlide(u32 battler)
+void OpponentHandleTrainerSlide(u32 battler)
 {
     u32 trainerPicId = OpponentGetTrainerPicId(battler);
     BtlController_HandleTrainerSlide(battler, trainerPicId);
@@ -663,7 +662,7 @@ static void OpponentHandleChoosePokemon(u32 battler)
     // Switching out
     else if (gBattleStruct->AI_monToSwitchIntoId[battler] == PARTY_SIZE)
     {
-        chosenMonId = GetMostSuitableMonToSwitchInto(battler, TRUE);
+        chosenMonId = GetMostSuitableMonToSwitchInto(battler, SWITCH_AFTER_KO);
         if (chosenMonId == PARTY_SIZE)
         {
             s32 battler1, battler2, firstId, lastId;

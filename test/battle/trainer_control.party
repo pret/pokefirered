@@ -29,3 +29,187 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 Wynaut
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== 1 ===
+Name: Test2
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+Difficulty: Normal
+
+Mewtwo
+Level: 5
+
+=== 2 ===
+Name: Test2
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+Difficulty: Normal
+
+Mewtwo
+Level: 50
+
+=== 2 ===
+Name: Test2
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+Difficulty: Easy
+
+Metapod
+Level: 1
+
+=== 2 ===
+Name: Test2
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+Difficulty: Hard
+
+Arceus
+Level: 99
+
+=== 3 ===
+Name: Test3
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+Party Size: 1
+
+Wynaut
+
+Wobbuffet
+
+Eevee
+
+Mew
+
+=== 4 ===
+Name: Test4
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+Party Size: 3
+
+Wynaut
+
+Wobbuffet
+Tags: Lead
+
+Eevee
+Tags: Ace
+
+Mew
+
+Oddish
+Tags: Ace
+
+Aron
+Tags: Lead
+
+=== 5 ===
+Name: Test5
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: Yes
+Party Size: 3
+Pool Rules: Weather Doubles
+
+Wynaut
+Tags: Lead
+
+Wobbuffet
+Tags: Lead
+
+Vulpix
+Tags: Lead / Weather Setter
+
+Bulbasaur
+Tags: Lead / Weather Abuser
+
+Torkoal
+Tags: Lead / Weather Setter
+
+Cherrim
+Tags: Lead / Weather Abuser
+
+Mew
+Tags: Lead
+
+Aron
+Tags: Lead
+
+Oddish
+
+Eevee
+
+=== 6 ===
+Name: Test6
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+Party Size: 2
+Pool Rules: Basic
+
+Wynaut
+Tags: Lead
+
+Wobbuffet
+Tags: Lead
+
+Eevee
+Tags: Lead
+
+=== 7 ===
+Name: Test1
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+Party Size: 2
+Pool Rules: Basic
+Pool Prune: Test
+
+Wynaut
+
+Wobbuffet
+Tags: Lead
+
+Eevee
+
+=== 8 ===
+Name: Test1
+Class: Pkmn Trainer 1
+Pic: Red
+Gender: Male
+Music: Male
+Double Battle: No
+Party Size: 2
+Pool Rules: Basic
+Pool Pick Functions: Lowest
+
+Wynaut
+Tags: Ace
+
+Wobbuffet
+
+Eevee
+Tags: Lead

@@ -49,6 +49,17 @@ static void PrintOakText_ForPetesSake(u32 battler);
 static void PrintOakTextWithMainBgDarkened(u32 battler, const u8 *text, u8 delay);
 static void HandleInputChooseAction(u32 battler);
 
+static const u8 sText_ForPetesSake[] = _("OAK: Oh, for Pete's sake…\nSo pushy, as always.\p{B_PLAYER_NAME}.\pYou've never had a POKéMON battle\nbefore, have you?\pA POKéMON battle is when TRAINERS\npit their POKéMON against each\lother.\p");
+static const u8 sText_HowDissapointing[] = _("OAK: Hm…\nHow disappointing…\pIf you win, you earn prize money,\nand your POKéMON grow.\pBut if you lose, {B_PLAYER_NAME}, you end\nup paying prize money…\pHowever, since you had no warning\nthis time, I'll pay for you.\pBut things won't be this way once\nyou step outside these doors.\pThat's why you must strengthen your\nPOKéMON by battling wild POKéMON.\p");
+static const u8 sText_InflictingDamageIsKey[] = _("OAK: Inflicting damage on the foe\nis the key to any battle.\p");
+static const u8 sText_KeepAnEyeOnHP[] = _("OAK: Keep your eyes on your\nPOKéMON's HP.\pIt will faint if the HP drops to\n“0.”\p");
+static const u8 sText_LoweringStats[] = _("OAK: Lowering the foe's stats\nwill put you at an advantage.\p");
+static const u8 sText_OakNoRunningFromATrainer[] = _("OAK: No! There's no running away\nfrom a TRAINER POKéMON battle!\p");
+static const u8 sText_TheTrainerThat[] = _("The TRAINER that makes the other\nTRAINER's POKéMON faint by lowering\ltheir HP to “0,” wins.\p");
+static const u8 sText_TryBattling[] = _("But rather than talking about it,\nyou'll learn more from experience.\pTry battling and see for yourself.\p");
+static const u8 sText_WinEarnsPrizeMoney[] = _("OAK: Hm! Excellent!\pIf you win, you earn prize money,\nand your POKéMON will grow!\pBattle other TRAINERS and make\nyour POKéMON strong!\p");
+static const u8 gText_WhatWillOldManDo[] = _("What will the\nold man do?");
+
 static void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
 {
     [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
@@ -414,7 +425,7 @@ static void PrintOakText_ForPetesSake(u32 battler)
         }
         break;
     case 2:
-        BattleStringExpandPlaceholdersToDisplayedString(gText_ForPetesSake);
+        BattleStringExpandPlaceholdersToDisplayedString(sText_ForPetesSake);
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_OAK_OLD_MAN);
         ++gBattleStruct->simulatedInputState[0];
         break;
@@ -433,7 +444,7 @@ static void PrintOakText_ForPetesSake(u32 battler)
     case 4:
         if (!gPaletteFade.active)
         {
-            BattleStringExpandPlaceholdersToDisplayedString(gText_TheTrainerThat);
+            BattleStringExpandPlaceholdersToDisplayedString(sText_TheTrainerThat);
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_OAK_OLD_MAN);
             ++gBattleStruct->simulatedInputState[0];
         }
@@ -453,7 +464,7 @@ static void PrintOakText_ForPetesSake(u32 battler)
     case 6:
         if (!gPaletteFade.active)
         {
-            BattleStringExpandPlaceholdersToDisplayedString(gText_TryBattling);
+            BattleStringExpandPlaceholdersToDisplayedString(sText_TryBattling);
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_OAK_OLD_MAN);
             ++gBattleStruct->simulatedInputState[0];
         }
@@ -483,27 +494,27 @@ static void PrintOakText_ForPetesSake(u32 battler)
 
 void PrintOakText_InflictingDamageIsKey(u32 battler)
 {
-    PrintOakTextWithMainBgDarkened(battler, gText_InflictingDamageIsKey, 1);
+    PrintOakTextWithMainBgDarkened(battler, sText_InflictingDamageIsKey, 1);
 }
 
 static void PrintOakText_LoweringStats(u32 battler)
 {
-    PrintOakTextWithMainBgDarkened(battler, gText_LoweringStats, 64);
+    PrintOakTextWithMainBgDarkened(battler, sText_LoweringStats, 64);
 }
 
 void PrintOakText_OakNoRunningFromATrainer(u32 battler)
 {
-    PrintOakTextWithMainBgDarkened(battler, gText_OakNoRunningFromATrainer, 1);
+    PrintOakTextWithMainBgDarkened(battler, sText_OakNoRunningFromATrainer, 1);
 }
 
 static void PrintOakText_WinEarnsPrizeMoney(u32 battler)
 {
-    PrintOakTextWithMainBgDarkened(battler, gText_WinEarnsPrizeMoney, 64);
+    PrintOakTextWithMainBgDarkened(battler, sText_WinEarnsPrizeMoney, 64);
 }
 
 void PrintOakText_HowDisappointing(u32 battler)
 {
-    PrintOakTextWithMainBgDarkened(battler, gText_HowDissapointing, 64);
+    PrintOakTextWithMainBgDarkened(battler, sText_HowDissapointing, 64);
 }
 
 static void PrintOakTextWithMainBgDarkened(u32 battler, const u8 *text, u8 delay)
@@ -605,7 +616,7 @@ static void PrintOakText_KeepAnEyeOnHP(u32 battler)
         }
         break;
     case 3:
-        BattleStringExpandPlaceholdersToDisplayedString(gText_KeepAnEyeOnHP);
+        BattleStringExpandPlaceholdersToDisplayedString(sText_KeepAnEyeOnHP);
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_OAK_OLD_MAN);
         ++gBattleStruct->simulatedInputState[0];
         break;

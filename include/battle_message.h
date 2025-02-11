@@ -3,11 +3,14 @@
 
 #include "constants/battle.h"
 
+// This buffer can hold many different things. Some of the things it can hold
+// that have explicit sizes are listed below to ensure it can contain them.
 #define TEXT_BUFF_ARRAY_COUNT   max(16, \
                                 max(MOVE_NAME_LENGTH + 2, /* +2 to hold the "!" and EOS. */ \
                                 max(POKEMON_NAME_LENGTH + 1, \
                                     ABILITY_NAME_LENGTH + 1)))
 #define BATTLE_MSG_MAX_WIDTH    208
+#define BATTLE_MSG_MAX_LINES    2
 
 // for 0xFD
 
@@ -76,6 +79,10 @@
 #define B_TXT_DEF_NAME_WITH_PREFIX2 0x3F //lowercase
 #define B_TXT_EFF_NAME_WITH_PREFIX2 0x40 //lowercase
 #define B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX2 0x41 //lowercase
+#define B_TXT_TRAINER1_NAME_WITH_CLASS 0x42
+#define B_TXT_TRAINER2_NAME_WITH_CLASS 0x43
+#define B_TXT_PARTNER_NAME_WITH_CLASS 0x44
+#define B_TXT_ATK_TRAINER_NAME_WITH_CLASS 0x45
 
 // for B_TXT_BUFF1, B_TXT_BUFF2 and B_TXT_BUFF3
 

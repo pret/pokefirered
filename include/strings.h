@@ -215,8 +215,6 @@ extern const u8 gString_SlotMachineControls[];
 
 // battle_controller_safari
 extern const u8 gText_EmptyString3[];
-extern const u8 gText_SafariZoneMenu[];
-extern const u8 gText_WhatWillPlayerThrow[];
 
 // battle_controller_player
 extern const u8 gText_BattleSwitchWhich[];
@@ -228,18 +226,6 @@ extern const u8 gText_LinkStandby[];
 extern const u8 gText_BattleMenu[];
 extern const u8 gText_WhatWillPkmnDo[];
 extern const u8 gText_NewLine[];
-
-// battle_controller_oak_old_man
-extern const u8 gText_ForPetesSake[];
-extern const u8 gText_TheTrainerThat[];
-extern const u8 gText_TryBattling[];
-extern const u8 gText_InflictingDamageIsKey[];
-extern const u8 gText_LoweringStats[];
-extern const u8 gText_KeepAnEyeOnHP[];
-extern const u8 gText_OakNoRunningFromATrainer[];
-extern const u8 gText_WinEarnsPrizeMoney[];
-extern const u8 gText_HowDissapointing[];
-extern const u8 gText_WhatWillOldManDo[];
 
 // battle_controller_pokedude
 extern const u8 Pokedude_Text_SpeedierBattlerGoesFirst[];

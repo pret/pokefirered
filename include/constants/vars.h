@@ -198,7 +198,7 @@
 #define VAR_MAP_ITEM_5             0x4090
 #define VAR_MAP_ITEM_6             0x4091
 #define VAR_MAP_ITEM_END           0x4092
-#define VAR_0x4093                 0x4093
+#define VAR_ELITE_FOUR_MEMBERS_BEATEN 0x4093
 #define VAR_0x4094                 0x4094
 #define VAR_0x4095                 0x4095
 #define VAR_0x4096                 0x4096

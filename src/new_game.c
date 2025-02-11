@@ -156,6 +156,8 @@ void NewGameInitData(void)
     VarSet(VAR_FIRE_STARTER, GetSpeciesFromGroup(SPECIES_CHARMANDER, RAND_INPUT_PICK_2));
     VarSet(VAR_WATER_STARTER, GetSpeciesFromGroup(SPECIES_SQUIRTLE, RAND_INPUT_PICK_2));
 
+    VarSet(VAR_ELITE_FOUR_MEMBERS_BEATEN, 0);
+
     // Overwrite options.
     SetDefaultOptions();
 

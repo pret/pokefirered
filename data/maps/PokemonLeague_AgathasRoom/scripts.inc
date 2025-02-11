@@ -82,6 +82,14 @@ PokemonLeague_AgathasRoom_EventScript_PostBattle::
 	end
 
 PokemonLeague_AgathasRoom_EventScript_DefeatedAgatha::
+  goto_if_ge VAR_ELITE_FOUR_MEMBERS_BEATEN 3 PokemonLeague_AgathasRoom_EventScript_DefeatedAgathaAgain
+  setvar VAR_ELITE_FOUR_MEMBERS_BEATEN 3
+  giveitem ITEM_RARE_CANDY
+  giveitem ITEM_NATURE_MINT
+  giveitem ITEM_ABILITY_PATCH
+  goto PokemonLeague_AgathasRoom_EventScript_DefeatedAgathaAgain
+
+PokemonLeague_AgathasRoom_EventScript_DefeatedAgathaAgain::
 	setflag FLAG_DEFEATED_AGATHA
 	call PokemonLeague_EventScript_OpenDoor
 	msgbox PokemonLeague_AgathasRoom_Text_PostBattle

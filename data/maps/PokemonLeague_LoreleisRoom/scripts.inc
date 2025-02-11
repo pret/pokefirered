@@ -86,6 +86,14 @@ PokemonLeague_LoreleisRoom_EventScript_PostBattle::
 	end
 
 PokemonLeague_LoreleisRoom_EventScript_DefeatedLorelei::
+  goto_if_ge VAR_ELITE_FOUR_MEMBERS_BEATEN 1 PokemonLeague_LoreleisRoom_EventScript_DefeatedLoreleiAgain
+  setvar VAR_ELITE_FOUR_MEMBERS_BEATEN 1
+  giveitem ITEM_RARE_CANDY
+  giveitem ITEM_NATURE_MINT
+  giveitem ITEM_ABILITY_PATCH
+  goto PokemonLeague_LoreleisRoom_EventScript_DefeatedLoreleiAgain
+
+PokemonLeague_LoreleisRoom_EventScript_DefeatedLoreleiAgain::
 	setflag FLAG_DEFEATED_LORELEI
 	call PokemonLeague_EventScript_OpenDoor
 	msgbox PokemonLeague_LoreleisRoom_Text_PostBattle

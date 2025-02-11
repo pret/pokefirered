@@ -95,7 +95,8 @@ void DisableNationalPokedex(void)
 
 void EnableNationalPokedex(void)
 {
-  // No-op because it's always enabled in this mod.
+  // Used to see if Lorelei should be missing.
+  FlagSet(FLAG_SYS_NATIONAL_DEX);
 }
 
 bool32 IsNationalPokedexEnabled(void)

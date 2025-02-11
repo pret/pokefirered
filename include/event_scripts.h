@@ -1208,10 +1208,10 @@ extern const u8 EventScript_AccessPokemonBoxLink[];
 extern const u8 EventScript_SprayWoreOff[];
 
 // battle_message
-extern const u8 Text_MonSentToBoxInSomeonesPC[];
-extern const u8 Text_MonSentToBoxInBillsPC[];
-extern const u8 Text_MonSentToBoxSomeonesBoxFull[];
-extern const u8 Text_MonSentToBoxBillsBoxFull[];
+extern const u8 gText_PkmnTransferredSomeonesPC[];
+extern const u8 gText_PkmnTransferredBillsPC[];
+extern const u8 gText_PkmnTransferredSomeonesPCBoxFull[];
+extern const u8 gText_PkmnTransferredBillsPCBoxFull[];
 extern const u8 gText_PkmnTransferredLanettesPCBoxFull[];
 extern const u8 gText_PkmnTransferredLanettesPC[];
 

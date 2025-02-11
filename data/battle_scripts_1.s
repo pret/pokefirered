@@ -5675,7 +5675,7 @@ BattleScript_LocalBattleLostPrintWhiteOut::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 BattleScript_LocalBattleLostEnd::
-	printstring STRINGID_PLAYERLOSTAGAINSTENEMYTRAINER
+	printstring STRINGID_PLAYERLOSTTOENEMYTRAINER
 	waitmessage B_WAIT_TIME_LONG
 	getmoneyreward
 	printstring STRINGID_PLAYERPAIDPRIZEMONEY

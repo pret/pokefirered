@@ -101,6 +101,9 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
+static const u8 sText_WhatWillPlayerThrow[] = _("What will {B_PLAYER_NAME}\nthrow?");
+static const u8 sText_SafariZoneMenu[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}BALL{CLEAR_TO 56}BAIT\nROCK{CLEAR_TO 56}RUN");
+
 void SetControllerToSafari(u32 battler)
 {
     gBattlerControllerEndFuncs[battler] = SafariBufferExecCompleted;
@@ -287,13 +290,13 @@ static void SafariHandleChooseAction(u32 battler)
 
     gBattlerControllerFuncs[battler] = HandleChooseActionAfterDma3;
     BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
-    BattlePutTextOnWindow(gText_SafariZoneMenu, B_WIN_ACTION_MENU);
+    BattlePutTextOnWindow(sText_SafariZoneMenu, B_WIN_ACTION_MENU);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
 
     ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
-    BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPlayerThrow);
+    BattleStringExpandPlaceholdersToDisplayedString(sText_WhatWillPlayerThrow);
     BreakStringAutomatic(gDisplayedStringBattle, WindowWidthPx(B_WIN_ACTION_PROMPT), 2, FONT_NORMAL);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }

@@ -291,10 +291,10 @@ static const u16 sRival_Gfx[] = INCBIN_U16("graphics/naming_screen/rival.4bpp");
 
 static const u8 *const sTransferredToPCMessages[] =
 {
-    Text_MonSentToBoxInSomeonesPC,
-    Text_MonSentToBoxInBillsPC,
-    Text_MonSentToBoxSomeonesBoxFull,
-    Text_MonSentToBoxBillsBoxFull
+    gText_PkmnTransferredSomeonesPC,
+    gText_PkmnTransferredBillsPC,
+    gText_PkmnTransferredSomeonesPCBoxFull,
+    gText_PkmnTransferredBillsPCBoxFull
 };
 
 static const struct BgTemplate sBgTemplates[] =

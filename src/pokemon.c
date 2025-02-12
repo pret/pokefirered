@@ -3,6 +3,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "random.h"
+#include "rtc.h"
 #include "text.h"
 #include "data.h"
 #include "battle.h"
@@ -5661,16 +5662,58 @@ u8 CheckPartyHasHadPokerus(struct Pokemon *party, u8 selection)
 
 // These two functions are stubbed from RS, but they're stubbed badly.
 // See note on RandomlyGivePartyPokerus above.
-static void UpdatePartyPokerusTime(void)
+void UpdatePartyPokerusTime(u16 days)
 {
-    u8 foo;
-    &foo;
+    int i;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, 0))
+        {
+            u8 pokerus = GetMonData(&gPlayerParty[i], MON_DATA_POKERUS, 0);
+            if (pokerus & 0xF)
+            {
+                if ((pokerus & 0xF) < days || days > 4)
+                    pokerus &= 0xF0;
+                else
+                    pokerus -= days;
+
+                if (pokerus == 0)
+                    pokerus = 0x10;
+
+                SetMonData(&gPlayerParty[i], MON_DATA_POKERUS, &pokerus);
+            }
+        }
+    }
 }
 
 void PartySpreadPokerus(struct Pokemon *party)
 {
-    u8 foo;
-    &foo;
+    if ((Random() % 3) == 0)
+    {
+        int i;
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_SPECIES, 0))
+            {
+                u8 pokerus = GetMonData(&party[i], MON_DATA_POKERUS, 0);
+                u8 curPokerus = pokerus;
+                if (pokerus)
+                {
+                    if (pokerus & 0xF)
+                    {
+                        // Spread to adjacent party members.
+                        if (i != 0 && !(GetMonData(&party[i - 1], MON_DATA_POKERUS, 0) & 0xF0))
+                            SetMonData(&party[i - 1], MON_DATA_POKERUS, &curPokerus);
+                        if (i != (PARTY_SIZE - 1) && !(GetMonData(&party[i + 1], MON_DATA_POKERUS, 0) & 0xF0))
+                        {
+                            SetMonData(&party[i + 1], MON_DATA_POKERUS, &curPokerus);
+                            i++;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 static void SetMonExpWithMaxLevelCheck(struct Pokemon *mon, int species, u8 unused, u32 data)

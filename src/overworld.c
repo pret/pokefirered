@@ -48,6 +48,7 @@
 #include "vs_seeker.h"
 #include "wild_encounter.h"
 #include "constants/cable_club.h"
+#include "clock.h"
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
@@ -758,6 +759,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
     MapResetTrainerRematches(mapGroup, mapNum);
+    DoTimeBasedEvents();
     SetSavedWeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
@@ -789,6 +791,7 @@ static void LoadMapFromWarp(bool32 unused)
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
 
     TrySetMapSaveWarpStatus();
+    DoTimeBasedEvents();
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
@@ -1684,6 +1687,7 @@ void CB2_ContinueSavedGame(void)
     LoadSaveblockMapHeader();
     LoadSaveblockObjEventScripts();
     UnfreezeObjectEvents();
+    DoTimeBasedEvents();
     Overworld_ResetStateOnContinue();
     InitMapFromSavedGame();
     PlayTimeCounter_Start();

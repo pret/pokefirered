@@ -1,0 +1,4 @@
+gUnknown_3005EF0
+gUnknown_3005EF4
+gUnknown_3005EF8
+gUnknown_3005F00

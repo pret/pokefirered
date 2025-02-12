@@ -2595,28 +2595,30 @@ PalletTown_ProfessorOaksLab_EventScript_LeftSign::
 # 1298 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
 	msgbox PalletTown_ProfessorOaksLab_Text_PressStartToOpenMenu, MSGBOX_SIGN
 # 1299 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
-	end
+	special StartWallClock
 # 1300 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
-
-# 1301 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
-PalletTown_ProfessorOaksLab_EventScript_RightSign::
-# 1302 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
-	lockall
-# 1303 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
-	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6, PalletTown_ProfessorOaksLab_EventScript_RightSignAlt
-# 1304 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
-	msgbox PalletTown_ProfessorOaksLab_Text_SaveOptionInMenu
-# 1305 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
-	releaseall
-# 1306 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
 	end
-# 1307 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+# 1301 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
 
-# 1308 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
-PalletTown_ProfessorOaksLab_EventScript_RightSignAlt::
-# 1309 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
-	msgbox PalletTown_ProfessorOaksLab_Text_AllMonTypesHaveStrongAndWeakPoints
-# 1310 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+# 1302 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+PalletTown_ProfessorOaksLab_EventScript_RightSign::
+# 1303 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+	lockall
+# 1304 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6, PalletTown_ProfessorOaksLab_EventScript_RightSignAlt
+# 1305 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+	msgbox PalletTown_ProfessorOaksLab_Text_SaveOptionInMenu
+# 1306 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
 	releaseall
+# 1307 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+	end
+# 1308 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+
+# 1309 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+PalletTown_ProfessorOaksLab_EventScript_RightSignAlt::
+# 1310 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+	msgbox PalletTown_ProfessorOaksLab_Text_AllMonTypesHaveStrongAndWeakPoints
 # 1311 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
+	releaseall
+# 1312 "data/maps/PalletTown_ProfessorOaksLab/scripts.pory"
 	end

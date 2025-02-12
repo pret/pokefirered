@@ -1,0 +1,4 @@
+gQuestLogPlaybackState
+sNumEventsInLogEntry
+gQuestLogFieldInput
+sCurQuestLogEntry

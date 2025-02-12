@@ -16,7 +16,7 @@
   "connections": [
     {
       "map": "MAP_PALLET_TOWN",
-      "offset": 0,
+      "offset": 18,
       "direction": "right"
     }
   ],

@@ -4561,4 +4561,11 @@ extern const u32 gMapMainMenuBG2[];
 extern const u32 gMapMainMenuNewGame[];
 extern const u32 gMapMainMenuContinue[];
 
+// wall clock
+extern const u32 gWallClock_Gfx[];
+extern const u16 gWallClockMale_Pal[];
+extern const u16 gWallClockFemale_Pal[];
+extern const u32 gWallClockStart_Tilemap[];
+extern const u32 gWallClockView_Tilemap[];
+
 #endif //GUARD_GRAPHICS_H

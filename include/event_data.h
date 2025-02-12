@@ -25,6 +25,7 @@ extern u16 gSpecialVar_PrevTextColor;
 
 void InitEventData(void);
 void ClearTempFieldEventData(void);
+void ClearDailyFlags(void);
 void ClearUpperFlags(void);
 void DisableNationalPokedex(void);
 void EnableNationalPokedex(void);

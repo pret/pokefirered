@@ -1296,6 +1296,7 @@ PalletTown_ProfessorOaksLab_EventScript_Computer::
 
 PalletTown_ProfessorOaksLab_EventScript_LeftSign::
 	msgbox PalletTown_ProfessorOaksLab_Text_PressStartToOpenMenu, MSGBOX_SIGN
+	special StartWallClock
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_RightSign::

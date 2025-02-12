@@ -47,11 +47,6 @@ static void LoadQuestLogWindowTilesOnBg(u8 bgId, u16 destOffset)
 
 // Unused
 // Equivalent to LoadUserWindowGfxByFrame, but takes a bg id directly
-static void LoadUserWindowGfxByFrameOnBg(u8 bgId, u8 frameType, u16 destOffset, u8 palOffset)
-{
-    LoadBgTiles(bgId, gUserFrames[frameType].tiles, 0x120, destOffset);
-    LoadPalette(gUserFrames[frameType].palette, palOffset, PLTT_SIZE_4BPP);
-}
 
 // Identical to LoadUserWindowGfx
 void LoadUserWindowGfx2(u8 windowId, u16 destOffset, u8 palOffset)

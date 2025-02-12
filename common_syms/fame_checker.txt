@@ -1,0 +1,2 @@
+gFameChecker_ListMenuTemplate
+gIconDescriptionBoxIsOpen

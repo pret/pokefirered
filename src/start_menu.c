@@ -305,6 +305,35 @@ static s8 PrintStartMenuItems(s8 *cursor_p, u8 nitems)
 
 static const u16 sIconsMenuPal[] = INCBIN_U16("graphics/start_menu/menuIconPal.gbapal");
 static const u8 sIconMenuSprites[] = INCBIN_U8("graphics/start_menu/iconMenu.4bpp");
+static const u32 sBg0_Tiles[] = INCBIN_U32("graphics/start_menu/BG0.4bpp.lz"); 
+static const u32 sBg0_Map[] = INCBIN_U32("graphics/start_menu/BG0.bin.lz"); 
+static const u16 sBg0_Pal[] = INCBIN_U16("graphics/start_menu/BG0.gbapal"); 
+
+static const struct BgTemplate sBgTemplateBg0[1] =  
+{
+   {
+    .bg = 0,
+    .charBaseIndex = 2784,
+    .mapBaseIndex = 720,
+    .screenSize = 0,
+    .paletteMode = 0,
+    .priority = 0,
+    .baseTile = 0,
+   },
+};
+
+static void LoadPrueba()
+{
+    InitBgsFromTemplates(0, sBgTemplateBg0, ARRAY_COUNT(sBgTemplateBg0)); 
+
+    LZ77UnCompVram(sBg0_Tiles, (void*) VRAM + 0x4000 * sBgTemplateBg0[0].charBaseIndex);
+    LZ77UnCompVram(sBg0_Map, (u16*) BG_SCREEN_ADDR(sBgTemplateBg0[0].mapBaseIndex));
+
+    LoadPalette(sBg0_Pal, 0xF0, 0xA0);
+
+    ShowBg(0);
+}
+
 
 static const struct OamData gSpriteOamData32 =
 {
@@ -553,6 +582,7 @@ void ShowStartMenu(void)
         HandleEnforcedLookDirectionOnPlayerStopMoving();
         StopPlayerAvatar();
     }
+    //LoadPrueba(0);
     OpenStartMenuWithFollowupFunc(Task_StartMenuHandleInput);
     LockPlayerFieldControls();
 }
@@ -1168,7 +1198,7 @@ static void CloseStartMenu(void)
     // RemoveStartMenuWindow();
     DestroySpriteIconsMenu();
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-    UnlockPlayerFieldControls();
+    UnlockPlayerFieldControls();    
 }
 
 void AppendToList(u8 *list, u8 *cursor, u8 newEntry)

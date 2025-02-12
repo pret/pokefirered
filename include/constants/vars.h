@@ -88,7 +88,7 @@
 #define VAR_0x4029                         0x4029
 #define VAR_0x402A                         0x402A
 #define VAR_0x402B                         0x402B
-#define VAR_0x402C                         0x402C
+#define VAR_DAYS                           0x402C // was VAR_RESET_RTC_ENABLE
 #define VAR_0x402D                         0x402D
 #define VAR_0x402E                         0x402E
 
@@ -96,7 +96,7 @@
 
 #define VAR_ICE_STEP_COUNT                 0x4030
 #define VAR_STARTER_MON                    0x4031 // 0: Bulbasaur, 1: Squirtle, 2: Charmander
-#define VAR_RESET_RTC_ENABLE               0x4032
+#define VAR_RESET_RTC_ENABLE               0x4032 // this var is recognised by FRLG as the RTC reset flag
 #define VAR_ENIGMA_BERRY_AVAILABLE         0x4033
 
 #define VAR_0x4034                         0x4034

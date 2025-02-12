@@ -69,9 +69,9 @@ static u16 sLastTextBgColor;
 static u16 sLastTextFgColor;
 static u16 sLastTextShadowColor;
 
-const struct FontInfo *gFonts;
-struct GlyphInfo gGlyphInfo;
-TextFlags gTextFlags;
+COMMON_DATA const struct FontInfo *gFonts = NULL;
+COMMON_DATA struct GlyphInfo gGlyphInfo = {0};
+COMMON_DATA TextFlags gTextFlags = {0};
 
 static const u8 sFontHalfRowOffsets[] =
 {
@@ -93,7 +93,7 @@ static const u8 sFontHalfRowOffsets[] =
     0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00
 };
 
-static const u8 sDownArrowTiles[]             = INCBIN_U8("graphics/fonts/down_arrows.4bpp");
+static const u8 sDownArrowTiles[]          = INCBIN_U8("graphics/fonts/down_arrows.4bpp");
 static const u8 sDoubleArrowTiles1[]       = INCBIN_U8("graphics/fonts/down_arrow_3.4bpp");
 static const u8 sDoubleArrowTiles2[]       = INCBIN_U8("graphics/fonts/down_arrow_4.4bpp");
 

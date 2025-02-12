@@ -442,7 +442,7 @@ static EWRAM_DATA u16 sEvBefore = 0;
 static EWRAM_DATA u16 sEvAfter = 0;
 
 
-void (*gItemUseCB)(u8, TaskFunc);
+COMMON_DATA void (*gItemUseCB)(u8, TaskFunc) = NULL;
 
 #include "data/party_menu.h"
 

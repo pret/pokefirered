@@ -6,8 +6,8 @@
 #include "window.h"
 
 
-u8 gTransparentTileNumber;
-void *gWindowBgTilemapBuffers[NUM_BACKGROUNDS];
+COMMON_DATA u8 gTransparentTileNumber;
+COMMON_DATA void *gWindowBgTilemapBuffers[NUM_BACKGROUNDS];
 
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
 EWRAM_DATA static struct Window* sWindowPtr = NULL;

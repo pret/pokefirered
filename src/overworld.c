@@ -109,14 +109,14 @@ static EWRAM_DATA s16 sCreditsOverworld_CmdIndex = 0;
 
 EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {};
 
-u16 *gBGTilemapBuffers1;
-u16 *gBGTilemapBuffers2;
-u16 *gBGTilemapBuffers3;
-void (*gFieldCallback)(void);
-bool8 (*gFieldCallback2)(void);
-u16 gHeldKeyCodeToSend;
-u8 gLocalLinkPlayerId;
-u8 gFieldLinkPlayerCount;
+COMMON_DATA u16 *gBGTilemapBuffers1 = NULL;
+COMMON_DATA u16 *gBGTilemapBuffers2 = NULL;
+COMMON_DATA u16 *gBGTilemapBuffers3 = NULL;
+COMMON_DATA void (*gFieldCallback)(void) = NULL;
+COMMON_DATA bool8 (*gFieldCallback2)(void) = NULL;
+COMMON_DATA u16 gHeldKeyCodeToSend = 0;
+COMMON_DATA u8 gLocalLinkPlayerId = 0;
+COMMON_DATA u8 gFieldLinkPlayerCount = 0;
 
 static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
 static KeyInterCB sPlayerKeyInterceptCallback;

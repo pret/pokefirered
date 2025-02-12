@@ -67,10 +67,10 @@ struct FlagOrVarRecord
     u16 value;
 };
 
-u8 gQuestLogPlaybackState;
-u16 sMaxActionsInScene;
-struct FieldInput gQuestLogFieldInput;
-struct QuestLogAction * sCurSceneActions;
+COMMON_DATA u8 gQuestLogPlaybackState = 0;
+COMMON_DATA u16 sMaxActionsInScene = 0;
+COMMON_DATA struct FieldInput gQuestLogFieldInput = {0};
+COMMON_DATA struct QuestLogAction * sCurSceneActions = NULL;
 
 static struct FlagOrVarRecord * sFlagOrVarRecords;
 static u16 sNumFlagsOrVars;

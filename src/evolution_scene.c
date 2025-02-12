@@ -43,7 +43,7 @@ static EWRAM_DATA struct EvoInfo *sEvoStructPtr = NULL;
 static EWRAM_DATA u16 *sBgAnimPal = NULL;
 
 // IWRAM common
-void (*gCB2_AfterEvolution)(void);
+COMMON_DATA void (*gCB2_AfterEvolution)(void) = NULL;
 
 #define sEvoCursorPos           gBattleCommunication[1] // when learning a new move
 #define sEvoGraphicsTaskId      gBattleCommunication[2]

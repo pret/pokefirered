@@ -15,7 +15,7 @@ struct ConnectionFlags
     u8 east:1;
 };
 
-struct BackupMapLayout VMap;
+COMMON_DATA struct BackupMapLayout VMap = {0};
 EWRAM_DATA u16 ALIGNED(4) sBackupMapData[VIRTUAL_MAP_SIZE] = {0};
 EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gCamera = {0};

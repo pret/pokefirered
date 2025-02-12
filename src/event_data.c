@@ -11,7 +11,10 @@ static bool8 IsFlagOrVarStoredInQuestLog(u16 idx, u8 a1);
 
 #define SPECIAL_FLAGS_SIZE (NUM_SPECIAL_FLAGS / 8)  // 8 flags per byte
 #define TEMP_FLAGS_SIZE    (NUM_TEMP_FLAGS / 8)
+#define DAILY_FLAGS_SIZE    (NUM_DAILY_FLAGS / 8)
 #define TEMP_VARS_SIZE     (NUM_TEMP_VARS * 2)      // 1/2 var per byte
+
+#define NUM_DAILY_FLAGS   (DAILY_FLAGS_END - DAILY_FLAGS_START + 1)
 
 EWRAM_DATA u16 gSpecialVar_0x8000 = 0;
 EWRAM_DATA u16 gSpecialVar_0x8001 = 0;
@@ -35,10 +38,7 @@ EWRAM_DATA u16 gSpecialVar_PrevTextColor = 0;
 EWRAM_DATA u16 gSpecialVar_0x8014 = 0;
 EWRAM_DATA u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {};
 
-#define NUM_DAILY_FLAGS   (DAILY_FLAGS_END - DAILY_FLAGS_START + 1)
-#define DAILY_FLAGS_SIZE    (NUM_DAILY_FLAGS / 8)
-
-u16 gLastQuestLogStoredFlagOrVarIdx;
+COMMON_DATA u16 gLastQuestLogStoredFlagOrVarIdx = 0;
 
 extern u16 *const gSpecialVars[];
 

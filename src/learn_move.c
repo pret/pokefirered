@@ -364,7 +364,7 @@ static void VBlankCB_MoveRelearner(void)
     TransferPlttBuffer();
 }
 
-void DisplayMoveTutorMenu(void)
+void TeachMoveRelearnerMove(void)
 {
     LockPlayerFieldControls();
     CreateTask(Task_InitMoveRelearnerMenu, 10);

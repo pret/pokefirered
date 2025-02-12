@@ -74,7 +74,7 @@ static void UpdateLetsGoEvolutionTracker(void);
 static bool8 UpdatePoisonStepCounter(void);
 #endif // OW_POISON_DAMAGE
 
-struct FieldInput gFieldInputRecord;
+COMMON_DATA struct FieldInput gFieldInputRecord = {0};
 
 void FieldClearPlayerInput(struct FieldInput *input)
 {

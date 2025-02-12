@@ -37,11 +37,11 @@ EWRAM_DATA struct PokemonStorageASLR gPokemonStorage = {0};
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 
 // IWRAM common
-bool32 gFlashMemoryPresent = 0;
-struct SaveBlock1 *gSaveBlock1Ptr = NULL;
-struct SaveBlock2 *gSaveBlock2Ptr = NULL;
+COMMON_DATA bool32 gFlashMemoryPresent = 0;
+COMMON_DATA struct SaveBlock1 *gSaveBlock1Ptr = NULL;
+COMMON_DATA struct SaveBlock2 *gSaveBlock2Ptr = NULL;
 IWRAM_INIT struct SaveBlock3 *gSaveBlock3Ptr = &gSaveblock3;
-struct PokemonStorage *gPokemonStoragePtr = NULL;
+COMMON_DATA struct PokemonStorage *gPokemonStoragePtr = NULL;
 
 void CheckForFlashMemory(void)
 {

@@ -68,8 +68,8 @@ static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 
 static bool8 sIsScriptedWildDouble;
 
-struct ScriptContext * sQuestLogScriptContextPtr;
-u8 gSelectedObjectEvent;
+COMMON_DATA struct ScriptContext * sQuestLogScriptContextPtr = NULL;
+COMMON_DATA u8 gSelectedObjectEvent = 0;
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.

@@ -32,7 +32,7 @@ static u8 sMapMusicFadeInSpeed;
 static u16 sFanfareCounter;
 
 // iwram common
-bool8 gDisableMusic;
+COMMON_DATA bool8 gDisableMusic = 0;
 
 extern u32 gBattleTypeFlags;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;

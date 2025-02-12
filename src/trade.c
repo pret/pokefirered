@@ -209,17 +209,6 @@ static void SetTradePartyHPBarSprites(void);
 static void SaveTradeGiftRibbons(void);
 static u32 CanTradeSelectedMon(struct Pokemon * party, int partyCount, int cursorPos);
 
-static const size_t sSizesAndOffsets[] = {
-    sizeof(struct SaveBlock2),
-    sizeof(struct SaveBlock1),
-    sizeof(struct MapLayout),
-    0x530, // unk
-    0x34, // unk
-    sizeof(struct Mail),
-    sizeof(struct Pokemon),
-    0x528 // unk
-};
-
 static const u16 sTradeMovesBoxTilemap[] = INCBIN_U16("graphics/trade/moves_box_map.bin");
 static const u16 sTradePartyBoxTilemap[] = INCBIN_U16("graphics/trade/party_box_map.bin");
 static const u8 sTradeStripesBG2Tilemap[] = INCBIN_U8("graphics/trade/stripes_bg2_map.bin");
@@ -2228,7 +2217,7 @@ static void SetSelectedMon(u8 cursorPosition)
 static void DrawSelectedMonScreen(u8 whichParty)
 {
     s8 nameStringWidth;
-    u8 nickname[20];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     u8 movesString[56];
     u8 i;
     u8 partyIdx;
@@ -2314,7 +2303,7 @@ static void DrawSelectedMonScreen(u8 whichParty)
 
 static u8 GetMonNicknameWidth(u8 *dest, u8 whichParty, u8 partyIdx)
 {
-    u8 nickname[POKEMON_NAME_LENGTH];
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
     if (whichParty == TRADE_PLAYER)
         GetMonData(&gPlayerParty[partyIdx], MON_DATA_NICKNAME, nickname);
     else
@@ -2369,8 +2358,8 @@ static void PrintPartyMonNickname(u8 whichParty, u8 windowId, const u8 *str)
 
 static void PrintPartyNicknames(u8 whichParty)
 {
-    u8 buff[20];
-    u8 nickname[30];
+    u8 buff[POKEMON_NAME_BUFFER_SIZE];
+    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     struct Pokemon * party = (whichParty == TRADE_PLAYER) ? gPlayerParty : gEnemyParty;
     u8 i;
     for (i = 0; i < sTradeMenu->partyCounts[whichParty]; i++)
@@ -2386,7 +2375,7 @@ static void PrintLevelAndGender(u8 whichParty, u8 monIdx, u8 x, u8 y, u8 winLeft
     u8 level;
     u32 symbolTile;
     u8 gender;
-    u8 nickname[POKEMON_NAME_LENGTH];
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
 
     CopyToBgTilemapBufferRect_ChangePalette(1, gTradeMenuMonBox_Tilemap, winLeft, winTop, 6, 3, 0);
     CopyBgTilemapBufferToVram(1);

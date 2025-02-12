@@ -220,13 +220,13 @@ void LoadObjectEvents(void)
     }
 }
 
-void SaveSerializedGame(void)
+void CopyPartyAndObjectsToSave(void)
 {
     SavePlayerParty();
     SaveObjectEvents();
 }
 
-void LoadSerializedGame(void)
+void CopyPartyAndObjectsFromSave(void)
 {
     LoadPlayerParty();
     LoadObjectEvents();

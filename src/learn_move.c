@@ -750,7 +750,7 @@ static void MoveRelearnerInitListMenuBuffersEtc(void)
 {
     int i;
     s32 count;
-    u8 nickname[11];
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
 
     sMoveRelearner->numLearnableMoves = GetMoveRelearnerMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves);
     count = GetMoveRelearnerMoves(&gPlayerParty[sMoveRelearner->selectedPartyMember], sMoveRelearner->learnableMoves);

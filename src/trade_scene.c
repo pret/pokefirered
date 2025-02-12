@@ -1224,7 +1224,7 @@ static void LoadTradeGbaSpriteGfx(void)
 
 static void TradeBufferOTnameAndNicknames(void)
 {
-    u8 nickname[20];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     u8 mpId;
     const struct InGameTrade * inGameTrade;
     if (sTradeAnim->isLinkTrade)
@@ -2439,9 +2439,7 @@ u16 GetInGameTradeSpeciesInfo(void)
 
 static void BufferInGameTradeMonName(void)
 {
-    // Populates gStringVar1 with the nickname of the sent Pokemon and
-    // gStringVar2 with the name of the offered species.
-    u8 nickname[30];
+    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     const struct InGameTrade * inGameTrade = &sInGameTrades[gSpecialVar_0x8004];
     GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gStringVar1, nickname);

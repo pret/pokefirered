@@ -88,6 +88,14 @@ PokemonLeague_BrunosRoom_EventScript_PostBattle::
 	end
 
 PokemonLeague_BrunosRoom_EventScript_DefeatedBruno::
+  goto_if_ge VAR_ELITE_FOUR_MEMBERS_BEATEN 2 PokemonLeague_BrunosRoom_EventScript_DefeatedBrunoAgain
+  setvar VAR_ELITE_FOUR_MEMBERS_BEATEN 2
+  giveitem ITEM_RARE_CANDY
+  giveitem ITEM_NATURE_MINT
+  giveitem ITEM_ABILITY_PATCH
+  goto PokemonLeague_BrunosRoom_EventScript_DefeatedBrunoAgain
+
+PokemonLeague_BrunosRoom_EventScript_DefeatedBrunoAgain::
 	setflag FLAG_DEFEATED_BRUNO
 	call PokemonLeague_EventScript_OpenDoor
 	msgbox PokemonLeague_BrunosRoom_Text_PostBattle

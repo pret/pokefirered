@@ -8,7 +8,7 @@ Route2_EastBuilding_Text_GreatHereYouGo::
     .string "Congratulations, here you go!$"
 
 Route2_EastBuilding_Text_ReceivedHM05FromAide::
-    .string "{PLAYER} received ¥10,000\n"
+    .string "{PLAYER} received ¥5,000\n"
     .string "from the RICH AIDE.$"
 
 Route2_EastBuilding_Text_ExplainHM05::

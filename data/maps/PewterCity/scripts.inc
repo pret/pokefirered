@@ -702,11 +702,11 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideApproachPlayer3
 	msgbox PewterCity_Text_AskedToDeliverThis
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	playfanfare MUS_OBTAIN_KEY_ITEM
 	message PewterCity_Text_ReceivedRunningShoesFromAide
 	waitmessage
+	addmoney 500
+	playfanfare MUS_OBTAIN_ITEM
 	waitfanfare
-  addmoney 1000
 	special DisableMsgBoxWalkaway
 	call EventScript_RestorePrevTextColor
 	msgbox PewterCity_Text_MustBeGoingBackToLab

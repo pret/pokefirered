@@ -553,7 +553,7 @@ void FieldUseFunc_Repel(u8 taskId)
 {
     if (VarGet(VAR_REPEL_STEP_COUNT) == 0)
     {
-        PlaySE(SE_REPEL);
+        // PlaySE(SE_REPEL);
         gTasks[taskId].func = Task_UseRepel;
     }
     else

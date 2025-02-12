@@ -2273,6 +2273,15 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
         if (GiveMoveToBoxMon(boxMon, move) == MON_HAS_MAX_MOVES)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
     }
+
+    if (level == 1 && species == SPECIES_PIKACHU) {
+        if (GiveMoveToBoxMon(boxMon, MOVE_SURF) == MON_HAS_MAX_MOVES) {
+            DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, MOVE_SURF);
+        }
+        if (GiveMoveToBoxMon(boxMon, MOVE_FLY) == MON_HAS_MAX_MOVES) {
+            DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, MOVE_FLY);
+        }
+    }
 }
 
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)

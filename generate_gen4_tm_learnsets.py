@@ -1,3 +1,5 @@
+raise(Exception('Use generate_new_tm_and_lv1_learnsets.py instead!'))
+
 import csv
 
 mon2moves = {}
@@ -5,7 +7,7 @@ mon2moves = {}
 with open('serebii_gen4_tm_learnsets.csv') as csv_file:
   reader = csv.reader(csv_file)
   for i, row in enumerate(reader):
-    move = 'TM' + str(51+i) + '_' + row[0].strip().replace(' ', '_').replace('-', '_').upper()
+    move = 'TM' + str((51+i)).zfill(3) + '_' + row[0].strip().replace(' ', '_').replace('-', '_').upper()
     dex_no = 0
     for i in range(1, len(row)):
       if len(row[i]) == 0:
@@ -29,7 +31,7 @@ s = '''
 // +--------------------------------------------------------+
 
 #define G4TMHM_LEARNSET(moves) {(u32)(moves), ((u64)(moves) >> 32)}                                                                                                                                                                             
-#define G4TMHM(tmhm) ((u64)1 << (ITEM_##tmhm - ITEM_TM051_ROOST))
+#define G4TMHM(tmhm) ((u64)1 << (ITEM_##tmhm - ITEM_TM0051_ROOST))
 
 // This table is similar to the one in tmhm_learnsets.h.
 static const u32 sGen4TMHMLearnsets[][2] =

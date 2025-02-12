@@ -231,6 +231,9 @@ bool8 WasUnableToUseMove(u8 battler)
 
 void PrepareStringBattle(u16 stringId, u8 battler)
 {
+    if (gSaveBlock2Ptr->expMessageMode == OPTIONS_EXP_MESSAGE_HIDE && stringId == STRINGID_PKMNGAINEDEXP) {
+        return;
+    }
     gActiveBattler = battler;
     BtlController_EmitPrintString(BUFFER_A, stringId);
     MarkBattlerForControllerExec(gActiveBattler);

@@ -424,10 +424,10 @@ void (*gItemUseCB)(u8, TaskFunc);
 
 u8 ScaledTrainerLevel(u8 level, u8 index) {
   const u8 badgeCount = BadgeCount();
-  if (index % 2 == 1) {
-    level += (badgeCount + 1) / 2;
+  if (index % 2 == 0) {
+    level += badgeCount / 2;
   } else {
-    level += (badgeCount) / 2;
+    level += (badgeCount + 1) / 2;
   }
   return level;
 }
@@ -448,38 +448,32 @@ void SortDesc(u8 arr[], u8 n) {
 }
 
 u8 ScaledWildLevel(u8 level) {
-  u8 numMons, levelSum, i;
+  u8 badgeCount, i, idx;
   u8 partyLevels[6];
+  u16 levelSum;
 
   for (i = 0; i < gPlayerPartyCount; ++i) {
     partyLevels[i] = gPlayerParty[i].level;
   }
   SortDesc(partyLevels, gPlayerPartyCount);
 
-  // Decrease wild level if it's at least the
-  // level of the player's highest level.
   if (level >= partyLevels[0]) {
     level = level * 2 / 3;
   }
 
-  // Denominator is the number of Pokemon that
-  // contribute to the level cap.
-  numMons = BadgeCount() + 1;
-  if (numMons > gPlayerPartyCount) {
-    numMons = gPlayerPartyCount;
-  }
+  badgeCount = BadgeCount();
 
-  // Numerator is sum of party levels, but with the
-  // player's highest Pokemon replaced with the level
-  // the wild Pokemon should be at.
   levelSum = level;
-
-  // Start at 1 to exclude the player's highest mon.
-  for (i = 1; i < numMons; ++i) {
-    levelSum += partyLevels[i];
+  for (i = 0; i < badgeCount; ++i) {
+    idx = 1 + (i % 4);
+    if (idx < gPlayerPartyCount) {
+      levelSum += partyLevels[idx];
+    } else {
+      levelSum += 2;
+    }
   }
 
-  return levelSum / numMons;
+  return levelSum / (badgeCount + 1);
 }
 
 u8 CheckLevelCap(u8 level) {
@@ -489,9 +483,11 @@ u8 CheckLevelCap(u8 level) {
   u8 monsInRange = 0;
   u8 monsInNextRange = 0;
 
+  const u8 levelBandRange = 7;
+
   u8 requiredMonsInRange = BadgeCount();
-  if (requiredMonsInRange > 5) {
-    requiredMonsInRange = 5;
+  if (requiredMonsInRange > 4) {
+    requiredMonsInRange = 4;
   }
 
   for (i = 0; i < gPlayerPartyCount; ++i) {
@@ -503,10 +499,10 @@ u8 CheckLevelCap(u8 level) {
         continue;
       }
     }
-    if (gPlayerParty[i].level >= (level-4)) {
+    if (gPlayerParty[i].level >= (level-levelBandRange-1)) {
       monsInNextRange++;
     }
-    if (gPlayerParty[i].level >= (level-5)) {
+    if (gPlayerParty[i].level >= (level-levelBandRange)) {
       monsInRange++;
     }
   }
@@ -515,7 +511,7 @@ u8 CheckLevelCap(u8 level) {
     return AT_CAP;
   } else if (monsInNextRange < requiredMonsInRange) {
     return ONE_AWAY_FROM_CAP;
-  } else if ((requiredMonsInRange < 5) && (monsInRange < (requiredMonsInRange+1))) {
+  } else if ((requiredMonsInRange < 4) && (monsInRange < (requiredMonsInRange+1))) {
     return AT_NEXT_BADGE_CAP;
   }
   return NOT_CLOSE_TO_CAP;
@@ -857,9 +853,13 @@ static void RenderPartyMenuBox(u8 slot)
         if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) == SPECIES_NONE)
         {
 
-            ConvertIntToDecimalStringN(gStringVar2, slot, STR_CONV_MODE_LEFT_ALIGN, 3);
-            StringCopy(gStringVar1, gText_RequiredAtBadge);
-            StringAppend(gStringVar1, gStringVar2);
+            if (slot < 5) {
+                ConvertIntToDecimalStringN(gStringVar2, slot, STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringCopy(gStringVar1, gText_RequiredAtBadge);
+                StringAppend(gStringVar1, gStringVar2);
+            } else {
+                StringCopy(gStringVar1, gText_NoBadgeRequirement);
+            }
 
             DrawEmptySlot(sPartyMenuBoxes[slot].windowId);
             DisplayPartyPokemonBarDetail(sPartyMenuBoxes[slot].windowId, gStringVar1, 0, sPartyMenuBoxes[slot].infoRects->dimensions);

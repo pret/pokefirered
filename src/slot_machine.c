@@ -1180,16 +1180,14 @@ static void MainTask_WinHandlePayout(u8 taskId)
             PlayFanfare(MUS_SLOTS_WIN);
         SetSlotMachineSetupTask(SLOTTASK_SHOW_AMOUNTS, 0);
         SetSlotMachineSetupTask(SLOTTASK_ANIM_WIN, 1);
-        data[1] = 8;
+        data[1] = 1;
         data[0]++;
         break;
     case 1:
         data[1]++;
         if (data[1] > 120)
         {
-            data[1] = 8;
-            if (JOY_HELD(A_BUTTON))
-                data[1] = 2;
+            data[1] = 1;
             data[0]++;
         }
         break;
@@ -1213,9 +1211,7 @@ static void MainTask_WinHandlePayout(u8 taskId)
                         AddCoins(1);
                         sSlotMachineState->payout--;
                     }
-                    data[1] = 8;
-                    if (JOY_HELD(A_BUTTON))
-                        data[1] = 2;
+                    data[1] = 1;
                 }
             }
             SetSlotMachineSetupTask(SLOTTASK_SHOW_AMOUNTS, 0);
@@ -2186,6 +2182,7 @@ static bool8 SlotsTask_MessageOutOfCoins(u8 * state, struct SlotMachineSetupTask
     switch (*state)
     {
     case 0:
+        AddCoins(50);
         Slot_PrintOnWindow0(gString_OutOfCoins);
         CopyWindowToVram(0, COPYWIN_FULL);
         (*state)++;
@@ -2402,7 +2399,7 @@ static void Task_FlashWinningLine(u8 taskId)
             LoadPalette(&sBgPal_PayoutLight[y], BG_PLTT_ID(1), sizeof(sBgPal_PayoutLight[0]));
             data[2] += 32;
             data[2] &= 0x7F;
-            data[1] = 8;
+            data[1] = 1;
         }
         else
             data[1]--;

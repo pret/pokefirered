@@ -1881,27 +1881,12 @@ static u8 DexScreen_CreateCategoryMenuScrollArrows(void)
  */
 static int DexScreen_InputHandler_GetShoulderInput(void)
 {
-    switch (gSaveBlock2Ptr->optionsButtonMode)
-    {
-    case OPTIONS_BUTTON_MODE_L_EQUALS_A:
-        // Using the JOY_HELD and JOY_NEW macros here does not match!
-        if ((gMain.heldKeys & R_BUTTON) && (gMain.newKeys & DPAD_LEFT))
-            return 1;
-        else if ((gMain.heldKeys & R_BUTTON) && (gMain.newKeys & DPAD_RIGHT))
-            return 2;
-        else
-            return 0;
-    case OPTIONS_BUTTON_MODE_LR:
-        if (gMain.newKeys & L_BUTTON)
-            return 1;
-        else if (gMain.newKeys & R_BUTTON)
-            return 2;
-        else
-            return 0;
-    case OPTIONS_BUTTON_MODE_HELP:
-    default:
+    if ((gMain.heldKeys & R_BUTTON) && (gMain.newKeys & DPAD_LEFT))
+        return 1;
+    else if ((gMain.heldKeys & R_BUTTON) && (gMain.newKeys & DPAD_RIGHT))
+        return 2;
+    else
         return 0;
-    }
 }
 
 static void Task_DexScreen_ShowMonPage(u8 taskId)

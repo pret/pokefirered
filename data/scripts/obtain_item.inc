@@ -22,6 +22,8 @@ Std_ObtainItem::
   waitfanfare
   waitmessage
 	checkitemtype VAR_0x8000
+	// Disable fanfare in EventScript_PlayFanfareObtainedTMHM.
+	setvar VAR_0x8007 FALSE
 	call EventScript_BufferPocketNameTryFanfare
 	msgbox Text_PutItemAway
   copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
@@ -161,15 +163,15 @@ EventScript_HiddenItemScript::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	waitse
 	goto_if_eq VAR_0x8005, 0, EventScript_TryPickUpHiddenCoins
-	// Disable all hidden items that aren't coins..
+	// Disable all hidden items.
 	end
 
 EventScript_TryPickUpHiddenItem::
-	// Disable all hidden items that aren't coins.
+	// Disable all hidden items.
 	return
 
 EventScript_PickedUpHiddenItem::
-	// Disable all hidden items that aren't coins.
+	// Disable all hidden items.
 	end
 
 EventScript_FoundSingleItem::

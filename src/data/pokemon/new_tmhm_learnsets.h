@@ -1211,6 +1211,7 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM103_COUNTER)
                                         | NTMHM(TM100_DOUBLE_EDGE)
                                         | NTMHM(TM119_DYNAMIC_PUNCH)
+                                        | NTMHM(TM125_FAKE_OUT)
                                         | NTMHM(TM098_HEADBUTT)
                                         | NTMHM(TM132_KNOCK_OFF)
                                         | NTMHM(TM102_LOW_KICK)
@@ -1543,7 +1544,9 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM131_YAWN)),
 
   [SPECIES_VAPOREON] = NTMHM_LEARNSET(NTMHM(TM137_AQUA_TAIL)
+                                        | NTMHM(TM120_BATON_PASS)
                                         | NTMHM(TM099_BODY_SLAM)
+                                        | NTMHM(TM111_CURSE)
                                         | NTMHM(TM100_DOUBLE_EDGE)
                                         | NTMHM(TM098_HEADBUTT)
                                         | NTMHM(TM117_HEAL_BELL)
@@ -1551,7 +1554,9 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM115_ICY_WIND)
                                         | NTMHM(TM148_LAST_RESORT)
                                         | NTMHM(TM107_QUICK_ATTACK)
-                                        | NTMHM(TM134_SIGNAL_BEAM)),
+                                        | NTMHM(TM134_SIGNAL_BEAM)
+                                        | NTMHM(TM128_WISH)
+                                        | NTMHM(TM131_YAWN)),
 
   [SPECIES_JOLTEON] = NTMHM_LEARNSET(NTMHM(TM106_AGILITY)
                                         | NTMHM(TM120_BATON_PASS)
@@ -1567,14 +1572,18 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM128_WISH)
                                         | NTMHM(TM131_YAWN)),
 
-  [SPECIES_FLAREON] = NTMHM_LEARNSET(NTMHM(TM099_BODY_SLAM)
+  [SPECIES_FLAREON] = NTMHM_LEARNSET(NTMHM(TM120_BATON_PASS)
+                                        | NTMHM(TM099_BODY_SLAM)
+                                        | NTMHM(TM111_CURSE)
                                         | NTMHM(TM100_DOUBLE_EDGE)
                                         | NTMHM(TM098_HEADBUTT)
                                         | NTMHM(TM117_HEAL_BELL)
                                         | NTMHM(TM126_HEAT_WAVE)
                                         | NTMHM(TM148_LAST_RESORT)
                                         | NTMHM(TM107_QUICK_ATTACK)
-                                        | NTMHM(TM129_SUPERPOWER)),
+                                        | NTMHM(TM129_SUPERPOWER)
+                                        | NTMHM(TM128_WISH)
+                                        | NTMHM(TM131_YAWN)),
 
   [SPECIES_PORYGON] = NTMHM_LEARNSET(NTMHM(TM106_AGILITY)
                                         | NTMHM(TM140_DISCHARGE)
@@ -2196,12 +2205,15 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM154_SUCKER_PUNCH)
                                         | NTMHM(TM095_THUNDER_PUNCH)),
 
-  [SPECIES_POLITOED] = NTMHM_LEARNSET(NTMHM(TM099_BODY_SLAM)
+  [SPECIES_POLITOED] = NTMHM_LEARNSET(NTMHM(TM112_BELLY_DRUM)
+                                        | NTMHM(TM099_BODY_SLAM)
                                         | NTMHM(TM135_BOUNCE)
                                         | NTMHM(TM103_COUNTER)
                                         | NTMHM(TM100_DOUBLE_EDGE)
                                         | NTMHM(TM119_DYNAMIC_PUNCH)
+                                        | NTMHM(TM133_ENDEAVOR)
                                         | NTMHM(TM098_HEADBUTT)
+                                        | NTMHM(TM101_HYDRO_PUMP)
                                         | NTMHM(TM105_HYPNOSIS)
                                         | NTMHM(TM115_ICY_WIND)
                                         | NTMHM(TM097_MEGA_KICK)
@@ -2303,7 +2315,9 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM104_SEISMIC_TOSS)
                                         | NTMHM(TM131_YAWN)),
 
-  [SPECIES_ESPEON] = NTMHM_LEARNSET(NTMHM(TM099_BODY_SLAM)
+  [SPECIES_ESPEON] = NTMHM_LEARNSET(NTMHM(TM120_BATON_PASS)
+                                        | NTMHM(TM099_BODY_SLAM)
+                                        | NTMHM(TM111_CURSE)
                                         | NTMHM(TM100_DOUBLE_EDGE)
                                         | NTMHM(TM098_HEADBUTT)
                                         | NTMHM(TM117_HEAL_BELL)
@@ -2312,16 +2326,22 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM107_QUICK_ATTACK)
                                         | NTMHM(TM134_SIGNAL_BEAM)
                                         | NTMHM(TM127_TRICK)
+                                        | NTMHM(TM128_WISH)
+                                        | NTMHM(TM131_YAWN)
                                         | NTMHM(TM156_ZEN_HEADBUTT)),
 
-  [SPECIES_UMBREON] = NTMHM_LEARNSET(NTMHM(TM099_BODY_SLAM)
+  [SPECIES_UMBREON] = NTMHM_LEARNSET(NTMHM(TM120_BATON_PASS)
+                                        | NTMHM(TM099_BODY_SLAM)
+                                        | NTMHM(TM111_CURSE)
                                         | NTMHM(TM100_DOUBLE_EDGE)
                                         | NTMHM(TM098_HEADBUTT)
                                         | NTMHM(TM117_HEAL_BELL)
                                         | NTMHM(TM148_LAST_RESORT)
                                         | NTMHM(TM121_PURSUIT)
                                         | NTMHM(TM107_QUICK_ATTACK)
-                                        | NTMHM(TM154_SUCKER_PUNCH)),
+                                        | NTMHM(TM154_SUCKER_PUNCH)
+                                        | NTMHM(TM128_WISH)
+                                        | NTMHM(TM131_YAWN)),
 
   [SPECIES_MURKROW] = NTMHM_LEARNSET(NTMHM(TM100_DOUBLE_EDGE)
                                         | NTMHM(TM126_HEAT_WAVE)
@@ -2335,6 +2355,7 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM096_WHIRLWIND)),
 
   [SPECIES_SLOWKING] = NTMHM_LEARNSET(NTMHM(TM137_AQUA_TAIL)
+                                        | NTMHM(TM112_BELLY_DRUM)
                                         | NTMHM(TM099_BODY_SLAM)
                                         | NTMHM(TM103_COUNTER)
                                         | NTMHM(TM111_CURSE)
@@ -2813,6 +2834,7 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM103_COUNTER)
                                         | NTMHM(TM100_DOUBLE_EDGE)
                                         | NTMHM(TM133_ENDEAVOR)
+                                        | NTMHM(TM125_FAKE_OUT)
                                         | NTMHM(TM098_HEADBUTT)
                                         | NTMHM(TM102_LOW_KICK)
                                         | NTMHM(TM097_MEGA_KICK)
@@ -2994,7 +3016,8 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM155_TAILWIND)
                                         | NTMHM(TM096_WHIRLWIND)),
 
-  [SPECIES_FROSLASS] = NTMHM_LEARNSET(NTMHM(TM113_DESTINY_BOND)
+  [SPECIES_FROSLASS] = NTMHM_LEARNSET(NTMHM(TM123_CRUNCH)
+                                        | NTMHM(TM113_DESTINY_BOND)
                                         | NTMHM(TM098_HEADBUTT)
                                         | NTMHM(TM094_ICE_PUNCH)
                                         | NTMHM(TM115_ICY_WIND)
@@ -4609,8 +4632,10 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM156_ZEN_HEADBUTT)),
 
   [SPECIES_GALLADE] = NTMHM_LEARNSET(NTMHM(TM139_CLOSE_COMBAT)
+                                        | NTMHM(TM113_DESTINY_BOND)
                                         | NTMHM(TM093_FIRE_PUNCH)
                                         | NTMHM(TM098_HEADBUTT)
+                                        | NTMHM(TM105_HYPNOSIS)
                                         | NTMHM(TM094_ICE_PUNCH)
                                         | NTMHM(TM132_KNOCK_OFF)
                                         | NTMHM(TM102_LOW_KICK)
@@ -4661,21 +4686,29 @@ static const u32 sNewTMHMLearnsets[][2] =
                                         | NTMHM(TM132_KNOCK_OFF)
                                         | NTMHM(TM129_SUPERPOWER)),
 
-  [SPECIES_LEAFEON] = NTMHM_LEARNSET(NTMHM(TM098_HEADBUTT)
+  [SPECIES_LEAFEON] = NTMHM_LEARNSET(NTMHM(TM120_BATON_PASS)
+                                        | NTMHM(TM111_CURSE)
+                                        | NTMHM(TM098_HEADBUTT)
                                         | NTMHM(TM117_HEAL_BELL)
                                         | NTMHM(TM132_KNOCK_OFF)
                                         | NTMHM(TM148_LAST_RESORT)
                                         | NTMHM(TM107_QUICK_ATTACK)
                                         | NTMHM(TM153_SEED_BOMB)
-                                        | NTMHM(TM122_SYNTHESIS)),
+                                        | NTMHM(TM122_SYNTHESIS)
+                                        | NTMHM(TM128_WISH)
+                                        | NTMHM(TM131_YAWN)),
 
   [SPECIES_GLACEON] = NTMHM_LEARNSET(NTMHM(TM137_AQUA_TAIL)
+                                        | NTMHM(TM120_BATON_PASS)
+                                        | NTMHM(TM111_CURSE)
                                         | NTMHM(TM098_HEADBUTT)
                                         | NTMHM(TM117_HEAL_BELL)
                                         | NTMHM(TM115_ICY_WIND)
                                         | NTMHM(TM148_LAST_RESORT)
                                         | NTMHM(TM107_QUICK_ATTACK)
-                                        | NTMHM(TM134_SIGNAL_BEAM)),
+                                        | NTMHM(TM134_SIGNAL_BEAM)
+                                        | NTMHM(TM128_WISH)
+                                        | NTMHM(TM131_YAWN)),
 
   [SPECIES_CHIMECHO] = NTMHM_LEARNSET(NTMHM(TM111_CURSE)
                                         | NTMHM(TM100_DOUBLE_EDGE)

@@ -22,16 +22,9 @@ Route10_PokemonCenter_1F_Text_GreatHereYouGo::
     .string "Congratulations, here you go!$"
 
 Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide::
-    .string "{PLAYER} received ¥20,000\n"
+    .string "{PLAYER} received ¥10,000\n"
     .string "from the RICH AIDE.$"
 
 Route10_PokemonCenter_1F_Text_ExplainEverstone::
-    .string "Making POKéMON evolve certainly\n"
-    .string "can add to the POKéDEX.\p"
-    .string "However, at times, you may not\n"
-    .string "want a certain POKéMON to evolve.\p"
-    .string "In that case, give the EVERSTONE\n"
-    .string "to that POKéMON.\p"
-    .string "It will prevent evolution according\n"
-    .string "to the PROFESSOR.$"
+    .string "Man, am I rich or what?!$"
 

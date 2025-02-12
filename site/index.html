@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Previous head content and styles remain the same until textarea styling -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Showdown Team Validator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/google-sheets-api/2.0.0/google-sheets-api.js"></script>
+    <style>
+        /* Previous styles remain the same until textarea */
+        :root {
+            --pokemon-red: #ee1515;
+            --pokemon-blue: #1538ee;
+            --pokemon-yellow: #fbd000;
+            --background-light: #f8f9fa;
+            --card-gradient-start: #ffffff;
+            --card-gradient-end: #e9ecef;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #4a90e2 0%, #2b6cb0 100%);
+            min-height: 100vh;
+            color: #2d3748;
+        }
+
+        .container {
+            background: linear-gradient(135deg, var(--card-gradient-start) 0%, var(--card-gradient-end) 100%);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: var(--pokemon-red);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pokemon-red), transparent);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 400px; /* Increased height to fit full team */
+            margin: 10px 0;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: monospace;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.9);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            resize: vertical;
+            min-height: 400px; /* Ensure minimum height */
+        }
+
+        /* Previous styles remain the same */
+        textarea:focus {
+            outline: none;
+            border-color: var(--pokemon-blue);
+            box-shadow: 0 0 0 3px rgba(21, 56, 238, 0.1);
+            background: white;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--pokemon-red) 0%, #cc1414 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(238, 21, 21, 0.2);
+        }
+
+        button:hover::after {
+            left: 100%;
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: linear-gradient(135deg, #ccc 0%, #999 100%);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error, .success {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-weight: 500;
+            animation: fadeIn 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error {
+            background: linear-gradient(135deg, rgba(238, 21, 21, 0.1) 0%, rgba(238, 21, 21, 0.05) 100%);
+            color: #ee1515;
+            border: 1px solid rgba(238, 21, 21, 0.2);
+        }
+
+        .success {
+            background: linear-gradient(135deg, rgba(21, 132, 21, 0.1) 0%, rgba(21, 132, 21, 0.05) 100%);
+            color: #158415;
+            border: 1px solid rgba(21, 132, 21, 0.2);
+        }
+
+        .pokemon-sprites {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pokemon-sprite {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.9) 100%);
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .pokemon-sprite:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .pokemon-sprite img {
+            image-rendering: pixelated;
+            width: 96px;
+            height: 96px;
+            transition: transform 0.3s ease;
+        }
+
+        .pokemon-sprite:hover img {
+            transform: scale(1.1);
+        }
+
+        .pokemon-sprite span {
+            margin-top: 8px;
+            font-size: 0.95em;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* New section for validation results layout */
+        .validation-section {
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+    <div class="container">
+        <h1>Pokémon Team Validator</h1>
+
+        <div id="validationResult" class="validation-section"></div>
+
+        <div class="button-container">
+            <button onclick="submitToSheets()" id="submitButton" disabled>Submit Team</button>
+        </div>
+
+        <textarea id="teamInput" placeholder="Pikachu @ Light Ball
+Ability: Static
+EVs: 252 Atk / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Jolly Nature
+- Volt Tackle
+- Iron Tail
+- Knock Off
+- Fake Out
+
+Charizard @ Choice Band
+Ability: Blaze
+EVs: 252 Atk / 4 SpD / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+Adamant Nature
+- Flare Blitz
+- Dragon Claw
+- Thunder Punch
+- Earthquake"></textarea>
+</div>
+<script>
+        function formatPokemonName(name) {
+            return name.split('(')[0].toLowerCase()
+                .replace(/[.':\s-]+/g, '')
+                .replace(/^mr/, 'mr-')
+                .replace(/^mime/, 'mime-')
+                .replace(/^ho/, 'ho-')
+                .replace(/^porygonz/, 'porygon-z')
+                .trim();
+        }
+
+        function validateHeldItem(firstLine) {
+            const parts = firstLine.split('@');
+            if (parts.length < 2) return false;
+            
+            const item = parts[1].trim();
+            return item.length > 0;
+        }
+
+        function validateLevel(stanza) {
+            const levelLine = stanza.split('\n')
+                .find(line => line.trim().startsWith('Level:'));
+            
+            if (!levelLine) return false;
+
+            const level = parseInt(levelLine.split(':')[1].trim());
+            return level === 50;
+        }
+
+        function validateEVs(stanza) {
+            const evLine = stanza.split('\n')
+                .find(line => line.trim().startsWith('EVs:'));
+            
+            if (!evLine) return false;
+
+            const evValues = evLine.substring(4).trim();
+            const evParts = evValues.split('/').map(part => part.trim());
+            
+            return evParts.length > 0 && evParts[0] !== '';
+        }
+
+        function validateIVs(stanza) {
+            const ivLine = stanza.split('\n')
+                .find(line => line.trim().startsWith('IVs:'));
+            
+            if (!ivLine) return false;
+
+            const ivValues = ivLine.substring(4).trim();
+            const ivParts = ivValues.split('/').map(part => part.trim());
+            
+            return ivParts.length > 0 && ivParts[0] !== '';
+        }
+
+        function validateNature(stanza) {
+            const natureLine = stanza.split('\n')
+                .find(line => line.trim().endsWith('Nature'));
+            
+            return !!natureLine;
+        }
+
+        function validateMoves(stanza) {
+            const moves = stanza.split('\n')
+                .filter(line => line.trim().startsWith('- '))
+                .map(line => line.trim().substring(2))
+                .filter(move => move.length > 0);
+
+            return moves.length === 4;
+        }
+
+        function parseTeam(teamText) {
+            const stanzas = teamText.trim().split(/\n\s*\n/);
+            const pokemon = [];
+            const errors = [];
+            
+            for (const stanza of stanzas) {
+                if (!stanza.trim()) continue;
+                
+                const firstLine = stanza.split('\n')[0].trim();
+                const pokemonName = firstLine.split('@')[0].trim();
+                
+                if (pokemonName && 
+                    !pokemonName.startsWith('-') && 
+                    !pokemonName.startsWith('Ability:') &&
+                    !pokemonName.startsWith('EVs:') &&
+                    !pokemonName.startsWith('IVs:')) {
+                    
+                    // Validate held item
+                    if (!validateHeldItem(firstLine)) {
+                        errors.push(`${pokemonName} is missing a held item`);
+                    }
+
+                    // Validate level
+                    if (!validateLevel(stanza)) {
+                        errors.push(`${pokemonName} must be explicitly set to Level: 50`);
+                    }
+
+                    // Validate EVs
+                    if (!validateEVs(stanza)) {
+                        errors.push(`${pokemonName} is missing EV specifications`);
+                    }
+
+                    // Validate IVs
+                    if (!validateIVs(stanza)) {
+                        errors.push(`${pokemonName} is missing IV specifications`);
+                    }
+
+                    // Validate Nature
+                    if (!validateNature(stanza)) {
+                        errors.push(`${pokemonName} is missing nature specification`);
+                    }
+
+                    // Validate Moves
+                    const moveCount = stanza.split('\n')
+                        .filter(line => line.trim().startsWith('- '))
+                        .length;
+                    
+                    if (moveCount !== 4) {
+                        errors.push(`${pokemonName} has ${moveCount} moves (must have exactly 4)`);
+                    }
+                    
+                    pokemon.push(pokemonName);
+                }
+            }
+            
+            return { pokemon, errors };
+        }
+
+        var unknownPokemonCount = 0;
+
+        function imageNotFound() {
+            unknownPokemonCount++;
+            console.log(`That image was not found. ${unknownPokemonCount}`);
+        }
+
+        var intervalId = window.setInterval(function(){
+            if (unknownPokemonCount > 0) {
+                submitButton.disabled = true;
+                var divsToHide = document.getElementsByClassName("success");
+                for(var i = 0; i < divsToHide.length; i++){
+                  divsToHide[i].style.display = "none";
+                }
+            }
+        }, 500);
+
+        function validateTeam() {
+            const teamText = document.getElementById('teamInput').value;
+            const validationResult = document.getElementById('validationResult');
+            const submitButton = document.getElementById('submitButton');
+            
+            const { pokemon, errors } = parseTeam(teamText);
+
+            unknownPokemonCount = 0;
+
+            // Create sprite display regardless of validation status
+            const spritesHtml = pokemon.map(name => {
+                const formattedName = formatPokemonName(name);
+                const spriteUrl = `https://www.smogon.com/dex/media/sprites/dp/${formattedName}.png`;
+                return `
+                    <div class="pokemon-sprite">
+                        <img src="${spriteUrl}" alt="Invalid Pokémon" onerror="imageNotFound()">
+                        <span>${name}</span>
+                    </div>
+                `;
+            }).join('');
+            
+            let statusHtml = '';
+
+            let teamWideErrors = []
+            if (pokemon.length !== 6) {
+                teamWideErrors .push(`Team must contain exactly 6 Pokémon (currently has ${pokemon.length})`)
+            }
+            if (unknownPokemonCount > 0) {
+                teamWideErrors .push(`${unknownPokemonCount} invalid pokémon names detected in the input.`)
+            }
+
+            const allErrors = teamWideErrors.concat(errors);
+            if (allErrors.length > 0) {
+                console.log("Printing errors")
+                statusHtml += `
+                    <div class="error">
+                        Validation errors found:<br>
+                        ${allErrors.map(error => `• ${error}`).join('<br>')}
+                    </div>`;
+                submitButton.disabled = true;
+            } else if (pokemon.length === 6) {
+                submitButton.disabled = false;
+            }
+
+            // Always show both status and sprites
+            validationResult.innerHTML = `
+                ${statusHtml}
+                <div class="pokemon-sprites">
+                    ${spritesHtml}
+                </div>
+            `;
+        }
+
+        // Previous helper functions remain exactly the same
+        function submitToSheets() {
+            console.log(`That image was not found. ${unknownPokemonCount}`);
+            alert('To implement Google Sheets submission, you\'ll need to:\n\n1. Set up a Google Cloud Project\n2. Enable Google Sheets API\n3. Create a Web App deployment in Google Apps Script\n4. Replace this function with the actual API call to your Google Apps Script endpoint');
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        const debouncedValidate = debounce(validateTeam, 500);
+
+        const teamInput = document.getElementById('teamInput');
+        teamInput.addEventListener('input', debouncedValidate);
+        teamInput.addEventListener('paste', debouncedValidate);
+    </script>
+</body>
+</html>

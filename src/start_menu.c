@@ -14,6 +14,7 @@
 #include "safari_zone.h"
 #include "start_menu.h"
 #include "menu.h"
+#include "rtc.h"
 #include "load_save.h"
 #include "strings.h"
 #include "menu_helpers.h"

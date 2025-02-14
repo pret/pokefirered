@@ -4,7 +4,7 @@
     <!-- Previous head content and styles remain the same until textarea styling -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon Showdown Team Validator</title>
+    <title>Pokémon Challenge Team Form</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/google-sheets-api/2.0.0/google-sheets-api.js"></script>
     <style>
         /* Previous styles remain the same until textarea */
@@ -215,10 +215,42 @@
             padding: 20px;
             border: 1px solid rgba(0, 0, 0, 0.1);
         }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-left: 8px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .button-with-spinner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
     </style>
 </head>
     <div class="container">
-        <h1>Pokémon Showdown Team Validator</h1>
+        <h1>Pokémon Challenge Team Form</h1>
+
+        <div class="button-container">
+          <b>Trainer Name:</b>
+          <input id="trainerName" placeholder="Ash Ketchum">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <b>Team Name:</b>
+          <input id="teamName" placeholder="Hoothoot and the Qwilfish">
+        </div>
 
         <div id="validationResult" class="validation-section"></div>
 
@@ -319,7 +351,7 @@ Adamant Nature
             const stanzas = teamText.trim().split(/\n\s*\n/);
             const pokemon = [];
             const errors = [];
-            
+
             for (const stanza of stanzas) {
                 if (!stanza.trim()) continue;
                 
@@ -377,7 +409,6 @@ Adamant Nature
 
         function imageNotFound() {
             unknownPokemonCount++;
-            console.log(`That image was not found. ${unknownPokemonCount}`);
         }
 
         var intervalId = window.setInterval(function(){
@@ -414,16 +445,25 @@ Adamant Nature
             let statusHtml = '';
 
             let teamWideErrors = []
+
+            if (document.getElementById('trainerName').value === '') {
+                teamWideErrors.push(`No trainer name provided`)
+            }
+            if (document.getElementById('teamName').value === '') {
+                teamWideErrors.push(`No team name provided (make it a good one!)`)
+            }
             if (pokemon.length !== 6) {
-                teamWideErrors .push(`Team must contain exactly 6 Pokémon (currently has ${pokemon.length})`)
+                teamWideErrors.push(`Team must contain exactly 6 Pokémon (currently has ${pokemon.length})`)
             }
             if (unknownPokemonCount > 0) {
-                teamWideErrors .push(`${unknownPokemonCount} invalid pokémon names detected in the input.`)
+                teamWideErrors.push(`${unknownPokemonCount} invalid Pokémon names detected in the input.`)
+            }
+            if (!teamText.includes('(M)') && !teamText.includes('(F)')) {
+                teamWideErrors.push('No genders provided (please specify a gender for all gendered species)')
             }
 
-            const allErrors = teamWideErrors.concat(errors);
+            const allErrors = pokemon.length === 6 ? teamWideErrors.concat(errors) : teamWideErrors;
             if (allErrors.length > 0) {
-                console.log("Printing errors")
                 statusHtml += `
                     <div class="error">
                         Validation errors found:<br>
@@ -443,10 +483,166 @@ Adamant Nature
             `;
         }
 
-        // Previous helper functions remain exactly the same
-        function submitToSheets() {
-            console.log(`That image was not found. ${unknownPokemonCount}`);
-            alert('To implement Google Sheets submission, you\'ll need to:\n\n1. Set up a Google Cloud Project\n2. Enable Google Sheets API\n3. Create a Web App deployment in Google Apps Script\n4. Replace this function with the actual API call to your Google Apps Script endpoint');
+        function parseGender(pokemonName) {
+            // Check for (M) or (F) suffix
+            if (pokemonName.includes('(M)')) return 'M';
+            if (pokemonName.includes('(F)')) return 'F';
+            
+            // Check for Nidoran specific case
+            if (pokemonName.includes('♂')) return 'M';
+            if (pokemonName.includes('♀')) return 'F';
+            
+            return 'U'; // Ungendered
+        }
+
+        function parseStats(line, prefix) {
+            const stats = {
+                hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0
+            };
+            
+            if (!line) return stats;
+            
+            const statParts = line.substring(prefix.length).trim().split('/');
+            for (const part of statParts) {
+                const [value, stat] = part.trim().split(' ');
+                switch(stat.toLowerCase()) {
+                    case 'hp': stats.hp = parseInt(value); break;
+                    case 'atk': stats.atk = parseInt(value); break;
+                    case 'def': stats.def = parseInt(value); break;
+                    case 'spa': stats.spa = parseInt(value); break;
+                    case 'spd': stats.spd = parseInt(value); break;
+                    case 'spe': stats.spe = parseInt(value); break;
+                }
+            }
+            
+            return stats;
+        }
+
+        function parsePokemonStanza(stanza, index) {
+            const lines = stanza.split('\n');
+            const firstLine = lines[0].trim();
+            const [pokemonName, item] = firstLine.split('@').map(s => s.trim());
+            
+            const ability = lines.find(line => line.trim().startsWith('Ability:'))?.split(':')[1]?.trim() || '';
+            const nature = lines.find(line => line.trim().endsWith('Nature'))?.split(' ')[0]?.trim() || '';
+            
+            const evLine = lines.find(line => line.trim().startsWith('EVs:'));
+            const ivLine = lines.find(line => line.trim().startsWith('IVs:'));
+            
+            const evs = parseStats(evLine, 'EVs:');
+            const ivs = parseStats(ivLine, 'IVs:');
+            
+            const moves = lines
+                .filter(line => line.trim().startsWith('- '))
+                .map(line => line.substring(2).trim());
+            
+            const prefix = `mon${index + 1}`;
+            const result = {
+                [`${prefix}_name`]: pokemonName.split('(')[0].trim(),
+                [`${prefix}_gender`]: parseGender(pokemonName),
+                [`${prefix}_item`]: item,
+                [`${prefix}_ability`]: ability,
+                [`${prefix}_nature`]: nature,
+                [`${prefix}_hp_ev`]: evs.hp,
+                [`${prefix}_atk_ev`]: evs.atk,
+                [`${prefix}_def_ev`]: evs.def,
+                [`${prefix}_spa_ev`]: evs.spa,
+                [`${prefix}_spd_ev`]: evs.spd,
+                [`${prefix}_spe_ev`]: evs.spe,
+                [`${prefix}_hp_iv`]: ivs.hp,
+                [`${prefix}_atk_iv`]: ivs.atk,
+                [`${prefix}_def_iv`]: ivs.def,
+                [`${prefix}_spa_iv`]: ivs.spa,
+                [`${prefix}_spd_iv`]: ivs.spd,
+                [`${prefix}_spe_iv`]: ivs.spe,
+            };
+            
+            // Add moves
+            moves.forEach((move, i) => {
+                result[`${prefix}_move${i + 1}`] = move;
+            });
+            
+            return result;
+        }
+
+        function submitted() {
+          alert('submitted!');
+        }
+
+        function showSubmissionStatus(message, isError = false) {
+            const validationResult = document.getElementById('validationResult');
+            const statusClass = isError ? 'error' : 'success';
+            const statusHtml = `
+                <div class="${statusClass}">
+                    ${message}
+                </div>
+            `;
+            validationResult.innerHTML = statusHtml + validationResult.innerHTML;
+        }
+
+        async function submitToSheets() {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyL-G8NC4st1VYmYtD0QC3_PnO5qNJC7tmqeZoJhLbRGlsNbCV3ovaBO6cJ_p4Cgfxfcw/exec';
+
+            // Make inputs readonly. We'll revert this if there's an error.
+            document.getElementById('teamInput').readOnly = true;
+            document.getElementById('trainerName').readOnly = true;
+            document.getElementById('teamName').readOnly = true;
+           
+            const teamText = document.getElementById('teamInput').value;
+            const trainerName = document.getElementById('trainerName').value;
+            const teamName = document.getElementById('teamName').value;
+            const submitButton = document.getElementById('submitButton');
+    
+            // Update button to show spinner
+            submitButton.disabled = true;
+            submitButton.innerHTML = `
+                <span class="button-with-spinner">
+                    Submitting
+                    <div class="loading-spinner"></div>
+                </span>
+            `;
+            
+            // Start with trainer and team name
+            let formData = {
+                trainer_name: trainerName,
+                team_name: teamName
+            };
+            
+            // Parse each Pokemon stanza and merge the results
+            const stanzas = teamText.trim().split(/\n\s*\n/);
+            stanzas.forEach((stanza, index) => {
+                if (stanza.trim()) {
+                    const pokemonData = parsePokemonStanza(stanza, index);
+                    formData = { ...formData, ...pokemonData };
+                }
+            });
+            
+            // Prepare form data for submission
+            const form = new FormData();
+            Object.keys(formData).forEach(key => {
+                form.append(key, formData[key]);
+            });
+
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: form
+                });
+
+                if (response.ok) {
+                    showSubmissionStatus('Team submitted successfully! 🎉', false);
+                    submitButton.innerHTML = 'Submitted Successfully!';
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                showSubmissionStatus('Error submitting team. Please try again. ' + error.message, true);
+                submitButton.innerHTML = 'Submit Team';
+                submitButton.disabled = false;
+                document.getElementById('teamInput').readOnly = true;
+                document.getElementById('trainerName').readOnly = true;
+                document.getElementById('teamName').readOnly = true;
+            }
         }
 
         function debounce(func, wait) {
@@ -466,6 +662,14 @@ Adamant Nature
         const teamInput = document.getElementById('teamInput');
         teamInput.addEventListener('input', debouncedValidate);
         teamInput.addEventListener('paste', debouncedValidate);
+
+        const trainerName = document.getElementById('trainerName');
+        trainerName.addEventListener('input', debouncedValidate);
+        trainerName.addEventListener('paste', debouncedValidate);
+
+        const teamName = document.getElementById('teamName');
+        teamName.addEventListener('input', debouncedValidate);
+        teamName.addEventListener('paste', debouncedValidate);
     </script>
 </body>
 </html>

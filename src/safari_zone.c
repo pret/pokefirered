@@ -46,11 +46,14 @@ void ExitSafariMode(void)
 bool8 MaybeEndChallenge(void) {
   u16 i;
   u16 limit = 5;
-  for (i = 0; i < 14; ++i) {
-    if (FlagGet(FLAG_EXT1+i)) limit += (i/2)+1;
-  }
-  if ((limit < 19) && FlagGet(FLAG_CHALLENGE_NOT_OVER) && (gSaveBlock2Ptr->playTimeHours >= limit))
+  if ((gSaveBlock2Ptr->playTimeHours >= limit && FlagGet(FLAG_CHALLENGE_NOT_OVER))
+      || (gSaveBlock1Ptr->location.mapGroup != 10 && !FlagGet(FLAG_CHALLENGE_NOT_OVER)))
   {
+    for (i = 0; i < 14; ++i) {
+      if (FlagGet(FLAG_EXT1+i)) limit += (i/2)+1;
+    }
+    if (limit >= 19) return FALSE;
+
     PlaySE(SE_DING_DONG);
     FlagClear(FLAG_CHALLENGE_NOT_OVER);
     ExitSafariMode();

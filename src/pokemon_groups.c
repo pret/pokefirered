@@ -182,6 +182,10 @@ u16 GetSpeciesFromGroup(u16 species, u16 randInput) {
   tempCombinedHash1 = HashCombine(GameHash(), mapHash * species);
   tempCombinedHash2 = HashCombine(mapHash, GameHash() * species);
 
+  if (IndexInto(group, tempCombinedHash1) == IndexInto(group, tempCombinedHash2)) {
+    ++tempCombinedHash2;
+  }
+
   if (random < (8 - BadgeCount()) && group != gGroup_WaterIce1 && group != gGroup_WaterIce2) {
     // 0-4% chance that the player found the "rare" species
     // that is unique to the current (non-water) route. We

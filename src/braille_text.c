@@ -13,34 +13,35 @@ static const u8 sScrollDistances[] = {
     [OPTIONS_TEXT_SPEED_MID] = 2,
     [OPTIONS_TEXT_SPEED_FAST] = 4,
 };
-static const u16 sBrailleGlyphs[] = INCBIN_U16("graphics/fonts/braille.fwjpnfont");
+static const u16 sFont_Braille[] = INCBIN_U16("graphics/fonts/braille.fwjpnfont");
 
 static void DecompressGlyph_Braille(u16);
 
 u16 FontFunc_Braille(struct TextPrinter *textPrinter)
 {
     u16 char_;
-    struct TextPrinterSubStruct *sub = &textPrinter->subUnion.sub;
+    struct TextPrinterSubStruct *subStruct;
+    subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
     switch (textPrinter->state)
     {
     case RENDER_STATE_HANDLE_CHAR:
-        if (JOY_HELD(A_BUTTON | B_BUTTON) && sub->hasPrintBeenSpedUp)
+        if (JOY_HELD(A_BUTTON | B_BUTTON) && subStruct->hasPrintBeenSpedUp)
         {
             textPrinter->delayCounter = 0;
         }
         if (textPrinter->delayCounter && textPrinter->textSpeed)
         {
-            textPrinter->delayCounter--;
+            textPrinter->delayCounter --;
             if (gTextFlags.canABSpeedUpPrint && JOY_NEW(A_BUTTON | B_BUTTON))
             {
-                sub->hasPrintBeenSpedUp = TRUE;
+                subStruct->hasPrintBeenSpedUp = TRUE;
                 textPrinter->delayCounter = 0;
             }
             return RENDER_UPDATE;
         }
         if (gTextFlags.autoScroll)
-            textPrinter->delayCounter = 1;
+            textPrinter->delayCounter = 3;
         else
             textPrinter->delayCounter = textPrinter->textSpeed;
 
@@ -84,7 +85,7 @@ u16 FontFunc_Braille(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentChar++;
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_FONT:
-                sub->glyphId = *textPrinter->printerTemplate.currentChar;
+                subStruct->fontId = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_RESET_FONT:
@@ -96,7 +97,7 @@ u16 FontFunc_Braille(struct TextPrinter *textPrinter)
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
                 textPrinter->state = RENDER_STATE_WAIT;
                 if (gTextFlags.autoScroll)
-                    sub->autoScrollDelay = 0;
+                    subStruct->autoScrollDelay = 0;
                 return RENDER_UPDATE;
             case EXT_CTRL_CODE_WAIT_SE:
                 textPrinter->state = RENDER_STATE_WAIT_SE;
@@ -186,7 +187,7 @@ u16 FontFunc_Braille(struct TextPrinter *textPrinter)
         return RENDER_UPDATE;
     case RENDER_STATE_PAUSE:
         if (textPrinter->delayCounter)
-            textPrinter->delayCounter--;
+            textPrinter->delayCounter --;
         else
             textPrinter->state = RENDER_STATE_HANDLE_CHAR;
         return RENDER_UPDATE;
@@ -196,9 +197,7 @@ u16 FontFunc_Braille(struct TextPrinter *textPrinter)
 
 static void DecompressGlyph_Braille(u16 glyph)
 {
-    const u16 *glyphs;
-
-    glyphs = sBrailleGlyphs + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
+    const u16 *glyphs = sFont_Braille + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
     DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
     DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
     DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
@@ -207,7 +206,7 @@ static void DecompressGlyph_Braille(u16 glyph)
     gCurGlyph.height = 16;
 }
 
-u32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese)
+u32 GetGlyphWidth_Braille(u16 glyphId, bool32 isJapanese)
 {
     return 16;
 }

@@ -71,16 +71,16 @@ extern struct TextGlyph gCurGlyph;
 
 struct TextPrinterSubStruct
 {
-    u8 glyphId:4;  // 0x14
+    u8 fontId:4;  // 0x14
     bool8 hasPrintBeenSpedUp:1;
-    u8 font_type_5:3;
+    u8 unk:3;
     u8 downArrowDelay:5;
     u8 downArrowYPosIdx:2;
-    u8 hasGlyphIdBeenSet:1;
+    bool8 hasFontIdBeenSet:1;
     u8 autoScrollDelay;
 };
 
-struct TextPrinterTemplate // TODO: Better name
+struct TextPrinterTemplate
 {
     const u8 *currentChar;
     u8 windowId;
@@ -100,11 +100,10 @@ struct TextPrinterTemplate // TODO: Better name
 struct TextPrinter
 {
     struct TextPrinterTemplate printerTemplate;
+
     void (*callback)(struct TextPrinterTemplate *, u16); // 0x10
-    union {
-        struct TextPrinterSubStruct sub;
-        u8 fields[7];
-    } subUnion;
+
+    u8 subStructFields[7]; // always cast to struct TextPrinterSubStruct... so why bother
     u8 active;
     u8 state;       // 0x1C
     u8 textSpeed;

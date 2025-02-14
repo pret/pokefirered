@@ -7,6 +7,7 @@
 // This file handles the braille font.
 // For printing braille messages, see ScrCmd_braillemessage
 
+ALIGNED(4)
 static const u8 sScrollDistances[] = {
     [OPTIONS_TEXT_SPEED_SLOW] = 1,
     [OPTIONS_TEXT_SPEED_MID] = 2,
@@ -135,7 +136,7 @@ u16 FontFunc_Braille(struct TextPrinter *textPrinter)
         }
         DecompressGlyph_Braille(char_);
         CopyGlyphToWindow(textPrinter);
-        textPrinter->printerTemplate.currentX += gGlyphInfo.width + textPrinter->printerTemplate.letterSpacing;
+        textPrinter->printerTemplate.currentX += gCurGlyph.width + textPrinter->printerTemplate.letterSpacing;
         return RENDER_PRINT;
     case RENDER_STATE_WAIT:
         if (TextPrinterWait(textPrinter))
@@ -198,12 +199,12 @@ static void DecompressGlyph_Braille(u16 glyph)
     const u16 *glyphs;
 
     glyphs = sBrailleGlyphs + 0x100 * (glyph / 8) + 0x10 * (glyph % 8);
-    DecompressGlyphTile(glyphs, (u16 *)gGlyphInfo.pixels);
-    DecompressGlyphTile(glyphs + 0x8, (u16 *)(gGlyphInfo.pixels + 0x20));
-    DecompressGlyphTile(glyphs + 0x80, (u16 *)(gGlyphInfo.pixels + 0x40));
-    DecompressGlyphTile(glyphs + 0x88, (u16 *)(gGlyphInfo.pixels + 0x60));
-    gGlyphInfo.width = 16;
-    gGlyphInfo.height = 16;
+    DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
+    DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
+    DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+    DecompressGlyphTile(glyphs + 0x88, gCurGlyph.gfxBufferBottom + 8);
+    gCurGlyph.width = 16;
+    gCurGlyph.height = 16;
 }
 
 u32 GetGlyphWidth_Braille(u16 font_type, bool32 isJapanese)

@@ -59,14 +59,15 @@ enum
     FONTATTR_COLOR_SHADOW
 };
 
-struct GlyphInfo
+struct TextGlyph
 {
-    u8 pixels[0x80];
+    u32 gfxBufferTop[16];
+    u32 gfxBufferBottom[16];
     u8 width;
     u8 height;
 };
 
-extern struct GlyphInfo gGlyphInfo;
+extern struct TextGlyph gCurGlyph;
 
 struct TextPrinterSubStruct
 {
@@ -160,7 +161,7 @@ u32 RenderFont(struct TextPrinter *textPrinter);
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor);
 void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
 void RestoreTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
-void DecompressGlyphTile(const u16 *src, u16 *dest);
+void DecompressGlyphTile(const void *src_, void *dest_);
 u8 GetLastTextColor(u8 colorType);
 void CopyGlyphToWindow(struct TextPrinter *x);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);

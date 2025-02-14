@@ -402,7 +402,7 @@ void HelpSystemRenderText(u8 fontId, u8 * dest, const u8 * src, u8 x, u8 y, u8 w
             return;
         case CHAR_NEWLINE:
             x = orig_x;
-            y += gGlyphInfo.height + 1;
+            y += gCurGlyph.height + 1;
             break;
         case PLACEHOLDER_BEGIN:
             curChar = *src;
@@ -419,11 +419,11 @@ void HelpSystemRenderText(u8 fontId, u8 * dest, const u8 * src, u8 x, u8 y, u8 w
                     // This is required to match a dummy [sp+#0x24] read here
                     if (fontId == FONT_SMALL)
                     {
-                        x += gGlyphInfo.width;
+                        x += gCurGlyph.width;
                     }
                     else
                     {
-                        x += gGlyphInfo.width + ZERO;
+                        x += gCurGlyph.width + ZERO;
                     }
                 }
             }
@@ -449,11 +449,11 @@ void HelpSystemRenderText(u8 fontId, u8 * dest, const u8 * src, u8 x, u8 y, u8 w
                     }
                     if (fontId == FONT_SMALL)
                     {
-                        x += gGlyphInfo.width;
+                        x += gCurGlyph.width;
                     }
                     else
                     {
-                        x += gGlyphInfo.width + ZERO;
+                        x += gCurGlyph.width + ZERO;
                     }
                 }
             }
@@ -461,7 +461,7 @@ void HelpSystemRenderText(u8 fontId, u8 * dest, const u8 * src, u8 x, u8 y, u8 w
         case CHAR_PROMPT_SCROLL:
         case CHAR_PROMPT_CLEAR:
             x = orig_x;
-            y += gGlyphInfo.height + 1;
+            y += gCurGlyph.height + 1;
             break;
         case EXT_CTRL_CODE_BEGIN:
             curChar = *src;
@@ -550,11 +550,11 @@ void HelpSystemRenderText(u8 fontId, u8 * dest, const u8 * src, u8 x, u8 y, u8 w
                 DecompressAndRenderGlyph(fontId, curChar, &srcBlit, &destBlit, dest, x, y, width, height);
                 if (fontId == FONT_SMALL)
                 {
-                    x += gGlyphInfo.width;
+                    x += gCurGlyph.width;
                 }
                 else
                 {
-                    x += gGlyphInfo.width + ZERO;
+                    x += gCurGlyph.width + ZERO;
                 }
             }
             break;
@@ -570,13 +570,13 @@ void DecompressAndRenderGlyph(u8 fontId, u16 glyph, struct Bitmap *srcBlit, stru
         DecompressGlyph_Female(glyph, FALSE);
     else
         DecompressGlyph_Normal(glyph, FALSE);
-    srcBlit->pixels = gGlyphInfo.pixels;
+    srcBlit->pixels = (u8*) gCurGlyph.gfxBufferTop;
     srcBlit->width = 16;
     srcBlit->height = 16;
     destBlit->pixels = destBuffer;
     destBlit->width = width * 8;
     destBlit->height = height * 8;
-    BlitBitmapRect4Bit(srcBlit, destBlit, 0, 0, x, y, gGlyphInfo.width, gGlyphInfo.height, 0);
+    BlitBitmapRect4Bit(srcBlit, destBlit, 0, 0, x, y, gCurGlyph.width, gCurGlyph.height, 0);
 }
 
 void HelpSystem_PrintTextInTopLeftCorner(const u8 * str)

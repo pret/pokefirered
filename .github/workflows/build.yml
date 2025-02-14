@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - no-ql-and-hs
   pull_request:
 
 concurrency:

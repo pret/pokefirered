@@ -3,10 +3,6 @@
 
 #include "constants/characters.h"
 
-#define NUM_TEXT_PRINTERS 32
-
-#define TEXT_SPEED_INSTANT 0
-
 // Given as a text speed when all the text should be
 // loaded at once but not copied to vram yet.
 #define TEXT_SKIP_DRAW 0xFF
@@ -150,30 +146,25 @@ extern u8 gStringVar4[1000];
 
 extern const u8 gKeypadIconTiles[];
 
-void SetFontsPointer(const struct FontInfo *fonts);
 void DeactivateAllTextPrinters(void);
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
-bool16 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
+bool32 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 void RunTextPrinters(void);
-bool16 IsTextPrinterActive(u8 id);
-u32 RenderFont(struct TextPrinter *textPrinter);
+bool32 IsTextPrinterActive(u8 id);
 void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor);
 void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
 void RestoreTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor);
 void DecompressGlyphTile(const void *src_, void *dest_);
-u8 GetLastTextColor(u8 colorType);
 void CopyGlyphToWindow(struct TextPrinter *x);
 void ClearTextSpan(struct TextPrinter *textPrinter, u32 width);
 
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter);
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter);
 void TextPrinterClearDownArrow(struct TextPrinter *textPrinter);
-bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter);
-bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
-bool16 TextPrinterWait(struct TextPrinter *textPrinter);
-void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex);
-u16 RenderText(struct TextPrinter *textPrinter);
-u32 (*GetFontWidthFunc(u8 glyphId))(u16, bool32);
+bool32 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter);
+bool32 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter);
+bool32 TextPrinterWait(struct TextPrinter *textPrinter);
+void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool32 drawArrow, u8 *counter, u8 *yCoordIndex);
 s32 GetGlyphWidth(u16 glyphId, bool32 isJapanese, u8 fontId);
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing);
 s32 GetStringLineWidth(u8 fontId, const u8 *str, s16 letterSpacing, u32 lineNum, u32 strSize);

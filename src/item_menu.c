@@ -669,11 +669,14 @@ static void Bag_BuildListMenuTemplate(u8 pocket)
 
 static void BagListMenuGetItemNameColored(u8 *dest, u16 itemId)
 {
+    u8* end;
     if (itemId == ITEM_TM_CASE || itemId == ITEM_BERRY_POUCH)
         StringCopy(dest, sListItemTextColor_TmCase_BerryPouch);
     else
         StringCopy(dest, sListItemTextColor_RegularItem);
-    StringAppend(dest, ItemId_GetName(itemId));
+    
+    end = StringAppend(dest, ItemId_GetName(itemId));
+    PrependFontIdToFit(dest, end, FONT_NARROW, 61);
 }
 
 static void BagListMenuMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)

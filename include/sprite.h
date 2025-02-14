@@ -1,6 +1,7 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
+#define OAM_MATRIX_COUNT 32
 #define MAX_SPRITES 64
 #define SPRITE_NONE 0xFF
 #define TAG_NONE 0xFFFF
@@ -30,6 +31,7 @@ struct SpriteFrameImage
 };
 
 #define obj_frame_tiles(ptr) {.data = (u8 *)ptr, .size = sizeof ptr}
+
 #define overworld_frame(ptr, width, height, frame) {.data = (u8 *)ptr + (width * height * frame * 64)/2, .size = (width * height * 64)/2}
 #define overworld_ascending_frames(ptr, width, height) {.data = (u8 *)ptr, .size = (width * height * 64)/2, .relativeFrames=TRUE}
 
@@ -120,7 +122,7 @@ union AffineAnimCmd
     struct AffineAnimFrameCmd frame;
     struct AffineAnimLoopCmd loop;
     struct AffineAnimJumpCmd jump;
-    struct AffineAnimEndCmdAlt end;
+    struct AffineAnimEndCmdAlt end; // unused in code
 };
 
 #define AFFINEANIMCMDTYPE_LOOP 0x7FFD
@@ -187,6 +189,10 @@ struct SpriteTemplate
     SpriteCallback callback;
 };
 
+// UB: template pointer is often used to point to temporary storage,
+// then later dereferenced after being freed. Usually this won't
+// be visible in-game, but this is (part of) what causes the item
+// icon palette to flicker when changing items in the bag.
 struct Sprite
 {
     /*0x00*/ struct OamData oam;
@@ -252,24 +258,26 @@ struct OamMatrix
 extern const struct OamData gDummyOamData;
 extern const union AnimCmd *const gDummySpriteAnimTable[];
 extern const union AffineAnimCmd *const gDummySpriteAffineAnimTable[];
+extern const struct SpriteTemplate gDummySpriteTemplate;
+
+extern u8 gReservedSpritePaletteCount;
+extern struct Sprite gSprites[MAX_SPRITES + 1];
+extern u8 gOamLimit;
+extern u16 gReservedSpriteTileCount;
 extern s16 gSpriteCoordOffsetX;
 extern s16 gSpriteCoordOffsetY;
-extern const struct SpriteTemplate gDummySpriteTemplate;
-extern struct Sprite gSprites[];
-extern u8 gOamLimit;
-extern struct OamMatrix gOamMatrices[];
+extern struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT];
 extern bool8 gAffineAnimsDisabled;
-extern u16 gReservedSpriteTileCount;
 
 void ResetSpriteData(void);
 void AnimateSprites(void);
 void BuildOamBuffer(void);
-u8 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
-u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
-u8 CreateInvisibleSprite(void (*callback)(struct Sprite *));
+u32 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
+u32 CreateSpriteAtEnd(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
+u32 CreateInvisibleSprite(void (*callback)(struct Sprite *));
 u32 CreateSpriteAndAnimate(const struct SpriteTemplate *template, s16 x, s16 y, u32 subpriority);
 void DestroySprite(struct Sprite *sprite);
-void ResetOamRange(u32 a, u32 b);
+void ResetOamRange(u32 start, u32 end);
 void LoadOam(void);
 void SetOamMatrix(u8 matrixNum, u16 a, u16 b, u16 c, u16 d);
 void CalcCenterToCornerVec(struct Sprite *sprite, u8 shape, u8 size, u8 affineMode);
@@ -281,6 +289,7 @@ void FreeSpritePalette(struct Sprite *sprite);
 void FreeSpriteOamMatrix(struct Sprite *sprite);
 void DestroySpriteAndFreeResources(struct Sprite *sprite);
 void AnimateSprite(struct Sprite *sprite);
+void SetSpriteMatrixAnchor(struct Sprite *sprite, s16 x, s16 y);
 void StartSpriteAnim(struct Sprite *sprite, u8 animNum);
 void StartSpriteAnimIfDifferent(struct Sprite *sprite, u8 animNum);
 void SeekSpriteAnim(struct Sprite *sprite, u8 animCmdIndex);
@@ -299,6 +308,8 @@ void LoadSpriteSheets(const struct SpriteSheet *sheets);
 s16 AllocSpriteTiles(u16 tileCount);
 u16 AllocTilesForSpriteSheet(struct SpriteSheet *sheet);
 void AllocTilesForSpriteSheets(struct SpriteSheet *sheets);
+void LoadTilesForSpriteSheet(const struct SpriteSheet *sheet);
+void LoadTilesForSpriteSheets(struct SpriteSheet *sheets);
 void FreeSpriteTilesByTag(u16 tag);
 void FreeSpriteTileRanges(void);
 u16 GetSpriteTileStartByTag(u16 tag);
@@ -306,10 +317,10 @@ u16 GetSpriteTileTagByTileStart(u16 start);
 void RequestSpriteSheetCopy(const struct SpriteSheet *sheet);
 u16 LoadSpriteSheetDeferred(const struct SpriteSheet *sheet);
 void FreeAllSpritePalettes(void);
-u8 LoadSpritePalette(const struct SpritePalette *palette);
+u32 LoadSpritePalette(const struct SpritePalette *palette);
 void LoadSpritePalettes(const struct SpritePalette *palettes);
-u8 AllocSpritePalette(u16 tag);
-u8 IndexOfSpritePaletteTag(u16 tag);
+u32 AllocSpritePalette(u16 tag);
+u32 IndexOfSpritePaletteTag(u16 tag);
 u16 GetSpritePaletteTagByPaletteNum(u8 paletteNum);
 void FreeSpritePaletteByTag(u16 tag);
 void SetSubspriteTables(struct Sprite *sprite, const struct SubspriteTable *subspriteTables);
@@ -320,7 +331,8 @@ void CopyFromSprites(u8 *dest);
 u8 SpriteTileAllocBitmapOp(u16 bit, u8 op);
 void ClearSpriteCopyRequests(void);
 void ResetAffineAnimData(void);
-void SetSpriteMatrixAnchor(struct Sprite* sprite, s16 xmod, s16 ymod);
 u32 GetSpanPerImage(u32 shape, u32 size);
+void RequestSpriteFrameImageCopy(u16 index, u16 tileNum, const struct SpriteFrameImage *images);
+void SetSpriteOamFlipBits(struct Sprite *sprite, u8 hFlip, u8 vFlip);
 
 #endif //GUARD_SPRITE_H

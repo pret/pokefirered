@@ -293,7 +293,7 @@ int BgTileAllocOp(int bg, int offset, int count, int mode)
 
     switch (mode)
     {
-    case BG_TILE_FIND_FREE_SPACE:
+    case 0:
         start = GetBgControlAttribute(bg, BG_CTRL_ATTR_CHARBASEINDEX) * (BG_CHAR_SIZE / TILE_SIZE_4BPP);
         end = start + 0x400;
         if (end > 0x800)
@@ -322,13 +322,13 @@ int BgTileAllocOp(int bg, int offset, int count, int mode)
             }
         }
         return -1;
-    case BG_TILE_ALLOC:
+    case 1:
         start = GetBgControlAttribute(bg, BG_CTRL_ATTR_CHARBASEINDEX) * (BG_CHAR_SIZE / TILE_SIZE_4BPP) + offset;
         end = start + count;
         for (i = start; i < end; i++)
             gpu_tile_allocation_map_bg[i / 8] |= 1 << (i % 8);
         break;
-    case BG_TILE_FREE:
+    case 2:
         start = GetBgControlAttribute(bg, BG_CTRL_ATTR_CHARBASEINDEX) * (BG_CHAR_SIZE / TILE_SIZE_4BPP) + offset;
         end = start + count;
         for (i = start; i < end; i++)
@@ -443,7 +443,7 @@ u16 LoadBgTiles(u8 bg, const void *src, u16 size, u16 destOffset)
 
     if (gWindowTileAutoAllocEnabled == TRUE)
     {
-        BgTileAllocOp(bg, tileOffset / 0x20, size / 0x20, BG_TILE_ALLOC);
+        BgTileAllocOp(bg, tileOffset / 0x20, size / 0x20, 1);
     }
 
     return cursor;
@@ -568,7 +568,7 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_MOSAIC);
         case BG_ATTR_WRAPAROUND:
             return GetBgControlAttribute(bg, BG_CTRL_ATTR_WRAPAROUND);
-        case BG_ATTR_MAPSIZE:
+        case BG_ATTR_METRIC:
             switch (GetBgType(bg))
             {
                 case 0:
@@ -578,7 +578,7 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
                 default:
                     return 0;
             }
-        case BG_ATTR_BGTYPE:
+        case BG_ATTR_TYPE:
             return GetBgType(bg);
         case BG_ATTR_BASETILE:
             return sGpuBgConfigs2[bg].baseTile;

@@ -103,7 +103,7 @@ void TilemapUtil_SetTilemap(u8 tilemapId, u8 bg, const void *tilemap, u16 width,
         sTilemapUtil[tilemapId].height = height;
 
         screenSize = GetBgAttribute(bg, BG_ATTR_SCREENSIZE);
-        bgType = GetBgAttribute(bg, BG_ATTR_BGTYPE);
+        bgType = GetBgAttribute(bg, BG_ATTR_TYPE);
         sTilemapUtil[tilemapId].altWidth = sTilemapDimensions[bgType][screenSize].width;
         sTilemapUtil[tilemapId].altHeight = sTilemapDimensions[bgType][screenSize].height;
         if (bgType != 0)

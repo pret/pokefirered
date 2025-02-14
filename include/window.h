@@ -1,12 +1,11 @@
 #ifndef GUARD_WINDOW_H
 #define GUARD_WINDOW_H
 
-#define WINDOWS_MAX 32
+#define WINDOWS_MAX  32
 
 #define PIXEL_FILL(num) ((num) | ((num) << 4))
 
-enum
-{
+enum {
     WINDOW_BG,
     WINDOW_TILEMAP_LEFT,
     WINDOW_TILEMAP_TOP,
@@ -18,8 +17,7 @@ enum
 };
 
 // Mode for CopyWindowToVram, CopyWindowRectToVram and CopyWindowToVram8Bit
-enum
-{
+enum {
     COPYWIN_NONE,
     COPYWIN_MAP,
     COPYWIN_GFX,
@@ -50,14 +48,13 @@ struct Window
     u8 *tileData;
 };
 
-typedef void (*WindowFunc)(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
-
-bool16 InitWindows(const struct WindowTemplate *templates);
+bool32 InitWindows(const struct WindowTemplate *templates);
 u32 AddWindow(const struct WindowTemplate *template);
 int AddWindowWithoutTileMap(const struct WindowTemplate *template);
 void RemoveWindow(u32 windowId);
 void FreeAllWindowBuffers(void);
 void CopyWindowToVram(u32 windowId, u32 mode);
+void CopyWindowRectToVram(u32 windowId, u32 mode, u32 x, u32 y, u32 w, u32 h);
 void PutWindowTilemap(u32 windowId);
 void PutWindowRectTilemapOverridePalette(u32 windowId, u8 x, u8 y, u8 width, u8 height, u8 palette);
 void ClearWindowTilemap(u32 windowId);
@@ -68,7 +65,7 @@ void FillWindowPixelRect(u32 windowId, u8 fillValue, u16 x, u16 y, u16 width, u1
 void CopyToWindowPixelBuffer(u32 windowId, const void *src, u16 size, u16 tileOffset);
 void FillWindowPixelBuffer(u32 windowId, u8 fillValue);
 void ScrollWindow(u32 windowId, u8 direction, u8 distance, u8 fillValue);
-void CallWindowFunction(u32 windowId, WindowFunc func);
+void CallWindowFunction(u32 windowId, void ( *func)(u8, u8, u8, u8, u8, u8));
 bool32 SetWindowAttribute(u32 windowId, u32 attributeId, u32 value);
 u32 GetWindowAttribute(u32 windowId, u32 attributeId);
 u32 AddWindow8Bit(const struct WindowTemplate *template);
@@ -79,7 +76,7 @@ void CopyWindowToVram8Bit(u32 windowId, u8 mode);
 u32 WindowWidthPx(u32 windowId);
 u32 WindowTemplateWidthPx(const struct WindowTemplate *template);
 
-extern void *gWindowBgTilemapBuffers[];
 extern struct Window gWindows[];
+extern void *gWindowBgTilemapBuffers[];
 
 #endif // GUARD_WINDOW_H

@@ -45,7 +45,7 @@ u32 GameHash() {
   if (gGameHash == 0) {
     gGameHash = Hash(gSaveBlock1Ptr->rivalName);
   }
-  return gGameHash;
+  return gGameHash + 7;
 }
 
 u32 MapHashInternal(bool8 fine) {

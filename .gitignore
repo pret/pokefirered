@@ -63,3 +63,8 @@ prefabs.json
 *.sym
 src/data/map_group_count.h
 !/tools/mgba/mgba-rom-test.exe
+tools/trainerproc/trainerproc
+*.Identifier
+*.smol
+*.fastSmol
+*.smolTM

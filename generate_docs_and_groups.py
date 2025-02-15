@@ -865,11 +865,21 @@ A fork of https://github.com/pret/pokefirered that is meant to be played by mult
 
 Major changes:
  - **Deterministic game seed:** Wild Pokémon, trainer Pokémon, and overworld items are randomized based on the Rival name specified at the beginning of the game. All non-key overworld items contain TMs. Some items may be randomly placed on water or in unreachable areas.
- - **Time limit:** After 5 hours pass, the player is locked in the Celadon Department Store. A PC and free Move Relearner are added to the Department Store. The game clock doesn't decrease while the START menu is active, including when the player is using the Pokémon summary screen, bag, etc. outside of battle.
+ - **Time limit:** After 5 hours pass, the player is locked in the Celadon Department Store. The game clock doesn't decrease while the START menu is active, including when the player is using the Pokémon summary screen, bag, etc. outside of battle.
  - **Level band:** Pokémon stop gaining experience if they become too overleveled compared to the rest of the team. Rare candies also stop working.
  - **Level scaling:** Wild and trainer Pokémon levels increase based on the player's party Pokémon levels and badge count.
- - **Gen 4 Pokemon, Moves, TMs, Abilities, & Items:** Most Gen 4 Pokémon in Gen 1-3 families (e.g. Munchlax, Weavile) are added, with Gen IV HG/SS learnsets and abilities. The Department Store sells Gen 4 battle items. Many Gen IV moves and abilities aren't implemented properly, and instead placeholder effects. The full Pokémon list at the bottom of this page.
- - **New TMs and learnsets:** 60+ TMs are added to the game, see the full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/all_tms.txt). Fully evolved Pokémon learn non-TM pre-evolution and egg moves at level 1. TMs can teach moves that were previously only learnable via breeding or move tutors. I.e. if a move is on Smogon it can be learned in this game.
+ - **Gen 4 Pokemon, Moves, TMs, Abilities, & Items:** Most Gen 4 Pokémon in Gen 1-3 families (e.g. Munchlax, Weavile) are added, with Gen IV HG/SS learnsets and abilities. The Department Store sells Gen 4 battle items, Nature Mints, and Ability Patches. Many Gen IV moves and abilities aren't implemented properly, and instead placeholder effects. The full Pokémon list at the bottom of this page.
+ - **New TMs and learnsets:** 64 TMs are added to the game, bringing the total to 156. Fully evolved Pokémon learn non-TM pre-evolution and egg moves at level 1. TMs can teach moves that were previously only learnable via breeding or move tutors. I.e. if a move is on Smogon it can be learned in this game. A free Move Relearner are added to the Department Store.
+
+Helpful code links:
+ - TM list: https://github.com/alecwshearer/poke-challenge/blob/master/all_tms.txt
+ - Pokémon level-up learnsets (including level 1): https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/level_up_learnsets.h
+ - Pokémon TM01-TM50 and HM learnsets: https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/tmhm_learnsets.h
+ - Pokémon TM51-TM92 learnsets: https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/gen4_tmhm_learnsets.h
+ - Pokémon TM93-TM156 learnsets: https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/new_tmhm_learnsets.h
+ - Pokémon evolution conditions: https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h
+ - Celadon City 5th floor items: https://github.com/alecwshearer/poke-challenge/blob/master/data/maps/CeladonCity_DepartmentStore_5F/scripts.inc
+ - Item prices (CTRL+F for "price"): https://github.com/alecwshearer/poke-challenge/blob/master/src/data/items.json
 
 Other changes:
  - Faster movement, animations, and text. Hold B to use normal walking speed.
@@ -886,14 +896,16 @@ Other changes:
  - Move tutors give the player a random TM instead. Purchasable, winnable, and gift TMs are randomized.
  - Gym leaders give the player a Rare Candy in addition to a TM upon earning a badge.
  - Legendary birds give the player a Rare Candy upon defeat.
+ - Elite Four members give the player a Rare Candy, Nature Mint, and Ability Patch upon defeat (first time only).
  - Overworld Pokémon (e.g. Snorlax, Articuno) can't be caught.
  - Physical/special split.
  - Pokémon that evolve above level 45 now evolve at level 45 instead.
  - Gift Pokémon are replaced with Spinda.
- - Game Corner prize Pokémon are replaced with baby Pokémon.
  - Items aren't sellable.
  - HMs are deletable without the Move Deleter.
  - Trade and happiness evolutions have been replaced with a new "Trade+ Stone", or Sun Stone & Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
+ - Tyrogue can evolve using Sun Stone (Hitmonchan), Moon Stone (Hitmonlee), and Trade+ Stone (Hitmontop) in addition to his normal level 20 evolution. You can avoid evolving by pressing B if you want to wait to use a stone.
+ - Pokémon that evolve by knowing a move (e.g. Ancient Power) instead evovle at the first level that they can know the move.
  - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
  - The PC is accessible from the START menu. Pokémon no longer heal when sent to the PC.
  - Start with a coin case containing 50 coins. Can no longer buy coins at the Game Corner. Earn 50 pity coins when you run out of coins at the slot machines.
@@ -913,6 +925,7 @@ Other changes:
  - The Arena Trap ability has been removed from the game.
  - Safari Balls are 53% more effective, which makes them 15% more effective than Ultra Balls.
  - Pewter, Cerulean, and Vermillion Marts sell Revives.
+ - Celadon Mart sells Ultra Balls.
  - Some early events are skipped; e.g. the Old Man.
  - Slightly modified wild encounters:
    - Dragonair -> Seadra
@@ -925,10 +938,12 @@ Other changes:
 
 ## Level band / level cap
 
-A 5 level band is in place. A portion of the player's team must be within 5 levels, inclusive, of each other;
+**TL;DR: Your Pokémon will stop gaining experience if they become too high a level compared to the rest of your team. The game will warn you when you're one level away from this happening.**
+
+A 7 level band is in place. A portion of the player's team must be within 7 levels, inclusive, of each other;
 e.g. a range of 30-35 is valid but 30-36 isn’t. The number of Pokémon that must be within the band is equal
 to the number of badges the player has plus 1. For example, the player has 3 badges, they must have 4 Pokémon
-within 5 levels (inclusive) of each other. If the highest leveled Pokémon exceeds the top of the band (also called
+within 7 levels (inclusive) of each other. If the highest leveled Pokémon exceeds the top of the band (also called
 the _level cap_), it will stop gaining experience until it is back within the band. Other party Pokémon holding an
 EXP share will still gain EXP, but the Pokémon outside of the band won’t gain EXP (and the EXP it would have gained
 won’t be distributed to the other party Pokémon).
@@ -940,21 +955,33 @@ warning can be disabled in the OPTION menu.
 
 ### Wild encounters
 
-Wild Pokémon levels are scaled based on party Pokémon levels and the level that the wild Pokémon is
-supposed to be at. This is done by replacing the highest party Pokémon level with the level that the
-wild Pokémon is supposed to be at, and then taking the average level of party Pokémon that are required
-to be within the level band, rounded down (floored).
+**TL;DR: Wild Pokémon levels approach your party's average level as you gain badges. Your 1st and 6th highest level Pokémon are excluded from the calculation.**
 
-#### Example
+Wild Pokémon levels are scaled based on party Pokémon levels and the level that the wild Pokémon is supposed to be at. This is done by:
+- Summing the levels of your 2nd through 5th highest Pokémon, for as many badges as you have.
+  - I.e., your 1st and 6th higest Pokémon are ignored and the others are cycled through from higeest to lowest.
+- Adding the level the wild Pokémon is supposed to be at.
+- Dividing by the number of badges you have plus 1.
+
+#### Example 1
 
 Input:
- - **Number of badges:** 3
- - **Required Pokémon in band:** 3 + 1 = 4
- - **Party Pokémon levels:** 25, 24, 22, 21, 12
+ - **Number of badges:** 2
+ - **Party Pokémon levels:** 20, 17, 16
+ - **Level the wild Pokémon is supposed to be at:** 10
+
+Output:
+ - **Scaled level:** ⌊(`weighted_team_sum` + `original_wild_level`) / (`badge_count + 1`)⌋ = ⌊((17 + 16) + 10) / 3⌋ = ⌊43 / 3⌋ = 14
+
+#### Example 2
+
+Input:
+ - **Number of badges:** 5
+ - **Party Pokémon levels:** 28, 24, 22, 21, 20, 12
  - **Level the wild Pokémon is supposed to be at:** 14
 
 Output:
- - **Scaled level:** ⌊(14 + 24 + 22 + 21) / 4⌋ = ⌊81 / 4⌋ = 20
+ - **Scaled level:** ⌊(`weighted_team_sum` + `original_wild_level`) / (`badge_count + 1`)⌋ = ⌊((24 + 22 + 21 + 20 + 24) + 14) / 6⌋ = ⌊125 / 6⌋ = 20
 
 #### Exception for high level Pokémon
 
@@ -963,6 +990,8 @@ are supposed to be at level greater than or equal to the player's highest Pokém
 multiplied by 0.67 before it is plugged into the scaling formula.
 
 ### Trainer battles
+
+**TL;DR: Trainer Pokémon levels increase by 0.5 on average for each badge you have.**
 
 Trainer Pokémon levels are increased based on the number of badges the player has. For each odd numbered badge,
 odd numbered trainer Pokémon levels are increased by 1. For each even numbered badge, even numbered trainer

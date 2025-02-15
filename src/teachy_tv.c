@@ -1,3 +1,4 @@
+#include "global.h"
 #include "task.h"
 #include "gflib.h"
 #include "menu_helpers.h"

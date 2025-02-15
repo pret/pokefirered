@@ -20,27 +20,6 @@ ROWS        0   1   2   3   4   5
             24  25  26  27  28  29
 */
 
-enum
-{
-    WALLPAPER_FOREST,
-    WALLPAPER_CITY,
-    WALLPAPER_DESERT,
-    WALLPAPER_SAVANNA,
-    WALLPAPER_CRAG,
-    WALLPAPER_VOLCANO,
-    WALLPAPER_SNOW,
-    WALLPAPER_CAVE,
-    WALLPAPER_BEACH,
-    WALLPAPER_SEAFLOOR,
-    WALLPAPER_RIVER,
-    WALLPAPER_SKY,
-    WALLPAPER_STARS,
-    WALLPAPER_POKECENTER,
-    WALLPAPER_TILES,
-    WALLPAPER_SIMPLE,
-    WALLPAPER_COUNT
-};
-#define MAX_DEFAULT_WALLPAPER WALLPAPER_SAVANNA
 
 struct PokemonStorage
 {
@@ -64,5 +43,13 @@ void ResetPokemonStorageSystem(void);
 u8 StorageGetCurrentBox(void);
 void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, u8 *buffer, s32 bytesToBuffer);
 u32 CountPartyNonEggMons(void);
+
+
+void BoxMonAtToMon(u8 boxId, u8 boxPosition, struct Pokemon * dst);
+void SetBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon * src);
+void SetCurrentBoxMonData(u8 boxPosition, s32 request, const void *value);
+void EnterPokeStorage(u8 boxOption);
+u32 GetAndCopyBoxMonDataAt(u8 boxId, u8 boxPosition, s32 request, void *dst);
+u32 GetCurrentBoxMonData(u8 boxPosition, s32 request);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

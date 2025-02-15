@@ -1386,16 +1386,6 @@ extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_RivalsName[];
 
 // pokemon_storage_system
-extern const u8 gText_WithdrawPokemon[];
-extern const u8 gText_WithdrawMonDescription[];
-extern const u8 gText_DepositPokemon[];
-extern const u8 gText_DepositMonDescription[];
-extern const u8 gText_MovePokemon[];
-extern const u8 gText_MoveMonDescription[];
-extern const u8 gText_MoveItems[];
-extern const u8 gText_MoveItemsDescription[];
-extern const u8 gText_SeeYa[];
-extern const u8 gText_SeeYaDescription[];
 extern const u8 gText_PartyFull[];
 extern const u8 gText_JustOnePkmn[];
 extern const u8 gText_Box[];

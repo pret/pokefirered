@@ -387,8 +387,6 @@ static void InitFlyMap(void);
 static void FreeFlyMap(u8);
 static void SetFlyWarpDestination(u16);
 
-#include "data/region_map/region_map_entry_strings.h"
-
 static const u16 sTopBar_Pal[] = INCBIN_U16("graphics/region_map/top_bar.gbapal"); // Palette for the top bar and dynamic text color
 static const u16 sMapCursor_Pal[] = INCBIN_U16("graphics/region_map/cursor.gbapal");
 static const u16 sPlayerIcon_RedPal[] = INCBIN_U16("graphics/region_map/player_icon_red.gbapal");
@@ -636,82 +634,84 @@ static const union AnimCmd *const sAnims_SwitchMapCursor[] = {
     sAnim_SwitchMapCursor
 };
 
+#include "data/region_map/region_map_entries.h"
+
 static const struct DungeonMapInfo sDungeonInfo[] = {
     {
         .id = MAPSEC_VIRIDIAN_FOREST,
-        .name = sMapsecName_VIRIDIAN_FOREST,
+        .name = sMapName_VIRIDIAN_FOREST,
         .desc = gText_RegionMap_AreaDesc_ViridianForest
     }, {
         .id = MAPSEC_MT_MOON,
-        .name = sMapsecName_MT__MOON,
+        .name = sMapName_MT__MOON,
         .desc = gText_RegionMap_AreaDesc_MtMoon
     }, {
         .id = MAPSEC_DIGLETTS_CAVE,
-        .name = sMapsecName_DIGLETT_S_CAVE,
+        .name = sMapName_DIGLETT_S_CAVE,
         .desc = gText_RegionMap_AreaDesc_DiglettsCave
     }, {
         .id = MAPSEC_KANTO_VICTORY_ROAD,
-        .name = sMapsecName_VICTORY_ROAD,
+        .name = sMapName_VICTORY_ROAD,
         .desc = gText_RegionMap_AreaDesc_VictoryRoad
     }, {
         .id = MAPSEC_POKEMON_MANSION,
-        .name = sMapsecName_POK__MON_MANSION,
+        .name = sMapName_POK__MON_MANSION,
         .desc = gText_RegionMap_AreaDesc_PokemonMansion
     }, {
         .id = MAPSEC_KANTO_SAFARI_ZONE,
-        .name = sMapsecName_SAFARI_ZONE,
+        .name = sMapName_SAFARI_ZONE,
         .desc = gText_RegionMap_AreaDesc_SafariZone
     }, {
         .id = MAPSEC_ROCK_TUNNEL,
-        .name = sMapsecName_ROCK_TUNNEL,
+        .name = sMapName_ROCK_TUNNEL,
         .desc = gText_RegionMap_AreaDesc_RockTunnel
     }, {
         .id = MAPSEC_SEAFOAM_ISLANDS,
-        .name = sMapsecName_SEAFOAM_ISLANDS,
+        .name = sMapName_SEAFOAM_ISLANDS,
         .desc = gText_RegionMap_AreaDesc_SeafoamIslands
     }, {
         .id = MAPSEC_POKEMON_TOWER,
-        .name = sMapsecName_POK__MON_TOWER,
+        .name = sMapName_POK__MON_TOWER,
         .desc = gText_RegionMap_AreaDesc_PokemonTower
     }, {
         .id = MAPSEC_CERULEAN_CAVE,
-        .name = sMapsecName_CERULEAN_CAVE,
+        .name = sMapName_CERULEAN_CAVE,
         .desc = gText_RegionMap_AreaDesc_CeruleanCave
     }, {
         .id = MAPSEC_POWER_PLANT,
-        .name = sMapsecName_POWER_PLANT,
+        .name = sMapName_POWER_PLANT,
         .desc = gText_RegionMap_AreaDesc_PowerPlant
     }, {
         .id = MAPSEC_MT_EMBER,
-        .name = sMapsecName_MT__EMBER,
+        .name = sMapName_MT__EMBER,
         .desc = gText_RegionMap_AreaDesc_MtEmber
     }, {
         .id = MAPSEC_BERRY_FOREST,
-        .name = sMapsecName_BERRY_FOREST,
+        .name = sMapName_BERRY_FOREST,
         .desc = gText_RegionMap_AreaDesc_BerryForest
     }, {
         .id = MAPSEC_ICEFALL_CAVE,
-        .name = sMapsecName_ICEFALL_CAVE,
+        .name = sMapName_ICEFALL_CAVE,
         .desc = gText_RegionMap_AreaDesc_IcefallCave
     }, {
         .id = MAPSEC_LOST_CAVE,
-        .name = sMapsecName_LOST_CAVE,
+        .name = sMapName_LOST_CAVE,
         .desc = gText_RegionMap_AreaDesc_LostCave
     }, {
         .id = MAPSEC_TANOBY_CHAMBERS,
-        .name = sMapsecName_TANOBY_CHAMBERS,
+        .name = sMapName_TANOBY_CHAMBERS,
         .desc = gText_RegionMap_AreaDesc_TanobyRuins
     }, {
         .id = MAPSEC_ALTERING_CAVE,
-        .name = sMapsecName_ALTERING_CAVE,
+        .name = sMapName_ALTERING_CAVE,
         .desc = gText_RegionMap_AreaDesc_AlteringCave
     }, {
         .id = MAPSEC_PATTERN_BUSH,
-        .name = sMapsecName_PATTERN_BUSH,
+        .name = sMapName_PATTERN_BUSH,
         .desc = gText_RegionMap_AreaDesc_PatternBush
     }, {
         .id = MAPSEC_DOTTED_HOLE,
-        .name = sMapsecName_DOTTED_HOLE,
+        .name = sMapName_DOTTED_HOLE,
         .desc = gText_RegionMap_AreaDesc_DottedHole
     }
 };
@@ -817,7 +817,6 @@ static const u8 sWinRegs[][2] = {
 
 static const u8 sTextColors[] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
 
-#include "data/region_map/region_map_entries.h"
 
 #include "data/region_map/region_map_layout_kanto.h"
 #include "data/region_map/region_map_layout_sevii_123.h"
@@ -1466,11 +1465,11 @@ static void DisplayCurrentDungeonName(void)
          descOffset = mapsecId - MAPSECS_KANTO;
          SetDispCnt(1, FALSE);
          sRegionMap->dungeonWinTop = TRUE;
-         sRegionMap->dungeonWinLeft = StringLength(sMapNames[descOffset]);
+         sRegionMap->dungeonWinLeft = StringLength(gRegionMapEntries[descOffset].name);
          sRegionMap->dungeonWinRight = sRegionMap->dungeonWinLeft * 10 + 50;
          sRegionMap->dungeonWinBottom = 48;
          FillWindowPixelBuffer(WIN_DUNGEON_NAME, PIXEL_FILL(0));
-         StringCopy(sRegionMap->dungeonName, sMapNames[descOffset]);
+         StringCopy(sRegionMap->dungeonName, gRegionMapEntries[descOffset].name);
          AddTextPrinterParameterized3(WIN_DUNGEON_NAME, FONT_NORMAL, 12, 2, sTextColorTable[GetSelectedMapsecType(LAYER_DUNGEON) - 2], 0, sRegionMap->dungeonName);
          PutWindowTilemap(WIN_DUNGEON_NAME);
          CopyWindowToVram(WIN_DUNGEON_NAME, COPYWIN_FULL);
@@ -3142,20 +3141,20 @@ static void GetPlayerPositionOnRegionMap(void)
     }
 
     sMapCursor->selectedMapsec -= MAPSECS_KANTO;
-    divisor = width / sMapSectionDimensions[sMapCursor->selectedMapsec][0];
+    divisor = width / gRegionMapEntries[sMapCursor->selectedMapsec].width;
     if (divisor == 0)
         divisor = 1;
     x /= divisor;
-    if (x >= sMapSectionDimensions[sMapCursor->selectedMapsec][0])
-        x = sMapSectionDimensions[sMapCursor->selectedMapsec][0] - 1;
-    divisor = height / sMapSectionDimensions[sMapCursor->selectedMapsec][1];
+    if (x >= gRegionMapEntries[sMapCursor->selectedMapsec].width)
+        x = gRegionMapEntries[sMapCursor->selectedMapsec].width - 1;
+    divisor = height / gRegionMapEntries[sMapCursor->selectedMapsec].height;
     if (divisor == 0)
         divisor = 1;
     y /= divisor;
-    if (y >= sMapSectionDimensions[sMapCursor->selectedMapsec][1])
-        y = sMapSectionDimensions[sMapCursor->selectedMapsec][1] - 1;
-    sMapCursor->x = x + sMapSectionTopLeftCorners[sMapCursor->selectedMapsec][0];
-    sMapCursor->y = y + sMapSectionTopLeftCorners[sMapCursor->selectedMapsec][1];
+    if (y >= gRegionMapEntries[sMapCursor->selectedMapsec].height)
+        y = gRegionMapEntries[sMapCursor->selectedMapsec].height - 1;
+    sMapCursor->x = x + gRegionMapEntries[sMapCursor->selectedMapsec].x;
+    sMapCursor->y = y + gRegionMapEntries[sMapCursor->selectedMapsec].y;
 }
 
 static void GetPlayerPositionOnRegionMap_HandleOverrides(void)
@@ -3793,9 +3792,9 @@ u8 *GetMapName(u8 *dst0, u16 mapsec, u16 fill)
     if ((idx = mapsec - MAPSECS_KANTO) <= MAPSEC_SPECIAL_AREA - MAPSECS_KANTO)
     {
         if (IsCeladonDeptStoreMapsec(mapsec) == TRUE)
-            dst = StringCopy(dst0, sMapsecName_CELADON_DEPT_);
+            dst = StringCopy(dst0, sMapName_CELADON_DEPT_);
         else
-            dst = StringCopy(dst0, sMapNames[idx]);
+            dst = StringCopy(dst0, gRegionMapEntries[idx].name);
     }
     else
     {

@@ -11,6 +11,15 @@ enum {
     REGIONMAP_TYPE_COUNT
 };
 
+struct RegionMapLocation
+{
+    u8 x;
+    u8 y;
+    u8 width;
+    u8 height;
+    const u8 *name;
+};
+
 u8 *GetMapName(u8 *dest, u16 mapsec, u16 fill);
 u8 *GetMapNameGeneric(u8 *dest, u16 mapsec);
 u8 *GetMapNameGeneric_(u8 *dest, u16 mapsec);

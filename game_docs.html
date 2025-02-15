@@ -177,7 +177,7 @@
             const contentDiv = document.getElementById('content');
             
             try {
-                const response = await fetch('https://alecwshearer.github.io/poke-challenge/README.md');
+                const response = await fetch('README.md');
                 
                 if (!response.ok) {
                     throw new Error(`Failed to fetch markdown: ${response.status}`);

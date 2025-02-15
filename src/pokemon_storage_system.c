@@ -31,8 +31,6 @@
 #include "constants/songs.h"
 
 
-// #include "pokemon_storage_system_internal.h"
-
 enum
 {
     RELEASE_MON_NOT_ALLOWED,
@@ -859,44 +857,75 @@ static void TilemapUtil_Update(u8 tilemapId);
 static void TilemapUtil_DrawPrev(u8 tilemapId);
 static void TilemapUtil_Draw(u8 tilemapId);
 
-const u8 gText_WithdrawPokemon[] = _("WITHDRAW POKéMON");
-const u8 gText_DepositPokemon[] = _("DEPOSIT POKéMON");
-const u8 gText_MovePokemon[] = _("MOVE POKéMON");
-const u8 gText_MoveItems[] = _("MOVE ITEMS");
-const u8 gText_SeeYa[] = _("SEE YA!");
-const u8 gText_WithdrawMonDescription[] = _("You can withdraw a POKéMON if you\nhave any in a BOX.");
-const u8 gText_DepositMonDescription[] = _("You can deposit your party\nPOKéMON in any BOX.");
-const u8 gText_MoveMonDescription[] = _("You can move POKéMON that are\nstored in any BOX.");
-const u8 gText_MoveItemsDescription[] = _("You can move items held by any\nPOKéMON in a BOX or your party.");
-const u8 gText_SeeYaDescription[] = _("See you later!");
-
 struct {
     const u8 *text;
     const u8 *desc;
 } static const sMainMenuTexts[OPTIONS_COUNT] = {
-    [OPTION_WITHDRAW]   = {gText_WithdrawPokemon, gText_WithdrawMonDescription},
-    [OPTION_DEPOSIT]    = {gText_DepositPokemon,  gText_DepositMonDescription},
-    [OPTION_MOVE_MONS]  = {gText_MovePokemon,     gText_MoveMonDescription},
-    [OPTION_MOVE_ITEMS] = {gText_MoveItems,       gText_MoveItemsDescription},
-    [OPTION_EXIT]       = {gText_SeeYa,           gText_SeeYaDescription}
+    [OPTION_WITHDRAW]   = {COMPOUND_STRING("WITHDRAW POKéMON"), COMPOUND_STRING("You can withdraw a POKéMON if you\nhave any in a BOX.")},
+    [OPTION_DEPOSIT]    = {COMPOUND_STRING("DEPOSIT POKéMON"),  COMPOUND_STRING("You can deposit your party\nPOKéMON in any BOX.")},
+    [OPTION_MOVE_MONS]  = {COMPOUND_STRING("MOVE POKéMON"),     COMPOUND_STRING("You can move POKéMON that are\nstored in any BOX.")},
+    [OPTION_MOVE_ITEMS] = {COMPOUND_STRING("MOVE ITEMS"),       COMPOUND_STRING("You can move items held by any\nPOKéMON in a BOX or your party.")},
+    [OPTION_EXIT]       = {COMPOUND_STRING("SEE YA!"),          COMPOUND_STRING("See you later!")}
 };
 
+static const struct WindowTemplate sWindowTemplate_MainMenu = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 17,
+    .height = 10,
+    .paletteNum = 15,
+    .baseBlock = 0x001
+};
+
+static const union AnimCmd sAnim_ChooseBoxMenu_TopLeft[] = {
+    ANIMCMD_FRAME( 0, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_ChooseBoxMenu_BottomLeft[] = {
+    ANIMCMD_FRAME( 4, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_ChooseBoxMenu_TopRight[] = {
+    ANIMCMD_FRAME( 6, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_ChooseBoxMenu_BottomRight[] = {
+    ANIMCMD_FRAME(10, 5),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sAnims_ChooseBoxMenu[] = {
+    sAnim_ChooseBoxMenu_TopLeft,
+    sAnim_ChooseBoxMenu_BottomLeft,
+    sAnim_ChooseBoxMenu_TopRight,
+    sAnim_ChooseBoxMenu_BottomRight,
+};
+
+static const union AffineAnimCmd sAffineAnim_ChooseBoxMenu[] = {
+    AFFINEANIMCMD_FRAME(224, 224, 0, 0),
+    AFFINEANIMCMD_END
+};
+
+// Unused
+static const union AffineAnimCmd *const sAffineAnims_ChooseBoxMenu[] = {
+    sAffineAnim_ChooseBoxMenu
+};
 
 // Unused, since LoadChooseBoxMenuGfx is always called with `loadPal` as false
 static const u16 sChooseBoxMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/unused_choose_box_menu.gbapal");
-
 static const u8 sChooseBoxMenuCenter_Gfx[] = INCBIN_U8("graphics/pokemon_storage/choose_box_menu_center.4bpp");
 static const u8 sChooseBoxMenuCorners_Gfx[] = INCBIN_U8("graphics/pokemon_storage/choose_box_menu_corners.4bpp");
-
-
 static const u32 sScrollingBg_Gfx[]     = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
 static const u32 sScrollingBg_Tilemap[] = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
-
-// Unused
-static const u16 sMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/menu.gbapal");
-
+static const u16 sMenu_Pal[] = INCBIN_U16("graphics/pokemon_storage/menu.gbapal"); // Unused
 static const u32 sMenu_Tilemap[]             = INCBIN_U32("graphics/pokemon_storage/menu.bin.lz");
 static const u16 sPkmnData_Tilemap[]         = INCBIN_U16("graphics/pokemon_storage/pkmn_data.bin");
+static const u16 gPokeStorageInterface_Pal[] = INCBIN_U16("graphics/pokemon_storage/interface.gbapal");
+static const u16 gPokeStorageInterface_NoDisplayMon_Pal[] = INCBIN_U16("graphics/pokemon_storage/interface_no_display_mon.gbapal");
 static const u16 sScrollingBg_Pal[]          = INCBIN_U16("graphics/pokemon_storage/scrolling_bg.gbapal");
 static const u16 sScrollingBgMoveItems_Pal[] = INCBIN_U16("graphics/pokemon_storage/scrolling_bg_move_items.gbapal");
 static const u16 sCloseBoxButton_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/close_box_button.bin");
@@ -904,14 +933,11 @@ static const u16 sPartySlotFilled_Tilemap[]  = INCBIN_U16("graphics/pokemon_stor
 static const u16 sPartySlotEmpty_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/party_slot_empty.bin");
 static const u16 sPokeStorageMisc2Pal[]      = INCBIN_U16("graphics/pokemon_storage/misc2.gbapal");
 static const u16 sWaveform_Gfx[]             = INCBIN_U16("graphics/pokemon_storage/waveform.4bpp");
-
-// Unused
 static const u16 sUnused_Pal[] = INCBIN_U16("graphics/pokemon_storage/unused.gbapal");
-
 static const u16 sItemInfoFrame_Pal[] = INCBIN_U16("graphics/pokemon_storage/item_info_frame.gbapal");
 
 static const struct WindowTemplate sWindowTemplates[] = {
-    {
+    [WIN_DISPLAY_INFO] = {
         .bg = 1,
         .tilemapLeft = 0,
         .tilemapTop = 11,
@@ -919,7 +945,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 7,
         .paletteNum = 3,
         .baseBlock = 0x0c0
-    }, {
+    },
+    [WIN_MESSAGE] = {
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 17,
@@ -927,7 +954,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 2,
         .paletteNum = 13,
         .baseBlock = 0x014
-    }, {
+    },
+    [WIN_ITEM_DESC] = {
         .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 12,
@@ -1243,8 +1271,8 @@ static const struct SpriteTemplate sSpriteTemplate_BoxScrollArrow = {
 };
 
 static const u16 sPokeStorageMisc1Pal[] = INCBIN_U16("graphics/pokemon_storage/misc1.gbapal");
-static const u16 sHandCursorTiles[] = INCBIN_U16("graphics/pokemon_storage/cursor.4bpp");
-static const u16 sHandCursorShadowTiles[] = INCBIN_U16("graphics/pokemon_storage/cursor_shadow.4bpp");
+static const u16 sHandCursor_Gfx[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.4bpp");
+static const u16 sHandCursorShadow_Gfx[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
 
 //------------------------------------------------------------------------------
@@ -1321,7 +1349,7 @@ static void PrintStringToBufferCopyNow(const u8 *string, void *dst, u16 offset, 
     RemoveWindow(windowId);
 }
 
-static u8 CountMonsInBox(u8 boxId)
+u8 CountMonsInBox(u8 boxId)
 {
     u16 i, count;
 
@@ -1544,16 +1572,6 @@ static void FieldTask_ReturnToPcMenu(void)
     FadeInFromBlack();
 }
 
-static const struct WindowTemplate sWindowTemplate_MainMenu = {
-    .bg = 0,
-    .tilemapLeft = 1,
-    .tilemapTop = 1,
-    .width = 17,
-    .height = 10,
-    .paletteNum = 15,
-    .baseBlock = 0x001
-};
-
 static void CreatePCMainMenu(u8 whichMenu, s16 *windowIdPtr)
 {
     s16 windowId = AddWindow(&sWindowTemplate_MainMenu);
@@ -1655,43 +1673,6 @@ u8 HandleBoxChooseSelectionInput(void)
     }
     return BOXID_NONE_CHOSEN;
 }
-
-static const union AnimCmd sAnim_ChooseBoxMenu_TopLeft[] = {
-    ANIMCMD_FRAME( 0, 5),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_ChooseBoxMenu_BottomLeft[] = {
-    ANIMCMD_FRAME( 4, 5),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_ChooseBoxMenu_TopRight[] = {
-    ANIMCMD_FRAME( 6, 5),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_ChooseBoxMenu_BottomRight[] = {
-    ANIMCMD_FRAME(10, 5),
-    ANIMCMD_END
-};
-
-static const union AnimCmd *const sAnims_ChooseBoxMenu[] = {
-    sAnim_ChooseBoxMenu_TopLeft,
-    sAnim_ChooseBoxMenu_BottomLeft,
-    sAnim_ChooseBoxMenu_TopRight,
-    sAnim_ChooseBoxMenu_BottomRight,
-};
-
-static const union AffineAnimCmd sAffineAnim_ChooseBoxMenu[] = {
-    AFFINEANIMCMD_FRAME(224, 224, 0, 0),
-    AFFINEANIMCMD_END
-};
-
-// Unused
-static const union AffineAnimCmd *const sAffineAnims_ChooseBoxMenu[] = {
-    sAffineAnim_ChooseBoxMenu
-};
 
 static void ChooseBoxMenu_CreateSprites(u8 curBox)
 {
@@ -7350,8 +7331,8 @@ static void CreateCursorSprites(void)
     u8 spriteId;
     u8 priority, subpriority;
     struct SpriteSheet spriteSheets[] = {
-        {sHandCursorTiles, 0x800, GFXTAG_CURSOR},
-        {sHandCursorShadowTiles, 0x80, GFXTAG_CURSOR_SHADOW},
+        {sHandCursor_Gfx, 0x800, GFXTAG_CURSOR},
+        {sHandCursorShadow_Gfx, 0x80, GFXTAG_CURSOR_SHADOW},
         {}
     };
 

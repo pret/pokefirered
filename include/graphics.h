@@ -5509,8 +5509,6 @@ extern const u16 gNamingScreenUnderscore_Gfx[];
 extern const u32 gPokeStorageMenu_Gfx[];
 extern const u32 gPokeStoragePartyMenu_Tilemap[];
 extern const u16 gPokeStoragePartyMenu_Pal[];
-extern const u16 gPokeStorageInterface_Pal[];
-extern const u16 gPokeStorageInterface_NoDisplayMon_Pal[];
 
 // pokedex_screen
 extern const u16 gDexScreen_TopMenuIconPals_AtoZ[];

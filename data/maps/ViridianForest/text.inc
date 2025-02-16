@@ -48,8 +48,8 @@ ViridianForest_Text_AnthonyIntro::
     .string "it if you go easy on me!$"
 
 ViridianForest_Text_AnthonyDefeat::
-    .string "Oh, boo.\n"
-    .string "Nothing went right.$"
+    .string "I found the POKéMON League\n"
+    .string "bug in this game!$"
 
 ViridianForest_Text_AnthonyPostBattle::
     .string "I lost some of my allowance…$"

@@ -53,11 +53,11 @@ static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
 static EWRAM_DATA u16 sElevatorCursorPos = 0;
 static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
-static EWRAM_DATA u16 sListMenuLastScrollPosition = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
 
-COMMON_DATA struct ListMenuTemplate sFieldSpecialsListMenuTemplate = {0};
+EWRAM_DATA u16 gScrollableMultichoice_ScrollOffset = 0;
+COMMON_DATA struct ListMenuTemplate gScrollableMultichoice_ListMenuTemplate = {0};
 COMMON_DATA u16 sFieldSpecialsListMenuScrollBuffer = 0;
 
 static void Task_AnimatePcTurnOn(u8 taskId);
@@ -1387,9 +1387,9 @@ static void Task_CreateScriptListMenu(u8 taskId)
     u8 windowId;
     LockPlayerFieldControls();
     if (gSpecialVar_0x8004 == LISTMENU_SILPHCO_FLOORS)
-        sListMenuLastScrollPosition = sElevatorScroll;
+        gScrollableMultichoice_ScrollOffset = sElevatorScroll;
     else
-        sListMenuLastScrollPosition = 0;
+        gScrollableMultichoice_ScrollOffset = 0;
     sListMenuItems = AllocZeroed(task->data[1] * sizeof(struct ListMenuItem));
     CreateScriptListMenu();
     mwidth = 0;
@@ -1407,11 +1407,11 @@ static void Task_CreateScriptListMenu(u8 taskId)
     template = CreateWindowTemplate(0, task->data[2], task->data[3], task->data[4], task->data[5], 15, 0x038);
     task->data[13] = windowId = AddWindow(&template);
     SetStandardWindowBorderStyle(task->data[13], 0);
-    sFieldSpecialsListMenuTemplate.totalItems = task->data[1];
-    sFieldSpecialsListMenuTemplate.maxShowed = task->data[0];
-    sFieldSpecialsListMenuTemplate.windowId = task->data[13];
+    gScrollableMultichoice_ListMenuTemplate.totalItems = task->data[1];
+    gScrollableMultichoice_ListMenuTemplate.maxShowed = task->data[0];
+    gScrollableMultichoice_ListMenuTemplate.windowId = task->data[13];
     Task_CreateMenuRemoveScrollIndicatorArrowPair(taskId);
-    task->data[14] = ListMenuInit(&sFieldSpecialsListMenuTemplate, task->data[7], task->data[8]);
+    task->data[14] = ListMenuInit(&gScrollableMultichoice_ListMenuTemplate, task->data[7], task->data[8]);
     PutWindowTilemap(task->data[13]);
     CopyWindowToVram(task->data[13], COPYWIN_FULL);
     gTasks[taskId].func = Task_ListMenuHandleInput;
@@ -1419,24 +1419,24 @@ static void Task_CreateScriptListMenu(u8 taskId)
 
 static void CreateScriptListMenu(void)
 {
-    sFieldSpecialsListMenuTemplate.items = sListMenuItems;
-    sFieldSpecialsListMenuTemplate.moveCursorFunc = ScriptListMenuMoveCursorFunction;
-    sFieldSpecialsListMenuTemplate.itemPrintFunc = NULL;
-    sFieldSpecialsListMenuTemplate.totalItems = 1;
-    sFieldSpecialsListMenuTemplate.maxShowed = 1;
-    sFieldSpecialsListMenuTemplate.windowId = 0;
-    sFieldSpecialsListMenuTemplate.header_X = 0;
-    sFieldSpecialsListMenuTemplate.item_X = 8;
-    sFieldSpecialsListMenuTemplate.cursor_X = 0;
-    sFieldSpecialsListMenuTemplate.upText_Y = 0;
-    sFieldSpecialsListMenuTemplate.cursorPal = 2;
-    sFieldSpecialsListMenuTemplate.fillValue = 1;
-    sFieldSpecialsListMenuTemplate.cursorShadowPal = 3;
-    sFieldSpecialsListMenuTemplate.lettersSpacing = 1;
-    sFieldSpecialsListMenuTemplate.itemVerticalPadding = 0;
-    sFieldSpecialsListMenuTemplate.scrollMultiple = 0;
-    sFieldSpecialsListMenuTemplate.fontId = FONT_NORMAL;
-    sFieldSpecialsListMenuTemplate.cursorKind = 0;
+    gScrollableMultichoice_ListMenuTemplate.items = sListMenuItems;
+    gScrollableMultichoice_ListMenuTemplate.moveCursorFunc = ScriptListMenuMoveCursorFunction;
+    gScrollableMultichoice_ListMenuTemplate.itemPrintFunc = NULL;
+    gScrollableMultichoice_ListMenuTemplate.totalItems = 1;
+    gScrollableMultichoice_ListMenuTemplate.maxShowed = 1;
+    gScrollableMultichoice_ListMenuTemplate.windowId = 0;
+    gScrollableMultichoice_ListMenuTemplate.header_X = 0;
+    gScrollableMultichoice_ListMenuTemplate.item_X = 8;
+    gScrollableMultichoice_ListMenuTemplate.cursor_X = 0;
+    gScrollableMultichoice_ListMenuTemplate.upText_Y = 0;
+    gScrollableMultichoice_ListMenuTemplate.cursorPal = 2;
+    gScrollableMultichoice_ListMenuTemplate.fillValue = 1;
+    gScrollableMultichoice_ListMenuTemplate.cursorShadowPal = 3;
+    gScrollableMultichoice_ListMenuTemplate.lettersSpacing = 1;
+    gScrollableMultichoice_ListMenuTemplate.itemVerticalPadding = 0;
+    gScrollableMultichoice_ListMenuTemplate.scrollMultiple = 0;
+    gScrollableMultichoice_ListMenuTemplate.fontId = FONT_NORMAL;
+    gScrollableMultichoice_ListMenuTemplate.cursorKind = 0;
 }
 
 static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListMenu * used)
@@ -1449,7 +1449,7 @@ static void ScriptListMenuMoveCursorFunction(s32 nothing, bool8 is, struct ListM
     {
         task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->data[14], &sFieldSpecialsListMenuScrollBuffer, NULL);
-        sListMenuLastScrollPosition = sFieldSpecialsListMenuScrollBuffer;
+        gScrollableMultichoice_ScrollOffset = sFieldSpecialsListMenuScrollBuffer;
     }
 }
 
@@ -1548,7 +1548,7 @@ static void Task_CreateMenuRemoveScrollIndicatorArrowPair(u8 taskId)
         template.secondY = 8 * task->data[5] + 10;
         template.fullyUpThreshold = 0;
         template.fullyDownThreshold = task->data[1] - task->data[0];
-        task->data[12] = AddScrollIndicatorArrowPair(&template, &sListMenuLastScrollPosition);
+        task->data[12] = AddScrollIndicatorArrowPair(&template, &gScrollableMultichoice_ScrollOffset);
     }
 }
 

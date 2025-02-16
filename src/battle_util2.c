@@ -61,7 +61,7 @@ void FreeBattleResources(void)
 
         for (i = 0; i < 4; i++)
         {
-            FREE_AND_SET_NULL(gPokedudeBattlerStates[i]);
+            TRY_FREE_AND_SET_NULL(gPokedudeBattlerStates[i]);
         }
     }
     gFieldStatuses = 0;

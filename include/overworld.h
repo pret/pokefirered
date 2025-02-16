@@ -181,6 +181,8 @@ bool8 SetDiveWarpEmerge(u16 x, u16 y);
 bool8 SetDiveWarpDive(u16 x, u16 y);
 
 u16 SeededItemByIndex(u16 index);
+void OverworldDisableMaybeEndChallenge(void);
+void OverworldEnableMaybeEndChallenge(void);
 
 extern u16 *gBGTilemapBuffers1;
 extern u16 *gBGTilemapBuffers2;

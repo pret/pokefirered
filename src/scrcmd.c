@@ -1212,6 +1212,7 @@ bool8 ScrCmd_lockall(struct ScriptContext * ctx)
     {
         FreezeObjects_WaitForPlayer();
         SetupNativeScript(ctx, IsFreezePlayerFinished);
+        OverworldDisableMaybeEndChallenge();
         return TRUE;
     }
 }
@@ -1234,6 +1235,7 @@ bool8 ScrCmd_lock(struct ScriptContext * ctx)
             FreezeObjects_WaitForPlayer();
             SetupNativeScript(ctx, IsFreezePlayerFinished);
         }
+        OverworldDisableMaybeEndChallenge();
         return TRUE;
     }
 }
@@ -1247,6 +1249,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext * ctx)
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
+    OverworldEnableMaybeEndChallenge();
     return FALSE;
 }
 
@@ -1261,6 +1264,7 @@ bool8 ScrCmd_release(struct ScriptContext * ctx)
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
+    OverworldEnableMaybeEndChallenge();
     return FALSE;
 }
 

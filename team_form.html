@@ -19,7 +19,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             background: linear-gradient(135deg, #4a90e2 0%, #2b6cb0 100%);
@@ -69,6 +69,12 @@
             border-color: var(--pokemon-blue);
             box-shadow: 0 0 0 3px rgba(21, 56, 238, 0.1);
             background: white;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
         }
 
         .button-container {
@@ -176,8 +182,8 @@
 
         .pokemon-sprite img {
             image-rendering: pixelated;
-            width: 96px;
-            height: 96px;
+            width: 80px;
+            height: 80px;
             transition: transform 0.3s ease;
         }
 
@@ -234,7 +240,7 @@
     <div class="container">
         <h1>Pokémon Challenge Team Form</h1>
 
-        <div class="button-container">
+        <div class="input-container" style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
           <b>Trainer Name:</b>
           <input id="trainerName" placeholder="Ash Ketchum">
           &nbsp;&nbsp;&nbsp;&nbsp;

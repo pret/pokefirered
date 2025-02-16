@@ -1020,14 +1020,14 @@ replaced with Pokémon from their group, as described below.
 ### Wild encounters
 
 For every "map set" (e.g. Route 1, Mt. Moon) in the game:
-  - Non-fishing Pokémon with an encounter rate less than or equal to 20% are
-  deterministically replaced with 1 species from their group.
-  - Non-fishing Pokémon with an encounter rate greater than 20%
-  are deterministically replaced with 2 species from their group. There is a ~66%
-  and ~33% chance of encountering the 2 replacements, respectively. More powerful
-  Pokémon are generally more likely to be the 33% replacement than the 66% one.
   - All fishing Pokémon are deterministically replaced with 1 species from their
   group, regardless of encounter rate.
+  - Non-fishing Pokémon with an encounter rate less than or equal to 20% are
+  deterministically replaced with 1 species from their group.
+  - Non-fishing Pokémon with an encounter rate greater than 20% are deterministically
+  replaced with 2 _distinct_ species from their group. There is a ~66% and ~33% chance of
+  encountering the 2 replacements, respectively. The Pokémon that comes first the group will
+  be the more likely encounter, and one that comes later will be the less likely one.
 
 #### Map sets
 

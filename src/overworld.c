@@ -1548,6 +1548,16 @@ void SetMainCallback1(MainCallback cb)
     gMain.callback1 = cb;
 }
 
+bool8 sMaybeEndChallengeDisabled = FALSE;
+
+void OverworldDisableMaybeEndChallenge(void) {
+    sMaybeEndChallengeDisabled = TRUE;
+}
+
+void OverworldEnableMaybeEndChallenge(void) {
+    sMaybeEndChallengeDisabled = FALSE;
+}
+
 static bool8 RunFieldCallback(void)
 {
     if (gFieldCallback2)
@@ -1570,7 +1580,9 @@ static bool8 RunFieldCallback(void)
         gFieldCallback = NULL;
     }
 
-    MaybeEndChallenge();
+    if (!sMaybeEndChallengeDisabled) {
+        MaybeEndChallenge();
+    }
     return TRUE;
 }
 

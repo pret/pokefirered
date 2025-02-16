@@ -2105,6 +2105,7 @@ static u32 LoadDynamicFollowerPalette(u32 species, bool32 shiny, bool32 female)
         {
             paletteNum = LoadSpritePalette(&spritePalette);
         }
+        ApplyGlobalFieldPaletteTint(paletteNum);
     }
     else
 #endif //OW_POKEMON_OBJECT_EVENTS == TRUE && OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
@@ -2119,6 +2120,7 @@ static u32 LoadDynamicFollowerPalette(u32 species, bool32 shiny, bool32 female)
         // Load compressed palette
         LoadCompressedSpritePaletteWithTag(palette, species);
         paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
+        ApplyGlobalFieldPaletteTint(paletteNum);
     }
 
     if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog

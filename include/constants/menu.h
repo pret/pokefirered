@@ -6,6 +6,8 @@
 
 #define MAX_MULTICHOICE_WIDTH 28
 
+#define MULTI_B_PRESSED  127
+
 #define MULTICHOICE_YES_NO                                      0
 #define MULTICHOICE_EEVEELUTIONS                                1
 #define MULTICHOICE_TRAINER_CARD_ICON_TINT                      2

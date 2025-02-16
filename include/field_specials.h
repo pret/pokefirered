@@ -3,6 +3,8 @@
 
 #include "global.h"
 
+extern u16 gScrollableMultichoice_ScrollOffset;
+
 u8 GetLeadMonIndex(void);
 s32 CountDigits(s32 number);
 void TV_PrintIntToStringVar(u8 varidx, s32 number);

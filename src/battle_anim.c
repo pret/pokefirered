@@ -1491,10 +1491,7 @@ static void Cmd_goto(void)
 // As a result, if misused, this function cannot reliably discern between field and contest status and could result in undefined behavior.
 bool8 IsContest(void)
 {
-    if (!gMain.inBattle)
-        return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 #define tBackgroundId   data[0]

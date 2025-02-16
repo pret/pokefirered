@@ -1642,7 +1642,7 @@ u8 ContextNpcGetTextColor(void)
         else
             gfxId = gObjectEvents[gSelectedObjectEvent].graphicsId;
         
-        if (gfxId >= OBJ_EVENT_GFX_MON_BASE)
+        if (gfxId & OBJ_EVENT_MON)
             return GetFollowerTextColor();
 
         if (gfxId >= OBJ_EVENT_GFX_VAR_0)

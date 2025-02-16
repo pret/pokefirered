@@ -49,7 +49,7 @@ u16 LoadCompressedSpriteSheet(const struct CompressedSpriteSheet *src)
 }
 
 // This can be used for either compressed or uncompressed sprite sheets
-u16 LoadCompressedSpriteSheetByTemplate(const struct SpriteTemplate *template, s32 offset)
+u32 LoadCompressedSpriteSheetByTemplate(const struct SpriteTemplate *template, s32 offset)
 {
     struct SpriteTemplate myTemplate;
     struct SpriteFrameImage myImage;
@@ -79,24 +79,21 @@ void LoadCompressedSpriteSheetOverrideBuffer(const struct CompressedSpriteSheet 
     LoadSpriteSheet(&dest);
 }
 
-void LoadCompressedSpritePalette(const struct CompressedSpritePalette *src)
+u32 LoadCompressedSpritePalette(const struct CompressedSpritePalette *src)
 {
-    struct SpritePalette dest;
-
-    LZ77UnCompWram(src->data, gDecompressionBuffer);
-    dest.data = (void *) gDecompressionBuffer;
-    dest.tag = src->tag;
-    LoadSpritePalette(&dest);
+    return LoadCompressedSpritePaletteWithTag(src->data, src->tag);
 }
 
-void LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag)
+u32 LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag)
 {
+    u32 index;
     struct SpritePalette dest;
 
     LZ77UnCompWram(pal, gDecompressionBuffer);
     dest.data = (void *) gDecompressionBuffer;
     dest.tag = tag;
-    LoadSpritePalette(&dest);
+    index = LoadSpritePalette(&dest);
+    return index;
 }
 
 void LoadCompressedSpritePaletteOverrideBuffer(const struct CompressedSpritePalette *src, void *buffer)

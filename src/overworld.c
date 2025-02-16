@@ -1545,6 +1545,8 @@ u8 UpdateTimeOfDay(void)
 // Whether a map type is naturally lit/outside
 bool8 MapHasNaturalLight(u8 mapType)
 {
+    if (!OW_DAY_AND_NIGHT)
+        return FALSE;
     return (mapType == MAP_TYPE_TOWN
          || mapType == MAP_TYPE_CITY
          || mapType == MAP_TYPE_ROUTE

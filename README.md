@@ -42,6 +42,8 @@ Other changes:
  - Gift Pokémon are replaced with Spinda.
  - Items aren't sellable.
  - HMs are deletable without the Move Deleter.
+ - Flash is no longer required in Rock Tunnel.
+ - Old Amber is removed from the game.
  - Trade and happiness evolutions have been replaced with a new "Trade+ Stone", or Sun Stone & Moon Stone in cases where one Pokémon can evolve into multiple others (e.g. Eevee into Espeon or Umbreon). See full list [here](https://github.com/alecwshearer/poke-challenge/blob/master/src/data/pokemon/evolution.h).
  - Tyrogue can evolve using Sun Stone (Hitmonchan), Moon Stone (Hitmonlee), and Trade+ Stone (Hitmontop) in addition to his normal level 20 evolution. You can avoid evolving by pressing B if you want to wait to use a stone.
  - Pokémon that evolve by knowing a move (e.g. Ancient Power) instead evovle at the first level that they can know the move.
@@ -57,7 +59,6 @@ Other changes:
     - 500 Coins: Level 20 Eevee.
  - Once the timer has elapsed, players can see their party's EVs and IVs by holding L and R respectively in the "Pokémon Skills" summary screen.
  - Repel works on all wild Pokémon, regardless of level.
- - Flash is no longer required in Rock Tunnel.
  - Player gets 10x the number of steps in the Safari Zone.
  - Shiny Pokémon odds are increased 10x.
  - Party menu shortcut for giving/taking Exp Shares.
@@ -65,6 +66,7 @@ Other changes:
  - Safari Balls are 53% more effective, which makes them 15% more effective than Ultra Balls.
  - Pewter, Cerulean, and Vermillion Marts sell Revives.
  - Celadon Mart sells Ultra Balls.
+ - All Pokémon that aren't normally catchable in the Safari Zone have a Safari Zone [flee rate](https://bulbapedia.bulbagarden.net/wiki/Kanto_Safari_Zone) of 75 (base 25% chance of fleeing).
  - Some early events are skipped; e.g. the Old Man.
  - Slightly modified wild encounters:
    - Dragonair -> Seadra
@@ -102,7 +104,9 @@ Wild Pokémon levels are scaled based on party Pokémon levels and the level tha
 - Adding the level the wild Pokémon is supposed to be at.
 - Dividing by the number of badges you have plus 1.
 
-#### Example 1
+If you have fewer Pokémon in your party than the number of badges you have divided by 2, the formula will treat the empty party slots with level 2 Pokémon.
+
+#### Example: less than 4 badges
 
 Input:
  - **Number of badges:** 2
@@ -110,9 +114,9 @@ Input:
  - **Level the wild Pokémon is supposed to be at:** 10
 
 Output:
- - **Scaled level:** ⌊(`weighted_team_sum` + `original_wild_level`) / (`badge_count + 1`)⌋ = ⌊((17 + 16) + 10) / 3⌋ = ⌊43 / 3⌋ = 14
+ - **Scaled level:** ⌊(`weighted_team_sum` + `original_wild_level`) / (`badge_count` + 1)⌋ = ⌊((17 + 16) + 10) / 3⌋ = ⌊43 / 3⌋ = 14
 
-#### Example 2
+#### Example: more than 4 badges
 
 Input:
  - **Number of badges:** 5
@@ -120,7 +124,17 @@ Input:
  - **Level the wild Pokémon is supposed to be at:** 14
 
 Output:
- - **Scaled level:** ⌊(`weighted_team_sum` + `original_wild_level`) / (`badge_count + 1`)⌋ = ⌊((24 + 22 + 21 + 20 + 24) + 14) / 6⌋ = ⌊125 / 6⌋ = 20
+ - **Scaled level:** ⌊(`weighted_team_sum` + `original_wild_level`) / (`badge_count` + 1)⌋ = ⌊((24 + 22 + 21 + 20 + 24) + 14) / 6⌋ = ⌊125 / 6⌋ = 20
+
+#### Example: not enough Pokémon in party
+
+Input:
+ - **Number of badges:** 2
+ - **Party Pokémon levels:** 20, 8
+ - **Level the wild Pokémon is supposed to be at:** 6
+
+Output:
+ - **Scaled level:** ⌊(`weighted_team_sum` + `original_wild_level`) / (`badge_count` + 1)⌋ = ⌊((8 + **2**) + 6) / 3⌋ = ⌊16 / 3⌋ = 5
 
 #### Exception for high level Pokémon
 

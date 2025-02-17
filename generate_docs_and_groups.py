@@ -940,18 +940,20 @@ Other changes:
 
 ## Level band / level cap
 
-**TL;DR: Your Pokémon will stop gaining experience if they become too high a level compared to the rest of your team. The game will warn you when you're one level away from this happening.**
+**TL;DR: Your Pokémon will stop gaining experience if they become too high a level compared to the rest of your team. The game will warn you when this is close to happening. The number of Pokémon considered depends on the number of badges you have.**
 
 A 7 level band is in place. A portion of the player's team must be within 7 levels, inclusive, of each other;
-e.g. a range of 30-35 is valid but 30-36 isn’t. The number of Pokémon that must be within the band is equal
-to the number of badges the player has plus 1. For example, the player has 3 badges, they must have 4 Pokémon
-within 7 levels (inclusive) of each other. If the highest leveled Pokémon exceeds the top of the band (also called
-the _level cap_), it will stop gaining experience until it is back within the band. Other party Pokémon holding an
-EXP share will still gain EXP, but the Pokémon outside of the band won’t gain EXP (and the EXP it would have gained
-won’t be distributed to the other party Pokémon).
+e.g. a range of 30-37 is valid but 30-38 isn’t. The number of Pokémon that must be within the band is equal
+to the number of badges the player has plus 1, _with a maximum cutoff of 5_. This means that the 6th Pokémon
+is never taken into account, so one low level Pokémon can be safely carried around for HM use, Pickup, etc.
+
+For example, the player has 3 badges, they must have 4 Pokémon within 7 levels (inclusive) of each other. If the
+highest leveled Pokémon exceeds the top of the band (also called the _level cap_), it will stop gaining experience
+until it is back within the band. Other party Pokémon holding an EXP share will still gain EXP, but the Pokémon
+outside of the band won’t gain EXP (and the EXP it would have gained won’t be distributed to the other party Pokémon).
 
 The game will issue warnings when a Pokémon is near the current level cap, or the cap at the next badge. The latter
-warning can be disabled in the OPTION menu.
+warning can be disabled in the OPTION menu, but this is not advised.
 
 ## Level scaling
 

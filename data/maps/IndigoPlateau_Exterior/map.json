@@ -62,14 +62,5 @@
     }
   ],
   "coord_events": [],
-  "bg_events": [],
-  "heal_locations": [
-    {
-      "id": "HEAL_LOCATION_INDIGO_PLATEAU",
-      "x": 11,
-      "y": 7,
-      "respawn_map": "MAP_INDIGO_PLATEAU_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_LEAGUE_NURSE"
-    }
-  ]
+  "bg_events": []
 }

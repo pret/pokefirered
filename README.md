@@ -25,7 +25,7 @@ Other changes:
  - Start the game with balls, healing items, the Old Rod, 6 Exp Shares, and more.
  - L button maps to A button. In battles, L button auto-fires A and holding R automatically runs away.
  - Gain experience for catching Pokémon.
- - Oak's aides give large sums of money for completing the Pokédex:
+ - Oak's aides give large sums of money for completing the Pokédex. You can find them in the Department Store and their original locations. The rewards are as follows:
    - 500 for 1 unique species.
    - 5k for 20 unique species.
    - 10k for 40 unique species.

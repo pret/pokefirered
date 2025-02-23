@@ -884,8 +884,9 @@ Helpful code links:
 Other changes:
  - Faster movement, animations, and text. Hold B to use normal walking speed.
  - Start the game with balls, healing items, the Old Rod, 6 Exp Shares, and more.
+ - L button maps to A button. In battles, L button auto-fires A and holding R automatically runs away.
  - Gain experience for catching Pokémon.
- - Oak's aides give large sums of money for completing the Pokédex:
+ - Oak's aides give large sums of money for completing the Pokédex. You can find them in the Department Store and their original locations. The rewards are as follows:
    - 500 for 1 unique species.
    - 5k for 20 unique species.
    - 10k for 40 unique species.
@@ -910,7 +911,7 @@ Other changes:
  - Pokémon that evolve by knowing a move (e.g. Ancient Power) instead evovle at the first level that they can know the move.
  - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
  - The PC is accessible from the START menu. Pokémon no longer heal when sent to the PC.
- - Start with a coin case containing 50 coins. Can no longer buy coins at the Game Corner. Earn 50 pity coins when you run out of coins at the slot machines.
+ - Start with a coin case containing 100 coins. Can no longer buy coins at the Game Corner. Earn 50 pity coins when you run out of coins at the slot machines.
  - The following prizes can be won at the Game Corner:
     - 100 Coins each: TMs for weather moves and Trick Room.
     - 150 Coins each: 6 random TMs, chosen based on the game seed.
@@ -959,7 +960,7 @@ warning can be disabled in the OPTION menu, but this is not advised.
 
 ### Wild encounters
 
-**TL;DR: Wild Pokémon levels approach your party's average level as you gain badges. Your 1st and 6th highest level Pokémon are excluded from the calculation.**
+**TL;DR: Wild Pokémon levels approach your party's average level as you gain badges. Your 1st and 6th highest level Pokémon are excluded from the calculation. Your party size must increase as you earn badges to take advantage of this.**
 
 Wild Pokémon levels are scaled based on party Pokémon levels and the level that the wild Pokémon is supposed to be at. This is done by:
 - Summing the levels of your 2nd through 5th highest Pokémon, for as many badges as you have.
@@ -967,7 +968,7 @@ Wild Pokémon levels are scaled based on party Pokémon levels and the level tha
 - Adding the level the wild Pokémon is supposed to be at.
 - Dividing by the number of badges you have plus 1.
 
-If you have fewer Pokémon in your party than the number of badges you have divided by 2, the formula will treat the empty party slots with level 2 Pokémon.
+If you have fewer Pokémon in your party than the number of Pokémon required by the formula, empty party slots will be treated as level 2 Pokémon.
 
 #### Example: less than 4 badges
 
@@ -987,7 +988,7 @@ Input:
  - **Level the wild Pokémon is supposed to be at:** 14
 
 Output:
- - **Scaled level:** ⌊(`weighted_team_sum` + `original_wild_level`) / (`badge_count` + 1)⌋ = ⌊((24 + 22 + 21 + 20 + 24) + 14) / 6⌋ = ⌊125 / 6⌋ = 20
+ - **Scaled level:** (`weighted_team_sum` + `original_wild_level`) / (`badge_count` + 1)⌋ = ⌊((24 + 22 + 21 + 20 + 24) + 14) / 6⌋ = ⌊125 / 6⌋ = 20
 
 #### Example: not enough Pokémon in party
 
@@ -1045,6 +1046,9 @@ For every "map set" (e.g. Route 1, Mt. Moon) in the game:
   encountering the 2 replacements, respectively. The Pokémon that comes first the group will
   be the more likely encounter, and one that comes later will be the less likely one.
 
+Pokémon that are catchable via multiple methods (e.g. fishing and walking) in the same route
+are replaced with the same Pokémon for each method.
+
 #### Map sets
 
 A "map set" is a collection of game locations that use the same Pokémon
@@ -1085,6 +1089,10 @@ of badges the player has (other rates will be adjusted acordingly).
 Trainer Pokémon are deterministically replaced with a single Pokémon from their group.
 
 ### Group list
+
+Pokémon that come first in these group are more likely to be the more common substitution
+in situations where a Pokémon maps to 2 species (i.e. for non-fishing Pokémon with a >20% 
+encounter rate).
 
 ''' + md)
 

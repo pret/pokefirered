@@ -55,6 +55,7 @@ Other changes:
     - 100 Coins each: TMs for weather moves and Trick Room.
     - 150 Coins each: 6 random TMs, chosen based on the game seed.
     - 150 Coins: Level 1 Pikachu that knows Surf and Fly.
+    - 150 Coins: Smeargle (doesn't work in-game, use it in Pokémon Showdown and give it average EVs IVs).
     - 150 Coins: Level 50 Ditto (can only be bought once -- subsequent ones are at level 2).
     - 300 Coins: Level 20 Lapras.
     - 500 Coins: Level 20 Eevee.

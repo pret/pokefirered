@@ -50,7 +50,7 @@ Other changes:
  - Pokémon that evolve by knowing a move (e.g. Ancient Power) instead evovle at the first level that they can know the move.
  - Player finds the Good Rod where the Old Rod used to be, and Super Rod where Good Rod used to be. The Super Rod can also still be found at its original location.
  - The PC is accessible from the START menu. Pokémon no longer heal when sent to the PC.
- - Start with a coin case containing 50 coins. Can no longer buy coins at the Game Corner. Earn 50 pity coins when you run out of coins at the slot machines.
+ - Start with a coin case containing 100 coins. Can no longer buy coins at the Game Corner. Earn 50 pity coins when you run out of coins at the slot machines.
  - The following prizes can be won at the Game Corner:
     - 100 Coins each: TMs for weather moves and Trick Room.
     - 150 Coins each: 6 random TMs, chosen based on the game seed.

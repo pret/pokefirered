@@ -297,10 +297,10 @@ Adamant Nature
             const levelLine = stanza.split('\n')
                 .find(line => line.trim().startsWith('Level:'));
             
-            if (!levelLine) return false;
+            if (!levelLine) return true;
 
             const level = parseInt(levelLine.split(':')[1].trim());
-            return level === 50;
+            return level === 100;
         }
 
         function validateEVs(stanza) {
@@ -367,7 +367,7 @@ Adamant Nature
 
                     // Validate level
                     if (!validateLevel(stanza)) {
-                        errors.push(`${pokemonName} must be explicitly set to Level: 50`);
+                        errors.push(`${pokemonName} must be explicitly set to level 100`);
                     }
 
                     // Validate EVs

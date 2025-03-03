@@ -48,13 +48,27 @@ u32 GameHash() {
   return gGameHash + 7;
 }
 
-u32 MapHashInternal(bool8 fine) {
+bool8 IsStarterGroup(const u16 * group) {
+  if ((group == gGroup_GrassStarter1) ||
+      (group == gGroup_GrassStarter2) ||
+      (group == gGroup_GrassStarter3) ||
+      (group == gGroup_FireStarter1) ||
+      (group == gGroup_FireStarter2) ||
+      (group == gGroup_FireStarter3) ||
+      (group == gGroup_WaterStarter1) ||
+      (group == gGroup_WaterStarter2) ||
+      (group == gGroup_WaterStarter3)) {
+	  return TRUE;
+  }
+  return FALSE;
+}
+
+u32 MapHashFromMapId(bool8 fine, u8 mapGroup, u8 mapNum) {
   static u32 gFineMapHash;
   static u32 gCoarseMapHash;
   static s8 gLastMap;
 
-  struct WarpData* location = &gSaveBlock1Ptr->location;
-  const u16 map = (location->mapGroup << 8) | location->mapNum;
+  const u16 map = (mapGroup << 8) | mapNum;
   u16 coarseMap = map;
 
   if (map != gLastMap) {
@@ -64,7 +78,7 @@ u32 MapHashInternal(bool8 fine) {
     // impacted by both mapRroup and mapNum.
     gFineMapHash = (gFineMapHash << 8) | (gFineMapHash >> 24);
 
-    if (location->mapGroup == 1) {
+    if (mapGroup == 1) {
       // Mt. Moon.
       if (map == MAP_MT_MOON_B1F || map == MAP_MT_MOON_B2F) {
         coarseMap = MAP_MT_MOON_1F;
@@ -128,12 +142,19 @@ u32 MapHashInternal(bool8 fine) {
   return fine ? gFineMapHash : gCoarseMapHash;
 }
 
+u32 MapHashFromPlayerSpot(bool8 fine) {
+  struct WarpData* location = &gSaveBlock1Ptr->location;
+  const u16 map = (location->mapGroup << 8) | location->mapNum;
+
+  return MapHashFromMapId(fine, location->mapGroup, location->mapNum);
+}
+
 u32 MapHash() {
-  return MapHashInternal(TRUE);
+  return MapHashFromPlayerSpot(TRUE);
 }
 
 u32 CoarseMapHash() {
-  return MapHashInternal(FALSE);
+  return MapHashFromPlayerSpot(FALSE);
 }
 
 u16 GetSpeciesFromGroup(u16 species, u16 randInput) {
@@ -150,19 +171,11 @@ u16 GetSpeciesFromGroup(u16 species, u16 randInput) {
 
   group = gMonGroups[species];
 
-  // If this is a starter, just use the game hash.
-  if ((group == gGroup_GrassStarter1) ||
-      (group == gGroup_GrassStarter2) ||
-      (group == gGroup_GrassStarter3) ||
-      (group == gGroup_FireStarter1) ||
-      (group == gGroup_FireStarter2) ||
-      (group == gGroup_FireStarter3) ||
-      (group == gGroup_WaterStarter1) ||
-      (group == gGroup_WaterStarter2) ||
-      (group == gGroup_WaterStarter3)) {
-    // Int divide by 3 to preserve evolution chain.
+  // if this is a starter, just use the game hash.
+  if (IsStarterGroup(group)) {
+    // int divide by 3 to preserve evolution chain.
     //
-    // Don't take route into account, so that rival
+    // don't take route into account, so that rival
     // has the same starter throughout the game.
     combinedHash = HashCombine(GameHash(), Hash(gSpeciesNames[(species + 2) / 3]));
     return IndexInto(group, combinedHash);

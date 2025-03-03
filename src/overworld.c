@@ -1548,7 +1548,7 @@ void SetMainCallback1(MainCallback cb)
     gMain.callback1 = cb;
 }
 
-bool8 sMaybeEndChallengeDisabled = FALSE;
+static bool8 sMaybeEndChallengeDisabled;
 
 void OverworldDisableMaybeEndChallenge(void) {
     sMaybeEndChallengeDisabled = TRUE;

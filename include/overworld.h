@@ -105,7 +105,7 @@ void Overworld_ClearSavedMusic(void);
 bool32 Overworld_MusicCanOverrideMapMusic(u16 song);
 
 void SetFlashLevel(s32 a1);
-u8 Overworld_GetFlashLevel(void);
+u8 GetFlashLevel(void);
 
 void Overworld_SetSavedMusic(u16);
 void Overworld_ChangeMusicToDefault(void);
@@ -205,5 +205,13 @@ void UpdateEscapeWarp(s16 x, s16 y);
 bool8 SetDiveWarpEmerge(u16 x, u16 y);
 bool8 SetDiveWarpDive(u16 x, u16 y);
 u8 UpdateSpritePaletteWithTime(u8 paletteNum);
+
+// Item Description Headers
+enum ItemObtainFlags
+{
+    FLAG_GET_ITEM_OBTAINED,
+    FLAG_SET_ITEM_OBTAINED,
+};
+bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId);
 
 #endif //GUARD_OVERWORLD_H

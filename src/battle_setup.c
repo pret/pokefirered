@@ -474,7 +474,7 @@ static u8 GetBattleTransitionTypeByMap(void)
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (Overworld_GetFlashLevel())
+    if (GetFlashLevel())
         return TRANSITION_TYPE_FLASH;
 
     if (MetatileBehavior_IsSurfable(behavior))

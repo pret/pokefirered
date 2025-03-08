@@ -258,7 +258,7 @@ ThreeIsland_EventScript_BattleBikersScene::
 	trainerbattle_no_intro TRAINER_CUE_BALL_PAXTON, ThreeIsland_Text_PaxtonDefeat
 	msgbox ThreeIsland_Text_PaxtonPostBattle
 	closemessage
-	fadescreen FADE_TO_BLACK
+	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject LOCALID_PAXTON
 	removeobject LOCALID_BIKER1
 	removeobject LOCALID_BIKER2
@@ -266,7 +266,7 @@ ThreeIsland_EventScript_BattleBikersScene::
 	removeobject LOCALID_BIKER4
 	removeobject LOCALID_BIKER5
 	removeobject LOCALID_BIKER6
-	fadescreen FADE_FROM_BLACK
+	fadescreenswapbuffers FADE_FROM_BLACK
 	setvar VAR_MAP_SCENE_THREE_ISLAND, 4
 	releaseall
 	end

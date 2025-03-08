@@ -121,6 +121,7 @@ struct __attribute__((packed, aligned(4))) ObjectEventTemplate
             u8 movementType;
             u16 movementRangeX:4;
             u16 movementRangeY:4;
+            u16 unused:8;
             u16 trainerType;
             u16 trainerRange_berryTreeId;
         };

@@ -4,6 +4,14 @@
 #include "global.h"
 #include "constants/field_weather.h"
 
+
+enum
+{
+    COLOR_MAP_NONE,
+    COLOR_MAP_DARK_CONTRAST,
+    COLOR_MAP_CONTRAST,
+};
+
 #define TAG_WEATHER_START 0x1200
 enum {
     GFXTAG_CLOUD = TAG_WEATHER_START,
@@ -137,6 +145,7 @@ struct Weather
 extern struct Weather *const gWeatherPtr;
 
 void FadeScreen(u8 mode, s8 delay);
+u32 FadeScreenHardware(u32 mode, s32 delay);
 
 void SetSavedWeather(u32);
 u8 GetSavedWeather(void);
@@ -152,6 +161,7 @@ u8 GetCurrentWeather(void);
 void delay(u8, u8, u32);
 void UpdateSpritePaletteWithWeather(u8 palIdx, bool32 allowFog);
 void ResetPreservedPalettesInWeather(void);
+const u8* SetPaletteColorMapType(u8 paletteIndex, u8 colorMapType);
 void PreservePaletteInWeather(u8 palIdx);
 bool32 IsWeatherAlphaBlend(void);
 

@@ -54,14 +54,6 @@ enum {
     MUSIC_DISABLE_KEEP,
 };
 
-struct __attribute__((packed)) TimeBlendSettings {
-  u16 weight:9;
-  u16 time1:3;
-  u16 time0:3;
-  u16 unused:1;
-  u16 altWeight;
-};
-
 
 extern struct WarpData gLastUsedWarp;
 extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
@@ -81,7 +73,7 @@ extern u8 gGlobalFieldTintMode;
 extern u8 gTimeOfDay;
 extern u16 gTimeUpdateCounter;
 
-extern struct TimeBlendSettings currentTimeBlend;
+extern struct TimeBlendSettings gTimeBlend;
 
 extern const struct Coords32 gDirectionToVectors[];
 
@@ -195,7 +187,7 @@ u16 SetLinkWaitingForScript(void);
 void SetMainCallback1(MainCallback cb);
 void CB1_Overworld(void);
 void CB2_ReturnToFieldContinueScript(void);
-u8 UpdateTimeOfDay(void);
+void UpdateTimeOfDay(void);
 bool8 MapHasNaturalLight(u8 mapType);
 void UpdateAltBgPalettes(u16 palettes);
 void UpdatePalettesWithTime(u32);

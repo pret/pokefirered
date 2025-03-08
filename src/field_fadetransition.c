@@ -74,7 +74,10 @@ static void WarpFadeInScreenWithDelay(void)
     {
     case FALSE:
         palette_bg_faded_fill_black();
-        FadeScreen(FADE_FROM_BLACK, 3);
+        // delay changed from 3 to 4
+        // fixes DNS palette issue
+        // e.g. fat man in palette town
+        FadeScreen(FADE_FROM_BLACK, 4);
         palette_bg_faded_fill_black();
         break;
     case TRUE:

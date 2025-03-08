@@ -223,6 +223,9 @@
 #define FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE 8
 #define FRIENDSHIP_EVENT_FAINT_LARGE          9
 
+// Friendship value that the majority of species use. This was changed in Generation 8 to 50.
+#define STANDARD_FRIENDSHIP 70
+
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255
 #define MAX_CONDITION   255

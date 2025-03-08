@@ -251,7 +251,7 @@ s32 WonderNews_Exit(bool32 useCancel)
         }
         break;
     case 5:
-        PrintMysteryGiftOrEReaderTopMenu(gGiftIsFromEReader, useCancel);
+        PrintMysteryGiftOrEReaderHeader(gGiftIsFromEReader, useCancel);
         break;
     case 6:
         MG_DrawCheckerboardPattern();

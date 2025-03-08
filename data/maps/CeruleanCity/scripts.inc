@@ -188,9 +188,9 @@ CeruleanCity_EventScript_GruntDefeated::
 	giveitem_msg CeruleanCity_Text_RecoveredTM28FromGrunt, ITEM_TM28
 	msgbox CeruleanCity_Text_BetterGetMovingBye
 	closemessage
-	fadescreen FADE_TO_BLACK
+	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject LOCALID_GRUNT
-	fadescreen FADE_FROM_BLACK
+	fadescreenswapbuffers FADE_FROM_BLACK
 	setflag FLAG_GOT_TM28_FROM_ROCKET
 	release
 	end

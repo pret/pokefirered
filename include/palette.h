@@ -41,10 +41,20 @@ enum
     FAST_FADE_OUT_TO_BLACK,
 };
 
-struct BlendSettings {
-  u32 blendColor:24;
-  u32 isTint:1;
-  u32 coeff:5;
+struct BlendSettings
+{
+    u32 blendColor:24;
+    u32 isTint:1;
+    u32 coeff:5;
+    u32 unused:2;
+};
+
+struct TimeBlendSettings
+{
+    struct BlendSettings startBlend;
+    struct BlendSettings endBlend;
+    u16 weight;
+    u16 altWeight;
 };
 
 struct PaletteFadeControl

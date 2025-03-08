@@ -446,11 +446,12 @@ void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
 
 void FieldEffectScript_LoadFadedPal(const struct SpritePalette * spritePalette)
 {
-    u8 idx = IndexOfSpritePaletteTag(spritePalette->tag);
-    LoadSpritePalette(spritePalette);
-    if (idx == 0xFF)
-        ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(spritePalette->tag));
-    UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(spritePalette->tag), TRUE);
+    u32 paletteSlot = LoadSpritePalette(spritePalette);
+
+    SetPaletteColorMapType(paletteSlot + 16, COLOR_MAP_DARK_CONTRAST);
+    if (paletteSlot == 0xFF)
+        ApplyGlobalFieldPaletteTint(paletteSlot);
+    UpdateSpritePaletteWithWeather(paletteSlot, TRUE);
 }
 
 void FieldEffectScript_LoadPal(const struct SpritePalette * spritePalette)

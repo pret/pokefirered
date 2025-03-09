@@ -1093,7 +1093,7 @@ static const s8 sFriendshipEventModifiers[][3] =
 
 #define HM_MOVES_END 0xFFFF
 
-static const u16 sHMMoves[] =
+const u16 sHMMoves[] =
 {
     MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH, MOVE_FLASH,
     MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, HM_MOVES_END
@@ -6052,7 +6052,7 @@ bool8 IsMoveHM(u16 move)
 {
     int i = 0;
 
-    if (P_CAN_FORGET_HIDDEN_MOVE)
+    if (P_CAN_FORGET_HIDDEN_MOVE && B_CATCH_SWAP_CHECK_HMS == FALSE)
         return FALSE;
 
     while (sHMMoves[i] != HM_MOVES_END)

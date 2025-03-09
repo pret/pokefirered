@@ -8896,7 +8896,7 @@ static void SpriteCB_AnimSpriteOnTargetSideCentre(struct Sprite *sprite)
 
     if (!sprite->data[0])
     {
-        if (IsAlly(gBattleAnimAttacker, target))
+        if (IsBattlerAlly(gBattleAnimAttacker, target))
         {
             if (IsDoubleBattle())
                 InitSpritePosToAnimAttackersCentre(sprite, FALSE);
@@ -9072,7 +9072,7 @@ static void SpriteCB_DragonEnergyShot(struct Sprite* sprite)
     u8 def1 = gBattleAnimTarget;
     u8 def2 = BATTLE_PARTNER(def1);
 
-    if (!IsDoubleBattle() || IsAlly(gBattleAnimAttacker, gBattleAnimTarget))
+    if (!IsDoubleBattle() || IsBattlerAlly(gBattleAnimAttacker, gBattleAnimTarget))
         y = GetBattlerSpriteCoord(def1, BATTLER_COORD_Y_PIC_OFFSET);
     else
     {
@@ -9172,7 +9172,7 @@ static void SpriteCB_GlacialLance(struct Sprite* sprite)
 
     sprite->data[0] = gBattleAnimArgs[6];
 
-    if (!IsDoubleBattle() || IsAlly(gBattleAnimAttacker, gBattleAnimTarget))
+    if (!IsDoubleBattle() || IsBattlerAlly(gBattleAnimAttacker, gBattleAnimTarget))
     {
         sprite->data[2] = GetBattlerSpriteCoord(def1, BATTLER_COORD_X_2) + gBattleAnimArgs[2]; //Converge on target
         sprite->data[4] = GetBattlerSpriteCoord(def1, BATTLER_COORD_Y_PIC_OFFSET) + gBattleAnimArgs[3];

@@ -391,7 +391,6 @@ enum MoveEffects
     MOVE_EFFECT_SMACK_DOWN,
     MOVE_EFFECT_FLAME_BURST,
     MOVE_EFFECT_FEINT,
-    MOVE_EFFECT_SPECTRAL_THIEF,
     MOVE_EFFECT_V_CREATE,
     MOVE_EFFECT_HAPPY_HOUR,
     MOVE_EFFECT_CORE_ENFORCER,
@@ -580,7 +579,7 @@ enum MoveEffects
 
 #define MOVE_TARGET_SELECTED            0
 #define MOVE_TARGET_DEPENDS             (1 << 0)
-#define MOVE_TARGET_USER_OR_SELECTED    (1 << 1)
+#define MOVE_TARGET_OPPONENT            (1 << 1)
 #define MOVE_TARGET_RANDOM              (1 << 2)
 #define MOVE_TARGET_BOTH                (1 << 3)
 #define MOVE_TARGET_USER                (1 << 4)

@@ -128,7 +128,7 @@ static u8 sRfuKeepAliveTimer;
 
 u8 gTimeOfDay;
 struct TimeBlendSettings gTimeBlend;
-u16 gTimeUpdateCounter; // playTimeVBlanks will eventually overflow, so this is used to update TOD
+s16 gTimeUpdateCounter; // playTimeVBlanks will eventually overflow, so this is used to update TOD
 
 static u8 CountBadgesForOverworldWhiteOutLossCalculation(void);
 static void Overworld_ResetStateAfterWhitingOut(void);
@@ -1630,7 +1630,7 @@ static void OverworldBasic(void)
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();
     // Every minute if no palette fade is active, update TOD blending as needed
-    if (!gPaletteFade.active && --gTimeUpdateCounter <= 0 && ++gTimeUpdateCounter >= (SECONDS_PER_MINUTE * 60 / FakeRtc_GetSecondsRatio()))
+    if (!gPaletteFade.active && --gTimeUpdateCounter <= 0)
     {
         struct TimeBlendSettings cachedBlend = gTimeBlend;
         u32 *bld0 = (u32*)&cachedBlend;

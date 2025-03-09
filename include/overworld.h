@@ -71,7 +71,7 @@ extern u8 gExitStairsMovementDisabled;
 extern u8 gDisableMapMusicChangeOnMapLoad;
 extern u8 gGlobalFieldTintMode;
 extern u8 gTimeOfDay;
-extern u16 gTimeUpdateCounter;
+extern s16 gTimeUpdateCounter;
 
 extern struct TimeBlendSettings gTimeBlend;
 

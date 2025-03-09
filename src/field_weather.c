@@ -717,6 +717,11 @@ void ApplyWeatherColorMapIfIdle_Gradual(u8 colorMapIndex, u8 targetColorMapIndex
 
 void FadeScreen(u8 mode, s8 delay)
 {
+    FadeSelectedPals(mode, delay, PALETTES_ALL);
+}
+
+void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes)
+{
     u32 fadeColor;
     bool8 fadeOut;
     bool8 useWeatherPal;
@@ -765,7 +770,7 @@ void FadeScreen(u8 mode, s8 delay)
         // For cases like that, use fadescreenswapbuffers
         CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_BUFFER_SIZE * 2);
 
-        BeginNormalPaletteFade(PALETTES_ALL, delay, 0, 16, fadeColor);
+        BeginNormalPaletteFade(selectedPalettes, delay, 0, 16, fadeColor);
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_OUT;
     }
     else
@@ -778,81 +783,13 @@ void FadeScreen(u8 mode, s8 delay)
         }
         else if (!QL_IS_PLAYBACK_STATE && MapHasNaturalLight(gMapHeader.mapType))
         {
-            UpdateAltBgPalettes(PALETTES_BG);
-            BeginTimeOfDayPaletteFade(PALETTES_ALL, delay, 16, 0, &gTimeBlend.startBlend, &gTimeBlend.endBlend, gTimeBlend.weight, fadeColor);
+            UpdateAltBgPalettes(selectedPalettes & PALETTES_BG);
+            BeginTimeOfDayPaletteFade(selectedPalettes, delay, 16, 0, &gTimeBlend.startBlend, &gTimeBlend.endBlend, gTimeBlend.weight, fadeColor);
         }
         else
         {
-            BeginNormalPaletteFade(PALETTES_ALL, delay, 16, 0, fadeColor);
-        }
-
-        gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_IN;
-        gWeatherPtr->fadeInFirstFrame = TRUE;
-        gWeatherPtr->fadeInTimer = 0;
-        Weather_SetBlendCoeffs(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
-        gWeatherPtr->readyForInit = TRUE;
-    }
-}
-
-void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes)
-{
-    u32 fadeColor;
-    bool8 fadeOut;
-    bool8 useWeatherPal;
-
-    switch (mode)
-    {
-    case FADE_FROM_BLACK:
-        fadeColor = RGB_BLACK;
-        fadeOut = FALSE;
-        break;
-    case FADE_FROM_WHITE:
-        fadeColor = RGB_WHITEALPHA;
-        fadeOut = FALSE;
-        break;
-    case FADE_TO_BLACK:
-        fadeColor = RGB_BLACK;
-        fadeOut = TRUE;
-        break;
-    case FADE_TO_WHITE:
-        fadeColor = RGB_WHITEALPHA;
-        fadeOut = TRUE;
-        break;
-    default:
-        return;
-    }
-
-    switch (gWeatherPtr->currWeather)
-    {
-    case WEATHER_RAIN:
-    case WEATHER_RAIN_THUNDERSTORM:
-    case WEATHER_DOWNPOUR:
-    case WEATHER_SNOW:
-    case WEATHER_FOG_HORIZONTAL:
-    case WEATHER_SHADE:
-    case WEATHER_DROUGHT:
-        useWeatherPal = TRUE;
-        break;
-    default:
-        useWeatherPal = FALSE;
-        break;
-    }
-
-    if (fadeOut)
-    {
-        if (useWeatherPal)
-            CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
-
-        BeginNormalPaletteFade(selectedPalettes, delay, 0, 16, fadeColor);
-        gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_OUT;
-    }
-    else
-    {
-        gWeatherPtr->fadeDestColor = fadeColor;
-        if (useWeatherPal)
-            gWeatherPtr->fadeScreenCounter = 0;
-        else
             BeginNormalPaletteFade(selectedPalettes, delay, 16, 0, fadeColor);
+        }
 
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_IN;
         gWeatherPtr->fadeInFirstFrame = TRUE;

@@ -375,3 +375,18 @@ DOUBLE_BATTLE_TEST("Intimidate will correctly decrease the attack of the second 
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
     }
 }
+
+SINGLE_BATTLE_TEST("Intimdate does not lose timing after mega evolution and switch out by a hit escape move")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_U_TURN].effect == EFFECT_HIT_ESCAPE);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_MANECTRIC) { Item(ITEM_MANECTITE); }
+        OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_U_TURN, gimmick: GIMMICK_MEGA); SEND_OUT(opponent, 1); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+        ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+    }
+}

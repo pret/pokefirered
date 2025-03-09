@@ -133,7 +133,7 @@ SINGLE_BATTLE_TEST("Shell Bell restores 1/8 HP of damage dealt")
 SINGLE_BATTLE_TEST("Shell Bell doesn't restore HP for damage dealt by a foreseen move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FUTURE_SIGHT].effect == EFFECT_FUTURE_SIGHT);
+        ASSUME(GetMoveEffect(MOVE_FUTURE_SIGHT) == EFFECT_FUTURE_SIGHT);
         PLAYER(SPECIES_WOBBUFFET) { Level(16); Item(ITEM_SHELL_BELL); HP(10); }
         OPPONENT(SPECIES_WOBBUFFET) { Level(16); };
     } WHEN {
@@ -195,6 +195,97 @@ SINGLE_BATTLE_TEST("Shell Bell does not activate on Future Sight if the original
         HP_BAR(player, captureDamage: &healed);
     } THEN {
         EXPECT_MUL_EQ(damage, Q_4_12(-0.25), healed);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Shell Bell heals accumulated damage for spread moves")
+{
+    s16 opponentLeftDamage;
+    s16 opponentRightDamage;
+    s16 playerRightDamage;
+    s16 shellBellHeal;
+
+    const u16 maxHp = 200;
+    const u16 initHp = 1;
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_DISCHARGE].target == MOVE_TARGET_FOES_AND_ALLY);
+        PLAYER(SPECIES_ARIADOS) { MaxHP(maxHp); HP(initHp); Item(ITEM_SHELL_BELL); }
+        PLAYER(SPECIES_WOBBUFFET) {}
+        OPPONENT(SPECIES_GYARADOS) {}
+        OPPONENT(SPECIES_CHANSEY) {}
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_DISCHARGE);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DISCHARGE, playerLeft);
+        HP_BAR(opponentLeft, captureDamage: &opponentLeftDamage);
+        HP_BAR(playerRight, captureDamage: &playerRightDamage);
+        HP_BAR(opponentRight, captureDamage: &opponentRightDamage);
+
+        HP_BAR(playerLeft, captureDamage: &shellBellHeal);
+    } THEN {
+        const s16 totalDamage = opponentLeftDamage
+            + playerRightDamage + opponentRightDamage;
+        EXPECT_EQ(shellBellHeal, -totalDamage / 8);
+        EXPECT_EQ(playerLeft->hp, initHp + (totalDamage / 8));
+    }
+}
+
+SINGLE_BATTLE_TEST("Shell Bell restores 1/8 HP at move end, one strike")
+{
+    const u16 maxHp = 200;
+    u16 hp, opponentHp;
+    u16 hpGainFromDamage, hpGainActual;
+
+    PARAMETRIZE { hp = maxHp; opponentHp = maxHp; }
+    PARAMETRIZE { hp = maxHp - 1; opponentHp = maxHp; }
+    PARAMETRIZE { hp = maxHp / 2; opponentHp = maxHp; }
+    PARAMETRIZE { hp = maxHp; opponentHp = 24; }        // dragon rage only does 24 dmg, only heal 3 HP instead of 5
+    PARAMETRIZE { hp = maxHp - 1; opponentHp = 24; }    // dragon rage only does 24 dmg, only heal 3 HP instead of 5
+    PARAMETRIZE { hp = maxHp / 2; opponentHp = 24; }    // dragon rage only does 24 dmg, only heal 3 HP instead of 5
+    PARAMETRIZE { hp = maxHp; opponentHp = 1; }
+    PARAMETRIZE { hp = maxHp - 1; opponentHp = 1; }
+    PARAMETRIZE { hp = maxHp / 2; opponentHp = 1; }
+
+    hpGainFromDamage = max(1, min(40, opponentHp) / 8);
+    hpGainActual = min(maxHp - hp, hpGainFromDamage);
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_DRAGON_RAGE) == EFFECT_FIXED_DAMAGE_ARG);
+        ASSUME(GetMoveFixedDamage(MOVE_DRAGON_RAGE) == 40);
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(maxHp); HP(hp); Item(ITEM_SHELL_BELL); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(maxHp); HP(opponentHp); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRAGON_RAGE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_RAGE, player);
+        HP_BAR(opponent);
+        if (hp < maxHp) {
+            HP_BAR(player, damage: -hpGainActual);
+        } else {
+            NOT HP_BAR(player);
+        }
+    } THEN {
+        EXPECT_EQ(player->hp, hp + hpGainActual);
+    }
+}
+
+SINGLE_BATTLE_TEST("Shell Bell recovers only 1 damage if the move only did 1 damage")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); Item(ITEM_SHELL_BELL); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); };
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRAGON_RAGE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_RAGE, player);
+        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+        HP_BAR(player);
+
+    } THEN {
+        EXPECT_EQ(player->hp, 2);
     }
 }
 

@@ -1572,4 +1572,7 @@ extern const u8 gText_Speed[];
 extern const u8 gText_AM[];
 extern const u8 gText_PM[];
 
+// Switch Caught Mon into Party
+extern const u8 gText_CannotSendMonToBoxHM[];
+
 #endif //GUARD_STRINGS_H

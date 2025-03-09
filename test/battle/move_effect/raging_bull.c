@@ -41,7 +41,6 @@ SINGLE_BATTLE_TEST("Raging Bull doesn't remove Light Screen, Reflect and Aurora 
     PARAMETRIZE { move = MOVE_REFLECT; }
     PARAMETRIZE { move = MOVE_AURORA_VEIL; }
 
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GASTLY);

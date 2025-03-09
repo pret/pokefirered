@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Water Compaction raises Defense 2 stages when hit by a water type move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
+        ASSUME(GetMoveType(MOVE_WATER_GUN) == TYPE_WATER);
         PLAYER(SPECIES_SANDYGAST) { Ability(ABILITY_WATER_COMPACTION); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -20,8 +20,8 @@ SINGLE_BATTLE_TEST("Water Compaction raises Defense 2 stages when hit by a water
 SINGLE_BATTLE_TEST("Water Compaction raises Defense 2 stages on each hit of a multi-hit Water type move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SURGING_STRIKES].type == TYPE_WATER);
-        ASSUME(gMovesInfo[MOVE_SURGING_STRIKES].strikeCount == 3);
+        ASSUME(GetMoveType(MOVE_SURGING_STRIKES) == TYPE_WATER);
+        ASSUME(GetMoveStrikeCount(MOVE_SURGING_STRIKES) == 3);
         PLAYER(SPECIES_SANDYGAST) { Ability(ABILITY_WATER_COMPACTION); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Water Compaction does not affect damage taken from Water typ
     PARAMETRIZE { ability = ABILITY_SAND_VEIL; }
     PARAMETRIZE { ability = ABILITY_WATER_COMPACTION; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
+        ASSUME(GetMoveType(MOVE_WATER_GUN) == TYPE_WATER);
         PLAYER(SPECIES_SANDYGAST) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

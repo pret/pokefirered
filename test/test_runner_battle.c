@@ -2043,7 +2043,7 @@ s32 MoveGetTarget(s32 battlerId, u32 moveId, struct MoveContext *ctx, u32 source
         {
             target = BATTLE_OPPOSITE(battlerId);
         }
-        else if (move->target == MOVE_TARGET_SELECTED)
+        else if (move->target == MOVE_TARGET_SELECTED || move->target == MOVE_TARGET_OPPONENT)
         {
             // In AI Doubles not specified target allows any target for EXPECT_MOVE.
             if (GetBattleTest()->type != BATTLE_TEST_AI_DOUBLES)

@@ -35,7 +35,7 @@ typedef s32 (*AiScoreFunc)(u32, u32, u32, s32);
 #define POWERFUL_STATUS_MOVE     10 // Moves with this score will be chosen over a move that faints target
 #define NO_DAMAGE_OR_FAILS      -20 // Move fails or does no damage
 
-// Scores given in AI_CalcMoveEffectScore
+// Scores given in AI_CalcMoveEffectScore and AI_CalcHoldEffectMoveScore
 #define NO_INCREASE      0
 #define WEAK_EFFECT      1
 #define DECENT_EFFECT    2

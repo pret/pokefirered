@@ -45,7 +45,7 @@ SINGLE_BATTLE_TEST("Snow Cloak increases evasion during snow")
 {
     PASSES_RANDOMLY(4, 5, RNG_ACCURACY);
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_POUND].accuracy == 100);
+        ASSUME(GetMoveAccuracy(MOVE_POUND) == 100);
         PLAYER(SPECIES_GLACEON) { Ability(ABILITY_SNOW_CLOAK); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

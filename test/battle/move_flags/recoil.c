@@ -83,3 +83,22 @@ SINGLE_BATTLE_TEST("Flare Blitz deals 33% of recoil damage to the user and can b
         EXPECT_MUL_EQ(directDamage, UQ_4_12(0.33), recoilDamage);
     }
 }
+
+SINGLE_BATTLE_TEST("Flare Blitz is absorbed by Flash Fire and no recoil damage is dealt")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_FLARE_BLITZ].recoil > 0);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_VULPIX) { Ability(ABILITY_FLASH_FIRE); };
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_TACKLE); MOVE(player, MOVE_FLARE_BLITZ); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        HP_BAR(player);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_FLARE_BLITZ, player);
+            HP_BAR(opponent);
+            HP_BAR(player);
+        }
+    }
+}

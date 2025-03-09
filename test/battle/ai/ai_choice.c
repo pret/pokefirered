@@ -24,6 +24,8 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon switch out after using a status move onc
         PARAMETRIZE { ability = ABILITY_KLUTZ;   heldItem = choiceItems[j]; }
     }
 
+    PASSES_RANDOMLY(SHOULD_SWITCH_CHOICE_LOCKED_PERCENTAGE, 100, RNG_AI_SWITCH_CHOICE_LOCKED);
+
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_YAWN) == DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveEffect(MOVE_YAWN) == EFFECT_YAWN);

@@ -6,14 +6,14 @@
 /*
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_X].effect == EFFECT_EVASION_UP_2);
+    ASSUME(GetMoveEffect(MOVE_X) == EFFECT_EVASION_UP_2);
 }
 
 SINGLE_BATTLE_TEST("Double Team raises Evasion by 1 stage")
 {
-    PASSES_RANDOMLY(gMovesInfo[MOVE_SCRATCH].accuracy * 3 / 5, 100, RNG_ACCURACY);
+    PASSES_RANDOMLY(GetMoveAccuracy(MOVE_SCRATCH) * 3 / 5, 100, RNG_ACCURACY);
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SCRATCH].accuracy == 100);
+        ASSUME(GetMoveAccuracy(MOVE_SCRATCH) == 100);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

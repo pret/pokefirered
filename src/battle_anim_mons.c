@@ -802,18 +802,6 @@ bool32 InitSpritePosToAnimBattler(u32 animBattlerId, struct Sprite *sprite, bool
     return TRUE;
 }
 
-u8 GetBattlerAtPosition(u8 position)
-{
-    u8 i;
-
-    for (i = 0; i < gBattlersCount; i++)
-    {
-        if (GetBattlerPosition(i) == position)
-            break;
-    }
-    return i;
-}
-
 bool8 IsBattlerSpritePresent(u8 battlerId)
 {
     if (IsContest())

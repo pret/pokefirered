@@ -174,7 +174,7 @@ SINGLE_BATTLE_TEST("Keen Eye & Gen9+ Illuminate don't prevent Spectral Thief fro
 
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_HONE_CLAWS) == EFFECT_ATTACK_ACCURACY_UP);
-        ASSUME(MoveHasAdditionalEffect(MOVE_SPECTRAL_THIEF, MOVE_EFFECT_SPECTRAL_THIEF) == TRUE);
+        ASSUME(GetMoveEffect(MOVE_SPECTRAL_THIEF) == EFFECT_SPECTRAL_THIEF);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Ability(ability); }
     } WHEN {
@@ -191,8 +191,8 @@ SINGLE_BATTLE_TEST("Keen Eye & Gen9+ Illuminate don't prevent Spectral Thief fro
             MESSAGE("The opposing Staryu's Attack rose!");
             MESSAGE("The opposing Staryu's accuracy rose!");
         }
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, player);
         MESSAGE("Wobbuffet stole the target's boosted stats!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, player);
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_ACC], DEFAULT_STAT_STAGE);
     }

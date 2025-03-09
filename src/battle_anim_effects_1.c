@@ -4022,7 +4022,7 @@ static const union AffineAnimCmd *const sAffineAnims_TeraStarstormBeamRing[] =
     sAffineAnim_TeraStarstormBeamRing,
 };
 
-const struct SpriteTemplate gTeraStarstormBeamSpriteTemplate = 
+const struct SpriteTemplate gTeraStarstormBeamSpriteTemplate =
 {
     .tileTag = ANIM_TAG_STARSTORM,
     .paletteTag = ANIM_TAG_STARSTORM,
@@ -4170,7 +4170,7 @@ void AnimTranslateLinearSingleSineWave(struct Sprite *sprite)
 
     sprite->data[5] = gBattleAnimArgs[5];
     InitAnimArcTranslation(sprite);
-    if (GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
+    if (IsBattlerAlly(gBattleAnimAttacker, gBattleAnimTarget))
         sprite->data[0] = 1;
     else
         sprite->data[0] = 0;
@@ -6845,10 +6845,12 @@ static void TrySwapWishBattlerIds(u32 battlerAtk, u32 battlerPartner)
     // if used future sight on opposing side, properly track who used it
     if (gSideStatuses[oppSide] & SIDE_STATUS_FUTUREATTACK)
     {
+        u32 battlerAtkSide = GetBattlerSide(battlerAtk);
         for (i = 0; i < gBattlersCount; i++)
         {
-            if (IsAlly(i,battlerAtk))
+            if (battlerAtkSide == GetBattlerSide(i))
                 continue;   // only on opposing side
+
             if (gWishFutureKnock.futureSightBattlerIndex[i] == battlerAtk)
             {
                 // if target was attacked with future sight from us, now they'll be the partner slot

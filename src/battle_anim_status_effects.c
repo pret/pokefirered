@@ -403,7 +403,7 @@ void AnimTask_CentredFrozenIceCube(u8 taskId)
     u8 battler1 = gBattleAnimTarget;
     u8 battler2 = BATTLE_PARTNER(battler1);
 
-    if (!IsDoubleBattle() || IsAlly(gBattleAnimAttacker, gBattleAnimTarget))
+    if (!IsDoubleBattle() || IsBattlerAlly(gBattleAnimAttacker, gBattleAnimTarget))
     {
         x = GetBattlerSpriteCoord(battler1, BATTLER_COORD_X_2);
         y = GetBattlerSpriteCoord(battler1, BATTLER_COORD_Y_PIC_OFFSET);

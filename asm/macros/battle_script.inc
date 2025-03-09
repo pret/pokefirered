@@ -1277,8 +1277,9 @@
 	.byte 0xef
 	.endm
 
-	.macro givecaughtmon
+	.macro givecaughtmon passInstr:req
 	.byte 0xf0
+	.4byte \passInstr
 	.endm
 
 	.macro trysetcaughtmondexflags failInstr:req
@@ -1290,9 +1291,8 @@
 	.byte 0xf2
 	.endm
 
-	.macro trygivecaughtmonnick successInstr:req
+	.macro trygivecaughtmonnick
 	.byte 0xf3
-	.4byte \successInstr
 	.endm
 
 	.macro subattackerhpbydmg
@@ -1641,8 +1641,8 @@
 	callnative BS_TryTriggerStatusForm
 	.endm
 
-	.macro setphotongeysercategory
-	callnative BS_SetPhotonGeyserCategory
+	.macro setdynamicmovecategory
+	callnative BS_SetDynamicMoveCategory
 	.endm
 
 	.macro tryupperhand failInstr:req
@@ -1785,6 +1785,15 @@
 
 	.macro removeterrain
 	callnative BS_RemoveTerrain
+	.endm
+
+	.macro tryspectralthiefsteal jumpInstr:req
+	callnative BS_TrySpectralThiefSteal
+	.4byte \jumpInstr
+	.endm
+
+	.macro spectralthiefprintstats
+	callnative BS_SpectralThiefPrintStats
 	.endm
 
 	.macro setmoveresultflags flags:req
@@ -2103,10 +2112,6 @@
 	various \battler, VARIOUS_SET_POWDER
 	.endm
 
-	.macro spectralthiefprintstats
-	various BS_ATTACKER, VARIOUS_SPECTRAL_THIEF
-	.endm
-
 	.macro bringdownairbornebattler battler:req
 	various \battler, VARIOUS_GRAVITY_ON_AIRBORNE_MONS
 	.endm
@@ -2363,6 +2368,11 @@
 	various \battler, VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM
 	.endm
 
+@ various remaining from pokefirered
+	.macro getbattlersforrecall
+	various BS_ATTACKER, VARIOUS_GET_BATTLERS_FOR_RECALL
+	.endm
+
 	.macro swapsidestatuses
 	callnative BS_CourtChangeSwapSideStatuses
 	.endm
@@ -2371,10 +2381,9 @@
 	callnative BS_SwapStats
 	.byte \stat
 	.endm
-
-@ various remaining from pokefirered
-	.macro getbattlersforrecall
-	various BS_ATTACKER, VARIOUS_GET_BATTLERS_FOR_RECALL
+    
+	.macro restoresavedmove
+	callnative BS_RestoreSavedMove
 	.endm
 
 @ helpful macros

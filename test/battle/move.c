@@ -134,42 +134,15 @@ DOUBLE_BATTLE_TEST("Turn order is determined randomly if priority and Speed tie 
     }
 }
 
-SINGLE_BATTLE_TEST("Critical hits occur at a 1/24 rate")
-{
-    PASSES_RANDOMLY(1, 24, RNG_CRITICAL_HIT);
-    GIVEN {
-        ASSUME(B_CRIT_CHANCE >= GEN_7);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_SCRATCH); }
-    } SCENE {
-        MESSAGE("A critical hit!");
-    }
-}
-
-SINGLE_BATTLE_TEST("Slash's critical hits occur at a 1/8 rate")
-{
-    PASSES_RANDOMLY(1, 8, RNG_CRITICAL_HIT);
-    GIVEN {
-        ASSUME(B_CRIT_CHANCE >= GEN_7);
-        ASSUME(GetMoveCriticalHitStage(MOVE_SLASH) == 1);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(player, MOVE_SLASH); }
-    } SCENE {
-        MESSAGE("A critical hit!");
-    }
-}
-
-SINGLE_BATTLE_TEST("Critical hits deal 50% more damage", s16 damage)
+SINGLE_BATTLE_TEST("Critical hits deal 100% (Gen 1-5) or 50% (Gen 6+) more damage", s16 damage)
 {
     bool32 criticalHit;
-    PARAMETRIZE { criticalHit = FALSE; }
-    PARAMETRIZE { criticalHit = TRUE; }
+    u32 genConfig;
+    PARAMETRIZE { criticalHit = FALSE; genConfig = GEN_5; }
+    PARAMETRIZE { criticalHit = TRUE;  genConfig = GEN_5; }
+    PARAMETRIZE { criticalHit = TRUE;  genConfig = GEN_6; }
     GIVEN {
-        ASSUME(B_CRIT_MULTIPLIER >= GEN_6);
+        WITH_CONFIG(GEN_CONFIG_CRIT_MULTIPLIER, genConfig);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -177,7 +150,8 @@ SINGLE_BATTLE_TEST("Critical hits deal 50% more damage", s16 damage)
     } SCENE {
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {
-        EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.5), results[1].damage);
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(2.0), results[1].damage);
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.5), results[2].damage);
     }
 }
 

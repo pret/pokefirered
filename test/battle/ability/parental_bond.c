@@ -131,12 +131,15 @@ SINGLE_BATTLE_TEST("Parental Bond-converted moves only hit once on Lightning Rod
     }
 }
 
-SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit twice 35% of the time")
+SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit twice 37.5/35% of the time")
 {
-    PASSES_RANDOMLY(35, 100, RNG_HITS);
+    u32 genConfig, passes, trials;
+    PARAMETRIZE { genConfig = GEN_4; passes = 3; trials = 8; }  // 37.5%
+    PARAMETRIZE { genConfig = GEN_5; passes = 7; trials = 20; } // 35%
+    PASSES_RANDOMLY(passes, trials, RNG_HITS);
 
     GIVEN {
-        ASSUME(B_MULTI_HIT_CHANCE >= GEN_5);
+        WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveEffect(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
@@ -157,12 +160,15 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
     }
 }
 
-SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit thrice 35% of the time")
+SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit thrice 37.5/35% of the time")
 {
-    PASSES_RANDOMLY(35, 100, RNG_HITS);
+    u32 genConfig, passes, trials;
+    PARAMETRIZE { genConfig = GEN_4; passes = 3; trials = 8; }  // 37.5%
+    PARAMETRIZE { genConfig = GEN_5; passes = 7; trials = 20; } // 35%
+    PASSES_RANDOMLY(passes, trials, RNG_HITS);
 
     GIVEN {
-        ASSUME(B_MULTI_HIT_CHANCE >= GEN_5);
+        WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveEffect(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
@@ -184,12 +190,15 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
     }
 }
 
-SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit four times 15% of the time")
+SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit four times 12.5/15% of the time")
 {
-    PASSES_RANDOMLY(15, 100, RNG_HITS);
+    u32 genConfig, passes, trials;
+    PARAMETRIZE { genConfig = GEN_4; passes = 1; trials = 8; }  // 12.5%
+    PARAMETRIZE { genConfig = GEN_5; passes = 3; trials = 20; } // 15%
+    PASSES_RANDOMLY(passes, trials, RNG_HITS);
 
     GIVEN {
-        ASSUME(B_MULTI_HIT_CHANCE >= GEN_5);
+        WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveEffect(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
@@ -212,12 +221,15 @@ SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they stil
     }
 }
 
-SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit five times 15% of the time")
+SINGLE_BATTLE_TEST("Parental Bond has no affect on multi hit moves and they still hit five times 12.5/15% of the time")
 {
-    PASSES_RANDOMLY(15, 100, RNG_HITS);
+    u32 genConfig, passes, trials;
+    PARAMETRIZE { genConfig = GEN_4; passes = 1; trials = 8; }  // 12.5%
+    PARAMETRIZE { genConfig = GEN_5; passes = 3; trials = 20; } // 15%
+    PASSES_RANDOMLY(passes, trials, RNG_HITS);
 
     GIVEN {
-        ASSUME(B_MULTI_HIT_CHANCE >= GEN_5);
+        WITH_CONFIG(GEN_CONFIG_MULTI_HIT_CHANCE, genConfig);
         ASSUME(GetMoveCategory(MOVE_COMET_PUNCH) != DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveEffect(MOVE_COMET_PUNCH) == EFFECT_MULTI_HIT);
         PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }

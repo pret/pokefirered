@@ -11,9 +11,12 @@
 #include "reshow_battle_screen.h"
 
 static void CB2_ReshowBattleScreenAfterMenu(void);
+static void CB2_ReshowBlankBattleScreenAfterMenu(void);
 static void ReshowBattleScreen_TurnOnDisplay(void);
+static void ClearBattleBgCntBaseBlocks(void);
 static bool8 LoadBattlerSpriteGfx(u8 battlerId);
 static void CreateHealthboxSprite(u8 battlerId);
+static void CreateCaughtMonSprite(void);
 
 void ReshowBattleScreenDummy(void)
 {
@@ -188,6 +191,100 @@ static void ReshowBattleScreen_TurnOnDisplay(void)
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_OBJWIN_ON);
 }
 
+static void ClearBattleBgCntBaseBlocks(void)
+{
+    vBgCnt *regBgcnt1, *regBgcnt2;
+
+    regBgcnt1 = (vBgCnt *)(&REG_BG1CNT);
+    regBgcnt1->charBaseBlock = 0;
+
+    regBgcnt2 = (vBgCnt *)(&REG_BG2CNT);
+    regBgcnt2->charBaseBlock = 0;
+}
+
+void ReshowBlankBattleScreenAfterMenu(void)
+{
+    gPaletteFade.bufferTransferDisabled = 1;
+    SetHBlankCallback(NULL);
+    SetVBlankCallback(NULL);
+    SetGpuReg(REG_OFFSET_MOSAIC, 0);
+    gBattleScripting.reshowMainState = 0;
+    gBattleScripting.reshowHelperState = 0;
+    SetMainCallback2(CB2_ReshowBlankBattleScreenAfterMenu);
+}
+
+static void CB2_ReshowBlankBattleScreenAfterMenu(void)
+{
+    switch (gBattleScripting.reshowMainState)
+    {
+    case 0:
+        ScanlineEffect_Clear();
+        BattleInitBgsAndWindows();
+        SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
+        SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+        ShowBg(0);
+        ShowBg(1);
+        ShowBg(2);
+        ShowBg(3);
+        ResetPaletteFade();
+        gBattle_BG0_X = 0;
+        gBattle_BG0_Y = 0;
+        gBattle_BG1_X = 0;
+        gBattle_BG1_Y = 0;
+        gBattle_BG2_X = 0;
+        gBattle_BG2_Y = 0;
+        gBattle_BG3_X = 255;
+        gBattle_BG3_Y = 0;
+        break;
+    case 1:
+        CpuFastFill(0, (void *)(VRAM), VRAM_SIZE);
+        break;
+    case 2:
+        LoadBattleTextboxAndBackground();
+        break;
+    case 3:
+        ResetSpriteData();
+        break;
+    case 4:
+        FreeAllSpritePalettes();
+        gReservedSpritePaletteCount = MAX_BATTLERS_COUNT;
+        break;
+    case 5:
+        ClearSpritesHealthboxAnimData();
+        break;
+    case 6:
+        if (!LoadBattlerSpriteGfx(0))
+            gBattleScripting.reshowMainState--;
+        break;
+    case 7:
+        if (!LoadBattlerSpriteGfx(1))
+            gBattleScripting.reshowMainState--;
+        break;
+    case 8:
+        if (!LoadBattlerSpriteGfx(2))
+            gBattleScripting.reshowMainState--;
+        break;
+    case 9:
+        if (!LoadBattlerSpriteGfx(3))
+            gBattleScripting.reshowMainState--;
+        break;
+    case 10:
+        if (gBattleScripting.monCaught) 
+            CreateCaughtMonSprite(); // displays the caught mon for the switch into party feature
+        break;
+    default:
+        SetVBlankCallback(VBlankCB_Battle);
+        ClearBattleBgCntBaseBlocks();
+        BeginHardwarePaletteFade(0xFF, 0, 0x10, 0, 1);
+        gPaletteFade.bufferTransferDisabled = 0;
+        SetMainCallback2(BattleMainCB2);
+        BattleInterfaceSetWindowPals();
+        break;
+    }
+
+    gBattleScripting.reshowMainState++;
+}
+
 static bool8 LoadBattlerSpriteGfx(u8 battler)
 {
     if (battler < gBattlersCount)
@@ -312,4 +409,18 @@ static void CreateHealthboxSprite(u8 battler)
                 SetHealthboxSpriteInvisible(healthboxSpriteId);
         }
     }
+}
+
+static void CreateCaughtMonSprite(void)
+{
+    SetMultiuseSpriteTemplateToPokemon(GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_SPECIES), GetBattlerPosition(gBattlerTarget));
+    gBattlerSpriteIds[gBattlerTarget] = CreateSprite(&gMultiuseSpriteTemplate, DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, GetBattlerSpriteSubpriority(gBattlerTarget));
+    gSprites[gBattlerSpriteIds[gBattlerTarget]].oam.paletteNum = gBattlerTarget;
+    gSprites[gBattlerSpriteIds[gBattlerTarget]].callback = SpriteCallbackDummy;
+    gSprites[gBattlerSpriteIds[gBattlerTarget]].data[0] = gBattlerTarget;
+    gSprites[gBattlerSpriteIds[gBattlerTarget]].data[2] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_SPECIES);
+
+    StartSpriteAnim(&gSprites[gBattlerSpriteIds[gBattlerTarget]], 0);
+
+    gSprites[gBattlerSpriteIds[gBattlerTarget]].invisible = FALSE;
 }

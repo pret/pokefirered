@@ -727,26 +727,28 @@
 #define STRINGID_SUPEREFFECTIVETWOFOES                725
 #define STRINGID_NOTVERYEFFECTIVETWOFOES              726
 #define STRINGID_ITDOESNTAFFECTTWOFOES                727
+#define STRINGID_SENDCAUGHTMONPARTYORBOX              728
+#define STRINGID_PKMNSENTTOPCAFTERCATCH               729
 
 // pokefirered specific
-#define STRINGID_OLDMANUSEDITEM                       728
-#define STRINGID_GOTCHAPKMNCAUGHTOLDMAN               729
-#define STRINGID_THREWROCK                            730
-#define STRINGID_THREWBAIT                            731
-#define STRINGID_PKMNANGRY                            732
-#define STRINGID_PKMNEATING                           733
-#define STRINGID_PKMNTRANSFERREDBILLSPC               734
-#define STRINGID_PKMNBOXBILLSPCFULL                   735
-#define STRINGID_POKEDUDEUSED                         736
-#define STRINGID_MONTOOSCAREDTOMOVE                   737
-#define STRINGID_GHOSTGETOUTGETOUT                    738
-#define STRINGID_SILPHSCOPEUNVEILED                   739
-#define STRINGID_GHOSTWASMAROWAK                      740
-#define STRINGID_TRAINER1MON1COMEBACK                 741
-#define STRINGID_TRAINER1MON2COMEBACK                 742
-#define STRINGID_TRAINER1MON1AND2COMEBACK             743
+#define STRINGID_OLDMANUSEDITEM                       730
+#define STRINGID_GOTCHAPKMNCAUGHTOLDMAN               731
+#define STRINGID_THREWROCK                            732
+#define STRINGID_THREWBAIT                            733
+#define STRINGID_PKMNANGRY                            734
+#define STRINGID_PKMNEATING                           735
+#define STRINGID_PKMNTRANSFERREDBILLSPC               736
+#define STRINGID_PKMNBOXBILLSPCFULL                   737
+#define STRINGID_POKEDUDEUSED                         738
+#define STRINGID_MONTOOSCAREDTOMOVE                   739
+#define STRINGID_GHOSTGETOUTGETOUT                    740
+#define STRINGID_SILPHSCOPEUNVEILED                   741
+#define STRINGID_GHOSTWASMAROWAK                      742
+#define STRINGID_TRAINER1MON1COMEBACK                 743
+#define STRINGID_TRAINER1MON2COMEBACK                 744
+#define STRINGID_TRAINER1MON1AND2COMEBACK             745
 
-#define BATTLESTRINGS_COUNT                           744
+#define BATTLESTRINGS_COUNT                           746
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -921,10 +923,12 @@
 #define B_MSG_WEAKEN_FIRE     1
 
 // gCaughtMonStringIds
-#define B_MSG_SENT_SOMEONES_PC  0
-#define B_MSG_SENT_BILLS_PC     1
-#define B_MSG_SOMEONES_BOX_FULL 2
-#define B_MSG_BILLS_BOX_FULL    3
+#define B_MSG_NO_MESSSAGE_SKIP   0
+#define B_MSG_SENT_SOMEONES_PC   1
+#define B_MSG_SENT_BILLS_PC      2
+#define B_MSG_SOMEONES_BOX_FULL  3
+#define B_MSG_BILLS_BOX_FULL     4
+#define B_MSG_SWAPPED_INTO_PARTY 5
 
 // gPrimalWeatherBlocksStringIds
 #define B_MSG_PRIMAL_WEATHER_FIZZLED_BY_RAIN    0

@@ -7,8 +7,8 @@ DOUBLE_BATTLE_TEST("Aroma Veil protects the Pokémon's side from Taunt")
     PARAMETRIZE { moveTarget = playerLeft; }
     PARAMETRIZE { moveTarget = playerRight; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TAUNT].effect == EFFECT_TAUNT);
-        ASSUME(gMovesInfo[MOVE_HARDEN].category == DAMAGE_CATEGORY_STATUS);
+        ASSUME(GetMoveEffect(MOVE_TAUNT) == EFFECT_TAUNT);
+        ASSUME(GetMoveCategory(MOVE_HARDEN) == DAMAGE_CATEGORY_STATUS);
         PLAYER(SPECIES_AROMATISSE) { Ability(ABILITY_AROMA_VEIL); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -28,8 +28,8 @@ DOUBLE_BATTLE_TEST("Aroma Veil protects the Pokémon's side from Torment")
     PARAMETRIZE { moveTarget = playerLeft; }
     PARAMETRIZE { moveTarget = playerRight; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TORMENT].effect == EFFECT_TORMENT);
-        ASSUME(gMovesInfo[MOVE_HARDEN].category == DAMAGE_CATEGORY_STATUS);
+        ASSUME(GetMoveEffect(MOVE_TORMENT) == EFFECT_TORMENT);
+        ASSUME(GetMoveCategory(MOVE_HARDEN) == DAMAGE_CATEGORY_STATUS);
         PLAYER(SPECIES_AROMATISSE) { Ability(ABILITY_AROMA_VEIL); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -51,8 +51,8 @@ DOUBLE_BATTLE_TEST("Aroma Veil protects the Pokémon's side from Encore")
     PARAMETRIZE { moveTarget = playerLeft; }
     PARAMETRIZE { moveTarget = playerRight; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ENCORE].effect == EFFECT_ENCORE);
-        ASSUME(gMovesInfo[MOVE_HARDEN].category == DAMAGE_CATEGORY_STATUS);
+        ASSUME(GetMoveEffect(MOVE_ENCORE) == EFFECT_ENCORE);
+        ASSUME(GetMoveCategory(MOVE_HARDEN) == DAMAGE_CATEGORY_STATUS);
         PLAYER(SPECIES_AROMATISSE) { Ability(ABILITY_AROMA_VEIL); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -74,8 +74,8 @@ DOUBLE_BATTLE_TEST("Aroma Veil protects the Pokémon's side from Disable")
     PARAMETRIZE { moveTarget = playerLeft; }
     PARAMETRIZE { moveTarget = playerRight; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DISABLE].effect == EFFECT_DISABLE);
-        ASSUME(gMovesInfo[MOVE_HARDEN].category == DAMAGE_CATEGORY_STATUS);
+        ASSUME(GetMoveEffect(MOVE_DISABLE) == EFFECT_DISABLE);
+        ASSUME(GetMoveCategory(MOVE_HARDEN) == DAMAGE_CATEGORY_STATUS);
         PLAYER(SPECIES_AROMATISSE) { Ability(ABILITY_AROMA_VEIL); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -94,7 +94,7 @@ DOUBLE_BATTLE_TEST("Aroma Veil protects the Pokémon's side from Disable")
 DOUBLE_BATTLE_TEST("Aroma Veil protects the Pokémon's side from Cursed Body")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_PECK].makesContact);
+        ASSUME(MoveMakesContact(MOVE_PECK));
         PLAYER(SPECIES_AROMATISSE) { Ability(ABILITY_AROMA_VEIL); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_JELLICENT) { Ability(ABILITY_CURSED_BODY); }
@@ -118,8 +118,8 @@ DOUBLE_BATTLE_TEST("Aroma Veil protects the Pokémon's side from Heal Block")
     PARAMETRIZE { moveTarget = playerLeft; }
     PARAMETRIZE { moveTarget = playerRight; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_HEAL_BLOCK].effect == EFFECT_HEAL_BLOCK);
-        ASSUME(gMovesInfo[MOVE_RECOVER].effect == EFFECT_RESTORE_HP);
+        ASSUME(GetMoveEffect(MOVE_HEAL_BLOCK) == EFFECT_HEAL_BLOCK);
+        ASSUME(GetMoveEffect(MOVE_RECOVER) == EFFECT_RESTORE_HP);
         PLAYER(SPECIES_AROMATISSE) { Ability(ABILITY_AROMA_VEIL); HP(1); }
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -139,7 +139,7 @@ DOUBLE_BATTLE_TEST("Aroma Veil protects the Pokémon's side from Infatuation")
     PARAMETRIZE { moveTarget = playerLeft; }
     PARAMETRIZE { moveTarget = playerRight; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_ATTRACT].effect == EFFECT_ATTRACT);
+        ASSUME(GetMoveEffect(MOVE_ATTRACT) == EFFECT_ATTRACT);
         PLAYER(SPECIES_AROMATISSE) { Ability(ABILITY_AROMA_VEIL); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -156,7 +156,7 @@ DOUBLE_BATTLE_TEST("Aroma Veil protects the Pokémon's side from Infatuation")
 DOUBLE_BATTLE_TEST("Aroma Veil does not protect the Pokémon's side from Imprison")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_IMPRISON].effect == EFFECT_IMPRISON);
+        ASSUME(GetMoveEffect(MOVE_IMPRISON) == EFFECT_IMPRISON);
         PLAYER(SPECIES_AROMATISSE) { Ability(ABILITY_AROMA_VEIL); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) {Moves(MOVE_IMPRISON, MOVE_CELEBRATE); }
@@ -180,7 +180,7 @@ DOUBLE_BATTLE_TEST("Aroma Veil prevents Psychic Noise's effect")
     PARAMETRIZE { moveTarget = playerLeft; }
     PARAMETRIZE { moveTarget = playerRight; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_PSYCHIC_NOISE].additionalEffects[0].moveEffect == MOVE_EFFECT_PSYCHIC_NOISE);
+        ASSUME(GetMoveAdditionalEffectById(MOVE_PSYCHIC_NOISE, 0)->moveEffect == MOVE_EFFECT_PSYCHIC_NOISE);
         PLAYER(SPECIES_AROMATISSE) { Ability(ABILITY_AROMA_VEIL); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

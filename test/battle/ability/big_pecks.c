@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Big Pecks prevents Defense stage reduction from moves")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_LEER].effect == EFFECT_DEFENSE_DOWN);
+        ASSUME(GetMoveEffect(MOVE_LEER) == EFFECT_DEFENSE_DOWN);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PIDGEY) { Ability(ABILITY_BIG_PECKS); }
     } WHEN {
@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Big Pecks prevents Defense stage reduction from moves")
 SINGLE_BATTLE_TEST("Big Pecks is ignored by Mold Breaker")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_LEER].effect == EFFECT_DEFENSE_DOWN);
+        ASSUME(GetMoveEffect(MOVE_LEER) == EFFECT_DEFENSE_DOWN);
         PLAYER(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); }
         OPPONENT(SPECIES_PIDGEY) { Ability(ABILITY_BIG_PECKS); }
     } WHEN {
@@ -56,8 +56,8 @@ SINGLE_BATTLE_TEST("Big Pecks doesn't prevent Defense stage reduction from moves
 SINGLE_BATTLE_TEST("Big Pecks doesn't prevent Topsy-Turvy")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_HARDEN].effect == EFFECT_DEFENSE_UP);
-        ASSUME(gMovesInfo[MOVE_TOPSY_TURVY].effect == EFFECT_TOPSY_TURVY);
+        ASSUME(GetMoveEffect(MOVE_HARDEN) == EFFECT_DEFENSE_UP);
+        ASSUME(GetMoveEffect(MOVE_TOPSY_TURVY) == EFFECT_TOPSY_TURVY);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PIDGEY) { Ability(ABILITY_BIG_PECKS); }
     } WHEN {
@@ -75,9 +75,9 @@ SINGLE_BATTLE_TEST("Big Pecks doesn't prevent Topsy-Turvy")
 SINGLE_BATTLE_TEST("Big Pecks doesn't prevent Spectral Thief from resetting positive Defense stage changes")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_HARDEN].effect == EFFECT_DEFENSE_UP);
-        ASSUME(MoveHasAdditionalEffect(MOVE_SPECTRAL_THIEF, MOVE_EFFECT_SPECTRAL_THIEF));
-        ASSUME(gMovesInfo[MOVE_SOAK].effect == EFFECT_SOAK);
+        ASSUME(GetMoveEffect(MOVE_HARDEN) == EFFECT_DEFENSE_UP);
+        ASSUME(GetMoveEffect(MOVE_SPECTRAL_THIEF) == EFFECT_SPECTRAL_THIEF);
+        ASSUME(GetMoveEffect(MOVE_SOAK) == EFFECT_SOAK);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PIDGEY) { Ability(ABILITY_BIG_PECKS); }
     } WHEN {
@@ -86,8 +86,8 @@ SINGLE_BATTLE_TEST("Big Pecks doesn't prevent Spectral Thief from resetting posi
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HARDEN, opponent);
         MESSAGE("The opposing Pidgey's Defense rose!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, player);
         MESSAGE("Wobbuffet stole the target's boosted stats!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPECTRAL_THIEF, player);
     } THEN {
         EXPECT_EQ(opponent->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
     }
@@ -96,8 +96,8 @@ SINGLE_BATTLE_TEST("Big Pecks doesn't prevent Spectral Thief from resetting posi
 SINGLE_BATTLE_TEST("Big Pecks doesn't prevent receiving negative Defense stage changes from Baton Pass")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_LEER].effect == EFFECT_DEFENSE_DOWN);
-        ASSUME(gMovesInfo[MOVE_BATON_PASS].effect == EFFECT_BATON_PASS);
+        ASSUME(GetMoveEffect(MOVE_LEER) == EFFECT_DEFENSE_DOWN);
+        ASSUME(GetMoveEffect(MOVE_BATON_PASS) == EFFECT_BATON_PASS);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PIDGEY) { Ability(ABILITY_BIG_PECKS); }

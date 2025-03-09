@@ -58,7 +58,6 @@ DOUBLE_BATTLE_TEST("Coaching bypasses Crafty Shield")
 
 DOUBLE_BATTLE_TEST("Coaching fails if all allies are is semi-invulnerable")
 {
-    KNOWN_FAILING; // Coaching succeeds
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_FLY) == EFFECT_SEMI_INVULNERABLE);
         PLAYER(SPECIES_WOBBUFFET);

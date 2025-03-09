@@ -1376,9 +1376,14 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Finale heals allies by 1/6 of their health")
 
 DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Sweetness cures allies' status conditions")
 {
+    u32 j;
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_SWEETNESS, MOVE_EFFECT_AROMATHERAPY));
         PLAYER(SPECIES_APPLETUN) { Status1(STATUS1_POISON); GigantamaxFactor(TRUE); }
+        PLAYER(SPECIES_APPLIN)  { Status1(STATUS1_POISON); }
+        PLAYER(SPECIES_APPLIN)  { Status1(STATUS1_POISON); }
+        PLAYER(SPECIES_APPLIN)  { Status1(STATUS1_POISON); }
+        PLAYER(SPECIES_APPLIN)  { Status1(STATUS1_POISON); }
         PLAYER(SPECIES_APPLIN)  { Status1(STATUS1_POISON); }
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -1387,9 +1392,10 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Sweetness cures allies' status conditions")
     } SCENE {
         MESSAGE("Appletun used G-Max Sweetness!");
         STATUS_ICON(playerLeft, none: TRUE);
-        MESSAGE("Appletun's status returned to normal!");
         STATUS_ICON(playerRight, none: TRUE);
-        MESSAGE("Applin's status returned to normal!");
+    } THEN {
+        for (j = 0; j < PARTY_SIZE; j++)
+            EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_STATUS), STATUS1_NONE);
     }
 }
 
@@ -1421,7 +1427,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance")
+DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance by 1 stage")
 {
     u32 j;
     GIVEN {

@@ -141,7 +141,7 @@ SINGLE_BATTLE_TEST("Trainer Slide: Last Half Hp")
 {
     gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SLIDE_LAST_HALF_HP;
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SUPER_FANG].effect == EFFECT_SUPER_FANG);
+        ASSUME(GetMoveEffect(MOVE_SUPER_FANG) == EFFECT_SUPER_FANG);
         ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].baseHP == 190);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

@@ -39,7 +39,7 @@ DOUBLE_BATTLE_TEST("Dancer can copy Teeter Dance and confuse both opposing targe
     GIVEN {
         ASSUME(IsDanceMove(MOVE_TEETER_DANCE));
         ASSUME(gItemsInfo[ITEM_LUM_BERRY].holdEffect == HOLD_EFFECT_CURE_STATUS);
-        PLAYER(SPECIES_WOBBUFFET)
+        PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT) { Item(ITEM_LUM_BERRY); }
         OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Item(ITEM_LUM_BERRY); }
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); }
@@ -58,10 +58,10 @@ DOUBLE_BATTLE_TEST("Dancer triggers from slowest to fastest")
 {
     GIVEN {
         ASSUME(IsDanceMove(MOVE_DRAGON_DANCE));
-        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_DANCER); Speed(10); }
+        PLAYER(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Speed(10); }
         PLAYER(SPECIES_WYNAUT) { Speed(50); }
         OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Speed(20); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_DANCER); Speed(3); }
+        OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Speed(3); }
     } WHEN {
         TURN { MOVE(playerRight, MOVE_DRAGON_DANCE); }
     } SCENE {
@@ -103,7 +103,7 @@ DOUBLE_BATTLE_TEST("Dancer still triggers if another dancer flinches")
     GIVEN {
         ASSUME(MoveHasAdditionalEffectWithChance(MOVE_FAKE_OUT, MOVE_EFFECT_FLINCH, 100));
         ASSUME(IsDanceMove(MOVE_DRAGON_DANCE));
-        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_DANCER); Speed(10); }
+        PLAYER(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Speed(10); }
         PLAYER(SPECIES_WYNAUT) { Speed(5); }
         OPPONENT(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); Speed(20); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(3); }
@@ -114,9 +114,9 @@ DOUBLE_BATTLE_TEST("Dancer still triggers if another dancer flinches")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DANCE, playerRight);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
         ABILITY_POPUP(playerLeft, ABILITY_DANCER);
-        MESSAGE("Wobbuffet flinched and couldn't move!");
+        MESSAGE("Oricorio flinched and couldn't move!");
         NONE_OF {
-            MESSAGE("Wobbuffet used Dragon Dance!");
+            MESSAGE("Oricorio used Dragon Dance!");
             ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DANCE, playerLeft);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         }
@@ -244,5 +244,93 @@ DOUBLE_BATTLE_TEST("Dancer doesn't call a move that didn't execute due to Powder
             ABILITY_POPUP(playerRight, ABILITY_DANCER);
             ANIMATION(ANIM_TYPE_MOVE, MOVE_FIERY_DANCE, playerRight);
         }
+    }
+}
+
+
+DOUBLE_BATTLE_TEST("Dancer still activates after Red Card")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) ;
+        PLAYER(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); }
+        PLAYER(SPECIES_CHANSEY);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
+        OPPONENT(SPECIES_BULBASAUR);
+        OPPONENT(SPECIES_SHUCKLE);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FIERY_DANCE, target: opponentLeft); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Fiery Dance!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FIERY_DANCE, playerLeft);
+        HP_BAR(opponentLeft);
+        // Red card trigger
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponentLeft);
+        MESSAGE("The opposing Wobbuffet held up its Red Card against Wobbuffet!");
+        MESSAGE("Chansey was dragged out!");
+        // Dancer
+        ABILITY_POPUP(playerRight, ABILITY_DANCER);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FIERY_DANCE, playerRight);
+        HP_BAR(opponentLeft);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Dancer still activate after Red Card even if blocked by Suction Cups")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SUCTION_CUPS); }
+        PLAYER(SPECIES_ORICORIO) { Ability(ABILITY_DANCER); }
+        PLAYER(SPECIES_CHANSEY);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
+        OPPONENT(SPECIES_BULBASAUR);
+        OPPONENT(SPECIES_SHUCKLE);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FIERY_DANCE, target: opponentLeft); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Fiery Dance!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FIERY_DANCE, playerLeft);
+        HP_BAR(opponentLeft);
+        // red card trigger
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponentLeft);
+        MESSAGE("The opposing Wobbuffet held up its Red Card against Wobbuffet!");
+        MESSAGE("Wobbuffet anchors itself with Suction Cups!");
+        NOT MESSAGE("Chansey was dragged out!");
+        // Dancer
+        ABILITY_POPUP(playerRight, ABILITY_DANCER);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FIERY_DANCE, playerRight);
+        HP_BAR(opponentLeft);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Dancer correctly restores move targets")
+{
+    GIVEN {
+        ASSUME(IsDanceMove(MOVE_REVELATION_DANCE));
+        PLAYER(SPECIES_ORICORIO) { Speed(10); }
+        PLAYER(SPECIES_ORICORIO) { Speed(3); }
+        OPPONENT(SPECIES_ORICORIO) { Speed(1); }
+        OPPONENT(SPECIES_ORICORIO) { Speed(5); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_REVELATION_DANCE, target: opponentLeft);
+               MOVE(opponentRight, MOVE_TACKLE, target: playerRight);
+               MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
+               MOVE(opponentLeft, MOVE_TACKLE, target: playerRight); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_REVELATION_DANCE, playerLeft);
+        HP_BAR(opponentLeft);
+        ABILITY_POPUP(opponentLeft, ABILITY_DANCER);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_REVELATION_DANCE, opponentLeft);
+        HP_BAR(playerLeft);
+        ABILITY_POPUP(playerRight, ABILITY_DANCER);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_REVELATION_DANCE, playerRight);
+        HP_BAR(opponentLeft);
+        ABILITY_POPUP(opponentRight, ABILITY_DANCER);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_REVELATION_DANCE, opponentRight);
+        HP_BAR(playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentRight);
+        HP_BAR(playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
+        HP_BAR(opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        HP_BAR(playerRight);
     }
 }

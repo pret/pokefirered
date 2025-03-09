@@ -48,12 +48,17 @@ SINGLE_BATTLE_TEST("Lansat Berry raises the holder's critical-hit-ratio by two s
     }
 }
 
-SINGLE_BATTLE_TEST("Lansat Berry raises the holder's critical-hit-ratio by two stages")
+SINGLE_BATTLE_TEST("Lansat Berry raises the holder's critical-hit-ratio by 2 stages")
 {
-    PASSES_RANDOMLY(1, 2, RNG_CRITICAL_HIT);
+    u32 genConfig = 0, chance;
+    for (u32 j = GEN_1; j <= GEN_5; j++)
+        PARAMETRIZE { genConfig = j; chance = 4; } // 25%
+    for (u32 j = GEN_6; j <= GEN_9; j++)
+        PARAMETRIZE { genConfig = j; chance = 2; } // 50%
+    PASSES_RANDOMLY(1, chance, RNG_CRITICAL_HIT);
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_CRIT_CHANCE, genConfig);
         ASSUME(GetMoveCriticalHitStage(MOVE_TACKLE) == 0);
-        ASSUME(B_CRIT_CHANCE >= GEN_6);
         PLAYER(SPECIES_WOBBUFFET) { MaxHP(160); HP(80); Item(ITEM_LANSAT_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

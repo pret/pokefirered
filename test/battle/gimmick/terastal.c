@@ -192,7 +192,7 @@ SINGLE_BATTLE_TEST("(TERA) Terastallization's 60 BP floor does not apply to dyna
     PARAMETRIZE { tera = GIMMICK_NONE; }
     PARAMETRIZE { tera = GIMMICK_TERA; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WATER_SPOUT].effect == EFFECT_POWER_BASED_ON_USER_HP);
+        ASSUME(GetMoveEffect(MOVE_WATER_SPOUT) == EFFECT_POWER_BASED_ON_USER_HP);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); TeraType(TYPE_WATER); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

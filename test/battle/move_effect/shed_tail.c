@@ -86,22 +86,22 @@ SINGLE_BATTLE_TEST("Shed Tail's HP cost doesn't trigger effects that trigger on 
     }
 }
 
-// Passes for some reason even though it seems there is some code missing
-/*
-AI_SINGLE_BATTLE_TEST("AI will use Shed Tail to pivot to another mon while in damage stalemate with player")
+AI_SINGLE_BATTLE_TEST("AI will use Shed Tail to pivot to another mon while in damage stalemate with player rather than hard switching")
 {
-    KNOWN_FAILING; // missing AI code
+    u32 aiFlags;
+    PARAMETRIZE { aiFlags = 0; }
+    PARAMETRIZE { aiFlags = AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_MON_CHOICES; }
     GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiFlags);
         PLAYER(SPECIES_WOBBUFFET) { Speed(100); Ability(ABILITY_RUN_AWAY); Moves(MOVE_TACKLE, MOVE_CELEBRATE); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(50); Ability(ABILITY_RUN_AWAY); Moves(MOVE_CONFUSION, MOVE_SHED_TAIL); }
         OPPONENT(SPECIES_SCIZOR) { Speed(101); Moves(MOVE_CELEBRATE, MOVE_X_SCISSOR); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); EXPECT_MOVE(opponent, MOVE_CONFUSION); }
+        if (aiFlags == 0)
+            TURN { MOVE(player, MOVE_TACKLE); EXPECT_MOVE(opponent, MOVE_CONFUSION); }
         TURN { MOVE(player, MOVE_TACKLE); EXPECT_MOVE(opponent, MOVE_SHED_TAIL); }
     }
 }
-*/
 
 SINGLE_BATTLE_TEST("Shed Tail creates a Substitute with 1/4 of user maximum health")
 {

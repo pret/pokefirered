@@ -97,3 +97,18 @@ DOUBLE_BATTLE_TEST("Tera Shell only makes the first hit against Terapagos from a
         NOT MESSAGE("It's not very effective…");
     }
 }
+
+SINGLE_BATTLE_TEST("Tera Shell respects immunity")
+{
+    GIVEN {
+        PLAYER(SPECIES_TERAPAGOS_TERASTAL) { Ability(ABILITY_TERA_SHELL); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SHADOW_BALL); }
+    } SCENE {
+        NONE_OF {
+            ABILITY_POPUP(player, ABILITY_TERA_SHELL);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SHADOW_BALL, opponent);
+        }
+    }
+}

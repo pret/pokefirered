@@ -75,7 +75,7 @@ DOUBLE_BATTLE_TEST("Lightning Rod forces single-target Electric-type moves to ta
 DOUBLE_BATTLE_TEST("Lightning Rod redirects an ally's attack")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
+        ASSUME(GetMoveType(MOVE_THUNDERBOLT) == TYPE_ELECTRIC);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_RAICHU) { Ability(ABILITY_LIGHTNING_ROD); }

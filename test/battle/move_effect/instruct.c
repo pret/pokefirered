@@ -216,3 +216,91 @@ DOUBLE_BATTLE_TEST("Instruct-called moves keep their priority")
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, playerRight);
     }
 }
+
+DOUBLE_BATTLE_TEST("Instructed move will be redirected and absorbed by Lightning Rod if it turns into an Electric Type move")
+{
+    struct BattlePokemon *moveTarget = NULL;
+    PARAMETRIZE { moveTarget = opponentLeft; }
+    PARAMETRIZE { moveTarget = opponentRight; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_PIKACHU) { Ability(ABILITY_LIGHTNING_ROD); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: moveTarget);
+            MOVE(opponentLeft, MOVE_PLASMA_FISTS, target: playerLeft);
+            MOVE(playerRight, MOVE_INSTRUCT, target: playerLeft);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PLASMA_FISTS, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_INSTRUCT, playerRight);
+        ABILITY_POPUP(opponentLeft, ABILITY_LIGHTNING_ROD);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Instructed move will be redirected by Follow Me after instructed target loses Stalwart")
+{
+    struct BattlePokemon *moveTarget = NULL;
+    PARAMETRIZE { moveTarget = opponentLeft; }
+    PARAMETRIZE { moveTarget = opponentRight; }
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_FOLLOW_ME].effect == EFFECT_FOLLOW_ME);
+        ASSUME(gMovesInfo[MOVE_SKILL_SWAP].effect == EFFECT_SKILL_SWAP);
+        PLAYER(SPECIES_DURALUDON) { Ability(ABILITY_STALWART); }
+        PLAYER(SPECIES_DURALUDON) { Ability(ABILITY_STALWART); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: moveTarget);
+            MOVE(opponentLeft, MOVE_FOLLOW_ME);
+            MOVE(opponentRight, MOVE_SKILL_SWAP, target: playerLeft);
+            MOVE(playerRight, MOVE_INSTRUCT, target: playerLeft);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FOLLOW_ME, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft);
+        HP_BAR(moveTarget);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_INSTRUCT, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft);
+        HP_BAR(opponentLeft);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Instructed move will be redirected by Rage Powder after instructed target loses Grass typing")
+{
+    struct BattlePokemon *moveTarget = NULL;
+    PARAMETRIZE { moveTarget = opponentLeft; }
+    PARAMETRIZE { moveTarget = opponentRight; }
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_RAGE_POWDER].effect == EFFECT_FOLLOW_ME);
+        ASSUME(gMovesInfo[MOVE_RAGE_POWDER].powderMove == TRUE);
+        ASSUME(gMovesInfo[MOVE_SOAK].effect == EFFECT_SOAK);
+        PLAYER(SPECIES_TREECKO);
+        PLAYER(SPECIES_SCEPTILE);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_TACKLE, target: moveTarget);
+            MOVE(opponentLeft, MOVE_RAGE_POWDER);
+            MOVE(opponentRight, MOVE_SOAK, target: playerLeft);
+            MOVE(playerRight, MOVE_INSTRUCT, target: playerLeft);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_POWDER, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft);
+        HP_BAR(moveTarget);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SOAK, opponentRight);
+        MESSAGE("Treecko transformed into the Water type!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_INSTRUCT, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft);
+        HP_BAR(opponentLeft);
+    }
+}

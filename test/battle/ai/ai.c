@@ -831,3 +831,17 @@ AI_SINGLE_BATTLE_TEST("AI stays choice locked into moves in spite of the player'
         TURN { EXPECT_MOVE(opponent, aiMove); }
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI won't use Sucker Punch if it expects a move of the same priority bracket and the opponent is faster")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_QUICK_ATTACK].priority == 1);
+        ASSUME(gMovesInfo[MOVE_SUCKER_PUNCH].priority == 1);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(300); Moves(MOVE_QUICK_ATTACK); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); Moves(MOVE_SUCKER_PUNCH, MOVE_TACKLE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_QUICK_ATTACK); EXPECT_MOVE(opponent, MOVE_SUCKER_PUNCH); }
+        TURN { MOVE(player, MOVE_QUICK_ATTACK); EXPECT_MOVE(opponent, MOVE_TACKLE); }
+    }
+}

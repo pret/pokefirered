@@ -520,3 +520,4 @@ SINGLE_BATTLE_TEST("Red Card activates before Eject Pack")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
     }
 }
+

@@ -72,3 +72,23 @@ SINGLE_BATTLE_TEST("ignoresTargetAbility moves do ignore target's abilities", s1
         EXPECT_EQ(results[4].damage, results[5].damage);
     }
 }
+
+SINGLE_BATTLE_TEST("ignoresTargetAbility allows Pokémon with Battle Armor and Shell Armor to receive critical hits")
+{
+    u32 species;
+    u32 ability;
+
+    PARAMETRIZE { species = SPECIES_KINGLER; ability = ABILITY_SHELL_ARMOR; }
+    PARAMETRIZE { species = SPECIES_ARMALDO; ability = ABILITY_BATTLE_ARMOR; }
+
+    GIVEN {
+        ASSUME(MoveIgnoresTargetAbility(MOVE_SUNSTEEL_STRIKE));
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(species) { Ability(ability); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SUNSTEEL_STRIKE, criticalHit: TRUE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNSTEEL_STRIKE, player);
+        MESSAGE("A critical hit!");
+    }
+}

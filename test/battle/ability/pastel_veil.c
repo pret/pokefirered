@@ -33,7 +33,6 @@ DOUBLE_BATTLE_TEST("Pastel Veil prevents Poison Sting poison on partner")
 
 SINGLE_BATTLE_TEST("Pastel Veil immediately cures Mold Breaker poison")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_TOXIC);
         PLAYER(SPECIES_PINSIR) { Ability(ABILITY_MOLD_BREAKER); }

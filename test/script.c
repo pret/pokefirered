@@ -49,6 +49,7 @@ TEST("Script_HasNoEffect variables")
         checkpartymove MOVE_CELEBRATE;
         random 2;
         checkmoney 5000;
+        // getpokenewsactive POKENEWS_LILYCOVE;
         checkplayergender;
         checkcoins VAR_RESULT;
         checkmodernfatefulencounter 0;

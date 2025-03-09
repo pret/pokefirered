@@ -105,7 +105,6 @@ SINGLE_BATTLE_TEST("Air Balloon pops before it can be stolen with Magician")
 SINGLE_BATTLE_TEST("Air Balloon pops before it can be stolen with Thief or Covet")
 {
     u32 move;
-    KNOWN_FAILING;
     PARAMETRIZE { move = MOVE_THIEF; }
     PARAMETRIZE { move = MOVE_COVET; }
     GIVEN {

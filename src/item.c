@@ -219,6 +219,9 @@ bool8 AddBagItem(u16 itemId, u16 count)
     u8 pocket;
     s8 idx;
 
+    if (count == 0)
+        return FALSE;
+
     if (ItemId_GetPocket(itemId) == 0)
         return FALSE;
 

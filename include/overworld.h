@@ -137,6 +137,7 @@ u32 ComputeWhiteOutMoneyLoss(void);
 void SetLastHealLocationWarp(u8 healLocaionId);
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum);
 void CB2_ReturnToFieldFromDiploma(void);
+void CB2_Overworld(void);
 void CB2_OverworldBasic(void);
 void CB2_NewGame(void);
 bool8 IsMapTypeOutdoors(u8 mapType);

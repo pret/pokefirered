@@ -8,6 +8,7 @@
 #include "config/item.h"
 #include "config/pokemon.h"
 #include "config/overworld.h"
+#include "config/dexnav.h"
 #include "config/ai.h"
 
 // Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.

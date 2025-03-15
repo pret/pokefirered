@@ -16,6 +16,7 @@ extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1Winter;
 extern const struct SpritePalette gSpritePalette_GeneralFieldEffect2;
 extern const struct SpritePalette gSpritePalette_Ash;
 extern const struct SpritePalette gSpritePalette_SmallSparkle;
+extern const struct SpritePalette gSpritePalette_CaveDust;
 
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall;
 extern const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium;

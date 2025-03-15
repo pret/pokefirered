@@ -3766,7 +3766,8 @@ static void Task_MoveDeoxysRock_Step(u8 taskId)
 u32 FldEff_CaveDust(void)
 {
     u8 spriteId;
-
+    
+    FieldEffectScript_LoadFadedPal(&gSpritePalette_CaveDust);
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_CaveDust, gFieldEffectArguments[0], gFieldEffectArguments[1], 0xFF);
     if (spriteId != MAX_SPRITES)

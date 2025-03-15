@@ -386,6 +386,28 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
 #undef sMapGroup
 #undef sYOffset
 
+static const struct SpritePalette* GetGeneralFieldPalette1()
+{
+    if (OW_SEASONS)
+    {
+        switch (gLoadedSeason)
+        {
+            case SEASON_SPRING:
+            default:
+                return &gSpritePalette_GeneralFieldEffect1;
+            case SEASON_SUMMER:
+                return &gSpritePalette_GeneralFieldEffect1Summer;
+            case SEASON_AUTUMN:
+                return &gSpritePalette_GeneralFieldEffect1Autumn;
+            case SEASON_WINTER:
+                return &gSpritePalette_GeneralFieldEffect1Winter;
+
+        }
+    }
+    return &gSpritePalette_GeneralFieldEffect1;
+}
+
+
 u32 FldEff_TallGrass(void)
 {
     s16 x;
@@ -402,19 +424,15 @@ u32 FldEff_TallGrass(void)
             case SEASON_SPRING:
             default:
                 spriteTemplate = &gFieldEffectObjectTemplate_TallGrass;
-                spritePalette = &gSpritePalette_GeneralFieldEffect1;
                 break;
             case SEASON_SUMMER:
                 spriteTemplate = &gFieldEffectObjectTemplate_TallGrassSummer;
-                spritePalette = &gSpritePalette_GeneralFieldEffect1Summer;
                 break;
             case SEASON_AUTUMN:
                 spriteTemplate = &gFieldEffectObjectTemplate_TallGrassAutumn;
-                spritePalette = &gSpritePalette_GeneralFieldEffect1Autumn;
                 break;
             case SEASON_WINTER:
                 spriteTemplate = &gFieldEffectObjectTemplate_TallGrassWinter;
-                spritePalette = &gSpritePalette_GeneralFieldEffect1Winter;
                 break;
 
         }
@@ -422,8 +440,8 @@ u32 FldEff_TallGrass(void)
     else
     {
         spriteTemplate = &gFieldEffectObjectTemplate_TallGrass;
-        spritePalette = &gSpritePalette_GeneralFieldEffect1;
     }
+    spritePalette = GetGeneralFieldPalette1();
     
     FieldEffectScript_LoadFadedPal(spritePalette);
     x = gFieldEffectArguments[0];
@@ -506,19 +524,15 @@ u32 FldEff_JumpTallGrass(void)
             case SEASON_SPRING:
             default:
                 spriteTemplate = &gFieldEffectObjectTemplate_JumpTallGrass;
-                spritePalette = &gSpritePalette_GeneralFieldEffect1;
                 break;
             case SEASON_SUMMER:
                 spriteTemplate = &gFieldEffectObjectTemplate_JumpTallGrass;
-                spritePalette = &gSpritePalette_GeneralFieldEffect1Summer;
                 break;
             case SEASON_AUTUMN:
                 spriteTemplate = &gFieldEffectObjectTemplate_JumpTallGrass;
-                spritePalette = &gSpritePalette_GeneralFieldEffect1Autumn;
                 break;
             case SEASON_WINTER:
                 spriteTemplate = &gFieldEffectObjectTemplate_JumpTallGrass;
-                spritePalette = &gSpritePalette_GeneralFieldEffect1Winter;
                 break;
 
         }
@@ -526,8 +540,8 @@ u32 FldEff_JumpTallGrass(void)
     else
     {
         spriteTemplate = &gFieldEffectObjectTemplate_JumpTallGrass;
-        spritePalette = &gSpritePalette_GeneralFieldEffect1;
     }
+    spritePalette = GetGeneralFieldPalette1();
 
     FieldEffectScript_LoadFadedPal(spritePalette);
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 12);
@@ -567,8 +581,9 @@ u32 FldEff_LongGrass(void)
     s16 y;
     u8 spriteId;
     struct Sprite *sprite;
+    const struct SpritePalette *spritePalette = GetGeneralFieldPalette1();
 
-    FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect1);
+    FieldEffectScript_LoadFadedPal(spritePalette);
     x = gFieldEffectArguments[0];
     y = gFieldEffectArguments[1];
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
@@ -633,8 +648,9 @@ u32 FldEff_JumpLongGrass(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
+    const struct SpritePalette *spritePalette = GetGeneralFieldPalette1();
 
-    FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect1);
+    FieldEffectScript_LoadFadedPal(spritePalette);
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_JumpLongGrass, gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
     if (spriteId != MAX_SPRITES)
@@ -654,8 +670,9 @@ u32 FldEff_ShortGrass(void)
     struct ObjectEvent * objectEvent;
     u8 spriteId;
     struct Sprite *sprite;
+    const struct SpritePalette *spritePalette = GetGeneralFieldPalette1();
 
-    FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect1);
+    FieldEffectScript_LoadFadedPal(spritePalette);
     objectEventId = GetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     objectEvent = &gObjectEvents[objectEventId];
     spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_ShortGrass, 0, 0, 0);
@@ -1095,8 +1112,9 @@ u32 FldEff_Ripple(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
+    const struct SpritePalette *spritePalette = GetGeneralFieldPalette1();
 
-    FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect1);
+    FieldEffectScript_LoadFadedPal(spritePalette);
     spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_Ripple, gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     if (spriteId != MAX_SPRITES)
     {
@@ -1114,8 +1132,9 @@ u32 FldEff_HotSpringsWater(void)
     struct ObjectEvent * objectEvent;
     u8 spriteId;
     struct Sprite *sprite;
+    const struct SpritePalette *spritePalette = GetGeneralFieldPalette1();
 
-    FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect1);
+    FieldEffectScript_LoadFadedPal(spritePalette);
     objectEventId = GetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     objectEvent = &gObjectEvents[objectEventId];
     spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_HotSpringsWater, 0, 0, 0);
@@ -1158,8 +1177,9 @@ u32 FldEff_ShakingGrass(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
+    const struct SpritePalette *spritePalette = GetGeneralFieldPalette1();
 
-    FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect1);
+    FieldEffectScript_LoadFadedPal(spritePalette);
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_UnusedGrass, gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     if (spriteId != MAX_SPRITES)
@@ -1176,8 +1196,9 @@ u32 FldEff_ShakingGrass2(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
+    const struct SpritePalette *spritePalette = GetGeneralFieldPalette1();
 
-    FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect1);
+    FieldEffectScript_LoadFadedPal(spritePalette);
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_UnusedGrass2, gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     if (spriteId != MAX_SPRITES)
@@ -1243,8 +1264,9 @@ u32 FldEff_Ash(void)
     s16 y;
     u8 spriteId;
     struct Sprite *sprite;
+    const struct SpritePalette *spritePalette = GetGeneralFieldPalette1();
 	
-    FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect1);
+    FieldEffectScript_LoadFadedPal(spritePalette);
 
     x = gFieldEffectArguments[0];
     y = gFieldEffectArguments[1];

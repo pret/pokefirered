@@ -7,6 +7,7 @@
 #define WATER_WILD_COUNT    5
 #define ROCK_WILD_COUNT     5
 #define FISH_WILD_COUNT     10
+#define HIDDEN_WILD_COUNT   3
 
 #define NUM_ALTERING_CAVE_TABLES 9
 
@@ -33,6 +34,7 @@ struct WildPokemonHeader
     const struct WildPokemonInfo *landMonsInfo;
     const struct WildPokemonInfo *waterMonsInfo;
     const struct WildPokemonInfo *rockSmashMonsInfo;
+    const struct WildPokemonInfo *hiddenMonsInfo;
     const struct WildPokemonInfo *fishingMonsInfo;
 };
 
@@ -58,5 +60,11 @@ void ResetEncounterRateModifiers(void);
 bool8 TryStandardWildEncounter(u32 currMetatileAttrs);
 bool8 TryDoDoubleWildBattle(void);
 u32 CalculateChainFishingShinyRolls(void);
+void CreateWildMon(u16 species, u8 level, u8 unownSlot);
+u16 GetCurrentMapWildMonHeaderId(void);
+u8 ChooseWildMonIndex_Land(void);
+u8 ChooseWildMonIndex_WaterRock(void);
+u8 ChooseHiddenMonIndex(void);
+bool32 MapHasNoEncounterData(void);
 
 #endif // GUARD_WILD_ENCOUNTER_H

@@ -4913,6 +4913,8 @@ extern const u16 gFogPalette[];
 extern const u32 gPartyMenuPokeball_Gfx[];
 extern const u32 gPartyMenuPokeball_Pal[];
 extern const u32 gPartyMenuPokeballSmall_Gfx[];
+extern const u32 gMoveTypes_Gfx[];
+extern const u32 gMoveTypes_Pal[];
 extern const u32 gStatusGfx_Icons[];
 extern const u32 gStatusPal_Icons[];
 extern const u32 gPartyMenuBg_Gfx[];

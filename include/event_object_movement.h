@@ -223,6 +223,7 @@ u8 GetJumpSpecialMovementAction(u32 direction);
 void EnableObjectGroundEffectsByXY(s16 x, s16 y);
 void MoveObjectEventToMapCoords(struct ObjectEvent *objectEvent, s16 x, s16 y);
 u8 CreateCopySpriteAt(struct Sprite *sprite, s16 x, s16 y, u8 subpriority);
+bool8 IsElevationMismatchAt(u8 elevation, s16 x, s16 y);
 u16 GetObjectPaletteTag(u8 paletteIndex);
 void SetSpritePosToMapCoords(s16 x, s16 y, s16 *x2, s16 *y2);
 void UpdateObjectEventSpriteInvisibility(struct Sprite *sprite, bool8 invisible);

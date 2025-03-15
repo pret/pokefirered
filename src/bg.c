@@ -736,6 +736,77 @@ u32 ChangeBgY(u8 bg, u32 value, u8 op)
     return sGpuBgConfigs2[bg].bg_y;
 }
 
+s32 ChangeBgY_ScreenOff(u32 bg, s32 value, u8 op)
+{
+    u32 mode;
+    u16 temp1;
+    u16 temp2;
+
+    if (IsInvalidBg(bg) || !GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE))
+    {
+        return -1;
+    }
+
+    switch (op)
+    {
+    case BG_COORD_SET:
+    default:
+        sGpuBgConfigs2[bg].bg_y = value;
+        break;
+    case BG_COORD_ADD:
+        sGpuBgConfigs2[bg].bg_y += value;
+        break;
+    case BG_COORD_SUB:
+        sGpuBgConfigs2[bg].bg_y -= value;
+        break;
+    }
+
+    mode = GetBgMode();
+
+    switch (bg)
+    {
+    case 0:
+        temp1 = sGpuBgConfigs2[0].bg_y >> 0x8;
+        SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, temp1);
+        break;
+    case 1:
+        temp1 = sGpuBgConfigs2[1].bg_y >> 0x8;
+        SetGpuReg_ForcedBlank(REG_OFFSET_BG1VOFS, temp1);
+        break;
+    case 2:
+        if (mode == 0)
+        {
+            temp1 = sGpuBgConfigs2[2].bg_y >> 0x8;
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG2VOFS, temp1);
+
+        }
+        else
+        {
+            temp1 = sGpuBgConfigs2[2].bg_y >> 0x10;
+            temp2 = sGpuBgConfigs2[2].bg_y & 0xFFFF;
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_H, temp1);
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_L, temp2);
+        }
+        break;
+    case 3:
+        if (mode == 0)
+        {
+            temp1 = sGpuBgConfigs2[3].bg_y >> 0x8;
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG3VOFS, temp1);
+        }
+        else if (mode == 2)
+        {
+            temp1 = sGpuBgConfigs2[3].bg_y >> 0x10;
+            temp2 = sGpuBgConfigs2[3].bg_y & 0xFFFF;
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_H, temp1);
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_L, temp2);
+        }
+        break;
+    }
+
+    return sGpuBgConfigs2[bg].bg_y;
+}
+
 u32 GetBgY(u8 bg)
 {
     if (IsInvalidBg32(bg) != FALSE)

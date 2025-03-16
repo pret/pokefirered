@@ -3057,6 +3057,9 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
     sPokedexScreenData->windowIds[1] = AddWindow(&sWindowTemplate_DexEntry_SpeciesStats);
     sPokedexScreenData->windowIds[2] = AddWindow(&sWindowTemplate_DexEntry_FlavorText);
 
+    // free category windows here to prevent running out of heap
+    DexScreen_DestroyCategoryPageMonIconAndInfoWindows();
+
     // Mon pic
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[0], PIXEL_FILL(0));
     DexScreen_LoadMonPicInWindow(sPokedexScreenData->windowIds[0], sPokedexScreenData->dexSpecies, 144);
@@ -3530,12 +3533,8 @@ static void Task_DexScreen_RegisterMonToPokedex(u8 taskId)
         sPokedexScreenData->state = 8;
         break;
     case 8:
-        if (!IsDma3ManagerBusyWithBgCopy())
-        {
-            FreeAllWindowBuffers(); // fixed crash after catching mon and pokedex is shown
-            DexScreen_DrawMonDexPage(TRUE);
-            sPokedexScreenData->state = 9;
-        }
+        DexScreen_DrawMonDexPage(TRUE);
+        sPokedexScreenData->state = 9;
         break;
     case 9:
         sPokedexScreenData->data[0] = 0;

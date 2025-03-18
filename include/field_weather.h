@@ -178,7 +178,7 @@ void DroughtStateRun(void);
 void SetRainStrengthFromSoundEffect(u16 soundEffect);
 void ApplyWeatherColorMapIfIdle(s8 colorMapIndex);
 void ApplyWeatherColorMapIfIdle_Gradual(u8 colorMapIndex, u8 targetColorMapIndex, u8 colorMapStepDelay);
-void ApplyWeatherColorMapToPal(u8 paletteIndex);
+void ApplyWeatherColorMapToPals(u8 startPalIndex, u8 numPalettes);
 void StartWeather(void);
 void SetWeather(u32 weather);
 void ResumePausedWeather(void);

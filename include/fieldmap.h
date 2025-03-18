@@ -46,7 +46,7 @@ void CopyMapTilesetsToVram(struct MapLayout const * mapLayout);
 void LoadMapTilesetPalettes(struct MapLayout const * mapLayout);
 void InitMap(void);
 void CopySecondaryTilesetToVramUsingHeap(const struct MapLayout * mapLayout);
-void LoadSecondaryTilesetPalette(const struct MapLayout * mapLayout);
+void LoadSecondaryTilesetPalette(const struct MapLayout * mapLayout, bool8 skipFaded);
 void InitMapFromSavedGame(void);
 void CopyPrimaryTilesetToVram(const struct MapLayout *mapLayout);
 void CopySecondaryTilesetToVram(const struct MapLayout *mapLayout);

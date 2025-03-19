@@ -6,7 +6,7 @@
 static inline u32 GetCurrentRegion(void)
 {
     // TODO: Since there's no current multi-region support, we have this constant for the purposes of regional form comparisons.
-    return REGION_HOENN;
+    return REGION_KANTO;
 }
 
 #endif // GUARD_REGIONS_H

@@ -74,14 +74,13 @@ struct VsSeekerTrainerInfo
 
 struct VsSeekerStruct
 {
-    /*0x000*/ struct VsSeekerTrainerInfo trainerInfo[OBJECT_EVENTS_COUNT];
-    /*0x100*/ u8 filler_100[0x300];
-    /*0x400*/ u16 trainerIdxArray[OBJECT_EVENTS_COUNT];
-    /*0x420*/ u8 runningBehaviourEtcArray[OBJECT_EVENTS_COUNT];
-    /*0x430*/ u8 numRematchableTrainers;
-    /*0x431*/ u8 trainerHasNotYetBeenFought:1;
-    /*0x431*/ u8 trainerDoesNotWantRematch:1;
-    /*0x431*/ u8 trainerWantsRematch:1;
+    struct VsSeekerTrainerInfo trainerInfo[OBJECT_EVENTS_COUNT];
+    u16 trainerIdxArray[OBJECT_EVENTS_COUNT];
+    u8 runningBehaviourEtcArray[OBJECT_EVENTS_COUNT];
+    u8 numRematchableTrainers;
+    u8 trainerHasNotYetBeenFought:1;
+    u8 trainerDoesNotWantRematch:1;
+    u8 trainerWantsRematch:1;
     u8 responseCode:5;
 };
 

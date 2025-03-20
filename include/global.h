@@ -391,7 +391,9 @@ struct SaveBlock2
     /*0x898*/ u16 mapView[0x100];
     /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
     /*0xAF0*/ struct BerryCrush berryCrush;
+#if FREE_POKEMON_JUMP == FALSE
     /*0xB00*/ struct PokemonJumpRecords pokeJump;
+#endif //FREE_POKEMON_JUMP
     /*0xB10*/ struct BerryPickingResults berryPick;
     /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT]; // moved to SaveBlock2 due to QuestLogScene taking up SaveBlock1
     /*0x???*/ u8 filler_90[212];

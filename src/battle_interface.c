@@ -559,6 +559,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
 
     gBattleStruct->ballSpriteIds[0] = MAX_SPRITES;
     gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
+    gBattleStruct->moveInfoSpriteId = MAX_SPRITES;
 
     return healthboxSpriteId;
 }

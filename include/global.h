@@ -19,6 +19,7 @@
 #include "constants/rgb.h"
 #include "constants/easy_chat.h"
 #include "constants/items.h"
+#include "config/save.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -844,7 +845,9 @@ struct SaveBlock1
     /*0x30BB*/ struct ExternalEventFlags externalEventFlags;
     /*0x30D0*/ struct Roamer roamer;
     /*0x30EC*/ struct EnigmaBerry enigmaBerry;
+#if FREE_MYSTERY_GIFT == FALSE
     /*0x3120*/ struct MysteryGiftSave mysteryGift;
+#endif //FREE_MYSTERY_GIFT
     /*0x????*/ u8 dexSeen[DEX_FLAGS_NO];
                u8 dexCaught[DEX_FLAGS_NO];
     /*0x361C*/ struct RamScript ramScript;

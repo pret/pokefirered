@@ -844,7 +844,9 @@ struct SaveBlock1
     /*0x30A7*/ struct ExternalEventData externalEventData;
     /*0x30BB*/ struct ExternalEventFlags externalEventFlags;
     /*0x30D0*/ struct Roamer roamer;
+#if FREE_ENIGMA_BERRY == FALSE
     /*0x30EC*/ struct EnigmaBerry enigmaBerry;
+#endif //FREE_ENIGMA_BERRY
 #if FREE_MYSTERY_GIFT == FALSE
     /*0x3120*/ struct MysteryGiftSave mysteryGift;
 #endif //FREE_MYSTERY_GIFT

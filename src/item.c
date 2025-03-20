@@ -688,7 +688,7 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId)
 bool8 ItemId_GetBattleUsage(u16 itemId)
 {
     u16 item = SanitizeItemId(itemId);    
-    if (item == ITEM_ENIGMA_BERRY)
+    if (item == ITEM_ENIGMA_BERRY_E_READER)
     {
         switch (GetItemEffectType(gSpecialVar_ItemId))
         {
@@ -727,14 +727,14 @@ u32 ItemId_GetFlingPower(u32 itemId)
 
 const u8 *ItemId_GetEffect(u32 itemId)
 {
-    if (itemId == ITEM_ENIGMA_BERRY)
-    {
+    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
+    #if FREE_ENIGMA_BERRY == FALSE
         return gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    }
+    #else
+        return 0;
+    #endif //FREE_ENIGMA_BERRY
     else
-    {
         return gItemsInfo[SanitizeItemId(itemId)].effect;
-    }
 }
 
 

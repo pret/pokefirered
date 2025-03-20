@@ -92,7 +92,7 @@ static void (*const sExitCallbackByItemType[])(void) = {
 static void SetUpItemUseCallback(u8 taskId)
 {
     u8 itemType;
-    if (gSpecialVar_ItemId == ITEM_ENIGMA_BERRY)
+    if (gSpecialVar_ItemId == ITEM_ENIGMA_BERRY_E_READER)
         itemType = gTasks[taskId].data[4] - 1;
     else
         itemType = ItemId_GetType(gSpecialVar_ItemId) - 1;

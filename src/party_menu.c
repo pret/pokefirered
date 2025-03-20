@@ -4523,12 +4523,11 @@ static void Task_SetSacredAshCB(u8 taskId)
 
 static bool8 IsHPRecoveryItem(u16 item)
 {
-    const u8 *effect;
+    const u8 *effect = ItemId_GetEffect(item);
 
-    if (item == ITEM_ENIGMA_BERRY)
-        effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    else
-        effect = ItemId_GetEffect(item);
+    if (effect == NULL)
+        return FALSE;
+
     if (effect[4] & ITEM4_HEAL_HP)
         return TRUE;
     else
@@ -6098,14 +6097,6 @@ static void CB2_UseEvolutionStone(void)
 static bool8 MonCanEvolve(void)
 {
     return GetEvolutionTargetSpecies(&gPlayerParty[gPartyMenu.slotId], EVO_MODE_ITEM_USE, gSpecialVar_ItemId, NULL) != SPECIES_NONE;
-}
-
-const u8* GetItemEffect(u16 item)
-{
-    if (item == ITEM_ENIGMA_BERRY)
-        return gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    else
-        return ItemId_GetEffect(item);
 }
 
 u8 GetItemEffectType(u16 item)

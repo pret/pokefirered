@@ -4261,13 +4261,16 @@ static bool32 IsPokeJumpCountdownRunning(void)
     return IsMinigameCountdownRunning();
 }
 
+#if FREE_POKEMON_JUMP == FALSE
 static struct PokemonJumpRecords *GetPokeJumpRecords(void)
 {
     return &gSaveBlock2Ptr->pokeJump;
 }
+#endif //FREE_POKEMON_JUMP
 
 void ResetPokemonJumpRecords(void)
 {
+#if FREE_POKEMON_JUMP == FALSE
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     records->jumpsInRow = 0;
     records->bestJumpScore = 0;
@@ -4275,10 +4278,12 @@ void ResetPokemonJumpRecords(void)
     records->gamesWithMaxPlayers = 0;
     records->unused2 = 0;
     records->unused1 = 0;
+#endif //FREE_POKEMON_JUMP
 }
 
 static bool32 TryUpdateRecords(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRow)
 {
+#if FREE_POKEMON_JUMP == FALSE
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     bool32 newRecord = FALSE;
 
@@ -4290,13 +4295,18 @@ static bool32 TryUpdateRecords(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRo
         records->excellentsInRow = excellentsInRow, newRecord = TRUE;
 
     return newRecord;
+#else
+    return FALSE;
+#endif //FREE_POKEMON_JUMP
 }
 
 static void IncrementGamesWithMaxPlayers(void)
 {
+#if FREE_POKEMON_JUMP == FALSE
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
     if (records->gamesWithMaxPlayers < 9999)
         records->gamesWithMaxPlayers++;
+#endif //FREE_POKEMON_JUMP
 }
 
 void ShowPokemonJumpRecords(void)
@@ -4361,6 +4371,7 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
 
 static void PrintRecordsText(u16 windowId)
 {
+#if FREE_POKEMON_JUMP == FALSE
     int i, x;
     int recordNums[3];
     struct PokemonJumpRecords *records = GetPokeJumpRecords();
@@ -4382,6 +4393,7 @@ static void PrintRecordsText(u16 windowId)
         AddTextPrinterParameterized5(windowId, FONT_NORMAL, strbuf, x, 20 + (i * 14), TEXT_SKIP_DRAW, NULL, 0, 0);
     }
     PutWindowTilemap(windowId);
+#endif //FREE_POKEMON_JUMP
 }
 
 static void TruncateToFirstWordOnly(u8 *str)

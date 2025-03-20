@@ -45,7 +45,7 @@
 #define OVERWORLD_PAL_FEMALE(...)
 #endif //OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
 
-#define OVERWORLD_DATA(objEventPic, _size, shadow, _tracks, _anims)                                                                     \
+#define OVERWORLD_DATA(picTable, _size, shadow, _tracks, _anims)                                                                     \
 {                                                                                                                                       \
     .tileTag = TAG_NONE,                                                                                                                \
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                                                            \
@@ -61,7 +61,7 @@
     .oam = (_size == SIZE_32x32 ? &gObjectEventBaseOam_32x32 : &gObjectEventBaseOam_64x64),                                             \
     .subspriteTables = (_size == SIZE_32x32 ? sOamTables_32x32 : sOamTables_64x64),                                                     \
     .anims = _anims,                                                                                                                    \
-    .images = (const struct SpriteFrameImage[]) { overworld_ascending_frames(objEventPic, SIZE_32x32 ? 4 : 8, SIZE_32x32 ? 4 : 8), },   \
+    .images = picTable,                                                                                                                 \
     .affineAnims = gDummySpriteAffineAnimTable,                                                                                         \
 }
 
@@ -122,7 +122,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .shinyPalette = gMonShinyPalette_CircledQuestionMark,
         .iconSprite = gMonIcon_QuestionMark,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         FOOTPRINT(QuestionMark)
+        SHADOW(-1, 0, SHADOW_SIZE_M)
     #if OW_POKEMON_OBJECT_EVENTS
         .overworldData = {
             .tileTag = TAG_NONE,
@@ -139,7 +141,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             .oam = &gObjectEventBaseOam_32x32,
             .subspriteTables = sOamTables_32x32,
             .anims = sAnimTable_Following,
-            .images = (const struct SpriteFrameImage[]) { overworld_ascending_frames(gObjectEventPic_Substitute, 4, 4), },
+            .images = sPicTable_Substitute,
             .affineAnims = gDummySpriteAffineAnimTable,
         },
     #endif

@@ -854,7 +854,9 @@ struct SaveBlock1
     /*0x3A08*/ struct RecordMixingGift recordMixingGift; // unused
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH + 1];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
+#if FREE_UNION_ROOM_CHAT == FALSE
     /*0x3AD4*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
+#endif //FREE_UNION_ROOM_CHAT
     /*0x3BA8*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C98*/ struct DaycareMon route5DayCareMon;
     /*0x3D34*/ u32 towerChallengeId;

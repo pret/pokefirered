@@ -37,7 +37,6 @@
 #include "recorded_battle.h"
 #include "rtc.h"
 #include "sound.h"
-#include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
@@ -377,7 +376,7 @@ static const u16 sKantoDexNumToNationalDexNum[KANTO_DEX_COUNT + 1] =
 };
 
 // Assigns all Hoenn Dex Indexes to a National Dex Index
-static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
+static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 {
     HOENN_TO_NATIONAL(TREECKO),
     HOENN_TO_NATIONAL(GROVYLE),
@@ -643,7 +642,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
         .statUp = STAT_ATK,
         .statDown = STAT_ATK,
         .backAnim = 0,
-    },
+            },
     [NATURE_LONELY] =
     {
         .name = COMPOUND_STRING("Lonely"),
@@ -844,6 +843,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_change_tables.h"
 #include "data/pokemon/form_change_table_pointers.h"
+#include "data/object_events/object_event_pic_tables_followers.h"
 
 #include "data/pokemon/species_info.h"
 
@@ -910,7 +910,7 @@ const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2] =
 
 // The classes used by other players in the Union Room.
 // These should correspond with the overworld graphics in sUnionRoomObjGfxIds
-const u16 gUnionRoomFacilityClasses[NUM_UNION_ROOM_CLASSES * GENDER_COUNT] = 
+const u16 gUnionRoomFacilityClasses[NUM_UNION_ROOM_CLASSES * GENDER_COUNT] =
 {
     // Male
     FACILITY_CLASS_COOLTRAINER_M,
@@ -1093,7 +1093,7 @@ static const s8 sFriendshipEventModifiers[][3] =
 
 #define HM_MOVES_END 0xFFFF
 
-const u16 sHMMoves[] =
+static const u16 sHMMoves[] =
 {
     MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH, MOVE_FLASH,
     MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, HM_MOVES_END
@@ -2162,6 +2162,19 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
         }
     }
 
+    //  Handler for if Zacian or Zamazenta should learn Iron Head
+    //  since it transforms in the Behemoth Blade/Bash move in
+    //  battle in the Crowned forms.
+    if (learnset[sLearningMoveTableID].move == MOVE_IRON_HEAD && (species == SPECIES_ZAMAZENTA_CROWNED || species == SPECIES_ZACIAN_CROWNED))
+    {
+        for (u32 accessor = MON_DATA_MOVE1; accessor <= MON_DATA_MOVE4; accessor++)
+        {
+            u32 move = GetMonData(mon, accessor);
+            if (move == MOVE_BEHEMOTH_BLADE || move == MOVE_BEHEMOTH_BASH)
+                return MOVE_NONE;
+        }
+    }
+
     if (learnset[sLearningMoveTableID].level == level)
     {
         gMoveToLearn = learnset[sLearningMoveTableID].move;
@@ -2228,8 +2241,9 @@ void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
 
 u8 CountAliveMonsInBattle(u8 caseId, u32 battler)
 {
-    s32 i;
-    u8 retVal = 0;
+    u32 i;
+    u32 battlerSide;
+    u32 retVal = 0;
 
     switch (caseId)
     {
@@ -2248,9 +2262,10 @@ u8 CountAliveMonsInBattle(u8 caseId, u32 battler)
         }
         break;
     case BATTLE_ALIVE_SIDE:
+        battlerSide = GetBattlerSide(battler);
         for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         {
-            if (GetBattlerSide(i) == GetBattlerSide(battler) && !(gAbsentBattlerFlags & (1u << i)))
+            if (GetBattlerSide(i) == battlerSide && !(gAbsentBattlerFlags & (1u << i)))
                 retVal++;
         }
         break;
@@ -3680,7 +3695,7 @@ u8 GetSecretBaseTrainerPicIndex(void)
     return gFacilityClassToPicIndex[facilityClass];
 }
 
-u8 GetSecretBaseTrainerNameIndex(void)
+u8 GetSecretBaseTrainerClass(void)
 {
     u8 facilityClass = sSecretBaseFacilityClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % NUM_SECRET_BASE_CLASSES];
     return gFacilityClassToTrainerClass[facilityClass];
@@ -3858,15 +3873,15 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->status2 = 0;
 }
 
-// void CopyPartyMonToBattleData(u32 battlerId, u32 partyIndex)
-// {
-//     u32 side = GetBattlerSide(battlerId);
-//     struct Pokemon *party = GetSideParty(side);
-//     PokemonToBattleMon(&party[partyIndex], &gBattleMons[battlerId]);
-//     gBattleStruct->hpOnSwitchout[side] = gBattleMons[battlerId].hp;
-//     UpdateSentPokesToOpponentValue(battlerId);
-//     ClearTemporarySpeciesSpriteData(battlerId, FALSE, FALSE);
-// }
+void CopyPartyMonToBattleData(u32 battlerId, u32 partyIndex)
+{
+    u32 side = GetBattlerSide(battlerId);
+    struct Pokemon *party = GetSideParty(side);
+    PokemonToBattleMon(&party[partyIndex], &gBattleMons[battlerId]);
+    gBattleStruct->hpOnSwitchout[side] = gBattleMons[battlerId].hp;
+    UpdateSentPokesToOpponentValue(battlerId);
+    ClearTemporarySpeciesSpriteData(battlerId, FALSE, FALSE);
+}
 
 bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 moveIndex)
 {
@@ -4497,80 +4512,80 @@ u8 GetItemEffectParamOffset(u32 battler, u16 itemId, u8 effectByte, u8 effectBit
     return offset;
 }
 
-// static void BufferStatRoseMessage(s32 statIdx)
-// {
-//     gBattlerTarget = gBattlerInMenuId;
-//     StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[statIdx]]);
-//     if (B_X_ITEMS_BUFF >= GEN_7)
-//     {
-//         StringCopy(gBattleTextBuff2, gText_StatSharply);
-//         StringAppend(gBattleTextBuff2, gText_StatRose);
-//     }
-//     else
-//     {
-//         StringCopy(gBattleTextBuff2, gText_StatRose);
-//     }
-//     BattleStringExpandPlaceholdersToDisplayedString(gText_DefendersStatRose);
-// }
+static void BufferStatRoseMessage(s32 statIdx)
+{
+    gBattlerTarget = gBattlerInMenuId;
+    StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[statIdx]]);
+    if (B_X_ITEMS_BUFF >= GEN_7)
+    {
+        StringCopy(gBattleTextBuff2, gText_StatSharply);
+        StringAppend(gBattleTextBuff2, gText_StatRose);
+    }
+    else
+    {
+        StringCopy(gBattleTextBuff2, gText_StatRose);
+    }
+    BattleStringExpandPlaceholdersToDisplayedString(gText_DefendersStatRose);
+}
 
-// u8 *UseStatIncreaseItem(u16 itemId)
-// {
-//     const u8 *itemEffect;
+u8 *UseStatIncreaseItem(u16 itemId)
+{
+    const u8 *itemEffect;
 
-//     if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-//     {
-//         if (gMain.inBattle)
-//             itemEffect = gEnigmaBerries[gBattlerInMenuId].itemEffect;
-//         else
-//         #if FREE_ENIGMA_BERRY == FALSE
-//             itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-//         #else
-//             itemEffect = 0;
-//         #endif //FREE_ENIGMA_BERRY
-//     }
-//     else
-//     {
-//         itemEffect = ItemId_GetEffect(itemId);
-//     }
+    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
+    {
+        if (gMain.inBattle)
+            itemEffect = gEnigmaBerries[gBattlerInMenuId].itemEffect;
+        else
+        #if FREE_ENIGMA_BERRY == FALSE
+            itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
+        #else
+            itemEffect = 0;
+        #endif //FREE_ENIGMA_BERRY
+    }
+    else
+    {
+        itemEffect = ItemId_GetEffect(itemId);
+    }
 
-//     gPotentialItemEffectBattler = gBattlerInMenuId;
+    gPotentialItemEffectBattler = gBattlerInMenuId;
 
-//     if (itemEffect[0] & ITEM0_DIRE_HIT)
-//     {
-//         gBattlerAttacker = gBattlerInMenuId;
-//         BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnGettingPumped);
-//     }
+    if (itemEffect[0] & ITEM0_DIRE_HIT)
+    {
+        gBattlerAttacker = gBattlerInMenuId;
+        BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnGettingPumped);
+    }
 
-//     switch (itemEffect[1])
-//     {
-//         case ITEM1_X_ATTACK:
-//             BufferStatRoseMessage(STAT_ATK);
-//             break;
-//         case ITEM1_X_DEFENSE:
-//             BufferStatRoseMessage(STAT_DEF);
-//             break;
-//         case ITEM1_X_SPEED:
-//             BufferStatRoseMessage(STAT_SPEED);
-//             break;
-//         case ITEM1_X_SPATK:
-//             BufferStatRoseMessage(STAT_SPATK);
-//             break;
-//         case ITEM1_X_SPDEF:
-//             BufferStatRoseMessage(STAT_SPDEF);
-//             break;
-//         case ITEM1_X_ACCURACY:
-//             BufferStatRoseMessage(STAT_ACC);
-//             break;
-//     }
+    switch (itemEffect[1])
+    {
+        case ITEM1_X_ATTACK:
+            BufferStatRoseMessage(STAT_ATK);
+            break;
+        case ITEM1_X_DEFENSE:
+            BufferStatRoseMessage(STAT_DEF);
+            break;
+        case ITEM1_X_SPEED:
+            BufferStatRoseMessage(STAT_SPEED);
+            break;
+        case ITEM1_X_SPATK:
+            BufferStatRoseMessage(STAT_SPATK);
+            break;
+        case ITEM1_X_SPDEF:
+            BufferStatRoseMessage(STAT_SPDEF);
+            break;
+        case ITEM1_X_ACCURACY:
+            BufferStatRoseMessage(STAT_ACC);
+            break;
+    }
 
-//     if (itemEffect[3] & ITEM3_GUARD_SPEC)
-//     {
-//         gBattlerAttacker = gBattlerInMenuId;
-//         BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnShroudedInMist);
-//     }
+    if (itemEffect[3] & ITEM3_GUARD_SPEC)
+    {
+        gBattlerAttacker = gBattlerInMenuId;
+        BattleStringExpandPlaceholdersToDisplayedString(gText_PkmnShroudedInMist);
+    }
 
-//     return gDisplayedStringBattle;
-// }
+    return gDisplayedStringBattle;
+}
 
 u8 GetNature(struct Pokemon *mon)
 {
@@ -6970,25 +6985,25 @@ void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method)
     }
 }
 
-// u32 GetMonFriendshipScore(struct Pokemon *pokemon)
-// {
-//     u32 friendshipScore = GetMonData(pokemon, MON_DATA_FRIENDSHIP, NULL);
+u32 GetMonFriendshipScore(struct Pokemon *pokemon)
+{
+    u32 friendshipScore = GetMonData(pokemon, MON_DATA_FRIENDSHIP, NULL);
 
-//     if (friendshipScore == MAX_FRIENDSHIP)
-//         return FRIENDSHIP_MAX;
-//     if (friendshipScore >= 200)
-//         return FRIENDSHIP_200_TO_254;
-//     if (friendshipScore >= 150)
-//         return FRIENDSHIP_150_TO_199;
-//     if (friendshipScore >= 100)
-//         return FRIENDSHIP_100_TO_149;
-//     if (friendshipScore >= 50)
-//         return FRIENDSHIP_50_TO_99;
-//     if (friendshipScore >= 1)
-//         return FRIENDSHIP_1_TO_49;
+    if (friendshipScore == MAX_FRIENDSHIP)
+        return FRIENDSHIP_MAX;
+    if (friendshipScore >= 200)
+        return FRIENDSHIP_200_TO_254;
+    if (friendshipScore >= 150)
+        return FRIENDSHIP_150_TO_199;
+    if (friendshipScore >= 100)
+        return FRIENDSHIP_100_TO_149;
+    if (friendshipScore >= 50)
+        return FRIENDSHIP_50_TO_99;
+    if (friendshipScore >= 1)
+        return FRIENDSHIP_1_TO_49;
 
-//     return FRIENDSHIP_NONE;
-// }
+    return FRIENDSHIP_NONE;
+}
 
 u32 GetMonAffectionHearts(struct Pokemon *pokemon)
 {
@@ -7098,50 +7113,6 @@ u16 GetSpeciesPreEvolution(u16 species)
     return SPECIES_NONE;
 }
 
-u16 GetFirstPartnerMove(u16 species)
-{
-    switch(species)
-    {
-        case SPECIES_VENUSAUR:
-        case SPECIES_MEGANIUM:
-        case SPECIES_SCEPTILE:
-        case SPECIES_TORTERRA:
-        case SPECIES_SERPERIOR:
-        case SPECIES_CHESNAUGHT:
-        case SPECIES_DECIDUEYE:
-        case SPECIES_DECIDUEYE_HISUI:
-        case SPECIES_RILLABOOM:
-        case SPECIES_MEOWSCARADA:
-            return MOVE_FRENZY_PLANT;
-        case SPECIES_CHARIZARD:
-        case SPECIES_TYPHLOSION:
-        case SPECIES_TYPHLOSION_HISUI:
-        case SPECIES_BLAZIKEN:
-        case SPECIES_INFERNAPE:
-        case SPECIES_EMBOAR:
-        case SPECIES_DELPHOX:
-        case SPECIES_INCINEROAR:
-        case SPECIES_CINDERACE:
-        case SPECIES_SKELEDIRGE:
-            return MOVE_BLAST_BURN;
-        case SPECIES_BLASTOISE:
-        case SPECIES_FERALIGATR:
-        case SPECIES_SWAMPERT:
-        case SPECIES_EMPOLEON:
-        case SPECIES_SAMUROTT:
-        case SPECIES_SAMUROTT_HISUI:
-        case SPECIES_GRENINJA:
-        case SPECIES_GRENINJA_ASH:
-        case SPECIES_GRENINJA_BATTLE_BOND:
-        case SPECIES_PRIMARINA:
-        case SPECIES_INTELEON:
-        case SPECIES_QUAQUAVAL:
-            return MOVE_HYDRO_CANNON;
-        default:
-            return MOVE_NONE;
-    }
-}
-
 void UpdateDaysPassedSinceFormChange(u16 days)
 {
     u32 i;
@@ -7237,7 +7208,7 @@ u32 GetRegionalFormByRegion(u32 species, u32 region)
         {
             if (firstFoundSpecies == 0)
                 firstFoundSpecies = formTable[formId];
-            
+
             if (IsSpeciesRegionalFormFromRegion(formTable[formId], region))
                 return formTable[formId];
         }
@@ -7290,4 +7261,48 @@ bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 battlerId)
             return TRUE;
     }
     return FALSE;
+}
+
+u16 GetFirstPartnerMove(u16 species)
+{
+    switch(species)
+    {
+        case SPECIES_VENUSAUR:
+        case SPECIES_MEGANIUM:
+        case SPECIES_SCEPTILE:
+        case SPECIES_TORTERRA:
+        case SPECIES_SERPERIOR:
+        case SPECIES_CHESNAUGHT:
+        case SPECIES_DECIDUEYE:
+        case SPECIES_DECIDUEYE_HISUI:
+        case SPECIES_RILLABOOM:
+        case SPECIES_MEOWSCARADA:
+            return MOVE_FRENZY_PLANT;
+        case SPECIES_CHARIZARD:
+        case SPECIES_TYPHLOSION:
+        case SPECIES_TYPHLOSION_HISUI:
+        case SPECIES_BLAZIKEN:
+        case SPECIES_INFERNAPE:
+        case SPECIES_EMBOAR:
+        case SPECIES_DELPHOX:
+        case SPECIES_INCINEROAR:
+        case SPECIES_CINDERACE:
+        case SPECIES_SKELEDIRGE:
+            return MOVE_BLAST_BURN;
+        case SPECIES_BLASTOISE:
+        case SPECIES_FERALIGATR:
+        case SPECIES_SWAMPERT:
+        case SPECIES_EMPOLEON:
+        case SPECIES_SAMUROTT:
+        case SPECIES_SAMUROTT_HISUI:
+        case SPECIES_GRENINJA:
+        case SPECIES_GRENINJA_ASH:
+        case SPECIES_GRENINJA_BATTLE_BOND:
+        case SPECIES_PRIMARINA:
+        case SPECIES_INTELEON:
+        case SPECIES_QUAQUAVAL:
+            return MOVE_HYDRO_CANNON;
+        default:
+            return MOVE_NONE;
+    }
 }

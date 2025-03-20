@@ -55,10 +55,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Chikorita,
         .iconSprite = gMonIcon_Chikorita,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
         SHADOW(-1, 2, SHADOW_SIZE_S)
         FOOTPRINT(Chikorita)
         OVERWORLD(
-            gObjectEventPic_Chikorita,
+            sPicTable_Chikorita,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -123,10 +124,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Bayleef,
         .iconSprite = gMonIcon_Bayleef,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 10, SHADOW_SIZE_M)
         FOOTPRINT(Bayleef)
         OVERWORLD(
-            gObjectEventPic_Bayleef,
+            sPicTable_Bayleef,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -202,10 +204,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_MeganiumF,
         .backPicSizeFemale = MON_COORDS_SIZE(56, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 13, SHADOW_SIZE_M)
         FOOTPRINT(Meganium)
         OVERWORLD(
-            gObjectEventPic_Meganium,
+            sPicTable_Meganium,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -214,7 +217,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Meganium
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_MeganiumF,
+            sPicTable_MeganiumF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -278,10 +281,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Cyndaquil,
         .iconSprite = gMonIcon_Cyndaquil,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 1 : 3,
+        .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
         SHADOW(0, -1, SHADOW_SIZE_S)
         FOOTPRINT(Cyndaquil)
         OVERWORLD(
-            gObjectEventPic_Cyndaquil,
+            sPicTable_Cyndaquil,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -346,10 +350,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Quilava,
         .iconSprite = gMonIcon_Quilava,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 1 : 3,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 2, SHADOW_SIZE_M)
         FOOTPRINT(Quilava)
         OVERWORLD(
-            gObjectEventPic_Quilava,
+            sPicTable_Quilava,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -422,10 +427,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Typhlosion,
         .iconSprite = gMonIcon_Typhlosion,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 1 : 3,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(4, 14, SHADOW_SIZE_L)
         FOOTPRINT(Typhlosion)
         OVERWORLD(
-            gObjectEventPic_Typhlosion,
+            sPicTable_Typhlosion,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -486,10 +492,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_TyphlosionHisui,
         .iconSprite = gMonIcon_TyphlosionHisui,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 14, SHADOW_SIZE_L)
         FOOTPRINT(Typhlosion)
         OVERWORLD(
-            gObjectEventPic_TyphlosionHisui,
+            sPicTable_TyphlosionHisui,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -560,10 +567,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Totodile,
         .iconSprite = gMonIcon_Totodile,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 2 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
         SHADOW(2, 0, SHADOW_SIZE_S)
         FOOTPRINT(Totodile)
         OVERWORLD(
-            gObjectEventPic_Totodile,
+            sPicTable_Totodile,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -629,10 +637,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Croconaw,
         .iconSprite = gMonIcon_Croconaw,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 2 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 8, SHADOW_SIZE_M)
         FOOTPRINT(Croconaw)
         OVERWORLD(
-            gObjectEventPic_Croconaw,
+            sPicTable_Croconaw,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -705,10 +714,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Feraligatr,
         .iconSprite = gMonIcon_Feraligatr,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 2 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(3, 11, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Feraligatr)
         OVERWORLD(
-            gObjectEventPic_Feraligatr,
+            sPicTable_Feraligatr,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -774,10 +784,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Sentret,
         .iconSprite = gMonIcon_Sentret,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 11, SHADOW_SIZE_S)
         FOOTPRINT(Sentret)
         OVERWORLD(
-            gObjectEventPic_Sentret,
+            sPicTable_Sentret,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -841,10 +852,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Furret,
         .iconSprite = gMonIcon_Furret,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 9, SHADOW_SIZE_M)
         FOOTPRINT(Furret)
         OVERWORLD(
-            gObjectEventPic_Furret,
+            sPicTable_Furret,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -918,10 +930,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Hoothoot,
         .iconSprite = gMonIcon_Hoothoot,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 2, SHADOW_SIZE_S)
         FOOTPRINT(Hoothoot)
         OVERWORLD(
-            gObjectEventPic_Hoothoot,
+            sPicTable_Hoothoot,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -991,10 +1004,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Noctowl,
         .iconSprite = gMonIcon_Noctowl,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-2, 10, SHADOW_SIZE_S)
         FOOTPRINT(Noctowl)
         OVERWORLD(
-            gObjectEventPic_Noctowl,
+            sPicTable_Noctowl,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -1066,10 +1080,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_LedybaF,
         .backPicSizeFemale = MON_COORDS_SIZE(56, 48),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 4, SHADOW_SIZE_M)
         FOOTPRINT(Ledyba)
         OVERWORLD(
-            gObjectEventPic_Ledyba,
+            sPicTable_Ledyba,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_BUG,
@@ -1078,7 +1093,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Ledyba
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_LedybaF,
+            sPicTable_LedybaF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_BUG,
@@ -1149,10 +1164,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_LedianF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 15, SHADOW_SIZE_S)
         FOOTPRINT(Ledian)
         OVERWORLD(
-            gObjectEventPic_Ledian,
+            sPicTable_Ledian,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -1161,7 +1177,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Ledian
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_LedianF,
+            sPicTable_LedianF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -1229,10 +1245,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Spinarak,
         .iconSprite = gMonIcon_Spinarak,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
         SHADOW(0, -8, SHADOW_SIZE_M)
         FOOTPRINT(Spinarak)
         OVERWORLD(
-            gObjectEventPic_Spinarak,
+            sPicTable_Spinarak,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_BUG,
@@ -1304,10 +1321,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Ariados,
         .iconSprite = gMonIcon_Ariados,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(1, 3, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Ariados)
         OVERWORLD(
-            gObjectEventPic_Ariados,
+            sPicTable_Ariados,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_BUG,
@@ -1375,10 +1393,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Chinchou,
         .iconSprite = gMonIcon_Chinchou,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 1, SHADOW_SIZE_M)
         FOOTPRINT(Chinchou)
         OVERWORLD(
-            gObjectEventPic_Chinchou,
+            sPicTable_Chinchou,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SPOT,
@@ -1446,10 +1465,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Lanturn,
         .iconSprite = gMonIcon_Lanturn,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(5, 4, SHADOW_SIZE_M)
         FOOTPRINT(Lanturn)
         OVERWORLD(
-            gObjectEventPic_Lanturn,
+            sPicTable_Lanturn,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SPOT,
@@ -1516,10 +1536,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Togepi,
         .iconSprite = gMonIcon_Togepi,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 2 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
         SHADOW(-1, -3, SHADOW_SIZE_S)
         FOOTPRINT(Togepi)
         OVERWORLD(
-            gObjectEventPic_Togepi,
+            sPicTable_Togepi,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -1584,10 +1605,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Togetic,
         .iconSprite = gMonIcon_Togetic,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 2 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 6, SHADOW_SIZE_S)
         FOOTPRINT(Togetic)
         OVERWORLD(
-            gObjectEventPic_Togetic,
+            sPicTable_Togetic,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -1665,10 +1687,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Togekiss,
         .iconSprite = gMonIcon_Togekiss,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(4, 15, SHADOW_SIZE_M)
         FOOTPRINT(Togekiss)
         OVERWORLD(
-            gObjectEventPic_Togekiss,
+            sPicTable_Togekiss,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -1737,10 +1760,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Natu,
         .iconSprite = gMonIcon_Natu,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 0 : 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-2, -4, SHADOW_SIZE_S)
         FOOTPRINT(Natu)
         OVERWORLD(
-            gObjectEventPic_Natu,
+            sPicTable_Natu,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -1814,10 +1838,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .frontPicFemale = gMonFrontPic_XatuF,
         .frontPicSizeFemale = MON_COORDS_SIZE(40, 56),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 9, SHADOW_SIZE_S)
         FOOTPRINT(Xatu)
         OVERWORLD(
-            gObjectEventPic_Xatu,
+            sPicTable_Xatu,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -1826,7 +1851,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Xatu
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_XatuF,
+            sPicTable_XatuF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -1893,10 +1918,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Mareep,
         .iconSprite = gMonIcon_Mareep,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 2 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
         SHADOW(1, 1, SHADOW_SIZE_M)
         FOOTPRINT(Mareep)
         OVERWORLD(
-            gObjectEventPic_Mareep,
+            sPicTable_Mareep,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -1963,10 +1989,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Flaaffy,
         .iconSprite = gMonIcon_Flaaffy,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 4, SHADOW_SIZE_S)
         FOOTPRINT(Flaaffy)
         OVERWORLD(
-            gObjectEventPic_Flaaffy,
+            sPicTable_Flaaffy,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2041,10 +2068,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Ampharos,
         .iconSprite = gMonIcon_Ampharos,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(3, 11, SHADOW_SIZE_M)
         FOOTPRINT(Ampharos)
         OVERWORLD(
-            gObjectEventPic_Ampharos,
+            sPicTable_Ampharos,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2106,11 +2134,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_AmpharosMega,
         .iconSprite = gMonIcon_AmpharosMega,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-7, 13, SHADOW_SIZE_M)
         FOOTPRINT(Ampharos)
     #if OW_BATTLE_ONLY_FORMS
         OVERWORLD(
-            gObjectEventPic_AmpharosMega,
+            sPicTable_AmpharosMega,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2189,10 +2218,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Azurill,
         .iconSprite = gMonIcon_Azurill,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 2 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
         SHADOW(-4, 3, SHADOW_SIZE_S)
         FOOTPRINT(Azurill)
         OVERWORLD(
-            gObjectEventPic_Azurill,
+            sPicTable_Azurill,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2262,10 +2292,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Marill,
         .iconSprite = gMonIcon_Marill,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 2 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
         SHADOW(-2, 0, SHADOW_SIZE_S)
         FOOTPRINT(Marill)
         OVERWORLD(
-            gObjectEventPic_Marill,
+            sPicTable_Marill,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2344,10 +2375,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Azumarill,
         .iconSprite = gMonIcon_Azumarill,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 2 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-4, 8, SHADOW_SIZE_S)
         FOOTPRINT(Azumarill)
         OVERWORLD(
-            gObjectEventPic_Azumarill,
+            sPicTable_Azumarill,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2415,10 +2447,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Bonsly,
         .iconSprite = gMonIcon_Bonsly,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
         SHADOW(-3, 4, SHADOW_SIZE_S)
         FOOTPRINT(Bonsly)
         OVERWORLD(
-            gObjectEventPic_Bonsly,
+            sPicTable_Bonsly,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2493,10 +2526,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_SudowoodoF,
         .backPicSizeFemale = MON_COORDS_SIZE(48, 56),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-2, 7, SHADOW_SIZE_S)
         FOOTPRINT(Sudowoodo)
         OVERWORLD(
-            gObjectEventPic_Sudowoodo,
+            sPicTable_Sudowoodo,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2505,7 +2539,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Sudowoodo
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_SudowoodoF,
+            sPicTable_SudowoodoF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2575,10 +2609,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Hoppip,
         .iconSprite = gMonIcon_Hoppip,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-5, 12, SHADOW_SIZE_S)
         FOOTPRINT(Hoppip)
         OVERWORLD(
-            gObjectEventPic_Hoppip,
+            sPicTable_Hoppip,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -2653,10 +2688,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Skiploom,
         .iconSprite = gMonIcon_Skiploom,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 10, SHADOW_SIZE_S)
         FOOTPRINT(Skiploom)
         OVERWORLD(
-            gObjectEventPic_Skiploom,
+            sPicTable_Skiploom,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -2736,10 +2772,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Jumpluff,
         .iconSprite = gMonIcon_Jumpluff,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-2, 11, SHADOW_SIZE_S)
         FOOTPRINT(Jumpluff)
         OVERWORLD(
-            gObjectEventPic_Jumpluff,
+            sPicTable_Jumpluff,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -2809,10 +2846,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_AipomF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 12, SHADOW_SIZE_S)
         FOOTPRINT(Aipom)
         OVERWORLD(
-            gObjectEventPic_Aipom,
+            sPicTable_Aipom,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2821,7 +2859,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Aipom
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_AipomF,
+            sPicTable_AipomF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2891,10 +2929,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_AmbipomF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 13, SHADOW_SIZE_S)
         FOOTPRINT(Ambipom)
         OVERWORLD(
-            gObjectEventPic_Ambipom,
+            sPicTable_Ambipom,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2903,7 +2942,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Ambipom
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_AmbipomF,
+            sPicTable_AmbipomF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -2974,10 +3013,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Sunkern,
         .iconSprite = gMonIcon_Sunkern,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
         SHADOW(-1, -4, SHADOW_SIZE_S)
         FOOTPRINT(Sunkern)
         OVERWORLD(
-            gObjectEventPic_Sunkern,
+            sPicTable_Sunkern,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SPOT,
@@ -3046,10 +3086,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Sunflora,
         .iconSprite = gMonIcon_Sunflora,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 6, SHADOW_SIZE_S)
         FOOTPRINT(Sunflora)
         OVERWORLD(
-            gObjectEventPic_Sunflora,
+            sPicTable_Sunflora,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3135,10 +3176,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Yanma,
         .iconSprite = gMonIcon_Yanma,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-2, 10, SHADOW_SIZE_S)
         FOOTPRINT(Yanma)
         OVERWORLD(
-            gObjectEventPic_Yanma,
+            sPicTable_Yanma,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -3229,10 +3271,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Yanmega,
         .iconSprite = gMonIcon_Yanmega,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 12, SHADOW_SIZE_M)
         FOOTPRINT(Yanmega)
         OVERWORLD(
-            gObjectEventPic_Yanmega,
+            sPicTable_Yanmega,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3304,10 +3347,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_WooperF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 40),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
         SHADOW(1, -2, SHADOW_SIZE_S)
         FOOTPRINT(Wooper)
         OVERWORLD(
-            gObjectEventPic_Wooper,
+            sPicTable_Wooper,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3316,7 +3360,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Wooper
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_WooperF,
+            sPicTable_WooperF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3385,10 +3429,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_QuagsireF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 56),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 8, SHADOW_SIZE_M)
         FOOTPRINT(Quagsire)
         OVERWORLD(
-            gObjectEventPic_Quagsire,
+            sPicTable_Quagsire,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3397,7 +3442,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Quagsire
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_QuagsireF,
+            sPicTable_QuagsireF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3455,10 +3500,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_WooperPaldea,
         .iconSprite = gMonIcon_WooperPaldea,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
         SHADOW(-1, -2, SHADOW_SIZE_S)
         FOOTPRINT(Wooper)
         OVERWORLD(
-            gObjectEventPic_WooperPaldea,
+            sPicTable_WooperPaldea,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3521,10 +3567,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Clodsire,
         .iconSprite = gMonIcon_Clodsire,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-2, 3, SHADOW_SIZE_L)
         FOOTPRINT(Clodsire)
         OVERWORLD(
-            gObjectEventPic_Clodsire,
+            sPicTable_Clodsire,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3600,10 +3647,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_MurkrowF,
         .backPicSizeFemale = MON_COORDS_SIZE(40, 56),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-2, 8, SHADOW_SIZE_S)
         FOOTPRINT(Murkrow)
         OVERWORLD(
-            gObjectEventPic_Murkrow,
+            sPicTable_Murkrow,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3612,7 +3660,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Murkrow
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_MurkrowF,
+            sPicTable_MurkrowF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3677,10 +3725,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Honchkrow,
         .iconSprite = gMonIcon_Honchkrow,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(5, 7, SHADOW_SIZE_M)
         FOOTPRINT(Honchkrow)
         OVERWORLD(
-            gObjectEventPic_Honchkrow,
+            sPicTable_Honchkrow,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3755,10 +3804,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Misdreavus,
         .iconSprite = gMonIcon_Misdreavus,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 10, SHADOW_SIZE_S)
         FOOTPRINT(Misdreavus)
         OVERWORLD(
-            gObjectEventPic_Misdreavus,
+            sPicTable_Misdreavus,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -3833,10 +3883,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Mismagius,
         .iconSprite = gMonIcon_Mismagius,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(1, 11, SHADOW_SIZE_M)
         FOOTPRINT(Mismagius)
         OVERWORLD(
-            gObjectEventPic_Mismagius,
+            sPicTable_Mismagius,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -3897,10 +3948,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Unown,                                                         \
         .iconSprite = gMonIcon_Unown ##letter,                                                          \
         .iconPalIndex = 0,                                                                              \
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,                                                         \
         SHADOW(0, 3, SHADOW_SIZE_S)                                                                     \
         FOOTPRINT(Unown)                                                                                \
         OVERWORLD(                                                                                      \
-            gObjectEventPic_Unown ##letter,                                                             \
+            sPicTable_Unown ##letter,                                                                   \
             SIZE_32x32,                                                                                 \
             SHADOW_SIZE_M,                                                                              \
             TRACKS_NONE,                                                                                \
@@ -4000,10 +4052,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Wynaut,
         .iconSprite = gMonIcon_Wynaut,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
         SHADOW(-1, 2, SHADOW_SIZE_S)
         FOOTPRINT(Wynaut)
         OVERWORLD(
-            gObjectEventPic_Wynaut,
+            sPicTable_Wynaut,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -4081,10 +4134,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .iconPalIndexFemale = 0,
     #endif
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-3, 8, SHADOW_SIZE_M)
         FOOTPRINT(Wobbuffet)
         OVERWORLD(
-            gObjectEventPic_Wobbuffet,
+            sPicTable_Wobbuffet,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -4093,7 +4147,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Wobbuffet
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_WobbuffetF,
+            sPicTable_WobbuffetF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -4163,10 +4217,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_GirafarigF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 13, SHADOW_SIZE_M)
         FOOTPRINT(Girafarig)
         OVERWORLD(
-            gObjectEventPic_Girafarig,
+            sPicTable_Girafarig,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -4175,7 +4230,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Girafarig
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_GirafarigF,
+            sPicTable_GirafarigF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -4235,10 +4290,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Farigiraf,
         .iconSprite = gMonIcon_Farigiraf,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(11, 13, SHADOW_SIZE_L)
         FOOTPRINT(Farigiraf)
         OVERWORLD(
-            gObjectEventPic_Farigiraf,
+            sPicTable_Farigiraf,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -4309,10 +4365,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Pineco,
         .iconSprite = gMonIcon_Pineco,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
         SHADOW(0, 2, SHADOW_SIZE_S)
         FOOTPRINT(Pineco)
         OVERWORLD(
-            gObjectEventPic_Pineco,
+            sPicTable_Pineco,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SPOT,
@@ -4378,10 +4435,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Forretress,
         .iconSprite = gMonIcon_Forretress,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 6, SHADOW_SIZE_L)
         FOOTPRINT(Forretress)
         OVERWORLD(
-            gObjectEventPic_Forretress,
+            sPicTable_Forretress,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SPOT,
@@ -4454,10 +4512,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Dunsparce,
         .iconSprite = gMonIcon_Dunsparce,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 2 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, -4, SHADOW_SIZE_M)
         FOOTPRINT(Dunsparce)
         OVERWORLD(
-            gObjectEventPic_Dunsparce,
+            sPicTable_Dunsparce,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SPOT,
@@ -4520,10 +4579,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Dudunsparce,
         .iconSprite = gMonIcon_Dudunsparce,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 5, SHADOW_SIZE_L)
         FOOTPRINT(Dudunsparce)
         OVERWORLD(
-            gObjectEventPic_DudunsparceTwoSegment,
+            sPicTable_DudunsparceTwoSegment,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SLITHER,
@@ -4583,10 +4643,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Dudunsparce,
         .iconSprite = gMonIcon_Dudunsparce,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(4, 4, SHADOW_SIZE_L)
         FOOTPRINT(Dudunsparce)
         OVERWORLD(
-            gObjectEventPic_DudunsparceThreeSegment,
+            sPicTable_DudunsparceThreeSegment,
             SIZE_64x64,
             SHADOW_SIZE_M,
             TRACKS_SLITHER,
@@ -4659,10 +4720,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_GligarF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 15, SHADOW_SIZE_S)
         FOOTPRINT(Gligar)
         OVERWORLD(
-            gObjectEventPic_Gligar,
+            sPicTable_Gligar,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -4671,7 +4733,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Gligar
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_GligarF,
+            sPicTable_GligarF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -4738,10 +4800,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Gliscor,
         .iconSprite = gMonIcon_Gliscor,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 13, SHADOW_SIZE_M)
         FOOTPRINT(Gliscor)
         OVERWORLD(
-            gObjectEventPic_Gliscor,
+            sPicTable_Gliscor,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -4810,10 +4873,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Snubbull,
         .iconSprite = gMonIcon_Snubbull,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
         SHADOW(-1, 1, SHADOW_SIZE_S)
         FOOTPRINT(Snubbull)
         OVERWORLD(
-            gObjectEventPic_Snubbull,
+            sPicTable_Snubbull,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -4885,10 +4949,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Granbull,
         .iconSprite = gMonIcon_Granbull,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(3, 10, SHADOW_SIZE_L)
         FOOTPRINT(Granbull)
         OVERWORLD(
-            gObjectEventPic_Granbull,
+            sPicTable_Granbull,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -4968,10 +5033,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Qwilfish,
         .iconSprite = gMonIcon_Qwilfish,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-2, 3, SHADOW_SIZE_S)
         FOOTPRINT(Qwilfish)
         OVERWORLD(
-            gObjectEventPic_Qwilfish,
+            sPicTable_Qwilfish,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SPOT,
@@ -5035,10 +5101,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_QwilfishHisui,
         .iconSprite = gMonIcon_QwilfishHisui,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-5, 4, SHADOW_SIZE_S)
         FOOTPRINT(Qwilfish)
         OVERWORLD(
-            gObjectEventPic_QwilfishHisui,
+            sPicTable_QwilfishHisui,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5100,10 +5167,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Overqwil,
         .iconSprite = gMonIcon_Overqwil,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 11, SHADOW_SIZE_M)
         FOOTPRINT(Overqwil)
         OVERWORLD(
-            gObjectEventPic_Overqwil,
+            sPicTable_Overqwil,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5176,10 +5244,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Shuckle,
         .iconSprite = gMonIcon_Shuckle,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
         SHADOW(1, 3, SHADOW_SIZE_M)
         FOOTPRINT(Shuckle)
         OVERWORLD(
-            gObjectEventPic_Shuckle,
+            sPicTable_Shuckle,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5253,10 +5322,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_HeracrossF,
         .backPicSizeFemale = MON_COORDS_SIZE(48, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 10, SHADOW_SIZE_M)
         FOOTPRINT(Heracross)
         OVERWORLD(
-            gObjectEventPic_Heracross,
+            sPicTable_Heracross,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5265,7 +5335,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Heracross
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_HeracrossF,
+            sPicTable_HeracrossF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5326,11 +5396,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_HeracrossMega,
         .iconSprite = gMonIcon_HeracrossMega,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 13, SHADOW_SIZE_M)
         FOOTPRINT(Heracross)
     #if OW_BATTLE_ONLY_FORMS
         OVERWORLD(
-            gObjectEventPic_HeracrossMega,
+            sPicTable_HeracrossMega,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5412,10 +5483,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_SneaselF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 5, SHADOW_SIZE_S)
         FOOTPRINT(Sneasel)
         OVERWORLD(
-            gObjectEventPic_Sneasel,
+            sPicTable_Sneasel,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5424,7 +5496,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Sneasel
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_SneaselF,
+            sPicTable_SneaselF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5497,10 +5569,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_WeavileF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-4, 10, SHADOW_SIZE_M)
         FOOTPRINT(Weavile)
         OVERWORLD(
-            gObjectEventPic_Weavile,
+            sPicTable_Weavile,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5509,7 +5582,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Weavile
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_WeavileF,
+            sPicTable_WeavileF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5576,10 +5649,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_SneaselHisuiF,
         .backPicSizeFemale = MON_COORDS_SIZE(56, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 5, SHADOW_SIZE_S)
         FOOTPRINT(Sneasel)
         OVERWORLD(
-            gObjectEventPic_SneaselHisui,
+            sPicTable_SneaselHisui,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5588,7 +5662,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_SneaselHisui
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_SneaselHisuiF,
+            sPicTable_SneaselHisuiF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5649,10 +5723,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Sneasler,
         .iconSprite = gMonIcon_Sneasler,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 11, SHADOW_SIZE_M)
         FOOTPRINT(Sneasler)
         OVERWORLD(
-            gObjectEventPic_Sneasler,
+            sPicTable_Sneasler,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5723,10 +5798,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Teddiursa,
         .iconSprite = gMonIcon_Teddiursa,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
         SHADOW(-2, 1, SHADOW_SIZE_S)
         FOOTPRINT(Teddiursa)
         OVERWORLD(
-            gObjectEventPic_Teddiursa,
+            sPicTable_Teddiursa,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5800,10 +5876,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_UrsaringF,
         .backPicSizeFemale = MON_COORDS_SIZE(56, 64),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(1, 14, SHADOW_SIZE_L)
         FOOTPRINT(Ursaring)
         OVERWORLD(
-            gObjectEventPic_Ursaring,
+            sPicTable_Ursaring,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5812,7 +5889,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Ursaring
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_UrsaringF,
+            sPicTable_UrsaringF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5871,10 +5948,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Ursaluna,
         .iconSprite = gMonIcon_Ursaluna,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(1, 4, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Ursaluna)
         OVERWORLD(
-            gObjectEventPic_Ursaluna,
+            sPicTable_Ursaluna,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -5934,6 +6012,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_UrsalunaBloodmoon,
         .iconSprite = gMonIcon_UrsalunaBloodmoon,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(6, 11, SHADOW_SIZE_L)
         FOOTPRINT(Ursaluna)
         .levelUpLearnset = sUrsalunaBloodmoonLevelUpLearnset,
@@ -5997,10 +6076,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Slugma,
         .iconSprite = gMonIcon_Slugma,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_SLOW,
         SHADOW(0, 0, SHADOW_SIZE_S)
         FOOTPRINT(Slugma)
         OVERWORLD(
-            gObjectEventPic_Slugma,
+            sPicTable_Slugma,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SLITHER,
@@ -6074,10 +6154,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Magcargo,
         .iconSprite = gMonIcon_Magcargo,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 5, SHADOW_SIZE_M)
         FOOTPRINT(Magcargo)
         OVERWORLD(
-            gObjectEventPic_Magcargo,
+            sPicTable_Magcargo,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SLITHER,
@@ -6147,10 +6228,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Swinub,
         .iconSprite = gMonIcon_Swinub,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
         SHADOW(-3, -6, SHADOW_SIZE_S)
         FOOTPRINT(Swinub)
         OVERWORLD(
-            gObjectEventPic_Swinub,
+            sPicTable_Swinub,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -6227,10 +6309,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_PiloswineF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 48),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 3, SHADOW_SIZE_M)
         FOOTPRINT(Piloswine)
         OVERWORLD(
-            gObjectEventPic_Piloswine,
+            sPicTable_Piloswine,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -6239,7 +6322,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Piloswine
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_PiloswineF,
+            sPicTable_PiloswineF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -6312,10 +6395,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .frontPicFemale = gMonFrontPic_MamoswineF,
         .frontPicSizeFemale = MON_COORDS_SIZE(64, 56),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(7, 7, SHADOW_SIZE_L)
         FOOTPRINT(Mamoswine)
         OVERWORLD(
-            gObjectEventPic_Mamoswine,
+            sPicTable_Mamoswine,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -6324,7 +6408,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Mamoswine
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_MamoswineF,
+            sPicTable_MamoswineF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -6402,10 +6486,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Corsola,
         .iconSprite = gMonIcon_Corsola,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 1, SHADOW_SIZE_M)
         FOOTPRINT(Corsola)
         OVERWORLD(
-            gObjectEventPic_Corsola,
+            sPicTable_Corsola,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -6467,10 +6552,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_CorsolaGalar,
         .iconSprite = gMonIcon_CorsolaGalar,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 2, SHADOW_SIZE_M)
         FOOTPRINT(Corsola)
         OVERWORLD(
-            gObjectEventPic_CorsolaGalar,
+            sPicTable_CorsolaGalar,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -6533,10 +6619,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Cursola,
         .iconSprite = gMonIcon_Cursola,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-3, 13, SHADOW_SIZE_S)
         FOOTPRINT(Cursola)
         OVERWORLD(
-            gObjectEventPic_Cursola,
+            sPicTable_Cursola,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -6606,10 +6693,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Remoraid,
         .iconSprite = gMonIcon_Remoraid,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 0, SHADOW_SIZE_S)
         FOOTPRINT(Remoraid)
         OVERWORLD(
-            gObjectEventPic_Remoraid,
+            sPicTable_Remoraid,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SPOT,
@@ -6687,10 +6775,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_OctilleryF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 56),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(1, 4, SHADOW_SIZE_M)
         FOOTPRINT(Octillery)
         OVERWORLD(
-            gObjectEventPic_Octillery,
+            sPicTable_Octillery,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SLITHER,
@@ -6699,7 +6788,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Octillery
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_OctilleryF,
+            sPicTable_OctilleryF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SLITHER,
@@ -6761,10 +6850,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Delibird,
         .iconSprite = gMonIcon_Delibird,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 0 : 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 7, SHADOW_SIZE_M)
         FOOTPRINT(Delibird)
         OVERWORLD(
-            gObjectEventPic_Delibird,
+            sPicTable_Delibird,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -6832,10 +6922,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Mantyke,
         .iconSprite = gMonIcon_Mantyke,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 3, SHADOW_SIZE_S)
         FOOTPRINT(Mantyke)
         OVERWORLD(
-            gObjectEventPic_Mantyke,
+            sPicTable_Mantyke,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -6909,10 +7000,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Mantine,
         .iconSprite = gMonIcon_Mantine,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 8, SHADOW_SIZE_M)
         FOOTPRINT(Mantine)
         OVERWORLD(
-            gObjectEventPic_Mantine,
+            sPicTable_Mantine,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -6978,10 +7070,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Skarmory,
         .iconSprite = gMonIcon_Skarmory,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 9, SHADOW_SIZE_M)
         FOOTPRINT(Skarmory)
         OVERWORLD(
-            gObjectEventPic_Skarmory,
+            sPicTable_Skarmory,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7046,10 +7139,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Houndour,
         .iconSprite = gMonIcon_Houndour,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
         SHADOW(0, 4, SHADOW_SIZE_M)
         FOOTPRINT(Houndour)
         OVERWORLD(
-            gObjectEventPic_Houndour,
+            sPicTable_Houndour,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7119,10 +7213,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_HoundoomF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 56),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-5, 13, SHADOW_SIZE_L)
         FOOTPRINT(Houndoom)
         OVERWORLD(
-            gObjectEventPic_Houndoom,
+            sPicTable_Houndoom,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7131,7 +7226,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Houndoom
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_HoundoomF,
+            sPicTable_HoundoomF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7190,11 +7285,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_HoundoomMega,
         .iconSprite = gMonIcon_HoundoomMega,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-5, 13, SHADOW_SIZE_L)
         FOOTPRINT(Houndoom)
     #if OW_BATTLE_ONLY_FORMS
         OVERWORLD(
-            gObjectEventPic_HoundoomMega,
+            sPicTable_HoundoomMega,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7268,10 +7364,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Phanpy,
         .iconSprite = gMonIcon_Phanpy,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NORMAL,
         SHADOW(3, -2, SHADOW_SIZE_M)
         FOOTPRINT(Phanpy)
         OVERWORLD(
-            gObjectEventPic_Phanpy,
+            sPicTable_Phanpy,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7343,10 +7440,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicFemale = gMonBackPic_DonphanF,
         .backPicSizeFemale = MON_COORDS_SIZE(64, 48),
 #endif //P_GENDER_DIFFERENCES
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(7, 2, SHADOW_SIZE_L)
         FOOTPRINT(Donphan)
         OVERWORLD(
-            gObjectEventPic_Donphan,
+            sPicTable_Donphan,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7355,7 +7453,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
             gShinyOverworldPalette_Donphan
         )
         OVERWORLD_FEMALE(
-            gObjectEventPic_DonphanF,
+            sPicTable_DonphanF,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7421,10 +7519,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Stantler,
         .iconSprite = gMonIcon_Stantler,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(3, 13, SHADOW_SIZE_M)
         FOOTPRINT(Stantler)
         OVERWORLD(
-            gObjectEventPic_Stantler,
+            sPicTable_Stantler,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7487,10 +7586,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Wyrdeer,
         .iconSprite = gMonIcon_Wyrdeer,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 13, SHADOW_SIZE_M)
         FOOTPRINT(Wyrdeer)
         OVERWORLD(
-            gObjectEventPic_Wyrdeer,
+            sPicTable_Wyrdeer,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7561,10 +7661,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Smeargle,
         .iconSprite = gMonIcon_Smeargle,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(6, 7, SHADOW_SIZE_S)
         FOOTPRINT(Smeargle)
         OVERWORLD(
-            gObjectEventPic_Smeargle,
+            sPicTable_Smeargle,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7635,10 +7736,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Miltank,
         .iconSprite = gMonIcon_Miltank,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 1 : 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-3, 4, SHADOW_SIZE_M)
         FOOTPRINT(Miltank)
         OVERWORLD(
-            gObjectEventPic_Miltank,
+            sPicTable_Miltank,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7715,10 +7817,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Raikou,
         .iconSprite = gMonIcon_Raikou,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 0 : 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-4, 7, SHADOW_SIZE_L)
         FOOTPRINT(Raikou)
         OVERWORLD(
-            gObjectEventPic_Raikou,
+            sPicTable_Raikou,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7795,10 +7898,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Entei,
         .iconSprite = gMonIcon_Entei,
         .iconPalIndex = 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 8, SHADOW_SIZE_L)
         FOOTPRINT(Entei)
         OVERWORLD(
-            gObjectEventPic_Entei,
+            sPicTable_Entei,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7875,10 +7979,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Suicune,
         .iconSprite = gMonIcon_Suicune,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 0 : 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(3, 10, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Suicune)
         OVERWORLD(
-            gObjectEventPic_Suicune,
+            sPicTable_Suicune,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -7946,10 +8051,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Larvitar,
         .iconSprite = gMonIcon_Larvitar,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
         SHADOW(0, 3, SHADOW_SIZE_S)
         FOOTPRINT(Larvitar)
         OVERWORLD(
-            gObjectEventPic_Larvitar,
+            sPicTable_Larvitar,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -8013,10 +8119,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Pupitar,
         .iconSprite = gMonIcon_Pupitar,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 0 : 2,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(3, 3, SHADOW_SIZE_S)
         FOOTPRINT(Pupitar)
         OVERWORLD(
-            gObjectEventPic_Pupitar,
+            sPicTable_Pupitar,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_SPOT,
@@ -8087,10 +8194,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Tyranitar,
         .iconSprite = gMonIcon_Tyranitar,
         .iconPalIndex = P_GBA_STYLE_SPECIES_ICONS ? 1 : 4,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 11, SHADOW_SIZE_L)
         FOOTPRINT(Tyranitar)
         OVERWORLD(
-            gObjectEventPic_Tyranitar,
+            sPicTable_Tyranitar,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -8152,11 +8260,12 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_TyranitarMega,
         .iconSprite = gMonIcon_TyranitarMega,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(-1, 13, SHADOW_SIZE_XL_BATTLE_ONLY)
         FOOTPRINT(Tyranitar)
     #if OW_BATTLE_ONLY_FORMS
         OVERWORLD(
-            gObjectEventPic_TyranitarMega,
+            sPicTable_TyranitarMega,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_FOOT,
@@ -8243,10 +8352,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Lugia,
         .iconSprite = gMonIcon_Lugia,
         .iconPalIndex = 0,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(2, 17, SHADOW_SIZE_L)
         FOOTPRINT(Lugia)
         OVERWORLD(
-            gObjectEventPic_Lugia,
+            sPicTable_Lugia,
             SIZE_64x64,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -8322,10 +8432,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_HoOh,
         .iconSprite = gMonIcon_HoOh,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(1, 17, SHADOW_SIZE_L)
         FOOTPRINT(HoOh)
         OVERWORLD(
-            gObjectEventPic_HoOh,
+            sPicTable_HoOh,
             SIZE_64x64,
             SHADOW_SIZE_M,
             TRACKS_NONE,
@@ -8403,10 +8514,11 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .shinyPalette = gMonShinyPalette_Celebi,
         .iconSprite = gMonIcon_Celebi,
         .iconPalIndex = 1,
+        .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
         SHADOW(0, 14, SHADOW_SIZE_S)
         FOOTPRINT(Celebi)
         OVERWORLD(
-            gObjectEventPic_Celebi,
+            sPicTable_Celebi,
             SIZE_32x32,
             SHADOW_SIZE_M,
             TRACKS_NONE,

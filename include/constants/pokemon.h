@@ -25,55 +25,55 @@
 #define TYPE_STELLAR          20
 #define NUMBER_OF_MON_TYPES   21
 
-// Pokemon egg groups
-#define EGG_GROUP_NONE         0
-#define EGG_GROUP_MONSTER      1
-#define EGG_GROUP_WATER_1      2
-#define EGG_GROUP_BUG          3
-#define EGG_GROUP_FLYING       4
-#define EGG_GROUP_FIELD        5
-#define EGG_GROUP_FAIRY        6
-#define EGG_GROUP_GRASS        7
-#define EGG_GROUP_HUMAN_LIKE   8
-#define EGG_GROUP_WATER_3      9
-#define EGG_GROUP_MINERAL      10
-#define EGG_GROUP_AMORPHOUS    11
-#define EGG_GROUP_WATER_2      12
-#define EGG_GROUP_DITTO        13
-#define EGG_GROUP_DRAGON       14
-#define EGG_GROUP_NO_EGGS_DISCOVERED 15
+// Pokémon egg groups
+#define EGG_GROUP_NONE                0
+#define EGG_GROUP_MONSTER             1
+#define EGG_GROUP_WATER_1             2
+#define EGG_GROUP_BUG                 3
+#define EGG_GROUP_FLYING              4
+#define EGG_GROUP_FIELD               5
+#define EGG_GROUP_FAIRY               6
+#define EGG_GROUP_GRASS               7
+#define EGG_GROUP_HUMAN_LIKE          8
+#define EGG_GROUP_WATER_3             9
+#define EGG_GROUP_MINERAL             10
+#define EGG_GROUP_AMORPHOUS           11
+#define EGG_GROUP_WATER_2             12
+#define EGG_GROUP_DITTO               13
+#define EGG_GROUP_DRAGON              14
+#define EGG_GROUP_NO_EGGS_DISCOVERED  15
 
-#define EGG_GROUPS_PER_MON      2
+#define EGG_GROUPS_PER_MON            2
 
-// Pokemon natures
-#define NATURE_HARDY    0
-#define NATURE_LONELY   1
-#define NATURE_BRAVE    2
-#define NATURE_ADAMANT  3
-#define NATURE_NAUGHTY  4
-#define NATURE_BOLD     5
-#define NATURE_DOCILE   6
-#define NATURE_RELAXED  7
-#define NATURE_IMPISH   8
-#define NATURE_LAX      9
-#define NATURE_TIMID    10
-#define NATURE_HASTY    11
-#define NATURE_SERIOUS  12
-#define NATURE_JOLLY    13
-#define NATURE_NAIVE    14
-#define NATURE_MODEST   15
-#define NATURE_MILD     16
-#define NATURE_QUIET    17
-#define NATURE_BASHFUL  18
-#define NATURE_RASH     19
-#define NATURE_CALM     20
-#define NATURE_GENTLE   21
-#define NATURE_SASSY    22
-#define NATURE_CAREFUL  23
-#define NATURE_QUIRKY   24
+// Pokémon natures
+#define NATURE_HARDY    0 // Neutral
+#define NATURE_LONELY   1 // +Atk -Def
+#define NATURE_BRAVE    2 // +Atk -Speed
+#define NATURE_ADAMANT  3 // +Atk -SpAtk
+#define NATURE_NAUGHTY  4 // +Atk -SpDef
+#define NATURE_BOLD     5 // +Def -Atk
+#define NATURE_DOCILE   6 // Neutral
+#define NATURE_RELAXED  7 // +Def -Speed
+#define NATURE_IMPISH   8 // +Def -SpAtk
+#define NATURE_LAX      9 // +Def -SpDef
+#define NATURE_TIMID    10 // +Speed -Atk
+#define NATURE_HASTY    11 // +Speed -Def
+#define NATURE_SERIOUS  12 // Neutral
+#define NATURE_JOLLY    13 // +Speed -SpAtk
+#define NATURE_NAIVE    14 // +Speed - SpDef
+#define NATURE_MODEST   15 // +SpAtk -Atk
+#define NATURE_MILD     16 // +SpAtk -Def
+#define NATURE_QUIET    17 // +SpAtk -Speed
+#define NATURE_BASHFUL  18 // Neutral
+#define NATURE_RASH     19 // +SpAtk -SpDef
+#define NATURE_CALM     20 // +SpDef -Atk
+#define NATURE_GENTLE   21 // +SpDef -Def
+#define NATURE_SASSY    22 // +SpDef -Speed
+#define NATURE_CAREFUL  23 // +SpDef -SpAtk
+#define NATURE_QUIRKY   24 // Neutral
 #define NUM_NATURES     25
 
-// Pokemon Stats
+// Pokémon Stats
 #define STAT_HP      0
 #define STAT_ATK     1
 #define STAT_DEF     2
@@ -95,6 +95,55 @@
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
 
+// Ribbon IDs used by TV and Pokénav
+#define CHAMPION_RIBBON       0
+#define COOL_RIBBON_NORMAL    1
+#define COOL_RIBBON_SUPER     2
+#define COOL_RIBBON_HYPER     3
+#define COOL_RIBBON_MASTER    4
+#define BEAUTY_RIBBON_NORMAL  5
+#define BEAUTY_RIBBON_SUPER   6
+#define BEAUTY_RIBBON_HYPER   7
+#define BEAUTY_RIBBON_MASTER  8
+#define CUTE_RIBBON_NORMAL    9
+#define CUTE_RIBBON_SUPER    10
+#define CUTE_RIBBON_HYPER    11
+#define CUTE_RIBBON_MASTER   12
+#define SMART_RIBBON_NORMAL  13
+#define SMART_RIBBON_SUPER   14
+#define SMART_RIBBON_HYPER   15
+#define SMART_RIBBON_MASTER  16
+#define TOUGH_RIBBON_NORMAL  17
+#define TOUGH_RIBBON_SUPER   18
+#define TOUGH_RIBBON_HYPER   19
+#define TOUGH_RIBBON_MASTER  20
+#define WINNING_RIBBON       21
+#define VICTORY_RIBBON       22
+#define ARTIST_RIBBON        23
+#define EFFORT_RIBBON        24
+#define MARINE_RIBBON        25
+#define LAND_RIBBON          26
+#define SKY_RIBBON           27
+#define COUNTRY_RIBBON       28
+#define NATIONAL_RIBBON      29
+#define EARTH_RIBBON         30
+#define WORLD_RIBBON         31
+
+#define FIRST_GIFT_RIBBON MARINE_RIBBON
+#define LAST_GIFT_RIBBON  WORLD_RIBBON
+#define NUM_GIFT_RIBBONS  (1 + LAST_GIFT_RIBBON - FIRST_GIFT_RIBBON)
+
+// The above gift ribbons (Marine - World) are
+// special distribution ribbons that correspond to
+// 1 bit each in the Pokémon struct. Gen 4 hard-codes
+// each of these to the given name. In Gen 3 they're
+// used to get an index into giftRibbons in the save block,
+// which can have a value 0-64 (0 is 'no ribbon') that
+// corresponds to one of the special ribbons listed
+// in gGiftRibbonDescriptionPointers. Most of these were
+// never distributed
+#define MAX_GIFT_RIBBON 64
+
 #define MIN_LEVEL 1
 #define MAX_LEVEL 100
 
@@ -104,17 +153,16 @@
 #define OT_ID_PRESET          1
 #define OT_ID_RANDOM_NO_SHINY 2
 
-#define MON_GIVEN_TO_PARTY 0
-#define MON_GIVEN_TO_PC    1
-#define MON_CANT_GIVE      2
+#define MON_GIVEN_TO_PARTY      0
+#define MON_GIVEN_TO_PC         1
+#define MON_CANT_GIVE           2
 
-#define PLAYER_HAS_TWO_USABLE_MONS 0
-#define PLAYER_HAS_ONE_MON         1
-#define PLAYER_HAS_ONE_USABLE_MON  2
+#define PLAYER_HAS_TWO_USABLE_MONS     0
+#define PLAYER_HAS_ONE_MON             1
+#define PLAYER_HAS_ONE_USABLE_MON      2
 
-// Learning moves
-#define MON_ALREADY_KNOWS_MOVE 0xFFFE
-#define MON_HAS_MAX_MOVES      0xFFFF
+#define MON_ALREADY_KNOWS_MOVE  0xFFFE
+#define MON_HAS_MAX_MOVES       0xFFFF
 
 #define LEVEL_UP_MOVE_ID   0x01FF
 #define LEVEL_UP_MOVE_LV   0xFE00
@@ -127,9 +175,10 @@
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
+// Constants for AdjustFriendship
 #define FRIENDSHIP_EVENT_GROW_LEVEL           0
-#define FRIENDSHIP_EVENT_VITAMIN              1
-#define FRIENDSHIP_EVENT_BATTLE_ITEM          2
+#define FRIENDSHIP_EVENT_VITAMIN              1 // unused, handled by PokemonUseItemEffects
+#define FRIENDSHIP_EVENT_BATTLE_ITEM          2 // unused, handled by PokemonUseItemEffects
 #define FRIENDSHIP_EVENT_LEAGUE_BATTLE        3
 #define FRIENDSHIP_EVENT_LEARN_TMHM           4
 #define FRIENDSHIP_EVENT_WALKING              5
@@ -137,6 +186,15 @@
 #define FRIENDSHIP_EVENT_FAINT_SMALL          7
 #define FRIENDSHIP_EVENT_FAINT_OUTSIDE_BATTLE 8
 #define FRIENDSHIP_EVENT_FAINT_LARGE          9
+
+// Constants for GetLeadMonFriendshipScore
+#define FRIENDSHIP_NONE        0
+#define FRIENDSHIP_1_TO_49     1
+#define FRIENDSHIP_50_TO_99    2
+#define FRIENDSHIP_100_TO_149  3
+#define FRIENDSHIP_150_TO_199  4
+#define FRIENDSHIP_200_TO_254  5
+#define FRIENDSHIP_MAX         6
 
 // Constants for GetBattlerAffectionHearts (based on friendship value)
 #define AFFECTION_NO_HEARTS     0 // 0-79 friendship
@@ -165,14 +223,6 @@
 #define DAMAGE_CATEGORY_SPECIAL     1
 #define DAMAGE_CATEGORY_STATUS      2
 
-// Battle move flags
-#define FLAG_MAKES_CONTACT          (1 << 0)
-#define FLAG_PROTECT_AFFECTED       (1 << 1)
-#define FLAG_MAGIC_COAT_AFFECTED    (1 << 2)
-#define FLAG_SNATCH_AFFECTED        (1 << 3)
-#define FLAG_MIRROR_MOVE_AFFECTED   (1 << 4)
-#define FLAG_KINGS_ROCK_AFFECTED    (1 << 5)
-
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0
 #define GROWTH_ERRATIC      1
@@ -181,7 +231,7 @@
 #define GROWTH_FAST         4
 #define GROWTH_SLOW         5
 
-// Body colors for pokedex search
+// Body colors for Pokédex search
 #define BODY_COLOR_RED      0
 #define BODY_COLOR_BLUE     1
 #define BODY_COLOR_YELLOW   2
@@ -193,11 +243,12 @@
 #define BODY_COLOR_WHITE    8
 #define BODY_COLOR_PINK     9
 
-// Evolution types
+#define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
+
 #define EVOLUTIONS_END                    0xFFFF // Not an actual evolution, used to mark the end of an evolution array.
-#define EVO_NONE                          0xFFFE // Not an actual evolution, used to generate offspring that can't evolve into the specified species, like regional forms.
 
 enum EvolutionMethods {
+    EVO_NONE,                            // Not an actual evolution, used to generate offspring that can't evolve into the specified species, like regional forms.
     EVO_FRIENDSHIP,                      // Pokémon levels up with friendship ≥ 220
     EVO_FRIENDSHIP_DAY,                  // Pokémon levels up during the day with friendship ≥ 220
     EVO_FRIENDSHIP_NIGHT,                // Pokémon levels up at night with friendship ≥ 220
@@ -263,6 +314,14 @@ enum EvolutionMode {
     EVO_MODE_BATTLE_ONLY,        // This mode is only used in battles to support Tandemaus' unique requirement
 };
 
+
+enum PokemonJumpType{
+    PKMN_JUMP_TYPE_NONE, // Not allowed in Pokémon Jump
+    PKMN_JUMP_TYPE_NORMAL,
+    PKMN_JUMP_TYPE_FAST,
+    PKMN_JUMP_TYPE_SLOW,
+};
+
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64
 #define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)
@@ -280,7 +339,6 @@ enum EvolutionMode {
 
 #define SKIP_FRONT_ANIM (1 << 7)
 
-
 #define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS + NUM_HIDDEN_ABILITY_SLOTS)
 #define NUM_NORMAL_ABILITY_SLOTS 2
 #define NUM_HIDDEN_ABILITY_SLOTS 1
@@ -288,6 +346,10 @@ enum EvolutionMode {
 // Used as a signal for givemon to generate a default ability by personality.
 #define NUM_ABILITY_PERSONALITY 0xFF
 
+#if P_LEGENDARY_PERFECT_IVS >= GEN_6
 #define LEGENDARY_PERFECT_IV_COUNT 3
+#else
+#define LEGENDARY_PERFECT_IV_COUNT 0
+#endif
 
 #endif // GUARD_CONSTANTS_POKEMON_H

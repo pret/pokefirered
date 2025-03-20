@@ -2213,7 +2213,7 @@ static const u8 *BattleStringGetOpponentClassByTrainerId(u16 trainerId)
     const u8 *toCpy;
 
     if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
-        toCpy = gTrainerClasses[GetSecretBaseTrainerNameIndex()].name;
+        toCpy = gTrainerClasses[GetSecretBaseTrainerClass()].name;
     else if (trainerId == TRAINER_UNION_ROOM)
         toCpy = gTrainerClasses[GetUnionRoomTrainerClass()].name;
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)

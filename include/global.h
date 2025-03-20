@@ -852,7 +852,9 @@ struct SaveBlock1
 #endif //FREE_MYSTERY_GIFT
     /*0x????*/ u8 dexSeen[DEX_FLAGS_NO];
                u8 dexCaught[DEX_FLAGS_NO];
+#if FREE_MYSTERY_EVENT_BUFFERS == FALSE
     /*0x361C*/ struct RamScript ramScript;
+#endif //FREE_MYSTERY_EVENT_BUFFERS
     /*0x3A08*/ struct RecordMixingGift recordMixingGift; // unused
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH + 1];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];

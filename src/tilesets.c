@@ -16,6 +16,9 @@
         [SEASON_WINTER] = NULL, \
     }
 
+EWRAM_DATA const struct Tileset* gCurrentPrimaryTileset = NULL;
+EWRAM_DATA const struct Tileset* gCurrentSecondaryTileset = NULL;
+
 static const struct Tileset* const sSeasonTilesetsPrimary[][SEASON_WINTER + 1] =
 {
     {
@@ -92,7 +95,7 @@ static const struct Tileset* const sSeasonTilesetsSecondary[][SEASON_WINTER + 1]
     SEASON_TILESETS_TERMINATOR
 };
 
-const struct Tileset* GetPrimaryTileset(const struct MapLayout* mapLayout)
+const struct Tileset* GetPrimaryTilesetFromLayout(const struct MapLayout* mapLayout)
 {
     u32 i;
     if (!OW_SEASONS)
@@ -110,7 +113,7 @@ const struct Tileset* GetPrimaryTileset(const struct MapLayout* mapLayout)
     return mapLayout->primaryTileset;
 }
 
-const struct Tileset* GetSecondaryTileset(const struct MapLayout* mapLayout)
+const struct Tileset* GetSecondaryTilesetFromLayout(const struct MapLayout* mapLayout)
 {
     u32 i;
 
@@ -127,4 +130,18 @@ const struct Tileset* GetSecondaryTileset(const struct MapLayout* mapLayout)
         }
     }
     return mapLayout->secondaryTileset;
+}
+
+const struct Tileset* GetPrimaryTileset(const struct MapLayout* mapLayout)
+{
+    if (gMapHeader.mapLayout == mapLayout)
+        return gCurrentPrimaryTileset;
+    return GetPrimaryTilesetFromLayout(mapLayout);
+}
+
+const struct Tileset* GetSecondaryTileset(const struct MapLayout* mapLayout)
+{
+    if (gMapHeader.mapLayout == mapLayout)
+        return gCurrentSecondaryTileset;
+    return GetSecondaryTilesetFromLayout(mapLayout);
 }

@@ -577,12 +577,16 @@ static void LoadCurrentMapData(void)
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     gSaveBlock1Ptr->mapLayoutId = gMapHeader.mapLayoutId;
     gMapHeader.mapLayout = GetMapLayout();
+    gCurrentPrimaryTileset = GetPrimaryTilesetFromLayout(gMapHeader.mapLayout);
+    gCurrentSecondaryTileset = GetSecondaryTilesetFromLayout(gMapHeader.mapLayout);
 }
 
 static void LoadSaveblockMapHeader(void)
 {
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
     gMapHeader.mapLayout = GetMapLayout();
+    gCurrentPrimaryTileset = GetPrimaryTilesetFromLayout(gMapHeader.mapLayout);
+    gCurrentSecondaryTileset = GetSecondaryTilesetFromLayout(gMapHeader.mapLayout);
 }
 
 static void SetPlayerCoordsFromWarp(void)
@@ -999,6 +1003,8 @@ void SetCurrentMapLayout(u16 mapLayoutId)
 {
     gSaveBlock1Ptr->mapLayoutId = mapLayoutId;
     gMapHeader.mapLayout = GetMapLayout();
+    gCurrentPrimaryTileset = GetPrimaryTilesetFromLayout(gMapHeader.mapLayout);
+    gCurrentSecondaryTileset = GetSecondaryTilesetFromLayout(gMapHeader.mapLayout);
 }
 
 void Overworld_SetWarpDestinationFromWarp(struct WarpData * warp)

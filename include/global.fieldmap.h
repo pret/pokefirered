@@ -410,6 +410,11 @@ extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 extern struct Camera gCamera;
 
+extern const struct Tileset* gCurrentPrimaryTileset;
+extern const struct Tileset* gCurrentSecondaryTileset;
+
+const struct Tileset* GetPrimaryTilesetFromLayout(const struct MapLayout* mapLayout);
+const struct Tileset* GetSecondaryTilesetFromLayout(const struct MapLayout* mapLayout);
 const struct Tileset* GetPrimaryTileset(const struct MapLayout* mapLayout);
 const struct Tileset* GetSecondaryTileset(const struct MapLayout* mapLayout);
 

@@ -1231,8 +1231,8 @@ static void TeachyTvLoadBg3Map(u16 *buffer)
     palIndicesBuffer = Alloc(16);
     memset(palIndicesBuffer, 0xFF, 16);
 
-    TeachyTvLoadMapTilesetToBuffer(GetPrimaryTileset(layout), tilesetsBuffer, NUM_TILES_IN_PRIMARY);
-    TeachyTvLoadMapTilesetToBuffer(GetSecondaryTileset(layout), tilesetsBuffer + NUM_TILES_IN_PRIMARY * TILE_SIZE_4BPP, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY);
+    TeachyTvLoadMapTilesetToBuffer(GetPrimaryTilesetFromLayout(layout), tilesetsBuffer, NUM_TILES_IN_PRIMARY);
+    TeachyTvLoadMapTilesetToBuffer(GetSecondaryTilesetFromLayout(layout), tilesetsBuffer + NUM_TILES_IN_PRIMARY * TILE_SIZE_4BPP, NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY);
 
     for (i = 0; i < 9; i++)
     {

@@ -26,7 +26,11 @@ static u16 GetNumFansOfPlayerInTrainerFanClub(struct TrainerFanClub *);
 static void TryLoseFansFromPlayTime(struct TrainerFanClub *);
 static bool16 IsFanClubMemberFanOfPlayer(struct TrainerFanClub *);
 static void SetInitialFansOfPlayer(struct TrainerFanClub *);
+#if FREE_LINK_BATTLE_RECORDS == FALSE
 static void BufferFanClubTrainerName(struct LinkBattleRecords *, u8, u8);
+#else
+static void BufferFanClubTrainerName(u8 whichLinkTrainer, u8 whichNPCTrainer);
+#endif //FREE_LINK_BATTLE_RECORDS
 static void UpdateTrainerFansAfterLinkBattle(struct TrainerFanClub *);
 static bool8 DidPlayerGetFirstFans(struct TrainerFanClub * );
 static void SetPlayerGotFirstFans(struct TrainerFanClub *);
@@ -266,9 +270,14 @@ void Script_BufferFanClubTrainerName(void)
         whichLinkTrainer = 1;
         break;
     }
+#if FREE_LINK_BATTLE_RECORDS == FALSE
     BufferFanClubTrainerName(&gSaveBlock2Ptr->linkBattleRecords, whichLinkTrainer, whichNPCTrainer);
+#else
+    BufferFanClubTrainerName(whichLinkTrainer, whichNPCTrainer);
+#endif //FREE_LINK_BATTLE_RECORDS
 }
 
+#if FREE_LINK_BATTLE_RECORDS == FALSE
 static void BufferFanClubTrainerName(struct LinkBattleRecords *linkRecords, u8 whichLinkTrainer, u8 whichNPCTrainer)
 {
     u8 *str;
@@ -308,6 +317,26 @@ static void BufferFanClubTrainerName(struct LinkBattleRecords *linkRecords, u8 w
         }
     }
 }
+#else
+static void BufferFanClubTrainerName(u8 whichLinkTrainer, u8 whichNPCTrainer)
+{
+    switch (whichNPCTrainer)
+    {
+    case 0:
+        StringCopy(gStringVar1, gSaveBlock1Ptr->rivalName);
+        break;
+    case 1:
+        StringCopy(gStringVar1, gText_LtSurge);
+        break;
+    case 2:
+        StringCopy(gStringVar1, gText_Koga);
+        break;
+    default:
+        StringCopy(gStringVar1, gSaveBlock1Ptr->rivalName);
+        break;
+    }
+}
+#endif //FREE_LINK_BATTLE_RECORDS
 
 void Special_UpdateTrainerFansAfterLinkBattle(void)
 {

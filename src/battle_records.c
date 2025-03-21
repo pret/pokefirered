@@ -30,8 +30,10 @@ static void ResetGpu(void);
 static void StopAllRunningTasks(void);
 static void EnableDisplay(void);
 static void ResetBGPos(void);
+#if FREE_LINK_BATTLE_RECORDS == FALSE
 static void PrintBattleRecords(void);
 static void CommitWindow(u8 windowId);
+#endif //FREE_LINK_BATTLE_RECORDS
 static void LoadFrameGfxOnBg(u8 bgId);
 
 static const u16 sTiles[] = INCBIN_U16("graphics/battle_records/bg_tiles.4bpp");
@@ -136,7 +138,9 @@ static void MainCB2_SetUp(void)
         if (gSpecialVar_0x8004)
             PrintTrainerTowerRecords();
         else
+#if FREE_LINK_BATTLE_RECORDS == FALSE
             PrintBattleRecords();
+#endif //FREE_LINK_BATTLE_RECORDS
         CreateTask(Task_WaitFadeIn, 8);
         SetMainCallback2(MainCB2);
         gMain.state = 0;
@@ -271,6 +275,7 @@ static void ResetBGPos(void)
     ChangeBgY(3, 0, 0);
 }
 
+#if FREE_LINK_BATTLE_RECORDS == FALSE
 static void ClearLinkBattleRecord(struct LinkBattleRecord *record)
 {
     CpuFill16(0, record, sizeof(*record));
@@ -403,12 +408,16 @@ static void AddOpponentLinkBattleRecord(struct LinkBattleRecords * records, cons
     UpdateLinkBattleRecord(&records->entries[i], outcome);
     SortLinkBattleRecords(records);
 }
+#endif //FREE_LINK_BATTLE_RECORDS
 
 void ClearPlayerLinkBattleRecords(void)
 {
+#if FREE_LINK_BATTLE_RECORDS == FALSE
     ClearLinkBattleRecords(&gSaveBlock2Ptr->linkBattleRecords);
+#endif //FREE_LINK_BATTLE_RECORDS
 }
 
+#if FREE_LINK_BATTLE_RECORDS == FALSE
 static void IncTrainerCardWinCount(s32 battlerId)
 {
     u16 *wins = &gTrainerCards[battlerId].rse.linkBattleWins;
@@ -439,16 +448,20 @@ static void UpdateBattleOutcomeOnTrainerCards(s32 battlerId)
         break;
     }
 }
+#endif //FREE_LINK_BATTLE_RECORDS
 
 void UpdatePlayerLinkBattleRecords(s32 battlerId)
 {
+#if FREE_LINK_BATTLE_RECORDS == FALSE
     if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(UNION_ROOM) || gSaveBlock1Ptr->location.mapNum != MAP_NUM(UNION_ROOM))
     {
         UpdateBattleOutcomeOnTrainerCards(battlerId);
         AddOpponentLinkBattleRecord(&gSaveBlock2Ptr->linkBattleRecords, gTrainerCards[battlerId].rse.playerName, gTrainerCards[battlerId].rse.trainerId, gBattleOutcome, gLinkPlayers[battlerId].language);
     }
+#endif //FREE_LINK_BATTLE_RECORDS
 }
 
+#if FREE_LINK_BATTLE_RECORDS == FALSE
 static void PrintTotalRecord(struct LinkBattleRecords * records)
 {
     u32 nwins = GetGameStat(GAME_STAT_LINK_BATTLE_WINS);
@@ -559,6 +572,7 @@ static void CommitWindow(u8 windowId)
     PutWindowTilemap(windowId);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
+#endif //FREE_LINK_BATTLE_RECORDS
 
 static void LoadFrameGfxOnBg(u8 bg)
 {

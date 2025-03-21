@@ -390,7 +390,9 @@ struct SaveBlock2
     /*0x0AD*/ bool8 unkFlag2; // Set FALSE, never read
     /*0x0B0*/ struct BattleTowerData battleTower;
     /*0x898*/ u16 mapView[0x100];
+#if FREE_LINK_BATTLE_RECORDS == FALSE
     /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
+#endif //FREE_LINK_BATTLE_RECORDS
     /*0xAF0*/ struct BerryCrush berryCrush;
 #if FREE_POKEMON_JUMP == FALSE
     /*0xB00*/ struct PokemonJumpRecords pokeJump;

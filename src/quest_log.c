@@ -386,12 +386,14 @@ static void BackUpTrainerRematches(void)
     {
         vars[i] = 0;
 
+#if FREE_MATCH_CALL == FALSE
         // 16 bits per var
         for (j = 0; j < 16; j++)
         {
             if (gSaveBlock1Ptr->trainerRematches[16 * i + j])
                 vars[i] += (1 << j);
         }
+#endif //FREE_MATCH_CALL
         VarSet(VAR_QLBAK_TRAINER_REMATCHES + i, vars[i]);
     }
 }
@@ -739,10 +741,12 @@ static void RestoreTrainerRematches(void)
         // 16 bits per var
         for (j = 0; j < 16; j++)
         {
+#if FREE_MATCH_CALL == FALSE
             if (vars[i] & 1)
                 gSaveBlock1Ptr->trainerRematches[16 * i + j] = 30;
             else
                 gSaveBlock1Ptr->trainerRematches[16 * i + j] = 0;
+#endif //FREE_MATCH_CALL
             vars[i] >>= 1;
         }
     }

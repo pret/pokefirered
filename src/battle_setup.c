@@ -701,6 +701,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     case TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC:
         SetMapVarsToTrainerA();
         return EventScript_TryDoDoubleTrainerBattle;
+#if FREE_MATCH_CALL == FALSE
     case TRAINER_BATTLE_REMATCH_DOUBLE:
         QL_FinishRecordingScene();
         SetMapVarsToTrainerA();
@@ -711,6 +712,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         SetMapVarsToTrainerA();
         TRAINER_BATTLE_PARAM.opponentA = GetRematchTrainerId(TRAINER_BATTLE_PARAM.opponentA);
         return EventScript_TryDoRematchBattle;
+#endif //FREE_MATCH_CALL
     case TRAINER_BATTLE_EARLY_RIVAL:
         SetMapVarsToTrainerA();
         return EventScript_DoNoIntroTrainerBattle;

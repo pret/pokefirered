@@ -368,7 +368,9 @@ static void SpriteCB_MonHitShake(struct Sprite *sprite);
 static void SpriteCB_MonHitFlash(struct Sprite *sprite);
 static void SpriteCB_MonIntroBounce(struct Sprite *sprite);
 static void Task_ShowPokemonJumpRecords(u8 taskId);
+#if FREE_POKEMON_JUMP == FALSE
 static void TruncateToFirstWordOnly(u8 *str);
+#endif //FREE_POKEMON_JUMP
 static void PrintRecordsText(u16 windowId);
 static void UpdateVineSwing(int id);
 static void StartPokeJumpGfx(struct PokemonJumpGfx *);
@@ -4396,6 +4398,7 @@ static void PrintRecordsText(u16 windowId)
 #endif //FREE_POKEMON_JUMP
 }
 
+#if FREE_POKEMON_JUMP == FALSE
 static void TruncateToFirstWordOnly(u8 *str)
 {
     for (;*str != EOS; str++)
@@ -4407,3 +4410,4 @@ static void TruncateToFirstWordOnly(u8 *str)
         }
     }
 }
+#endif //FREE_POKEMON_JUMP

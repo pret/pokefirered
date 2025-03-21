@@ -282,11 +282,13 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
 {
+#if FREE_BATTLE_TOWER_E_READER == FALSE
     u32 data = ScriptReadWord(ctx) - ctx->data[1] + ctx->data[0];
     memcpy(&gSaveBlock2Ptr->battleTower.ereaderTrainer, (void *)data, sizeof(struct BattleTowerEReaderTrainer));
     ValidateEReaderTrainer();
     StringExpandPlaceholders(gStringVar4, gText_MysteryGiftNewTrainer);
     ctx->data[2] = 2;
+#endif //FREE_BATTLE_TOWER_E_READER
     return FALSE;
 }
 

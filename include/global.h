@@ -867,8 +867,10 @@ struct SaveBlock1
 #endif //FREE_UNION_ROOM_CHAT
     /*0x3BA8*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C98*/ struct DaycareMon route5DayCareMon;
+#if FREE_TRAINER_HILL == FALSE
     /*0x3D34*/ u32 towerChallengeId;
     /*0x3D38*/ struct TrainerTower trainerTower[NUM_TOWER_CHALLENGE_TYPES];
+#endif //FREE_TRAINER_HILL
     /*0x3D24*/ u8 unusedSB1[0x1C];
 }; // size: 0x3D68
 

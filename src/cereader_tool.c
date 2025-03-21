@@ -12,7 +12,11 @@ STATIC_ASSERT(SEC30_SIZE + SEC31_SIZE <= SECTOR_COUNTER_OFFSET * 2, EReaderTrain
 
 static u8 GetTrainerHillUnkVal(void)
 {
+#if FREE_TRAINER_HILL == FALSE
     return (gSaveBlock1Ptr->trainerTower[0].unk9 + 1) % 256;
+#else
+    return 0;
+#endif //FREE_TRAINER_HILL
 }
 
 static bool32 ValidateTrainerTowerTrainer(struct TrainerTowerFloor * floor)

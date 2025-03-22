@@ -206,6 +206,8 @@ u8 DoJumpSpecialSpriteMovement(struct Sprite *);
 void TurnVirtualObject(u8 virtualObjId, u8 direction);
 const u8 *GetObjectEventScriptPointerByObjectEventId(u8 objectEventId);
 u8 GetFirstInactiveObjectEventId(void);
+u8 GetObjectEventIdByLocalId(u8);
+bool32 IsFollowerVisible(void);
 u8 GetCollisionFlagsAtCoords(struct ObjectEvent * objectEvent, s16 x, s16 y, u8 direction);
 void OverrideTemplateCoordsForObjectEvent(const struct ObjectEvent *objectEvent);
 void CancelPlayerForcedMovement(void);

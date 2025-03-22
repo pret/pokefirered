@@ -55,6 +55,19 @@ static u8 BikeInputHandler_Normal(u8 *direction_p, u16 newKeys, u16 heldKeys)
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     u8 direction = GetPlayerMovementDirection();
 
+    // fix direction when moving on sideways stairs
+    switch (direction)
+    {
+    case DIR_SOUTHWEST:
+    case DIR_NORTHWEST:
+        direction = DIR_WEST;
+        break;
+    case DIR_SOUTHEAST:
+    case DIR_NORTHEAST:
+        direction = DIR_EAST;
+        break;
+    }
+
     gPlayerAvatar.bikeFrameCounter = 0;
     if (MetatileBehavior_IsCyclingRoadPullDownTile(playerObjEvent->currentMetatileBehavior) == TRUE)
     {
@@ -188,7 +201,7 @@ static void BikeTransition_MoveDirection(u8 direction)
             
             if (collision == COLLISION_COUNT)
                 PlayerWalkFast(direction);
-            else if (PlayerIsMovingOnRockStairs(direction))
+            else if (ObjectMovingOnRockStairs(playerObjEvent, direction))
                 PlayerWalkFast(direction);
             else
                 PlayerRideWaterCurrent(direction);

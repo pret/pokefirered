@@ -48,12 +48,6 @@ enum {
 };
 
 enum {
-    JUMP_TYPE_NORMAL,
-    JUMP_TYPE_FAST,
-    JUMP_TYPE_SLOW,
-};
-
-enum {
     FUNC_GAME_INTRO,
     FUNC_WAIT_ROUND,
     FUNC_GAME_ROUND,
@@ -2129,24 +2123,24 @@ static void HandleMonState(void)
 
 static const s8 sJumpOffsets[][48] =
 {
-    [JUMP_TYPE_NORMAL] = { -3,  -6,  -8, -10, -13, -15, -17, -19,
-                          -21, -23, -25, -27, -28, -29,
-                          JUMP_PEAK, JUMP_PEAK, JUMP_PEAK,
-                          -28, -27, -26, -25, -23, -22, -20, -18,
-                          -17, -15, -13, -11,  -8,  -6,  -4,  -1},
+    [PKMN_JUMP_TYPE_NORMAL - 1] = { -3,  -6,  -8, -10, -13, -15, -17, -19,
+                                   -21, -23, -25, -27, -28, -29,
+                                   JUMP_PEAK, JUMP_PEAK, JUMP_PEAK,
+                                   -28, -27, -26, -25, -23, -22, -20, -18,
+                                   -17, -15, -13, -11,  -8,  -6,  -4,  -1},
 
-    [JUMP_TYPE_FAST]  = { -3,  -6,  -9, -11, -14, -16, -18, -20,
-                         -22, -24, -26, -28, -29,
-                         JUMP_PEAK, JUMP_PEAK,
-                         -28, -26, -24, -22, -20, -18, -16, -14,
-                         -11, -9,  -6,  -4,  -1},
+    [PKMN_JUMP_TYPE_FAST - 1]  = { -3,  -6,  -9, -11, -14, -16, -18, -20,
+                                  -22, -24, -26, -28, -29,
+                                  JUMP_PEAK, JUMP_PEAK,
+                                  -28, -26, -24, -22, -20, -18, -16, -14,
+                                  -11, -9,  -6,  -4,  -1},
 
-    [JUMP_TYPE_SLOW]  = { -3,  -6,  -9, -11, -13, -15, -17, -19,
-                         -21, -23, -25, -27, -28, -29,
-                         JUMP_PEAK, JUMP_PEAK, JUMP_PEAK, JUMP_PEAK,
-                         -29, -29, -28, -28, -27, -27, -26, -25,
-                         -24, -22, -20, -18, -16, -14, -12, -11,
-                          -9,  -6,  -4,  -1},
+    [PKMN_JUMP_TYPE_SLOW - 1]  = { -3,  -6,  -9, -11, -13, -15, -17, -19,
+                                  -21, -23, -25, -27, -28, -29,
+                                  JUMP_PEAK, JUMP_PEAK, JUMP_PEAK, JUMP_PEAK,
+                                  -29, -29, -28, -28, -27, -27, -26, -25,
+                                  -24, -22, -20, -18, -16, -14, -12, -11,
+                                   -9,  -6,  -4,  -1},
 };
 
 static void UpdateJump(int multiplayerId)
@@ -2181,7 +2175,7 @@ static void UpdateJump(int multiplayerId)
 
     jumpOffsetIdx -= 4;
     if (jumpOffsetIdx < (int)ARRAY_COUNT(sJumpOffsets[0]))
-        jumpOffset = sJumpOffsets[player->monJumpType][jumpOffsetIdx];
+        jumpOffset = sJumpOffsets[player->monJumpType - 1][jumpOffsetIdx];
     else
         jumpOffset = 0;
 

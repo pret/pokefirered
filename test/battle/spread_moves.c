@@ -16,15 +16,16 @@ DOUBLE_BATTLE_TEST("Spread Moves: Ability and Item effects activate correctly af
             MOVE(opponentRight, MOVE_HEAT_WAVE);
             MOVE(playerLeft, MOVE_HYPER_VOICE);
             SEND_OUT(opponentRight, 3);
-            SEND_OUT(opponentLeft, 2);
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HYPER_VOICE, playerLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponentRight);
         MESSAGE("The opposing Wobbuffet is switched out with the Eject Button!");
         MESSAGE("2 sent out Pikachu!");
-        ABILITY_POPUP(opponentLeft, ABILITY_EMERGENCY_EXIT);
-        MESSAGE("2 sent out Wynaut!");
+        NONE_OF {
+            ABILITY_POPUP(opponentLeft, ABILITY_EMERGENCY_EXIT);
+            MESSAGE("2 sent out Wynaut!");
+        }
     }
 }
 

@@ -44,28 +44,27 @@ SINGLE_BATTLE_TEST("Mind's Eye doesn't bypass a Ghost-type's Wonder Guard")
 
 AI_SINGLE_BATTLE_TEST("AI doesn't use accuracy-lowering moves if it knows that the foe has Mind's Eye")
 {
-    u32 abilityAI = ABILITY_NONE, moveAI = MOVE_NONE, j = 0;
+    u32 abilityAI = ABILITY_NONE;
 
-    for (j = MOVE_NONE + 1; j < MOVES_COUNT; j++)
-    {
-        if (GetMoveEffect(j) == EFFECT_ACCURACY_DOWN || GetMoveEffect(j) == EFFECT_ACCURACY_DOWN_2) {
-            PARAMETRIZE { moveAI = j; abilityAI = ABILITY_SWIFT_SWIM; }
-            PARAMETRIZE { moveAI = j; abilityAI = ABILITY_MOLD_BREAKER; }
-        }
-    }
+    PARAMETRIZE { abilityAI = ABILITY_SWIFT_SWIM; }
+    PARAMETRIZE { abilityAI = ABILITY_MOLD_BREAKER; }
 
     GIVEN {
+        ASSUME(GetMoveEffect(MOVE_SAND_ATTACK) == EFFECT_ACCURACY_DOWN);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_MINDS_EYE); }
-        OPPONENT(SPECIES_BASCULEGION) { Moves(MOVE_CELEBRATE, moveAI); Ability(abilityAI); }
+        PLAYER(SPECIES_URSALUNA_BLOODMOON) { Ability(ABILITY_MINDS_EYE); }
+        OPPONENT(SPECIES_BASCULEGION) { Moves(MOVE_CELEBRATE, MOVE_SAND_ATTACK); Ability(abilityAI); }
     } WHEN {
-            TURN { MOVE(player, MOVE_TACKLE); }
-            TURN { MOVE(player, MOVE_TACKLE);
-                   if (abilityAI == ABILITY_MOLD_BREAKER) { SCORE_GT(opponent, moveAI, MOVE_CELEBRATE); }
-                   else { SCORE_EQ(opponent, moveAI, MOVE_CELEBRATE); }
-                }
+        TURN {
+            if (abilityAI == ABILITY_MOLD_BREAKER) {
+                SCORE_GT(opponent, MOVE_SAND_ATTACK, MOVE_CELEBRATE);
+            } else {
+                SCORE_EQ(opponent, MOVE_SAND_ATTACK, MOVE_CELEBRATE);
+            }
+        }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
-        if (abilityAI == ABILITY_MOLD_BREAKER) { ANIMATION(ANIM_TYPE_MOVE, moveAI, opponent); }
+        if (abilityAI == ABILITY_MOLD_BREAKER) {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SAND_ATTACK, opponent);
+        }
     }
 }

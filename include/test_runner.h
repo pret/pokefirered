@@ -20,6 +20,7 @@ void TestRunner_Battle_CheckAiMoveScores(u32 battlerId);
 void TestRunner_Battle_AISetScore(const char *file, u32 line, u32 battlerId, u32 moveIndex, s32 score);
 void TestRunner_Battle_AIAdjustScore(const char *file, u32 line, u32 battlerId, u32 moveIndex, s32 score);
 void TestRunner_Battle_InvalidNoHPMon(u32 battlerId, u32 partyIndex);
+void TestRunner_CheckMemory(void);
 
 void TestRunner_Battle_CheckBattleRecordActionType(u32 battlerId, u32 recordIndex, u32 actionType);
 

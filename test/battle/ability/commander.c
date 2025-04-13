@@ -245,11 +245,11 @@ DOUBLE_BATTLE_TEST("Commander doesn't prevent Imposter from working on a Command
         OPPONENT(SPECIES_DITTO) { Ability(ABILITY_IMPOSTER); }
     } WHEN {
         TURN { }
-        TURN { SWITCH(opponentRight, 2); }
+        TURN { SWITCH(opponentLeft, 2); }
     } SCENE {
         ABILITY_POPUP(playerRight, ABILITY_COMMANDER);
         MESSAGE("Tatsugiri was swallowed by Dondozo and became Dondozo's commander!");
-        ABILITY_POPUP(opponentRight, ABILITY_IMPOSTER);
+        ABILITY_POPUP(opponentLeft, ABILITY_IMPOSTER);
         MESSAGE("The opposing Ditto transformed into Tatsugiri using Imposter!");
     }
 }

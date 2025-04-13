@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Take Down deals 25% of recoil damage to the user")
+SINGLE_BATTLE_TEST("Recoil: Take Down deals 25% of recoil damage to the user")
 {
     s16 directDamage;
     s16 recoilDamage;
@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Take Down deals 25% of recoil damage to the user")
     }
 }
 
-SINGLE_BATTLE_TEST("Double Edge deals 33% of recoil damage to the user")
+SINGLE_BATTLE_TEST("Recoil: Double Edge deals 33% of recoil damage to the user")
 {
     s16 directDamage;
     s16 recoilDamage;
@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Double Edge deals 33% of recoil damage to the user")
     }
 }
 
-SINGLE_BATTLE_TEST("Head Smash deals 50% of recoil damage to the user")
+SINGLE_BATTLE_TEST("Recoil: Head Smash deals 50% of recoil damage to the user")
 {
     s16 directDamage;
     s16 recoilDamage;
@@ -61,7 +61,7 @@ SINGLE_BATTLE_TEST("Head Smash deals 50% of recoil damage to the user")
     }
 }
 
-SINGLE_BATTLE_TEST("Flare Blitz deals 33% of recoil damage to the user and can burn target")
+SINGLE_BATTLE_TEST("Recoil: Flare Blitz deals 33% of recoil damage to the user and can burn target")
 {
     s16 directDamage;
     s16 recoilDamage;
@@ -84,10 +84,10 @@ SINGLE_BATTLE_TEST("Flare Blitz deals 33% of recoil damage to the user and can b
     }
 }
 
-SINGLE_BATTLE_TEST("Flare Blitz is absorbed by Flash Fire and no recoil damage is dealt")
+SINGLE_BATTLE_TEST("Recoil: Flare Blitz is absorbed by Flash Fire and no recoil damage is dealt")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FLARE_BLITZ].recoil > 0);
+        ASSUME(GetMoveRecoil(MOVE_FLARE_BLITZ) > 0);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_VULPIX) { Ability(ABILITY_FLASH_FIRE); };
     } WHEN {

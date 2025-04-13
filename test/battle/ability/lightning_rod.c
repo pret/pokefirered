@@ -97,3 +97,21 @@ DOUBLE_BATTLE_TEST("Lightning Rod redirects an ally's attack")
         }
     }
 }
+
+DOUBLE_BATTLE_TEST("Lightning Rod absorbs moves that targets all battlers but does not redirect")
+{
+    GIVEN {
+        ASSUME(GetMoveType(MOVE_DISCHARGE) == TYPE_ELECTRIC);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_RAICHU) { Ability(ABILITY_LIGHTNING_ROD); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_DISCHARGE); }
+    } SCENE {
+        NOT HP_BAR(opponentRight);
+        ABILITY_POPUP(opponentRight, ABILITY_LIGHTNING_ROD);
+        HP_BAR(opponentLeft);
+        HP_BAR(playerRight);
+    }
+}

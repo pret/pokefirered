@@ -296,3 +296,49 @@ SINGLE_BATTLE_TEST("Rage Fist number of hits is copied by Transform")
         EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(2.0), timesGotHit[1]);
     }
 }
+
+SINGLE_BATTLE_TEST("Rage Fist base power is increased by 50 if user was hit and forces out")
+{
+    s16 timesGotHit[2];
+
+    GIVEN {
+        PLAYER(SPECIES_REGIROCK);
+        OPPONENT(SPECIES_REGIROCK);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_RAGE_FIST); MOVE(player, MOVE_DRAGON_TAIL); }
+        TURN { MOVE(player, MOVE_CELEBRATE); SWITCH(opponent, 0); }
+        TURN { MOVE(opponent, MOVE_RAGE_FIST); MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, opponent);
+        HP_BAR(player, captureDamage: &timesGotHit[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_TAIL, player);
+        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, opponent);
+        HP_BAR(player, captureDamage: &timesGotHit[1]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
+    } THEN {
+        EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(2.0), timesGotHit[1]);
+    }
+}
+
+SINGLE_BATTLE_TEST("Rage Fist doesn't get increased power if Substitute is hit")
+{
+    s16 timesGotHit[2];
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_RAGE_FIST); MOVE(player, MOVE_CELEBRATE); }
+        TURN { MOVE(opponent, MOVE_SUBSTITUTE); MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_RAGE_FIST); MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, opponent);
+        HP_BAR(player, captureDamage: &timesGotHit[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, opponent);
+        HP_BAR(player, captureDamage: &timesGotHit[1]);
+    } THEN {
+        EXPECT_EQ(timesGotHit[0], timesGotHit[1]);
+    }
+}

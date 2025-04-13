@@ -73,3 +73,30 @@ DOUBLE_BATTLE_TEST("Stealth Rock damages the correct pokemon when Eject Button i
         EXPECT_EQ(opponentLeft->hp, opponentLeft->maxHP);
     }
 }
+
+SINGLE_BATTLE_TEST("Stealth Rock damage terastalized mons with the correct amount of damage", s16 damage)
+{
+    u32 tera;
+
+    PARAMETRIZE { tera = FALSE; }
+    PARAMETRIZE { tera = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_CHARIZARD) { TeraType(TYPE_NORMAL); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        if (tera == TRUE)
+            TURN { MOVE(opponent, MOVE_STEALTH_ROCK); MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+        else
+            TURN { MOVE(opponent, MOVE_STEALTH_ROCK); MOVE(player, MOVE_CELEBRATE); }
+        TURN { SWITCH(player, 1); }
+        TURN { SWITCH(player, 0); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, opponent);
+        HP_BAR(player);
+        HP_BAR(player, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_GT(results[0].damage, results[1].damage);
+    }
+}

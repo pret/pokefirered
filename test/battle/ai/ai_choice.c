@@ -195,3 +195,38 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they are trappe
         }
     }
 }
+
+AI_SINGLE_BATTLE_TEST("Choiced Pokémon will switch if locked into a move the player is immune to")
+{
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[0] == TYPE_GHOST);
+        ASSUME(GetMoveType(MOVE_SURF) == TYPE_WATER);
+        ASSUME(GetMoveType(MOVE_BODY_SLAM) == TYPE_NORMAL);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_GASTLY) { Level(1); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_VAPOREON) { Ability(ABILITY_WATER_ABSORB); Moves(MOVE_SURF); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Item(ITEM_CHOICE_BAND); Moves(MOVE_SURF, MOVE_BODY_SLAM); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Item(ITEM_CHOICE_BAND); Moves(MOVE_SURF, MOVE_BODY_SLAM); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_SURF); SEND_OUT(player, 1); }
+        TURN { MOVE(player, MOVE_SURF); EXPECT_SWITCH(opponent, 1); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Choiced Pokémon will only see choiced moves when considering switching with ShouldSwitchIfHasBadOdds")
+{
+    PASSES_RANDOMLY(SHOULD_SWITCH_HASBADODDS_PERCENTAGE, 100, RNG_AI_SWITCH_HASBADODDS);
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[0] == TYPE_GHOST);
+        ASSUME(GetMoveType(MOVE_SURF) == TYPE_WATER);
+        ASSUME(GetMoveType(MOVE_BODY_SLAM) == TYPE_NORMAL);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES);
+        PLAYER(SPECIES_GASTLY) { Level(1); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_ZIGZAGOON) { Item(ITEM_CHOICE_BAND); Moves(MOVE_CLOSE_COMBAT); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Item(ITEM_CHOICE_BAND); Moves(MOVE_SURF, MOVE_CLOSE_COMBAT); }
+        OPPONENT(SPECIES_BRONZONG) { Moves(MOVE_CLOSE_COMBAT); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_SURF); SEND_OUT(player, 1); }
+        TURN { MOVE(player, MOVE_CLOSE_COMBAT); EXPECT_SWITCH(opponent, 1); }
+    }
+}

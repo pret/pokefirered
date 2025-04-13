@@ -412,3 +412,43 @@ SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke don't prevent S
             MESSAGE("The opposing Metang used Celebrate!");
     }
 }
+
+SINGLE_BATTLE_TEST("Clear Body, Full Metal Body, and White Smoke protect from Protect's secondary effects")
+{
+    u32 move = MOVE_NONE;
+    u32 species = SPECIES_NONE;
+    u32 ability = ABILITY_NONE;
+
+    static const u32 moves[] = {
+        MOVE_SPIKY_SHIELD,
+        MOVE_KINGS_SHIELD,
+        MOVE_SILK_TRAP,
+        MOVE_OBSTRUCT,
+    };
+
+    for (u32 j = 0; j < ARRAY_COUNT(moves); j++)
+    {
+        PARAMETRIZE{ move = moves[j]; species = SPECIES_METANG;   ability = ABILITY_CLEAR_BODY; }
+        PARAMETRIZE{ move = moves[j]; species = SPECIES_SOLGALEO; ability = ABILITY_FULL_METAL_BODY; }
+        PARAMETRIZE{ move = moves[j]; species = SPECIES_TORKOAL;  ability = ABILITY_WHITE_SMOKE; }
+    }
+
+    GIVEN {
+        PLAYER(species) { Ability(ability); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, move); MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, opponent);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+            if (move == MOVE_KINGS_SHIELD) {
+                MESSAGE("Wobbuffet's Attack fell!");
+            } else if (move == MOVE_SILK_TRAP) {
+                MESSAGE("Wobbuffet's Speed fell!");
+            } else if (move == MOVE_OBSTRUCT) {
+                MESSAGE("Wobbuffet's Defense harshly fell!");
+            }
+        }
+    }
+}

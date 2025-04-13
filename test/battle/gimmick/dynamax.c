@@ -2,7 +2,7 @@
 #include "test/battle.h"
 
 // ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax increases HP and max HP by 1.5x", u16 hp)
+SINGLE_BATTLE_TEST("Dynamax: Dynamax increases HP and max HP by 1.5x", u16 hp)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax increases HP and max HP by 1.5x", u16 hp)
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax Level increases HP and max HP multipliers by 0.05 for each level", u16 hp)
+SINGLE_BATTLE_TEST("Dynamax: Dynamax Level increases HP and max HP multipliers by 0.05 for each level", u16 hp)
 {
     u32 dynamax, level;
     PARAMETRIZE { dynamax = GIMMICK_NONE; level = 0; }
@@ -68,7 +68,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax Level increases HP and max HP multipliers 
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax expires after three turns", u16 hp)
+SINGLE_BATTLE_TEST("Dynamax: Dynamax expires after three turns", u16 hp)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -98,7 +98,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax expires after three turns", u16 hp)
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax expires after three turns and correctly converts HP according to Dynamax Level")
+SINGLE_BATTLE_TEST("Dynamax: Dynamax expires after three turns and correctly converts HP according to Dynamax Level")
 {
     u32 dynamaxLevel, dynamax;
     u16 capturedHP, finalHP;
@@ -141,7 +141,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamax expires after three turns and correctly co
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be flinched")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon cannot be flinched")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_FAKE_OUT) == EFFECT_FIRST_TURN_ONLY);
@@ -156,7 +156,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be flinched")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be hit by weight-based moves")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon cannot be hit by weight-based moves")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_HEAVY_SLAM) == EFFECT_HEAT_CRASH);
@@ -172,7 +172,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be hit by weight-based mo
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be hit by OHKO moves")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon cannot be hit by OHKO moves")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_FISSURE) == EFFECT_OHKO);
@@ -188,7 +188,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot be hit by OHKO moves")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are affected by Grudge")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are affected by Grudge")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Speed(50); };
@@ -203,7 +203,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are affected by Grudge")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by phazing moves, but still take damage")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are not affected by phazing moves, but still take damage")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_DRAGON_TAIL) == EFFECT_HIT_SWITCH_TARGET);
@@ -225,7 +225,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by phazing move
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by phazing moves but no block message is printed if they faint")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are not affected by phazing moves but no block message is printed if they faint")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_DRAGON_TAIL) == EFFECT_HIT_SWITCH_TARGET);
@@ -243,26 +243,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by phazing move
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Red Card")
-{
-    GIVEN {
-        ASSUME(gItemsInfo[ITEM_RED_CARD].holdEffect == HOLD_EFFECT_RED_CARD);
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WYNAUT);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
-    } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_CELEBRATE); }
-    } SCENE {
-        MESSAGE("Wobbuffet used Max Strike!");
-        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
-        MESSAGE("The opposing Wobbuffet held up its Red Card against Wobbuffet!");
-        MESSAGE("The move was blocked by the power of Dynamax!");
-    } THEN {
-        EXPECT_EQ(opponent->item, ITEM_NONE);
-    }
-}
-
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can be switched out by Eject Button")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon can be switched out by Eject Button")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_EJECT_BUTTON].holdEffect == HOLD_EFFECT_EJECT_BUTTON);
@@ -281,7 +262,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can be switched out by Eject But
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot have their ability swapped to another Pokemon's")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon cannot have their ability swapped to another Pokemon's")
 {
     GIVEN {
         PLAYER(SPECIES_MILTANK) { Ability(ABILITY_SCRAPPY); }
@@ -297,7 +278,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot have their ability swappe
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have their ability changed or suppressed")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon can have their ability changed or suppressed")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); }
@@ -314,7 +295,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have their ability changed o
 }
 
 // Max Moves don't make contact, so Cursed Body doesn't need to be tested, but it is coded for.
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon's Max Moves cannot be disabled")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon's Max Moves cannot be disabled")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -328,7 +309,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon's Max Moves cannot be disabled")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have base moves disabled on their first turn")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon can have base moves disabled on their first turn")
 {
     GIVEN {
         ASSUME(B_DISABLE_TURNS >= GEN_5);
@@ -349,7 +330,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can have base moves disabled on 
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Torment")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are immune to Torment")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -364,7 +345,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Torment")
 }
 
 // This is true for all item-removing moves.
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not immune to Knock Off")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are not immune to Knock Off")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_POTION); }
@@ -380,7 +361,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not immune to Knock Off")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon lose their substitutes")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon lose their substitutes")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -397,10 +378,11 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon lose their substitutes")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon that changes forms does not gain HP")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon that changes forms does not gain HP")
 {
     u16 capturedHP, finalHP;
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_BATTLE_BOND, GEN_8);
         PLAYER(SPECIES_GRENINJA_BATTLE_BOND) { Ability(ABILITY_BATTLE_BOND); HP(100); Speed(100); }
         OPPONENT(SPECIES_CATERPIE) { HP(1); Speed(1000); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(10); }
@@ -418,7 +400,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon that changes forms does not gain
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon that changes forms does not gain HP unless the new form gains Max HP")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon that changes forms does not gain HP unless the new form gains Max HP")
 {
     u32 hp = 1, maxHP = 200;
     u32 species;
@@ -438,7 +420,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon that changes forms does not gain
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves deal 1/4 damage through protect", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Max Moves deal 1/4 damage through protect", s16 damage)
 {
     bool32 protected;
     PARAMETRIZE { protected = TRUE; }
@@ -458,7 +440,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves deal 1/4 damage through protect", s16 da
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't bypass Max Guard")
+SINGLE_BATTLE_TEST("Dynamax: Max Moves don't bypass Max Guard")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -470,7 +452,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't bypass Max Guard")
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) Feint bypasses Max Guard but doesn't break it")
+DOUBLE_BATTLE_TEST("Dynamax: Feint bypasses Max Guard but doesn't break it")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -491,7 +473,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Feint bypasses Max Guard but doesn't break it")
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Instruct")
+DOUBLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are immune to Instruct")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -509,7 +491,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Instruct")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Pokemon with Gigantamax forms change upon Dynamaxing")
+SINGLE_BATTLE_TEST("Dynamax: Pokemon with Gigantamax forms change upon Dynamaxing")
 {
     u32 species;
     bool32 gigantamaxFactor;
@@ -525,7 +507,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Pokemon with Gigantamax forms change upon Dynamaxi
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Pokemon with Gigantamax forms revert upon switching")
+SINGLE_BATTLE_TEST("Dynamax: Pokemon with Gigantamax forms revert upon switching")
 {
     GIVEN {
         PLAYER(SPECIES_VENUSAUR);
@@ -540,7 +522,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Pokemon with Gigantamax forms revert upon switchin
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Choice items", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon are not affected by Choice items", s16 damage)
 {
     u16 item;
     PARAMETRIZE { item = ITEM_CHOICE_BAND; }
@@ -561,7 +543,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Choice items
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot use Max Guard while holding Assault Vest")
+SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon cannot use Max Guard while holding Assault Vest")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_ASSAULT_VEST].holdEffect == HOLD_EFFECT_ASSAULT_VEST);
@@ -582,7 +564,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon cannot use Max Guard while holdi
 // Anything that is conditional based off max HP still uses gBattleMons[battler].maxHP.
 // Below are some tests, but very far from all encompassing:
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Endeavor uses a Pokemon's non-Dynamax HP", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Endeavor uses a Pokemon's non-Dynamax HP", s16 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -601,7 +583,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Endeavor uses a Pokemon's non-Dynamax HP", s16 dam
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Super Fang uses a Pokemon's non-Dynamax HP", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Super Fang uses a Pokemon's non-Dynamax HP", s16 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -620,7 +602,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Super Fang uses a Pokemon's non-Dynamax HP", s16 d
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Pain Split uses a Pokemon's non-Dynamax HP", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Pain Split uses a Pokemon's non-Dynamax HP", s16 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -639,7 +621,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Pain Split uses a Pokemon's non-Dynamax HP", s16 d
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Sitrus Berries heal based on a Pokemon's non-Dynamax HP", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Sitrus Berries heal based on a Pokemon's non-Dynamax HP", s16 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -659,7 +641,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Sitrus Berries heal based on a Pokemon's non-Dynam
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Heal Pulse heals based on a Pokemon's non-Dynamax HP", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: Heal Pulse heals based on a Pokemon's non-Dynamax HP", s16 damage)
 {
     u32 dynamax;
     PARAMETRIZE { dynamax = GIMMICK_NONE; }
@@ -679,7 +661,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Heal Pulse heals based on a Pokemon's non-Dynamax 
 }
 
 // ============= MAX MOVE EFFECTS ==========================================
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers single opponent's speed")
+SINGLE_BATTLE_TEST("Dynamax: Max Strike lowers single opponent's speed")
 {
     GIVEN {
         // Fails?: ASSUME(GetMaxMove(B_POSITION_PLAYER_LEFT, MOVE_TACKLE) == MOVE_MAX_STRIKE);
@@ -704,7 +686,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers single opponent's speed")
 }
 
 // This test should apply to all stat-lowering Max Moves, including G-Max Foam Burst and G-Max Tartness.
-DOUBLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers both opponents' speed")
+DOUBLE_BATTLE_TEST("Dynamax: Max Strike lowers both opponents' speed")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_MAX_STRIKE, MOVE_EFFECT_LOWER_SPEED_SIDE));
@@ -740,7 +722,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Max Strike lowers both opponents' speed")
 }
 
 // This test should apply to all stat-boosting Max Moves, too.
-DOUBLE_BATTLE_TEST("(DYNAMAX) Max Knuckle raises both allies' attack")
+DOUBLE_BATTLE_TEST("Dynamax: Max Knuckle raises both allies' attack")
 {
     s16 damage[4];
     GIVEN {
@@ -783,7 +765,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Max Knuckle raises both allies' attack")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Flare sets up sunlight")
+SINGLE_BATTLE_TEST("Dynamax: Max Flare sets up sunlight")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_MAX_FLARE, MOVE_EFFECT_SUN));
@@ -799,7 +781,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Flare sets up sunlight")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Geyser sets up heavy rain")
+SINGLE_BATTLE_TEST("Dynamax: Max Geyser sets up heavy rain")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_MAX_GEYSER, MOVE_EFFECT_RAIN));
@@ -815,7 +797,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Geyser sets up heavy rain")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Hailstorm sets up hail")
+SINGLE_BATTLE_TEST("Dynamax: Max Hailstorm sets up hail")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_MAX_HAILSTORM, MOVE_EFFECT_HAIL));
@@ -831,7 +813,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Hailstorm sets up hail")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Rockfall sets up a sandstorm")
+SINGLE_BATTLE_TEST("Dynamax: Max Rockfall sets up a sandstorm")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_MAX_ROCKFALL, MOVE_EFFECT_SANDSTORM));
@@ -847,7 +829,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Rockfall sets up a sandstorm")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Overgrowth sets up Grassy Terrain")
+SINGLE_BATTLE_TEST("Dynamax: Max Overgrowth sets up Grassy Terrain")
 {
     s32 maxHP = 490; // Because of recalculated stats upon Dynamaxing
     GIVEN {
@@ -868,7 +850,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Overgrowth sets up Grassy Terrain")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Mindstorm sets up Psychic Terrain")
+SINGLE_BATTLE_TEST("Dynamax: Max Mindstorm sets up Psychic Terrain")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_MAX_MINDSTORM, MOVE_EFFECT_PSYCHIC_TERRAIN));
@@ -885,7 +867,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Mindstorm sets up Psychic Terrain")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Lightning sets up Electric Terrain")
+SINGLE_BATTLE_TEST("Dynamax: Max Lightning sets up Electric Terrain")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_MAX_LIGHTNING, MOVE_EFFECT_ELECTRIC_TERRAIN));
@@ -900,7 +882,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Lightning sets up Electric Terrain")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Starfall sets up Misty Terrain")
+SINGLE_BATTLE_TEST("Dynamax: Max Starfall sets up Misty Terrain")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_MAX_STARFALL, MOVE_EFFECT_MISTY_TERRAIN));
@@ -915,7 +897,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Starfall sets up Misty Terrain")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Stonesurge sets up Stealth Rocks")
+SINGLE_BATTLE_TEST("Dynamax: G-Max Stonesurge sets up Stealth Rocks")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_STONESURGE, MOVE_EFFECT_STEALTH_ROCK));
@@ -935,7 +917,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Stonesurge sets up Stealth Rocks")
 }
 
 // The test below also tests that sharp steel does type-based damage and can be Defogged away.
-SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Steelsurge sets up sharp steel")
+SINGLE_BATTLE_TEST("Dynamax: G-Max Steelsurge sets up sharp steel")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_STEELSURGE, MOVE_EFFECT_STEELSURGE));
@@ -963,7 +945,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Steelsurge sets up sharp steel")
 }
 
 // The test below should apply to G-Max Fireball and G-Max Drum Solo, too.
-SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Hydrosnipe has fixed power and ignores abilities", s16 damage)
+SINGLE_BATTLE_TEST("Dynamax: G-Max Hydrosnipe has fixed power and ignores abilities", s16 damage)
 {
     u16 move;
     PARAMETRIZE { move = MOVE_WATER_GUN; }
@@ -982,7 +964,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) G-Max Hydrosnipe has fixed power and ignores abili
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Volt Crash paralyzes both opponents")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Volt Crash paralyzes both opponents")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_VOLT_CRASH, MOVE_EFFECT_PARALYZE_SIDE));
@@ -1005,7 +987,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Volt Crash paralyzes both opponents")
 
 // G-Max Stun Shock can apply different statuses to each opponent, but this isn't
 // compatible with the test RNG set-up.
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock paralyzes or poisons both opponents")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Stun Shock paralyzes or poisons both opponents")
 {
     u8 statusAnim;
     u32 rng;
@@ -1046,7 +1028,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock paralyzes or poisons both opponen
 }
 
 // This test extends to G-Max Befuddle, too.
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock chooses statuses before considering immunities")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Stun Shock chooses statuses before considering immunities")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_STUN_SHOCK, MOVE_EFFECT_POISON_PARALYZE_SIDE));
@@ -1074,7 +1056,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Stun Shock chooses statuses before consideri
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Befuddle paralyzes, poisons, or sleeps both opponents")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Befuddle paralyzes, poisons, or sleeps both opponents")
 {
     u8 statusAnim;
     u32 rng;
@@ -1123,7 +1105,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Befuddle paralyzes, poisons, or sleeps both 
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Gold Rush confuses both opponents and generates money")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Gold Rush confuses both opponents and generates money")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_GOLD_RUSH, MOVE_EFFECT_CONFUSE_PAY_DAY_SIDE));
@@ -1143,7 +1125,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Gold Rush confuses both opponents and genera
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Smite confuses both opponents")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Smite confuses both opponents")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_SMITE, MOVE_EFFECT_CONFUSE_SIDE));
@@ -1162,7 +1144,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Smite confuses both opponents")
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Cuddle infatuates both opponents, if possible")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Cuddle infatuates both opponents, if possible")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_CUDDLE, MOVE_EFFECT_INFATUATE_SIDE));
@@ -1183,7 +1165,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Cuddle infatuates both opponents, if possibl
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Terror traps both opponents")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Terror traps both opponents")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_TERROR, MOVE_EFFECT_PREVENT_ESCAPE_SIDE));
@@ -1202,7 +1184,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Terror traps both opponents")
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Baton Pass passes G-Max Terror's escape prevention effect")
+SINGLE_BATTLE_TEST("Dynamax: Baton Pass passes G-Max Terror's escape prevention effect")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_TERROR, MOVE_EFFECT_PREVENT_ESCAPE_SIDE));
@@ -1219,7 +1201,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Baton Pass passes G-Max Terror's escape prevention
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Meltdown torments both opponents for 3 turns")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Meltdown torments both opponents for 3 turns")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_MELTDOWN, MOVE_EFFECT_TORMENT_SIDE));
@@ -1255,7 +1237,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Meltdown torments both opponents for 3 turns
 }
 
 // This test applies to G-Max Cannonade, G-Max Vine Lash, and G-Max Volcalith, too.
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Wildfire sets a field effect that damages non-Fire types")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Wildfire sets a field effect that damages non-Fire types")
 {
     s16 damage;
     GIVEN {
@@ -1301,7 +1283,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Wildfire sets a field effect that damages no
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Replenish recycles allies' berries 50\% of the time")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Replenish recycles allies' berries 50\% of the time")
 {
     PASSES_RANDOMLY(1, 2, RNG_G_MAX_REPLENISH);
     GIVEN {
@@ -1329,7 +1311,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Replenish recycles allies' berries 50\% of t
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Snooze makes only the target drowsy")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Snooze makes only the target drowsy")
 {
     PASSES_RANDOMLY(1, 2, RNG_G_MAX_SNOOZE);
     GIVEN {
@@ -1353,7 +1335,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Snooze makes only the target drowsy")
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Finale heals allies by 1/6 of their health")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Finale heals allies by 1/6 of their health")
 {
     s16 damage1, damage2;
     GIVEN {
@@ -1374,7 +1356,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Finale heals allies by 1/6 of their health")
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Sweetness cures allies' status conditions")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Sweetness cures allies' status conditions")
 {
     u32 j;
     GIVEN {
@@ -1400,7 +1382,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Sweetness cures allies' status conditions")
 }
 
 // This test applies to G-Max Sandblast, too.
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Centiferno traps both opponents in Fire Spin")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_CENTIFERNO, MOVE_EFFECT_FIRE_SPIN_SIDE));
@@ -1427,7 +1409,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Centiferno traps both opponents in Fire Spin
     }
 }
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance by 1 stage")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Chi Strike boosts allies' crit chance by 1 stage")
 {
     u32 j;
     GIVEN {
@@ -1458,9 +1440,9 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Chi Strike boosts allies' crit chance by 1 s
     }
 }
 
-TO_DO_BATTLE_TEST("(DYNAMAX) Baton Pass doesn't pass G-Max Chi Strike's effect");
+TO_DO_BATTLE_TEST("Dynamax: Baton Pass doesn't pass G-Max Chi Strike's effect");
 
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Depletion takes away 2 PP from the target's last move")
+DOUBLE_BATTLE_TEST("Dynamax: G-Max Depletion takes away 2 PP from the target's last move")
 {
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_DRAGON_CLAW) == DAMAGE_CATEGORY_PHYSICAL); // Otherwise Sableye faints.
@@ -1483,7 +1465,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max Depletion takes away 2 PP from the target's 
 }
 
 // This test applies to G-Max Rapid Flow, too.
-DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max One Blow bypasses Max Guard for full damage", s16 damage)
+DOUBLE_BATTLE_TEST("Dynamax: G-Max One Blow bypasses Max Guard for full damage", s16 damage)
 {
     bool32 protect;
     PARAMETRIZE { protect = TRUE; }
@@ -1513,7 +1495,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) G-Max One Blow bypasses Max Guard for full damage"
 
 // Bug Testing
 //  This test will fail if it's the first test a thread runs
-DOUBLE_BATTLE_TEST("(DYNAMAX) Max Flare doesn't softlock the game when fainting player partner")
+DOUBLE_BATTLE_TEST("Dynamax: Max Flare doesn't softlock the game when fainting player partner")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -1529,7 +1511,7 @@ DOUBLE_BATTLE_TEST("(DYNAMAX) Max Flare doesn't softlock the game when fainting 
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't execute effects on fainted battlers")
+SINGLE_BATTLE_TEST("Dynamax: Max Moves don't execute effects on fainted battlers")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -1544,7 +1526,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't execute effects on fainted battler
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Moxie clones can be triggered by Max Moves fainting opponents")
+SINGLE_BATTLE_TEST("Dynamax: Moxie clones can be triggered by Max Moves fainting opponents")
 {
     GIVEN {
         ASSUME(GetMovePower(MOVE_WATERFALL) > 0);
@@ -1556,11 +1538,11 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Moxie clones can be triggered by Max Moves faintin
     } SCENE {
         MESSAGE("The opposing Wobbuffet fainted!");
         ABILITY_POPUP(player, ABILITY_MOXIE);
-        MESSAGE("Gyarados's Moxie raised its Attack!");
+        MESSAGE("Gyarados's Attack rose!");
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Attacks prints a message when hitting into Max Guard")
+SINGLE_BATTLE_TEST("Dynamax: Max Attacks prints a message when hitting into Max Guard")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -1573,7 +1555,7 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Attacks prints a message when hitting into Max
     }
 }
 
-SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't bypass absorbing abilities")
+SINGLE_BATTLE_TEST("Dynamax: Max Moves don't bypass absorbing abilities")
 {
     u32 move, ability, species;
     PARAMETRIZE { move = MOVE_SPARK; ability = ABILITY_VOLT_ABSORB; species = SPECIES_LANTURN; }
@@ -1607,5 +1589,33 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Max Moves don't bypass absorbing abilities")
             HP_BAR(opponent);
         }
         ABILITY_POPUP(opponent, ability);
+    }
+}
+
+SINGLE_BATTLE_TEST("Dynamax: Dynamax is reverted before switch out")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_TACKLE); SEND_OUT(player, 1); }
+        TURN { SWITCH(player, 0); }
+        TURN { MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Tackle!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Dynamax: Destiny Bond fails if a dynamaxed battler is present on field")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_DESTINY_BOND) == EFFECT_DESTINY_BOND);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_DESTINY_BOND); MOVE(player, MOVE_TACKLE, gimmick: GIMMICK_DYNAMAX); }
+    } SCENE {
+        MESSAGE("The move was blocked by the power of Dynamax!");
     }
 }

@@ -137,3 +137,61 @@ SINGLE_BATTLE_TEST("Psychic Seed raises the holder's Sp. Defense on Psychic Terr
         EXPECT_EQ(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
     }
 }
+
+SINGLE_BATTLE_TEST("Seeds get consumed in Terrain even if holder is not affected by Terrain")
+{
+    u32 species, ability, item;
+    PARAMETRIZE { species = SPECIES_TAPU_KOKO; ability = ABILITY_ELECTRIC_SURGE; item = ITEM_ELECTRIC_SEED; }
+    PARAMETRIZE { species = SPECIES_TAPU_BULU; ability = ABILITY_GRASSY_SURGE; item = ITEM_GRASSY_SEED; }
+    PARAMETRIZE { species = SPECIES_TAPU_FINI; ability = ABILITY_MISTY_SURGE; item = ITEM_MISTY_SEED; }
+    PARAMETRIZE { species = SPECIES_TAPU_LELE; ability = ABILITY_PSYCHIC_SURGE; item = ITEM_PSYCHIC_SEED; }
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_PIDGEY].types[0] == TYPE_FLYING || gSpeciesInfo[SPECIES_PIDGEY].types[1] == TYPE_FLYING);
+        PLAYER(SPECIES_PIDGEY) { Item(item); }
+        OPPONENT(species) { Ability(ability); }
+    } WHEN {
+        TURN { }
+    } SCENE {
+        ABILITY_POPUP(opponent, ability);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+    } THEN {
+        EXPECT_EQ(player->item, ITEM_NONE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Electric Seed is consumed on Electric Terrain before other abilities change the terrain")
+{
+    GIVEN {
+        PLAYER(SPECIES_TAPU_BULU) { Ability(ABILITY_GRASSY_SURGE); Item(ITEM_ELECTRIC_SEED); Speed(5); }
+        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); Item(ITEM_ELECTRIC_SEED); Speed(10); }
+    } WHEN {
+        TURN { }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        MESSAGE("Using Electric Seed, the Defense of the opposing Tapu Koko rose!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+        MESSAGE("Using Electric Seed, the Defense of Tapu Bulu rose!");
+        ABILITY_POPUP(player, ABILITY_GRASSY_SURGE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Electric Seed doesn't activate on existing Electric Terrain before user's ability changes the terrain")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_TAPU_BULU) { Ability(ABILITY_GRASSY_SURGE); Item(ITEM_ELECTRIC_SEED); }
+        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); }
+    } WHEN {
+        TURN { SWITCH(player, 1); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
+        SWITCH_OUT_MESSAGE("Wobbuffet");
+        SEND_IN_MESSAGE("Tapu Bulu");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+            MESSAGE("Using Electric Seed, the Defense of Tapu Bulu rose!");
+        }
+        ABILITY_POPUP(player, ABILITY_GRASSY_SURGE);
+    }
+}

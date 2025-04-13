@@ -88,3 +88,34 @@ SINGLE_BATTLE_TEST("Clear Amulet prevents secondary effects that reduce stats")
         }
     }
 }
+
+SINGLE_BATTLE_TEST("Clear Amulet protects from Protect's secondary effects")
+{
+    u32 move;
+
+    PARAMETRIZE { move = MOVE_SPIKY_SHIELD; }
+    PARAMETRIZE { move = MOVE_BANEFUL_BUNKER; }
+    PARAMETRIZE { move = MOVE_BURNING_BULWARK; }
+    PARAMETRIZE { move = MOVE_KINGS_SHIELD; }
+    PARAMETRIZE { move = MOVE_SILK_TRAP; }
+    PARAMETRIZE { move = MOVE_OBSTRUCT; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_CLEAR_AMULET); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, move); MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, opponent);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+            if (move == MOVE_KINGS_SHIELD) {
+                MESSAGE("Wobbuffet's Attack fell!");
+            } else if (move == MOVE_SILK_TRAP) {
+                MESSAGE("Wobbuffet's Speed fell!");
+            } else if (move == MOVE_OBSTRUCT) {
+                MESSAGE("Wobbuffet's Defense harshly fell!");
+            }
+        }
+    }
+}

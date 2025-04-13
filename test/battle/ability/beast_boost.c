@@ -19,19 +19,19 @@ SINGLE_BATTLE_TEST("Beast Boost boosts the most proficient stat when knocking ou
         ABILITY_POPUP(player, ABILITY_BEAST_BOOST);
         switch(i) {
             case 0:
-                MESSAGE("Nihilego's Beast Boost raised its Attack!");
+                MESSAGE("Nihilego's Attack rose!");
                 break;
             case 1:
-                MESSAGE("Nihilego's Beast Boost raised its Defense!");
+                MESSAGE("Nihilego's Defense rose!");
                 break;
             case 2:
-                MESSAGE("Nihilego's Beast Boost raised its Sp. Atk!");
+                MESSAGE("Nihilego's Sp. Atk rose!");
                 break;
             case 3:
-                MESSAGE("Nihilego's Beast Boost raised its Sp. Def!");
+                MESSAGE("Nihilego's Sp. Def rose!");
                 break;
             case 4:
-                MESSAGE("Nihilego's Beast Boost raised its Speed!");
+                MESSAGE("Nihilego's Speed rose!");
                 break;
         }
     }

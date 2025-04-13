@@ -1,6 +1,43 @@
 #include "global.h"
 #include "test/battle.h"
 
+SINGLE_BATTLE_TEST("Counter is not affected by Protect effects")
+{
+    u32 move;
+
+    PARAMETRIZE { move = MOVE_SPIKY_SHIELD; }
+    PARAMETRIZE { move = MOVE_BANEFUL_BUNKER; }
+    PARAMETRIZE { move = MOVE_BURNING_BULWARK; }
+    PARAMETRIZE { move = MOVE_KINGS_SHIELD; }
+    PARAMETRIZE { move = MOVE_SILK_TRAP; }
+    PARAMETRIZE { move = MOVE_OBSTRUCT; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, move); MOVE(player, MOVE_COUNTER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, opponent);
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_COUNTER, player);
+            if (move == MOVE_SPIKY_SHIELD) {
+                HP_BAR(player);
+            } else if (move == MOVE_BANEFUL_BUNKER) {
+                STATUS_ICON(player, STATUS1_POISON);
+            } else if (move == MOVE_BURNING_BULWARK) {
+                STATUS_ICON(player, STATUS1_BURN);
+            } else if (move == MOVE_KINGS_SHIELD) {
+                MESSAGE("Wobbuffet's Attack fell!");
+            } else if (move == MOVE_SILK_TRAP) {
+                MESSAGE("Wobbuffet's Speed fell!");
+            } else if (move == MOVE_OBSTRUCT) {
+                MESSAGE("Wobbuffet's Defense harshly fell!");
+            }
+        }
+    }
+}
+
 TO_DO_BATTLE_TEST("Counter will do twice as much damage received from the opponent");
 TO_DO_BATTLE_TEST("Counter cannot affect ally Pokémon");
 TO_DO_BATTLE_TEST("Counter hits the last opponent that hit the user"); //Doubles

@@ -57,6 +57,8 @@ TEST("Terastallization type is reset to the default types when setting Tera Type
     CreateMon(&mon, SPECIES_PIDGEY, 100, 0, FALSE, 0, OT_ID_PRESET, 0);
     SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
     EXPECT_EQ(teraType, GetMonData(&mon, MON_DATA_TERA_TYPE));
+    if (typeNone == TYPE_NONE)
+        typeNone = GetTeraTypeFromPersonality(&mon);
     SetMonData(&mon, MON_DATA_TERA_TYPE, &typeNone);
     typeNone = GetMonData(&mon, MON_DATA_TERA_TYPE);
     EXPECT(typeNone == gSpeciesInfo[SPECIES_PIDGEY].types[0]

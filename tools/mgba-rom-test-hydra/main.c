@@ -111,6 +111,8 @@ static const struct Symbol *lookup_address(uint32_t address)
 // available by default.
 void *memmem(const void *haystack, size_t haystacklen, const void *needle, size_t needlelen)
 {
+    if (haystacklen < needlelen)
+        return NULL;
     const char *haystack_ = haystack;
     const char *needle_ = needle;
     for (size_t i = 0; i < haystacklen - needlelen; i++)

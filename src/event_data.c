@@ -38,6 +38,13 @@ EWRAM_DATA u16 gSpecialVar_PrevTextColor = 0;
 EWRAM_DATA u16 gSpecialVar_0x8014 = 0;
 EWRAM_DATA u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {};
 
+#if TESTING
+#define TEST_FLAGS_SIZE     1
+#define TEST_VARS_SIZE      8
+EWRAM_DATA static u8 sTestFlags[TEST_FLAGS_SIZE] = {0};
+EWRAM_DATA static u16 sTestVars[TEST_VARS_SIZE] = {0};
+#endif // TESTING
+
 COMMON_DATA u16 gLastQuestLogStoredFlagOrVarIdx = 0;
 
 extern u16 *const gSpecialVars[];
@@ -212,6 +219,10 @@ u16 *GetVarPointer(u16 idx)
         }
         return &gSaveBlock1Ptr->vars[idx - VARS_START];
     }
+#if TESTING
+    else if (idx >= TESTING_VARS_START)
+        return &sTestVars[idx - TESTING_VARS_START];
+#endif // TESTING
     return gSpecialVars[idx - SPECIAL_VARS_START];
 }
 
@@ -291,6 +302,10 @@ u8 *GetFlagAddr(u16 idx)
         }
         return &gSaveBlock1Ptr->flags[idx / 8];
     }
+#if TESTING
+    else if (idx >= TESTING_FLAGS_START)
+        return &sTestFlags[(idx - TESTING_FLAGS_START) / 8];
+#endif // TESTING
     return &sSpecialFlags[(idx - SPECIAL_FLAGS_START) / 8];
 }
 

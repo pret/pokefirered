@@ -1607,9 +1607,9 @@ static void Task_UpdateLvlInHealthbox(u8 taskId)
 
 static void Task_SetControllerToWaitForString(u8 taskId)
 {
-    s32 battlerId = gTasks[taskId].tExpTask_battler;
+    u8 battlerId = gTasks[taskId].tExpTask_battler;
 
-    if (IsBattlerSpriteVisible((u8)battlerId) == TRUE && !gTestRunnerEnabled)
+    if (IsBattlerSpriteVisible(battlerId) == TRUE && !gTestRunnerEnabled)
     {
         gTasks[taskId].func = Task_CreateLevelUpVerticalStripes;
         gTasks[taskId].data[15] = 0;

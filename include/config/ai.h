@@ -44,6 +44,9 @@
 #define SHOULD_SWITCH_REGENERATOR_PERCENTAGE                        50
 #define SHOULD_SWITCH_REGENERATOR_STATS_RAISED_PERCENTAGE           20
 
+// AI switchin considerations
+#define ALL_MOVES_BAD_STATUS_MOVES_BAD                          FALSE // If the AI has no moves that affect the target, ShouldSwitchIfAllMovesBad can prompt a switch. Enabling this config will ignore status moves that can affect the target when making this decision.
+
 // AI held item-based move scoring
 #define LOW_ACCURACY_THRESHOLD                                  75 // Moves with accuracy equal OR below this value are considered low accuracy 
 

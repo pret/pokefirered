@@ -276,7 +276,7 @@ const u8 gText_TimeBoard[] = _("TIME BOARD");
 const u8 gText_XMinYZSec[] = _("{STR_VAR_1}MIN. {STR_VAR_2}.{STR_VAR_3}SEC.");
 
 
-const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
+const u8 *const gBattleStringsTable[STRINGID_COUNT] =
 {
     [STRINGID_TRAINER1LOSETEXT]                     = COMPOUND_STRING("{B_TRAINER1_LOSE_TEXT}"),
     [STRINGID_PKMNGAINEDEXP]                        = COMPOUND_STRING("{B_BUFF1} gained{B_BUFF2} {B_BUFF3} Exp. Points!\p"),
@@ -738,12 +738,11 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_FRISKACTIVATES]                       = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} frisked {B_DEF_NAME_WITH_PREFIX2} and found its {B_LAST_ITEM}!"),
     [STRINGID_UNNERVEENTERS]                        = COMPOUND_STRING("{B_DEF_TEAM1} team is too nervous to eat Berries!"),
     [STRINGID_HARVESTBERRY]                         = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} harvested its {B_LAST_ITEM}!"),
-    [STRINGID_LASTABILITYRAISEDSTAT]                = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}'s {B_LAST_ABILITY} raised its {B_BUFF1}!"),
     [STRINGID_MAGICBOUNCEACTIVATES]                 = COMPOUND_STRING("{B_DEF_NAME_WITH_PREFIX} bounced the {B_ATK_NAME_WITH_PREFIX2} back!"),
     [STRINGID_PROTEANTYPECHANGE]                    = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY} transformed it into the {B_BUFF1} type!"),
     [STRINGID_SYMBIOSISITEMPASS]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} passed its {B_LAST_ITEM} to {B_EFF_NAME_WITH_PREFIX2} through {B_LAST_ABILITY}!"),
     [STRINGID_STEALTHROCKDMG]                       = COMPOUND_STRING("Pointed stones dug into {B_SCR_NAME_WITH_PREFIX2}!"),
-    [STRINGID_TOXICSPIKESABSORBED]                  = COMPOUND_STRING("The poison spikes disappeared from the ground around {B_ATK_TEAM2} team!"),
+    [STRINGID_TOXICSPIKESABSORBED]                  = COMPOUND_STRING("The poison spikes disappeared from the ground around {B_SCR_TEAM2} team!"),
     [STRINGID_TOXICSPIKESPOISONED]                  = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} was poisoned!"),
     [STRINGID_STICKYWEBSWITCHIN]                    = COMPOUND_STRING("{B_SCR_NAME_WITH_PREFIX} was caught in a sticky web!"),
     [STRINGID_HEALINGWISHCAMETRUE]                  = COMPOUND_STRING("The healing wish came true for {B_ATK_NAME_WITH_PREFIX2}!"),
@@ -998,6 +997,14 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_SUPEREFFECTIVETWOFOES]                = COMPOUND_STRING("It's super effective on {B_DEF_NAME_WITH_PREFIX2} and {B_DEF_PARTNER_NAME}!"),
     [STRINGID_NOTVERYEFFECTIVETWOFOES]              = COMPOUND_STRING("It's not very effective on {B_DEF_NAME_WITH_PREFIX2} and {B_DEF_PARTNER_NAME}!"),
     [STRINGID_ITDOESNTAFFECTTWOFOES]                = COMPOUND_STRING("It doesn't affect {B_DEF_NAME_WITH_PREFIX2} and {B_DEF_PARTNER_NAME}…"),
+    [STRINGID_SENDCAUGHTMONPARTYORBOX]              = COMPOUND_STRING("Add {B_DEF_NAME} to your party?"),
+    [STRINGID_PKMNSENTTOPCAFTERCATCH]               = gText_PkmnSentToPCAfterCatch,
+    [STRINGID_PKMNDYNAMAXED]                        = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} grew huge into its Dynamax form!"),
+    [STRINGID_PKMNGIGANTAMAXED]                     = COMPOUND_STRING("{B_ATK_NAME_WITH_PREFIX} grew huge into its Gigantamax form!"),
+    [STRINGID_TIMETODYNAMAX]                        = COMPOUND_STRING("Time to Dynamax!"),
+    [STRINGID_TIMETOGIGANTAMAX]                     = COMPOUND_STRING("Time to Gigantamax!"),
+    [STRINGID_QUESTIONFORFEITBATTLE]                = COMPOUND_STRING("Would you like to give up on this battle and quit now? Quitting the battle is the same as losing the battle."),
+    [STRINGID_FORFEITBATTLEGAVEMONEY]               = COMPOUND_STRING("You gave ¥{B_BUFF1} to the winner…{PAUSE_UNTIL_PRESS}"),
 
     // pokefirered strings
     [STRINGID_PKMNTRANSFERREDBILLSPC]        = gText_PkmnTransferredBillsPC,
@@ -1016,8 +1023,6 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_TRAINER1MON1COMEBACK]          = COMPOUND_STRING("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME}, come back!"),
     [STRINGID_TRAINER1MON2COMEBACK]          = COMPOUND_STRING("{B_TRAINER1_NAME}: {B_OPPONENT_MON2_NAME}, come back!"),
     [STRINGID_TRAINER1MON1AND2COMEBACK]      = COMPOUND_STRING("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME}, come back!"),
-    [STRINGID_SENDCAUGHTMONPARTYORBOX]       = COMPOUND_STRING("Add {B_DEF_NAME} to your party?"),
-    [STRINGID_PKMNSENTTOPCAFTERCATCH]        = gText_PkmnSentToPCAfterCatch,
 };
 
 const u16 gTrainerUsedItemStringIds[] =
@@ -1979,7 +1984,7 @@ void BufferStringBattle(u16 stringId, u32 battler)
         stringPtr = gBattleStruct->trainerSlideMsg;
         break;
     default: // load a string from the table
-        if (stringId >= BATTLESTRINGS_COUNT)
+        if (stringId >= STRINGID_COUNT)
         {
             gDisplayedStringBattle[0] = EOS;
             return;
@@ -2737,6 +2742,18 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 break;
             case B_TXT_DEF_TEAM2:
                 if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
+                    toCpy = sText_Your2;
+                else
+                    toCpy = sText_Opposing2;
+                break;
+            case B_TXT_SCR_TEAM1:
+                if (GetBattlerSide(gBattleScripting.battler) == B_SIDE_PLAYER)
+                    toCpy = sText_Your1;
+                else
+                    toCpy = sText_Opposing1;
+                break;
+            case B_TXT_SCR_TEAM2:
+                if (GetBattlerSide(gBattleScripting.battler) == B_SIDE_PLAYER)
                     toCpy = sText_Your2;
                 else
                     toCpy = sText_Opposing2;

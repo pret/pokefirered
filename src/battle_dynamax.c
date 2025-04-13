@@ -491,3 +491,20 @@ void BS_JumpIfDynamaxed(void)
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+void BS_UndoDynamax(void)
+{
+    NATIVE_ARGS(u8 battler);
+    u32 battler = GetBattlerForBattleScript(cmd->battler);
+
+    if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX)
+    {
+        BattleScriptPushCursor();
+        UndoDynamax(battler);
+        gBattleScripting.battler = battler;
+        gBattlescriptCurrInstr = BattleScript_DynamaxEnds_Ret;
+        return;
+    }
+
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}

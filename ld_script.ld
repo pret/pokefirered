@@ -38,6 +38,7 @@ SECTIONS {
 
         /* COMMON starts at 0x30030E0 */
         INCLUDE "sym_common.ld"
+        src/*.o(COMMON);
 
         *libc.a:sbrkr.o(COMMON);
         end = .;

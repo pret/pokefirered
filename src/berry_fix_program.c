@@ -32,10 +32,10 @@ enum {
     STATE_RETRY,
 };
 
-const void *gMultibootStart;
-int gMultibootStatus;
-size_t gMultibootSize;
-struct MultiBootParam gMultibootParam;
+COMMON_DATA const void *gMultibootStart = NULL;
+COMMON_DATA int gMultibootStatus = 0;
+COMMON_DATA size_t gMultibootSize = 0;
+COMMON_DATA struct MultiBootParam gMultibootParam = {0};
 
 static void CB2_BerryFix(void);
 static void Task_BerryFixMain(u8 taskId);

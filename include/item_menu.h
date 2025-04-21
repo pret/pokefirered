@@ -15,8 +15,8 @@ struct BagStruct
     u8 location;
     bool8 bagOpen;
     u16 pocket;
-    u16 itemsAbove[3];
-    u16 cursorPos[3];
+    u16 itemsAbove[NUM_BAG_POCKETS_NO_CASES];
+    u16 cursorPos[NUM_BAG_POCKETS_NO_CASES];
 };
 
 extern struct BagStruct gBagMenuState;

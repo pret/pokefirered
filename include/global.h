@@ -690,7 +690,7 @@ struct QuestLogScene
     /*0x0004*/ s16 x;
     /*0x0006*/ s16 y;
     /*0x0008*/ struct QuestLogObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
-    /*0x0148*/ u8 flags[NUM_FLAG_BYTES];
+    /*0x0148*/ u8 ALIGNED(2) flags[NUM_FLAG_BYTES];
     /*0x02c8*/ u16 vars[VARS_COUNT];
     /*0x0468*/ struct QuestLogObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
     /*0x0568*/ u16 script[128];
@@ -858,7 +858,7 @@ struct SaveBlock1
 #endif //FREE_MATCH_CALL
     /*0x06A0*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
     /*0x08E0*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
-    /*0x0EE0*/ u8 flags[NUM_FLAG_BYTES];
+    /*0x0EE0*/ u8 ALIGNED(2) flags[NUM_FLAG_BYTES];
     /*0x1000*/ u16 vars[VARS_COUNT];
     /*0x1200*/ u32 gameStats[NUM_GAME_STATS];
     /*0x1300*/ struct QuestLogScene questLog[QUEST_LOG_SCENE_COUNT];

@@ -1784,7 +1784,7 @@ static void VBlankCB_Spiral(void)
         SetGpuReg(REG_OFFSET_WIN1V, sTransitionData->win1V);
         SetGpuReg(REG_OFFSET_WIN0H, gScanlineEffectRegBuffers[0][0]);
         SetGpuReg(REG_OFFSET_WIN1H, gScanlineEffectRegBuffers[0][1]);
-        DmaSet(0, gScanlineEffectRegBuffers[0], &REG_WIN0H, (DMA_32BIT << 16) | B_TRANS_DMA_FLAGS);
+        DmaSet(0, (u32*)gScanlineEffectRegBuffers[0], &REG_WIN0H, (DMA_32BIT << 16) | B_TRANS_DMA_FLAGS);
     }
 }
 

@@ -1,7 +1,25 @@
 #include "global.h"
 #include "test/battle.h"
 
-TO_DO_BATTLE_TEST("Analytic increases the power of moves by 30% if it's the last one that uses its move");
+SINGLE_BATTLE_TEST("Analytic increases the power of moves by 30% if it's the last one that uses its move", s16 damage)
+{
+    u32 speed;
+
+    PARAMETRIZE { speed = 3; }
+    PARAMETRIZE { speed = 1; }
+
+    GIVEN {
+        PLAYER(SPECIES_MAGNEMITE) { Ability(ABILITY_ANALYTIC); Speed(speed); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(1.3), results[1].damage);
+    }
+}
+
 TO_DO_BATTLE_TEST("Analytic takes into account modifications to speeed an priority (Gen 5-8)");       //Eg. Paralysis, Power Weight, Stall
 TO_DO_BATTLE_TEST("Analytic does not take into account modifications to speeed an priority (Gen 8)"); //Eg. Paralysis, Power Weight, Stall
 TO_DO_BATTLE_TEST("Analytic takes into account the turn order of what fainted Pokémon would've moved");

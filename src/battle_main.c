@@ -893,7 +893,7 @@ static void CB2_HandleStartBattle(void)
             ShowBg(1);
             ShowBg(2);
             ShowBg(3);
-            BattleInterfaceSetWindowPals();
+            FillAroundBattleWindows();
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
         if (gWirelessCommType)
@@ -1092,7 +1092,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             ShowBg(1);
             ShowBg(2);
             ShowBg(3);
-            BattleInterfaceSetWindowPals();
+            FillAroundBattleWindows();
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
         if (gWirelessCommType)
@@ -1497,7 +1497,7 @@ static void CB2_HandleStartMultiBattle(void)
             ShowBg(1);
             ShowBg(2);
             ShowBg(3);
-            BattleInterfaceSetWindowPals();
+            FillAroundBattleWindows();
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
         if (gWirelessCommType)

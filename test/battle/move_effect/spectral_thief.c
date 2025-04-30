@@ -8,8 +8,8 @@ SINGLE_BATTLE_TEST("Spectral Thief steals opponents boost before attacking", s16
     PARAMETRIZE { move = MOVE_SWORDS_DANCE; }
 
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SWORDS_DANCE].effect == EFFECT_ATTACK_UP_2);
-        ASSUME(gMovesInfo[MOVE_SPECTRAL_THIEF].effect == EFFECT_SPECTRAL_THIEF);
+        ASSUME(GetMoveEffect(MOVE_SWORDS_DANCE) == EFFECT_ATTACK_UP_2);
+        ASSUME(GetMoveEffect(MOVE_SPECTRAL_THIEF) == EFFECT_SPECTRAL_THIEF);
         PLAYER(SPECIES_REGIROCK);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -32,8 +32,8 @@ SINGLE_BATTLE_TEST("Spectral Thief steals opponents boost before attacking", s16
 SINGLE_BATTLE_TEST("Spectral Thief can't steal opponent's boost if target is immune")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SWORDS_DANCE].effect == EFFECT_ATTACK_UP_2);
-        ASSUME(gMovesInfo[MOVE_SPECTRAL_THIEF].effect == EFFECT_SPECTRAL_THIEF);
+        ASSUME(GetMoveEffect(MOVE_SWORDS_DANCE) == EFFECT_ATTACK_UP_2);
+        ASSUME(GetMoveEffect(MOVE_SPECTRAL_THIEF) == EFFECT_SPECTRAL_THIEF);
         PLAYER(SPECIES_MEOWTH);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -17,7 +17,7 @@
 #include "link.h"
 #include "list_menu.h"
 #include "load_save.h"
-#include "mail_data.h"
+#include "mail.h"
 #include "map_name_popup.h"
 #include "menu.h"
 #include "menu_indicators.h"

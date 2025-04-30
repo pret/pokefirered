@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_ROTOTILLER].effect == EFFECT_ROTOTILLER);
+    ASSUME(GetMoveEffect(MOVE_ROTOTILLER) == EFFECT_ROTOTILLER);
 }
 
 DOUBLE_BATTLE_TEST("Rototiller boosts Attack and Special Attack of all Grass types on the field")
@@ -55,7 +55,7 @@ SINGLE_BATTLE_TEST("Rototiller doesn't affect pokemon that are semi-invulnerable
 {
     GIVEN {
         ASSUME(gSpeciesInfo[SPECIES_TANGELA].types[0] == TYPE_GRASS);
-        ASSUME(gMovesInfo[MOVE_DIG].effect == EFFECT_SEMI_INVULNERABLE);
+        ASSUME(GetMoveEffect(MOVE_DIG) == EFFECT_SEMI_INVULNERABLE);
         PLAYER(SPECIES_TANGELA);
         OPPONENT(SPECIES_TANGELA);
     } WHEN {
@@ -79,7 +79,7 @@ SINGLE_BATTLE_TEST("Rototiller fails if the only valid target is semi-invulnerab
         ASSUME(gSpeciesInfo[SPECIES_TANGELA].types[0] == TYPE_GRASS);
         ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] != TYPE_GRASS);
         ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[1] != TYPE_GRASS);
-        ASSUME(gMovesInfo[MOVE_DIG].effect == EFFECT_SEMI_INVULNERABLE);
+        ASSUME(GetMoveEffect(MOVE_DIG) == EFFECT_SEMI_INVULNERABLE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_TANGELA);
     } WHEN {

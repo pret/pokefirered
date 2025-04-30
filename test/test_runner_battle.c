@@ -2034,16 +2034,16 @@ s32 MoveGetTarget(s32 battlerId, u32 moveId, struct MoveContext *ctx, u32 source
     }
     else
     {
-        const struct MoveInfo *move = &gMovesInfo[moveId];
-        if (move->target == MOVE_TARGET_RANDOM
-         || move->target == MOVE_TARGET_BOTH
-         || move->target == MOVE_TARGET_DEPENDS
-         || move->target == MOVE_TARGET_FOES_AND_ALLY
-         || move->target == MOVE_TARGET_OPPONENTS_FIELD)
+        u32 moveTarget = GetMoveTarget(moveId);
+        if (moveTarget == MOVE_TARGET_RANDOM
+         || moveTarget == MOVE_TARGET_BOTH
+         || moveTarget == MOVE_TARGET_DEPENDS
+         || moveTarget == MOVE_TARGET_FOES_AND_ALLY
+         || moveTarget == MOVE_TARGET_OPPONENTS_FIELD)
         {
             target = BATTLE_OPPOSITE(battlerId);
         }
-        else if (move->target == MOVE_TARGET_SELECTED || move->target == MOVE_TARGET_OPPONENT)
+        else if (moveTarget == MOVE_TARGET_SELECTED || moveTarget == MOVE_TARGET_OPPONENT)
         {
             // In AI Doubles not specified target allows any target for EXPECT_MOVE.
             if (GetBattleTest()->type != BATTLE_TEST_AI_DOUBLES)
@@ -2053,11 +2053,11 @@ s32 MoveGetTarget(s32 battlerId, u32 moveId, struct MoveContext *ctx, u32 source
 
             target = BATTLE_OPPOSITE(battlerId);
         }
-        else if (move->target == MOVE_TARGET_USER || move->target == MOVE_TARGET_ALL_BATTLERS)
+        else if (moveTarget == MOVE_TARGET_USER || moveTarget == MOVE_TARGET_ALL_BATTLERS)
         {
             target = battlerId;
         }
-        else if (move->target == MOVE_TARGET_ALLY)
+        else if (moveTarget == MOVE_TARGET_ALLY)
         {
             target = BATTLE_PARTNER(battlerId);
         }
@@ -2116,7 +2116,7 @@ void MoveGetIdAndSlot(s32 battlerId, struct MoveContext *ctx, u32 *moveId, u32 *
     if (ctx->explicitGimmick && ctx->gimmick != GIMMICK_NONE)
     {
         u32 item = GetMonData(mon, MON_DATA_HELD_ITEM);
-        u32 holdEffect = ItemId_GetHoldEffect(item);
+        enum ItemHoldEffect holdEffect = ItemId_GetHoldEffect(item);
         u32 species = GetMonData(mon, MON_DATA_SPECIES);
         u32 side = battlerId & BIT_SIDE;
 

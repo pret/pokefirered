@@ -5,7 +5,7 @@
 #include "battle.h"
 #include "constants/items.h"
 #include "daycare.h"
-#include "mail_data.h"
+#include "mail.h"
 #include "pokemon_storage_system.h"
 #include "event_data.h"
 #include "random.h"

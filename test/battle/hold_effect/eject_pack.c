@@ -160,3 +160,74 @@ SINGLE_BATTLE_TEST("Eject Pack will miss timing to switch out user if Eject Butt
         EXPECT(opponent->species == SPECIES_WYNAUT);
     }
 }
+
+DOUBLE_BATTLE_TEST("Eject Pack: Only the fastest Eject Pack will activate after intimidate")
+{
+    u32 speed;
+
+    PARAMETRIZE { speed = 1; }
+    PARAMETRIZE { speed = 11; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); Item(ITEM_EJECT_PACK); }
+        PLAYER(SPECIES_WYNAUT) { Speed(speed); Item(ITEM_EJECT_PACK); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
+        OPPONENT(SPECIES_WYNAUT)  { Speed(4); }
+        OPPONENT(SPECIES_WOBBUFFET)  { Speed(5); }
+        OPPONENT(SPECIES_EKANS) { Speed(6); Ability(ABILITY_INTIMIDATE); }
+    } WHEN {
+        TURN {
+            SWITCH(opponentLeft, 2);
+            if (speed == 11)
+                SEND_OUT(playerRight, 2);
+            else
+                SEND_OUT(playerLeft, 2);
+        }
+    } SCENE {
+        ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+        if (speed == 11) {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
+        } else {
+            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("Eject Pack: Only the fastest Eject Pack will activate after a move stat drop")
+{
+    u32 speed;
+
+    PARAMETRIZE { speed = 1; }
+    PARAMETRIZE { speed = 11; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); Item(ITEM_EJECT_PACK); }
+        PLAYER(SPECIES_WYNAUT) { Speed(speed); Item(ITEM_EJECT_PACK); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
+        OPPONENT(SPECIES_WYNAUT)  { Speed(4); }
+        OPPONENT(SPECIES_WOBBUFFET)  { Speed(5); }
+    } WHEN {
+        TURN {
+            MOVE(opponentLeft, MOVE_BUBBLE);
+            if (speed == 11)
+                SEND_OUT(playerRight, 2);
+            else
+                SEND_OUT(playerLeft, 2);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BUBBLE, opponentLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+        if (speed == 11) {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
+        } else {
+            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
+        }
+    }
+}

@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Oblivious prevents Captivate")
         PLAYER(SPECIES_SLOWPOKE) { Ability(ABILITY_OBLIVIOUS); Gender(MON_MALE); }
         OPPONENT(SPECIES_WOBBUFFET) { Gender(MON_FEMALE); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_ATTRACT); }
+        TURN { MOVE(opponent, MOVE_CAPTIVATE); }
     } SCENE {
         ABILITY_POPUP(player, ABILITY_OBLIVIOUS);
         NONE_OF { ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player); }

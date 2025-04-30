@@ -12,7 +12,7 @@
 #include "item.h"
 #include "item_icon.h"
 #include "item_menu.h"
-#include "mail_data.h"
+#include "mail.h"
 #include "menu.h"
 #include "mon_markings.h"
 #include "naming_screen.h"

@@ -14,6 +14,48 @@ AI_DOUBLE_BATTLE_TEST("AI prefers Entrainment'ing good abilities onto partner wi
     }
 }
 
-TO_DO_BATTLE_TEST("Entrainment changes the target's Ability to match the user's");
-TO_DO_BATTLE_TEST("Entrainment fails if the user's ability has cantBeCopied flag");
-TO_DO_BATTLE_TEST("Entrainment fails if the targets's ability has cantBeOverwritten flag");
+SINGLE_BATTLE_TEST("Entrainment changes the target's Ability to match the user's")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_TELEPATHY); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ENTRAINMENT); }
+    } THEN {
+        EXPECT(opponent->ability == ABILITY_TELEPATHY);
+    }
+}
+
+SINGLE_BATTLE_TEST("Entrainment fails if the user's ability has cantBeCopied flag")
+{
+    GIVEN {
+        ASSUME(gAbilitiesInfo[ABILITY_MULTITYPE].cantBeCopied);
+        PLAYER(SPECIES_ARCEUS)   { Ability(ABILITY_MULTITYPE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_SHADOW_TAG); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ENTRAINMENT); }
+    } SCENE {
+        MESSAGE("But it failed!");
+    } THEN {
+        EXPECT(player->ability == ABILITY_MULTITYPE);
+        EXPECT(opponent->ability == ABILITY_SHADOW_TAG);
+    }
+}
+
+SINGLE_BATTLE_TEST("Entrainment fails if the target's ability has cantBeOverwritten flag")
+{
+    GIVEN {
+        ASSUME(gAbilitiesInfo[ABILITY_MULTITYPE].cantBeOverwritten);
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_TELEPATHY); }
+        OPPONENT(SPECIES_ARCEUS)  { Ability(ABILITY_MULTITYPE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ENTRAINMENT); }
+    } SCENE {
+        MESSAGE("But it failed!");
+    } THEN {
+        EXPECT(player->ability   == ABILITY_TELEPATHY);
+        EXPECT(opponent->ability == ABILITY_MULTITYPE);
+    }
+}
+
+TO_DO_BATTLE_TEST("Entrainment fails on Dynamaxed Pokémon");

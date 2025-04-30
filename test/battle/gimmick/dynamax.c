@@ -68,6 +68,29 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamax Level increases HP and max HP multipliers b
     }
 }
 
+SINGLE_BATTLE_TEST("Dynamax: Dynamax expires when fainted")
+{
+    u32 dynamax;
+    PARAMETRIZE { dynamax = GIMMICK_NONE; }
+    PARAMETRIZE { dynamax = GIMMICK_DYNAMAX; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE, gimmick: dynamax); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        if (dynamax)
+            MESSAGE("Wobbuffet used Max Strike!");
+        else
+            MESSAGE("Wobbuffet used Tackle!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        HP_BAR(player);
+        if (dynamax) // Expect to have visual reversion when fainting.
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
+        MESSAGE("Wobbuffet fainted!");
+    }
+}
+
 SINGLE_BATTLE_TEST("Dynamax: Dynamax expires after three turns", u16 hp)
 {
     u32 dynamax;

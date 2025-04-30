@@ -15,7 +15,6 @@
 #include "script.h"
 #include "event_data.h"
 #include "mail.h"
-#include "mail_data.h"
 #include "pokeball.h"
 #include "evolution_scene.h"
 #include "overworld.h"

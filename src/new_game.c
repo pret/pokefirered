@@ -11,7 +11,7 @@
 #include "quest_log.h"
 #include "wild_encounter.h"
 #include "event_data.h"
-#include "mail_data.h"
+#include "mail.h"
 #include "play_time.h"
 #include "money.h"
 #include "battle_records.h"

@@ -77,9 +77,9 @@ SINGLE_BATTLE_TEST("Dream Eater works on targets with Comatose")
 SINGLE_BATTLE_TEST("Dream Eater fails if the target is behind a Substitute (Gen 1-4)")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_YAWN].effect == EFFECT_YAWN);
-        ASSUME(gMovesInfo[MOVE_SUBSTITUTE].effect == EFFECT_SUBSTITUTE);
-        ASSUME(!gMovesInfo[MOVE_DREAM_EATER].ignoresSubstitute);
+        ASSUME(GetMoveEffect(MOVE_YAWN) == EFFECT_YAWN);
+        ASSUME(GetMoveEffect(MOVE_SUBSTITUTE) == EFFECT_SUBSTITUTE);
+        ASSUME(!MoveIgnoresSubstitute(MOVE_DREAM_EATER));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -97,8 +97,8 @@ SINGLE_BATTLE_TEST("Dream Eater works if the target is behind a Substitute (Gen 
     s16 damage;
     s16 healed;
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_YAWN].effect == EFFECT_YAWN);
-        ASSUME(gMovesInfo[MOVE_SUBSTITUTE].effect == EFFECT_SUBSTITUTE);
+        ASSUME(GetMoveEffect(MOVE_YAWN) == EFFECT_YAWN);
+        ASSUME(GetMoveEffect(MOVE_SUBSTITUTE) == EFFECT_SUBSTITUTE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
     } WHEN {

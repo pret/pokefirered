@@ -30,7 +30,6 @@
 #include "link_rfu.h"
 #include "load_save.h"
 #include "mail.h"
-#include "mail_data.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"

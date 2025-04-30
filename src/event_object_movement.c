@@ -2157,11 +2157,11 @@ static u32 LoadDynamicFollowerPalette(u32 species, bool32 shiny, bool32 female)
         // Check if pal data must be decompressed
         if (IsLZ77Data(spritePalette.data, PLTT_SIZE_4BPP, PLTT_SIZE_4BPP))
         {
-            struct CompressedSpritePalette compSpritePalette;
+            struct SpritePalette compSpritePalette;
 
             compSpritePalette.data = (const void *) spritePalette.data;
             compSpritePalette.tag = spritePalette.tag;
-            paletteNum = LoadCompressedSpritePalette(&compSpritePalette);
+            paletteNum = LoadSpritePalette(&compSpritePalette);
         }
         else
         {
@@ -2174,13 +2174,13 @@ static u32 LoadDynamicFollowerPalette(u32 species, bool32 shiny, bool32 female)
     {
         // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
         // so that palette tags do not overlap
-        const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, female); //ETODO
+        const u16 *palette = GetMonSpritePalFromSpecies(species, shiny, female); //ETODO
         // palette already loaded
         if ((paletteNum = IndexOfSpritePaletteTag(species)) < 16)
             return paletteNum;
         // Use matching front sprite's normal/shiny palettes
         // Load compressed palette
-        LoadCompressedSpritePaletteWithTag(palette, species);
+        LoadSpritePaletteWithTag(palette, species);
         paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
         ApplyGlobalFieldPaletteTint(paletteNum);
     }

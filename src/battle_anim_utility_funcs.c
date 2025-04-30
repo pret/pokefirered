@@ -487,29 +487,29 @@ static void StatsChangeAnimation_Step2(u8 taskId)
     switch (sAnimStatsChangeData->aAnimStatId)
     {
     case STAT_ANIM_PAL_ATK:
-        LoadCompressedPalette(gStatAnim_Attack_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
+        LoadPalette(gStatAnim_Attack_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case STAT_ANIM_PAL_DEF:
-        LoadCompressedPalette(gStatAnim_Defense_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
+        LoadPalette(gStatAnim_Defense_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case STAT_ANIM_PAL_ACC:
-        LoadCompressedPalette(gStatAnim_Accuracy_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
+        LoadPalette(gStatAnim_Accuracy_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case STAT_ANIM_PAL_SPEED:
-        LoadCompressedPalette(gStatAnim_Speed_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
+        LoadPalette(gStatAnim_Speed_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case STAT_ANIM_PAL_EVASION:
-        LoadCompressedPalette(gStatAnim_Evasion_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
+        LoadPalette(gStatAnim_Evasion_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case STAT_ANIM_PAL_SPATK:
-        LoadCompressedPalette(gStatAnim_SpAttack_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
+        LoadPalette(gStatAnim_SpAttack_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     case STAT_ANIM_PAL_SPDEF:
-        LoadCompressedPalette(gStatAnim_SpDefense_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
+        LoadPalette(gStatAnim_SpDefense_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     default:
  // case STAT_ANIM_PAL_MULTIPLE:
-        LoadCompressedPalette(gStatAnim_Multiple_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
+        LoadPalette(gStatAnim_Multiple_Pal, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
         break;
     }
 
@@ -795,7 +795,7 @@ void AnimTask_SetAllNonAttackersInvisiblity(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void StartMonScrollingBgMask(u8 taskId, int UNUSED unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette)
+void StartMonScrollingBgMask(u8 taskId, int UNUSED unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u16 *palette)
 {
     u16 species;
     u8 spriteId, spriteId2;
@@ -843,7 +843,7 @@ void StartMonScrollingBgMask(u8 taskId, int UNUSED unused, u16 scrollSpeed, u8 b
     GetBattleAnimBg1Data(&animBgData);
     AnimLoadCompressedBgTilemapHandleContest(&animBgData, tilemap, FALSE);
     AnimLoadCompressedBgGfx(animBgData.bgId, gfx, animBgData.tilesOffset);
-    LoadCompressedPalette(palette, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
+    LoadPalette(palette, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
 
     gBattle_BG1_X = 0;
     gBattle_BG1_Y = 0;

@@ -382,7 +382,7 @@ bool8 IsBattleSEPlaying(u8 battlerId)
 void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
 {
     u32 personalityValue, isShiny, species, paletteOffset, position;
-    const void *lzPaletteData;
+    const u16 *paletteData;
     struct Pokemon *illusionMon = GetIllusionMonPtr(battler);
     if (illusionMon != NULL)
         mon = illusionMon;
@@ -423,14 +423,12 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
     paletteOffset = OBJ_PLTT_ID(battler);
 
     if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies == SPECIES_NONE)
-        lzPaletteData = GetMonFrontSpritePal(mon);
+        paletteData = GetMonFrontSpritePal(mon);
     else
-        lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personalityValue);
+        paletteData = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personalityValue);
 
-    void *buffer = MallocAndDecompress(lzPaletteData, NULL);
-    LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
-    LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battler), PLTT_SIZE_4BPP);
-    Free(buffer);
+    LoadPalette(paletteData, paletteOffset, PLTT_SIZE_4BPP);
+    LoadPalette(paletteData, BG_PLTT_ID(8) + BG_PLTT_ID(battler), PLTT_SIZE_4BPP);
 
     // transform's pink color
     if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies != SPECIES_NONE)
@@ -478,7 +476,7 @@ void DecompressTrainerFrontPic(u16 frontPicId, u8 battler)
     u8 position = GetBattlerPosition(battler);
 
     DecompressPicFromTable(&gTrainerSprites[frontPicId].frontPic, gMonSpritesGfxPtr->spritesGfx[position]);
-    LoadCompressedSpritePalette(&gTrainerSprites[frontPicId].palette);
+    LoadSpritePalette(&gTrainerSprites[frontPicId].palette);
 }
 
 void DecompressTrainerBackPic(u16 backPicId, u8 battler)
@@ -486,13 +484,13 @@ void DecompressTrainerBackPic(u16 backPicId, u8 battler)
     u8 position = GetBattlerPosition(battler);
     DecompressPicFromTable(&gTrainerBacksprites[backPicId].backPic,
                            gMonSpritesGfxPtr->spritesGfx[position]);
-    LoadCompressedPalette(gTrainerBacksprites[backPicId].palette.data,
+    LoadPalette(gTrainerBacksprites[backPicId].palette.data,
                           OBJ_PLTT_ID(battler), PLTT_SIZE_4BPP);
 }
 
 void DecompressTrainerBackPalette(u16 index, u8 palette)
 {
-    LoadCompressedPalette(gTrainerBacksprites[index].palette.data, OBJ_PLTT_ID2(palette), PLTT_SIZE_4BPP);
+    LoadPalette(gTrainerBacksprites[index].palette.data, OBJ_PLTT_ID2(palette), PLTT_SIZE_4BPP);
 }
 
 void BattleGfxSfxDummy2(u16 species)
@@ -825,7 +823,7 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battler, bool8 loadMonSprite)
         }
 
         palOffset = OBJ_PLTT_ID(battler);
-        LoadCompressedPalette(gSubstituteDollPal, palOffset, PLTT_SIZE_4BPP);
+        LoadPalette(gSubstituteDollPal, palOffset, PLTT_SIZE_4BPP);
     }
     else
     {

@@ -573,9 +573,9 @@ static bool8 DoLoadBagGraphics(void)
         }
         break;
     case 2:
-        LoadCompressedPalette(gBagBgPalette, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
+        LoadPalette(gBagBgPalette, BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
         if (!BagIsTutorial() && gSaveBlock2Ptr->playerGender != MALE)
-            LoadCompressedPalette(gBagBgPalette_FemaleOverride, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+            LoadPalette(gBagBgPalette_FemaleOverride, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         sBagMenuDisplay->data[0]++;
         break;
     case 3:
@@ -586,7 +586,7 @@ static bool8 DoLoadBagGraphics(void)
         sBagMenuDisplay->data[0]++;
         break;
     case 4:
-        LoadCompressedSpritePalette(&gSpritePalette_Bag);
+        LoadSpritePalette(&gSpritePalette_Bag);
         sBagMenuDisplay->data[0]++;
         break;
     case 5:
@@ -594,7 +594,7 @@ static bool8 DoLoadBagGraphics(void)
         sBagMenuDisplay->data[0]++;
         break;
     default:
-        LoadCompressedSpritePalette(&gBagSwapSpritePalette);
+        LoadSpritePalette(&gBagSwapSpritePalette);
         sBagMenuDisplay->data[0] = 0;
         return TRUE;
     }

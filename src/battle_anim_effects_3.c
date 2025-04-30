@@ -2633,7 +2633,7 @@ void AnimTask_MorningSunLightBeam(u8 taskId)
         }
 
         AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimMaskImage_LightBeam, animBg.tilesOffset);
-        LoadCompressedPalette(gBattleAnimMaskPalette_LightBeam, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
+        LoadPalette(gBattleAnimMaskPalette_LightBeam, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
 
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
@@ -2829,7 +2829,7 @@ void AnimTask_DoomDesireLightBeam(u8 taskId)
         }
 
         AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimMaskImage_LightBeam, animBg.tilesOffset);
-        LoadCompressedPalette(gBattleAnimMaskPalette_LightBeam, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
+        LoadPalette(gBattleAnimMaskPalette_LightBeam, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
         gTasks[taskId].data[10] = gBattle_BG1_X;
         gTasks[taskId].data[11] = gBattle_BG1_Y;
         gTasks[taskId].data[0]++;

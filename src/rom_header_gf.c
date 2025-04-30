@@ -23,8 +23,8 @@ struct GFRomHeader
     u8 gameName[32];
     const struct CompressedSpriteSheet * monFrontPics;
     const struct CompressedSpriteSheet * monBackPics;
-    const struct CompressedSpritePalette * monNormalPalettes;
-    const struct CompressedSpritePalette * monShinyPalettes;
+    const struct SpritePalette * monNormalPalettes;
+    const struct SpritePalette * monShinyPalettes;
     const u8 *const * monIcons;
     const u8 *monIconPaletteIds;
     const struct SpritePalette * monIconPalettes;
@@ -76,7 +76,7 @@ struct GFRomHeader
     const struct Item * items;
     const struct MoveInfo * moves;
     const struct CompressedSpriteSheet * ballGfx;
-    const struct CompressedSpritePalette * ballPalettes;
+    const struct SpritePalette * ballPalettes;
     u32 gcnLinkFlagsOffset;
     u32 gameClearFlag;
     u32 ribbonFlag;

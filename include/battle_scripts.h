@@ -101,6 +101,7 @@ extern const u8 BattleScript_SelectingTormentedMoveInPalace[];
 extern const u8 BattleScript_SelectingNotAllowedMoveTaunt[];
 extern const u8 BattleScript_MoveUsedIsTaunted[];
 extern const u8 BattleScript_SelectingNotAllowedMoveTauntInPalace[];
+extern const u8 BattleScript_WishButFullHp[];
 extern const u8 BattleScript_WishComesTrue[];
 extern const u8 BattleScript_IngrainTurnHeal[];
 extern const u8 BattleScript_AtkDefDown[];
@@ -170,6 +171,8 @@ extern const u8 BattleScript_RainDishActivates[];
 extern const u8 BattleScript_SandstreamActivates[];
 extern const u8 BattleScript_ShedSkinActivates[];
 extern const u8 BattleScript_IntimidateActivates[];
+extern const u8 BattleScript_IntimidatePrevented[];
+extern const u8 BattleScript_IntimidateInReverse[];
 extern const u8 BattleScript_DroughtActivates[];
 extern const u8 BattleScript_TookAttack[];
 extern const u8 BattleScript_SturdyPreventsOHKO[];
@@ -269,7 +272,6 @@ extern const u8 BattleScript_WonderRoomEnds[];
 extern const u8 BattleScript_MagicRoomEnds[];
 extern const u8 BattleScript_TerrainEnds[];
 extern const u8 BattleScript_TerrainEnds_Ret[];
-extern const u8 BattleScript_GrassyTerrainEnds[];
 extern const u8 BattleScript_MudSportEnds[];
 extern const u8 BattleScript_WaterSportEnds[];
 extern const u8 BattleScript_SturdiedMsg[];
@@ -385,6 +387,8 @@ extern const u8 BattleScript_FriskMsgWithPopup[];
 extern const u8 BattleScript_MoodyActivates[];
 extern const u8 BattleScript_EmergencyExit[];
 extern const u8 BattleScript_EmergencyExitWild[];
+extern const u8 BattleScript_EmergencyExitEnd2[];
+extern const u8 BattleScript_EmergencyExitWildEnd2[];
 extern const u8 BattleScript_CheekPouchActivates[];
 extern const u8 BattleScript_TotemVar[];
 extern const u8 BattleScript_TotemFlaredToLife[];
@@ -513,6 +517,7 @@ extern const u8 BattleScript_BoosterEnergyRet[];
 extern const u8 BattleScript_TeraShellDistortingTypeMatchups[];
 extern const u8 BattleScript_TeraFormChange[];
 extern const u8 BattleScript_SleepClausePreventsEnd[];
+
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];
 extern const u8 BattleScript_ZMoveActivateStatus[];
@@ -521,6 +526,7 @@ extern const u8 BattleScript_RecoverHPZMove[];
 extern const u8 BattleScript_StatUpZMove[];
 extern const u8 BattleScript_HealReplacementZMove[];
 extern const u8 BattleScript_EffectExtremeEvoboost[];
+
 // max moves
 extern const u8 BattleScript_EffectRaiseStatAllies[];
 extern const u8 BattleScript_EffectLowerStatFoes[];
@@ -550,11 +556,13 @@ extern const u8 BattleScript_EffectRaiseCritAlliesAnim[];
 extern const u8 BattleScript_EffectHealOneSixthAllies[];
 extern const u8 BattleScript_EffectRecycleBerriesAllies[];
 extern const u8 BattleScript_RemoveGenericType[];
+
 // dynamax and max raids
 extern const u8 BattleScript_DynamaxBegins[];
 extern const u8 BattleScript_DynamaxEnds[];
 extern const u8 BattleScript_DynamaxEnds_Ret[];
 extern const u8 BattleScript_MoveBlockedByDynamax[];
+
 // Battle move scripts
 extern const u8 BattleScript_EffectSleep[];
 extern const u8 BattleScript_EffectAbsorb[];
@@ -822,6 +830,7 @@ extern const u8 BattleScript_EffectClangorousSoul[];
 extern const u8 BattleScript_EffectSkyDrop[];
 extern const u8 BattleScript_EffectMeteorBeam[];
 extern const u8 BattleScript_EffectCourtChange[];
+extern const u8 BattleScript_EffectExtremeEvoboost[];
 extern const u8 BattleScript_EffectHitSetRemoveTerrain[];
 extern const u8 BattleScript_EffectDarkVoid[];
 extern const u8 BattleScript_EffectVictoryDance[];
@@ -836,6 +845,7 @@ extern const u8 BattleScript_MoveEffectSaltCure[];
 extern const u8 BattleScript_EffectChillyReception[];
 extern const u8 BattleScript_EffectMaxMove[];
 extern const u8 BattleScript_EffectGlaiveRush[];
+extern const u8 BattleScript_EffectBrickBreak[];
 extern const u8 BattleScript_EffectDoodle[];
 extern const u8 BattleScript_EffectFilletAway[];
 extern const u8 BattleScript_EffectShedTail[];

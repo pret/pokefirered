@@ -288,6 +288,7 @@ enum MoveEndEffects
     MOVEEND_LIFEORB_SHELLBELL, // Includes shell bell, throat spray, etc
     MOVEEND_EMERGENCY_EXIT,
     MOVEEND_EJECT_PACK,
+    MOVEEND_HIT_ESCAPE,
     MOVEEND_OPPORTUNIST, // Occurs after other stat change items/abilities to try and copy the boosts
     MOVEEND_PICKPOCKET,
     MOVEEND_WHITE_HERB,

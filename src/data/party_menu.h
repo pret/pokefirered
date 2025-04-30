@@ -781,7 +781,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeball =
     gPartyMenuPokeball_Gfx, 0x400, 0x04b0
 };
 
-static const struct CompressedSpritePalette sSpritePalette_MenuPokeball =
+static const struct SpritePalette sSpritePalette_MenuPokeball =
 {
     gPartyMenuPokeball_Pal, 0x04b0
 };
@@ -961,7 +961,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
     gStatusGfx_Icons, 0x400, 1202
 };
 
-static const struct CompressedSpritePalette sSpritePalette_StatusIcons =
+static const struct SpritePalette sSpritePalette_StatusIcons =
 {
     gStatusPal_Icons, 1202
 };

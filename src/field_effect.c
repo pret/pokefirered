@@ -558,8 +558,20 @@ bool8 FieldEffectActiveListContains(enum FieldEffect fldeff)
 u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer)
 {
     struct SpriteTemplate spriteTemplate;
-    LoadCompressedSpritePaletteOverrideBuffer(&gTrainerSprites[trainerSpriteID].palette, buffer);
+    bool32 alloced = FALSE;
+
+    // Allocate memory for buffer
+    if (buffer == NULL)
+    {
+        buffer = Alloc(TRAINER_PIC_SIZE);
+        alloced = TRUE;
+    }
+
+    LoadSpritePalette(&gTrainerSprites[trainerSpriteID].palette);
     LoadCompressedSpriteSheetOverrideBuffer(&gTrainerSprites[trainerSpriteID].frontPic, buffer);
+    if (alloced)
+        Free(buffer);
+
     spriteTemplate.tileTag = gTrainerSprites[trainerSpriteID].frontPic.tag;
     spriteTemplate.paletteTag = gTrainerSprites[trainerSpriteID].palette.tag;
     spriteTemplate.oam = &sNewGameOakOamAttributes;

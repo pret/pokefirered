@@ -19,7 +19,7 @@ static const struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet =
     .data = gSmokescreenImpactTiles, .size = 0x180, .tag = TAG_SMOKESCREEN
 };
 
-static const struct CompressedSpritePalette sSmokescreenImpactSpritePalette =
+static const struct SpritePalette sSmokescreenImpactSpritePalette =
 {
     .data = gSmokescreenImpactPalette, .tag = TAG_SMOKESCREEN
 };
@@ -106,7 +106,7 @@ u8 SmokescreenImpact(s16 x, s16 y, bool8 persist)
     if (GetSpriteTileStartByTag(sSmokescreenImpactSpriteSheet.tag) == 0xFFFF)
     {
         LoadCompressedSpriteSheetUsingHeap(&sSmokescreenImpactSpriteSheet);
-        LoadCompressedSpritePaletteUsingHeap(&sSmokescreenImpactSpritePalette);
+        LoadSpritePalette(&sSmokescreenImpactSpritePalette);
     }
 
     mainSpriteId = CreateInvisibleSpriteWithCallback(SpriteCB_SmokescreenImpactMain);

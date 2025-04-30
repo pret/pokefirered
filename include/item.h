@@ -26,7 +26,7 @@ struct Item
     u8 battleUsage;
     u8 flingPower;
     const u32 *iconPic;
-    const u32 *iconPalette;
+    const u16 *iconPalette;
 };
 
 struct BagPocket

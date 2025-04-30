@@ -46,7 +46,7 @@ u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
 {
     struct SpriteTemplate template;
     struct SpriteSheet spriteSheet;
-    struct CompressedSpritePalette spritePalette;
+    struct SpritePalette spritePalette;
     u8 spriteId;
 
     if (!AllocItemIconTemporaryBuffers())
@@ -61,7 +61,7 @@ u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
 
     spritePalette.data = GetItemIconPalette(itemId);
     spritePalette.tag = paletteTag;
-    LoadCompressedSpritePalette(&spritePalette);
+    LoadSpritePalette(&spritePalette);
 
     CpuCopy16(&gItemIconSpriteTemplate, &template, sizeof(struct SpriteTemplate));
     template.tileTag = tilesTag;
@@ -77,7 +77,7 @@ u8 AddCustomItemIconSprite(const struct SpriteTemplate * origTemplate, u16 tiles
 {
     struct SpriteTemplate template;
     struct SpriteSheet spriteSheet;
-    struct CompressedSpritePalette spritePalette;
+    struct SpritePalette spritePalette;
     u8 spriteId;
 
     if (!AllocItemIconTemporaryBuffers())
@@ -92,7 +92,7 @@ u8 AddCustomItemIconSprite(const struct SpriteTemplate * origTemplate, u16 tiles
 
     spritePalette.data = GetItemIconPalette(itemId);
     spritePalette.tag = paletteTag;
-    LoadCompressedSpritePalette(&spritePalette);
+    LoadSpritePalette(&spritePalette);
 
     CpuCopy16(origTemplate, &template, sizeof(struct SpriteTemplate));
     template.tileTag = tilesTag;

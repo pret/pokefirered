@@ -257,7 +257,7 @@ static void LinkPartnerHandleHealthBarUpdate(u32 battler)
 static void LinkPartnerHandleIntroTrainerBallThrow(u32 battler)
 {
     u32 trainerPicId = LinkPlayerGetTrainerPicId(GetBattlerMultiplayerId(battler));
-    const u32 *trainerPal = gTrainerBacksprites[trainerPicId].palette.data;
+    const u16 *trainerPal = gTrainerBacksprites[trainerPicId].palette.data;
     // Link partner uses the same intro sequence as the player partner.
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F9, trainerPal, 24, Controller_PlayerPartnerShowIntroHealthbox, StartAnimLinearTranslation);
 }

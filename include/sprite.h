@@ -41,12 +41,6 @@ struct SpritePalette
     u16 tag;
 };
 
-struct CompressedSpritePalette
-{
-    const u32 *data;  // LZ77 compressed palette data
-    u16 tag;
-};
-
 struct AnimFrameCmd
 {
     // If the sprite has an array of images, this is the array index.

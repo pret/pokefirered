@@ -247,76 +247,68 @@
 
 #define EVOLUTIONS_END                    0xFFFF // Not an actual evolution, used to mark the end of an evolution array.
 
-enum EvolutionMethods {
-    EVO_NONE,                            // Not an actual evolution, used to generate offspring that can't evolve into the specified species, like regional forms.
-    EVO_FRIENDSHIP,                      // Pokémon levels up with friendship ≥ 220
-    EVO_FRIENDSHIP_DAY,                  // Pokémon levels up during the day with friendship ≥ 220
-    EVO_FRIENDSHIP_NIGHT,                // Pokémon levels up at night with friendship ≥ 220
-    EVO_LEVEL,                           // Pokémon reaches the specified level
-    EVO_TRADE,                           // Pokémon is traded
-    EVO_TRADE_ITEM,                      // Pokémon is traded while it's holding the specified item
-    EVO_ITEM,                            // specified item is used on Pokémon
-    EVO_LEVEL_ATK_GT_DEF,                // Pokémon reaches the specified level with attack > defense
-    EVO_LEVEL_ATK_EQ_DEF,                // Pokémon reaches the specified level with attack = defense
-    EVO_LEVEL_ATK_LT_DEF,                // Pokémon reaches the specified level with attack < defense
-    EVO_LEVEL_SILCOON,                   // Pokémon reaches the specified level with a Silcoon personality value
-    EVO_LEVEL_CASCOON,                   // Pokémon reaches the specified level with a Cascoon personality value
-    EVO_LEVEL_NINJASK,                   // Pokémon reaches the specified level (special value for Ninjask)
-    EVO_LEVEL_SHEDINJA,                  // Pokémon reaches the specified level (special value for Shedinja)
-    EVO_BEAUTY,                          // Pokémon levels up with beauty ≥ specified value
-    EVO_LEVEL_FEMALE,                    // Pokémon reaches the specified level, is female
-    EVO_LEVEL_MALE,                      // Pokémon reaches the specified level, is male
-    EVO_LEVEL_NIGHT,                     // Pokémon reaches the specified level, is night
-    EVO_LEVEL_DAY,                       // Pokémon reaches the specified level, is day
-    EVO_LEVEL_DUSK,                      // Pokémon reaches the specified level, is dusk (5-6 P.M)
-    EVO_ITEM_HOLD_DAY,                   // Pokémon levels up, holds specified item at day
-    EVO_ITEM_HOLD_NIGHT,                 // Pokémon levels up, holds specified item at night
-    EVO_MOVE,                            // Pokémon levels up, knows specified move
-    EVO_FRIENDSHIP_MOVE_TYPE,            // Pokémon levels up with friendship ≥ 220, knows move with specified type
-    EVO_MAPSEC,                          // Pokémon levels up on specified mapsec
-    EVO_ITEM_MALE,                       // specified item is used on a male Pokémon
-    EVO_ITEM_FEMALE,                     // specified item is used on a female Pokémon
-    EVO_LEVEL_RAIN,                      // Pokémon reaches the specified level during rain in the overworld
-    EVO_SPECIFIC_MON_IN_PARTY,           // Pokémon levels up with a specified Pokémon in party
-    EVO_LEVEL_DARK_TYPE_MON_IN_PARTY,    // Pokémon reaches the specified level with a Dark Type Pokémon in party
-    EVO_TRADE_SPECIFIC_MON,              // Pokémon is traded for a specified Pokémon
-    EVO_SPECIFIC_MAP,                    // Pokémon levels up on specified map
-    EVO_LEVEL_NATURE_AMPED,              // Pokémon reaches the specified level, it has a Hardy, Brave, Adamant, Naughty, Docile, Impish, Lax, Hasty, Jolly, Naive, Rash, Sassy, or Quirky nature.
-    EVO_LEVEL_NATURE_LOW_KEY,            // Pokémon reaches the specified level, it has a Lonely, Bold, Relaxed, Timid, Serious, Modest, Mild, Quiet, Bashful, Calm, Gentle, or Careful nature.
-    EVO_CRITICAL_HITS,                   // Pokémon performs specified number of critical hits in one battle
-    EVO_SCRIPT_TRIGGER_DMG,              // Pokémon has specified HP below max, then player interacts trigger
-    EVO_DARK_SCROLL,                     // interacts with Scroll of Darkness
-    EVO_WATER_SCROLL,                    // interacts with Scroll of Waters
-    EVO_ITEM_NIGHT,                      // specified item is used on Pokémon, is night
-    EVO_ITEM_DAY,                        // specified item is used on Pokémon, is day
-    EVO_ITEM_HOLD,                       // Pokémon levels up, holds specified item
-    EVO_LEVEL_FOG,                       // Pokémon reaches the specified level during fog in the overworld
-    EVO_MOVE_TWO_SEGMENT,                // Pokémon levels up, knows specified move, has a personality value with a modulus of 0
-    EVO_MOVE_THREE_SEGMENT,              // Pokémon levels up, knows specified move, has a personality value with a modulus of 1-99
-    EVO_LEVEL_FAMILY_OF_THREE,           // Pokémon reaches the specified level in battle with a personality value with a modulus of 0
-    EVO_LEVEL_FAMILY_OF_FOUR,            // Pokémon reaches the specified level in battle with a personality value with a modulus of 1-99
-    EVO_USE_MOVE_TWENTY_TIMES,           // Pokémon levels up after having used a move for at least 20 times
-    EVO_RECOIL_DAMAGE_MALE,              // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a male
-    EVO_RECOIL_DAMAGE_FEMALE,            // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a female
-    EVO_ITEM_COUNT_999,                  // Pokémon levels up after trainer has collected 999 of a specific item
-    EVO_DEFEAT_THREE_WITH_ITEM,          // Pokémon levels up after having defeat 3 Pokémon of the same species holding the specified item
-    EVO_OVERWORLD_STEPS,                 // Pokémon levels up after having taken a specific amount of steps in the overworld
+enum EvolutionConditions {
+    // Gen 2
+    IF_GENDER,                          // The Pokémon is of specific gender.
+    IF_TIME,                            // It is currently the specific time of day.
+    IF_NOT_TIME,                        // It is NOT currently the specific time of day.
+    IF_MIN_FRIENDSHIP,                  // The Pokémon has the defined amount of Friendship.
+    IF_ATK_GT_DEF,                      // The Pokémon's Attack is greater than its Defense stat.
+    IF_ATK_EQ_DEF,                      // The Pokémon's Attack is equal to its Defense stat.
+    IF_ATK_LT_DEF,                      // The Pokémon's Attack is lower than its Defense stat.
+    IF_HOLD_ITEM,                       // The Pokémon is holding a specific item.
+    // Gen 3
+    IF_PID_UPPER_MODULO_10_GT,          // The Pokémon's upper personality value's modulo by 10 is greater than the defined value.
+    IF_PID_UPPER_MODULO_10_EQ,          // The Pokémon's upper personality value's modulo by 10 is equal to the defined value.
+    IF_PID_UPPER_MODULO_10_LT,          // The Pokémon's upper personality value's modulo by 10 is lower or equal than the defined value.
+    IF_MIN_BEAUTY,                      // The Pokémon has the defined amount of Beauty.
+    IF_MIN_COOLNESS,                    // The Pokémon has the defined amount of Coolness.
+    IF_MIN_SMARTNESS,                   // The Pokémon has the defined amount of Smartness. (aka Cleverness in Gen6+)
+    IF_MIN_TOUGHNESS,                   // The Pokémon has the defined amount of Toughness.
+    IF_MIN_CUTENESS,                    // The Pokémon has the defined amount of Cuteness.
+    // Gen 4
+    IF_SPECIES_IN_PARTY,                // The party contains a Pokémon of the specified species.
+    IF_IN_MAP,                          // The player is currently in the specific map.
+    IF_IN_MAPSEC,                       // The player is currently in the specific map sector.
+    IF_KNOWS_MOVE,                      // The Pokémon knows specific move.
+    // Gen 5
+    IF_TRADE_PARTNER_SPECIES,           // The Pokémon is traded for a specific species.
+    // Gen 6
+    IF_TYPE_IN_PARTY,                   // The party contains a Pokémon of the specified type.
+    IF_WEATHER,                         // It is currently the specific weather in the current map.
+    IF_KNOWS_MOVE_TYPE,                 // The Pokémon knows a move with a specific type.
+    // Gen 8
+    IF_NATURE,                          // The Pokémon has a specific nature.
+    IF_AMPED_NATURE,                    // The Pokémon has one of the following natures: Hardy, Brave, Adamant, Naughty, Docile, Impish, Lax, Hasty, Jolly, Naive, Rash, Sassy, or Quirky.
+    IF_LOW_KEY_NATURE,                  // The Pokémon has one of the following natures: Lonely, Bold, Relaxed, Timid, Serious, Modest, Mild, Quiet, Bashful, Calm, Gentle, or Careful.
+    IF_RECOIL_DAMAGE_GE,                // The Pokémon suffered at least certain amount of non-fainting recoil damage.
+    IF_CURRENT_DAMAGE_GE,               // The Pokémon has the specified difference of HP from its Max HP.
+    IF_CRITICAL_HITS_GE,                // The Pokémon performed the specified number of critical hits in one battle at least.
+    IF_USED_MOVE_X_TIMES,               // The Pokémon has used a move for at least X amount of times.
+    // Gen 9
+    IF_DEFEAT_X_WITH_ITEMS,             // The Pokémon defeated X amount of Pokémon of the specified species that are holding the specified item.
+    IF_PID_MODULO_100_GT,               // The Pokémon's personality value's modulo by 100 is greater than the defined value.
+    IF_PID_MODULO_100_EQ,               // The Pokémon's personality value's modulo by 100 is equal than the defined value.
+    IF_PID_MODULO_100_LT,               // The Pokémon's personality value's modulo by 100 is lower than the defined value.
+    IF_MIN_OVERWORLD_STEPS,             // The Player has taken a specific amount of steps in the overworld with the Pokémon following them or in the first slot of the party.
+    IF_BAG_ITEM_COUNT,                  // The Player has the specific amount of an item in the bag. It then removes those items.
+    CONDITIONS_END
+};
 
-    // Alcremie evolutions methods. Different combinations of day, spin rotation and duration.
-    EVO_ITEM_HOLD_SPIN_DAY_LESS_THAN_5_SECS_CLOCKWISE,
-    EVO_ITEM_HOLD_SPIN_DAY_LESS_THAN_5_SECS_COUNTER_CLOCKWISE,
-    EVO_ITEM_HOLD_SPIN_NIGHT_LESS_THAN_5_SECS_CLOCKWISE,
-    EVO_ITEM_HOLD_SPIN_NIGHT_LESS_THAN_5_SECS_COUNTER_CLOCKWISE,
-    EVO_ITEM_HOLD_SPIN_DAY_MORE_THAN_5_SECS_CLOCKWISE,
-    EVO_ITEM_HOLD_SPIN_DAY_MORE_THAN_5_SECS_COUNTER_CLOCKWISE,
-    EVO_ITEM_HOLD_SPIN_NIGHT_MORE_THAN_5_SECS_CLOCKWISE,
-    EVO_ITEM_HOLD_SPIN_NIGHT_MORE_THAN_5_SECS_COUNTER_CLOCKWISE,
-    EVO_ITEM_HOLD_SPIN_DUSK_MORE_THAN_10_SECS,
+enum EvolutionMethods {
+    EVO_NONE,                   // Not an actual evolution, used to generate offspring that can't evolve into the specified species, like regional forms.
+    EVO_LEVEL,                  // Pokémon reaches the specified level
+    EVO_TRADE,                  // Pokémon is traded
+    EVO_ITEM,                   // specified item is used on Pokémon
+    EVO_SPLIT_FROM_EVO,         // A clone is generated and evolved when another evolution happens
+    EVO_SCRIPT_TRIGGER,         // Player interacts with an overworld trigger
+    EVO_LEVEL_BATTLE_ONLY,      // Pokémon reaches the specified level, in battle only
+    EVO_BATTLE_END,             // Battle ends, doesn't need to level up
+    EVO_SPIN                    // The player spins in the overworld
 };
 
 enum EvolutionMode {
     EVO_MODE_NORMAL,
-    EVO_MODE_CANT_STOP,
     EVO_MODE_TRADE,
     EVO_MODE_ITEM_USE,
     EVO_MODE_ITEM_CHECK,         // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
@@ -325,17 +317,25 @@ enum EvolutionMode {
     EVO_MODE_BATTLE_ONLY,        // This mode is only used in battles to support Tandemaus' unique requirement
 };
 
-enum StartEvo
-{
+// used to determine whether an evolution is happening or not, so we know if items should be removed
+enum EvoState {
     CHECK_EVO,
     DO_EVO,
 };
 
-enum PokemonJumpType{
-    PKMN_JUMP_TYPE_NONE, // Not allowed in Pokémon Jump
+enum PokemonJumpType {
+    PKMN_JUMP_TYPE_NONE,        // Not allowed in Pokémon Jump
     PKMN_JUMP_TYPE_NORMAL,
     PKMN_JUMP_TYPE_FAST,
     PKMN_JUMP_TYPE_SLOW,
+};
+
+enum EvoSpinDirections {
+    SPIN_CW_SHORT,              // Player spins clockwise
+    SPIN_CW_LONG,               // Player spins clockwise
+    SPIN_CCW_SHORT,             // Player spins counter-clockwise
+    SPIN_CCW_LONG,              // Player spins counter-clockwise
+    SPIN_EITHER,                // Player spins either clockwise or counter-clockwise
 };
 
 #define MON_PIC_WIDTH 64

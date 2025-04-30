@@ -12,6 +12,7 @@ u8 GetPlayerFacingDirection(void);
 u8 GetPlayerMovementDirection(void);
 u8 PlayerGetCopyableMovement(void);
 void MovePlayerNotOnBike(u8 direction, u16 heldKeys);
+bool8 TryDoMetatileBehaviorForcedMovement(void);
 
 void MovementType_Player(struct Sprite *sprite);
 void HandleEnforcedLookDirectionOnPlayerStopMoving(void);

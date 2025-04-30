@@ -4,6 +4,7 @@
 #include "decompress.h"
 #include "dynamic_placeholder_text_util.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "field_fadetransition.h"
 #include "field_weather.h"
 #include "graphics.h"
@@ -484,7 +485,7 @@ struct PokemonStorageSystemData
     u8 cursorPrevPartyPos;
     u8 cursorFlipTimer;
     u8 cursorPalNums[2];
-    const u32 *displayMonPalette;
+    const u16 *displayMonPalette;
     u32 displayMonPersonality;
     u16 displayMonSpecies;
     u16 displayMonItemId;
@@ -6053,7 +6054,11 @@ static void DoTrySetDisplayMonData(void)
 static void SetMovedMonData(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT)
+    {
         gStorage->movingMon = gPlayerParty[sCursorPosition];
+        if (&gPlayerParty[sCursorPosition] == GetFirstLiveMon())
+            gFollowerSteps = 0;
+    }
     else
         BoxMonAtToMon(boxId, position, &gStorage->movingMon);
 
@@ -6068,7 +6073,12 @@ static void SetPlacedMonData(u8 boxId, u8 position)
         HealPokemon(&gStorage->movingMon);
     
     if (boxId == TOTAL_BOXES_COUNT)
+    {
         gPlayerParty[position] = gStorage->movingMon;
+        struct Pokemon *mon = &gPlayerParty[position];
+        if (mon == GetFirstLiveMon())
+            gFollowerSteps = 0;
+    }
     else
     {
         BoxMonRestorePP(&gStorage->movingMon.box);

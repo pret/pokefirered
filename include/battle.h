@@ -85,12 +85,12 @@ struct DisableStruct
     s8 stockpileBeforeSpDef;
     u8 substituteHP;
     u8 encoredMovePos;
-    u8 disableTimer:4;
-    u8 encoreTimer:4;
-    u8 perishSongTimer:4;
-    u8 rolloutTimer:4;
-    u8 rolloutTimerStartValue:4;
-    u8 tauntTimer:4;
+    u16 disableTimer;
+    u16 encoreTimer;
+    u16 perishSongTimer;
+    u16 rolloutTimer;
+    u16 rolloutTimerStartValue;
+    u16 tauntTimer;
     u8 furyCutterCounter;
     u8 battlerPreventingEscape;
     u8 battlerWithSureHit;
@@ -99,16 +99,16 @@ struct DisableStruct
     u8 chargeTimer:4;
     u8 rechargeTimer;
     u8 autotomizeCount;
-    u8 slowStartTimer;
-    u8 embargoTimer;
-    u8 magnetRiseTimer;
-    u8 telekinesisTimer;
-    u8 healBlockTimer;
-    u8 laserFocusTimer;
-    u8 throatChopTimer;
+    u16 slowStartTimer;
+    u16 embargoTimer;
+    u16 magnetRiseTimer;
+    u16 telekinesisTimer;
+    u16 healBlockTimer;
+    u16 laserFocusTimer;
+    u16 throatChopTimer;
     u8 wrapTurns;
-    u8 syrupBombTimer;
-    u8 tormentTimer:4; // used for G-Max Meltdown
+    u16 syrupBombTimer;
+    u16 tormentTimer; // used for G-Max Meltdown
     u8 usedMoves:4;
     u8 truantCounter:1;
     u8 truantSwitchInHack:1;
@@ -174,7 +174,8 @@ struct ProtectStruct
     u16 eatMirrorHerb:1;
     u16 activateOpportunist:2; // 2 - to copy stats. 1 - stats copied (do not repeat). 0 - no stats to copy
     u16 usedAllySwitch:1;
-    u16 padding:5;
+    u16 lashOutAffected:1;
+    u16 padding:4;
     // End of 16-bit bitfield
     u16 physicalDmg;
     u16 specialDmg;
@@ -192,7 +193,7 @@ struct SpecialStatus
     u8 lightningRodRedirected:1;
     u8 restoredBattlerSprite: 1;
     u8 faintedHasReplacement:1;
-    u8 emergencyExited:1;
+    u8 preventLifeOrbDamage:1; // So that Life Orb doesn't activate various effects.
     u8 afterYou:1;
     u8 enduredDamage:1;
     u8 stormDrainRedirected:1;
@@ -216,8 +217,7 @@ struct SpecialStatus
     // End of byte
     u8 dancerUsedMove:1;
     u8 dancerOriginalTarget:3;
-    u8 preventLifeOrbDamage:1; // So that Life Orb doesn't activate various effects.
-    u8 unused:3;
+    u8 unused:4;
     // End of byte
 };
 
@@ -270,7 +270,7 @@ struct FieldTimer
 
 struct WishFutureKnock
 {
-    u8 futureSightCounter[MAX_BATTLERS_COUNT];
+    u16 futureSightCounter[MAX_BATTLERS_COUNT];
     u8 futureSightBattlerIndex[MAX_BATTLERS_COUNT];
     u8 futureSightPartyIndex[MAX_BATTLERS_COUNT];
     u16 futureSightMove[MAX_BATTLERS_COUNT];
@@ -400,7 +400,7 @@ struct StatsArray
 
 struct BattleResources
 {
-    struct SecretBaseRecord *secretBase;
+    struct SecretBaseRecord* secretBase;
     struct BattleScriptsStack* battleScriptsStack;
     struct BattleCallbacksStack* battleCallbackStack;
     struct StatsArray* beforeLvlUp;
@@ -557,7 +557,7 @@ struct ZMoveData
 
 struct DynamaxData
 {
-    u8 dynamaxTurns[MAX_BATTLERS_COUNT];
+    u16 dynamaxTurns[MAX_BATTLERS_COUNT];
     u16 baseMoves[MAX_BATTLERS_COUNT]; // base move of Max Move
     u16 lastUsedBaseMove;
 };
@@ -634,9 +634,9 @@ struct BattlerState
 struct BattleStruct
 {
     struct BattlerState battlerState[MAX_BATTLERS_COUNT];
-    u8 turnEffectsTracker;
+    u8 eventBlockCounter;
     u8 turnEffectsBattlerId;
-    u8 turnCountersTracker;
+    u8 endTurnEventsCounter;
     u16 wrappedMove[MAX_BATTLERS_COUNT];
     u16 moveTarget[MAX_BATTLERS_COUNT];
     u32 expShareExpValue;
@@ -704,8 +704,6 @@ struct BattleStruct
         struct LinkBattlerHeader linkBattlerHeader;
         struct BattleVideo battleVideo;
     } multiBuffer;
-    u8 wishPerishSongState;
-    u8 wishPerishSongBattlerId;
     u8 startingStatus:6; // status to apply at battle start. defined in constants/battle.h
     u8 startingStatusDone:1;
     u8 terrainDone:1;
@@ -715,7 +713,7 @@ struct BattleStruct
     u8 friskedAbility:1; // If identifies two mons, show the ability pop-up only once.
     u8 fickleBeamBoosted:1;
     u8 poisonPuppeteerConfusion:1;
-    u8 startingStatusTimer;
+    u16 startingStatusTimer;
     u8 atkCancellerTracker;
     // struct BattleTvMovePoints tvMovePoints;
     // struct BattleTv tv;
@@ -814,8 +812,6 @@ struct BattleStruct
     u8 usedMicleBerry;
     struct MessageStatus slideMessageStatus;
     u8 trainerSlideSpriteIds[MAX_BATTLERS_COUNT];
-    u8 embodyAspectBoost[NUM_BATTLE_SIDES];
-    u16 savedMove; // backup current move for mid-turn switching, e.g. Red Card
     u16 opponentMonCanTera:6;
     u16 opponentMonCanDynamax:6;
     u16 padding:4;
@@ -1288,4 +1284,3 @@ static inline bool32 IsBattlerInvalidForSpreadMove(u32 battlerAtk, u32 battlerDe
 }
 
 #endif // GUARD_BATTLE_H
-

@@ -79,31 +79,12 @@ void LoadCompressedSpriteSheetOverrideBuffer(const struct CompressedSpriteSheet 
     LoadSpriteSheet(&dest);
 }
 
-u32 LoadCompressedSpritePalette(const struct CompressedSpritePalette *src)
+u32 LoadSpritePaletteWithTag(const u16 *pal, u16 tag)
 {
-    return LoadCompressedSpritePaletteWithTag(src->data, src->tag);
-}
-
-u32 LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag)
-{
-    u32 index;
-    struct SpritePalette dest;
-
-    LZ77UnCompWram(pal, gDecompressionBuffer);
-    dest.data = (void *) gDecompressionBuffer;
-    dest.tag = tag;
-    index = LoadSpritePalette(&dest);
-    return index;
-}
-
-void LoadCompressedSpritePaletteOverrideBuffer(const struct CompressedSpritePalette *src, void *buffer)
-{
-    struct SpritePalette dest;
-
-    LZ77UnCompWram(src->data, buffer);
-    dest.data = buffer;
-    dest.tag = src->tag;
-    LoadSpritePalette(&dest);
+    struct SpritePalette spritePal;
+    spritePal.data = pal;
+    spritePal.tag = tag;
+    return LoadSpritePalette(&spritePal);
 }
 
 void DecompressPicFromTable(const struct CompressedSpriteSheet *src, void *buffer)
@@ -162,37 +143,6 @@ bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet *src
     dest.tag = src->tag;
 
     LoadSpriteSheet(&dest);
-    Free(buffer);
-    return FALSE;
-}
-
-bool8 LoadCompressedSpritePaletteUsingHeap(const struct CompressedSpritePalette *src)
-{
-    struct SpritePalette dest;
-    void *buffer;
-
-    buffer = AllocZeroed(src->data[0] >> 8);
-    LZ77UnCompWram(src->data, buffer);
-    dest.data = buffer;
-    dest.tag = src->tag;
-
-    LoadSpritePalette(&dest);
-    Free(buffer);
-    return FALSE;
-}
-
-bool8 LoadCompressedSpritePaletteUsingHeapWithTag(const u32 *pal, u16 tag)
-{
-    struct SpritePalette dest;
-    void *buffer;
-
-    buffer = AllocZeroed(*((u32 *)pal) >> 8);
-    if (!buffer)
-        return TRUE;
-    LZ77UnCompWram(pal, buffer);
-    dest.data = buffer;
-    dest.tag = tag;
-    LoadSpritePalette(&dest);
     Free(buffer);
     return FALSE;
 }

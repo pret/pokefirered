@@ -16,8 +16,10 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "evolution_scene.h"
+#include "field_player_avatar.h"
 #include "field_specials.h"
 #include "field_weather.h"
+#include "follower_npc.h"
 #include "graphics.h"
 #include "item.h"
 #include "caps.h"
@@ -92,6 +94,9 @@ EWRAM_DATA static u8 sTriedEvolving = 0;
 EWRAM_DATA u16 gFollowerSteps = 0;
 
 #include "data/abilities.h"
+#if P_TUTOR_MOVES_ARRAY
+#include "data/tutor_moves.h"
+#endif // P_TUTOR_MOVES_ARRAY
 
 // Used in an unreferenced function in RS.
 // Unreferenced here and in FRLG.
@@ -912,7 +917,7 @@ const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2] =
 // These should correspond with the overworld graphics in sUnionRoomObjGfxIds
 const u16 gUnionRoomFacilityClasses[NUM_UNION_ROOM_CLASSES * GENDER_COUNT] =
 {
-    // Male
+    // Male classes
     FACILITY_CLASS_COOLTRAINER_M,
     FACILITY_CLASS_BLACK_BELT,
     FACILITY_CLASS_CAMPER,
@@ -972,7 +977,7 @@ const struct SpriteTemplate gBattlerSpriteTemplates[MAX_BATTLERS_COUNT] =
     },
 };
 
-static const struct SpriteTemplate sTrainerBackSpriteTemplates[] = 
+static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
 {
     [TRAINER_BACK_PIC_RED] = {
         .tileTag = TAG_NONE,
@@ -1041,7 +1046,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
 
 // Classes dummied out
 #define NUM_SECRET_BASE_CLASSES 5
-static const u8 sSecretBaseFacilityClasses[GENDER_COUNT][NUM_SECRET_BASE_CLASSES] = 
+static const u8 sSecretBaseFacilityClasses[GENDER_COUNT][NUM_SECRET_BASE_CLASSES] =
 {
     [MALE] = {
         FACILITY_CLASS_YOUNGSTER,
@@ -3618,7 +3623,8 @@ u8 GetMonsStateToDoubles_2(void)
     s32 aliveCount = 0;
     s32 i;
 
-    if (OW_DOUBLE_APPROACH_WITH_ONE_MON)
+    if (OW_DOUBLE_APPROACH_WITH_ONE_MON
+     /* || FollowerNPCIsBattlePartner() */)
         return PLAYER_HAS_TWO_USABLE_MONS;
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -4229,12 +4235,14 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
                     case 7: // ITEM4_EVO_STONE
                         {
-                            u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, NULL, DO_EVO);
+                            bool32 canStopEvo = TRUE;
+                            u32 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, NULL, &canStopEvo, CHECK_EVO);
 
                             if (targetSpecies != SPECIES_NONE)
                             {
+                                GetEvolutionTargetSpecies(mon, EVO_MODE_ITEM_USE, item, NULL, &canStopEvo, DO_EVO);
                                 // already called in item use special (differs from emerald)
-                                // BeginEvolutionScene(mon, targetSpecies, FALSE, partyIndex);
+                                // BeginEvolutionScene(mon, targetSpecies, canStopEvo, partyIndex);
                                 return FALSE;
                             }
                         }
@@ -4622,24 +4630,24 @@ u32 GetGMaxTargetSpecies(u32 species)
     return species;
 }
 
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 evolutionItem, struct Pokemon *tradePartner, enum StartEvo prepareEvo)
+bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct EvolutionParam *params, struct Pokemon *tradePartner, u32 partyId, bool32 *canStopEvo, enum EvoState evoState)
 {
-    int i, j;
-    u16 targetSpecies = SPECIES_NONE;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
-    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
+    u32 i, j;
+    u32 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
+    u32 gender = GetMonGender(mon);
+    u32 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
+    u32 attack = GetMonData(mon, MON_DATA_ATK, 0);
+    u32 defense = GetMonData(mon, MON_DATA_DEF, 0);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
-    u8 level;
-    u16 friendship;
-    u8 beauty = GetMonData(mon, MON_DATA_BEAUTY, 0);
     u16 upperPersonality = personality >> 16;
-    u32 holdEffect, currentMap, partnerSpecies, partnerHeldItem, partnerHoldEffect;
-    bool32 consumeItem = FALSE;
-    u16 evolutionTracker = GetMonData(mon, MON_DATA_EVOLUTION_TRACKER, 0);
-    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
-
-    if (evolutions == NULL)
-        return SPECIES_NONE;
+    u32 weather = GetCurrentWeather();
+    u32 nature = GetNature(mon);
+    bool32 removeHoldItem = FALSE;
+    u32 removeBagItem = ITEM_NONE;
+    u32 removeBagItemCount = 0;
+    u32 evolutionTracker = GetMonData(mon, MON_DATA_EVOLUTION_TRACKER, 0);
+    u32 partnerSpecies, partnerHeldItem;
+    enum ItemHoldEffect partnerHoldEffect;
 
     if (tradePartner != NULL)
     {
@@ -4662,6 +4670,299 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
         partnerHoldEffect = HOLD_EFFECT_NONE;
     }
 
+    // Check for additional conditions (only if the primary method passes). Skips if there's no additional conditions.
+    for (i = 0; params != NULL && params[i].condition != CONDITIONS_END; i++)
+    {
+        enum EvolutionConditions condition = params[i].condition;
+        u32 currentCondition = FALSE;
+
+        switch(condition)
+        {
+        // Gen 2
+        case IF_GENDER:
+            if (gender == GetMonGender(mon))
+                currentCondition = TRUE;
+            break;
+        case IF_MIN_FRIENDSHIP:
+            if (friendship >= params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_ATK_GT_DEF:
+            if (attack > defense)
+                currentCondition = TRUE;
+            break;
+        case IF_ATK_EQ_DEF:
+            if (attack == defense)
+                currentCondition = TRUE;
+            break;
+        case IF_ATK_LT_DEF:
+            if (attack < defense)
+                currentCondition = TRUE;
+            break;
+        case IF_TIME:
+            if (GetTimeOfDay() == params[i].arg1)
+                currentCondition = TRUE;
+                
+            break;
+        case IF_NOT_TIME:
+            if (GetTimeOfDay() != params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_HOLD_ITEM:
+            if (heldItem == params[i].arg1)
+            {
+                currentCondition = TRUE;
+                removeHoldItem = TRUE;
+            }
+            break;
+        // Gen 3
+        case IF_PID_UPPER_MODULO_10_GT:
+            if ((upperPersonality % 10) > params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_PID_UPPER_MODULO_10_EQ:
+            if ((upperPersonality % 10) == params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_PID_UPPER_MODULO_10_LT:
+            if ((upperPersonality % 10) < params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_MIN_BEAUTY:
+        {
+            u32 beauty = GetMonData(mon, MON_DATA_BEAUTY, 0);
+            if (beauty >= params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        }
+        case IF_MIN_COOLNESS:
+        {
+            u32 coolness = GetMonData(mon, MON_DATA_COOL, 0);
+            if (coolness >= params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        }
+        case IF_MIN_SMARTNESS: 
+        // remember that even though it's called "Smart/Smartness" here, 
+        // from gen 6 and up it's known as "Clever/Cleverness."
+        {
+            u32 smartness = GetMonData(mon, MON_DATA_SMART, 0);
+            if (smartness >= params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        }
+        case IF_MIN_TOUGHNESS:
+        {
+            u32 toughness = GetMonData(mon, MON_DATA_TOUGH, 0);
+            if (toughness >= params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        }
+        case IF_MIN_CUTENESS:
+        {
+            u32 cuteness = GetMonData(mon, MON_DATA_CUTE, 0);
+            if (cuteness >= params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        }
+        // Gen 4
+        case IF_SPECIES_IN_PARTY:
+            for (j = 0; j < PARTY_SIZE; j++)
+            {
+                if (GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL) == params[i].arg1)
+                {
+                    currentCondition = TRUE;
+                    break;
+                }
+            }
+            break;
+        case IF_IN_MAP:
+            if (params[i].arg1 == ((gSaveBlock1Ptr->location.mapGroup) << 8 | gSaveBlock1Ptr->location.mapNum))
+                currentCondition = TRUE;
+            break;
+        case IF_IN_MAPSEC:
+            if (gMapHeader.regionMapSectionId == params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_KNOWS_MOVE:
+            if (MonKnowsMove(mon, params[i].arg1))
+                currentCondition = TRUE;
+            break;
+        // Gen 5
+        case IF_TRADE_PARTNER_SPECIES:
+            if (params[i].arg1 == partnerSpecies && partnerHoldEffect != HOLD_EFFECT_PREVENT_EVOLVE)
+                currentCondition = TRUE;
+            break;
+        // Gen 6
+        case IF_TYPE_IN_PARTY:
+            for (j = 0; j < PARTY_SIZE; j++)
+            {
+                u16 currSpecies = GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL);
+                if (gSpeciesInfo[currSpecies].types[0] == params[i].arg1
+                 || gSpeciesInfo[currSpecies].types[1] == params[i].arg1)
+                {
+                    currentCondition = TRUE;
+                    break;
+                }
+            }
+            break;
+        case IF_WEATHER:
+            if (params[i].arg1 == WEATHER_RAIN)
+            {
+                if (weather == WEATHER_RAIN || weather == WEATHER_RAIN_THUNDERSTORM || weather == WEATHER_DOWNPOUR)
+                    currentCondition = TRUE;
+            }
+            else if (params[i].arg1 == WEATHER_FOG)
+            {
+                if (weather == WEATHER_FOG_DIAGONAL || weather == WEATHER_FOG_HORIZONTAL)
+                    currentCondition = TRUE;
+            }
+            else if (weather == params[i].arg1)
+            {
+                currentCondition = TRUE;
+            }
+
+            break;
+        case IF_KNOWS_MOVE_TYPE:
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                if (GetMoveType(GetMonData(mon, MON_DATA_MOVE1 + j, NULL)) == params[i].arg1)
+                {
+                    currentCondition = TRUE;
+                    break;
+                }
+            }
+            break;
+        // Gen 8
+        case IF_NATURE:
+            if (nature == params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_AMPED_NATURE:
+            switch (nature)
+            {
+            case NATURE_HARDY:
+            case NATURE_BRAVE:
+            case NATURE_ADAMANT:
+            case NATURE_NAUGHTY:
+            case NATURE_DOCILE:
+            case NATURE_IMPISH:
+            case NATURE_LAX:
+            case NATURE_HASTY:
+            case NATURE_JOLLY:
+            case NATURE_NAIVE:
+            case NATURE_RASH:
+            case NATURE_SASSY:
+            case NATURE_QUIRKY:
+                currentCondition = TRUE;
+                break;
+            }
+            break;
+        case IF_LOW_KEY_NATURE:
+            switch (nature)
+            {
+            case NATURE_LONELY:
+            case NATURE_BOLD:
+            case NATURE_RELAXED:
+            case NATURE_TIMID:
+            case NATURE_SERIOUS:
+            case NATURE_MODEST:
+            case NATURE_MILD:
+            case NATURE_QUIET:
+            case NATURE_BASHFUL:
+            case NATURE_CALM:
+            case NATURE_GENTLE:
+            case NATURE_CAREFUL:
+                currentCondition = TRUE;
+                break;
+            }
+            break;
+        case IF_RECOIL_DAMAGE_GE:
+            if (evolutionTracker >= params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_CURRENT_DAMAGE_GE:
+        {
+            u32 currentHp = GetMonData(mon, MON_DATA_HP, NULL);
+            if (currentHp != 0 && (GetMonData(mon, MON_DATA_MAX_HP, NULL) - currentHp >= params[i].arg1))
+                currentCondition = TRUE;
+            break;
+        }
+        case IF_CRITICAL_HITS_GE:
+            if (partyId != PARTY_SIZE && gPartyCriticalHits[partyId] >= params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_USED_MOVE_X_TIMES:
+            if (evolutionTracker >= params[i].arg2)
+                currentCondition = TRUE;
+        // Gen 9
+        case IF_DEFEAT_X_WITH_ITEMS:
+            if (evolutionTracker >= params[i].arg3)
+                currentCondition = TRUE;
+            break;
+        case IF_PID_MODULO_100_GT:
+            if ((personality % 100) > params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_PID_MODULO_100_EQ:
+            if ((personality % 100) == params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_PID_MODULO_100_LT:
+            if ((personality % 100) < params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_MIN_OVERWORLD_STEPS:
+            if (mon == GetFirstLiveMon() && gFollowerSteps >= params[i].arg1)
+                currentCondition = TRUE;
+            break;
+        case IF_BAG_ITEM_COUNT:
+            if (CheckBagHasItem(params[i].arg1, params[i].arg2))
+            {
+                currentCondition = TRUE;
+                removeBagItem = params[i].arg1;
+                removeBagItemCount = params[i].arg2;
+                if (canStopEvo != NULL)
+                    *canStopEvo = FALSE;
+            }
+            break;
+        case CONDITIONS_END:
+            break;
+        }
+
+        // check if an evolution is about to happen and items should be removed
+        if (evoState == DO_EVO)
+        {
+            if (removeHoldItem)
+            {
+                u32 heldItem = ITEM_NONE;
+                SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+            }
+
+            if (removeBagItem != ITEM_NONE)
+                RemoveBagItem(removeBagItem, removeBagItemCount);
+        }
+
+        if (currentCondition == FALSE)
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+u32 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 evolutionItem, struct Pokemon *tradePartner, bool32 *canStopEvo, enum EvoState evoState)
+{
+    int i;
+    u32 targetSpecies = SPECIES_NONE;
+    u32 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u32 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
+    u32 level = GetMonData(mon, MON_DATA_LEVEL, 0);
+    u32 holdEffect;
+    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
+
+    if (evolutions == NULL)
+        return SPECIES_NONE;
+
     if (heldItem == ITEM_ENIGMA_BERRY_E_READER)
     #if FREE_ENIGMA_BERRY == FALSE
         holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
@@ -4681,271 +4982,31 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
     {
     case EVO_MODE_NORMAL:
     case EVO_MODE_BATTLE_ONLY:
-        level = GetMonData(mon, MON_DATA_LEVEL, 0);
-        friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
-
         for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
         {
+            bool32 conditionsMet = FALSE;
             if (SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
                 continue;
 
+            // Check main primary evolution method
             switch (evolutions[i].method)
             {
-            case EVO_FRIENDSHIP:
-                if (friendship >= FRIENDSHIP_EVO_THRESHOLD)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_FRIENDSHIP_DAY:
-                if (GetTimeOfDay() != TIME_NIGHT && friendship >= FRIENDSHIP_EVO_THRESHOLD)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_DAY:
-                if (GetTimeOfDay() != TIME_NIGHT && evolutions[i].param <= level)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_FRIENDSHIP_NIGHT:
-                if (GetTimeOfDay() == TIME_NIGHT && friendship >= FRIENDSHIP_EVO_THRESHOLD)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_NIGHT:
-                if (GetTimeOfDay() == TIME_NIGHT && evolutions[i].param <= level)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_ITEM_HOLD_NIGHT:
-                if (GetTimeOfDay() == TIME_NIGHT && heldItem == evolutions[i].param)
-                {
-                    targetSpecies = evolutions[i].targetSpecies;
-                    consumeItem = TRUE;
-                }
-                break;
-            case EVO_ITEM_HOLD_DAY:
-                if (GetTimeOfDay() != TIME_NIGHT && heldItem == evolutions[i].param)
-                {
-                    targetSpecies = evolutions[i].targetSpecies;
-                    consumeItem = TRUE;
-                }
-                break;
-            case EVO_LEVEL_DUSK:
-                if (GetTimeOfDay() == TIME_EVENING && evolutions[i].param <= level)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
             case EVO_LEVEL:
                 if (evolutions[i].param <= level)
-                    targetSpecies = evolutions[i].targetSpecies;
+                    conditionsMet = TRUE;
                 break;
-            case EVO_LEVEL_FEMALE:
-                if (evolutions[i].param <= level && GetMonGender(mon) == MON_FEMALE)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_MALE:
-                if (evolutions[i].param <= level && GetMonGender(mon) == MON_MALE)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_ATK_GT_DEF:
-                if (evolutions[i].param <= level)
-                    if (GetMonData(mon, MON_DATA_ATK, 0) > GetMonData(mon, MON_DATA_DEF, 0))
-                        targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_ATK_EQ_DEF:
-                if (evolutions[i].param <= level)
-                    if (GetMonData(mon, MON_DATA_ATK, 0) == GetMonData(mon, MON_DATA_DEF, 0))
-                        targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_ATK_LT_DEF:
-                if (evolutions[i].param <= level)
-                    if (GetMonData(mon, MON_DATA_ATK, 0) < GetMonData(mon, MON_DATA_DEF, 0))
-                        targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_SILCOON:
-                if (evolutions[i].param <= level && (upperPersonality % 10) <= 4)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_CASCOON:
-                if (evolutions[i].param <= level && (upperPersonality % 10) > 4)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_NINJASK:
-                if (evolutions[i].param <= level)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_FAMILY_OF_FOUR:
-                if (mode == EVO_MODE_BATTLE_ONLY && evolutions[i].param <= level && (personality % 100) != 0)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_FAMILY_OF_THREE:
-                if (mode == EVO_MODE_BATTLE_ONLY && evolutions[i].param <= level && (personality % 100) == 0)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_BEAUTY:
-                if (evolutions[i].param <= beauty)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_MOVE:
-                if (MonKnowsMove(mon, evolutions[i].param))
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_MOVE_TWO_SEGMENT:
-                if (MonKnowsMove(mon, evolutions[i].param) && (personality % 100) != 0)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_MOVE_THREE_SEGMENT:
-                if (MonKnowsMove(mon, evolutions[i].param) && (personality % 100) == 0)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_FRIENDSHIP_MOVE_TYPE:
-                if (friendship >= FRIENDSHIP_EVO_THRESHOLD)
-                {
-                    for (j = 0; j < MAX_MON_MOVES; j++)
-                    {
-                        if (GetMoveType(GetMonData(mon, MON_DATA_MOVE1 + j, NULL)) == evolutions[i].param)
-                        {
-                            targetSpecies = evolutions[i].targetSpecies;
-                            break;
-                        }
-                    }
-                }
-                break;
-            case EVO_SPECIFIC_MON_IN_PARTY:
-                for (j = 0; j < PARTY_SIZE; j++)
-                {
-                    if (GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL) == evolutions[i].param)
-                    {
-                        targetSpecies = evolutions[i].targetSpecies;
-                        break;
-                    }
-                }
-                break;
-            case EVO_LEVEL_DARK_TYPE_MON_IN_PARTY:
-                if (evolutions[i].param <= level)
-                {
-                    for (j = 0; j < PARTY_SIZE; j++)
-                    {
-                        u16 currSpecies = GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL);
-                        if (gSpeciesInfo[currSpecies].types[0] == TYPE_DARK
-                         || gSpeciesInfo[currSpecies].types[1] == TYPE_DARK)
-                        {
-                            targetSpecies = evolutions[i].targetSpecies;
-                            break;
-                        }
-                    }
-                }
-                break;
-            case EVO_LEVEL_RAIN:
-                j = GetCurrentWeather();
-                if (evolutions[i].param <= level
-                 && (j == WEATHER_RAIN || j == WEATHER_RAIN_THUNDERSTORM || j == WEATHER_DOWNPOUR))
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_FOG:
-                j = GetCurrentWeather();
-                if (evolutions[i].param <= level
-                 && (j == WEATHER_FOG_HORIZONTAL || j == WEATHER_FOG_DIAGONAL))
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_MAPSEC:
-                if (gMapHeader.regionMapSectionId == evolutions[i].param)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_SPECIFIC_MAP:
-                currentMap = ((gSaveBlock1Ptr->location.mapGroup) << 8 | gSaveBlock1Ptr->location.mapNum);
-                if (currentMap == evolutions[i].param)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_LEVEL_NATURE_AMPED:
-                if (evolutions[i].param <= level)
-                {
-                    u8 nature = GetNature(mon);
-                    switch (nature)
-                    {
-                    case NATURE_HARDY:
-                    case NATURE_BRAVE:
-                    case NATURE_ADAMANT:
-                    case NATURE_NAUGHTY:
-                    case NATURE_DOCILE:
-                    case NATURE_IMPISH:
-                    case NATURE_LAX:
-                    case NATURE_HASTY:
-                    case NATURE_JOLLY:
-                    case NATURE_NAIVE:
-                    case NATURE_RASH:
-                    case NATURE_SASSY:
-                    case NATURE_QUIRKY:
-                        targetSpecies = evolutions[i].targetSpecies;
-                        break;
-                    }
-                }
-                break;
-            case EVO_LEVEL_NATURE_LOW_KEY:
-                if (evolutions[i].param <= level)
-                {
-                    u8 nature = GetNature(mon);
-                    switch (nature)
-                    {
-                    case NATURE_LONELY:
-                    case NATURE_BOLD:
-                    case NATURE_RELAXED:
-                    case NATURE_TIMID:
-                    case NATURE_SERIOUS:
-                    case NATURE_MODEST:
-                    case NATURE_MILD:
-                    case NATURE_QUIET:
-                    case NATURE_BASHFUL:
-                    case NATURE_CALM:
-                    case NATURE_GENTLE:
-                    case NATURE_CAREFUL:
-                        targetSpecies = evolutions[i].targetSpecies;
-                        break;
-                    }
-                }
-                break;
-            case EVO_ITEM_HOLD:
-                if (heldItem == evolutions[i].param)
-                {
-                    targetSpecies = evolutions[i].targetSpecies;
-                    consumeItem = TRUE;
-                }
-                break;
-            case EVO_USE_MOVE_TWENTY_TIMES:
-                if (evolutionTracker >= 20)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_RECOIL_DAMAGE_MALE:
-                if (evolutionTracker >= evolutions[i].param && GetMonGender(mon) == MON_MALE)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_RECOIL_DAMAGE_FEMALE:
-                if (evolutionTracker >= evolutions[i].param && GetMonGender(mon) == MON_FEMALE)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_DEFEAT_THREE_WITH_ITEM:
-                if (evolutionTracker >= 3)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_OVERWORLD_STEPS:
-                if (mon == GetFirstLiveMon() && gFollowerSteps >= evolutions[i].param)
-                    targetSpecies = evolutions[i].targetSpecies;
+            case EVO_LEVEL_BATTLE_ONLY:
+                if (mode == EVO_MODE_BATTLE_ONLY && evolutions[i].param <= level)
+                    conditionsMet = TRUE;
                 break;
             }
-        }
-        break;
-    case EVO_MODE_CANT_STOP:
-        level = GetMonData(mon, MON_DATA_LEVEL, 0);
-        friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
 
-        for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
-        {
-            if (SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
-                continue;
-
-            switch (evolutions[i].method)
+            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, evoState))
             {
-            case EVO_ITEM_COUNT_999:
-                if (CheckBagHasItem(evolutions[i].param, 999))
-                {
-                    targetSpecies = evolutions[i].targetSpecies;
-                    if (prepareEvo == DO_EVO)
-                        RemoveBagItem(evolutions[i].param, 999);
-                }
+                // All checks passed, so stop checking the rest of the evolutions.
+                // This is different from vanilla where the loop continues.
+                // If you have overlapping evolutions, put the ones you want to happen first on top of the list.
+                targetSpecies = evolutions[i].targetSpecies;
                 break;
             }
         }
@@ -4953,24 +5014,23 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
     case EVO_MODE_TRADE:
         for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
         {
+            bool32 conditionsMet = FALSE;
             if (SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
                 continue;
 
             switch (evolutions[i].method)
             {
             case EVO_TRADE:
+                conditionsMet = TRUE;
+                break;
+            }
+
+            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, tradePartner, PARTY_SIZE, canStopEvo, evoState))
+            {
+                // All checks passed, so stop checking the rest of the evolutions.
+                // This is different from vanilla where the loop continues.
+                // If you have overlapping evolutions, put the ones you want to happen first on top of the list.
                 targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_TRADE_ITEM:
-                if (evolutions[i].param == heldItem)
-                {
-                    targetSpecies = evolutions[i].targetSpecies;
-                    consumeItem = TRUE;
-                }
-                break;
-            case EVO_TRADE_SPECIFIC_MON:
-                if (evolutions[i].param == partnerSpecies && partnerHoldEffect != HOLD_EFFECT_PREVENT_EVOLVE)
-                    targetSpecies = evolutions[i].targetSpecies;
                 break;
             }
         }
@@ -4979,6 +5039,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
     case EVO_MODE_ITEM_CHECK:
         for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
         {
+            bool32 conditionMet = FALSE;
             if (SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
                 continue;
 
@@ -4986,23 +5047,18 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
             {
             case EVO_ITEM:
                 if (evolutions[i].param == evolutionItem)
-                    targetSpecies = evolutions[i].targetSpecies;
+                    conditionMet = TRUE;
                 break;
-            case EVO_ITEM_FEMALE:
-                if (GetMonGender(mon) == MON_FEMALE && evolutions[i].param == evolutionItem)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_ITEM_MALE:
-                if (GetMonGender(mon) == MON_MALE && evolutions[i].param == evolutionItem)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_ITEM_NIGHT:
-                if (GetTimeOfDay() == TIME_NIGHT && evolutions[i].param == evolutionItem)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_ITEM_DAY:
-                if (GetTimeOfDay() != TIME_NIGHT && evolutions[i].param == evolutionItem)
-                    targetSpecies = evolutions[i].targetSpecies;
+            }
+
+            if (conditionMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, evoState))
+            {
+                // All checks passed, so stop checking the rest of the evolutions.
+                // This is different from vanilla where the loop continues.
+                // If you have overlapping evolutions, put the ones you want to happen first on top of the list.
+                targetSpecies = evolutions[i].targetSpecies;
+                if (canStopEvo != NULL)
+                    *canStopEvo = FALSE;
                 break;
             }
         }
@@ -5011,14 +5067,23 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
     case EVO_MODE_BATTLE_SPECIAL:
         for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
         {
+            bool32 conditionsMet = FALSE;
             if (SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
                 continue;
 
             switch (evolutions[i].method)
             {
-            case EVO_CRITICAL_HITS:
-                if (gPartyCriticalHits[evolutionItem] >= evolutions[i].param)
-                    targetSpecies = evolutions[i].targetSpecies;
+                case EVO_BATTLE_END:
+                    conditionsMet = TRUE;
+                    break;
+            }
+
+            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, evolutionItem, canStopEvo, evoState))
+            {
+                // All checks passed, so stop checking the rest of the evolutions.
+                // This is different from vanilla where the loop continues.
+                // If you have overlapping evolutions, put the ones you want to happen first on top of the list.
+                targetSpecies = evolutions[i].targetSpecies;
                 break;
             }
         }
@@ -5027,50 +5092,33 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
     case EVO_MODE_OVERWORLD_SPECIAL:
         for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
         {
+            bool32 conditionsMet = FALSE;
             if (SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
                 continue;
 
             switch (evolutions[i].method)
             {
-            case EVO_SCRIPT_TRIGGER_DMG:
-            {
-                u16 currentHp = GetMonData(mon, MON_DATA_HP, NULL);
-                if (evolutionItem == EVO_SCRIPT_TRIGGER_DMG
-                    && currentHp != 0
-                    && (GetMonData(mon, MON_DATA_MAX_HP, NULL) - currentHp >= evolutions[i].param))
-                    targetSpecies = evolutions[i].targetSpecies;
+            case EVO_SCRIPT_TRIGGER:
+            case EVO_SPIN:
+                if (gSpecialVar_0x8000 == evolutions[i].param)
+                    conditionsMet = TRUE;
+                    
                 break;
             }
-            case EVO_DARK_SCROLL:
-                if (evolutionItem == EVO_DARK_SCROLL)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_WATER_SCROLL:
-                if (evolutionItem == EVO_WATER_SCROLL)
-                    targetSpecies = evolutions[i].targetSpecies;
-                break;
-            case EVO_ITEM_HOLD_SPIN_DAY_LESS_THAN_5_SECS_CLOCKWISE:
-            case EVO_ITEM_HOLD_SPIN_DAY_LESS_THAN_5_SECS_COUNTER_CLOCKWISE:
-            case EVO_ITEM_HOLD_SPIN_NIGHT_LESS_THAN_5_SECS_CLOCKWISE:
-            case EVO_ITEM_HOLD_SPIN_NIGHT_LESS_THAN_5_SECS_COUNTER_CLOCKWISE:
-            case EVO_ITEM_HOLD_SPIN_DAY_MORE_THAN_5_SECS_CLOCKWISE:
-            case EVO_ITEM_HOLD_SPIN_DAY_MORE_THAN_5_SECS_COUNTER_CLOCKWISE:
-            case EVO_ITEM_HOLD_SPIN_NIGHT_MORE_THAN_5_SECS_CLOCKWISE:
-            case EVO_ITEM_HOLD_SPIN_NIGHT_MORE_THAN_5_SECS_COUNTER_CLOCKWISE:
-            case EVO_ITEM_HOLD_SPIN_DUSK_MORE_THAN_10_SECS:
-                if (evolutions[i].param == heldItem && evolutionItem == evolutions[i].method)
-                {
-                    targetSpecies = evolutions[i].targetSpecies;
-                    consumeItem = TRUE;
-                }
 
+            if (conditionsMet && DoesMonMeetAdditionalConditions(mon, evolutions[i].params, NULL, PARTY_SIZE, canStopEvo, evoState))
+            {
+                // All checks passed, so stop checking the rest of the evolutions.
+                // This is different from vanilla where the loop continues.
+                // If you have overlapping evolutions, put the ones you want to happen first on top of the list.
+                targetSpecies = evolutions[i].targetSpecies;
                 break;
             }
         }
         break;
     }
 
-    // Pikachu, Meowth, and Eevee cannot evolve if they have the
+    // Pikachu, Meowth, Eevee and Duraludon cannot evolve if they have the
     // Gigantamax Factor. We assume that is because their evolutions
     // do not have a Gigantamax Form.
     if (GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, NULL)
@@ -5078,12 +5126,6 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
      && GetGMaxTargetSpecies(targetSpecies) == targetSpecies)
     {
         return SPECIES_NONE;
-    }
-
-    if (consumeItem && prepareEvo == DO_EVO)
-    {
-        heldItem = ITEM_NONE;
-        SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
     }
 
     return targetSpecies;
@@ -6050,7 +6092,7 @@ static void Task_PlayMapChosenOrBattleBGM(u8 taskId)
 
 #undef tSongId
 
-const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
+const u16 *GetMonFrontSpritePal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
     bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
@@ -6058,12 +6100,12 @@ const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
     return GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality);
 }
 
-const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality)
+const u16 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality)
 {
     return GetMonSpritePalFromSpecies(species, isShiny, IsPersonalityFemale(species, personality));
 }
 
-const u32 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale)
+const u16 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale)
 {
     species = SanitizeSpeciesId(species);
 
@@ -6500,7 +6542,10 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 
 bool8 HasTwoFramesAnimation(u16 species)
 {
-    return P_TWO_FRAME_FRONT_SPRITES && species != SPECIES_UNOWN && !gTestRunnerHeadless;
+    return P_TWO_FRAME_FRONT_SPRITES 
+        && gSpeciesInfo[species].frontAnimFrames != sAnims_SingleFramePlaceHolder 
+        && species != SPECIES_UNOWN 
+        && !gTestRunnerHeadless;
 }
 
 static bool8 ShouldSkipFriendshipChange(void)
@@ -6718,13 +6763,13 @@ u8 GetFormIdFromFormSpeciesId(u16 formSpeciesId)
 }
 
 // Returns the current species if no form change is possible
-u32 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg)
+u32 GetFormChangeTargetSpecies(struct Pokemon *mon, enum FormChanges method, u32 arg)
 {
     return GetFormChangeTargetSpeciesBoxMon(&mon->box, method, arg);
 }
 
 // Returns the current species if no form change is possible
-u32 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 arg)
+u32 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum FormChanges method, u32 arg)
 {
     u32 i;
     u32 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
@@ -6815,6 +6860,8 @@ u32 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                         break;
                     }
                     break;
+                default:
+                    break;
                 }
             }
         }
@@ -6839,7 +6886,7 @@ void TrySetDayLimitToFormChange(struct Pokemon *mon)
     }
 }
 
-bool32 DoesSpeciesHaveFormChangeMethod(u16 species, u16 method)
+bool32 DoesSpeciesHaveFormChangeMethod(u16 species, enum FormChanges method)
 {
     u32 i;
     const struct FormChange *formChanges = GetSpeciesFormChanges(species);
@@ -6906,20 +6953,22 @@ void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
 void TrySpecialOverworldEvo(void)
 {
     u8 i;
-    u8 evoMethod = gSpecialVar_0x8000;
-    u16 canStopEvo = gSpecialVar_0x8001;
+    bool32 canStopEvo = gSpecialVar_0x8001;
     u16 tryMultiple = gSpecialVar_0x8002;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        u16 targetSpecies = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_OVERWORLD_SPECIAL, evoMethod, SPECIES_NONE, DO_EVO);
+        u32 targetSpecies = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_OVERWORLD_SPECIAL, 0, NULL, &canStopEvo, CHECK_EVO);
+
         if (targetSpecies != SPECIES_NONE && !(sTriedEvolving & (1u << i)))
         {
+            GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_OVERWORLD_SPECIAL, 0, NULL, &canStopEvo, DO_EVO);
             sTriedEvolving |= 1u << i;
             if(gMain.callback2 == TrySpecialOverworldEvo) // This fixes small graphics glitches.
                 EvolutionScene(&gPlayerParty[i], targetSpecies, canStopEvo, i);
             else
                 BeginEvolutionScene(&gPlayerParty[i], targetSpecies, canStopEvo, i);
+                
             if (tryMultiple)
                 gCB2_AfterEvolution = TrySpecialOverworldEvo;
             else
@@ -6946,7 +6995,7 @@ bool32 SpeciesHasGenderDifferences(u16 species)
     return FALSE;
 }
 
-bool32 TryFormChange(u32 monId, u32 side, u16 method)
+bool32 TryFormChange(u32 monId, u32 side, enum FormChanges method)
 {
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
 
@@ -6984,7 +7033,7 @@ bool32 IsSpeciesEnabled(u16 species)
     return gSpeciesInfo[species].baseHP > 0 || species == SPECIES_EGG;
 }
 
-void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method)
+void TryToSetBattleFormChangeMoves(struct Pokemon *mon, enum FormChanges method)
 {
     int i, j;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);

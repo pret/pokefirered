@@ -1,6 +1,6 @@
 #include "global.h"
 #include "gflib.h"
-#include "mail_data.h"
+#include "mail.h"
 #include "pokemon_icon.h"
 #include "graphics.h"
 

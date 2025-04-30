@@ -190,3 +190,13 @@ SINGLE_BATTLE_TEST("(Gulp Missile) Transformed Cramorant Gulping lowers defense 
         HP_BAR(opponent);
     }
 }
+
+SINGLE_BATTLE_TEST("Gulp Missile triggered by explosion doesn't freeze the game")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_CRAMORANT);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SURF); MOVE(player, MOVE_EXPLOSION); }
+    }
+}

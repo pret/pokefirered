@@ -133,3 +133,18 @@ SINGLE_BATTLE_TEST("Tanga Berry activates before Bug Bite")
         EXPECT_EQ(player->item, ITEM_NONE);
     }
 }
+
+SINGLE_BATTLE_TEST("Bug Bite ignores Unnerve")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_TYRANITAR) { Ability(ABILITY_UNNERVE); Item(ITEM_ORAN_BERRY); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_BUG_BITE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BUG_BITE, player);
+        HP_BAR(player);
+    } THEN {
+        EXPECT_EQ(opponent->item, ITEM_NONE);
+    }
+}

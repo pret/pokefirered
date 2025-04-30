@@ -51,7 +51,7 @@ DOUBLE_BATTLE_TEST("Neutralizing Gas prevents ally's switch-in ability from acti
 DOUBLE_BATTLE_TEST("Neutralizing Gas ignores all battlers' ability effects")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SURF].target == MOVE_TARGET_FOES_AND_ALLY);
+        ASSUME(GetMoveTarget(MOVE_SURF) == MOVE_TARGET_FOES_AND_ALLY);
         PLAYER(SPECIES_WEEZING) { Ability(ABILITY_NEUTRALIZING_GAS); }
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_TELEPATHY); }
         OPPONENT(SPECIES_LANTURN) { Ability(ABILITY_WATER_ABSORB); }
@@ -87,7 +87,7 @@ SINGLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from attacker's ability
     PARAMETRIZE { ability = ABILITY_NEUTRALIZING_GAS; }
     PARAMETRIZE { ability = ABILITY_LEVITATE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WEEZING) { Ability(ability); }
         OPPONENT(SPECIES_AZUMARILL) { Ability(ABILITY_HUGE_POWER); }
     } WHEN {
@@ -106,8 +106,8 @@ SINGLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from target's ability",
     PARAMETRIZE { ability = ABILITY_NEUTRALIZING_GAS; }
     PARAMETRIZE { ability = ABILITY_LEVITATE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].makesContact == TRUE);
-        ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
+        ASSUME(MoveMakesContact(MOVE_TACKLE) == TRUE);
+        ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
         PLAYER(SPECIES_WEEZING) { Ability(ability); }
         OPPONENT(SPECIES_BEWEAR) { Ability(ABILITY_FLUFFY); }
     } WHEN {
@@ -146,7 +146,7 @@ DOUBLE_BATTLE_TEST("Neutralizing Gas ignores multipliers from ally's ability", s
     PARAMETRIZE { ability = ABILITY_NEUTRALIZING_GAS; }
     PARAMETRIZE { ability = ABILITY_LEVITATE; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WEEZING) { Ability(ability); }
         PLAYER(SPECIES_WO_CHIEN) { Ability(ABILITY_TABLETS_OF_RUIN); }
         OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_TELEPATHY); }

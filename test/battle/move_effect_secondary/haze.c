@@ -16,7 +16,10 @@ SINGLE_BATTLE_TEST("Freeze Frost restores stat changes when it was succesful")
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_FREEZY_FROST, hit: moveSuccess); }
+        TURN {
+            MOVE(opponent, MOVE_SAND_ATTACK);
+            MOVE(player, MOVE_FREEZY_FROST, hit: moveSuccess);
+        }
     } SCENE {
         if (moveSuccess == TRUE)
         {

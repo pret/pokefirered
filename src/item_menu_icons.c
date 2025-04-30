@@ -103,7 +103,7 @@ const struct CompressedSpriteSheet gSpriteSheet_BagFemale = {
     .tag = TAG_BAG
 };
 
-const struct CompressedSpritePalette gSpritePalette_Bag = {
+const struct SpritePalette gSpritePalette_Bag = {
     .data = gBag_Pal,
     .tag = TAG_BAG
 };
@@ -153,7 +153,7 @@ const struct CompressedSpriteSheet gBagSwapSpriteSheet = {
     .tag = TAG_SWAP_LINE
 };
 
-const struct CompressedSpritePalette gBagSwapSpritePalette = {
+const struct SpritePalette gBagSwapSpritePalette = {
     .data = gSwapLine_Pal,
     .tag = TAG_SWAP_LINE
 };

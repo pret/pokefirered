@@ -208,7 +208,7 @@ DOUBLE_BATTLE_TEST("Shell Bell heals accumulated damage for spread moves")
     const u16 maxHp = 200;
     const u16 initHp = 1;
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DISCHARGE].target == MOVE_TARGET_FOES_AND_ALLY);
+        ASSUME(GetMoveTarget(MOVE_DISCHARGE) == MOVE_TARGET_FOES_AND_ALLY);
         PLAYER(SPECIES_ARIADOS) { MaxHP(maxHp); HP(initHp); Item(ITEM_SHELL_BELL); }
         PLAYER(SPECIES_WOBBUFFET) {}
         OPPONENT(SPECIES_GYARADOS) {}

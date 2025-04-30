@@ -249,8 +249,8 @@ DOUBLE_BATTLE_TEST("Instructed move will be redirected by Follow Me after instru
     PARAMETRIZE { moveTarget = opponentLeft; }
     PARAMETRIZE { moveTarget = opponentRight; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FOLLOW_ME].effect == EFFECT_FOLLOW_ME);
-        ASSUME(gMovesInfo[MOVE_SKILL_SWAP].effect == EFFECT_SKILL_SWAP);
+        ASSUME(GetMoveEffect(MOVE_FOLLOW_ME) == EFFECT_FOLLOW_ME);
+        ASSUME(GetMoveEffect(MOVE_SKILL_SWAP) == EFFECT_SKILL_SWAP);
         PLAYER(SPECIES_DURALUDON) { Ability(ABILITY_STALWART); }
         PLAYER(SPECIES_DURALUDON) { Ability(ABILITY_STALWART); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -279,9 +279,9 @@ DOUBLE_BATTLE_TEST("Instructed move will be redirected by Rage Powder after inst
     PARAMETRIZE { moveTarget = opponentLeft; }
     PARAMETRIZE { moveTarget = opponentRight; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_RAGE_POWDER].effect == EFFECT_FOLLOW_ME);
-        ASSUME(gMovesInfo[MOVE_RAGE_POWDER].powderMove == TRUE);
-        ASSUME(gMovesInfo[MOVE_SOAK].effect == EFFECT_SOAK);
+        ASSUME(GetMoveEffect(MOVE_RAGE_POWDER) == EFFECT_FOLLOW_ME);
+        ASSUME(IsPowderMove(MOVE_RAGE_POWDER) == TRUE);
+        ASSUME(GetMoveEffect(MOVE_SOAK) == EFFECT_SOAK);
         PLAYER(SPECIES_TREECKO);
         PLAYER(SPECIES_SCEPTILE);
         OPPONENT(SPECIES_WOBBUFFET);

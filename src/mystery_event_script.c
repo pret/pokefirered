@@ -4,7 +4,7 @@
 #include "battle_tower.h"
 #include "easy_chat.h"
 #include "event_data.h"
-#include "mail_data.h"
+#include "mail.h"
 #include "mystery_event_script.h"
 #include "pokedex.h"
 #include "pokemon_size_record.h"

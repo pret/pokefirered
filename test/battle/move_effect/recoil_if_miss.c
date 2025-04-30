@@ -102,7 +102,7 @@ SINGLE_BATTLE_TEST("Recoil if miss: Jump Kick's recoil happens after Spiky Shiel
 SINGLE_BATTLE_TEST("Recoil if miss: Jump Kick recoil happens after Spiky Shield damage")
 {
     GIVEN {
-        ASSUME(!gMovesInfo[MOVE_JUMP_KICK].ignoresProtect);
+        ASSUME(!MoveIgnoresProtect(MOVE_JUMP_KICK));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -5,7 +5,7 @@ SINGLE_BATTLE_TEST("Color Change changes the type of a Pokemon being hit by a mo
 {
     GIVEN {
         ASSUME(gSpeciesInfo[SPECIES_KECLEON].types[0] != TYPE_PSYCHIC && gSpeciesInfo[SPECIES_KECLEON].types[1] != TYPE_PSYCHIC);
-        ASSUME(gMovesInfo[MOVE_PSYWAVE].type == TYPE_PSYCHIC);
+        ASSUME(GetMoveType(MOVE_PSYWAVE) == TYPE_PSYCHIC);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_KECLEON) { Ability(ABILITY_COLOR_CHANGE); }
     } WHEN {
@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Color Change does not change the type when hit by a move tha
 {
     GIVEN {
         ASSUME(gSpeciesInfo[SPECIES_KECLEON].types[0] == TYPE_NORMAL || gSpeciesInfo[SPECIES_KECLEON].types[1] == TYPE_NORMAL);
-        ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_KECLEON) { Ability(ABILITY_COLOR_CHANGE); }
     } WHEN {
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Color Change does not change the type of a dual-type Pokemon
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PSYCHO_CUT, player);
         NONE_OF {
             ABILITY_POPUP(opponent, ABILITY_COLOR_CHANGE);
-            MESSAGE("The opposing Xatu's Color Change made it the Psychic type!");
+            MESSAGE("The opposing Slowbro's Color Change made it the Psychic type!");
         }
     }
 }

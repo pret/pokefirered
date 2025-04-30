@@ -167,6 +167,24 @@ DOUBLE_BATTLE_TEST("Ally Switch - move fails if the target was ally which change
     }
 }
 
+DOUBLE_BATTLE_TEST("Ally Switch doesn't make self-targeting status moves fail")
+{
+    GIVEN {
+        ASSUME(gMovesInfo[MOVE_HARDEN].target == MOVE_TARGET_USER);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); MOVE(playerRight, MOVE_HARDEN); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HARDEN, playerLeft);
+    } THEN {
+        EXPECT_EQ(playerLeft->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 1);
+    }
+}
+
 DOUBLE_BATTLE_TEST("Ally Switch increases the Protect-like moves counter")
 {
     GIVEN {
@@ -277,11 +295,8 @@ DOUBLE_BATTLE_TEST("Ally switch swaps opposing sky drop targets if partner is be
     }
 }
 
-// Test passes in isolation but fails on CI
-/*
 DOUBLE_BATTLE_TEST("Ally Switch swaps Illusion data")
 {
-    KNOWN_FAILING; // Test passes in isolation but fails on CI
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_ALLY_SWITCH) == EFFECT_ALLY_SWITCH);
         PLAYER(SPECIES_HOOPA);
@@ -295,7 +310,6 @@ DOUBLE_BATTLE_TEST("Ally Switch swaps Illusion data")
         EXPECT(&gPlayerParty[2] == gBattleStruct->illusion[0].mon);
     }
 }
-*/
 
 // Triple Battles required to test
 //TO_DO_BATTLE_TEST("Ally Switch fails if the user is in the middle of the field in a Triple Battle");

@@ -7,7 +7,6 @@
 #include "mail.h"
 #include "task.h"
 #include "menu.h"
-#include "mail_data.h"
 #include "player_pc.h"
 #include "overworld.h"
 #include "help_system.h"

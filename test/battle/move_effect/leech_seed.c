@@ -58,6 +58,36 @@ SINGLE_BATTLE_TEST("Leech Seed recovery is prevented by Heal Block")
     }
 }
 
+DOUBLE_BATTLE_TEST("Leech Seed will drain HP based on speed of the drained mon")
+{
+    GIVEN {
+        PLAYER(SPECIES_WYNAUT) { Speed(1); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(2); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(3); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(4); }
+    } WHEN {
+        TURN { 
+            MOVE(playerLeft, MOVE_LEECH_SEED, target: opponentLeft); 
+            MOVE(playerRight, MOVE_LEECH_SEED, target: opponentRight); 
+            MOVE(opponentLeft, MOVE_LEECH_SEED, target: playerLeft); 
+            MOVE(opponentRight, MOVE_LEECH_SEED, target: playerRight); 
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_LEECH_SEED, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_LEECH_SEED, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_LEECH_SEED, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_LEECH_SEED, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_LEECH_SEED_DRAIN, opponentRight);
+        HP_BAR(opponentRight);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_LEECH_SEED_DRAIN, opponentLeft);
+        HP_BAR(opponentLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_LEECH_SEED_DRAIN, playerRight);
+        HP_BAR(playerRight);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_LEECH_SEED_DRAIN, playerLeft);
+        HP_BAR(playerLeft);
+    }
+}
+
 TO_DO_BATTLE_TEST("Leech Seed doesn't affect already seeded targets")
 TO_DO_BATTLE_TEST("Leech Seed's effect is paused until a new battler replaces the original user's position") // Faint, can't be replaced, then revived.
 TO_DO_BATTLE_TEST("Leech Seed's effect pause still prevents it from being seeded again")

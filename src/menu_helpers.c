@@ -5,7 +5,7 @@
 #include "menu_helpers.h"
 #include "link.h"
 #include "overworld.h"
-#include "mail_data.h"
+#include "mail.h"
 #include "field_specials.h"
 #include "constants/songs.h"
 #include "constants/items.h"

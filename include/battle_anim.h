@@ -79,7 +79,7 @@ struct BattleAnimBgData
 struct BattleAnimBackground
 {
     const u32 *image;
-    const u32 *palette;
+    const u16 *palette;
     const u32 *tilemap;
 };
 
@@ -342,7 +342,7 @@ extern const struct OamData gOamData_AffineDouble_ObjBlend_16x32;
 extern const struct OamData gOamData_AffineDouble_ObjBlend_32x64;
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
-extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
+extern const struct SpritePalette gBattleAnimPaletteTable[];
 
 extern const struct SpriteTemplate gFlashingHitSplatSpriteTemplate;
 extern const struct SpriteTemplate gBasicHitSplatSpriteTemplate;
@@ -591,7 +591,7 @@ void AnimWeatherBallUp(struct Sprite *sprite);
 void AnimWeatherBallDown(struct Sprite *sprite);
 u32 UnpackSelectedBattlePalettes(s16 selector);
 void InitStatsChangeAnimation(u8 taskId);
-void StartMonScrollingBgMask(u8 taskId, int unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u32 *palette);
+void StartMonScrollingBgMask(u8 taskId, int unused, u16 scrollSpeed, u8 battler, bool8 includePartner, u8 numFadeSteps, u8 fadeStepDelay, u8 duration, const u32 *gfx, const u32 *tilemap, const u16 *palette);
 void ClearBattleAnimBg(u32 bgId);
 void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *, const void *, bool32);
 bool32 InitSpritePosToAnimBattler(u32 animBattlerId, struct Sprite *sprite, bool8 respectMonPicOffsets);

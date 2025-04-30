@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gMovesInfo[MOVE_SNORE].effect == EFFECT_SNORE);
+    ASSUME(GetMoveEffect(MOVE_SNORE) == EFFECT_SNORE);
 }
 
 SINGLE_BATTLE_TEST("Snore fails if not asleep")
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Snore fails if user is throat chopped")
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_THROAT_CHOP, MOVE_EFFECT_THROAT_CHOP));
-        ASSUME(gMovesInfo[MOVE_SNORE].soundMove == TRUE);
+        ASSUME(IsSoundMove(MOVE_SNORE) == TRUE);
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_SLEEP); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

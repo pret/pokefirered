@@ -1470,7 +1470,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_SaltParticle, 0x400, ANIM_TAG_SALT_PARTICLE},
 };
 
-const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
+const struct SpritePalette gBattleAnimPaletteTable[] =
 {
     {gBattleAnimSpritePal_Bone, ANIM_TAG_BONE},
     {gBattleAnimSpritePal_Spark, ANIM_TAG_SPARK},

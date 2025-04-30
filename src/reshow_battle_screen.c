@@ -168,7 +168,7 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
         BeginHardwarePaletteFade(0xFF, 0, 0x10, 0, 1);
         gPaletteFade.bufferTransferDisabled = 0;
         SetMainCallback2(BattleMainCB2);
-        BattleInterfaceSetWindowPals();
+        FillAroundBattleWindows();
         break;
     default:
         break;
@@ -278,7 +278,7 @@ static void CB2_ReshowBlankBattleScreenAfterMenu(void)
         BeginHardwarePaletteFade(0xFF, 0, 0x10, 0, 1);
         gPaletteFade.bufferTransferDisabled = 0;
         SetMainCallback2(BattleMainCB2);
-        BattleInterfaceSetWindowPals();
+        FillAroundBattleWindows();
         break;
     }
 

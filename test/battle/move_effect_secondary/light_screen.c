@@ -16,7 +16,10 @@ SINGLE_BATTLE_TEST("Glitzy Glow sets up Light Screen when it was succesful")
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_GLITZY_GLOW, hit: moveSuccess); }
+        TURN {
+            MOVE(opponent, MOVE_SAND_ATTACK);
+            MOVE(player, MOVE_GLITZY_GLOW, hit: moveSuccess);
+        }
     } SCENE {
         if (moveSuccess == TRUE)
         {

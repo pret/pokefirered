@@ -16,17 +16,37 @@ DOUBLE_BATTLE_TEST("Acupressure fails on the user if it targeted its ally but sw
         OPPONENT(SPECIES_KADABRA);
         OPPONENT(SPECIES_ABRA);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); MOVE(playerRight, MOVE_ACUPRESSURE, target:playerLeft); }
+        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); MOVE(playerRight, MOVE_ACUPRESSURE, target: playerLeft); }
     } SCENE {
         MESSAGE("Wobbuffet used Ally Switch!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
         MESSAGE("Wobbuffet and Wynaut switched places!");
-
+        MESSAGE("Wynaut used Acupressure!");
         MESSAGE("But it failed!");
         NONE_OF {
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_ACUPRESSURE);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_ACUPRESSURE, playerLeft);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         }
+    }
+}
+
+DOUBLE_BATTLE_TEST("Acupressure works on the ally if it targeted itself but switched positions via Ally Switch")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_KADABRA);
+        OPPONENT(SPECIES_ABRA);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); MOVE(playerRight, MOVE_ACUPRESSURE, target: playerRight); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Ally Switch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
+        MESSAGE("Wobbuffet and Wynaut switched places!");
+        MESSAGE("Wynaut used Acupressure!");
+        NOT MESSAGE("But it failed!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ACUPRESSURE, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
     }
 }
 

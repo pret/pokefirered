@@ -532,7 +532,7 @@ static void TeachyTvLoadGraphic(void)
     DecompressAndCopyTileDataToVram(1, gTeachyTv_Gfx, 0, 0, 0);
     LZDecompressWram(gTeachyTvScreen_Tilemap, sResources->screenTilemap);
     LZDecompressWram(gTeachyTvTitle_Tilemap, sResources->titleTilemap);
-    LoadCompressedPalette(gTeachyTv_Pal, BG_PLTT_ID(0), 4 * PLTT_SIZE_4BPP);
+    LoadPalette(gTeachyTv_Pal, BG_PLTT_ID(0), 4 * PLTT_SIZE_4BPP);
     LoadPalette(&src, BG_PLTT_ID(0), sizeof(src));
     LoadSpritePalette(&gSpritePalette_GeneralFieldEffect1);
     TeachyTvLoadBg3Map(sResources->buffer3);

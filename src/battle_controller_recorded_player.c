@@ -506,7 +506,7 @@ static void RecordedPlayerHandleStatusAnimation(u32 battler)
 static void RecordedPlayerHandleIntroTrainerBallThrow(u32 battler)
 {
     u32 trainerPicId;
-    const u32 *trainerPal;
+    const u16 *trainerPal;
 
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
         trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(battler)].gender + TRAINER_BACK_PIC_RED;

@@ -16,7 +16,10 @@ SINGLE_BATTLE_TEST("Baddy Bad sets up Reflect when it was succesful")
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_BADDY_BAD, hit: moveSuccess); }
+        TURN {
+            MOVE(opponent, MOVE_SAND_ATTACK);
+            MOVE(player, MOVE_BADDY_BAD, hit: moveSuccess);
+        }
     } SCENE {
         if (moveSuccess == TRUE)
         {

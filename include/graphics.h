@@ -5438,9 +5438,9 @@ extern const u16 gHoennTrainerCardGreen_Pal[];
 extern const u32 gHoennTrainerCard_Gfx[];
 
 // battle_interface
-extern const u32 gBattleInterface_Textbox_Gfx[];
-extern const u16 gBattleInterface_Textbox_Pal[];
-extern const u32 gBattleInterface_Textbox_Tilemap[];
+extern const u32 gBattleTextboxTiles[];
+extern const u16 gBattleTextboxPalette[];
+extern const u32 gBattleTextboxTilemap[];
 extern const u32 gBattleInterface_PartySummaryBar_Gfx[];
 extern const u8 gBattleInterface_Gfx[][32];
 extern const u16 gBattleInterface_Healthbox_Pal[];
@@ -5467,10 +5467,10 @@ extern const u32 gUnionRoomChat_Bg_Tilemap[];
 extern const u32 gUnionRoomChat_Icons_Gfx[];
 
 // battle_bg
-extern const u32 gFile_graphics_battle_transitions_vs_frame_sheet[];
+extern const u32 gBattleVSFrame_Gfx[];
 extern const u32 gVsLettersGfx[];
-extern const u16 gFile_graphics_battle_transitions_vs_frame_palette[];
-extern const u32 gFile_graphics_battle_transitions_vs_frame_tilemap[];
+extern const u16 gBattleVSFrame_Pal[];
+extern const u32 gBattleVSFrame_Tilemap[];
 
 // berry_crush
 extern const u16 gBerryCrush_Crusher_Pal[];

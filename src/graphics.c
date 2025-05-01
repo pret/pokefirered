@@ -1,8 +1,8 @@
 #include "global.h"
 
-const u32 gBattleInterface_Textbox_Gfx[] = INCBIN_U32("graphics/battle_interface/textbox.4bpp.lz");
-const u16 gBattleInterface_Textbox_Pal[] = INCBIN_U16("graphics/battle_interface/textbox.gbapal");
-const u32 gBattleInterface_Textbox_Tilemap[] = INCBIN_U32("graphics/battle_interface/textbox.bin.lz");
+const u32 gBattleTextboxTiles[] = INCBIN_U32("graphics/battle_interface/textbox.4bpp.lz");
+const u16 gBattleTextboxPalette[] = INCBIN_U16("graphics/battle_interface/textbox.gbapal");
+const u32 gBattleTextboxTilemap[] = INCBIN_U32("graphics/battle_interface/textbox.bin.lz");
 
 // const u32 gMonFrontPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/front.4bpp.lz");
 // const u32 gMonBackPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/back.4bpp.lz");
@@ -1006,9 +1006,9 @@ const u16 gPPTextPalette[] = INCBIN_U16("graphics/interface/text_pp.gbapal");
 // const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/icon.4bpp");
 // const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/footprint.1bpp");
 
-const u32 gFile_graphics_battle_transitions_vs_frame_sheet[] = INCBIN_U32("graphics/battle_transitions/vs_frame.4bpp.lz");
-const u32 gFile_graphics_battle_transitions_vs_frame_tilemap[] = INCBIN_U32("graphics/battle_transitions/vs_frame.bin.lz");
-const u16 gFile_graphics_battle_transitions_vs_frame_palette[] = INCBIN_U16("graphics/battle_transitions/vs_frame.gbapal");
+const u32 gBattleVSFrame_Gfx[] = INCBIN_U32("graphics/battle_transitions/vs_frame.4bpp.lz");
+const u32 gBattleVSFrame_Tilemap[] = INCBIN_U32("graphics/battle_transitions/vs_frame.bin.lz");
+const u16 gBattleVSFrame_Pal[] = INCBIN_U16("graphics/battle_transitions/vs_frame.gbapal");
 
 const u32 gVsLettersGfx[] = INCBIN_U32("graphics/battle_transitions/vs.4bpp.lz");
 

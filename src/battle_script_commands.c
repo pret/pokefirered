@@ -4047,7 +4047,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                     }
                 }
                 else
-                    gBattleScripting.moveEffect = gBattleTerrainInfo[gBattleEnvironment].secretPowerEffect;
+                    gBattleScripting.moveEffect = gBattleEnvironmentInfo[gBattleEnvironment].secretPowerEffect;
                 SetMoveEffect(primary, certain);
                 break;
             case MOVE_EFFECT_PSYCHIC_NOISE:
@@ -14812,7 +14812,7 @@ static void Cmd_callterrainattack(void)
 
 u32 GetNaturePowerMove(u32 battler)
 {
-    u32 move = gBattleTerrainInfo[gBattleEnvironment].naturePower;
+    u32 move = gBattleEnvironmentInfo[gBattleEnvironment].naturePower;
     if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
         move = MOVE_MOONBLAST;
     else if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
@@ -14821,7 +14821,7 @@ u32 GetNaturePowerMove(u32 battler)
         move = MOVE_ENERGY_BALL;
     else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
         move = MOVE_PSYCHIC;
-    else if (gBattleTerrainInfo[gBattleEnvironment].naturePower == MOVE_NONE)
+    else if (gBattleEnvironmentInfo[gBattleEnvironment].naturePower == MOVE_NONE)
         move = MOVE_TRI_ATTACK;
 
     if (GetActiveGimmick(battler) == GIMMICK_Z_MOVE)
@@ -15673,7 +15673,7 @@ static void Cmd_tryrecycleitem(void)
 
 bool32 CanCamouflage(u8 battler)
 {
-    if (IS_BATTLER_OF_TYPE(battler, gBattleTerrainInfo[gBattleEnvironment].camouflageType))
+    if (IS_BATTLER_OF_TYPE(battler, gBattleEnvironmentInfo[gBattleEnvironment].camouflageType))
         return FALSE;
     return TRUE;
 }
@@ -15698,7 +15698,7 @@ static void Cmd_settypetoterrain(void)
         terrainType = TYPE_PSYCHIC;
         break;
     default:
-        terrainType = gBattleTerrainInfo[gBattleEnvironment].camouflageType;
+        terrainType = gBattleEnvironmentInfo[gBattleEnvironment].camouflageType;
         break;
     }
 

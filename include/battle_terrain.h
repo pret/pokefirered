@@ -12,6 +12,6 @@ struct BattleTerrain {
     struct BattleBackground background;
 };
 
-extern const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT];
+extern const struct BattleTerrain gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT];
 
 #endif // GUARD_BATTLE_TERRAIN_H

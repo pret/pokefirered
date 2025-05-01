@@ -1,6 +1,6 @@
 #include "graphics/battle_terrain.h"
 
-const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
+const struct BattleTerrain gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] =
 {
     [BATTLE_ENVIRONMENT_GRASS] =
     {
@@ -16,11 +16,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .camouflageType = TYPE_GRASS,
         .background =
         {
-            .tileset = gBattleTerrainTiles_Grass,
-            .tilemap = gBattleTerrainTilemap_Grass,
-            .entryTileset = gBattleTerrainAnimTiles_Grass,
-            .entryTilemap = gBattleTerrainAnimTilemap_Grass,
-            .palette = gBattleTerrainPalette_Grass,
+            .tileset = gBattleEnvironmentTiles_Grass,
+            .tilemap = gBattleEnvironmentTilemap_Grass,
+            .entryTileset = gBattleEnvironmentAnimTiles_Grass,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Grass,
+            .palette = gBattleEnvironmentPalette_Grass,
         },
     },
     [BATTLE_ENVIRONMENT_LONG_GRASS] =
@@ -37,11 +37,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .camouflageType = TYPE_GRASS,
         .background =
         {
-            .tileset = gBattleTerrainTiles_LongGrass,
-            .tilemap = gBattleTerrainTilemap_LongGrass,
-            .entryTileset = gBattleTerrainAnimTiles_LongGrass,
-            .entryTilemap = gBattleTerrainAnimTilemap_LongGrass,
-            .palette = gBattleTerrainPalette_LongGrass,
+            .tileset = gBattleEnvironmentTiles_LongGrass,
+            .tilemap = gBattleEnvironmentTilemap_LongGrass,
+            .entryTileset = gBattleEnvironmentAnimTiles_LongGrass,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_LongGrass,
+            .palette = gBattleEnvironmentPalette_LongGrass,
         },
     },
     [BATTLE_ENVIRONMENT_SAND] =
@@ -52,11 +52,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .camouflageType = TYPE_GROUND,
         .background =
         {
-            .tileset = gBattleTerrainTiles_Sand,
-            .tilemap = gBattleTerrainTilemap_Sand,
-            .entryTileset = gBattleTerrainAnimTiles_Sand,
-            .entryTilemap = gBattleTerrainAnimTilemap_Sand,
-            .palette = gBattleTerrainPalette_Sand,
+            .tileset = gBattleEnvironmentTiles_Sand,
+            .tilemap = gBattleEnvironmentTilemap_Sand,
+            .entryTileset = gBattleEnvironmentAnimTiles_Sand,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Sand,
+            .palette = gBattleEnvironmentPalette_Sand,
         },
     },
     [BATTLE_ENVIRONMENT_UNDERWATER] =
@@ -67,11 +67,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .camouflageType = TYPE_WATER,
         .background =
         {
-            .tileset = gBattleTerrainTiles_Underwater,
-            .tilemap = gBattleTerrainTilemap_Underwater,
-            .entryTileset = gBattleTerrainAnimTiles_Underwater,
-            .entryTilemap = gBattleTerrainAnimTilemap_Underwater,
-            .palette = gBattleTerrainPalette_Underwater,
+            .tileset = gBattleEnvironmentTiles_Underwater,
+            .tilemap = gBattleEnvironmentTilemap_Underwater,
+            .entryTileset = gBattleEnvironmentAnimTiles_Underwater,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Underwater,
+            .palette = gBattleEnvironmentPalette_Underwater,
         },
     },
     [BATTLE_ENVIRONMENT_WATER] =
@@ -82,11 +82,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .camouflageType = TYPE_WATER,
         .background =
         {
-            .tileset = gBattleTerrainTiles_Water,
-            .tilemap = gBattleTerrainTilemap_Water,
-            .entryTileset = gBattleTerrainAnimTiles_Water,
-            .entryTilemap = gBattleTerrainAnimTilemap_Water,
-            .palette = gBattleTerrainPalette_Water,
+            .tileset = gBattleEnvironmentTiles_Water,
+            .tilemap = gBattleEnvironmentTilemap_Water,
+            .entryTileset = gBattleEnvironmentAnimTiles_Water,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Water,
+            .palette = gBattleEnvironmentPalette_Water,
         },
     },
     [BATTLE_ENVIRONMENT_POND] =
@@ -97,11 +97,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .camouflageType = TYPE_WATER,
         .background =
         {
-            .tileset = gBattleTerrainTiles_Pond,
-            .tilemap = gBattleTerrainTilemap_Pond,
-            .entryTileset = gBattleTerrainAnimTiles_Pond,
-            .entryTilemap = gBattleTerrainAnimTilemap_Pond,
-            .palette = gBattleTerrainPalette_Pond,
+            .tileset = gBattleEnvironmentTiles_Pond,
+            .tilemap = gBattleEnvironmentTilemap_Pond,
+            .entryTileset = gBattleEnvironmentAnimTiles_Pond,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Pond,
+            .palette = gBattleEnvironmentPalette_Pond,
         },
     },
     [BATTLE_ENVIRONMENT_MOUNTAIN] =
@@ -124,11 +124,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .camouflageType = B_CAMOUFLAGE_TYPES >= GEN_5 ? TYPE_GROUND : TYPE_ROCK,
         .background =
         {
-            .tileset = gBattleTerrainTiles_Mountain,
-            .tilemap = gBattleTerrainTilemap_Mountain,
-            .entryTileset = gBattleTerrainAnimTiles_Mountain,
-            .entryTilemap = gBattleTerrainAnimTilemap_Mountain,
-            .palette = gBattleTerrainPalette_Mountain,
+            .tileset = gBattleEnvironmentTiles_Mountain,
+            .tilemap = gBattleEnvironmentTilemap_Mountain,
+            .entryTileset = gBattleEnvironmentAnimTiles_Mountain,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Mountain,
+            .palette = gBattleEnvironmentPalette_Mountain,
         },
     },
     [BATTLE_ENVIRONMENT_CAVE] =
@@ -147,11 +147,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .camouflageType = TYPE_ROCK,
         .background =
         {
-            .tileset = gBattleTerrainTiles_Cave,
-            .tilemap = gBattleTerrainTilemap_Cave,
-            .entryTileset = gBattleTerrainAnimTiles_Cave,
-            .entryTilemap = gBattleTerrainAnimTilemap_Cave,
-            .palette = gBattleTerrainPalette_Cave,
+            .tileset = gBattleEnvironmentTiles_Cave,
+            .tilemap = gBattleEnvironmentTilemap_Cave,
+            .entryTileset = gBattleEnvironmentAnimTiles_Cave,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Cave,
+            .palette = gBattleEnvironmentPalette_Cave,
         },
     },
     [BATTLE_ENVIRONMENT_BUILDING] =
@@ -162,11 +162,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .camouflageType = TYPE_NORMAL,
         .background =
         {
-            .tileset = gBattleTerrainTiles_Building,
-            .tilemap = gBattleTerrainTilemap_Building,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Building,
+            .tileset = gBattleEnvironmentTiles_Building,
+            .tilemap = gBattleEnvironmentTilemap_Building,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Building,
         },
     },
     [BATTLE_ENVIRONMENT_PLAIN] =
@@ -183,11 +183,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .camouflageType = B_CAMOUFLAGE_TYPES >= GEN_4 ? TYPE_GROUND : TYPE_NORMAL,
         .background =
         {
-            .tileset = gBattleTerrainTiles_Building,
-            .tilemap = gBattleTerrainTilemap_Building,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Plain,
+            .tileset = gBattleEnvironmentTiles_Building,
+            .tilemap = gBattleEnvironmentTilemap_Building,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Plain,
         },
     },
     [BATTLE_ENVIRONMENT_SOARING] =
@@ -287,11 +287,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
         .background = {
-            .tileset = gBattleTerrainTiles_Building,
-            .tilemap = gBattleTerrainTilemap_Building,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Link
+            .tileset = gBattleEnvironmentTiles_Building,
+            .tilemap = gBattleEnvironmentTilemap_Building,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Link
         }
     },
     [BATTLE_ENVIRONMENT_GYM] =
@@ -301,11 +301,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
         .background = {
-            .tileset = gBattleTerrainTiles_Building,
-            .tilemap = gBattleTerrainTilemap_Building,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Gym
+            .tileset = gBattleEnvironmentTiles_Building,
+            .tilemap = gBattleEnvironmentTilemap_Building,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Gym
         }
     },
     [BATTLE_ENVIRONMENT_LEADER] =
@@ -315,11 +315,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
         .background = {
-            .tileset = gBattleTerrainTiles_Building,
-            .tilemap = gBattleTerrainTilemap_Building,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Leader
+            .tileset = gBattleEnvironmentTiles_Building,
+            .tilemap = gBattleEnvironmentTilemap_Building,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Leader
         }
     },
     [BATTLE_ENVIRONMENT_INDOOR_2] =
@@ -329,11 +329,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
         .background = {
-            .tileset = gBattleTerrainTiles_Indoor,
-            .tilemap = gBattleTerrainTilemap_Indoor,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Indoor2
+            .tileset = gBattleEnvironmentTiles_Indoor,
+            .tilemap = gBattleEnvironmentTilemap_Indoor,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Indoor2
         }
     },
     [BATTLE_ENVIRONMENT_INDOOR_1] =
@@ -343,11 +343,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
         .background = {
-            .tileset = gBattleTerrainTiles_Indoor,
-            .tilemap = gBattleTerrainTilemap_Indoor,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Indoor1
+            .tileset = gBattleEnvironmentTiles_Indoor,
+            .tilemap = gBattleEnvironmentTilemap_Indoor,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Indoor1
         }
     },
     [BATTLE_ENVIRONMENT_LORELEI] =
@@ -357,11 +357,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
         .background = {
-            .tileset = gBattleTerrainTiles_Indoor,
-            .tilemap = gBattleTerrainTilemap_Indoor,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Lorelei
+            .tileset = gBattleEnvironmentTiles_Indoor,
+            .tilemap = gBattleEnvironmentTilemap_Indoor,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Lorelei
         }
     },
     [BATTLE_ENVIRONMENT_BRUNO] =
@@ -371,11 +371,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
         .background = {
-            .tileset = gBattleTerrainTiles_Indoor,
-            .tilemap = gBattleTerrainTilemap_Indoor,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Bruno
+            .tileset = gBattleEnvironmentTiles_Indoor,
+            .tilemap = gBattleEnvironmentTilemap_Indoor,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Bruno
         }
     },
     [BATTLE_ENVIRONMENT_AGATHA] =
@@ -385,11 +385,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
         .background = {
-            .tileset = gBattleTerrainTiles_Indoor,
-            .tilemap = gBattleTerrainTilemap_Indoor,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Agatha
+            .tileset = gBattleEnvironmentTiles_Indoor,
+            .tilemap = gBattleEnvironmentTilemap_Indoor,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Agatha
         }
     },
     [BATTLE_ENVIRONMENT_LANCE] =
@@ -399,11 +399,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
         .background = {
-            .tileset = gBattleTerrainTiles_Indoor,
-            .tilemap = gBattleTerrainTilemap_Indoor,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Lance
+            .tileset = gBattleEnvironmentTiles_Indoor,
+            .tilemap = gBattleEnvironmentTilemap_Indoor,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Lance
         }
     },
     [BATTLE_ENVIRONMENT_CHAMPION] =
@@ -413,11 +413,11 @@ const struct BattleTerrain gBattleTerrainInfo[BATTLE_ENVIRONMENT_COUNT] =
         .secretPowerEffect = MOVE_EFFECT_PARALYSIS,
         .camouflageType = TYPE_NORMAL,
         .background = {
-            .tileset = gBattleTerrainTiles_Indoor,
-            .tilemap = gBattleTerrainTilemap_Indoor,
-            .entryTileset = gBattleTerrainAnimTiles_Building,
-            .entryTilemap = gBattleTerrainAnimTilemap_Building,
-            .palette = gBattleTerrainPalette_Champion
+            .tileset = gBattleEnvironmentTiles_Indoor,
+            .tilemap = gBattleEnvironmentTilemap_Indoor,
+            .entryTileset = gBattleEnvironmentAnimTiles_Building,
+            .entryTilemap = gBattleEnvironmentAnimTilemap_Building,
+            .palette = gBattleEnvironmentPalette_Champion
         }
     }
 };

@@ -476,6 +476,13 @@ void AnimRockFragment(struct Sprite *sprite)
 }
 
 // Swirls particle in vortex. Used for moves like Fire Spin or Sand Tomb
+// args[0] - initial x offset
+// args[1] - initial y offset
+// args[2] - y increment
+// args[3] - duration
+// args[4] - increments some sin parameter
+// args[5] - fixed sin parameter
+// args[6] - attacker or target
 void AnimParticleInVortex(struct Sprite *sprite)
 {
     if (IsDoubleBattle()

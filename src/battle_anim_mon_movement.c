@@ -1173,6 +1173,11 @@ void SetupShakeBattlerBasedOnMovePowerOrDmg(u8 taskId, u8 animBattlerId)
     gTasks[taskId].data[2] = gBattleAnimArgs[2];
 }
 
+// args[0] - 0 if scale on move power, 1 if scale on move damage
+// args[1] - delay before starting anim
+// args[2] - duration of anim (after anim starts from above counter)
+// args[3] - 1 if do horizontal shake 
+// args[4] - 1 if do vertical shake
 void AnimTask_ShakeTargetPartnerBasedOnMovePowerOrDmg(u8 taskId)
 {
     SetupShakeBattlerBasedOnMovePowerOrDmg(taskId, ANIM_DEF_PARTNER);

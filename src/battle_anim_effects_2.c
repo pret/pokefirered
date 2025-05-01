@@ -3130,6 +3130,8 @@ static void AnimHealBellMusicNote(struct Sprite *sprite)
     SetMusicNotePalette(sprite, gBattleAnimArgs[5], gBattleAnimArgs[6]);
 }
 
+// args[0] - initial x offset
+// args[1] - initial y offset
 void AnimMagentaHeart(struct Sprite *sprite)
 {
     if (++sprite->data[0] == 1)

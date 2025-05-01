@@ -8574,12 +8574,12 @@ void AnimTask_GetTimeOfDay(u8 taskId)
 
 void AnimTask_GetLycanrocForm(u8 taskId)
 {
-    if (GetMonData(GetIllusionMonPtr(gBattleAnimAttacker), MON_DATA_SPECIES) == SPECIES_LYCANROC_MIDNIGHT)
-        gBattleAnimArgs[0] = 1;
-    else
-        gBattleAnimArgs[0] = 0;
-
     gBattleAnimArgs[0] = 0;
+    if (gBattleMons[gBattleAnimAttacker].species == SPECIES_LYCANROC_MIDNIGHT)
+        gBattleAnimArgs[0] = 1;
+    else if (gBattleMons[gBattleAnimAttacker].species == SPECIES_LYCANROC_DUSK)
+        gBattleAnimArgs[0] = 2;
+
     DestroyAnimVisualTask(taskId);
 }
 

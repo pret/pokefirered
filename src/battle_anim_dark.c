@@ -932,9 +932,7 @@ void AnimTask_MetallicShine(u8 taskId)
     }
 
     if (IsContest())
-    {
-        species = SPECIES_NONE; // species = gContestResources->moveAnim->species;
-    }
+        species = 0; // gContestResources->moveAnim->species;
     else
         species = GetMonData(GetPartyBattlerData(gBattleAnimAttacker), MON_DATA_SPECIES);
 

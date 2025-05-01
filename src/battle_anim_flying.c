@@ -1027,6 +1027,10 @@ void AnimBounceBallLand(struct Sprite *sprite)
     }
 }
 
+// args[0] - initial x offset
+// args[1] - initial y offset
+// args[2] - initial delay before anim
+// args[3] - quadratic delta to sprite y
 static void AnimDiveBall(struct Sprite *sprite)
 {
     InitSpritePosToAnimAttacker(sprite, TRUE);
@@ -1066,6 +1070,7 @@ static void AnimDiveBall_Step2(struct Sprite *sprite)
         DestroyAnimSprite(sprite);
 }
 
+// args[0] - attacker or target
 static void AnimDiveWaterSplash(struct Sprite *sprite)
 {
     u32 matrixNum;

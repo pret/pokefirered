@@ -538,7 +538,6 @@ struct PokemonStorageSystemData
     u16 displayMonPalOffset;
     u16 *displayMonTilePtr;
     struct Sprite *displayMonSprite;
-    u16 displayMonPalBuffer[0x20];
     u8 ALIGNED(4) tileBuffer[MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
     u8 ALIGNED(4) itemIconBuffer[0x200];
     u8 wallpaperBgTilemapBuffer[0x1000];
@@ -748,7 +747,7 @@ static bool32 IsItemIconAtPosition(u8 cursorArea, u8 cursorPos);
 static u8 GetNewItemIconIdx(void);
 static u8 GetItemIconIdxByPosition(u8 cursorArea, u8 cursorPos);
 static void SetItemIconPosition(u8 id, u8 cursorArea, u8 cursorPos);
-static void LoadItemIconGfx(u8 id, const u32 * tiles, const u32 * pal);
+static void LoadItemIconGfx(u8 id, const u32 * tiles, const u16 * pal);
 static void SetItemIconAffineAnim(u8 id, u8 affineAnimNo);
 static void SetItemIconCallback(u8 id, u8 command, u8 cursorArea, u8 cursorPos);
 static void SetItemIconActive(u8 id, bool8 show);
@@ -3660,13 +3659,11 @@ static void CreateDisplayMonSprite(void)
     u8 palSlot;
     u8 spriteId;
     struct SpriteSheet sheet = {gStorage->tileBuffer, MON_PIC_SIZE, GFXTAG_DISPLAY_MON};
-    struct SpritePalette palette = {gStorage->displayMonPalBuffer, PALTAG_DISPLAY_MON};
+    struct SpritePalette palette = {gStorage->displayMonPalette, PALTAG_DISPLAY_MON};
     struct SpriteTemplate template = sSpriteTemplate_DisplayMon;
 
     for (i = 0; i < MON_PIC_SIZE; i++)
         gStorage->tileBuffer[i] = 0;
-    for (i = 0; i < 0x10; i++)
-        gStorage->displayMonPalBuffer[i] = 0;
 
     gStorage->displayMonSprite = NULL;
 
@@ -3704,9 +3701,8 @@ static void LoadDisplayMonGfx(u16 species, u32 personality)
     if (species != SPECIES_NONE)
     {
         HandleLoadSpecialPokePic(TRUE, gStorage->tileBuffer, species, personality);
-        LZ77UnCompWram(gStorage->displayMonPalette, gStorage->displayMonPalBuffer);
         CpuCopy32(gStorage->tileBuffer, gStorage->displayMonTilePtr, 0x800);
-        LoadPalette(gStorage->displayMonPalBuffer, gStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
+        LoadPalette(gStorage->displayMonPalette, gStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
         gStorage->displayMonSprite->invisible = FALSE;
     }
     else
@@ -8347,7 +8343,7 @@ static void TryLoadItemIconAtPos(u8 cursorArea, u8 cursorPos)
     if (heldItem != ITEM_NONE)
     {
         const u32 *tiles = GetItemIconPic(heldItem);
-        const u32 *pal = GetItemIconPalette(heldItem);
+        const u16 *pal = GetItemIconPalette(heldItem);
         u8 id = GetNewItemIconIdx();
 
         SetItemIconPosition(id, cursorArea, cursorPos);
@@ -8399,7 +8395,7 @@ static void Item_FromMonToMoving(u8 cursorArea, u8 cursorPos)
 static void InitItemIconInCursor(u16 item)
 {
     const u32 *tiles = GetItemIconPic(item);
-    const u32 *pal = GetItemIconPalette(item);
+    const u16 *pal = GetItemIconPalette(item);
     u8 id = GetNewItemIconIdx();
 
     LoadItemIconGfx(id, tiles, pal);
@@ -8651,7 +8647,7 @@ static void SetItemIconPosition(u8 id, u8 cursorArea, u8 cursorPos)
     gStorage->itemIcons[id].cursorPos = cursorPos;
 }
 
-static void LoadItemIconGfx(u8 id, const u32 *itemTiles, const u32 *itemPal)
+static void LoadItemIconGfx(u8 id, const u32 *itemTiles, const u16 *itemPal)
 {
     s32 i;
 
@@ -8664,8 +8660,7 @@ static void LoadItemIconGfx(u8 id, const u32 *itemTiles, const u32 *itemPal)
         CpuFastCopy(gStorage->tileBuffer + (i * 0x60), gStorage->itemIconBuffer + (i * 0x80), 0x60);
 
     CpuFastCopy(gStorage->itemIconBuffer, gStorage->itemIcons[id].tiles, 0x200);
-    LZ77UnCompWram(itemPal, gStorage->itemIconBuffer);
-    LoadPalette(gStorage->itemIconBuffer, gStorage->itemIcons[id].palIndex, PLTT_SIZE_4BPP);
+    LoadPalette(itemPal, gStorage->itemIcons[id].palIndex, PLTT_SIZE_4BPP);
 }
 
 static void SetItemIconAffineAnim(u8 id, u8 animNum)

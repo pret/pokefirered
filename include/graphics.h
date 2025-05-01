@@ -2803,6 +2803,7 @@ extern const u16 gTMCaseMenu_Female_Pal[];
 extern const u32 gTMCaseDisc_Gfx[];
 extern const u16 gTMCaseDiscTypes1_Pal[];
 extern const u16 gTMCaseDiscTypes2_Pal[];
+extern const u16 gTMCaseDiscTypes_Pal[][256];
 extern const u8 gTMCaseHM_Gfx[];
 
 extern const u16 gStandardMenuPalette[];

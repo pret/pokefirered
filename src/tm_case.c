@@ -114,7 +114,6 @@ static EWRAM_DATA struct {
 static EWRAM_DATA void *sTilemapBuffer = NULL;
 static EWRAM_DATA struct ListMenuItem * sListMenuItemsBuffer = NULL;
 static EWRAM_DATA u8 (* sListMenuStringsBuffer)[29] = NULL;
-static EWRAM_DATA u16 * sTMSpritePaletteBuffer = NULL;
 
 static void CB2_SetUpTMCaseUI_Blocking(void);
 static bool8 DoSetUpTMCaseUI(void);
@@ -176,7 +175,6 @@ static void TintDiscpriteByType(u8 type);
 static void SetDiscSpritePosition(struct Sprite *sprite, u8 tmIdx);
 static void SwapDisc(u8 spriteId, u16 itemId);
 static void SpriteCB_SwapDisc(struct Sprite *sprite);
-static void LoadDiscTypePalettes(void);
 
 static const struct BgTemplate sBGTemplates[] = {
     {
@@ -571,7 +569,6 @@ static void ResetBufferPointers_NoFree(void)
     sTilemapBuffer = NULL;
     sListMenuItemsBuffer = NULL;
     sListMenuStringsBuffer = NULL;
-    sTMSpritePaletteBuffer = NULL;
 }
 
 static void LoadBGTemplates(void)
@@ -624,7 +621,6 @@ static bool8 HandleLoadTMCaseGraphicsAndPalettes(void)
         sTMCaseDynamicResources->seqId++;
         break;
     default:
-        LoadDiscTypePalettes();
         sTMCaseDynamicResources->seqId = 0;
         return TRUE;
     }
@@ -866,8 +862,6 @@ static void DestroyTMCaseBuffers(void)
         Free(sListMenuItemsBuffer);
     if (sListMenuStringsBuffer != NULL)
         Free(sListMenuStringsBuffer);
-    if (sTMSpritePaletteBuffer != NULL)
-        Free(sTMSpritePaletteBuffer);
     FreeAllWindowBuffers();
 }
 
@@ -1652,10 +1646,15 @@ static void SetDiscSpriteAnim(struct Sprite *sprite, u8 tmIdx)
         StartSpriteAnim(sprite, ANIM_TM);
 }
 
+#define NUM_TYPES_PER_PALETTE 16
+
 static void TintDiscpriteByType(u8 type)
 {
     u8 palOffset = PLTT_ID(IndexOfSpritePaletteTag(TAG_DISC));
-    LoadPalette(sTMSpritePaletteBuffer + sTMSpritePaletteOffsetByType[type], OBJ_PLTT_OFFSET + palOffset, PLTT_SIZE_4BPP);
+    u32 palTypeIndex = sTMSpritePaletteOffsetByType[type] / (NUM_TYPES_PER_PALETTE * PLTT_SIZE_4BPP);
+    u32 palTypeOffset = sTMSpritePaletteOffsetByType[type] % (NUM_TYPES_PER_PALETTE * PLTT_SIZE_4BPP);
+
+    LoadPalette(&gTMCaseDiscTypes_Pal[palTypeIndex][palTypeOffset], OBJ_PLTT_OFFSET + palOffset, PLTT_SIZE_4BPP);
     if (sTMCaseStaticResources.menuType == TMCASE_POKEDUDE)
         BlendPalettes(1 << (16 + palOffset), 4, RGB_BLACK);
 }
@@ -1725,19 +1724,4 @@ static void SpriteCB_SwapDisc(struct Sprite *sprite)
         else
             sprite->y2 -= DISC_Y_MOVE;
     }
-}
-
-// - 1 excludes TYPE_MYSTERY
-#define NUM_DISC_COLORS ((NUMBER_OF_MON_TYPES - 1) * 16)
-
-static void LoadDiscTypePalettes(void)
-{
-    struct SpritePalette spritePalette;
-
-    sTMSpritePaletteBuffer = Alloc(NUM_DISC_COLORS * sizeof(u16));
-    LZDecompressWram(gTMCaseDiscTypes1_Pal, sTMSpritePaletteBuffer); // Decompress the first 16
-    LZDecompressWram(gTMCaseDiscTypes2_Pal, sTMSpritePaletteBuffer + 0x100); // Decompress the rest (Only 17 total, this is just Dragon type)
-    spritePalette.data = sTMSpritePaletteBuffer + NUM_DISC_COLORS;
-    spritePalette.tag = TAG_DISC;
-    LoadSpritePalette(&spritePalette);
 }

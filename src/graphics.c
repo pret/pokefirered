@@ -1187,6 +1187,10 @@ const u16 gTMCaseMenu_Female_Pal[] = INCBIN_U16("graphics/tm_case/menu_female.gb
 const u32 gTMCaseDisc_Gfx[] = INCBIN_U32("graphics/tm_case/disc.4bpp.lz");
 const u16 gTMCaseDiscTypes1_Pal[] = INCBIN_U16("graphics/tm_case/disc_types_1.gbapal");
 const u16 gTMCaseDiscTypes2_Pal[] = INCBIN_U16("graphics/tm_case/disc_types_2.gbapal");
+const u16 gTMCaseDiscTypes_Pal[][256] = {
+    INCBIN_U16("graphics/tm_case/disc_types_1.gbapal"),
+    INCBIN_U16("graphics/tm_case/disc_types_2.gbapal"),
+};
 
 const u8 gItemPcTiles[] = INCBIN_U8("graphics/item_pc/bg.4bpp.lz");
 const u16 gItemPcBgPals[] = INCBIN_U16("graphics/item_pc/bg.gbapal");

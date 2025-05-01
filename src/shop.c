@@ -609,19 +609,14 @@ static void BuyMenuInitBgs(void)
 
 static void BuyMenuDecompressBgGraphics(void)
 {
-    u16 *pal;
-
     DecompressAndCopyTileDataToVram(1, gBuyMenuFrame_Gfx, 0x480, 0x3DC, 0);
     if ((sShopData.martType) != MART_TYPE_TMHM)
         LZDecompressWram(gBuyMenuFrame_Tilemap, gShopTilemapBuffer1);
     else
         LZDecompressWram(gBuyMenuFrame_TmHmTilemap, gShopTilemapBuffer1);
 
-    pal = Alloc(2 * PLTT_SIZE_4BPP);
-    LZDecompressWram(gBuyMenuFrame_Pal, pal);
-    LoadPalette(&pal[0 * 16], BG_PLTT_ID(11), PLTT_SIZE_4BPP);
-    LoadPalette(&pal[1 * 16], BG_PLTT_ID(6), PLTT_SIZE_4BPP);
-    Free(pal);
+    LoadPalette(&gBuyMenuFrame_Pal[0 * 16], BG_PLTT_ID(11), PLTT_SIZE_4BPP);
+    LoadPalette(&gBuyMenuFrame_Pal[1 * 16], BG_PLTT_ID(6), PLTT_SIZE_4BPP);
 }
 
 static void BuyMenuInitWindows(bool32 isSellingTM)

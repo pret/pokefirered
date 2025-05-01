@@ -45,13 +45,6 @@ int main(int argc, char *argv[])
         return "//\n// DO NOT MODIFY THIS FILE! It is auto-generated from " + jsonfilepath +" and Inja template " + templateFilepath + "\n//\n";
     });
 
-    env.add_callback("contains", 2, [](Arguments& args) {
-        string word = args.at(0)->get<string>();
-        string check = args.at(1)->get<string>();
-
-        return word.find(check) != std::string::npos;
-    });
-
     env.add_callback("subtract", 2, [](Arguments& args) {
         int minuend = args.at(0)->get<int>();
         int subtrahend = args.at(1)->get<int>();

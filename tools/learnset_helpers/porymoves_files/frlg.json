@@ -4694,7 +4694,7 @@
       "MOVE_REVENGE",
       "MOVE_REVERSAL",
       "MOVE_ROCK_SLIDE",
-      "MOVE_SMELLING_SALT"
+      "MOVE_SMELLING_SALTS"
     ],
     "TutorMoves": [
       "MOVE_BODY_SLAM",
@@ -4807,7 +4807,7 @@
       "MOVE_REVENGE",
       "MOVE_REVERSAL",
       "MOVE_ROCK_SLIDE",
-      "MOVE_SMELLING_SALT"
+      "MOVE_SMELLING_SALTS"
     ],
     "TutorMoves": [
       "MOVE_BODY_SLAM",
@@ -5582,7 +5582,7 @@
       "MOVE_MEDITATE",
       "MOVE_ROCK_SLIDE",
       "MOVE_ROLLING_KICK",
-      "MOVE_SMELLING_SALT"
+      "MOVE_SMELLING_SALTS"
     ],
     "TutorMoves": [
       "MOVE_BODY_SLAM",
@@ -5685,7 +5685,7 @@
       "MOVE_MEDITATE",
       "MOVE_ROCK_SLIDE",
       "MOVE_ROLLING_KICK",
-      "MOVE_SMELLING_SALT"
+      "MOVE_SMELLING_SALTS"
     ],
     "TutorMoves": [
       "MOVE_BODY_SLAM",
@@ -5789,7 +5789,7 @@
       "MOVE_MEDITATE",
       "MOVE_ROCK_SLIDE",
       "MOVE_ROLLING_KICK",
-      "MOVE_SMELLING_SALT"
+      "MOVE_SMELLING_SALTS"
     ],
     "TutorMoves": [
       "MOVE_BODY_SLAM",
@@ -9379,7 +9379,7 @@
       "MOVE_CURSE",
       "MOVE_MAGNITUDE",
       "MOVE_SLEEP_TALK",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_SNORE",
       "MOVE_SUBSTITUTE"
     ],
@@ -18107,7 +18107,7 @@
       "MOVE_METRONOME",
       "MOVE_PRESENT",
       "MOVE_REFLECT",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_SNORE"
     ],
     "TutorMoves": [
@@ -18212,7 +18212,7 @@
       "MOVE_METRONOME",
       "MOVE_PRESENT",
       "MOVE_REFLECT",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_SNORE"
     ],
     "TutorMoves": [
@@ -22086,7 +22086,7 @@
       "MOVE_ENDURE",
       "MOVE_REVERSAL",
       "MOVE_ROCK_SLIDE",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_SWAGGER"
     ],
     "TutorMoves": [
@@ -22195,7 +22195,7 @@
       "MOVE_ENDURE",
       "MOVE_REVERSAL",
       "MOVE_ROCK_SLIDE",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_SWAGGER"
     ],
     "TutorMoves": [
@@ -22315,7 +22315,7 @@
       "MOVE_ENDURE",
       "MOVE_REVERSAL",
       "MOVE_ROCK_SLIDE",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_SWAGGER"
     ],
     "TutorMoves": [
@@ -25387,7 +25387,7 @@
     ],
     "EggMoves": [
       "MOVE_EXTRASENSORY",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_SNORE",
       "MOVE_SWAGGER",
       "MOVE_TAKE_DOWN"
@@ -25495,7 +25495,7 @@
     ],
     "EggMoves": [
       "MOVE_EXTRASENSORY",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_SNORE",
       "MOVE_SWAGGER",
       "MOVE_TAKE_DOWN"
@@ -25609,7 +25609,7 @@
     ],
     "EggMoves": [
       "MOVE_EXTRASENSORY",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_SNORE",
       "MOVE_SWAGGER",
       "MOVE_TAKE_DOWN"
@@ -25662,7 +25662,7 @@
       },
       {
         "Level": 31,
-        "Move": "MOVE_SMELLING_SALT"
+        "Move": "MOVE_SMELLING_SALTS"
       },
       {
         "Level": 37,
@@ -25772,7 +25772,7 @@
       },
       {
         "Level": 33,
-        "Move": "MOVE_SMELLING_SALT"
+        "Move": "MOVE_SMELLING_SALTS"
       },
       {
         "Level": 40,
@@ -26446,7 +26446,7 @@
     "EggMoves": [
       "MOVE_BODY_SLAM",
       "MOVE_ENDEAVOR",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_STOMP"
     ],
     "TutorMoves": [
@@ -26550,7 +26550,7 @@
     "EggMoves": [
       "MOVE_BODY_SLAM",
       "MOVE_ENDEAVOR",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_STOMP"
     ],
     "TutorMoves": [
@@ -26667,7 +26667,7 @@
     "EggMoves": [
       "MOVE_BODY_SLAM",
       "MOVE_ENDEAVOR",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_STOMP"
     ],
     "TutorMoves": [
@@ -28659,7 +28659,7 @@
       "MOVE_DISABLE",
       "MOVE_ENCORE",
       "MOVE_ROCK_SLIDE",
-      "MOVE_SMELLING_SALT",
+      "MOVE_SMELLING_SALTS",
       "MOVE_TRICK",
       "MOVE_WISH"
     ],

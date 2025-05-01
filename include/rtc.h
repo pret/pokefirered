@@ -100,7 +100,10 @@ enum TimeOfDay {
     TIME_DAY,
     TIME_EVENING,
     TIME_NIGHT,
+    TIMES_OF_DAY_COUNT,
 };
+
+#define TIME_OF_DAY_DEFAULT    0
 
 enum Season {
     SEASON_SPRING,

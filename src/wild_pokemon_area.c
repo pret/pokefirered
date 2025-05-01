@@ -6,6 +6,7 @@
 #include "overworld.h"
 #include "pokedex.h"
 #include "pokedex_area_markers.h"
+#include "rtc.h"
 #include "constants/region_map_sections.h"
 #include "constants/maps.h"
 
@@ -17,7 +18,7 @@ struct RoamerPair
 
 static s32 GetRoamerIndex(u16 species);
 static s32 GetRoamerPokedexAreaMarkers(u16 species, struct Subsprite * subsprites);
-static bool32 IsSpeciesOnMap(const struct WildPokemonHeader * data, s32 species);
+static bool32 IsSpeciesOnMap(const struct WildPokemonHeader * data, u32 headerId, s32 species);
 static bool32 IsSpeciesInEncounterTable(const struct WildPokemonInfo * pokemon, s32 species, s32 count);
 static u16 GetMapSecIdFromWildMonHeader(const struct WildPokemonHeader * header);
 static bool32 FindDexAreaByMapSec(u16 mapSecId, const u16 (*lut)[2], s32 count, s32 * lutIdx_p, u16 * tableIdx_p);
@@ -190,7 +191,7 @@ s32 GetSpeciesPokedexAreaMarkers(u16 species, struct Subsprite * subsprites)
             if (alteringCaveNum != alteringCaveCount - 1)
                 continue;
         }
-        if (IsSpeciesOnMap(&gWildMonHeaders[i], species))
+        if (IsSpeciesOnMap(&gWildMonHeaders[i], i, species))
         {
             // Search for all dex areas associated with this MAPSEC.
             // In the vanilla game each MAPSEC only has at most one DEX_AREA.
@@ -259,21 +260,22 @@ static s32 GetRoamerPokedexAreaMarkers(u16 species, struct Subsprite * subsprite
     return 0;
 }
 
-static bool32 IsSpeciesOnMap(const struct WildPokemonHeader * data, s32 species)
+static bool32 IsSpeciesOnMap(const struct WildPokemonHeader * data, u32 headerId, s32 species)
 {
-    if (IsSpeciesInEncounterTable(data->landMonsInfo, species, LAND_WILD_COUNT))
+    enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
+    if (IsSpeciesInEncounterTable(data->encounterTypes[timeOfDay].landMonsInfo, species, LAND_WILD_COUNT))
         return TRUE;
-    if (IsSpeciesInEncounterTable(data->waterMonsInfo, species, WATER_WILD_COUNT))
+    if (IsSpeciesInEncounterTable(data->encounterTypes[timeOfDay].waterMonsInfo, species, WATER_WILD_COUNT))
         return TRUE;
 // When searching the fishing encounters, this incorrectly uses the size of the land encounters.
 // As a result it's reading out of bounds of the fishing encounters tables.
 #ifdef BUGFIX
-    if (IsSpeciesInEncounterTable(data->fishingMonsInfo, species, FISH_WILD_COUNT))
+    if (IsSpeciesInEncounterTable(data->encounterTypes[timeOfDay].fishingMonsInfo, species, FISH_WILD_COUNT))
 #else
-    if (IsSpeciesInEncounterTable(data->fishingMonsInfo, species, LAND_WILD_COUNT))
+    if (IsSpeciesInEncounterTable(data->encounterTypes[timeOfDay].fishingMonsInfo, species, LAND_WILD_COUNT))
 #endif
         return TRUE;
-    if (IsSpeciesInEncounterTable(data->rockSmashMonsInfo, species, ROCK_WILD_COUNT))
+    if (IsSpeciesInEncounterTable(data->encounterTypes[timeOfDay].rockSmashMonsInfo, species, ROCK_WILD_COUNT))
         return TRUE;
 
     return FALSE;

@@ -298,7 +298,7 @@
 #define ANIM_TAG_SLASH_2                    (ANIM_SPRITES_START + 286)
 #define ANIM_TAG_WHIP_HIT                   (ANIM_SPRITES_START + 287)
 #define ANIM_TAG_BLUE_RING_2                (ANIM_SPRITES_START + 288)
-// new particles
+//new particles
 #define ANIM_TAG_WHITE_STREAK               (ANIM_SPRITES_START + 289)
 #define ANIM_TAG_PURPLE_JAB                 (ANIM_SPRITES_START + 290)
 #define ANIM_TAG_TOXIC_SPIKES               (ANIM_SPRITES_START + 291)
@@ -421,10 +421,10 @@
 #define ANIM_TAG_SALT_PARTICLE              (ANIM_SPRITES_START + 407)
 
 // battlers
-#define ANIM_ATTACKER    0
-#define ANIM_TARGET      1
-#define ANIM_ATK_PARTNER 2
-#define ANIM_DEF_PARTNER 3
+#define ANIM_ATTACKER         0
+#define ANIM_TARGET           1
+#define ANIM_ATK_PARTNER      2
+#define ANIM_DEF_PARTNER      3
 
 // Below are used by AnimTask_ShakeMon2 and AnimTask_SetGrayscaleOrOriginalPal
 #define ANIM_PLAYER_LEFT      (MAX_BATTLERS_COUNT + 0)
@@ -448,7 +448,7 @@
 #define SOUND_PAN_TARGET    63
 
 // move background ids
-#define BG_NONE 0 // the same as BG_DARK
+#define BG_NONE 0 // the same as BG_DARK but is unused
 #define BG_DARK 1
 #define BG_GHOST 2
 #define BG_PSYCHIC 3
@@ -506,9 +506,9 @@
 #define BG_BOLT_STRIKE 55
 #define BG_ZMOVE_ACTIVATE 56
 #define BG_TECTONIC_RAGE 57
-#define BG_BLUE_SKY_DAY 58
-#define BG_BLUE_SKY_AFTERNOON 59
-#define BG_BLUE_SKY_NIGHT 60
+#define BG_ROCK_FIELD_DAY 58
+#define BG_ROCK_FIELD_AFTERNOON 59
+#define BG_ROCK_FIELD_NIGHT 60
 #define BG_ZMOVE_MOUNTAIN 61
 #define BG_NEVERENDING_NIGHTMARE 62
 #define BG_WATER_PULSE 63
@@ -532,7 +532,7 @@
 #define BG_RAINBOW 81
 #define BG_SWAMP 82
 
-// table ids for general animations (gBattleAnims_General)
+// table ids for general animations (sBattleAnims_General)
 #define B_ANIM_STATS_CHANGE             0
 #define B_ANIM_SUBSTITUTE_FADE          1
 #define B_ANIM_SUBSTITUTE_APPEAR        2
@@ -620,7 +620,7 @@
 
 #define NUM_B_ANIMS_STATUS              9
 
-// Most tasks return a value to gBattleAnimArgs[7].
+// Tasks with return values often assign them to gBattleAnimArgs[7].
 #define ARG_RET_ID 7
 
 // For createsprite macro to use internally
@@ -664,50 +664,21 @@
 
 // Flags given to various functions to indicate which palettes to consider.
 // Handled by UnpackSelectedBattlePalettes
-#define F_PAL_BG          (1 << 0)
-#define F_PAL_ATTACKER    (1 << 1)
-#define F_PAL_TARGET      (1 << 2)
-#define F_PAL_ATK_PARTNER (1 << 3)
-#define F_PAL_DEF_PARTNER (1 << 4)
-#define F_PAL_ANIM_1      (1 << 5) // Palette set for GetBattleAnimBg1Data/GetBgDataForTransform. Only used (ineffectually?) by Aromatherapy.
-#define F_PAL_ANIM_2      (1 << 6) // Palette set for GetBattleAnimBgData/GetBgDataForTransform. Unused.
-#define F_PAL_ATK_SIDE    (F_PAL_ATTACKER | F_PAL_ATK_PARTNER)
-#define F_PAL_DEF_SIDE    (F_PAL_TARGET | F_PAL_DEF_PARTNER)
-#define F_PAL_BATTLERS    (F_PAL_ATK_SIDE | F_PAL_DEF_SIDE)
+#define F_PAL_BG                  (1 << 0)
+#define F_PAL_ATTACKER            (1 << 1)
+#define F_PAL_TARGET              (1 << 2)
+#define F_PAL_ATK_PARTNER         (1 << 3)
+#define F_PAL_DEF_PARTNER         (1 << 4)
+#define F_PAL_ANIM_1              (1 << 5) // Palette set for GetBattleAnimBg1Data/GetBgDataForTransform. Only used (ineffectually?) by Aromatherapy.
+#define F_PAL_ANIM_2              (1 << 6) // Palette set for GetBattleAnimBgData/GetBgDataForTransform. Unused.
+#define F_PAL_ATK_SIDE            (F_PAL_ATTACKER | F_PAL_ATK_PARTNER)
+#define F_PAL_DEF_SIDE            (F_PAL_TARGET | F_PAL_DEF_PARTNER)
+#define F_PAL_BATTLERS            (F_PAL_ATK_SIDE | F_PAL_DEF_SIDE)
 #define F_PAL_ADJACENT            (F_PAL_DEF_SIDE | F_PAL_ATK_PARTNER)
 #define F_PAL_ALL_BUT_DEF         (F_PAL_ATK_SIDE | F_PAL_DEF_PARTNER)
 #define F_PAL_ALL_BUT_ATK_PARTNER (F_PAL_ATTACKER | F_PAL_DEF_SIDE)
 // The below are only used by AnimTask_BlendBattleAnimPal to get battler sprite palettes by position rather than by role.
 // It's redundant with F_PAL_BATTLERS, because they're only ever used together to refer to all the battlers at once.
 #define F_PAL_BATTLERS_2  (1 << 7 | 1 << 8 | 1 << 9 | 1 << 10)
-
-// Battle mon back animations.
-// #define BACK_ANIM_NONE                         0x00
-// #define BACK_ANIM_H_SLIDE_QUICK                0x01
-// #define BACK_ANIM_H_SLIDE                      0x02
-// #define BACK_ANIM_H_SLIDE_WITH_V_COMPRESS_1    0x03
-// #define BACK_ANIM_H_SLIDE_WITH_V_COMPRESS_2    0x04
-// #define BACK_ANIM_SHRINK_GROW_1                0x05
-// #define BACK_ANIM_GROW_1                       0x06
-// #define BACK_ANIM_CIRCLE_MOVE_COUNTERCLOCKWISE 0x07
-// #define BACK_ANIM_HORIZONTAL_SHAKE             0x08
-// #define BACK_ANIM_VERTICAL_SHAKE               0x09
-// #define BACK_ANIM_V_SHAKE_WITH_H_SLIDE         0x0a
-// #define BACK_ANIM_VERTICAL_STRETCH             0x0b
-// #define BACK_ANIM_HORIZONTAL_STRETCH           0x0c
-// #define BACK_ANIM_GROW_2                       0x0d
-// #define BACK_ANIM_V_SHAKE_WITH_PAUSE           0x0e
-// #define BACK_ANIM_CIRCLE_MOVE_CLOCKWISE        0x0f
-// #define BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_SMALL  0x10
-// #define BACK_ANIM_CONCAVE_DOWN_ARC_SWAY_LARGE  0x11
-// #define BACK_ANIM_CONCAVE_UP_ARC_SWAY_LARGE    0x12
-// #define BACK_ANIM_DIP_RIGHT_SIDE               0x13
-// #define BACK_ANIM_SHRINK_GROW_2                0x14
-// #define BACK_ANIM_JOLT_RIGHT                   0x15
-// #define BACK_ANIM_FLASH_YELLOW_WITH_SHAKE      0x16
-// #define BACK_ANIM_FADE_RED_WITH_SHAKE          0x17
-// #define BACK_ANIM_FADE_GREEN_WITH_SHAKE        0x18
-// #define BACK_ANIM_FADE_BLUE_WITH_SHAKE         0x19
-
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H

@@ -19,7 +19,7 @@
 
 #define DEXNAV_CHAIN_MAX                100 // maximum chain value
 
-// hidden pokemon options - an approximation of values to due to lack of available data
+// hidden pokemon options - an approximation of values due to lack of available data
 #define HIDDEN_MON_STEP_COUNT       100  // Look for hidden pokemon every x steps
 #define HIDDEN_MON_SEARCH_RATE      25   // x% chance of finding hidden pokemon every x steps
 #define HIDDEN_MON_PROBABILTY       15   // x% chance of finding hidden mon compared to regular encounter data

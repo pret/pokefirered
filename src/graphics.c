@@ -1895,13 +1895,13 @@ const u32 gBattleAnimBgImage_ShatteredPsyche[] = INCBIN_U32("graphics/battle_ani
 const u16 gBattleAnimBgPalette_ShatteredPsyche[] = INCBIN_U16("graphics/battle_anims/backgrounds/shattered_psyche.gbapal");
 const u32 gBattleAnimBgTilemap_ShatteredPsyche[] = INCBIN_U32("graphics/battle_anims/backgrounds/shattered_psyche.bin.lz");
 
-const u32 gBattleAnimBgImage_SkyDay[] = INCBIN_U32("graphics/battle_anims/backgrounds/sky_day.4bpp.lz");
-const u16 gBattleAnimBgPalette_SkyDay[] = INCBIN_U16("graphics/battle_anims/backgrounds/sky_day.gbapal");
-const u32 gBattleAnimBgTilemap_SkyDay[] = INCBIN_U32("graphics/battle_anims/backgrounds/sky_day.bin.lz");
+const u32 gBattleAnimBgImage_RockField[] = INCBIN_U32("graphics/battle_anims/backgrounds/rock_field.4bpp.lz");
+const u16 gBattleAnimBgPalette_RockDay[] = INCBIN_U16("graphics/battle_anims/backgrounds/rock_day.gbapal");
+const u32 gBattleAnimBgTilemap_RockField[] = INCBIN_U32("graphics/battle_anims/backgrounds/rock_field.bin.lz");
 
-const u16 gBattleAnimBgPalette_SkyAfternoon[] = INCBIN_U16("graphics/battle_anims/backgrounds/sky_afternoon.gbapal");
+const u16 gBattleAnimBgPalette_RockAfternoon[] = INCBIN_U16("graphics/battle_anims/backgrounds/rock_afternoon.gbapal");
 
-const u16 gBattleAnimBgPalette_SkyNight[] = INCBIN_U16("graphics/battle_anims/backgrounds/sky_night.gbapal");
+const u16 gBattleAnimBgPalette_RockNight[] = INCBIN_U16("graphics/battle_anims/backgrounds/rock_night.gbapal");
 
 const u32 gBattleAnimBgImage_SnuggleForever[] = INCBIN_U32("graphics/battle_anims/backgrounds/snuggle_forever.4bpp.lz");
 const u16 gBattleAnimBgPalette_SnuggleForever[] = INCBIN_U16("graphics/battle_anims/backgrounds/snuggle_forever.gbapal");

@@ -376,14 +376,14 @@ static const struct {
     u8 mapScene;
     u8 battleTerrain;
 } sMapBattleSceneMapping[] = {
-    {MAP_BATTLE_SCENE_GYM,      BATTLE_TERRAIN_GYM},
-    {MAP_BATTLE_SCENE_INDOOR_1, BATTLE_TERRAIN_INDOOR_1},
-    {MAP_BATTLE_SCENE_INDOOR_2, BATTLE_TERRAIN_INDOOR_2},
-    {MAP_BATTLE_SCENE_LORELEI,  BATTLE_TERRAIN_LORELEI},
-    {MAP_BATTLE_SCENE_BRUNO,    BATTLE_TERRAIN_BRUNO},
-    {MAP_BATTLE_SCENE_AGATHA,   BATTLE_TERRAIN_AGATHA},
-    {MAP_BATTLE_SCENE_LANCE,    BATTLE_TERRAIN_LANCE},
-    {MAP_BATTLE_SCENE_LINK,     BATTLE_TERRAIN_LINK}
+    {MAP_BATTLE_SCENE_GYM,      BATTLE_ENVIRONMENT_GYM},
+    {MAP_BATTLE_SCENE_INDOOR_1, BATTLE_ENVIRONMENT_INDOOR_1},
+    {MAP_BATTLE_SCENE_INDOOR_2, BATTLE_ENVIRONMENT_INDOOR_2},
+    {MAP_BATTLE_SCENE_LORELEI,  BATTLE_ENVIRONMENT_LORELEI},
+    {MAP_BATTLE_SCENE_BRUNO,    BATTLE_ENVIRONMENT_BRUNO},
+    {MAP_BATTLE_SCENE_AGATHA,   BATTLE_ENVIRONMENT_AGATHA},
+    {MAP_BATTLE_SCENE_LANCE,    BATTLE_ENVIRONMENT_LANCE},
+    {MAP_BATTLE_SCENE_LINK,     BATTLE_ENVIRONMENT_LINK}
 };
 
 static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
@@ -394,12 +394,12 @@ static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
         if (mapBattleScene == sMapBattleSceneMapping[i].mapScene)
             return sMapBattleSceneMapping[i].battleTerrain;
     }
-    return BATTLE_TERRAIN_PLAIN;
+    return BATTLE_ENVIRONMENT_PLAIN;
 }
 
-static const void* const sSeasonBattleBackgrounds[BATTLE_TERRAIN_COUNT][SEASON_WINTER + 1] =
+static const void* const sSeasonBattleBackgrounds[BATTLE_ENVIRONMENT_COUNT][SEASON_WINTER + 1] =
 {
-    [BATTLE_TERRAIN_GRASS] = 
+    [BATTLE_ENVIRONMENT_GRASS] = 
     {
         [SEASON_SPRING] = &gBattleTerrainPalette_Grass,
         [SEASON_SUMMER] = &gBattleTerrainPalette_GrassSummer,
@@ -421,7 +421,7 @@ const void* GetBattleBackgroundPalette(u16 terrain)
 static void LoadBattleTerrainGfx(u16 terrain)
 {
     if (terrain >= NELEMS(gBattleTerrainInfo))
-        terrain = BATTLE_TERRAIN_PLAIN;
+        terrain = BATTLE_ENVIRONMENT_PLAIN;
     // Copy to bg3
     LZDecompressVram(gBattleTerrainInfo[terrain].background.tileset, (void *)BG_CHAR_ADDR(2));
     LZDecompressVram(gBattleTerrainInfo[terrain].background.tilemap, (void *)BG_SCREEN_ADDR(26));
@@ -431,7 +431,7 @@ static void LoadBattleTerrainGfx(u16 terrain)
 static void LoadBattleTerrainEntryGfx(u16 terrain)
 {
     if (terrain >= NELEMS(gBattleTerrainInfo))
-        terrain = BATTLE_TERRAIN_PLAIN;
+        terrain = BATTLE_ENVIRONMENT_PLAIN;
     // Copy to bg1
     LZDecompressVram(gBattleTerrainInfo[terrain].background.entryTileset, (void *)BG_CHAR_ADDR(1));
     LZDecompressVram(gBattleTerrainInfo[terrain].background.entryTilemap, (void *)BG_SCREEN_ADDR(28));
@@ -440,8 +440,8 @@ static void LoadBattleTerrainEntryGfx(u16 terrain)
 // Unused
 void GetBattleTerrainGfxPtrs(u8 terrain, const u32 **tilesPtr, const u32 **mapPtr, const u32 **palPtr)
 {
-    if (terrain > BATTLE_TERRAIN_PLAIN)
-        terrain = BATTLE_TERRAIN_PLAIN;
+    if (terrain > BATTLE_ENVIRONMENT_PLAIN)
+        terrain = BATTLE_ENVIRONMENT_PLAIN;
     *tilesPtr = gBattleTerrainInfo[terrain].background.tileset;
     *mapPtr = gBattleTerrainInfo[terrain].background.tilemap;
     *palPtr = gBattleTerrainInfo[terrain].background.palette;
@@ -780,27 +780,27 @@ void DrawBattleEntryBackground(void)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
     {
-        LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_GRASS);
+        LoadBattleTerrainEntryGfx(BATTLE_ENVIRONMENT_GRASS);
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK))
     {
-        LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
+        LoadBattleTerrainEntryGfx(BATTLE_ENVIRONMENT_BUILDING);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
     {
         switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES))
         {
         case SPECIES_GROUDON:
-            LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_CAVE);
+            LoadBattleTerrainEntryGfx(BATTLE_ENVIRONMENT_CAVE);
             break;
         case SPECIES_KYOGRE:
-            LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_WATER);
+            LoadBattleTerrainEntryGfx(BATTLE_ENVIRONMENT_WATER);
             break;
         default:
             if (GetCurrentMapBattleScene() == MAP_BATTLE_SCENE_NORMAL)
-                LoadBattleTerrainEntryGfx(gBattleTerrain);
+                LoadBattleTerrainEntryGfx(gBattleEnvironment);
             else
-                LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
+                LoadBattleTerrainEntryGfx(BATTLE_ENVIRONMENT_BUILDING);
             break;
         }
     }
@@ -811,23 +811,23 @@ void DrawBattleEntryBackground(void)
             u32 trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
             if (trainerClass == TRAINER_CLASS_LEADER)
             {
-                LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
+                LoadBattleTerrainEntryGfx(BATTLE_ENVIRONMENT_BUILDING);
                 return;
             }
             else if (trainerClass == TRAINER_CLASS_CHAMPION)
             {
-                LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
+                LoadBattleTerrainEntryGfx(BATTLE_ENVIRONMENT_BUILDING);
                 return;
             }
         }
 
         if (GetCurrentMapBattleScene() == MAP_BATTLE_SCENE_NORMAL)
         {
-            LoadBattleTerrainEntryGfx(gBattleTerrain);
+            LoadBattleTerrainEntryGfx(gBattleEnvironment);
         }
         else
         {
-            LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
+            LoadBattleTerrainEntryGfx(BATTLE_ENVIRONMENT_BUILDING);
         }
     }
 }
@@ -837,25 +837,25 @@ static u8 GetBattleTerrainOverride(void)
     u8 battleScene;
     if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK))
     {
-        return BATTLE_TERRAIN_LINK;
+        return BATTLE_ENVIRONMENT_LINK;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
     {
-        gBattleTerrain = BATTLE_TERRAIN_GRASS;
-        return BATTLE_TERRAIN_GRASS;
+        gBattleEnvironment = BATTLE_ENVIRONMENT_GRASS;
+        return BATTLE_ENVIRONMENT_GRASS;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         u32 trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
         if (trainerClass == TRAINER_CLASS_LEADER)
-            return BATTLE_TERRAIN_LEADER;
+            return BATTLE_ENVIRONMENT_LEADER;
         else if (trainerClass == TRAINER_CLASS_CHAMPION)
-            return BATTLE_TERRAIN_CHAMPION;
+            return BATTLE_ENVIRONMENT_CHAMPION;
     }
     battleScene = GetCurrentMapBattleScene();
     if (battleScene == MAP_BATTLE_SCENE_NORMAL)
     {
-        return gBattleTerrain;
+        return gBattleEnvironment;
     }
     return GetBattleTerrainByMapScene(battleScene);
 }

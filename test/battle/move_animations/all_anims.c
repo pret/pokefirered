@@ -222,7 +222,7 @@ static void SceneSingles(u32 move, struct BattlePokemon *mon)
     {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_POUND, mon);
     }
-    else if (gMovesInfo[move].effect == EFFECT_NATURE_POWER) // Recorded battles always use BATTLE_TERRAIN_BUILDING
+    else if (gMovesInfo[move].effect == EFFECT_NATURE_POWER) // Recorded battles always use BATTLE_ENVIRONMENT_BUILDING
     {
         ANIMATION(ANIM_TYPE_MOVE, B_NATURE_POWER_MOVES >= GEN_4 ? MOVE_TRI_ATTACK : MOVE_SWIFT, mon);
     }
@@ -354,7 +354,7 @@ static void DoublesScene(u32 move, struct BattlePokemon *attacker)
         ANIMATION(ANIM_TYPE_MOVE, MOVE_POUND, attacker);
     }
     else if (gMovesInfo[move].effect == EFFECT_NATURE_POWER)
-    { // Recorded battles always use BATTLE_TERRAIN_BUILDING
+    { // Recorded battles always use BATTLE_ENVIRONMENT_BUILDING
         ANIMATION(ANIM_TYPE_MOVE, B_NATURE_POWER_MOVES >= GEN_4 ? MOVE_TRI_ATTACK : MOVE_SWIFT, attacker);
     }
     else

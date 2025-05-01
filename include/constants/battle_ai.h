@@ -1,19 +1,6 @@
 #ifndef GUARD_CONSTANTS_BATTLE_AI_H
 #define GUARD_CONSTANTS_BATTLE_AI_H
 
-// battlers
-#define AI_TARGET 0
-#define AI_USER 1
-#define AI_TARGET_PARTNER 2
-#define AI_USER_PARTNER 3
-
-// get_type command
-#define AI_TYPE1_TARGET 0
-#define AI_TYPE1_USER 1
-#define AI_TYPE2_TARGET 2
-#define AI_TYPE2_USER 3
-#define AI_TYPE_MOVE 4
-
 // AI Flags. Most run specific functions to update score, new flags are used for internal logic in other scripts
 // See docs/ai_flags.md for more details.
 #define AI_FLAG_CHECK_BAD_MOVE              (1 << 0)  // AI will avoid using moves that are likely to fail or be ineffective in the current situation.

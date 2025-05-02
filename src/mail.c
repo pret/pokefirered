@@ -590,7 +590,7 @@ static bool8 DoInitMailView(void)
         gPaletteFade.bufferTransferDisabled = TRUE;
         break;
     case 17:
-        iconId = MailSpeciesToIconSpecies(sMailViewResources->mail->species);
+        iconId = GetIconSpeciesNoPersonality(sMailViewResources->mail->species);
         switch (sMailViewResources->monIconType)
         {
         case MAIL_ICON_BEAD:
@@ -720,8 +720,8 @@ static void ShowMailCB_Teardown(void)
         {
         case MAIL_ICON_BEAD:
         case MAIL_ICON_DREAM:
-            FreeMonIconPalette(MailSpeciesToIconSpecies(sMailViewResources->mail->species));
-            DestroyMonIcon(&gSprites[sMailViewResources->monIconSpriteId]);
+            FreeMonIconPalette(GetIconSpeciesNoPersonality(sMailViewResources->mail->species));
+            FreeAndDestroyMonIconSprite(&gSprites[sMailViewResources->monIconSpriteId]);
             break;
         }
         *sMailViewResources = (struct MailViewResources){};

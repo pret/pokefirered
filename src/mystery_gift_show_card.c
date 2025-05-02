@@ -464,7 +464,7 @@ static void CreateCardSprites(void)
     // Create icon sprite
     if (sWonderCardData->cardMetadata.iconSpecies != SPECIES_NONE)
     {
-        sWonderCardData->monIconSpriteId = CreateMonIconNoPersonality(MailSpeciesToIconSpecies(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0);
+        sWonderCardData->monIconSpriteId = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.iconSpecies), SpriteCallbackDummy, 220, 20, 0);
         gSprites[sWonderCardData->monIconSpriteId].oam.priority = 2;
     }
     
@@ -480,7 +480,7 @@ static void CreateCardSprites(void)
             sWonderCardData->stampSpriteIds[i][0] = CreateSprite(&sSpriteTemplate_StampShadow, 216 - 32 * i, 0x90, 8);
             if (sWonderCardData->cardMetadata.stampData[0][i] != 0)
             {
-                sWonderCardData->stampSpriteIds[i][1] = CreateMonIconNoPersonality(MailSpeciesToIconSpecies(sWonderCardData->cardMetadata.stampData[0][i]), SpriteCallbackDummy, 216 - 32 * i, 136, 0);
+                sWonderCardData->stampSpriteIds[i][1] = CreateMonIconNoPersonality(GetIconSpeciesNoPersonality(sWonderCardData->cardMetadata.stampData[0][i]), SpriteCallbackDummy, 216 - 32 * i, 136, 0);
                 gSprites[sWonderCardData->stampSpriteIds[i][1]].oam.priority = 2;
             }
         }
@@ -493,7 +493,7 @@ static void DestroyCardSprites(void)
     
     // Destroy icon sprite
     if (sWonderCardData->monIconSpriteId != SPRITE_NONE)
-        DestroyMonIcon(&gSprites[sWonderCardData->monIconSpriteId]);
+        FreeAndDestroyMonIconSprite(&gSprites[sWonderCardData->monIconSpriteId]);
     
     // Destroy stamp sprites
     if (sWonderCardData->card.maxStamps != 0 && sWonderCardData->card.type == CARD_TYPE_STAMP)
@@ -508,7 +508,7 @@ static void DestroyCardSprites(void)
             #else
                 if (sWonderCardData->stampSpriteIds[i][0] != SPRITE_NONE)
             #endif
-                    DestroyMonIcon(&gSprites[sWonderCardData->stampSpriteIds[i][1]]);
+                    FreeAndDestroyMonIconSprite(&gSprites[sWonderCardData->stampSpriteIds[i][1]]);
             }
         }
         FreeSpriteTilesByTag(TAG_STAMP_SHADOW);

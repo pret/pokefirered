@@ -1001,7 +1001,7 @@ static void CleanUpAiInfoWindow(u8 taskId)
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         if (data->spriteIds.aiIconSpriteIds[i] != 0xFF)
-            DestroyMonIcon(&gSprites[data->spriteIds.aiIconSpriteIds[i]]);
+            FreeAndDestroyMonIconSprite(&gSprites[data->spriteIds.aiIconSpriteIds[i]]);
     }
     FreeAndDestroyMonPicSprite(data->aiMonSpriteId);
     ClearWindowTilemap(data->aiMovesWindowId);
@@ -1345,7 +1345,7 @@ static void SwitchToDebugViewFromAiParty(u8 taskId)
         if (data->spriteIds.aiPartyIcons[i] != 0xFF)
         {
             DestroySpriteAndFreeResources(&gSprites[gSprites[data->spriteIds.aiPartyIcons[i]].sConditionSpriteId]);
-            DestroyMonIcon(&gSprites[data->spriteIds.aiPartyIcons[i]]);
+            FreeAndDestroyMonIconSprite(&gSprites[data->spriteIds.aiPartyIcons[i]]);
         }
     }
     ClearWindowTilemap(data->aiMovesWindowId);

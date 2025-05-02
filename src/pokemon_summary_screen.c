@@ -4611,7 +4611,7 @@ static void PokeSum_DestroyMonIconSprite(void)
     u16 species;
     species = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES_OR_EGG);
     SafeFreeMonIconPalette(species);
-    DestroyMonIcon(&gSprites[sMonSummaryScreen->monIconSpriteId]);
+    FreeAndDestroyMonIconSprite(&gSprites[sMonSummaryScreen->monIconSpriteId]);
 }
 
 static void CreateMoveSelectionCursorObjs(u16 tileTag, u16 palTag)

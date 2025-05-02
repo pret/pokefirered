@@ -29,6 +29,7 @@
 #include "constants/help_system.h"
 #include "constants/item_menu.h"
 #include "constants/items.h"
+#include "constants/pokemon_icon.h"
 #include "constants/songs.h"
 
 
@@ -218,7 +219,7 @@ enum {
 
 enum
 {
-    PALTAG_MON_ICON_0 = 56000,
+    PALTAG_MON_ICON_0 = POKE_ICON_BASE_PAL_TAG,
     PALTAG_MON_ICON_1, // Used implicitly in CreateMonIconSprite
     PALTAG_MON_ICON_2, // Used implicitly in CreateMonIconSprite
     PALTAG_3, // Unused
@@ -7741,7 +7742,7 @@ static bool8 MultiMove_Function_Start(void)
     {
     case 0:
         HideBg(0);
-        LoadMonIconPalettesAt(BG_PLTT_ID(8));
+        TryLoadAllMonIconPalettesAtOffset(BG_PLTT_ID(8));
         sMultiMove->state++;
         break;
     case 1:

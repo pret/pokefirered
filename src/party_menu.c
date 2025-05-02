@@ -7494,7 +7494,7 @@ static void Task_TryItemUseFormChange(u8 taskId)
 
         if (gTasks[taskId].tAnimWait == 0)
         {
-            DestroyMonIcon(icon);
+            FreeAndDestroyMonIconSprite(icon);
             CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY, NULL), &sPartyMenuBoxes[gPartyMenu.slotId], 1);
             icon->oam.mosaic = TRUE;
             icon->data[0] = 10;
@@ -7699,7 +7699,7 @@ static void TryItemHoldFormChange(struct Pokemon *mon)
     {
         PlayCry_NormalNoDucking(targetSpecies, 0, CRY_VOLUME_RS, CRY_VOLUME_RS);
         SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
-        DestroyMonIcon(&gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId]);
+        FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId]);
         CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY, NULL), &sPartyMenuBoxes[gPartyMenu.slotId], 1);
         CalculateMonStats(mon);
         UpdatePartyMonHeldItemSprite(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);

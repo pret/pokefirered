@@ -80,19 +80,20 @@ u16 SpeciesToMailSpecies(u16 species, u32 personality)
     return species;
 }
 
-u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *unownLetter)
+u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *buffer)
 {
     u16 result;
 
-    if (mailSpecies >= UNOWN_OFFSET && mailSpecies < (UNOWN_OFFSET + NUM_UNOWN_FORMS))
+    if (mailSpecies >= UNOWN_OFFSET && mailSpecies < UNOWN_OFFSET + NUM_UNOWN_FORMS)
     {
         result = SPECIES_UNOWN;
-        *unownLetter = mailSpecies - UNOWN_OFFSET;
+        *buffer = mailSpecies - UNOWN_OFFSET;
     }
     else
     {
         result = mailSpecies;
     }
+
     return result;
 }
 

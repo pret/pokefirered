@@ -120,7 +120,7 @@ u16 RunTextPrintersAndIsPrinter0Active(void);
 void AddTextPrinterForMessage_2(bool8 allowSkippingDelayWithButtonPress);
 void DisplayYesNoMenuWithDefault(void);
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed);
-void LoadSignpostWindowFrameGfx(void);
+void LoadSignPostWindowFrameGfx(void);
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
 void DecompressAndLoadBgGfxUsingHeap2(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 void FreeAllOverworldWindowBuffers(void);

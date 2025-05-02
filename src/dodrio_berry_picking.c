@@ -4115,8 +4115,8 @@ static void ResetBerryAndStatusBarSprites(void)
 
 static void LoadWindowFrameGfx(u8 frameId)
 {
-    LoadBgTiles(BG_INTERFACE, GetUserWindowGraphics(frameId)->tiles, 0x120, 1);
-    LoadPalette(GetUserWindowGraphics(frameId)->pal, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
+    LoadBgTiles(BG_INTERFACE, GetWindowFrameTilesPal(frameId)->tiles, 0x120, 1);
+    LoadPalette(GetWindowFrameTilesPal(frameId)->pal, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
 }
 
 static void DBP_LoadStdWindowGfx(void)

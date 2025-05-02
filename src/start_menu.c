@@ -653,7 +653,7 @@ static bool8 StartMenuOptionCallback(void)
         DestroySafariZoneStatsWindow();
         DestroyTimeWindow();
         CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(CB2_OptionsMenuFromStartMenu);
+        SetMainCallback2(CB2_InitOptionMenu);
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
         return TRUE;
     }

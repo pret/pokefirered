@@ -1320,6 +1320,7 @@ const u16 gTradeUnused_Tilemap[] = INCBIN_U16("graphics/trade/unused.bin");
 const u16 gTradeMenu_Tilemap[] = INCBIN_U16("graphics/trade/menu.bin");
 const u16 gTradeMenuMonBox_Tilemap[] = INCBIN_U16("graphics/trade/menu_mon_box.bin");
 
+const u16 gMessageBox_Pal[] = INCBIN_U16("graphics/text_window/menu_message.gbapal");
 const u16 gMessageBox_Gfx[] = INCBIN_U16("graphics/text_window/menu_message.4bpp");
 
 const u16 gFameCheckerBgPals[] = INCBIN_U16("graphics/fame_checker/bg.gbapal");

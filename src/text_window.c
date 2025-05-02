@@ -8,7 +8,7 @@
 #include "palette.h"
 #include "text_window.h"
 
-static const u16 sSignpostWindow_Gfx[] = INCBIN_U16("graphics/text_window/signpost.4bpp");
+static const u16 gSignpostWindow_Gfx[] = INCBIN_U16("graphics/text_window/signpost.4bpp");
 static const u16 sStdTextWindow_Gfx[]  = INCBIN_U16("graphics/text_window/std.4bpp");
 static const u16 sQuestLogWindow_Gfx[] = INCBIN_U16("graphics/text_window/quest_log.4bpp");
 
@@ -35,14 +35,14 @@ static const u16 sTextWindowFrame9_Pal[]  = INCBIN_U16("graphics/text_window/typ
 static const u16 sTextWindowFrame10_Pal[] = INCBIN_U16("graphics/text_window/type10.gbapal");
 
 static const u16 sTextWindowPalettes[][16] = {
-    INCBIN_U16("graphics/text_window/stdpal_0.gbapal"),
+    INCBIN_U16("graphics/text_window/menu_message.gbapal"),
     INCBIN_U16("graphics/text_window/stdpal_1.gbapal"),
     INCBIN_U16("graphics/text_window/stdpal_2.gbapal"),
     INCBIN_U16("graphics/text_window/stdpal_3.gbapal"),
     INCBIN_U16("graphics/text_window/stdpal_4.gbapal")
 };
 
-static const struct TextWindowGraphics sWindowFrames[] = {
+static const struct TilesPal sWindowFrames[WINDOW_FRAMES_COUNT] = {
     {.tiles = sTextWindowFrame1_Gfx,  .pal = sTextWindowFrame1_Pal },
     {.tiles = sTextWindowFrame2_Gfx,  .pal = sTextWindowFrame2_Pal },
     {.tiles = sTextWindowFrame3_Gfx,  .pal = sTextWindowFrame3_Pal },
@@ -56,9 +56,10 @@ static const struct TextWindowGraphics sWindowFrames[] = {
 };
 
 static const u16 sTextWindowDexNavFrame[] = INCBIN_U16("graphics/text_window/dexnav_pal.gbapal");
-static const struct TextWindowGraphics sDexNavWindowFrame = {sTextWindowFrame1_Gfx, sTextWindowDexNavFrame};
+static const struct TilesPal sDexNavWindowFrame = {sTextWindowFrame1_Gfx, sTextWindowDexNavFrame};
 
-const struct TextWindowGraphics *GetUserWindowGraphics(u8 id)
+// code
+const struct TilesPal *GetWindowFrameTilesPal(u8 id)
 {
     if (id >= ARRAY_COUNT(sWindowFrames))
         return &sWindowFrames[0];
@@ -72,38 +73,22 @@ void LoadStdWindowGfxOnBg(u8 bgId, u16 destOffset, u8 palOffset)
     LoadPalette(GetTextWindowPalette(3), palOffset, PLTT_SIZE_4BPP);
 }
 
-void LoadHelpMessageWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
-{
-    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gHelpMessageWindow_Gfx, 0x280, destOffset);
-    LoadPalette(GetTextWindowPalette(2), palOffset, PLTT_SIZE_4BPP);
-}
-
-void LoadSignpostWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
-{
-    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sSignpostWindow_Gfx, 0x260, destOffset);
-    LoadPalette(GetTextWindowPalette(1), palOffset, PLTT_SIZE_4BPP);
-}
-
 void LoadStdWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sStdTextWindow_Gfx, 0x120, destOffset);
     LoadPalette(GetTextWindowPalette(3), palOffset, PLTT_SIZE_4BPP);
 }
 
-void LoadStdWindowTiles(u8 windowId, u16 destOffset)
-{
-    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sStdTextWindow_Gfx, 0x120, destOffset);
-}
-
-void LoadQuestLogWindowTiles(u8 windowId, u16 destOffset)
-{
-    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sQuestLogWindow_Gfx, 0x280, destOffset);
-}
-
 void LoadMessageBoxGfx(u8 windowId, u16 destOffset, u8 palOffset)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gMessageBox_Gfx, 0x280, destOffset);
-    LoadPalette(GetTextWindowPalette(0), palOffset, PLTT_SIZE_4BPP);
+    LoadPalette(GetOverworldTextboxPalettePtr(), palOffset, PLTT_SIZE_4BPP);
+}
+
+void LoadSignBoxGfx(u8 windowId, u16 destOffset, u8 palOffset)
+{
+    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gSignpostWindow_Gfx, 0x260, destOffset);
+    LoadPalette(GetTextWindowPalette(1), palOffset, PLTT_SIZE_4BPP);
 }
 
 void LoadUserWindowBorderGfx_(u8 windowId, u16 destOffset, u8 palOffset)
@@ -111,10 +96,10 @@ void LoadUserWindowBorderGfx_(u8 windowId, u16 destOffset, u8 palOffset)
     LoadUserWindowBorderGfx(windowId, destOffset, palOffset);
 }
 
-void LoadWindowGfx(u8 windowId, u8 frameType, u16 destOffset, u8 palOffset)
+void LoadWindowGfx(u8 windowId, u8 frameId, u16 destOffset, u8 palOffset)
 {
-    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sWindowFrames[frameType].tiles, 0x120, destOffset);
-    LoadPalette(sWindowFrames[frameType].pal, palOffset, PLTT_SIZE_4BPP);
+    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sWindowFrames[frameId].tiles, 0x120, destOffset);
+    LoadPalette(sWindowFrames[frameId].pal, palOffset, PLTT_SIZE_4BPP);
 }
 
 void LoadUserWindowBorderGfx(u8 windowId, u16 destOffset, u8 palOffset)
@@ -166,44 +151,58 @@ void rbox_fill_rectangle(u8 windowId)
     u16 width = GetWindowAttribute(windowId, WINDOW_WIDTH);
     u16 height = GetWindowAttribute(windowId, WINDOW_HEIGHT);
 
-    FillBgTilemapBufferRect(bgLayer, 0, tilemapLeft - 1, tilemapTop - 1, width + 2, height + 2, 17);
+    FillBgTilemapBufferRect(bgLayer, 0, tilemapLeft - 1, tilemapTop - 1, width + 2, height + 2, 0x11);
 }
-
-// const u16 *GetTextWindowPalette(u8 id)
-// {
-//     switch (id)
-//     {
-//     case 0:
-//         id = 0;
-//         break;
-//     case 1:
-//         id = 0x10;
-//         break;
-//     case 2:
-//         id = 0x20;
-//         break;
-//     case 3:
-//         id = 0x30;
-//         break;
-//     case 4:
-//     default:
-//         id = 0x40;
-//         break;
-//     }
-
-//     return (const u16 *)(sTextWindowPalettes) + id;
-// }
 
 const u16 *GetTextWindowPalette(u8 id)
 {
-    if (id >= ARRAY_COUNT(sTextWindowPalettes))
-        return sTextWindowPalettes[ARRAY_COUNT(sTextWindowPalettes) - 1];
-    else
-        return sTextWindowPalettes[id];
+    switch (id)
+    {
+    case 0:
+        id = 0x00;
+        break;
+    case 1:
+        id = 0x10;
+        break;
+    case 2:
+        id = 0x20;
+        break;
+    case 3:
+        id = 0x30;
+        break;
+    case 4:
+    default:
+        id = 0x40;
+        break;
+    }
+
+    return (const u16 *)(sTextWindowPalettes) + id;
+}
+
+const u16 *GetOverworldTextboxPalettePtr(void)
+{
+    return gMessageBox_Pal;
 }
 
 void LoadDexNavWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
 {
     LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sDexNavWindowFrame.tiles, 0x120, destOffset);
     LoadPalette(sDexNavWindowFrame.pal, palOffset, 32);
+}
+
+// FRLG
+void LoadHelpMessageWindowGfx(u8 windowId, u16 destOffset, u8 palOffset)
+{
+    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gHelpMessageWindow_Gfx, 0x280, destOffset);
+    LoadPalette(GetTextWindowPalette(2), palOffset, PLTT_SIZE_4BPP);
+}
+
+void LoadStdWindowTiles(u8 windowId, u16 destOffset)
+{
+    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sStdTextWindow_Gfx, 0x120, destOffset);
+}
+
+void LoadQuestLogWindowTiles(u8 windowId, u16 destOffset)
+{
+    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), sQuestLogWindow_Gfx, 0x280, destOffset);
 }

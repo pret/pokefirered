@@ -1532,9 +1532,9 @@ void DestroyHelpMessageWindow_(void)
     DestroyHelpMessageWindow(2);
 }
 
-void LoadSignpostWindowFrameGfx(void)
+void LoadSignPostWindowFrameGfx(void)
 {
     Menu_LoadStdPal();
-    LoadSignpostWindowGfx(0, DLG_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM));
+    LoadSignBoxGfx(0, DLG_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM));
     LoadUserWindowBorderGfx(0, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
 }

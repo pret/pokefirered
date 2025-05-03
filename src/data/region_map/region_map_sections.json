@@ -692,7 +692,7 @@
       "height": 3
     },
     {
-      "map_section": "MAPSEC_NAVEL_ROCK",
+      "map_section": "MAPSEC_NAVEL_ROCK_FRLG",
       "name": "NAVEL ROCK",
       "x": 10,
       "y": 8,
@@ -765,7 +765,7 @@
       "height": 1
     },
     {
-      "map_section": "MAPSEC_ALTERING_CAVE",
+      "map_section": "MAPSEC_ALTERING_CAVE_FRLG",
       "name": "ALTERING CAVE",
       "x": 0,
       "y": 0,
@@ -797,7 +797,7 @@
       "height": 1
     },
     {
-      "map_section": "MAPSEC_BIRTH_ISLAND",
+      "map_section": "MAPSEC_BIRTH_ISLAND_FRLG",
       "name": "BIRTH ISLAND",
       "x": 18,
       "y": 13,

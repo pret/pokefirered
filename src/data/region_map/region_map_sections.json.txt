@@ -17,7 +17,7 @@ static const u8 sMapName_{{ cleanString(map_section.name) }}_Clone[] = _("{{ map
 
 const struct RegionMapLocation gRegionMapEntries[] = {
 ## for map_section in map_sections
-    [{{ map_section.map_section }} - MAPSECS_KANTO] = { {{ map_section.x }}, {{ map_section.y }}, {{ map_section.width }}, {{ map_section.height }}, sMapName_{{ cleanString(map_section.name) }}{% if existsIn(map_section, "name_clone") %}_Clone{% endif %} },
+    [{{ map_section.map_section }} - KANTO_MAPSEC_START] = { {{ map_section.x }}, {{ map_section.y }}, {{ map_section.width }}, {{ map_section.height }}, sMapName_{{ cleanString(map_section.name) }}{% if existsIn(map_section, "name_clone") %}_Clone{% endif %} },
 ## endfor
 };
 

@@ -123,7 +123,7 @@ static const u16 sDexAreas_Sevii6[][2] = {
 	{ MAPSEC_RUIN_VALLEY,    DEX_AREA_RUIN_VALLEY },
 	{ MAPSEC_DOTTED_HOLE,    DEX_AREA_DOTTED_HOLE },
 	{ MAPSEC_PATTERN_BUSH,   DEX_AREA_PATTERN_BUSH },
-	{ MAPSEC_ALTERING_CAVE,  DEX_AREA_ALTERING_CAVE }    
+	{ MAPSEC_ALTERING_CAVE_FRLG,  DEX_AREA_ALTERING_CAVE }    
 };
 
 static const u16 sDexAreas_Sevii7[][2] = {
@@ -185,7 +185,7 @@ s32 GetSpeciesPokedexAreaMarkers(u16 species, struct Subsprite * subsprites)
     for (i = 0, areaCount = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(UNDEFINED); i++)
     {
         mapSecId = GetMapSecIdFromWildMonHeader(&gWildMonHeaders[i]);
-        if (mapSecId == MAPSEC_ALTERING_CAVE)
+        if (mapSecId == MAPSEC_ALTERING_CAVE_FRLG)
         {
             alteringCaveCount++;
             if (alteringCaveNum != alteringCaveCount - 1)

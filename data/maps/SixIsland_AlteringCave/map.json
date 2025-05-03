@@ -3,7 +3,7 @@
   "name": "SixIsland_AlteringCave",
   "layout": "LAYOUT_SIX_ISLAND_ALTERING_CAVE",
   "music": "MUS_SEVII_CAVE",
-  "region_map_section": "MAPSEC_ALTERING_CAVE",
+  "region_map_section": "MAPSEC_ALTERING_CAVE_FRLG",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",

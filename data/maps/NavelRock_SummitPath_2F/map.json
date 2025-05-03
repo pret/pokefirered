@@ -3,7 +3,7 @@
   "name": "NavelRock_SummitPath_2F",
   "layout": "LAYOUT_NAVEL_ROCK_SUMMIT_PATH_2F",
   "music": "MUS_SEVII_CAVE",
-  "region_map_section": "MAPSEC_NAVEL_ROCK",
+  "region_map_section": "MAPSEC_NAVEL_ROCK_FRLG",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",

@@ -737,7 +737,7 @@ static void BuyMenuDrawMapBg(void)
         for (i = 0; i < 5; i++)
         {
             metatile = MapGridGetMetatileIdAt(x + i, y + j);
-            metatileLayerType = MapGridGetMetatileLayerTypeAt(x + i, y + j); //TODO Xiros: Triple layer
+            metatileLayerType = METATILE_LAYER_TYPE_NORMAL;
 
             if (metatile < NUM_METATILES_IN_PRIMARY)
                 BuyMenuDrawMapMetatile(i, j, mapLayout->primaryTileset->metatiles + metatile * NUM_TILES_PER_METATILE, metatileLayerType);

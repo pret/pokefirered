@@ -26,6 +26,7 @@
 #include "trainer_see.h"
 #include "vs_seeker.h"
 #include "wild_encounter.h"
+#include "config/debug.h"
 #include "config/overworld.h"
 #include "constants/songs.h"
 #include "constants/event_bg.h"

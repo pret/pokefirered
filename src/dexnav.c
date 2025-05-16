@@ -1069,7 +1069,7 @@ static void Task_ManageDexNavHUD(u8 taskId)
 	}
 
 	//Check if script just executed
-	if (ScriptContext2_IsEnabled() == TRUE)
+	if (ArePlayerFieldControlsLocked() == TRUE)
 	{
 		//gCurrentDexNavChain = 0; //Not fair because of the repel pop up
 		DestroyTask(taskId);
@@ -1743,7 +1743,7 @@ void InitDexNavHUD(u16 species, u8 environment)
 // This is called via a c1 from the GUI, while waiting to return to the OW
 static void ExecDexNavHUD(void)
 {
-	if (!gPaletteFade.active && !ScriptContext2_IsEnabled() && gMain.callback2 == CB2_Overworld)
+	if (!gPaletteFade.active && !ArePlayerFieldControlsLocked() && gMain.callback2 == CB2_Overworld)
 	{
 		SetMainCallback1(CB1_Overworld);
 		InitDexNavHUD(gSpecialVar_0x8000, gSpecialVar_0x8001);

@@ -204,7 +204,7 @@ void UnlockPlayerFieldControls(void)
     sLockFieldControls = FALSE;
 }
 
-bool8 ScriptContext2_IsEnabled(void)
+bool8 ArePlayerFieldControlsLocked(void)
 {
     return sLockFieldControls;
 }

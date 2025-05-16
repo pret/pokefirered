@@ -9,10 +9,10 @@ MODERN        ?= 0
 # Compares the ROM to a checksum of the original - only makes sense using when non-modern
 COMPARE       ?= 0
 
+KEEP_TEMPS    ?= 0
+
 # If you use 1Mbit Flash, change "?= SRAM" to "?= NO"
 SAVE_SRAM       ?= SRAM
-
-KEEP_TEMPS    ?= 0
 
 ifeq (modern,$(MAKECMDGOALS))
   MODERN := 1

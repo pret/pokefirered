@@ -1602,11 +1602,11 @@ void CreateStopSurfingTask_NoMusicChange(u8 direction)
 
 void SeafoamIslandsB4F_CurrentDumpsPlayerOnLand(void)
 {
-    if (gQuestLogPlaybackState != 1 && gQuestLogPlaybackState != 3)
-    {
-        QuestLogRecordPlayerAvatarGfxTransitionWithDuration(sQuestLogSurfDismountActionIds[DIR_NORTH], 16);
-        CreateStopSurfingTask(DIR_NORTH);
-    }
+    if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_RUNNING || gQuestLogPlaybackState == QL_PLAYBACK_STATE_ACTION_END)
+        return;
+
+    QuestLogRecordPlayerAvatarGfxTransitionWithDuration(sQuestLogSurfDismountActionIds[DIR_NORTH], 16);
+    CreateStopSurfingTask(DIR_NORTH);
 }
 
 static void Task_StopSurfingInit(u8 taskId)

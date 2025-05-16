@@ -1,4 +1,6 @@
 // jsonproc.cpp
+// jsonproc converts JSON data to an output file based on an Inja template. 
+// https://github.com/pantor/inja
 
 #include "jsonproc.h"
 
@@ -6,6 +8,9 @@
 
 #include <string>
 using std::string; using std::to_string;
+
+#include <algorithm>
+using std::replace_if;
 
 #include <inja.hpp>
 using namespace inja;
@@ -109,11 +114,16 @@ int main(int argc, char *argv[])
     });
 
     env.add_callback("cleanString", 1, [](Arguments& args) {
-        string badChars = ".'{} \n\t-_\u00e9";
         string str = args.at(0)->get<string>();
-        str.erase(remove_if(str.begin(), str.end(), [&badChars](const char &c) {
-            return badChars.find(c) != std::string::npos;
-        }), str.end());
+        for (unsigned int i = 0; i < str.length(); i++) {
+            // This code is not Unicode aware, so UTF-8 is not easily parsable without introducing
+            // another library. Just filter out any non-alphanumeric characters for now.
+            // TODO: proper Unicode string normalization
+            if ((i == 0 && isdigit(str[i]))
+             || !isalnum(str[i])) {
+                str[i] = '_';
+            }
+        }
         return str;
     });
 

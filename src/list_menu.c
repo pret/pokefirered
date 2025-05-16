@@ -39,8 +39,8 @@ struct MoveMenuInfoIcon
 
 static EWRAM_DATA struct MysteryGiftLinkMenuStruct sMysteryGiftLinkMenu = {0};
 
-struct ListMenuOverride gListMenuOverride;
-struct ListMenuTemplate gMultiuseListMenuTemplate;
+COMMON_DATA struct ListMenuOverride gListMenuOverride = {0};
+COMMON_DATA struct ListMenuTemplate gMultiuseListMenuTemplate = {0};
 
 static u8 ListMenuInitInternal(const struct ListMenuTemplate *listMenuTemplate, u16 cursorPos, u16 itemsAbove);
 static bool8 ListMenuChangeSelection(struct ListMenu *list, bool8 updateCursorAndCallCallback, u8 count, bool8 movingDown);

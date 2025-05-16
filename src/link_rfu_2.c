@@ -75,9 +75,9 @@ static u32 sRfuAPIBuffer[RFU_API_BUFF_SIZE_RAM / 4];
 static u8 sResendBlock8[CMD_LENGTH * 2];
 static u16 sResendBlock16[CMD_LENGTH];
 
-struct RfuGameData gHostRfuGameData;
-struct RfuManager gRfu;
-u8 gHostRfuUsername[PLAYER_NAME_LENGTH + 1];
+COMMON_DATA struct RfuGameData gHostRfuGameData = {0};
+COMMON_DATA struct RfuManager gRfu = {0};
+COMMON_DATA u8 gHostRfuUsername[PLAYER_NAME_LENGTH + 1] = {0};
 
 static void InitChildRecvBuffers(void);
 static void InitParentSendData(void);
@@ -1831,7 +1831,7 @@ static void ReceiveRfuLinkPlayers(const struct SioInfo *sioInfo)
 
 // Could be relocated to top of file, but would also require relocating assert strings
 static const char sASCII_PokemonSioInfo[] = "PokemonSioInfo";
-static const u8 sText_Akito[] = _("　あきと"); // Presumably "Akito Mori", one of Game Freak's programmers
+ALIGNED(4) static const u8 sText_Akito[] = _("あきと"); // Presumably "Akito Mori", one of Game Freak's programmers
 static const char sASCII_LinkLossDisconnect[] = "LINK LOSS DISCONNECT!";
 static const char sASCII_LinkLossRecoveryNow[] = "LINK LOSS RECOVERY NOW";
 ALIGNED(4) static const char sASCII_30Spaces[] = {"                              "};

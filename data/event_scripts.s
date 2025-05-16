@@ -36,6 +36,7 @@
 #include "constants/easy_chat.h"
 #include "constants/trainer_card.h"
 #include "constants/help_system.h"
+#include "constants/trainer_fan_club.h"
 #include "constants/mystery_gift.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"

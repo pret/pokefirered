@@ -50,8 +50,8 @@ static EWRAM_DATA u16 sListMenuLastScrollPosition = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
 static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
 
-struct ListMenuTemplate sFieldSpecialsListMenuTemplate;
-u16 sFieldSpecialsListMenuScrollBuffer;
+COMMON_DATA struct ListMenuTemplate sFieldSpecialsListMenuTemplate = {0};
+COMMON_DATA u16 sFieldSpecialsListMenuScrollBuffer = 0;
 
 static void Task_AnimatePcTurnOn(u8 taskId);
 static void PcTurnOnUpdateMetatileId(bool16 flag);
@@ -1095,18 +1095,19 @@ void DrawElevatorCurrentFloorWindow(void)
 {
     const u8 *floorname;
     u32 strwidth;
-    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
-    {
-        sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
-        LoadStdWindowGfx(sElevatorCurrentFloorWindowId, 0x21D, BG_PLTT_ID(13));
-        DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 13);
-        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, gText_NowOn, 0, 2, 0xFF, NULL);
-        floorname = sFloorNamePointers[gSpecialVar_0x8005];
-        strwidth = GetStringWidth(FONT_NORMAL, floorname, 0);
-        AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, floorname, 56 - strwidth, 16, 0xFF, NULL);
-        PutWindowTilemap(sElevatorCurrentFloorWindowId);
-        CopyWindowToVram(sElevatorCurrentFloorWindowId, COPYWIN_FULL);
-    }
+
+    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay) == TRUE)
+        return;
+
+    sElevatorCurrentFloorWindowId = AddWindow(&sElevatorCurrentFloorWindowTemplate);
+    LoadStdWindowGfx(sElevatorCurrentFloorWindowId, 0x21D, BG_PLTT_ID(13));
+    DrawStdFrameWithCustomTileAndPalette(sElevatorCurrentFloorWindowId, FALSE, 0x21D, 13);
+    AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, gText_NowOn, 0, 2, 0xFF, NULL);
+    floorname = sFloorNamePointers[gSpecialVar_0x8005];
+    strwidth = GetStringWidth(FONT_NORMAL, floorname, 0);
+    AddTextPrinterParameterized(sElevatorCurrentFloorWindowId, FONT_NORMAL, floorname, 56 - strwidth, 16, 0xFF, NULL);
+    PutWindowTilemap(sElevatorCurrentFloorWindowId);
+    CopyWindowToVram(sElevatorCurrentFloorWindowId, COPYWIN_FULL);
 }
 
 void CloseElevatorCurrentFloorWindow(void)
@@ -1164,91 +1165,92 @@ void ListMenu(void)
 {
     u8 taskId;
     struct Task *task;
-    if (QuestLog_SchedulePlaybackCB(QLPlaybackCB_DestroyScriptMenuMonPicSprites) != TRUE)
+
+    if (QL_AvoidDisplay(QL_DestroyAbortedDisplay) == TRUE)
+        return;
+        
+    taskId = CreateTask(Task_CreateScriptListMenu, 8);
+    task = &gTasks[taskId];
+    switch (gSpecialVar_0x8004)
     {
-        taskId = CreateTask(Task_CreateScriptListMenu, 8);
-        task = &gTasks[taskId];
-        switch (gSpecialVar_0x8004)
-        {
-        case LISTMENU_BADGES:
-            task->data[0] = 4;
-            task->data[1] = 9;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 12;
-            task->data[5] = 7;
-            task->data[6] = 1;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_SILPHCO_FLOORS:
-            task->data[0] = 7;
-            task->data[1] = 12;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            task->data[7] = sElevatorScroll;
-            task->data[8] = sElevatorCursorPos;
-            break;
-        case LISTMENU_ROCKET_HIDEOUT_FLOORS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 4;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 8;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_DEPT_STORE_FLOORS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 6;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 8;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_WIRELESS_LECTURE_HEADERS: // Multichoice used instead
-            task->data[0] = 4;
-            task->data[1] = 4;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 17;
-            task->data[5] = 8;
-            task->data[6] = 1;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_BERRY_POWDER:
-            task->data[0] = 7;
-            task->data[1] = 12;
-            task->data[2] = 16;
-            task->data[3] = 1;
-            task->data[4] = 17;
-            task->data[5] = 12;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case LISTMENU_TRAINER_TOWER_FLOORS: // Mulitchoice used instead
-            task->data[0] = 3;
-            task->data[1] = 3;
-            task->data[2] = 1;
-            task->data[3] = 1;
-            task->data[4] = 8;
-            task->data[5] = 6;
-            task->data[6] = 0;
-            task->data[15] = taskId;
-            break;
-        case 99:
-            break;
-        default:
-            gSpecialVar_Result = 0x7F;
-            DestroyTask(taskId);
-            break;
-        }
+    case LISTMENU_BADGES:
+        task->data[0] = 4;
+        task->data[1] = 9;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 12;
+        task->data[5] = 7;
+        task->data[6] = 1;
+        task->data[15] = taskId;
+        break;
+    case LISTMENU_SILPHCO_FLOORS:
+        task->data[0] = 7;
+        task->data[1] = 12;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 8;
+        task->data[5] = 12;
+        task->data[6] = 0;
+        task->data[15] = taskId;
+        task->data[7] = sElevatorScroll;
+        task->data[8] = sElevatorCursorPos;
+        break;
+    case LISTMENU_ROCKET_HIDEOUT_FLOORS: // Multichoice used instead
+        task->data[0] = 4;
+        task->data[1] = 4;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 8;
+        task->data[5] = 8;
+        task->data[6] = 0;
+        task->data[15] = taskId;
+        break;
+    case LISTMENU_DEPT_STORE_FLOORS: // Multichoice used instead
+        task->data[0] = 4;
+        task->data[1] = 6;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 8;
+        task->data[5] = 8;
+        task->data[6] = 0;
+        task->data[15] = taskId;
+        break;
+    case LISTMENU_WIRELESS_LECTURE_HEADERS: // Multichoice used instead
+        task->data[0] = 4;
+        task->data[1] = 4;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 17;
+        task->data[5] = 8;
+        task->data[6] = 1;
+        task->data[15] = taskId;
+        break;
+    case LISTMENU_BERRY_POWDER:
+        task->data[0] = 7;
+        task->data[1] = 12;
+        task->data[2] = 16;
+        task->data[3] = 1;
+        task->data[4] = 17;
+        task->data[5] = 12;
+        task->data[6] = 0;
+        task->data[15] = taskId;
+        break;
+    case LISTMENU_TRAINER_TOWER_FLOORS: // Mulitchoice used instead
+        task->data[0] = 3;
+        task->data[1] = 3;
+        task->data[2] = 1;
+        task->data[3] = 1;
+        task->data[4] = 8;
+        task->data[5] = 6;
+        task->data[6] = 0;
+        task->data[15] = taskId;
+        break;
+    case 99:
+        break;
+    default:
+        gSpecialVar_Result = 0x7F;
+        DestroyTask(taskId);
+        break;
     }
 }
 
@@ -1810,7 +1812,7 @@ static const struct {
     u16 inside_num;
     u16 outside_grp;
     u16 outside_num;
-} sInsideOutsidePairs[51] = {
+} sInsideOutsidePairs[] = {
     [QL_LOCATION_HOME]               = {MAP(PALLET_TOWN_PLAYERS_HOUSE_1F),          MAP(PALLET_TOWN)},
     [QL_LOCATION_OAKS_LAB]           = {MAP(PALLET_TOWN_PROFESSOR_OAKS_LAB),        MAP(PALLET_TOWN)},
     [QL_LOCATION_VIRIDIAN_GYM]       = {MAP(VIRIDIAN_CITY_GYM),                     MAP(VIRIDIAN_CITY)},
@@ -1881,67 +1883,67 @@ void QuestLog_CheckDepartingIndoorsMap(void)
     }
 }
 
-struct QuestLogDepartedData {
-    u8 map_section_id;
-    u8 entrance_id;
-};
-
 void QuestLog_TryRecordDepartedLocation(void)
 {
     s16 x, y;
-    struct QuestLogDepartedData event_buffer;
-    u16 ql_entrance_id = VarGet(VAR_QL_ENTRANCE);
-    event_buffer.map_section_id = 0;
-    event_buffer.entrance_id = 0;
+    struct QuestLogEvent_Departed data;
+    u16 locationId = VarGet(VAR_QL_ENTRANCE);
+    data.mapSec = 0;
+    data.locationId = 0;
     if (FlagGet(FLAG_SYS_QL_DEPARTED))
     {
-        if (ql_entrance_id == QL_LOCATION_VIRIDIAN_FOREST_1)
+        if (locationId == QL_LOCATION_VIRIDIAN_FOREST_1)
         {
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE) && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE) || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE)))
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE)
+              && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE)
+               || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE)))
             {
-                event_buffer.map_section_id = MAPSEC_ROUTE_2;
+                data.mapSec = MAPSEC_ROUTE_2;
                 if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE))
-                    event_buffer.entrance_id = ql_entrance_id;
+                    data.locationId = locationId;
                 else
-                    event_buffer.entrance_id = ql_entrance_id + 1;
-                SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
+                    data.locationId = locationId + 1;
+                SetQuestLogEvent(QL_EVENT_DEPARTED, (const u16 *)&data);
                 FlagClear(FLAG_SYS_QL_DEPARTED);
                 return;
             }
         }
-        else if (ql_entrance_id == QL_LOCATION_LEAGUE_GATE_1)
+        else if (locationId == QL_LOCATION_LEAGUE_GATE_1)
         {
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE22) && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22) || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE23)))
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE22) &&
+                (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22)
+              || gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE23)))
             {
-                event_buffer.map_section_id = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[ql_entrance_id].inside_grp, sInsideOutsidePairs[ql_entrance_id].inside_num)->regionMapSectionId;
+                data.mapSec = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[locationId].inside_grp, sInsideOutsidePairs[locationId].inside_num)->regionMapSectionId;
                 if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE22))
-                    event_buffer.entrance_id = ql_entrance_id;
+                    data.locationId = locationId;
                 else
-                    event_buffer.entrance_id = ql_entrance_id + 1;
-                SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
+                    data.locationId = locationId + 1;
+                SetQuestLogEvent(QL_EVENT_DEPARTED, (const u16 *)&data);
                 FlagClear(FLAG_SYS_QL_DEPARTED);
                 return;
             }
         }
-        if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[ql_entrance_id].outside_grp && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[ql_entrance_id].outside_num)
+        if (gSaveBlock1Ptr->location.mapGroup == sInsideOutsidePairs[locationId].outside_grp
+           && gSaveBlock1Ptr->location.mapNum == sInsideOutsidePairs[locationId].outside_num)
         {
-            event_buffer.map_section_id = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[ql_entrance_id].inside_grp, sInsideOutsidePairs[ql_entrance_id].inside_num)->regionMapSectionId;
-            event_buffer.entrance_id = ql_entrance_id;
-            if (ql_entrance_id == QL_LOCATION_ROCK_TUNNEL_1)
+            data.mapSec = Overworld_GetMapHeaderByGroupAndId(sInsideOutsidePairs[locationId].inside_grp, sInsideOutsidePairs[locationId].inside_num)->regionMapSectionId;
+            data.locationId = locationId;
+            if (locationId == QL_LOCATION_ROCK_TUNNEL_1)
             {
                 PlayerGetDestCoords(&x, &y);
                 if (x != 15 || y != 26)
-                    event_buffer.entrance_id++;
+                    data.locationId++;
             }
-            else if (ql_entrance_id == QL_LOCATION_SEAFOAM_ISLANDS_1)
+            else if (locationId == QL_LOCATION_SEAFOAM_ISLANDS_1)
             {
                 PlayerGetDestCoords(&x, &y);
                 if (x != 67 || y != 15)
-                    event_buffer.entrance_id++;
+                    data.locationId++;
             }
-            SetQuestLogEvent(QL_EVENT_DEPARTED, (void *)&event_buffer);
+            SetQuestLogEvent(QL_EVENT_DEPARTED, (const u16 *)&data);
             FlagClear(FLAG_SYS_QL_DEPARTED);
-            if (ql_entrance_id == QL_LOCATION_ROCKET_HIDEOUT)
+            if (locationId == QL_LOCATION_ROCKET_HIDEOUT)
             {
                 VarSet(VAR_QL_ENTRANCE, QL_LOCATION_GAME_CORNER);
                 FlagSet(FLAG_SYS_QL_DEPARTED);

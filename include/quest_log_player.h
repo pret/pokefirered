@@ -3,15 +3,19 @@
 
 #include "global.h"
 
-#define QL_PLAYER_GFX_NORMAL          0
-#define QL_PLAYER_GFX_BIKE            1
-#define QL_PLAYER_GFX_FISH            2
-#define QL_PLAYER_GFX_SURF            3
-#define QL_PLAYER_GFX_STOP_SURF_S     4
-#define QL_PLAYER_GFX_STOP_SURF_N     5
-#define QL_PLAYER_GFX_STOP_SURF_W     6
-#define QL_PLAYER_GFX_STOP_SURF_E     7
-#define QL_PLAYER_GFX_VSSEEKER        8
+enum {
+    QL_PLAYER_GFX_NORMAL,
+    QL_PLAYER_GFX_BIKE,
+    QL_PLAYER_GFX_FISH,
+    QL_PLAYER_GFX_SURF,
+    QL_PLAYER_GFX_STOP_SURF_S,
+    QL_PLAYER_GFX_STOP_SURF_N,
+    QL_PLAYER_GFX_STOP_SURF_W,
+    QL_PLAYER_GFX_STOP_SURF_E,
+    QL_PLAYER_GFX_VSSEEKER,
+    QL_PLAYER_GFX_NONE = 0xFF
+};
+
 
 void QuestLogUpdatePlayerSprite(u8 state);
 bool32 QuestLogTryRecordPlayerAvatarGfxTransition(u8 state);

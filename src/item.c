@@ -331,7 +331,7 @@ void ClearBag(void)
 {
     u16 i;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < NUM_BAG_POCKETS; i++)
     {
         ClearItemSlots(gBagPockets[i].itemSlots, gBagPockets[i].capacity);
     }
@@ -567,16 +567,8 @@ u16 BagGetQuantityByItemId(u16 itemId)
 
 void TrySetObtainedItemQuestLogEvent(u16 itemId)
 {
-    struct QuestLogStruct_809A824
-    {
-        u16 itemId;
-        u8 mapSectionId;
-    } * ptr;
-
     // Only some key items trigger this event
-    if
-    (
-        itemId == ITEM_OAKS_PARCEL
+    if (itemId == ITEM_OAKS_PARCEL
      || itemId == ITEM_POKE_FLUTE
      || itemId == ITEM_SECRET_KEY
      || itemId == ITEM_BIKE_VOUCHER
@@ -595,16 +587,15 @@ void TrySetObtainedItemQuestLogEvent(u16 itemId)
      || itemId == ITEM_TEA
      || itemId == ITEM_POWDER_JAR
      || itemId == ITEM_RUBY
-     || itemId == ITEM_SAPPHIRE
-    )
+     || itemId == ITEM_SAPPHIRE)
     {
         if (itemId != ITEM_TOWN_MAP || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(PALLET_TOWN_RIVALS_HOUSE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(PALLET_TOWN_RIVALS_HOUSE)))
         {
-            ptr = malloc(sizeof(*ptr));
-            ptr->itemId = itemId;
-            ptr->mapSectionId = gMapHeader.regionMapSectionId;
-            SetQuestLogEvent(QL_EVENT_OBTAINED_ITEM, (void *)ptr);
-            free(ptr);
+            struct QuestLogEvent_StoryItem * data = malloc(sizeof(*data));
+            data->itemId = itemId;
+            data->mapSec = gMapHeader.regionMapSectionId;
+            SetQuestLogEvent(QL_EVENT_OBTAINED_STORY_ITEM, (const u16 *)data);
+            free(data);
         }
     }
 }

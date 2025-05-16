@@ -5,6 +5,12 @@
 #define QL_STATE_PLAYBACK      2
 #define QL_STATE_PLAYBACK_LAST 3
 
+#define QL_PLAYBACK_STATE_STOPPED            0
+#define QL_PLAYBACK_STATE_RUNNING            1
+#define QL_PLAYBACK_STATE_RECORDING          2
+#define QL_PLAYBACK_STATE_ACTION_END         3
+#define QL_PLAYBACK_STATE_RECORDING_NO_DELAY 4
+
 #define QL_START_NORMAL 1
 #define QL_START_WARP   2
 
@@ -16,9 +22,9 @@
 
 #define QL_IS_PLAYBACK_STATE (gQuestLogState == QL_STATE_PLAYBACK || gQuestLogState == QL_STATE_PLAYBACK_LAST)
 
-#define QL_EVENT_0                              0 // Null
-#define QL_EVENT_1                              1 // Null
-#define QL_EVENT_2                              2 // Null
+#define QL_EVENT_INPUT                          0 // Null
+#define QL_EVENT_GFX_CHANGE                     1 // Null
+#define QL_EVENT_MOVEMENT                       2 // Null
 #define QL_EVENT_SWITCHED_PARTY_ORDER           3
 #define QL_EVENT_USED_ITEM                      4
 #define QL_EVENT_GAVE_HELD_ITEM                 5
@@ -55,12 +61,12 @@
 #define QL_EVENT_USED_FIELD_MOVE                36
 #define QL_EVENT_BOUGHT_ITEM                    37
 #define QL_EVENT_SOLD_ITEM                      38
-#define QL_EVENT_39                             39 // Null
-#define QL_EVENT_OBTAINED_ITEM                  40
-#define QL_EVENT_41                             41 // Null
+#define QL_EVENT_SCENE_END                      39 // Null
+#define QL_EVENT_OBTAINED_STORY_ITEM            40
+#define QL_EVENT_WAIT                           41 // Null
 #define QL_EVENT_ARRIVED                        42
 
-#define QL_EVENT_USED_POKEMART QL_EVENT_BOUGHT_ITEM - 1 // Used as a start pos for QL_EVENT_BOUGHT_ITEM / QL_EVENT_SOLD_ITEM
+#define QL_EVENT_USED_POKEMART (QL_EVENT_BOUGHT_ITEM - 1) // Used as a start pos for QL_EVENT_BOUGHT_ITEM / QL_EVENT_SOLD_ITEM
 
 #define IS_LINK_QL_EVENT(event)((event) >= QL_EVENT_LINK_TRADED && (event) <= QL_EVENT_LINK_BATTLED_UNION)
 #define IS_VALID_QL_EVENT(event)((event) >= QL_EVENT_SWITCHED_PARTY_ORDER && (event) <= QL_EVENT_ARRIVED)
@@ -128,28 +134,23 @@
 #define QL_DEPARTED_MISC_BUILDING_1  8
 #define QL_DEPARTED_MISC_BUILDING_2  9
 
-#define QL_INPUT_OFF 0
-#define QL_INPUT_UP 1
-#define QL_INPUT_DOWN 2
-#define QL_INPUT_LEFT 3
-#define QL_INPUT_RIGHT 4
-#define QL_INPUT_L 5
-#define QL_INPUT_R 6
-#define QL_INPUT_START 7
+#define QL_INPUT_OFF    0
+#define QL_INPUT_UP     1
+#define QL_INPUT_DOWN   2
+#define QL_INPUT_LEFT   3
+#define QL_INPUT_RIGHT  4
+#define QL_INPUT_L      5
+#define QL_INPUT_R      6
+#define QL_INPUT_START  7
 #define QL_INPUT_SELECT 8
-#define QL_INPUT_A 9
-#define QL_INPUT_B 10
+#define QL_INPUT_A      9
+#define QL_INPUT_B      10
 
-
-#define FANCLUB_MEMBER1        0
-#define FANCLUB_MEMBER2        1
-#define FANCLUB_MEMBER3        2
-#define FANCLUB_MEMBER4        3
-#define FANCLUB_MEMBER5        4
-#define FANCLUB_MEMBER6        5
-#define FANCLUB_MEMBER7        6
-#define FANCLUB_MEMBER8        7
-
-#define NUM_TRAINER_FAN_CLUB_MEMBERS  8
+#define QL_ACTION_MOVEMENT     0
+#define QL_ACTION_GFX_CHANGE   1
+#define QL_ACTION_INPUT        2
+#define QL_ACTION_EMPTY        3
+#define QL_ACTION_WAIT       254
+#define QL_ACTION_SCENE_END  255
 
 #endif //GUARD_CONSTANTS_QUEST_LOG_H

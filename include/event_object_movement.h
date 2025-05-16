@@ -127,7 +127,7 @@ void MoveCoords(u8, s16 *, s16 *);
 bool8 ObjectEventIsHeldMovementActive(struct ObjectEvent *);
 u8 ObjectEventClearHeldMovementIfFinished(struct ObjectEvent *);
 u8 GetObjectEventIdByPosition(u16 x, u16 y, u8 elevation);
-void UpdateQuestLogObjectEventCurrentMovement(struct ObjectEvent *, struct Sprite *);
+void QL_UpdateObjectEventCurrentMovement(struct ObjectEvent *, struct Sprite *);
 bool8 ObjectEventSetHeldMovement(struct ObjectEvent *, u8);
 void ShiftStillObjectEventCoords(struct ObjectEvent *);
 void OverrideMovementTypeForObjectEvent(const struct ObjectEvent *, u8);

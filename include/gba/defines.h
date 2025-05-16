@@ -13,6 +13,7 @@
 #define IWRAM_DATA __attribute__((section("iwram_data")))
 #define EWRAM_DATA __attribute__((section("ewram_data")))
 #endif
+#define COMMON_DATA __attribute__((section("common_data")))
 
 #if MODERN
 #define NOINLINE __attribute__((noinline))
@@ -71,6 +72,8 @@
 
 #define TILE_SIZE_4BPP 32
 #define TILE_SIZE_8BPP 64
+
+#define BG_TILE_ADDR_4BPP(n)   (void *)(BG_VRAM + (TILE_SIZE_4BPP * (n)))
 
 #define TILE_OFFSET_4BPP(n) ((n) * TILE_SIZE_4BPP)
 #define TILE_OFFSET_8BPP(n) ((n) * TILE_SIZE_8BPP)

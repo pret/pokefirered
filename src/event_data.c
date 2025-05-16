@@ -35,7 +35,7 @@ EWRAM_DATA u16 gSpecialVar_PrevTextColor = 0;
 EWRAM_DATA u16 gSpecialVar_0x8014 = 0;
 EWRAM_DATA u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {};
 
-u16 gLastQuestLogStoredFlagOrVarIdx;
+COMMON_DATA u16 gLastQuestLogStoredFlagOrVarIdx = 0;
 
 extern u16 *const gSpecialVars[];
 
@@ -192,15 +192,15 @@ u16 *GetVarPointer(u16 idx)
     {
         switch (gQuestLogPlaybackState)
         {
-        case 0:
+        case QL_PLAYBACK_STATE_STOPPED:
         default:
             break;
-        case 1:
+        case QL_PLAYBACK_STATE_RUNNING:
             ptr = QuestLogGetFlagOrVarPtr(FALSE, idx);
             if (ptr != NULL)
                 gSaveBlock1Ptr->vars[idx - VARS_START] = *ptr;
             break;
-        case 2:
+        case QL_PLAYBACK_STATE_RECORDING:
             if (IsFlagOrVarStoredInQuestLog(idx - VARS_START, TRUE) == TRUE)
             {
                 gLastQuestLogStoredFlagOrVarIdx = idx - VARS_START;
@@ -263,15 +263,15 @@ u8 *GetFlagAddr(u16 idx)
     {
         switch (gQuestLogPlaybackState)
         {
-        case 0:
+        case QL_PLAYBACK_STATE_STOPPED:
         default:
             break;
-        case 1:
+        case QL_PLAYBACK_STATE_RUNNING:
             ptr = QuestLogGetFlagOrVarPtr(TRUE, idx);
             if (ptr != NULL)
-                gSaveBlock1Ptr->flags[idx >> 3] = *ptr;
+                gSaveBlock1Ptr->flags[idx / 8] = *ptr;
             break;
-        case 2:
+        case QL_PLAYBACK_STATE_RECORDING:
             if (IsFlagOrVarStoredInQuestLog(idx, FALSE) == TRUE)
             {
                 gLastQuestLogStoredFlagOrVarIdx = idx;

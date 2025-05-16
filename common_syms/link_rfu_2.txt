@@ -1,3 +1,0 @@
-gHostRfuGameData
-gRfu
-gHostRfuUsername

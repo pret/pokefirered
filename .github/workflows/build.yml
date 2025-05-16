@@ -32,8 +32,8 @@ jobs:
           ref: 'symbols'
 
       - name: Install binutils
-        run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi
-        # build-essential, git, and libpng-dev are already installed
+        run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi libpng-dev
+        # build-essential and git are already installed
         # gcc-arm-none-eabi is only needed for the modern build
         # as an alternative to dkP
 
@@ -72,14 +72,6 @@ jobs:
           COMPARE: 0
         run: |
           make -j${nproc} all
-
-      - name: Webhook
-        if: ${{ github.event_name == 'push' && github.repository_owner == 'pret' }}
-        env:
-          CALCROM_DISCORD_WEBHOOK_USERNAME: OK
-          CALCROM_DISCORD_WEBHOOK_AVATAR_URL: https://i.imgur.com/38BQHdd.png
-          CALCROM_DISCORD_WEBHOOK_URL: ${{ secrets.CALCROM_DISCORD_WEBHOOK_URL }}
-        run: sh .github/calcrom/webhook.sh pokefirered
 
       - name: Move symfiles
         if: ${{ github.event_name == 'push' }}

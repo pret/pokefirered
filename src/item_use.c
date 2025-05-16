@@ -912,20 +912,14 @@ void FieldUseFunc_OakStopsYou(u8 taskId)
 
 void ItemUse_SetQuestLogEvent(u8 eventId, struct Pokemon *pokemon, u16 itemId, u16 param)
 {
-    struct UnkStruct_ItemUseQuestLog
-    {
-        u16 itemId;
-        u16 unk2;
-        u16 species;
-        u16 param;
-    } *questLog = Alloc(sizeof(*questLog));
+    struct QuestLogEvent_Item *data = Alloc(sizeof(*data));
 
-    questLog->itemId = itemId;
-    questLog->param = param;
+    data->itemId = itemId;
+    data->itemParam = param;
     if (pokemon != NULL)
-        questLog->species = GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
+        data->species = GetMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
     else
-        questLog->species = 0xFFFF;
-    SetQuestLogEvent(eventId, (void *)questLog);
-    Free(questLog);
+        data->species = 0xFFFF;
+    SetQuestLogEvent(eventId, (void *)data);
+    Free(data);
 }

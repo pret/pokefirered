@@ -1,4 +1,0 @@
-gQuestLogPlaybackState
-sNumEventsInLogEntry
-gQuestLogFieldInput
-sCurQuestLogEntry

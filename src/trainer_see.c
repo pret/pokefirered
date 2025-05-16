@@ -88,7 +88,7 @@ static const TrainerSeeFunc sTrainerSeeFuncList2[] = {
 bool8 CheckForTrainersWantingBattle(void)
 {
     u8 i;
-    if (sub_8111C2C() == TRUE)
+    if (QL_IsTrainerSightDisabled() == TRUE)
         return FALSE;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
@@ -518,7 +518,7 @@ static void Task_RevealTrainer_RunTrainerSeeFuncList(u8 taskId)
     struct ObjectEvent * trainerObj;
 
     // another objEvent loaded into by loadword?
-    LoadWordFromTwoHalfwords((u16 *)&task->data[1], (uintptr_t *)&trainerObj);
+    LoadWordFromTwoHalfwords((u16 *)&task->data[1], (u32 *)&trainerObj);
     if (!task->data[7])
     {
         ObjectEventClearHeldMovement(trainerObj);

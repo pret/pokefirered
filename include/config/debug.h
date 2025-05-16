@@ -7,4 +7,4 @@
 #define DEBUG_OVERWORLD_TRIGGER_EVENT   pressedStartButton  // The event that opens the menu when holding the key(s) defined in DEBUG_OVERWORLD_HELD_KEYS.
 #define DEBUG_OVERWORLD_IN_MENU         FALSE                // Replaces the overworld debug menu button combination with a start menu entry (above Pokédex).
 
-#endif // GUARD_CONFIG_DEBUG_H
+#endif // GUARD_CONFIG_DEBUG_Hs

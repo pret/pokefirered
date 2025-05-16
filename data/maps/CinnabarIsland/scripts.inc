@@ -36,7 +36,7 @@ CinnabarIsland_EventScript_MoveSeagallopDown::
 	return
 
 CinnabarIsland_EventScript_ReadyObjectsReturnFromSeviiIslands::
-	setobjectxyperm LOCALID_BILL, 21, 8
+	setobjectxyperm LOCALID_BILL, 19, 7
 	setobjectmovementtype LOCALID_BILL, MOVEMENT_TYPE_FACE_UP
 	return
 

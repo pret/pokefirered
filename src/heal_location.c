@@ -103,8 +103,8 @@ void SetWhiteoutRespawnWarpAndHealerNpc(struct WarpData * warp)
         }
         else
         {
-            warp->x = 7;
-            warp->y = 4;
+            warp->x = 5;
+            warp->y = 6 ;
         }
         SetWhiteoutRespawnHealerNpcAsLastTalked(healLocationIdx);
     }

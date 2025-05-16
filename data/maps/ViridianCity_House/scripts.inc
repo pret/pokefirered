@@ -20,5 +20,6 @@ ViridianCity_House_EventScript_Speary::
 	end
 
 ViridianCity_House_EventScript_NicknameSign::
+	showmonpic SPECIES_SPEAROW, 10, 3
 	msgbox ViridianCity_House_Text_SpearowNameSpeary, MSGBOX_SIGN
 	end

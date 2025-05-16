@@ -251,15 +251,15 @@ static void PcTurnOnUpdateMetatileId(bool16 flickerOff)
     {
     case DIR_NORTH:
         deltaX = 0;
-        deltaY = -1;
+        deltaY = -2;
         break;
     case DIR_WEST:
         deltaX = -1;
-        deltaY = -1;
+        deltaY = -2;
         break;
     case DIR_EAST:
         deltaX = 1;
-        deltaY = -1;
+        deltaY = -2;
         break;
     }
     if (flickerOff)
@@ -294,15 +294,15 @@ void AnimatePcTurnOff()
     {
     case DIR_NORTH:
         deltaX = 0;
-        deltaY = -1;
+        deltaY = -2;
         break;
     case DIR_WEST:
         deltaX = -1;
-        deltaY = -1;
+        deltaY = -2;
         break;
     case DIR_EAST:
         deltaX = 1;
-        deltaY = -1;
+        deltaY = -2;
         break;
     }
     if (gSpecialVar_0x8004 == 0)
@@ -2550,4 +2550,35 @@ static void Task_WingFlapSound(u8 taskId)
     }
     if (data[0] == gSpecialVar_0x8004 - 1)
         DestroyTask(taskId);
+}
+
+void CheckSaveblockSizes(void)
+{
+	ConvertIntToDecimalStringN(gStringVar1, sizeof(struct SaveBlock1), STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar2, sizeof(struct SaveBlock2), STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, sizeof(struct PokemonStorage), STR_CONV_MODE_LEFT_ALIGN, 6);
+}
+
+void CheckSpecies(void)
+{
+    u8 i;
+    u16 species;
+    struct Pokemon *pokemon;
+    for (i = 0; i < CalculatePlayerPartyCount(); i++)
+    {
+        pokemon = &gPlayerParty[i];
+        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+        {
+            species = GetMonData(pokemon, MON_DATA_SPECIES);
+            if (species == gSpecialVar_0x8005)
+            {
+                gSpecialVar_Result = TRUE;
+                return;
+            }
+            else
+            {
+                gSpecialVar_Result = FALSE;
+            }
+        }
+    }
 }

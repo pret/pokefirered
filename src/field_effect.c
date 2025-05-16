@@ -485,7 +485,7 @@ static void FieldEffectScript_CallNative(const u8 **script, u32 *result)
     *script += sizeof(u32);
 }
 
-static void FieldEffectFreeGraphicsResources(struct Sprite *sprite)
+void FieldEffectFreeGraphicsResources(struct Sprite * sprite)
 {
     u16 tileStart = sprite->sheetTileStart;
     u8 paletteNum = sprite->oam.paletteNum;
@@ -615,7 +615,7 @@ u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
         return spriteId;
 }
 
-static u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority)
+u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority)
 {
     const struct CompressedSpritePalette * spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
     u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, 1, x, y, 0, spritePalette->tag);
@@ -761,10 +761,10 @@ bool8 FldEff_PokecenterHeal(void)
     nPokemon = CalculatePlayerPartyCount();
     task = &gTasks[CreateTask(Task_PokecenterHeal, 0xFF)];
     task->tNumMons = nPokemon;
-    task->tFirstBallX = 93;
-    task->tFirstBallY = 36;
+    task->tFirstBallX = 109;
+    task->tFirstBallY = 20;
     task->tMonitorX = 128;
-    task->tMonitorY = 24;
+    task->tMonitorY = 8;
     return FALSE;
 }
 

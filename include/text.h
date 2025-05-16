@@ -42,6 +42,8 @@ enum {
     RENDER_STATE_PAUSE,
 };
 
+#define TEXT_SPEED_FF 0xFF
+
 enum
 {
     FONTATTR_MAX_LETTER_WIDTH,
@@ -167,6 +169,7 @@ u16 FontFunc_NormalCopy2(struct TextPrinter *textPrinter);
 u16 FontFunc_Male(struct TextPrinter *textPrinter);
 u16 FontFunc_Female(struct TextPrinter *textPrinter);
 u16 FontFunc_Braille(struct TextPrinter *textPrinter);
+u32 IsInstantText(void);
 
 void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter);
 void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter);

@@ -334,7 +334,7 @@ void FieldInput_HandleCancelSignpost(struct FieldInput * input)
 
 static void Task_QuestLogPlayback_OpenStartMenu(u8 taskId)
 {
-    if (!ArePlayerFieldControlsLocked())
+    if (!ScriptContext2_IsEnabled())
     {
         PlaySE(SE_WIN_OPEN);
         ShowStartMenu();

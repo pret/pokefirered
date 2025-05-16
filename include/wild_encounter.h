@@ -33,6 +33,14 @@ struct WildPokemonHeader
     const struct WildPokemonInfo *fishingMonsInfo;
 };
 
+enum
+{
+	LAND_MONS_HEADER,
+	WATER_MONS_HEADER,
+	FISHING_MONS_HEADER,
+	ROCK_SMASH_MONS_HEADER,
+};
+
 extern const struct WildPokemonHeader gWildMonHeaders[];
 
 void DisableWildEncounters(bool8 disabled);
@@ -49,5 +57,8 @@ bool8 SweetScentWildEncounter(void);
 void SeedWildEncounterRng(u16 randVal);
 void ResetEncounterRateModifiers(void);
 bool8 TryStandardWildEncounter(u32 currMetatileAttrs);
+void GenerateWildMon(u16 species, u8 level, u8 slot);
+const struct WildPokemonInfo* LoadProperMonsData(u8 type);
+u32 GenerateUnownPersonalityByLetter(u8 letter);
 
 #endif // GUARD_WILD_ENCOUNTER_H

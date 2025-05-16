@@ -109,12 +109,12 @@ EventScript_GiveProfile:
 	end
 
 Text_IdLoveToHearYourProfile:
-	.string "Hi, glad to meet you!\p"
-	.string "…That's unfriendly of you.\n"
-	.string "How about saying hi back?\p"
-	.string "So, come on, tell me about\n"
-	.string "yourself.\p"
-	.string "I'd love to hear your profile!$"
+	.string "Hola, me da gusto verte.\p"
+	.string "Oye, te dije hola...\n"
+	.string "Qué grosero... al menos podrías\l"
+	.string "responder.\p"
+	.string "Vamos, cuéntame algo, ¿sí?\p"
+	.string "¡Dime al menos cuál es tu perfil!$"
 
 Text_TellMeWhatsYourProfile:
 	.string "Tell me something good about\n"

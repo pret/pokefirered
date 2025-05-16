@@ -1,5 +1,6 @@
 #include "global.h"
 #include "field_message_box.h"
+#include "field_name_box.h"
 #include "gflib.h"
 #include "new_menu_helpers.h"
 #include "quest_log.h"

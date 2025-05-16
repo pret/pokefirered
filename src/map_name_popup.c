@@ -150,9 +150,9 @@ static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
 {
     struct WindowTemplate windowTemplate = {
         .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 29,
-        .width = 14,
+        .tilemapLeft = 0,
+        .tilemapTop = 47,
+        .width = 30,
         .height = 2,
         .paletteNum = WIN_PAL_NUM,
         .baseBlock = 0x001
@@ -178,13 +178,14 @@ static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
         LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(WIN_PAL_NUM), PLTT_SIZE_4BPP);
     else
         CpuCopy16(GetTextWindowPalette(3), &gPlttBufferUnfaded[BG_PLTT_ID(WIN_PAL_NUM)], PLTT_SIZE_4BPP);
-    LoadStdWindowTiles(windowId, tileNum);
-    DrawTextBorderOuter(windowId, tileNum, WIN_PAL_NUM);
     PutWindowTilemap(windowId);
     MapNamePopupPrintMapNameOnWindow(windowId);
     CopyWindowToVram(windowId, COPYWIN_FULL);
     return windowId;
 }
+
+#include "menu.h"
+static const u8 sMapNamePopUpTextColors [] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
 
 static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
 {
@@ -197,10 +198,13 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
         ptr = MapNamePopupAppendFloorNum(ptr, gMapHeader.floorNum);
         maxWidth = gMapHeader.floorNum != FLOOR_ROOFTOP ? 152 : 176;
     }
-    xpos = (maxWidth - GetStringWidth(FONT_NORMAL, mapName, -1)) / 2;
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, mapName, xpos, 2, TEXT_SKIP_DRAW, NULL);
+    xpos = (maxWidth - GetStringWidth(FONT_SMALL, mapName, -1)) / 2;
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(15));
+    AddTextPrinterParameterized3(windowId, FONT_SMALL, 4, 2, sMapNamePopUpTextColors, TEXT_SKIP_DRAW, mapName);
 }
+//AddTextPrinterParameterized3(windowId, FONT_SMALL, xpos, 2, sMapNamePopUpTextColors, TEXT_SKIP_DRAW, mapName);
+//AddTextPrinterParameterized(windowId, FONT_SMALL, mapName, 4, 0, TEXT_SKIP_DRAW, NULL);
+
 
 static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 floorNum)
 {

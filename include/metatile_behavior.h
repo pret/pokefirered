@@ -135,5 +135,7 @@ bool8 MetatileBehavior_IsBurglary(u8 metatileBehavior);
 bool8 MetatileBehavior_IsTrainerTowerMonitor(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSecretBaseJumpMat(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSecretBaseSpinMat(u8 metatileBehavior);
+bool8 MetatileBehavior_IsLandWildEncounter(u8 metatileBehavior);
+bool8 MetatileBehavior_IsWaterWildEncounter(u8 metatileBehavior);
 
 #endif // GUARD_METATILE_BEHAVIOR

@@ -29,7 +29,7 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
-      "x": 16,
+      "x": 15,
       "y": 62,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -57,8 +57,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
-      "x": 11,
-      "y": 13,
+      "x": 13,
+      "y": 12,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -86,7 +86,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 17,
-      "y": 54,
+      "y": 75,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -99,8 +99,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 17,
-      "y": 64,
+      "x": 18,
+      "y": 63,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -113,89 +113,133 @@
     {
       "type": "clone",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
-      "x": 6,
+      "x": 5,
       "y": 85,
       "target_local_id": 8,
       "target_map": "MAP_VIRIDIAN_CITY"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "x": 5,
+      "y": 7,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route2_EventScript_Adolescente",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 11,
+      "y": 60,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 3,
+      "movement_range_y": 3,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "3",
+      "script": "Route2_EventScript_EntrenadorDamian",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
+      "x": 11,
+      "y": 68,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route2_EventScript_Policia",
+      "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 5,
-      "y": 13,
-      "elevation": 3,
-      "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE",
-      "dest_warp_id": "3"
-    },
-    {
       "x": 6,
-      "y": 13,
+      "y": 12,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE",
       "dest_warp_id": "3"
     },
     {
       "x": 5,
-      "y": 51,
+      "y": 12,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_NORTH_ENTRANCE",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 7,
+      "y": 50,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE",
       "dest_warp_id": "1"
     },
     {
-      "x": 17,
+      "x": 16,
       "y": 11,
       "elevation": 3,
       "dest_map": "MAP_DIGLETTS_CAVE_NORTH_ENTRANCE",
       "dest_warp_id": "1"
     },
     {
-      "x": 17,
-      "y": 22,
+      "x": 16,
+      "y": 23,
       "elevation": 0,
       "dest_map": "MAP_ROUTE2_HOUSE",
       "dest_warp_id": "1"
     },
     {
-      "x": 18,
+      "x": 17,
       "y": 46,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_EAST_BUILDING",
       "dest_warp_id": "1"
     },
     {
+      "x": 17,
+      "y": 41,
+      "elevation": 3,
+      "dest_map": "MAP_ROUTE2_EAST_BUILDING",
+      "dest_warp_id": "3"
+    },
+    {
       "x": 18,
       "y": 41,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_EAST_BUILDING",
-      "dest_warp_id": "3"
+      "dest_warp_id": "2"
     },
     {
-      "x": 19,
-      "y": 41,
-      "elevation": 3,
-      "dest_map": "MAP_ROUTE2_EAST_BUILDING",
-      "dest_warp_id": "3"
-    },
-    {
-      "x": 19,
+      "x": 18,
       "y": 46,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_EAST_BUILDING",
-      "dest_warp_id": "1"
+      "dest_warp_id": "0"
     },
     {
-      "x": 6,
-      "y": 51,
+      "x": 8,
+      "y": 50,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2_VIRIDIAN_FOREST_SOUTH_ENTRANCE",
-      "dest_warp_id": "1"
+      "dest_warp_id": "3"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",
-      "x": 14,
+      "x": 18,
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -204,10 +248,42 @@
     {
       "type": "sign",
       "x": 7,
-      "y": 73,
+      "y": 70,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route2_EventScript_RouteSign"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 70,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route2_EventScript_RouteSign"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route2_EventScript_RouteSign2"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route2_EventScript_RouteSign2"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 52,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route2_EventScript_RouteSign3"
     }
   ]
 }

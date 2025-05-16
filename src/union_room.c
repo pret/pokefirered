@@ -2411,7 +2411,7 @@ static void Task_RunUnionRoom(u8 taskId)
                 gSpecialVar_Result = 0;
             }
         }
-        else if (ArePlayerFieldControlsLocked() != TRUE)
+        else if (ScriptContext2_IsEnabled() != TRUE)
         {
             if (JOY_NEW(A_BUTTON))
             {

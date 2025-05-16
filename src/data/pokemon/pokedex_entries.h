@@ -5030,4 +5030,40 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 337,
         .trainerOffset = 2,
     },
+    [NATIONAL_DEX_MAGNEZONE] =
+    {
+        .categoryName = _("MAGNET"),
+        .height = 10,
+        .weight = 600,
+        .description = gMagnezonePokedexText,
+        .unusedDescription = gMagnezonePokedexTextUnused,
+        .pokemonScale = 293,
+        .pokemonOffset = -4,
+        .trainerScale = 273,
+        .trainerOffset = -2,
+    },
+    [NATIONAL_DEX_BONSLY] =
+    {
+        .categoryName = _("IMITATION"),
+        .height = 12,
+        .weight = 380,
+        .description = gBonslyPokedexText,
+        .unusedDescription = gBonslyPokedexTextUnused,
+        .pokemonScale = 293,
+        .pokemonOffset = -4,
+        .trainerScale = 273,
+        .trainerOffset = -2,
+    },
+    [NATIONAL_DEX_MIMEJR] =
+    {
+        .categoryName = _("BARRIER"),
+        .height = 10,
+        .weight = 600,
+        .description = gMinejrPokedexText,
+        .unusedDescription = gMinejrPokedexTextUnused,
+        .pokemonScale = 293,
+        .pokemonOffset = -4,
+        .trainerScale = 273,
+        .trainerOffset = -2,
+    },
 };

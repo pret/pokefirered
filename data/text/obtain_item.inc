@@ -1,47 +1,48 @@
 Text_ObtainedTheX::
-	.string "Obtained the {STR_VAR_2}!$"
+	.string "¡Obtuviste {SHADOW DYNAMIC_COLOR4}{STR_VAR_2}{SHADOW DYNAMIC_COLOR4}!$"
 
 Text_BagIsFull::
-	.string "The BAG is full…$"
+	.string "La {SHADOW DYNAMIC_COLOR4}MOCHILA{SHADOW DYNAMIC_COLOR4} está llena…$"
 
 Text_PutItemAway::
-	.string "{PLAYER} put the {STR_VAR_2}\n"
-	.string "in the {STR_VAR_3}.$"
+	.string "Has guardado {SHADOW DYNAMIC_COLOR4}{STR_VAR_2}\n"
+	.string "{SHADOW LIGHT_GRAY}en el {COLOR BLUE}{SHADOW LIGHT_BLUE}{STR_VAR_3}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}.$"
 
 Text_FoundOneItem::
-	.string "{PLAYER} found one {STR_VAR_2}!$"
+	.string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} encontró {SHADOW DYNAMIC_COLOR4}{STR_VAR_2}{SHADOW LIGHT_GRAY} !$"
 
 Text_TooBadBagFull::
-	.string "Too bad!\n"
-	.string "The BAG is full…$"
+	.string "¡Que mal!\n"
+	.string "La {SHADOW DYNAMIC_COLOR4}MOCHILA{SHADOW LIGHT_GRAY}  está llena…$"
 
 Text_FoundXCoins::
-	.string "{PLAYER} found\n"
-	.string "{STR_VAR_1} {STR_VAR_2}!$"
+	.string "¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}  encontró\n"
+	.string "{SHADOW DYNAMIC_COLOR4}{STR_VAR_1} {STR_VAR_2}{SHADOW LIGHT_GRAY} !$"
 
 Text_PutCoinsAwayInCoinCase::
-	.string "{PLAYER} put the COINS away in\n"
-	.string "the COIN CASE.$"
+	.string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW DYNAMIC_COLOR4} puso las {SHADOW DYNAMIC_COLOR4}MONEDAS{SHADOW LIGHT_GRAY}  en el\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}ESTUCHE DE MONEDAS{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}.$"
+
 
 Text_CoinCaseIsFull::
-	.string "Too bad!\n"
-	.string "The COIN CASE is full…$"
+	.string "¡Que mal!\n"
+	.string "El {COLOR BLUE}{SHADOW LIGHT_BLUE}ESTUCHE DE MONEDAS{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY} está lleno…$"
 
 Text_NothingToPutThemIn::
-	.string "Too bad!\n"
-	.string "There's nothing to put them in…$"
+	.string "¡Que mal!\n"
+	.string "No hay dónde poner esto…$"
 
 Text_FoundXItems::
-	.string "{PLAYER} found\n"
-	.string "{STR_VAR_1} {STR_VAR_2}(s)!$"
+	.string "¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW DYNAMIC_COLOR4} encontró\n"
+	.string "{SHADOW DYNAMIC_COLOR4}{STR_VAR_1} {STR_VAR_2}(s){SHADOW DYNAMIC_COLOR4}!$"
 
 Text_ObtainedTheDecor::
-	.string "Obtained the {STR_VAR_2}!$"
+	.string "¡Obtuviste {STR_VAR_2}!$"
 
 Text_NoRoomForAnotherDecor::
-	.string "Too bad! There's no room left for\n"
-	.string "another {STR_VAR_2}…$"
+	.string "¡Que mal! no queda espacio para\n"
+	.string "otro {STR_VAR_2}…$"
 
 Text_DecorTransferredToPC::
-	.string "The {STR_VAR_2} was transferred\n"
-	.string "to the PC.$"
+	.string "{STR_VAR_2} se transfirió\n"
+	.string "a tu PC.$"

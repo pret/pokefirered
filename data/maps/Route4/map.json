@@ -29,8 +29,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
-      "x": 9,
-      "y": 8,
+      "x": 10,
+      "y": 14,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
@@ -71,10 +71,10 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BOY",
-      "x": 15,
-      "y": 14,
+      "x": 16,
+      "y": 15,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -122,40 +122,42 @@
   "warp_events": [
     {
       "x": 19,
-      "y": 5,
+      "y": 11,
       "elevation": 3,
       "dest_map": "MAP_MT_MOON_1F",
       "dest_warp_id": "3"
     },
     {
-      "x": 32,
-      "y": 5,
+      "x": 41,
+      "y": 7,
       "elevation": 0,
       "dest_map": "MAP_MT_MOON_B1F",
       "dest_warp_id": "7"
     },
     {
       "x": 12,
-      "y": 5,
+      "y": 11,
       "elevation": 0,
       "dest_map": "MAP_ROUTE4_POKEMON_CENTER_1F",
-      "dest_warp_id": "1"
+      "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",
-      "x": 18,
-      "y": 7,
+      "x": 15,
+      "y": 13,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route4_EventScript_MtMoonSign"
     },
     {
       "type": "sign",
-      "x": 34,
-      "y": 7,
+      "x": 41,
+      "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route4_EventScript_RouteSign"
@@ -172,8 +174,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 5,
-      "y": 4,
+      "x": 11,
+      "y": 16,
       "elevation": 3,
       "item": "ITEM_PERSIM_BERRY",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE4_PERSIM_BERRY",
@@ -189,6 +191,14 @@
       "flag": "FLAG_HIDDEN_ITEM_ROUTE4_RAZZ_BERRY",
       "quantity": 1,
       "underfoot": false
+    },
+    {
+      "type": "sign",
+      "x": 14,
+      "y": 13,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route4_EventScript_MtMoonSign"
     }
   ]
 }

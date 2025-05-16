@@ -24,6 +24,9 @@
 #include "constants/help_system.h"
 #include "constants/songs.h"
 #include "constants/event_objects.h"
+#include "palette.h"
+
+void BlendPalette(u16, u16, u8, u16);
 
 enum {
     INPUT_NONE,
@@ -344,7 +347,7 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
     },
     [WIN_TEXT_ENTRY] = {
         .bg = 3,
-        .tilemapLeft = 8,
+        .tilemapLeft = 6,
         .tilemapTop = 6,
         .width = 14,
         .height = 2,
@@ -353,9 +356,9 @@ static const struct WindowTemplate sWindowTemplates[WIN_COUNT + 1] =
     },
     [WIN_TEXT_ENTRY_BOX] = {
         .bg = 3,
-        .tilemapLeft = 9,
-        .tilemapTop = 4,
-        .width = 16,
+        .tilemapLeft = 6,
+        .tilemapTop = 3,
+        .width = 20,
         .height = 2,
         .paletteNum = 10,
         .baseBlock = 0x004c
@@ -933,45 +936,18 @@ static void TryStartButtonFlash(u8 button, bool8 keepFlashing, bool8 interruptCu
 static void Task_UpdateButtonFlash(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
+    u16 base;
 
     if (task->tButtonId == BUTTON_COUNT || !task->tAllowFlash)
         return;
 
-    MultiplyInvertedPaletteRGBComponents(GetButtonPalOffset(task->tButtonId), task->tColor, task->tColor, task->tColor);
+    base = GetButtonPalOffset(task->tButtonId);
 
-    if (task->tColorDelay && --task->tColorDelay)
-        return;
-
-    task->tColorDelay = 2;
-    if (task->tColorIncr >= 0)
-    {
-        if (task->tColor < 14)
-        {
-            task->tColor += task->tColorIncr;
-            task->tColorDelta += task->tColorIncr;
-        }
-        else
-        {
-            task->tColor = 16;
-            task->tColorDelta++;
-        }
-    }
-    else
-    {
-        task->tColor += task->tColorIncr;
-        task->tColorDelta += task->tColorIncr;
-    }
-
-    if (task->tColor == 16 && task->tColorDelta == 22)
-    {
-        task->tColorIncr = -4;
-    }
-    else if (task->tColor == 0)
-    {
-        task->tAllowFlash = task->tKeepFlashing;
-        task->tColorIncr = 2;
-        task->tColorDelta = 0;
-    }
+    // Establece colores fijos en lugar de parpadeo
+    // Color 14: rojo brillante - RGB(31, 0, 0)
+    // Color 15: verde brillante - RGB(0, 31, 0)
+    gPlttBufferFaded[base]     = RGB(30, 8, 5); // índice 14
+    gPlttBufferFaded[base + 1] = RGB(31, 20, 18); // índice 15
 }
 
 static u16 GetButtonPalOffset(u8 button)
@@ -990,7 +966,12 @@ static u16 GetButtonPalOffset(u8 button)
 static void RestoreButtonColor(u8 button)
 {
     u16 index = GetButtonPalOffset(button);
+
+    // Restaurar el color original del índice 14
     gPlttBufferFaded[index] = gPlttBufferUnfaded[index];
+
+    // Restaurar el color original del índice 15
+    gPlttBufferFaded[index + 1] = gPlttBufferUnfaded[index + 1];
 }
 
 static void StartButtonFlash(struct Task *task, u8 button, u8 keepFlashing)
@@ -1092,22 +1073,29 @@ static void SpriteCB_Underscore(struct Sprite *sprite)
 {
     const s16 y[] = {2, 3, 2, 1};
     u8 pos = GetTextEntryPosition();
+    u8 fadeLevel;
 
-    if (pos != (u8)sprite->sId)
+    if (pos != (u8)sprite->data[0]) // sId
     {
         sprite->y2 = 0;
-        sprite->sYPosId = 0;
-        sprite->sDelay = 0;
+        sprite->data[1] = 0; // sYPosId
+        sprite->data[2] = 0; // sDelay
     }
     else
     {
-        sprite->y2 = y[sprite->sYPosId];
-        sprite->sDelay++;
-        if (sprite->sDelay > 8)
+        sprite->y2 = y[sprite->data[1]];
+        sprite->data[2]++;
+        if (sprite->data[2] > 8)
         {
-            sprite->sYPosId = (sprite->sYPosId + 1) & (ARRAY_COUNT(y) - 1);
-            sprite->sDelay = 0;
+            sprite->data[1] = (sprite->data[1] + 1) & (ARRAY_COUNT(y) - 1);
+            sprite->data[2] = 0;
         }
+
+        // Parpadeo: declarar fadeLevel antes del uso
+        fadeLevel = (sprite->data[2] * 2) & 0x1F;
+
+        BlendPalette(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_PAGE_SWAP_OTHERS)) + 2, 1, fadeLevel, RGB_WHITE);
+        BlendPalette(OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_PAGE_SWAP_OTHERS)) + 3, 1, fadeLevel, RGB_WHITE);
     }
 }
 
@@ -1228,21 +1216,35 @@ static void CreatePageSwapButtonSprites(void)
     u8 textSpriteId;
     u8 buttonSpriteId;
 
-    frameSpriteId = CreateSprite(&sSpriteTemplate_PageSwapFrame, 204, 88, 0);
+    frameSpriteId = CreateSprite(&sSpriteTemplate_PageSwapFrame, 199, 86, 0); // +5 en X
     sNamingScreen->swapBtnFrameSpriteId = frameSpriteId;
     SetSubspriteTables(&gSprites[frameSpriteId], sSubspriteTable_PageSwapFrame);
     gSprites[frameSpriteId].invisible = TRUE;
 
-    textSpriteId = CreateSprite(&sSpriteTemplate_PageSwapText, 204, 84, 1);
+    textSpriteId = CreateSprite(&sSpriteTemplate_PageSwapText, 199, 95, 1); // +5 en X
     gSprites[frameSpriteId].data[6] = textSpriteId;
     SetSubspriteTables(&gSprites[textSpriteId], sSubspriteTable_PageSwapText);
     gSprites[textSpriteId].invisible = TRUE;
 
-    buttonSpriteId = CreateSprite(&sSpriteTemplate_PageSwapButton, 204, 83, 2);
+    buttonSpriteId = CreateSprite(&sSpriteTemplate_PageSwapButton, 199, 94, 2); // +5 en X
     gSprites[buttonSpriteId].oam.priority = 1;
     gSprites[frameSpriteId].data[7] = buttonSpriteId;
     gSprites[buttonSpriteId].invisible = TRUE;
 }
+
+static void CreateBackOkSprites(void)
+{
+    u8 spriteId;
+
+    spriteId = CreateSprite(&sSpriteTemplate_BackButton, 199, 114, 0); // +5 en X
+    SetSubspriteTables(&gSprites[spriteId], sSubspriteTable_Button);
+    gSprites[spriteId].invisible = TRUE;
+
+    spriteId = CreateSprite(&sSpriteTemplate_OkButton, 199, 138, 0); // +5 en X
+    SetSubspriteTables(&gSprites[spriteId], sSubspriteTable_Button);
+    gSprites[spriteId].invisible = TRUE;
+}
+
 
 static void StartPageSwapButtonAnim(void)
 {
@@ -1333,36 +1335,50 @@ static void SetPageSwapButtonGfx(u8 page, struct Sprite *text, struct Sprite *bu
 #undef sTextSpriteId
 #undef sButtonSpriteId
 
-static void CreateBackOkSprites(void)
-{
-    u8 spriteId = CreateSprite(&sSpriteTemplate_BackButton, 204, 116, 0);
-    SetSubspriteTables(&gSprites[spriteId], sSubspriteTable_Button);
-    gSprites[spriteId].invisible = TRUE;
-
-    spriteId = CreateSprite(&sSpriteTemplate_OkButton, 204, 140, 0);
-    SetSubspriteTables(&gSprites[spriteId], sSubspriteTable_Button);
-    gSprites[spriteId].invisible = TRUE;
-}
-
+//LINEA PUNTEADA
 static void CreateTextEntrySprites(void)
 {
     u8 spriteId;
     s16 xPos;
     u8 i;
 
-    xPos = sNamingScreen->inputCharBaseXPos - 5;
-    spriteId = CreateSprite(&sSpriteTemplate_InputArrow, xPos, 56, 0);
-    gSprites[spriteId].oam.priority = 3;
-    gSprites[spriteId].invisible = TRUE;
-    xPos = sNamingScreen->inputCharBaseXPos;
-    for (i = 0; i < sNamingScreen->template->maxChars; i++, xPos += 8)
+    // Posición apodo pokémon
+    if (sNamingScreen->templateNum == NAMING_SCREEN_CAUGHT_MON
+     || sNamingScreen->templateNum == NAMING_SCREEN_NICKNAME)
     {
-        spriteId = CreateSprite(&sSpriteTemplate_Underscore, xPos + 3, 60, 0);
+        xPos = 54;
+        spriteId = CreateSprite(&sSpriteTemplate_InputArrow, xPos, 57, 0);
         gSprites[spriteId].oam.priority = 3;
-        gSprites[spriteId].data[0] = i;
         gSprites[spriteId].invisible = TRUE;
+
+        xPos = 60;
+        for (i = 0; i < sNamingScreen->template->maxChars; i++, xPos += 8)
+        {
+            spriteId = CreateSprite(&sSpriteTemplate_Underscore, xPos, 62, 0);
+            gSprites[spriteId].oam.priority = 3;
+            gSprites[spriteId].data[0] = i;
+            gSprites[spriteId].invisible = TRUE;
+        }
+    }
+    else
+    {
+        // Posición estándar para jugador, rival y caja
+        xPos = 54;
+        spriteId = CreateSprite(&sSpriteTemplate_InputArrow, xPos, 57, 0);
+        gSprites[spriteId].oam.priority = 3;
+        gSprites[spriteId].invisible = TRUE;
+
+        xPos = 60;
+        for (i = 0; i < sNamingScreen->template->maxChars; i++, xPos += 8)
+        {
+            spriteId = CreateSprite(&sSpriteTemplate_Underscore, xPos, 62, 0);
+            gSprites[spriteId].oam.priority = 3;
+            gSprites[spriteId].data[0] = i;
+            gSprites[spriteId].invisible = TRUE;
+        }
     }
 }
+
 
 //--------------------------------------------------
 // Icon creation (the thing you're naming or giving input to)
@@ -1393,14 +1409,14 @@ static void NamingScreen_CreatePlayerIcon(void)
     u8 spriteId;
 
     rivalGfxId = GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, sNamingScreen->monSpecies);
-    spriteId = CreateObjectGraphicsSprite(rivalGfxId, SpriteCallbackDummy, 56, 37, 0);
+    spriteId = CreateObjectGraphicsSprite(rivalGfxId, SpriteCallbackDummy, 34, 50, 0); // nueva posición
     gSprites[spriteId].oam.priority = 3;
     StartSpriteAnim(&gSprites[spriteId], ANIM_STD_GO_SOUTH);
 }
 
 static void NamingScreen_CreatePCIcon(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_PCIcon, 56, 41, 0);
+    u8 spriteId = CreateSprite(&sSpriteTemplate_PCIcon, 34, 51, 0);
     SetSubspriteTables(&gSprites[spriteId], sSubspriteTable_PCIcon);
     gSprites[spriteId].oam.priority = 3;
 }
@@ -1410,7 +1426,7 @@ static void NamingScreen_CreateMonIcon(void)
     u8 spriteId;
 
     LoadMonIconPalettes();
-    spriteId = CreateMonIcon(sNamingScreen->monSpecies, SpriteCallbackDummy, 56, 40, 0, sNamingScreen->monPersonality, 1);
+    spriteId = CreateMonIcon(sNamingScreen->monSpecies, SpriteCallbackDummy, 34, 51, 0, sNamingScreen->monPersonality, 1);
     gSprites[spriteId].oam.priority = 3;
 }
 
@@ -1447,7 +1463,7 @@ static void NamingScreen_CreateRivalIcon(void)
     template.anims = sAnims_Rival;
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&palette);
-    spriteId = CreateSprite(&template, 56, 37, 0);
+    spriteId = CreateSprite(&template, 34, 50, 0); // Nueva posición
     gSprites[spriteId].oam.priority = 3;
 }
 
@@ -1695,21 +1711,51 @@ static void HandleDpadMovement(struct Task *task)
 #undef tKeyboardEvent
 #undef tButtonId
 
+// TU NOMBRE ES...
 static void DrawNormalTextEntryBox(void)
 {
-    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
-    AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL_COPY_1, sNamingScreen->template->title, 1, 1, 0, NULL);
+    const u8 textColor[3] = {2, 1, 3}; // color texto, sombra, fondo
+
+    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(2));
+
+    AddTextPrinterParameterized3(
+        sNamingScreen->windows[WIN_TEXT_ENTRY_BOX],
+        FONT_NORMAL_COPY_1,
+        2,  // posición x (2 píxeles a la izquierda)
+        4,  // posición y (3 píxeles hacia abajo)
+        textColor,
+        0,
+        sNamingScreen->template->title
+    );
+
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX]);
 }
 
+
+
+
 static void DrawMonTextEntryBox(void)
 {
+    const u8 textColor[3] = {2, 1, 3}; // texto, sombra, fondo
     u8 buffer[32];
 
-    StringCopy(buffer, gSpeciesNames[sNamingScreen->monSpecies]);
-    StringAppendN(buffer, sNamingScreen->template->title, 15);
-    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(1));
-    AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], FONT_NORMAL_COPY_1, buffer, 1, 1, 0, NULL);
+    StringCopy(buffer, sNamingScreen->template->title); // "APODO PARA "
+    StringAppend(buffer, gSpeciesNames[sNamingScreen->monSpecies]);
+    StringAppend(buffer, gText_Ellipsis); // agrega "..."
+    
+
+    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX], PIXEL_FILL(2));
+
+    AddTextPrinterParameterized3(
+        sNamingScreen->windows[WIN_TEXT_ENTRY_BOX],
+        FONT_NORMAL_COPY_1,
+        2,  // posición x (2 píxeles a la izquierda)
+        4,  // posición y (3 píxeles hacia abajo)
+        textColor,
+        0,
+        buffer
+    );
+
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY_BOX]);
 }
 
@@ -1881,30 +1927,52 @@ static void DecompressToBgTilemapBuffer(u8 bg, const u32 *src)
 {
     CopyToBgTilemapBuffer(bg, src, 0, 0);
 }
-
+//LETRAS ELEGIDAS PARA EL NOMBRE
 static void DrawTextEntry(void)
 {
     u8 i;
     u8 temp[2];
     u16 extraWidth;
     u8 maxChars = sNamingScreen->template->maxChars;
-    u16 xpos = sNamingScreen->inputCharBaseXPos - 0x40;
+    const u8 textColor[3] = {15, 1, 2}; // texto: color 1, sombra: color 2, fondo: color 0
 
-    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY], PIXEL_FILL(1));
+    u16 xpos;
+    u8 ypos = 1;
+
+    // Diferenciar posición según tipo de pantalla de nombrado
+    if (sNamingScreen->templateNum == NAMING_SCREEN_CAUGHT_MON
+     || sNamingScreen->templateNum == NAMING_SCREEN_NICKNAME)
+        xpos = 10; // Pokémon
+    else
+        xpos = 10; // Jugador y rival
+
+    FillWindowPixelBuffer(sNamingScreen->windows[WIN_TEXT_ENTRY], PIXEL_FILL(13));
 
     for (i = 0; i < maxChars; i++)
     {
         temp[0] = sNamingScreen->textBuffer[i];
-        temp[1] = gExpandedPlaceholder_Empty[0];
+        temp[1] = EOS;
         extraWidth = (IsWideLetter(temp[0]) == TRUE) ? 2 : 0;
 
-        AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, temp, i * 8 + xpos + extraWidth, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized3(
+            sNamingScreen->windows[WIN_TEXT_ENTRY],
+            FONT_NORMAL,
+            i * 8 + xpos + extraWidth,
+            ypos,
+            textColor,
+            TEXT_SKIP_DRAW,
+            temp
+        );
     }
 
     TryDrawGenderIcon();
     CopyWindowToVram(sNamingScreen->windows[WIN_TEXT_ENTRY], COPYWIN_GFX);
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY]);
 }
+
+
+
+
 
 struct TextColor   // Needed because of alignment
 {
@@ -2221,14 +2289,14 @@ static const struct Subsprite sSubsprites_PageSwapFrame[] = {
 static const struct Subsprite sSubsprites_PageSwapText[] = {
     {
         .x = -12,
-        .y = -4,
+        .y = -5,
         .shape = SPRITE_SHAPE(16x8),
         .size = SPRITE_SIZE(16x8),
         .tileOffset = 0,
         .priority = 1
     }, {
         .x =   4,
-        .y = -4,
+        .y = -5,
         .shape = SPRITE_SHAPE(8x8),
         .size = SPRITE_SIZE(8x8),
         .tileOffset = 2,
@@ -2342,8 +2410,8 @@ static const union AnimCmd sAnim_CursorSquish[] = {
 };
 
 static const union AnimCmd sAnim_PCIcon[] = {
-    ANIMCMD_FRAME(0, 2),
-    ANIMCMD_FRAME(1, 2),
+    ANIMCMD_FRAME(0, 10),  // ← duración más larga
+    ANIMCMD_FRAME(1, 10),
     ANIMCMD_JUMP(0)
 };
 

@@ -33,9 +33,13 @@ struct WildEncounterData
 
 static EWRAM_DATA struct WildEncounterData sWildEncounterData = {};
 static EWRAM_DATA bool8 sWildEncountersDisabled = FALSE;
+static EWRAM_DATA u8** gWildDataSwitch = 0;
+static EWRAM_DATA const struct WildPokemonHeader* sSavedWildDataDaytimeHeader = NULL;
+static EWRAM_DATA u8 sSavedWildDataMapGroup = 0;
+static EWRAM_DATA u8 sSavedWildDataMapNum = 0;
 
 static bool8 UnlockedTanobyOrAreNotInTanoby(void);
-static u32 GenerateUnownPersonalityByLetter(u8 letter);
+u32 GenerateUnownPersonalityByLetter(u8 letter);
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *rate);
 static u8 GetFluteEncounterRateModType(void);
@@ -43,6 +47,7 @@ static void ApplyCleanseTagEncounterRateMod(u32 *rate);
 static bool8 IsLeadMonHoldingCleanseTag(void);
 static u16 WildEncounterRandom(void);
 static void AddToWildEncounterRateBuff(u8 encouterRate);
+void GenerateWildMon(u16 species, u8 level, u8 slot);
 
 #include "data/wild_encounters.h"
 
@@ -223,7 +228,7 @@ static bool8 UnlockedTanobyOrAreNotInTanoby(void)
     return FALSE;
 }
 
-static void GenerateWildMon(u16 species, u8 level, u8 slot)
+void GenerateWildMon(u16 species, u8 level, u8 slot)
 {
     u32 personality;
     s8 chamber;
@@ -240,7 +245,7 @@ static void GenerateWildMon(u16 species, u8 level, u8 slot)
     }
 }
 
-static u32 GenerateUnownPersonalityByLetter(u8 letter)
+u32 GenerateUnownPersonalityByLetter(u8 letter)
 {
     u32 personality;
     do
@@ -781,4 +786,134 @@ static void AddToWildEncounterRateBuff(u8 encounterRate)
         sWildEncounterData.encounterRateBuff += encounterRate;
     else
         sWildEncounterData.encounterRateBuff = 0;
+}
+
+static const struct WildPokemonHeader* GetCurrentMapWildMonDaytimeHeader(void)
+{
+	u32 i;
+
+	if (gWildDataSwitch != NULL)
+	{
+		if ((u32) gWildDataSwitch >= 0x8000000) //Real Pointer
+			return (const struct WildPokemonHeader*) gWildDataSwitch;
+		else
+			gWildDataSwitch = NULL;
+	}
+
+	if (gSaveBlock1Ptr->location.mapGroup == sSavedWildDataMapGroup
+	&&  gSaveBlock1Ptr->location.mapNum == sSavedWildDataMapNum)
+	{
+		return sSavedWildDataDaytimeHeader;
+	}
+	else //Cache data for faster data access
+	{
+		sSavedWildDataMapGroup = gSaveBlock1Ptr->location.mapGroup;
+		sSavedWildDataMapNum = gSaveBlock1Ptr->location.mapNum;
+	}
+
+	for (i = 0; gWildMonHeaders[i].mapGroup != 0xFF; ++i)
+	{
+		const struct WildPokemonHeader* wildHeader = &gWildMonHeaders[i];
+
+		if (wildHeader->mapGroup == gSaveBlock1Ptr->location.mapGroup
+		&&  wildHeader->mapNum   == gSaveBlock1Ptr->location.mapNum)
+		{
+			if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SIX_ISLAND_ALTERING_CAVE)
+			&&  gSaveBlock1Ptr->location.mapNum == MAP_NUM(SIX_ISLAND_ALTERING_CAVE))
+			{
+				u16 alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
+				if (alteringCaveId > 8)
+					alteringCaveId = 0;
+
+				i += alteringCaveId;
+			}
+
+			/* A function that returns true if the Tanoby Key flag has been set.
+			   If it hasn't, and you're in the ruins, then return false to indicate
+			   no Pokemon can be found. */
+			if (!UnlockedTanobyOrAreNotInTanoby())
+				break; //No Pokemon here					 
+
+			sSavedWildDataDaytimeHeader = &gWildMonHeaders[i]; //Cache data for faster data access
+			return &gWildMonHeaders[i];
+		}
+	}
+
+	sSavedWildDataDaytimeHeader = NULL; //No data on this map
+	return NULL;
+}
+
+static const struct WildPokemonHeader* GetCurrentMapWildMonHeader(void)
+{
+	if (gWildDataSwitch != NULL)
+	{
+		if ((u32) gWildDataSwitch >= 0x8000000) //Real Pointer
+			return (const struct WildPokemonHeader*) gWildDataSwitch;
+		else
+			gWildDataSwitch = NULL;
+	}
+
+	#ifdef TIME_ENABLED
+		u32 i;
+
+		const struct WildPokemonHeader* headerTable = NULL;
+
+		if (IsNightTime())
+			headerTable = gWildMonNightHeaders;
+		else if (IsMorning())
+			headerTable = gWildMonMorningHeaders;
+		else if (IsEvening())
+			headerTable = gWildMonEveningHeaders;
+
+		if (headerTable != NULL) //Not Daytime
+		{
+			for (i = 0; headerTable[i].mapGroup != 0xFF; ++i)
+			{
+				if (headerTable[i].mapGroup == gSaveBlock1Ptr->location.mapGroup
+				&&  headerTable[i].mapNum == gSaveBlock1Ptr->location.mapNum)
+					return &headerTable[i];
+			}
+		}
+	#endif
+
+	return GetCurrentMapWildMonDaytimeHeader();
+}
+
+static const struct WildPokemonInfo* LoadProperMonsPointer(const struct WildPokemonHeader* header, const u8 type)
+{
+	switch (type) {
+		case LAND_MONS_HEADER:
+			return header->landMonsInfo;
+		case WATER_MONS_HEADER:
+			return header->waterMonsInfo;
+		case FISHING_MONS_HEADER:
+			return header->fishingMonsInfo;
+		case ROCK_SMASH_MONS_HEADER:
+			return header->rockSmashMonsInfo;
+		default:
+			return NULL;
+	}
+}
+
+const struct WildPokemonInfo* LoadProperMonsData(u8 type)
+{
+	const struct WildPokemonInfo* monsInfo;
+	const struct WildPokemonHeader* header = GetCurrentMapWildMonHeader();
+
+	if (header == NULL) //No data whatsoever on this map
+		return NULL;
+
+	monsInfo = LoadProperMonsPointer(header, type);
+
+	if (monsInfo == NULL)
+	{
+		#ifdef TIME_ENABLED
+			header = GetCurrentMapWildMonDaytimeHeader();
+			monsInfo = LoadProperMonsPointer(header, type);
+			if (header == NULL || monsInfo == NULL)
+		#endif
+				return NULL;
+	}
+
+	return monsInfo;
 }

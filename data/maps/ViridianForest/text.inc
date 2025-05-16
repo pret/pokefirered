@@ -1,105 +1,162 @@
 ViridianForest_Text_FriendsItchingToBattle::
-    .string "I came here with some friends to\n"
-    .string "catch us some BUG POKéMON!\p"
-    .string "They're all itching to get into\n"
-    .string "some POKéMON battles!$"
+    .string "{COLOR DARK_GRAY}¡Vine aquí con amigos para atrapar\n"
+    .string "algunos {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} tipo {SHADOW DYNAMIC_COLOR4}BICHO{SHADOW LIGHT_GRAY}!\p"
+    .string "Todos están ansiosos por\n"
+    .string "participar en batallas {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.$"
 
 ViridianForest_Text_RickIntro::
-    .string "Hey! You have POKéMON!\n"
-    .string "Come on!\l"
-    .string "Let's battle 'em!$"
+    .string "{COLOR DARK_GRAY}¡Hey! Tú tienes {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}, ¿verdad?\n"
+    .string "¡Ven, vamos a tener una batalla!$"
 
 ViridianForest_Text_RickDefeat::
-    .string "No!\nCATERPIE can't hack it!$"
+    .string "¡Nooo!\n¿CATERPIE, estás bien?$"
 
 ViridianForest_Text_RickPostBattle::
-    .string "Ssh! You'll scare the bugs away.\n"
-    .string "Another time, okay?$"
+    .string "{COLOR DARK_GRAY}¡Ssh!\n"
+    .string "¡Vas a espantar a los bichos!...$"
 
 ViridianForest_Text_DougIntro::
-    .string "Yo!\n"
-    .string "You can't jam out if you're a\l"
-    .string "POKéMON TRAINER!$"
+    .string "{COLOR DARK_GRAY}¡Eh!\p"
+    .string "¡Hay que tener disciplina para ser\n"
+    .string "{SHADOW DYNAMIC_COLOR4}ENTRENADOR POKÉMON{SHADOW LIGHT_GRAY}!$"
 
 ViridianForest_Text_DougDefeat::
-    .string "Huh?\n"
-    .string "I ran out of POKéMON!$"
+    .string "¿SERÁ POSIBLE?\n"
+    .string "¡NO ME QUEDAN MÁS POKÉMON!$"
 
 ViridianForest_Text_DougPostBattle::
-    .string "That totally stinks! I'm going to\n"
-    .string "catch some stronger ones!$"
+    .string "{COLOR DARK_GRAY}¡Vaya! \n"
+    .string "¡Voy a atrapar unos más fuertes!$"
 
 ViridianForest_Text_SammyIntro::
-    .string "Hey, wait up!\n"
-    .string "What's the hurry? Why the rush?$"
+    .string "{COLOR DARK_GRAY}¡Eh, espera!\n"
+    .string "¿Por qué tienes tanta prisa?$"
 
 ViridianForest_Text_SammyDefeat::
-    .string "I give!\n"
-    .string "You're good at this!$"
+    .string "¡ME RINDO!\n"
+    .string "¡ERES DEMASIADO FUERTE!$"
 
 ViridianForest_Text_SammyPostBattle::
-    .string "Sometimes, you can find stuff on\n"
-    .string "the ground.\p"
-    .string "I'm looking for the stuff I\n"
-    .string "dropped. Can you help me?$"
+    .string "{COLOR DARK_GRAY}¡A veces puedes encontrar cosas\n"
+    .string "en el suelo!\p"
+    .string "¡Estoy buscando los objetos que\n"
+    .string "se me cayeron!$"
 
 ViridianForest_Text_AnthonyIntro::
-    .string "I might be little, but I won't like\n"
-    .string "it if you go easy on me!$"
+    .string "{COLOR DARK_GRAY}Estoy obsesionado con la belleza\n"
+    .string "del {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}...$"
 
 ViridianForest_Text_AnthonyDefeat::
-    .string "Oh, boo.\n"
-    .string "Nothing went right.$"
+    .string "¡OH!\n"
+    .string "¡TUS POKéMON SON MUY FUERTES!$"
 
 ViridianForest_Text_AnthonyPostBattle::
-    .string "I lost some of my allowance…$"
+    .string "{COLOR DARK_GRAY}Parece que estoy un poco\n"
+    .string "deshidratado...\p"
+    .string "Llevo horas aqui admirando la\n"
+    .string "naturaleza...$"
+
+ViridianForest_Text_NPC::
+    .string "No quiero luchar, solo estoy esperando\n"
+    .string "el momento perfecto para atrapar mi\l"
+    .string "próximo {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.$"
 
 ViridianForest_Text_CharlieIntro::
-    .string "Did you know that POKéMON evolve?$"
+    .string "{COLOR DARK_GRAY}¿Has experimentado alguna vez la\n"
+    .string "emoción de ver a tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\l"
+    .string "evolucionar?$"
 
 ViridianForest_Text_CharlieDefeat::
-    .string "Oh!\n"
-    .string "I lost!$"
+    .string "¡OH!\n"
+    .string "¡HE PERDIDO!$"
 
 ViridianForest_Text_CharliePostBattle::
-    .string "BUG POKéMON evolve quickly.\n"
-    .string "They're a lot of fun!$"
+    .string "{COLOR DARK_GRAY}Es sorprendente lo rápido que\n"
+    .string "evolucionan los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.$"
 
 ViridianForest_Text_RanOutOfPokeBalls::
-    .string "I was throwing POKé BALLS to\n"
-    .string "catch POKéMON, and I ran out.\p"
-    .string "That's why you can never have too\n"
-    .string "many POKé BALLS.$"
+    .string "{COLOR DARK_GRAY}¡Estaba lanzando {SHADOW DYNAMIC_COLOR4}POKé BALLS{SHADOW LIGHT_GRAY} para\n"
+    .string "atrapar {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} y de repente se\l"
+    .string "escapó!\p"
+    .string "Por eso siempre es bueno llevar\n"
+    .string "muchas {SHADOW DYNAMIC_COLOR4}POKé BALLS{SHADOW LIGHT_GRAY}.$"
 
 ViridianForest_Text_AvoidGrassyAreasWhenWeak::
-    .string "TRAINER TIPS\p"
-    .string "If your POKéMON are weak and you\n"
-    .string "want to avoid battles, stay away\l"
-    .string "from grassy areas!$"
+    .string "{SHADOW DYNAMIC_COLOR4}PISTAS ENTRENADOR{SHADOW LIGHT_GRAY}\p"
+    .string "¡Debilita a los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} antes\n"
+    .string "de intentar capturarlos!\p"
+    .string "¡Si están fuertes, podrían escapar!$"
 
 ViridianForest_Text_UseAntidoteForPoison::
-    .string "For poison, use ANTIDOTE!\n"
-    .string "Get it at POKéMON MARTS!$"
+    .string "{SHADOW DYNAMIC_COLOR4}PISTAS ENTRENADOR{SHADOW LIGHT_GRAY}\p"
+    .string "¡Usa {SHADOW DYNAMIC_COLOR4}ANTÍDOTO{SHADOW LIGHT_GRAY} contra el veneno!\p"
+    .string "¡Lo conseguirás en las {SHADOW DYNAMIC_COLOR4}TIENDAS\n"
+    .string "POKéMON{SHADOW LIGHT_GRAY}!$"
+    
 
 ViridianForest_Text_ContactOakViaPCToRatePokedex::
-    .string "TRAINER TIPS\p"
-    .string "Contact PROF. OAK via a PC to\n"
-    .string "get your POKéDEX evaluated!$"
+    .string "{SHADOW DYNAMIC_COLOR4}PISTAS ENTRENADOR{SHADOW LIGHT_GRAY}\p"
+    .string "¡Para evaluar tu {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}, llama\n"
+    .string "al {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY} vía {SHADOW DYNAMIC_COLOR4}PC{SHADOW LIGHT_GRAY}!$"
 
 ViridianForest_Text_CantCatchOwnedMons::
-    .string "TRAINER TIPS\p"
-    .string "You can't catch a POKéMON that\n"
-    .string "belongs to someone else.\p"
-    .string "Throw POKé BALLS only at wild\n"
-    .string "POKéMON to catch them!$"
+    .string "{SHADOW DYNAMIC_COLOR4}PISTAS ENTRENADOR{SHADOW LIGHT_GRAY}\p"
+    .string "¡No robes los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} de otros\n"
+    .string "{SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY}!\p"
+    .string "¡Captura sólo {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} salvajes\n"
+    .string "con las {SHADOW DYNAMIC_COLOR4}POKé BALLS{SHADOW LIGHT_GRAY}!$"
 
 ViridianForest_Text_WeakenMonsBeforeCapture::
-    .string "TRAINER TIPS\p"
-    .string "Weaken POKéMON before attempting\n"
-    .string "capture!\p"
-    .string "When healthy, they may escape!$"
+    .string "{SHADOW DYNAMIC_COLOR4}PISTAS ENTRENADOR{SHADOW LIGHT_GRAY}\p"
+    .string "¡Debilita a los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} antes\n"
+    .string "de intentar capturarlos!\p"
+    .string "¡Si están fuertes, podrían escapar!$"
 
 ViridianForest_Text_LeavingViridianForest::
-    .string "LEAVING VIRIDIAN FOREST\n"
-    .string "PEWTER CITY AHEAD$"
+    .string "{SHADOW DYNAMIC_COLOR4}BOSQUE VERDE\n"
+    .string "{UP_ARROW_2}{SHADOW LIGHT_GRAY} RUTA 2 NORTE$"
 
+ViridianForest_Text_Batalla1_Rojo::
+    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} ¡Mira donde te encuentro!\p"
+    .string "¿Cómo va la búsqueda de nuevos\n"
+    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}?$"
+
+ViridianForest_Text_Batalla2_Rojo::
+    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} ¡Te dije que el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}\n"
+    .string "era fascinante!\p"
+    .string "Además de tener una gran variedad\n"
+    .string "de {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.\p"
+    .string "Me encantaría ver qué nuevas\n"
+    .string "especies has registrado...$"
+
+ViridianForest_Text_Batalla3_Rojo::
+    .string "¡TIENES UN EQUIPO IMPRESIONANTE!$"
+
+ViridianForest_Text_Batalla4_Rojo::
+    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} Creo que es hora de que me vaya...\n"
+    .string "Todavía nos queda mucho camino\l"
+    .string "por delante.$"
+
+
+ViridianForest_Text_Batalla5_Rojo::
+    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} ¡Soy tan despistado!\n"
+    .string "Casi me voy sin entregarte esto...$"
+
+ViridianForest_Text_RepExpRojo::
+    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} obtuvo {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY}\n"
+    .string "de manos de {SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY}.$"
+
+ViridianForest_Text_Batalla6_Rojo::
+    .string "{SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY}: El {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY} es un objeto\n"
+    .string "que un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} puede llevar consigo.\p"
+    .string "Con este objeto, el {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} que lo\n"  
+    .string "tenga ganará puntos de experiencia,\l"
+    .string "incluso si no se encuentra\l"
+    .string "en combate.\p"
+    .string "Estoy seguro de que te será de\n"  
+    .string "gran ayuda en tu aventura.$"
+
+ViridianForest_Text_BosqueVerde::
+    .string "{SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}\p"
+    .string "Entre sombras y laberintos los\n"
+    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} danzan en la penumbra.$"

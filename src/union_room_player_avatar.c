@@ -203,7 +203,7 @@ static bool32 TryReleaseUnionRoomPlayerObjectEvent(u32 leaderId)
     if (!ObjectEventClearHeldMovementIfFinished(object))
         return FALSE;
 
-    if (!ArePlayerFieldControlsLocked())
+    if (!ScriptContext2_IsEnabled())
         UnfreezeObjectEvent(object);
     else
         FreezeObjectEvent(object);

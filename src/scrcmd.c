@@ -32,6 +32,7 @@
 #include "shop.h"
 #include "slot_machine.h"
 #include "field_effect.h"
+#include "field_name_box.h"
 #include "fieldmap.h"
 #include "field_door.h"
 #include "constants/event_objects.h"
@@ -2247,5 +2248,20 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext * ctx)
 
     if (partyIndex < PARTY_SIZE)
         SetMonData(&gPlayerParty[partyIndex], MON_DATA_MET_LOCATION, &location);
+    return FALSE;
+}
+
+bool8 ScrCmd_namebox(struct ScriptContext *ctx) {
+    const u8 *name = (const u8 *)ScriptReadWord(ctx);
+
+    if (name == NULL)
+        name = (const u8 *)ctx->data[0];
+    ShowNamebox(name);
+    return FALSE;
+}
+
+bool8 ScrCmd_hidenamebox(struct ScriptContext *ctx) {
+    if(IsNameboxDisplayed())
+        ClearNamebox();
     return FALSE;
 }

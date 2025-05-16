@@ -1634,6 +1634,20 @@
 	.endm
 
 
+	@ Starts displaying a name box containing the specified text. If text is a pointer, then the string at 
+	@ that offset will be loaded and used. If text is script bank 0, then the value of script bank 0 will be treated as 
+	@ a pointer to the text. (You can use loadpointer to place a string pointer in a script bank.)
+	.macro namebox name:req
+	.byte 0xd5
+	.4byte \name
+	.endm
+    
+	@ Closes the current message box.
+	.macro hidenamebox
+	.byte 0xd6
+	.endm
+
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req

@@ -90,3 +90,59 @@ MtMoon_1F_Text_BrockHelpsExcavateFossils::
     .string "under MT. MOON.\p"
     .string "Sometimes, BROCK of PEWTER GYM\n"
     .string "lends me a hand.$"
+
+MtMoon_1F_Text_Sign01::
+    .string "{SHADOW DYNAMIC_COLOR4}MONTE LUNAR{SHADOW LIGHT_GRAY}\n"
+    .string "La cuna de las estrellas$"
+
+MtMoon_1F_Text_SilvioTerminado::
+    .string "EVENTO TERMINADO$"
+
+
+Name_Desconociodo::
+    .string "???$"
+Name_Silvio::
+    .string "SILVIO$"
+
+MtMoon_1F_Text_Silvio_EsperaUnSegundo::
+    .string "¡Eh! ¡Tú! Espera un segundo...$"
+
+MtMoon_1F_Text_Silvio_EresEntrenadora::
+    .string "¿Eres {SHADOW DYNAMIC_COLOR4}ENTRENADORA POKéMON{SHADOW LIGHT_GRAY}?$"
+
+MtMoon_1F_Text_Silvio_QueSorpresa::
+    .string "Qué sorpresa encontrar alguien así tan\n"
+    .string "adentro del {SHADOW DYNAMIC_COLOR4}MONTE LUNAR{SHADOW LIGHT_GRAY}.\p"
+    .string "Me llamo {SHADOW DYNAMIC_COLOR4}SILVIO{SHADOW LIGHT_GRAY}. Fui geólogo por\n"
+    .string "muchos años en el {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}\l"
+    .string "de {SHADOW DYNAMIC_COLOR4}CIUDAD PLATEADA{SHADOW LIGHT_GRAY}.\p"
+    .string "Aunque ya no trabajo allí, no puedo\n"
+    .string "evitar regresar de vez en cuando...$"
+
+MtMoon_1F_Text_Silvio_3::
+    .string "Este lugar es especial. Estas vetas\n"
+    .string "de roca, estas grietas...\p"
+    .string "A veces ocultan fragmentos de\n"
+    .string "piedras evolutivas.\p"
+    .string "Si sabes observar, el monte te habla.$"
+
+MtMoon_1F_Text_SilvioIntro::
+    .string "Pero claro, no todo se aprende\n"
+    .string "observando.\p"
+    .string "¿Qué te parece si medimos tu instinto\n"
+    .string "con una batalla?\p"
+    .string "Nada muy formal, solo un combate\n"
+    .string "amistoso entre colegas de caminos\l"
+    .string "polvorientos.$"
+
+MtMoon_1F_Text_SilvioDefeat::
+    .string "¡ESO FUE MAGNÍFICO!\n"
+    .string "TIENES BUEN OJO Y AÚN MEJOR ESTRATEGIA$"
+    
+MtMoon_1F_Text_Silvio_4::
+    .string "Cuando vuelvas a {SHADOW DYNAMIC_COLOR4}CIUDAD PLATEADA{SHADOW LIGHT_GRAY},\n"
+    .string "pasa por mi tienda. Tengo algunas piedras\l"
+    .string "que podrían ayudarte a evolucionar tu\l"
+    .string "equipo.\l"
+    .string "Será un gusto hacer negocios con\l"
+    .string "alguien que sabe luchar.$"

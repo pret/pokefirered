@@ -2721,6 +2721,28 @@ const u32 gMonShinyPalette_Chimecho[] = INCBIN_U32("graphics/pokemon/chimecho/sh
 const u8 gMonIcon_Chimecho[] = INCBIN_U8("graphics/pokemon/chimecho/icon.4bpp");
 const u8 gMonFootprint_Chimecho[] = INCBIN_U8("graphics/pokemon/chimecho/footprint.1bpp");
 
+const u32 gMonFrontPic_Magnezone[] = INCBIN_U32("graphics/pokemon/magnezone/front.4bpp.lz");
+const u32 gMonPalette_Magnezone[] = INCBIN_U32("graphics/pokemon/magnezone/normal.gbapal.lz");
+const u32 gMonBackPic_Magnezone[] = INCBIN_U32("graphics/pokemon/magnezone/back.4bpp.lz");
+const u32 gMonShinyPalette_Magnezone[] = INCBIN_U32("graphics/pokemon/magnezone/shiny.gbapal.lz");
+const u8 gMonIcon_Magnezone[] = INCBIN_U8("graphics/pokemon/magnezone/icon.4bpp");
+const u8 gMonFootprint_Magnezone[] = INCBIN_U8("graphics/pokemon/magnezone/footprint.1bpp");
+
+const u32 gMonFrontPic_Bonsly[] = INCBIN_U32("graphics/pokemon/bonsly/front.4bpp.lz");
+const u32 gMonPalette_Bonsly[] = INCBIN_U32("graphics/pokemon/bonsly/normal.gbapal.lz");
+const u32 gMonBackPic_Bonsly[] = INCBIN_U32("graphics/pokemon/bonsly/back.4bpp.lz");
+const u32 gMonShinyPalette_Bonsly[] = INCBIN_U32("graphics/pokemon/bonsly/shiny.gbapal.lz");
+const u8 gMonIcon_Bonsly[] = INCBIN_U8("graphics/pokemon/bonsly/icon.4bpp");
+const u8 gMonFootprint_Bonsly[] = INCBIN_U8("graphics/pokemon/bonsly/footprint.1bpp");
+
+const u32 gMonFrontPic_Mimejr[] = INCBIN_U32("graphics/pokemon/mime_jr/front.4bpp.lz");
+const u32 gMonPalette_Mimejr[] = INCBIN_U32("graphics/pokemon/mime_jr/normal.gbapal.lz");
+const u32 gMonBackPic_Mimejr[] = INCBIN_U32("graphics/pokemon/mime_jr/back.4bpp.lz");
+const u32 gMonShinyPalette_Mimejr[] = INCBIN_U32("graphics/pokemon/mime_jr/shiny.gbapal.lz");
+const u8 gMonIcon_Mimejr[] = INCBIN_U8("graphics/pokemon/mime_jr/icon.4bpp");
+const u8 gMonFootprint_Mimejr[] = INCBIN_U8("graphics/pokemon/mime_jr/footprint.1bpp");
+
+
 const u32 gMonFrontPic_Egg[] = INCBIN_U32("graphics/pokemon/egg/front.4bpp.lz");
 const u32 gMonPalette_Egg[] = INCBIN_U32("graphics/pokemon/egg/normal.gbapal.lz");
 

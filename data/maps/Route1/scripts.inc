@@ -11,11 +11,13 @@ Route1_EventScript_MartClerk::
 	goto_if_eq VAR_RESULT, FALSE, EventScript_BagIsFull
 	bufferitemname STR_VAR_2, ITEM_POTION
 	playfanfare MUS_LEVEL_UP
+	signmsg
 	message Text_ObtainedTheX
 	waitmessage
 	waitfanfare
 	additem ITEM_POTION
 	msgbox Route1_Text_PutPotionAway
+	normalmsg
 	call EventScript_RestorePrevTextColor
 	setflag FLAG_GOT_POTION_ON_ROUTE_1
 	release
@@ -32,4 +34,13 @@ Route1_EventScript_Boy::
 
 Route1_EventScript_RouteSign::
 	msgbox Route1_Text_RouteSign, MSGBOX_SIGN
+	end
+
+Route1_EventScript_RouteSign2::
+	msgbox Route1_Text_RouteSign2, MSGBOX_SIGN
+	end
+
+Route1_EventScript_Damian::
+	trainerbattle_single TRAINER_YOUNGSTER_JOSH, Route1_EventScript_DamianIntro, Route1_EventScript_DamianDefeat
+	msgbox Route1_EventScript_DamianPostBattle, MSGBOX_AUTOCLOSE
 	end

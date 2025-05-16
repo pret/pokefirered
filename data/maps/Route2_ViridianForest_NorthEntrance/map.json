@@ -13,7 +13,7 @@
   "show_map_name": false,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "type": "object",
@@ -21,7 +21,7 @@
       "x": 5,
       "y": 4,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -35,7 +35,7 @@
       "x": 4,
       "y": 7,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -47,9 +47,9 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
       "x": 10,
-      "y": 5,
+      "y": 4,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -60,22 +60,15 @@
   ],
   "warp_events": [
     {
-      "x": 6,
-      "y": 10,
+      "x": 8,
+      "y": 9,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_FOREST",
-      "dest_warp_id": "2"
+      "dest_warp_id": "3"
     },
     {
       "x": 7,
-      "y": 10,
-      "elevation": 3,
-      "dest_map": "MAP_VIRIDIAN_FOREST",
-      "dest_warp_id": "2"
-    },
-    {
-      "x": 8,
-      "y": 10,
+      "y": 9,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_FOREST",
       "dest_warp_id": "2"
@@ -85,9 +78,20 @@
       "y": 1,
       "elevation": 3,
       "dest_map": "MAP_ROUTE2",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 8,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE2",
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
-  "bg_events": []
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
 }

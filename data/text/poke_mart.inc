@@ -1,29 +1,26 @@
 Text_MayIHelpYou::
-	.string "Hi, there!\n"
-	.string "May I help you?$"
+	.string "{COLOR DARK_GRAY}¡Hola! ¿Puedo ayudarte en algo?$"
 
 Text_FillOutQuestionnaire::
-	.string "There is a questionnaire.\n"
-	.string "Would you like to fill it out?$"
+	.string "{COLOR DARK_GRAY}Hay un cuestionario.\n"
+	.string "¿Quieres rellenarlo?$"
 
 Text_QuestionnaireThankYou::
-	.string "Thank you for taking the time to\n"
-	.string "fill out our questionnaire.\p"
-	.string "Your feedback will be used for\n"
-	.string "future reference.$"
+	.string "{COLOR DARK_GRAY}Gracias por rellenar el\n"
+	.string "cuestionario. Usaremos tus\l"
+	.string "respuestas a modo de referencia.$"
 
 Text_YouKnowThoseWords::
-	.string "Oh, hello!\n"
-	.string "You know those words?\p"
-	.string "That means you must know about\n"
-	.string "the MYSTERY GIFT.\p"
-	.string "From now on, you should be\n"
-	.string "receiving MYSTERY GIFTS!$"
+	.string "{COLOR DARK_GRAY}Hola, ¿conoces las palabras?\p"
+	.string "Pues entonces debes de saber\n"
+	.string "de qué va el REGALO MISTERIOSO.\p"
+	.string "¡A partir de ahora, podrás recibir\n"
+	.string "REGALOS MISTERIOSOS!$"
 
 Text_YouCanAccessMysteryGift::
-	.string "Once you save your game, you can\n"
-	.string "access the MYSTERY GIFT.$"
+	.string "{COLOR DARK_GRAY}Una vez guardes la partida, podrás\n"
+	.string "acceder al REGALO MISTERIOSO.$"
 
 Text_ThankYouForAccessingMysteryGift::
-	.string "Thank you for accessing the\n"
-	.string "MYSTERY GIFT System.$"
+	.string "{COLOR DARK_GRAY}Gracias por acceder al sistema\n"
+	.string "del REGALO MISTERIOSO.$"

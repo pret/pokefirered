@@ -6,6 +6,9 @@ GAME_LANGUAGE ?= ENGLISH
 MODERN        ?= 0
 COMPARE       ?= 0
 
+# If you use 1Mbit Flash, change "?= SRAM" to "?= NO"
+SAVE_SRAM       ?= SRAM
+
 # For gbafix
 MAKER_CODE  := 01
 

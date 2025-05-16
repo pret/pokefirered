@@ -1087,7 +1087,7 @@ static void Task_FinalScene_WaitFade(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
 
-    if (ArePlayerFieldControlsLocked() != TRUE)
+    if (ScriptContext2_IsEnabled() != TRUE)
     {
         FreezeObjectEvents();
         HandleEnforcedLookDirectionOnPlayerStopMoving();
@@ -1417,7 +1417,7 @@ void sub_81127F8(struct FieldInput * a0)
         sCurQuestLogEntry[sQuestLogCursor].mapGroup = r2 >> 16;
         sCurQuestLogEntry[sQuestLogCursor].animId = r2 >> 24; // always 0
         sQuestLogCursor++;
-        if (ArePlayerFieldControlsLocked())
+        if (ScriptContext2_IsEnabled())
             sNextStepDelay = TRUE;
         else
             sNextStepDelay = FALSE;
@@ -1590,7 +1590,7 @@ void sub_8112B3C(void)
         }
         break;
     case 2:
-        if (ArePlayerFieldControlsLocked() != TRUE)
+        if (ScriptContext2_IsEnabled() != TRUE)
         {
             sNextStepDelay++;
             if (sQuestLogCursor >= sNumEventsInLogEntry)
@@ -1627,7 +1627,7 @@ u8 sub_8112CAC(void)
 
 static bool8 RecordHeadAtEndOfEntryOrScriptContext2Enabled(void)
 {
-    if (sQuestLogCursor >= sNumEventsInLogEntry || ArePlayerFieldControlsLocked() == TRUE)
+    if (sQuestLogCursor >= sNumEventsInLogEntry || ScriptContext2_IsEnabled() == TRUE)
         return TRUE;
     return FALSE;
 }

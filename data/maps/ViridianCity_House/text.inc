@@ -1,16 +1,17 @@
 ViridianCity_House_Text_NicknamingIsFun::
-    .string "Coming up with nicknames is fun,\n"
-    .string "but it's not so easy to do.\p"
-    .string "Clever names are nice, but simple\n"
-    .string "names are easier to remember.$"
+    .string "{COLOR DARK_GRAY}Inventarse apodos es divertido,\n"
+    .string "pero difícil.\p"
+    .string "Es más fácil recordar nombres\n"
+    .string "sencillos.$"
 
 ViridianCity_House_Text_MyDaddyLovesMonsToo::
-    .string "My daddy loves POKéMON, too.$"
+    .string "{COLOR DARK_GRAY}¡A mi padre también le gustan los\n"
+    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}!$"
 
 ViridianCity_House_Text_Speary::
-    .string "SPEARY: Tetweet!$"
+    .string "{SHADOW DYNAMIC_COLOR4}SPEARY:{SHADOW LIGHT_GRAY} ¡Spe-pe-peeary!$"
 
 ViridianCity_House_Text_SpearowNameSpeary::
-    .string "SPEAROW\n"
-    .string "Name: SPEARY$"
+    .string "{SHADOW DYNAMIC_COLOR4}SPEAROW{SHADOW LIGHT_GRAY}\n"
+    .string "NOMBRE: SPEARY$"
 

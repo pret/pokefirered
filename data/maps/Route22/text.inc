@@ -1,25 +1,24 @@
 Route22_Text_EarlyRivalIntro::
-	.string "{RIVAL}: Hey! {PLAYER}!\p"
-	.string "You're off to the POKéMON LEAGUE?\n"
-	.string "Forget about it!\p"
-	.string "You probably don't have any\n"
-	.string "BADGES, do you?\p"
-	.string "The guard won't let you through\n"
-	.string "without them.\p"
-	.string "By the way, did your POKéMON get\n"
-	.string "any stronger?$"
+	.string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}{RIVAL}{SHADOW LIGHT_GRAY}: ¡Eh! ¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
+	.string "¿Vas a la {SHADOW DYNAMIC_COLOR4}LIGA POKéMON{SHADOW LIGHT_GRAY}?\n"
+	.string "¡Olvídalo! ¡Seguro que no tienes\n"
+	.string "ninguna {SHADOW DYNAMIC_COLOR4}MEDALLA{SHADOW LIGHT_GRAY}!\p"
+	.string "¡El guardia no te dejará pasar!\p"
+	.string "Dime, ¿ya son más fuertes tus\n"
+	.string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}?$"
 
 Route22_Text_EarlyRivalDefeat::
-	.string "Awww!\n"
-	.string "You just lucked out!$"
+	.string "¡Auuu!\n"
+	.string "¡Has tenido mucha suerte!$"
+
 
 Route22_Text_EarlyRivalPostBattle::
-	.string "I heard the POKéMON LEAGUE is\n"
-	.string "crawling with tough TRAINERS.\p"
-	.string "I have to figure out how to get\n"
-	.string "past them.\p"
-	.string "You should quit dawdling and get a\n"
-	.string "move on!$"
+.string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}{RIVAL}{SHADOW LIGHT_GRAY}: Dicen que los {SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY} de\n"
+.string "la {SHADOW DYNAMIC_COLOR4}LIGA POKÉMON{SHADOW LIGHT_GRAY} son muy fuertes.\p"
+.string "¡Tengo que encontrar la forma de\n"
+.string "vencerlos!\p"
+.string "¡Deja de perder el tiempo y ponte en\n"
+.string "marcha!$"
 
 @ Translated in RB as "{RIVAL}: What? Why do I have 2 POKéMON? You should catch some more too!"
 Route22_Text_RivalShouldCatchSomeMons::
@@ -30,15 +29,13 @@ Route22_Text_RivalShouldCatchSomeMons::
 	.string "つかまえれば　いい　じゃん！$"
 
 Route22_Text_LateRivalIntro::
-	.string "{RIVAL}: What? {PLAYER}!\n"
-	.string "What a surprise to see you here!\p"
-	.string "So you're going to the POKéMON\n"
-	.string "LEAGUE?\p"
-	.string "You collected all the BADGES, too?\n"
-	.string "That's cool!\p"
-	.string "Then I'll whip you, {PLAYER}, as a\n"
-	.string "warm-up for the POKéMON LEAGUE!\p"
-	.string "Come on!$"
+	.string "{SHADOW DYNAMIC_COLOR4}{RIVAL}{SHADOW LIGHT_GRAY}: ¡Eh! ¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
+	.string "¿Vas a la {SHADOW DYNAMIC_COLOR4}LIGA POKéMON{SHADOW LIGHT_GRAY}?\n"
+	.string "¡Olvídalo! ¡Seguro que no tienes\n"
+	.string "ninguna {SHADOW DYNAMIC_COLOR4}MEDALLA{SHADOW LIGHT_GRAY}!\p"
+	.string "¡El guardia no te dejará pasar!\p"
+	.string "Dime, ¿ya son más fuertes tus\n"
+	.string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}?$"
 
 Route22_Text_LateRivalDefeat::
 	.string "What!?\p"
@@ -64,3 +61,10 @@ Route22_Text_LeagueGateSign::
 	.string "POKéMON LEAGUE\n"
 	.string "Front Gate$"
 
+TX_BETA1::
+	.string "{COLOR RED}{SHADOW LIGHT_RED}NO DISPONIBLE EN ESTA BETA.$"
+
+TX_DEXNACIONAL::
+	.string "Se activó la {SHADOW DYNAMIC_COLOR4}DEX NACIONAL{SHADOW LIGHT_GRAY}\n"
+	.string "para comprobar la compatibilidad\l"
+	.string "con otros juegos.$"

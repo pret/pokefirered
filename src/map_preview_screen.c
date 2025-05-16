@@ -310,8 +310,8 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
 
 static const struct WindowTemplate sMapNameWindow = {
     .bg = 0,
-    .tilemapLeft = 0,
-    .tilemapTop = 0,
+    .tilemapLeft = -1,
+    .tilemapTop = 50,
     .width = 13,
     .height = 2,
     .paletteNum = 14,
@@ -454,11 +454,11 @@ u16 MapPreview_CreateMapNameWindow(u8 mapsec)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     color[0] = TEXT_COLOR_WHITE; // Access violation
-    color[1] = TEXT_COLOR_RED; // Access violation
+    color[1] = TEXT_COLOR_DARK_GRAY; // Access violation
     color[2] = TEXT_COLOR_LIGHT_GRAY; // Access violation
     GetMapName(gStringVar4, mapsec, 0);
-    xctr = 104 - GetStringWidth(FONT_NORMAL, gStringVar4, 0);
-    AddTextPrinterParameterized4(windowId, FONT_NORMAL, xctr / 2, 2, 0, 0, color/* Access violation */, -1, gStringVar4);
+    xctr = 104 - GetStringWidth(FONT_SMALL, gStringVar4, 0);
+    AddTextPrinterParameterized4(windowId, FONT_SMALL, xctr / 2, 2, 0, 0, color/* Access violation */, -1, gStringVar4);
     return windowId;
 }
 

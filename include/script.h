@@ -35,7 +35,7 @@ u16 ScriptReadHalfword(struct ScriptContext *ctx);
 u32 ScriptReadWord(struct ScriptContext *ctx);
 void LockPlayerFieldControls(void);
 void UnlockPlayerFieldControls(void);
-bool8 ArePlayerFieldControlsLocked(void);
+bool8 ScriptContext2_IsEnabled(void);
 void ScriptContext_Init(void);
 bool8 ScriptContext_IsEnabled(void);
 bool8 ScriptContext_RunScript(void);

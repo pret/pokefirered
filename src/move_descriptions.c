@@ -1,26 +1,26 @@
 #include "global.h"
 #include "constants/moves.h"
 
-const u8 gMoveDescription_Pound[] = _("A physical attack\ndelivered with a\nlong tail or a\nforeleg, etc.");
-const u8 gMoveDescription_KarateChop[] = _("The foe is attacked\nwith a sharp chop.\nIt has a high\ncritical-hit ratio.");
-const u8 gMoveDescription_DoubleSlap[] = _("The foe is slapped\nrepeatedly, back\nand forth, two to\nfive times.");
-const u8 gMoveDescription_CometPunch[] = _("The foe is hit with\na flurry of punches\nthat strike two to\nfive times.");
-const u8 gMoveDescription_MegaPunch[] = _("The foe is slugged\nby a punch thrown\nwith muscle-packed\npower.");
-const u8 gMoveDescription_PayDay[] = _("Numerous coins are\nhurled at the foe.\nMoney is earned\nafter battle.");
-const u8 gMoveDescription_FirePunch[] = _("The foe is punched\nwith a fiery fist.\nIt may leave the\nfoe with a burn.");
-const u8 gMoveDescription_IcePunch[] = _("The foe is punched\nwith an icy fist.\nIt may leave the\nfoe frozen.");
-const u8 gMoveDescription_ThunderPunch[] = _("The foe is punched\nwith an electrified\nfist. It may leave\nthe foe paralyzed.");
-const u8 gMoveDescription_Scratch[] = _("Hard, pointed, and\nsharp claws rake\nthe foe.");
-const u8 gMoveDescription_ViceGrip[] = _("Huge, impressive\npincers grip and\nsqueeze the foe.");
-const u8 gMoveDescription_Guillotine[] = _("A vicious tearing\nattack with pincers.\nThe foe will faint\nif it hits.");
-const u8 gMoveDescription_RazorWind[] = _("Blades of wind hit\nthe foe on the 2nd\nturn. It has a high\ncritical-hit ratio.");
-const u8 gMoveDescription_SwordsDance[] = _("A frenetic dance of\nfighting. It sharply\nraises the ATTACK\nstat.");
-const u8 gMoveDescription_Cut[] = _("A basic attack.\nIt can be used to\ncut down thin trees\nand grass.");
-const u8 gMoveDescription_Gust[] = _("Strikes the foe\nwith a gust of wind\nwhipped up by\nwings.");
-const u8 gMoveDescription_WingAttack[] = _("The foe is struck\nwith large, imposing\nwings spread wide.");
-const u8 gMoveDescription_Whirlwind[] = _("The foe is made to\nswitch out with an\nally. In the wild,\nthe battle ends.");
-const u8 gMoveDescription_Fly[] = _("A 2-turn move that\nhits on the 2nd\nturn. Use it to fly\nto any known town.");
-const u8 gMoveDescription_Bind[] = _("A long body or\ntentacles are used\nto bind the foe for\ntwo to five turns.");
+const u8 gMoveDescription_Pound[] = _("Un ataque físico\ncon una larga\ncola o una pata\ndelantera, etc.");
+const u8 gMoveDescription_KarateChop[] = _("Ataca al rival\ncon un manotazo.\nSuele resultar en\nun ataque crítico.");
+const u8 gMoveDescription_DoubleSlap[] = _("El oponente\nes abofeteado\nrepetidamente, de\ndos a cinco veces.");
+const u8 gMoveDescription_CometPunch[] = _("El oponente es\natacado por una\nráfaga de puños de\ndos a cinco veces.");
+const u8 gMoveDescription_MegaPunch[] = _("El oponente recibe\nun puñetazo de\ngran poder\nmuscular.");
+const u8 gMoveDescription_PayDay[] = _("Se lanzan monedas\nal rival. Se gana\ndinero al final\nde la batalla.");
+const u8 gMoveDescription_FirePunch[] = _("El rival recibe un\npuño de fuego.\nPuede dejar una\nquemadura.");
+const u8 gMoveDescription_IcePunch[] = _("El rival recibe un\ngolpe de hielo.\nPuede causar\ncongelamiento.");
+const u8 gMoveDescription_ThunderPunch[] = _("El rival recibe un\ngolpe eléctrico.\nPuede causar\nparálisis.");
+const u8 gMoveDescription_Scratch[] = _("Garras puntiagudas\ny filosas arañan\nal oponente.");
+const u8 gMoveDescription_ViceGrip[] = _("Tenazas enormes que\nsujetan y aprietan\nal rival.");
+const u8 gMoveDescription_Guillotine[] = _("Un ataque feroz con\ntenazas. El rival\nse debilitará si\nconecta.");
+const u8 gMoveDescription_RazorWind[] = _("Hojas de viento que\ndañan en el segundo\nturno. Alto índice\nde golpes críticos.");
+const u8 gMoveDescription_SwordsDance[] = _("Una frenética danza\nde lucha.\nAumenta mucho el\nATAQUE.");
+const u8 gMoveDescription_Cut[] = _("Ataque básico.\nPuede usarse para\ncortar hierba y\npequeños árboles.");
+const u8 gMoveDescription_Gust[] = _("Ataca al rival con\nuna ráfaga de\nviento generado\npor alas.");
+const u8 gMoveDescription_WingAttack[] = _("El rival es atacado\npor grandes e\nimponentes alas.");
+const u8 gMoveDescription_Whirlwind[] = _("Cambia al rival con\nun aliado. Si es\nsalvaje, termina\nla batalla.");
+const u8 gMoveDescription_Fly[] = _("Dura dos turnos y\nhace daño en el\nsegundo. Te lleva a\nlugares conocidos.");
+const u8 gMoveDescription_Bind[] = _("Un cuerpo largo o\ntentáculos atan al\nrival durante dos\na cinco turnos.");
 const u8 gMoveDescription_Slam[] = _("The foe is struck\nwith a long tail,\nvines, etc.");
 const u8 gMoveDescription_VineWhip[] = _("The foe is struck\nwith slender, whip-\nlike vines.");
 const u8 gMoveDescription_Stomp[] = _("The foe is stomped\nwith a big foot.\nIt may make the\nfoe flinch.");

@@ -435,6 +435,10 @@ static const u32 sBattleTerrainPalette_Champion[] = INCBIN_U32("graphics/battle_
 static const u32 sBattleTerrainPalette_Plain[] = INCBIN_U32("graphics/battle_terrain/indoor/plain.gbapal.lz");
 static const u32 sBattleTerrainTiles_Indoor[] = INCBIN_U32("graphics/battle_terrain/indoor/terrain.4bpp.lz");
 static const u32 sBattleTerrainTilemap_Indoor[] = INCBIN_U32("graphics/battle_terrain/indoor/terrain.bin.lz");
+static const u32 sBattleTerrainPalette_ViridianForest[] = INCBIN_U32("graphics/battle_terrain/forest/viridianforest.gbapal.lz");
+static const u32 sBattleTerrainPalette_Brock[] = INCBIN_U32("graphics/battle_terrain/gym/brock_gym.gbapal.lz");
+static const u32 sBattleTerrainPalette_MtMoon[] = INCBIN_U32("graphics/battle_terrain/cave/mtmoon.gbapal.lz");
+
 
 static const struct BattleBackground sBattleTerrainTable[] = {
     [BATTLE_TERRAIN_GRASS] =
@@ -596,6 +600,30 @@ static const struct BattleBackground sBattleTerrainTable[] = {
         .entryTileset = sBattleTerrainAnimTiles_Building,
         .entryTilemap = sBattleTerrainAnimTilemap_Building,
         .palette = sBattleTerrainPalette_Champion
+    },
+    [BATTLE_TERRAIN_VIRIDIAN_FOREST] =
+    {
+        .tileset = sBattleTerrainTiles_Building,
+        .tilemap = sBattleTerrainTilemap_Building,
+        .entryTileset = sBattleTerrainAnimTiles_Building,
+        .entryTilemap = sBattleTerrainAnimTilemap_Building,
+        .palette = sBattleTerrainPalette_ViridianForest
+    },
+        [BATTLE_TERRAIN_BROCK_GYM] =
+    {
+        .tileset = sBattleTerrainTiles_Indoor,
+        .tilemap = sBattleTerrainTilemap_Indoor,
+        .entryTileset = sBattleTerrainAnimTiles_Building,
+        .entryTilemap = sBattleTerrainAnimTilemap_Building,
+        .palette = sBattleTerrainPalette_Brock
+    },
+        [BATTLE_TERRAIN_MTMOON] =
+    {
+        .tileset = sBattleTerrainTiles_Cave,
+        .tilemap = sBattleTerrainTilemap_Cave,
+        .entryTileset = sBattleTerrainAnimTiles_Cave,
+        .entryTilemap = sBattleTerrainAnimTilemap_Cave,
+        .palette = sBattleTerrainPalette_MtMoon
     }
 };
 
@@ -604,13 +632,16 @@ static const struct {
     u8 battleTerrain;
 } sMapBattleSceneMapping[] = {
     {MAP_BATTLE_SCENE_GYM,      BATTLE_TERRAIN_GYM},
-    {MAP_BATTLE_SCENE_INDOOR_1, BATTLE_TERRAIN_INDOOR_1},
-    {MAP_BATTLE_SCENE_INDOOR_2, BATTLE_TERRAIN_INDOOR_2},
-    {MAP_BATTLE_SCENE_LORELEI,  BATTLE_TERRAIN_LORELEI},
-    {MAP_BATTLE_SCENE_BRUNO,    BATTLE_TERRAIN_BRUNO},
-    {MAP_BATTLE_SCENE_AGATHA,   BATTLE_TERRAIN_AGATHA},
-    {MAP_BATTLE_SCENE_LANCE,    BATTLE_TERRAIN_LANCE},
-    {MAP_BATTLE_SCENE_LINK,     BATTLE_TERRAIN_LINK}
+    {MAP_BATTLE_SCENE_INDOOR_1,  BATTLE_TERRAIN_INDOOR_1},
+    {MAP_BATTLE_SCENE_INDOOR_2,  BATTLE_TERRAIN_INDOOR_2},
+    {MAP_BATTLE_SCENE_LORELEI,   BATTLE_TERRAIN_LORELEI},
+    {MAP_BATTLE_SCENE_BRUNO,     BATTLE_TERRAIN_BRUNO},
+    {MAP_BATTLE_SCENE_AGATHA,    BATTLE_TERRAIN_AGATHA},
+    {MAP_BATTLE_SCENE_LANCE,     BATTLE_TERRAIN_LANCE},
+    {MAP_BATTLE_SCENE_LINK,      BATTLE_TERRAIN_LINK},
+    {MAP_BATTLE_SCENE_VIRIDIAN_FOREST,    BATTLE_TERRAIN_VIRIDIAN_FOREST},
+    {MAP_BATTLE_SCENE_BROCK_GYM, BATTLE_TERRAIN_BROCK_GYM},
+    {MAP_BATTLE_SCENE_MTMOON,    BATTLE_TERRAIN_MTMOON}
 };
 
 // Unused
@@ -1024,8 +1055,6 @@ void DrawBattleEntryBackground(void)
             u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
             if (trainerClass == TRAINER_CLASS_LEADER)
             {
-                LoadBattleTerrainEntryGfx(BATTLE_TERRAIN_BUILDING);
-                return;
             }
             else if (trainerClass == TRAINER_CLASS_CHAMPION)
             {
@@ -1060,7 +1089,7 @@ static u8 GetBattleTerrainOverride(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_LEADER)
-            return BATTLE_TERRAIN_LEADER;
+            return BATTLE_TERRAIN_BROCK_GYM;
         else if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION)
             return BATTLE_TERRAIN_CHAMPION;
     }

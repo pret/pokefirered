@@ -1,11 +1,9 @@
 PewterCity_Mart_Text_BoughtWeirdFishFromShadyGuy::
-    .string "A shady old guy sucked me into\n"
-    .string "buying this weird fish POKéMON!\p"
-    .string "It's totally weak and it cost ¥500!$"
+    .string "{COLOR DARK_GRAY}¡Un anciano misterioso me vendió\n"
+    .string "este extraño {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} pez!\p"
+    .string "¡Es muy débil y me costó ¥500!$"
 
 PewterCity_Mart_Text_GoodThingsIfRaiseMonsDiligently::
-    .string "Good things can happen if you raise\n"
-    .string "POKéMON diligently.\p"
-    .string "Even the weak ones can surprise\n"
-    .string "you if you don't give up on them.$"
-
+    .string "{COLOR DARK_GRAY}¡Mejorarás mucho si entrenas\n"
+    .string "rápidamente a todos tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY},\p"
+    .string "incluso a los más débiles!$"

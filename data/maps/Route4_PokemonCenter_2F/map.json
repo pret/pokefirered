@@ -13,13 +13,13 @@
   "show_map_name": false,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CABLE_CLUB_RECEPTIONIST",
-      "x": 6,
-      "y": 2,
+      "x": 5,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -33,7 +33,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CABLE_CLUB_RECEPTIONIST",
       "x": 2,
-      "y": 2,
+      "y": 3,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -46,8 +46,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CABLE_CLUB_RECEPTIONIST",
-      "x": 10,
-      "y": 2,
+      "x": 7,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -61,7 +61,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MG_DELIVERYMAN",
       "x": 1,
-      "y": 2,
+      "y": 3,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -78,23 +78,27 @@
       "y": 6,
       "elevation": 4,
       "dest_map": "MAP_ROUTE4_POKEMON_CENTER_1F",
-      "dest_warp_id": "3"
+      "dest_warp_id": "1"
     },
     {
       "x": 5,
-      "y": 1,
+      "y": 2,
       "elevation": 0,
       "dest_map": "MAP_UNION_ROOM",
       "dest_warp_id": "0"
     },
     {
-      "x": 9,
-      "y": 1,
+      "x": 7,
+      "y": 2,
       "elevation": 0,
       "dest_map": "MAP_TRADE_CENTER",
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
-  "bg_events": []
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
 }

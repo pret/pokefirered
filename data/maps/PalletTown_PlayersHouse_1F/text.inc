@@ -1,25 +1,30 @@
+Name_Mama::
+    .string "MAMÁ$"
+
 PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou::
-    .string "MOM: …Right.\n"
-    .string "All boys leave home someday.\l"
-    .string "It said so on TV.\p"
-    .string "Oh, yes. PROF. OAK, next door, was\n"
-    .string "looking for you.$"
+    .string "En fin...\p"
+    .string "Todos los muchachos se van de casa\n"
+    .string "¡Así es la vida!\p"
+    .string "¡Ah si!\p"
+    .string "El {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY} quería verte.$"
 
 PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou::
-    .string "MOM: …Right.\n"
-    .string "All girls dream of traveling.\l"
-    .string "It said so on TV.\p"
-    .string "Oh, yes. PROF. OAK, next door, was\n"
-    .string "looking for you.$"
+    .string "En fin...\p"
+    .string "Todas las muchachas se van de casa\n"
+    .string "algún día. ¡Así es la vida!\p"
+    .string "¡Ah si!\p"
+    .string "El {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY} quería verte.$"
+
 
 PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest::
-    .string "MOM: {PLAYER}!\n"
-    .string "You should take a quick rest.$"
+    .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}MAMÁ:{SHADOW LIGHT_GRAY} ¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
+    .string "Deberías tomarte un\n"
+    .string "descanso.$"
 
 PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare::
-    .string "MOM: Oh, good! You and your\n"
-    .string "POKéMON are looking great.\l"
-    .string "Take care now!$"
+    .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}MAMÁ:{SHADOW LIGHT_GRAY} ¡Muy bien! ¡Tú y tus\n"
+    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} están en plena forma!\p"
+    .string "¡Cuidate!$"
 
 PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad::
     .string "There's a movie on TV.\n"
@@ -28,10 +33,9 @@ PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad::
     .string "…I better go, too.$"
 
 PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad::
-    .string "There's a movie on TV.\n"
-    .string "A girl with her hair in pigtails is\l"
-    .string "walking up a brick road.\p"
-    .string "…I better go, too.$"
+    .string "Están dando una película...\p"
+    .string "Sale una chica con coletas andando\n"
+    .string "por una calle empedrada...$"
 
 PalletTown_PlayersHouse_1F_Text_OopsWrongSide::
     .string "Oops, wrong side…$"

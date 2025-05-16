@@ -130,7 +130,7 @@ static void SetDefaultFlashLevel(void);
 static void Overworld_TryMapConnectionMusicTransition(void);
 static void ChooseAmbientCrySpecies(void);
 
-static void CB2_Overworld(void);
+void CB2_Overworld(void);
 static void CB2_LoadMap2(void);
 static void CB2_LoadMapOnReturnToFieldCableClub(void);
 static void CB2_ReturnToFieldLocal(void);
@@ -1395,7 +1395,7 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
     FieldClearPlayerInput(&fieldInput);
     FieldGetPlayerInput(&fieldInput, newKeys, heldKeys);
     FieldInput_HandleCancelSignpost(&fieldInput);
-    if (!ArePlayerFieldControlsLocked())
+    if (!ScriptContext2_IsEnabled())
     {
         if (ProcessPlayerFieldInput(&fieldInput) == TRUE)
         {
@@ -1422,7 +1422,7 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
     FieldClearPlayerInput(&fieldInput);
     fieldInput = gQuestLogFieldInput;
     FieldInput_HandleCancelSignpost(&fieldInput);
-    if (!ArePlayerFieldControlsLocked())
+    if (!ScriptContext2_IsEnabled())
     {
         if (ProcessPlayerFieldInput(&fieldInput) == TRUE)
         {
@@ -1472,7 +1472,7 @@ void CB2_OverworldBasic(void)
     OverworldBasic();
 }
 
-static void CB2_Overworld(void)
+void CB2_Overworld(void)
 {
     bool32 fading = !!gPaletteFade.active;
     if (fading)
@@ -2847,7 +2847,7 @@ static void ResetPlayerHeldKeys(u16 *keys)
 
 static u16 KeyInterCB_SelfIdle(u32 key)
 {
-    if (ArePlayerFieldControlsLocked() == TRUE)
+    if (ScriptContext2_IsEnabled() == TRUE)
         return LINK_KEY_CODE_EMPTY;
     if (GetLinkRecvQueueLength() > 4)
         return LINK_KEY_CODE_HANDLE_RECV_QUEUE;
@@ -2867,7 +2867,7 @@ static u16 KeyInterCB_Idle(u32 key)
 static u16 KeyInterCB_DeferToEventScript(u32 key)
 {
     u16 retVal;
-    if (ArePlayerFieldControlsLocked() == TRUE)
+    if (ScriptContext2_IsEnabled() == TRUE)
     {
         retVal = LINK_KEY_CODE_EMPTY;
     }

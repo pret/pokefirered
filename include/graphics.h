@@ -2346,6 +2346,24 @@ extern const u32 gMonBackPic_Chimecho[];
 extern const u32 gMonShinyPalette_Chimecho[];
 extern const u8 gMonIcon_Chimecho[];
 extern const u8 gMonFootprint_Chimecho[];
+extern const u32 gMonFrontPic_Magnezone[];
+extern const u32 gMonPalette_Magnezone[];
+extern const u32 gMonBackPic_Magnezone[];
+extern const u32 gMonShinyPalette_Magnezone[];
+extern const u8 gMonIcon_Magnezone[];
+extern const u8 gMonFootprint_Magnezone[];
+extern const u32 gMonFrontPic_Mimejr[];
+extern const u32 gMonPalette_Mimejr[];
+extern const u32 gMonBackPic_Mimejr[];
+extern const u32 gMonShinyPalette_Mimejr[];
+extern const u8 gMonIcon_Mimejr[];
+extern const u8 gMonFootprint_Mimejr[];
+extern const u32 gMonFrontPic_Bonsly[];
+extern const u32 gMonPalette_Bonsly[];
+extern const u32 gMonBackPic_Bonsly[];
+extern const u32 gMonShinyPalette_Bonsly[];
+extern const u8 gMonIcon_Bonsly[];
+extern const u8 gMonFootprint_Bonsly[];
 extern const u32 gMonFrontPic_Egg[];
 extern const u32 gMonPalette_Egg[];
 extern const u8 gMonIcon_Egg[];
@@ -2591,6 +2609,7 @@ extern const u32 gTrainerFrontPic_AromaLady[];
 extern const u32 gTrainerFrontPic_RuinManiac[];
 extern const u32 gTrainerFrontPic_Lady[];
 extern const u32 gTrainerFrontPic_Painter[];
+extern const u32 gTrainerFrontPic_Silvio[];
 
 extern const u32 gTrainerPalette_AquaLeaderArchie[];
 extern const u32 gTrainerPalette_AquaGruntM[];
@@ -2744,6 +2763,7 @@ extern const u32 gTrainerPalette_AromaLady[];
 extern const u32 gTrainerPalette_RuinManiac[];
 extern const u32 gTrainerPalette_Lady[];
 extern const u32 gTrainerPalette_Painter[];
+extern const u32 gTrainerPalette_Silvio[];
 
 extern const u8 gMenuInfoElements_Gfx[];
 extern const u16 gMenuInfoElements1_Pal[];
@@ -4548,5 +4568,34 @@ extern const u16 gPokeStorageInterface_NoDisplayMon_Pal[];
 // pokedex_screen
 extern const u16 gDexScreen_TopMenuIconPals_AtoZ[];
 extern const u32 gDexScreen_TopMenuIconTiles_AtoZ[];
+
+// Dexnav
+extern const u32 gInterfaceGfx_dexnavGuiTiles[];
+extern const u32 gInterfaceGfx_dexnavGuiMap[];
+extern const u32 gInterfaceGfx_dexnavGuiPal[];
+extern const u32 gInterfaceGfx_dexnavStarsTiles[];
+extern const u16 gInterfaceGfx_dexnavStarsPal[];
+extern const u32 DexNavCursorTiles[];
+extern const u32 DexNavCursorPal[];
+extern const u32 gInterfaceGfx_emptyTiles[];
+extern const u16 gInterfaceGfx_emptyPal[];
+extern const u32 gInterfaceGfx_CapturedAllPokemonTiles[];
+extern const u16 gInterfaceGfx_CapturedAllPokemonPal[];
+extern const u32 gInterfaceGfx_DexNavNoDataSymbolTiles[];
+extern const u32 DexNavBarTiles[];
+extern const u32 DexNavSightTiles[];
+extern const u32 DexNavBButtonTiles[];
+
+//Main Menu
+extern const u16 sMainMenuTextPal[];
+extern const u16 sMainMenuTextFemalePal[];
+extern const u16 gPalMainMenuBG[];
+extern const u16 gPalMainMenuNoSel[];
+extern const u16 gPalMainMenuSel[];
+extern const u32 gTilesMainMenuBG1[];
+extern const u32 gTilesMainMenuBG2[];
+extern const u32 gMapMainMenuBG2[];
+extern const u32 gMapMainMenuNewGame[];
+extern const u32 gMapMainMenuContinue[];
 
 #endif //GUARD_GRAPHICS_H

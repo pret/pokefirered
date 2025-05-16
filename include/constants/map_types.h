@@ -12,14 +12,18 @@
 #define MAP_TYPE_INDOOR      8
 #define MAP_TYPE_SECRET_BASE 9 // Not used by any map.
 
-#define MAP_BATTLE_SCENE_NORMAL   0
-#define MAP_BATTLE_SCENE_GYM      1
-#define MAP_BATTLE_SCENE_INDOOR_1 2 // Pokemon Tower, Tanoby ruins
-#define MAP_BATTLE_SCENE_INDOOR_2 3 // Pokemon Mansion, Power Plant, Rocket Hideout/Warehouse
-#define MAP_BATTLE_SCENE_LORELEI  4
-#define MAP_BATTLE_SCENE_BRUNO    5
-#define MAP_BATTLE_SCENE_AGATHA   6
-#define MAP_BATTLE_SCENE_LANCE    7
-#define MAP_BATTLE_SCENE_LINK     8
+#define MAP_BATTLE_SCENE_NORMAL       0
+#define MAP_BATTLE_SCENE_GYM          1
+#define MAP_BATTLE_SCENE_INDOOR_1     2 // Pokemon Tower, Tanoby ruins
+#define MAP_BATTLE_SCENE_INDOOR_2     3 // Pokemon Mansion, Power Plant, Rocket Hideout/Warehouse
+#define MAP_BATTLE_SCENE_LORELEI      4
+#define MAP_BATTLE_SCENE_BRUNO        5
+#define MAP_BATTLE_SCENE_AGATHA       6
+#define MAP_BATTLE_SCENE_LANCE        7
+#define MAP_BATTLE_SCENE_LINK         8
+#define MAP_BATTLE_SCENE_VIRIDIAN_FOREST 9
+#define MAP_BATTLE_SCENE_BROCK_GYM    10
+#define MAP_BATTLE_SCENE_MTMOON       11
+
 
 #endif  // GUARD_CONSTANTS_MAP_TYPES_H

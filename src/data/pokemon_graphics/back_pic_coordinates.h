@@ -408,7 +408,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_MAGNEMITE] =
     {
         .size = MON_COORDS_SIZE(32, 24),
-        .y_offset = 20,
+        .y_offset = 10,
     },
     [SPECIES_MAGNETON] =
     {
@@ -2059,6 +2059,21 @@ const struct MonCoords gMonBackPicCoords[] =
     {
         .size = MON_COORDS_SIZE(32, 56),
         .y_offset = 7,
+    },
+    [SPECIES_MAGNEZONE] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 12,
+    },
+    [SPECIES_BONSLY] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 12,
+    },
+        [SPECIES_MIMEJR] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 12,
     },
     [SPECIES_EGG] =
     {

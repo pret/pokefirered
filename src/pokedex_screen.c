@@ -146,7 +146,7 @@ const u32 sNatDexTiles[] = INCBIN_U32("graphics/pokedex/national_dex_bgtiles.4bp
 const u16 sKantoDexPalette[0x100] = INCBIN_U16("graphics/pokedex/kanto_dex_bgpals.gbapal");
 
 const u16 sDexScreen_CategoryCursorPals[] = {
-    RGB(24, 22, 17), RGB(26, 24, 20),
+    RGB(24, 22, 17), RGB(55, 24, 20),
     RGB(26, 20, 15), RGB(27, 23, 19),
     RGB(28, 18, 15), RGB(28, 22, 19),
     RGB(30, 16, 13), RGB(29, 21, 18),
@@ -2868,9 +2868,9 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
         printerTemplate.letterSpacing = 1;
         printerTemplate.lineSpacing = 0;
         printerTemplate.unk = 0;
-        printerTemplate.fgColor = 1;
+        printerTemplate.fgColor = 5;
         printerTemplate.bgColor = 0;
-        printerTemplate.shadowColor = 2;
+        printerTemplate.shadowColor = 1;
 
         length = GetStringWidth(FONT_NORMAL, gPokedexEntries[species].description, 0);
         xCenter = x + (240 - length) / 2;
@@ -2941,6 +2941,7 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
     // Species stats
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[1], PIXEL_FILL(0));
     DexScreen_PrintMonDexNo(sPokedexScreenData->windowIds[1], FONT_SMALL, sPokedexScreenData->dexSpecies, 0, 8);
+    //NOMBRE POKEMON
     DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[1], FONT_NORMAL, gSpeciesNames[sPokedexScreenData->dexSpecies], 28, 8, 0);
     DexScreen_PrintMonCategory(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 24);
     DexScreen_PrintMonHeight(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 36);

@@ -262,6 +262,29 @@ const u16 gTilesetPalettes_Building[][16] =
 	INCBIN_U16("data/tilesets/primary/building/palettes/15.gbapal"),
 };
 
+const u32 gTilesetTiles_PewterGymInterior[] = INCBIN_U32("data/tilesets/primary/PewterGymInterior/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_PewterGymInterior[][16] =
+{
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/primary/PewterGymInterior/palettes/15.gbapal"),
+};
+
+
 const u32 gTilesetTiles_Mart[] = INCBIN_U32("data/tilesets/secondary/mart/tiles.4bpp.lz");
 
 const u16 gTilesetPalettes_Mart[][16] =

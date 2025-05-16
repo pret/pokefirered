@@ -66,6 +66,7 @@ typedef void (*MovementAction)(u8 direction);
 #define GROUND_EFFECT_FLAG_SHORT_GRASS           (1 << 17)
 #define GROUND_EFFECT_FLAG_HOT_SPRINGS           (1 << 18)
 #define GROUND_EFFECT_FLAG_SEAWEED               (1 << 19)
+#define GROUND_EFFECT_SHADOW                     (1 << 20)
 
 struct PairedPalettes
 {
@@ -181,6 +182,7 @@ u8 ElevationToPriority(u8 elevation);
 void ObjectEventUpdateElevation(struct ObjectEvent *pObject);
 void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *sprite, u8 offset);
 void CopyObjectGraphicsInfoToSpriteTemplate(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables);
+bool8 IsElevationMismatchAt(u8, s16, s16);
 u8 AddCameraObject(u8 trackedSpriteId);
 void UpdateObjectEventsForCameraUpdate(s16 x, s16 y);
 void SpriteCB_VirtualObject(struct Sprite *);

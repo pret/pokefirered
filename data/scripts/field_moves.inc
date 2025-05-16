@@ -45,16 +45,16 @@ EventScript_DontCutTree::
 	end
 
 Text_CutTreeDown::
-	.string "This tree looks like it can be CUT\n"
-	.string "down!\p"
-	.string "Would you like to CUT it?$"
+	.string "Parece que puedes {SHADOW DYNAMIC_COLOR4}CORTAR\n"
+	.string "{SHADOW LIGHT_GRAY}este árbol.\p"
+	.string "¿Usas {SHADOW DYNAMIC_COLOR4}CORTE{SHADOW LIGHT_GRAY}?$"
 
 Text_MonUsedMove::
-	.string "{STR_VAR_1} used {STR_VAR_2}!$"
+	.string "{SHADOW DYNAMIC_COLOR4}{STR_VAR_1}{SHADOW LIGHT_GRAY} usó {SHADOW DYNAMIC_COLOR4}{STR_VAR_2}{SHADOW LIGHT_GRAY}!$"
 
 Text_TreeCanBeCutDown::
-	.string "This tree looks like it can be CUT\n"
-	.string "down!$"
+	.string "Parece que puedes {SHADOW DYNAMIC_COLOR4}CORTAR{SHADOW LIGHT_GRAY}\n"
+	.string "este árbol.$"
 
 EventScript_RockSmash::
 	goto_if_questlog EventScript_ReleaseEnd

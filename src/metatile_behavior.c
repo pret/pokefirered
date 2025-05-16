@@ -1037,3 +1037,22 @@ bool8 MetatileBehavior_IsTrainerTowerMonitor(u8 metatileBehavior)
     else
         return FALSE;
 }
+
+
+bool8 MetatileBehavior_IsLandWildEncounter(u8 metatileBehavior)
+{
+    if (MetatileBehavior_IsSurfableAndNotWaterfall(metatileBehavior) == FALSE
+     && (MetatileBehavior_IsPokeGrass(metatileBehavior) == TRUE || metatileBehavior == MB_CAVE))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsWaterWildEncounter(u8 metatileBehavior)
+{
+    if (MetatileBehavior_IsSurfableAndNotWaterfall(metatileBehavior) == TRUE
+     && (MetatileBehavior_IsPokeGrass(metatileBehavior) == FALSE && metatileBehavior != MB_CAVE))
+        return TRUE;
+    else
+        return FALSE;
+}

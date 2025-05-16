@@ -4,8 +4,7 @@
 #include "menu.h"
 #include "text_window.h"
 #include "strings.h"
-
-#define MAX_MONEY 999999
+#include "money.h"
 
 EWRAM_DATA static u8 sMoneyBoxWindowId = 0;
 

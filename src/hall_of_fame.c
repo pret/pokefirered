@@ -73,7 +73,6 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId);
 static void Task_Hof_ExitOnKeyPressed(u8 taskId);
 static void Task_Hof_HandlePaletteOnExit(u8 taskId);
 static void Task_Hof_HandleExit(u8 taskId);
-static void SetWarpsToRollCredits(void);
 static void Task_HofPC_CopySaveData(u8 taskId);
 static void Task_HofPC_DrawSpritesPrintText(u8 taskId);
 static void Task_HofPC_PrintMonInfo(u8 taskId);
@@ -696,7 +695,7 @@ static void Task_Hof_HandleExit(u8 taskId)
     }
 }
 
-static void SetWarpsToRollCredits(void)
+void SetWarpsToRollCredits(void)
 {
     VarSet(VAR_MAP_SCENE_INDIGO_PLATEAU_EXTERIOR, 1);
     FlagSet(FLAG_DONT_SHOW_MAP_NAME_POPUP);

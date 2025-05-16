@@ -35,6 +35,8 @@
 #include "pokemon_storage_system.h"
 #include "constants/sound.h"
 #include "ev_iv_display_screen.h"
+#include "pokemon_debug.h"
+#include "constants/pokemon_debug.h"
 
 // needs conflicting header to match (curIndex is s8 in the function, but has to be defined as u8 here)
 extern s16 SeekToNextMonInBox(struct BoxPokemon * boxMons, u8 curIndex, u8 maxIndex, u8 flags);
@@ -1214,6 +1216,14 @@ static void Task_InputHandler_Info(u8 taskId)
             {
                 sMonSummaryScreen->state3270 = PSS_STATE3270_ATEXIT_FADEOUT;
             }
+        #if DEBUG_POKEMON_MENU == TRUE
+            else if (JOY_NEW(SELECT_BUTTON) && !gMain.inBattle)
+            {
+                sMonSummaryScreen->savedCallback = CB2_Debug_Pokemon;
+                PlaySE(SE_SELECT);
+                sMonSummaryScreen->state3270 = PSS_STATE3270_ATEXIT_FADEOUT;
+            }
+        #endif
         }
         break;
     case PSS_STATE3270_FLIPPAGES:

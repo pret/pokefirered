@@ -184,6 +184,7 @@
 // Shiny odds
 #define SHINY_ODDS 8 // Actual probability is SHINY_ODDS/65536
 
+#define MIN_LEVEL 1
 #define MAX_LEVEL 100
 
 #define OT_ID_PLAYER_ID       0
@@ -299,5 +300,9 @@
 #define DEOXYS_CHECK_BATTLE_SPRITE      1
 #define DEOXYS_CHECK_TRADE_MAIN         3
 #define DEOXYS_CHECK_BATTLE_ANIM        5
+
+// changing this doesn't actually do anything
+// outside of the debug menu
+#define NUM_ABILITY_SLOTS 2
 
 #endif // GUARD_CONSTANTS_POKEMON_H

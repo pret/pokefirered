@@ -25,6 +25,7 @@
 #include "field_specials.h"
 #include "dexnav.h"
 #include "berry.h"
+#include "graphics.h"
 #include "constants/items.h"
 #include "constants/item_effects.h"
 #include "constants/hoenn_cries.h"
@@ -72,7 +73,6 @@ u8 GetNatureFromPersonality(u32 personality);
 static bool8 PartyMonHasStatus(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 static bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 static bool8 IsPokemonStorageFull(void);
-static u8 SendMonToPC(struct Pokemon* mon);
 static void EncryptBoxMon(struct BoxPokemon *boxMon);
 static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
@@ -81,6 +81,7 @@ static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 
 #include "data/battle_moves.h"
+#include "data/pokemon_graphics/footprint_table.h"
 
 // Used in an unreferenced function in RS.
 // Unreferenced here and in Emerald.
@@ -3703,7 +3704,7 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     return MON_GIVEN_TO_PARTY;
 }
 
-static u8 SendMonToPC(struct Pokemon* mon)
+u8 SendMonToPC(struct Pokemon* mon)
 {
     s32 boxNo, boxPos;
 
@@ -6449,4 +6450,43 @@ u8 *MonSpritesGfxManager_GetSpritePtr(u8 spriteNum)
             spriteNum = 0;
         return sMonSpritesGfxManager->spritePointers[spriteNum];
     }
+}
+
+void GiveBoxMonInitialMoveset_Fast(struct BoxPokemon *boxMon) //Credit: AsparagusEduardo
+{
+    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
+    s32 level = GetLevelFromBoxMonExp(boxMon);
+    s32 i;
+    u16 levelMoveCount = 0;
+    u16 moves[MAX_MON_MOVES] = {0};
+    u8 addedMoves = 0;
+    const u16 *learnset = GetSpeciesLevelUpLearnset(species);
+
+    for (i = 0; learnset[i] != LEVEL_UP_END; i++)
+        levelMoveCount++;
+        
+    for (i = levelMoveCount; (i >= 0 && addedMoves < MAX_MON_MOVES); i--)
+    {
+        if ((learnset[i] & LEVEL_UP_MOVE_LV) > (level << 9))
+            continue;
+            
+        if ((learnset[i] & LEVEL_UP_MOVE_LV) == 0)
+            continue;
+
+        if (moves[addedMoves] != (learnset[i] & LEVEL_UP_MOVE_ID))
+            moves[addedMoves++] = (learnset[i] & LEVEL_UP_MOVE_ID);
+    }
+    for (i = MAX_MON_MOVES - 1; i >= 0; i--)
+    {
+        SetBoxMonData(boxMon, MON_DATA_MOVE1 + i, &moves[i]);
+        SetBoxMonData(boxMon, MON_DATA_PP1 + i, &gBattleMoves[moves[i]].pp);
+    }
+}
+
+const u16 *GetSpeciesLevelUpLearnset(u16 species)
+{
+    const u16 *learnset = gLevelUpLearnsets[species];
+    if (learnset == NULL)
+        return gLevelUpLearnsets[SPECIES_NONE];
+    return learnset;
 }

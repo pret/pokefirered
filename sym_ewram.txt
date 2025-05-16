@@ -135,6 +135,7 @@
 	.include "src/digit_obj_util.o"
 	.include "src/trainer_tower.o"
 	.include "src/berry_powder.o"
+	.include "src/debug.o"
 	.include "src/dexnav.o"
 	.include "src/ev_iv_display_screen.o"
 	.include "src/field_name_box.o"

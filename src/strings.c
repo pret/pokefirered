@@ -942,6 +942,7 @@ const u8 gStartMenuDesc_Save[] = _("Guarda tu partida con un registro\ncompleto 
 const u8 gStartMenuDesc_Option[] = _("Cambia varios ajustes, cómo velocidad\nde texto, reglas del juego, etc.");
 const u8 gStartMenuDesc_Exit[] = _("Cierra esta ventana del MENÚ.");
 const u8 gStartMenuDesc_Retire[] = _("Te retira del JUEGO SAFARI y regresas al\nmostrador de inscripciones. ");
+const u8 gStartMenuDesc_Debug[] = _("Debugging functions for developers.");
 
 #include "data/text/quest_log.h"
 

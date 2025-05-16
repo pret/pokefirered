@@ -2284,6 +2284,7 @@ static void BattleStartClearSetData(void)
         gBattleStruct->safariEscapeFactor = 2;
     gBattleStruct->wildVictorySong = 0;
     gBattleStruct->moneyMultiplier = 1;
+    gBattleStruct->debugAISet = FALSE;
 
     for (i = 0; i < 8; i++)
     {
@@ -3232,6 +3233,10 @@ static void HandleTurnActionSelectionState(void)
                     BtlController_EmitEndBounceEffect(0);
                     MarkBattlerForControllerExec(gActiveBattler);
                     return;
+                case B_ACTION_DEBUG:
+                    BtlController_EmitDebugMenu(0);
+                    MarkBattlerForControllerExec(gActiveBattler);
+                    break;
                 }
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
                  && !(gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -3340,6 +3345,9 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_OLDMAN_THROW:
                     gBattleCommunication[gActiveBattler]++;
+                    break;
+                case B_ACTION_DEBUG:
+                    gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                     break;
                 }
             }

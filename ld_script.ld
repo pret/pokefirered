@@ -311,6 +311,7 @@ SECTIONS {
         src/minigame_countdown.o(.text);
         src/berry_fix_program.o(.text);
         src/ev_iv_display_screen.o(.text);
+        src/debug.o(.text);
         src/dexnav.o(.text);
         src/field_name_box.o(.text);
     } > ROM =0
@@ -610,6 +611,7 @@ SECTIONS {
         src/trainer_tower_sets.o(.rodata);
         src/move_descriptions.o(.rodata);
         src/ev_iv_display_screen.o(.rodata);
+        src/debug.o(.rodata);
 
         /* These should not be moved to C files */
         src/mystery_event_msg.o(.rodata);
@@ -1046,6 +1048,8 @@ SECTIONS {
         data/*.o(.rodata);
     } > ROM =0
 
+
+    __rom_end = .;
 
     /* DWARF 2 sections */
     .debug_aranges  0 : { *(.debug_aranges) }

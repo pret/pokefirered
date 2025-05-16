@@ -284,7 +284,7 @@ static s32 ListMenuTestInput(struct ListMenuTemplate *template, u32 cursorPos, u
     return LIST_NOTHING_CHOSEN;
 }
 
-static void ListMenuGetCurrentItemArrayId(u8 listTaskId, u16 *arrayId)
+void ListMenuGetCurrentItemArrayId(u8 listTaskId, u16 *arrayId)
 {
     struct ListMenu *list = (struct ListMenu *)gTasks[listTaskId].data;
 

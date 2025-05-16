@@ -50,6 +50,16 @@ void LoadCompressedSpritePalette(const struct CompressedSpritePalette *src)
     LoadSpritePalette(&dest);
 }
 
+void LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag)
+{
+    struct SpritePalette dest;
+
+    LZ77UnCompWram(pal, gDecompressionBuffer);
+    dest.data = (void *) gDecompressionBuffer;
+    dest.tag = tag;
+    LoadSpritePalette(&dest);
+}
+
 void LoadCompressedSpritePaletteOverrideBuffer(const struct CompressedSpritePalette *a, void *buffer)
 {
     struct SpritePalette dest;

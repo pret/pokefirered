@@ -14,7 +14,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: devkitpro/devkitarm
     env:
       GAME_VERSION: FIRERED
       GAME_REVISION: 0

@@ -262,20 +262,22 @@ static s32 GetRoamerPokedexAreaMarkers(u16 species, struct Subsprite * subsprite
 
 static bool32 IsSpeciesOnMap(const struct WildPokemonHeader * data, u32 headerId, s32 species)
 {
-    enum TimeOfDay timeOfDay = GetTimeOfDayForEncounters(headerId, WILD_AREA_LAND);
-    if (IsSpeciesInEncounterTable(data->encounterTypes[timeOfDay].landMonsInfo, species, LAND_WILD_COUNT))
+    enum Season season;
+    enum TimeOfDay timeOfDay;
+    GetSeasonAndTimeOfDayForEncounters(headerId, WILD_AREA_LAND, &season, &timeOfDay);
+    if (IsSpeciesInEncounterTable(data->encounterTypes[season][timeOfDay].landMonsInfo, species, LAND_WILD_COUNT))
         return TRUE;
-    if (IsSpeciesInEncounterTable(data->encounterTypes[timeOfDay].waterMonsInfo, species, WATER_WILD_COUNT))
+    if (IsSpeciesInEncounterTable(data->encounterTypes[season][timeOfDay].waterMonsInfo, species, WATER_WILD_COUNT))
         return TRUE;
 // When searching the fishing encounters, this incorrectly uses the size of the land encounters.
 // As a result it's reading out of bounds of the fishing encounters tables.
 #ifdef BUGFIX
-    if (IsSpeciesInEncounterTable(data->encounterTypes[timeOfDay].fishingMonsInfo, species, FISH_WILD_COUNT))
+    if (IsSpeciesInEncounterTable(data->encounterTypes[season][timeOfDay].fishingMonsInfo, species, FISH_WILD_COUNT))
 #else
-    if (IsSpeciesInEncounterTable(data->encounterTypes[timeOfDay].fishingMonsInfo, species, LAND_WILD_COUNT))
+    if (IsSpeciesInEncounterTable(data->encounterTypes[season][timeOfDay].fishingMonsInfo, species, LAND_WILD_COUNT))
 #endif
         return TRUE;
-    if (IsSpeciesInEncounterTable(data->encounterTypes[timeOfDay].rockSmashMonsInfo, species, ROCK_WILD_COUNT))
+    if (IsSpeciesInEncounterTable(data->encounterTypes[season][timeOfDay].rockSmashMonsInfo, species, ROCK_WILD_COUNT))
         return TRUE;
 
     return FALSE;

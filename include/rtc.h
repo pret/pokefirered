@@ -110,6 +110,7 @@ enum Season {
     SEASON_SUMMER,
     SEASON_AUTUMN,
     SEASON_WINTER,
+    SEASON_COUNT
 };
 
 extern struct Time gLocalTime;

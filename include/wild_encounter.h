@@ -50,12 +50,7 @@ struct WildPokemonHeader
 {
     u8 mapGroup;
     u8 mapNum;
-
-#if OW_TIME_OF_DAY_ENCOUNTERS
-const struct WildEncounterTypes encounterTypes[TIMES_OF_DAY_COUNT];
-#else
-const struct WildEncounterTypes encounterTypes[1];
-#endif
+    const struct WildEncounterTypes encounterTypes[(OW_SEASON_ENCOUNTERS ? SEASON_COUNT : 1)][(OW_TIME_OF_DAY_ENCOUNTERS ? TIMES_OF_DAY_COUNT : 1)];
 };
 
 extern const struct WildPokemonHeader gWildMonHeaders[];
@@ -86,6 +81,6 @@ u8 ChooseWildMonIndex_Land(void);
 u8 ChooseWildMonIndex_WaterRock(void);
 u8 ChooseHiddenMonIndex(void);
 bool32 MapHasNoEncounterData(void);
-enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
+void GetSeasonAndTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area, enum Season *season, enum TimeOfDay *timeOfDay);
 
 #endif // GUARD_WILD_ENCOUNTER_H

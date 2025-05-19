@@ -169,7 +169,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 12,
         .baseBlock = 0x356
     }, 
-    [BAG_WIN_CONTEXT] = { // conctext menu with 1 element
+    [BAG_WIN_CONTEXT] = { // context menu with 1 element
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 17,
@@ -178,7 +178,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x20a
     }, 
-    [BAG_WIN_CONTEXT + 1] = { // conctext menu with 2 elements
+    [BAG_WIN_CONTEXT + 1] = { // context menu with 2 elements
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 15,
@@ -187,7 +187,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x20a
     }, 
-    [BAG_WIN_CONTEXT + 2] = { // conctext menu with 3 elements
+    [BAG_WIN_CONTEXT + 2] = { // context menu with 3 elements
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 13,
@@ -196,7 +196,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x20a
     }, 
-    [BAG_WIN_CONTEXT + 3] = { // conctext menu with 4 elements
+    [BAG_WIN_CONTEXT + 3] = { // context menu with 4 elements
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 11,

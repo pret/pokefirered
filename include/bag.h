@@ -13,7 +13,7 @@
 #define BAG_WIN_MONEY               2   // top left corner
 #define BAG_WIN_MSG_FULL            5   // full MSG box
 #define BAG_WIN_MSG                 6   // MSG box width 14 (spares icon bottom left corner)
-#define BAG_WIN_CONTEXT             10  // conctext menu with 1 element
+#define BAG_WIN_CONTEXT             10  // context menu with 1 element
 
 void InitBagWindows(void);
 void BagPrintTextOnWindow(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);

@@ -735,7 +735,7 @@ static void bag_menu_print_cursor(u8 y, u8 colorIdx)
     }
     else
     {
-        BagPrintTextOnWindow(0, FONT_NORMAL, gText_SelectorArrow2, 1, y, 0, 0, 0, colorIdx);
+        BagPrintTextOnWindow(BAG_WIN_ITEMS_ID, FONT_NORMAL, gText_SelectorArrow2, 1, y, 0, 0, 0, colorIdx);
     }
 }
 
@@ -753,7 +753,7 @@ static void PrintItemDescriptionOnMessageWindow(s32 itemIndex)
     else
         description = gText_CloseBag;
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    BagPrintTextOnWindow(1, FONT_NORMAL, description, 0, 3, 2, 0, 0, 0);
+    BagPrintTextOnWindow(BAG_WIN_MAIN_MSG_ID, FONT_NORMAL, description, 0, 3, 2, 0, 0, 0);
 }
 
 static void CreatePocketScrollArrowPair(void)
@@ -1226,7 +1226,7 @@ static void BeginMovingItemInPocket(u8 taskId, s16 itemIndex)
     StringCopy(gStringVar1, ItemId_GetName(BagGetItemIdByPocketPosition(gBagMenuState.pocket + 1, data[1])));
     StringExpandPlaceholders(gStringVar4, gOtherText_WhereShouldTheStrVar1BePlaced);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    BagPrintTextOnWindow(1, FONT_NORMAL, gStringVar4, 0, 3, 2, 0, 0, 0);
+    BagPrintTextOnWindow(BAG_WIN_MAIN_MSG_ID, FONT_NORMAL, gStringVar4, 0, 3, 2, 0, 0, 0);
     UpdateSwapLinePos(0, ListMenuGetYCoordForPrintingArrowCursor(data[0]));
     SetSwapLineInvisibility(FALSE);
     BagDestroyPocketSwitchArrowPair();

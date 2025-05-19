@@ -3,14 +3,15 @@
 
 #include "menu_helpers.h"
 
+// windowIds
 #define BAG_WIN_ITEMS_ID            0   // central main list window
-#define BAG_WIN_MAIN_MSG_ID              1   // bottom MSG box
+#define BAG_WIN_MAIN_MSG_ID         1   // bottom MSG box
 #define BAG_WIN_TITLE_ID            2   // top left pocket title
 
-// whichWindow indexes
+// whichWindow
 #define BAG_WIN_CHOOSE_QUANTITY     0   // bottom right corner
 #define BAG_WIN_MONEY               2   // top left corner
-#define BAG_WIN_MSG_FULL            5 // full MSG box
+#define BAG_WIN_MSG_FULL            5   // full MSG box
 #define BAG_WIN_MSG                 6   // MSG box width 14 (spares icon bottom left corner)
 #define BAG_WIN_CONTEXT             10  // conctext menu with 1 element
 

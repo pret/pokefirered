@@ -1018,7 +1018,7 @@ static void All_CalculateNItemsAndMaxShowed(void)
 void DisplayItemMessageInBag(u8 taskId, u8 fontId, const u8 * string, TaskFunc followUpFunc)
 {
     s16 *data = gTasks[taskId].data;
-    data[10] = OpenBagWindow(5);
+    data[10] = OpenBagWindow(BAG_WIN_MSG_FULL);
     FillWindowPixelBuffer(data[10], PIXEL_FILL(1));
     DisplayMessageAndContinueTask(taskId, data[10], 0x06D, 0x0D, fontId, GetTextSpeedSetting(), string, followUpFunc);
     ScheduleBgCopyTilemapToVram(0);
@@ -1321,11 +1321,11 @@ static void InitQuantityToTossOrDeposit(u16 cursorPos, const u8 *str)
 
 static void UpdateQuantityToTossOrDeposit(s16 value, u8 ndigits)
 {
-    u8 r6 = GetBagWindow(0);
-    FillWindowPixelBuffer(r6, PIXEL_FILL(1));
+    u8 bagQuantityWinId = GetBagWindow(BAG_WIN_CHOOSE_QUANTITY);
+    FillWindowPixelBuffer(bagQuantityWinId, PIXEL_FILL(1));
     ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEADING_ZEROS, ndigits);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
-    BagPrintTextOnWindow(r6, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
+    BagPrintTextOnWindow(bagQuantityWinId, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
 }
 
 // row of 0 is the bottom row in the list, up to LIST_TILES_HEIGHT at the top
@@ -1482,8 +1482,8 @@ static void Task_ItemMenuAction_Use(u8 taskId)
 static void Task_ItemMenuAction_Toss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    ClearWindowTilemap(GetBagWindow(10));
-    ClearWindowTilemap(GetBagWindow(6));
+    ClearWindowTilemap(GetBagWindow(BAG_WIN_CONTEXT));
+    ClearWindowTilemap(GetBagWindow(BAG_WIN_MSG));
     HideBagWindow(BAG_WIN_CONTEXT);
     HideBagWindow(BAG_WIN_MSG);
     PutWindowTilemap(0);
@@ -1528,7 +1528,7 @@ static void Task_SelectQuantityToToss(u8 taskId)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearWindowTilemap(GetBagWindow(6));
+        ClearWindowTilemap(GetBagWindow(BAG_WIN_MSG));
         HideBagWindow(BAG_WIN_MSG);
         HideBagWindow(BAG_WIN_CHOOSE_QUANTITY);
         ScheduleBgCopyTilemapToVram(0);
@@ -1648,7 +1648,7 @@ static void Task_WaitAButtonAndCloseContextMenu(u8 taskId)
 void Task_ReturnToBagFromContextMenu(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    CloseBagWindow(5);
+    CloseBagWindow(BAG_WIN_MSG_FULL);
     DestroyListMenuTask(data[0], &gBagMenuState.cursorPos[gBagMenuState.pocket], &gBagMenuState.itemsAbove[gBagMenuState.pocket]);
     Pocket_CalculateNItemsAndMaxShowed(gBagMenuState.pocket);
     PocketCalculateInitialCursorPosAndItemsAbove(gBagMenuState.pocket);
@@ -1854,7 +1854,7 @@ static void Task_SellItem_No(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     HideBagWindow(BAG_WIN_MONEY);
-    CloseBagWindow(5);
+    CloseBagWindow(BAG_WIN_MSG_FULL);
     PutWindowTilemap(2);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
@@ -1878,7 +1878,7 @@ static void Task_InitSaleQuantitySelectInterface(u8 taskId)
 
 static void UpdateSalePriceDisplay(s32 amount)
 {
-    PrintMoneyAmount(GetBagWindow(0), 56, 10, amount, 0);
+    PrintMoneyAmount(GetBagWindow(BAG_WIN_CHOOSE_QUANTITY), 56, 10, amount, 0);
 }
 
 static void Task_SelectQuantityToSell(u8 taskId)
@@ -1903,7 +1903,7 @@ static void Task_SelectQuantityToSell(u8 taskId)
         PlaySE(SE_SELECT);
         HideBagWindow(BAG_WIN_CHOOSE_QUANTITY);
         HideBagWindow(BAG_WIN_MONEY);
-        CloseBagWindow(5);
+        CloseBagWindow(BAG_WIN_MSG_FULL);
         PutWindowTilemap(2);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
@@ -1939,8 +1939,8 @@ static void Task_FinalizeSaleToShop(u8 taskId)
     Bag_BuildListMenuTemplate(gBagMenuState.pocket);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagMenuState.cursorPos[gBagMenuState.pocket], gBagMenuState.itemsAbove[gBagMenuState.pocket]);
     bag_menu_print_cursor_(data[0], 2);
-    BagDrawTextBoxOnWindow(GetBagWindow(2));
-    PrintMoneyAmountInMoneyBox(GetBagWindow(2), GetMoney(&gSaveBlock1Ptr->money), 0);
+    BagDrawTextBoxOnWindow(GetBagWindow(BAG_WIN_MONEY));
+    PrintMoneyAmountInMoneyBox(GetBagWindow(BAG_WIN_MONEY), GetMoney(&gSaveBlock1Ptr->money), 0);
     gTasks[taskId].func = Task_WaitPressAB_AfterSell;
 }
 
@@ -1981,7 +1981,7 @@ static void Task_SelectQuantityToDeposit(u8 taskId)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearWindowTilemap(GetBagWindow(6));
+        ClearWindowTilemap(GetBagWindow(BAG_WIN_MSG));
         HideBagWindow(BAG_WIN_MSG);
         HideBagWindow(BAG_WIN_CHOOSE_QUANTITY);
         ScheduleBgCopyTilemapToVram(0);

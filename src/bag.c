@@ -28,7 +28,7 @@ static const struct WindowTemplate sDefaultBagWindowsStd[] = {
         .paletteNum = 15,
         .baseBlock = 0x008a
     }, 
-    [BAG_WIN_MESSAGE_ID] = { // bottom MSG box
+    [BAG_WIN_MAIN_MSG_ID] = { // bottom MSG box
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 14,
@@ -58,7 +58,7 @@ static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
         .paletteNum = 15,
         .baseBlock = 0x008a
     }, 
-    [BAG_WIN_MESSAGE_ID] = { // bottom MSG box
+    [BAG_WIN_MAIN_MSG_ID] = { // bottom MSG box
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 14,
@@ -124,7 +124,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x28a
     }, 
-    [BAG_WIN_MSG - 1] = { // whole MSG box unused
+    [BAG_WIN_MSG_FULL] = { // whole MSG box
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,

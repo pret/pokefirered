@@ -28,7 +28,7 @@ static const struct WindowTemplate sDefaultBagWindowsStd[] = {
         .paletteNum = 15,
         .baseBlock = 0x008a
     }, 
-    [BAG_WIN_MSG_ID] = { // bottom MSG box
+    [BAG_WIN_MESSAGE_ID] = { // bottom MSG box
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 14,
@@ -58,7 +58,7 @@ static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
         .paletteNum = 15,
         .baseBlock = 0x008a
     }, 
-    [BAG_WIN_MSG_ID] = { // bottom MSG box
+    [BAG_WIN_MESSAGE_ID] = { // bottom MSG box
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 14,
@@ -88,7 +88,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x242
     }, 
-    [BAG_WIN_BUY_QUANTITY] = { // popup when buying or selling quantities
+    [BAG_WIN_CHOOSE_QUANTITY + 1] = { // popup when buying or selling quantities
         .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 9,
@@ -106,7 +106,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 12,
         .baseBlock = 0x272
     }, 
-    [BAG_WIN_CHOOSE_QUANTITY2] = { // unused
+    [3] = { // unused
         .bg = 0,
         .tilemapLeft = 23,
         .tilemapTop = 15,
@@ -115,7 +115,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x28a
     }, 
-    [BAG_WIN_4] = { // unused
+    [4] = { // unused
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 9,
@@ -124,7 +124,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x28a
     }, 
-    [BAG_WIN_MSG_W26] = { // whole MSG box
+    [BAG_WIN_MSG - 1] = { // whole MSG box unused
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
@@ -133,7 +133,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x2a2
     }, 
-    [BAG_WIN_MSG_W14] = { // MSG bodx width 14 (spares icon bottom left corner)
+    [BAG_WIN_MSG] = { // MSG box width 14 (spares icon bottom left corner)
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -142,7 +142,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 12,
         .baseBlock = 0x2a2
     }, 
-    [BAG_WIN_MSG_W15] = { // MSG bodx width 15
+    [BAG_WIN_MSG + 1] = { // MSG box width 15
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -151,7 +151,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 12,
         .baseBlock = 0x2da
     }, 
-    [BAG_WIN_MSG_W16] = { // MSG bodx width 16
+    [BAG_WIN_MSG + 2] = { // MSG box width 16
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -160,7 +160,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 12,
         .baseBlock = 0x316
     }, 
-    [BAG_WIN_MSG_W23] = { // MSG bodx width 23
+    [BAG_WIN_MSG + 3] = { // MSG box width 23
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -169,7 +169,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 12,
         .baseBlock = 0x356
     }, 
-    [BAG_WIN_CONTEXT_H2] = { // conctext menu with 1 element
+    [BAG_WIN_CONTEXT] = { // conctext menu with 1 element
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 17,
@@ -178,7 +178,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x20a
     }, 
-    [BAG_WIN_CONTEXT_H4] = { // conctext menu with 2 elements
+    [BAG_WIN_CONTEXT + 1] = { // conctext menu with 2 elements
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 15,
@@ -187,7 +187,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x20a
     }, 
-    [BAG_WIN_CONTEXT_H6] = { // conctext menu with 3 elements
+    [BAG_WIN_CONTEXT + 2] = { // conctext menu with 3 elements
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 13,
@@ -196,7 +196,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x20a
     }, 
-    [BAG_WIN_CONTEXT_H8] = { // conctext menu with 4 elements
+    [BAG_WIN_CONTEXT + 3] = { // conctext menu with 4 elements
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 11,
@@ -321,7 +321,7 @@ void BagCreateYesNoMenuTopRight(u8 taskId, const struct YesNoFuncTable * ptrs)
 
 void BagPrintMoneyAmount(void)
 {
-    PrintMoneyAmountInMoneyBoxWithBorder(ShowBagWindow(2, 0), 0x081, 0x0C, GetMoney(&gSaveBlock1Ptr->money));
+    PrintMoneyAmountInMoneyBoxWithBorder(ShowBagWindow(BAG_WIN_MONEY, 0), 0x081, 0x0C, GetMoney(&gSaveBlock1Ptr->money));
 }
 
 void BagDrawTextBoxOnWindow(u8 windowId)

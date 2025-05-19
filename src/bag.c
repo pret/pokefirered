@@ -232,7 +232,7 @@ void InitBagWindows(void)
     ScheduleBgCopyTilemapToVram(0);
     for (i = 0; i < 11; i++)
     {
-        sOpenWindows[i] = 0xFF;
+        sOpenWindows[i] = WINDOW_NONE;
     }
 }
 
@@ -257,7 +257,7 @@ void BagDrawDepositItemTextBox(void)
 
 u8 ShowBagWindow(u8 whichWindow, u8 nItems)
 {
-    if (sOpenWindows[whichWindow] == 0xFF)
+    if (sOpenWindows[whichWindow] == WINDOW_NONE)
     {
         sOpenWindows[whichWindow] = AddWindow(&sWindowTemplates[whichWindow + nItems]);
         if (whichWindow != 6)
@@ -279,12 +279,12 @@ void HideBagWindow(u8 whichWindow)
     ClearWindowTilemap(sOpenWindows[whichWindow]);
     RemoveWindow(sOpenWindows[whichWindow]);
     ScheduleBgCopyTilemapToVram(0);
-    sOpenWindows[whichWindow] = 0xFF;
+    sOpenWindows[whichWindow] = WINDOW_NONE;
 }
 
 u8 OpenBagWindow(u8 whichWindow)
 {
-    if (sOpenWindows[whichWindow] == 0xFF)
+    if (sOpenWindows[whichWindow] == WINDOW_NONE)
     {
         sOpenWindows[whichWindow] = AddWindow(&sWindowTemplates[whichWindow]);
     }
@@ -293,14 +293,14 @@ u8 OpenBagWindow(u8 whichWindow)
 
 void CloseBagWindow(u8 whichWindow)
 {
-    if (sOpenWindows[whichWindow] != 0xFF)
+    if (sOpenWindows[whichWindow] != WINDOW_NONE)
     {
         ClearDialogWindowAndFrameToTransparent(sOpenWindows[whichWindow], FALSE);
         ClearWindowTilemap(sOpenWindows[whichWindow]);
         RemoveWindow(sOpenWindows[whichWindow]);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
-        sOpenWindows[whichWindow] = 0xFF;
+        sOpenWindows[whichWindow] = WINDOW_NONE;
     }
 }
 

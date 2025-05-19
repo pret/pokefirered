@@ -7,6 +7,7 @@
 #include "menu.h"
 #include "money.h"
 #include "strings.h"
+#include "bag.h"
 
 static const u16 sBagWindowPalF[] = INCBIN_U16("graphics/item_menu/bag_window_pal.gbapal");
 
@@ -18,7 +19,7 @@ static const u8 sTextColors[][3] = {
 };
 
 static const struct WindowTemplate sDefaultBagWindowsStd[] = {
-    {
+    [BAG_WIN_ITEMS_ID] = { // central main list window
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 1,
@@ -26,7 +27,8 @@ static const struct WindowTemplate sDefaultBagWindowsStd[] = {
         .height = 12,
         .paletteNum = 15,
         .baseBlock = 0x008a
-    }, {
+    }, 
+    [BAG_WIN_MSG_ID] = { // bottom MSG box
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 14,
@@ -34,7 +36,8 @@ static const struct WindowTemplate sDefaultBagWindowsStd[] = {
         .height = 6,
         .paletteNum = 15,
         .baseBlock = 0x0162
-    }, {
+    }, 
+    [BAG_WIN_TITLE_ID] = { // top left pocket title
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -46,7 +49,7 @@ static const struct WindowTemplate sDefaultBagWindowsStd[] = {
 };
 
 static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
-    {
+    [BAG_WIN_ITEMS_ID] = { // central main list window
         .bg = 0,
         .tilemapLeft = 11,
         .tilemapTop = 1,
@@ -54,7 +57,8 @@ static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
         .height = 12,
         .paletteNum = 15,
         .baseBlock = 0x008a
-    }, {
+    }, 
+    [BAG_WIN_MSG_ID] = { // bottom MSG box
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 14,
@@ -62,7 +66,8 @@ static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
         .height = 6,
         .paletteNum = 15,
         .baseBlock = 0x0162
-    }, {
+    }, 
+    [BAG_WIN_TITLE_ID] = { // top left pocket title
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -74,7 +79,7 @@ static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
 };
 
 static const struct WindowTemplate sWindowTemplates[] = {
-    {
+    [BAG_WIN_CHOOSE_QUANTITY] = { // bottom right corner
         .bg = 0,
         .tilemapLeft = 24,
         .tilemapTop = 15,
@@ -82,7 +87,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x242
-    }, {
+    }, 
+    [BAG_WIN_BUY_QUANTITY] = { // popup when buying or selling quantities
         .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 9,
@@ -90,7 +96,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x242
-    }, {
+    }, 
+    [BAG_WIN_MONEY] = { // top left corner
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -98,7 +105,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 3,
         .paletteNum = 12,
         .baseBlock = 0x272
-    }, {
+    }, 
+    [BAG_WIN_CHOOSE_QUANTITY2] = { // unused
         .bg = 0,
         .tilemapLeft = 23,
         .tilemapTop = 15,
@@ -106,7 +114,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x28a
-    }, {
+    }, 
+    [BAG_WIN_4] = { // unused
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 9,
@@ -114,7 +123,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x28a
-    }, {
+    }, 
+    [BAG_WIN_MSG_W26] = { // whole MSG box
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
@@ -122,7 +132,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x2a2
-    }, {
+    }, 
+    [BAG_WIN_MSG_W14] = { // MSG bodx width 14 (spares icon bottom left corner)
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -130,7 +141,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 12,
         .baseBlock = 0x2a2
-    }, {
+    }, 
+    [BAG_WIN_MSG_W15] = { // MSG bodx width 15
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -138,7 +150,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 12,
         .baseBlock = 0x2da
-    }, {
+    }, 
+    [BAG_WIN_MSG_W16] = { // MSG bodx width 16
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -146,7 +159,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 12,
         .baseBlock = 0x316
-    }, {
+    }, 
+    [BAG_WIN_MSG_W23] = { // MSG bodx width 23
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -154,7 +168,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 12,
         .baseBlock = 0x356
-    }, {
+    }, 
+    [BAG_WIN_CONTEXT_H2] = { // conctext menu with 1 element
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 17,
@@ -162,7 +177,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 0x20a
-    }, {
+    }, 
+    [BAG_WIN_CONTEXT_H4] = { // conctext menu with 2 elements
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 15,
@@ -170,7 +186,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x20a
-    }, {
+    }, 
+    [BAG_WIN_CONTEXT_H6] = { // conctext menu with 3 elements
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 13,
@@ -178,7 +195,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 6,
         .paletteNum = 15,
         .baseBlock = 0x20a
-    }, {
+    }, 
+    [BAG_WIN_CONTEXT_H8] = { // conctext menu with 4 elements
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 11,

@@ -42,20 +42,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PalletTown_RivalsHouse_EventScript_TownMap",
       "flag": "FLAG_HIDE_TOWN_MAP"
-    },
-    {
-      "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
-      "x": 6,
-      "y": 18,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "PalletTown_OaksHouse_EventScript_Regalo",
-      "flag": "0"
     }
   ],
   "warp_events": [

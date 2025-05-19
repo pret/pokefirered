@@ -95,10 +95,6 @@ MtMoon_1F_Text_Sign01::
     .string "{SHADOW DYNAMIC_COLOR4}MONTE LUNAR{SHADOW LIGHT_GRAY}\n"
     .string "La cuna de las estrellas$"
 
-MtMoon_1F_Text_SilvioTerminado::
-    .string "EVENTO TERMINADO$"
-
-
 Name_Desconociodo::
     .string "???$"
 Name_Silvio::
@@ -110,16 +106,19 @@ MtMoon_1F_Text_Silvio_EsperaUnSegundo::
 MtMoon_1F_Text_Silvio_EresEntrenadora::
     .string "¿Eres {SHADOW DYNAMIC_COLOR4}ENTRENADORA POKéMON{SHADOW LIGHT_GRAY}?$"
 
+MtMoon_1F_Text_Silvio_EresEntrenador::
+    .string "¿Eres {SHADOW DYNAMIC_COLOR4}ENTRENADOR POKéMON{SHADOW LIGHT_GRAY}?$"
+
 MtMoon_1F_Text_Silvio_QueSorpresa::
-    .string "Qué sorpresa encontrar alguien así tan\n"
-    .string "adentro del {SHADOW DYNAMIC_COLOR4}MONTE LUNAR{SHADOW LIGHT_GRAY}.\p"
+    .string "Qué sorpresa encontrar alguien as\n"
+    .string "tan adentro del {SHADOW DYNAMIC_COLOR4}MONTE LUNAR{SHADOW LIGHT_GRAY}.\p"
     .string "Me llamo {SHADOW DYNAMIC_COLOR4}SILVIO{SHADOW LIGHT_GRAY}. Fui geólogo por\n"
     .string "muchos años en el {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}\l"
     .string "de {SHADOW DYNAMIC_COLOR4}CIUDAD PLATEADA{SHADOW LIGHT_GRAY}.\p"
     .string "Aunque ya no trabajo allí, no puedo\n"
     .string "evitar regresar de vez en cuando...$"
 
-MtMoon_1F_Text_Silvio_3::
+MtMoon_1F_Text_EsteLugar::
     .string "Este lugar es especial. Estas vetas\n"
     .string "de roca, estas grietas...\p"
     .string "A veces ocultan fragmentos de\n"
@@ -137,12 +136,12 @@ MtMoon_1F_Text_SilvioIntro::
 
 MtMoon_1F_Text_SilvioDefeat::
     .string "¡ESO FUE MAGNÍFICO!\n"
-    .string "TIENES BUEN OJO Y AÚN MEJOR ESTRATEGIA$"
+    .string "BUEN OJO Y AÚN MEJOR ESTRATEGIA$"
     
-MtMoon_1F_Text_Silvio_4::
+MtMoon_1F_Text_CuandoVuelvas::
     .string "Cuando vuelvas a {SHADOW DYNAMIC_COLOR4}CIUDAD PLATEADA{SHADOW LIGHT_GRAY},\n"
-    .string "pasa por mi tienda. Tengo algunas piedras\l"
-    .string "que podrían ayudarte a evolucionar tu\l"
-    .string "equipo.\l"
-    .string "Será un gusto hacer negocios con\l"
+    .string "pasa por mi tienda.\p"
+    .string "Tengo algunas piedras que podrían\n"
+    .string "pudarte a evolucionar tu equipo.\p"
+    .string "Será un gusto hacer negocios con\n"
     .string "alguien que sabe luchar.$"

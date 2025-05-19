@@ -37,7 +37,6 @@ MtMoon_1F_EventScript_Iris::
 MtMoon_1F_EventScript_Jovan::
 	trainerbattle_single TRAINER_SUPER_NERD_JOVAN, MtMoon_1F_Text_JovanIntro, MtMoon_1F_Text_JovanDefeat
 	msgbox MtMoon_1F_Text_JovanPostBattle, MSGBOX_AUTOCLOSE
-	setvar VAR_0x4090, 0
 	end
 
 MtMoon_1F_EventScript_Kent::
@@ -50,91 +49,162 @@ MtMoon_1F_EventScript_Robby::
 	msgbox MtMoon_1F_Text_RobbyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtMoon_1F_EventScript_Silvio::
-	goto_if_set FLAG_SILVIO_MONTE_LUNA, MtMoon_1F_EventScript_SilvioTerminado
+@ENCUENTRO SILVIO
+MtMoon_1F_EventScript_SilvioIzq::
 	setflag FLAG_HIDE_SILVIO
-	setobjectxy 17,30,15													@APARECE SILVIO
-	applymovement OBJ_EVENT_ID_PLAYER, MtMoon_1F_Movement_PlayerCamina		@PLAYER CAMINA
-	applymovement 17 MtMoon_1F_Movement_SilvioAparece						@SILVIO SE SORPRENDE
+	setobjectxy 17,30,15
+	applymovement OBJ_EVENT_ID_PLAYER, MtMoon_1F_Movement_PlayerCamina
+	applymovement 17 MtMoon_1F_Movement_SilvioAparece
 	waitmovement 0
-	
 	namebox Name_Desconociodo
-	msgbox MtMoon_1F_Text_Silvio_EsperaUnSegundo							@ESPERA UN SEGUNDO...
+	msgbox MtMoon_1F_Text_Silvio_EsperaUnSegundo
 	hidenamebox
 	closemessage
-
-	applymovement 17, MtMoon_1F_Movement_SilvioMira							@SILVIO MIRA IZQUIERDA
+	applymovement 17 MtMoon_1F_Movement_SilvioExclamacion
 	waitmovement 0
-	
+	checkplayergender
+	call_if_eq VAR_RESULT, FEMALE, MtMoon_1F_EventScript_Silvio_EresEntrenadora
+	call_if_eq VAR_RESULT, MALE, MtMoon_1F_EventScript_Silvio_EresEntrenador
+	applymovement OBJ_EVENT_ID_PLAYER, MtMoon_1F_Movement_PlayerEsperaPaso
+	waitmovement 0
+	setobjectxy 18,31,16
+	applymovement 18 MtMoon_1F_Movement_SilvioCamina
+	applymovement 17 MtMoon_1F_Movement_SilvioCamina
+	waitmovement 0
 	namebox Name_Desconociodo
-	msgbox MtMoon_1F_Text_Silvio_EresEntrenadora							@ERES ENTRENADORA
-	hidenamebox
-	closemessage
-
-	applymovement OBJ_EVENT_ID_PLAYER, MtMoon_1F_Movement_PlayerEspera		@PLAYER ESPERA
-	waitmovement 0
-	applymovement 17 MtMoon_1F_Movement_SilvioCamina						@SILVIO SE ACERCA
-	waitmovement 0
-
-	namebox Name_Desconociodo
-	msgbox MtMoon_1F_Text_Silvio_QueSorpresa								@QUE SORPRESA...
+	msgbox MtMoon_1F_Text_Silvio_QueSorpresa
 	hidenamebox	
 	closemessage
-	
-	applymovement 17 MtMoon_1F_Movement_SilvioMiraAlrededor				@SILVIO MIRA ALREDEDOR
+	applymovement 17 MtMoon_1F_Movement_SilvioMiraAlrededor
 	waitmovement 0
-
-	applymovement 17 MtMoon_1F_Movement_SilvioSalto 						@SILVIO SALTO EN EL LUGAR
+	applymovement 17 MtMoon_1F_Movement_SilvioSalto
 	waitmovement 0
-
-	msgbox MtMoon_1F_Text_Silvio_3
-	applymovement 17 MtMoon_1F_Movement_SilvioSalto 						@SILVIO CAMINA EN EL LUEGAR
+	namebox Name_Silvio
+	msgbox MtMoon_1F_Text_EsteLugar
+	hidenamebox	
+	closemessage
+	applymovement 17 MtMoon_1F_Movement_SilvioSalto
 	waitmovement 0
-
-	msgbox MtMoon_1F_Text_SilvioIntro 									@INTRODUCCIÓN BATALLA
-
-	trainerbattle_no_intro TRAINER_SILVIO, MtMoon_1F_Text_SilvioDefeat	@BATALLA
-	msgbox MtMoon_1F_Text_Silvio_4 										@INVITACION TIENDA
-	applymovement 17 MtMoon_1F_Movement_SilvioSalida						@SILVIO SE VA
+	namebox Name_Silvio
+	msgbox MtMoon_1F_Text_SilvioIntro
+	hidenamebox	
+	closemessage
+	trainerbattle_no_intro TRAINER_SILVIO, MtMoon_1F_Text_SilvioDefeat
+	msgbox MtMoon_1F_Text_CuandoVuelvas
+	applymovement 17 MtMoon_1F_Movement_SilvioSalida
+	applymovement 18 MtMoon_1F_Movement_ClefarySalida
 	waitmovement 0
-	setobjectxy 17,30,21													@SILVIO DESAPARECE
+	setobjectxy 17,30,21
+	setobjectxy 18,30,22
 	setflag FLAG_SILVIO_MONTE_LUNA
 	setflag FLAG_SILVIO_TIENDA
 	setvar VAR_0x4090, 1
 	release
 	end
 
-MtMoon_1F_EventScript_SilvioTerminado::
-	msgbox MtMoon_1F_Text_SilvioTerminado, MSGBOX_DEFAULT
+MtMoon_1F_EventScript_SilvioDer::
+	setflag FLAG_HIDE_SILVIO
+	setobjectxy 17,30,15
+	applymovement OBJ_EVENT_ID_PLAYER, MtMoon_1F_Movement_PlayerCamina
+	applymovement 17 MtMoon_1F_Movement_SilvioAparece
+	waitmovement 0
+	namebox Name_Desconociodo
+	msgbox MtMoon_1F_Text_Silvio_EsperaUnSegundo
+	hidenamebox
+	closemessage
+	applymovement 17 MtMoon_1F_Movement_SilvioExclamacion
+	waitmovement 0
+	checkplayergender
+	call_if_eq VAR_RESULT, FEMALE, MtMoon_1F_EventScript_Silvio_EresEntrenadora
+	call_if_eq VAR_RESULT, MALE, MtMoon_1F_EventScript_Silvio_EresEntrenador
+	applymovement OBJ_EVENT_ID_PLAYER, MtMoon_1F_Movement_PlayerEspera
+	waitmovement 0
+	setobjectxy 18,31,16
+	applymovement 18 MtMoon_1F_Movement_SilvioCamina
+	applymovement 17 MtMoon_1F_Movement_SilvioCamina
+	waitmovement 0
+	namebox Name_Desconociodo
+	msgbox MtMoon_1F_Text_Silvio_QueSorpresa
+	hidenamebox	
+	closemessage
+	applymovement 17 MtMoon_1F_Movement_SilvioMiraAlrededor
+	waitmovement 0
+	applymovement 17 MtMoon_1F_Movement_SilvioSalto
+	waitmovement 0
+	namebox Name_Silvio
+	msgbox MtMoon_1F_Text_EsteLugar
+	hidenamebox	
+	closemessage
+	applymovement 17 MtMoon_1F_Movement_SilvioSalto
+	waitmovement 0
+	namebox Name_Silvio
+	msgbox MtMoon_1F_Text_SilvioIntro
+	hidenamebox	
+	closemessage
+	trainerbattle_no_intro TRAINER_SILVIO, MtMoon_1F_Text_SilvioDefeat
+	msgbox MtMoon_1F_Text_CuandoVuelvas
+	applymovement 17 MtMoon_1F_Movement_SilvioSalida
+	applymovement 18 MtMoon_1F_Movement_ClefarySalida
+	waitmovement 0
+	setobjectxy 17,30,21
+	setobjectxy 18,30,22
+	setflag FLAG_SILVIO_MONTE_LUNA
+	setflag FLAG_SILVIO_TIENDA
+	setvar VAR_0x4090, 1
+	release
 	end
+
+MtMoon_1F_EventScript_Silvio_EresEntrenadora::
+	namebox Name_Desconociodo
+	msgbox MtMoon_1F_Text_Silvio_EresEntrenadora
+	closemessage
+	return
+
+MtMoon_1F_EventScript_Silvio_EresEntrenador::
+	namebox Name_Desconociodo
+	msgbox MtMoon_1F_Text_Silvio_EresEntrenador
+	hidenamebox
+	closemessage
+	return
 
 MtMoon_1F_Movement_PlayerCamina::
 	walk_up
 	walk_up
+	walk_up
+	jump_in_place_right
 	step_end
 
 MtMoon_1F_Movement_PlayerEspera::
-	jump_in_place_up
+	jump_in_place_right
 	emote_question_mark
 	step_end
 
-MtMoon_1F_Movement_SilvioMira::
-	face_left
+MtMoon_1F_Movement_PlayerEsperaPaso::
+	jump_in_place_right
+	emote_question_mark
+	walk_right
 	step_end
 
 MtMoon_1F_Movement_SilvioAparece::
 	walk_down
 	delay_16
 	delay_16
+	face_left
+	delay_16
+	delay_16
+	face_right
+	delay_16
+	delay_16
+	jump_in_place_left
+	step_end
+
+MtMoon_1F_Movement_SilvioExclamacion::
 	emote_exclamation_mark
-	jump_in_place_down
 	step_end
 
 MtMoon_1F_Movement_SilvioCamina::
 	walk_left
 	walk_left
-	walk_left
-	face_down
 	step_end
 	
 MtMoon_1F_Movement_SilvioMiraAlrededor::
@@ -142,26 +212,38 @@ MtMoon_1F_Movement_SilvioMiraAlrededor::
 	delay_16
 	face_up
 	delay_16
-	face_left
-	delay_16
 	face_up
 	delay_16
 	face_down
+	delay_16
+	face_left
 	step_end
 
 MtMoon_1F_Movement_SilvioSalto::
-	walk_in_place_down
-	jump_in_place_down
-	walk_in_place_down
+	walk_in_place_left
+	jump_in_place_left
+	walk_in_place_left
 	step_end
 
 
 MtMoon_1F_Movement_SilvioSalida::
+	walk_down
 	walk_left
 	walk_down
 	walk_down
 	walk_down
-	walk_right
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+MtMoon_1F_Movement_ClefarySalida::
+	walk_left
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	walk_down
 	walk_down
 	walk_down
 	walk_down

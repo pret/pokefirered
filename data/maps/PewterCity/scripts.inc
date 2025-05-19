@@ -627,9 +627,9 @@ PewterCity_EventScript_Silvio1::
 	msgbox PewterCity_Text_Silvio1, MSGBOX_NPC
 	end
 
-PewterCity_EventScript_Silvio2::
+PewterCity_EventScript_Nina::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Text_Silvio2, MSGBOX_NPC
+	msgbox PewterCity_Text_MiAbuelitoDice, MSGBOX_NPC
 	end
 
 PewterCity_EventScript_Nino::
@@ -811,25 +811,6 @@ PewterCity_Movement_WalkInPlaceLeft::
 	walk_in_place_left
 	step_end
 
-
-PewterCity_EventScript_EventoSilvio::
-
-	fadescreen FADE_FROM_WHITE @animacion puerta
-	setobjectxy 7,14,2 @aparece silvio
-	applymovement 0, PewterCity_Movement_EventoSilvio1 @protagonista camina hacia el choque
-	applymovement 7, PewterCity_Movement_EventoSilvio2 @silvio camina hacia el choque
-	waitmovement 0
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, PalletTown_EventScript_Hombre
-	call_if_eq VAR_RESULT, FEMALE, PalletTown_EventScript_Mujer
-
-
-
-	removeobject LOCALID_AIDE
-	setvar VAR_0x4090, 2
-	givemon SPECIES_GROWLITHE, 100 @para testeo
-	end
-
 PalletTown_EventScript_Mujer::
 	msgbox PewterCity_Text_EventoSilvioMujer1
 	closemessage
@@ -842,22 +823,3 @@ PalletTown_EventScript_Hombre::
 	closemessage
 	playbgm MUS_FOLLOW_ME, 0
 	end
-
-
-
-
-PewterCity_Movement_EventoSilvio1::
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	step_end
-
-PewterCity_Movement_EventoSilvio2::
-	walk_down
-	walk_down
-	walk_down
-	step_end

@@ -13,7 +13,7 @@
   "show_map_name": true,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "type": "object",
@@ -53,13 +53,17 @@
       "dest_warp_id": "0"
     },
     {
-      "x": 7,
+      "x": 6,
       "y": 4,
       "elevation": 3,
       "dest_map": "MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL",
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
-  "bg_events": []
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
 }

@@ -1,5 +1,3 @@
-.equ LOCALID_BILL, 1
-
 OneIsland_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, OneIsland_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, OneIsland_OnFrame
@@ -16,21 +14,21 @@ OneIsland_OnFrame::
 OneIsland_EventScript_EnterOneIslandFirstTime::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement OBJ_EVENT_ID_PLAYER, OneIsland_Movement_PlayerExitHarbor
+	applymovement LOCALID_PLAYER, OneIsland_Movement_PlayerExitHarbor
 	waitmovement 0
 	msgbox OneIsland_Text_BillLetsGoSeeCelio
 	closemessage
-	applymovement LOCALID_BILL, OneIsland_Movement_BillWalkToPokeCenter
-	applymovement OBJ_EVENT_ID_PLAYER, OneIsland_Movement_PlayerWalkToPokeCenter
+	applymovement LOCALID_ONE_ISLAND_BILL, OneIsland_Movement_BillWalkToPokeCenter
+	applymovement LOCALID_PLAYER, OneIsland_Movement_PlayerWalkToPokeCenter
 	waitmovement 0
 	opendoor 14, 5
 	waitdooranim
-	applymovement LOCALID_BILL, OneIsland_Movement_BillEnterPokeCenter
-	applymovement OBJ_EVENT_ID_PLAYER, OneIsland_Movement_PlayerEnterPokeCenter
+	applymovement LOCALID_ONE_ISLAND_BILL, OneIsland_Movement_BillEnterPokeCenter
+	applymovement LOCALID_PLAYER, OneIsland_Movement_PlayerEnterPokeCenter
 	waitmovement 0
 	closedoor 14, 5
 	waitdooranim
-	removeobject LOCALID_BILL
+	removeobject LOCALID_ONE_ISLAND_BILL
 	setvar VAR_MAP_SCENE_ONE_ISLAND_HARBOR, 3
 	warp MAP_ONE_ISLAND_POKEMON_CENTER_1F, 9, 9
 	waitstate

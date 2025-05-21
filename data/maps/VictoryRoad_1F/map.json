@@ -72,6 +72,7 @@
       "flag": "FLAG_HIDE_VICTORY_ROAD_1F_TM02"
     },
     {
+      "local_id": "LOCALID_VICTORY_ROAD_1F_BOULDER",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 7,

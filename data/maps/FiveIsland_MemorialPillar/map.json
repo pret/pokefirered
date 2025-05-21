@@ -22,6 +22,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_MEMORIAL_MAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 8,

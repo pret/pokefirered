@@ -69,6 +69,7 @@
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
+      "local_id": "LOCALID_FIVE_ISLAND_MEADOW_BORDER_TREE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 8,

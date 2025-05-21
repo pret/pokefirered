@@ -10,8 +10,8 @@
 
 #define MAP_UNDEFINED (0xFF | (0xFF << 8))
 
-#define MAP_GROUP(map) (MAP_##map >> 8)
-#define MAP_NUM(map) (MAP_##map & 0xFF)
+#define MAP_GROUP(map) (map >> 8)
+#define MAP_NUM(map) (map & 0xFF)
 
 #define MAP(map) MAP_GROUP(map), MAP_NUM(map)
 

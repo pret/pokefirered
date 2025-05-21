@@ -1,5 +1,3 @@
-.equ LOCALID_KARATE_MASTER, 5
-
 SaffronCity_Dojo_MapScripts::
 	.byte 0
 

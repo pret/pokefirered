@@ -1,6 +1,3 @@
-.equ LOCALID_RIVAL,    1
-.equ LOCALID_PROF_OAK, 2
-
 PokemonLeague_ChampionsRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, PokemonLeague_ChampionsRoom_OnWarp
 	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_ChampionsRoom_OnResume
@@ -39,7 +36,7 @@ PokemonLeague_ChampionsRoom_OnWarp::
 	.2byte 0
 
 PokemonLeague_ChampionsRoom_EventScript_TurnPlayerNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_ChampionsRoom_OnFrame::
@@ -50,7 +47,7 @@ PokemonLeague_ChampionsRoom_EventScript_EnterRoom::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE
 	setflag FLAG_TEMP_2
-	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerEnter
+	applymovement LOCALID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerEnter
 	waitmovement 0
 	delay 20
 	call_if_unset FLAG_SYS_GAME_CLEAR, PokemonLeague_ChampionsRoom_EventScript_Intro
@@ -67,30 +64,30 @@ PokemonLeague_ChampionsRoom_EventScript_EnterRoom::
 	setflag FLAG_TEMP_4
 	msgbox PokemonLeague_ChampionsRoom_Text_PostBattle
 	playbgm MUS_SLOW_PALLET, 0
-	addobject LOCALID_PROF_OAK
+	addobject LOCALID_CHAMPIONS_ROOM_PROF_OAK
 	msgbox PokemonLeague_ChampionsRoom_Text_OakPlayer
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerWatchOakEnter
-	applymovement LOCALID_RIVAL, PokemonLeague_ChampionsRoom_Movement_RivalWatchOakEnter
-	applymovement LOCALID_PROF_OAK, PokemonLeague_ChampionsRoom_Movement_OakEnter
+	applymovement LOCALID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerWatchOakEnter
+	applymovement LOCALID_CHAMPIONS_ROOM_RIVAL, PokemonLeague_ChampionsRoom_Movement_RivalWatchOakEnter
+	applymovement LOCALID_CHAMPIONS_ROOM_PROF_OAK, PokemonLeague_ChampionsRoom_Movement_OakEnter
 	waitmovement 0
 	delay 25
 	specialvar VAR_RESULT, GetStarterSpecies
 	bufferspeciesname STR_VAR_1, VAR_RESULT
 	msgbox PokemonLeague_ChampionsRoom_Text_OakCongratulations
-	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterRight
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_CHAMPIONS_ROOM_PROF_OAK, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_CHAMPIONS_ROOM_RIVAL, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox PokemonLeague_ChampionsRoom_Text_OakImDisappointedRival
 	closemessage
-	applymovement LOCALID_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_CHAMPIONS_ROOM_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 20
 	msgbox PokemonLeague_ChampionsRoom_Text_OakPlayerComeWithMe
 	closemessage
 	delay 13
-	applymovement LOCALID_PROF_OAK, PokemonLeague_ChampionsRoom_Movement_OakExit
-	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerExit
+	applymovement LOCALID_CHAMPIONS_ROOM_PROF_OAK, PokemonLeague_ChampionsRoom_Movement_OakExit
+	applymovement LOCALID_PLAYER, PokemonLeague_ChampionsRoom_Movement_PlayerExit
 	waitmovement 0
 	setvar VAR_TEMP_1, 1
 	warp MAP_POKEMON_LEAGUE_HALL_OF_FAME, 5, 12

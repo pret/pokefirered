@@ -7,7 +7,7 @@ Route10_PokemonCenter_1F_MapScripts::
 
 Route10_PokemonCenter_1F_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F
-	setrespawn SPAWN_ROUTE10
+	setrespawn HEAL_LOCATION_ROUTE10
 	end
 
 Route10_PokemonCenter_1F_EventScript_Nurse::

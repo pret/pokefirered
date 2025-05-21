@@ -30,6 +30,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_UNION_ROOM_PLAYER_4",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_3",
       "x": 1,
@@ -44,6 +45,7 @@
       "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_4"
     },
     {
+      "local_id": "LOCALID_UNION_ROOM_PLAYER_8",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_7",
       "x": 7,
@@ -58,6 +60,7 @@
       "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_8"
     },
     {
+      "local_id": "LOCALID_UNION_ROOM_PLAYER_7",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_6",
       "x": 1,
@@ -72,6 +75,7 @@
       "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_7"
     },
     {
+      "local_id": "LOCALID_UNION_ROOM_PLAYER_6",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_5",
       "x": 7,
@@ -86,6 +90,7 @@
       "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_6"
     },
     {
+      "local_id": "LOCALID_UNION_ROOM_PLAYER_5",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_4",
       "x": 13,
@@ -100,6 +105,7 @@
       "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_5"
     },
     {
+      "local_id": "LOCALID_UNION_ROOM_PLAYER_3",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_2",
       "x": 10,
@@ -114,6 +120,7 @@
       "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_3"
     },
     {
+      "local_id": "LOCALID_UNION_ROOM_PLAYER_2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_1",
       "x": 13,
@@ -128,6 +135,7 @@
       "flag": "FLAG_HIDE_UNION_ROOM_PLAYER_2"
     },
     {
+      "local_id": "LOCALID_UNION_ROOM_PLAYER_1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 4,

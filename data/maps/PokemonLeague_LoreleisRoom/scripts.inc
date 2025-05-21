@@ -33,7 +33,7 @@ PokemonLeague_LoreleisRoom_OnWarp::
 	.2byte 0
 
 PokemonLeague_LoreleisRoom_EventScript_TurnPlayerNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_LoreleisRoom_OnFrame::

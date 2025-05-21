@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_WAREHOUSE_GRUNT2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 15,
@@ -30,6 +31,7 @@
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
+      "local_id": "LOCALID_WAREHOUSE_GRUNT3",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 17,
@@ -44,6 +46,7 @@
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
+      "local_id": "LOCALID_WAREHOUSE_ADMIN1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_F",
       "x": 27,
@@ -58,6 +61,7 @@
       "flag": "FLAG_HIDE_FIVE_ISLAND_ROCKETS"
     },
     {
+      "local_id": "LOCALID_WAREHOUSE_ADMIN2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 25,

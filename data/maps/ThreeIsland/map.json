@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_THREE_ISLAND_ANTIBIKER1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 7,
@@ -41,6 +42,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_ANTIBIKERS"
     },
     {
+      "local_id": "LOCALID_THREE_ISLAND_ANTIBIKER2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MAN",
       "x": 8,
@@ -55,6 +57,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_ANTIBIKERS"
     },
     {
+      "local_id": "LOCALID_PAXTON",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 8,
@@ -69,6 +72,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_LONE_BIKER"
     },
     {
+      "local_id": "LOCALID_THREE_ISLAND_BIKER3",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 9,
@@ -83,6 +87,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
+      "local_id": "LOCALID_THREE_ISLAND_BIKER1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 9,
@@ -97,6 +102,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
+      "local_id": "LOCALID_THREE_ISLAND_BIKER4",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 10,
@@ -111,6 +117,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
+      "local_id": "LOCALID_THREE_ISLAND_BIKER2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 10,
@@ -125,6 +132,7 @@
       "flag": "FLAG_HIDE_THREE_ISLAND_BIKERS"
     },
     {
+      "local_id": "LOCALID_THREE_ISLAND_BIKER5",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 11,
@@ -209,6 +217,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_THREE_ISLAND_BIKER6",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BIKER",
       "x": 15,

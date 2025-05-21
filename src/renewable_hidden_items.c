@@ -22,8 +22,8 @@ static void SampleRenewableItemFlags(void);
 
 static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
     {
-        .mapGroup = MAP_GROUP(ROUTE20),
-        .mapNum = MAP_NUM(ROUTE20),
+        .mapGroup = MAP_GROUP(MAP_ROUTE20),
+        .mapNum = MAP_NUM(MAP_ROUTE20),
         .rare = {
             NO_ITEM,
             NO_ITEM,
@@ -56,8 +56,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(ROUTE21_NORTH),
-        .mapNum = MAP_NUM(ROUTE21_NORTH),
+        .mapGroup = MAP_GROUP(MAP_ROUTE21_NORTH),
+        .mapNum = MAP_NUM(MAP_ROUTE21_NORTH),
         .rare = {
             NO_ITEM,
             NO_ITEM,
@@ -90,8 +90,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL),
-        .mapNum = MAP_NUM(UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL),
+        .mapGroup = MAP_GROUP(MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL),
+        .mapNum = MAP_NUM(MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL),
         .rare = {
             HIDDEN_ID(FLAG_HIDDEN_ITEM_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL_ETHER),
             NO_ITEM,
@@ -124,8 +124,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(UNDERGROUND_PATH_EAST_WEST_TUNNEL),
-        .mapNum = MAP_NUM(UNDERGROUND_PATH_EAST_WEST_TUNNEL),
+        .mapGroup = MAP_GROUP(MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL),
+        .mapNum = MAP_NUM(MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL),
         .rare = {
             HIDDEN_ID(FLAG_HIDDEN_ITEM_UNDERGROUND_PATH_EAST_WEST_TUNNEL_ETHER),
             NO_ITEM,
@@ -158,8 +158,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(SEVEN_ISLAND_TANOBY_RUINS),
-        .mapNum = MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS),
+        .mapGroup = MAP_GROUP(MAP_SEVEN_ISLAND_TANOBY_RUINS),
+        .mapNum = MAP_NUM(MAP_SEVEN_ISLAND_TANOBY_RUINS),
         .rare = {
             HIDDEN_ID(FLAG_HIDDEN_ITEM_SEVEN_ISLAND_TANOBY_RUINS_HEART_SCALE_4),
             HIDDEN_ID(FLAG_HIDDEN_ITEM_SEVEN_ISLAND_TANOBY_RUINS_HEART_SCALE),
@@ -192,8 +192,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(MT_MOON_B1F),
-        .mapNum = MAP_NUM(MT_MOON_B1F),
+        .mapGroup = MAP_GROUP(MAP_MT_MOON_B1F),
+        .mapNum = MAP_NUM(MAP_MT_MOON_B1F),
         .rare = {
             HIDDEN_ID(FLAG_HIDDEN_ITEM_MT_MOON_B1F_TINY_MUSHROOM),
             HIDDEN_ID(FLAG_HIDDEN_ITEM_MT_MOON_B1F_TINY_MUSHROOM_2),
@@ -226,8 +226,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(THREE_ISLAND_BERRY_FOREST),
-        .mapNum = MAP_NUM(THREE_ISLAND_BERRY_FOREST),
+        .mapGroup = MAP_GROUP(MAP_THREE_ISLAND_BERRY_FOREST),
+        .mapNum = MAP_NUM(MAP_THREE_ISLAND_BERRY_FOREST),
         .rare = {
             HIDDEN_ID(FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_BLUK_BERRY),
             HIDDEN_ID(FLAG_HIDDEN_ITEM_THREE_ISLAND_BERRY_FOREST_WEPEAR_BERRY),
@@ -260,8 +260,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(ONE_ISLAND_TREASURE_BEACH),
-        .mapNum = MAP_NUM(ONE_ISLAND_TREASURE_BEACH),
+        .mapGroup = MAP_GROUP(MAP_ONE_ISLAND_TREASURE_BEACH),
+        .mapNum = MAP_NUM(MAP_ONE_ISLAND_TREASURE_BEACH),
         .rare = {
             HIDDEN_ID(FLAG_HIDDEN_ITEM_ONE_ISLAND_TREASURE_BEACH_ULTRA_BALL),
             HIDDEN_ID(FLAG_HIDDEN_ITEM_ONE_ISLAND_TREASURE_BEACH_ULTRA_BALL_2),
@@ -294,8 +294,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(THREE_ISLAND_BOND_BRIDGE),
-        .mapNum = MAP_NUM(THREE_ISLAND_BOND_BRIDGE),
+        .mapGroup = MAP_GROUP(MAP_THREE_ISLAND_BOND_BRIDGE),
+        .mapNum = MAP_NUM(MAP_THREE_ISLAND_BOND_BRIDGE),
         .rare = {
             NO_ITEM,
             NO_ITEM,
@@ -328,8 +328,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(FOUR_ISLAND),
-        .mapNum = MAP_NUM(FOUR_ISLAND),
+        .mapGroup = MAP_GROUP(MAP_FOUR_ISLAND),
+        .mapNum = MAP_NUM(MAP_FOUR_ISLAND),
         .rare = {
             NO_ITEM,
             NO_ITEM,
@@ -362,8 +362,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(FIVE_ISLAND_MEMORIAL_PILLAR),
-        .mapNum = MAP_NUM(FIVE_ISLAND_MEMORIAL_PILLAR),
+        .mapGroup = MAP_GROUP(MAP_FIVE_ISLAND_MEMORIAL_PILLAR),
+        .mapNum = MAP_NUM(MAP_FIVE_ISLAND_MEMORIAL_PILLAR),
         .rare = {
             HIDDEN_ID(FLAG_HIDDEN_ITEM_FIVE_ISLAND_MEMORIAL_PILLAR_BIG_PEARL),
             NO_ITEM,
@@ -396,8 +396,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(FIVE_ISLAND_RESORT_GORGEOUS),
-        .mapNum = MAP_NUM(FIVE_ISLAND_RESORT_GORGEOUS),
+        .mapGroup = MAP_GROUP(MAP_FIVE_ISLAND_RESORT_GORGEOUS),
+        .mapNum = MAP_NUM(MAP_FIVE_ISLAND_RESORT_GORGEOUS),
         .rare = {
             HIDDEN_ID(FLAG_HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_NEST_BALL),
             HIDDEN_ID(FLAG_HIDDEN_ITEM_FIVE_ISLAND_RESORT_GORGEOUS_STAR_PIECE),
@@ -430,8 +430,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(SIX_ISLAND_OUTCAST_ISLAND),
-        .mapNum = MAP_NUM(SIX_ISLAND_OUTCAST_ISLAND),
+        .mapGroup = MAP_GROUP(MAP_SIX_ISLAND_OUTCAST_ISLAND),
+        .mapNum = MAP_NUM(MAP_SIX_ISLAND_OUTCAST_ISLAND),
         .rare = {
             HIDDEN_ID(FLAG_HIDDEN_ITEM_SIX_ISLAND_OUTCAST_ISLAND_STAR_PIECE),
             HIDDEN_ID(FLAG_HIDDEN_ITEM_SIX_ISLAND_OUTCAST_ISLAND_NET_BALL),
@@ -464,8 +464,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(SIX_ISLAND_GREEN_PATH),
-        .mapNum = MAP_NUM(SIX_ISLAND_GREEN_PATH),
+        .mapGroup = MAP_GROUP(MAP_SIX_ISLAND_GREEN_PATH),
+        .mapNum = MAP_NUM(MAP_SIX_ISLAND_GREEN_PATH),
         .rare = {
             NO_ITEM,
             NO_ITEM,
@@ -498,8 +498,8 @@ static const struct RenewableHiddenItemData sRenewableHiddenItems[] = {
         }
     },
     {
-        .mapGroup = MAP_GROUP(SEVEN_ISLAND_TRAINER_TOWER),
-        .mapNum = MAP_NUM(SEVEN_ISLAND_TRAINER_TOWER),
+        .mapGroup = MAP_GROUP(MAP_SEVEN_ISLAND_TRAINER_TOWER),
+        .mapNum = MAP_NUM(MAP_SEVEN_ISLAND_TRAINER_TOWER),
         .rare = {
             HIDDEN_ID(FLAG_HIDDEN_ITEM_SEVEN_ISLAND_TRAINER_TOWER_BIG_PEARL),
             NO_ITEM,

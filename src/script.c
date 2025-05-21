@@ -540,9 +540,9 @@ bool32 ValidateRamScript(void)
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return FALSE;
-    if (scriptData->mapGroup != MAP_GROUP(UNDEFINED))
+    if (scriptData->mapGroup != MAP_GROUP(MAP_UNDEFINED))
         return FALSE;
-    if (scriptData->mapNum != MAP_NUM(UNDEFINED))
+    if (scriptData->mapNum != MAP_NUM(MAP_UNDEFINED))
         return FALSE;
     if (scriptData->objectId != 0xFF)
         return FALSE;
@@ -558,9 +558,9 @@ u8 *GetSavedRamScriptIfValid(void)
         return NULL;
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return NULL;
-    if (scriptData->mapGroup != MAP_GROUP(UNDEFINED))
+    if (scriptData->mapGroup != MAP_GROUP(MAP_UNDEFINED))
         return NULL;
-    if (scriptData->mapNum != MAP_NUM(UNDEFINED))
+    if (scriptData->mapNum != MAP_NUM(MAP_UNDEFINED))
         return NULL;
     if (scriptData->objectId != 0xFF)
         return NULL;
@@ -579,5 +579,5 @@ void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
 {
     if (scriptSize > sizeof(gSaveBlock1Ptr->ramScript.data.script))
         scriptSize = sizeof(gSaveBlock1Ptr->ramScript.data.script);
-    InitRamScript(script, scriptSize, MAP_GROUP(UNDEFINED), MAP_NUM(UNDEFINED), 0xFF);
+    InitRamScript(script, scriptSize, MAP_GROUP(MAP_UNDEFINED), MAP_NUM(MAP_UNDEFINED), 0xFF);
 }

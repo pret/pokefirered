@@ -733,7 +733,7 @@ static u8 SaveDialogCB_AskSaveHandleInput(void)
             sSaveDialogCB = SaveDialogCB_PrintSavingDontTurnOffPower;
         break;
     case 1:
-    case -1:
+    case MENU_B_PRESSED:
         CloseSaveStatsWindow_();
         CloseSaveMessageWindow();
         return SAVECB_RETURN_CANCEL;
@@ -772,7 +772,7 @@ static u8 SaveDialogCB_AskOverwriteOrReplacePreviousFileHandleInput(void)
         sSaveDialogCB = SaveDialogCB_PrintSavingDontTurnOffPower;
         break;
     case 1:
-    case -1:
+    case MENU_B_PRESSED:
         CloseSaveStatsWindow_();
         CloseSaveMessageWindow();
         return SAVECB_RETURN_CANCEL;

@@ -250,7 +250,7 @@ struct SideTimer
     /*0x0B*/ u8 fieldB;
 };
 
-extern struct SideTimer gSideTimers[];
+extern struct SideTimer gSideTimers[NUM_BATTLE_SIDES];
 
 struct WishFutureKnock
 {
@@ -261,7 +261,7 @@ struct WishFutureKnock
     u8 wishCounter[MAX_BATTLERS_COUNT];
     u8 wishMonId[MAX_BATTLERS_COUNT];
     u8 weatherDuration;
-    u8 knockedOffMons[2];
+    u8 knockedOffMons[NUM_BATTLE_SIDES]; // Each battler is represented by a bit.
 };
 
 extern struct WishFutureKnock gWishFutureKnock;
@@ -424,7 +424,7 @@ struct BattleStruct
     u8 AI_monToSwitchIntoId[2];
     u8 simulatedInputState[4];  // used by Oak/Old Man/Pokedude controllers
     u8 lastTakenMove[MAX_BATTLERS_COUNT * 2 * 2]; // ask gamefreak why they declared it that way
-    u16 hpOnSwitchout[2];
+    u16 hpOnSwitchout[NUM_BATTLE_SIDES];
     u8 abilityPreventingSwitchout;
     u8 hpScale;
     u16 savedBattleTypeFlags;
@@ -691,7 +691,7 @@ extern const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
 extern u16 gLastMoves[MAX_BATTLERS_COUNT];
 extern u8 gBattlerByTurnOrder[MAX_BATTLERS_COUNT];
 extern u8 gBattleCommunication[BATTLE_COMMUNICATION_ENTRIES_COUNT];
-extern u16 gSideStatuses[2];
+extern u16 gSideStatuses[NUM_BATTLE_SIDES];
 extern u32 gHitMarker;
 extern u16 gChosenMoveByBattler[MAX_BATTLERS_COUNT];
 extern u8 gMoveResultFlags;

@@ -22,6 +22,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_CREDITS_RIVAL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 11,
@@ -36,6 +37,7 @@
       "flag": "FLAG_HIDE_CREDITS_RIVAL"
     },
     {
+      "local_id": "LOCALID_CREDITS_PROF_OAK",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PROF_OAK",
       "x": 11,

@@ -27,6 +27,7 @@
   ],
   "object_events": [
     {
+      "local_id": "LOCALID_ONE_ISLAND_BILL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BILL",
       "x": 12,

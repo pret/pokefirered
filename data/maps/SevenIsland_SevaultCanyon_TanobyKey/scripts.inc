@@ -1,11 +1,3 @@
-.set LOCALID_BOULDER1, 1
-.set LOCALID_BOULDER2, 2
-.set LOCALID_BOULDER3, 3
-.set LOCALID_BOULDER4, 4
-.set LOCALID_BOULDER5, 5
-.set LOCALID_BOULDER6, 6
-.set LOCALID_BOULDER7, 7
-
 .equ NUM_SWITCHES_PRESSED, VAR_TEMP_8
 
 SevenIsland_SevaultCanyon_TanobyKey_MapScripts::
@@ -26,13 +18,13 @@ SevenIsland_SevaultCanyon_TanobyKey_OnTransition::
 	end
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_MoveBouldersToSolvedPos::
-	setobjectxyperm LOCALID_BOULDER1, 7, 2
-	setobjectxyperm LOCALID_BOULDER2, 4, 4
-	setobjectxyperm LOCALID_BOULDER3, 10, 4
-	setobjectxyperm LOCALID_BOULDER4, 5, 6
-	setobjectxyperm LOCALID_BOULDER5, 9, 6
-	setobjectxyperm LOCALID_BOULDER6, 5, 8
-	setobjectxyperm LOCALID_BOULDER7, 9, 8
+	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER1, 7, 2
+	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER2, 4, 4
+	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER3, 10, 4
+	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER4, 5, 6
+	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER5, 9, 6
+	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER6, 5, 8
+	setobjectxyperm LOCALID_TANOBY_KEY_BOULDER7, 9, 8
 	return
 
 SevenIsland_SevaultCanyon_TanobyKey_EventScript_Switch1::

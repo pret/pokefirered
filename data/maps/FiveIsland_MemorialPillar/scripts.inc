@@ -1,5 +1,3 @@
-.set LOCALID_MEMORIAL_MAN, 1
-
 FiveIsland_MemorialPillar_MapScripts::
 	.byte 0
 
@@ -57,7 +55,7 @@ FiveIsland_MemorialPillar_EventScript_PlaceLemonade::
 	applymovement LOCALID_MEMORIAL_MAN, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	delay 45
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox FiveIsland_MemorialPillar_Text_ThankYouPleaseTakeThis

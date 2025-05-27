@@ -4,7 +4,7 @@ PewterCity_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 PewterCity_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_PEWTER_CITY
+	setrespawn HEAL_LOCATION_PEWTER_CITY
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_Nurse::

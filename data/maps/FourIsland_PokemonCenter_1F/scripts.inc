@@ -4,7 +4,7 @@ FourIsland_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 FourIsland_PokemonCenter_1F_OnTransition::
-	setrespawn SPAWN_FOUR_ISLAND
+	setrespawn HEAL_LOCATION_FOUR_ISLAND
 	end
 
 FourIsland_PokemonCenter_1F_EventScript_Nurse::

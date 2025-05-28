@@ -44,6 +44,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PEWTER_HOUSE_NIDORAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NIDORAN_M",
       "x": 6,

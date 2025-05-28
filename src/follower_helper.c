@@ -96,7 +96,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_HAPPY,
         .conditions =
         {
-            MATCH_MAP(ROUTE1), // TODO: Match maps 
+            MATCH_MAP(MAP_ROUTE1), // TODO: Match maps 
         },
     },
     [COND_MSG_ROUTE_112] =
@@ -105,7 +105,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_HAPPY,
         .conditions =
         {
-            MATCH_MAP(ROUTE1),
+            MATCH_MAP(MAP_ROUTE1),
         },
     },
     [COND_MSG_DAY_CARE] =
@@ -115,7 +115,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_NEUTRAL,
         .conditions =
         {
-            MATCH_MAP(ROUTE1)
+            MATCH_MAP(MAP_ROUTE1)
         },
     },
     [COND_MSG_MART] =
@@ -144,7 +144,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_PENSIVE,
         .conditions =
         {
-            MATCH_MAP(ROUTE1)
+            MATCH_MAP(MAP_ROUTE1)
         },
     },
     [COND_MSG_MACHINES] =
@@ -155,9 +155,9 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .orFlag = 1, // match any of these maps
         .conditions =
         {
-            MATCH_MAP(ROUTE1),
-            MATCH_MAP(ROUTE1),
-            MATCH_MAP(ROUTE1),
+            MATCH_MAP(MAP_ROUTE1),
+            MATCH_MAP(MAP_ROUTE1),
+            MATCH_MAP(MAP_ROUTE1),
         },
     },
     [COND_MSG_SAILING] =
@@ -215,7 +215,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_SURPRISE,
         .conditions =
         {
-            MATCH_MAP(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR),
+            MATCH_MAP(MAP_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR),
         },
     },
     [COND_MSG_ICE_ROOM] =
@@ -225,7 +225,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_SURPRISE,
         .conditions =
         {
-            MATCH_MAP(SEAFOAM_ISLANDS_B4F),
+            MATCH_MAP(MAP_SEAFOAM_ISLANDS_B4F),
         },
     },
     [COND_MSG_ROUTE_117] =
@@ -234,7 +234,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_SURPRISE,
         .conditions =
         {
-            MATCH_MAP(ROUTE1),
+            MATCH_MAP(MAP_ROUTE1),
         },
     },
     [COND_MSG_DRAGON_GROWL] =

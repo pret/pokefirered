@@ -49,7 +49,7 @@ Route16_NorthEntrance_1F_EventScript_NeedBikeTrigger::
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox Route16_NorthEntrance_1F_Text_ExcuseMeWaitUp
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	call_if_eq VAR_0x8008, 1, Route16_NorthEntrance_1F_EventScript_PlayerWalkToCounterMidTop
@@ -58,28 +58,28 @@ Route16_NorthEntrance_1F_EventScript_NeedBikeTrigger::
 	call_if_eq VAR_0x8008, 4, Route16_NorthEntrance_1F_EventScript_PlayerWalkToCounterBottom
 	msgbox Route16_NorthEntrance_1F_Text_NoPedestriansOnCyclingRoad
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Route16_NorthEntrance_1F_Movement_WalkRight
+	applymovement LOCALID_PLAYER, Route16_NorthEntrance_1F_Movement_WalkRight
 	waitmovement 0
 	releaseall
 	end
 
 Route16_NorthEntrance_1F_EventScript_PlayerWalkToCounterMidTop::
-	applymovement OBJ_EVENT_ID_PLAYER, Route16_NorthEntrance_1F_Movement_WalkUp
+	applymovement LOCALID_PLAYER, Route16_NorthEntrance_1F_Movement_WalkUp
 	waitmovement 0
 	return
 
 Route16_NorthEntrance_1F_EventScript_PlayerWalkToCounterMid::
-	applymovement OBJ_EVENT_ID_PLAYER, Route16_NorthEntrance_1F_Movement_WalkUp2
+	applymovement LOCALID_PLAYER, Route16_NorthEntrance_1F_Movement_WalkUp2
 	waitmovement 0
 	return
 
 Route16_NorthEntrance_1F_EventScript_PlayerWalkToCounterMidBottom::
-	applymovement OBJ_EVENT_ID_PLAYER, Route16_NorthEntrance_1F_Movement_WalkUp3
+	applymovement LOCALID_PLAYER, Route16_NorthEntrance_1F_Movement_WalkUp3
 	waitmovement 0
 	return
 
 Route16_NorthEntrance_1F_EventScript_PlayerWalkToCounterBottom::
-	applymovement OBJ_EVENT_ID_PLAYER, Route16_NorthEntrance_1F_Movement_WalkUp4
+	applymovement LOCALID_PLAYER, Route16_NorthEntrance_1F_Movement_WalkUp4
 	waitmovement 0
 	return
 

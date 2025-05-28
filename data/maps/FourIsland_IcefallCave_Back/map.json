@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_ICEFALL_ROCKET1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 11,
@@ -30,6 +31,7 @@
       "flag": "FLAG_HIDE_ICEFALL_CAVE_ROCKETS"
     },
     {
+      "local_id": "LOCALID_ICEFALL_ROCKET2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 13,
@@ -44,6 +46,7 @@
       "flag": "FLAG_HIDE_ICEFALL_CAVE_ROCKETS"
     },
     {
+      "local_id": "LOCALID_ICEFALL_LORELEI",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LORELEI",
       "x": 12,
@@ -58,6 +61,7 @@
       "flag": "FLAG_HIDE_ICEFALL_CAVE_LORELEI"
     },
     {
+      "local_id": "LOCALID_ICEFALL_ROCKET3",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 10,

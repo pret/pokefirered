@@ -182,7 +182,7 @@ s32 GetSpeciesPokedexAreaMarkers(u16 species, struct Subsprite * subsprites)
     alteringCaveNum = VarGet(VAR_ALTERING_CAVE_WILD_SET);
     if (alteringCaveNum >= NUM_ALTERING_CAVE_TABLES)
         alteringCaveNum = 0;
-    for (i = 0, areaCount = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(UNDEFINED); i++)
+    for (i = 0, areaCount = 0; gWildMonHeaders[i].mapGroup != MAP_GROUP(MAP_UNDEFINED); i++)
     {
         mapSecId = GetMapSecIdFromWildMonHeader(&gWildMonHeaders[i]);
         if (mapSecId == MAPSEC_ALTERING_CAVE_FRLG)

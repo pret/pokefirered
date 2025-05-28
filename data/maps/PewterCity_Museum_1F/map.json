@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_MUSEUM_SCIENTIST1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
       "x": 16,
@@ -58,6 +59,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_OLD_AMBER",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_AMBER",
       "x": 22,

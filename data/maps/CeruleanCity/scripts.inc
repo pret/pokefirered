@@ -1,10 +1,3 @@
-.set LOCALID_POLICEMAN, 1
-.set LOCALID_GRUNT,     2
-.set LOCALID_SLOWBRO,   5
-.set LOCALID_LASS,      6
-.set LOCALID_RIVAL,     8
-.set LOCALID_WOMAN,     11
-
 CeruleanCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, CeruleanCity_OnTransition
 	.byte 0
@@ -15,9 +8,9 @@ CeruleanCity_OnTransition::
 	end
 
 CeruleanCity_EventScript_BlockExits::
-	setobjectxyperm LOCALID_POLICEMAN, 30, 12
-	setobjectxyperm LOCALID_SLOWBRO, 26, 31
-	setobjectxyperm LOCALID_LASS, 27, 31
+	setobjectxyperm LOCALID_CERULEAN_POLICEMAN, 30, 12
+	setobjectxyperm LOCALID_CERULEAN_SLOWBRO, 26, 31
+	setobjectxyperm LOCALID_CERULEAN_LASS, 27, 31
 	return
 
 CeruleanCity_EventScript_RivalTriggerLeft::
@@ -29,14 +22,14 @@ CeruleanCity_EventScript_RivalTriggerLeft::
 CeruleanCity_EventScript_RivalTriggerMid::
 	lockall
 	setvar VAR_TEMP_1, 1
-	setobjectxyperm LOCALID_RIVAL, 23, 0
+	setobjectxyperm LOCALID_CERULEAN_RIVAL, 23, 0
 	goto CeruleanCity_EventScript_Rival
 	end
 
 CeruleanCity_EventScript_RivalTriggerRight::
 	lockall
 	setvar VAR_TEMP_1, 2
-	setobjectxyperm LOCALID_RIVAL, 24, 0
+	setobjectxyperm LOCALID_CERULEAN_RIVAL, 24, 0
 	goto CeruleanCity_EventScript_Rival
 	end
 
@@ -44,11 +37,11 @@ CeruleanCity_EventScript_Rival::
 	textcolor NPC_TEXT_COLOR_MALE
 	setvar VAR_MAP_SCENE_ROUTE22, 2
 	playbgm MUS_ENCOUNTER_RIVAL, 0
-	addobject LOCALID_RIVAL
-	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalEnter
+	addobject LOCALID_CERULEAN_RIVAL
+	applymovement LOCALID_CERULEAN_RIVAL, CeruleanCity_Movement_RivalEnter
 	waitmovement 0
 	msgbox CeruleanCity_Text_RivalIntro
-	setvar VAR_LAST_TALKED, LOCALID_RIVAL
+	setvar VAR_LAST_TALKED, LOCALID_CERULEAN_RIVAL
 	call_if_eq VAR_STARTER_MON, 2, CeruleanCity_EventScript_RivalSquirtle
 	call_if_eq VAR_STARTER_MON, 1, CeruleanCity_EventScript_RivalBulbasaur
 	call_if_eq VAR_STARTER_MON, 0, CeruleanCity_EventScript_RivalCharmander
@@ -65,10 +58,10 @@ CeruleanCity_EventScript_Rival::
 	giveitem ITEM_FAME_CHECKER
 	msgbox CeruleanCity_Text_ExplainFameCheckerSmellYa
 	closemessage
-	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalExit
+	applymovement LOCALID_CERULEAN_RIVAL, CeruleanCity_Movement_RivalExit
 	waitmovement 0
 	fadedefaultbgm
-	removeobject LOCALID_RIVAL
+	removeobject LOCALID_CERULEAN_RIVAL
 	releaseall
 	end
 
@@ -85,14 +78,14 @@ CeruleanCity_EventScript_RivalCharmander::
 	return
 
 CeruleanCity_EventScript_RivalStartExit::
-	applymovement OBJ_EVENT_ID_PLAYER, CeruleanCity_Movement_PlayerWatchRivalExit
-	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalStartExit
+	applymovement LOCALID_PLAYER, CeruleanCity_Movement_PlayerWatchRivalExit
+	applymovement LOCALID_CERULEAN_RIVAL, CeruleanCity_Movement_RivalStartExit
 	waitmovement 0
 	return
 
 CeruleanCity_EventScript_RivalStartExitRight::
-	applymovement OBJ_EVENT_ID_PLAYER, CeruleanCity_Movement_PlayerWatchRivalExitRight
-	applymovement LOCALID_RIVAL, CeruleanCity_Movement_RivalStartExitRight
+	applymovement LOCALID_PLAYER, CeruleanCity_Movement_PlayerWatchRivalExitRight
+	applymovement LOCALID_CERULEAN_RIVAL, CeruleanCity_Movement_RivalStartExitRight
 	waitmovement 0
 	return
 
@@ -189,7 +182,7 @@ CeruleanCity_EventScript_GruntDefeated::
 	msgbox CeruleanCity_Text_BetterGetMovingBye
 	closemessage
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject LOCALID_GRUNT
+	removeobject LOCALID_CERULEAN_GRUNT
 	fadescreenswapbuffers FADE_FROM_BLACK
 	setflag FLAG_GOT_TM28_FROM_ROCKET
 	release
@@ -204,9 +197,9 @@ CeruleanCity_EventScript_NoRoomForTM28::
 CeruleanCity_EventScript_GruntTriggerTop::
 	lockall
 	setvar VAR_TEMP_1, 0
-	applymovement LOCALID_GRUNT, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_CERULEAN_GRUNT, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	goto CeruleanCity_EventScript_GruntTrigger
 	end
@@ -214,9 +207,9 @@ CeruleanCity_EventScript_GruntTriggerTop::
 CeruleanCity_EventScript_GruntTriggerBottom::
 	lockall
 	setvar VAR_TEMP_1, 1
-	applymovement LOCALID_GRUNT, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_CERULEAN_GRUNT, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	goto CeruleanCity_EventScript_GruntTrigger
 	end
@@ -224,7 +217,7 @@ CeruleanCity_EventScript_GruntTriggerBottom::
 CeruleanCity_EventScript_GruntTrigger::
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox CeruleanCity_Text_GruntIntro
-	setvar VAR_LAST_TALKED, LOCALID_GRUNT
+	setvar VAR_LAST_TALKED, LOCALID_CERULEAN_GRUNT
 	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_5, CeruleanCity_Text_GruntDefeat
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1
 	goto CeruleanCity_EventScript_GruntDefeated
@@ -235,7 +228,7 @@ CeruleanCity_EventScript_Policeman::
 	faceplayer
 	msgbox CeruleanCity_Text_PeopleHereWereRobbed
 	closemessage
-	applymovement LOCALID_POLICEMAN, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_CERULEAN_POLICEMAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -270,7 +263,7 @@ CeruleanCity_EventScript_Woman::
 	faceplayer
 	msgbox CeruleanCity_Text_WantBrightRedBicycle
 	closemessage
-	applymovement LOCALID_WOMAN, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_CERULEAN_WOMAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -285,7 +278,7 @@ CeruleanCity_EventScript_Lass::
 	waitmessage
 	delay 40
 	playse SE_PIN
-	applymovement LOCALID_SLOWBRO, Common_Movement_QuestionMark
+	applymovement LOCALID_CERULEAN_SLOWBRO, Common_Movement_QuestionMark
 	waitmovement 0
 	delay 30
 	call_if_eq VAR_0x8008, 0, CeruleanCity_EventScript_SlowbroFailed1

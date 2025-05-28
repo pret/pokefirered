@@ -11,7 +11,7 @@ PokemonTower_6F_EventScript_MarowakGhost::
 	waitstate
 	special QuestLog_CutRecording
 	goto_if_eq VAR_RESULT, FALSE, PokemonTower_6F_EventScript_DefeatedMarowakGhost  @ VAR_RESULT set by CB2_EndMarowakBattle
-	applymovement OBJ_EVENT_ID_PLAYER, PokemonTower_6F_Movement_ForcePlayerUp
+	applymovement LOCALID_PLAYER, PokemonTower_6F_Movement_ForcePlayerUp
 	waitmovement 0
 	releaseall
 	end

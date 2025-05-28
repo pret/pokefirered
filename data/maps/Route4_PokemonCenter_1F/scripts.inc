@@ -7,7 +7,7 @@ Route4_PokemonCenter_1F_MapScripts::
 
 Route4_PokemonCenter_1F_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F
-	setrespawn SPAWN_ROUTE4
+	setrespawn HEAL_LOCATION_ROUTE4
 	end
 
 Route4_PokemonCenter_1F_EventScript_Boy::

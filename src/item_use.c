@@ -903,11 +903,11 @@ void ItemUseOutOfBattle_VsSeeker(u8 taskId)
     if ((gMapHeader.mapType != MAP_TYPE_ROUTE
       && gMapHeader.mapType != MAP_TYPE_TOWN
       && gMapHeader.mapType != MAP_TYPE_CITY)
-     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(VIRIDIAN_FOREST)
-      && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(VIRIDIAN_FOREST)
-       || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MT_EMBER_EXTERIOR)
-       || gSaveBlock1Ptr->location.mapNum == MAP_NUM(THREE_ISLAND_BERRY_FOREST)
-       || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SIX_ISLAND_PATTERN_BUSH))))
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_VIRIDIAN_FOREST)
+      && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_VIRIDIAN_FOREST)
+       || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_MT_EMBER_EXTERIOR)
+       || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_THREE_ISLAND_BERRY_FOREST)
+       || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SIX_ISLAND_PATTERN_BUSH))))
     {
         PrintNotTheTimeToUseThat(taskId, gTasks[taskId].data[3]);
     }

@@ -374,7 +374,8 @@ generated: $(AUTO_GEN_TARGETS)
 %.rl:     %      ; $(GFX) $< $@
 
 clean-generated:
-	-rm -f $(AUTO_GEN_TARGETS)
+	@rm -f $(AUTO_GEN_TARGETS)
+	@echo "rm -f <AUTO_GEN_TARGETS>"
 	-rm -f $(ALL_LEARNABLES_JSON)
 
 COMPETITIVE_PARTY_SYNTAX := $(shell PATH="$(PATH)"; echo 'COMPETITIVE_PARTY_SYNTAX' | $(CPP) $(CPPFLAGS) -imacros include/gba/defines.h -imacros include/config/general.h | tail -n1)

@@ -1,5 +1,3 @@
-.set LOCALID_BOULDER, 5
-
 VictoryRoad_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, VictoryRoad_1F_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, VictoryRoad_1F_OnTransition
@@ -26,7 +24,7 @@ VictoryRoad_1F_EventScript_FloorSwitch::
 	playse SE_ICE_BREAK
 	special DrawWholeMapView
 	waitse
-	copyobjectxytoperm LOCALID_BOULDER
+	copyobjectxytoperm LOCALID_VICTORY_ROAD_1F_BOULDER
 	setvar VAR_MAP_SCENE_VICTORY_ROAD_1F, 100
 	releaseall
 	end

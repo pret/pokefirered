@@ -1,6 +1,3 @@
-.equ LOCALID_DAYCARE_MAN, 1
-.equ LOCALID_RIVAL, 10
-
 FourIsland_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FourIsland_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FourIsland_OnFrame
@@ -18,7 +15,7 @@ FourIsland_EventScript_ShowRival::
 
 FourIsland_EventScript_TrySetDayCareManPos::
 	goto_if_unset FLAG_PENDING_DAYCARE_EGG, FourIsland_EventScript_EndSetDayCareManPos
-	setobjectxyperm LOCALID_DAYCARE_MAN, 16, 14
+	setobjectxyperm LOCALID_FOUR_ISLAND_DAYCARE_MAN, 16, 14
 FourIsland_EventScript_EndSetDayCareManPos::
 	return
 
@@ -29,25 +26,25 @@ FourIsland_OnFrame::
 FourIsland_EventScript_RivalScene::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
+	applymovement LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
+	applymovement LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	delay 25
-	applymovement LOCALID_RIVAL, FourIsland_Movement_RivalApproach
+	applymovement LOCALID_FOUR_ISLAND_RIVAL, FourIsland_Movement_RivalApproach
 	waitmovement 0
 	msgbox FourIsland_Text_RivalAlreadyGotEggBeSmellingYa
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, FourIsland_Movement_PlayerWatchRivalExit
-	applymovement LOCALID_RIVAL, FourIsland_Movement_RivalExit
+	applymovement LOCALID_PLAYER, FourIsland_Movement_PlayerWatchRivalExit
+	applymovement LOCALID_FOUR_ISLAND_RIVAL, FourIsland_Movement_RivalExit
 	waitmovement 0
 	fadedefaultbgm
 	playse SE_EXIT
 	delay 35
-	removeobject LOCALID_RIVAL
+	removeobject LOCALID_FOUR_ISLAND_RIVAL
 	setvar VAR_MAP_SCENE_FOUR_ISLAND, 1
 	releaseall
 	end

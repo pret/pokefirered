@@ -111,6 +111,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_ROUTE16_CUT_TREE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 41,

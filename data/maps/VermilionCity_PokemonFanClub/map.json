@@ -72,6 +72,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_POKEMON_FAN_CLUB_WOMAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
       "x": 4,
@@ -86,6 +87,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_POKEMON_FAN_CLUB_FAT_MAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 7,

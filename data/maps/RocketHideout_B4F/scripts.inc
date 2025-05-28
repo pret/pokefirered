@@ -1,7 +1,3 @@
-.equ LOCALID_GIOVANNI,    1
-.equ LOCALID_SILPH_SCOPE, 2
-.equ LOCALID_LIFT_KEY,    4
-
 .equ NUM_DOOR_GRUNTS_DEFEATED, VAR_TEMP_1
 
 RocketHideout_B4F_MapScripts::
@@ -31,7 +27,7 @@ RocketHideout_B4F_EventScript_Giovanni::
 	msgbox RocketHideout_B4F_Text_GiovanniPostBattle
 	fadescreen FADE_TO_BLACK
 	closemessage
-	removeobject LOCALID_GIOVANNI
+	removeobject LOCALID_HIDEOUT_GIOVANNI
 	addobject LOCALID_SILPH_SCOPE
 	clearflag FLAG_HIDE_SILPH_SCOPE
 	setflag FLAG_HIDE_CELADON_ROCKETS

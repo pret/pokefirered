@@ -472,8 +472,8 @@ void TryStartQuestLogPlayback(u8 taskId)
 
 static void Task_BeginQuestLogPlayback(u8 taskId)
 {
-    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(ROUTE1);
-    gSaveBlock1Ptr->location.mapNum =  MAP_NUM(ROUTE1);
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_ROUTE1);
+    gSaveBlock1Ptr->location.mapNum =  MAP_NUM(MAP_ROUTE1);
     gSaveBlock1Ptr->location.warpId = WARP_ID_NONE;
     sCurrentSceneNum = 0;
     gDisableMapMusicChangeOnMapLoad = 1;
@@ -1353,7 +1353,7 @@ void QL_UpdateObject(struct Sprite *sprite)
     // index 0 is reserved for player, index 1 is reserved for follower
     // other ObjectsEvents are at index localId + 1
     struct ObjectEvent *objectEvent = &gObjectEvents[sprite->data[0]];
-    if (objectEvent->localId == OBJ_EVENT_ID_PLAYER)
+    if (objectEvent->localId == LOCALID_PLAYER)
     {
         if (sMovementScripts[0][0] != MOVEMENT_ACTION_NONE)
         {

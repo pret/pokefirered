@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
 }
 
 SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after switch out", s16 damage)
@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after switch ou
         OPPONENT(SPECIES_ARBOK) { Ability(ability); }
     } WHEN {
         TURN { SWITCH(opponent, 1); }
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         if (ability == ABILITY_INTIMIDATE)
         {
@@ -41,8 +41,8 @@ SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after KO", s16 
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(1); }
         OPPONENT(SPECIES_ARBOK) { Ability(ability); Speed(1); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); SEND_OUT(opponent, 1); }
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); SEND_OUT(opponent, 1); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         HP_BAR(opponent);
         if (ability == ABILITY_INTIMIDATE)
@@ -110,11 +110,11 @@ SINGLE_BATTLE_TEST("Intimidate and Eject Button don't force the opponent to Atta
         ASSUME(gItemsInfo[ITEM_EJECT_BUTTON].holdEffect == HOLD_EFFECT_EJECT_BUTTON);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
-        OPPONENT(SPECIES_HITMONTOP) { Moves(MOVE_TACKLE); }
+        OPPONENT(SPECIES_HITMONTOP) { Moves(MOVE_SCRATCH); }
     } WHEN {
         TURN {
            MOVE(player, MOVE_QUICK_ATTACK);
-           MOVE(opponent, MOVE_TACKLE);
+           MOVE(opponent, MOVE_SCRATCH);
            SEND_OUT(opponent, 1);
         }
     } SCENE {
@@ -125,8 +125,8 @@ SINGLE_BATTLE_TEST("Intimidate and Eject Button don't force the opponent to Atta
         ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
         MESSAGE("The opposing Hitmontop's Intimidate cuts Wobbuffet's Attack!");
         NONE_OF {
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
-            MESSAGE("The opposing Hitmontop used Tackle!");
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+            MESSAGE("The opposing Hitmontop used Scratch!");
         }
     }
 }
@@ -295,7 +295,7 @@ SINGLE_BATTLE_TEST("Intimidate activates when it's no longer affected by Neutral
 SINGLE_BATTLE_TEST("Intimidate activates when it's no longer affected by Neutralizing Gas - opponent caused switches")
 {
     u32 move, item;
-    PARAMETRIZE { move = MOVE_TACKLE; item = ITEM_EJECT_BUTTON; }
+    PARAMETRIZE { move = MOVE_SCRATCH; item = ITEM_EJECT_BUTTON; }
     PARAMETRIZE { move = MOVE_GROWL; item = ITEM_EJECT_PACK; }
     PARAMETRIZE { move = MOVE_ROAR; item = ITEM_NONE; }
     PARAMETRIZE { move = MOVE_DRAGON_TAIL; item = ITEM_NONE; }

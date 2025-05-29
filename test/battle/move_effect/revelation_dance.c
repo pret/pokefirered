@@ -124,7 +124,7 @@ SINGLE_BATTLE_TEST("Revelation Dance becomes Normal type if used by a Typeless P
         PLAYER(SPECIES_ORICORIO_BAILE) { Ability(ABILITY_DANCER); }
         OPPONENT(speciesOpponent);
     } WHEN {
-        TURN { MOVE(player, MOVE_BURN_UP); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_BURN_UP); MOVE(opponent, MOVE_SCRATCH); }
         TURN { MOVE(player, MOVE_ROOST); MOVE(opponent, MOVE_REVELATION_DANCE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BURN_UP, player);

@@ -120,7 +120,7 @@ SINGLE_BATTLE_TEST("Upper Hand is boosted by Sheer Force")
 AI_SINGLE_BATTLE_TEST("AI won't use Upper Hand unless it has seen a priority move")
 {
     u16 move;
-    PARAMETRIZE { move = MOVE_TACKLE; }
+    PARAMETRIZE { move = MOVE_SCRATCH; }
     PARAMETRIZE { move = MOVE_QUICK_ATTACK; }
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);

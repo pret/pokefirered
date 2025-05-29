@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Analytic increases the power of moves by 30% if it's the las
         PLAYER(SPECIES_MAGNEMITE) { Ability(ABILITY_ANALYTIC); Speed(speed); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         HP_BAR(opponent, captureDamage: &results[i].damage);
     } FINALLY {

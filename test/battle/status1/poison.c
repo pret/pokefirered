@@ -16,3 +16,27 @@ SINGLE_BATTLE_TEST("Poison deals 1/8th damage per turn")
             HP_BAR(player, damage: maxHP / 8);
     }
 }
+
+SINGLE_BATTLE_TEST("Poison can't bad poison a poison or steel type")
+{
+    u32 species;
+
+    PARAMETRIZE { species = SPECIES_BELDUM; }
+    PARAMETRIZE { species = SPECIES_BULBASAUR; }
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_POISON_GAS) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_POISON_GAS) == MOVE_EFFECT_POISON);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_POISON_GAS) == MOVE_EFFECT_POISON);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(species);
+    } WHEN {
+        TURN { MOVE(player, MOVE_POISON_GAS); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_POISON_GAS, player);
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
+            STATUS_ICON(opponent, poison: TRUE);
+        }
+    }
+}

@@ -79,12 +79,12 @@ SINGLE_BATTLE_TEST("(Gulp Missile) Transformed Cramorant deal 1/4 of damage oppo
         PLAYER(SPECIES_CRAMORANT) { Ability(ABILITY_GULP_MISSILE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, player);
         HP_BAR(opponent);
         ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
         HP_BAR(opponent, captureDamage: &gulpMissileDamage);
@@ -102,12 +102,12 @@ SINGLE_BATTLE_TEST("(Gulp Missile) Cramorant in Gorging paralyzes the target if 
         PLAYER(SPECIES_CRAMORANT) { HP(120); MaxHP(250); Ability(ABILITY_GULP_MISSILE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, player);
         HP_BAR(opponent);
         ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
         HP_BAR(opponent);
@@ -123,12 +123,12 @@ SINGLE_BATTLE_TEST("(Gulp Missile) triggers even if the user is fainted by oppos
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_TACKLE); SEND_OUT(player, 1); }
+        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_SCRATCH); SEND_OUT(player, 1); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, player);
         HP_BAR(opponent);
         ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
         STATUS_ICON(opponent, paralysis: TRUE);
@@ -145,12 +145,12 @@ SINGLE_BATTLE_TEST("(Gulp Missile) Transformed Cramorant Gulping lowers defense 
         PLAYER(SPECIES_CRAMORANT) { Ability(ABILITY_GULP_MISSILE); }
         OPPONENT(species) { Ability(ability); }
     } WHEN {
-        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, player);
         HP_BAR(opponent);
         ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
         ABILITY_POPUP(opponent, ability);
@@ -167,16 +167,16 @@ SINGLE_BATTLE_TEST("(Gulp Missile) Transformed Cramorant Gulping lowers defense 
     PARAMETRIZE { ability = ABILITY_INFILTRATOR; }
     PARAMETRIZE { ability = ABILITY_CLEAR_BODY; }
     GIVEN {
-        ASSUME(MoveMakesContact(MOVE_TACKLE));
+        ASSUME(MoveMakesContact(MOVE_SCRATCH));
         PLAYER(SPECIES_CRAMORANT) { Ability(ABILITY_GULP_MISSILE); Item(ITEM_ROCKY_HELMET); }
         OPPONENT(SPECIES_DRAGAPULT) { Ability(ability); }
     } WHEN {
-        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, player);
         HP_BAR(opponent);
         ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
         ABILITY_POPUP(player, ABILITY_GULP_MISSILE);
         HP_BAR(opponent);

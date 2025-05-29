@@ -10,13 +10,13 @@ SINGLE_BATTLE_TEST("Tera Shell makes all moves against Terapagos not very effect
         PLAYER(SPECIES_TERAPAGOS_TERASTAL) { Ability(ABILITY_TERA_SHELL); HP(hp); MaxHP(100);}
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         if (hp == 100) {
-            MESSAGE("The opposing Wobbuffet used Tackle!");
+            MESSAGE("The opposing Wobbuffet used Scratch!");
             ABILITY_POPUP(player, ABILITY_TERA_SHELL);
             MESSAGE("Terapagos made its shell gleam! It's distorting type matchups!");
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
             HP_BAR(player);
             MESSAGE("It's not very effective…");
         }
@@ -63,14 +63,14 @@ DOUBLE_BATTLE_TEST("Tera Shell only makes the first hit of a double battle turn 
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_TACKLE, target: playerLeft); MOVE(opponentRight, MOVE_TACKLE, target: playerLeft); }
+        TURN { MOVE(opponentLeft, MOVE_SCRATCH, target: playerLeft); MOVE(opponentRight, MOVE_SCRATCH, target: playerLeft); }
     } SCENE {
         ABILITY_POPUP(playerLeft, ABILITY_TERA_SHELL);
         MESSAGE("Terapagos made its shell gleam! It's distorting type matchups!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         HP_BAR(playerLeft, captureDamage: &firstHit);
         MESSAGE("It's not very effective…");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentRight);
         HP_BAR(playerLeft, captureDamage: &secondHit);
         NOT MESSAGE("It's not very effective…");
     } THEN {

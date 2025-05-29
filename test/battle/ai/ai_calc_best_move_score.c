@@ -54,7 +54,7 @@ AI_SINGLE_BATTLE_TEST("AI will increase speed if it is slower")
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI will correctly predict what move the opposing mon going to use")
+AI_SINGLE_BATTLE_TEST("AI will not waste a turn setting up if it knows target can faint it")
 {
     u16 move;
 

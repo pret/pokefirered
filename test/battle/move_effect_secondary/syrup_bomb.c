@@ -200,14 +200,14 @@ SINGLE_BATTLE_TEST("Sticky Syrup is removed when the user faints")
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_SYRUP_BOMB);
-               MOVE(opponent, MOVE_TACKLE);
+               MOVE(opponent, MOVE_SCRATCH);
                SEND_OUT(player, 1);
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SYRUP_BOMB, player);
         HP_BAR(opponent);
         MESSAGE("The opposing Wobbuffet got covered in sticky candy syrup!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
         MESSAGE("Wobbuffet fainted!");
         SEND_IN_MESSAGE("Wynaut");

@@ -12,13 +12,13 @@ SINGLE_BATTLE_TEST("Mirror Move copies the last used move by the target")
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); MOVE(player, MOVE_MIRROR_MOVE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); MOVE(player, MOVE_MIRROR_MOVE); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
         MESSAGE("Wobbuffet used Mirror Move!");
-        MESSAGE("Wobbuffet used Tackle!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        MESSAGE("Wobbuffet used Scratch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         HP_BAR(opponent);
     }
 }
@@ -29,11 +29,11 @@ SINGLE_BATTLE_TEST("Mirror Move fails if no move was used before")
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_MIRROR_MOVE); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_MIRROR_MOVE); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         MESSAGE("Wobbuffet used Mirror Move!");
         MESSAGE("The Mirror Move failed!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
     }
 }
@@ -43,7 +43,8 @@ SINGLE_BATTLE_TEST("Mirror Move's called powder move fails against Grass Types")
     GIVEN {
         ASSUME(IsPowderMove(MOVE_STUN_SPORE));
         ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
-        ASSUME(GetMoveEffect(MOVE_STUN_SPORE) == EFFECT_PARALYZE);
+        ASSUME(GetMoveEffect(MOVE_STUN_SPORE) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_STUN_SPORE) == MOVE_EFFECT_PARALYSIS);
         PLAYER(SPECIES_ODDISH);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

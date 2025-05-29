@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
-    ASSUME(GetMovePower(MOVE_TACKLE) > 0);
+    ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
+    ASSUME(GetMovePower(MOVE_SCRATCH) > 0);
 }
 
 SINGLE_BATTLE_TEST("Galvanize turns a normal type move into Electric")
@@ -13,9 +13,9 @@ SINGLE_BATTLE_TEST("Galvanize turns a normal type move into Electric")
         PLAYER(SPECIES_KRABBY);
         OPPONENT(SPECIES_GEODUDE_ALOLA) { Ability(ABILITY_GALVANIZE); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         MESSAGE("It's super effective!");
     }
 }

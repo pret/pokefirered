@@ -167,7 +167,7 @@ AI_DOUBLE_BATTLE_TEST("Spicy Extract user will use it if partner holds Clear Amu
 {
     u32 move;
 
-    PARAMETRIZE { move = MOVE_TACKLE; }
+    PARAMETRIZE { move = MOVE_SCRATCH; }
     PARAMETRIZE { move = MOVE_SWIFT;}
 
     GIVEN {
@@ -175,13 +175,13 @@ AI_DOUBLE_BATTLE_TEST("Spicy Extract user will use it if partner holds Clear Amu
         PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(20); Item(ITEM_CLEAR_AMULET); Moves(move); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(40); Moves(MOVE_TACKLE, MOVE_SPICY_EXTRACT); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(40); Moves(MOVE_SCRATCH, MOVE_SPICY_EXTRACT); }
     } WHEN {
         TURN {
-            if (move == MOVE_TACKLE)
+            if (move == MOVE_SCRATCH)
                 EXPECT_MOVE(opponentRight, MOVE_SPICY_EXTRACT);
             else
-                EXPECT_MOVE(opponentRight, MOVE_TACKLE);
+                EXPECT_MOVE(opponentRight, MOVE_SCRATCH);
         }
     }
 }
@@ -198,11 +198,11 @@ AI_DOUBLE_BATTLE_TEST("Spicy Extract user will not choose the move if it does no
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
-        OPPONENT(species) { Speed(20); Ability(ability); Moves(MOVE_TACKLE); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(40); Moves(MOVE_TACKLE, MOVE_SPICY_EXTRACT); }
+        OPPONENT(species) { Speed(20); Ability(ability); Moves(MOVE_SCRATCH); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(40); Moves(MOVE_SCRATCH, MOVE_SPICY_EXTRACT); }
     } WHEN {
         TURN {
-            EXPECT_MOVE(opponentRight, MOVE_TACKLE);
+            EXPECT_MOVE(opponentRight, MOVE_SCRATCH);
         }
     }
 }

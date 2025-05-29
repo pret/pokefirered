@@ -37,13 +37,13 @@ DOUBLE_BATTLE_TEST("Beak Blast burns all who make contact with the pokemon")
 {
     GIVEN {
         ASSUME(GetMovePriority(MOVE_BEAK_BLAST) < 0);
-        ASSUME(MoveMakesContact(MOVE_TACKLE));
+        ASSUME(MoveMakesContact(MOVE_SCRATCH));
         PLAYER(SPECIES_WYNAUT) { Speed(10); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(5); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(3); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_TACKLE, target: playerLeft); MOVE(opponentRight, MOVE_TACKLE, target: playerLeft); MOVE(playerLeft, MOVE_BEAK_BLAST, target: opponentLeft); }
+        TURN { MOVE(opponentLeft, MOVE_SCRATCH, target: playerLeft); MOVE(opponentRight, MOVE_SCRATCH, target: playerLeft); MOVE(playerLeft, MOVE_BEAK_BLAST, target: opponentLeft); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_BEAK_BLAST_SETUP, playerLeft);
         MESSAGE("Wynaut started heating up its beak!");
@@ -51,15 +51,15 @@ DOUBLE_BATTLE_TEST("Beak Blast burns all who make contact with the pokemon")
         MESSAGE("Wobbuffet used Celebrate!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
 
-        MESSAGE("The opposing Wobbuffet used Tackle!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        MESSAGE("The opposing Wobbuffet used Scratch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         HP_BAR(playerLeft);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponentLeft);
         MESSAGE("The opposing Wobbuffet was burned!");
         STATUS_ICON(opponentLeft, burn: TRUE);
 
-        MESSAGE("The opposing Wobbuffet used Tackle!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentRight);
+        MESSAGE("The opposing Wobbuffet used Scratch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentRight);
         HP_BAR(playerLeft);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponentRight);
         MESSAGE("The opposing Wobbuffet was burned!");
@@ -75,12 +75,12 @@ SINGLE_BATTLE_TEST("Beak Blast burns only when contact moves are used")
 {
     u32 move;
     bool32 burn;
-    PARAMETRIZE { move = MOVE_TACKLE; burn = TRUE; }
+    PARAMETRIZE { move = MOVE_SCRATCH; burn = TRUE; }
     PARAMETRIZE { move = MOVE_WATER_GUN; burn = FALSE; }
     PARAMETRIZE { move = MOVE_LEER; burn = FALSE; }
 
     GIVEN {
-        ASSUME(MoveMakesContact(MOVE_TACKLE));
+        ASSUME(MoveMakesContact(MOVE_SCRATCH));
         ASSUME(!MoveMakesContact(MOVE_WATER_GUN));
         ASSUME(!MoveMakesContact(MOVE_LEER));
         PLAYER(SPECIES_WOBBUFFET);

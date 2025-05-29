@@ -15,9 +15,9 @@ SINGLE_BATTLE_TEST("Scope Lens increases the critical hit ratio by 1 stage")
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SCOPE_LENS); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         MESSAGE("A critical hit!");
     }
 }

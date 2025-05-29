@@ -13,9 +13,10 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_SPIKES) == EFFECT_SPIKES);
     ASSUME(GetMoveEffect(MOVE_TOXIC_SPIKES) == EFFECT_TOXIC_SPIKES);
     ASSUME(GetMoveEffect(MOVE_STICKY_WEB) == EFFECT_STICKY_WEB);
-    ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_TOXIC);
+    ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_NON_VOLATILE_STATUS);
+    ASSUME(GetMoveNonVolatileStatus(MOVE_TOXIC) == MOVE_EFFECT_TOXIC);
     ASSUME(GetMoveEffect(MOVE_SCREECH) == EFFECT_DEFENSE_DOWN_2);
-    ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(GetMoveCategory(MOVE_GUST) == DAMAGE_CATEGORY_SPECIAL);
 }
 
@@ -66,7 +67,7 @@ DOUBLE_BATTLE_TEST("Defog removes Reflect and Light Screen from target's side", 
     } WHEN {
         TURN { MOVE(opponentLeft, MOVE_REFLECT); MOVE(opponentRight, MOVE_LIGHT_SCREEN); }
         TURN { MOVE(playerLeft, move, target: opponentLeft); }
-        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); MOVE(playerRight, MOVE_GUST, target: opponentRight); }
+        TURN { MOVE(playerLeft, MOVE_SCRATCH, target: opponentLeft); MOVE(playerRight, MOVE_GUST, target: opponentRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_REFLECT, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_LIGHT_SCREEN, opponentRight);
@@ -75,7 +76,7 @@ DOUBLE_BATTLE_TEST("Defog removes Reflect and Light Screen from target's side", 
             MESSAGE("The opposing team's Reflect wore off!");
             MESSAGE("The opposing team's Light Screen wore off!");
         }
-        MESSAGE("Wobbuffet used Tackle!");
+        MESSAGE("Wobbuffet used Scratch!");
         HP_BAR(opponentLeft, captureDamage: &results[i].damagePhysical);
         MESSAGE("Wobbuffet used Gust!");
         HP_BAR(opponentRight, captureDamage: &results[i].damageSpecial);
@@ -311,7 +312,7 @@ DOUBLE_BATTLE_TEST("Defog removes Aurora Veil from target's side", s16 damagePhy
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_HAIL); MOVE(playerRight, MOVE_AURORA_VEIL); }
         TURN { MOVE(opponentLeft, move, target: playerLeft); }
-        TURN { MOVE(opponentLeft, MOVE_TACKLE, target: playerLeft); MOVE(opponentRight, MOVE_GUST, target: playerRight); }
+        TURN { MOVE(opponentLeft, MOVE_SCRATCH, target: playerLeft); MOVE(opponentRight, MOVE_GUST, target: playerRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HAIL, playerLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AURORA_VEIL, playerRight);
@@ -321,7 +322,7 @@ DOUBLE_BATTLE_TEST("Defog removes Aurora Veil from target's side", s16 damagePhy
             MESSAGE("Glalie's evasiveness fell!");
             MESSAGE("Your team's Aurora Veil wore off!");
         }
-        MESSAGE("The opposing Glalie used Tackle!");
+        MESSAGE("The opposing Glalie used Scratch!");
         HP_BAR(playerLeft, captureDamage: &results[i].damagePhysical);
         MESSAGE("The opposing Glalie used Gust!");
         HP_BAR(playerRight, captureDamage: &results[i].damageSpecial);

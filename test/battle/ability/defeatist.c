@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(GetMoveCategory(MOVE_ECHOED_VOICE) == DAMAGE_CATEGORY_SPECIAL);
 }
 
@@ -16,9 +16,9 @@ SINGLE_BATTLE_TEST("Defeatist halves Attack when HP <= 50%", s16 damage)
         PLAYER(SPECIES_ARCHEN) { Ability(ABILITY_DEFEATIST); HP(hp), MaxHP(400);}
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_SCRATCH); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         HP_BAR(opponent, captureDamage: &results[i].damage);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     } FINALLY {

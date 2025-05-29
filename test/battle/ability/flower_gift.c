@@ -96,7 +96,7 @@ DOUBLE_BATTLE_TEST("Flower Gift increases the attack of Cherrim and its allies b
     PARAMETRIZE { sunny = FALSE; }
     PARAMETRIZE { sunny = TRUE; }
     GIVEN {
-        ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_CHERRIM_OVERCAST) { Ability(ABILITY_FLOWER_GIFT); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -104,8 +104,8 @@ DOUBLE_BATTLE_TEST("Flower Gift increases the attack of Cherrim and its allies b
     } WHEN {
         if (sunny)
             TURN { MOVE(playerLeft, MOVE_SUNNY_DAY); }
-        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft);
-               MOVE(playerRight, MOVE_TACKLE, target: opponentLeft); }
+        TURN { MOVE(playerLeft, MOVE_SCRATCH, target: opponentLeft);
+               MOVE(playerRight, MOVE_SCRATCH, target: opponentLeft); }
     } SCENE {
         // sun activates
         if (sunny) {
@@ -113,11 +113,11 @@ DOUBLE_BATTLE_TEST("Flower Gift increases the attack of Cherrim and its allies b
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, playerLeft);
             MESSAGE("Cherrim transformed!");
         }
-        // player uses Tackle
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft);
+        // player uses Scratch
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
         HP_BAR(opponentLeft, captureDamage: &results[i].damageL);
-        // partner uses Tackle
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
+        // partner uses Scratch
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerRight);
         HP_BAR(opponentLeft, captureDamage: &results[i].damageR);
     } FINALLY {
         EXPECT_MUL_EQ(results[0].damageL, UQ_4_12(1.5), results[1].damageL);

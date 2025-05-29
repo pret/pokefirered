@@ -47,8 +47,6 @@ SINGLE_BATTLE_TEST("Bestow fails if the target already has a held item")
 #include "mail.h"
 SINGLE_BATTLE_TEST("Bestow fails if the user is holding Mail")
 {
-    KNOWN_FAILING;
-
     GIVEN {
         ASSUME(ItemIsMail(ITEM_ORANGE_MAIL));
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_ORANGE_MAIL); }
@@ -94,36 +92,41 @@ SINGLE_BATTLE_TEST("Bestow fails if the user's held item is a Z-Crystal")
     }
 }
 
-SINGLE_BATTLE_TEST("Bestow fails if the target is behind a Substitute")
+SINGLE_BATTLE_TEST("Bestow fails if the target is behind a Substitute (Gen 6+)")
 {
-    KNOWN_FAILING;
-
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SITRUS_BERRY); Speed(50); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(100); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_SUBSTITUTE); MOVE(player, MOVE_BESTOW); }
     } SCENE {
-        MESSAGE("But it failed!");
+        if (B_UPDATED_MOVE_FLAGS >= GEN_6) {
+            NOT MESSAGE("But it failed!");
+        } else {
+            MESSAGE("But it failed!");
+        }
     } THEN {
-        EXPECT(player->item == ITEM_SITRUS_BERRY);
-        EXPECT(opponent->item == ITEM_NONE);
+        if (B_UPDATED_MOVE_FLAGS >= GEN_6) {
+            EXPECT(player->item == ITEM_NONE);
+            EXPECT(opponent->item == ITEM_SITRUS_BERRY);
+        } else {
+            EXPECT(player->item == ITEM_SITRUS_BERRY);
+            EXPECT(opponent->item == ITEM_NONE);
+        }
     }
 }
 
 SINGLE_BATTLE_TEST("Bestow fails if the user's held item changes its form")
 {
-    KNOWN_FAILING;
-
     GIVEN {
-        PLAYER(SPECIES_GIRATINA_ORIGIN) { Item(ITEM_GRISEOUS_ORB); }
+        PLAYER(SPECIES_GIRATINA_ORIGIN) { Item(ITEM_GRISEOUS_CORE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_BESTOW); }
     } SCENE {
         MESSAGE("But it failed!");
     } THEN {
-        EXPECT(player->item == ITEM_GRISEOUS_ORB);
+        EXPECT(player->item == ITEM_GRISEOUS_CORE);
         EXPECT(opponent->item == ITEM_NONE);
     }
 }

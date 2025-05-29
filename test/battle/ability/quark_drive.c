@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
+    ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
     ASSUME(GetMoveCategory(MOVE_ROUND) == DAMAGE_CATEGORY_SPECIAL);
 }
 
@@ -28,10 +28,10 @@ SINGLE_BATTLE_TEST("Quark Drive boosts either Attack or Special Attack, not both
     u32 move;
     s16 damage[2];
 
-    PARAMETRIZE { species = SPECIES_IRON_VALIANT; move = MOVE_TACKLE; }
+    PARAMETRIZE { species = SPECIES_IRON_VALIANT; move = MOVE_SCRATCH; }
     PARAMETRIZE { species = SPECIES_IRON_VALIANT; move = MOVE_ROUND; }
 
-    PARAMETRIZE { species = SPECIES_IRON_MOTH; move = MOVE_TACKLE; }
+    PARAMETRIZE { species = SPECIES_IRON_MOTH; move = MOVE_SCRATCH; }
     PARAMETRIZE { species = SPECIES_IRON_MOTH; move = MOVE_ROUND; }
 
     GIVEN {
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Quark Drive boosts either Attack or Special Attack, not both
         ANIMATION(ANIM_TYPE_MOVE, move, player);
         HP_BAR(opponent, captureDamage: &damage[1]);
     } THEN {
-        if ((move == MOVE_TACKLE && species == SPECIES_IRON_VALIANT) || (move == MOVE_ROUND && species == SPECIES_IRON_MOTH))
+        if ((move == MOVE_SCRATCH && species == SPECIES_IRON_VALIANT) || (move == MOVE_ROUND && species == SPECIES_IRON_MOTH))
             EXPECT_MUL_EQ(damage[0], Q_4_12(1.3), damage[1]);
         else
             EXPECT_EQ(damage[0], damage[1]);
@@ -115,59 +115,36 @@ SINGLE_BATTLE_TEST("Quark Drive activates on Electric Terrain even if not ground
     }
 }
 
-SINGLE_BATTLE_TEST("Quark Drive boosts Attack 1st in case of a stat tie")
+SINGLE_BATTLE_TEST("Quark Drive prioritizes stats in the case of a tie in the following order: Atk, Def, Sp.Atk, Sp.Def, Speed")
 {
-    GIVEN {
-        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Attack(5); Defense(5); SpAttack(5); SpDefense(5); Speed(5); }
-        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); Speed(5); }
-    } WHEN {
-        TURN { }
-    } SCENE {
-        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
-        ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
-        MESSAGE("Iron Treads's Attack was heightened!");
-    }
-}
+    u8 stats[] = {1, 1, 1, 1, 1};
 
-SINGLE_BATTLE_TEST("Quark Drive boosts Defense 2nd in case of a stat tie")
-{
+    PARAMETRIZE { stats[4] = 255; stats[3] = 255; stats[2] = 255; stats[1] = 255; stats[0] = 255; }
+    PARAMETRIZE { stats[4] = 255; stats[3] = 255; stats[2] = 255; stats[1] = 255; }
+    PARAMETRIZE { stats[4] = 255; stats[3] = 255; stats[2] = 255; }
+    PARAMETRIZE { stats[4] = 255; stats[3] = 255; }
     GIVEN {
-        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Attack(4); Defense(5); SpAttack(5); SpDefense(5); Speed(5); }
+        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Attack(stats[0]); Defense(stats[1]); SpAttack(stats[2]); SpDefense(stats[3]); Speed(stats[4]); }
         OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); Speed(5); }
     } WHEN {
         TURN { }
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
         ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
-        MESSAGE("Iron Treads's Defense was heightened!");
-    }
-}
-
-SINGLE_BATTLE_TEST("Quark Drive boosts Special Attack 3rd in case of a stat tie")
-{
-    GIVEN {
-        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Attack(4); Defense(4); SpAttack(5); SpDefense(5); Speed(5); }
-        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); Speed(5); }
-    } WHEN {
-        TURN { }
-    } SCENE {
-        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
-        ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
-        MESSAGE("Iron Treads's Sp. Atk was heightened!");
-    }
-}
-
-SINGLE_BATTLE_TEST("Quark Drive boosts Special Defense 4th in case of a stat tie")
-{
-    GIVEN {
-        PLAYER(SPECIES_IRON_TREADS) { Ability(ABILITY_QUARK_DRIVE); Attack(4); Defense(4); SpAttack(4); SpDefense(5); Speed(5); }
-        OPPONENT(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); Speed(5); }
-    } WHEN {
-        TURN { }
-    } SCENE {
-        ABILITY_POPUP(opponent, ABILITY_ELECTRIC_SURGE);
-        ABILITY_POPUP(player, ABILITY_QUARK_DRIVE);
-        MESSAGE("Iron Treads's Sp. Def was heightened!");
+        switch(i) {
+            case 0:
+                MESSAGE("Iron Treads's Attack was heightened!");
+                break;
+            case 1:
+                MESSAGE("Iron Treads's Defense was heightened!");
+                break;
+            case 2:
+                MESSAGE("Iron Treads's Sp. Atk was heightened!");
+                break;
+            case 3:
+                MESSAGE("Iron Treads's Sp. Def was heightened!");
+                break;
+        }
     }
 }
 

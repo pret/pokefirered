@@ -1485,7 +1485,7 @@ void RNGSeed_(u32 sourceLine, rng_value_t seed)
     DATA.recordedBattle.rngSeed = seed;
 }
 
-void AIFlags_(u32 sourceLine, u32 flags)
+void AIFlags_(u32 sourceLine, u64 flags)
 {
     INVALID_IF(!IsAITest(), "AI_FLAGS is usable only in AI_SINGLE_BATTLE_TEST & AI_DOUBLE_BATTLE_TEST");
     DATA.recordedBattle.AI_scripts = flags;
@@ -2373,7 +2373,7 @@ void ExpectMoves(u32 sourceLine, struct BattlePokemon *battler, bool32 notExpect
     s32 battlerId = battler - gBattleMons;
     u32 i;
 
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moves.moves[i] != MOVE_NONE)
         {

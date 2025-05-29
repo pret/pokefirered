@@ -51,15 +51,15 @@ WILD_BATTLE_TEST("Ion Deluge works the same way as always when used by a mon wit
 SINGLE_BATTLE_TEST("Ion Deluge makes Normal type moves Electric type")
 {
     GIVEN {
-        ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
+        ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GOLBAT);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_ION_DELUGE); MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_ION_DELUGE); MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         MESSAGE("The opposing Golbat used Ion Deluge!");
         MESSAGE("A deluge of ions showers the battlefield!");
-        MESSAGE("Wobbuffet used Tackle!");
-        MESSAGE("It's super effective!"); // Because Tackle is now electric type.
+        MESSAGE("Wobbuffet used Scratch!");
+        MESSAGE("It's super effective!"); // Because Scratch is now electric type.
     }
 }

@@ -37,9 +37,9 @@ WILD_BATTLE_TEST("Higher leveled Pokemon give more exp", s32 exp)
         PLAYER(SPECIES_WOBBUFFET) { Level(20); }
         OPPONENT(SPECIES_CATERPIE) { Level(level); HP(1); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tackle!");
+        MESSAGE("Wobbuffet used Scratch!");
         MESSAGE("The wild Caterpie fainted!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } FINALLY {
@@ -58,9 +58,9 @@ WILD_BATTLE_TEST("Lucky Egg boosts gained exp points by 50%", s32 exp)
         PLAYER(SPECIES_WOBBUFFET) { Level(20); Item(item); }
         OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tackle!");
+        MESSAGE("Wobbuffet used Scratch!");
         MESSAGE("The wild Caterpie fainted!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } FINALLY {
@@ -81,9 +81,9 @@ WILD_BATTLE_TEST("Exp is scaled to player and opponent's levels", s32 exp)
         PLAYER(SPECIES_WOBBUFFET) { Level(level); }
         OPPONENT(SPECIES_CATERPIE) { Level(5); HP(1); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tackle!");
+        MESSAGE("Wobbuffet used Scratch!");
         MESSAGE("The wild Caterpie fainted!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } FINALLY {
@@ -105,9 +105,9 @@ WILD_BATTLE_TEST("Large exp gains are supported", s32 exp) // #1455
         PLAYER(SPECIES_WOBBUFFET) { Level(1); Item(ITEM_LUCKY_EGG); OTName("Test"); } // OT Name is different so it gets more exp as a traded mon
         OPPONENT(SPECIES_BLISSEY) { Level(level); HP(1); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tackle!");
+        MESSAGE("Wobbuffet used Scratch!");
         MESSAGE("The wild Blissey fainted!");
         EXPERIENCE_BAR(player, captureGainedExp: &results[i].exp);
     } THEN {
@@ -133,9 +133,9 @@ WILD_BATTLE_TEST("Exp Share(held) gives Experience to mons which did not partici
         PLAYER(SPECIES_WYNAUT) { Level(40); Item(item); }
         OPPONENT(SPECIES_CATERPIE) { Level(10); HP(1); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        MESSAGE("Wobbuffet used Tackle!");
+        MESSAGE("Wobbuffet used Scratch!");
         MESSAGE("The wild Caterpie fainted!");
         // This message should appear only for gen6> exp share.
         NOT MESSAGE("The rest of your team gained EXP. Points thanks to the Exp. Share!");

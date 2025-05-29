@@ -3,8 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
-    ASSUME(GetMovePower(MOVE_TACKLE) > 0);
+    ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
+    ASSUME(GetMovePower(MOVE_SCRATCH) > 0);
 }
 
 SINGLE_BATTLE_TEST("Aerilate turns a Normal-type move into Flying-type move")
@@ -13,10 +13,10 @@ SINGLE_BATTLE_TEST("Aerilate turns a Normal-type move into Flying-type move")
         PLAYER(SPECIES_MEGANIUM);
         OPPONENT(SPECIES_SALAMENCE) { Item(ITEM_SALAMENCITE); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE, gimmick: GIMMICK_MEGA); }
+        TURN { MOVE(opponent, MOVE_SCRATCH, gimmick: GIMMICK_MEGA); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         MESSAGE("It's super effective!");
     }
 }

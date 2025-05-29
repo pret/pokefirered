@@ -201,16 +201,16 @@ DOUBLE_BATTLE_TEST("Dancer-called move doesn't update move to be Instructed")
 {
     GIVEN {
         ASSUME(IsDanceMove(MOVE_DRAGON_DANCE));
-        ASSUME(!IsMoveInstructBanned(MOVE_TACKLE));
+        ASSUME(!IsMoveInstructBanned(MOVE_SCRATCH));
         ASSUME(GetMoveEffect(MOVE_INSTRUCT) == EFFECT_INSTRUCT);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_ORICORIO);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_TACKLE, target: playerLeft); MOVE(playerRight, MOVE_DRAGON_DANCE); MOVE(opponentRight, MOVE_INSTRUCT, target: opponentLeft); }
+        TURN { MOVE(opponentLeft, MOVE_SCRATCH, target: playerLeft); MOVE(playerRight, MOVE_DRAGON_DANCE); MOVE(opponentRight, MOVE_INSTRUCT, target: opponentLeft); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DANCE, playerRight);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
         ABILITY_POPUP(opponentLeft, ABILITY_DANCER);
@@ -221,7 +221,7 @@ DOUBLE_BATTLE_TEST("Dancer-called move doesn't update move to be Instructed")
             ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_DANCE, opponentLeft);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
         }
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
     }
 }
 
@@ -311,9 +311,9 @@ DOUBLE_BATTLE_TEST("Dancer correctly restores move targets")
         OPPONENT(SPECIES_ORICORIO) { Speed(5); }
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_REVELATION_DANCE, target: opponentLeft);
-               MOVE(opponentRight, MOVE_TACKLE, target: playerRight);
-               MOVE(playerRight, MOVE_TACKLE, target: opponentRight);
-               MOVE(opponentLeft, MOVE_TACKLE, target: playerRight); }
+               MOVE(opponentRight, MOVE_SCRATCH, target: playerRight);
+               MOVE(playerRight, MOVE_SCRATCH, target: opponentRight);
+               MOVE(opponentLeft, MOVE_SCRATCH, target: playerRight); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_REVELATION_DANCE, playerLeft);
         HP_BAR(opponentLeft);
@@ -326,11 +326,11 @@ DOUBLE_BATTLE_TEST("Dancer correctly restores move targets")
         ABILITY_POPUP(opponentRight, ABILITY_DANCER);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_REVELATION_DANCE, opponentRight);
         HP_BAR(playerLeft);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentRight);
         HP_BAR(playerRight);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerRight);
         HP_BAR(opponentRight);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         HP_BAR(playerRight);
     }
 }

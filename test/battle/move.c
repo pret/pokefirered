@@ -42,14 +42,14 @@ SINGLE_BATTLE_TEST("AdditionalEffect.chance controls the proportion of secondary
 SINGLE_BATTLE_TEST("Turn order is determined by priority")
 {
     GIVEN {
-        ASSUME(GetMovePriority(MOVE_QUICK_ATTACK) > GetMovePriority(MOVE_TACKLE));
+        ASSUME(GetMovePriority(MOVE_QUICK_ATTACK) > GetMovePriority(MOVE_SCRATCH));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_QUICK_ATTACK); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_QUICK_ATTACK); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, player);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
     }
 }
 
@@ -205,10 +205,10 @@ DOUBLE_BATTLE_TEST("Moves fail if they target the partner but they faint before 
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_TACKLE, target: playerRight); MOVE(playerLeft, MOVE_TACKLE, target: playerRight); }
+        TURN { MOVE(opponentLeft, MOVE_SCRATCH, target: playerRight); MOVE(playerLeft, MOVE_SCRATCH, target: playerRight); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
     }
 }
 
@@ -220,9 +220,9 @@ DOUBLE_BATTLE_TEST("Moves do not fail if an alive partner is the target")
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_TACKLE, target: playerRight); }
+        TURN { MOVE(playerLeft, MOVE_SCRATCH, target: playerRight); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
     }
 }
 
@@ -239,13 +239,13 @@ DOUBLE_BATTLE_TEST("Moves fail if they target into a pokemon that was fainted by
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_HYPER_VOICE);
-            MOVE(playerRight, MOVE_TACKLE, target: opponentLeft);
+            MOVE(playerRight, MOVE_SCRATCH, target: opponentLeft);
             SEND_OUT(opponentLeft, 2);
             SEND_OUT(opponentRight, 3);
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_HYPER_VOICE, playerLeft);
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerRight);
     }
 }
 
@@ -258,9 +258,9 @@ DOUBLE_BATTLE_TEST("Moves that target the field are not going to fail if one mon
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_TACKLE, target: playerRight); MOVE(playerLeft, MOVE_SURF); }
+        TURN { MOVE(opponentLeft, MOVE_SCRATCH, target: playerRight); MOVE(playerLeft, MOVE_SURF); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SURF, playerLeft);
     }
 }

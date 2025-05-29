@@ -9,10 +9,10 @@ SINGLE_BATTLE_TEST("Aftermath damages the attacker by 1/4th of its max HP if fai
         PLAYER(SPECIES_VOLTORB) { HP(1); Ability(ABILITY_AFTERMATH); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {MOVE(opponent, MOVE_TACKLE);}
+        TURN {MOVE(opponent, MOVE_SCRATCH);}
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Tackle!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        MESSAGE("The opposing Wobbuffet used Scratch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         MESSAGE("Voltorb fainted!");
         ABILITY_POPUP(player, ABILITY_AFTERMATH);
         HP_BAR(opponent, captureDamage: &aftermathDamage);

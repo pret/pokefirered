@@ -5,12 +5,12 @@ SINGLE_BATTLE_TEST("Toxic Chain inflicts bad poison when attacking")
 {
     PASSES_RANDOMLY(3, 10, RNG_TOXIC_CHAIN);
     GIVEN {
-        ASSUME(GetMoveCategory(MOVE_TACKLE) != DAMAGE_CATEGORY_STATUS);
-        ASSUME(GetMovePower(MOVE_TACKLE) > 0);
+        ASSUME(GetMoveCategory(MOVE_SCRATCH) != DAMAGE_CATEGORY_STATUS);
+        ASSUME(GetMovePower(MOVE_SCRATCH) > 0);
         PLAYER(SPECIES_OKIDOGI) { Ability(ABILITY_TOXIC_CHAIN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         ABILITY_POPUP(player, ABILITY_TOXIC_CHAIN);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);

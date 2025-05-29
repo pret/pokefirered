@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveEffect(MOVE_HYPNOSIS) == EFFECT_SLEEP);
+    ASSUME(GetMoveEffect(MOVE_HYPNOSIS) == EFFECT_NON_VOLATILE_STATUS);
+    ASSUME(GetMoveNonVolatileStatus(MOVE_HYPNOSIS) == MOVE_EFFECT_SLEEP);
 }
 
 SINGLE_BATTLE_TEST("Hypnosis inflicts 1-3 turns of sleep")

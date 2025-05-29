@@ -138,7 +138,7 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Spit Up")
         ASSUME(GetMoveEffect(MOVE_SPIT_UP) == EFFECT_SPIT_UP);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET) { HP(43); }
-        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_STOCKPILE, MOVE_SPIT_UP, MOVE_TACKLE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_STOCKPILE, MOVE_SPIT_UP, MOVE_SCRATCH); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, MOVE_STOCKPILE); }
         TURN { EXPECT_MOVE(opponent, MOVE_SPIT_UP); }
@@ -238,21 +238,6 @@ AI_SINGLE_BATTLE_TEST("AI chooses moves that cure inactive party members")
             TURN { EXPECT_MOVE(opponent, MOVE_BODY_PRESS); }
         else
             TURN { EXPECT_MOVE(opponent, MOVE_HEAL_BELL); }
-    }
-}
-
-AI_DOUBLE_BATTLE_TEST("AI prioritizes Skill Swapping Contrary to allied mons that would benefit from it")
-{
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_SKILL_SWAP) == EFFECT_SKILL_SWAP);
-        ASSUME(GetMoveAdditionalEffectById(MOVE_OVERHEAT, 0)->moveEffect == MOVE_EFFECT_SP_ATK_MINUS_2);
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_DOUBLE_BATTLE);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
-        PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
-        OPPONENT(SPECIES_SPINDA) { Ability(ABILITY_CONTRARY); Speed(5); Moves(MOVE_SKILL_SWAP, MOVE_ENCORE, MOVE_FAKE_TEARS, MOVE_SWAGGER); }
-        OPPONENT(SPECIES_ARCANINE) { Ability(ABILITY_INTIMIDATE); Speed(4); Moves (MOVE_OVERHEAT); }
-    } WHEN {
-        TURN { EXPECT_MOVE(opponentLeft, MOVE_SKILL_SWAP, target:opponentRight); EXPECT_MOVE(opponentRight, MOVE_OVERHEAT); }
     }
 }
 

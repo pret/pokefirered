@@ -17,13 +17,13 @@ SINGLE_BATTLE_TEST("Rage Fist base power is increased by 50 if the user takes da
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {
         for (turns = 0; turns < 2; turns++) {
-            TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_TACKLE); }
+            TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_SCRATCH); }
         }
     } SCENE {
         for (turns = 0; turns < 2; turns++) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
             HP_BAR(opponent, captureDamage: &timesGotHit[turns]);
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
             HP_BAR(player);
         }
     } THEN {
@@ -99,9 +99,9 @@ DOUBLE_BATTLE_TEST("Rage Fist maximum base power is 350")
                 if (turns == 1)
                     MOVE(playerLeft, MOVE_RAGE_FIST, target: opponentLeft);
 
-                MOVE(playerRight, MOVE_TACKLE, target: playerLeft);
-                MOVE(opponentLeft, MOVE_TACKLE, target: playerLeft);
-                MOVE(opponentRight, MOVE_TACKLE, target: playerLeft);
+                MOVE(playerRight, MOVE_SCRATCH, target: playerLeft);
+                MOVE(opponentLeft, MOVE_SCRATCH, target: playerLeft);
+                MOVE(opponentRight, MOVE_SCRATCH, target: playerLeft);
             }
         }
         TURN { MOVE(playerLeft, MOVE_RAGE_FIST, target: opponentLeft); }
@@ -111,11 +111,11 @@ DOUBLE_BATTLE_TEST("Rage Fist maximum base power is 350")
                 ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, playerLeft);
                 HP_BAR(opponentLeft, captureDamage: &timesGotHit[0]);
             }
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerRight);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerRight);
             HP_BAR(playerLeft);
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
             HP_BAR(playerLeft);
-            ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentRight);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentRight);
             HP_BAR(playerLeft);
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, playerLeft);
@@ -160,15 +160,15 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not lost if user switches out")
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {
-        TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_TACKLE); }
-        TURN { SWITCH(player, 1); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_SCRATCH); }
+        TURN { SWITCH(player, 1); MOVE(opponent, MOVE_SCRATCH); }
         TURN { SWITCH(player, 0); }
         TURN { MOVE(player, MOVE_RAGE_FIST); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
         HP_BAR(opponent, captureDamage: &timesGotHit[0]);
         SWITCH_OUT_MESSAGE("Wobbuffet");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         SWITCH_OUT_MESSAGE("Wynaut");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
         HP_BAR(opponent, captureDamage: &timesGotHit[1]);
@@ -210,14 +210,14 @@ SINGLE_BATTLE_TEST("Rage Fist base power is increased by 50 even if a damaging m
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {
         TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_FALSE_SWIPE); }
-        TURN { MOVE(player, MOVE_ENDURE); MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_ENDURE); MOVE(opponent, MOVE_SCRATCH); }
         TURN { MOVE(player, MOVE_RAGE_FIST); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
         HP_BAR(opponent, captureDamage: &timesGotHit[0]);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FALSE_SWIPE, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ENDURE, player);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
         HP_BAR(opponent, captureDamage: &timesGotHit[1]);
     } THEN {
@@ -235,13 +235,13 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased if move had no affect"
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {
         for (turns = 0; turns < 2; turns++) {
-            TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_TACKLE); }
+            TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_SCRATCH); }
         }
     } SCENE {
         for (turns = 0; turns < 2; turns++) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
             HP_BAR(opponent, captureDamage: &timesGotHit[turns]);
-            MESSAGE("The opposing Regirock used Tackle!");
+            MESSAGE("The opposing Regirock used Scratch!");
             MESSAGE("It doesn't affect Gastly…");
         }
     } THEN {
@@ -331,7 +331,7 @@ SINGLE_BATTLE_TEST("Rage Fist doesn't get increased power if Substitute is hit")
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_RAGE_FIST); MOVE(player, MOVE_CELEBRATE); }
-        TURN { MOVE(opponent, MOVE_SUBSTITUTE); MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SUBSTITUTE); MOVE(player, MOVE_SCRATCH); }
         TURN { MOVE(opponent, MOVE_RAGE_FIST); MOVE(player, MOVE_CELEBRATE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, opponent);

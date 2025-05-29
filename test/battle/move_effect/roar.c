@@ -78,7 +78,7 @@ SINGLE_BATTLE_TEST("Roar fails against target with Guard Dog")
     } WHEN {
         TURN { MOVE(player, MOVE_ROAR); }
     } SCENE {
-        NONE_OF {        
+        NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_ROAR, player);
             MESSAGE("The opposing Charmander was dragged out!");
         }

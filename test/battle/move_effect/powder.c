@@ -263,13 +263,13 @@ SINGLE_BATTLE_TEST("Powder doesn't consume Berry from Fire type Natural Gift but
 DOUBLE_BATTLE_TEST("Powder damages a target using Shell Trap even if it wasn't hit by a Physical move")
 {
     u32 move;
-    PARAMETRIZE { move = MOVE_TACKLE; }
+    PARAMETRIZE { move = MOVE_SCRATCH; }
     PARAMETRIZE { move = MOVE_EMBER; }
     PARAMETRIZE { move = MOVE_TICKLE;}
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_SHELL_TRAP) == EFFECT_SHELL_TRAP);
         ASSUME(GetMoveType(MOVE_SHELL_TRAP) == TYPE_FIRE);
-        ASSUME(GetMoveCategory(MOVE_TACKLE) == DAMAGE_CATEGORY_PHYSICAL);
+        ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
         ASSUME(GetMoveCategory(MOVE_EMBER) == DAMAGE_CATEGORY_SPECIAL);
         ASSUME(GetMoveCategory(MOVE_TICKLE) == DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveEffect(MOVE_TICKLE) == EFFECT_TICKLE);

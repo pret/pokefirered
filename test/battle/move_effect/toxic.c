@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_TOXIC);
+    ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_NON_VOLATILE_STATUS);
+    ASSUME(GetMoveNonVolatileStatus(MOVE_TOXIC) == MOVE_EFFECT_TOXIC);
 }
 
 SINGLE_BATTLE_TEST("Toxic inflicts bad poison")
@@ -18,6 +19,27 @@ SINGLE_BATTLE_TEST("Toxic inflicts bad poison")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, player);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
         STATUS_ICON(opponent, badPoison: TRUE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Toxic can't bad poison a poison or steel type")
+{
+    u32 species;
+
+    PARAMETRIZE { species = SPECIES_BELDUM; }
+    PARAMETRIZE { species = SPECIES_BULBASAUR; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(species);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TOXIC); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, player);
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
+            STATUS_ICON(opponent, badPoison: TRUE);
+        }
     }
 }
 

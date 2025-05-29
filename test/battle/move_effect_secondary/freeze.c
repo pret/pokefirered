@@ -4,7 +4,6 @@
 ASSUMPTIONS
 {
     ASSUME(MoveHasAdditionalEffect(MOVE_POWDER_SNOW, MOVE_EFFECT_FREEZE_OR_FROSTBITE) == TRUE);
-    ASSUME(GetMoveAccuracy(MOVE_BLIZZARD) == 70);
 }
 
 #if B_USE_FROSTBITE == TRUE
@@ -57,21 +56,6 @@ SINGLE_BATTLE_TEST("Freeze cannot be inflicted in Sunlight")
         TURN { MOVE(opponent, MOVE_SUNNY_DAY); MOVE(player, MOVE_ICE_BEAM); }
     } SCENE {
         NOT MESSAGE("Wobbuffet was frozen solid!");
-    }
-}
-
-SINGLE_BATTLE_TEST("Blizzard bypasses accuracy checks in Hail and Snow")
-{
-    u32 move;
-    PARAMETRIZE { move = MOVE_HAIL; }
-    PARAMETRIZE { move = MOVE_SNOWSCAPE; }
-    GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponent, move); MOVE(player, MOVE_BLIZZARD); }
-    } SCENE {
-        NOT MESSAGE("Wobbuffet's attack missed!");
     }
 }
 

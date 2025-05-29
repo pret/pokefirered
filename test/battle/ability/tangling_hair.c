@@ -3,9 +3,9 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveEffect(MOVE_TACKLE) == EFFECT_HIT);
-    ASSUME(GetMovePower(MOVE_TACKLE) > 0);
-    ASSUME(MoveMakesContact(MOVE_TACKLE) == TRUE);
+    ASSUME(GetMoveEffect(MOVE_SCRATCH) == EFFECT_HIT);
+    ASSUME(GetMovePower(MOVE_SCRATCH) > 0);
+    ASSUME(MoveMakesContact(MOVE_SCRATCH) == TRUE);
 }
 
 
@@ -13,7 +13,7 @@ SINGLE_BATTLE_TEST("Tangling Hair drops opposing mon's speed if ability user got
 {
     u32 move;
 
-    PARAMETRIZE { move = MOVE_TACKLE; }
+    PARAMETRIZE { move = MOVE_SCRATCH; }
     PARAMETRIZE { move = MOVE_SWIFT; }
 
     GIVEN {
@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Tangling Hair drops opposing mon's speed if ability user got
         TURN { MOVE(opponent, move); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
-        if (move == MOVE_TACKLE) {
+        if (move == MOVE_SCRATCH) {
             ABILITY_POPUP(player, ABILITY_TANGLING_HAIR);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
             MESSAGE("The opposing Wynaut's Speed fell!");
@@ -39,9 +39,9 @@ SINGLE_BATTLE_TEST("Tangling Hair does not cause Rocky Helmet miss activation")
         PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); Item(ITEM_ROCKY_HELMET); }
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         ABILITY_POPUP(player, ABILITY_TANGLING_HAIR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("The opposing Wynaut's Speed fell!");
@@ -56,9 +56,9 @@ SINGLE_BATTLE_TEST("Tangling Hair Speed stat drop triggers defiant and keeps ori
         PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); Item(ITEM_ROCKY_HELMET); }
         OPPONENT(SPECIES_PAWNIARD) { Ability(ABILITY_DEFIANT); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         ABILITY_POPUP(player, ABILITY_TANGLING_HAIR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("The opposing Pawniard's Speed fell!");
@@ -66,5 +66,22 @@ SINGLE_BATTLE_TEST("Tangling Hair Speed stat drop triggers defiant and keeps ori
         MESSAGE("The opposing Pawniard's Attack sharply rose!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         MESSAGE("The opposing Pawniard was hurt by Dugtrio's Rocky Helmet!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Tangling Hair does not activate on confusion damage")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
+        PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_CONFUSE_RAY); MOVE(player, MOVE_CELEBRATE, WITH_RNG(RNG_CONFUSION, TRUE)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFUSE_RAY, opponent);
+        NONE_OF {
+            ABILITY_POPUP(player, ABILITY_TANGLING_HAIR);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        }
     }
 }

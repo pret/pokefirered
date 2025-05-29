@@ -15,7 +15,7 @@ SINGLE_BATTLE_TEST("Eject Button is not triggered when there is nothing to switc
     } WHEN {
         TURN {
             MOVE(player, MOVE_QUICK_ATTACK);
-            MOVE(opponent, MOVE_TACKLE);
+            MOVE(opponent, MOVE_SCRATCH);
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, player);
@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Eject Button is not triggered when there is nothing to switc
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
             MESSAGE("The opposing Wobbuffet is switched out with the Eject Button!");
         }
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
     }
 }
 
@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Eject Button is not activated by a Sheer Force boosted move"
     } WHEN {
         TURN {
             MOVE(player, MOVE_FLAMETHROWER);
-            MOVE(opponent, MOVE_TACKLE);
+            MOVE(opponent, MOVE_SCRATCH);
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAMETHROWER, player);
@@ -44,7 +44,7 @@ SINGLE_BATTLE_TEST("Eject Button is not activated by a Sheer Force boosted move"
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
             MESSAGE("The opposing Wobbuffet is switched out with the Eject Button!");
         }
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
     }
 }
 
@@ -57,12 +57,12 @@ SINGLE_BATTLE_TEST("Eject Button will not activate under Substitute")
     } WHEN {
         TURN {
                MOVE(opponent, MOVE_SUBSTITUTE);
-               MOVE(player, MOVE_TACKLE);
+               MOVE(player, MOVE_SCRATCH);
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SUBSTITUTE, opponent);
         MESSAGE("The opposing Raichu put in a substitute!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         MESSAGE("The substitute took damage for the opposing Raichu!");
         NONE_OF {
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
@@ -79,11 +79,11 @@ SINGLE_BATTLE_TEST("Eject Button is not blocked by trapping abilities or moves")
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {
-            MOVE(player, MOVE_TACKLE);
+            MOVE(player, MOVE_SCRATCH);
             SEND_OUT(opponent, 1);
         }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
         MESSAGE("The opposing Wobbuffet is switched out with the Eject Button!");
         MESSAGE("2 sent out Wobbuffet!");
@@ -99,7 +99,7 @@ SINGLE_BATTLE_TEST("Eject Button is not triggered after the mon loses Eject Butt
     } WHEN {
         TURN {
             MOVE(player, MOVE_KNOCK_OFF);
-            MOVE(opponent, MOVE_TACKLE);
+            MOVE(opponent, MOVE_SCRATCH);
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_KNOCK_OFF, player);
@@ -107,7 +107,7 @@ SINGLE_BATTLE_TEST("Eject Button is not triggered after the mon loses Eject Butt
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
             MESSAGE("The opposing Wobbuffet is switched out with the Eject Button!");
         }
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
     }
 }
 
@@ -120,14 +120,14 @@ SINGLE_BATTLE_TEST("Eject Button is not triggered after given to player by Picke
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {
-            MOVE(player, MOVE_TACKLE);
-            MOVE(opponent, MOVE_TACKLE);
+            MOVE(player, MOVE_SCRATCH);
+            MOVE(opponent, MOVE_SCRATCH);
         }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         ABILITY_POPUP(opponent, ABILITY_PICKPOCKET);
         MESSAGE("The opposing Sneasel stole Regieleki's Eject Button!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
     }
 }
 
@@ -140,7 +140,7 @@ SINGLE_BATTLE_TEST("Eject Button has no chance to activate after Dragon Tail")
     } WHEN {
         TURN {
             MOVE(player, MOVE_DRAGON_TAIL);
-            MOVE(opponent, MOVE_TACKLE);
+            MOVE(opponent, MOVE_SCRATCH);
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_TAIL, player);

@@ -256,17 +256,34 @@ TEST("givemon respects perfectIVCount")
     }
 }
 
+TEST("givemon respects FORM_CHANGE_ITEM_HOLD")
+{
+    ZeroPlayerPartyMons();
+
+    RUN_OVERWORLD_SCRIPT(
+        givemon SPECIES_ARCEUS_NORMAL, 100, item=ITEM_ZAP_PLATE;
+        givemon SPECIES_ARCEUS_GRASS, 100, item=ITEM_ZAP_PLATE;
+        givemon SPECIES_ARCEUS_ELECTRIC, 100, item=ITEM_ZAP_PLATE;
+        givemon SPECIES_GIRATINA_ORIGIN, 100, item=ITEM_POTION;
+    );
+
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_ARCEUS_ELECTRIC);
+    EXPECT_EQ(GetMonData(&gPlayerParty[1], MON_DATA_SPECIES), SPECIES_ARCEUS_ELECTRIC);
+    EXPECT_EQ(GetMonData(&gPlayerParty[2], MON_DATA_SPECIES), SPECIES_ARCEUS_ELECTRIC);
+    EXPECT_EQ(GetMonData(&gPlayerParty[3], MON_DATA_SPECIES), SPECIES_GIRATINA_ALTERED);
+}
+
 TEST("givemon [moves]")
 {
     ZeroPlayerPartyMons();
 
     RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_WOBBUFFET, 100, move1=MOVE_TACKLE, move2=MOVE_SPLASH, move3=MOVE_NONE, move4=MOVE_NONE;
+        givemon SPECIES_WOBBUFFET, 100, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_NONE, move4=MOVE_NONE;
     );
 
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_LEVEL), 100);
-    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE1), MOVE_TACKLE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE1), MOVE_SCRATCH);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE2), MOVE_SPLASH);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE3), MOVE_NONE);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE4), MOVE_NONE);
@@ -277,7 +294,7 @@ TEST("givemon [all]")
     ZeroPlayerPartyMons();
 
     RUN_OVERWORLD_SCRIPT(
-        givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=ITEM_MASTER_BALL, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_TACKLE, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, isShiny=TRUE, gmaxFactor=TRUE, teraType=TYPE_FIRE, dmaxLevel=7;
+        givemon SPECIES_WOBBUFFET, 100, item=ITEM_LEFTOVERS, ball=ITEM_MASTER_BALL, nature=NATURE_BOLD, abilityNum=2, gender=MON_MALE, hpEv=1, atkEv=2, defEv=3, speedEv=4, spAtkEv=5, spDefEv=6, hpIv=7, atkIv=8, defIv=9, speedIv=10, spAtkIv=11, spDefIv=12, move1=MOVE_SCRATCH, move2=MOVE_SPLASH, move3=MOVE_CELEBRATE, move4=MOVE_EXPLOSION, isShiny=TRUE, gmaxFactor=TRUE, teraType=TYPE_FIRE, dmaxLevel=7;
     );
 
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
@@ -299,7 +316,7 @@ TEST("givemon [all]")
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPEED_IV), 10);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_IV), 11);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPDEF_IV), 12);
-    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE1), MOVE_TACKLE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE1), MOVE_SCRATCH);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE2), MOVE_SPLASH);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE3), MOVE_CELEBRATE);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE4), MOVE_EXPLOSION);
@@ -332,7 +349,7 @@ TEST("givemon [vars]")
     VarSet(VAR_TEMP_2, 10);
     VarSet(VAR_TEMP_3, 11);
     VarSet(VAR_TEMP_4, 12);
-    VarSet(VAR_TEMP_5, MOVE_TACKLE);
+    VarSet(VAR_TEMP_5, MOVE_SCRATCH);
     VarSet(VAR_TEMP_6, MOVE_SPLASH);
     VarSet(VAR_TEMP_7, MOVE_CELEBRATE);
     VarSet(VAR_TEMP_8, MOVE_EXPLOSION);
@@ -364,7 +381,7 @@ TEST("givemon [vars]")
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPEED_IV), 10);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPATK_IV), 11);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPDEF_IV), 12);
-    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE1), MOVE_TACKLE);
+    EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE1), MOVE_SCRATCH);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE2), MOVE_SPLASH);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE3), MOVE_CELEBRATE);
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_MOVE4), MOVE_EXPLOSION);

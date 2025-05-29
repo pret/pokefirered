@@ -467,6 +467,8 @@ void AnimDracoMeteorRock(struct Sprite *sprite);
 void CoreEnforcerLoadBeamTarget(struct Sprite *sprite);
 void SpriteCB_RandomCentredHits(struct Sprite *sprite);
 void InitSpritePosToAnimTargetsCentre(struct Sprite *sprite, bool32 respectMonPicOffsets);
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_PrimalSymbol[];
+extern const union AffineAnimCmd *const gSpriteAffineAnimTable_MegaSymbol[];
 
 //
 void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible);

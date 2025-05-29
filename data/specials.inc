@@ -74,7 +74,7 @@ gSpecials::
 	def_special PlayTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
 	def_special IsTrainerReadyForRematch
-	def_special StartRematchBattle
+	def_special BattleSetup_StartRematchBattle
 	def_special ShowPokemonStorageSystemPC
 	def_special HasEnoughMonsForDoubleBattle
 	def_special NullFieldSpecial  @ Hoenn TV specials
@@ -327,7 +327,7 @@ gSpecials::
 	def_special SetIcefallCaveCrackedIceMetatiles
 	def_special ShakeScreen
 	def_special StartGroudonKyogreBattle
-	def_special StartLegendaryBattle
+	def_special BattleSetup_StartLegendaryBattle
 	def_special StartRegiBattle
 	def_special SetUpTrainerMovement
 	def_special NullFieldSpecial
@@ -338,7 +338,7 @@ gSpecials::
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special SetEReaderTrainerGfxId
-	def_special StartSouthernIslandBattle
+	def_special BattleSetup_StartLatiBattle
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial

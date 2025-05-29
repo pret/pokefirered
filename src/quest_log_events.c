@@ -1063,12 +1063,12 @@ static const u16 *LoadEvent_UsedItem(const u16 *eventData)
 {
     const u16 *record = LoadEvent(QL_EVENT_USED_ITEM, eventData);
 
-    switch (ItemId_GetPocket(rItemId))
+    switch (GetItemPocket(rItemId))
     {
     case POCKET_ITEMS:
     case POCKET_POKE_BALLS:
     case POCKET_BERRIES:
-        StringCopy(gStringVar1, ItemId_GetName(rItemId));
+        StringCopy(gStringVar1, GetItemName(rItemId));
         if (rItemId == ITEM_ESCAPE_ROPE)
         {
             GetMapNameGeneric(gStringVar2, (u8)rItemParam);
@@ -1085,7 +1085,7 @@ static const u16 *LoadEvent_UsedItem(const u16 *eventData)
         }
         break;
     case POCKET_KEY_ITEMS:
-        StringCopy(gStringVar1, ItemId_GetName(rItemId));
+        StringCopy(gStringVar1, GetItemName(rItemId));
         StringExpandPlaceholders(gStringVar4, gText_QuestLog_UsedTheKeyItem);
         break;
     case POCKET_TM_HM:
@@ -1131,7 +1131,7 @@ static const u16 *LoadEvent_GaveHeldItemFromPartyMenu(const u16 * eventData)
 {
     const u16 *record = LoadEvent(QL_EVENT_GAVE_HELD_ITEM, eventData);
     QuestLog_GetSpeciesName(rSpecies, gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetName(rItemId));
+    StringCopy(gStringVar2, GetItemName(rItemId));
     StringExpandPlaceholders(gStringVar4, gText_QuestLog_GaveMonHeldItem);
     return record + 2;
 }
@@ -1145,7 +1145,7 @@ static const u16 *LoadEvent_GaveHeldItemFromBagMenu(const u16 *eventData)
 {
     const u16 *record = LoadEvent(QL_EVENT_GAVE_HELD_ITEM_BAG, eventData);
     QuestLog_GetSpeciesName(rSpecies, gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetName(rItemId));
+    StringCopy(gStringVar2, GetItemName(rItemId));
     StringExpandPlaceholders(gStringVar4, gText_QuestLog_GaveMonHeldItem2);
     return record + 2;
 }
@@ -1160,7 +1160,7 @@ static const u16 *LoadEvent_GaveHeldItemFromPC(const u16 *eventData)
     const u16 *record = LoadEvent(QL_EVENT_GAVE_HELD_ITEM_PC, eventData);
 
     QuestLog_GetSpeciesName(rSpecies, gStringVar2, 0);
-    StringCopy(gStringVar1, ItemId_GetName(rItemId));
+    StringCopy(gStringVar1, GetItemName(rItemId));
     StringExpandPlaceholders(gStringVar4, gText_QuestLog_GaveMonHeldItemFromPC);
     return record + 2;
 }
@@ -1175,7 +1175,7 @@ static const u16 *LoadEvent_TookHeldItem(const u16 *eventData)
     const u16 *record = LoadEvent(QL_EVENT_TOOK_HELD_ITEM, eventData);
 
     QuestLog_GetSpeciesName(rSpecies, gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetName(rItemId));
+    StringCopy(gStringVar2, GetItemName(rItemId));
     StringExpandPlaceholders(gStringVar4, gText_QuestLog_TookHeldItemFromMon);
     return record + 2;
 }
@@ -1209,8 +1209,8 @@ static const u16 *LoadEvent_SwappedHeldItem(const u16 *eventData)
 {
     const u16 *record = LoadEvent(QL_EVENT_SWAPPED_HELD_ITEM, eventData);
     QuestLog_GetSpeciesName(rSpecies, gStringVar1, 0);
-    StringCopy(gStringVar2, ItemId_GetName(rTakenItemId));
-    StringCopy(gStringVar3, ItemId_GetName(rGivenItemId));
+    StringCopy(gStringVar2, GetItemName(rTakenItemId));
+    StringCopy(gStringVar3, GetItemName(rGivenItemId));
     StringExpandPlaceholders(gStringVar4, gText_QuestLog_SwappedHeldItemsOnMon);
     return record + 3;
 }
@@ -1224,8 +1224,8 @@ static const u16 *LoadEvent_SwappedHeldItemFromPC(const u16 *eventData)
 {
     const u16 *record = LoadEvent(QL_EVENT_SWAPPED_HELD_ITEM_PC, eventData);
     QuestLog_GetSpeciesName(rSpecies, gStringVar2, 0);
-    StringCopy(gStringVar3, ItemId_GetName(rTakenItemId));
-    StringCopy(gStringVar1, ItemId_GetName(rGivenItemId));
+    StringCopy(gStringVar3, GetItemName(rTakenItemId));
+    StringCopy(gStringVar1, GetItemName(rGivenItemId));
     StringExpandPlaceholders(gStringVar4, gText_QuestLog_SwappedHeldItemFromPC);
     return record + 3;
 }
@@ -2085,7 +2085,7 @@ static const u16 *LoadEvent_BoughtItem(const u16 *eventData)
     DynamicPlaceholderTextUtil_Reset();
     GetMapNameGeneric(gStringVar1, r7[0]);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, ItemId_GetName(r4[0]));
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, GetItemName(r4[0]));
     if (r4[1] < 2)
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_BoughtItem);
     else
@@ -2121,7 +2121,7 @@ static const u16 *LoadEvent_SoldItem(const u16 *eventData)
     if (r7[1] == 0) {
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gSaveBlock2Ptr->playerName);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, gStringVar1);
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, ItemId_GetName(r5[0]));
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, GetItemName(r5[0]));
         if (r5[1] == 1)
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, gText_QuestLog_JustOne);
         else
@@ -2136,7 +2136,7 @@ static const u16 *LoadEvent_SoldItem(const u16 *eventData)
     else
     {
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, ItemId_GetName(r5[0]));
+        DynamicPlaceholderTextUtil_SetPlaceholderPtr(1, GetItemName(r5[0]));
         ConvertIntToDecimalStringN(gStringVar2, r6, STR_CONV_MODE_LEFT_ALIGN, 6);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gStringVar2);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_QuestLog_SoldItemsIncludingItem);
@@ -2159,7 +2159,7 @@ static const u16 *LoadEvent_ObtainedStoryItem(const u16 *eventData)
     const u16 *r4 = LoadEvent(QL_EVENT_OBTAINED_STORY_ITEM, eventData);
     const u8 *r5 = (const u8 *)r4 + 2;
     GetMapNameGeneric(gStringVar1, r5[0]);
-    StringCopy(gStringVar2, ItemId_GetName(r4[0]));
+    StringCopy(gStringVar2, GetItemName(r4[0]));
     StringExpandPlaceholders(gStringVar4, gText_QuestLog_ObtainedItemInLocation);
     return (const u16 *)(r5 + 2);
 }

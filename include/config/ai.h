@@ -22,6 +22,7 @@
 #define SHOULD_SWITCH_CHOICE_LOCKED_PERCENTAGE                      100 // Only if locked into status move
 #define SHOULD_SWITCH_ATTACKING_STAT_MINUS_TWO_PERCENTAGE           50
 #define SHOULD_SWITCH_ATTACKING_STAT_MINUS_THREE_PLUS_PERCENTAGE    100
+#define SHOULD_SWITCH_ALL_SCORES_BAD_PERCENTAGE                     100
 
 // AI smart switching chances for bad statuses
 #define SHOULD_SWITCH_PERISH_SONG_PERCENTAGE                    100
@@ -46,6 +47,8 @@
 
 // AI switchin considerations
 #define ALL_MOVES_BAD_STATUS_MOVES_BAD                          FALSE // If the AI has no moves that affect the target, ShouldSwitchIfAllMovesBad can prompt a switch. Enabling this config will ignore status moves that can affect the target when making this decision.
+#define AI_BAD_SCORE_THRESHOLD                                  90 // Move scores beneath this threshold are considered "bad" when deciding switching
+#define AI_GOOD_SCORE_THRESHOLD                                 100 // Move scores above this threshold are considered "good" when deciding switching
 
 // AI held item-based move scoring
 #define LOW_ACCURACY_THRESHOLD                                  75 // Moves with accuracy equal OR below this value are considered low accuracy 
@@ -59,5 +62,16 @@
 
 // AI prediction chances
 #define PREDICT_SWITCH_CHANCE                                   50
+#define PREDICT_MOVE_CHANCE                                     100
+
+// AI PP Stall detection chance per roll
+#define PP_STALL_DISREGARD_MOVE_PERCENTAGE                      50
+// Score reduction if any roll for PP stall detection passes
+#define PP_STALL_SCORE_REDUCTION                                20
+
+// AI's acceptable number of hits to KO the partner via friendly fire in a double battle.
+#define FRIENDLY_FIRE_RISKY_THRESHOLD           2
+#define FRIENDLY_FIRE_NORMAL_THRESHOLD          3
+#define FRIENDLY_FIRE_CONSERVATIVE_THRESHOLD    4
 
 #endif // GUARD_CONFIG_AI_H

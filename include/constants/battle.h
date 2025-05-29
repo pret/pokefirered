@@ -23,12 +23,23 @@
  *   +---------------------------+
  */
 
-#define MAX_BATTLERS_COUNT  4
+enum BattlerPosition
+{
+    B_POSITION_PLAYER_LEFT,
+    B_POSITION_OPPONENT_LEFT,
+    B_POSITION_PLAYER_RIGHT,
+    B_POSITION_OPPONENT_RIGHT,
+    MAX_POSITION_COUNT,
+};
 
-#define B_POSITION_PLAYER_LEFT        0
-#define B_POSITION_OPPONENT_LEFT      1
-#define B_POSITION_PLAYER_RIGHT       2
-#define B_POSITION_OPPONENT_RIGHT     3
+enum BattlerId
+{
+    B_BATTLER_0,
+    B_BATTLER_1,
+    B_BATTLER_2,
+    B_BATTLER_3,
+    MAX_BATTLERS_COUNT,
+};
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
 #define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
@@ -213,7 +224,7 @@
 #define HITMARKER_NO_PPDEDUCT           (1 << 11)
 #define HITMARKER_UNUSED_2              (1 << 12)
 #define HITMARKER_STATUS_ABILITY_EFFECT (1 << 13)
-#define HITMARKER_SYNCHRONISE_EFFECT    (1 << 14)
+#define HITMARKER_SYNCHRONIZE_EFFECT    (1 << 14)
 #define HITMARKER_RUN                   (1 << 15)
 #define HITMARKER_IGNORE_DISGUISE       (1 << 16)
 #define HITMARKER_DISABLE_ANIMATION     (1 << 17)   // disable animations during battle scripts, e.g. for Bug Bite
@@ -381,10 +392,8 @@ enum MoveEffects
     MOVE_EFFECT_EVS_MINUS_2,
     MOVE_EFFECT_SCALE_SHOT,
     MOVE_EFFECT_THRASH,
-    MOVE_EFFECT_KNOCK_OFF,
     MOVE_EFFECT_DEF_SPDEF_DOWN,
     MOVE_EFFECT_CLEAR_SMOG,
-    MOVE_EFFECT_SMACK_DOWN,
     MOVE_EFFECT_FLAME_BURST,
     MOVE_EFFECT_FEINT,
     MOVE_EFFECT_V_CREATE,
@@ -396,7 +405,6 @@ enum MoveEffects
     MOVE_EFFECT_RECOIL_HP_25,
     MOVE_EFFECT_TRAP_BOTH,
     MOVE_EFFECT_ROUND,
-    MOVE_EFFECT_STOCKPILE_WORE_OFF,
     MOVE_EFFECT_DIRE_CLAW,
     MOVE_EFFECT_STEALTH_ROCK,
     MOVE_EFFECT_SPIKES,
@@ -473,7 +481,7 @@ enum MoveEffects
 #define MOVE_EFFECT_CERTAIN             0x4000
 #define MOVE_EFFECT_CONTINUE            0x8000
 
-// Battle terrain defines for gBattleEnvironment.
+// Battle environment defines for gBattleEnvironment.
 #define BATTLE_ENVIRONMENT_GRASS            0
 #define BATTLE_ENVIRONMENT_LONG_GRASS       1
 #define BATTLE_ENVIRONMENT_SAND             2
@@ -484,7 +492,7 @@ enum MoveEffects
 #define BATTLE_ENVIRONMENT_CAVE             7
 #define BATTLE_ENVIRONMENT_BUILDING         8
 #define BATTLE_ENVIRONMENT_PLAIN            9
-// New battle terrains are used for Secret Power but not fully implemented.
+// New battle environments are used for Secret Power but not fully implemented.
 #define BATTLE_ENVIRONMENT_SOARING          10
 #define BATTLE_ENVIRONMENT_SKY_PILLAR       11
 #define BATTLE_ENVIRONMENT_BURIAL_GROUND    12
@@ -620,6 +628,18 @@ enum StartingStatus
     STARTING_STATUS_SEA_OF_FIRE_OPPONENT,
     STARTING_STATUS_SWAMP_PLAYER,
     STARTING_STATUS_SWAMP_OPPONENT,
+};
+
+enum SlideMsgStates
+{
+    PRINT_SLIDE_MESSAGE,
+    RESTORE_BATTLER_SLIDE_CONTROL,
+};
+
+enum MonState
+{
+    MON_IN_BATTLE,
+    MON_OUTSIDE_BATTLE,
 };
 
 #endif // GUARD_CONSTANTS_BATTLE_H

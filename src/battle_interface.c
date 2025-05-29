@@ -469,18 +469,16 @@ enum
 
 // This function is here to cover a specific case - one player's mon in a 2 vs 1 double battle. In this scenario - display singles layout.
 // The same goes for a 2 vs 1 where opponent has only one pokemon.
-u32 WhichBattleCoords(u32 battlerId) // 0 - singles, 1 - doubles
+enum BattleCoordTypes GetBattlerCoordsIndex(u32 battler)
 {
-    if (GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT
-        && gPlayerPartyCount == 1
-        && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-        return 0;
-    else if (GetBattlerPosition(battlerId) == B_POSITION_OPPONENT_LEFT
-             && gEnemyPartyCount == 1
-             && !(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS))
-        return 0;
+    if (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT && gPlayerPartyCount == 1 && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        return BATTLE_COORDS_SINGLES;
+    else if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_LEFT && gEnemyPartyCount == 1 && !(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS))
+        return BATTLE_COORDS_SINGLES;
+    else if (IsDoubleBattle())
+        return BATTLE_COORDS_DOUBLES;
     else
-        return IsDoubleBattle();
+        return BATTLE_COORDS_SINGLES;
 }
 
 u8 CreateBattlerHealthboxSprites(u8 battlerId)
@@ -491,7 +489,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     u8 healthbarSpriteId;
     struct Sprite *healthbarSprite;
 
-    if (WhichBattleCoords(battlerId) == 0)
+    if (GetBattlerCoordsIndex(battlerId) == 0)
     {
         if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         {
@@ -702,7 +700,7 @@ void GetBattlerHealthboxCoords(u8 battler, s16 *x, s16 *y)
 {
     *x = 0, *y = 0;
 
-    if (!WhichBattleCoords(battler))
+    if (!GetBattlerCoordsIndex(battler))
     {
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
             *x = 44, *y = 30;
@@ -770,7 +768,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
         objVram = (void *)(OBJ_VRAM0);
-        if (!WhichBattleCoords(battler))
+        if (!GetBattlerCoordsIndex(battler))
             objVram += spriteTileNum + 0x820;
         else
             objVram += spriteTileNum + 0x420;
@@ -789,7 +787,7 @@ void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp
     u32 windowId, spriteTileNum;
     u8 *windowTileData;
 
-    if (GetBattlerSide(gSprites[healthboxSpriteId].sBattlerId) == B_SIDE_PLAYER && !WhichBattleCoords(gSprites[healthboxSpriteId].sBattlerId))
+    if (GetBattlerSide(gSprites[healthboxSpriteId].sBattlerId) == B_SIDE_PLAYER && !GetBattlerCoordsIndex(gSprites[healthboxSpriteId].sBattlerId))
     {
         // Only in the Japanese release can HP be displayed as text outside of double battles
         u8 text[8];
@@ -820,7 +818,7 @@ void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp
 
         u8 text[20] = __("{COLOR 01}{HIGHLIGHT 02}");
         battler = gSprites[healthboxSpriteId].sBattlerId;
-        if (WhichBattleCoords(battler) == TRUE || GetBattlerSide(battler) == B_SIDE_OPPONENT)
+        if (GetBattlerCoordsIndex(battler) == TRUE || GetBattlerSide(battler) == B_SIDE_OPPONENT)
         {
             if (maxOrCurrent != HP_CURRENT)
                 UpdateHpTextInHealthboxInDoubles(healthboxSpriteId, maxOrCurrent, currHp, maxHp);
@@ -1003,7 +1001,7 @@ void SwapHpBarsWithHpText(void)
     {
         if (gSprites[gHealthboxSpriteIds[i]].callback == SpriteCallbackDummy
             && GetBattlerSide(i) != B_SIDE_OPPONENT
-            && (WhichBattleCoords(i) || GetBattlerSide(i) != B_SIDE_PLAYER))
+            && (GetBattlerCoordsIndex(i) || GetBattlerSide(i) != B_SIDE_PLAYER))
         {
             bool8 noBars;
 
@@ -1011,7 +1009,7 @@ void SwapHpBarsWithHpText(void)
             noBars = gBattleSpritesDataPtr->battlerData[i].hpNumbersNoBars;
             if (GetBattlerSide(i) == B_SIDE_PLAYER)
             {
-                if (!WhichBattleCoords(i))
+                if (!GetBattlerCoordsIndex(i))
                     continue;
                 if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
                     continue;
@@ -1110,7 +1108,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         {
             isOpponent = TRUE;
 
-            if (!isSwitchingMons || !WhichBattleCoords(battlerId))
+            if (!isSwitchingMons || !GetBattlerCoordsIndex(battlerId))
                 x = 104, y = 40;
             else
                 x = 104, y = 16;
@@ -1546,7 +1544,7 @@ void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     {
         TextIntoHealthboxObject((void *)(OBJ_VRAM0 + 0x40 + spriteTileNum), windowTileData, 6);
         ptr = (void *)(OBJ_VRAM0);
-        if (!WhichBattleCoords(gSprites[healthboxSpriteId].sBattlerId))
+        if (!GetBattlerCoordsIndex(gSprites[healthboxSpriteId].sBattlerId))
             ptr += spriteTileNum + 0x800;
         else
             ptr += spriteTileNum + 0x400;
@@ -1616,7 +1614,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
         status = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_STATUS);
-        if (!WhichBattleCoords(battlerId))
+        if (!GetBattlerCoordsIndex(battlerId))
             tileNumAdder = 0x1A;
         else
             tileNumAdder = 0x12;
@@ -1676,7 +1674,7 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     FillPalette(sStatusIconColors[statusPalId], pltAdder + OBJ_PLTT_OFFSET, PLTT_SIZEOF(1));
     CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_OFFSET + pltAdder], (u16 *)OBJ_PLTT + pltAdder, PLTT_SIZEOF(1));
     CpuCopy32(statusGfxPtr, (void *)(OBJ_VRAM0 + (gSprites[healthboxSpriteId].oam.tileNum + tileNumAdder) * TILE_SIZE_4BPP), 3 * TILE_SIZE_4BPP);
-    if (WhichBattleCoords(battlerId) == TRUE || GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
+    if (GetBattlerCoordsIndex(battlerId) == TRUE || GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
     {
         if (!gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars)
         {
@@ -1788,7 +1786,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
-        u8 isDoubles = WhichBattleCoords(battlerId);
+        u8 isDoubles = GetBattlerCoordsIndex(battlerId);
 
         if (elementId == HEALTHBOX_LEVEL || elementId == HEALTHBOX_ALL)
             UpdateLvlInHealthbox(healthboxSpriteId, GetMonData(mon, MON_DATA_LEVEL));

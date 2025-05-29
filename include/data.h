@@ -48,9 +48,9 @@ struct TrainerBacksprite
     const union AnimCmd *const *const animation;
 };
 
-#define MON_COORDS_SIZE(width, height)(DIV_ROUND_UP(width, 8) << 4 | DIV_ROUND_UP(height, 8))
-#define GET_MON_COORDS_WIDTH(size)((size >> 4) * 8)
-#define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
+#define MON_COORDS_SIZE(width, height) (DIV_ROUND_UP(width, 8) << 4 | DIV_ROUND_UP(height, 8))
+#define GET_MON_COORDS_WIDTH(size) ((size >> 4) * 8)
+#define GET_MON_COORDS_HEIGHT(size) ((size & 0xF) * 8)
 #define TRAINER_PARTY_IVS(hp, atk, def, speed, spatk, spdef) (hp | (atk << 5) | (def << 10) | (speed << 15) | (spatk << 20) | (spdef << 25))
 #define TRAINER_PARTY_EVS(hp, atk, def, speed, spatk, spdef) ((const u8[6]){hp,atk,def,spatk,spdef,speed})
 
@@ -82,17 +82,22 @@ struct TrainerMon
 
 #define TRAINER_PARTY(partyArray) partyArray, .partySize = ARRAY_COUNT(partyArray)
 
+enum TrainerBattleType 
+{
+    TRAINER_BATTLE_TYPE_SINGLES,
+    TRAINER_BATTLE_TYPE_DOUBLES,
+};
+
 struct Trainer
 {
-    /*0x00*/ u32 aiFlags;
+    /*0x00*/ u64 aiFlags;
     /*0x04*/ const struct TrainerMon *party;
     /*0x08*/ u16 items[MAX_TRAINER_ITEMS];
     /*0x10*/ u8 trainerClass;
     /*0x11*/ u8 encounterMusic_gender; // last bit is gender
     /*0x12*/ u8 trainerPic;
     /*0x13*/ u8 trainerName[TRAINER_NAME_LENGTH + 1];
-    /*0x1E*/ bool8 doubleBattle:1;
-             bool8 padding:1;
+    /*0x1E*/ u8 battleType:2;
              u8 startingStatus:6;    // this trainer starts a battle with a given status. see include/constants/battle.h for values
     /*0x1F*/ u8 mugshotColor;
     /*0x20*/ u8 partySize;
@@ -235,6 +240,10 @@ static inline const u8 GetTrainerPicFromId(u16 trainerId)
 {
     u32 sanitizedTrainerId = SanitizeTrainerId(trainerId);
     enum DifficultyLevel difficulty = GetTrainerDifficultyLevel(sanitizedTrainerId);
+    enum DifficultyLevel partnerDifficulty = GetBattlePartnerDifficultyLevel(trainerId);
+
+    if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
+        return gBattlePartners[partnerDifficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerPic;
 
     return gTrainers[difficulty][sanitizedTrainerId].trainerPic;
 }
@@ -244,12 +253,12 @@ static inline const u8 GetTrainerStartingStatusFromId(u16 trainerId)
     return gTrainers[GetCurrentDifficultyLevel()][SanitizeTrainerId(trainerId)].startingStatus;
 }
 
-static inline const bool32 IsTrainerDoubleBattle(u16 trainerId)
+static inline const enum TrainerBattleType GetTrainerBattleType(u16 trainerId)
 {
     u32 sanitizedTrainerId = SanitizeTrainerId(trainerId);
     enum DifficultyLevel difficulty = GetTrainerDifficultyLevel(sanitizedTrainerId);
 
-    return gTrainers[difficulty][sanitizedTrainerId].doubleBattle;
+    return gTrainers[difficulty][sanitizedTrainerId].battleType;
 }
 
 static inline const u8 GetTrainerPartySizeFromId(u16 trainerId)
@@ -286,7 +295,7 @@ static inline const struct TrainerMon *GetTrainerPartyFromId(u16 trainerId)
     return gTrainers[difficulty][sanitizedTrainerId].party;
 }
 
-static inline const bool32 GetTrainerAIFlagsFromId(u16 trainerId)
+static inline const u64 GetTrainerAIFlagsFromId(u16 trainerId)
 {
     u32 sanitizedTrainerId = SanitizeTrainerId(trainerId);
     enum DifficultyLevel difficulty = GetTrainerDifficultyLevel(sanitizedTrainerId);

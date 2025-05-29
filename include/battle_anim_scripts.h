@@ -1003,6 +1003,8 @@ extern const u8 gBattleAnimGeneral_Fog[];
 extern const u8 gBattleAnimGeneral_TeraCharge[];
 extern const u8 gBattleAnimGeneral_TeraActivate[];
 extern const u8 gBattleAnimGeneral_SimpleHeal[];
+extern const u8 gBattleAnimGeneral_PowerConstruct[];
+// pokefirered
 extern const u8 gBattleAnimGeneral_MonScared[];
 extern const u8 gBattleAnimGeneral_GhostGetOut[];
 extern const u8 gBattleAnimGeneral_SilphScoped[];

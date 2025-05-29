@@ -393,7 +393,7 @@ void PSA_PrintMessage(u8 messageId)
     switch (messageId)
     {
     case 0: // Item was used on Mon
-        str = StringCopy(scene->textBuf, ItemId_GetName(itemId));
+        str = StringCopy(scene->textBuf, GetItemName(itemId));
         str = StringCopy(str, gText_WasUsedOn);
         GetMonData(pokemon, MON_DATA_NICKNAME, str);
         StringAppend(scene->textBuf, gText_Period);

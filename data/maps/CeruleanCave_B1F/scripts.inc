@@ -36,7 +36,7 @@ CeruleanCave_B1F_EventScript_Mewtwo::
 	waitbuttonpress
 	setwildbattle SPECIES_MEWTWO, 70
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special StartLegendaryBattle
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, GetBattleOutcome

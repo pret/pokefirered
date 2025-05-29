@@ -65,7 +65,7 @@ EventScript_TryDoRematchBattle::
 	waitmessage
 	waitbuttonpress
 	goto_if_questlog EventScript_EndQuestLogRematch
-	special StartRematchBattle
+	special BattleSetup_StartRematchBattle
 	waitstate
 	releaseall
 	end
@@ -84,7 +84,7 @@ EventScript_TryDoDoubleRematchBattle::
 	waitmessage
 	waitbuttonpress
 	goto_if_questlog EventScript_EndQuestLogRematch
-	special StartRematchBattle
+	special BattleSetup_StartRematchBattle
 	waitstate
 	releaseall
 	end

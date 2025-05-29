@@ -81,7 +81,7 @@ SINGLE_BATTLE_TEST("Bestow fails if the user's held item is a Mega Stone")
 SINGLE_BATTLE_TEST("Bestow fails if the user's held item is a Z-Crystal")
 {
     GIVEN {
-        ASSUME(ItemId_GetHoldEffect(ITEM_FIGHTINIUM_Z) == HOLD_EFFECT_Z_CRYSTAL);
+        ASSUME(GetItemHoldEffect(ITEM_FIGHTINIUM_Z) == HOLD_EFFECT_Z_CRYSTAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FIGHTINIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

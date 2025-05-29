@@ -605,7 +605,7 @@ bool8 TryStandardWildLandEncounter(u16 headerId, u32 currMetatileAttrs, u16 prev
             return FALSE;
         }
 
-        StartRoamerBattle();
+        BattleSetup_StartRoamerBattle();
         return TRUE;
     }
 
@@ -617,11 +617,11 @@ bool8 TryStandardWildLandEncounter(u16 headerId, u32 currMetatileAttrs, u16 prev
             struct Pokemon mon1 = gEnemyParty[0];
             TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[season][timeOfDay].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_KEEN_EYE);
             gEnemyParty[1] = mon1;
-            StartDoubleWildBattle();
+            BattleSetup_StartDoubleWildBattle();
         }
         else
         {
-            StartWildBattle();
+            BattleSetup_StartWildBattle();
         }
         return TRUE;
     }
@@ -653,7 +653,7 @@ bool8 TryStandardWildSurfEncounter(u16 headerId, u32 currMetatileAttrs, u16 prev
             return FALSE;
         }
 
-        StartRoamerBattle();
+        BattleSetup_StartRoamerBattle();
         return TRUE;
     }
     // try a regular surfing encounter
@@ -665,11 +665,11 @@ bool8 TryStandardWildSurfEncounter(u16 headerId, u32 currMetatileAttrs, u16 prev
             struct Pokemon mon1 = gEnemyParty[0];
             TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[season][timeOfDay].waterMonsInfo, WILD_AREA_WATER, WILD_CHECK_KEEN_EYE);
             gEnemyParty[1] = mon1;
-            StartDoubleWildBattle();
+            BattleSetup_StartDoubleWildBattle();
         }
         else
         {
-            StartWildBattle();
+            BattleSetup_StartWildBattle();
         }
         return TRUE;
     }
@@ -712,7 +712,7 @@ void RockSmashWildEncounter(void)
         gSpecialVar_Result = FALSE;
     else if (TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[season][timeOfDay].rockSmashMonsInfo, WILD_AREA_ROCKS, WILD_CHECK_REPEL) == TRUE)
     {
-        StartWildBattle();
+        BattleSetup_StartWildBattle();
         gSpecialVar_Result = TRUE;
     }
     else
@@ -736,7 +736,7 @@ bool8 SweetScentWildEncounter(void)
     {
         if (TryStartRoamerEncounter() == TRUE)
         {
-            StartRoamerBattle();
+            BattleSetup_StartRoamerBattle();
             return TRUE;
         }
         GetSeasonAndTimeOfDayForEncounters(headerId, WILD_AREA_LAND, &season, &timeOfDay);
@@ -746,14 +746,14 @@ bool8 SweetScentWildEncounter(void)
 
         TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[season][timeOfDay].landMonsInfo, WILD_AREA_LAND, 0);
 
-        StartWildBattle();
+        BattleSetup_StartWildBattle();
         return TRUE;
     }
     else if (MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_WATER)
     {
         if (TryStartRoamerEncounter() == TRUE)
         {
-            StartRoamerBattle();
+            BattleSetup_StartRoamerBattle();
             return TRUE;
         }
 
@@ -762,7 +762,7 @@ bool8 SweetScentWildEncounter(void)
             return FALSE;
 
         TryGenerateWildMon(gWildMonHeaders[headerId].encounterTypes[season][timeOfDay].waterMonsInfo, WILD_AREA_WATER, 0);
-        StartWildBattle();
+        BattleSetup_StartWildBattle();
         return TRUE;
     }
 
@@ -808,7 +808,7 @@ void FishingWildEncounter(u8 rod)
     gIsFishingEncounter = TRUE;
     GenerateFishingEncounter(gWildMonHeaders[headerId].encounterTypes[season][timeOfDay].fishingMonsInfo, rod);
     IncrementGameStat(GAME_STAT_FISHING_CAPTURES);
-    StartWildBattle();
+    BattleSetup_StartWildBattle();
 }
 
 u16 GetLocalWildMon(bool8 *isWaterMon)

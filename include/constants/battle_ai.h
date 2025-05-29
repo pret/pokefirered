@@ -30,19 +30,25 @@
 #define AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE  (1 << 22)  // AI adds score to highest damage move regardless of accuracy or secondary effect
 #define AI_FLAG_PREDICT_SWITCH              (1 << 23)  // AI will predict the player's switches and switchins based on how it would handle the situation. Recommend using AI_FLAG_OMNISCIENT
 #define AI_FLAG_PREDICT_INCOMING_MON        (1 << 24)  // AI will score against the predicting incoming mon if it predicts the player to switch. Requires AI_FLAG_PREDICT_SWITCH
+#define AI_FLAG_PP_STALL_PREVENTION         (1 << 25)  // AI keeps track of the player's switches where the incoming mon is immune to the chosen move
+#define AI_FLAG_PREDICT_MOVE                (1 << 26)  // AI will predict the player's move based on what move it would use in the same situation. Recommend using AI_FLAG_OMNISCIENT
 
-#define AI_FLAG_COUNT                       25
+// Flags at and after 32 need different formatting, as in
+// #define AI_FLAG_PLACEHOLDER      ((u64)1 << 32)
+
+
+#define AI_FLAG_COUNT                       27
 
 // The following options are enough to have a basic/smart trainer. Any other addtion could make the trainer worse/better depending on the flag
 #define AI_FLAG_BASIC_TRAINER         (AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY)
 #define AI_FLAG_SMART_TRAINER         (AI_FLAG_BASIC_TRAINER | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_WEIGH_ABILITY_PREDICTION)
-#define AI_FLAG_PREDICTION            (AI_FLAG_PREDICT_SWITCH | AI_FLAG_PREDICT_INCOMING_MON)
+#define AI_FLAG_PREDICTION            (AI_FLAG_PREDICT_SWITCH | AI_FLAG_PREDICT_INCOMING_MON | AI_FLAG_PREDICT_MOVE)
 
 // 'other' ai logic flags
-#define AI_FLAG_DYNAMIC_FUNC          (1 << 28)  // Create custom AI functions for specific battles via "setdynamicaifunc" cmd
-#define AI_FLAG_ROAMING               (1 << 29)
-#define AI_FLAG_SAFARI                (1 << 30)
-#define AI_FLAG_FIRST_BATTLE          (1 << 31)
+#define AI_FLAG_DYNAMIC_FUNC          ((u64)1 << 60)  // Create custom AI functions for specific battles via "setdynamicaifunc" cmd
+#define AI_FLAG_ROAMING               ((u64)1 << 61)
+#define AI_FLAG_SAFARI                ((u64)1 << 62)
+#define AI_FLAG_FIRST_BATTLE          ((u64)1 << 63)
 
 #define AI_SCORE_DEFAULT 100 // Default score for all AI moves.
 

@@ -152,7 +152,7 @@ u32 GetUsableZMove(u32 battler, u32 move)
         if (zMove != MOVE_NONE)
             return zMove;  // Signature z move exists
 
-        if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && GetMoveType(move) == ItemId_GetSecondaryId(item))
+        if (move != MOVE_NONE && zMove != MOVE_Z_STATUS && GetMoveType(move) == GetItemSecondaryId(item))
             return GetTypeBasedZMove(move);
     }
 
@@ -196,7 +196,7 @@ bool32 IsViableZMove(u32 battler, u32 move)
         if (zMove != MOVE_NONE)
             return TRUE;
 
-        if (move != MOVE_NONE && GetMoveType(move) == ItemId_GetSecondaryId(item))
+        if (move != MOVE_NONE && GetMoveType(move) == GetItemSecondaryId(item))
             return TRUE;
     }
 

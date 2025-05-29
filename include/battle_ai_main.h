@@ -6,11 +6,6 @@ typedef s32 (*AiScoreFunc)(u32, u32, u32, s32);
 
 #define UNKNOWN_NO_OF_HITS UINT32_MAX
 
-// return vals for BattleAI_ChooseMoveOrAction
-// 0 - 3 are move idx
-#define AI_CHOICE_FLEE 4
-#define AI_CHOICE_WATCH 5
-
 // for AI_WhoStrikesFirst
 #define AI_IS_FASTER   1
 #define AI_IS_SLOWER   -1
@@ -65,7 +60,7 @@ enum AIScore
         { \
             TestRunner_Battle_AISetScore(__FILE__, __LINE__, battler, movesetIndex, val); \
         } \
-        AI_THINKING_STRUCT->score[movesetIndex] = val; \
+        gAiThinkingStruct->score[movesetIndex] = val; \
     } while (0) \
 
 #define ADJUST_SCORE(val) \
@@ -73,7 +68,7 @@ enum AIScore
     { \
         if (TESTING) \
         { \
-            TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, battlerAtk, AI_THINKING_STRUCT->movesetIndex, val); \
+            TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, battlerAtk, gAiThinkingStruct->movesetIndex, val); \
         } \
         score += val; \
     } while (0) \
@@ -83,7 +78,7 @@ enum AIScore
     { \
     if (TESTING) \
         { \
-            TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, battlerAtk, AI_THINKING_STRUCT->movesetIndex, val); \
+            TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, battlerAtk, gAiThinkingStruct->movesetIndex, val); \
         } \
         score += val; \
         return score; \
@@ -94,7 +89,7 @@ enum AIScore
     { \
         if (TESTING) \
         { \
-            TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, battlerAtk, AI_THINKING_STRUCT->movesetIndex, val); \
+            TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, battlerAtk, gAiThinkingStruct->movesetIndex, val); \
         } \
         (*score) += val; \
     } while (0) \
@@ -114,7 +109,8 @@ enum AIScore
 void BattleAI_SetupItems(void);
 void BattleAI_SetupFlags(void);
 void BattleAI_SetupAIData(u8 defaultScoreMoves, u32 battler);
-u32 BattleAI_ChooseMoveOrAction(u32 battler);
+void ComputeBattlerDecisions(u32 battler);
+u32 BattleAI_ChooseMoveIndex(u32 battler);
 void Ai_InitPartyStruct(void);
 void Ai_UpdateSwitchInData(u32 battler);
 void Ai_UpdateFaintData(u32 battler);

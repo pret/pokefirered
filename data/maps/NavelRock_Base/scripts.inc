@@ -55,7 +55,7 @@ NavelRock_Base_EventScript_Lugia::
 	delay 20
 	seteventmon SPECIES_LUGIA, 70
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special StartLegendaryBattle
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, GetBattleOutcome

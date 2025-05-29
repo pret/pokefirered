@@ -23,6 +23,12 @@
 #define MOVE_LIMITATION_PLACEHOLDER             (1 << 15)
 #define MOVE_LIMITATIONS_ALL                    0xFFFF
 
+enum NonVolatileStatus
+{
+    STATUS_CHECK_TRIGGER,
+    STATUS_RUN_SCRIPT,
+};
+
 enum AbilityEffectOptions
 {
     ABILITY_CHECK_TRIGGER,
@@ -229,7 +235,7 @@ bool32 HandleFaintedMonActions(void);
 void TryClearRageAndFuryCutter(void);
 u32 AtkCanceller_MoveSuccessOrder(void);
 void SetAtkCancellerForCalledMove(void);
-bool32 HasNoMonsToSwitch(u32 battler, u8 r1, u8 r2);
+bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2);
 bool32 TryChangeBattleWeather(u32 battler, u32 battleWeatherId, bool32 viaAbility);
 bool32 CanAbilityBlockMove(u32 battlerAtk, u32 battlerDef, u32 abilityAtk, u32 abilityDef, u32 move, enum AbilityEffectOptions option);
 bool32 CanAbilityAbsorbMove(u32 battlerAtk, u32 battlerDef, u32 abilityDef, u32 move, u32 moveType, enum AbilityEffectOptions option);
@@ -286,9 +292,12 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, enum FormChanges method);
 bool32 TryBattleFormChange(u32 battler, enum FormChanges method);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
 bool32 CanBattlerGetOrLoseItem(u32 battler, u16 itemId);
+u32 GetBattlerVisualSpecies(u32 battler);
+bool32 TryClearIllusion(u32 battler, u32 caseID);
 u32 GetIllusionMonSpecies(u32 battler);
 struct Pokemon *GetIllusionMonPtr(u32 battler);
 void ClearIllusionMon(u32 battler);
+u32 GetIllusionMonPartyId(struct Pokemon *party, struct Pokemon *mon, struct Pokemon *partnerMon);
 bool32 SetIllusionMon(struct Pokemon *mon, u32 battler);
 bool32 ShouldGetStatBadgeBoost(u16 flagId, u32 battler);
 u32 GetBattleMoveCategory(u32 move);
@@ -331,13 +340,16 @@ bool32 IsMoveEffectRemoveSpeciesType(u32 move, u32 moveEffect, u32 argument);
 bool32 MoveHasChargeTurnAdditionalEffect(u32 move);
 bool32 CanTargetPartner(u32 battlerAtk, u32 battlerDef);
 bool32 TargetFullyImmuneToCurrMove(u32 battlerAtk, u32 battlerDef);
+bool32 MoodyCantRaiseStat(u32 stat);
+bool32 MoodyCantLowerStat(u32 stat);
 
-bool32 CanBeSlept(u32 battler, u32 ability, enum SleepClauseBlock isBlockedBySleepClause);
-bool32 CanBePoisoned(u32 battlerAtk, u32 battlerDef, u32 defAbility);
-bool32 CanBeBurned(u32 battler, u32 ability);
-bool32 CanBeParalyzed(u32 battler, u32 ability);
-bool32 CanBeFrozen(u32 battler);
-bool32 CanGetFrostbite(u32 battler);
+bool32 CanBeSlept(u32 battlerAtk, u32 battlerDef, u32 abilityDef, enum SleepClauseBlock isBlockedBySleepClause);
+bool32 CanBePoisoned(u32 battlerAtk, u32 battlerDef, u32 abilityAtk, u32 abilityDef);
+bool32 CanBeBurned(u32 battlerAtk, u32 battlerDef, u32 ability);
+bool32 CanBeParalyzed(u32 battlerAtk, u32 battlerDef, u32 abilityDef);
+bool32 CanBeFrozen(u32 battlerAtk, u32 battlerDef, u32 abilityDef);
+bool32 CanGetFrostbite(u32 battlerAtk, u32 battlerDef, u32 abilityDef);
+bool32 CanSetNonVolatileStatus(u32 battlerAtk, u32 battlerDef, u32 abilityAtk, u32 abilityDef, enum MoveEffects secondaryMoveEffect, enum NonVolatileStatus option);
 bool32 CanBeConfused(u32 battler);
 bool32 IsBattlerTerrainAffected(u32 battler, u32 terrainFlag);
 u32 GetBattlerAffectionHearts(u32 battler);
@@ -369,7 +381,9 @@ void ClearPursuitValuesIfSet(u32 battler);
 void ClearPursuitValues(void);
 bool32 HasWeatherEffect(void);
 u32 RestoreWhiteHerbStats(u32 battler);
-bool32 IsFutureSightAttackerInParty(u32 battlerAtk, u32 battlerDef);
+bool32 IsFutureSightAttackerInParty(u32 battlerAtk, u32 battlerDef, u32 move);
 bool32 HadMoreThanHalfHpNowDoesnt(u32 battler);
+void UpdateStallMons(void);
+bool32 TryRestoreHPBerries(u32 battler, enum ItemCaseId caseId);
 
 #endif // GUARD_BATTLE_UTIL_H

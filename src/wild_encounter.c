@@ -597,9 +597,9 @@ bool8 TryStandardWildLandEncounter(u16 headerId, u32 currMetatileAttrs, u16 prev
         AddToWildEncounterRateBuff(gWildMonHeaders[headerId].encounterTypes[season][timeOfDay].landMonsInfo->encounterRate);
         return FALSE;
     }
-    if (TryStartRoamerEncounter() == TRUE)
+    if (TryStartRoamerEncounter())
     {
-        roamer = &gSaveBlock1Ptr->roamer;
+        roamer = &gSaveBlock1Ptr->roamer[gEncounteredRoamerIndex];
         if (!IsWildLevelAllowedByRepel(roamer->level))
         {
             return FALSE;
@@ -645,9 +645,9 @@ bool8 TryStandardWildSurfEncounter(u16 headerId, u32 currMetatileAttrs, u16 prev
         return FALSE;
     }
 
-    if (TryStartRoamerEncounter() == TRUE)
+    if (TryStartRoamerEncounter())
     {
-        roamer = &gSaveBlock1Ptr->roamer;
+        roamer = &gSaveBlock1Ptr->roamer[gEncounteredRoamerIndex];
         if (!IsWildLevelAllowedByRepel(roamer->level))
         {
             return FALSE;
@@ -734,7 +734,7 @@ bool8 SweetScentWildEncounter(void)
 
     if (MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_LAND)
     {
-        if (TryStartRoamerEncounter() == TRUE)
+        if (TryStartRoamerEncounter())
         {
             BattleSetup_StartRoamerBattle();
             return TRUE;
@@ -751,7 +751,7 @@ bool8 SweetScentWildEncounter(void)
     }
     else if (MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_WATER)
     {
-        if (TryStartRoamerEncounter() == TRUE)
+        if (TryStartRoamerEncounter())
         {
             BattleSetup_StartRoamerBattle();
             return TRUE;

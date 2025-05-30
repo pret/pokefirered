@@ -16,7 +16,7 @@ struct RoamerPair
     u16 starter;
 };
 
-static s32 GetRoamerIndex(u16 species);
+static u32 GetRoamerIndex(u32 species);
 static s32 GetRoamerPokedexAreaMarkers(u16 species, struct Subsprite * subsprites);
 static bool32 IsSpeciesOnMap(const struct WildPokemonHeader * data, u32 headerId, s32 species);
 static bool32 IsSpeciesInEncounterTable(const struct WildPokemonInfo * pokemon, s32 species, s32 count);
@@ -174,7 +174,7 @@ s32 GetSpeciesPokedexAreaMarkers(u16 species, struct Subsprite * subsprites)
     s32 alteringCaveNum;
     s32 i;
 
-    if (GetRoamerIndex(species) >= 0)
+    if (GetRoamerIndex(species) < ROAMER_COUNT)
         return GetRoamerPokedexAreaMarkers(species, subsprites);
 
     seviiAreas = GetUnlockedSeviiAreas();
@@ -221,33 +221,31 @@ s32 GetSpeciesPokedexAreaMarkers(u16 species, struct Subsprite * subsprites)
     return areaCount;
 }
 
-static s32 GetRoamerIndex(u16 species)
+static u32 GetRoamerIndex(u32 species)
 {
-    s32 i;
-    for (i = 0; i < ARRAY_COUNT(sRoamerPairs); i++)
+    u32 i;
+    for (i = 0; i < ROAMER_COUNT; i++)
     {
-        if (sRoamerPairs[i].roamer == species)
+        struct Roamer *roamer = &gSaveBlock1Ptr->roamer[i];
+        if (roamer->active && roamer->species == species)
             return i;
     }
-
-    return -1;
+    return ROAMER_COUNT;
 }
 
 static s32 GetRoamerPokedexAreaMarkers(u16 species, struct Subsprite * subsprites)
 {
-    u16 mapSecId;
-    s32 roamerIdx;
-    u16 dexArea;
+    u32 roamerIndex;
     s32 tableIndex;
+    u16 mapSecId;
+    u16 dexArea;
 
     // Make sure that this is a roamer species, and that it corresponds to the player's starter.
-    roamerIdx = GetRoamerIndex(species);
-    if (roamerIdx < 0)
-        return 0;
-    if (sRoamerPairs[roamerIdx].starter != GetStarterSpecies())
+    roamerIndex = GetRoamerIndex(species);
+    if (roamerIndex >= ROAMER_COUNT)
         return 0;
 
-    mapSecId = GetRoamerLocationMapSectionId();
+    mapSecId = GetRoamerLocationMapSectionId(roamerIndex);
     tableIndex = 0;
     if (FindDexAreaByMapSec(mapSecId, sDexAreas_Kanto, ARRAY_COUNT(sDexAreas_Kanto), &tableIndex, &dexArea))
     {

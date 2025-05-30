@@ -68,6 +68,7 @@
 #define MAX_REMATCH_ENTRIES 100
 #define UNION_ROOM_KB_ROW_COUNT 10
 #define GIFT_RIBBONS_COUNT 11
+#define ROAMER_COUNT 1 // Number of maximum concurrent active roamers
 
 // Contests
 #define CONTEST_CATEGORIES_COUNT  5

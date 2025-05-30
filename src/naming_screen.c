@@ -1640,13 +1640,13 @@ static void HandleDpadMovement(struct Task *task)
 
     GetCursorPos(&cursorX, &cursorY);
     input = INPUT_NONE;
-    if (JOY_REPT(DPAD_UP))
+    if (JOY_REPEAT(DPAD_UP))
         input = INPUT_DPAD_UP;
-    if (JOY_REPT(DPAD_DOWN))
+    if (JOY_REPEAT(DPAD_DOWN))
         input = INPUT_DPAD_DOWN;
-    if (JOY_REPT(DPAD_LEFT))
+    if (JOY_REPEAT(DPAD_LEFT))
         input = INPUT_DPAD_LEFT;
-    if (JOY_REPT(DPAD_RIGHT))
+    if (JOY_REPEAT(DPAD_RIGHT))
         input = INPUT_DPAD_RIGHT;
 
     // Get new cursor position

@@ -210,7 +210,7 @@ static u16 GetPrevBall(u16 ballId)
 {
     u16 ballPrev;
     s32 i, j;
-    SortAndCompactBagPocket(&gBagPockets[BALLS_POCKET]);
+    CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
     for (i = 0; i < gBagPockets[BALLS_POCKET].capacity; i++)
     {
         if (ballId == gBagPockets[BALLS_POCKET].itemSlots[i].itemId)
@@ -235,7 +235,7 @@ static u32 GetNextBall(u32 ballId)
 {
     u32 ballNext = ITEM_NONE;
     s32 i;
-    SortAndCompactBagPocket(&gBagPockets[BALLS_POCKET]);
+    CompactItemsInBagPocket(&gBagPockets[BALLS_POCKET]);
     for (i = 1; i < gBagPockets[BALLS_POCKET].capacity; i++)
     {
         if (ballId == gBagPockets[BALLS_POCKET].itemSlots[i-1].itemId)
@@ -257,7 +257,7 @@ static void HandleInputChooseAction(u32 battler)
     DoBounceEffect(battler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(battler, BOUNCE_MON, 7, 1);
 
-    if (JOY_REPT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+    if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
         gPlayerDpadHoldFrames++;
     else
         gPlayerDpadHoldFrames = 0;

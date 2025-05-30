@@ -668,25 +668,25 @@ s32 HelpSystem_GetMenuInput(void)
     {
         return -6;
     }
-    else if (JOY_REPT(DPAD_UP))
+    else if (JOY_REPEAT(DPAD_UP))
     {
         if (!MoveCursor(1, 0))
             PlaySE(SE_SELECT);
         return -4;
     }
-    else if (JOY_REPT(DPAD_DOWN))
+    else if (JOY_REPEAT(DPAD_DOWN))
     {
         if (!MoveCursor(1, 1))
             PlaySE(SE_SELECT);
         return -5;
     }
-    else if (JOY_REPT(DPAD_LEFT))
+    else if (JOY_REPEAT(DPAD_LEFT))
     {
         if (!MoveCursor(7, 0))
             PlaySE(SE_SELECT);
         return -4;
     }
-    else if (JOY_REPT(DPAD_RIGHT))
+    else if (JOY_REPEAT(DPAD_RIGHT))
     {
         if (!MoveCursor(7, 1))
             PlaySE(SE_SELECT);

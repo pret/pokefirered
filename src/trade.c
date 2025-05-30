@@ -1811,13 +1811,13 @@ static void CB_ProcessMenuInput(void)
 {
     int i;
 
-    if (JOY_REPT(DPAD_UP))
+    if (JOY_REPEAT(DPAD_UP))
         TradeMenuMoveCursor(&sTradeMenu->cursorPosition, DIR_UP);
-    else if (JOY_REPT(DPAD_DOWN))
+    else if (JOY_REPEAT(DPAD_DOWN))
         TradeMenuMoveCursor(&sTradeMenu->cursorPosition, DIR_DOWN);
-    else if (JOY_REPT(DPAD_LEFT))
+    else if (JOY_REPEAT(DPAD_LEFT))
         TradeMenuMoveCursor(&sTradeMenu->cursorPosition, DIR_LEFT);
-    else if (JOY_REPT(DPAD_RIGHT))
+    else if (JOY_REPEAT(DPAD_RIGHT))
         TradeMenuMoveCursor(&sTradeMenu->cursorPosition, DIR_RIGHT);
 
     if (JOY_NEW(A_BUTTON))

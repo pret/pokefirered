@@ -6666,7 +6666,7 @@ static u8 HandleInput_InBox_Normal(void)
         gStorage->cursorVerticalWrap = 0;
         gStorage->cursorHorizontalWrap = 0;
         gStorage->cursorFlipTimer = 0;
-        if (JOY_REPT(DPAD_UP))
+        if (JOY_REPEAT(DPAD_UP))
         {
             input = INPUT_MOVE_CURSOR;
             if (sCursorPosition >= IN_BOX_COLUMNS)
@@ -6678,7 +6678,7 @@ static u8 HandleInput_InBox_Normal(void)
             }
             break;
         }
-        else if (JOY_REPT(DPAD_DOWN))
+        else if (JOY_REPEAT(DPAD_DOWN))
         {
             input = INPUT_MOVE_CURSOR;
             cursorPosition += IN_BOX_COLUMNS;
@@ -6692,7 +6692,7 @@ static u8 HandleInput_InBox_Normal(void)
             }
             break;
         }
-        else if (JOY_REPT(DPAD_LEFT))
+        else if (JOY_REPEAT(DPAD_LEFT))
         {
             input = INPUT_MOVE_CURSOR;
             if (sCursorPosition % IN_BOX_COLUMNS != 0)
@@ -6704,7 +6704,7 @@ static u8 HandleInput_InBox_Normal(void)
             }
             break;
         }
-        else if (JOY_REPT(DPAD_RIGHT))
+        else if (JOY_REPEAT(DPAD_RIGHT))
         {
             input = INPUT_MOVE_CURSOR;
             if ((sCursorPosition + 1) % IN_BOX_COLUMNS != 0)
@@ -6789,7 +6789,7 @@ static u8 HandleInput_InBox_GrabbingMultiple(void)
 {
     if (JOY_HELD(A_BUTTON))
     {
-        if (JOY_REPT(DPAD_UP))
+        if (JOY_REPEAT(DPAD_UP))
         {
             if (sCursorPosition / IN_BOX_COLUMNS != 0)
             {
@@ -6799,7 +6799,7 @@ static u8 HandleInput_InBox_GrabbingMultiple(void)
             else
                 return INPUT_MULTIMOVE_UNABLE;
         }
-        else if (JOY_REPT(DPAD_DOWN))
+        else if (JOY_REPEAT(DPAD_DOWN))
         {
             if (sCursorPosition + IN_BOX_COLUMNS < IN_BOX_COUNT)
             {
@@ -6809,7 +6809,7 @@ static u8 HandleInput_InBox_GrabbingMultiple(void)
             else
                 return INPUT_MULTIMOVE_UNABLE;
         }
-        else if (JOY_REPT(DPAD_LEFT))
+        else if (JOY_REPEAT(DPAD_LEFT))
         {
             if (sCursorPosition % IN_BOX_COLUMNS != 0)
             {
@@ -6819,7 +6819,7 @@ static u8 HandleInput_InBox_GrabbingMultiple(void)
             else
                 return INPUT_MULTIMOVE_UNABLE;
         }
-        else if (JOY_REPT(DPAD_RIGHT))
+        else if (JOY_REPEAT(DPAD_RIGHT))
         {
             if ((sCursorPosition + 1) % IN_BOX_COLUMNS != 0)
             {
@@ -6852,7 +6852,7 @@ static u8 HandleInput_InBox_GrabbingMultiple(void)
 
 static u8 HandleInput_InBox_MovingMultiple(void)
 {
-    if (JOY_REPT(DPAD_UP))
+    if (JOY_REPEAT(DPAD_UP))
     {
         if (MultiMove_TryMoveGroup(0))
         {
@@ -6862,7 +6862,7 @@ static u8 HandleInput_InBox_MovingMultiple(void)
         else
             return INPUT_MULTIMOVE_UNABLE;
     }
-    else if (JOY_REPT(DPAD_DOWN))
+    else if (JOY_REPEAT(DPAD_DOWN))
     {
         if (MultiMove_TryMoveGroup(1))
         {
@@ -6872,7 +6872,7 @@ static u8 HandleInput_InBox_MovingMultiple(void)
         else
             return INPUT_MULTIMOVE_UNABLE;
     }
-    else if (JOY_REPT(DPAD_LEFT))
+    else if (JOY_REPEAT(DPAD_LEFT))
     {
         if (MultiMove_TryMoveGroup(2))
         {
@@ -6882,7 +6882,7 @@ static u8 HandleInput_InBox_MovingMultiple(void)
         else
             return INPUT_SCROLL_LEFT;
     }
-    else if (JOY_REPT(DPAD_RIGHT))
+    else if (JOY_REPEAT(DPAD_RIGHT))
     {
         if (MultiMove_TryMoveGroup(3))
         {
@@ -6937,7 +6937,7 @@ static u8 HandleInput_InParty(void)
         gotoBox = FALSE;
         input = INPUT_NONE;
 
-        if (JOY_REPT(DPAD_UP))
+        if (JOY_REPEAT(DPAD_UP))
         {
             if (--cursorPosition < 0)
                 cursorPosition = PARTY_SIZE;
@@ -6945,7 +6945,7 @@ static u8 HandleInput_InParty(void)
                 input = INPUT_MOVE_CURSOR;
             break;
         }
-        else if (JOY_REPT(DPAD_DOWN))
+        else if (JOY_REPEAT(DPAD_DOWN))
         {
             if (++cursorPosition > PARTY_SIZE)
                 cursorPosition = 0;
@@ -6953,14 +6953,14 @@ static u8 HandleInput_InParty(void)
                 input = INPUT_MOVE_CURSOR;
             break;
         }
-        else if (JOY_REPT(DPAD_LEFT) && sCursorPosition != 0)
+        else if (JOY_REPEAT(DPAD_LEFT) && sCursorPosition != 0)
         {
             input = INPUT_MOVE_CURSOR;
             gStorage->cursorPrevPartyPos = sCursorPosition;
             cursorPosition = 0;
             break;
         }
-        else if (JOY_REPT(DPAD_RIGHT))
+        else if (JOY_REPEAT(DPAD_RIGHT))
         {
             if (sCursorPosition == 0)
             {
@@ -7052,7 +7052,7 @@ static u8 HandleInput_BoxTitle(void)
         gStorage->cursorVerticalWrap = 0;
         gStorage->cursorFlipTimer = 0;
 
-        if (JOY_REPT(DPAD_UP))
+        if (JOY_REPEAT(DPAD_UP))
         {
             input = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_BUTTONS;
@@ -7060,7 +7060,7 @@ static u8 HandleInput_BoxTitle(void)
             gStorage->cursorFlipTimer = 1;
             break;
         }
-        else if (JOY_REPT(DPAD_DOWN))
+        else if (JOY_REPEAT(DPAD_DOWN))
         {
             input = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_IN_BOX;
@@ -7125,7 +7125,7 @@ static u8 HandleInput_OnButtons(void)
         gStorage->cursorVerticalWrap = 0;
         gStorage->cursorFlipTimer = 0;
 
-        if (JOY_REPT(DPAD_UP))
+        if (JOY_REPEAT(DPAD_UP))
         {
             input = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_IN_BOX;
@@ -7137,7 +7137,7 @@ static u8 HandleInput_OnButtons(void)
             gStorage->cursorFlipTimer = 1;
             break;
         }
-        else if (JOY_REPT(DPAD_DOWN | START_BUTTON))
+        else if (JOY_REPEAT(DPAD_DOWN | START_BUTTON))
         {
             input = INPUT_MOVE_CURSOR;
             cursorArea = CURSOR_AREA_BOX_TITLE;
@@ -7146,14 +7146,14 @@ static u8 HandleInput_OnButtons(void)
             break;
         }
 
-        if (JOY_REPT(DPAD_LEFT))
+        if (JOY_REPEAT(DPAD_LEFT))
         {
             input = INPUT_MOVE_CURSOR;
             if (--cursorPosition < 0)
                 cursorPosition = 1;
             break;
         }
-        else if (JOY_REPT(DPAD_RIGHT))
+        else if (JOY_REPEAT(DPAD_RIGHT))
         {
             input = INPUT_MOVE_CURSOR;
             if (++cursorPosition > 1)

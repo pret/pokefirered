@@ -82,9 +82,9 @@ u8 GetLRKeysPressedAndHeld(void)
 {
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
     {
-        if (JOY_REPT(L_BUTTON))
+        if (JOY_REPEAT(L_BUTTON))
             return MENU_L_PRESSED;
-        if (JOY_REPT(R_BUTTON))
+        if (JOY_REPEAT(R_BUTTON))
             return MENU_R_PRESSED;
     }
     return 0;
@@ -174,7 +174,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax)
 {
     s16 valBefore = (*quantity_p);
 
-    if (JOY_REPT(DPAD_ANY) == DPAD_UP)
+    if (JOY_REPEAT(DPAD_ANY) == DPAD_UP)
     {
         (*quantity_p)++;
         if ((*quantity_p) > qmax)
@@ -190,7 +190,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax)
             return TRUE;
         }
     }
-    else if (JOY_REPT(DPAD_ANY) == DPAD_DOWN)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_DOWN)
     {
         (*quantity_p)--;
         if ((*quantity_p) <= 0)
@@ -205,7 +205,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax)
             return TRUE;
         }
     }
-    else if (JOY_REPT(DPAD_ANY) == DPAD_RIGHT)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_RIGHT)
     {
         (*quantity_p) += 10;
         if ((*quantity_p) > qmax)
@@ -220,7 +220,7 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax)
             return TRUE;
         }
     }
-    else if (JOY_REPT(DPAD_ANY) == DPAD_LEFT)
+    else if (JOY_REPEAT(DPAD_ANY) == DPAD_LEFT)
     {
         (*quantity_p) -= 10;
         if ((*quantity_p) <= 0)

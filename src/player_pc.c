@@ -285,7 +285,7 @@ static void PrintStringOnWindow0WithDialogueFrame(const u8 *str)
 
 static void Task_TopMenu_ItemStorageSubmenu_HandleInput(u8 taskId)
 {
-    if (JOY_REPT(DPAD_UP))
+    if (JOY_REPEAT(DPAD_UP))
     {
         if (Menu_GetCursorPos() != 0)
         {
@@ -294,7 +294,7 @@ static void Task_TopMenu_ItemStorageSubmenu_HandleInput(u8 taskId)
             PrintStringOnWindow0WithDialogueFrame(sItemStorageActionDescriptionPtrs[Menu_GetCursorPos()]);
         }
     }
-    else if (JOY_REPT(DPAD_DOWN))
+    else if (JOY_REPEAT(DPAD_DOWN))
     {
         if (Menu_GetCursorPos() != 2)
         {

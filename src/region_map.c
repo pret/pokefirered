@@ -2794,7 +2794,7 @@ static u8 HandleRegionMapInput(void)
     }
     else if (!JOY_NEW(B_BUTTON))
     {
-        if (JOY_REPT(START_BUTTON))
+        if (JOY_REPEAT(START_BUTTON))
         {
             SnapToIconOrButton();
             sMapCursor->selectedMapsec = GetSelectedMapSection(GetSelectedRegionMap(), LAYER_MAP, sMapCursor->y, sMapCursor->x);

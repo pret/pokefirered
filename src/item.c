@@ -517,7 +517,7 @@ void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket)
     u16 k;
     struct ItemSlot * buff;
 
-    SortAndCompactBagPocket(pocket);
+    CompactItemsInBagPocket(pocket);
 
     for (i = 0; i < pocket->capacity; i++)
     {
@@ -545,7 +545,7 @@ void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket)
     Free(buff);
 }
 
-void SortAndCompactBagPocket(struct BagPocket * pocket)
+void CompactItemsInBagPocket(struct BagPocket * pocket)
 {
     u16 i, j;
 

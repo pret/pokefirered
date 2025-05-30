@@ -1360,13 +1360,7 @@ static void SetMultiPartnerMenuParty(u8 offset)
         gMultiPartnerParty[i].gender      = GetMonGender(&gPlayerParty[offset + i]);
         StripExtCtrlCodes(gMultiPartnerParty[i].nickname);
         if (GetMonData(&gPlayerParty[offset + i], MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
-        {
-            for (cur = gMultiPartnerParty[i].nickname, j = 0; cur[j] != EOS; j++)
-                ;
-            while (j < 6)
-                cur[j++] = 0;
-            cur[j] = EOS;
-        }
+            PadNameString(gMultiPartnerParty[i].nickname, CHAR_SPACE);
     }
     memcpy(sMultiPartnerPartyBuffer, gMultiPartnerParty, sizeof(gMultiPartnerParty));
 }

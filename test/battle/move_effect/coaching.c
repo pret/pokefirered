@@ -103,10 +103,10 @@ DOUBLE_BATTLE_TEST("Coaching fails if there's no ally")
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_TACKLE, target: playerRight); }
+        TURN { MOVE(playerLeft, MOVE_SCRATCH, target: playerRight); }
         TURN { MOVE(playerLeft, MOVE_COACHING, target: playerRight); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, playerLeft);
         MESSAGE("Wynaut fainted!");
         MESSAGE("Wobbuffet used Coaching!");
         NONE_OF {

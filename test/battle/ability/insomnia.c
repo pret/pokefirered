@@ -4,7 +4,8 @@
 SINGLE_BATTLE_TEST("Insomnia prevents sleep")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_SLEEP);
+        ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
         PLAYER(SPECIES_DROWZEE) { Ability(ABILITY_INSOMNIA); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

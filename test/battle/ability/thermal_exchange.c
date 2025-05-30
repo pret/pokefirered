@@ -4,7 +4,8 @@
 SINGLE_BATTLE_TEST("Thermal Exchange makes Will-O-Wisp fail")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_WILL_O_WISP) == EFFECT_WILL_O_WISP);
+        ASSUME(GetMoveEffect(MOVE_WILL_O_WISP) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_WILL_O_WISP) == MOVE_EFFECT_BURN);
         PLAYER(SPECIES_BAXCALIBUR) { Ability(ABILITY_THERMAL_EXCHANGE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -24,9 +25,9 @@ SINGLE_BATTLE_TEST("Thermal Exchange prevents the user from getting burned when 
         PLAYER(SPECIES_BAXCALIBUR) { Ability(ABILITY_THERMAL_EXCHANGE); }
         OPPONENT(SPECIES_PONYTA) { Ability(ABILITY_FLAME_BODY); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         NONE_OF {
             ABILITY_POPUP(opponent, ABILITY_FLAME_BODY);
             STATUS_ICON(player, burn: TRUE);
@@ -37,7 +38,8 @@ SINGLE_BATTLE_TEST("Thermal Exchange prevents the user from getting burned when 
 SINGLE_BATTLE_TEST("Thermal Exchange cures burns when acquired")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_WILL_O_WISP) == EFFECT_WILL_O_WISP);
+        ASSUME(GetMoveEffect(MOVE_WILL_O_WISP) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_WILL_O_WISP) == MOVE_EFFECT_BURN);
         ASSUME(GetMoveEffect(MOVE_SKILL_SWAP) == EFFECT_SKILL_SWAP);
         PLAYER(SPECIES_BAXCALIBUR) { Ability(ABILITY_THERMAL_EXCHANGE); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -56,7 +58,8 @@ SINGLE_BATTLE_TEST("Thermal Exchange cures burns when acquired")
 SINGLE_BATTLE_TEST("Thermal Exchange burn prevention can be bypassed with Mold Breaker but is cured after")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_WILL_O_WISP) == EFFECT_WILL_O_WISP);
+        ASSUME(GetMoveEffect(MOVE_WILL_O_WISP) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_WILL_O_WISP) == MOVE_EFFECT_BURN);
         PLAYER(SPECIES_BAXCALIBUR) { Ability(ABILITY_THERMAL_EXCHANGE); }
         OPPONENT(SPECIES_RAMPARDOS) { Ability(ABILITY_MOLD_BREAKER); }
     } WHEN {

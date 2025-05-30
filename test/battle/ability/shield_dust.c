@@ -49,11 +49,11 @@ SINGLE_BATTLE_TEST("Shield Dust does not block primary effects")
     PARAMETRIZE { move = MOVE_PAY_DAY; }
 
     GIVEN {
+        ASSUME(GetMoveEffect(MOVE_THOUSAND_ARROWS) == EFFECT_SMACK_DOWN);
+        ASSUME(GetMoveEffect(MOVE_SMACK_DOWN) == EFFECT_SMACK_DOWN);
         ASSUME(MoveHasAdditionalEffectWithChance(MOVE_INFESTATION, MOVE_EFFECT_WRAP, 0) == TRUE);
-        ASSUME(MoveHasAdditionalEffectWithChance(MOVE_THOUSAND_ARROWS, MOVE_EFFECT_SMACK_DOWN, 0) == TRUE);
         ASSUME(MoveHasAdditionalEffectWithChance(MOVE_JAW_LOCK, MOVE_EFFECT_TRAP_BOTH, 0) == TRUE);
         ASSUME(MoveHasAdditionalEffectWithChance(MOVE_PAY_DAY, MOVE_EFFECT_PAYDAY, 0) == TRUE);
-        ASSUME(MoveHasAdditionalEffectWithChance(MOVE_SMACK_DOWN, MOVE_EFFECT_SMACK_DOWN, 0) == TRUE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_VIVILLON) { Ability(ABILITY_SHIELD_DUST); }
     } WHEN {
@@ -125,7 +125,7 @@ DOUBLE_BATTLE_TEST("Shield Dust does or does not block Sparkling Aria depending 
 {
     u32 moveToUse;
     PARAMETRIZE { moveToUse = MOVE_FINAL_GAMBIT; }
-    PARAMETRIZE { moveToUse = MOVE_TACKLE; }
+    PARAMETRIZE { moveToUse = MOVE_SCRATCH; }
     GIVEN {
         PLAYER(SPECIES_WYNAUT);
         PLAYER(SPECIES_WOBBUFFET);
@@ -135,7 +135,7 @@ DOUBLE_BATTLE_TEST("Shield Dust does or does not block Sparkling Aria depending 
         TURN { MOVE(playerRight, moveToUse, target: opponentRight); MOVE(playerLeft, MOVE_SPARKLING_ARIA); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPARKLING_ARIA, playerLeft);
-        if (moveToUse == MOVE_TACKLE) {
+        if (moveToUse == MOVE_SCRATCH) {
             MESSAGE("The opposing Vivillon's burn was cured!");
             STATUS_ICON(opponentLeft, none: TRUE);
         } else {
@@ -183,7 +183,7 @@ SINGLE_BATTLE_TEST("Shield Dust does not prevent ability stat changes")
         PLAYER(SPECIES_VIVILLON) { Ability(ABILITY_SHIELD_DUST); }
         OPPONENT(SPECIES_ELDEGOSS) { Ability(ABILITY_COTTON_DOWN); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         MESSAGE("Vivillon's Speed fell!");
     }

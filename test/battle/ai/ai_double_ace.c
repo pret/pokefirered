@@ -82,8 +82,8 @@ AI_DOUBLE_BATTLE_TEST("AI_FLAG_DOUBLE_ACE_POKEMON: Ace mons won't be switched in
         PLAYER(SPECIES_GENGAR) { Level(10); }
         PLAYER(SPECIES_GENGAR) { Level(10); }
 
-        OPPONENT(SPECIES_RATTATA) { Moves(MOVE_TACKLE); Level(10); }
-        OPPONENT(SPECIES_PSYDUCK) { Moves(MOVE_TACKLE); Level(10); }
+        OPPONENT(SPECIES_RATTATA) { Moves(MOVE_SCRATCH); Level(10); }
+        OPPONENT(SPECIES_PSYDUCK) { Moves(MOVE_SCRATCH); Level(10); }
 
         OPPONENT(SPECIES_ABRA) { Moves(MOVE_ABSORB); Level(20); }
 

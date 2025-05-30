@@ -26,16 +26,16 @@ SINGLE_BATTLE_TEST("Last Resort always fails if it's the only known move")
 SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been used - 2 moves")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_TACKLE); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_SCRATCH); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_LAST_RESORT); }
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
         TURN { MOVE(player, MOVE_LAST_RESORT); }
     } SCENE {
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Tackle!");
+        MESSAGE("Wobbuffet used Scratch!");
         MESSAGE("Wobbuffet used Last Resort!");
         HP_BAR(opponent);
     }
@@ -44,18 +44,18 @@ SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been
 SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been used - 3 moves")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_TACKLE, MOVE_SCRATCH); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_QUICK_ATTACK, MOVE_SCRATCH); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_LAST_RESORT); }
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_QUICK_ATTACK); }
         TURN { MOVE(player, MOVE_LAST_RESORT); }
         TURN { MOVE(player, MOVE_SCRATCH); }
         TURN { MOVE(player, MOVE_LAST_RESORT); }
     } SCENE {
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Tackle!");
+        MESSAGE("Wobbuffet used Quick Attack!");
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
         MESSAGE("Wobbuffet used Scratch!");
@@ -67,11 +67,11 @@ SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been
 SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been used - 4 moves")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_TACKLE, MOVE_SCRATCH, MOVE_GUST); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_QUICK_ATTACK, MOVE_SCRATCH, MOVE_GUST); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_LAST_RESORT); }
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_QUICK_ATTACK); }
         TURN { MOVE(player, MOVE_LAST_RESORT); }
         TURN { MOVE(player, MOVE_SCRATCH); }
         TURN { MOVE(player, MOVE_LAST_RESORT); }
@@ -80,7 +80,7 @@ SINGLE_BATTLE_TEST("Last Resort works only when all of the known moves have been
     } SCENE {
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
-        MESSAGE("Wobbuffet used Tackle!");
+        MESSAGE("Wobbuffet used Quick Attack!");
         MESSAGE("Wobbuffet used Last Resort!");
         MESSAGE("But it failed!");
         MESSAGE("Wobbuffet used Scratch!");

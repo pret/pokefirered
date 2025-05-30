@@ -207,7 +207,7 @@ SINGLE_BATTLE_TEST("Reflect Type succeeds against a Terastallized target and cop
         PLAYER(SPECIES_ARCANINE) { TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_POLIWRATH);
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_REFLECT_TYPE); }
+        TURN { MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_REFLECT_TYPE); }
     } SCENE {
         MESSAGE("The opposing Poliwrath used Reflect Type!");
     } THEN {

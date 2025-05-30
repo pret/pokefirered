@@ -12,7 +12,7 @@
 #include "constants/trainers.h"
 #include "constants/battle.h"
 
-#define NUM_TEST_TRAINERS 9
+#define NUM_TEST_TRAINERS 11
 
 static const struct Trainer sTestTrainers[DIFFICULTY_COUNT][NUM_TEST_TRAINERS] =
 {
@@ -281,4 +281,13 @@ TEST("Trainer Party Pool can choose which functions to use for picking mons")
     EXPECT(GetMonData(&testParty[0], MON_DATA_SPECIES) == SPECIES_WYNAUT);
     EXPECT(GetMonData(&testParty[1], MON_DATA_SPECIES) == SPECIES_WOBBUFFET);
     Free(testParty);
+}
+
+TEST("trainerproc supports both Double Battle: Yes and Battle Type: Doubles")
+{
+    u32 currTrainer;
+    PARAMETRIZE { currTrainer = 9; }
+    PARAMETRIZE { currTrainer = 10; }
+    const struct Trainer trainer = sTestTrainers[GetTrainerDifficultyLevelTest(currTrainer)][currTrainer];
+    EXPECT(trainer.battleType == TRAINER_BATTLE_TYPE_DOUBLES);
 }

@@ -8,10 +8,10 @@ SINGLE_BATTLE_TEST("Quick Draw has a 30% chance of going first")
         PLAYER(SPECIES_SLOWBRO_GALAR) { Ability(ABILITY_QUICK_DRAW); Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(100); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         ABILITY_POPUP(player, ABILITY_QUICK_DRAW);
-        MESSAGE("Slowbro used Tackle!");
+        MESSAGE("Slowbro used Scratch!");
         MESSAGE("The opposing Wobbuffet used Celebrate!");
     }
 }
@@ -23,10 +23,10 @@ SINGLE_BATTLE_TEST("Quick Draw does not activate 70% of the time")
         PLAYER(SPECIES_SLOWBRO_GALAR) { Ability(ABILITY_QUICK_DRAW); Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(100); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         NOT ABILITY_POPUP(player, ABILITY_QUICK_DRAW);
         MESSAGE("The opposing Wobbuffet used Celebrate!");
-        MESSAGE("Slowbro used Tackle!");
+        MESSAGE("Slowbro used Scratch!");
     }
 }

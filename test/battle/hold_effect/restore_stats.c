@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(gItemsInfo[ITEM_WHITE_HERB].holdEffect == HOLD_EFFECT_RESTORE_STATS);
+    ASSUME(gItemsInfo[ITEM_WHITE_HERB].holdEffect == HOLD_EFFECT_WHITE_HERB);
 }
 
 SINGLE_BATTLE_TEST("White Herb restores stats when they're lowered")
@@ -166,9 +166,9 @@ SINGLE_BATTLE_TEST("White Herb wont have time to activate if Magician steals it"
         PLAYER(SPECIES_SLUGMA) {  Ability(ABILITY_WEAK_ARMOR); Item(ITEM_WHITE_HERB); }
         OPPONENT(SPECIES_FENNEKIN) { Ability(ABILITY_MAGICIAN); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         ABILITY_POPUP(player, ABILITY_WEAK_ARMOR);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         MESSAGE("Slugma's Weak Armor lowered its Defense!");
@@ -215,5 +215,23 @@ SINGLE_BATTLE_TEST("White Herb has correct interactions with Intimidate triggere
         } else {
             EXPECT(player->statStages[STAT_ATK] = DEFAULT_STAT_STAGE + 1);
         }
+    }
+}
+
+DOUBLE_BATTLE_TEST("White Herb is correctly displayed")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT) { Item(ITEM_WHITE_HERB); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerRight, MOVE_SUPERPOWER, target: opponentRight); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+        MESSAGE("Wynaut returned its stats to normal using its White Herb!");
+    } THEN {
+        EXPECT(playerLeft->item == ITEM_NONE);
+        EXPECT(playerLeft->statStages[STAT_DEF] = DEFAULT_STAT_STAGE);
     }
 }

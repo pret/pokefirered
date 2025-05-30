@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Dynamax Cannon causes double damage to Dynamaxed Pokemon", s
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE, gimmick: dynamax); MOVE(opponent, MOVE_DYNAMAX_CANNON); }
+        TURN { MOVE(player, MOVE_SCRATCH, gimmick: dynamax); MOVE(opponent, MOVE_DYNAMAX_CANNON); }
     } SCENE {
         HP_BAR(player, captureDamage: &results[i].damage);
     } FINALLY {

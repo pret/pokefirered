@@ -13,9 +13,9 @@ SINGLE_BATTLE_TEST("Battle Armor and Shell Armor block critical hits")
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species) { Ability(ability); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE, criticalHit: TRUE); }
+        TURN { MOVE(player, MOVE_SCRATCH, criticalHit: TRUE); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         NOT MESSAGE("A critical hit!");
     }
 }
@@ -41,9 +41,9 @@ SINGLE_BATTLE_TEST("Mold Breaker, Teravolt and Turboblaze ignore Battle Armor an
         PLAYER(species1) { Ability(ability1); }
         OPPONENT(species2) { Ability(ability2); }
     } WHEN {
-        TURN { MOVE(player, MOVE_TACKLE, criticalHit: TRUE); }
+        TURN { MOVE(player, MOVE_SCRATCH, criticalHit: TRUE); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         MESSAGE("A critical hit!");
     }
 }

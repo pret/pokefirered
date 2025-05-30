@@ -11,7 +11,7 @@ ASSUMPTIONS
     ASSUME(gItemsInfo[ITEM_MISTY_SEED].holdEffectParam == HOLD_EFFECT_PARAM_MISTY_TERRAIN);
     ASSUME(gItemsInfo[ITEM_PSYCHIC_SEED].holdEffect == HOLD_EFFECT_SEEDS);
     ASSUME(gItemsInfo[ITEM_PSYCHIC_SEED].holdEffectParam == HOLD_EFFECT_PARAM_PSYCHIC_TERRAIN);
-    
+
 }
 
 SINGLE_BATTLE_TEST("Electric Seed raises the holder's Defense on Electric Terrain")

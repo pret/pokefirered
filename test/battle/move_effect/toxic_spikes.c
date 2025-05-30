@@ -235,3 +235,34 @@ SINGLE_BATTLE_TEST("Toxic Spikes inflicts poison on switch in after Primal Rever
         STATUS_ICON(player, poison: TRUE);
     }
 }
+
+SINGLE_BATTLE_TEST("Toxic Spikes print normal poison for 1 layer")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TOXIC_SPIKES); }
+        TURN { SWITCH(opponent, 1); }
+        TURN {}
+    } SCENE {
+        MESSAGE("The opposing Wynaut was poisoned!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Toxic Spikes print bad poison for 2 layers")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TOXIC_SPIKES); }
+        TURN { MOVE(player, MOVE_TOXIC_SPIKES); }
+        TURN { SWITCH(opponent, 1); }
+        TURN {}
+    } SCENE {
+        MESSAGE("The opposing Wynaut was badly poisoned!");
+    }
+}

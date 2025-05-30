@@ -2,6 +2,7 @@
 #define GUARD_MOVES_H
 
 #include "contest_effect.h"
+#include "constants/battle.h"
 #include "constants/battle_move_effects.h"
 #include "constants/moves.h"
 
@@ -113,6 +114,9 @@ struct MoveInfo
     bool32 ignoresSubstitute:1;
     bool32 forcePressure:1;
     bool32 cantUseTwice:1;
+    bool32 alwaysHitsInRain:1;
+    bool32 accuracy50InSun:1;
+    bool32 alwaysHitsInHailSnow:1;
     // Ban flags
     bool32 gravityBanned:1;
     bool32 mirrorMoveBanned:1;
@@ -129,7 +133,7 @@ struct MoveInfo
     bool32 sketchBanned:1;
     //Other
     bool32 validApprenticeMove:1;
-    u32 padding:10;
+    u32 padding:7;
     // end of word
 
     union {
@@ -145,6 +149,7 @@ struct MoveInfo
         u32 fixedDamage;
         u32 absorbPercentage;
         u32 recoilPercentage;
+        u32 nonVolatileStatus;
     } argument;
 
     // primary/secondary effects
@@ -158,7 +163,7 @@ struct MoveInfo
     const u8 *battleAnimScript;
 };
 
-extern const struct MoveInfo gMovesInfo[];
+extern const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL];
 extern const u8 gNotDoneYetDescription[];
 extern const struct BattleMoveEffect gBattleMoveEffects[];
 
@@ -175,17 +180,17 @@ static inline const u8 *GetMoveName(u32 moveId)
     return gMovesInfo[SanitizeMoveId(moveId)].name;
 }
 
+static inline enum BattleMoveEffects GetMoveEffect(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].effect;
+}
+
 static inline const u8 *GetMoveDescription(u32 moveId)
 {
     moveId = SanitizeMoveId(moveId);
-    if (gMovesInfo[moveId].effect == EFFECT_PLACEHOLDER)
+    if (GetMoveEffect(moveId) == EFFECT_PLACEHOLDER)
         return gNotDoneYetDescription;
     return gMovesInfo[moveId].description;
-}
-
-static inline u32 GetMoveEffect(u32 moveId)
-{
-    return gMovesInfo[SanitizeMoveId(moveId)].effect;
 }
 
 static inline u32 GetMoveType(u32 moveId)
@@ -388,6 +393,21 @@ static inline bool32 MoveCantBeUsedTwice(u32 moveId)
     return gMovesInfo[SanitizeMoveId(moveId)].cantUseTwice;
 }
 
+static inline bool32 MoveAlwaysHitsInRain(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].alwaysHitsInRain;
+}
+
+static inline bool32 MoveHas50AccuracyInSun(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].accuracy50InSun;
+}
+
+static inline bool32 MoveAlwaysHitsInHailSnow(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].alwaysHitsInHailSnow;
+}
+
 static inline bool32 IsMoveGravityBanned(u32 moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].gravityBanned;
@@ -453,6 +473,11 @@ static inline bool32 IsMoveSketchBanned(u32 moveId)
     return gMovesInfo[SanitizeMoveId(moveId)].sketchBanned;
 }
 
+static inline bool32 IsValidApprenticeMove(u32 moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].validApprenticeMove;
+}
+
 static inline u32 GetMoveTwoTurnAttackStringId(u32 moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].argument.twoTurnAttack.stringId;
@@ -511,6 +536,20 @@ static inline u32 GetMoveRecoil(u32 moveId)
     return gMovesInfo[SanitizeMoveId(moveId)].argument.recoilPercentage;
 }
 
+static inline u32 GetMoveNonVolatileStatus(u32 move)
+{
+    move = SanitizeMoveId(move);
+    switch(GetMoveEffect(move))
+    {
+    case EFFECT_NON_VOLATILE_STATUS:
+    case EFFECT_YAWN:
+    case EFFECT_DARK_VOID:
+        return gMovesInfo[move].argument.nonVolatileStatus;
+    default:
+        return MOVE_EFFECT_NONE;
+    }
+}
+
 static inline const struct AdditionalEffect *GetMoveAdditionalEffectById(u32 moveId, u32 effect)
 {
     return &gMovesInfo[SanitizeMoveId(moveId)].additionalEffects[effect];
@@ -550,12 +589,12 @@ static inline const u8 *GetMoveAnimationScript(u32 moveId)
 static inline const u8 *GetMoveBattleScript(u32 moveId)
 {
     moveId = SanitizeMoveId(moveId);
-    if (gBattleMoveEffects[gMovesInfo[moveId].effect].battleScript == NULL)
+    if (gBattleMoveEffects[GetMoveEffect(moveId)].battleScript == NULL)
     {
         DebugPrintfLevel(MGBA_LOG_WARN, "No effect for moveId=%u", moveId);
         return gBattleMoveEffects[EFFECT_PLACEHOLDER].battleScript;
     }
-    return gBattleMoveEffects[gMovesInfo[moveId].effect].battleScript;
+    return gBattleMoveEffects[GetMoveEffect(moveId)].battleScript;
 }
 
 #endif // GUARD_MOVES_H

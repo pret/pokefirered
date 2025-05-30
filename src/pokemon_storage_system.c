@@ -6628,7 +6628,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
 
         // Buffer item name
         if (gStorage->displayMonItemId != ITEM_NONE)
-            StringCopyPadded(gStorage->displayMonItemNameText, ItemId_GetName(gStorage->displayMonItemId), CHAR_SPACE, 8);
+            StringCopyPadded(gStorage->displayMonItemNameText, GetItemName(gStorage->displayMonItemId), CHAR_SPACE, 8);
         else
             StringFill(gStorage->displayMonItemNameText, CHAR_SPACE, 8);
     }
@@ -8545,7 +8545,7 @@ static bool8 IsActiveItemMoving(void)
 
 static const u8 *GetMovingItemName(void)
 {
-    return ItemId_GetName(gStorage->movingItemId);
+    return GetItemName(gStorage->movingItemId);
 }
 
 static u16 GetMovingItem(void)
@@ -8733,9 +8733,9 @@ static void PrintItemDescription(void)
     const u8 *description;
 
     if (IsActiveItemMoving())
-        description = ItemId_GetDescription(gStorage->movingItemId);
+        description = GetItemDescription(gStorage->movingItemId);
     else
-        description = ItemId_GetDescription(gStorage->displayMonItemId);
+        description = GetItemDescription(gStorage->displayMonItemId);
 
     FillWindowPixelBuffer(2, PIXEL_FILL(1));
     AddTextPrinterParameterized5(2, FONT_NORMAL, description, 2, 0, 0, NULL, 0, 0);

@@ -7,7 +7,7 @@ SINGLE_BATTLE_TEST("Steam Engine raises speed when hit by a Fire or Water move")
 
     PARAMETRIZE { move = MOVE_EMBER; }
     PARAMETRIZE { move = MOVE_WATER_GUN; }
-    
+
     GIVEN {
         PLAYER(SPECIES_COALOSSAL) { Ability(ABILITY_STEAM_ENGINE); }
         OPPONENT(SPECIES_WOBBUFFET);

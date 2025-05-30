@@ -59,7 +59,7 @@ NavelRock_Summit_EventScript_HoOh::
 	special RemoveCameraObject
 	seteventmon SPECIES_HO_OH, 70
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE
-	special StartLegendaryBattle
+	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	setvar VAR_LAST_TALKED, LOCALID_NAVEL_ROCK_HO_OH

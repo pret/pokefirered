@@ -1,13 +1,21 @@
 #ifndef GUARD_BATTLE_INTERFACE_H
 #define GUARD_BATTLE_INTERFACE_H
 
-#include "global.h"
 #include "battle_controllers.h"
+
+// used for sBattlerCoords and sBattlerHealthboxCoords
+enum BattleCoordTypes
+{
+    BATTLE_COORDS_SINGLES,
+    BATTLE_COORDS_DOUBLES,
+    BATTLE_COORDS_COUNT,
+};
 
 enum
 {
     HP_CURRENT,
-    HP_MAX
+    HP_MAX,
+    HP_BOTH
 };
 
 enum
@@ -56,15 +64,15 @@ enum
 #define TAG_OMEGA_INDICATOR_TILE        0xD77A
 #define TAG_DYNAMAX_INDICATOR_TILE      0xD77B
 
-#define TAG_NORMAL_INDICATOR_TILE       0xD77F
-#define TAG_FIGHTING_INDICATOR_TILE     0xD780
-#define TAG_FLYING_INDICATOR_TILE       0xD781
-#define TAG_POISON_INDICATOR_TILE       0xD782
-#define TAG_GROUND_INDICATOR_TILE       0xD783
-#define TAG_ROCK_INDICATOR_TILE         0xD784
-#define TAG_BUG_INDICATOR_TILE          0xD785
-#define TAG_GHOST_INDICATOR_TILE        0xD786
-#define TAG_STEEL_INDICATOR_TILE        0xD787
+#define TAG_NORMAL_INDICATOR_TILE       0xD77C
+#define TAG_FIGHTING_INDICATOR_TILE     0xD77D
+#define TAG_FLYING_INDICATOR_TILE       0xD77E
+#define TAG_POISON_INDICATOR_TILE       0xD77F
+#define TAG_GROUND_INDICATOR_TILE       0xD780
+#define TAG_ROCK_INDICATOR_TILE         0xD781
+#define TAG_BUG_INDICATOR_TILE          0xD782
+#define TAG_GHOST_INDICATOR_TILE        0xD783
+#define TAG_STEEL_INDICATOR_TILE        0xD784
 // empty spot for TYPE_MYSTERY
 #define TAG_FIRE_INDICATOR_TILE         0xD786
 #define TAG_WATER_INDICATOR_TILE        0xD787
@@ -99,55 +107,39 @@ enum
     HEALTHBOX_SAFARI_BALLS_TEXT
 };
 
-u32 WhichBattleCoords(u32 battlerId);
-void Task_HidePartyStatusSummary(u8 taskId);
-u8 CreateBattlerHealthboxSprites(u8 battlerId);
+enum BattleCoordTypes GetBattlerCoordsIndex(u32 battler);
+u8 CreateBattlerHealthboxSprites(u8 battler);
 u8 CreateSafariPlayerHealthboxSprites(void);
-void SetBattleBarStruct(u8 battlerId, u8 healthboxSpriteId, s32 maxVal, s32 currVal, s32 receivedValue);
+void SetBattleBarStruct(u8 battler, u8 healthboxSpriteId, s32 maxVal, s32 oldVal, s32 receivedValue);
 void SetHealthboxSpriteInvisible(u8 healthboxSpriteId);
 void SetHealthboxSpriteVisible(u8 healthboxSpriteId);
-void DestoryHealthboxSprite(u8 healthboxSpriteId);
-void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBankOnly);
-void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHPBoxes);
-void InitBattlerHealthboxCoords(u8 battlerId);
+void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBattlerOnly);
+void UpdateOamPriorityInAllHealthboxes(u8 priority, bool32 hideHpBoxes);
+void InitBattlerHealthboxCoords(u8 battler);
 void GetBattlerHealthboxCoords(u8 battler, s16 *x, s16 *y);
 void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp);
 void SwapHpBarsWithHpText(void);
-u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, u8 isSwitchingMons, bool8 isBattleStart);
+u8 CreatePartyStatusSummarySprites(u8 battler, struct HpAndStatus *partyInfo, bool8 skipPlayer, bool8 isBattleStart);
+void Task_HidePartyStatusSummary(u8 taskId);
 void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elementId);
+s32 MoveBattleBar(u8 battler, u8 healthboxSpriteId, u8 whichBar, u8 unused);
 u8 GetScaledHPFraction(s16 hp, s16 maxhp, u8 scale);
 u8 GetHPBarLevel(s16 hp, s16 maxhp);
-void UpdateNickInHealthbox(u8 spriteId, struct Pokemon *mon);
-void TryAddPokeballIconToHealthbox(u8 spriteId, u8);
-s32 MoveBattleBar(u8 battler, u8 healthboxSpriteId, u8 whichBar, u8 arg3);
-
-void CreateMegaTriggerSprite(u8 battlerId, u8 palId);
-void ChangeMegaTriggerSprite(u8 spriteId, u8 animId);
-void HideMegaTriggerSprite(void);
-void DestroyMegaTriggerSprite(void);
-bool32 IsMegaTriggerSpriteActive(void);
-
-void CreateBurstTriggerSprite(u8 battlerId, u8 palId);
-void ChangeBurstTriggerSprite(u8 spriteId, u8 animId);
-void HideBurstTriggerSprite(void);
-void DestroyBurstTriggerSprite(void);
-bool32 IsBurstTriggerSpriteActive(void);
-
-void HideTriggerSprites(void);
-
 void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle);
 void DestroyAbilityPopUp(u8 battlerId);
-void UpdateAbilityPopup(u8 battlerId);
-
 bool32 CanThrowLastUsedBall(void);
 void TryHideLastUsedBall(void);
 void TryRestoreLastUsedBall(void);
 void TryAddLastUsedBallItemSprites(void);
 void SwapBallToDisplay(bool32 sameBall);
 void ArrowsChangeColorLastBallCycle(bool32 showArrows);
-
+void UpdateAbilityPopup(u8 battlerId);
 void CategoryIcons_LoadSpritesGfx(void);
 void TryToAddMoveInfoWindow(void);
 void TryToHideMoveInfoWindow(void);
+
+// frlg
+void UpdateNickInHealthbox(u8 spriteId, struct Pokemon *mon);
+void TryAddPokeballIconToHealthbox(u8 spriteId, u8);
 
 #endif // GUARD_BATTLE_INTERFACE_H

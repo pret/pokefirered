@@ -9,8 +9,8 @@ ASSUMPTIONS
     ASSUME(!IsBattleMoveStatus(MOVE_FEINT_ATTACK));
     ASSUME(GetMoveType(MOVE_SHADOW_PUNCH) == TYPE_GHOST);
     ASSUME(!IsBattleMoveStatus(MOVE_SHADOW_PUNCH));
-    ASSUME(GetMoveType(MOVE_TACKLE) == TYPE_NORMAL);
-    ASSUME(!IsBattleMoveStatus(MOVE_TACKLE));
+    ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
+    ASSUME(!IsBattleMoveStatus(MOVE_SCRATCH));
 }
 
 SINGLE_BATTLE_TEST("Rattled boosts speed by 1 when hit by Bug, Dark or Ghost type move")
@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Rattled boosts speed by 1 when hit by Bug, Dark or Ghost typ
     PARAMETRIZE { move = MOVE_FURY_CUTTER; }
     PARAMETRIZE { move = MOVE_FEINT_ATTACK; }
     PARAMETRIZE { move = MOVE_SHADOW_PUNCH; }
-    PARAMETRIZE { move = MOVE_TACKLE; }
+    PARAMETRIZE { move = MOVE_SCRATCH; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) {Speed(42) ;}
         OPPONENT(SPECIES_SUDOWOODO) {Speed(40); Ability(ABILITY_RATTLED);}
@@ -29,14 +29,14 @@ SINGLE_BATTLE_TEST("Rattled boosts speed by 1 when hit by Bug, Dark or Ghost typ
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, player);
         HP_BAR(opponent);
-        if (move != MOVE_TACKLE) {
+        if (move != MOVE_SCRATCH) {
             ABILITY_POPUP(opponent, ABILITY_RATTLED);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
             MESSAGE("The opposing Sudowoodo's Speed rose!");
         }
         MESSAGE("The opposing Sudowoodo used Celebrate!");
         // Sudowoodo is now faster
-        if (move != MOVE_TACKLE){
+        if (move != MOVE_SCRATCH){
             MESSAGE("The opposing Sudowoodo used Celebrate!");
             ANIMATION(ANIM_TYPE_MOVE, move, player);
             HP_BAR(opponent);

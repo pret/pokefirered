@@ -90,3 +90,17 @@ SINGLE_BATTLE_TEST("Hail damage rounds properly when maxHP < 16")
         HP_BAR(player, damage: 1);
     }
 }
+
+SINGLE_BATTLE_TEST("Hail doesn't do damage when weather is negated")
+{
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] != TYPE_ICE);
+        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[1] != TYPE_ICE);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GOLDUCK) { Ability(ABILITY_CLOUD_NINE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_HAIL); }
+    } SCENE {
+        NOT HP_BAR(player);
+    }
+}

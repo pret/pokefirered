@@ -12,15 +12,15 @@ SINGLE_BATTLE_TEST("Speed Swap swaps user and target's speed stats")
         PLAYER(SPECIES_WOBBUFFET) { Speed(6); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(10); }
     }WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); MOVE(player, MOVE_SPEED_SWAP); }
-        TURN { MOVE(opponent, MOVE_TACKLE); MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); MOVE(player, MOVE_SPEED_SWAP); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         // Turn 1
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPEED_SWAP, player);
         // Turn 2
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
     } THEN {
         EXPECT_EQ(player->speed, 10);
         EXPECT_EQ(opponent->speed, 6);
@@ -39,14 +39,14 @@ SINGLE_BATTLE_TEST("Speed Swap doesn't swap user and target's speed modifiers")
         OPPONENT(species) { Speed(10); Ability(ability); }
     }WHEN {
         TURN { MOVE(opponent, move); MOVE(player, MOVE_SPEED_SWAP); }
-        TURN { MOVE(opponent, MOVE_TACKLE); MOVE(player, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         // Turn 1
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SPEED_SWAP, player);
         // Turn 2
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponent); // Opponent is still first
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent); // Opponent is still first
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
     } THEN {
         EXPECT_EQ(player->speed, 10);
         EXPECT_EQ(opponent->speed, 8);

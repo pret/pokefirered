@@ -28,7 +28,7 @@ DOUBLE_BATTLE_TEST("Ally Switch fails if there is no partner")
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_TACKLE, target:playerRight); }
+        TURN { MOVE(opponentLeft, MOVE_SCRATCH, target:playerRight); }
         TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); }
     } SCENE {
         MESSAGE("Wobbuffet fainted!");
@@ -103,14 +103,14 @@ DOUBLE_BATTLE_TEST("Ally Switch does not redirect moves done by pokemon with Sta
         OPPONENT(SPECIES_KADABRA) { Ability(ability); }
         OPPONENT(SPECIES_ABRA);
     } WHEN {
-        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); MOVE(opponentLeft, MOVE_TACKLE, target:playerRight); } // Kadabra targets playerRight Wynaut.
+        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); MOVE(opponentLeft, MOVE_SCRATCH, target:playerRight); } // Kadabra targets playerRight Wynaut.
     } SCENE {
         MESSAGE("Wobbuffet used Ally Switch!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
         MESSAGE("Wobbuffet and Wynaut switched places!");
 
-        MESSAGE("The opposing Kadabra used Tackle!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TACKLE, opponentLeft);
+        MESSAGE("The opposing Kadabra used Scratch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponentLeft);
         HP_BAR((ability == ABILITY_STALWART || ability == ABILITY_PROPELLER_TAIL) ? playerLeft : playerRight);
     }
 }
@@ -120,14 +120,14 @@ DOUBLE_BATTLE_TEST("Ally Switch has no effect on partner's chosen move")
     u16 chosenMove;
     struct BattlePokemon *chosenTarget = NULL;
 
-    PARAMETRIZE { chosenMove = MOVE_TACKLE; chosenTarget = opponentLeft; }
-    PARAMETRIZE { chosenMove = MOVE_TACKLE; chosenTarget = opponentRight; }
+    PARAMETRIZE { chosenMove = MOVE_SCRATCH; chosenTarget = opponentLeft; }
+    PARAMETRIZE { chosenMove = MOVE_SCRATCH; chosenTarget = opponentRight; }
     PARAMETRIZE { chosenMove = MOVE_POUND; chosenTarget = opponentLeft; }
     PARAMETRIZE { chosenMove = MOVE_POUND; chosenTarget = opponentRight; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WYNAUT) { Moves(MOVE_TACKLE, MOVE_POUND, MOVE_CELEBRATE, MOVE_SCRATCH); }
+        PLAYER(SPECIES_WYNAUT) { Moves(MOVE_SCRATCH, MOVE_POUND, MOVE_CELEBRATE, MOVE_SCRATCH); }
         OPPONENT(SPECIES_KADABRA);
         OPPONENT(SPECIES_ABRA);
     } WHEN {

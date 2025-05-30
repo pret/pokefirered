@@ -32,6 +32,7 @@ enum ShouldSwitchScenario
     SHOULD_SWITCH_CHOICE_LOCKED,
     SHOULD_SWITCH_ATTACKING_STAT_MINUS_TWO,
     SHOULD_SWITCH_ATTACKING_STAT_MINUS_THREE_PLUS,
+    SHOULD_SWITCH_ALL_SCORES_BAD,
 };
 
 enum SwitchType
@@ -45,5 +46,6 @@ void AI_TrySwitchOrUseItem(u32 battler);
 u32 GetMostSuitableMonToSwitchInto(u32 battler, enum SwitchType switchType);
 bool32 ShouldSwitch(u32 battler);
 bool32 IsMonGrounded(u16 heldItemEffect, u32 ability, u8 type1, u8 type2);
+void ModifySwitchAfterMoveScoring(u32 battler);
 
 #endif // GUARD_BATTLE_AI_SWITCH_ITEMS_H

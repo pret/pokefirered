@@ -5,7 +5,7 @@ ASSUMPTIONS
 {
     ASSUME(gItemsInfo[ITEM_AIR_BALLOON].holdEffect == HOLD_EFFECT_AIR_BALLOON);
     ASSUME(GetMoveType(MOVE_EARTHQUAKE) == TYPE_GROUND);
-    ASSUME(GetMoveType(MOVE_TACKLE) != TYPE_GROUND);
+    ASSUME(GetMoveType(MOVE_SCRATCH) != TYPE_GROUND);
     ASSUME(GetMoveEffect(MOVE_RECYCLE) == EFFECT_RECYCLE);
 }
 
@@ -30,10 +30,10 @@ SINGLE_BATTLE_TEST("Air Balloon pops when the holder is hit by a move that is no
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_AIR_BALLOON); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
-        MESSAGE("The opposing Wobbuffet used Tackle!");
+        MESSAGE("The opposing Wobbuffet used Scratch!");
         MESSAGE("Wobbuffet's Air Balloon popped!");
     }
 }
@@ -44,11 +44,11 @@ SINGLE_BATTLE_TEST("Air Balloon no longer prevents the holder from taking damage
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_AIR_BALLOON); };
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
         TURN { MOVE(opponent, MOVE_EARTHQUAKE); }
     } SCENE {
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
-        MESSAGE("The opposing Wobbuffet used Tackle!");
+        MESSAGE("The opposing Wobbuffet used Scratch!");
         MESSAGE("Wobbuffet's Air Balloon popped!");
         MESSAGE("The opposing Wobbuffet used Earthquake!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, opponent);
@@ -63,12 +63,12 @@ SINGLE_BATTLE_TEST("Air Balloon can not be restored with Recycle after it has be
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {
-            MOVE(opponent, MOVE_TACKLE);
+            MOVE(opponent, MOVE_SCRATCH);
             MOVE(player, MOVE_RECYCLE);
         }
     } SCENE {
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
-        MESSAGE("The opposing Wobbuffet used Tackle!");
+        MESSAGE("The opposing Wobbuffet used Scratch!");
         MESSAGE("Wobbuffet's Air Balloon popped!");
         MESSAGE("Wobbuffet used Recycle!");
         MESSAGE("But it failed!");
@@ -94,7 +94,7 @@ SINGLE_BATTLE_TEST("Air Balloon pops before it can be stolen with Magician")
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_AIR_BALLOON); };
         OPPONENT(SPECIES_DELPHOX) { Ability(ABILITY_MAGICIAN); };
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TACKLE); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         MESSAGE("Wobbuffet floats in the air with its Air Balloon!");
         MESSAGE("Wobbuffet's Air Balloon popped!");

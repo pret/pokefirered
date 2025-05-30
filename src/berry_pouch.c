@@ -765,7 +765,7 @@ static void PrintSelectedBerryDescription(s32 itemIdx)
 {
     const u8 * str;
     if (itemIdx != sResources->listMenuNumItems)
-        str = ItemId_GetDescription(BagGetItemIdByPocketPosition(POCKET_BERRIES, itemIdx));
+        str = GetItemDescription(BagGetItemIdByPocketPosition(POCKET_BERRIES, itemIdx));
     else
         str = gText_TheBerryPouchWillBePutAway;
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
@@ -1086,8 +1086,8 @@ static void Task_BerryPouch_Use(u8 taskId)
     ScheduleBgCopyTilemapToVram(2);
     if (sStaticCnt.type == BERRYPOUCH_FROMBATTLE)
     {
-        u16 type = ItemId_GetType(gSpecialVar_ItemId);
-        if (!ItemId_GetBattleUsage(gSpecialVar_ItemId)) {
+        u16 type = GetItemType(gSpecialVar_ItemId);
+        if (!GetItemBattleUsage(gSpecialVar_ItemId)) {
             ItemUseOutOfBattle_CannotUse(taskId);
             return;
         }
@@ -1111,11 +1111,11 @@ static void Task_BerryPouch_Use(u8 taskId)
         sResources->exitCallback = CB2_ReturnToField;
         BerryPouch_StartFadeToExitCallback(taskId);
     }
-    else if (CalculatePlayerPartyCount() == 0 && ItemId_GetType(gSpecialVar_ItemId) == ITEM_USE_PARTY_MENU) {
+    else if (CalculatePlayerPartyCount() == 0 && GetItemType(gSpecialVar_ItemId) == ITEM_USE_PARTY_MENU) {
         Task_Give_PrintThereIsNoPokemon(taskId);
     }
     else {
-        ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
+        GetItemFieldFunc(gSpecialVar_ItemId)(taskId);
     }
 }
 
@@ -1304,7 +1304,7 @@ static void Task_ContextMenu_FromPokemonPC(u8 taskId)
 static void Task_ContextMenu_Sell(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    if (ItemId_GetPrice(gSpecialVar_ItemId) == 0)
+    if (GetItemPrice(gSpecialVar_ItemId) == 0)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_OhNoICantBuyThat);
@@ -1332,7 +1332,7 @@ static void Task_ContextMenu_Sell(u8 taskId)
 static void Task_AskSellMultiple(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    ConvertIntToDecimalStringN(gStringVar3, ItemId_GetPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_ICanPayThisMuch_WouldThatBeOkay);
     DisplayItemMessageInBerryPouch(taskId, GetDialogBoxFontId(), gStringVar4, Task_SellMultiple_CreateYesNoMenu);
 }
@@ -1362,7 +1362,7 @@ static void Task_Sell_PrintSelectMultipleUI(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
     BerryPouchPrint(windowId, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0xFF, 1);
-    SellMultiple_UpdateSellPriceDisplay(ItemId_GetPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8]);
+    SellMultiple_UpdateSellPriceDisplay(GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8]);
     PrintMoneyInWin2();
     CreateScrollIndicatorArrows_SellQuantity();
     gTasks[taskId].func = Task_Sell_SelectMultiple;
@@ -1379,7 +1379,7 @@ static void Task_Sell_SelectMultiple(u8 taskId)
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
     {
         PrintxQuantityOnWindow(1, data[8], 2);
-        SellMultiple_UpdateSellPriceDisplay(ItemId_GetPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8]);
+        SellMultiple_UpdateSellPriceDisplay(GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8]);
     }
     else if (JOY_NEW(A_BUTTON))
     {
@@ -1412,7 +1412,7 @@ static void Task_SellYes(u8 taskId)
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    ConvertIntToDecimalStringN(gStringVar3, ItemId_GetPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_TurnedOverItemsWorthYen);
     DisplayItemMessageInBerryPouch(taskId, FONT_NORMAL, gStringVar4, Task_SellBerries_PlaySfxAndRemoveBerries);
 }
@@ -1422,7 +1422,7 @@ static void Task_SellBerries_PlaySfxAndRemoveBerries(u8 taskId)
     s16 * data = gTasks[taskId].data;
     PlaySE(SE_SHOP);
     RemoveBagItem(gSpecialVar_ItemId, data[8]);
-    AddMoney(&gSaveBlock1Ptr->money, ItemId_GetPrice(gSpecialVar_ItemId) / 2 * data[8]);
+    AddMoney(&gSaveBlock1Ptr->money, GetItemPrice(gSpecialVar_ItemId) / 2 * data[8]);
     RecordItemTransaction(gSpecialVar_ItemId, data[8], QL_EVENT_SOLD_ITEM - QL_EVENT_USED_POKEMART);
     DestroyListMenuTask(data[0], &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
     SortAndCountBerries();

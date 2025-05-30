@@ -99,34 +99,29 @@ static const u16 sMiscIndicatorPal[] = INCBIN_U16("graphics/battle_interface/mis
 static const u16 sMegaIndicatorPal[] = INCBIN_U16("graphics/battle_interface/mega_indicator.gbapal");
 static const u16 sTeraIndicatorPal[] = INCBIN_U16("graphics/battle_interface/tera_indicator.gbapal");
 
-static const struct SpriteSheet sSpriteSheet_MegaIndicator = {sMegaIndicatorGfx, sizeof(sMegaIndicatorGfx), TAG_MEGA_INDICATOR_TILE};
-static const struct SpriteSheet sSpriteSheet_AlphaIndicator = {sAlphaIndicatorGfx, sizeof(sAlphaIndicatorGfx), TAG_ALPHA_INDICATOR_TILE};
-static const struct SpriteSheet sSpriteSheet_OmegaIndicator = {sOmegaIndicatorGfx, sizeof(sOmegaIndicatorGfx), TAG_OMEGA_INDICATOR_TILE};
-static const struct SpriteSheet sSpriteSheet_DynamaxIndicator = {sDynamaxIndicatorGfx, sizeof(sDynamaxIndicatorGfx), TAG_DYNAMAX_INDICATOR_TILE};
-static const struct SpriteSheet sTeraIndicatorSpriteSheets[NUMBER_OF_MON_TYPES + 1] =
+static const u8 *const sTeraIndicatorDataPtrs[] =
 {
-    {sNormalIndicatorGfx, sizeof(sNormalIndicatorGfx), TAG_NORMAL_INDICATOR_TILE}, // TYPE_NONE
-    {sNormalIndicatorGfx, sizeof(sNormalIndicatorGfx), TAG_NORMAL_INDICATOR_TILE},
-    {sFightingIndicatorGfx, sizeof(sFightingIndicatorGfx), TAG_FIGHTING_INDICATOR_TILE},
-    {sFlyingIndicatorGfx, sizeof(sFlyingIndicatorGfx), TAG_FLYING_INDICATOR_TILE},
-    {sPoisonIndicatorGfx, sizeof(sPoisonIndicatorGfx), TAG_POISON_INDICATOR_TILE},
-    {sGroundIndicatorGfx, sizeof(sGroundIndicatorGfx), TAG_GROUND_INDICATOR_TILE},
-    {sRockIndicatorGfx, sizeof(sRockIndicatorGfx), TAG_ROCK_INDICATOR_TILE},
-    {sBugIndicatorGfx, sizeof(sBugIndicatorGfx), TAG_BUG_INDICATOR_TILE},
-    {sGhostIndicatorGfx, sizeof(sGhostIndicatorGfx), TAG_GHOST_INDICATOR_TILE},
-    {sSteelIndicatorGfx, sizeof(sSteelIndicatorGfx), TAG_STEEL_INDICATOR_TILE},
-    {sNormalIndicatorGfx, sizeof(sNormalIndicatorGfx), TAG_NORMAL_INDICATOR_TILE}, // TYPE_MYSTERY
-    {sFireIndicatorGfx, sizeof(sFireIndicatorGfx), TAG_FIRE_INDICATOR_TILE},
-    {sWaterIndicatorGfx, sizeof(sWaterIndicatorGfx), TAG_WATER_INDICATOR_TILE},
-    {sGrassIndicatorGfx, sizeof(sGrassIndicatorGfx), TAG_GRASS_INDICATOR_TILE},
-    {sElectricIndicatorGfx, sizeof(sElectricIndicatorGfx), TAG_ELECTRIC_INDICATOR_TILE},
-    {sPsychicIndicatorGfx, sizeof(sPsychicIndicatorGfx), TAG_PSYCHIC_INDICATOR_TILE},
-    {sIceIndicatorGfx, sizeof(sIceIndicatorGfx), TAG_ICE_INDICATOR_TILE},
-    {sDragonIndicatorGfx, sizeof(sDragonIndicatorGfx), TAG_DRAGON_INDICATOR_TILE},
-    {sDarkIndicatorGfx, sizeof(sDarkIndicatorGfx), TAG_DARK_INDICATOR_TILE},
-    {sFairyIndicatorGfx, sizeof(sFairyIndicatorGfx), TAG_FAIRY_INDICATOR_TILE},
-    {sStellarIndicatorGfx, sizeof(sStellarIndicatorGfx), TAG_STELLAR_INDICATOR_TILE},
-    {0}
+    sNormalIndicatorGfx,
+    sNormalIndicatorGfx,
+    sFightingIndicatorGfx,
+    sFlyingIndicatorGfx,
+    sPoisonIndicatorGfx,
+    sGroundIndicatorGfx,
+    sRockIndicatorGfx,
+    sBugIndicatorGfx,
+    sGhostIndicatorGfx,
+    sSteelIndicatorGfx,
+    sNormalIndicatorGfx,
+    sFireIndicatorGfx,
+    sWaterIndicatorGfx,
+    sGrassIndicatorGfx,
+    sElectricIndicatorGfx,
+    sPsychicIndicatorGfx,
+    sIceIndicatorGfx,
+    sDragonIndicatorGfx,
+    sDarkIndicatorGfx,
+    sFairyIndicatorGfx,
+    sStellarIndicatorGfx,
 };
 
 static const struct SpritePalette sSpritePalette_MiscIndicator = {sMiscIndicatorPal, TAG_MISC_INDICATOR_PAL};
@@ -135,19 +130,62 @@ static const struct SpritePalette sSpritePalette_TeraIndicator = {sTeraIndicator
 
 static const struct OamData sOamData_GimmickIndicator =
 {
-    .shape = SPRITE_SHAPE(16x16),
-    .size = SPRITE_SIZE(16x16),
+    .shape = SPRITE_SHAPE(8x16),
+    .size = SPRITE_SIZE(8x16),
     .priority = 1,
 };
 
 static void SpriteCb_GimmickIndicator(struct Sprite *sprite);
-static const struct SpriteTemplate sSpriteTemplate_GimmickIndicator =
+
+#define BATTLER_INDICATOR_TAG 0xDEDE
+static const struct SpriteSheet sBattler_GimmickSpritesheets[] =
 {
-    .tileTag = TAG_NORMAL_INDICATOR_TILE,   // updated dynamically
-    .paletteTag = TAG_TERA_INDICATOR_PAL,   // updated dynamically
-    .oam = &sOamData_GimmickIndicator,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCb_GimmickIndicator,
+    {sNormalIndicatorGfx, sizeof(sNormalIndicatorGfx), BATTLER_INDICATOR_TAG},
+    {sNormalIndicatorGfx, sizeof(sNormalIndicatorGfx), BATTLER_INDICATOR_TAG+1},
+    {sNormalIndicatorGfx, sizeof(sNormalIndicatorGfx), BATTLER_INDICATOR_TAG+2},
+    {sNormalIndicatorGfx, sizeof(sNormalIndicatorGfx), BATTLER_INDICATOR_TAG+3},
+};
+
+static const struct SpriteTemplate sSpriteTemplate_BattlerIndicators[] =
+{
+    [0] =
+    {
+        .tileTag = BATTLER_INDICATOR_TAG,   // updated dynamically
+        .paletteTag = TAG_TERA_INDICATOR_PAL,   // updated dynamically
+        .oam = &sOamData_GimmickIndicator,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCb_GimmickIndicator,
+    },
+    [1] =
+    {
+        .tileTag = BATTLER_INDICATOR_TAG + 1,   // updated dynamically
+        .paletteTag = TAG_TERA_INDICATOR_PAL,   // updated dynamically
+        .oam = &sOamData_GimmickIndicator,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCb_GimmickIndicator,
+    },
+    [2] =
+    {
+        .tileTag = BATTLER_INDICATOR_TAG + 2,   // updated dynamically
+        .paletteTag = TAG_TERA_INDICATOR_PAL,   // updated dynamically
+        .oam = &sOamData_GimmickIndicator,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCb_GimmickIndicator,
+    },
+    [3] =
+    {
+        .tileTag = BATTLER_INDICATOR_TAG + 3,   // updated dynamically
+        .paletteTag = TAG_TERA_INDICATOR_PAL,   // updated dynamically
+        .oam = &sOamData_GimmickIndicator,
+        .anims = gDummySpriteAnimTable,
+        .images = NULL,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCb_GimmickIndicator,
+    },
 };

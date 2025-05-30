@@ -91,7 +91,7 @@ enum {
    gBattleControllerExecFlags |= (1u << battler) << ((playerId) << 2)
 
 #define MARK_BATTLE_CONTROLLER_IDLE_FOR_PLAYER(battler, playerId) \
-   gBattleControllerExecFlags &= ~(1u << battler) << ((playerId) * 4)
+   gBattleControllerExecFlags &= ~((u32)(1u << battler) << ((playerId) * 4))
 
 #define IS_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battler, playerId) \
    (gBattleControllerExecFlags & (1u << battler) << ((playerId) * 4))

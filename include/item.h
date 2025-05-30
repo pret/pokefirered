@@ -39,7 +39,7 @@ extern const struct Item gItemsInfo[];
 extern struct BagPocket gBagPockets[];
 
 void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity);
-void CopyItemName(u16 itemId, u8 *string);
+u8 *CopyItemName(u16 itemId, u8 *string);
 u8 *CopyItemNameHandlePlural(u16 itemId, u8 *string, u32 quantity);
 bool8 IsBagPocketNonEmpty(u8 pocket);
 bool8 CheckBagHasItem(u16 itemId, u16 count);

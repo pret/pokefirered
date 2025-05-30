@@ -342,7 +342,7 @@ gSpecials::
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
-	def_special GetPartyMonSpecies
+	def_special ScriptGetPartyMonSpecies
 	def_special IsSelectedMonEgg
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial

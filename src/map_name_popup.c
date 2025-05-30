@@ -136,7 +136,7 @@ static void Task_MapNamePopup(u8 taskId)
     SetGpuReg(REG_OFFSET_BG0VOFS, task->tPos);
 }
 
-void DismissMapNamePopup(void)
+void HideMapNamePopUpWindow(void)
 {
     u8 taskId;
     s16 *data;

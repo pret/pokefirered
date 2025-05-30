@@ -1426,7 +1426,7 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
             if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_RECORDING)
                 QL_RecordFieldInput(&gFieldInputRecord);
             LockPlayerFieldControls();
-            DismissMapNamePopup();
+            HideMapNamePopUpWindow();
         }
         else
         {
@@ -1451,7 +1451,7 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
         if (ProcessPlayerFieldInput(&fieldInput) == TRUE)
         {
             LockPlayerFieldControls();
-            DismissMapNamePopup();
+            HideMapNamePopUpWindow();
         }
         else
         {

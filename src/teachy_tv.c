@@ -530,8 +530,8 @@ static void TeachyTvLoadGraphic(void)
     u16 src = RGB_BLACK;
     ResetTempTileDataBuffers();
     DecompressAndCopyTileDataToVram(1, gTeachyTv_Gfx, 0, 0, 0);
-    LZDecompressWram(gTeachyTvScreen_Tilemap, sResources->screenTilemap);
-    LZDecompressWram(gTeachyTvTitle_Tilemap, sResources->titleTilemap);
+    DecompressDataWithHeaderWram(gTeachyTvScreen_Tilemap, sResources->screenTilemap);
+    DecompressDataWithHeaderWram(gTeachyTvTitle_Tilemap, sResources->titleTilemap);
     LoadPalette(gTeachyTv_Pal, BG_PLTT_ID(0), 4 * PLTT_SIZE_4BPP);
     LoadPalette(&src, BG_PLTT_ID(0), sizeof(src));
     LoadSpritePalette(&gSpritePalette_GeneralFieldEffect1);
@@ -1284,7 +1284,7 @@ static void TeachyTvLoadMapTilesetToBuffer(const struct Tileset *ts, u8 *dstBuff
         if (!ts->isCompressed)
             CpuFastCopy(ts->tiles, dstBuffer, 0x20 * size);
         else
-            LZDecompressWram(ts->tiles, dstBuffer);
+            DecompressDataWithHeaderWram(ts->tiles, dstBuffer);
     }
 }
 

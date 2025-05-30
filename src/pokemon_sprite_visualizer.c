@@ -957,8 +957,8 @@ static void LoadBattleBg(u8 battleBgType, u8 battleTerrain)
         break;
     }
     
-    LZDecompressVram(gBattleEnvironmentInfo[battleTerrain].background.tileset, (void*)(BG_CHAR_ADDR(2)));
-    LZDecompressVram(gBattleEnvironmentInfo[battleTerrain].background.tilemap, (void*)(BG_SCREEN_ADDR(26)));
+    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[battleTerrain].background.tileset, (void*)(BG_CHAR_ADDR(2)));
+    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[battleTerrain].background.tilemap, (void*)(BG_SCREEN_ADDR(26)));
     LoadPalette(GetBattleBackgroundPalette(battleTerrain), 0x20, 0x60);
 }
 static void PrintBattleBgName(u8 taskId)

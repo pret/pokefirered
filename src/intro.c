@@ -247,8 +247,8 @@ extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 extern const u32 gMultiBootProgram_PokemonColosseum_End[];
 
 static const u16 sCopyright_Pal[] = INCBIN_U16("graphics/intro/copyright.gbapal");
-static const u8 sCopyright_Gfx[]  = INCBIN_U8( "graphics/intro/copyright.4bpp.lz");
-static const u8 sCopyright_Map[]  = INCBIN_U8( "graphics/intro/copyright.bin.lz");
+static const u32 sCopyright_Gfx[]  = INCBIN_U32( "graphics/intro/copyright.4bpp.lz");
+static const u32 sCopyright_Map[]  = INCBIN_U32( "graphics/intro/copyright.bin.lz");
 
 // Game Freak
 static const u16 sGameFreakBg_Pal[]   = INCBIN_U16("graphics/intro/game_freak/bg.gbapal");
@@ -903,9 +903,11 @@ static void CB2_WaitFadeBeforeSetUpIntro(void)
 
 static void LoadCopyrightGraphics(u16 charBase, u16 screenBase, u16 palOffset)
 {
-    LZ77UnCompVram(sCopyright_Gfx, (void *)BG_VRAM + charBase);
-    LZ77UnCompVram(sCopyright_Map, (void *)BG_VRAM + screenBase);
+    DebugPrintfLevel(MGBA_LOG_ERROR, "LoadCopyrightGraphics start");
+    DecompressDataWithHeaderVram(sCopyright_Gfx, (void *)BG_VRAM + charBase);
+    DecompressDataWithHeaderVram(sCopyright_Map, (void *)BG_VRAM + screenBase);
     LoadPalette(sCopyright_Pal, palOffset, sizeof(sCopyright_Pal));
+    DebugPrintfLevel(MGBA_LOG_ERROR, "LoadCopyrightGraphics end");
 }
 
 static void SerialCB_CopyrightScreen(void)

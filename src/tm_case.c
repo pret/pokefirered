@@ -601,12 +601,12 @@ static bool8 HandleLoadTMCaseGraphicsAndPalettes(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(gTMCaseMenu_Tilemap, sTilemapBuffer);
+            DecompressDataWithHeaderWram(gTMCaseMenu_Tilemap, sTilemapBuffer);
             sTMCaseDynamicResources->seqId++;
         }
         break;
     case 2:
-        LZDecompressWram(gTMCase_Tilemap, GetBgTilemapBuffer(1));
+        DecompressDataWithHeaderWram(gTMCase_Tilemap, GetBgTilemapBuffer(1));
         sTMCaseDynamicResources->seqId++;
         break;
     case 3:

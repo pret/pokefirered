@@ -24,6 +24,9 @@
 *.id2
 *.latfont
 *.lz
+*.smol
+*.fastSmol
+*.smolTM
 *.map
 *.nam
 *.o
@@ -65,6 +68,8 @@ prefabs.json
 src/data/map_group_count.h
 !/tools/mgba/mgba-rom-test.exe
 tools/trainerproc/trainerproc
+tools/compresSmol/compresSmol
+tools/compresSmol/compresSmolTilemap
 *.Identifier
 *.smol
 *.fastSmol

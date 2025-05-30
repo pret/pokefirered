@@ -110,7 +110,7 @@ void LoadMessageBoxAndFrameGfx(u8 windowId, bool8 copyToVram);
 void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void ResetBgPositions(void);
 void DisplayItemMessageOnField(u8 taskId, u8 fontId, const u8 *src, TaskFunc callback);
-void *MallocAndDecompress(const void *src, u32 * size);
+void *malloc_and_decompress(const void *src, u32 * size);
 void DrawHelpMessageWindowWithText(const u8 * text);
 u8 GetStartMenuWindowId(void);
 void DestroyHelpMessageWindow_(void);

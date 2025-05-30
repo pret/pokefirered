@@ -439,7 +439,7 @@ static bool8 ItemPc_LoadGraphics(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(gItemPcTilemap, sBg1TilemapBuffer);
+            DecompressDataWithHeaderWram(gItemPcTilemap, sBg1TilemapBuffer);
             sStateDataPtr->data[0]++;
         }
         break;

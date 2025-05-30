@@ -903,11 +903,9 @@ static void CB2_WaitFadeBeforeSetUpIntro(void)
 
 static void LoadCopyrightGraphics(u16 charBase, u16 screenBase, u16 palOffset)
 {
-    DebugPrintfLevel(MGBA_LOG_ERROR, "LoadCopyrightGraphics start");
     DecompressDataWithHeaderVram(sCopyright_Gfx, (void *)BG_VRAM + charBase);
     DecompressDataWithHeaderVram(sCopyright_Map, (void *)BG_VRAM + screenBase);
     LoadPalette(sCopyright_Pal, palOffset, sizeof(sCopyright_Pal));
-    DebugPrintfLevel(MGBA_LOG_ERROR, "LoadCopyrightGraphics end");
 }
 
 static void SerialCB_CopyrightScreen(void)

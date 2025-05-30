@@ -23,7 +23,7 @@ LavenderTown_House2_EventScript_DontRateNickname::
 	end
 
 LavenderTown_House2_EventScript_CheckCanRateMon::
-	specialvar VAR_RESULT, GetPartyMonSpecies
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	goto_if_eq VAR_RESULT, SPECIES_EGG, LavenderTown_House2_EventScript_CantNicknameEgg
 	special BufferMonNickname
 	special IsMonOTIDNotPlayers

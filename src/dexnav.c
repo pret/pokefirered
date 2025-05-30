@@ -986,7 +986,7 @@ bool8 TryStartDexNavSearch(void)
     if (FlagGet(DN_FLAG_SEARCHING) || (val & DEXNAV_MASK_SPECIES) == SPECIES_NONE)
         return FALSE;
 
-    DismissMapNamePopup();
+    HideMapNamePopUpWindow();
     ChangeBgY_ScreenOff(0, 0, 0);
     taskId = CreateTask(Task_InitDexNavSearch, 0);
     gTasks[taskId].tSpecies = val & DEXNAV_MASK_SPECIES;
@@ -2633,7 +2633,7 @@ bool8 TryFindHiddenPokemon(void)
         gTasks[taskId].tSpecies = sDexNavSearchDataPtr->species;
         gTasks[taskId].tEnvironment = sDexNavSearchDataPtr->environment;
         gTasks[taskId].tRevealed = FALSE;
-        DismissMapNamePopup();
+        HideMapNamePopUpWindow();
         ChangeBgY_ScreenOff(0, 0, 0);
         return FALSE;   // we dont actually want to enable the script context or the game will freeze
     }

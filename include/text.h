@@ -184,6 +184,7 @@ void DestroyTextCursorSprite(u8 spriteId);
 
 u32 GetFontIdToFit(const u8 *string, u32 widestFontId, u32 letterSpacing, u32 widthPx);
 u8 *PrependFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width);
+u8 *WrapFontIdToFit(u8 *start, u8 *end, u32 fontId, u32 width);
 
 // braille.c
 u16 FontFunc_Braille(struct TextPrinter *textPrinter);

@@ -106,10 +106,10 @@ Debug_EventScript_CheckEVs_End::
 	end
 
 Debug_EventScript_Text_OffensiveEVs:
-	.string "ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2},\nSPEED EVs: {STR_VAR_3}$"
+	.string "ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2}, SPEED EVs: {STR_VAR_3}$"
 
 Debug_EventScript_Text_DefensiveEVs:
-	.string "HP EVs: {STR_VAR_1}, DEF EVs: {STR_VAR_2},\nSPDEF EVs: {STR_VAR_3}$"
+	.string "HP EVs: {STR_VAR_1}, DEF EVs: {STR_VAR_2}, SPDEF EVs: {STR_VAR_3}$"
 
 Debug_EventScript_CheckIVs::
 	lockall
@@ -127,10 +127,10 @@ Debug_EventScript_CheckIVs_End::
 	end
 
 Debug_EventScript_Text_OffensiveIVs:
-	.string "ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2},\nSPEED IVs: {STR_VAR_3}$"
+	.string "ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2}, SPEED IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Text_DefensiveIVs:
-	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2},\nSPDEF IVs: {STR_VAR_3}$"
+	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
 	release
@@ -209,7 +209,7 @@ Debug_HatchAnEgg::
 	special ChoosePartyMon
 	waitstate
 	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_HatchAnEgg_End
-	specialvar VAR_RESULT, GetPartyMonSpecies
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	goto_if_ne VAR_RESULT, SPECIES_EGG, DebugScript_HatchAnEgg_CantForceHatch
 	special EggHatch
 	waitstate
@@ -264,7 +264,12 @@ Debug_ShowExpansionVersion::
 	end
 
 Debug_ExpansionVersion:
-	.string "pokefirered {STR_VAR_1}$"
+	.string "pokefirered-expansion {STR_VAR_1}$"
+
+Debug_EventScript_Steven_Multi::
+	call MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
+	release
+	end
 
 Debug_BerryPestsDisabled::
 	msgbox DebugText_BerryPestsDisabled, MSGBOX_DEFAULT
@@ -304,7 +309,7 @@ Debug_EventScript_InflictStatus1_Single:
 	special ChoosePartyMon
 	waitstate
 	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
-	specialvar VAR_RESULT, GetPartyMonSpecies
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	goto_if_eq VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Poison, 0
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Paralysis, 1
@@ -322,7 +327,7 @@ Debug_EventScript_InflictStatus1_Single:
 	case 4, Debug_EventScript_InflictStatus1_Single_Freeze
 	case 5, Debug_EventScript_InflictStatus1_Single_Frostbite
 	case 6, Debug_EventScript_InflictStatus1_Close
-	case SCR_MENU_CANCEL, Debug_EventScript_InflictStatus1_Close
+	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Close
 	releaseall
 	end
 
@@ -373,7 +378,7 @@ Debug_EventScript_InflictStatus1_Party:
 	case 4, Debug_EventScript_InflictStatus1_Party_Freeze
 	case 5, Debug_EventScript_InflictStatus1_Party_Frostbite
 	case 6, Debug_EventScript_InflictStatus1_Close
-	case SCR_MENU_CANCEL, Debug_EventScript_InflictStatus1_Close
+	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Close
 	releaseall
 	end
 
@@ -433,3 +438,231 @@ Debug_EventScript_InflictStatus1_Text_Freeze:
 
 Debug_EventScript_InflictStatus1_Text_Frostbite:
 	.string "Frostbite$"
+
+Debug_EventScript_EWRAMCounters::
+	callnative CheckEWRAMCounters
+	msgbox Debug_EventScript_EWRAMCounters_Text, MSGBOX_DEFAULT
+	release
+	end
+
+Debug_EventScript_EWRAMCounters_Text::
+	.string "Follower Steps: {STR_VAR_1}.\n"
+	.string "Fishing Chain: {STR_VAR_2}.$"
+
+Debug_EventScript_FontTest_Text_1::
+	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
+	.string "Angel Adept Blind Bodice Clique\n"
+	.string "Coast Dunce Docile Enact Eosin\l"
+	.string "Furlong Focal Gnome Gondola Human\l"
+	.string "Hoist Inlet Iodine Justin Jocose\l"
+	.string "Knoll Koala Linden Loads Milliner\l"
+	.string "Modal Number Nodule Onset Oddball\l"
+	.string "Pneumo Poncho Quanta Qophs Rhone\l"
+	.string "Roman Snout Sodium Tundra Tocsin\l"
+	.string "Uncle Udder Vulcan Vocal Whale\l"
+	.string "Woman Xmas Xenon Yunnan Young\l"
+	.string "Zloty Zodiac.$"
+
+Debug_EventScript_FontTest_Text_2::
+	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
+	.string "Angel angel adept for the nuance loads\n"
+	.string "of the arena cocoa and quaalude. Blind\l"
+	.string "blind bodice for the submit oboe of the\l"
+	.string "club snob and abbot. Clique clique\l"
+	.string "coast for the pouch loco of the franc\l"
+	.string "assoc and accede. Dunce dunce docile\l"
+	.string "for the loudness mastodon of the\l"
+	.string "loud statehood and huddle.$"
+
+Debug_EventScript_FontTest_Text_3::
+	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
+	.string "Enact enact eosin for the quench coed\n"
+	.string "of the pique canoe and bleep. Furlong\l"
+	.string "furlong focal for the genuflect\l"
+	.string "profound of the motif aloof and offers.\l"
+	.string "Gnome gnome gondola for the impugn\l"
+	.string "logos of the unplug analog and smuggle.\l"
+	.string "Human human hoist for the buddhist\l"
+	.string "alcohol of the riyadh caliph and\l"
+	.string "bathhouse.$"
+
+Debug_EventScript_FontTest_Text_4::
+	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
+	.string "Inlet inlet iodine for the quince\n"
+	.string "champion of the ennui scampi and shiite.\l"
+	.string "Justin justin jocose for the djibouti\l"
+	.string "sojourn of the oranj raj and hajjis.\l"
+	.string "Knoll knoll koala for the banknote\l"
+	.string "lookout of the dybbuk outlook and\l"
+	.string "trekked. Linden linden loads for the\l"
+	.string "ulna monolog of the consul menthol and\l"
+	.string "shallot.$"
+
+Debug_EventScript_FontTest_Text_5::
+	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
+	.string "Milliner milliner modal for the alumna\n"
+	.string "solomon of the album custom and summon.\l"
+	.string "Number number nodule for the unmade\l"
+	.string "economic of the shotgun bison and\l"
+	.string "tunnel. Onset onset oddball for the\l"
+	.string "abandon podium of the antiquo tempo\l"
+	.string "and moonlit. Pneumo pneumo poncho for\l"
+	.string "the dauphin opossum of the holdup\l"
+	.string "bishop and supplies.$"
+
+Debug_EventScript_FontTest_Text_6::
+	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
+	.string "Quanta quanta qophs for the inquest\n"
+	.string "sheqel of the cinq coq and suqqu. Rhone\l"
+	.string "rhone roman for the burnt porous of the\l"
+	.string "lemur clamor and carrot. Snout snout\l"
+	.string "sodium for the ensnare bosom of the\l"
+	.string "genus pathos and missing. Tundra\l"
+	.string "tundra tocsin for the nutmeg isotope\l"
+	.string "of the peasant ingot and ottoman.$"
+
+Debug_EventScript_FontTest_Text_7::
+	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
+	.string "Uncle uncle udder for the dunes cloud\n"
+	.string "of the hindu thou and continuum. Vulcan\l"
+	.string "vulcan vocal for the alluvial ovoid of\l"
+	.string "the yugoslav chekhov and revved. Whale\l"
+	.string "whale woman for the meanwhile blowout\l"
+	.string "of the forepaw meadow and glowworm.\l"
+	.string "Xmas xmas xenon for the bauxite\l"
+	.string "doxology of the tableaux equinox and\l"
+	.string "exxon.$"
+
+Debug_EventScript_FontTest_Text_8::
+	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
+	.string "Yunnan yunnan young for the dynamo\n"
+	.string "coyote of the obloquy employ and\l"
+	.string "sayyid. Zloty zloty zodiac for the gizmo\l"
+	.string "ozone of the franz laissez and buzzing.$"
+
+
+Debug_EventScript_FontTest_Text_9::                 @ Special thanks to Nintendo for this nice pangram to test other glyphs
+	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
+	.string "42 × 138 = 5796.\n"
+	.string "Mr Jock, TV quiz PhD: bags 20% fewer\l"
+	.string "lynx at a café; voilà, they're “worth”\l"
+	.string "♂1/♀1 = ¥1. That's 10 + 9 - 8 = 11\l"
+	.string "Nintendo GBA can connect to a Nintendo\l"
+	.string "GameCube console! He claimed-though I don't\l"
+	.string "believe him-to have done so in an eyes-shut\l"
+	.string "state…?$"
+
+Debug_PrintFontTest::
+	msgbox Debug_EventScript_FontTest_Text_1, MSGBOX_DEFAULT
+	msgbox Debug_EventScript_FontTest_Text_2, MSGBOX_DEFAULT
+	msgbox Debug_EventScript_FontTest_Text_3, MSGBOX_DEFAULT
+	msgbox Debug_EventScript_FontTest_Text_4, MSGBOX_DEFAULT
+	msgbox Debug_EventScript_FontTest_Text_5, MSGBOX_DEFAULT
+	msgbox Debug_EventScript_FontTest_Text_6, MSGBOX_DEFAULT
+	msgbox Debug_EventScript_FontTest_Text_7, MSGBOX_DEFAULT
+	msgbox Debug_EventScript_FontTest_Text_8, MSGBOX_DEFAULT
+	msgbox Debug_EventScript_FontTest_Text_9, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Debug_EventScript_FontTest::
+	lockall
+	goto Debug_PrintFontTest
+@	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
+@	dynmultipush Debug_EventScript_InflictStatus1_Text_Single, 0
+@	dynmultipush Debug_EventScript_InflictStatus1_Text_PartyWide, 1
+@	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 2
+@	dynmultistack 0, 0, FALSE, 3 FALSE, 0, NULL
+@	switch VAR_RESULT
+@	case 0, Debug_EventScript_InflictStatus1_Single
+@	case 1, Debug_EventScript_InflictStatus1_Party
+@	case 2, Debug_EventScript_InflictStatus1_Close
+@Debug_EventScript_InflictStatus1_Close:
+@	releaseall
+@	end
+
+Debug_EventScript_TellTheTime::
+	callnative DebugMenu_CalculateTime
+	msgbox Debug_EventScript_TellTheTime_Text_0, MSGBOX_DEFAULT
+	waitmessage
+	closemessage
+	end
+
+Debug_EventScript_PrintTimeOfDay::
+	callnative DebugMenu_CalculateTimeOfDay
+	msgbox DebugEventScript_PrintWeekday_Text_0, MSGBOX_DEFAULT
+	waitmessage
+	closemessage
+	end
+
+Debug_EventScript_FakeRTCNotEnabled::
+	msgbox Debug_EventScript_FakeRTCNotEnabled_Text_0, MSGBOX_DEFAULT
+	waitmessage
+	closemessage
+	return
+
+Debug_EventScript_FakeRTCNotEnabled_Text_0:
+	.string "You currently do not have Fake RTC\nenabled. Please enable it in include/\lconfig/overworld.h$"
+
+
+Debug_EventScript_TellTheTime_Text_0:
+	.string "Time and date:\n"
+	.string "{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3}$"
+
+DebugEventScript_PrintWeekday_Text_0:
+	.string "Time of day: {STR_VAR_1}$"
+
+
+@ steven multibattle script
+MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle::
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+	waitmovement 0
+	special SavePlayerParty
+	fadescreen FADE_TO_BLACK
+	special ChooseHalfPartyForBattle
+	waitstate
+	goto_if_ne VAR_RESULT, 0, MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle
+	special LoadPlayerParty
+	goto MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt
+
+MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle::
+	multi_2_vs_2 TRAINER_MAXIE_MOSSDEEP, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_Text_TabithaDefeat, PARTNER_STEVEN
+	switch VAR_RESULT
+	case 1, MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha
+	fadescreen FADE_TO_BLACK
+	special SetCB2WhiteOut
+	waitstate
+
+MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
+	fadescreen FADE_FROM_BLACK
+	releaseall
+	end
+
+MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand:
+	.string "All I want…\n"
+	.string "I just want to expand the land mass…$"
+
+MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt::
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	waitmovement 0
+	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
+	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly, MSGBOX_DEFAULT
+	closemessage
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+	waitmovement 0
+	releaseall
+	end
+
+MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle:
+	.string "STEVEN: {PLAYER}{KUN}!\n"
+	.string "You're going to help me?\p"
+	.string "Let's go into battle together!\n"
+	.string "Are you ready?$"
+
+MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly:
+	.string "STEVEN: Then, hurry!\n"
+	.string "Get ready quickly!$"
+
+MossdeepCity_SpaceCenter_Text_TabithaDefeat:
+	.string "I'm with our leader…$"

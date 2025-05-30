@@ -51,7 +51,7 @@ PalletTown_RivalsHouse_EventScript_GroomMon::
 	lock
 	faceplayer
 	goto_if_ge VAR_0x8004, PARTY_SIZE, PalletTown_RivalsHouse_EventScript_DeclineGrooming
-	specialvar VAR_RESULT, GetPartyMonSpecies
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	goto_if_eq VAR_RESULT, SPECIES_EGG, PalletTown_RivalsHouse_EventScript_CantGroomEgg
 	msgbox PalletTown_RivalsHouse_Text_LookingNiceInNoTime
 	closemessage

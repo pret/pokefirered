@@ -73,7 +73,7 @@
 #define TRAINER_RS_PKMN_BREEDER_F                 66
 #define TRAINER_RS_PKMN_RANGER_M                  67
 #define TRAINER_RS_PKMN_RANGER_F                  68
-#define TRAINER_MAGMA_LEADER                      69
+#define TRAINER_MAXIE_MOSSDEEP                    69
 #define TRAINER_MAGMA_GRUNT_M                     70
 #define TRAINER_MAMGA_GRUNT_F                     71
 #define TRAINER_RS_LASS                           72
@@ -84,7 +84,7 @@
 #define TRAINER_RS_SIS_AND_BRO                    77
 #define TRAINER_AQUA_ADMIN_MATT                   78
 #define TRAINER_AQUA_ADMIN_SHELLY                 79
-#define TRAINER_MAGMA_ADMIN_TABITHA               80
+#define TRAINER_TABITHA_MOSSDEEP                  80
 #define TRAINER_MAGMA_ADMIN_COURTNEY              81
 #define TRAINER_LEADER_WATTSON                    82
 #define TRAINER_LEADER_FLANNERY                   83

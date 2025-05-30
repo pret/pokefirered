@@ -62,9 +62,9 @@ void SetBagPocketsPointers(void)
     gBagPockets[POCKET_BERRIES - 1].capacity = BAG_BERRIES_COUNT;
 }
 
-void CopyItemName(u16 itemId, u8 * dest)
+u8 *CopyItemName(u16 itemId, u8 * dest)
 {
-    StringCopy(dest, GetItemName(itemId));
+    return StringCopy(dest, GetItemName(itemId));
 }
 
 const u8 sText_s[] =_("s");

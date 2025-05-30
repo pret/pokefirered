@@ -1344,8 +1344,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
 
 static void SetMultiPartnerMenuParty(u8 offset)
 {
-    s32 i, j;
-    u8 *cur;
+    s32 i;
 
     for (i = 0; i < MULTI_PARTY_SIZE; i++)
     {

@@ -105,7 +105,6 @@ void DisplayYesNoMenuDefaultYes(void);
 void InitStandardTextBoxWindows(void);
 void DecompressAndLoadBgGfxUsingHeap(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 void InitTextBoxGfxAndPrinters(void);
-void *DecompressAndCopyTileDataToVram2(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 void LoadMessageBoxAndFrameGfx(u8 windowId, bool8 copyToVram);
 void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void ResetBgPositions(void);

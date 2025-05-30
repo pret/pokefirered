@@ -4627,8 +4627,8 @@ static void CreateMoveSelectionCursorObjs(u16 tileTag, u16 palTag)
     sMoveSelectionCursorObjs[2] = AllocZeroed(sizeof(struct MoveSelectionCursor));
     sMoveSelectionCursorObjs[3] = AllocZeroed(sizeof(struct MoveSelectionCursor));
 
-    LZ77UnCompWram(sMoveSelectionCursorTiles_Left, gfxBufferPtrs[0]);
-    LZ77UnCompWram(sMoveSelectionCursorTiles_Right, gfxBufferPtrs[1]);
+    DecompressDataWithHeaderWram(sMoveSelectionCursorTiles_Left, gfxBufferPtrs[0]);
+    DecompressDataWithHeaderWram(sMoveSelectionCursorTiles_Right, gfxBufferPtrs[1]);
 
     for (i = 0; i < 4; i++)
     {
@@ -4740,7 +4740,7 @@ static void CreateMonStatusIconObj(u16 tileTag, u16 palTag)
     sStatusIcon = AllocZeroed(sizeof(struct MonStatusIconObj));
     gfxBufferPtr = AllocZeroed(0x20 * 32);
 
-    LZ77UnCompWram(gSummaryScreen_StatusAilmentIcon_Gfx, gfxBufferPtr);
+    DecompressDataWithHeaderWram(gSummaryScreen_StatusAilmentIcon_Gfx, gfxBufferPtr);
 
     if (sStatusIcon != NULL)
     {
@@ -4832,7 +4832,7 @@ static void CreateHpBarObjs(u16 tileTag, u16 palTag)
 
     sHpBarObjs = AllocZeroed(sizeof(struct HpBarObjs));
     gfxBufferPtr = AllocZeroed(0x20 * 12);
-    LZ77UnCompWram(gSummaryScreen_HpBar_Gfx, gfxBufferPtr);
+    DecompressDataWithHeaderWram(gSummaryScreen_HpBar_Gfx, gfxBufferPtr);
 
     curHp = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP);
     maxHp = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_MAX_HP);
@@ -4990,7 +4990,7 @@ static void CreateExpBarObjs(u16 tileTag, u16 palTag)
     sExpBarObjs = AllocZeroed(sizeof(struct ExpBarObjs));
     gfxBufferPtr = AllocZeroed(0x20 * 12);
 
-    LZ77UnCompWram(gSummaryScreen_ExpBar_Gfx, gfxBufferPtr);
+    DecompressDataWithHeaderWram(gSummaryScreen_ExpBar_Gfx, gfxBufferPtr);
     if (gfxBufferPtr != NULL)
     {
         struct SpriteSheet sheet = {
@@ -5122,7 +5122,7 @@ static void CreatePokerusIconObj(u16 tileTag, u16 palTag)
     sPokerusIconObj = AllocZeroed(sizeof(struct PokerusIconObj));
     gfxBufferPtr = AllocZeroed(0x20 * 1);
 
-    LZ77UnCompWram(sPokerusIconObjTiles, gfxBufferPtr);
+    DecompressDataWithHeaderWram(sPokerusIconObjTiles, gfxBufferPtr);
 
     if (sPokerusIconObj != NULL)
     {
@@ -5207,7 +5207,7 @@ static void CreateShinyStarObj(u16 tileTag, u16 palTag)
     sShinyStarObjData = AllocZeroed(sizeof(struct ShinyStarObjData));
     gfxBufferPtr = AllocZeroed(0x20 * 2);
 
-    LZ77UnCompWram(sStarObjTiles, gfxBufferPtr);
+    DecompressDataWithHeaderWram(sStarObjTiles, gfxBufferPtr);
 
     if (sShinyStarObjData != NULL)
     {

@@ -1,6 +1,7 @@
 #include <limits.h>
 #include "global.h"
 #include "bg.h"
+#include "decompress.h"
 #include "dma3.h"
 #include "gpu_regs.h"
 
@@ -910,7 +911,7 @@ void CopyToBgTilemapBuffer(u8 bg, const void *src, u16 mode, u16 destOffset)
         }
         else
         {
-            LZ77UnCompWram(src, (void *)(sGpuBgConfigs2[bg].tilemap + (destOffset * 32)));
+            DecompressDataWithHeaderWram(src, (void *)(sGpuBgConfigs2[bg].tilemap + (destOffset * 32)));
         }
     }
 }

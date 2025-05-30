@@ -43,9 +43,9 @@ struct WonderGraphics
     u8 bodyTextPal:4;
     u8 footerTextPal:4;
     u8 stampShadowPal:4;
-    const u8 * tiles;
-    const u8 * map;
-    const u16 * pal;
+    const u32 *tiles;
+    const u32 *map;
+    const u16 *pal;
 };
 
 extern const u16 gCard1Pal[];

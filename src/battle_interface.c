@@ -765,13 +765,18 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, xPos, 3, &windowId);
     spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum * TILE_SIZE_4BPP;
 
-    if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+    if (IsOnPlayerSide(battler))
     {
         objVram = (void *)(OBJ_VRAM0);
-        if (!GetBattlerCoordsIndex(battler))
+        switch (GetBattlerCoordsIndex(battler))
+        {
+        case BATTLE_COORDS_SINGLES:
             objVram += spriteTileNum + 0x820;
-        else
+            break;
+        default:
             objVram += spriteTileNum + 0x420;
+            break;
+        }
     }
     else
     {
@@ -2260,6 +2265,7 @@ static const s16 sAbilityPopUpCoordsSingles[MAX_BATTLERS_COUNT][2] =
 
 static u8* AddTextPrinterAndCreateWindowOnAbilityPopUp(const u8 *str, u32 x, u32 y, u32 color1, u32 color2, u32 color3, u32 *windowId)
 {
+    u32 fontId;
     u8 color[3] = {color1, color2, color3};
     struct WindowTemplate winTemplate = {0};
     winTemplate.width = POPUP_WINDOW_WIDTH;
@@ -2268,7 +2274,8 @@ static u8* AddTextPrinterAndCreateWindowOnAbilityPopUp(const u8 *str, u32 x, u32
     *windowId = AddWindow(&winTemplate);
     FillWindowPixelBuffer(*windowId, PIXEL_FILL(color1));
 
-    AddTextPrinterParameterized4(*windowId, FONT_SMALL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
+    fontId = GetFontIdToFit(str, FONT_SMALL, 0, 76);
+    AddTextPrinterParameterized4(*windowId, fontId, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
     return (u8 *)(GetWindowAttribute(*windowId, WINDOW_TILE_DATA));
 }
 
@@ -2320,26 +2327,29 @@ static void ClearAbilityName(u8 spriteId1, u8 spriteId2)
                         7, 9, 1);
 }
 
-static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
+static void PrintBattlerOnAbilityPopUp(u8 battler, u8 spriteId1, u8 spriteId2)
 {
     int i;
     u8 lastChar;
     u8* textPtr;
     u8 monName[POKEMON_NAME_LENGTH + 3] = {0};
-    u8* nick = gBattleMons[battlerId].nickname; // This needs to be updated for Illusion support
+    struct Pokemon *illusionMon = GetIllusionMonPtr(battler);
+    u8 nick[POKEMON_NAME_LENGTH + 1] = {0};
+
+    if (illusionMon != NULL)
+        GetMonData(illusionMon, MON_DATA_NICKNAME, nick);
+    else
+        GetMonData(GetBattlerMon(battler), MON_DATA_NICKNAME, nick);
 
     for (i = 0; i < POKEMON_NAME_LENGTH; ++i)
     {
-        monName[i] = nick[i];
-
-        if (nick[i] == EOS || i + 1 == POKEMON_NAME_LENGTH) // End of string
+        if (nick[i] == EOS) // End of string
             break;
+
+        monName[i] = nick[i];
     }
 
-    textPtr = monName + i + 1;
-
-    if (*(textPtr - 1) == EOS)
-        textPtr--;
+    textPtr = monName + i;
 
     lastChar = *(textPtr - 1);
 
@@ -2497,7 +2507,7 @@ static inline bool32 IsAnyAbilityPopUpActive(void)
     return FALSE;
 }
 
-void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
+void CreateAbilityPopUp(u8 battler, u32 ability, bool32 isDoubleBattle)
 {
     const s16 (*coords)[2];
     u8 spriteId1, spriteId2, battlerPosition, taskId;
@@ -2510,7 +2520,7 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 
     if (gTestRunnerEnabled)
     {
-        TestRunner_Battle_RecordAbilityPopUp(battlerId, ability);
+        TestRunner_Battle_RecordAbilityPopUp(battler, ability);
         if (gTestRunnerHeadless)
             return;
     }
@@ -2521,8 +2531,8 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
         LoadSpritePalette(&sSpritePalette_AbilityPopUp);
     }
 
-    gBattleStruct->battlerState[battlerId].activeAbilityPopUps = TRUE;
-    battlerPosition = GetBattlerPosition(battlerId);
+    gBattleStruct->battlerState[battler].activeAbilityPopUps = TRUE;
+    battlerPosition = GetBattlerPosition(battler);
 
     if (isDoubleBattle)
         coords = sAbilityPopUpCoordsDoubles;
@@ -2558,30 +2568,30 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
     gSprites[spriteId2].tOriginalX = coords[battlerPosition][0] + ABILITY_POP_UP_POS_X_DIFF;
     gSprites[spriteId2].oam.tileNum += (8 * 4); //Second half of pop up
 
-    gBattleStruct->abilityPopUpSpriteIds[battlerId][0] = spriteId1;
-    gBattleStruct->abilityPopUpSpriteIds[battlerId][1] = spriteId2;
+    gBattleStruct->abilityPopUpSpriteIds[battler][0] = spriteId1;
+    gBattleStruct->abilityPopUpSpriteIds[battler][1] = spriteId2;
 
     taskId = CreateTask(Task_FreeAbilityPopUpGfx, 5);
     gTasks[taskId].tSpriteId1 = spriteId1;
     gTasks[taskId].tSpriteId2 = spriteId2;
 
     gSprites[spriteId1].tIsMain = TRUE;
-    gSprites[spriteId1].tBattlerId = battlerId;
-    gSprites[spriteId2].tBattlerId = battlerId;
+    gSprites[spriteId1].tBattlerId = battler;
+    gSprites[spriteId2].tBattlerId = battler;
 
     StartSpriteAnim(&gSprites[spriteId1], 0);
     StartSpriteAnim(&gSprites[spriteId2], 0);
 
-    PrintBattlerOnAbilityPopUp(battlerId, spriteId1, spriteId2);
+    PrintBattlerOnAbilityPopUp(battler, spriteId1, spriteId2);
     PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
 }
 
-void UpdateAbilityPopup(u8 battlerId)
+void UpdateAbilityPopup(u8 battler)
 {
-    u8 spriteId1 = gBattleStruct->abilityPopUpSpriteIds[battlerId][0];
-    u8 spriteId2 = gBattleStruct->abilityPopUpSpriteIds[battlerId][1];
-    u16 ability = (gBattleScripting.abilityPopupOverwrite != 0) ? gBattleScripting.abilityPopupOverwrite : gBattleMons[battlerId].ability;
+    u8 spriteId1 = gBattleStruct->abilityPopUpSpriteIds[battler][0];
+    u8 spriteId2 = gBattleStruct->abilityPopUpSpriteIds[battler][1];
+    u16 ability = (gBattleScripting.abilityPopupOverwrite != 0) ? gBattleScripting.abilityPopupOverwrite : gBattleMons[battler].ability;
 
     PrintAbilityOnAbilityPopUp(ability, spriteId1, spriteId2);
     RestoreOverwrittenPixels((void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32));
@@ -2624,12 +2634,12 @@ static void SpriteCb_AbilityPopUp(struct Sprite *sprite)
     }
 }
 
-void DestroyAbilityPopUp(u8 battlerId)
+void DestroyAbilityPopUp(u8 battler)
 {
-    if (gBattleStruct->battlerState[battlerId].activeAbilityPopUps)
+    if (gBattleStruct->battlerState[battler].activeAbilityPopUps)
     {
-        gSprites[gBattleStruct->abilityPopUpSpriteIds[battlerId][0]].tFrames = 0;
-        gSprites[gBattleStruct->abilityPopUpSpriteIds[battlerId][1]].tFrames = 0;
+        gSprites[gBattleStruct->abilityPopUpSpriteIds[battler][0]].tFrames = 0;
+        gSprites[gBattleStruct->abilityPopUpSpriteIds[battler][1]].tFrames = 0;
     }
     gBattleScripting.fixedPopup = FALSE;
 }
@@ -2790,7 +2800,7 @@ void TryAddLastUsedBallItemSprites(void)
         gBattleStruct->ballSpriteIds[0] = AddItemIconSprite(102, 102, gBallToDisplay);
         gSprites[gBattleStruct->ballSpriteIds[0]].x = LAST_USED_BALL_X_0;
         gSprites[gBattleStruct->ballSpriteIds[0]].y = LAST_USED_BALL_Y;
-        gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;   // restore
+        gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;
         gLastUsedBallMenuPresent = TRUE;
         gSprites[gBattleStruct->ballSpriteIds[0]].callback = SpriteCB_LastUsedBall;
     }
@@ -2805,7 +2815,8 @@ void TryAddLastUsedBallItemSprites(void)
         gBattleStruct->ballSpriteIds[1] = CreateSprite(&sSpriteTemplate_LastUsedBallWindow,
                                                        LAST_BALL_WIN_X_0,
                                                        LAST_USED_WIN_Y, 5);
-        gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;   // restore
+        gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;
+        gSprites[gBattleStruct->moveInfoSpriteId].sHide = TRUE;
         gLastUsedBallMenuPresent = TRUE;
     }
     if (B_LAST_USED_BALL_CYCLE == TRUE)
@@ -2830,6 +2841,9 @@ static void DestroyLastUsedBallGfx(struct Sprite *sprite)
 
 void TryToAddMoveInfoWindow(void)
 {
+    if (!B_SHOW_MOVE_DESCRIPTION)
+        return;
+
     LoadSpritePalette(&sSpritePalette_AbilityPopUp);
     if (GetSpriteTileStartByTag(MOVE_INFO_WINDOW_TAG) == 0xFFFF)
         LoadSpriteSheet(&sSpriteSheet_MoveInfoWindow);
@@ -2892,7 +2906,7 @@ static void SpriteCB_LastUsedBall(struct Sprite *sprite)
 }
 
 static void SpriteCB_MoveInfoWin(struct Sprite *sprite)
-{    
+{
     if (sprite->sHide)
     {
         if (sprite->x != LAST_BALL_WIN_X_0)
@@ -2919,16 +2933,16 @@ static void TryHideOrRestoreLastUsedBall(u8 caseId)
     {
     case 0: // hide
         if (gBattleStruct->ballSpriteIds[0] != MAX_SPRITES)
-            gSprites[gBattleStruct->ballSpriteIds[0]].sHide = TRUE;   // hide
+            gSprites[gBattleStruct->ballSpriteIds[0]].sHide = TRUE;
         if (gBattleStruct->ballSpriteIds[1] != MAX_SPRITES)
-            gSprites[gBattleStruct->ballSpriteIds[1]].sHide = TRUE;   // hide
+            gSprites[gBattleStruct->ballSpriteIds[1]].sHide = TRUE;
         gLastUsedBallMenuPresent = FALSE;
         break;
     case 1: // restore
         if (gBattleStruct->ballSpriteIds[0] != MAX_SPRITES)
-            gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;   // restore
+            gSprites[gBattleStruct->ballSpriteIds[0]].sHide = FALSE;
         if (gBattleStruct->ballSpriteIds[1] != MAX_SPRITES)
-            gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;   // restore
+            gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;
         gLastUsedBallMenuPresent = TRUE;
         break;
     }

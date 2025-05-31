@@ -5778,7 +5778,7 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     else if (playerAction >= MOVEMENT_ACTION_WALK_SLOW_DOWN && playerAction <= MOVEMENT_ACTION_WALK_SLOW_RIGHT)
     {
         if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH)) // on sideways stairs
-            objectEvent->movementActionId = GetWalkNormalMovementAction(direction);
+            ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkNormalMovementAction(direction));
         else
             ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkSlowMovementAction(direction));
     }
@@ -5788,11 +5788,11 @@ bool8 FollowablePlayerMovement_Step(struct ObjectEvent *objectEvent, struct Spri
     }
     else if (gSprites[gPlayerAvatar.spriteId].data[4] == MOVE_SPEED_FAST_1)
     {
-        objectEvent->movementActionId = GetWalkFastMovementAction(direction);
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkFastMovementAction(direction));
     }
     else
     {
-        objectEvent->movementActionId = GetWalkNormalMovementAction(direction);
+        ObjectEventSetSingleMovement(objectEvent, sprite, GetWalkNormalMovementAction(direction));
         if (OW_FOLLOWERS_BOBBING == TRUE)
             sprite->y2 = -1;
     }

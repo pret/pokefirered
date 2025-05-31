@@ -624,7 +624,7 @@ static bool8 BerryPouchLoadGfx(void)
     case 1:
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
-            LZDecompressWram(gBerryPouchBg1Tilemap, sResources->bg1TilemapBuffer);
+            DecompressDataWithHeaderWram(gBerryPouchBg1Tilemap, sResources->bg1TilemapBuffer);
             sResources->data[0]++;
         }
         break;

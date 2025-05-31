@@ -52,7 +52,7 @@ u8 AddItemIconSprite(u16 tilesTag, u16 paletteTag, u16 itemId)
     if (!AllocItemIconTemporaryBuffers())
         return MAX_SPRITES;
 
-    LZDecompressWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+    DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
     CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
     spriteSheet.data = gItemIcon4x4Buffer;
     spriteSheet.size = 0x200;
@@ -83,7 +83,7 @@ u8 AddCustomItemIconSprite(const struct SpriteTemplate * origTemplate, u16 tiles
     if (!AllocItemIconTemporaryBuffers())
         return MAX_SPRITES;
 
-    LZDecompressWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
+    DecompressDataWithHeaderWram(GetItemIconPic(itemId), gItemIconDecompressionBuffer);
     CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
     spriteSheet.data = gItemIcon4x4Buffer;
     spriteSheet.size = 0x200;

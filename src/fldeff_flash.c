@@ -1,4 +1,5 @@
 #include "global.h"
+#include "decompress.h"
 #include "gflib.h"
 #include "event_data.h"
 #include "event_scripts.h"
@@ -299,8 +300,8 @@ static void Task_FlashTransition_Exit_0(u8 taskId)
 static void Task_FlashTransition_Exit_1(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    LZ77UnCompVram(sCaveTransitionTiles, (void *)BG_CHAR_ADDR(3));
-    LZ77UnCompVram(sCaveTransitionTilemap, (void *)BG_SCREEN_ADDR(31));
+    DecompressDataWithHeaderVram(sCaveTransitionTiles, (void *)BG_CHAR_ADDR(3));
+    DecompressDataWithHeaderVram(sCaveTransitionTilemap, (void *)BG_SCREEN_ADDR(31));
     LoadPalette(sCaveTransitionPalette_White, BG_PLTT_ID(14), sizeof(sCaveTransitionPalette_White));
     LoadPalette(sCaveTransitionPalette_Exit, BG_PLTT_ID(14), sizeof(sCaveTransitionPalette_Exit));
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
@@ -367,8 +368,8 @@ static void Task_FlashTransition_Enter_0(u8 taskId)
 static void Task_FlashTransition_Enter_1(u8 taskId)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    LZ77UnCompVram(sCaveTransitionTiles, (void *)BG_CHAR_ADDR(3));
-    LZ77UnCompVram(sCaveTransitionTilemap, (void *)BG_SCREEN_ADDR(31));
+    DecompressDataWithHeaderVram(sCaveTransitionTiles, (void *)BG_CHAR_ADDR(3));
+    DecompressDataWithHeaderVram(sCaveTransitionTilemap, (void *)BG_SCREEN_ADDR(31));
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);

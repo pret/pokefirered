@@ -919,7 +919,7 @@ void ClearBattleAnimBg(u32 bgId)
 void AnimLoadCompressedBgGfx(u32 bgId, const u32 *src, u32 tilesOffset)
 {
     CpuFill32(0, gBattleAnimBgTileBuffer, 0x2000);
-    LZDecompressWram(src, gBattleAnimBgTileBuffer);
+    DecompressDataWithHeaderWram(src, gBattleAnimBgTileBuffer);
     LoadBgTiles(bgId, gBattleAnimBgTileBuffer, 0x2000, tilesOffset);
 }
 

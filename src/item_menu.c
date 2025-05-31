@@ -568,9 +568,9 @@ static bool8 DoLoadBagGraphics(void)
         if (FreeTempTileDataBuffersIfPossible() != TRUE)
         {
             if (gBagMenuState.location != ITEMMENULOCATION_ITEMPC)
-                LZDecompressWram(gBagBg_Tilemap, sBagBgTilemapBuffer);
+                DecompressDataWithHeaderWram(gBagBg_Tilemap, sBagBgTilemapBuffer);
             else
-                LZDecompressWram(gBagBg_ItemPC_Tilemap, sBagBgTilemapBuffer);
+                DecompressDataWithHeaderWram(gBagBg_ItemPC_Tilemap, sBagBgTilemapBuffer);
             sBagMenuDisplay->data[0]++;
         }
         break;

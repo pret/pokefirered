@@ -675,8 +675,8 @@ static void LoadBattleTerrainGfx(u16 terrain)
     if (terrain >= NELEMS(gBattleEnvironmentInfo))
         terrain = BATTLE_ENVIRONMENT_PLAIN;
     // Copy to bg3
-    LZDecompressVram(gBattleEnvironmentInfo[terrain].background.tileset, (void *)BG_CHAR_ADDR(2));
-    LZDecompressVram(gBattleEnvironmentInfo[terrain].background.tilemap, (void *)BG_SCREEN_ADDR(26));
+    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[terrain].background.tileset, (void *)BG_CHAR_ADDR(2));
+    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[terrain].background.tilemap, (void *)BG_SCREEN_ADDR(26));
     LoadPalette(GetBattleBackgroundPalette(terrain), BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
 }
 
@@ -685,8 +685,8 @@ static void LoadBattleTerrainEntryGfx(u16 terrain)
     if (terrain >= NELEMS(gBattleEnvironmentInfo))
         terrain = BATTLE_ENVIRONMENT_PLAIN;
     // Copy to bg1
-    LZDecompressVram(gBattleEnvironmentInfo[terrain].background.entryTileset, (void *)BG_CHAR_ADDR(1));
-    LZDecompressVram(gBattleEnvironmentInfo[terrain].background.entryTilemap, (void *)BG_SCREEN_ADDR(28));
+    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[terrain].background.entryTileset, (void *)BG_CHAR_ADDR(1));
+    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[terrain].background.entryTilemap, (void *)BG_SCREEN_ADDR(28));
 }
 
 void BattleInitBgsAndWindows(void)
@@ -748,7 +748,7 @@ void DrawMainBattleBackground(void)
 
 void LoadBattleTextboxAndBackground(void)
 {
-    LZDecompressVram(gBattleTextboxTiles, (void *)(BG_CHAR_ADDR(0)));
+    DecompressDataWithHeaderVram(gBattleTextboxTiles, (void *)(BG_CHAR_ADDR(0)));
     CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
     CopyBgTilemapBufferToVram(0);
     LoadPalette(gBattleTextboxPalette, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
@@ -1018,8 +1018,8 @@ void DrawBattleEntryBackground(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        LZDecompressVram(gBattleVSFrame_Gfx, (void *)(BG_CHAR_ADDR(1)));
-        LZDecompressVram(gVsLettersGfx, (void *)OBJ_VRAM0);
+        DecompressDataWithHeaderVram(gBattleVSFrame_Gfx, (void *)(BG_CHAR_ADDR(1)));
+        DecompressDataWithHeaderVram(gVsLettersGfx, (void *)OBJ_VRAM0);
         LoadPalette(gBattleVSFrame_Pal, BG_PLTT_ID(6), PLTT_SIZE_4BPP);
         SetBgAttribute(1, BG_ATTR_SCREENSIZE, 1);
         SetGpuReg(REG_OFFSET_BG1CNT, 0x5C04);
@@ -1045,8 +1045,8 @@ void DrawBattleEntryBackground(void)
     {
         // if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || gPartnerTrainerId > TRAINER_PARTNER(PARTNER_NONE))
         // {
-        //     LZDecompressVram(gBattleEnvironmentAnimTiles_Building, (void *)(BG_CHAR_ADDR(1)));
-        //     LZDecompressVram(gBattleEnvironmentAnimTilemap_Building, (void *)(BG_SCREEN_ADDR(28)));
+        //     DecompressDataWithHeaderVram(gBattleEnvironmentAnimTiles_Building, (void *)(BG_CHAR_ADDR(1)));
+        //     DecompressDataWithHeaderVram(gBattleEnvironmentAnimTilemap_Building, (void *)(BG_SCREEN_ADDR(28)));
         // }
         // else
         // {
@@ -1141,7 +1141,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
     switch (caseId)
     {
     case 0:
-        LZDecompressVram(gBattleTextboxTiles, (void *)BG_CHAR_ADDR(0));
+        DecompressDataWithHeaderVram(gBattleTextboxTiles, (void *)BG_CHAR_ADDR(0));
         break;
     case 1:
         CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0x000);
@@ -1152,11 +1152,11 @@ bool8 LoadChosenBattleElement(u8 caseId)
         break;
     case 3:
         battleScene = GetBattleTerrainOverride();
-        LZDecompressVram(gBattleEnvironmentInfo[battleScene].background.tileset, (void *)BG_CHAR_ADDR(2));
+        DecompressDataWithHeaderVram(gBattleEnvironmentInfo[battleScene].background.tileset, (void *)BG_CHAR_ADDR(2));
         // fallthrough
     case 4:
         battleScene = GetBattleTerrainOverride();
-        LZDecompressVram(gBattleEnvironmentInfo[battleScene].background.tilemap, (void *)BG_SCREEN_ADDR(26));
+        DecompressDataWithHeaderVram(gBattleEnvironmentInfo[battleScene].background.tilemap, (void *)BG_SCREEN_ADDR(26));
         break;
     case 5:
         battleScene = GetBattleTerrainOverride();

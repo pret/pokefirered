@@ -1,4 +1,5 @@
 #include "global.h"
+#include "decompress.h"
 #include "gflib.h"
 #include "menu_indicators.h"
 #include "mystery_gift.h"
@@ -84,16 +85,16 @@ static const struct ScrollArrowsTemplate sArrowsTemplate = {
 static const u16 sNews0Pal[] = INCBIN_U16("graphics/wonder_news/bg0.gbapal");
 static const u16 sNews6Pal[] = INCBIN_U16("graphics/wonder_news/bg6.gbapal");
 static const u16 sNews7Pal[] = INCBIN_U16("graphics/wonder_news/bg7.gbapal");
-static const u8 sNews0Gfx[] = INCBIN_U8("graphics/wonder_news/bg0.4bpp.lz");
-static const u8 sNews0Map[] = INCBIN_U8("graphics/wonder_news/bg0.bin.lz");
-static const u8 sNews1Gfx[] = INCBIN_U8("graphics/wonder_news/bg1.4bpp.lz");
-static const u8 sNews1Map[] = INCBIN_U8("graphics/wonder_news/bg1.bin.lz");
-static const u8 sNews2Gfx[] = INCBIN_U8("graphics/wonder_news/bg2.4bpp.lz");
-static const u8 sNews2Map[] = INCBIN_U8("graphics/wonder_news/bg2.bin.lz");
-static const u8 sNews6Gfx[] = INCBIN_U8("graphics/wonder_news/bg6.4bpp.lz");
-static const u8 sNews6Map[] = INCBIN_U8("graphics/wonder_news/bg6.bin.lz");
-static const u8 sNews7Gfx[] = INCBIN_U8("graphics/wonder_news/bg7.4bpp.lz");
-static const u8 sNews7Map[] = INCBIN_U8("graphics/wonder_news/bg7.bin.lz");
+static const u32 sNews0Gfx[] = INCBIN_U32("graphics/wonder_news/bg0.4bpp.lz");
+static const u32 sNews0Map[] = INCBIN_U32("graphics/wonder_news/bg0.bin.lz");
+static const u32 sNews1Gfx[] = INCBIN_U32("graphics/wonder_news/bg1.4bpp.lz");
+static const u32 sNews1Map[] = INCBIN_U32("graphics/wonder_news/bg1.bin.lz");
+static const u32 sNews2Gfx[] = INCBIN_U32("graphics/wonder_news/bg2.4bpp.lz");
+static const u32 sNews2Map[] = INCBIN_U32("graphics/wonder_news/bg2.bin.lz");
+static const u32 sNews6Gfx[] = INCBIN_U32("graphics/wonder_news/bg6.4bpp.lz");
+static const u32 sNews6Map[] = INCBIN_U32("graphics/wonder_news/bg6.bin.lz");
+static const u32 sNews7Gfx[] = INCBIN_U32("graphics/wonder_news/bg7.4bpp.lz");
+static const u32 sNews7Map[] = INCBIN_U32("graphics/wonder_news/bg7.bin.lz");
 
 static const struct WonderGraphics sNewsGraphics[NUM_WONDER_BGS] = {
     {.titleTextPal = 1, .bodyTextPal = 0, .tiles = sNews0Gfx, .map = sNews0Map, .pal = sNews0Pal},
@@ -171,7 +172,7 @@ s32 WonderNews_Enter(void)
             return 0;
         gPaletteFade.bufferTransferDisabled = TRUE;
         LoadPalette(sWonderNewsData->gfx->pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
-        LZ77UnCompWram(sWonderNewsData->gfx->map, sWonderNewsData->bgTilemapBuffer);
+        DecompressDataWithHeaderWram(sWonderNewsData->gfx->map, sWonderNewsData->bgTilemapBuffer);
         CopyRectToBgTilemapBufferRect(1, sWonderNewsData->bgTilemapBuffer, 0, 0, 30, 3, 0, 0, 30, 3, 1, 8, 0);
         CopyRectToBgTilemapBufferRect(3, sWonderNewsData->bgTilemapBuffer, 0, 3, 30, 23, 0, 3, 30, 23, 1, 8, 0);
         CopyBgTilemapBufferToVram(1);

@@ -425,7 +425,7 @@ void HandlePngToFullwidthJapaneseFontCommand(char *inputPath, char *outputPath, 
 void HandleLZCompressCommand(char *inputPath, char *outputPath, int argc, char **argv)
 {
     int overflowSize = 0;
-    int minDistance = 2; // default, for compatibility with LZ77UnCompVram()
+    int minDistance = 2; // default, for compatibility with DecompressDataWithHeaderVram()
 
     for (int i = 3; i < argc; i++)
     {

@@ -12,7 +12,7 @@ static const u16 gSignpostWindow_Gfx[] = INCBIN_U16("graphics/text_window/signpo
 static const u16 sStdTextWindow_Gfx[]  = INCBIN_U16("graphics/text_window/std.4bpp");
 static const u16 sQuestLogWindow_Gfx[] = INCBIN_U16("graphics/text_window/quest_log.4bpp");
 
-static const u8 sTextWindowFrame1_Gfx[]  = INCBIN_U8("graphics/text_window/type1.4bpp");
+const u8 gTextWindowFrame1_Gfx[]  = INCBIN_U8("graphics/text_window/type1.4bpp");
 static const u8 sTextWindowFrame2_Gfx[]  = INCBIN_U8("graphics/text_window/type2.4bpp");
 static const u8 sTextWindowFrame3_Gfx[]  = INCBIN_U8("graphics/text_window/type3.4bpp");
 static const u8 sTextWindowFrame4_Gfx[]  = INCBIN_U8("graphics/text_window/type4.4bpp");
@@ -23,7 +23,7 @@ static const u8 sTextWindowFrame8_Gfx[]  = INCBIN_U8("graphics/text_window/type8
 static const u8 sTextWindowFrame9_Gfx[]  = INCBIN_U8("graphics/text_window/type9.4bpp");
 static const u8 sTextWindowFrame10_Gfx[] = INCBIN_U8("graphics/text_window/type10.4bpp");
 
-static const u16 sTextWindowFrame1_Pal[]  = INCBIN_U16("graphics/text_window/type1.gbapal");
+const u16 gTextWindowFrame1_Pal[]  = INCBIN_U16("graphics/text_window/type1.gbapal");
 static const u16 sTextWindowFrame2_Pal[]  = INCBIN_U16("graphics/text_window/type2.gbapal");
 static const u16 sTextWindowFrame3_Pal[]  = INCBIN_U16("graphics/text_window/type3.gbapal");
 static const u16 sTextWindowFrame4_Pal[]  = INCBIN_U16("graphics/text_window/type4.gbapal");
@@ -43,7 +43,7 @@ static const u16 sTextWindowPalettes[][16] = {
 };
 
 static const struct TilesPal sWindowFrames[WINDOW_FRAMES_COUNT] = {
-    {.tiles = sTextWindowFrame1_Gfx,  .pal = sTextWindowFrame1_Pal },
+    {.tiles = gTextWindowFrame1_Gfx,  .pal = gTextWindowFrame1_Pal },
     {.tiles = sTextWindowFrame2_Gfx,  .pal = sTextWindowFrame2_Pal },
     {.tiles = sTextWindowFrame3_Gfx,  .pal = sTextWindowFrame3_Pal },
     {.tiles = sTextWindowFrame4_Gfx,  .pal = sTextWindowFrame4_Pal },
@@ -56,7 +56,7 @@ static const struct TilesPal sWindowFrames[WINDOW_FRAMES_COUNT] = {
 };
 
 static const u16 sTextWindowDexNavFrame[] = INCBIN_U16("graphics/text_window/dexnav_pal.gbapal");
-static const struct TilesPal sDexNavWindowFrame = {sTextWindowFrame1_Gfx, sTextWindowDexNavFrame};
+static const struct TilesPal sDexNavWindowFrame = {gTextWindowFrame1_Gfx, sTextWindowDexNavFrame};
 
 // code
 const struct TilesPal *GetWindowFrameTilesPal(u8 id)

@@ -931,13 +931,13 @@ static void TradeAnimInit_LoadGfx(void)
     DeactivateAllTextPrinters();
     // Doing the graphics load...
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-    LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
+    DecompressDataWithHeaderWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
     LoadPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     InitWindows(sTradeMessageWindowTemplates);
     // ... and doing the same load again
     DecompressAndLoadBgGfxUsingHeap(0, gBattleTextboxTiles, 0, 0, 0);
-    LZDecompressWram(gBattleTextboxTilemap, gDecompressionBuffer);
+    DecompressDataWithHeaderWram(gBattleTextboxTilemap, gDecompressionBuffer);
     CopyToBgTilemapBuffer(0, gDecompressionBuffer, BG_SCREEN_SIZE, 0);
     LoadPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
 }
@@ -1140,7 +1140,7 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
         if (!sTradeAnim->isCableTrade)
         {
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_OBJ_ON);
-            LZ77UnCompVram(sWirelessCloseup_Map, (void *)BG_SCREEN_ADDR(5));
+            DecompressDataWithHeaderVram(sWirelessCloseup_Map, (void *)BG_SCREEN_ADDR(5));
             BlendPalettes(0x000000008, 0x10, RGB_BLACK);
         }
         else
@@ -1152,8 +1152,8 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
         break;
     case 3:
         LoadPalette(sWirelessSignalAnimPals_Off, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
-        LZ77UnCompVram(sWirelessSignal4bpp, BG_CHAR_ADDR(1));
-        LZ77UnCompVram(sWirelessSignalTilemap, BG_SCREEN_ADDR(18));
+        DecompressDataWithHeaderVram(sWirelessSignal4bpp, BG_CHAR_ADDR(1));
+        DecompressDataWithHeaderVram(sWirelessSignalTilemap, BG_SCREEN_ADDR(18));
         sTradeAnim->bg2vofs = 0x50;
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
         break;

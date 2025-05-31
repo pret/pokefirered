@@ -650,7 +650,7 @@ static void LoadWallClockGraphics(void)
     DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
     DmaClear32(3, (void *)OAM, OAM_SIZE);
     DmaClear16(3, (void *)PLTT, PLTT_SIZE);
-    LZ77UnCompVram(gWallClock_Gfx, (void *)VRAM);
+    DecompressDataWithHeaderVram(gWallClock_Gfx, (void *)VRAM);
 
     if (gSpecialVar_0x8004 == MALE)
         LoadPalette(gWallClockMale_Pal, 0, 32);
@@ -696,7 +696,7 @@ void CB2_StartWallClock(void)
     u8 spriteId;
 
     LoadWallClockGraphics();
-    LZ77UnCompVram(gWallClockStart_Tilemap, (u16 *)BG_SCREEN_ADDR(7));
+    DecompressDataWithHeaderVram(gWallClockStart_Tilemap, (u16 *)BG_SCREEN_ADDR(7));
 
     taskId = CreateTask(Task_SetClock_WaitFadeIn, 0);
     gTasks[taskId].tHours = 10;
@@ -741,7 +741,7 @@ void CB2_ViewWallClock(void)
     u8 angle2;
 
     LoadWallClockGraphics();
-    LZ77UnCompVram(gWallClockView_Tilemap, (u16 *)BG_SCREEN_ADDR(7));
+    DecompressDataWithHeaderVram(gWallClockView_Tilemap, (u16 *)BG_SCREEN_ADDR(7));
 
     taskId = CreateTask(Task_ViewClock_WaitFadeIn, 0);
     InitClockWithRtc(taskId);

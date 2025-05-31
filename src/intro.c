@@ -247,15 +247,15 @@ extern const u32 gMultiBootProgram_PokemonColosseum_Start[];
 extern const u32 gMultiBootProgram_PokemonColosseum_End[];
 
 static const u16 sCopyright_Pal[] = INCBIN_U16("graphics/intro/copyright.gbapal");
-static const u8 sCopyright_Gfx[]  = INCBIN_U8( "graphics/intro/copyright.4bpp.lz");
-static const u8 sCopyright_Map[]  = INCBIN_U8( "graphics/intro/copyright.bin.lz");
+static const u32 sCopyright_Gfx[]  = INCBIN_U32( "graphics/intro/copyright.4bpp.lz");
+static const u32 sCopyright_Map[]  = INCBIN_U32( "graphics/intro/copyright.bin.lz");
 
 // Game Freak
 static const u16 sGameFreakBg_Pal[]   = INCBIN_U16("graphics/intro/game_freak/bg.gbapal");
 static const u8 sGameFreakBg_Gfx[]    = INCBIN_U8( "graphics/intro/game_freak/bg.4bpp.lz");
 static const u8 sGameFreakBg_Map[]    = INCBIN_U8( "graphics/intro/game_freak/bg.bin.lz");
 static const u16 sGameFreakLogo_Pal[] = INCBIN_U16("graphics/intro/game_freak/logo.gbapal");
-static const u8 sGameFreakText_Gfx[]  = INCBIN_U8( "graphics/intro/game_freak/game_freak.4bpp.lz");
+static const u32 sGameFreakText_Gfx[] = INCBIN_U32( "graphics/intro/game_freak/game_freak.4bpp.lz");
 static const u32 sGameFreakLogo_Gfx[] = INCBIN_U32("graphics/intro/game_freak/logo.4bpp.lz");
 static const u16 sStar_Pal[]          = INCBIN_U16("graphics/intro/game_freak/star.gbapal");
 static const u32 sStar_Gfx[]          = INCBIN_U32("graphics/intro/game_freak/star.4bpp.lz");
@@ -903,8 +903,8 @@ static void CB2_WaitFadeBeforeSetUpIntro(void)
 
 static void LoadCopyrightGraphics(u16 charBase, u16 screenBase, u16 palOffset)
 {
-    LZ77UnCompVram(sCopyright_Gfx, (void *)BG_VRAM + charBase);
-    LZ77UnCompVram(sCopyright_Map, (void *)BG_VRAM + screenBase);
+    DecompressDataWithHeaderVram(sCopyright_Gfx, (void *)BG_VRAM + charBase);
+    DecompressDataWithHeaderVram(sCopyright_Map, (void *)BG_VRAM + screenBase);
     LoadPalette(sCopyright_Pal, palOffset, sizeof(sCopyright_Pal));
 }
 
@@ -1114,8 +1114,8 @@ static void IntroCB_Init(struct IntroSequenceData * this)
     {
     case 0:
         InitWindows(sWindowTemplates);
-        LZ77UnCompWram(sGameFreakText_Gfx, this->gameFreakTextGfx);
-        LZ77UnCompWram(sGameFreakLogo_Gfx, this->gameFreakLogoGfx);
+        DecompressDataWithHeaderWram(sGameFreakText_Gfx, this->gameFreakTextGfx);
+        DecompressDataWithHeaderWram(sGameFreakLogo_Gfx, this->gameFreakLogoGfx);
         FillBgTilemapBufferRect(BG_GF_TEXT_LOGO, 0x000, 0, 0, 32, 32, 17);
         FillWindowPixelBuffer(WIN_GF_TEXT_LOGO, PIXEL_FILL(0));
         BlitBitmapToWindow(WIN_GF_TEXT_LOGO, this->gameFreakTextGfx, 0, 40, 144, 16);

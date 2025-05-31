@@ -9,6 +9,9 @@ struct TilesPal
     const u16 *pal;
 };
 
+extern const u8 gTextWindowFrame1_Gfx[];
+extern const u16 gTextWindowFrame1_Pal[];
+
 const struct TilesPal *GetWindowFrameTilesPal(u8 id);
 void LoadWindowGfx(u8 windowId, u8 frameType, u16 destOffset, u8 palOffset);
 void rbox_fill_rectangle(u8 windowId);

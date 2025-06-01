@@ -1,19 +1,80 @@
 #include "global.h"
-#include "gflib.h"
-#include "task.h"
+#include "bg.h"
+#include "field_specials.h"
+#include "gpu_regs.h"
+#include "graphics.h"
+#include "link.h"
+#include "mail.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "link.h"
 #include "overworld.h"
-#include "mail.h"
-#include "field_specials.h"
+#include "sound.h"
+#include "string_util.h"
+#include "task.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 
+enum {
+    ANIM_SWAP_LINE_START,
+    ANIM_SWAP_LINE_MID,
+    ANIM_SWAP_LINE_END,
+};
+
 static EWRAM_DATA const struct YesNoFuncTable *sYesNo = NULL;
 static EWRAM_DATA TaskFunc sMessageNextTask = NULL;
 static EWRAM_DATA u8 sMessageWindowId = {0};
+
+
+static const struct OamData sOamData_SwapLine = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 1,
+    .paletteNum = 1
+};
+
+static const union AnimCmd sAnim_SwapLine_Start[] = {
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_SwapLine_Mid[] = {
+    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_SwapLine_End[] = {
+    ANIMCMD_FRAME(0, 0, .hFlip = TRUE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sAnims_SwapLine[] = {
+    [ANIM_SWAP_LINE_START] = sAnim_SwapLine_Start,
+    [ANIM_SWAP_LINE_MID]   = sAnim_SwapLine_Mid,
+    [ANIM_SWAP_LINE_END]   = sAnim_SwapLine_End
+};
+
+const struct CompressedSpriteSheet gBagSwapSpriteSheet = {
+    .data = gSwapLine_Gfx,
+    .size = 0x100,
+    .tag = TAG_SWAP_LINE
+};
+
+const struct SpritePalette gBagSwapSpritePalette = {
+    .data = gSwapLine_Pal,
+    .tag = TAG_SWAP_LINE
+};
+
+static const struct SpriteTemplate sSpriteTemplate_SwapLine = {
+    .tileTag = TAG_SWAP_LINE,
+    .paletteTag = TAG_SWAP_LINE,
+    .oam = &sOamData_SwapLine,
+    .anims = sAnims_SwapLine,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 
@@ -244,4 +305,47 @@ u8 GetDialogBoxFontId(void)
         return FONT_MALE;
     else
         return FONT_FEMALE;
+}
+
+void CreateSwapLineSprites(u8 *spriteIds, u8 count)
+{
+    u8 i;
+
+    for (i = 0; i < count; i++)
+    {
+        spriteIds[i] = CreateSprite(&sSpriteTemplate_SwapLine, i * 16 + 96, 7, 0);
+        if (i != 0)
+            StartSpriteAnim(&gSprites[spriteIds[i]], ANIM_SWAP_LINE_MID);
+
+        gSprites[spriteIds[i]].invisible = TRUE;
+    }
+}
+
+void SetSwapLineSpritesInvisibility(u8 *spriteIds, u8 count, bool8 invisible)
+{
+    u8 i;
+
+    for (i = 0; i < count; i++)
+        gSprites[spriteIds[i]].invisible = invisible;
+}
+
+void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s16 x, u16 y)
+{
+    u8 i;
+    bool8 hasMargin = count & SWAP_LINE_HAS_MARGIN;
+    count &= ~SWAP_LINE_HAS_MARGIN;
+
+    for (i = 0; i < count; i++)
+    {
+        // If the list menu has a right margin, the swap line
+        // shouldn't extend all the way to the edge of the screen.
+        // If this is the last sprite in the line, move it a bit
+        // to the left to keep it out of the margin.
+        if (i == count - 1 && hasMargin)
+            gSprites[spriteIds[i]].x2 = x - 8;
+        else
+            gSprites[spriteIds[i]].x2 = x;
+
+        gSprites[spriteIds[i]].y = 1 + y;
+    }
 }

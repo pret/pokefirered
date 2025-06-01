@@ -8,6 +8,15 @@
 #define MENU_L_PRESSED 1
 #define MENU_R_PRESSED 2
 
+#define SWAP_LINE_HAS_MARGIN (1 << 7)
+
+enum {
+    TAG_BAG_GFX = 100,
+    TAG_SWAP_LINE,
+    TAG_ITEM_ICON,
+    TAG_ITEM_ICON_ALT,
+};
+
 struct YesNoFuncTable
 {
     TaskFunc yesFunc;
@@ -30,5 +39,8 @@ u8 GetLRKeysPressedAndHeld(void);
 bool8 IsHoldingItemAllowed(u16 itemId);
 bool8 IsWritingMailAllowed(u16 itemId);
 void ResetVramOamAndBgCntRegs(void);
+void CreateSwapLineSprites(u8 *spriteIds, u8 count);
+void SetSwapLineSpritesInvisibility(u8 *spriteIds, u8 count, bool8 invisible);
+void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s16 x, u16 y);
 
 #endif //GUARD_MENU_HELPERS_H

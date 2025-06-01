@@ -14,7 +14,7 @@ void AddBagItemIconSprite(u16 itemId, u8 id);
 void RemoveBagItemIconSprite(u8 id);
 void CreateItemMenuSwapLine(void);
 void SetItemMenuSwapLineInvisibility(bool8 invisible);
-void UpdateItemMenuSwapLinePos(s16 x, u16 y);
+void UpdateItemMenuSwapLinePos(u16 y);
 
 void ResetItemMenuIconState(void);
 void CreateBerryPouchItemIcon(u16 itemId, u8 id);

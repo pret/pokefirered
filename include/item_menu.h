@@ -5,9 +5,15 @@
 #include "task.h"
 #include "constants/item.h"
 
-// Exported type declarations
-
-// Exported RAM declarations
+#define ITEMMENU_SWAP_LINE_LENGTH 9
+// Indexes for gItemMenuIconSpriteIds
+enum {
+    ITEMMENUSPRITE_BAG,
+    ITEMMENUSPRITE_SWAP_LINE,
+    ITEMMENUSPRITE_ITEM = ITEMMENUSPRITE_SWAP_LINE + ITEMMENU_SWAP_LINE_LENGTH,
+    ITEMMENUSPRITE_ITEM_ALT,
+    ITEMMENUSPRITE_COUNT
+};
 
 struct BagStruct
 {
@@ -20,6 +26,7 @@ struct BagStruct
 };
 
 extern struct BagStruct gBagMenuState;
+extern u8 gItemMenuIconSpriteIds[ITEMMENUSPRITE_COUNT];
 
 extern u16 gSpecialVar_ItemId;
 

@@ -52,25 +52,26 @@ enum ListMenuFields
 
 struct ListMenuTemplate
 {
-    /*0x00*/ const struct ListMenuItem *items;
-    /*0x04*/ void (* moveCursorFunc)(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-    /*0x08*/ void (* itemPrintFunc)(u8 windowId, u32 itemId, u8 y);
-    /*0x0C*/ u16 totalItems;
-    /*0x0E*/ u16 maxShowed;
-    /*0x10*/ u8 windowId;
-    /*0x11*/ u8 header_X;
-    /*0x12*/ u8 item_X;
-    /*0x13*/ u8 cursor_X;
-    /*0x14*/ u8 upText_Y:4; // x1, x2, x4, x8 = xF
-             u8 cursorPal:4; // x10, x20, x40, x80 = xF0
-    /*0x15*/ u8 fillValue:4; // x1, x2, x4, x8 = xF
-             u8 cursorShadowPal:4; // x10, x20, x40, x80 = xF0
-    /*0x16*/ u8 lettersSpacing:3;
-             u8 itemVerticalPadding:3;
-             u8 scrollMultiple:2; // x40, x80 = xC0
-    /*0x17*/ u8 fontId:6; // x1, x2, x4, x8, x10, x20 = x3F
-             u8 cursorKind:2; // x40, x80
-}; /* size = 0x18 */
+    const struct ListMenuItem *items;
+    void (*moveCursorFunc)(s32 itemIndex, bool8 onInit, struct ListMenu *list);
+    void (*itemPrintFunc)(u8 windowId, u32 itemId, u8 y);
+    u32 totalItems:12;
+    u32 maxShowed:12;
+    u32 textNarrowWidth:8;
+    u8 windowId;
+    u8 header_X;
+    u8 item_X;
+    u8 cursor_X;
+    u8 upText_Y:4; // x1, x2, x4, x8 = xF
+    u8 cursorPal:4; // x10, x20, x40, x80 = xF0
+    u8 fillValue:4; // x1, x2, x4, x8 = xF
+    u8 cursorShadowPal:4; // x10, x20, x40, x80 = xF0
+    u8 lettersSpacing:3;
+    u8 itemVerticalPadding:3;
+    u8 scrollMultiple:2; // x40, x80 = xC0
+    u8 fontId:6; // x1, x2, x4, x8, x10, x20 = x3F
+    u8 cursorKind:2; // x40, x80
+};
 
 struct ListMenu
 {

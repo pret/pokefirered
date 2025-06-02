@@ -65,7 +65,6 @@
 #include "constants/field_effects.h"
 #include "constants/field_move.h"
 #include "constants/item_effects.h"
-#include "constants/item_menu.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
@@ -3622,7 +3621,7 @@ static void CursorCB_Give(u8 taskId)
 
 void CB2_SelectBagItemToGive(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_PARTY, OPEN_BAG_LAST, CB2_GiveHoldItem);
+    GoToBagMenu(ITEMMENULOCATION_PARTY, NUM_BAG_POCKETS_NO_CASES, CB2_GiveHoldItem);
 }
 
 void CB2_GiveHoldItem(void)
@@ -4447,7 +4446,7 @@ void CB2_ShowPartyMenuForItemUse(void)
 
 static void CB2_ReturnToBagMenu(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_LAST, OPEN_BAG_LAST, NULL);
+    GoToBagMenu(ITEMMENULOCATION_LAST, NUM_BAG_POCKETS_NO_CASES, NULL);
 }
 
 static void CB2_ReturnToTMCaseMenu(void)

@@ -28,7 +28,6 @@
 #include "text_window.h"
 #include "constants/field_weather.h"
 #include "constants/game_stat.h"
-#include "constants/item_menu.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 
@@ -433,7 +432,7 @@ static void Task_HandleShopMenuSell(u8 taskId)
 
 static void CB2_GoToSellMenu(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_SHOP, OPEN_BAG_LAST, CB2_ReturnToField);
+    GoToBagMenu(ITEMMENULOCATION_SHOP, NUM_BAG_POCKETS_NO_CASES, CB2_ReturnToField);
     gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
 }
 

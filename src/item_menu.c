@@ -32,7 +32,6 @@
 #include "strings.h"
 #include "teachy_tv.h"
 #include "tm_case.h"
-#include "constants/item_menu.h"
 #include "constants/items.h"
 #include "constants/quest_log.h"
 #include "constants/songs.h"
@@ -113,7 +112,7 @@ static void Task_HandleSwappingItemsInput(u8 taskId);
 static void ExecuteMoveItemInPocket(u8 taskId, u32 itemIndex);
 static void AbortMovingItemInPocket(u8 taskId, u32 itemIndex);
 static void DrawItemListRow(u8 row);
-static void Task_ItemContext_FieldOrBattle(u8 taskId);
+static void Task_ItemContext_Normal(u8 taskId);
 static void Task_FieldItemContextMenuHandleInput(u8 taskId);
 static void Task_ItemMenuAction_Use(u8 taskId);
 static void Task_ItemMenuAction_Toss(u8 taskId);
@@ -162,6 +161,21 @@ static void Task_Bag_TeachyTvCatching(u8 taskId);
 static void Task_Bag_TeachyTvStatus(u8 taskId);
 static void Task_Bag_TeachyTvTMs(u8 taskId);
 
+enum {
+    ACTION_USE,
+    ACTION_TOSS,
+    ACTION_REGISTER,
+    ACTION_GIVE,
+    ACTION_CANCEL,
+    ACTION_BATTLE_USE,
+    ACTION_CHECK,
+    ACTION_OPEN,
+    ACTION_OPEN_BERRIES,
+    ACTION_WALK,
+    ACTION_DESELECT,
+    ACTION_DUMMY,
+};
+
 static const struct BgTemplate sBgTemplates[2] = {
     {
         .bg = 0,
@@ -194,82 +208,94 @@ static const u8 *const gPocketNamesStringsTable[] = {
 static const u16 sItemListTilemap[LIST_TILES_WIDTH * LIST_TILES_HEIGHT] = INCBIN_U16("graphics/item_menu/list.bin");
 
 static const struct MenuAction sItemMenuContextActions[] = {
-    [ITEMMENUACTION_USE] = {gOtherText_Use, {.void_u8 = Task_ItemMenuAction_Use}},
-    [ITEMMENUACTION_TOSS] = {gOtherText_Toss, {.void_u8 = Task_ItemMenuAction_Toss}},
-    [ITEMMENUACTION_REGISTER] = {gOtherText_Register, {.void_u8 = Task_ItemMenuAction_ToggleSelect}},
-    [ITEMMENUACTION_GIVE] = {gOtherText_Give, {.void_u8 = Task_ItemMenuAction_Give}},
-    [ITEMMENUACTION_CANCEL] = {gFameCheckerText_Cancel, {.void_u8 = Task_ItemMenuAction_Cancel}},
-    [ITEMMENUACTION_BATTLE_USE] = {gOtherText_Use, {.void_u8 = Task_ItemMenuAction_BattleUse}},
-    [ITEMMENUACTION_CHECK] = {gOtherText_Check, {.void_u8 = Task_ItemMenuAction_Use}},
-    [ITEMMENUACTION_OPEN] = {gOtherText_Open, {.void_u8 = Task_ItemMenuAction_Use}},
-    [ITEMMENUACTION_OPEN_BERRIES] = {gOtherText_Open, {.void_u8 = Task_ItemMenuAction_BattleUse}},
-    [ITEMMENUACTION_WALK] = {gOtherText_Walk, {.void_u8 = Task_ItemMenuAction_Use}},
-    [ITEMMENUACTION_DESELECT] = {gOtherText_Deselect, {.void_u8 = Task_ItemMenuAction_ToggleSelect}},
-    [ITEMMENUACTION_DUMMY] = {gString_Dummy, {.void_u8 = NULL}}
+    [ACTION_USE] = {gOtherText_Use, {.void_u8 = Task_ItemMenuAction_Use}},
+    [ACTION_TOSS] = {gOtherText_Toss, {.void_u8 = Task_ItemMenuAction_Toss}},
+    [ACTION_REGISTER] = {gOtherText_Register, {.void_u8 = Task_ItemMenuAction_ToggleSelect}},
+    [ACTION_GIVE] = {gOtherText_Give, {.void_u8 = Task_ItemMenuAction_Give}},
+    [ACTION_CANCEL] = {gFameCheckerText_Cancel, {.void_u8 = Task_ItemMenuAction_Cancel}},
+    [ACTION_BATTLE_USE] = {gOtherText_Use, {.void_u8 = Task_ItemMenuAction_BattleUse}},
+    [ACTION_CHECK] = {gOtherText_Check, {.void_u8 = Task_ItemMenuAction_Use}},
+    [ACTION_OPEN] = {gOtherText_Open, {.void_u8 = Task_ItemMenuAction_Use}},
+    [ACTION_OPEN_BERRIES] = {gOtherText_Open, {.void_u8 = Task_ItemMenuAction_BattleUse}},
+    [ACTION_WALK] = {gOtherText_Walk, {.void_u8 = Task_ItemMenuAction_Use}},
+    [ACTION_DESELECT] = {gOtherText_Deselect, {.void_u8 = Task_ItemMenuAction_ToggleSelect}},
+    [ACTION_DUMMY] = {gString_Dummy, {.void_u8 = NULL}}
 };
 
+
+
 static const u8 sContextMenuItems_Field[][4] = {
+    [ITEMS_POCKET] =
     {
-        ITEMMENUACTION_USE,
-        ITEMMENUACTION_GIVE,
-        ITEMMENUACTION_TOSS,
-        ITEMMENUACTION_CANCEL
-    }, {
-        ITEMMENUACTION_USE,
-        ITEMMENUACTION_REGISTER,
-        ITEMMENUACTION_CANCEL,
-        ITEMMENUACTION_DUMMY
-    }, {
-        ITEMMENUACTION_GIVE,
-        ITEMMENUACTION_TOSS,
-        ITEMMENUACTION_CANCEL,
-        ITEMMENUACTION_DUMMY
+        ACTION_USE,
+        ACTION_GIVE,
+        ACTION_TOSS,
+        ACTION_CANCEL
+    },
+    [KEYITEMS_POCKET] =
+    {
+        ACTION_USE,
+        ACTION_REGISTER,
+        ACTION_CANCEL,
+        ACTION_DUMMY
+    },
+    [BALLS_POCKET] =
+    {
+        ACTION_GIVE,
+        ACTION_TOSS,
+        ACTION_CANCEL,
+        ACTION_DUMMY
     }
 };
 
 static const u8 sContextMenuItems_CheckGiveTossCancel[] = {
-    ITEMMENUACTION_CHECK,
-    ITEMMENUACTION_GIVE,
-    ITEMMENUACTION_TOSS,
-    ITEMMENUACTION_CANCEL
+    ACTION_CHECK,
+    ACTION_GIVE,
+    ACTION_TOSS,
+    ACTION_CANCEL
 };
 
 static const u8 sContextMenuItems_GiveIfNotKeyItemPocket[][2] = {
+    [ITEMS_POCKET] =
     {
-        ITEMMENUACTION_GIVE,
-        ITEMMENUACTION_CANCEL
-    }, {
-        ITEMMENUACTION_CANCEL,
-        ITEMMENUACTION_DUMMY
-    }, {
-        ITEMMENUACTION_GIVE,
-        ITEMMENUACTION_CANCEL
+        ACTION_GIVE,
+        ACTION_CANCEL
+    },
+    [KEYITEMS_POCKET] =
+    {
+        ACTION_CANCEL,
+        ACTION_DUMMY
+    },
+    [BALLS_POCKET] =
+    {
+        ACTION_GIVE,
+        ACTION_CANCEL
     }
 };
 
 static const u8 sContextMenuItems_Open[] = {
-    ITEMMENUACTION_OPEN,
-    ITEMMENUACTION_CANCEL
+    ACTION_OPEN,
+    ACTION_CANCEL
 };
 
 static const u8 sContextMenuItems_BattleUse[] = {
-    ITEMMENUACTION_BATTLE_USE,
-    ITEMMENUACTION_CANCEL
+    ACTION_BATTLE_USE,
+    ACTION_CANCEL
 };
 
 static const u8 sContextMenuItems_Cancel[] = {
-    ITEMMENUACTION_CANCEL,
-    ITEMMENUACTION_DUMMY
+    ACTION_CANCEL,
+    ACTION_DUMMY
 };
 
 static const TaskFunc sItemContextTaskFuncs[] = {
-    [ITEMMENULOCATION_FIELD]  = Task_ItemContext_FieldOrBattle,
+    [ITEMMENULOCATION_FIELD]  = Task_ItemContext_Normal,
     [ITEMMENULOCATION_PARTY]  = Task_ItemContext_FieldGive,
     [ITEMMENULOCATION_SHOP]   = Task_ItemContext_Sell,
     [ITEMMENULOCATION_ITEMPC] = Task_ItemContext_Deposit,
     [ITEMMENULOCATION_PCBOX]  = Task_ItemContext_PcBoxGive,
-    [ITEMMENULOCATION_BATTLE] = Task_ItemContext_FieldOrBattle,
-    [ITEMMENULOCATION_BERRY_TREE_MULCH] = Task_ItemContext_FieldOrBattle,
+    [ITEMMENULOCATION_BATTLE] = Task_ItemContext_Normal,
+    [ITEMMENULOCATION_BERRY_TREE_MULCH] = Task_ItemContext_Normal,
     [ITEMMENULOCATION_OLD_MAN] = NULL
 };
 
@@ -337,7 +363,7 @@ void GoToBagMenu(u8 location, u8 pocket, MainCallback bagCallback)
         {
             sBagMenuDisplay->data[i] = 0;
         }
-        if (pocket == OPEN_BAG_ITEMS || pocket == OPEN_BAG_KEYITEMS || pocket == OPEN_BAG_POKEBALLS)
+        if (pocket == ITEMS_POCKET || pocket == KEYITEMS_POCKET || pocket == BALLS_POCKET)
             gBagMenuState.pocket = pocket;
         gTextFlags.autoScroll = FALSE;
         gSpecialVar_ItemId = ITEM_NONE;
@@ -347,12 +373,12 @@ void GoToBagMenu(u8 location, u8 pocket, MainCallback bagCallback)
 
 void CB2_BagMenuFromStartMenu(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_FIELD, OPEN_BAG_LAST, CB2_ReturnToFieldWithOpenMenu);
+    GoToBagMenu(ITEMMENULOCATION_FIELD, NUM_BAG_POCKETS_NO_CASES, CB2_ReturnToFieldWithOpenMenu);
 }
 
 void CB2_BagMenuFromBattle(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_BATTLE, OPEN_BAG_LAST, CB2_SetUpReshowBattleScreenAfterMenu2);
+    GoToBagMenu(ITEMMENULOCATION_BATTLE, NUM_BAG_POCKETS_NO_CASES, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 static void CB2_BagMenuRun(void)
@@ -1346,8 +1372,8 @@ static void OpenContextMenu(u8 taskId)
     case ITEMMENULOCATION_TTVSCR_STATUS:
         if (gSpecialVar_ItemId == ITEM_BERRY_POUCH)
         {
-            sContextMenuItemsBuffer[0] = ITEMMENUACTION_OPEN_BERRIES;
-            sContextMenuItemsBuffer[1] = ITEMMENUACTION_CANCEL;
+            sContextMenuItemsBuffer[0] = ACTION_OPEN_BERRIES;
+            sContextMenuItemsBuffer[1] = ACTION_CANCEL;
             sContextMenuItemsPtr = sContextMenuItemsBuffer;
             sContextMenuNumItems = 2;
         }
@@ -1377,7 +1403,7 @@ static void OpenContextMenu(u8 taskId)
             }
             else
             {
-                if (gBagMenuState.pocket == POCKET_KEY_ITEMS - 1)
+                if (gBagMenuState.pocket == KEYITEMS_POCKET)
                     sContextMenuNumItems = 1;
                 else
                     sContextMenuNumItems = 2;
@@ -1388,29 +1414,29 @@ static void OpenContextMenu(u8 taskId)
         {
             switch (gBagMenuState.pocket)
             {
-            case OPEN_BAG_ITEMS:
+            case ITEMS_POCKET:
                 sContextMenuNumItems = 4;
                 if (ItemIsMail(gSpecialVar_ItemId) == TRUE)
                     sContextMenuItemsPtr = sContextMenuItems_CheckGiveTossCancel;
                 else
                     sContextMenuItemsPtr = sContextMenuItems_Field[gBagMenuState.pocket];
                 break;
-            case OPEN_BAG_KEYITEMS:
+            case KEYITEMS_POCKET:
                 sContextMenuItemsPtr = sContextMenuItemsBuffer;
                 sContextMenuNumItems = 3;
-                sContextMenuItemsBuffer[2] = ITEMMENUACTION_CANCEL;
+                sContextMenuItemsBuffer[2] = ACTION_CANCEL;
                 if (gSaveBlock1Ptr->registeredItem == gSpecialVar_ItemId)
-                    sContextMenuItemsBuffer[1] = ITEMMENUACTION_DESELECT;
+                    sContextMenuItemsBuffer[1] = ACTION_DESELECT;
                 else
-                    sContextMenuItemsBuffer[1] = ITEMMENUACTION_REGISTER;
+                    sContextMenuItemsBuffer[1] = ACTION_REGISTER;
                 if (gSpecialVar_ItemId == ITEM_TM_CASE || gSpecialVar_ItemId == ITEM_BERRY_POUCH)
-                    sContextMenuItemsBuffer[0] = ITEMMENUACTION_OPEN;
+                    sContextMenuItemsBuffer[0] = ACTION_OPEN;
                 else if (gSpecialVar_ItemId == ITEM_BICYCLE && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE | PLAYER_AVATAR_FLAG_MACH_BIKE))
-                    sContextMenuItemsBuffer[0] = ITEMMENUACTION_WALK;
+                    sContextMenuItemsBuffer[0] = ACTION_WALK;
                 else
-                    sContextMenuItemsBuffer[0] = ITEMMENUACTION_USE;
+                    sContextMenuItemsBuffer[0] = ACTION_USE;
                 break;
-            case OPEN_BAG_POKEBALLS:
+            case BALLS_POCKET:
                 sContextMenuItemsPtr = sContextMenuItems_Field[gBagMenuState.pocket];
                 sContextMenuNumItems = 3;
                 break;
@@ -1436,7 +1462,7 @@ static void OpenContextMenu(u8 taskId)
     BagPrintTextOnWindow(r4, FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
 }
 
-static void Task_ItemContext_FieldOrBattle(u8 taskId)
+static void Task_ItemContext_Normal(u8 taskId)
 {
     OpenContextMenu(taskId);
     gTasks[taskId].func = Task_FieldItemContextMenuHandleInput;
@@ -1452,7 +1478,7 @@ static void Task_FieldItemContextMenuHandleInput(u8 taskId)
         {
         case -1:
             PlaySE(SE_SELECT);
-            sItemMenuContextActions[ITEMMENUACTION_CANCEL].func.void_u8(taskId);
+            sItemMenuContextActions[ACTION_CANCEL].func.void_u8(taskId);
             break;
         case -2:
             break;
@@ -1780,7 +1806,7 @@ static void GoToBerryPouch_PCBox(void)
 
 static void ReturnToBagMenuFromSubmenu_PCBox(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_PCBOX, OPEN_BAG_LAST, CB2_ReturnToPokeStorage);
+    GoToBagMenu(ITEMMENULOCATION_PCBOX, NUM_BAG_POCKETS_NO_CASES, CB2_ReturnToPokeStorage);
 }
 
 static void Task_ItemContext_Sell(u8 taskId)
@@ -1833,7 +1859,7 @@ static void GoToBerryPouch_Sell(void)
 
 static void ReturnToBagMenuFromSubmenu_Sell(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_SHOP, OPEN_BAG_LAST, CB2_ReturnToField);
+    GoToBagMenu(ITEMMENULOCATION_SHOP, NUM_BAG_POCKETS_NO_CASES, CB2_ReturnToField);
 }
 
 #define ITEM_SELL_FACTOR ((I_SELL_VALUE_FRACTION >= GEN_9) ? 4 : 2)
@@ -2105,7 +2131,7 @@ void InitOldManBag(void)
     BackUpPlayerBag();
     AddBagItem(ITEM_POTION, 1);
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(ITEMMENULOCATION_OLD_MAN, OPEN_BAG_ITEMS, CB2_SetUpReshowBattleScreenAfterMenu2);
+    GoToBagMenu(ITEMMENULOCATION_OLD_MAN, ITEMS_POCKET, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 #define tFrameCounter data[8]
@@ -2195,7 +2221,7 @@ void InitPokedudeBag(u8 a0)
         location = ITEMMENULOCATION_TTVSCR_CATCHING;
         break;
     }
-    GoToBagMenu(location, OPEN_BAG_ITEMS, cb2);
+    GoToBagMenu(location, ITEMS_POCKET, cb2);
 }
 
 static bool8 Task_BButtonInterruptTeachyTv(u8 taskId)

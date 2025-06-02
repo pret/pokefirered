@@ -46,9 +46,9 @@ enum {
 
 // IDs for the actions in the context menu
 enum {
-    ACTION_USE,
-    ACTION_GIVE,
-    ACTION_EXIT
+    TMCASE_ACTION_USE,
+    TMCASE_ACTION_GIVE,
+    TMCASE_ACTION_EXIT
 };
 
 enum {
@@ -213,13 +213,13 @@ static void (*const sSelectTMActionTasks[])(u8 taskId) = {
 };
 
 static const struct MenuAction sMenuActions[] = {
-    [ACTION_USE]  = {gOtherText_Use,  {Action_Use}  },
-    [ACTION_GIVE] = {gOtherText_Give, {Action_Give} },
-    [ACTION_EXIT] = {gOtherText_Exit, {Action_Exit} },
+    [TMCASE_ACTION_USE]  = {gOtherText_Use,  {Action_Use}  },
+    [TMCASE_ACTION_GIVE] = {gOtherText_Give, {Action_Give} },
+    [TMCASE_ACTION_EXIT] = {gOtherText_Exit, {Action_Exit} },
 };
 
-static const u8 sMenuActionIndices_Field[] = {ACTION_USE, ACTION_GIVE, ACTION_EXIT};
-static const u8 sMenuActionIndices_UnionRoom[] = {ACTION_GIVE, ACTION_EXIT};
+static const u8 sMenuActionIndices_Field[] = {TMCASE_ACTION_USE, TMCASE_ACTION_GIVE, TMCASE_ACTION_EXIT};
+static const u8 sMenuActionIndices_UnionRoom[] = {TMCASE_ACTION_GIVE, TMCASE_ACTION_EXIT};
 
 static const struct YesNoFuncTable sYesNoFuncTable = {Task_PrintSaleConfirmedText, Task_SaleOfTMsCanceled};
 

@@ -28,7 +28,6 @@
 #include "strings.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
-#include "constants/item_menu.h"
 
 struct TeachyTvCtrlBlk
 {

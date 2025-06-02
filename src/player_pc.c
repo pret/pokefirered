@@ -2,7 +2,6 @@
 #include "gflib.h"
 #include "item.h"
 #include "task.h"
-#include "menu_indicators.h"
 #include "strings.h"
 #include "menu.h"
 #include "mail.h"

@@ -7,7 +7,6 @@
 #include "event_data.h"
 #include "field_specials.h"
 #include "item_icon.h"
-#include "menu_indicators.h"
 #include "script.h"
 #include "strings.h"
 #include "field_effect.h"

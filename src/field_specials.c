@@ -23,7 +23,6 @@
 #include "field_weather.h"
 #include "event_object_movement.h"
 #include "item.h"
-#include "menu_indicators.h"
 #include "random.h"
 #include "mail.h"
 #include "help_system.h"

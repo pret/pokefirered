@@ -13,7 +13,6 @@
 #include "item_use.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "menu_indicators.h"
 #include "move.h"
 #include "party_menu.h"
 #include "pc_screen_effect.h"

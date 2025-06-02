@@ -13,7 +13,6 @@
 #include "list_menu.h"
 #include "task.h"
 #include "event_object_movement.h"
-#include "menu_indicators.h"
 #include "text_window.h"
 #include "fame_checker.h"
 #include "strings.h"

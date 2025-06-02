@@ -12,6 +12,13 @@
 #define LIST_MULTIPLE_SCROLL_DPAD   1
 #define LIST_MULTIPLE_SCROLL_L_R    2
 
+enum {
+    CURSOR_BLACK_ARROW,
+    CURSOR_INVISIBLE,
+    CURSOR_RED_OUTLINE,
+    CURSOR_RED_ARROW,
+};
+
 enum
 {
     SCROLL_ARROW_LEFT,
@@ -93,6 +100,32 @@ struct ListMenuWindowRect
     u8 palNum;
 };
 
+struct ScrollArrowsTemplate
+{
+    u8 firstArrowType;
+    u8 firstX;
+    u8 firstY;
+    u8 secondArrowType;
+    u8 secondX;
+    u8 secondY;
+    u16 fullyUpThreshold;
+    u16 fullyDownThreshold;
+    u16 tileTag;
+    u16 palTag;
+    u8 palNum;
+};
+
+struct CursorStruct
+{
+    u8 left;
+    u8 top;
+    u16 rowWidth;
+    u16 rowHeight;
+    u16 tileTag;
+    u16 palTag;
+    u8 palNum;
+};
+
 extern struct ListMenuTemplate gMultiuseListMenuTemplate;
 
 u32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 arg2, u16 tileNum, u16 palNum);
@@ -108,5 +141,15 @@ void ListMenuOverrideSetColors(u8 cursorPal, u8 fillValue, u8 cursorShadowPal);
 void ListMenuDefaultCursorMoveFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 void ListMenuSetTemplateField(u8 taskId, u8 field, s32 value);
 bool8 ListMenuChangeSelectionFull(struct ListMenu *list, bool32 updateCursor, bool32 callCallback, u8 count, bool8 movingDown);
+
+u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 firstPos, s32 secondPos, s32 fullyDownThreshold, s32 tileTag, s32 palTag, u16 *scrollOffset);
+u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate * template, u16 * a1);
+void RemoveScrollIndicatorArrowPair(u8);
+u8 ListMenuAddCursorObjectInternal(const struct CursorStruct *cursor, u32 cursorKind);
+u8 ListMenuAddRedOutlineCursorObject(const struct CursorStruct *cursor);
+void ListMenuUpdateRedOutlineCursorObject(u8 taskId, u16 x, u16 y);
+void ListMenuRemoveRedOutlineCursorObject(u8 taskId);
+void ListMenuRemoveCursorObject(u8 taskId, u32 cursorKind);
+void ListMenuUpdateCursorObject(u8 taskId, u16 x, u16 y, u32 cursorKind);
 
 #endif //GUARD_LIST_MENU_H

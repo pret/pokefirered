@@ -9,7 +9,6 @@
 #include "list_menu.h"
 #include "item_menu.h"
 #include "item.h"
-#include "menu_indicators.h"
 #include "event_object_movement.h"
 #include "random.h"
 #include "constants/songs.h"

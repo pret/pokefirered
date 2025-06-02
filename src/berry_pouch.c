@@ -29,7 +29,6 @@
 #include "money.h"
 #include "shop.h"
 #include "menu.h"
-#include "menu_indicators.h"
 #include "pokemon_storage_system.h"
 #include "constants/items.h"
 #include "constants/songs.h"

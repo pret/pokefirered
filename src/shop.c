@@ -18,7 +18,6 @@
 #include "scanline_effect.h"
 #include "item_icon.h"
 #include "decompress.h"
-#include "menu_indicators.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "event_object_movement.h"

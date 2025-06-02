@@ -20,7 +20,6 @@
 #include "data.h"
 #include "scanline_effect.h"
 #include "strings.h"
-#include "menu_indicators.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/quest_log.h"

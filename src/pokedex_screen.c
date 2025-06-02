@@ -6,7 +6,6 @@
 #include "task.h"
 #include "event_data.h"
 #include "help_system.h"
-#include "menu_indicators.h"
 #include "overworld.h"
 #include "strings.h"
 #include "menu.h"

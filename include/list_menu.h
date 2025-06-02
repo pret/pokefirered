@@ -75,8 +75,8 @@ struct ListMenuTemplate
 struct ListMenu
 {
     struct ListMenuTemplate template;
-    u16 cursorPos;
-    u16 itemsAbove;
+    u16 scrollOffset;
+    u16 selectedRow;
     u8 unk_1C;
     u8 unk_1D;
     u8 taskId;

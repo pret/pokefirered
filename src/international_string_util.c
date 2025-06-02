@@ -69,7 +69,7 @@ int Intl_GetListMenuWidth(const struct ListMenuTemplate *listMenu)
     maxWidth = 0;
     for (i = 0; i < listMenu->totalItems; i++)
     {
-        int width = GetStringWidth(listMenu->fontId, items[i].label, 0);
+        int width = GetStringWidth(listMenu->fontId, items[i].name, 0);
         if (width > maxWidth)
             maxWidth = width;
     }

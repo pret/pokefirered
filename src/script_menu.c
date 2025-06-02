@@ -853,7 +853,7 @@ static void FreeListMenuItems(struct ListMenuItem *items, u32 count)
     for (i = 0; i < count; ++i)
     {
         // All items were dynamically allocated, so items[i].name is not actually constant.
-        Free((void *)items[i].label);
+        Free((void *)items[i].name);
     }
     Free(items);
 }
@@ -979,7 +979,7 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
 
     for (i = 0; i < argc; ++i)
     {
-        width = DisplayTextAndGetWidth(items[i].label, width);
+        width = DisplayTextAndGetWidth(items[i].name, width);
     }
     LoadMessageBoxAndBorderGfx();
     windowHeight = (argc < maxBeforeScroll) ? argc * 2 : maxBeforeScroll * 2;
@@ -1018,7 +1018,7 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
 
     if (sDynamicMenuEventId != DYN_MULTICHOICE_CB_NONE && sDynamicListMenuEventCollections[sDynamicMenuEventId].OnSelectionChanged)
     {
-        struct DynamicListMenuEventArgs eventArgs = {.selectedItem = items[initialRow].index, .windowId = windowId, .list = &gMultiuseListMenuTemplate};
+        struct DynamicListMenuEventArgs eventArgs = {.selectedItem = items[initialRow].id, .windowId = windowId, .list = &gMultiuseListMenuTemplate};
         sDynamicListMenuEventCollections[sDynamicMenuEventId].OnSelectionChanged(&eventArgs);
     }
     ListMenuGetScrollAndRow(gTasks[taskId].data[0], &gScrollableMultichoice_ScrollOffset, NULL);

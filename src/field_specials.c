@@ -1395,9 +1395,9 @@ static void Task_CreateScriptListMenu(u8 taskId)
     mwidth = 0;
     for (i = 0; i < task->data[1]; i++)
     {
-        sListMenuItems[i].label = sListMenuLabels[gSpecialVar_0x8004][i];
-        sListMenuItems[i].index = i;
-        width = GetStringWidth(FONT_NORMAL, sListMenuItems[i].label, 0);
+        sListMenuItems[i].name = sListMenuLabels[gSpecialVar_0x8004][i];
+        sListMenuItems[i].id = i;
+        width = GetStringWidth(FONT_NORMAL, sListMenuItems[i].name, 0);
         if (width > mwidth)
             mwidth = width;
     }

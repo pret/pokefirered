@@ -643,11 +643,11 @@ static void InitTMCaseListMenuItems(void)
     for (i = 0; i < sTMCaseDynamicResources->numTMs; i++)
     {
         GetTMNumberAndMoveString(sListMenuStringsBuffer[i], pocket->itemSlots[i].itemId);
-        sListMenuItemsBuffer[i].label = sListMenuStringsBuffer[i];
-        sListMenuItemsBuffer[i].index = i;
+        sListMenuItemsBuffer[i].name = sListMenuStringsBuffer[i];
+        sListMenuItemsBuffer[i].id = i;
     }
-    sListMenuItemsBuffer[i].label = gText_Close;
-    sListMenuItemsBuffer[i].index = LIST_CANCEL;
+    sListMenuItemsBuffer[i].name = gText_Close;
+    sListMenuItemsBuffer[i].id = LIST_CANCEL;
 
     gMultiuseListMenuTemplate.items = sListMenuItemsBuffer;
     gMultiuseListMenuTemplate.totalItems = sTMCaseDynamicResources->numTMs + 1; // +1 for Cancel

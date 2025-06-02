@@ -715,8 +715,8 @@ bool8 BuyMenuBuildListMenuTemplate(void)
         PokeMartWriteNameAndIdAt(&sShopMenuListMenu[i], sShopData.itemList[i], sShopMenuItemStrings[i]);
     }
     StringCopy(sShopMenuItemStrings[i], gFameCheckerText_Cancel);
-    sShopMenuListMenu[i].label = sShopMenuItemStrings[i];
-    sShopMenuListMenu[i].index = -2;
+    sShopMenuListMenu[i].name = sShopMenuItemStrings[i];
+    sShopMenuListMenu[i].id = -2;
     gMultiuseListMenuTemplate.items = sShopMenuListMenu;
     gMultiuseListMenuTemplate.totalItems = sShopData.itemCount + 1;
     gMultiuseListMenuTemplate.windowId = 4;
@@ -752,8 +752,8 @@ bool8 BuyMenuBuildListMenuTemplate(void)
 static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8 *dst)
 {
     CopyItemName(index, dst);
-    list->label = dst;
-    list->index = index;
+    list->name = dst;
+    list->id = index;
 }
 
 static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list)

@@ -642,13 +642,13 @@ static void Bag_BuildListMenuTemplate(u8 pocket)
     for (i = 0; i < sBagMenuDisplay->nItems[pocket]; i++)
     {
         BagListMenuGetItemNameColored(sListMenuItemStrings[i], bagPocket->itemSlots[i].itemId);
-        sListMenuItems[i].label = sListMenuItemStrings[i];
-        sListMenuItems[i].index = i;
+        sListMenuItems[i].name = sListMenuItemStrings[i];
+        sListMenuItems[i].id = i;
     }
     StringCopy(sListMenuItemStrings[i], sListItemTextColor_RegularItem);
     StringAppend(sListMenuItemStrings[i], gFameCheckerText_Cancel);
-    sListMenuItems[i].label = sListMenuItemStrings[i];
-    sListMenuItems[i].index = i;
+    sListMenuItems[i].name = sListMenuItemStrings[i];
+    sListMenuItems[i].id = i;
     gMultiuseListMenuTemplate.items = sListMenuItems;
     gMultiuseListMenuTemplate.totalItems = sBagMenuDisplay->nItems[pocket] + 1;
     gMultiuseListMenuTemplate.windowId = 0;

@@ -171,57 +171,57 @@ static const struct WindowTemplate sWindowTemplates[] =
 static const struct ListMenuItem sListMenuItems[] = 
 {
     {
-        .label = gTeachyTvString_TeachBattle,
-        .index = TTVSCR_BATTLE
+        .name = gTeachyTvString_TeachBattle,
+        .id = TTVSCR_BATTLE
     },
     {
-        .label = gTeachyTvString_StatusProblems,
-        .index = TTVSCR_STATUS
+        .name = gTeachyTvString_StatusProblems,
+        .id = TTVSCR_STATUS
     },
     {
-        .label = gTeachyTvString_TypeMatchups,
-        .index = TTVSCR_MATCHUPS
+        .name = gTeachyTvString_TypeMatchups,
+        .id = TTVSCR_MATCHUPS
     },
     {
-        .label = gTeachyTvString_CatchPkmn,
-        .index = TTVSCR_CATCHING
+        .name = gTeachyTvString_CatchPkmn,
+        .id = TTVSCR_CATCHING
     },
     {
-        .label = gTeachyTvString_AboutTMs,
-        .index = TTVSCR_TMS
+        .name = gTeachyTvString_AboutTMs,
+        .id = TTVSCR_TMS
     },
     {
-        .label = gTeachyTvString_RegisterItem,
-        .index = TTVSCR_REGISTER
+        .name = gTeachyTvString_RegisterItem,
+        .id = TTVSCR_REGISTER
     },
 
     {
-        .label = gTeachyTvString_Cancel,
-        .index = -2
+        .name = gTeachyTvString_Cancel,
+        .id = -2
     },
 };
 
 static const struct ListMenuItem sListMenuItems_NoTMCase[] = 
 {
     {
-        .label = gTeachyTvString_TeachBattle,
-        .index = TTVSCR_BATTLE
+        .name = gTeachyTvString_TeachBattle,
+        .id = TTVSCR_BATTLE
     },
     {
-        .label = gTeachyTvString_StatusProblems,
-        .index = TTVSCR_STATUS
+        .name = gTeachyTvString_StatusProblems,
+        .id = TTVSCR_STATUS
     },
     {
-        .label = gTeachyTvString_TypeMatchups,
-        .index = TTVSCR_MATCHUPS
+        .name = gTeachyTvString_TypeMatchups,
+        .id = TTVSCR_MATCHUPS
     },
     {
-        .label = gTeachyTvString_CatchPkmn,
-        .index = TTVSCR_CATCHING
+        .name = gTeachyTvString_CatchPkmn,
+        .id = TTVSCR_CATCHING
     },
     {
-        .label = gTeachyTvString_Cancel,
-        .index = -2
+        .name = gTeachyTvString_Cancel,
+        .id = -2
     },
 };
 

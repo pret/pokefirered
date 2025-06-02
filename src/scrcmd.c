@@ -1824,7 +1824,7 @@ static void DynamicMultichoiceSortList(struct ListMenuItem *items, u32 count)
     {
         for (j = 0; j < count - i - 1; ++j)
         {
-            if (items[j].index > items[j+1].index)
+            if (items[j].id > items[j+1].id)
             {
                 tmp = items[j];
                 items[j] = items[j+1];
@@ -1867,8 +1867,8 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
             u8 *nameBuffer = Alloc(100);
             const u8 *arg = (const u8 *) ScriptReadWord(ctx);
             StringExpandPlaceholders(nameBuffer, arg);
-            items[i].label = nameBuffer;
-            items[i].index = i;
+            items[i].name = nameBuffer;
+            items[i].id = i;
             if (i == initialSelected)
                 initialRow = i;
         }
@@ -1881,7 +1881,7 @@ bool8 ScrCmd_dynmultichoice(struct ScriptContext *ctx)
         {
             struct ListMenuItem *currentItem = MultichoiceDynamic_PeekElementAt(i);
             items[i] = *currentItem;
-            if (currentItem->index == initialSelected)
+            if (currentItem->id == initialSelected)
                 initialRow = i;
         }
         if (shouldSort)
@@ -1910,8 +1910,8 @@ bool8 ScrCmd_dynmultipush(struct ScriptContext *ctx)
     u8 *nameBuffer = Alloc(100);
     struct ListMenuItem item;
     StringExpandPlaceholders(nameBuffer, name);
-    item.label = nameBuffer;
-    item.index = id;
+    item.name = nameBuffer;
+    item.id = id;
     MultichoiceDynamic_PushElement(item);
     return FALSE;
 }

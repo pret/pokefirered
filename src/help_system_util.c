@@ -657,7 +657,7 @@ s32 HelpSystem_GetMenuInput(void)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        return gHelpSystemListMenu.sub.items[gHelpSystemListMenu.itemsAbove + gHelpSystemListMenu.cursorPos].index;
+        return gHelpSystemListMenu.sub.items[gHelpSystemListMenu.itemsAbove + gHelpSystemListMenu.cursorPos].id;
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -728,7 +728,7 @@ void PrintListMenuItems(void)
     {
         u8 x = gHelpSystemListMenu.sub.left + 8;
         u8 y = gHelpSystemListMenu.sub.top + glyphHeight * i;
-        HelpSystem_PrintTextAt(gHelpSystemListMenu.sub.items[r5].label, x, y);
+        HelpSystem_PrintTextAt(gHelpSystemListMenu.sub.items[r5].name, x, y);
         r5++;
     }
 }

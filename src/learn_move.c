@@ -762,11 +762,11 @@ static void MoveRelearnerInitListMenuBuffersEtc(void)
     sMoveRelearner->numLearnableMoves++;
     for (i = 0; i < count; i++)
     {
-        sMoveRelearner->listMenuItems[i].label = sMoveRelearner->listMenuStrbufs[i];
-        sMoveRelearner->listMenuItems[i].index = i;
+        sMoveRelearner->listMenuItems[i].name = sMoveRelearner->listMenuStrbufs[i];
+        sMoveRelearner->listMenuItems[i].id = i;
     }
-    sMoveRelearner->listMenuItems[i].label = gFameCheckerText_Cancel;
-    sMoveRelearner->listMenuItems[i].index = 0xFE;
+    sMoveRelearner->listMenuItems[i].name = gFameCheckerText_Cancel;
+    sMoveRelearner->listMenuItems[i].id = 0xFE;
     gMultiuseListMenuTemplate = sMoveRelearnerListMenuTemplate;
     gMultiuseListMenuTemplate.items = sMoveRelearner->listMenuItems;
     gMultiuseListMenuTemplate.totalItems = count + 1;

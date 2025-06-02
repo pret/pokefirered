@@ -665,11 +665,11 @@ static void SetUpListMenuTemplate(void)
     for (i = 0; i < sResources->listMenuNumItems; i++)
     {
         GetBerryNameAndIndexForMenu(&sListMenuStrbuf[i * 27], pocket->itemSlots[i].itemId);
-        sListMenuItems[i].label = &sListMenuStrbuf[i * 27];
-        sListMenuItems[i].index = i;
+        sListMenuItems[i].name = &sListMenuStrbuf[i * 27];
+        sListMenuItems[i].id = i;
     }
-    sListMenuItems[i].label = gText_Close;
-    sListMenuItems[i].index = i;
+    sListMenuItems[i].name = gText_Close;
+    sListMenuItems[i].id = i;
     gMultiuseListMenuTemplate.items = sListMenuItems;
     if (sStaticCnt.type != BERRYPOUCH_FROMBERRYCRUSH)
         gMultiuseListMenuTemplate.totalItems = sResources->listMenuNumItems + 1;

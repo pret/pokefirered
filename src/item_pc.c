@@ -483,11 +483,11 @@ static void ItemPc_BuildListMenuTemplate(void)
 
     for (i = 0; i < sStateDataPtr->nItems; i++)
     {
-        sListMenuItems[i].label = GetItemName(gSaveBlock1Ptr->pcItems[i].itemId);
-        sListMenuItems[i].index = i;
+        sListMenuItems[i].name = GetItemName(gSaveBlock1Ptr->pcItems[i].itemId);
+        sListMenuItems[i].id = i;
     }
-    sListMenuItems[i].label = gFameCheckerText_Cancel;
-    sListMenuItems[i].index = -2;
+    sListMenuItems[i].name = gFameCheckerText_Cancel;
+    sListMenuItems[i].id = -2;
 
     gMultiuseListMenuTemplate.items = sListMenuItems;
     gMultiuseListMenuTemplate.totalItems = sStateDataPtr->nItems + 1;

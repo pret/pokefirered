@@ -1411,14 +1411,14 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
             caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
             if (seen)
             {
-                sPokedexScreenData->listItems[i].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
+                sPokedexScreenData->listItems[i].name = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
                 seenCount = i + 1;
             }
             else
             {
-                sPokedexScreenData->listItems[i].label = gText_5Dashes;
+                sPokedexScreenData->listItems[i].name = gText_5Dashes;
             }
-            sPokedexScreenData->listItems[i].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+            sPokedexScreenData->listItems[i].id = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
         }
         break;
     case DEX_ORDER_ATOZ:
@@ -1431,8 +1431,8 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
                 caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
                 if (seen)
                 {
-                    sPokedexScreenData->listItems[seenCount].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
-                    sPokedexScreenData->listItems[seenCount].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+                    sPokedexScreenData->listItems[seenCount].name = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
+                    sPokedexScreenData->listItems[seenCount].id = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
                     seenCount++;
                 }
             }
@@ -1448,8 +1448,8 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
                 caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
                 if (caught)
                 {
-                    sPokedexScreenData->listItems[seenCount].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
-                    sPokedexScreenData->listItems[seenCount].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+                    sPokedexScreenData->listItems[seenCount].name = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
+                    sPokedexScreenData->listItems[seenCount].id = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
                     seenCount++;
                 }
             }
@@ -1465,8 +1465,8 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
                 caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
                 if (caught)
                 {
-                    sPokedexScreenData->listItems[seenCount].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
-                    sPokedexScreenData->listItems[seenCount].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+                    sPokedexScreenData->listItems[seenCount].name = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
+                    sPokedexScreenData->listItems[seenCount].id = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
                     seenCount++;
                 }
             }
@@ -1482,8 +1482,8 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
                 caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
                 if (caught)
                 {
-                    sPokedexScreenData->listItems[seenCount].label = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
-                    sPokedexScreenData->listItems[seenCount].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
+                    sPokedexScreenData->listItems[seenCount].name = gSpeciesInfo[NationalPokedexNumToSpecies(natDexNum)].speciesName;
+                    sPokedexScreenData->listItems[seenCount].id = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(natDexNum);
                     seenCount++;
                 }
             }
@@ -1500,26 +1500,26 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
             seen = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_SEEN, FALSE);
             caught = DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE);
             
-            if (!sPokedexScreenData->listItems[natDexNum - 1].index)
+            if (!sPokedexScreenData->listItems[natDexNum - 1].id)
             {
                 if (seen)
                 {
-                    sPokedexScreenData->listItems[natDexNum - 1].label = gSpeciesInfo[species].speciesName;
+                    sPokedexScreenData->listItems[natDexNum - 1].name = gSpeciesInfo[species].speciesName;
                     seenCount = natDexNum > seenCount ? natDexNum : seenCount;
                 }
                 else
                 {
-                    sPokedexScreenData->listItems[natDexNum - 1].label = gText_5Dashes;
+                    sPokedexScreenData->listItems[natDexNum - 1].name = gText_5Dashes;
                 }
-                sPokedexScreenData->listItems[natDexNum - 1].index = (caught << 17) + (seen << 16) + species;
+                sPokedexScreenData->listItems[natDexNum - 1].id = (caught << 17) + (seen << 16) + species;
             }
         }
 
         // in case national dex nums are missing
         for (i = 0; i < NATIONAL_DEX_COUNT; i++)
         {
-            if (!sPokedexScreenData->listItems[i].index)
-                sPokedexScreenData->listItems[i].label = gText_5Dashes;
+            if (!sPokedexScreenData->listItems[i].id)
+                sPokedexScreenData->listItems[i].name = gText_5Dashes;
         }
         break;
     }
@@ -2101,7 +2101,7 @@ static bool32 DexScreen_TryScrollMonsVertical(u8 direction)
         selectedIndex--;
         while (selectedIndex >= 0) //Should be while (--selectedIndex >= 0) without the selectedIndex-- in the body or before the while at all, but this is needed to match.
         {
-            if ((sPokedexScreenData->listItems[selectedIndex].index >> 16) & 1)
+            if ((sPokedexScreenData->listItems[selectedIndex].id >> 16) & 1)
             {
                 break;
             }
@@ -2123,7 +2123,7 @@ static bool32 DexScreen_TryScrollMonsVertical(u8 direction)
         selectedIndex++;
         while (selectedIndex < sPokedexScreenData->orderedDexCount) //Should be while (++selectedIndex < sPokedexScreenData->orderedDexCount) without the selectedIndex++ in the body or before the while at all, but this is needed to match.
         {
-            if ((sPokedexScreenData->listItems[selectedIndex].index >> 16) & 1)
+            if ((sPokedexScreenData->listItems[selectedIndex].id >> 16) & 1)
                 break;
             selectedIndex++;
         }
@@ -2132,7 +2132,7 @@ static bool32 DexScreen_TryScrollMonsVertical(u8 direction)
             return FALSE;
         }
     }
-    sPokedexScreenData->characteristicMenuInput = sPokedexScreenData->listItems[selectedIndex].index;
+    sPokedexScreenData->characteristicMenuInput = sPokedexScreenData->listItems[selectedIndex].id;
 
     if (sPokedexScreenData->orderedDexCount > 9)
     {

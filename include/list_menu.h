@@ -22,8 +22,8 @@ enum
 
 struct ListMenuItem
 {
-    const u8 *label;
-    u32 index;
+    const u8 *name;
+    u32 id;
 };
 
 struct ListMenu;

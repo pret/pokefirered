@@ -8,9 +8,11 @@
 #define LIST_CANCEL -2
 #define LIST_HEADER -3
 
-#define LIST_NO_MULTIPLE_SCROLL     0
-#define LIST_MULTIPLE_SCROLL_DPAD   1
-#define LIST_MULTIPLE_SCROLL_L_R    2
+enum {
+    LIST_NO_MULTIPLE_SCROLL,
+    LIST_MULTIPLE_SCROLL_DPAD,
+    LIST_MULTIPLE_SCROLL_L_R,
+};
 
 enum {
     CURSOR_BLACK_ARROW,
@@ -19,21 +21,12 @@ enum {
     CURSOR_RED_ARROW,
 };
 
-enum
-{
+enum {
     SCROLL_ARROW_LEFT,
     SCROLL_ARROW_RIGHT,
     SCROLL_ARROW_UP,
-    SCROLL_ARROW_DOWN,
+    SCROLL_ARROW_DOWN
 };
-
-struct ListMenuItem
-{
-    const u8 *name;
-    u32 id;
-};
-
-struct ListMenu;
 
 // For ListMenuGet/SetTemplateField
 enum ListMenuFields
@@ -55,6 +48,14 @@ enum ListMenuFields
     LISTFIELD_SCROLLMULTIPLE,
     LISTFIELD_FONTID,
     LISTFIELD_CURSORKIND,
+};
+
+struct ListMenu;
+
+struct ListMenuItem
+{
+    const u8 *name;
+    s32 id;
 };
 
 struct ListMenuTemplate
@@ -140,15 +141,14 @@ u16 ListMenuGetYCoordForPrintingArrowCursor(u8 listTaskId);
 void ListMenuOverrideSetColors(u8 cursorPal, u8 fillValue, u8 cursorShadowPal);
 void ListMenuDefaultCursorMoveFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 void ListMenuSetTemplateField(u8 taskId, u8 field, s32 value);
+void Task_ScrollIndicatorArrowPairOnMainMenu(u8 taskId);
+bool8 ListMenuChangeSelection(struct ListMenu *list, bool8 updateCursorAndCallCallback, u8 count, bool8 movingDown);
 bool8 ListMenuChangeSelectionFull(struct ListMenu *list, bool32 updateCursor, bool32 callCallback, u8 count, bool8 movingDown);
 
+u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16 *scrollOffset);
 u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 firstPos, s32 secondPos, s32 fullyDownThreshold, s32 tileTag, s32 palTag, u16 *scrollOffset);
-u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate * template, u16 * a1);
 void RemoveScrollIndicatorArrowPair(u8);
 u8 ListMenuAddCursorObjectInternal(const struct CursorStruct *cursor, u32 cursorKind);
-u8 ListMenuAddRedOutlineCursorObject(const struct CursorStruct *cursor);
-void ListMenuUpdateRedOutlineCursorObject(u8 taskId, u16 x, u16 y);
-void ListMenuRemoveRedOutlineCursorObject(u8 taskId);
 void ListMenuRemoveCursorObject(u8 taskId, u32 cursorKind);
 void ListMenuUpdateCursorObject(u8 taskId, u16 x, u16 y, u32 cursorKind);
 

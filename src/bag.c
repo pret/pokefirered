@@ -196,7 +196,7 @@ void InitBagWindows(void)
 {
     u8 i;
 
-    if (gBagMenuState.location != 3)
+    if (gBagPosition.location != 3)
         InitWindows(sDefaultBagWindowsStd);
     else
         InitWindows(sDefaultBagWindowsDeposit);

@@ -106,7 +106,7 @@ static void SetUpItemUseCallback(u8 taskId)
         ItemMenu_SetExitCallback(sExitCallbackByItemType[itemType]);
         if (itemType == ITEM_USE_FIELD - 1)
             Bag_BeginCloseWin0Animation();
-        ItemMenu_StartFadeToExitCallback(taskId);
+        Task_FadeAndCloseBagMenu(taskId);
     }
 }
 
@@ -205,7 +205,7 @@ void ItemUseOutOfBattle_AbilityPatch(u8 taskId)
 void ItemUseOutOfBattle_Mail(u8 taskId)
 {
     ItemMenu_SetExitCallback(CB2_CheckMail);
-    ItemMenu_StartFadeToExitCallback(taskId);
+    Task_FadeAndCloseBagMenu(taskId);
 }
 
 static void CB2_CheckMail(void)
@@ -534,7 +534,7 @@ void ItemUseOutOfBattle_TmCase(u8 taskId)
     if (gTasks[taskId].tIsFieldUse == FALSE)
     {
         ItemMenu_SetExitCallback(InitTMCaseFromBag);
-        ItemMenu_StartFadeToExitCallback(taskId);
+        Task_FadeAndCloseBagMenu(taskId);
     }
     else
     {
@@ -549,7 +549,7 @@ void ItemUseOutOfBattle_BerryPouch(u8 taskId)
     if (gTasks[taskId].tIsFieldUse == FALSE)
     {
         ItemMenu_SetExitCallback(InitBerryPouchFromBag);
-        ItemMenu_StartFadeToExitCallback(taskId);
+        Task_FadeAndCloseBagMenu(taskId);
     }
     else
     {
@@ -565,7 +565,7 @@ void ItemUseOutOfBattle_TeachyTv(u8 taskId)
     if (gTasks[taskId].tIsFieldUse == FALSE)
     {
         ItemMenu_SetExitCallback(InitTeachyTvFromBag);
-        ItemMenu_StartFadeToExitCallback(taskId);
+        Task_FadeAndCloseBagMenu(taskId);
     }
     else
     {
@@ -580,7 +580,7 @@ void ItemUseOutOfBattle_TownMap(u8 taskId)
     if (gTasks[taskId].tIsFieldUse == FALSE)
     {
         ItemMenu_SetExitCallback(UseTownMapFromBag);
-        ItemMenu_StartFadeToExitCallback(taskId);
+        Task_FadeAndCloseBagMenu(taskId);
     }
     else
     {
@@ -596,7 +596,7 @@ void ItemUseOutOfBattle_FameChecker(u8 taskId)
     if (gTasks[taskId].tIsFieldUse == FALSE)
     {
         ItemMenu_SetExitCallback(UseFameCheckerFromBag);
-        ItemMenu_StartFadeToExitCallback(taskId);
+        Task_FadeAndCloseBagMenu(taskId);
     }
     else
     {
@@ -690,7 +690,7 @@ static void Task_InitBerryPouchFromField(u8 taskId)
 static void ItemUseInBattle_BerryPouch(u8 taskId)
 {
     ItemMenu_SetExitCallback(InitBerryPouchFromBattle);
-    ItemMenu_StartFadeToExitCallback(taskId);
+    Task_FadeAndCloseBagMenu(taskId);
 }
 
 static void InitBerryPouchFromBattle(void)
@@ -933,7 +933,7 @@ static void ItemUse_SwitchToPartyMenuInBattle(u8 taskId)
     else
     {
         ItemMenu_SetExitCallback(EnterPartyFromItemMenuInBattle);
-        ItemMenu_StartFadeToExitCallback(taskId);
+        Task_FadeAndCloseBagMenu(taskId);
     }
 }
 
@@ -955,7 +955,7 @@ void ItemUseInBattle_BagMenu(u8 taskId)
             RemoveBagItem(gSpecialVar_ItemId, 1);
         }
         ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = ItemMenu_StartFadeToExitCallback;
+        gTasks[taskId].func = Task_FadeAndCloseBagMenu;
     }
 }
 

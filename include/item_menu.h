@@ -1,9 +1,8 @@
 #ifndef GUARD_ITEM_MENU_H
 #define GUARD_ITEM_MENU_H
 
-#include "global.h"
-#include "task.h"
-#include "constants/item.h"
+#include "item.h"
+#include "menu_helpers.h"
 
 enum {
     ITEMMENULOCATION_FIELD,
@@ -101,5 +100,18 @@ void GoToBagMenu(u8 menuType, u8 pocket, MainCallback callback);
 bool8 UseRegisteredKeyItemOnField(void);
 void CB2_ChooseBerry(void);
 void CB2_ChooseMulch(void);
+
+void LoadBagMenuTextWindows(void);
+void BagPrintTextOnWindow(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
+void BagPrintTextOnWin1CenteredColor0(const u8 * str, u8 unused);
+void BagDrawDepositItemTextBox(void);
+u32 ShowBagWindow(u32 whichWindow);
+void BagMenu_RemoveWindow(u8 whichWindow);
+u8 OpenBagWindow(u8 whichWindow);
+void CloseBagWindow(u8 whichWindow);
+u8 GetBagWindow(u8 whichWindow);
+void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTable);
+void BagPrintMoneyAmount(void);
+void BagDrawTextBoxOnWindow(u8 windowId);
 
 #endif //GUARD_ITEM_MENU_H

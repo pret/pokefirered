@@ -92,7 +92,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 palet
     gTasks[taskId].func = Task_ContinueTaskAfterMessagePrints;
 }
 
-bool16 RunTextPrinters_CheckActive(u8 textPrinterId)
+bool16 RunTextPrintersRetIsActive(u8 textPrinterId)
 {
     RunTextPrinters();
     return IsTextPrinterActive(textPrinterId);
@@ -100,7 +100,7 @@ bool16 RunTextPrinters_CheckActive(u8 textPrinterId)
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId)
 {
-    if (!RunTextPrinters_CheckActive(sMessageWindowId))
+    if (!RunTextPrintersRetIsActive(sMessageWindowId))
         sMessageNextTask(taskId);
 }
 

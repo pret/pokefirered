@@ -24,7 +24,7 @@ struct YesNoFuncTable
 };
 
 void ResetAllBgsCoordinates(void);
-bool16 RunTextPrinters_CheckActive(u8 textPrinterId);
+bool16 RunTextPrintersRetIsActive(u8 textPrinterId);
 bool8 IsActiveOverworldLinkBusy(void);
 bool8 MenuHelpers_ShouldWaitForLinkRecv(void);
 bool8 MenuHelpers_IsLinkActive(void);

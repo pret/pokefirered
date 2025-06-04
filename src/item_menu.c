@@ -1,6 +1,5 @@
 #include "global.h"
 #include "gflib.h"
-#include "bag.h"
 #include "battle.h"
 #include "battle_controllers.h"
 #include "battle_main.h"
@@ -90,6 +89,7 @@ static void CalculateInitialCursorPosAndItemsAbove(void);
 static void UpdatePocketScrollPositions(void);
 static void DestroyBagMenuResources(void);
 static void Task_CloseBagMenu(u8 taskId);
+static u8 AddItemMessageWindow(u8);
 static void Task_AnimateWin0v(u8 taskId);
 static void ShowBagOrBeginWin0OpenTask(void);
 static void All_CalculateNItemsAndMaxShowed(void);
@@ -442,7 +442,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x28a
     },
-    [ITEMWIN_5] =
+    [ITEMWIN_MESSAGE] =
     {
         .bg = 0,
         .tilemapLeft = 2,
@@ -1256,13 +1256,13 @@ static void All_CalculateNItemsAndMaxShowed(void)
         Pocket_CalculateNItemsAndMaxShowed(i);
 }
 
-void DisplayItemMessageInBag(u8 taskId, u8 fontId, const u8 * string, TaskFunc followUpFunc)
+void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId))
 {
     s16 *data = gTasks[taskId].data;
-    data[10] = OpenBagWindow(ITEMWIN_5);
-    FillWindowPixelBuffer(data[10], PIXEL_FILL(1));
-    DisplayMessageAndContinueTask(taskId, data[10], 0x06D, 0x0D, fontId, GetPlayerTextSpeedDelay(), string, followUpFunc);
-    ScheduleBgCopyTilemapToVram(0);
+    tMsgWindowId = AddItemMessageWindow(ITEMWIN_MESSAGE);
+    FillWindowPixelBuffer(tMsgWindowId, PIXEL_FILL(1));
+    DisplayMessageAndContinueTask(taskId, tMsgWindowId, 0x06D, 13, fontId, GetPlayerTextSpeedDelay(), str, callback);
+    ScheduleBgCopyTilemapToVram(sWindowTemplates[ITEMWIN_MESSAGE].bg);
 }
 
 void ItemMenu_SetExitCallback(MainCallback cb)
@@ -1844,7 +1844,7 @@ static void Task_ItemMenuAction_Give(u8 taskId)
     PutWindowTilemap(1);
     CopyWindowToVram(0, COPYWIN_MAP);
     if (!IsWritingMailAllowed(itemId))
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_CantWriteMailHere, Task_WaitAButtonAndCloseContextMenu);
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_CantWriteMailHere, Task_WaitAButtonAndCloseContextMenu);
     else if (GetItemImportance(itemId) == 0)
     {
         if (CalculatePlayerPartyCount() == 0)
@@ -1863,14 +1863,14 @@ static void Task_ItemMenuAction_Give(u8 taskId)
 
 static void Task_PrintThereIsNoPokemon(u8 taskId)
 {
-    DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_ThereIsNoPokemon, Task_WaitAButtonAndCloseContextMenu);
+    DisplayItemMessage(taskId, FONT_NORMAL, gText_ThereIsNoPokemon, Task_WaitAButtonAndCloseContextMenu);
 }
 
 static void Task_PrintItemCantBeHeld(u8 taskId)
 {
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_ItemCantBeHeld);
-    DisplayItemMessageInBag(taskId, FONT_NORMAL, gStringVar4, Task_WaitAButtonAndCloseContextMenu);
+    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, Task_WaitAButtonAndCloseContextMenu);
 }
 
 static void Task_WaitAButtonAndCloseContextMenu(u8 taskId)
@@ -1885,7 +1885,7 @@ static void Task_WaitAButtonAndCloseContextMenu(u8 taskId)
 void Task_ReturnToBagFromContextMenu(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    CloseBagWindow(ITEMWIN_5);
+    CloseBagWindow(ITEMWIN_MESSAGE);
     DestroyListMenuTask(data[0], &gBagPosition.scrollPosition[gBagPosition.pocket], &gBagPosition.cursorPosition[gBagPosition.pocket]);
     Pocket_CalculateNItemsAndMaxShowed(gBagPosition.pocket);
     PocketCalculateInitialCursorPosAndItemsAbove(gBagPosition.pocket);
@@ -1949,7 +1949,7 @@ static void Task_ItemContext_FieldGive(u8 taskId)
     u16 itemId = BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1]);
     if (!IsWritingMailAllowed(itemId))
     {
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_CantWriteMailHere, Task_WaitAButtonAndCloseContextMenu);
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_CantWriteMailHere, Task_WaitAButtonAndCloseContextMenu);
     }
     else if (itemId == ITEM_TM_CASE)
     {
@@ -1993,7 +1993,7 @@ static void Task_ItemContext_PcBoxGive(u8 taskId)
     u16 itemId = BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1]);
     if (ItemIsMail(itemId) == TRUE)
     {
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_CantWriteMailHere, Task_WaitAButtonAndCloseContextMenu);
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_CantWriteMailHere, Task_WaitAButtonAndCloseContextMenu);
     }
     else if (itemId == ITEM_TM_CASE)
     {
@@ -2048,7 +2048,7 @@ static void Task_ItemContext_Sell(u8 taskId)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_OhNoICantBuyThat);
-        DisplayItemMessageInBag(taskId, GetDialogBoxFontId(), gStringVar4, Task_ReturnToBagFromContextMenu);
+        DisplayItemMessage(taskId, GetDialogBoxFontId(), gStringVar4, Task_ReturnToBagFromContextMenu);
     }
     else
     {
@@ -2064,7 +2064,7 @@ static void Task_ItemContext_Sell(u8 taskId)
                 data[2] = 99;
             CopyItemName(gSpecialVar_ItemId, gStringVar1);
             StringExpandPlaceholders(gStringVar4, gText_HowManyWouldYouLikeToSell);
-            DisplayItemMessageInBag(taskId, GetDialogBoxFontId(), gStringVar4, Task_InitSaleQuantitySelectInterface);
+            DisplayItemMessage(taskId, GetDialogBoxFontId(), gStringVar4, Task_InitSaleQuantitySelectInterface);
         }
     }
 }
@@ -2091,7 +2091,7 @@ static void Task_PrintSaleConfirmationText(u8 taskId)
     s16 *data = gTasks[taskId].data;
     ConvertIntToDecimalStringN(gStringVar3, (GetItemPrice(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1])) / ITEM_SELL_FACTOR) * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_ICanPayThisMuch_WouldThatBeOkay);
-    DisplayItemMessageInBag(taskId, GetDialogBoxFontId(), gStringVar4, Task_ShowSellYesNoMenu);
+    DisplayItemMessage(taskId, GetDialogBoxFontId(), gStringVar4, Task_ShowSellYesNoMenu);
 }
 
 static void Task_ShowSellYesNoMenu(u8 taskId)
@@ -2103,7 +2103,7 @@ static void Task_SellItem_No(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     BagMenu_RemoveWindow(ITEMWIN_2);
-    CloseBagWindow(ITEMWIN_5);
+    CloseBagWindow(ITEMWIN_MESSAGE);
     PutWindowTilemap(2);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
@@ -2152,7 +2152,7 @@ static void Task_SelectQuantityToSell(u8 taskId)
         PlaySE(SE_SELECT);
         BagMenu_RemoveWindow(ITEMWIN_1);
         BagMenu_RemoveWindow(ITEMWIN_2);
-        CloseBagWindow(ITEMWIN_5);
+        CloseBagWindow(ITEMWIN_MESSAGE);
         PutWindowTilemap(2);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
@@ -2171,7 +2171,7 @@ static void Task_SellItem_Yes(u8 taskId)
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar3, (GetItemPrice(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1])) / ITEM_SELL_FACTOR) * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_TurnedOverItemsWorthYen);
-    DisplayItemMessageInBag(taskId, FONT_NORMAL, gStringVar4, Task_FinalizeSaleToShop);
+    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, Task_FinalizeSaleToShop);
 }
 
 static void Task_FinalizeSaleToShop(u8 taskId)
@@ -2264,7 +2264,7 @@ static void Task_TryDoItemDeposit(u8 taskId)
     }
     else
     {
-        DisplayItemMessageInBag(taskId, FONT_NORMAL, gText_NoRoomToStoreItems, Task_WaitAButtonAndCloseContextMenu);
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_NoRoomToStoreItems, Task_WaitAButtonAndCloseContextMenu);
     }
 }
 
@@ -2745,13 +2745,12 @@ void BagMenu_RemoveWindow(u8 whichWindow)
     }
 }
 
-u8 OpenBagWindow(u8 whichWindow)
-{   
-    if (gBagMenu->windowIds[whichWindow] == WINDOW_NONE)
-    {
-        gBagMenu->windowIds[whichWindow] = AddWindow(&sWindowTemplates[whichWindow]);
-    }
-    return gBagMenu->windowIds[whichWindow];
+static u8 AddItemMessageWindow(u8 windowType)
+{
+    u8 *windowId = &gBagMenu->windowIds[windowType];
+    if (*windowId == WINDOW_NONE)
+        *windowId = AddWindow(&sWindowTemplates[windowType]);
+    return *windowId;
 }
 
 void CloseBagWindow(u8 whichWindow)

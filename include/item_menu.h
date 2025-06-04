@@ -26,7 +26,7 @@ enum {
     ITEMWIN_2,
     ITEMWIN_YESNO_BOTTOMRIGHT,
     ITEMWIN_YESNO_TOPRIGHT,
-    ITEMWIN_5,
+    ITEMWIN_MESSAGE,
     ITEMWIN_6,
     ITEMWIN_7,
     ITEMWIN_8,
@@ -90,7 +90,7 @@ void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_);
 void Task_FadeAndCloseBagMenu(u8 taskId);
 void Bag_BeginCloseWin0Animation(void);
 void ItemMenu_SetExitCallback(void (*)(void));
-void DisplayItemMessageInBag(u8 taskId, u8 fontId, const u8 * string, TaskFunc followUpFunc);
+void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId));
 void Task_ReturnToBagFromContextMenu(u8 taskId);
 void CB2_BagMenuFromBattle(void);
 void InitOldManBag(void);
@@ -107,7 +107,6 @@ void BagPrintTextOnWin1CenteredColor0(const u8 * str, u8 unused);
 void BagDrawDepositItemTextBox(void);
 u32 ShowBagWindow(u32 whichWindow);
 void BagMenu_RemoveWindow(u8 whichWindow);
-u8 OpenBagWindow(u8 whichWindow);
 void CloseBagWindow(u8 whichWindow);
 u8 GetBagWindow(u8 whichWindow);
 void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTable);

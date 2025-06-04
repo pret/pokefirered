@@ -16,7 +16,7 @@ static const u8 sTextColors[][3] = {
     {0, 8, 9}
 };
 
-static const struct WindowTemplate sDefaultBagWindowsStd[] = {
+static const struct WindowTemplate sDefaultBagWindows[] = {
     {
         .bg = 0,
         .tilemapLeft = 11,
@@ -73,6 +73,7 @@ static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
 };
 
 static const struct WindowTemplate sWindowTemplates[] = {
+    [ITEMWIN_0] =
     {
         .bg = 0,
         .tilemapLeft = 24,
@@ -81,7 +82,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x242
-    }, {
+    },
+    [ITEMWIN_1] =
+    {
         .bg = 0,
         .tilemapLeft = 17,
         .tilemapTop = 9,
@@ -89,7 +92,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x242
-    }, {
+    },
+    [ITEMWIN_2] =
+    {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -97,7 +102,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 3,
         .paletteNum = 12,
         .baseBlock = 0x272
-    }, {
+    },
+    [ITEMWIN_YESNO_BOTTOMRIGHT] =
+    {
         .bg = 0,
         .tilemapLeft = 23,
         .tilemapTop = 15,
@@ -105,7 +112,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x28a
-    }, {
+    },
+    [ITEMWIN_YESNO_TOPRIGHT] =
+    {
         .bg = 0,
         .tilemapLeft = 21,
         .tilemapTop = 9,
@@ -113,7 +122,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x28a
-    }, {
+    },
+    [ITEMWIN_5] =
+    {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
@@ -121,7 +132,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x2a2
-    }, {
+    },
+    [ITEMWIN_6] =
+    {
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -129,7 +142,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 12,
         .baseBlock = 0x2a2
-    }, {
+    },
+    [ITEMWIN_7] =
+    {
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -137,7 +152,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 12,
         .baseBlock = 0x2da
-    }, {
+    },
+    [ITEMWIN_8] =
+    {
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -145,7 +162,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 12,
         .baseBlock = 0x316
-    }, {
+    },
+    [ITEMWIN_9] =
+    {
         .bg = 0,
         .tilemapLeft = 6,
         .tilemapTop = 15,
@@ -153,7 +172,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 12,
         .baseBlock = 0x356
-    }, {
+    },
+    [ITEMWIN_1x1] =
+    {
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 17,
@@ -161,7 +182,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 0x20a
-    }, {
+    },
+    [ITEMWIN_1x2] =
+    {
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 15,
@@ -169,7 +192,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 4,
         .paletteNum = 15,
         .baseBlock = 0x20a
-    }, {
+    },
+    [ITEMWIN_1x3] =
+    {
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 13,
@@ -177,7 +202,9 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 6,
         .paletteNum = 15,
         .baseBlock = 0x20a
-    }, {
+    },
+    [ITEMWIN_1x4] =
+    {
         .bg = 0,
         .tilemapLeft = 22,
         .tilemapTop = 11,
@@ -190,14 +217,14 @@ static const struct WindowTemplate sWindowTemplates[] = {
 
 static const u8 sUnused[] = {16, 8, 4};
 
-static EWRAM_DATA u8 sOpenWindows[11] = {};
+static EWRAM_DATA u8 sOpenWindows[14] = {};
 
-void InitBagWindows(void)
+void LoadBagMenuTextWindows(void)
 {
     u8 i;
 
-    if (gBagPosition.location != 3)
-        InitWindows(sDefaultBagWindowsStd);
+    if (gBagPosition.location != ITEMMENULOCATION_ITEMPC)
+        InitWindows(sDefaultBagWindows);
     else
         InitWindows(sDefaultBagWindowsDeposit);
     DeactivateAllTextPrinters();
@@ -211,9 +238,9 @@ void InitBagWindows(void)
         PutWindowTilemap(i);
     }
     ScheduleBgCopyTilemapToVram(0);
-    for (i = 0; i < 11; i++)
+    for (i = 0; i < ARRAY_COUNT(sOpenWindows); i++)
     {
-        sOpenWindows[i] = 0xFF;
+        sOpenWindows[i] = WINDOW_NONE;
     }
 }
 
@@ -236,36 +263,45 @@ void BagDrawDepositItemTextBox(void)
     AddTextPrinterParameterized(2, FONT_SMALL, gText_DepositItem, x / 2, 1, 0, NULL);
 }
 
-u8 ShowBagWindow(u8 whichWindow, u8 nItems)
+u32 ShowBagWindow(u32 whichWindow)
 {
-    if (sOpenWindows[whichWindow] == 0xFF)
+    if (sOpenWindows[whichWindow] == WINDOW_NONE)
     {
-        sOpenWindows[whichWindow] = AddWindow(&sWindowTemplates[whichWindow + nItems]);
-        if (whichWindow != 6)
+        sOpenWindows[whichWindow] = AddWindow(&sWindowTemplates[whichWindow]);
+        switch (whichWindow)
         {
-            DrawStdFrameWithCustomTileAndPalette(sOpenWindows[whichWindow], FALSE, 0x064, 14);
-        }
-        else
-        {
-            DrawStdFrameWithCustomTileAndPalette(sOpenWindows[whichWindow], FALSE, 0x081, 12);
+            case ITEMWIN_6:
+            case ITEMWIN_7:
+            case ITEMWIN_8:
+            case ITEMWIN_9:
+                DrawStdFrameWithCustomTileAndPalette(sOpenWindows[whichWindow], FALSE, 0x081, 12);
+                break;
+            default:
+                DrawStdFrameWithCustomTileAndPalette(sOpenWindows[whichWindow], FALSE, 0x064, 14);
+                break;
         }
         ScheduleBgCopyTilemapToVram(0);
     }
     return sOpenWindows[whichWindow];
 }
 
-void HideBagWindow(u8 whichWindow)
+void BagMenu_RemoveWindow(u8 whichWindow)
 {
-    ClearStdWindowAndFrameToTransparent(sOpenWindows[whichWindow], FALSE);
-    ClearWindowTilemap(sOpenWindows[whichWindow]);
-    RemoveWindow(sOpenWindows[whichWindow]);
-    ScheduleBgCopyTilemapToVram(0);
-    sOpenWindows[whichWindow] = 0xFF;
+    u8 *windowId = &sOpenWindows[whichWindow];
+    
+    if (*windowId != WINDOW_NONE)
+    {
+        ClearStdWindowAndFrameToTransparent(sOpenWindows[whichWindow], FALSE);
+        ClearWindowTilemap(sOpenWindows[whichWindow]);
+        RemoveWindow(sOpenWindows[whichWindow]);
+        ScheduleBgCopyTilemapToVram(0);
+        *windowId = WINDOW_NONE;
+    }
 }
 
 u8 OpenBagWindow(u8 whichWindow)
 {   
-    if (sOpenWindows[whichWindow] == 0xFF)
+    if (sOpenWindows[whichWindow] == WINDOW_NONE)
     {
         sOpenWindows[whichWindow] = AddWindow(&sWindowTemplates[whichWindow]);
     }
@@ -274,14 +310,14 @@ u8 OpenBagWindow(u8 whichWindow)
 
 void CloseBagWindow(u8 whichWindow)
 {
-    if (sOpenWindows[whichWindow] != 0xFF)
+    if (sOpenWindows[whichWindow] != WINDOW_NONE)
     {
         ClearDialogWindowAndFrameToTransparent(sOpenWindows[whichWindow], FALSE);
         ClearWindowTilemap(sOpenWindows[whichWindow]);
         RemoveWindow(sOpenWindows[whichWindow]);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
-        sOpenWindows[whichWindow] = 0xFF;
+        sOpenWindows[whichWindow] = WINDOW_NONE;
     }
 }
 
@@ -290,19 +326,14 @@ u8 GetBagWindow(u8 whichWindow)
     return sOpenWindows[whichWindow];
 }
 
-void BagCreateYesNoMenuBottomRight(u8 taskId, const struct YesNoFuncTable * ptrs)
+void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTable)
 {
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[3], FONT_NORMAL, 0, 2, 0x064, 14, ptrs);
-}
-
-void BagCreateYesNoMenuTopRight(u8 taskId, const struct YesNoFuncTable * ptrs)
-{
-    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[4], FONT_NORMAL, 0, 2, 0x064, 14, ptrs);
+    CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[windowType], FONT_NORMAL, 0, 2, 0x064, 14, funcTable);
 }
 
 void BagPrintMoneyAmount(void)
 {
-    PrintMoneyAmountInMoneyBoxWithBorder(ShowBagWindow(2, 0), 0x081, 0x0C, GetMoney(&gSaveBlock1Ptr->money));
+    PrintMoneyAmountInMoneyBoxWithBorder(ShowBagWindow(ITEMWIN_2), 0x081, 0x0C, GetMoney(&gSaveBlock1Ptr->money));
 }
 
 void BagDrawTextBoxOnWindow(u8 windowId)

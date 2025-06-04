@@ -776,7 +776,7 @@ static void ItemStorage_StartItemSwap(u8 taskId, s16 pos)
     data[1] = pos;
     sStateDataPtr->moveModeOrigPos = pos;
     StringCopy(gStringVar1, GetItemName(ItemPc_GetItemIdBySlotId(data[1])));
-    StringExpandPlaceholders(gStringVar4, gOtherText_WhereShouldTheStrVar1BePlaced);
+    StringExpandPlaceholders(gStringVar4, gText_MoveVar1Where);
     FillWindowPixelBuffer(1, 0x00);
     ItemPc_AddTextPrinterParameterized(1, FONT_NORMAL, gStringVar4, 0, 3, 2, 3, 0, 0);
     ItemStorage_UpdateSwapLinePos(ListMenuGetYCoordForPrintingArrowCursor(data[0]));

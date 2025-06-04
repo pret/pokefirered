@@ -21,6 +21,24 @@ enum {
     ITEMMENULOCATION_LAST,
 };
 
+enum {
+    ITEMWIN_0,
+    ITEMWIN_1,
+    ITEMWIN_2,
+    ITEMWIN_YESNO_BOTTOMRIGHT,
+    ITEMWIN_YESNO_TOPRIGHT,
+    ITEMWIN_5,
+    ITEMWIN_6,
+    ITEMWIN_7,
+    ITEMWIN_8,
+    ITEMWIN_9,
+    ITEMWIN_1x1,
+    ITEMWIN_1x2,
+    ITEMWIN_1x3,
+    ITEMWIN_1x4,
+    ITEMWIN_COUNT
+};
+
 #define ITEMMENU_SWAP_LINE_LENGTH 9
 // Indexes for gItemMenuIconSpriteIds
 enum {
@@ -47,7 +65,8 @@ struct BagMenu
 {
     void (*newScreenCallback)(void);
     u8 tilemapBuffer[BG_SCREEN_SIZE];
-    u8 itemOriginalLocation;
+    u8 windowIds[ITEMWIN_COUNT];
+    u8 toSwapPos;
     u8 pocketSwitchMode:4;
     u8 itemMenuIcon:2;
     u8 inhibitItemDescriptionPrint:2;

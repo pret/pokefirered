@@ -157,7 +157,7 @@ extern const u8 gString_Help[];
 extern const u8 gString_HelpSystem_ClearTo8[];
 
 extern const u8 gText_Var1IsSelected[];
-extern const u8 gOtherText_WhereShouldTheStrVar1BePlaced[];
+extern const u8 gText_MoveVar1Where[];
 extern const u8 gOtherText_Powder[];
 extern const u8 gText_NoMoreRoomInBag[];
 extern const u8 gText_WithdrawHowMany[];

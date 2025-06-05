@@ -301,7 +301,6 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax)
 
 void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 totalItems)
 {
-    DebugPrintfLevel(MGBA_LOG_ERROR, "before: scrollOffset = %u, cursorPos = %u", *scrollOffset, *cursorPos);
     if (*scrollOffset != 0 && *scrollOffset + maxShownItems > totalItems)
         *scrollOffset = totalItems - maxShownItems;
 
@@ -312,7 +311,6 @@ void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 maxShownIte
         else
             *cursorPos = totalItems - 1;
     }
-    DebugPrintfLevel(MGBA_LOG_ERROR, "after: scrollOffset = %u, cursorPos = %u", *scrollOffset, *cursorPos);
 }
 
 void SetCursorScrollWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 shownItems, u8 totalItems, u8 maxShownItems)

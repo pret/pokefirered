@@ -67,14 +67,15 @@ struct BagMenu
     u8 windowIds[ITEMWIN_COUNT];
     u8 toSwapPos;
     u8 pocketSwitchMode:4;
-    u8 itemMenuIcon:2;
-    u8 inhibitItemDescriptionPrint:2;
+    u8 itemIconSlot:2;
+    u8 inhibitItemDescriptionPrint:1;
+    u8 hideCloseBagText:1;
     u16 contextMenuSelectedItem;
     u8 pocketScrollArrowsTask;
     u8 pocketSwitchArrowsTask;
-    u8 nItems[NUM_BAG_POCKETS_NO_CASES];
-    u8 maxShowed[NUM_BAG_POCKETS_NO_CASES];
-    u8 data[4];
+    u8 numItemStacks[NUM_BAG_POCKETS_NO_CASES];
+    u8 numShownItems[NUM_BAG_POCKETS_NO_CASES];
+    s16 graphicsLoadState;
 };
 
 extern u8 gItemMenuIconSpriteIds[ITEMMENUSPRITE_COUNT];
@@ -83,7 +84,7 @@ extern u16 gSpecialVar_ItemId;
 
 // Exported ROM declarations
 void SetBagOpenFalse(void);
-void ResetBagCursorPositions(void);
+void ResetBagScrollPositions(void);
 void InitPokedudeBag(u8);
 void CB2_BagMenuFromStartMenu(void);
 void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_);
@@ -94,8 +95,8 @@ void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8
 void Task_ReturnToBagFromContextMenu(u8 taskId);
 void CB2_BagMenuFromBattle(void);
 void InitOldManBag(void);
-void Pocket_CalculateNItemsAndMaxShowed(u8 pocketId);
-void PocketCalculateInitialCursorPosAndItemsAbove(u8 pocketId);
+void UpdatePocketItemList(u8 pocketId);
+void UpdatePocketListPosition(u8 pocketId);
 void GoToBagMenu(u8 menuType, u8 pocket, MainCallback callback);
 bool8 UseRegisteredKeyItemOnField(void);
 void CB2_ChooseBerry(void);

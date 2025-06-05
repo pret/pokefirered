@@ -789,8 +789,8 @@ static void RemoveUsedItem(void)
 {
     u8 pocketId = GetItemPocket(gSpecialVar_ItemId) - 1;
     RemoveBagItem(gSpecialVar_ItemId, 1);
-    Pocket_CalculateNItemsAndMaxShowed(pocketId);
-    PocketCalculateInitialCursorPosAndItemsAbove(pocketId);
+    UpdatePocketItemList(pocketId);
+    UpdatePocketListPosition(pocketId);
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
 }

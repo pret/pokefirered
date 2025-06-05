@@ -299,6 +299,58 @@ bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax)
     return FALSE;
 }
 
+void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 totalItems)
+{
+    DebugPrintfLevel(MGBA_LOG_ERROR, "before: scrollOffset = %u, cursorPos = %u", *scrollOffset, *cursorPos);
+    if (*scrollOffset != 0 && *scrollOffset + maxShownItems > totalItems)
+        *scrollOffset = totalItems - maxShownItems;
+
+    if (*scrollOffset + *cursorPos >= totalItems)
+    {
+        if (totalItems == 0)
+            *cursorPos = 0;
+        else
+            *cursorPos = totalItems - 1;
+    }
+    DebugPrintfLevel(MGBA_LOG_ERROR, "after: scrollOffset = %u, cursorPos = %u", *scrollOffset, *cursorPos);
+}
+
+void SetCursorScrollWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 shownItems, u8 totalItems, u8 maxShownItems)
+{
+    u8 i;
+
+    if (maxShownItems % 2 != 0)
+    {
+        // Is cursor at least halfway down visible list
+        if (*cursorPos >= maxShownItems / 2)
+        {
+            for (i = 0; i < *cursorPos - (maxShownItems / 2); i++)
+            {
+                // Stop if reached end of list
+                if (*scrollOffset + shownItems == totalItems)
+                    break;
+                (*cursorPos)--;
+                (*scrollOffset)++;
+            }
+        }
+    }
+    else
+    {
+        // Is cursor at least halfway down visible list
+        if (*cursorPos >= (maxShownItems / 2) + 1)
+        {
+            for (i = 0; i <= *cursorPos - (maxShownItems / 2); i++)
+            {
+                // Stop if reached end of list
+                if (*scrollOffset + shownItems == totalItems)
+                    break;
+                (*cursorPos)--;
+                (*scrollOffset)++;
+            }
+        }
+    }
+}
+
 u8 GetDialogBoxFontId(void)
 {
     if (ContextNpcGetTextColor() == NPC_TEXT_COLOR_MALE)

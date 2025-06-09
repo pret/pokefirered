@@ -164,12 +164,13 @@ static const struct BgTemplate sBgTemplates[] =
 
 static const TaskFunc sBerryPouchContextMenuTasks[] = 
 {
-    Task_NormalContextMenu,
-    Task_ContextMenu_FromPartyGiveMenu,
-    Task_ContextMenu_Sell,
-    Task_ContextMenu_FromPokemonPC,
-    Task_NormalContextMenu,
-    [BERRYPOUCH_FROMBERRYTREE] =             BerryPouch_StartFadeToExitCallback,
+    [BERRYPOUCH_FROMFIELD]            = Task_NormalContextMenu,
+    [BERRYPOUCH_FROMPARTYGIVE]        = Task_ContextMenu_FromPartyGiveMenu,
+    [BERRYPOUCH_FROMMARTSELL]         = Task_ContextMenu_Sell,
+    [BERRYPOUCH_FROMPOKEMONSTORAGEPC] = Task_ContextMenu_FromPokemonPC,
+    [BERRYPOUCH_FROMBATTLE]           = Task_NormalContextMenu,
+    [BERRYPOUCH_FROMBERRYCRUSH]       = NULL,
+    [BERRYPOUCH_FROMBERRYTREE]        = BerryPouch_StartFadeToExitCallback,
 };
 
 static const struct YesNoFuncTable sYesNoFuncs_Toss = 
@@ -1332,7 +1333,7 @@ static void Task_ContextMenu_Sell(u8 taskId)
             if (data[2] > 99)
                 data[2] = 99;
             CopyItemName(gSpecialVar_ItemId, gStringVar1);
-            StringExpandPlaceholders(gStringVar4, gText_HowManyWouldYouLikeToSell);
+            StringExpandPlaceholders(gStringVar4, gText_HowManyToSell);
             DisplayItemMessageInBerryPouch(taskId, GetDialogBoxFontId(), gStringVar4, Task_Sell_PrintSelectMultipleUI);
         }
     }
@@ -1420,9 +1421,9 @@ static void Task_SellYes(u8 taskId)
     s16 * data = gTasks[taskId].data;
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
-    CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    ConvertIntToDecimalStringN(gStringVar3, GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar4, gText_TurnedOverItemsWorthYen);
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
+    ConvertIntToDecimalStringN(gStringVar1, (GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / ITEM_SELL_FACTOR) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+    StringExpandPlaceholders(gStringVar4, gText_TurnedOverVar1ForVar2);
     DisplayItemMessageInBerryPouch(taskId, FONT_NORMAL, gStringVar4, Task_SellBerries_PlaySfxAndRemoveBerries);
 }
 

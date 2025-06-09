@@ -233,7 +233,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
             u16 quantity;
             // Does this stack have room for more??
             quantity = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
-            if (quantity + count <= 999)
+            if (quantity + count <= MAX_BAG_ITEM_CAPACITY)
             {
                 quantity += count;
                 SetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity, quantity);
@@ -411,7 +411,7 @@ bool8 AddPCItem(u16 itemId, u16 count)
         if (gSaveBlock1Ptr->pcItems[i].itemId == itemId)
         {
             quantity = GetPcItemQuantity(&gSaveBlock1Ptr->pcItems[i].quantity);
-            if (quantity + count <= 999)
+            if (quantity + count <= MAX_PC_ITEM_CAPACITY)
             {
                 quantity += count;
                 SetPcItemQuantity(&gSaveBlock1Ptr->pcItems[i].quantity, quantity);

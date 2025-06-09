@@ -4,6 +4,8 @@
 #include "item.h"
 #include "menu_helpers.h"
 
+#define ITEM_SELL_FACTOR ((I_SELL_VALUE_FRACTION >= GEN_9) ? 4 : 2)
+
 enum {
     ITEMMENULOCATION_FIELD,
     ITEMMENULOCATION_PARTY,
@@ -101,7 +103,6 @@ void CB2_ChooseMulch(void);
 
 void LoadBagMenuTextWindows(void);
 void BagMenu_Print(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
-void BagPrintTextOnWin1CenteredColor0(const u8 * str, u8 unused);
 void BagDrawDepositItemTextBox(void);
 u32 BagMenu_AddWindow(u32 whichWindow);
 void BagMenu_RemoveWindow(u8 whichWindow);

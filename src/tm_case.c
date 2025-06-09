@@ -1074,7 +1074,7 @@ static void PrintError_ThereIsNoPokemon(u8 taskId)
 static void PrintError_ItemCantBeHeld(u8 taskId)
 {
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gText_ItemCantBeHeld);
+    StringExpandPlaceholders(gStringVar4, gText_Var1CantBeHeld);
     PrintMessageWithFollowupTask(taskId, FONT_NORMAL, gStringVar4, Task_WaitButtonAfterErrorPrint);
 }
 

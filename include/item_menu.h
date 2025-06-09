@@ -92,7 +92,7 @@ void Task_FadeAndCloseBagMenu(u8 taskId);
 void Bag_BeginCloseWin0Animation(void);
 void ItemMenu_SetExitCallback(void (*)(void));
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId));
-void Task_ReturnToBagFromContextMenu(u8 taskId);
+void CloseItemMessage(u8 taskId);
 void CB2_BagMenuFromBattle(void);
 void InitOldManBag(void);
 void UpdatePocketItemList(u8 pocketId);

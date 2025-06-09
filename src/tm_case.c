@@ -718,7 +718,7 @@ static void List_ItemPrintFunc(u8 windowId, u32 itemIndex, u8 y)
             if (!GetItemImportance(itemId))
             {
                 ConvertIntToDecimalStringN(gStringVar1, BagGetQuantityByPocketPosition(POCKET_TM_HM, itemIndex), STR_CONV_MODE_RIGHT_ALIGN, 3);
-                StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+                StringExpandPlaceholders(gStringVar4, gText_xVar1);
             }
             else
             {
@@ -1220,7 +1220,7 @@ static void Task_InitQuantitySelectUI(u8 taskId)
 
     TMCase_SetWindowBorder1(WIN_SELL_QUANTITY);
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     TMCase_Print(WIN_SELL_QUANTITY, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, COLOR_DARK);
     SellTM_PrintQuantityAndSalePrice(1, GetItemPrice(BagGetItemIdByPocketPosition(POCKET_TM_HM, tSelection)) / 2 * tQuantitySelected);
     PrintPlayersMoney();
@@ -1234,9 +1234,9 @@ static void SellTM_PrintQuantityAndSalePrice(s16 quantity, s32 amount)
 {
     FillWindowPixelBuffer(WIN_SELL_QUANTITY, 0x11);
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     TMCase_Print(WIN_SELL_QUANTITY, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, COLOR_DARK);
-    PrintMoneyAmount(WIN_SELL_QUANTITY, 0x38, 0x0A, amount, 0);
+    PrintMoneyAmount(WIN_SELL_QUANTITY, 56, 10, amount, 0);
 }
 
 static void Task_QuantitySelect_HandleInput(u8 taskId)

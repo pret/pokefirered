@@ -1047,7 +1047,7 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
     PrintMoneyAmount(3, 0x36, 0xA, sShopData.itemPrice, TEXT_SKIP_DRAW);
     ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BuyMenuPrint(3, FONT_SMALL, gStringVar4, 2, 0xA, 0, 0, 0, 1);
 }
 

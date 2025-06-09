@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "event_data.h"
+#include "field_specials.h"
 #include "menu.h"
 #include "money.h"
 #include "text_window.h"
@@ -132,4 +133,9 @@ void HideMoneyBox(void)
     ClearStdWindowAndFrameToTransparent(sMoneyBoxWindowId, FALSE);
     CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_GFX);
     RemoveWindow(sMoneyBoxWindowId);
+}
+
+u32 CalculateMoneyTextHorizontalPosition(u32 amount)
+{
+    return (CountDigits(amount) > 8) ? 64 : 56;
 }

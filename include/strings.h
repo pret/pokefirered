@@ -95,7 +95,7 @@ extern const u8 gOtherText_Exit[];
 extern const u8 gText_ThreeHyphens[];
 extern const u8 gText_SevenHyphens[];
 extern const u8 gText_NumberClear01[];
-extern const u8 gText_TimesStrVar1[];
+extern const u8 gText_xVar1[];
 extern const u8 gText_IsSelected[];
 extern const u8 gText_ThereIsNoPokemon[];
 extern const u8 gText_Var1CantBeHeld[];

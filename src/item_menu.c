@@ -65,6 +65,27 @@ enum PocketSwitchMode
     SWITCHMODE_OLDMAN
 };
 
+enum {
+    ACTION_USE,
+    ACTION_TOSS,
+    ACTION_REGISTER,
+    ACTION_GIVE,
+    ACTION_CANCEL,
+    ACTION_BATTLE_USE,
+    ACTION_CHECK,
+    ACTION_OPEN,
+    ACTION_OPEN_BERRIES,
+    ACTION_WALK,
+    ACTION_DESELECT,
+    ACTION_DUMMY,
+};
+
+enum {
+    WIN_ITEM_LIST,
+    WIN_DESCRIPTION,
+    WIN_POCKET_NAME
+};
+
 struct BagBackup
 {
     struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
@@ -107,6 +128,7 @@ static void InitPocketScrollPositions(void);
 static void FreeBagMenu(void);
 static void Task_CloseBagMenu(u8 taskId);
 static u8 AddItemMessageWindow(u8);
+static void RemoveItemMessageWindow(u8);
 static void Task_AnimateWin0v(u8 taskId);
 static void ShowBagOrBeginWin0OpenTask(void);
 static void UpdatePocketItemLists(void);
@@ -136,6 +158,7 @@ static void Task_PrintThereIsNoPokemon(u8 taskId);
 static void ItemMenu_Cancel(u8 taskId);
 static void PrintItemCantBeHeld(u8 taskId);
 static void HandleErrorMessage(u8 taskId);
+static void DisplayCurrentMoneyWindow(void);
 static void Task_ItemMenuAction_BattleUse(u8 taskId);
 static void Task_ItemContext_FieldGive(u8 taskId);
 static void GoToTMCase_Give(void);
@@ -152,9 +175,9 @@ static void ReturnToBagMenuFromSubmenu_Sell(void);
 static void Task_PrintSaleConfirmationText(u8 taskId);
 static void Task_ShowSellYesNoMenu(u8 taskId);
 static void Task_SellItem_No(u8 taskId);
-static void Task_InitSaleQuantitySelectInterface(u8 taskId);
+static void InitSellHowManyInput(u8 taskId);
 static void UpdateSalePriceDisplay(s32 price);
-static void Task_SelectQuantityToSell(u8 taskId);
+static void Task_ChooseHowManyToSell(u8 taskId);
 static void Task_SellItem_Yes(u8 taskId);
 static void Task_FinalizeSaleToShop(u8 taskId);
 static void Task_WaitPressAB_AfterSell(u8 taskId);
@@ -170,21 +193,6 @@ static void Task_Bag_TeachyTvCatching(u8 taskId);
 static void Task_Bag_TeachyTvStatus(u8 taskId);
 static void Task_Bag_TeachyTvTMs(u8 taskId);
 static void RemoveContextWindow(void);
-
-enum {
-    ACTION_USE,
-    ACTION_TOSS,
-    ACTION_REGISTER,
-    ACTION_GIVE,
-    ACTION_CANCEL,
-    ACTION_BATTLE_USE,
-    ACTION_CHECK,
-    ACTION_OPEN,
-    ACTION_OPEN_BERRIES,
-    ACTION_WALK,
-    ACTION_DESELECT,
-    ACTION_DUMMY,
-};
 
 // Item list ID for toSwapPos to indicate an item is not currently being swapped
 #define NOT_SWAPPING 0xFF
@@ -369,6 +377,7 @@ static const u8 sFontColorTable[][3] = {
 };
 
 static const struct WindowTemplate sDefaultBagWindows[] = {
+    [WIN_ITEM_LIST] =
     {
         .bg = 0,
         .tilemapLeft = 11,
@@ -377,7 +386,9 @@ static const struct WindowTemplate sDefaultBagWindows[] = {
         .height = 12,
         .paletteNum = 15,
         .baseBlock = 0x008a
-    }, {
+    },
+    [WIN_DESCRIPTION] =
+    {
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 14,
@@ -385,7 +396,9 @@ static const struct WindowTemplate sDefaultBagWindows[] = {
         .height = 6,
         .paletteNum = 15,
         .baseBlock = 0x0162
-    }, {
+    },
+    [WIN_POCKET_NAME] =
+    {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -393,10 +406,12 @@ static const struct WindowTemplate sDefaultBagWindows[] = {
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 0x01f8
-    }, DUMMY_WIN_TEMPLATE
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
+    [WIN_ITEM_LIST] =
     {
         .bg = 0,
         .tilemapLeft = 11,
@@ -405,7 +420,9 @@ static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
         .height = 12,
         .paletteNum = 15,
         .baseBlock = 0x008a
-    }, {
+    },
+    [WIN_DESCRIPTION] =
+    {
         .bg = 0,
         .tilemapLeft = 5,
         .tilemapTop = 14,
@@ -413,7 +430,9 @@ static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
         .height = 6,
         .paletteNum = 15,
         .baseBlock = 0x0162
-    }, {
+    },
+    [WIN_POCKET_NAME] =
+    {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 1,
@@ -421,11 +440,12 @@ static const struct WindowTemplate sDefaultBagWindowsDeposit[] = {
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x01f8
-    }, DUMMY_WIN_TEMPLATE
+    },
+    DUMMY_WIN_TEMPLATE
 };
 
 static const struct WindowTemplate sWindowTemplates[] = {
-    [ITEMWIN_0] =
+    [ITEMWIN_QUANTITY] =
     {
         .bg = 0,
         .tilemapLeft = 24,
@@ -435,7 +455,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x242
     },
-    [ITEMWIN_1] =
+    [ITEMWIN_QUANTITY_WIDE] =
     {
         .bg = 0,
         .tilemapLeft = 17,
@@ -445,7 +465,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x242
     },
-    [ITEMWIN_2] =
+    [ITEMWIN_MONEY] =
     {
         .bg = 0,
         .tilemapLeft = 1,
@@ -455,7 +475,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 12,
         .baseBlock = 0x272
     },
-    [ITEMWIN_YESNO_BOTTOMRIGHT] =
+    [ITEMWIN_YESNO_LOW] =
     {
         .bg = 0,
         .tilemapLeft = 23,
@@ -465,7 +485,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x28a
     },
-    [ITEMWIN_YESNO_TOPRIGHT] =
+    [ITEMWIN_YESNO_HIGH] =
     {
         .bg = 0,
         .tilemapLeft = 21,
@@ -485,7 +505,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0x2a2
     },
-    [ITEMWIN_6] =
+    [ITEMWIN_SELECTIONTEXT] =
     {
         .bg = 0,
         .tilemapLeft = 6,
@@ -969,7 +989,7 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
     if (gBagPosition.pocket != KEYITEMS_POCKET && GetItemImportance(itemId) == FALSE)
     {
         ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, MAX_ITEM_DIGITS);
-        StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+        StringExpandPlaceholders(gStringVar4, gText_xVar1);
         BagMenu_Print(windowId, FONT_SMALL, gStringVar4, 110, y, 0, 0, TEXT_SKIP_DRAW, 1);
     }
     else if (gSaveBlock1Ptr->registeredItem != ITEM_NONE && gSaveBlock1Ptr->registeredItem == itemId)
@@ -1028,7 +1048,7 @@ static void CreatePocketScrollArrowPair_SellQuantity(void)
     );
 }
 
-static void CreateArrowPair_QuantitySelect(void)
+static void CreatePocketScrollArrowPair_QuantitySelect(void)
 {
     gBagMenu->contextMenuSelectedItem = 1;
     gBagMenu->pocketScrollArrowsTask = AddScrollIndicatorArrowPairParameterized(
@@ -1531,23 +1551,23 @@ static void AbortMovingItemInPocket(u8 taskId, u32 itemIndex)
 static void InitQuantityToTossOrDeposit(u16 cursorPos, const u8 *str)
 {
     u8 r4;
-    u8 r5 = ShowBagWindow(ITEMWIN_8);
+    u8 r5 = BagMenu_AddWindow(ITEMWIN_8);
     CopyItemName(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, cursorPos), gStringVar1);
     StringExpandPlaceholders(gStringVar4, str);
     BagMenu_Print(r5, FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
-    r4 = ShowBagWindow(ITEMWIN_0);
+    r4 = BagMenu_AddWindow(ITEMWIN_QUANTITY);
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BagMenu_Print(r4, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
-    CreateArrowPair_QuantitySelect();
+    CreatePocketScrollArrowPair_QuantitySelect();
 }
 
 static void UpdateQuantityToTossOrDeposit(s16 value, u8 ndigits)
 {
-    u8 r6 = GetBagWindow(ITEMWIN_0);
+    u8 r6 = GetBagWindow(ITEMWIN_QUANTITY);
     FillWindowPixelBuffer(r6, PIXEL_FILL(1));
     ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEADING_ZEROS, ndigits);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BagMenu_Print(r6, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
 }
 
@@ -1560,8 +1580,8 @@ static void DrawItemListRow(u8 row)
 
 static void OpenContextMenu(u8 taskId)
 {
-    u8 r6;
-    u8 r4;
+    u8 contextWindowId;
+    u8 selectionTextWindowId;
     switch (gBagPosition.location)
     {
     case ITEMMENULOCATION_BATTLE:
@@ -1639,9 +1659,9 @@ static void OpenContextMenu(u8 taskId)
             }
         }
     }
-    r6 = ShowBagWindow(ITEMWIN_1x1 + sContextMenuNumItems - 1);
+    contextWindowId = BagMenu_AddWindow(ITEMWIN_1x1 + sContextMenuNumItems - 1);
     PrintMenuActionTexts(
-        r6,
+        contextWindowId,
         FONT_NORMAL,
         GetMenuCursorDimensionByFont(FONT_NORMAL, 0),
         2,
@@ -1651,11 +1671,11 @@ static void OpenContextMenu(u8 taskId)
         sItemMenuActions,
         sContextMenuItemsPtr
     );
-    InitMenuNormal(r6, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumItems, 0);
-    r4 = ShowBagWindow(ITEMWIN_6);
+    InitMenuNormal(contextWindowId, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumItems, 0);
+    selectionTextWindowId = BagMenu_AddWindow(ITEMWIN_SELECTIONTEXT);
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
-    BagMenu_Print(r4, FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
+    BagMenu_Print(selectionTextWindowId, FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
 }
 
 static void Task_ItemContext_Normal(u8 taskId)
@@ -1691,7 +1711,7 @@ static void ItemMenu_UseOutOfBattle(u8 taskId)
     if (GetItemFieldFunc(gSpecialVar_ItemId) != NULL)
     {
         RemoveContextWindow();
-        BagMenu_RemoveWindow(ITEMWIN_6);
+        BagMenu_RemoveWindow(ITEMWIN_SELECTIONTEXT);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
@@ -1706,9 +1726,9 @@ static void ItemMenu_Toss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     ClearWindowTilemap(GetBagWindow(ITEMWIN_1x1 + sContextMenuNumItems - 1));
-    ClearWindowTilemap(GetBagWindow(ITEMWIN_6));
+    ClearWindowTilemap(GetBagWindow(ITEMWIN_SELECTIONTEXT));
     RemoveContextWindow();
-    BagMenu_RemoveWindow(ITEMWIN_6);
+    BagMenu_RemoveWindow(ITEMWIN_SELECTIONTEXT);
     PutWindowTilemap(0);
     tItemCount = 1;
     if (tQuantity == 1)
@@ -1727,8 +1747,8 @@ static void Task_ConfirmTossItems(u8 taskId)
     s16 *data = gTasks[taskId].data;
     ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_ThrowAwayStrVar2OfThisItemQM);
-    BagMenu_Print(ShowBagWindow(ITEMWIN_7), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
-    BagMenu_YesNo(taskId, ITEMWIN_YESNO_BOTTOMRIGHT, &sYesNoMenu_Toss);
+    BagMenu_Print(BagMenu_AddWindow(ITEMWIN_7), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
+    BagMenu_YesNo(taskId, ITEMWIN_YESNO_LOW, &sYesNoMenu_Toss);
 }
 
 static void Task_TossItem_No(u8 taskId)
@@ -1753,7 +1773,7 @@ static void Task_SelectQuantityToToss(u8 taskId)
         PlaySE(SE_SELECT);
         ClearWindowTilemap(GetBagWindow(ITEMWIN_8));
         BagMenu_RemoveWindow(ITEMWIN_8);
-        BagMenu_RemoveWindow(ITEMWIN_0);
+        BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
         ScheduleBgCopyTilemapToVram(0);
         BagDestroyPocketScrollArrowPair();
         Task_ConfirmTossItems(taskId);
@@ -1762,7 +1782,7 @@ static void Task_SelectQuantityToToss(u8 taskId)
     {
         PlaySE(SE_SELECT);
         BagMenu_RemoveWindow(ITEMWIN_8);
-        BagMenu_RemoveWindow(ITEMWIN_0);
+        BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
@@ -1779,7 +1799,7 @@ static void Task_TossItem_Yes(u8 taskId)
     CopyItemName(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1]), gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayStrVar2StrVar1s);
-    BagMenu_Print(ShowBagWindow(ITEMWIN_9), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
+    BagMenu_Print(BagMenu_AddWindow(ITEMWIN_9), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
     gTasks[taskId].func = Task_WaitAB_RedrawAndReturnToBag;
 }
 
@@ -1826,7 +1846,7 @@ static void ItemMenu_Give(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u16 itemId = BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1]);
     RemoveContextWindow();
-    BagMenu_RemoveWindow(ITEMWIN_6);
+    BagMenu_RemoveWindow(ITEMWIN_SELECTIONTEXT);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     CopyWindowToVram(0, COPYWIN_MAP);
@@ -1878,7 +1898,7 @@ void CloseItemMessage(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
     u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
-    CloseBagWindow(ITEMWIN_MESSAGE);
+    RemoveItemMessageWindow(ITEMWIN_MESSAGE);
     DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
     UpdatePocketItemList(gBagPosition.pocket);
     UpdatePocketListPosition(gBagPosition.pocket);
@@ -1889,12 +1909,21 @@ void CloseItemMessage(u8 taskId)
     ReturnToItemList(taskId);
 }
 
+// Prints the quantity of items to be sold and the amount that would be earned
+static void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
+{
+    ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
+    AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, 4, 10, TEXT_SKIP_DRAW, 0);
+    PrintMoneyAmount(windowId, CalculateMoneyTextHorizontalPosition(moneyEarned), 10, moneyEarned, 0);
+}
+
 static void ItemMenu_Cancel(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
     RemoveContextWindow();
-    BagMenu_RemoveWindow(ITEMWIN_6);
+    BagMenu_RemoveWindow(ITEMWIN_SELECTIONTEXT);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     ScheduleBgCopyTilemapToVram(0);
@@ -1922,7 +1951,7 @@ static void Task_ItemMenuAction_BattleUse(u8 taskId)
         return;
 
     RemoveContextWindow();
-    BagMenu_RemoveWindow(ITEMWIN_6);
+    BagMenu_RemoveWindow(ITEMWIN_SELECTIONTEXT);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     CopyWindowToVram(0, COPYWIN_MAP);   
@@ -2050,16 +2079,16 @@ static void Task_ItemContext_Sell(u8 taskId)
         data[8] = 1;
         if (data[2] == 1)
         {
-            BagPrintMoneyAmount();
+            DisplayCurrentMoneyWindow();
             Task_PrintSaleConfirmationText(taskId);
         }
         else
         {
-            if (data[2] > 99)
-                data[2] = 99;
+            if (data[2] > 999)
+                data[2] = 999;
             CopyItemName(gSpecialVar_ItemId, gStringVar1);
             StringExpandPlaceholders(gStringVar4, gText_HowManyWouldYouLikeToSell);
-            DisplayItemMessage(taskId, GetDialogBoxFontId(), gStringVar4, Task_InitSaleQuantitySelectInterface);
+            DisplayItemMessage(taskId, GetDialogBoxFontId(), gStringVar4, InitSellHowManyInput);
         }
     }
 }
@@ -2091,14 +2120,14 @@ static void Task_PrintSaleConfirmationText(u8 taskId)
 
 static void Task_ShowSellYesNoMenu(u8 taskId)
 {
-    BagMenu_YesNo(taskId, ITEMWIN_YESNO_TOPRIGHT, &sYesNoMenu_Sell);
+    BagMenu_YesNo(taskId, ITEMWIN_YESNO_HIGH, &sYesNoMenu_Sell);
 }
 
 static void Task_SellItem_No(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    BagMenu_RemoveWindow(ITEMWIN_2);
-    CloseBagWindow(ITEMWIN_MESSAGE);
+    BagMenu_RemoveWindow(ITEMWIN_MONEY);
+    RemoveItemMessageWindow(ITEMWIN_MESSAGE);
     PutWindowTilemap(2);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
@@ -2107,36 +2136,33 @@ static void Task_SellItem_No(u8 taskId)
     ReturnToItemList(taskId);
 }
 
-static void Task_InitSaleQuantitySelectInterface(u8 taskId)
+static void InitSellHowManyInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u8 r4 = ShowBagWindow(ITEMWIN_1);
-    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
-    BagMenu_Print(r4, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0xFF, 1);
-    UpdateSalePriceDisplay((GetItemPrice(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1])) / ITEM_SELL_FACTOR) * data[8]);
-    BagPrintMoneyAmount();
+    u8 windowId = BagMenu_AddWindow(ITEMWIN_QUANTITY_WIDE);
+    
+    PrintItemSoldAmount(windowId, 1, (GetItemPrice(gSpecialVar_ItemId) / ITEM_SELL_FACTOR) * tItemCount);
+    DisplayCurrentMoneyWindow();
     CreatePocketScrollArrowPair_SellQuantity();
-    gTasks[taskId].func = Task_SelectQuantityToSell;
+    gTasks[taskId].func = Task_ChooseHowManyToSell;
 }
 
 static void UpdateSalePriceDisplay(s32 amount)
 {
-    PrintMoneyAmount(GetBagWindow(ITEMWIN_1), 56, 10, amount, 0);
+    PrintMoneyAmount(GetBagWindow(ITEMWIN_QUANTITY_WIDE), 56, 10, amount, 0);
 }
 
-static void Task_SelectQuantityToSell(u8 taskId)
+static void Task_ChooseHowManyToSell(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
+    if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
-        UpdateQuantityToTossOrDeposit(data[8], 2);
-        UpdateSalePriceDisplay((GetItemPrice(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1])) / ITEM_SELL_FACTOR) * data[8]);
+        PrintItemSoldAmount(gBagMenu->windowIds[ITEMWIN_QUANTITY_WIDE], tItemCount, (GetItemPrice(gSpecialVar_ItemId) / ITEM_SELL_FACTOR) * tItemCount);
     }
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        BagMenu_RemoveWindow(ITEMWIN_1);
+        BagMenu_RemoveWindow(ITEMWIN_QUANTITY_WIDE);
         PutWindowTilemap(0);
         ScheduleBgCopyTilemapToVram(0);
         BagDestroyPocketScrollArrowPair();
@@ -2145,9 +2171,9 @@ static void Task_SelectQuantityToSell(u8 taskId)
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        BagMenu_RemoveWindow(ITEMWIN_1);
-        BagMenu_RemoveWindow(ITEMWIN_2);
-        CloseBagWindow(ITEMWIN_MESSAGE);
+        BagMenu_RemoveWindow(ITEMWIN_QUANTITY_WIDE);
+        BagMenu_RemoveWindow(ITEMWIN_MONEY);
+        RemoveItemMessageWindow(ITEMWIN_MESSAGE);
         PutWindowTilemap(2);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
@@ -2183,8 +2209,8 @@ static void Task_FinalizeSaleToShop(u8 taskId)
     LoadBagItemListBuffers(gBagPosition.pocket);
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, gBagPosition.scrollPosition[gBagPosition.pocket], gBagPosition.cursorPosition[gBagPosition.pocket]);
     BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
-    BagDrawTextBoxOnWindow(GetBagWindow(ITEMWIN_2));
-    PrintMoneyAmountInMoneyBox(GetBagWindow(ITEMWIN_2), GetMoney(&gSaveBlock1Ptr->money), 0);
+    BagDrawTextBoxOnWindow(GetBagWindow(ITEMWIN_MONEY));
+    PrintMoneyAmountInMoneyBox(GetBagWindow(ITEMWIN_MONEY), GetMoney(&gSaveBlock1Ptr->money), 0);
     gTasks[taskId].func = Task_WaitPressAB_AfterSell;
 }
 
@@ -2193,7 +2219,7 @@ static void Task_WaitPressAB_AfterSell(u8 taskId)
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        BagMenu_RemoveWindow(ITEMWIN_2);
+        BagMenu_RemoveWindow(ITEMWIN_MONEY);
         PutWindowTilemap(2);
         gBagMenu->inhibitItemDescriptionPrint = FALSE;
         CloseItemMessage(taskId);
@@ -2227,7 +2253,7 @@ static void Task_SelectQuantityToDeposit(u8 taskId)
         PlaySE(SE_SELECT);
         ClearWindowTilemap(GetBagWindow(ITEMWIN_8));
         BagMenu_RemoveWindow(ITEMWIN_8);
-        BagMenu_RemoveWindow(ITEMWIN_0);
+        BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
         ScheduleBgCopyTilemapToVram(0);
         BagDestroyPocketScrollArrowPair();
         Task_TryDoItemDeposit(taskId);
@@ -2236,7 +2262,7 @@ static void Task_SelectQuantityToDeposit(u8 taskId)
     {
         PlaySE(SE_SELECT);
         BagMenu_RemoveWindow(ITEMWIN_8);
-        BagMenu_RemoveWindow(ITEMWIN_0);
+        BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
         BagMenu_PrintCursor(tListTaskId, COLORID_1);
@@ -2254,7 +2280,7 @@ static void Task_TryDoItemDeposit(u8 taskId)
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_DepositedStrVar2StrVar1s);
-        BagMenu_Print(ShowBagWindow(ITEMWIN_9), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
+        BagMenu_Print(BagMenu_AddWindow(ITEMWIN_9), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
         gTasks[taskId].func = Task_WaitAB_RedrawAndReturnToBag;
     }
     else
@@ -2375,7 +2401,7 @@ static void Task_Bag_OldManTutorial(u8 taskId)
         case 408:
             PlaySE(SE_SELECT);
             RemoveContextWindow();
-            BagMenu_RemoveWindow(ITEMWIN_6);
+            BagMenu_RemoveWindow(ITEMWIN_SELECTIONTEXT);
             PutWindowTilemap(0);
             PutWindowTilemap(1);
             CopyWindowToVram(0, COPYWIN_MAP);
@@ -2483,7 +2509,7 @@ static void Task_Bag_TeachyTvRegister(u8 taskId)
             PlaySE(SE_SELECT);
             gSaveBlock1Ptr->registeredItem = gSpecialVar_ItemId;
             RemoveContextWindow();
-            BagMenu_RemoveWindow(ITEMWIN_6);
+            BagMenu_RemoveWindow(ITEMWIN_SELECTIONTEXT);
             PutWindowTilemap(0);
             PutWindowTilemap(1);
             DestroyListMenuTask(data[0], &gBagPosition.scrollPosition[gBagPosition.pocket], &gBagPosition.cursorPosition[gBagPosition.pocket]);
@@ -2551,7 +2577,7 @@ static void Task_Bag_TeachyTvCatching(u8 taskId)
         case 816:
             PlaySE(SE_SELECT);
             RemoveContextWindow();
-            BagMenu_RemoveWindow(ITEMWIN_6);
+            BagMenu_RemoveWindow(ITEMWIN_SELECTIONTEXT);
             PutWindowTilemap(0);
             PutWindowTilemap(1);
             CopyWindowToVram(0, COPYWIN_MAP);
@@ -2593,7 +2619,7 @@ static void Task_Bag_TeachyTvStatus(u8 taskId)
         case 306:
             PlaySE(SE_SELECT);
             RemoveContextWindow();
-            BagMenu_RemoveWindow(ITEMWIN_6);
+            BagMenu_RemoveWindow(ITEMWIN_SELECTIONTEXT);
             PutWindowTilemap(0);
             PutWindowTilemap(1);
             CopyWindowToVram(0, COPYWIN_MAP);
@@ -2634,7 +2660,7 @@ static void Task_Bag_TeachyTvTMs(u8 taskId)
         case 408:
             PlaySE(SE_SELECT);
             RemoveContextWindow();
-            BagMenu_RemoveWindow(ITEMWIN_6);
+            BagMenu_RemoveWindow(ITEMWIN_SELECTIONTEXT);
             PutWindowTilemap(0);
             PutWindowTilemap(1);
             CopyWindowToVram(0, COPYWIN_MAP);
@@ -2700,14 +2726,14 @@ void BagDrawDepositItemTextBox(void)
     AddTextPrinterParameterized(2, FONT_SMALL, gText_DepositItem, x / 2, 1, 0, NULL);
 }
 
-u32 ShowBagWindow(u32 whichWindow)
+u32 BagMenu_AddWindow(u32 whichWindow)
 {
     if (gBagMenu->windowIds[whichWindow] == WINDOW_NONE)
     {
         gBagMenu->windowIds[whichWindow] = AddWindow(&sWindowTemplates[whichWindow]);
         switch (whichWindow)
         {
-            case ITEMWIN_6:
+            case ITEMWIN_SELECTIONTEXT:
             case ITEMWIN_7:
             case ITEMWIN_8:
             case ITEMWIN_9:
@@ -2744,16 +2770,17 @@ static u8 AddItemMessageWindow(u8 windowType)
     return *windowId;
 }
 
-void CloseBagWindow(u8 whichWindow)
+static void RemoveItemMessageWindow(u8 windowType)
 {
-    if (gBagMenu->windowIds[whichWindow] != WINDOW_NONE)
+    u8 *windowId = &gBagMenu->windowIds[windowType];
+    if (*windowId != WINDOW_NONE)
     {
-        ClearDialogWindowAndFrameToTransparent(gBagMenu->windowIds[whichWindow], FALSE);
-        ClearWindowTilemap(gBagMenu->windowIds[whichWindow]);
-        RemoveWindow(gBagMenu->windowIds[whichWindow]);
+        ClearDialogWindowAndFrameToTransparent(*windowId, FALSE);
+        ClearWindowTilemap(*windowId);
+        RemoveWindow(*windowId);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
-        gBagMenu->windowIds[whichWindow] = WINDOW_NONE;
+        *windowId = WINDOW_NONE;
     }
 }
 
@@ -2767,9 +2794,10 @@ void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTa
     CreateYesNoMenuWithCallbacks(taskId, &sWindowTemplates[windowType], FONT_NORMAL, 0, 2, 0x064, 14, funcTable);
 }
 
-void BagPrintMoneyAmount(void)
+static void DisplayCurrentMoneyWindow(void)
 {
-    PrintMoneyAmountInMoneyBoxWithBorder(ShowBagWindow(ITEMWIN_2), 0x081, 0x0C, GetMoney(&gSaveBlock1Ptr->money));
+    u8 windowId = BagMenu_AddWindow(ITEMWIN_MONEY);
+    PrintMoneyAmountInMoneyBoxWithBorder(windowId, 0x081, 0x0C, GetMoney(&gSaveBlock1Ptr->money));
 }
 
 void BagDrawTextBoxOnWindow(u8 windowId)

@@ -551,7 +551,7 @@ static void ItemPc_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
     {
         u16 quantity = ItemPc_GetItemQuantityBySlotId(itemId);
         ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+        StringExpandPlaceholders(gStringVar4, gText_xVar1);
         ItemPc_AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, 110, y, 0, 0, 0xFF, 1);
     }
 }
@@ -964,7 +964,7 @@ static void ItemPc_WithdrawMultipleInitWindow(u16 slotId)
     StringExpandPlaceholders(gStringVar4, gText_WithdrawHowMany);
     AddTextPrinterParameterized(ItemPc_GetOrCreateSubwindow(1), FONT_NORMAL, gStringVar4, 0, 2, 0, NULL);
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     ItemPc_SetBorderStyleOnWindow(3);
     ItemPc_AddTextPrinterParameterized(3, FONT_SMALL, gStringVar4, 8, 10, 1, 0, 0, 1);
     ScheduleBgCopyTilemapToVram(0);
@@ -974,7 +974,7 @@ static void UpdateWithdrawQuantityDisplay(s16 quantity)
 {
     FillWindowPixelRect(3, PIXEL_FILL(1), 10, 10, 28, 12);
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 3);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     ItemPc_AddTextPrinterParameterized(3, FONT_SMALL, gStringVar4, 8, 10, 1, 0, 0, 1);
 }
 

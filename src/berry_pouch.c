@@ -733,7 +733,7 @@ static void BerryPouchItemPrintFunc(u8 windowId, u32 itemId, u8 y)
     {
         itemQuantity = BagGetQuantityByPocketPosition(POCKET_BERRIES, itemId);
         ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+        StringExpandPlaceholders(gStringVar4, gText_xVar1);
         BerryPouchPrint(windowId, FONT_SMALL, gStringVar4, 110, y, 0, 0, 0xFF, 1);
     }
 }
@@ -925,7 +925,7 @@ void InitTossQuantitySelectUI(u8 taskId, const u8 * str)
     BerryPouchPrint(windowId, FONT_NORMAL, gStringVar4, 0, 2, 1, 2, 0, 1);
     windowId2 = GetOrCreateVariableWindow(0);
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BerryPouchPrint(windowId2, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
 }
 
@@ -934,7 +934,7 @@ static void PrintxQuantityOnWindow(u8 whichWindow, s16 quantity, u8 ndigits)
     u8 windowId = GetVariableWindowId(whichWindow);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, ndigits);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BerryPouchPrint(windowId, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
 }
 
@@ -1359,7 +1359,7 @@ static void Task_Sell_PrintSelectMultipleUI(u8 taskId)
     s16 * data = gTasks[taskId].data;
     u8 windowId = GetOrCreateVariableWindow(1);
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BerryPouchPrint(windowId, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0xFF, 1);
     SellMultiple_UpdateSellPriceDisplay(GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8]);
     PrintMoneyInWin2();

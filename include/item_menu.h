@@ -21,13 +21,13 @@ enum {
 };
 
 enum {
-    ITEMWIN_0,
-    ITEMWIN_1,
-    ITEMWIN_2,
-    ITEMWIN_YESNO_BOTTOMRIGHT,
-    ITEMWIN_YESNO_TOPRIGHT,
+    ITEMWIN_QUANTITY,
+    ITEMWIN_QUANTITY_WIDE,
+    ITEMWIN_MONEY,
+    ITEMWIN_YESNO_LOW,
+    ITEMWIN_YESNO_HIGH,
     ITEMWIN_MESSAGE,
-    ITEMWIN_6,
+    ITEMWIN_SELECTIONTEXT,
     ITEMWIN_7,
     ITEMWIN_8,
     ITEMWIN_9,
@@ -106,12 +106,10 @@ void LoadBagMenuTextWindows(void);
 void BagMenu_Print(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
 void BagPrintTextOnWin1CenteredColor0(const u8 * str, u8 unused);
 void BagDrawDepositItemTextBox(void);
-u32 ShowBagWindow(u32 whichWindow);
+u32 BagMenu_AddWindow(u32 whichWindow);
 void BagMenu_RemoveWindow(u8 whichWindow);
-void CloseBagWindow(u8 whichWindow);
 u8 GetBagWindow(u8 whichWindow);
 void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTable);
-void BagPrintMoneyAmount(void);
 void BagDrawTextBoxOnWindow(u8 windowId);
 
 #endif //GUARD_ITEM_MENU_H

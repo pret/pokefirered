@@ -1131,7 +1131,7 @@ static void Task_BerryPouch_Toss(u8 taskId)
         Task_AskTossMultiple(taskId);
     else
     {
-        InitTossQuantitySelectUI(taskId, gText_TossOutHowManyStrVar1s);
+        InitTossQuantitySelectUI(taskId, gText_TossHowManyVar1s);
         CreateScrollIndicatorArrows_TossQuantity();
         gTasks[taskId].func = Task_Toss_SelectMultiple;
     }
@@ -1369,7 +1369,7 @@ static void Task_Sell_PrintSelectMultipleUI(u8 taskId)
 
 static void SellMultiple_UpdateSellPriceDisplay(s32 price)
 {
-    PrintMoneyAmount(GetVariableWindowId(1), 56, 10, price, 0);
+    PrintMoneyAmount(GetVariableWindowId(1), CalculateMoneyTextHorizontalPosition(price), 10, price, 0);
 }
 
 static void Task_Sell_SelectMultiple(u8 taskId)

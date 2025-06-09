@@ -649,7 +649,7 @@ static void BuyMenuDrawGraphics(void)
 {
     BuyMenuDrawMapView();
     BuyMenuCopyTilemapData();
-    PrintMoneyAmountInMoneyBoxWithBorder(0, 0xA, 0xF, GetMoney(&gSaveBlock1Ptr->money));
+    PrintMoneyAmountInMoneyBoxWithBorder(0, 10, 15, GetMoney(&gSaveBlock1Ptr->money));
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);
@@ -793,7 +793,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y)
 
     if (item != INDEX_CANCEL)
     {
-        ConvertIntToDecimalStringN(gStringVar1, GetItemPrice(item), 0, 6);
+        ConvertIntToDecimalStringN(gStringVar1, GetItemPrice(item), 0, MAX_MONEY_DIGITS);
         x = 6 - StringLength(gStringVar1);
         loc = gStringVar4;
         while (x-- != 0)
@@ -1045,8 +1045,8 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     FillWindowPixelBuffer(3, PIXEL_FILL(1));
-    PrintMoneyAmount(3, 0x36, 0xA, sShopData.itemPrice, TEXT_SKIP_DRAW);
-    ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, 2);
+    PrintMoneyAmount(3, CalculateMoneyTextHorizontalPosition(sShopData.itemPrice), 10, sShopData.itemPrice, TEXT_SKIP_DRAW);
+    ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BuyMenuPrint(3, FONT_SMALL, gStringVar4, 2, 0xA, 0, 0, 0, 1);
 }
@@ -1096,16 +1096,21 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
     u16 maxQuantity;
 
     BuyMenuQuantityBoxThinBorder(1, 0);
-    ConvertIntToDecimalStringN(gStringVar1, quantityInBag, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar1, quantityInBag, STR_CONV_MODE_RIGHT_ALIGN, MAX_ITEM_DIGITS + 1);
     StringExpandPlaceholders(gStringVar4, gText_InBagVar1);
     BuyMenuPrint(1, FONT_NORMAL, gStringVar4, 0, 2, 0, 0, 0, 1);
     tItemCount = 1;
     BuyMenuQuantityBoxNormalBorder(3, 0);
     BuyMenuPrintItemQuantityAndPrice(taskId);
     ScheduleBgCopyTilemapToVram(0);
-    maxQuantity = GetMoney(&gSaveBlock1Ptr->money) / GetItemPrice(tItemId);
-    if (maxQuantity > 99)
-        sShopData.maxQuantity = 99;
+
+    if (sShopData.itemPrice == 0)
+        maxQuantity = MAX_BAG_ITEM_CAPACITY;
+    else
+        maxQuantity = GetMoney(&gSaveBlock1Ptr->money) / sShopData.itemPrice;
+
+    if (maxQuantity > MAX_BAG_ITEM_CAPACITY)
+        sShopData.maxQuantity = MAX_BAG_ITEM_CAPACITY;
     else
         sShopData.maxQuantity = (u8)maxQuantity;
 

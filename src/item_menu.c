@@ -10,6 +10,7 @@
 #include "field_player_avatar.h"
 #include "graphics.h"
 #include "help_system.h"
+#include "international_string_util.h"
 #include "item.h"
 #include "item_icon.h"
 #include "item_menu.h"
@@ -86,6 +87,17 @@ enum {
     WIN_POCKET_NAME
 };
 
+// Item list ID for toSwapPos to indicate an item is not currently being swapped
+#define NOT_SWAPPING 0xFF
+
+struct ListBuffer1 {
+    struct ListMenuItem subBuffers[MAX_POCKET_ITEMS];
+};
+
+struct ListBuffer2 {
+    u8 name[MAX_POCKET_ITEMS][max(ITEM_NAME_LENGTH, MOVE_NAME_LENGTH) + 15];
+};
+
 struct BagBackup
 {
     struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
@@ -147,10 +159,10 @@ static void Task_ItemContext_Normal(u8 taskId);
 static void Task_FieldItemContextMenuHandleInput(u8 taskId);
 static void ItemMenu_UseOutOfBattle(u8 taskId);
 static void ItemMenu_Toss(u8 taskId);
-static void Task_ConfirmTossItems(u8 taskId);
-static void Task_TossItem_No(u8 taskId);
-static void Task_SelectQuantityToToss(u8 taskId);
-static void Task_TossItem_Yes(u8 taskId);
+static void AskTossItems(u8 taskId);
+static void CancelToss(u8 taskId);
+static void Task_ChooseHowManyToToss(u8 taskId);
+static void ConfirmToss(u8 taskId);
 static void Task_WaitAB_RedrawAndReturnToBag(u8 taskId);
 static void ItemMenu_Register(u8 taskId);
 static void ItemMenu_Give(u8 taskId);
@@ -172,18 +184,17 @@ static void Task_ItemContext_Sell(u8 taskId);
 static void GoToTMCase_Sell(void);
 static void GoToBerryPouch_Sell(void);
 static void ReturnToBagMenuFromSubmenu_Sell(void);
-static void Task_PrintSaleConfirmationText(u8 taskId);
-static void Task_ShowSellYesNoMenu(u8 taskId);
+static void DisplaySellItemPriceAndConfirm(u8 taskId);
+static void AskSellItems(u8 taskId);
 static void Task_SellItem_No(u8 taskId);
 static void InitSellHowManyInput(u8 taskId);
-static void UpdateSalePriceDisplay(s32 price);
 static void Task_ChooseHowManyToSell(u8 taskId);
-static void Task_SellItem_Yes(u8 taskId);
+static void ConfirmSell(u8 taskId);
 static void Task_FinalizeSaleToShop(u8 taskId);
 static void Task_WaitPressAB_AfterSell(u8 taskId);
 static void Task_ItemContext_Deposit(u8 taskId);
-static void Task_SelectQuantityToDeposit(u8 taskId);
-static void Task_TryDoItemDeposit(u8 taskId);
+static void Task_ChooseHowManyToDeposit(u8 taskId);
+static void TryDepositItem(u8 taskId);
 static bool32 IsTutorialBag(void);
 static void Task_Bag_OldManTutorial(u8 taskId);
 static void Task_Pokedude_FadeFromBag(u8 taskId);
@@ -193,17 +204,9 @@ static void Task_Bag_TeachyTvCatching(u8 taskId);
 static void Task_Bag_TeachyTvStatus(u8 taskId);
 static void Task_Bag_TeachyTvTMs(u8 taskId);
 static void RemoveContextWindow(void);
+static void PrintItemQuantity(u8, s16);
 
-// Item list ID for toSwapPos to indicate an item is not currently being swapped
-#define NOT_SWAPPING 0xFF
-
-struct ListBuffer1 {
-    struct ListMenuItem subBuffers[MAX_POCKET_ITEMS];
-};
-
-struct ListBuffer2 {
-    u8 name[MAX_POCKET_ITEMS][max(ITEM_NAME_LENGTH, MOVE_NAME_LENGTH) + 15];
-};
+static const u8 sText_DepositHowManyVar1[] = _("Deposit how many\n{STR_VAR_1}(s)?");
 
 static const struct BgTemplate sBgTemplates_ItemMenu[2] = {
     {
@@ -328,13 +331,13 @@ static const TaskFunc sItemContextTaskFuncs[] = {
     [ITEMMENULOCATION_OLD_MAN] = NULL
 };
 
-static const struct YesNoFuncTable sYesNoMenu_Toss = {
-    Task_TossItem_Yes,
-    Task_TossItem_No
+static const struct YesNoFuncTable sYesNoTossFunctions = {
+    ConfirmToss,
+    CancelToss
 };
 
 static const struct YesNoFuncTable sYesNoMenu_Sell = {
-    Task_SellItem_Yes,
+    ConfirmSell,
     Task_SellItem_No
 };
 
@@ -515,7 +518,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 12,
         .baseBlock = 0x2a2
     },
-    [ITEMWIN_7] =
+    [ITEMWIN_ASKTOSS] =
     {
         .bg = 0,
         .tilemapLeft = 6,
@@ -1129,6 +1132,27 @@ static void InitPocketScrollPositions(void)
         SetCursorScrollWithinListBounds(&gBagPosition.scrollPosition[i], &gBagPosition.cursorPosition[i], gBagMenu->numShownItems[i], gBagMenu->numItemStacks[i], MAX_ITEMS_SHOWN);
 }
 
+static void AddItemQuantityWindow(u8 windowType)
+{
+    PrintItemQuantity(BagMenu_AddWindow(windowType), 1);
+}
+
+static void PrintItemQuantity(u8 windowId, s16 quantity)
+{
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
+    AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, GetStringCenterAlignXOffset(FONT_SMALL, gStringVar4, 0x28), 10, 0, 0);
+}
+
+// Prints the quantity of items to be sold and the amount that would be earned
+static void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
+{
+    ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
+    AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, 4, 10, TEXT_SKIP_DRAW, 0);
+    PrintMoneyAmount(windowId, CalculateMoneyTextHorizontalPosition(moneyEarned), 10, moneyEarned, 0);
+}
+
 static void FreeBagMenu(void)
 {
     Free(sListBuffer2);
@@ -1548,29 +1572,6 @@ static void AbortMovingItemInPocket(u8 taskId, u32 itemIndex)
     gTasks[taskId].func = Task_BagMenu_HandleInput;
 }
 
-static void InitQuantityToTossOrDeposit(u16 cursorPos, const u8 *str)
-{
-    u8 r4;
-    u8 r5 = BagMenu_AddWindow(ITEMWIN_8);
-    CopyItemName(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, cursorPos), gStringVar1);
-    StringExpandPlaceholders(gStringVar4, str);
-    BagMenu_Print(r5, FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
-    r4 = BagMenu_AddWindow(ITEMWIN_QUANTITY);
-    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
-    StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    BagMenu_Print(r4, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
-    CreatePocketScrollArrowPair_QuantitySelect();
-}
-
-static void UpdateQuantityToTossOrDeposit(s16 value, u8 ndigits)
-{
-    u8 r6 = GetBagWindow(ITEMWIN_QUANTITY);
-    FillWindowPixelBuffer(r6, PIXEL_FILL(1));
-    ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEADING_ZEROS, ndigits);
-    StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    BagMenu_Print(r6, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
-}
-
 // row of 0 is the bottom row in the list, up to LIST_TILES_HEIGHT at the top
 static void DrawItemListRow(u8 row)
 {
@@ -1733,40 +1734,47 @@ static void ItemMenu_Toss(u8 taskId)
     tItemCount = 1;
     if (tQuantity == 1)
     {
-        Task_ConfirmTossItems(taskId);
+        AskTossItems(taskId);
     }
     else
     {
-        InitQuantityToTossOrDeposit(data[1], gText_TossOutHowManyStrVar1s);
-        gTasks[taskId].func = Task_SelectQuantityToToss;
+        u8 windowId = BagMenu_AddWindow(ITEMWIN_8);
+        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_TossHowManyVar1s);
+        BagMenu_Print(windowId, FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
+        AddItemQuantityWindow(ITEMWIN_QUANTITY);
+        CreatePocketScrollArrowPair_QuantitySelect();
+        gTasks[taskId].func = Task_ChooseHowManyToToss;
     }
 }
 
-static void Task_ConfirmTossItems(u8 taskId)
+static void AskTossItems(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+
+    ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_ThrowAwayStrVar2OfThisItemQM);
-    BagMenu_Print(BagMenu_AddWindow(ITEMWIN_7), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
-    BagMenu_YesNo(taskId, ITEMWIN_YESNO_LOW, &sYesNoMenu_Toss);
+    BagMenu_Print(BagMenu_AddWindow(ITEMWIN_ASKTOSS), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
+    BagMenu_YesNo(taskId, ITEMWIN_YESNO_LOW, &sYesNoTossFunctions);
 }
 
-static void Task_TossItem_No(u8 taskId)
+static void CancelToss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    BagMenu_RemoveWindow(ITEMWIN_7);
+
+    BagMenu_RemoveWindow(ITEMWIN_ASKTOSS);
     PutWindowTilemap(1);
     ScheduleBgCopyTilemapToVram(0);
     BagMenu_PrintCursor(tListTaskId, COLORID_1);
     ReturnToItemList(taskId);
 }
 
-static void Task_SelectQuantityToToss(u8 taskId)
+static void Task_ChooseHowManyToToss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
     {
-        UpdateQuantityToTossOrDeposit(data[8], 3);
+        PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
     }
     else if (JOY_NEW(A_BUTTON))
     {
@@ -1776,7 +1784,7 @@ static void Task_SelectQuantityToToss(u8 taskId)
         BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
         ScheduleBgCopyTilemapToVram(0);
         BagDestroyPocketScrollArrowPair();
-        Task_ConfirmTossItems(taskId);
+        AskTossItems(taskId);
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -1792,10 +1800,10 @@ static void Task_SelectQuantityToToss(u8 taskId)
     }
 }
 
-static void Task_TossItem_Yes(u8 taskId)
+static void ConfirmToss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    BagMenu_RemoveWindow(ITEMWIN_7);
+    BagMenu_RemoveWindow(ITEMWIN_ASKTOSS);
     CopyItemName(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1]), gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayStrVar2StrVar1s);
@@ -1907,15 +1915,6 @@ void CloseItemMessage(u8 taskId)
     ScheduleBgCopyTilemapToVram(0);
     BagMenu_PrintCursor(tListTaskId, COLORID_1);
     ReturnToItemList(taskId);
-}
-
-// Prints the quantity of items to be sold and the amount that would be earned
-static void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
-{
-    ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
-    StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, 4, 10, TEXT_SKIP_DRAW, 0);
-    PrintMoneyAmount(windowId, CalculateMoneyTextHorizontalPosition(moneyEarned), 10, moneyEarned, 0);
 }
 
 static void ItemMenu_Cancel(u8 taskId)
@@ -2080,7 +2079,7 @@ static void Task_ItemContext_Sell(u8 taskId)
         if (data[2] == 1)
         {
             DisplayCurrentMoneyWindow();
-            Task_PrintSaleConfirmationText(taskId);
+            DisplaySellItemPriceAndConfirm(taskId);
         }
         else
         {
@@ -2110,15 +2109,15 @@ static void ReturnToBagMenuFromSubmenu_Sell(void)
 
 #define ITEM_SELL_FACTOR ((I_SELL_VALUE_FRACTION >= GEN_9) ? 4 : 2)
 
-static void Task_PrintSaleConfirmationText(u8 taskId)
+static void DisplaySellItemPriceAndConfirm(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    ConvertIntToDecimalStringN(gStringVar3, (GetItemPrice(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1])) / ITEM_SELL_FACTOR) * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, (GetItemPrice(gSpecialVar_ItemId) / ITEM_SELL_FACTOR) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_ICanPayThisMuch_WouldThatBeOkay);
-    DisplayItemMessage(taskId, GetDialogBoxFontId(), gStringVar4, Task_ShowSellYesNoMenu);
+    DisplayItemMessage(taskId, GetDialogBoxFontId(), gStringVar4, AskSellItems);
 }
 
-static void Task_ShowSellYesNoMenu(u8 taskId)
+static void AskSellItems(u8 taskId)
 {
     BagMenu_YesNo(taskId, ITEMWIN_YESNO_HIGH, &sYesNoMenu_Sell);
 }
@@ -2147,11 +2146,6 @@ static void InitSellHowManyInput(u8 taskId)
     gTasks[taskId].func = Task_ChooseHowManyToSell;
 }
 
-static void UpdateSalePriceDisplay(s32 amount)
-{
-    PrintMoneyAmount(GetBagWindow(ITEMWIN_QUANTITY_WIDE), 56, 10, amount, 0);
-}
-
 static void Task_ChooseHowManyToSell(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
@@ -2166,7 +2160,7 @@ static void Task_ChooseHowManyToSell(u8 taskId)
         PutWindowTilemap(0);
         ScheduleBgCopyTilemapToVram(0);
         BagDestroyPocketScrollArrowPair();
-        Task_PrintSaleConfirmationText(taskId);
+        DisplaySellItemPriceAndConfirm(taskId);
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -2184,13 +2178,13 @@ static void Task_ChooseHowManyToSell(u8 taskId)
     }
 }
 
-static void Task_SellItem_Yes(u8 taskId)
+static void ConfirmSell(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    ConvertIntToDecimalStringN(gStringVar3, (GetItemPrice(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1])) / ITEM_SELL_FACTOR) * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, (GetItemPrice(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1])) / ITEM_SELL_FACTOR) * data[8], STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_TurnedOverItemsWorthYen);
     DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, Task_FinalizeSaleToShop);
 }
@@ -2229,24 +2223,29 @@ static void Task_WaitPressAB_AfterSell(u8 taskId)
 static void Task_ItemContext_Deposit(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    data[8] = 1;
-    if (data[2] == 1)
+    tItemCount = 1;
+    if (tQuantity == 1)
     {
-        Task_TryDoItemDeposit(taskId);
+        TryDepositItem(taskId);
     }
     else
     {
-        InitQuantityToTossOrDeposit(data[1], gText_DepositHowManyStrVars1);
-        gTasks[taskId].func = Task_SelectQuantityToDeposit;
+        u8 windowId = BagMenu_AddWindow(ITEMWIN_8);
+        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, sText_DepositHowManyVar1);
+        BagMenu_Print(windowId, FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
+        AddItemQuantityWindow(ITEMWIN_QUANTITY);
+        CreatePocketScrollArrowPair_QuantitySelect();
+        gTasks[taskId].func = Task_ChooseHowManyToDeposit;
     }
 }
 
-static void Task_SelectQuantityToDeposit(u8 taskId)
+static void Task_ChooseHowManyToDeposit(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
     {
-        UpdateQuantityToTossOrDeposit(data[8], 3);
+        PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
     }
     else if (JOY_NEW(A_BUTTON))
     {
@@ -2256,7 +2255,7 @@ static void Task_SelectQuantityToDeposit(u8 taskId)
         BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
         ScheduleBgCopyTilemapToVram(0);
         BagDestroyPocketScrollArrowPair();
-        Task_TryDoItemDeposit(taskId);
+        TryDepositItem(taskId);
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -2271,7 +2270,7 @@ static void Task_SelectQuantityToDeposit(u8 taskId)
     }
 }
 
-static void Task_TryDoItemDeposit(u8 taskId)
+static void TryDepositItem(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     if (AddPCItem(gSpecialVar_ItemId, data[8]) == TRUE)
@@ -2734,7 +2733,7 @@ u32 BagMenu_AddWindow(u32 whichWindow)
         switch (whichWindow)
         {
             case ITEMWIN_SELECTIONTEXT:
-            case ITEMWIN_7:
+            case ITEMWIN_ASKTOSS:
             case ITEMWIN_8:
             case ITEMWIN_9:
                 DrawStdFrameWithCustomTileAndPalette(gBagMenu->windowIds[whichWindow], FALSE, 0x081, 12);

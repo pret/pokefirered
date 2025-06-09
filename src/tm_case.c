@@ -1236,7 +1236,7 @@ static void SellTM_PrintQuantityAndSalePrice(s16 quantity, s32 amount)
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     TMCase_Print(WIN_SELL_QUANTITY, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, COLOR_DARK);
-    PrintMoneyAmount(WIN_SELL_QUANTITY, 56, 10, amount, 0);
+    PrintMoneyAmount(WIN_SELL_QUANTITY, CalculateMoneyTextHorizontalPosition(amount), 10, amount, 0);
 }
 
 static void Task_QuantitySelect_HandleInput(u8 taskId)

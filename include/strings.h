@@ -459,7 +459,7 @@ extern const u8 gCreditsString_Akira_Kinashi[];
 
 // berry_pouch
 extern const u8 gText_TheStrVar1CantBeHeldHere[];
-extern const u8 gText_TossOutHowManyStrVar1s[];
+extern const u8 gText_TossHowManyVar1s[];
 extern const u8 gText_ThrewAwayStrVar2StrVar1s[];
 extern const u8 gText_ThrowAwayStrVar2OfThisItemQM[];
 extern const u8 gText_BerryPouch[];
@@ -1099,7 +1099,6 @@ extern const u8 gOtherText_Open[];
 extern const u8 gOtherText_Deselect[];
 extern const u8 gText_CloseBag[];
 extern const u8 gText_CantWriteMailHere[];
-extern const u8 gText_DepositHowManyStrVars1[];
 extern const u8 gText_DepositedStrVar2StrVar1s[];
 extern const u8 gText_NoRoomToStoreItems[];
 

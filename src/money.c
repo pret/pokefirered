@@ -73,19 +73,6 @@ void SubtractMoneyFromVar0x8005(void)
 void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed)
 {
     PrintMoneyAmount(windowId, 16, 12, amount, speed);
-    // u8 *txtPtr;
-    // s32 strLength;
-
-    // ConvertIntToDecimalStringN(gStringVar1, amount, STR_CONV_MODE_LEFT_ALIGN, 6);
-
-    // strLength = 6 - StringLength(gStringVar1);
-    // txtPtr = gStringVar4;
-
-    // while (strLength-- != 0)
-    //     *(txtPtr++) = 0;
-
-    // StringExpandPlaceholders(txtPtr, gText_PokedollarVar1);
-    // AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, 64 - GetStringWidth(FONT_SMALL, gStringVar4, 0), 0xC, speed, NULL);
 }
 
 static u32 CalculateLeadingSpacesForMoney(u32 numDigits)

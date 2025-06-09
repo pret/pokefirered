@@ -528,7 +528,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 12,
         .baseBlock = 0x2da
     },
-    [ITEMWIN_8] =
+    [ITEMWIN_ASKTOSS_QUANTITY] =
     {
         .bg = 0,
         .tilemapLeft = 6,
@@ -538,7 +538,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .paletteNum = 12,
         .baseBlock = 0x316
     },
-    [ITEMWIN_9] =
+    [ITEMWIN_TOSSED] =
     {
         .bg = 0,
         .tilemapLeft = 6,
@@ -1738,7 +1738,7 @@ static void ItemMenu_Toss(u8 taskId)
     }
     else
     {
-        u8 windowId = BagMenu_AddWindow(ITEMWIN_8);
+        u8 windowId = BagMenu_AddWindow(ITEMWIN_ASKTOSS_QUANTITY);
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, gText_TossHowManyVar1s);
         BagMenu_Print(windowId, FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
@@ -1779,8 +1779,8 @@ static void Task_ChooseHowManyToToss(u8 taskId)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearWindowTilemap(GetBagWindow(ITEMWIN_8));
-        BagMenu_RemoveWindow(ITEMWIN_8);
+        ClearWindowTilemap(GetBagWindow(ITEMWIN_ASKTOSS_QUANTITY));
+        BagMenu_RemoveWindow(ITEMWIN_ASKTOSS_QUANTITY);
         BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
         ScheduleBgCopyTilemapToVram(0);
         BagDestroyPocketScrollArrowPair();
@@ -1789,7 +1789,7 @@ static void Task_ChooseHowManyToToss(u8 taskId)
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        BagMenu_RemoveWindow(ITEMWIN_8);
+        BagMenu_RemoveWindow(ITEMWIN_ASKTOSS_QUANTITY);
         BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
@@ -1807,7 +1807,7 @@ static void ConfirmToss(u8 taskId)
     CopyItemName(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1]), gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayStrVar2StrVar1s);
-    BagMenu_Print(BagMenu_AddWindow(ITEMWIN_9), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
+    BagMenu_Print(BagMenu_AddWindow(ITEMWIN_TOSSED), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
     gTasks[taskId].func = Task_WaitAB_RedrawAndReturnToBag;
 }
 
@@ -1818,7 +1818,7 @@ static void Task_WaitAB_RedrawAndReturnToBag(u8 taskId)
     {
         PlaySE(SE_SELECT);
         RemoveBagItem(gSpecialVar_ItemId, data[8]);
-        BagMenu_RemoveWindow(ITEMWIN_9);
+        BagMenu_RemoveWindow(ITEMWIN_TOSSED);
         DestroyListMenuTask(data[0], &gBagPosition.scrollPosition[gBagPosition.pocket], &gBagPosition.cursorPosition[gBagPosition.pocket]);
         UpdatePocketItemList(gBagPosition.pocket);
         UpdatePocketListPosition(gBagPosition.pocket);
@@ -2230,7 +2230,7 @@ static void Task_ItemContext_Deposit(u8 taskId)
     }
     else
     {
-        u8 windowId = BagMenu_AddWindow(ITEMWIN_8);
+        u8 windowId = BagMenu_AddWindow(ITEMWIN_ASKTOSS_QUANTITY);
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         StringExpandPlaceholders(gStringVar4, sText_DepositHowManyVar1);
         BagMenu_Print(windowId, FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
@@ -2250,8 +2250,8 @@ static void Task_ChooseHowManyToDeposit(u8 taskId)
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ClearWindowTilemap(GetBagWindow(ITEMWIN_8));
-        BagMenu_RemoveWindow(ITEMWIN_8);
+        ClearWindowTilemap(GetBagWindow(ITEMWIN_ASKTOSS_QUANTITY));
+        BagMenu_RemoveWindow(ITEMWIN_ASKTOSS_QUANTITY);
         BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
         ScheduleBgCopyTilemapToVram(0);
         BagDestroyPocketScrollArrowPair();
@@ -2260,7 +2260,7 @@ static void Task_ChooseHowManyToDeposit(u8 taskId)
     else if (JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        BagMenu_RemoveWindow(ITEMWIN_8);
+        BagMenu_RemoveWindow(ITEMWIN_ASKTOSS_QUANTITY);
         BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
@@ -2279,7 +2279,7 @@ static void TryDepositItem(u8 taskId)
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, gText_DepositedStrVar2StrVar1s);
-        BagMenu_Print(BagMenu_AddWindow(ITEMWIN_9), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
+        BagMenu_Print(BagMenu_AddWindow(ITEMWIN_TOSSED), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, 1);
         gTasks[taskId].func = Task_WaitAB_RedrawAndReturnToBag;
     }
     else
@@ -2734,8 +2734,8 @@ u32 BagMenu_AddWindow(u32 whichWindow)
         {
             case ITEMWIN_SELECTIONTEXT:
             case ITEMWIN_ASKTOSS:
-            case ITEMWIN_8:
-            case ITEMWIN_9:
+            case ITEMWIN_ASKTOSS_QUANTITY:
+            case ITEMWIN_TOSSED:
                 DrawStdFrameWithCustomTileAndPalette(gBagMenu->windowIds[whichWindow], FALSE, 0x081, 12);
                 break;
             default:

@@ -6998,7 +6998,6 @@ static void UpdatePartyToFieldOrder(void)
 
 static void CB2_SetUpExitToBattleScreen(void)
 {
-    SetBagOpenFalse();
     SetMainCallback2(CB2_SetUpReshowBattleScreenAfterMenu);
 }
 

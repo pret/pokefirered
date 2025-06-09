@@ -104,8 +104,6 @@ static void SetUpItemUseCallback(u8 taskId)
     else
     {
         ItemMenu_SetExitCallback(sExitCallbackByItemType[itemType]);
-        if (itemType == ITEM_USE_FIELD - 1)
-            Bag_BeginCloseWin0Animation();
         Task_FadeAndCloseBagMenu(taskId);
     }
 }

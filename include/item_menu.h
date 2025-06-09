@@ -52,7 +52,6 @@ struct BagPosition
 {
     void (*exitCallback)(void);
     u8 location;
-    bool8 bagOpen;
     u16 pocket;
     u16 cursorPosition[NUM_BAG_POCKETS_NO_CASES];
     u16 scrollPosition[NUM_BAG_POCKETS_NO_CASES];
@@ -83,13 +82,11 @@ extern u8 gItemMenuIconSpriteIds[ITEMMENUSPRITE_COUNT];
 extern u16 gSpecialVar_ItemId;
 
 // Exported ROM declarations
-void SetBagOpenFalse(void);
 void ResetBagScrollPositions(void);
 void InitPokedudeBag(u8);
 void CB2_BagMenuFromStartMenu(void);
 void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_);
 void Task_FadeAndCloseBagMenu(u8 taskId);
-void Bag_BeginCloseWin0Animation(void);
 void ItemMenu_SetExitCallback(void (*)(void));
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId));
 void CloseItemMessage(u8 taskId);

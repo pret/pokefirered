@@ -463,6 +463,16 @@ static void VBlankCB_BerryPouchIdle(void)
     TransferPlttBuffer();
 }
 
+#define tListTaskId        data[0]
+#define tListPosition      data[1]
+#define tQuantity          data[2]
+#define tNeverRead         data[3]
+#define tItemCount         data[8]
+#define tMsgWindowId       data[10]
+#define tPocketSwitchDir   data[11]
+#define tPocketSwitchTimer data[12]
+#define tPocketSwitchState data[13]
+
 static void CB2_InitBerryPouch(void)
 {
     while (1)
@@ -549,8 +559,8 @@ static bool8 RunBerryPouchInit(void)
         break;
     case 14:
         taskId = CreateTask(Task_BerryPouchMain, 0);
-        gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
-        gTasks[taskId].data[8] = 0;
+        gTasks[taskId].tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
+        gTasks[taskId].tItemCount = 0;
         gMain.state++;
         break;
     case 15:

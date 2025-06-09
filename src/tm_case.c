@@ -1459,7 +1459,6 @@ static void Task_Pokedude_Run(u8 taskId)
             sTMCaseStaticResources.scrollOffset = sPokedudeBagBackup->scrollOffset;
             Free(sPokedudeBagBackup);
             CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
-            SetBagOpenFalse();
             BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, 0);
             tPokedudeState++;
         }

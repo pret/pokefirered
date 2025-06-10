@@ -1,21 +1,31 @@
 Route2_EventScript_ItemEther::
+	signmsg
 	finditem ITEM_ETHER
+	normalmsg
 	end
 
 Route2_EventScript_ItemParalyzeHeal::
+	signmsg
 	finditem ITEM_PARALYZE_HEAL
+	normalmsg
 	end
 
 ViridianForest_EventScript_ItemPokeBall::
+	signmsg
 	finditem ITEM_POKE_BALL
+	normalmsg
 	end
 
 ViridianForest_EventScript_ItemAntidote::
+	signmsg
 	finditem ITEM_ANTIDOTE
+	normalmsg
 	end
 
 ViridianForest_EventScript_ItemPotion::
+	signmsg
 	finditem ITEM_POTION
+	normalmsg
 	end
 
 MtMoon_1F_EventScript_ItemParalyzeHeal::
@@ -411,7 +421,21 @@ ThreeIsland_EventScript_ItemZinc::
 	end
 
 ViridianForest_EventScript_ItemPotion2::
+	signmsg
 	finditem ITEM_POTION
+	normalmsg
+	end
+	
+ViridianForest_EventScript_ItemPotion3::
+	signmsg
+	finditem ITEM_POTION
+	normalmsg
+	end
+
+ViridianForest_EventScript_ItemPotion4::
+	signmsg
+	finditem ITEM_REPEL
+	normalmsg
 	end
 
 MtMoon_B2F_EventScript_ItemRevive::

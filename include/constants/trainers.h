@@ -166,6 +166,8 @@
 #define TRAINER_PIC_RUIN_MANIAC           145
 #define TRAINER_PIC_LADY                  146
 #define TRAINER_PIC_PAINTER               147
+#define TRAINER_PIC_SILVIO              148
+
 
 // The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
 #define TRAINER_BACK_PIC_RED                    0
@@ -438,6 +440,7 @@
 #define FACILITY_CLASS_ELITE_FOUR_AGATHA      147
 #define FACILITY_CLASS_ELITE_FOUR_LANCE       148
 #define FACILITY_CLASS_CHAMPION_RIVAL_2       149
+#define FACILITY_CLASS_SILVIO 150
 
 #define F_TRAINER_FEMALE (1 << 7)
 

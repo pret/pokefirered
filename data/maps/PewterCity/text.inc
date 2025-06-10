@@ -1,3 +1,26 @@
+PewterCity_Text_Silvio::
+.string "{SHADOW DYNAMIC_COLOR4}TIENDA DE PIEDRAS DEL SABER{SHADOW LIGHT_GRAY}\n"
+.string "El poder del cambio.$"
+
+PewterCity_Text_Silvio1::
+.string "¿Sabías que en estas montañas hay\n"
+.string "piedras muy raras?\p"
+.string "{SHADOW DYNAMIC_COLOR4}SILVIO{SHADOW LIGHT_GRAY} es un experto en\n"
+.string "encontrarlas.$"
+
+PewterCity_Text_Silvio2::
+.string "¡Mi abuelito dice que don {SHADOW DYNAMIC_COLOR4}SILVIO{SHADOW LIGHT_GRAY}\n"
+.string "puede hablar con las piedras!$"
+
+PewterCity_Text_Montanista::
+    .string "{COLOR DARK_GRAY}Como montañista experimentado,\n"
+    .string "conozco cada rincón y grieta de\l"
+    .string "estas montañas.$"
+
+PewterCity_Text_Nino::
+    .string "{COLOR DARK_GRAY}¿Crees que el {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY}\n"
+    .string "intentará robar el {SHADOW DYNAMIC_COLOR4}ONIX{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY}?$"
+
 Text_DreamEaterTeach::
     .string "Yawn!\n"
     .string "I must have dozed off in the sun.\p"
@@ -21,79 +44,93 @@ Text_DreamEaterTaught::
     .string "I…can't eat…anymore…$"
 
 PewterCity_Text_ClefairyCameFromMoon::
-    .string "CLEFAIRY came from the moon.\n"
-    .string "That's what the rumor is.\p"
-    .string "They appeared after MOON STONES\n"
-    .string "fell on MT. MOON.$"
+    .string "{COLOR DARK_GRAY}¡Dicen que los {SHADOW DYNAMIC_COLOR4}CLEFAIRY{SHADOW LIGHT_GRAY} vinieron\n"
+    .string "de la luna!\p"
+    .string "¡Aparecieron tras la caída de\n"
+    .string "varias {SHADOW DYNAMIC_COLOR4}PIEDRAS LUNARES{SHADOW LIGHT_GRAY}\l"
+    .string "en el {SHADOW DYNAMIC_COLOR4}MT. MOON{SHADOW LIGHT_GRAY}!$"
 
 PewterCity_Text_BrockOnlySeriousTrainerHere::
-    .string "There aren't many serious POKéMON\n"
-    .string "TRAINERS here.\p"
-    .string "They're all like BUG CATCHERS,\n"
-    .string "you know, just hobbyists.\p"
-    .string "But PEWTER GYM's BROCK isn't like\n"
-    .string "that, not one bit.$"
+    .string "{COLOR DARK_GRAY}¡No hay muchos {SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY}\n"
+    .string "de {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} por aquí!\p"
+    .string "¡Todos parecen {SHADOW DYNAMIC_COLOR4}CAZABICHOS{SHADOW LIGHT_GRAY}, salvo\n"
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY}, del {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY} de\l"
+    .string "{SHADOW DYNAMIC_COLOR4}CIUDAD PLATEADA{SHADOW LIGHT_GRAY}!$"
+
+PalletTown_Text_Prueba::
+    .string "1234567$"
 
 PewterCity_Text_DidYouCheckOutMuseum::
-    .string "Did you check out the MUSEUM?$"
+    .string "{COLOR DARK_GRAY}¿Has estado en el {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}?$"
 
 PewterCity_Text_WerentThoseFossilsAmazing::
-    .string "Weren't those fossils from MT. MOON\n"
-    .string "amazing?$"
+    .string "{COLOR DARK_GRAY}¿No eran geniales esos fósiles\n"
+    .string "del {SHADOW DYNAMIC_COLOR4}MT. MOON{SHADOW LIGHT_GRAY}?$"
 
 PewterCity_Text_ReallyYouHaveToGo::
-    .string "Really?\n"
-    .string "You absolutely have to go!$"
+    .string "{COLOR DARK_GRAY}¿De verdad?\n"
+    .string "¡Pues tienes que ir!$"
 
 PewterCity_Text_ThisIsTheMuseum::
-    .string "This is it, the MUSEUM.\p"
-    .string "You have to pay to get in, but it's\n"
-    .string "worth it. See you around!$"
+    .string "{COLOR DARK_GRAY}Aqui está el {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}\p"
+    .string "{SHADOW LIGHT_GRAY}¡Hay que pagar para entrar, pero\n"
+    .string "vale la pena! ¡Hasta luego!$"
+
 
 PewterCity_Text_DoYouKnowWhatImDoing::
-    .string "Psssst!\n"
-    .string "Do you know what I'm doing?$"
+    .string "{COLOR DARK_GRAY}¡Psssst!\n"
+    .string "¿Sabes lo que estoy haciendo?$"
 
 PewterCity_Text_ThatsRightItsHardWork::
-    .string "That's right!\n"
-    .string "It's hard work!$"
+    .string "{COLOR DARK_GRAY}¡Eso es!\n"
+    .string "¡Un trabajo tremendo!$"
 
 PewterCity_Text_SprayingRepelToKeepWildMonsOut::
-    .string "I'm spraying REPEL to keep wild\n"
-    .string "POKéMON out of my garden!$"
+    .string "{COLOR DARK_GRAY}¡Utilizo el {SHADOW DYNAMIC_COLOR4}REPELENTE{SHADOW LIGHT_GRAY} para echar\n"
+    .string "de mi jardín a los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}!$"
 
 PewterCity_Text_BrocksLookingForChallengersFollowMe::
-    .string "You're a TRAINER, right?\p"
-    .string "BROCK's looking for new\n"
-    .string "challengers. Follow me!$"
+    .string "{COLOR DARK_GRAY}¡Oye, espera un momento!\p"
+    .string "¿Has tenido la oportunidad de\n"
+    .string "conocer a {SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY}?\p"
+    .string "Su destreza en combate es\n"
+    .string "legendaria en toda la región.\p"
+    .string "Antes de seguir tu camino, te\n"
+    .string "animo a que entres al {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY} y\l"
+    .string "lo enfrentes en batalla.\p"
+    .string "¡Sígueme!$"
 
 PewterCity_Text_GoTakeOnBrock::
-    .string "If you have the right stuff,\n"
-    .string "go take on BROCK!$"
+    .string "{COLOR DARK_GRAY}¡Aquí estamos! Este es el {SHADOW DYNAMIC_COLOR4}GIMNASIO\n"
+    .string "{SHADOW LIGHT_GRAY}de {SHADOW DYNAMIC_COLOR4}CIUDAD PLATEADA{SHADOW LIGHT_GRAY}\p"
+    .string "Estoy seguro de que tendrás una\n"
+    .string "batalla emocionante.\p"
+    .string "¡Ve y desafía a {SHADOW DYNAMIC_COLOR4}BROCK{SHADOW DYNAMIC_COLOR4}!$"
 
 PewterCity_Text_TrainerTipsEarningEXP::
-    .string "TRAINER TIPS\p"
-    .string "All POKéMON that appear in battle,\n"
-    .string "however briefly, earn EXP Points.$"
+    .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}PISTAS ENTRENADOR\p"
+    .string "{SHADOW LIGHT_GRAY}¡Todo {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} que luche en un\n"
+    .string "combate ganará {SHADOW DYNAMIC_COLOR4}EXPERIENCIA{SHADOW LIGHT_GRAY}!$"
 
 PewterCity_Text_CallPoliceIfInfoOnThieves::
-    .string "NOTICE!\p"
-    .string "Thieves have been stealing POKéMON\n"
-    .string "fossils from MT. MOON.\p"
-    .string "Please call the PEWTER POLICE if\n"
-    .string "you have any information.$"
+    .string "{COLOR RED}{SHADOW LIGHT_RED}¡AVISO!{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}\p"
+    .string "¡Unos ladrones han robado fósiles\n"
+    .string "de {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} del {SHADOW DYNAMIC_COLOR4}MT. MOON{SHADOW LIGHT_GRAY}!\p"
+    .string "¡Avisa a la {SHADOW DYNAMIC_COLOR4}POLICÍA{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}CIUDAD{SHADOW LIGHT_GRAY}\n"
+    .string "{SHADOW DYNAMIC_COLOR4}PLATEADA{SHADOW LIGHT_GRAY} si sabes de algo!$"
 
 PewterCity_Text_MuseumOfScience::
-    .string "PEWTER MUSEUM OF SCIENCE$"
+    .string "{SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA DE\n"
+    .string "CIUDAD PLATEADA$"
 
 PewterCity_Text_GymSign::
-    .string "PEWTER CITY POKéMON GYM\n"
-    .string "LEADER: BROCK\l"
-    .string "The Rock-Solid POKéMON TRAINER!$"
+    .string "{SHADOW DYNAMIC_COLOR4}GIMNASIO POKéMON DE PLATEADA\p"
+    .string "LIDER: BROCK\n"
+    .string "{SHADOW LIGHT_GRAY}¡Es fuerte como una roca!$"
 
 PewterCity_Text_CitySign::
-    .string "PEWTER CITY\n"
-    .string "A Stone Gray City$"
+    .string "{SHADOW DYNAMIC_COLOR4}CIUDAD PLANTEADA{SHADOW LIGHT_GRAY}\n"
+    .string "Ciudad de riscos inaccesibles$"
 
 @ The below 3 JP texts are unused. Possibly a cut NPC meant to give the player the Berry Pouch
 PewterCity_Text_DefeatedBrockYouCanHaveTreasure::
@@ -152,3 +189,13 @@ PewterCity_Text_RunningShoesLetterFromMom::
     .string "you! Don't ever give up!\p"
     .string "From Mom$"
 
+
+PewterCity_Text_EventoSilvioHombre1::
+.string "{SHADOW DYNAMIC_COLOR4}???{SHADOW LIGHT_GRAY}: ¡Whoa! ¡Por poco te derribo,\n"
+.string "muchacho!\p"
+.string "Disculpa, venía distraído...$"
+
+PewterCity_Text_EventoSilvioMujer1::
+.string "{SHADOW DYNAMIC_COLOR4}???{SHADOW LIGHT_GRAY}: ¡Whoa! ¡Por poco te derribo,\n"
+.string "muchacha!\p"
+.string "Disculpa, venía distraído...$"

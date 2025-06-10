@@ -99,7 +99,7 @@
 #define VAR_RESET_RTC_ENABLE               0x4032
 #define VAR_ENIGMA_BERRY_AVAILABLE         0x4033
 
-#define VAR_0x4034                         0x4034
+#define VAR_DEXNAV                         0x4034
 #define VAR_RESORT_GOREGEOUS_STEP_COUNTER  0x4035
 #define VAR_RESORT_GORGEOUS_REQUESTED_MON  0x4036
 #define VAR_PC_BOX_TO_SEND_MON             0x4037
@@ -191,11 +191,11 @@
 #define VAR_MAP_SCENE_MT_MOON_B2F                                              0x408B
 
 
-#define VAR_0x408C                 0x408C
-#define VAR_0x408D                 0x408D
-#define VAR_0x408E                 0x408E
-#define VAR_0x408F                 0x408F
-#define VAR_0x4090                 0x4090
+#define VAR_0x408C                 0x408C //ENTREGA POKEDEX
+#define VAR_0x408D                 0x408D //BATALLA BOSQUE
+#define VAR_0x408E                 0x408E //ZAPATILLAS
+#define VAR_0x408F                 0x408F //BROCK MUSEO
+#define VAR_0x4090                 0x4090 //SILVIO
 #define VAR_0x4091                 0x4091
 #define VAR_0x4092                 0x4092
 #define VAR_0x4093                 0x4093

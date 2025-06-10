@@ -39,7 +39,11 @@ RomHeaderChecksum:
 	.byte 0
 
 RomHeaderReserved2:
+.ifdef SRAM
+	.hword 0x85B5
+.else
 	.space 2
+.endif
 
 	.word 0
 

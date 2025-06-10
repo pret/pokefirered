@@ -17,7 +17,9 @@ EventScript_VideoGame::
 	end
 
 EventScript_Computer::
+	signmsg
 	msgbox Text_Computer, MSGBOX_SIGN
+	waitmessage
 	end
 
 EventScript_ImpressiveMachine::
@@ -57,7 +59,9 @@ EventScript_Painting::
 	end
 
 EventScript_PowerPlantMachine::
+	signmsg
 	msgbox Text_PowerPlantMachine, MSGBOX_SIGN
+	waitmessage
 	end
 
 EventScript_Telephone::
@@ -89,7 +93,9 @@ EventScript_BeautifulSkyWindow::
 	end
 
 EventScript_BlinkingLights::
+	signmsg
 	msgbox Text_BlinkingLights, MSGBOX_SIGN
+	waitmessage	
 	end
 
 EventScript_NeatlyLinedUpTools::

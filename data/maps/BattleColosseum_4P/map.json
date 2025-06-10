@@ -13,8 +13,10 @@
   "show_map_name": false,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_LINK",
-  "connections": null,
-  "object_events": [],
+  "connections": 0,
+  "object_events": [
+
+  ],
   "warp_events": [
     {
       "x": 5,
@@ -83,5 +85,7 @@
       "script": "BattleColosseum_4P_EventScript_PlayerSpot3"
     }
   ],
-  "bg_events": []
+  "bg_events": [
+
+  ]
 }

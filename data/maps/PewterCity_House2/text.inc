@@ -1,14 +1,17 @@
 PewterCity_House2_Text_MonsLearnTechniquesAsTheyGrow::
-    .string "POKéMON learn new techniques as\n"
-    .string "they grow.\p"
-    .string "But some moves must be taught to\n"
-    .string "them by people.$"
+    .string "¡Los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} aprenden nuevos\n"
+    .string "ataques a medida que crecen!\p"
+    .string "¡Pero hay ciertos ataques que\n"
+    .string "hay que enseñarles!$"
 
 PewterCity_House2_Text_MonsEasierCatchIfStatused::
-    .string "A POKéMON becomes easier to \n"
-    .string "catch if it has a status problem.\p"
-    .string "Sleep, poison, burn, or paralysis…\n"
-    .string "Those are all effective.\p"
-    .string "But catching POKéMON is never\n"
-    .string "a sure thing!$"
+.string "¡Los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} son más fáciles\n"
+.string "de atrapar si están debilitados o\l"
+.string "dormidos!\p"
+.string "¡Pero no siempre funciona!$"
 
+PewterCity_House2_Text_EventScript_OldWoman::
+.string "{COLOR DARK_GRAY}Esta ciudad es tranquila, pero tiene\n"
+.string "mucho que ofrecer.\p"
+.string "El museo es fascinante, y {SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} es\n"
+.string "un líder de gimnasio muy respetado.$"

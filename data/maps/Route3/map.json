@@ -30,7 +30,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 70,
-      "y": 13,
+      "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -43,10 +43,10 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
-      "x": 40,
-      "y": 11,
+      "x": 41,
+      "y": 12,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_UP_AND_DOWN",
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -57,36 +57,36 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
-      "x": 32,
-      "y": 6,
+      "x": 37,
+      "y": 9,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "4",
+      "trainer_sight_or_berry_tree_id": "3",
       "script": "Route3_EventScript_James",
       "flag": "0"
     },
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
-      "x": 30,
-      "y": 3,
+      "x": 27,
+      "y": 4,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "5",
+      "trainer_sight_or_berry_tree_id": "2",
       "script": "Route3_EventScript_Sally",
       "flag": "0"
     },
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
-      "x": 25,
-      "y": 4,
+      "x": 51,
+      "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -99,8 +99,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
-      "x": 29,
-      "y": 10,
+      "x": 30,
+      "y": 9,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
@@ -113,10 +113,10 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
-      "x": 19,
-      "y": 9,
+      "x": 22,
+      "y": 15,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_LEFT_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -127,22 +127,22 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
-      "x": 12,
-      "y": 6,
+      "x": 15,
+      "y": 9,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "3",
+      "trainer_sight_or_berry_tree_id": "4",
       "script": "Route3_EventScript_Colton",
       "flag": "0"
     },
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
-      "x": 17,
-      "y": 4,
+      "x": 20,
+      "y": 2,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -153,13 +153,17 @@
       "flag": "0"
     }
   ],
-  "warp_events": [],
-  "coord_events": [],
+  "warp_events": [
+
+  ],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",
-      "x": 72,
-      "y": 11,
+      "x": 71,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route3_EventScript_RouteSign"
@@ -167,12 +171,20 @@
     {
       "type": "hidden_item",
       "x": 26,
-      "y": 9,
+      "y": 6,
       "elevation": 3,
       "item": "ITEM_ORAN_BERRY",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE3_ORAN_BERRY",
       "quantity": 1,
       "underfoot": false
+    },
+    {
+      "type": "sign",
+      "x": 70,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route3_EventScript_RouteSign"
     }
   ]
 }

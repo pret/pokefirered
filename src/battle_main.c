@@ -33,6 +33,7 @@
 #include "trig.h"
 #include "vs_seeker.h"
 #include "util.h"
+#include "dexnav.h"
 #include "constants/abilities.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_setup.h"
@@ -428,23 +429,23 @@ const u8 gTypeEffectiveness[336] =
 const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 {
     [TYPE_NORMAL] = _("NORMAL"),
-    [TYPE_FIGHTING] = _("FIGHT"),
-    [TYPE_FLYING] = _("FLYING"),
-    [TYPE_POISON] = _("POISON"),
-    [TYPE_GROUND] = _("GROUND"),
-    [TYPE_ROCK] = _("ROCK"),
-    [TYPE_BUG] = _("BUG"),
-    [TYPE_GHOST] = _("GHOST"),
-    [TYPE_STEEL] = _("STEEL"),
+    [TYPE_FIGHTING] = _("LUCHA"),
+    [TYPE_FLYING] = _("VOLAD."),
+    [TYPE_POISON] = _("VENENO"),
+    [TYPE_GROUND] = _("TIERRA"),
+    [TYPE_ROCK] = _("ROCA"),
+    [TYPE_BUG] = _("BICHO"),
+    [TYPE_GHOST] = _("FANT."),
+    [TYPE_STEEL] = _("ACERO"),
     [TYPE_MYSTERY] = _("???"),
-    [TYPE_FIRE] = _("FIRE"),
-    [TYPE_WATER] = _("WATER"),
-    [TYPE_GRASS] = _("GRASS"),
-    [TYPE_ELECTRIC] = _("ELECTR"),
-    [TYPE_PSYCHIC] = _("PSYCHC"),
-    [TYPE_ICE] = _("ICE"),
-    [TYPE_DRAGON] = _("DRAGON"),
-    [TYPE_DARK] = _("DARK"),
+    [TYPE_FIRE] = _("FUEGO"),
+    [TYPE_WATER] = _("AGUA"),
+    [TYPE_GRASS] = _("PLANTA"),
+    [TYPE_ELECTRIC] = _("ELÉCT."),
+    [TYPE_PSYCHIC] = _("PSÍQ."),
+    [TYPE_ICE] = _("HIELO"),
+    [TYPE_DRAGON] = _("DRAGÓN"),
+    [TYPE_DARK] = _("OSCUR."),
 };
 
 // This is a factor in how much money you get for beating a trainer.
@@ -3741,10 +3742,10 @@ static void HandleEndTurn_BattleWon(void)
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
         switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)
         {
-        case TRAINER_CLASS_LEADER:
         case TRAINER_CLASS_CHAMPION:
             PlayBGM(MUS_VICTORY_GYM_LEADER);
             break;
+        case TRAINER_CLASS_LEADER:
         case TRAINER_CLASS_BOSS:
         case TRAINER_CLASS_TEAM_ROCKET:
         case TRAINER_CLASS_COOLTRAINER:
@@ -3852,6 +3853,14 @@ static void HandleEndTurn_FinishBattle(void)
     {
         gBattleScriptingCommandsTable[gBattlescriptCurrInstr[0]]();
     }
+
+    if (gDexNavStartedBattle
+	    && gCurrentDexNavChain < 100
+	    && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
+		        ++gCurrentDexNavChain;
+	    else
+		        gCurrentDexNavChain = 0;
+	    gDexNavStartedBattle = FALSE;
 }
 
 static void FreeResetData_ReturnToOvOrDoEvolutions(void)

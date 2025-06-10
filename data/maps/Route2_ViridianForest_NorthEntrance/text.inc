@@ -1,20 +1,18 @@
 Route2_ViridianForest_NorthEntrance_Text_ManyMonsOnlyInForests::
-    .string "Many POKéMON live only in forests \n"
-    .string "and caves.\p"
-    .string "You need to be persistent and look\n"
-    .string "everywhere to get different kinds.$"
+    .string "{COLOR DARK_GRAY}Muchos {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} sólo viven\n"
+    .string "en bosques y cuevas.\p"
+    .string "¡Tienes que mirar por todas partes\n"
+    .string "para conseguirlos todos!$"
 
 Route2_ViridianForest_NorthEntrance_Text_CanCutSkinnyTrees::
-    .string "Have you noticed the skinny trees\n"
-    .string "on the roadside?\p"
-    .string "They can be cut down by a special\n"
-    .string "POKéMON move, I hear.$"
+    .string "{COLOR DARK_GRAY}¿Has visto los arbustos junto al\n"
+    .string "camino?\p"
+    .string "Puedes cortarlos con un\n"
+    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.$"
 
 Route2_ViridianForest_NorthEntrance_Text_CanCancelEvolution::
-    .string "Do you know the evolution-cancel\n"
-    .string "technique?\p"
-    .string "When a POKéMON is evolving, you\n"
-    .string "can stop the process.\p"
-    .string "It's a technique for raising\n"
-    .string "POKéMON the way they are.$"
-
+    .string "{COLOR DARK_GRAY}¿Sabías que puedes cancelar la\n"
+    .string "evolución de un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}?\p"
+    .string "Cuando un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} esté\n"
+    .string "evolucionando, puedes detenerlo y.\l"
+    .string "dejarlo como está.$"

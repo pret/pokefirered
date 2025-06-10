@@ -70,6 +70,7 @@ static void SpriteCB_EggShard(struct Sprite* sprite);
 static void EggHatchPrintMessage(u8 windowId, u8 *string, u8 x, u8 y, u8 speed);
 static void CreateRandomEggShardSprite(void);
 static void CreateEggShardSprite(u8 x, u8 y, s16 data1, s16 data2, s16 data3, u8 spriteAnimIndex);
+u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves);
 
 // IWRAM bss
 static struct EggHatchData *sEggHatchData;
@@ -851,7 +852,7 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
 
 // Counts the number of egg moves a pokemon learns and stores the moves in
 // the given array.
-static u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
+u8 GetEggMoves(struct Pokemon *pokemon, u16 *eggMoves)
 {
     u16 eggMoveIdx;
     u16 numEggMoves;

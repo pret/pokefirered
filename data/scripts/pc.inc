@@ -7,9 +7,28 @@ EventScript_PC::
 	setvar VAR_0x8004, 0
 	special AnimatePcTurnOn
 	playse SE_PC_ON
+	signmsg
 	msgbox Text_BootedUpPC
+	normalmsg
 	goto EventScript_PCMainMenu
 	end
+
+
+EventScript_PC2::
+	setmetatile 6, 3, 0x2F4, 0
+	goto_if_questlog EventScript_ReleaseEnd
+	lockall
+	goto_if_set FLAG_SYS_PC_STORAGE_DISABLED, EventScript_PCDisabled
+	setvar VAR_0x8004, HELPCONTEXT_PC
+	special Script_SetHelpContext
+	setvar VAR_0x8004, 0
+	playse SE_PC_ON
+	msgbox Text_BootedUpPC
+	goto EventScript_PCMainMenu
+	setmetatile 6, 3, 0x2FD, 0
+	end
+
+
 
 @ For when the player first arrives on One Island
 EventScript_PCDisabled::
@@ -18,7 +37,9 @@ EventScript_PCDisabled::
 	end
 
 EventScript_PCMainMenu::
+	signmsg
 	message Text_AccessWhichPC
+	normalmsg
 	waitmessage
 	special CreatePCMenu
 	waitstate
@@ -56,7 +77,9 @@ EventScript_AccessPokemonStorage::
 	end
 
 EventScript_AccessSomeonesPC::
+	signmsg
 	msgbox Text_AccessedSomeonesPC
+	normalmsg
 	return
 
 EventScript_AccessBillsPC::

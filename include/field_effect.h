@@ -13,6 +13,7 @@ bool8 FieldEffectActiveListContains(u8 id);
 void CreateTeleportFieldEffectTask(void);
 void FieldEffectActiveListRemove(u8 id);
 void StartEscapeRopeFieldEffect(void);
+void FieldEffectFreeGraphicsResources(struct Sprite * sprite);
 void FieldEffectStop(struct Sprite *sprite, u8 id);
 u8 CreateTrainerSprite(u8 trainerSpriteID, s16 x, s16 y, u8 subpriority, u8 *buffer);
 void FieldCB_FallWarpExit(void);
@@ -27,5 +28,6 @@ void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b);
 void SpriteCB_PopOutOfAsh(struct Sprite *sprite);
 void SpriteCB_AshLaunch(struct Sprite *sprite);
 void FieldEffectActiveListClear(void);
+u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 x, s16 y, u8 subpriority);
 
 #endif //GUARD_FIELD_EFFECTS_H

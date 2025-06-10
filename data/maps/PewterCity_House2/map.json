@@ -13,13 +13,13 @@
   "show_map_name": false,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
-      "x": 3,
-      "y": 3,
+      "x": 2,
+      "y": 5,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
@@ -33,7 +33,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
       "x": 5,
-      "y": 3,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_UP",
       "movement_range_x": 1,
@@ -41,6 +41,20 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PewterCity_House2_EventScript_LittleBoy",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
+      "x": 16,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PewterCity_House2_EventScript_OldWoman",
       "flag": "0"
     }
   ],
@@ -53,20 +67,17 @@
       "dest_warp_id": "6"
     },
     {
-      "x": 4,
+      "x": 17,
       "y": 7,
       "elevation": 0,
       "dest_map": "MAP_PEWTER_CITY",
-      "dest_warp_id": "6"
-    },
-    {
-      "x": 5,
-      "y": 7,
-      "elevation": 0,
-      "dest_map": "MAP_PEWTER_CITY",
-      "dest_warp_id": "6"
+      "dest_warp_id": "7"
     }
   ],
-  "coord_events": [],
-  "bg_events": []
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
 }

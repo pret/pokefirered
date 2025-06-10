@@ -1,10 +1,9 @@
 Route2_ViridianForest_SouthEntrance_Text_ForestIsMaze::
-    .string "Are you going to VIRIDIAN FOREST?\n"
-    .string "It's a natural maze in there.\l"
-    .string "Be careful you don't get lost.$"
+    .string "{COLOR DARK_GRAY}¿Entraras en el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}?\n"
+    .string "Es un laberinto natural...\l"
+    .string "¡Asegúrate de no perderte!$"
 
 Route2_ViridianForest_SouthEntrance_Text_RattataHasWickedBite::
-    .string "RATTATA may be small, but don't\n"
-    .string "underestimate its wicked bite.\p"
-    .string "Have you caught one already?$"
-
+    .string "{COLOR DARK_GRAY}¡No subestimes a {SHADOW DYNAMIC_COLOR4}RATTATA{SHADOW LIGHT_GRAY} solo por su\n"
+    .string "tamaño, es capaz de morder fuerte!\p"
+    .string "¿Ya has capturado uno?$"

@@ -27,7 +27,7 @@ PalletTown_EventScript_SetSignLadyDone::
 
 PalletTown_EventScript_SetSignLadyPos::
 	goto_if_set FLAG_PALLET_LADY_NOT_BLOCKING_SIGN, PalletTown_EventScript_MoveSignLadyToRouteEntrance
-	setobjectxyperm LOCALID_SIGN_LADY, 5, 15
+	setobjectxyperm LOCALID_SIGN_LADY, 7, 13
 	setobjectmovementtype LOCALID_SIGN_LADY, MOVEMENT_TYPE_FACE_UP
 	return
 
@@ -67,7 +67,7 @@ PalletTown_EventScript_OakRatingScene::
 	waitmovement 0
 	opendoor 16, 13
 	waitdooranim
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterLab
+	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEntraLab
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterLab
 	waitmovement 0
 	closedoor 16, 13
@@ -75,7 +75,7 @@ PalletTown_EventScript_OakRatingScene::
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 3
 	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
-	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6, 12
+	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 5, 12
 	waitstate
 	releaseall
 	end
@@ -148,7 +148,7 @@ PalletTown_Movement_OakWalkToLabFromHouse::
 	walk_right
 	walk_right
 	walk_right
-	walk_in_place_faster_up
+	face_up
 	step_end
 
 PalletTown_Movement_PlayerWalkToLabFromHouse::
@@ -182,8 +182,10 @@ PalletTown_EventScript_OakTriggerRight::
 	end
 
 PalletTown_EventScript_OakTrigger::
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, PalletTown_EventScript_Boy
+	call_if_eq VAR_RESULT, FEMALE, PalletTown_EventScript_Girl
 	famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
-	textcolor NPC_TEXT_COLOR_MALE
 	delay 30
 	playbgm MUS_OAK, 0
 	message PalletTown_Text_OakDontGoOut
@@ -203,24 +205,100 @@ PalletTown_EventScript_OakTrigger::
 	msgbox PalletTown_Text_OakGrassUnsafeNeedMon
 	closemessage
 	delay 30
-	call_if_eq VAR_TEMP_1, 0, PalletTown_EventScript_OakLeadPlayerToLabLeft
-	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_OakLeadPlayerToLabRight
-	opendoor 16, 13
+	// GRITO Y APARICIÓN DE PIKACHU//
+	playmoncry SPECIES_PIKACHU, 0
+	call_if_eq VAR_TEMP_1, 0, PalletTown_EventScript_AparicionPikachuIzq
+	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_AparicionPikachuDer
+	// PANTALLA BLANCA Y BATALLA
+	fadescreen FADE_TO_WHITE
+	special StartOldManTutorialBattle
+	waitstate
+	lock
+	// DESAPARECE PIKACHU
+	setobjectxy 4,14,2
+	playbgm MUS_OAK, 0
+	// PROFESOR DESPUÉS DE LA BATALLA
+	msgbox PalletTown_Text_Vaya
+	closemessage
+	applymovement LOCALID_PROF_OAK, PalletTown_Movement_SaltaArriba
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SaltaAbajo
+	waitmovement 0
+	msgbox PalletTown_Text_DespuesPikachu
+	closemessage
+	delay 30
+	// CAMINAN HACIA EL LABORATORIO
+	call_if_eq VAR_TEMP_1, 0, PuebloPaleta_EventScript_OakRegresoLabIzq
+	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_OakRegresoLabDer
+	opendoor 21, 12
 	waitdooranim
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterLab
+	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEntraLab
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterLab
 	waitmovement 0
-	closedoor 16, 13
+	closedoor 21, 12
 	waitdooranim
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1
 	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 1
 	setflag FLAG_HIDE_OAK_IN_PALLET_TOWN
 	setflag FLAG_DONT_TRANSITION_MUSIC
-	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6, 12
+	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 5, 12
 	waitstate
 	releaseall
 	end
+
+PalletTown_EventScript_Boy::
+	setflag FLAG_0x0B0
+	closemessage
+	return
+
+PalletTown_EventScript_Girl::
+	setflag FLAG_0x0AF
+	closemessage
+	return
+	
+Movement_ExclamacionIzq::
+	emote_exclamation_mark
+	jump_in_place_right
+	step_end
+
+Movement_ExclamacionDer::
+	emote_exclamation_mark
+	jump_in_place_left
+	step_end
+
+Movement_Aparicion_PikachuIzq::
+	set_visible
+	step_end
+
+Movement_Aparicion_PikachuDer::
+	face_right
+	set_visible
+	step_end
+
+
+PalletTown_EventScript_AparicionPikachuIzq::
+	applymovement 3,Movement_ExclamacionIzq
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_ExclamacionIzq
+	waitmovement OBJ_EVENT_ID_PLAYER
+	waitmovement 3
+	setobjectxy 4,13,1
+	waitmoncry
+	delay 30
+	applymovement 4, Movement_Aparicion_PikachuIzq
+	waitmovement 4
+	return
+
+PalletTown_EventScript_AparicionPikachuDer::
+	applymovement 3,Movement_ExclamacionDer
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_ExclamacionDer
+	waitmovement OBJ_EVENT_ID_PLAYER
+	waitmovement 3
+	applymovement 4, Movement_Aparicion_PikachuDer
+	waitmovement 4
+	setobjectxy 4,12,1
+	waitmoncry
+	delay 30
+	return
 
 PalletTown_EventScript_OakEnterLeft::
 	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterLeft
@@ -232,25 +310,24 @@ PalletTown_EventScript_OakEnterRight::
 	waitmovement 0
 	return
 
-PalletTown_EventScript_OakLeadPlayerToLabLeft::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakWalkToLabLeft
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerWalkToLabLeft
+PuebloPaleta_EventScript_OakRegresoLabIzq::
+	applymovement LOCALID_PROF_OAK, PuebloPaleta_Movement_RegresoLabOakIzq
+	applymovement OBJ_EVENT_ID_PLAYER, PuebloPaleta_EventScript_PlayerRegresoLabIzq
 	waitmovement 0
 	return
 
-PalletTown_EventScript_OakLeadPlayerToLabRight::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakWalkToLabRight
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerWalkToLabRight
+PalletTown_EventScript_OakRegresoLabDer::
+	applymovement LOCALID_PROF_OAK, PuebloPaleta_Movement_RegresoLabOakDer
+	applymovement OBJ_EVENT_ID_PLAYER, PuebloPaleta_EventScript_PlayerRegresoLabDer
 	waitmovement 0
 	return
 
 PalletTown_Movement_OakEnterLeft::
 	walk_up
 	walk_up
-	walk_right
 	walk_up
 	walk_up
-	walk_right
+	walk_up
 	walk_up
 	walk_up
 	step_end
@@ -259,16 +336,15 @@ PalletTown_Movement_OakEnterRight::
 	walk_right
 	walk_up
 	walk_up
-	walk_right
 	walk_up
 	walk_up
-	walk_right
+	walk_up
 	walk_up
 	walk_up
 	step_end
 
-	.macro walk_to_lab
-	walk_left
+PuebloPaleta_Movement_RegresoLabOakIzq::
+	walk_down
 	walk_down
 	walk_down
 	walk_down
@@ -284,44 +360,99 @@ PalletTown_Movement_OakEnterRight::
 	walk_right
 	walk_right
 	walk_right
-	.endm
-
-PalletTown_Movement_OakWalkToLabLeft::
-	walk_down
-	walk_to_lab
 	walk_right
-	walk_in_place_faster_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right	
 	step_end
 
-PalletTown_Movement_OakWalkToLabRight::
+PuebloPaleta_Movement_RegresoLabOakDer::
 	walk_down
-	walk_left
-	walk_to_lab
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
 	walk_right
-	walk_in_place_faster_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
-PalletTown_Movement_OakEnterLab::
+PalletTown_Movement_OakEntraLab::
 	walk_up
 	set_invisible
 	step_end
 
-PalletTown_Movement_PlayerWalkToLabLeft::
-	walk_down
-	walk_down
-	walk_to_lab
+PalletTown_Movement_SaltaArriba::
+	face_up
 	step_end
 
-PalletTown_Movement_PlayerWalkToLabRight::
+PalletTown_Movement_SaltaAbajo::
+	face_down
+	step_end
+
+PuebloPaleta_EventScript_PlayerRegresoLabIzq::
 	walk_down
 	walk_down
-	walk_left
-	walk_to_lab
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+PuebloPaleta_EventScript_PlayerRegresoLabDer::
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 PalletTown_Movement_PlayerEnterLab::
 	walk_right
-	walk_up
+	face_up
 	set_invisible
 	step_end
 
@@ -410,6 +541,7 @@ PalletTown_EventScript_RivalsHouseSign::
 
 PalletTown_EventScript_TownSign::
 	msgbox PalletTown_Text_TownSign, MSGBOX_SIGN
+	setflag FLAG_0x0B2
 	end
 
 PalletTown_EventScript_TrainerTips::
@@ -450,3 +582,106 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	call PalletTown_EventScript_SignLadyShowSign
 	release
 	end
+
+@ZAPATILLAS DEPORTIVAS - TRIGGER
+PalletTown_EventScript_Zapatillas_Trigger::
+	lock
+	faceplayer
+	setvar VAR_TEMP_1, 0
+	playse SE_PIN
+	applymovement 11, PalletTown_Movement_MamaTrigger
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerTrigger
+	waitmovement 0
+	msgbox PalletTown_Text_Zapatillas1, MSGBOX_NPC
+	signmsg
+	msgbox PalletTown_Text_RecibirZapatillas
+	normalmsg
+	delay_16
+	waitmessage
+	waitfanfare
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	msgbox PalletTown_Text_Zapatillas2
+	closemessage
+	msgbox PalletTown_Text_Zapatillas3
+	closemessage
+	applymovement 11, PalletTown_Movement_MamaRegreso2
+	waitmovement 0	
+	opendoor 7, 6
+	waitdooranim
+	removeobject 11
+	closedoor 7, 6
+	waitdooranim
+	setflag FLAG_SYS_B_DASH
+	setflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY
+	setflag FLAG_0x0B2 @desaparece mama
+	setvar VAR_MAP_SCENE_PEWTER_CITY, 0
+	release
+	end
+
+@ZAPATILLAS DEPORTIVAS - MAMA
+PalletTown_EventScript_Zapatillas_NPC::
+	playse SE_PIN
+	applymovement 11, Common_Movement_ExclamationMark
+	waitmovement 0
+	msgbox PalletTown_Text_Zapatillas1, MSGBOX_NPC
+	signmsg
+	msgbox PalletTown_Text_RecibirZapatillas
+	normalmsg
+	delay_16
+	waitmessage
+	waitfanfare
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	msgbox PalletTown_Text_Zapatillas2
+	closemessage
+	msgbox PalletTown_Text_Zapatillas3
+	closemessage
+	applymovement 11, PalletTown_Movement_MamaRegreso1
+	waitmovement 0	
+	opendoor 7, 6
+	waitdooranim
+	removeobject 11
+	closedoor 7, 6
+	waitdooranim
+	setflag FLAG_SYS_B_DASH
+	setflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY
+	setflag FLAG_0x0B2 @aparece mama
+	setvar VAR_MAP_SCENE_PEWTER_CITY, 0
+	release
+	end
+
+PalletTown_Movement_MamaTrigger::
+	emote_exclamation_mark
+	face_right
+	step_end
+
+PalletTown_Movement_PlayerTrigger::
+	face_left
+	step_end
+
+PalletTown_Movement_MamaRegreso1::
+	walk_right
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	face_up
+	step_end
+
+PalletTown_Movement_MamaRegreso2::
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	face_up
+	step_end

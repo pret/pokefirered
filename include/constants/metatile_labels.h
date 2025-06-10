@@ -71,8 +71,8 @@
 #define METATILE_General_WideTreeTopRight_Mowed  0x00F
 
 // gTileset_GenericBuilding1
-#define METATILE_GenericBuilding1_PlayersPCOff  0x28F
-#define METATILE_GenericBuilding1_PlayersPCOn   0x28A
+#define METATILE_GenericBuilding1_PlayersPCOff  0x286
+#define METATILE_GenericBuilding1_PlayersPCOn   0x2BC
 
 // gTileset_LavenderTown
 #define METATILE_LavenderTown_Door  0x2A2
@@ -85,15 +85,15 @@
 #define METATILE_MtEmber_CaveEntrance  0x346
 
 // gTileset_PalletTown
-#define METATILE_PalletTown_Door         0x2A3
-#define METATILE_PalletTown_OaksLabDoor  0x2AC
+#define METATILE_PalletTown_Door         0x2AB
+#define METATILE_PalletTown_OaksLabDoor  0x2D7
 
 // gTileset_PewterCity
-#define METATILE_PewterCity_Door  0x2CE
+#define METATILE_PewterCity_Door  0x2A3
 
 // gTileset_PokemonCenter
 #define METATILE_PokemonCenter_CableClubDoor                         0x2DE
-#define METATILE_PokemonCenter_CounterBarrier                        0x2F9
+#define METATILE_PokemonCenter_CounterBarrier                        0x2C6
 #define METATILE_PokemonCenter_Escalator_BottomNextRail_Normal       0x2D0
 #define METATILE_PokemonCenter_Escalator_BottomNextRail_Transition1  0x30A
 #define METATILE_PokemonCenter_Escalator_BottomNextRail_Transition2  0x308
@@ -115,7 +115,7 @@
 #define METATILE_PokemonCenter_Escalator_Top_Normal                  0x2E4
 #define METATILE_PokemonCenter_Escalator_Top_Transition1             0x317
 #define METATILE_PokemonCenter_Escalator_Top_Transition2             0x315
-#define METATILE_PokemonCenter_Floor_ShadeLeft                       0x2C5
+#define METATILE_PokemonCenter_Floor_ShadeLeft                       0x280
 #define METATILE_PokemonCenter_NetworkMachine_Ruby                   0x35D
 #define METATILE_PokemonCenter_NetworkMachine_Sapphire               0x35F
 #define METATILE_PokemonCenter_NetworkMachine_ScreenLeft_On          0x35A
@@ -282,14 +282,14 @@
 #define METATILE_VermilionGym_Beam_Node_TopLeft_On               0x2A9
 #define METATILE_VermilionGym_Beam_Node_TopRight_Edge_HalfOn     0x2BE
 #define METATILE_VermilionGym_Beam_Node_TopRight_Edge_Off        0x295
-#define METATILE_VermilionGym_Beam_Node_TopRight_Edge_On         0x2AB
+#define METATILE_VermilionGym_Beam_Node_TopRight_Edge_On         0x2AC
 #define METATILE_VermilionGym_Beam_Node_TopRight_HalfOn          0x2BF
 #define METATILE_VermilionGym_Beam_Node_TopRight_Off             0x296
 #define METATILE_VermilionGym_Beam_Node_TopRight_On              0x2AC
 #define METATILE_VermilionGym_Floor                              0x281
 
 // gTileset_ViridianCity
-#define METATILE_ViridianCity_Door  0x299
+#define METATILE_ViridianCity_Door  0x377
 
 // gTileset_ViridianForest
 #define METATILE_ViridianForest_HugeTreeTopMiddle_Grass  0x284

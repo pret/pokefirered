@@ -1378,3 +1378,32 @@ const u16 sEmptyPal[16] = {0};
 const u16 gBerryCrush_Crusher_Pal[] = INCBIN_U16("graphics/berry_crush/crusher.gbapal");
 const u32 gBerryCrush_Crusher_Gfx[] = INCBIN_U32("graphics/berry_crush/crusher.4bpp.lz");
 const u32 gBerryCrush_TextWindows_Tilemap[] = INCBIN_U32("graphics/berry_crush/text_windows.bin.lz");
+
+//Dexnav
+const u32 gInterfaceGfx_dexnavGuiTiles[] = INCBIN_U32("graphics/dexnav/dexnav_gui.4bpp.lz");
+const u32 gInterfaceGfx_dexnavGuiMap[] = INCBIN_U32("graphics/dexnav/dexnav_gui.bin.lz");
+const u32 gInterfaceGfx_dexnavGuiPal[] = INCBIN_U32("graphics/dexnav/dexnav_gui.gbapal.lz");
+const u32 gInterfaceGfx_dexnavStarsTiles[] = INCBIN_U32("graphics/dexnav/dexnav_stars.4bpp");
+const u16 gInterfaceGfx_dexnavStarsPal[] = INCBIN_U16("graphics/dexnav/dexnav_stars.gbapal");
+const u32 DexNavCursorTiles[] = INCBIN_U32("graphics/dexnav/dexnav_cursor.4bpp.lz");
+const u32 DexNavCursorPal[] = INCBIN_U32("graphics/dexnav/dexnav_cursor.gbapal.lz");
+const u32 gInterfaceGfx_emptyTiles[] = INCBIN_U32("graphics/dexnav/dexnav_empty.4bpp.lz");
+const u16 gInterfaceGfx_emptyPal[] = INCBIN_U16("graphics/dexnav/dexnav_empty.gbapal");
+const u32 gInterfaceGfx_CapturedAllPokemonTiles[] = INCBIN_U32("graphics/dexnav/captured_all_mons.4bpp.lz");
+const u16 gInterfaceGfx_CapturedAllPokemonPal[] = INCBIN_U16("graphics/dexnav/captured_all_mons.gbapal");
+const u32 gInterfaceGfx_DexNavNoDataSymbolTiles[] = INCBIN_U32("graphics/dexnav/dexnav_no_data.4bpp.lz");
+const u32 DexNavBarTiles[] = INCBIN_U32("graphics/dexnav/dexnav_bar.4bpp.lz");
+const u32 DexNavSightTiles[] = INCBIN_U32("graphics/dexnav/dexnav_sight.4bpp.lz");
+const u32 DexNavBButtonTiles[] = INCBIN_U32("graphics/dexnav/dexnav_b_button.4bpp.lz");
+
+//Main Menu
+const u16 sMainMenuTextPal[] = {RGB(0, 0, 0), RGB(30, 30, 30), RGB(17, 17, 17), RGB(7, 20, 31), RGB(7, 13, 20)};
+const u16 sMainMenuTextFemalePal[] = {RGB(31, 9, 11), RGB(21, 8, 8)};
+const u16 gPalMainMenuBG[] = INCBIN_U16("graphics/main_menu/bg.gbapal");
+const u16 gPalMainMenuNoSel[] = INCBIN_U16("graphics/main_menu/no_sel.gbapal");
+const u16 gPalMainMenuSel[] = INCBIN_U16("graphics/main_menu/sel.gbapal");
+const u32 gTilesMainMenuBG1[] = INCBIN_U32("graphics/main_menu/tiles_bg1.4bpp.lz");
+const u32 gTilesMainMenuBG2[] = INCBIN_U32("graphics/main_menu/tiles_bg2.4bpp.lz");
+const u32 gMapMainMenuBG2[] = INCBIN_U32("graphics/main_menu/bg.bin.lz");
+const u32 gMapMainMenuNewGame[] = INCBIN_U32("graphics/main_menu/new_game.bin.lz");
+const u32 gMapMainMenuContinue[] = INCBIN_U32("graphics/main_menu/continue.bin.lz");

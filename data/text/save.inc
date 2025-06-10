@@ -1,26 +1,25 @@
 gText_WouldYouLikeToSaveTheGame::
-	.string "Would you like to save the game?$"
+	.string "¿Quieres guardar la partida?$"
 
 gText_AlreadySaveFile_WouldLikeToOverwrite::
-	.string "There is already a saved file.\n"
-	.string "Is it okay to overwrite it?$"
+	.string "Ya hay una partida guardada.\n"
+	.string "¿Quieres sobrescribirla?$"
 
 gText_SavingDontTurnOffThePower::
-	.string "SAVING…\n"
-	.string "DON'T TURN OFF THE POWER.$"
+	.string "{SHADOW DYNAMIC_COLOR4}GUARDANDO...\n"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}NO APAGUES LA CONSOLA$"
 
 gText_PlayerSavedTheGame::
-	.string "{PLAYER} saved the game.$"
+	.string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} ha guardado la partida.$"
 
 gText_SaveFailed2::
 	.string "セーブに　しっぱい　しました‥$"
 
 gText_DifferentGameFile::
-	.string "WARNING!\p"
-	.string "There is a different game file that\n"
-	.string "is already saved.\p"
-	.string "If you save now, the other file's\n"
-	.string "adventure, including items and\l"
-	.string "POKéMON, will be entirely lost.\p"
-	.string "Are you sure you want to save now\n"
-	.string "and overwrite the other save file?$"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}¡ADVERTENCIA!\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Ya hay una partida guardada.\n"
+	.string "Si guardas ahora, perderás los\n"
+	.string "datos de la otra partida,\l"
+	.string "incluyendo objetos y POKéMON.\p"
+	.string "¿Quieres guardar ahora y\n"
+	.string "sobrescribir la otra partida?$"

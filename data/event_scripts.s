@@ -834,7 +834,7 @@ Text_WelcomeTimeCapsule::
 	.string "TIME CAPSULE.$"
 
 Text_PleaseComeAgain::
-	.string "Please come again!$"
+	.string "{COLOR DARK_GRAY}¡Regresa pronto!$"
 
 @ Unused
 Text_HavingDiscountSaleToday::
@@ -855,8 +855,8 @@ Text_WantWhichFloor::
 	.string "Which floor do you want?$"
 
 Text_BagItemCanBeRegistered::
-	.string "An item in the BAG can be\n"
-	.string "registered to SELECT for easy use.$"
+.string "Puedes asignar cualquier objeto de\n"
+.string "tu {SHADOW DYNAMIC_COLOR4}MOCHILA{SHADOW LIGHT_GRAY} al botón {SHADOW DYNAMIC_COLOR4}SELECT{SHADOW LIGHT_GRAY}.$"
 
 @ Unused (email from R/S Rivals computer)
 Text_TrainerSchoolEmail::
@@ -870,7 +870,7 @@ Text_TrainerSchoolEmail::
 	.string "‥‥　‥‥　‥‥$"
 
 Text_PlayerBootedUpPC::
-	.string "{PLAYER} booted up the PC.$"
+	.string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} encendió la PC.$"
 
 @ Unused
 Text_LinkWasCanceled::
@@ -878,29 +878,29 @@ Text_LinkWasCanceled::
 
 @ Unused
 Text_GiveNicknameToReceivedMon::
-	.string "Want to give a nickname to the\n"
-	.string "{STR_VAR_2} you received?$"
+	.string "¿Quieres darle un apodo al\n"
+	.string "{SHADOW DYNAMIC_COLOR4}{STR_VAR_2}{SHADOW LIGHT_GRAY} que recibiste?$"
 
 gText_PkmnFainted3::
-	.string "{STR_VAR_1} fainted…\p"
+	.string "{SHADOW DYNAMIC_COLOR4}{STR_VAR_1}{SHADOW LIGHT_GRAY} se debilitó…\p"
 	.string "$"
 
 Text_WelcomeWantToHealPkmn::
-	.string "Welcome to our POKéMON CENTER!\p"
-	.string "Would you like me to heal your\n"
-	.string "POKéMON back to perfect health?$"
+	.string "{COLOR DARK_GRAY}¡Bienvenida al {SHADOW DYNAMIC_COLOR4}CENTRO POKéMON{SHADOW LIGHT_GRAY}!\p"
+	.string "¿Quieres que nos ocupemos de los\n"
+	.string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} de tu equipo?$"
 
 Text_TakeYourPkmnForFewSeconds::
-	.string "Okay, I'll take your POKéMON for a\n"
-	.string "few seconds.$"
+	.string "{COLOR DARK_GRAY}Muy bien, tomaré a tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} por\n"
+	.string "unos segundos.$"
 
 Text_WeHopeToSeeYouAgain::
-	.string "We hope to see you again!$"
+	.string "{COLOR DARK_GRAY}¡Vuelve siempre que quieras!$"
 
 Text_RestoredPkmnToFullHealth::
-	.string "Thank you for waiting.\n"
-	.string "We've restored your POKéMON to\l"
-	.string "full health.$"
+	.string "{COLOR DARK_GRAY}Gracias por esperar.\n"
+	.string "Restauramos la salud de tus\l"
+	.string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} por completo.$"
 
 	.include "data/text/surf.inc"
 
@@ -915,9 +915,9 @@ Text_BigHoleInTheWall::
 	.string "おおきな　あなが　あいている！$"
 
 Text_WirelessClubUndergoingAdjustments::
-	.string "I'm terribly sorry.\n"
-	.string "The POKéMON WIRELESS CLUB is\l"
-	.string "undergoing adjustments now.$"
+	.string "{COLOR DARK_GRAY}Lo siento, pero el {COLOR RED}{SHADOW LIGHT_RED}CLUB\n"
+	.string "INALÁMBRICO POKéMON {COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}no está\l"
+	.string "disponible todavía.$"
 
 Text_AppearsToBeUndergoingAdjustments::
 	.string "It appears to be undergoing\n"
@@ -928,8 +928,8 @@ Text_HandedOverItem::
 	.string "{STR_VAR_1}.$"
 
 Text_GiveNicknameToThisMon::
-	.string "Do you want to give a nickname to\n"
-	.string "this {STR_VAR_1}?$"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}¿Quieres darle un apodo a tu\n"
+	.string "{SHADOW DYNAMIC_COLOR4}{STR_VAR_1}{SHADOW LIGHT_GRAY}?$"
 
 	.include "data/text/itemfinder.inc"
 	.include "data/text/route23.inc"
@@ -1094,7 +1094,9 @@ EventScript_OutOfCenterPartyHeal::
 
 EventScript_WallTownMap::
 	lockall
+	signmsg
 	msgbox Text_ATownMap
+	normalmsg
 	goto_if_questlog EventScript_ReleaseEnd
 	fadescreen FADE_TO_BLACK
 	special ShowTownMap
@@ -1360,3 +1362,6 @@ Text_TestMsg::
 	.include "data/text/save.inc"
 	.include "data/text/new_game_intro.inc"
 	.include "data/text/pokedude.inc"
+	.include "data/scripts/dexnav.inc"
+
+

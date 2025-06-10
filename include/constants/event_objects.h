@@ -153,8 +153,9 @@
 #define OBJ_EVENT_GFX_DEOXYS_A 149
 #define OBJ_EVENT_GFX_DEOXYS_N 150
 #define OBJ_EVENT_GFX_SS_ANNE 151
-
-#define NUM_OBJ_EVENT_GFX     152
+#define OBJ_EVENT_GFX_SILVIO 156
+#define OBJ_EVENT_GFX_ZUBAT    158
+#define NUM_OBJ_EVENT_GFX      160
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
@@ -181,6 +182,7 @@
 #define SHADOW_SIZE_M   1
 #define SHADOW_SIZE_L   2
 #define SHADOW_SIZE_XL  3
+#define SHADOW_SIZE_NONE 3
 
 #define F_INANIMATE                        (1 << 6)
 #define F_DISABLE_REFLECTION_PALETTE_LOAD  (1 << 7)

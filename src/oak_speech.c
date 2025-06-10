@@ -17,7 +17,7 @@
 #include "data.h"
 #include "constants/songs.h"
 
-#define INTRO_SPECIES SPECIES_NIDORAN_F
+#define INTRO_SPECIES SPECIES_PIKACHU
 
 enum
 {
@@ -298,8 +298,8 @@ static const struct WindowTemplate sIntro_WindowTemplates[NUM_INTRO_WINDOWS + 1]
     [WIN_INTRO_BOYGIRL] =
     {
         .bg = 0,
-        .tilemapLeft = 18,
-        .tilemapTop = 9,
+        .tilemapLeft = 10,
+        .tilemapTop = 5,
         .width = 9,
         .height = 4,
         .paletteNum = 15,
@@ -321,7 +321,7 @@ static const struct WindowTemplate sIntro_WindowTemplates[NUM_INTRO_WINDOWS + 1]
         .tilemapLeft = 2,
         .tilemapTop = 2,
         .width = 12,
-        .height = 10,
+        .height = 6,
         .paletteNum = 15,
         .baseBlock = 1
     },
@@ -589,59 +589,20 @@ static const u8 *const sMaleNameChoices[] =
 {
 #if defined(FIRERED)
     gNameChoice_Red,
-    gNameChoice_Fire,
-    gNameChoice_Ash,
-    gNameChoice_Kene,
-    gNameChoice_Geki,
 #elif defined(LEAFGREEN)
-    gNameChoice_Green,
-    gNameChoice_Leaf,
-    gNameChoice_Gary,
-    gNameChoice_Kaz,
-    gNameChoice_Toru,
+    gNameChoice_Red,
 #endif
-    gNameChoice_Jak,
-    gNameChoice_Janne,
-    gNameChoice_Jonn,
-    gNameChoice_Kamon,
-    gNameChoice_Karl,
-    gNameChoice_Taylor,
-    gNameChoice_Oscar,
-    gNameChoice_Hiro,
-    gNameChoice_Max,
-    gNameChoice_Jon,
-    gNameChoice_Ralph,
-    gNameChoice_Kay,
-    gNameChoice_Tosh,
-    gNameChoice_Roak
 };
 
 static const u8 *const sFemaleNameChoices[] =
 {
 #if defined(FIRERED)
-    gNameChoice_Red,
-    gNameChoice_Fire,
+    gNameChoice_Leaf,
 #elif defined(LEAFGREEN)
-    gNameChoice_Green,
     gNameChoice_Leaf,
 #endif
     gNameChoice_Omi,
     gNameChoice_Jodi,
-    gNameChoice_Amanda,
-    gNameChoice_Hillary,
-    gNameChoice_Makey,
-    gNameChoice_Michi,
-    gNameChoice_Paula,
-    gNameChoice_June,
-    gNameChoice_Cassie,
-    gNameChoice_Rey,
-    gNameChoice_Seda,
-    gNameChoice_Kiko,
-    gNameChoice_Mina,
-    gNameChoice_Norie,
-    gNameChoice_Sai,
-    gNameChoice_Momo,
-    gNameChoice_Suzi
 };
 
 static const u8 *const sRivalNameChoices[] =
@@ -649,13 +610,9 @@ static const u8 *const sRivalNameChoices[] =
 #if defined(FIRERED)
     gNameChoice_Green,
     gNameChoice_Gary,
-    gNameChoice_Kaz,
-    gNameChoice_Toru
 #elif defined(LEAFGREEN)
-    gNameChoice_Red,
-    gNameChoice_Ash,
-    gNameChoice_Kene,
-    gNameChoice_Geki
+    gNameChoice_Green,
+    gNameChoice_Gary,   
 #endif
 };
 
@@ -770,23 +727,15 @@ static void Task_NewGameScene(u8 taskId)
         CopyBgTilemapBufferToVram(1);
         break;
     case 7:
-        CreateTopBarWindowLoadPalette(0, 30, 0, 13, 0x1C4);
-        FillBgTilemapBufferRect_Palette0(1, 0xD00F, 0,  0, 30, 2);
-        FillBgTilemapBufferRect_Palette0(1, 0xD002, 0,  2, 30, 1);
-        FillBgTilemapBufferRect_Palette0(1, 0xD00E, 0, 19, 30, 1);
-        ControlsGuide_LoadPage1();
         gPaletteFade.bufferTransferDisabled = FALSE;
-        gTasks[taskId].tTextCursorSpriteId = CreateTextCursorSprite(0, 230, 149, 0, 0);
         BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
         break;
     case 10:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
         ShowBg(0);
         ShowBg(1);
         SetVBlankCallback(VBlankCB_NewGameScene);
-        PlayBGM(MUS_NEW_GAME_INSTRUCT);
-        gTasks[taskId].func = Task_ControlsGuide_HandleInput;
+        gTasks[taskId].func = Task_OakSpeech_Init;
         gMain.state = 0;
         return;
     }
@@ -1156,7 +1105,6 @@ static void Task_OakSpeech_ThisWorld(u8 taskId)
 {
     if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
     {
-        OakSpeechPrintMessage(gOakSpeech_Text_ThisWorld, sOakSpeechResources->textSpeed);
         gTasks[taskId].tTimer = 30;
         gTasks[taskId].func = Task_OakSpeech_ReleaseNidoranFFromPokeBall;
     }
@@ -1312,10 +1260,10 @@ static void Task_OakSpeech_HandleGenderInput(u8 taskId)
     switch (input)
     {
     case 0: // BOY
-        gSaveBlock2Ptr->playerGender = MALE;
+        gSaveBlock2Ptr->playerGender = FEMALE;
         break;
     case 1: // GIRL
-        gSaveBlock2Ptr->playerGender = FEMALE;
+        gSaveBlock2Ptr->playerGender = MALE;
         break;
     case MENU_B_PRESSED:
     case MENU_NOTHING_CHOSEN:
@@ -1404,7 +1352,6 @@ static void Task_OakSpeech_RepeatNameQuestion(u8 taskId)
     if (sOakSpeechResources->hasPlayerBeenNamed == FALSE)
         OakSpeechPrintMessage(gOakSpeech_Text_YourNameWhatIsIt, 0);
     else
-        OakSpeechPrintMessage(gOakSpeech_Text_YourRivalsNameWhatWasIt, 0);
     gTasks[taskId].func = Task_OakSpeech_HandleRivalNameInput;
 }
 
@@ -1597,7 +1544,7 @@ static void Task_OakSpeech_LetsGo(u8 taskId)
     {
         StringExpandPlaceholders(gStringVar4, gOakSpeech_Text_LetsGo);
         OakSpeechPrintMessage(gStringVar4, sOakSpeechResources->textSpeed);
-        gTasks[taskId].tTimer = 30;
+        gTasks[taskId].tTimer = 60;
         gTasks[taskId].func = Task_OakSpeech_FadeOutBGM;
     }
 }
@@ -1887,7 +1834,7 @@ static void CreateNidoranFSprite(u8 taskId)
     DecompressPicFromTable(&gMonFrontPicTable[INTRO_SPECIES], MonSpritesGfxManager_GetSpritePtr(0), INTRO_SPECIES);
     LoadCompressedSpritePaletteUsingHeap(&gMonPaletteTable[INTRO_SPECIES]);
     SetMultiuseSpriteTemplateToPokemon(INTRO_SPECIES, 0);
-    spriteId = CreateSprite(&gMultiuseSpriteTemplate, 96, 96, 1);
+    spriteId = CreateSprite(&gMultiuseSpriteTemplate, 96, 90, 1);
     gSprites[spriteId].callback = SpriteCallbackDummy;
     gSprites[spriteId].oam.priority = 1;
     gSprites[spriteId].invisible = TRUE;
@@ -2131,7 +2078,7 @@ static void PrintNameChoiceOptions(u8 taskId, u8 hasPlayerBeenNamed)
         textPtrs = sRivalNameChoices;
     for (i = 0; i < ARRAY_COUNT(sRivalNameChoices); i++)
         AddTextPrinterParameterized(tMenuWindowId, FONT_NORMAL, textPtrs[i], 8, 16 * (i + 1) + 1, 0, NULL);
-    Menu_InitCursor(tMenuWindowId, FONT_NORMAL, 0, 1, 16, 5, 0);
+    Menu_InitCursor(tMenuWindowId, FONT_NORMAL, 0, 1, 16, 3, 0);
     CopyWindowToVram(tMenuWindowId, COPYWIN_FULL);
 }
 

@@ -617,6 +617,19 @@ static const u16 sTutorLearnsets[] =
                        | TUTOR(MOVE_THUNDER_WAVE)
                        | TUTOR(MOVE_SUBSTITUTE),
 
+    [SPECIES_MAGNEZONE] = TUTOR(MOVE_DOUBLE_EDGE)
+                       | TUTOR(MOVE_MIMIC)
+                       | TUTOR(MOVE_THUNDER_WAVE)
+                       | TUTOR(MOVE_SUBSTITUTE) ,
+
+    [SPECIES_BONSLY] =   TUTOR(MOVE_BODY_SLAM)
+                       | TUTOR(MOVE_MIMIC),
+
+    [SPECIES_MIMEJR] = TUTOR(MOVE_DOUBLE_EDGE)
+                       | TUTOR(MOVE_MIMIC)
+                       | TUTOR(MOVE_THUNDER_WAVE)
+                       | TUTOR(MOVE_SUBSTITUTE) ,
+                       
     [SPECIES_FARFETCHD] = TUTOR(MOVE_SWORDS_DANCE)
                         | TUTOR(MOVE_BODY_SLAM)
                         | TUTOR(MOVE_DOUBLE_EDGE)

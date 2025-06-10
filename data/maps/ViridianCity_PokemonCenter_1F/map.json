@@ -13,13 +13,13 @@
   "show_map_name": false,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
-      "x": 7,
-      "y": 2,
+      "x": 5,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -32,10 +32,10 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 12,
-      "y": 5,
+      "x": 7,
+      "y": 7,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -46,10 +46,10 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BOY",
-      "x": 4,
-      "y": 7,
+      "x": 8,
+      "y": 5,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -61,9 +61,9 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
       "x": 2,
-      "y": 3,
+      "y": 5,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -74,14 +74,14 @@
   ],
   "warp_events": [
     {
-      "x": 6,
-      "y": 8,
+      "x": 10,
+      "y": 9,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_CITY",
       "dest_warp_id": "0"
     },
     {
-      "x": 7,
+      "x": 5,
       "y": 8,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_CITY",
@@ -89,7 +89,7 @@
     },
     {
       "x": 8,
-      "y": 8,
+      "y": 9,
       "elevation": 3,
       "dest_map": "MAP_VIRIDIAN_CITY",
       "dest_warp_id": "0"
@@ -102,6 +102,10 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
-  "bg_events": []
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
 }

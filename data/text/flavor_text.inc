@@ -1,15 +1,15 @@
 @ Flavor text for interacting with various background objects
 
 Text_Bookshelf::
-	.string "It's crammed full of POKéMON\n"
-	.string "books.$"
+	.string "Está repleto de libros\n"
+	.string "sobre {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.$"
 
 Text_NothingButPokemonBooks::
 	.string "ほんだなに　ならんでいるのは\n"
 	.string "ポケモンの　ほん　ばかりだ$"
 
 Text_ATownMap::
-	.string "A TOWN MAP.$"
+	.string "MAPA.$"
 
 Text_PokeMartShelf::
 	.string "Wow!\n"
@@ -61,16 +61,16 @@ Text_Painting::
 	.string "It looks like it's feeling good.$"
 
 Text_PowerPlantMachine::
-	.string "What could this machine be?\n"
-	.string "Better not mess around with it!$"
+	.string "¿Qué clase de máquina será?\n"
+	.string "¡Mejor no tocarla!$"
 
 Text_Telephone::
 	.string "It's a telephone.\n"
 	.string "Better not use it.$"
 
 Text_Computer::
-	.string "It's all complicated words and\n"
-	.string "numbers that make no sense…$"
+	.string "Son palabras y números complicados\n"
+	.string "que no tienen sentido...$"
 
 Text_AdvertisingPoster::
 	.string "It's an advertising poster about\n"
@@ -98,8 +98,8 @@ Text_BeautifulSkyWindow::
 	.string "beautiful.$"
 
 Text_BlinkingLights::
-	.string "Lights in different colors are\n"
-	.string "flashing on and off.$"
+	.string "Las luces del mismo color\n"
+	.string "parpadean intermitentemente.$"
 
 Text_NeatlyLinedUpTools::
 	.string "All sorts of tools are lined up\n"

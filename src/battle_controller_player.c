@@ -170,6 +170,8 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 
 static const u8 sTargetIdentities[] = { B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT, B_POSITION_OPPONENT_RIGHT, B_POSITION_OPPONENT_LEFT };
 
+static bool8 sLastUsedBall;
+
 // unknown unused data
 static const u8 sUnused[] = { 0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58 };
 
@@ -306,6 +308,25 @@ static void HandleInputChooseAction(void)
     else if (JOY_NEW(START_BUTTON))
     {
         SwapHpBarsWithHpText();
+    }
+    else if (JOY_NEW(L_BUTTON))
+    {
+        if (IsPlayerPartyAndPokemonStorageFull() || !CheckBagHasItem(ITEM_POKE_BALL, 1))
+			    PlaySE(SE_FAILURE);
+		    else
+		    {
+            PlaySE(SE_SELECT);
+            sLastUsedBall = TRUE;
+            gSpecialVar_ItemId = ITEM_POKE_BALL;
+            RemoveBagItem(gSpecialVar_ItemId, 1);
+            BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
+            PlayerBufferExecCompleted();
+        }
+    }
+    else if (JOY_NEW(R_BUTTON))
+    {
+        BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
+        PlayerBufferExecCompleted();
     }
 }
 
@@ -2451,11 +2472,19 @@ static void PlayerHandleChooseItem(void)
 {
     s32 i;
 
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-    gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
-    gBattlerInMenuId = gActiveBattler;
-    for (i = 0; i < 3; ++i)
-        gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][1 + i];
+    if (sLastUsedBall == TRUE)
+    {
+        sLastUsedBall = FALSE;
+        gBattlerControllerFuncs[gActiveBattler] = CompleteWhenChoseItem;
+    }
+    else
+    {
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+        gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
+        gBattlerInMenuId = gActiveBattler;
+        for (i = 0; i < 3; ++i)
+            gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][1 + i];
+    }
 }
 
 static void PlayerHandleChoosePokemon(void)

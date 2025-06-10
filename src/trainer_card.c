@@ -1139,8 +1139,13 @@ static void PrintIdOnCard(void)
 
     txtPtr = StringCopy(buffer, gText_TrainerCardIDNo);
     ConvertIntToDecimalStringN(txtPtr, sTrainerCardDataPtr->trainerCard.rse.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
-    AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], sTrainerCardIdXPositions[sTrainerCardDataPtr->cardType], sTrainerCardIdYPositions[sTrainerCardDataPtr->cardType], sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
+
+    AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 
+        sTrainerCardIdXPositions[sTrainerCardDataPtr->cardType] + 1,  // desplazamiento en X
+        sTrainerCardIdYPositions[sTrainerCardDataPtr->cardType], 
+        sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
 }
+
 
 static void PrintMoneyOnCard(void)
 {
@@ -1267,8 +1272,12 @@ static void PrintNameOnCardBack(void)
 
     if (sTrainerCardDataPtr->cardType == CARD_TYPE_FRLG)
     {
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], sTrainerCardBackNameXPositions[sTrainerCardDataPtr->cardType],
-            sTrainerCardBackNameYPositions[sTrainerCardDataPtr->cardType], sTrainerCardTextColors, TEXT_SKIP_DRAW, sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_NAME]);
+        // Desplazar 5 a la derecha, 1 hacia arriba
+        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 
+            sTrainerCardBackNameXPositions[sTrainerCardDataPtr->cardType] + 5,
+            sTrainerCardBackNameYPositions[sTrainerCardDataPtr->cardType] - 1,
+            sTrainerCardTextColors, TEXT_SKIP_DRAW, 
+            sTrainerCardDataPtr->strings[TRAINER_CARD_STRING_NAME]);
     }
     else
     {    

@@ -19,7 +19,7 @@ EventScript_PkmnCenterNurse_HealPkmn::
 	end
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterLeft
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
 	waitfieldeffect FLDEFF_POKECENTER_HEAL

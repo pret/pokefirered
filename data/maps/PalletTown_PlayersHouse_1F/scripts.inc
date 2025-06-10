@@ -17,11 +17,15 @@ PalletTown_PlayersHouse_1F_EventScript_Mom::
 	end
 
 PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale::
+	namebox Name_Mama
 	msgbox PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou
+	hidenamebox
 	return
 
 PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale::
+	namebox Name_Mama
 	msgbox PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou
+	hidenamebox
 	return
 
 PalletTown_PlayersHouse_1F_EventScript_MomHeal::
@@ -44,13 +48,13 @@ PalletTown_PlayersHouse_1F_EventScript_TVScreen::
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenMale
 	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale
-	releaseall
+	releaseall 
 	end
 
 PalletTown_PlayersHouse_1F_EventScript_TVScreenMale::
-	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad
+	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad, MSGBOX_SIGN
 	return
 
 PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale::
-	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad
+	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad, MSGBOX_SIGN
 	return

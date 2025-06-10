@@ -1,12 +1,12 @@
 PalletTown_RivalsHouse_Text_HiBrothersAtLab::
-    .string "DAISY: Hi, {PLAYER}!\p"
-    .string "My brother, {RIVAL}, is out at\n"
-    .string "Grandpa's LAB.$"
+    .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}DAISY:{SHADOW LIGHT_GRAY} ¡Hola, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
+    .string "¡{SHADOW DYNAMIC_COLOR4}{RIVAL}{SHADOW LIGHT_GRAY} está en el laboratorio\n"
+    .string "del abuelo!$"
 
 PalletTown_RivalsHouse_Text_HeardYouBattledRival::
-    .string "DAISY: {PLAYER}, I heard you had\n"
-    .string "a battle against {RIVAL}.\p"
-    .string "I wish I'd seen that!$"
+    .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}DAISY:{SHADOW LIGHT_GRAY}, he oído que has\n"
+    .string "luchado contra {SHADOW DYNAMIC_COLOR4}{RIVAL}{SHADOW LIGHT_GRAY}.\p"
+    .string "¡Me hubiera encantado estar ahí!$"
 
 PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp::
     .string "Grandpa asked you to run an\n"
@@ -15,7 +15,7 @@ PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp::
     .string "Here, this will help you.$"
 
 PalletTown_RivalsHouse_Text_ReceivedTownMapFromDaisy::
-    .string "{PLAYER} received a TOWN MAP\n"
+    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} recibido a TOWN MAP\n"
     .string "from DAISY.$"
 
 PalletTown_RivalsHouse_Text_DontHaveSpaceForThis::
@@ -34,8 +34,8 @@ PalletTown_RivalsHouse_Text_PleaseGiveMonsRest::
     .string "them a rest.$"
 
 PalletTown_RivalsHouse_Text_ItsBigMapOfKanto::
-    .string "It's a big map of the KANTO region.\n"
-    .string "Now this would be useful!$"
+    .string "¡Es un gran mapa de {SHADOW DYNAMIC_COLOR4}KANTO{SHADOW LIGHT_GRAY}!\n"
+    .string "¡Que útil!$"
 
 PalletTown_RivalsHouse_Text_ShelvesCrammedFullOfBooks::
     .string "The shelves are crammed full of\n"

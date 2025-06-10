@@ -190,16 +190,16 @@
 #define FLAG_HIDE_SAFFRON_CITY_POKECENTER_SABRINA_JOURNALS 0x0AE
 
 // Unused?
-#define FLAG_0x0AF               0x0AF
-#define FLAG_0x0B0               0x0B0
-#define FLAG_0x0B1               0x0B1
-#define FLAG_0x0B2               0x0B2
-#define FLAG_0x0B3               0x0B3
-#define FLAG_0x0B4               0x0B4
-#define FLAG_0x0B5               0x0B5
-#define FLAG_0x0B6               0x0B6
-#define FLAG_0x0B7               0x0B7
-#define FLAG_0x0B8               0x0B8
+#define FLAG_0x0AF               0x0AF  //BOY TIENDA CIUDAD VERDE
+#define FLAG_0x0B0               0x0B0  //GIRL TIENDA CIUDAD VERDE
+#define FLAG_0x0B1               0x0B1  //BOY LAB POKEDEX
+#define FLAG_0x0B2               0x0B2  //CASA MAMA OFF
+#define FLAG_0x0B3               0x0B3  //REGALO POKEMONES BETA
+#define FLAG_0x0B4               0x0B4  //EVENTO BROCK MUSEO
+#define FLAG_0x0B5               0x0B5  //FOSIL KABUTO
+#define FLAG_0x0B6               0x0B6  //FOSIL OMANYTE
+#define FLAG_0x0B7               0x0B7  //EVENTO BROCK DESPUES MUSEO
+#define FLAG_0x0B8               0x0B8  //APARECE OW SILVIO
 #define FLAG_0x0B9               0x0B9
 #define FLAG_0x0BA               0x0BA
 #define FLAG_0x0BB               0x0BB
@@ -530,7 +530,7 @@
 #define FLAG_HIDE_SILPH_CO_4F_TM41                              0x1FE
 
 // Unused?
-#define FLAG_0x1FF               0x1FF
+#define FLAG_SHINY_CREATION      0x1FF
 #define FLAG_0x200               0x200
 #define FLAG_0x201               0x201
 #define FLAG_0x202               0x202
@@ -794,8 +794,8 @@
 #define FLAG_OAKS_RATING_IS_VIA_PC                       0x2FF
 
 // Unused?
-#define FLAG_0x300               0x300
-#define FLAG_0x301               0x301
+#define FLAG_0x300               0x300 //ball bosque verde
+#define FLAG_0x301               0x301 // repelente bosque verde
 #define FLAG_0x302               0x302
 #define FLAG_0x303               0x303
 #define FLAG_0x304               0x304
@@ -1220,6 +1220,9 @@
 #define FLAG_HIDDEN_ITEM_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE_RAWST_BERRY  (FLAG_HIDDEN_ITEMS_START + 188)
 #define FLAG_HIDDEN_ITEM_VIRIDIAN_CITY_GYM_MACHO_BRACE                     (FLAG_HIDDEN_ITEMS_START + 189)
 #define FLAG_HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE                       (FLAG_HIDDEN_ITEMS_START + 190)
+#define FLAG_HIDDEN_ITEM_CUIDAD_VERDE1                                     (FLAG_HIDDEN_ITEMS_START + 191)
+#define FLAG_HIDDEN_ITEM_CUIDAD_VERDE2                                     (FLAG_HIDDEN_ITEMS_START + 192)
+#define FLAG_HIDDEN_ITEM_CUIDAD_VERDE3                                     (FLAG_HIDDEN_ITEMS_START + 193)
 
 // Unused hidden item flags
 #define FLAG_UNUSED_0x4A7               0x4A7 // Unused Flag
@@ -1247,13 +1250,13 @@
 #define FLAG_DEFEATED_LANCE           0x4BB
 #define FLAG_DEFEATED_CHAMP           0x4BC
 
-// Unused?
-#define FLAG_0x4BD               0x4BD
-#define FLAG_0x4BE               0x4BE
-#define FLAG_0x4BF               0x4BF
-#define FLAG_0x4C0               0x4C0
-#define FLAG_0x4C1               0x4C1
-#define FLAG_0x4C2               0x4C2
+    // Unused?
+#define FLAG_BULBASAUR           0x4BD
+#define FLAG_SQUIRTLE            0x4BE
+#define FLAG_CHARMANDER          0x4BF
+#define FLAG_SILVIO_MONTE_LUNA 0x4C0
+#define FLAG_SILVIO_TIENDA     0x4C1
+#define FLAG_HIDE_SILVIO       0x4C2
 #define FLAG_0x4C3               0x4C3
 #define FLAG_0x4C4               0x4C4
 #define FLAG_0x4C5               0x4C5
@@ -1334,7 +1337,7 @@
 #define FLAG_SYS_SPECIAL_WILD_BATTLE                                (SYS_FLAGS + 0x7)
 
 #define FLAG_SYS_QL_DEPARTED                                        (SYS_FLAGS + 0x8)
-#define FLAG_0x809                                                  (SYS_FLAGS + 0x9)
+#define FLAG_SYS_DEXNAV_GET                                         (SYS_FLAGS + 0x9)
 #define FLAG_0x80A                                                  (SYS_FLAGS + 0xA)
 #define FLAG_0x80B                                                  (SYS_FLAGS + 0xB)
 #define FLAG_0x80C                                                  (SYS_FLAGS + 0xC)

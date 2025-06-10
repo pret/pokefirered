@@ -1,5 +1,10 @@
 Route2_ViridianForest_SouthEntrance_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, ViridianForest_DexNavOn2
 	.byte 0
+
+ViridianForest_DexNavOn2::
+	setflag FLAG_SYS_DEXNAV_GET
+	end
 
 Route2_ViridianForest_SouthEntrance_EventScript_Woman1::
 	msgbox Route2_ViridianForest_SouthEntrance_Text_ForestIsMaze, MSGBOX_NPC

@@ -32,6 +32,7 @@
 *.s.old
 *.s.old2
 *.sa*
+*.sna
 *.swo
 *.swp
 *.til

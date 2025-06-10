@@ -195,7 +195,6 @@ CableClub_EventScript_Tutorial::
 
 Movement_PlayerApproachCounter:
 	walk_up
-	walk_up
 	step_end
 
 CableClub_EventScript_WelcomeToCableClub::
@@ -514,7 +513,8 @@ CableClub_EventScript_NotReadyYet::
 	end
 
 Movement_AttendantFaceDown::
-	face_down
+	walk_left
+	walk_down
 	step_end
 
 @ Unused
@@ -523,10 +523,13 @@ Movement_AttendantFaceRight::
 	step_end
 
 Movement_AttendantFaceLeft::
+	walk_up
+	walk_right
 	face_left
 	step_end
 
 Movement_PlayerExitLinkRoom::
+	walk_down
 	walk_down
 	walk_down
 	step_end
@@ -538,7 +541,7 @@ Movement_PlayerApproachLinkRoomRight::
 	step_end
 
 Movement_PlayerApproachLinkRoomLeft::
-	walk_left
+	@walk_left
 	walk_up
 	walk_up
 	step_end
@@ -557,7 +560,7 @@ Movement_PlayerFaceAttendantRight::
 	step_end
 
 Movement_PlayerEnterMinigameRoom::
-	walk_left
+	@walk_left
 	walk_up
 	walk_up
 	walk_up
@@ -839,6 +842,9 @@ CableClub_EventScript_DontAskAboutLinking::
 	return
 
 CableClub_EventScript_DirectCornerAttendant::
+	setvar 0x8005, SPECIES_MAGNEZONE
+	special CheckSpecies
+	goto_if_eq VAR_RESULT, TRUE, Inalambrico4GEN
 	goto_if_questlog EventScript_ReleaseEnd
 	special QuestLog_CutRecording
 	lock
@@ -853,6 +859,12 @@ CableClub_EventScript_DirectCornerAttendant::
 	delay 15
 	goto CableClub_EventScript_DirectCornerSelectService
 	end
+
+Inalambrico4GEN:
+	msgbox TextInalambrico4GEN, MSGBOX_SIGN
+	end
+
+
 
 CableClub_EventScript_DirectCornerSelectService::
 	goto_if_unset FLAG_GOT_POWDER_JAR, CableClub_EventScript_DirectCornerNoBerry
@@ -1102,11 +1114,11 @@ CableClub_EventScript_CloseUnionRoomBarrier::
 	return
 
 CableClub_EventScript_OpenDirectCornerBarrier::
-	setmetatile 9, 3, METATILE_PokemonCenter_Floor_ShadeLeft, 0
+	setmetatile 7, 2, METATILE_PokemonCenter_Floor_ShadeLeft, 0
 	return
 
 CableClub_EventScript_CloseDirectCornerBarrier::
-	setmetatile 9, 3, METATILE_PokemonCenter_CounterBarrier, 1
+	setmetatile 7, 2, METATILE_PokemonCenter_CounterBarrier, 1
 	return
 
 CableClub_EventScript_OpenGameCornerBarrier::
@@ -1289,22 +1301,22 @@ TwoIsland_JoyfulGameCorner_EventScript_ShowDodrioBerryPickingRecords::
 	end
 
 CableClub_Text_WelcomeWhichCableClubService::
-	.string "Welcome to the POKéMON CABLE\n"
-	.string "CLUB.\p"
-	.string "Which of our services do you wish\n"
-	.string "to use?$"
+	.string "{COLOR DARK_GRAY}Éste es el {SHADOW DYNAMIC_COLOR4}CLUB{SHADOW LIGHT_GRAY} del {SHADOW DYNAMIC_COLOR4}CABLE\n"
+	.string "POKéMON{SHADOW LIGHT_GRAY}.\p"
+	.string "¿Qué podemos hacer por ti?$"
+
 
 CableClub_Text_WhichService::
 	.string "Which of our services do you wish\n"
 	.string "to use?$"
 
 CableClub_Text_TradeMonsUsingLinkCable::
-	.string "Trade POKéMON with another player\n"
-	.string "using a GBA Game Link cable.$"
+	.string "Realiza {SHADOW DYNAMIC_COLOR4}INTERCAMBIOS POKéMON{SHADOW LIGHT_GRAY}\n"
+	.string "con alguien más.$"
 
 CableClub_Text_BattleUsingLinkCable::
-	.string "You may battle another TRAINER\n"
-	.string "using a GBA Game Link cable.$"
+	.string "Realiza {SHADOW DYNAMIC_COLOR4}BATALLAS POKéMON{SHADOW LIGHT_GRAY} con\n"
+	.string "alguien más.$"
 
 @ Unused, translated in Emerald
 CableClub_Text_CloseThisMenu::
@@ -1323,8 +1335,8 @@ CableClub_Text_CantTradeEnigmaBerry::
 	.string "BERRY can't be traded.$"
 
 CableClub_Text_PleaseWaitBCancel::
-	.string "Please wait.\n"
-	.string "… … B Button: Cancel$"
+	.string "{COLOR DARK_GRAY}Por favor espera...\n"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}BOTON B: CANCELAR$"
 
 CableClub_Text_WhenAllPlayersReadyAConfirmBCancel::
 	.string "When all players are ready…\n"
@@ -1349,7 +1361,7 @@ CableClub_Text_PleaseEnter::
 	.string "Please enter.$"
 
 CableClub_Text_DirectYouToYourRoom::
-	.string "I'll direct you to your room now.$"
+	.string "{COLOR DARK_GRAY}Te voy a llevar a tu sala.$"
 
 CableClub_Text_SomeoneIsNotReadyToLink::
 	.string "Someone is not ready to link.\p"
@@ -1365,7 +1377,7 @@ CableClub_Text_PlayersMadeDifferentSelections::
 	.string "made different selections.$"
 
 CableClub_Text_PleaseVisitAgain::
-	.string "Please do visit again.$"
+	.string "{COLOR DARK_GRAY}Vuelve cuando quieras.$"
 
 CableClub_Text_IncorrectNumberOfParticipants::
 	.string "The number of participants is\n"
@@ -1392,30 +1404,28 @@ Text_TerminateLinkIfYouLeaveRoom::
 	.string "leave the room. Is that okay?$"
 
 Text_TerminateLinkConfirmation::
-	.string "Terminating link…\n"
-	.string "You will be escorted out of\l"
-	.string "the room. Please wait.$"
+	.string "Finalizando conexión... \n"
+	.string "Te acompañamos fuera de la sala.\l"
+	.string "Espera un momento.$"
 
 Text_TrainerTooBusyToNotice::
-	.string "This TRAINER is too busy to\n"
-	.string "notice…$"
+	.string "Este {SHADOW DYNAMIC_COLOR4}ENTRENADOR{SHADOW LIGHT_GRAY} no te hace\n"
+	.string "ni caso...$"
 
 Text_LookedAtPlayersTrainerCard::
-	.string "Score! Got to look at {STR_VAR_1}'s\n"
-	.string "TRAINER CARD!$"
+	.string "¡Bingo! ¡Puedes mirar la {SHADOW DYNAMIC_COLOR4}FICHA{SHADOW LIGHT_GRAY}\n"
+	.string "de {SHADOW DYNAMIC_COLOR4}ENTRENADOR{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}{STR_VAR_1}{SHADOW LIGHT_GRAY}!$"
 
 Text_LookedAtPlayersTrainerCardColored::
-	.string "Score! Got to look at {STR_VAR_1}'s\n"
-	.string "TRAINER CARD!\p"
-	.string "It's a {STR_VAR_2} card!$"
+	.string "¡Bingo! ¡Puedes mirar la {SHADOW DYNAMIC_COLOR4}FICHA{SHADOW LIGHT_GRAY}\n"
+	.string "de {SHADOW DYNAMIC_COLOR4}ENTRENADOR{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}{STR_VAR_1}{SHADOW LIGHT_GRAY}!\p"
+	.string "¡Es de color {SHADOW DYNAMIC_COLOR4}{STR_VAR_2}{SHADOW LIGHT_GRAY}!$"
 
 Text_TakeSeatStartBattle::
-	.string "Please take your seat and start\n"
-	.string "your battle.$"
+	.string "Puedes comenzar el combate.$"
 
 Text_TakeSeatStartTrade::
-	.string "Please take your seat and start\n"
-	.string "your trade.$"
+	.string "Puedes comenzar el intercambio.$"
 
 @ Unused, leftover from RS
 RecordCorner_Text_ThanksForComing::
@@ -1426,7 +1436,7 @@ CableClub_Text_TrainerCardDataOverwritten::
 	.string "be overwritten.$"
 
 CableClub_Text_HopeToSeeYouAgain::
-	.string "I hope to see you again!$"
+	.string "{COLOR DARK_GRAY}¡Vuelve cuando quieras!$"
 
 CableClub_Text_NotSetUpForFarAwayRegion::
 	.string "I'm awfully sorry.\p"
@@ -1458,12 +1468,12 @@ CableClub_Text_PleaseWait::
 	.string "しょうしょう　おまちください$"
 
 CableClub_Text_YouMayTradeHere::
-	.string "You may trade your POKéMON here\n"
-	.string "with another TRAINER.$"
+	.string "Aquí puedes intercambiar {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\n"
+	.string "con un amigo.$"
 
 CableClub_Text_YouMayBattleHere::
-	.string "You may battle with your friends\n"
-	.string "here.$"
+	.string "Aquí puedes luchar contra tus\n"
+	.string "amigos.$"
 
 CableClub_Text_CanMakeBerryPowder::
 	.string "Two to five TRAINERS can make\n"
@@ -1475,7 +1485,7 @@ CableClub_Text_CanMixRecords::
 	.string "あそびかたを　せつめいします$"
 
 CableClub_Text_CancelSelectedItem::
-	.string "Cancels the selected MENU item.$"
+	.string "Cancelar la selección.$"
 
 @ Unused, translated in Emerald
 CableClub_Text_WhichBattleMode::
@@ -1498,11 +1508,11 @@ CableClub_Text_NoEnigmaBerryInUnionRoom::
 	.string "BERRY may enter the UNION ROOM.$"
 
 CableClub_Text_UnionRoomAdapterNotConnected::
-	.string "This is the POKéMON WIRELESS CLUB\n"
-	.string "UNION ROOM.\p"
-	.string "Unfortunately, your Wireless\n"
-	.string "Adapter is not connected properly.\p"
-	.string "Please do come again.$"
+	.string "{COLOR DARK_GRAY}Esta es la {SHADOW DYNAMIC_COLOR4}SALA UNIÓN{SHADOW LIGHT_GRAY} del {SHADOW DYNAMIC_COLOR4}CLUB\n"
+	.string "INALÁMBRICO POKéMON{SHADOW LIGHT_GRAY}.\p"
+	.string "Oh, parece que tu Conector\n"
+	.string "inalámbrico no está bien conectado...\p"
+	.string "Inténtalo de nuevo más tarde.$"
 
 @ Unused, translated in Emerald
 CableClub_Text_OhExcuseMe::
@@ -1603,44 +1613,43 @@ Text_RetryFromStartPlease::
 	.string "やりなおして　みて　くれ$"
 
 CableClub_Text_WelcomeWhichDirectCornerRoom::
-	.string "Welcome to the POKéMON WIRELESS\n"
-	.string "CLUB DIRECT CORNER.\p"
-	.string "You may interact directly with\n"
-	.string "your friends here.\p"
-	.string "Which room would you like to\n"
-	.string "enter?$"
+	.string "{COLOR DARK_GRAY}Esta es la {SHADOW DYNAMIC_COLOR4}ZONA DIRECTA del {SHADOW DYNAMIC_COLOR4}CLUB\n"
+	.string "INALÁMBRICO POKéMON{SHADOW LIGHT_GRAY}.\p"
+	.string "Aquí puedes comunicarte\n"
+	.string "directamente con tus amigos.\p"
+	.string "¿En qué sala quieres entrar?$"
 
 CableClub_Text_TradePokemon::
-	.string "Would you like to trade POKéMON?$"
+	.string "{COLOR DARK_GRAY}¿Quieres cambiar {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}?$"
 
 CableClub_Text_PlayWhichBattleMode::
-	.string "Which Battle Mode would you like\n"
-	.string "to play?$"
+	.string "{COLOR DARK_GRAY}¿Qué modo de combate quieres?$"
 
 CableClub_Text_UseBerryCrush::
 	.string "Would you like to use the\n"
 	.string "BERRY CRUSH System?$"
 
 CableClub_Text_ExplainBattleModes::
-	.string "There are three Battle Modes.\p"
-	.string "SINGLE BATTLE is for two TRAINERS\n"
-	.string "with one or more POKéMON each.\p"
-	.string "Each TRAINER can have one POKéMON\n"
-	.string "in battle at a time.\p"
-	.string "DOUBLE BATTLE is for two TRAINERS\n"
-	.string "with two or more POKéMON each.\p"
-	.string "Each TRAINER will send out two\n"
-	.string "POKéMON in battle at a time.\p"
-	.string "MULTI BATTLE is for four TRAINERS\n"
-	.string "with one or more POKéMON each.\p"
-	.string "Each TRAINER can have one POKéMON\n"
-	.string "in battle at a time.$"
+	.string "{COLOR DARK_GRAY}Hay tres modos de combate.\p"
+	.string "El {SHADOW DYNAMIC_COLOR4}COMBATE INDIVIDUAL{SHADOW LIGHT_GRAY} es para dos\n"
+	.string "{SHADOW DYNAMIC_COLOR4}ENTRENADORES {SHADOW LIGHT_GRAY}con uno o más\l"
+	.string "{SHADOW DYNAMIC_COLOR4}POKéMON {SHADOW LIGHT_GRAY}cada uno.\p"
+	.string "Cada {SHADOW DYNAMIC_COLOR4}ENTRENADOR{SHADOW LIGHT_GRAY} puede usar un\n"
+	.string "POKéMON cada vez.\p"
+	.string "El {SHADOW DYNAMIC_COLOR4}COMBATE DOBLE{SHADOW LIGHT_GRAY} es para dos\n"
+	.string "{SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY} con dos o más\l"
+	.string "{SHADOW DYNAMIC_COLOR4}POKéMON {SHADOW LIGHT_GRAY}cada uno.\p"
+	.string "Cada {SHADOW DYNAMIC_COLOR4}ENTRENADOR{SHADOW LIGHT_GRAY} usará dos\n"
+	.string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} cada vez.\p"
+	.string "El {SHADOW DYNAMIC_COLOR4}COMBATE MULTIJUGADOR es para\n"
+	.string "cuatro ENTRENADORES con uno o más\l"
+	.string "POKéMON cada uno.\p"
+	.string "Cada {SHADOW DYNAMIC_COLOR4}ENTRENADOR{SHADOW LIGHT_GRAY} puede usar un\n"
+	.string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} cada vez.$"
 
 CableClub_Text_ChooseGroupLeaderOfTwo::
-	.string "Please decide which of you two\n"
-	.string "will become the LEADER.\p"
-	.string "The other player must then choose\n"
-	.string "“JOIN GROUP.”$"
+	.string "Un jugador debe ser {SHADOW DYNAMIC_COLOR4}LÍDER{SHADOW LIGHT_GRAY}.\p"
+	.string "Y el otro, “{SHADOW DYNAMIC_COLOR4}UNIRSE{SHADOW LIGHT_GRAY} al {SHADOW DYNAMIC_COLOR4}GRUPO{SHADOW LIGHT_GRAY}”.$"
 
 CableClub_Text_ChooseGroupLeaderOfFour::
 	.string "Please decide which of you four\n"
@@ -1655,13 +1664,12 @@ CableClub_Text_ChooseGroupLeader::
 	.string "“JOIN GROUP.”$"
 
 CableClub_Text_WelcomeUnionRoomEnter::
-	.string "Welcome to the POKéMON WIRELESS\n"
-	.string "CLUB UNION ROOM.\p"
-	.string "You may interact directly with\n"
-	.string "other TRAINERS here, some of\l"
-	.string "whom you may not even know.\p"
-	.string "Would you like to enter the ROOM?$"
-
+	.string "{COLOR DARK_GRAY}Ésta es la {SHADOW DYNAMIC_COLOR4}SALA UNIÓN{SHADOW LIGHT_GRAY} del {SHADOW DYNAMIC_COLOR4}CLUB\n"
+	.string "INALÁMBRICO POKéMON{SHADOW LIGHT_GRAY}.\p"
+	.string "Aquí puedes comunicarte\n"
+	.string "directamente con {SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY}\l"
+	.string "a los que puede que no conozcas.\p"
+	.string "¿Quieres entrar en la {SHADOW DYNAMIC_COLOR4}SALA{SHADOW LIGHT_GRAY}?$"
 CableClub_Text_UnionRoomInfo::
 	.string "The TRAINERS in the UNION ROOM\n"
 	.string "will be those players around you\l"
@@ -1681,74 +1689,80 @@ CableClub_Text_EnjoyUnionRoom::
 	.string "the UNION ROOM.$"
 
 CableClub_Text_FirstTimeRightThisWay::
-	.string "Hello!\n"
-	.string "My name is TEALA.\p"
-	.string "This must be your first time\n"
-	.string "up here.\p"
-	.string "I'll show you how the Wireless\n"
-	.string "Communication System works.\p"
-	.string "First, I need to show you this\n"
-	.string "floor of our POKéMON CENTER.\p"
-	.string "Right this way, please.$"
+	.string "{COLOR DARK_GRAY}¡Hola!\n"
+	.string "Me llamo {SHADOW DYNAMIC_COLOR4}TEALA{SHADOW LIGHT_GRAY}.\p"
+	.string "Es tu primera vez aquí, ¿verdad?\p"
+	.string "Te voy a explicar cómo funciona\n"
+	.string "el sistema de comunicación\l"
+	.string "inalámbrica.\p"
+	.string "Primero, te mostraré esta área\n"
+	.string "de nuestro {SHADOW DYNAMIC_COLOR4}CENTRO POKÉMON{SHADOW LIGHT_GRAY}.\p"
+	.string "Por aquí, por favor.$"
 
 CableClub_Text_ExplainWirelessClubFirstTime::
-	.string "On the top floor, there are two\n"
-	.string "rooms.\p"
-	.string "First, the room on the left.\n"
-	.string "It's the UNION ROOM.\p"
-	.string "You may link up with TRAINERS\n"
-	.string "around you who have also entered\l"
-	.string "the UNION ROOM.\p"
-	.string "With them, you may do things like\n"
-	.string "chat, battle, and trade.\p"
-	.string "Second, the room on the right is\n"
-	.string "the DIRECT CORNER.\p"
-	.string "You may trade or battle POKéMON\n"
-	.string "with your friends in this room.\p"
-	.string "If the Wireless Adapter isn't\n"
-	.string "connected, you may still link up\l"
-	.string "using a GBA Game Link cable.\p"
-	.string "If that is the case, you must go\n"
-	.string "to the DIRECT CORNER.\p"
-	.string "I hope you enjoy the Wireless \n"
-	.string "Communication System.$"
+	.string "{COLOR DARK_GRAY}En el primer piso de los {SHADOW DYNAMIC_COLOR4}CENTROS\n"
+	.string "POKéMON {SHADOW LIGHT_GRAY}hay dos salas.\p"
+	.string "Primero te hablaré de la sala de\n"
+	.string "la izquierda: la {SHADOW DYNAMIC_COLOR4}SALA UNIÓN{SHADOW LIGHT_GRAY}.\p"
+	.string "En ella puedes conectarte con los\n"
+	.string "{SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY} que también\p"
+	.string "hayan entrado en la {SHADOW DYNAMIC_COLOR4}SALA UNIÓN{SHADOW LIGHT_GRAY}\n"
+	.string "y estén cerca de ti.\p"
+	.string "Con ellos, podrás chatear, luchar\n"
+	.string "y realizar intercambios.\p"
+	.string "Ahora, la sala de la derecha:\n"
+	.string "la {SHADOW DYNAMIC_COLOR4}ZONA DIRECTA{SHADOW LIGHT_GRAY}.\p"
+	.string "En ella puedes realizar\n"
+	.string "intercambios o enfrentarte a tus\l"
+	.string "amigos en combates {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.\p"
+	.string "Si el Conector inalámbrico de {SHADOW DYNAMIC_COLOR4}GBA{SHADOW LIGHT_GRAY}\n"
+	.string "no estuviera conectado, puedes\p"
+	.string "conectarte a tus amigos con un\n"
+	.string "cable Game Link de Game Boy\l"
+	.string "Advance.\p"
+	.string "Para ello hay que ir a la {SHADOW DYNAMIC_COLOR4}ZONA\n"
+	.string "DIRECTA{SHADOW LIGHT_GRAY}.\p"
+	.string "Espero que disfrutes del sistema\n"
+	.string "de comunicación inalámbrica.$"
 
 CableClub_Text_AskAboutLinking::
-	.string "Hello, {PLAYER}!\p"
-	.string "It's me, TEALA, the POKéMON\n"
-	.string "CENTER 2F attendant.\p"
-	.string "Is there something you needed to\n"
-	.string "ask me about linking?$"
+	.string "{COLOR DARK_GRAY}¡Hola, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
+	.string "Soy yo, {SHADOW DYNAMIC_COLOR4}TEALA{SHADOW LIGHT_GRAY}, la recepcionista\n"
+	.string "del 1.{SUPER_ER} Piso del {SHADOW DYNAMIC_COLOR4}CENTRO POKéMON{SHADOW LIGHT_GRAY}.\p"
+	.string "¿Necesitas información sobre\n"
+	.string "cómo realizar la conexión?$"
 
 CableClub_Text_ExplainWirelessClub::
-	.string "Let me explain how the POKéMON\n"
-	.string "WIRELESS CLUB works.\p"
-	.string "On this, the top floor, there are\n"
-	.string "two rooms.\p"
-	.string "First, the room on the left.\n"
-	.string "It's the UNION ROOM.\p"
-	.string "You may link up with TRAINERS\n"
-	.string "around you who have also entered\l"
-	.string "the UNION ROOM.\p"
-	.string "With them, you may do things like\n"
-	.string "chat, battle, and trade.\p"
-	.string "Second, the room on the right is\n"
-	.string "the DIRECT CORNER.\p"
-	.string "You may trade or battle POKéMON\n"
-	.string "with your friends in this room.\p"
-	.string "Sometimes, you may not be able to\n"
-	.string "find your friends in the UNION ROOM\l"
-	.string "or the DIRECT CORNER.\p"
-	.string "In that case, please move closer\n"
-	.string "to your friends.\p"
-	.string "If the Wireless Adapter isn't\n"
-	.string "connected, you may still link up\l"
-	.string "using a GBA Game Link cable.\p"
-	.string "If that is the case, you must go\n"
-	.string "to the DIRECT CORNER.\p"
-	.string "I hope you enjoy the Wireless \n"
-	.string "Communication System.$"
+	.string "{COLOR DARK_GRAY}En el segundo piso de los {SHADOW DYNAMIC_COLOR4}CENTROS\n"
+	.string "POKÉMON{SHADOW LIGHT_GRAY} hay dos salas.\p"
+	.string "Primero, te hablaré de la sala\n"
+	.string "de la izquierda: la {SHADOW DYNAMIC_COLOR4}SALA UNIÓN{SHADOW LIGHT_GRAY}.\p"
+	.string "En esta sala puedes conectarte\n"
+	.string "con los {SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY} que también\p"
+	.string "hayan entrado en la {SHADOW DYNAMIC_COLOR4}SALA UNIÓN{SHADOW LIGHT_GRAY}\n"
+	.string "y estén cerca de ti.\p"
+	.string "Con ellos podrás chatear, combatir\n"
+	.string "y realizar intercambios.\p"
+	.string "Ahora, sobre la sala de la derecha:\n"
+	.string "la {SHADOW DYNAMIC_COLOR4}ZONA DIRECTA{SHADOW LIGHT_GRAY}.\p"
+	.string "Aquí puedes realizar intercambios\n"
+	.string "o enfrentarte a tus amigos en\l"
+	.string "combates {SHADOW DYNAMIC_COLOR4}POKÉMON{SHADOW LIGHT_GRAY}.\p"
+	.string "Si el Conector inalámbrico de {SHADOW DYNAMIC_COLOR4}GBA{SHADOW LIGHT_GRAY}\n"
+	.string "no está conectado, puedes usar un\p"
+	.string "cable Game Link de Game Boy\n"
+	.string "Advance para conectarte con tus\l"
+	.string "amigos.\p"
+	.string "Para eso, debes ir a la {SHADOW DYNAMIC_COLOR4}ZONA\n"
+	.string "DIRECTA{SHADOW LIGHT_GRAY}.\p"
+	.string "Espero que disfrutes el sistema\n"
+	.string "de comunicación inalámbrica.$"
 
 CableClub_Text_HopeYouEnjoyWirelessSystem::
-	.string "I hope you enjoy the Wireless\n"
-	.string "Communication System.$"
+	.string "{COLOR DARK_GRAY}Espero que disfrutes del sistema\n"
+	.string "de comunicación inalámbrica.$"
+
+TextInalambrico4GEN::
+	.string "{COLOR DARK_GRAY}Lo siento, los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} de la región\n"
+	.string "de {SHADOW DYNAMIC_COLOR4}SINNOH{SHADOW LIGHT_GRAY} no pueden entrar al\l"
+	.string "{COLOR RED}{SHADOW LIGHT_RED}CLUB INALÁMBRICO POKéMON{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}.$"

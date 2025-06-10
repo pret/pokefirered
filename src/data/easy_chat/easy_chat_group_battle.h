@@ -59,7 +59,7 @@ static const u8 sEasyChatWord_Easy[] = _("EASY");
 static const u8 sEasyChatWord_Weak[] = _("WEAK");
 static const u8 sEasyChatWord_TooWeak[] = _("TOO WEAK");
 static const u8 sEasyChatWord_Pushover[] = _("PUSHOVER");
-static const u8 sEasyChatWord_Leader[] = _("LEADER");
+static const u8 sEasyChatWord_Leader[] = _("LIDER");
 static const u8 sEasyChatWord_Rule[] = _("RULE");
 static const u8 sEasyChatWord_Move[] = _("MOVE");
 

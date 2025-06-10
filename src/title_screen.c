@@ -98,7 +98,7 @@ static const struct OamData sOamData_FlameOrLeaf = {
     .shape = ST_OAM_SQUARE,
     .size = ST_OAM_SIZE_1,
     .tileNum = 0,
-    .priority = 3,
+    .priority = 2,
     .paletteNum = 0
 };
 

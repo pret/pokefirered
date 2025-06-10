@@ -30,6 +30,7 @@
 	.include "src/m4a_1.o"
 	.include "data/sound_data.o"
 	.include "src/agb_flash.o"
+	.include "src/dexnav.o"
 	.include "*libgcc.a:dp-bit.o"
 	.include "*libgcc.a:fp-bit.o"
 	.include "*libc.a:syscalls.o"

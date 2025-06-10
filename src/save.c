@@ -93,12 +93,31 @@ COMMON_DATA u16 gSaveAttemptStatus = 0;
 EWRAM_DATA struct SaveSector gSaveDataBuffer = {0};
 EWRAM_DATA u32 gSaveUnusedVar2 = 0;
 
+#ifdef SRAM
+extern void sub_08fa0074(void);
+
+NAKED
+static void goto_arm_mode(void)
+{
+    asm(".syntax unified\n\
+    push {lr}\n\
+    ldr r0, off_pointer\n\
+    bx r0\n\
+    pop {pc}\n\
+    off_pointer: .word sub_08fa0074\n\
+    .syntax divided\n");
+}
+#endif
+
 void ClearSaveData(void)
 {
     u16 i;
 
     for (i = 0; i < SECTORS_COUNT; i++)
         EraseFlashSector(i);
+#ifdef SRAM
+    goto_arm_mode();
+#endif
 }
 
 void Save_ResetSaveCounters(void)
@@ -159,6 +178,9 @@ static u8 WriteSaveSectorOrSlot(u16 sectorId, const struct SaveSectorLocation *l
             gSaveCounter = gLastSaveCounter;
         }
     }
+#ifdef SRAM
+    goto_arm_mode();
+#endif
 
     return status;
 }

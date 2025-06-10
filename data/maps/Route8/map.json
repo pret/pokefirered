@@ -29,8 +29,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
-      "x": 62,
-      "y": 14,
+      "x": 61,
+      "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
@@ -43,8 +43,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
-      "x": 55,
-      "y": 15,
+      "x": 56,
+      "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -57,8 +57,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
-      "x": 51,
-      "y": 6,
+      "x": 49,
+      "y": 10,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -183,8 +183,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
-      "x": 40,
-      "y": 3,
+      "x": 43,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -197,8 +197,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
-      "x": 41,
-      "y": 3,
+      "x": 44,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -253,7 +253,9 @@
       "dest_warp_id": "2"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",

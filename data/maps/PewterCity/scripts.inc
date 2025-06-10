@@ -22,6 +22,7 @@ PewterCity_EventScript_GymGuide::
 	call_if_eq VAR_FACING, DIR_EAST, PewterCity_EventScript_WalkToGymEast
 	msgbox PewterCity_Text_GoTakeOnBrock
 	closemessage
+	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_Protagonista
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GymGuideExit
 	waitmovement 0
 	fadedefaultbgm
@@ -63,8 +64,6 @@ PewterCity_EventScript_WalkToGymNorth::
 	walk_left
 	walk_left
 	walk_left
-	walk_up
-	walk_left
 	walk_left
 	walk_left
 	walk_left
@@ -89,7 +88,6 @@ PewterCity_EventScript_WalkToGymNorth::
 	walk_up
 	walk_up
 	walk_up
-	walk_left
 	walk_left
 	walk_left
 	walk_left
@@ -113,7 +111,7 @@ PewterCity_EventScript_WalkToGymNorth::
 	walk_down
 	walk_down
 	walk_down
-	walk_right
+	walk_down
 	walk_right
 	walk_right
 	walk_right
@@ -124,6 +122,7 @@ PewterCity_EventScript_WalkToGymNorth::
 .endm
 
 .macro walk_to_gym_alt
+	emote_x
 	walk_left
 	walk_left
 	walk_left
@@ -244,7 +243,15 @@ PewterCity_Movement_GuideWalkToGymNorth::
 	walk_in_place_faster_left
 	step_end
 
+PewterCity_Movement_Protagonista::
+	face_up
+	step_end
+
+
 PewterCity_Movement_GymGuideExit::
+	walk_up
+	walk_left
+	walk_left
 	walk_down
 	walk_left
 	walk_left
@@ -252,9 +259,12 @@ PewterCity_Movement_GymGuideExit::
 	walk_left
 	walk_left
 	walk_left
-	walk_left
-	walk_left
-	walk_left
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
 	step_end
 
 PewterCity_EventScript_GymGuideTriggerTop::
@@ -283,7 +293,6 @@ PewterCity_EventScript_GymGuideTriggerRight::
 	end
 
 PewterCity_EventScript_GymGuideTrigger::
-	textcolor NPC_TEXT_COLOR_MALE
 	msgbox PewterCity_Text_BrocksLookingForChallengersFollowMe
 	closemessage
 	playbgm MUS_FOLLOW_ME, 0
@@ -292,6 +301,7 @@ PewterCity_EventScript_GymGuideTrigger::
 	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_WalkToGymBottom
 	msgbox PewterCity_Text_GoTakeOnBrock
 	closemessage
+	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Movement_Protagonista
 	applymovement LOCALID_GYM_GUIDE, PewterCity_Movement_GymGuideExit
 	waitmovement 0
 	fadedefaultbgm
@@ -486,24 +496,18 @@ PewterCity_EventScript_CheckedOutMuseum::
 	end
 
 .macro walk_to_museum
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
 	walk_left
 	walk_left
 	walk_up
 	walk_up
 	walk_up
 	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_left
 	walk_left
 	walk_left
 	walk_left
@@ -605,16 +609,43 @@ PewterCity_Movement_MuseumGuideExit::
 	walk_down
 	walk_down
 	walk_down
-	walk_right
-	walk_right
-	walk_right
+	walk_down
+	walk_down
 	step_end
+
+PewterCity_EventScript_Montanista::
+	lock
+	faceplayer
+	setvar VAR_MAP_SCENE_PEWTER_CITY, 1
+	setflag FLAG_HIDE_PEWTER_CITY_GYM_GUIDE
+	msgbox PewterCity_Text_Montanista
+	release
+	end
+
+PewterCity_EventScript_Silvio1::
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	msgbox PewterCity_Text_Silvio1, MSGBOX_NPC
+	end
+
+PewterCity_EventScript_Silvio2::
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	msgbox PewterCity_Text_Silvio2, MSGBOX_NPC
+	end
+
+PewterCity_EventScript_Nino::
+	lock
+	faceplayer
+	msgbox PewterCity_Text_Nino
+	release
+	end
 
 PewterCity_EventScript_FatMan::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_BROCK, 2
+	namebox PalletTown_Text_Prueba
 	msgbox PewterCity_Text_BrockOnlySeriousTrainerHere
+	hidenamebox
 	release
 	end
 
@@ -640,8 +671,14 @@ PewterCity_EventScript_PoliceNotice::
 	msgbox PewterCity_Text_CallPoliceIfInfoOnThieves, MSGBOX_SIGN
 	end
 
+PewterCity_EventScript_Silvio::
+	msgbox PewterCity_Text_Silvio, MSGBOX_SIGN
+	end
+
 PewterCity_EventScript_MuseumSign::
+	clearflag FLAG_0x0B8 @TERMINA PELEA PARA QUE APAREZCA SILVIO
 	msgbox PewterCity_Text_MuseumOfScience, MSGBOX_SIGN
+	givemon SPECIES_GROWLITHE, 100 @para testeo
 	end
 
 PewterCity_EventScript_GymSign::
@@ -654,78 +691,6 @@ PewterCity_EventScript_GymSign::
 PewterCity_EventScript_CitySign::
 	msgbox PewterCity_Text_CitySign, MSGBOX_SIGN
 	end
-
-PewterCity_EventScript_RunningShoesAide::
-	lock
-	faceplayer
-	setvar VAR_TEMP_1, 0
-	call PewterCity_EventScript_AideGiveRunningShoes
-	release
-	end
-
-PewterCity_EventScript_RunningShoesAideTriggerTop::
-	lockall
-	setvar VAR_TEMP_1, 1
-	call PewterCity_EventScript_AideGiveRunningShoes
-	releaseall
-	end
-
-PewterCity_EventScript_RunningShoesAideTriggerMid::
-	lockall
-	setvar VAR_TEMP_1, 2
-	call PewterCity_EventScript_AideGiveRunningShoes
-	releaseall
-	end
-
-PewterCity_EventScript_RunningShoesAideTriggerBottom::
-	lockall
-	setvar VAR_TEMP_1, 3
-	call PewterCity_EventScript_AideGiveRunningShoes
-	releaseall
-	end
-
-PewterCity_EventScript_AideGiveRunningShoes::
-	textcolor NPC_TEXT_COLOR_MALE
-	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideNoticePlayer
-	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideNoticePlayer
-	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideNoticePlayer
-	waitse
-	playse SE_PIN
-	applymovement LOCALID_AIDE, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_AIDE, Common_Movement_Delay48
-	waitmovement 0
-	msgbox PewterCity_Text_OhPlayer
-	call_if_eq VAR_TEMP_1, 0, PewterCity_EventScript_AideApproachPlayer0
-	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideApproachPlayer1
-	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideApproachPlayer2
-	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideApproachPlayer3
-	msgbox PewterCity_Text_AskedToDeliverThis
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	playfanfare MUS_OBTAIN_KEY_ITEM
-	message PewterCity_Text_ReceivedRunningShoesFromAide
-	waitmessage
-	waitfanfare
-	msgbox PewterCity_Text_SwitchedShoesWithRunningShoes
-	special DisableMsgBoxWalkaway
-	signmsg
-	msgbox PewterCity_Text_ExplainRunningShoes
-	normalmsg
-	call EventScript_RestorePrevTextColor
-	msgbox PewterCity_Text_MustBeGoingBackToLab
-	closemessage
-	call_if_eq VAR_TEMP_1, 0, PewterCity_EventScript_AideExit0
-	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideExit1
-	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideExit2
-	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideExit3
-	delay 30
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Text_RunningShoesLetterFromMom
-	closemessage
-	removeobject LOCALID_AIDE
-	setflag FLAG_SYS_B_DASH
-	setvar VAR_MAP_SCENE_PEWTER_CITY, 2
-	return
 
 PewterCity_EventScript_AideNoticePlayer::
 	applymovement LOCALID_AIDE, Common_Movement_WalkInPlaceFasterDown
@@ -844,4 +809,55 @@ PewterCity_Movement_AideExit3::
 @ Unused
 PewterCity_Movement_WalkInPlaceLeft::
 	walk_in_place_left
+	step_end
+
+
+PewterCity_EventScript_EventoSilvio::
+
+	fadescreen FADE_FROM_WHITE @animacion puerta
+	setobjectxy 7,14,2 @aparece silvio
+	applymovement 0, PewterCity_Movement_EventoSilvio1 @protagonista camina hacia el choque
+	applymovement 7, PewterCity_Movement_EventoSilvio2 @silvio camina hacia el choque
+	waitmovement 0
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, PalletTown_EventScript_Hombre
+	call_if_eq VAR_RESULT, FEMALE, PalletTown_EventScript_Mujer
+
+
+
+	removeobject LOCALID_AIDE
+	setvar VAR_0x4090, 2
+	givemon SPECIES_GROWLITHE, 100 @para testeo
+	end
+
+PalletTown_EventScript_Mujer::
+	msgbox PewterCity_Text_EventoSilvioMujer1
+	closemessage
+	playbgm MUS_FOLLOW_ME, 0
+	end
+
+
+PalletTown_EventScript_Hombre::
+	msgbox PewterCity_Text_EventoSilvioHombre1
+	closemessage
+	playbgm MUS_FOLLOW_ME, 0
+	end
+
+
+
+
+PewterCity_Movement_EventoSilvio1::
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	step_end
+
+PewterCity_Movement_EventoSilvio2::
+	walk_down
+	walk_down
+	walk_down
 	step_end

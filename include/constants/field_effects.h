@@ -27,8 +27,8 @@
 #define FLDEFF_BERRY_TREE_GROWTH_SPARKLE 23
 #define FLDEFF_DEEP_SAND_FOOTPRINTS      24
 #define FLDEFF_POKECENTER_HEAL           25
-#define FLDEFF_USE_SECRET_POWER_TREE     26
-#define FLDEFF_USE_SECRET_POWER_SHRUB    27
+#define FLDEFF_CAVE_DUST    		 	 26 //NEW!
+#define FLDEFF_REPEATING_SPARKLES    	 27 //NEW!
 #define FLDEFF_TREE_DISGUISE             28
 #define FLDEFF_MOUNTAIN_DISGUISE         29
 #define FLDEFF_NPCFLY_OUT                30
@@ -48,8 +48,8 @@
 #define FLDEFF_USE_DIVE                  44
 #define FLDEFF_POKEBALL                  45
 #define FLDEFF_X_ICON                    46
-#define FLDEFF_NOP_47                    47
-#define FLDEFF_NOP_48                    48
+#define FLDEFF_LAVA_BUBBLES              47 //NEW!
+#define FLDEFF_THIN_RING                 48 //NEW!
 #define FLDEFF_POP_OUT_OF_ASH            49
 #define FLDEFF_LAVARIDGE_GYM_WARP        50
 #define FLDEFF_SWEET_SCENT               51

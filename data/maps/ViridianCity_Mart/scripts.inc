@@ -10,8 +10,6 @@ ViridianCity_Mart_OnLoad::
 	end
 
 ViridianCity_Mart_EventScript_HideQuestionnaire::
-	setmetatile 1, 3, METATILE_Mart_CounterMid_Top, 1
-	setmetatile 1, 4, METATILE_Mart_CounterMid_Bottom, 1
 	end
 
 ViridianCity_Mart_OnFrame::
@@ -20,35 +18,91 @@ ViridianCity_Mart_OnFrame::
 
 ViridianCity_Mart_EventScript_ParcelScene::
 	lockall
-	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_CLERK, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
-	msgbox ViridianCity_Mart_Text_YouCameFromPallet
-	closemessage
-	applymovement LOCALID_CLERK, ViridianCity_Mart_Movement_FacePlayer
-	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
-	waitmovement 0
-	msgbox ViridianCity_Mart_Text_TakeThisToProfOak
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, ViridianCity_Mart_EventScript_Boy
+	call_if_eq VAR_RESULT, FEMALE, ViridianCity_Mart_EventScript_Girl
+	famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
-	giveitem_msg ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk, ITEM_OAKS_PARCEL, 1, MUS_OBTAIN_KEY_ITEM
-	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 5
+	setvar VAR_0x408C, 1
 	releaseall
 	end
+
+
+ViridianCity_Mart_EventScript_Boy::
+	textcolor NPC_TEXT_COLOR_FEMALE
+	delay 40
+	applymovement 4, ViridianCity_Mart_Movement_Down
+	waitmovement 0
+	msgbox ViridianCity_Mart_Text_Hoja1
+	closemessage
+	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
+	waitmovement 0
+	msgbox ViridianCity_Mart_Text_Hoja2
+	closemessage
+	applymovement 4, ViridianCity_Mart_Movement_FacePlayer
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SaltaAbajo
+	waitmovement 0
+	textcolor NPC_TEXT_COLOR_FEMALE
+	msgbox ViridianCity_Mart_Text_Hoja3
+	closemessage
+	applymovement 4, ViridianCity_Mart_Movement_Seva
+	waitmovement 0
+	setobjectxy 4,10,9
+	setflag FLAG_0x0AF
+	return
+	end
+
+ViridianCity_Mart_EventScript_Girl::
+	textcolor NPC_TEXT_COLOR_MALE
+	delay 40
+	applymovement 5, ViridianCity_Mart_Movement_Down
+	waitmovement 0
+	playbgm MUS_ENCOUNTER_BOY, 0
+	msgbox ViridianCity_Mart_Text_Rojo1
+	closemessage
+	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
+	waitmovement 0
+	msgbox ViridianCity_Mart_Text_Rojo2
+	closemessage
+	applymovement 5, ViridianCity_Mart_Movement_FacePlayer
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SaltaAbajo
+	waitmovement 0
+	textcolor NPC_TEXT_COLOR_MALE
+	msgbox ViridianCity_Mart_Text_Rojo3
+	closemessage
+	applymovement 5, ViridianCity_Mart_Movement_Seva
+	waitmovement 0
+	setobjectxy 5,10,9
+	playbgm MUS_POKE_CENTER, 0
+	setflag FLAG_0x0B0
+	return
+	end
+
+ViridianCity_Mart_Movement_Down::
+	jump_in_place_down
+	step_end
 
 ViridianCity_Mart_Movement_ApproachCounter::
 	walk_up
 	walk_up
 	walk_up
-	walk_up
-	walk_in_place_faster_left
 	step_end
 
 ViridianCity_Mart_Movement_FacePlayer::
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	walk_in_place_faster_right
+	walk_right
+	walk_down
+	walk_down
+	walk_left
+	walk_down
+	walk_down
+	jump_in_place_up
+	emote_exclamation_mark
+	step_end
+
+ViridianCity_Mart_Movement_Seva::
+	walk_in_place_down
 	step_end
 
 ViridianCity_Mart_EventScript_Clerk::
@@ -64,6 +118,7 @@ ViridianCity_Mart_EventScript_Clerk::
 	end
 
 	.align 2
+
 ViridianCity_Mart_Items::
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION
@@ -74,7 +129,19 @@ ViridianCity_Mart_Items::
 	end
 
 ViridianCity_Mart_EventScript_SayHiToOak::
-	msgbox ViridianCity_Mart_Text_SayHiToOakForMe
+	message Text_MayIHelpYou
+	waitmessage
+	pokemart ViridianCity_Mart_Items2
+	msgbox Text_PleaseComeAgain
+	release
+	end
+
+ViridianCity_Mart_Items2::
+	.2byte ITEM_POTION
+	.2byte ITEM_ANTIDOTE
+	.2byte ITEM_PARALYZE_HEAL
+	.2byte ITEM_RARE_CANDY
+	.2byte ITEM_NONE
 	release
 	end
 

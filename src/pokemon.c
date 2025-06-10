@@ -23,6 +23,7 @@
 #include "overworld.h"
 #include "party_menu.h"
 #include "field_specials.h"
+#include "dexnav.h"
 #include "berry.h"
 #include "constants/items.h"
 #include "constants/item_effects.h"
@@ -67,7 +68,7 @@ static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 perso
 static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId);
 static bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 static u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
-static u8 GetNatureFromPersonality(u32 personality);
+u8 GetNatureFromPersonality(u32 personality);
 static bool8 PartyMonHasStatus(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 static bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId);
 static bool8 IsPokemonStorageFull(void);
@@ -513,6 +514,9 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_HOENN(JIRACHI),
     SPECIES_TO_HOENN(DEOXYS),
     SPECIES_TO_HOENN(CHIMECHO),
+    SPECIES_TO_HOENN(MAGNEZONE),
+    SPECIES_TO_HOENN(BONSLY),
+    SPECIES_TO_HOENN(MIMEJR),
 };
 
  // Assigns all species to the National Dex Index (Summary No. for National Dex)
@@ -929,6 +933,9 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(JIRACHI),
     SPECIES_TO_NATIONAL(DEOXYS),
     SPECIES_TO_NATIONAL(CHIMECHO),
+    SPECIES_TO_NATIONAL(MAGNEZONE),
+    SPECIES_TO_NATIONAL(BONSLY),
+    SPECIES_TO_NATIONAL(MIMEJR),
 };
 
 // Assigns all Hoenn Dex Indexes to a National Dex Index
@@ -1345,6 +1352,9 @@ static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
     HOENN_TO_NATIONAL(OLD_UNOWN_X),
     HOENN_TO_NATIONAL(OLD_UNOWN_Y),
     HOENN_TO_NATIONAL(OLD_UNOWN_Z),
+    HOENN_TO_NATIONAL(MAGNEZONE),
+    HOENN_TO_NATIONAL(BONSLY),
+    HOENN_TO_NATIONAL(MIMEJR), 
 };
 
 static const struct SpindaSpot sSpindaSpotGraphics[] =
@@ -1357,7 +1367,7 @@ static const struct SpindaSpot sSpindaSpotGraphics[] =
 
 #include "data/pokemon/item_effects.h"
 
-static const s8 sNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
+const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 {                      // Attack  Defense  Speed  Sp.Atk  Sp.Def
     [NATURE_HARDY]   = {    0,      0,      0,      0,      0   },
     [NATURE_LONELY]  = {   +1,     -1,      0,      0,      0   },
@@ -5005,7 +5015,7 @@ u8 GetNature(struct Pokemon *mon)
     return GetMonData(mon, MON_DATA_PERSONALITY, NULL) % NUM_NATURES;
 }
 
-static u8 GetNatureFromPersonality(u32 personality)
+u8 GetNatureFromPersonality(u32 personality)
 {
     return personality % NUM_NATURES;
 }
@@ -5407,7 +5417,7 @@ static u16 ModifyStatByNature(u8 nature, u16 stat, u8 statIndex)
     if (statIndex <= STAT_HP || statIndex > NUM_NATURE_STATS)
         return stat;
 
-    switch (sNatureStatTable[nature][statIndex - 1])
+    switch (gNatureStatTable[nature][statIndex - 1])
     {
     case 1:
         retVal = stat * 110;
@@ -6019,7 +6029,8 @@ void SetMonPreventsSwitchingString(void)
 
 void SetWildMonHeldItem(void)
 {
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER)))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER))
+    && !gDexNavStartedBattle)
     {
         u16 rnd = Random() % 100;
         u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);

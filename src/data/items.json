@@ -70,7 +70,7 @@
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A BALL thrown to catch a wild\\nPOKéMON. It is designed in a\\ncapsule style.",
+      "description_english": "Sirve para atrapar POKéMON\\nsalvajes. Parece una cápsula.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -209,12 +209,12 @@
       "secondaryId": 11
     },
     {
-      "english": "POTION",
+      "english": "POCIÓN",
       "itemId": "ITEM_POTION",
       "price": 300,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 20,
-      "description_english": "A spray-type wound medicine.\\nIt restores the HP of one POKéMON\\nby 20 points.",
+      "description_english": "Medicina en spray, que cura heridas\\ny restaaura 20 PS de un POKéMON.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -225,12 +225,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ANTIDOTE",
+      "english": "ANTÍDOTO",
       "itemId": "ITEM_ANTIDOTE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A spray-type medicine.\\nIt heals one POKéMON from a\\npoisoning.",
+      "description_english": "Medicina en spray, que cura a un\\nPOKéMON envenenado.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -241,12 +241,12 @@
       "secondaryId": 0
     },
     {
-      "english": "BURN HEAL",
+      "english": "ANTIQUEMAR",
       "itemId": "ITEM_BURN_HEAL",
       "price": 250,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A spray-type medicine.\\nIt heals one POKéMON of a burn.",
+      "description_english": "Medicina en spray, que cura a un\\nPOKéMON quemado.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -273,12 +273,12 @@
       "secondaryId": 0
     },
     {
-      "english": "AWAKENING",
+      "english": "DESPERTAR",
       "itemId": "ITEM_AWAKENING",
       "price": 250,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A spray-type medicine.\\nIt awakens a sleeping POKéMON.",
+      "description_english": "Medicina en spray, que despierta\\na un POKéMON dormido.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -289,12 +289,12 @@
       "secondaryId": 0
     },
     {
-      "english": "PARLYZ HEAL",
+      "english": "ANTIPARALIZ",
       "itemId": "ITEM_PARALYZE_HEAL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A spray-type medicine.\\nIt heals one POKéMON from\\nparalysis.",
+      "description_english": "Medicina en spray, que cura a un\\nPOKéMON paralizado.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1089,7 +1089,7 @@
       "secondaryId": 0
     },
     {
-      "english": "RARE CANDY",
+      "english": "CARAMELORARO",
       "itemId": "ITEM_RARE_CANDY",
       "price": 4800,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -1361,12 +1361,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ESCAPE ROPE",
+      "english": "CUERDA HUIDAE",
       "itemId": "ITEM_ESCAPE_ROPE",
       "price": 550,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A long, durable rope.\\nUse it to escape instantly from a\\ncave or a dungeon.",
+      "description_english": "Larga y resistente cuerda.\\nSirve para huir de una cueva\\nu otros sitios cerrados.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1377,12 +1377,12 @@
       "secondaryId": 0
     },
     {
-      "english": "REPEL",
+      "english": "REPELENTE",
       "itemId": "ITEM_REPEL",
       "price": 350,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 100,
-      "description_english": "Prevents weak wild POKéMON from\\nappearing for 100 steps.",
+      "description_english": "Repele POKéMON salvajes débiles\\nen un recorrido de 100 pasos.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -2913,7 +2913,7 @@
       "secondaryId": 0
     },
     {
-      "english": "EXP. SHARE",
+      "english": "REPARTIR EXP.",
       "itemId": "ITEM_EXP_SHARE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_EXP_SHARE",
@@ -5883,12 +5883,12 @@
       "secondaryId": 0
     },
     {
-      "english": "TM CASE",
+      "english": "TUBO MT-MO",
       "itemId": "ITEM_TM_CASE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A case that holds TMs and HMs.\\nIt is attached to the BAG's\\ncompartment for important items.",
+      "description_english": "Tubo que contiene las MT y MO.\\nEstá en el bolsillo de los objetos\\nclave de la MOCHILA.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",
@@ -5915,12 +5915,12 @@
       "secondaryId": 0
     },
     {
-      "english": "TEACHY TV",
+      "english": "POKé TELE",
       "itemId": "ITEM_TEACHY_TV",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A television set that is tuned to\\na program with useful tips for\\nnovice TRAINERS.",
+      "description_english": "Tele de bolsillo que emite consejos\\nmuy útiles para ENTRENADORES\\nnovatos.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",

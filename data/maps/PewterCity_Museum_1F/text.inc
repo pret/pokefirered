@@ -1,26 +1,85 @@
+PewterCity_Museum_1F_Text_Brock1::
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ...y así es como los fósiles\n"
+    .string "nos permiten aprender sobre el\l"
+    .string "pasado de los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}...$"
+
+PewterCity_Museum_1F_Text_Brock2::
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ¡Oh, parece que tenemos una\n"
+    .string "visitante especial!\p"
+    .string "¿Eres tú quien desea desafiarme\n"
+    .string "en el {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY}?$"
+
+PewterCity_Museum_1F_Text_Brock3::
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} Siempre emocionado de\n"
+    .string "enfrentarme a nuevos retadores.\p"
+    .string "Permíteme terminar aquí y nos\n"
+    .string "encontraremos en el {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY} para\l"
+    .string "nuestro combate.\p"
+    .string "Mientras tanto, ¿por qué no echas\n"
+    .string "un vistazo a las exhibiciones?$"
+
+PewterCity_Museum_1F_Text_BrockNoTeVayas1::
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ¡No te vayas sin echarle un\n"
+    .string "vistazo a las exhibiciones!$"
+
+PewterCity_Museum_1F_Text_BrockTermina1::
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ...los fósiles nos enseñan\n"
+    .string "sobre el pasado y nos inspiran\p"
+    .string "para nuestros viajes...\n"
+    .string "¡Gracias por venir!$"
+
+PewterCity_Museum_1F_Text_BrockTermina2::
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ¡Hola {SHADOW DYNAMIC_COLOR4}ENTRENADORA{SHADOW LIGHT_GRAY}! Gracias\n"
+    .string "por venir hasta aquí.\p"
+    .string "Espero que hayas aprendido algo\n"
+    .string "sobre los fósiles.$"
+
+PewterCity_Museum_1F_Text_BrockTermina3::
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} He oído que has venido a\n"
+    .string "desafiarme en el {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY}.\p"
+    .string "¡Vamos de inmediato para nuestra\n"
+    .string "batalla!$"
+
+PewterCity_Museum_1F_Text_Fosil1::
+    .string "{SHADOW DYNAMIC_COLOR4}FÓSIL DE KABUTO{SHADOW LIGHT_GRAY}\n"
+    .string "Antiguo caparazón petrificado de\l"
+    .string "un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} prehistórico extinto,\l"
+    .string "similar a un cangrejo.$"
+
+PewterCity_Museum_1F_Text_Fosil2::
+    .string "{SHADOW DYNAMIC_COLOR4}FÓSIL DE OMANYTE{SHADOW LIGHT_GRAY}\n"
+    .string "Restos petrificados de un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\l"
+    .string "marino extinto con una concha en\l"
+    .string "forma de espiral.$"
+
 PewterCity_Museum_1F_Text_Its50YForChildsTicket::
-    .string "Yes, yes.\n"
-    .string "It's ¥50 for a child's ticket.\p"
-    .string "Would you like to come in?$"
+    .string "Bienvenida al {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}.\n"
+    .string "Las niñas pagan ¥100...\p"
+    .string "¿Te gustaría entrar?$"
 
 PewterCity_Museum_1F_Text_ComeAgain::
-    .string "Come again!$"
+    .string "¡Hasta pronto!$"
 
 PewterCity_Museum_1F_Text_Right50YThankYou::
-    .string "Right, ¥50!\n"
-    .string "Thank you!$"
+    .string "¡¥100! ¡Vale!\n"
+    .string "¡Gracias!$"
 
 PewterCity_Museum_1F_Text_DontHaveEnoughMoney::
-    .string "You don't have enough money.$"
+    .string "No tienes suficiente dinero.$"
 
 PewterCity_Museum_1F_Text_PleaseEnjoyYourself::
-    .string "Please enjoy yourself.$"
+    .string "¡Disfruta del {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}!$"
 
 PewterCity_Museum_1F_Text_DoYouKnowWhatAmberIs::
     .string "You can't sneak in the back way!\n"
     .string "Nice try, kid, but no.\p"
     .string "Oh, whatever!\n"
     .string "Do you know what AMBER is?$"
+
+PewterCity_Museum_1F_Text_Montanero::
+    .string "Esta {SHADOW DYNAMIC_COLOR4}PIEDRA LUNAR{SHADOW LIGHT_GRAY} es increíble...\p"
+    .string "Siempre he soñado con encontrar\n"
+    .string "una en el {SHADOW DYNAMIC_COLOR4}MONTE MOON{SHADOW LIGHT_GRAY}.$"
 
 PewterCity_Museum_1F_Text_AmberContainsGeneticMatter::
     .string "AMBER contains the genetic matter\n"
@@ -78,10 +137,46 @@ PewterCity_Museum_1F_Text_BeautifulPieceOfAmber::
     .string "AMBER in a clear gold color.$"
 
 PewterCity_Museum_1F_Text_AerodactylFossil::
-    .string "AERODACTYL Fossil\n"
-    .string "A primitive and rare POKéMON.$"
+    .string "{SHADOW DYNAMIC_COLOR4}FÓSIL DE AERODACTYL{SHADOW LIGHT_GRAY}\n"
+    .string "Restos petrificados de un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\l"
+    .string "volador extinto, con aspecto de\l"
+    .string "dragón prehistórico.$"
 
 PewterCity_Museum_1F_Text_KabutopsFossil::
     .string "KABUTOPS Fossil\n"
     .string "A primitive and rare POKéMON.$"
 
+PewterCity_Museum_1F_Text_NPC01::
+    .string "Es fascinante, ¿verdad?\p"
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} conoce mucho sobre estos\n"
+    .string "fósiles.$"
+
+PewterCity_Museum_1F_Text_NPC02::
+    .string "¡Esos fósiles  son enormes!\p"
+    .string "¿Cómo era el mundo de los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\n"
+    .string "antes?$"
+
+PewterCity_Museum_1F_Text_NPC03::
+.string "¡Vaya, qué interesante!\p"
+.string "Nunca había visto tantos fósiles de\n"
+.string "cerca.\p"
+.string "{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} sabe mucho sobre estos {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\n"
+.string "antiguos.$"
+
+PewterCity_Museum_1F_Text_NPC04::
+.string "¡Qué maravillosa exhibición!\p"
+.string "{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} realmente tiene una pasión por\n"
+.string "los fósiles.$"
+
+PewterCity_Museum_1F_Text_NPC05::
+.string "{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} demuestra un profundo conocimiento\n"
+.string "de los fósiles.$"
+
+PewterCity_Museum_1F_Text_NPC06::
+.string "Este espécimen es uno de los más\n"
+.string "raros que hemos encontrado.\p"
+.string "Imagina cómo debió ser en su hábitat\n"
+.string "original...$"
+
+PewterCity_Museum_1F_Text_NPC07::
+.string "SIN NADA$"

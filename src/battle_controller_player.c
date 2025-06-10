@@ -174,8 +174,6 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 
 static const u8 sTargetIdentities[] = { B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT, B_POSITION_OPPONENT_RIGHT, B_POSITION_OPPONENT_LEFT };
 
-static bool8 sLastUsedBall;
-
 // unknown unused data
 static const u8 sUnused[] = { 0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58 };
 
@@ -418,13 +416,11 @@ static void HandleInputChooseAction(void)
     {
         SwapHpBarsWithHpText();
     }
-#if DEBUG_BATTLE_MENU == TRUE
-    else if (JOY_NEW(SELECT_BUTTON))
+    else if (DEBUG_BATTLE_MENU == TRUE && JOY_NEW(SELECT_BUTTON))
     {
         BtlController_EmitTwoReturnValues(1, B_ACTION_DEBUG, 0);
         PlayerBufferExecCompleted();
     }
-#endif
     else if (JOY_NEW(L_BUTTON))
     {
         if (IsPlayerPartyAndPokemonStorageFull() || !CheckBagHasItem(ITEM_POKE_BALL, 1))
@@ -432,17 +428,11 @@ static void HandleInputChooseAction(void)
 		    else
 		    {
             PlaySE(SE_SELECT);
-            sLastUsedBall = TRUE;
             gSpecialVar_ItemId = ITEM_POKE_BALL;
             RemoveBagItem(gSpecialVar_ItemId, 1);
             BtlController_EmitTwoReturnValues(1, B_ACTION_USE_ITEM, 0);
             PlayerBufferExecCompleted();
         }
-    }
-    else if (JOY_NEW(R_BUTTON))
-    {
-        BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
-        PlayerBufferExecCompleted();
     }
     else if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == FALSE
              && JOY_NEW(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
@@ -450,6 +440,11 @@ static void HandleInputChooseAction(void)
         PlaySE(SE_SELECT);
         TryHideLastUsedBall();
         BtlController_EmitTwoReturnValues(1, B_ACTION_THROW_BALL, 0);
+        PlayerBufferExecCompleted();
+    }
+    else if (JOY_NEW(R_BUTTON))
+    {
+        BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
         PlayerBufferExecCompleted();
     }
 }
@@ -2557,6 +2552,7 @@ static void PlayerHandleChooseAction(void)
     BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
+    TryRestoreLastUsedBall();
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
@@ -2596,19 +2592,11 @@ static void PlayerHandleChooseItem(void)
 {
     s32 i;
 
-    if (sLastUsedBall == TRUE)
-    {
-        sLastUsedBall = FALSE;
-        gBattlerControllerFuncs[gActiveBattler] = CompleteWhenChoseItem;
-    }
-    else
-    {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-        gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
-        gBattlerInMenuId = gActiveBattler;
-        for (i = 0; i < 3; ++i)
-            gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][1 + i];
-    }
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
+    gBattlerInMenuId = gActiveBattler;
+    for (i = 0; i < 3; ++i)
+        gBattlePartyCurrentOrder[i] = gBattleBufferA[gActiveBattler][1 + i];
 }
 
 static void PlayerHandleChoosePokemon(void)

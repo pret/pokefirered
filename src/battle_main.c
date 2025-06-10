@@ -3341,6 +3341,10 @@ static void HandleTurnActionSelectionState(void)
                 case B_ACTION_SAFARI_BALL:
                     gBattleCommunication[gActiveBattler]++;
                     break;
+                case B_ACTION_THROW_BALL:
+                    gBattleStruct->throwingPokeBall = TRUE;
+                    gBattleCommunication[gActiveBattler]++;
+                    break;
                 case B_ACTION_SAFARI_BAIT:
                 case B_ACTION_SAFARI_GO_NEAR:
                     gBattleCommunication[gActiveBattler]++;

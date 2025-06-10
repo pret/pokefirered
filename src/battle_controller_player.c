@@ -20,6 +20,7 @@
 #include "battle_script_commands.h"
 #include "reshow_battle_screen.h"
 #include "constants/battle_anim.h"
+#include "constants/item.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -221,15 +222,120 @@ static void CompleteOnBattlerSpritePosX_0(void)
         PlayerBufferExecCompleted();
 }
 
+static u16 GetPrevBall(u16 ballId)
+{
+    u16 ballPrev;
+    s32 i, j;
+    SortAndCompactBagPocket(&gBagPockets[BALLS_POCKET]);
+    for (i = 0; i < gBagPockets[BALLS_POCKET].capacity; i++)
+    {
+        if (ballId == gBagPockets[BALLS_POCKET].itemSlots[i].itemId)
+        {
+            if (i <= 0)
+            {
+                for (j = gBagPockets[BALLS_POCKET].capacity - 1; j >= 0; j--)
+                {
+                    ballPrev = gBagPockets[BALLS_POCKET].itemSlots[j].itemId;
+                    if (ballPrev != ITEM_NONE)
+                        return ballPrev;
+                }
+            }
+            i--;
+            break;
+        }
+    }
+    return gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
+}
+
+static u32 GetNextBall(u32 ballId)
+{
+    u32 ballNext = ITEM_NONE;
+    s32 i;
+    SortAndCompactBagPocket(&gBagPockets[BALLS_POCKET]);
+    for (i = 1; i < gBagPockets[BALLS_POCKET].capacity; i++)
+    {
+        if (ballId == gBagPockets[BALLS_POCKET].itemSlots[i-1].itemId)
+        {
+            ballNext = gBagPockets[BALLS_POCKET].itemSlots[i].itemId;
+            break;
+        }
+    }
+    if (ballNext == ITEM_NONE)
+        return gBagPockets[BALLS_POCKET].itemSlots[0].itemId; // Zeroth slot
+    else
+        return ballNext;
+}
+
+
 static void HandleInputChooseAction(void)
 {
     u16 itemId = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
 
     DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
+
+    if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == TRUE)
+    {
+        if (!gLastUsedBallMenuPresent)
+        {
+            gBattleStruct->ackBallUseBtn = FALSE;
+        }
+        else if (JOY_NEW(B_LAST_USED_BALL_BUTTON))
+        {
+            gBattleStruct->ackBallUseBtn = TRUE;
+            gBattleStruct->ballSwapped = FALSE;
+            ArrowsChangeColorLastBallCycle(TRUE);
+        }
+
+        if (gBattleStruct->ackBallUseBtn)
+        {
+            if (JOY_HELD(B_LAST_USED_BALL_BUTTON) && (JOY_NEW(DPAD_DOWN) || JOY_NEW(DPAD_RIGHT)))
+            {
+                bool32 sameBall = FALSE;
+                u32 nextBall = GetNextBall(gBallToDisplay);
+                gBattleStruct->ballSwapped = TRUE;
+                if (gBallToDisplay == nextBall)
+                    sameBall = TRUE;
+                else
+                    gBallToDisplay = nextBall;
+                SwapBallToDisplay(sameBall);
+                PlaySE(SE_SELECT);
+            }
+            else if (JOY_HELD(B_LAST_USED_BALL_BUTTON) && (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_LEFT)))
+            {
+                bool32 sameBall = FALSE;
+                u32 prevBall = GetPrevBall(gBallToDisplay);
+                gBattleStruct->ballSwapped = TRUE;
+                if (gBallToDisplay == prevBall)
+                    sameBall = TRUE;
+                else
+                    gBallToDisplay = prevBall;
+                SwapBallToDisplay(sameBall);
+                PlaySE(SE_SELECT);
+            }
+            else if (JOY_NEW(B_BUTTON) || (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && gBattleStruct->ballSwapped))
+            {
+                gBattleStruct->ackBallUseBtn = FALSE;
+                gBattleStruct->ballSwapped = FALSE;
+                ArrowsChangeColorLastBallCycle(FALSE);
+            }
+            else if (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
+            {
+                gBattleStruct->ackBallUseBtn = FALSE;
+                PlaySE(SE_SELECT);
+                ArrowsChangeColorLastBallCycle(FALSE);
+                TryHideLastUsedBall();
+                BtlController_EmitTwoReturnValues(1, B_ACTION_THROW_BALL, 0);
+                PlayerBufferExecCompleted();
+            }
+            return;
+        }
+    }
+
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
+        TryHideLastUsedBall();
 
         switch (gActionSelectionCursor[gActiveBattler])
         {
@@ -336,6 +442,14 @@ static void HandleInputChooseAction(void)
     else if (JOY_NEW(R_BUTTON))
     {
         BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
+        PlayerBufferExecCompleted();
+    }
+    else if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == FALSE
+             && JOY_NEW(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
+    {
+        PlaySE(SE_SELECT);
+        TryHideLastUsedBall();
+        BtlController_EmitTwoReturnValues(1, B_ACTION_THROW_BALL, 0);
         PlayerBufferExecCompleted();
     }
 }

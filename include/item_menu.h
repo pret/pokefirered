@@ -87,7 +87,7 @@ extern u16 gSpecialVar_ItemId;
 void ResetBagScrollPositions(void);
 void InitPokedudeBag(u8);
 void CB2_BagMenuFromStartMenu(void);
-void MoveItemSlotInList(struct ItemSlot * itemSlots_, u32 from, u32 to_);
+void MoveItemSlotInList(struct ItemSlot *itemSlots_, u32 from, u32 to_);
 void Task_FadeAndCloseBagMenu(u8 taskId);
 void ItemMenu_SetExitCallback(void (*)(void));
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId));

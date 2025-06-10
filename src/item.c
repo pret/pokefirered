@@ -486,12 +486,10 @@ void RegisteredItemHandleBikeSwap(void)
     }
 }
 
-void SwapItemSlots(struct ItemSlot * a, struct ItemSlot * b)
+static void SwapItemSlots(struct ItemSlot *a, struct ItemSlot *b)
 {
-    struct ItemSlot c;
-    c = *a;
-    *a = *b;
-    *b = c;
+    struct ItemSlot temp;
+    SWAP(*a, *b, temp);
 }
 
 void BagPocketCompaction(struct ItemSlot * slots, u8 capacity)
@@ -545,16 +543,16 @@ void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket)
     Free(buff);
 }
 
-void CompactItemsInBagPocket(struct BagPocket * pocket)
+void CompactItemsInBagPocket(struct BagPocket *bagPocket)
 {
     u16 i, j;
 
-    for (i = 0; i < pocket->capacity; i++)
+    for (i = 0; i < bagPocket->capacity - 1; i++)
     {
-        for (j = i + 1; j < pocket->capacity; j++)
+        for (j = i + 1; j < bagPocket->capacity; j++)
         {
-            if (GetBagItemQuantity(&pocket->itemSlots[i].quantity) == 0 || (GetBagItemQuantity(&pocket->itemSlots[j].quantity) != 0 && pocket->itemSlots[i].itemId > pocket->itemSlots[j].itemId))
-                SwapItemSlots(&pocket->itemSlots[i], &pocket->itemSlots[j]);
+            if (GetBagItemQuantity(&bagPocket->itemSlots[i].quantity) == 0)
+                SwapItemSlots(&bagPocket->itemSlots[i], &bagPocket->itemSlots[j]);
         }
     }
 }

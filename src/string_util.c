@@ -624,6 +624,7 @@ u8 GetExtCtrlCodeLength(u8 code)
         1,
         1,
         1,
+        2,
     };
 
     u8 length = 0;

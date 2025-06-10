@@ -487,6 +487,7 @@ void HelpSystemRenderText(u8 fontId, u8 * dest, const u8 * src, u8 x, u8 y, u8 w
             case EXT_CTRL_CODE_SKIP:
                 src++;
                 break;
+            case EXT_CTRL_CODE_CLEAR_TEXT_TO:
             case EXT_CTRL_CODE_CLEAR_TO:
             {
                 clearPixels = *src + orig_x - x;

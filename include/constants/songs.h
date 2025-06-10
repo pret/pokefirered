@@ -259,6 +259,7 @@
 #define SE_DEOXYS_MOVE            253 // SE_DEOMOV
 #define SE_POKE_JUMP_SUCCESS      254 // SE_EXCELLENT
 #define SE_POKE_JUMP_FAILURE      255 // SE_NAWAMISS
+#define END_SE                    SE_POKE_JUMP_FAILURE
 // Music kept from RS
 #define MUS_HEAL                  256 // MUS_ME_ASA
 #define MUS_LEVEL_UP              257 // MUS_FANFA1
@@ -354,5 +355,8 @@
 #define MUS_TEACHY_TV_MENU        346 // MUS_TVNOIZE
 
 #define MUS_NONE                    0xFFFF
+
+#define START_MUS                   MUS_HEAL
+#define END_MUS                     MUS_TEACHY_TV_MENU
 
 #endif  // GUARD_CONSTANTS_SONGS_H

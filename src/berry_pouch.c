@@ -903,7 +903,7 @@ static void SortAndCountBerries(void)
     u16 i;
     u32 r2;
     struct BagPocket *pocket = &gBagPockets[POCKET_BERRIES - 1];
-    CompactItemsInBagPocket(pocket);
+    SortBerriesOrTMHMs(pocket);
     sResources->listMenuNumItems = 0;
     for (i = 0; i < pocket->capacity; i++)
     {

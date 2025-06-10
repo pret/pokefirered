@@ -70,7 +70,6 @@ void ClearPCItemSlots(void);
 void TrySetObtainedItemQuestLogEvent(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 amount);
 
-void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket);
 u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 itemId);
 u16 BagGetQuantityByPocketPosition(u8 pocketId, u16 itemId);
 u16 BagGetQuantityByItemId(u16 item);
@@ -82,6 +81,7 @@ void SetBagPocketsPointers(void);
 void ItemPcCompaction(void);
 void RemovePCItem(u16 itemId, u16 quantity);
 void CompactItemsInBagPocket(struct BagPocket * pocket);
+void SortBerriesOrTMHMs(struct BagPocket *bagPocket);
 u8 CountItemsInPC(void);
 bool8 HasAtLeastOneBerry(void);
 bool8 HasAtLeastOnePokeBall(void);

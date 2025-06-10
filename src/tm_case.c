@@ -507,7 +507,7 @@ static bool8 DoSetUpTMCaseUI(void)
             gMain.state++;
         break;
     case 9:
-        SortPocketAndPlaceHMsFirst(&gBagPockets[POCKET_TM_HM - 1]);
+        SortBerriesOrTMHMs(&gBagPockets[POCKET_TM_HM - 1]);
         gMain.state++;
         break;
     case 10:

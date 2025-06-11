@@ -3250,3 +3250,15 @@ u8 IsMonDisobedient(void)
         }
     }
 }
+
+void HandleAction_ThrowBall(void)
+{
+    gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gLastUsedItem = gBallToDisplay;
+    if (!ItemId_GetImportance(gLastUsedItem))
+    	RemoveBagItem(gLastUsedItem, 1);
+    gBattlescriptCurrInstr = BattleScript_ThrowBall;
+    gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
+}

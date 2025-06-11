@@ -205,7 +205,7 @@ extern const u8 BattleScript_ActionSelectionItemsCantBeUsed[];
 extern const u8 BattleScript_AskIfWantsToForfeitMatch[];
 extern const u8 BattleScript_PrintPlayerForfeited[];
 extern const u8 BattleScript_PrintPlayerForfeitedLinkBattle[];
-extern const u8 BattleScript_BallThrow[];
+extern const u8 BattleScript_ThrowBall[];
 extern const u8 BattleScript_BallThrowByWally[];
 extern const u8 BattleScript_SafariBallThrow[];
 extern const u8 BattleScript_SuccessBallThrow[];

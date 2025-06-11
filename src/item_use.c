@@ -923,3 +923,8 @@ void ItemUse_SetQuestLogEvent(u8 eventId, struct Pokemon *pokemon, u16 itemId, u
     SetQuestLogEvent(eventId, (void *)data);
     Free(data);
 }
+
+bool32 CanThrowBall(void)
+{
+    return !IsPlayerPartyAndPokemonStorageFull();
+}

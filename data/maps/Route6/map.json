@@ -120,14 +120,14 @@
       "dest_warp_id": "1"
     },
     {
-      "x": 12,
+      "x": 11,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_ROUTE6_NORTH_ENTRANCE",
       "dest_warp_id": "2"
     },
     {
-      "x": 13,
+      "x": 12,
       "y": 5,
       "elevation": 3,
       "dest_map": "MAP_ROUTE6_NORTH_ENTRANCE",

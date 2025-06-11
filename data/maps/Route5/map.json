@@ -56,9 +56,9 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_POLIWRATH",
-      "x": 21,
-      "y": 13,
+      "graphics_id": "OBJ_EVENT_GFX_NIDORAN_M",
+      "x": 18,
+      "y": 18,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,

@@ -63,7 +63,6 @@ PewterCity_Gym_EventScript_DefeatedBrock::
 	famechecker FAMECHECKER_BROCK, 1
 	setflag FLAG_DEFEATED_BROCK
 	setflag FLAG_BADGE01_GET
-	setvar VAR_0x4090, 1
 	setflag FLAG_HIDE_PEWTER_CITY_GYM_GUIDE
 	set_gym_trainers 1
 	goto PewterCity_Gym_EventScript_GiveTM39
@@ -95,8 +94,6 @@ PewterCity_Gym_EventScript_Gustavo::
 	trainerbattle_single TRAINER_HIKER_GUSTAVO, PewterCity_Gym_Text_GustavoIntro, PewterCity_Gym_Text_GustavoDefeat
 	msgbox PewterCity_Gym_Text_GustavoPostBattle, MSGBOX_AUTOCLOSE
 	end
-
-
 
 PewterCity_Gym_EventScript_BrockNoEsta::
 	applymovement 3, PewterCity_Museum_1F_Move_BrockNoEsta1

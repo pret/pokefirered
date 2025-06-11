@@ -60,7 +60,7 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
-      "x": 37,
+      "x": 42,
       "y": 21,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -130,7 +130,7 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 32,
+      "x": 31,
       "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -172,8 +172,8 @@
   ],
   "warp_events": [
     {
-      "x": 26,
-      "y": 20,
+      "x": 25,
+      "y": 19,
       "elevation": 3,
       "dest_map": "MAP_MT_MOON_B1F",
       "dest_warp_id": "3"

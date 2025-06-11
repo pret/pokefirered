@@ -182,16 +182,19 @@ PalletTown_EventScript_OakTriggerRight::
 	end
 
 PalletTown_EventScript_OakTrigger::
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, PalletTown_EventScript_Boy
 	call_if_eq VAR_RESULT, FEMALE, PalletTown_EventScript_Girl
 	famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	delay 30
 	playbgm MUS_OAK, 0
-	message PalletTown_Text_OakDontGoOut
+	namebox Name_Oak
+	message PalletTown_Text_AltoAhi
 	waitmessage
 	delay 85
 	closemessage
+	hidenamebox
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
@@ -202,37 +205,43 @@ PalletTown_EventScript_OakTrigger::
 	call_if_eq VAR_TEMP_1, 0, PalletTown_EventScript_OakEnterLeft
 	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_OakEnterRight
 	delay 30
-	msgbox PalletTown_Text_OakGrassUnsafeNeedMon
+	namebox Name_Oak
+	msgbox PalletTown_Text_CuidadoEnLaHierba
 	closemessage
+	hidenamebox
 	delay 30
-	// GRITO Y APARICIÓN DE PIKACHU//
 	playmoncry SPECIES_PIKACHU, 0
 	call_if_eq VAR_TEMP_1, 0, PalletTown_EventScript_AparicionPikachuIzq
 	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_AparicionPikachuDer
-	// PANTALLA BLANCA Y BATALLA
 	fadescreen FADE_TO_WHITE
 	special StartOldManTutorialBattle
 	waitstate
 	lock
-	// DESAPARECE PIKACHU
 	setobjectxy 4,14,2
 	playbgm MUS_OAK, 0
-	// PROFESOR DESPUÉS DE LA BATALLA
-	msgbox PalletTown_Text_Vaya
+	namebox Name_Oak
+	msgbox PalletTown_Text_EsoEstuvoCerca
 	closemessage
+	hidenamebox
+
 	applymovement LOCALID_PROF_OAK, PalletTown_Movement_SaltaArriba
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SaltaAbajo
+
 	waitmovement 0
-	msgbox PalletTown_Text_DespuesPikachu
+	namebox Name_Oak
+	msgbox PalletTown_Text_LosPokemonPueden
 	closemessage
+	hidenamebox
 	delay 30
-	// CAMINAN HACIA EL LABORATORIO
+	@regresolaboratorio
 	call_if_eq VAR_TEMP_1, 0, PuebloPaleta_EventScript_OakRegresoLabIzq
 	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_OakRegresoLabDer
 	opendoor 21, 12
 	waitdooranim
+
 	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEntraLab
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterLab
+	
 	waitmovement 0
 	closedoor 21, 12
 	waitdooranim
@@ -492,7 +501,7 @@ PalletTown_EventScript_SignLadyMoveOutOfWayLeft::
 PalletTown_EventScript_SignLadyDone::
 	applymovement LOCALID_SIGN_LADY, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox PalletTown_Text_RaisingMonsToo
+	msgbox PalletTown_Text_YoTambienEntreno
 	release
 	end
 
@@ -521,26 +530,26 @@ PalletTown_Movement_SignLadyMoveOutOfWayLeft::
 	step_end
 
 PalletTown_EventScript_FatMan::
-	msgbox PalletTown_Text_CanStoreItemsAndMonsInPC, MSGBOX_NPC
+	msgbox PalletTown_Text_LaTecnologiaEs, MSGBOX_NPC
 	end
 
 PalletTown_EventScript_OaksLabSign::
 	lockall
 	famechecker FAMECHECKER_OAK, 0
-	msgbox PalletTown_Text_OakPokemonResearchLab
+	msgbox PalletTown_Text_LaboratorioDeInvestigacion
 	releaseall
 	end
 
 PalletTown_EventScript_PlayersHouseSign::
-	msgbox PalletTown_Text_PlayersHouse, MSGBOX_SIGN
+	msgbox PalletTown_Text_CasaPlayer, MSGBOX_SIGN
 	end
 
 PalletTown_EventScript_RivalsHouseSign::
-	msgbox PalletTown_Text_RivalsHouse, MSGBOX_SIGN
+	msgbox PalletTown_Text_CasaRival, MSGBOX_SIGN
 	end
 
 PalletTown_EventScript_TownSign::
-	msgbox PalletTown_Text_TownSign, MSGBOX_SIGN
+	msgbox PalletTown_Text_LetreroPueblo, MSGBOX_SIGN
 	setflag FLAG_0x0B2
 	end
 
@@ -584,7 +593,7 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	end
 
 @ZAPATILLAS DEPORTIVAS - TRIGGER
-PalletTown_EventScript_Zapatillas_Trigger::
+PalletTown_RunningShoes_Trigger::
 	lock
 	faceplayer
 	setvar VAR_TEMP_1, 0
@@ -592,18 +601,11 @@ PalletTown_EventScript_Zapatillas_Trigger::
 	applymovement 11, PalletTown_Movement_MamaTrigger
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerTrigger
 	waitmovement 0
-	msgbox PalletTown_Text_Zapatillas1, MSGBOX_NPC
-	signmsg
-	msgbox PalletTown_Text_RecibirZapatillas
-	normalmsg
-	delay_16
-	waitmessage
-	waitfanfare
-	playfanfare MUS_OBTAIN_KEY_ITEM
-	msgbox PalletTown_Text_Zapatillas2
-	closemessage
-	msgbox PalletTown_Text_Zapatillas3
-	closemessage
+
+	checkplayergender
+	call_if_eq VAR_RESULT, FEMALE, PalletTown_RunningShoes_Female
+	call_if_eq VAR_RESULT, MALE, PalletTown_RunningShoes_Male
+
 	applymovement 11, PalletTown_Movement_MamaRegreso2
 	waitmovement 0	
 	opendoor 7, 6
@@ -618,23 +620,69 @@ PalletTown_EventScript_Zapatillas_Trigger::
 	release
 	end
 
-@ZAPATILLAS DEPORTIVAS - MAMA
-PalletTown_EventScript_Zapatillas_NPC::
-	playse SE_PIN
-	applymovement 11, Common_Movement_ExclamationMark
-	waitmovement 0
-	msgbox PalletTown_Text_Zapatillas1, MSGBOX_NPC
+
+@ZAPATILLAS DEPORTIVAS - TRIGGER - FEMALE
+PalletTown_RunningShoes_Female::
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_EsperaUnMomento_Female
+	hidenamebox
+	closemessage
+	
 	signmsg
-	msgbox PalletTown_Text_RecibirZapatillas
+	msgbox PalletTown_Text_RunningShoes_RecibisteZapatillas
 	normalmsg
 	delay_16
 	waitmessage
 	waitfanfare
 	playfanfare MUS_OBTAIN_KEY_ITEM
-	msgbox PalletTown_Text_Zapatillas2
+
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_SonUnasZapatillas
+	hidenamebox
 	closemessage
-	msgbox PalletTown_Text_Zapatillas3
+
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_NoOlvides_Female
+	hidenamebox
 	closemessage
+	return
+
+@ZAPATILLAS DEPORTIVAS - TRIGGER - MALE
+PalletTown_RunningShoes_Male::
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_EsperaUnMomento_Male
+	hidenamebox
+	closemessage
+	
+	signmsg
+	msgbox PalletTown_Text_RunningShoes_RecibisteZapatillas
+	normalmsg
+	delay_16
+	waitmessage
+	waitfanfare
+	playfanfare MUS_OBTAIN_KEY_ITEM
+
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_SonUnasZapatillas
+	hidenamebox
+	closemessage
+
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_NoOlvides_Male
+	hidenamebox
+	closemessage
+	return
+
+@ZAPATILLAS DEPORTIVAS - MAMA
+PalletTown_EventScript_RunningShoes_Mom::
+	playse SE_PIN
+	applymovement 11, Common_Movement_ExclamationMark
+	waitmovement 0
+
+	checkplayergender
+	call_if_eq VAR_RESULT, FEMALE, PalletTown_EventScript_RunningShoes_Mom_Female
+	call_if_eq VAR_RESULT, MALE, PalletTown_EventScript_RunningShoes_Mom_Male
+	
 	applymovement 11, PalletTown_Movement_MamaRegreso1
 	waitmovement 0	
 	opendoor 7, 6
@@ -648,6 +696,55 @@ PalletTown_EventScript_Zapatillas_NPC::
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 0
 	release
 	end
+
+PalletTown_EventScript_RunningShoes_Mom_Female::
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_EsperaUnMomento_Female
+	hidenamebox
+	closemessage
+	
+	signmsg
+	msgbox PalletTown_Text_RunningShoes_RecibisteZapatillas
+	normalmsg
+	delay_16
+	waitmessage
+	waitfanfare
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_SonUnasZapatillas
+	hidenamebox
+	closemessage
+
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_NoOlvides_Female
+	hidenamebox
+	return
+
+PalletTown_EventScript_RunningShoes_Mom_Male::
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_EsperaUnMomento_Male
+	hidenamebox
+	closemessage
+	
+	signmsg
+	msgbox PalletTown_Text_RunningShoes_RecibisteZapatillas
+	normalmsg
+	delay_16
+	waitmessage
+	waitfanfare
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_SonUnasZapatillas
+	hidenamebox
+	closemessage
+	
+	namebox Name_Mama
+	msgbox PalletTown_Text_RunningShoes_NoOlvides_Male
+	hidenamebox
+	return
+
 
 PalletTown_Movement_MamaTrigger::
 	emote_exclamation_mark

@@ -1,104 +1,101 @@
 Route3_Text_TunnelFromCeruleanTiring::
-    .string "Whew… I better take a rest…\n"
-    .string "Groan…\p"
-    .string "That tunnel from CERULEAN takes a\n"
-    .string "lot out of you!$"
+    .string "Uf... Será mejor que descanse un\n"
+     .string "poco...\p"
+    .string "¡Ese monte desde {SHADOW DYNAMIC_COLOR4}CIUDAD CELESTE{SHADOW LIGHT_GRAY}\n"
+    .string "te deja agotado!$"
 
 Route3_Text_ColtonIntro::
-    .string "Hey!\n"
-    .string "I saw you in VIRIDIAN FOREST!$"
+    .string "{COLOR DARK_GRAY}¡Hey!\n"
+    .string "¡Te vi en el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}!$"
 
 Route3_Text_ColtonDefeat::
-    .string "You beat me again!$"
+    .string "¡ME GANASTE OTRA VEZ!$"
 
 Route3_Text_ColtonPostBattle::
-    .string "There are other kinds of POKéMON\n"
-    .string "than the ones you find in forests.$"
+    .string "{COLOR DARK_GRAY}Hay otros tipos de {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} además\n"
+    .string "de los que encuentras en bosques.$"
 
 Route3_Text_BenIntro::
-    .string "Hi!\n"
-    .string "I like shorts!\p"
-    .string "They're delightfully comfy and\n"
-    .string "easy to wear!$"
+    .string "{COLOR DARK_GRAY}¡Me gustan los pantalones cortos!\p"
+    .string "¡Son cómodos y fáciles de usar!$"
 
 Route3_Text_BenDefeat::
-    .string "I don't believe it!$"
+    .string "¡NO LO PUEDO CREER!$"
 
 Route3_Text_BenPostBattle::
-    .string "Are you using a POKéMON CENTER's\n"
-    .string "PC for storing your POKéMON?\p"
-    .string "Each BOX can hold up to\n"
-    .string "30 POKéMON.$"
+    .string "{COLOR DARK_GRAY}¿Estás usando la {SHADOW DYNAMIC_COLOR4}PC del {SHADOW DYNAMIC_COLOR4}CENTRO\n"
+    .string "POKéMON{SHADOW LIGHT_GRAY} para guardar tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}?\p"
+    .string "Cada {SHADOW DYNAMIC_COLOR4}CAJA{SHADOW LIGHT_GRAY} puede contener hasta\n"
+    .string "30 {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.$"
 
 Route3_Text_JaniceIntro::
-    .string "Excuse me!\n"
-    .string "You looked at me, didn't you?$"
+    .string "{COLOR DARK_GRAY}¡Disculpa!\n"
+    .string "¡Me miraste, ¿verdad?!$"
 
 Route3_Text_JaniceDefeat::
-    .string "You're mean!$"
+    .string "¡QUÉ INSOLENTE!$"
 
 Route3_Text_JanicePostBattle::
-    .string "You shouldn't be staring if you\n"
-    .string "don't want to battle!$"
+    .string "{COLOR DARK_GRAY}¡No deberías mirar si no quieres\n"
+    .string "pelear!$"
 
 Route3_Text_GregIntro::
-    .string "Are you a TRAINER?\n"
-    .string "Let's get with it right away!$"
+    .string "{COLOR DARK_GRAY}¿Te gusta combatir?\n"
+    .string "¡Entonces, a pelear ya mismo!$"
 
 Route3_Text_GregDefeat::
-    .string "If I had new POKéMON, I would've\n"
-    .string "won!$"
+    .string "¡SI TUVIERA NUEVOS POKéMON TE\n"
+    .string "HABRÍA GANADO!$"
 
 Route3_Text_GregPostBattle::
-    .string "If a POKéMON BOX on the PC gets\n"
-    .string "full, just switch to another BOX.$"
+    .string "{COLOR DARK_GRAY}Si una {SHADOW DYNAMIC_COLOR4}CAJA{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} en la {SHADOW DYNAMIC_COLOR4}PC{SHADOW LIGHT_GRAY}\n"
+    .string "se llena, solo cambia a otra.$"
 
 Route3_Text_SallyIntro::
-    .string "That look you gave me…\n"
-    .string "It's so intriguing!$"
+    .string "{COLOR DARK_GRAY}Esa mirada que me diste...\n"
+    .string "¡Es tan intrigante!$"
 
 Route3_Text_SallyDefeat::
-    .string "Be nice!$"
+    .string "¡SÉ AMABLE!$"
 
 Route3_Text_SallyPostBattle::
-    .string "You can avoid battles by not\n"
-    .string "letting TRAINERS see you.$"
+    .string "{COLOR DARK_GRAY}Puedes evitar combates si no dejas\n"
+    .string "que otros {SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY} te vean.$"
 
 Route3_Text_CalvinIntro::
-    .string "Hey! You're not wearing shorts!\n"
-    .string "What's wrong with you?$"
+    .string "{COLOR DARK_GRAY}¡Hey! ¡No estás usando shorts!\n"
+    .string "¿Qué te pasa?$"
 
 Route3_Text_CalvinDefeat::
-    .string "Lost!\n"
-    .string "Lost! Lost!$"
+    .string "¡PERDÍ!\n"
+    .string "¡PERDÍ, PERDÍ!$"
 
 Route3_Text_CalvinPostBattle::
-    .string "I always wear shorts, even in\n"
-    .string "winter. That's my policy.$"
+    .string "{COLOR DARK_GRAY}Siempre uso shorts,\n"
+    .string "incluso en invierno. ¡Esa es mi regla!$"
 
 Route3_Text_JamesIntro::
-    .string "I'll battle you with the POKéMON\n"
-    .string "I just caught.$"
+    .string "{COLOR DARK_GRAY}Voy a luchar con los POKéMON\n"
+    .string "que acabo de atrapar.$"
 
 Route3_Text_JamesDefeat::
-    .string "Done like dinner!$"
+    .string "ESO FUE MÁS RÁPIDO DE LO QUE PENSABA$"
 
 Route3_Text_JamesPostBattle::
-    .string "Trained POKéMON are stronger than\n"
-    .string "the wild ones.$"
+    .string "{COLOR DARK_GRAY}Los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} entrenados son más\n"
+    .string "fuertes que los salvajes.$"
 
 Route3_Text_RobinIntro::
-    .string "Eek!\n"
-    .string "Did you touch me?$"
+    .string "{COLOR DARK_GRAY}¡Ay!\n"
+    .string "¿Me tocaste?$"
 
 Route3_Text_RobinDefeat::
-    .string "That's it?$"
+    .string "¿ESO FUE TODO?$"
 
 Route3_Text_RobinPostBattle::
-    .string "ROUTE 4 is at the foot of\n"
-    .string "MT. MOON.$"
+    .string "{COLOR DARK_GRAY}La {SHADOW DYNAMIC_COLOR4}RUTA 4{SHADOW LIGHT_GRAY} está al pie del\n"
+    .string "{SHADOW DYNAMIC_COLOR4}MONTE LUNAR{SHADOW LIGHT_GRAY}.$"
 
 Route3_Text_RouteSign::
-    .string "ROUTE 3\n"
-    .string "MT. MOON AHEAD$"
-
+    .string "RUTA 3\n"
+    .string "MONTE MOON ADELANTE$"

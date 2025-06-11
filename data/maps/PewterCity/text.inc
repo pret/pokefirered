@@ -8,7 +8,7 @@ PewterCity_Text_Silvio1::
 .string "{SHADOW DYNAMIC_COLOR4}SILVIO{SHADOW LIGHT_GRAY} es un experto en\n"
 .string "encontrarlas.$"
 
-PewterCity_Text_Silvio2::
+PewterCity_Text_MiAbuelitoDice::
 .string "¡Mi abuelito dice que don {SHADOW DYNAMIC_COLOR4}SILVIO{SHADOW LIGHT_GRAY}\n"
 .string "puede hablar con las piedras!$"
 

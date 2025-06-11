@@ -10995,7 +10995,6 @@ static const struct TrainerMonNoItemCustomMoves sParty_Silvio[] = {
     {
         .iv = 150,
         .lvl = 18,
-        .species = SPECIES_BONSLY,
-        .moves = {MOVE_SING, MOVE_ENCORE, MOVE_SHOCK_WAVE, MOVE_MOONLIGHT},
+        .species = SPECIES_CLEFAIRY,
     },
 };

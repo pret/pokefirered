@@ -26,7 +26,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PalletTown_ProfessorOaksLab_EventScript_Aide1",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_Cientifico1",
       "flag": "0"
     },
     {
@@ -40,7 +40,7 @@
       "movement_range_y": 4,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PalletTown_ProfessorOaksLab_EventScript_Aide3",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_Cientifico3",
       "flag": "0"
     },
     {
@@ -54,7 +54,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PalletTown_ProfessorOaksLab_EventScript_Aide2",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_Cientifico2",
       "flag": "0"
     },
     {
@@ -201,7 +201,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB",
       "var_value": "2",
-      "script": "PalletTown_ProfessorOaksLab_EventScript_LeaveStarterSceneTrigger"
+      "script": "PalletTown_ProfessorOaksLab_EventScript_SalidaSinPokemon"
     },
     {
       "type": "trigger",
@@ -210,7 +210,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB",
       "var_value": "2",
-      "script": "PalletTown_ProfessorOaksLab_EventScript_LeaveStarterSceneTrigger"
+      "script": "PalletTown_ProfessorOaksLab_EventScript_SalidaSinPokemon"
     },
     {
       "type": "trigger",
@@ -219,7 +219,7 @@
       "elevation": 3,
       "var": "VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB",
       "var_value": "2",
-      "script": "PalletTown_ProfessorOaksLab_EventScript_LeaveStarterSceneTrigger"
+      "script": "PalletTown_ProfessorOaksLab_EventScript_SalidaSinPokemon"
     },
     {
       "type": "trigger",

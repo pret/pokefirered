@@ -905,7 +905,7 @@
       "id": "LAYOUT_ROUTE5",
       "name": "Route5_Layout",
       "width": 48,
-      "height": 40,
+      "height": 35,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
@@ -1113,7 +1113,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_ViridianCity",
+      "secondary_tileset": "gTileset_PewterCity",
       "border_filepath": "data/layouts/Route22/border.bin",
       "blockdata_filepath": "data/layouts/Route22/map.bin"
     },
@@ -2272,7 +2272,7 @@
     {
       "id": "LAYOUT_SAFFRON_CITY_NORTH_SOUTH_ENTRANCE",
       "name": "SaffronCity_NorthSouthEntrance_Layout",
-      "width": 9,
+      "width": 10,
       "height": 11,
       "border_width": 2,
       "border_height": 2,

@@ -47,6 +47,7 @@
 #define B_ACTION_CANCEL_PARTNER            12 // when choosing an action
 #define B_ACTION_NOTHING_FAINTED           13 // when choosing an action
 #define B_ACTION_DEBUG                     20
+#define B_ACTION_THROW_BALL                21 // R to throw last used ball
 #define B_ACTION_NONE                      0xFF
 
 #define MAX_TRAINER_ITEMS 4
@@ -457,6 +458,11 @@ struct BattleStruct
         struct MultiBattlePokemonTx multiBattleMons[3];
     } multiBuffer;
     u8 padding_1E4[0x1C];
+    u8 ballSpriteIds[2];    // item gfx, window gfx
+    u8 ackBallUseBtn:1; // Used for the last used ball feature
+    u8 ballSwapped:1; // Used for the last used ball feature
+    u8 throwingPokeBall:1;
+    u8 unused:5;
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;
@@ -723,5 +729,9 @@ extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern u8 gBattleTerrain;
 extern struct MultiBattlePokemonTx gMultiPartnerParty[3];
 extern u16 gRandomTurnNumber;
+extern u8 gLastUsedBall;
+extern u16 gLastThrownBall;
+extern u16 gBallToDisplay;
+extern bool8 gLastUsedBallMenuPresent;
 
 #endif // GUARD_BATTLE_H

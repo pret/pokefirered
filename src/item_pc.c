@@ -1018,7 +1018,7 @@ static void Task_ItemPcGive(u8 taskId)
         ItemPc_DestroySubwindow(0);
         ClearWindowTilemap(4);
         PutWindowTilemap(0);
-        ItemPc_PrintOnWindow5WithContinueTask(taskId, gText_ThereIsNoPokemon, gTask_ItemPcWaitButtonAndExitSubmenu);
+        ItemPc_PrintOnWindow5WithContinueTask(taskId, gText_NoPokemon, gTask_ItemPcWaitButtonAndExitSubmenu);
     }
     else
     {

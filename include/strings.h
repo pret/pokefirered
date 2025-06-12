@@ -97,7 +97,7 @@ extern const u8 gText_SevenHyphens[];
 extern const u8 gText_NumberClear01[];
 extern const u8 gText_xVar1[];
 extern const u8 gText_IsSelected[];
-extern const u8 gText_ThereIsNoPokemon[];
+extern const u8 gText_NoPokemon[];
 extern const u8 gText_Var1CantBeHeld[];
 extern const u8 gText_TMCase[];
 extern const u8 gText_Close[];
@@ -1098,9 +1098,7 @@ extern const u8 gOtherText_Check[];
 extern const u8 gOtherText_Open[];
 extern const u8 gOtherText_Deselect[];
 extern const u8 gText_CloseBag[];
-extern const u8 gText_CantWriteMailHere[];
-extern const u8 gText_DepositedStrVar2StrVar1s[];
-extern const u8 gText_NoRoomToStoreItems[];
+extern const u8 gText_CantWriteMail[];
 
 // union_room_battle
 extern const u8 gText_CommStandbyAwaitingOtherPlayer[];

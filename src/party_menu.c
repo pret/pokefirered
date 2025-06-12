@@ -1249,7 +1249,7 @@ static void SwapPartyPokemon(struct Pokemon *mon1, struct Pokemon *mon2)
 
 static void Task_ClosePartyMenu(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ClosePartyMenuAndSetCB2;
 }
 
@@ -1259,10 +1259,13 @@ static void Task_ClosePartyMenuAndSetCB2(u8 taskId)
     {
         if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
             UpdatePartyToFieldOrder();
+
         if (sPartyMenuInternal->exitCallback != NULL)
             SetMainCallback2(sPartyMenuInternal->exitCallback);
         else
             SetMainCallback2(gPartyMenu.exitCallback);
+
+        ResetSpriteData();
         FreePartyPointers();
         DestroyTask(taskId);
     }
@@ -1328,6 +1331,8 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
             {
                 if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
                     sPartyMenuInternal->exitCallback = CB2_SetUpExitToBattleScreen;
+
+                PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
                 gItemUseCB(taskId, Task_ClosePartyMenuAfterText);
             }
             break;

@@ -711,7 +711,7 @@ void Mailbox_ReturnToMailListAfterDeposit(void)
 
 static void Task_Error_NoPokemon(u8 taskId)
 {
-    DisplayItemMessageOnField(taskId, FONT_NORMAL, gText_ThereIsNoPokemon, Task_PlayerPcExitMailSubmenu);
+    DisplayItemMessageOnField(taskId, FONT_NORMAL, gText_NoPokemon, Task_PlayerPcExitMailSubmenu);
 }
 
 static void Task_RedrawPlayerPcMailboxAndSetUpInputHandler(u8 taskId)

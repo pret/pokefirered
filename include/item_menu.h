@@ -74,6 +74,9 @@ struct BagMenu
     u16 contextMenuSelectedItem;
     u8 pocketScrollArrowsTask;
     u8 pocketSwitchArrowsTask;
+    const u8 *contextMenuItemsPtr;
+    u8 contextMenuItemsBuffer[4];
+    u8 contextMenuNumItems;
     u8 numItemStacks[NUM_BAG_POCKETS_NO_CASES];
     u8 numShownItems[NUM_BAG_POCKETS_NO_CASES];
     s16 graphicsLoadState;
@@ -81,6 +84,7 @@ struct BagMenu
 
 extern u8 gItemMenuIconSpriteIds[ITEMMENUSPRITE_COUNT];
 
+extern struct BagMenu *gBagMenu;
 extern u16 gSpecialVar_ItemId;
 
 // Exported ROM declarations

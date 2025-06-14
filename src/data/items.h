@@ -9372,9 +9372,9 @@ const struct Item gItemsInfo[] =
             .holdEffect = HOLD_EFFECT_RESTORE_PCT_HP,
             .holdEffectParam = 25,
             .description = COMPOUND_STRING(
-                "A hold item\nthat "
-                "restores the user's "
-                "HP a\nlittle."),
+                "A hold item that "
+                "restores the\nuser's "
+                "HP a little."),
         #else
             .holdEffect = HOLD_EFFECT_RESTORE_HP,
             .holdEffectParam = 30,
@@ -12373,6 +12373,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
+        .battleUsage = EFFECT_ITEM_USE_BERRY_POUCH,
         .fieldUseFunc = ItemUseOutOfBattle_BerryPouch,
         .iconPic = gItemIcon_BerryPouch,
         .iconPalette = gItemIconPalette_BerryPouch,

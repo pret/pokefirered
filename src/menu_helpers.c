@@ -203,7 +203,11 @@ void SetVBlankHBlankCallbacksToNull(void)
 
 void ResetVramOamAndBgCntRegs(void)
 {
-    ResetAllBgsCoordinatesAndBgCntRegs();
+    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    SetGpuReg(REG_OFFSET_BG3CNT, 0);
+    SetGpuReg(REG_OFFSET_BG2CNT, 0);
+    SetGpuReg(REG_OFFSET_BG1CNT, 0);
+    SetGpuReg(REG_OFFSET_BG0CNT, 0);
     CpuFill16(0, (void *) VRAM, VRAM_SIZE);
     CpuFill32(0, (void *) OAM, OAM_SIZE);
     CpuFill16(0, (void *) PLTT, PLTT_SIZE);
@@ -211,24 +215,14 @@ void ResetVramOamAndBgCntRegs(void)
 
 void ResetAllBgsCoordinates(void)
 {
-    ChangeBgX(0, 0, 0);
-    ChangeBgY(0, 0, 0);
-    ChangeBgX(1, 0, 0);
-    ChangeBgY(1, 0, 0);
-    ChangeBgX(2, 0, 0);
-    ChangeBgY(2, 0, 0);
-    ChangeBgX(3, 0, 0);
-    ChangeBgY(3, 0, 0);
-}
-
-void ResetAllBgsCoordinatesAndBgCntRegs(void)
-{
-    SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    SetGpuReg(REG_OFFSET_BG3CNT, 0);
-    SetGpuReg(REG_OFFSET_BG2CNT, 0);
-    SetGpuReg(REG_OFFSET_BG1CNT, 0);
-    SetGpuReg(REG_OFFSET_BG0CNT, 0);
-    ResetAllBgsCoordinates();
+    ChangeBgX(0, 0, BG_COORD_SET);
+    ChangeBgY(0, 0, BG_COORD_SET);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    ChangeBgX(3, 0, BG_COORD_SET);
+    ChangeBgY(3, 0, BG_COORD_SET);
 }
 
 bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax)

@@ -505,13 +505,14 @@ static void TeachyTvMainCallback(void)
 
 static void TeachyTvSetupBg(void)
 {
-    ResetAllBgsCoordinatesAndBgCntRegs();
+    ResetVramOamAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, 4);
     SetBgTilemapBuffer(1, sResources->screenTilemap);
     SetBgTilemapBuffer(2, sResources->buffer2);
     SetBgTilemapBuffer(3, sResources->buffer3);
-    SetGpuReg(REG_OFFSET_DISPCNT, 0x3040);
+    ResetAllBgsCoordinates();
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);

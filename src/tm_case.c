@@ -573,12 +573,14 @@ static void ResetBufferPointers_NoFree(void)
 static void LoadBGTemplates(void)
 {
     void ** ptr;
-    ResetAllBgsCoordinatesAndBgCntRegs();
+
+    ResetVramOamAndBgCntRegs();
     ptr = &sTilemapBuffer;
     *ptr = AllocZeroed(0x800);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBGTemplates, ARRAY_COUNT(sBGTemplates));
     SetBgTilemapBuffer(2, *ptr);
+    ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);

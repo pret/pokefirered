@@ -867,11 +867,12 @@ static bool8 SetupBagMenu(void)
 
 static void BagMenu_InitBGs(void)
 {
-    ResetAllBgsCoordinatesAndBgCntRegs();
+    ResetVramOamAndBgCntRegs();
     memset(gBagMenu->tilemapBuffer, 0, sizeof(gBagMenu->tilemapBuffer));
     ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, sBgTemplates_ItemMenu, NELEMS(sBgTemplates_ItemMenu));
     SetBgTilemapBuffer(1, gBagMenu->tilemapBuffer);
+    ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(1);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     ShowBg(0);

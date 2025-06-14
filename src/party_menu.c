@@ -788,7 +788,6 @@ static void ResetPartyMenu(void)
 
 static bool8 AllocPartyMenuBg(void)
 {
-    ResetAllBgsCoordinatesAndBgCntRegs();
     sPartyBgTilemapBuffer = Alloc(0x800);
     if (sPartyBgTilemapBuffer == NULL)
         return FALSE;
@@ -796,6 +795,7 @@ static bool8 AllocPartyMenuBg(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sPartyMenuBgTemplates, ARRAY_COUNT(sPartyMenuBgTemplates));
     SetBgTilemapBuffer(1, sPartyBgTilemapBuffer);
+    ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(1);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);

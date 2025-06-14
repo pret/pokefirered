@@ -611,11 +611,12 @@ static void Task_AbortBerryPouchLoading_WaitFade(u8 taskId)
 
 static void BerryPouchInitBgs(void)
 {
-    ResetAllBgsCoordinatesAndBgCntRegs();
+    ResetVramOamAndBgCntRegs();
     memset(sResources->bg1TilemapBuffer, 0, BG_SCREEN_SIZE);
     ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
     SetBgTilemapBuffer(1, sResources->bg1TilemapBuffer);
+    ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(1);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);

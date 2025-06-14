@@ -5322,6 +5322,8 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 {
     if (!gPaletteFade.active)
     {
+        if (gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
+            FreeAllWindowBuffers();
         gIsFishingEncounter = FALSE;
         gIsSurfingEncounter = FALSE;
         if (gDexNavSpecies && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
@@ -5355,7 +5357,8 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         }
     }
 
-    FreeAllWindowBuffers();
+    if (!(gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
+        FreeAllWindowBuffers();
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
         // To account for Battle Factory and Slateport Battle Tent, enemy parties are zeroed out in the facilitites respective src/xxx.c files

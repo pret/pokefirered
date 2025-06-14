@@ -413,7 +413,7 @@ static void Task_ItemPcWaitFadeAndBail(u8 taskId)
 
 static bool8 ItemPc_InitBgs(void)
 {
-    ResetAllBgsCoordinatesAndBgCntRegs();
+    ResetVramOamAndBgCntRegs();
     sBg1TilemapBuffer = Alloc(0x800);
     if (sBg1TilemapBuffer == NULL)
         return FALSE;
@@ -421,6 +421,7 @@ static bool8 ItemPc_InitBgs(void)
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
     SetBgTilemapBuffer(1, sBg1TilemapBuffer);
+    ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(1);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
     SetGpuReg(REG_OFFSET_BLDCNT , 0);

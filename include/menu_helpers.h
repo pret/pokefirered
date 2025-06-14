@@ -31,7 +31,6 @@ bool8 MenuHelpers_ShouldWaitForLinkRecv(void);
 void SetCursorWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 maxShownItems, u8 totalItems);
 void SetCursorScrollWithinListBounds(u16 *scrollOffset, u16 *cursorPos, u8 shownItems, u8 totalItems, u8 maxShownItems);
 void SetVBlankHBlankCallbacksToNull(void);
-void ResetAllBgsCoordinatesAndBgCntRegs(void);
 u8 GetDialogBoxFontId(void);
 bool8 AdjustQuantityAccordingToDPadInput(s16 *quantity_p, u16 qmax);
 void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 paletteNum, u8 fontId, u8 textSpeed, const u8 *string, void *taskFunc);

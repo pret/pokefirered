@@ -34,6 +34,8 @@ struct ItemPcResources
     u8 scrollIndicatorArrowPairId;
     u16 withdrawQuantitySubmenuCursorPos;
     s16 data[3];
+    u8 swapLineSpriteIds[ITEMMENU_SWAP_LINE_LENGTH];
+    u8 itemSpriteIds[2];
 };
 
 struct ItemPcStaticResources
@@ -216,7 +218,7 @@ void ItemPc_Init(u8 kind, MainCallback callback)
         SetMainCallback2(callback);
         return;
     }
-    if ((sStateDataPtr = Alloc(sizeof(struct ItemPcResources))) == NULL)
+    if ((sStateDataPtr = AllocZeroed(sizeof(struct ItemPcResources))) == NULL)
     {
         SetMainCallback2(callback);
         return;
@@ -230,6 +232,8 @@ void ItemPc_Init(u8 kind, MainCallback callback)
     sStateDataPtr->itemMenuIconSlot = 0;
     sStateDataPtr->scrollIndicatorArrowPairId = 0xFF;
     sStateDataPtr->savedCallback = 0;
+    sStateDataPtr->itemSpriteIds[0] = SPRITE_NONE;
+    sStateDataPtr->itemSpriteIds[1] = SPRITE_NONE;
     for (i = 0; i < 3; i++)
     {
         sStateDataPtr->data[i] = 0;
@@ -291,7 +295,6 @@ static bool8 ItemPc_DoGfxSetup(void)
         gMain.state++;
         break;
     case 5:
-        ResetItemMenuIconState();
         gMain.state++;
         break;
     case 6:
@@ -342,7 +345,7 @@ static bool8 ItemPc_DoGfxSetup(void)
         gMain.state++;
         break;
     case 14:
-        CreateSwapLineSprites(&gItemMenuIconSpriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH);
+        CreateSwapLineSprites(sStateDataPtr->swapLineSpriteIds, ITEMMENU_SWAP_LINE_LENGTH);
         gMain.state++;
         break;
     case 15:
@@ -508,6 +511,39 @@ static void ItemPc_BuildListMenuTemplate(void)
     gMultiuseListMenuTemplate.cursorKind = 0;
 }
 
+static void AddPcItemIconSprite(u16 item, u8 iconSlot)
+{
+    u8 *spriteIdPtr = &sStateDataPtr->itemSpriteIds[iconSlot];
+
+    if (*spriteIdPtr == SPRITE_NONE)
+    {
+        u8 spriteId;
+
+        // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
+        FreeSpriteTilesByTag(TAG_ITEM_ICON + iconSlot);
+        FreeSpritePaletteByTag(TAG_ITEM_ICON + iconSlot);
+        spriteId = AddItemIconSprite(TAG_ITEM_ICON + iconSlot, TAG_ITEM_ICON + iconSlot, item);
+        if (spriteId != MAX_SPRITES)
+        {
+            *spriteIdPtr = spriteId;
+            gSprites[spriteId].x2 = 24;
+            gSprites[spriteId].y2 = 140;
+        }
+    }
+}
+
+static void RemovePcItemIconSprite(u16 item, u8 iconSlot)
+{
+    u8 *spriteIdPtr = &sStateDataPtr->itemSpriteIds[iconSlot];
+    if (*spriteIdPtr == SPRITE_NONE)
+        return;
+
+    FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON);
+    FreeSpritePaletteByTag(iconSlot + TAG_ITEM_ICON);
+    DestroySprite(&gSprites[*spriteIdPtr]);
+    *spriteIdPtr = SPRITE_NONE;
+}
+
 static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu * list)
 {
     u16 itemId;
@@ -517,11 +553,10 @@ static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
 
     if (sStateDataPtr->moveModeOrigPos == 0xFF)
     {
-        RemoveBagItemIconSprite(sStateDataPtr->itemMenuIconSlot ^ 1);
         if (itemIndex != -2)
         {
             itemId = ItemPc_GetItemIdBySlotId(itemIndex);
-            AddBagItemIconSprite(itemId, sStateDataPtr->itemMenuIconSlot);
+            AddPcItemIconSprite(itemId, sStateDataPtr->itemMenuIconSlot);
             if (GetItemPocket(itemId) == POCKET_TM_HM)
                 desc = gMovesInfo[ItemIdToBattleMoveId(itemId)].name;
             else
@@ -529,9 +564,10 @@ static void ItemPc_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
         }
         else
         {
-            AddBagItemIconSprite(ITEMS_COUNT, sStateDataPtr->itemMenuIconSlot);
+            AddPcItemIconSprite(ITEMS_COUNT, sStateDataPtr->itemMenuIconSlot);
             desc = gText_ReturnToPC;
         }
+        RemovePcItemIconSprite(itemId, sStateDataPtr->itemMenuIconSlot ^ 1);
         sStateDataPtr->itemMenuIconSlot ^= 1;
         FillWindowPixelBuffer(1, 0);
         ItemPc_AddTextPrinterParameterized(1, FONT_NORMAL, desc, 0, 3, 2, 0, 0, 3);
@@ -765,7 +801,7 @@ static void ItemPc_ReturnFromSubmenu(u8 taskId)
 
 static void ItemStorage_UpdateSwapLinePos(u8 y)
 {
-    UpdateSwapLineSpritesPos(&gItemMenuIconSpriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH, -32, y + 6);
+    UpdateSwapLineSpritesPos(sStateDataPtr->swapLineSpriteIds, ITEMMENU_SWAP_LINE_LENGTH, -32, y + 6);
 }
 
 static void ItemStorage_StartItemSwap(u8 taskId, s16 pos)
@@ -780,7 +816,7 @@ static void ItemStorage_StartItemSwap(u8 taskId, s16 pos)
     FillWindowPixelBuffer(1, 0x00);
     ItemPc_AddTextPrinterParameterized(1, FONT_NORMAL, gStringVar4, 0, 3, 2, 3, 0, 0);
     ItemStorage_UpdateSwapLinePos(ListMenuGetYCoordForPrintingArrowCursor(data[0]));
-    SetItemMenuSwapLineInvisibility(FALSE);
+    SetSwapLineSpritesInvisibility(sStateDataPtr->swapLineSpriteIds, ITEMMENU_SWAP_LINE_LENGTH, FALSE);
     ItemPc_PrintOrRemoveCursor(data[0], 2);
     gTasks[taskId].func = ItemStorage_ProcessItemSwapInput;
 }
@@ -819,7 +855,7 @@ static void ItemPc_InsertItemIntoNewSlot(u8 taskId, u32 pos)
             sListMenuState.row--;
         ItemPc_BuildListMenuTemplate();
         data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
-        SetItemMenuSwapLineInvisibility(TRUE);
+        SetSwapLineSpritesInvisibility(sStateDataPtr->swapLineSpriteIds, ITEMMENU_SWAP_LINE_LENGTH, TRUE);
         gTasks[taskId].func = Task_ItemPcMain;
     }
 }
@@ -833,7 +869,7 @@ static void ItemPc_MoveItemModeCancel(u8 taskId, u32 pos)
         sListMenuState.row--;
     ItemPc_BuildListMenuTemplate();
     data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sListMenuState.scroll, sListMenuState.row);
-    SetItemMenuSwapLineInvisibility(TRUE);
+    SetSwapLineSpritesInvisibility(sStateDataPtr->swapLineSpriteIds, ITEMMENU_SWAP_LINE_LENGTH, TRUE);
     gTasks[taskId].func = Task_ItemPcMain;
 }
 
@@ -872,7 +908,7 @@ static void Task_ItemPcSubmenuRun(u8 taskId)
 
 static void Task_ItemPcWithdraw(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     ClearStdWindowAndFrameToTransparent(4, FALSE);
     ItemPc_DestroySubwindow(0);

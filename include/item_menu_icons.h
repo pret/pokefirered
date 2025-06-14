@@ -16,7 +16,4 @@ void CreateItemMenuSwapLine(void);
 void SetItemMenuSwapLineInvisibility(bool8 invisible);
 void UpdateItemMenuSwapLinePos(u16 y);
 
-void ResetItemMenuIconState(void);
-void CreateBerryPouchItemIcon(u16 itemId, u8 id);
-
 #endif // GUARD_ITEM_MENU_ICONS_H

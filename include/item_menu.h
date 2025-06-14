@@ -41,7 +41,6 @@ enum {
 };
 
 #define ITEMMENU_SWAP_LINE_LENGTH 9
-// Indexes for gItemMenuIconSpriteIds
 enum {
     ITEMMENUSPRITE_BAG,
     ITEMMENUSPRITE_SWAP_LINE,
@@ -65,6 +64,7 @@ struct BagMenu
 {
     void (*newScreenCallback)(void);
     u8 tilemapBuffer[BG_SCREEN_SIZE];
+    u8 spriteIds[ITEMMENUSPRITE_COUNT];
     u8 windowIds[ITEMWIN_COUNT];
     u8 toSwapPos;
     u8 pocketSwitchMode:4;
@@ -81,8 +81,6 @@ struct BagMenu
     u8 numShownItems[NUM_BAG_POCKETS_NO_CASES];
     s16 graphicsLoadState;
 };
-
-extern u8 gItemMenuIconSpriteIds[ITEMMENUSPRITE_COUNT];
 
 extern struct BagMenu *gBagMenu;
 extern u16 gSpecialVar_ItemId;

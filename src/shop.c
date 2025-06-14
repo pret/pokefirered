@@ -55,19 +55,20 @@ enum
 
 struct ShopData
 {
-    /*0x00*/ void (*callback)(void);
-    /*0x04*/ const u16 *itemList;
-    /*0x08*/ u32 itemPrice;
-    /*0x0C*/ u16 selectedRow;
-    /*0x0E*/ u16 scrollOffset;
-    /*0x10*/ u16 itemCount;
-    /*0x12*/ u16 itemsShowed;
-    /*0x14*/ u16 maxQuantity;
-    /*0x16*/ u16 martType:4;    // 0x1 if tm list
-             u16 fontId:5;
-             u16 itemSlot:2;
-             u16 unk16_11:5;
-    /*0x18*/ u16 unk18;
+    void (*callback)(void);
+    const u16 *itemList;
+    u32 itemPrice;
+    u16 selectedRow;
+    u16 scrollOffset;
+    u16 itemCount;
+    u16 itemsShowed;
+    u16 maxQuantity;
+    u16 martType:4;    // 0x1 if tm list
+    u16 fontId:5;
+    u16 itemSlot:2;
+    u16 unk16_11:5;
+    u16 unk18;
+    u8 itemSpriteIds[2];
 };
 
 static EWRAM_DATA s16 sViewportObjectEvents[OBJECT_EVENTS_COUNT][4] = {0};
@@ -513,7 +514,8 @@ static void CB2_InitBuyMenu(void)
         ResetSpriteData();
         ResetTasks();
         ClearScheduledBgCopiesToVram();
-        ResetItemMenuIconState();
+        sShopData.itemSpriteIds[0] = SPRITE_NONE;
+        sShopData.itemSpriteIds[1] = SPRITE_NONE;
         if (!(InitShopData()) || !(BuyMenuBuildListMenuTemplate()))
             return;
         BuyMenuInitBgs();
@@ -754,6 +756,39 @@ static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8 *d
     list->id = index;
 }
 
+static void BuyMenuAddItemIcon(u16 item, u8 iconSlot)
+{
+    u8 *spriteIdPtr = &sShopData.itemSpriteIds[iconSlot];
+
+    if (*spriteIdPtr == SPRITE_NONE)
+    {
+        u8 spriteId;
+
+        // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
+        FreeSpriteTilesByTag(TAG_ITEM_ICON + iconSlot);
+        FreeSpritePaletteByTag(TAG_ITEM_ICON + iconSlot);
+        spriteId = AddItemIconSprite(TAG_ITEM_ICON + iconSlot, TAG_ITEM_ICON + iconSlot, item);
+        if (spriteId != MAX_SPRITES)
+        {
+            *spriteIdPtr = spriteId;
+            gSprites[spriteId].x2 = 24;
+            gSprites[spriteId].y2 = 140;
+        }
+    }
+}
+
+static void BuyMenuRemoveItemIcon(u8 iconSlot)
+{
+    u8 *spriteIdPtr = &sShopData.itemSpriteIds[iconSlot];
+    if (*spriteIdPtr == SPRITE_NONE)
+        return;
+
+    FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON);
+    FreeSpritePaletteByTag(iconSlot + TAG_ITEM_ICON);
+    DestroySprite(&gSprites[*spriteIdPtr]);
+    *spriteIdPtr = SPRITE_NONE;
+}
+
 static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list)
 {
     const u8 *description;
@@ -769,11 +804,11 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
     FillWindowPixelBuffer(5, PIXEL_FILL(0));
     if (sShopData.martType != MART_TYPE_TMHM)
     {
-        RemoveBagItemIconSprite(sShopData.itemSlot ^ 1);
         if (item != INDEX_CANCEL)
-            AddBagItemIconSprite(item, sShopData.itemSlot);
+            BuyMenuAddItemIcon(item, sShopData.itemSlot);
         else
-            AddBagItemIconSprite(ITEMS_COUNT, sShopData.itemSlot);
+            BuyMenuAddItemIcon(ITEMS_COUNT, sShopData.itemSlot);
+        BuyMenuRemoveItemIcon(sShopData.itemSlot ^ 1);
 
         sShopData.itemSlot ^= 1;
         BuyMenuPrint(5, FONT_NORMAL, description, 0, 3, 2, 1, 0, 0);

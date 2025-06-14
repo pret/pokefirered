@@ -42,6 +42,7 @@ struct BerryPouchStruct_203F36C
     u8 listMenuNumItems;
     u8 listMenuMaxShowed;
     u8 itemMenuIconId;
+    u8 itemSpriteIds[2];
     u8 ALIGNED(4) bg1TilemapBuffer[BG_SCREEN_SIZE];
     s16 data[4];
 };
@@ -439,6 +440,8 @@ void InitBerryPouch(u8 type, void (*savedCallback)(void), u8 allowSelect)
             sStaticCnt.savedCallback = savedCallback;
         sResources->exitCallback = NULL;
         sResources->itemMenuIconId = 0;
+        sResources->itemSpriteIds[0] = SPRITE_NONE,
+        sResources->itemSpriteIds[1] = SPRITE_NONE,
         sResources->indicatorTaskId = 0xFF;
         for (i = 0; i < 4; i++)
             sResources->data[i] = 0;
@@ -515,7 +518,6 @@ static bool8 RunBerryPouchInit(void)
         gMain.state++;
         break;
     case 5:
-        ResetItemMenuIconState();
         gMain.state++;
         break;
     case 6:
@@ -721,6 +723,39 @@ static void CopySelectedListMenuItemName(s16 itemIdx, u8 * dest)
     StringCopy(dest, &sListMenuStrbuf[itemIdx * 27]);
 }
 
+static void CreateBerryPouchItemIcon(u16 item, u8 iconSlot)
+{
+    u8 *spriteIdPtr = &sResources->itemSpriteIds[iconSlot];
+
+    if (*spriteIdPtr == SPRITE_NONE)
+    {
+        u8 spriteId;
+
+        // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
+        FreeSpriteTilesByTag(TAG_ITEM_ICON + iconSlot);
+        FreeSpritePaletteByTag(TAG_ITEM_ICON + iconSlot);
+        spriteId = AddItemIconSprite(TAG_ITEM_ICON + iconSlot, TAG_ITEM_ICON + iconSlot, item);
+        if (spriteId != MAX_SPRITES)
+        {
+            *spriteIdPtr = spriteId;
+            gSprites[spriteId].x2 = 24;
+            gSprites[spriteId].y2 = 147;
+        }
+    }
+}
+
+static void RemoveBerryPouchItemIcon(u8 iconSlot)
+{
+    u8 *spriteIdPtr = &sResources->itemSpriteIds[iconSlot];
+    if (*spriteIdPtr == SPRITE_NONE)
+        return;
+
+    FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON);
+    FreeSpritePaletteByTag(iconSlot + TAG_ITEM_ICON);
+    DestroySprite(&gSprites[*spriteIdPtr]);
+    *spriteIdPtr = SPRITE_NONE;
+}
+
 static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
@@ -728,11 +763,11 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
         PlaySE(SE_BAG_CURSOR);
         StartBerryPouchSpriteWobbleAnim();
     }
-    RemoveBagItemIconSprite(sResources->itemMenuIconId ^ 1);
     if (sResources->listMenuNumItems != itemIndex)
         CreateBerryPouchItemIcon(BagGetItemIdByPocketPosition(POCKET_BERRIES, itemIndex), sResources->itemMenuIconId);
     else
         CreateBerryPouchItemIcon(ITEMS_COUNT, sResources->itemMenuIconId);
+    RemoveBerryPouchItemIcon(sResources->itemMenuIconId ^ 1);
     sResources->itemMenuIconId ^= 1;
     PrintSelectedBerryDescription(itemIndex);
 }

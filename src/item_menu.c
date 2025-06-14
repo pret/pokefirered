@@ -702,6 +702,7 @@ void GoToBagMenu(u8 location, u8 pocket, MainCallback exitCallback)
         gBagMenu->toSwapPos = NOT_SWAPPING;
         gBagMenu->pocketScrollArrowsTask = TASK_NONE;
         gBagMenu->pocketSwitchArrowsTask = TASK_NONE;
+        memset(gBagMenu->spriteIds, SPRITE_NONE, sizeof(gBagMenu->spriteIds));
         memset(gBagMenu->windowIds, WINDOW_NONE, sizeof(gBagMenu->windowIds));
         SetMainCallback2(CB2_Bag);
         
@@ -778,7 +779,6 @@ static bool8 SetupBagMenu(void)
         gMain.state++;
         break;
     case 5:
-        ResetItemMenuIconState();
         gMain.state++;
         break;
     case 6:
@@ -1507,7 +1507,7 @@ static void Task_HandleSwappingItemsInput(u8 taskId)
     if (JOY_NEW(SELECT_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ListMenuGetScrollAndRow(data[0], &gBagPosition.scrollPosition[gBagPosition.pocket], &gBagPosition.cursorPosition[gBagPosition.pocket]);
+        ListMenuGetScrollAndRow(tListTaskId, &gBagPosition.scrollPosition[gBagPosition.pocket], &gBagPosition.cursorPosition[gBagPosition.pocket]);
         DoItemSwap(taskId);
     }
     else

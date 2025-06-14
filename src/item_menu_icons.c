@@ -12,8 +12,6 @@ enum {
     AFFINEANIM_BAG_SHAKE,
 };
 
-EWRAM_DATA u8 gItemMenuIconSpriteIds[ITEMMENUSPRITE_COUNT] = {0};
-
 static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite);
 static void SpriteCB_ShakeBagSprite(struct Sprite *sprite);
 
@@ -121,23 +119,15 @@ const struct SpriteTemplate gItemIconSpriteTemplate = {
     .callback = SpriteCallbackDummy
 };
 
-void ResetItemMenuIconState(void)
-{
-    u16 i;
-
-    for (i = 0; i < ITEMMENUSPRITE_COUNT; i++)
-        gItemMenuIconSpriteIds[i] = SPRITE_NONE;
-}
-
 void AddBagVisualSprite(u8 bagPocketId)
 {
-    gItemMenuIconSpriteIds[ITEMMENUSPRITE_BAG] = CreateSprite(&sSpriteTemplate_Bag, 40, 68, 0);
+    gBagMenu->spriteIds[ITEMMENUSPRITE_BAG] = CreateSprite(&sSpriteTemplate_Bag, 40, 68, 0);
     SetBagVisualPocketId(bagPocketId);
 }
 
 void SetBagVisualPocketId(u8 bagPocketId)
 {
-    struct Sprite *sprite = &gSprites[gItemMenuIconSpriteIds[ITEMMENUSPRITE_BAG]];
+    struct Sprite *sprite = &gSprites[gBagMenu->spriteIds[ITEMMENUSPRITE_BAG]];
     sprite->y2 = -5;
     sprite->callback = SpriteCB_BagVisualSwitchingPockets;
     StartSpriteAnim(sprite, bagPocketId);
@@ -153,7 +143,7 @@ static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite)
 
 void ShakeBagSprite(void)
 {
-    struct Sprite *sprite = &gSprites[gItemMenuIconSpriteIds[ITEMMENUSPRITE_BAG]];
+    struct Sprite *sprite = &gSprites[gBagMenu->spriteIds[ITEMMENUSPRITE_BAG]];
     if (sprite->affineAnimEnded)
     {
         StartSpriteAffineAnim(sprite, AFFINEANIM_BAG_SHAKE);
@@ -172,7 +162,7 @@ static void SpriteCB_ShakeBagSprite(struct Sprite *sprite)
 
 void AddBagItemIconSprite(u16 itemId, u8 id)
 {
-    u8 *spriteIds = &gItemMenuIconSpriteIds[ITEMMENUSPRITE_ITEM];
+    u8 *spriteIds = &gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM];
 
     if (spriteIds[id] == SPRITE_NONE)
     {
@@ -193,7 +183,7 @@ void AddBagItemIconSprite(u16 itemId, u8 id)
 
 void RemoveBagItemIconSprite(u8 id)
 {
-    u8 *spriteIds = &gItemMenuIconSpriteIds[ITEMMENUSPRITE_ITEM];
+    u8 *spriteIds = &gBagMenu->spriteIds[ITEMMENUSPRITE_ITEM];
 
     if (spriteIds[id] != SPRITE_NONE)
     {
@@ -204,37 +194,17 @@ void RemoveBagItemIconSprite(u8 id)
 
 void CreateItemMenuSwapLine(void)
 {
-    CreateSwapLineSprites(&gItemMenuIconSpriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH);
+    CreateSwapLineSprites(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH);
 }
 
 void SetItemMenuSwapLineInvisibility(bool8 invisible)
 {
-    SetSwapLineSpritesInvisibility(&gItemMenuIconSpriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH, invisible);
+    SetSwapLineSpritesInvisibility(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH, invisible);
 }
 
 void UpdateItemMenuSwapLinePos(u16 y)
 {
-    UpdateSwapLineSpritesPos(&gItemMenuIconSpriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH, 0, y + 6);
-}
-
-void CreateBerryPouchItemIcon(u16 itemId, u8 id)
-{
-    u8 *spriteIds = &gItemMenuIconSpriteIds[ITEMMENUSPRITE_ITEM];
-    u8 spriteId;
-
-    if (spriteIds[id] == SPRITE_NONE)
-    {
-        // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
-        FreeSpriteTilesByTag(TAG_ITEM_ICON + id);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON + id);
-        spriteId = AddItemIconSprite(TAG_ITEM_ICON + id, TAG_ITEM_ICON + id, itemId);
-        if (spriteId != MAX_SPRITES)
-        {
-            spriteIds[id] = spriteId;
-            gSprites[spriteId].x2 = 24;
-            gSprites[spriteId].y2 = 147; // This value is the only difference from AddBagItemIconSprite
-        }
-    }
+    UpdateSwapLineSpritesPos(&gBagMenu->spriteIds[ITEMMENUSPRITE_SWAP_LINE], ITEMMENU_SWAP_LINE_LENGTH, 0, y + 6);
 }
 
 

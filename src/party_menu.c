@@ -1351,7 +1351,7 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
             }
             break;
         case PARTY_ACTION_GIVE_ITEM:
-        // case PARTY_ACTION_GIVE_PC_ITEM:
+        case PARTY_ACTION_GIVE_PC_ITEM:
             if (IsSelectedMonNotEgg((u8 *)slotPtr))
             {
                 PlaySE(SE_SELECT);
@@ -1812,8 +1812,8 @@ static void DisplayGaveHeldItemMessage(struct Pokemon *mon, u16 item, bool8 keep
 {
     if (!fromBagMenu) // Used Give option from party menu
         ItemUse_SetQuestLogEvent(QL_EVENT_GAVE_HELD_ITEM, mon, item, 0xFFFF);
-    // else if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM)
-    //     ItemUse_SetQuestLogEvent(QL_EVENT_GAVE_HELD_ITEM_PC, mon, item, 0xFFFF);
+    else if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM)
+        ItemUse_SetQuestLogEvent(QL_EVENT_GAVE_HELD_ITEM_PC, mon, item, 0xFFFF);
     else
         ItemUse_SetQuestLogEvent(QL_EVENT_GAVE_HELD_ITEM_BAG, mon, item, 0xFFFF);
     GetMonNickname(mon, gStringVar1);
@@ -4345,9 +4345,9 @@ static void SetSwappedHeldItemQuestLogEvent(struct Pokemon *mon, u16 item, u16 i
     data->species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     data->takenItemId = item;
     data->givenItemId = item2;
-    // if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM)
-    //     SetQuestLogEvent(QL_EVENT_SWAPPED_HELD_ITEM_PC, (void *)data);
-    // else
+    if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM)
+        SetQuestLogEvent(QL_EVENT_SWAPPED_HELD_ITEM_PC, (void *)data);
+    else
         SetQuestLogEvent(QL_EVENT_SWAPPED_HELD_ITEM, (void *)data);
     Free(data);
 }
@@ -6401,9 +6401,9 @@ static void DisplayItemMustBeRemovedFirstMessage(u8 taskId)
 
 static void RemoveItemToGiveFromBag(u16 item)
 {
-    // if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM) // Unused, never occurs
-    //     RemovePCItem(item, 1);
-    // else
+    if (gPartyMenu.action == PARTY_ACTION_GIVE_PC_ITEM)
+        RemovePCItem(item, 1);
+    else
         RemoveBagItem(item, 1);
 }
 

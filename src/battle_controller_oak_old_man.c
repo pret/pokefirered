@@ -833,8 +833,8 @@ static void OakOldManHandleChoosePokemon(u32 battler)
     s32 i;
 
     gBattleControllerData[battler] = CreateTask(TaskDummy, 0xFF);
-    gTasks[gBattleControllerData[battler]].data[0] = gBattleResources->bufferA[battler][1] & 0xF;
-    *(&gBattleStruct->battlerPreventingSwitchout) = gBattleResources->bufferA[battler][1] >> 4;
+    gTasks[gBattleControllerData[battler]].data[0] = gBattleResources->bufferA[battler][1];
+    *(&gBattleStruct->battlerPreventingSwitchout) = gBattleResources->bufferA[battler][8];
     *(&gBattleStruct->prevSelectedPartySlot) = gBattleResources->bufferA[battler][2];
     *(&gBattleStruct->abilityPreventingSwitchout) = (gBattleResources->bufferA[battler][3] & 0xFF) | (gBattleResources->bufferA[battler][7] << 8);
     for (i = 0; i < 3; ++i)

@@ -346,7 +346,7 @@ static void PlayerPartnerHandleChoosePokemon(u32 battler)
 {
     s32 chosenMonId;
     // Choosing Revival Blessing target
-    if ((gBattleResources->bufferA[battler][1] & 0xF) == PARTY_ACTION_CHOOSE_FAINTED_MON)
+    if (gBattleResources->bufferA[battler][1] == PARTY_ACTION_CHOOSE_FAINTED_MON)
     {
         chosenMonId = gSelectedMonPartyId = GetFirstFaintedPartyIndex(battler);
     }

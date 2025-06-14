@@ -257,6 +257,12 @@ static void ItemPc_VBlankCB(void)
     TransferPlttBuffer();
 }
 
+#define tListTaskId        data[0]
+#define tListPosition      data[1]
+#define tQuantity          data[2]
+#define tNeverRead         data[3]
+#define tItemCount         data[8]
+
 static void ItemPc_RunSetup(void)
 {
     while (1)
@@ -914,8 +920,8 @@ static void Task_ItemPcWithdraw(u8 taskId)
     ClearStdWindowAndFrameToTransparent(4, FALSE);
     ItemPc_DestroySubwindow(0);
     ClearWindowTilemap(4);
-    data[8] = 1;
-    if (ItemPc_GetItemQuantityBySlotId(data[1]) == 1)
+    tItemCount = 1;
+    if (ItemPc_GetItemQuantityBySlotId(tListPosition) == 1)
     {
         PutWindowTilemap(0);
         ScheduleBgCopyTilemapToVram(0);
@@ -924,7 +930,7 @@ static void Task_ItemPcWithdraw(u8 taskId)
     else
     {
         PutWindowTilemap(0);
-        ItemPc_WithdrawMultipleInitWindow(data[1]);
+        ItemPc_WithdrawMultipleInitWindow(tListPosition);
         ItemPc_PlaceWithdrawQuantityScrollIndicatorArrows();
         gTasks[taskId].func = Task_ItemPcHandleWithdrawMultiple;
     }
@@ -936,11 +942,11 @@ static void ItemPc_DoWithdraw(u8 taskId)
     u16 itemId = ItemPc_GetItemIdBySlotId(data[1]);
     u8 windowId;
 
-    if (AddBagItem(itemId, data[8]) == TRUE)
+    if (AddBagItem(itemId, tItemCount) == TRUE)
     {
         ItemUse_SetQuestLogEvent(QL_EVENT_WITHDREW_ITEM_PC, NULL, itemId, 0xFFFF);
         CopyItemName(itemId, gStringVar1);
-        ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
         StringExpandPlaceholders(gStringVar4, gText_WithdrewQuantItem);
         windowId = ItemPc_GetOrCreateSubwindow(2);
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar4, 0, 2, 0, NULL);
@@ -962,8 +968,8 @@ static void Task_ItemPcWaitButtonAndFinishWithdrawMultiple(u8 taskId)
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        itemId = ItemPc_GetItemIdBySlotId(data[1]);
-        RemovePCItem(itemId, data[8]);
+        itemId = ItemPc_GetItemIdBySlotId(tListPosition);
+        RemovePCItem(itemId, tItemCount);
         ItemPcCompaction();
         Task_ItemPcCleanUpWithdraw(taskId);
     }
@@ -1000,7 +1006,7 @@ static void ItemPc_WithdrawMultipleInitWindow(u16 slotId)
     CopyItemName(itemId, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_WithdrawHowMany);
     AddTextPrinterParameterized(ItemPc_GetOrCreateSubwindow(1), FONT_NORMAL, gStringVar4, 0, 2, 0, NULL);
-    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     ItemPc_SetBorderStyleOnWindow(3);
     ItemPc_AddTextPrinterParameterized(3, FONT_SMALL, gStringVar4, 8, 10, 1, 0, 0, 1);
@@ -1010,24 +1016,26 @@ static void ItemPc_WithdrawMultipleInitWindow(u16 slotId)
 static void UpdateWithdrawQuantityDisplay(s16 quantity)
 {
     FillWindowPixelRect(3, PIXEL_FILL(1), 10, 10, 28, 12);
-    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 3);
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     ItemPc_AddTextPrinterParameterized(3, FONT_SMALL, gStringVar4, 8, 10, 1, 0, 0, 1);
 }
 
 static void Task_ItemPcHandleWithdrawMultiple(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
-    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
-        UpdateWithdrawQuantityDisplay(data[8]);
+    if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
+    {
+        UpdateWithdrawQuantityDisplay(tItemCount);
+    }
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
         ItemPc_DestroySubwindow(1);
         ClearWindowTilemap(3);
         PutWindowTilemap(0);
-        ItemPc_PrintOrRemoveCursor(data[0], 1);
+        ItemPc_PrintOrRemoveCursor(tListTaskId, 1);
         ScheduleBgCopyTilemapToVram(0);
         ItemPc_RemoveScrollIndicatorArrowPair();
         ItemPc_DoWithdraw(taskId);
@@ -1040,7 +1048,7 @@ static void Task_ItemPcHandleWithdrawMultiple(u8 taskId)
         ClearWindowTilemap(3);
         PutWindowTilemap(0);
         PutWindowTilemap(1);
-        ItemPc_PrintOrRemoveCursor(data[0], 1);
+        ItemPc_PrintOrRemoveCursor(tListTaskId, 1);
         ScheduleBgCopyTilemapToVram(0);
         ItemPc_RemoveScrollIndicatorArrowPair();
         ItemPc_ReturnFromSubmenu(taskId);
@@ -1077,7 +1085,7 @@ static void ItemPc_CB2_ReturnFromPartyMenu(void)
 
 static void gTask_ItemPcWaitButtonAndExitSubmenu(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -1085,7 +1093,7 @@ static void gTask_ItemPcWaitButtonAndExitSubmenu(u8 taskId)
         ClearDialogWindowAndFrameToTransparent(5, FALSE);
         ClearWindowTilemap(5);
         PutWindowTilemap(1);
-        ItemPc_PrintOrRemoveCursor(data[0], 1);
+        ItemPc_PrintOrRemoveCursor(tListTaskId, 1);
         ScheduleBgCopyTilemapToVram(0);
         ItemPc_ReturnFromSubmenu(taskId);
     }
@@ -1093,14 +1101,14 @@ static void gTask_ItemPcWaitButtonAndExitSubmenu(u8 taskId)
 
 static void Task_ItemPcCancel(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     ClearStdWindowAndFrameToTransparent(4, FALSE);
     ItemPc_DestroySubwindow(0);
     ClearWindowTilemap(4);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
-    ItemPc_PrintOrRemoveCursor(data[0], 1);
+    ItemPc_PrintOrRemoveCursor(tListTaskId, 1);
     ScheduleBgCopyTilemapToVram(0);
     ItemPc_ReturnFromSubmenu(taskId);
 }

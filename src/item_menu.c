@@ -1771,7 +1771,7 @@ static void CancelToss(u8 taskId)
 static void Task_ChooseHowManyToToss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
+    if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
         PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
     }
@@ -2195,7 +2195,8 @@ static void Task_ItemContext_Deposit(u8 taskId)
 static void Task_ChooseHowManyToDeposit(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
+
+    if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
         PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
     }

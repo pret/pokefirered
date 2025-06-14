@@ -1348,7 +1348,11 @@ void RecordItemTransaction(u16 itemId, u16 quantity, u8 logEventId)
     {
         // logEventId will either be 1 (bought) or 2 (sold)
         // so for buying it will add the full price and selling will add half price
-        history->totalMoney += (GetItemPrice(itemId) >> (logEventId - 1)) * quantity;
+        if (logEventId == (QL_EVENT_SOLD_ITEM - QL_EVENT_USED_POKEMART))
+            history->totalMoney += GetItemSellPrice(itemId) * quantity;
+        else
+            history->totalMoney += GetItemPrice(itemId) * quantity;
+
         if (history->totalMoney > 999999)
             history->totalMoney = 999999;
     }

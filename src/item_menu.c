@@ -2041,8 +2041,14 @@ static void Task_ItemContext_Sell(u8 taskId)
         }
         else
         {
+            u32 maxQuantity = MAX_MONEY / GetItemSellPrice(gSpecialVar_ItemId);
+
             if (tQuantity > MAX_BAG_ITEM_CAPACITY)
                 tQuantity = MAX_BAG_ITEM_CAPACITY;
+            
+            if (tQuantity > maxQuantity)
+                tQuantity = maxQuantity;
+
             CopyItemName(gSpecialVar_ItemId, gStringVar1);
             StringExpandPlaceholders(gStringVar4, gText_HowManyToSell);
             DisplayItemMessage(taskId, GetDialogBoxFontId(), gStringVar4, InitSellHowManyInput);
@@ -2053,7 +2059,7 @@ static void Task_ItemContext_Sell(u8 taskId)
 static void DisplaySellItemPriceAndConfirm(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    ConvertIntToDecimalStringN(gStringVar3, (GetItemPrice(gSpecialVar_ItemId) / ITEM_SELL_FACTOR) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+    ConvertIntToDecimalStringN(gStringVar3, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_ICanPayThisMuch_WouldThatBeOkay);
     DisplayItemMessage(taskId, GetDialogBoxFontId(), gStringVar4, AskSellItems);
 }
@@ -2081,7 +2087,7 @@ static void InitSellHowManyInput(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u8 windowId = BagMenu_AddWindow(ITEMWIN_QUANTITY_WIDE);
     
-    PrintItemSoldAmount(windowId, 1, (GetItemPrice(gSpecialVar_ItemId) / ITEM_SELL_FACTOR) * tItemCount);
+    PrintItemSoldAmount(windowId, 1, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount);
     DisplayCurrentMoneyWindow();
     CreatePocketScrollArrowPair_SellQuantity();
     gTasks[taskId].func = Task_ChooseHowManyToSell;
@@ -2092,7 +2098,7 @@ static void Task_ChooseHowManyToSell(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
-        PrintItemSoldAmount(gBagMenu->windowIds[ITEMWIN_QUANTITY_WIDE], tItemCount, (GetItemPrice(gSpecialVar_ItemId) / ITEM_SELL_FACTOR) * tItemCount);
+        PrintItemSoldAmount(gBagMenu->windowIds[ITEMWIN_QUANTITY_WIDE], tItemCount, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount);
     }
     else if (JOY_NEW(A_BUTTON))
     {
@@ -2126,7 +2132,7 @@ static void ConfirmSell(u8 taskId)
     PutWindowTilemap(WIN_ITEM_LIST);
     ScheduleBgCopyTilemapToVram(0);
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
-    ConvertIntToDecimalStringN(gStringVar1, (GetItemPrice(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, data[1])) / ITEM_SELL_FACTOR) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+    ConvertIntToDecimalStringN(gStringVar1, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_TurnedOverVar1ForVar2);
     DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, SellItem);
 }
@@ -2139,7 +2145,7 @@ static void SellItem(u8 taskId)
 
     PlaySE(SE_SHOP);
     RemoveBagItem(gSpecialVar_ItemId, tItemCount);
-    AddMoney(&gSaveBlock1Ptr->money, (GetItemPrice(gSpecialVar_ItemId) / ITEM_SELL_FACTOR) * tItemCount);
+    AddMoney(&gSaveBlock1Ptr->money, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount);
     RecordItemTransaction(gSpecialVar_ItemId, tItemCount, QL_EVENT_SOLD_ITEM - QL_EVENT_USED_POKEMART);
     DestroyListMenuTask(tListTaskId, scrollPos, cursorPos);
     UpdatePocketItemList(gBagPosition.pocket);

@@ -4,8 +4,6 @@
 #include "item.h"
 #include "menu_helpers.h"
 
-#define ITEM_SELL_FACTOR ((I_SELL_VALUE_FRACTION >= GEN_9) ? 4 : 2)
-
 enum {
     ITEMMENULOCATION_FIELD,
     ITEMMENULOCATION_PARTY,

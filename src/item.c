@@ -763,6 +763,11 @@ u32 GetItemStatus2Mask(u16 itemId)
         return 0;
 }
 
+u32 GetItemSellPrice(u32 itemId)
+{
+    return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
+}
+
 bool8 IsItemTM(u16 itemId)
 {
     itemId = SanitizeItemId(itemId);

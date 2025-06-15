@@ -198,6 +198,7 @@ static void Task_Bag_TeachyTvCatching(u8 taskId);
 static void Task_Bag_TeachyTvStatus(u8 taskId);
 static void Task_Bag_TeachyTvTMs(u8 taskId);
 static void BagDrawDepositItemTextBox(void);
+static void BagDrawTextBoxOnWindow(u8 windowId);
 
 static const u8 sText_DepositHowManyVar1[] = _("Deposit how many\n{STR_VAR_1}(s)?");
 static const u8 sText_DepositedVar2Var1s[] = _("Deposited {STR_VAR_2}\n{STR_VAR_1}(s).");
@@ -2669,7 +2670,7 @@ static void DisplayCurrentMoneyWindow(void)
     PrintMoneyAmountInMoneyBoxWithBorder(windowId, 0x081, 0x0C, GetMoney(&gSaveBlock1Ptr->money));
 }
 
-void BagDrawTextBoxOnWindow(u8 windowId)
+static void BagDrawTextBoxOnWindow(u8 windowId)
 {
     DrawTextBorderOuter(windowId, 0x064, 14);
 }

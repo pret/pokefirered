@@ -50,7 +50,6 @@ u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8);
 void ItemUse_SetQuestLogEvent(u8, struct Pokemon *, u16, u16);
 void FieldCB_UseItemOnField(void);
-void DisplayDadsAdviceCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField);
 
 enum {
     BALL_THROW_UNABLE_TWO_MONS,

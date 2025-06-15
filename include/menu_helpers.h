@@ -40,6 +40,7 @@ u8 GetLRKeysPressedAndHeld(void);
 bool8 IsHoldingItemAllowed(u16 itemId);
 bool8 IsWritingMailAllowed(u16 itemId);
 void ResetVramOamAndBgCntRegs(void);
+void LoadListMenuSwapLineGfx(void);
 void CreateSwapLineSprites(u8 *spriteIds, u8 count);
 void SetSwapLineSpritesInvisibility(u8 *spriteIds, u8 count, bool8 invisible);
 void UpdateSwapLineSpritesPos(u8 *spriteIds, u8 count, s16 x, u16 y);

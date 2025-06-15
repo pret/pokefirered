@@ -345,6 +345,32 @@ void ClearPCItemSlots(void)
     }
 }
 
+void MoveItemSlotInList(struct ItemSlot *itemSlots_, u32 from, u32 to_)
+{
+    // dumb assignments needed to match
+    struct ItemSlot *itemSlots = itemSlots_;
+    u32 to = to_;
+
+    if (from != to)
+    {
+        s16 i, count;
+        struct ItemSlot firstSlot = itemSlots[from];
+
+        if (to > from)
+        {
+            to--;
+            for (i = from, count = to; i < count; i++)
+                itemSlots[i] = itemSlots[i + 1];
+        }
+        else
+        {
+            for (i = from, count = to; i > count; i--)
+                itemSlots[i] = itemSlots[i - 1];
+        }
+        itemSlots[to] = firstSlot;
+    }
+}
+
 void ClearBag(void)
 {
     u16 i;

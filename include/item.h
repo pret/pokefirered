@@ -65,6 +65,7 @@ ItemUseFunc GetItemFieldFunc(u16 itemId);
 u8 GetItemBattleUsage(u16 itemId);
 u16 GetItemSecondaryId(u16 itemId);
 u32 GetItemFlingPower(u32 itemId);
+void MoveItemSlotInList(struct ItemSlot *itemSlots_, u32 from, u32 to_);
 void ClearBag(void);
 void ClearPCItemSlots(void);
 void TrySetObtainedItemQuestLogEvent(u16 itemId);

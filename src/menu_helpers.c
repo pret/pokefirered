@@ -1,5 +1,6 @@
 #include "global.h"
 #include "bg.h"
+#include "decompress.h"
 #include "field_specials.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -55,14 +56,14 @@ static const union AnimCmd *const sAnims_SwapLine[] = {
     [ANIM_SWAP_LINE_END]   = sAnim_SwapLine_End
 };
 
-const struct CompressedSpriteSheet gBagSwapSpriteSheet = {
-    .data = gSwapLine_Gfx,
+static const struct CompressedSpriteSheet sSpriteSheet_SwapLine = {
+    .data = gSwapLineGfx,
     .size = 0x100,
     .tag = TAG_SWAP_LINE
 };
 
-const struct SpritePalette gBagSwapSpritePalette = {
-    .data = gSwapLine_Pal,
+static const struct SpritePalette sSpritePalette_SwapLine = {
+    .data = gSwapLinePal,
     .tag = TAG_SWAP_LINE
 };
 
@@ -349,6 +350,12 @@ u8 GetDialogBoxFontId(void)
         return FONT_MALE;
     else
         return FONT_FEMALE;
+}
+
+void LoadListMenuSwapLineGfx(void)
+{
+    LoadCompressedSpriteSheet(&sSpriteSheet_SwapLine);
+    LoadSpritePalette(&sSpritePalette_SwapLine);
 }
 
 void CreateSwapLineSprites(u8 *spriteIds, u8 count)

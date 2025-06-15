@@ -17,7 +17,7 @@ enum {
     ITEMMENULOCATION_TTVSCR_REGISTER,
     ITEMMENULOCATION_TTVSCR_TMS,
     ITEMMENULOCATION_BERRY_TREE_MULCH,
-    ITEMMENULOCATION_LAST,
+    ITEMMENULOCATION_LAST
 };
 
 enum {
@@ -101,11 +101,7 @@ bool8 UseRegisteredKeyItemOnField(void);
 void CB2_ChooseBerry(void);
 void CB2_ChooseMulch(void);
 
-void LoadBagMenuTextWindows(void);
-void BagMenu_Print(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 letterSpacing, u8 lineSpacing, u8 speed, u8 colorIdx);
 void BagDrawDepositItemTextBox(void);
-u32 BagMenu_AddWindow(u32 whichWindow);
-void BagMenu_RemoveWindow(u8 whichWindow);
 u8 GetBagWindow(u8 whichWindow);
 void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTable);
 void BagDrawTextBoxOnWindow(u8 windowId);

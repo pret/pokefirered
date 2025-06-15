@@ -457,8 +457,10 @@ extern const u8 gCreditsString_The_Royal_New_Zealand_Foundation_of_the_Blind_Gre
 extern const u8 gCreditsString_Graphic_Designer[];
 extern const u8 gCreditsString_Akira_Kinashi[];
 
+extern const u8 *const gPocketNamesStringsTable[];
+
 // berry_pouch
-extern const u8 gText_TheStrVar1CantBeHeldHere[];
+extern const u8 gText_Var1CantBeHeldHere[];
 extern const u8 gText_TossHowManyVar1s[];
 extern const u8 gText_ThrewAwayStrVar2StrVar1s[];
 extern const u8 gText_ThrowAwayStrVar2OfThisItemQM[];

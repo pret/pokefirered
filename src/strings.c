@@ -1,5 +1,6 @@
 #include "global.h"
 #include "strings.h"
+#include "constants/item.h"
 
 const u8 gExpandedPlaceholder_Empty[] = _("");
 const u8 gExpandedPlaceholder_Kun[] = _("");
@@ -166,6 +167,12 @@ const u8 gText_SaveCompleted[] = _("Save completed.");
 const u8 gText_NoSaveFileCantSetTime[] = _("There is no save file, so the time\ncan't be set.");
 const u8 gText_InGameClockUsable[] = _("The in-game clock adjustment system\nis now useable.");
 
+const u8 *const gPocketNamesStringsTable[] = {
+    [ITEMS_POCKET] = COMPOUND_STRING("ITEMS"),
+    [KEYITEMS_POCKET] = COMPOUND_STRING("KEY ITEMS"),
+    [BALLS_POCKET] = COMPOUND_STRING("POKé BALLS"),
+};
+
 const u8 gText_MenuPokedex[] = _("POKéDEX");
 const u8 gText_MenuBag[] = _("BAG");
 const u8 gText_MenuPokenav[] = _("ポケナビ");
@@ -192,7 +199,7 @@ const u8 gText_CantWriteMail[] = _("You can't write\nMAIL here.");
 const u8 gText_NoPokemon[] = _("There is no\nPOKéMON.");
 const u8 gText_MoveVar1Where[] = _("Where should the {STR_VAR_1}\nbe placed?");
 const u8 gText_Var1CantBeHeld[] = _("The {STR_VAR_1} can't be held.");
-const u8 gText_TheStrVar1CantBeHeldHere[] = _("The {STR_VAR_1} can't be held\nhere.");
+const u8 gText_Var1CantBeHeldHere[] = _("The {STR_VAR_1} can't be held\nhere.");
 const u8 gText_TossHowManyVar1s[] = _("Toss out how many\n{STR_VAR_1}(s)?");
 const u8 gText_ThrewAwayStrVar2StrVar1s[] = _("Threw away {STR_VAR_2}\n{STR_VAR_1}(s).");
 const u8 gText_ThrowAwayStrVar2OfThisItemQM[] = _("Throw away {STR_VAR_2} of\nthis item?");

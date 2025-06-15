@@ -9,7 +9,6 @@
 #include "list_menu.h"
 #include "item_menu.h"
 #include "item.h"
-#include "menu_indicators.h"
 #include "event_object_movement.h"
 #include "random.h"
 #include "constants/songs.h"
@@ -29,7 +28,6 @@
 #include "strings.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
-#include "constants/item_menu.h"
 
 struct TeachyTvCtrlBlk
 {
@@ -171,57 +169,57 @@ static const struct WindowTemplate sWindowTemplates[] =
 static const struct ListMenuItem sListMenuItems[] = 
 {
     {
-        .label = gTeachyTvString_TeachBattle,
-        .index = TTVSCR_BATTLE
+        .name = gTeachyTvString_TeachBattle,
+        .id = TTVSCR_BATTLE
     },
     {
-        .label = gTeachyTvString_StatusProblems,
-        .index = TTVSCR_STATUS
+        .name = gTeachyTvString_StatusProblems,
+        .id = TTVSCR_STATUS
     },
     {
-        .label = gTeachyTvString_TypeMatchups,
-        .index = TTVSCR_MATCHUPS
+        .name = gTeachyTvString_TypeMatchups,
+        .id = TTVSCR_MATCHUPS
     },
     {
-        .label = gTeachyTvString_CatchPkmn,
-        .index = TTVSCR_CATCHING
+        .name = gTeachyTvString_CatchPkmn,
+        .id = TTVSCR_CATCHING
     },
     {
-        .label = gTeachyTvString_AboutTMs,
-        .index = TTVSCR_TMS
+        .name = gTeachyTvString_AboutTMs,
+        .id = TTVSCR_TMS
     },
     {
-        .label = gTeachyTvString_RegisterItem,
-        .index = TTVSCR_REGISTER
+        .name = gTeachyTvString_RegisterItem,
+        .id = TTVSCR_REGISTER
     },
 
     {
-        .label = gTeachyTvString_Cancel,
-        .index = -2
+        .name = gTeachyTvString_Cancel,
+        .id = -2
     },
 };
 
 static const struct ListMenuItem sListMenuItems_NoTMCase[] = 
 {
     {
-        .label = gTeachyTvString_TeachBattle,
-        .index = TTVSCR_BATTLE
+        .name = gTeachyTvString_TeachBattle,
+        .id = TTVSCR_BATTLE
     },
     {
-        .label = gTeachyTvString_StatusProblems,
-        .index = TTVSCR_STATUS
+        .name = gTeachyTvString_StatusProblems,
+        .id = TTVSCR_STATUS
     },
     {
-        .label = gTeachyTvString_TypeMatchups,
-        .index = TTVSCR_MATCHUPS
+        .name = gTeachyTvString_TypeMatchups,
+        .id = TTVSCR_MATCHUPS
     },
     {
-        .label = gTeachyTvString_CatchPkmn,
-        .index = TTVSCR_CATCHING
+        .name = gTeachyTvString_CatchPkmn,
+        .id = TTVSCR_CATCHING
     },
     {
-        .label = gTeachyTvString_Cancel,
-        .index = -2
+        .name = gTeachyTvString_Cancel,
+        .id = -2
     },
 };
 
@@ -507,13 +505,14 @@ static void TeachyTvMainCallback(void)
 
 static void TeachyTvSetupBg(void)
 {
-    ResetAllBgsCoordinatesAndBgCntRegs();
+    ResetVramOamAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBgTemplates, 4);
     SetBgTilemapBuffer(1, sResources->screenTilemap);
     SetBgTilemapBuffer(2, sResources->buffer2);
     SetBgTilemapBuffer(3, sResources->buffer3);
-    SetGpuReg(REG_OFFSET_DISPCNT, 0x3040);
+    ResetAllBgsCoordinates();
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     ShowBg(0);
     ShowBg(1);
     ShowBg(2);
@@ -803,7 +802,7 @@ static void TTVcmd_NpcMoveAndSetupTextPrinter(u8 taskId)
 static void TTVcmd_IdleIfTextPrinterIsActive(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!RunTextPrinters_CheckActive(0))
+    if (!RunTextPrintersRetIsActive(0))
         ++data[3];
 }
 
@@ -931,7 +930,7 @@ static const u8 sGrassAnimArray[] =
 static void TTVcmd_IdleIfTextPrinterIsActive2(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!RunTextPrinters_CheckActive(0))
+    if (!RunTextPrintersRetIsActive(0))
         ++data[3];
 }
 

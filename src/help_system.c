@@ -1954,12 +1954,12 @@ static void BuildMainTopicsListAndMoveToH00(struct HelpSystemListMenu * helpList
     {
         if (sHelpSystemContextTopicFlags[sHelpSystemContextId][sHelpSystemContextTopicOrder[i]] == TRUE)
         {
-            listMenuItemsBuffer[totalItems].label = sHelpSystemTopicPtrs[sHelpSystemContextTopicOrder[i]];
-            listMenuItemsBuffer[totalItems].index = sHelpSystemContextTopicOrder[i];
+            listMenuItemsBuffer[totalItems].name = sHelpSystemTopicPtrs[sHelpSystemContextTopicOrder[i]];
+            listMenuItemsBuffer[totalItems].id = sHelpSystemContextTopicOrder[i];
             totalItems++;
         }
     }
-    listMenuItemsBuffer[totalItems - 1].index = -2;
+    listMenuItemsBuffer[totalItems - 1].id = -2;
     helpListMenu->sub.totalItems = totalItems;
     helpListMenu->sub.maxShowed = totalItems;
     helpListMenu->sub.left = 0;
@@ -1989,16 +1989,16 @@ static void SetHelpSystemSubmenuItems(struct HelpSystemListMenu * helpListMenu, 
         if (IsHelpSystemSubmenuEnabled(submenuItems[i]) == TRUE)
         {
             if (gHelpSystemState.topic == TOPIC_WHAT_TO_DO)
-                listMenuItemsBuffer[totalItems].label = sHelpSystemSpecializedQuestionTextPtrs[submenuItems[i]];
+                listMenuItemsBuffer[totalItems].name = sHelpSystemSpecializedQuestionTextPtrs[submenuItems[i]];
             else if (gHelpSystemState.topic == TOPIC_HOW_TO_DO)
-                listMenuItemsBuffer[totalItems].label = sHelpSystemMenuTopicTextPtrs[submenuItems[i]];
+                listMenuItemsBuffer[totalItems].name = sHelpSystemMenuTopicTextPtrs[submenuItems[i]];
             else if (gHelpSystemState.topic == TOPIC_TERMS)
-                listMenuItemsBuffer[totalItems].label = sHelpSystemTermTextPtrs[submenuItems[i]];
+                listMenuItemsBuffer[totalItems].name = sHelpSystemTermTextPtrs[submenuItems[i]];
             else if (gHelpSystemState.topic == TOPIC_ABOUT_GAME)
-                listMenuItemsBuffer[totalItems].label = sHelpSystemGeneralTopicTextPtrs[submenuItems[i]];
+                listMenuItemsBuffer[totalItems].name = sHelpSystemGeneralTopicTextPtrs[submenuItems[i]];
             else // TOPIC_TYPE_MATCHUP
-                listMenuItemsBuffer[totalItems].label = sHelpSystemTypeMatchupTextPtrs[submenuItems[i]];
-            listMenuItemsBuffer[totalItems].index = submenuItems[i];
+                listMenuItemsBuffer[totalItems].name = sHelpSystemTypeMatchupTextPtrs[submenuItems[i]];
+            listMenuItemsBuffer[totalItems].id = submenuItems[i];
             totalItems++;
         }
     }
@@ -2006,13 +2006,13 @@ static void SetHelpSystemSubmenuItems(struct HelpSystemListMenu * helpListMenu, 
     {
         for (i = 0, submenuItems = sTerms_Basic; submenuItems[i] != HELP_END; i++)
         {
-            listMenuItemsBuffer[totalItems].label = sHelpSystemTermTextPtrs[submenuItems[i]];
-            listMenuItemsBuffer[totalItems].index = submenuItems[i];
+            listMenuItemsBuffer[totalItems].name = sHelpSystemTermTextPtrs[submenuItems[i]];
+            listMenuItemsBuffer[totalItems].id = submenuItems[i];
             totalItems++;
         }
     }
-    listMenuItemsBuffer[totalItems].label = Help_Text_Cancel;
-    listMenuItemsBuffer[totalItems].index = -2;
+    listMenuItemsBuffer[totalItems].name = Help_Text_Cancel;
+    listMenuItemsBuffer[totalItems].id = -2;
     totalItems++;
     helpListMenu->sub.totalItems = totalItems;
     helpListMenu->sub.maxShowed = 7;
@@ -2471,7 +2471,7 @@ static void ResetHelpSystemCursor(struct HelpSystemListMenu * helpListMenu)
 
 static void PrintHelpSystemTopicMouseoverDescription(struct HelpSystemListMenu * helpListMenu, struct ListMenuItem * listMenuItemsBuffer)
 {
-    s32 index = listMenuItemsBuffer[helpListMenu->itemsAbove + helpListMenu->cursorPos].index;
+    s32 index = listMenuItemsBuffer[helpListMenu->itemsAbove + helpListMenu->cursorPos].id;
     if (index == -2)
         HelpSystem_PrintTopicMouseoverDescription(sHelpSystemTopicMouseoverDescriptionPtrs[5]);
     else

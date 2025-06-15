@@ -1,7 +1,6 @@
 #include "global.h"
 #include "decompress.h"
 #include "gflib.h"
-#include "menu_indicators.h"
 #include "mystery_gift.h"
 #include "mystery_gift_menu.h"
 #include "menu.h"

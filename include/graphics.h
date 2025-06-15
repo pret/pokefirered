@@ -2858,8 +2858,8 @@ extern const u32 gItemPcTilemap[];
 extern const u32 gBagMale_Gfx[];
 extern const u32 gBagFemale_Gfx[];
 extern const u16 gBag_Pal[];
-extern const u32 gSwapLine_Gfx[];
-extern const u16 gSwapLine_Pal[];
+extern const u32 gSwapLineGfx[];
+extern const u16 gSwapLinePal[];
 
 // item icons
 // Poké Balls

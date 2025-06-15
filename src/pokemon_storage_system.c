@@ -27,7 +27,6 @@
 #include "text_window.h"
 #include "trig.h"
 #include "constants/help_system.h"
-#include "constants/item_menu.h"
 #include "constants/items.h"
 #include "constants/pokemon_icon.h"
 #include "constants/songs.h"
@@ -3505,7 +3504,7 @@ static void Task_ChangeScreen(u8 taskId)
         break;
     case SCREEN_CHANGE_ITEM_FROM_BAG:
         FreePokeStorageData();
-        GoToBagMenu(ITEMMENULOCATION_PCBOX, OPEN_BAG_ITEMS, CB2_ReturnToPokeStorage);
+        GoToBagMenu(ITEMMENULOCATION_PCBOX, ITEMS_POCKET, CB2_ReturnToPokeStorage);
         break;
     }
 

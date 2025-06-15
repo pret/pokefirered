@@ -4,7 +4,6 @@
 #include "list_menu.h"
 #include "player_pc.h"
 #include "strings.h"
-#include "menu_indicators.h"
 #include "constants/songs.h"
 
 static EWRAM_DATA u8 sWindowIds[3] = {};
@@ -95,11 +94,11 @@ u8 MailboxPC_InitListMenu(struct PlayerPCItemPageStruct * playerPcStruct)
     u16 i;
     for (i = 0; i < playerPcStruct->count; i++)
     {
-        sListMenuItems[i].label = sString_Dummy;
-        sListMenuItems[i].index = i;
+        sListMenuItems[i].name = sString_Dummy;
+        sListMenuItems[i].id = i;
     }
-    sListMenuItems[i].label = gFameCheckerText_Cancel;
-    sListMenuItems[i].index = -2;
+    sListMenuItems[i].name = gFameCheckerText_Cancel;
+    sListMenuItems[i].id = -2;
 
     gMultiuseListMenuTemplate.items = sListMenuItems;
     gMultiuseListMenuTemplate.totalItems = playerPcStruct->count + 1;

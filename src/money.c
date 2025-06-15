@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "event_data.h"
+#include "field_specials.h"
 #include "menu.h"
 #include "money.h"
 #include "text_window.h"
@@ -71,35 +72,33 @@ void SubtractMoneyFromVar0x8005(void)
 
 void PrintMoneyAmountInMoneyBox(u8 windowId, int amount, u8 speed)
 {
-    u8 *txtPtr;
-    s32 strLength;
+    PrintMoneyAmount(windowId, 16, 12, amount, speed);
+}
 
-    ConvertIntToDecimalStringN(gStringVar1, amount, STR_CONV_MODE_LEFT_ALIGN, 6);
-
-    strLength = 6 - StringLength(gStringVar1);
-    txtPtr = gStringVar4;
-
-    while (strLength-- != 0)
-        *(txtPtr++) = 0;
-
-    StringExpandPlaceholders(txtPtr, gText_PokedollarVar1);
-    AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, 64 - GetStringWidth(FONT_SMALL, gStringVar4, 0), 0xC, speed, NULL);
+static u32 CalculateLeadingSpacesForMoney(u32 numDigits)
+{
+    u32 leadingSpaces = CountDigits(INT_MAX) - StringLength(gStringVar1);
+    return (numDigits > 8) ? leadingSpaces : leadingSpaces - 2;
 }
 
 void PrintMoneyAmount(u8 windowId, u8 x, u8 y, int amount, u8 speed)
 {
-    u8 *txtPtr;
-    s32 strLength;
+    u8 *txtPtr = gStringVar4;
+    u32 numDigits = CountDigits(amount);
+    u32 maxDigits = (numDigits > 6) ? MAX_MONEY_DIGITS: 6;
+    u32 leadingSpaces;
 
-    ConvertIntToDecimalStringN(gStringVar1, amount, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar1, amount, STR_CONV_MODE_LEFT_ALIGN, maxDigits);
 
-    strLength = 6 - StringLength(gStringVar1);
-    txtPtr = gStringVar4;
+    leadingSpaces = CalculateLeadingSpacesForMoney(numDigits);
 
-    while (strLength-- != 0)
-        *(txtPtr++) = 0;
+    while (leadingSpaces-- > 0)
+        *(txtPtr++) = CHAR_SPACER;
 
     StringExpandPlaceholders(txtPtr, gText_PokedollarVar1);
+
+    if (numDigits > 8)
+        PrependFontIdToFit(gStringVar4, txtPtr + 1 + numDigits, FONT_NORMAL, 54);
     AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, x, y, speed, NULL);
 }
 
@@ -132,4 +131,9 @@ void HideMoneyBox(void)
     ClearStdWindowAndFrameToTransparent(sMoneyBoxWindowId, FALSE);
     CopyWindowToVram(sMoneyBoxWindowId, COPYWIN_GFX);
     RemoveWindow(sMoneyBoxWindowId);
+}
+
+u32 CalculateMoneyTextHorizontalPosition(u32 amount)
+{
+    return (CountDigits(amount) > 8) ? 54 : 46;
 }

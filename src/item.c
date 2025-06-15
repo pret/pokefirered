@@ -233,7 +233,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
             u16 quantity;
             // Does this stack have room for more??
             quantity = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
-            if (quantity + count <= 999)
+            if (quantity + count <= MAX_BAG_ITEM_CAPACITY)
             {
                 quantity += count;
                 SetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity, quantity);
@@ -345,6 +345,32 @@ void ClearPCItemSlots(void)
     }
 }
 
+void MoveItemSlotInList(struct ItemSlot *itemSlots_, u32 from, u32 to_)
+{
+    // dumb assignments needed to match
+    struct ItemSlot *itemSlots = itemSlots_;
+    u32 to = to_;
+
+    if (from != to)
+    {
+        s16 i, count;
+        struct ItemSlot firstSlot = itemSlots[from];
+
+        if (to > from)
+        {
+            to--;
+            for (i = from, count = to; i < count; i++)
+                itemSlots[i] = itemSlots[i + 1];
+        }
+        else
+        {
+            for (i = from, count = to; i > count; i--)
+                itemSlots[i] = itemSlots[i - 1];
+        }
+        itemSlots[to] = firstSlot;
+    }
+}
+
 void ClearBag(void)
 {
     u16 i;
@@ -411,7 +437,7 @@ bool8 AddPCItem(u16 itemId, u16 count)
         if (gSaveBlock1Ptr->pcItems[i].itemId == itemId)
         {
             quantity = GetPcItemQuantity(&gSaveBlock1Ptr->pcItems[i].quantity);
-            if (quantity + count <= 999)
+            if (quantity + count <= MAX_PC_ITEM_CAPACITY)
             {
                 quantity += count;
                 SetPcItemQuantity(&gSaveBlock1Ptr->pcItems[i].quantity, quantity);
@@ -486,12 +512,10 @@ void RegisteredItemHandleBikeSwap(void)
     }
 }
 
-void SwapItemSlots(struct ItemSlot * a, struct ItemSlot * b)
+static void SwapItemSlots(struct ItemSlot *a, struct ItemSlot *b)
 {
-    struct ItemSlot c;
-    c = *a;
-    *a = *b;
-    *b = c;
+    struct ItemSlot temp;
+    SWAP(*a, *b, temp);
 }
 
 void BagPocketCompaction(struct ItemSlot * slots, u8 capacity)
@@ -510,51 +534,44 @@ void BagPocketCompaction(struct ItemSlot * slots, u8 capacity)
     }
 }
 
-void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket)
-{
-    u16 i;
-    u16 j = 0;
-    u16 k;
-    struct ItemSlot * buff;
-
-    CompactItemsInBagPocket(pocket);
-
-    for (i = 0; i < pocket->capacity; i++)
-    {
-        if (pocket->itemSlots[i].itemId == ITEM_NONE && GetBagItemQuantity(&pocket->itemSlots[i].quantity) == 0)
-            return;
-        if (pocket->itemSlots[i].itemId >= ITEM_HM01 && GetBagItemQuantity(&pocket->itemSlots[i].quantity) != 0)
-        {
-            for (j = i + 1; j < pocket->capacity; j++)
-            {
-                if (pocket->itemSlots[j].itemId == ITEM_NONE && GetBagItemQuantity(&pocket->itemSlots[j].quantity) == 0)
-                    break;
-            }
-            break;
-        }
-    }
-
-    for (k = 0; k < pocket->capacity; k++)
-        pocket->itemSlots[k].quantity = GetBagItemQuantity(&pocket->itemSlots[k].quantity);
-    buff = AllocZeroed(pocket->capacity * sizeof(struct ItemSlot));
-    CpuCopy16(pocket->itemSlots + i, buff, (j - i) * sizeof(struct ItemSlot));
-    CpuCopy16(pocket->itemSlots, buff + (j - i), i * sizeof(struct ItemSlot));
-    CpuCopy16(buff, pocket->itemSlots, pocket->capacity * sizeof(struct ItemSlot));
-    for (k = 0; k < pocket->capacity; k++)
-        SetBagItemQuantity(&pocket->itemSlots[k].quantity, pocket->itemSlots[k].quantity);
-    Free(buff);
-}
-
-void CompactItemsInBagPocket(struct BagPocket * pocket)
+void CompactItemsInBagPocket(struct BagPocket *bagPocket)
 {
     u16 i, j;
 
-    for (i = 0; i < pocket->capacity; i++)
+    for (i = 0; i < bagPocket->capacity - 1; i++)
     {
-        for (j = i + 1; j < pocket->capacity; j++)
+        for (j = i + 1; j < bagPocket->capacity; j++)
         {
-            if (GetBagItemQuantity(&pocket->itemSlots[i].quantity) == 0 || (GetBagItemQuantity(&pocket->itemSlots[j].quantity) != 0 && pocket->itemSlots[i].itemId > pocket->itemSlots[j].itemId))
-                SwapItemSlots(&pocket->itemSlots[i], &pocket->itemSlots[j]);
+            if (GetBagItemQuantity(&bagPocket->itemSlots[i].quantity) == 0)
+                SwapItemSlots(&bagPocket->itemSlots[i], &bagPocket->itemSlots[j]);
+        }
+    }
+}
+
+static u32 GetSortIndex(u32 itemId)
+{
+    if (!IsItemHM(itemId))
+        return itemId;
+
+    return (itemId - (NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES));
+}
+
+void SortBerriesOrTMHMs(struct BagPocket *bagPocket)
+{
+    u16 i, j;
+
+    for (i = 0; i < bagPocket->capacity - 1; i++)
+    {
+        for (j = i + 1; j < bagPocket->capacity; j++)
+        {
+            if (GetBagItemQuantity(&bagPocket->itemSlots[i].quantity) != 0)
+            {
+                if (GetBagItemQuantity(&bagPocket->itemSlots[j].quantity) == 0)
+                    continue;
+                if (GetSortIndex(bagPocket->itemSlots[i].itemId) <= GetSortIndex(bagPocket->itemSlots[j].itemId))
+                    continue;
+            }
+            SwapItemSlots(&bagPocket->itemSlots[i], &bagPocket->itemSlots[j]);
         }
     }
 }
@@ -770,6 +787,11 @@ u32 GetItemStatus2Mask(u16 itemId)
         return STATUS2_CONFUSION;
     else
         return 0;
+}
+
+u32 GetItemSellPrice(u32 itemId)
+{
+    return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
 }
 
 bool8 IsItemTM(u16 itemId)

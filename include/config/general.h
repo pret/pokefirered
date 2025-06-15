@@ -44,6 +44,8 @@
 #define GAME_VERSION VERSION_LEAF_GREEN
 #endif // GAME_VERSION
 
+#define IS_FRLG (GAME_VERSION == VERSION_FIRE_RED || GAME_VERSION == VERSION_LEAF_GREEN)
+
 // rev1 renamed the source folder for reasons
 #define CODE_ROOT "C:/WORK/POKeFRLG/Src/pm_lgfr_ose/source/"
 #define ABSPATH(x) (CODE_ROOT x)

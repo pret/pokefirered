@@ -1176,8 +1176,8 @@ const u32 gBagMale_Gfx[] = INCBIN_U32("graphics/interface/bag_male.4bpp.lz");
 const u32 gBagFemale_Gfx[] = INCBIN_U32("graphics/interface/bag_female.4bpp.lz");
 const u16 gBag_Pal[] = INCBIN_U16("graphics/interface/bag.gbapal");
 
-const u32 gSwapLine_Gfx[] = INCBIN_U32("graphics/interface/bag_swap.4bpp.lz");
-const u16 gSwapLine_Pal[] = INCBIN_U16("graphics/interface/bag_swap.gbapal");
+const u32 gSwapLineGfx[] = INCBIN_U32("graphics/interface/bag_swap.4bpp.lz");
+const u16 gSwapLinePal[] = INCBIN_U16("graphics/interface/bag_swap.gbapal");
 
 const u32 gTMCase_Gfx[] = INCBIN_U32("graphics/tm_case/tm_case.4bpp.lz");
 const u32 gTMCaseMenu_Tilemap[] = INCBIN_U32("graphics/tm_case/menu.bin.lz");

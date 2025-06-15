@@ -19,7 +19,7 @@ void Task_WaitPlayerStopMoving(u8 taskId)
 {
     if (IsPlayerStandingStill())
     {
-        HandleEnforcedLookDirectionOnPlayerStopMoving();
+        PlayerFreeze();
         DestroyTask(taskId);
     }
 }
@@ -47,7 +47,7 @@ void Task_WaitPlayerAndTargetNPCStopMoving(u8 taskId)
 
     if (task->data[0] == 0 && IsPlayerStandingStill() == TRUE)
     {
-        HandleEnforcedLookDirectionOnPlayerStopMoving();
+        PlayerFreeze();
         task->data[0] = 1;
     }
 
@@ -126,7 +126,7 @@ static void Task_FreezeObjectAndPlayer(u8 taskId)
 
     if (!task->tPlayerFrozen && IsPlayerStandingStill() == TRUE)
     {
-        HandleEnforcedLookDirectionOnPlayerStopMoving();
+        PlayerFreeze();
         task->tPlayerFrozen = TRUE;
     }
     if (!task->tObjectFrozen && !gObjectEvents[objectEventId].singleMovementActive)

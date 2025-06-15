@@ -101,7 +101,11 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
             while (block != head);
             Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":L%s:%d, %s: OOM allocating %d bytes", gTestRunnerState.test->filename, SourceLine(0), location, size);
 #endif
-            AGB_ASSERT_EX(0, ABSPATH("gflib/malloc.c"), 174);
+            if (location)
+            {
+                DebugPrintfLevel(MGBA_LOG_ERROR, "%s: out of memory trying to allocate %d bytes", location, size);
+            }
+            AGB_ASSERT(FALSE);
             return NULL;
         }
 
@@ -111,14 +115,12 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
 
 void FreeInternal(void *heapStart, void *pointer)
 {
-    AGB_ASSERT_EX(pointer != NULL, ABSPATH("gflib/malloc.c"), 195);
-
     if (pointer)
     {
         struct MemBlock *head = (struct MemBlock *)heapStart;
         struct MemBlock *block = (struct MemBlock *)((u8 *)pointer - sizeof(struct MemBlock));
-        AGB_ASSERT_EX(block->magic == MALLOC_SYSTEM_ID, ABSPATH("gflib/malloc.c"), 204);
-        AGB_ASSERT_EX(block->allocated == TRUE, ABSPATH("gflib/malloc.c"), 205);
+        AGB_ASSERT(block->magic == MALLOC_SYSTEM_ID);
+        AGB_ASSERT(block->allocated == TRUE);
         block->allocated = FALSE;
 
         // If the freed block isn't the last one, merge with the next block
@@ -141,7 +143,7 @@ void FreeInternal(void *heapStart, void *pointer)
         {
             if (!block->prev->allocated)
             {
-                AGB_ASSERT_EX(block->prev->magic == MALLOC_SYSTEM_ID, ABSPATH("gflib/malloc.c"), 228);
+                AGB_ASSERT(block->prev->magic == MALLOC_SYSTEM_ID);
 
                 block->prev->next = block->next;
 

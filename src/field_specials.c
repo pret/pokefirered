@@ -23,7 +23,6 @@
 #include "field_weather.h"
 #include "event_object_movement.h"
 #include "item.h"
-#include "menu_indicators.h"
 #include "random.h"
 #include "mail.h"
 #include "help_system.h"
@@ -1395,9 +1394,9 @@ static void Task_CreateScriptListMenu(u8 taskId)
     mwidth = 0;
     for (i = 0; i < task->data[1]; i++)
     {
-        sListMenuItems[i].label = sListMenuLabels[gSpecialVar_0x8004][i];
-        sListMenuItems[i].index = i;
-        width = GetStringWidth(FONT_NORMAL, sListMenuItems[i].label, 0);
+        sListMenuItems[i].name = sListMenuLabels[gSpecialVar_0x8004][i];
+        sListMenuItems[i].id = i;
+        width = GetStringWidth(FONT_NORMAL, sListMenuItems[i].name, 0);
         if (width > mwidth)
             mwidth = width;
     }
@@ -1676,26 +1675,16 @@ void TV_PrintIntToStringVar(u8 varidx, s32 number)
     ConvertIntToDecimalStringN(sStringVarPtrs[varidx], number, STR_CONV_MODE_LEFT_ALIGN, n);
 }
 
-s32 CountDigits(s32 number)
+size_t CountDigits(s32 value)
 {
-    if (number / 10 == 0)
-        return 1;
-    else if (number / 100 == 0)
-        return 2;
-    else if (number / 1000 == 0)
-        return 3;
-    else if (number / 10000 == 0)
-        return 4;
-    else if (number / 100000 == 0)
-        return 5;
-    else if (number / 1000000 == 0)
-        return 6;
-    else if (number / 10000000 == 0)
-        return 7;
-    else if (number / 100000000 == 0)
-        return 8;
-    else
-        return 1;
+    u32 count = 0;
+
+    while (value > 0)
+    {
+        value /= 10;
+        count++;
+    }
+    return count;
 }
 
 bool8 NameRaterWasNicknameChanged(void)

@@ -29,7 +29,6 @@
 #include "money.h"
 #include "shop.h"
 #include "menu.h"
-#include "menu_indicators.h"
 #include "pokemon_storage_system.h"
 #include "constants/items.h"
 #include "constants/songs.h"
@@ -43,6 +42,7 @@ struct BerryPouchStruct_203F36C
     u8 listMenuNumItems;
     u8 listMenuMaxShowed;
     u8 itemMenuIconId;
+    u8 itemSpriteIds[2];
     u8 ALIGNED(4) bg1TilemapBuffer[BG_SCREEN_SIZE];
     s16 data[4];
 };
@@ -165,12 +165,13 @@ static const struct BgTemplate sBgTemplates[] =
 
 static const TaskFunc sBerryPouchContextMenuTasks[] = 
 {
-    Task_NormalContextMenu,
-    Task_ContextMenu_FromPartyGiveMenu,
-    Task_ContextMenu_Sell,
-    Task_ContextMenu_FromPokemonPC,
-    Task_NormalContextMenu,
-    [BERRYPOUCH_FROMBERRYTREE] =             BerryPouch_StartFadeToExitCallback,
+    [BERRYPOUCH_FROMFIELD]            = Task_NormalContextMenu,
+    [BERRYPOUCH_FROMPARTYGIVE]        = Task_ContextMenu_FromPartyGiveMenu,
+    [BERRYPOUCH_FROMMARTSELL]         = Task_ContextMenu_Sell,
+    [BERRYPOUCH_FROMPOKEMONSTORAGEPC] = Task_ContextMenu_FromPokemonPC,
+    [BERRYPOUCH_FROMBATTLE]           = Task_NormalContextMenu,
+    [BERRYPOUCH_FROMBERRYCRUSH]       = NULL,
+    [BERRYPOUCH_FROMBERRYTREE]        = BerryPouch_StartFadeToExitCallback,
 };
 
 static const struct YesNoFuncTable sYesNoFuncs_Toss = 
@@ -439,6 +440,8 @@ void InitBerryPouch(u8 type, void (*savedCallback)(void), u8 allowSelect)
             sStaticCnt.savedCallback = savedCallback;
         sResources->exitCallback = NULL;
         sResources->itemMenuIconId = 0;
+        sResources->itemSpriteIds[0] = SPRITE_NONE,
+        sResources->itemSpriteIds[1] = SPRITE_NONE,
         sResources->indicatorTaskId = 0xFF;
         for (i = 0; i < 4; i++)
             sResources->data[i] = 0;
@@ -463,6 +466,16 @@ static void VBlankCB_BerryPouchIdle(void)
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
+
+#define tListTaskId        data[0]
+#define tListPosition      data[1]
+#define tQuantity          data[2]
+#define tNeverRead         data[3]
+#define tItemCount         data[8]
+#define tMsgWindowId       data[10]
+#define tPocketSwitchDir   data[11]
+#define tPocketSwitchTimer data[12]
+#define tPocketSwitchState data[13]
 
 static void CB2_InitBerryPouch(void)
 {
@@ -505,7 +518,6 @@ static bool8 RunBerryPouchInit(void)
         gMain.state++;
         break;
     case 5:
-        ResetItemMenuIconState();
         gMain.state++;
         break;
     case 6:
@@ -550,8 +562,8 @@ static bool8 RunBerryPouchInit(void)
         break;
     case 14:
         taskId = CreateTask(Task_BerryPouchMain, 0);
-        gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
-        gTasks[taskId].data[8] = 0;
+        gTasks[taskId].tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
+        gTasks[taskId].tItemCount = 0;
         gMain.state++;
         break;
     case 15:
@@ -599,11 +611,12 @@ static void Task_AbortBerryPouchLoading_WaitFade(u8 taskId)
 
 static void BerryPouchInitBgs(void)
 {
-    ResetAllBgsCoordinatesAndBgCntRegs();
+    ResetVramOamAndBgCntRegs();
     memset(sResources->bg1TilemapBuffer, 0, BG_SCREEN_SIZE);
     ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, sBgTemplates, NELEMS(sBgTemplates));
     SetBgTilemapBuffer(1, sResources->bg1TilemapBuffer);
+    ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(1);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
@@ -665,11 +678,11 @@ static void SetUpListMenuTemplate(void)
     for (i = 0; i < sResources->listMenuNumItems; i++)
     {
         GetBerryNameAndIndexForMenu(&sListMenuStrbuf[i * 27], pocket->itemSlots[i].itemId);
-        sListMenuItems[i].label = &sListMenuStrbuf[i * 27];
-        sListMenuItems[i].index = i;
+        sListMenuItems[i].name = &sListMenuStrbuf[i * 27];
+        sListMenuItems[i].id = i;
     }
-    sListMenuItems[i].label = gText_Close;
-    sListMenuItems[i].index = i;
+    sListMenuItems[i].name = gText_Close;
+    sListMenuItems[i].id = i;
     gMultiuseListMenuTemplate.items = sListMenuItems;
     if (sStaticCnt.type != BERRYPOUCH_FROMBERRYCRUSH)
         gMultiuseListMenuTemplate.totalItems = sResources->listMenuNumItems + 1;
@@ -711,6 +724,39 @@ static void CopySelectedListMenuItemName(s16 itemIdx, u8 * dest)
     StringCopy(dest, &sListMenuStrbuf[itemIdx * 27]);
 }
 
+static void CreateBerryPouchItemIcon(u16 item, u8 iconSlot)
+{
+    u8 *spriteIdPtr = &sResources->itemSpriteIds[iconSlot];
+
+    if (*spriteIdPtr == SPRITE_NONE)
+    {
+        u8 spriteId;
+
+        // Either TAG_ITEM_ICON or TAG_ITEM_ICON_ALT
+        FreeSpriteTilesByTag(TAG_ITEM_ICON + iconSlot);
+        FreeSpritePaletteByTag(TAG_ITEM_ICON + iconSlot);
+        spriteId = AddItemIconSprite(TAG_ITEM_ICON + iconSlot, TAG_ITEM_ICON + iconSlot, item);
+        if (spriteId != MAX_SPRITES)
+        {
+            *spriteIdPtr = spriteId;
+            gSprites[spriteId].x2 = 24;
+            gSprites[spriteId].y2 = 147;
+        }
+    }
+}
+
+static void RemoveBerryPouchItemIcon(u8 iconSlot)
+{
+    u8 *spriteIdPtr = &sResources->itemSpriteIds[iconSlot];
+    if (*spriteIdPtr == SPRITE_NONE)
+        return;
+
+    FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON);
+    FreeSpritePaletteByTag(iconSlot + TAG_ITEM_ICON);
+    DestroySprite(&gSprites[*spriteIdPtr]);
+    *spriteIdPtr = SPRITE_NONE;
+}
+
 static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
@@ -718,11 +764,11 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
         PlaySE(SE_BAG_CURSOR);
         StartBerryPouchSpriteWobbleAnim();
     }
-    RemoveBagItemIconSprite(sResources->itemMenuIconId ^ 1);
     if (sResources->listMenuNumItems != itemIndex)
         CreateBerryPouchItemIcon(BagGetItemIdByPocketPosition(POCKET_BERRIES, itemIndex), sResources->itemMenuIconId);
     else
         CreateBerryPouchItemIcon(ITEMS_COUNT, sResources->itemMenuIconId);
+    RemoveBerryPouchItemIcon(sResources->itemMenuIconId ^ 1);
     sResources->itemMenuIconId ^= 1;
     PrintSelectedBerryDescription(itemIndex);
 }
@@ -730,11 +776,11 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
 static void BerryPouchItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     u16 itemQuantity;
-    if (itemId != -2 && sResources->listMenuNumItems != itemId)
+    if (itemId != LIST_CANCEL && sResources->listMenuNumItems != itemId)
     {
         itemQuantity = BagGetQuantityByPocketPosition(POCKET_BERRIES, itemId);
-        ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+        ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, MAX_ITEM_DIGITS);
+        StringExpandPlaceholders(gStringVar4, gText_xVar1);
         BerryPouchPrint(windowId, FONT_SMALL, gStringVar4, 110, y, 0, 0, 0xFF, 1);
     }
 }
@@ -874,10 +920,10 @@ void BerryPouch_StartFadeToExitCallback(u8 taskId)
 
 static void Task_BerryPouchFadeToExitCallback(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     if (!gPaletteFade.active)
     {
-        DestroyListMenuTask(data[0], &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
+        DestroyListMenuTask(tListTaskId, &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
         if (sResources->exitCallback != NULL)
             SetMainCallback2(sResources->exitCallback);
         else
@@ -893,7 +939,7 @@ static void SortAndCountBerries(void)
     u16 i;
     u32 r2;
     struct BagPocket *pocket = &gBagPockets[POCKET_BERRIES - 1];
-    CompactItemsInBagPocket(pocket);
+    SortBerriesOrTMHMs(pocket);
     sResources->listMenuNumItems = 0;
     for (i = 0; i < pocket->capacity; i++)
     {
@@ -918,35 +964,37 @@ void BerryPouch_SetExitCallback(void (*callback)(void))
 
 void InitTossQuantitySelectUI(u8 taskId, const u8 * str)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     u8 windowId = GetOrCreateVariableWindow(8);
     u8 windowId2;
-    CopySelectedListMenuItemName(data[1], gStringVar1);
+
+    CopySelectedListMenuItemName(tListPosition, gStringVar1);
     StringExpandPlaceholders(gStringVar4, str);
     BerryPouchPrint(windowId, FONT_NORMAL, gStringVar4, 0, 2, 1, 2, 0, 1);
     windowId2 = GetOrCreateVariableWindow(0);
-    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BerryPouchPrint(windowId2, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
 }
 
-static void PrintxQuantityOnWindow(u8 whichWindow, s16 quantity, u8 ndigits)
+static void PrintxQuantityOnWindow(u8 whichWindow, s16 quantity)
 {
     u8 windowId = GetVariableWindowId(whichWindow);
+
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, ndigits);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BerryPouchPrint(windowId, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, 1);
 }
 
 static void Task_BerryPouchMain(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     s32 menuInput;
     if (!gPaletteFade.active && IsActiveOverworldLinkBusy() != TRUE)
     {
-        menuInput = ListMenu_ProcessInput(data[0]);
-        ListMenuGetScrollAndRow(data[0], &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
+        menuInput = ListMenu_ProcessInput(tListTaskId);
+        ListMenuGetScrollAndRow(tListTaskId, &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
         if (JOY_NEW(SELECT_BUTTON) && sStaticCnt.allowSelect == 1)
         {
             PlaySE(SE_SELECT);
@@ -983,9 +1031,9 @@ static void Task_BerryPouchMain(u8 taskId)
                 {
                     DestroyScrollIndicatorArrows();
                     SetDescriptionWindowBorderPalette(1);
-                    BerryPouchSetArrowCursorFromListMenu(data[0], 2);
-                    data[1] = menuInput;
-                    data[2] = BagGetQuantityByPocketPosition(POCKET_BERRIES, menuInput);
+                    BerryPouchSetArrowCursorFromListMenu(tListTaskId, 2);
+                    tListPosition = menuInput;
+                    tQuantity = BagGetQuantityByPocketPosition(POCKET_BERRIES, menuInput);
                     gSpecialVar_ItemId = BagGetItemIdByPocketPosition(POCKET_BERRIES, menuInput);
                     gTasks[taskId].func = sBerryPouchContextMenuTasks[sStaticCnt.type];
                 }
@@ -1004,7 +1052,7 @@ static void Task_CleanUpAndReturnToMain(u8 taskId)
 
 static void CreateNormalContextMenu(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     u8 windowId;
     u8 windowId2;
 
@@ -1035,7 +1083,7 @@ static void CreateNormalContextMenu(u8 taskId)
     PrintMenuActionTexts(windowId, FONT_NORMAL, GetMenuCursorDimensionByFont(FONT_NORMAL, 0), 2, GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING), GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumOptions, sContextMenuActions, sContextMenuOptions);
     InitMenuNormal(windowId, FONT_NORMAL, 0, 2, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) + 2, sContextMenuNumOptions, 0);
     windowId2 = GetOrCreateVariableWindow(6);
-    CopySelectedListMenuItemName(data[1], gStringVar1);
+    CopySelectedListMenuItemName(tListPosition, gStringVar1);
     StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
     BerryPouchPrint(windowId2, FONT_NORMAL, gStringVar4, 0, 2, 1, 2, 0, 1);
 }
@@ -1127,12 +1175,12 @@ static void Task_BerryPouch_Toss(u8 taskId)
     DestroyVariableWindow(sContextMenuNumOptions + 9);
     DestroyVariableWindow(6);
     PutWindowTilemap(0);
-    data[8] = 1;
-    if (data[2] == 1)
+    tItemCount = 1;
+    if (tQuantity == 1)
         Task_AskTossMultiple(taskId);
     else
     {
-        InitTossQuantitySelectUI(taskId, gText_TossOutHowManyStrVar1s);
+        InitTossQuantitySelectUI(taskId, gText_TossHowManyVar1s);
         CreateScrollIndicatorArrows_TossQuantity();
         gTasks[taskId].func = Task_Toss_SelectMultiple;
     }
@@ -1141,7 +1189,8 @@ static void Task_BerryPouch_Toss(u8 taskId)
 static void Task_AskTossMultiple(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+
+    ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_ThrowAwayStrVar2OfThisItemQM);
     BerryPouchPrint(GetOrCreateVariableWindow(7), FONT_NORMAL, gStringVar4, 0, 2, 1, 2, 0, 1);
     CreateYesNoMenuWin3(taskId, &sYesNoFuncs_Toss);
@@ -1149,21 +1198,25 @@ static void Task_AskTossMultiple(u8 taskId)
 
 static void Task_TossNo(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
+
     DestroyVariableWindow(7);
     PutWindowTilemap(1);
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(2);
-    BerryPouchSetArrowCursorFromListMenu(data[0], 1);
+    BerryPouchSetArrowCursorFromListMenu(tListTaskId, 1);
     Task_CleanUpAndReturnToMain(taskId);
 }
 
 static void Task_Toss_SelectMultiple(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
-    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
-        PrintxQuantityOnWindow(0, data[8], 3);
+    s16 *data = gTasks[taskId].data;
+
+    if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
+    {
+        PrintxQuantityOnWindow(0, tItemCount);
+    }
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -1184,7 +1237,7 @@ static void Task_Toss_SelectMultiple(u8 taskId)
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
         ScheduleBgCopyTilemapToVram(2);
-        BerryPouchSetArrowCursorFromListMenu(data[0], 1);
+        BerryPouchSetArrowCursorFromListMenu(tListTaskId, 1);
         DestroyScrollIndicatorArrows();
         Task_CleanUpAndReturnToMain(taskId);
     }
@@ -1194,8 +1247,8 @@ static void Task_TossYes(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
     DestroyVariableWindow(7);
-    CopySelectedListMenuItemName(data[1], gStringVar1);
-    ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 3);
+    CopySelectedListMenuItemName(tListPosition, gStringVar1);
+    ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayStrVar2StrVar1s);
     BerryPouchPrint(GetOrCreateVariableWindow(9), FONT_NORMAL, gStringVar4, 0, 2, 1, 2, 0, 1);
     gTasks[taskId].func = Task_WaitButtonThenTossBerries;
@@ -1203,20 +1256,21 @@ static void Task_TossYes(u8 taskId)
 
 static void Task_WaitButtonThenTossBerries(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
+
     if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        RemoveBagItem(gSpecialVar_ItemId, data[8]);
+        RemoveBagItem(gSpecialVar_ItemId, tItemCount);
         DestroyVariableWindow(9);
-        DestroyListMenuTask(data[0], &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
+        DestroyListMenuTask(tListTaskId, &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
         SortAndCountBerries();
         SanitizeListMenuSelectionParams();
         SetUpListMenuTemplate();
-        data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
+        tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
-        BerryPouchSetArrowCursorFromListMenu(data[0], 1);
+        BerryPouchSetArrowCursorFromListMenu(tListTaskId, 1);
         Task_CleanUpAndReturnToMain(taskId);
     }
 }
@@ -1240,7 +1294,7 @@ static void Task_BerryPouch_Give(u8 taskId)
 
 static void Task_Give_PrintThereIsNoPokemon(u8 taskId)
 {
-    DisplayItemMessageInBerryPouch(taskId, FONT_NORMAL, gText_ThereIsNoPokemon, Task_WaitButtonBeforeDialogueWindowDestruction);
+    DisplayItemMessageInBerryPouch(taskId, FONT_NORMAL, gText_NoPokemon, Task_WaitButtonBeforeDialogueWindowDestruction);
 }
 
 static void Task_WaitButtonBeforeDialogueWindowDestruction(u8 taskId)
@@ -1254,15 +1308,15 @@ static void Task_WaitButtonBeforeDialogueWindowDestruction(u8 taskId)
 
 void Task_BerryPouch_DestroyDialogueWindowAndRefreshListMenu(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     TryDestroyVariableWindow(5);
-    DestroyListMenuTask(data[0], &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
+    DestroyListMenuTask(tListTaskId, &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
     SortAndCountBerries();
     SanitizeListMenuSelectionParams();
     SetUpListMenuTemplate();
-    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
+    tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
     ScheduleBgCopyTilemapToVram(0);
-    BerryPouchSetArrowCursorFromListMenu(data[0], 1);
+    BerryPouchSetArrowCursorFromListMenu(tListTaskId, 1);
     Task_CleanUpAndReturnToMain(taskId);
 }
 
@@ -1274,18 +1328,16 @@ static void Task_BerryPouch_Exit(u8 taskId)
     PutWindowTilemap(1);
     ScheduleBgCopyTilemapToVram(0);
     ScheduleBgCopyTilemapToVram(2);
-    BerryPouchSetArrowCursorFromListMenu(gTasks[taskId].data[0], 1);
+    BerryPouchSetArrowCursorFromListMenu(gTasks[taskId].tListTaskId, 1);
     Task_CleanUpAndReturnToMain(taskId);
 }
 
 static void Task_ContextMenu_FromPartyGiveMenu(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
-    u16 itemId = BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1]);
-    if (!IsHoldingItemAllowed(itemId))
+    if (!IsHoldingItemAllowed(gSpecialVar_ItemId))
     {
-        CopyItemName(itemId, gStringVar1);
-        StringExpandPlaceholders(gStringVar4, gText_TheStrVar1CantBeHeldHere);
+        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_Var1CantBeHeldHere);
         DisplayItemMessageInBerryPouch(taskId, FONT_NORMAL, gStringVar4, Task_WaitButtonBeforeDialogueWindowDestruction);
     }
     else
@@ -1312,18 +1364,24 @@ static void Task_ContextMenu_Sell(u8 taskId)
     }
     else
     {
-        data[8] = 1;
-        if (data[2] == 1)
+        tItemCount = 1;
+        if (tQuantity == 1)
         {
             PrintMoneyInWin2();
             Task_AskSellMultiple(taskId);
         }
         else
         {
-            if (data[2] > 99)
-                data[2] = 99;
+            u32 maxQuantity = MAX_MONEY / GetItemSellPrice(gSpecialVar_ItemId);
+
+            if (tQuantity > MAX_BAG_ITEM_CAPACITY)
+                tQuantity = MAX_BAG_ITEM_CAPACITY;
+            
+            if (tQuantity > maxQuantity)
+                tQuantity = maxQuantity;
+
             CopyItemName(gSpecialVar_ItemId, gStringVar1);
-            StringExpandPlaceholders(gStringVar4, gText_HowManyWouldYouLikeToSell);
+            StringExpandPlaceholders(gStringVar4, gText_HowManyToSell);
             DisplayItemMessageInBerryPouch(taskId, GetDialogBoxFontId(), gStringVar4, Task_Sell_PrintSelectMultipleUI);
         }
     }
@@ -1332,7 +1390,8 @@ static void Task_ContextMenu_Sell(u8 taskId)
 static void Task_AskSellMultiple(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    ConvertIntToDecimalStringN(gStringVar3, GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
+
+    ConvertIntToDecimalStringN(gStringVar3, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_ICanPayThisMuch_WouldThatBeOkay);
     DisplayItemMessageInBerryPouch(taskId, GetDialogBoxFontId(), gStringVar4, Task_SellMultiple_CreateYesNoMenu);
 }
@@ -1344,25 +1403,26 @@ static void Task_SellMultiple_CreateYesNoMenu(u8 taskId)
 
 static void Task_SellNo(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     DestroyVariableWindow(2);
     TryDestroyVariableWindow(5);
     PutWindowTilemap(2);
     PutWindowTilemap(0);
     PutWindowTilemap(1);
     ScheduleBgCopyTilemapToVram(0);
-    BerryPouchSetArrowCursorFromListMenu(data[0], 1);
+    BerryPouchSetArrowCursorFromListMenu(tListTaskId, 1);
     Task_CleanUpAndReturnToMain(taskId);
 }
 
 static void Task_Sell_PrintSelectMultipleUI(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     u8 windowId = GetOrCreateVariableWindow(1);
-    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     BerryPouchPrint(windowId, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0xFF, 1);
-    SellMultiple_UpdateSellPriceDisplay(GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8]);
+    SellMultiple_UpdateSellPriceDisplay(GetItemSellPrice(gSpecialVar_ItemId) * tItemCount);
     PrintMoneyInWin2();
     CreateScrollIndicatorArrows_SellQuantity();
     gTasks[taskId].func = Task_Sell_SelectMultiple;
@@ -1370,16 +1430,17 @@ static void Task_Sell_PrintSelectMultipleUI(u8 taskId)
 
 static void SellMultiple_UpdateSellPriceDisplay(s32 price)
 {
-    PrintMoneyAmount(GetVariableWindowId(1), 56, 10, price, 0);
+    PrintMoneyAmount(GetVariableWindowId(1), CalculateMoneyTextHorizontalPosition(price), 10, price, 0);
 }
 
 static void Task_Sell_SelectMultiple(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    if (AdjustQuantityAccordingToDPadInput(&data[8], data[2]) == TRUE)
+
+    if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
-        PrintxQuantityOnWindow(1, data[8], 2);
-        SellMultiple_UpdateSellPriceDisplay(GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8]);
+        PrintxQuantityOnWindow(1, tItemCount);
+        SellMultiple_UpdateSellPriceDisplay(GetItemSellPrice(gSpecialVar_ItemId) * tItemCount);
     }
     else if (JOY_NEW(A_BUTTON))
     {
@@ -1401,7 +1462,7 @@ static void Task_Sell_SelectMultiple(u8 taskId)
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(0);
         DestroyScrollIndicatorArrows();
-        BerryPouchSetArrowCursorFromListMenu(data[0], 1);
+        BerryPouchSetArrowCursorFromListMenu(tListTaskId, 1);
         Task_CleanUpAndReturnToMain(taskId);
     }
 }
@@ -1411,25 +1472,25 @@ static void Task_SellYes(u8 taskId)
     s16 * data = gTasks[taskId].data;
     PutWindowTilemap(0);
     ScheduleBgCopyTilemapToVram(0);
-    CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    ConvertIntToDecimalStringN(gStringVar3, GetItemPrice(BagGetItemIdByPocketPosition(POCKET_BERRIES, data[1])) / 2 * data[8], STR_CONV_MODE_LEFT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar4, gText_TurnedOverItemsWorthYen);
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
+    ConvertIntToDecimalStringN(gStringVar1, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_MONEY_DIGITS);
+    StringExpandPlaceholders(gStringVar4, gText_TurnedOverVar1ForVar2);
     DisplayItemMessageInBerryPouch(taskId, FONT_NORMAL, gStringVar4, Task_SellBerries_PlaySfxAndRemoveBerries);
 }
 
 static void Task_SellBerries_PlaySfxAndRemoveBerries(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
     PlaySE(SE_SHOP);
-    RemoveBagItem(gSpecialVar_ItemId, data[8]);
-    AddMoney(&gSaveBlock1Ptr->money, GetItemPrice(gSpecialVar_ItemId) / 2 * data[8]);
-    RecordItemTransaction(gSpecialVar_ItemId, data[8], QL_EVENT_SOLD_ITEM - QL_EVENT_USED_POKEMART);
-    DestroyListMenuTask(data[0], &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
+    RemoveBagItem(gSpecialVar_ItemId, tItemCount);
+    AddMoney(&gSaveBlock1Ptr->money, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount);
+    RecordItemTransaction(gSpecialVar_ItemId, tItemCount, QL_EVENT_SOLD_ITEM - QL_EVENT_USED_POKEMART);
+    DestroyListMenuTask(tListTaskId, &sStaticCnt.listMenuScrollOffset, &sStaticCnt.listMenuSelectedRow);
     SortAndCountBerries();
     SanitizeListMenuSelectionParams();
     SetUpListMenuTemplate();
-    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
-    BerryPouchSetArrowCursorFromListMenu(data[0], 2);
+    tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, sStaticCnt.listMenuScrollOffset, sStaticCnt.listMenuSelectedRow);
+    BerryPouchSetArrowCursorFromListMenu(tListTaskId, 2);
     PrintMoneyAmountInMoneyBox(GetVariableWindowId(2), GetMoney(&gSaveBlock1Ptr->money), 0);
     gTasks[taskId].func = Task_SellBerries_WaitButton;
 }

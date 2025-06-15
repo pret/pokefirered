@@ -979,7 +979,7 @@ void PlayerShakeHeadOrWalkInPlace(void)
     PlayerSetAnimId(MOVEMENT_ACTION_SHAKE_HEAD_OR_WALK_IN_PLACE, 0);
 }
 
-void HandleEnforcedLookDirectionOnPlayerStopMoving(void)
+void PlayerFreeze(void)
 {
     if (gPlayerAvatar.tileTransitionState == T_TILE_CENTER || gPlayerAvatar.tileTransitionState == T_NOT_MOVING)
     {

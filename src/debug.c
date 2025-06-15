@@ -1481,14 +1481,14 @@ static void Debug_GenerateListMenuNames(u32 totalItems)
             if (sDebugMenuListData->listId == 0)
             {
                 flagResult = Debug_CheckToggleFlags(i);
-                name = sDebugMenu_Items_FlagsVars[i].label;
+                name = sDebugMenu_Items_FlagsVars[i].name;
             }
             else if (sDebugMenuListData->listId == 1)
             {
                 flagResult = sDebugBattleData->aiFlags[i];
                 if (i == totalItems - 1)
                     flagResult = 0xFF;
-                name = sDebugMenu_Items_Battle_1[i].label;
+                name = sDebugMenu_Items_Battle_1[i].name;
             }
 
             if (flagResult == 0xFF)
@@ -1509,8 +1509,8 @@ static void Debug_GenerateListMenuNames(u32 totalItems)
             }
         }
 
-        sDebugMenuListData->listItems[i].label = &sDebugMenuListData->itemNames[i][0];
-        sDebugMenuListData->listItems[i].index = i;
+        sDebugMenuListData->listItems[i].name = &sDebugMenuListData->itemNames[i][0];
+        sDebugMenuListData->listItems[i].id = i;
     }
 }
 

@@ -20,7 +20,6 @@
 #include "data.h"
 #include "scanline_effect.h"
 #include "strings.h"
-#include "menu_indicators.h"
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/quest_log.h"
@@ -47,9 +46,9 @@ enum {
 
 // IDs for the actions in the context menu
 enum {
-    ACTION_USE,
-    ACTION_GIVE,
-    ACTION_EXIT
+    TMCASE_ACTION_USE,
+    TMCASE_ACTION_GIVE,
+    TMCASE_ACTION_EXIT
 };
 
 enum {
@@ -214,13 +213,13 @@ static void (*const sSelectTMActionTasks[])(u8 taskId) = {
 };
 
 static const struct MenuAction sMenuActions[] = {
-    [ACTION_USE]  = {gOtherText_Use,  {Action_Use}  },
-    [ACTION_GIVE] = {gOtherText_Give, {Action_Give} },
-    [ACTION_EXIT] = {gOtherText_Exit, {Action_Exit} },
+    [TMCASE_ACTION_USE]  = {gOtherText_Use,  {Action_Use}  },
+    [TMCASE_ACTION_GIVE] = {gOtherText_Give, {Action_Give} },
+    [TMCASE_ACTION_EXIT] = {gOtherText_Exit, {Action_Exit} },
 };
 
-static const u8 sMenuActionIndices_Field[] = {ACTION_USE, ACTION_GIVE, ACTION_EXIT};
-static const u8 sMenuActionIndices_UnionRoom[] = {ACTION_GIVE, ACTION_EXIT};
+static const u8 sMenuActionIndices_Field[] = {TMCASE_ACTION_USE, TMCASE_ACTION_GIVE, TMCASE_ACTION_EXIT};
+static const u8 sMenuActionIndices_UnionRoom[] = {TMCASE_ACTION_GIVE, TMCASE_ACTION_EXIT};
 
 static const struct YesNoFuncTable sYesNoFuncTable = {Task_PrintSaleConfirmedText, Task_SaleOfTMsCanceled};
 
@@ -455,10 +454,10 @@ static void CB2_SetUpTMCaseUI_Blocking(void)
     }
 }
 
-#define tListTaskId       data[0]
-#define tSelection        data[1]
-#define tQuantityOwned    data[2]
-#define tQuantitySelected data[8]
+#define tListTaskId data[0]
+#define tListPos    data[1]
+#define tQuantity   data[2]
+#define tItemCount  data[8]
 
 #define tPokedudeState data[8] // Re-used
 #define tPokedudeTimer data[9]
@@ -508,7 +507,7 @@ static bool8 DoSetUpTMCaseUI(void)
             gMain.state++;
         break;
     case 9:
-        SortPocketAndPlaceHMsFirst(&gBagPockets[POCKET_TM_HM - 1]);
+        SortBerriesOrTMHMs(&gBagPockets[POCKET_TM_HM - 1]);
         gMain.state++;
         break;
     case 10:
@@ -574,12 +573,14 @@ static void ResetBufferPointers_NoFree(void)
 static void LoadBGTemplates(void)
 {
     void ** ptr;
-    ResetAllBgsCoordinatesAndBgCntRegs();
+
+    ResetVramOamAndBgCntRegs();
     ptr = &sTilemapBuffer;
     *ptr = AllocZeroed(0x800);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBGTemplates, ARRAY_COUNT(sBGTemplates));
     SetBgTilemapBuffer(2, *ptr);
+    ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
@@ -643,11 +644,11 @@ static void InitTMCaseListMenuItems(void)
     for (i = 0; i < sTMCaseDynamicResources->numTMs; i++)
     {
         GetTMNumberAndMoveString(sListMenuStringsBuffer[i], pocket->itemSlots[i].itemId);
-        sListMenuItemsBuffer[i].label = sListMenuStringsBuffer[i];
-        sListMenuItemsBuffer[i].index = i;
+        sListMenuItemsBuffer[i].name = sListMenuStringsBuffer[i];
+        sListMenuItemsBuffer[i].id = i;
     }
-    sListMenuItemsBuffer[i].label = gText_Close;
-    sListMenuItemsBuffer[i].index = LIST_CANCEL;
+    sListMenuItemsBuffer[i].name = gText_Close;
+    sListMenuItemsBuffer[i].id = LIST_CANCEL;
 
     gMultiuseListMenuTemplate.items = sListMenuItemsBuffer;
     gMultiuseListMenuTemplate.totalItems = sTMCaseDynamicResources->numTMs + 1; // +1 for Cancel
@@ -719,7 +720,7 @@ static void List_ItemPrintFunc(u8 windowId, u32 itemIndex, u8 y)
             if (!GetItemImportance(itemId))
             {
                 ConvertIntToDecimalStringN(gStringVar1, BagGetQuantityByPocketPosition(POCKET_TM_HM, itemIndex), STR_CONV_MODE_RIGHT_ALIGN, 3);
-                StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+                StringExpandPlaceholders(gStringVar4, gText_xVar1);
             }
             else
             {
@@ -921,8 +922,8 @@ static void Task_HandleListInput(u8 taskId)
                     SetDescriptionWindowShade(1);
                     RemoveScrollArrows();
                     PrintListCursor(tListTaskId, COLOR_CURSOR_SELECTED);
-                    tSelection = input;
-                    tQuantityOwned = BagGetQuantityByPocketPosition(POCKET_TM_HM, input);
+                    tListPos = input;
+                    tQuantity = BagGetQuantityByPocketPosition(POCKET_TM_HM, input);
                     gSpecialVar_ItemId = BagGetItemIdByPocketPosition(POCKET_TM_HM, input);
                     gTasks[taskId].func = sSelectTMActionTasks[sTMCaseStaticResources.menuType];
                     break;
@@ -1040,7 +1041,7 @@ static void Action_Use(u8 taskId)
 static void Action_Give(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    u16 itemId = BagGetItemIdByPocketPosition(POCKET_TM_HM, tSelection);
+    u16 itemId = BagGetItemIdByPocketPosition(POCKET_TM_HM, tListPos);
     RemoveContextMenu(&sTMCaseDynamicResources->contextMenuWindowId);
     ClearStdWindowAndFrameToTransparent(WIN_SELECTED_MSG, FALSE);
     ClearWindowTilemap(WIN_SELECTED_MSG);
@@ -1069,13 +1070,13 @@ static void Action_Give(u8 taskId)
 
 static void PrintError_ThereIsNoPokemon(u8 taskId)
 {
-    PrintMessageWithFollowupTask(taskId, FONT_NORMAL, gText_ThereIsNoPokemon, Task_WaitButtonAfterErrorPrint);
+    PrintMessageWithFollowupTask(taskId, FONT_NORMAL, gText_NoPokemon, Task_WaitButtonAfterErrorPrint);
 }
 
 static void PrintError_ItemCantBeHeld(u8 taskId)
 {
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gText_ItemCantBeHeld);
+    StringExpandPlaceholders(gStringVar4, gText_Var1CantBeHeld);
     PrintMessageWithFollowupTask(taskId, FONT_NORMAL, gStringVar4, Task_WaitButtonAfterErrorPrint);
 }
 
@@ -1126,7 +1127,7 @@ static void Task_SelectedTMHM_GiveParty(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    if (!GetItemImportance(BagGetItemIdByPocketPosition(POCKET_TM_HM, tSelection)))
+    if (!GetItemImportance(BagGetItemIdByPocketPosition(POCKET_TM_HM, tListPos)))
     {
         sTMCaseDynamicResources->nextScreenCallback = CB2_GiveHoldItem;
         Task_BeginFadeOutFromTMCase(taskId);
@@ -1142,7 +1143,7 @@ static void Task_SelectedTMHM_GivePC(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    if (!GetItemImportance(BagGetItemIdByPocketPosition(POCKET_TM_HM, tSelection)))
+    if (!GetItemImportance(BagGetItemIdByPocketPosition(POCKET_TM_HM, tListPos)))
     {
         sTMCaseDynamicResources->nextScreenCallback = CB2_ReturnToPokeStorage;
         Task_BeginFadeOutFromTMCase(taskId);
@@ -1156,7 +1157,7 @@ static void Task_SelectedTMHM_GivePC(u8 taskId)
 
 static void Task_SelectedTMHM_Sell(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     if (GetItemImportance(gSpecialVar_ItemId))
     {
@@ -1167,18 +1168,24 @@ static void Task_SelectedTMHM_Sell(u8 taskId)
     }
     else
     {
-        tQuantitySelected = 1;
-        if (tQuantityOwned == 1)
+        tItemCount = 1;
+        if (tQuantity == 1)
         {
             PrintPlayersMoney();
             Task_AskConfirmSaleWithAmount(taskId);
         }
         else
         {
-            if (tQuantityOwned > 99)
-                tQuantityOwned = 99;
+            u32 maxQuantity = MAX_MONEY / GetItemSellPrice(gSpecialVar_ItemId);
+
+            if (tQuantity > MAX_BAG_ITEM_CAPACITY)
+                tQuantity = MAX_BAG_ITEM_CAPACITY;
+            
+            if (tQuantity > maxQuantity)
+                tQuantity = maxQuantity;
+
             CopyItemName(gSpecialVar_ItemId, gStringVar1);
-            StringExpandPlaceholders(gStringVar4, gText_HowManyWouldYouLikeToSell);
+            StringExpandPlaceholders(gStringVar4, gText_HowManyToSell);
             PrintMessageWithFollowupTask(taskId, GetDialogBoxFontId(), gStringVar4, Task_InitQuantitySelectUI);
         }
     }
@@ -1188,7 +1195,7 @@ static void Task_AskConfirmSaleWithAmount(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
 
-    ConvertIntToDecimalStringN(gStringVar3, GetItemPrice(BagGetItemIdByPocketPosition(POCKET_TM_HM, tSelection)) / 2 * tQuantitySelected, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_ICanPayThisMuch_WouldThatBeOkay);
     PrintMessageWithFollowupTask(taskId, GetDialogBoxFontId(), gStringVar4, Task_PlaceYesNoBox);
 }
@@ -1217,13 +1224,13 @@ static void Task_SaleOfTMsCanceled(u8 taskId)
 
 static void Task_InitQuantitySelectUI(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
     TMCase_SetWindowBorder1(WIN_SELL_QUANTITY);
-    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     TMCase_Print(WIN_SELL_QUANTITY, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, COLOR_DARK);
-    SellTM_PrintQuantityAndSalePrice(1, GetItemPrice(BagGetItemIdByPocketPosition(POCKET_TM_HM, tSelection)) / 2 * tQuantitySelected);
+    SellTM_PrintQuantityAndSalePrice(1, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount);
     PrintPlayersMoney();
     CreateQuantityScrollArrows();
     ScheduleBgCopyTilemapToVram(0);
@@ -1234,19 +1241,19 @@ static void Task_InitQuantitySelectUI(u8 taskId)
 static void SellTM_PrintQuantityAndSalePrice(s16 quantity, s32 amount)
 {
     FillWindowPixelBuffer(WIN_SELL_QUANTITY, 0x11);
-    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, MAX_ITEM_DIGITS);
+    StringExpandPlaceholders(gStringVar4, gText_xVar1);
     TMCase_Print(WIN_SELL_QUANTITY, FONT_SMALL, gStringVar4, 4, 10, 1, 0, 0, COLOR_DARK);
-    PrintMoneyAmount(WIN_SELL_QUANTITY, 0x38, 0x0A, amount, 0);
+    PrintMoneyAmount(WIN_SELL_QUANTITY, CalculateMoneyTextHorizontalPosition(amount), 10, amount, 0);
 }
 
 static void Task_QuantitySelect_HandleInput(u8 taskId)
 {
-    s16 * data = gTasks[taskId].data;
+    s16 *data = gTasks[taskId].data;
 
-    if (AdjustQuantityAccordingToDPadInput(&tQuantitySelected, tQuantityOwned) == 1)
+    if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
     {
-        SellTM_PrintQuantityAndSalePrice(tQuantitySelected, GetItemPrice(BagGetItemIdByPocketPosition(POCKET_TM_HM, tSelection)) / 2 * tQuantitySelected);
+        SellTM_PrintQuantityAndSalePrice(tItemCount, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount);
     }
     else if (JOY_NEW(A_BUTTON))
     {
@@ -1280,9 +1287,9 @@ static void Task_PrintSaleConfirmedText(u8 taskId)
 
     PutWindowTilemap(WIN_LIST);
     ScheduleBgCopyTilemapToVram(0);
-    CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    ConvertIntToDecimalStringN(gStringVar3, GetItemPrice(BagGetItemIdByPocketPosition(POCKET_TM_HM, tSelection)) / 2 * tQuantitySelected, STR_CONV_MODE_LEFT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar4, gText_TurnedOverItemsWorthYen);
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
+    ConvertIntToDecimalStringN(gStringVar1, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, 6);
+    StringExpandPlaceholders(gStringVar4, gText_TurnedOverVar1ForVar2);
     PrintMessageWithFollowupTask(taskId, FONT_NORMAL, gStringVar4, Task_DoSaleOfTMs);
 }
 
@@ -1291,9 +1298,9 @@ static void Task_DoSaleOfTMs(u8 taskId)
     s16 * data = gTasks[taskId].data;
 
     PlaySE(SE_SHOP);
-    RemoveBagItem(gSpecialVar_ItemId, tQuantitySelected);
-    AddMoney(&gSaveBlock1Ptr->money, GetItemPrice(gSpecialVar_ItemId) / 2 * tQuantitySelected);
-    RecordItemTransaction(gSpecialVar_ItemId, tQuantitySelected, QL_EVENT_SOLD_ITEM - QL_EVENT_USED_POKEMART);
+    RemoveBagItem(gSpecialVar_ItemId, tItemCount);
+    AddMoney(&gSaveBlock1Ptr->money, GetItemSellPrice(gSpecialVar_ItemId) * tItemCount);
+    RecordItemTransaction(gSpecialVar_ItemId, tItemCount, QL_EVENT_SOLD_ITEM - QL_EVENT_USED_POKEMART);
     DestroyListMenuTask(tListTaskId, &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
     TMCaseSetup_GetTMCount();
     TMCaseSetup_InitListMenuPositions();
@@ -1460,7 +1467,6 @@ static void Task_Pokedude_Run(u8 taskId)
             sTMCaseStaticResources.scrollOffset = sPokedudeBagBackup->scrollOffset;
             Free(sPokedudeBagBackup);
             CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
-            SetBagOpenFalse();
             BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, 0);
             tPokedudeState++;
         }

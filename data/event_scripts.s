@@ -863,7 +863,7 @@ Text_MakingPreparations::
 Text_WantWhichFloor::
 	.string "Which floor do you want?$"
 
-Text_BagItemCanBeRegistered::
+gText_SelectWithoutRegisteredItem::
 	.string "An item in the BAG can be\n"
 	.string "registered to SELECT for easy use.$"
 
@@ -1133,8 +1133,8 @@ EventScript_HandOverItem::
 	.include "data/scripts/flavor_text.inc"
 	.include "data/scripts/questionnaire.inc"
 
-EventScript_BagItemCanBeRegistered::
-	msgbox Text_BagItemCanBeRegistered, MSGBOX_SIGN
+EventScript_SelectWithoutRegisteredItem::
+	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
 	end
 
 EventScript_Return::

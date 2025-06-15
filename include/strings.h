@@ -95,19 +95,19 @@ extern const u8 gOtherText_Exit[];
 extern const u8 gText_ThreeHyphens[];
 extern const u8 gText_SevenHyphens[];
 extern const u8 gText_NumberClear01[];
-extern const u8 gText_TimesStrVar1[];
+extern const u8 gText_xVar1[];
 extern const u8 gText_IsSelected[];
-extern const u8 gText_ThereIsNoPokemon[];
-extern const u8 gText_ItemCantBeHeld[];
+extern const u8 gText_NoPokemon[];
+extern const u8 gText_Var1CantBeHeld[];
 extern const u8 gText_TMCase[];
 extern const u8 gText_Close[];
 extern const u8 gText_TMCaseWillBePutAway[];
 extern const u8 gText_FontSmall[];
 extern const u8 gText_FontNormal[];
 extern const u8 gText_OhNoICantBuyThat[];
-extern const u8 gText_HowManyWouldYouLikeToSell[];
+extern const u8 gText_HowManyToSell[];
 extern const u8 gText_ICanPayThisMuch_WouldThatBeOkay[];
-extern const u8 gText_TurnedOverItemsWorthYen[];
+extern const u8 gText_TurnedOverVar1ForVar2[];
 extern const u8 gPokedudeText_TMTypes[];
 extern const u8 gPokedudeText_ReadTMDescription[];
 extern const u8 gFameCheckerText_Cancel[];
@@ -157,7 +157,7 @@ extern const u8 gString_Help[];
 extern const u8 gString_HelpSystem_ClearTo8[];
 
 extern const u8 gText_Var1IsSelected[];
-extern const u8 gOtherText_WhereShouldTheStrVar1BePlaced[];
+extern const u8 gText_MoveVar1Where[];
 extern const u8 gOtherText_Powder[];
 extern const u8 gText_NoMoreRoomInBag[];
 extern const u8 gText_WithdrawHowMany[];
@@ -457,9 +457,11 @@ extern const u8 gCreditsString_The_Royal_New_Zealand_Foundation_of_the_Blind_Gre
 extern const u8 gCreditsString_Graphic_Designer[];
 extern const u8 gCreditsString_Akira_Kinashi[];
 
+extern const u8 *const gPocketNamesStringsTable[];
+
 // berry_pouch
-extern const u8 gText_TheStrVar1CantBeHeldHere[];
-extern const u8 gText_TossOutHowManyStrVar1s[];
+extern const u8 gText_Var1CantBeHeldHere[];
+extern const u8 gText_TossHowManyVar1s[];
 extern const u8 gText_ThrewAwayStrVar2StrVar1s[];
 extern const u8 gText_ThrowAwayStrVar2OfThisItemQM[];
 extern const u8 gText_BerryPouch[];
@@ -1097,14 +1099,8 @@ extern const u8 gOtherText_Walk[];
 extern const u8 gOtherText_Check[];
 extern const u8 gOtherText_Open[];
 extern const u8 gOtherText_Deselect[];
-extern const u8 gText_Items2[];
-extern const u8 gText_PokeBalls2[];
-extern const u8 gText_KeyItems2[];
 extern const u8 gText_CloseBag[];
-extern const u8 gText_CantWriteMailHere[];
-extern const u8 gText_DepositHowManyStrVars1[];
-extern const u8 gText_DepositedStrVar2StrVar1s[];
-extern const u8 gText_NoRoomToStoreItems[];
+extern const u8 gText_CantWriteMail[];
 
 // union_room_battle
 extern const u8 gText_CommStandbyAwaitingOtherPlayer[];

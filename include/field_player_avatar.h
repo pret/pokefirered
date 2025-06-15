@@ -15,7 +15,7 @@ void MovePlayerNotOnBike(u8 direction, u16 heldKeys);
 bool8 TryDoMetatileBehaviorForcedMovement(void);
 
 void MovementType_Player(struct Sprite *sprite);
-void HandleEnforcedLookDirectionOnPlayerStopMoving(void);
+void PlayerFreeze(void);
 void StopPlayerAvatar(void);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);
 u8 GetPlayerAvatarGraphicsIdByStateId(u8);

@@ -65,12 +65,12 @@ ItemUseFunc GetItemFieldFunc(u16 itemId);
 u8 GetItemBattleUsage(u16 itemId);
 u16 GetItemSecondaryId(u16 itemId);
 u32 GetItemFlingPower(u32 itemId);
+void MoveItemSlotInList(struct ItemSlot *itemSlots_, u32 from, u32 to_);
 void ClearBag(void);
 void ClearPCItemSlots(void);
 void TrySetObtainedItemQuestLogEvent(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 amount);
 
-void SortPocketAndPlaceHMsFirst(struct BagPocket * pocket);
 u16 BagGetItemIdByPocketPosition(u8 pocketId, u16 itemId);
 u16 BagGetQuantityByPocketPosition(u8 pocketId, u16 itemId);
 u16 BagGetQuantityByItemId(u16 item);
@@ -82,6 +82,7 @@ void SetBagPocketsPointers(void);
 void ItemPcCompaction(void);
 void RemovePCItem(u16 itemId, u16 quantity);
 void CompactItemsInBagPocket(struct BagPocket * pocket);
+void SortBerriesOrTMHMs(struct BagPocket *bagPocket);
 u8 CountItemsInPC(void);
 bool8 HasAtLeastOneBerry(void);
 bool8 HasAtLeastOnePokeBall(void);
@@ -95,6 +96,7 @@ bool8 IsItemBall(u16 itemId);
 const u8 *GetItemEffect(u32 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
 u32 GetItemStatus2Mask(u16 itemId);
+u32 GetItemSellPrice(u32 itemId);
 
 /* Expands to:
  * enum

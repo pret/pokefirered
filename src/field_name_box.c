@@ -4,6 +4,7 @@
 #include "decompress.h"
 #include "palette.h"
 #include "sprite.h"
+#include "string_util.h"
 
 #define NAMEBOX_TAG_GFX   0xD222
 #define NAMEBOX_TAG_PAL   0xD223
@@ -75,6 +76,7 @@ void ClearNamebox(void)
 
 void ShowNamebox(const u8 *text)
 {
+
     if (IsNameboxDisplayed())
         ClearNamebox();
 
@@ -83,8 +85,10 @@ void ShowNamebox(const u8 *text)
     FillWindowPixelBuffer(sNameboxWinId, PIXEL_FILL(0));
     PutWindowTilemap(sNameboxWinId);
 
+    StringExpandPlaceholders(gStringVar4, text);
+
     AddTextPrinterParameterized(sNameboxWinId, FONT_NORMAL,
-                                text,
+                                gStringVar4,
                                 6, 2,   
                                 TEXT_SKIP_DRAW, NULL);
 

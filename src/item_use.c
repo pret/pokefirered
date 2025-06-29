@@ -785,7 +785,7 @@ void ItemUseOutOfBattle_ResetEVs(u8 taskId)
 
 static void RemoveUsedItem(void)
 {
-    u8 pocketId = GetItemPocket(gSpecialVar_ItemId) - 1;
+    u8 pocketId = GetItemPocket(gSpecialVar_ItemId);
     RemoveBagItem(gSpecialVar_ItemId, 1);
     UpdatePocketItemList(pocketId);
     UpdatePocketListPosition(pocketId);

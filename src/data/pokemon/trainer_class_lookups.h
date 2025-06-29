@@ -157,7 +157,7 @@ const u16 gFacilityClassToPicIndex[] =
     [FACILITY_CLASS_CHAMPION_RIVAL_2]       = TRAINER_PIC_CHAMPION_RIVAL,
 };
 
-const u16 gFacilityClassToTrainerClass[] =
+const enum TrainerClassID gFacilityClassToTrainerClass[] =
 {
     [FACILITY_CLASS_AQUA_LEADER_ARCHIE]     = TRAINER_CLASS_AQUA_LEADER,
     [FACILITY_CLASS_AQUA_GRUNT_M]           = TRAINER_CLASS_TEAM_AQUA,

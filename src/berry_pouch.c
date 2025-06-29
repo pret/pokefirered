@@ -765,7 +765,7 @@ static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMen
         StartBerryPouchSpriteWobbleAnim();
     }
     if (sResources->listMenuNumItems != itemIndex)
-        CreateBerryPouchItemIcon(BagGetItemIdByPocketPosition(POCKET_BERRIES, itemIndex), sResources->itemMenuIconId);
+        CreateBerryPouchItemIcon(GetBagItemId(POCKET_BERRIES, itemIndex), sResources->itemMenuIconId);
     else
         CreateBerryPouchItemIcon(ITEMS_COUNT, sResources->itemMenuIconId);
     RemoveBerryPouchItemIcon(sResources->itemMenuIconId ^ 1);
@@ -778,7 +778,7 @@ static void BerryPouchItemPrintFunc(u8 windowId, u32 itemId, u8 y)
     u16 itemQuantity;
     if (itemId != LIST_CANCEL && sResources->listMenuNumItems != itemId)
     {
-        itemQuantity = BagGetQuantityByPocketPosition(POCKET_BERRIES, itemId);
+        itemQuantity = GetBagItemQuantity(POCKET_BERRIES, itemId);
         ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, MAX_ITEM_DIGITS);
         StringExpandPlaceholders(gStringVar4, gText_xVar1);
         BerryPouchPrint(windowId, FONT_SMALL, gStringVar4, 110, y, 0, 0, 0xFF, 1);
@@ -811,7 +811,7 @@ static void PrintSelectedBerryDescription(s32 itemIdx)
 {
     const u8 * str;
     if (itemIdx != sResources->listMenuNumItems)
-        str = GetItemDescription(BagGetItemIdByPocketPosition(POCKET_BERRIES, itemIdx));
+        str = GetItemDescription(GetBagItemId(POCKET_BERRIES, itemIdx));
     else
         str = gText_TheBerryPouchWillBePutAway;
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
@@ -937,24 +937,26 @@ static void Task_BerryPouchFadeToExitCallback(u8 taskId)
 static void SortAndCountBerries(void)
 {
     u16 i;
-    u32 r2;
-    struct BagPocket *pocket = &gBagPockets[POCKET_BERRIES - 1];
+    u32 numListItems;
+    enum Pocket pocket = POCKET_BERRIES;
+    struct BagPocket *bagPocket = &gBagPockets[pocket];
+
     SortBerriesOrTMHMs(pocket);
     sResources->listMenuNumItems = 0;
-    for (i = 0; i < pocket->capacity; i++)
+    for (i = 0; i < bagPocket->capacity; i++)
     {
-        if (pocket->itemSlots[i].itemId == ITEM_NONE)
+        if (bagPocket->itemSlots[i].itemId == ITEM_NONE)
             break;
         sResources->listMenuNumItems++;
     }
     if (sStaticCnt.type != BERRYPOUCH_FROMBERRYCRUSH)
-        r2 = sResources->listMenuNumItems + 1;
+        numListItems = sResources->listMenuNumItems + 1;
     else
-        r2 = sResources->listMenuNumItems;
-    if (r2 > 7)
+        numListItems = sResources->listMenuNumItems;
+    if (numListItems > 7)
         sResources->listMenuMaxShowed = 7;
     else
-        sResources->listMenuMaxShowed = r2;
+        sResources->listMenuMaxShowed = numListItems;
 }
 
 void BerryPouch_SetExitCallback(void (*callback)(void))
@@ -1019,7 +1021,7 @@ static void Task_BerryPouchMain(u8 taskId)
                 PlaySE(SE_SELECT);
                 if (sStaticCnt.type == BERRYPOUCH_FROMBERRYCRUSH)
                 {
-                    gSpecialVar_ItemId = BagGetItemIdByPocketPosition(POCKET_BERRIES, menuInput);
+                    gSpecialVar_ItemId = GetBagItemId(POCKET_BERRIES, menuInput);
                     BerryPouch_StartFadeToExitCallback(taskId);
                 }
                 else if (menuInput == sResources->listMenuNumItems)
@@ -1033,8 +1035,8 @@ static void Task_BerryPouchMain(u8 taskId)
                     SetDescriptionWindowBorderPalette(1);
                     BerryPouchSetArrowCursorFromListMenu(tListTaskId, 2);
                     tListPosition = menuInput;
-                    tQuantity = BagGetQuantityByPocketPosition(POCKET_BERRIES, menuInput);
-                    gSpecialVar_ItemId = BagGetItemIdByPocketPosition(POCKET_BERRIES, menuInput);
+                    tQuantity = GetBagItemQuantity(POCKET_BERRIES, menuInput);
+                    gSpecialVar_ItemId = GetBagItemId(POCKET_BERRIES, menuInput);
                     gTasks[taskId].func = sBerryPouchContextMenuTasks[sStaticCnt.type];
                 }
                 break;

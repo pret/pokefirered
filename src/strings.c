@@ -168,9 +168,9 @@ const u8 gText_NoSaveFileCantSetTime[] = _("There is no save file, so the time\n
 const u8 gText_InGameClockUsable[] = _("The in-game clock adjustment system\nis now useable.");
 
 const u8 *const gPocketNamesStringsTable[] = {
-    [ITEMS_POCKET] = COMPOUND_STRING("ITEMS"),
-    [KEYITEMS_POCKET] = COMPOUND_STRING("KEY ITEMS"),
-    [BALLS_POCKET] = COMPOUND_STRING("POKé BALLS"),
+    [POCKET_ITEMS] = COMPOUND_STRING("ITEMS"),
+    [POCKET_KEY_ITEMS] = COMPOUND_STRING("KEY ITEMS"),
+    [POCKET_POKE_BALLS] = COMPOUND_STRING("POKé BALLS"),
 };
 
 const u8 gText_MenuPokedex[] = _("POKéDEX");

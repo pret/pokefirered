@@ -387,7 +387,7 @@ static u32 GetMaxPowerTier(u32 move)
     switch (GetMoveEffect(move))
     {
         case EFFECT_BIDE:
-        case EFFECT_SUPER_FANG:
+        case EFFECT_FIXED_PERCENT_DAMAGE:
         case EFFECT_LEVEL_DAMAGE:
         case EFFECT_PSYWAVE:
         case EFFECT_COUNTER:
@@ -400,13 +400,14 @@ static u32 GetMaxPowerTier(u32 move)
         case EFFECT_TERRAIN_PULSE:
         case EFFECT_PUNISHMENT:
         case EFFECT_TRUMP_CARD:
-        case EFFECT_FIXED_DAMAGE_ARG:
+        case EFFECT_FIXED_HP_DAMAGE:
         case EFFECT_SPIT_UP:
         case EFFECT_NATURAL_GIFT:
         case EFFECT_MIRROR_COAT:
         case EFFECT_FINAL_GAMBIT:
             return MAX_POWER_TIER_2;
         case EFFECT_OHKO:
+        case EFFECT_SHEER_COLD:
         case EFFECT_RETURN:
         case EFFECT_FRUSTRATION:
         case EFFECT_HEAT_CRASH:
@@ -502,10 +503,9 @@ void BS_UndoDynamax(void)
 
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX)
     {
-        BattleScriptPushCursor();
         UndoDynamax(battler);
         gBattleScripting.battler = battler;
-        gBattlescriptCurrInstr = BattleScript_DynamaxEnds_Ret;
+        BattleScriptCall(BattleScript_DynamaxEnds_Ret);
         return;
     }
 

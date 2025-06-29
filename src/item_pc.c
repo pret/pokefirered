@@ -707,7 +707,7 @@ static u16 ItemPc_GetItemIdBySlotId(u16 idx)
 
 static u16 ItemPc_GetItemQuantityBySlotId(u16 idx)
 {
-    return GetPcItemQuantity(&gSaveBlock1Ptr->pcItems[idx].quantity);
+    return GetPCItemQuantity(&gSaveBlock1Ptr->pcItems[idx].quantity);
 }
 
 static void ItemPc_CountPcItems(void)
@@ -849,7 +849,7 @@ static void ItemPc_InsertItemIntoNewSlot(u8 taskId, u32 pos)
         ItemPc_MoveItemModeCancel(taskId, pos);
     else
     {
-        MoveItemSlotInList(gSaveBlock1Ptr->pcItems, data[1], pos);
+        MoveItemSlotInPC(gSaveBlock1Ptr->pcItems, data[1], pos);
         DestroyListMenuTask(data[0], &sListMenuState.scroll, &sListMenuState.row);
         if (data[1] < pos)
             sListMenuState.row--;

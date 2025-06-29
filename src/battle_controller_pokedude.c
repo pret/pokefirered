@@ -40,8 +40,6 @@ struct PokedudeBattlePartyInfo
     u8 gender;
 };
 
-static void PokedudeHandleLoadMonSprite(u32 battler);
-static void PokedudeHandleSwitchInAnim(u32 battler);
 static void PokedudeHandleDrawTrainerPic(u32 battler);
 static void PokedudeHandleTrainerSlide(u32 battler);
 static void PokedudeHandleSuccessBallThrowAnim(u32 battler);
@@ -51,19 +49,16 @@ static void PokedudeHandleChooseAction(u32 battler);
 static void PokedudeHandleChooseMove(u32 battler);
 static void PokedudeHandleChooseItem(u32 battler);
 static void PokedudeHandleChoosePokemon(u32 battler);
-static void PokedudeHandleHealthBarUpdate(u32 battler);
 static void PokedudeHandleStatusXor(u32 battler);
 static void PokedudeHandlePlaySE(u32 battler);
 static void PokedudeHandleIntroTrainerBallThrow(u32 battler);
 static void PokedudeHandleDrawPartyStatusSummary(u32 battler);
 static void PokedudeHandleEndBounceEffect(u32 battler);
-static void PokedudeHandleBattleAnimation(u32 battler);
 static void PokedudeHandleLinkStandbyMsg(u32 battler);
 static void PokedudeHandleEndLinkBattle(u32 battler);
 
 static void PokedudeAction_PrintVoiceoverMessage(u32 battler);
 static void PokedudeAction_PrintMessageWithHealthboxPals(u32 battler);
-static void PokedudeBufferExecCompleted(u32 battler);
 static void PokedudeSimulateInputChooseAction(u32 battler);
 static void PokedudeBufferRunCommand(u32 battler);
 static bool8 HandlePokedudeVoiceoverEtc(u32 battler);
@@ -79,8 +74,8 @@ static void (*const sPokedudeBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler)
     [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,
     [CONTROLLER_SETMONDATA]               = BtlController_HandleSetMonData,
     [CONTROLLER_SETRAWMONDATA]            = BtlController_Empty,
-    [CONTROLLER_LOADMONSPRITE]            = PokedudeHandleLoadMonSprite,
-    [CONTROLLER_SWITCHINANIM]             = PokedudeHandleSwitchInAnim,
+    [CONTROLLER_LOADMONSPRITE]            = BtlController_HandleLoadMonSprite,
+    [CONTROLLER_SWITCHINANIM]             = BtlController_HandleSwitchInAnim,
     [CONTROLLER_RETURNMONTOBALL]          = BtlController_HandleReturnMonToBall,
     [CONTROLLER_DRAWTRAINERPIC]           = PokedudeHandleDrawTrainerPic,
     [CONTROLLER_TRAINERSLIDE]             = PokedudeHandleTrainerSlide,
@@ -99,7 +94,7 @@ static void (*const sPokedudeBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler)
     [CONTROLLER_OPENBAG]                  = PokedudeHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = PokedudeHandleChoosePokemon,
     [CONTROLLER_23]                       = BtlController_Empty,
-    [CONTROLLER_HEALTHBARUPDATE]          = PokedudeHandleHealthBarUpdate,
+    [CONTROLLER_HEALTHBARUPDATE]          = BtlController_HandleHealthBarUpdate,
     [CONTROLLER_EXPUPDATE]                = PlayerHandleExpUpdate,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,
@@ -123,7 +118,7 @@ static void (*const sPokedudeBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler)
     [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_Empty,
     [CONTROLLER_ENDBOUNCE]                = PokedudeHandleEndBounceEffect,
     [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_Empty,
-    [CONTROLLER_BATTLEANIMATION]          = PokedudeHandleBattleAnimation,
+    [CONTROLLER_BATTLEANIMATION]          = BtlController_HandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = PokedudeHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,
     [CONTROLLER_ENDLINKBATTLE]            = PokedudeHandleEndLinkBattle,
@@ -165,26 +160,6 @@ static void HandleInputChooseAction(u32 battler)
     PokedudeSimulateInputChooseAction(battler);
 }
 
-static void CompleteOnBattlerSpritePosX_0(u32 battler)
-{
-    if (gSprites[gBattlerSpriteIds[battler]].animEnded == TRUE
-        && gSprites[gBattlerSpriteIds[battler]].x2 == 0)
-    {
-        if (!gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim)
-        {
-            TryShinyAnimation(battler, &gEnemyParty[gBattlerPartyIndexes[battler]]);
-        }
-        else if (gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim)
-        {
-            gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = FALSE;
-            gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
-            FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-            FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
-            PokedudeBufferExecCompleted(battler);
-        }
-    }
-}
-
 static void Pokedude_SetBattleEndCallbacks(u32 battler)
 {
     if (!gPaletteFade.active)
@@ -192,50 +167,6 @@ static void Pokedude_SetBattleEndCallbacks(u32 battler)
         gMain.inBattle = FALSE;
         gMain.callback1 = gPreBattleCallback1;
         SetMainCallback2(gMain.savedCallback);
-    }
-}
-
-static void SwitchIn_HandleSoundAndEnd(u32 battler)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive)
-    {
-        CreateTask(Task_PlayerController_RestoreBgmAfterCry, 10);
-        HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
-        PokedudeBufferExecCompleted(battler);
-    }
-}
-
-static void SwitchIn_CleanShinyAnimShowSubstitute(u32 battler)
-{
-    if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy
-        && gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim)
-    {
-        gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim = FALSE;
-        gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
-        FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-        FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
-        if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
-            InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_MON_TO_SUBSTITUTE);
-        gBattlerControllerFuncs[battler] = SwitchIn_HandleSoundAndEnd;
-    }
-}
-
-static void SwitchIn_TryShinyAnimShowHealthbox(u32 battler)
-{
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].triedShinyMonAnim
-        && !gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive)
-        TryShinyAnimation(battler, &gPlayerParty[gBattlerPartyIndexes[battler]]);
-    if (gSprites[gBattleControllerData[battler]].callback == SpriteCallbackDummy
-        && !(gBattleSpritesDataPtr->healthBoxesData[battler].ballAnimActive))
-    {
-        DestroySprite(&gSprites[gBattleControllerData[battler]]);
-        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler],
-                                 &gPlayerParty[gBattlerPartyIndexes[battler]],
-                                 HEALTHBOX_ALL);
-        StartHealthboxSlideIn(battler);
-        SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
-        CopyBattleSpriteInvisibility(battler);
-        gBattlerControllerFuncs[battler] = SwitchIn_CleanShinyAnimShowSubstitute;
     }
 }
 
@@ -360,7 +291,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
     }
 }
 
-static void PokedudeBufferExecCompleted(u32 battler)
+void PokedudeBufferExecCompleted(u32 battler)
 {
     gBattlerControllerFuncs[battler] = PokedudeBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -374,18 +305,6 @@ static void PokedudeBufferExecCompleted(u32 battler)
     {
         gBattleControllerExecFlags &= ~(1u << battler);
     }
-}
-
-static void PokedudeHandleLoadMonSprite(u32 battler)
-{
-    BtlController_HandleLoadMonSprite(battler, CompleteOnBattlerSpritePosX_0);
-}
-
-static void PokedudeHandleSwitchInAnim(u32 battler)
-{
-    gActionSelectionCursor[battler] = 0;
-    gMoveSelectionCursor[battler] = 0;
-    BtlController_HandleSwitchInAnim(battler, GetBattlerSide(battler) == B_SIDE_PLAYER, SwitchIn_TryShinyAnimShowHealthbox);
 }
 
 static void PokedudeHandleDrawTrainerPic(u32 battler)
@@ -518,11 +437,6 @@ static void PokedudeHandleChoosePokemon(u32 battler)
     gBattlerInMenuId = battler;
 }
 
-static void PokedudeHandleHealthBarUpdate(u32 battler)
-{
-    BtlController_HandleHealthBarUpdate(battler, TRUE);
-}
-
 // shared with battle_controller_player
 static void PokedudeHandleStatusXor(u32 battler)
 {
@@ -546,7 +460,7 @@ static void PokedudeHandlePlaySE(u32 battler)
 
 static void PokedudeHandleIntroTrainerBallThrow(u32 battler)
 {
-    BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F8, gTrainerBacksprites[TRAINER_BACK_PIC_POKEDUDE].palette.data, 31, Intro_TryShinyAnimShowHealthbox, StartAnimLinearTranslation);
+    BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F8, gTrainerBacksprites[TRAINER_BACK_PIC_POKEDUDE].palette.data, 31, Intro_TryShinyAnimShowHealthbox);
 }
 
 static void PokedudeHandleDrawPartyStatusSummary(u32 battler)
@@ -572,11 +486,6 @@ static void PokedudeHandleEndBounceEffect(u32 battler)
     EndBounceEffect(battler, BOUNCE_HEALTHBOX);
     EndBounceEffect(battler, BOUNCE_MON);
     PokedudeBufferExecCompleted(battler);
-}
-
-static void PokedudeHandleBattleAnimation(u32 battler)
-{
-    BtlController_HandleBattleAnimation(battler, TRUE);
 }
 
 static void PokedudeHandleLinkStandbyMsg(u32 battler)

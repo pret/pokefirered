@@ -3,7 +3,8 @@
 
 // National Pokédex order
 // These constants are NOT disabled by P_GEN_X_POKEMON to keep pokedex_orders.h clean.
-enum {
+enum NationalDexOrder
+{
     NATIONAL_DEX_NONE,
     // Kanto
     NATIONAL_DEX_BULBASAUR,
@@ -1043,7 +1044,8 @@ enum {
 };
 
 // Kanto Pokedex order
-enum {
+enum KantoDexOrder
+{
     KANTO_DEX_NONE,
     // Kanto
     KANTO_DEX_BULBASAUR,
@@ -1305,8 +1307,9 @@ enum {
     KANTO_DEX_END
 };
 
-// Hoenn Pokedex order
-enum {
+// Hoenn Pokédex order
+enum HoennDexOrder
+{
     HOENN_DEX_NONE,
     HOENN_DEX_TREECKO,
     HOENN_DEX_GROVYLE,
@@ -1574,6 +1577,7 @@ enum {
 
 #define POKEMON_SLOTS_NUMBER (NATIONAL_DEX_COUNT + 1)
 
+
 #define DECAGRAMS_IN_POUND             4536
 #define CM_PER_INCH                    2.54
 #define CM_PER_INCH_FACTOR             (CM_PER_INCH * 100)
@@ -1583,5 +1587,19 @@ enum {
 
 #define WEIGHT_HEIGHT_STR_LEN          16
 #define WEIGHT_HEIGHT_STR_MEM          (WEIGHT_HEIGHT_STR_LEN * sizeof(u8))
+
+enum
+{
+    DEX_MODE_HOENN,
+    DEX_MODE_NATIONAL
+};
+
+enum
+{
+    FLAG_GET_SEEN,
+    FLAG_GET_CAUGHT,
+    FLAG_SET_SEEN,
+    FLAG_SET_CAUGHT
+};
 
 #endif // GUARD_CONSTANTS_POKEDEX_H

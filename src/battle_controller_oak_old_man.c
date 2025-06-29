@@ -29,18 +29,15 @@ static void OakOldManHandleChooseAction(u32 battler);
 static void OakOldManHandleChooseMove(u32 battler);
 static void OakOldManHandleChooseItem(u32 battler);
 static void OakOldManHandleChoosePokemon(u32 battler);
-static void OakOldManHandleHealthBarUpdate(u32 battler);
 static void OakOldManHandlePlaySE(u32 battler);
 static void OakOldManHandleFaintingCry(u32 battler);
 static void OakOldManHandleIntroTrainerBallThrow(u32 battler);
 static void OakOldManHandleDrawPartyStatusSummary(u32 battler);
 static void OakOldManHandleEndBounceEffect(u32 battler);
-static void OakOldManHandleBattleAnimation(u32 battler);
 static void OakOldManHandleLinkStandbyMsg(u32 battler);
 static void OakOldManHandleEndLinkBattle(u32 battler);
 
 static void OakOldManBufferRunCommand(u32 battler);
-static void OakOldManBufferExecCompleted(u32 battler);
 static void WaitForMonSelection(u32 battler);
 static void CompleteWhenChoseItem(u32 battler);
 static void PrintOakText_KeepAnEyeOnHP(u32 battler);
@@ -86,7 +83,7 @@ static void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler
     [CONTROLLER_OPENBAG]                  = OakOldManHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = OakOldManHandleChoosePokemon,
     [CONTROLLER_23]                       = BtlController_Empty,
-    [CONTROLLER_HEALTHBARUPDATE]          = OakOldManHandleHealthBarUpdate,
+    [CONTROLLER_HEALTHBARUPDATE]          = BtlController_HandleHealthBarUpdate,
     [CONTROLLER_EXPUPDATE]                = PlayerHandleExpUpdate,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
     [CONTROLLER_STATUSANIMATION]          = BtlController_HandleStatusAnimation,
@@ -110,7 +107,7 @@ static void (*const sOakOldManBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler
     [CONTROLLER_HIDEPARTYSTATUSSUMMARY]   = BtlController_Empty,
     [CONTROLLER_ENDBOUNCE]                = OakOldManHandleEndBounceEffect,
     [CONTROLLER_SPRITEINVISIBILITY]       = BtlController_Empty,
-    [CONTROLLER_BATTLEANIMATION]          = OakOldManHandleBattleAnimation,
+    [CONTROLLER_BATTLEANIMATION]          = BtlController_HandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = OakOldManHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,
     [CONTROLLER_ENDLINKBATTLE]            = OakOldManHandleEndLinkBattle,
@@ -655,7 +652,7 @@ static void PrintOakText_KeepAnEyeOnHP(u32 battler)
     }
 }
 
-static void OakOldManBufferExecCompleted(u32 battler)
+void OakOldManBufferExecCompleted(u32 battler)
 {
     gBattlerControllerFuncs[battler] = OakOldManBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -844,11 +841,6 @@ static void OakOldManHandleChoosePokemon(u32 battler)
     gBattlerInMenuId = battler;
 }
 
-static void OakOldManHandleHealthBarUpdate(u32 battler)
-{
-    BtlController_HandleHealthBarUpdate(battler, TRUE);
-}
-
 static void OakOldManHandlePlaySE(u32 battler)
 {
     PlaySE(gBattleResources->bufferA[battler][1] | (gBattleResources->bufferA[battler][2] << 8));
@@ -868,7 +860,7 @@ static void OakOldManHandleIntroTrainerBallThrow(u32 battler)
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
         const u16 *trainerPal = gTrainerBacksprites[gSaveBlock2Ptr->playerGender].palette.data;
-        BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F8, trainerPal, 31, Intro_TryShinyAnimShowHealthbox, StartAnimLinearTranslation);
+        BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F8, trainerPal, 31, Intro_TryShinyAnimShowHealthbox);
     }
     else
     {
@@ -901,11 +893,6 @@ static void OakOldManHandleEndBounceEffect(u32 battler)
     EndBounceEffect(battler, BOUNCE_HEALTHBOX);
     EndBounceEffect(battler, BOUNCE_MON);
     OakOldManBufferExecCompleted(battler);
-}
-
-static void OakOldManHandleBattleAnimation(u32 battler)
-{
-    BtlController_HandleBattleAnimation(battler, TRUE);
 }
 
 static void OakOldManHandleLinkStandbyMsg(u32 battler)

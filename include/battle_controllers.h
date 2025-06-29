@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_CONTROLLERS_H
 #define GUARD_BATTLE_CONTROLLERS_H
 
+typedef void (*BattleControllerFunc)(u32 battler);
+
 enum {
     REQUEST_ALL_BATTLE,
     REQUEST_SPECIES_BATTLE,
@@ -72,41 +74,63 @@ enum {
 // (e.g. MarkBattlerForControllerExec) instead of using these macros
 // directly.
 
-#define MARK_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battler) \
-   gBattleControllerExecFlags |= (1u << battler)
+static inline void MarkBattleControllerActiveOnLocal(u32 battler)
+{
+    gBattleControllerExecFlags |= (1u << battler);
+}
 
-#define MARK_BATTLE_CONTROLLER_IDLE_ON_LOCAL(battler) \
-   gBattleControllerExecFlags &= ~(1u << battler)
+static inline void MarkBattleControllerIdleOnLocal(u32 battler)
+{
+    gBattleControllerExecFlags &= ~(1u << battler);
+}
 
-#define IS_BATTLE_CONTROLLER_ACTIVE_ON_LOCAL(battler) \
-   (gBattleControllerExecFlags & (1u << battler))
+static inline bool32 IsBattleControllerActiveOnLocal(u32 battler)
+{
+    return gBattleControllerExecFlags & (1u << battler);
+}
 
-#define MARK_BATTLE_CONTROLLER_MESSAGE_OUTBOUND_OVER_LINK(battler) \
-   gBattleControllerExecFlags |= ((1u << battler) << (32 - MAX_BATTLERS_COUNT))
+static inline void MarkBattleControllerMessageOutboundOverLink(u32 battler)
+{
+    gBattleControllerExecFlags |= ((1u << battler) << (32 - MAX_BATTLERS_COUNT));
+}
 
-#define MARK_BATTLE_CONTROLLER_MESSAGE_SYNCHRONIZED_OVER_LINK(battler) \
-   gBattleControllerExecFlags &= ~((1 << 28) << (battler))
+static inline void MarkBattleControllerMessageSynchronizedOverLink(u32 battler)
+{
+    gBattleControllerExecFlags &= ~((1 << 28) << (battler));
+}
 
-#define MARK_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battler, playerId) \
-   gBattleControllerExecFlags |= ((1u << battler) << ((playerId) << 2))
+static inline bool32 IsBattleControllerMessageSynchronizedOverLink(u32 battler)
+{
+    return gBattleControllerExecFlags & (1u << (battler + 28));
+}
 
-#define MARK_BATTLE_CONTROLLER_IDLE_FOR_PLAYER(battler, playerId) \
-   gBattleControllerExecFlags &= ~((1u << battler) << ((playerId) * 4))
+static inline void MarkBattleControllerActiveForPlayer(u32 battler, u32 playerId)
+{
+    gBattleControllerExecFlags |= ((1u << battler) << ((playerId) << 2));
+}
 
-#define IS_BATTLE_CONTROLLER_ACTIVE_FOR_PLAYER(battler, playerId) \
-   (gBattleControllerExecFlags & ((1u << battler) << ((playerId) * 4)))
+static inline void MarkBattleControllerIdleForPlayer(u32 battler, u32 playerId)
+{
+    gBattleControllerExecFlags &= ~((1u << battler) << ((playerId) * 4));
+}
+
+static inline bool32 IsBattleControllerActiveForPlayer(u32 battler, u32 playerId)
+{
+    return gBattleControllerExecFlags & ((1u << battler) << ((playerId) * 4));
+}
 
 // This actually checks if a specific controller is active on any player or if
 // *any* controller is pending sync over link communications, but the macro name
 // can only be so specific before it just gets ridiculous.
-#define IS_BATTLE_CONTROLLER_ACTIVE_OR_PENDING_SYNC_ANYWHERE(battler) \
-   (gBattleControllerExecFlags & ( \
-      (1u << battler)              \
-    | (0xF << 28)                  \
-    | (1u << battler << 4)         \
-    | (1u << battler << 8)         \
-    | (1u << battler << 12)        \
-   ))
+static inline bool32 IsBattleControllerActiveOrPendingSyncAnywhere(u32 battler)
+{
+   return gBattleControllerExecFlags & (
+                  (1u << battler)
+                | (0xF << 28)
+                | (1u << battler << 4)
+                | (1u << battler << 8)
+                | (1u << battler << 12));
+}
 
 // Special arguments for Battle Controller functions.
 
@@ -302,7 +326,7 @@ void BtlController_EmitResetActionMoveSelection(u32 battler, u32 bufferId, u8 ca
 void BtlController_EmitEndLinkBattle(u32 battler, u32 bufferId, u8 battleOutcome);
 void BtlController_EmitDebugMenu(u32 battler, u32 bufferId);
 
-void BattleControllerComplete(u32 battler); // Can be used for all the controllers.
+void BtlController_Complete(u32 battler); // Can be used for all the controllers.
 void BtlController_Empty(u32 battler); // Empty command, does nothing, only completes the execution.
 void BtlController_TerminatorNop(u32 battler); // Dummy function at the end of the table.
 void BattleControllerDummy(u32 battler);
@@ -315,8 +339,8 @@ void BtlController_HandleGetMonData(u32 battler);
 void BtlController_HandleGetRawMonData(u32 battler);
 void BtlController_HandleSetMonData(u32 battler);
 void BtlController_HandleSetRawMonData(u32 battler);
-void BtlController_HandleLoadMonSprite(u32 battler, void (*controllerCallback)(u32 battler));
-void BtlController_HandleSwitchInAnim(u32 battler, bool32 isPlayerSide, void (*controllerCallback)(u32 battler));
+void BtlController_HandleLoadMonSprite(u32 battler);
+void BtlController_HandleSwitchInAnim(u32 battler);
 void BtlController_HandleReturnMonToBall(u32 battler);
 void BtlController_HandleDrawTrainerPic(u32 battlerId, u32 trainerPicId, bool32 isFrontPic, s16 xPos, s16 yPos, s32 subpriority);
 void BtlController_HandleTrainerSlide(u32 battler, u32 trainerPicId);
@@ -326,7 +350,8 @@ void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animI
 void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
 void BtlController_HandleMoveAnimation(u32 battler);
 void BtlController_HandlePrintString(u32 battler);
-void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText);
+void BtlController_HandlePrintStringPlayerOnly(u32 battler);
+void BtlController_HandleHealthBarUpdate(u32 battler);
 void DoStatusIconUpdate(u32 battler);
 void BtlController_HandleStatusIconUpdate(u32 battler);
 void BtlController_HandleStatusAnimation(u32 battler);
@@ -338,13 +363,14 @@ void BtlController_HandleIntroSlide(u32 battler);
 void BtlController_HandleSpriteInvisibility(u32 battler);
 bool32 TwoPlayerIntroMons(u32 battlerId); // Double battle with both player pokemon active.
 bool32 TwoOpponentIntroMons(u32 battlerId); // Double battle with both opponent pokemon active.
-void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, const u16 *trainerPal, s16 framesToWait, void (*controllerCallback)(u32 battler), void (*spriteCallback)(struct Sprite *sprite));
+void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, const u16 *trainerPal, s16 framesToWait, void (*controllerCallback)(u32 battler));
 void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay);
 void BtlController_HandleHidePartyStatusSummary(u32 battler);
-void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE);
+void BtlController_HandleBattleAnimation(u32 battler);
 
 // player controller
 void SetControllerToPlayer(u32 battler);
+void PlayerBufferExecCompleted(u32 battler);
 void SetBattleEndCallbacks(u32 battler);
 void PlayerHandleBallThrowAnim(u32 battler);
 void PlayerHandleExpUpdate(u32 battler);
@@ -367,28 +393,42 @@ void HandleChooseMoveAfterDma3(u32 battler);
 
 // recorded player controller
 void SetControllerToRecordedPlayer(u32 battler);
+void RecordedPlayerBufferExecCompleted(u32 battler);
 
 // opponent controller
 void SetControllerToOpponent(u32 battler);
-void OpponentHandleTrainerSlide(u32 battler);
 void OpponentBufferExecCompleted(u32 battler);
+void OpponentHandleTrainerSlide(u32 battler);
 
 // player partner controller
 void Controller_PlayerPartnerShowIntroHealthbox(u32 battler); // Also used by the link partner.
 void SetControllerToPlayerPartner(u32 battler);
+void PlayerPartnerBufferExecCompleted(u32 battler);
 
 // safari controller
 void SetControllerToSafari(u32 battler);
+void SafariBufferExecCompleted(u32 battler);
+
+// recorded opponent controller
+void SetControllerToRecordedOpponent(u32 battler);
+void RecordedOpponentBufferExecCompleted(u32 battler);
+
+// link opponent
+void SetControllerToLinkOpponent(u32 battler);
+void LinkOpponentBufferExecCompleted(u32 battler);
+
+// link partner
+void SetControllerToLinkPartner(u32 battler);
+void LinkPartnerBufferExecCompleted(u32 battler);
 
 // pokedude controller
 void SetControllerToPokedude(u32 battler);
 void InitPokedudePartyAndOpponent(void);
-
-// recorded opponent controller
-void SetControllerToRecordedOpponent(u32 battler);
+void PokedudeBufferExecCompleted(u32 battler);
 
 // oak and old man controller
 void SetControllerToOakOrOldMan(u32 battler);
+void OakOldManBufferExecCompleted(u32 battler);
 
 // These flags are set to signal that the indicated message
 // was already emitted
@@ -411,19 +451,15 @@ void OakOldManHandleInputChooseMove(u32 battler);
 void BtlCtrl_DrawVoiceoverMessageFrame(void);
 void BtlCtrl_RemoveVoiceoverMessageFrame(void);
 
-// link opponent
-void SetControllerToLinkOpponent(u32 battler);
-
-// link partner
-void SetControllerToLinkPartner(u32 battler);
-
 void TrySetBattlerShadowSpriteCallback(u32 battler);
 
-bool32 TryShinyAnimAfterMonAnimUtil(u32 battler);
-bool32 SwitchIn_ShowSubstituteUtil(u32 battler);
-bool32 SwitchIn_WaitAndEndUtil(u32 battler);
-bool32 SwitchIn_HandleSoundAndEndUtil(u32 battler);
-bool32 SwitchIn_ShowHealthboxUtil(u32 battler);
-bool32 SwitchIn_TryShinyAnimUtil(u32 battler);
+void TryShinyAnimAfterMonAnim(u32 battler);
+void WaitForMonAnimAfterLoad(u32 battler);
+void BtlController_HandleSwitchInWaitAndEnd(u32 battler);
+void BtlController_Intro_DelayAndEnd(u32 battler);
+void BtlController_HandleSwitchInShowHealthbox(u32 battler);
+void BtlController_HandleSwitchInTryShinyAnim(u32 battler);
+void BtlController_HandleSwitchInSoundAndEnd(u32 battler);
+void BtlController_HandleSwitchInShowSubstitute(u32 battler);
 
 #endif // GUARD_BATTLE_CONTROLLERS_H

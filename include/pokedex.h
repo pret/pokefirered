@@ -1,20 +1,6 @@
 #ifndef GUARD_POKEDEX_H
 #define GUARD_POKEDEX_H
 
-enum
-{
-    DEX_MODE_KANTO,
-    DEX_MODE_NATIONAL
-};
-
-enum
-{
-    FLAG_GET_SEEN,
-    FLAG_GET_CAUGHT,
-    FLAG_SET_SEEN,
-    FLAG_SET_CAUGHT
-};
-
 // IDs for the pokedex area markers
 enum {
     DEX_AREA_NONE,

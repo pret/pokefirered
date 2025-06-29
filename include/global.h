@@ -28,6 +28,10 @@
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 #define NAKED __attribute__((naked))
 
+#if __STDC_VERSION__ < 202311L
+#define asm __asm__
+#endif
+
 // IDE support
 #if defined(__APPLE__) || defined(__CYGWIN__) || defined(__INTELLISENSE__)
 // We define these when using certain IDEs to fool preproc

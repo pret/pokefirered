@@ -64,7 +64,7 @@ DOUBLE_BATTLE_TEST("Dragon Cheer increases critical hit ratio by 2 on Dragon typ
     GIVEN {
         WITH_CONFIG(GEN_CONFIG_CRIT_CHANCE, genConfig);
         ASSUME(GetMoveCriticalHitStage(MOVE_SCRATCH) == 0);
-        ASSUME(gSpeciesInfo[SPECIES_DRATINI].baseSpeed == 50);
+        ASSUME(GetSpeciesBaseSpeed(SPECIES_DRATINI) == 50);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_DRATINI);
         OPPONENT(SPECIES_WOBBUFFET);

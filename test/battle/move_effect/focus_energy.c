@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by 1 st
     GIVEN {
         WITH_CONFIG(GEN_CONFIG_CRIT_CHANCE, genConfig);
         WITH_CONFIG(GEN_CONFIG_FOCUS_ENERGY_CRIT_RATIO, genConfig);
-        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].baseSpeed == 33);
+        ASSUME(GetSpeciesBaseSpeed(SPECIES_WOBBUFFET) == 33);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

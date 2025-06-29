@@ -4,8 +4,8 @@
 ASSUMPTIONS {
     int i;
     for (i = 0; i < NUM_ABILITY_SLOTS; i++) {
-        ASSUME(gSpeciesInfo[SPECIES_KADABRA].abilities[i] != ABILITY_QUARK_DRIVE);
-        ASSUME(gSpeciesInfo[SPECIES_ALAKAZAM].abilities[i] != ABILITY_ELECTRIC_SURGE);
+        ASSUME(GetSpeciesAbility(SPECIES_KADABRA, i) != ABILITY_QUARK_DRIVE);
+        ASSUME(GetSpeciesAbility(SPECIES_ALAKAZAM, i) != ABILITY_ELECTRIC_SURGE);
     }
 }
 

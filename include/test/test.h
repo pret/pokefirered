@@ -15,6 +15,7 @@ enum TestResult
     TEST_RESULT_TIMEOUT,
     TEST_RESULT_CRASH,
     TEST_RESULT_TODO,
+    TEST_RESULT_KNOWN_FAIL,
 };
 
 struct TestRunner
@@ -214,7 +215,7 @@ static inline struct Benchmark BenchmarkStop(void)
     } while (0)
 
 #define KNOWN_FAILING \
-    Test_ExpectedResult(TEST_RESULT_FAIL)
+    Test_ExpectedResult(TEST_RESULT_KNOWN_FAIL)
 
 #define KNOWN_LEAKING \
     Test_ExpectLeaks(TRUE)

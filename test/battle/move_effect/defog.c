@@ -304,7 +304,7 @@ DOUBLE_BATTLE_TEST("Defog removes Aurora Veil from target's side", s16 damagePhy
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_HAIL) == EFFECT_HAIL);
-        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
+        ASSUME(GetSpeciesType(SPECIES_GLALIE, 0) == TYPE_ICE);
         PLAYER(SPECIES_GLALIE) { Speed(4); }
         PLAYER(SPECIES_GLALIE) { Speed(3); }
         OPPONENT(SPECIES_GLALIE) { Speed(2); }
@@ -336,7 +336,7 @@ DOUBLE_BATTLE_TEST("Defog removes everything it can")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_HAIL) == EFFECT_HAIL);
-        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
+        ASSUME(GetSpeciesType(SPECIES_GLALIE, 0) == TYPE_ICE);
         PLAYER(SPECIES_GLALIE) { Speed(4); }
         PLAYER(SPECIES_GLALIE) { Speed(3); }
         PLAYER(SPECIES_GLALIE) { Speed(12); }

@@ -50,7 +50,7 @@ SINGLE_BATTLE_TEST("Plasma Fists turns normal moves into electric for the remain
 SINGLE_BATTLE_TEST("Plasma Fists does not set up Ion Deluge if it does not connect")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_PHANPY].types[0] == TYPE_GROUND || gSpeciesInfo[SPECIES_PHANPY].types[1] == TYPE_GROUND);
+        ASSUME(GetSpeciesType(SPECIES_PHANPY, 0) == TYPE_GROUND || GetSpeciesType(SPECIES_PHANPY, 1) == TYPE_GROUND);
         PLAYER(SPECIES_KRABBY);
         OPPONENT(SPECIES_PHANPY);
     } WHEN {

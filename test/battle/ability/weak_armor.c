@@ -77,7 +77,7 @@ SINGLE_BATTLE_TEST("Weak Armor does not trigger when brought in by Dragon Tail a
     }
 }
 
-SINGLE_BATTLE_TEST("Weak Armor still lowers boosts Speed if Defense can't go any lower")
+SINGLE_BATTLE_TEST("Weak Armor still boosts Speed if Defense can't go any lower")
 {
     GIVEN {
         PLAYER(SPECIES_SLUGMA) { Ability(ABILITY_WEAK_ARMOR); }

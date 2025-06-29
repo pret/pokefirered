@@ -673,4 +673,24 @@ SINGLE_BATTLE_TEST("Pursuit user faints to Life Orb and target still switches ou
     }
 }
 
+DOUBLE_BATTLE_TEST("Pursuit user switches out due to Red Card and partner's switch is cancelled if switching to same Pokémon")
+{
+    GIVEN {
+        ASSUME(GetItemHoldEffect(ITEM_RED_CARD) == HOLD_EFFECT_RED_CARD);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_ARCEUS);
+        OPPONENT(SPECIES_WYNAUT) { Item(ITEM_RED_CARD); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ARCEUS);
+    } WHEN {
+        TURN { SWITCH(opponentLeft, 2); SWITCH(playerRight, 2); MOVE(playerLeft, MOVE_PURSUIT, target: opponentLeft); }
+    } THEN {
+        // playerLeft switches to Arceus
+        EXPECT_EQ(playerLeft->species, SPECIES_ARCEUS);
+        // playerRight has their switch cancelled
+        EXPECT_EQ(playerRight->species, SPECIES_WYNAUT);
+    }
+}
+
 TO_DO_BATTLE_TEST("Baton Pass doesn't cause Pursuit to increase its power or priority");

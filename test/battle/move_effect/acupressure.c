@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-TO_DO_BATTLE_TEST("Acupressure increases one of two stats by 2 stages at random");
+TO_DO_BATTLE_TEST("Acupressure increases one of its stats by 2 stages at random");
 TO_DO_BATTLE_TEST("Acupressure doesn't try to increase a stat that has been maximized");
 TO_DO_BATTLE_TEST("Acupressure fails on the user if all of its stats are maximized");
 TO_DO_BATTLE_TEST("Acupressure fails on the ally if all of its stats are maximized");

@@ -10,7 +10,7 @@ SINGLE_BATTLE_TEST("Super Luck increases the critical hit ratio by 1 stage")
         PARAMETRIZE { genConfig = j; passes = 1; trials = 8; }  // 12.5%
     PASSES_RANDOMLY(passes, trials, RNG_CRITICAL_HIT);
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_TOGEPI].baseSpeed == 20);
+        ASSUME(GetSpeciesBaseSpeed(SPECIES_TOGEPI) == 20);
         WITH_CONFIG(GEN_CONFIG_CRIT_CHANCE, genConfig);
         PLAYER(SPECIES_TOGEPI) { Ability(ABILITY_SUPER_LUCK); };
         OPPONENT(SPECIES_WOBBUFFET);

@@ -686,9 +686,9 @@ TEST("Battle strings fit on the battle message window")
         break;
     // Buffer "999999" to B_BUFF1
     case STRINGID_PLAYERGOTMONEY:
-    case STRINGID_PLAYERWHITEOUT2:
+    case STRINGID_PLAYERWHITEOUT2_TRAINER:
     case STRINGID_PLAYERPICKEDUPMONEY:
-    case STRINGID_PLAYERPAIDPRIZEMONEY:
+    case STRINGID_PLAYERWHITEOUT2_WILD:
         PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 6, sixDigitNines);
         break;
     // Buffer "99" to B_BUFF1
@@ -814,6 +814,7 @@ TEST("Battle strings fit on the battle message window")
     default:
         break;
     }
+    EXPECT(gBattleStringsTable[battleStringId] != NULL);
     BattleStringExpandPlaceholders(gBattleStringsTable[battleStringId], battleString, BATTLE_STRING_BUFFER_SIZE);
     DebugPrintf("Battle String ID %d: %S", battleStringId, battleString);
     for (j = 1;; j++)

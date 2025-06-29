@@ -1771,6 +1771,7 @@ DOUBLE_BATTLE_TEST("Sleep Clause: Sleep Clause does not prevent sleeping your pa
 DOUBLE_BATTLE_TEST("Sleep Clause: Sleep moves used after being Encore'd are prevented when sleep clause is active")
 {
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_ENCORE_TARGET, GEN_3);
         FLAG_SET(B_FLAG_SLEEP_CLAUSE);
         ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
         ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);

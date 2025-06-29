@@ -13,7 +13,7 @@ SINGLE_BATTLE_TEST("criticalHitStage set to 1 increases critical hits occur at a
     GIVEN {
         WITH_CONFIG(GEN_CONFIG_CRIT_CHANCE, genConfig);
         ASSUME(GetMoveCriticalHitStage(MOVE_SLASH) == 1);
-        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].baseSpeed == 33);
+        ASSUME(GetSpeciesBaseSpeed(SPECIES_WOBBUFFET) == 33);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

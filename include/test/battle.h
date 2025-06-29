@@ -88,7 +88,7 @@
  *   {
  *       GIVEN {
  *           ASSUME(IsPowderMove(MOVE_STUN_SPORE));
- *           ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
+ *           ASSUME(GetSpeciesType(SPECIES_ODDISH, 0) == TYPE_GRASS);
  *           PLAYER(SPECIES_ODDISH); // 1.
  *           OPPONENT(SPECIES_ODDISH); // 2.
  *       } WHEN {
@@ -734,7 +734,7 @@ struct BattleTestRunnerState
     bool8 runThen:1;
     bool8 runFinally:1;
     bool8 runningFinally:1;
-    bool8 tearDownBattle:1;
+    bool8 hasTornDownBattle:1;
     struct BattleTestData data;
     u8 *results;
     u8 checkProgressParameter;

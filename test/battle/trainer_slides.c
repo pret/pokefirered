@@ -59,7 +59,7 @@ SINGLE_BATTLE_TEST("Trainer Slide: Player Lands First STAB Hit")
     gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SLIDE_PLAYER_LANDS_FIRST_STAB_MOVE;
 
     GIVEN {
-        ASSUME((GetMoveType(MOVE_VINE_WHIP)) == gSpeciesInfo[SPECIES_BULBASAUR].types[0]);
+        ASSUME((GetMoveType(MOVE_VINE_WHIP)) == GetSpeciesType(SPECIES_BULBASAUR, 0));
         PLAYER(SPECIES_BULBASAUR);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -77,8 +77,8 @@ SINGLE_BATTLE_TEST("Trainer Slide: Player Lands First Super Effective Hit")
 
     GIVEN {
         ASSUME(GetMoveType(MOVE_BITE) == TYPE_DARK);
-        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] == TYPE_PSYCHIC);
-        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] == TYPE_PSYCHIC);
+        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 0) == TYPE_PSYCHIC);
+        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 0) == TYPE_PSYCHIC);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -110,7 +110,7 @@ SINGLE_BATTLE_TEST("Trainer Slide: Enemy Mon Unaffected")
     gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SLIDE_ENEMY_MON_UNAFFECTED;
     GIVEN {
         ASSUME(B_SHEER_COLD_IMMUNITY >= GEN_7);
-        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
+        ASSUME(GetSpeciesType(SPECIES_GLALIE, 0) == TYPE_ICE);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_GLALIE);
     } WHEN {
@@ -141,8 +141,8 @@ SINGLE_BATTLE_TEST("Trainer Slide: Last Half Hp")
 {
     gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SLIDE_LAST_HALF_HP;
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_SUPER_FANG) == EFFECT_SUPER_FANG);
-        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].baseHP == 190);
+        ASSUME(GetMoveEffect(MOVE_SUPER_FANG) == EFFECT_FIXED_PERCENT_DAMAGE);
+        ASSUME(GetSpeciesBaseHP(SPECIES_WOBBUFFET) == 190);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

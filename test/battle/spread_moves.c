@@ -3,7 +3,6 @@
 
 DOUBLE_BATTLE_TEST("Spread Moves: Ability and Item effects activate correctly after a multi target move")
 {
-    // TODO: Might be a bug, verify on cardridge
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LUM_BERRY); }
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_COVERT_CLOAK); }

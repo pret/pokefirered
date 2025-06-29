@@ -19,13 +19,16 @@ SINGLE_BATTLE_TEST("Contrary raises Attack when Intimidated in a single battle",
     } SCENE {
         ABILITY_POPUP(player, ABILITY_INTIMIDATE);
         if (ability == ABILITY_CONTRARY) {
-            ABILITY_POPUP(opponent, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
             MESSAGE("The opposing Spinda's Attack rose!");
+        } else {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+            MESSAGE("Mightyena's Intimidate cuts the opposing Spinda's Attack!");
         }
         HP_BAR(player, captureDamage: &results[i].damage);
-    }
-    FINALLY {
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_ATK], (ability == ABILITY_CONTRARY) ? DEFAULT_STAT_STAGE + 1 : DEFAULT_STAT_STAGE - 1);
+    } FINALLY {
         EXPECT_MUL_EQ(results[1].damage, Q_4_12(2.25), results[0].damage);
     }
 }
@@ -49,7 +52,6 @@ DOUBLE_BATTLE_TEST("Contrary raises Attack when Intimidated in a double battle",
     } SCENE {
         ABILITY_POPUP(playerLeft, ABILITY_INTIMIDATE);
         if (abilityLeft == ABILITY_CONTRARY) {
-            ABILITY_POPUP(opponentLeft, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
             MESSAGE("The opposing Spinda's Attack rose!");
         } else {
@@ -57,7 +59,6 @@ DOUBLE_BATTLE_TEST("Contrary raises Attack when Intimidated in a double battle",
             MESSAGE("Mightyena's Intimidate cuts the opposing Spinda's Attack!");
         }
         if (abilityRight == ABILITY_CONTRARY) {
-            ABILITY_POPUP(opponentRight, ABILITY_CONTRARY);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
             MESSAGE("The opposing Spinda's Attack rose!");
         } else {
@@ -69,8 +70,7 @@ DOUBLE_BATTLE_TEST("Contrary raises Attack when Intimidated in a double battle",
     } THEN {
         EXPECT_EQ(opponentLeft->statStages[STAT_ATK],  (abilityLeft == ABILITY_CONTRARY)  ? DEFAULT_STAT_STAGE+1 : DEFAULT_STAT_STAGE-1);
         EXPECT_EQ(opponentRight->statStages[STAT_ATK], (abilityRight == ABILITY_CONTRARY) ? DEFAULT_STAT_STAGE+1 : DEFAULT_STAT_STAGE-1);
-    }
-    FINALLY {
+    } FINALLY {
         EXPECT_MUL_EQ(results[1].damageLeft, Q_4_12(2.25), results[0].damageLeft);
         EXPECT_MUL_EQ(results[1].damageRight, Q_4_12(2.25), results[0].damageRight);
     }

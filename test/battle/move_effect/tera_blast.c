@@ -46,20 +46,20 @@ SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
     PARAMETRIZE { species = SPECIES_ABRA;      type = TYPE_DARK;     }
 
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_CHIKORITA].types[0] == TYPE_GRASS);
-        ASSUME(gSpeciesInfo[SPECIES_CHIKORITA].types[1] == TYPE_GRASS);
-        ASSUME(gSpeciesInfo[SPECIES_CYNDAQUIL].types[0] == TYPE_FIRE);
-        ASSUME(gSpeciesInfo[SPECIES_CYNDAQUIL].types[1] == TYPE_FIRE);
-        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[0] == TYPE_GHOST);
-        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[1] == TYPE_POISON);
-        ASSUME(gSpeciesInfo[SPECIES_TOTODILE].types[0] == TYPE_WATER);
-        ASSUME(gSpeciesInfo[SPECIES_TOTODILE].types[1] == TYPE_WATER);
-        ASSUME(gSpeciesInfo[SPECIES_DRATINI].types[0] == TYPE_DRAGON);
-        ASSUME(gSpeciesInfo[SPECIES_DRATINI].types[1] == TYPE_DRAGON);
-        ASSUME(gSpeciesInfo[SPECIES_SNEASEL].types[0] == TYPE_DARK);
-        ASSUME(gSpeciesInfo[SPECIES_SNEASEL].types[1] == TYPE_ICE);
-        ASSUME(gSpeciesInfo[SPECIES_ABRA].types[0] == TYPE_PSYCHIC);
-        ASSUME(gSpeciesInfo[SPECIES_ABRA].types[1] == TYPE_PSYCHIC);
+        ASSUME(GetSpeciesType(SPECIES_CHIKORITA, 0) == TYPE_GRASS);
+        ASSUME(GetSpeciesType(SPECIES_CHIKORITA, 1) == TYPE_GRASS);
+        ASSUME(GetSpeciesType(SPECIES_CYNDAQUIL, 0) == TYPE_FIRE);
+        ASSUME(GetSpeciesType(SPECIES_CYNDAQUIL, 1) == TYPE_FIRE);
+        ASSUME(GetSpeciesType(SPECIES_GASTLY, 0) == TYPE_GHOST);
+        ASSUME(GetSpeciesType(SPECIES_GASTLY, 1) == TYPE_POISON);
+        ASSUME(GetSpeciesType(SPECIES_TOTODILE, 0) == TYPE_WATER);
+        ASSUME(GetSpeciesType(SPECIES_TOTODILE, 1) == TYPE_WATER);
+        ASSUME(GetSpeciesType(SPECIES_DRATINI, 0) == TYPE_DRAGON);
+        ASSUME(GetSpeciesType(SPECIES_DRATINI, 1) == TYPE_DRAGON);
+        ASSUME(GetSpeciesType(SPECIES_SNEASEL, 0) == TYPE_DARK);
+        ASSUME(GetSpeciesType(SPECIES_SNEASEL, 1) == TYPE_ICE);
+        ASSUME(GetSpeciesType(SPECIES_ABRA, 0) == TYPE_PSYCHIC);
+        ASSUME(GetSpeciesType(SPECIES_ABRA, 1) == TYPE_PSYCHIC);
         PLAYER(SPECIES_WOBBUFFET) { TeraType(type); }
         OPPONENT(species);
     } WHEN {

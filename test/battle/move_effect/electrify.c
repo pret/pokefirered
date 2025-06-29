@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Electrify makes the target's move Electric-type for the remainder of the turn (single move)")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_SANDSLASH].types[0] == TYPE_GROUND || gSpeciesInfo[SPECIES_SANDSLASH].types[1] == TYPE_GROUND);
+        ASSUME(GetSpeciesType(SPECIES_SANDSLASH, 0) == TYPE_GROUND || GetSpeciesType(SPECIES_SANDSLASH, 1) == TYPE_GROUND);
         ASSUME(GetMoveType(MOVE_SCRATCH) != TYPE_ELECTRIC);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_SANDSLASH);
@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Electrify makes the target's move Electric-type for the rema
 DOUBLE_BATTLE_TEST("Electrify makes the target's move Electric-type for the remainder of the turn (double move)")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_SANDSLASH].types[0] == TYPE_GROUND || gSpeciesInfo[SPECIES_SANDSLASH].types[1] == TYPE_GROUND);
+        ASSUME(GetSpeciesType(SPECIES_SANDSLASH, 0) == TYPE_GROUND || GetSpeciesType(SPECIES_SANDSLASH, 1) == TYPE_GROUND);
         ASSUME(GetMoveType(MOVE_SCRATCH) != TYPE_ELECTRIC);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WYNAUT);
@@ -39,7 +39,7 @@ SINGLE_BATTLE_TEST("Electrify can change status moves to Electric-type")
 {
     KNOWN_FAILING;
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_SANDSLASH].types[0] == TYPE_GROUND || gSpeciesInfo[SPECIES_SANDSLASH].types[1] == TYPE_GROUND);
+        ASSUME(GetSpeciesType(SPECIES_SANDSLASH, 0) == TYPE_GROUND || GetSpeciesType(SPECIES_SANDSLASH, 1) == TYPE_GROUND);
         ASSUME(GetMoveCategory(MOVE_LEER) == DAMAGE_CATEGORY_STATUS);
         ASSUME(GetMoveType(MOVE_LEER) != TYPE_ELECTRIC);
         PLAYER(SPECIES_WOBBUFFET);
@@ -55,7 +55,7 @@ SINGLE_BATTLE_TEST("Electrify can change status moves to Electric-type")
 SINGLE_BATTLE_TEST("Electrify changes the type of foreseen moves when hitting its target")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_SANDSLASH].types[0] == TYPE_GROUND || gSpeciesInfo[SPECIES_SANDSLASH].types[1] == TYPE_GROUND);
+        ASSUME(GetSpeciesType(SPECIES_SANDSLASH, 0) == TYPE_GROUND || GetSpeciesType(SPECIES_SANDSLASH, 1) == TYPE_GROUND);
         ASSUME(GetMoveEffect(MOVE_FUTURE_SIGHT) == EFFECT_FUTURE_SIGHT);
         ASSUME(GetMoveType(MOVE_FUTURE_SIGHT) != TYPE_ELECTRIC);
         PLAYER(SPECIES_WOBBUFFET);

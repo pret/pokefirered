@@ -4,8 +4,8 @@
 ASSUMPTIONS
 {
     ASSUME(gItemsInfo[ITEM_APICOT_BERRY].holdEffect == HOLD_EFFECT_SP_DEFENSE_UP);
-    ASSUME(GetMoveEffect(MOVE_DRAGON_RAGE) == EFFECT_FIXED_DAMAGE_ARG);
-    ASSUME(GetMoveFixedDamage(MOVE_DRAGON_RAGE) == 40);
+    ASSUME(GetMoveEffect(MOVE_DRAGON_RAGE) == EFFECT_FIXED_HP_DAMAGE);
+    ASSUME(GetMoveFixedHPDamage(MOVE_DRAGON_RAGE) == 40);
 }
 
 SINGLE_BATTLE_TEST("Apicot Berry raises the holder's Sp. Def by one stage when HP drops to 1/4 or below")

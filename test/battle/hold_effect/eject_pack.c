@@ -161,12 +161,16 @@ SINGLE_BATTLE_TEST("Eject Pack will miss timing to switch out user if Eject Butt
     }
 }
 
-DOUBLE_BATTLE_TEST("Eject Pack: Only the fastest Eject Pack will activate after intimidate")
+DOUBLE_BATTLE_TEST("Eject Pack: Only the fastest Eject Pack will activate after an ability stat drop")
 {
     u32 speed;
+    u32 species, ability;
 
-    PARAMETRIZE { speed = 1; }
-    PARAMETRIZE { speed = 11; }
+    PARAMETRIZE { species = SPECIES_EKANS; ability = ABILITY_INTIMIDATE; speed = 1; }
+    PARAMETRIZE { species = SPECIES_EKANS; ability = ABILITY_INTIMIDATE; speed = 11; }
+
+    PARAMETRIZE { species = SPECIES_DIPPLIN; ability = ABILITY_SUPERSWEET_SYRUP; speed = 1; }
+    PARAMETRIZE { species = SPECIES_DIPPLIN; ability = ABILITY_SUPERSWEET_SYRUP; speed = 11; }
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Speed(10); Item(ITEM_EJECT_PACK); }
@@ -174,7 +178,7 @@ DOUBLE_BATTLE_TEST("Eject Pack: Only the fastest Eject Pack will activate after 
         PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
         OPPONENT(SPECIES_WYNAUT)  { Speed(4); }
         OPPONENT(SPECIES_WOBBUFFET)  { Speed(5); }
-        OPPONENT(SPECIES_EKANS) { Speed(6); Ability(ABILITY_INTIMIDATE); }
+        OPPONENT(species) { Speed(6); Ability(ability); }
     } WHEN {
         TURN {
             SWITCH(opponentLeft, 2);
@@ -184,14 +188,18 @@ DOUBLE_BATTLE_TEST("Eject Pack: Only the fastest Eject Pack will activate after 
                 SEND_OUT(playerLeft, 2);
         }
     } SCENE {
-        ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
+        ABILITY_POPUP(opponentLeft, ability);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
         if (speed == 11) {
+            NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
             NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
         } else {
-            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+            NONE_OF {
+                ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
+                ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+            }
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
         }
     }
@@ -220,6 +228,84 @@ DOUBLE_BATTLE_TEST("Eject Pack: Only the fastest Eject Pack will activate after 
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BUBBLE, opponentLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+        if (speed == 11) {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
+        } else {
+            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("Eject Pack: Only the fastest Eject Pack will activate after intimidate (switch in after fainting)")
+{
+    u32 speed;
+
+    PARAMETRIZE { speed = 1; }
+    PARAMETRIZE { speed = 11; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); Item(ITEM_EJECT_PACK); }
+        PLAYER(SPECIES_WYNAUT) { Speed(speed); Item(ITEM_EJECT_PACK); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
+        OPPONENT(SPECIES_WYNAUT)  { HP(1); Speed(4); }
+        OPPONENT(SPECIES_WOBBUFFET)  { Speed(5); }
+        OPPONENT(SPECIES_EKANS) { Speed(6); Ability(ABILITY_INTIMIDATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_POUND, target: opponentLeft);
+            SEND_OUT(opponentLeft, 2);
+            if (speed == 11)
+                SEND_OUT(playerRight, 2);
+            else
+                SEND_OUT(playerLeft, 2);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POUND, playerLeft);
+        ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+        if (speed == 11) {
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
+        } else {
+            NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
+        }
+    }
+}
+
+DOUBLE_BATTLE_TEST("Eject Pack: Only the fastest Eject Pack will activate after intimidate (switch in after 2 mons fainted)")
+{
+    u32 speed;
+
+    PARAMETRIZE { speed = 1; }
+    PARAMETRIZE { speed = 11; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); Item(ITEM_EJECT_PACK); }
+        PLAYER(SPECIES_WYNAUT) { Speed(speed); Item(ITEM_EJECT_PACK); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
+        OPPONENT(SPECIES_WYNAUT)  { HP(1); Speed(4); }
+        OPPONENT(SPECIES_WOBBUFFET)  { Speed(5); }
+        OPPONENT(SPECIES_WYNAUT)  { Speed(4); }
+        OPPONENT(SPECIES_EKANS) { Speed(6); Ability(ABILITY_INTIMIDATE); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_HYPER_VOICE);
+            SEND_OUT(opponentLeft, 3);
+            SEND_OUT(opponentRight, 2);
+            if (speed == 11)
+                SEND_OUT(playerRight, 2);
+            else
+                SEND_OUT(playerLeft, 2);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HYPER_VOICE, playerLeft);
+        ABILITY_POPUP(opponentLeft, ABILITY_INTIMIDATE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
         if (speed == 11) {

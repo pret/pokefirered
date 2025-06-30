@@ -312,7 +312,9 @@ top:
             const char *color;
             const char *result;
 
-            if (gTestRunnerState.result == gTestRunnerState.expectedResult)
+            if (gTestRunnerState.result == gTestRunnerState.expectedResult
+             || (gTestRunnerState.result == TEST_RESULT_FAIL
+              && gTestRunnerState.expectedResult == TEST_RESULT_KNOWN_FAIL))
             {
                 color = "\e[32m";
                 Test_MgbaPrintf(":N%s", gTestRunnerState.test->name);
@@ -330,7 +332,7 @@ top:
             switch (gTestRunnerState.result)
             {
             case TEST_RESULT_FAIL:
-                if (gTestRunnerState.expectedResult == TEST_RESULT_FAIL)
+                if (gTestRunnerState.expectedResult == TEST_RESULT_KNOWN_FAIL)
                 {
                     result = "KNOWN_FAILING";
                     color = "\e[33m";
@@ -387,7 +389,9 @@ top:
                 Test_MgbaPrintf(":A%s%s\e[0m", color, result);
             else if (gTestRunnerState.result == TEST_RESULT_TODO)
                 Test_MgbaPrintf(":T%s%s\e[0m", color, result);
-            else if (gTestRunnerState.expectedResult == gTestRunnerState.result)
+            else if (gTestRunnerState.expectedResult == gTestRunnerState.result
+                 || (gTestRunnerState.result == TEST_RESULT_FAIL
+                  && gTestRunnerState.expectedResult == TEST_RESULT_KNOWN_FAIL))
                 Test_MgbaPrintf(":K%s%s\e[0m", color, result);
             else
                 Test_MgbaPrintf(":F%s%s\e[0m", color, result);

@@ -1364,7 +1364,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Launches shock\nwaves that "
             "always\ninflict 20 HP\ndamage."),
-        .effect = EFFECT_FIXED_DAMAGE_ARG,
+        .effect = EFFECT_FIXED_HP_DAMAGE,
         .power = 1,
         .type = TYPE_NORMAL,
         .accuracy = 90,
@@ -2220,7 +2220,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Launches shock\nwaves that "
             "always\ninflict 40 HP\ndamage."),
-        .effect = EFFECT_FIXED_DAMAGE_ARG,
+        .effect = EFFECT_FIXED_HP_DAMAGE,
         .power = 1,
         .type = TYPE_DRAGON,
         .accuracy = 100,
@@ -2866,7 +2866,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Minimizes the\nuser's size to "
         #if B_MINIMIZE_EVASION >= GEN_5
             "\nsharply raise\nevasiveness."),
-        #else 
+        #else
             "\nraise evasiveness."),
         #endif
         .effect = EFFECT_MINIMIZE,
@@ -3221,6 +3221,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .parentalBondBanned = TRUE,
+        .dampBanned = TRUE,
         .contestEffect = CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = 0,
@@ -3704,7 +3705,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
         #if B_UPDATED_MOVE_DATA >= GEN_5
             "Envelops the foes\nin a toxic "
-        #else 
+        #else
             "Envelops the foe\nin a toxic "
         #endif
             "gas that may\npoison."),
@@ -4082,6 +4083,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .parentalBondBanned = TRUE,
+        .dampBanned = TRUE,
         .contestEffect = CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = 0,
@@ -4308,7 +4310,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Attacks with sharp\nfangs "
             "and cuts\nhalf the foe's HP."),
-        .effect = EFFECT_SUPER_FANG,
+        .effect = EFFECT_FIXED_PERCENT_DAMAGE,
         .power = 1,
         .type = TYPE_NORMAL,
         .accuracy = 90,
@@ -4316,6 +4318,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_PHYSICAL,
+        .argument = { .damagePercentage = 50 },
         .makesContact = TRUE,
         .ignoresKingsRock = (B_UPDATED_MOVE_FLAGS == GEN_3 || B_UPDATED_MOVE_FLAGS == GEN_4),
         .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_MONS_WITH_GOOD_APPEALS,
@@ -6050,11 +6053,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     {
         .name = COMPOUND_STRING("Rapid Spin"),
         .description = COMPOUND_STRING(
-            "Spins attack that\nremoves "
+            "User spins and\nremoves some "
         #if B_SPEED_BUFFING_RAPID_SPIN >= GEN_8
-            "some\neffects and ups\nspeed."),
+            "\neffects, while\nupping speed."),
         #else 
-            "certain\neffects."),
+            "\neffects."),
         #endif
         .effect = EFFECT_RAPID_SPIN,
         .power = B_UPDATED_MOVE_DATA >= GEN_8 ? 50 : 20,
@@ -6280,7 +6283,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         #else
             "The type and\neffectiveness "
             "vary\nwith the user."),
-        #endif 
+        #endif
         .power = B_HIDDEN_POWER_DMG >= GEN_6 ? 60 : 1,
         .effect = EFFECT_HIDDEN_POWER,
         .type = TYPE_NORMAL,
@@ -8685,7 +8688,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "A chilling attack\nthat "
             "causes\nfainting if it\nhits."),
-        .effect = EFFECT_OHKO,
+        .effect = EFFECT_SHEER_COLD,
         .power = 1,
         .type = TYPE_ICE,
         .accuracy = 30,
@@ -9621,7 +9624,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Whips up a breeze,\ndoubling "
         #if B_TAILWIND_TURNS >= GEN_5
             "ally\nSpeed for 4 turns."),
-        #else 
+        #else
             "ally\nSpeed for 3 turns."),
         #endif
         .effect = EFFECT_TAILWIND,
@@ -12568,6 +12571,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
+        .argument = { .type = TYPE_WATER },
         .zMove = { .effect = Z_EFFECT_SPATK_UP_1 },
         .magicCoatAffected = TRUE,
         .contestEffect = CONTEST_EFFECT_WORSEN_CONDITION_OF_PREV_MONS,
@@ -13992,7 +13996,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Attacks with an\nancient "
             "song. May\ninduce sleep."),
-        .effect = EFFECT_RELIC_SONG,
+        .effect = EFFECT_HIT,
         .power = 75,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -17089,7 +17093,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Halves the foe's\nHP with "
             "the power\nof nature."),
-        .effect = EFFECT_SUPER_FANG,
+        .effect = EFFECT_FIXED_PERCENT_DAMAGE,
         .power = 1,
         .type = TYPE_FAIRY,
         .accuracy = 90,
@@ -17134,7 +17138,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "It explodes the\nuser's head "
             "to\ndamage everything\naround."),
-        .effect = EFFECT_MIND_BLOWN,
+        .effect = EFFECT_MAX_HP_50_RECOIL,
         .power = 150,
         .type = TYPE_FIRE,
         .accuracy = 100,
@@ -17143,6 +17147,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
+        .dampBanned = TRUE,
         .contestEffect = CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = 0,
@@ -18543,7 +18548,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Hit everything and\nfaint. "
             "Powers up\non Misty Terrain."),
-        .effect = EFFECT_EXPLOSION,
+        .effect = EFFECT_MISTY_EXPLOSION,
         .power = 100,
         .type = TYPE_FAIRY,
         .accuracy = 100,
@@ -18551,6 +18556,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = MOVE_TARGET_FOES_AND_ALLY,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
+        .dampBanned = TRUE,
         .contestEffect = CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES,
         .contestCategory = CONTEST_CATEGORY_CUTE,
         .contestComboStarterId = 0,
@@ -19319,7 +19325,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "A user-hurting\nblast of "
             "amassed\nchlorophyll."),
-        .effect = EFFECT_MAX_HP_50_RECOIL,
+        .effect = EFFECT_CHLOROBLAST,
         .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 150 : 120,
         .type = TYPE_GRASS,
         .accuracy = 95,
@@ -20174,7 +20180,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "Summons a ruinous\ndisaster "
             "and cuts\nhalf the foe's HP."),
-        .effect = EFFECT_SUPER_FANG,
+        .effect = EFFECT_FIXED_PERCENT_DAMAGE,
         .power = 1,
         .type = TYPE_DARK,
         .accuracy = 90,
@@ -21641,7 +21647,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "The Land Spirit\nPokémon "
             "greatly\nreduces the foe's\nHP."),
-        .effect = EFFECT_GUARDIAN_OF_ALOLA,
+        .effect = EFFECT_FIXED_PERCENT_DAMAGE,
         .power = 1,
         .type = TYPE_FAIRY,
         .accuracy = 0,
@@ -21649,6 +21655,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = { .damagePercentage = 75 },
         .battleAnimScript = gBattleAnimMove_GuardianOfAlola,
     },
     [MOVE_SEARING_SUNRAZE_SMASH] =

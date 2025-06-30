@@ -91,8 +91,8 @@ SINGLE_BATTLE_TEST("Abilities replaced by Mega Evolution do not affect turn orde
 {
     GIVEN {
         ASSUME(B_MEGA_EVO_TURN_ORDER >= GEN_7);
-        ASSUME(gSpeciesInfo[SPECIES_SABLEYE_MEGA].abilities[0] != ABILITY_STALL
-            && gSpeciesInfo[SPECIES_SABLEYE_MEGA].abilities[1] != ABILITY_STALL);
+        ASSUME(GetSpeciesAbility(SPECIES_SABLEYE_MEGA, 0) != ABILITY_STALL
+            && GetSpeciesAbility(SPECIES_SABLEYE_MEGA, 1) != ABILITY_STALL);
         PLAYER(SPECIES_SABLEYE) { Item(ITEM_SABLENITE); Ability(ABILITY_STALL); Speed(105); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(44); }
     } WHEN {
@@ -158,9 +158,9 @@ SINGLE_BATTLE_TEST("Mega Evolved Pokemon do not change abilities after fainting"
 {
     GIVEN {
         ASSUME(MoveMakesContact(MOVE_CRUNCH) == TRUE);
-        ASSUME(gSpeciesInfo[SPECIES_GARCHOMP_MEGA].abilities[0] != ABILITY_ROUGH_SKIN);
-        ASSUME(gSpeciesInfo[SPECIES_GARCHOMP_MEGA].abilities[1] != ABILITY_ROUGH_SKIN);
-        ASSUME(gSpeciesInfo[SPECIES_GARCHOMP_MEGA].abilities[2] != ABILITY_ROUGH_SKIN);
+        ASSUME(GetSpeciesAbility(SPECIES_GARCHOMP_MEGA, 0) != ABILITY_ROUGH_SKIN);
+        ASSUME(GetSpeciesAbility(SPECIES_GARCHOMP_MEGA, 1) != ABILITY_ROUGH_SKIN);
+        ASSUME(GetSpeciesAbility(SPECIES_GARCHOMP_MEGA, 2) != ABILITY_ROUGH_SKIN);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GARCHOMP) { Ability(ABILITY_ROUGH_SKIN); Item(ITEM_GARCHOMPITE); HP(1); }
     } WHEN {

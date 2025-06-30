@@ -1,6 +1,9 @@
+#include "constants/battle_ai.h"
+#include "constants/moves.h"
 #include "global.h"
 #include "test/battle.h"
 #include "battle_ai_util.h"
+#include "test/test.h"
 
 ASSUMPTIONS
 {
@@ -251,5 +254,27 @@ AI_SINGLE_BATTLE_TEST("AI prioritizes Pursuit if it would KO opponent")
         OPPONENT(SPECIES_TYRANITAR) { Moves(MOVE_CRUNCH, MOVE_PURSUIT); }
     } WHEN {
         TURN { SWITCH(player, 1); EXPECT_MOVE(opponent, MOVE_PURSUIT); SEND_OUT(player, 1); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI uses Quick Guard against Quick Attack when opponent would die of poison")
+{
+    GIVEN {
+        PLAYER(SPECIES_ZUBAT) { Moves(MOVE_QUICK_ATTACK); Status1(STATUS1_TOXIC_POISON); }
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT | AI_FLAG_PREDICT_MOVE);
+        OPPONENT(SPECIES_RATTATA) { Moves(MOVE_QUICK_GUARD, MOVE_TACKLE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_QUICK_ATTACK); EXPECT_MOVE(opponent, MOVE_QUICK_GUARD); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI uses Wide Guard against Earthquake when opponent would die of poison")
+{
+    GIVEN {
+        PLAYER(SPECIES_ZUBAT) { Moves(MOVE_EARTHQUAKE); Status1(STATUS1_TOXIC_POISON); }
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT | AI_FLAG_PREDICT_MOVE);
+        OPPONENT(SPECIES_RATTATA) { Moves(MOVE_WIDE_GUARD, MOVE_TACKLE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_EARTHQUAKE); EXPECT_MOVE(opponent, MOVE_WIDE_GUARD); }
     }
 }

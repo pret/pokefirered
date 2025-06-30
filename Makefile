@@ -32,6 +32,8 @@ ANALYZE      ?= 0
 UNUSED_ERROR ?= 0
 # Adds -Og and -g flags, which optimize the build for debugging and include debug info respectively
 DEBUG        ?= 0
+# Adds -flto flag, which increases link time but results in a more efficient binary (especially in audio processing)
+LTO          ?= 0
 
 ifeq (compare,$(MAKECMDGOALS))
   COMPARE := 1
@@ -119,7 +121,7 @@ TEST_BUILDDIR = $(OBJ_DIR)/$(TEST_SUBDIR)
 SHELL := bash -o pipefail
 
 # Set flags for tools
-ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=1 --defsym $(GAME_VERSION)=1
+ASFLAGS := -mcpu=arm7tdmi -march=armv4t -meabi=5 --defsym MODERN=1 --defsym $(GAME_VERSION)=1
 
 INCLUDE_DIRS := include
 INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
@@ -130,11 +132,19 @@ O_LEVEL ?= g
 else
 O_LEVEL ?= 2
 endif
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -D$(GAME_VERSION)
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -D$(GAME_VERSION) -std=gnu17
 ARMCC := $(PREFIX)gcc
 PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
 CC1 := $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
-override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
+
+override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
+
+ifneq ($(LTO),0)
+  ifneq ($(TEST),1)
+    override CFLAGS += -flto=auto -fno-fat-lto-objects -fno-asynchronous-unwind-tables -ffunction-sections -fdata-sections
+  endif
+endif
+
 ifeq ($(ANALYZE),1)
   override CFLAGS += -fanalyzer
 endif
@@ -198,7 +208,7 @@ ALL_LEARNABLES_JSON := $(LEARNSET_HELPERS_BUILD_DIR)/all_learnables.json
 WILD_ENCOUNTERS_TOOL_DIR := $(TOOLS_DIR)/wild_encounters
 AUTO_GEN_TARGETS += $(DATA_SRC_SUBDIR)/wild_encounters.h
 
-$(DATA_SRC_SUBDIR)/wild_encounters.h: $(DATA_SRC_SUBDIR)/wild_encounters.json $(WILD_ENCOUNTERS_TOOL_DIR)/wild_encounters_time_season.py $(INCLUDE_DIRS)/config/overworld.h
+$(DATA_SRC_SUBDIR)/wild_encounters.h: $(DATA_SRC_SUBDIR)/wild_encounters.json $(WILD_ENCOUNTERS_TOOL_DIR)/wild_encounters_time_season.py $(INCLUDE_DIRS)/config/overworld.h $(INCLUDE_DIRS)/config/dexnav.h
 	python3 $(WILD_ENCOUNTERS_TOOL_DIR)/wild_encounters_time_season.py
 
 $(C_BUILDDIR)/wild_encounter.o: c_dep += $(DATA_SRC_SUBDIR)/wild_encounters.h
@@ -296,7 +306,7 @@ agbcc:
 
 LD_SCRIPT_TEST := ld_script_test.ld
 
-$(OBJ_DIR)/ld_script_test.ld: $(LD_SCRIPT_TEST) $(LD_SCRIPT_DEPS)
+$(OBJ_DIR)/ld_script_test.ld: $(LD_SCRIPT_TEST)
 	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../$(LD_SCRIPT_TEST) > ld_script_test.ld
 
 $(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tools check-tools
@@ -332,7 +342,7 @@ clean-assets:
 	rm -f $(DATA_ASM_SUBDIR)/layouts/layouts.inc $(DATA_ASM_SUBDIR)/layouts/layouts_table.inc
 	rm -f $(DATA_ASM_SUBDIR)/maps/connections.inc $(DATA_ASM_SUBDIR)/maps/events.inc $(DATA_ASM_SUBDIR)/maps/groups.inc $(DATA_ASM_SUBDIR)/maps/headers.inc $(DATA_SRC_SUBDIR)/map_group_count.h
 	find sound -iname '*.bin' -exec rm {} +
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.smol' -o -iname '*.fastSmol' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.smol' -o -iname '*.fastSmol' -o -iname '*.smolTM' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 
 tidy: tidymodern tidycheck tidydebug
@@ -381,7 +391,8 @@ generated: $(AUTO_GEN_TARGETS)
 clean-generated:
 	@rm -f $(AUTO_GEN_TARGETS)
 	@echo "rm -f <AUTO_GEN_TARGETS>"
-	-rm -f $(ALL_LEARNABLES_JSON)
+	@rm -f $(ALL_LEARNABLES_JSON)
+	@echo "rm -f <ALL_LEARNABLES_JSON>"
 
 COMPETITIVE_PARTY_SYNTAX := $(shell PATH="$(PATH)"; echo 'COMPETITIVE_PARTY_SYNTAX' | $(CPP) $(CPPFLAGS) -imacros include/gba/defines.h -imacros include/config/general.h | tail -n1)
 ifeq ($(COMPETITIVE_PARTY_SYNTAX),1)
@@ -390,10 +401,13 @@ endif
 
 $(C_BUILDDIR)/librfu_intr.o: CFLAGS := -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
 $(C_BUILDDIR)/berry_crush.o: override CFLAGS += -Wno-address-of-packed-member
-# $(C_BUILDDIR)/agb_flash.o: override CFLAGS += -fno-toplevel-reorder
+$(C_BUILDDIR)/agb_flash.o: override CFLAGS += -fno-toplevel-reorder
 $(C_BUILDDIR)/pokedex_plus_hgss.o: CFLAGS := -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
 # Annoyingly we can't turn this on just for src/data/trainers.h
 $(C_BUILDDIR)/data.o: CFLAGS += -fno-show-column -fno-diagnostics-show-caret
+
+# Needed for parity with pret
+$(C_BUILDDIR)/graphics.o: override CFLAGS += -Wno-missing-braces
 
 $(TEST_BUILDDIR)/%.o: CFLAGS := -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wno-pointer-to-int-cast -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
 
@@ -421,6 +435,7 @@ ifneq ($(NODEP),1)
 -include $(addprefix $(OBJ_DIR)/,$(C_SRCS:.c=.d))
 endif
 
+ifeq ($(TEST),1)
 $(TEST_BUILDDIR)/%.o: $(TEST_SUBDIR)/%.c
 	@echo "$(CC1) <flags> -o $@ $<"
 	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
@@ -430,6 +445,7 @@ $(TEST_BUILDDIR)/%.d: $(TEST_SUBDIR)/%.c
 
 ifneq ($(NODEP),1)
 -include $(addprefix $(OBJ_DIR)/,$(TEST_SRCS:.c=.d))
+endif
 endif
 
 $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
@@ -484,19 +500,28 @@ $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(TEACHABLE_DEPS)
 
 # Linker script
 LD_SCRIPT := ld_script_modern.ld
-LD_SCRIPT_DEPS :=
 
 # Final rules
 
 libagbsyscall:
 	@$(MAKE) -C libagbsyscall TOOLCHAIN=$(TOOLCHAIN) MODERN=1
 
-# Elf from object files
-LDFLAGS = -Map ../../$(MAP)
-$(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS) libagbsyscall
-	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
-	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ <objs> <libs> | cat"
+# Enable LTO LDFLAGS if set
+ifneq ($(LTO),0)
+LDFLAGS := -march=armv4t -mabi=apcs-gnu -mcpu=arm7tdmi -Xlinker -Map=../../$(MAP) -Xlinker --print-memory-usage -Xassembler -meabi=5 -Xassembler -march=armv4t -Xassembler -mcpu=arm7tdmi -Xlinker --gc-sections
+LDFLAGS += -Xlinker -flto=auto
+$(ELF): $(LD_SCRIPT) $(OBJS) libagbsyscall
+	@echo "cd $(OBJ_DIR) && $(ARMCC) $(LDFLAGS) -T ../../$< -o ../../$@ <objs> <libs>"
+	+@cd $(OBJ_DIR) && $(ARMCC) $(LDFLAGS) -T ../../$< -o ../../$@ $(OBJS_REL) $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+else
+# Output .map file, memory usage readout and gc sections to clean-up unused data
+LDFLAGS = -Map ../../$(MAP) --print-memory-usage
+$(ELF): $(LD_SCRIPT) $(OBJS) libagbsyscall
+	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$<  -o ../../$@ $(OBJS_REL) $(LIB) | cat
+	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< -o ../../$@ <objs> <libs> | cat"
+	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
+endif
 
 # Builds the rom from the elf file
 $(ROM): $(ELF)

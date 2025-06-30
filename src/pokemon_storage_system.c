@@ -3504,7 +3504,7 @@ static void Task_ChangeScreen(u8 taskId)
         break;
     case SCREEN_CHANGE_ITEM_FROM_BAG:
         FreePokeStorageData();
-        GoToBagMenu(ITEMMENULOCATION_PCBOX, ITEMS_POCKET, CB2_ReturnToPokeStorage);
+        GoToBagMenu(ITEMMENULOCATION_PCBOX, POCKET_ITEMS, CB2_ReturnToPokeStorage);
         break;
     }
 

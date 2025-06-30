@@ -832,6 +832,15 @@ struct ExternalEventFlags
 
 } __attribute__((packed));/*size = 0x15*/
 
+struct Bag
+{
+    struct ItemSlot items[BAG_ITEMS_COUNT];
+    struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
+    struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
+    struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
+    struct ItemSlot berries[BAG_BERRIES_COUNT];
+};
+
 struct SaveBlock1
 {
     /*0x0000*/ struct Coords16 pos;
@@ -851,11 +860,7 @@ struct SaveBlock1
     /*0x0294*/ u16 coins;
     /*0x0296*/ u16 registeredItem; // registered for use with SELECT button
     /*0x0298*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
-    /*0x0310*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
-    /*0x03b8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
-    /*0x0430*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
-    /*0x0464*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
-    /*0x054c*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+    /*0x560*/ struct Bag bag;
     /*0x062C*/ u16 berryBlenderRecords[3]; // unused
 #if FREE_MATCH_CALL == FALSE
     /*0x0638*/ u16 trainerRematchStepCounter;

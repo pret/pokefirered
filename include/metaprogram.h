@@ -4,11 +4,11 @@
 
 /* Check if VA_OPT_ is supported by the compiler. GCC's version should be at least 9.5*/
 #define PP_THIRD_ARG(a,b,c,...) c
-#define VA_OPT_SUPPORTED_I(...) PP_THIRD_ARG(__VA_OPT__(,),TRUE,FALSE,)
+#define VA_OPT_SUPPORTED_I(...) PP_THIRD_ARG(__VA_OPT__(,),1,0,)
 #define VA_OPT_SUPPORTED VA_OPT_SUPPORTED_I(?)
 
 #if !VA_OPT_SUPPORTED
-#error ERROR: VA_OPT__ is not supported. Please update your gcc compiler to version 10 or higher
+#error ERROR: __VA_OPT__ is not supported. Please update your arm-none-eabi-gcc compiler to version 10 or higher
 #endif // VA_OPT_SUPPORTED
 
 /* Calls m0/m1/.../m8 depending on how many arguments are passed. */
@@ -48,9 +48,26 @@
  * Useful for passing arguments which may contain commas into a macro. */
 #define UNPACK(...) __VA_ARGS__
 
+/* Updated version that can extract arguments from brackets as well. 
+ * Examples:
+ * 
+ * UNPACK_B(a, b) => a, b
+ * UNPACK_B((a, b)) => a, b
+ * UNPACK_B((a)) => a
+ * 
+ * The simple UNPACK is used for extracting non-bracketed arguments.
+ * */
+#define UNPACK_EXTRA(...) IF_YOU_SEE_ME_SOMETHING_IS_WRONG, __VA_ARGS__
+#define UNPACK_B(a) INVOKE(UNPACK_B_, a, UNPACK_EXTRA a)
+#define UNPACK_B_(a, b, ...) __VA_OPT__(UNPACK)a
+
 /* Expands to 'macro(...args, ...)'. */
-#define INVOKE_WITH(macro, args, ...) INVOKE_WITH_(macro, UNPACK args __VA_OPT__(, __VA_ARGS__))
-#define INVOKE_WITH_(macro, ...) macro(__VA_ARGS__)
+#define INVOKE_WITH(macro, args, ...) INVOKE(macro, UNPACK args __VA_OPT__(, __VA_ARGS__))
+#define INVOKE(macro, ...) macro(__VA_ARGS__)
+
+/* Same as INVOKE_WITH but uses UNPACK_B to unpack arguments and only applies macro to args if there are any. */
+#define INVOKE_WITH_B(macro, args, ...) INVOKE_B(macro, UNPACK_B(args) __VA_OPT__(, __VA_ARGS__))
+#define INVOKE_B(macro, ...) __VA_OPT__(macro(__VA_ARGS__))
 
 /* Recursive macros.
  * Based on https://www.scs.stanford.edu/~dm/blog/va-opt.html
@@ -142,5 +159,16 @@ Input must be of the form (upper << lower) where upper can be up to 3, lower up 
 
 /* Will read a compressed bit stored by COMPRESS_BIT into a single byte */
 #define UNCOMPRESS_BITS(compressed) ((compressed >> 5) << (compressed & 0x1F))
+
+/* Bit maxima */
+#define MAX_u8 0xFF
+#define MAX_u16 0xFFFF
+#define MAX_u32 0xFFFFFFFF
+
+/* Finds the maximum value of the given number of bits (up to 32 - obviously)*/
+#define MAX_BITS(_bit) (MAX_u32 >> (32 - _bit))
+
+/* Finds the required digits to display the number (maximum 4) */
+#define MAX_DIGITS(_num) 1 + !!(_num / 10) + !!(_num / 100) + !!(_num / 1000)
 
 #endif

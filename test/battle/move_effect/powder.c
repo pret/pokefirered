@@ -135,7 +135,7 @@ DOUBLE_BATTLE_TEST("Powder fails if target is already affected by Powder")
 SINGLE_BATTLE_TEST("Powder fails if the target is Grass type")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_VENUSAUR].types[0] == TYPE_GRASS || gSpeciesInfo[SPECIES_VENUSAUR].types[1] == TYPE_GRASS);
+        ASSUME(GetSpeciesType(SPECIES_VENUSAUR, 0) == TYPE_GRASS || GetSpeciesType(SPECIES_VENUSAUR, 1) == TYPE_GRASS);
         PLAYER(SPECIES_VENUSAUR);
         OPPONENT(SPECIES_VIVILLON);
     } WHEN {

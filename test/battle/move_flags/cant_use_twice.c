@@ -32,6 +32,7 @@ SINGLE_BATTLE_TEST("Moves with the cantUseTwice flag strike again if fast encore
     PARAMETRIZE { move = MOVE_GIGATON_HAMMER; }
     PARAMETRIZE { move = MOVE_BLOOD_MOON; }
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_ENCORE_TARGET, GEN_3);
         ASSUME(GetMoveEffect(MOVE_ENCORE) == EFFECT_ENCORE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

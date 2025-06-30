@@ -110,8 +110,8 @@ SINGLE_BATTLE_TEST("Shed Tail creates a Substitute with 1/4 of user maximum heal
     PARAMETRIZE { hp = 164; }
 
     GIVEN {
-        ASSUME(GetMoveFixedDamage(MOVE_DRAGON_RAGE) == 40);
-        ASSUME(GetMoveEffect(MOVE_DRAGON_RAGE) == EFFECT_FIXED_DAMAGE_ARG);
+        ASSUME(GetMoveFixedHPDamage(MOVE_DRAGON_RAGE) == 40);
+        ASSUME(GetMoveEffect(MOVE_DRAGON_RAGE) == EFFECT_FIXED_HP_DAMAGE);
         PLAYER(SPECIES_BULBASAUR) { MaxHP(hp); }
         PLAYER(SPECIES_BULBASAUR);
         OPPONENT(SPECIES_CHARMANDER);

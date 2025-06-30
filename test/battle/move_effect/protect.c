@@ -537,10 +537,10 @@ DOUBLE_BATTLE_TEST("Crafty Shield protects self and ally from Confide and Decora
 DOUBLE_BATTLE_TEST("Crafty Shield does not protect against moves that target all battlers")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_TANGELA].types[0] == TYPE_GRASS);
-        ASSUME(gSpeciesInfo[SPECIES_TANGROWTH].types[0] == TYPE_GRASS);
-        ASSUME(gSpeciesInfo[SPECIES_SUNKERN].types[0] == TYPE_GRASS);
-        ASSUME(gSpeciesInfo[SPECIES_SUNFLORA].types[0] == TYPE_GRASS);
+        ASSUME(GetSpeciesType(SPECIES_TANGELA, 0) == TYPE_GRASS);
+        ASSUME(GetSpeciesType(SPECIES_TANGROWTH, 0) == TYPE_GRASS);
+        ASSUME(GetSpeciesType(SPECIES_SUNKERN, 0) == TYPE_GRASS);
+        ASSUME(GetSpeciesType(SPECIES_SUNFLORA, 0) == TYPE_GRASS);
         PLAYER(SPECIES_TANGELA);
         PLAYER(SPECIES_TANGROWTH);
         OPPONENT(SPECIES_SUNKERN);

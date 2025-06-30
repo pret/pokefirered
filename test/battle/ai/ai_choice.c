@@ -199,7 +199,7 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they are trappe
 AI_SINGLE_BATTLE_TEST("Choiced Pokémon will switch if locked into a move the player is immune to")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[0] == TYPE_GHOST);
+        ASSUME(GetSpeciesType(SPECIES_GASTLY, 0) == TYPE_GHOST);
         ASSUME(GetMoveType(MOVE_SURF) == TYPE_WATER);
         ASSUME(GetMoveType(MOVE_BODY_SLAM) == TYPE_NORMAL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
@@ -217,7 +217,7 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon will only see choiced moves when conside
 {
     PASSES_RANDOMLY(SHOULD_SWITCH_HASBADODDS_PERCENTAGE, 100, RNG_AI_SWITCH_HASBADODDS);
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[0] == TYPE_GHOST);
+        ASSUME(GetSpeciesType(SPECIES_GASTLY, 0) == TYPE_GHOST);
         ASSUME(GetMoveType(MOVE_SURF) == TYPE_WATER);
         ASSUME(GetMoveType(MOVE_BODY_SLAM) == TYPE_NORMAL);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES);
@@ -235,7 +235,7 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon will only see choiced moves when conside
 {
     PASSES_RANDOMLY(SHOULD_SWITCH_ABSORBS_MOVE_PERCENTAGE, 100, RNG_AI_SWITCH_ABSORBING);
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_SANDSHREW].types[0] == TYPE_GROUND);
+        ASSUME(GetSpeciesType(SPECIES_SANDSHREW, 0) == TYPE_GROUND);
         ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
         ASSUME(GetMoveType(MOVE_THUNDERBOLT) == TYPE_ELECTRIC);
         ASSUME(GetMoveType(MOVE_WATER_GUN) == TYPE_WATER);

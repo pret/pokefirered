@@ -1,13 +1,13 @@
 #include "global.h"
 #include "gba/m4a_internal.h"
-#include "gflib.h"
+#include "sound.h"
 #include "battle.h"
 #include "m4a.h"
+#include "main.h"
 #include "pokemon.h"
 #include "quest_log.h"
 #include "constants/cries.h"
 #include "constants/songs.h"
-#include "constants/sound.h"
 #include "task.h"
 #include "test_runner.h"
 
@@ -21,25 +21,17 @@ struct Fanfare
 extern u8 gDisableMapMusicChangeOnMapLoad;
 extern u8 gDisableHelpSystemVolumeReduce;
 
-// ewram
-EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
+EWRAM_DATA struct MusicPlayerInfo *gMPlay_PokemonCry = NULL;
 EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
 
-// iwram bss
 static u16 sCurrentMapMusic;
 static u16 sNextMapMusic;
 static u8 sMapMusicState;
 static u8 sMapMusicFadeInSpeed;
 static u16 sFanfareCounter;
 
-// iwram common
 COMMON_DATA bool8 gDisableMusic = 0;
 
-extern u32 gBattleTypeFlags;
-extern struct MusicPlayerInfo gMPlayInfo_BGM;
-extern struct MusicPlayerInfo gMPlayInfo_SE1;
-extern struct MusicPlayerInfo gMPlayInfo_SE2;
-extern struct MusicPlayerInfo gMPlayInfo_SE3;
 extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable_Reverse[];
 
@@ -164,6 +156,15 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
     sNextMapMusic = songNum;
     sMapMusicState = 7;
     sMapMusicFadeInSpeed = fadeInSpeed;
+}
+
+static void UNUSED FadeInNewMapMusic(u16 songNum, u8 speed)
+{
+    FadeInNewBGM(songNum, speed);
+    sCurrentMapMusic = songNum;
+    sNextMapMusic = 0;
+    sMapMusicState = 2;
+    sMapMusicFadeInSpeed = 0;
 }
 
 bool8 IsNotWaitingForBGMStop(void)
@@ -390,7 +391,7 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     u32 length;
     u32 pitch;
     u32 chorus;
-    
+
     // Set default values
     // May be overridden depending on mode.
     length = 210;
@@ -477,11 +478,11 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     SetPokemonCryChorus(chorus);
     SetPokemonCryPriority(priority);
 
-    species = GetCryIdBySpecies(species);
-    if (species != CRY_NONE)
+    enum PokemonCry cryId = GetCryIdBySpecies(species);
+    if (cryId != CRY_NONE)
     {
-        species--;
-        gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[species] : &gCryTable[species]);
+        cryId--;
+        gMPlay_PokemonCry = SetPokemonCryTone(reverse ? &gCryTable_Reverse[cryId] : &gCryTable[cryId]);
     }
 }
 

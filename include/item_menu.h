@@ -52,8 +52,8 @@ struct BagPosition
     void (*exitCallback)(void);
     u8 location;
     u16 pocket;
-    u16 cursorPosition[NUM_BAG_POCKETS_NO_CASES];
-    u16 scrollPosition[NUM_BAG_POCKETS_NO_CASES];
+    u16 cursorPosition[POCKETS_COUNT_NO_CASES];
+    u16 scrollPosition[POCKETS_COUNT_NO_CASES];
 };
 
 extern struct BagPosition gBagPosition;
@@ -75,8 +75,8 @@ struct BagMenu
     const u8 *contextMenuItemsPtr;
     u8 contextMenuItemsBuffer[4];
     u8 contextMenuNumItems;
-    u8 numItemStacks[NUM_BAG_POCKETS_NO_CASES];
-    u8 numShownItems[NUM_BAG_POCKETS_NO_CASES];
+    u8 numItemStacks[POCKETS_COUNT_NO_CASES];
+    u8 numShownItems[POCKETS_COUNT_NO_CASES];
     s16 graphicsLoadState;
 };
 
@@ -84,7 +84,7 @@ extern struct BagMenu *gBagMenu;
 extern u16 gSpecialVar_ItemId;
 
 void CB2_BagMenuFromBattle(void);
-void UpdatePocketListPosition(u8 pocketId);
+void UpdatePocketListPosition(enum Pocket pocketId);
 void CB2_BagMenuFromStartMenu(void);
 bool8 UseRegisteredKeyItemOnField(void);
 void GoToBagMenu(u8 menuType, u8 pocket, MainCallback callback);
@@ -93,7 +93,7 @@ void CB2_ChooseBerry(void);
 void CB2_ChooseMulch(void);
 void Task_FadeAndCloseBagMenu(u8 taskId);
 void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTable);
-void UpdatePocketItemList(u8 pocketId);
+void UpdatePocketItemList(enum Pocket pocketId);
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId));
 void CloseItemMessage(u8 taskId);
 

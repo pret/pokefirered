@@ -1107,6 +1107,8 @@ static const u16 *LoadEvent_UsedItem(const u16 *eventData)
                 StringExpandPlaceholders(gStringVar4, gText_QuestLog_MonLearnedMoveFromTM);
         }
         break;
+    default:
+        break;
     }
     return record + 3;
 }

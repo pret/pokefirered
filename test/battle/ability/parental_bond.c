@@ -80,7 +80,7 @@ DOUBLE_BATTLE_TEST("Parental Bond does not convert multi-target moves into a two
     GIVEN {
         ASSUME(GetMoveStrikeCount(MOVE_EARTHQUAKE) < 2);
         ASSUME(GetMoveTarget(MOVE_EARTHQUAKE) == MOVE_TARGET_FOES_AND_ALLY);
-        ASSUME(gSpeciesInfo[SPECIES_PIDGEY].types[1] == TYPE_FLYING);
+        ASSUME(GetSpeciesType(SPECIES_PIDGEY, 1) == TYPE_FLYING);
         PLAYER(SPECIES_KANGASKHAN) { Item(ITEM_KANGASKHANITE); }
         PLAYER(SPECIES_PIDGEY);
         OPPONENT(SPECIES_WOBBUFFET);

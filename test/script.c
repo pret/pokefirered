@@ -3,6 +3,7 @@
 #include "test/overworld_script.h"
 #include "script.h"
 #include "constants/decorations.h"
+#include "constants/field_move.h"
 #include "constants/moves.h"
 
 TEST("Script_HasNoEffect control flow")
@@ -46,7 +47,7 @@ TEST("Script_HasNoEffect variables")
         checkpcitem ITEM_POTION, 1;
         checkdecorspace DECOR_SNORLAX_DOLL;
         checkdecor DECOR_SNORLAX_DOLL;
-        checkpartymove MOVE_CELEBRATE;
+        checkfieldmoveusable 0; // doesn't work with enums currently
         random 2;
         checkmoney 5000;
         // getpokenewsactive POKENEWS_LILYCOVE;

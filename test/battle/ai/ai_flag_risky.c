@@ -10,8 +10,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI will blindly Mirror Coat against specia
 
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_MIRROR_COAT) == EFFECT_MIRROR_COAT);
-        ASSUME(gSpeciesInfo[SPECIES_GROVYLE].baseSpAttack == 85);
-        ASSUME(gSpeciesInfo[SPECIES_GROVYLE].baseAttack == 65);
+        ASSUME(GetSpeciesBaseSpAttack(SPECIES_GROVYLE) == 85);
+        ASSUME(GetSpeciesBaseAttack(SPECIES_GROVYLE) == 65);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiRiskyFlag);
         PLAYER(SPECIES_GROVYLE) { Level(20); Moves(MOVE_ENERGY_BALL); }
         OPPONENT(SPECIES_CASTFORM) { Level(20); Moves(MOVE_SCRATCH, MOVE_MIRROR_COAT); }
@@ -29,8 +29,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: AI will blindly Counter against physical a
 
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_COUNTER) == EFFECT_COUNTER);
-        ASSUME(gSpeciesInfo[SPECIES_MARSHTOMP].baseAttack == 85);
-        ASSUME(gSpeciesInfo[SPECIES_MARSHTOMP].baseSpAttack == 60);
+        ASSUME(GetSpeciesBaseAttack(SPECIES_MARSHTOMP) == 85);
+        ASSUME(GetSpeciesBaseSpAttack(SPECIES_MARSHTOMP) == 60);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiRiskyFlag);
         PLAYER(SPECIES_MARSHTOMP) { Level(20); Moves(MOVE_WATERFALL); }
         OPPONENT(SPECIES_CASTFORM) { Level(20); Moves(MOVE_SCRATCH, MOVE_COUNTER); }

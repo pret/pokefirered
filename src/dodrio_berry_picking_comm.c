@@ -14,6 +14,7 @@ struct ReadyToStartPacket
 {
     u8 id;
     bool8 ALIGNED(4) ready;
+    u32 unused; // Put here, so that packet has the same size as gRfu.packet(12 bytes).
 };
 
 struct GameStatePacket
@@ -63,12 +64,14 @@ struct PickStatePacket
 {
     u8 id;
     u8 ALIGNED(4) pickState;
+    u32 unused; // Put here, so that packet has the same size as gRfu.packet(12 bytes).
 };
 
 struct ReadyToEndPacket
 {
     u8 id;
     bool32 ready;
+    u32 unused; // Put here, so that packet has the same size as gRfu.packet(12 bytes).
 };
 
 void SendPacket_ReadyToStart(bool32 ready)

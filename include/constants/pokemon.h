@@ -219,29 +219,38 @@
 #define EV_ITEM_RAISE_LIMIT ((I_VITAMIN_EV_CAP >= GEN_8) ? MAX_PER_STAT_EVS : 100)
 
 // Move category defines.
-#define DAMAGE_CATEGORY_PHYSICAL    0
-#define DAMAGE_CATEGORY_SPECIAL     1
-#define DAMAGE_CATEGORY_STATUS      2
+enum DamageCategory
+{
+    DAMAGE_CATEGORY_PHYSICAL,
+    DAMAGE_CATEGORY_SPECIAL,
+    DAMAGE_CATEGORY_STATUS
+};
 
 // Growth rates
-#define GROWTH_MEDIUM_FAST  0
-#define GROWTH_ERRATIC      1
-#define GROWTH_FLUCTUATING  2
-#define GROWTH_MEDIUM_SLOW  3
-#define GROWTH_FAST         4
-#define GROWTH_SLOW         5
+enum GrowthRate
+{
+    GROWTH_MEDIUM_FAST,
+    GROWTH_ERRATIC,
+    GROWTH_FLUCTUATING,
+    GROWTH_MEDIUM_SLOW,
+    GROWTH_FAST,
+    GROWTH_SLOW,
+};
 
 // Body colors for Pokédex search
-#define BODY_COLOR_RED      0
-#define BODY_COLOR_BLUE     1
-#define BODY_COLOR_YELLOW   2
-#define BODY_COLOR_GREEN    3
-#define BODY_COLOR_BLACK    4
-#define BODY_COLOR_BROWN    5
-#define BODY_COLOR_PURPLE   6
-#define BODY_COLOR_GRAY     7
-#define BODY_COLOR_WHITE    8
-#define BODY_COLOR_PINK     9
+enum BodyColor
+{
+    BODY_COLOR_RED,
+    BODY_COLOR_BLUE,
+    BODY_COLOR_YELLOW,
+    BODY_COLOR_GREEN,
+    BODY_COLOR_BLACK,
+    BODY_COLOR_BROWN,
+    BODY_COLOR_PURPLE,
+    BODY_COLOR_GRAY,
+    BODY_COLOR_WHITE,
+    BODY_COLOR_PINK,
+};
 
 #define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
 

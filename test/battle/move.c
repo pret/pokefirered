@@ -89,7 +89,7 @@ DOUBLE_BATTLE_TEST("Turn order is determined randomly if priority and Speed tie 
         ASSUME(GetMoveEffect(MOVE_ENDEAVOR) == EFFECT_ENDEAVOR);
         ASSUME(GetMoveEffect(MOVE_LIFE_DEW) == EFFECT_JUNGLE_HEALING);
         ASSUME(GetMoveEffect(MOVE_CRUSH_GRIP) == EFFECT_POWER_BASED_ON_TARGET_HP);
-        ASSUME(GetMoveEffect(MOVE_SUPER_FANG) == EFFECT_SUPER_FANG);
+        ASSUME(GetMoveEffect(MOVE_SUPER_FANG) == EFFECT_FIXED_PERCENT_DAMAGE);
         PLAYER(SPECIES_WOBBUFFET) { MaxHP(480); HP(360); Defense(100); Speed(1); }
         PLAYER(SPECIES_WYNAUT) { Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Attack(100); Speed(1); }

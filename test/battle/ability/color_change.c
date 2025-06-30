@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Color Change changes the type of a Pokemon being hit by a move if the type of the move and the Pokemon are different")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_KECLEON].types[0] != TYPE_PSYCHIC && gSpeciesInfo[SPECIES_KECLEON].types[1] != TYPE_PSYCHIC);
+        ASSUME(GetSpeciesType(SPECIES_KECLEON, 0) != TYPE_PSYCHIC && GetSpeciesType(SPECIES_KECLEON, 1) != TYPE_PSYCHIC);
         ASSUME(GetMoveType(MOVE_PSYWAVE) == TYPE_PSYCHIC);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_KECLEON) { Ability(ABILITY_COLOR_CHANGE); }
@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Color Change changes the type of a Pokemon being hit by a mo
 SINGLE_BATTLE_TEST("Color Change does not change the type when hit by a move that's the same type as itself")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_KECLEON].types[0] == TYPE_NORMAL || gSpeciesInfo[SPECIES_KECLEON].types[1] == TYPE_NORMAL);
+        ASSUME(GetSpeciesType(SPECIES_KECLEON, 0) == TYPE_NORMAL || GetSpeciesType(SPECIES_KECLEON, 1) == TYPE_NORMAL);
         ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_KECLEON) { Ability(ABILITY_COLOR_CHANGE); }

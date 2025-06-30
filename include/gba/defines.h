@@ -13,6 +13,7 @@
 #define EWRAM_INIT __attribute__((section(".ewram")))
 #define COMMON_DATA __attribute__((section("common_data")))
 #define UNUSED __attribute__((unused))
+#define USED __attribute__((used))
 
 #define ARM_FUNC __attribute__((target("arm")))
 
@@ -24,6 +25,7 @@
 
 #define ALIGNED(n) __attribute__((aligned(n)))
 #define PACKED __attribute__((packed))
+#define TRANSPARENT __attribute__ ((__transparent_union__))
 
 #define SOUND_INFO_PTR (*(struct SoundInfo **)0x3007FF0)
 #define INTR_CHECK     (*(u16 *)0x3007FF8)

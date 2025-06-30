@@ -97,13 +97,13 @@ SINGLE_BATTLE_TEST("Toxic Spikes do not poison airborne Pokemon")
     u32 move2 = MOVE_CELEBRATE;
     bool32 airborne;
 
-    ASSUME(gSpeciesInfo[SPECIES_PIDGEY].types[1] == TYPE_FLYING);
+    ASSUME(GetSpeciesType(SPECIES_PIDGEY, 1) == TYPE_FLYING);
     PARAMETRIZE { species = SPECIES_PIDGEY; airborne = TRUE; }
     PARAMETRIZE { species = SPECIES_PIDGEY; item = ITEM_IRON_BALL; airborne = FALSE; }
     PARAMETRIZE { species = SPECIES_PIDGEY; move1 = MOVE_GRAVITY; airborne = FALSE; }
     PARAMETRIZE { species = SPECIES_PIDGEY; move1 = MOVE_INGRAIN; airborne = FALSE; }
 
-    ASSUME(gSpeciesInfo[SPECIES_UNOWN].abilities[0] == ABILITY_LEVITATE);
+    ASSUME(GetSpeciesAbility(SPECIES_UNOWN, 0) == ABILITY_LEVITATE);
     PARAMETRIZE { species = SPECIES_UNOWN; airborne = TRUE; }
     PARAMETRIZE { species = SPECIES_UNOWN; item = ITEM_IRON_BALL; airborne = FALSE; }
     PARAMETRIZE { species = SPECIES_UNOWN; move1 = MOVE_GRAVITY; airborne = FALSE; }
@@ -139,7 +139,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes do not poison airborne Pokemon")
 SINGLE_BATTLE_TEST("Toxic Spikes do not affect Steel-types")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_STEELIX].types[0] == TYPE_STEEL);
+        ASSUME(GetSpeciesType(SPECIES_STEELIX, 0) == TYPE_STEEL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_STEELIX);
@@ -163,9 +163,9 @@ SINGLE_BATTLE_TEST("Toxic Spikes are removed by grounded Poison-type Pokémon on
     PARAMETRIZE { species = SPECIES_ZUBAT; move = MOVE_GRAVITY; grounded = TRUE; }
     PARAMETRIZE { species = SPECIES_ZUBAT; move = MOVE_INGRAIN; grounded = TRUE; }
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_EKANS].types[0] == TYPE_POISON);
-        ASSUME(gSpeciesInfo[SPECIES_ZUBAT].types[0] == TYPE_POISON);
-        ASSUME(gSpeciesInfo[SPECIES_ZUBAT].types[1] == TYPE_FLYING);
+        ASSUME(GetSpeciesType(SPECIES_EKANS, 0) == TYPE_POISON);
+        ASSUME(GetSpeciesType(SPECIES_ZUBAT, 0) == TYPE_POISON);
+        ASSUME(GetSpeciesType(SPECIES_ZUBAT, 1) == TYPE_FLYING);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(species) { Item(item); }
@@ -190,7 +190,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes are removed by grounded Poison-type Pokémon on
 SINGLE_BATTLE_TEST("Toxic Spikes are not removed by Poison-type Pokémon affected by Magnet Rise on switch in")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_EKANS].types[0] == TYPE_POISON);
+        ASSUME(GetSpeciesType(SPECIES_EKANS, 0) == TYPE_POISON);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_EKANS);

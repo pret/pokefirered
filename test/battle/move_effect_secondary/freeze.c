@@ -32,7 +32,7 @@ SINGLE_BATTLE_TEST("Powder Snow cannot freeze an Ice-type Pokémon")
 #endif
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_SNORUNT].types[0] == TYPE_ICE);
+        ASSUME(GetSpeciesType(SPECIES_SNORUNT, 0) == TYPE_ICE);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_SNORUNT);
     } WHEN {
@@ -74,7 +74,7 @@ SINGLE_BATTLE_TEST("Freezing Glare shouldn't freeze Psychic-types")
 #endif
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_ARTICUNO_GALAR].types[0] == TYPE_PSYCHIC);
+        ASSUME(GetSpeciesType(SPECIES_ARTICUNO_GALAR, 0) == TYPE_PSYCHIC);
         ASSUME(MoveHasAdditionalEffect(MOVE_FREEZING_GLARE, MOVE_EFFECT_FREEZE_OR_FROSTBITE) == TRUE);
         ASSUME(GetMoveType(MOVE_FREEZING_GLARE) == TYPE_PSYCHIC);
         PLAYER(SPECIES_ARTICUNO_GALAR);

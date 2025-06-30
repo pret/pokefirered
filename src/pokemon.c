@@ -119,7 +119,7 @@ static const struct CombinedMove sCombinedMoves[2] =
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
 #define KANTO_TO_NATIONAL(name)     [KANTO_DEX_##name] = NATIONAL_DEX_##name
 
-static const u16 sKantoDexNumToNationalDexNum[KANTO_DEX_COUNT + 1] =
+static const enum NationalDexOrder sKantoDexNumToNationalDexNum[KANTO_DEX_COUNT + 1] =
 {
     // Kanto
     KANTO_TO_NATIONAL(BULBASAUR),
@@ -381,7 +381,7 @@ static const u16 sKantoDexNumToNationalDexNum[KANTO_DEX_COUNT + 1] =
 };
 
 // Assigns all Hoenn Dex Indexes to a National Dex Index
-static const u16 sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
+static const enum NationalDexOrder sHoennToNationalOrder[HOENN_DEX_COUNT - 1] =
 {
     HOENN_TO_NATIONAL(TREECKO),
     HOENN_TO_NATIONAL(GROVYLE),
@@ -983,7 +983,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
-        .anims = NULL, 
+        .anims = NULL,
         .images = gTrainerBackPicTable_Red,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
@@ -992,7 +992,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
-        .anims = NULL, 
+        .anims = NULL,
         .images = gTrainerBackPicTable_Leaf,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
@@ -1001,7 +1001,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
-        .anims = NULL, 
+        .anims = NULL,
         .images = gTrainerBackPicTable_RSBrendan,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
@@ -1010,7 +1010,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
-        .anims = NULL, 
+        .anims = NULL,
         .images = gTrainerBackPicTable_RSMay,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
@@ -1019,7 +1019,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
-        .anims = NULL, 
+        .anims = NULL,
         .images = gTrainerBackPicTable_Pokedude,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
@@ -1028,7 +1028,7 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
         .tileTag = TAG_NONE,
         .paletteTag = 0,
         .oam = &gOamData_BattleSpritePlayerSide,
-        .anims = NULL, 
+        .anims = NULL,
         .images = gTrainerBackPicTable_OldMan,
         .affineAnims = gAffineAnims_BattleSpritePlayerSide,
         .callback = SpriteCB_BattleSpriteStartSlideLeft,
@@ -1044,24 +1044,23 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
     },
 };
 
-// Classes dummied out
 #define NUM_SECRET_BASE_CLASSES 5
 static const u8 sSecretBaseFacilityClasses[GENDER_COUNT][NUM_SECRET_BASE_CLASSES] =
 {
     [MALE] = {
         FACILITY_CLASS_YOUNGSTER,
-        FACILITY_CLASS_YOUNGSTER,
-        FACILITY_CLASS_YOUNGSTER,
-        FACILITY_CLASS_YOUNGSTER,
-        FACILITY_CLASS_YOUNGSTER
+        FACILITY_CLASS_BUG_CATCHER,
+        FACILITY_CLASS_RICH_BOY,
+        FACILITY_CLASS_CAMPER,
+        FACILITY_CLASS_COOLTRAINER_M
     },
     [FEMALE] = {
-        FACILITY_CLASS_YOUNGSTER,
-        FACILITY_CLASS_YOUNGSTER,
-        FACILITY_CLASS_YOUNGSTER,
-        FACILITY_CLASS_YOUNGSTER,
-        FACILITY_CLASS_YOUNGSTER
-    },
+        FACILITY_CLASS_LASS,
+        FACILITY_CLASS_SCHOOL_KID_F,
+        FACILITY_CLASS_LADY,
+        FACILITY_CLASS_PICNICKER,
+        FACILITY_CLASS_COOLTRAINER_F
+    }
 };
 
 static const u8 sGetMonDataEVConstants[] =
@@ -1361,7 +1360,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 
-    u32 teraType = (boxMon->personality & 0x1) == 0 ? gSpeciesInfo[species].types[0] : gSpeciesInfo[species].types[1];
+    u32 teraType = (boxMon->personality & 0x1) == 0 ? GetSpeciesType(species, 0) : GetSpeciesType(species, 1);
     SetBoxMonData(boxMon, MON_DATA_TERA_TYPE, &teraType);
 
     if (fixedIV < USE_RANDOM_IVS)
@@ -1438,7 +1437,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         }
     }
 
-    if (gSpeciesInfo[species].abilities[1])
+    if (GetSpeciesAbility(species, 1))
     {
         value = personality & 1;
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
@@ -1855,7 +1854,7 @@ u16 GetUnionRoomTrainerPic(void)
     return FacilityClassToPicIndex(gUnionRoomFacilityClasses[arrId]);
 }
 
-u16 GetUnionRoomTrainerClass(void)
+enum TrainerClassID GetUnionRoomTrainerClass(void)
 {
     u8 linkId;
     u32 arrId;
@@ -1952,7 +1951,7 @@ void CalculateMonStats(struct Pokemon *mon)
     }
     else
     {
-        s32 n = 2 * gSpeciesInfo[species].baseHP + hpIV;
+        s32 n = 2 * GetSpeciesBaseHP(species) + hpIV;
         newMaxHP = (((n + hpEV / 4) * level) / 100) + level + 10;
     }
 
@@ -3642,7 +3641,7 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
     int i;
 
     if (abilityNum < NUM_ABILITY_SLOTS)
-        gLastUsedAbility = gSpeciesInfo[species].abilities[abilityNum];
+        gLastUsedAbility = GetSpeciesAbility(species, abilityNum);
     else
         gLastUsedAbility = ABILITY_NONE;
 
@@ -3650,13 +3649,13 @@ u16 GetAbilityBySpecies(u16 species, u8 abilityNum)
     {
         for (i = NUM_NORMAL_ABILITY_SLOTS; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++)
         {
-            gLastUsedAbility = gSpeciesInfo[species].abilities[i];
+            gLastUsedAbility = GetSpeciesAbility(species, i);
         }
     }
 
     for (i = 0; i < NUM_ABILITY_SLOTS && gLastUsedAbility == ABILITY_NONE; i++) // look for any non-empty ability
     {
-        gLastUsedAbility = gSpeciesInfo[species].abilities[i];
+        gLastUsedAbility = GetSpeciesAbility(species, i);
     }
 
     return gLastUsedAbility;
@@ -3710,7 +3709,7 @@ u8 GetSecretBaseTrainerPicIndex(void)
     return gFacilityClassToPicIndex[facilityClass];
 }
 
-u8 GetSecretBaseTrainerClass(void)
+enum TrainerClassID GetSecretBaseTrainerClass(void)
 {
     u8 facilityClass = sSecretBaseFacilityClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % NUM_SECRET_BASE_CLASSES];
     return gFacilityClassToTrainerClass[facilityClass];
@@ -3763,14 +3762,54 @@ const u8 *GetSpeciesPokedexDescription(u16 species)
     return gSpeciesInfo[species].description;
 }
 
-u16 GetSpeciesHeight(u16 species)
+u32 GetSpeciesHeight(u16 species)
 {
     return gSpeciesInfo[SanitizeSpeciesId(species)].height;
 }
 
-u16 GetSpeciesWeight(u16 species)
+u32 GetSpeciesWeight(u16 species)
 {
     return gSpeciesInfo[SanitizeSpeciesId(species)].weight;
+}
+
+u32 GetSpeciesType(u16 species, u8 slot)
+{
+    return gSpeciesInfo[SanitizeSpeciesId(species)].types[slot];
+}
+
+u32 GetSpeciesAbility(u16 species, u8 slot)
+{
+    return gSpeciesInfo[SanitizeSpeciesId(species)].abilities[slot];
+}
+
+u32 GetSpeciesBaseHP(u16 species)
+{
+    return gSpeciesInfo[SanitizeSpeciesId(species)].baseHP;
+}
+
+u32 GetSpeciesBaseAttack(u16 species)
+{
+    return gSpeciesInfo[SanitizeSpeciesId(species)].baseAttack;
+}
+
+u32 GetSpeciesBaseDefense(u16 species)
+{
+    return gSpeciesInfo[SanitizeSpeciesId(species)].baseDefense;
+}
+
+u32 GetSpeciesBaseSpAttack(u16 species)
+{
+    return gSpeciesInfo[SanitizeSpeciesId(species)].baseSpAttack;
+}
+
+u32 GetSpeciesBaseSpDefense(u16 species)
+{
+    return gSpeciesInfo[SanitizeSpeciesId(species)].baseSpDefense;
+}
+
+u32 GetSpeciesBaseSpeed(u16 species)
+{
+    return gSpeciesInfo[SanitizeSpeciesId(species)].baseSpeed;
 }
 
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species)
@@ -3873,8 +3912,8 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->spDefense = GetMonData(src, MON_DATA_SPDEF, NULL);
     dst->abilityNum = GetMonData(src, MON_DATA_ABILITY_NUM, NULL);
     dst->otId = GetMonData(src, MON_DATA_OT_ID, NULL);
-    dst->types[0] = gSpeciesInfo[dst->species].types[0];
-    dst->types[1] = gSpeciesInfo[dst->species].types[1];
+    dst->types[0] = GetSpeciesType(dst->species, 0);
+    dst->types[1] = GetSpeciesType(dst->species, 1);
     dst->types[2] = TYPE_MYSTERY;
     dst->isShiny = IsMonShiny(src);
     dst->ability = GetAbilityBySpecies(dst->species, dst->abilityNum);
@@ -4802,8 +4841,8 @@ bool32 DoesMonMeetAdditionalConditions(struct Pokemon *mon, const struct Evoluti
             for (j = 0; j < PARTY_SIZE; j++)
             {
                 u16 currSpecies = GetMonData(&gPlayerParty[j], MON_DATA_SPECIES, NULL);
-                if (gSpeciesInfo[currSpecies].types[0] == params[i].arg1
-                 || gSpeciesInfo[currSpecies].types[1] == params[i].arg1)
+                if (GetSpeciesType(currSpecies, 0) == params[i].arg1
+                 || GetSpeciesType(currSpecies, 1) == params[i].arg1)
                 {
                     currentCondition = TRUE;
                     break;
@@ -5162,71 +5201,25 @@ bool8 IsMonPastEvolutionLevel(struct Pokemon *mon)
     return FALSE;
 }
 
-u16 SpeciesToNationalDexNum(u16 species)
-{
-    if (!species)
-        return NATIONAL_DEX_NONE;
-
-    return gSpeciesInfo[species].natDexNum;
-}
-
-u16 NationalToKantoDexNum(u16 natDexNum)
-{
-    u16 i;
-
-    if (natDexNum == 0)
-    {
-        return KANTO_DEX_NONE;
-    }
-
-    for (i = KANTO_DEX_BULBASAUR; i < KANTO_DEX_END; i++)
-    {
-        if (sKantoDexNumToNationalDexNum[i] == natDexNum)
-        {
-            return i;
-        }
-    }
-    return KANTO_DEX_NONE;
-}
-
-u16 SpeciesToKantoDexNum(u16 species)
-{
-    return NationalToKantoDexNum(SpeciesToNationalDexNum(species));
-}
-
-bool32 IsSpeciesInKantoDex(u16 species)
-{
-    return SpeciesToKantoDexNum(species) != KANTO_DEX_NONE;
-}
-
-u16 KantoToNationalDexNum(u16 kantoNum)
-{
-    if (KANTO_DEX_START <= kantoNum && kantoNum < KANTO_DEX_END)
-        return sKantoDexNumToNationalDexNum[kantoNum];
-    return NATIONAL_DEX_NONE;
-}
-
-u16 KantoNumToSpecies(u16 kantoNum)
-{
-    return NationalPokedexNumToSpecies(KantoToNationalDexNum(kantoNum));
-}
-
-u16 NationalPokedexNumToSpecies(u16 nationalNum)
+u16 NationalPokedexNumToSpecies(enum NationalDexOrder nationalNum)
 {
     u16 species;
 
     if (!nationalNum)
-        return SPECIES_NONE;
+        return 0;
 
-    for (species = 1; species < NUM_SPECIES; species++)
-    {
-        if (gSpeciesInfo[species].natDexNum == nationalNum)
-            return GET_BASE_SPECIES_ID(species);
-    }
-    return SPECIES_NONE;
+    species = 1;
+
+    while (species < (NUM_SPECIES) && gSpeciesInfo[species].natDexNum != nationalNum)
+        species++;
+
+    if (species == NUM_SPECIES)
+        return NATIONAL_DEX_NONE;
+
+    return GET_BASE_SPECIES_ID(species);
 }
 
-u16 NationalToHoennOrder(u16 nationalNum)
+enum HoennDexOrder NationalToHoennOrder(enum NationalDexOrder nationalNum)
 {
     u16 hoennNum;
 
@@ -5244,7 +5237,7 @@ u16 NationalToHoennOrder(u16 nationalNum)
     return hoennNum + 1;
 }
 
-u16 SpeciesToNationalPokedexNum(u16 species)
+enum NationalDexOrder SpeciesToNationalPokedexNum(u16 species)
 {
     species = SanitizeSpeciesId(species);
     if (!species)
@@ -5253,14 +5246,14 @@ u16 SpeciesToNationalPokedexNum(u16 species)
     return gSpeciesInfo[species].natDexNum;
 }
 
-u16 SpeciesToHoennPokedexNum(u16 species)
+enum HoennDexOrder SpeciesToHoennPokedexNum(u16 species)
 {
     if (!species)
         return 0;
     return NationalToHoennOrder(gSpeciesInfo[species].natDexNum);
 }
 
-u16 HoennToNationalOrder(u16 hoennNum)
+enum NationalDexOrder HoennToNationalOrder(enum HoennDexOrder hoennNum)
 {
     if (!hoennNum || hoennNum >= HOENN_DEX_COUNT)
         return 0;
@@ -5268,16 +5261,60 @@ u16 HoennToNationalOrder(u16 hoennNum)
     return sHoennToNationalOrder[hoennNum - 1];
 }
 
-u16 HoennToNationalDexNum(u16 hoennNum)
+enum NationalDexOrder HoennToNationalDexNum(enum HoennDexOrder hoennNum)
 {
     if (HOENN_DEX_START <= hoennNum && hoennNum < HOENN_DEX_END)
         return sHoennToNationalOrder[hoennNum];
     return NATIONAL_DEX_NONE;
 }
 
-u16 HoennNumToSpecies(u16 hoennNum)
+u16 HoennNumToSpecies(enum HoennDexOrder hoennNum)
 {
     return NationalPokedexNumToSpecies(HoennToNationalDexNum(hoennNum));
+}
+
+enum KantoDexOrder NationalToKantoDexNum(enum NationalDexOrder natDexNum)
+{
+    enum KantoDexOrder i;
+
+    if (natDexNum == 0)
+    {
+        return KANTO_DEX_NONE;
+    }
+
+    for (i = KANTO_DEX_BULBASAUR; i < KANTO_DEX_END; i++)
+    {
+        if (sKantoDexNumToNationalDexNum[i] == natDexNum)
+        {
+            return i;
+        }
+    }
+    return KANTO_DEX_NONE;
+}
+
+enum KantoDexOrder SpeciesToKantoDexNum(u16 species)
+{
+    if (!species)
+        return KANTO_DEX_NONE;
+
+    return NationalToKantoDexNum(SpeciesToNationalPokedexNum(species));
+}
+
+bool32 IsSpeciesInKantoDex(u16 species)
+{
+    return SpeciesToKantoDexNum(species) != KANTO_DEX_NONE;
+}
+
+enum NationalDexOrder KantoToNationalDexNum(enum KantoDexOrder kantoNum)
+{
+    if (KANTO_DEX_START <= kantoNum && kantoNum < KANTO_DEX_END)
+        return sKantoDexNumToNationalDexNum[kantoNum];
+    return NATIONAL_DEX_NONE;
+}
+
+u16 KantoNumToSpecies(enum KantoDexOrder kantoNum)
+{
+    return NationalPokedexNumToSpecies(KantoToNationalDexNum(kantoNum));
 }
 
 // Spots can be drawn on Spinda's color indexes 1, 2, or 3
@@ -5476,7 +5513,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
     {
         u8 friendshipLevel = 0;
         s16 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, 0);
-        u32 opponentTrainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
+        enum TrainerClassID opponentTrainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
 
         if (friendship > 99)
             friendshipLevel++;
@@ -5991,12 +6028,12 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 
 u16 SpeciesToPokedexNum(u16 species)
 {
-    species = SpeciesToNationalPokedexNum(species);
-    if (!IsNationalPokedexEnabled())
-    {
-        species = NationalToKantoDexNum(species);
-    }
-    return species > 0 ? species : 0xFFFF;
+    if (IsNationalPokedexEnabled())
+        return SpeciesToNationalPokedexNum(species);
+    species = SpeciesToKantoDexNum(species);
+    if (species <= KANTO_DEX_COUNT)
+        return species;
+    return 0xFFFF;
 }
 
 bool32 IsSpeciesInHoennDex(u16 species)
@@ -6030,7 +6067,7 @@ u16 GetBattleBGM(void)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        u32 trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
+        enum TrainerClassID trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
 
         switch (trainerClass)
         {
@@ -6531,7 +6568,7 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
         return FacilityClassToPicIndex(FACILITY_CLASS_RED);
 }
 
-void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
+void HandleSetPokedexFlag(enum NationalDexOrder nationalNum, u8 caseId, u32 personality)
 {
     u8 getFlagCaseId = (caseId == FLAG_SET_SEEN) ? FLAG_GET_SEEN : FLAG_GET_CAUGHT;
     if (!GetSetPokedexFlag(nationalNum, getFlagCaseId)) // don't set if it's already set
@@ -6800,7 +6837,7 @@ u32 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum FormChanges
                         // This is to prevent reverting to base form when giving the item to the corresponding form.
                         // Eg. Giving a Zap Plate to an Electric Arceus without an item (most likely to happen when using givemon)
                         bool32 currentItemForm = FALSE;
-                        for (int j = 0; formChanges[j].method != FORM_CHANGE_TERMINATOR; j++)
+                        for (u32 j = 0; formChanges[j].method != FORM_CHANGE_TERMINATOR; j++)
                         {
                             if (species == formChanges[j].targetSpecies
                                 && formChanges[j].param1 == heldItem
@@ -6853,7 +6890,7 @@ u32 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum FormChanges
                     if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
-                case FORM_CHANGE_END_BATTLE_TERRAIN:
+                case FORM_CHANGE_END_BATTLE_ENVIRONMENT:
                     if (gBattleEnvironment == formChanges[i].param1)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
@@ -7050,6 +7087,7 @@ u16 SanitizeSpeciesId(u16 species)
 
 bool32 IsSpeciesEnabled(u16 species)
 {
+    // This function should not use the GetSpeciesBaseHP function, as the included sanitation will result in an infinite loop
     return gSpeciesInfo[species].baseHP > 0 || species == SPECIES_EGG;
 }
 
@@ -7185,7 +7223,7 @@ void HealBoxPokemon(struct BoxPokemon *boxMon)
     BoxMonRestorePP(boxMon);
 }
 
-u16 GetCryIdBySpecies(u16 species)
+enum PokemonCry GetCryIdBySpecies(u16 species)
 {
     species = SanitizeSpeciesId(species);
     if (P_CRIES_ENABLED == FALSE || gSpeciesInfo[species].cryId >= CRY_COUNT || gTestRunnerHeadless)
@@ -7334,6 +7372,21 @@ u32 GetTeraTypeFromPersonality(struct Pokemon *mon)
 {
     const u8 *types = gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types;
     return (GetMonData(mon, MON_DATA_PERSONALITY) & 0x1) == 0 ? types[0] : types[1];
+}
+
+struct Pokemon *GetSavedPlayerPartyMon(u32 index)
+{
+    return &gSaveBlock1Ptr->playerParty[index];
+}
+
+u8 *GetSavedPlayerPartyCount(void)
+{
+    return &gSaveBlock1Ptr->playerPartyCount;
+}
+
+void SavePlayerPartyMon(u32 index, struct Pokemon *mon)
+{
+    gSaveBlock1Ptr->playerParty[index] = *mon;
 }
 
 //pokefirered specific

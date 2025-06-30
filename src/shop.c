@@ -433,7 +433,7 @@ static void Task_HandleShopMenuSell(u8 taskId)
 
 static void CB2_GoToSellMenu(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_SHOP, NUM_BAG_POCKETS_NO_CASES, CB2_ReturnToField);
+    GoToBagMenu(ITEMMENULOCATION_SHOP, POCKETS_COUNT_NO_CASES, CB2_ReturnToField);
     gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
 }
 
@@ -1127,7 +1127,7 @@ static void Task_BuyMenu(u8 taskId)
 static void Task_BuyHowManyDialogueInit(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    u16 quantityInBag = BagGetQuantityByItemId(tItemId);
+    u16 quantityInBag = CountTotalItemQuantityInBag(tItemId);
     u16 maxQuantity;
 
     BuyMenuQuantityBoxThinBorder(1, 0);

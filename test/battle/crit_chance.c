@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Critical hits without modifiers occur at different rates by 
     PASSES_RANDOMLY(passes, trials, RNG_CRITICAL_HIT);
     GIVEN {
         WITH_CONFIG(GEN_CONFIG_CRIT_CHANCE, genConfig);
-        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].baseSpeed == 33);
+        ASSUME(GetSpeciesBaseSpeed(SPECIES_WOBBUFFET) == 33);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

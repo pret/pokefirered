@@ -278,11 +278,11 @@ PewterCity_Museum_1F_EventScript_Brock::
 	applymovement 13, PewterCity_Museum_1F_Move_Publico1
 	waitmovement 0
 	msgbox PewterCity_Museum_1F_Text_Brock3
-	applymovement 2, PalletTown_ProfessorOaksLab_Movement_Player8
-	applymovement 6, PalletTown_ProfessorOaksLab_Movement_Player8
-	applymovement 11, PalletTown_ProfessorOaksLab_Movement_Player8
-	applymovement 12, PalletTown_ProfessorOaksLab_Movement_Player8
-	applymovement 13, PalletTown_ProfessorOaksLab_Movement_Player8
+	applymovement 2, PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	applymovement 6, PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	applymovement 11, PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	applymovement 12, PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	applymovement 13, PalletTown_ProfessorOaksLab_Movement_MiraArriba
 	waitmovement 0
 	special SpawnCameraObject
 	applymovement OBJ_EVENT_ID_CAMERA, PewterCity_Museum_1F_Move_Camara3

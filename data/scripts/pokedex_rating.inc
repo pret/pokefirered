@@ -11,7 +11,9 @@ PokedexRating_EventScript_DexCompleteIntro::
 	return
 
 PokedexRating_EventScript_NormalIntro::
+	namebox Name_Oak
 	msgbox PokedexRating_Text_HowIsPokedexComingAlong
+	hidenamebox
 	return
 
 PokedexRating_EventScript_ShowRatingMsg::
@@ -43,9 +45,11 @@ PokedexRating_EventScript_Rate::
 	copyvar VAR_0x800A, VAR_RESULT
 	buffernumberstring STR_VAR_1, VAR_0x8008 @ Num Kanto Seen
 	buffernumberstring STR_VAR_2, VAR_0x8009 @ Num Kanto Caught
+	namebox Name_Oak
 	msgbox PokedexRating_Text_SeenXOwnedY
 	call_if_unset FLAG_OAKS_RATING_IS_VIA_PC, PokedexRating_EventScript_SetTextColor
 	call PokedexRating_EventScript_ShowRatingMsg
+	hidenamebox
 	goto_if_eq VAR_0x800A, FALSE, PokedexRating_EventScript_EndRating  @ National Dex not enabled
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, GetPokedexCount

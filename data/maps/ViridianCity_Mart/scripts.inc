@@ -29,22 +29,31 @@ ViridianCity_Mart_EventScript_ParcelScene::
 
 
 ViridianCity_Mart_EventScript_Boy::
-	textcolor NPC_TEXT_COLOR_FEMALE
 	delay 40
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	applymovement 4, ViridianCity_Mart_Movement_Down
 	waitmovement 0
-	msgbox ViridianCity_Mart_Text_Hoja1
+	playbgm MUS_ENCOUNTER_BOY, 0
+	namebox Name_Hoja
+	msgbox ViridianCity_Mart_Text_QueAlegriaEncontrarteAqui
+	hidenamebox
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
 	waitmovement 0
-	msgbox ViridianCity_Mart_Text_Hoja2
+	delay 40
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	namebox Name_Hoja
+	msgbox ViridianCity_Mart_Text_VinePorUnasPokeball
+	hidenamebox
 	closemessage
 	applymovement 4, ViridianCity_Mart_Movement_FacePlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SaltaAbajo
 	waitmovement 0
-	textcolor NPC_TEXT_COLOR_FEMALE
-	msgbox ViridianCity_Mart_Text_Hoja3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	namebox Name_Hoja
+	msgbox ViridianCity_Mart_Text_NosVemosEnElLaboratorio
+	hidenamebox
 	closemessage
 	applymovement 4, ViridianCity_Mart_Movement_Seva
 	waitmovement 0
@@ -53,24 +62,34 @@ ViridianCity_Mart_EventScript_Boy::
 	return
 	end
 
+@SI ERES MUJER
 ViridianCity_Mart_EventScript_Girl::
-	textcolor NPC_TEXT_COLOR_MALE
 	delay 40
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+
 	applymovement 5, ViridianCity_Mart_Movement_Down
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	msgbox ViridianCity_Mart_Text_Rojo1
+	namebox Name_Rojo
+	msgbox ViridianCity_Mart_Text_QueAlegriaEncontrarteAqui
+	hidenamebox
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
 	waitmovement 0
-	msgbox ViridianCity_Mart_Text_Rojo2
+	delay 40
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	namebox Name_Rojo
+	msgbox ViridianCity_Mart_Text_VinePorUnasPokeball
+	hidenamebox
 	closemessage
 	applymovement 5, ViridianCity_Mart_Movement_FacePlayer
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SaltaAbajo
 	waitmovement 0
-	textcolor NPC_TEXT_COLOR_MALE
-	msgbox ViridianCity_Mart_Text_Rojo3
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	namebox Name_Rojo
+	msgbox ViridianCity_Mart_Text_NosVemosEnElLaboratorio
+	hidenamebox
 	closemessage
 	applymovement 5, ViridianCity_Mart_Movement_Seva
 	waitmovement 0

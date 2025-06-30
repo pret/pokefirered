@@ -4,7 +4,20 @@ Name_Rival::
 Name_Oak::
     .string "OAK$"
 
-@ELECIÓN POKéMON INCIAL
+@NPC MAPA
+PalletTown_ProfessorOaksLab_Text_Cientifico1::
+    .string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Estudio a los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}.\n"
+    .string "Soy ayudante del {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}.$"
+
+
+PalletTown_ProfessorOaksLab_Text_Cientifico3::
+    .string "{COLOR DARK_GRAY}El {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY} es una eminencia en\n"
+    .string "todo lo relacionado con la\l"
+    .string "investigación de los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.\p"
+    .string "¡Es admirados por muchos de los\n"
+    .string "{SHADOW DYNAMIC_COLOR4}ENTRENADORES POKéMON{SHADOW LIGHT_GRAY}!$"
+
+@EVENTO ELECIÓN POKéMON INCIAL - INICIO
 PalletTown_ProfessorOaksLab_Text_EstoyAburrido::
     .string "¡Abuelo!\n"
     .string "¡Ya me aburrí de tanto esperar!$"
@@ -43,14 +56,14 @@ PalletTown_ProfessorOaksLab_Text_CualQuieres::
     .string "para ti?$"
 
 PalletTown_ProfessorOaksLab_Text_YoQue::
-    .string " ¡¿Eh?! ¿Y yo qué?$"
+    .string "¡¿Eh?! ¿Y yo qué?$"
 
 PalletTown_ProfessorOaksLab_Text_TambienTeDare::
     .string "¡Tranquilo, {SHADOW DYNAMIC_COLOR4}{RIVAL}{SHADOW LIGHT_GRAY}! ¡También te\n"
     .string "daré uno!\p"
-    .string "Pero primero, deja que {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} elija$"
+    .string "Pero primero, deja que {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} elija...$"
 
-@ELECCIÓN POKéBALL
+@EVENTO ELECIÓN POKéMON INCIAL - ELECCIÓN POKéBALL
 PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander::
     .string "¡Asi que {SHADOW DYNAMIC_COLOR4}CHARMANDER{SHADOW LIGHT_GRAY}!\n"
     .string "Necesitaras mucha paciencia con él.\p"
@@ -69,24 +82,29 @@ PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur::
     .string "Bueno, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}, entonces ¿quieres\n"
     .string "al {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} tipo {SHADOW DYNAMIC_COLOR4}PLANTA{SHADOW LIGHT_GRAY}?$"
 
-@MIENTRAS ELECCIÓN POKéBALL - RIVAL
+@EVENTO ELECIÓN POKéMON INCIAL - MIENTRAS ELECCIÓN POKéBALL - RIVAL
 PalletTown_ProfessorOaksLab_Text_SiEligesBien::
     .string "¡A ver si eliges bien, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
     .string "¡No quiero excusas cuando pierdas!$"
 
-@MIENTRAS ELECCIÓN POKéBALL - OAK
+@EVENTO ELECIÓN POKéMON INCIAL - MIENTRAS ELECCIÓN POKéBALL - OAK
 PalletTown_ProfessorOaksLab_Text_EsasTresPokeBalls::
-    .string "Muy bien, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}...\n"
+    .string "Muy bien, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}...\p"
     .string "Esas tres {SHADOW DYNAMIC_COLOR4}POKé BALLS{SHADOW LIGHT_GRAY} contienen un\n"
-    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} cada una.\l"
+    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} cada una.\p"
     .string "¿Cuál quieres para ti?$"
 
-@MIENTRAS ELECCIÓN POKéBALL - SALIDA
+@EVENTO ELECIÓN POKéMON INCIAL - MIENTRAS ELECCIÓN POKéBALL - SALIDA
 PalletTown_ProfessorOaksLab_Text_NoPuedesIrte::
-    .string "¡No puedes irte sin un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} !\n"
+    .string "¡No puedes irte sin un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}!\n"
     .string "¡Es peligroso allá afuera!$"
 
-@POKéBALL ELEGIDA
+@EVENTO ELECIÓN POKéMON INCIAL - MIENTRAS ELECCIÓN POKéBALL - NPC RIVAL
+PalletTown_ProfessorOaksLab_Text_MiPokemonPareceMuchoMas::
+    .string "Mi {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} parece mucho más\n"
+    .string "fuerte que el tuyo.$"
+
+@EVENTO ELECIÓN POKéMON INCIAL - MIENTRAS ELECCIÓN POKéBALL - POKéBALL ELEGIDA
 PalletTown_ProfessorOaksLab_Text_ReceivedMonFromOak::
     .string "{COLOR DARK_GRAY}¡Recibiste a {SHADOW DYNAMIC_COLOR4}{STR_VAR_1}{SHADOW LIGHT_GRAY}\n"
     .string "de parte del {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY}!$"
@@ -99,11 +117,11 @@ PalletTown_ProfessorOaksLab_Text_EntoncesEsteSera::
 
 PalletTown_ProfessorOaksLab_Text_SiApareceUnPokemon::
     .string "Si aparece un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} salvaje,\n"
-    .string "tu compañero podrá luchar contra él.\p"
+    .string "tu compañero podrá defenderte.\p"
     .string "Con su ayuda, no te será difícil\n"
     .string "llegar a la siguiente ciudad.$"
 
-@BATALLA CON EL RIVAL
+@EVENTO ELECIÓN POKéMON INCIAL - MIENTRAS ELECCIÓN POKéBALL - BATALLA CON EL RIVAL
 PalletTown_ProfessorOaksLab_Text_NoVasAHuir::
     .string "¡Espera, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
     .string "¡No vas a huir sin una pelea,\n"
@@ -112,37 +130,16 @@ PalletTown_ProfessorOaksLab_Text_NoVasAHuir::
     .string "¡Quiero ver si estás a la altura!$"
 
 PalletTown_ProfessorOaksLab_Text_HareQueMi::
-    .string "¡De acuerdo!\n"
+    .string "¡De acuerdo!\p"
     .string "¡Haré que mi {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} participe en\n"
     .string "más batallas!\p"
     .string "Así potenciaré al máximo sus\n"
     .string "habilidades.$"
 
-@NPC
-
-PalletTown_ProfessorOaksLab_Text_Cientifico1::
-    .string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Estudio a los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}.\n"
-    .string "Soy ayudante del {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}.$"
-
-
-PalletTown_ProfessorOaksLab_Text_Cientifico3::
-    .string "{COLOR DARK_GRAY}El {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY} es una eminencia en\n"
-    .string "todo lo relacionado con la\l"
-    .string "investigación de los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.\p"
-    .string "¡Es admirados por muchos de los\n"
-    .string "{SHADOW DYNAMIC_COLOR4}ENTRENADORES POKéMON{SHADOW LIGHT_GRAY}!$"
-
-
-
 @AUN SIN REVISAR
 PalletTown_ProfessorOaksLab_Text_RivalGrampsIsntAround::
     .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}{RIVAL}:{SHADOW LIGHT_GRAY} ¿Qué haces aqui, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}?\p"
     .string "Abuelo no está.$"
-
-PalletTown_ProfessorOaksLab_Text_RivalMyMonLooksTougher::
-    .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}{RIVAL}:{SHADOW LIGHT_GRAY} Mi {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} parece mucho\n"
-    .string "más fuerte que el tuyo.$"
-
 
 PalletTown_ProfessorOaksLab_Text_RivalDefeat::
     .string "¿QUÉ?\p"
@@ -213,11 +210,6 @@ PalletTown_ProfessorOaksLab_Text_OakTakeTheseWithYou::
     .string "OAK: {PLAYER} and {RIVAL}.\n"
     .string "Take these with you.$"
 
-PalletTown_ProfessorOaksLab_Text_ReceivedPokedexFromOak::
-    .string "{COLOR DARK_GRAY}¡Recibiste una {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}\n"
-    .string "de parte del {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY}!$"
-
-
 PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese::
     .string "OAK: You can't get detailed data\n"
     .string "on POKéMON by just seeing them.\p"
@@ -225,11 +217,6 @@ PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese::
     .string "complete data.\p"
     .string "So, here are some tools for\n"
     .string "catching wild POKéMON.$"
-
-PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls::
-    .string "{COLOR DARK_GRAY}¡Recibiste 5 {SHADOW DYNAMIC_COLOR4}POKé BALLS{SHADOW LIGHT_GRAY}\n"
-    .string "de parte del {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY}!$"
-
 
 PalletTown_ProfessorOaksLab_Text_OakExplainCatching::
     .string "When a wild POKéMON appears,\n"
@@ -385,130 +372,143 @@ PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex::
     .string "ONE ISLAND first…\p"
     .string "Anyways, I'm outta here!$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex1::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK:{SHADOW LIGHT_GRAY} ¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\n"
-    .string "¡Qué bueno que viniste a verme!\p"
-    .string "¿Cómo va todo con tu {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}?\n"
-    .string "¡Creo que te quiere mucho!$"
+@EVENTO RECIBIR POKEDEX Y POKERADAR
+PalletTown_ProfessorOaksLab_Text_QueAlegriaVertePorAqui::
+    .string "¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\n"
+    .string "¡Qué alegría verte por aquí!\p"
+    .string "¿Cómo va todo con tu {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}?\p"
+    .string "¡Se nota que ha creado un fuerte\n"
+    .string "lazo contigo!$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex2::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK:{SHADOW LIGHT_GRAY} {SHADOW DYNAMIC_COLOR4}HOJA{SHADOW LIGHT_GRAY} me acaba de traer\n"
-    .string "unas {COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}POKéDEX{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY} que envió mi colega\l"
-    .string "el {SHADOW DYNAMIC_COLOR4}PROF. ELM{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}PUEBLO PRIMAVERA{SHADOW LIGHT_GRAY}.$"
+PalletTown_ProfessorOaksLab_Text_RojoMeAcaba::
+    .string "{SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY} me acaba de traer unas {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}\n"
+    .string "que envió mi colega, el {SHADOW DYNAMIC_COLOR4}PROF. ELM{SHADOW LIGHT_GRAY},\l"
+    .string "desde {SHADOW DYNAMIC_COLOR4}PUEBLO PRIMAVERA{SHADOW LIGHT_GRAY}.$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex3::
-    .string "{SHADOW DYNAMIC_COLOR4}{RIVAL}:{SHADOW LIGHT_GRAY} ¿Qué necesitas ahora?\p"
-    .string "No ves que ando muy ocupado,\n"
-    .string "tengo mucho que hacer...$"
+PalletTown_ProfessorOaksLab_Text_HojaMeAcaba::
+    .string "{SHADOW DYNAMIC_COLOR4}HOJA{SHADOW LIGHT_GRAY} me acaba de traer unas {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}\n"
+    .string "que envió mi colega, el {SHADOW DYNAMIC_COLOR4}PROF. ELM{SHADOW LIGHT_GRAY},\l"
+    .string "desde {SHADOW DYNAMIC_COLOR4}PUEBLO PRIMAVERA{SHADOW LIGHT_GRAY}.$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex4::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK:{SHADOW LIGHT_GRAY} ¡Relájate un poco!\p"
-    .string "Yo les quería pedir un favor...$"
+PalletTown_ProfessorOaksLab_Text_YAhoraQueNecesitas::
+    .string "¿Y ahora qué necesitas?\p"
+    .string "Estoy ocupado...\p"
+    .string "Tengo cosas más importantes\n"
+    .string "que hacer...$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex5::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK:{SHADOW LIGHT_GRAY} He dedicado toda mi vida\n"
-    .string "a crear una {SHADOW DYNAMIC_COLOR4}ENCICLOPEDIA POKéMON{SHADOW LIGHT_GRAY}\l"
-    .string "conocida como la {COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}POKéDEX{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}.$"
+PalletTown_ProfessorOaksLab_Text_RelajateUnPoco::
+    .string "¡Relájate un poco, {SHADOW DYNAMIC_COLOR4}{RIVAL}{SHADOW LIGHT_GRAY}!\n"
+    .string "Lo que quiero es pedirles un favor\l"
+    .string "muy especial...$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex6::
-    .string "{SHADOW DYNAMIC_COLOR4}{RIVAL}:{SHADOW LIGHT_GRAY} ¡Genial, con esa enciclopedia\n"
-    .string "podré saber qué {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} son los\l"
-    .string "mejores para capturarlos!$"
+PalletTown_ProfessorOaksLab_Text_HeDedicadoMiVida::
+    .string "He dedicado toda mi vida a crear una\n"
+    .string "{SHADOW DYNAMIC_COLOR4}ENCICLOPEDIA POKéMON{SHADOW LIGHT_GRAY}, conocida\l"
+    .string "como {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}.$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex7::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK:{SHADOW LIGHT_GRAY} Mi colega {SHADOW DYNAMIC_COLOR4}ELM{SHADOW LIGHT_GRAY} me está\n"
-    .string "ayudando en la mejora constante\l"
-    .string "de esta herramienta; la hemos\l"
-    .string "actualizado con información sobre\l"
-    .string "nuevos {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.\p"
-    .string "Las {COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}POKéDEX{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY} que él me envió en\n"  
-    .string "este momento están completamente\l"
-    .string "vacías, por lo tanto, quiero\l"
-    .string "pedirles una misión de gran\l"
-    .string "importancia. ¿Estarían dispuestos\l"
-    .string "a completarla con la información\l"
-    .string "de todos los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} de la región?$"
+PalletTown_ProfessorOaksLab_Text_GenialConEsaEnciclpedia::
+    .string "¡Perfecto!\p"
+    .string "Con esa enciclopedia voy a poder\n"
+    .string "identificar a los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} más\l"
+    .string "fuertes...$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex12::
-    .string "{SHADOW DYNAMIC_COLOR4}{RIVAL}:{SHADOW LIGHT_GRAY} ¡Oye, abuelo!\p"
-    .string "Lo que estás pidiendo es \n"
-    .string "completamente imposible...$"
+PalletTown_ProfessorOaksLab_Text_YAtraprlosAntes::
+    .string "¡Y atraparlos antes que ustedes!$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex8::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK:{SHADOW LIGHT_GRAY} Quiero que recorran\n"
-    .string "cada rincón y encuentren todos\l"
-    .string "los tipos de {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} que haya en\l"
-    .string "la región.$"
+PalletTown_ProfessorOaksLab_Text_MiColegaElm::
+    .string "Mi colega {SHADOW DYNAMIC_COLOR4}ELM{SHADOW LIGHT_GRAY} me está ayudando a\n"
+    .string "mejorar esta herramienta.\p"
+    .string "La hemos actualizado con información\n"
+    .string "sobre nuevas especies.\p"
+    .string "Las {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY} que me envió están\n"
+    .string "completamente vacías.\p"
+    .string "Por eso quiero pedirles una misión de\n"
+    .string "gran importancia...\p"
+    .string "¿Estarían dispuestos a llenarlas con\n"
+    .string "información de todos los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} de\l"
+    .string "la región de {SHADOW DYNAMIC_COLOR4}KANTO{SHADOW LIGHT_GRAY}?$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex9::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK:{SHADOW LIGHT_GRAY} Les proporcionaré\n"
-    .string "algunas {COLOR DARK_GRAY}El {SHADOW DYNAMIC_COLOR4}POKé BALLS{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY} para que\l"
-    .string "puedan comenzar esta tarea de la\l"
-    .string "mejor manera posible.$"
+PalletTown_ProfessorOaksLab_Text_OyeAbuelo::
+    .string "¡Oye, abuelo!\p"
+    .string "Lo que estás pidiendo...\p"
+    .string "Es completamente imposible...$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex10::
+PalletTown_ProfessorOaksLab_Text_QuieroQueRecorranCada::
+    .string "Quiero que recorran cada rincón y\n"
+    .string "descubran todos los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} que\l"
+    .string "habitan en esta región.$"
+
+PalletTown_ProfessorOaksLab_Text_RecibisteUnaPokedex::
+    .string "{COLOR DARK_GRAY}¡Recibiste una {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}\n"
+    .string "de parte del {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY}!$"
+
+PalletTown_ProfessorOaksLab_Text_LesProporcionareAlgunas::
+    .string "Les proporcionaré algunas {SHADOW DYNAMIC_COLOR4}POKéBALLS{SHADOW LIGHT_GRAY}\n"
+    .string "para que puedan comenzar la tarea\l"
+    .string "del mejor modo posible.$"
+
+PalletTown_ProfessorOaksLab_Text_RecibistePokeBalls::
+    .string "{COLOR DARK_GRAY}¡Recibiste 5 {SHADOW DYNAMIC_COLOR4}POKé BALLS{SHADOW LIGHT_GRAY}\n"
+    .string "de parte del {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY}!$"
+
+PalletTown_ProfessorOaksLab_Text_RecibistePokeRadar::
     .string "{COLOR DARK_GRAY}¡Recibiste un {SHADOW DYNAMIC_COLOR4}POKéRADAR{SHADOW LIGHT_GRAY}\n"
     .string "de parte del {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY}!$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex11::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK:{SHADOW LIGHT_GRAY} Les señalará las zonas\n"
-    .string "de hierba en las que puede haber\l"
-    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} al acecho.\p"
-    .string "Estoy convencido que les ayudará\n"
-    .string "en esta aventura.$"
+PalletTown_ProfessorOaksLab_Text_HaObtenidPokerada::
+    .string "¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} ha obtenido un {SHADOW DYNAMIC_COLOR4}POKéRADAR{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}!$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex13::
-    .string "{SHADOW DYNAMIC_COLOR4}{RIVAL}:{SHADOW LIGHT_GRAY} ¡Qué fastidio!\n"
-    .string "¡Yo quería desafiar a los líderes\l"
-    .string "de gimnasios, y esta situación me\l"
-    .string "frustra al máximo!$"
-PalletTown_ProfessorOaksLab_Text_Pokedex14::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK:{SHADOW LIGHT_GRAY} Nadie te impide desafiar\n"
-    .string "a los líderes de gimnasios.\p"
-    .string "Cada uno vive su aventura a su\n"
-    .string "manera, pero a lo largo del camino,\l"
-    .string "tienes la oportunidad de completar\l"
-    .string "la {COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}POKéDEX{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY} y, de paso, ayudar a tu\l"
-    .string "abuelo en su labor.$"
+PalletTown_ProfessorOaksLab_Text_ElPokeRadarLesIndicara::
+    .string "El {SHADOW DYNAMIC_COLOR4}POKéRADAR{SHADOW LIGHT_GRAY} les indicará las zonas\n"
+    .string "de hierba donde podría haber\l"
+    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} escondidos.\p"
+    .string "Estoy seguro de que les será de gran\n"
+    .string "ayuda para ustedes.$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex15::
-    .string "{SHADOW DYNAMIC_COLOR4}{RIVAL}: {PLAYER}{SHADOW LIGHT_GRAY}... {SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY}...\p"
-    .string "Solo uno de los tres será digno de\n"
-    .string "convertirse en MAESTRO POKÉMON, y\l"
-    .string "no hay duda de que ese afortunado\l"
-    .string "será únicamente yo, sin necesidad\l"
-    .string "de ayuda de nadie...$"
+PalletTown_ProfessorOaksLab_Text_QueFastidio::
+    .string "¡Qué fastidio!\p"
+    .string "¡Yo quería ir ya por las medallas de\n"
+    .string "gimnasio, no ponerme a llenar una\l"
+    .string "{SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}!\p"
+    .string "Esto es una pérdida de tiempo...$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex16::
-    .string "{SHADOW DYNAMIC_COLOR4}HOJA:{SHADOW LIGHT_GRAY} ¡Estoy emocionada por\n"
-    .string "comenzar esta aventura {PLAYER}!\l"
-    .string "Iré a explorar el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY},\l"
-    .string "es un lugar fascinante.$"
+PalletTown_ProfessorOaksLab_Text_NadieTeImpide::
+    .string "Nadie te impide desafiar a los\n"
+    .string "líderes de gimnasio.\p"
+    .string "Cada quien vive su aventura a su\n"
+    .string "ritmo.\p"
+    .string "Pero en el camino, puedes ayudarme\n"
+    .string "con la {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}.\p"
+    .string "Sería un gesto valioso para tu viejo\n"
+    .string "abuelo.$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex17::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK:{SHADOW LIGHT_GRAY} ¡Los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} de la\n"
-    .string "región esperan por ti!$"
+PalletTown_ProfessorOaksLab_Text_RojoSoloUnoDeNosotros::
+    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}... {SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY}...\p"
+    .string "Solo uno de nosotros llegará a ser\n"
+    .string "un verdadero {SHADOW DYNAMIC_COLOR4}MAESTRO POKéMON{SHADOW LIGHT_GRAY}.\p"
+    .string "Y créanme, ese voy a ser yo.\n"
+    .string "Sin ayuda. Sin distracciones.$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex2Rojo::
-    .string "{SHADOW DYNAMIC_COLOR4}PROF. OAK: ROJO {SHADOW LIGHT_GRAY}me acaba de traer\n"
-    .string "unas {COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}POKéDEX{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY} que envió mi colega\l"
-    .string "el {SHADOW DYNAMIC_COLOR4}PROF. ELM{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}PUEBLO PRIMAVERA{SHADOW LIGHT_GRAY}.$"
+PalletTown_ProfessorOaksLab_Text_HojaSoloUnoDeNosotros::
+    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}... {SHADOW DYNAMIC_COLOR4}HOJA{SHADOW LIGHT_GRAY}...\n"
+    .string "Solo uno de nosotros llegará a ser\n"
+    .string "un verdadero {SHADOW DYNAMIC_COLOR4}MAESTRO POKéMON{SHADOW LIGHT_GRAY}.\p"
+    .string "Y créanme, ese voy a ser yo.\n"
+    .string "Sin ayuda. Sin distracciones.$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex15Rojo::
-    .string "{SHADOW DYNAMIC_COLOR4}{RIVAL}: {PLAYER}{SHADOW LIGHT_GRAY}... {SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY}...\p"
-    .string "Solo uno de los tres será digno de\n"
-    .string "convertirse en {SHADOW DYNAMIC_COLOR4}MAESTRO POKéMON{SHADOW LIGHT_GRAY}, y\l"
-    .string "no hay duda de que ese afortunado\l"
-    .string "será únicamente yo, sin necesidad\l"
-    .string "de ayuda de nadie...$"
+PalletTown_ProfessorOaksLab_Text_EstoyEmocionado::
+    .string "¡Estoy emocionado por la aventura!\p"
+    .string "Iré a explorar el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}.\p"
+    .string "Debe haber {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} increíbles por\n"
+    .string "allí.$"
 
-PalletTown_ProfessorOaksLab_Text_Pokedex16Rojo::
-    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} ¡Estoy emocionada por\n"
-    .string "comenzar esta aventura {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\l"
-    .string "Iré a explorar el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY},\l"
-    .string "es un lugar fascinante.$"
+PalletTown_ProfessorOaksLab_Text_EstoyEmocionada::
+    .string "¡Estoy emocionada por la aventura!\p"
+    .string "Iré a explorar el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}.\p"
+    .string "Debe haber {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}  increíbles por\n"
+    .string "allí.$"
 
-
-
-PalletTown_ProfessorOaksLab_Text_Pokeradar::
-    .string "¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} ha obtenido el {COLOR DARK_GRAY}El {SHADOW DYNAMIC_COLOR4}POKéRADAR{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}!$"
+PalletTown_ProfessorOaksLab_Text_LosPokemonDeLaRegion::
+    .string "¡Los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} de la región los\n"
+    .string "esperan!\p"
+    .string "¡Buena suerte!$"

@@ -57,7 +57,7 @@ PalletTown_ProfessorOaksLab_EventScript_ReadyPlayerForStarterScene::
 PalletTown_ProfessorOaksLab_OnFrame::
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1, PalletTown_ProfessorOaksLab_EleccionInicial
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7, PalletTown_ProfessorOaksLab_EventScript_EnterForNationalDexScene
-	map_script_2 VAR_0x408C, 1, PalletTown_ProfessorOaksLab_EventScript_Pokedex1
+	map_script_2 VAR_0x408C, 1, PalletTown_ProfessorOaksLab_EventScript_RecibirPokedex
 	.2byte 0
 
 PalletTown_ProfessorOaksLab_EventScript_EnterForNationalDexScene:: @ 8169002 
@@ -204,7 +204,7 @@ PalletTown_ProfessorOaksLab_Movement_OakBringDexesToDeskSouth::
 	delay_4
 	step_end
 
-@ELECCIÓN POKÉMON
+@EVENTO ELECCIÓN POKÉMON
 PalletTown_ProfessorOaksLab_EleccionInicial::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	lockall
@@ -217,82 +217,70 @@ PalletTown_ProfessorOaksLab_EleccionInicial::
 	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_PlayerEnter
 	waitmovement 0
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Rival1 @añadi
-	waitmovement 0 @añadido
-
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_SaltoCaminarEnSitioArriba
+	waitmovement 0
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioArriba
+	waitmovement 0
 	namebox Name_Rival
 	msgbox PalletTown_ProfessorOaksLab_Text_EstoyAburrido
 	hidenamebox
 	closemessage
-
 	delay 60
-
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
+	waitmovement 0
 	namebox Name_Oak
 	msgbox PalletTown_ProfessorOaksLab_Text_TenPaciencia
 	hidenamebox
 	closemessage
-
-
 	delay 30
-	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_Oak1 @añadido
-	waitmovement 0 @añadido
-
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_Oak1
+	waitmovement 0
 	namebox Name_Oak
 	msgbox PalletTown_ProfessorOaksLab_Text_YaRecorde
 	hidenamebox
 	closemessage
-
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_Player1 @añadido
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Player1 @añadido
-	waitmovement 0 @añadido
-
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_Player1
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Player1
+	waitmovement 0
 	namebox Name_Oak
 	msgbox PalletTown_ProfessorOaksLab_Text_MiraEstasPokeballs
 	hidenamebox
 	closemessage
-
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalReact
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
-
 	namebox Name_Rival
 	msgbox PalletTown_ProfessorOaksLab_Text_VoyASerElMejor
 	hidenamebox
 	closemessage
-
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Rival2 @añadido
-	waitmovement 0 @añadido
-	
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Rival2
+	waitmovement 0
 	namebox Name_Rival
 	msgbox PalletTown_ProfessorOaksLab_Text_DesdeNino
 	hidenamebox
 	closemessage
-
-	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_Oak1 @añadido
-	waitmovement 0 @añadido
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_Oak1
+	waitmovement 0
 	clearflag FLAG_DONT_TRANSITION_MUSIC
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	playbgm MUS_OAK, 0
-
 	namebox Name_Oak
 	msgbox PalletTown_ProfessorOaksLab_Text_CualQuieres
 	hidenamebox
 	closemessage
-
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalReact
 	waitmovement 0
-
 	namebox Name_Rival
 	msgbox PalletTown_ProfessorOaksLab_Text_YoQue
 	hidenamebox
 	closemessage
-
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
+	waitmovement 0
 	namebox Name_Oak
 	msgbox PalletTown_ProfessorOaksLab_Text_TambienTeDare
 	hidenamebox
 	closemessage
-
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2
 	releaseall
 	end
@@ -311,7 +299,7 @@ PalletTown_ProfessorOaksLab_Movement_Rival2::
 	emote_exclamation_mark
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_Rival1::
+PalletTown_ProfessorOaksLab_Movement_SaltoCaminarEnSitioArriba::
 	jump_in_place_up
 	walk_in_place_up
 	step_end
@@ -342,6 +330,8 @@ PalletTown_ProfessorOaksLab_Movement_RivalReact::
 PalletTown_ProfessorOaksLab_EventScript_SalidaSinPokemon::
 	lockall
 	applymovement LOCALID_PROF_OAK, Common_Movement_FaceDown
+	waitmovement 0
+	applymovement LOCALID_PROF_OAK , PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
 	waitmovement 0
 	namebox Name_Oak
 	msgbox PalletTown_ProfessorOaksLab_Text_NoPuedesIrte
@@ -404,7 +394,7 @@ PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle::
 PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtleLeft::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleLeft
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player2
+	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiradaDerecha
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleSquirtle
 	end
@@ -463,7 +453,7 @@ PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander::
 PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderLeft::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderLeft
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player2
+	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiradaDerecha
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleCharmander
 	end
@@ -471,7 +461,7 @@ PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderLeft::
 PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmanderMid::
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderMid
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player2
+	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiradaDerecha
 	waitmovement 0
 	goto PalletTown_ProfessorOaksLab_EventScript_RivalBattleCharmander
 	end
@@ -487,7 +477,7 @@ PalletTown_ProfessorOaksLab_EventScript_RivalBattleCharmander::
 	goto PalletTown_ProfessorOaksLab_EventScript_EndRivalBattle
 	end
 
-PalletTown_ProfessorOaksLab_Movement_Player2::
+PalletTown_ProfessorOaksLab_Movement_MiradaDerecha::
 	face_right
 	step_end
 
@@ -549,6 +539,9 @@ PalletTown_ProfessorOaksLab_EventScript_RivalBattleBulbasaur::
 	trainerbattle_earlyrival TRAINER_RIVAL_OAKS_LAB_BULBASAUR, RIVAL_BATTLE_TUTORIAL, PalletTown_ProfessorOaksLab_Text_RivalDefeat, Text_RivalVictory
 	goto PalletTown_ProfessorOaksLab_EventScript_EndRivalBattle
 	end
+
+
+
 
 PalletTown_ProfessorOaksLab_Movement_Player3::
 	face_left
@@ -765,16 +758,19 @@ PalletTown_ProfessorOaksLab_EventScript_RivalWaitingForStarter::
 	msgbox PalletTown_ProfessorOaksLab_Text_SiEligesBien
 	hidenamebox
 	closemessage
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	waitmovement 0
 	release
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_RivalChoseStarter::
-	msgbox PalletTown_ProfessorOaksLab_Text_RivalMyMonLooksTougher
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_MiPokemonPareceMuchoMas
 	release
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_ProfOak::
-	lock
 	faceplayer
 	goto_if_set SHOWED_OAK_COMPLETE_DEX, PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 9, PalletTown_ProfessorOaksLab_EventScript_RatePokedex
@@ -785,9 +781,12 @@ PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 	goto_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1, PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 4, PalletTown_ProfessorOaksLab_EventScript_OakBattleMonForItToGrow
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_OakCanReachNextTownWithMon
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	namebox Name_Oak
 	msgbox PalletTown_ProfessorOaksLab_Text_EsasTresPokeBalls
 	hidenamebox
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_MiraAbajo
+	waitmovement 0
 	closemessage
 	release
 	end
@@ -865,7 +864,7 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene:: @original
 	delay 10
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_KEY_ITEM
-	message PalletTown_ProfessorOaksLab_Text_ReceivedPokedexFromOak
+	message PalletTown_ProfessorOaksLab_Text_RecibisteUnaPokedex
 	waitmessage
 	waitfanfare
 	call EventScript_RestorePrevTextColor
@@ -873,7 +872,7 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene:: @original
 	special SetUnlockedPokedexFlags
 	setvar VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 1
 	msgbox PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese
-	giveitem_msg PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls, ITEM_POKE_BALL, 5
+	giveitem_msg PalletTown_ProfessorOaksLab_Text_RecibistePokeBalls, ITEM_POKE_BALL, 5
 	msgbox PalletTown_ProfessorOaksLab_Text_OakExplainCatching
 	famechecker FAMECHECKER_OAK, 1
 	msgbox PalletTown_ProfessorOaksLab_Text_OakCompleteMonGuideWasMyDream
@@ -1148,7 +1147,7 @@ PalletTown_ProfessorOaksLab_EventScript_PlayerOutOfBalls::
 
 PalletTown_ProfessorOaksLab_EventScript_GivePlayerMoreBalls::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakAddedNothingToPokedex
-	giveitem_msg PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls, ITEM_POKE_BALL, 5
+	giveitem_msg PalletTown_ProfessorOaksLab_Text_RecibistePokeBalls, ITEM_POKE_BALL, 5
 	setflag FLAG_GOT_POKEBALLS_FROM_OAK_AFTER_22_RIVAL
 	release
 	end
@@ -1394,7 +1393,7 @@ PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur::
 
 PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	namebox Name_Oak
+	namebox Name_Rival
 	msgbox PalletTown_ProfessorOaksLab_Text_EntoncesEsteSera
 	hidenamebox
 	closemessage
@@ -1467,6 +1466,8 @@ PalletTown_ProfessorOaksLab_EventScript_Cientifico1::
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear
 	msgbox PalletTown_ProfessorOaksLab_Text_Cientifico1
+	applymovement 1, PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	waitmovement 0	
 	release
 	end
 
@@ -1481,6 +1482,8 @@ PalletTown_ProfessorOaksLab_EventScript_Cientifico2::
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, PalletTown_ProfessorOaksLab_EventScript_Aide2GameClear
 	msgbox PalletTown_ProfessorOaksLab_Text_Cientifico1
+	applymovement 3, PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	waitmovement 0	
 	release
 	end
 
@@ -1495,6 +1498,8 @@ PalletTown_ProfessorOaksLab_EventScript_Cientifico3::
 	faceplayer
 	famechecker FAMECHECKER_OAK, 2
 	msgbox PalletTown_ProfessorOaksLab_Text_Cientifico3
+	applymovement 2, PalletTown_ProfessorOaksLab_Movement_MiraIzquierdaPregunta
+	waitmovement 0	
 	release
 	end
 
@@ -1523,70 +1528,121 @@ PalletTown_ProfessorOaksLab_EventScript_RightSignAlt::
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_EntregaPokedex::
-	map_script_2 VAR_0x408C, 1, PalletTown_ProfessorOaksLab_EventScript_Pokedex1
+	map_script_2 VAR_0x408C, 1, PalletTown_ProfessorOaksLab_EventScript_RecibirPokedex
 	.2byte 0
 
 
-PalletTown_ProfessorOaksLab_EventScript_PokedexRojo::
+@EVENTO RECIBIR POKEDEX Y POKERADAR
+PalletTown_ProfessorOaksLab_EventScript_RecibirPokedex::
+	lockall
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, PalletTown_ProfessorOaksLab_EventScript_PokedexHoja
+	call_if_eq VAR_RESULT, FEMALE, PalletTown_ProfessorOaksLab_EventScript_RecibirPokedexFemale
+	setvar VAR_0x408C, 2
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
+	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
+	setvar VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 1
+	setvar VAR_MAP_SCENE_ROUTE22, 1
+	releaseall
+	end
+
+@PLAYER FEMENINO - EVENTO RECIBIR POKEDEX Y POKERADAR
+PalletTown_ProfessorOaksLab_EventScript_RecibirPokedexFemale::
 	clearflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY @ aparece mama
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 1 @ aparece el evento
 	setflag FLAG_0x0B2 @desaparece mama
 	playbgm MUS_OAK, 0
 	setobjectxy 12,4,5
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_Player4
-	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_Oak2
-	applymovement 12, PalletTown_ProfessorOaksLab_Movement_Hoja3
+	applymovement 12, PalletTown_ProfessorOaksLab_Movement_MiradaDerecha
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex1
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_EntradaPlayer
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakTeRecibe
+	applymovement 12, PalletTown_ProfessorOaksLab_Movement_RojoHojaTeRecibe
+	waitmovement 0
+	special SpawnCameraObject
+	applymovement OBJ_EVENT_ID_CAMERA, PalletTown_ProfessorOaksLab_Movement_CamaraEntrada
+	waitmovement 0
+	special RemoveCameraObject
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_QueAlegriaVertePorAqui
+	hidenamebox
 	closemessage
-	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_Oak3
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakMiraARojoHoja
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex2Rojo
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_RojoMeAcaba
+	hidenamebox
 	closemessage
-	applymovement 12, PalletTown_ProfessorOaksLab_Movement_Hoja4
+	applymovement 12, PalletTown_ProfessorOaksLab_Movement_RojoHojaSeUbica
 	waitmovement 0
-
-	playbgm MUS_ENCOUNTER_RIVAL, 0
 	setobjectxyperm LOCALID_RIVAL, 5, 12
 	addobject LOCALID_RIVAL
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_Player5
-	applymovement 12, PalletTown_ProfessorOaksLab_Movement_Player5
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Rival3
+	playbgm MUS_ENCOUNTER_RIVAL, 0
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_PlayerLlegadaRival
+	applymovement 12, PalletTown_ProfessorOaksLab_Movement_PlayerLlegadaRival
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalEntrada
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex3
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_YAhoraQueNecesitas
+	hidenamebox
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_Player6
-	applymovement 12, PalletTown_ProfessorOaksLab_Movement_Player6
-	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_Oak4
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakSorprende
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioArriba
+	applymovement 12, PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioArriba
 	waitmovement 0
 	playbgm MUS_OAK, 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex4
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_RelajateUnPoco
+	hidenamebox
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player1
-	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_Player1
-	applymovement 12,PalletTown_ProfessorOaksLab_Movement_Player1
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex5
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_HeDedicadoMiVida
+	hidenamebox
 	closemessage
-	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_Player7
+	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioArriba
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex6
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_GenialConEsaEnciclpedia
+	hidenamebox
 	closemessage
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex7
+	playbgm MUS_ENCOUNTER_RIVAL, 0
+	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_SaltoEnSitoExclamacionIzquierda
+	waitmovement 0
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_YAtraprlosAntes
+	hidenamebox
 	closemessage
-
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex12
+	playbgm MUS_OAK, 0
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
+	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	waitmovement 0
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_MiColegaElm
+	hidenamebox
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_Player6
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Player6
-	applymovement 12, PalletTown_ProfessorOaksLab_Movement_Player6
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex8
+	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_SaltarEnSitioArriba
+	waitmovement 0
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_OyeAbuelo
+	hidenamebox
 	closemessage
-
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_OakSorprende
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_SaltarEnSitioArriba
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_SaltarEnSitioArriba
+	applymovement 12, PalletTown_ProfessorOaksLab_Movement_SaltarEnSitioArriba
+	waitmovement 0
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_QuieroQueRecorranCada
+	hidenamebox
+	closemessage
 	textcolor NPC_TEXT_COLOR_NEUTRAL								
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	signmsg
-	msgbox PalletTown_ProfessorOaksLab_Text_ReceivedPokedexFromOak
+	msgbox PalletTown_ProfessorOaksLab_Text_RecibisteUnaPokedex
 	normalmsg
 	delay_16
 	waitmessage
@@ -1594,282 +1650,331 @@ PalletTown_ProfessorOaksLab_EventScript_PokedexRojo::
 	setflag FLAG_SYS_POKEDEX_GET
 	special SetUnlockedPokedexFlags
 	setvar VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 1			
-
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex9
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
+	waitmovement 0
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_LesProporcionareAlgunas
+	hidenamebox
 	closemessage
-
 	signmsg
-	giveitem_msg PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls, ITEM_POKE_BALL, 5
+	giveitem_msg PalletTown_ProfessorOaksLab_Text_RecibistePokeBalls, ITEM_POKE_BALL, 5
 	normalmsg
-
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex10
+	signmsg
+	msgbox PalletTown_ProfessorOaksLab_Text_RecibistePokeRadar
 	closemessage
-
+	normalmsg
 	textcolor NPC_TEXT_COLOR_NEUTRAL								
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	setflag FLAG_SYS_DEXNAV_GET
 	signmsg
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokeradar
+	msgbox PalletTown_ProfessorOaksLab_Text_HaObtenidPokerada
 	normalmsg
 	delay_16
 	waitmessage
 	waitfanfare
 	closemessage
-
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex11
-	closemessage
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Rival1
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex13
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_ElPokeRadarLesIndicara
+	hidenamebox
 	closemessage
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex14
-	closemessage
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Rival4
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_SaltoCaminarEnSitioArriba
 	waitmovement 0
-
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player2
-	applymovement 11,PalletTown_ProfessorOaksLab_Movement_Player2
-	waitmovement 0
-
-
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex15Rojo
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_QueFastidio
+	hidenamebox
 	closemessage
-
-
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
+	waitmovement 0
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_NadieTeImpide
+	hidenamebox
+	closemessage
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_SaltoEnSitoExclamacionIzquierda
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiradaDerecha
+	applymovement 12,PalletTown_ProfessorOaksLab_Movement_MiradaDerecha
+	waitmovement 0
+	playbgm MUS_ENCOUNTER_RIVAL, 0
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_RojoSoloUnoDeNosotros
+	hidenamebox
+	closemessage
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalSeVa
 	waitmovement 0
 	setobjectxy LOCALID_RIVAL,12,13
-
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player3
+	playbgm MUS_OAK, 0
+	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiraIzquierdaPregunta
+	applymovement 12,PalletTown_ProfessorOaksLab_Movement_MiraDerechaPregunta
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex16Rojo
+	namebox Name_Rojo
+	msgbox PalletTown_ProfessorOaksLab_Text_EstoyEmocionado
+	hidenamebox
 	closemessage
-
-	applymovement 12, PalletTown_ProfessorOaksLab_Movement_HojaSeVa
+	applymovement 12, PalletTown_ProfessorOaksLab_Movement_RojoHojaSeVa
 	waitmovement 0
 	setobjectxy 12,12,13
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player8
+	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiraArriba
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex17
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
+	waitmovement 0
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_LosPokemonDeLaRegion
+	hidenamebox
 	closemessage
+	special SpawnCameraObject
+	applymovement OBJ_EVENT_ID_CAMERA, PalletTown_ProfessorOaksLab_Movement_CamaraSalida
+	waitmovement 0
+	special RemoveCameraObject
 	setvar VAR_0x408C, 2
-	
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
 	setvar VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 1
 	setvar VAR_MAP_SCENE_ROUTE22, 1
-
-
-
 	releaseall
 	end
 
+@PLAYER MASCULINO - EVENTO RECIBIR POKEDEX Y POKERADAR
 PalletTown_ProfessorOaksLab_EventScript_PokedexHoja::
-	setvar RIVAL_STARTER_ID, LOCALID_CHARMANDER_BALL
-	setvar RIVAL_STARTER_ID, LOCALID_BULBASAUR_BALL
-	setvar RIVAL_STARTER_ID, LOCALID_SQUIRTLE_BALL
 	clearflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY @ aparece mama
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 1 @ aparece el evento
 	setflag FLAG_0x0B2 @desaparece mama
+	playbgm MUS_OAK, 0
 	setobjectxy 11,4,5
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_Player4
-	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_Oak2
-	applymovement 11, PalletTown_ProfessorOaksLab_Movement_Hoja3
+	applymovement 11, PalletTown_ProfessorOaksLab_Movement_MiradaDerecha
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex1
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_EntradaPlayer
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakTeRecibe
+	applymovement 11, PalletTown_ProfessorOaksLab_Movement_RojoHojaTeRecibe
+	waitmovement 0
+	special SpawnCameraObject
+	applymovement OBJ_EVENT_ID_CAMERA, PalletTown_ProfessorOaksLab_Movement_CamaraEntrada
+	waitmovement 0
+	special RemoveCameraObject
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_QueAlegriaVertePorAqui
+	hidenamebox
 	closemessage
-	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_Oak3
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakMiraARojoHoja
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex2
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_HojaMeAcaba
+	hidenamebox
 	closemessage
-	applymovement 11, PalletTown_ProfessorOaksLab_Movement_Hoja4
+	applymovement 11, PalletTown_ProfessorOaksLab_Movement_RojoHojaSeUbica
 	waitmovement 0
-
-	playbgm MUS_ENCOUNTER_RIVAL, 0
 	setobjectxyperm LOCALID_RIVAL, 5, 12
 	addobject LOCALID_RIVAL
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_Player5
-	applymovement 11, PalletTown_ProfessorOaksLab_Movement_Player5
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Rival3
+	playbgm MUS_ENCOUNTER_RIVAL, 0
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_PlayerLlegadaRival
+	applymovement 11, PalletTown_ProfessorOaksLab_Movement_PlayerLlegadaRival
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalEntrada
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex3
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_YAhoraQueNecesitas
+	hidenamebox
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_Player6
-	applymovement 11, PalletTown_ProfessorOaksLab_Movement_Player6
-	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_Oak4
+	applymovement LOCALID_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_OakSorprende
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex4
-	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player1
-	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_Player1
-	applymovement 11,PalletTown_ProfessorOaksLab_Movement_Player1
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioArriba
+	applymovement 11, PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioArriba
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex5
+	playbgm MUS_OAK, 0
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_RelajateUnPoco
+	hidenamebox
 	closemessage
-	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_Player7
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex6
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_HeDedicadoMiVida
+	hidenamebox
 	closemessage
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex7
+	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioArriba
+	waitmovement 0
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_GenialConEsaEnciclpedia
+	hidenamebox
 	closemessage
-
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex12
+	playbgm MUS_ENCOUNTER_RIVAL, 0
+	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_SaltoEnSitoExclamacionIzquierda
+	waitmovement 0
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_YAtraprlosAntes
+	hidenamebox
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_Player6
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Player6
-	applymovement 11, PalletTown_ProfessorOaksLab_Movement_Player6
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex8
+	playbgm MUS_OAK, 0
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
+	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	waitmovement 0
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_MiColegaElm
+	hidenamebox
 	closemessage
-
+	applymovement LOCALID_RIVAL,PalletTown_ProfessorOaksLab_Movement_SaltarEnSitioArriba
+	waitmovement 0
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_OyeAbuelo
+	hidenamebox
+	closemessage
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_OakSorprende
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_ProfessorOaksLab_Movement_SaltarEnSitioArriba
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_SaltarEnSitioArriba
+	applymovement 11, PalletTown_ProfessorOaksLab_Movement_SaltarEnSitioArriba
+	waitmovement 0
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_QuieroQueRecorranCada
+	hidenamebox
+	closemessage
 	textcolor NPC_TEXT_COLOR_NEUTRAL								
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	signmsg
-	msgbox PalletTown_ProfessorOaksLab_Text_ReceivedPokedexFromOak
+	msgbox PalletTown_ProfessorOaksLab_Text_RecibisteUnaPokedex
 	normalmsg
 	delay_16
 	waitmessage
 	waitfanfare
 	setflag FLAG_SYS_POKEDEX_GET
 	special SetUnlockedPokedexFlags
-	setvar VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 1		
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex9
-	closemessage	
-	signmsg
-	giveitem_msg PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls, ITEM_POKE_BALL, 5
-	normalmsg
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex10
+	setvar VAR_MAP_SCENE_POKEMON_CENTER_TEALA, 1			
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
+	waitmovement 0
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_LesProporcionareAlgunas
+	hidenamebox
 	closemessage
+	signmsg
+	giveitem_msg PalletTown_ProfessorOaksLab_Text_RecibistePokeBalls, ITEM_POKE_BALL, 5
+	normalmsg
+	signmsg
+	msgbox PalletTown_ProfessorOaksLab_Text_RecibistePokeRadar
+	closemessage
+	normalmsg
 	textcolor NPC_TEXT_COLOR_NEUTRAL								
 	playfanfare MUS_OBTAIN_KEY_ITEM
+	setflag FLAG_SYS_DEXNAV_GET
 	signmsg
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokeradar
+	msgbox PalletTown_ProfessorOaksLab_Text_HaObtenidPokerada
 	normalmsg
 	delay_16
 	waitmessage
 	waitfanfare
 	closemessage
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex11
-	closemessage
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Rival1
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex13
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_ElPokeRadarLesIndicara
+	hidenamebox
 	closemessage
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex14
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_SaltoCaminarEnSitioArriba
+	waitmovement 0
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_QueFastidio
+	hidenamebox
 	closemessage
-	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_Rival4
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player2
-	applymovement 11,PalletTown_ProfessorOaksLab_Movement_Player2
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_NadieTeImpide
+	hidenamebox
+	closemessage
+	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_SaltoEnSitoExclamacionIzquierda
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex15
+	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiradaDerecha
+	applymovement 11,PalletTown_ProfessorOaksLab_Movement_MiradaDerecha
+	waitmovement 0
+	playbgm MUS_ENCOUNTER_RIVAL, 0
+	namebox Name_Rival
+	msgbox PalletTown_ProfessorOaksLab_Text_HojaSoloUnoDeNosotros
+	hidenamebox
 	closemessage
 	applymovement LOCALID_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalSeVa
 	waitmovement 0
-	setobjectxy LOCALID_RIVAL,12,13
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player3
+	setobjectxy LOCALID_RIVAL,11,13
+	playbgm MUS_OAK, 0
+	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiraIzquierdaPregunta
+	applymovement 11,PalletTown_ProfessorOaksLab_Movement_MiraDerechaPregunta
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex16
+	namebox Name_Hoja
+	msgbox PalletTown_ProfessorOaksLab_Text_EstoyEmocionado
+	hidenamebox
 	closemessage
-	applymovement 11, PalletTown_ProfessorOaksLab_Movement_HojaSeVa
+	applymovement 11, PalletTown_ProfessorOaksLab_Movement_RojoHojaSeVa
 	waitmovement 0
-	setobjectxy 11,12,13
-	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_Player8
+	setobjectxy 11,11,13
+	applymovement OBJ_EVENT_ID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiraArriba
 	waitmovement 0
-	msgbox PalletTown_ProfessorOaksLab_Text_Pokedex17
+	applymovement LOCALID_PROF_OAK,PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo
+	waitmovement 0
+	namebox Name_Oak
+	msgbox PalletTown_ProfessorOaksLab_Text_LosPokemonDeLaRegion
+	hidenamebox
 	closemessage
+	special SpawnCameraObject
+	applymovement OBJ_EVENT_ID_CAMERA, PalletTown_ProfessorOaksLab_Movement_CamaraSalida
+	waitmovement 0
+	special RemoveCameraObject
 	setvar VAR_0x408C, 2
-
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
 	setvar VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 1
 	setvar VAR_MAP_SCENE_ROUTE22, 1
-
-	release
-	end
-
-
-PalletTown_ProfessorOaksLab_EventScript_Pokedex1::
-	lockall
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, PalletTown_ProfessorOaksLab_EventScript_PokedexHoja
-	call_if_eq VAR_RESULT, FEMALE, PalletTown_ProfessorOaksLab_EventScript_PokedexRojo
-	setvar VAR_0x408C, 2
-
-	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
-	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
-	setvar VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 1
-	setvar VAR_MAP_SCENE_ROUTE22, 1
-
 	releaseall
 	end
 
-PalletTown_ProfessorOaksLab_Movement_Player7::
-	emote_question_mark
-	walk_in_place_up
-	step_end
-
-PalletTown_ProfessorOaksLab_Movement_Oak4::
-	jump_in_place_down
-	emote_exclamation_mark
-	step_end
-
-PalletTown_ProfessorOaksLab_Movement_Player6::
-	jump_in_place_up
-	step_end
-
-PalletTown_ProfessorOaksLab_Movement_Player5::
-	face_down
-	emote_exclamation_mark
-	delay_16
-	face_right
-	step_end
-
-PalletTown_ProfessorOaksLab_Movement_Player4::
+@MOVIMIENTOS - EVENTO RECIBIR POKEDEX Y POKERADAR
+PalletTown_ProfessorOaksLab_Movement_EntradaPlayer::
 	walk_up
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_Oak2::
+PalletTown_ProfessorOaksLab_Movement_CamaraEntrada::
+	walk_up
+	walk_up
+	step_end
+
+PalletTown_ProfessorOaksLab_Movement_CamaraSalida::
+	walk_down
+	walk_down
+	step_end
+
+PalletTown_ProfessorOaksLab_Movement_OakTeRecibe::
 	face_left
-	delay_16
-	delay_16
-	delay_16
 	delay_16
 	delay_16
 	delay_16
 	jump_in_place_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_Hoja3::
+PalletTown_ProfessorOaksLab_Movement_RojoHojaTeRecibe::
 	delay_16
 	delay_16
 	delay_16
-	delay_16
-	delay_16
-	delay_16
-	face_down
+	walk_in_place_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_Oak3::
+PalletTown_ProfessorOaksLab_Movement_OakMiraARojoHoja::
 	face_left
 	delay_16
-	delay_16
-	delay_16
 	face_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_Hoja4::
+PalletTown_ProfessorOaksLab_Movement_RojoHojaSeUbica::
+	delay_16
 	walk_left
 	walk_down
 	walk_down
 	walk_down
 	walk_right
 	face_up
+	delay_16
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_Rival3::
+PalletTown_ProfessorOaksLab_Movement_RivalEntrada::
 	walk_up
 	walk_up
 	walk_right
@@ -1878,7 +1983,33 @@ PalletTown_ProfessorOaksLab_Movement_Rival3::
 	jump_in_place_up
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_Rival4::
+PalletTown_ProfessorOaksLab_Movement_PlayerLlegadaRival::
+	face_down
+	emote_exclamation_mark
+	delay_16
+	delay_16
+	delay_16
+	face_right
+	step_end
+
+PalletTown_ProfessorOaksLab_Movement_OakSorprende::
+	walk_in_place_down
+	emote_exclamation_mark
+	step_end
+
+PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioArriba::
+	walk_in_place_up
+	step_end
+
+PalletTown_ProfessorOaksLab_Movement_CaminarEnSitioAbajo::
+	walk_in_place_down
+	step_end
+
+PalletTown_ProfessorOaksLab_Movement_SaltarEnSitioArriba::
+	jump_in_place_up
+	step_end
+
+PalletTown_ProfessorOaksLab_Movement_SaltoEnSitoExclamacionIzquierda::
 	jump_in_place_left
 	emote_exclamation_mark
 	step_end
@@ -1891,7 +2022,25 @@ PalletTown_ProfessorOaksLab_Movement_RivalSeVa::
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_HojaSeVa::
+PalletTown_ProfessorOaksLab_Movement_MiraIzquierdaPregunta::
+	emote_question_mark
+	delay_16
+	delay_16
+	delay_16
+	face_left
+	step_end
+
+PalletTown_ProfessorOaksLab_Movement_MiraDerechaPregunta::
+	emote_question_mark
+	delay_16
+	delay_16
+	delay_16
+	face_right
+	delay_16
+	walk_in_place_right
+	step_end
+
+PalletTown_ProfessorOaksLab_Movement_RojoHojaSeVa::
 	walk_down
 	walk_down
 	walk_right
@@ -1899,6 +2048,10 @@ PalletTown_ProfessorOaksLab_Movement_HojaSeVa::
 	walk_down
 	step_end
 
-PalletTown_ProfessorOaksLab_Movement_Player8::
+PalletTown_ProfessorOaksLab_Movement_MiraArriba::
 	face_up
+	step_end
+
+PalletTown_ProfessorOaksLab_Movement_MiraAbajo::
+	face_down
 	step_end

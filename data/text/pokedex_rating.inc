@@ -1,19 +1,17 @@
 PokedexRating_Text_HowIsPokedexComingAlong::
-	.string "OAK: Good to see you!\n"
-	.string "How is your POKéDEX coming along?\p"
-	.string "Here, let me take a look.$"
+	.string "{COLOR DARK_GRAY}¡Qué gusto verte de nuevo!\n"
+	.string "¿Cómo va esa {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}?\p"
+	.string "¡A ver, déjame echarle un vistazo!$"
 
 PokedexRating_Text_SeenXOwnedY::
-	.string "The amount of progress you've made\n"
-	.string "on your POKéDEX is:\p"
-	.string "{STR_VAR_1} POKéMON seen and\n"
-	.string "{STR_VAR_2} POKéMON owned.\p"
-	.string "{FONT_NORMAL}PROF. OAK's rating:$"
+	.string "{COLOR DARK_GRAY}Nivel de la {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}:\p"
+	.string "Has visto {SHADOW DYNAMIC_COLOR4}{STR_VAR_1} POKéMON{SHADOW LIGHT_GRAY}\n"
+	.string "Has atrapado {SHADOW DYNAMIC_COLOR4}{STR_VAR_2} POKéMON{SHADOW LIGHT_GRAY}.$"
 
 PokedexRating_Text_LessThan10::
-	.string "You still have lots to do.\p"
-	.string "Go into every patch of grass you\n"
-	.string "see and look for POKéMON!$"
+	.string "{COLOR DARK_GRAY}Aún te queda mucho por descubrir.\p"
+	.string "¡Explora bien las zonas con hierba\n"
+	.string "alta para encontrar {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}!{FONT_NORMAL}$"
 
 PokedexRating_Text_LessThan20::
 	.string "It looks as if you're getting on\n"

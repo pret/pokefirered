@@ -138,7 +138,7 @@ const struct Tileset gTileset_Building =
     .palettes = gTilesetPalettes_Building,
     .metatiles = gMetatiles_Building,
     .metatileAttributes = gMetatileAttributes_Building,
-    .callback = NULL,
+    .callback = InitTilesetAnim_Building,
 };
 
 const struct Tileset gTileset_PewterGymInterior =

@@ -213,20 +213,18 @@ PalletTown_EventScript_OakTrigger::
 	playmoncry SPECIES_PIKACHU, 0
 	call_if_eq VAR_TEMP_1, 0, PalletTown_EventScript_AparicionPikachuIzq
 	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_AparicionPikachuDer
+	setobjectxy 4,14,2
 	fadescreen FADE_TO_WHITE
 	special StartOldManTutorialBattle
 	waitstate
 	lock
-	setobjectxy 4,14,2
 	playbgm MUS_OAK, 0
 	namebox Name_Oak
 	msgbox PalletTown_Text_EsoEstuvoCerca
 	closemessage
 	hidenamebox
-
 	applymovement LOCALID_PROF_OAK, PalletTown_Movement_SaltaArriba
 	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SaltaAbajo
-
 	waitmovement 0
 	namebox Name_Oak
 	msgbox PalletTown_Text_LosPokemonPueden

@@ -159,7 +159,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_GREEN_NORMAL",
       "x": 12,
-      "y": 13,
+      "y": 10,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -175,7 +175,7 @@
       "x": 12,
       "y": 12,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -255,7 +255,7 @@
       "elevation": 0,
       "var": "VAR_TEMP_0",
       "var_value": "0",
-      "script": "PalletTown_ProfessorOaksLab_EventScript_Pokedex1"
+      "script": "PalletTown_ProfessorOaksLab_EventScript_RecibirPokedex"
     }
   ],
   "bg_events": [

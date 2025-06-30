@@ -17,6 +17,56 @@ static void (*sSecondaryTilesetAnimCallback)(u16);
 static void _InitPrimaryTilesetAnimation(void);
 static void _InitSecondaryTilesetAnimation(void);
 
+// 
+static const u16 sTilesetAnims_Building_Maquina1_Frame0[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina1/0.4bpp");
+static const u16 sTilesetAnims_Building_Maquina1_Frame1[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina1/1.4bpp");
+static const u16 sTilesetAnims_Building_Maquina1_Frame2[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina1/2.4bpp");
+
+static const u16 *const sTilesetAnims_Building_Maquina1[] = {
+    sTilesetAnims_Building_Maquina1_Frame0,
+    sTilesetAnims_Building_Maquina1_Frame1,
+    sTilesetAnims_Building_Maquina1_Frame2
+};
+//
+static const u16 sTilesetAnims_Building_Maquina2_Frame0[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina2/0.4bpp");
+static const u16 sTilesetAnims_Building_Maquina2_Frame1[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina2/1.4bpp");
+static const u16 sTilesetAnims_Building_Maquina2_Frame2[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina2/2.4bpp");
+static const u16 sTilesetAnims_Building_Maquina2_Frame3[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina2/3.4bpp");
+static const u16 sTilesetAnims_Building_Maquina2_Frame4[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina2/4.4bpp");
+
+static const u16 *const sTilesetAnims_Building_Maquina2[] = {
+    sTilesetAnims_Building_Maquina2_Frame0,
+    sTilesetAnims_Building_Maquina2_Frame1,
+    sTilesetAnims_Building_Maquina2_Frame2,
+    sTilesetAnims_Building_Maquina2_Frame3,
+    sTilesetAnims_Building_Maquina2_Frame4,
+};
+static const u16 sTilesetAnims_Building_Maquina3_Frame0[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina3/0.4bpp");
+static const u16 sTilesetAnims_Building_Maquina3_Frame1[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina3/1.4bpp");
+static const u16 sTilesetAnims_Building_Maquina3_Frame2[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina3/2.4bpp");
+static const u16 sTilesetAnims_Building_Maquina3_Frame3[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina3/3.4bpp");
+
+static const u16 *const sTilesetAnims_Building_Maquina3[] = {
+    sTilesetAnims_Building_Maquina3_Frame0,
+    sTilesetAnims_Building_Maquina3_Frame1,
+    sTilesetAnims_Building_Maquina3_Frame2,
+    sTilesetAnims_Building_Maquina3_Frame3
+};
+static const u16 sTilesetAnims_Building_Maquina4_Frame0[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina4/0.4bpp");
+static const u16 sTilesetAnims_Building_Maquina4_Frame1[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina4/1.4bpp");
+static const u16 sTilesetAnims_Building_Maquina4_Frame2[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina4/2.4bpp");
+static const u16 sTilesetAnims_Building_Maquina4_Frame3[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina4/3.4bpp");
+static const u16 sTilesetAnims_Building_Maquina4_Frame4[] = INCBIN_U16("data/tilesets/primary/building/anim/maquina4/4.4bpp");
+
+static const u16 *const sTilesetAnims_Building_Maquina4[] = {
+    sTilesetAnims_Building_Maquina4_Frame0,
+    sTilesetAnims_Building_Maquina4_Frame1,
+    sTilesetAnims_Building_Maquina4_Frame2,
+    sTilesetAnims_Building_Maquina4_Frame3,
+    sTilesetAnims_Building_Maquina4_Frame4
+};
+// 
+
 // palette: general 00
 static const u16 sTilesetAnims_General_Flower_Frame0[] = INCBIN_U16("data/tilesets/primary/general/anim/flower/0.4bpp");
 static const u16 sTilesetAnims_General_Flower_Frame1[] = INCBIN_U16("data/tilesets/primary/general/anim/flower/1.4bpp");
@@ -30,6 +80,14 @@ static const u16 *const sTilesetAnims_General_Flower[] = {
     sTilesetAnims_General_Flower_Frame2,
     sTilesetAnims_General_Flower_Frame3,
     sTilesetAnims_General_Flower_Frame4
+};
+
+static const u16 sTilesetAnims_General_Pasto_Frame0[] = INCBIN_U16("data/tilesets/primary/general/anim/pasto/0.4bpp");
+static const u16 sTilesetAnims_General_Pasto_Frame1[] = INCBIN_U16("data/tilesets/primary/general/anim/pasto/1.4bpp");
+
+static const u16 *const sTilesetAnims_General_Pasto[] = {
+    sTilesetAnims_General_Pasto_Frame0,
+    sTilesetAnims_General_Pasto_Frame1
 };
 
 // palette: general 04
@@ -210,6 +268,11 @@ static void QueueAnimTiles_General_Flower(u16 timer)
     AppendTilesetAnimToBuffer(sTilesetAnims_General_Flower[timer % ARRAY_COUNT(sTilesetAnims_General_Flower)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(508)), 4 * TILE_SIZE_4BPP);
 }
 
+static void QueueAnimTiles_General_Pasto(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_General_Pasto[timer % ARRAY_COUNT(sTilesetAnims_General_Pasto)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(617)), 2 * TILE_SIZE_4BPP);
+}
+
 static void QueueAnimTiles_General_Water_Current_LandWatersEdge(u16 timer)
 {
     AppendTilesetAnimToBuffer(sTilesetAnims_General_Water_Current_LandWatersEdge[timer % ARRAY_COUNT(sTilesetAnims_General_Water_Current_LandWatersEdge)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(416)), 48 * TILE_SIZE_4BPP);
@@ -220,6 +283,25 @@ static void QueueAnimTiles_General_SandWatersEdge(u16 timer)
     AppendTilesetAnimToBuffer(sTilesetAnims_General_SandWatersEdge[timer % ARRAY_COUNT(sTilesetAnims_General_SandWatersEdge)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(464)), 18 * TILE_SIZE_4BPP);
 }
 
+//
+static void QueueAnimTiles_Building_Maquina1(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_Building_Maquina1[timer % ARRAY_COUNT(sTilesetAnims_Building_Maquina1)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(120)), 4 * TILE_SIZE_4BPP);
+}
+static void QueueAnimTiles_Building_Maquina2(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_Building_Maquina2[timer % ARRAY_COUNT(sTilesetAnims_Building_Maquina1)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(74)), 4 * TILE_SIZE_4BPP);
+}
+static void QueueAnimTiles_Building_Maquina3(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_Building_Maquina3[timer % ARRAY_COUNT(sTilesetAnims_Building_Maquina1)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(183)), 4 * TILE_SIZE_4BPP);
+}
+static void QueueAnimTiles_Building_Maquina4(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_Building_Maquina4[timer % ARRAY_COUNT(sTilesetAnims_Building_Maquina1)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(84)), TILE_SIZE_4BPP);
+}
+//
+
 static void TilesetAnim_General(u16 timer)
 {
     if (timer % 8 == 0)
@@ -228,7 +310,29 @@ static void TilesetAnim_General(u16 timer)
         QueueAnimTiles_General_Water_Current_LandWatersEdge(timer / 16);
     if (timer % 16 == 2)
         QueueAnimTiles_General_Flower(timer / 16);
+    if (timer % 16 == 2)
+        QueueAnimTiles_General_Pasto(timer / 16);
 }
+
+static void TilesetAnim_Building(u16 timer)
+{
+    if (timer % 16 == 2)
+        QueueAnimTiles_Building_Maquina1(timer / 16);
+    if (timer % 16 == 1)
+        QueueAnimTiles_Building_Maquina2(timer / 16);
+    if (timer % 16 == 1)
+        QueueAnimTiles_Building_Maquina3(timer / 16);
+    if (timer % 8 == 0)
+        QueueAnimTiles_Building_Maquina4(timer / 8);
+}
+
+void InitTilesetAnim_Building(void)
+{
+    sPrimaryTilesetAnimCounter = 0;
+    sPrimaryTilesetAnimCounterMax = 640;
+    sPrimaryTilesetAnimCallback = TilesetAnim_Building;
+}
+
 
 void InitTilesetAnim_General(void)
 {

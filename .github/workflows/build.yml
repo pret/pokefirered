@@ -40,6 +40,12 @@ jobs:
           GAME_VERSION: LEAFGREEN
         run: make -j${nproc} -O all
 
+      - name: LTO
+        run: |
+          make tidy
+          make -j${nproc} LTO=1
+        # make tidy to purge previous build
+
       - name: Test
         env:
           TEST: 1

@@ -98,8 +98,7 @@ struct GFRomHeader
 
 // This seems to need to be in the text section for some reason.
 // To avoid a changed section attributes warning it's put in a special .text.consts section.
-__attribute__((section(".text.consts")))
-USED static const struct GFRomHeader sGFRomHeader = {
+__attribute__((section(".text.header_gf"))) USED const struct GFRomHeader sGFRomHeader = {
     .version = GAME_VERSION,
     .language = GAME_LANGUAGE,
 #ifdef FIRERED

@@ -516,7 +516,7 @@ $(ELF): $(LD_SCRIPT) $(OBJS) libagbsyscall
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 else
 # Output .map file, memory usage readout and gc sections to clean-up unused data
-LDFLAGS = -Map ../../$(MAP) --print-memory-usage
+LDFLAGS = -Map ../../$(MAP) --print-memory-usage --gc-sections
 $(ELF): $(LD_SCRIPT) $(OBJS) libagbsyscall
 	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$<  -o ../../$@ $(OBJS_REL) $(LIB) | cat
 	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< -o ../../$@ <objs> <libs> | cat"

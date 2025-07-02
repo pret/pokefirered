@@ -246,7 +246,7 @@
       "elevation": 0,
       "var": "VAR_MAP_SCENE_PEWTER_CITY",
       "var_value": "1",
-      "script": "PalletTown_EventScript_RunningShoes_Mom"
+      "script": "PalletTown_RunningShoes_Trigger"
     }
   ],
   "bg_events": [

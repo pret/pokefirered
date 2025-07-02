@@ -596,8 +596,9 @@ PalletTown_RunningShoes_Trigger::
 	faceplayer
 	setvar VAR_TEMP_1, 0
 	playse SE_PIN
-	applymovement 11, PalletTown_Movement_MamaTrigger
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerTrigger
+	applymovement 11, PalletTown_Movement_MiraDerechaExclamacion
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_MiraIzquierda
 	waitmovement 0
 
 	checkplayergender
@@ -674,8 +675,6 @@ PalletTown_RunningShoes_Male::
 @ZAPATILLAS DEPORTIVAS - MAMA
 PalletTown_EventScript_RunningShoes_Mom::
 	playse SE_PIN
-	applymovement 11, Common_Movement_ExclamationMark
-	waitmovement 0
 
 	checkplayergender
 	call_if_eq VAR_RESULT, FEMALE, PalletTown_EventScript_RunningShoes_Mom_Female
@@ -717,6 +716,7 @@ PalletTown_EventScript_RunningShoes_Mom_Female::
 	namebox Name_Mama
 	msgbox PalletTown_Text_RunningShoes_NoOlvides_Female
 	hidenamebox
+	closemessage
 	return
 
 PalletTown_EventScript_RunningShoes_Mom_Male::
@@ -741,8 +741,18 @@ PalletTown_EventScript_RunningShoes_Mom_Male::
 	namebox Name_Mama
 	msgbox PalletTown_Text_RunningShoes_NoOlvides_Male
 	hidenamebox
+	closemessage
 	return
 
+PalletTown_Movement_MiraDerechaExclamacion::
+	emote_exclamation_mark
+	face_right
+	step_end
+
+PalletTown_Movement_MiraIzquierda::
+	walk_in_place_up
+	face_left
+	step_end
 
 PalletTown_Movement_MamaTrigger::
 	emote_exclamation_mark

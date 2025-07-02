@@ -304,7 +304,7 @@ static void QueueAnimTiles_Building_Maquina4(u16 timer)
 
 static void TilesetAnim_General(u16 timer)
 {
-    if (timer % 8 == 0)
+    if (timer % 16 == 0)
         QueueAnimTiles_General_SandWatersEdge(timer / 8);
     if (timer % 16 == 1)
         QueueAnimTiles_General_Water_Current_LandWatersEdge(timer / 16);

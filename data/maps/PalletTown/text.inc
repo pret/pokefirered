@@ -39,15 +39,15 @@ PalletTown_Text_LetreroPueblo::
     .string "{SHADOW DYNAMIC_COLOR4}PUEBLO PALETA\n"
     .string "{SHADOW LIGHT_GRAY}¡Un lienzo en blanco de tu viaje!$"
 
-@ZAPATILLAS DEPORTIVAS
+@EVENTO ZAPATILLAS DEPORTIVAS
 PalletTown_Text_RunningShoes_EsperaUnMomento_Female::
-    .string "¡Espera un momento, querida!\p"
+    .string "{SHADOW LIGHT_GRAY}¡Espera un momento, querida!\p"
     .string "Sabía que estarías ansiosa por\n"
     .string "comenzar tu viaje, pero no puedes\l"
     .string "irte sin esto...$"
 
 PalletTown_Text_RunningShoes_EsperaUnMomento_Male::
-    .string "¡Espera un momento, querido!\p"
+    .string "{SHADOW LIGHT_GRAY}¡Espera un momento, querido!\p"
     .string "Sabía que estarías ansioso por\n"
     .string "comenzar tu viaje, pero no puedes\l"
     .string "irte sin esto...$"

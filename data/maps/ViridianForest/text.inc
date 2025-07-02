@@ -117,7 +117,7 @@ ViridianForest_Text_LeavingViridianForest::
     .string "{UP_ARROW_2}{SHADOW LIGHT_GRAY} RUTA 2 NORTE$"
 
 ViridianForest_Text_Batalla1_Rojo::
-    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} ¡Mira donde te encuentro!\p"
+    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} ¡de te encuentro!\p"
     .string "¿Cómo va la búsqueda de nuevos\n"
     .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}?$"
 

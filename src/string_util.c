@@ -36,6 +36,17 @@ extern u8 gExpandedPlaceholder_Kyogre[];
 extern u8 gExpandedPlaceholder_Groudon[];
 extern u8 gExpandedPlaceholder_Red[];
 extern u8 gExpandedPlaceholder_Green[];
+extern u8 gText_ExpandedPlaceholder_O[];
+extern u8 gText_ExpandedPlaceholder_A[];
+extern u8 gText_ExpandedPlaceholder_E[];
+extern u8 gText_ExpandedPlaceholder_EL[];
+extern u8 gText_ExpandedPlaceholder_LA[];
+extern u8 gText_ExpandedPlaceholder_El[];
+extern u8 gText_ExpandedPlaceholder_La[];
+extern u8 gText_ExpandedPlaceholder_ITA[];
+extern u8 gText_ExpandedPlaceholder_ITO[];
+extern u8 gText_ExpandedPlaceholder_COLOR_MALE[];
+extern u8 gText_ExpandedPlaceholder_COLOR_FEMALE[];
 
 u8 *StringCopy_Nickname(u8 *dest, const u8 *src)
 {
@@ -387,6 +398,79 @@ static u8 *ExpandPlaceholder_KunChan(void)
         return gExpandedPlaceholder_Chan;
 }
 
+//Género
+static u8 *ExpandPlaceholder_OA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_O;
+    else
+        return gText_ExpandedPlaceholder_A;
+}
+
+static u8 *ExpandPlaceholder_A(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gExpandedPlaceholder_Kun;
+    else
+        return gText_ExpandedPlaceholder_A;
+}
+
+static u8 *ExpandPlaceholder_ElLa(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_El;
+    else
+        return gText_ExpandedPlaceholder_La;
+}
+
+static u8 *ExpandPlaceholder_ELLA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_EL;
+    else
+        return gText_ExpandedPlaceholder_LA;
+}
+
+static u8 *ExpandPlaceholder_ITA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gExpandedPlaceholder_Kun;
+    else
+        return gText_ExpandedPlaceholder_ITA;
+}
+
+static u8 *ExpandPlaceholder_ITOITA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_ITO;
+    else
+        return gText_ExpandedPlaceholder_ITA;
+}
+
+static u8 *ExpandPlaceholder_EA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_E;
+    else
+        return gText_ExpandedPlaceholder_A;
+}
+
+static u8 *ExpandPlaceholder_COLOR_PLAYER(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_COLOR_MALE;
+    else
+        return gText_ExpandedPlaceholder_COLOR_FEMALE;
+}
+
+static u8 *ExpandPlaceholder_COLOR_RIVAL(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_COLOR_FEMALE;
+    else
+        return gText_ExpandedPlaceholder_COLOR_MALE;
+}
+
 static u8 *ExpandPlaceholder_RivalName(void)
 {
     if (gSaveBlock1Ptr->rivalName[0] == EOS)
@@ -485,6 +569,16 @@ u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_ARCHIE]       = ExpandPlaceholder_Archie,
         [PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
         [PLACEHOLDER_ID_KYOGRE]       = ExpandPlaceholder_Kyogre,
+         // Género
+        [PLACEHOLDER_ID_OA] = ExpandPlaceholder_OA,
+        [PLACEHOLDER_ID_A] = ExpandPlaceholder_A,
+        [PLACEHOLDER_ID_ELLA] = ExpandPlaceholder_ELLA,
+        [PLACEHOLDER_ID_ElLa] = ExpandPlaceholder_ElLa,
+        [PLACEHOLDER_ID_ITA] = ExpandPlaceholder_ITA,
+        [PLACEHOLDER_ID_ITOITA] = ExpandPlaceholder_ITOITA,
+        [PLACEHOLDER_ID_EA] = ExpandPlaceholder_EA,
+        [PLACEHOLDER_ID_COLOR_PLAYER] = ExpandPlaceholder_COLOR_PLAYER,
+        [PLACEHOLDER_ID_COLOR_RIVAL] = ExpandPlaceholder_COLOR_RIVAL,
     };
 
     if (id >= NELEMS(funcs))

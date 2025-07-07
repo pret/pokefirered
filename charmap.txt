@@ -346,6 +346,19 @@ GOOD_LEADER    = FD 0B @ "ARCHIE"  / "MAXIE"
 EVIL_LEGENDARY = FD 0C @ "GROUDON" / "KYOGRE"
 GOOD_LEGENDARY = FD 0D @ "KYOGRE"  / "GROUDON"
 
+@ Semantica del género gramatical
+OA            = FD 0E
+A             = FD 0F
+ELLA          = FD 10
+ElLa          = FD 11
+ITA           = FD 12
+ITOITA        = FD 13
+EA            = FD 14
+
+@ Colores según género
+COLOR_PLAYER  = FD 15
+COLOR_RIVAL   = FD 16
+
 @ battle macros
 
 UNKNOWN_STR = FD 00

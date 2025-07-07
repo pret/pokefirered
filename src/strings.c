@@ -34,6 +34,19 @@ const u8 gExpandedPlaceholder_Kyogre[] = _("KYOGRE");
 const u8 gExpandedPlaceholder_Groudon[] = _("GROUDON");
 const u8 gExpandedPlaceholder_Red[] = _("ROJO");
 const u8 gExpandedPlaceholder_Green[] = _("VERDE");
+// Género
+const u8 gText_ExpandedPlaceholder_O[] = _("o");
+const u8 gText_ExpandedPlaceholder_A[] = _("a");
+const u8 gText_ExpandedPlaceholder_E[] = _("e");
+const u8 gText_ExpandedPlaceholder_EL[] = _("el");
+const u8 gText_ExpandedPlaceholder_LA[] = _("la");
+const u8 gText_ExpandedPlaceholder_El[] = _("El");
+const u8 gText_ExpandedPlaceholder_La[] = _("La");
+const u8 gText_ExpandedPlaceholder_ITA[] = _("ita");
+const u8 gText_ExpandedPlaceholder_ITO[] = _("ito");
+const u8 gText_ExpandedPlaceholder_COLOR_MALE[] = _("{COLOR BLUE}");
+const u8 gText_ExpandedPlaceholder_COLOR_FEMALE[] = _("{COLOR RED}");
+
 const u8 gText_EggNickname[] = _("HUEVO");
 const u8 gText_MenuPokemon[] = _("POKéMON");
 const u8 gText_NewGame[] = _("NUEVA PARTIDA");
@@ -1392,3 +1405,5 @@ const u8 gText_DexNav_Invalid[] = _("NO SE PUEDE BUSCAR");
 const u8 gText_DexNav_NoDataForSlot[] = _("NO HAY INFORMACIÓN");
 const u8 gText_DexNav_Locked[] = _("Pokémon searchable via {R_BUTTON}!");
 const u8 gText_DexNav_TooDark[] = _("It's too dark to search for a Pokémon!");
+
+

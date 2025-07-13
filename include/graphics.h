@@ -3936,8 +3936,8 @@ extern const u32 gBlankGfxCompressed[];
 extern const u32 gInterfaceGfx_HPNumbers[];
 extern const u32 gGhostFrontPic[];
 extern const u32 gGhostPalette[];
-extern const u32 gSubstituteDollGfx[];
-extern const u32 gSubstituteDollTilemap[];
+extern const u32 gSubstituteDollFrontGfx[];
+extern const u32 gSubstituteDollBackGfx[];
 extern const u32 gSubstituteDollPal[];
 
 // ice

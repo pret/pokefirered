@@ -137,5 +137,13 @@ bool8 MetatileBehavior_IsSecretBaseJumpMat(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSecretBaseSpinMat(u8 metatileBehavior);
 bool8 MetatileBehavior_IsLandWildEncounter(u8 metatileBehavior);
 bool8 MetatileBehavior_IsWaterWildEncounter(u8 metatileBehavior);
+bool8 MetatileBehavior_IsSidewaysStairsRightSide(u8 metatileBehavior);
+bool8 MetatileBehavior_IsSidewaysStairsLeftSide(u8 metatileBehavior);
+bool8 MetatileBehavior_IsSidewaysStairsRightSideTop(u8 metatileBehavior);
+bool8 MetatileBehavior_IsSidewaysStairsLeftSideTop(u8 metatileBehavior);
+bool8 MetatileBehavior_IsSidewaysStairsRightSideBottom(u8 metatileBehavior);
+bool8 MetatileBehavior_IsSidewaysStairsLeftSideBottom(u8 metatileBehavior);
+bool8 MetatileBehavior_IsSidewaysStairsRightSideAny(u8 metatileBehavior);
+bool8 MetatileBehavior_IsSidewaysStairsLeftSideAny(u8 metatileBehavior);
 
 #endif // GUARD_METATILE_BEHAVIOR

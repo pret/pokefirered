@@ -16,6 +16,7 @@
   "connections": 0,
   "object_events": [
     {
+      "local_id": "LOCALID_DAISY",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_DAISY",
       "x": 5,
@@ -30,6 +31,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TOWN_MAP",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_TOWN_MAP",
       "x": 6,

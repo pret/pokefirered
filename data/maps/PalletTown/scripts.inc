@@ -1,6 +1,3 @@
-.equ LOCALID_SIGN_LADY, 1
-.equ LOCALID_PROF_OAK,  3
-
 .equ SIGN_LADY_READY, VAR_TEMP_2
 
 PalletTown_MapScripts::
@@ -27,13 +24,13 @@ PalletTown_EventScript_SetSignLadyDone::
 
 PalletTown_EventScript_SetSignLadyPos::
 	goto_if_set FLAG_PALLET_LADY_NOT_BLOCKING_SIGN, PalletTown_EventScript_MoveSignLadyToRouteEntrance
-	setobjectxyperm LOCALID_SIGN_LADY, 7, 13
-	setobjectmovementtype LOCALID_SIGN_LADY, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_PALLET_SIGN_LADY, 7, 13
+	setobjectmovementtype LOCALID_PALLET_SIGN_LADY, MOVEMENT_TYPE_FACE_UP
 	return
 
 PalletTown_EventScript_MoveSignLadyToRouteEntrance::
-	setobjectxyperm LOCALID_SIGN_LADY, 12, 2
-	setobjectmovementtype LOCALID_SIGN_LADY, MOVEMENT_TYPE_FACE_DOWN
+	setobjectxyperm LOCALID_PALLET_SIGN_LADY, 12, 2
+	setobjectmovementtype LOCALID_PALLET_SIGN_LADY, MOVEMENT_TYPE_FACE_DOWN
 	setvar SIGN_LADY_READY, TRUE
 	return
 
@@ -45,10 +42,10 @@ PalletTown_OnFrame::
 PalletTown_EventScript_OakRatingScene::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE
-	setobjectxyperm LOCALID_PROF_OAK, 14, 14
-	setobjectmovementtype LOCALID_PROF_OAK, MOVEMENT_TYPE_FACE_LEFT
-	addobject LOCALID_PROF_OAK
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakWalkToPlayersDoor
+	setobjectxyperm LOCALID_PALLET_PROF_OAK, 14, 14
+	setobjectmovementtype LOCALID_PALLET_PROF_OAK, MOVEMENT_TYPE_FACE_LEFT
+	addobject LOCALID_PALLET_PROF_OAK
+	applymovement LOCALID_PALLET_PROF_OAK, PalletTown_Movement_OakWalkToPlayersDoor
 	waitmovement 0
 	goto_if_unset FLAG_WORLD_MAP_ONE_ISLAND, PalletTown_EventScript_NotBeenToOneIslandYet
 	msgbox PalletTown_Text_OakLetMeSeePokedex
@@ -62,13 +59,13 @@ PalletTown_EventScript_OakRatingScene::
 	msgbox PalletTown_Text_CaughtXImpressiveFollowMe
 	closemessage
 	playbgm MUS_FOLLOW_ME, 0
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerWalkToLabFromHouse
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakWalkToLabFromHouse
+	applymovement LOCALID_PLAYER, PalletTown_Movement_PlayerWalkToLabFromHouse
+	applymovement LOCALID_PALLET_PROF_OAK, PalletTown_Movement_OakWalkToLabFromHouse
 	waitmovement 0
 	opendoor 16, 13
 	waitdooranim
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEntraLab
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterLab
+	applymovement LOCALID_PALLET_PROF_OAK, PalletTown_Movement_OakEntraLab
+	applymovement LOCALID_PLAYER, PalletTown_Movement_PlayerEnterLab
 	waitmovement 0
 	closedoor 16, 13
 	waitdooranim
@@ -82,9 +79,9 @@ PalletTown_EventScript_OakRatingScene::
 
 PalletTown_EventScript_EndOakRatingScene::
 	closemessage
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakExit
+	applymovement LOCALID_PALLET_PROF_OAK, PalletTown_Movement_OakExit
 	waitmovement 0
-	removeobject LOCALID_PROF_OAK
+	removeobject LOCALID_PALLET_PROF_OAK
 	setvar VAR_MAP_SCENE_PALLET_TOWN_OAK, 3
 	releaseall
 	end
@@ -195,13 +192,13 @@ PalletTown_EventScript_OakTrigger::
 	delay 85
 	closemessage
 	hidenamebox
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+	applymovement LOCALID_PLAYER, Common_Movement_ExclamationMark
 	waitmovement 0
 	delay 30
-	addobject LOCALID_PROF_OAK
+	addobject LOCALID_PALLET_PROF_OAK
 	call_if_eq VAR_TEMP_1, 0, PalletTown_EventScript_OakEnterLeft
 	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_OakEnterRight
 	delay 30
@@ -223,8 +220,8 @@ PalletTown_EventScript_OakTrigger::
 	msgbox PalletTown_Text_EsoEstuvoCerca
 	closemessage
 	hidenamebox
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_SaltaArriba
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SaltaAbajo
+	applymovement LOCALID_PALLET_PROF_OAK, PalletTown_Movement_SaltaArriba
+	applymovement LOCALID_PLAYER, PalletTown_Movement_SaltaAbajo
 	waitmovement 0
 	namebox Name_Oak
 	msgbox PalletTown_Text_LosPokemonPueden
@@ -237,9 +234,9 @@ PalletTown_EventScript_OakTrigger::
 	opendoor 21, 12
 	waitdooranim
 
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEntraLab
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_PlayerEnterLab
-	
+	applymovement LOCALID_PALLET_PROF_OAK, PalletTown_Movement_OakEntraLab
+	applymovement LOCALID_PLAYER, PalletTown_Movement_PlayerEnterLab
+
 	waitmovement 0
 	closedoor 21, 12
 	waitdooranim
@@ -285,8 +282,8 @@ Movement_Aparicion_PikachuDer::
 
 PalletTown_EventScript_AparicionPikachuIzq::
 	applymovement 3,Movement_ExclamacionIzq
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_ExclamacionIzq
-	waitmovement OBJ_EVENT_ID_PLAYER
+	applymovement LOCALID_PLAYER, Movement_ExclamacionIzq
+	waitmovement LOCALID_PLAYER
 	waitmovement 3
 	setobjectxy 4,13,1
 	waitmoncry
@@ -297,8 +294,8 @@ PalletTown_EventScript_AparicionPikachuIzq::
 
 PalletTown_EventScript_AparicionPikachuDer::
 	applymovement 3,Movement_ExclamacionDer
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_ExclamacionDer
-	waitmovement OBJ_EVENT_ID_PLAYER
+	applymovement LOCALID_PLAYER, Movement_ExclamacionDer
+	waitmovement LOCALID_PLAYER
 	waitmovement 3
 	applymovement 4, Movement_Aparicion_PikachuDer
 	waitmovement 4
@@ -308,24 +305,24 @@ PalletTown_EventScript_AparicionPikachuDer::
 	return
 
 PalletTown_EventScript_OakEnterLeft::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterLeft
+	applymovement LOCALID_PALLET_PROF_OAK, PalletTown_Movement_OakEnterLeft
 	waitmovement 0
 	return
 
 PalletTown_EventScript_OakEnterRight::
-	applymovement LOCALID_PROF_OAK, PalletTown_Movement_OakEnterRight
+	applymovement LOCALID_PALLET_PROF_OAK, PalletTown_Movement_OakEnterRight
 	waitmovement 0
 	return
 
 PuebloPaleta_EventScript_OakRegresoLabIzq::
-	applymovement LOCALID_PROF_OAK, PuebloPaleta_Movement_RegresoLabOakIzq
-	applymovement OBJ_EVENT_ID_PLAYER, PuebloPaleta_EventScript_PlayerRegresoLabIzq
+	applymovement LOCALID_PALLET_PROF_OAK, PuebloPaleta_Movement_RegresoLabOakIzq
+	applymovement LOCALID_PLAYER, PuebloPaleta_EventScript_PlayerRegresoLabIzq
 	waitmovement 0
 	return
 
 PalletTown_EventScript_OakRegresoLabDer::
-	applymovement LOCALID_PROF_OAK, PuebloPaleta_Movement_RegresoLabOakDer
-	applymovement OBJ_EVENT_ID_PLAYER, PuebloPaleta_EventScript_PlayerRegresoLabDer
+	applymovement LOCALID_PALLET_PROF_OAK, PuebloPaleta_Movement_RegresoLabOakDer
+	applymovement LOCALID_PLAYER, PuebloPaleta_EventScript_PlayerRegresoLabDer
 	waitmovement 0
 	return
 
@@ -470,48 +467,48 @@ PalletTown_EventScript_SignLady::
 	goto_if_eq SIGN_LADY_READY, TRUE, PalletTown_EventScript_SignLadyStartShowSign
 	goto_if_set FLAG_TEMP_2, PalletTown_EventScript_SignLadyGoReadSign
 	msgbox PalletTown_Text_HmmIsThatRight
-	applymovement LOCALID_SIGN_LADY, Common_Movement_FacePlayer
+	applymovement LOCALID_PALLET_SIGN_LADY, Common_Movement_FacePlayer
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_SIGN_LADY, Common_Movement_ExclamationMark
+	applymovement LOCALID_PALLET_SIGN_LADY, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_SIGN_LADY, Common_Movement_Delay48
+	applymovement LOCALID_PALLET_SIGN_LADY, Common_Movement_Delay48
 	waitmovement 0
 	msgbox PalletTown_Text_OhLookLook
 	closemessage
 	call_if_eq VAR_FACING, DIR_EAST, PalletTown_EventScript_SignLadyMoveOutOfWayRight
 	call_if_ne VAR_FACING, DIR_EAST, PalletTown_EventScript_SignLadyMoveOutOfWayLeft
-	copyobjectxytoperm LOCALID_SIGN_LADY
+	copyobjectxytoperm LOCALID_PALLET_SIGN_LADY
 	setflag FLAG_TEMP_2
 	release
 	end
 
 PalletTown_EventScript_SignLadyMoveOutOfWayRight::
-	applymovement LOCALID_SIGN_LADY, PalletTown_Movement_SignLadyMoveOutOfWayRight
+	applymovement LOCALID_PALLET_SIGN_LADY, PalletTown_Movement_SignLadyMoveOutOfWayRight
 	waitmovement 0
 	return
 
 PalletTown_EventScript_SignLadyMoveOutOfWayLeft::
-	applymovement LOCALID_SIGN_LADY, PalletTown_Movement_SignLadyMoveOutOfWayLeft
+	applymovement LOCALID_PALLET_SIGN_LADY, PalletTown_Movement_SignLadyMoveOutOfWayLeft
 	waitmovement 0
 	return
 
 PalletTown_EventScript_SignLadyDone::
-	applymovement LOCALID_SIGN_LADY, Common_Movement_FacePlayer
+	applymovement LOCALID_PALLET_SIGN_LADY, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox PalletTown_Text_YoTambienEntreno
 	release
 	end
 
 PalletTown_EventScript_SignLadyGoReadSign::
-	applymovement LOCALID_SIGN_LADY, Common_Movement_FacePlayer
+	applymovement LOCALID_PALLET_SIGN_LADY, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox PalletTown_Text_ReadItReadIt
 	release
 	end
 
 PalletTown_EventScript_SignLadyJustShowedSign::
-	applymovement LOCALID_SIGN_LADY, Common_Movement_FacePlayer
+	applymovement LOCALID_PALLET_SIGN_LADY, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox PalletTown_Text_SignsAreUsefulArentThey
 	release
@@ -560,8 +557,8 @@ PalletTown_EventScript_TrainerTips::
 
 PalletTown_EventScript_SignLadyTrigger::
 	lockall
-	applymovement LOCALID_SIGN_LADY, Common_Movement_WalkInPlaceFasterRight
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_PALLET_SIGN_LADY, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	call PalletTown_EventScript_SignLadyShowSign
 	releaseall
@@ -584,7 +581,7 @@ PalletTown_EventScript_SignLadyShowSign::
 	return
 
 PalletTown_EventScript_SignLadyStartShowSign::
-	applymovement LOCALID_SIGN_LADY, Common_Movement_FacePlayer
+	applymovement LOCALID_PALLET_SIGN_LADY, Common_Movement_FacePlayer
 	waitmovement 0
 	call PalletTown_EventScript_SignLadyShowSign
 	release
@@ -598,7 +595,7 @@ PalletTown_RunningShoes_Trigger::
 	playse SE_PIN
 	applymovement 11, PalletTown_Movement_MiraDerechaExclamacion
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_MiraIzquierda
+	applymovement LOCALID_PLAYER, PalletTown_Movement_MiraIzquierda
 	waitmovement 0
 
 	checkplayergender

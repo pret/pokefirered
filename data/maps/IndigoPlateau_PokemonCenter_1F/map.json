@@ -30,6 +30,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_LEAGUE_NURSE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 13,
@@ -58,6 +59,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_LEAGUE_DOOR_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
       "x": 5,

@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_RESORT_GORGEOUS_HOUSE_SELPHY",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 4,
@@ -30,6 +31,7 @@
       "flag": "FLAG_HIDE_RESORT_GORGEOUS_INSIDE_SELPHY"
     },
     {
+      "local_id": "LOCALID_RESORT_GORGEOUS_HOUSE_BUTLER",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
       "x": 6,

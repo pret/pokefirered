@@ -53,7 +53,7 @@ MtMoon_1F_EventScript_Robby::
 MtMoon_1F_EventScript_SilvioIzq::
 	setflag FLAG_HIDE_SILVIO
 	setobjectxy 17,30,15
-	applymovement OBJ_EVENT_ID_PLAYER, MtMoon_1F_Movement_PlayerCamina
+	applymovement LOCALID_PLAYER, MtMoon_1F_Movement_PlayerCamina
 	applymovement 17 MtMoon_1F_Movement_SilvioAparece
 	waitmovement 0
 	namebox Name_Desconociodo
@@ -65,7 +65,7 @@ MtMoon_1F_EventScript_SilvioIzq::
 	checkplayergender
 	call_if_eq VAR_RESULT, FEMALE, MtMoon_1F_EventScript_Silvio_EresEntrenadora
 	call_if_eq VAR_RESULT, MALE, MtMoon_1F_EventScript_Silvio_EresEntrenador
-	applymovement OBJ_EVENT_ID_PLAYER, MtMoon_1F_Movement_PlayerEsperaPaso
+	applymovement LOCALID_PLAYER, MtMoon_1F_Movement_PlayerEsperaPaso
 	waitmovement 0
 	setobjectxy 18,31,16
 	applymovement 18 MtMoon_1F_Movement_SilvioCamina
@@ -105,7 +105,7 @@ MtMoon_1F_EventScript_SilvioIzq::
 MtMoon_1F_EventScript_SilvioDer::
 	setflag FLAG_HIDE_SILVIO
 	setobjectxy 17,30,15
-	applymovement OBJ_EVENT_ID_PLAYER, MtMoon_1F_Movement_PlayerCamina
+	applymovement LOCALID_PLAYER, MtMoon_1F_Movement_PlayerCamina
 	applymovement 17 MtMoon_1F_Movement_SilvioAparece
 	waitmovement 0
 	namebox Name_Desconociodo
@@ -117,7 +117,7 @@ MtMoon_1F_EventScript_SilvioDer::
 	checkplayergender
 	call_if_eq VAR_RESULT, FEMALE, MtMoon_1F_EventScript_Silvio_EresEntrenadora
 	call_if_eq VAR_RESULT, MALE, MtMoon_1F_EventScript_Silvio_EresEntrenador
-	applymovement OBJ_EVENT_ID_PLAYER, MtMoon_1F_Movement_PlayerEspera
+	applymovement LOCALID_PLAYER, MtMoon_1F_Movement_PlayerEspera
 	waitmovement 0
 	setobjectxy 18,31,16
 	applymovement 18 MtMoon_1F_Movement_SilvioCamina

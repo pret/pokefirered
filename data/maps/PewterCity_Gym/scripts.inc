@@ -98,11 +98,11 @@ PewterCity_Gym_EventScript_Gustavo::
 PewterCity_Gym_EventScript_BrockNoEsta::
 	applymovement 3, PewterCity_Museum_1F_Move_BrockNoEsta1
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Move_BrockNoEsta2
+	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Move_BrockNoEsta2
 	waitmovement 0
 	msgbox PewterCity_Gym_Text_BrockNoEsta
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, PewterCity_Museum_1F_Move_BrockNoEsta3
+	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Move_BrockNoEsta3
 	waitmovement 0
 	applymovement 3, Common_Movement_FaceOriginalDirection
 	waitmovement 0

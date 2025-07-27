@@ -107,6 +107,7 @@
       "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
+      "local_id": "LOCALID_SAFFRON_DOOR_GUARD_GRUNT",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 34,

@@ -11,7 +11,7 @@ EventScript_FixCrackedGround::
 EventScript_FallDownHole::
 	lockall
 	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_SetInvisible
+	applymovement LOCALID_PLAYER, Movement_SetInvisible
 	waitmovement 0
 	playse SE_FALL
 	delay 60
@@ -23,7 +23,7 @@ EventScript_FallDownHole::
 EventScript_DoFallWarp::
 	lockall
 	delay 20
-	applymovement OBJ_EVENT_ID_PLAYER, Movement_SetInvisible
+	applymovement LOCALID_PLAYER, Movement_SetInvisible
 	waitmovement 0
 	playse SE_FALL
 	delay 60

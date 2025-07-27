@@ -60,6 +60,7 @@
       "flag": "FLAG_TEMP_11"
     },
     {
+      "local_id": "LOCALID_VIRIDIAN_OLD_MAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
       "x": 35,
@@ -74,6 +75,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_TUTORIAL_MAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
       "x": 19,
@@ -88,6 +90,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_VIRIDIAN_WOMAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_WOMAN_3",
       "x": 21,
@@ -130,6 +133,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_VIRIDIAN_BORDER_TREE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 17,

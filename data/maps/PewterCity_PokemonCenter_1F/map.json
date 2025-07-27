@@ -44,6 +44,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PEWTER_NURSE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 5,

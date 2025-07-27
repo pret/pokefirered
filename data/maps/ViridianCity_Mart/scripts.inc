@@ -1,5 +1,3 @@
-.set LOCALID_CLERK, 1
-
 ViridianCity_Mart_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, ViridianCity_Mart_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, ViridianCity_Mart_OnFrame
@@ -38,7 +36,7 @@ ViridianCity_Mart_EventScript_Boy::
 	msgbox ViridianCity_Mart_Text_QueAlegriaEncontrarteAqui
 	hidenamebox
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
+	applymovement LOCALID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
 	waitmovement 0
 	delay 40
 	textcolor NPC_TEXT_COLOR_NEUTRAL
@@ -48,7 +46,7 @@ ViridianCity_Mart_EventScript_Boy::
 	closemessage
 	applymovement 4, ViridianCity_Mart_Movement_FacePlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SaltaAbajo
+	applymovement LOCALID_PLAYER, PalletTown_Movement_SaltaAbajo
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	namebox Name_Hoja
@@ -74,7 +72,7 @@ ViridianCity_Mart_EventScript_Girl::
 	msgbox ViridianCity_Mart_Text_QueAlegriaEncontrarteAqui
 	hidenamebox
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
+	applymovement LOCALID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
 	waitmovement 0
 	delay 40
 	textcolor NPC_TEXT_COLOR_NEUTRAL
@@ -84,7 +82,7 @@ ViridianCity_Mart_EventScript_Girl::
 	closemessage
 	applymovement 5, ViridianCity_Mart_Movement_FacePlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, PalletTown_Movement_SaltaAbajo
+	applymovement LOCALID_PLAYER, PalletTown_Movement_SaltaAbajo
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	namebox Name_Rojo

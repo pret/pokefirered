@@ -75,7 +75,7 @@ ViridianForest_EventScript_Batalla1::
 	playbgm MUS_ENCOUNTER_BOY, 0
 	setvar VAR_0x408D,2
 	setobjectxy 12,39,42
-	applymovement OBJ_EVENT_ID_PLAYER, ViridianForest_Batalla1
+	applymovement LOCALID_PLAYER, ViridianForest_Batalla1
 	applymovement 12, ViridianForest_Batalla2
 	waitmovement 0
 	msgbox ViridianForest_Text_Batalla1_Rojo
@@ -93,7 +93,7 @@ ViridianForest_EventScript_Batalla2::
 	playbgm MUS_ENCOUNTER_BOY, 0
 	setvar VAR_0x408D,2
 	setobjectxy 12,39,42
-	applymovement OBJ_EVENT_ID_PLAYER, ViridianForest_Batalla8
+	applymovement LOCALID_PLAYER, ViridianForest_Batalla8
 	applymovement 12, ViridianForest_Batalla7
 	waitmovement 0
 	msgbox ViridianForest_Text_Batalla1_Rojo

@@ -172,7 +172,7 @@ Route23_EventScript_MissingBoulderBadgeTrigger::
 	playse SE_BOO
 	msgbox Text_CantLetYouPass
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Route23_Movement_WalkDown
+	applymovement LOCALID_PLAYER, Route23_Movement_WalkDown
 	applymovement VAR_0x8009, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	releaseall
@@ -185,7 +185,7 @@ Route23_EventScript_MissingBadgeTrigger::
 	waitbuttonpress
 	closemessage
 	waitse
-	applymovement OBJ_EVENT_ID_PLAYER, Route23_Movement_WalkDown
+	applymovement LOCALID_PLAYER, Route23_Movement_WalkDown
 	applymovement VAR_0x8009, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	releaseall

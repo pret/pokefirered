@@ -97,6 +97,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_VERMILION_FERRY_SAILOR",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SAILOR",
       "x": 24,

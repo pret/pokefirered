@@ -551,36 +551,36 @@ void SetQuestLogEvent(u16 eventId, const u16 * data)
 static bool8 InQuestLogDisabledLocation(void)
 {
     // In Trainer Tower
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_1F)
-        && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_1F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_2F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_3F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_4F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_5F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_6F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_7F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_8F)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ROOF)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_LOBBY)
-         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR)))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TRAINER_TOWER_1F)
+        && (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_1F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_2F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_3F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_4F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_5F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_6F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_7F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_8F)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_ROOF)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_LOBBY)
+         || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_ELEVATOR)))
         return TRUE;
 
     // In pokemon trainer fan club
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB)
-      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB)
+      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB))
         return TRUE;
 
     // In E-Reader house
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SEVEN_ISLAND_HOUSE_ROOM1) &&
-        (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_HOUSE_ROOM1)
-      || gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_HOUSE_ROOM2)))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SEVEN_ISLAND_HOUSE_ROOM1) &&
+        (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SEVEN_ISLAND_HOUSE_ROOM1)
+      || gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SEVEN_ISLAND_HOUSE_ROOM2)))
         return TRUE;
 
     // In elevator
-    if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROCKET_HIDEOUT_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROCKET_HIDEOUT_ELEVATOR))
-     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SILPH_CO_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SILPH_CO_ELEVATOR))
-     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TRAINER_TOWER_ELEVATOR))
-     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(CELADON_CITY_DEPARTMENT_STORE_ELEVATOR)))
+    if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROCKET_HIDEOUT_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROCKET_HIDEOUT_ELEVATOR))
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SILPH_CO_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SILPH_CO_ELEVATOR))
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_TRAINER_TOWER_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_TRAINER_TOWER_ELEVATOR))
+     || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_ELEVATOR)))
         return TRUE;
 
     return FALSE;

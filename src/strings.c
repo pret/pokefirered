@@ -47,6 +47,10 @@ const u8 gText_ExpandedPlaceholder_ITO[] = _("ito");
 const u8 gText_ExpandedPlaceholder_COLOR_MALE[] = _("{COLOR BLUE}");
 const u8 gText_ExpandedPlaceholder_COLOR_FEMALE[] = _("{COLOR RED}");
 
+// RED_GREEN placeholders (opposite gender character)
+const u8 gText_ExpandedPlaceholder_RED_GREEN_HOJA[] = _("HOJA");
+const u8 gText_ExpandedPlaceholder_RED_GREEN_ROJO[] = _("ROJO");
+
 const u8 gText_EggNickname[] = _("HUEVO");
 const u8 gText_MenuPokemon[] = _("POKéMON");
 const u8 gText_NewGame[] = _("NUEVA PARTIDA");

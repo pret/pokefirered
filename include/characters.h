@@ -289,6 +289,16 @@
 #define PLACEHOLDER_ID_EA            0x14
 #define PLACEHOLDER_ID_COLOR_PLAYER  0x15
 #define PLACEHOLDER_ID_COLOR_RIVAL   0x16
+// RED_GREEN placeholders (opposite gender character)
+#define PLACEHOLDER_ID_RED_GREEN_OA   0x17
+#define PLACEHOLDER_ID_RED_GREEN_A    0x18
+#define PLACEHOLDER_ID_RED_GREEN_ELLA 0x19
+#define PLACEHOLDER_ID_RED_GREEN_ElLa 0x1A
+#define PLACEHOLDER_ID_RED_GREEN_ITA  0x1B
+#define PLACEHOLDER_ID_RED_GREEN_ITOITA 0x1C
+#define PLACEHOLDER_ID_RED_GREEN_EA   0x1D
+#define PLACEHOLDER_ID_RED_GREEN_NAME 0x1E
+
 
 // Note that while all dot combinations are represented in
 // the Braille font, they are not all meaningful characters.

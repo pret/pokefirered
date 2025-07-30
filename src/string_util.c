@@ -47,6 +47,9 @@ extern u8 gText_ExpandedPlaceholder_ITA[];
 extern u8 gText_ExpandedPlaceholder_ITO[];
 extern u8 gText_ExpandedPlaceholder_COLOR_MALE[];
 extern u8 gText_ExpandedPlaceholder_COLOR_FEMALE[];
+// RED_GREEN placeholders (opposite gender character)
+extern u8 gText_ExpandedPlaceholder_RED_GREEN_HOJA[];
+extern u8 gText_ExpandedPlaceholder_RED_GREEN_ROJO[];
 
 u8 *StringCopy_Nickname(u8 *dest, const u8 *src)
 {
@@ -471,6 +474,71 @@ static u8 *ExpandPlaceholder_COLOR_RIVAL(void)
         return gText_ExpandedPlaceholder_COLOR_MALE;
 }
 
+// RED_GREEN placeholders (opposite gender character)
+static u8 *ExpandPlaceholder_RED_GREEN_OA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_A;
+    else
+        return gText_ExpandedPlaceholder_O;
+}
+
+static u8 *ExpandPlaceholder_RED_GREEN_A(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_A;
+    else
+        return gExpandedPlaceholder_Kun;
+}
+
+static u8 *ExpandPlaceholder_RED_GREEN_ElLa(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_La;
+    else
+        return gText_ExpandedPlaceholder_El;
+}
+
+static u8 *ExpandPlaceholder_RED_GREEN_ELLA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_LA;
+    else
+        return gText_ExpandedPlaceholder_EL;
+}
+
+static u8 *ExpandPlaceholder_RED_GREEN_ITA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_ITA;
+    else
+        return gExpandedPlaceholder_Kun;
+}
+
+static u8 *ExpandPlaceholder_RED_GREEN_ITOITA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_ITA;
+    else
+        return gText_ExpandedPlaceholder_ITO;
+}
+
+static u8 *ExpandPlaceholder_RED_GREEN_EA(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_A;
+    else
+        return gText_ExpandedPlaceholder_E;
+}
+
+static u8 *ExpandPlaceholder_RED_GREEN_NAME(void)
+{
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gText_ExpandedPlaceholder_RED_GREEN_HOJA;
+    else
+        return gText_ExpandedPlaceholder_RED_GREEN_ROJO;
+}
+
 static u8 *ExpandPlaceholder_RivalName(void)
 {
     if (gSaveBlock1Ptr->rivalName[0] == EOS)
@@ -579,6 +647,15 @@ u8 *GetExpandedPlaceholder(u32 id)
         [PLACEHOLDER_ID_EA] = ExpandPlaceholder_EA,
         [PLACEHOLDER_ID_COLOR_PLAYER] = ExpandPlaceholder_COLOR_PLAYER,
         [PLACEHOLDER_ID_COLOR_RIVAL] = ExpandPlaceholder_COLOR_RIVAL,
+        // RED_GREEN placeholders (opposite gender character)
+        [PLACEHOLDER_ID_RED_GREEN_OA] = ExpandPlaceholder_RED_GREEN_OA,
+        [PLACEHOLDER_ID_RED_GREEN_A] = ExpandPlaceholder_RED_GREEN_A,
+        [PLACEHOLDER_ID_RED_GREEN_ELLA] = ExpandPlaceholder_RED_GREEN_ELLA,
+        [PLACEHOLDER_ID_RED_GREEN_ElLa] = ExpandPlaceholder_RED_GREEN_ElLa,
+        [PLACEHOLDER_ID_RED_GREEN_ITA] = ExpandPlaceholder_RED_GREEN_ITA,
+        [PLACEHOLDER_ID_RED_GREEN_ITOITA] = ExpandPlaceholder_RED_GREEN_ITOITA,
+        [PLACEHOLDER_ID_RED_GREEN_EA] = ExpandPlaceholder_RED_GREEN_EA,
+        [PLACEHOLDER_ID_RED_GREEN_NAME] = ExpandPlaceholder_RED_GREEN_NAME,
     };
 
     if (id >= NELEMS(funcs))

@@ -359,6 +359,17 @@ EA            = FD 14
 COLOR_PLAYER  = FD 15
 COLOR_RIVAL   = FD 16
 
+@ Placeholders para los personajes opuestos en Rojo/Verde
+RED_GREEN_OA     = FD 17
+RED_GREEN_A      = FD 18
+RED_GREEN_ELLA   = FD 19
+RED_GREEN_ElLa   = FD 1A
+RED_GREEN_ITA    = FD 1B
+RED_GREEN_ITOITA = FD 1C
+RED_GREEN_EA     = FD 1D
+RED_GREEN_NAME   = FD 1E
+
+
 @ battle macros
 
 UNKNOWN_STR = FD 00

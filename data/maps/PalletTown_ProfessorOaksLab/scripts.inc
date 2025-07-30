@@ -1695,7 +1695,7 @@ PalletTown_ProfessorOaksLab_EventScript_RecibirPokedexFemale::
 	applymovement LOCALID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiraIzquierdaPregunta
 	applymovement 12,PalletTown_ProfessorOaksLab_Movement_MiraDerechaPregunta
 	waitmovement 0
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox PalletTown_ProfessorOaksLab_Text_EstoyEmocionado
 	hidenamebox
 	closemessage
@@ -1884,7 +1884,7 @@ PalletTown_ProfessorOaksLab_EventScript_PokedexHoja::
 	applymovement LOCALID_PLAYER,PalletTown_ProfessorOaksLab_Movement_MiraIzquierdaPregunta
 	applymovement 11,PalletTown_ProfessorOaksLab_Movement_MiraDerechaPregunta
 	waitmovement 0
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox PalletTown_ProfessorOaksLab_Text_EstoyEmocionado
 	hidenamebox
 	closemessage

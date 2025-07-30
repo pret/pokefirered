@@ -95,10 +95,7 @@ MtMoon_1F_Text_Sign01::
     .string "{SHADOW DYNAMIC_COLOR4}MONTE LUNAR{SHADOW LIGHT_GRAY}\n"
     .string "La cuna de las estrellas$"
 
-Name_Desconociodo::
-    .string "???$"
-Name_Silvio::
-    .string "SILVIO$"
+
 
 MtMoon_1F_Text_Silvio_EsperaUnSegundo::
     .string "¡Eh! ¡Tú! Espera un segundo...$"

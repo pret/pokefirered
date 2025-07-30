@@ -1,8 +1,3 @@
-Name_Rival::
-    .string "{RIVAL}$"
-
-Name_Oak::
-    .string "OAK$"
 
 @NPC MAPA
 PalletTown_ProfessorOaksLab_Text_Cientifico1::

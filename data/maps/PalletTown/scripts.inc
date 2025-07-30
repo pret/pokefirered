@@ -180,9 +180,6 @@ PalletTown_EventScript_OakTriggerRight::
 
 PalletTown_EventScript_OakTrigger::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, PalletTown_EventScript_Boy
-	call_if_eq VAR_RESULT, FEMALE, PalletTown_EventScript_Girl
 	famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	delay 30
 	playbgm MUS_OAK, 0
@@ -250,16 +247,7 @@ PalletTown_EventScript_OakTrigger::
 	releaseall
 	end
 
-PalletTown_EventScript_Boy::
-	setflag FLAG_0x0B0
-	closemessage
-	return
 
-PalletTown_EventScript_Girl::
-	setflag FLAG_0x0AF
-	closemessage
-	return
-	
 Movement_ExclamacionIzq::
 	emote_exclamation_mark
 	jump_in_place_right

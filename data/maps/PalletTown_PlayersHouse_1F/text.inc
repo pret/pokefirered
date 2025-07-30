@@ -1,6 +1,3 @@
-Name_Mama::
-    .string "MAMÁ$"
-
 PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou::
     .string "En fin...\p"
     .string "Todos los muchachos se van de casa\n"

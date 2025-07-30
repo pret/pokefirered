@@ -1,8 +1,3 @@
-Name_Rojo::
-    .string "ROJO$"
-
-Name_Hoja::
-    .string "HOJA$"
 
 ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes::
     .string "{COLOR DARK_GRAY}Creo que en esta tienda venden\n"

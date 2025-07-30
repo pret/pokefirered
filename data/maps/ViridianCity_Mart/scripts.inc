@@ -1,7 +1,12 @@
 ViridianCity_Mart_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, ViridianCity_Mart_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, ViridianCity_Mart_OnLoad
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, ViridianCity_Mart_OnFrame
 	.byte 0
+
+ViridianCity_Mart_OnTransition::
+	call Common_EventScript_SetupRedGreenGfxId
+	end
 
 ViridianCity_Mart_OnLoad::
 	goto_if_unset FLAG_SYS_POKEDEX_GET, ViridianCity_Mart_EventScript_HideQuestionnaire
@@ -16,9 +21,7 @@ ViridianCity_Mart_OnFrame::
 
 ViridianCity_Mart_EventScript_ParcelScene::
 	lockall
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, ViridianCity_Mart_EventScript_Boy
-	call_if_eq VAR_RESULT, FEMALE, ViridianCity_Mart_EventScript_Girl
+	call ViridianCity_Mart_EventScript_RedGreen
 	famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
 	setvar VAR_0x408C, 1
@@ -26,13 +29,13 @@ ViridianCity_Mart_EventScript_ParcelScene::
 	end
 
 
-ViridianCity_Mart_EventScript_Boy::
+ViridianCity_Mart_EventScript_RedGreen::
 	delay 40
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	applymovement 4, ViridianCity_Mart_Movement_Down
+	applymovement LOCALID_VIDRIAN_MART_REDGREEN, ViridianCity_Mart_Movement_Down
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianCity_Mart_Text_QueAlegriaEncontrarteAqui
 	hidenamebox
 	closemessage
@@ -40,60 +43,24 @@ ViridianCity_Mart_EventScript_Boy::
 	waitmovement 0
 	delay 40
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianCity_Mart_Text_VinePorUnasPokeball
 	hidenamebox
 	closemessage
-	applymovement 4, ViridianCity_Mart_Movement_FacePlayer
+	applymovement LOCALID_VIDRIAN_MART_REDGREEN, ViridianCity_Mart_Movement_FacePlayer
 	waitmovement 0
 	applymovement LOCALID_PLAYER, PalletTown_Movement_SaltaAbajo
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianCity_Mart_Text_NosVemosEnElLaboratorio
 	hidenamebox
 	closemessage
-	applymovement 4, ViridianCity_Mart_Movement_Seva
+	applymovement LOCALID_VIDRIAN_MART_REDGREEN, ViridianCity_Mart_Movement_Seva
 	waitmovement 0
-	setobjectxy 4,10,9
-	setflag FLAG_0x0AF
-	return
-	end
-
-@SI ERES MUJER
-ViridianCity_Mart_EventScript_Girl::
-	delay 40
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-
-	applymovement 5, ViridianCity_Mart_Movement_Down
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Rojo
-	msgbox ViridianCity_Mart_Text_QueAlegriaEncontrarteAqui
-	hidenamebox
-	closemessage
-	applymovement LOCALID_PLAYER, ViridianCity_Mart_Movement_ApproachCounter
-	waitmovement 0
-	delay 40
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	namebox Name_Rojo
-	msgbox ViridianCity_Mart_Text_VinePorUnasPokeball
-	hidenamebox
-	closemessage
-	applymovement 5, ViridianCity_Mart_Movement_FacePlayer
-	waitmovement 0
-	applymovement LOCALID_PLAYER, PalletTown_Movement_SaltaAbajo
-	waitmovement 0
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	namebox Name_Rojo
-	msgbox ViridianCity_Mart_Text_NosVemosEnElLaboratorio
-	hidenamebox
-	closemessage
-	applymovement 5, ViridianCity_Mart_Movement_Seva
-	waitmovement 0
-	setobjectxy 5,10,9
+	setobjectxy LOCALID_VIDRIAN_MART_REDGREEN,10,9
 	playbgm MUS_POKE_CENTER, 0
-	setflag FLAG_0x0B0
+	setflag FLAG_OCULTAR_REDGREEN_TIENDA_VERDE
 	return
 	end
 

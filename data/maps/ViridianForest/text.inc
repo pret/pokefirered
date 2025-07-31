@@ -116,14 +116,14 @@ ViridianForest_Text_LeavingViridianForest::
     .string "{SHADOW DYNAMIC_COLOR4}BOSQUE VERDE\n"
     .string "{UP_ARROW_2}{SHADOW LIGHT_GRAY} RUTA 2 NORTE$"
 
-ViridianForest_Text_Batalla1_Rojo::
-    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} ¡de te encuentro!\p"
+ViridianForest_Text_MiraDondeTeEncuentro::
+    .string "¡Mira donde te encuentro!\p"
     .string "¿Cómo va la búsqueda de nuevos\n"
     .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}?$"
 
-ViridianForest_Text_Batalla2_Rojo::
-    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} ¡Te dije que el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}\n"
-    .string "era fascinante!\p"
+ViridianForest_Text_TeDijeQue::
+    .string "¡Te dije que el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY} era\n"
+    .string "fascinante!\p"
     .string "Además de tener una gran variedad\n"
     .string "de {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.\p"
     .string "Me encantaría ver qué nuevas\n"
@@ -132,29 +132,35 @@ ViridianForest_Text_Batalla2_Rojo::
 ViridianForest_Text_Batalla3_Rojo::
     .string "¡TIENES UN EQUIPO IMPRESIONANTE!$"
 
-ViridianForest_Text_Batalla4_Rojo::
-    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} Creo que es hora de que me vaya...\n"
-    .string "Todavía nos queda mucho camino\l"
+ViridianForest_Text_CreQueEsHora::
+    .string "Creo que es hora de que me vaya...\p"
+    .string "Todavía nos queda mucho camino\n"
     .string "por delante.$"
 
+ViridianForest_Text_SoyTanDespitada::
+    .string "¡Soy tan despistada!\n"
+    .string "Casi me voy sin entregarte esto...$"
 
-ViridianForest_Text_Batalla5_Rojo::
-    .string "{SHADOW DYNAMIC_COLOR4}ROJO:{SHADOW LIGHT_GRAY} ¡Soy tan despistado!\n"
+ViridianForest_Text_SoyTanDespitado::
+    .string "¡Soy tan despistado!\n"
     .string "Casi me voy sin entregarte esto...$"
 
 ViridianForest_Text_RepExpRojo::
     .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} obtuvo {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY}\n"
     .string "de manos de {SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY}.$"
 
-ViridianForest_Text_Batalla6_Rojo::
-    .string "{SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY}: El {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY} es un objeto\n"
-    .string "que un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} puede llevar consigo.\p"
-    .string "Con este objeto, el {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} que lo\n"  
+ViridianForest_Text_RepExpHoja::
+    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} obtuvo {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY}\n"
+    .string "de manos de {SHADOW DYNAMIC_COLOR4}HOJA{SHADOW LIGHT_GRAY}.$"
+
+ViridianForest_Text_ElRepartirExpEs::
+    .string "El {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY} es un objeto que un\n"
+    .string "POKéMON puede llevar consigo.\p"
+    .string "Con este objeto, el {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} que lo\n"
     .string "tenga ganará puntos de experiencia,\l"
-    .string "incluso si no se encuentra\l"
-    .string "en combate.\p"
-    .string "Estoy seguro de que te será de\n"  
-    .string "gran ayuda en tu aventura.$"
+    .string "incluso si no se encuentra en combate.\p"
+    .string "Estoy seguro de que te será de gran\n"
+    .string "ayuda en tu aventura. $"
 
 ViridianForest_Text_BosqueVerde::
     .string "{SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}\p"

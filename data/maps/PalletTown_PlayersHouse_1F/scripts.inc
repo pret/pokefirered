@@ -5,26 +5,14 @@ PalletTown_PlayersHouse_1F_EventScript_Mom::
 	lock
 	faceplayer
 	goto_if_set FLAG_BEAT_RIVAL_IN_OAKS_LAB, PalletTown_PlayersHouse_1F_EventScript_MomHeal
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale
-	call_if_eq VAR_RESULT, FEMALE, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale
+	namebox Name_Mama
+	msgbox PalletTown_PlayersHouse_1F_Text_AllKidsLeaveOakLookingForYou
+	hidenamebox
 	closemessage
 	applymovement LOCALID_MOM, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
-
-PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale::
-	namebox Name_Mama
-	msgbox PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou
-	hidenamebox
-	return
-
-PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale::
-	namebox Name_Mama
-	msgbox PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou
-	hidenamebox
-	return
 
 PalletTown_PlayersHouse_1F_EventScript_MomHeal::
 	msgbox PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest

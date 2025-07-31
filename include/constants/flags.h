@@ -193,7 +193,7 @@
 #define FLAG_OCULTAR_REDGREEN_TIENDA_VERDE  0x0AF  //BOY TIENDA CIUDAD VERDE
 #define FLAG_UNUSED_0x0B0              0x0B0  
 #define FLAG_0x0B1               0x0B1  //BOY LAB POKEDEX
-#define FLAG_0x0B2               0x0B2  //CASA MAMA OFF
+#define FLAG_HIDE_PALLET_TOWN_HOUSE_MOM                0x0B2  //CASA MAMA OFF
 #define FLAG_0x0B3               0x0B3  //REGALO POKEMONES BETA
 #define FLAG_0x0B4               0x0B4  //EVENTO BROCK MUSEO
 #define FLAG_0x0B5               0x0B5  //FOSIL KABUTO

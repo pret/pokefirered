@@ -375,13 +375,8 @@ PalletTown_ProfessorOaksLab_Text_QueAlegriaVertePorAqui::
     .string "¡Se nota que ha creado un fuerte\n"
     .string "lazo contigo!$"
 
-PalletTown_ProfessorOaksLab_Text_RojoMeAcaba::
-    .string "{SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY} me acaba de traer unas {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}\n"
-    .string "que envió mi colega, el {SHADOW DYNAMIC_COLOR4}PROF. ELM{SHADOW LIGHT_GRAY},\l"
-    .string "desde {SHADOW DYNAMIC_COLOR4}PUEBLO PRIMAVERA{SHADOW LIGHT_GRAY}.$"
-
-PalletTown_ProfessorOaksLab_Text_HojaMeAcaba::
-    .string "{SHADOW DYNAMIC_COLOR4}HOJA{SHADOW LIGHT_GRAY} me acaba de traer unas {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}\n"
+PalletTown_ProfessorOaksLab_Text_RojoHojaMeAcaba::
+    .string "{SHADOW DYNAMIC_COLOR4}{RED_GREEN_NAME}{SHADOW LIGHT_GRAY} me acaba de traer unas {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}\n"
     .string "que envió mi colega, el {SHADOW DYNAMIC_COLOR4}PROF. ELM{SHADOW LIGHT_GRAY},\l"
     .string "desde {SHADOW DYNAMIC_COLOR4}PUEBLO PRIMAVERA{SHADOW LIGHT_GRAY}.$"
 
@@ -477,30 +472,17 @@ PalletTown_ProfessorOaksLab_Text_NadieTeImpide::
     .string "Sería un gesto valioso para tu viejo\n"
     .string "abuelo.$"
 
-PalletTown_ProfessorOaksLab_Text_RojoSoloUnoDeNosotros::
-    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}... {SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY}...\p"
+PalletTown_ProfessorOaksLab_Text_SoloUnoDeNosotros::
+    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}... {SHADOW DYNAMIC_COLOR4}{RED_GREEN_NAME}{SHADOW LIGHT_GRAY}...\p"
     .string "Solo uno de nosotros llegará a ser\n"
     .string "un verdadero {SHADOW DYNAMIC_COLOR4}MAESTRO POKéMON{SHADOW LIGHT_GRAY}.\p"
     .string "Y créanme, ese voy a ser yo.\n"
     .string "Sin ayuda. Sin distracciones.$"
 
-PalletTown_ProfessorOaksLab_Text_HojaSoloUnoDeNosotros::
-    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}... {SHADOW DYNAMIC_COLOR4}HOJA{SHADOW LIGHT_GRAY}...\n"
-    .string "Solo uno de nosotros llegará a ser\n"
-    .string "un verdadero {SHADOW DYNAMIC_COLOR4}MAESTRO POKéMON{SHADOW LIGHT_GRAY}.\p"
-    .string "Y créanme, ese voy a ser yo.\n"
-    .string "Sin ayuda. Sin distracciones.$"
-
-PalletTown_ProfessorOaksLab_Text_EstoyEmocionado::
-    .string "¡Estoy emocionado por la aventura!\p"
+PalletTown_ProfessorOaksLab_Text_RedGreenImExcited::
+    .string "¡Estoy emocionad{RED_GREEN_OA} por la aventura!\p"
     .string "Iré a explorar el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}.\p"
     .string "Debe haber {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} increíbles por\n"
-    .string "allí.$"
-
-PalletTown_ProfessorOaksLab_Text_EstoyEmocionada::
-    .string "¡Estoy emocionada por la aventura!\p"
-    .string "Iré a explorar el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}.\p"
-    .string "Debe haber {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}  increíbles por\n"
     .string "allí.$"
 
 PalletTown_ProfessorOaksLab_Text_LosPokemonDeLaRegion::

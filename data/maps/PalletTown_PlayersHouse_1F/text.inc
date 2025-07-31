@@ -1,17 +1,9 @@
-PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou::
+PalletTown_PlayersHouse_1F_Text_AllKidsLeaveOakLookingForYou::
     .string "En fin...\p"
-    .string "Todos los muchachos se van de casa\n"
+    .string "Tod{OA}s los muchach{OA}s se van de casa.\n"
     .string "¡Así es la vida!\p"
     .string "¡Ah si!\p"
     .string "El {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY} quería verte.$"
-
-PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou::
-    .string "En fin...\p"
-    .string "Todas las muchachas se van de casa\n"
-    .string "algún día. ¡Así es la vida!\p"
-    .string "¡Ah si!\p"
-    .string "El {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY} quería verte.$"
-
 
 PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest::
     .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}MAMÁ:{SHADOW LIGHT_GRAY} ¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"

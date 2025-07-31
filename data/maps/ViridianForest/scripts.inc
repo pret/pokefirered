@@ -207,21 +207,21 @@ ViridianForest_EventScript_EncuentroRojoHoja_MaleDerecha::
 
 ViridianForest_EventScript_BulbasaurMaleDerecha::
 	trainerbattle_no_intro TRAINER_HOJA_BULBASAUR, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitada
 	hidenamebox
 	closemessage
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -233,21 +233,21 @@ ViridianForest_EventScript_BulbasaurMaleDerecha::
 
 ViridianForest_EventScript_SquirtleMaleDerecha::
 	trainerbattle_no_intro TRAINER_HOJA_SQUIRTLE, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitada
 	hidenamebox
 	closemessage
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -259,21 +259,21 @@ ViridianForest_EventScript_SquirtleMaleDerecha::
 
 ViridianForest_EventScript_CharmanderMaleDerecha::
 	trainerbattle_no_intro TRAINER_HOJA_CHARMANDER, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitada
 	hidenamebox
 	closemessage
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -286,21 +286,21 @@ ViridianForest_EventScript_CharmanderMaleDerecha::
 @ARREGLADOS
 ViridianForest_EventScript_BulbasaurMaleIzquierda::
 	trainerbattle_no_intro TRAINER_HOJA_BULBASAUR, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 17, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitada
 	hidenamebox
 	closemessage
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -312,21 +312,21 @@ ViridianForest_EventScript_BulbasaurMaleIzquierda::
 
 ViridianForest_EventScript_SquirtleMaleIzquierda::
 	trainerbattle_no_intro TRAINER_HOJA_SQUIRTLE, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 17, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitada
 	hidenamebox
 	closemessage
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -338,21 +338,21 @@ ViridianForest_EventScript_SquirtleMaleIzquierda::
 
 ViridianForest_EventScript_CharmanderMaleIzquierda::
 	trainerbattle_no_intro TRAINER_HOJA_CHARMANDER, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 17, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitada
 	hidenamebox
 	closemessage
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Hoja
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -364,21 +364,21 @@ ViridianForest_EventScript_CharmanderMaleIzquierda::
 
 ViridianForest_EventScript_BulbasaurFemaleDerecha::
 	trainerbattle_no_intro TRAINER_ROJO_BULBASAUR, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitado
 	hidenamebox
 	closemessage
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -390,21 +390,21 @@ ViridianForest_EventScript_BulbasaurFemaleDerecha::
 
 ViridianForest_EventScript_SquirtleFemaleDerecha::
 	trainerbattle_no_intro TRAINER_ROJO_SQUIRTLE, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitado
 	hidenamebox
 	closemessage
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -416,21 +416,21 @@ ViridianForest_EventScript_SquirtleFemaleDerecha::
 
 ViridianForest_EventScript_CharmanderFemaleDerecha::
 	trainerbattle_no_intro TRAINER_ROJO_CHARMANDER, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitado
 	hidenamebox
 	closemessage
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -442,14 +442,14 @@ ViridianForest_EventScript_CharmanderFemaleDerecha::
 
 ViridianForest_EventScript_BulbasaurFemaleIzquierda::
 	trainerbattle_no_intro TRAINER_ROJO_BULBASAUR, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitado
 	hidenamebox
 	closemessage
@@ -457,7 +457,7 @@ ViridianForest_EventScript_BulbasaurFemaleIzquierda::
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -469,14 +469,14 @@ ViridianForest_EventScript_BulbasaurFemaleIzquierda::
 
 ViridianForest_EventScript_SquirtleFemaleIzquierda::
 	trainerbattle_no_intro TRAINER_ROJO_SQUIRTLE, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitado
 	hidenamebox
 	closemessage
@@ -484,7 +484,7 @@ ViridianForest_EventScript_SquirtleFemaleIzquierda::
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
@@ -496,14 +496,14 @@ ViridianForest_EventScript_SquirtleFemaleIzquierda::
 
 ViridianForest_EventScript_CharmanderFemaleIzquierda::
 	trainerbattle_no_intro TRAINER_ROJO_CHARMANDER, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
 	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_SoyTanDespitado
 	hidenamebox
 	closemessage
@@ -511,7 +511,7 @@ ViridianForest_EventScript_CharmanderFemaleIzquierda::
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
-	namebox Name_Rojo
+	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage

@@ -170,6 +170,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PALLET_MOM",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_MOM",
       "x": 12,

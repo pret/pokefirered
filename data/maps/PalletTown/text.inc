@@ -40,15 +40,9 @@ PalletTown_Text_LetreroPueblo::
     .string "{SHADOW LIGHT_GRAY}¡Un lienzo en blanco de tu viaje!$"
 
 @EVENTO ZAPATILLAS DEPORTIVAS
-PalletTown_Text_RunningShoes_EsperaUnMomento_Female::
-    .string "{SHADOW LIGHT_GRAY}¡Espera un momento, querida!\p"
-    .string "Sabía que estarías ansiosa por\n"
-    .string "comenzar tu viaje, pero no puedes\l"
-    .string "irte sin esto...$"
-
-PalletTown_Text_RunningShoes_EsperaUnMomento_Male::
-    .string "{SHADOW LIGHT_GRAY}¡Espera un momento, querido!\p"
-    .string "Sabía que estarías ansioso por\n"
+PalletTown_Text_RunningShoes_EsperaUnMomento::
+    .string "{SHADOW LIGHT_GRAY}¡Espera un momento, querid{OA}!\p"
+    .string "Sabía que estarías ansios{OA} por\n"
     .string "comenzar tu viaje, pero no puedes\l"
     .string "irte sin esto...$"
 
@@ -62,18 +56,11 @@ PalletTown_Text_RunningShoes_SonUnasZapatillas::
     .string "que tengas un buen par de zapatos\l"
     .string "en tus pies.$"
 
-PalletTown_Text_RunningShoes_NoOlvides_Female::
+PalletTown_Text_RunningShoes_NoOlvides::
     .string "No olvides que {SHADOW DYNAMIC_COLOR4}PUEBLO PALETA{SHADOW LIGHT_GRAY} siempre\n"
     .string "será tu hogar.\p"
-    .string "Siempre serás bienvenida aquí, sin\n"
+    .string "Siempre serás bienvenid{OA} aquí, sin\n"
     .string "importar lo lejos que viajes.$"
-
-PalletTown_Text_RunningShoes_NoOlvides_Male::
-    .string "No olvides que {SHADOW DYNAMIC_COLOR4}PUEBLO PALETA{SHADOW LIGHT_GRAY} siempre\n"
-    .string "será tu hogar.\l"
-    .string "Siempre serás bienvenido aquí, sin\l"
-    .string "importar lo lejos que viajes.$"
-
 
 PalletTown_Text_RunningShoes_RecibisteZapatillas::
     .string "{COLOR DARK_GRAY}¡Recibiste las {SHADOW DYNAMIC_COLOR4}ZAPATILLAS DEPORTIVAS{SHADOW LIGHT_GRAY}\n"

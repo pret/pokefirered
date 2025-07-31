@@ -24,7 +24,7 @@ ViridianCity_Mart_EventScript_ParcelScene::
 	call ViridianCity_Mart_EventScript_RedGreen
 	famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
-	setvar VAR_0x408C, 1
+	setvar VAR_LAB_POKEDEX_EVENT, 1
 	releaseall
 	end
 
@@ -49,7 +49,7 @@ ViridianCity_Mart_EventScript_RedGreen::
 	closemessage
 	applymovement LOCALID_VIDRIAN_MART_REDGREEN, ViridianCity_Mart_Movement_FacePlayer
 	waitmovement 0
-	applymovement LOCALID_PLAYER, PalletTown_Movement_SaltaAbajo
+	applymovement LOCALID_PLAYER, Common_Movement_FaceDown
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	namebox Name_RedGreen

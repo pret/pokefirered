@@ -191,7 +191,7 @@
 #define VAR_MAP_SCENE_MT_MOON_B2F                                              0x408B
 
 
-#define VAR_0x408C                 0x408C //ENTREGA POKEDEX
+#define VAR_LAB_POKEDEX_EVENT    0x408C //ENTREGA POKEDEX
 #define VAR_0x408D                 0x408D //BATALLA BOSQUE
 #define VAR_0x408E                 0x408E //ZAPATILLAS
 #define VAR_0x408F                 0x408F //BROCK MUSEO

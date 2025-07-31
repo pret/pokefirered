@@ -49,6 +49,10 @@ Common_Movement_FaceDown::
 	face_down
 	step_end
 
+Common_Movement_FaceUp::
+	face_up
+	step_end
+
 Common_Movement_WalkUp5::
 	walk_up
 	walk_up
@@ -57,7 +61,6 @@ Common_Movement_WalkUp5::
 	walk_up
 	step_end
 
-@ Unused
 Common_Movement_WalkUp4::
 	walk_up
 	walk_up
@@ -65,18 +68,30 @@ Common_Movement_WalkUp4::
 	walk_up
 	step_end
 
+Common_Movement_WalkDown2::
+	walk_down
+	walk_down
+	step_end
+
 Common_Movement_Delay32::
 	delay_16
 	delay_16
 	step_end
 
-@ Unused
 Common_Movement_WalkUp::
 	walk_up
 	step_end
 
-@ Unused
 Common_Movement_WalkUp2::
 	walk_up
 	walk_up
 	step_end
+
+Common_Movement_WalkInPlaceDown:
+	walk_in_place_down
+	step_end
+
+Common_Movement_WalkInPlaceUp:
+	walk_in_place_up
+	step_end
+

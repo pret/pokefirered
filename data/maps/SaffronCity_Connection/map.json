@@ -35,16 +35,8 @@
       "direction": "right"
     }
   ],
-  "object_events": [
-
-  ],
-  "warp_events": [
-
-  ],
-  "coord_events": [
-
-  ],
-  "bg_events": [
-
-  ]
+  "object_events": [],
+  "warp_events": [],
+  "coord_events": [],
+  "bg_events": []
 }

@@ -129,7 +129,7 @@ ViridianForest_Text_TeDijeQue::
     .string "Me encantaría ver qué nuevas\n"
     .string "especies has registrado...$"
 
-ViridianForest_Text_Batalla3_Rojo::
+ViridianForest_Text_BattleRedGreen::
     .string "¡TIENES UN EQUIPO IMPRESIONANTE!$"
 
 ViridianForest_Text_CreQueEsHora::
@@ -137,29 +137,31 @@ ViridianForest_Text_CreQueEsHora::
     .string "Todavía nos queda mucho camino\n"
     .string "por delante.$"
 
+@eliminar
 ViridianForest_Text_SoyTanDespitada::
     .string "¡Soy tan despistada!\n"
     .string "Casi me voy sin entregarte esto...$"
 
 ViridianForest_Text_SoyTanDespitado::
-    .string "¡Soy tan despistado!\n"
+    .string "¡Soy tan despistad{RED_GREEN_OA}!\n"
     .string "Casi me voy sin entregarte esto...$"
 
 ViridianForest_Text_RepExpRojo::
     .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} obtuvo {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY}\n"
-    .string "de manos de {SHADOW DYNAMIC_COLOR4}ROJO{SHADOW LIGHT_GRAY}.$"
+    .string "de manos de {SHADOW DYNAMIC_COLOR4}{RED_GREEN_NAME}{SHADOW LIGHT_GRAY}.$"
 
+@eliminar
 ViridianForest_Text_RepExpHoja::
     .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} obtuvo {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY}\n"
     .string "de manos de {SHADOW DYNAMIC_COLOR4}HOJA{SHADOW LIGHT_GRAY}.$"
 
 ViridianForest_Text_ElRepartirExpEs::
-    .string "El {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY} es un objeto que un\n"
-    .string "POKéMON puede llevar consigo.\p"
+    .string "El {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY} es un objeto que\n"
+    .string "un POKéMON puede llevar consigo.\p"
     .string "Con este objeto, el {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} que lo\n"
     .string "tenga ganará puntos de experiencia,\l"
-    .string "incluso si no se encuentra en combate.\p"
-    .string "Estoy seguro de que te será de gran\n"
+    .string "incluso si no se encuentra en batalla.\p"
+    .string "Estoy segur{RED_GREEN_OA} de que te será de gran\n"
     .string "ayuda en tu aventura. $"
 
 ViridianForest_Text_BosqueVerde::

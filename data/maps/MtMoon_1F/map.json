@@ -13,7 +13,7 @@
   "show_map_name": true,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_MTMOON",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "type": "object",
@@ -306,7 +306,7 @@
       "elevation": 0,
       "var": "VAR_0x4090",
       "var_value": "0",
-      "script": "MtMoon_1F_EventScript_SilvioDer"
+      "script": "MtMoon_1F_EventScript_SilvioRight"
     },
     {
       "type": "trigger",

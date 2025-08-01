@@ -1257,7 +1257,7 @@
 #define FLAG_SILVIO_MONTE_LUNA     0x4C0
 #define FLAG_SILVIO_TIENDA         0x4C1
 #define FLAG_HIDE_SILVIO           0x4C2
-#define FLAG_HIDE_ROJOHOJAVIRIDIAN 0x4C3
+#define FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST 0x4C3
 #define FLAG_0x4C4               0x4C4
 #define FLAG_0x4C5               0x4C5
 #define FLAG_0x4C6               0x4C6

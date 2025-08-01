@@ -28,7 +28,6 @@ ViridianCity_Mart_EventScript_ParcelScene::
 	releaseall
 	end
 
-
 ViridianCity_Mart_EventScript_RedGreen::
 	delay 40
 	textcolor NPC_TEXT_COLOR_NEUTRAL

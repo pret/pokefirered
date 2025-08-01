@@ -355,7 +355,6 @@
     {
       "id": "MAPSEC_ROUTE_4_POKECENTER",
       "name": "ROUTE 4",
-      "name_clone": true,
       "x": 8,
       "y": 3,
       "width": 1,
@@ -364,7 +363,6 @@
     {
       "id": "MAPSEC_ROUTE_10_POKECENTER",
       "name": "ROUTE 10",
-      "name_clone": true,
       "x": 18,
       "y": 3,
       "width": 1,
@@ -605,7 +603,6 @@
     {
       "id": "MAPSEC_UNDERGROUND_PATH_2",
       "name": "UNDERGROUND PATH",
-      "name_clone": true,
       "x": 0,
       "y": 0,
       "width": 1,
@@ -998,7 +995,6 @@
     {
       "id": "MAPSEC_TRAINER_TOWER_2",
       "name": "TRAINER TOWER",
-      "name_clone": true,
       "x": 0,
       "y": 0,
       "width": 1,

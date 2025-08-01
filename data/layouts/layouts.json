@@ -772,7 +772,7 @@
     {
       "id": "LAYOUT_LAVENDER_TOWN",
       "name": "LavenderTown_Layout",
-      "width": 24,
+      "width": 26,
       "height": 20,
       "border_width": 2,
       "border_height": 2,
@@ -953,7 +953,7 @@
       "id": "LAYOUT_ROUTE9",
       "name": "Route9_Layout",
       "width": 72,
-      "height": 20,
+      "height": 22,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
@@ -988,7 +988,7 @@
     {
       "id": "LAYOUT_ROUTE12",
       "name": "Route12_Layout",
-      "width": 24,
+      "width": 28,
       "height": 120,
       "border_width": 2,
       "border_height": 2,

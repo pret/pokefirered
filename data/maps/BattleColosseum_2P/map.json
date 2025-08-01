@@ -13,7 +13,7 @@
   "show_map_name": false,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_LINK",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "type": "object",
@@ -66,7 +66,5 @@
       "script": "BattleColosseum_2P_EventScript_PlayerSpot1"
     }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

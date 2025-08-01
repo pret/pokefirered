@@ -1,26 +1,32 @@
-PewterCity_Museum_1F_Text_Brock1::
-    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ...y así es como los fósiles\n"
-    .string "nos permiten aprender sobre el\l"
-    .string "pasado de los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}...$"
+PewterCity_Museum_1F_Text_AsiEsComoLosFosiles::
+    .string " ...y así es como los fósiles nos\n"
+    .string "permiten aprender sobre el pasado de\l"
+    .string "los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}...$"
 
-PewterCity_Museum_1F_Text_Brock2::
-    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ¡Oh, parece que tenemos una\n"
-    .string "visitante especial!\p"
-    .string "¿Eres tú quien desea desafiarme\n"
-    .string "en el {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY}?$"
+PewterCity_Museum_1F_Text_PareceQueTenemosUna::
+    .string "¡Oh, parece que tenemos una visitante\n"
+    .string "especial!\p"
+    .string "¿Eres tú quien desea desafiarme en el\n"
+    .string "{SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY}?$"
 
-PewterCity_Museum_1F_Text_Brock3::
-    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} Siempre emocionado de\n"
-    .string "enfrentarme a nuevos retadores.\p"
+PewterCity_Museum_1F_Text_PareceQueTenemosUn::
+    .string "¡Oh, parece que tenemos un visitante\n"
+    .string "especial!\p"
+    .string "¿Eres tú quien desea desafiarme en el\n"
+    .string "{SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY}?$"
+
+PewterCity_Museum_1F_Text_SiempreEmocionado::
+    .string "Siempre emocionado de enfrentarme a\n"
+    .string "nuevos retadores...\p"
     .string "Permíteme terminar aquí y nos\n"
     .string "encontraremos en el {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY} para\l"
     .string "nuestro combate.\p"
-    .string "Mientras tanto, ¿por qué no echas\n"
-    .string "un vistazo a las exhibiciones?$"
+    .string "Mientras tanto, ¿por qué no echas un\n"
+    .string "vistazo a las exhibiciones?$"
 
-PewterCity_Museum_1F_Text_BrockNoTeVayas1::
-    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ¡No te vayas sin echarle un\n"
-    .string "vistazo a las exhibiciones!$"
+PewterCity_Museum_1F_Text_BrockNoTeVayas::
+    .string "¡No te vayas sin echarle un vistazo a\n"
+    .string "las exhibiciones!$"
 
 PewterCity_Museum_1F_Text_BrockTermina1::
     .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ...los fósiles nos enseñan\n"
@@ -53,8 +59,8 @@ PewterCity_Museum_1F_Text_Fosil2::
     .string "forma de espiral.$"
 
 PewterCity_Museum_1F_Text_Its50YForChildsTicket::
-    .string "Bienvenida al {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}.\n"
-    .string "Las niñas pagan ¥100...\p"
+    .string "Bienvenid{OA} al {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}.\n"
+    .string "L{OA}s niñ{OA}s pagan ¥100...\p"
     .string "¿Te gustaría entrar?$"
 
 PewterCity_Museum_1F_Text_ComeAgain::

@@ -13,7 +13,7 @@
   "show_map_name": true,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_VIRIDIAN_FOREST",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "type": "object",
@@ -172,7 +172,7 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_RED_NORMAL",
-      "x": 36,
+      "x": 34,
       "y": 49,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -181,7 +181,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_ROJOHOJAVIRIDIAN"
+      "flag": "FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST"
     },
     {
       "type": "object",
@@ -251,7 +251,22 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_ROJOHOJAVIRIDIAN"
+      "flag": "FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST"
+    },
+    {
+      "local_id": "LOCALID_VIDRIAN_FOREST_REDGREEN",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 36,
+      "y": 49,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST"
     }
   ],
   "warp_events": [
@@ -287,21 +302,21 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 39,
-      "y": 49,
-      "elevation": 0,
-      "var": "VAR_0x408D",
-      "var_value": "0",
-      "script": "ViridianForest_EventScript_EncuentroRojoHojaIzquierda"
-    },
-    {
-      "type": "trigger",
       "x": 40,
       "y": 49,
       "elevation": 0,
-      "var": "VAR_0x408D",
+      "var": "VAR_REDGREEN_VIRIDIAN_FOREST",
       "var_value": "0",
-      "script": "ViridianForest_EventScript_EncuentroRojoHojaDerecha"
+      "script": "ViridianForest_EventScript_RedGreenEncounterRight"
+    },
+    {
+      "type": "trigger",
+      "x": 39,
+      "y": 49,
+      "elevation": 0,
+      "var": "VAR_REDGREEN_VIRIDIAN_FOREST",
+      "var_value": "0",
+      "script": "ViridianForest_EventScript_RedGreenEncounterLeft"
     }
   ],
   "bg_events": [

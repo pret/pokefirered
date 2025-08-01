@@ -102,7 +102,7 @@ MtMoon_1F_EventScript_SilvioIzq::
 	release
 	end
 
-MtMoon_1F_EventScript_SilvioDer::
+MtMoon_1F_EventScript_SilvioRight::
 	setflag FLAG_HIDE_SILVIO
 	setobjectxy 17,30,15
 	applymovement LOCALID_PLAYER, MtMoon_1F_Movement_PlayerCamina

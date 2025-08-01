@@ -5,6 +5,7 @@ ViridianForest_MapScripts::
 ViridianForest_OnTransition::
 	clearflag FLAG_SYS_DEXNAV_GET
 	setworldmapflag FLAG_WORLD_MAP_VIRIDIAN_FOREST
+	call Common_EventScript_SetupRedGreenGfxId
 	end
 
 ViridianForest_EventScript_Youngster::
@@ -71,307 +72,28 @@ ViridianForest_EventScript_Charlie::
 	msgbox ViridianForest_Text_CharliePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@EVENTO ENCUENTRO ROJO/HOJA - LADO IZQUIERDO
-ViridianForest_EventScript_EncuentroRojoHojaIzquierda::
-	setflag FLAG_HIDE_ROJOHOJAVIRIDIAN
+ViridianForest_EventScript_RedGreenEncounter::
+	namebox Name_RedGreen
+	msgbox ViridianForest_Text_MiraDondeTeEncuentro
+	hidenamebox
+	closemessage
+	applymovement LOCALID_VIDRIAN_FOREST_REDGREEN, ViridianForest_MirarAlrededorRedGreen
+	waitmovement 0
+	namebox Name_RedGreen
+	msgbox ViridianForest_Text_TeDijeQue
+	hidenamebox
+	closemessage
 	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE, ViridianForest_EventScript_EncuentroRojoHoja_FemaleIzquierda
-	call_if_eq VAR_RESULT, MALE, ViridianForest_EventScript_EncuentroRojoHoja_MaleIzquierda
-	end
-
-@EVENTO ENCUENTRO ROJO/HOJA - LADO DERECHO
-ViridianForest_EventScript_EncuentroRojoHojaDerecha::
-	setflag FLAG_HIDE_ROJOHOJAVIRIDIAN
-	checkplayergender
-	call_if_eq VAR_RESULT, FEMALE, ViridianForest_EventScript_EncuentroRojoHoja_FemaleDerecha
-	call_if_eq VAR_RESULT, MALE, ViridianForest_EventScript_EncuentroRojoHoja_MaleDerecha
-	end
-
-@PLAYER MUJER - LADO IZQUIERDO
-ViridianForest_EventScript_EncuentroRojoHoja_FemaleIzquierda::
-	playbgm MUS_ENCOUNTER_BOY, 0
-	setvar VAR_0x408D,2
-	setobjectxy 12,39,42
-	applymovement LOCALID_PLAYER, ViridianForest_EntradaPlayerIzquierda
-	applymovement 12, ViridianForest_EntradaRojoHojaIzquieda
-	waitmovement 0
-	msgbox ViridianForest_Text_MiraDondeTeEncuentro
-	closemessage
-	applymovement 12, ViridianForest_MirarAlrededorIzquierda
-	waitmovement 0
-	msgbox ViridianForest_Text_TeDijeQue
-	closemessage
-	goto_if_set FLAG_BULBASAUR, ViridianForest_EventScript_BulbasaurFemaleIzquierda
-	goto_if_set FLAG_SQUIRTLE, ViridianForest_EventScript_SquirtleFemaleIzquierda
-	goto_if_set FLAG_CHARMANDER, ViridianForest_EventScript_CharmanderFemaleIzquierda
-	playbgm MUS_ENCOUNTER_BOY, 0
-	applymovement 12, ViridianForest_RojoHojaSeVaDerecha
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	msgbox ViridianForest_Text_SoyTanDespitada
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	closemessage
-	applymovement 12, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 12,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
-
-@PLAYER HOMBRE - LADO IZQUIERDO
-ViridianForest_EventScript_EncuentroRojoHoja_MaleIzquierda::
-	playbgm MUS_ENCOUNTER_BOY, 0
-	setvar VAR_0x408D,2
-	setobjectxy 17,39,42
-	applymovement OBJ_EVENT_ID_PLAYER, ViridianForest_EntradaPlayerIzquierda
-	applymovement 17, ViridianForest_EntradaRojoHojaIzquieda
-	waitmovement 0
-	msgbox ViridianForest_Text_MiraDondeTeEncuentro
-	closemessage
-	applymovement 17, ViridianForest_MirarAlrededorIzquierda
-	waitmovement 0
-	msgbox ViridianForest_Text_TeDijeQue
-	closemessage
-	goto_if_set FLAG_BULBASAUR, ViridianForest_EventScript_BulbasaurMaleIzquierda
-	goto_if_set FLAG_SQUIRTLE, ViridianForest_EventScript_SquirtleMaleIzquierda
-	goto_if_set FLAG_CHARMANDER, ViridianForest_EventScript_CharmanderMaleIzquierda
-	playbgm MUS_ENCOUNTER_BOY, 0
-	applymovement 17, ViridianForest_RojoHojaSeVaDerecha
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	msgbox ViridianForest_Text_SoyTanDespitada
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	closemessage
-	applymovement 17, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 17,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
-
-@PLAYER MUJER - LADO DERECHO
-ViridianForest_EventScript_EncuentroRojoHoja_FemaleDerecha::
-	playbgm MUS_ENCOUNTER_BOY, 0
-	setvar VAR_0x408D,2
-	setobjectxy 12,39,42
-	applymovement LOCALID_PLAYER, ViridianForest_EntradaPlayerDerecha
-	applymovement 12, ViridianForest_EntradaRojoHojaDerecha
-	waitmovement 0
-	msgbox ViridianForest_Text_MiraDondeTeEncuentro
-	closemessage
-	applymovement 12, ViridianForest_MirarAlrededorDerecha
-	waitmovement 0
-	msgbox ViridianForest_Text_TeDijeQue
-	closemessage
-	goto_if_set FLAG_BULBASAUR, ViridianForest_EventScript_BulbasaurFemaleDerecha
-	goto_if_set FLAG_SQUIRTLE, ViridianForest_EventScript_SquirtleFemaleDerecha
-	goto_if_set FLAG_CHARMANDER, ViridianForest_EventScript_CharmanderFemaleDerecha
-	end
-
-@PLAYER HOMBRE - LADO DERECHO
-ViridianForest_EventScript_EncuentroRojoHoja_MaleDerecha::
-	playbgm MUS_ENCOUNTER_BOY, 0
-	setvar VAR_0x408D,2
-	setobjectxy 17,39,42
-	applymovement OBJ_EVENT_ID_PLAYER, ViridianForest_EntradaPlayerDerecha
-	applymovement 17, ViridianForest_EntradaRojoHojaDerecha
-	waitmovement 0
-	msgbox ViridianForest_Text_MiraDondeTeEncuentro
-	closemessage
-	applymovement 17, ViridianForest_MirarAlrededorDerecha
-	waitmovement 0
-	msgbox ViridianForest_Text_TeDijeQue
-	closemessage
-	goto_if_set FLAG_BULBASAUR, ViridianForest_EventScript_BulbasaurMaleDerecha
-	goto_if_set FLAG_SQUIRTLE, ViridianForest_EventScript_SquirtleMaleDerecha
-	goto_if_set FLAG_CHARMANDER, ViridianForest_EventScript_CharmanderMaleDerecha
-	playbgm MUS_ENCOUNTER_BOY, 0
-	applymovement 17, ViridianForest_RojoHojaSeVaDerecha
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	msgbox ViridianForest_Text_SoyTanDespitada
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	closemessage
-	applymovement 17, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 17,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
-
-ViridianForest_EventScript_BulbasaurMaleDerecha::
-	trainerbattle_no_intro TRAINER_HOJA_BULBASAUR, ViridianForest_Text_Batalla3_Rojo
+	call_if_eq VAR_RESULT, FEMALE, ViridianForest_EventScript_BattleFemale
+	call_if_eq VAR_RESULT, MALE, ViridianForest_EventScript_BattleMale
 	namebox Name_RedGreen
 	msgbox ViridianForest_Text_CreQueEsHora
 	hidenamebox
 	closemessage
-	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
+	applymovement LOCALID_VIDRIAN_FOREST_REDGREEN, ViridianForest_RegresaRedGreen
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitada
-	hidenamebox
-	closemessage
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 12,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
-
-ViridianForest_EventScript_SquirtleMaleDerecha::
-	trainerbattle_no_intro TRAINER_HOJA_SQUIRTLE, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitada
-	hidenamebox
-	closemessage
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 12,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
-
-ViridianForest_EventScript_CharmanderMaleDerecha::
-	trainerbattle_no_intro TRAINER_HOJA_CHARMANDER, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitada
-	hidenamebox
-	closemessage
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 12,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
-
-@ARREGLADOS
-ViridianForest_EventScript_BulbasaurMaleIzquierda::
-	trainerbattle_no_intro TRAINER_HOJA_BULBASAUR, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 17, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitada
-	hidenamebox
-	closemessage
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 17, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 17,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
-
-ViridianForest_EventScript_SquirtleMaleIzquierda::
-	trainerbattle_no_intro TRAINER_HOJA_SQUIRTLE, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 17, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitada
-	hidenamebox
-	closemessage
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 17, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 17,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
-
-ViridianForest_EventScript_CharmanderMaleIzquierda::
-	trainerbattle_no_intro TRAINER_HOJA_CHARMANDER, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 17, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitada
-	hidenamebox
-	closemessage
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 17, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 17,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
-
-ViridianForest_EventScript_BulbasaurFemaleDerecha::
-	trainerbattle_no_intro TRAINER_ROJO_BULBASAUR, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
+	namebox Name_RedGreen	
 	msgbox ViridianForest_Text_SoyTanDespitado
 	hidenamebox
 	closemessage
@@ -382,146 +104,73 @@ ViridianForest_EventScript_BulbasaurFemaleDerecha::
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox
 	closemessage
-	applymovement 12, ViridianForest_HojaRojoSeVaFinal
+	applymovement LOCALID_VIDRIAN_FOREST_REDGREEN, ViridianForest_SalidaRedGreen
 	waitmovement 0
-	setobjectxy 12,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
+	return
 
-ViridianForest_EventScript_SquirtleFemaleDerecha::
-	trainerbattle_no_intro TRAINER_ROJO_SQUIRTLE, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
+ViridianForest_EventScript_RedGreenEncounterLeft::
+	setflag FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitado
-	hidenamebox
-	closemessage
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 12,53,0
+	setvar VAR_REDGREEN_VIRIDIAN_FOREST,2
+	setobjectxy LOCALID_VIDRIAN_FOREST_REDGREEN,39,42 
+	applymovement LOCALID_PLAYER, ViridianForest_EntradaPlayerLeft
+	applymovement LOCALID_VIDRIAN_FOREST_REDGREEN, ViridianForest_EntradaRedGreenLeft
+	waitmovement 
+	call ViridianForest_EventScript_RedGreenEncounter
+	setobjectxy LOCALID_VIDRIAN_FOREST_REDGREEN,53,0
 	playbgm MUS_VIRIDIAN_FOREST, 0
 	end
 
-ViridianForest_EventScript_CharmanderFemaleDerecha::
-	trainerbattle_no_intro TRAINER_ROJO_CHARMANDER, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
+ViridianForest_EventScript_RedGreenEncounterRight::
+	setflag FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST
 	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitado
-	hidenamebox
-	closemessage
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 12,53,0
+	setvar VAR_REDGREEN_VIRIDIAN_FOREST,2
+	setobjectxy LOCALID_VIDRIAN_FOREST_REDGREEN,39,42 
+	applymovement LOCALID_PLAYER, ViridianForest_EntradaPlayerRight
+	applymovement LOCALID_VIDRIAN_FOREST_REDGREEN, ViridianForest_EntradaRedGreenRight
+	waitmovement 
+	call ViridianForest_EventScript_RedGreenEncounter
+	setobjectxy LOCALID_VIDRIAN_FOREST_REDGREEN,53,0
 	playbgm MUS_VIRIDIAN_FOREST, 0
 	end
 
-ViridianForest_EventScript_BulbasaurFemaleIzquierda::
-	trainerbattle_no_intro TRAINER_ROJO_BULBASAUR, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitado
-	hidenamebox
-	closemessage
-	msgbox ViridianForest_Text_SoyTanDespitada
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 12,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
+ViridianForest_EventScript_BattleFemale::
+	goto_if_set FLAG_BULBASAUR, ViridianForest_EventScript_BulbasaurFemale
+	goto_if_set FLAG_SQUIRTLE, ViridianForest_EventScript_SquirtleFemale
+	goto_if_set FLAG_CHARMANDER, ViridianForest_EventScript_CharmanderFemale
+	return
 
-ViridianForest_EventScript_SquirtleFemaleIzquierda::
-	trainerbattle_no_intro TRAINER_ROJO_SQUIRTLE, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitado
-	hidenamebox
-	closemessage
-	msgbox ViridianForest_Text_SoyTanDespitada
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 12,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
+ViridianForest_EventScript_BattleMale::
+	goto_if_set FLAG_BULBASAUR, ViridianForest_EventScript_BulbasaurMale
+	goto_if_set FLAG_SQUIRTLE, ViridianForest_EventScript_SquirtleMale
+	goto_if_set FLAG_CHARMANDER, ViridianForest_EventScript_CharmanderMale
+	return
 
-ViridianForest_EventScript_CharmanderFemaleIzquierda::
-	trainerbattle_no_intro TRAINER_ROJO_CHARMANDER, ViridianForest_Text_Batalla3_Rojo
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_CreQueEsHora
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_RojoHojaSeVaIzquierda
-	waitmovement 0
-	playbgm MUS_ENCOUNTER_BOY, 0
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_SoyTanDespitado
-	hidenamebox
-	closemessage
-	msgbox ViridianForest_Text_SoyTanDespitada
-	signmsg
-	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
-	normalmsg
-	namebox Name_RedGreen
-	msgbox ViridianForest_Text_ElRepartirExpEs
-	hidenamebox
-	closemessage
-	applymovement 12, ViridianForest_HojaRojoSeVaFinal
-	waitmovement 0
-	setobjectxy 12,53,0
-	playbgm MUS_VIRIDIAN_FOREST, 0
-	end
+ViridianForest_EventScript_BulbasaurFemale::
+	trainerbattle_no_intro TRAINER_ROJO_BULBASAUR, ViridianForest_Text_BattleRedGreen
+	return
 
-ViridianForest_EntradaRojoHojaDerecha::
+ViridianForest_EventScript_SquirtleFemale::
+	trainerbattle_no_intro TRAINER_ROJO_SQUIRTLE, ViridianForest_Text_BattleRedGreen
+	return
+
+ViridianForest_EventScript_CharmanderFemale::
+	trainerbattle_no_intro TRAINER_ROJO_CHARMANDER, ViridianForest_Text_BattleRedGreen
+	return
+
+ViridianForest_EventScript_BulbasaurMale::
+	trainerbattle_no_intro TRAINER_HOJA_BULBASAUR, ViridianForest_Text_BattleRedGreen
+	return
+
+ViridianForest_EventScript_SquirtleMale::
+	trainerbattle_no_intro TRAINER_HOJA_SQUIRTLE, ViridianForest_Text_BattleRedGreen
+	return
+
+ViridianForest_EventScript_CharmanderMale::
+	trainerbattle_no_intro TRAINER_HOJA_CHARMANDER, ViridianForest_Text_BattleRedGreen
+	return
+
+ViridianForest_EntradaRedGreenRight::
 	walk_down
 	walk_down
 	walk_down
@@ -531,7 +180,7 @@ ViridianForest_EntradaRojoHojaDerecha::
 	walk_in_place_right
 	step_end
 
-ViridianForest_EntradaRojoHojaIzquieda::
+ViridianForest_EntradaRedGreenLeft::
 	walk_down
 	walk_down
 	walk_down
@@ -540,7 +189,7 @@ ViridianForest_EntradaRojoHojaIzquieda::
 	walk_in_place_down
 	step_end
 
-ViridianForest_EntradaPlayerIzquierda::
+ViridianForest_EntradaPlayerLeft::
 	walk_up
 	walk_up
 	walk_up
@@ -548,36 +197,25 @@ ViridianForest_EntradaPlayerIzquierda::
 	emote_exclamation_mark
 	step_end
 
-
-ViridianForest_EntradaPlayerDerecha::
+ViridianForest_EntradaPlayerRight::
 	walk_up
 	walk_up
 	walk_up
-	face_left
+	jump_in_place_left
 	emote_exclamation_mark
 	step_end
 
-ViridianForest_MirarAlrededorIzquierda::
+ViridianForest_MirarAlrededorRedGreen::
 	face_up
-	delay_16
-	face_left
 	delay_16
 	face_right
 	delay_16
-	jump_in_place_down
-	step_end
-
-ViridianForest_MirarAlrededorDerecha::
-	face_up
-	delay_16
 	face_left
 	delay_16
-	face_right
-	delay_16
-	jump_in_place_right
+	face_player
 	step_end
 
-ViridianForest_RojoHojaSeVaDerecha::
+ViridianForest_RegresaRedGreen::
 	delay_16
 	delay_16
 	walk_up
@@ -587,29 +225,12 @@ ViridianForest_RojoHojaSeVaDerecha::
 	jump_in_place_down
 	walk_down
 	walk_down
-	face_player
 	delay_16
-	jump_in_place_right
+	face_player
 	delay_16
 	step_end
 
-ViridianForest_RojoHojaSeVaIzquierda::
-	delay_16
-	delay_16
-	walk_up
-	walk_up
-	emote_exclamation_mark
-	delay_16
-	jump_in_place_down
-	walk_down
-	walk_down
-	face_player
-	delay_16
-	jump_in_place_down
-	delay_16
-	step_end
-
-ViridianForest_HojaRojoSeVaFinal::
+ViridianForest_SalidaRedGreen::
 	walk_up
 	walk_up
 	walk_up

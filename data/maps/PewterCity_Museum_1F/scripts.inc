@@ -256,77 +256,118 @@ PewterCity_Museum_1F_EventScript_NPC06::
 	releaseall
 	end
 
-
 PewterCity_Museum_1F_EventScript_Brock::
+	lock
 	setvar VAR_0x408F,2
-	textcolor NPC_TEXT_COLOR_NEUTRAL
+	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
+	waitmovement 0
+	@FALTA REVISAR EL MOVIMIENTO DE CAMARA
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, PewterCity_Museum_1F_Move_Camara1
+	applymovement LOCALID_CAMERA, Common_Movement_WalkUp3
 	waitmovement 0
 	special RemoveCameraObject
-	msgbox PewterCity_Museum_1F_Text_Brock1
-	applymovement 10, PewterCity_Museum_1F_Move_Brock
+
+	textcolor NPC_TEXT_COLOR_NEUTRAL	
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_AsiEsComoLosFosiles
+	hidenamebox
+	closemessage
+	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_Brock
 	waitmovement 0
-	msgbox PewterCity_Museum_1F_Text_Brock2
-	applymovement 2, PewterCity_Museum_1F_Move_Publico2
-	applymovement 6, PewterCity_Museum_1F_Move_Publico1
-	applymovement 11, PewterCity_Museum_1F_Move_Publico1
-	applymovement 12, PewterCity_Museum_1F_Move_Publico2
-	applymovement 13, PewterCity_Museum_1F_Move_Publico1
+	checkplayergender
+	call_if_eq VAR_RESULT, FEMALE, PewterCity_Museum_1F_EventScript_PareceQueTenemosUna
+	call_if_eq VAR_RESULT, MALE, PewterCity_Museum_1F_EventScript_PareceQueTenemosUn
+	applymovement LOCALID_MUSEUM_SPECTATOR1, Common_Movement_FaceDown
+	applymovement LOCALID_MUSEUM_SPECTATOR2, PewterCity_Museum_1F_Move_Publico2
+	applymovement LOCALID_MUSEUM_SPECTATOR3, Common_Movement_FaceDown
+	applymovement LOCALID_MUSEUM_SPECTATOR4, PewterCity_Museum_1F_Move_Publico2
+	applymovement LOCALID_MUSEUM_SPECTATOR5, Common_Movement_FaceDown
 	waitmovement 0
-	msgbox PewterCity_Museum_1F_Text_Brock3
-	applymovement 2, PalletTown_ProfessorOaksLab_Movement_MiraArriba
-	applymovement 6, PalletTown_ProfessorOaksLab_Movement_MiraArriba
-	applymovement 11, PalletTown_ProfessorOaksLab_Movement_MiraArriba
-	applymovement 12, PalletTown_ProfessorOaksLab_Movement_MiraArriba
-	applymovement 13, PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_SiempreEmocionado
+	hidenamebox
+	closemessage
+	applymovement LOCALID_MUSEUM_SPECTATOR1, Common_Movement_FaceUp
+	applymovement LOCALID_MUSEUM_SPECTATOR2, Common_Movement_FaceUp
+	applymovement LOCALID_MUSEUM_SPECTATOR3, Common_Movement_FaceUp
+	applymovement LOCALID_MUSEUM_SPECTATOR4, Common_Movement_FaceUp
+	applymovement LOCALID_MUSEUM_SPECTATOR5, Common_Movement_FaceUp
 	waitmovement 0
+	@FALTA REVISAR EL MOVIMIENTO DE CAMARA
 	special SpawnCameraObject
-	applymovement OBJ_EVENT_ID_CAMERA, PewterCity_Museum_1F_Move_Camara3
+	applymovement LOCALID_CAMERA, Common_Movement_WalkDown3
 	waitmovement 0
 	special RemoveCameraObject
 	setflag FLAG_0x0B4 @desaparece brock y publico
 	releaseall
 	end
 
+PewterCity_Museum_1F_EventScript_PareceQueTenemosUna::
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_PareceQueTenemosUna
+	hidenamebox
+	closemessage
+	return
+
+PewterCity_Museum_1F_EventScript_PareceQueTenemosUn::
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_PareceQueTenemosUn
+	hidenamebox
+	closemessage
+	return
+
 PewterCity_Museum_1F_EventScript_BrockNoTeVayas::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	setvar VAR_0x408F,2
-	msgbox PewterCity_Museum_1F_Text_BrockNoTeVayas1
-	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Move_Player1
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_BrockNoTeVayas
+	hidenamebox
+	closemessage
+	applymovement LOCALID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
 	releaseall
 	end
-
-PewterCity_Museum_1F_Move_Player1::
-	walk_up
-	step_end
-
-PewterCity_Museum_1F_Move_Camara1::
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-PewterCity_Museum_1F_Move_Camara3::
-	walk_down
-	walk_down
-	walk_down	
-	step_end
 
 PewterCity_Museum_1F_Move_Brock::
 	emote_exclamation_mark
 	walk_in_place_down
 	step_end
 
-PewterCity_Museum_1F_Move_Publico1::
-	face_down
-	step_end
-
 PewterCity_Museum_1F_Move_Publico2::
 	emote_question_mark
 	face_down
 	step_end
+
+@FOSIL IZQUIERDA
+@PewterCity_Museum_1F_EventScript_FosilLeft::
+	@lock
+	@goto_if_set FLAG_0x0B7, PewterCity_Museum_1F_EventScript_FosilLeftFinal
+	@setflag FLAG_0x0B5
+	@special SetSeenMon
+	@setvar VAR_0x8004, SPECIES_KABUTO
+	@showmonpic SPECIES_KABUTO, 10, 3
+	@signmsg
+	@msgbox PewterCity_Museum_1F_Text_Fosil1
+	@normalmsg
+	@waitmessage
+	@hidemonpic
+	@goto_if_set FLAG_0x0B6, PewterCity_Museum_1F_EventScript_FosilCheckFosil2
+	@release
+	@end
+
+@PewterCity_Museum_1F_EventScript_FosilLeftFlag::
+	@lock
+	@special SetSeenMon
+	@setvar VAR_0x8004, SPECIES_KABUTO
+	@showmonpic SPECIES_KABUTO, 10, 3
+	@signmsg
+	@msgbox PewterCity_Museum_1F_Text_Fosil2
+	@normalmsg
+	@waitmessage
+	@hidemonpic
+	@release
+	@end
+
 
 PewterCity_Museum_1F_EventScript_Fosil1::
 	lock
@@ -360,9 +401,6 @@ PewterCity_Museum_1F_EventScript_Fosil2::
 	release
 	end
 
-
-
-
 PewterCity_Museum_1F_EventScript_FosilCheckFosil2::
 	lockall
 	goto_if_set FLAG_0x0B5, PewterCity_Museum_1F_EventScript_BrockTerminaFosil1
@@ -394,7 +432,6 @@ PewterCity_Museum_1F_EventScript_BrockFosilFinal2::
 	hidemonpic
 	release
 	end
-
 
 PewterCity_Museum_1F_EventScript_FosilCheckFosil1::
 	lockall

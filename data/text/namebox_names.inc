@@ -15,3 +15,6 @@ Name_Rival::
 
 Name_Oak::
     .string "OAK$"
+
+Name_Brock::
+    .string "BROCK$"

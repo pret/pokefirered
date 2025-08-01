@@ -73,6 +73,12 @@ Common_Movement_WalkDown2::
 	walk_down
 	step_end
 
+Common_Movement_WalkDown3::
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
 Common_Movement_Delay32::
 	delay_16
 	delay_16
@@ -83,6 +89,11 @@ Common_Movement_WalkUp::
 	step_end
 
 Common_Movement_WalkUp2::
+	walk_up
+	walk_up
+	step_end
+
+Common_Movement_WalkUp3::
 	walk_up
 	walk_up
 	step_end

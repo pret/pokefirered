@@ -173,6 +173,22 @@ static const u16 *const sTilesetAnims_MtEmber_Steam[] = {
     sTilesetAnims_MtEmber_Steam_Frame3
 };
 
+static const u16 sTilesetAnims_LavenderTown_Torii_Frame0[] = INCBIN_U16("data/tilesets/secondary/lavender_town/anim/torii/0.4bpp");
+static const u16 sTilesetAnims_LavenderTown_Torii_Frame1[] = INCBIN_U16("data/tilesets/secondary/lavender_town/anim/torii/1.4bpp");
+static const u16 sTilesetAnims_LavenderTown_Torii_Frame2[] = INCBIN_U16("data/tilesets/secondary/lavender_town/anim/torii/2.4bpp");
+static const u16 sTilesetAnims_LavenderTown_Torii_Frame3[] = INCBIN_U16("data/tilesets/secondary/lavender_town/anim/torii/3.4bpp");
+static const u16 sTilesetAnims_LavenderTown_Torii_Frame4[] = INCBIN_U16("data/tilesets/secondary/lavender_town/anim/torii/4.4bpp");
+static const u16 sTilesetAnims_LavenderTown_Torii_Frame5[] = INCBIN_U16("data/tilesets/secondary/lavender_town/anim/torii/5.4bpp");
+
+static const u16 *const sTilesetAnims_LavenderTown_Torii[] = {
+    sTilesetAnims_LavenderTown_Torii_Frame0,
+    sTilesetAnims_LavenderTown_Torii_Frame1,
+    sTilesetAnims_LavenderTown_Torii_Frame2,
+    sTilesetAnims_LavenderTown_Torii_Frame3,
+    sTilesetAnims_LavenderTown_Torii_Frame4,
+    sTilesetAnims_LavenderTown_Torii_Frame5
+};
+
 static const u16 sTilesetAnims_VermilionGym_MotorizedDoor_Frame0[] = INCBIN_U16("data/tilesets/secondary/vermilion_gym/anim/motorizeddoor/0.4bpp");
 static const u16 sTilesetAnims_VermilionGym_MotorizedDoor_Frame1[] = INCBIN_U16("data/tilesets/secondary/vermilion_gym/anim/motorizeddoor/1.4bpp");
 
@@ -434,3 +450,24 @@ void InitTilesetAnim_CeladonGym(void)
     sSecondaryTilesetAnimCounterMax = 256;
     sSecondaryTilesetAnimCallback = TilesetAnim_CeladonGym;
 }
+
+static void QueueAnimTiles_LavenderTown_Torii(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_LavenderTown_Torii[timer % ARRAY_COUNT(sTilesetAnims_LavenderTown_Torii)],(u16 *)(BG_VRAM + TILE_OFFSET_4BPP(896)), 10 * TILE_SIZE_4BPP);
+}
+
+    
+static void TilesetAnim_LavenderTown(u16 timer)
+{
+    if (timer % 16 == 0)
+        QueueAnimTiles_LavenderTown_Torii(timer / 16);
+}
+
+void InitTilesetAnim_LavenderTown(void)
+{
+    sSecondaryTilesetAnimCounter = 0;
+    sSecondaryTilesetAnimCounterMax = 256;
+    sSecondaryTilesetAnimCallback = TilesetAnim_LavenderTown;
+}
+
+

@@ -940,7 +940,7 @@
     {
       "id": "LAYOUT_ROUTE8",
       "name": "Route8_Layout",
-      "width": 72,
+      "width": 63,
       "height": 20,
       "border_width": 2,
       "border_height": 2,
@@ -953,11 +953,11 @@
       "id": "LAYOUT_ROUTE9",
       "name": "Route9_Layout",
       "width": 72,
-      "height": 22,
+      "height": 24,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_CeruleanCity",
+      "secondary_tileset": "gTileset_LavenderTown",
       "border_filepath": "data/layouts/Route9/border.bin",
       "blockdata_filepath": "data/layouts/Route9/map.bin"
     },

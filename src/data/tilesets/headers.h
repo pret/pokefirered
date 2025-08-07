@@ -61,7 +61,7 @@ const struct Tileset gTileset_LavenderTown =
     .palettes = gTilesetPalettes_LavenderTown,
     .metatiles = gMetatiles_LavenderTown,
     .metatileAttributes = gMetatileAttributes_LavenderTown,
-    .callback = NULL,
+    .callback = InitTilesetAnim_LavenderTown,
 };
 
 const struct Tileset gTileset_VermilionCity =

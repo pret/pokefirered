@@ -16,7 +16,7 @@
   "connections": [
     {
       "map": "MAP_CERULEAN_CITY",
-      "offset": -10,
+      "offset": -8,
       "direction": "left"
     },
     {
@@ -99,10 +99,10 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
-      "x": 49,
-      "y": 9,
+      "x": 40,
+      "y": 19,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -113,10 +113,10 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
-      "x": 53,
-      "y": 4,
+      "x": 46,
+      "y": 11,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 3,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -142,7 +142,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
       "x": 36,
-      "y": 8,
+      "y": 13,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
@@ -197,7 +197,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_RED_NORMAL",
+      "graphics_id": "OBJ_EVENT_GFX_PIDGEY",
       "x": 46,
       "y": 14,
       "elevation": 0,
@@ -211,7 +211,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_RED_NORMAL",
+      "graphics_id": "OBJ_EVENT_GFX_PIDGEY",
       "x": 36,
       "y": 17,
       "elevation": 0,
@@ -225,7 +225,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_RED_NORMAL",
+      "graphics_id": "OBJ_EVENT_GFX_PIDGEY",
       "x": 47,
       "y": 10,
       "elevation": 0,

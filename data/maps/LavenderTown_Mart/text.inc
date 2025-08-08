@@ -1,25 +1,26 @@
 LavenderTown_Mart_Text_SearchingForStatRaiseItems::
-    .string "I'm searching for items that raise\n"
-    .string "the stats of POKéMON.\p"
-    .string "They're effective over the course\n"
-    .string "of a single battle.\p"
-    .string "X ATTACK, X DEFEND, X SPEED, \n"
-    .string "and X SPECIAL are what I'm after.\p"
-    .string "Do you know where I can get them?$"
+    .string "Estoy buscando objetos que aumenten\n"
+    .string "las estadísticas de los POKéMON.\p"
+    .string "Son efectivos durante un solo\n"
+    .string "combate.\p"
+    .string "X ATAQUE, X DEFENSA, X VELOCIDAD,\n"
+    .string "y X ESPECIAL son los que busco.\p"
+    .string "¿Sabes dónde puedo conseguirlos?$"
 
 LavenderTown_Mart_Text_DidYouBuyRevives::
-    .string "Did you buy some REVIVES?\n"
-    .string "They revive any fainted POKéMON!$"
+    .string "¿Compraste REVIVIR?\n"
+    .string "¡Reviven a cualquier POKéMON debilitado!$"
 
 LavenderTown_Mart_Text_TrainerDuosCanChallengeYou::
-    .string "Sometimes, a TRAINER duo will\n"
-    .string "challenge you with two POKéMON\l"
-    .string "at the same time.\p"
-    .string "If that happens, you have to send\n"
-    .string "out two POKéMON to battle, too.$"
+    .string "A veces, un dúo de ENTRENADORES\n"
+    .string "te desafiará con dos POKéMON\l"
+    .string "al mismo tiempo.\p"
+    .string "Si eso pasa, tú también debes\n"
+    .string "enviar dos POKéMON a combatir.$"
 
 LavenderTown_Mart_Text_SoldNuggetFromMountainsFor5000::
-    .string "この　あいだ　やまおくで\n"
-    .string "きんのたまを　ひろい　ましてね！\p"
-    .string "つかえない　しなもの　ですが\n"
-    .string "うったら　なんと　5000¥でした$"
+    .string "Hace poco, en lo profundo de\n"
+    .string "las montañas, encontré una PEPITA.\p"
+    .string "No sirve para nada, pero cuando\n"
+    .string "la vendí, ¡me dieron 5000¥!$"
+

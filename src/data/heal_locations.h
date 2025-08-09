@@ -80,7 +80,7 @@ static const struct HealLocation sHealLocations[NUM_HEAL_LOCATIONS - 1] = {
         .mapGroup = MAP_GROUP(MAP_ROUTE10),
         .mapNum = MAP_NUM(MAP_ROUTE10),
         .x = 13,
-        .y = 21,
+        .y = 23,
     },
     [HEAL_LOCATION_ONE_ISLAND - 1] = {
         .mapGroup = MAP_GROUP(MAP_ONE_ISLAND),

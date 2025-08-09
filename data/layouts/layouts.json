@@ -964,8 +964,8 @@
     {
       "id": "LAYOUT_ROUTE10",
       "name": "Route10_Layout",
-      "width": 24,
-      "height": 80,
+      "width": 25,
+      "height": 82,
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",

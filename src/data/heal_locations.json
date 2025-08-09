@@ -100,7 +100,7 @@
       "id": "HEAL_LOCATION_ROUTE10",
       "map": "MAP_ROUTE10",
       "x": 13,
-      "y": 21,
+      "y": 23,
       "respawn_map": "MAP_ROUTE10_POKEMON_CENTER_1F",
       "respawn_npc": "LOCALID_ROUTE10_NURSE"
     },

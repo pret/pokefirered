@@ -21,7 +21,7 @@
     },
     {
       "map": "MAP_ROUTE9",
-      "offset": 0,
+      "offset": 2,
       "direction": "left"
     }
   ],
@@ -30,7 +30,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 7,
-      "y": 60,
+      "y": 62,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -44,7 +44,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 4,
-      "y": 62,
+      "y": 64,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -58,7 +58,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
       "x": 15,
-      "y": 70,
+      "y": 72,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 2,
@@ -72,7 +72,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 4,
-      "y": 68,
+      "y": 70,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
@@ -86,7 +86,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
       "x": 13,
-      "y": 44,
+      "y": 46,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
@@ -100,7 +100,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
       "x": 9,
-      "y": 27,
+      "y": 29,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -114,7 +114,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 10,
-      "y": 20,
+      "y": 22,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -128,7 +128,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 10,
-      "y": 22,
+      "y": 24,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -142,7 +142,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 10,
-      "y": 24,
+      "y": 26,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -156,7 +156,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 10,
-      "y": 26,
+      "y": 28,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -170,35 +170,35 @@
   "warp_events": [
     {
       "x": 8,
-      "y": 19,
+      "y": 21,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
       "dest_warp_id": "0"
     },
     {
       "x": 8,
-      "y": 57,
+      "y": 59,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
       "dest_warp_id": "5"
     },
     {
       "x": 7,
-      "y": 40,
+      "y": 42,
       "elevation": 3,
       "dest_map": "MAP_POWER_PLANT",
       "dest_warp_id": "1"
     },
     {
       "x": 13,
-      "y": 20,
+      "y": 22,
       "elevation": 0,
       "dest_map": "MAP_ROUTE10_POKEMON_CENTER_1F",
       "dest_warp_id": "1"
     },
     {
       "x": 2,
-      "y": 37,
+      "y": 39,
       "elevation": 3,
       "dest_map": "MAP_POWER_PLANT",
       "dest_warp_id": "3"
@@ -209,7 +209,7 @@
     {
       "type": "sign",
       "x": 15,
-      "y": 59,
+      "y": 61,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route10_EventScript_SouthRockTunnelSign"
@@ -217,7 +217,7 @@
     {
       "type": "sign",
       "x": 6,
-      "y": 42,
+      "y": 44,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route10_EventScript_PowerPlantSign"
@@ -225,7 +225,7 @@
     {
       "type": "sign",
       "x": 7,
-      "y": 21,
+      "y": 23,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route10_EventScript_NorthRockTunnelSign"
@@ -233,7 +233,7 @@
     {
       "type": "hidden_item",
       "x": 10,
-      "y": 19,
+      "y": 21,
       "elevation": 0,
       "item": "ITEM_SUPER_POTION",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE10_SUPER_POTION",
@@ -243,7 +243,7 @@
     {
       "type": "hidden_item",
       "x": 12,
-      "y": 40,
+      "y": 42,
       "elevation": 3,
       "item": "ITEM_MAX_ETHER",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE10_MAX_ETHER",
@@ -253,7 +253,7 @@
     {
       "type": "hidden_item",
       "x": 6,
-      "y": 26,
+      "y": 28,
       "elevation": 3,
       "item": "ITEM_CHERI_BERRY",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE10_CHERI_BERRY",
@@ -263,7 +263,7 @@
     {
       "type": "hidden_item",
       "x": 17,
-      "y": 29,
+      "y": 31,
       "elevation": 3,
       "item": "ITEM_PERSIM_BERRY",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE10_PERSIM_BERRY",
@@ -273,7 +273,7 @@
     {
       "type": "hidden_item",
       "x": 20,
-      "y": 57,
+      "y": 59,
       "elevation": 3,
       "item": "ITEM_NANAB_BERRY",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE10_NANAB_BERRY",

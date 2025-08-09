@@ -189,6 +189,7 @@ const u16 gObjectEventPal_RSQuintyPlumpReflection[] = INCBIN_U16("graphics/objec
 
 const u16 gObjectEventPic_Silvio[] = INCBIN_U16("graphics/object_events/pics/people/silvio.4bpp");
 const u16 gObjectEventPic_Zubat[] = INCBIN_U16("graphics/object_events/pics/pokemon/zubat.4bpp");
+const u16 gObjectEventPic_Geodude[] = INCBIN_U16("graphics/object_events/pics/pokemon/geodude.4bpp");
 
 const u16 gFieldEffectObjectPic_ShadowSmall[] = INCBIN_U16("graphics/field_effects/pics/shadow_small.4bpp");
 const u16 gFieldEffectObjectPic_ShadowMedium[] = INCBIN_U16("graphics/field_effects/pics/shadow_medium.4bpp");

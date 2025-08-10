@@ -187,6 +187,8 @@ const u16 gObjectEventPic_Policeman[] = INCBIN_U16("graphics/object_events/pics/
 const u16 gObjectEventPal_RSQuintyPlump[] = INCBIN_U16("graphics/object_events/palettes/rs_quinty_plump.gbapal");
 const u16 gObjectEventPal_RSQuintyPlumpReflection[] = INCBIN_U16("graphics/object_events/palettes/rs_quinty_plump_reflection.gbapal");
 
+const u16 gObjectEventPic_Jessie[] = INCBIN_U16("graphics/object_events/pics/people/jessie.4bpp");
+const u16 gObjectEventPic_James[] = INCBIN_U16("graphics/object_events/pics/people/james.4bpp");
 const u16 gObjectEventPic_Silvio[] = INCBIN_U16("graphics/object_events/pics/people/silvio.4bpp");
 const u16 gObjectEventPic_Zubat[] = INCBIN_U16("graphics/object_events/pics/pokemon/zubat.4bpp");
 const u16 gObjectEventPic_Geodude[] = INCBIN_U16("graphics/object_events/pics/pokemon/geodude.4bpp");

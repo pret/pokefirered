@@ -16,28 +16,31 @@ MtMoon_B2F_Text_ThenThisFossilIsMine::
     .string "¡Entonces este fósil es mío!$"
 
 MtMoon_B2F_Text_LabOnCinnabarRegeneratesFossils::
-    .string "Muy lejos, en la ISLA CANELA,\n"
-    .string "hay un LABORATORIO POKéMON.\p"
+    .string "Muy lejos, en la {SHADOW DYNAMIC_COLOR4}ISLA CANELA{SHADOW LIGHT_GRAY},\n"
+    .string "hay un {SHADOW DYNAMIC_COLOR4}LABORATORIO POKéMON{SHADOW LIGHT_GRAY}.\p"
     .string "Allí investigan cómo regenerar\n"
     .string "fósiles.$"
 
+
+
 MtMoon_B2F_Text_Grunt1Intro::
-    .string "Nosotros, el TEAM ROCKET,\n"
+    .string "Nosotros, el {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY},\n"
     .string "¡encontraremos los fósiles!\p"
-    .string "Revivir POKéMON con ellos\n"
-    .string "nos dará enormes riquezas!$"
+    .string "Revivir {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} con ellos haremos\n"
+    .string "enormes riquezas!$"
 
 MtMoon_B2F_Text_Grunt1Defeat::
     .string "¡ARGH!\n"
     .string "¡AHORA ESTOY FURIOSO!$"
 
 MtMoon_B2F_Text_Grunt1PostBattle::
-    .string "¡Me hiciste enojar!\n"
-    .string "¡El TEAM ROCKET te pondrá en su lista negra!$"
+    .string "¡Me hiciste enojar!\p"
+    .string "¡El {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY} te pondrá en\n"
+    .string "su lista negra!$"
 
 MtMoon_B2F_Text_Grunt2Intro::
-    .string "Nosotros, el TEAM ROCKET, somos\n"
-    .string "¡gánsteres POKéMON!\l"
+    .string "Nosotros, el {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY}, somos\n"
+    .string "gánsteres {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}!\p"
     .string "¡Infundimos miedo con nuestra fuerza!$"
 
 MtMoon_B2F_Text_Grunt2Defeat::
@@ -48,18 +51,18 @@ MtMoon_B2F_Text_Grunt2PostBattle::
     .string "¡Mis compañeros no soportarán esto!$"
 
 MtMoon_B2F_Text_Grunt3Intro::
-    .string "¡Estamos haciendo un gran trabajo aquí!\n"
-    .string "¡Lárgate, niño!$"
+    .string "¡Estamos trabajando aquí!\n"
+    .string "¡Lárgate, niñ{OA}!$"
 
 MtMoon_B2F_Text_Grunt3Defeat::
     .string "ASÍ QUE ERES BUENO…$"
 
 MtMoon_B2F_Text_Grunt3PostBattle::
-    .string "¡Si encuentras un fósil, dámelo\n"
+    .string "¡Si encuentras un fósil, dámelo \n"
     .string "y lárgate!$"
 
 MtMoon_B2F_Text_Grunt4Intro::
-    .string "¡Los niños no deberían meterse\n"
+    .string "¡L{OA}s niñ{OA}s no deberían meterse\n"
     .string "con los adultos!\p"
     .string "¡Podría acabar mal!$"
 
@@ -67,7 +70,7 @@ MtMoon_B2F_Text_Grunt4Defeat::
     .string "¡ESTOY QUE ARDO!$"
 
 MtMoon_B2F_Text_Grunt4PostBattle::
-    .string "Los POKéMON vivían aquí mucho antes\n"
+    .string "Los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} vivían aquí mucho antes\n"
     .string "de que llegara la gente.$"
 
 MtMoon_B2F_Text_YouWantDomeFossil::

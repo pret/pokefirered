@@ -1,14 +1,16 @@
+@PENDIENTE UN / UNA
+
 MtMoon_1F_Text_MarcosIntro::
-    .string "¡Eh!\n"
-    .string "¡Me asustaste!\l"
-    .string "…Ah, ¡solo eres un niño!$"
+    .string "¡Eh!\p"
+    .string "¡Me asustaste!\p"
+    .string "...Ah, ¡solo eres un niñ{OA}!$"
 
 MtMoon_1F_Text_MarcosDefeat::
     .string "¡GUAU!\n"
     .string "¡OTRA VEZ ME SORPRENDISTE!$"
 
 MtMoon_1F_Text_MarcosPostBattle::
-    .string "Los niños como tú no deberían\n"
+    .string "L{OA}s niñ{OA}s como tú no deberían\n"
     .string "andar por aquí en la oscuridad.$"
 
 MtMoon_1F_Text_JoshIntro::
@@ -20,7 +22,7 @@ MtMoon_1F_Text_JoshDefeat::
     .string "NO TIENE NADA DE GENIAL.$"
 
 MtMoon_1F_Text_JoshPostBattle::
-    .string "Vine hasta aquí abajo para\n"
+    .string "Vine hasta aquí de profundo para\n"
     .string "presumir ante las chicas.$"
 
 MtMoon_1F_Text_MiriamIntro::
@@ -43,12 +45,13 @@ MtMoon_1F_Text_JovanDefeat::
     .string "¡MIS POKÉMON NO PUEDEN MÁS!$"
 
 MtMoon_1F_Text_JovanPostBattle::
-    .string "Tengo que encontrar POKéMON más\n"
-    .string "fuertes. ¿Dónde estarán?$"
+    .string "Tengo que encontrar {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} más\n"
+    .string "fuertes...\p"
+    .string "¿Dónde estarán?$"
 
 MtMoon_1F_Text_IrisIntro::
-    .string "¿Qué?\n"
-    .string "Estoy esperando a que mis amigos\l"
+    .string "¿Qué?\p"
+    .string "Estoy esperando a que mis amigos\n"
     .string "me encuentren aquí.$"
 
 MtMoon_1F_Text_IrisDefeat::
@@ -59,25 +62,27 @@ MtMoon_1F_Text_IrisPostBattle::
     .string "muy raros aquí.$"
 
 MtMoon_1F_Text_KentIntro::
-    .string "Hay hombres sospechosos en la\n"
-    .string "cueva. ¿Y tú?$"
+    .string "Hay personas sospechosas en la\n"
+    .string "cueva.\p"
+    .string "¿Y tú?$"
 
 MtMoon_1F_Text_KentDefeat::
     .string "¡ME VENCISTE!$"
 
 MtMoon_1F_Text_KentPostBattle::
-    .string "¡Los vi!\n"
-    .string "¡Estoy seguro de que son del TEAM ROCKET!$"
+    .string "¡Los vi!\p"
+    .string "¡Estoy seguro de que son del\n" 
+    .string "{SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY}!$"
 
 MtMoon_1F_Text_RobbyIntro::
     .string "Debes pasar por esta cueva\n"
-    .string "para llegar a CIUDAD CELESTE.$"
+    .string "para llegar a {SHADOW DYNAMIC_COLOR4}CIUDAD CELESTE{SHADOW LIGHT_GRAY}.$"
 
 MtMoon_1F_Text_RobbyDefeat::
     .string "PERDÍ.$"
 
 MtMoon_1F_Text_RobbyPostBattle::
-    .string "¡ZUBAT es resistente!\n"
+    .string "¡{SHADOW DYNAMIC_COLOR4}ZUBAT{SHADOW LIGHT_GRAY} es resistente!\n"
     .string "Pero si logras atrapar uno, podrás\l"
     .string "contar con él.$"
 
@@ -86,10 +91,10 @@ MtMoon_1F_Text_ZubatIsABloodsucker::
     .string "¡ZUBAT es un chupasangre!$"
 
 MtMoon_1F_Text_BrockHelpsExcavateFossils::
-    .string "Hola, estoy excavando fósiles\n"
-    .string "aquí bajo el MONTE LUNAR.\p"
-    .string "A veces, BROCK del GIMNASIO\n"
-    .string "PLATEADO me echa una mano.$"
+    .string "Estoy excavando fósiles aquí bajo el \n"
+    .string "{SHADOW DYNAMIC_COLOR4}MONTE LUNAR{SHADOW LIGHT_GRAY}.\p"
+    .string "A veces, {SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}CIUDAD PLATEADO{SHADOW LIGHT_GRAY}\n"
+    .string "me echa una mano...$"
 
 MtMoon_1F_Text_Sign01::
     .string "{SHADOW DYNAMIC_COLOR4}MONTE LUNAR{SHADOW LIGHT_GRAY}\n"

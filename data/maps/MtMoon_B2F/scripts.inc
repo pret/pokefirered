@@ -29,7 +29,6 @@ MtMoon_B2F_EventScript_Miguel::
 	end
 
 MtMoon_B2F_EventScript_BattleMiguel::
-	textcolor NPC_TEXT_COLOR_MALE
 	message MtMoon_B2F_Text_MiguelIntro
 	waitmessage
 	playbgm MUS_ENCOUNTER_GYM_LEADER, 0

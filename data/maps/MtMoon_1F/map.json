@@ -214,10 +214,10 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ZUBAT",
-      "x": 22,
-      "y": 31,
+      "x": 29,
+      "y": 23,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_type": "MOVEMENT_TYPE_WALK_DOWN_AND_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -228,7 +228,7 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ZUBAT",
-      "x": 13,
+      "x": 18,
       "y": 24,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WALK_LEFT_AND_RIGHT",

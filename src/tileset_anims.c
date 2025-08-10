@@ -425,7 +425,7 @@ void InitTilesetAnim_MtEmber(void)
 
 static void QueueAnimTiles_Cave_Water(u16 timer)
 {
-    AppendTilesetAnimToBuffer(sTilesetAnims_Cave_Water[timer % ARRAY_COUNT(sTilesetAnims_Cave_Water)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(896)), 2 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(sTilesetAnims_Cave_Water[timer % ARRAY_COUNT(sTilesetAnims_Cave_Water)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(978)), 2 * TILE_SIZE_4BPP);
 }
 
 static void TilesetAnim_Cave(u16 timer)

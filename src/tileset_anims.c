@@ -173,6 +173,18 @@ static const u16 *const sTilesetAnims_MtEmber_Steam[] = {
     sTilesetAnims_MtEmber_Steam_Frame3
 };
 
+static const u16 sTilesetAnims_Cave_Water_Frame0[] = INCBIN_U16("data/tilesets/secondary/cave/anim/water/0.4bpp");
+static const u16 sTilesetAnims_Cave_Water_Frame1[] = INCBIN_U16("data/tilesets/secondary/cave/anim/water/1.4bpp");
+static const u16 sTilesetAnims_Cave_Water_Frame2[] = INCBIN_U16("data/tilesets/secondary/cave/anim/water/2.4bpp");
+static const u16 sTilesetAnims_Cave_Water_Frame3[] = INCBIN_U16("data/tilesets/secondary/cave/anim/water/3.4bpp");
+
+static const u16 *const sTilesetAnims_Cave_Water[] = {
+    sTilesetAnims_Cave_Water_Frame0,
+    sTilesetAnims_Cave_Water_Frame1,
+    sTilesetAnims_Cave_Water_Frame2,
+    sTilesetAnims_Cave_Water_Frame3
+};
+
 static const u16 sTilesetAnims_LavenderTown_Torii_Frame0[] = INCBIN_U16("data/tilesets/secondary/lavender_town/anim/torii/0.4bpp");
 static const u16 sTilesetAnims_LavenderTown_Torii_Frame1[] = INCBIN_U16("data/tilesets/secondary/lavender_town/anim/torii/1.4bpp");
 static const u16 sTilesetAnims_LavenderTown_Torii_Frame2[] = INCBIN_U16("data/tilesets/secondary/lavender_town/anim/torii/2.4bpp");
@@ -409,6 +421,24 @@ void InitTilesetAnim_MtEmber(void)
     sSecondaryTilesetAnimCounter = 0;
     sSecondaryTilesetAnimCounterMax = 256;
     sSecondaryTilesetAnimCallback = TilesetAnim_MtEmber;
+}
+
+static void QueueAnimTiles_Cave_Water(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_Cave_Water[timer % ARRAY_COUNT(sTilesetAnims_Cave_Water)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(896)), 2 * TILE_SIZE_4BPP);
+}
+
+static void TilesetAnim_Cave(u16 timer)
+{
+    if (timer % 16 == 0)
+        QueueAnimTiles_Cave_Water(timer / 16);
+}
+
+void InitTilesetAnim_Cave(void)
+{
+    sSecondaryTilesetAnimCounter = 0;
+    sSecondaryTilesetAnimCounterMax = 256;
+    sSecondaryTilesetAnimCallback = TilesetAnim_Cave;
 }
 
 static void QueueAnimTiles_VermilionGym_MotorizedDoor(u16 timer)

@@ -182,7 +182,7 @@ const struct Tileset gTileset_Cave =
     .palettes = gTilesetPalettes_Cave,
     .metatiles = gMetatiles_Cave,
     .metatileAttributes = gMetatileAttributes_Cave,
-    .callback = NULL,
+    .callback = InitTilesetAnim_Cave,
 };
 
 const struct Tileset gTileset_Dummy1 =

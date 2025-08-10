@@ -157,6 +157,7 @@
 #define OBJ_EVENT_GFX_SS_ANNE 151
 #define OBJ_EVENT_GFX_SILVIO 156
 #define OBJ_EVENT_GFX_ZUBAT    158
+#define OBJ_EVENT_GFX_GEODUDE 159
 #define NUM_OBJ_EVENT_GFX      160
 
 // These are dynamic object gfx ids.

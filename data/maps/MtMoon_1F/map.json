@@ -45,7 +45,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "graphics_id": "OBJ_EVENT_GFX_NERD",
       "x": 25,
       "y": 24,
       "elevation": 3,

@@ -160,7 +160,8 @@
 #define OBJ_EVENT_GFX_SILVIO 154
 #define OBJ_EVENT_GFX_ZUBAT    155
 #define OBJ_EVENT_GFX_GEODUDE 156
-#define NUM_OBJ_EVENT_GFX      157
+#define OBJ_EVENT_GFX_NERD    157
+#define NUM_OBJ_EVENT_GFX      158
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

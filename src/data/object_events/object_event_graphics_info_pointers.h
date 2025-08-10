@@ -155,6 +155,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_James;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Silvio;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Zubat;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Geodude;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nerd;
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
     [OBJ_EVENT_GFX_RED_NORMAL]               = &gObjectEventGraphicsInfo_RedNormal,
@@ -314,4 +315,5 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SILVIO]                   = &gObjectEventGraphicsInfo_Silvio,
     [OBJ_EVENT_GFX_ZUBAT]                    = &gObjectEventGraphicsInfo_Zubat,
     [OBJ_EVENT_GFX_GEODUDE]                  = &gObjectEventGraphicsInfo_Geodude,
+    [OBJ_EVENT_GFX_NERD]                     = &gObjectEventGraphicsInfo_Nerd,
 };

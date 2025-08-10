@@ -175,6 +175,9 @@ $(OBJEVENTGFXDIR)/people/mom.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/mr_fuji.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
+$(OBJEVENTGFXDIR)/people/nerd.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
 $(OBJEVENTGFXDIR)/people/nurse.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 

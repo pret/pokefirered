@@ -641,7 +641,7 @@ PewterCity_EventScript_FatMan::
 	famechecker FAMECHECKER_BROCK, 2
 	namebox PalletTown_Text_Prueba
 	msgbox PewterCity_Text_BrockOnlySeriousTrainerHere
-	hidenamebox
+	closemessage
 	release
 	end
 

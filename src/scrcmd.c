@@ -1309,9 +1309,12 @@ bool8 ScrCmd_waitmessage(struct ScriptContext * ctx)
 bool8 ScrCmd_closemessage(struct ScriptContext * ctx)
 {
     HideFieldMessageBox();
+    if(IsNameboxDisplayed())
+    {
+        ClearNamebox();
+    }
     return FALSE;
 }
-
 static bool8 WaitForAorBPress(void)
 {
     if (JOY_NEW(A_BUTTON))

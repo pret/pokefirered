@@ -12,7 +12,7 @@
   "allow_running": true,
   "show_map_name": true,
   "floor_number": 0,
-  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "battle_scene": "MAP_BATTLE_SCENE_MTMOON",
   "connections": null,
   "object_events": [
     {

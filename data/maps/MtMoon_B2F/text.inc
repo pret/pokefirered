@@ -21,8 +21,6 @@ MtMoon_B2F_Text_LabOnCinnabarRegeneratesFossils::
     .string "Allí investigan cómo regenerar\n"
     .string "fósiles.$"
 
-
-
 MtMoon_B2F_Text_Grunt1Intro::
     .string "Nosotros, el {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY},\n"
     .string "¡encontraremos los fósiles!\p"

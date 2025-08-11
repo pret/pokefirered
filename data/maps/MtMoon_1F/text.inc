@@ -3,7 +3,7 @@
 MtMoon_1F_Text_MarcosIntro::
     .string "¡Eh!\p"
     .string "¡Me asustaste!\p"
-    .string "...Ah, ¡solo eres un niñ{OA}!$"
+    .string "...Ah, ¡solo eres un{A} niñ{OA}!$"
 
 MtMoon_1F_Text_MarcosDefeat::
     .string "¡GUAU!\n"

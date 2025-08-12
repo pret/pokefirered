@@ -890,7 +890,7 @@ gText_PkmnFainted3::
 	.string "$"
 
 Text_WelcomeWantToHealPkmn::
-	.string "{COLOR DARK_GRAY}¡Bienvenida al {SHADOW DYNAMIC_COLOR4}CENTRO POKéMON{SHADOW LIGHT_GRAY}!\p"
+	.string "{COLOR DARK_GRAY}¡Bienvenid{OA} al {SHADOW DYNAMIC_COLOR4}CENTRO POKéMON{SHADOW LIGHT_GRAY}!\p"
 	.string "¿Quieres que nos ocupemos de los\n"
 	.string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} de tu equipo?$"
 

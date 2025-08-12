@@ -2261,12 +2261,12 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Seel = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Voltorb = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 128,
     .width = 16,
     .height = 16,
-    .paletteSlot = 5,
+    .paletteSlot = 0,
     .shadowSize = SHADOW_SIZE_M,
     .inanimate = FALSE,
     .disableReflectionPaletteLoad = FALSE,

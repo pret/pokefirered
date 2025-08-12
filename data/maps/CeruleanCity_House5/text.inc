@@ -1,70 +1,70 @@
 CeruleanCity_House1_Text_AnyInterestInBerries::
-    .string "I concoct a variety of medicine\n"
-    .string "from BERRY POWDER.\p"
-    .string "Using good BERRY POWDER, I can\n"
-    .string "make any kind of medicine.\p"
-    .string "Now tell me, have you any interest\n"
-    .string "in BERRIES?$"
+.string "Preparo todo tipo de medicinas\n"
+.string "con POLVO DE BAYAS.\p"
+.string "Usando buen POLVO DE BAYAS, puedo\n"
+.string "hacer cualquier medicina.\p"
+.string "Ahora dime, ¿tienes algún interés\n"
+.string "en las BAYAS?$"
 
 CeruleanCity_House1_Text_HaveJustTheThing::
-    .string "Ah, good! For you, then, I have\n"
-    .string "just the thing.$"
+.string "¡Ah, bien! Entonces tengo justo\n"
+.string "lo que necesitas.$"
 
 CeruleanCity_House1_Text_GoCrushBerriesAtDirectCorner::
-    .string "There's something new on the second\n"
-    .string "floor of POKéMON CENTERS, at the\l"
-    .string "DIRECT CORNER.\p"
-    .string "They installed a Wireless Adapter\n"
-    .string "machine for crushing BERRIES.\p"
-    .string "This is where you come in.\p"
-    .string "I have a favor to ask, one that\n"
-    .string "I can entrust only to you.\p"
-    .string "Could you make BERRY POWDER for\n"
-    .string "me using that machine?\p"
-    .string "Don't forget, the machine is at the\n"
-    .string "DIRECT CORNER of POKéMON CENTERS.\p"
-    .string "I'll concoct medicine for you if\n"
-    .string "you bring me some BERRY POWDER.\p"
-    .string "Don't forget, crush BERRIES into\n"
-    .string "BERRY POWDER and bring it to me.$"
+.string "Hay algo nuevo en el segundo piso\n"
+.string "de los CENTROS POKéMON, en la\l"
+.string "ESQUINA DIRECTA.\p"
+.string "Instalaron una máquina con\n"
+.string "Adaptador Inalámbrico para triturar BAYAS.\p"
+.string "Aquí es donde entras tú.\p"
+.string "Tengo un favor que pedirte, uno que\n"
+.string "solo puedo confiarte a ti.\p"
+.string "¿Podrías hacer POLVO DE BAYAS para\n"
+.string "mí usando esa máquina?\p"
+.string "No lo olvides, la máquina está en la\n"
+.string "ESQUINA DIRECTA de los CENTROS POKéMON.\p"
+.string "Prepararé medicina para ti si\n"
+.string "me traes algo de POLVO DE BAYAS.\p"
+.string "No lo olvides, tritura BAYAS para\n"
+.string "hacer POLVO DE BAYAS y tráemelo.$"
 
 CeruleanCity_House1_Text_WhyMustYouLieNoBerries::
-    .string "Why must you lie to me?\p"
-    .string "How many BERRIES do you have?\n"
-    .string "Not a one!$"
+.string "¿Por qué me mientes?\p"
+.string "¿Cuántas BAYAS tienes?\n"
+.string "¡Ni una!$"
 
 CeruleanCity_House1_Text_TakeInterestInAllSortsOfThings::
-    .string "You have no interest in BERRIES?\p"
-    .string "Young one, it's important to take an\n"
-    .string "interest in all sorts of things.$"
+.string "¿No tienes interés en las BAYAS?\p"
+.string "Jovencito, es importante interesarse\n"
+.string "en todo tipo de cosas.$"
 
 CeruleanCity_House1_Text_HaveYouBroughtBerryPowder::
-    .string "Er-hem! Have you brought me some\n"
-    .string "BERRY POWDER?$"
+.string "¡Ejem! ¿Me trajiste algo de\n"
+.string "POLVO DE BAYAS?$"
 
 CeruleanCity_House5_Text_ExchangeWithWhat::
-    .string "With what would you like to \n"
-    .string "exchange it?$"
+.string "¿Por qué te gustaría\n"
+.string "cambiarlo?$"
 
 CeruleanCity_House1_Text_YoullExchangeBerryPowderForItem::
-    .string "Fine, you'll exchange your BERRY\n"
-    .string "POWDER for one {STR_VAR_1}?$"
+.string "Bien, ¿cambiarás tu POLVO DE BAYAS\n"
+.string "por un {STR_VAR_1}?$"
 
 CeruleanCity_House1_Text_DontHaveEnoughBerryPowder::
-    .string "Hm? You don't have enough\n"
-    .string "BERRY POWDER.$"
+.string "¿Eh? No tienes suficiente\n"
+.string "POLVO DE BAYAS.$"
 
 CeruleanCity_House1_Text_TradeMoreBerryPowder::
-    .string "This is fine BERRY POWDER indeed.\n"
-    .string "It will make excellent medicine.\p"
-    .string "Would you like to trade more BERRY\n"
-    .string "POWDER for something else?$"
+.string "Este POLVO DE BAYAS es excelente.\n"
+.string "Haré una medicina magnífica.\p"
+.string "¿Quieres cambiar más POLVO DE BAYAS\n"
+.string "por algo más?$"
 
 CeruleanCity_House1_Text_HopeToSeeYouAgain::
-    .string "That's fine, then.\n"
-    .string "I'll hope to see you back again.$"
+.string "Está bien, entonces.\n"
+.string "Espero verte de nuevo.$"
 
 CeruleanCity_House1_Text_SeeMeIfYoudLikeToTradePowder::
-    .string "Come see me if you'd like to trade\n"
-    .string "your BERRY POWDER.$"
+.string "Ven a verme si quieres cambiar\n"
+.string "tu POLVO DE BAYAS.$"
 

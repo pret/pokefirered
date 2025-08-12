@@ -8,9 +8,9 @@ CeruleanCity_OnTransition::
 	end
 
 CeruleanCity_EventScript_BlockExits::
-	setobjectxyperm LOCALID_CERULEAN_POLICEMAN, 30, 12
-	setobjectxyperm LOCALID_CERULEAN_SLOWBRO, 26, 31
-	setobjectxyperm LOCALID_CERULEAN_LASS, 27, 31
+	setobjectxyperm LOCALID_CERULEAN_POLICEMAN, 28, 12
+	setobjectxyperm LOCALID_CERULEAN_SLOWBRO, 24, 28
+	setobjectxyperm LOCALID_CERULEAN_LASS, 25, 28
 	return
 
 CeruleanCity_EventScript_RivalTriggerLeft::
@@ -355,4 +355,17 @@ CeruleanCity_EventScript_GymSign::
 	famechecker FAMECHECKER_MISTY, 0
 	msgbox CeruleanCity_Text_GymSign
 	releaseall
+	end
+
+
+CeruleanCity_EventScript_WinBattlesOnBridgeGetPrize::
+	msgbox CeruleanCity_Text_WinBattlesOnBridgeGetPrize, MSGBOX_NPC
+	end
+
+CeruleanCity_EventScript_NuggetBridgeHoldsGreatChallenges::
+	msgbox CeruleanCity_Text_NuggetBridgeHoldsGreatChallenges, MSGBOX_NPC
+	end
+
+CeruleanCity_EventScript_MistyIsStrongestWaterTypeLeader::
+	msgbox CeruleanCity_Text_MistyIsStrongestWaterTypeLeader, MSGBOX_NPC
 	end

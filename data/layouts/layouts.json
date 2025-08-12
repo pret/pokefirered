@@ -64,7 +64,7 @@
     {
       "id": "LAYOUT_HOUSE1",
       "name": "House1_Layout",
-      "width": 11,
+      "width": 7,
       "height": 9,
       "border_width": 2,
       "border_height": 2,
@@ -1977,7 +1977,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GenericBuilding2",
+      "secondary_tileset": "gTileset_GenericBuilding1",
       "border_filepath": "data/layouts/CeruleanCity_House1/border.bin",
       "blockdata_filepath": "data/layouts/CeruleanCity_House1/map.bin"
     },
@@ -3477,7 +3477,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GenericBuilding2",
+      "secondary_tileset": "gTileset_GenericBuilding1",
       "border_filepath": "data/layouts/CeruleanCity_House5/border.bin",
       "blockdata_filepath": "data/layouts/CeruleanCity_House5/map.bin"
     },

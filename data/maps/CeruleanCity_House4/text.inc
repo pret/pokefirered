@@ -1,6 +1,6 @@
 CeruleanCity_House4_Text_NothingEntertaining::
-.string "Ay…\n"
-.string "Mucho tiempo, poco que hacer…\p"
+.string "Ay...\n"
+.string "Mucho tiempo, poco que hacer...\p"
 .string "¿No pasa nada entretenido\n"
 .string "en ninguna parte?$"
 

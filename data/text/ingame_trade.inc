@@ -19,18 +19,18 @@ Trade_Text_IsntMyOldMonGreat::
 	.string "Isn't my old {STR_VAR_2} great?$"
 
 Trade_Text_DoYouHaveMonWouldYouTradeForMon::
-	.string "Hello, there! Do you happen to\n"
-	.string "have a {STR_VAR_1}?\p"
-	.string "Would you agree to a trade for\n"
-	.string "my {STR_VAR_2}?$"
+	.string "¡Hola! ¿Por casualidad tienes\n"
+	.string "un {SHADOW DYNAMIC_COLOR4}{STR_VAR_1}{SHADOW LIGHT_GRAY}?\p"
+	.string "¿Te gustaría intercambiarlo por\n"
+	.string "mi {SHADOW DYNAMIC_COLOR4}{STR_VAR_2}{SHADOW LIGHT_GRAY}?$"
 
 Trade_Text_WellIfYouDontWantTo::
-	.string "Well, if you don't want to…$"
+	.string "Bueno, si no quieres...$"
 
 Trade_Text_ThisIsntMon::
-	.string "Hmmm?\n"
-	.string "This isn't a {STR_VAR_1}.\p"
-	.string "Think of me if you get one.$"
+	.string "¿Hmm?\n"
+	.string "Esto no es un {SHADOW DYNAMIC_COLOR4}{STR_VAR_1}{SHADOW LIGHT_GRAY}.\p"
+	.string "Piensa en mí si consigues uno.$"
 
 Trade_Text_Thanks::
 	.string "Thanks!$"

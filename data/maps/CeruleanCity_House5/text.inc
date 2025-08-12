@@ -1,10 +1,10 @@
 CeruleanCity_House1_Text_AnyInterestInBerries::
 .string "Preparo todo tipo de medicinas\n"
-.string "con POLVO DE BAYAS.\p"
-.string "Usando buen POLVO DE BAYAS, puedo\n"
+.string "con {SHADOW DYNAMIC_COLOR4}POLVO DE BAYAS{SHADOW LIGHT_GRAY}.\p"
+.string "Usando buen {SHADOW DYNAMIC_COLOR4}POLVO DE BAYAS{SHADOW LIGHT_GRAY}, puedo\n"
 .string "hacer cualquier medicina.\p"
 .string "Ahora dime, ¿tienes algún interés\n"
-.string "en las BAYAS?$"
+.string "en las {SHADOW DYNAMIC_COLOR4}BAYAS{SHADOW LIGHT_GRAY}?$"
 
 CeruleanCity_House1_Text_HaveJustTheThing::
 .string "¡Ah, bien! Entonces tengo justo\n"
@@ -30,12 +30,12 @@ CeruleanCity_House1_Text_GoCrushBerriesAtDirectCorner::
 
 CeruleanCity_House1_Text_WhyMustYouLieNoBerries::
 .string "¿Por qué me mientes?\p"
-.string "¿Cuántas BAYAS tienes?\n"
+.string "¿Cuántas {SHADOW DYNAMIC_COLOR4}BAYAS{SHADOW LIGHT_GRAY} tienes?\n"
 .string "¡Ni una!$"
 
 CeruleanCity_House1_Text_TakeInterestInAllSortsOfThings::
-.string "¿No tienes interés en las BAYAS?\p"
-.string "Jovencito, es importante interesarse\n"
+.string "¿No tienes interés en las {SHADOW DYNAMIC_COLOR4}BAYAS{SHADOW LIGHT_GRAY}?\p"
+.string "Jovencit{OA}, es importante interesarse\n"
 .string "en todo tipo de cosas.$"
 
 CeruleanCity_House1_Text_HaveYouBroughtBerryPowder::

@@ -1394,15 +1394,15 @@ static const struct SpriteFrameImage sPicTable_Slowpoke[] = {
 };
 
 static const struct SpriteFrameImage sPicTable_Slowbro[] = {
-    overworld_frame(gObjectEventPic_Slowbro, 2, 2, 0),
-    overworld_frame(gObjectEventPic_Slowbro, 2, 2, 1),
-    overworld_frame(gObjectEventPic_Slowbro, 2, 2, 2),
-    overworld_frame(gObjectEventPic_Slowbro, 2, 2, 0),
-    overworld_frame(gObjectEventPic_Slowbro, 2, 2, 0),
-    overworld_frame(gObjectEventPic_Slowbro, 2, 2, 1),
-    overworld_frame(gObjectEventPic_Slowbro, 2, 2, 1),
-    overworld_frame(gObjectEventPic_Slowbro, 2, 2, 2),
-    overworld_frame(gObjectEventPic_Slowbro, 2, 2, 2),
+    overworld_frame(gObjectEventPic_Slowbro, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Slowbro, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Slowbro, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Slowbro, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Slowbro, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Slowbro, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Slowbro, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Slowbro, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Slowbro, 4, 4, 2),
 };
 
 static const struct SpriteFrameImage sPicTable_Machop[] = {

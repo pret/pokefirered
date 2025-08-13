@@ -62,14 +62,14 @@ static void Task_MapNamePopup(u8 taskId)
         if (IsDma3ManagerBusyWithBgCopy())
             break;
         // fallthrough
-    case 2:
-        task->tPos -= 2;
-        if (task->tPos <= -24)
-        {
-            task->tState = 3;
-            task->tTimer = 0;
-        }
-        break;
+case 2:
+    task->tPos += 1; // antes era -= 2
+    if (task->tPos >= 24) // altura final abajo
+    {
+        task->tState = 3;
+        task->tTimer = 0;
+    }
+    break;
     case 3:
         task->tTimer++;
         if (task->tTimer > 120)
@@ -78,23 +78,24 @@ static void Task_MapNamePopup(u8 taskId)
             task->tState = 4;
         }
         break;
-    case 4:
-        task->tPos += 2;
-        if (task->tPos >= 0)
+case 4:
+    // Salida (subir)
+    task->tPos -= 1; // antes era += 2
+    if (task->tPos <= 0) // vuelve a la posición original
+    {
+        if (task->tReshow)
         {
-            if (task->tReshow)
-            {
-                MapNamePopupPrintMapNameOnWindow(task->tWindowId);
-                CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
-                task->tState = 1;
-                task->tReshow = FALSE;
-            }
-            else
-            {
-                task->tState = 6;
-                return;
-            }
+            MapNamePopupPrintMapNameOnWindow(task->tWindowId);
+            CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
+            task->tState = 1;
+            task->tReshow = FALSE;
         }
+        else
+        {
+            task->tState = 6;
+            return;
+        }
+    }
     case 5:
         break;
     case 6:
@@ -151,7 +152,7 @@ static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
     struct WindowTemplate windowTemplate = {
         .bg = 0,
         .tilemapLeft = 0,
-        .tilemapTop = 47,
+        .tilemapTop =21,
         .width = 30,
         .height = 2,
         .paletteNum = WIN_PAL_NUM,

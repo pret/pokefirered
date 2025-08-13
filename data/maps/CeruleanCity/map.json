@@ -67,6 +67,7 @@
       "flag": "FLAG_HIDE_CERULEAN_ROCKET"
     },
     {
+      "local_id": "LOCALID_CERULEAN_LITTLE_BOY",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_BOY",
       "x": 27,
@@ -194,7 +195,7 @@
       "local_id": "LOCALID_CERULEAN_CAVE_GUARD",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_M",
-      "x": 2,
+      "x": 1,
       "y": 14,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -388,17 +389,18 @@
       "flag": "FLAG_TEMP_13"
     },
     {
+      "local_id": "LOCALID_CERULEAN_PSYDUCK",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PSYDUCK",
       "x": 33,
       "y": 22,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "CeruleanCity_EventScript_Psyduck",
       "flag": "0"
     },
     {
@@ -458,6 +460,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_CERULEAN_VOLTORB",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VOLTORB",
       "x": 10,
@@ -468,7 +471,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "CeruleanCity_EventScript_Voltorb",
       "flag": "0"
     }
   ],
@@ -631,7 +634,7 @@
     },
     {
       "type": "sign",
-      "x": 11,
+      "x": 17,
       "y": 28,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -639,16 +642,16 @@
     },
     {
       "type": "sign",
-      "x": 17,
-      "y": 28,
+      "x": 18,
+      "y": 13,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_EventScript_TrainerTips"
     },
     {
       "type": "hidden_item",
-      "x": 14,
-      "y": 11,
+      "x": 11,
+      "y": 7,
       "elevation": 3,
       "item": "ITEM_RARE_CANDY",
       "flag": "FLAG_HIDDEN_ITEM_CERULEAN_CITY_RARE_CANDY",
@@ -678,6 +681,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "CeruleanCity_BikeShop_EventScript_Bicycle"
+    },
+    {
+      "type": "sign",
+      "x": 22,
+      "y": 21,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "CeruleanCity_EventScript_CitySign"
     }
   ]
 }

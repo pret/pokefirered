@@ -18,3 +18,9 @@ Name_Oak::
 
 Name_Brock::
     .string "BROCK$"
+
+Name_Voltorb::
+    .string "VOLTORB$"
+
+Name_Psyduck::
+    .string "PSYDUCK$"

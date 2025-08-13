@@ -35,7 +35,7 @@ CeruleanCity_Text_OhRightLittlePresentAsFavor::
 .string "regalo como favor.$"
 
 CeruleanCity_Text_ExplainFameCheckerSmellYa::
-.string "Un chismoso como tú…\n"
+.string "Un chismoso como tú....\n"
 .string "Eso te viene perfecto.\p"
 .string "Yo no lo necesito porque no\n"
 .string "me importan los demás.\p"
@@ -50,7 +50,7 @@ CeruleanCity_Text_RivalVictory::
 CeruleanCity_Text_GruntIntro::
 .string "¡Oye! ¡Fuera!\n"
 .string "¡Este no es tu patio!\p"
-.string "…¿Eh?\n"
+.string "....¿Eh?\n"
 .string "¿Yo?\p"
 .string "¡Soy un transeúnte inocente!\n"
 .string "¿No me crees?{PLAY_BGM}{MUS_ENCOUNTER_ROCKET}$"
@@ -60,7 +60,7 @@ CeruleanCity_Text_GruntDefeat::
 .string "¡ME IRÉ EN SILENCIO!$"
 
 CeruleanCity_Text_OkayIllReturnStolenTM::
-.string "…Está bien.\n"
+.string "....Está bien.\n"
 .string "Devolveré la MT que robé.$"
 
 CeruleanCity_Text_RecoveredTM28FromGrunt::
@@ -75,6 +75,8 @@ CeruleanCity_Text_MakeRoomForThisCantRun::
 .string "¡Haz espacio para esto!\n"
 .string "¡No puedo huir hasta dártelo!$"
 
+
+@pendiente A mayuscula
 CeruleanCity_Text_TrainerLifeIsToughIsntIt::
 .string "¿También eres {SHADOW DYNAMIC_COLOR4}ENTRENADOR{A}{SHADOW LIGHT_GRAY}?\p"
 .string "Coleccionar, luchar...\n"
@@ -102,45 +104,45 @@ CeruleanCity_Text_PokemonEncyclopediaAmusing::
 
 CeruleanCity_Text_PeopleHereWereRobbed::
 .string "La gente de aquí fue robada.\p"
-.string "¡Es obvio que el TEAM ROCKET está\n"
+.string "¡Es obvio que el {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY} está\n"
 .string "detrás de este vil crimen!\p"
-.string "¡Hasta nuestra FUERZA POLICIAL tiene\n"
-.string "problemas con esos ROCKETS!$"
+.string "¡Hasta nuestra {SHADOW DYNAMIC_COLOR4}FUERZA POLICIAL{SHADOW LIGHT_GRAY} tiene\n"
+.string "problemas con esos villanos!$"
 
 CeruleanCity_Text_SlowbroUseSonicboom::
-.string "¡Vamos, SLOWBRO!\n"
-.string "¡Usa SONICBOOM!$"
+.string "¡Vamos, {SHADOW DYNAMIC_COLOR4}SLOWBRO{SHADOW LIGHT_GRAY}!\n"
+.string "¡Usa {SHADOW DYNAMIC_COLOR4}SONICBOOM{SHADOW LIGHT_GRAY}!$"
 
 CeruleanCity_Text_SlowbroPayAttention::
-.string "¡Vamos, SLOWBRO, pon atención!$"
+.string "¡Vamos, {SHADOW DYNAMIC_COLOR4}SLOWBRO{SHADOW LIGHT_GRAY}, pon atención!$"
 
 CeruleanCity_Text_SlowbroPunch::
-.string "¡SLOWBRO, da un puñetazo!$"
+.string "¡{SHADOW DYNAMIC_COLOR4}SLOWBRO{SHADOW LIGHT_GRAY}, da un puñetazo!$"
 
 CeruleanCity_Text_NoYouBlewItAgain::
 .string "¡No!\n"
 .string "¡La arruinaste otra vez!$"
 
 CeruleanCity_Text_SlowbroWithdraw::
-.string "¡SLOWBRO, REFUGIO!$"
+.string "¡{SHADOW DYNAMIC_COLOR4}SLOWBRO{SHADOW LIGHT_GRAY}, {SHADOW DYNAMIC_COLOR4}REFUGIO{SHADOW LIGHT_GRAY}!$"
 
 CeruleanCity_Text_HardToControlMonsObedience::
 .string "¡No! ¡Eso está mal!\n"
-.string "¡Es tan difícil controlar a los POKéMON!\p"
-.string "La obediencia de tus POKéMON depende\n"
-.string "de tus habilidades como ENTRENADOR.$"
+.string "¡Es difícil controlar a los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}!\p"
+.string "La obediencia de tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} depende\n"
+.string "de tus habilidades como {SHADOW DYNAMIC_COLOR4}ENTRENADOR{SHADOW LIGHT_GRAY}.$"
 
 CeruleanCity_Text_SlowbroTookSnooze::
-.string "SLOWBRO se echó una siesta…$"
+.string "{SHADOW DYNAMIC_COLOR4}SLOWBRO{SHADOW LIGHT_GRAY} se echó una siesta....$"
 
 CeruleanCity_Text_SlowbroLoafingAround::
-.string "SLOWBRO está holgazaneando…$"
+.string "{SHADOW DYNAMIC_COLOR4}SLOWBRO{SHADOW LIGHT_GRAY} está holgazaneando....$"
 
 CeruleanCity_Text_SlowbroTurnedAway::
-.string "SLOWBRO se dio la vuelta…$"
+.string "{SHADOW DYNAMIC_COLOR4}SLOWBRO{SHADOW LIGHT_GRAY} se dio la vuelta....$"
 
 CeruleanCity_Text_SlowbroIgnoredOrders::
-.string "SLOWBRO ignoró las órdenes…$"
+.string "{SHADOW DYNAMIC_COLOR4}SLOWBRO{SHADOW LIGHT_GRAY} ignoró las órdenes....$"
 
 CeruleanCity_Text_WantBrightRedBicycle::
 .string "Quiero una bicicleta roja brillante.\p"
@@ -160,43 +162,48 @@ CeruleanCity_Text_ThisIsCeruleanCave::
 .string "logrado un gran mérito.$"
 
 CeruleanCity_Text_CitySign::
-.string "CIUDAD CELESTE\n"
-.string "La rodea una misteriosa aura\l"
-.string "azul$"
+.string "{SHADOW DYNAMIC_COLOR4}CIUDAD CELESTE{SHADOW LIGHT_GRAY}\n"
+.string "La rodea una misteriosa aura azul$"
 
 CeruleanCity_Text_TrainerTipsHeldItems::
-.string "CONSEJO ENTRENADOR\p"
-.string "Un POKéMON puede llevar\n"
-.string "un objeto.\p"
+.string "{SHADOW DYNAMIC_COLOR4}CONSEJO ENTRENADOR{SHADOW LIGHT_GRAY}\p"
+.string "Un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} puede llevar un objeto.\p"
 .string "Algunos objetos incluso pueden\n"
-.string "ser usados en combate por el POKéMON que lo lleva.$"
+.string "ser usados en combate por el\l"
+.string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} que lo lleva.$"
 
 CeruleanCity_Text_BikeShopSign::
-.string "¡Hierba y cuevas sin esfuerzo!\n"
-.string "TIENDA DE BICICLETAS$"
+.string "{SHADOW DYNAMIC_COLOR4}TIENDA DE BICICLETAS{SHADOW LIGHT_GRAY}\n"
+.string "¡Hierba y cuevas sin esfuerzo!$"
 
 CeruleanCity_Text_GymSign::
-.string "GIMNASIO POKéMON DE CIUDAD CELESTE\n"
-.string "LÍDER: MISTY\l"
+.string "{SHADOW DYNAMIC_COLOR4}GIMNASIO POKéMON DE CIUDAD CELESTE{SHADOW LIGHT_GRAY}\n"
+.string "{SHADOW DYNAMIC_COLOR4}LÍDER: {SHADOW DYNAMIC_COLOR4}MISTY{SHADOW LIGHT_GRAY}\l"
 .string "¡La sirena marimacho!$"
 
 CeruleanCity_Text_WinBattlesOnBridgeGetPrize::
-.string "CIUDAD CELESTE es famosa por su\n"
+.string "{SHADOW DYNAMIC_COLOR4}CIUDAD CELESTE{SHADOW LIGHT_GRAY} es famosa por su\n"
 .string "hermoso puente al norte.\p"
-.string "Lo llaman PUENTE PEPITA.\p"
+.string "Lo llaman {SHADOW DYNAMIC_COLOR4}PUENTE PEPITA{SHADOW LIGHT_GRAY}.\p"
 .string "¡Dicen que si lo cruzas, te esperan\n"
 .string "grandes desafíos!$"
 
 CeruleanCity_Text_NuggetBridgeHoldsGreatChallenges::
-.string "¡A veces veo a ENTRENADORES\n"
+.string "¡A veces veo a {SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY}\n"
 .string "peleando en el puente del norte!\p"
 .string "Dicen que si ganas todas las\n"
 .string "batallas, te dan un premio.$"
 
 CeruleanCity_Text_MistyIsStrongestWaterTypeLeader::
 .string "¿Ves ese gran edificio?\n"
-.string "Es el GIMNASIO de MISTY.\p"
-.string "¡Ella es la LIDER más fuerte de toda\n"
+.string "Es el {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}MISTY{SHADOW LIGHT_GRAY}.\p"
+.string "Ella es la {SHADOW DYNAMIC_COLOR4}LIDER{SHADOW LIGHT_GRAY} más fuerte de toda\n"
 .string "la región...\p"
-.string "Al menos en cuanto a POKéMON de tipo\l"
-.string "AGUA.$"
+.string "Al menos en cuanto a {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} de\n"
+.string "tipo {SHADOW DYNAMIC_COLOR4}AGUA{SHADOW LIGHT_GRAY}.$"
+
+CeruleanCity_Text_Voltorb::
+.string "¡Volt!$"
+
+CeruleanCity_Text_Psyduck::
+.string "¡Psy!$"

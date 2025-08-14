@@ -266,7 +266,6 @@ PewterCity_Museum_1F_EventScript_Brock::
 	applymovement LOCALID_CAMERA, Common_Movement_WalkUp3
 	waitmovement 0
 	special RemoveCameraObject
-
 	textcolor NPC_TEXT_COLOR_NEUTRAL	
 	namebox Name_Brock
 	msgbox PewterCity_Museum_1F_Text_AsiEsComoLosFosiles
@@ -298,7 +297,7 @@ PewterCity_Museum_1F_EventScript_Brock::
 	applymovement LOCALID_CAMERA, Common_Movement_WalkDown3
 	waitmovement 0
 	special RemoveCameraObject
-	setflag FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR @desaparece brock y publico
+	setflag FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR
 	releaseall
 	end
 

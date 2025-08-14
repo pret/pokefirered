@@ -43,8 +43,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_LASS",
-      "x": 75,
-      "y": 3,
+      "x": 73,
+      "y": 6,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
@@ -57,8 +57,8 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 67,
-      "y": 5,
+      "x": 68,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -72,7 +72,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BOY",
       "x": 16,
-      "y": 15,
+      "y": 17,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
@@ -86,7 +86,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
       "x": 47,
-      "y": 3,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
@@ -100,7 +100,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
       "x": 50,
-      "y": 3,
+      "y": 4,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
@@ -154,8 +154,8 @@
     },
     {
       "type": "sign",
-      "x": 41,
-      "y": 8,
+      "x": 43,
+      "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route4_EventScript_RouteSign"
@@ -163,7 +163,7 @@
     {
       "type": "hidden_item",
       "x": 43,
-      "y": 2,
+      "y": 4,
       "elevation": 3,
       "item": "ITEM_GREAT_BALL",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE4_GREAT_BALL",
@@ -172,8 +172,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 11,
-      "y": 16,
+      "x": 18,
+      "y": 4,
       "elevation": 3,
       "item": "ITEM_PERSIM_BERRY",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE4_PERSIM_BERRY",
@@ -182,8 +182,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 67,
-      "y": 17,
+      "x": 42,
+      "y": 4,
       "elevation": 3,
       "item": "ITEM_RAZZ_BERRY",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE4_RAZZ_BERRY",
@@ -197,6 +197,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route4_EventScript_MtMoonSign"
+    },
+    {
+      "type": "sign",
+      "x": 44,
+      "y": 10,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route4_EventScript_RouteSign"
     }
   ]
 }

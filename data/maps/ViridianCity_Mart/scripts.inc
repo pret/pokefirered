@@ -59,7 +59,7 @@ ViridianCity_Mart_EventScript_RedGreen::
 	waitmovement 0
 	setobjectxy LOCALID_VIDRIAN_MART_REDGREEN,10,9
 	playbgm MUS_POKE_CENTER, 0
-	setflag FLAG_OCULTAR_REDGREEN_TIENDA_VERDE
+	setflag FLAG_HIDE_VIRIDIAN_CITY_MART_REDGREEN
 	return
 	end
 

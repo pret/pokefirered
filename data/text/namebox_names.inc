@@ -24,3 +24,6 @@ Name_Voltorb::
 
 Name_Psyduck::
     .string "PSYDUCK$"
+
+Name_Geodude::
+    .string "GEODUDE$"

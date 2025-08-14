@@ -43,7 +43,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PewterCity_Museum_1F_EventScript_NPC01",
-      "flag": "FLAG_0x0B4"
+      "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
       "local_id": "LOCALID_OLD_AMBER",
@@ -73,7 +73,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PewterCity_Museum_1F_EventScript_NPC02",
-      "flag": "FLAG_0x0B4"
+      "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
       "type": "object",
@@ -130,7 +130,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_0x0B4"
+      "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
       "local_id": "LOCALID_MUSEUM_SPECTATOR5",
@@ -145,7 +145,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PewterCity_Museum_1F_EventScript_NPC05",
-      "flag": "FLAG_0x0B4"
+      "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
       "local_id": "LOCALID_MUSEUM_SPECTATOR2",
@@ -160,7 +160,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PewterCity_Museum_1F_EventScript_NPC03",
-      "flag": "FLAG_0x0B4"
+      "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
       "local_id": "LOCALID_MUSEUM_SPECTATOR1",
@@ -175,7 +175,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PewterCity_Museum_1F_EventScript_NPC04",
-      "flag": "FLAG_0x0B4"
+      "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
       "type": "object",

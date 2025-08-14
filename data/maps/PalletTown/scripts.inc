@@ -623,7 +623,7 @@ PalletTown_EventScript_RunningShoes_MomEntersHouse::
 	closedoor 7, 6
 	waitdooranim
 	setflag FLAG_SYS_B_DASH
-	setflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY
+	setflag FLAG_SHOW_PALLET_TOWN_RUNNING_SHOES_MOM
 	clearflag FLAG_HIDE_PALLET_TOWN_HOUSE_MOM
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 0
 	release

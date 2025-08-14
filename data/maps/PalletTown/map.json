@@ -182,7 +182,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PalletTown_EventScript_RunningShoes_Mom",
-      "flag": "FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY"
+      "flag": "FLAG_SHOW_PALLET_TOWN_RUNNING_SHOES_MOM"
     }
   ],
   "warp_events": [

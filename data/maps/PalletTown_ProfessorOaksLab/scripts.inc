@@ -1512,7 +1512,7 @@ PalletTown_ProfessorOaksLab_EventScript_EntregaPokedex::
 @EVENTO RECIBIR POKEDEX Y POKERADAR
 PalletTown_ProfessorOaksLab_EventScript_RecibirPokedex::
 	lockall
-	clearflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY @ aparece mama
+	clearflag FLAG_SHOW_PALLET_TOWN_RUNNING_SHOES_MOM @ aparece mama
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 1 @ aparece el evento
 	setflag FLAG_HIDE_PALLET_TOWN_HOUSE_MOM
 	playbgm MUS_OAK, 0

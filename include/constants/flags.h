@@ -159,7 +159,7 @@
 #define FLAG_HIDE_SAPPHIRE                                 0x08F
 #define FLAG_HIDE_DOTTED_HOLE_SCIENTIST                    0x090
 #define FLAG_HIDE_THREE_ISLAND_LONE_BIKER                  0x091
-#define FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY            0x092
+#define FLAG_SHOW_PALLET_TOWN_RUNNING_SHOES_MOM            0x092
 #define FLAG_HIDE_LOST_CAVE_SELPHY                         0x093
 #define FLAG_HIDE_RESORT_GORGEOUS_SELPHY                   0x094
 #define FLAG_HIDE_RESORT_GORGEOUS_INSIDE_SELPHY            0x095
@@ -190,16 +190,16 @@
 #define FLAG_HIDE_SAFFRON_CITY_POKECENTER_SABRINA_JOURNALS 0x0AE
 
 // Unused?
-#define FLAG_HIDE_VIRIDIAN_CITY_MART_REDGREEN  0x0AF  //BOY TIENDA CIUDAD VERDE
-#define FLAG_UNUSED_0x0B0              0x0B0  
-#define FLAG_0x0B1               0x0B1  //BOY LAB POKEDEX
-#define FLAG_HIDE_PALLET_TOWN_HOUSE_MOM                0x0B2  //CASA MAMA OFF
-#define FLAG_0x0B3               0x0B3  //REGALO POKEMONES BETA
-#define FLAG_0x0B4               0x0B4  //EVENTO BROCK MUSEO
-#define FLAG_0x0B5               0x0B5  //FOSIL KABUTO
-#define FLAG_0x0B6               0x0B6  //FOSIL OMANYTE
-#define FLAG_0x0B7               0x0B7  //EVENTO BROCK DESPUES MUSEO
-#define FLAG_0x0B8               0x0B8  //APARECE OW SILVIO
+#define FLAG_HIDE_VIRIDIAN_CITY_MART_REDGREEN              0x0AF
+#define FLAG_HIDE_PALLET_TOWN_HOUSE_MOM                    0x0B0
+#define FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR   0x0B1
+#define FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_KABUTO          0x0B2
+#define FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE         0x0B3
+#define FLAG_HIDE_PEWTER_CITY_BROCK_EVENT                  0x0B4
+#define FLAG_0x0B5               0x0B5
+#define FLAG_0x0B6               0x0B6
+#define FLAG_0x0B7               0x0B7
+#define FLAG_0x0B8               0x0B8
 #define FLAG_0x0B9               0x0B9
 #define FLAG_0x0BA               0x0BA
 #define FLAG_0x0BB               0x0BB

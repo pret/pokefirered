@@ -672,9 +672,7 @@ PewterCity_EventScript_Silvio::
 	end
 
 PewterCity_EventScript_MuseumSign::
-	clearflag FLAG_0x0B8 @TERMINA PELEA PARA QUE APAREZCA SILVIO
 	msgbox PewterCity_Text_MuseumOfScience, MSGBOX_SIGN
-	givemon SPECIES_GROWLITHE, 100 @para testeo
 	end
 
 PewterCity_EventScript_GymSign::

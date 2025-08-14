@@ -17,7 +17,7 @@ const struct Tileset gTileset_PalletTown =
     .palettes = gTilesetPalettes_PalletTown,
     .metatiles = gMetatiles_PalletTown,
     .metatileAttributes = gMetatileAttributes_PalletTown,
-    .callback = NULL,
+    .callback = InitTilesetAnim_PalletTown,
 };
 
 const struct Tileset gTileset_ViridianCity =

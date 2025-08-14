@@ -371,33 +371,3 @@ CeruleanCity_EventScript_NuggetBridgeHoldsGreatChallenges::
 CeruleanCity_EventScript_MistyIsStrongestWaterTypeLeader::
 	msgbox CeruleanCity_Text_MistyIsStrongestWaterTypeLeader, MSGBOX_NPC
 	end
-
-CeruleanCity_EventScript_Voltorb::
-	faceplayer
-	waitse
-	applymovement LOCALID_CERULEAN_VOLTORB, Common_Movement_ExclamationMark
-	waitmovement 0
-	playmoncry SPECIES_VOLTORB, CRY_MODE_NORMAL
-	namebox Name_Voltorb
-	msgbox CeruleanCity_Text_Voltorb
-	closemessage
-	waitmoncry
-	applymovement LOCALID_CERULEAN_VOLTORB, Common_Movement_FaceOriginalDirection
-	waitmovement 0
-	release
-	end
-
-CeruleanCity_EventScript_Psyduck::
-	faceplayer
-	waitse
-	applymovement LOCALID_CERULEAN_PSYDUCK, Common_Movement_ExclamationMark
-	waitmovement 0
-	playmoncry SPECIES_PSYDUCK, CRY_MODE_NORMAL
-	namebox Name_Psyduck
-	msgbox CeruleanCity_Text_Psyduck
-	closemessage
-	waitmoncry
-	applymovement LOCALID_CERULEAN_PSYDUCK, Common_Movement_FaceOriginalDirection
-	waitmovement 0
-	release
-	end

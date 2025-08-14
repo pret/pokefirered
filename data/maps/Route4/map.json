@@ -72,7 +72,7 @@
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BOY",
       "x": 16,
-      "y": 18,
+      "y": 19,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
@@ -144,7 +144,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route4_EventScript_Geodude",
+      "script": "Common_EventScript_Pokemon_Geodude",
       "flag": "0"
     }
   ],
@@ -191,8 +191,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 43,
-      "y": 4,
+      "x": 29,
+      "y": 9,
       "elevation": 3,
       "item": "ITEM_GREAT_BALL",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE4_GREAT_BALL",
@@ -201,8 +201,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 18,
-      "y": 4,
+      "x": 30,
+      "y": 9,
       "elevation": 3,
       "item": "ITEM_PERSIM_BERRY",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE4_PERSIM_BERRY",
@@ -211,8 +211,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 42,
-      "y": 4,
+      "x": 28,
+      "y": 9,
       "elevation": 3,
       "item": "ITEM_RAZZ_BERRY",
       "flag": "FLAG_HIDDEN_ITEM_ROUTE4_RAZZ_BERRY",

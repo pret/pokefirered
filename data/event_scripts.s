@@ -809,6 +809,7 @@ gStdScriptsEnd::
 	.include "data/scripts/trainer_battle.inc"
 	.include "data/scripts/debug.inc"
 	.include "data/scripts/red_green_graphics.inc"
+	.include "data/scripts/pokemon_scripts.inc"
 	.include "data/text/namebox_names.inc"
 
 @ Unused

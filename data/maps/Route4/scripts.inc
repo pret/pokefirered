@@ -20,18 +20,3 @@ Route4_EventScript_IfFindRareTakeToPewterMuseum::
 Route4_EventScript_GeodudeHelpsClearLooseRocks::
 	msgbox Route4_Text_GeodudeHelpsClearLooseRocks, MSGBOX_NPC
 	end
-
-Route4_EventScript_Geodude::
-	faceplayer
-	waitse
-	applymovement LOCALID_ROUTE4_GEODUDE, Common_Movement_ExclamationMark
-	waitmovement 0
-	playmoncry SPECIES_GEODUDE, CRY_MODE_NORMAL
-	namebox Name_Geodude
-	msgbox Route4_Text_Geodude
-	closemessage
-	waitmoncry
-	applymovement LOCALID_ROUTE4_GEODUDE, Common_Movement_FaceOriginalDirection
-	waitmovement 0
-	release
-	end

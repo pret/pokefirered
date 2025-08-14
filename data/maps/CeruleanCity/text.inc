@@ -201,9 +201,3 @@ CeruleanCity_Text_MistyIsStrongestWaterTypeLeader::
 .string "la región...\p"
 .string "Al menos en cuanto a {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} de\n"
 .string "tipo {SHADOW DYNAMIC_COLOR4}AGUA{SHADOW LIGHT_GRAY}.$"
-
-CeruleanCity_Text_Voltorb::
-.string "¡Volt!$"
-
-CeruleanCity_Text_Psyduck::
-.string "¡Psy!$"

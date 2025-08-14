@@ -88,6 +88,3 @@ Route4_Text_GeodudeHelpsClearLooseRocks::
     .string "¡Mira qué fuerte es mi {SHADOW DYNAMIC_COLOR4}GEODUDE{SHADOW LIGHT_GRAY}!\p"
     .string "Me ayuda a despejar el camino cuando\n"
     .string "hay rocas sueltas.$"
-
-Route4_Text_Geodude::
-.string "¡Geo!$"

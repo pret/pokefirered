@@ -1,7 +1,7 @@
 PewterCity_Museum_1F_Text_AsiEsComoLosFosiles::
     .string " ...y así es como los fósiles nos\n"
-    .string "permiten aprender sobre el pasado de\l"
-    .string "los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}...$"
+    .string "permiten aprender sobre el pasado\l"
+    .string "de los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}...$"
 
 PewterCity_Museum_1F_Text_PareceQueTenemosUna::
     .string "¡Oh, parece que tenemos una visitante\n"
@@ -28,21 +28,22 @@ PewterCity_Museum_1F_Text_BrockNoTeVayas::
     .string "¡No te vayas sin echarle un vistazo a\n"
     .string "las exhibiciones!$"
 
-PewterCity_Museum_1F_Text_BrockTermina1::
-    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ...los fósiles nos enseñan\n"
-    .string "sobre el pasado y nos inspiran\p"
-    .string "para nuestros viajes...\n"
+PewterCity_Museum_1F_Text_LosFosilesNosEnsenan::
+    .string "...los fósiles nos enseñan sobre el\n"
+    .string "pasado y nos inspiran para nuestros\l"
+    .string "viajes...\p"
     .string "¡Gracias por venir!$"
 
-PewterCity_Museum_1F_Text_BrockTermina2::
-    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} ¡Hola {SHADOW DYNAMIC_COLOR4}ENTRENADORA{SHADOW LIGHT_GRAY}! Gracias\n"
-    .string "por venir hasta aquí.\p"
+@pendiente A mayuscula
+PewterCity_Museum_1F_Text_HolaEntrenadora::
+    .string "¡Hola {SHADOW DYNAMIC_COLOR4}ENTRENADOR{A}{SHADOW LIGHT_GRAY}!\n"
+    .string "Gracias por venir hasta aquí.\p"
     .string "Espero que hayas aprendido algo\n"
     .string "sobre los fósiles.$"
 
-PewterCity_Museum_1F_Text_BrockTermina3::
-    .string "{SHADOW DYNAMIC_COLOR4}BROCK:{SHADOW LIGHT_GRAY} He oído que has venido a\n"
-    .string "desafiarme en el {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY}.\p"
+PewterCity_Museum_1F_Text_HeOidoQue::
+    .string "He oído que has venido a desafiarme\n"
+    .string "en el {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY}.\p"
     .string "¡Vamos de inmediato para nuestra\n"
     .string "batalla!$"
 

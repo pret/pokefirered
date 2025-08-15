@@ -258,10 +258,9 @@ PewterCity_Museum_1F_EventScript_NPC06::
 
 PewterCity_Museum_1F_EventScript_Brock::
 	lock
-	setvar VAR_0x408F,2
+	setvar VAR_PEWTER_CITY_MUSSEUM_BROCK,2
 	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
-	@FALTA REVISAR EL MOVIMIENTO DE CAMARA
 	special SpawnCameraObject
 	applymovement LOCALID_CAMERA, Common_Movement_WalkUp3
 	waitmovement 0
@@ -269,7 +268,6 @@ PewterCity_Museum_1F_EventScript_Brock::
 	textcolor NPC_TEXT_COLOR_NEUTRAL	
 	namebox Name_Brock
 	msgbox PewterCity_Museum_1F_Text_AsiEsComoLosFosiles
-	hidenamebox
 	closemessage
 	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_Brock
 	waitmovement 0
@@ -284,7 +282,6 @@ PewterCity_Museum_1F_EventScript_Brock::
 	waitmovement 0
 	namebox Name_Brock
 	msgbox PewterCity_Museum_1F_Text_SiempreEmocionado
-	hidenamebox
 	closemessage
 	applymovement LOCALID_MUSEUM_SPECTATOR1, Common_Movement_FaceUp
 	applymovement LOCALID_MUSEUM_SPECTATOR2, Common_Movement_FaceUp
@@ -292,7 +289,6 @@ PewterCity_Museum_1F_EventScript_Brock::
 	applymovement LOCALID_MUSEUM_SPECTATOR4, Common_Movement_FaceUp
 	applymovement LOCALID_MUSEUM_SPECTATOR5, Common_Movement_FaceUp
 	waitmovement 0
-	@FALTA REVISAR EL MOVIMIENTO DE CAMARA
 	special SpawnCameraObject
 	applymovement LOCALID_CAMERA, Common_Movement_WalkDown3
 	waitmovement 0
@@ -304,23 +300,19 @@ PewterCity_Museum_1F_EventScript_Brock::
 PewterCity_Museum_1F_EventScript_PareceQueTenemosUna::
 	namebox Name_Brock
 	msgbox PewterCity_Museum_1F_Text_PareceQueTenemosUna
-	hidenamebox
 	closemessage
 	return
 
 PewterCity_Museum_1F_EventScript_PareceQueTenemosUn::
 	namebox Name_Brock
 	msgbox PewterCity_Museum_1F_Text_PareceQueTenemosUn
-	hidenamebox
 	closemessage
 	return
 
 PewterCity_Museum_1F_EventScript_BrockNoTeVayas::
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	setvar VAR_0x408F,2
+	setvar VAR_PEWTER_CITY_MUSSEUM_BROCK,2
 	namebox Name_Brock
 	msgbox PewterCity_Museum_1F_Text_BrockNoTeVayas
-	hidenamebox
 	closemessage
 	applymovement LOCALID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
@@ -337,41 +329,10 @@ PewterCity_Museum_1F_Move_Publico2::
 	face_down
 	step_end
 
-@FOSIL IZQUIERDA
-@PewterCity_Museum_1F_EventScript_FosilLeft::
-	@lock
-	@goto_if_set FLAG_HIDE_PEWTER_CITY_BROCK_EVENT, PewterCity_Museum_1F_EventScript_FosilLeftFinal
-	@setflag FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_KABUTO
-	@special SetSeenMon
-	@setvar VAR_0x8004, SPECIES_KABUTO
-	@showmonpic SPECIES_KABUTO, 10, 3
-	@signmsg
-	@msgbox PewterCity_Museum_1F_Text_Fosil1
-	@normalmsg
-	@waitmessage
-	@hidemonpic
-	@goto_if_set FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE, PewterCity_Museum_1F_EventScript_FosilCheckFosil2
-	@release
-	@end
-
-@PewterCity_Museum_1F_EventScript_FosilLeftFlag::
-	@lock
-	@special SetSeenMon
-	@setvar VAR_0x8004, SPECIES_KABUTO
-	@showmonpic SPECIES_KABUTO, 10, 3
-	@signmsg
-	@msgbox PewterCity_Museum_1F_Text_Fosil2
-	@normalmsg
-	@waitmessage
-	@hidemonpic
-	@release
-	@end
-
-
-PewterCity_Museum_1F_EventScript_Fosil1::
+PewterCity_Museum_1F_EventScript_KabutoSign::
 	lock
-	goto_if_set FLAG_HIDE_PEWTER_CITY_BROCK_EVENT, PewterCity_Museum_1F_EventScript_BrockFosilFinal2
-	setflag FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_KABUTO
+	goto_if_set FLAG_HIDE_PEWTER_CITY_BROCK_EVENT_FINISHED, PewterCity_Museum_1F_EventScript_KabutoSignFinished @EVENTO TERMINADO
+	setflag FLAG_PEWTER_CITY_MUSEUM_BROCK_KABUTO
 	special SetSeenMon
 	setvar VAR_0x8004, SPECIES_KABUTO
 	showmonpic SPECIES_KABUTO, 10, 3
@@ -380,13 +341,13 @@ PewterCity_Museum_1F_EventScript_Fosil1::
 	normalmsg
 	waitmessage
 	hidemonpic
-	goto_if_set FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE, PewterCity_Museum_1F_EventScript_FosilCheckFosil2
+	goto_if_set FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE, PewterCity_Museum_1F_EventScript_CheckKabuto @si ya se vio el otro fosil
 	release
 	end
 
-PewterCity_Museum_1F_EventScript_Fosil2::
+PewterCity_Museum_1F_EventScript_OmanyteSign::
 	lock
-	goto_if_set FLAG_HIDE_PEWTER_CITY_BROCK_EVENT, PewterCity_Museum_1F_EventScript_BrockFosilFinal1
+	goto_if_set FLAG_HIDE_PEWTER_CITY_BROCK_EVENT_FINISHED, PewterCity_Museum_1F_EventScript_OmanyteSignFinished @EVENTO TERMINADO
 	setflag FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE
 	special SetSeenMon
 	setvar VAR_0x8004, SPECIES_OMANYTE
@@ -396,17 +357,23 @@ PewterCity_Museum_1F_EventScript_Fosil2::
 	normalmsg
 	hidemonpic
 	waitmessage
-	goto_if_set FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_KABUTO, PewterCity_Museum_1F_EventScript_FosilCheckFosil1
+	goto_if_set FLAG_PEWTER_CITY_MUSEUM_BROCK_KABUTO, PewterCity_Museum_1F_EventScript_CheckOmanyte @si ya se vio el otro fosil
 	release
 	end
 
-PewterCity_Museum_1F_EventScript_FosilCheckFosil2::
+PewterCity_Museum_1F_EventScript_CheckOmanyte::
 	lockall
-	goto_if_set FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_KABUTO, PewterCity_Museum_1F_EventScript_BrockTerminaFosil1
+	goto_if_set FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE, PewterCity_Museum_1F_EventScript_BrockFinishedKabuto
 	releaseall
 	end
 
-PewterCity_Museum_1F_EventScript_BrockFosilFinal1::
+PewterCity_Museum_1F_EventScript_CheckKabuto::
+	lockall
+	goto_if_set FLAG_PEWTER_CITY_MUSEUM_BROCK_KABUTO, PewterCity_Museum_1F_EventScript_BrockFinishedOmanyte
+	releaseall
+	end
+
+PewterCity_Museum_1F_EventScript_OmanyteSignFinished::
 	lock
 	special SetSeenMon
 	setvar VAR_0x8004, SPECIES_OMANYTE
@@ -419,8 +386,7 @@ PewterCity_Museum_1F_EventScript_BrockFosilFinal1::
 	release
 	end
 
-PewterCity_Museum_1F_EventScript_BrockFosilFinal2::
-	lock
+PewterCity_Museum_1F_EventScript_KabutoSignFinished::
 	special SetSeenMon
 	setvar VAR_0x8004, SPECIES_KABUTO
 	showmonpic SPECIES_KABUTO, 10, 3
@@ -432,63 +398,89 @@ PewterCity_Museum_1F_EventScript_BrockFosilFinal2::
 	release
 	end
 
-PewterCity_Museum_1F_EventScript_FosilCheckFosil1::
+PewterCity_Museum_1F_EventScript_BrockFinishedOmanyte::
 	lockall
-	goto_if_set FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE, PewterCity_Museum_1F_EventScript_BrockTerminaFosil2
+	setflag FLAG_HIDE_PEWTER_CITY_BROCK_EVENT_FINISHED
+	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Move_ExclamationMarkFaceRightPlayer 
+	waitmovement 0
+	@MUSICA CLASES
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_LosFosilesNosEnsenan
+	closemessage
+	fadescreen FADE_TO_BLACK
+	setobjectxy LOCALID_MUSEUM_SPECTATOR1,13,13
+	setobjectxy LOCALID_MUSEUM_SPECTATOR2,13,13
+	setobjectxy LOCALID_MUSEUM_SPECTATOR3,13,13
+	setobjectxy LOCALID_MUSEUM_SPECTATOR4,13,13
+	setobjectxy LOCALID_MUSEUM_SPECTATOR5,13,13
+	fadescreen FADE_FROM_BLACK
+	@MUSICA DESAFIO
+	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_WalkRightBrock
+	waitmovement 0
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_HolaEntrenadora
+	closemessage
+	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_LookAroundRightBrock
+	waitmovement 0	
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_HeOidoQue
+	closemessage
+	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_SalidaBrockRight
+	waitmovement 0	
+	setvar VAR_PEWTER_CITY_MUSSEUM_BROCK,3
+	setobjectxy LOCALID_MUSEUM_BROCK,13,13
+	@MUSICA MUSEO
 	releaseall
 	end
 
-PewterCity_Museum_1F_EventScript_BrockTerminaFosil1::
+PewterCity_Museum_1F_EventScript_BrockFinishedKabuto::
 	lockall
-	setflag FLAG_HIDE_PEWTER_CITY_BROCK_EVENT
+	setflag FLAG_HIDE_PEWTER_CITY_BROCK_EVENT_FINISHED
 	normalmsg
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Move_BrockTermina1 
+	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Move_ExclamationMarkFaceLeftPlayer 
 	waitmovement 0
-
 	@MUSICA CLASES
-
-	msgbox PewterCity_Museum_1F_Text_BrockTermina1 MSGBOX_DEFAULT
-	waitmessage          
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_LosFosilesNosEnsenan
+	closemessage
 	fadescreen FADE_TO_BLACK
-	setobjectxy 2,13,13
-	setobjectxy 6,13,13
-	setobjectxy 11,13,13
-	setobjectxy 12,13,13
-	setobjectxy 13,13,13
+	setobjectxy LOCALID_MUSEUM_SPECTATOR1,13,13
+	setobjectxy LOCALID_MUSEUM_SPECTATOR2,13,13
+	setobjectxy LOCALID_MUSEUM_SPECTATOR3,13,13
+	setobjectxy LOCALID_MUSEUM_SPECTATOR4,13,13
+	setobjectxy LOCALID_MUSEUM_SPECTATOR5,13,13
 	fadescreen FADE_FROM_BLACK
-	
 	@MUSICA DESAFIO
-
-	applymovement 10, PewterCity_Museum_1F_Move_BrockTermina2
+	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_WalkLeftBrock
 	waitmovement 0	
-	msgbox PewterCity_Museum_1F_Text_BrockTermina2 MSGBOX_DEFAULT
-	waitmessage
-	applymovement 10, PewterCity_Museum_1F_Move_BrockTermina3
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_HolaEntrenadora
+	closemessage
+	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_LookAroundLeftBrock
 	waitmovement 0	
-	msgbox PewterCity_Museum_1F_Text_BrockTermina3
-	waitmessage
-	applymovement 10, PewterCity_Museum_1F_Move_BrockTermina4
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_HeOidoQue
+	closemessage
+	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_SalidaBrockLeft
 	waitmovement 0	
-	setvar VAR_0x408F,3
-	setobjectxy 10,13,13
-
+	setvar VAR_PEWTER_CITY_MUSSEUM_BROCK,3
+	setobjectxy LOCALID_MUSEUM_BROCK,13,13
 	@MUSICA MUSEO
-
 	releaseall
 	end
 
-PewterCity_Museum_1F_Move_BrockTermina1::
+PewterCity_Museum_1F_Move_ExclamationMarkFaceRightPlayer::
 	emote_exclamation_mark
 	face_right
 	step_end
 
-PewterCity_Museum_1F_Move_BrockTermina1v2::
+PewterCity_Museum_1F_Move_ExclamationMarkFaceLeftPlayer::
 	emote_exclamation_mark
 	face_left
 	step_end
 
-PewterCity_Museum_1F_Move_BrockTermina2::
+PewterCity_Museum_1F_Move_WalkRightBrock::
 	face_left
 	delay_16
 	delay_16
@@ -498,7 +490,7 @@ PewterCity_Museum_1F_Move_BrockTermina2::
 	walk_left
 	step_end
 
-PewterCity_Museum_1F_Move_BrockTermina2v2::
+PewterCity_Museum_1F_Move_WalkLeftBrock::
 	face_right
 	delay_16
 	delay_16
@@ -508,7 +500,7 @@ PewterCity_Museum_1F_Move_BrockTermina2v2::
 	walk_right
 	step_end
 
-PewterCity_Museum_1F_Move_BrockTermina3::
+PewterCity_Museum_1F_Move_LookAroundRightBrock::
 	face_right
 	delay_16
 	face_down
@@ -519,7 +511,7 @@ PewterCity_Museum_1F_Move_BrockTermina3::
 	delay_16
 	step_end
 
-PewterCity_Museum_1F_Move_BrockTermina3v2::
+PewterCity_Museum_1F_Move_LookAroundLeftBrock::
 	face_left
 	delay_16
 	face_down
@@ -530,7 +522,7 @@ PewterCity_Museum_1F_Move_BrockTermina3v2::
 	delay_16
 	step_end
 
-PewterCity_Museum_1F_Move_BrockTermina4::
+PewterCity_Museum_1F_Move_SalidaBrockRight::
 	walk_right
 	walk_right
 	walk_right
@@ -545,7 +537,7 @@ PewterCity_Museum_1F_Move_BrockTermina4::
 	walk_down
 	step_end
 
-PewterCity_Museum_1F_Move_BrockTermina4v2::
+PewterCity_Museum_1F_Move_SalidaBrockLeft::
 	walk_left
 	walk_left
 	walk_left
@@ -559,43 +551,3 @@ PewterCity_Museum_1F_Move_BrockTermina4v2::
 	walk_down
 	walk_down
 	step_end
-
-PewterCity_Museum_1F_EventScript_BrockTerminaFosil2::
-	lockall
-	setflag FLAG_HIDE_PEWTER_CITY_BROCK_EVENT
-	normalmsg
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	applymovement LOCALID_PLAYER, PewterCity_Museum_1F_Move_BrockTermina1v2 
-	waitmovement 0
-
-	@MUSICA CLASES
-
-	msgbox PewterCity_Museum_1F_Text_BrockTermina1 MSGBOX_DEFAULT
-	waitmessage
-	fadescreen FADE_TO_BLACK
-	setobjectxy 2,13,13
-	setobjectxy 6,13,13
-	setobjectxy 11,13,13
-	setobjectxy 12,13,13
-	setobjectxy 13,13,13
-	fadescreen FADE_FROM_BLACK
-	
-	@MUSICA DESAFIO
-
-	applymovement 10, PewterCity_Museum_1F_Move_BrockTermina2v2
-	waitmovement 0	
-	msgbox PewterCity_Museum_1F_Text_BrockTermina2 MSGBOX_DEFAULT
-	waitmessage
-	applymovement 10, PewterCity_Museum_1F_Move_BrockTermina3v2
-	waitmovement 0	
-	msgbox PewterCity_Museum_1F_Text_BrockTermina3
-	waitmessage
-	applymovement 10, PewterCity_Museum_1F_Move_BrockTermina4v2
-	waitmovement 0	
-	setvar VAR_0x408F,3
-	setobjectxy 10,13,13
-
-	@MUSICA MUSEO
-
-	releaseall
-	end

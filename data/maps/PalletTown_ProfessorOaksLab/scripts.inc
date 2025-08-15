@@ -50,7 +50,7 @@ PalletTown_ProfessorOaksLab_EventScript_ReadyPlayerForStarterScene::
 PalletTown_ProfessorOaksLab_OnFrame::
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1, PalletTown_ProfessorOaksLab_EleccionInicial
 	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 7, PalletTown_ProfessorOaksLab_EventScript_EnterForNationalDexScene
-	map_script_2 VAR_LAB_POKEDEX_EVENT, 1, PalletTown_ProfessorOaksLab_EventScript_RecibirPokedex
+	map_script_2 VAR_OAKS_LAB_POKEDEX_POKERADAR_RECEIVE, 1, PalletTown_ProfessorOaksLab_EventScript_RecibirPokedex
 	.2byte 0
 
 PalletTown_ProfessorOaksLab_EventScript_EnterForNationalDexScene:: @ 8169002 
@@ -1438,19 +1438,20 @@ PalletTown_ProfessorOaksLab_EventScript_LastPokeBall::
 	release
 	end
 
+
+PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear::
+	famechecker FAMECHECKER_OAK, 5
+	msgbox PalletTown_ProfessorOaksLab_Text_OakIsGoingToHaveRadioShow
+	release
+	end
+
 PalletTown_ProfessorOaksLab_EventScript_Cientifico1::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear
 	msgbox PalletTown_ProfessorOaksLab_Text_Cientifico1
-	applymovement 1, PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0	
-	release
-	end
-
-PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear::
-	famechecker FAMECHECKER_OAK, 5
-	msgbox PalletTown_ProfessorOaksLab_Text_OakIsGoingToHaveRadioShow
 	release
 	end
 
@@ -1459,7 +1460,16 @@ PalletTown_ProfessorOaksLab_EventScript_Cientifico2::
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, PalletTown_ProfessorOaksLab_EventScript_Aide2GameClear
 	msgbox PalletTown_ProfessorOaksLab_Text_Cientifico1
-	applymovement 3, PalletTown_ProfessorOaksLab_Movement_MiraArriba
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	waitmovement 0	
+	release
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_Cientifico3::
+	lock
+	faceplayer
+	msgbox PalletTown_ProfessorOaksLab_Text_Cientifico3
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0	
 	release
 	end
@@ -1470,15 +1480,6 @@ PalletTown_ProfessorOaksLab_EventScript_Aide2GameClear::
 	release
 	end
 
-PalletTown_ProfessorOaksLab_EventScript_Cientifico3::
-	lock
-	faceplayer
-	famechecker FAMECHECKER_OAK, 2
-	msgbox PalletTown_ProfessorOaksLab_Text_Cientifico3
-	applymovement 2, PalletTown_ProfessorOaksLab_Movement_MiraIzquierdaPregunta
-	waitmovement 0	
-	release
-	end
 
 PalletTown_ProfessorOaksLab_EventScript_Pokedex::
 	msgbox PalletTown_ProfessorOaksLab_Text_BlankEncyclopedia, MSGBOX_NPC
@@ -1505,7 +1506,7 @@ PalletTown_ProfessorOaksLab_EventScript_RightSignAlt::
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_EntregaPokedex::
-	map_script_2 VAR_LAB_POKEDEX_EVENT, 1, PalletTown_ProfessorOaksLab_EventScript_RecibirPokedex
+	map_script_2 VAR_OAKS_LAB_POKEDEX_POKERADAR_RECEIVE, 1, PalletTown_ProfessorOaksLab_EventScript_RecibirPokedex
 	.2byte 0
 
 
@@ -1691,7 +1692,7 @@ PalletTown_ProfessorOaksLab_EventScript_RecibirPokedex::
 	applymovement LOCALID_CAMERA, Common_Movement_WalkDown2
 	waitmovement 0
 	special RemoveCameraObject
-	setvar VAR_LAB_POKEDEX_EVENT, 2
+	setvar VAR_OAKS_LAB_POKEDEX_POKERADAR_RECEIVE, 2
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1
 	setvar VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 1

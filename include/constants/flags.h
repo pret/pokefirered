@@ -192,11 +192,11 @@
 // Unused?
 #define FLAG_HIDE_VIRIDIAN_CITY_MART_REDGREEN              0x0AF
 #define FLAG_HIDE_PALLET_TOWN_HOUSE_MOM                    0x0B0
-#define FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR   0x0B1
-#define FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_KABUTO          0x0B2
-#define FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE         0x0B3
-#define FLAG_HIDE_PEWTER_CITY_BROCK_EVENT                  0x0B4
-#define FLAG_0x0B5               0x0B5
+#define FLAG_HIDE_VIRIDIAN_FOREST_REDGREEN                 0x0B1
+#define FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR   0x0B2
+#define FLAG_PEWTER_CITY_MUSEUM_BROCK_KABUTO          0x0B3
+#define FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE         0x0B4
+#define FLAG_HIDE_PEWTER_CITY_BROCK_EVENT_FINISHED         0x0B5
 #define FLAG_0x0B6               0x0B6
 #define FLAG_0x0B7               0x0B7
 #define FLAG_0x0B8               0x0B8
@@ -1257,7 +1257,7 @@
 #define FLAG_SILVIO_MONTE_LUNA     0x4C0
 #define FLAG_SILVIO_TIENDA         0x4C1
 #define FLAG_HIDE_SILVIO           0x4C2
-#define FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST 0x4C3
+#define FLAG_0x4C3               0x4C3
 #define FLAG_0x4C4               0x4C4
 #define FLAG_0x4C5               0x4C5
 #define FLAG_0x4C6               0x4C6

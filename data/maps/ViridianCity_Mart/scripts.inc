@@ -24,7 +24,7 @@ ViridianCity_Mart_EventScript_ParcelScene::
 	call ViridianCity_Mart_EventScript_RedGreen
 	famechecker FAMECHECKER_OAK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1
-	setvar VAR_LAB_POKEDEX_EVENT, 1
+	setvar VAR_OAKS_LAB_POKEDEX_POKERADAR_RECEIVE, 1
 	releaseall
 	end
 

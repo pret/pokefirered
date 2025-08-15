@@ -207,7 +207,7 @@ PalletTown_EventScript_OakTrigger::
 	playmoncry SPECIES_PIKACHU, 0
 	call_if_eq VAR_TEMP_1, 0, PalletTown_EventScript_AparicionPikachuIzq
 	call_if_eq VAR_TEMP_1, 1, PalletTown_EventScript_AparicionPikachuDer
-	setobjectxy 4,14,2
+	setobjectxy LOCALID_PALLET_PIKACHU,14,2
 	fadescreen FADE_TO_WHITE
 	special StartOldManTutorialBattle
 	waitstate
@@ -273,7 +273,7 @@ PalletTown_EventScript_AparicionPikachuIzq::
 	applymovement LOCALID_PLAYER, Movement_ExclamacionIzq
 	waitmovement LOCALID_PLAYER
 	waitmovement 3
-	setobjectxy 4,13,1
+	setobjectxy LOCALID_PALLET_PIKACHU,13,1
 	waitmoncry
 	delay 30
 	applymovement 4, Movement_Aparicion_PikachuIzq
@@ -287,7 +287,7 @@ PalletTown_EventScript_AparicionPikachuDer::
 	waitmovement 3
 	applymovement 4, Movement_Aparicion_PikachuDer
 	waitmovement 4
-	setobjectxy 4,12,1
+	setobjectxy LOCALID_PALLET_PIKACHU,12,1
 	waitmoncry
 	delay 30
 	return
@@ -544,7 +544,6 @@ PalletTown_EventScript_SignLadyTrigger::
 	end
 
 PalletTown_EventScript_SignLadyShowSign::
-	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox PalletTown_Text_LookCopiedTrainerTipsSign
 	closemessage
 	delay 20

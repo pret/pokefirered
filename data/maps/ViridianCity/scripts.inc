@@ -246,7 +246,6 @@ ViridianCity_Movement_WalkDown::
 
 ViridianCity_EventScript_TutorialTriggerLeft::
 	lockall
-	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
@@ -257,7 +256,6 @@ ViridianCity_EventScript_TutorialTriggerLeft::
 
 ViridianCity_EventScript_TutorialTriggerRight::
 	lockall
-	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft

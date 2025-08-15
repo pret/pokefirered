@@ -191,10 +191,10 @@
 #define VAR_MAP_SCENE_MT_MOON_B2F                                              0x408B
 
 
-#define VAR_LAB_POKEDEX_EVENT                                                  0x408C //ENTREGA POKEDEX
-#define VAR_REDGREEN_VIRIDIAN_FOREST                                            0x408D //BATALLA BOSQUE
-#define VAR_0x408E                 0x408E //ZAPATILLAS
-#define VAR_0x408F                 0x408F //BROCK MUSEO
+#define VAR_OAKS_LAB_POKEDEX_POKERADAR_RECEIVE                                 0x408C
+#define VAR_VIRIDIAN_FOREST_REDGREEN                                           0x408D
+#define VAR_PEWTER_CITY_MUSSEUM_BROCK                                          0x408E
+#define VAR_0x408F                 0x408F
 #define VAR_0x4090                 0x4090 //SILVIO
 #define VAR_0x4091                 0x4091
 #define VAR_0x4092                 0x4092

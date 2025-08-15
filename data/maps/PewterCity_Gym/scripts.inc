@@ -36,8 +36,6 @@ PewterCity_Gym_EventScript_Brockv1::
 	trainerbattle_single TRAINER_LEADER_BROCK, PewterCity_Gym_Text_BrockIntro, PewterCity_Gym_Text_BrockDefeat, PewterCity_Gym_EventScript_DefeatedBrock
 	goto_if_unset FLAG_GOT_TM39_FROM_BROCK, PewterCity_Gym_EventScript_GiveTM39
 	msgbox PewterCity_Gym_Text_BrockPostBattle
-	setflag FLAG_HIDE_PEWTER_CITY_GYM_GUIDE
-	setvar VAR_MAP_SCENE_PEWTER_CITY, 1
 	release
 	end
 
@@ -47,8 +45,6 @@ PewterCity_Gym_EventScript_Brockv2::
 	trainerbattle_single TRAINER_LEADER_BROCK2, PewterCity_Gym_Text_BrockIntro, PewterCity_Gym_Text_BrockDefeat, PewterCity_Gym_EventScript_DefeatedBrock
 	goto_if_unset FLAG_GOT_TM39_FROM_BROCK, PewterCity_Gym_EventScript_GiveTM39
 	msgbox PewterCity_Gym_Text_BrockPostBattle
-	setflag FLAG_HIDE_PEWTER_CITY_GYM_GUIDE
-	setvar VAR_MAP_SCENE_PEWTER_CITY, 1
 	release
 	end
 
@@ -69,6 +65,8 @@ PewterCity_Gym_EventScript_DefeatedBrock::
 	end
 
 PewterCity_Gym_EventScript_GiveTM39::
+	setflag FLAG_HIDE_PEWTER_CITY_GYM_GUIDE
+	setvar VAR_MAP_SCENE_PEWTER_CITY, 1
 	msgbox PewterCity_Gym_Text_TakeThisWithYou
 	checkitemspace ITEM_TM39
 	goto_if_eq VAR_RESULT, FALSE, PewterCity_Gym_EventScript_NoRoomForTM39

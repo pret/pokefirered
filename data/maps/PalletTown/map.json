@@ -72,6 +72,7 @@
       "flag": "FLAG_HIDE_OAK_IN_PALLET_TOWN"
     },
     {
+      "local_id": "LOCALID_PALLET_PIKACHU",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PIKACHU",
       "x": 14,

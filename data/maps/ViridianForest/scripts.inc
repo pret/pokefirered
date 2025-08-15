@@ -73,6 +73,7 @@ ViridianForest_EventScript_Charlie::
 	end
 
 ViridianForest_EventScript_RedGreenEncounter::
+	clearflag FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR
 	namebox Name_RedGreen
 	msgbox ViridianForest_Text_MiraDondeTeEncuentro
 	hidenamebox
@@ -109,9 +110,9 @@ ViridianForest_EventScript_RedGreenEncounter::
 	return
 
 ViridianForest_EventScript_RedGreenEncounterLeft::
-	setflag FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST
+	setflag FLAG_HIDE_VIRIDIAN_FOREST_REDGREEN
 	playbgm MUS_ENCOUNTER_BOY, 0
-	setvar VAR_REDGREEN_VIRIDIAN_FOREST,2
+	setvar VAR_VIRIDIAN_FOREST_REDGREEN,2
 	setobjectxy LOCALID_VIDRIAN_FOREST_REDGREEN,39,42 
 	applymovement LOCALID_PLAYER, ViridianForest_EntradaPlayerLeft
 	applymovement LOCALID_VIDRIAN_FOREST_REDGREEN, ViridianForest_EntradaRedGreenLeft
@@ -122,9 +123,9 @@ ViridianForest_EventScript_RedGreenEncounterLeft::
 	end
 
 ViridianForest_EventScript_RedGreenEncounterRight::
-	setflag FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST
+	setflag FLAG_HIDE_VIRIDIAN_FOREST_REDGREEN
 	playbgm MUS_ENCOUNTER_BOY, 0
-	setvar VAR_REDGREEN_VIRIDIAN_FOREST,2
+	setvar VAR_VIRIDIAN_FOREST_REDGREEN,2
 	setobjectxy LOCALID_VIDRIAN_FOREST_REDGREEN,39,42 
 	applymovement LOCALID_PLAYER, ViridianForest_EntradaPlayerRight
 	applymovement LOCALID_VIDRIAN_FOREST_REDGREEN, ViridianForest_EntradaRedGreenRight

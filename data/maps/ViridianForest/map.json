@@ -181,7 +181,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST"
+      "flag": "FLAG_HIDE_VIRIDIAN_FOREST_REDGREEN"
     },
     {
       "type": "object",
@@ -251,14 +251,14 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST"
+      "flag": "FLAG_HIDE_VIRIDIAN_FOREST_REDGREEN"
     },
     {
       "local_id": "LOCALID_VIDRIAN_FOREST_REDGREEN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_VAR_0",
-      "x": 36,
-      "y": 49,
+      "x": 39,
+      "y": 42,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -266,7 +266,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_REDGREEN_VIRIDIAN_FOREST"
+      "flag": "FLAG_HIDE_VIRIDIAN_FOREST_REDGREEN"
     }
   ],
   "warp_events": [
@@ -305,7 +305,7 @@
       "x": 40,
       "y": 49,
       "elevation": 0,
-      "var": "VAR_REDGREEN_VIRIDIAN_FOREST",
+      "var": "VAR_VIRIDIAN_FOREST_REDGREEN",
       "var_value": "0",
       "script": "ViridianForest_EventScript_RedGreenEncounterRight"
     },
@@ -314,7 +314,7 @@
       "x": 39,
       "y": 49,
       "elevation": 0,
-      "var": "VAR_REDGREEN_VIRIDIAN_FOREST",
+      "var": "VAR_VIRIDIAN_FOREST_REDGREEN",
       "var_value": "0",
       "script": "ViridianForest_EventScript_RedGreenEncounterLeft"
     }

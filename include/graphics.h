@@ -2902,6 +2902,8 @@ extern const u32 gItemIconPalette_Carbos[];
 extern const u32 gItemIconPalette_Calcium[];
 extern const u32 gItemIcon_RareCandy[];
 extern const u32 gItemIconPalette_RareCandy[];
+extern const u32 gItemIcon_CapCandy[];
+extern const u32 gItemIconPalette_CapCandy[];
 extern const u32 gItemIcon_PPUp[];
 extern const u32 gItemIconPalette_PPUp[];
 extern const u32 gItemIconPalette_Zinc[];
@@ -4549,4 +4551,4 @@ extern const u16 gPokeStorageInterface_NoDisplayMon_Pal[];
 extern const u16 gDexScreen_TopMenuIconPals_AtoZ[];
 extern const u32 gDexScreen_TopMenuIconTiles_AtoZ[];
 
-#endif //GUARD_GRAPHICS_H
+#endif // GUARD_GRAPHICS_H

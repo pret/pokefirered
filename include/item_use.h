@@ -16,6 +16,7 @@ void FieldUseFunc_Medicine(u8 taskId);
 void FieldUseFunc_Ether(u8 taskId);
 void FieldUseFunc_PpUp(u8 taskId);
 void FieldUseFunc_RareCandy(u8 taskId);
+void FieldUseFunc_CapCandy(u8 taskId);
 void FieldUseFunc_EvoItem(u8 taskId);
 void FieldUseFunc_SacredAsh(u8 taskId);
 void FieldUseFunc_TmCase(u8 taskId);
@@ -42,4 +43,4 @@ void Task_UseDigEscapeRopeOnField(u8 taskId);
 u8 CanUseEscapeRopeOnCurrMap(void);
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 
-#endif //GUARD_ITEM_USE_H
+#endif // GUARD_ITEM_USE_H

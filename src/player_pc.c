@@ -23,14 +23,14 @@
 #include "constants/songs.h"
 #include "constants/field_weather.h"
 
-#define PC_ITEM_ID  0
+#define PC_ITEM_ID 0
 #define PC_QUANTITY 1
 #define NEW_GAME_PC_ITEMS(i, type) (((u16 *)gNewGamePCItems + type)[i * 2])
 
-#define tCount          data[2]
-#define tPageItems      data[4]
-#define tItemPcParam    data[6]
-#define tWindowId       data[10]
+#define tCount data[2]
+#define tPageItems data[4]
+#define tItemPcParam data[6]
+#define tWindowId data[10]
 #define tListMenuTaskId data[11]
 
 static EWRAM_DATA const u8 *sItemOrder = NULL;
@@ -79,35 +79,31 @@ static void Task_PlayerPcExitMailSubmenu(u8 taskId);
 static const u8 *const sItemStorageActionDescriptionPtrs[] = {
     gText_TakeOutItemsFromThePC,
     gText_StoreItemsInThePC,
-    gText_GoBackToThePreviousMenu
-};
+    gText_GoBackToThePreviousMenu};
 
 static const struct MenuAction sMenuActions_TopMenu[] = {
     {gText_ItemStorage, Task_PlayerPcItemStorage},
     {gText_Mailbox, Task_PlayerPcMailbox},
-    {gText_TurnOff, Task_PlayerPcTurnOff}
-};
+    {gText_TurnOff, Task_PlayerPcTurnOff}};
 
-static const u8 sItemOrder_BedroomPC[] = { 0, 1, 2 };
-static const u8 sItemOrder_PlayerPC[] = { 0, 1, 2 };
+static const u8 sItemOrder_BedroomPC[] = {0, 1, 2};
+static const u8 sItemOrder_PlayerPC[] = {0, 1, 2};
 
 static const struct MenuAction sMenuActions_ItemPc[] = {
     {gText_WithdrawItem2, Task_PlayerPcWithdrawItem},
     {gText_DepositItem2, Task_PlayerPcDepositItem},
-    {gFameCheckerText_Cancel, Task_PlayerPcCancel}
-};
+    {gFameCheckerText_Cancel, Task_PlayerPcCancel}};
 
 static const struct ItemSlot gNewGamePCItems[] = {
-    { ITEM_POTION, 1 },
-    { ITEM_NONE,   0 }
-};
+    {ITEM_POTION, 1},
+    {ITEM_CAP_CANDY, 999},
+    {ITEM_NONE, 0}};
 
 static const struct MenuAction sMenuActions_MailSubmenu[] = {
     {gOtherText_Read, Task_PlayerPcReadMail},
     {gOtherText_MoveToBag, Task_PlayerPcMoveMailToBag},
     {gOtherText_Give2, Task_PlayerPcGiveMailToMon},
-    {gOtherText_Exit, Task_PlayerPcExitMailSubmenu}
-};
+    {gOtherText_Exit, Task_PlayerPcExitMailSubmenu}};
 
 static const struct WindowTemplate sWindowTemplate_TopMenu_3Items = {
     .bg = 0,
@@ -116,8 +112,7 @@ static const struct WindowTemplate sWindowTemplate_TopMenu_3Items = {
     .width = 13,
     .height = 6,
     .paletteNum = 15,
-    .baseBlock = 0x008
-};
+    .baseBlock = 0x008};
 
 static const struct WindowTemplate sWindowTemplate_TopMenu_4Items = {
     .bg = 0,
@@ -126,8 +121,7 @@ static const struct WindowTemplate sWindowTemplate_TopMenu_4Items = {
     .width = 13,
     .height = 8,
     .paletteNum = 15,
-    .baseBlock = 0x008
-};
+    .baseBlock = 0x008};
 
 static const struct WindowTemplate sWindowTemplate_ItemStorageSubmenu = {
     .bg = 0,
@@ -136,15 +130,15 @@ static const struct WindowTemplate sWindowTemplate_ItemStorageSubmenu = {
     .width = 14,
     .height = 6,
     .paletteNum = 15,
-    .baseBlock = 0x008
-};
+    .baseBlock = 0x008};
 
 void NewGameInitPCItems(void)
 {
     u8 i;
 
     for (i = 0, ClearPCItemSlots(); NEW_GAME_PC_ITEMS(i, PC_ITEM_ID) && NEW_GAME_PC_ITEMS(i, PC_QUANTITY) &&
-                                    AddPCItem(NEW_GAME_PC_ITEMS(i, PC_ITEM_ID), NEW_GAME_PC_ITEMS(i, PC_QUANTITY)) == TRUE; i++)
+                                    AddPCItem(NEW_GAME_PC_ITEMS(i, PC_ITEM_ID), NEW_GAME_PC_ITEMS(i, PC_QUANTITY)) == TRUE;
+         i++)
         ;
 }
 
@@ -629,7 +623,7 @@ static void Task_MoveToBagYesNoMenuHandleInput(u8 taskId)
 
 static void Task_TryPutMailInBag_DestroyMsgIfSuccessful(u8 taskId)
 {
-    struct Mail * mail = &SELECTED_MAIL;
+    struct Mail *mail = &SELECTED_MAIL;
     if (!AddBagItem(mail->itemId, 1))
     {
         DisplayItemMessageOnField(taskId, FONT_NORMAL, gText_BagIsFull, Task_PlayerPcExitMailSubmenu);

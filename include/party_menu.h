@@ -9,9 +9,9 @@ struct PartyMenu
 {
     MainCallback exitCallback;
     TaskFunc task;
-    u8 menuType:4;
-    u8 layout:2;
-    u8 chooseMonsBattleType:2;
+    u8 menuType : 4;
+    u8 layout : 2;
+    u8 chooseMonsBattleType : 2;
     s8 slotId;
     s8 slotId2;
     u8 action;
@@ -59,6 +59,7 @@ bool8 IsMoveHm(u16 move);
 bool8 MonKnowsMove(struct Pokemon *mon, u16 move);
 void ItemUseCB_TMHM(u8 taskId, TaskFunc func);
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc func);
+void ItemUseCB_CapCandy(u8 taskId, TaskFunc func);
 void ItemUseCB_SacredAsh(u8 taskId, TaskFunc func);
 void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc func);
 u8 GetItemEffectType(u16 item);

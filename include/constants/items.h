@@ -179,7 +179,7 @@
 #define ITEM_ENIGMA_BERRY 175
 
 #define FIRST_BERRY_INDEX ITEM_CHERI_BERRY
-#define LAST_BERRY_INDEX  ITEM_ENIGMA_BERRY
+#define LAST_BERRY_INDEX ITEM_ENIGMA_BERRY
 
 #define ITEM_UNUSED_BERRY_1 176
 #define ITEM_UNUSED_BERRY_2 177
@@ -444,21 +444,22 @@
 #define ITEM_POWDER_JAR 372
 #define ITEM_RUBY 373
 #define ITEM_SAPPHIRE 374
+#define ITEM_CAP_CANDY 375
 
-#define ITEMS_COUNT 375
+#define ITEMS_COUNT 376
 
-#define ITEM_TO_BERRY(itemId)(((itemId - FIRST_BERRY_INDEX) + 1))
+#define ITEM_TO_BERRY(itemId) (((itemId - FIRST_BERRY_INDEX) + 1))
 #define MAIL_NONE 0xFF
 
 #define NUM_TECHNICAL_MACHINES 50
-#define NUM_HIDDEN_MACHINES     8
+#define NUM_HIDDEN_MACHINES 8
 
 // Secondary IDs for rods
-#define OLD_ROD   0
-#define GOOD_ROD  1
+#define OLD_ROD 0
+#define GOOD_ROD 1
 #define SUPER_ROD 2
 
 // Check if the item is one that can be used on a Pokemon.
 #define IS_POKEMON_ITEM(item) ((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX)
 
-#endif  // GUARD_CONSTANTS_ITEMS_H
+#endif // GUARD_CONSTANTS_ITEMS_H

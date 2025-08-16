@@ -143,6 +143,9 @@ const u32 gItemIconPalette_Calcium[] = INCBIN_U32("graphics/items/icon_palettes/
 const u32 gItemIcon_RareCandy[] = INCBIN_U32("graphics/items/icons/rare_candy.4bpp.lz");
 const u32 gItemIconPalette_RareCandy[] = INCBIN_U32("graphics/items/icon_palettes/rare_candy.gbapal.lz");
 
+const u32 gItemIcon_CapCandy[] = INCBIN_U32("graphics/items/icons/rare_candy.4bpp.lz"); // reuse rare candy item images
+const u32 gItemIconPalette_CapCandy[] = INCBIN_U32("graphics/items/icon_palettes/rare_candy.gbapal.lz");
+
 const u32 gItemIcon_PPUp[] = INCBIN_U32("graphics/items/icons/pp_up.4bpp.lz");
 const u32 gItemIconPalette_PPUp[] = INCBIN_U32("graphics/items/icon_palettes/pp_up.gbapal.lz");
 
@@ -620,21 +623,21 @@ const u32 gItemIconPalette_DevonScope[] = INCBIN_U32("graphics/items/icon_palett
 const u32 gItemIcon_TMHM[] = INCBIN_U32("graphics/items/icons/tm_hm.4bpp.lz");
 
 const u32 gItemIconPalette_FightingTMHM[] = INCBIN_U32("graphics/items/icon_palettes/fighting_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_DragonTMHM[]   = INCBIN_U32("graphics/items/icon_palettes/dragon_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_WaterTMHM[]    = INCBIN_U32("graphics/items/icon_palettes/water_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_PsychicTMHM[]  = INCBIN_U32("graphics/items/icon_palettes/psychic_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_NormalTMHM[]   = INCBIN_U32("graphics/items/icon_palettes/normal_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_PoisonTMHM[]   = INCBIN_U32("graphics/items/icon_palettes/poison_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_IceTMHM[]      = INCBIN_U32("graphics/items/icon_palettes/ice_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_GrassTMHM[]    = INCBIN_U32("graphics/items/icon_palettes/grass_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_FireTMHM[]     = INCBIN_U32("graphics/items/icon_palettes/fire_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_DarkTMHM[]     = INCBIN_U32("graphics/items/icon_palettes/dark_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_SteelTMHM[]    = INCBIN_U32("graphics/items/icon_palettes/steel_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_DragonTMHM[] = INCBIN_U32("graphics/items/icon_palettes/dragon_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_WaterTMHM[] = INCBIN_U32("graphics/items/icon_palettes/water_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_PsychicTMHM[] = INCBIN_U32("graphics/items/icon_palettes/psychic_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_NormalTMHM[] = INCBIN_U32("graphics/items/icon_palettes/normal_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_PoisonTMHM[] = INCBIN_U32("graphics/items/icon_palettes/poison_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_IceTMHM[] = INCBIN_U32("graphics/items/icon_palettes/ice_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_GrassTMHM[] = INCBIN_U32("graphics/items/icon_palettes/grass_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_FireTMHM[] = INCBIN_U32("graphics/items/icon_palettes/fire_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_DarkTMHM[] = INCBIN_U32("graphics/items/icon_palettes/dark_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_SteelTMHM[] = INCBIN_U32("graphics/items/icon_palettes/steel_tm_hm.gbapal.lz");
 const u32 gItemIconPalette_ElectricTMHM[] = INCBIN_U32("graphics/items/icon_palettes/electric_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_GroundTMHM[]   = INCBIN_U32("graphics/items/icon_palettes/ground_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_GhostTMHM[]    = INCBIN_U32("graphics/items/icon_palettes/ghost_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_RockTMHM[]     = INCBIN_U32("graphics/items/icon_palettes/rock_tm_hm.gbapal.lz");
-const u32 gItemIconPalette_FlyingTMHM[]   = INCBIN_U32("graphics/items/icon_palettes/flying_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_GroundTMHM[] = INCBIN_U32("graphics/items/icon_palettes/ground_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_GhostTMHM[] = INCBIN_U32("graphics/items/icon_palettes/ghost_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_RockTMHM[] = INCBIN_U32("graphics/items/icon_palettes/rock_tm_hm.gbapal.lz");
+const u32 gItemIconPalette_FlyingTMHM[] = INCBIN_U32("graphics/items/icon_palettes/flying_tm_hm.gbapal.lz");
 
 // FireRed/LeafGreen key items
 

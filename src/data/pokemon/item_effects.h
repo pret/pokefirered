@@ -415,8 +415,6 @@ const u8 *const gItemEffectTable[] =
             ITEM_POTION] = sItemEffect_Calcium,
         [ITEM_RARE_CANDY -
             ITEM_POTION] = sItemEffect_RareCandy,
-        [ITEM_CAP_CANDY -
-            ITEM_POTION] = sItemEffect_CapCandy,
         [ITEM_PP_UP -
             ITEM_POTION] = sItemEffect_PPUp,
         [ITEM_ZINC -
@@ -469,6 +467,8 @@ const u8 *const gItemEffectTable[] =
             ITEM_POTION] = sItemEffect_LumBerry,
         [ITEM_SITRUS_BERRY -
             ITEM_POTION] = sItemEffect_SitrusBerry,
+        [ITEM_CAP_CANDY -
+            ITEM_POTION] = sItemEffect_CapCandy,
         [LAST_BERRY_INDEX -
             ITEM_POTION] = NULL,
 };

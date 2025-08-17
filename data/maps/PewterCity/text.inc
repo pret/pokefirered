@@ -189,13 +189,8 @@ PewterCity_Text_RunningShoesLetterFromMom::
     .string "you! Don't ever give up!\p"
     .string "From Mom$"
 
+PewterCity_Text_SilvoMart_Cerrado::
+.string "CERRADO$"
 
-PewterCity_Text_EventoSilvioHombre1::
-.string "{SHADOW DYNAMIC_COLOR4}???{SHADOW LIGHT_GRAY}: ¡Whoa! ¡Por poco te derribo,\n"
-.string "muchacho!\p"
-.string "Disculpa, venía distraído...$"
-
-PewterCity_Text_EventoSilvioMujer1::
-.string "{SHADOW DYNAMIC_COLOR4}???{SHADOW LIGHT_GRAY}: ¡Whoa! ¡Por poco te derribo,\n"
-.string "muchacha!\p"
-.string "Disculpa, venía distraído...$"
+PewterCity_Text_SilvoMart_Abierto::
+.string "ABIERTO$"

@@ -660,6 +660,7 @@ PewterCity_EventScript_KnowWhatTheyreDoing::
 	end
 
 PewterCity_EventScript_TrainerTips::
+	setflag FLAG_SILVIO_MART
 	msgbox PewterCity_Text_TrainerTipsEarningEXP, MSGBOX_SIGN
 	end
 
@@ -805,15 +806,13 @@ PewterCity_Movement_WalkInPlaceLeft::
 	walk_in_place_left
 	step_end
 
-PalletTown_EventScript_Mujer::
-	msgbox PewterCity_Text_EventoSilvioMujer1
+PewterCity_EventScript_SilvoMart::
+	msgbox PewterCity_Text_SilvoMart_Cerrado
 	closemessage
-	playbgm MUS_FOLLOW_ME, 0
+	goto_if_set FLAG_SILVIO_MART, CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle
 	end
 
-
-PalletTown_EventScript_Hombre::
-	msgbox PewterCity_Text_EventoSilvioHombre1
+PewterCity_EventScript_SilvoMartAbierto::
+	msgbox PewterCity_Text_SilvoMart_Abierto
 	closemessage
-	playbgm MUS_FOLLOW_ME, 0
 	end

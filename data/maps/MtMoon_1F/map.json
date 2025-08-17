@@ -46,10 +46,10 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NERD",
-      "x": 25,
-      "y": 24,
+      "x": 33,
+      "y": 15,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -240,6 +240,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_MT_MOON_SILVIO",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SILVIO",
       "x": 30,
@@ -251,9 +252,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_SILVIO"
+      "flag": "FLAG_HIDE_MT_MOON_HIDE_SILVIO"
     },
     {
+      "local_id": "LOCALID_MT_MOON_CLEFAIRY",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CLEFAIRY",
       "x": 30,
@@ -265,7 +267,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
-      "flag": "FLAG_HIDE_SILVIO"
+      "flag": "FLAG_HIDE_MT_MOON_HIDE_SILVIO"
     }
   ],
   "warp_events": [
@@ -304,7 +306,7 @@
       "x": 27,
       "y": 19,
       "elevation": 0,
-      "var": "VAR_0x4090",
+      "var": "VAR_MT_MOON_SILVIO",
       "var_value": "0",
       "script": "MtMoon_1F_EventScript_SilvioRight"
     },
@@ -313,7 +315,7 @@
       "x": 26,
       "y": 19,
       "elevation": 0,
-      "var": "VAR_0x4090",
+      "var": "VAR_MT_MOON_SILVIO",
       "var_value": "0",
       "script": "MtMoon_1F_EventScript_SilvioIzq"
     }

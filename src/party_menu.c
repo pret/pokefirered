@@ -5074,7 +5074,10 @@ void ItemUseCB_CapCandy(u8 taskId, TaskFunc func)
     if (currentLevel >= levelCap || currentLevel >= MAX_LEVEL)
         noEffect = TRUE;
     else
-        noEffect = PokemonItemUseNoEffect(mon, item, gPartyMenu.slotId, 0);
+        // This check is bypassed because PokemonItemUseNoEffect is not designed to handle
+        // the looping nature of the Cap Candy. The function would incorrectly return
+        // "no effect" in some cases, breaking the level-up loop.
+        noEffect = FALSE;
 
     PlaySE(SE_SELECT);
     if (noEffect)
@@ -5132,7 +5135,7 @@ static void Task_UseCapCandyAgain(u8 taskId)
 {
     if (!IsPartyMenuTextPrinterActive())
     {
-        ItemUseCB_CapCandy(taskId, gTasks[taskId].func);
+        ItemUseCB_CapCandyStep(taskId, gTasks[taskId].func);
     }
 }
 

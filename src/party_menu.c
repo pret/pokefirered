@@ -4536,9 +4536,16 @@ static void Task_ClosePartyMenuAfterText(u8 taskId)
 {
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
-        if (gPartyMenuUseExitCallback == FALSE)
-            sPartyMenuInternal->exitCallback = NULL;
-        Task_ClosePartyMenu(taskId);
+        if (gPartyMenu.capCandyInProgress)
+        {
+            Task_HandleCapCandyLink(taskId);
+        }
+        else
+        {
+            if (gPartyMenuUseExitCallback == FALSE)
+                sPartyMenuInternal->exitCallback = NULL;
+            Task_ClosePartyMenu(taskId);
+        }
     }
 }
 
@@ -5070,6 +5077,7 @@ void ItemUseCB_CapCandy(u8 taskId, TaskFunc func)
     u8 currentLevel = GetMonData(mon, MON_DATA_LEVEL);
     u8 levelCap = GetCurrentLevelCap();
 
+    gPartyMenu.capCandyInProgress = FALSE;
     // Check if already at level cap or max level
     if (currentLevel >= levelCap || currentLevel >= MAX_LEVEL)
         noEffect = TRUE;
@@ -5086,6 +5094,7 @@ void ItemUseCB_CapCandy(u8 taskId, TaskFunc func)
     }
     else
     {
+        gPartyMenu.capCandyInProgress = TRUE;
         Task_DoUseItemAnim(taskId);
         gItemUseCB = ItemUseCB_CapCandyStep;
     }
@@ -5097,33 +5106,34 @@ static void ItemUseCB_CapCandyStep(u8 taskId, TaskFunc func)
     struct PartyMenuInternal *ptr = sPartyMenuInternal;
     s16 *arrayPtr = ptr->data;
     u8 level;
-    u8 levelCap = GetCurrentLevelCap();
+    u32 exp;
 
     GetMonLevelUpWindowStats(mon, arrayPtr);
-    ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0);
+
+    // Manually grant experience for one level
+    level = GetMonData(mon, MON_DATA_LEVEL);
+    if (level < MAX_LEVEL)
+    {
+        exp = gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].growthRate][level + 1];
+        SetMonData(mon, MON_DATA_EXP, &exp);
+        CalculateMonStats(mon);
+    }
+
     GetMonLevelUpWindowStats(mon, &ptr->data[NUM_STATS]);
     gPartyMenuUseExitCallback = TRUE;
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
     PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
 
     UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
+    // Do not remove the item here, it will be removed at the end of the loop.
 
     GetMonNickname(mon, gStringVar1);
-    level = GetMonData(mon, MON_DATA_LEVEL);
+    level = GetMonData(mon, MON_DATA_LEVEL); // get new level
     ConvertIntToDecimalStringN(gStringVar2, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
-
-    if (level < levelCap && level < MAX_LEVEL)
-    {
-        gTasks[taskId].func = Task_UseCapCandyAgain;
-    }
-    else
-    {
-        RemoveBagItem(gSpecialVar_ItemId, 1);
-        gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
-    }
+    gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
 }
 
 static void Task_UseCapCandyAgain(u8 taskId)
@@ -5131,6 +5141,26 @@ static void Task_UseCapCandyAgain(u8 taskId)
     if (!IsPartyMenuTextPrinterActive())
     {
         ItemUseCB_CapCandyStep(taskId, gTasks[taskId].func);
+    }
+}
+
+static void Task_HandleCapCandyLink(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u8 level = GetMonData(mon, MON_DATA_LEVEL);
+    u8 levelCap = GetCurrentLevelCap();
+
+    if (gPartyMenu.capCandyInProgress && level < levelCap && level < MAX_LEVEL)
+    {
+        // Continue the loop
+        ItemUseCB_CapCandyStep(taskId, Task_HandleCapCandyLink);
+    }
+    else
+    {
+        // End the loop
+        gPartyMenu.capCandyInProgress = FALSE;
+        RemoveBagItem(gSpecialVar_ItemId, 1);
+        Task_ClosePartyMenuAfterText(taskId);
     }
 }
 

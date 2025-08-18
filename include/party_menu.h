@@ -17,6 +17,7 @@ struct PartyMenu
     u8 action;
     u16 bagItem;
     s16 data[2];
+    bool8 capCandyInProgress;
 };
 
 extern struct PartyMenu gPartyMenu;

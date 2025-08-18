@@ -5106,19 +5106,24 @@ static void ItemUseCB_CapCandyStep(u8 taskId, TaskFunc func)
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
     PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
 
+    UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
+
     GetMonNickname(mon, gStringVar1);
     level = GetMonData(mon, MON_DATA_LEVEL);
     ConvertIntToDecimalStringN(gStringVar2, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
-    gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
 
-    // If we haven't reached the cap and haven't hit MAX_LEVEL, continue with another candy
     if (level < levelCap && level < MAX_LEVEL)
+    {
         gTasks[taskId].func = Task_UseCapCandyAgain;
+    }
     else
+    {
+        RemoveBagItem(gSpecialVar_ItemId, 1);
         gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
+    }
 }
 
 static void Task_UseCapCandyAgain(u8 taskId)

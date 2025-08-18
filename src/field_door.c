@@ -81,6 +81,8 @@ static const u8 sDoorAnimTiles_HideoutElevator[] = INCBIN_U8("graphics/door_anim
 static const u16 sDoorNullPalette20[16] = {};
 static const u8 sDoorAnimTiles_SSAnne[] = INCBIN_U8("graphics/door_anims/ss_anne.4bpp");
 static const u16 sDoorNullPalette21[16] = {};
+static const u8 sDoorAnimTiles_PewterSlidingSingle[] = INCBIN_U8("graphics/door_anims/pewter_sliding.4bpp");
+static const u16 sDoorNullPalettePewterSliding[16] = {};
 static const u8 sDoorAnimTiles_CeruleanSlidingSingle[] = INCBIN_U8("graphics/door_anims/cerulean_sliding.4bpp");
 static const u16 sDoorNullPaletteCeruleanSliding[16] = {};
 
@@ -227,6 +229,7 @@ static const u8 sDoorAnimPalettes_Saffron[] = {8, 8, 8, 8, 8, 8, 8, 8};
 static const u8 sDoorAnimPalettes_SilphCo[] = {3, 3, 3, 3, 3, 3, 3, 3};
 static const u8 sDoorAnimPalettes_Cerulean[] = {11, 11, 11, 11, 11, 11, 11, 11};
 static const u8 sDoorAnimPalettes_CeruleanSlidingSingle[] = {12, 12, 12, 12, 12, 12, 12, 12};
+static const u8 sDoorAnimPalettes_PewterSlidingSingle[] = {12, 12, 12, 12, 12, 12, 12, 12};
 static const u8 sDoorAnimPalettes_Lavender[] = {9, 9, 9, 9, 9, 9, 9, 9};
 static const u8 sDoorAnimPalettes_Vermilion[] = {9, 9, 9, 9, 9, 9, 9, 9};
 static const u8 sDoorAnimPalettes_PokemonFanClub[] = {9, 9, 9, 9, 9, 9, 9, 9};
@@ -258,6 +261,7 @@ static const struct DoorGraphics sDoorGraphics[] = {
     {METATILE_PalletTown_OaksLabDoor,                      DOOR_SOUND_NORMAL,  DOOR_SIZE_1x1, sDoorAnimTiles_OaksLab, sDoorAnimPalettes_OaksLab},
     {METATILE_ViridianCity_Door,                           DOOR_SOUND_NORMAL,  DOOR_SIZE_1x1, sDoorAnimTiles_Viridian, sDoorAnimPalettes_Viridian},
     {METATILE_PewterCity_Door,                             DOOR_SOUND_NORMAL,  DOOR_SIZE_1x1, sDoorAnimTiles_Pewter, sDoorAnimPalettes_Pewter},
+    {METATILE_PewterCity_SilvioMart,                        DOOR_SOUND_SLIDING, DOOR_SIZE_1x1, sDoorAnimTiles_PewterSlidingSingle, sDoorAnimPalettes_PewterSlidingSingle},
     {METATILE_SaffronCity_Door,                            DOOR_SOUND_NORMAL,  DOOR_SIZE_1x1, sDoorAnimTiles_Saffron, sDoorAnimPalettes_Saffron},
     {METATILE_SaffronCity_SilphCoDoor,                     DOOR_SOUND_SLIDING, DOOR_SIZE_1x1, sDoorAnimTiles_SilphCo, sDoorAnimPalettes_SilphCo},
     {METATILE_CeruleanCity_Door,                           DOOR_SOUND_NORMAL,  DOOR_SIZE_1x1, sDoorAnimTiles_Cerulean, sDoorAnimPalettes_Cerulean},

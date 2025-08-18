@@ -5074,10 +5074,7 @@ void ItemUseCB_CapCandy(u8 taskId, TaskFunc func)
     if (currentLevel >= levelCap || currentLevel >= MAX_LEVEL)
         noEffect = TRUE;
     else
-        // This check is bypassed because PokemonItemUseNoEffect is not designed to handle
-        // the looping nature of the Cap Candy. The function would incorrectly return
-        // "no effect" in some cases, breaking the level-up loop.
-        noEffect = FALSE;
+        noEffect = FALSE; // PokemonItemUseNoEffect(mon, item, gPartyMenu.slotId, 0);
 
     PlaySE(SE_SELECT);
     if (noEffect)
@@ -5097,35 +5094,28 @@ void ItemUseCB_CapCandy(u8 taskId, TaskFunc func)
 static void ItemUseCB_CapCandyStep(u8 taskId, TaskFunc func)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u8 currentLevel = GetMonData(mon, MON_DATA_LEVEL);
-    u8 levelCap = GetCurrentLevelCap();
     struct PartyMenuInternal *ptr = sPartyMenuInternal;
     s16 *arrayPtr = ptr->data;
+    u8 level;
+    u8 levelCap = GetCurrentLevelCap();
 
-    // Get pre-level up stats
     GetMonLevelUpWindowStats(mon, arrayPtr);
-
-    // Apply level up once
     ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0);
-
-    // Get post-level up stats
     GetMonLevelUpWindowStats(mon, &ptr->data[NUM_STATS]);
-
     gPartyMenuUseExitCallback = TRUE;
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
     PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
-    UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
-    RemoveBagItem(gSpecialVar_ItemId, 1);
 
     GetMonNickname(mon, gStringVar1);
-    currentLevel = GetMonData(mon, MON_DATA_LEVEL); // Get new level after level up
-    ConvertIntToDecimalStringN(gStringVar2, currentLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+    level = GetMonData(mon, MON_DATA_LEVEL);
+    ConvertIntToDecimalStringN(gStringVar2, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
 
     // If we haven't reached the cap and haven't hit MAX_LEVEL, continue with another candy
-    if (currentLevel < levelCap && currentLevel < MAX_LEVEL)
+    if (level < levelCap && level < MAX_LEVEL)
         gTasks[taskId].func = Task_UseCapCandyAgain;
     else
         gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;

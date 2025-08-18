@@ -4114,13 +4114,10 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                 u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
                 if (level != MAX_LEVEL)
                 {
-                    if (item == ITEM_RARE_CANDY || (item == ITEM_CAP_CANDY && level < GetCurrentLevelCap()))
-                    {
-                        data = gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][level + 1];
-                        SetMonData(mon, MON_DATA_EXP, &data);
-                        CalculateMonStats(mon);
-                        retVal = FALSE;
-                    }
+                    data = gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][level + 1];
+                    SetMonData(mon, MON_DATA_EXP, &data);
+                    CalculateMonStats(mon);
+                    retVal = FALSE;
                 }
             }
 
@@ -4603,15 +4600,9 @@ bool8 PokemonItemUseNoEffect(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mo
                 u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
                 if (level != MAX_LEVEL)
                 {
-                    if (item == ITEM_RARE_CANDY)
+                    if (item == ITEM_RARE_CANDY || item == ITEM_CAP_CANDY)
                     {
                         retVal = FALSE;
-                    }
-                    else if (item == ITEM_CAP_CANDY)
-                    {
-                        u8 levelCap = GetCurrentLevelCap();
-                        if (level < levelCap)
-                            retVal = FALSE;
                     }
                 }
             }

@@ -1,11 +1,21 @@
 PewterCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, PewterCity_OnTransition
+	map_script MAP_SCRIPT_ON_LOAD, PewterCity_GameCorner_OnLoad
 	.byte 0
+
+PewterCity_GameCorner_OnLoad::
+	call_if_set FLAG_SILVIO_MART, PewterCity_EventScript_SilvioMart
+	end
 
 PewterCity_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_PEWTER_CITY
 	setvar VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F, 0
 	end
+
+PewterCity_EventScript_SilvioMart::
+	setmetatile 34, 11, METATILE_PewterCity_SilvioMart , 1
+	special DrawWholeMapView
+	return
 
 @ Impossible to speak to this NPC from a facing dir != DIR_EAST normally, so they arent checked
 @ Additionally, no movement script exists for facing DIR_SOUTH, which would necessitate walking out of bounds
@@ -618,11 +628,6 @@ PewterCity_EventScript_Montanista::
 	release
 	end
 
-PewterCity_EventScript_Silvio1::
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Text_Silvio1, MSGBOX_NPC
-	end
-
 PewterCity_EventScript_Nina::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PewterCity_Text_MiAbuelitoDice, MSGBOX_NPC
@@ -638,10 +643,7 @@ PewterCity_EventScript_Nino::
 PewterCity_EventScript_FatMan::
 	lock
 	faceplayer
-	famechecker FAMECHECKER_BROCK, 2
-	namebox PalletTown_Text_Prueba
 	msgbox PewterCity_Text_BrockOnlySeriousTrainerHere
-	closemessage
 	release
 	end
 
@@ -669,7 +671,7 @@ PewterCity_EventScript_PoliceNotice::
 	end
 
 PewterCity_EventScript_Silvio::
-	msgbox PewterCity_Text_Silvio, MSGBOX_SIGN
+	msgbox PewterCity_Text_SilvoMart_Sign, MSGBOX_SIGN
 	end
 
 PewterCity_EventScript_MuseumSign::
@@ -806,13 +808,11 @@ PewterCity_Movement_WalkInPlaceLeft::
 	walk_in_place_left
 	step_end
 
-PewterCity_EventScript_SilvoMart::
-	msgbox PewterCity_Text_SilvoMart_Cerrado
-	closemessage
-	goto_if_set FLAG_SILVIO_MART, CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle
+PewterCity_EventScript_SilvioMartSign::
+	call_if_unset FLAG_SILVIO_MART, PewterCity_Text_SilvoMart_SignMartSign
 	end
 
-PewterCity_EventScript_SilvoMartAbierto::
-	msgbox PewterCity_Text_SilvoMart_Abierto
+PewterCity_Text_SilvoMart_SignMartSign::
+	msgbox PewterCity_Text_SilvoMart_Cerrado, MSGBOX_SIGN
 	closemessage
 	end

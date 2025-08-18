@@ -154,32 +154,6 @@ EventScript_MegaKickTaught::
 	release
 	end
 
-EventScript_DreamEaterTutor::
-	lock
-	faceplayer
-	goto_if_set FLAG_TUTOR_DREAM_EATER, EventScript_DreamEaterTaught
-	msgbox Text_DreamEaterTeach, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, EventScript_DreamEaterDeclined
-	call EventScript_CanOnlyBeLearnedOnce
-	goto_if_eq VAR_RESULT, NO, EventScript_DreamEaterDeclined
-	msgbox Text_DreamEaterWhichMon
-	setvar VAR_0x8005, MOVETUTOR_DREAM_EATER
-	call EventScript_ChooseMoveTutorMon
-	goto_if_eq VAR_RESULT, FALSE, EventScript_DreamEaterDeclined
-	setflag FLAG_TUTOR_DREAM_EATER
-	goto EventScript_DreamEaterTaught
-	end
-
-EventScript_DreamEaterDeclined::
-	msgbox Text_DreamEaterDeclined
-	release
-	end
-
-EventScript_DreamEaterTaught::
-	msgbox Text_DreamEaterTaught
-	release
-	end
-
 EventScript_SoftboiledTutor::
 	lock
 	faceplayer

@@ -226,10 +226,6 @@ ViridianCity_EventScript_WomanRoadBlocked::
 	release
 	end
 
-ViridianCity_EventScript_DreamEaterTutor::
-	goto EventScript_DreamEaterTutor
-	end
-
 ViridianCity_EventScript_RoadBlocked::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE

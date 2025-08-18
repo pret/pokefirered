@@ -90,7 +90,8 @@
 #define METATILE_PalletTown_OaksLabDoor  0x2D7
 
 // gTileset_PewterCity
-#define METATILE_PewterCity_Door  0x2A3
+#define METATILE_PewterCity_Door        0x2A3
+#define METATILE_PewterCity_SilvioMart  0x3AD
 
 // gTileset_PokemonCenter
 #define METATILE_PokemonCenter_CableClubDoor                         0x2DE

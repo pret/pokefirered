@@ -337,7 +337,7 @@ static void Task_HandleStopLearningMoveYesNoInput(u8 taskId);
 static void Task_TryLearningNextMoveAfterText(u8 taskId);
 static void ItemUseCB_RareCandyStep(u8 taskId, TaskFunc func);
 static void ItemUseCB_CapCandyStep(u8 taskId, TaskFunc func);
-static void Task_UseCapCandyAgain(u8 taskId);
+static void Task_HandleCapCandyLink(u8 taskId);
 static void Task_DisplayLevelUpStatsPg1(u8 taskId);
 static void Task_DisplayLevelUpStatsPg2(u8 taskId);
 static void UpdateMonDisplayInfoAfterRareCandy(u8 slot, struct Pokemon *mon);
@@ -5123,9 +5123,7 @@ static void ItemUseCB_CapCandyStep(u8 taskId, TaskFunc func)
     gPartyMenuUseExitCallback = TRUE;
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);
     PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
-
     UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
-    // Do not remove the item here, it will be removed at the end of the loop.
 
     GetMonNickname(mon, gStringVar1);
     level = GetMonData(mon, MON_DATA_LEVEL); // get new level
@@ -5134,14 +5132,6 @@ static void ItemUseCB_CapCandyStep(u8 taskId, TaskFunc func)
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
-}
-
-static void Task_UseCapCandyAgain(u8 taskId)
-{
-    if (!IsPartyMenuTextPrinterActive())
-    {
-        ItemUseCB_CapCandyStep(taskId, gTasks[taskId].func);
-    }
 }
 
 static void Task_HandleCapCandyLink(u8 taskId)
@@ -5159,7 +5149,6 @@ static void Task_HandleCapCandyLink(u8 taskId)
     {
         // End the loop
         gPartyMenu.capCandyInProgress = FALSE;
-        RemoveBagItem(gSpecialVar_ItemId, 1);
         Task_ClosePartyMenuAfterText(taskId);
     }
 }

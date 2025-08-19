@@ -28,7 +28,7 @@ const struct Tileset gTileset_ViridianCity =
     .palettes = gTilesetPalettes_ViridianCity,
     .metatiles = gMetatiles_ViridianCity,
     .metatileAttributes = gMetatileAttributes_ViridianCity,
-    .callback = NULL,
+    .callback = InitTilesetAnim_ViridianCity,
 };
 
 const struct Tileset gTileset_PewterCity =

@@ -15,6 +15,7 @@ void InitTilesetAnim_SilphCo(void);
 void InitTilesetAnim_MtEmber(void);
 void InitTilesetAnim_Cave(void);
 void InitTilesetAnim_PalletTown(void);
+void InitTilesetAnim_ViridianCity(void);
 void InitTilesetAnim_LavenderTown(void);
 
 #endif // GUARD_TILESET_ANIMS_H

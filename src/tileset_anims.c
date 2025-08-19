@@ -538,7 +538,7 @@ void InitTilesetAnim_PalletTown(void)
 
 static void QueueAnimTiles_ViridianCity_Flower(u16 timer)
 {
-    AppendTilesetAnimToBuffer(sTilesetAnims_ViridianCity_Flower[timer % ARRAY_COUNT(sTilesetAnims_ViridianCity_Flower)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(966)), 2 * TILE_SIZE_4BPP);
+    AppendTilesetAnimToBuffer(sTilesetAnims_ViridianCity_Flower[timer % ARRAY_COUNT(sTilesetAnims_ViridianCity_Flower)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(860)), 2 * TILE_SIZE_4BPP);
 }
 
 static void TilesetAnim_ViridianCity(u16 timer)

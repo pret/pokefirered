@@ -203,15 +203,15 @@
       "x": 35,
       "y": 4,
       "elevation": 0,
-      "dest_map": "MAP_MT_MOON_1F",
-      "dest_warp_id": "3"
+      "dest_map": "MAP_PEWTER_CITY_HOUSE1",
+      "dest_warp_id": "0"
     },
     {
       "x": 16,
       "y": 25,
       "elevation": 0,
       "dest_map": "MAP_PEWTER_CITY_POKEMON_CENTER_1F",
-      "dest_warp_id": "1"
+      "dest_warp_id": "0"
     },
     {
       "x": 9,

@@ -83,3 +83,22 @@ MtMoon_B2F_Text_ObtainedHelixFossil::
 MtMoon_B2F_Text_ObtainedDomeFossil::
     .string "¡Obtuviste el FÓSIL DOMO!$"
 
+MtMoon_B2F_Text_Jessie_Intro::
+    .string "¡Alto ahí, mocos{OA}!\n"
+    .string "Ese fósil ya tiene dueños.$"
+
+MtMoon_B2F_Text_James_Intro::
+    .string "Entrégalo ahora ya...\n"
+    .string "o tendremos que actuar.$"
+
+MtMoon_B2F_Text_Jessie_Reveal::
+    .string "¿Que no nos reconoces?\n"
+    .string "Soy {SHADOW DYNAMIC_COLOR4}JESSIE{SHADOW LIGHT_GRAY} del {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY}.$"
+
+MtMoon_B2F_Text_James_RevealFemale::
+    .string "...y yo soy {SHADOW DYNAMIC_COLOR4}JAMES{SHADOW LIGHT_GRAY}.\n"
+    .string "No te harás la heroína con nosotros.$"
+
+MtMoon_B2F_Text_James_RevealMale::
+    .string "...y yo soy {SHADOW DYNAMIC_COLOR4}JAMES{SHADOW LIGHT_GRAY}.\n"
+    .string "No te harás el héroe con nosotros.$"

@@ -13,7 +13,7 @@
   "show_map_name": false,
   "floor_number": 0,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": 0,
+  "connections": null,
   "object_events": [
     {
       "local_id": "LOCALID_ROUTE4_NURSE",
@@ -110,7 +110,7 @@
       "dest_warp_id": "2"
     },
     {
-      "x": 1,
+      "x": 0,
       "y": 6,
       "elevation": 4,
       "dest_map": "MAP_ROUTE4_POKEMON_CENTER_2F",
@@ -118,9 +118,15 @@
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "Common_EventScript_BetaEast"
+    }
   ],
-  "bg_events": [
-
-  ]
+  "bg_events": []
 }

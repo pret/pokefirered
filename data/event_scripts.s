@@ -811,6 +811,7 @@ gStdScriptsEnd::
 	.include "data/scripts/red_green_graphics.inc"
 	.include "data/scripts/pokemon_scripts.inc"
 	.include "data/text/namebox_names.inc"
+	.include "data/scripts/beta_scripts.inc"
 
 @ Unused
 Text_WouldYouLikeToMixRecords::

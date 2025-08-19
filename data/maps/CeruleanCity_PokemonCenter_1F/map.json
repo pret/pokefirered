@@ -113,20 +113,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CeruleanCity_PokemonCenter_1F_EventScript_PokemonJournalMisty",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
-    },
-    {
-      "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_POLICEMAN",
-      "x": 1,
-      "y": 6,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "BETA1",
-      "flag": "0"
     }
   ],
   "warp_events": [
@@ -145,6 +131,16 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 1,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_TEMP_0",
+      "var_value": "0",
+      "script": "Common_EventScript_BetaEast"
+    }
+  ],
   "bg_events": []
 }

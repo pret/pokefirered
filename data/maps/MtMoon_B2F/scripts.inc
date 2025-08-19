@@ -93,14 +93,33 @@ MtMoon_B2F_EventScript_HelixFossil::
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
 	waitmovement 0
 	copyobjectxytoperm LOCALID_MIGUEL
-	textcolor NPC_TEXT_COLOR_MALE
 	playfanfare MUS_OBTAIN_KEY_ITEM
-	message MtMoon_B2F_Text_ThenThisFossilIsMine
-	waitmessage
-	waitfanfare
+	msgbox MtMoon_B2F_Text_ThenThisFossilIsMine
+	closemessage
 	removeobject LOCALID_DOME_FOSSIL
 	setflag FLAG_GOT_HELIX_FOSSIL
 	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
+
+	@cambio de musica
+
+	namebox Name_Desconociodo
+	msgbox MtMoon_B2F_Text_Jessie_Intro
+	closemessage
+	namebox Name_Desconociodo
+	msgbox MtMoon_B2F_Text_James_Intro
+	closemessage
+	applymovement LOCALID_PLAYER, Common_Movement_JumpFaceDownExclamationMark
+	applymovement LOCALID_MIGUEL, Common_Movement_JumpFaceDownExclamationMark
+	waitmovement 0
+	namebox Name_Desconociodo
+	msgbox MtMoon_B2F_Text_Jessie_Reveal
+	closemessage
+	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelRunAway
+	waitmovement 0
+	checkplayergender
+	call_if_eq VAR_RESULT, FEMALE, MtMoon_B2F_EventScript_JessieJamesFemale
+	call_if_eq VAR_RESULT, MALE, MtMoon_B2F_EventScript_JessieJamesMale
+
 	release
 	end
 
@@ -133,3 +152,33 @@ MtMoon_B2F_EventScript_Grunt4::
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_4, MtMoon_B2F_Text_Grunt4Intro, MtMoon_B2F_Text_Grunt4Defeat
 	msgbox MtMoon_B2F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
 	end
+
+MtMoon_B2F_EventScript_JessieJamesTrigger::
+	releaseall
+	end
+
+MtMoon_B2F_EventScript_JessieJamesFemale::
+	namebox Name_Desconociodo
+	msgbox MtMoon_B2F_Text_James_RevealFemale
+	closemessage
+	return
+
+MtMoon_B2F_EventScript_JessieJamesMale::
+	namebox Name_Desconociodo
+	msgbox MtMoon_B2F_Text_James_RevealMale
+	closemessage
+	return
+
+MtMoon_B2F_Movement_MiguelRunAway::
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	step_end

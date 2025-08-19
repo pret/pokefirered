@@ -43,6 +43,36 @@ Common_EventScript_Pokemon_Voltorb::
 	release
 	end
 
+Common_EventScript_Pokemon_Sandshrew::
+	faceplayer
+	waitse
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	playmoncry SPECIES_SANDSHREW, CRY_MODE_NORMAL
+	namebox Name_Sandshrew
+	msgbox Common_Text_Pokemon_Sandshrew
+	closemessage
+	waitmoncry
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+Common_EventScript_Pokemon_Clefairy::
+	faceplayer
+	waitse
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	playmoncry SPECIES_CLEFAIRY, CRY_MODE_NORMAL
+	namebox Name_Clefairy
+	msgbox Common_Text_Pokemon_Clefairy
+	closemessage
+	waitmoncry
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
 Common_Text_Pokemon_Geodude::
 .string "¡Geo!$"
 
@@ -51,3 +81,9 @@ Common_Text_Pokemon_Psyduck::
 
 Common_Text_Pokemon_Voltorb::
 .string "¡Volt!$"
+
+Common_Text_Pokemon_Sandshrew::
+.string "¡Shrew!$"
+
+Common_Text_Pokemon_Clefairy::
+.string "¡Clefa!$"

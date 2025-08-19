@@ -27,3 +27,9 @@ Name_Psyduck::
 
 Name_Geodude::
     .string "GEODUDE$"
+
+Name_Sandshrew::
+    .string "SANDSHEW$"
+
+Name_Clefairy::
+    .string "CLEFARIY$"

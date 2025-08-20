@@ -167,6 +167,7 @@
 #define TRAINER_PIC_LADY                  146
 #define TRAINER_PIC_PAINTER               147
 #define TRAINER_PIC_SILVIO              148
+#define TRAINER_PIC_ROCKET_JESSIE_JAMES 149
 
 
 // The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)

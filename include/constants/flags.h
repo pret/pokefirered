@@ -199,7 +199,7 @@
 #define FLAG_HIDE_PEWTER_CITY_BROCK_EVENT_FINISHED         0x0B5
 #define FLAG_HIDE_MT_MOON_HIDE_SILVIO                      0x0B6
 #define FLAG_SILVIO_MART                                   0x0B7
-#define FLAG_0x0B8               0x0B8
+#define FLAG_HIDE_MT_MOON_JESSIE_JAMES                     0x0B8
 #define FLAG_0x0B9               0x0B9
 #define FLAG_0x0BA               0x0BA
 #define FLAG_0x0BB               0x0BB

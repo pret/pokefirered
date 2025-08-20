@@ -101,24 +101,54 @@ MtMoon_B2F_EventScript_HelixFossil::
 	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 
 	@cambio de musica
+	delay 16
+	setobjectxy LOCALID_MT_MOON_JESSIE,13,13 
+	setobjectxy LOCALID_MT_MOON_JAMES,12,13 
 
-	namebox Name_Desconociodo
+	setflag FLAG_HIDE_MT_MOON_JESSIE_JAMES
+	
+	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_WalkUp3
+	waitmovement 0
+
+	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_JumpFaceUpExclamationMark
+	waitmovement 0
+
+	namebox Name_Desconociodo	
 	msgbox MtMoon_B2F_Text_Jessie_Intro
 	closemessage
+
+	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_WalkUp3
+	waitmovement 0
+
+	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_JumpFaceUpExclamationMark
+	waitmovement 0
+
 	namebox Name_Desconociodo
 	msgbox MtMoon_B2F_Text_James_Intro
 	closemessage
 	applymovement LOCALID_PLAYER, Common_Movement_JumpFaceDownExclamationMark
 	applymovement LOCALID_MIGUEL, Common_Movement_JumpFaceDownExclamationMark
 	waitmovement 0
+
+	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_JumpFaceUpExclamationMark
+	waitmovement 0
+
 	namebox Name_Desconociodo
 	msgbox MtMoon_B2F_Text_Jessie_Reveal
 	closemessage
+
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelRunAway
 	waitmovement 0
+	setobjectxy LOCALID_MIGUEL,20,13 
+
+	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_JumpFaceUpExclamationMark
+	waitmovement 0
+
 	checkplayergender
 	call_if_eq VAR_RESULT, FEMALE, MtMoon_B2F_EventScript_JessieJamesFemale
 	call_if_eq VAR_RESULT, MALE, MtMoon_B2F_EventScript_JessieJamesMale
+	trainerbattle_double TRAINER_TWINS_ELI_ANNE, Route8_Text_EliIntro, Route8_Text_EliDefeat, Route8_Text_EliNotEnoughMons
+
 
 	release
 	end

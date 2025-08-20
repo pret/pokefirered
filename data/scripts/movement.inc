@@ -100,6 +100,7 @@ Common_Movement_WalkUp2::
 Common_Movement_WalkUp3::
 	walk_up
 	walk_up
+	walk_up
 	step_end
 
 Common_Movement_WalkLeft::
@@ -116,6 +117,11 @@ Common_Movement_WalkInPlaceDown:
 
 Common_Movement_WalkInPlaceUp:
 	walk_in_place_up
+	step_end
+
+Common_Movement_JumpFaceUpExclamationMark::
+	emote_exclamation_mark
+	jump_in_place_up
 	step_end
 
 Common_Movement_JumpFaceDownExclamationMark::

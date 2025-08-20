@@ -12,7 +12,7 @@ Text_OpenedPkmnStorage::
 	.string "Almacenamiento de {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}$"
 
 Text_AccessedPlayersPC::
-	.string "Accessed {PLAYER}'s PC.$"
+	.string "Accediste a la {SHADOW DYNAMIC_COLOR4}PC{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}.$"
 
 Text_AccessedBillsPC::
-	.string "Accessed BILL's PC.$"
+	.string "Accediste a la {SHADOW DYNAMIC_COLOR4}PC{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}BILL{SHADOW LIGHT_GRAY}.$"

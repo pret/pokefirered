@@ -39,7 +39,6 @@ EventScript_PCDisabled::
 EventScript_PCMainMenu::
 	signmsg
 	message Text_AccessWhichPC
-	normalmsg
 	waitmessage
 	special CreatePCMenu
 	waitstate
@@ -83,7 +82,9 @@ EventScript_AccessSomeonesPC::
 	return
 
 EventScript_AccessBillsPC::
+	signmsg
 	msgbox Text_AccessedBillsPC
+	normalmsg
 	return
 
 EventScript_TurnOffPC::
@@ -109,8 +110,10 @@ EventScript_AccessHallOfFame::
 EventScript_AccessProfOaksPC::
 	goto_if_unset FLAG_SYS_POKEDEX_GET, EventScript_TurnOffPC
 	playse SE_PC_LOGIN
+	signmsg
 	msgbox Text_AccessedProfOaksPC
 	msgbox Text_HavePokedexRated, MSGBOX_YESNO
+	normalmsg
 	goto_if_eq VAR_RESULT, NO, EventScript_ExitOaksPC
 	setflag FLAG_OAKS_RATING_IS_VIA_PC
 	call PokedexRating_EventScript_Rate
@@ -119,6 +122,8 @@ EventScript_AccessProfOaksPC::
 	end
 
 EventScript_ExitOaksPC::
+	signmsg
 	msgbox Text_ClosedLinkToProfOaksPC
+	normalmsg
 	goto EventScript_PCMainMenu
 	end

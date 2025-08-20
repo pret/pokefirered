@@ -951,20 +951,19 @@ Text_ItNeedsCardKey::
 	.string "It needs a CARD KEY!$"
 
 Text_AccessedProfOaksPC::
-	.string "Accessed PROF. OAK's PC…\p"
-	.string "Accessed the POKéDEX Rating\n"
-	.string "System…$"
+	.string "Accediste a la {SHADOW DYNAMIC_COLOR4}PC{SHADOW LIGHT_GRAY} del {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY}.$"
+	.string "Accediste al sistema de\n"
+	.string "evaluación de la {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}.$"
 
 Text_HavePokedexRated::
-	.string "Would you like to have your\n"
-	.string "POKéDEX rated?$"
+	.string "¿Quieres que evalúe tu {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}?$"
 
 Text_ClosedLinkToProfOaksPC::
 	.string "Closed link to PROF. OAK's PC.$"
 
 Text_VoiceRangOutDontRunAway::
-	.string "Someone's voice rang out,\n"
-	.string "“Don't run away!”$"
+	.string "Se cerró la conexión con la {SHADOW DYNAMIC_COLOR4}PC{SHADOW LIGHT_GRAY}\n"
+	.string "del {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY}.$"
 
 @ Uncear what the below unused JP texts were for
 Text_IdLikeToSeeRequest::

@@ -147,7 +147,7 @@ MtMoon_B2F_EventScript_HelixFossil::
 	checkplayergender
 	call_if_eq VAR_RESULT, FEMALE, MtMoon_B2F_EventScript_JessieJamesFemale
 	call_if_eq VAR_RESULT, MALE, MtMoon_B2F_EventScript_JessieJamesMale
-	trainerbattle_double TRAINER_TWINS_ELI_ANNE, Route8_Text_EliIntro, Route8_Text_EliDefeat, Route8_Text_EliNotEnoughMons
+	trainerbattle_double TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON, Route8_Text_EliIntro, Route8_Text_EliDefeat, Route8_Text_EliNotEnoughMons
 
 
 	release

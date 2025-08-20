@@ -8066,6 +8066,24 @@ static const struct TrainerMonNoItemDefaultMoves sParty_TeamRocketGrunt51[] = {
     },
 };
 
+static const struct TrainerMonNoItemDefaultMoves sParty_TeamRocketJessieJamesMtMoon[] = {
+    {
+        .iv = 0,
+        .lvl = 28,
+        .species = SPECIES_GOLBAT,
+    },
+    {
+        .iv = 0,
+        .lvl = 28,
+        .species = SPECIES_DROWZEE,
+    },
+    {
+        .iv = 0,
+        .lvl = 28,
+        .species = SPECIES_HYPNO,
+    },
+};
+
 static const struct TrainerMonNoItemDefaultMoves sParty_BirdKeeperMilo[] = {
     {
         .iv = 0,

@@ -756,11 +756,12 @@
 #define TRAINER_HIKER_GUSTAVO                    750
 #define TRAINER_LEADER_BROCK2                    751
 #define TRAINER_SILVIO                           752
-// NOTE: Because each Trainer uses a flag to determine when they are defeated, there is 
+#define TRAINER_TEAM_ROCKET_GRUNT_52             753
+// NOTE: Because each Trainer uses a flag to determine when they are defeated, there is
 //       only space for 25 additional trainers before trainer flag space overflows.
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define NUM_TRAINERS                             752
+#define NUM_TRAINERS                             753
 #define MAX_TRAINERS_COUNT                       769
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

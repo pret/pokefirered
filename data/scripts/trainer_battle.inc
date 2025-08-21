@@ -20,16 +20,28 @@ EventScript_NoTrainerBattle::
 	gotopostbattlescript
 
 EventScript_TryDoDoubleTrainerBattle::
-	lock
-	faceplayer
-	call EventScript_RevealTrainer
-	specialvar VAR_RESULT, Script_HasTrainerBeenFought
-	goto_if_ne VAR_RESULT, FALSE, EventScript_NoDoubleTrainerBattle
-	special HasEnoughMonsForDoubleBattle
-	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, EventScript_NotEnoughMonsForDoubleBattle
-	special PlayTrainerEncounterMusic
-	special SetUpTrainerMovement
-	goto EventScript_DoTrainerBattle
+        lock
+        faceplayer
+        call EventScript_RevealTrainer
+        specialvar VAR_RESULT, Script_HasTrainerBeenFought
+        goto_if_ne VAR_RESULT, FALSE, EventScript_NoDoubleTrainerBattle
+        special HasEnoughMonsForDoubleBattle
+        goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, EventScript_NotEnoughMonsForDoubleBattle
+        special PlayTrainerEncounterMusic
+        special SetUpTrainerMovement
+        goto EventScript_DoTrainerBattle
+
+EventScript_TryDoDoubleTrainerBattleNoIntro::
+        lock
+        faceplayer
+        call EventScript_RevealTrainer
+        specialvar VAR_RESULT, Script_HasTrainerBeenFought
+        goto_if_ne VAR_RESULT, FALSE, EventScript_NoDoubleTrainerBattle
+        special HasEnoughMonsForDoubleBattle
+        goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, EventScript_NotEnoughMonsForDoubleBattle
+        special PlayTrainerEncounterMusic
+        special SetUpTrainerMovement
+        goto EventScript_DoNoIntroTrainerBattleContinueScript
 
 EventScript_NotEnoughMonsForDoubleBattle::
 	special ShowTrainerCantBattleSpeech
@@ -42,12 +54,17 @@ EventScript_NoDoubleTrainerBattle::
 	gotopostbattlescript
 
 EventScript_DoNoIntroTrainerBattle::
-	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
-	waitmovement 0
-	special PlayTrainerEncounterMusic
-	goto_if_questlog EventScript_EndQuestLogBattle
-	dotrainerbattle
-	gotopostbattlescript
+        applymovement VAR_LAST_TALKED, Movement_RevealTrainer
+        waitmovement 0
+        special PlayTrainerEncounterMusic
+        goto_if_questlog EventScript_EndQuestLogBattle
+        dotrainerbattle
+        gotopostbattlescript
+
+EventScript_DoNoIntroTrainerBattleContinueScript::
+        goto_if_questlog EventScript_EndQuestLogBattle
+        dotrainerbattle
+        gotobeatenscript
 
 EventScript_TryDoRematchBattle::
 	call EventScript_RevealTrainer

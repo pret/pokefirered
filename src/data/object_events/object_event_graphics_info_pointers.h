@@ -96,7 +96,8 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pokedex;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CutTree;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RockSmashRock;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StrengthBoulder;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fossil;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HelixFossil;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DomeFossil;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ruby;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Sapphire;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldAmber;
@@ -257,7 +258,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_CUT_TREE]                 = &gObjectEventGraphicsInfo_CutTree,
     [OBJ_EVENT_GFX_ROCK_SMASH_ROCK]          = &gObjectEventGraphicsInfo_RockSmashRock,
     [OBJ_EVENT_GFX_PUSHABLE_BOULDER]         = &gObjectEventGraphicsInfo_StrengthBoulder,
-    [OBJ_EVENT_GFX_FOSSIL]                   = &gObjectEventGraphicsInfo_Fossil,
+    [OBJ_EVENT_GFX_HELIX_FOSSIL]             = &gObjectEventGraphicsInfo_HelixFossil,
     [OBJ_EVENT_GFX_RUBY]                     = &gObjectEventGraphicsInfo_Ruby,
     [OBJ_EVENT_GFX_SAPPHIRE]                 = &gObjectEventGraphicsInfo_Sapphire,
     [OBJ_EVENT_GFX_OLD_AMBER]                = &gObjectEventGraphicsInfo_OldAmber,
@@ -318,4 +319,5 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_GEODUDE]                  = &gObjectEventGraphicsInfo_Geodude,
     [OBJ_EVENT_GFX_NERD]                     = &gObjectEventGraphicsInfo_Nerd,
     [OBJ_EVENT_GFX_SANDSHREW]                = &gObjectEventGraphicsInfo_Sandshrew,
+    [OBJ_EVENT_GFX_DOME_FOSSIL]              = &gObjectEventGraphicsInfo_DomeFossil,
 };

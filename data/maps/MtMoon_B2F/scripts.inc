@@ -81,7 +81,6 @@ MtMoon_B2F_Movement_MiguelToHelixFossil::
 	step_end
 
 MtMoon_B2F_EventScript_HelixFossil::
-	lock
 	faceplayer
 	signmsg
 	msgbox MtMoon_B2F_Text_YouWantHelixFossil, MSGBOX_YESNO

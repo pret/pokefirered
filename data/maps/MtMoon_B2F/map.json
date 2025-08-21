@@ -18,7 +18,7 @@
     {
       "local_id": "LOCALID_DOME_FOSSIL",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
+      "graphics_id": "OBJ_EVENT_GFX_DOME_FOSSIL",
       "x": 12,
       "y": 7,
       "elevation": 3,
@@ -33,7 +33,7 @@
     {
       "local_id": "LOCALID_HELIX_FOSSIL",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_FOSSIL",
+      "graphics_id": "OBJ_EVENT_GFX_HELIX_FOSSIL",
       "x": 13,
       "y": 7,
       "elevation": 3,

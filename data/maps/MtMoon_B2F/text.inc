@@ -102,3 +102,20 @@ MtMoon_B2F_Text_James_RevealFemale::
 MtMoon_B2F_Text_James_RevealMale::
     .string "...y yo soy {SHADOW DYNAMIC_COLOR4}JAMES{SHADOW LIGHT_GRAY}.\n"
     .string "No te harás el héroe con nosotros.$"
+
+MtMoon_B2F_Text_Jessie_DoubleChallenge::
+    .string "¿Te crees valiente?\n"
+    .string "¡Nos enfrentarás a los dos!$"
+
+MtMoon_B2F_Text_James_DoubleChallenge::
+    .string "¡Batalla doble!\n"
+    .string "Verás lo que es el trabajo en equipo.$"
+
+MtMoon_B2F_Text_Jessie_RunAway::
+    .string "Esto no acaba aquí...$"
+
+MtMoon_B2F_Text_James_RunAway::
+    .string "...¡El {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY} volverá por ti!$"
+
+MtMoon_B2F_Text_James_Test::
+    .string "CONTINUACIÓN EVENTO$"

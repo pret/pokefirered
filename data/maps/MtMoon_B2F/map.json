@@ -249,24 +249,6 @@
       "var": "VAR_MAP_SCENE_MT_MOON_B2F",
       "var_value": "0",
       "script": "MtMoon_B2F_EventScript_MiguelTrigger"
-    },
-    {
-      "type": "trigger",
-      "x": 13,
-      "y": 8,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "MtMoon_B2F_EventScript_JessieJamesTrigger"
-    },
-    {
-      "type": "trigger",
-      "x": 12,
-      "y": 8,
-      "elevation": 0,
-      "var": "VAR_TEMP_0",
-      "var_value": "0",
-      "script": "NULL"
     }
   ],
   "bg_events": [

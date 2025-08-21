@@ -61,13 +61,6 @@ Common_Movement_WalkUp5::
 	walk_up
 	step_end
 
-Common_Movement_WalkUp4::
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
 Common_Movement_WalkDown::
 	walk_down
 	step_end
@@ -103,6 +96,13 @@ Common_Movement_WalkUp3::
 	walk_up
 	step_end
 
+Common_Movement_WalkUp4::
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
 Common_Movement_WalkLeft::
 	walk_left
 	step_end
@@ -115,8 +115,14 @@ Common_Movement_WalkInPlaceDown:
 	walk_in_place_down
 	step_end
 
-Common_Movement_WalkInPlaceUp:
+Common_Movement_WalkInPlaceUp::
 	walk_in_place_up
+	walk_in_place_up
+	step_end
+
+Common_Movement_WalkInPlaceRight::
+	walk_in_place_right
+	walk_in_place_right
 	step_end
 
 Common_Movement_JumpFaceUpExclamationMark::

@@ -19,6 +19,12 @@ Name_Oak::
 Name_Brock::
     .string "BROCK$"
 
+Name_Jessie::
+    .string "JESSIE$"
+
+Name_James::
+    .string "JAMES$"
+
 Name_Voltorb::
     .string "VOLTORB$"
 

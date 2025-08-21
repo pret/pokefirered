@@ -1898,22 +1898,41 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Snorlax = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fossil = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_HelixFossil = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
-    .size = 128,
+    .size = 256,
     .width = 16,
-    .height = 16,
+    .height = 32,
     .paletteSlot = 0,
-    .shadowSize = SHADOW_SIZE_S,
+    .shadowSize = SHADOW_SIZE_M,
     .inanimate = TRUE,
     .disableReflectionPaletteLoad = FALSE,
     .tracks = TRACKS_NONE,
-    .oam = &gObjectEventBaseOam_16x16,
-    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
     .anims = sAnimTable_Inanimate,
-    .images = sPicTable_Fossil,
+    .images = sPicTable_HelixFossil,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DomeFossil = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = 0,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_DomeFossil,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 

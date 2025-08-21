@@ -101,7 +101,7 @@
 #define OBJ_EVENT_GFX_CUT_TREE 95
 #define OBJ_EVENT_GFX_ROCK_SMASH_ROCK 96
 #define OBJ_EVENT_GFX_PUSHABLE_BOULDER 97
-#define OBJ_EVENT_GFX_FOSSIL 98
+#define OBJ_EVENT_GFX_HELIX_FOSSIL 98
 #define OBJ_EVENT_GFX_RUBY 99
 #define OBJ_EVENT_GFX_SAPPHIRE 100
 #define OBJ_EVENT_GFX_OLD_AMBER 101
@@ -162,7 +162,8 @@
 #define OBJ_EVENT_GFX_GEODUDE 156
 #define OBJ_EVENT_GFX_NERD    157
 #define OBJ_EVENT_GFX_SANDSHREW 158
-#define NUM_OBJ_EVENT_GFX      159
+#define OBJ_EVENT_GFX_DOME_FOSSIL 159
+#define NUM_OBJ_EVENT_GFX      160
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

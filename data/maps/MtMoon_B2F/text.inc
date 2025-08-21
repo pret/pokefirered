@@ -117,5 +117,6 @@ MtMoon_B2F_Text_Jessie_RunAway::
 MtMoon_B2F_Text_James_RunAway::
     .string "...¡El {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY} volverá por ti!$"
 
-MtMoon_B2F_Text_James_Test::
-    .string "CONTINUACIÓN EVENTO$"
+MtMoon_B2F_Text_Jessie_James_Defeat::
+    .string "¡IMPOSIBLE!\n"
+    .string "¡NUESTRO DÚO PERFECTO... DERROTADO!$"

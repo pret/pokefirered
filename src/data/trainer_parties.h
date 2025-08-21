@@ -8070,17 +8070,17 @@ static const struct TrainerMonNoItemDefaultMoves sParty_TeamRocketJessieJamesMtM
     {
         .iv = 0,
         .lvl = 1,
-        .species = SPECIES_GOLBAT,
+        .species = SPECIES_KOFFING,
     },
     {
         .iv = 0,
         .lvl = 1,
-        .species = SPECIES_DROWZEE,
+        .species = SPECIES_EKANS,
     },
     {
         .iv = 0,
         .lvl = 1,
-        .species = SPECIES_HYPNO,
+        .species = SPECIES_MEOWTH,
     },
 };
 

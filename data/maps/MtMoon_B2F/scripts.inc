@@ -13,7 +13,7 @@ MtMoon_B2F_EventScript_ShowFossils::
 
 MtMoon_B2F_EventScript_MiguelTrigger::
 	lockall
-	applymovement LOCALID_MIGUEL, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_MT_MOON_MIGUEL, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	call MtMoon_B2F_EventScript_BattleMiguel
 	releaseall
@@ -33,7 +33,7 @@ MtMoon_B2F_EventScript_BattleMiguel::
 	waitmessage
 	playbgm MUS_ENCOUNTER_GYM_LEADER, 0
 	waitbuttonpress
-	setvar VAR_LAST_TALKED, LOCALID_MIGUEL
+	setvar VAR_LAST_TALKED, LOCALID_MT_MOON_MIGUEL
 	trainerbattle_no_intro TRAINER_SUPER_NERD_MIGUEL, MtMoon_B2F_Text_MiguelDefeat
 	setvar VAR_MAP_SCENE_MT_MOON_B2F, 1
 	msgbox MtMoon_B2F_Text_WellEachTakeAFossil
@@ -59,9 +59,9 @@ MtMoon_B2F_EventScript_DomeFossil::
 	closemessage
 	special QuestLog_CutRecording
 	delay 10
-	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToHelixFossil
+	applymovement LOCALID_MT_MOON_MIGUEL, MtMoon_B2F_Movement_MiguelToHelixFossil
 	waitmovement 0
-	copyobjectxytoperm LOCALID_MIGUEL
+	copyobjectxytoperm LOCALID_MT_MOON_MIGUEL
 	textcolor NPC_TEXT_COLOR_MALE
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message MtMoon_B2F_Text_ThenThisFossilIsMine
@@ -92,9 +92,9 @@ MtMoon_B2F_EventScript_HelixFossil::
 	closemessage
 	special QuestLog_CutRecording
 	delay 10
-	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
+	applymovement LOCALID_MT_MOON_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
 	waitmovement 0
-	copyobjectxytoperm LOCALID_MIGUEL
+	copyobjectxytoperm LOCALID_MT_MOON_MIGUEL
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	msgbox MtMoon_B2F_Text_ThenThisFossilIsMine
 	closemessage
@@ -106,69 +106,51 @@ MtMoon_B2F_EventScript_HelixFossil::
 	delay 16
 	setobjectxy LOCALID_MT_MOON_JESSIE,13,14 
 	setobjectxy LOCALID_MT_MOON_JAMES,12,14 
-
 	setflag FLAG_HIDE_MT_MOON_JESSIE_JAMES
-	
 	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_WalkUp4
 	waitmovement 0
-
 	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_JumpFaceUpExclamationMark
 	waitmovement 0
-
 	namebox Name_Desconociodo	
 	msgbox MtMoon_B2F_Text_Jessie_Intro
 	closemessage
-
 	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_WalkUp4
 	waitmovement 0
-
 	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_JumpFaceUpExclamationMark
 	waitmovement 0
-
 	namebox Name_Desconociodo
 	msgbox MtMoon_B2F_Text_James_Intro
 	closemessage
 	applymovement LOCALID_PLAYER, Common_Movement_JumpFaceDownExclamationMark
-	applymovement LOCALID_MIGUEL, Common_Movement_JumpFaceDownExclamationMark
+	applymovement LOCALID_MT_MOON_MIGUEL, Common_Movement_JumpFaceDownExclamationMark
 	waitmovement 0
-
 	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_JumpFaceUpExclamationMark
 	waitmovement 0
-
 	namebox Name_Desconociodo
 	msgbox MtMoon_B2F_Text_Jessie_Reveal
 	closemessage
-
-	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelRunAway
+	applymovement LOCALID_MT_MOON_MIGUEL, MtMoon_B2F_Movement_MiguelRunAway
 	waitmovement 0
-	setobjectxy LOCALID_MIGUEL,20,13 
-
+	setobjectxy LOCALID_MT_MOON_MIGUEL,3,16 
 	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_JumpFaceUpExclamationMark
 	waitmovement 0
-
 	checkplayergender
 	call_if_eq VAR_RESULT, FEMALE, MtMoon_B2F_EventScript_JessieJamesFemale
 	call_if_eq VAR_RESULT, MALE, MtMoon_B2F_EventScript_JessieJamesMale
-
 	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_WalkUp
 	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_WalkUp
 	waitmovement 0
-
-
 	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_WalkInPlaceUp
 	waitmovement 0
-
 	namebox Name_Jessie
 	msgbox MtMoon_B2F_Text_Jessie_DoubleChallenge
 	closemessage 
-
 	applymovement LOCALID_MT_MOON_JAMES, MtMoon_B2F_Movement_JamesToPlayer
 	waitmovement 0
-
 	namebox Name_James
 	msgbox MtMoon_B2F_Text_James_DoubleChallenge
 	closemessage 
-	trainerbattle_double TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON, Route8_Text_EliIntro, Route8_Text_EliDefeat, Route8_Text_EliNotEnoughMons, MtMoon_B2F_EventScript_HelixFossilAfterBattle
+	trainerbattle_double_no_intro TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON, MtMoon_B2F_Text_Jessie_James_Defeat, MtMoon_B2F_Text_Jessie_James_Defeat, MtMoon_B2F_EventScript_HelixFossilAfterBattle
 	release
 	end
 
@@ -217,6 +199,8 @@ MtMoon_B2F_EventScript_HelixFossilAfterBattle::
 	applymovement LOCALID_MT_MOON_JAMES, MtMoon_B2F_Movement_JamesRunAway
 	applymovement LOCALID_MT_MOON_JESSIE, MtMoon_B2F_Movement_JessieRunAway
 	waitmovement 0
+	setobjectxy LOCALID_MT_MOON_JAMES,3,16 
+	setobjectxy LOCALID_MT_MOON_JESSIE,3,16 
 	releaseall
 	end
 
@@ -252,24 +236,36 @@ MtMoon_B2F_Movement_JamesToPlayer::
 	step_end
 
 MtMoon_B2F_Movement_JamesRunAway::
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_left
-	walk_left
-	walk_left
-	walk_left
+	delay_16
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	step_end
 
 MtMoon_B2F_Movement_JessieRunAway::
 	walk_left
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_left
-	walk_left
-	walk_left
-	walk_left
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up
+	walk_fast_up	
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	step_end

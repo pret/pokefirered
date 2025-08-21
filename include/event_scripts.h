@@ -1134,7 +1134,9 @@ extern const u8 EventScript_ItemfinderDigUpUnderfootItem[];
 
 // battle_setup
 extern const u8 EventScript_DoNoIntroTrainerBattle[];
+extern const u8 EventScript_DoNoIntroTrainerBattleContinueScript[];
 extern const u8 EventScript_TryDoDoubleTrainerBattle[];
+extern const u8 EventScript_TryDoDoubleTrainerBattleNoIntro[];
 extern const u8 EventScript_TryDoNormalTrainerBattle[];
 extern const u8 EventScript_TryDoDoubleRematchBattle[];
 extern const u8 EventScript_TryDoRematchBattle[];

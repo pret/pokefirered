@@ -721,16 +721,20 @@
 			.4byte \pointer1 @ text
 			.4byte \pointer2 @ text
 			.4byte \pointer3 @ text
-		.elseif \type == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC
-			.4byte \pointer1 @ text
-			.4byte \pointer2 @ text
-			.4byte \pointer3 @ text
-			.4byte \pointer4 @ event script
-		.elseif \type == TRAINER_BATTLE_EARLY_RIVAL
-			.4byte \pointer1 @ text
-			.4byte \pointer2 @ text
-		.endif
-	.endm
+                .elseif \type == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC
+                        .4byte \pointer1 @ text
+                        .4byte \pointer2 @ text
+                        .4byte \pointer3 @ text
+                        .4byte \pointer4 @ event script
+                .elseif \type == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_INTRO
+                        .4byte \pointer1 @ text
+                        .4byte \pointer2 @ text
+                        .4byte \pointer3 @ event script
+                .elseif \type == TRAINER_BATTLE_EARLY_RIVAL
+                        .4byte \pointer1 @ text
+                        .4byte \pointer2 @ text
+                .endif
+        .endm
 
 	NO_MUSIC = FALSE
 
@@ -764,14 +768,19 @@
 	.endm
 
 	@ Starts a rematch double battle. Takes a trainer, intro text, loss text, and text for when you have too few pokemon
-	.macro trainerbattle_rematch_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req
-	trainerbattle TRAINER_BATTLE_REMATCH_DOUBLE, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text
-	.endm
+        .macro trainerbattle_rematch_double trainer:req, intro_text:req, lose_text:req, not_enough_pkmn_text:req
+        trainerbattle TRAINER_BATTLE_REMATCH_DOUBLE, \trainer, 0, \intro_text, \lose_text, \not_enough_pkmn_text
+        .endm
 
-	@ Starts a trainer battle, skipping intro text. Takes a trainer and loss text
-	.macro trainerbattle_no_intro trainer:req, lose_text:req
-	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, \trainer, 0, \lose_text
-	.endm
+        @ Starts a double trainer battle, skipping intro text, and continues with an event script
+        .macro trainerbattle_double_no_intro trainer:req, lose_text:req, not_enough_pkmn_text:req, event_script:req
+        trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_INTRO, \trainer, 0, \lose_text, \not_enough_pkmn_text, \event_script
+        .endm
+
+        @ Starts a trainer battle, skipping intro text. Takes a trainer and loss text
+        .macro trainerbattle_no_intro trainer:req, lose_text:req
+        trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, \trainer, 0, \lose_text
+        .endm
 
 	@ Starts a trainer battle with victory text if the player loses. If flags is nonzero, the player will be healed after battle (and its assumed to be the tutorial battle)
 	.macro trainerbattle_earlyrival trainer:req, flags:req, defeat_text:req, victory_text:req

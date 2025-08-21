@@ -149,6 +149,7 @@ const struct MonCoords gTrainerFrontPicCoords[] =
     {.size = 8, .y_offset = 1},
     {.size = 8, .y_offset = 1},
     {.size = 8, .y_offset = 1},
+    {.size = 8, .y_offset = 1},
 };
 
 const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
@@ -263,7 +264,6 @@ const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
     TRAINER_SPRITE(SCIENTIST, gTrainerFrontPic_Scientist, 0x800),
     TRAINER_SPRITE(LEADER_GIOVANNI, gTrainerFrontPic_LeaderGiovanni, 0x800),
     TRAINER_SPRITE(ROCKET_GRUNT_M, gTrainerFrontPic_RocketGruntM, 0x800),
-    TRAINER_SPRITE(ROCKET_JESSIE_JAMES, gTrainerFrontPic_RocketJessieJames, 0x800),
     TRAINER_SPRITE(COOLTRAINER_M, gTrainerFrontPic_CooltrainerM, 0x800),
     TRAINER_SPRITE(COOLTRAINER_F, gTrainerFrontPic_CooltrainerF, 0x800),
     TRAINER_SPRITE(ELITE_FOUR_LORELEI, gTrainerFrontPic_EliteFourLorelei, 0x800),
@@ -303,6 +303,7 @@ const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
     TRAINER_SPRITE(LADY, gTrainerFrontPic_Lady, 0x800),
     TRAINER_SPRITE(PAINTER, gTrainerFrontPic_Painter, 0x800),
     TRAINER_SPRITE(SILVIO, gTrainerFrontPic_Silvio, 0x800),
+    TRAINER_SPRITE(ROCKET_JESSIE_JAMES, gTrainerFrontPic_RocketJessieJames, 0x800),
 };
 
 const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[] =

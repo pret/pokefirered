@@ -328,9 +328,6 @@ const u32 gTrainerPalette_LeaderGiovanni[] = INCBIN_U32("graphics/trainers/palet
 const u32 gTrainerFrontPic_RocketGruntM[] = INCBIN_U32("graphics/trainers/front_pics/rocket_grunt_m_front_pic.4bpp.lz");
 const u32 gTrainerPalette_RocketGruntM[] = INCBIN_U32("graphics/trainers/palettes/rocket_grunt_m.gbapal.lz");
 
-const u32 gTrainerFrontPic_RocketJessieJames[] = INCBIN_U32("graphics/trainers/front_pics/rocket_jessie_james_front_pic.4bpp.lz");
-const u32 gTrainerPalette_RocketJessieJames[] = INCBIN_U32("graphics/trainers/palettes/rocket_jessie_james.gbapal.lz");
-
 const u32 gTrainerFrontPic_CooltrainerM[] = INCBIN_U32("graphics/trainers/front_pics/cool_trainer_m_front_pic.4bpp.lz");
 const u32 gTrainerPalette_CooltrainerM[] = INCBIN_U32("graphics/trainers/palettes/cool_trainer_m.gbapal.lz");
 
@@ -447,6 +444,9 @@ const u32 gTrainerPalette_Painter[] = INCBIN_U32("graphics/trainers/palettes/pai
 
 const u32 gTrainerFrontPic_Silvio[] = INCBIN_U32("graphics/trainers/front_pics/silvio_front_pic.4bpp.lz");
 const u32 gTrainerPalette_Silvio[] = INCBIN_U32("graphics/trainers/palettes/silvio.gbapal.lz");
+
+const u32 gTrainerFrontPic_RocketJessieJames[] = INCBIN_U32("graphics/trainers/front_pics/rocket_jessie_james_front_pic.4bpp.lz");
+const u32 gTrainerPalette_RocketJessieJames[] = INCBIN_U32("graphics/trainers/palettes/rocket_jessie_james.gbapal.lz");
 
 const u8 gTrainerBackPic_Red[] = INCBIN_U8("graphics/trainers/back_pics/red_back_pic.4bpp");
 const u8 gTrainerBackPic_Leaf[] = INCBIN_U8("graphics/trainers/back_pics/leaf_back_pic.4bpp");

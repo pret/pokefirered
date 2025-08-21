@@ -2571,7 +2571,6 @@ extern const u32 gTrainerFrontPic_RivalEarly[];
 extern const u32 gTrainerFrontPic_Scientist[];
 extern const u32 gTrainerFrontPic_LeaderGiovanni[];
 extern const u32 gTrainerFrontPic_RocketGruntM[];
-extern const u32 gTrainerFrontPic_RocketJessieJames[];
 extern const u32 gTrainerFrontPic_CooltrainerM[];
 extern const u32 gTrainerFrontPic_CooltrainerF[];
 extern const u32 gTrainerFrontPic_EliteFourLorelei[];
@@ -2611,6 +2610,7 @@ extern const u32 gTrainerFrontPic_RuinManiac[];
 extern const u32 gTrainerFrontPic_Lady[];
 extern const u32 gTrainerFrontPic_Painter[];
 extern const u32 gTrainerFrontPic_Silvio[];
+extern const u32 gTrainerFrontPic_RocketJessieJames[];
 
 extern const u32 gTrainerPalette_AquaLeaderArchie[];
 extern const u32 gTrainerPalette_AquaGruntM[];

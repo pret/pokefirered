@@ -85,6 +85,10 @@ static const u8 sDoorAnimTiles_PewterSlidingSingle[] = INCBIN_U8("graphics/door_
 static const u16 sDoorNullPalettePewterSliding[16] = {};
 static const u8 sDoorAnimTiles_CeruleanSlidingSingle[] = INCBIN_U8("graphics/door_anims/cerulean_sliding.4bpp");
 static const u16 sDoorNullPaletteCeruleanSliding[16] = {};
+static const u8 sDoorAnimTiles_ViridianSlidingSingleBlue[] = INCBIN_U8("graphics/door_anims/viridian_sliding_blue.4bpp");
+static const u16 sDoorNullPaletteViridianSlidingBlue[16] = {};
+static const u8 sDoorAnimTiles_ViridianSlidingSinglePurple[] = INCBIN_U8("graphics/door_anims/viridian_sliding_purple.4bpp");
+static const u16 sDoorNullPaletteViridianSlidingPurple[16] = {};
 
 // Doors from R/S dummied below
 static const u8 sDoorAnimTiles_Empty1[256 * 3] = {};
@@ -223,13 +227,15 @@ static const u8 sDoorAnimPalettes_SlidingSingle[] = {2, 2, 2, 2, 2, 2, 2, 2};
 static const u8 sDoorAnimPalettes_SlidingDouble[] = {3, 3, 3, 3, 3, 3, 3, 3};
 static const u8 sDoorAnimPalettes_Pallet[] = {11, 11, 11, 11, 11, 11, 11, 11};
 static const u8 sDoorAnimPalettes_OaksLab[] = {7, 7, 7, 7, 7, 7, 7, 7};
-static const u8 sDoorAnimPalettes_Viridian[] = {2, 2, 2, 2, 2, 2, 2, 2};
+static const u8 sDoorAnimPalettes_Viridian[] = {7, 7, 7, 7, 7, 7, 7, 7};
 static const u8 sDoorAnimPalettes_Pewter[] = {12, 12, 12, 12, 12, 12, 12, 12};
 static const u8 sDoorAnimPalettes_Saffron[] = {8, 8, 8, 8, 8, 8, 8, 8};
 static const u8 sDoorAnimPalettes_SilphCo[] = {3, 3, 3, 3, 3, 3, 3, 3};
 static const u8 sDoorAnimPalettes_Cerulean[] = {11, 11, 11, 11, 11, 11, 11, 11};
 static const u8 sDoorAnimPalettes_CeruleanSlidingSingle[] = {12, 12, 12, 12, 12, 12, 12, 12};
 static const u8 sDoorAnimPalettes_PewterSlidingSingle[] = {7, 7, 7, 7, 7, 7, 7, 7};
+static const u8 sDoorAnimPalettes_ViridianSlidingSingleBlue[] = {7, 7, 7, 7, 7, 7, 7, 7};
+static const u8 sDoorAnimPalettes_ViridianSlidingSinglePurple[] = {7, 7, 7, 7, 7, 7, 7, 7};
 static const u8 sDoorAnimPalettes_Lavender[] = {9, 9, 9, 9, 9, 9, 9, 9};
 static const u8 sDoorAnimPalettes_Vermilion[] = {9, 9, 9, 9, 9, 9, 9, 9};
 static const u8 sDoorAnimPalettes_PokemonFanClub[] = {9, 9, 9, 9, 9, 9, 9, 9};
@@ -260,6 +266,8 @@ static const struct DoorGraphics sDoorGraphics[] = {
     {METATILE_PalletTown_Door,                             DOOR_SOUND_NORMAL,  DOOR_SIZE_1x1, sDoorAnimTiles_Pallet, sDoorAnimPalettes_Pallet},
     {METATILE_PalletTown_OaksLabDoor,                      DOOR_SOUND_NORMAL,  DOOR_SIZE_1x1, sDoorAnimTiles_OaksLab, sDoorAnimPalettes_OaksLab},
     {METATILE_ViridianCity_Door,                           DOOR_SOUND_NORMAL,  DOOR_SIZE_1x1, sDoorAnimTiles_Viridian, sDoorAnimPalettes_Viridian},
+    {METATILE_ViridianCity_SlidingSingleBlue,              DOOR_SOUND_SLIDING, DOOR_SIZE_1x1, sDoorAnimTiles_ViridianSlidingSingleBlue, sDoorAnimPalettes_ViridianSlidingSingleBlue},
+    {METATILE_ViridianCity_SlidingSinglePurple,            DOOR_SOUND_SLIDING, DOOR_SIZE_1x1, sDoorAnimTiles_ViridianSlidingSinglePurple, sDoorAnimPalettes_ViridianSlidingSinglePurple},
     {METATILE_PewterCity_Door,                             DOOR_SOUND_NORMAL,  DOOR_SIZE_1x1, sDoorAnimTiles_Pewter, sDoorAnimPalettes_Pewter},
     {METATILE_PewterCity_SilvioMart,                        DOOR_SOUND_SLIDING, DOOR_SIZE_1x1, sDoorAnimTiles_PewterSlidingSingle, sDoorAnimPalettes_PewterSlidingSingle},
     {METATILE_SaffronCity_Door,                            DOOR_SOUND_NORMAL,  DOOR_SIZE_1x1, sDoorAnimTiles_Saffron, sDoorAnimPalettes_Saffron},

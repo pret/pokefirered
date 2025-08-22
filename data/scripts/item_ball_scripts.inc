@@ -16,6 +16,10 @@ ViridianForest_EventScript_ItemPokeBall::
 	normalmsg
 	end
 
+ViridianForest_EventScript_ItemRepel::
+	finditem ITEM_REPEL
+	end
+
 ViridianForest_EventScript_ItemAntidote::
 	signmsg
 	finditem ITEM_ANTIDOTE

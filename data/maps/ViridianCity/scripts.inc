@@ -276,7 +276,7 @@ ViridianCity_EventScript_DoTutorialBattle::
 ViridianCity_EventScript_Clefairy::
 	msgbox ViridianCity_Text_TrainerClefairy, MSGBOX_NPC
 	playmoncry SPECIES_CLEFAIRY, CRY_MODE_ENCOUNTER
-	applymovement LOCALID_VIRIDIAN_CITY_CLEFAIRY, ViridianCity_Movement_Mareep
+	applymovement LOCALID_VIRIDIAN_CITY_CLEFAIRY, Common_Movement_ExclamationMark
 	waitmovement 0
 	releaseall
 	end

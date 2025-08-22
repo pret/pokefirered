@@ -752,7 +752,7 @@
 #define TRAINER_HOJA_BULBASAUR                   746
 #define TRAINER_HOJA_SQUIRTLE                    747
 #define TRAINER_HOJA_CHARMANDER                  748
-#define TRAINER_FIDEL                           749
+#define TRAINER_GENTLEMAN_FIDEL                           749
 #define TRAINER_HIKER_GUSTAVO                    750
 #define TRAINER_LEADER_BROCK2                    751
 #define TRAINER_SILVIO                           752

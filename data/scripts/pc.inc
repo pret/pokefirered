@@ -67,7 +67,9 @@ EventScript_AccessPokemonStorage::
 	playse SE_PC_LOGIN
 	call_if_unset FLAG_SYS_NOT_SOMEONES_PC, EventScript_AccessSomeonesPC
 	call_if_set FLAG_SYS_NOT_SOMEONES_PC, EventScript_AccessBillsPC
+	signmsg
 	msgbox Text_OpenedPkmnStorage
+	normalmsg
 	special ShowPokemonStorageSystemPC
 	waitstate
 	setvar VAR_0x8004, HELPCONTEXT_PC

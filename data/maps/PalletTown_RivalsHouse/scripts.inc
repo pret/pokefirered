@@ -27,6 +27,7 @@ PalletTown_RivalsHouse_EventScript_Daisy::
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 2, PalletTown_RivalsHouse_EventScript_ExplainTownMap
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_RIVALS_HOUSE, 1, PalletTown_RivalsHouse_EventScript_GiveTownMap
 	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 1, PalletTown_RivalsHouse_EventScript_HeardBattledRival
+	namebox Name_Daisy
 	msgbox PalletTown_RivalsHouse_Text_HiBrothersAtLab
 	closemessage
 	applymovement LOCALID_DAISY, Common_Movement_FaceOriginalDirection
@@ -124,11 +125,14 @@ PalletTown_RivalsHouse_EventScript_MonFriendshipHighest::
 	end
 
 PalletTown_RivalsHouse_EventScript_PleaseGiveMonsRest::
+	namebox Name_Daisy
 	msgbox PalletTown_RivalsHouse_Text_PleaseGiveMonsRest
+	closemessage
 	release
 	end
 
 PalletTown_RivalsHouse_EventScript_GiveTownMap::
+	namebox Name_Daisy
 	msgbox PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp
 	closemessage
 	checkitemspace ITEM_TOWN_MAP
@@ -141,7 +145,9 @@ PalletTown_RivalsHouse_EventScript_GiveTownMap::
 	applymovement LOCALID_DAISY, Common_Movement_FacePlayer
 	waitmovement 0
 	delay 12
+	signmsg
 	giveitem_msg PalletTown_RivalsHouse_Text_ReceivedTownMapFromDaisy, ITEM_TOWN_MAP, 1, MUS_OBTAIN_KEY_ITEM
+	normalmsg
 	release
 	end
 
@@ -151,7 +157,9 @@ PalletTown_RivalsHouse_EventScript_NoRoomForTownMap::
 	end
 
 PalletTown_RivalsHouse_EventScript_ExplainTownMap::
+	namebox Name_Daisy
 	msgbox PalletTown_RivalsHouse_Text_ExplainTownMap
+	closemessage
 	release
 	end
 

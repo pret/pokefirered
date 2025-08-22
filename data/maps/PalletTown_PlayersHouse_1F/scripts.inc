@@ -15,10 +15,13 @@ PalletTown_PlayersHouse_1F_EventScript_Mom::
 	end
 
 PalletTown_PlayersHouse_1F_EventScript_MomHeal::
+	namebox Name_Mama
 	msgbox PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest
 	closemessage
 	call EventScript_OutOfCenterPartyHeal
+	namebox Name_Mama
 	msgbox PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare
+	closemessage
 	release
 	end
 

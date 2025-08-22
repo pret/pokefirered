@@ -14,7 +14,9 @@ ViridianCity_House_EventScript_Speary::
 	faceplayer
 	waitse
 	playmoncry SPECIES_SPEAROW, CRY_MODE_NORMAL
+	namebox Name_speary
 	msgbox ViridianCity_House_Text_Speary
+	closemessage 
 	waitmoncry
 	release
 	end
@@ -22,4 +24,5 @@ ViridianCity_House_EventScript_Speary::
 ViridianCity_House_EventScript_NicknameSign::
 	showmonpic SPECIES_SPEAROW, 10, 3
 	msgbox ViridianCity_House_Text_SpearowNameSpeary, MSGBOX_SIGN
+	hidemonpic
 	end

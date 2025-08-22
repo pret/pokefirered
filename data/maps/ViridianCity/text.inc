@@ -111,7 +111,7 @@ ViridianCity_Text_CitySign::
 
 ViridianCity_Text_EventScript_LetreroEscuela::
     .string "{SHADOW DYNAMIC_COLOR4}ESCUELA DE ENTRENADORES{SHADOW LIGHT_GRAY}\n"
-    .string "¡Aprende y crea escuela!$"
+    .string "¡APRENDE Y CREA ESCUELA!$"
 
 ViridianCity_Text_CatchMonsForEasierBattles::
     .string "{SHADOW DYNAMIC_COLOR4}PISTAS DE ENTRENADOR{SHADOW LIGHT_GRAY}\p"

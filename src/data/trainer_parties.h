@@ -145,15 +145,15 @@ static const struct TrainerMonNoItemDefaultMoves sParty_YoungsterAnibal[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Fidel[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_GentlemanFidel[] = {
     {
         .iv = 0,
-        .lvl = 7,
+        .lvl = 5,
         .species = SPECIES_MIMEJR,
     },
     {
         .iv = 0,
-        .lvl = 4,
+        .lvl = 3,
         .species = SPECIES_SPEAROW,
     },
 };

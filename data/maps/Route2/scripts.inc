@@ -26,6 +26,6 @@ Route2_EventScript_DiglettsCaveSign::
 	end
 
 Route2_EventScript_TrainerFidel::
-	trainerbattle_single TRAINER_FIDEL, Route2_EventScript_TrainerFidelIntro, Route2_EventScript_TrainerFidelDefeat
-	msgbox Route2_Text_EntrenadorDamian3, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_GENTLEMAN_FIDEL, Route2_EventScript_TrainerFidelIntro, Route2_EventScript_TrainerFidelDefeat
+	msgbox Route2_EventScript_TrainerFidelPostBattle, MSGBOX_AUTOCLOSE
 	end

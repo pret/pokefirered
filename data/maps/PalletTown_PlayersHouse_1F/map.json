@@ -27,7 +27,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PalletTown_PlayersHouse_1F_EventScript_MomHeal",
+      "script": "PalletTown_PlayersHouse_1F_EventScript_Mom",
       "flag": "FLAG_HIDE_PALLET_TOWN_HOUSE_MOM"
     }
   ],

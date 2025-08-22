@@ -1,5 +1,5 @@
 PalletTown_RivalsHouse_Text_HiBrothersAtLab::
-    .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}DAISY:{SHADOW LIGHT_GRAY} ¡Hola, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
+    .string "¡Hola, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
     .string "¡{SHADOW DYNAMIC_COLOR4}{RIVAL}{SHADOW LIGHT_GRAY} está en el laboratorio\n"
     .string "del abuelo!$"
 
@@ -9,29 +9,29 @@ PalletTown_RivalsHouse_Text_HeardYouBattledRival::
     .string "¡Me hubiera encantado estar ahí!$"
 
 PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp::
-    .string "Grandpa asked you to run an\n"
-    .string "errand?\p"
-    .string "Gee, that's lazy of him.\n"
-    .string "Here, this will help you.$"
+    .string "¿El abuelo te pidió que hicieras un\n"
+    .string "mandado?\p"
+    .string "Vaya, qué flojo de su parte.\n"
+    .string "Toma, esto te ayudará.$"
 
 PalletTown_RivalsHouse_Text_ReceivedTownMapFromDaisy::
-    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} recibido a TOWN MAP\n"
-    .string "from DAISY.$"
+    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} ha recibido a {SHADOW DYNAMIC_COLOR4}MAPA{SHADOW LIGHT_GRAY}\n"
+    .string "de manos de {SHADOW DYNAMIC_COLOR4}DAISY{SHADOW LIGHT_GRAY}.$"
 
 PalletTown_RivalsHouse_Text_DontHaveSpaceForThis::
     .string "You don't have space for this in\n"
     .string "your BAG.$"
 
 PalletTown_RivalsHouse_Text_ExplainTownMap::
-    .string "You can use the TOWN MAP to find\n"
-    .string "out where you are, or check the\l"
-    .string "names of places.$"
+    .string "Puedes usar el {SHADOW DYNAMIC_COLOR4}MAPA{SHADOW LIGHT_GRAY} para saber dónde\n"
+    .string "estás o revisar los nombres de los\l"
+    .string "lugares.$"
 
 PalletTown_RivalsHouse_Text_PleaseGiveMonsRest::
-    .string "DAISY: Just like people, POKéMON\n"
-    .string "are living things.\p"
-    .string "When they get tired, please give\n"
-    .string "them a rest.$"
+    .string "Al igual que las personas, los\n"
+    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} son seres vivos.\p"
+    .string "Cuando se cansen, por favor no\n"
+    .string "olvides darles un descanso.$"
 
 PalletTown_RivalsHouse_Text_ItsBigMapOfKanto::
     .string "¡Es un gran mapa de {SHADOW DYNAMIC_COLOR4}KANTO{SHADOW LIGHT_GRAY}!\n"

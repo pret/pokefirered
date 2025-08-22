@@ -1,8 +1,11 @@
+Name_Desconociodo::
+    .string "???$"
+
 Name_RedGreen::
     .string "{RED_GREEN_NAME}$"
 
-Name_Desconociodo::
-    .string "???$"
+Name_Rival::
+    .string "{RIVAL}$"
 
 Name_Silvio::
     .string "SILVIO$"
@@ -10,8 +13,8 @@ Name_Silvio::
 Name_Mama::
     .string "MAMÁ$"
 
-Name_Rival::
-    .string "{RIVAL}$"
+Name_Daisy::
+    .string "DAISY$"
 
 Name_Oak::
     .string "OAK$"

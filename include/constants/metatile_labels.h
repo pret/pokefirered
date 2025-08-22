@@ -291,9 +291,9 @@
 #define METATILE_VermilionGym_Floor                              0x281
 
 // gTileset_ViridianCity
-#define METATILE_ViridianCity_Door                               0x377
-#define METATILE_ViridianCity_SlidingSingleBlue                  0x357
-#define METATILE_ViridianCity_SlidingSinglePurple                0x2ED
+#define METATILE_ViridianCity_Door                 0x377
+#define METATILE_ViridianCity_SlidingSingleBlue    0x357
+#define METATILE_ViridianCity_SlidingSinglePurple  0x2ED
 
 // gTileset_ViridianForest
 #define METATILE_ViridianForest_HugeTreeTopMiddle_Grass  0x284

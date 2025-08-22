@@ -9,7 +9,7 @@ Text_NothingButPokemonBooks::
 	.string "ポケモンの　ほん　ばかりだ$"
 
 Text_ATownMap::
-	.string "MAPA.$"
+	.string "{SHADOW DYNAMIC_COLOR4}MAPA{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}KANTO{SHADOW LIGHT_GRAY}.$"
 
 Text_PokeMartShelf::
 	.string "Wow!\n"

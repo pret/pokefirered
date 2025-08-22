@@ -7,7 +7,9 @@ EventScript_CutTree::
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_CUT
+	signmsg
 	msgbox Text_CutTreeDown, MSGBOX_YESNO
+	normalmsg
 	goto_if_eq VAR_RESULT, NO, EventScript_DontCutTree
 	msgbox Text_MonUsedMove
 	closemessage
@@ -35,7 +37,9 @@ Movement_CutTreeDown::
 	step_end
 
 EventScript_CantCutTree::
+	signmsg
 	msgbox Text_TreeCanBeCutDown, MSGBOX_SIGN
+	normalmsg
 	releaseall
 	end
 

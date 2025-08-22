@@ -7,7 +7,8 @@ Route2_Text_RouteSign2::
     .string "CIUDAD VERDE - CIUDAD PLATEADA$"
 
 Route2_Text_RouteSign3::
-    .string "{SHADOW DYNAMIC_COLOR4}{UP_ARROW_2} BOSQUE VERDE$"
+    .string "{SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}\n"
+    .string "ENTRADA SUR$"
 
 Route2_Text_Policia::
     .string "{COLOR DARK_GRAY}Los informes de actividad del\n"
@@ -30,7 +31,7 @@ Route2_EventScript_TrainerFidelDefeat::
     .string "TU VICTORIA AÑADE OTRO RELATO DE\n"
     .string "VALENTÍA$"
 
-Route2_Text_EntrenadorDamian3::
+Route2_EventScript_TrainerFidelPostBattle::
     .string "{COLOR DARK_GRAY}En el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}, hay rumores de\n"
     .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} raros que no suelen\l"
     .string "encontrarse por aquí.$"

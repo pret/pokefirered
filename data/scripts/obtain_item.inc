@@ -62,7 +62,9 @@ EventScript_ObtainedItem::
 	message Text_ObtainedTheX
 	waitfanfare
 	waitmessage
+	signmsg
 	msgbox Text_PutItemAway
+	normalmsg
 	setvar VAR_RESULT, 1
 	return
 
@@ -128,7 +130,9 @@ EventScript_PickUpItem::
 	call_if_eq VAR_0x8008, FALSE, EventScript_FoundItem
 	waitfanfare
 	waitmessage
+	signmsg
 	msgbox Text_PutItemAway
+	normalmsg
 	return
 
 EventScript_FoundTMHM::
@@ -136,7 +140,9 @@ EventScript_FoundTMHM::
 	return
 
 EventScript_FoundItem::
-	message Text_FoundOneItem
+	signmsg
+	msgbox Text_FoundOneItem
+	normalmsg
 	return
 
 EventScript_NoRoomToPickUpItem::
@@ -168,13 +174,17 @@ EventScript_PickedUpHiddenItem::
 	call_if_ne VAR_0x8006, 1, EventScript_FoundMultipleItems
 	waitfanfare
 	waitmessage
+	signmsg
 	msgbox Text_PutItemAway
+	normalmsg
 	special SetHiddenItemFlag
 	releaseall
 	end
 
 EventScript_FoundSingleItem::
-	message Text_FoundOneItem
+	signmsg
+	msgbox Text_FoundOneItem
+	normalmsg
 	return
 
 EventScript_FoundCoins::
@@ -188,8 +198,12 @@ EventScript_FoundMultipleItems::
 	return
 
 EventScript_NoRoomForHiddenItem::
+	signmsg
 	msgbox Text_FoundOneItem
+	normalmsg
+	signmsg
 	msgbox Text_TooBadBagFull
+	normalmsg
 	setvar VAR_RESULT, 0
 	releaseall
 	end

@@ -5835,7 +5835,7 @@
       "secondaryId": 0
     },
     {
-      "english": "TOWN MAP",
+      "english": "MAPA",
       "itemId": "ITEM_TOWN_MAP",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",

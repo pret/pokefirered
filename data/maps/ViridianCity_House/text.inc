@@ -8,8 +8,11 @@ ViridianCity_House_Text_MyDaddyLovesMonsToo::
     .string "{COLOR DARK_GRAY}¡A mi padre también le gustan los\n"
     .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}!$"
 
+Name_speary::
+    .string "SPEARY$"
+
 ViridianCity_House_Text_Speary::
-    .string "{SHADOW DYNAMIC_COLOR4}SPEARY:{SHADOW LIGHT_GRAY} ¡Spe-pe-peeary!$"
+    .string "¡Spe-pe-peeary!$"
 
 ViridianCity_House_Text_SpearowNameSpeary::
     .string "{SHADOW DYNAMIC_COLOR4}SPEAROW{SHADOW LIGHT_GRAY}\n"

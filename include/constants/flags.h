@@ -1220,9 +1220,9 @@
 #define FLAG_HIDDEN_ITEM_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE_RAWST_BERRY  (FLAG_HIDDEN_ITEMS_START + 188)
 #define FLAG_HIDDEN_ITEM_VIRIDIAN_CITY_GYM_MACHO_BRACE                     (FLAG_HIDDEN_ITEMS_START + 189)
 #define FLAG_HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE                       (FLAG_HIDDEN_ITEMS_START + 190)
-#define FLAG_HIDDEN_ITEM_CUIDAD_VERDE1                                     (FLAG_HIDDEN_ITEMS_START + 191)
-#define FLAG_HIDDEN_ITEM_CUIDAD_VERDE2                                     (FLAG_HIDDEN_ITEMS_START + 192)
-#define FLAG_HIDDEN_ITEM_CUIDAD_VERDE3                                     (FLAG_HIDDEN_ITEMS_START + 193)
+#define FLAG_HIDDEN_VIRIDIAN_CITY_POTION                                     (FLAG_HIDDEN_ITEMS_START + 191)
+#define FLAG_HIDDEN_VIRIDIAN_CITY_POKEBALL                                     (FLAG_HIDDEN_ITEMS_START + 192)
+#define FLAG_HIDDEN_VIRIDIAN_CITY_ANTIDOTE                                     (FLAG_HIDDEN_ITEMS_START + 193)
 
 // Unused hidden item flags
 #define FLAG_UNUSED_0x4A7               0x4A7 // Unused Flag

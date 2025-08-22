@@ -59,20 +59,19 @@ ViridianCity_EventScript_BasuraItem1::
 	lock
 	faceplayer
 	signmsg
-	goto_if_set FLAG_HIDDEN_ITEM_CUIDAD_VERDE1, ViridianCity_EventScript_Basura
+	goto_if_set FLAG_HIDDEN_VIRIDIAN_CITY_POTION, ViridianCity_EventScript_Basura
 	giveitem_msg ViridianCity_Text_BasuraItem1, ITEM_POTION
-	setflag FLAG_HIDDEN_ITEM_CUIDAD_VERDE1
+	setflag FLAG_HIDDEN_VIRIDIAN_CITY_POTION
 	normalmsg
 	release
 	end
 
 ViridianCity_EventScript_BasuraItem2::
-	lock
 	faceplayer
 	signmsg
-	goto_if_set FLAG_HIDDEN_ITEM_CUIDAD_VERDE2, ViridianCity_EventScript_Basura
+	goto_if_set FLAG_HIDDEN_VIRIDIAN_CITY_POKEBALL, ViridianCity_EventScript_Basura
 	giveitem_msg ViridianCity_Text_BasuraItem2, ITEM_POKE_BALL
-	setflag FLAG_HIDDEN_ITEM_CUIDAD_VERDE2
+	setflag FLAG_HIDDEN_VIRIDIAN_CITY_POKEBALL
 	normalmsg
 	release
 	end
@@ -81,9 +80,9 @@ ViridianCity_EventScript_BasuraItem3::
 	lock
 	faceplayer
 	signmsg
-	goto_if_set FLAG_HIDDEN_ITEM_CUIDAD_VERDE3, ViridianCity_EventScript_Basura
+	goto_if_set FLAG_HIDDEN_VIRIDIAN_CITY_ANTIDOTE, ViridianCity_EventScript_Basura
 	giveitem_msg ViridianCity_Text_BasuraItem3, ITEM_ANTIDOTE
-	setflag FLAG_HIDDEN_ITEM_CUIDAD_VERDE3
+	setflag FLAG_HIDDEN_VIRIDIAN_CITY_ANTIDOTE
 	normalmsg
 	release
 	end
@@ -91,6 +90,7 @@ ViridianCity_EventScript_BasuraItem3::
 ViridianCity_EventScript_Basura::
 	signmsg
 	msgbox ViridianCity_Text_Basura, MSGBOX_SIGN
+	closemessage
 	normalmsg
 	release
 	end
@@ -273,67 +273,59 @@ ViridianCity_EventScript_DoTutorialBattle::
 	msgbox ViridianCity_Text_WatchThatToLearnBasics
 	return
 
-ViridianCity_MareepMujer::
-	msgbox ViridianCity_Text_Mareep, MSGBOX_NPC
-	playmoncry SPECIES_MAREEP, CRY_MODE_ENCOUNTER
-	applymovement 17, ViridianCity_Movement_Mareep
+ViridianCity_EventScript_Clefairy::
+	msgbox ViridianCity_Text_TrainerClefairy, MSGBOX_NPC
+	playmoncry SPECIES_CLEFAIRY, CRY_MODE_ENCOUNTER
+	applymovement LOCALID_VIRIDIAN_CITY_CLEFAIRY, ViridianCity_Movement_Mareep
 	waitmovement 0
 	releaseall
 	end
-
-ViridianCity_Mareep::
-	playmoncry SPECIES_MAREEP, CRY_MODE_ENCOUNTER
-	applymovement 17, ViridianCity_Movement_Mareep
-	waitmovement 0
-	releaseall
-	end
-	
-ViridianCity_Movement_Mareep::
-	emote_exclamation_mark
-	jump_in_place_down
-	step_end
 
 ViridianCity_EntrenadorBuscaLider::
 	msgbox ViridianCity_Text_EntrenadorBuscaLider, MSGBOX_NPC
 	releaseall
 	end
 
-ViridianCity_EntrenadorPequeno1::
-	msgbox ViridianCity_Text_EntrenadorPequeno1
+ViridianCity_EventScript_Trainer_Psyduck::
+	msgbox ViridianCity_Text_Trainer_Psyduck
 	closemessage
-	playmoncry SPECIES_SANDSHREW, CRY_MODE_NORMAL
-	applymovement 11, ViridianCity_Movement_Sandshrew
+	playmoncry SPECIES_PSYDUCK, CRY_MODE_NORMAL
+	applymovement LOCALID_VIRIDIAN_CITY_PSYDUCK, ViridianCity_Movement_ViridianCity_Psyduck
 	waitmovement 0
 	waitmoncry
 	end
 
-ViridianCity_Sandshrew::
-	playmoncry SPECIES_SANDSHREW, CRY_MODE_NORMAL
-	applymovement 11, ViridianCity_Movement_Sandshrew
+ViridianCity_EventScript_Psyduck::
+	playmoncry SPECIES_PSYDUCK, CRY_MODE_NORMAL
+	applymovement LOCALID_VIRIDIAN_CITY_PSYDUCK, ViridianCity_Movement_ViridianCity_Psyduck
 	waitmovement 0
 	waitmoncry
 	end
 
-ViridianCity_Nidoran::
+ViridianCity_EventScript_Nidoran::
 	playmoncry SPECIES_NIDORAN_F, CRY_MODE_NORMAL
-	applymovement 12, ViridianCity_Movement_Nidoran2
+	applymovement LOCALID_VIRIDIAN_CITY_NIDORAN_F, ViridianCity_Movement_ViridianCity_Nidoran_AttackInPlace
 	waitmovement 0
 	waitmoncry
 	end
 
+ViridianCity_EventScript_TrainerNidoran::
+	playmoncry SPECIES_NIDORAN_F, CRY_MODE_NORMAL
+	applymovement LOCALID_VIRIDIAN_CITY_NIDORAN_F, ViridianCity_Movement_ViridianCity_Nidoran_Attack
+	waitmovement 0
+	waitmoncry
+	end
 
-ViridianCity_Movement_Sandshrew::
+ViridianCity_InfoEscuela::
+	msgbox ViridianCity_Text_InfoEscuela, MSGBOX_NPC
+	releaseall
+	end
+
+ViridianCity_Movement_ViridianCity_Psyduck::
 	emote_x
 	step_end
 
-ViridianCity_EntrenadorPequeno2::
-	playmoncry SPECIES_NIDORAN_F, CRY_MODE_NORMAL
-	applymovement 12, ViridianCity_Movement_Nidoran1
-	waitmovement 0
-	waitmoncry
-	end
-
-ViridianCity_Movement_Nidoran1::
+ViridianCity_Movement_ViridianCity_Nidoran_Attack::
 	walk_in_place_left
 	emote_exclamation_mark
 	jump_left
@@ -341,13 +333,8 @@ ViridianCity_Movement_Nidoran1::
 	face_left
 	step_end
 
-ViridianCity_Movement_Nidoran2::
+ViridianCity_Movement_ViridianCity_Nidoran_AttackInPlace::
 	walk_in_place_left
 	emote_exclamation_mark
 	face_left
 	step_end
-
-ViridianCity_InfoEscuela::
-	msgbox ViridianCity_Text_InfoEscuela, MSGBOX_NPC
-	releaseall
-	end

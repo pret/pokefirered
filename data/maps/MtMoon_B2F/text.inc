@@ -72,16 +72,16 @@ MtMoon_B2F_Text_Grunt4PostBattle::
     .string "de que llegara la gente.$"
 
 MtMoon_B2F_Text_YouWantDomeFossil::
-    .string "¿Quieres el FÓSIL DOMO?$"
+    .string "¿Quieres el {SHADOW DYNAMIC_COLOR4}FÓSIL DOMO{SHADOW LIGHT_GRAY}?$"
 
 MtMoon_B2F_Text_YouWantHelixFossil::
-    .string "¿Quieres el FÓSIL HÉLIX?$"
+    .string "¿Quieres el {SHADOW DYNAMIC_COLOR4}FÓSIL HÉLIX{SHADOW LIGHT_GRAY}?$"
 
 MtMoon_B2F_Text_ObtainedHelixFossil::
-    .string "¡Obtuviste el FÓSIL HÉLIX!$"
+    .string "¡Obtuviste el {SHADOW DYNAMIC_COLOR4}FÓSIL HÉLIX{SHADOW LIGHT_GRAY}!$"
 
 MtMoon_B2F_Text_ObtainedDomeFossil::
-    .string "¡Obtuviste el FÓSIL DOMO!$"
+    .string "¡Obtuviste el {SHADOW DYNAMIC_COLOR4}FÓSIL DOMO{SHADOW LIGHT_GRAY}!$"
 
 MtMoon_B2F_Text_Jessie_Intro::
     .string "¡Alto ahí, mocos{OA}!\n"

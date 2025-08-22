@@ -28,7 +28,7 @@ Text_MomExplainHPGetPotions::
 	.string "{COLOR DARK_GRAY}Muy bien, tú y tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} están \n"
 	.string "en plena forma.\p"
 	.string "El {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY} me ha contado que la\n"
-	.string "energía de los POKéMON se mide\n"
+	.string "energía de los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} se mide\n"
 	.string "en {SHADOW DYNAMIC_COLOR4}PS{SHADOW LIGHT_GRAY}.\p"	
 	.string "Si tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} pierden {SHADOW DYNAMIC_COLOR4}PS{SHADOW LIGHT_GRAY}, puedes\n"
 	.string "recuperarlos en cualquier {SHADOW DYNAMIC_COLOR4}CENTRO\l"

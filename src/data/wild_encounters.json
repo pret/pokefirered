@@ -1498,29 +1498,29 @@
                 "species": "SPECIES_PARAS"
               },
               {
-                "min_level": 10,
-                "max_level": 10,
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_RATTATA"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_ZUBAT"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_GEODUDE"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_PARAS"
+              },
+              {
+                "min_level": 11,
+                "max_level": 13,
                 "species": "SPECIES_CLEFAIRY"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_NONE"
               }
             ]
           }
@@ -16464,37 +16464,37 @@
                 "species": "SPECIES_ODDISH"
               },
               {
-                "min_level": 4,
+                "min_level": 2,
                 "max_level": 4,
                 "species": "SPECIES_PIDGEY"
               },
               {
-                "min_level": 4,
+                "min_level": 2,
                 "max_level": 4,
                 "species": "SPECIES_RATTATA"
               },
               {
-                "min_level": 4,
+                "min_level": 2,
                 "max_level": 4,
                 "species": "SPECIES_BELLSPROUT"
               },
               {
-                "min_level": 4,
+                "min_level": 2,
                 "max_level": 4,
                 "species": "SPECIES_SENTRET"
               },
               {
-                "min_level": 4,
+                "min_level": 2,
                 "max_level": 4,
                 "species": "SPECIES_ODDISH"
               },
               {
-                "min_level": 3,
+                "min_level": 2,
                 "max_level": 4,
                 "species": "SPECIES_PIDGEY"
               },
               {
-                "min_level": 3,
+                "min_level": 2,
                 "max_level": 4,
                 "species": "SPECIES_RATTATA"
               }

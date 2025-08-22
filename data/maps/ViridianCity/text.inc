@@ -62,7 +62,7 @@ ViridianCity_Text_WatchThatToLearnBasics::
 ViridianCity_Text_WeakenMonsFirstToCatch::
     .string "Lo bien que me sienta tomarme\n"
     .string "un café... ¡Me pone de buena ánimo!\p"
-    .string "Aunque ceo que estaba demasiado\n"
+    .string "Aunque creo que estaba demasiado\n"
     .string "cargado... Me duele la cabeza.\p"
     .string "A todo esto... ¿Estás completando\n"
     .string "la {SHADOW DYNAMIC_COLOR4}POKéDEX{SHADOW LIGHT_GRAY}?\p"
@@ -128,27 +128,26 @@ ViridianCity_Text_MovesLimitedByPP::
     .string "POKéMON{SHADOW LIGHT_GRAY} para recargar sus {SHADOW DYNAMIC_COLOR4}PP{SHADOW LIGHT_GRAY}.$"
 
 ViridianCity_Text_GymSign::
-    .string "GIMNASIO POKéMON DE CIUDAD VERDE$"
+    .string "{SHADOW DYNAMIC_COLOR4}GIMNASIO POKéMON DE CIUDAD VERDE$"
 
 ViridianCity_Text_GymDoorsAreLocked::
     .string "GIMNASIO POKÉMON\n"
     .string "{COLOR RED}{SHADOW LIGHT_RED}CERRADO$"
 
-
-ViridianCity_Text_Mareep::
-    .string "{SHADOW LIGHT_GRAY}Pasar los días en compañia a mi\n"
-    .string "{SHADOW DYNAMIC_COLOR4}CLEFAIRY {SHADOW LIGHT_GRAY}lo mejor de mi vida$"
+ViridianCity_Text_TrainerClefairy::
+    .string "Pasar los días en compañia a mi\n"
+    .string "{SHADOW DYNAMIC_COLOR4}CLEFAIRY{SHADOW LIGHT_GRAY} lo mejor de mi vida$"
 
 ViridianCity_Text_EntrenadorBuscaLider::
     .string "Todas las veces que he venido a\n"
     .string "{SHADOW DYNAMIC_COLOR4}CIUDAD VERDE{SHADOW LIGHT_GRAY} nunca he podido\l"
     .string "encontrar al {SHADOW DYNAMIC_COLOR4}LIDER{SHADOW DYNAMIC_COLOR4} de {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW DYNAMIC_COLOR4}.$"
 
-ViridianCity_Text_EntrenadorPequeno1::
-    .string "¡Vamos {SHADOW DYNAMIC_COLOR4}SANDSHREW{SHADOW LIGHT_GRAY}!\n"
+ViridianCity_Text_Trainer_Psyduck::
+    .string "¡Vamos {SHADOW DYNAMIC_COLOR4}PSYDUCK{SHADOW LIGHT_GRAY}!\n"
     .string "Aún te queda algo de energía...$"
 
-ViridianCity_Text_EntrenadorPequeno2::
+ViridianCity_Text_Trainer_Nidoran::
     .string "¡NIDORAN!\p"
     .string "¡Ataca!$"
 

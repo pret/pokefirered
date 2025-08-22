@@ -125,6 +125,11 @@ Common_Movement_WalkInPlaceRight::
 	walk_in_place_right
 	step_end
 
+Common_Movement_WalkInPlaceLeft::
+	walk_in_place_left
+	walk_in_place_left
+	step_end
+
 Common_Movement_JumpFaceUpExclamationMark::
 	emote_exclamation_mark
 	jump_in_place_up

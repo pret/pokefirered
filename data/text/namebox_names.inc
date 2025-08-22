@@ -38,4 +38,4 @@ Name_Sandshrew::
     .string "SANDSHEW$"
 
 Name_Clefairy::
-    .string "CLEFARIY$"
+    .string "CLEFAIRY$"

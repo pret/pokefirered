@@ -158,10 +158,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_EntrenadorPequeno1",
+      "script": "ViridianCity_EventScript_Trainer_Psyduck",
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_VIRIDIAN_CITY_PSYDUCK",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PSYDUCK",
       "x": 29,
@@ -172,10 +173,11 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_Sandshrew",
+      "script": "ViridianCity_EventScript_Psyduck",
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_VIRIDIAN_CITY_NIDORAN_F",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NIDORAN_F",
       "x": 31,
@@ -186,7 +188,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_Nidoran",
+      "script": "ViridianCity_EventScript_Nidoran",
       "flag": "0"
     },
     {
@@ -200,7 +202,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_EntrenadorPequeno2",
+      "script": "ViridianCity_EventScript_TrainerNidoran",
       "flag": "0"
     },
     {
@@ -214,7 +216,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_MareepMujer",
+      "script": "ViridianCity_EventScript_Clefairy",
       "flag": "0"
     },
     {
@@ -246,6 +248,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_VIRIDIAN_CITY_CLEFAIRY",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CLEFAIRY",
       "x": 32,
@@ -418,7 +421,7 @@
     },
     {
       "type": "sign",
-      "x": 38,
+      "x": 37,
       "y": 19,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -446,7 +449,7 @@
       "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ViridianCity_Text_Basura"
+      "script": "ViridianCity_EventScript_Basura"
     },
     {
       "type": "sign",

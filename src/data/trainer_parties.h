@@ -132,7 +132,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_YoungsterCalvin[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_YoungsterJosh[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_YoungsterAnibal[] = {
     {
         .iv = 0,
         .lvl = 3,
@@ -145,15 +145,15 @@ static const struct TrainerMonNoItemDefaultMoves sParty_YoungsterJosh[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_Damian[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_Fidel[] = {
     {
         .iv = 0,
-        .lvl = 8    ,
+        .lvl = 7,
         .species = SPECIES_MIMEJR,
     },
     {
         .iv = 0,
-        .lvl = 6,
+        .lvl = 4,
         .species = SPECIES_SPEAROW,
     },
 };

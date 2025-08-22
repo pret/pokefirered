@@ -94,7 +94,7 @@
 // Actual FRLG trainers start here
 #define TRAINER_YOUNGSTER_BEN                     89
 #define TRAINER_YOUNGSTER_CALVIN                  90
-#define TRAINER_YOUNGSTER_JOSH                    91
+#define TRAINER_YOUNGSTER_ANIBAL                    91
 #define TRAINER_YOUNGSTER_TIMMY                   92
 #define TRAINER_YOUNGSTER_JOEY                    93
 #define TRAINER_YOUNGSTER_DAN                     94
@@ -752,7 +752,7 @@
 #define TRAINER_HOJA_BULBASAUR                   746
 #define TRAINER_HOJA_SQUIRTLE                    747
 #define TRAINER_HOJA_CHARMANDER                  748
-#define TRAINER_DAMIAN                           749
+#define TRAINER_FIDEL                           749
 #define TRAINER_HIKER_GUSTAVO                    750
 #define TRAINER_LEADER_BROCK2                    751
 #define TRAINER_SILVIO                           752

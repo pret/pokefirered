@@ -31,13 +31,13 @@ Route1_Text_RouteSign2::
     .string "Una apacible senda campestres de\n"
     .string "exuberante vegetación.$"
 
-Route1_EventScript_DamianIntro::
+Route1_EventScript_TrainerAnibalIntro::
     .string "{COLOR DARK_GRAY}Sabes que significa eso, ¿verdad?$"
 
-Route1_EventScript_DamianDefeat::
+Route1_EventScript_TrainerAnibalDefeat::
     .string "¡Pero que fuerte eres!$"
 
-Route1_EventScript_DamianPostBattle::
+Route1_EventScript_TrainerAnibalPostBattle::
     .string "{COLOR DARK_GRAY}¡Vayas por donde vayas habrá\n"
     .string "{SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY} dispuestos a\l"
     .string "retarte a un combate!$"

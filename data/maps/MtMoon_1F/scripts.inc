@@ -20,7 +20,7 @@ MtMoon_1F_EventScript_Marcos::
 	end
 
 MtMoon_1F_EventScript_Josh::
-	trainerbattle_single TRAINER_YOUNGSTER_JOSH, MtMoon_1F_Text_JoshIntro, MtMoon_1F_Text_JoshDefeat
+	trainerbattle_single TRAINER_YOUNGSTER_ANIBAL, MtMoon_1F_Text_JoshIntro, MtMoon_1F_Text_JoshDefeat
 	msgbox MtMoon_1F_Text_JoshPostBattle, MSGBOX_AUTOCLOSE
 	end
 

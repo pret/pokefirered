@@ -902,7 +902,7 @@ const struct Trainer gTrainers[] = {
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
         .party = NO_ITEM_DEFAULT_MOVES(sParty_YoungsterCalvin),
     },
-    [TRAINER_YOUNGSTER_JOSH] = {
+    [TRAINER_YOUNGSTER_ANIBAL] = {
         .trainerClass = TRAINER_CLASS_YOUNGSTER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_YOUNGSTER,
@@ -910,18 +910,18 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_YoungsterJosh),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_YoungsterAnibal),
     },
 
-    [TRAINER_DAMIAN] = {
+    [TRAINER_FIDEL] = {
         .trainerClass = TRAINER_CLASS_GENTLEMAN,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_RICH,
         .trainerPic = TRAINER_PIC_GENTLEMAN,
-        .trainerName = _("DAMIAN"),
+        .trainerName = _("FIDEL"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Damian),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_Fidel),
     },
 
     [TRAINER_YOUNGSTER_TIMMY] = {

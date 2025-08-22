@@ -40,7 +40,7 @@ Route1_EventScript_RouteSign2::
 	msgbox Route1_Text_RouteSign2, MSGBOX_SIGN
 	end
 
-Route1_EventScript_Damian::
-	trainerbattle_single TRAINER_YOUNGSTER_JOSH, Route1_EventScript_DamianIntro, Route1_EventScript_DamianDefeat
-	msgbox Route1_EventScript_DamianPostBattle, MSGBOX_AUTOCLOSE
+Route1_EventScript_TrainerAnibal::
+	trainerbattle_single TRAINER_YOUNGSTER_ANIBAL, Route1_EventScript_TrainerAnibalIntro, Route1_EventScript_TrainerAnibalDefeat
+	msgbox Route1_EventScript_TrainerAnibalPostBattle, MSGBOX_AUTOCLOSE
 	end

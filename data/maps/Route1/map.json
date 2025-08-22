@@ -65,7 +65,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "3",
-      "script": "Route1_EventScript_Damian",
+      "script": "Route1_EventScript_TrainerAnibal",
       "flag": "0"
     },
     {

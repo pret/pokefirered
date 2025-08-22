@@ -21,12 +21,12 @@ Route2_Text_Adolescente::
     .string "raros en esta hierba alta.\p"
     .string "¡Estoy decidida a atrapar uno hoy!$"
 
-Route2_Text_EntrenadorDamian1::
+Route2_EventScript_TrainerFidelIntro::
     .string "{COLOR DARK_GRAY}Este camino tiene sus secretos...\p"
     .string "¿Estás listo para descubrirlos en\n"
     .string "batalla?$"
 
-Route2_Text_EntrenadorDamian2::
+Route2_EventScript_TrainerFidelDefeat::
     .string "TU VICTORIA AÑADE OTRO RELATO DE\n"
     .string "VALENTÍA$"
 

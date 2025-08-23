@@ -34,6 +34,11 @@ LavenderTown_EventScript_TownSign::
 	msgbox LavenderTown_Text_TownSign, MSGBOX_SIGN
 	end
 
+CONCURSO2025::
+	applymovement LOCALID_PLAYER, Common_Movement_ExclamationMark
+	waitmovement 0
+	end
+
 LavenderTown_EventScript_SilphScopeNotice::
 	msgbox LavenderTown_Text_SilphScopeNotice, MSGBOX_SIGN
 	end

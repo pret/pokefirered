@@ -75,7 +75,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_PIDGEY",
+      "graphics_id": "OBJ_EVENT_GFX_SPEAROW",
       "x": 16,
       "y": 4,
       "elevation": 0,
@@ -89,7 +89,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_PIDGEY",
+      "graphics_id": "OBJ_EVENT_GFX_SPEAROW",
       "x": 11,
       "y": 10,
       "elevation": 0,
@@ -103,7 +103,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_PIDGEY",
+      "graphics_id": "OBJ_EVENT_GFX_SPEAROW",
       "x": 17,
       "y": 4,
       "elevation": 0,
@@ -117,7 +117,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_PIDGEY",
+      "graphics_id": "OBJ_EVENT_GFX_SPEAROW",
       "x": 7,
       "y": 3,
       "elevation": 0,

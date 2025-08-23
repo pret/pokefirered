@@ -1029,8 +1029,8 @@
 
 #define FLAG_HIDDEN_ITEMS_START 1000 // 0x3E8
 
-#define FLAG_HIDDEN_ITEM_VIRIDIAN_FOREST_POTION                            (FLAG_HIDDEN_ITEMS_START +   0)
-#define FLAG_HIDDEN_ITEM_VIRIDIAN_FOREST_ANTIDOTE                          (FLAG_HIDDEN_ITEMS_START +   1)
+#define FLAG_HIDE_VIRIDIAN_FOREST_REPEL                            (FLAG_HIDDEN_ITEMS_START +   0)
+#define FLAG_HIDE_VIRIDIAN_FOREST_ANTIDOTE_2                          (FLAG_HIDDEN_ITEMS_START +   1)
 #define FLAG_HIDDEN_ITEM_MT_MOON_B2F_MOON_STONE                            (FLAG_HIDDEN_ITEMS_START +   2)
 #define FLAG_HIDDEN_ITEM_MT_MOON_B2F_ETHER                                 (FLAG_HIDDEN_ITEMS_START +   3)
 #define FLAG_HIDDEN_ITEM_ROUTE25_ELIXIR                                    (FLAG_HIDDEN_ITEMS_START +   4)

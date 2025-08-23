@@ -1024,7 +1024,7 @@ const struct Trainer gTrainers[] = {
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
         .party = NO_ITEM_DEFAULT_MOVES(sParty_YoungsterBen2),
     },
-    [TRAINER_BUG_CATCHER_RICK] = {
+    [TRAINER_BUG_CATCHER_RICARDO] = {
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BUG_CATCHER,
@@ -1032,9 +1032,9 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_BugCatcherRick),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_BugCatcherRicardo),
     },
-    [TRAINER_BUG_CATCHER_DOUG] = {
+    [TRAINER_BUG_CATCHER_CLAUDIO] = {
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BUG_CATCHER,
@@ -1042,9 +1042,9 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_BugCatcherDoug),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_BugCatcherClaudio),
     },
-    [TRAINER_BUG_CATCHER_SAMMY] = {
+    [TRAINER_BUG_CATCHER_SAMUEL] = {
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BUG_CATCHER,
@@ -1052,7 +1052,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_BugCatcherSammy),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_BugCatcherSamuel),
     },
     [TRAINER_BUG_CATCHER_COLTON] = {
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
@@ -5328,7 +5328,7 @@ const struct Trainer gTrainers[] = {
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
         .party = NO_ITEM_DEFAULT_MOVES(sParty_Biker2),
     },
-    [TRAINER_BUG_CATCHER_ANTHONY] = {
+    [TRAINER_GENTLEMAN_ANTONIO] = {
         .trainerClass = TRAINER_CLASS_GENTLEMAN,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_GENTLEMAN,
@@ -5336,7 +5336,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_BugCatcherAnthony),
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_GentlemanAntonio),
     },
     [TRAINER_BUG_CATCHER_CHARLIE] = {
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,

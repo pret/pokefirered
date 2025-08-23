@@ -1,19 +1,13 @@
 Route2_EventScript_ItemEther::
-	signmsg
 	finditem ITEM_ETHER
-	normalmsg
 	end
 
 Route2_EventScript_ItemParalyzeHeal::
-	signmsg
 	finditem ITEM_PARALYZE_HEAL
-	normalmsg
 	end
 
 ViridianForest_EventScript_ItemPokeBall::
-	signmsg
 	finditem ITEM_POKE_BALL
-	normalmsg
 	end
 
 ViridianForest_EventScript_ItemRepel::
@@ -21,15 +15,15 @@ ViridianForest_EventScript_ItemRepel::
 	end
 
 ViridianForest_EventScript_ItemAntidote::
-	signmsg
 	finditem ITEM_ANTIDOTE
-	normalmsg
+	end
+
+ViridianForest_EventScript_ItemAntidote2::
+	finditem ITEM_ANTIDOTE
 	end
 
 ViridianForest_EventScript_ItemPotion::
-	signmsg
 	finditem ITEM_POTION
-	normalmsg
 	end
 
 MtMoon_1F_EventScript_ItemParalyzeHeal::

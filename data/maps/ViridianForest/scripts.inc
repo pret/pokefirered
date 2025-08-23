@@ -19,9 +19,6 @@ ViridianForest_EventScript_Boy::
 ViridianForest_EventScript_TrainerTips1::
 	msgbox ViridianForest_Text_AvoidGrassyAreasWhenWeak, MSGBOX_SIGN
 	end
-ViridianForest_EventScript_BosqueVerde::
-	msgbox ViridianForest_Text_BosqueVerde, MSGBOX_SIGN
-	end
 
 ViridianForest_EventScript_TrainerTips2::
 	msgbox ViridianForest_Text_UseAntidoteForPoison, MSGBOX_SIGN
@@ -35,32 +32,36 @@ ViridianForest_EventScript_TrainerTips4::
 	msgbox ViridianForest_Text_CantCatchOwnedMons, MSGBOX_SIGN
 	end
 
-ViridianForest_EventScript_TrainerTips5:: @traducido
+ViridianForest_EventScript_TrainerTips5::
 	msgbox ViridianForest_Text_WeakenMonsBeforeCapture, MSGBOX_SIGN
 	end
 
-ViridianForest_EventScript_ExitSign::
-	msgbox ViridianForest_Text_LeavingViridianForest, MSGBOX_SIGN
+ViridianForest_EventScript_SignSouth::
+	msgbox ViridianForest_Text_ViridianForestSignSouth, MSGBOX_SIGN
 	end
 
-ViridianForest_EventScript_Rick::
-	trainerbattle_single TRAINER_BUG_CATCHER_RICK, ViridianForest_Text_RickIntro, ViridianForest_Text_RickDefeat
-	msgbox ViridianForest_Text_RickPostBattle, MSGBOX_AUTOCLOSE
+ViridianForest_EventScript_SignNorth::
+	msgbox ViridianForest_Text_ViridianForestSignNorth, MSGBOX_SIGN
 	end
 
-ViridianForest_EventScript_Doug::
-	trainerbattle_single TRAINER_BUG_CATCHER_DOUG, ViridianForest_Text_DougIntro, ViridianForest_Text_DougDefeat
-	msgbox ViridianForest_Text_DougPostBattle, MSGBOX_AUTOCLOSE
+ViridianForest_EventScript_Ricardo::
+	trainerbattle_single TRAINER_BUG_CATCHER_RICARDO, ViridianForest_Text_RicardoIntro, ViridianForest_Text_RicardoDefeat
+	msgbox ViridianForest_Text_RicardoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ViridianForest_EventScript_Sammy::
-	trainerbattle_single TRAINER_BUG_CATCHER_SAMMY, ViridianForest_Text_SammyIntro, ViridianForest_Text_SammyDefeat
-	msgbox ViridianForest_Text_SammyPostBattle, MSGBOX_AUTOCLOSE
+ViridianForest_EventScript_Claudio::
+	trainerbattle_single TRAINER_BUG_CATCHER_CLAUDIO, ViridianForest_Text_ClaudioIntro, ViridianForest_Text_ClaudioDefeat
+	msgbox ViridianForest_Text_ClaudioPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-ViridianForest_EventScript_Anthony::
-	trainerbattle_single TRAINER_BUG_CATCHER_ANTHONY, ViridianForest_Text_AnthonyIntro, ViridianForest_Text_AnthonyDefeat
-	msgbox ViridianForest_Text_AnthonyPostBattle, MSGBOX_AUTOCLOSE
+ViridianForest_EventScript_Samuel::
+	trainerbattle_single TRAINER_BUG_CATCHER_SAMUEL, ViridianForest_Text_SamuelIntro, ViridianForest_Text_SamuelDefeat
+	msgbox ViridianForest_Text_SamuelPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+ViridianForest_EventScript_Antonio::
+	trainerbattle_single TRAINER_GENTLEMAN_ANTONIO, ViridianForest_Text_AntonioIntro, ViridianForest_Text_AntonioDefeat
+	msgbox ViridianForest_Text_AntonioPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 ViridianForest_EventScript_NPC::

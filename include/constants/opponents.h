@@ -105,9 +105,9 @@
 #define TRAINER_YOUNGSTER_YASU                    99
 #define TRAINER_YOUNGSTER_DAVE                   100
 #define TRAINER_YOUNGSTER_BEN_2                  101
-#define TRAINER_BUG_CATCHER_RICK                 102
-#define TRAINER_BUG_CATCHER_DOUG                 103
-#define TRAINER_BUG_CATCHER_SAMMY                104
+#define TRAINER_BUG_CATCHER_RICARDO                 102
+#define TRAINER_BUG_CATCHER_CLAUDIO                 103
+#define TRAINER_BUG_CATCHER_SAMUEL                104
 #define TRAINER_BUG_CATCHER_COLTON               105
 #define TRAINER_BUG_CATCHER_GREG                 106
 #define TRAINER_BUG_CATCHER_JAMES                107
@@ -534,7 +534,7 @@
 #define TRAINER_BIKER_GOON_2                     528
 #define TRAINER_BIKER_GOON_3                     529
 #define TRAINER_BIKER_2                          530
-#define TRAINER_BUG_CATCHER_ANTHONY              531
+#define TRAINER_GENTLEMAN_ANTONIO              531
 #define TRAINER_BUG_CATCHER_CHARLIE              532
 #define TRAINER_TWINS_ELI_ANNE_2                 533
 #define TRAINER_YOUNGSTER_JOHNSON                534

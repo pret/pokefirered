@@ -1840,3 +1840,15 @@ static const struct SpriteFrameImage sPicTable_Sandshrew[] = {
     overworld_frame(gObjectEventPic_Sandshrew, 2, 2, 7),
     overworld_frame(gObjectEventPic_Sandshrew, 2, 2, 8),
 };
+
+static const struct SpriteFrameImage sPicTable_Gastly[] = {
+    overworld_frame(gObjectEventPic_Gastly, 4, 4, 0),
+    overworld_frame(gObjectEventPic_Gastly, 4, 4, 1),
+    overworld_frame(gObjectEventPic_Gastly, 4, 4, 2),
+    overworld_frame(gObjectEventPic_Gastly, 4, 4, 3),
+    overworld_frame(gObjectEventPic_Gastly, 4, 4, 4),
+    overworld_frame(gObjectEventPic_Gastly, 4, 4, 5),
+    overworld_frame(gObjectEventPic_Gastly, 4, 4, 6),
+    overworld_frame(gObjectEventPic_Gastly, 4, 4, 7),
+    overworld_frame(gObjectEventPic_Gastly, 4, 4, 8),
+};

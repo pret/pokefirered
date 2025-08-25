@@ -662,16 +662,11 @@ PewterCity_EventScript_KnowWhatTheyreDoing::
 	end
 
 PewterCity_EventScript_TrainerTips::
-	setflag FLAG_SILVIO_MART
 	msgbox PewterCity_Text_TrainerTipsEarningEXP, MSGBOX_SIGN
 	end
 
 PewterCity_EventScript_PoliceNotice::
 	msgbox PewterCity_Text_CallPoliceIfInfoOnThieves, MSGBOX_SIGN
-	end
-
-PewterCity_EventScript_Silvio::
-	msgbox PewterCity_Text_SilvoMart_Sign, MSGBOX_SIGN
 	end
 
 PewterCity_EventScript_MuseumSign::
@@ -809,10 +804,14 @@ PewterCity_Movement_WalkInPlaceLeft::
 	step_end
 
 PewterCity_EventScript_SilvioMartSign::
-	call_if_unset FLAG_SILVIO_MART, PewterCity_Text_SilvoMart_SignMartSign
+	msgbox PewterCity_Text_SilvoMart_Sign, MSGBOX_SIGN
 	end
 
-PewterCity_Text_SilvoMart_SignMartSign::
-	msgbox PewterCity_Text_SilvoMart_Cerrado, MSGBOX_SIGN
+PewterCity_EventScript_SilvioMartClosed::
+	call_if_unset FLAG_SILVIO_MART, PewterCity_EventScript_SilvioMartClosedFlag
+	end
+
+PewterCity_EventScript_SilvioMartClosedFlag::
+	msgbox PewterCity_Text_SilvoMartClosed, MSGBOX_SIGN
 	closemessage
 	end

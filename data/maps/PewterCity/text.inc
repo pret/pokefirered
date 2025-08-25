@@ -94,12 +94,13 @@ PewterCity_Text_GymSign::
 
 PewterCity_Text_CitySign::
     .string "{SHADOW DYNAMIC_COLOR4}CIUDAD PLANTEADA{SHADOW LIGHT_GRAY}\n"
-    .string "Ciudad de riscos inaccesibles$"
+    .string "    CIUDAD DE RISCOS INACCESIBLES$"
 
-PewterCity_Text_SilvoMart_Cerrado::
+
+PewterCity_Text_SilvoMartClosed::
         .string "{SHADOW DYNAMIC_COLOR4}CERRADO{SHADOW LIGHT_GRAY}\n"
-        .string "Vuelvo enseguida...$"
+        .string "VUELVO ENSEGUIDA...$"
 
 PewterCity_Text_SilvoMart_Sign::
     .string "{SHADOW DYNAMIC_COLOR4}TIENDA DE PIEDRAS DEL SABER{SHADOW LIGHT_GRAY}\n"
-    .string "El poder del cambio.$"
+    .string "EL PODER DEL CAMBIO$"

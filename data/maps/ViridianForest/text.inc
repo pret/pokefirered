@@ -58,7 +58,7 @@ ViridianForest_Text_AntonioPostBattle::
 
 ViridianForest_Text_NPC::
     .string "No quiero luchar, solo estoy\n"
-    .string "esperando el momento perfecto\n"
+    .string "esperando el momento perfecto\p"
     .string "para atrapar mi próximo {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}$"
 
 ViridianForest_Text_CharlieIntro::
@@ -141,11 +141,6 @@ ViridianForest_Text_CreQueEsHora::
     .string "Todavía nos queda mucho camino\n"
     .string "por delante.$"
 
-@eliminar
-ViridianForest_Text_SoyTanDespitada::
-    .string "¡Soy tan despistada!\n"
-    .string "Casi me voy sin entregarte esto...$"
-
 ViridianForest_Text_SoyTanDespitado::
     .string "¡Soy tan despistad{RED_GREEN_OA}!\n"
     .string "Casi me voy sin entregarte esto...$"
@@ -153,11 +148,6 @@ ViridianForest_Text_SoyTanDespitado::
 ViridianForest_Text_RepExpRojo::
     .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} obtuvo {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY}\n"
     .string "de manos de {SHADOW DYNAMIC_COLOR4}{RED_GREEN_NAME}{SHADOW LIGHT_GRAY}.$"
-
-@eliminar
-ViridianForest_Text_RepExpHoja::
-    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} obtuvo {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY}\n"
-    .string "de manos de {SHADOW DYNAMIC_COLOR4}HOJA{SHADOW LIGHT_GRAY}.$"
 
 ViridianForest_Text_ElRepartirExpEs::
     .string "El {SHADOW DYNAMIC_COLOR4}REPARTIR EXP.{SHADOW LIGHT_GRAY} es un objeto que\n"

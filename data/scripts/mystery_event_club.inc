@@ -1,14 +1,5 @@
 .equ GAVE_PROFILE,  VAR_TEMP_1
 
-MysteryEventClub_EventScript_Woman::
-	lock
-	faceplayer
-	goto_if_eq GAVE_PROFILE, TRUE, EventScript_AlreadyGaveProfile
-	goto_if_set FLAG_SYS_SET_TRAINER_CARD_PROFILE, EventScript_GivenProfileBefore
-	msgbox Text_IdLoveToHearYourProfile
-	goto EventScript_AskForProfile
-	end
-
 EventScript_AlreadyGaveProfile:
 	msgbox Text_TellMoreNextTime
 	release

@@ -2,7 +2,7 @@ PewterCity_Museum_1F_MapScripts::
 	.byte 0
 
 PewterCity_Museum_1F_EventScript_Scientist1::
-	lock
+	lockall
 	faceplayer
 	goto_if_eq VAR_FACING, DIR_WEST, PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
 	goto_if_eq VAR_FACING, DIR_SOUTH, PewterCity_Museum_1F_EventScript_Scientist1BehindCounter
@@ -64,7 +64,7 @@ PewterCity_Museum_1F_EventScript_EntranceTriggerRight::
 PewterCity_Museum_1F_EventScript_EntranceTrigger::
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	showmoneybox 0, 0
-	msgbox PewterCity_Museum_1F_Text_Its50YForChildsTicket, MSGBOX_YESNO
+	msgbox PewterCity_Museum_1F_Text_Its100YForChildsTicket, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, PewterCity_Museum_1F_EventScript_TryPayForTicket
 	msgbox PewterCity_Museum_1F_Text_ComeAgain
 	closemessage
@@ -143,7 +143,7 @@ PewterCity_Museum_1F_EventScript_OldMan::
 	end
 
 PewterCity_Museum_1F_EventScript_OldAmberScientist::
-	lock
+	lockall
 	faceplayer
 	goto_if_set FLAG_GOT_OLD_AMBER, PewterCity_Museum_1F_EventScript_AlreadyGotOldAmber
 	msgbox PewterCity_Museum_1F_Text_WantYouToGetAmberExamined
@@ -183,81 +183,65 @@ PewterCity_Museum_1F_EventScript_AerodactylFossil::
 	releaseall
 	end
 
-PewterCity_Museum_1F_EventScript_KabutopsFossil::
-	lockall
-	setvar VAR_0x8004, SPECIES_KABUTOPS
-	setvar VAR_0x8005, 10
-	setvar VAR_0x8006, 3
-	special OpenMuseumFossilPic
-	msgbox PewterCity_Museum_1F_Text_KabutopsFossil
-	special CloseMuseumFossilPic
+PewterCity_Museum_1F_EventScript_Silvio::
+	namebox Name_Desconocido
+	msgbox PewterCity_Museum_1F_Text_Silvio
+	closemessage
+	applymovement LOCALID_MUSEUM_SILVIO, Common_Movement_FaceOriginalDirection
+	waitmovement 0
 	releaseall
 	end
 
-PewterCity_Museum_1F_EventScript_Montanero::
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Museum_1F_Text_Montanero
-	releaseall
-	end
-
-@NPC CLASE
-PewterCity_Museum_1F_EventScript_NPC01::
+PewterCity_Museum_1F_EventScript_Spectator1::
 	faceplayer
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Museum_1F_Text_NPC01 MSGBOX_NPC
+	msgbox PewterCity_Museum_1F_Text_Spectator1 MSGBOX_NPC
+	applymovement LOCALID_MUSEUM_SPECTATOR1, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	releaseall
+	end
+
+PewterCity_Museum_1F_EventScript_Spectator2::
+	faceplayer
+	msgbox PewterCity_Museum_1F_Text_Spectator2 MSGBOX_NPC
+	applymovement LOCALID_MUSEUM_SPECTATOR2, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	releaseall
+	end
+
+PewterCity_Museum_1F_EventScript_Spectator3::
+	faceplayer
+	msgbox PewterCity_Museum_1F_Text_Spectator3 MSGBOX_NPC
 	applymovement 2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
 
-PewterCity_Museum_1F_EventScript_NPC02::
+PewterCity_Museum_1F_EventScript_Spectator4::
 	faceplayer
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Museum_1F_Text_NPC02 MSGBOX_NPC
-	applymovement 6, Common_Movement_FaceOriginalDirection
+	msgbox PewterCity_Museum_1F_Text_Spectator4 MSGBOX_NPC
+	applymovement LOCALID_MUSEUM_SPECTATOR4, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
 
-PewterCity_Museum_1F_EventScript_NPC03::
+PewterCity_Museum_1F_EventScript_Spectator5::
 	faceplayer
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Museum_1F_Text_NPC03 MSGBOX_NPC
-	applymovement 12, Common_Movement_FaceOriginalDirection
+	msgbox PewterCity_Museum_1F_Text_Spectator5 MSGBOX_NPC
+	applymovement LOCALID_MUSEUM_SPECTATOR5, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
 
-PewterCity_Museum_1F_EventScript_NPC04::
+PewterCity_Museum_1F_EventScript_Scientist::
 	faceplayer
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Museum_1F_Text_NPC04 MSGBOX_NPC
-	applymovement 13, Common_Movement_FaceOriginalDirection
-	waitmovement 0
-	releaseall
-	end
-
-PewterCity_Museum_1F_EventScript_NPC05::
-	faceplayer
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Museum_1F_Text_NPC05 MSGBOX_NPC
-	applymovement 11, Common_Movement_FaceOriginalDirection
-	waitmovement 0
-	releaseall
-	end
-
-@cientifico npc
-PewterCity_Museum_1F_EventScript_NPC06::
-	faceplayer
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Museum_1F_Text_NPC06 MSGBOX_NPC
-	applymovement 9, Common_Movement_FaceOriginalDirection
+	msgbox PewterCity_Museum_1F_Text_Scientist MSGBOX_NPC
+	applymovement LOCALID_MUSEUM_SCIENTIST, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end
 
 PewterCity_Museum_1F_EventScript_Brock::
-	lock
+	lockall
 	setvar VAR_PEWTER_CITY_MUSSEUM_BROCK,2
 	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
@@ -267,7 +251,7 @@ PewterCity_Museum_1F_EventScript_Brock::
 	special RemoveCameraObject
 	textcolor NPC_TEXT_COLOR_NEUTRAL	
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_AsiEsComoLosFosiles
+	msgbox PewterCity_Museum_1F_Text_FossilsTeachAboutPast
 	closemessage
 	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_Brock
 	waitmovement 0
@@ -281,7 +265,7 @@ PewterCity_Museum_1F_EventScript_Brock::
 	applymovement LOCALID_MUSEUM_SPECTATOR5, Common_Movement_FaceDown
 	waitmovement 0
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_SiempreEmocionado
+	msgbox PewterCity_Museum_1F_Text_AlwaysExcited
 	closemessage
 	applymovement LOCALID_MUSEUM_SPECTATOR1, Common_Movement_FaceUp
 	applymovement LOCALID_MUSEUM_SPECTATOR2, Common_Movement_FaceUp
@@ -299,20 +283,20 @@ PewterCity_Museum_1F_EventScript_Brock::
 
 PewterCity_Museum_1F_EventScript_PareceQueTenemosUna::
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_PareceQueTenemosUna
+	msgbox PewterCity_Museum_1F_Text_SpecialVisitorFemale
 	closemessage
 	return
 
 PewterCity_Museum_1F_EventScript_PareceQueTenemosUn::
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_PareceQueTenemosUn
+	msgbox PewterCity_Museum_1F_Text_SpecialVisitorMale
 	closemessage
 	return
 
 PewterCity_Museum_1F_EventScript_BrockNoTeVayas::
 	setvar VAR_PEWTER_CITY_MUSSEUM_BROCK,2
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_BrockNoTeVayas
+	msgbox PewterCity_Museum_1F_Text_DontLeaveWithoutLooking
 	closemessage
 	applymovement LOCALID_PLAYER, Common_Movement_WalkUp
 	waitmovement 0
@@ -330,15 +314,16 @@ PewterCity_Museum_1F_Move_Publico2::
 	step_end
 
 PewterCity_Museum_1F_EventScript_KabutoSign::
-	lock
+	lockall
 	goto_if_set FLAG_HIDE_PEWTER_CITY_BROCK_EVENT_FINISHED, PewterCity_Museum_1F_EventScript_KabutoSignFinished @EVENTO TERMINADO
 	setflag FLAG_PEWTER_CITY_MUSEUM_BROCK_KABUTO
 	special SetSeenMon
 	setvar VAR_0x8004, SPECIES_KABUTO
 	showmonpic SPECIES_KABUTO, 10, 3
 	signmsg
-	msgbox PewterCity_Museum_1F_Text_Fosil1
+	msgbox PewterCity_Museum_1F_Text_Kabuto
 	normalmsg
+	closemessage
 	waitmessage
 	hidemonpic
 	goto_if_set FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE, PewterCity_Museum_1F_EventScript_CheckKabuto @si ya se vio el otro fosil
@@ -346,15 +331,16 @@ PewterCity_Museum_1F_EventScript_KabutoSign::
 	end
 
 PewterCity_Museum_1F_EventScript_OmanyteSign::
-	lock
+	lockall
 	goto_if_set FLAG_HIDE_PEWTER_CITY_BROCK_EVENT_FINISHED, PewterCity_Museum_1F_EventScript_OmanyteSignFinished @EVENTO TERMINADO
 	setflag FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_OMANYTE
 	special SetSeenMon
 	setvar VAR_0x8004, SPECIES_OMANYTE
 	showmonpic SPECIES_OMANYTE, 10, 3
 	signmsg
-	msgbox PewterCity_Museum_1F_Text_Fosil2
+	msgbox PewterCity_Museum_1F_Text_Omanyte
 	normalmsg
+	closemessage
 	hidemonpic
 	waitmessage
 	goto_if_set FLAG_PEWTER_CITY_MUSEUM_BROCK_KABUTO, PewterCity_Museum_1F_EventScript_CheckOmanyte @si ya se vio el otro fosil
@@ -374,13 +360,14 @@ PewterCity_Museum_1F_EventScript_CheckKabuto::
 	end
 
 PewterCity_Museum_1F_EventScript_OmanyteSignFinished::
-	lock
+	lockall
 	special SetSeenMon
 	setvar VAR_0x8004, SPECIES_OMANYTE
 	showmonpic SPECIES_OMANYTE, 10, 3
 	signmsg
-	msgbox PewterCity_Museum_1F_Text_Fosil2
+	msgbox PewterCity_Museum_1F_Text_Omanyte
 	normalmsg
+	closemessage
 	hidemonpic
 	waitmessage
 	release
@@ -391,8 +378,9 @@ PewterCity_Museum_1F_EventScript_KabutoSignFinished::
 	setvar VAR_0x8004, SPECIES_KABUTO
 	showmonpic SPECIES_KABUTO, 10, 3
 	signmsg
-	msgbox PewterCity_Museum_1F_Text_Fosil2
+	msgbox PewterCity_Museum_1F_Text_Omanyte
 	normalmsg
+	closemessage
 	waitmessage
 	hidemonpic
 	release
@@ -405,7 +393,7 @@ PewterCity_Museum_1F_EventScript_BrockFinishedOmanyte::
 	waitmovement 0
 	@MUSICA CLASES
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_LosFosilesNosEnsenan
+	msgbox PewterCity_Museum_1F_Text_FossilsTeachUs
 	closemessage
 	fadescreen FADE_TO_BLACK
 	setobjectxy LOCALID_MUSEUM_SPECTATOR1,13,13
@@ -418,12 +406,12 @@ PewterCity_Museum_1F_EventScript_BrockFinishedOmanyte::
 	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_WalkRightBrock
 	waitmovement 0
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_HolaEntrenadora
+	msgbox PewterCity_Museum_1F_Text_HelloTrainer
 	closemessage
 	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_LookAroundRightBrock
 	waitmovement 0	
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_HeOidoQue
+	msgbox PewterCity_Museum_1F_Text_IHeardThat
 	closemessage
 	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_SalidaBrockRight
 	waitmovement 0	
@@ -442,7 +430,7 @@ PewterCity_Museum_1F_EventScript_BrockFinishedKabuto::
 	waitmovement 0
 	@MUSICA CLASES
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_LosFosilesNosEnsenan
+	msgbox PewterCity_Museum_1F_Text_FossilsTeachUs
 	closemessage
 	fadescreen FADE_TO_BLACK
 	setobjectxy LOCALID_MUSEUM_SPECTATOR1,13,13
@@ -455,12 +443,12 @@ PewterCity_Museum_1F_EventScript_BrockFinishedKabuto::
 	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_WalkLeftBrock
 	waitmovement 0	
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_HolaEntrenadora
+	msgbox PewterCity_Museum_1F_Text_HelloTrainer
 	closemessage
 	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_LookAroundLeftBrock
 	waitmovement 0	
 	namebox Name_Brock
-	msgbox PewterCity_Museum_1F_Text_HeOidoQue
+	msgbox PewterCity_Museum_1F_Text_IHeardThat
 	closemessage
 	applymovement LOCALID_MUSEUM_BROCK, PewterCity_Museum_1F_Move_SalidaBrockLeft
 	waitmovement 0	

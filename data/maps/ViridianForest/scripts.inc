@@ -102,6 +102,7 @@ ViridianForest_EventScript_RedGreenEncounter::
 	signmsg
 	giveitem_msg ViridianForest_Text_RepExpRojo, ITEM_EXP_SHARE, 1
 	normalmsg
+	playfanfare MUS_OBTAIN_KEY_ITEM
 	namebox Name_RedGreen
 	msgbox ViridianForest_Text_ElRepartirExpEs
 	hidenamebox

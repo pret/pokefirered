@@ -22,10 +22,12 @@ PewterCity_House1_EventScript_Nidoran::
 	end
 
 PewterCity_House1_EventScript_DoNidoranCry::
-	textcolor NPC_TEXT_COLOR_NEUTRAL
 	waitse
 	playmoncry SPECIES_NIDORAN_M, CRY_MODE_NORMAL
+	applymovement LOCALID_PEWTER_HOUSE_NIDORAN, Common_Movement_ExclamationMark
+	waitmovement 0
+	namebox	Name_Nidoran
 	msgbox PewterCity_House1_Text_Nidoran
+	closemessage
 	waitmoncry
-	call EventScript_RestorePrevTextColor
 	return

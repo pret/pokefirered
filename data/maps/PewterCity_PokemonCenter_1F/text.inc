@@ -6,7 +6,7 @@ PewterCity_PokemonCenter_1F_Text_TeamRocketMtMoonImOnPhone::
 .string "¿Será posible?$"
 
 PewterCity_PokemonCenter_1F_Text_Jigglypuff::
-    .string "{SHADOW DYNAMIC_COLOR4}JIGGLYPUFF:{SHADOW LIGHT_GRAY} Puu pupuu!$"
+    .string "Puu pupuu!$"
 
 PewterCity_PokemonCenter_1F_Text_WhenJiggylypuffSingsMonsGetDrowsy::
 .string "Aaah..., qué sueño...\p"

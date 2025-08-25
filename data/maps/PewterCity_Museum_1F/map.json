@@ -42,7 +42,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PewterCity_Museum_1F_EventScript_NPC01",
+      "script": "PewterCity_Museum_1F_EventScript_Spectator3",
       "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
@@ -72,12 +72,13 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PewterCity_Museum_1F_EventScript_NPC02",
+      "script": "PewterCity_Museum_1F_EventScript_Spectator4",
       "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
+      "local_id": "LOCALID_MUSEUM_SILVIO",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_SILVIO",
       "x": 4,
       "y": 7,
       "elevation": 0,
@@ -86,8 +87,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PewterCity_Museum_1F_EventScript_Montanero",
-      "flag": "0"
+      "script": "PewterCity_Museum_1F_EventScript_Silvio",
+      "flag": "FLAG_SILVIO_MART"
     },
     {
       "local_id": "LOCALID_MUSEUM_CLEFAIRY",
@@ -102,9 +103,10 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Common_EventScript_Pokemon_Clefairy",
-      "flag": "0"
+      "flag": "FLAG_SILVIO_MART"
     },
     {
+      "local_id": "LOCALID_MUSEUM_SCIENTIST",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 11,
@@ -115,7 +117,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PewterCity_Museum_1F_EventScript_NPC06",
+      "script": "PewterCity_Museum_1F_EventScript_Scientist",
       "flag": "0"
     },
     {
@@ -145,7 +147,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PewterCity_Museum_1F_EventScript_NPC05",
+      "script": "PewterCity_Museum_1F_EventScript_Spectator5",
       "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
@@ -160,7 +162,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PewterCity_Museum_1F_EventScript_NPC03",
+      "script": "PewterCity_Museum_1F_EventScript_Spectator2",
       "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
@@ -175,7 +177,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PewterCity_Museum_1F_EventScript_NPC04",
+      "script": "PewterCity_Museum_1F_EventScript_Spectator1",
       "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
@@ -235,7 +237,7 @@
     {
       "type": "sign",
       "x": 6,
-      "y": 1,
+      "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "PewterCity_Museum_1F_EventScript_AerodactylFossil"

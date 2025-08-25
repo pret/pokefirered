@@ -4,20 +4,24 @@ Route2_Text_RouteSign::
 
 Route2_Text_RouteSign2::
     .string "{SHADOW DYNAMIC_COLOR4}RUTA 2 - NORTE{SHADOW LIGHT_GRAY}\n"
-    .string "CIUDAD VERDE - CIUDAD PLATEADA$"
+    .string "CIUDAD PLATEADA - CIUDAD VERDE$"
 
 Route2_Text_RouteSign3::
     .string "{SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}\n"
     .string "ENTRADA SUR$"
 
-Route2_Text_Policia::
+Route2_Text_RouteSign4::
+    .string "{SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}\n"
+    .string "ENTRADA NORTE$"
+
+Route2_Text_Police::
     .string "{COLOR DARK_GRAY}Los informes de actividad del\n"
     .string "{SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY} están en aumento.\p"
     .string "Mantén tus ojos y oídos abiertos\n"
     .string "mientras viajas.$"
 
-Route2_Text_Adolescente::
-    .string "{COLOR DARK_GRAY}Dicen que si tienes paciencia,\n"
+Route2_Text_Girl::
+    .string "Dicen que si tienes paciencia,\n"
     .string "podrías encontrar {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} súper\l"
     .string "raros en esta hierba alta.\p"
     .string "¡Estoy decidida a atrapar uno hoy!$"

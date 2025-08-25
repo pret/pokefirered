@@ -13,12 +13,16 @@ Route2_EventScript_RouteSign3::
 	msgbox Route2_Text_RouteSign3, MSGBOX_SIGN
 	end
 
-Route2_EventScript_Policia::
-	msgbox Route2_Text_Policia, MSGBOX_NPC
+Route2_EventScript_RouteSign4::
+	msgbox Route2_Text_RouteSign4, MSGBOX_SIGN
 	end
 
-Route2_EventScript_Adolescente::
-	msgbox Route2_Text_Adolescente, MSGBOX_NPC
+Route2_EventScript_Police::
+	msgbox Route2_Text_Police, MSGBOX_NPC
+	end
+
+Route2_EventScript_Girl::
+	msgbox Route2_Text_Girl, MSGBOX_NPC
 	end
 
 Route2_EventScript_DiglettsCaveSign::

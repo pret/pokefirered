@@ -1,4 +1,4 @@
-Name_Desconociodo::
+Name_Desconocido::
     .string "???$"
 
 Name_RedGreen::
@@ -42,3 +42,9 @@ Name_Sandshrew::
 
 Name_Clefairy::
     .string "CLEFAIRY$"
+
+Name_Nidoran::
+    .string "NIDORAN$"
+
+Name_Jigglypuff::
+    .string "JIGGLYPUFF$"

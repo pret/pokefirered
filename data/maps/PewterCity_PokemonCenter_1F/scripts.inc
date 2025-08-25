@@ -31,8 +31,9 @@ PewterCity_PokemonCenter_1F_EventScript_Jigglypuff::
 	fadeoutbgm 0
 	playbgm MUS_JIGGLYPUFF, 0
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	message PewterCity_PokemonCenter_1F_Text_Jigglypuff
-	waitmessage
+	namebox Name_Jigglypuff
+	msgbox PewterCity_PokemonCenter_1F_Text_Jigglypuff
+	closemessage
 	delay 455
 	playbgm MUS_POKE_CENTER, 1
 	release

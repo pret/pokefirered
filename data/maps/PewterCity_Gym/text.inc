@@ -1,6 +1,6 @@
 PewterCity_Gym_Text_BrockNoEsta::
-.string "{COLOR DARK_GRAY}Lo siento, pero {SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} no está en el\n"
-.string "gimnasio en este momento. \p"
+.string "Lo siento, pero {SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} no está en el\n"
+.string "{SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY} en este momento. \p"
 .string "Está dando una charla en el\n"
 .string "{SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}.\p"
 .string "No puedes desafiarlo hasta que\n"

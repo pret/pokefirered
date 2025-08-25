@@ -82,14 +82,14 @@ MtMoon_B2F_EventScript_DomeFossil::
 	waitmovement 0
 	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_JumpFaceUpExclamationMark
 	waitmovement 0
-	namebox Name_Desconociodo	
+	namebox Name_Desconocido	
 	msgbox MtMoon_B2F_Text_Jessie_Intro
 	closemessage
 	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_WalkUp4
 	waitmovement 0
 	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_JumpFaceUpExclamationMark
 	waitmovement 0
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_B2F_Text_James_Intro
 	closemessage
 	applymovement LOCALID_PLAYER, Common_Movement_JumpFaceDownExclamationMark
@@ -97,7 +97,7 @@ MtMoon_B2F_EventScript_DomeFossil::
 	waitmovement 0
 	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_JumpFaceUpExclamationMark
 	waitmovement 0
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_B2F_Text_Jessie_Reveal
 	closemessage
 	applymovement LOCALID_MT_MOON_MIGUEL, MtMoon_B2F_Movement_MiguelRunAway
@@ -167,14 +167,14 @@ MtMoon_B2F_EventScript_HelixFossil::
 	waitmovement 0
 	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_JumpFaceUpExclamationMark
 	waitmovement 0
-	namebox Name_Desconociodo	
+	namebox Name_Desconocido	
 	msgbox MtMoon_B2F_Text_Jessie_Intro
 	closemessage
 	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_WalkUp4
 	waitmovement 0
 	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_JumpFaceUpExclamationMark
 	waitmovement 0
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_B2F_Text_James_Intro
 	closemessage
 	applymovement LOCALID_PLAYER, Common_Movement_JumpFaceDownExclamationMark
@@ -182,7 +182,7 @@ MtMoon_B2F_EventScript_HelixFossil::
 	waitmovement 0
 	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_JumpFaceUpExclamationMark
 	waitmovement 0
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_B2F_Text_Jessie_Reveal
 	closemessage
 	applymovement LOCALID_MT_MOON_MIGUEL, MtMoon_B2F_Movement_MiguelRunAway
@@ -280,13 +280,13 @@ MtMoon_B2F_EventScript_AfterBattleDomeFossil::
 	end
 
 MtMoon_B2F_EventScript_JessieJamesFemale::
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_B2F_Text_James_RevealFemale
 	closemessage
 	return
 
 MtMoon_B2F_EventScript_JessieJamesMale::
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_B2F_Text_James_RevealMale
 	closemessage
 	return

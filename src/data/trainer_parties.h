@@ -153,10 +153,12 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GentlemanFidel[] = {
     },
     {
         .iv = 0,
-        .lvl = 3,
+        .lvl = 2,
         .species = SPECIES_SPEAROW,
     },
 };
+
+
 
 static const struct TrainerMonNoItemDefaultMoves sParty_YoungsterTimmy[] = {
     {
@@ -10953,7 +10955,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_RojoBosqueVerdeBulbasaur
     },
     {
         .iv = 0,
-        .lvl = 7,
+        .lvl = 8,
         .species = SPECIES_SQUIRTLE,
     },
 };
@@ -10971,7 +10973,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_RojoBosqueVerdeSquirtle[
     },
     {
         .iv = 0,
-        .lvl = 7,
+        .lvl = 8,
         .species = SPECIES_CHARMANDER,
     },
 };
@@ -10989,7 +10991,7 @@ static const struct TrainerMonNoItemDefaultMoves sParty_RojoBosqueVerdeCharmande
     },
     {
         .iv = 0,
-        .lvl = 7,
+        .lvl = 8,
         .species = SPECIES_BULBASAUR,
     },
 };

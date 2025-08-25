@@ -56,7 +56,7 @@ MtMoon_1F_EventScript_SilvioIzq::
 	applymovement LOCALID_PLAYER, MtMoon_1F_Movement_PlayerCamina
 	applymovement LOCALID_MT_MOON_SILVIO MtMoon_1F_Movement_SilvioAparece
 	waitmovement 0
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_1F_Text_Silvio_EsperaUnSegundo
 	closemessage
 	applymovement LOCALID_MT_MOON_SILVIO MtMoon_1F_Movement_SilvioExclamacion
@@ -70,7 +70,7 @@ MtMoon_1F_EventScript_SilvioIzq::
 	applymovement LOCALID_MT_MOON_CLEFAIRY MtMoon_1F_Movement_SilvioCamina
 	applymovement LOCALID_MT_MOON_SILVIO MtMoon_1F_Movement_SilvioCamina
 	waitmovement 0
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_1F_Text_Silvio_QueSorpresa
 	closemessage
 	applymovement LOCALID_MT_MOON_SILVIO MtMoon_1F_Movement_SilvioMiraAlrededor
@@ -104,7 +104,7 @@ MtMoon_1F_EventScript_SilvioRight::
 	applymovement LOCALID_PLAYER, MtMoon_1F_Movement_PlayerCamina
 	applymovement LOCALID_MT_MOON_SILVIO MtMoon_1F_Movement_SilvioAparece
 	waitmovement 0
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_1F_Text_Silvio_EsperaUnSegundo
 	closemessage
 	applymovement LOCALID_MT_MOON_SILVIO MtMoon_1F_Movement_SilvioExclamacion
@@ -118,7 +118,7 @@ MtMoon_1F_EventScript_SilvioRight::
 	applymovement LOCALID_MT_MOON_CLEFAIRY MtMoon_1F_Movement_SilvioCamina
 	applymovement LOCALID_MT_MOON_SILVIO MtMoon_1F_Movement_SilvioCamina
 	waitmovement 0
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_1F_Text_Silvio_QueSorpresa
 	closemessage
 	applymovement LOCALID_MT_MOON_SILVIO MtMoon_1F_Movement_SilvioMiraAlrededor
@@ -147,13 +147,13 @@ MtMoon_1F_EventScript_SilvioRight::
 	end
 
 MtMoon_1F_EventScript_Silvio_EresEntrenadora::
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_1F_Text_Silvio_EresEntrenadora
 	closemessage
 	return
 
 MtMoon_1F_EventScript_Silvio_EresEntrenador::
-	namebox Name_Desconociodo
+	namebox Name_Desconocido
 	msgbox MtMoon_1F_Text_Silvio_EresEntrenador
 	
 	closemessage

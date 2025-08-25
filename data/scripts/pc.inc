@@ -28,6 +28,11 @@ EventScript_PC2::
 	setmetatile 6, 3, 0x2FD, 0
 	end
 
+KabutoTest::
+	namebox Name_Brock
+	msgbox Name_Brock
+	closemessage
+	end
 
 
 @ For when the player first arrives on One Island

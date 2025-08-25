@@ -570,6 +570,8 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     gSpecialVar_Facing = direction;
     if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
         return EventScript_PC;
+    if (MetatileBehavior_IsKabuto(metatileBehavior) == TRUE)
+        return KabutoTest;
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
         return EventScript_WallTownMap;
     if (MetatileBehavior_IsBookshelf(metatileBehavior) == TRUE)

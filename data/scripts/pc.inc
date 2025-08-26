@@ -28,8 +28,6 @@ EventScript_PC2::
 	setmetatile 6, 3, 0x2FD, 0
 	end
 
-
-
 @ For when the player first arrives on One Island
 EventScript_PCDisabled::
 	msgbox OneIsland_PokemonCenter_1F_Text_UsualPCServicesUnavailable

@@ -1261,4 +1261,9 @@ extern const u8 TradeCenter_EventScript_Chair1[];
 extern const u8 TradeCenter_ConfirmLeaveRoom[];
 extern const u8 TradeCenter_TerminateLink[];
 
+//new
+extern const u8 PewterCity_Museum_1F_EventScript_KabutoSign[];
+extern const u8 PewterCity_Museum_1F_EventScript_OmanyteSign[];
+
+
 #endif //GUARD_EVENT_SCRIPTS_H

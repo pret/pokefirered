@@ -245,7 +245,7 @@
     {
       "type": "sign",
       "x": 10,
-      "y": 4,
+      "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_SOUTH",
       "script": "PewterCity_Museum_1F_EventScript_OmanyteSign"
@@ -253,7 +253,7 @@
     {
       "type": "sign",
       "x": 1,
-      "y": 4,
+      "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_SOUTH",
       "script": "PewterCity_Museum_1F_EventScript_KabutoSign"
@@ -261,7 +261,7 @@
     {
       "type": "sign",
       "x": 11,
-      "y": 4,
+      "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_SOUTH",
       "script": "PewterCity_Museum_1F_EventScript_OmanyteSign"
@@ -269,7 +269,7 @@
     {
       "type": "sign",
       "x": 2,
-      "y": 4,
+      "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_SOUTH",
       "script": "PewterCity_Museum_1F_EventScript_KabutoSign"

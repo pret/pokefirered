@@ -413,6 +413,21 @@ bool8 MetatileBehavior_IsPC(u8 metatileBehavior)
         return FALSE;
 }
 
+bool8 MetatileBehavior_IsKabuto(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_KABUTO)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 MetatileBehavior_IsOmanyte(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_OMANYTE)
+        return TRUE;
+    else
+        return FALSE;
+}
 bool8 MetatileBehavior_HasRipples(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_POND_WATER || metatileBehavior == MB_PUDDLE)

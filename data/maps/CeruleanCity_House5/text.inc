@@ -35,7 +35,7 @@ CeruleanCity_House1_Text_WhyMustYouLieNoBerries::
 
 CeruleanCity_House1_Text_TakeInterestInAllSortsOfThings::
 .string "¿No tienes interés en las {SHADOW DYNAMIC_COLOR4}BAYAS{SHADOW LIGHT_GRAY}?\p"
-.string "Jovencit{OA}, es importante interesarse\n"
+.string "Jovencit{oa}, es importante interesarse\n"
 .string "en todo tipo de cosas.$"
 
 CeruleanCity_House1_Text_HaveYouBroughtBerryPowder::

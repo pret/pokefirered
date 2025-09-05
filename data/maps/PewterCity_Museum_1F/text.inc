@@ -60,8 +60,8 @@ PewterCity_Museum_1F_Text_Omanyte::
     .string "forma de espiral.$"
 
 PewterCity_Museum_1F_Text_Its100YForChildsTicket::
-    .string "Bienvenid{OA} al {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}.\n"
-    .string "L{OA}s niñ{OA}s pagan ¥100...\p"
+    .string "Bienvenid{oa} al {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}.\n"
+    .string "L{oa}s niñ{oa}s pagan ¥100...\p"
     .string "¿Te gustaría entrar?$"
 
 PewterCity_Museum_1F_Text_ComeAgain::

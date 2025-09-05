@@ -50,7 +50,7 @@ MtMoon_B2F_Text_Grunt2PostBattle::
 
 MtMoon_B2F_Text_Grunt3Intro::
     .string "¡Estamos trabajando aquí!\n"
-    .string "¡Lárgate, niñ{OA}!$"
+    .string "¡Lárgate, niñ{oa}!$"
 
 MtMoon_B2F_Text_Grunt3Defeat::
     .string "ASÍ QUE ERES BUENO…$"
@@ -60,7 +60,7 @@ MtMoon_B2F_Text_Grunt3PostBattle::
     .string "y lárgate!$"
 
 MtMoon_B2F_Text_Grunt4Intro::
-    .string "¡L{OA}s niñ{OA}s no deberían meterse\n"
+    .string "¡L{oa}s niñ{oa}s no deberían meterse\n"
     .string "con los adultos!\p"
     .string "¡Podría acabar mal!$"
 
@@ -84,7 +84,7 @@ MtMoon_B2F_Text_ObtainedDomeFossil::
     .string "¡Obtuviste el {SHADOW DYNAMIC_COLOR4}FÓSIL DOMO{SHADOW LIGHT_GRAY}!$"
 
 MtMoon_B2F_Text_Jessie_Intro::
-    .string "¡Alto ahí, mocos{OA}!\n"
+    .string "¡Alto ahí, mocos{oa}!\n"
     .string "Ese fósil ya tiene dueños.$"
 
 MtMoon_B2F_Text_James_Intro::

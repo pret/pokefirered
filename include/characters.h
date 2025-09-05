@@ -298,6 +298,18 @@
 #define PLACEHOLDER_ID_RED_GREEN_ITOITA 0x1C
 #define PLACEHOLDER_ID_RED_GREEN_EA   0x1D
 #define PLACEHOLDER_ID_RED_GREEN_NAME 0x1E
+#define PLACEHOLDER_ID_oa             0x1F
+#define PLACEHOLDER_ID_a              0x20
+#define PLACEHOLDER_ID_ella           0x21
+#define PLACEHOLDER_ID_ita            0x22
+#define PLACEHOLDER_ID_ito_ita        0x23
+#define PLACEHOLDER_ID_ea             0x24
+#define PLACEHOLDER_ID_RED_GREEN_oa   0x25
+#define PLACEHOLDER_ID_RED_GREEN_a    0x26
+#define PLACEHOLDER_ID_RED_GREEN_ella 0x27
+#define PLACEHOLDER_ID_RED_GREEN_ita  0x28
+#define PLACEHOLDER_ID_RED_GREEN_ito_ita 0x29
+#define PLACEHOLDER_ID_RED_GREEN_ea   0x2A
 
 
 // Note that while all dot combinations are represented in

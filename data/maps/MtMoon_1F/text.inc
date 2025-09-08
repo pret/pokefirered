@@ -3,14 +3,14 @@
 MtMoon_1F_Text_MarcosIntro::
     .string "¡Eh!\p"
     .string "¡Me asustaste!\p"
-    .string "...Ah, ¡solo eres un{A} niñ{OA}!$"
+    .string "...Ah, ¡solo eres un{a} niñ{oa}!$"
 
 MtMoon_1F_Text_MarcosDefeat::
     .string "¡GUAU!\n"
     .string "¡OTRA VEZ ME SORPRENDISTE!$"
 
 MtMoon_1F_Text_MarcosPostBattle::
-    .string "L{OA}s niñ{OA}s como tú no deberían\n"
+    .string "L{oa}s niñ{oa}s como tú no deberían\n"
     .string "andar por aquí en la oscuridad.$"
 
 MtMoon_1F_Text_JoshIntro::

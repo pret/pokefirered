@@ -41,8 +41,8 @@ PalletTown_Text_LetreroPueblo::
 
 @EVENTO ZAPATILLAS DEPORTIVAS
 PalletTown_Text_RunningShoes_EsperaUnMomento::
-    .string "{SHADOW LIGHT_GRAY}¡Espera un momento, querid{OA}!\p"
-    .string "Sabía que estarías ansios{OA} por\n"
+    .string "{SHADOW LIGHT_GRAY}¡Espera un momento, querid{oa}!\p"
+    .string "Sabía que estarías ansios{oa} por\n"
     .string "comenzar tu viaje, pero no puedes\l"
     .string "irte sin esto...$"
 
@@ -59,7 +59,7 @@ PalletTown_Text_RunningShoes_SonUnasZapatillas::
 PalletTown_Text_RunningShoes_NoOlvides::
     .string "No olvides que {SHADOW DYNAMIC_COLOR4}PUEBLO PALETA{SHADOW LIGHT_GRAY} siempre\n"
     .string "será tu hogar.\p"
-    .string "Siempre serás bienvenid{OA} aquí, sin\n"
+    .string "Siempre serás bienvenid{oa} aquí, sin\n"
     .string "importar lo lejos que viajes.$"
 
 PalletTown_Text_RunningShoes_RecibisteZapatillas::

@@ -142,7 +142,7 @@ ViridianForest_Text_CreQueEsHora::
     .string "por delante.$"
 
 ViridianForest_Text_SoyTanDespitado::
-    .string "¡Soy tan despistad{RED_GREEN_OA}!\n"
+    .string "¡Soy tan despistad{RED_GREEN_oa}!\n"
     .string "Casi me voy sin entregarte esto...$"
 
 ViridianForest_Text_RepExpRojo::
@@ -155,5 +155,5 @@ ViridianForest_Text_ElRepartirExpEs::
     .string "Con este objeto, el {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} que lo\n"
     .string "tenga ganará puntos de experiencia,\l"
     .string "incluso si no se encuentra en batalla.\p"
-    .string "Estoy segur{RED_GREEN_OA} de que te será de gran\n"
+    .string "Estoy segur{RED_GREEN_oa} de que te será de gran\n"
     .string "ayuda en tu aventura. $"

@@ -480,7 +480,7 @@ PalletTown_ProfessorOaksLab_Text_SoloUnoDeNosotros::
     .string "Sin ayuda. Sin distracciones.$"
 
 PalletTown_ProfessorOaksLab_Text_RedGreenImExcited::
-    .string "¡Estoy emocionad{RED_GREEN_OA} por la aventura!\p"
+    .string "¡Estoy emocionad{RED_GREEN_oa} por la aventura!\p"
     .string "Iré a explorar el {SHADOW DYNAMIC_COLOR4}BOSQUE VERDE{SHADOW LIGHT_GRAY}.\p"
     .string "Debe haber {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} increíbles por\n"
     .string "allí.$"

@@ -1,6 +1,6 @@
 PalletTown_PlayersHouse_1F_Text_AllKidsLeaveOakLookingForYou::
     .string "En fin...\p"
-    .string "Tod{OA}s los muchach{OA}s se van de casa.\n"
+    .string "Tod{oa}s los muchach{oa}s se van de casa.\n"
     .string "¡Así es la vida!\p"
     .string "¡Ah si!\p"
     .string "El {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY} quería verte.$"

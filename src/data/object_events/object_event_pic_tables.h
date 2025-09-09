@@ -1471,14 +1471,14 @@ static const struct SpriteFrameImage sPicTable_Lapras[] = {
 
 static const struct SpriteFrameImage sPicTable_Zapdos[] = {
     overworld_frame(gObjectEventPic_Zapdos, 8, 8, 0),
+    overworld_frame(gObjectEventPic_Zapdos, 8, 8, 0),
+    overworld_frame(gObjectEventPic_Zapdos, 8, 8, 0),
     overworld_frame(gObjectEventPic_Zapdos, 8, 8, 1),
     overworld_frame(gObjectEventPic_Zapdos, 8, 8, 2),
     overworld_frame(gObjectEventPic_Zapdos, 8, 8, 0),
     overworld_frame(gObjectEventPic_Zapdos, 8, 8, 0),
-    overworld_frame(gObjectEventPic_Zapdos, 8, 8, 1),
-    overworld_frame(gObjectEventPic_Zapdos, 8, 8, 1),
-    overworld_frame(gObjectEventPic_Zapdos, 8, 8, 2),
-    overworld_frame(gObjectEventPic_Zapdos, 8, 8, 2),
+    overworld_frame(gObjectEventPic_Zapdos, 8, 8, 0),
+    overworld_frame(gObjectEventPic_Zapdos, 8, 8, 0),
 };
 
 static const struct SpriteFrameImage sPicTable_Moltres[] = {

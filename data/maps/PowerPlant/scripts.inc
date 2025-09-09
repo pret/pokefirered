@@ -119,3 +119,13 @@ PowerPlant_EventScript_FoughtElectrode2::
 	setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
 	goto EventScript_RemoveStaticMon
 	end
+
+PowerPlant_EventScript_FinalScan::
+	setvar VAR_SCAN_FINAL,2
+	special SpawnCameraObject
+	applymovement LOCALID_CAMERA, Common_Movement_WalkUp4
+	waitmovement 0
+	special RemoveCameraObject
+	setflag FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR
+	releaseall
+	end

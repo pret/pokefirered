@@ -1808,7 +1808,7 @@
       "height": 40,
       "border_width": 2,
       "border_height": 2,
-      "primary_tileset": "gTileset_General",
+      "primary_tileset": "gTileset_PowerPlantFlash",
       "secondary_tileset": "gTileset_PowerPlant",
       "border_filepath": "data/layouts/PowerPlant/border.bin",
       "blockdata_filepath": "data/layouts/PowerPlant/map.bin"

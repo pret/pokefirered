@@ -9,6 +9,17 @@ const struct Tileset gTileset_General =
     .callback = InitTilesetAnim_General,
 };
 
+const struct Tileset gTileset_PowerPlantFlash =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_PowerPlantFlash,
+    .palettes = gTilesetPalettes_PowerPlantFlash,
+    .metatiles = gMetatiles_PowerPlantFlash,
+    .metatileAttributes = gMetatileAttributes_PowerPlantFlash,
+    .callback = InitTilesetAnim_General,
+};
+
 const struct Tileset gTileset_PalletTown =
 {
     .isCompressed = TRUE,

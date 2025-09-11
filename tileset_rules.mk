@@ -6,6 +6,9 @@ $(TILESETGFXDIR)/primary/building/tiles.4bpp: %.4bpp: %.png
 $(TILESETGFXDIR)/primary/general/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 640 -Wnum_tiles
 
+$(TILESETGFXDIR)/primary/power_plant_flash/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 640 -Wnum_tiles
+
 $(TILESETGFXDIR)/secondary/pallet_town/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 76 -Wnum_tiles
 

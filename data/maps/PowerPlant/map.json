@@ -190,7 +190,7 @@
     {
       "local_id": "LOCALID_POWERPLANT_MAGNEMITE1",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_GEODUDE",
+      "graphics_id": "OBJ_EVENT_GFX_MAGNEMITE",
       "x": 23,
       "y": 10,
       "elevation": 0,
@@ -205,7 +205,7 @@
     {
       "local_id": "LOCALID_POWERPLANT_MAGNEMITE2",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_GEODUDE",
+      "graphics_id": "OBJ_EVENT_GFX_MAGNEMITE",
       "x": 27,
       "y": 8,
       "elevation": 0,

@@ -196,6 +196,7 @@ const u16 gObjectEventPic_Geodude[] = INCBIN_U16("graphics/object_events/pics/po
 const u16 gObjectEventPic_Nerd[] = INCBIN_U16("graphics/object_events/pics/people/nerd.4bpp");
 const u16 gObjectEventPic_Sandshrew[] = INCBIN_U16("graphics/object_events/pics/pokemon/sandshrew.4bpp");
 const u16 gObjectEventPic_Gastly[] = INCBIN_U16("graphics/object_events/pics/pokemon/gastly.4bpp");
+const u16 gObjectEventPic_Magnemite[] = INCBIN_U16("graphics/object_events/pics/pokemon/magnemite.4bpp");
 
 const u16 gFieldEffectObjectPic_ShadowSmall[] = INCBIN_U16("graphics/field_effects/pics/shadow_small.4bpp");
 const u16 gFieldEffectObjectPic_ShadowMedium[] = INCBIN_U16("graphics/field_effects/pics/shadow_medium.4bpp");

@@ -65,7 +65,32 @@ static const u16 *const sTilesetAnims_Building_Maquina4[] = {
     sTilesetAnims_Building_Maquina4_Frame3,
     sTilesetAnims_Building_Maquina4_Frame4
 };
-// 
+//
+static const u16 sTilesetAnims_PowerPlantFlash_Electric_Frame0[] = INCBIN_U16("data/tilesets/primary/power_plant_flash/anim/electric/0.4bpp");
+static const u16 sTilesetAnims_PowerPlantFlash_Electric_Frame1[] = INCBIN_U16("data/tilesets/primary/power_plant_flash/anim/electric/1.4bpp");
+static const u16 sTilesetAnims_PowerPlantFlash_Electric_Frame2[] = INCBIN_U16("data/tilesets/primary/power_plant_flash/anim/electric/2.4bpp");
+static const u16 sTilesetAnims_PowerPlantFlash_Electric_Frame3[] = INCBIN_U16("data/tilesets/primary/power_plant_flash/anim/electric/3.4bpp");
+
+static const u16 *const sTilesetAnims_PowerPlantFlash_Electric[] = {
+    sTilesetAnims_PowerPlantFlash_Electric_Frame0,
+    sTilesetAnims_PowerPlantFlash_Electric_Frame1,
+    sTilesetAnims_PowerPlantFlash_Electric_Frame2,
+    sTilesetAnims_PowerPlantFlash_Electric_Frame3,
+};
+
+static const u16 sTilesetAnims_PowerPlantFlash_Machine_Frame0[] = INCBIN_U16("data/tilesets/primary/power_plant_flash/anim/machine/0.4bpp");
+static const u16 sTilesetAnims_PowerPlantFlash_Machine_Frame1[] = INCBIN_U16("data/tilesets/primary/power_plant_flash/anim/machine/1.4bpp");
+static const u16 sTilesetAnims_PowerPlantFlash_Machine_Frame2[] = INCBIN_U16("data/tilesets/primary/power_plant_flash/anim/machine/2.4bpp");
+static const u16 sTilesetAnims_PowerPlantFlash_Machine_Frame3[] = INCBIN_U16("data/tilesets/primary/power_plant_flash/anim/machine/3.4bpp");
+static const u16 sTilesetAnims_PowerPlantFlash_Machine_Frame4[] = INCBIN_U16("data/tilesets/primary/power_plant_flash/anim/machine/4.4bpp");
+
+static const u16 *const sTilesetAnims_PowerPlantFlash_Machine[] = {
+    sTilesetAnims_PowerPlantFlash_Machine_Frame0,
+    sTilesetAnims_PowerPlantFlash_Machine_Frame1,
+    sTilesetAnims_PowerPlantFlash_Machine_Frame2,
+    sTilesetAnims_PowerPlantFlash_Machine_Frame3,
+    sTilesetAnims_PowerPlantFlash_Machine_Frame4
+};
 
 // palette: general 00
 static const u16 sTilesetAnims_General_Flower_Frame0[] = INCBIN_U16("data/tilesets/primary/general/anim/flower/0.4bpp");
@@ -329,6 +354,16 @@ static void QueueAnimTiles_General_SandWatersEdge(u16 timer)
     AppendTilesetAnimToBuffer(sTilesetAnims_General_SandWatersEdge[timer % ARRAY_COUNT(sTilesetAnims_General_SandWatersEdge)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(464)), 18 * TILE_SIZE_4BPP);
 }
 
+static void QueueAnimTiles_PowerPlantFlash_Electric(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_PowerPlantFlash_Electric[timer % ARRAY_COUNT(sTilesetAnims_PowerPlantFlash_Electric)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(128)), 112 * TILE_SIZE_4BPP);
+}
+
+static void QueueAnimTiles_Machine(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_PowerPlantFlash_Machine[timer % ARRAY_COUNT(sTilesetAnims_PowerPlantFlash_Machine)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(240)), 17 * TILE_SIZE_4BPP);
+}
+
 //
 static void QueueAnimTiles_Building_Maquina1(u16 timer)
 {
@@ -372,6 +407,14 @@ static void TilesetAnim_Building(u16 timer)
         QueueAnimTiles_Building_Maquina4(timer / 8);
 }
 
+static void TilesetAnim_PowerPlantFlash(u16 timer)
+{
+    if (timer % 16 == 2)
+        QueueAnimTiles_PowerPlantFlash_Electric(timer / 16);
+        QueueAnimTiles_Machine(timer / 16);
+}
+
+
 void InitTilesetAnim_Building(void)
 {
     sPrimaryTilesetAnimCounter = 0;
@@ -386,6 +429,14 @@ void InitTilesetAnim_General(void)
     sPrimaryTilesetAnimCounterMax = 640;
     sPrimaryTilesetAnimCallback = TilesetAnim_General;
 }
+
+void InitTilesetAnim_PowerPlantFlash(void)
+{
+    sPrimaryTilesetAnimCounter = 0;
+    sPrimaryTilesetAnimCounterMax = 640;
+    sPrimaryTilesetAnimCallback = TilesetAnim_PowerPlantFlash;
+}
+
 
 static void QueueAnimTiles_CeladonCity_Fountain(u16 timer)
 {

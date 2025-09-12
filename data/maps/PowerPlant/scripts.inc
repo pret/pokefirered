@@ -126,6 +126,12 @@ PowerPlant_EventScript_FinalScan::
 	applymovement LOCALID_CAMERA, Common_Movement_WalkUp4
 	waitmovement 0
 	special RemoveCameraObject
+	applymovement LOCALID_PLAYER, Common_Movement_ExclamationMark
+	applymovement LOCALID_POWERPLANT_SCIENTIST1, Common_Movement_ExclamationMark
+	applymovement LOCALID_POWERPLANT_SCIENTIST2, Common_Movement_ExclamationMark
+	applymovement LOCALID_POWERPLANT_SCIENTIST3, Common_Movement_ExclamationMark
+	applymovement LOCALID_POWERPLANT_SCIENTIST4, Common_Movement_ExclamationMark
+	waitmovement 0
 	setflag FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR
 	releaseall
 	end

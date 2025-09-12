@@ -17,7 +17,7 @@ const struct Tileset gTileset_PowerPlantFlash =
     .palettes = gTilesetPalettes_PowerPlantFlash,
     .metatiles = gMetatiles_PowerPlantFlash,
     .metatileAttributes = gMetatileAttributes_PowerPlantFlash,
-    .callback = InitTilesetAnim_General,
+    .callback = InitTilesetAnim_PowerPlantFlash,
 };
 
 const struct Tileset gTileset_PalletTown =

@@ -197,8 +197,8 @@
   ],
   "warp_events": [
     {
-      "x": 8,
-      "y": 21,
+      "x": 6,
+      "y": 22,
       "elevation": 3,
       "dest_map": "MAP_ROCK_TUNNEL_1F",
       "dest_warp_id": "0"

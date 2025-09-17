@@ -132,7 +132,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "PewterCity_Museum_1F_EventScript_BrockBusy",
       "flag": "FLAG_HIDE_PEWTER_CITY_MUSEUM_BROCK_AND_SPECTATOR"
     },
     {
@@ -233,46 +233,5 @@
       "script": "PewterCity_Museum_1F_EventScript_BrockNoTeVayas"
     }
   ],
-  "bg_events": [
-    {
-      "type": "sign",
-      "x": 6,
-      "y": 3,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "PewterCity_Museum_1F_EventScript_AerodactylFossil"
-    },
-    {
-      "type": "sign",
-      "x": 10,
-      "y": 3,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_SOUTH",
-      "script": "PewterCity_Museum_1F_EventScript_OmanyteSign"
-    },
-    {
-      "type": "sign",
-      "x": 1,
-      "y": 3,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_SOUTH",
-      "script": "PewterCity_Museum_1F_EventScript_KabutoSign"
-    },
-    {
-      "type": "sign",
-      "x": 11,
-      "y": 3,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_SOUTH",
-      "script": "PewterCity_Museum_1F_EventScript_OmanyteSign"
-    },
-    {
-      "type": "sign",
-      "x": 2,
-      "y": 3,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_SOUTH",
-      "script": "PewterCity_Museum_1F_EventScript_KabutoSign"
-    }
-  ]
+  "bg_events": []
 }

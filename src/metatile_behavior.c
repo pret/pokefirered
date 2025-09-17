@@ -413,6 +413,14 @@ bool8 MetatileBehavior_IsPC(u8 metatileBehavior)
         return FALSE;
 }
 
+bool8 MetatileBehavior_IsAerodactyl(u8 metatileBehavior)
+{
+    if (metatileBehavior == MB_AERODACTYL)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 bool8 MetatileBehavior_IsKabuto(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_KABUTO)

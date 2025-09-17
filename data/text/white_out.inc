@@ -19,13 +19,13 @@ Text_MonsHealed::
 	.string "We hope you excel!$"
 
 Text_HadQuiteAnExperienceTakeRest::
-	.string "{COLOR DARK_GRAY}¡Hola, cielo!\p"
+	.string "¡Hola, cielo!\p"
 	.string "¡Tienes cara de haber aprendido\n"
 	.string "bastante!\p"
 	.string "¡Descansa un poco, criatura!$"
 
 Text_MomExplainHPGetPotions::
-	.string "{COLOR DARK_GRAY}Muy bien, tú y tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} están \n"
+	.string "Muy bien, tú y tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} están \n"
 	.string "en plena forma.\p"
 	.string "El {SHADOW DYNAMIC_COLOR4}PROF. OAK{SHADOW LIGHT_GRAY} me ha contado que la\n"
 	.string "energía de los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} se mide\n"

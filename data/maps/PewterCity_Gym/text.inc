@@ -7,15 +7,14 @@ PewterCity_Gym_Text_BrockNoEsta::
 .string "regrese.$"
 
 PewterCity_Gym_Text_BrockIntro::
-.string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY}: Ah, ¡has venido al fin!\p"
-.string "Lamento haberte hecho esperar.\n"
-.string "Pero ahora que estoy aquí...\p"
-.string "Soy {SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY}, el líder de este\n"
-.string "gimnasio.\p"
-.string "Soy un experto en {SHADOW DYNAMIC_COLOR4}POKÉMON{SHADOW LIGHT_GRAY} tipo {SHADOW DYNAMIC_COLOR4}ROCA{SHADOW LIGHT_GRAY},\n"
-.string "aunque puede que aún te sorprenda.\p"
-.string "¡Veamos si tienes lo necesario para\n"
-.string "derrotarme!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "¡Hola! Me alegra que hayas llegado\n"
+    .string "hasta aquí.\p"
+    .string "Perdona la espera.\n"
+    .string "Gracias por venir a desafiarme.\p"
+    .string "Entreno {SHADOW DYNAMIC_COLOR4}POKÉMON{SHADOW LIGHT_GRAY} de tipo {SHADOW DYNAMIC_COLOR4}ROCA{SHADOW LIGHT_GRAY},\n"
+    .string "fuertes y resistentes como tierra.\p"
+    .string "¡Quiero ver de lo que eres capaz,\n"
+    .string "así que hagamos un gran combate!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 
 
@@ -24,47 +23,39 @@ PewterCity_Gym_Text_BrockIntro::
 @ buffer that it's put into, and it stomps all over the gBattleTextBuffs after, as well as the otherwise
 @ unused array after that, sFlickerArray. Perhaps that's the reason why said array exists.
 PewterCity_Gym_Text_BrockDefeat::
-.string "TE SUBESTIMÉ...\p"
-.string "PERO LO LOGRASTE, ASÍ QUE AQUÍ TIENES\n"
-.string "LA {SHADOW LIGHT_RED}MEDALLA ROCA{SHADOW GREEN}.\p"
-.string "{FONT_NORMAL}{SHADOW LIGHT_RED}{PLAYER}{SHADOW GREEN} RECIBIÓ LA {SHADOW LIGHT_RED}MEDALLA ROCA{SHADOW GREEN}.{PAUSE_MUSIC}{PLAY_BGM}{MUS_OBTAIN_BADGE}{PAUSE 0xFE}{PAUSE 0x56}{RESUME_MUSIC}\p"
-.string "ES UNA MEDALLA OFICIAL DE LA LIGA\n"
-.string "POKÉMON.\p"
-.string "¡HARÁ QUE TUS POKÉMON SEAN MÁS FUERTES!\n"
-.string "ADEMÁS, AHORA PODRÁS USAR DESTELLO\l"
-.string "CUANDO QUIERAS.$"
+    .string "EN ESTA OCASIÓN TÚ HAS SIDO\n"
+    .string "MÁS FUERTE...$"
 
 PewterCity_Gym_Text_TakeThisWithYou::
-    .string "{COLOR DARK_GRAY}¡Espera!\n"
-    .string "Toma esto, te puede servir...$"
+    .string "Mi defensa no resistió los ataques de\n"
+    .string "tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.\p"
+    .string "Eres incluso más fuerte de lo que\n"
+    .string "imaginaba.\p"
+    .string "Toma, acepta esta medalla.$"
 
-PewterCity_Gym_Text_ReceivedTM39FromBrock::
-    .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} recibió {SHADOW DYNAMIC_COLOR4}TM39{SHADOW LIGHT_GRAY}\n"
+PewterCity_Gym_Text_BrockDefeatedTakeBadge::
+    .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} recibió {SHADOW DYNAMIC_COLOR4}MEDALLA ROCA{SHADOW LIGHT_GRAY}\n"
     .string "de manos de {SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY}.$"
 
 PewterCity_Gym_Text_ExplainTM39::
-    .string "{COLOR DARK_GRAY}Una {SHADOW DYNAMIC_COLOR4}MT{SHADOW LIGHT_GRAY} (Máquina Técnica) contiene\n"
-    .string "una técnica para {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.\p"
+    .string "Gracias, {SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}.\n"
+    .string "¡Ha sido un gran combate!\p"
+    .string "Como muestra de aprecio, quiero\n"
+    .string "darte el movimiento {SHADOW DYNAMIC_COLOR4}TUMBA ROCAS{SHADOW LIGHT_GRAY}.\p"
+    .string "Lanzando rocas reduce la velocidad\n"
+    .string "del rival.$"
 
-    .string "Usar una {SHADOW DYNAMIC_COLOR4}MT{SHADOW LIGHT_GRAY} enseña el movimiento\n"
-    .string "que contiene a un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.\p"
-
-    .string "Las {SHADOW DYNAMIC_COLOR4}MT{SHADOW LIGHT_GRAY} solo pueden usarse una vez.\l"
-    .string "Así que, cuando uses una, elige\n"
-    .string "con cuidado al {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.\p"
-
-    .string "De todos modos...\n"
-    .string "La {SHADOW DYNAMIC_COLOR4}MT39{SHADOW LIGHT_GRAY} contiene {SHADOW DYNAMIC_COLOR4}TUMBA ROCAS{SHADOW LIGHT_GRAY}.\p"
-    .string "Lanza rocas al rival y\n"
-    .string "reduce su {SHADOW DYNAMIC_COLOR4}VELOCIDAD{SHADOW LIGHT_GRAY}.$"
+PewterCity_Gym_Text_BrockDefeatedTakeMT::
+    .string "{COLOR DARK_GRAY}{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} recibió {SHADOW DYNAMIC_COLOR4}MT39{SHADOW LIGHT_GRAY}\n"
+    .string "de manos de {SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY}.$"
 
 PewterCity_Gym_Text_BrockPostBattle::
-    .string "{COLOR DARK_GRAY}¡En el mundo hay todo tipo de\n"
-    .string "{SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY}!\p"
-    .string "¡Parece que eres muy buena\n"
-    .string "entrenando {SHADOW DYNAMIC_COLOR4}POKÉMON{SHADOW LIGHT_GRAY}!\p"
-    .string "¡Ve al {SHADOW DYNAMIC_COLOR4}GIMNASIO{SHADOW LIGHT_GRAY} de {SHADOW DYNAMIC_COLOR4}CELESTE{SHADOW LIGHT_GRAY} y\n"
-    .string "pon a prueba tus habilidades!$"
+    .string "El mundo es enorme...\p"
+    .string "Encontrarás muchos {SHADOW DYNAMIC_COLOR4}ENTRENADORES{SHADOW LIGHT_GRAY}\n"
+    .string "tan fuertes como tú.\p"
+    .string "Espera y verás...\p"
+    .string "Yo también seguiré haciéndome\n"
+    .string "más fuerte.$"
 
 PewterCity_Gym_Text_DontHaveRoomForThis::
     .string "You don't have room for this.$"
@@ -96,8 +87,6 @@ PewterCity_Gym_Text_GustavoPostBattle::
 .string "{COLOR DARK_GRAY}¡{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} también es duro, pero seguro\n"
 .string "puedes con él!$"
 
-
-
 PewterCity_Gym_Text_LetMeTakeYouToTheTop::
     .string "¡Puedo decirte lo que se necesita\n"
     .string "para ser un {SHADOW DYNAMIC_COLOR4}CAMPEÓN POKéMON{SHADOW LIGHT_GRAY}!\p"
@@ -111,8 +100,8 @@ PewterCity_Gym_Text_LetsGetHappening::
 
 PewterCity_Gym_Text_TryDifferentPartyOrders::
     .string "¡El último {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} que enviaré a\n"
-    .string "luchar te sorprenderá con sus ataques\l"
-    .string "de {SHADOW DYNAMIC_COLOR4}TIPO VOLADOR{SHADOW LIGHT_GRAY}!\p"
+    .string "luchar te sorprenderá con sus\l"
+    .string "ataques de {SHADOW DYNAMIC_COLOR4}TIPO ROCA{SHADOW LIGHT_GRAY}!\p"
     .string "Cambiar el orden de tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\n"
     .string "podría facilitarte las cosas\l"
     .string "durante el combate.$"

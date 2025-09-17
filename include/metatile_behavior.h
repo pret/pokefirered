@@ -49,6 +49,7 @@ bool8 MetatileBehavior_IsSlideEast(u8 metatileBehavior);
 bool8 MetatileBehavior_IsCounter(u8 metatileBehavior);
 bool8 MetatileBehavior_IsPlayerFacingTVScreen(u8 metatileBehavior, u8 playerDirection);
 bool8 MetatileBehavior_IsPC(u8 metatileBehavior);
+bool8 MetatileBehavior_IsAerodactyl(u8 metatileBehavior);
 bool8 MetatileBehavior_IsKabuto(u8 metatileBehavior);
 bool8 MetatileBehavior_IsOmanyte(u8 metatileBehavior);
 bool8 MetatileBehavior_HasRipples(u8 metatileBehavior);

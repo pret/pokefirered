@@ -570,6 +570,8 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     gSpecialVar_Facing = direction;
     if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
         return EventScript_PC;
+    if (MetatileBehavior_IsAerodactyl(metatileBehavior) == TRUE)
+        return PewterCity_Museum_1F_EventScript_AerodactylFossil;
     if (MetatileBehavior_IsKabuto(metatileBehavior) == TRUE)
         return PewterCity_Museum_1F_EventScript_KabutoSign;
     if (MetatileBehavior_IsOmanyte(metatileBehavior) == TRUE)

@@ -183,6 +183,19 @@ PewterCity_Museum_1F_EventScript_AerodactylFossil::
 	releaseall
 	end
 
+PewterCity_Museum_1F_EventScript_BrockBusy::
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_BrockWaitAMoment
+	closemessage
+	delay 30
+	namebox Name_Brock
+	msgbox PewterCity_Museum_1F_Text_BrockBusy MSGBOX_NPC
+	closemessage
+	applymovement LOCALID_MUSEUM_BROCK, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	releaseall
+	end
+
 PewterCity_Museum_1F_EventScript_Silvio::
 	namebox Name_Desconocido
 	msgbox PewterCity_Museum_1F_Text_Silvio

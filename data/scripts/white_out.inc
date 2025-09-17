@@ -24,9 +24,13 @@ EventScript_AfterWhiteOutMomHeal::
 	textcolor NPC_TEXT_COLOR_FEMALE
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
+	namebox Name_Mama
 	msgbox Text_HadQuiteAnExperienceTakeRest
+	closemessage
 	call EventScript_OutOfCenterPartyHeal
+	namebox Name_Mama
 	msgbox Text_MomExplainHPGetPotions
+	closemessage
 	fadedefaultbgm
 	releaseall
 	end

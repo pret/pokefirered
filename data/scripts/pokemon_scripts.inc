@@ -72,6 +72,21 @@ Common_EventScript_Pokemon_Clefairy::
 	waitmovement 0
 	release
 	end
+	
+Common_EventScript_Pokemon_Bonsly::
+	faceplayer
+	waitse
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	playmoncry SPECIES_BONSLY, CRY_MODE_NORMAL
+	namebox Name_Bonsly
+	msgbox Common_Text_Pokemon_Bonsly
+	closemessage
+	waitmoncry
+	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
 
 Common_Text_Pokemon_Geodude::
 .string "¡Geo!$"
@@ -87,3 +102,6 @@ Common_Text_Pokemon_Sandshrew::
 
 Common_Text_Pokemon_Clefairy::
 .string "¡Clefa!$"
+
+Common_Text_Pokemon_Bonsly::
+.string "¡Bons-bonsly!$"

@@ -35,7 +35,7 @@ Route1_EventScript_TrainerAnibalIntro::
     .string "{COLOR DARK_GRAY}Sabes que significa eso, ¿verdad?$"
 
 Route1_EventScript_TrainerAnibalDefeat::
-    .string "¡Pero que fuerte eres!$"
+    .string "¡PERO QUE FUERTE ERES!$"
 
 Route1_EventScript_TrainerAnibalPostBattle::
     .string "{COLOR DARK_GRAY}¡Vayas por donde vayas habrá\n"

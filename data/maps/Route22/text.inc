@@ -1,6 +1,6 @@
 Route22_Text_EarlyRivalIntro::
 	.string "¡Eh! ¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
-	.string "¿Vas a la {SHADOW DYNAMIC_COLOR4}LIGA POKéMON{SHADOW LIGHT_GRAY}?\n"
+	.string "¿Vas a la {SHADOW DYNAMIC_COLOR4}LIGA POKéMON{SHADOW LIGHT_GRAY}?\p"
 	.string "¡Olvídalo! ¡Seguro que no tienes\n"
 	.string "ninguna {SHADOW DYNAMIC_COLOR4}MEDALLA{SHADOW LIGHT_GRAY}!\p"
 	.string "¡El guardia no te dejará pasar!\p"
@@ -30,7 +30,7 @@ Route22_Text_RivalShouldCatchSomeMons::
 
 Route22_Text_LateRivalIntro::
 	.string "¡Eh! ¡{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY}!\p"
-	.string "¿Vas a la {SHADOW DYNAMIC_COLOR4}LIGA POKéMON{SHADOW LIGHT_GRAY}?\n"
+	.string "¿Vas a la {SHADOW DYNAMIC_COLOR4}LIGA POKéMON{SHADOW LIGHT_GRAY}?\p"
 	.string "¡Olvídalo! ¡Seguro que no tienes\n"
 	.string "ninguna {SHADOW DYNAMIC_COLOR4}MEDALLA{SHADOW LIGHT_GRAY}!\p"
 	.string "¡El guardia no te dejará pasar!\p"

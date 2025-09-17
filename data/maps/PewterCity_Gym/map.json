@@ -16,6 +16,7 @@
   "connections": null,
   "object_events": [
     {
+      "local_id": "LOCALID_GYM_BROCK",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BROCK",
       "x": 6,
@@ -82,7 +83,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "PewterCity_Gym_EventScript_Bonsly",
+      "script": "Common_EventScript_Pokemon_Bonsly",
       "flag": "0"
     }
   ],

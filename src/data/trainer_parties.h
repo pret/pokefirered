@@ -868,13 +868,13 @@ static const struct TrainerMonNoItemDefaultMoves sParty_SailorDwayne[] = {
 static const struct TrainerMonNoItemCustomMoves sParty_CamperLiam[] = {
     {
         .iv = 0,
-        .lvl = 11,
+        .lvl = 9 ,
         .species = SPECIES_ARON,
         .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_ROCK_TOMB, MOVE_NONE},
     },
     {
         .iv = 0,
-        .lvl = 13,
+        .lvl = 10,
         .species = SPECIES_PARAS,
     },
 };
@@ -882,12 +882,12 @@ static const struct TrainerMonNoItemCustomMoves sParty_CamperLiam[] = {
 static const struct TrainerMonNoItemCustomMoves sParty_HikerGustavo[] = {
     {
         .iv = 0,
-        .lvl = 11,
+        .lvl = 9,
         .species = SPECIES_LARVITAR,
     },
     {
         .iv = 0,
-        .lvl = 13,
+        .lvl = 10,
         .species = SPECIES_DIGLETT,
     },
 };
@@ -5628,25 +5628,25 @@ static const struct TrainerMonItemCustomMoves sParty_EliteFourLance[] = {
 static const struct TrainerMonNoItemCustomMoves sParty_LeaderBrock[] = {
     {
         .iv = 0,
-        .lvl = 19,
+        .lvl = 9,
         .species = SPECIES_ONIX,
         .moves = {MOVE_ROCK_TOMB, MOVE_ROCK_THROW, MOVE_BIND, MOVE_TAIL_WHIP},
     },
     {
         .iv = 0,
-        .lvl = 20,
+        .lvl = 10,
         .species = SPECIES_GEODUDE,
         .moves = {MOVE_ROCK_SLIDE, MOVE_MAGNITUDE, MOVE_IRON_DEFENSE, MOVE_BODY_SLAM},
     },
     {
         .iv = 0,
-        .lvl = 15,
+        .lvl = 11,
         .species = SPECIES_KABUTO,
         .moves = {MOVE_WATER_GUN, MOVE_ROCK_THROW, MOVE_BUBBLE_BEAM, MOVE_CURSE},
     },
     {
         .iv = 0,
-        .lvl = 14,
+        .lvl = 7,
         .species = SPECIES_BONSLY,
         .moves = {MOVE_ROCK_THROW, MOVE_SLAM, MOVE_MIMIC, MOVE_CURSE},
     },
@@ -5655,25 +5655,25 @@ static const struct TrainerMonNoItemCustomMoves sParty_LeaderBrock[] = {
 static const struct TrainerMonNoItemCustomMoves sParty_LeaderBrock2[] = {
     {
         .iv = 0,
-        .lvl = 19,
+        .lvl = 9,
         .species = SPECIES_ONIX,
         .moves = {MOVE_ROCK_TOMB, MOVE_ROCK_THROW, MOVE_BIND, MOVE_TAIL_WHIP},
     },
     {
         .iv = 0,
-        .lvl = 20,
+        .lvl = 10,
         .species = SPECIES_RHYHORN,
         .moves = {MOVE_STOMP, MOVE_HORN_ATTACK, MOVE_LEER, MOVE_SAND_ATTACK},
     },
     {
         .iv = 0,
-        .lvl = 15,
+        .lvl = 11,
         .species = SPECIES_OMANYTE,
         .moves = {MOVE_WATER_GUN, MOVE_MUD_SHOT, MOVE_ROCK_TOMB, MOVE_WITHDRAW},
     },
     {
         .iv = 0,
-        .lvl = 14,
+        .lvl = 7,
         .species = SPECIES_BONSLY,
         .moves = {MOVE_ROCK_THROW, MOVE_SLAM, MOVE_MIMIC, MOVE_CURSE},
     },

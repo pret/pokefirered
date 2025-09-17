@@ -24,6 +24,15 @@ PewterCity_Museum_1F_Text_AlwaysExcited::
     .string "Mientras tanto, ¿por qué no echas un\n"
     .string "vistazo a las exhibiciones?$"
 
+PewterCity_Museum_1F_Text_BrockWaitAMoment::
+    .string "Un momento, por favor...$"
+
+PewterCity_Museum_1F_Text_BrockBusy::
+    .string "Estoy dando una explicación\n"
+    .string "sobre estos fósiles.\p"
+    .string "Échales un vistazo tú también.\n"
+    .string "Luego hablamos, ¿de acuerdo?$"
+
 PewterCity_Museum_1F_Text_DontLeaveWithoutLooking::
     .string "¡No te vayas sin echarle un vistazo a\n"
     .string "las exhibiciones!$"
@@ -103,8 +112,8 @@ PewterCity_Museum_1F_Text_Spectator2::
     .string "¡Vaya, qué interesante!\p"
     .string "Nunca había visto tantos fósiles de\n"
     .string "cerca.\p"
-    .string "{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} sabe mucho sobre estos {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\n"
-    .string "antiguos.$"
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} sabe mucho sobre estos\n"
+    .string "{SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} antiguos.$"
 
 PewterCity_Museum_1F_Text_Spectator3::
     .string "Es fascinante, ¿verdad?\p"
@@ -117,8 +126,8 @@ PewterCity_Museum_1F_Text_Spectator4::
     .string "antes?$"
 
 PewterCity_Museum_1F_Text_Spectator5::
-    .string "{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} demuestra un profundo conocimiento\n"
-    .string "de los fósiles.$"
+    .string "{SHADOW DYNAMIC_COLOR4}BROCK{SHADOW LIGHT_GRAY} demuestra un profundo\n"
+    .string "conocimiento de los fósiles.$"
 
 @No incluido en la beta
 PewterCity_Museum_1F_Text_AmberContainsGeneticMatter::

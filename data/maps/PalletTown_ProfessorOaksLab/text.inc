@@ -143,11 +143,11 @@ PalletTown_ProfessorOaksLab_Text_RivalDefeat::
 
 @ Also used for early Route 22 battle
 Text_RivalVictory::
-    .string "¡Bien!\n"
-    .string "¿No soy el mejor?$"
+    .string "¡BIEN!\n"
+    .string "¿NO SOY EL MEJOR?$"
 
 PalletTown_ProfessorOaksLab_Text_RivalGramps::
-    .string "{RIVAL}: Gramps!$"
+    .string "¡RAYOS!$"
 
 PalletTown_ProfessorOaksLab_Text_RivalWhatDidYouCallMeFor::
     .string "{RIVAL}: I almost forgot!\n"

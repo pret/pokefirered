@@ -48,3 +48,6 @@ Name_Nidoran::
 
 Name_Jigglypuff::
     .string "JIGGLYPUFF$"
+
+Name_Bonsly::
+    .string "BONSLY$"

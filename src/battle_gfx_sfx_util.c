@@ -849,11 +849,11 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battler, bool8 loadMonSprite)
             position = GetBattlerPosition(battler);
 
         if (IsContest())
-            DecompressDataWithHeaderVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->spritesGfx[position]);
+            DecompressDataWithHeaderVram(gSubstituteDollBackGfx, gMonSpritesGfxPtr->spritesGfx[position]);
         else if (!IsOnPlayerSide(battler))
-            DecompressDataWithHeaderVram(gSubstituteDollGfx, gMonSpritesGfxPtr->spritesGfx[position]);
+            DecompressDataWithHeaderVram(gSubstituteDollFrontGfx, gMonSpritesGfxPtr->spritesGfx[position]);
         else
-            DecompressDataWithHeaderVram(gSubstituteDollTilemap, gMonSpritesGfxPtr->spritesGfx[position]);
+            DecompressDataWithHeaderVram(gSubstituteDollBackGfx, gMonSpritesGfxPtr->spritesGfx[position]);
 
         for (i = 1; i < 4; i++)
         {

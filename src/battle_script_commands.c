@@ -5,7 +5,7 @@
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
 #include "battle_scripts.h"
-#include "battle_terrain.h"
+#include "battle_environment.h"
 #include "battle_z_move.h"
 #include "item.h"
 #include "util.h"

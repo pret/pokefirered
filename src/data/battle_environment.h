@@ -1,6 +1,6 @@
-#include "graphics/battle_terrain.h"
+#include "graphics/battle_environment.h"
 
-const struct BattleTerrain gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] =
+const struct BattleEnvironmentInfo gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT] =
 {
     [BATTLE_ENVIRONMENT_GRASS] =
     {

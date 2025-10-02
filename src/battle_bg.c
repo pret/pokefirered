@@ -5,7 +5,7 @@
 #include "battle_main.h"
 #include "battle_message.h"
 #include "battle_setup.h"
-#include "battle_terrain.h"
+#include "battle_environment.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -29,7 +29,7 @@
 #include "constants/trainers.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_partner.h"
-#include "data/battle_terrain.h"
+#include "data/battle_environment.h"
 
 static u8 GetBattleTerrainOverride(void);
 

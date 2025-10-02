@@ -3,7 +3,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_gfx_sfx_util.h"
-#include "battle_terrain.h"
+#include "battle_environment.h"
 #include "bg.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -41,7 +41,7 @@
 #include "constants/items.h"
 #include "constants/event_objects.h"
 
-extern const struct BattleTerrain gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT];
+extern const struct BattleEnvironmentInfo gBattleEnvironmentInfo[BATTLE_ENVIRONMENT_COUNT];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadowsSized;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;

@@ -158,7 +158,7 @@ enum DebugBattleEnvironment
 
 // *******************************
 // Constants
-#define DEBUG_MENU_FONT FONT_NORMAL
+#define DEBUG_MENU_FONT FONT_SHORT
 
 #define DEBUG_MENU_WIDTH_MAIN 17
 #define DEBUG_MENU_HEIGHT_MAIN 9

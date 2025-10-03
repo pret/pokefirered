@@ -2872,7 +2872,7 @@ static void SortBagItems(u8 taskId)
 
     StringCopy(gStringVar1, sSortTypeStrings[tSortType]);
     StringExpandPlaceholders(gStringVar4, sText_ItemsSorted);
-    DisplayItemMessage(taskId, 1, gStringVar4, Task_SortFinish);
+    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, Task_SortFinish);
 }
 
 #undef tSortType
@@ -2881,8 +2881,7 @@ static void Task_SortFinish(u8 taskId)
 {
     if (gMain.newKeys & (A_BUTTON | B_BUTTON))
     {
-        RemoveItemMessageWindow(4);
-        ReturnToItemList(taskId);
+        CloseItemMessage(taskId);
     }
 }
 

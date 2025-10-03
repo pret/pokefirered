@@ -1,7 +1,7 @@
-// #ifndef GUARD_FOLLOWER_NPC_H
-// #define GUARD_FOLLOWER_NPC_H
+#ifndef GUARD_FOLLOWER_NPC_H
+#define GUARD_FOLLOWER_NPC_H
 
-// #include "constants/follower_npc.h"
+#include "constants/follower_npc.h"
 
 // #define MOVEMENT_INVALID 0xFE
 
@@ -126,4 +126,4 @@
 // void Task_MoveNPCFollowerAfterForcedMovement(u8 taskId);
 // void Task_HideNPCFollowerAfterMovementFinish(u8 taskId);
 
-// #endif // GUARD_FOLLOWER_NPC_H
+#endif // GUARD_FOLLOWER_NPC_H

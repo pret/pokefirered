@@ -689,84 +689,22 @@ static const union AnimCmd *const sBackAnims_Hoenn[] =
     sAnimCmd_Point_HGSS,
 };
 
-#define BACK_PIC_TABLE_ENTRY(backPicData, entryId) \
-    {.data = backPicData + TRAINER_PIC_SIZE * entryId, .size = TRAINER_PIC_SIZE}
-
-const struct SpriteFrameImage gTrainerBackPicTable_Red[] =
-{
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Red, 0),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Red, 1),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Red, 2),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Red, 3),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Red, 4),
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_Leaf[] =
-{
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Leaf, 0),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Leaf, 1),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Leaf, 2),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Leaf, 3),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Leaf, 4),
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_Pokedude[] =
-{
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Pokedude, 0),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Pokedude, 1),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Pokedude, 2),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Pokedude, 3),
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_OldMan[] =
-{
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_OldMan, 0),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_OldMan, 1),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_OldMan, 2),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_OldMan, 3),
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_RSBrendan[] =
-{
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSBrendan, 0),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSBrendan, 1),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSBrendan, 2),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSBrendan, 3),
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_RSMay[] =
-{
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSMay, 0),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSMay, 1),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSMay, 2),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_RSMay, 3),
-};
-
-const struct SpriteFrameImage gTrainerBackPicTable_Steven[] =
-{
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Steven, 0),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Steven, 1),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Steven, 2),
-    BACK_PIC_TABLE_ENTRY(gTrainerBackPic_Steven, 3),
-};
-
-
-#define TRAINER_BACK_SPRITE(trainerId, yOffset, backPicData, backPicTable, paletteData, anim)                                    \
-    [trainerId] =                                                                                                               \
-    {                                                                                                                           \
-        .coordinates = {.size = 8, .y_offset = yOffset},                                                                        \
-        .backPic = {.data = (const u32 *)backPicData, .size = TRAINER_PIC_SIZE * ARRAY_COUNT(backPicTable), .tag = trainerId},  \
-        .palette = {.data = paletteData, .tag = trainerId},                                                                     \
-        .animation = anim,                                                                                                      \
+#define TRAINER_BACK_SPRITE(trainerPic, yOffset, sprite, pal, anim)                          \
+    [trainerPic] =                                                                            \
+    {                                                                                        \
+        .coordinates = {.size = 8, .y_offset = yOffset},                                     \
+        .backPic = {.data = sprite, .size = TRAINER_PIC_SIZE, .relativeFrames = TRUE},       \
+        .palette = {.data = pal, .tag = trainerPic},                                         \
+        .animation = anim,                                                                   \
     }
 
 const struct TrainerBacksprite gTrainerBacksprites[] =
 {
-    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_RED, 5, gTrainerBackPic_Red, gTrainerBackPicTable_Red, gTrainerPalette_RedBackPic, sBackAnims_Kanto),
-    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_LEAF, 5, gTrainerBackPic_Leaf, gTrainerBackPicTable_Leaf, gTrainerPalette_LeafBackPic, sBackAnims_Kanto),
-    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN, 4, gTrainerBackPic_RSBrendan, gTrainerBackPicTable_RSBrendan, gTrainerPalette_RSBrendan1, sBackAnims_Hoenn),
-    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY, 4, gTrainerBackPic_RSMay, gTrainerBackPicTable_RSMay, gTrainerPalette_RSMay1, sBackAnims_Hoenn),
-    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_POKEDUDE, 4, gTrainerBackPic_Pokedude, gTrainerBackPicTable_Pokedude, gTrainerPalette_PokedudeBackPic, sBackAnims_OldManPokedude),
-    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_OLD_MAN, 4, gTrainerBackPic_OldMan, gTrainerBackPicTable_OldMan, gTrainerPalette_OldManBackPic, sBackAnims_OldManPokedude),
-    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_STEVEN, 4, gTrainerBackPic_Steven, gTrainerBackPicTable_Steven, gTrainerPalette_Steven, sBackAnims_Hoenn),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_RED, 5, gTrainerBackPic_Red, gTrainerPalette_RedBackPic, sBackAnims_Kanto),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_LEAF, 5, gTrainerBackPic_Leaf, gTrainerPalette_LeafBackPic, sBackAnims_Kanto),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN, 4, gTrainerBackPic_RSBrendan, gTrainerPalette_RSBrendan1, sBackAnims_Hoenn),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY, 4, gTrainerBackPic_RSMay, gTrainerPalette_RSMay1, sBackAnims_Hoenn),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_POKEDUDE, 4, gTrainerBackPic_Pokedude, gTrainerPalette_PokedudeBackPic, sBackAnims_OldManPokedude),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_OLD_MAN, 4, gTrainerBackPic_OldMan, gTrainerPalette_OldManBackPic, sBackAnims_OldManPokedude),
+    TRAINER_BACK_SPRITE(TRAINER_BACK_PIC_STEVEN, 4, gTrainerBackPic_Steven, gTrainerPalette_Steven, sBackAnims_Hoenn),
 };

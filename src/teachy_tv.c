@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_main.h"
 #include "task.h"
 #include "gflib.h"
 #include "menu_helpers.h"
@@ -16,7 +17,6 @@
 #include "event_data.h"
 #include "load_save.h"
 #include "battle_transition.h"
-#include "battle_main.h"
 #include "battle.h"
 #include "battle_controllers.h"
 #include "global.fieldmap.h"

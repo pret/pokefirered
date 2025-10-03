@@ -4545,7 +4545,7 @@ static bool8 IsHPRecoveryItem(u16 item)
         return FALSE;
 }
 
-static void GetMedicineItemEffectMessage(u16 item)
+static void GetMedicineItemEffectMessage(u16 item, u32 statusCured)
 {
     switch (GetItemEffectType(item))
     {
@@ -4558,8 +4558,11 @@ static void GetMedicineItemEffectMessage(u16 item)
     case ITEM_EFFECT_CURE_BURN:
         StringExpandPlaceholders(gStringVar4, gText_PkmnBurnHealed);
         break;
-    case ITEM_EFFECT_CURE_FREEZE:
-        StringExpandPlaceholders(gStringVar4, gText_PkmnThawedOut);
+    case ITEM_EFFECT_CURE_FREEZE_FROSTBITE:
+        if (statusCured & STATUS1_FREEZE)
+            StringExpandPlaceholders(gStringVar4, gText_PkmnThawedOut);
+        if (statusCured & STATUS1_FROSTBITE)
+            StringExpandPlaceholders(gStringVar4, gText_PkmnFrostbiteHealed);
         break;
     case ITEM_EFFECT_CURE_PARALYSIS:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfParalysis);
@@ -5013,6 +5016,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc func)
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 item = gSpecialVar_ItemId;
     bool8 canHeal, cannotUse;
+    u32 oldStatus = GetMonData(mon, MON_DATA_STATUS);
 
     if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE) {
         cannotUse = TRUE;
@@ -5062,7 +5066,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc func)
         else
         {
             GetMonNickname(mon, gStringVar1);
-            GetMedicineItemEffectMessage(item);
+            GetMedicineItemEffectMessage(item, oldStatus);
             DisplayPartyMenuMessage(gStringVar4, TRUE);
             ScheduleBgCopyTilemapToVram(2);
             gTasks[taskId].func = func;
@@ -5353,7 +5357,7 @@ static void ItemUseCB_RestorePP(u8 taskId, TaskFunc func)
     RemoveBagItem(gSpecialVar_ItemId, 1);
     move = GetMonData(mon, gPartyMenu.ppMoveSlot + MON_DATA_MOVE1);
     StringCopy(gStringVar1, gMovesInfo[move].name);
-    GetMedicineItemEffectMessage(gSpecialVar_ItemId);
+    GetMedicineItemEffectMessage(gSpecialVar_ItemId, 0);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
     ScheduleBgCopyTilemapToVram(2);
     gTasks[taskId].func = Task_ClosePartyMenuAfterText;
@@ -6127,16 +6131,16 @@ u8 GetItemEffectType(u16 item)
     u32 statusCure;
     const u8 *itemEffect = GetItemEffect(item);
 
-    // Read the item's effect properties.
     if (itemEffect == NULL)
         return ITEM_EFFECT_NONE;
 
-    if ((itemEffect[0] & ITEM0_DIRE_HIT) || itemEffect[1] || itemEffect[2] || (itemEffect[3] & ITEM3_GUARD_SPEC))
+    if ((itemEffect[0] & ITEM0_DIRE_HIT) || itemEffect[1] || (itemEffect[3] & ITEM3_GUARD_SPEC))
         return ITEM_EFFECT_X_ITEM;
     else if (itemEffect[0] & ITEM0_SACRED_ASH)
         return ITEM_EFFECT_SACRED_ASH;
     else if (itemEffect[3] & ITEM3_LEVEL_UP)
         return ITEM_EFFECT_RAISE_LEVEL;
+
     statusCure = itemEffect[3] & ITEM3_STATUS_ALL;
     if (statusCure || (itemEffect[0] >> 7))
     {
@@ -6147,7 +6151,7 @@ u8 GetItemEffectType(u16 item)
         else if (statusCure == ITEM3_BURN)
             return ITEM_EFFECT_CURE_BURN;
         else if (statusCure == ITEM3_FREEZE)
-            return ITEM_EFFECT_CURE_FREEZE;
+            return ITEM_EFFECT_CURE_FREEZE_FROSTBITE;
         else if (statusCure == ITEM3_PARALYSIS)
             return ITEM_EFFECT_CURE_PARALYSIS;
         else if (statusCure == ITEM3_CONFUSION)
@@ -6157,6 +6161,7 @@ u8 GetItemEffectType(u16 item)
         else
             return ITEM_EFFECT_CURE_ALL_STATUS;
     }
+
     if (itemEffect[4] & (ITEM4_REVIVE | ITEM4_HEAL_HP))
         return ITEM_EFFECT_HEAL_HP;
     else if (itemEffect[4] & ITEM4_EV_ATK)

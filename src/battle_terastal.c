@@ -62,9 +62,9 @@ void ApplyBattlerVisualsForTeraAnim(u32 battler)
 // Returns whether a battler can Terastallize.
 bool32 CanTerastallize(u32 battler)
 {
-    enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
+    enum ItemHoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
 
-    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED && GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_TERAPAGOS)
+    if (gBattleMons[battler].volatiles.transformed && GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_TERAPAGOS)
         return FALSE;
 
     // Prevents Zigzagoon from terastalizing in vanilla.
@@ -132,20 +132,19 @@ bool32 IsTypeStellarBoosted(u32 battler, u32 type)
 
 // Returns the STAB power multiplier to use when Terastallized.
 // Power multipliers from Smogon Research thread.
-uq4_12_t GetTeraMultiplier(u32 battler, u32 type)
+uq4_12_t GetTeraMultiplier(struct DamageContext *ctx)
 {
-    u32 teraType = GetBattlerTeraType(battler);
-    bool32 hasAdaptability = (GetBattlerAbility(battler) == ABILITY_ADAPTABILITY);
+    u32 teraType = GetBattlerTeraType(ctx->battlerAtk);
 
     // Safety check.
-    if (GetActiveGimmick(battler) != GIMMICK_TERA)
+    if (GetActiveGimmick(ctx->battlerAtk) != GIMMICK_TERA)
         return UQ_4_12(1.0);
 
     // Stellar-type checks.
     if (teraType == TYPE_STELLAR)
     {
-        bool32 shouldBoost = IsTypeStellarBoosted(battler, type);
-        if (IS_BATTLER_OF_BASE_TYPE(battler, type))
+        bool32 shouldBoost = IsTypeStellarBoosted(ctx->battlerAtk, ctx->moveType);
+        if (IS_BATTLER_OF_BASE_TYPE(ctx->battlerAtk, ctx->moveType))
         {
             if (shouldBoost)
                 return UQ_4_12(2.0);
@@ -158,18 +157,18 @@ uq4_12_t GetTeraMultiplier(u32 battler, u32 type)
             return UQ_4_12(1.0);
     }
     // Base and Tera type.
-    if (type == teraType && IS_BATTLER_OF_BASE_TYPE(battler, type))
+    if (ctx->moveType == teraType && IS_BATTLER_OF_BASE_TYPE(ctx->battlerAtk, ctx->moveType))
     {
-        if (hasAdaptability)
+        if (ctx->abilityAtk == ABILITY_ADAPTABILITY)
             return UQ_4_12(2.25);
         else
             return UQ_4_12(2.0);
     }
     // Base or Tera type only.
-    else if ((type == teraType && !IS_BATTLER_OF_BASE_TYPE(battler, type))
-             || (type != teraType && IS_BATTLER_OF_BASE_TYPE(battler, type)))
+    else if ((ctx->moveType == teraType && !IS_BATTLER_OF_BASE_TYPE(ctx->battlerAtk, ctx->moveType))
+             || (ctx->moveType != teraType && IS_BATTLER_OF_BASE_TYPE(ctx->battlerAtk, ctx->moveType)))
     {
-        if (hasAdaptability)
+        if (ctx->abilityAtk == ABILITY_ADAPTABILITY)
             return UQ_4_12(2.0);
         else
             return UQ_4_12(1.5);

@@ -17,6 +17,13 @@
 #include "constants/items.h"
 #include "constants/maps.h"
 
+#define DUMMY_PC_BAG_POCKET                 \
+{                                           \
+    .id = POCKET_DUMMY,                     \
+    .capacity = PC_ITEMS_COUNT,             \
+    .itemSlots = gSaveBlock1Ptr->pcItems,   \
+}
+
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {};
 
 static const u8 *ItemId_GetPluralName(u16);
@@ -27,6 +34,27 @@ static bool32 DoesItemHavePluralName(u16);
 #include "pokemon_summary_screen.h"
 #include "data/pokemon/item_effects.h"
 #include "data/items.h"
+
+#define UNPACK_TM_ITEM_ID(_tm) [CAT(ENUM_TM_HM_, _tm) + 1] = { CAT(ITEM_TM_, _tm), CAT(MOVE_, _tm) },
+#define UNPACK_HM_ITEM_ID(_hm) [CAT(ENUM_TM_HM_, _hm) + 1] = { CAT(ITEM_HM_, _hm), CAT(MOVE_, _hm) },
+
+const struct TmHmIndexKey gTMHMItemMoveIds[NUM_ALL_MACHINES + 1] =
+{
+    [0] = { ITEM_NONE, MOVE_NONE }, // Failsafe
+    FOREACH_TM(UNPACK_TM_ITEM_ID)
+    FOREACH_HM(UNPACK_HM_ITEM_ID)
+    /*
+     * Expands to the following:
+     *
+     * [1] = { ITEM_TM_FOCUS_PUNCH, MOVE_FOCUS_PUNCH },
+     * [2] = { ITEM_TM_DRAGON_CLAW, MOVE_DRAGON_CLAW },
+     * [3] = { ITEM_TM_WATER_PULSE, MOVE_WATER_PULSE },
+     * etc etc
+    */
+};
+
+#undef UNPACK_TM_ITEM_ID
+#undef UNPACK_HM_ITEM_ID
 
 static inline u16 GetBagItemIdPocket(struct BagPocket *pocket, u32 pocketPos)
 {
@@ -726,9 +754,11 @@ ItemUseFunc GetItemFieldFunc(u16 itemId)
     return gItemsInfo[SanitizeItemId(itemId)].fieldUseFunc;
 }
 
-bool8 GetItemBattleUsage(u16 itemId)
+// Returns an item's battle effect script ID.
+u8 GetItemBattleUsage(u16 itemId)
 {
-    u16 item = SanitizeItemId(itemId);    
+    u16 item = SanitizeItemId(itemId);
+    // Handle E-Reader berries.
     if (item == ITEM_ENIGMA_BERRY_E_READER)
     {
         switch (GetItemEffectType(gSpecialVar_ItemId))
@@ -740,7 +770,7 @@ bool8 GetItemBattleUsage(u16 itemId)
             case ITEM_EFFECT_CURE_POISON:
             case ITEM_EFFECT_CURE_SLEEP:
             case ITEM_EFFECT_CURE_BURN:
-            case ITEM_EFFECT_CURE_FREEZE:
+            case ITEM_EFFECT_CURE_FREEZE_FROSTBITE:
             case ITEM_EFFECT_CURE_PARALYSIS:
             case ITEM_EFFECT_CURE_ALL_STATUS:
             case ITEM_EFFECT_CURE_CONFUSION:
@@ -800,22 +830,30 @@ u32 GetItemStatus1Mask(u16 itemId)
     return 0;
 }
 
-u32 GetItemStatus2Mask(u16 itemId)
+bool32 ItemHasVolatileFlag(u16 itemId, enum Volatile _volatile)
 {
     const u8 *effect = GetItemEffect(itemId);
-    if (effect[3] & ITEM3_STATUS_ALL)
-        return STATUS2_INFATUATION | STATUS2_CONFUSION;
-    else if (effect[0] & ITEM0_INFATUATION)
-        return STATUS2_INFATUATION;
-    else if (effect[3] & ITEM3_CONFUSION)
-        return STATUS2_CONFUSION;
-    else
-        return 0;
+    switch (_volatile)
+    {
+    case VOLATILE_CONFUSION:
+        return (effect[3] & ITEM3_STATUS_ALL) || (effect[3] & ITEM3_CONFUSION);
+    case VOLATILE_INFATUATION:
+        return (effect[3] & ITEM3_STATUS_ALL) || (effect[0] & ITEM0_INFATUATION);
+    default:
+        return FALSE;
+    }
 }
 
 u32 GetItemSellPrice(u32 itemId)
 {
     return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
+}
+
+bool32 IsHoldEffectChoice(enum ItemHoldEffect holdEffect)
+{
+    return holdEffect == HOLD_EFFECT_CHOICE_BAND
+        || holdEffect == HOLD_EFFECT_CHOICE_SCARF
+        || holdEffect == HOLD_EFFECT_CHOICE_SPECS;
 }
 
 bool8 IsItemTM(u16 itemId)

@@ -89,11 +89,12 @@ static void (*const sExitCallbackByItemType[])(void) = {
     [ITEM_USE_PARTY_MENU_MOVES - 1] = CB2_ShowPartyMenuForItemUse
 };
 
+#define tEnigmaBerryType data[4]
 static void SetUpItemUseCallback(u8 taskId)
 {
     u8 itemType;
     if (gSpecialVar_ItemId == ITEM_ENIGMA_BERRY_E_READER)
-        itemType = gTasks[taskId].data[4] - 1;
+        itemType = gTasks[taskId].tEnigmaBerryType - 1;
     else
         itemType = GetItemType(gSpecialVar_ItemId) - 1;
     if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRIES)
@@ -976,9 +977,9 @@ static u32 GetBallThrowableState(void)
         return BALL_THROW_UNABLE_TWO_MONS;
     else if (IsPlayerPartyAndPokemonStorageFull() == TRUE)
         return BALL_THROW_UNABLE_NO_ROOM;
-    else if (B_SEMI_INVULNERABLE_CATCH >= GEN_4 && (gStatuses3[GetCatchingBattler()] & STATUS3_SEMI_INVULNERABLE))
+    else if (B_SEMI_INVULNERABLE_CATCH >= GEN_4 &&  IsSemiInvulnerable(GetCatchingBattler(), CHECK_ALL))
         return BALL_THROW_UNABLE_SEMI_INVULNERABLE;
-    else if (FlagGet(B_FLAG_NO_CATCHING))
+    else if (FlagGet(B_FLAG_NO_CATCHING) || !IsAllowedToUseBag())
         return BALL_THROW_UNABLE_DISABLED_FLAG;
 
     return BALL_THROW_ABLE;
@@ -992,6 +993,29 @@ bool32 CanThrowBall(void)
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
 static const u8 sText_CantThrowPokeBall_Disabled[] = _("POKé BALLS cannot be used\nright now!\p");
+
+static bool32 IteamHealsMonVolatile(u32 battler, u16 itemId)
+{
+    const u8 *effect = GetItemEffect(itemId);
+    if (effect[3] & ITEM3_STATUS_ALL)
+        return (gBattleMons[battler].volatiles.infatuation || gBattleMons[battler].volatiles.confusionTurns > 0);
+    else if (effect[0] & ITEM0_INFATUATION)
+        return gBattleMons[battler].volatiles.infatuation;
+    else if (effect[3] & ITEM3_CONFUSION)
+        return gBattleMons[battler].volatiles.confusionTurns > 0;
+
+    return FALSE;
+}
+
+static bool32 SelectedMonHasVolatile(u16 itemId)
+{
+    if (gPartyMenu.slotId == 0)
+        return IteamHealsMonVolatile(0, itemId);
+    else if (gBattleTypeFlags & (BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI) && gPartyMenu.slotId == 1)
+        return IteamHealsMonVolatile(2, itemId);
+    return FALSE;
+}
+
 // Returns whether an item can be used in battle and sets the fail text.
 bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
 {
@@ -1002,8 +1026,8 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
     u16 hp = GetMonData(mon, MON_DATA_HP);
 
     // Embargo Check
-    if ((gPartyMenu.slotId == 0 && gStatuses3[B_POSITION_PLAYER_LEFT] & STATUS3_EMBARGO)
-        || (gPartyMenu.slotId == 1 && gStatuses3[B_POSITION_PLAYER_RIGHT] & STATUS3_EMBARGO))
+    if ((gPartyMenu.slotId == 0 && gBattleMons[B_POSITION_PLAYER_LEFT].volatiles.embargo)
+        || (gPartyMenu.slotId == 1 && gBattleMons[B_POSITION_PLAYER_RIGHT].volatiles.embargo))
     {
         return TRUE;
     }
@@ -1016,7 +1040,7 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_SET_FOCUS_ENERGY:
-        if (gBattleMons[gBattlerInMenuId].status2 & STATUS2_FOCUS_ENERGY)
+        if (gBattleMons[gBattlerInMenuId].volatiles.dragonCheer || gBattleMons[gBattlerInMenuId].volatiles.focusEnergy)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_SET_MIST:
@@ -1064,13 +1088,13 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
         break;
     case EFFECT_ITEM_CURE_STATUS:
         if (!((GetMonData(mon, MON_DATA_STATUS) & GetItemStatus1Mask(itemId))
-            || (gPartyMenu.slotId == 0 && gBattleMons[gBattlerInMenuId].status2 & GetItemStatus2Mask(itemId))))
+            || SelectedMonHasVolatile(itemId)))
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_HEAL_AND_CURE_STATUS:
         if ((hp == 0 || hp == GetMonData(mon, MON_DATA_MAX_HP))
             && !((GetMonData(mon, MON_DATA_STATUS) & GetItemStatus1Mask(itemId))
-            || (gPartyMenu.slotId == 0 && gBattleMons[gBattlerInMenuId].status2 & GetItemStatus2Mask(itemId))))
+            || SelectedMonHasVolatile(itemId)))
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_REVIVE:
@@ -1078,11 +1102,11 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_RESTORE_PP:
-        if (GetItemEffect(itemId)[6] == ITEM4_HEAL_PP)
+        if (GetItemEffect(itemId)[4] == ITEM4_HEAL_PP)
         {
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
-                if (GetMonData(mon, MON_DATA_PP1 + i) < CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + i), GetMonData(mon, MON_DATA_PP_BONUSES), i));
+                if (GetMonData(mon, MON_DATA_PP1 + i) < CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + i), GetMonData(mon, MON_DATA_PP_BONUSES), i))
                     break;
             }
             if (i == MAX_MON_MOVES)
@@ -1111,7 +1135,7 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
     case ITEM_EFFECT_CURE_POISON:
     case ITEM_EFFECT_CURE_SLEEP:
     case ITEM_EFFECT_CURE_BURN:
-    case ITEM_EFFECT_CURE_FREEZE:
+    case ITEM_EFFECT_CURE_FREEZE_FROSTBITE:
     case ITEM_EFFECT_CURE_PARALYSIS:
     case ITEM_EFFECT_CURE_ALL_STATUS:
     case ITEM_EFFECT_ATK_EV:
@@ -1120,29 +1144,30 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
     case ITEM_EFFECT_SPDEF_EV:
     case ITEM_EFFECT_SPEED_EV:
     case ITEM_EFFECT_DEF_EV:
-        gTasks[taskId].data[4] = 1;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_PARTY_MENU;
         ItemUseOutOfBattle_Medicine(taskId);
         break;
     case ITEM_EFFECT_SACRED_ASH:
-        gTasks[taskId].data[4] = 1;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_PARTY_MENU;
         ItemUseOutOfBattle_SacredAsh(taskId);
         break;
     case ITEM_EFFECT_RAISE_LEVEL:
-        gTasks[taskId].data[4] = 1;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_PARTY_MENU;
         ItemUseOutOfBattle_RareCandy(taskId);
         break;
     case ITEM_EFFECT_PP_UP:
     case ITEM_EFFECT_PP_MAX:
-        gTasks[taskId].data[4] = 1;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_PARTY_MENU;
         ItemUseOutOfBattle_PPUp(taskId);
         break;
     case ITEM_EFFECT_HEAL_PP:
-        gTasks[taskId].data[4] = 1;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_PARTY_MENU;
         ItemUseOutOfBattle_PPRecovery(taskId);
         break;
     default:
-        gTasks[taskId].data[4] = 4;
+        gTasks[taskId].tEnigmaBerryType = ITEM_USE_BAG_MENU;
         ItemUseOutOfBattle_CannotUse(taskId);
+        break;
     }
 }
 

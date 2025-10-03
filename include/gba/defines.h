@@ -27,6 +27,8 @@
 #define ALIGNED(n) __attribute__((aligned(n)))
 #define PACKED __attribute__((packed))
 #define TRANSPARENT __attribute__ ((__transparent_union__))
+#define ALWAYS_INLINE inline __attribute__((always_inline))
+#define NONNULL __attribute__((__nonnull__))
 
 #define SOUND_INFO_PTR (*(struct SoundInfo **)0x3007FF0)
 #define INTR_CHECK     (*(u16 *)0x3007FF8)

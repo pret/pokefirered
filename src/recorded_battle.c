@@ -346,35 +346,35 @@ void RecordedBattle_CopyBattlerMoves(u32 battler)
 
 void RecordedBattle_CheckMovesetChanges(u8 mode)
 {
-    s32 battlerId, j, k;
+    s32 battler, j, k;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return;
 
-    for (battlerId = 0; battlerId < gBattlersCount; battlerId++)
+    for (battler = 0; battler < gBattlersCount; battler++)
     {
         // Player's side only
-        if (GetBattlerSide(battlerId) != B_SIDE_OPPONENT)
+        if (IsOnPlayerSide(battler))
         {
             if (mode == B_RECORD_MODE_RECORDING)
             {
                 // Check if any of the battler's moves have changed.
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
-                    if (gBattleMons[battlerId].moves[j] != sPlayerMonMoves[battlerId / 2][j])
+                    if (gBattleMons[battler].moves[j] != sPlayerMonMoves[battler / 2][j])
                         break;
                 }
                 if (j != MAX_MON_MOVES)
                 {
                     // At least one of the moves has been changed
-                    RecordedBattle_SetBattlerAction(battlerId, ACTION_MOVE_CHANGE);
+                    RecordedBattle_SetBattlerAction(battler, ACTION_MOVE_CHANGE);
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
                         for (k = 0; k < MAX_MON_MOVES; k++)
                         {
-                            if (gBattleMons[battlerId].moves[j] == sPlayerMonMoves[battlerId / 2][k])
+                            if (gBattleMons[battler].moves[j] == sPlayerMonMoves[battler / 2][k])
                             {
-                                RecordedBattle_SetBattlerAction(battlerId, k);
+                                RecordedBattle_SetBattlerAction(battler, k);
                                 break;
                             }
                         }
@@ -383,7 +383,7 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
             }
             else // B_RECORD_MODE_PLAYBACK
             {
-                if (sBattleRecords[battlerId][sBattlerRecordSizes[battlerId]] == ACTION_MOVE_CHANGE)
+                if (sBattleRecords[battler][sBattlerRecordSizes[battler]] == ACTION_MOVE_CHANGE)
                 {
                     u8 ppBonuses[MAX_MON_MOVES];
                     u8 moveSlots[MAX_MON_MOVES];
@@ -393,55 +393,56 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
 
                     // We know the current action is ACTION_MOVE_CHANGE, retrieve
                     // it without saving it to move on to the next action.
-                    RecordedBattle_GetBattlerAction(RECORDED_BYTE, battlerId);
+                    RecordedBattle_GetBattlerAction(RECORDED_BYTE, battler);
 
                     for (j = 0; j < MAX_MON_MOVES; j++)
-                        ppBonuses[j] = ((gBattleMons[battlerId].ppBonuses & (3 << (j << 1))) >> (j << 1));
+                        ppBonuses[j] = ((gBattleMons[battler].ppBonuses & (3 << (j << 1))) >> (j << 1));
 
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
-                        moveSlots[j] = RecordedBattle_GetBattlerAction(RECORDED_BYTE, battlerId);
-                        movePp.moves[j] = gBattleMons[battlerId].moves[moveSlots[j]];
-                        movePp.currentPp[j] = gBattleMons[battlerId].pp[moveSlots[j]];
+                        moveSlots[j] = RecordedBattle_GetBattlerAction(RECORDED_BYTE, battler);
+                        movePp.moves[j] = gBattleMons[battler].moves[moveSlots[j]];
+                        movePp.currentPp[j] = gBattleMons[battler].pp[moveSlots[j]];
                         movePp.maxPp[j] = ppBonuses[moveSlots[j]];
-                        mimickedMoveSlots[j] = (gDisableStructs[battlerId].mimickedMoves & gBitTable[j]) >> j;
+                        mimickedMoveSlots[j] = (gDisableStructs[battler].mimickedMoves & (1u << j)) >> j;
                     }
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
-                        gBattleMons[battlerId].moves[j] = movePp.moves[j];
-                        gBattleMons[battlerId].pp[j] = movePp.currentPp[j];
+                        gBattleMons[battler].moves[j] = movePp.moves[j];
+                        gBattleMons[battler].pp[j] = movePp.currentPp[j];
                     }
-                    gBattleMons[battlerId].ppBonuses = 0;
-                    gDisableStructs[battlerId].mimickedMoves = 0;
+                    gBattleMons[battler].ppBonuses = 0;
+                    gDisableStructs[battler].mimickedMoves = 0;
                     for (j = 0; j < MAX_MON_MOVES; j++)
                     {
-                        gBattleMons[battlerId].ppBonuses |= movePp.maxPp[j] << (j << 1);
-                        gDisableStructs[battlerId].mimickedMoves |= mimickedMoveSlots[j] << j;
+                        gBattleMons[battler].ppBonuses |= movePp.maxPp[j] << (j << 1);
+                        gDisableStructs[battler].mimickedMoves |= mimickedMoveSlots[j] << j;
                     }
 
-                    if (!(gBattleMons[battlerId].status2 & STATUS2_TRANSFORMED))
+                    if (!(gBattleMons[battler].volatiles.transformed))
                     {
+                        struct Pokemon *mon = GetBattlerMon(battler);
                         for (j = 0; j < MAX_MON_MOVES; j++)
-                            ppBonuses[j] = (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP_BONUSES, NULL) & ((3 << (j << 1)))) >> (j << 1);
+                            ppBonuses[j] = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & ((3 << (j << 1)))) >> (j << 1);
 
                         for (j = 0; j < MAX_MON_MOVES; j++)
                         {
-                            movePp.moves[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + moveSlots[j], NULL);
-                            movePp.currentPp[j] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP1 + moveSlots[j], NULL);
+                            movePp.moves[j] = GetMonData(mon, MON_DATA_MOVE1 + moveSlots[j], NULL);
+                            movePp.currentPp[j] = GetMonData(mon, MON_DATA_PP1 + moveSlots[j], NULL);
                             movePp.maxPp[j] = ppBonuses[moveSlots[j]];
                         }
                         for (j = 0; j < MAX_MON_MOVES; j++)
                         {
-                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_MOVE1 + j, &movePp.moves[j]);
-                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP1 + j, &movePp.currentPp[j]);
+                            SetMonData(mon, MON_DATA_MOVE1 + j, &movePp.moves[j]);
+                            SetMonData(mon, MON_DATA_PP1 + j, &movePp.currentPp[j]);
                         }
                         ppBonusSet = 0;
                         for (j = 0; j < MAX_MON_MOVES; j++)
                             ppBonusSet |= movePp.maxPp[j] << (j << 1);
 
-                        SetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PP_BONUSES, &ppBonusSet);
+                        SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonusSet);
                     }
-                    gChosenMoveByBattler[battlerId] = gBattleMons[battlerId].moves[*(gBattleStruct->chosenMovePositions + battlerId)];
+                    gChosenMoveByBattler[battler] = GetChosenMoveFromPosition(battler);
                 }
             }
         }

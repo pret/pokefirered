@@ -121,6 +121,8 @@ void AnimMudSportDirt(struct Sprite *sprite);
 void AnimDirtScatter(struct Sprite *sprite);
 void AnimMudSportDirtRising(struct Sprite *sprite);
 void AnimDirtPlumeParticle(struct Sprite *);
+void AnimBoneHitProjectile(struct Sprite *sprite);
+extern const union AnimCmd *const sAnims_MudSlapMud[];
 extern const union AffineAnimCmd *const gAffineAnims_SpinningBone[];
 
 // battle_anim_throw.c
@@ -153,6 +155,7 @@ void AnimTranslateLinearSingleSineWave(struct Sprite *sprite);
 void AnimTeraStarstormStars(struct Sprite *sprite);
 void AnimGrantingStars(struct Sprite *sprite);
 void AnimFollowMeFinger(struct Sprite *sprite);
+void AnimPoisonJabProjectile(struct Sprite *sprite);
 extern const union AnimCmd *const gRazorLeafParticleAnimTable[];
 extern const union AnimCmd *const gPowerAbsorptionOrbAnimTable[];
 extern const union AffineAnimCmd *const gPowerAbsorptionOrbAffineAnimTable[];
@@ -380,6 +383,7 @@ void AnimElectricity(struct Sprite *);
 void AnimTask_VoltSwitch(struct Sprite* sprite);
 extern const union AffineAnimCmd *const gAffineAnims_GrowingElectricOrb[];
 extern const union AffineAnimCmd *const gAffineAnims_FlashingSpark[];
+extern const union AnimCmd *const sAnims_CirclingElectricShock[];
 extern const union AnimCmd *const gAnims_ThunderboltOrb[];
 extern const union AnimCmd *const gAnims_ElectricPuff[];
 extern const union AnimCmd *const gAnims_ElectricChargingParticles[];
@@ -403,6 +407,9 @@ extern const union AnimCmd *const gAnims_RevengeBigScratch[];
 extern const union AnimCmd *const gAnims_FlyingRock[];
 extern const union AffineAnimCmd *const gAffineAnims_Whirlpool[];
 extern const union AffineAnimCmd *const gAffineAnims_BasicRock[];
+extern const union AnimCmd *const gAnims_FlyingRock[];
+extern const union AnimCmd *const sAnims_BasicRock[];
+void AnimRockTomb(struct Sprite *sprite);
 void AnimParticleInVortex(struct Sprite *sprite);
 void AnimFallingRock(struct Sprite *sprite);
 void AnimRaiseSprite(struct Sprite *sprite);
@@ -597,6 +604,9 @@ void StartMonScrollingBgMask(u8 taskId, int unused, u16 scrollSpeed, u8 battler,
 void ClearBattleAnimBg(u32 bgId);
 void AnimLoadCompressedBgTilemapHandleContest(struct BattleAnimBgData *, const void *, bool32);
 bool32 InitSpritePosToAnimBattler(u32 animBattlerId, struct Sprite *sprite, bool8 respectMonPicOffsets);
+
+// battle_anim_ice.c
+void AnimIceBeamParticle(struct Sprite *sprite);
 
 // battle_anim_bug.c
 void AnimTranslateStinger(struct Sprite *sprite);

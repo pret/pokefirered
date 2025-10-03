@@ -42,9 +42,9 @@ struct TrainerSprite
 
 struct TrainerBacksprite
 {
-    struct MonCoords coordinates;
-    struct CompressedSpriteSheet backPic;
-    struct SpritePalette palette;
+    const struct MonCoords coordinates;
+    const struct SpriteFrameImage backPic;
+    const struct SpritePalette palette;
     const union AnimCmd *const *const animation;
 };
 
@@ -105,6 +105,8 @@ struct Trainer
     /*0x22*/ u8 poolRuleIndex;
     /*0x23*/ u8 poolPickIndex;
     /*0x24*/ u8 poolPruneIndex;
+    /*0x25*/ u16 overrideTrainer;
+    /*0x26*/ u8 trainerBackPic;
 };
 
 struct TrainerClass

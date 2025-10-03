@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_main.h"
 #include "gflib.h"
 #include "decompress.h"
 #include "graphics.h"
@@ -7,7 +8,6 @@
 #include "move.h"
 #include "constants/item.h"
 #include "constants/items.h"
-#include "battle_main.h"
 
 EWRAM_DATA u8 *gItemIconDecompressionBuffer = NULL;
 EWRAM_DATA u8 *gItemIcon4x4Buffer = NULL;

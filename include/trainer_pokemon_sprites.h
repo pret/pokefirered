@@ -16,5 +16,7 @@ u16 FreeAndDestroyMonPicSpriteNoPalette(u16 spriteId);
 u16 FreeAndDestroyTrainerPicSprite(u16);
 u16 LoadMonPicInWindow(u16 species, bool32 isShiny, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId);
 u16 CreateMonPicSprite(u16 species, bool32 isShiny, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag);
+u16 PlayerGenderToFrontTrainerPicId_Debug(u8 gender, bool8 getClass);
+void CopyTrainerBackspriteFramesToDest(u8 trainerPicId, u8 *dest);
 
 #endif // GUARD_TRAINER_POKEMON_SPRITES_H

@@ -80,10 +80,27 @@ SINGLE_BATTLE_TEST("Powder doesn't damage target if it has Magic Guard")
     }
 }
 
-SINGLE_BATTLE_TEST("Powder doesn't damage target under heavy rain")
+SINGLE_BATTLE_TEST("Powder damages the target under heavy rain (Gen 6)")
 {
     GIVEN {
-        ASSUME(B_POWDER_RAIN >= GEN_7);
+        WITH_CONFIG(GEN_CONFIG_POWDER_RAIN, GEN_6);
+        PLAYER(SPECIES_KYOGRE_PRIMAL) { Ability(ABILITY_PRIMORDIAL_SEA); }
+        OPPONENT(SPECIES_VIVILLON);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_POWDER); MOVE(player, MOVE_EMBER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POWDER, opponent);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, player);
+        HP_BAR(player);
+    } THEN {
+        EXPECT_LT(player->hp, player->maxHP);
+    }
+}
+
+SINGLE_BATTLE_TEST("Powder doesn't damage target under heavy rain (Gen 7+)")
+{
+    GIVEN {
+        WITH_CONFIG(GEN_CONFIG_POWDER_RAIN, GEN_7);
         PLAYER(SPECIES_KYOGRE_PRIMAL) { Ability(ABILITY_PRIMORDIAL_SEA); }
         OPPONENT(SPECIES_VIVILLON);
     } WHEN {
@@ -92,7 +109,7 @@ SINGLE_BATTLE_TEST("Powder doesn't damage target under heavy rain")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_POWDER, opponent);
         NONE_OF {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, player);
-            HP_BAR(opponent);
+            HP_BAR(player);
         }
     } THEN {
         EXPECT_EQ(player->maxHP, player->hp);

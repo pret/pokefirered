@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(!IsBattleMoveStatus(MOVE_WATER_GUN));
 }
 
-// Battle Bond transforms the pokemon when fainting any battler(opposing or partner), unless it's the last pokemon and the battle ends.
+// Battle Bond transforms the Pokémon when fainting any battler(opposing or partner), unless it's the last Pokémon and the battle ends.
 SINGLE_BATTLE_TEST("Battle Bond transforms player's Greninja - Singles")
 {
     u32 monsCountPlayer, monsCountOpponent;

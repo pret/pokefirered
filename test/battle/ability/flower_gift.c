@@ -65,7 +65,8 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal when its abili
 
 SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back to normal under Cloud Nine/Air Lock")
 {
-    u32 species = 0, ability = 0;
+    u32 species = 0;
+    enum Ability ability = 0;
     PARAMETRIZE { species = SPECIES_PSYDUCK;  ability = ABILITY_CLOUD_NINE; }
     PARAMETRIZE { species = SPECIES_RAYQUAZA; ability = ABILITY_AIR_LOCK; }
     GIVEN {

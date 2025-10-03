@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Powder Snow inflicts freeze")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_POWDER_SNOW, player);
         HP_BAR(opponent);
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_FRZ, opponent);
+        ANIMATION(ANIM_TYPE_STATUS, (B_USE_FROSTBITE ? B_ANIM_STATUS_FRB : B_ANIM_STATUS_FRZ), opponent);
         FREEZE_OR_FROSTBURN_STATUS(opponent, TRUE);
     }
 }
@@ -85,11 +85,11 @@ SINGLE_BATTLE_TEST("Freezing Glare shouldn't freeze Psychic-types")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FREEZING_GLARE, player);
         HP_BAR(opponent);
         #if B_STATUS_TYPE_IMMUNITY > GEN_1
-            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_FRZ, opponent);
+            ANIMATION(ANIM_TYPE_STATUS, (B_USE_FROSTBITE ? B_ANIM_STATUS_FRB : B_ANIM_STATUS_FRZ), opponent);
             FREEZE_OR_FROSTBURN_STATUS(opponent, TRUE);
         #else
             NONE_OF {
-                ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_FRZ, opponent);
+                ANIMATION(ANIM_TYPE_STATUS, (B_USE_FROSTBITE ? B_ANIM_STATUS_FRB : B_ANIM_STATUS_FRZ), opponent);
                 FREEZE_OR_FROSTBURN_STATUS(opponent, TRUE);
             }
         #endif

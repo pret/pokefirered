@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Bug Bite eats the target's berry and immediately gains its e
         PLAYER(SPECIES_WOBBUFFET) { HP(399); MaxHP(400); Status1(status1); Moves(MOVE_SLEEP_TALK, MOVE_BUG_BITE); }
         OPPONENT(SPECIES_WOBBUFFET) { Item(item); }
     } WHEN {
-        // Chesto Berry can only be applied if the pokemon is asleep and uses Sleep Talk.
+        // Chesto Berry can only be applied if the Pokémon is asleep and uses Sleep Talk.
         if (item == ITEM_CHESTO_BERRY) {
             TURN { MOVE(player, MOVE_SLEEP_TALK); }
         } else {

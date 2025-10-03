@@ -67,6 +67,36 @@ SINGLE_BATTLE_TEST("Razor Wind doesn't need to charge with Power Herb")
     }
 }
 
+DOUBLE_BATTLE_TEST("Razor Wind successfully KOs both opponents")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_POWER_HERB); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_WYNAUT) { HP(1); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_RAZOR_WIND); }
+    } SCENE {
+        if (B_UPDATED_MOVE_DATA >= GEN_5) {
+            NOT MESSAGE("Wobbuffet whipped up a whirlwind!");
+            MESSAGE("Wobbuffet used Razor Wind!");
+        } else
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_RAZOR_WIND, playerLeft);
+        if (B_UPDATED_MOVE_DATA < GEN_5)
+            MESSAGE("Wobbuffet whipped up a whirlwind!");
+        else
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_RAZOR_WIND, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
+        MESSAGE("Wobbuffet became fully charged due to its Power Herb!");
+        if (B_UPDATED_MOVE_DATA < GEN_5)
+            MESSAGE("Wobbuffet used Razor Wind!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAZOR_WIND, playerLeft);
+        HP_BAR(opponentLeft);
+        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("The opposing Wynaut fainted!");
+    }
+}
+
 SINGLE_BATTLE_TEST("Skull Bash needs a charging turn")
 {
     GIVEN {

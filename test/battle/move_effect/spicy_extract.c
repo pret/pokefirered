@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Spicy Extract raises target's Attack by 2 stages and lowers 
 
 SINGLE_BATTLE_TEST("Spicy Extract is prevented by target's ability if it's Attack stat is maxed out")
 {
-    u16 ability;
+    enum Ability ability;
 
     PARAMETRIZE { ability = ABILITY_CLEAR_BODY; }
     PARAMETRIZE { ability = ABILITY_LIGHT_METAL; }
@@ -189,7 +189,7 @@ AI_DOUBLE_BATTLE_TEST("Spicy Extract user will use it if partner holds Clear Amu
 AI_DOUBLE_BATTLE_TEST("Spicy Extract user will not choose the move if it does not benefit partner")
 {
     u32 species;
-    u32 ability;
+    enum Ability ability;
 
     PARAMETRIZE { species = SPECIES_GHOLDENGO; ability = ABILITY_GOOD_AS_GOLD; }
     PARAMETRIZE { species = SPECIES_SNIVY; ability = ABILITY_CONTRARY; }

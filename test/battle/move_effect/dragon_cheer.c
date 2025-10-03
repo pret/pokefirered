@@ -103,3 +103,29 @@ DOUBLE_BATTLE_TEST("Dragon Cheer fails if critical hit stage was already increas
 }
 
 TO_DO_BATTLE_TEST("Baton Pass passes Dragon Cheer's effect");
+
+AI_DOUBLE_BATTLE_TEST("AI uses Dragon Cheer")
+{
+    u32 species;
+    PARAMETRIZE { species = SPECIES_DRATINI; }
+    PARAMETRIZE { species = SPECIES_WOBBUFFET; }
+
+    GIVEN {
+        ASSUME(GetSpeciesType(SPECIES_DRATINI, 0) == TYPE_DRAGON);
+        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 0) != TYPE_DRAGON);
+        ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 1) != TYPE_DRAGON);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, MOVE_CELEBRATE); }
+        OPPONENT(species) { Moves(MOVE_DRAGON_CHEER, MOVE_POUND); }
+        OPPONENT(species) { Moves(MOVE_DRAGON_CHEER, MOVE_POUND); }
+    } WHEN {
+        if (species == SPECIES_DRATINI)
+            TURN {  EXPECT_MOVE(opponentLeft, MOVE_DRAGON_CHEER); }
+        else
+            TURN {  NOT_EXPECT_MOVE(opponentLeft, MOVE_DRAGON_CHEER); }
+    }
+}
+
+
+

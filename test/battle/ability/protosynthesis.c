@@ -184,7 +184,8 @@ SINGLE_BATTLE_TEST("Protosynthesis activates even if the Pokémon is holding an 
 
 SINGLE_BATTLE_TEST("Protosynthesis doesn't activate if Cloud Nine/Air Lock is on the field")
 {
-    u32 species, ability;
+    u32 species;
+    enum Ability ability;
     PARAMETRIZE { species = SPECIES_RAYQUAZA; ability = ABILITY_AIR_LOCK; }
     PARAMETRIZE { species = SPECIES_GOLDUCK; ability = ABILITY_CLOUD_NINE; }
 

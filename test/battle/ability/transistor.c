@@ -7,7 +7,7 @@
 SINGLE_BATTLE_TEST("Transistor increases Electric-type attack / special attack", s16 damage)
 {
     u32 move;
-    u16 ability;
+    enum Ability ability;
 
     PARAMETRIZE { move = MOVE_SCRATCH; ability = ABILITY_KLUTZ; }
     PARAMETRIZE { move = MOVE_SCRATCH; ability = ABILITY_TRANSISTOR; }
@@ -38,7 +38,7 @@ SINGLE_BATTLE_TEST("Transistor increases Electric-type attack / special attack",
 
 SINGLE_BATTLE_TEST("Transistor is blocked by neutralizing gas", s16 damage)
 {
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_NEUTRALIZING_GAS; }
     PARAMETRIZE { ability = ABILITY_LEVITATE; }
 

@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Eject Pack does not cause the new Pokémon to lose HP due to
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
         MESSAGE("Wobbuffet is switched out with the Eject Pack!");
         SEND_IN_MESSAGE("Wynaut");
-        NOT MESSAGE("Wynaut was hurt by its Life Orb!");
+        NOT HP_BAR(player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     }
 }
@@ -315,5 +315,26 @@ DOUBLE_BATTLE_TEST("Eject Pack: Only the fastest Eject Pack will activate after 
             NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerRight);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, playerLeft);
         }
+    }
+}
+
+SINGLE_BATTLE_TEST("Eject Pack does not activate if mon is switched in due to Eject Button")
+{
+    GIVEN {
+        PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_ARENA_TRAP); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_BUTTON); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_EJECT_PACK); };
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_BULLDOZE);
+            SEND_OUT(opponent, 1);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BULLDOZE, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
+        MESSAGE("The opposing Wobbuffet is switched out with the Eject Button!");
+        MESSAGE("2 sent out Wobbuffet!");
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
     }
 }

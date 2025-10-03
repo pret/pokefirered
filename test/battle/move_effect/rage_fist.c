@@ -249,7 +249,7 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not increased if move had no affect"
     }
 }
 
-SINGLE_BATTLE_TEST("Rage Fist base power is increased if Disguise breaks")
+SINGLE_BATTLE_TEST("Rage Fist base power is increased if Disguise breaks (Gen7)")
 {
     s16 timesGotHit[2];
     u16 species = SPECIES_NONE;
@@ -258,6 +258,34 @@ SINGLE_BATTLE_TEST("Rage Fist base power is increased if Disguise breaks")
     PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }
 
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_DISGUISE_HP_LOSS, GEN_7);
+        PLAYER(species) { Ability(ABILITY_DISGUISE); }
+        OPPONENT(SPECIES_REGIROCK);
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_ROCK_THROW); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
+        HP_BAR(opponent, captureDamage: &timesGotHit[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ROCK_THROW, opponent);
+        ABILITY_POPUP(player, ABILITY_DISGUISE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
+        HP_BAR(opponent, captureDamage: &timesGotHit[1]);
+    } THEN {
+        EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(2.0), timesGotHit[1]);
+    }
+}
+
+SINGLE_BATTLE_TEST("Rage Fist base power is increased if Disguise breaks (Gen8+)")
+{
+    s16 timesGotHit[2];
+    u16 species = SPECIES_NONE;
+
+    PARAMETRIZE { species = SPECIES_MIMIKYU_DISGUISED; }
+    PARAMETRIZE { species = SPECIES_MIMIKYU_TOTEM_DISGUISED; }
+
+    GIVEN {
+        WITH_CONFIG(GEN_CONFIG_DISGUISE_HP_LOSS, GEN_8);
         PLAYER(species) { Ability(ABILITY_DISGUISE); }
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {
@@ -340,5 +368,30 @@ SINGLE_BATTLE_TEST("Rage Fist doesn't get increased power if Substitute is hit")
         HP_BAR(player, captureDamage: &timesGotHit[1]);
     } THEN {
         EXPECT_EQ(timesGotHit[0], timesGotHit[1]);
+    }
+}
+
+SINGLE_BATTLE_TEST("Rage Fist counter will be updated correctly after absorb move")
+{
+    s16 timesGotHit[2];
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_GIGA_DRAIN) == EFFECT_ABSORB);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_GIGA_DRAIN); }
+        TURN { MOVE(player, MOVE_RAGE_FIST); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
+        HP_BAR(opponent, captureDamage: &timesGotHit[0]);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GIGA_DRAIN, opponent);
+        HP_BAR(player);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_RAGE_FIST, player);
+        HP_BAR(opponent, captureDamage: &timesGotHit[1]);
+    } THEN {
+        EXPECT_MUL_EQ(timesGotHit[0], Q_4_12(2.0), timesGotHit[1]);
     }
 }

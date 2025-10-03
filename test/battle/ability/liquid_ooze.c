@@ -109,11 +109,11 @@ SINGLE_BATTLE_TEST("Liquid Ooze causes Strength Sap users to lose HP instead of 
 }
 
 /* * https://bulbapedia.bulbagarden.net/wiki/Liquid_Ooze_(Ability)#In_battle:
-   * If the recipient of Leech Seed's effect were to faint due to Liquid Ooze on the same turn as the victim of Leech Seed, then the victim faints before the recipient. This means that the victim's team loses the battle if both teams had their final Pokémon sent out. 
+   * If the recipient of Leech Seed's effect were to faint due to Liquid Ooze on the same turn as the victim of Leech Seed, then the victim faints before the recipient. This means that the victim's team loses the battle if both teams had their final Pokémon sent out.
  */
 SINGLE_BATTLE_TEST("Liquid Ooze causes leech seed victim to faint before seeder")
 {
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_CLEAR_BODY; }
     PARAMETRIZE { ability = ABILITY_LIQUID_OOZE; }
     GIVEN {
@@ -138,10 +138,11 @@ SINGLE_BATTLE_TEST("Liquid Ooze causes leech seed victim to faint before seeder"
     }
 }
 
-SINGLE_BATTLE_TEST("Liquid Ooze causes Dream Eater users to lose HP instead of heal (Gen 5+")
+SINGLE_BATTLE_TEST("Liquid Ooze causes Dream Eater users to lose HP instead of heal (Gen 5+)")
 {
     s16 damage;
     GIVEN {
+        WITH_CONFIG(GEN_DREAM_EATER_LIQUID_OOZE, GEN_5);
         ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
         ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
         ASSUME(GetMoveEffect(MOVE_DREAM_EATER) == EFFECT_DREAM_EATER);
@@ -158,8 +159,31 @@ SINGLE_BATTLE_TEST("Liquid Ooze causes Dream Eater users to lose HP instead of h
         HP_BAR(opponent);
         HP_BAR(player, captureDamage: &damage);
     } THEN {
-        EXPECT_LT(damage, 0);
+        EXPECT_GT(damage, 0); // Positive damage
     }
 }
 
-TO_DO_BATTLE_TEST("Liquid Ooze does not cause Dream Eater users to lose HP instead of heal (Gen 3-4")
+SINGLE_BATTLE_TEST("Liquid Ooze does not cause Dream Eater users to lose HP instead of heal (Gen 3-4")
+{
+    s16 damage;
+    GIVEN {
+        WITH_CONFIG(GEN_DREAM_EATER_LIQUID_OOZE, GEN_3);
+        ASSUME(GetMoveEffect(MOVE_SPORE) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_SPORE) == MOVE_EFFECT_SLEEP);
+        ASSUME(GetMoveEffect(MOVE_DREAM_EATER) == EFFECT_DREAM_EATER);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_TENTACRUEL) { Ability(ABILITY_LIQUID_OOZE); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SCRATCH); MOVE(player, MOVE_SPORE); }
+        TURN { MOVE(player, MOVE_DREAM_EATER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        HP_BAR(player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DREAM_EATER, player);
+        HP_BAR(opponent);
+        HP_BAR(player, captureDamage: &damage);
+    } THEN {
+        EXPECT_LT(damage, 0); // Negative damage = Heal
+    }
+}

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Fell Stinger raises user's Attack by 3 stages if it faints target")
+SINGLE_BATTLE_TEST("Fell Stinger raises user's Attack by 2 stages (Gen6) or 3 stages (Gen7+) if it faints target")
 {
     u32 config;
 

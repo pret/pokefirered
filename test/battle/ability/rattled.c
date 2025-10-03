@@ -52,10 +52,30 @@ SINGLE_BATTLE_TEST("Rattled boosts speed by 1 when hit by Bug, Dark or Ghost typ
     }
 }
 
-SINGLE_BATTLE_TEST("Rattled boosts speed by 1 when affected by Intimidate")
+SINGLE_BATTLE_TEST("Rattled does not boost speed by 1 when affected by Intimidate (Gen5-7)")
 {
     GIVEN {
-        ASSUME(B_UPDATED_INTIMIDATE >= GEN_8);
+        WITH_CONFIG(GEN_CONFIG_UPDATED_INTIMIDATE, GEN_7);
+        PLAYER(SPECIES_GYARADOS) {Ability(ABILITY_INTIMIDATE); }
+        OPPONENT(SPECIES_SUDOWOODO) {Ability(ABILITY_RATTLED); }
+    } WHEN {
+        TURN {}
+    } SCENE {
+        ABILITY_POPUP(player, ABILITY_INTIMIDATE);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+        MESSAGE("Gyarados's Intimidate cuts the opposing Sudowoodo's Attack!");
+        NONE_OF {
+            ABILITY_POPUP(opponent, ABILITY_RATTLED);
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+            MESSAGE("The opposing Sudowoodo's Speed rose!");
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Rattled boosts speed by 1 when affected by Intimidate (Gen8+)")
+{
+    GIVEN {
+        WITH_CONFIG(GEN_CONFIG_UPDATED_INTIMIDATE, GEN_8);
         PLAYER(SPECIES_GYARADOS) {Ability(ABILITY_INTIMIDATE); }
         OPPONENT(SPECIES_SUDOWOODO) {Ability(ABILITY_RATTLED); }
     } WHEN {

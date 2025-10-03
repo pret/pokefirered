@@ -22,3 +22,35 @@ DOUBLE_BATTLE_TEST("Flame Burst Substitute")
         NOT MESSAGE("The substitute took damage for the opposing Wynaut!");
     }
 }
+
+DOUBLE_BATTLE_TEST("Flame Burst doesn't crash, opponent to player")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponentRight, MOVE_FLAME_BURST, target: playerLeft); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAME_BURST, opponentRight);
+        HP_BAR(playerRight);
+        MESSAGE("Wobbuffet fainted!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Flame Burst doesn't crash, player to opponent")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET)
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WYNAUT) { HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FLAME_BURST, target: opponentLeft); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAME_BURST, playerLeft);
+        HP_BAR(opponentRight);
+        MESSAGE("The opposing Wynaut fainted!");
+    }
+}

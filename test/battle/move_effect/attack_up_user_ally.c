@@ -1,17 +1,14 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS
-{
-    ASSUME(GetMoveEffect(MOVE_HOWL) == EFFECT_ATTACK_UP_USER_ALLY);
-}
-
 SINGLE_BATTLE_TEST("Howl raises user's Attack by 1 stage", s16 damage)
 {
     bool32 raiseAttack;
     PARAMETRIZE { raiseAttack = FALSE; }
     PARAMETRIZE { raiseAttack = TRUE; }
     GIVEN {
+        ASSUME(GetMoveEffect(MOVE_HOWL) == EFFECT_ATTACK_UP
+            || GetMoveEffect(MOVE_HOWL) == EFFECT_ATTACK_UP_USER_ALLY);
         ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -37,6 +34,7 @@ DOUBLE_BATTLE_TEST("Howl raises user's and partner's Attack by 1 stage", s16 dam
     PARAMETRIZE { raiseAttack = FALSE; }
     PARAMETRIZE { raiseAttack = TRUE; }
     GIVEN {
+        ASSUME(GetMoveEffect(MOVE_HOWL) == EFFECT_ATTACK_UP_USER_ALLY);
         ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET) { Speed(15); }
         PLAYER(SPECIES_WYNAUT) { Speed(10); }
@@ -69,6 +67,7 @@ DOUBLE_BATTLE_TEST("Howl does not work on partner if it has Soundproof")
     s16 damage[2];
 
     GIVEN {
+        ASSUME(GetMoveEffect(MOVE_HOWL) == EFFECT_ATTACK_UP_USER_ALLY);
         ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WOBBUFFET) { Speed(15); }
         PLAYER(SPECIES_VOLTORB) { Speed(10); Ability(ABILITY_SOUNDPROOF); }

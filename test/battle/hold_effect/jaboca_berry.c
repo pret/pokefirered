@@ -42,7 +42,6 @@ SINGLE_BATTLE_TEST("Jaboca Berry causes the attacker to lose 1/8 of its max HP i
 
 SINGLE_BATTLE_TEST("Jaboca Berry triggers before Bug Bite can steal it")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_BUG_BITE) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_WYNAUT);

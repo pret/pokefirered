@@ -88,3 +88,21 @@ SINGLE_BATTLE_TEST("Effect Spore causes sleep 11% of the time")
         STATUS_ICON(player, sleep: TRUE);
     }
 }
+
+SINGLE_BATTLE_TEST("Effect Spore will check if it can inflict status onto attacker, not itself")
+{
+    PASSES_RANDOMLY(11, 100, RNG_EFFECT_SPORE);
+    GIVEN {
+        ASSUME(B_ABILITY_TRIGGER_CHANCE >= GEN_5);
+        ASSUME(MoveMakesContact(MOVE_SCRATCH));
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_BRELOOM) { Status1(STATUS1_BURN); Ability(ABILITY_EFFECT_SPORE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_EFFECT_SPORE);
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, player);
+        MESSAGE("The opposing Breloom's Effect Spore made Wobbuffet sleep!");
+        STATUS_ICON(player, sleep: TRUE);
+    }
+}

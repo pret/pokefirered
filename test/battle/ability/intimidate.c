@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after switch out", s16 damage)
 {
-    u32 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_INTIMIDATE; }
     PARAMETRIZE { ability = ABILITY_SHED_SKIN; }
     GIVEN {
@@ -33,7 +33,7 @@ SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after switch ou
 
 SINGLE_BATTLE_TEST("Intimidate (opponent) lowers player's attack after KO", s16 damage)
 {
-    u32 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_INTIMIDATE; }
     PARAMETRIZE { ability = ABILITY_SHED_SKIN; }
     GIVEN {
@@ -376,7 +376,7 @@ DOUBLE_BATTLE_TEST("Intimidate will correctly decrease the attack of the second 
     }
 }
 
-SINGLE_BATTLE_TEST("Intimdate does not lose timing after mega evolution and switch out by a hit escape move")
+SINGLE_BATTLE_TEST("Intimidate does not lose timing after mega evolution and switch out by a hit escape move")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_U_TURN) == EFFECT_HIT_ESCAPE);

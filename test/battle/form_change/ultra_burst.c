@@ -58,7 +58,7 @@ DOUBLE_BATTLE_TEST("Ultra Burst's order is determined by Speed - player faster")
 SINGLE_BATTLE_TEST("Ultra Burst affects turn order")
 {
     GIVEN {
-        ASSUME(B_MEGA_EVO_TURN_ORDER >= GEN_7);
+        WITH_CONFIG(GEN_CONFIG_MEGA_EVO_TURN_ORDER, GEN_7);
         PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); Speed(105); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(106); }
     } WHEN {

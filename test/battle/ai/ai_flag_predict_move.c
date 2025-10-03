@@ -27,3 +27,18 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_PREDICT_MOVE: AI will still attack you when it sh
         TURN { MOVE(player, MOVE_SURF); EXPECT_MOVE(opponent, MOVE_LEAF_BLADE); }
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI won't use Sucker Punch if it expects a move of the same priority bracket and the opponent is faster")
+{
+    PASSES_RANDOMLY(PREDICT_MOVE_CHANCE, 100, RNG_AI_PREDICT_MOVE);
+    GIVEN {
+        ASSUME(GetMovePriority(MOVE_QUICK_ATTACK) == 1);
+        ASSUME(GetMovePriority(MOVE_SUCKER_PUNCH) == 1);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT | AI_FLAG_PREDICT_MOVE);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(300); Moves(MOVE_QUICK_ATTACK); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); Moves(MOVE_SUCKER_PUNCH, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_QUICK_ATTACK); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
+        TURN { MOVE(player, MOVE_QUICK_ATTACK); EXPECT_MOVE(opponent, MOVE_SCRATCH); }
+    }
+}

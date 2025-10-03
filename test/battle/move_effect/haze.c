@@ -30,3 +30,6 @@ SINGLE_BATTLE_TEST("Haze resets stat changes", s16 damage)
         EXPECT_EQ(results[0].damage, results[1].damage);
     }
 }
+
+TO_DO_BATTLE_TEST("Haze resets Focus Energy (Gen 1 and 4)")
+TO_DO_BATTLE_TEST("Haze doesn't reset Focus Energy (Gen 2-3 and 5+)")

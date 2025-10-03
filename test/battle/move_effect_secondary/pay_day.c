@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(MoveHasAdditionalEffect(MOVE_PAY_DAY, MOVE_EFFECT_PAYDAY));
+    ASSUME(MoveHasAdditionalEffectWithChance(MOVE_PAY_DAY, MOVE_EFFECT_PAYDAY, 0) == TRUE);
 }
 
 SINGLE_BATTLE_TEST("Pay Day Scatters coins around after it hits - singles")

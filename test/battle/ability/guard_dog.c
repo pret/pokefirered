@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Guard Dog raises Attack when intimidated", s16 damage)
 {
-    u32 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_INTIMIDATE; }
     PARAMETRIZE { ability = ABILITY_SHED_SKIN; }
     GIVEN {

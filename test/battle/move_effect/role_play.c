@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Role Play copies target's ability")
     } THEN {
         EXPECT_EQ(player->ability, ABILITY_BLAZE);
         EXPECT_EQ(opponent->ability, ABILITY_BLAZE);
-    } 
+    }
 }
 
 DOUBLE_BATTLE_TEST("Role Play copies target's current ability even if it changed during that turn")
@@ -50,7 +50,8 @@ DOUBLE_BATTLE_TEST("Role Play copies target's current ability even if it changed
 
 SINGLE_BATTLE_TEST("Role Play and Doodle fail if target's ability can't be copied'")
 {
-    u32 species, ability;
+    u32 species;
+    enum Ability ability;
 
     PARAMETRIZE { species = SPECIES_SHEDINJA; ability = ABILITY_WONDER_GUARD; }
     PARAMETRIZE { species = SPECIES_CASTFORM; ability = ABILITY_FORECAST; }
@@ -90,10 +91,12 @@ SINGLE_BATTLE_TEST("Role Play and Doodle fail if target's ability can't be copie
 
 SINGLE_BATTLE_TEST("Role Play fails if user's ability can't be suppressed")
 {
-    u32 species, ability;
+    u32 species;
+    enum Ability ability;
 
     PARAMETRIZE { species = SPECIES_ARCEUS; ability = ABILITY_MULTITYPE; }
-    PARAMETRIZE { species = SPECIES_DARMANITAN; ability = ABILITY_ZEN_MODE; }
+    if (B_UPDATED_ABILITY_DATA >= GEN_7)
+        PARAMETRIZE { species = SPECIES_DARMANITAN; ability = ABILITY_ZEN_MODE; }
     PARAMETRIZE { species = SPECIES_AEGISLASH; ability = ABILITY_STANCE_CHANGE; }
     PARAMETRIZE { species = SPECIES_MINIOR; ability = ABILITY_SHIELDS_DOWN; }
     PARAMETRIZE { species = SPECIES_WISHIWASHI; ability = ABILITY_SCHOOLING; }

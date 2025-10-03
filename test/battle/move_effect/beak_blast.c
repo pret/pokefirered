@@ -33,7 +33,7 @@ DOUBLE_BATTLE_TEST("Beak Blast's charging message is shown before other moves ar
     }
 }
 
-DOUBLE_BATTLE_TEST("Beak Blast burns all who make contact with the pokemon")
+DOUBLE_BATTLE_TEST("Beak Blast burns all who make contact with the Pokémon")
 {
     GIVEN {
         ASSUME(GetMovePriority(MOVE_BEAK_BLAST) < 0);
@@ -109,6 +109,21 @@ SINGLE_BATTLE_TEST("Beak Blast burns only when contact moves are used")
         MESSAGE("Wobbuffet used Beak Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAK_BLAST, player);
         HP_BAR(opponent);
+    }
+}
+
+SINGLE_BATTLE_TEST("Beak Blast doesn't burn fire types")
+{
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_ARCANINE].types[0] == TYPE_FIRE || gSpeciesInfo[SPECIES_ARCANINE].types[1]);
+        PLAYER(SPECIES_ARCANINE);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_BEAK_BLAST); MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
+        NOT STATUS_ICON(player, burn: TRUE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAK_BLAST, opponent);
     }
 }
 

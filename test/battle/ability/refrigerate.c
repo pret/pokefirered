@@ -22,7 +22,8 @@ SINGLE_BATTLE_TEST("Refrigerate turns a Normal-type move into a Ice-type move")
 
 SINGLE_BATTLE_TEST("Refrigerate boosts power of affected moves by 20% (Gen7+) or 30% (Gen1-6)", s16 damage)
 {
-    u32 ability, genConfig;
+    enum Ability ability;
+    u32 genConfig;
     PARAMETRIZE { ability = ABILITY_SNOW_WARNING;   genConfig = GEN_7; }
     PARAMETRIZE { ability = ABILITY_SNOW_WARNING;   genConfig = GEN_6; }
     PARAMETRIZE { ability = ABILITY_REFRIGERATE;    genConfig = GEN_7; }
@@ -46,12 +47,14 @@ SINGLE_BATTLE_TEST("Refrigerate boosts power of affected moves by 20% (Gen7+) or
 
 SINGLE_BATTLE_TEST("Refrigerate doesn't affect Weather Ball's type", s16 damage)
 {
-    u16 move, ability;
+    u16 move;
+    enum Ability ability;
     PARAMETRIZE { move = MOVE_CELEBRATE; ability = ABILITY_SNOW_WARNING; }
     PARAMETRIZE { move = MOVE_SUNNY_DAY; ability = ABILITY_SNOW_WARNING; }
     PARAMETRIZE { move = MOVE_CELEBRATE; ability = ABILITY_REFRIGERATE; }
     PARAMETRIZE { move = MOVE_SUNNY_DAY; ability = ABILITY_REFRIGERATE; }
     GIVEN {
+        WITH_CONFIG(GEN_SNOW_WARNING, GEN_9); //To prevent capturing hail damage
         ASSUME(GetMoveEffect(MOVE_WEATHER_BALL) == EFFECT_WEATHER_BALL);
         ASSUME(GetSpeciesType(SPECIES_PINSIR, 0) == TYPE_BUG);
         PLAYER(SPECIES_AMAURA) { Ability(ability); }
@@ -73,7 +76,7 @@ SINGLE_BATTLE_TEST("Refrigerate doesn't affect Weather Ball's type", s16 damage)
 
 SINGLE_BATTLE_TEST("Refrigerate doesn't affect Natural Gift's type")
 {
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_SNOW_WARNING; }
     PARAMETRIZE { ability = ABILITY_REFRIGERATE; }
     GIVEN {

@@ -108,10 +108,11 @@ struct Item
     const u16 *iconPalette;
 };
 
-struct BagPocket
+struct __attribute__((aligned(2))) BagPocket
 {
     struct ItemSlot *itemSlots;
-    u8 capacity;
+    u16 capacity:10;
+    enum Pocket id:6;
 };
 
 struct TmHmIndexKey
@@ -178,7 +179,29 @@ static inline u16 GetTMHMMoveId(enum TMHMIndex index)
     return gTMHMItemMoveIds[index].moveId;
 }
 
-u16 GetBagItemQuantity(enum Pocket pocketId, u32 pocketPos);
+void BagPocket_SetSlotData(struct BagPocket *pocket, u32 pocketPos, struct ItemSlot newSlot);
+struct ItemSlot BagPocket_GetSlotData(struct BagPocket *pocket, u32 pocketPos);
+
+static inline void BagPocket_SetSlotItemIdAndCount(struct BagPocket *pocket, u32 pocketPos, u16 itemId, u16 quantity)
+{
+    BagPocket_SetSlotData(pocket, pocketPos, (struct ItemSlot) {itemId, quantity});
+}
+
+static inline u16 GetBagItemId(enum Pocket pocketId, u32 pocketPos)
+{
+    return BagPocket_GetSlotData(&gBagPockets[pocketId], pocketPos).itemId;
+}
+
+static inline u16 GetBagItemQuantity(enum Pocket pocketId, u32 pocketPos)
+{
+    return BagPocket_GetSlotData(&gBagPockets[pocketId], pocketPos).quantity;
+}
+
+static inline struct ItemSlot GetBagItemIdAndQuantity(enum Pocket pocketId, u32 pocketPos)
+{
+    return BagPocket_GetSlotData(&gBagPockets[pocketId], pocketPos);
+}
+
 void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity);
 u8 *CopyItemName(u16 itemId, u8 *string);
 u8 *CopyItemNameHandlePlural(u16 itemId, u8 *string, u32 quantity);
@@ -212,7 +235,6 @@ void ClearPCItemSlots(void);
 void TrySetObtainedItemQuestLogEvent(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 amount);
 
-u16 GetBagItemId(enum Pocket pocketId, u32 pocketPos);
 u16 CountTotalItemQuantityInBag(u16 item);
 u8 GetItemImportance(u16 itemId);
 u16 GetPCItemQuantity(u16 *);

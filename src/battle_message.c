@@ -57,7 +57,7 @@ const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1} is preventing switching 
 const u8 gText_StatSharply[] = _("sharply ");
 const u8 gText_StatRose[] = _("rose!");
 const u8 gText_StatFell[] = _("fell!");
-const u8 gText_DefendersStatRose[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1} {B_BUFF2}");
+const u8 gText_DefendersStatRose[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1} {B_BUFF2}rose!");
 static const u8 sText_GotAwaySafely[] = _("{PLAY_SE SE_FLEE}You got away safely!\p");
 static const u8 sText_PlayerDefeatedLinkTrainer[] = _("You defeated {B_LINK_OPPONENT1_NAME}!");
 static const u8 sText_TwoLinkTrainersDefeated[] = _("You defeated {B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}!");
@@ -2688,13 +2688,13 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                     toCpy = sText_Opposing2;
                 break;
             case B_TXT_EFF_TEAM1:
-                if (GetBattlerSide(gBattleScripting.battler) == B_SIDE_PLAYER)
+                if (IsOnPlayerSide(gEffectBattler))
                     toCpy = sText_Your1;
                 else
                     toCpy = sText_Opposing1;
                 break;
             case B_TXT_EFF_TEAM2:
-                if (GetBattlerSide(gBattleScripting.battler) == B_SIDE_PLAYER)
+                if (IsOnPlayerSide(gEffectBattler))
                     toCpy = sText_Your2;
                 else
                     toCpy = sText_Opposing2;

@@ -50,14 +50,27 @@ SINGLE_BATTLE_TEST("Synthesis recovers 1/4 of the user's max HP in Rain, Sandsto
     }
 }
 
+SINGLE_BATTLE_TEST("Synthesis recovers regular amount in sandstorm if holding utility umbrella")
+{
+    u32 item;
+    PARAMETRIZE { item = ITEM_LIFE_ORB; }
+    PARAMETRIZE { item = ITEM_UTILITY_UMBRELLA; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); Item(item); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SANDSTORM); MOVE(player, MOVE_SYNTHESIS); }
+    } SCENE {
+        if (item != ITEM_UTILITY_UMBRELLA)
+            HP_BAR(player, damage: -(400 / 4));
+        else
+            HP_BAR(player, damage: -(400 / 2));
+    }
+}
+
 TO_DO_BATTLE_TEST("TODO: Synthesis recovers 1/4 of the user's max HP while it is not day (Gen2)")
-
 TO_DO_BATTLE_TEST("TODO: Synthesis recovers 1/2 of the user's max HP in Sunlight while it is not day (Gen2)")
-
 TO_DO_BATTLE_TEST("TODO: Synthesis recovers 1/8 of the user's max HP in Rain, Sandstorm, Hail, and Snow while it is not day (Gen2)")
-
 TO_DO_BATTLE_TEST("TODO: Synthesis recovers 2/4 of the user's max HP while it is day (Gen2)")
-
 TO_DO_BATTLE_TEST("TODO: Synthesis recovers 2/2 of the user's max HP in Sunlight while it is day (Gen2)")
-
 TO_DO_BATTLE_TEST("TODO: Synthesis recovers 2/8 of the user's max HP in Rain, Sandstorm, Hail, and Snow while it is day (Gen2)")

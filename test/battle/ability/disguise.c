@@ -6,11 +6,30 @@ ASSUMPTIONS
     ASSUME(GetMoveCategory(MOVE_AERIAL_ACE) == DAMAGE_CATEGORY_PHYSICAL);
 }
 
-SINGLE_BATTLE_TEST("Disguised Mimikyu will lose 1/8 of its max HP upon changing to its busted form")
+SINGLE_BATTLE_TEST("Disguised Mimikyu doesn't lose 1/8 of its max HP upon changing to its busted form (Gen7)")
+{
+    GIVEN {
+        WITH_CONFIG(GEN_CONFIG_DISGUISE_HP_LOSS, GEN_7);
+        PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_AERIAL_ACE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_AERIAL_ACE, opponent);
+        NOT HP_BAR(player);
+        ABILITY_POPUP(player, ABILITY_DISGUISE);
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_MIMIKYU_BUSTED);
+        EXPECT_EQ(player->hp, player->maxHP);
+    }
+}
+
+SINGLE_BATTLE_TEST("Disguised Mimikyu will lose 1/8 of its max HP upon changing to its busted form (Gen8+)")
 {
     s16 disguiseDamage;
 
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_DISGUISE_HP_LOSS, GEN_8);
         PLAYER(SPECIES_MIMIKYU_DISGUISED) { Ability(ABILITY_DISGUISE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

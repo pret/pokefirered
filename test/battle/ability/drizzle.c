@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Drizzle summons rain", s16 damage)
 {
-    u32 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_DRIZZLE; }
     PARAMETRIZE { ability = ABILITY_DAMP; }
 

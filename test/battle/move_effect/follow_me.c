@@ -34,6 +34,19 @@ DOUBLE_BATTLE_TEST("Follow Me redirects single target moves used by opponents to
     }
 }
 
+TO_DO_BATTLE_TEST("Follow Me doesn't redirect opponent moves that can't affect opponents") //Eg. Helping Hand
+TO_DO_BATTLE_TEST("Follow Me no longer redirects if the center of attention faints mid-turn")
+TO_DO_BATTLE_TEST("Follow Me can only redirect charging moves on the turn that they would hit")
+TO_DO_BATTLE_TEST("Follow Me can only redirect Future Sight/Doom Desire on the turn they were selected (Gen3-5)")
+TO_DO_BATTLE_TEST("Follow Me does not redirect Future Sight/Doom Desire (Gen 6+)")
+TO_DO_BATTLE_TEST("Follow Me draws Electric/Water moves even if there's a Pokémon with Lightning Rod/Storm Drain")
+TO_DO_BATTLE_TEST("Follow Me prioritizes the first Pokémon that used it") // There can be 2 centers of attention. If the first is gone, the 2nd is used
+//TO_DO_BATTLE_TEST("Triples: Follow Me can only draw non-adjacent moves if they use a long-range move")
+TO_DO_BATTLE_TEST("Follow Me can be used in Single Battles (Gen3-SwSh)")
+TO_DO_BATTLE_TEST("Follow Me fails in Single Battles (BDSP+)")
+TO_DO_BATTLE_TEST("Follow Me cannot redirect Sky Drop")
+TO_DO_BATTLE_TEST("Follow Me does not draw attack when the user is being Sky-Dropped")
+
 DOUBLE_BATTLE_TEST("Spotlight redirects single target moves used by the opposing side to Spotlight's target")
 {
     struct BattlePokemon *moveTarget = NULL;

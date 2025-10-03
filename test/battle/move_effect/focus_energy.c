@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by 1 st
     u32 genConfig = 0, chance = 0;
     for (u32 j = GEN_1; j <= GEN_9; j++) {
         PARAMETRIZE { genConfig = j; useFocusEnergy = FALSE; chance = j >= GEN_7 ? 24 : 16; } // ~4.16%/6.25% with Wobbuffet's base speed
-        PARAMETRIZE { genConfig = j; useFocusEnergy = TRUE; 
+        PARAMETRIZE { genConfig = j; useFocusEnergy = TRUE;
             if (j >= GEN_6)
                 chance = 2; // 50% / 25%
             else if (j >= GEN_3)
@@ -39,3 +39,6 @@ SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by 1 st
         MESSAGE("A critical hit!");
     }
 }
+
+TO_DO_BATTLE_TEST("Focus Energy fails if critical hit stage was already increased by Dragon Cheer")
+TO_DO_BATTLE_TEST("Baton Pass passes Focus Energy's effect");

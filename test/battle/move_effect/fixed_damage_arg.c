@@ -27,7 +27,9 @@ SINGLE_BATTLE_TEST("Sonic Boom deals fixed damage", s16 damage)
     }
 }
 
-SINGLE_BATTLE_TEST("Sonic Boom doesn't affect ghost types")
+TO_DO_BATTLE_TEST("Sonic Boom affects ghost types (Gen1)")
+
+SINGLE_BATTLE_TEST("Sonic Boom doesn't affect ghost types (Gen2+)")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

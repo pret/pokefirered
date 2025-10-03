@@ -231,23 +231,36 @@ SINGLE_BATTLE_TEST("Gem boosted Damage calculation")
 
 #define NUM_DAMAGE_SPREADS (DMG_ROLL_PERCENT_HI - DMG_ROLL_PERCENT_LO) + 1
 
-static const s16 sThunderShockTransistorSpread[] = { 54, 55, 56, 57, 57, 58, 59, 60, 60, 60, 61, 62, 63, 63, 64, 65 };
+static const s16 sThunderShockTransistorSpreadGen9[] = { 54, 55, 56, 57, 57, 58, 59, 60, 60, 60, 61, 62, 63, 63, 64, 65 };
+static const s16 sThunderShockTransistorSpreadGen8[] = { 63, 64, 65, 66, 66, 67, 68, 69, 69, 70, 71, 72, 72, 73, 74, 75 };
 static const s16 sThunderShockRegularSpread[] = { 42, 42, 43, 43, 44, 45, 45, 45, 46, 46, 47, 48, 48, 48, 49, 50 };
-static const s16 sWildChargeTransistorSpread[] = { 123, 124, 126, 127, 129, 130, 132, 133, 135, 136, 138, 139, 141, 142, 144, 145 };
+static const s16 sWildChargeTransistorSpreadGen9[] = { 123, 124, 126, 127, 129, 130, 132, 133, 135, 136, 138, 139, 141, 142, 144, 145 };
+static const s16 sWildChargeTransistorSpreadGen8[] = { 141, 143, 145, 147, 148, 150, 151, 153, 155, 156, 158, 160, 162, 163, 165, 167 };
 static const s16 sWildChargeRegularSpread[] = { 94, 96, 96, 98, 99, 100, 101, 102, 103, 105, 105, 107, 108, 109, 110, 111 };
 
 DOUBLE_BATTLE_TEST("Transistor Damage calculation", s16 damage)
 {
     s16 expectedDamageTransistorSpec = 0, expectedDamageRegularPhys = 0, expectedDamageRegularSpec = 0, expectedDamageTransistorPhys = 0;
     s16 damagePlayerLeft, damagePlayerRight, damageOpponentLeft, damageOpponentRight;
+    u32 gen = 0;
     for (u32 spread = 0; spread < 16; ++spread) {
-        PARAMETRIZE { expectedDamageTransistorSpec = sThunderShockTransistorSpread[spread],
+        PARAMETRIZE { gen = GEN_9,
+                      expectedDamageTransistorSpec = sThunderShockTransistorSpreadGen9[spread],
+                      expectedDamageRegularSpec = sThunderShockRegularSpread[spread];
+                      expectedDamageTransistorPhys = sWildChargeTransistorSpreadGen9[spread],
+                      expectedDamageRegularPhys = sWildChargeRegularSpread[spread];
+                    }
+    }
+    for (u32 spread = 0; spread < 16; ++spread) {
+        PARAMETRIZE { gen = GEN_8,
+                      expectedDamageTransistorSpec = sThunderShockTransistorSpreadGen8[spread],
                       expectedDamageRegularSpec = sThunderShockRegularSpread[spread],
-                      expectedDamageTransistorPhys = sWildChargeTransistorSpread[spread],
+                      expectedDamageTransistorPhys = sWildChargeTransistorSpreadGen8[spread],
                       expectedDamageRegularPhys = sWildChargeRegularSpread[spread];
                     }
     }
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_TRANSISTOR_BOOST, gen);
         ASSUME(GetMoveType(MOVE_WILD_CHARGE) == TYPE_ELECTRIC);
         ASSUME(GetMoveType(MOVE_THUNDER_SHOCK) == TYPE_ELECTRIC);
         ASSUME(GetMoveCategory(MOVE_WILD_CHARGE) == DAMAGE_CATEGORY_PHYSICAL);
@@ -260,10 +273,10 @@ DOUBLE_BATTLE_TEST("Transistor Damage calculation", s16 damage)
         OPPONENT(SPECIES_REGIELEKI) { Ability(ABILITY_TRANSISTOR); }
     } WHEN {
         TURN {
-            MOVE(playerLeft, MOVE_THUNDER_SHOCK, target: opponentLeft, WITH_RNG(RNG_DAMAGE_MODIFIER, 15 - i));
-            MOVE(playerRight, MOVE_THUNDER_SHOCK, target: opponentRight, WITH_RNG(RNG_DAMAGE_MODIFIER, 15 - i));
-            MOVE(opponentLeft, MOVE_WILD_CHARGE, target: playerLeft, WITH_RNG(RNG_DAMAGE_MODIFIER, 15 - i));
-            MOVE(opponentRight, MOVE_WILD_CHARGE, target: playerRight, WITH_RNG(RNG_DAMAGE_MODIFIER, 15 - i));
+            MOVE(playerLeft, MOVE_THUNDER_SHOCK, target: opponentLeft, WITH_RNG(RNG_DAMAGE_MODIFIER, 15 - (i % 16)));
+            MOVE(playerRight, MOVE_THUNDER_SHOCK, target: opponentRight, WITH_RNG(RNG_DAMAGE_MODIFIER, 15 - (i % 16)));
+            MOVE(opponentLeft, MOVE_WILD_CHARGE, target: playerLeft, WITH_RNG(RNG_DAMAGE_MODIFIER, 15 - (i % 16)));
+            MOVE(opponentRight, MOVE_WILD_CHARGE, target: playerRight, WITH_RNG(RNG_DAMAGE_MODIFIER, 15 - (i % 16)));
         }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDER_SHOCK, playerLeft);

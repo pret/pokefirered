@@ -62,3 +62,5 @@ DOUBLE_BATTLE_TEST("Flower Veil prevents Toxic bad poison on partner - left targ
         MESSAGE("The opposing Chikorita surrounded itself with a veil of petals!");
     }
 }
+
+TO_DO_BATTLE_TEST("Flower Veil's stat reduction protection considers Contrary") // Eg. If a move would reduce stats due to Contrary, it will be protected by Mist.

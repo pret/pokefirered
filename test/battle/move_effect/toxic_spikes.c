@@ -266,3 +266,28 @@ SINGLE_BATTLE_TEST("Toxic Spikes print bad poison for 2 layers")
         MESSAGE("The opposing Wynaut was badly poisoned!");
     }
 }
+
+SINGLE_BATTLE_TEST("Toxic Spikes: Only two layers can be set up")
+{
+    GIVEN {
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_TOXIC_SPIKES); }
+        TURN { MOVE(opponent, MOVE_TOXIC_SPIKES); }
+        TURN { MOVE(opponent, MOVE_TOXIC_SPIKES); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC_SPIKES, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC_SPIKES, opponent);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC_SPIKES, opponent);
+    } THEN {
+        EXPECT_EQ(gBattleStruct->hazardsQueue[0][0], HAZARDS_TOXIC_SPIKES);
+        EXPECT_EQ(gBattleStruct->hazardsQueue[0][1], HAZARDS_NONE);
+        EXPECT_EQ(gBattleStruct->hazardsQueue[0][2], HAZARDS_NONE);
+        EXPECT_EQ(gBattleStruct->hazardsQueue[0][3], HAZARDS_NONE);
+        EXPECT_EQ(gBattleStruct->hazardsQueue[0][4], HAZARDS_NONE);
+        EXPECT_EQ(gBattleStruct->hazardsQueue[0][5], HAZARDS_NONE);
+        u32 toxicSpikesAmount = gSideTimers[0].toxicSpikesAmount;
+        EXPECT_EQ(toxicSpikesAmount, 2);
+    }
+}

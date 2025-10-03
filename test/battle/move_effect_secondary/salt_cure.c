@@ -132,3 +132,19 @@ SINGLE_BATTLE_TEST("If Salt Cure faints the target, messages will be applied in 
         MESSAGE("The opposing Wobbuffet fainted!");
     }
 }
+
+DOUBLE_BATTLE_TEST("Salt Cure works in double battles")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_SALT_CURE, target: opponentLeft); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SALT_CURE, playerLeft);
+        HP_BAR(opponentLeft);
+        HP_BAR(opponentLeft);
+    }
+}

@@ -159,7 +159,7 @@ SINGLE_BATTLE_TEST("Hit Escape: Held items are consumed immediately after a mon 
     }
 }
 
-SINGLE_BATTLE_TEST("Hit Escape: Electric Seed boost is received by the right pokemon after U-turn and Intimidate")
+SINGLE_BATTLE_TEST("Hit Escape: Electric Seed boost is received by the right Pokémon after U-turn and Intimidate")
 {
     GIVEN {
         PLAYER(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); };

@@ -6,9 +6,10 @@
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves do not retain priority")
 {
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_MEGA_EVO_TURN_ORDER, GEN_7); // TODO: Decouple this config from other gimmicks
         ASSUME(GetMoveType(MOVE_QUICK_ATTACK) == TYPE_NORMAL);
-        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
-        OPPONENT(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_SCRATCH);
                MOVE(player, MOVE_QUICK_ATTACK, gimmick: GIMMICK_Z_MOVE); }
@@ -578,7 +579,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Extreme Evoboost boosts all the user's stats by two
 SINGLE_BATTLE_TEST("(Z-MOVE) Genesis Supernova sets up psychic terrain")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_GENESIS_SUPERNOVA) == EFFECT_HIT_SET_REMOVE_TERRAIN);
+        ASSUME(GetMoveEffect(MOVE_GENESIS_SUPERNOVA) == EFFECT_HIT_SET_TERRAIN);
         PLAYER(SPECIES_MEW) { Item(ITEM_MEWNIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -588,14 +589,14 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Genesis Supernova sets up psychic terrain")
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_GENESIS_SUPERNOVA, player);
         NOT { ANIMATION(ANIM_TYPE_MOVE, MOVE_QUICK_ATTACK, player); }
-        MESSAGE("Mew cannot use Quick Attack!");
+        MESSAGE("The opposing Wobbuffet is protected by the Psychic Terrain!");
     }
 }
 
 SINGLE_BATTLE_TEST("(Z-MOVE) Splintered Stormshards removes terrain")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_SPLINTERED_STORMSHARDS) == EFFECT_HIT_SET_REMOVE_TERRAIN);
+        ASSUME(GetMoveEffect(MOVE_SPLINTERED_STORMSHARDS) == EFFECT_ICE_SPINNER);
         PLAYER(SPECIES_LYCANROC_DUSK) { Item(ITEM_LYCANIUM_Z); }
         OPPONENT(SPECIES_TAPU_LELE) { Ability(ABILITY_PSYCHIC_SURGE); HP(1000); MaxHP(1000); }
     } WHEN {
@@ -679,3 +680,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Revelation Dance always transforms into Breakneck
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BREAKNECK_BLITZ, player);
     }
 }
+
+TO_DO_BATTLE_TEST("(Z-MOVE) Stat changes from status Z-Moves are not inverted by Contrary")
+TO_DO_BATTLE_TEST("(Z-MOVE) Stat changes from Extreme Evoboost are inverted by Contrary")
+TO_DO_BATTLE_TEST("(Z-MOVE) Stat changes from Clangorous Soulblaze are inverted by Contrary")

@@ -35,3 +35,5 @@ DOUBLE_BATTLE_TEST("Magic Room prevents item hold effects")
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponentRight);
     }
 }
+
+TO_DO_BATTLE_TEST("TODO: Write Magic Room (Move Effect) test titles")

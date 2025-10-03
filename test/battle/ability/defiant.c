@@ -3,7 +3,7 @@
 
 DOUBLE_BATTLE_TEST("Defiant sharply raises player's Attack after Intimidate")
 {
-    u32 abilityLeft, abilityRight;
+    enum Ability abilityLeft, abilityRight;
 
     PARAMETRIZE { abilityLeft = ABILITY_VITAL_SPIRIT; abilityRight = ABILITY_VITAL_SPIRIT; }
     PARAMETRIZE { abilityLeft = ABILITY_VITAL_SPIRIT; abilityRight = ABILITY_DEFIANT; }
@@ -51,7 +51,7 @@ DOUBLE_BATTLE_TEST("Defiant sharply raises player's Attack after Intimidate")
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
             MESSAGE("Primeape's Attack sharply rose!");
         }
-    } FINALLY {
+    } THEN {
         // -2 from Intimidates and +4 from Defiants gets +2 total
         EXPECT_EQ(playerLeft->statStages[STAT_ATK], (abilityLeft == ABILITY_DEFIANT) ? DEFAULT_STAT_STAGE + 2 : DEFAULT_STAT_STAGE - 2);
         EXPECT_EQ(playerRight->statStages[STAT_ATK], (abilityRight == ABILITY_DEFIANT) ? DEFAULT_STAT_STAGE + 2 : DEFAULT_STAT_STAGE - 2);
@@ -61,7 +61,7 @@ DOUBLE_BATTLE_TEST("Defiant sharply raises player's Attack after Intimidate")
 // Same as above, but for opponent.
 DOUBLE_BATTLE_TEST("Defiant sharply raises opponent's Attack after Intimidate")
 {
-    u32 abilityLeft, abilityRight;
+    enum Ability abilityLeft, abilityRight;
 
     PARAMETRIZE { abilityLeft = ABILITY_VITAL_SPIRIT; abilityRight = ABILITY_VITAL_SPIRIT; }
     PARAMETRIZE { abilityLeft = ABILITY_VITAL_SPIRIT; abilityRight = ABILITY_DEFIANT; }
@@ -109,7 +109,7 @@ DOUBLE_BATTLE_TEST("Defiant sharply raises opponent's Attack after Intimidate")
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
             MESSAGE("The opposing Primeape's Attack sharply rose!");
         }
-    } FINALLY {
+    } THEN {
         // -2 from Intimidates and +4 from Defiants gets +2 total
         EXPECT_EQ(opponentLeft->statStages[STAT_ATK], (abilityLeft == ABILITY_DEFIANT) ? DEFAULT_STAT_STAGE + 2 : DEFAULT_STAT_STAGE - 2);
         EXPECT_EQ(opponentRight->statStages[STAT_ATK], (abilityRight == ABILITY_DEFIANT) ? DEFAULT_STAT_STAGE + 2 : DEFAULT_STAT_STAGE - 2);
@@ -210,7 +210,7 @@ SINGLE_BATTLE_TEST("Defiant activates after Sticky Web lowers Speed if Court Cha
     }
 }
 
-DOUBLE_BATTLE_TEST("Defiant is activated by Cotton Down for non-ally pokemon")
+DOUBLE_BATTLE_TEST("Defiant is activated by Cotton Down for non-ally Pokémon")
 {
     GIVEN {
         PLAYER(SPECIES_MANKEY) { Ability(ABILITY_DEFIANT); }
@@ -311,7 +311,7 @@ SINGLE_BATTLE_TEST("Defiant activates for each stat that is lowered")
     }
 }
 
-SINGLE_BATTLE_TEST("Defiant doesn't activate if the pokemon lowers it's own stats")
+SINGLE_BATTLE_TEST("Defiant doesn't activate if the Pokémon lowers it's own stats")
 {
     u32 move;
 

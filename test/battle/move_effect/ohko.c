@@ -21,6 +21,18 @@ SINGLE_BATTLE_TEST("OHKO moves can hit semi-invulnerable mons when the user has 
     }
 }
 
+SINGLE_BATTLE_TEST("OHKO moves can not hit semi-invulnerable")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FLY); MOVE(player, MOVE_FISSURE); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
+    }
+}
+
 SINGLE_BATTLE_TEST("OHKO moves can can be endured by Focus Sash")
 {
     GIVEN {
@@ -48,7 +60,29 @@ SINGLE_BATTLE_TEST("OHKO moves can can be endured by Sturdy")
     }
 }
 
+SINGLE_BATTLE_TEST("OHKO moves always fails if the target has a higher level than the user")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Level(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Level(2); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FISSURE); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
+    }
+}
+
+SINGLE_BATTLE_TEST("OHKO moves fail if target protects")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_PROTECT); MOVE(player, MOVE_FISSURE); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FISSURE, player);
+    }
+}
 TO_DO_BATTLE_TEST("OHKO moves faints the target, skipping regular damage calculations")
-TO_DO_BATTLE_TEST("OHKO moves always fails if the target has a higher level than the user")
 TO_DO_BATTLE_TEST("OHKO moves's accuracy increases by 1% for every level the user has over the target")
 TO_DO_BATTLE_TEST("OHKO moves's ignores non-stage accuracy modifiers") // Gravity, Wide Lens, Compound Eyes

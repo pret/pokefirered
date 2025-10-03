@@ -29,16 +29,16 @@ DOUBLE_BATTLE_TEST("Court Change swaps entry hazards used by the opponent")
         MESSAGE("Wynaut swapped the battle effects affecting each side of the field!");
         SEND_IN_MESSAGE("Wynaut");
         NONE_OF {
-            MESSAGE("Wynaut was hurt by the spikes!");
-            MESSAGE("Pointed stones dug into Wynaut!");
-            MESSAGE("Wynaut was poisoned!");
             MESSAGE("Wynaut was caught in a sticky web!");
+            MESSAGE("Pointed stones dug into Wynaut!");
+            MESSAGE("Wynaut was hurt by the spikes!");
+            MESSAGE("Wynaut was poisoned!");
         }
         MESSAGE("2 sent out Wobbuffet!");
-        MESSAGE("The opposing Wobbuffet was hurt by the spikes!");
-        MESSAGE("Pointed stones dug into the opposing Wobbuffet!");
-        MESSAGE("The opposing Wobbuffet was poisoned!");
         MESSAGE("The opposing Wobbuffet was caught in a sticky web!");
+        MESSAGE("Pointed stones dug into the opposing Wobbuffet!");
+        MESSAGE("The opposing Wobbuffet was hurt by the spikes!");
+        MESSAGE("The opposing Wobbuffet was poisoned!");
     }
 }
 
@@ -64,16 +64,16 @@ DOUBLE_BATTLE_TEST("Court Change swaps entry hazards used by the player")
         MESSAGE("The opposing Wynaut used Court Change!");
         MESSAGE("The opposing Wynaut swapped the battle effects affecting each side of the field!");
         SEND_IN_MESSAGE("Wobbuffet");
-        MESSAGE("Wobbuffet was hurt by the spikes!");
-        MESSAGE("Pointed stones dug into Wobbuffet!");
-        MESSAGE("Wobbuffet was poisoned!");
         MESSAGE("Wobbuffet was caught in a sticky web!");
+        MESSAGE("Pointed stones dug into Wobbuffet!");
+        MESSAGE("Wobbuffet was hurt by the spikes!");
+        MESSAGE("Wobbuffet was poisoned!");
         MESSAGE("2 sent out Wynaut!");
         NONE_OF {
-            MESSAGE("The opposing Wynaut was hurt by the spikes!");
-            MESSAGE("Pointed stones dug into the opposing Wynaut!");
-            MESSAGE("The opposing Wynaut was poisoned!");
             MESSAGE("The opposing Wynaut was caught in a sticky web!");
+            MESSAGE("Pointed stones dug into the opposing Wynaut!");
+            MESSAGE("The opposing Wynaut was hurt by the spikes!");
+            MESSAGE("The opposing Wynaut was poisoned!");
         }
     }
 }
@@ -217,3 +217,35 @@ DOUBLE_BATTLE_TEST("Court Change used by the player swaps G-Max Vine Lash, G-Max
         }
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI uses Court Change")
+{
+    u32 move;
+
+    PARAMETRIZE { move = MOVE_HEADBUTT; }
+    PARAMETRIZE { move = MOVE_REFLECT; }
+    PARAMETRIZE { move = MOVE_LIGHT_SCREEN; }
+    PARAMETRIZE { move = MOVE_SAFEGUARD; }
+    PARAMETRIZE { move = MOVE_SPIKES; }
+    PARAMETRIZE { move = MOVE_STEALTH_ROCK; }
+    PARAMETRIZE { move = MOVE_TOXIC_SPIKES; }
+    PARAMETRIZE { move = MOVE_TAILWIND; }
+    PARAMETRIZE { move = MOVE_STICKY_WEB; }
+    PARAMETRIZE { move = MOVE_MIST; }
+    PARAMETRIZE { move = MOVE_LUCKY_CHANT; }
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(move, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_ZIGZAGOON) { Moves(move, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_COURT_CHANGE, MOVE_HEADBUTT); }
+        OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_COURT_CHANGE, MOVE_HEADBUTT); }
+    } WHEN {
+        TURN { MOVE(player, move); EXPECT_MOVE(opponent, MOVE_HEADBUTT); }
+        if (move == MOVE_HEADBUTT)
+            TURN { MOVE(player, MOVE_CELEBRATE); NOT_EXPECT_MOVE(opponent, MOVE_COURT_CHANGE); }
+        else
+            TURN { MOVE(player, MOVE_CELEBRATE); EXPECT_MOVE(opponent, MOVE_COURT_CHANGE); }
+    }
+}
+

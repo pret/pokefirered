@@ -4,7 +4,8 @@
 
 SINGLE_BATTLE_TEST("Embody Aspect raises a stat depending on the users form by one stage")
 {
-    u16 species, ability;
+    u16 species;
+    enum Ability ability;
 
     PARAMETRIZE { species = SPECIES_OGERPON_TEAL_TERA; ability = ABILITY_EMBODY_ASPECT_TEAL_MASK; }
     PARAMETRIZE { species = SPECIES_OGERPON_HEARTHFLAME_TERA; ability = ABILITY_EMBODY_ASPECT_HEARTHFLAME_MASK; }

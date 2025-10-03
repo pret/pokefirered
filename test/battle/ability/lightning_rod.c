@@ -28,6 +28,8 @@ SINGLE_BATTLE_TEST("Lightning Rod absorbs Electric-type moves and increases the 
             HP_BAR(opponent);
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    } THEN {
+        EXPECT_EQ(gBattleHistory->abilities[1], ABILITY_LIGHTNING_ROD); // Check if the correct ability has been recorded
     }
 }
 

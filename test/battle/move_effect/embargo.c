@@ -77,7 +77,7 @@ WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect effort val
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_POWER_WEIGHT); }
         OPPONENT(SPECIES_CATERPIE) { HP(1); }
         ASSUME(gItemsInfo[ITEM_POWER_WEIGHT].holdEffect == HOLD_EFFECT_POWER_ITEM);
-        ASSUME(gItemsInfo[ITEM_POWER_WEIGHT].holdEffectParam == 8);
+        ASSUME(gItemsInfo[ITEM_POWER_WEIGHT].holdEffectParam != 0);
         ASSUME(gItemsInfo[ITEM_POWER_WEIGHT].secondaryId == STAT_HP);
         ASSUME(gSpeciesInfo[SPECIES_CATERPIE].evYield_HP == 1);
     } WHEN {
@@ -114,28 +114,32 @@ SINGLE_BATTLE_TEST("Embargo negates a held item's Speed reduction")
     }
 }
 
-WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect friendship")
-{
-    u32 initialFriendship;
-    u32 finalFriendship;
+// This is a useful test, but under the current circumstances, we can't actually test this without modifying
+// X_ITEM_FRIENDSHIP_INCREASE. Since HOLD_EFFECT_FRIENDSHIP_UP applies a 1.5x modifier, and the stock
+// Friendship increase is 1, the held item effect actually does not affect the Friendship gained.
+//
+// WILD_BATTLE_TEST("Embargo doesn't block held item effects that affect friendship")
+// {
+//     u32 initialFriendship;
+//     u32 finalFriendship;
 
-    KNOWN_FAILING; // Pokémon are currently not obtaining Friendship for using items in battle.
-    GIVEN {
-        ASSUME(gItemsInfo[ITEM_X_ACCURACY].battleUsage == EFFECT_ITEM_INCREASE_STAT);
-        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SOOTHE_BELL); };
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { USE_ITEM(player, ITEM_X_ACCURACY); }
-        TURN { MOVE(player, MOVE_SING); }
-    } SCENE {
-        MESSAGE("Wobbuffet used Sing!");
-        MESSAGE("Wild Wobbuffet fell asleep!");
-    } THEN {
-        initialFriendship = GetMonData(&PLAYER_PARTY[0], MON_DATA_FRIENDSHIP);
-        finalFriendship = GetMonData(&gPlayerParty[0], MON_DATA_FRIENDSHIP);
-        EXPECT_EQ(finalFriendship, initialFriendship + 2);
-    }
-}
+//     KNOWN_FAILING; // Pokémon are currently not obtaining Friendship for using items in battle.
+//     GIVEN {
+//         ASSUME(gItemsInfo[ITEM_X_ACCURACY].battleUsage == EFFECT_ITEM_INCREASE_STAT);
+//         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SOOTHE_BELL); };
+//         OPPONENT(SPECIES_WOBBUFFET);
+//     } WHEN {
+//         TURN { USE_ITEM(player, ITEM_X_ACCURACY); }
+//         TURN { MOVE(player, MOVE_SING); }
+//     } SCENE {
+//         MESSAGE("Wobbuffet used Sing!");
+//         MESSAGE("Wild Wobbuffet fell asleep!");
+//     } THEN {
+//         initialFriendship = GetMonData(&PLAYER_PARTY[0], MON_DATA_FRIENDSHIP);
+//         finalFriendship = GetMonData(&gPlayerParty[0], MON_DATA_FRIENDSHIP);
+//         EXPECT_EQ(finalFriendship, initialFriendship + 2);
+//     }
+// }
 
 SINGLE_BATTLE_TEST("Embargo doesn't block a held item's form-changing effect, but it does block its other effects", s16 damage)
 {

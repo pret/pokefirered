@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-DOUBLE_BATTLE_TEST("Frisk does not trigger when pokemon hold no items")
+DOUBLE_BATTLE_TEST("Frisk does not trigger when Pokémon hold no items")
 {
     GIVEN {
         PLAYER(SPECIES_FURRET) { Ability(ABILITY_FRISK); };

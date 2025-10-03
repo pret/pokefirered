@@ -64,13 +64,14 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_RISKY: Mid-battle switches prioritize offensive o
     PARAMETRIZE { aiRiskyFlag = AI_FLAG_RISKY; }
 
     GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_MON_CHOICES | aiRiskyFlag);
+        ASSUME(P_UPDATED_STATS >= GEN_7); // Swellow's 50 Sp.Atk in Gen 6 instead of the current 75 causes the AI to switch to Electrode
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_OMNISCIENT | aiRiskyFlag);
         PLAYER(SPECIES_SWELLOW) { Level(30); Moves(MOVE_WING_ATTACK, MOVE_BOOMBURST); Speed(5); }
         OPPONENT(SPECIES_PONYTA) { Level(1); Moves(MOVE_NONE); Speed(4); } // Forces switchout
         OPPONENT(SPECIES_ARON) { Level(30); Moves(MOVE_HEADBUTT); Speed(4); SpDefense(41); } // Mid battle, AI sends out Aron
         OPPONENT(SPECIES_ELECTRODE) { Level(30); Moves(MOVE_CHARGE_BEAM); Speed(6); Ability(ABILITY_STATIC); }
     } WHEN {
-            TURN { MOVE(player, MOVE_WING_ATTACK); EXPECT_SWITCH(opponent, aiRiskyFlag? 2 : 1); }
+        TURN { MOVE(player, MOVE_WING_ATTACK); EXPECT_SWITCH(opponent, aiRiskyFlag? 2 : 1); }
     }
 }
 

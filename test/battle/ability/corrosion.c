@@ -238,3 +238,10 @@ SINGLE_BATTLE_TEST("Corrosion's effect is lost if the move used by the Pokémon 
         }
     }
 }
+
+TO_DO_BATTLE_TEST("Corrosion can poison Poison/Steel types if the Pokémon uses Baneful Bunker")
+TO_DO_BATTLE_TEST("Corrosion can poison Poison/Steel types if the Pokémon uses Psycho Shift while poisoned")
+TO_DO_BATTLE_TEST("Corrosion can poison Poison/Steel types if the Pokémon uses Fling while holding a Toxic Orb")
+TO_DO_BATTLE_TEST("Corrosion can poison Poison/Steel types if the Pokémon uses Fling while holding a Poison Barb")
+TO_DO_BATTLE_TEST("Dynamax: Corrosion can poison Poison/Steel types if the Pokémon uses G-Max Malodor")
+TO_DO_BATTLE_TEST("Corrosion does not affect Poison Spikes")

@@ -29,6 +29,8 @@ SINGLE_BATTLE_TEST("Hex deals double damage to foes with a status", s16 damage)
     }
 }
 
+TO_DO_BATTLE_TEST("Hex deals double damage to Pokémon with Comatose")
+
 SINGLE_BATTLE_TEST("Venoshock's power doubles if the target is poisoned/badly poisoned", s16 damage)
 {
     u32 status1;

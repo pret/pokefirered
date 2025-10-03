@@ -73,3 +73,64 @@ SINGLE_BATTLE_TEST("Berserk activates after all hits from a multi-hit move")
         EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 1);
     }
 }
+
+SINGLE_BATTLE_TEST("Berserk does not activate if move is boosted by Sheer Force")
+{
+    u16 maxHp = 500;
+    GIVEN {
+        PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); MaxHP(maxHp); HP(maxHp / 2 + 1); }
+        OPPONENT(SPECIES_NIDOKING) { Ability(ABILITY_SHEER_FORCE); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_EMBER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponent);
+        NOT ABILITY_POPUP(player, ABILITY_BERSERK);
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(player->statStages[STAT_SPEED], DEFAULT_STAT_STAGE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Berserk will not activate if the last multi hit move activates a restore berry")
+{
+    u32 j;
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_DOUBLE_SLAP) == EFFECT_MULTI_HIT);
+        PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); Item(ITEM_SITRUS_BERRY); MaxHP(100); HP(90); }
+        OPPONENT(SPECIES_SHELLDER) { Ability(ABILITY_SKILL_LINK); } // Always hits 5 times.
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_DOUBLE_SLAP); }
+    } SCENE {
+        for (j = 0; j < 4; j++) {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_DOUBLE_SLAP, opponent);
+            NOT ABILITY_POPUP(player, ABILITY_BERSERK);
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DOUBLE_SLAP, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+        NOT ABILITY_POPUP(player, ABILITY_BERSERK);
+
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Berserk activates before the hp can be restored on non multi hit moves")
+{
+    u16 maxHp = 500;
+    GIVEN {
+        ASSUME(!IsBattleMoveStatus(MOVE_SCRATCH));
+        PLAYER(SPECIES_DRAMPA) { Ability(ABILITY_BERSERK); Item(ITEM_SITRUS_BERRY); MaxHP(maxHp); HP(maxHp / 2 + 1); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        ABILITY_POPUP(player, ABILITY_BERSERK);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, player);
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 1);
+    }
+}

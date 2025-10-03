@@ -47,7 +47,8 @@ SINGLE_BATTLE_TEST("Paralysis has a 25% chance of skipping the turn")
 
 AI_SINGLE_BATTLE_TEST("AI avoids Thunder Wave when it can not paralyse target")
 {
-    u32 species, ability;
+    u32 species;
+    enum Ability ability;
 
     PARAMETRIZE { species = SPECIES_HITMONLEE; ability = ABILITY_LIMBER; }
     PARAMETRIZE { species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }
@@ -75,5 +76,19 @@ SINGLE_BATTLE_TEST("Thunder Wave doesn't affect Electric types in Gen6+")
     } SCENE {
         MESSAGE("Wobbuffet used Thunder Wave!");
         MESSAGE("It doesn't affect the opposing Pikachu…");
+    }
+}
+
+SINGLE_BATTLE_TEST("Thunder Wave doesn't print an effectiveness message")
+{
+    GIVEN {
+        ASSUME(gSpeciesInfo[SPECIES_PIDGEY].types[1] == TYPE_FLYING);
+        PLAYER(SPECIES_PIDGEY);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_THUNDER_WAVE); }
+    } SCENE {
+        MESSAGE("The opposing Wobbuffet used Thunder Wave!");
+        NOT MESSAGE("It's super effective!");
     }
 }

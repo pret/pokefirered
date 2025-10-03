@@ -44,6 +44,7 @@ SINGLE_BATTLE_TEST("Teraform Zero can be replaced")
         PLAYER(SPECIES_TERAPAGOS);
         OPPONENT(SPECIES_WHIMSICOTT) { Ability(ABILITY_PRANKSTER); }
     } WHEN {
+        TURN { MOVE(opponent, MOVE_POUND); }
         TURN { MOVE(opponent, MOVE_WORRY_SEED); MOVE(player, MOVE_REST, gimmick: GIMMICK_TERA); }
     } SCENE {
         MESSAGE("The opposing Whimsicott used Worry Seed!");

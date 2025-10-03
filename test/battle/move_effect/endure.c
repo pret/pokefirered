@@ -27,6 +27,33 @@ SINGLE_BATTLE_TEST("Endure does not prevent multiple hits and stat changes occur
     }
 }
 
+DOUBLE_BATTLE_TEST("Endure is not transferred to a mon that is switched in due to Eject Button")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT) { HP(1); Item(ITEM_EJECT_BUTTON); }
+        OPPONENT(SPECIES_SQUIRTLE) { HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(opponentRight, MOVE_ENDURE);
+            MOVE(playerLeft, MOVE_POUND, target: opponentRight);
+            SEND_OUT(opponentRight, 2);
+            MOVE(playerRight, MOVE_POUND, target: opponentRight);
+            SEND_OUT(opponentRight, 3);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENDURE, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POUND, playerLeft);
+        MESSAGE("The opposing Wynaut endured the hit!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_POUND, playerRight);
+        NOT MESSAGE("The opposing Squirtle endured the hit!");
+    }
+}
+
 TO_DO_BATTLE_TEST("Endure's success rate decreases for every consecutively used turn");
 TO_DO_BATTLE_TEST("Endure uses the same counter as Protect");
 TO_DO_BATTLE_TEST("Endure doesn't trigger effects that require damage to be done to the Pokémon (Gen 2-4)"); // Eg. Rough Skin

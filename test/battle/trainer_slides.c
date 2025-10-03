@@ -109,7 +109,7 @@ SINGLE_BATTLE_TEST("Trainer Slide: Enemy Mon Unaffected")
 {
     gBattleTestRunnerState->data.recordedBattle.opponentA = TRAINER_SLIDE_ENEMY_MON_UNAFFECTED;
     GIVEN {
-        ASSUME(B_SHEER_COLD_IMMUNITY >= GEN_7);
+        WITH_CONFIG(GEN_CONFIG_SHEER_COLD_IMMUNITY, GEN_7);
         ASSUME(GetSpeciesType(SPECIES_GLALIE, 0) == TYPE_ICE);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_GLALIE);

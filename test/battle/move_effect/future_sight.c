@@ -60,13 +60,14 @@ SINGLE_BATTLE_TEST("Future Sight is not boosted by Life Orb is original user if 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FUTURE_SIGHT, player);
         MESSAGE("The opposing Regice took the Future Sight attack!");
         HP_BAR(opponent, captureDamage: &futureSightDmg);
-        NOT MESSAGE("Raichu was hurt by its Life Orb!");
+        NOT HP_BAR(player);
     } THEN {
         EXPECT_EQ(seedFlareDmg, futureSightDmg);
     }
 }
 
-SINGLE_BATTLE_TEST("Future Sight receives STAB from party mon")
+TO_DO_BATTLE_TEST("Future Sight does not receive STAB from party mon (Gen 2-4)")
+SINGLE_BATTLE_TEST("Future Sight receives STAB from party mon (Gen 5+)")
 {
     s16 seedFlareDmg;
     s16 futureSightDmg;
@@ -91,7 +92,8 @@ SINGLE_BATTLE_TEST("Future Sight receives STAB from party mon")
     }
 }
 
-SINGLE_BATTLE_TEST("Future Sight is affected by type effectiveness")
+TO_DO_BATTLE_TEST("Future Sight is not affected by type effectiveness (Gen 2-4)")
+SINGLE_BATTLE_TEST("Future Sight is affected by type effectiveness (Gen 5+)")
 {
     GIVEN {
         PLAYER(SPECIES_PIKACHU);
@@ -112,6 +114,9 @@ SINGLE_BATTLE_TEST("Future Sight is affected by type effectiveness")
         NOT HP_BAR(opponent);
     }
 }
+
+TO_DO_BATTLE_TEST("Future Sight ignores Wonder Guard (Gen 2-4)")
+TO_DO_BATTLE_TEST("Future Sight doesn't ignore Wonder Guard (Gen 5+)")
 
 SINGLE_BATTLE_TEST("Future Sight will miss timing if target faints before it is about to get hit")
 {

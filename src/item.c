@@ -56,6 +56,75 @@ const struct TmHmIndexKey gTMHMItemMoveIds[NUM_ALL_MACHINES + 1] =
 #undef UNPACK_TM_ITEM_ID
 #undef UNPACK_HM_ITEM_ID
 
+
+static inline struct ItemSlot NONNULL BagPocket_GetSlotDataGeneric(struct BagPocket *pocket, u32 pocketPos)
+{
+    return (struct ItemSlot) {
+        .itemId = pocket->itemSlots[pocketPos].itemId,
+        .quantity = pocket->itemSlots[pocketPos].quantity,
+    };
+}
+
+static inline struct ItemSlot NONNULL BagPocket_GetSlotDataPC(struct BagPocket *pocket, u32 pocketPos)
+{
+    return (struct ItemSlot) {
+        .itemId = pocket->itemSlots[pocketPos].itemId,
+        .quantity = pocket->itemSlots[pocketPos].quantity,
+    };
+}
+
+static inline void NONNULL BagPocket_SetSlotDataGeneric(struct BagPocket *pocket, u32 pocketPos, struct ItemSlot newSlot)
+{
+    pocket->itemSlots[pocketPos].itemId = newSlot.itemId;
+    pocket->itemSlots[pocketPos].quantity = newSlot.quantity;
+}
+
+static inline void NONNULL BagPocket_SetSlotDataPC(struct BagPocket *pocket, u32 pocketPos, struct ItemSlot newSlot)
+{
+    pocket->itemSlots[pocketPos].itemId = newSlot.itemId;
+    pocket->itemSlots[pocketPos].quantity = newSlot.quantity;
+}
+
+struct ItemSlot NONNULL BagPocket_GetSlotData(struct BagPocket *pocket, u32 pocketPos)
+{
+    switch (pocket->id)
+    {
+    case POCKET_ITEMS:
+    case POCKET_KEY_ITEMS:
+    case POCKET_POKE_BALLS:
+    case POCKET_TM_HM:
+    case POCKET_BERRIES:
+        return BagPocket_GetSlotDataGeneric(pocket, pocketPos);
+    case POCKET_DUMMY:
+        return BagPocket_GetSlotDataPC(pocket, pocketPos);
+    }
+
+    return (struct ItemSlot) {0}; // Because compiler complains
+}
+
+void NONNULL BagPocket_SetSlotData(struct BagPocket *pocket, u32 pocketPos, struct ItemSlot newSlot)
+{
+    if (newSlot.itemId == ITEM_NONE || newSlot.quantity == 0) // Sets to zero if quantity or itemId is zero
+    {
+        newSlot.itemId = ITEM_NONE;
+        newSlot.quantity = 0;
+    }
+
+    switch (pocket->id)
+    {
+    case POCKET_ITEMS:
+    case POCKET_KEY_ITEMS:
+    case POCKET_POKE_BALLS:
+    case POCKET_TM_HM:
+    case POCKET_BERRIES:
+        BagPocket_SetSlotDataGeneric(pocket, pocketPos, newSlot);
+        break;
+    case POCKET_DUMMY:
+        BagPocket_SetSlotDataPC(pocket, pocketPos, newSlot);
+        break;
+    }
+}
+
 static inline u16 GetBagItemIdPocket(struct BagPocket *pocket, u32 pocketPos)
 {
     return pocket->itemSlots[pocketPos].itemId;
@@ -74,16 +143,6 @@ static inline void SetBagItemIdPocket(struct BagPocket *pocket, u32 pocketPos, u
 static inline void SetBagItemQuantityPocket(struct BagPocket *pocket, u32 pocketPos, u16 newValue)
 {
     pocket->itemSlots[pocketPos].quantity = newValue;
-}
-
-u16 GetBagItemId(enum Pocket pocketId, u32 pocketPos)
-{
-    return GetBagItemIdPocket(&gBagPockets[pocketId], pocketPos);
-}
-
-u16 GetBagItemQuantity(enum Pocket pocketId, u32 pocketPos)
-{
-    return GetBagItemQuantityPocket(&gBagPockets[pocketId], pocketPos);
 }
 
 // static void SetBagItemId(enum Pocket pocketId, u32 pocketPos, u16 itemId)
@@ -110,18 +169,23 @@ void SetBagItemsPointers(void)
 {
     gBagPockets[POCKET_ITEMS].itemSlots = gSaveBlock1Ptr->bag.items;
     gBagPockets[POCKET_ITEMS].capacity = BAG_ITEMS_COUNT;
+    gBagPockets[POCKET_ITEMS].id = POCKET_ITEMS;
 
     gBagPockets[POCKET_KEY_ITEMS].itemSlots = gSaveBlock1Ptr->bag.keyItems;
     gBagPockets[POCKET_KEY_ITEMS].capacity = BAG_KEYITEMS_COUNT;
+    gBagPockets[POCKET_KEY_ITEMS].id = POCKET_KEY_ITEMS;
 
     gBagPockets[POCKET_POKE_BALLS].itemSlots = gSaveBlock1Ptr->bag.pokeBalls;
     gBagPockets[POCKET_POKE_BALLS].capacity = BAG_POKEBALLS_COUNT;
+    gBagPockets[POCKET_POKE_BALLS].id = POCKET_POKE_BALLS;
 
     gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.TMsHMs;
     gBagPockets[POCKET_TM_HM].capacity = BAG_TMHM_COUNT;
+    gBagPockets[POCKET_TM_HM].id = POCKET_TM_HM;
 
     gBagPockets[POCKET_BERRIES].itemSlots = gSaveBlock1Ptr->bag.berries;
     gBagPockets[POCKET_BERRIES].capacity = BAG_BERRIES_COUNT;
+    gBagPockets[POCKET_BERRIES].id = POCKET_BERRIES;
 }
 
 u8 *CopyItemName(u16 itemId, u8 * dest)
@@ -706,7 +770,7 @@ u32 GetItemPrice(u16 itemId)
 
 static bool32 DoesItemHavePluralName(u16 itemId)
 {
-    return (gItemsInfo[SanitizeItemId(itemId)].pluralName[0] != '\0');
+    return gItemsInfo[SanitizeItemId(itemId)].pluralName != NULL;
 }
 
 static const u8 *ItemId_GetPluralName(u16 itemId)

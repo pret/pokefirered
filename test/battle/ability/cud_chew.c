@@ -47,3 +47,5 @@ SINGLE_BATTLE_TEST("Cud Chew will activate Oran Berry effect again on the next t
         EXPECT_EQ(opponent->hp, 40);
     }
 }
+
+TO_DO_BATTLE_TEST("Cud Chew will activate Lum Berry effect again on the next turn")

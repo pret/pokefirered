@@ -51,6 +51,7 @@ DOUBLE_BATTLE_TEST("Pursuit doesn't attack a foe using Teleport / Baton Pass to 
     PARAMETRIZE { move = MOVE_TELEPORT; }
     PARAMETRIZE { move = MOVE_BATON_PASS; }
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_TELEPORT_BEHAVIOR, GEN_8);
         ASSUME(GetMoveEffect(MOVE_QUASH) == EFFECT_QUASH);
         ASSUME(GetMoveEffect(MOVE_TELEPORT) == EFFECT_TELEPORT);
         ASSUME(GetMoveEffect(MOVE_BATON_PASS) == EFFECT_BATON_PASS);

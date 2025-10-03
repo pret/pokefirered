@@ -73,7 +73,8 @@ SINGLE_BATTLE_TEST("Toxic cannot miss if used by a Poison-type")
 
 AI_SINGLE_BATTLE_TEST("AI avoids toxic when it can not poison target")
 {
-    u32 species, ability;
+    u32 species;
+    enum Ability ability;
 
     PARAMETRIZE { species = SPECIES_SNORLAX; ability = ABILITY_IMMUNITY; }
     PARAMETRIZE { species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }

@@ -6,9 +6,10 @@ gInitialMainCB2 = CB2_TestRunner;
 
 MEMORY
 {
-    EWRAM (rwx) : ORIGIN = 0x2000000, LENGTH = 256K
-    IWRAM (rwx) : ORIGIN = 0x3000000, LENGTH = 32K
-    ROM    (rx) : ORIGIN = 0x8000000, LENGTH = 32M
+    EWRAM            (rwx) : ORIGIN = 0x2000000, LENGTH = 256K
+    IWRAM            (rwx) : ORIGIN = 0x3000000, LENGTH = 0x7F00
+    IWRAM_PERSISTENT (rwx) : ORIGIN = 0x3007F00, LENGTH = 0x100
+    ROM               (rx) : ORIGIN = 0x8000000, LENGTH = 32M
 }
 
 SECTIONS {
@@ -18,6 +19,7 @@ SECTIONS {
     {
         __ewram_start = .;
         *(.ewram*)
+        . = ALIGN(4);
         __ewram_end = .;
     } > EWRAM
 
@@ -60,13 +62,11 @@ SECTIONS {
     /* .persistent starts at 0x3007F00 */
     /* WARNING: This is the end of the IRQ stack, if there's too
      * much data it WILL be overwritten. */
-
-    . = 0x03007F00;
     .iwram.persistent (NOLOAD) :
     ALIGN(4)
     {
         test/*.o(.persistent);
-    } > IWRAM
+    } > IWRAM_PERSISTENT
 
     /* BEGIN ROM DATA */
     . = 0x8000000;
@@ -135,6 +135,7 @@ SECTIONS {
     ALIGN(4)
     {
         __start_tests = .;
+        test/test_test_runner.o(.tests); /* Sanity checks first. */
         test/*.o(.tests);
         __stop_tests = .;
         test/*.o(.text);

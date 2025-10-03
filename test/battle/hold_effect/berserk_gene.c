@@ -213,11 +213,11 @@ SINGLE_BATTLE_TEST("Berserk Gene causes infinite confusion") // check if bit is 
         TURN {}
     } SCENE {
     } THEN {
-        EXPECT(gStatuses4[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] & STATUS4_INFINITE_CONFUSION);
+        EXPECT(gBattleMons[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)].volatiles.infiniteConfusion);
     }
 }
 
-SINGLE_BATTLE_TEST("Berserk Gene causes confusion timer to not tick down", u32 status2)
+SINGLE_BATTLE_TEST("Berserk Gene causes confusion timer to not tick down", u32 confusionTurns)
 {
     u32 turns;
     PARAMETRIZE { turns = 1; }
@@ -231,9 +231,9 @@ SINGLE_BATTLE_TEST("Berserk Gene causes confusion timer to not tick down", u32 s
             TURN {}
         }
     } THEN {
-        results[i].status2 = player->status2;
+        results[i].confusionTurns = player->volatiles.confusionTurns;
     } FINALLY {
-        EXPECT_EQ(results[0].status2, results[1].status2);
+        EXPECT_EQ(results[0].confusionTurns, results[1].confusionTurns);
     }
 }
 

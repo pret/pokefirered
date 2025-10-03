@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain protects grounded battlers from priority mov
         TURN { MOVE(player, MOVE_QUICK_ATTACK); MOVE(opponent, MOVE_QUICK_ATTACK); }
     } SCENE {
         MESSAGE("Claydol used Psychic Terrain!");
-        MESSAGE("Claydol cannot use Quick Attack!");
+        MESSAGE("The opposing Wobbuffet is protected by the Psychic Terrain!");
         NOT { HP_BAR(opponent); }
         MESSAGE("The opposing Wobbuffet used Quick Attack!");
         HP_BAR(player);
@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Psychic Terrain increases power of Psychic-type moves by 30/
     }
 }
 
-SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves that target the user")
+SINGLE_BATTLE_TEST("Psychic Terrain doesn't blocks priority moves that target the user")
 {
     GIVEN {
         PLAYER(SPECIES_SABLEYE) { Ability(ABILITY_PRANKSTER); HP(1); }
@@ -140,5 +140,39 @@ SINGLE_BATTLE_TEST("Psychic Terrain lasts for 5 turns")
         MESSAGE("The opposing Wobbuffet used Celebrate!");
 
         MESSAGE("The weirdness disappeared from the battlefield!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Psychic Terrain protects grounded battlers from priority moves in doubles - Left")
+{
+    GIVEN {
+        PLAYER(SPECIES_CLAYDOL) { Ability(ABILITY_LEVITATE); }
+        PLAYER(SPECIES_TAPU_LELE) { Ability(ABILITY_PSYCHIC_SURGE); }
+        OPPONENT(SPECIES_VOLBEAT) { Ability(ABILITY_PRANKSTER); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_COTTON_SPORE); }
+    } SCENE {
+        ABILITY_POPUP(playerRight, ABILITY_PSYCHIC_SURGE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COTTON_SPORE, opponentLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Psychic Terrain protects grounded battlers from priority moves in doubles - Right")
+{
+    GIVEN {
+        PLAYER(SPECIES_TAPU_LELE) { Ability(ABILITY_PSYCHIC_SURGE); }
+        PLAYER(SPECIES_CLAYDOL) { Ability(ABILITY_LEVITATE); }
+        OPPONENT(SPECIES_VOLBEAT) { Ability(ABILITY_PRANKSTER); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_COTTON_SPORE); }
+    } SCENE {
+        ABILITY_POPUP(playerLeft, ABILITY_PSYCHIC_SURGE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COTTON_SPORE, opponentLeft);
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, playerRight);
     }
 }

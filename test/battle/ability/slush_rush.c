@@ -54,6 +54,7 @@ SINGLE_BATTLE_TEST("Slush Rush doesn't prevent non-Ice types from taking damage 
     GIVEN {
         ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 0) != TYPE_ICE);
         ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 1) != TYPE_ICE);
+        ASSUME(GetMoveEffect(MOVE_HAIL) == EFFECT_HAIL);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_CETITAN) { Ability(ABILITY_SLUSH_RUSH); }
     } WHEN {

@@ -32,11 +32,31 @@ SINGLE_BATTLE_TEST("Burn Up fails if the user isn't a Fire-type")
     } WHEN {
         TURN { MOVE(player, MOVE_BURN_UP); }
     } SCENE {
-        NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_BURN_UP, player); }
         MESSAGE("Wobbuffet used Burn Up!");
+        NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_BURN_UP, player); }
         MESSAGE("But it failed!");
     }
 }
+
+TO_DO_BATTLE_TEST("Burn Up doesn't thaw the user if it fails due to the user not being Fire-type")
+
+SINGLE_BATTLE_TEST("Burn Up fails if the user has Protean/Libero and is not a Fire-type")
+{
+    GIVEN {
+        WITH_CONFIG(GEN_PROTEAN_LIBERO, GEN_6);
+        PLAYER(SPECIES_REGIROCK);
+        OPPONENT(SPECIES_KECLEON) { Ability(ABILITY_PROTEAN); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_BURN_UP); }
+    } SCENE {
+        MESSAGE("The opposing Kecleon used Burn Up!");
+        NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_BURN_UP, player); }
+        MESSAGE("But it failed!");
+    }
+}
+
+TO_DO_BATTLE_TEST("(TERA) Burn Up user does not lose their Fire type if they've Terastallized into Fire type")
 
 SINGLE_BATTLE_TEST("Burn Up user loses its Fire-type if enemy faints")
 {

@@ -57,7 +57,7 @@ SINGLE_BATTLE_TEST("Shed Tail's HP cost can trigger a berry before the user swit
     }
 }
 
-SINGLE_BATTLE_TEST("Shed Tail fails if there are no usable pokemon left")
+SINGLE_BATTLE_TEST("Shed Tail fails if there are no usable Pokémon left")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET)

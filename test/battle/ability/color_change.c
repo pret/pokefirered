@@ -153,3 +153,16 @@ SINGLE_BATTLE_TEST("Color Change changes the type to Normal when a Pokemon is hi
         MESSAGE("The opposing Kecleon's Color Change made it the Normal type!");
     }
 }
+
+SINGLE_BATTLE_TEST("Color Change does not activate if move is boosted by Sheer Force")
+{
+    GIVEN {
+        PLAYER(SPECIES_KECLEON) { Ability(ABILITY_COLOR_CHANGE); }
+        OPPONENT(SPECIES_NIDOKING) { Ability(ABILITY_SHEER_FORCE); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_EMBER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EMBER, opponent);
+        NOT ABILITY_POPUP(player, ABILITY_COLOR_CHANGE);
+    }
+}

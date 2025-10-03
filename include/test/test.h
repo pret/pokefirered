@@ -37,10 +37,18 @@ struct Test
     u16 sourceLine;
 };
 
+enum TestFilterMode
+{
+    TEST_FILTER_MODE_TEST_NAME_PREFIX,
+    TEST_FILTER_MODE_TEST_NAME_INFIX,
+    TEST_FILTER_MODE_FILENAME_EXACT,
+};
+
 struct TestRunnerState
 {
     u8 state;
     u8 exitCode;
+    enum TestFilterMode filterMode:8;
     const char *skipFilename;
     u32 failedAssumptionsBlockLine;
     const struct Test *test;
@@ -52,6 +60,14 @@ struct TestRunnerState
     bool8 inBenchmark:1;
     bool8 tearDown:1;
     u32 timeoutSeconds;
+};
+
+struct PersistentTestRunnerState
+{
+    u32 address:28;
+    u32 state:1;
+    u32 expectCrash:1;
+    u32 unused_30:2;
 };
 
 extern const u8 gTestRunnerN;
@@ -71,11 +87,13 @@ extern const struct TestRunner gFunctionTestRunner;
 extern struct FunctionTestRunnerState *gFunctionTestRunnerState;
 
 extern struct TestRunnerState gTestRunnerState;
+extern struct PersistentTestRunnerState gPersistentTestRunnerState;
 
 void CB2_TestRunner(void);
 
 void Test_ExpectedResult(enum TestResult);
 void Test_ExpectLeaks(bool32);
+void Test_ExpectCrash(bool32);
 void Test_ExitWithResult(enum TestResult, u32 stopLine, const char *fmt, ...);
 u32 SourceLine(u32 sourceLineOffset);
 u32 SourceLineOffset(u32 sourceLine);
@@ -219,6 +237,9 @@ static inline struct Benchmark BenchmarkStop(void)
 
 #define KNOWN_LEAKING \
     Test_ExpectLeaks(TRUE)
+
+#define KNOWN_CRASHING \
+    Test_ExpectCrash(TRUE)
 
 #define PARAMETRIZE if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter)
 

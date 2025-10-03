@@ -67,3 +67,30 @@ SINGLE_BATTLE_TEST("Mycelium Might vs Stall action order depends on speed")
         }
     }
 }
+
+DOUBLE_BATTLE_TEST("Mycelium Might priority bracket will not change if the ability is changed mid-turn")
+{
+    GIVEN {
+        PLAYER(SPECIES_TOEDSCOOL) { Speed(100); Ability(ABILITY_MYCELIUM_MIGHT); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(30); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(20); }
+    } WHEN {
+        TURN {
+            MOVE(opponentLeft, MOVE_WORRY_SEED, target: playerLeft);
+            MOVE(playerLeft, MOVE_SCREECH, target: opponentLeft);
+        }
+        TURN {}
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_WORRY_SEED, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCREECH, playerLeft);
+
+        // Turn 2
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponentRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerRight);
+    }
+}

@@ -17,6 +17,13 @@
 #include "constants/items.h"
 #include "constants/maps.h"
 
+#define DUMMY_PC_BAG_POCKET                 \
+{                                           \
+    .id = POCKET_DUMMY,                     \
+    .capacity = PC_ITEMS_COUNT,             \
+    .itemSlots = gSaveBlock1Ptr->pcItems,   \
+}
+
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {};
 
 static const u8 *ItemId_GetPluralName(u16);
@@ -27,6 +34,96 @@ static bool32 DoesItemHavePluralName(u16);
 #include "pokemon_summary_screen.h"
 #include "data/pokemon/item_effects.h"
 #include "data/items.h"
+
+#define UNPACK_TM_ITEM_ID(_tm) [CAT(ENUM_TM_HM_, _tm) + 1] = { CAT(ITEM_TM_, _tm), CAT(MOVE_, _tm) },
+#define UNPACK_HM_ITEM_ID(_hm) [CAT(ENUM_TM_HM_, _hm) + 1] = { CAT(ITEM_HM_, _hm), CAT(MOVE_, _hm) },
+
+const struct TmHmIndexKey gTMHMItemMoveIds[NUM_ALL_MACHINES + 1] =
+{
+    [0] = { ITEM_NONE, MOVE_NONE }, // Failsafe
+    FOREACH_TM(UNPACK_TM_ITEM_ID)
+    FOREACH_HM(UNPACK_HM_ITEM_ID)
+    /*
+     * Expands to the following:
+     *
+     * [1] = { ITEM_TM_FOCUS_PUNCH, MOVE_FOCUS_PUNCH },
+     * [2] = { ITEM_TM_DRAGON_CLAW, MOVE_DRAGON_CLAW },
+     * [3] = { ITEM_TM_WATER_PULSE, MOVE_WATER_PULSE },
+     * etc etc
+    */
+};
+
+#undef UNPACK_TM_ITEM_ID
+#undef UNPACK_HM_ITEM_ID
+
+
+static inline struct ItemSlot NONNULL BagPocket_GetSlotDataGeneric(struct BagPocket *pocket, u32 pocketPos)
+{
+    return (struct ItemSlot) {
+        .itemId = pocket->itemSlots[pocketPos].itemId,
+        .quantity = pocket->itemSlots[pocketPos].quantity,
+    };
+}
+
+static inline struct ItemSlot NONNULL BagPocket_GetSlotDataPC(struct BagPocket *pocket, u32 pocketPos)
+{
+    return (struct ItemSlot) {
+        .itemId = pocket->itemSlots[pocketPos].itemId,
+        .quantity = pocket->itemSlots[pocketPos].quantity,
+    };
+}
+
+static inline void NONNULL BagPocket_SetSlotDataGeneric(struct BagPocket *pocket, u32 pocketPos, struct ItemSlot newSlot)
+{
+    pocket->itemSlots[pocketPos].itemId = newSlot.itemId;
+    pocket->itemSlots[pocketPos].quantity = newSlot.quantity;
+}
+
+static inline void NONNULL BagPocket_SetSlotDataPC(struct BagPocket *pocket, u32 pocketPos, struct ItemSlot newSlot)
+{
+    pocket->itemSlots[pocketPos].itemId = newSlot.itemId;
+    pocket->itemSlots[pocketPos].quantity = newSlot.quantity;
+}
+
+struct ItemSlot NONNULL BagPocket_GetSlotData(struct BagPocket *pocket, u32 pocketPos)
+{
+    switch (pocket->id)
+    {
+    case POCKET_ITEMS:
+    case POCKET_KEY_ITEMS:
+    case POCKET_POKE_BALLS:
+    case POCKET_TM_HM:
+    case POCKET_BERRIES:
+        return BagPocket_GetSlotDataGeneric(pocket, pocketPos);
+    case POCKET_DUMMY:
+        return BagPocket_GetSlotDataPC(pocket, pocketPos);
+    }
+
+    return (struct ItemSlot) {0}; // Because compiler complains
+}
+
+void NONNULL BagPocket_SetSlotData(struct BagPocket *pocket, u32 pocketPos, struct ItemSlot newSlot)
+{
+    if (newSlot.itemId == ITEM_NONE || newSlot.quantity == 0) // Sets to zero if quantity or itemId is zero
+    {
+        newSlot.itemId = ITEM_NONE;
+        newSlot.quantity = 0;
+    }
+
+    switch (pocket->id)
+    {
+    case POCKET_ITEMS:
+    case POCKET_KEY_ITEMS:
+    case POCKET_POKE_BALLS:
+    case POCKET_TM_HM:
+    case POCKET_BERRIES:
+        BagPocket_SetSlotDataGeneric(pocket, pocketPos, newSlot);
+        break;
+    case POCKET_DUMMY:
+        BagPocket_SetSlotDataPC(pocket, pocketPos, newSlot);
+        break;
+    }
+}
 
 static inline u16 GetBagItemIdPocket(struct BagPocket *pocket, u32 pocketPos)
 {
@@ -46,16 +143,6 @@ static inline void SetBagItemIdPocket(struct BagPocket *pocket, u32 pocketPos, u
 static inline void SetBagItemQuantityPocket(struct BagPocket *pocket, u32 pocketPos, u16 newValue)
 {
     pocket->itemSlots[pocketPos].quantity = newValue;
-}
-
-u16 GetBagItemId(enum Pocket pocketId, u32 pocketPos)
-{
-    return GetBagItemIdPocket(&gBagPockets[pocketId], pocketPos);
-}
-
-u16 GetBagItemQuantity(enum Pocket pocketId, u32 pocketPos)
-{
-    return GetBagItemQuantityPocket(&gBagPockets[pocketId], pocketPos);
 }
 
 // static void SetBagItemId(enum Pocket pocketId, u32 pocketPos, u16 itemId)
@@ -82,18 +169,23 @@ void SetBagItemsPointers(void)
 {
     gBagPockets[POCKET_ITEMS].itemSlots = gSaveBlock1Ptr->bag.items;
     gBagPockets[POCKET_ITEMS].capacity = BAG_ITEMS_COUNT;
+    gBagPockets[POCKET_ITEMS].id = POCKET_ITEMS;
 
     gBagPockets[POCKET_KEY_ITEMS].itemSlots = gSaveBlock1Ptr->bag.keyItems;
     gBagPockets[POCKET_KEY_ITEMS].capacity = BAG_KEYITEMS_COUNT;
+    gBagPockets[POCKET_KEY_ITEMS].id = POCKET_KEY_ITEMS;
 
     gBagPockets[POCKET_POKE_BALLS].itemSlots = gSaveBlock1Ptr->bag.pokeBalls;
     gBagPockets[POCKET_POKE_BALLS].capacity = BAG_POKEBALLS_COUNT;
+    gBagPockets[POCKET_POKE_BALLS].id = POCKET_POKE_BALLS;
 
     gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.TMsHMs;
     gBagPockets[POCKET_TM_HM].capacity = BAG_TMHM_COUNT;
+    gBagPockets[POCKET_TM_HM].id = POCKET_TM_HM;
 
     gBagPockets[POCKET_BERRIES].itemSlots = gSaveBlock1Ptr->bag.berries;
     gBagPockets[POCKET_BERRIES].capacity = BAG_BERRIES_COUNT;
+    gBagPockets[POCKET_BERRIES].id = POCKET_BERRIES;
 }
 
 u8 *CopyItemName(u16 itemId, u8 * dest)
@@ -678,7 +770,7 @@ u32 GetItemPrice(u16 itemId)
 
 static bool32 DoesItemHavePluralName(u16 itemId)
 {
-    return (gItemsInfo[SanitizeItemId(itemId)].pluralName[0] != '\0');
+    return gItemsInfo[SanitizeItemId(itemId)].pluralName != NULL;
 }
 
 static const u8 *ItemId_GetPluralName(u16 itemId)
@@ -726,9 +818,11 @@ ItemUseFunc GetItemFieldFunc(u16 itemId)
     return gItemsInfo[SanitizeItemId(itemId)].fieldUseFunc;
 }
 
-bool8 GetItemBattleUsage(u16 itemId)
+// Returns an item's battle effect script ID.
+u8 GetItemBattleUsage(u16 itemId)
 {
-    u16 item = SanitizeItemId(itemId);    
+    u16 item = SanitizeItemId(itemId);
+    // Handle E-Reader berries.
     if (item == ITEM_ENIGMA_BERRY_E_READER)
     {
         switch (GetItemEffectType(gSpecialVar_ItemId))
@@ -740,7 +834,7 @@ bool8 GetItemBattleUsage(u16 itemId)
             case ITEM_EFFECT_CURE_POISON:
             case ITEM_EFFECT_CURE_SLEEP:
             case ITEM_EFFECT_CURE_BURN:
-            case ITEM_EFFECT_CURE_FREEZE:
+            case ITEM_EFFECT_CURE_FREEZE_FROSTBITE:
             case ITEM_EFFECT_CURE_PARALYSIS:
             case ITEM_EFFECT_CURE_ALL_STATUS:
             case ITEM_EFFECT_CURE_CONFUSION:
@@ -800,22 +894,30 @@ u32 GetItemStatus1Mask(u16 itemId)
     return 0;
 }
 
-u32 GetItemStatus2Mask(u16 itemId)
+bool32 ItemHasVolatileFlag(u16 itemId, enum Volatile _volatile)
 {
     const u8 *effect = GetItemEffect(itemId);
-    if (effect[3] & ITEM3_STATUS_ALL)
-        return STATUS2_INFATUATION | STATUS2_CONFUSION;
-    else if (effect[0] & ITEM0_INFATUATION)
-        return STATUS2_INFATUATION;
-    else if (effect[3] & ITEM3_CONFUSION)
-        return STATUS2_CONFUSION;
-    else
-        return 0;
+    switch (_volatile)
+    {
+    case VOLATILE_CONFUSION:
+        return (effect[3] & ITEM3_STATUS_ALL) || (effect[3] & ITEM3_CONFUSION);
+    case VOLATILE_INFATUATION:
+        return (effect[3] & ITEM3_STATUS_ALL) || (effect[0] & ITEM0_INFATUATION);
+    default:
+        return FALSE;
+    }
 }
 
 u32 GetItemSellPrice(u32 itemId)
 {
     return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
+}
+
+bool32 IsHoldEffectChoice(enum ItemHoldEffect holdEffect)
+{
+    return holdEffect == HOLD_EFFECT_CHOICE_BAND
+        || holdEffect == HOLD_EFFECT_CHOICE_SCARF
+        || holdEffect == HOLD_EFFECT_CHOICE_SPECS;
 }
 
 bool8 IsItemTM(u16 itemId)

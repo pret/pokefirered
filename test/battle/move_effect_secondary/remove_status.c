@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Smelling Salts does not cure paralyzed pokemons behind substitutes or get increased power")
 {
-    u32 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_INNER_FOCUS; }
     PARAMETRIZE { ability = ABILITY_INFILTRATOR; }
     GIVEN {
@@ -62,7 +62,7 @@ SINGLE_BATTLE_TEST("Smelling Salts get incread power vs. paralyzed targets")
 
 SINGLE_BATTLE_TEST("Wake-Up Slap does not cure paralyzed pokemons behind substitutes or get increased power")
 {
-    u32 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_INNER_FOCUS; }
     PARAMETRIZE { ability = ABILITY_INFILTRATOR; }
     GIVEN {
@@ -112,6 +112,8 @@ SINGLE_BATTLE_TEST("Wake-Up Slap gets increased power against sleeping targets")
         }
     }
 }
+
+TO_DO_BATTLE_TEST("Wake-Up Slap gets increased power against Pokémon with Comatose")
 
 DOUBLE_BATTLE_TEST("Sparkling Aria cures burns from all Pokemon on the field and behind substitutes")
 {

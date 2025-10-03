@@ -12,7 +12,7 @@ SINGLE_BATTLE_TEST("Water Bubble prevents burn from Will-o-Wisp")
         TURN { MOVE(opponent, MOVE_WILL_O_WISP); }
     } SCENE {
         ABILITY_POPUP(player, ABILITY_WATER_BUBBLE);
-        MESSAGE("Dewpider's Water Bubble prevents burns!");
+        MESSAGE("It doesn't affect Dewpider…");
         NONE_OF {
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, player);
             STATUS_ICON(player, burn: TRUE);

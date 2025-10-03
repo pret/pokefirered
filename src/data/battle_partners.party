@@ -1,16 +1,19 @@
 === PARTNER_NONE ===
 Name: 
 Class: Pkmn Trainer 1
-Pic: Ruby Sapphire Brendan
+Pic: RS Brendan 1
 Gender: Male
 Music: Male
+Back Pic: Ruby Sapphire Brendan
 
 === PARTNER_STEVEN ===
 Name: STEVEN
 Class: Rival Late
-Pic: Steven
+Pic: RS Brendan 1
 Gender: Male
 Music: Male
+Back Pic: Steven
+AI: Basic Trainer
 
 Metang
 Brave Nature

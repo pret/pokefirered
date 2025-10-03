@@ -1,10 +1,28 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Own Tempo prevents Intimidate but no other stat down changes")
+SINGLE_BATTLE_TEST("Own Tempo doesn't prevent Intimidate (Gen3-7)")
 {
     GIVEN {
-        ASSUME(B_UPDATED_INTIMIDATE >= GEN_8);
+        WITH_CONFIG(GEN_CONFIG_UPDATED_INTIMIDATE, GEN_7);
+        ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
+        PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); };
+        OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };
+    } WHEN {
+        TURN { }
+    } SCENE {
+        ABILITY_POPUP(player, ABILITY_INTIMIDATE);
+        NONE_OF {
+            ABILITY_POPUP(opponent, ABILITY_OWN_TEMPO);
+            MESSAGE("The opposing Slowpoke's Own Tempo prevents stat loss!");
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Own Tempo prevents Intimidate but no other stat down changes (Gen8+)")
+{
+    GIVEN {
+        WITH_CONFIG(GEN_CONFIG_UPDATED_INTIMIDATE, GEN_8);
         ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
         PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); };
         OPPONENT(SPECIES_SLOWPOKE) { Ability(ABILITY_OWN_TEMPO); };

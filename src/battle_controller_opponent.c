@@ -456,31 +456,15 @@ static void OpponentHandleChooseMove(u32 battler)
                 target = GetBattlerAtPosition(Random() & 2);
             } while (!CanTargetBattler(battler, target, move));
 
-            // Don't bother to loop through table if the move can't attack ally
+            // Don't bother to check if they're enemies if the move can't attack ally
             if (B_WILD_NATURAL_ENEMIES == TRUE && !(GetBattlerMoveTargetType(battler, move) & MOVE_TARGET_BOTH))
             {
-                u16 i, speciesAttacker, speciesTarget, isPartnerEnemy = FALSE;
-                static const u16 naturalEnemies[][2] =
-                {
-                    // Attacker         Target
-                    {SPECIES_ZANGOOSE,  SPECIES_SEVIPER},
-                    {SPECIES_SEVIPER,   SPECIES_ZANGOOSE},
-                    {SPECIES_HEATMOR,   SPECIES_DURANT},
-                    {SPECIES_DURANT,    SPECIES_HEATMOR},
-                    {SPECIES_SABLEYE,   SPECIES_CARBINK},
-                    {SPECIES_MAREANIE,  SPECIES_CORSOLA},
-                };
+                u32 speciesAttacker, speciesTarget;
                 speciesAttacker = gBattleMons[battler].species;
                 speciesTarget = gBattleMons[GetBattlerAtPosition(BATTLE_PARTNER(battler))].species;
 
-                for (i = 0; i < ARRAY_COUNT(naturalEnemies); i++)
-                {
-                    if (speciesAttacker == naturalEnemies[i][0] && speciesTarget == naturalEnemies[i][1])
-                    {
-                        isPartnerEnemy = TRUE;
-                        break;
-                    }
-                }
+                bool32 isPartnerEnemy = IsNaturalEnemy(speciesAttacker, speciesTarget);
+
                 if (isPartnerEnemy && CanTargetBattler(battler, target, move))
                     BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, (chosenMoveIndex) | (GetBattlerAtPosition(BATTLE_PARTNER(battler)) << 8));
                 else
@@ -524,6 +508,7 @@ static void OpponentHandleChoosePokemon(u32 battler)
 {
     s32 chosenMonId;
     s32 pokemonInBattle = 1;
+    enum SwitchType switchType = SWITCH_AFTER_KO;
 
     // Choosing Revival Blessing target
     if (gBattleResources->bufferA[battler][1] == PARTY_ACTION_CHOOSE_FAINTED_MON)
@@ -533,7 +518,9 @@ static void OpponentHandleChoosePokemon(u32 battler)
     // Switching out
     else if (gBattleStruct->AI_monToSwitchIntoId[battler] == PARTY_SIZE)
     {
-        chosenMonId = GetMostSuitableMonToSwitchInto(battler, SWITCH_AFTER_KO);
+        if (IsSwitchOutEffect(GetMoveEffect(gCurrentMove)) || gAiLogicData->ejectButtonSwitch || gAiLogicData->ejectPackSwitch)
+            switchType = SWITCH_MID_BATTLE;
+        chosenMonId = GetMostSuitableMonToSwitchInto(battler, switchType);
         if (chosenMonId == PARTY_SIZE)
         {
             s32 battler1, battler2, firstId, lastId;

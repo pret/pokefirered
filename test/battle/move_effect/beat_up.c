@@ -2,7 +2,33 @@
 #include "test/battle.h"
 
 // General
-TO_DO_BATTLE_TEST("Beat Up hits the target for each non-fainted, non-statused member in the party");
+SINGLE_BATTLE_TEST("Beat Up hits the target for each non-fainted, non-statused member in the party")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_PICHU)
+        PLAYER(SPECIES_PIKACHU) { Status1(STATUS1_POISON); }
+        PLAYER(SPECIES_RAICHU)
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_BEAT_UP); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAT_UP, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAT_UP, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAT_UP, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAT_UP, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAT_UP, player);
+        MESSAGE("The Pokémon was hit 4 time(s)!");
+    } THEN {
+        EXPECT_EQ(gBattleStruct->beatUpSpecies[0], SPECIES_WOBBUFFET);
+        EXPECT_EQ(gBattleStruct->beatUpSpecies[1], SPECIES_WYNAUT);
+        EXPECT_EQ(gBattleStruct->beatUpSpecies[2], SPECIES_PICHU);
+        EXPECT_EQ(gBattleStruct->beatUpSpecies[3], SPECIES_RAICHU);
+    }
+}
+
+TO_DO_BATTLE_TEST("Beat Up doesn't consider Comatose as a status")
 TO_DO_BATTLE_TEST("Beat Up's strikes have each an independent chance of a critical hit");
 
 // B_BEAT_UP Gen2-4

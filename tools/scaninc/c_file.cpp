@@ -257,7 +257,7 @@ void CFile::CheckIncbin()
 
         // INCBIN_COMP; include *compressed* version of file
         if (incbinType == 6)
-            path = path.append(".lz");
+            path = path.append(".smol");
 
         SkipWhitespace();
 

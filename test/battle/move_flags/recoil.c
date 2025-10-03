@@ -102,3 +102,23 @@ SINGLE_BATTLE_TEST("Recoil: Flare Blitz is absorbed by Flash Fire and no recoil 
         }
     }
 }
+
+SINGLE_BATTLE_TEST("Recoil: The correct amount of recoil damage is dealt after targets recovery berry proc")
+{
+    s16 directDamage;
+    s16 recoilDamage;
+
+    GIVEN {
+        ASSUME(GetMoveRecoil(MOVE_TAKE_DOWN) == 25);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(100); HP(51); Item(ITEM_SITRUS_BERRY); };
+    } WHEN {
+        TURN { MOVE(player, MOVE_TAKE_DOWN); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TAKE_DOWN, player);
+        HP_BAR(opponent, captureDamage: &directDamage);
+        HP_BAR(player, captureDamage: &recoilDamage);
+    } THEN {
+        EXPECT_MUL_EQ(directDamage, UQ_4_12(0.25), recoilDamage);
+    }
+}

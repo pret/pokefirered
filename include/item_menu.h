@@ -38,6 +38,15 @@ enum {
     ITEMWIN_COUNT
 };
 
+//bag sort
+enum BagSortOptions
+{
+    SORT_ALPHABETICALLY,
+    SORT_BY_TYPE,
+    SORT_BY_AMOUNT, //greatest->least
+    SORT_BY_INDEX,
+};
+
 #define ITEMMENU_SWAP_LINE_LENGTH 9
 enum {
     ITEMMENUSPRITE_BAG,
@@ -96,6 +105,7 @@ void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable *funcTa
 void UpdatePocketItemList(enum Pocket pocketId);
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId));
 void CloseItemMessage(u8 taskId);
+void SortItemsInBag(struct BagPocket *pocket, enum BagSortOptions type);
 
 void InitPokedudeBag(u8);
 void ItemMenu_SetExitCallback(void (*)(void));

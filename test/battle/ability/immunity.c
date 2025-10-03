@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Immunity prevents Toxic bad poison")
     } SCENE {
         MESSAGE("Wobbuffet used Toxic!");
         ABILITY_POPUP(opponent, ABILITY_IMMUNITY);
-        MESSAGE("The opposing Snorlax's Immunity prevents poisoning!");
+        MESSAGE("It doesn't affect the opposing Snorlax…");
         NOT STATUS_ICON(opponent, poison: TRUE);
     }
 }
@@ -47,7 +47,7 @@ SINGLE_BATTLE_TEST("Immunity prevents Toxic Spikes poison")
     }
 }
 
-SINGLE_BATTLE_TEST("Immunity doesn't prevent pokemon from being poisoned by Toxic Spikes on switch-in if forced in by phazing with Mold Breaker, but it cures it immediately")
+SINGLE_BATTLE_TEST("Immunity doesn't prevent Pokémon from being poisoned by Toxic Spikes on switch-in if forced in by phazing with Mold Breaker, but it cures it immediately")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_DRAGON_TAIL) == EFFECT_HIT_SWITCH_TARGET);

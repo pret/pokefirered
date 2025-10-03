@@ -49,10 +49,28 @@ DOUBLE_BATTLE_TEST("Lunar Dance causes the user to faint and fully heals the rep
     }
 }
 
-SINGLE_BATTLE_TEST("Healing Wish effect activates only if the switched pokemon can be healed")
+SINGLE_BATTLE_TEST("Healing Wish effect activates even if the the switched Pokémon can't be healed (Gen4-7)")
 {
     GIVEN {
-        ASSUME(B_HEALING_WISH_SWITCH >= GEN_8);
+        WITH_CONFIG(GEN_CONFIG_HEALING_WISH_SWITCH, GEN_7);
+        PLAYER(SPECIES_GARDEVOIR) { Speed(300); }
+        PLAYER(SPECIES_NINJASK) { Speed(400); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_HEALING_WISH); SEND_OUT(player, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HEALING_WISH, player);
+        HP_BAR(player, hp: 0);
+        MESSAGE("Gardevoir fainted!");
+        MESSAGE("The healing wish came true for Ninjask!");
+        MESSAGE("Ninjask regained health!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Healing Wish effect activates only if the switched Pokémon can be healed (Gen8+)")
+{
+    GIVEN {
+        WITH_CONFIG(GEN_CONFIG_HEALING_WISH_SWITCH, GEN_8);
         PLAYER(SPECIES_GARDEVOIR) { Speed(300); }
         PLAYER(SPECIES_NINJASK) { Speed(400); }
         PLAYER(SPECIES_WYNAUT) { HP(50); MaxHP(100); Status1(STATUS1_PARALYSIS); Speed(50); }
@@ -65,8 +83,8 @@ SINGLE_BATTLE_TEST("Healing Wish effect activates only if the switched pokemon c
         HP_BAR(player, hp: 0);
         MESSAGE("Gardevoir fainted!");
         NONE_OF {
-            MESSAGE("The healing wish came true for Wynaut!");
-            MESSAGE("Wynaut's HP was restored.");
+            MESSAGE("The healing wish came true for Ninjask!");
+            MESSAGE("Ninjask regained health!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, player);
         MESSAGE("The healing wish came true for Wynaut!");

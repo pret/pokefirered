@@ -5,7 +5,7 @@
 SINGLE_BATTLE_TEST("Unnerve prevents opposing Pokémon from eating their own berries")
 {
     u16 mon;
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { mon = SPECIES_JOLTIK, ability = ABILITY_UNNERVE; }
     PARAMETRIZE { mon = SPECIES_CALYREX_ICE, ability = ABILITY_AS_ONE_ICE_RIDER; }
     GIVEN {
@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Unnerve prevents opposing Pokémon from eating their own ber
 SINGLE_BATTLE_TEST("Unnerve doesn't prevent opposing Pokémon from using Natural Gift")
 {
     u16 mon;
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { mon = SPECIES_JOLTIK, ability = ABILITY_UNNERVE; }
     PARAMETRIZE { mon = SPECIES_CALYREX_ICE, ability = ABILITY_AS_ONE_ICE_RIDER; }
     GIVEN {
@@ -42,7 +42,7 @@ SINGLE_BATTLE_TEST("Unnerve doesn't prevent opposing Pokémon from using Natural
 SINGLE_BATTLE_TEST("Unnerve prints the correct string (player)")
 {
     u16 mon;
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { mon = SPECIES_JOLTIK, ability = ABILITY_UNNERVE; }
     PARAMETRIZE { mon = SPECIES_CALYREX_ICE, ability = ABILITY_AS_ONE_ICE_RIDER; }
     GIVEN {
@@ -59,7 +59,7 @@ SINGLE_BATTLE_TEST("Unnerve prints the correct string (player)")
 SINGLE_BATTLE_TEST("Unnerve prints the correct string (opponent)")
 {
     u16 mon;
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { mon = SPECIES_JOLTIK, ability = ABILITY_UNNERVE; }
     PARAMETRIZE { mon = SPECIES_CALYREX_ICE, ability = ABILITY_AS_ONE_ICE_RIDER; }
     GIVEN {
@@ -76,7 +76,7 @@ SINGLE_BATTLE_TEST("Unnerve prints the correct string (opponent)")
 SINGLE_BATTLE_TEST("Unnerve activates only once per switch-in")
 {
     u16 mon;
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { mon = SPECIES_JOLTIK, ability = ABILITY_UNNERVE; }
     PARAMETRIZE { mon = SPECIES_CALYREX_ICE, ability = ABILITY_AS_ONE_ICE_RIDER; }
     GIVEN {

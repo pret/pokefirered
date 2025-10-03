@@ -87,7 +87,7 @@ DOUBLE_BATTLE_TEST("Turn order is determined randomly if priority and Speed tie 
 
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_ENDEAVOR) == EFFECT_ENDEAVOR);
-        ASSUME(GetMoveEffect(MOVE_LIFE_DEW) == EFFECT_JUNGLE_HEALING);
+        ASSUME(GetMoveEffect(MOVE_LIFE_DEW) == EFFECT_LIFE_DEW);
         ASSUME(GetMoveEffect(MOVE_CRUSH_GRIP) == EFFECT_POWER_BASED_ON_TARGET_HP);
         ASSUME(GetMoveEffect(MOVE_SUPER_FANG) == EFFECT_FIXED_PERCENT_DAMAGE);
         PLAYER(SPECIES_WOBBUFFET) { MaxHP(480); HP(360); Defense(100); Speed(1); }
@@ -226,7 +226,7 @@ DOUBLE_BATTLE_TEST("Moves do not fail if an alive partner is the target")
     }
 }
 
-DOUBLE_BATTLE_TEST("Moves fail if they target into a pokemon that was fainted by the previous move")
+DOUBLE_BATTLE_TEST("Moves fail if they target into a Pokémon that was fainted by the previous move")
 {
     GIVEN {
         ASSUME(GetMoveTarget(MOVE_HYPER_VOICE) == MOVE_TARGET_BOTH);

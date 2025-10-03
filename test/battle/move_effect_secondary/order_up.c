@@ -140,7 +140,7 @@ DOUBLE_BATTLE_TEST("Order Up is boosted by Sheer Force without removing the stat
 DOUBLE_BATTLE_TEST("Order Up is always boosted by Sheer Force", s16 damage)
 {
     u32 move;
-    u32 ability;
+    enum Ability ability;
     PARAMETRIZE(move = MOVE_CELEBRATE, ability = ABILITY_STORM_DRAIN);
     PARAMETRIZE(move = MOVE_ENTRAINMENT, ability = ABILITY_STORM_DRAIN);
     PARAMETRIZE(move = MOVE_ENTRAINMENT, ability = ABILITY_COMMANDER);

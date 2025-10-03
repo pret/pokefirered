@@ -419,6 +419,10 @@
 #define ANIM_TAG_PINKVIO_ORB                (ANIM_SPRITES_START + 405)
 #define ANIM_TAG_STARSTORM                  (ANIM_SPRITES_START + 406)
 #define ANIM_TAG_SALT_PARTICLE              (ANIM_SPRITES_START + 407)
+#define ANIM_TAG_TERA_SYMBOL                (ANIM_SPRITES_START + 408)
+#define ANIM_TAG_TATSUGIRI_CURLY            (ANIM_SPRITES_START + 409)
+#define ANIM_TAG_TATSUGIRI_DROOPY           (ANIM_SPRITES_START + 410)
+#define ANIM_TAG_TATSUGIRI_STRETCHY         (ANIM_SPRITES_START + 411)
 
 // battlers
 #define ANIM_ATTACKER         0
@@ -588,9 +592,9 @@
 #define B_ANIM_SIMPLE_HEAL              52
 #define B_ANIM_POWER_CONSTRUCT          53
 // pokefirered
-#define B_ANIM_MON_SCARED               (B_ANIM_POWER_CONSTRUCT + 1)
-#define B_ANIM_GHOST_GET_OUT            (B_ANIM_MON_SCARED      + 1)
-#define B_ANIM_SILPH_SCOPED             (B_ANIM_GHOST_GET_OUT   + 1)
+#define B_ANIM_MON_SCARED               54
+#define B_ANIM_GHOST_GET_OUT            55
+#define B_ANIM_SILPH_SCOPED             56
 #define B_ANIM_ROCK_THROW               (B_ANIM_SILPH_SCOPED    + 1)
 #define B_ANIM_SAFARI_REACTION          (B_ANIM_ROCK_THROW      + 1)
 
@@ -618,8 +622,9 @@
 #define B_ANIM_STATUS_FRZ               6
 #define B_ANIM_STATUS_CURSED            7
 #define B_ANIM_STATUS_NIGHTMARE         8
+#define B_ANIM_STATUS_FRB               9
 
-#define NUM_B_ANIMS_STATUS              9
+#define NUM_B_ANIMS_STATUS              10
 
 // Tasks with return values often assign them to gBattleAnimArgs[7].
 #define ARG_RET_ID 7
@@ -662,6 +667,12 @@
 #define ANIM_SURF_PAL_SURF           0
 #define ANIM_SURF_PAL_MUDDY_WATER    1
 #define ANIM_SURF_PAL_SLUDGE_WAVE    2
+
+// Order Up palettes for Commander
+#define ANIM_ORDER_UP_NONE           0
+#define ANIM_ORDER_UP_CURLY          1
+#define ANIM_ORDER_UP_DROOPY         2
+#define ANIM_ORDER_UP_STRETCHY       3
 
 // Flags given to various functions to indicate which palettes to consider.
 // Handled by UnpackSelectedBattlePalettes

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS 
+ASSUMPTIONS
 {
     ASSUME(GetMoveEffect(MOVE_DESTINY_BOND) == EFFECT_DESTINY_BOND);
 }
@@ -21,10 +21,28 @@ SINGLE_BATTLE_TEST("Destiny Bond faints the opposing mon if it fainted from the 
     }
 }
 
-SINGLE_BATTLE_TEST("Destiny Bond fails if used sequentially in Gen 7+")
+SINGLE_BATTLE_TEST("Destiny Bond doesn't fail if used sequentially (Gen2-6)")
 {
     GIVEN {
-        ASSUME(B_DESTINY_BOND_FAIL >= GEN_7);
+        WITH_CONFIG(GEN_CONFIG_DESTINY_BOND_FAIL, GEN_6);
+        PLAYER(SPECIES_ZIGZAGOON);
+        OPPONENT(SPECIES_ZIGZAGOON);
+        OPPONENT(SPECIES_ZIGZAGOON);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DESTINY_BOND); }
+        TURN { MOVE(player, MOVE_DESTINY_BOND); SWITCH(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DESTINY_BOND, player);
+        MESSAGE("2 sent out Zigzagoon!");
+        NOT { MESSAGE("But it failed!"); }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DESTINY_BOND, player);
+    }
+}
+
+SINGLE_BATTLE_TEST("Destiny Bond fails if used sequentially (Gen7+)")
+{
+    GIVEN {
+        WITH_CONFIG(GEN_CONFIG_DESTINY_BOND_FAIL, GEN_7);
         PLAYER(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
@@ -39,10 +57,10 @@ SINGLE_BATTLE_TEST("Destiny Bond fails if used sequentially in Gen 7+")
     }
 }
 
-SINGLE_BATTLE_TEST("Destiny Bond does not fail if used repeatedly separated by other moves in Gen 7+")
+SINGLE_BATTLE_TEST("Destiny Bond does not fail if used repeatedly separated by other moves (Gen7+)")
 {
     GIVEN {
-        ASSUME(B_DESTINY_BOND_FAIL >= GEN_7);
+        WITH_CONFIG(GEN_CONFIG_DESTINY_BOND_FAIL, GEN_7);
         PLAYER(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
@@ -58,10 +76,10 @@ SINGLE_BATTLE_TEST("Destiny Bond does not fail if used repeatedly separated by o
     }
 }
 
-SINGLE_BATTLE_TEST("Destiny Bond does not fail if used after failing in Gen 7+")
+SINGLE_BATTLE_TEST("Destiny Bond does not fail if used after failing (Gen7+)")
 {
     GIVEN {
-        ASSUME(B_DESTINY_BOND_FAIL >= GEN_7);
+        WITH_CONFIG(GEN_CONFIG_DESTINY_BOND_FAIL, GEN_7);
         PLAYER(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
@@ -108,4 +126,3 @@ TO_DO_BATTLE_TEST("Destiny Bond's effect can trigger on the next turn if the use
 TO_DO_BATTLE_TEST("Destiny Bond can be used multiple times in a row (Gen 2-6)");
 TO_DO_BATTLE_TEST("Destiny Bond always fails if it was successfully used the previous turn (Gen 7+)");
 TO_DO_BATTLE_TEST("Destiny Bond cannot be used in Raids");
-

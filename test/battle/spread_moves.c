@@ -83,7 +83,7 @@ DOUBLE_BATTLE_TEST("Spread Moves: A spread move attack will activate both resist
     }
 }
 
-DOUBLE_BATTLE_TEST("Spread Moves: If a spread move attack will activate a resist berries on one pokemon, only the damage for that mon will be reduced")
+DOUBLE_BATTLE_TEST("Spread Moves: If a spread move attack will activate a resist berries on one Pokémon, only the damage for that mon will be reduced")
 {
     s16 opponentLeftDmg[2];
     s16 opponentRightDmg[2];
@@ -188,7 +188,7 @@ DOUBLE_BATTLE_TEST("Spread Moves: AOE move vs Disguise, Volt Absorb (right) and 
     }
 }
 
-DOUBLE_BATTLE_TEST("Spread Moves: AOE move vs Disguise, Volt Absorb (left) and Lightning Rod (reft)")
+DOUBLE_BATTLE_TEST("Spread Moves: AOE move vs Disguise, Volt Absorb (left) and Lightning Rod (right)")
 {
     GIVEN {
         ASSUME(GetMoveTarget(MOVE_DISCHARGE) == MOVE_TARGET_FOES_AND_ALLY);
@@ -431,5 +431,25 @@ DOUBLE_BATTLE_TEST("Spread Moves: Unless move hits every target user will not in
         HP_BAR(opponentLeft);
         HP_BAR(opponentRight);
         MESSAGE("It's super effective on the opposing Torkoal and Torkoal!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Spread Moves: Focus Sash activates correctly")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT) { HP(2); MaxHP(2); Item(ITEM_FOCUS_SASH); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(2); MaxHP(2); Item(ITEM_FOCUS_SASH); }
+        OPPONENT(SPECIES_WYNAUT) { HP(2); MaxHP(2); Item(ITEM_FOCUS_SASH); }
+    } WHEN {
+        TURN { MOVE(playerRight, MOVE_HYPER_VOICE); MOVE(playerLeft, MOVE_EXPLOSION); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HYPER_VOICE, playerRight);
+        MESSAGE("The opposing Wynaut hung on using its Focus Sash!");
+        MESSAGE("The opposing Wobbuffet hung on using its Focus Sash!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, playerLeft);
+        MESSAGE("The opposing Wobbuffet fainted!");
+        MESSAGE("Wynaut hung on using its Focus Sash!");
+        MESSAGE("The opposing Wynaut fainted!");
     }
 }

@@ -3,63 +3,19 @@
 
 ASSUMPTIONS
 {
-    ASSUME(MoveHasAdditionalEffect(MOVE_STONE_AXE, MOVE_EFFECT_STEALTH_ROCK) == TRUE);
+    ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_STONESURGE, MOVE_EFFECT_STEALTH_ROCK));
 }
 
-SINGLE_BATTLE_TEST("Stone Axe sets up hazards after hitting the target")
+SINGLE_BATTLE_TEST("Steath Rock: Rock from G-Max Stonesurge are set up before any ability activation")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_DREDNAW) { GigantamaxFactor(TRUE); }
+        OPPONENT(SPECIES_SKARMORY) { Ability(ABILITY_WEAK_ARMOR); }
     } WHEN {
-        TURN { MOVE(player, MOVE_STONE_AXE); }
-        TURN { SWITCH(opponent, 1); }
+        TURN { MOVE(player, MOVE_WATERFALL, gimmick: GIMMICK_DYNAMAX); }
     } SCENE {
-        s32 maxHP = GetMonData(&OPPONENT_PARTY[1], MON_DATA_MAX_HP);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_STONE_AXE, player);
-        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_G_MAX_STONESURGE, player);
         MESSAGE("Pointed stones float in the air around the opposing team!");
-        MESSAGE("2 sent out Wobbuffet!");
-        HP_BAR(opponent, damage: maxHP / 8);
-        MESSAGE("Pointed stones dug into the opposing Wobbuffet!");
+        ABILITY_POPUP(opponent, ABILITY_WEAK_ARMOR);
     }
 }
-
-SINGLE_BATTLE_TEST("Stone Axe can set up pointed stones only once")
-{
-    GIVEN {
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
-    } WHEN {
-        TURN { MOVE(player, MOVE_STONE_AXE); }
-        TURN { MOVE(player, MOVE_STONE_AXE); }
-        TURN { MOVE(player, MOVE_STONE_AXE); }
-        TURN { MOVE(player, MOVE_STONE_AXE); }
-        TURN { SWITCH(opponent, 1); }
-    } SCENE {
-        s32 maxHP = GetMonData(&OPPONENT_PARTY[1], MON_DATA_MAX_HP);
-
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_STONE_AXE, player);
-        HP_BAR(opponent);
-        MESSAGE("Pointed stones float in the air around the opposing team!");
-
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_STONE_AXE, player);
-        HP_BAR(opponent);
-        NOT MESSAGE("Pointed stones float in the air around the opposing team!");
-
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_STONE_AXE, player);
-        HP_BAR(opponent);
-        NOT MESSAGE("Pointed stones float in the air around the opposing team!");
-
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_STONE_AXE, player);
-        HP_BAR(opponent);
-        NOT MESSAGE("Pointed stones float in the air around the opposing team!");
-
-        MESSAGE("2 sent out Wynaut!");
-        HP_BAR(opponent, damage: maxHP / 8);
-        MESSAGE("Pointed stones dug into the opposing Wynaut!");
-    }
-}
-

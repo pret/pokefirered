@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Mirror Armor lowers a stat of the attacking pokemon")
+SINGLE_BATTLE_TEST("Mirror Armor lowers a stat of the attacking Pokémon")
 {
     u16 move, statId;
 

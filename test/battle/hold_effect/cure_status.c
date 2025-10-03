@@ -87,7 +87,7 @@ SINGLE_BATTLE_TEST("Aspear and Lum Berries cure freeze or frostbite")
         TURN { MOVE(player, MOVE_ICE_PUNCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ICE_PUNCH, player);
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_FRZ, opponent);
+        ANIMATION(ANIM_TYPE_STATUS, (B_USE_FROSTBITE ? B_ANIM_STATUS_FRB : B_ANIM_STATUS_FRZ), opponent);
         FREEZE_OR_FROSTBURN_STATUS(opponent, TRUE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
         FREEZE_OR_FROSTBURN_STATUS(opponent, FALSE);
@@ -115,6 +115,8 @@ SINGLE_BATTLE_TEST("Chesto and Lum Berries cure sleep")
         STATUS_ICON(opponent, sleep: FALSE);
     }
 }
+
+TO_DO_BATTLE_TEST("Chesto and Lum Berries don't trigger if the holder has Comatose")
 
 SINGLE_BATTLE_TEST("Cheri and Lum Berries cure paralysis")
 {
@@ -158,7 +160,7 @@ SINGLE_BATTLE_TEST("Perism and Lum Berries cure confusion")
     }
 }
 
-SINGLE_BATTLE_TEST("Berry hold effect cures status if a pokemon enters a battle")
+SINGLE_BATTLE_TEST("Berry hold effect cures status if a Pokémon enters a battle")
 {
     u16 status;
     u16 item;
@@ -289,6 +291,5 @@ DOUBLE_BATTLE_TEST("Lum Berry correctly cures all battlers if multiple fainted t
         EXPECT_EQ(playerLeft->status1, STATUS1_NONE);
         EXPECT_EQ(playerRight->status1, STATUS1_NONE);
         EXPECT_EQ(opponentLeft->status1, STATUS1_NONE);
-
     }
 }

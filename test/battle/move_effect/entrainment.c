@@ -58,4 +58,19 @@ SINGLE_BATTLE_TEST("Entrainment fails if the target's ability has cantBeOverwrit
     }
 }
 
+SINGLE_BATTLE_TEST("Entrainment causes primal weather to revert")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_TELEPATHY); }
+        OPPONENT(SPECIES_GROUDON) { Item(ITEM_RED_ORB); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ENTRAINMENT); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENTRAINMENT, player);
+        MESSAGE("The extremely harsh sunlight faded!");
+    } THEN {
+        EXPECT(opponent->ability == ABILITY_TELEPATHY);
+    }
+}
+
 TO_DO_BATTLE_TEST("Entrainment fails on Dynamaxed Pokémon");

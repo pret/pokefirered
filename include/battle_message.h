@@ -2,6 +2,7 @@
 #define GUARD_BATTLE_MESSAGE_H
 
 #include "constants/battle.h"
+#include "constants/battle_string_ids.h"
 
 // This buffer can hold many different things. Some of the things it can hold
 // that have explicit sizes are listed below to ensure it can contain them.
@@ -83,8 +84,8 @@
 #define B_TXT_TRAINER2_NAME_WITH_CLASS 0x43
 #define B_TXT_PARTNER_NAME_WITH_CLASS 0x44
 #define B_TXT_ATK_TRAINER_NAME_WITH_CLASS 0x45
-#define B_TXT_SCR_TEAM1 0x46
-#define B_TXT_SCR_TEAM2 0x47
+#define B_TXT_EFF_TEAM1 0x46
+#define B_TXT_EFF_TEAM2 0x47
 
 // for B_TXT_BUFF1, B_TXT_BUFF2 and B_TXT_BUFF3
 
@@ -249,7 +250,7 @@ struct BattleMsgData
     u8 textBuffs[3][TEXT_BUFF_ARRAY_COUNT];
 };
 
-void BufferStringBattle(u16 stringID, u32 battler);
+void BufferStringBattle(enum StringID stringID, u32 battler);
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src);
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize);
 void BattleHandleAddTextPrinter(const u8 *text, u8 arg1);
@@ -298,5 +299,8 @@ extern const u8 gText_HighlightRed_Left[];
 extern const u8 gText_Win[];
 extern const u8 gText_Loss[];
 extern const u8 gText_Draw[];
+
+extern const u16 gStatUpStringIds[];
+extern const u16 gStatDownStringIds[];
 
 #endif // GUARD_BATTLE_MESSAGE_H

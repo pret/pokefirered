@@ -27,7 +27,7 @@ WILD_BATTLE_TEST("Ion Deluge works the same way as always when used by a mon wit
 
 WILD_BATTLE_TEST("Ion Deluge works the same way as always when used by a mon with Lightning Rod / Motor Drive")
 {
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_LIGHTNING_ROD; }
     PARAMETRIZE { ability = ABILITY_MOTOR_DRIVE; }
 

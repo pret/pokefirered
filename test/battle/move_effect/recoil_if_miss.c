@@ -134,7 +134,7 @@ SINGLE_BATTLE_TEST("Recoil if miss: Supercell Slam causes recoil if it is absorb
 
 SINGLE_BATTLE_TEST("Recoil if miss: Disguise doesn't prevent crash damage from Jump Kick into ghost types")
 {
-    u32 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_EARLY_BIRD; }
     PARAMETRIZE { ability = ABILITY_SCRAPPY; }
 

@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Water Compaction raises Defense 2 stages on each hit of a mu
 
 SINGLE_BATTLE_TEST("Water Compaction does not affect damage taken from Water type moves", s16 damage)
 {
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_SAND_VEIL; }
     PARAMETRIZE { ability = ABILITY_WATER_COMPACTION; }
     GIVEN {

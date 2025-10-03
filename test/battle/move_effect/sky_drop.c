@@ -122,3 +122,16 @@ SINGLE_BATTLE_TEST("Sky Drop stops the confusion count until the target is dropp
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, player);
     }
 }
+
+SINGLE_BATTLE_TEST("Sky Drop fails if the targe is in a semi-invulnerable state")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_FLY); MOVE(player, MOVE_SKY_DROP); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLY, opponent);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SKY_DROP, player);
+    }
+}

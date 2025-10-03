@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Attract causes the target to become infatuated with the user
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ATTRACT, player);
         MESSAGE("The opposing Nidoking fell in love!");
     } THEN {
-        EXPECT(opponent->status2 & STATUS2_INFATUATION);
+        EXPECT(opponent->volatiles.infatuation);
     }
 }
 
@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Attract ignores type immunity")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ATTRACT, player);
         MESSAGE("The opposing Misdreavus fell in love!");
     } THEN {
-        EXPECT(opponent->status2 & STATUS2_INFATUATION);
+        EXPECT(opponent->volatiles.infatuation);
     }
 }
 
@@ -51,7 +51,7 @@ SINGLE_BATTLE_TEST("Attract bypasses Substitute")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ATTRACT, player);
         MESSAGE("The opposing Nidoking fell in love!");
     } THEN {
-        EXPECT(opponent->status2 & STATUS2_INFATUATION);
+        EXPECT(opponent->volatiles.infatuation);
     }
 }
 
@@ -69,7 +69,7 @@ SINGLE_BATTLE_TEST("Attract fails if the target is already infatuated")
         MESSAGE("Nidoqueen used Attract!");
         MESSAGE("But it failed!");
     } THEN {
-        EXPECT(opponent->status2 & STATUS2_INFATUATION);
+        EXPECT(opponent->volatiles.infatuation);
     }
 }
 
@@ -84,7 +84,7 @@ SINGLE_BATTLE_TEST("Attract fails when used on a Pokémon of the same gender")
         MESSAGE("Nidoqueen used Attract!");
         MESSAGE("But it failed!");
     } THEN {
-        EXPECT(!(opponent->status2 & STATUS2_INFATUATION));
+        EXPECT(!(opponent->volatiles.infatuation));
     }
 }
 
@@ -100,6 +100,6 @@ SINGLE_BATTLE_TEST("Attract fails when used on a genderless Pokémon")
         MESSAGE("Nidoqueen used Attract!");
         MESSAGE("But it failed!");
     } THEN {
-        EXPECT(!(opponent->status2 & STATUS2_INFATUATION));
+        EXPECT(!(opponent->volatiles.infatuation));
     }
 }

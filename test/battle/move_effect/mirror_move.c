@@ -32,7 +32,7 @@ SINGLE_BATTLE_TEST("Mirror Move fails if no move was used before")
         TURN { MOVE(player, MOVE_MIRROR_MOVE); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
         MESSAGE("Wobbuffet used Mirror Move!");
-        MESSAGE("The Mirror Move failed!");
+        MESSAGE("But it failed!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         HP_BAR(player);
     }

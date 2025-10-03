@@ -80,7 +80,7 @@ SINGLE_BATTLE_TEST("Pastel Veil prevents Toxic bad poison")
     } SCENE {
         MESSAGE("Wobbuffet used Toxic!");
         ABILITY_POPUP(opponent, ABILITY_PASTEL_VEIL);
-        MESSAGE("The opposing Ponyta is protected by a pastel veil!");
+        MESSAGE("It doesn't affect the opposing Ponyta…");
         NOT STATUS_ICON(opponent, badPoison: TRUE);
     }
 }
@@ -97,7 +97,7 @@ DOUBLE_BATTLE_TEST("Pastel Veil prevents Toxic bad poison on partner - right tar
     } SCENE {
         MESSAGE("Wobbuffet used Toxic!");
         ABILITY_POPUP(opponentLeft, ABILITY_PASTEL_VEIL);
-        MESSAGE("The opposing Wynaut is protected by a pastel veil!");
+        MESSAGE("It doesn't affect the opposing Wynaut…");
         NOT STATUS_ICON(opponentRight, badPoison: TRUE);
     }
 }
@@ -114,7 +114,7 @@ DOUBLE_BATTLE_TEST("Pastel Veil prevents Toxic bad poison on partner - left targ
     } SCENE {
         MESSAGE("Wobbuffet used Toxic!");
         ABILITY_POPUP(opponentRight, ABILITY_PASTEL_VEIL);
-        MESSAGE("The opposing Wynaut is protected by a pastel veil!");
+        MESSAGE("It doesn't affect the opposing Wynaut…");
         NOT STATUS_ICON(opponentLeft, badPoison: TRUE);
     }
 }

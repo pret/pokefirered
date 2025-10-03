@@ -41,9 +41,9 @@ SINGLE_BATTLE_TEST("Hurricane can hit airborne targets (Fly, Bounce)")
     PARAMETRIZE { move = MOVE_BOUNCE; }
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_FLY) == EFFECT_SEMI_INVULNERABLE);
-        ASSUME(GetMoveTwoTurnAttackStatus(MOVE_FLY) == STATUS3_ON_AIR);
+        ASSUME(GetMoveTwoTurnAttackStatus(MOVE_FLY) == STATE_ON_AIR);
         ASSUME(GetMoveEffect(MOVE_BOUNCE) == EFFECT_SEMI_INVULNERABLE);
-        ASSUME(GetMoveTwoTurnAttackStatus(MOVE_BOUNCE) == STATUS3_ON_AIR);
+        ASSUME(GetMoveTwoTurnAttackStatus(MOVE_BOUNCE) == STATE_ON_AIR);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Moves(move); }
     } WHEN {
@@ -59,7 +59,7 @@ DOUBLE_BATTLE_TEST("Hurricane can hit airborne targets (Sky Drop)")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_SKY_DROP) == EFFECT_SKY_DROP);
-        ASSUME(GetMoveTwoTurnAttackStatus(MOVE_SKY_DROP) == STATUS3_ON_AIR);
+        ASSUME(GetMoveTwoTurnAttackStatus(MOVE_SKY_DROP) == STATE_ON_AIR);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

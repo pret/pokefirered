@@ -523,6 +523,11 @@ static void Task_HandleMonAnimation(u8 taskId)
         sprite->data[2] = gTasks[taskId].tSpeciesId;
         sprite->data[1] = 0;
 
+        // Task_HandleMonAnimation handles more than just KO animations,
+        // but if the counter is non-zero then only KO animations are running.
+        // This assumption is not checked.
+        if (gBattleStruct->battlerKOAnimsRunning > 0)
+            gBattleStruct->battlerKOAnimsRunning--;
         DestroyTask(taskId);
     }
 }

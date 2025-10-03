@@ -232,3 +232,21 @@ DOUBLE_BATTLE_TEST("Eject Button activation will not trigger an attack from the 
         }
     }
 }
+
+SINGLE_BATTLE_TEST("Eject Button activates after Wandring Spirit")
+{
+    GIVEN {
+        PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_YAMASK_GALAR) { Item(ITEM_EJECT_BUTTON); Ability(ABILITY_WANDERING_SPIRIT); }
+    } WHEN {
+        TURN {
+            SWITCH(opponent, 1);
+            MOVE(player, MOVE_DRAGON_CLAW);
+            SEND_OUT(opponent, 0);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_CLAW, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
+    }
+}

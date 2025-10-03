@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Adaptability increases same-type attack bonus from x1.5 to x2", s16 damage)
 {
-    u32 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_HYPER_CUTTER; }
     PARAMETRIZE { ability = ABILITY_ADAPTABILITY; }
     GIVEN {

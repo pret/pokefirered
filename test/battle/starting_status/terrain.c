@@ -29,19 +29,20 @@ SINGLE_BATTLE_TEST("B_VAR_STARTING_STATUS starts a chosen terrain at the beginni
         TURN { ; }
         TURN { ; }
     } SCENE {
-        switch (terrain) {
-            case STARTING_STATUS_GRASSY_TERRAIN:
-                MESSAGE("Grass grew to cover the battlefield!");
-                break;
-            case STARTING_STATUS_PSYCHIC_TERRAIN:
-                MESSAGE("The battlefield got weird!");
-                break;
-            case STARTING_STATUS_MISTY_TERRAIN:
-                MESSAGE("Mist swirled around the battlefield!");
-                break;
-            case STARTING_STATUS_ELECTRIC_TERRAIN:
-                MESSAGE("An electric current is running across the battlefield!");
-                break;
+        switch (terrain)
+        {
+        case STARTING_STATUS_GRASSY_TERRAIN:
+            MESSAGE("The battlefield is covered with grass!");
+            break;
+        case STARTING_STATUS_PSYCHIC_TERRAIN:
+            MESSAGE("The battlefield seems weird!");
+            break;
+        case STARTING_STATUS_MISTY_TERRAIN:
+            MESSAGE("Mist swirls around the battlefield!");
+            break;
+        case STARTING_STATUS_ELECTRIC_TERRAIN:
+            MESSAGE("An electric current is running across the battlefield!");
+            break;
         }
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_RESTORE_BG);
         NONE_OF {

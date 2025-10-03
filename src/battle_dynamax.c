@@ -74,7 +74,7 @@ static const struct GMaxMove sGMaxMoveTable[] =
 bool32 CanDynamax(u32 battler)
 {
     u16 species = GetBattlerVisualSpecies(battler);
-    enum ItemHoldEffect holdEffect = GetBattlerHoldEffect(battler, FALSE);
+    enum ItemHoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
 
     // Prevents Zigzagoon from dynamaxing in vanilla.
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && !IsOnPlayerSide(battler))
@@ -181,14 +181,14 @@ void ActivateDynamax(u32 battler)
     gBattleStruct->dynamax.dynamaxTurns[battler] = gBattleTurnCounter + DYNAMAX_TURNS_COUNT;
 
     // Substitute is removed upon Dynamaxing.
-    gBattleMons[battler].status2 &= ~STATUS2_SUBSTITUTE;
+    gBattleMons[battler].volatiles.substitute = FALSE;
     ClearBehindSubstituteBit(battler);
 
     // Choiced Moves are reset upon Dynamaxing.
     gBattleStruct->choicedMove[battler] = MOVE_NONE;
 
     // Try Gigantamax form change.
-    if (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)) // Ditto cannot Gigantamax.
+    if (!gBattleMons[battler].volatiles.transformed) // Ditto cannot Gigantamax.
         TryBattleFormChange(battler, FORM_CHANGE_BATTLE_GIGANTAMAX);
 
     BattleScriptExecute(BattleScript_DynamaxBegins);
@@ -230,21 +230,6 @@ bool32 IsMoveBlockedByMaxGuard(u32 move)
         case MOVE_TEATIME:
         case MOVE_TRANSFORM:
             return TRUE;
-    }
-    return FALSE;
-}
-
-// Weight-based moves (and some other moves in Raids) are blocked by Dynamax.
-bool32 IsMoveBlockedByDynamax(u32 move)
-{
-    // TODO: Certain moves are banned in raids.
-    switch (GetMoveEffect(move))
-    {
-        case EFFECT_HEAT_CRASH:
-        case EFFECT_LOW_KICK:
-            return TRUE;
-        default:
-            break;
     }
     return FALSE;
 }

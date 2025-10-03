@@ -141,6 +141,8 @@ SINGLE_BATTLE_TEST("Strength Sap fails if target is at -6 Atk")
     }
 }
 
+TO_DO_BATTLE_TEST("Strength Sap doesn't fail if target has Contrary and is at +6 Atk, restoring HP based on +5 Atk")
+
 SINGLE_BATTLE_TEST("Strength Sap restores more HP if Big Root is held", s16 hp)
 {
     u32 item;

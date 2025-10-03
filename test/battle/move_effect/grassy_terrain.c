@@ -81,7 +81,7 @@ SINGLE_BATTLE_TEST("Grassy Terrain lasts for 5 turns")
     }
 }
 
-SINGLE_BATTLE_TEST("Grassy Terrain heals the pokemon on the field for the duration of the terrain, including last turn")
+SINGLE_BATTLE_TEST("Grassy Terrain heals the Pokémon on the field for the duration of the terrain, including last turn")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

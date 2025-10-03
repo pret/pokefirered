@@ -93,7 +93,7 @@ TEST("Move descriptions fit on Pokemon Summary Screen")
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 1000;
     u32 move = MOVE_NONE;
-    for (i = 1; i < MOVES_COUNT; i++)
+    for (i = 1; i < MOVES_COUNT_ALL; i++)
     {
         PARAMETRIZE_LABEL("%S", GetMoveDescription(i)) { move = i; }
     }
@@ -499,7 +499,7 @@ TEST("Ability names fit on Pokemon Summary Screen")
 {
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 1000;
-    u32 ability = ABILITY_NONE;
+    enum Ability ability = ABILITY_NONE;
     for (i = 1; i < ABILITIES_COUNT; i++)
     {
         PARAMETRIZE_LABEL("%S", gAbilitiesInfo[i].name) { ability = i; }
@@ -511,7 +511,7 @@ TEST("Ability names fit on Ability Pop-Up")
 {
     u32 i;
     const u32 fontId = FONT_SMALL_NARROWER, widthPx = 1000;
-    u32 ability = ABILITY_NONE;
+    enum Ability ability = ABILITY_NONE;
     for (i = 1; i < ABILITIES_COUNT; i++)
     {
         PARAMETRIZE_LABEL("%S", gAbilitiesInfo[i].name) { ability = i; }
@@ -523,7 +523,7 @@ TEST("Ability descriptions fit on Pokemon Summary Screen")
 {
     u32 i;
     const u32 fontId = FONT_NORMAL, widthPx = 1000;
-    u32 ability = ABILITY_NONE;
+    enum Ability ability = ABILITY_NONE;
     for (i = 1; i < ABILITIES_COUNT; i++)
     {
         PARAMETRIZE_LABEL("%S", gAbilitiesInfo[i].description) { ability = i; }
@@ -570,7 +570,7 @@ TEST("Battle strings fit on the battle message window")
     s32 sixDigitNines = 999999;                                 // 36 pixels.
     u8 nickname[POKEMON_NAME_LENGTH + 1] = _("MMMMMMMMMMMM");   // 72 pixels.
     u32 longMoveID = MOVE_NATURES_MADNESS;                      // 89 pixels.
-    u32 longAbilityID = ABILITY_SUPERSWEET_SYRUP;               // 91 pixels.
+    enum Ability longAbilityID = ABILITY_SUPERSWEET_SYRUP;    // 91 pixels.
     u32 longStatName = STAT_EVASION;                            // 40 pixels.
     u32 longTypeName = TYPE_ELECTRIC;                           // 43 pixels.
     u32 longSpeciesName = SPECIES_SANDY_SHOCKS;                 // 47 pixels.
@@ -667,8 +667,6 @@ TEST("Battle strings fit on the battle message window")
         break;
     // Buffer Move name to B_BUFF1
     case STRINGID_PKMNLEARNEDMOVE2:
-    case STRINGID_TEAMSTOPPEDWORKING: // Unused
-    case STRINGID_FOESTOPPEDWORKING: // Unused
     case STRINGID_PKMNHURTBY:
     case STRINGID_PKMNFREEDFROM:
     case STRINGID_PKMNMOVEWASDISABLED:
@@ -679,7 +677,7 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_PKMNSXWOREOFF:
     case STRINGID_BUFFERENDS:
     case STRINGID_FOREWARNACTIVATES:
-    case STRINGID_CUSEDBODYDISABLED:
+    case STRINGID_CURSEDBODYDISABLED:
     case STRINGID_CURRENTMOVECANTSELECT:
     case STRINGID_TARGETISHURTBYSALTCURE:
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, longMoveID);
@@ -719,8 +717,6 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_ATTACKERABILITYSTATRAISE:
     case STRINGID_TARGETABILITYSTATLOWER:
     case STRINGID_SCRIPTINGABILITYSTATRAISE:
-    case STRINGID_BATTLERABILITYRAISEDSTAT:
-    case STRINGID_ABILITYRAISEDSTATDRASTICALLY:
     case STRINGID_STATWASHEIGHTENED:
         StringCopy(gBattleTextBuff1, gStatNamesTable[longStatName]);
         break;
@@ -762,7 +758,6 @@ TEST("Battle strings fit on the battle message window")
     case STRINGID_PKMNCURIOUSABOUTX:
     case STRINGID_PKMNENTHRALLEDBYX:
     case STRINGID_PKMNIGNOREDX:
-    case STRINGID_PREVENTEDFROMWORKING:
     case STRINGID_PKMNOBTAINEDX:
     case STRINGID_ABOUTTOUSEPOLTERGEIST:
         PREPARE_ITEM_BUFFER(gBattleTextBuff1, longItemName);

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-ASSUMPTIONS 
+ASSUMPTIONS
 {
     ASSUME(gItemsInfo[ITEM_ELECTRIC_SEED].holdEffect == HOLD_EFFECT_SEEDS);
     ASSUME(gItemsInfo[ITEM_ELECTRIC_SEED].holdEffectParam == HOLD_EFFECT_PARAM_ELECTRIC_TERRAIN);
@@ -16,7 +16,8 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Electric Seed raises the holder's Defense on Electric Terrain")
 {
-    u32 ability, item;
+    enum Ability ability;
+    u32 item;
     PARAMETRIZE { ability = ABILITY_TELEPATHY; item = ITEM_NONE; }
     PARAMETRIZE { ability = ABILITY_TELEPATHY; item = ITEM_ELECTRIC_SEED; }
     PARAMETRIZE { ability = ABILITY_ELECTRIC_SURGE; item = ITEM_NONE; }
@@ -47,7 +48,8 @@ SINGLE_BATTLE_TEST("Electric Seed raises the holder's Defense on Electric Terrai
 
 SINGLE_BATTLE_TEST("Grassy Seed raises the holder's Defense on Grassy Terrain")
 {
-    u32 ability, item;
+    enum Ability ability;
+    u32 item;
     PARAMETRIZE { ability = ABILITY_TELEPATHY; item = ITEM_NONE; }
     PARAMETRIZE { ability = ABILITY_TELEPATHY; item = ITEM_GRASSY_SEED; }
     PARAMETRIZE { ability = ABILITY_GRASSY_SURGE; item = ITEM_NONE; }
@@ -78,7 +80,8 @@ SINGLE_BATTLE_TEST("Grassy Seed raises the holder's Defense on Grassy Terrain")
 
 SINGLE_BATTLE_TEST("Misty Seed raises the holder's Sp. Defense on Misty Terrain")
 {
-    u32 ability, item;
+    enum Ability ability;
+    u32 item;
     PARAMETRIZE { ability = ABILITY_TELEPATHY; item = ITEM_NONE; }
     PARAMETRIZE { ability = ABILITY_TELEPATHY; item = ITEM_MISTY_SEED; }
     PARAMETRIZE { ability = ABILITY_MISTY_SURGE; item = ITEM_NONE; }
@@ -109,7 +112,8 @@ SINGLE_BATTLE_TEST("Misty Seed raises the holder's Sp. Defense on Misty Terrain"
 
 SINGLE_BATTLE_TEST("Psychic Seed raises the holder's Sp. Defense on Psychic Terrain")
 {
-    u32 ability, item;
+    enum Ability ability;
+    u32 item;
     PARAMETRIZE { ability = ABILITY_TELEPATHY; item = ITEM_NONE; }
     PARAMETRIZE { ability = ABILITY_TELEPATHY; item = ITEM_PSYCHIC_SEED; }
     PARAMETRIZE { ability = ABILITY_PSYCHIC_SURGE; item = ITEM_NONE; }
@@ -140,7 +144,8 @@ SINGLE_BATTLE_TEST("Psychic Seed raises the holder's Sp. Defense on Psychic Terr
 
 SINGLE_BATTLE_TEST("Seeds get consumed in Terrain even if holder is not affected by Terrain")
 {
-    u32 species, ability, item;
+    u32 species, item;
+    enum Ability ability;
     PARAMETRIZE { species = SPECIES_TAPU_KOKO; ability = ABILITY_ELECTRIC_SURGE; item = ITEM_ELECTRIC_SEED; }
     PARAMETRIZE { species = SPECIES_TAPU_BULU; ability = ABILITY_GRASSY_SURGE; item = ITEM_GRASSY_SEED; }
     PARAMETRIZE { species = SPECIES_TAPU_FINI; ability = ABILITY_MISTY_SURGE; item = ITEM_MISTY_SEED; }

@@ -10,7 +10,8 @@ ASSUMPTIONS
 
 AI_SINGLE_BATTLE_TEST("Choiced Pokémon switch out after using a status move once")
 {
-    u32 j, ability = ABILITY_NONE, heldItem = ITEM_NONE;
+    u32 j, heldItem = ITEM_NONE;
+    enum Ability ability = ABILITY_NONE;
 
     static const u32 choiceItems[] = {
         ITEM_CHOICE_SPECS,
@@ -46,7 +47,7 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon switch out after using a status move onc
 
 AI_SINGLE_BATTLE_TEST("Choiced Pokémon only consider their own status moves when determining if they should switch")
 {
-    GIVEN 
+    GIVEN
     {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_RISKY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_MON_CHOICES);
         PLAYER(SPECIES_ZIGZAGOON) { Speed(4); Moves(MOVE_TAIL_WHIP, MOVE_SCRATCH); }
@@ -61,7 +62,8 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon only consider their own status moves whe
 AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use stat boosting moves")
 {
     // Moves defined by MOVE_TARGET_USER (with exceptions?)
-    u32 j, ability = ABILITY_NONE, heldItem = ITEM_NONE;
+    u32 j, heldItem = ITEM_NONE;
+    enum Ability ability = ABILITY_NONE;
 
     static const u32 choiceItems[] = {
         ITEM_CHOICE_SPECS,
@@ -93,8 +95,8 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use stat boosting moves")
 
 AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they are the only party member")
 {
-    u32 j, ability = ABILITY_NONE, isAlive = 0, heldItem = ITEM_NONE;
-
+    u32 j, isAlive = 0, heldItem = ITEM_NONE;
+    enum Ability ability = ABILITY_NONE;
     static const u32 choiceItems[] = {
         ITEM_CHOICE_SPECS,
         ITEM_CHOICE_BAND,
@@ -128,8 +130,8 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they are the on
 
 AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they don't have a good switchin")
 {
-    u32 j, ability = ABILITY_NONE, move = MOVE_NONE, species = SPECIES_NONE, heldItem = ITEM_NONE;
-
+    u32 j, move = MOVE_NONE, species = SPECIES_NONE, heldItem = ITEM_NONE;
+    enum Ability ability = ABILITY_NONE;
     static const u32 choiceItems[] = {
         ITEM_CHOICE_SPECS,
         ITEM_CHOICE_BAND,

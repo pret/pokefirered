@@ -43,9 +43,9 @@ SINGLE_BATTLE_TEST("Tidy Up removes hazards and raises Stats")
         MESSAGE("Wobbuffet used Tidy Up!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TIDY_UP, player);
         MESSAGE("The spikes disappeared from the ground around your team!");
-        MESSAGE("The pointed stones disappeared from around your team!");
-        MESSAGE("The poison spikes disappeared from the ground around your team!");
         MESSAGE("The sticky web has disappeared from the ground around your team!");
+        MESSAGE("The poison spikes disappeared from the ground around your team!");
+        MESSAGE("The pointed stones disappeared from around your team!");
         MESSAGE("Tidying up complete!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
         MESSAGE("Wobbuffet's Attack rose!");

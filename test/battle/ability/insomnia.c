@@ -40,7 +40,7 @@ SINGLE_BATTLE_TEST("Insomnia prevents yawn")
     }
 }
 
-SINGLE_BATTLE_TEST("Insomnia prevents rest")
+SINGLE_BATTLE_TEST("Insomnia prevents Rest")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_REST) == EFFECT_REST);

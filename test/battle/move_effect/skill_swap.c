@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Skill Swap swaps user and target's abilities")
     } THEN {
         EXPECT_EQ(player->ability, ABILITY_BLAZE);
         EXPECT_EQ(opponent->ability, ABILITY_TELEPATHY);
-    } 
+    }
 }
 
 DOUBLE_BATTLE_TEST("Skill Swap only swaps user's ability with target's ability")
@@ -67,7 +67,8 @@ DOUBLE_BATTLE_TEST("Skill Swap doesn't display ability popups when swapping with
 
 SINGLE_BATTLE_TEST("Skill Swap fails if user or target has an ability that can't be swapped")
 {
-    u32 species, ability;
+    u32 species;
+    enum Ability ability;
 
     PARAMETRIZE { species = SPECIES_SHEDINJA; ability = ABILITY_WONDER_GUARD; }
     PARAMETRIZE { species = SPECIES_ARCEUS; ability = ABILITY_MULTITYPE; }

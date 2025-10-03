@@ -674,7 +674,7 @@ static bool8 AllocateListMenuBuffers(void)
 static void SetUpListMenuTemplate(void)
 {
     u16 i;
-    struct BagPocket *pocket = &gBagPockets[POCKET_BERRIES - 1];
+    struct BagPocket *pocket = &gBagPockets[POCKET_BERRIES];
     for (i = 0; i < sResources->listMenuNumItems; i++)
     {
         GetBerryNameAndIndexForMenu(&sListMenuStrbuf[i * 27], pocket->itemSlots[i].itemId);
@@ -1007,9 +1007,9 @@ static void Task_BerryPouchMain(u8 taskId)
         {
             switch (menuInput)
             {
-            case -1:
+            case LIST_NOTHING_CHOSEN:
                 return;
-            case -2:
+            case LIST_CANCEL:
                 if (sStaticCnt.type != BERRYPOUCH_FROMBERRYCRUSH)
                 {
                     PlaySE(SE_SELECT);

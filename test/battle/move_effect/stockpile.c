@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Stockpile's count can go up only to 3")
         MESSAGE("Wobbuffet stockpiled 3!");
 
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_STOCKPILE, player);
-        MESSAGE("Wobbuffet can't stockpile any more!");
+        MESSAGE("But it failed!");
     }
 }
 
@@ -49,9 +49,9 @@ SINGLE_BATTLE_TEST("Spit Up and Swallow don't work if used without Stockpile")
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, move, player);
         if (move == MOVE_SWALLOW)
-            MESSAGE("But it failed to swallow a thing!");
+            MESSAGE("But it failed!");
         else
-            MESSAGE("But it failed to spit up a thing!");
+            MESSAGE("But it failed!");
 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STOCKPILE, player);
         MESSAGE("Wobbuffet stockpiled 1!");

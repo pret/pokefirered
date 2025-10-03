@@ -114,3 +114,43 @@ SINGLE_BATTLE_TEST("Last Resort works with Sleep Talk")
         HP_BAR(opponent);
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI uses Last Resort - 2 moves")
+{
+    KNOWN_FAILING;
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { NOT_EXPECT_MOVE(opponent, MOVE_LAST_RESORT); }
+        TURN { EXPECT_MOVE(opponent, MOVE_LAST_RESORT); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI uses Last Resort - 3 moves")
+{
+    KNOWN_FAILING;
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_QUICK_ATTACK, MOVE_SCRATCH); }
+    } WHEN {
+        TURN { NOT_EXPECT_MOVE(opponent, MOVE_LAST_RESORT); }
+        TURN { NOT_EXPECT_MOVE(opponent, MOVE_LAST_RESORT); }
+        TURN { EXPECT_MOVE(opponent, MOVE_LAST_RESORT); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI uses Last Resort - 4 moves")
+{
+    KNOWN_FAILING;
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_LAST_RESORT, MOVE_QUICK_ATTACK, MOVE_SCRATCH, MOVE_GUST); }
+    } WHEN {
+        TURN { NOT_EXPECT_MOVE(opponent, MOVE_LAST_RESORT); }
+        TURN { NOT_EXPECT_MOVE(opponent, MOVE_LAST_RESORT); }
+        TURN { NOT_EXPECT_MOVE(opponent, MOVE_LAST_RESORT); }
+        TURN { EXPECT_MOVE(opponent, MOVE_LAST_RESORT); }
+    }
+}
+

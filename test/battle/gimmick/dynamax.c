@@ -601,7 +601,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon cannot use Max Guard while holdin
 
 // Almost anything that calculates damage based on HP has been changed to non-Dynamax HP.
 // This includes Leftovers, Life Orb, Heal Pulse, Rocky Helmet, Sandstorm, etc. etc.
-// There are some redundant cases (i.e Substitute) that can never be used by a Dynamaxed pokemon.
+// There are some redundant cases (i.e Substitute) that can never be used by a Dynamaxed Pokémon.
 // Anything that is conditional based off max HP still uses gBattleMons[battler].maxHP.
 // Below are some tests, but very far from all encompassing:
 
@@ -838,7 +838,11 @@ SINGLE_BATTLE_TEST("Dynamax: Max Geyser sets up heavy rain")
     }
 }
 
+#if B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_SNOW
+SINGLE_BATTLE_TEST("Dynamax: Max Hailstorm sets up snow")
+#else
 SINGLE_BATTLE_TEST("Dynamax: Max Hailstorm sets up hail")
+#endif
 {
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_MAX_HAILSTORM, MOVE_EFFECT_HAIL));
@@ -848,9 +852,15 @@ SINGLE_BATTLE_TEST("Dynamax: Max Hailstorm sets up hail")
         TURN { MOVE(player, MOVE_POWDER_SNOW, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_CELEBRATE); }
     } SCENE {
         MESSAGE("Wobbuffet used Max Hailstorm!");
+#if B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_SNOW
+        MESSAGE("It started to snow!");
+        MESSAGE("The opposing Wobbuffet used Celebrate!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_SNOW_CONTINUES);
+#else
         MESSAGE("It started to hail!");
         MESSAGE("The opposing Wobbuffet used Celebrate!");
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HAIL_CONTINUES);
+#endif        
     }
 }
 
@@ -903,7 +913,7 @@ SINGLE_BATTLE_TEST("Dynamax: Max Mindstorm sets up Psychic Terrain")
     } SCENE {
         MESSAGE("The opposing Wobbuffet used Extreme Speed!");
         MESSAGE("Wobbuffet used Max Mindstorm!");
-        MESSAGE("The opposing Wobbuffet cannot use Extreme Speed!");
+        MESSAGE("Wobbuffet is protected by the Psychic Terrain!");
         MESSAGE("Wobbuffet used Max Mindstorm!");
     }
 }
@@ -1018,11 +1028,11 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Volt Crash paralyzes both opponents")
     } SCENE {
         MESSAGE("Pikachu used G-Max Volt Crash!");
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentLeft);
-        STATUS_ICON(opponentLeft, paralysis: TRUE);
         MESSAGE("The opposing Wobbuffet is paralyzed, so it may be unable to move!");
+        STATUS_ICON(opponentLeft, paralysis: TRUE);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponentRight);
-        STATUS_ICON(opponentRight, paralysis: TRUE);
         MESSAGE("The opposing Wynaut is paralyzed, so it may be unable to move!");
+        STATUS_ICON(opponentRight, paralysis: TRUE);
     }
 }
 
@@ -1048,22 +1058,22 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Stun Shock paralyzes or poisons both opponent
         // opponent left
         ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponentLeft);
         if (statusAnim == B_ANIM_STATUS_PSN) {
-            STATUS_ICON(opponentLeft, poison: TRUE);
             MESSAGE("The opposing Wobbuffet was poisoned!");
+            STATUS_ICON(opponentLeft, poison: TRUE);
         }
         else {
-            STATUS_ICON(opponentLeft, paralysis: TRUE);
             MESSAGE("The opposing Wobbuffet is paralyzed, so it may be unable to move!");
+            STATUS_ICON(opponentLeft, paralysis: TRUE);
         }
         // opponent right
         ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponentRight);
         if (statusAnim == B_ANIM_STATUS_PSN) {
-            STATUS_ICON(opponentRight, poison: TRUE);
             MESSAGE("The opposing Wynaut was poisoned!");
+            STATUS_ICON(opponentRight, poison: TRUE);
         }
         else {
-            STATUS_ICON(opponentRight, paralysis: TRUE);
             MESSAGE("The opposing Wynaut is paralyzed, so it may be unable to move!");
+            STATUS_ICON(opponentRight, paralysis: TRUE);
         }
     }
 }
@@ -1118,30 +1128,30 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Befuddle paralyzes, poisons, or sleeps both o
         // opponent left
         ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponentLeft);
         if (statusAnim == B_ANIM_STATUS_PSN) {
-            STATUS_ICON(opponentLeft, poison: TRUE);
             MESSAGE("The opposing Wobbuffet was poisoned!");
+            STATUS_ICON(opponentLeft, poison: TRUE);
         }
         else if (statusAnim == B_ANIM_STATUS_PRZ) {
-            STATUS_ICON(opponentLeft, paralysis: TRUE);
             MESSAGE("The opposing Wobbuffet is paralyzed, so it may be unable to move!");
+            STATUS_ICON(opponentLeft, paralysis: TRUE);
         }
         else {
-            STATUS_ICON(opponentLeft, sleep: TRUE);
             MESSAGE("The opposing Wobbuffet fell asleep!");
+            STATUS_ICON(opponentLeft, sleep: TRUE);
         }
         // opponent right
         ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponentRight);
         if (statusAnim == B_ANIM_STATUS_PSN) {
-            STATUS_ICON(opponentRight, poison: TRUE);
             MESSAGE("The opposing Wobbuffet was poisoned!");
+            STATUS_ICON(opponentRight, poison: TRUE);
         }
         else if (statusAnim == B_ANIM_STATUS_PRZ) {
-            STATUS_ICON(opponentRight, paralysis: TRUE);
             MESSAGE("The opposing Wobbuffet is paralyzed, so it may be unable to move!");
+            STATUS_ICON(opponentRight, paralysis: TRUE);
         }
         else {
-            STATUS_ICON(opponentRight, sleep: TRUE);
             MESSAGE("The opposing Wobbuffet fell asleep!");
+            STATUS_ICON(opponentRight, sleep: TRUE);
         }
     }
 }
@@ -1221,7 +1231,7 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Terror traps both opponents")
         MESSAGE("The opposing Wobbuffet can no longer escape!");
         MESSAGE("The opposing Wobbuffet can no longer escape!");
     } THEN { // Can't find good way to test trapping
-        EXPECT(opponentLeft->status2 & STATUS2_ESCAPE_PREVENTION);
+        EXPECT(opponentLeft->volatiles.escapePrevention);
     }
 }
 
@@ -1238,7 +1248,7 @@ SINGLE_BATTLE_TEST("Dynamax: Baton Pass passes G-Max Terror's escape prevention 
         ANIMATION(ANIM_TYPE_MOVE, MOVE_G_MAX_TERROR, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, opponent);
     } THEN {
-        EXPECT(opponent->status2 & STATUS2_ESCAPE_PREVENTION);
+        EXPECT(opponent->volatiles.escapePrevention);
     }
 }
 
@@ -1598,7 +1608,8 @@ SINGLE_BATTLE_TEST("Dynamax: Max Attacks prints a message when hitting into Max 
 
 SINGLE_BATTLE_TEST("Dynamax: Max Moves don't bypass absorbing abilities")
 {
-    u32 move, ability, species;
+    u32 move, species;
+    enum Ability ability;
     PARAMETRIZE { move = MOVE_SPARK; ability = ABILITY_VOLT_ABSORB; species = SPECIES_LANTURN; }
     PARAMETRIZE { move = MOVE_WATER_GUN; ability = ABILITY_WATER_ABSORB; species = SPECIES_LANTURN; }
     PARAMETRIZE { move = MOVE_EMBER; ability = ABILITY_FLASH_FIRE; species = SPECIES_HEATRAN; }
@@ -1648,15 +1659,5 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamax is reverted before switch out")
     }
 }
 
-SINGLE_BATTLE_TEST("Dynamax: Destiny Bond fails if a dynamaxed battler is present on field")
-{
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_DESTINY_BOND) == EFFECT_DESTINY_BOND);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-    } WHEN {
-        TURN { MOVE(opponent, MOVE_DESTINY_BOND); MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_DYNAMAX); }
-    } SCENE {
-        MESSAGE("The move was blocked by the power of Dynamax!");
-    }
-}
+TO_DO_BATTLE_TEST("Dynamax: Contrary inverts stat-lowering Max Moves, without showing a message")
+TO_DO_BATTLE_TEST("Dynamax: Contrary inverts stat-increasing Max Moves, without showing a message")

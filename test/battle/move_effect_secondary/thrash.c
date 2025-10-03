@@ -114,6 +114,6 @@ SINGLE_BATTLE_TEST("Petal Dance does not lock mons that copy the move with Dance
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PETAL_DANCE, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PETAL_DANCE, opponent);
         // How do you actually test locking?
-        EXPECT(!(opponent->status2 & STATUS2_MULTIPLETURNS));
+        EXPECT(!(opponent->volatiles.multipleTurns));
     }
 }

@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Simple Beam replaces target's ability with Simple")
         ABILITY_POPUP(opponent, ABILITY_BLAZE);
     } THEN {
         EXPECT_EQ(opponent->ability, ABILITY_SIMPLE);
-    } 
+    }
 }
 
 DOUBLE_BATTLE_TEST("Simple Beam fails if the target already has Simple")
@@ -44,7 +44,8 @@ DOUBLE_BATTLE_TEST("Simple Beam fails if the target already has Simple")
 
 SINGLE_BATTLE_TEST("Simple Beam fails if target has an ability that can't be overwritten")
 {
-    u32 species, ability;
+    u32 species;
+    enum Ability ability;
 
     PARAMETRIZE { species = SPECIES_ARCEUS; ability = ABILITY_MULTITYPE; }
     PARAMETRIZE { species = SPECIES_AEGISLASH; ability = ABILITY_STANCE_CHANGE; }

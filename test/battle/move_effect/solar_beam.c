@@ -9,7 +9,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Solar Beam does not need a charging turn if Sun is up")
 {
-    u32 ability;
+    enum Ability ability;
 
     PARAMETRIZE { ability = ABILITY_DROUGHT; }
     PARAMETRIZE { ability = ABILITY_WHITE_SMOKE; }

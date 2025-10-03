@@ -78,6 +78,10 @@ enum {
     ACTION_OPEN_BERRIES,
     ACTION_WALK,
     ACTION_DESELECT,
+    ACTION_BY_NAME,
+    ACTION_BY_TYPE,
+    ACTION_BY_AMOUNT,
+    ACTION_BY_INDEX,
     ACTION_DUMMY,
 };
 
@@ -205,6 +209,19 @@ static const u8 sText_DepositedVar2Var1s[] = _("Deposited {STR_VAR_2}\n{STR_VAR_
 static const u8 sText_NoRoomForItems[] = _("There's no room to\nstore items.");
 static const u8 sText_CantStoreImportantItems[] = _("Important items\ncan't be stored in\nthe PC!");
 
+static void Task_LoadBagSortOptions(u8 taskId);
+static void ItemMenu_SortByName(u8 taskId);
+static void ItemMenu_SortByType(u8 taskId);
+static void ItemMenu_SortByAmount(u8 taskId);
+static void ItemMenu_SortByIndex(u8 taskId);
+static void SortBagItems(u8 taskId);
+static void Task_SortFinish(u8 taskId);
+static void MergeSort(struct BagPocket *pocket, s32 (*comparator)(enum Pocket, struct ItemSlot, struct ItemSlot));
+static s32 CompareItemsAlphabetically(enum Pocket pocketId, struct ItemSlot item1, struct ItemSlot item2);
+static s32 CompareItemsByMost(enum Pocket pocketId, struct ItemSlot item1, struct ItemSlot item2);
+static s32 CompareItemsByType(enum Pocket pocketId, struct ItemSlot item1, struct ItemSlot item2);
+static s32 CompareItemsByIndex(enum Pocket pocketId, struct ItemSlot item1, struct ItemSlot item2);
+
 static const struct BgTemplate sBgTemplates_ItemMenu[2] = {
     {
         .bg = 0,
@@ -259,6 +276,10 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_OPEN_BERRIES] = {gOtherText_Open, {.void_u8 = ItemMenu_UseInBattle}},
     [ACTION_WALK] = {gOtherText_Walk, {.void_u8 = ItemMenu_UseOutOfBattle}},
     [ACTION_DESELECT] = {gOtherText_Deselect, {.void_u8 = ItemMenu_Register}},
+    [ACTION_BY_NAME]           = {COMPOUND_STRING("Name"),      {ItemMenu_SortByName}},
+    [ACTION_BY_TYPE]           = {COMPOUND_STRING("Type"),      {ItemMenu_SortByType}},
+    [ACTION_BY_AMOUNT]         = {COMPOUND_STRING("Amount"),    {ItemMenu_SortByAmount}},
+    [ACTION_BY_INDEX]          = {COMPOUND_STRING("Index"),     {ItemMenu_SortByIndex}},
     [ACTION_DUMMY] = {gString_Dummy, {.void_u8 = NULL}}
 };
 
@@ -1224,6 +1245,11 @@ static void InitPocketScrollPositions(void)
         SetCursorScrollWithinListBounds(&gBagPosition.scrollPosition[i], &gBagPosition.cursorPosition[i], gBagMenu->numShownItems[i], gBagMenu->numItemStacks[i], MAX_ITEMS_SHOWN);
 }
 
+u8 GetItemListPosition(u8 pocketId)
+{
+    return gBagPosition.scrollPosition[pocketId] + gBagPosition.cursorPosition[pocketId];
+}
+
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId))
 {
     s16 *data = gTasks[taskId].data;
@@ -1301,6 +1327,34 @@ static void Task_BagMenu_HandleInput(u8 taskId)
                 return;
             }
         }
+            else if (JOY_NEW(START_BUTTON))
+            {
+                if ((gBagMenu->numItemStacks[gBagPosition.pocket] - 1) <= 1) //can't sort with 0 or 1 item in bag
+                {
+                    static const u8 sText_NothingToSort[] = _("There's nothing to sort!");
+                    PlaySE(SE_FAILURE);
+                    DisplayItemMessage(taskId, 1, sText_NothingToSort, HandleErrorMessage);
+                    break;
+                }
+                else
+                {
+                    struct ItemSlot tempItem;
+                    data[1] = GetItemListPosition(gBagPosition.pocket);
+                    tempItem = GetBagItemIdAndQuantity(gBagPosition.pocket, data[1]);
+                    data[2] = tempItem.quantity;
+                    if (gBagPosition.cursorPosition[gBagPosition.pocket] == gBagMenu->numItemStacks[gBagPosition.pocket])
+                        break;
+                    else
+                        gSpecialVar_ItemId = tempItem.itemId;
+
+                    PlaySE(SE_SELECT);
+                    BagDestroyPocketScrollArrowPair();
+                    BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
+                    ListMenuGetScrollAndRow(data[0], scrollPos, cursorPos);
+                    gTasks[taskId].func = Task_LoadBagSortOptions;
+                    return;
+                }
+            }
         break;
     }
 
@@ -2691,5 +2745,299 @@ static void BagDrawDepositItemTextBox(void)
 
     DrawStdFrameWithCustomTileAndPalette(WIN_POCKET_NAME, FALSE, 0x081, 12);
     AddTextPrinterParameterized(WIN_POCKET_NAME, FONT_SMALL, gText_DepositItem, x / 2, 1, 0, NULL);
+}
+
+static const u8 sText_SortItemsHow[] = _("Sort items how?");
+static const u8 sText_ItemsSorted[] = _("Items sorted by {STR_VAR_1}!");
+static const u8 *const sSortTypeStrings[] =
+{
+    [SORT_ALPHABETICALLY] = COMPOUND_STRING("name"),
+    [SORT_BY_TYPE] = COMPOUND_STRING("type"),
+    [SORT_BY_AMOUNT] = COMPOUND_STRING("amount"),
+    [SORT_BY_INDEX] = COMPOUND_STRING("index")
+};
+
+static const u8 sBagMenuSortItems[] =
+{
+    ACTION_BY_NAME,
+    ACTION_BY_TYPE,
+    ACTION_BY_AMOUNT,
+    ACTION_CANCEL,
+};
+
+static const u8 sBagMenuSortKeyItems[] =
+{
+    ACTION_BY_NAME,
+    ACTION_CANCEL,
+};
+
+static const u8 sBagMenuSortPokeBalls[] =
+{
+    ACTION_BY_NAME,
+    ACTION_BY_AMOUNT,
+    ACTION_DUMMY,
+    ACTION_CANCEL,
+};
+
+static const u8 sBagMenuSortBerriesTMsHMs[] =
+{
+    ACTION_BY_NAME,
+    ACTION_BY_AMOUNT,
+    ACTION_BY_INDEX,
+    ACTION_CANCEL,
+};
+
+static void AddBagSortSubMenu(void)
+{
+    switch (gBagPosition.pocket)
+    {
+    case POCKET_KEY_ITEMS:
+        gBagMenu->contextMenuItemsPtr = sBagMenuSortKeyItems;
+        memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortKeyItems, NELEMS(sBagMenuSortKeyItems));
+        gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortKeyItems);
+        break;
+    case POCKET_POKE_BALLS:
+        gBagMenu->contextMenuItemsPtr = sBagMenuSortPokeBalls;
+        memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortPokeBalls, NELEMS(sBagMenuSortPokeBalls));
+        gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortPokeBalls);
+        break;
+    case POCKET_BERRIES:
+    case POCKET_TM_HM:
+        gBagMenu->contextMenuItemsPtr = sBagMenuSortBerriesTMsHMs;
+        memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortBerriesTMsHMs, NELEMS(sBagMenuSortBerriesTMsHMs));
+        gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortBerriesTMsHMs);
+        break;
+    default:
+        gBagMenu->contextMenuItemsPtr = sBagMenuSortItems;
+        memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortItems, NELEMS(sBagMenuSortItems));
+        gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortItems);
+        break;
+    }
+
+    StringExpandPlaceholders(gStringVar4, sText_SortItemsHow);
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    BagMenu_Print(1, 1, gStringVar4, 3, 1, 0, 0, 0, 0);
+    PrintContextMenuItems(BagMenu_AddWindow(ITEMWIN_1x1 + gBagMenu->contextMenuNumItems - 1));
+}
+
+static void Task_LoadBagSortOptions(u8 taskId)
+{
+    AddBagSortSubMenu();
+    gTasks[taskId].func = Task_ItemContext_SingleRow;
+}
+
+#define tSortType data[2]
+static void ItemMenu_SortByName(u8 taskId)
+{
+    gTasks[taskId].tSortType = SORT_ALPHABETICALLY;
+    StringCopy(gStringVar1, sSortTypeStrings[SORT_ALPHABETICALLY]);
+    gTasks[taskId].func = SortBagItems;
+}
+
+static void ItemMenu_SortByType(u8 taskId)
+{
+    gTasks[taskId].tSortType = SORT_BY_TYPE;
+    StringCopy(gStringVar1, sSortTypeStrings[SORT_BY_TYPE]);
+    gTasks[taskId].func = SortBagItems;
+}
+
+static void ItemMenu_SortByAmount(u8 taskId)
+{
+    gTasks[taskId].tSortType = SORT_BY_AMOUNT; //greatest->least
+    StringCopy(gStringVar1, sSortTypeStrings[SORT_BY_AMOUNT]);
+    gTasks[taskId].func = SortBagItems;
+}
+
+static void ItemMenu_SortByIndex(u8 taskId)
+{
+    gTasks[taskId].tSortType = SORT_BY_INDEX;
+    StringCopy(gStringVar1, sSortTypeStrings[SORT_BY_INDEX]);
+    gTasks[taskId].func = SortBagItems;
+}
+
+static void SortBagItems(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
+    u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
+
+    RemoveContextWindow();
+
+    SortItemsInBag(&gBagPockets[gBagPosition.pocket], tSortType);
+    DestroyListMenuTask(data[0], scrollPos, cursorPos);
+    UpdatePocketListPosition(gBagPosition.pocket);
+    LoadBagItemListBuffers(gBagPosition.pocket);
+    data[0] = ListMenuInit(&gMultiuseListMenuTemplate, *scrollPos, *cursorPos);
+    ScheduleBgCopyTilemapToVram(0);
+
+    StringCopy(gStringVar1, sSortTypeStrings[tSortType]);
+    StringExpandPlaceholders(gStringVar4, sText_ItemsSorted);
+    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, Task_SortFinish);
+}
+
+#undef tSortType
+
+static void Task_SortFinish(u8 taskId)
+{
+    if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+    {
+        CloseItemMessage(taskId);
+    }
+}
+
+void SortItemsInBag(struct BagPocket *pocket, enum BagSortOptions type)
+{
+    switch (type)
+    {
+    case SORT_ALPHABETICALLY:
+        MergeSort(pocket, CompareItemsAlphabetically);
+        break;
+    case SORT_BY_AMOUNT:
+        MergeSort(pocket, CompareItemsByMost);
+        break;
+    case SORT_BY_INDEX:
+        MergeSort(pocket, CompareItemsByIndex);
+        break;
+    default:
+        MergeSort(pocket, CompareItemsByType);
+        break;
+    }
+}
+
+static inline __attribute__((always_inline)) void Merge(struct BagPocket *pocket, u32 iLeft, u32 iRight, u32 iEnd, struct ItemSlot *dummySlots, s32 (*comparator)(enum Pocket, struct ItemSlot, struct ItemSlot))
+{
+    struct ItemSlot item_i, item_j;
+    u32 i = iLeft, j = iRight;
+    for (u32 k = iLeft; k < iEnd; k++)
+    {
+        item_i = BagPocket_GetSlotData(pocket, i);
+        item_j = BagPocket_GetSlotData(pocket, j);
+        if (i < iRight && (j >= iEnd || comparator(pocket->id, item_i, item_j) < 0))
+        {
+            dummySlots[k] = item_i;
+            i++;
+        }
+        else
+        {
+            dummySlots[k] = item_j;
+            j++;
+        }
+    }
+}
+
+// Source: https://en.wikipedia.org/wiki/Merge_sort#Bottom-up_implementation
+static void MergeSort(struct BagPocket *pocket, s32 (*comparator)(enum Pocket, struct ItemSlot, struct ItemSlot))
+{
+    struct ItemSlot *dummySlots = AllocZeroed(sizeof(struct ItemSlot) * pocket->capacity);
+
+    u32 usedCapacity;
+    for (usedCapacity = 0; usedCapacity < pocket->capacity; usedCapacity++)
+    {
+        if (BagPocket_GetSlotData(pocket, usedCapacity).itemId == ITEM_NONE)
+            break;
+    }
+
+    for (u32 width = 1; width < usedCapacity; width *= 2)
+    {
+        for (u32 i = 0; i < usedCapacity; i += 2 * width)
+            Merge(pocket, i, min(i + width, usedCapacity), min(i + 2 * width, usedCapacity), dummySlots, comparator);
+
+        for (u32 j = 0; j < usedCapacity; j++)
+            BagPocket_SetSlotData(pocket, j, dummySlots[j]);
+    }
+
+    Free(dummySlots);
+}
+
+static s32 CompareItemsAlphabetically(enum Pocket pocketId, struct ItemSlot item1, struct ItemSlot item2)
+{
+    const u8 *name1, *name2;
+
+    if (item1.itemId == ITEM_NONE)
+        return 1;
+    else if (item2.itemId == ITEM_NONE)
+        return -1;
+
+    if (pocketId == POCKET_TM_HM)
+    {
+        name1 = gMovesInfo[GetTMHMMoveId(GetItemTMHMIndex(item1.itemId))].name;
+        name2 = gMovesInfo[GetTMHMMoveId(GetItemTMHMIndex(item2.itemId))].name;
+    }
+    else
+    {
+        name1 = GetItemName(item1.itemId);
+        name2 = GetItemName(item2.itemId);
+    }
+
+    return StringCompare(name1, name2);
+}
+
+static s32 CompareItemsByMost(enum Pocket pocketId, struct ItemSlot item1, struct ItemSlot item2)
+{
+    if (item1.itemId == ITEM_NONE)
+        return 1;
+    else if (item2.itemId == ITEM_NONE)
+        return -1;
+
+    if (item1.quantity < item2.quantity)
+        return 1;
+    else if (item1.quantity > item2.quantity)
+        return -1;
+
+    return CompareItemsAlphabetically(pocketId, item1, item2); // Items have same quantity so sort alphabetically
+}
+
+static s32 CompareItemsByType(enum Pocket pocketId, struct ItemSlot item1, struct ItemSlot item2)
+{
+    if (item1.itemId == ITEM_NONE)
+        return 1;
+    else if (item2.itemId == ITEM_NONE)
+        return -1;
+
+    enum ItemSortType type1 = gItemsInfo[item1.itemId].sortType;
+    enum ItemSortType type2 = gItemsInfo[item2.itemId].sortType;
+
+    // Uncategorized items go last.
+    if (type1 != ITEM_TYPE_UNCATEGORIZED && type2 == ITEM_TYPE_UNCATEGORIZED)
+        return -1;
+    else if (type2 != ITEM_TYPE_UNCATEGORIZED && type1 == ITEM_TYPE_UNCATEGORIZED)
+        return 1;
+    else if (type1 < type2)
+        return -1;
+    else if (type1 > type2)
+        return 1;
+
+    return CompareItemsAlphabetically(pocketId, item1, item2); // Items are of same type so sort alphabetically
+}
+
+static s32 CompareItemsByIndex(enum Pocket pocketId, struct ItemSlot item1, struct ItemSlot item2)
+{
+    u16 index1 = 0, index2 = 0;
+
+    if (item1.itemId == ITEM_NONE)
+        return 1;
+    else if (item2.itemId == ITEM_NONE)
+        return -1;
+
+    switch (pocketId)
+    {
+    case POCKET_TM_HM:
+        index1 = GetItemTMHMIndex(item1.itemId);
+        index2 = GetItemTMHMIndex(item2.itemId);
+        break;
+    case POCKET_BERRIES: // To do - requires #7305
+        index1 = item1.itemId;
+        index2 = item2.itemId;
+        break;
+    default:
+        return 0;
+    }
+
+    if (index1 < index2)
+        return -1;
+    else if (index1 > index2)
+        return 1;
+
+    return 0; // Cannot have multiple stacks of indexed items
 }
 

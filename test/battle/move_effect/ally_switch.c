@@ -90,9 +90,9 @@ DOUBLE_BATTLE_TEST("Ally Switch does not redirect the target of Snipe Shot")
     }
 }
 
-DOUBLE_BATTLE_TEST("Ally Switch does not redirect moves done by pokemon with Stalwart and Propeller Tail")
+DOUBLE_BATTLE_TEST("Ally Switch does not redirect moves done by Pokémon with Stalwart and Propeller Tail")
 {
-    u16 ability;
+    enum Ability ability;
     PARAMETRIZE { ability = ABILITY_STALWART; }
     PARAMETRIZE { ability = ABILITY_PROPELLER_TAIL; }
     PARAMETRIZE { ability = ABILITY_TELEPATHY; }
@@ -185,10 +185,25 @@ DOUBLE_BATTLE_TEST("Ally Switch doesn't make self-targeting status moves fail")
     }
 }
 
-DOUBLE_BATTLE_TEST("Ally Switch increases the Protect-like moves counter")
+DOUBLE_BATTLE_TEST("Ally Switch doesn't increase the Protect-like moves counter (Gen5-8)")
 {
     GIVEN {
-        ASSUME(B_ALLY_SWITCH_FAIL_CHANCE >= GEN_9);
+        WITH_CONFIG(GEN_ALLY_SWITCH_FAIL_CHANCE, GEN_8);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); }
+    } THEN {
+        EXPECT(gDisableStructs[B_POSITION_PLAYER_RIGHT].protectUses == 0);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Ally Switch increases the Protect-like moves counter (Gen9+)")
+{
+    GIVEN {
+        WITH_CONFIG(GEN_ALLY_SWITCH_FAIL_CHANCE, GEN_9);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -308,6 +323,86 @@ DOUBLE_BATTLE_TEST("Ally Switch swaps Illusion data")
         TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); }
     } THEN {
         EXPECT(&gPlayerParty[2] == gBattleStruct->illusion[0].mon);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Ally switch updates last used moves for Mimic")
+{
+    GIVEN {
+        PLAYER(SPECIES_XATU)     { Speed(100); }
+        PLAYER(SPECIES_RIOLU)    { Speed(150); }
+        OPPONENT(SPECIES_FEAROW) { Speed(20); }
+        OPPONENT(SPECIES_ARON)   { Speed(30); }
+    } WHEN {
+        TURN { MOVE(playerRight, MOVE_FAKE_OUT, target: opponentRight); MOVE(playerLeft, MOVE_ALLY_SWITCH);
+               MOVE(opponentLeft, MOVE_MIMIC, target: playerLeft);
+             }
+    } SCENE {
+        MESSAGE("Riolu used Fake Out!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FAKE_OUT, playerRight);
+        MESSAGE("Xatu used Ally Switch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft);
+        MESSAGE("Xatu and Riolu switched places!");
+        MESSAGE("The opposing Fearow used Mimic!");
+        MESSAGE("The opposing Fearow learned Fake Out!");
+    }
+}
+
+DOUBLE_BATTLE_TEST("Ally Switch does not update leech seed battler")
+{
+    GIVEN {
+        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_SOLOSIS);
+        OPPONENT(SPECIES_BULBASAUR) { HP(50); MaxHP(100); }
+        OPPONENT(SPECIES_RALTS)  { HP(50); MaxHP(100); }
+    } WHEN {
+        TURN { MOVE(opponentLeft, MOVE_LEECH_SEED, target: playerLeft); }
+        TURN { MOVE(opponentRight, MOVE_ALLY_SWITCH); }
+        TURN { ; }
+    } SCENE {
+        // turn 1
+        MESSAGE("The opposing Bulbasaur used Leech Seed!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_LEECH_SEED, opponentLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_LEECH_SEED_DRAIN, playerLeft);
+        HP_BAR(playerLeft);
+        HP_BAR(opponentLeft);
+
+        MESSAGE("The opposing Ralts used Ally Switch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, opponentRight);
+        MESSAGE("The opposing Ralts and the opposing Bulbasaur switched places!");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_LEECH_SEED_DRAIN, playerLeft);
+        HP_BAR(playerLeft);
+        HP_BAR(opponentLeft); // Ralts now gets hp gain
+    } THEN {
+        EXPECT_GT(opponentLeft->hp, 50);
+        EXPECT_GT(opponentRight->hp, 50);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Ally Switch updates attract battler")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); Gender(MON_MALE); }
+        PLAYER(SPECIES_SOLOSIS)   { Speed(50); }
+        OPPONENT(SPECIES_CLEFAIRY) { Speed(20); Gender(MON_FEMALE); Ability(ABILITY_CUTE_CHARM); }
+        OPPONENT(SPECIES_RALTS)    { Speed(30); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft); }
+        TURN { MOVE(opponentRight, MOVE_ALLY_SWITCH); }
+        TURN { ; }
+    } SCENE {
+        // turn 1
+        MESSAGE("Wobbuffet used Tackle!");
+        HP_BAR(opponentLeft);
+        ABILITY_POPUP(opponentLeft, ABILITY_CUTE_CHARM);
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_INFATUATION, playerLeft);
+        MESSAGE("The opposing Clefairy's Cute Charm infatuated Wobbuffet!");
+        // turn 2
+        MESSAGE("The opposing Ralts used Ally Switch!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, opponentRight);
+        MESSAGE("The opposing Ralts and the opposing Clefairy switched places!");
+        // turn 3
+        MESSAGE("Wobbuffet is in love with the opposing Clefairy!"); // tracks attract battler
     }
 }
 

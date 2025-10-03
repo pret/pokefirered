@@ -6,7 +6,7 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_FURY_CUTTER) == EFFECT_FURY_CUTTER);
 }
 
-SINGLE_BATTLE_TEST("Fury Cutter power doubles with each use, up to 160 power")
+SINGLE_BATTLE_TEST("Fury Cutter's power doubles with each use, up to 160 power")
 {
     s16 damage[6];
     int turn;
@@ -36,6 +36,10 @@ SINGLE_BATTLE_TEST("Fury Cutter power doubles with each use, up to 160 power")
         EXPECT_EQ(damage[maxTurns - 2], damage[maxTurns - 1]);
     }
 }
+
+TO_DO_BATTLE_TEST("Fury Cutter's power is reset if the user misses")
+TO_DO_BATTLE_TEST("Fury Cutter's power is reset if the user is switched out")
+TO_DO_BATTLE_TEST("Fury Cutter's power is reset if the trainer uses an item")
 
 SINGLE_BATTLE_TEST("Fury Cutter counter is the same for both hits of Parental Bond")
 {

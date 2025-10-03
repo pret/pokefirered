@@ -15,7 +15,7 @@ SINGLE_BATTLE_TEST("Tri Attack can inflict paralysis, burn or freeze")
     u8 statusAnim;
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; }
-    PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; }
+    PARAMETRIZE { statusAnim = (B_USE_FROSTBITE ? B_ANIM_STATUS_FRB : B_ANIM_STATUS_FRZ); }
     PASSES_RANDOMLY(1, 3, RNG_TRI_ATTACK);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
@@ -29,7 +29,7 @@ SINGLE_BATTLE_TEST("Tri Attack can inflict paralysis, burn or freeze")
         ANIMATION(ANIM_TYPE_STATUS, statusAnim, opponent);
         if (statusAnim == B_ANIM_STATUS_BRN) {
             STATUS_ICON(opponent, burn: TRUE);
-        } else if (statusAnim == B_ANIM_STATUS_FRZ) {
+        } else if (statusAnim == (B_USE_FROSTBITE ? B_ANIM_STATUS_FRB : B_ANIM_STATUS_FRZ)) {
             FREEZE_OR_FROSTBURN_STATUS(opponent, TRUE);
         } else if (statusAnim == B_ANIM_STATUS_PRZ) {
             STATUS_ICON(opponent, paralysis: TRUE);
@@ -74,13 +74,14 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze electric/fire/ice typ
 }
 
 #if B_USE_FROSTBITE == TRUE
-SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/frostbite pokemon with abilities preventing respective statuses")
+SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/frostbite Pokémon with abilities preventing respective statuses")
 #else
-SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze pokemon with abilities preventing respective statuses")
+SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze Pokémon with abilities preventing respective statuses")
 #endif
 {
     u8 statusAnim;
-    u16 species, ability;
+    u16 species;
+    enum Ability ability;
     u32 rng;
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; species = SPECIES_PERSIAN; ability = ABILITY_LIMBER; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; }

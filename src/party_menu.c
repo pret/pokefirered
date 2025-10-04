@@ -5375,7 +5375,7 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc func)
 
 u16 ItemIdToBattleMoveId(u16 item)
 {
-    return (GetItemPocket(item) == POCKET_TM_HM) ? gItemsInfo[item].secondaryId : MOVE_NONE;
+    return (GetItemPocket(item) == POCKET_TM_HM) ? GetItemTMHMMoveId(item) : MOVE_NONE;
 }
 
 bool8 MonKnowsMove(struct Pokemon *mon, u16 move)

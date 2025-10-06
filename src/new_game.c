@@ -29,6 +29,7 @@
 #include "berry_powder.h"
 #include "pokemon_jump.h"
 #include "event_scripts.h"
+bool8 gIsNuzlockeMode = FALSE;
 
 // this file's functions
 static void ResetMiniGamesResults(void);

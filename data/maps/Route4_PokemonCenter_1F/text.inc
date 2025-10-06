@@ -1,54 +1,55 @@
 Route4_PokemonCenter_1F_Text_CanHaveSixMonsWithYou::
-    .string "Okay, set six POKé BALLS in my\n"
-    .string "belt…\p"
-    .string "Yeah, that'll do it. At most, you\n"
-    .string "can have six POKéMON with you.$"
+    .string "Bien, pondré seis {SHADOW DYNAMIC_COLOR4}POKé BALLS{SHADOW LIGHT_GRAY} en mi\n"
+    .string "cinturón...\p"
+    .string "Sí, eso bastará.\p"
+    .string "Como máximo puedes llevar\n"
+    .string "seis {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} contigo.$"
 
 Route4_PokemonCenter_1F_Text_TeamRocketAttacksCerulean::
-    .string "TEAM ROCKET attacks CERULEAN\n"
-    .string "citizens…\p"
-    .string "Not a day goes by without TEAM\n"
-    .string "ROCKET being in the news.$"
+    .string "EL {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY} ataca a los\n"
+    .string "ciudadanos de {SHADOW DYNAMIC_COLOR4}CIUDAD CELESTE{SHADOW LIGHT_GRAY}...\p"
+    .string "No pasa un día sin que el {SHADOW DYNAMIC_COLOR4}EQUIPO{SHADOW LIGHT_GRAY}\n"
+    .string "{SHADOW DYNAMIC_COLOR4}ROCKET{SHADOW LIGHT_GRAY} salga en las noticias.$"
 
 Route4_PokemonCenter_1F_Text_LaddieBuyMagikarpForJust500::
-    .string "MAN: Hello there, laddie!\n"
-    .string "Have I got a deal just for you!\p"
-    .string "I'll let you have a secret POKéMON\n"
-    .string "- a MAGIKARP - for just ¥500!\p"
-    .string "So, you'll buy it, am I right?$"
+    .string "¡Hola, muchacho!\n"
+    .string "¡Tengo un trato perfecto para ti!\p"
+    .string "Te daré tener un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} secreto...\n"
+    .string "¡Un {SHADOW DYNAMIC_COLOR4}MAGIKARP{SHADOW LIGHT_GRAY} por solo ¥500!\p"
+    .string "Entonces, lo comprarás, ¿verdad?$"
 
 Route4_PokemonCenter_1F_Text_SweetieBuyMagikarpForJust500::
-    .string "MAN: Hello there, sweetie pie!\n"
-    .string "Have I got a deal just for you!\p"
-    .string "I'll let you have a secret POKéMON\n"
-    .string "- a MAGIKARP - for just ¥500!\p"
-    .string "So, you'll buy it, am I right?$"
+    .string "¡Hola, cariño!\n"
+    .string "¡Tengo un trato perfecto para ti!\p"
+    .string "Te daré tener un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} secreto...\n"
+    .string "¡Un {SHADOW DYNAMIC_COLOR4}MAGIKARP{SHADOW LIGHT_GRAY} por solo ¥500!\p"
+    .string "Entonces, lo comprarás, ¿verdad?$"
 
 Route4_PokemonCenter_1F_Text_PaidOutrageouslyForMagikarp::
-    .string "{PLAYER} paid an outrageous ¥500\n"
-    .string "and bought the MAGIKARP…$"
+    .string "{SHADOW DYNAMIC_COLOR4}{PLAYER}{SHADOW LIGHT_GRAY} pagó la exagerada suma de\n"
+    .string "¥500 y compró el {SHADOW DYNAMIC_COLOR4}MAGIKARP{SHADOW LIGHT_GRAY}...$"
 
 Route4_PokemonCenter_1F_Text_OnlyDoingThisAsFavorToYou::
-    .string "No? You say no? I'm only doing this\n"
-    .string "as a favor to you!$"
+    .string "¿No? ¿Dices que no?\n"
+    .string "¡Solo hago esto como un\n"
+    .string "favor para ti!$"
 
 Route4_PokemonCenter_1F_Text_NoRoomForMorePokemon::
-    .string "There's no more room for any more\n"
-    .string "POKéMON, it looks like.$"
+    .string "Parece que no queda espacio para\n"
+    .string "más {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}.$"
 
 Route4_PokemonCenter_1F_Text_YoullNeedMoreMoney::
-    .string "You'll need more money than that!$"
+    .string "¡Necesitas más dinero que eso!$"
 
 Route4_PokemonCenter_1F_Text_IDontGiveRefunds::
-    .string "MAN: Well, I don't give refunds.\n"
-    .string "You knew what you were getting!$"
+    .string "Pues no doy reembolsos.\n"
+    .string "¡Sabías lo que comprabas!$"
 
 Route4_PokemonCenter_1F_Text_ShouldStoreMonsUsingPC::
-    .string "Sometimes, you'll have too many\n"
-    .string "POKéMON with you to add any more.\p"
-    .string "In that case, you should just\n"
-    .string "store some using any PC.$"
+    .string "A veces llevarás demasiados {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\n"
+    .string "contigo como para añadir más...\n"
+    .string "En ese caso, deberías guardar\n"
+    .string "algunos usando cualquier {SHADOW DYNAMIC_COLOR4}PC{SHADOW LIGHT_GRAY}.$"
 
 Route4_PokemonCenter_1F_Text_ItsANewspaper::
-    .string "It's a newspaper.$"
-
+    .string "Es un periódico.$"

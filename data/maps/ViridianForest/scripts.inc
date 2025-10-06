@@ -112,9 +112,7 @@ ViridianForest_EventScript_RedGreenEncounter::
 	return
 
 ViridianForest_EventScript_RedGreenEncounterLeft::
-	setflag FLAG_HIDE_VIRIDIAN_FOREST_REDGREEN
 	playbgm MUS_ENCOUNTER_BOY, 0
-	setvar VAR_VIRIDIAN_FOREST_REDGREEN,2
 	setobjectxy LOCALID_VIDRIAN_FOREST_REDGREEN,39,42 
 	applymovement LOCALID_PLAYER, ViridianForest_EntradaPlayerLeft
 	applymovement LOCALID_VIDRIAN_FOREST_REDGREEN, ViridianForest_EntradaRedGreenLeft
@@ -122,12 +120,13 @@ ViridianForest_EventScript_RedGreenEncounterLeft::
 	call ViridianForest_EventScript_RedGreenEncounter
 	setobjectxy LOCALID_VIDRIAN_FOREST_REDGREEN,53,0
 	playbgm MUS_VIRIDIAN_FOREST, 0
+	setvar VAR_VIRIDIAN_FOREST_REDGREEN,2
+	setflag FLAG_HIDE_VIRIDIAN_FOREST_REDGREEN
 	end
 
 ViridianForest_EventScript_RedGreenEncounterRight::
-	setflag FLAG_HIDE_VIRIDIAN_FOREST_REDGREEN
+
 	playbgm MUS_ENCOUNTER_BOY, 0
-	setvar VAR_VIRIDIAN_FOREST_REDGREEN,2
 	setobjectxy LOCALID_VIDRIAN_FOREST_REDGREEN,39,42 
 	applymovement LOCALID_PLAYER, ViridianForest_EntradaPlayerRight
 	applymovement LOCALID_VIDRIAN_FOREST_REDGREEN, ViridianForest_EntradaRedGreenRight
@@ -135,6 +134,8 @@ ViridianForest_EventScript_RedGreenEncounterRight::
 	call ViridianForest_EventScript_RedGreenEncounter
 	setobjectxy LOCALID_VIDRIAN_FOREST_REDGREEN,53,0
 	playbgm MUS_VIRIDIAN_FOREST, 0
+	setvar VAR_VIRIDIAN_FOREST_REDGREEN,2
+	setflag FLAG_HIDE_VIRIDIAN_FOREST_REDGREEN
 	end
 
 ViridianForest_EventScript_BattleFemale::

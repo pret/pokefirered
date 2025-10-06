@@ -58,7 +58,7 @@ ViridianForest_Text_AntonioPostBattle::
 
 ViridianForest_Text_NPC::
     .string "No quiero luchar, solo estoy\n"
-    .string "esperando el momento perfecto\p"
+    .string "esperando el momento perfecto\l"
     .string "para atrapar mi próximo {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}$"
 
 ViridianForest_Text_CharlieIntro::

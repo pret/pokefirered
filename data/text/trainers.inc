@@ -13,7 +13,7 @@ VSSeeker_Text_TrainersNotReady::
 	.string "to be ready for battle.\p"
 	.string "Let's wait till later.{PAUSE_UNTIL_PRESS}$"
 
-Route3_Text_ColtonRematchIntro::
+Route3_Text_CristianRematchIntro::
 	.string "Hey!\n"
 	.string "I saw you in VIRIDIAN FOREST!$"
 
@@ -22,7 +22,7 @@ Route3_Text_BenRematchIntro::
 	.string "They're comfy and easy to wear!\p"
 	.string "You should be wearing shorts, too!$"
 
-Route3_Text_JaniceRematchIntro::
+Route3_Text_JazminRematchIntro::
 	.string "Excuse me!\n"
 	.string "You keep looking at me, don't you?$"
 
@@ -30,11 +30,11 @@ Route3_Text_GregRematchIntro::
 	.string "You're a TRAINER, aren't you?\n"
 	.string "Let's get with it right away!$"
 
-Route3_Text_SallyRematchIntro::
+Route3_Text_SusanaRematchIntro::
 	.string "That look you give me…\n"
 	.string "It intrigues me so!$"
 
-Route3_Text_CalvinRematchIntro::
+Route3_Text_CesarRematchIntro::
 	.string "Hey! What's wrong with you?\n"
 	.string "You're still not wearing shorts!$"
 
@@ -42,7 +42,7 @@ Route3_Text_JamesRematchIntro::
 	.string "I'll battle you with the POKéMON\n"
 	.string "I started raising.$"
 
-Route3_Text_RobinRematchIntro::
+Route3_Text_RobertaRematchIntro::
 	.string "Eek!\n"
 	.string "Did you push me?$"
 

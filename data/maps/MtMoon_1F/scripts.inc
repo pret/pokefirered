@@ -34,19 +34,19 @@ MtMoon_1F_EventScript_Iris::
 	msgbox MtMoon_1F_Text_IrisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtMoon_1F_EventScript_Jovan::
-	trainerbattle_single TRAINER_SUPER_NERD_JOVAN, MtMoon_1F_Text_JovanIntro, MtMoon_1F_Text_JovanDefeat
-	msgbox MtMoon_1F_Text_JovanPostBattle, MSGBOX_AUTOCLOSE
+MtMoon_1F_EventScript_Javier::
+	trainerbattle_single TRAINER_SUPER_NERD_JAVIER, MtMoon_1F_Text_JavierIntro, MtMoon_1F_Text_JavierDefeat
+	msgbox MtMoon_1F_Text_JavierPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtMoon_1F_EventScript_Kent::
-	trainerbattle_single TRAINER_BUG_CATCHER_KENT, MtMoon_1F_Text_KentIntro, MtMoon_1F_Text_KentDefeat
-	msgbox MtMoon_1F_Text_KentPostBattle, MSGBOX_AUTOCLOSE
+MtMoon_1F_EventScript_Cristobal::
+	trainerbattle_single TRAINER_BUG_CATCHER_CRISTOBAL, MtMoon_1F_Text_CristobalIntro, MtMoon_1F_Text_CristobalDefeat
+	msgbox MtMoon_1F_Text_CristobalPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MtMoon_1F_EventScript_Robby::
-	trainerbattle_single TRAINER_BUG_CATCHER_ROBBY, MtMoon_1F_Text_RobbyIntro, MtMoon_1F_Text_RobbyDefeat
-	msgbox MtMoon_1F_Text_RobbyPostBattle, MSGBOX_AUTOCLOSE
+MtMoon_1F_EventScript_Roberto::
+	trainerbattle_single TRAINER_BUG_CATCHER_ROBERTO, MtMoon_1F_Text_RobertoIntro, MtMoon_1F_Text_RobertoDefeat
+	msgbox MtMoon_1F_Text_RobertoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 @ENCUENTRO SILVIO

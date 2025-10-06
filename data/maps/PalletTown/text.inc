@@ -30,7 +30,7 @@ PalletTown_Text_LaboratorioDeInvestigacion::
     .string "DE POKéMON DEL PROF. OAK$"
 
 PalletTown_Text_CasaPlayer::
-    .string "CASA DE {PLAYER}$"
+    .string "TAMAÑO COMPARADO CON AAAAAAA$"
 
 PalletTown_Text_CasaRival::
     .string "CASA DE {RIVAL}$"

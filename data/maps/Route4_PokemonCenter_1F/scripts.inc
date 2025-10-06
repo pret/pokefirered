@@ -16,7 +16,7 @@ Route4_PokemonCenter_1F_EventScript_Boy::
 
 Route4_PokemonCenter_1F_EventScript_Gentleman::
 	lock
-	msgbox Route4_PokemonCenter_1F_Text_TeamRocketAttacksCerulean
+	msgbox Route4_PokemonCenter_1F_Text_TeamRocketAttacksCerulean, MSGBOX_NPC
 	release
 	end
 
@@ -101,7 +101,9 @@ Route4_PokemonCenter_1F_EventScript_PayForMagikarp::
 	removemoney MAGIKARP_PRICE
 	updatemoneybox
 	playfanfare MUS_LEVEL_UP
+	signmsg
 	message Route4_PokemonCenter_1F_Text_PaidOutrageouslyForMagikarp
+	normalmsg
 	waitmessage
 	waitfanfare
 	bufferspeciesname STR_VAR_1, SPECIES_MAGIKARP

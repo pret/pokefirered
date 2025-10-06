@@ -8,3 +8,7 @@ Route3_EventScript_Youngster::
 Route3_EventScript_RouteSign::
 	msgbox Route3_Text_RouteSign, MSGBOX_SIGN
 	end
+
+Route3_EventScript_ItemBerry::
+	finditem ITEM_ORAN_BERRY
+	end

@@ -37,14 +37,14 @@ MtMoon_1F_Text_MiriamPostBattle::
     .string "¿Cómo salgo de aquí?\n"
     .string "Es tan grande que puedo perderme.$"
 
-MtMoon_1F_Text_JovanIntro::
+MtMoon_1F_Text_JavierIntro::
     .string "¡¿Qué?!\n"
     .string "¡No te acerques así!$"
 
-MtMoon_1F_Text_JovanDefeat::
+MtMoon_1F_Text_JavierDefeat::
     .string "¡MIS POKÉMON NO PUEDEN MÁS!$"
 
-MtMoon_1F_Text_JovanPostBattle::
+MtMoon_1F_Text_JavierPostBattle::
     .string "Tengo que encontrar {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} más\n"
     .string "fuertes...\p"
     .string "¿Dónde estarán?$"
@@ -61,27 +61,27 @@ MtMoon_1F_Text_IrisPostBattle::
     .string "Vine porque oí que hay fósiles\n"
     .string "muy raros aquí.$"
 
-MtMoon_1F_Text_KentIntro::
+MtMoon_1F_Text_CristobalIntro::
     .string "Hay personas sospechosas en la\n"
     .string "cueva.\p"
     .string "¿Y tú?$"
 
-MtMoon_1F_Text_KentDefeat::
+MtMoon_1F_Text_CristobalDefeat::
     .string "¡ME VENCISTE!$"
 
-MtMoon_1F_Text_KentPostBattle::
+MtMoon_1F_Text_CristobalPostBattle::
     .string "¡Los vi!\p"
     .string "¡Estoy seguro de que son del\n" 
     .string "{SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY}!$"
 
-MtMoon_1F_Text_RobbyIntro::
+MtMoon_1F_Text_RobertoIntro::
     .string "Debes pasar por esta cueva\n"
     .string "para llegar a {SHADOW DYNAMIC_COLOR4}CIUDAD CELESTE{SHADOW LIGHT_GRAY}.$"
 
-MtMoon_1F_Text_RobbyDefeat::
+MtMoon_1F_Text_RobertoDefeat::
     .string "PERDÍ.$"
 
-MtMoon_1F_Text_RobbyPostBattle::
+MtMoon_1F_Text_RobertoPostBattle::
     .string "¡{SHADOW DYNAMIC_COLOR4}ZUBAT{SHADOW LIGHT_GRAY} es resistente!\n"
     .string "Pero si logras atrapar uno, podrás\l"
     .string "contar con él.$"

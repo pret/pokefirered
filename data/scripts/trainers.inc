@@ -1,4 +1,3 @@
-@TRADUCIDO
 Route3_EventScript_Ben::
 	trainerbattle_single TRAINER_YOUNGSTER_BEN, Route3_Text_BenIntro, Route3_Text_BenDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -6,41 +5,35 @@ Route3_EventScript_Ben::
 	msgbox Route3_Text_BenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
 Route3_EventScript_BenRematch::
 	trainerbattle_rematch TRAINER_YOUNGSTER_BEN, Route3_Text_BenRematchIntro, Route3_Text_BenDefeat
 	msgbox Route3_Text_BenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
-Route3_EventScript_Calvin::
-	trainerbattle_single TRAINER_YOUNGSTER_CALVIN, Route3_Text_CalvinIntro, Route3_Text_CalvinDefeat
+Route3_EventScript_Cesar::
+	trainerbattle_single TRAINER_YOUNGSTER_CESAR, Route3_Text_CesarIntro, Route3_Text_CesarDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_CalvinRematch
-	msgbox Route3_Text_CalvinPostBattle, MSGBOX_AUTOCLOSE
+	goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_CesarRematch
+	msgbox Route3_Text_CesarPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
-Route3_EventScript_CalvinRematch::
-	trainerbattle_rematch TRAINER_YOUNGSTER_CALVIN, Route3_Text_CalvinRematchIntro, Route3_Text_CalvinDefeat
-	msgbox Route3_Text_CalvinPostBattle, MSGBOX_AUTOCLOSE
+Route3_EventScript_CesarRematch::
+	trainerbattle_rematch TRAINER_YOUNGSTER_CESAR, Route3_Text_CesarRematchIntro, Route3_Text_CesarDefeat
+	msgbox Route3_Text_CesarPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
-Route3_EventScript_Colton::
-	trainerbattle_single TRAINER_BUG_CATCHER_COLTON, Route3_Text_ColtonIntro, Route3_Text_ColtonDefeat
+Route3_EventScript_Cristian::
+	trainerbattle_single TRAINER_BUG_CATCHER_CRISTIAN, Route3_Text_CristianIntro, Route3_Text_CristianDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_ColtonRematch
-	msgbox Route3_Text_ColtonPostBattle, MSGBOX_AUTOCLOSE
+	goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_CristianRematch
+	msgbox Route3_Text_CristianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
-Route3_EventScript_ColtonRematch::
-	trainerbattle_rematch TRAINER_BUG_CATCHER_COLTON, Route3_Text_ColtonRematchIntro, Route3_Text_ColtonDefeat
-	msgbox Route3_Text_ColtonPostBattle, MSGBOX_AUTOCLOSE
+Route3_EventScript_CristianRematch::
+	trainerbattle_rematch TRAINER_BUG_CATCHER_CRISTIAN, Route3_Text_CristianRematchIntro, Route3_Text_CristianDefeat
+	msgbox Route3_Text_CristianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
 Route3_EventScript_Greg::
 	trainerbattle_single TRAINER_BUG_CATCHER_GREG, Route3_Text_GregIntro, Route3_Text_GregDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -48,13 +41,11 @@ Route3_EventScript_Greg::
 	msgbox Route3_Text_GregPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
 Route3_EventScript_GregRematch::
 	trainerbattle_rematch TRAINER_BUG_CATCHER_GREG, Route3_Text_GregRematchIntro, Route3_Text_GregDefeat
 	msgbox Route3_Text_GregPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
 Route3_EventScript_James::
 	trainerbattle_single TRAINER_BUG_CATCHER_JAMES, Route3_Text_JamesIntro, Route3_Text_JamesDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -62,52 +53,45 @@ Route3_EventScript_James::
 	msgbox Route3_Text_JamesPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
 Route3_EventScript_JamesRematch::
 	trainerbattle_rematch TRAINER_BUG_CATCHER_JAMES, Route3_Text_JamesRematchIntro, Route3_Text_JamesDefeat
 	msgbox Route3_Text_JamesPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
-Route3_EventScript_Janice::
-	trainerbattle_single TRAINER_LASS_JANICE, Route3_Text_JaniceIntro, Route3_Text_JaniceDefeat
+Route3_EventScript_Jazmin::
+	trainerbattle_single TRAINER_LASS_JAZMIN, Route3_Text_JazminIntro, Route3_Text_JazminDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_JaniceRematch
-	msgbox Route3_Text_JanicePostBattle, MSGBOX_AUTOCLOSE
+	goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_JazminRematch
+	msgbox Route3_Text_JazminPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
-Route3_EventScript_JaniceRematch::
-	trainerbattle_rematch TRAINER_LASS_JANICE, Route3_Text_JaniceRematchIntro, Route3_Text_JaniceDefeat
-	msgbox Route3_Text_JanicePostBattle, MSGBOX_AUTOCLOSE
+Route3_EventScript_JazminRematch::
+	trainerbattle_rematch TRAINER_LASS_JAZMIN, Route3_Text_JazminRematchIntro, Route3_Text_JazminDefeat
+	msgbox Route3_Text_JazminPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
-Route3_EventScript_Sally::
-	trainerbattle_single TRAINER_LASS_SALLY, Route3_Text_SallyIntro, Route3_Text_SallyDefeat
+Route3_EventScript_Susana::
+	trainerbattle_single TRAINER_LASS_SUSANA, Route3_Text_SusanaIntro, Route3_Text_SusanaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_SallyRematch
-	msgbox Route3_Text_SallyPostBattle, MSGBOX_AUTOCLOSE
+	goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_SusanaRematch
+	msgbox Route3_Text_SusanaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
-Route3_EventScript_SallyRematch::
-	trainerbattle_rematch TRAINER_LASS_SALLY, Route3_Text_SallyRematchIntro, Route3_Text_SallyDefeat
-	msgbox Route3_Text_SallyPostBattle, MSGBOX_AUTOCLOSE
+Route3_EventScript_SusanaRematch::
+	trainerbattle_rematch TRAINER_LASS_SUSANA, Route3_Text_SusanaRematchIntro, Route3_Text_SusanaDefeat
+	msgbox Route3_Text_SusanaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
-Route3_EventScript_Robin::
-	trainerbattle_single TRAINER_LASS_ROBIN, Route3_Text_RobinIntro, Route3_Text_RobinDefeat
+Route3_EventScript_Roberta::
+	trainerbattle_single TRAINER_LASS_ROBERTA, Route3_Text_RobertaIntro, Route3_Text_RobertaDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_RobinRematch
-	msgbox Route3_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
+	goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_RobertaRematch
+	msgbox Route3_Text_RobertaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-@TRADUCIDO
-Route3_EventScript_RobinRematch::
-	trainerbattle_rematch TRAINER_LASS_ROBIN, Route3_Text_RobinRematchIntro, Route3_Text_RobinDefeat
-	msgbox Route3_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
+Route3_EventScript_RobertaRematch::
+	trainerbattle_rematch TRAINER_LASS_ROBERTA, Route3_Text_RobertaRematchIntro, Route3_Text_RobertaDefeat
+	msgbox Route3_Text_RobertaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route4_EventScript_Crissy::

@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE6_UNUSED_HOUSE",
   "name": "Route6_UnusedHouse",
   "layout": "LAYOUT_HOUSE2",
-  "music": "MUS_ROUTE3",
+  "music": "MUS_HG_ROUTE3",
   "region_map_section": "MAPSEC_ROUTE_6",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

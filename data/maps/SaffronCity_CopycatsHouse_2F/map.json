@@ -2,7 +2,7 @@
   "id": "MAP_SAFFRON_CITY_COPYCATS_HOUSE_2F",
   "name": "SaffronCity_CopycatsHouse_2F",
   "layout": "LAYOUT_SAFFRON_CITY_COPYCATS_HOUSE_2F",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

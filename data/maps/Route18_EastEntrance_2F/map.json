@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE18_EAST_ENTRANCE_2F",
   "name": "Route18_EastEntrance_2F",
   "layout": "LAYOUT_ENTRANCE_2F",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_ROUTE_18",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

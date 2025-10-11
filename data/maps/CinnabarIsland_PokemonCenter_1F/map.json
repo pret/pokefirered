@@ -2,7 +2,7 @@
   "id": "MAP_CINNABAR_ISLAND_POKEMON_CENTER_1F",
   "name": "CinnabarIsland_PokemonCenter_1F",
   "layout": "LAYOUT_POKEMON_CENTER_1F",
-  "music": "MUS_POKE_CENTER",
+  "music": "MUS_HG_POKE_CENTER",
   "region_map_section": "MAPSEC_CINNABAR_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

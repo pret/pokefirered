@@ -2,7 +2,7 @@
   "id": "MAP_PEWTER_CITY",
   "name": "PewterCity",
   "layout": "LAYOUT_PEWTER_CITY",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_PEWTER_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

@@ -2,7 +2,7 @@
   "id": "MAP_CELADON_CITY_DEPARTMENT_STORE_3F",
   "name": "CeladonCity_DepartmentStore_3F",
   "layout": "LAYOUT_CELADON_CITY_DEPARTMENT_STORE_3F",
-  "music": "MUS_POKE_CENTER",
+  "music": "MUS_HG_POKE_CENTER",
   "region_map_section": "MAPSEC_CELADON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

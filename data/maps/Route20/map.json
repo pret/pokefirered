@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE20",
   "name": "Route20",
   "layout": "LAYOUT_ROUTE20",
-  "music": "MUS_ROUTE3",
+  "music": "MUS_HG_ROUTE3",
   "region_map_section": "MAPSEC_ROUTE_20",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

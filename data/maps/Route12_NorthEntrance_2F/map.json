@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE12_NORTH_ENTRANCE_2F",
   "name": "Route12_NorthEntrance_2F",
   "layout": "LAYOUT_ENTRANCE_2F",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_ROUTE_12",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

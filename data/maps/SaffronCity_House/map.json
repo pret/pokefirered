@@ -2,7 +2,7 @@
   "id": "MAP_SAFFRON_CITY_HOUSE",
   "name": "SaffronCity_House",
   "layout": "LAYOUT_HOUSE5",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

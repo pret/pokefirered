@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE2_EAST_BUILDING",
   "name": "Route2_EastBuilding",
   "layout": "LAYOUT_ROUTE2_ENTRANCE",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_ROUTE_2",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

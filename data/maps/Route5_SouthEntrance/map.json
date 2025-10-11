@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE5_SOUTH_ENTRANCE",
   "name": "Route5_SouthEntrance",
   "layout": "LAYOUT_SAFFRON_CITY_NORTH_SOUTH_ENTRANCE",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_ROUTE_5",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

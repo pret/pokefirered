@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE2_HOUSE",
   "name": "Route2_House",
   "layout": "LAYOUT_HOUSE2",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_ROUTE_2",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

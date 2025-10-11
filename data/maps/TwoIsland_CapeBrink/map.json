@@ -2,7 +2,7 @@
   "id": "MAP_TWO_ISLAND_CAPE_BRINK",
   "name": "TwoIsland_CapeBrink",
   "layout": "LAYOUT_TWO_ISLAND_CAPE_BRINK",
-  "music": "MUS_ROUTE3",
+  "music": "MUS_HG_ROUTE3",
   "region_map_section": "MAPSEC_CAPE_BRINK",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

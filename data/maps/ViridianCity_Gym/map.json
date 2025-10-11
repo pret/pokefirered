@@ -2,7 +2,7 @@
   "id": "MAP_VIRIDIAN_CITY_GYM",
   "name": "ViridianCity_Gym",
   "layout": "LAYOUT_VIRIDIAN_CITY_GYM",
-  "music": "MUS_GYM",
+  "music": "MUS_HG_GYM",
   "region_map_section": "MAPSEC_VIRIDIAN_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

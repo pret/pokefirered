@@ -2,7 +2,7 @@
   "id": "MAP_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL",
   "name": "UndergroundPath_NorthSouthTunnel",
   "layout": "LAYOUT_UNDERGROUND_PATH_NORTH_SOUTH_TUNNEL",
-  "music": "MUS_ROUTE1",
+  "music": "MUS_HG_ROUTE1",
   "region_map_section": "MAPSEC_UNDERGROUND_PATH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

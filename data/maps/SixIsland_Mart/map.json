@@ -2,7 +2,7 @@
   "id": "MAP_SIX_ISLAND_MART",
   "name": "SixIsland_Mart",
   "layout": "LAYOUT_MART",
-  "music": "MUS_POKE_CENTER",
+  "music": "MUS_HG_POKE_CENTER",
   "region_map_section": "MAPSEC_SIX_ISLAND",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE7_EAST_ENTRANCE",
   "name": "Route7_EastEntrance",
   "layout": "LAYOUT_SAFFRON_CITY_EAST_WEST_ENTRANCE",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_ROUTE_7",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

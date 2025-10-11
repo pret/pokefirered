@@ -2,7 +2,7 @@
   "id": "MAP_MT_MOON_B1F",
   "name": "MtMoon_B1F",
   "layout": "LAYOUT_MT_MOON_B1F",
-  "music": "MUS_MT_MOON",
+  "music": "MUS_HG_MT_MOON_SQUARE",
   "region_map_section": "MAPSEC_MT_MOON",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

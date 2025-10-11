@@ -2,7 +2,7 @@
   "id": "MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB",
   "name": "PalletTown_ProfessorOaksLab",
   "layout": "LAYOUT_PALLET_TOWN_PROFESSOR_OAKS_LAB",
-  "music": "MUS_OAK_LAB",
+  "music": "MUS_HG_OAK",
   "region_map_section": "MAPSEC_PALLET_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

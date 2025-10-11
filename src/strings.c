@@ -940,7 +940,6 @@ const u8 gText_BattleStyleSet[] = _("FIJO");
 const u8 gText_SoundMono[] = _("MONO");
 const u8 gText_SoundStereo[] = _("ESTÉREO");
 const u8 gTextJP_Type[] = _("タイプ");
-const u8 gText_ButtonTypeHelp[] = _("AYUDA");
 const u8 gText_ButtonTypeLEqualsA[] = _("L=A");
 const u8 gText_ButtonTypeLR[] = _("LR");
 const u8 gText_FrameType[] = _("TIPO");
@@ -956,17 +955,6 @@ const u8 gText_NoSaveFileCantSetTime[] = _("レポ-トが ないので\nじか�
 const u8 gText_InGameClockUsable[] = _("ゲ-ムない じかんの しゅうせい システムが\nつかえる ように なりました!");
 const u8 gText_SavingDontTurnOffThePower2[] = _("GUARDANDO…\nNO APAGUES LA CONSOLA.");
 
-// Start menu option descriptions
-const u8 gStartMenuDesc_DexNav[] = _("Search for wild POKéMON in the area\nwith potential special qualities!");
-const u8 gStartMenuDesc_Pokedex[] = _("Una máquina que graba secretos de los\nPOKéMON al conocerlos o atraparlos.");
-const u8 gStartMenuDesc_Pokemon[] = _("Revisa y organiza a los POKéMON que\nestán viajando contigo en tu equipo.");
-const u8 gStartMenuDesc_Bag[] = _("Tiene bolsillos para guardar objetos\nque compraste, recibiste, o encontraste.");
-const u8 gStartMenuDesc_Player[] = _("Revisa tu dinero y otros datos de juego.");
-const u8 gStartMenuDesc_Save[] = _("Guarda tu partida con un registro\ncompleto de tu avance para descansar.");
-const u8 gStartMenuDesc_Option[] = _("Cambia varios ajustes, cómo velocidad\nde texto, reglas del juego, etc.");
-const u8 gStartMenuDesc_Exit[] = _("Cierra esta ventana del MENÚ.");
-const u8 gStartMenuDesc_Retire[] = _("Te retira del JUEGO SAFARI y regresas al\nmostrador de inscripciones. ");
-const u8 gStartMenuDesc_Debug[] = _("Debugging functions for developers.");
 
 #include "data/text/quest_log.h"
 

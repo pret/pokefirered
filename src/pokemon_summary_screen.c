@@ -2,7 +2,6 @@
 #include "gflib.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
-#include "help_system.h"
 #include "task.h"
 #include "menu_helpers.h"
 #include "link.h"
@@ -57,7 +56,6 @@ static void PokeSum_AddWindows(u8 curPageIndex);
 static void PokeSum_PrintPageHeaderText(u8 curPageIndex);
 static void PokeSum_InitBgCoordsBeforePageFlips(void);
 static u8 PokeSum_IsPageFlipFinished(u8);
-static void PokeSum_SetHelpContext(void);
 static void Task_HandleInput_SelectMove(u8 id);
 static void PokeSum_CopyNewBgTilemapBeforePageFlip_2(void);
 static void PokeSum_CopyNewBgTilemapBeforePageFlip(void);
@@ -1017,20 +1015,17 @@ void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, 
     {
     case PSS_MODE_NORMAL:
     default:
-        SetHelpContext(HELPCONTEXT_POKEMON_INFO);
         sMonSummaryScreen->curPageIndex = PSS_PAGE_INFO;
         sMonSummaryScreen->isBoxMon = FALSE;
         sMonSummaryScreen->lockMovesFlag = FALSE;
         break;
     case PSS_MODE_BOX:
-        SetHelpContext(HELPCONTEXT_POKEMON_INFO);
         sMonSummaryScreen->curPageIndex = PSS_PAGE_INFO;
         sMonSummaryScreen->isBoxMon = TRUE;
         sMonSummaryScreen->lockMovesFlag = FALSE;
         break;
     case PSS_MODE_SELECT_MOVE:
     case PSS_MODE_FORGET_MOVE:
-        SetHelpContext(HELPCONTEXT_POKEMON_MOVES);
         sMonSummaryScreen->curPageIndex = PSS_PAGE_MOVES_INFO;
         sMonSummaryScreen->isBoxMon = FALSE;
         sMonSummaryScreen->lockMovesFlag = TRUE;
@@ -1351,7 +1346,6 @@ static void Task_PokeSum_FlipPages(u8 taskId)
 
         break;
     default:
-        PokeSum_SetHelpContext();
 
         if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
             gTasks[sMonSummaryScreen->inputHandlerTaskId].func = Task_HandleInput_SelectMove;
@@ -1465,7 +1459,6 @@ static void Task_FlipPages_FromInfo(u8 taskId)
 
         break;
     default:
-        PokeSum_SetHelpContext();
         gTasks[sMonSummaryScreen->inputHandlerTaskId].func = Task_HandleInput_SelectMove;
         sMonSummaryScreen->state3284 = 0;
         sMonSummaryScreen->lockMovesFlag = FALSE;
@@ -1551,7 +1544,6 @@ static void Task_BackOutOfSelectMove(u8 taskId)
         PokeSum_ShowSpritesBeforePageFlip();
         break;
     default:
-        PokeSum_SetHelpContext();
         gTasks[sMonSummaryScreen->inputHandlerTaskId].func = Task_InputHandler_Info;
         sMonSummaryScreen->state3284 = 0;
         sMonSummaryScreen->lockMovesFlag = FALSE;
@@ -3263,23 +3255,6 @@ static void PokeSum_RemoveWindows(u8 curPageIndex)
     for (i = 0; i < 7; i++)
         RemoveWindow(sMonSummaryScreen->windowIds[i]);
 
-}
-
-static void PokeSum_SetHelpContext(void)
-{
-    switch (sMonSummaryScreen->curPageIndex)
-    {
-    case PSS_PAGE_INFO:
-        SetHelpContext(HELPCONTEXT_POKEMON_INFO);
-        break;
-    case PSS_PAGE_SKILLS:
-        SetHelpContext(HELPCONTEXT_POKEMON_SKILLS);
-        break;
-    case PSS_PAGE_MOVES:
-    case PSS_PAGE_MOVES_INFO:
-        SetHelpContext(HELPCONTEXT_POKEMON_MOVES);
-        break;
-    }
 }
 
 static u8 PokeSum_BufferOtName_IsEqualToCurrentOwner(struct Pokemon * mon)

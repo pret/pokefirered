@@ -22,7 +22,6 @@
 #include "overworld.h"
 #include "strings.h"
 #include "title_screen.h"
-#include "help_system.h"
 #include "pokedex.h"
 #include "text_window.h"
 #include "text_window_graphics.h"

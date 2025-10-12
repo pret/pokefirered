@@ -77,8 +77,8 @@
   "bg_events": [
     {
       "type": "hidden_item",
-      "x": 45,
-      "y": 5,
+      "x": 34,
+      "y": 21,
       "elevation": 0,
       "item": "ITEM_TINY_MUSHROOM",
       "flag": "FLAG_HIDDEN_ITEM_MT_MOON_B1F_TINY_MUSHROOM",
@@ -107,8 +107,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 24,
-      "y": 32,
+      "x": 31,
+      "y": 21,
       "elevation": 0,
       "item": "ITEM_BIG_MUSHROOM",
       "flag": "FLAG_HIDDEN_ITEM_MT_MOON_B1F_BIG_MUSHROOM",
@@ -117,8 +117,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 6,
-      "y": 16,
+      "x": 33,
+      "y": 21,
       "elevation": 0,
       "item": "ITEM_BIG_MUSHROOM",
       "flag": "FLAG_HIDDEN_ITEM_MT_MOON_B1F_BIG_MUSHROOM_2",
@@ -127,8 +127,8 @@
     },
     {
       "type": "hidden_item",
-      "x": 44,
-      "y": 22,
+      "x": 32,
+      "y": 21,
       "elevation": 0,
       "item": "ITEM_BIG_MUSHROOM",
       "flag": "FLAG_HIDDEN_ITEM_MT_MOON_B1F_BIG_MUSHROOM_3",

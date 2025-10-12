@@ -14,14 +14,14 @@ Route4_PokemonCenter_1F_Text_TeamRocketAttacksCerulean::
 Route4_PokemonCenter_1F_Text_LaddieBuyMagikarpForJust500::
     .string "¡Hola, muchacho!\n"
     .string "¡Tengo un trato perfecto para ti!\p"
-    .string "Te daré tener un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} secreto...\n"
+    .string "Te daré tener un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} secreto.\n"
     .string "¡Un {SHADOW DYNAMIC_COLOR4}MAGIKARP{SHADOW LIGHT_GRAY} por solo ¥500!\p"
     .string "Entonces, lo comprarás, ¿verdad?$"
 
 Route4_PokemonCenter_1F_Text_SweetieBuyMagikarpForJust500::
     .string "¡Hola, cariño!\n"
     .string "¡Tengo un trato perfecto para ti!\p"
-    .string "Te daré tener un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} secreto...\n"
+    .string "Te daré tener un {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} secreto.\n"
     .string "¡Un {SHADOW DYNAMIC_COLOR4}MAGIKARP{SHADOW LIGHT_GRAY} por solo ¥500!\p"
     .string "Entonces, lo comprarás, ¿verdad?$"
 
@@ -30,7 +30,7 @@ Route4_PokemonCenter_1F_Text_PaidOutrageouslyForMagikarp::
     .string "¥500 y compró el {SHADOW DYNAMIC_COLOR4}MAGIKARP{SHADOW LIGHT_GRAY}...$"
 
 Route4_PokemonCenter_1F_Text_OnlyDoingThisAsFavorToYou::
-    .string "¿No? ¿Dices que no?\n"
+    .string "¿No? ¿Dices que no?\p"
     .string "¡Solo hago esto como un\n"
     .string "favor para ti!$"
 
@@ -47,7 +47,7 @@ Route4_PokemonCenter_1F_Text_IDontGiveRefunds::
 
 Route4_PokemonCenter_1F_Text_ShouldStoreMonsUsingPC::
     .string "A veces llevarás demasiados {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\n"
-    .string "contigo como para añadir más...\n"
+    .string "contigo como para añadir más...\p"
     .string "En ese caso, deberías guardar\n"
     .string "algunos usando cualquier {SHADOW DYNAMIC_COLOR4}PC{SHADOW LIGHT_GRAY}.$"
 

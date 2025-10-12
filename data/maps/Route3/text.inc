@@ -75,7 +75,7 @@ Route3_Text_CesarPostBattle::
     .string "incluso en invierno. ¡Esa es mi regla!$"
 
 Route3_Text_JamesIntro::
-    .string "Voy a luchar con los POKéMON\n"
+    .string "Voy a luchar con los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}\n"
     .string "que acabo de atrapar.$"
 
 Route3_Text_JamesDefeat::

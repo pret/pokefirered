@@ -110,7 +110,7 @@ MtMoon_1F_Text_Silvio_EresEntrenador::
     .string "¿Eres {SHADOW DYNAMIC_COLOR4}ENTRENADOR POKéMON{SHADOW LIGHT_GRAY}?$"
 
 MtMoon_1F_Text_Silvio_QueSorpresa::
-    .string "Qué sorpresa encontrar alguien as\n"
+    .string "Qué sorpresa encontrar alguien aquí\n"
     .string "tan adentro del {SHADOW DYNAMIC_COLOR4}MONTE LUNAR{SHADOW LIGHT_GRAY}.\p"
     .string "Me llamo {SHADOW DYNAMIC_COLOR4}SILVIO{SHADOW LIGHT_GRAY}. Fui geólogo por\n"
     .string "muchos años en el {SHADOW DYNAMIC_COLOR4}MUSEO DE CIENCIA{SHADOW LIGHT_GRAY}\l"

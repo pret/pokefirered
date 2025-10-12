@@ -51,7 +51,6 @@ MtMoon_1F_EventScript_Roberto::
 
 @ENCUENTRO SILVIO
 MtMoon_1F_EventScript_SilvioIzq::
-	setflag FLAG_HIDE_MT_MOON_HIDE_SILVIO
 	setobjectxy LOCALID_MT_MOON_SILVIO,30,15
 	applymovement LOCALID_PLAYER, MtMoon_1F_Movement_PlayerCamina
 	applymovement LOCALID_MT_MOON_SILVIO MtMoon_1F_Movement_SilvioAparece
@@ -95,11 +94,11 @@ MtMoon_1F_EventScript_SilvioIzq::
 	setobjectxy LOCALID_MT_MOON_CLEFAIRY,30,22
 	setflag FLAG_SILVIO_MART
 	setvar VAR_MT_MOON_SILVIO, 1
+	setflag FLAG_HIDE_MT_MOON_HIDE_SILVIO
 	release
 	end
 
 MtMoon_1F_EventScript_SilvioRight::
-	setflag FLAG_HIDE_MT_MOON_HIDE_SILVIO
 	setobjectxy LOCALID_MT_MOON_SILVIO,30,15
 	applymovement LOCALID_PLAYER, MtMoon_1F_Movement_PlayerCamina
 	applymovement LOCALID_MT_MOON_SILVIO MtMoon_1F_Movement_SilvioAparece
@@ -143,6 +142,7 @@ MtMoon_1F_EventScript_SilvioRight::
 	setobjectxy LOCALID_MT_MOON_CLEFAIRY,30,22
 	setflag FLAG_SILVIO_MART
 	setvar VAR_MT_MOON_SILVIO, 1
+	setflag FLAG_HIDE_MT_MOON_HIDE_SILVIO
 	release
 	end
 

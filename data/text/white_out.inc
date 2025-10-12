@@ -14,9 +14,9 @@ Text_MonsHealedShouldBuyPotions::
 	.string "¡Demuestra lo que vales!$"
 
 Text_MonsHealed::
-	.string "Your POKéMON have been healed\n"
-	.string "to perfect health.\p"
-	.string "We hope you excel!$"
+	.string "{COLOR DARK_GRAY}Tus {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} han sido curados\n"
+	.string "completamente.\p"
+	.string "¡Esperamos que te vaya excelente!$"
 
 Text_HadQuiteAnExperienceTakeRest::
 	.string "¡Hola, cielo!\p"

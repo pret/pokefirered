@@ -1293,12 +1293,12 @@ static const struct TrainerMonNoItemDefaultMoves sParty_SuperNerdMiguel[] = {
     {
         .iv = 0,
         .lvl = 12,
-        .species = SPECIES_VOLTORB,
+        .species = SPECIES_MURKROW,
     },
     {
         .iv = 0,
         .lvl = 12,
-        .species = SPECIES_KOFFING,
+        .species = SPECIES_PICHU,
     },
 };
 
@@ -11019,22 +11019,22 @@ static const struct TrainerMonNoItemDefaultMoves sParty_RojoBosqueVerdeCharmande
 static const struct TrainerMonNoItemCustomMoves sParty_Silvio[] = {
     {
         .iv = 100,
-        .lvl = 17,
+        .lvl = 15,
         .species = SPECIES_GROWLITHE,
     },
     {
         .iv = 100,
-        .lvl = 17,
+        .lvl = 15,
         .species = SPECIES_GLOOM,
     },
     {
         .iv = 100,
-        .lvl = 17,
+        .lvl = 15,
         .species = SPECIES_POLIWHIRL,
     },
     {
         .iv = 150,
-        .lvl = 18,
+        .lvl = 15,
         .species = SPECIES_CLEFAIRY,
     },
 };

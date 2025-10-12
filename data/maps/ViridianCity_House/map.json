@@ -2,7 +2,7 @@
   "id": "MAP_VIRIDIAN_CITY_HOUSE",
   "name": "ViridianCity_House",
   "layout": "LAYOUT_VIRIDIAN_CITY_HOUSE",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_VIRIDIAN_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

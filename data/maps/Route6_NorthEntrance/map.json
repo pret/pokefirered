@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE6_NORTH_ENTRANCE",
   "name": "Route6_NorthEntrance",
   "layout": "LAYOUT_SAFFRON_CITY_NORTH_SOUTH_ENTRANCE",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_ROUTE_6",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

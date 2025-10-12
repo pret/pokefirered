@@ -2,7 +2,7 @@
   "id": "MAP_TRADE_CENTER",
   "name": "TradeCenter",
   "layout": "LAYOUT_TRADE_CENTER",
-  "music": "MUS_POKE_CENTER",
+  "music": "MUS_HG_POKE_CENTER",
   "region_map_section": "MAPSEC_SPECIAL_AREA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

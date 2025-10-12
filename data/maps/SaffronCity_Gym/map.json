@@ -2,7 +2,7 @@
   "id": "MAP_SAFFRON_CITY_GYM",
   "name": "SaffronCity_Gym",
   "layout": "LAYOUT_SAFFRON_CITY_GYM",
-  "music": "MUS_GYM",
+  "music": "MUS_HG_GYM",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

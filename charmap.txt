@@ -858,6 +858,17 @@ MUS_ENCOUNTER_DEOXYS      = 57 01
 MUS_TRAINER_TOWER         = 58 01
 MUS_SLOW_PALLET           = 59 01
 MUS_TEACHY_TV_MENU        = 5A 01
+MUS_HG_PALLET             = 5B 01
+MUS_HG_OAK                = 5C 01
+MUS_HG_ROUTE1             = 5D 01
+MUS_HG_ROUTE3             = 5E 01
+MUS_HG_PEWTER             = 5F 01
+MUS_HG_VIRIDIAN_FOREST    = 60 01
+MUS_HG_POKE_CENTER        = 61 01
+MUS_HG_POKE_MART          = 62 01
+MUS_HG_GYM                = 63 01
+MUS_HG_MT_MOON_SQUARE     = 64 01
+MUS_HG_CERULEAN           = 65 01
 
 A_BUTTON        = F8 00
 B_BUTTON        = F8 01

@@ -2,7 +2,7 @@
   "id": "MAP_CERULEAN_CITY_GYM",
   "name": "CeruleanCity_Gym",
   "layout": "LAYOUT_CERULEAN_CITY_GYM",
-  "music": "MUS_GYM",
+  "music": "MUS_HG_GYM",
   "region_map_section": "MAPSEC_CERULEAN_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,8 +2,6 @@ EventScript_PC::
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_set FLAG_SYS_PC_STORAGE_DISABLED, EventScript_PCDisabled
-	setvar VAR_0x8004, HELPCONTEXT_PC
-	special Script_SetHelpContext
 	setvar VAR_0x8004, 0
 	special AnimatePcTurnOn
 	playse SE_PC_ON
@@ -19,8 +17,8 @@ EventScript_PC2::
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall
 	goto_if_set FLAG_SYS_PC_STORAGE_DISABLED, EventScript_PCDisabled
-	setvar VAR_0x8004, HELPCONTEXT_PC
-	special Script_SetHelpContext
+	//setvar VAR_0x8004, HELPCONTEXT_PC
+	//special Script_SetHelpContext
 	setvar VAR_0x8004, 0
 	playse SE_PC_ON
 	msgbox Text_BootedUpPC
@@ -70,8 +68,6 @@ EventScript_AccessPokemonStorage::
 	normalmsg
 	special ShowPokemonStorageSystemPC
 	waitstate
-	setvar VAR_0x8004, HELPCONTEXT_PC
-	special Script_SetHelpContext
 	goto EventScript_PCMainMenu
 	end
 
@@ -91,19 +87,14 @@ EventScript_TurnOffPC::
 	setvar VAR_0x8004, 0
 	playse SE_PC_OFF
 	special AnimatePcTurnOff
-	special SetHelpContextForMap
 	releaseall
 	end
 
 EventScript_AccessHallOfFame::
 	goto_if_unset FLAG_SYS_GAME_CLEAR, EventScript_TurnOffPC
 	playse SE_PC_LOGIN
-	setvar VAR_0x8004, HELPCONTEXT_PC_MISC
-	special BackupHelpContext
-	special Script_SetHelpContext
 	special HallOfFamePCBeginFade
 	waitstate
-	special RestoreHelpContext
 	goto EventScript_ChoosePCMenu
 	end
 

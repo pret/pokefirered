@@ -2,7 +2,7 @@
   "id": "MAP_CERULEAN_CITY",
   "name": "CeruleanCity",
   "layout": "LAYOUT_CERULEAN_CITY",
-  "music": "MUS_FUCHSIA",
+  "music": "MUS_HG_CERULEAN",
   "region_map_section": "MAPSEC_CERULEAN_CITY",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

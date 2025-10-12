@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE10_POKEMON_CENTER_1F",
   "name": "Route10_PokemonCenter_1F",
   "layout": "LAYOUT_POKEMON_CENTER_1F",
-  "music": "MUS_POKE_CENTER",
+  "music": "MUS_HG_POKE_CENTER",
   "region_map_section": "MAPSEC_ROUTE_10",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

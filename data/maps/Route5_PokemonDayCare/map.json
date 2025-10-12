@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE5_POKEMON_DAY_CARE",
   "name": "Route5_PokemonDayCare",
   "layout": "LAYOUT_ROUTE5_POKEMON_DAY_CARE",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_ROUTE_5",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

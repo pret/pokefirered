@@ -2,7 +2,7 @@
   "id": "MAP_SAFFRON_CITY_DOJO",
   "name": "SaffronCity_Dojo",
   "layout": "LAYOUT_SAFFRON_CITY_DOJO",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

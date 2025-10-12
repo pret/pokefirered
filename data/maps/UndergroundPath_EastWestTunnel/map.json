@@ -2,7 +2,7 @@
   "id": "MAP_UNDERGROUND_PATH_EAST_WEST_TUNNEL",
   "name": "UndergroundPath_EastWestTunnel",
   "layout": "LAYOUT_UNDERGROUND_PATH_EAST_WEST_TUNNEL",
-  "music": "MUS_ROUTE1",
+  "music": "MUS_HG_ROUTE1",
   "region_map_section": "MAPSEC_UNDERGROUND_PATH_2",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

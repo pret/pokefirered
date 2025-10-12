@@ -2,7 +2,7 @@
   "id": "MAP_THREE_ISLAND_BERRY_FOREST",
   "name": "ThreeIsland_BerryForest",
   "layout": "LAYOUT_THREE_ISLAND_BERRY_FOREST",
-  "music": "MUS_VIRIDIAN_FOREST",
+  "music": "MUS_HG_VIRIDIAN_FOREST",
   "region_map_section": "MAPSEC_BERRY_FOREST",
   "requires_flash": false,
   "weather": "WEATHER_SHADE",

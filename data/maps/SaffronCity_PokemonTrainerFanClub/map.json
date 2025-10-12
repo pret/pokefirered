@@ -2,7 +2,7 @@
   "id": "MAP_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB",
   "name": "SaffronCity_PokemonTrainerFanClub",
   "layout": "LAYOUT_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_SAFFRON_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

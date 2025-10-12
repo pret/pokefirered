@@ -8071,3 +8071,55 @@ voicegroup190::
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0
 	voice_directsound_no_resample 64, 104, DirectSoundWaveData_ethnic_flavours_atarigane, 255, 0, 255, 0
 	voice_directsound 63, 64, DirectSoundWaveData_sc88pro_taiko, 255, 0, 255, 0
+
+
+@ --Start HGSS Voicegroups--
+.include "sound/voicegroups/voicegroup216.inc"
+.include "sound/voicegroups/voicegroup219.inc"
+.include "sound/voicegroups/voicegroup220.inc"
+.include "sound/voicegroups/voicegroup229.inc" @ [Main Voicegroup] HGSS instruments
+.include "sound/voicegroups/voicegroup230.inc" @ HGSS Drum Mapping
+.include "sound/voicegroups/voicegroup231.inc" @ HGSS Taiko Drum Mapping
+.include "sound/voicegroups/voicegroup232.inc" @ HGSS Drum Kick + Snare Mapping
+.include "sound/voicegroups/voicegroup233.inc"
+.include "sound/voicegroups/voicegroup234.inc"
+.include "sound/voicegroups/voicegroup235.inc"
+.include "sound/voicegroups/voicegroup236.inc"
+.include "sound/voicegroups/voicegroup237.inc"
+.include "sound/voicegroups/voicegroup238.inc"
+.include "sound/voicegroups/voicegroup239.inc"
+.include "sound/voicegroups/voicegroup240.inc"
+.include "sound/voicegroups/voicegroup241.inc"
+.include "sound/voicegroups/voicegroup242.inc"
+.include "sound/voicegroups/voicegroup243.inc"
+.include "sound/voicegroups/voicegroup244.inc"
+.include "sound/voicegroups/voicegroup245.inc"
+.include "sound/voicegroups/voicegroup246.inc"
+.include "sound/voicegroups/voicegroup247.inc"
+.include "sound/voicegroups/voicegroup248.inc"
+.include "sound/voicegroups/voicegroup249.inc"
+.include "sound/voicegroups/voicegroup250.inc"
+.include "sound/voicegroups/voicegroup251.inc"
+.include "sound/voicegroups/voicegroup252.inc"
+.include "sound/voicegroups/voicegroup253.inc"
+.include "sound/voicegroups/voicegroup254.inc"
+.include "sound/voicegroups/voicegroup255.inc"
+.include "sound/voicegroups/voicegroup256.inc"
+.include "sound/voicegroups/voicegroup257.inc"
+.include "sound/voicegroups/voicegroup258.inc"
+.include "sound/voicegroups/voicegroup259.inc"
+.include "sound/voicegroups/voicegroup260.inc"
+.include "sound/voicegroups/voicegroup261.inc"
+.include "sound/voicegroups/voicegroup262.inc"
+.include "sound/voicegroups/voicegroup263.inc"
+.include "sound/voicegroups/voicegroup264.inc"
+.include "sound/voicegroups/voicegroup265.inc"
+.include "sound/voicegroups/voicegroup266.inc"
+.include "sound/voicegroups/voicegroup267.inc"
+.include "sound/voicegroups/voicegroup268.inc"
+.include "sound/voicegroups/voicegroup269.inc"
+.include "sound/voicegroups/voicegroup270.inc"
+.include "sound/voicegroups/voicegroup271.inc"
+.include "sound/voicegroups/voicegroup272.inc"
+.include "sound/voicegroups/voicegroup273.inc"
+@ --End HGSS Voicegroups--

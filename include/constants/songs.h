@@ -354,9 +354,23 @@
 #define MUS_SLOW_PALLET           345 // MUS_SLOWMASARA
 #define MUS_TEACHY_TV_MENU        346 // MUS_TVNOIZE
 
+//Start HGSS songs
+#define MUS_HG_PALLET_TOWN        347
+#define MUS_HG_OAK                348
+#define MUS_HG_ROUTE1             349
+#define MUS_HG_ROUTE3             350
+#define MUS_HG_PEWTER             351
+#define MUS_HG_VIRIDIAN_FOREST    352
+#define MUS_HG_POKE_CENTER        353
+#define MUS_HG_POKE_MART          354
+#define MUS_HG_GYM                355
+#define MUS_HG_MT_MOON_SQUARE     356
+#define MUS_HG_CERULEAN           357
+//end hgss songs
+
 #define MUS_NONE                    0xFFFF
 
 #define START_MUS                   MUS_HEAL
-#define END_MUS                     MUS_TEACHY_TV_MENU
+#define END_MUS                     MUS_HG_CERULEAN
 
 #endif  // GUARD_CONSTANTS_SONGS_H

@@ -3,7 +3,6 @@
 #include "event_data.h"
 #include "field_fadetransition.h"
 #include "field_weather.h"
-#include "help_system.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
@@ -13,7 +12,6 @@
 #include "task.h"
 #include "constants/songs.h"
 #include "constants/field_weather.h"
-#include "constants/help_system.h"
 
 static EWRAM_DATA u8 sPreviousBoxOption = 0;
 static EWRAM_DATA struct ChooseBoxMenu *sChooseBoxMenu = NULL;
@@ -245,7 +243,6 @@ static void Task_PCMainMenu(u8 taskId)
     switch (task->tState)
     {
     case STATE_LOAD:
-        SetHelpContext(HELPCONTEXT_BILLS_PC);
         CreatePCMainMenu(task->tSelectedOption, &task->tWindowId);
         LoadStdWindowFrameGfx();
         DrawDialogueFrame(0, FALSE);

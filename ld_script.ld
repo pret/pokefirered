@@ -263,7 +263,6 @@ SECTIONS {
         src/union_room_chat.o(.text);
         src/union_room_chat_display.o(.text);
         src/union_room_chat_objects.o(.text);
-        src/help_system.o(.text);
         src/quest_log_battle.o(.text);
         src/fame_checker.o(.text);
         src/menu2.o(.text);
@@ -272,7 +271,6 @@ SECTIONS {
         src/menu_indicators.o(.text);
         src/pokedex_area_markers.o(.text);
         src/pokemon_summary_screen.o(.text);
-        src/help_system_util.o(.text);
         src/wild_pokemon_area.o(.text);
         src/dynamic_placeholder_text_util.o(.text);
         src/berry_pouch.o(.text);
@@ -562,7 +560,6 @@ SECTIONS {
         src/union_room_chat.o(.rodata);
         src/union_room_chat_display.o(.rodata);
         src/union_room_chat_objects.o(.rodata);
-        src/help_system.o(.rodata);
         src/fame_checker.o(.rodata);
         src/menu2.o(.rodata);
         src/oak_speech.o(.rodata);
@@ -570,7 +567,6 @@ SECTIONS {
         src/menu_indicators.o(.rodata);
         src/pokedex_area_markers.o(.rodata);
         src/pokemon_summary_screen.o(.rodata);
-        src/help_system_util.o(.rodata);
         src/wild_pokemon_area.o(.rodata);
         src/dynamic_placeholder_text_util.o(.rodata);
         src/berry_pouch.o(.rodata);
@@ -612,13 +608,14 @@ SECTIONS {
         src/move_descriptions.o(.rodata);
         src/ev_iv_display_screen.o(.rodata);
         src/debug.o(.rodata);
+        src/field_name_box.o(.rodata);
 
         /* These should not be moved to C files */
         src/mystery_event_msg.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
-        src/field_name_box.o(.rodata);
+    
     } > ROM =0
 
     song_data :
@@ -971,6 +968,18 @@ SECTIONS {
         sound/songs/midi/mus_trainer_tower.o(.rodata);
         sound/songs/midi/mus_slow_pallet.o(.rodata);
         sound/songs/midi/mus_teachy_tv_menu.o(.rodata);
+        sound/songs/midi/mus_hg_pallet.o(.rodata);
+        sound/songs/midi/mus_hg_oak.o(.rodata);
+        sound/songs/midi/mus_hg_route1.o(.rodata);
+        sound/songs/midi/mus_hg_route3.o(.rodata);
+        sound/songs/midi/mus_hg_pewter.o(.rodata);
+        sound/songs/midi/mus_hg_viridian_forest.o(.rodata);
+        sound/songs/midi/mus_hg_poke_center.o(.rodata);
+        sound/songs/midi/mus_hg_poke_mart.o(.rodata);
+        sound/songs/midi/mus_hg_gym.o(.rodata);
+        sound/songs/midi/mus_hg_mt_moon_square.o(.rodata);
+        sound/songs/midi/mus_hg_cerulean.o(.rodata);
+
     } > ROM =0
 
     lib_rodata :

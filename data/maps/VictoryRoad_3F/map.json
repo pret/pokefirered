@@ -2,7 +2,7 @@
   "id": "MAP_VICTORY_ROAD_3F",
   "name": "VictoryRoad_3F",
   "layout": "LAYOUT_VICTORY_ROAD_3F",
-  "music": "MUS_MT_MOON",
+  "music": "MUS_HG_MT_MOON_SQUARE",
   "region_map_section": "MAPSEC_KANTO_VICTORY_ROAD",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

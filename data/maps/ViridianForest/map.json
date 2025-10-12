@@ -2,7 +2,7 @@
   "id": "MAP_VIRIDIAN_FOREST",
   "name": "ViridianForest",
   "layout": "LAYOUT_VIRIDIAN_FOREST",
-  "music": "MUS_VIRIDIAN_FOREST",
+  "music": "MUS_HG_VIRIDIAN_FOREST",
   "region_map_section": "MAPSEC_VIRIDIAN_FOREST",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

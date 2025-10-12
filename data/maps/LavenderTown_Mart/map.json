@@ -2,7 +2,7 @@
   "id": "MAP_LAVENDER_TOWN_MART",
   "name": "LavenderTown_Mart",
   "layout": "LAYOUT_MART",
-  "music": "MUS_POKE_CENTER",
+  "music": "MUS_HG_POKE_MART",
   "region_map_section": "MAPSEC_LAVENDER_TOWN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_VIRIDIAN_CITY_MART",
   "name": "ViridianCity_Mart",
   "layout": "LAYOUT_MART",
-  "music": "MUS_POKE_CENTER",
+  "music": "MUS_HG_POKE_MART",
   "region_map_section": "MAPSEC_VIRIDIAN_CITY",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

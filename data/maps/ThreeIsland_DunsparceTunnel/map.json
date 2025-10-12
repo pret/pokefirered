@@ -2,7 +2,7 @@
   "id": "MAP_THREE_ISLAND_DUNSPARCE_TUNNEL",
   "name": "ThreeIsland_DunsparceTunnel",
   "layout": "LAYOUT_THREE_ISLAND_DUNSPARCE_TUNNEL",
-  "music": "MUS_VIRIDIAN_FOREST",
+  "music": "MUS_HG_VIRIDIAN_FOREST",
   "region_map_section": "MAPSEC_THREE_ISLE_PATH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE15_WEST_ENTRANCE_1F",
   "name": "Route15_WestEntrance_1F",
   "layout": "LAYOUT_ENTRANCE_1F",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_ROUTE_15",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_SEAFOAM_ISLANDS_B3F",
   "name": "SeafoamIslands_B3F",
   "layout": "LAYOUT_SEAFOAM_ISLANDS_B3F",
-  "music": "MUS_VIRIDIAN_FOREST",
+  "music": "MUS_HG_VIRIDIAN_FOREST",
   "region_map_section": "MAPSEC_SEAFOAM_ISLANDS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -2,7 +2,7 @@
   "id": "MAP_UNDERGROUND_PATH_NORTH_ENTRANCE",
   "name": "UndergroundPath_NorthEntrance",
   "layout": "LAYOUT_UNDERGROUND_PATH_ENTRANCE",
-  "music": "MUS_PEWTER",
+  "music": "MUS_HG_PEWTER",
   "region_map_section": "MAPSEC_UNDERGROUND_PATH",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

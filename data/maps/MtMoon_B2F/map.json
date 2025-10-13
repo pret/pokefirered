@@ -76,7 +76,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_F",
       "x": 10,
       "y": 17,
       "elevation": 3,
@@ -303,8 +303,8 @@
       "dest_warp_id": "6"
     },
     {
-      "x": 14,
-      "y": 8,
+      "x": 13,
+      "y": 13,
       "elevation": 0,
       "dest_map": "MAP_MT_MOON_B2F",
       "dest_warp_id": "0"
@@ -319,6 +319,15 @@
       "var": "VAR_MAP_SCENE_MT_MOON_B2F",
       "var_value": "0",
       "script": "MtMoon_B2F_EventScript_MiguelTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_MAP_SCENE_MT_MOON_B2F",
+      "var_value": "1",
+      "script": "MtMoon_B2F_EventScript_CheckJessieJamesEvent"
     }
   ],
   "bg_events": [

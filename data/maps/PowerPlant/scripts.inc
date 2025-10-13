@@ -121,7 +121,7 @@ PowerPlant_EventScript_FoughtElectrode2::
 	end
 
 PowerPlant_EventScript_FinalScan::
-	setvar VAR_SCAN_FINAL,2
+	setvar VAR_MT_MOON_JESSIE_JAMES,2
 	special SpawnCameraObject
 	applymovement LOCALID_CAMERA, Common_Movement_WalkUp4
 	waitmovement 0

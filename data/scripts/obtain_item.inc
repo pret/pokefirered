@@ -136,7 +136,9 @@ EventScript_PickUpItem::
 	return
 
 EventScript_FoundTMHM::
-	message Text_FoundTMHMContainsMove
+	signmsg
+	msgbox Text_FoundTMHMContainsMove
+	normalmsg
 	return
 
 EventScript_FoundItem::

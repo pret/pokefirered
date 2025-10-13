@@ -139,3 +139,16 @@ Common_Movement_JumpFaceDownExclamationMark::
 	emote_exclamation_mark
 	jump_in_place_down
 	step_end
+
+Common_Movement_LockFacingDirection::
+	lock_facing_direction
+	step_end
+
+Common_Movement_UnlockFacingDirection::
+	unlock_facing_direction
+	step_end
+
+Common_Movement_JumpUpExclamationMark::
+	emote_exclamation_mark
+	jump_up
+	step_end

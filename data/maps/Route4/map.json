@@ -71,10 +71,10 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BOY",
-      "x": 16,
-      "y": 19,
+      "x": 11,
+      "y": 17,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -153,8 +153,8 @@
       "x": 19,
       "y": 11,
       "elevation": 3,
-      "dest_map": "MAP_MT_MOON_1F",
-      "dest_warp_id": "3"
+      "dest_map": "MAP_MT_MOON_B2F",
+      "dest_warp_id": "4"
     },
     {
       "x": 41,

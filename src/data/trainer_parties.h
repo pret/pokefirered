@@ -8091,17 +8091,17 @@ static const struct TrainerMonNoItemDefaultMoves sParty_TeamRocketGrunt51[] = {
 static const struct TrainerMonNoItemDefaultMoves sParty_TeamRocketJessieJamesMtMoon[] = {
     {
         .iv = 0,
-        .lvl = 1,
+        .lvl = 15,
         .species = SPECIES_KOFFING,
     },
     {
         .iv = 0,
-        .lvl = 1,
+        .lvl = 15,
         .species = SPECIES_EKANS,
     },
     {
         .iv = 0,
-        .lvl = 1,
+        .lvl = 16,
         .species = SPECIES_MEOWTH,
     },
 };
@@ -11019,18 +11019,18 @@ static const struct TrainerMonNoItemDefaultMoves sParty_RojoBosqueVerdeCharmande
 static const struct TrainerMonNoItemCustomMoves sParty_Silvio[] = {
     {
         .iv = 100,
-        .lvl = 15,
+        .lvl = 13,
         .species = SPECIES_GROWLITHE,
     },
     {
         .iv = 100,
-        .lvl = 15,
-        .species = SPECIES_GLOOM,
+        .lvl = 13,
+        .species = SPECIES_ODDISH,
     },
     {
         .iv = 100,
-        .lvl = 15,
-        .species = SPECIES_POLIWHIRL,
+        .lvl = 13,
+        .species = SPECIES_POLIWAG,
     },
     {
         .iv = 150,

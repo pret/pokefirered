@@ -385,12 +385,12 @@
       "secondaryId": 0
     },
     {
-      "english": "REVIVE",
+      "english": "REVIVIR",
       "itemId": "ITEM_REVIVE",
       "price": 1500,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A medicine that revives a fainted\\nPOKéMON, restoring HP by half the\\nmaximum amount.",
+      "description_english": "Medicina que hace revivir a un\\nPOKéMON debilitado.\\nLe da la mitad de los PS.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1094,7 +1094,7 @@
       "price": 4800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A candy that is packed with energy.\\nIt raises the level of a POKéMON\\nby one.",
+      "description_english": "Caramelo rebosante de energía.\\nAumenta 1 nivel a un POKéMON.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1505,12 +1505,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MOON STONE",
+      "english": "PIEDRA LUNAR",
       "itemId": "ITEM_MOON_STONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt is as black as the night sky.",
+      "description_english": "Curiosa piedra que hace\\nevolucionar a especies de POKéMON.\\nEs negra como el azabache.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1745,12 +1745,12 @@
       "secondaryId": 0
     },
     {
-      "english": "STAR PIECE",
+      "english": "TR. ESTRELLA",
       "itemId": "ITEM_STAR_PIECE",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A shard of a pretty gem that\\nsparkles in a red color.\\nIt can be sold at a high price.",
+      "description_english": "Trozo de bonita gema roja\\nque se vende a alto precio.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -4625,7 +4625,7 @@
       "secondaryId": 0
     },
     {
-      "english": "TM01",
+      "english": "MT01",
       "itemId": "ITEM_TM01",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4642,7 +4642,7 @@
       "moveId": "FocusPunch"
     },
     {
-      "english": "TM02",
+      "english": "MT02",
       "itemId": "ITEM_TM02",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4659,7 +4659,7 @@
       "moveId": "DragonClaw"
     },
     {
-      "english": "TM03",
+      "english": "MT03",
       "itemId": "ITEM_TM03",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4676,7 +4676,7 @@
       "moveId": "WaterPulse"
     },
     {
-      "english": "TM04",
+      "english": "MT04",
       "itemId": "ITEM_TM04",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4693,7 +4693,7 @@
       "moveId": "CalmMind"
     },
     {
-      "english": "TM05",
+      "english": "MT05",
       "itemId": "ITEM_TM05",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4710,7 +4710,7 @@
       "moveId": "Roar"
     },
     {
-      "english": "TM06",
+      "english": "MT06",
       "itemId": "ITEM_TM06",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4727,7 +4727,7 @@
       "moveId": "Toxic"
     },
     {
-      "english": "TM07",
+      "english": "MT07",
       "itemId": "ITEM_TM07",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4744,7 +4744,7 @@
       "moveId": "Hail"
     },
     {
-      "english": "TM08",
+      "english": "MT08",
       "itemId": "ITEM_TM08",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4761,7 +4761,7 @@
       "moveId": "BulkUp"
     },
     {
-      "english": "TM09",
+      "english": "MT09",
       "itemId": "ITEM_TM09",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4778,7 +4778,7 @@
       "moveId": "BulletSeed"
     },
     {
-      "english": "TM10",
+      "english": "MT10",
       "itemId": "ITEM_TM10",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4795,7 +4795,7 @@
       "moveId": "HiddenPower"
     },
     {
-      "english": "TM11",
+      "english": "MT11",
       "itemId": "ITEM_TM11",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4812,7 +4812,7 @@
       "moveId": "SunnyDay"
     },
     {
-      "english": "TM12",
+      "english": "MT12",
       "itemId": "ITEM_TM12",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4829,7 +4829,7 @@
       "moveId": "Taunt"
     },
     {
-      "english": "TM13",
+      "english": "MT13",
       "itemId": "ITEM_TM13",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4846,7 +4846,7 @@
       "moveId": "IceBeam"
     },
     {
-      "english": "TM14",
+      "english": "MT14",
       "itemId": "ITEM_TM14",
       "price": 5500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4863,7 +4863,7 @@
       "moveId": "Blizzard"
     },
     {
-      "english": "TM15",
+      "english": "MT15",
       "itemId": "ITEM_TM15",
       "price": 7500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4880,7 +4880,7 @@
       "moveId": "HyperBeam"
     },
     {
-      "english": "TM16",
+      "english": "MT16",
       "itemId": "ITEM_TM16",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4897,7 +4897,7 @@
       "moveId": "LightScreen"
     },
     {
-      "english": "TM17",
+      "english": "MT17",
       "itemId": "ITEM_TM17",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4914,7 +4914,7 @@
       "moveId": "Protect"
     },
     {
-      "english": "TM18",
+      "english": "MT18",
       "itemId": "ITEM_TM18",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4931,7 +4931,7 @@
       "moveId": "RainDance"
     },
     {
-      "english": "TM19",
+      "english": "MT19",
       "itemId": "ITEM_TM19",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4948,7 +4948,7 @@
       "moveId": "GigaDrain"
     },
     {
-      "english": "TM20",
+      "english": "MT20",
       "itemId": "ITEM_TM20",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4965,7 +4965,7 @@
       "moveId": "Safeguard"
     },
     {
-      "english": "TM21",
+      "english": "MT21",
       "itemId": "ITEM_TM21",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4982,7 +4982,7 @@
       "moveId": "Frustration"
     },
     {
-      "english": "TM22",
+      "english": "MT22",
       "itemId": "ITEM_TM22",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -4999,7 +4999,7 @@
       "moveId": "SolarBeam"
     },
     {
-      "english": "TM23",
+      "english": "MT23",
       "itemId": "ITEM_TM23",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5016,7 +5016,7 @@
       "moveId": "IronTail"
     },
     {
-      "english": "TM24",
+      "english": "MT24",
       "itemId": "ITEM_TM24",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5033,7 +5033,7 @@
       "moveId": "Thunderbolt"
     },
     {
-      "english": "TM25",
+      "english": "MT25",
       "itemId": "ITEM_TM25",
       "price": 5500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5050,7 +5050,7 @@
       "moveId": "Thunder"
     },
     {
-      "english": "TM26",
+      "english": "MT26",
       "itemId": "ITEM_TM26",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5067,7 +5067,7 @@
       "moveId": "Earthquake"
     },
     {
-      "english": "TM27",
+      "english": "MT27",
       "itemId": "ITEM_TM27",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5084,7 +5084,7 @@
       "moveId": "Return"
     },
     {
-      "english": "TM28",
+      "english": "MT28",
       "itemId": "ITEM_TM28",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5101,7 +5101,7 @@
       "moveId": "Dig"
     },
     {
-      "english": "TM29",
+      "english": "MT29",
       "itemId": "ITEM_TM29",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5118,7 +5118,7 @@
       "moveId": "Psychic"
     },
     {
-      "english": "TM30",
+      "english": "MT30",
       "itemId": "ITEM_TM30",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5135,7 +5135,7 @@
       "moveId": "ShadowBall"
     },
     {
-      "english": "TM31",
+      "english": "MT31",
       "itemId": "ITEM_TM31",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5152,7 +5152,7 @@
       "moveId": "BrickBreak"
     },
     {
-      "english": "TM32",
+      "english": "MT32",
       "itemId": "ITEM_TM32",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5169,7 +5169,7 @@
       "moveId": "DoubleTeam"
     },
     {
-      "english": "TM33",
+      "english": "MT33",
       "itemId": "ITEM_TM33",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5186,7 +5186,7 @@
       "moveId": "Reflect"
     },
     {
-      "english": "TM34",
+      "english": "MT34",
       "itemId": "ITEM_TM34",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5203,7 +5203,7 @@
       "moveId": "ShockWave"
     },
     {
-      "english": "TM35",
+      "english": "MT35",
       "itemId": "ITEM_TM35",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5220,7 +5220,7 @@
       "moveId": "Flamethrower"
     },
     {
-      "english": "TM36",
+      "english": "MT36",
       "itemId": "ITEM_TM36",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5237,7 +5237,7 @@
       "moveId": "SludgeBomb"
     },
     {
-      "english": "TM37",
+      "english": "MT37",
       "itemId": "ITEM_TM37",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5254,7 +5254,7 @@
       "moveId": "Sandstorm"
     },
     {
-      "english": "TM38",
+      "english": "MT38",
       "itemId": "ITEM_TM38",
       "price": 5500,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5271,7 +5271,7 @@
       "moveId": "FireBlast"
     },
     {
-      "english": "TM39",
+      "english": "MT39",
       "itemId": "ITEM_TM39",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5288,7 +5288,7 @@
       "moveId": "RockTomb"
     },
     {
-      "english": "TM40",
+      "english": "MT40",
       "itemId": "ITEM_TM40",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5305,7 +5305,7 @@
       "moveId": "AerialAce"
     },
     {
-      "english": "TM41",
+      "english": "MT41",
       "itemId": "ITEM_TM41",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5322,7 +5322,7 @@
       "moveId": "Torment"
     },
     {
-      "english": "TM42",
+      "english": "MT42",
       "itemId": "ITEM_TM42",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5339,7 +5339,7 @@
       "moveId": "Facade"
     },
     {
-      "english": "TM43",
+      "english": "MT43",
       "itemId": "ITEM_TM43",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5356,7 +5356,7 @@
       "moveId": "SecretPower"
     },
     {
-      "english": "TM44",
+      "english": "MT44",
       "itemId": "ITEM_TM44",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5373,7 +5373,7 @@
       "moveId": "Rest"
     },
     {
-      "english": "TM45",
+      "english": "MT45",
       "itemId": "ITEM_TM45",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5390,7 +5390,7 @@
       "moveId": "Attract"
     },
     {
-      "english": "TM46",
+      "english": "MT46",
       "itemId": "ITEM_TM46",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5407,7 +5407,7 @@
       "moveId": "Thief"
     },
     {
-      "english": "TM47",
+      "english": "MT47",
       "itemId": "ITEM_TM47",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5424,7 +5424,7 @@
       "moveId": "SteelWing"
     },
     {
-      "english": "TM48",
+      "english": "MT48",
       "itemId": "ITEM_TM48",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5441,7 +5441,7 @@
       "moveId": "SkillSwap"
     },
     {
-      "english": "TM49",
+      "english": "MT49",
       "itemId": "ITEM_TM49",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5458,7 +5458,7 @@
       "moveId": "Snatch"
     },
     {
-      "english": "TM50",
+      "english": "MT50",
       "itemId": "ITEM_TM50",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",

@@ -261,7 +261,7 @@
       "x": 24,
       "y": 11,
       "elevation": 0,
-      "var": "VAR_SCAN_FINAL",
+      "var": "VAR_MT_MOON_JESSIE_JAMES",
       "var_value": "0",
       "script": "PowerPlant_EventScript_FinalScan"
     }

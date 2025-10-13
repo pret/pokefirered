@@ -24,12 +24,12 @@ MtMoon_B2F_Text_LabOnCinnabarRegeneratesFossils::
 MtMoon_B2F_Text_Grunt1Intro::
     .string "Nosotros, el {SHADOW DYNAMIC_COLOR4}EQUIPO ROCKET{SHADOW LIGHT_GRAY},\n"
     .string "¡encontraremos los fósiles!\p"
-    .string "Revivir {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} con ellos haremos\n"
-    .string "enormes riquezas!$"
+    .string "¡Reviviremos los {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} con ellos\n"
+    .string "y haremos enormes riquezas!$"
 
 MtMoon_B2F_Text_Grunt1Defeat::
     .string "¡ARGH!\n"
-    .string "¡AHORA ESTOY FURIOSO!$"
+    .string "¡AHORA ESTOY FURIOSA!$"
 
 MtMoon_B2F_Text_Grunt1PostBattle::
     .string "¡Me hiciste enojar!\p"
@@ -42,7 +42,7 @@ MtMoon_B2F_Text_Grunt2Intro::
     .string "¡Infundimos miedo con nuestra fuerza!$"
 
 MtMoon_B2F_Text_Grunt2Defeat::
-    .string "¡LA ARRUINÉ!$"
+    .string "¡LO ARRUINÉ!$"
 
 MtMoon_B2F_Text_Grunt2PostBattle::
     .string "¡Rayos!\n"
@@ -53,11 +53,11 @@ MtMoon_B2F_Text_Grunt3Intro::
     .string "¡Lárgate, niñ{oa}!$"
 
 MtMoon_B2F_Text_Grunt3Defeat::
-    .string "ASÍ QUE ERES BUENO…$"
+    .string "ASÍ QUE ERES BUEN{OA}...$"
 
 MtMoon_B2F_Text_Grunt3PostBattle::
-    .string "¡Si encuentras un fósil, dámelo \n"
-    .string "y lárgate!$"
+    .string "Si encuentras un fósil...\n"
+    .string "dámelo y lárgate$"
 
 MtMoon_B2F_Text_Grunt4Intro::
     .string "¡L{oa}s niñ{oa}s no deberían meterse\n"
@@ -120,3 +120,6 @@ MtMoon_B2F_Text_James_RunAway::
 MtMoon_B2F_Text_Jessie_James_Defeat::
     .string "¡IMPOSIBLE!\n"
     .string "¡NUESTRO DÚO PERFECTO... DERROTADO!$"
+
+MtMoon_B2F_Text_Batalla::
+    .string "Tienes un Pokemon?$"

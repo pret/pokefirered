@@ -79,11 +79,11 @@ MtMoon_1F_Text_RobertoIntro::
     .string "para llegar a {SHADOW DYNAMIC_COLOR4}CIUDAD CELESTE{SHADOW LIGHT_GRAY}.$"
 
 MtMoon_1F_Text_RobertoDefeat::
-    .string "PERDÍ.$"
+    .string "PERDÍ...$"
 
 MtMoon_1F_Text_RobertoPostBattle::
-    .string "¡{SHADOW DYNAMIC_COLOR4}ZUBAT{SHADOW LIGHT_GRAY} es resistente!\n"
-    .string "Pero si logras atrapar uno, podrás\l"
+    .string "¡{SHADOW DYNAMIC_COLOR4}ZUBAT{SHADOW LIGHT_GRAY} es resistente!\p"
+    .string "Pero si logras atrapar uno, podrás\n"
     .string "contar con él.$"
 
 MtMoon_1F_Text_ZubatIsABloodsucker::
@@ -136,7 +136,7 @@ MtMoon_1F_Text_SilvioIntro::
 
 MtMoon_1F_Text_SilvioDefeat::
     .string "¡ESO FUE MAGNÍFICO!\n"
-    .string "BUEN OJO Y AÚN MEJOR ESTRATEGIA$"
+    .string "BUEN OJO Y AÚN MEJOR ESTRATEGIA...   VG$"
     
 MtMoon_1F_Text_CuandoVuelvas::
     .string "Cuando vuelvas a {SHADOW DYNAMIC_COLOR4}CIUDAD PLATEADA{SHADOW LIGHT_GRAY},\n"

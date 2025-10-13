@@ -45,7 +45,6 @@ ld_script_sapphire.txt
 sound/**/*.bin
 sound/songs/midi/*.s
 src/data/heal_locations.h
-src/data/items.h
 src/data/wild_encounters.h
 src/data/region_map/region_map_entries.h
 src/data/region_map/region_map_entry_strings.h
@@ -62,3 +61,11 @@ prefabs.json
 .vscode/*.*
 *.js
 *.sym
+pokefirered.gba
+*.zip
+*.png
+*.jpg
+pokefirered.gba
+*.zip
+*.png
+*.jpg

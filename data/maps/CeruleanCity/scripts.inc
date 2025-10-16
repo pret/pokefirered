@@ -167,7 +167,7 @@ CeruleanCity_EventScript_Grunt::
 	goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_5, CeruleanCity_EventScript_GruntDefeated
 	message CeruleanCity_Text_GruntIntro
 	waitmessage
-	playbgm MUS_ENCOUNTER_ROCKET, 0
+	playbgm MUS_HG_ENCOUNTER_ROCKET, 0
 	waitbuttonpress
 	trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_5, CeruleanCity_Text_GruntDefeat
 	setvar VAR_MAP_SCENE_CERULEAN_CITY_ROCKET, 1

@@ -7,7 +7,7 @@ ViridianCity_Gym_Text_GiovanniIntro::
     .string "So be it.\l"
     .string "This time, I'm not holding back!\p"
     .string "Once more, you shall face\n"
-    .string "GIOVANNI, the greatest TRAINER!{PLAY_BGM}{MUS_ENCOUNTER_ROCKET}$"
+    .string "GIOVANNI, the greatest TRAINER!{PLAY_BGM}{MUS_HG_ENCOUNTER_ROCKET}$"
 
 ViridianCity_Gym_Text_GiovanniDefeat::
     .string "Ha!\n"

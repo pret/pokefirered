@@ -53,7 +53,7 @@ CeruleanCity_Text_GruntIntro::
 .string "....¿Eh?\n"
 .string "¿Yo?\p"
 .string "¡Soy un transeúnte inocente!\n"
-.string "¿No me crees?{PLAY_BGM}{MUS_ENCOUNTER_ROCKET}$"
+.string "¿No me crees?{PLAY_BGM}{MUS_HG_ENCOUNTER_ROCKET}$"
 
 CeruleanCity_Text_GruntDefeat::
 .string "RECLUTA: ¡ALTO! ¡ME RINDO!\n"

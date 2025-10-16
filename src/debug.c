@@ -3627,7 +3627,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_LAVENDER) \
     X(MUS_HEAL_UNUSED) \
     X(MUS_CYCLING) \
-    X(MUS_ENCOUNTER_ROCKET) \
+    X(MUS_HG_ENCOUNTER_ROCKET) \
     X(MUS_ENCOUNTER_GIRL) \
     X(MUS_ENCOUNTER_BOY) \
     X(MUS_HALL_OF_FAME) \

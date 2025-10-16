@@ -366,11 +366,12 @@
 #define MUS_HG_GYM                355
 #define MUS_HG_MT_MOON_SQUARE     356
 #define MUS_HG_CERULEAN           357
+#define MUS_HG_ENCOUNTER_ROCKET   358
 //end hgss songs
 
 #define MUS_NONE                    0xFFFF
 
 #define START_MUS                   MUS_HEAL
-#define END_MUS                     MUS_HG_CERULEAN
+#define END_MUS                     MUS_HG_ENCOUNTER_ROCKET
 
 #endif  // GUARD_CONSTANTS_SONGS_H

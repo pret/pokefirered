@@ -979,6 +979,7 @@ SECTIONS {
         sound/songs/midi/mus_hg_gym.o(.rodata);
         sound/songs/midi/mus_hg_mt_moon_square.o(.rodata);
         sound/songs/midi/mus_hg_cerulean.o(.rodata);
+        sound/songs/midi/mus_hg_encounter_rocket.o(.rodata);
 
     } > ROM =0
 

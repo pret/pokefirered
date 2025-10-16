@@ -357,6 +357,7 @@ gSongTable::
 	song mus_hg_gym, 0, 0
 	song mus_hg_mt_moon_square, 0, 0
 	song mus_hg_cerulean, 0, 0
-	
+	song mus_hg_encounter_rocket, 0, 0
+
 dummy_song_header:
 	.byte 0, 0, 0, 0

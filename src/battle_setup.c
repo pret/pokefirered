@@ -1044,7 +1044,7 @@ void PlayTrainerEncounterMusic(void)
             music = MUS_ENCOUNTER_BOY;
             break;
         default:
-            music = MUS_ENCOUNTER_ROCKET;
+            music = MUS_HG_ENCOUNTER_ROCKET;
             break;
         }
         PlayNewMapMusic(music);

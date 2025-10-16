@@ -869,6 +869,7 @@ MUS_HG_POKE_MART          = 62 01
 MUS_HG_GYM                = 63 01
 MUS_HG_MT_MOON_SQUARE     = 64 01
 MUS_HG_CERULEAN           = 65 01
+MUS_HG_ENCOUNTER_ROCKET   = 66 01
 
 A_BUTTON        = F8 00
 B_BUTTON        = F8 01

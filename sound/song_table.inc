@@ -353,11 +353,12 @@ gSongTable::
 	song mus_hg_pewter, 0, 0
 	song mus_hg_viridian_forest, 0, 0
 	song mus_hg_poke_center, 0, 0
-    song mus_hg_poke_mart, 0, 0
-	song mus_hg_gym, 0, 0
-	song mus_hg_mt_moon_square, 0, 0
-	song mus_hg_cerulean, 0, 0
-	song mus_hg_encounter_rocket, 0, 0
+        song mus_hg_poke_mart, 0, 0
+        song mus_hg_gym, 0, 0
+        song mus_hg_mt_moon_square, 0, 0
+        song mus_hg_cerulean, 0, 0
+        song mus_hg_encounter_rocket, 0, 0
+        song mus_hg_vs_wild_kanto, 0, 0
 
 dummy_song_header:
 	.byte 0, 0, 0, 0

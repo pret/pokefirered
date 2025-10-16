@@ -5861,7 +5861,7 @@ void ClearBattleMonForms(void)
 static u16 GetBattleBGM(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
-        return MUS_VS_WILD;
+        return MUS_HG_VS_WILD_KANTO;
     if (gBattleTypeFlags & BATTLE_TYPE_REGI)
         return MUS_RS_VS_TRAINER;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -5884,7 +5884,7 @@ static u16 GetBattleBGM(void)
             return MUS_VS_TRAINER;
         }
     }
-    return MUS_VS_WILD;
+    return MUS_HG_VS_WILD_KANTO;
 }
 
 void PlayBattleBGM(void)

@@ -3642,7 +3642,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_VICTORY_ROAD) \
     X(MUS_VS_GYM_LEADER) \
     X(MUS_VS_TRAINER) \
-    X(MUS_VS_WILD) \
+    X(MUS_HG_VS_WILD_KANTO) \
     X(MUS_VS_CHAMPION) \
     X(MUS_PALLET) \
     X(MUS_OAK_LAB) \

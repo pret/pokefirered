@@ -5728,6 +5728,16 @@ const struct Trainer gTrainers[] = {
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
         .party = NO_ITEM_DEFAULT_MOVES(sParty_TeamRocketJessieJamesMtMoon),
     },
+    [TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON_NODOUBLE] = {
+        .trainerClass = TRAINER_CLASS_TEAM_ROCKET,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
+        .trainerPic = TRAINER_PIC_ROCKET_JESSIE_JAMES,
+        .trainerName = _("DUO ROCKET"),
+        .items = {},
+        .doubleBattle = FALSE,
+        .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
+        .party = NO_ITEM_DEFAULT_MOVES(sParty_TeamRocketJessieJamesMtMoon),
+    },
     [TRAINER_BIRD_KEEPER_MILO] = {
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_COOL,

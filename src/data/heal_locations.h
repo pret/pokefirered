@@ -25,7 +25,7 @@ static const struct HealLocation sHealLocations[NUM_HEAL_LOCATIONS - 1] = {
     [HEAL_LOCATION_CERULEAN_CITY - 1] = {
         .mapGroup = MAP_GROUP(MAP_CERULEAN_CITY),
         .mapNum = MAP_NUM(MAP_CERULEAN_CITY),
-        .x = 19,
+        .x = 21,
         .y = 20,
     },
     [HEAL_LOCATION_LAVENDER_TOWN - 1] = {

@@ -752,11 +752,12 @@
 #define TRAINER_HOJA_BULBASAUR                   746
 #define TRAINER_HOJA_SQUIRTLE                    747
 #define TRAINER_HOJA_CHARMANDER                  748
-#define TRAINER_GENTLEMAN_FIDEL                           749
+#define TRAINER_GENTLEMAN_FIDEL                  749
 #define TRAINER_HIKER_GUSTAVO                    750
 #define TRAINER_LEADER_BROCK2                    751
 #define TRAINER_SILVIO                           752
 #define TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON             753
+#define TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON_NODOUBLE    754
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is
 //       only space for 25 additional trainers before trainer flag space overflows.
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space

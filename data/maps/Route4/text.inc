@@ -25,7 +25,7 @@ Route4_Text_RouteSign::
 
 Text_MegaPunchTeach::
     .string "¡Un puñetazo de ferocidad\n"
-    .string " estruendosa!\p"
+    .string "estruendosa!\p"
     .string "¡Cargado con poder destructivo!\p"
     .string "Cuando estés en apuros,\n"
     .string "¡{SHADOW DYNAMIC_COLOR4}MEGAPUÑO{SHADOW LIGHT_GRAY} es el ataque definitivo!\p"
@@ -34,24 +34,24 @@ Text_MegaPunchTeach::
     .string "¡Déjame enseñárselo a tu {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY}!$"
 
 Text_MegaPunchDeclined::
-    .string "Volverás cuando entiendas el\n"
-    .string "valor de {SHADOW DYNAMIC_COLOR4}MEGAPUÑO{SHADOW LIGHT_GRAY}.$"
+    .string "Volverás cuando entiendas el valor\n"
+    .string "de {SHADOW DYNAMIC_COLOR4}MEGAPUÑO{SHADOW LIGHT_GRAY}.$"
 
 Text_MegaPunchWhichMon::
     .string "¡Bien!\n"
     .string "¿Qué {SHADOW DYNAMIC_COLOR4}POKéMON{SHADOW LIGHT_GRAY} lo aprenderá?$"
 
 Text_MegaPunchTaught::
-    .string "¡Ahora somos camaradas en el arte del\n"
-    .string "puñetazo!\p"
+    .string "¡Ahora somos camaradas en el arte\n"
+    .string "del puñetazo!\p"
     .string "Deberías irte antes de que te vea\n"
-    .string "el tonto descarriado que solo entrena\l"
-    .string "sus patadas ridículas allá.$"
+    .string "el tonto descarriado que solo\l"
+    .string "entrena sus patadas ridículas allá.$"
 
 Text_MegaKickTeach::
     .string "¡Una patada de ferocidad brutal!\p"
     .string "¡Cargada con poder destructivo!\p"
-    .string "A fin de cuentas,\n"
+    .string "A fin de cuentas...\n"
     .string "¡{SHADOW DYNAMIC_COLOR4}MEGAPATADA{SHADOW LIGHT_GRAY} es el ataque final!\p"
     .string "¿No lo crees?\p"
     .string "¡Bien!\n"
@@ -69,8 +69,8 @@ Text_MegaKickTaught::
     .string "¡Ahora somos almas gemelas en el arte\n"
     .string "de la patada!\p"
     .string "Deberías correr antes de que te vea\n"
-    .string "el iluso despistado que solo entrena\l"
-    .string "sus simples puñetazos allá.$"
+    .string "el iluso despistado que solo\l"
+    .string "entrena sus simples puñetazos allá.$"
 
 Route4_Text_PeopleLikeAndRespectBrock::
     .string "¡Oh, vaya, esa es la MEDALLA ROCA!\n"

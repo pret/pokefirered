@@ -120,13 +120,16 @@ MtMoon_B2F_EventScript_DomeFossil::
 	namebox Name_James
 	msgbox MtMoon_B2F_Text_James_DoubleChallenge
 	closemessage 
+
+	special HasEnoughMonsForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, MtMoon_B2F_EventScript_OnePokemonForDoubleBattleDomeFossil
+
 	trainerbattle_double_no_intro TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON, MtMoon_B2F_Text_Jessie_James_Defeat, MtMoon_B2F_Text_Jessie_James_Defeat, MtMoon_B2F_EventScript_AfterBattleDomeFossil
 	playbgm MUS_MT_MOON, 0
 	setflag FLAG_HIDE_MT_MOON_JESSIE_JAMES
 	setvar VAR_MT_MOON_JESSIE_JAMES, 0
 	release
 	end
-
 
 MtMoon_B2F_Movement_MiguelToHelixFossil::
 	walk_right
@@ -207,7 +210,7 @@ MtMoon_B2F_EventScript_HelixFossil::
 	closemessage
 	
 	special HasEnoughMonsForDoubleBattle
-	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, MtMoon_B2F_EventScript_OnePokemonForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, MtMoon_B2F_EventScript_OnePokemonForDoubleBattleHelixFossil
 
 	trainerbattle_double_no_intro TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON, MtMoon_B2F_Text_Jessie_James_Defeat, MtMoon_B2F_Text_Jessie_James_Defeat, MtMoon_B2F_EventScript_AfterBattleHelixFossil
 	playbgm MUS_MT_MOON, 0
@@ -216,8 +219,8 @@ MtMoon_B2F_EventScript_HelixFossil::
 	release
 	end
 
-MtMoon_B2F_EventScript_OnePokemonForDoubleBattle::
-	trainerbattle_no_intro TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON, MtMoon_B2F_Text_Jessie_James_Defeat
+MtMoon_B2F_EventScript_OnePokemonForDoubleBattleHelixFossil::
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON_NODOUBLE, MtMoon_B2F_Text_Jessie_James_Defeat
 	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_WalkInPlaceUp
 	waitmovement 0
 	namebox Name_Jessie
@@ -230,6 +233,29 @@ MtMoon_B2F_EventScript_OnePokemonForDoubleBattle::
 	closemessage 
 	applymovement LOCALID_MT_MOON_JAMES, MtMoon_B2F_Movement_JamesRunAway
 	applymovement LOCALID_MT_MOON_JESSIE, MtMoon_B2F_Movement_JessieRunAwayHelixFossil
+	waitmovement 0
+	setobjectxy LOCALID_MT_MOON_JAMES,3,16 
+	setobjectxy LOCALID_MT_MOON_JESSIE,3,16 
+	playbgm MUS_MT_MOON, 0
+	setflag FLAG_HIDE_MT_MOON_JESSIE_JAMES
+	setvar VAR_MT_MOON_JESSIE_JAMES, 0
+	releaseall
+	end
+
+MtMoon_B2F_EventScript_OnePokemonForDoubleBattleDomeFossil::
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON_NODOUBLE, MtMoon_B2F_Text_Jessie_James_Defeat
+	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	namebox Name_Jessie
+	msgbox MtMoon_B2F_Text_Jessie_RunAway
+	closemessage 
+	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_WalkInPlaceLeft
+	waitmovement 0
+	namebox Name_James
+	msgbox MtMoon_B2F_Text_James_RunAway
+	closemessage 
+	applymovement LOCALID_MT_MOON_JAMES, MtMoon_B2F_Movement_JamesRunAway
+	applymovement LOCALID_MT_MOON_JESSIE, MtMoon_B2F_Movement_JessieRunAwayDomeFossil
 	waitmovement 0
 	setobjectxy LOCALID_MT_MOON_JAMES,3,16 
 	setobjectxy LOCALID_MT_MOON_JESSIE,3,16 
@@ -295,10 +321,36 @@ MtMoon_B2F_EventScript_JessieJamesRepeat::
 	namebox Name_James
 	msgbox MtMoon_B2F_Text_James_DoubleChallenge
 	closemessage 
+	
+	special HasEnoughMonsForDoubleBattle
+	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, MtMoon_B2F_EventScript_OnePokemonForDoubleBattleRepeat
+
 	trainerbattle_double_no_intro TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON, MtMoon_B2F_Text_Jessie_James_Defeat, MtMoon_B2F_Text_Jessie_James_Defeat, MtMoon_B2F_EventScript_AfterBattleRepeat
 	release
 	end
 
+MtMoon_B2F_EventScript_OnePokemonForDoubleBattleRepeat::
+	trainerbattle_no_intro TRAINER_TEAM_ROCKET_JESSIE_JAMES_MT_MOON_NODOUBLE, MtMoon_B2F_Text_Jessie_James_Defeat
+	applymovement LOCALID_MT_MOON_JESSIE, Common_Movement_WalkInPlaceUp
+	waitmovement 0
+	namebox Name_Jessie
+	msgbox MtMoon_B2F_Text_Jessie_RunAway
+	closemessage 
+	applymovement LOCALID_MT_MOON_JAMES, Common_Movement_WalkInPlaceRight
+	waitmovement 0
+	namebox Name_James
+	msgbox MtMoon_B2F_Text_James_RunAway
+	closemessage 
+	applymovement LOCALID_MT_MOON_JAMES, MtMoon_B2F_Movement_JamesRunAwayRepeat
+	applymovement LOCALID_MT_MOON_JESSIE, MtMoon_B2F_Movement_JessieRunAwayRepeat
+	waitmovement 0
+	setobjectxy LOCALID_MT_MOON_JAMES,3,16 
+	setobjectxy LOCALID_MT_MOON_JESSIE,3,16 
+	playbgm MUS_MT_MOON, 0
+	setflag FLAG_HIDE_MT_MOON_JESSIE_JAMES
+	setvar VAR_MT_MOON_JESSIE_JAMES, 0
+	releaseall
+	end
 
 MtMoon_B2F_EventScript_CheckJessieJamesEvent::
 	goto_if_set FLAG_HIDE_MT_MOON_JESSIE_JAMES, MtMoon_B2F_EventScript_DontTakeFossil

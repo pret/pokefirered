@@ -16,7 +16,7 @@
   "connections": [
     {
       "map": "MAP_CERULEAN_CITY",
-      "offset": 0,
+      "offset": -2,
       "direction": "up"
     },
     {

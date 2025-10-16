@@ -72,7 +72,7 @@ MtMoon_B2F_EventScript_DomeFossil::
 	removeobject LOCALID_HELIX_FOSSIL
 	setflag FLAG_GOT_DOME_FOSSIL
 	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
-	playbgm MUS_ROCKET_HIDEOUT, 0
+	playbgm MUS_HG_ENCOUNTER_ROCKET, 0
 	setvar VAR_MT_MOON_JESSIE_JAMES, 1
 	delay 16
 	setobjectxy LOCALID_MT_MOON_JAMES,13,14 
@@ -160,7 +160,7 @@ MtMoon_B2F_EventScript_HelixFossil::
 	removeobject LOCALID_DOME_FOSSIL
 	setflag FLAG_GOT_HELIX_FOSSIL
 	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
-	playbgm MUS_ROCKET_HIDEOUT, 0
+	playbgm MUS_HG_ENCOUNTER_ROCKET, 0
 	setvar VAR_MT_MOON_JESSIE_JAMES, 1
 	delay 16
 	setobjectxy LOCALID_MT_MOON_JESSIE,13,14 
@@ -267,7 +267,7 @@ MtMoon_B2F_EventScript_OnePokemonForDoubleBattleDomeFossil::
 
 
 MtMoon_B2F_EventScript_JessieJamesRepeat::
-	playbgm MUS_ROCKET_HIDEOUT, 0
+	playbgm MUS_HG_ENCOUNTER_ROCKET, 0
 	setvar VAR_MT_MOON_JESSIE_JAMES, 1
 	delay 16
 	setobjectxy LOCALID_MT_MOON_JESSIE,13,16 

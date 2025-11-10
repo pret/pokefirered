@@ -690,7 +690,7 @@ static const union AnimCmd *const sBackAnims_Hoenn[] =
 };
 
 #define TRAINER_BACK_SPRITE(trainerPic, yOffset, sprite, pal, anim)                          \
-    [trainerPic] =                                                                            \
+    [trainerPic] =                                                                           \
     {                                                                                        \
         .coordinates = {.size = 8, .y_offset = yOffset},                                     \
         .backPic = {.data = sprite, .size = TRAINER_PIC_SIZE, .relativeFrames = TRUE},       \

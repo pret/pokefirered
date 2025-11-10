@@ -1080,8 +1080,11 @@ static void HandleBallAnimEnd(struct Sprite *sprite)
         AnimateSprite(&gSprites[gBattlerSpriteIds[battler]]);
         gSprites[gBattlerSpriteIds[battler]].data[1] = 0x1000;
     }
+    else
+    {
+        gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
+    }
 
-    gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
     if (sprite->animEnded)
         sprite->invisible = TRUE;
     if (gSprites[gBattlerSpriteIds[battler]].affineAnimEnded)

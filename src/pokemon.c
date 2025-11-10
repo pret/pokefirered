@@ -118,8 +118,8 @@ static const struct CombinedMove sCombinedMoves[2] =
 // NOTE: The order of the elements in the array below is irrelevant.
 // To reorder the pokedex, see the values in include/constants/pokedex.h.
 
-#define KANTO_TO_NATIONAL(name)     [KANTO_DEX_##name - 1] = NATIONAL_DEX_##name
-#define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
+#define KANTO_TO_NATIONAL(name)     [KANTO_DEX_##name - KANTO_DEX_START] = NATIONAL_DEX_##name
+#define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - HOENN_DEX_START] = NATIONAL_DEX_##name
 
 
 static const enum NationalDexOrder sKantoDexNumToNationalDexNum[KANTO_DEX_COUNT] =
@@ -5178,7 +5178,7 @@ enum HoennDexOrder NationalToHoennOrder(enum NationalDexOrder nationalNum)
 
     hoennNum = 0;
 
-    while (hoennNum < (HOENN_DEX_COUNT - 1) && sHoennToNationalOrder[hoennNum] != nationalNum)
+    while (hoennNum < (HOENN_DEX_COUNT - 1) && sHoennToNationalOrder[hoennNum - HOENN_DEX_START] != nationalNum)
         hoennNum++;
 
     if (hoennNum >= HOENN_DEX_COUNT - 1)
@@ -5232,11 +5232,11 @@ enum KantoDexOrder NationalToKantoDexNum(enum NationalDexOrder natDexNum)
         return KANTO_DEX_NONE;
     }
 
-    for (i = KANTO_DEX_BULBASAUR; i < KANTO_DEX_END; i++)
+    for (i = 0; i < ARRAY_COUNT(sKantoDexNumToNationalDexNum); i++)
     {
         if (sKantoDexNumToNationalDexNum[i] == natDexNum)
         {
-            return i;
+            return i + KANTO_DEX_START;
         }
     }
     return KANTO_DEX_NONE;
@@ -5258,7 +5258,7 @@ bool32 IsSpeciesInKantoDex(u16 species)
 enum NationalDexOrder KantoToNationalDexNum(enum KantoDexOrder kantoNum)
 {
     if (KANTO_DEX_START <= kantoNum && kantoNum < KANTO_DEX_END)
-        return sKantoDexNumToNationalDexNum[kantoNum];
+        return sKantoDexNumToNationalDexNum[kantoNum - KANTO_DEX_START];
     return NATIONAL_DEX_NONE;
 }
 

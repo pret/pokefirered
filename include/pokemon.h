@@ -836,7 +836,7 @@ enum KantoDexOrder NationalToKantoDexNum(enum NationalDexOrder natDexNum);
 enum NationalDexOrder HoennToNationalDexNum(enum HoennDexOrder hoennNum);
 u16 KantoNumToSpecies(enum KantoDexOrder kantoNum);
 u16 HoennNumToSpecies(enum HoennDexOrder hoennNum);
-void DrawSpindaSpots(u32 species, u32 personality, u8 *dest, bool8 isFrontPic);
+void DrawSpindaSpots(u32 personality, u8 *dest, bool32 isSecondFrame);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 u8 GetPlayerFlankId(void);
 u16 GetLinkTrainerFlankId(u8 linkPlayerId);

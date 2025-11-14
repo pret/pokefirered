@@ -20,7 +20,7 @@ void StopPlayerAvatar(void);
 void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);
 u8 GetPlayerAvatarGraphicsIdByStateId(u8);
 void SetPlayerAvatarStateMask(u8 mask);
-void AlignFishingAnimationFrames(struct Sprite *sprite);
+void AlignFishingAnimationFrames();
 void CreateStopSurfingTask_NoMusicChange(u8 direction);
 void SavePlayerFacingDirectionForTeleport(u8 direction);
 void SetPlayerAvatarTransitionFlags(u16 flags);
@@ -68,5 +68,7 @@ u8 GetRSAvatarGraphicsIdByGender(u8 gender);
 //sideways stairs
 u8 GetRightSideStairsDirection(u8 direction);
 u8 GetLeftSideStairsDirection(u8 direction);
+void SetPlayerAvatarFishing(u8 direction);
+bool32 MetatileAtCoordsIsWaterTile(s16 x, s16 y);
 
 #endif //GUARD_FIELD_PLAYER_AVATAR_H

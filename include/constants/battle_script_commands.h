@@ -125,48 +125,59 @@ enum CmdVarious
 
 #define PARTY_SCREEN_OPTIONAL (1 << 7) // Flag for first argument to openpartyscreen
 
+enum SetMoveEffectFlags
+{
+    NO_FLAGS = 0,
+    EFFECT_PRIMARY = (1 << 0),
+    EFFECT_CERTAIN = (1 << 1),
+};
+
 // cases for Cmd_moveend - Order matters!
 enum MoveEndEffects
 {
     MOVEEND_SET_VALUES,
     MOVEEND_PROTECT_LIKE_EFFECT,
+    MOVEEND_GRUDGE,
+    MOVEEND_DESTINY_BOND,
     MOVEEND_ABSORB,
     MOVEEND_RAGE,
     MOVEEND_SYNCHRONIZE_TARGET,
     MOVEEND_ABILITIES,
     MOVEEND_ABILITIES_ATTACKER,
-    MOVEEND_STATUS_IMMUNITY_ABILITIES,
+    MOVEEND_STATUS_IMMUNITY_ABILITIES, // TODO: Do berries come before????
     MOVEEND_SYNCHRONIZE_ATTACKER,
     MOVEEND_ATTACKER_INVISIBLE,
     MOVEEND_ATTACKER_VISIBLE,
     MOVEEND_TARGET_VISIBLE,
     MOVEEND_ITEM_EFFECTS_TARGET,
-    MOVEEND_ITEM_EFFECTS_ALL,
+    MOVEEND_ITEM_EFFECTS_ATTACKER_1,
     MOVEEND_SYMBIOSIS,
-    MOVEEND_KINGSROCK, // These item effects will occur each strike of a multi-hit move
     MOVEEND_SUBSTITUTE,
     MOVEEND_SKY_DROP_CONFUSE,
     MOVEEND_UPDATE_LAST_MOVES,
     MOVEEND_MIRROR_MOVE,
     MOVEEND_DEFROST,
     MOVEEND_NEXT_TARGET, // Everything up until here is handled for each strike of a spread move
+    MOVEEND_HP_THRESHHOLD_ITEMS_TARGET, // Activation only during a multi hit move / ability (Parental Bond)
     MOVEEND_MULTIHIT_MOVE,
     MOVEEND_MOVE_BLOCK,
-    MOVEEND_ITEM_EFFECTS_ATTACKER,
+    MOVEEND_ITEM_EFFECTS_ATTACKER_2,
     MOVEEND_ABILITY_BLOCK,
-    MOVEEND_SHEER_FORCE, // If move is Sheer Force affected, skip until Opportunist
+    MOVEEND_SHEER_FORCE, // If move is Sheer Force affected, skip to Hit Escape + One
     MOVEEND_COLOR_CHANGE, // Color Change / Berserk / Anger Shell
-    MOVEEND_RED_CARD, 
+    MOVEEND_KEE_MARANGA_HP_THRESHOLD_ITEM_TARGET,
+    MOVEEND_RED_CARD,
     MOVEEND_EJECT_BUTTON,
-    MOVEEND_LIFEORB_SHELLBELL, 
+    MOVEEND_LIFE_ORB_SHELL_BELL,
     MOVEEND_FORM_CHANGE,
     MOVEEND_EMERGENCY_EXIT,
     MOVEEND_EJECT_PACK,
     MOVEEND_HIT_ESCAPE,
+    MOVEEND_ITEMS_EFFECTS_ALL,
+    MOVEEND_WHITE_HERB,
     MOVEEND_OPPORTUNIST,
     MOVEEND_MIRROR_HERB,
     MOVEEND_PICKPOCKET,
-    MOVEEND_WHITE_HERB,
     MOVEEND_THIRD_MOVE_BLOCK,
     MOVEEND_CHANGED_ITEMS,
     MOVEEND_SAME_MOVE_TURNS,
@@ -174,6 +185,9 @@ enum MoveEndEffects
     MOVEEND_DANCER,
     MOVEEND_PURSUIT_NEXT_ACTION,
     MOVEEND_COUNT,
+
+    // This guarantees a correct jump if new moveends are added directly after MOVEEND_HIT_ESCAPE
+    MOVEEND_JUMP_TO_HIT_ESCAPE_PLUS_ONE = (MOVEEND_HIT_ESCAPE + 1),
 };
 
 // switch cases
@@ -193,6 +207,12 @@ enum TriggerOnFieldStatus
     ON_ANY,
     ON_TERRAIN,
     ON_WEATHER,
+};
+
+enum HealthUpdate
+{
+    PASSIVE_HP_UPDATE,
+    MOVE_DAMAGE_HP_UPDATE,
 };
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

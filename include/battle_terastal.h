@@ -4,11 +4,11 @@
 void ActivateTera(u32 battler);
 void ApplyBattlerVisualsForTeraAnim(u32 battler);
 bool32 CanTerastallize(u32 battler);
-u32 GetBattlerTeraType(u32 battler);
-void ExpendTypeStellarBoost(u32 battler, u32 type);
-bool32 IsTypeStellarBoosted(u32 battler, u32 type);
+enum Type GetBattlerTeraType(u32 battler);
+void ExpendTypeStellarBoost(u32 battler, enum Type type);
+bool32 IsTypeStellarBoosted(u32 battler, enum Type type);
 uq4_12_t GetTeraMultiplier(struct DamageContext *ctx);
 
-u16 GetTeraTypeRGB(u32 type);
+u16 GetTeraTypeRGB(enum Type type);
 
 #endif

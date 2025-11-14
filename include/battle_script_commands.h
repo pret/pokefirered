@@ -40,16 +40,15 @@ union TRANSPARENT StatChangeFlags
     };
 };
 
-s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, enum Ability abilityAtk, enum Ability abilityDef, enum ItemHoldEffect holdEffectAtk);
-s32 CalcCritChanceStageGen1(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, enum Ability abilityAtk, enum Ability abilityDef, enum ItemHoldEffect holdEffectAtk);
+s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, enum Ability abilityAtk, enum Ability abilityDef, enum HoldEffect holdEffectAtk);
+s32 CalcCritChanceStageGen1(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, enum Ability abilityAtk, enum Ability abilityDef, enum HoldEffect holdEffectAtk);
 s32 GetCritHitOdds(s32 critChanceIndex);
-u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, enum Ability atkAbility, enum Ability defAbility, u32 atkHoldEffect, u32 defHoldEffect);
 bool32 HasBattlerActedThisTurn(u32 battler);
 u32 GetBattlerTurnOrderNum(u32 battler);
 bool32 NoAliveMonsForBattlerSide(u32 battler);
 bool32 NoAliveMonsForPlayer(void);
 bool32 NoAliveMonsForEitherParty(void);
-void SetMoveEffect(u32 battler, u32 effectBattler, bool32 primary, bool32 certain);
+void SetMoveEffect(u32 battler, u32 effectBattler, enum MoveEffect moveEffect, const u8 *battleScript, enum SetMoveEffectFlags effectFlags);
 bool32 CanBattlerSwitch(u32 battlerId);
 void BattleDestroyYesNoCursorAt(u8 cursorPosition);
 void BattleCreateYesNoCursorAt(u8 cursorPosition);
@@ -67,8 +66,8 @@ bool32 TryResetBattlerStatChanges(u8 battler);
 bool32 CanCamouflage(u8 battlerId);
 void StealTargetItem(u8 battlerStealer, u8 battlerItem);
 u8 GetCatchingBattler(void);
-u32 GetHighestStatId(u32 battlerId);
-bool32 ProteanTryChangeType(u32 battler, enum Ability ability, u32 move, u32 moveType);
+enum Stat GetHighestStatId(u32 battlerId);
+bool32 ProteanTryChangeType(u32 battler, enum Ability ability, u32 move, enum Type moveType);
 bool32 IsMoveNotAllowedInSkyBattles(u32 move);
 bool32 DoSwitchInAbilities(u32 battlerId);
 u8 GetFirstFaintedPartyIndex(u8 battlerId);
@@ -76,6 +75,7 @@ bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler);
 void SaveBattlerTarget(u32 battler);
 void SaveBattlerAttacker(u32 battler);
 bool32 CanBurnHitThaw(u16 move);
+bool32 EmergencyExitCanBeTriggered(u32 battler);
 bool32 IsMonGettingExpSentOut(void);
 
 extern void (*const gBattleScriptingCommandsTable[])(void);

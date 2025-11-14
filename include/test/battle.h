@@ -194,21 +194,22 @@
  *         ASSUME(GetMoveEffect(MOVE_POISON_STING) == EFFECT_POISON_HIT);
  *     }
  *
- * SINGLE_BATTLE_TEST(name, results...) and DOUBLE_BATTLE_TEST(name, results...)
- * Define single- and double- battles. The names should start with the
- * name of the mechanic being tested so that it is easier to run all the
- * related tests. results contains variable declarations to be placed
- * into the results array which is available in PARAMETRIZEd tests.
- * The main differences for doubles are:
+ * SINGLE_BATTLE_TEST(name, results...), DOUBLE_BATTLE_TEST(name, results...), MULTI_BATTLE_TEST(name, results...), 
+ * TWO_VS_ONE_BATTLE_TEST(name, results...), and ONE_VS_TWO_BATTLE_TEST(name, results...)
+ * Define single-, double-, 2v2-multi-, 2v1-multi-, and 1v2- battles. The names should start with 
+ * the name of the mechanic being tested so that it is easier to run all the related tests. results contains variable
+ * declarations to be placed into the `results` array which is available in tests using `PARAMETRIZE` commands.
+ * The main differences for doubles, 2v2, 2v1, and 1v2 are:
  * - Move targets sometimes need to be explicit.
  * - Instead of player and opponent there is playerLeft, playerRight,
  *   opponentLeft, and opponentRight.
  *
- * AI_SINGLE_BATTLE_TEST(name, results...) and AI_DOUBLE_BATTLE_TEST(name, results...)
+ * AI_SINGLE_BATTLE_TEST(name, results...), AI_DOUBLE_BATTLE_TEST(name, results...), 
+ * AI_MULTI_BATTLE_TEST(name, results...), AI_TWO_VS_ONE_BATTLE_TEST(name, results...), and AI_ONE_VS_TWO_BATTLE_TEST(name, results...)
  * Define battles where opponent mons are controlled by AI, the same that runs
  * when battling regular Trainers. The flags for AI should be specified by
  * the AI_FLAGS command.
- * The rules remain the same as with the SINGLE and DOUBLE battle tests
+ * The rules remain the same as with the SINGLE, DOUBLE, MULTI, TWO_VS_ONE, and ONE_VS_TWO battle tests with some differences:
  * with some differences:
  * - opponent's action is specified by the EXPECT_MOVE(s) / EXPECT_SEND_OUT / EXPECT_SWITCH commands
  * - we don't control what opponent actually does, instead we make sure the opponent does what we expect it to do
@@ -333,10 +334,39 @@
  * Note if Moves is specified then MOVE will not automatically add moves
  * to the moveset.
  *
+ * For tests using MULTI_BATTLE_TEST, AI_MULTI_BATTLE_TEST, TWO_VS_ONE_BATTLE_TEST, 
+ * AI_TWO_VS_ONE_BATTLE_TEST, ONE_VS_TWO_BATTLE_TEST, and AI_ONE_VS_TWO_BATTLE_TEST, 
+ * the below must be used instead of PLAYER(species) and OPPONENT(species).
+ * MULTI_PLAYER(species), MULTI_PARTNER(species), MULTI_OPPONENT_A(species), and 
+ * MULTI_OPPONENT_B(species) Adds the species to the player's, player partner's, 
+ * opponent A's, or opponent B's party, respectively.
+ * Pokemon can be customised as per the guidance for PLAYER(species) and OPPONENT(species).
+ * The functions assign the Pokémon to the party of the trainer at B_POSITION_PLAYER_LEFT, 
+ * B_POSITION_PLAYER_RIGHT, B_POSITION_OPPONENT_LEFT, and B_POSITION_OPPONENT_RIGHT, respectively.
+ * MULTI_PLAYER(species) and MULTI_OPPONENT_A(species) set Pokémon starting at party index 0,
+ * while MULTI_PARTNER(species) and MULTI_OPPONENT_B(species) set Pokémon starting at party 
+ * index 3.
+ * For ONE_VS_TWO tests, MULTI_PLAYER(species) must be used for all player-side Pokémon,
+ * and for TWO_VS_ONE tests, MULTI_OPPONENT_A(species) must be used for all opponent-side
+ * Pokémon. 
+ * All MULTI_PLAYER(species) Pokémon must be set before any MULTI_PARTNER(species) Pokémon,
+ * and all MULTI_OPPONENT_A(species) must be set before any MULTI_OPPONENT_B(species) Pokémon,
+ * else Pokémon will be set in the incorrect parties in the test.
+ * Note where a side in a test has two trainers, the test setup manages the assigning of correct
+ * multi-party orders, therefore when using functions such as SEND_OUT, Player and Opponent A 
+ * Pokémon may be referenced using indexes 0, 1, and 2, and Player's Partner and Opponent B 
+ * Pokémon may be referenced using indexes 3, 4, and 5.
+ *
  * AI_FLAGS
- * Specifies which AI flags are run during the test. Has use only for AI tests.
+ * Specifies which AI flags are run for all battlers during the test. Has use only for AI tests.
  * The most common combination is  AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT)
  * which is the general 'smart' AI.
+ * 
+ * BATTLER_AI_FLAGS
+ * Specifies additional AI flags to be applied to specific battlers (battler 0/1/2/3). Has use only for AI tests.
+ * Must be used strictly after AI_FLAGS(flags), which overwrites all existing flags.
+ * Example: BATTLER_AI_FLAGS(3, AI_FLAG_RISKY) used after AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT)
+ * will set AI_FLAG_RISKY to only battler3 (Opponent B), in addition to the flags set by AI_FLAGS.
  *
  * WHEN
  * Contains the choices that battlers make during the battle.
@@ -537,10 +567,13 @@
 #define MAX_QUEUED_EVENTS 30
 #define MAX_EXPECTED_ACTIONS 10
 
-enum { BATTLE_TEST_SINGLES, BATTLE_TEST_DOUBLES, BATTLE_TEST_WILD, BATTLE_TEST_AI_SINGLES, BATTLE_TEST_AI_DOUBLES };
+enum { BATTLE_TEST_SINGLES, BATTLE_TEST_DOUBLES, BATTLE_TEST_WILD, BATTLE_TEST_AI_SINGLES, BATTLE_TEST_AI_DOUBLES, BATTLE_TEST_MULTI, BATTLE_TEST_AI_MULTI, BATTLE_TEST_TWO_VS_ONE, BATTLE_TEST_AI_TWO_VS_ONE, BATTLE_TEST_ONE_VS_TWO, BATTLE_TEST_AI_ONE_VS_TWO };
 
 typedef void (*SingleBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *);
 typedef void (*DoubleBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *);
+typedef void (*MultiBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *);
+typedef void (*TwoVsOneBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *);
+typedef void (*OneVsTwoBattleTestFunction)(void *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *);
 
 struct BattleTest
 {
@@ -549,6 +582,9 @@ struct BattleTest
     {
         SingleBattleTestFunction singles;
         DoubleBattleTestFunction doubles;
+        MultiBattleTestFunction multi;
+        TwoVsOneBattleTestFunction two_vs_one;
+        OneVsTwoBattleTestFunction one_vs_two;
     } function;
     size_t resultsSize;
 };
@@ -622,18 +658,12 @@ struct QueuedEvent
     } as;
 };
 
-struct TurnRNG
-{
-    u16 tag;
-    u16 value;
-};
-
 struct BattlerTurn
 {
     u8 hit:2;
     u8 criticalHit:2;
     u8 secondaryEffect:2;
-    struct TurnRNG rng;
+    struct RiggedRNG rng;
 };
 
 struct ExpectedAIAction
@@ -688,11 +718,11 @@ struct BattleTestData
 
     u8 playerPartySize;
     u8 opponentPartySize;
-    u8 explicitMoves[NUM_BATTLE_SIDES];
+    u8 explicitMoves[MAX_BATTLERS_COUNT];
     bool8 hasExplicitSpeeds;
-    u8 explicitSpeeds[NUM_BATTLE_SIDES];
+    u8 explicitSpeeds[MAX_BATTLERS_COUNT];
     u16 slowerThan[NUM_BATTLE_SIDES][PARTY_SIZE];
-    u8 currentSide;
+    u8 currentPosition;
     u8 currentPartyIndex;
     struct Pokemon *currentMon;
     u8 gender;
@@ -700,6 +730,7 @@ struct BattleTestData
     bool8 isShiny;
     enum Ability forcedAbilities[NUM_BATTLE_SIDES][PARTY_SIZE];
     u8 chosenGimmick[NUM_BATTLE_SIDES][PARTY_SIZE];
+    u8 forcedEnvironment;
 
     u8 currentMonIndexes[MAX_BATTLERS_COUNT];
     u8 turnState;
@@ -767,6 +798,8 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 #define R_APPEND_TRUE(...) __VA_OPT__(FIRST(__VA_ARGS__), TRUE RECURSIVELY(R_FOR_EACH(APPEND_COMMA_TRUE, EXCEPT_1(__VA_ARGS__))))
 
 #define AI_TRAINER_NAME "{PKMN} TRAINER LEAF"
+#define AI_TRAINER_2_NAME "{PKMN} TRAINER RED"
+#define AI_PARTNER_NAME "{PKMN} TRAINER 1"
 
 /* Test */
 
@@ -812,6 +845,60 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
     }; \
     static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *playerLeft, struct BattlePokemon *opponentLeft, struct BattlePokemon *playerRight, struct BattlePokemon *opponentRight)
 
+    #define BATTLE_TEST_ARGS_MULTI(_name, _type, ...) \
+    struct CAT(Result, __LINE__) { RECURSIVELY(R_FOR_EACH(APPEND_SEMICOLON, __VA_ARGS__)) }; \
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *); \
+    __attribute__((section(".tests"), used)) static const struct Test CAT(sTest, __LINE__) = \
+    { \
+        .name = _name, \
+        .filename = __FILE__, \
+        .runner = &gBattleTestRunner, \
+        .sourceLine = __LINE__, \
+        .data = (void *)&(const struct BattleTest) \
+        { \
+            .type = _type, \
+            .function = { .multi = (MultiBattleTestFunction)CAT(Test, __LINE__) }, \
+            .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
+        }, \
+    }; \
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *playerLeft, struct BattlePokemon *opponentLeft, struct BattlePokemon *playerRight, struct BattlePokemon *opponentRight)
+
+#define BATTLE_TEST_ARGS_TWO_VS_ONE(_name, _type, ...) \
+    struct CAT(Result, __LINE__) { RECURSIVELY(R_FOR_EACH(APPEND_SEMICOLON, __VA_ARGS__)) }; \
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *); \
+    __attribute__((section(".tests"), used)) static const struct Test CAT(sTest, __LINE__) = \
+    { \
+        .name = _name, \
+        .filename = __FILE__, \
+        .runner = &gBattleTestRunner, \
+        .sourceLine = __LINE__, \
+        .data = (void *)&(const struct BattleTest) \
+        { \
+            .type = _type, \
+            .function = { .two_vs_one = (TwoVsOneBattleTestFunction)CAT(Test, __LINE__) }, \
+            .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
+        }, \
+    }; \
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *playerLeft, struct BattlePokemon *opponentLeft, struct BattlePokemon *playerRight, struct BattlePokemon *opponentRight)
+
+#define BATTLE_TEST_ARGS_ONE_VS_TWO(_name, _type, ...) \
+    struct CAT(Result, __LINE__) { RECURSIVELY(R_FOR_EACH(APPEND_SEMICOLON, __VA_ARGS__)) }; \
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *, const u32, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *, struct BattlePokemon *); \
+    __attribute__((section(".tests"), used)) static const struct Test CAT(sTest, __LINE__) = \
+    { \
+        .name = _name, \
+        .filename = __FILE__, \
+        .runner = &gBattleTestRunner, \
+        .sourceLine = __LINE__, \
+        .data = (void *)&(const struct BattleTest) \
+        { \
+            .type = _type, \
+            .function = { .one_vs_two = (OneVsTwoBattleTestFunction)CAT(Test, __LINE__) }, \
+            .resultsSize = sizeof(struct CAT(Result, __LINE__)), \
+        }, \
+    }; \
+    static void CAT(Test, __LINE__)(struct CAT(Result, __LINE__) *results, const u32 i, struct BattlePokemon *playerLeft, struct BattlePokemon *opponentLeft, struct BattlePokemon *playerRight, struct BattlePokemon *opponentRight)
+
 
 #define SINGLE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_SINGLE(_name, BATTLE_TEST_SINGLES, __VA_ARGS__)
 #define WILD_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_SINGLE(_name, BATTLE_TEST_WILD, __VA_ARGS__)
@@ -819,6 +906,15 @@ extern struct BattleTestRunnerState *const gBattleTestRunnerState;
 
 #define DOUBLE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_DOUBLE(_name, BATTLE_TEST_DOUBLES, __VA_ARGS__)
 #define AI_DOUBLE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_DOUBLE(_name, BATTLE_TEST_AI_DOUBLES, __VA_ARGS__)
+
+#define MULTI_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_MULTI(_name, BATTLE_TEST_MULTI, __VA_ARGS__)
+#define AI_MULTI_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_MULTI(_name, BATTLE_TEST_AI_MULTI, __VA_ARGS__)
+
+#define TWO_VS_ONE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_TWO_VS_ONE(_name, BATTLE_TEST_TWO_VS_ONE, __VA_ARGS__)
+#define AI_TWO_VS_ONE_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_TWO_VS_ONE(_name, BATTLE_TEST_AI_TWO_VS_ONE, __VA_ARGS__)
+
+#define ONE_VS_TWO_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_ONE_VS_TWO(_name, BATTLE_TEST_ONE_VS_TWO, __VA_ARGS__)
+#define AI_ONE_VS_TWO_BATTLE_TEST(_name, ...) BATTLE_TEST_ARGS_ONE_VS_TWO(_name, BATTLE_TEST_AI_ONE_VS_TWO, __VA_ARGS__)
 
 /* Parametrize */
 
@@ -848,13 +944,18 @@ struct moveWithPP {
 
 #define RNGSeed(seed) RNGSeed_(__LINE__, seed)
 #define AI_FLAGS(flags) AIFlags_(__LINE__, flags)
+#define BATTLER_AI_FLAGS(battler, flags) BattlerAIFlags_(__LINE__, battler, flags)
 #define AI_LOG AILogScores(__LINE__)
 
 #define FLAG_SET(flagId) SetFlagForTest(__LINE__, flagId)
 #define WITH_CONFIG(configTag, value) TestSetConfig(__LINE__, configTag, value)
 
-#define PLAYER(species) for (OpenPokemon(__LINE__, B_SIDE_PLAYER, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
-#define OPPONENT(species) for (OpenPokemon(__LINE__, B_SIDE_OPPONENT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
+#define PLAYER(species) for (OpenPokemon(__LINE__, B_POSITION_PLAYER_LEFT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
+#define OPPONENT(species) for (OpenPokemon(__LINE__, B_POSITION_OPPONENT_LEFT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
+#define MULTI_PLAYER(species) for (OpenPokemonMulti(__LINE__, B_POSITION_PLAYER_LEFT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
+#define MULTI_OPPONENT_A(species) for (OpenPokemonMulti(__LINE__, B_POSITION_OPPONENT_LEFT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
+#define MULTI_PARTNER(species) for (OpenPokemonMulti(__LINE__, B_POSITION_PLAYER_RIGHT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
+#define MULTI_OPPONENT_B(species) for (OpenPokemonMulti(__LINE__, B_POSITION_OPPONENT_RIGHT, species); gBattleTestRunnerState->data.currentMon; ClosePokemon(__LINE__))
 
 #define Gender(gender) Gender_(__LINE__, gender)
 #define Nature(nature) Nature_(__LINE__, nature)
@@ -884,15 +985,18 @@ struct moveWithPP {
 #define TeraType(teraType) TeraType_(__LINE__, teraType)
 #define Shadow(isShadow) Shadow_(__LINE__, isShadow)
 #define Shiny(isShiny) Shiny_(__LINE__, isShiny)
+#define Environment(environment) Environment_(__LINE__, environment)
 
 void SetFlagForTest(u32 sourceLine, u16 flagId);
 void TestSetConfig(u32 sourceLine, enum GenConfigTag configTag, u32 value);
 void ClearFlagAfterTest(void);
-void OpenPokemon(u32 sourceLine, u32 side, u32 species);
+void OpenPokemon(u32 sourceLine, enum BattlerPosition position, u32 species);
+void OpenPokemonMulti(u32 sourceLine, enum BattlerPosition position, u32 species);
 void ClosePokemon(u32 sourceLine);
 
 void RNGSeed_(u32 sourceLine, rng_value_t seed);
 void AIFlags_(u32 sourceLine, u64 flags);
+void BattlerAIFlags_(u32 sourceLine, u32 battler, u64 flags);
 void AILogScores(u32 sourceLine);
 void Gender_(u32 sourceLine, u32 gender);
 void Nature_(u32 sourceLine, u32 nature);
@@ -919,9 +1023,26 @@ void Status1_(u32 sourceLine, u32 status1);
 void OTName_(u32 sourceLine, const u8 *otName);
 void DynamaxLevel_(u32 sourceLine, u32 dynamaxLevel);
 void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor);
-void TeraType_(u32 sourceLine, u32 teraType);
+void TeraType_(u32 sourceLine, enum Type teraType);
 void Shadow_(u32 sourceLine, bool32 isShadow);
 void Shiny_(u32 sourceLine, bool32 isShiny);
+void Environment_(u32 sourceLine, u32 environment);
+
+static inline bool8 IsMultibattleTest(void)
+{
+    if (TESTING)
+    {
+        if (((gBattleTypeFlags & BATTLE_MULTI_TEST) == BATTLE_MULTI_TEST)
+        || ((gBattleTypeFlags & BATTLE_TWO_VS_ONE_TEST) == BATTLE_TWO_VS_ONE_TEST))
+            return TRUE;
+        else
+            return FALSE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
 
 // Created for easy use of EXPECT_MOVES, so the user can provide 1, 2, 3 or 4 moves for AI which can pass the test.
 struct FourMoves
@@ -972,7 +1093,7 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 #define SKIP_TURN(battler) SkipTurn(__LINE__, battler)
 #define SEND_OUT(battler, partyIndex) SendOut(__LINE__, battler, partyIndex)
 #define USE_ITEM(battler, ...) UseItem(__LINE__, battler, (struct ItemContext) { R_APPEND_TRUE(__VA_ARGS__) })
-#define WITH_RNG(tag, value) rng: ((struct TurnRNG) { tag, value })
+#define WITH_RNG(tag, value) rng: ((struct RiggedRNG) { tag, value })
 
 struct MoveContext
 {
@@ -997,7 +1118,7 @@ struct MoveContext
     u16 explicitNotExpected:1;
     struct BattlePokemon *target;
     bool8 explicitTarget;
-    struct TurnRNG rng;
+    struct RiggedRNG rng;
     bool8 explicitRNG;
 };
 
@@ -1009,7 +1130,7 @@ struct ItemContext
     u16 explicitPartyIndex:1;
     u16 move;
     u16 explicitMove:1;
-    struct TurnRNG rng;
+    struct RiggedRNG rng;
     u16 explicitRNG:1;
 };
 

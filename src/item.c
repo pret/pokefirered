@@ -913,7 +913,7 @@ u32 GetItemSellPrice(u32 itemId)
     return GetItemPrice(itemId) / ITEM_SELL_FACTOR;
 }
 
-bool32 IsHoldEffectChoice(enum ItemHoldEffect holdEffect)
+bool32 IsHoldEffectChoice(enum HoldEffect holdEffect)
 {
     return holdEffect == HOLD_EFFECT_CHOICE_BAND
         || holdEffect == HOLD_EFFECT_CHOICE_SCARF
@@ -939,6 +939,5 @@ bool8 IsItemTMHM(u16 itemId)
 
 bool8 IsItemBall(u16 itemId)
 {
-    itemId = SanitizeItemId(itemId);
-    return FIRST_BALL <= itemId && itemId <= LAST_BALL;
+    return GetPocketByItemId(itemId) == POCKET_POKE_BALLS;
 }

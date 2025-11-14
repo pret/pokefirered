@@ -74,7 +74,6 @@ void SeedWildEncounterRng(u16 randVal);
 void ResetEncounterRateModifiers(void);
 bool8 TryStandardWildEncounter(u32 currMetatileAttrs);
 bool8 TryDoDoubleWildBattle(void);
-u32 CalculateChainFishingShinyRolls(void);
 void CreateWildMon(u16 species, u8 level, u8 unownSlot);
 u16 GetCurrentMapWildMonHeaderId(void);
 u8 ChooseWildMonIndex_Land(void);

@@ -27,7 +27,7 @@ struct RecordedBattleSave
     u8 frontierBrainSymbol;
     u8 battleScene:1;
     u8 textSpeed:3;
-    u32 AI_scripts;
+    u64 AI_scripts[MAX_BATTLERS_COUNT];
     u8 recordMixFriendName[PLAYER_NAME_LENGTH + 1];
     u8 recordMixFriendClass;
     u8 apprenticeId;
@@ -75,7 +75,7 @@ u8 GetBattleSceneInRecordedBattle(void);
 u8 GetTextSpeedInRecordedBattle(void);
 void RecordedBattle_CopyBattlerMoves(u32 battler);
 void RecordedBattle_CheckMovesetChanges(u8 mode);
-u32 GetAiScriptsInRecordedBattle(void);
+u64 GetAiScriptsInRecordedBattle(u32 battler);
 void RecordedBattle_SetPlaybackFinished(void);
 bool8 RecordedBattle_CanStopPlayback(void);
 u8 GetBattlerLinkPlayerGender(u32 battler);

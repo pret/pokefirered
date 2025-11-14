@@ -28,6 +28,8 @@
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "test/battle.h"
+#include "test/test_runner_battle.h"
 
 static void RecordedPlayerHandleDrawTrainerPic(u32 battler);
 static void RecordedPlayerHandleTrainerSlideBack(u32 battler);
@@ -40,7 +42,6 @@ static void RecordedPlayerHandleStatusAnimation(u32 battler);
 static void RecordedPlayerHandleIntroTrainerBallThrow(u32 battler);
 static void RecordedPlayerHandleDrawPartyStatusSummary(u32 battler);
 static void RecordedPlayerHandleEndLinkBattle(u32 battler);
-
 static void RecordedPlayerBufferRunCommand(u32 battler);
 
 static void (*const sRecordedPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
@@ -147,8 +148,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
             gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim = FALSE;
             gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim = FALSE;
 
-            FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-            FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+            FreeShinyStars();
 
             HandleLowHpMusicChange(GetBattlerMon(battler), battler);
             if (IsDoubleBattle())
@@ -276,43 +276,54 @@ static void RecordedPlayerHandleDrawTrainerPic(u32 battler)
     s16 xPos, yPos;
     u32 trainerPicId;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
+    // Sets Multibattle test player sprites to not be Hiker
+    if (IsMultibattleTest())
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            trainerPicId = GetBattlerLinkPlayerGender(battler);
-        else
-            trainerPicId = gLinkPlayers[gRecordedBattleMultiplayerId].gender;
-    }
-    else
-    {
-        trainerPicId = gLinkPlayers[0].gender;
-    }
-
-    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-    {
-        if ((GetBattlerPosition(battler) & BIT_FLANK) != 0) // second mon
-            xPos = 90;
-        else // first mon
-            xPos = 32;
-
+        trainerPicId = TRAINER_BACK_PIC_RED;
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-        {
-            xPos = 90;
-            yPos = 80;
-        }
+            xPos = 32;
         else
-        {
-            yPos = (8 - gTrainerBacksprites[trainerPicId].coordinates.size) * 4 + 80;
-        }
-
-    }
-    else
-    {
-        xPos = 80;
+            xPos = 80;
         yPos = (8 - gTrainerBacksprites[trainerPicId].coordinates.size) * 4 + 80;
     }
+    else 
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
+        {
+            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+                trainerPicId = GetBattlerLinkPlayerGender(battler);
+            else
+                trainerPicId = gLinkPlayers[gRecordedBattleMultiplayerId].gender;
+        }
+        else
+            trainerPicId = gLinkPlayers[0].gender;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        {
+            if ((GetBattlerPosition(battler) & BIT_FLANK) != 0) // second mon
+                xPos = 90;
+            else // first mon
+                xPos = 32;
+
+            // !TESTING added as otherwise first test battle sprite is positioned incorrectly
+            if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && !TESTING)
+            {
+                xPos = 90;
+                yPos = 80;
+            }
+            else
+            {
+                yPos = (8 - gTrainerBacksprites[trainerPicId].coordinates.size) * 4 + 80;
+            }
+        }
+        else
+        {
+            xPos = 80;
+            yPos = (8 - gTrainerBacksprites[trainerPicId].coordinates.size) * 4 + 80;
+        }
+    }
+
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && !TESTING)
         isFrontPic = TRUE;
     else
         isFrontPic = FALSE;

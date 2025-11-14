@@ -39,7 +39,10 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 // #include "trainer_hill.h"
+#include "trainer_tower.h"
 #include "test_runner.h"
+#include "test/battle.h"
+#include "test/test_runner_battle.h"
 
 static void OpponentHandleDrawTrainerPic(u32 battler);
 static void OpponentHandleTrainerSlideBack(u32 battler);
@@ -160,8 +163,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
                 gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
                 gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim = FALSE;
                 gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim = FALSE;
-                FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-                FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+                FreeShinyStars();
             }
             else
             {
@@ -175,8 +177,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
                 if (!gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim
                  && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim)
                 {
-                    FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-                    FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+                    FreeShinyStars();
                 }
                 else
                 {
@@ -354,18 +355,40 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
 static void OpponentHandleDrawTrainerPic(u32 battler)
 {
     s16 xPos;
-    u32 trainerPicId = OpponentGetTrainerPicId(battler);
-
-    if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT)
+    u32 trainerPicId;
+    
+    // Sets Multibattle test opponent sprites to not be Hiker
+    if (IsMultibattleTest())
     {
-        if ((GetBattlerPosition(battler) & BIT_FLANK) != 0) // second mon
+        if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_LEFT)
+        {
+            trainerPicId = TRAINER_PIC_LEAF;
+            if (!(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS))
+                xPos = 176;
+            else
+                xPos = 200;
+        }
+        else
+        {
+            trainerPicId = TRAINER_PIC_RED;
             xPos = 152;
-        else // first mon
-            xPos = 200;
+        }
     }
     else
     {
-        xPos = 176;
+        trainerPicId = OpponentGetTrainerPicId(battler);
+    
+        if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT)
+        {
+            if ((GetBattlerPosition(battler) & BIT_FLANK) != 0) // second mon
+                xPos = 152;
+           else // first mon
+                xPos = 200;
+        }
+        else
+        {
+            xPos = 176;
+        }
     }
 
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, TRUE, xPos, (8 - gTrainerSprites[trainerPicId].frontPicCoords.size) * 4 + 40, -1);
@@ -520,6 +543,12 @@ static void OpponentHandleChoosePokemon(u32 battler)
     {
         if (IsSwitchOutEffect(GetMoveEffect(gCurrentMove)) || gAiLogicData->ejectButtonSwitch || gAiLogicData->ejectPackSwitch)
             switchType = SWITCH_MID_BATTLE;
+
+        // reset the AI data to consider the correct on-field state at time of switch
+        SetBattlerAiData(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT), gAiLogicData);
+        if (IsDoubleBattle())
+            SetBattlerAiData(GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT), gAiLogicData);
+
         chosenMonId = GetMostSuitableMonToSwitchInto(battler, switchType);
         if (chosenMonId == PARTY_SIZE)
         {

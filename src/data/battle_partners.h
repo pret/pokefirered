@@ -29,7 +29,7 @@
 #line 10
         .trainerName = _("STEVEN"),
 #line 11
-        .trainerClass = TRAINER_CLASS_RIVAL_LATE,
+        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
 #line 12
         .trainerPic = TRAINER_PIC_RS_BRENDAN_1,
         .encounterMusic_gender =

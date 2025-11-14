@@ -31,7 +31,8 @@ ASSUMPTIONS
 // IV combinations sourced from https://www.smogon.com/forums/threads/hidden-power-iv-combinations.78083/
 SINGLE_BATTLE_TEST("Hidden Power's type is determined by IVs")
 {
-    u32 type, j, foeType, foeSpecies, foeItem;
+    enum Type type, foeType, j;
+    u32 foeSpecies, foeItem;
     u32 hp, atk, def, spAtk, spDef, speed;
     bool32 hidden;
 

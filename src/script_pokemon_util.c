@@ -149,14 +149,15 @@ void SetTeraType(struct ScriptContext *ctx)
  * if side/slot are assigned, it will create the mon at the assigned party location
  * if slot == PARTY_SIZE, it will give the mon to first available party or storage slot
  */
-static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, enum PokeBall ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 gmaxFactor, u8 teraType, u8 dmaxLevel)
+static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, enum PokeBall ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, enum ShinyMode shinyMode, bool8 gmaxFactor, enum Type teraType, u8 dmaxLevel)
 {
-    u16 nationalDexNum;
+    enum NationalDexOrder nationalDexNum;
     int sentToPc;
     struct Pokemon mon;
     u32 i;
     u8 genderRatio = gSpeciesInfo[species].genderRatio;
     u16 targetSpecies;
+    bool32 isShiny;
 
     // check whether to use a specific nature or a random one
     if (nature >= NUM_NATURES)
@@ -177,10 +178,13 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
         CreateMonWithNature(&mon, species, level, 32, nature);
 
     // shininess
-    if (P_FLAG_FORCE_SHINY != 0 && FlagGet(P_FLAG_FORCE_SHINY))
+    if (shinyMode == SHINY_MODE_ALWAYS || (P_FLAG_FORCE_SHINY != 0 && FlagGet(P_FLAG_FORCE_SHINY)))
         isShiny = TRUE;
-    else if (P_FLAG_FORCE_NO_SHINY != 0 && FlagGet(P_FLAG_FORCE_NO_SHINY))
+    else if (shinyMode == SHINY_MODE_NEVER || (P_FLAG_FORCE_NO_SHINY != 0 && FlagGet(P_FLAG_FORCE_NO_SHINY)))
         isShiny = FALSE;
+    else
+        isShiny = GetMonData(&mon, MON_DATA_IS_SHINY);
+
     SetMonData(&mon, MON_DATA_IS_SHINY, &isShiny);
 
     // gigantamax factor
@@ -190,8 +194,8 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     SetMonData(&mon, MON_DATA_DYNAMAX_LEVEL, &dmaxLevel);
 
     // tera type
-    if (teraType >= NUMBER_OF_MON_TYPES)
-        teraType = TYPE_NONE;
+    if (teraType == TYPE_NONE || teraType == TYPE_MYSTERY || teraType >= NUMBER_OF_MON_TYPES)
+        teraType = GetTeraTypeFromPersonality(&mon);
     SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
 
     // EV and IV
@@ -331,8 +335,8 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
 
     // Perfect IV calculation
     u32 i;
-    u8 availableIVs[NUM_STATS];
-    u8 selectedIvs[NUM_STATS];
+    enum Stat availableIVs[NUM_STATS];
+    enum Stat selectedIvs[NUM_STATS];
     if (gSpeciesInfo[species].perfectIVCount != 0)
     {
         // Initialize a list of IV indices.
@@ -356,23 +360,24 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
             case STAT_SPEED: speedIv = MAX_PER_STAT_IVS; break;
             case STAT_SPATK: spAtkIv = MAX_PER_STAT_IVS; break;
             case STAT_SPDEF: spDefIv = MAX_PER_STAT_IVS; break;
+            default: break;
             }
         }
     }
-    hpIv              = PARSE_FLAG(11, hpIv);
-    atkIv             = PARSE_FLAG(12, atkIv);
-    defIv             = PARSE_FLAG(13, defIv);
-    speedIv           = PARSE_FLAG(14, speedIv);
-    spAtkIv           = PARSE_FLAG(15, spAtkIv);
-    spDefIv           = PARSE_FLAG(16, spDefIv);
-    u16 move1         = PARSE_FLAG(17, MOVE_NONE);
-    u16 move2         = PARSE_FLAG(18, MOVE_NONE);
-    u16 move3         = PARSE_FLAG(19, MOVE_NONE);
-    u16 move4         = PARSE_FLAG(20, MOVE_NONE);
-    bool8 isShiny     = PARSE_FLAG(21, FALSE);
-    bool8 gmaxFactor  = PARSE_FLAG(22, FALSE);
-    u8 teraType       = PARSE_FLAG(23, NUMBER_OF_MON_TYPES);
-    u8 dmaxLevel      = PARSE_FLAG(24, 0);
+    hpIv                     = PARSE_FLAG(11, hpIv);
+    atkIv                    = PARSE_FLAG(12, atkIv);
+    defIv                    = PARSE_FLAG(13, defIv);
+    speedIv                  = PARSE_FLAG(14, speedIv);
+    spAtkIv                  = PARSE_FLAG(15, spAtkIv);
+    spDefIv                  = PARSE_FLAG(16, spDefIv);
+    u16 move1                = PARSE_FLAG(17, MOVE_NONE);
+    u16 move2                = PARSE_FLAG(18, MOVE_NONE);
+    u16 move3                = PARSE_FLAG(19, MOVE_NONE);
+    u16 move4                = PARSE_FLAG(20, MOVE_NONE);
+    enum ShinyMode shinyMode = PARSE_FLAG(21, SHINY_MODE_RANDOM);
+    bool8 gmaxFactor         = PARSE_FLAG(22, FALSE);
+    enum Type teraType       = PARSE_FLAG(23, NUMBER_OF_MON_TYPES);
+    u8 dmaxLevel             = PARSE_FLAG(24, 0);
 
     u8 evs[NUM_STATS]        = {hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv};
     u8 ivs[NUM_STATS]        = {hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv};
@@ -383,7 +388,7 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
     else
         Script_RequestEffects(SCREFF_V1);
 
-    gSpecialVar_Result = ScriptGiveMonParameterized(side, slot, species, level, item, ball, nature, abilityNum, gender, evs, ivs, moves, isShiny, gmaxFactor, teraType, dmaxLevel);
+    gSpecialVar_Result = ScriptGiveMonParameterized(side, slot, species, level, item, ball, nature, abilityNum, gender, evs, ivs, moves, shinyMode, gmaxFactor, teraType, dmaxLevel);
 }
 
 #undef PARSE_FLAG

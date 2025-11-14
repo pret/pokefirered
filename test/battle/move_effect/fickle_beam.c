@@ -12,15 +12,14 @@ SINGLE_BATTLE_TEST("Fickle Beam deals double damage 30% of the time")
 
     PASSES_RANDOMLY(30, 100, RNG_FICKLE_BEAM);
     GIVEN {
-        ASSUME(GetMovePower(MOVE_POWER_GEM) == 80);
-        ASSUME(GetMovePower(MOVE_FICKLE_BEAM) == 80);
+        ASSUME(GetMovePower(MOVE_DAZZLING_GLEAM) == GetMovePower(MOVE_FICKLE_BEAM));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_POWER_GEM); }
+        TURN { MOVE(player, MOVE_DAZZLING_GLEAM); }
         TURN { MOVE(player, MOVE_FICKLE_BEAM); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_POWER_GEM, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DAZZLING_GLEAM, player);
         HP_BAR(opponent, captureDamage: &damage[0]);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_FICKLE_BEAM, player);
         HP_BAR(opponent, captureDamage: &damage[1]);

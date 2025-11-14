@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveEffect(MOVE_WORRY_SEED) == EFFECT_WORRY_SEED);
+    ASSUME(GetMoveEffect(MOVE_WORRY_SEED) == EFFECT_OVERWRITE_ABILITY);
+    ASSUME(GetMoveOverwriteAbility(MOVE_WORRY_SEED) == ABILITY_INSOMNIA);
 }
 
 SINGLE_BATTLE_TEST("Worry Seed replaces target's ability with Insomnia")

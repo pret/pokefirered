@@ -31,22 +31,35 @@ SINGLE_BATTLE_TEST("Oblivious prevents Captivate")
     }
 }
 
-SINGLE_BATTLE_TEST("Oblivious prevents Taunt")
+SINGLE_BATTLE_TEST("Oblivious prevents Taunt (Gen6+)")
 {
+    u32 gen = 0;
+    PARAMETRIZE { gen = GEN_5; }
+    PARAMETRIZE { gen = GEN_6; }
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_OBLIVIOUS_TAUNT, gen);
         ASSUME(GetMoveEffect(MOVE_TAUNT) == EFFECT_TAUNT);
-        ASSUME(B_OBLIVIOUS_TAUNT >= GEN_6);
         PLAYER(SPECIES_SLOWPOKE) { Ability(ABILITY_OBLIVIOUS); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_TAUNT); }
-        TURN { MOVE(player, MOVE_SPORE); }
+        TURN { MOVE(player, MOVE_SPORE, allowed: gen == GEN_6); }
     } SCENE {
-        ABILITY_POPUP(player, ABILITY_OBLIVIOUS);
-        NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_TAUNT, opponent); }
-        MESSAGE("It doesn't affect Slowpoke…");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, player);
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponent);
+        if (gen == GEN_6) {
+            NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_TAUNT, opponent); }
+            ABILITY_POPUP(player, ABILITY_OBLIVIOUS);
+            MESSAGE("It doesn't affect Slowpoke…");
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, player);
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponent);
+        } else {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TAUNT, opponent);
+            NONE_OF {
+                ABILITY_POPUP(player, ABILITY_OBLIVIOUS);
+                MESSAGE("It doesn't affect Slowpoke…");
+                ANIMATION(ANIM_TYPE_MOVE, MOVE_SPORE, player);
+                ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_SLP, opponent);
+            }
+        }
     }
 }
 

@@ -106,7 +106,7 @@ TEST("No species has two evolutions that use the evolution tracker")
 
     for (i = 0; i < NUM_SPECIES; i++)
     {
-        if (GetSpeciesEvolutions(i) != NULL) PARAMETRIZE { species = i; }
+        if (IsSpeciesEnabled(i) && GetSpeciesEvolutions(i) != NULL) PARAMETRIZE { species = i; }
     }
 
     evolutionTrackerEvolutions = 0;

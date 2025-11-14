@@ -102,7 +102,7 @@ SINGLE_BATTLE_TEST("Illusion breaks if affected by Gastro Acid")
 SINGLE_BATTLE_TEST("Illusion breaks if user loses Illusion due to Worry Seed")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_WORRY_SEED) == EFFECT_WORRY_SEED);
+        ASSUME(GetMoveEffect(MOVE_WORRY_SEED) == EFFECT_OVERWRITE_ABILITY);
         PLAYER(SPECIES_ZOROARK);
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);

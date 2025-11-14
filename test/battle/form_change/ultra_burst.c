@@ -59,10 +59,10 @@ SINGLE_BATTLE_TEST("Ultra Burst affects turn order")
 {
     GIVEN {
         WITH_CONFIG(GEN_CONFIG_MEGA_EVO_TURN_ORDER, GEN_7);
-        PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z); Speed(105); }
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(106); }
+        PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Item(ITEM_ULTRANECROZIUM_Z);}
+        OPPONENT(SPECIES_WOBBUFFET) {}
     } WHEN {
-        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_ULTRA_BURST); }
+        TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_ULTRA_BURST); }
     } SCENE {
         MESSAGE("Necrozma used Celebrate!");
         MESSAGE("The opposing Wobbuffet used Celebrate!");

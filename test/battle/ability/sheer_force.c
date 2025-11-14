@@ -1363,15 +1363,16 @@ DOUBLE_BATTLE_TEST("Sheer Force only boosts the damage of moves it's supposed to
 
 AI_SINGLE_BATTLE_TEST("AI sees Sheer Force skips additional effects")
 {
-    u16 ability, expectedMove;
+    u16 ability, expectedMove, move;
 
-    PARAMETRIZE { ability = ABILITY_NONE;        expectedMove = MOVE_POWER_UP_PUNCH; }
-    PARAMETRIZE { ability = ABILITY_SHEER_FORCE; expectedMove = MOVE_KARATE_CHOP; }
+    PARAMETRIZE { ability = ABILITY_ROUGH_SKIN;  move = MOVE_KARATE_CHOP; expectedMove = MOVE_POWER_UP_PUNCH; }
+    PARAMETRIZE { ability = ABILITY_ROUGH_SKIN;  move = MOVE_BRICK_BREAK; expectedMove = MOVE_POWER_UP_PUNCH; }
+    PARAMETRIZE { ability = ABILITY_SHEER_FORCE; move = MOVE_BRICK_BREAK; expectedMove = MOVE_BRICK_BREAK;    }
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ability); Moves(MOVE_POWER_UP_PUNCH, MOVE_KARATE_CHOP); }
+        OPPONENT(SPECIES_DRUDDIGON) { Ability(ability); Moves(MOVE_POWER_UP_PUNCH, move); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, expectedMove); }
     }

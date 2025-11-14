@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Tera Blast changes from Normal-type to the user's Tera Type"
 SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
 {
     u32 species;
-    u32 type;
+    enum Type type;
 
     PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_FLYING;   }
     PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_POISON;   }

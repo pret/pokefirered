@@ -212,6 +212,50 @@ DOUBLE_BATTLE_TEST("Moves fail if they target the partner but they faint before 
     }
 }
 
+MULTI_BATTLE_TEST("Ally switch fails when used by either side in a multibattle")
+{
+    GIVEN {
+        MULTI_PLAYER(SPECIES_WOBBUFFET);
+        MULTI_PARTNER(SPECIES_WOBBUFFET);
+        MULTI_OPPONENT_A(SPECIES_WOBBUFFET);
+        MULTI_OPPONENT_B(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); MOVE(playerRight, MOVE_ALLY_SWITCH); MOVE(opponentLeft, MOVE_ALLY_SWITCH); MOVE(opponentRight, MOVE_ALLY_SWITCH); }
+    } SCENE {
+        NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft); ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerRight); ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, opponentLeft); ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, opponentRight); }
+    }
+}
+
+TWO_VS_ONE_BATTLE_TEST("Ally switch can only be used by the opponent in a 2v1 battle")
+{
+    GIVEN {
+        MULTI_PLAYER(SPECIES_WOBBUFFET);
+        MULTI_PARTNER(SPECIES_WOBBUFFET);
+        MULTI_OPPONENT_A(SPECIES_WOBBUFFET);
+        MULTI_OPPONENT_A(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); MOVE(playerRight, MOVE_ALLY_SWITCH); MOVE(opponentLeft, MOVE_ALLY_SWITCH); }
+    } SCENE {
+        { ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, opponentLeft); }
+        NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft); ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerRight); }
+    }
+}
+
+ONE_VS_TWO_BATTLE_TEST("Ally switch can only be used by the player in a 1v2 battle")
+{
+    GIVEN {
+        MULTI_PLAYER(SPECIES_WOBBUFFET);
+        MULTI_PLAYER(SPECIES_WOBBUFFET);
+        MULTI_OPPONENT_A(SPECIES_WOBBUFFET);
+        MULTI_OPPONENT_B(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_ALLY_SWITCH); MOVE(opponentLeft, MOVE_ALLY_SWITCH); MOVE(opponentRight, MOVE_ALLY_SWITCH); }
+    } SCENE {
+        { ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerLeft); }
+        NONE_OF { ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, opponentLeft); ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, opponentRight); }
+    }
+}
+
 DOUBLE_BATTLE_TEST("Moves do not fail if an alive partner is the target")
 {
     GIVEN {

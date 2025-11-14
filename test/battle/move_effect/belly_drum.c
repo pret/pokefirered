@@ -159,7 +159,6 @@ SINGLE_BATTLE_TEST("Belly Drum maximizes the user's Attack stat, even when below
 
 SINGLE_BATTLE_TEST("Belly Drum fails if the user's Attack is already at +6, even with Contrary")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_CHARM) == EFFECT_ATTACK_DOWN_2);
         PLAYER(SPECIES_SERPERIOR) { Ability(ABILITY_CONTRARY); }
@@ -190,7 +189,6 @@ SINGLE_BATTLE_TEST("Belly Drum fails if the user's Attack is already at +6, even
 
 SINGLE_BATTLE_TEST("Belly Drum deducts HP if the user has Contrary and is at -6")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_SWORDS_DANCE) == EFFECT_ATTACK_UP_2);
         PLAYER(SPECIES_SERPERIOR) { Ability(ABILITY_CONTRARY); }
@@ -215,6 +213,6 @@ SINGLE_BATTLE_TEST("Belly Drum deducts HP if the user has Contrary and is at -6"
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BELLY_DRUM, player);
         s32 maxHP = GetMonData(&PLAYER_PARTY[0], MON_DATA_MAX_HP);
         HP_BAR(player, hp: maxHP / 2);
-        MESSAGE("Wobbuffet cut its own HP and maximized its Attack!");
+        MESSAGE("Serperior cut its own HP and maximized its Attack!");
     }
 }

@@ -1,4 +1,5 @@
 #include <stdarg.h>
+#include "fake_rtc.h"
 #include "global.h"
 #include "gpu_regs.h"
 #include "load_save.h"
@@ -9,6 +10,7 @@
 #include "constants/characters.h"
 #include "test_runner.h"
 #include "test/test.h"
+#include "test/battle.h"
 
 #define TIMEOUT_SECONDS 60
 
@@ -184,6 +186,13 @@ void TestRunner_CheckMemory(void)
     }
 }
 
+static void ClearSaveBlocks(void)
+{
+    ClearSav1();
+    ClearSav2();
+    ClearSav3();
+}
+
 void CB2_TestRunner(void)
 {
 top:
@@ -201,17 +210,13 @@ top:
         gTestRunnerState.filterMode = DetectFilterMode(gTestRunnerArgv);
 
         MoveSaveBlocks_ResetHeap();
-        ClearSav1();
-        ClearSav2();
-        ClearSav3();
 
         gIntrTable[7] = Intr_Timer2;
-
-        gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
 
         // The current test restarted the ROM (e.g. by jumping to NULL).
         if (gPersistentTestRunnerState.address != 0)
         {
+            ClearSaveBlocks();
             gTestRunnerState.test = __start_tests;
             while ((uintptr_t)gTestRunnerState.test != gPersistentTestRunnerState.address)
             {
@@ -255,6 +260,7 @@ top:
         break;
 
     case STATE_ASSIGN_TEST:
+        ClearSaveBlocks();
         while (1)
         {
             if (gTestRunnerState.test == __stop_tests)
@@ -477,6 +483,7 @@ void Test_ExpectCrash(bool32 expectCrash)
 static void FunctionTest_SetUp(void *data)
 {
     (void)data;
+    ClearRiggedRng();
     gFunctionTestRunnerState = AllocZeroed(sizeof(*gFunctionTestRunnerState));
     SeedRng(0);
 }
@@ -508,12 +515,84 @@ static bool32 FunctionTest_CheckProgress(void *data)
     return madeProgress;
 }
 
+static u32 FunctionTest_RandomUniform(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32), void *caller)
+{
+    //rigged
+    for (u32 i = 0; i < RIGGED_RNG_COUNT; i++)
+    {
+        if (gFunctionTestRunnerState->rngList[i].tag == tag)
+        {
+            if (reject && reject(gFunctionTestRunnerState->rngList[i].value))
+                Test_ExitWithResult(TEST_RESULT_INVALID, SourceLine(0), ":LWITH_RNG specified a rejected value (%d)", gFunctionTestRunnerState->rngList[i].value);
+            return gFunctionTestRunnerState->rngList[i].value;
+        }
+    }
+    //trials
+    /*
+    if (tag == STATE->rngTag)
+        return RandomUniformTrials(tag, lo, hi, reject);
+    */
+
+    //default
+    return RandomUniformDefaultValue(tag, lo, hi, reject, caller);
+}
+
+static u32 FunctionTest_RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights, void *caller)
+{
+    //rigged
+    for (u32 i = 0; i < RIGGED_RNG_COUNT; i++)
+    {
+        if (gFunctionTestRunnerState->rngList[i].tag == tag)
+            return gFunctionTestRunnerState->rngList[i].value;
+    }
+
+    //trials
+    /*
+    if (tag == STATE->rngTag)
+        return RandomWeightedArrayTrials(tag, sum, n, weights);
+    */
+
+    //default
+    return RandomWeightedArrayDefaultValue(tag, n, weights, caller);
+}
+
+static const void* FunctionTest_RandomElementArray(enum RandomTag tag, const void *array, size_t size, size_t count, void *caller)
+{
+    //rigged
+    for (u32 i = 0; i < RIGGED_RNG_COUNT; i++)
+    {
+        if (gFunctionTestRunnerState->rngList[i].tag == tag)
+        {
+            u32 element = 0;
+            for (u32 index = 0; index < count; index++)
+            {
+                memcpy(&element, (const u8 *)array + size * index, size);
+                if (element == gFunctionTestRunnerState->rngList[i].value)
+                    return (const u8 *)array + size * index;
+            }
+            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":L%s: RandomElement illegal value requested: %d", gTestRunnerState.test->filename, gFunctionTestRunnerState->rngList[i].value);
+        }
+    }
+
+    //trials
+    /*
+    if (tag == STATE->rngTag)
+        return RandomElementTrials(tag, array, size, count);
+    */
+
+    //default
+    return RandomElementArrayDefaultValue(tag, array, size, count, caller);
+}
+
 const struct TestRunner gFunctionTestRunner =
 {
     .setUp = FunctionTest_SetUp,
     .run = FunctionTest_Run,
     .tearDown = FunctionTest_TearDown,
     .checkProgress = FunctionTest_CheckProgress,
+    .randomUniform = FunctionTest_RandomUniform,
+    .randomWeightedArray = FunctionTest_RandomWeightedArray,
+    .randomElementArray = FunctionTest_RandomElementArray,
 };
 
 static void Assumptions_Run(void *data)
@@ -820,4 +899,103 @@ u32 SourceLineOffset(u32 sourceLine)
         return 0;
     else
         return sourceLine - test->sourceLine;
+}
+
+u32 RandomUniform(enum RandomTag tag, u32 lo, u32 hi)
+{
+    void *caller = __builtin_extract_return_addr(__builtin_return_address(0));
+    if (gTestRunnerState.test->runner->randomUniform)
+        return gTestRunnerState.test->runner->randomUniform(tag, lo, hi, NULL, caller);
+    else
+        return RandomUniformDefault(tag, lo, hi);
+}
+
+u32 RandomUniformExcept(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32))
+{
+    void *caller = __builtin_extract_return_addr(__builtin_return_address(0));
+    if (gTestRunnerState.test->runner->randomUniform)
+        return gTestRunnerState.test->runner->randomUniform(tag, lo, hi, reject, caller);
+    else
+        return RandomUniformExceptDefault(tag, lo, hi, reject);
+}
+
+u32 RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, const u8 *weights)
+{
+    void *caller = __builtin_extract_return_addr(__builtin_return_address(0));
+    if (gTestRunnerState.test->runner->randomWeightedArray)
+        return gTestRunnerState.test->runner->randomWeightedArray(tag, sum, n, weights, caller);
+    else
+        return RandomWeightedArrayDefault(tag, sum, n, weights);
+}
+
+const void *RandomElementArray(enum RandomTag tag, const void *array, size_t size, size_t count)
+{
+    void *caller = __builtin_extract_return_addr(__builtin_return_address(0));
+    if (gTestRunnerState.test->runner->randomElementArray)
+        return gTestRunnerState.test->runner->randomElementArray(tag, array, size, count, caller);
+    else
+        return RandomElementArrayDefault(tag, array, size, count);
+}
+
+u32 RandomUniformDefaultValue(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32), void *caller)
+{
+    u32 default_ = hi;
+    if (reject)
+    {
+        while (reject(default_))
+        {
+            if (default_ == lo)
+                Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomUniformExcept called from %p with tag %d rejected all values", caller, tag);
+            default_--;
+        }
+    }
+    return default_;
+}
+
+u32 RandomWeightedArrayDefaultValue(enum RandomTag tag, u32 n, const u8 *weights, void *caller)
+{
+    while (weights[n-1] == 0)
+    {
+        if (n == 1)
+            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":LRandomWeightedArray called from %p with tag %d and all zero weights", caller, tag);
+        n--;
+    }
+    return n-1;
+}
+
+const void *RandomElementArrayDefaultValue(enum RandomTag tag, const void *array, size_t size, size_t count, void *caller)
+{
+    return (const u8 *)array + size * (count - 1);
+}
+
+void ClearRiggedRng(void)
+{
+    struct RiggedRNG zeroRng = {.tag = RNG_NONE, .value = 0};
+    for (u32 i = 0; i < RIGGED_RNG_COUNT; i++)
+        memcpy(&gFunctionTestRunnerState->rngList[i], &zeroRng, sizeof(zeroRng));
+}
+
+void SetupRiggedRng(u32 sourceLine, enum RandomTag randomTag, u32 value)
+{
+    struct RiggedRNG rng = {.tag = randomTag, .value = value};
+    u32 i;
+    for (i = 0; i < RIGGED_RNG_COUNT; i++)
+    {
+        if (gFunctionTestRunnerState->rngList[i].tag == randomTag)
+        {
+            memcpy(&gFunctionTestRunnerState->rngList[i], &rng, sizeof(rng));
+            break;
+        }
+        else if (gFunctionTestRunnerState->rngList[i].tag > RNG_NONE)
+        {
+            continue;
+        }
+        else
+        {
+            memcpy(&gFunctionTestRunnerState->rngList[i], &rng, sizeof(rng));
+            break;
+        }
+    }
+    if (i == RIGGED_RNG_COUNT)
+        Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, ":L%s:%d: Too many rigged RNGs to set up", gTestRunnerState.test->filename, sourceLine);
 }

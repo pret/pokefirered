@@ -1,25 +1,37 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Overcoat blocks powder and spore moves")
+SINGLE_BATTLE_TEST("Overcoat blocks powder and spore moves (Gen6+)")
 {
+    u32 gen = 0;
+    PARAMETRIZE { gen = GEN_5; }
+    PARAMETRIZE { gen = GEN_6; }
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_POWDER_OVERCOAT, gen);
         ASSUME(IsPowderMove(MOVE_STUN_SPORE));
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_PINECO) { Ability(ABILITY_OVERCOAT); }
     } WHEN {
         TURN { MOVE(player, MOVE_STUN_SPORE); }
     } SCENE {
-        ABILITY_POPUP(opponent, ABILITY_OVERCOAT);
-        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_STUN_SPORE, player);
-        MESSAGE("It doesn't affect the opposing Pineco…");
+        if (gen == GEN_6) {
+            ABILITY_POPUP(opponent, ABILITY_OVERCOAT);
+            NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_STUN_SPORE, player);
+            MESSAGE("It doesn't affect the opposing Pineco…");
+        } else {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_STUN_SPORE, player);
+            NONE_OF {
+                ABILITY_POPUP(opponent, ABILITY_OVERCOAT);
+                MESSAGE("It doesn't affect the opposing Pineco…");
+            }
+        }
     }
 }
 
 DOUBLE_BATTLE_TEST("Overcoat blocks damage from sandstorm")
 {
     GIVEN {
-        PLAYER(SPECIES_WYNAUT)    { Speed(50); } 
+        PLAYER(SPECIES_WYNAUT)    { Speed(50); }
         PLAYER(SPECIES_HELIOLISK) { Speed(40); Ability(ABILITY_SAND_VEIL); }
         OPPONENT(SPECIES_PINECO)  { Speed(30); Ability(ABILITY_OVERCOAT); }
         OPPONENT(SPECIES_STARLY)     { Speed(20); }
@@ -41,7 +53,7 @@ DOUBLE_BATTLE_TEST("Overcoat blocks damage from hail")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_HAIL) == EFFECT_HAIL);
-        PLAYER(SPECIES_WYNAUT)    { Speed(50); Ability(ABILITY_SNOW_CLOAK); } 
+        PLAYER(SPECIES_WYNAUT)    { Speed(50); Ability(ABILITY_SNOW_CLOAK); }
         PLAYER(SPECIES_SOLOSIS)   { Speed(40); Ability(ABILITY_RUN_AWAY); }
         OPPONENT(SPECIES_PINECO)  { Speed(30); Ability(ABILITY_OVERCOAT); }
         OPPONENT(SPECIES_SNORUNT) { Speed(20); }
@@ -73,4 +85,3 @@ SINGLE_BATTLE_TEST("Overcoat blocks Effect Spore's effect")
         EXPECT_EQ(player->status1, 0);
     }
 }
-

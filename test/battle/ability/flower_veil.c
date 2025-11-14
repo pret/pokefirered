@@ -15,7 +15,7 @@ ASSUMPTIONS
     ASSUME(GetMoveNonVolatileStatus(MOVE_HYPNOSIS) == MOVE_EFFECT_SLEEP);
 }
 
-DOUBLE_BATTLE_TEST("Flower Veil prevents Toxic bad poison on partner - right target")
+DOUBLE_BATTLE_TEST("Flower Veil prevents status on allied Grass-types - right target")
 {
     u32 move;
 
@@ -39,7 +39,7 @@ DOUBLE_BATTLE_TEST("Flower Veil prevents Toxic bad poison on partner - right tar
     }
 }
 
-DOUBLE_BATTLE_TEST("Flower Veil prevents Toxic bad poison on partner - left target")
+DOUBLE_BATTLE_TEST("Flower Veil prevents status on allied Grass-types - left target")
 {
     u32 move;
 

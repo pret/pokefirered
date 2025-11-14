@@ -338,7 +338,7 @@ AI_DOUBLE_BATTLE_TEST("AI will trigger its ally's Weakness Policy")
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI will only explode and kill everything on the field with Risky or Will Suicide")
+AI_DOUBLE_BATTLE_TEST("AI will only explode and kill everything on the field with Risky or Will Suicide (doubles)")
 {
     ASSUME(GetMoveTarget(MOVE_EXPLOSION) == MOVE_TARGET_FOES_AND_ALLY);
     ASSUME(GetMoveEffect(MOVE_EXPLOSION) == EFFECT_EXPLOSION);
@@ -360,6 +360,36 @@ AI_DOUBLE_BATTLE_TEST("AI will only explode and kill everything on the field wit
             TURN { EXPECT_MOVE(opponentLeft, MOVE_ELECTRO_BALL); }
         else
             TURN { EXPECT_MOVE(opponentLeft, MOVE_EXPLOSION); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("Battler 3 has Battler 1 AI flags set correctly (doubles)")
+{
+    ASSUME(GetMoveTarget(MOVE_EXPLOSION) == MOVE_TARGET_FOES_AND_ALLY);
+    ASSUME(GetMoveEffect(MOVE_EXPLOSION) == EFFECT_EXPLOSION);
+
+    u32 aiFlags;
+    u32 battler;
+
+    PARAMETRIZE { aiFlags = 0; battler = 1; }
+    PARAMETRIZE { aiFlags = 0; battler = 3; }
+    PARAMETRIZE { aiFlags = AI_FLAG_RISKY; battler = 3; }
+    PARAMETRIZE { aiFlags = AI_FLAG_RISKY; battler = 1; }
+    PARAMETRIZE { aiFlags = AI_FLAG_WILL_SUICIDE; battler = 1; }
+    PARAMETRIZE { aiFlags = AI_FLAG_WILL_SUICIDE; battler = 3; }
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        BATTLER_AI_FLAGS(battler, aiFlags);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_VOLTORB) { Moves(MOVE_EXPLOSION, MOVE_ELECTRO_BALL); HP(1); }
+        OPPONENT(SPECIES_ELECTRODE) { Moves(MOVE_EXPLOSION, MOVE_ELECTRO_BALL); HP(1); }
+    } WHEN {
+        if (aiFlags == 0 || battler == 3)
+            TURN { EXPECT_MOVE(opponentLeft, MOVE_ELECTRO_BALL, target: playerLeft); EXPECT_MOVE(opponentRight, MOVE_ELECTRO_BALL, target: playerLeft); }
+        else
+            TURN { EXPECT_MOVE(opponentLeft, MOVE_EXPLOSION, target: playerLeft); EXPECT_MOVE(opponentRight, MOVE_EXPLOSION); }
     }
 }
 

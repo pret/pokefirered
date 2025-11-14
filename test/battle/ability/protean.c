@@ -54,3 +54,19 @@ SINGLE_BATTLE_TEST("Protean changes the type of the user only once per switch in
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
     }
 }
+
+SINGLE_BATTLE_TEST("Protean does not change the user's type when using Struggle")
+{
+    GIVEN {
+        PLAYER(SPECIES_REGIROCK);
+        OPPONENT(SPECIES_GRENINJA) { Ability(ABILITY_PROTEAN); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_STRUGGLE); }
+    } SCENE {
+        NONE_OF {
+            ABILITY_POPUP(opponent, ABILITY_PROTEAN);
+            MESSAGE("The opposing Greninja transformed into the Normal type!");
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, opponent);
+    }
+}

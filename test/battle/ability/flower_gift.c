@@ -200,4 +200,23 @@ SINGLE_BATTLE_TEST("Flower Gift transforms Cherrim back when it uses a move that
     }
 }
 
+DOUBLE_BATTLE_TEST("Flower Gift reverts Cherrim back after Teraform Zero clears weather")
+{
+    GIVEN {
+        PLAYER(SPECIES_TERAPAGOS_TERASTAL);
+        PLAYER(SPECIES_CHERRIM) { Ability(ABILITY_FLOWER_GIFT); }
+        OPPONENT(SPECIES_GROUDON) { Ability(ABILITY_DROUGHT); }
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+    } SCENE {
+        ABILITY_POPUP(opponentLeft, ABILITY_DROUGHT);
+        ABILITY_POPUP(playerRight, ABILITY_FLOWER_GIFT);
+        ABILITY_POPUP(playerLeft, ABILITY_TERAFORM_ZERO);
+        ABILITY_POPUP(playerRight, ABILITY_FLOWER_GIFT);
+    } THEN {
+        EXPECT_EQ(playerRight->species, SPECIES_CHERRIM);
+    }
+}
+
 TO_DO_BATTLE_TEST("Flower Gift does not transform Cherrim back to normal when suppressed if Cherrim is Dynamaxed");

@@ -13,7 +13,7 @@ SINGLE_BATTLE_TEST("Mimicry changes the battler's type based on Terrain")
 {
     u32 j;
     u32 terrainMove = MOVE_NONE;
-    u32 terrainType = TYPE_NONE;
+    enum Type terrainType = TYPE_NONE;
 
     for (j = 0; j < ARRAY_COUNT(terrainData); j++)
         PARAMETRIZE { terrainMove = terrainData[j][0]; terrainType = terrainData[j][1]; }

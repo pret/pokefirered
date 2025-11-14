@@ -3,7 +3,8 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveEffect(MOVE_SIMPLE_BEAM) == EFFECT_SIMPLE_BEAM);
+    ASSUME(GetMoveEffect(MOVE_SIMPLE_BEAM) == EFFECT_OVERWRITE_ABILITY);
+    ASSUME(GetMoveOverwriteAbility(MOVE_SIMPLE_BEAM) == ABILITY_SIMPLE);
 }
 
 SINGLE_BATTLE_TEST("Simple Beam replaces target's ability with Simple")

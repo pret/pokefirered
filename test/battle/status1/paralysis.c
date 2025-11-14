@@ -56,6 +56,7 @@ AI_SINGLE_BATTLE_TEST("AI avoids Thunder Wave when it can not paralyse target")
     PARAMETRIZE { species = SPECIES_PIKACHU; ability = ABILITY_STATIC; }
 
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_PARALYZE_ELECTRIC, GEN_6);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
         PLAYER(species) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE, MOVE_THUNDER_WAVE); }
@@ -64,18 +65,30 @@ AI_SINGLE_BATTLE_TEST("AI avoids Thunder Wave when it can not paralyse target")
     }
 }
 
-SINGLE_BATTLE_TEST("Thunder Wave doesn't affect Electric types in Gen6+")
+SINGLE_BATTLE_TEST("Thunder Wave doesn't affect Electric types (Gen6+)")
 {
+    u32 gen = 0;
+    PARAMETRIZE { gen = GEN_5; }
+    PARAMETRIZE { gen = GEN_6; }
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_PARALYZE_ELECTRIC, gen);
         ASSUME(GetSpeciesType(SPECIES_PIKACHU, 0) == TYPE_ELECTRIC);
-        ASSUME(B_PARALYZE_ELECTRIC >= GEN_6);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PIKACHU);
     } WHEN {
         TURN { MOVE(player, MOVE_THUNDER_WAVE); }
     } SCENE {
         MESSAGE("Wobbuffet used Thunder Wave!");
-        MESSAGE("It doesn't affect the opposing Pikachu…");
+        if (gen == GEN_6) {
+            NONE_OF {
+                ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
+                STATUS_ICON(opponent, paralysis: TRUE);
+            }
+            MESSAGE("It doesn't affect the opposing Pikachu…");
+        } else {
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
+            STATUS_ICON(opponent, paralysis: TRUE);
+        }
     }
 }
 

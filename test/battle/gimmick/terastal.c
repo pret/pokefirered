@@ -606,14 +606,14 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar type boosts all moves
     s16 damage[4];
     GIVEN {
         ASSUME(GetMovePower(MOVE_MEGA_DRAIN) == 40);
-        ASSUME(GetMovePower(MOVE_BUBBLE) == 40);
+        ASSUME(GetMovePower(MOVE_WATER_GUN) == 40);
         PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_STELLAR); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_MEGA_DRAIN); }
         TURN { MOVE(player, MOVE_MEGA_DRAIN, gimmick: GIMMICK_TERA); }
         TURN { MOVE(player, MOVE_MEGA_DRAIN); }
-        TURN { MOVE(player, MOVE_BUBBLE); }
+        TURN { MOVE(player, MOVE_WATER_GUN); }
     } SCENE {
         // turn 1
         MESSAGE("Wobbuffet used Mega Drain!");
@@ -628,8 +628,8 @@ SINGLE_BATTLE_TEST("(TERA) Terastallizing into the Stellar type boosts all moves
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MEGA_DRAIN, player);
         HP_BAR(opponent, captureDamage: &damage[2]);
         // turn 4
-        MESSAGE("Wobbuffet used Bubble!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_BUBBLE, player);
+        MESSAGE("Wobbuffet used Water Gun!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, player);
         HP_BAR(opponent, captureDamage: &damage[3]);
     } THEN {
         // The jump from 40 BP to 72 BP (60 * 1.2x) is a 1.8x boost.
@@ -822,7 +822,7 @@ SINGLE_BATTLE_TEST("(TERA) Pokemon with Tera forms change upon Terastallizing")
 
 SINGLE_BATTLE_TEST("(TERA) All type indicators function correctly")
 {
-    u32 type;
+    enum Type type;
     PARAMETRIZE { type = TYPE_NONE; }
     PARAMETRIZE { type = TYPE_NORMAL; }
     PARAMETRIZE { type = TYPE_FIGHTING; }
@@ -854,7 +854,7 @@ SINGLE_BATTLE_TEST("(TERA) All type indicators function correctly")
 
 SINGLE_BATTLE_TEST("(TERA) All type indicators function correctly - Opponent")
 {
-    u32 type;
+    enum Type type;
     PARAMETRIZE { type = TYPE_NONE; }
     PARAMETRIZE { type = TYPE_NORMAL; }
     PARAMETRIZE { type = TYPE_FIGHTING; }

@@ -245,14 +245,14 @@ void RemovePCItem(u16 itemId, u16 quantity);
 void CompactItemsInBagPocket(enum Pocket pocketId);
 void SortBerriesOrTMHMs(enum Pocket pocketId);
 u8 CountItemsInPC(void);
-bool8 HasAtLeastOneBerry(void);
-bool8 HasAtLeastOnePokeBall(void);
+bool32 HasAtLeastOneBerry(void);
+bool32 HasAtLeastOnePokeBall(void);
 
-bool8 IsItemTM(u16 itemId);
-bool8 IsItemHM(u16 itemId);
-bool8 IsItemTMHM(u16 itemId);
+bool32 IsItemTM(u16 itemId);
+bool32 IsItemHM(u16 itemId);
+bool32 IsItemTMHM(u16 itemId);
 
-bool8 IsItemBall(u16 itemId);
+bool32 IsItemBall(u16 itemId);
 
 const u8 *GetItemEffect(u32 itemId);
 u32 GetItemStatus1Mask(u16 itemId);

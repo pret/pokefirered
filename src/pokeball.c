@@ -538,6 +538,38 @@ const struct SpriteTemplate gBallSpriteTemplates[POKEBALL_COUNT] =
     },
 };
 
+const u16 gBallItemIds[POKEBALL_COUNT] =
+{
+    [BALL_STRANGE] = ITEM_STRANGE_BALL,
+    [BALL_POKE]    = ITEM_POKE_BALL,
+    [BALL_GREAT]   = ITEM_GREAT_BALL,
+    [BALL_ULTRA]   = ITEM_ULTRA_BALL,
+    [BALL_MASTER]  = ITEM_MASTER_BALL,
+    [BALL_PREMIER] = ITEM_PREMIER_BALL,
+    [BALL_HEAL]    = ITEM_HEAL_BALL,
+    [BALL_NET]     = ITEM_NET_BALL,
+    [BALL_NEST]    = ITEM_NEST_BALL,
+    [BALL_DIVE]    = ITEM_DIVE_BALL,
+    [BALL_DUSK]    = ITEM_DUSK_BALL,
+    [BALL_TIMER]   = ITEM_TIMER_BALL,
+    [BALL_QUICK]   = ITEM_QUICK_BALL,
+    [BALL_REPEAT]  = ITEM_REPEAT_BALL,
+    [BALL_LUXURY]  = ITEM_LUXURY_BALL,
+    [BALL_LEVEL]   = ITEM_LEVEL_BALL,
+    [BALL_LURE]    = ITEM_LURE_BALL,
+    [BALL_MOON]    = ITEM_MOON_BALL,
+    [BALL_FRIEND]  = ITEM_FRIEND_BALL,
+    [BALL_LOVE]    = ITEM_LOVE_BALL,
+    [BALL_FAST]    = ITEM_FAST_BALL,
+    [BALL_HEAVY]   = ITEM_HEAVY_BALL,
+    [BALL_DREAM]   = ITEM_DREAM_BALL,
+    [BALL_SAFARI]  = ITEM_SAFARI_BALL,
+    [BALL_SPORT]   = ITEM_SPORT_BALL,
+    [BALL_PARK]    = ITEM_PARK_BALL,
+    [BALL_BEAST]   = ITEM_BEAST_BALL,
+    [BALL_CHERISH] = ITEM_CHERISH_BALL,
+};
+
 #define tFrames          data[0]
 #define tPan             data[1]
 #define tThrowId         data[2]

@@ -465,4 +465,5 @@ gSpecials::
 	def_special TrySkyBattle
 	def_special TryPrepareSecondApproachingTrainer
 	def_special SetHiddenNature
+	def_special SetAbility
 gSpecialsEnd::

@@ -267,7 +267,7 @@ bool8 CheckBagHasItem(u16 itemId, u16 count)
     return FALSE;
 }
 
-bool8 HasAtLeastOneBerry(void)
+bool32 HasAtLeastOneBerry(void)
 {
     u16 itemId;
     bool8 exists;
@@ -292,13 +292,11 @@ bool8 HasAtLeastOneBerry(void)
     return FALSE;
 }
 
-bool8 HasAtLeastOnePokeBall(void)
+bool32 HasAtLeastOnePokeBall(void)
 {
-    u16 ballId;
-
-    for (ballId = BALL_STRANGE; ballId < POKEBALL_COUNT; ballId++)
+    for (enum PokeBall ballId = BALL_STRANGE; ballId < POKEBALL_COUNT; ballId++)
     {
-        if (CheckBagHasItem(ballId, 1) == TRUE)
+        if (CheckBagHasItem(gBallItemIds[ballId], 1) == TRUE)
             return TRUE;
     }
     return FALSE;
@@ -920,24 +918,24 @@ bool32 IsHoldEffectChoice(enum HoldEffect holdEffect)
         || holdEffect == HOLD_EFFECT_CHOICE_SPECS;
 }
 
-bool8 IsItemTM(u16 itemId)
+bool32 IsItemTM(u16 itemId)
 {
     itemId = SanitizeItemId(itemId);
     return ITEM_TM01 <= itemId && itemId <= ITEM_TM100;
 }
 
-bool8 IsItemHM(u16 itemId)
+bool32 IsItemHM(u16 itemId)
 {
     itemId = SanitizeItemId(itemId);
     return ITEM_HM01 <= itemId && itemId <= ITEM_HM08;
 }
 
-bool8 IsItemTMHM(u16 itemId)
+bool32 IsItemTMHM(u16 itemId)
 {
     return IsItemTM(itemId) || IsItemHM(itemId);
 }
 
-bool8 IsItemBall(u16 itemId)
+bool32 IsItemBall(u16 itemId)
 {
     return GetPocketByItemId(itemId) == POCKET_POKE_BALLS;
 }

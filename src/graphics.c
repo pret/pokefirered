@@ -1962,7 +1962,7 @@ const u16 gMonIconPalettes[][16] = {
 };
 
 // Pokédex
-const u16 gPokedexBgHoenn_Pal[] = INCBIN_U16("graphics/pokedex/emerald/bg_hoenn.gbapal");
+const u16 gPokedexBgKanto_Pal[] = INCBIN_U16("graphics/pokedex/emerald/bg_hoenn.gbapal");
 const u16 gPokedexSearchResults_Pal[] = INCBIN_U16("graphics/pokedex/emerald/search_results_bg.gbapal");
 const u16 gPokedexBgNational_Pal[] = INCBIN_U16("graphics/pokedex/emerald/bg_national.gbapal");
 const u32 gPokedexMenu_Gfx[] = INCBIN_U32("graphics/pokedex/emerald/menu.4bpp.smol");
@@ -1980,7 +1980,7 @@ const u32 gPokedexCryScreen_Tilemap[] = INCBIN_U32("graphics/pokedex/emerald/cry
 const u16 gPokedexSearchMenu_Pal[] = INCBIN_U16("graphics/pokedex/emerald/search_menu.gbapal");
 const u32 gPokedexSearchMenu_Gfx[] = INCBIN_U32("graphics/pokedex/emerald/search_menu.4bpp.smol");
 const u32 gPokedexSearchMenuNational_Tilemap[] = INCBIN_U32("graphics/pokedex/emerald/search_menu_national.bin.smolTM");
-const u32 gPokedexSearchMenuHoenn_Tilemap[] = INCBIN_U32("graphics/pokedex/emerald/search_menu_hoenn.bin.smolTM");
+const u32 gPokedexSearchMenuKanto_Tilemap[] = INCBIN_U32("graphics/pokedex/emerald/search_menu_hoenn.bin.smolTM");
 
 const u16 gPokedexAreaScreenAreaUnknown_Pal[] = INCBIN_U16("graphics/pokedex/emerald/area_unknown.gbapal");
 const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCBIN_U32("graphics/pokedex/emerald/area_unknown.4bpp.smol");

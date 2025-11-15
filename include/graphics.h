@@ -6537,7 +6537,7 @@ extern const u16 gBattleIcons_Pal2[];
 
 // Pokédex
 extern const u32 gPokedexInterface_Gfx[];
-extern const u16 gPokedexBgHoenn_Pal[];
+extern const u16 gPokedexBgKanto_Pal[];
 extern const u32 gPokedexMenu_Gfx[];
 extern const u32 gPokedexList_Tilemap[];
 extern const u32 gPokedexListUnderlay_Tilemap[];
@@ -6552,7 +6552,7 @@ extern const u32 gPokedexScreenSelectBarMain_Tilemap[];
 extern const u32 gPokedexScreenSelectBarSubmenu_Tilemap[];
 extern const u16 gPokedexCaughtScreen_Pal[];
 extern const u32 gPokedexSearchMenu_Gfx[];
-extern const u32 gPokedexSearchMenuHoenn_Tilemap[];
+extern const u32 gPokedexSearchMenuKanto_Tilemap[];
 extern const u32 gPokedexSearchMenuNational_Tilemap[];
 extern const u16 gPokedexSearchMenu_Pal[];
 

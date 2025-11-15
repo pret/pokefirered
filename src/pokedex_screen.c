@@ -3478,19 +3478,43 @@ void DexScreen_InputHandler_StartToCry(void)
         PlayCry_NormalNoDucking(sPokedexScreenData->dexSpecies, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
 }
 
-u8 DexScreen_RegisterMonToPokedex(u16 species)
+#define tState         data[0]
+#define tSpecies        data[1]
+#define tPalTimer      data[2]
+#define tMonSpriteId   data[3]
+#define tIsShiny       data[13]
+#define tPersonalityLo 14
+#define tPersonalityHi 15
+
+u8 DisplayCaughtMonDexPage(u16 species, bool32 isShiny, u32 personality)
 {
-    DexScreen_GetSetPokedexFlag(species, FLAG_SET_SEEN, TRUE);
-    DexScreen_GetSetPokedexFlag(species, FLAG_SET_CAUGHT, TRUE);
+    u8 taskId = 0;
+    if (POKEDEX_PLUS_HGSS)
+    {
+        taskId = CreateTask(Task_DisplayCaughtMonDexPageHGSS, 0);
+    }
+    else if (POKEDEX_EMERALD)
+    {
+        taskId = CreateTask(Task_DisplayCaughtMonDexPage, 0);
+    }
+    else
+    {
+        if ((!IsNationalPokedexEnabled() && !IsSpeciesInKantoDex(species)) || !DexScreen_MonHasCategoryEntry(species))
+            return CreateTask(Task_DexScreen_RegisterNonKantoMonBeforeNationalDex, 0);
 
-    if ((!IsNationalPokedexEnabled() && !IsSpeciesInKantoDex(species)) || !DexScreen_MonHasCategoryEntry(species))
-        return CreateTask(Task_DexScreen_RegisterNonKantoMonBeforeNationalDex, 0);
+        DexScreen_LoadResources();
+        gTasks[sPokedexScreenData->taskId].func = Task_DexScreen_RegisterMonToPokedex;
+        DexScreen_LookUpCategoryBySpecies(species);
 
-    DexScreen_LoadResources();
-    gTasks[sPokedexScreenData->taskId].func = Task_DexScreen_RegisterMonToPokedex;
-    DexScreen_LookUpCategoryBySpecies(species);
+        return sPokedexScreenData->taskId;
+    }
 
-    return sPokedexScreenData->taskId;
+    gTasks[taskId].tState = 0;
+    gTasks[taskId].tSpecies = species;
+    gTasks[taskId].tIsShiny = isShiny;
+    gTasks[taskId].data[tPersonalityLo] = personality;
+    gTasks[taskId].data[tPersonalityHi] = personality >> 16;
+    return taskId;
 }
 
 static void Task_DexScreen_RegisterNonKantoMonBeforeNationalDex(u8 taskId)

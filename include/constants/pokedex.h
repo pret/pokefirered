@@ -1600,7 +1600,7 @@ enum HoennDexOrder
 
 enum
 {
-    DEX_MODE_HOENN,
+    DEX_MODE_KANTO,
     DEX_MODE_NATIONAL
 };
 

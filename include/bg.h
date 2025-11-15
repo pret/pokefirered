@@ -37,6 +37,12 @@ enum
     BG_ATTR_BASETILE,
 };
 
+enum {
+    BG_TYPE_NORMAL,
+    BG_TYPE_AFFINE,
+    BG_TYPE_NONE = 0xFFFF
+};
+
 // Modes for ChangeBgX / ChangeBgY
 enum {
     BG_COORD_SET,

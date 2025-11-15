@@ -104,6 +104,7 @@ void ResetTempTileDataBuffers(void);
 void *DecompressAndCopyTileDataToVram(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 bool8 FreeTempTileDataBuffersIfPossible(void);
 void SetBgTilemapPalette(u8 bgId, u8 left, u8 top, u8 width, u8 height, u8 palette);
+void AddValToTilemapBuffer(void *ptr, int delta, int width, int height, bool32 isAffine);
 void DrawDialogueFrame(u8 windowId, bool8 transfer);
 u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16), u8 fgColor, u8 bgColor, u8 shadowColor);
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);

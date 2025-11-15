@@ -23,7 +23,7 @@ static bool32 IsSpeciesInEncounterTable(const struct WildPokemonInfo * pokemon, 
 static u16 GetMapSecIdFromWildMonHeader(const struct WildPokemonHeader * header);
 static bool32 FindDexAreaByMapSec(u16 mapSecId, const u16 (*lut)[2], s32 count, s32 * lutIdx_p, u16 * tableIdx_p);
 
-static const u16 sDexAreas_Kanto[][2] = {
+const u16 sDexAreas_Kanto[55][2] = {
     { MAPSEC_PALLET_TOWN,         DEX_AREA_PALLET_TOWN },
     { MAPSEC_VIRIDIAN_CITY,       DEX_AREA_VIRIDIAN_CITY },
     { MAPSEC_PEWTER_CITY,         DEX_AREA_PEWTER_CITY },

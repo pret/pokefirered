@@ -98,7 +98,7 @@ static const struct Subsprite *const sSubsprites[] = {
     [MARKER_LARGE_V]  = &sSubsprite_LargeVertical
 };
 
-static const s8 sAreaMarkers[][4] = {
+const s8 sAreaMarkers[][4] = {
                                   // Marker,          x,    y
     [DEX_AREA_NONE]             = {},
     [DEX_AREA_PALLET_TOWN]      = { MARKER_CIRCULAR,  54,  44 },

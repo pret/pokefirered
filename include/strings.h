@@ -1576,4 +1576,76 @@ extern const u8 gText_PM[];
 // Switch Caught Mon into Party
 extern const u8 gText_CannotSendMonToBoxHM[];
 
+//Pokédex text
+extern const u8 gText_CryOf[];
+extern const u8 gText_SizeComparedTo[];
+extern const u8 gText_PokedexRegistration[];
+extern const u8 gText_NumberClear01[];
+extern const u8 gText_5MarksPokemon[];
+extern const u8 gText_UnkHeight[];
+extern const u8 gText_UnkHeightMetric[];
+extern const u8 gText_UnkWeight[];
+extern const u8 gText_UnkWeightMetric[];
+extern const u8 gText_HTHeight[];
+extern const u8 gText_WTWeight[];
+extern const u8 gText_SearchingPleaseWait[];
+extern const u8 gText_SearchCompleted[];
+extern const u8 gText_NoMatchingPkmnWereFound[];
+extern const u8 gText_SelectorArrow[];
+
+extern const u8 gText_Power[];
+extern const u8 gText_Accuracy2[];
+extern const u8 gText_Appeal[];
+extern const u8 gText_Jam[];
+
+
+// Pokédex strings
+extern const u8 gText_SearchForPkmnBasedOnParameters[];
+extern const u8 gText_SwitchPokedexListings[];
+extern const u8 gText_ReturnToPokedex[];
+extern const u8 gText_SelectPokedexMode[];
+extern const u8 gText_SelectPokedexListingMode[];
+extern const u8 gText_ListByFirstLetter[];
+extern const u8 gText_ListByBodyColor[];
+extern const u8 gText_ListByType[];
+extern const u8 gText_ExecuteSearchSwitch[];
+extern const u8 gText_DexHoennTitle[];
+extern const u8 gText_DexNatTitle[];
+extern const u8 gText_DexSortNumericalTitle[];
+extern const u8 gText_DexSortAtoZTitle[];
+extern const u8 gText_DexSortHeaviestTitle[];
+extern const u8 gText_DexSortLightestTitle[];
+extern const u8 gText_DexSortTallestTitle[];
+extern const u8 gText_DexSortSmallestTitle[];
+extern const u8 gText_DexSearchAlphaABC[];
+extern const u8 gText_DexSearchAlphaDEF[];
+extern const u8 gText_DexSearchAlphaGHI[];
+extern const u8 gText_DexSearchAlphaJKL[];
+extern const u8 gText_DexSearchAlphaMNO[];
+extern const u8 gText_DexSearchAlphaPQR[];
+extern const u8 gText_DexSearchAlphaSTU[];
+extern const u8 gText_DexSearchAlphaVWX[];
+extern const u8 gText_DexSearchAlphaYZ[];
+extern const u8 gText_DexSearchColorRed[];
+extern const u8 gText_DexSearchColorBlue[];
+extern const u8 gText_DexSearchColorYellow[];
+extern const u8 gText_DexSearchColorGreen[];
+extern const u8 gText_DexSearchColorBlack[];
+extern const u8 gText_DexSearchColorBrown[];
+extern const u8 gText_DexSearchColorPurple[];
+extern const u8 gText_DexSearchColorGray[];
+extern const u8 gText_DexSearchColorWhite[];
+extern const u8 gText_DexSearchColorPink[];
+extern const u8 gText_DexHoennDescription[];
+extern const u8 gText_DexNatDescription[];
+extern const u8 gText_DexSortNumericalDescription[];
+extern const u8 gText_DexSortAtoZDescription[];
+extern const u8 gText_DexSortHeaviestDescription[];
+extern const u8 gText_DexSortLightestDescription[];
+extern const u8 gText_DexSortTallestDescription[];
+extern const u8 gText_DexSortSmallestDescription[];
+extern const u8 gText_DexEmptyString[];
+extern const u8 gText_DexSearchDontSpecify[];
+extern const u8 gText_DexSearchTypeNone[];
+
 #endif //GUARD_STRINGS_H

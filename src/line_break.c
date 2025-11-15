@@ -14,7 +14,40 @@ void StripLineBreaks(u8 *src)
     }
 }
 
-void BreakStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
+u32 CountLineBreaks(u8 *src)
+{
+    u32 currIndex = 0;
+    u32 numNewLines = 0;
+    while (src[currIndex] != EOS)
+    {
+        if (src[currIndex] == CHAR_PROMPT_SCROLL || src[currIndex] == CHAR_NEWLINE)
+            numNewLines++;
+        currIndex++;
+    }
+
+    return numNewLines;
+}
+
+void BreakStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, enum ToggleScrollPrompt toggleScrollPrompt)
+{
+    u32 currIndex = 0;
+    u8 *currSrc = src;
+    while (src[currIndex] != EOS)
+    {
+        if (src[currIndex] == CHAR_PROMPT_CLEAR)
+        {
+            u8 replacedChar = src[currIndex];
+            src[currIndex] = EOS;
+            BreakSubStringAutomatic(currSrc, maxWidth, screenLines, fontId, toggleScrollPrompt);
+            src[currIndex] = replacedChar;
+            currSrc = &src[currIndex + 1];
+        }
+        currIndex++;
+    }
+    BreakSubStringAutomatic(currSrc, maxWidth, screenLines, fontId, toggleScrollPrompt);
+}
+
+void BreakStringNaive(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, enum ToggleScrollPrompt toggleScrollPrompt)
 {
     u32 currIndex = 0;
     u8 *currSrc = src;
@@ -24,16 +57,17 @@ void BreakStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
         {
             u8 replacedChar = src[currIndex + 1];
             src[currIndex + 1] = EOS;
-            BreakSubStringAutomatic(currSrc, maxWidth, screenLines, fontId);
+            BreakSubStringNaive(currSrc, maxWidth, screenLines, fontId, toggleScrollPrompt);
             src[currIndex + 1] = replacedChar;
             currSrc = &src[currIndex + 1];
         }
         currIndex++;
     }
-    BreakSubStringAutomatic(currSrc, maxWidth, screenLines, fontId);
+    BreakSubStringNaive(currSrc, maxWidth, screenLines, fontId, toggleScrollPrompt);
 }
 
-void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
+#define SCROLL_PROMPT_WIDTH 8
+void BreakSubStringNaive(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, enum ToggleScrollPrompt toggleScrollPrompt)
 {
     //  If the string already has line breaks, don't interfere with them
     if (StringHasManualBreaks(src))
@@ -95,11 +129,124 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
 
     //  Step 1: Does it all fit one one line? Then no break
     //  Step 2: Try to split across minimum number of lines
-    u32 spaceWidth = GetGlyphWidth(0, FALSE, fontId);
+    u32 spaceWidth = GetGlyphWidth(CHAR_SPACE, FALSE, fontId);
     u32 totalWidth = allWords[0].width;
     //  Calculate total widths without any line breaks
     for (u32 i = 1; i < numWords; i++)
         totalWidth += allWords[i].width + spaceWidth;
+
+    //  If it doesn't fit on 1 line, do line breaks
+    if (totalWidth > maxWidth)
+    {
+        u32 currWidth = 0;
+        u32 numBreaks = 0;
+        u32 currWords = 1;
+        for (u32 wordIndex = 0; wordIndex < numWords; wordIndex++)
+        {
+            currWidth += allWords[wordIndex].width;
+            if (numBreaks == screenLines - 1)
+            {
+                if (SCROLL_PROMPT_WIDTH + currWidth + (currWords - 1) * spaceWidth > maxWidth)
+                {
+                    src[allWords[wordIndex].startIndex - 1] = CHAR_PROMPT_SCROLL;
+                    currWidth = allWords[wordIndex].length;
+                    currWords = 1;
+                }
+                else
+                {
+                    currWords++;
+                }
+            }
+            else
+            {
+                if (currWidth + (currWords - 1) * spaceWidth > maxWidth)
+                {
+                    src[allWords[wordIndex].startIndex - 1] = CHAR_NEWLINE;
+                    currWidth = allWords[wordIndex].width;
+                    currWords = 1;
+                    numBreaks++;
+                }
+                else
+                {
+                    currWords++;
+                }
+            }
+        }
+    }
+
+    Free(allWords);
+}
+
+void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, enum ToggleScrollPrompt toggleScrollPrompt)
+{
+    //  If the string already has line breaks, don't interfere with them
+    if (StringHasManualBreaks(src))
+        return;
+    //  Sanity check
+    if (src[0] == EOS)
+        return;
+    u32 numChars = 1;
+    u32 numWords = 1;
+    u32 currWordIndex = 0;
+    u32 currWordLength = 1;
+    bool32 isPrevCharSplitting = FALSE;
+    bool32 isCurrCharSplitting;
+    //  Get numbers of chars in string and count words
+    while (src[numChars] != EOS)
+    {
+        isCurrCharSplitting = IsWordSplittingChar(src, numChars);
+        if (isCurrCharSplitting && !isPrevCharSplitting)
+            numWords++;
+        isPrevCharSplitting = isCurrCharSplitting;
+        numChars++;
+    }
+    //  Allocate enough space for word data
+    struct StringWord *allWords = Alloc(numWords*sizeof(struct StringWord));
+
+    allWords[currWordIndex].startIndex = 0;
+    allWords[currWordIndex].width = 0;
+    isPrevCharSplitting = FALSE;
+    //  Fill in word begin index and lengths
+    for (u32 i = 1; i < numChars; i++)
+    {
+        isCurrCharSplitting = IsWordSplittingChar(src, i);
+        if (isCurrCharSplitting && !isPrevCharSplitting)
+        {
+            allWords[currWordIndex].length = currWordLength;
+            currWordIndex++;
+            currWordLength = 0;
+        }
+        else if (!isCurrCharSplitting && isPrevCharSplitting)
+        {
+            allWords[currWordIndex].startIndex = i;
+            allWords[currWordIndex].width = 0;
+            currWordLength++;
+        }
+        else
+        {
+            currWordLength++;
+        }
+        isPrevCharSplitting = isCurrCharSplitting;
+    }
+    allWords[currWordIndex].length = currWordLength;
+
+    //  Fill in individual word widths
+    for (u32 i = 0; i < numWords; i++)
+    {
+        for (u32 j = 0; j < allWords[i].length; j++)
+            allWords[i].width += GetGlyphWidth(src[allWords[i].startIndex + j], FALSE, fontId);
+    }
+
+    //  Step 1: Does it all fit one one line? Then no break
+    //  Step 2: Try to split across minimum number of lines
+    u32 spaceWidth = GetGlyphWidth(CHAR_SPACE, FALSE, fontId);
+    u32 totalWidth = allWords[0].width;
+    //  Calculate total widths without any line breaks
+    for (u32 i = 1; i < numWords; i++)
+        totalWidth += allWords[i].width + spaceWidth;
+
+    if (toggleScrollPrompt == SHOW_SCROLL_PROMPT)
+        totalWidth += SCROLL_PROMPT_WIDTH;
 
     //  If it doesn't fit on 1 line, do fancy line break calculation
     //  NOTE: Currently the line break calculation isn't fancy
@@ -111,6 +258,8 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
         bool32 shouldTryAgain;
         for (currWordIndex = 0; currWordIndex < numWords; currWordIndex++)
         {
+            if (toggleScrollPrompt == SHOW_SCROLL_PROMPT && currWordIndex + 1 == numWords)
+                currLineWidth += SCROLL_PROMPT_WIDTH;
             if (currLineWidth + allWords[currWordIndex].length > maxWidth)
             {
                 totalLines++;
@@ -121,6 +270,10 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
                 currLineWidth += allWords[currWordIndex].width + spaceWidth;
             }
         }
+
+        if (currLineWidth > maxWidth)
+            totalLines++;
+
         //  LINE LAYOUT STARTS HERE
         struct StringLine *stringLines;
         do
@@ -185,7 +338,7 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId)
             }
         } while (shouldTryAgain);
         //u32 currBadness = GetStringBadness(stringLines, totalLines, maxWidth);
-        BuildNewString(stringLines, totalLines, screenLines, src);
+        BuildNewString(stringLines, totalLines, screenLines, src, toggleScrollPrompt);
         Free(stringLines);
     }
 
@@ -247,7 +400,7 @@ u32 GetStringBadness(struct StringLine *stringLines, u32 numLines, u32 maxWidth)
 }
 
 //  Build the new string from the data stored in the StringLine structs
-void BuildNewString(struct StringLine *stringLines, u32 numLines, u32 maxLines, u8 *str)
+void BuildNewString(struct StringLine *stringLines, u32 numLines, u32 maxLines, u8 *str, enum ToggleScrollPrompt toggleScrollPrompt)
 {
     u32 srcCharIndex = 0;
     for (u32 lineIndex = 0; lineIndex < numLines; lineIndex++)
@@ -259,7 +412,7 @@ void BuildNewString(struct StringLine *stringLines, u32 numLines, u32 maxLines, 
         if (lineIndex + 1 < numLines)
         {
             //  Add the appropriate line break depending on line number
-            if (lineIndex >= maxLines - 1 && numLines > maxLines)
+            if (lineIndex >= maxLines - 1 && numLines > maxLines && toggleScrollPrompt == SHOW_SCROLL_PROMPT)
                 str[srcCharIndex] = CHAR_PROMPT_SCROLL;
             else
                 str[srcCharIndex] = CHAR_NEWLINE;
@@ -279,3 +432,4 @@ bool32 StringHasManualBreaks(u8 *src)
     }
     return FALSE;
 }
+#undef SCROLL_PROMPT_WIDTH

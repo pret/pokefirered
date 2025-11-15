@@ -1157,6 +1157,25 @@ void CopyToBufferFromBgTilemap(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8
     }
 }
 
+void AddValToTilemapBuffer(void *ptr, int delta, int width, int height, bool32 isAffine)
+{
+    int i;
+    int area = width * height;
+    if (isAffine == TRUE)
+    {
+        u8 *as8BPP = ptr;
+        for (i = 0; i < area; i++)
+            as8BPP[i] += delta;
+    }
+    else
+    {
+        // Limit add to first 10 bits
+        u16 *as4BPP = ptr;
+        for (i = 0; i < area; i++)
+            as4BPP[i] = (as4BPP[i] & 0xFC00) | ((as4BPP[i] + delta) & 0x3FF);
+    }
+}
+
 void ResetBgPositions(void)
 {
     ChangeBgX(0, 0, 0);

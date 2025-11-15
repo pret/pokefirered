@@ -2,7 +2,7 @@
 #include "pokedex.h"
 #include "pokedex_screen.h"
 
-s8 GetSetPokedexFlag(u16 nationalDexNo, u8 caseID)
+s8 GetSetPokedexFlag(enum NationalDexOrder nationalDexNo, u8 caseID)
 {
     return DexScreen_GetSetPokedexFlag(nationalDexNo, caseID, 0);
 }

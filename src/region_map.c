@@ -232,7 +232,6 @@ struct PlayerIcon
     struct Sprite *sprite;
     u16 tileTag;
     u16 palTag;
-    u16 tiles[0x40];
 }; // size = 0x8C
 
 struct MapIconSprite
@@ -388,10 +387,13 @@ static void InitFlyMap(void);
 static void FreeFlyMap(u8);
 static void SetFlyWarpDestination(u16);
 
+const u32 gPlayerIcon_Red[] = INCBIN_U32("graphics/region_map/player_icon_red.4bpp");
+const u32 gPlayerIcon_Leaf[] = INCBIN_U32("graphics/region_map/player_icon_leaf.4bpp");
+const u16 gPlayerIcon_RedPal[] = INCBIN_U16("graphics/region_map/player_icon_red.gbapal");
+const u16 gPlayerIcon_LeafPal[] = INCBIN_U16("graphics/region_map/player_icon_leaf.gbapal");
+
 static const u16 sTopBar_Pal[] = INCBIN_U16("graphics/region_map/top_bar.gbapal"); // Palette for the top bar and dynamic text color
 static const u16 sMapCursor_Pal[] = INCBIN_U16("graphics/region_map/cursor.gbapal");
-static const u16 sPlayerIcon_RedPal[] = INCBIN_U16("graphics/region_map/player_icon_red.gbapal");
-static const u16 sPlayerIcon_LeafPal[] = INCBIN_U16("graphics/region_map/player_icon_leaf.gbapal");
 static const u16 sMiscIcon_Pal[] = INCBIN_U16("graphics/region_map/misc_icon.gbapal"); // For dungeon and fly icons
 static const u16 sRegionMap_Pal[] = INCBIN_U16("graphics/region_map/region_map.gbapal");
 static const u16 sUnusedPalette[] = { RGB(0, 0, 31), RGB(0, 12, 31), RGB_WHITE, RGB_WHITE };
@@ -400,8 +402,6 @@ static const u16 sMapEdge_Pal[] = INCBIN_U16("graphics/region_map/map_edge.gbapa
 static const u32 sSwitchMapCursorLeft_Gfx[] = INCBIN_U32("graphics/region_map/switch_map_cursor_left.4bpp.lz");
 static const u32 sSwitchMapCursorRight_Gfx[] = INCBIN_U32("graphics/region_map/switch_map_cursor_right.4bpp.lz");
 static const u32 sMapCursor_Gfx[] = INCBIN_U32("graphics/region_map/cursor.4bpp.lz");
-static const u32 sPlayerIcon_Red[] = INCBIN_U32("graphics/region_map/player_icon_red.4bpp.lz");
-static const u32 sPlayerIcon_Leaf[] = INCBIN_U32("graphics/region_map/player_icon_leaf.4bpp.lz");
 static const u32 sRegionMap_Gfx[] = INCBIN_U32("graphics/region_map/region_map.4bpp.lz");
 static const u32 sMapEdge_Gfx[] = INCBIN_U32("graphics/region_map/map_edge.4bpp.lz");
 static const u32 sSwitchMapMenu_Gfx[] = INCBIN_U32("graphics/region_map/switch_map_menu.4bpp.lz");
@@ -3358,10 +3358,6 @@ static u8 GetSelectedMapSection(u8 whichMap, u8 layer, s16 y, s16 x)
 static void CreatePlayerIcon(u16 tileTag, u16 palTag)
 {
     sPlayerIcon = AllocZeroed(sizeof(struct PlayerIcon));
-    if (gSaveBlock2Ptr->playerGender == FEMALE)
-        DecompressDataWithHeaderWram(sPlayerIcon_Leaf, sPlayerIcon->tiles);
-    else
-        DecompressDataWithHeaderWram(sPlayerIcon_Red, sPlayerIcon->tiles);
     sPlayerIcon->tileTag = tileTag;
     sPlayerIcon->palTag = palTag;
     sPlayerIcon->x = GetMapCursorX();
@@ -3373,12 +3369,12 @@ static void CreatePlayerIconSprite(void)
 {
     u8 spriteId;
     struct SpriteSheet spriteSheet = {
-        .data = sPlayerIcon->tiles,
-        .size = sizeof(sPlayerIcon->tiles),
+        .data = gPlayerIcon_Red,
+        .size = sizeof(gPlayerIcon_Red),
         .tag = sPlayerIcon->tileTag
     };
     struct SpritePalette spritePalette = {
-        .data = sPlayerIcon_RedPal,
+        .data = gPlayerIcon_RedPal,
         .tag = sPlayerIcon->palTag
     };
     struct SpriteTemplate template = {
@@ -3391,8 +3387,11 @@ static void CreatePlayerIconSprite(void)
         .callback = SpriteCallbackDummy
     };
 
-    if (gSaveBlock2Ptr->playerGender == FEMALE)
-        spritePalette.data = sPlayerIcon_LeafPal;
+    if (gSaveBlock2Ptr->playerGender == FEMALE) {
+        spriteSheet.data = gPlayerIcon_Leaf;
+        spriteSheet.size = sizeof(gPlayerIcon_Leaf);
+        spritePalette.data = gPlayerIcon_LeafPal;
+    }
 
     LoadSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);

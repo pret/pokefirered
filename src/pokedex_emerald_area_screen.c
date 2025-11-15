@@ -157,11 +157,6 @@ static const u16 sFeebasData[][3] =
     {NUM_SPECIES}
 };
 
-static const mapsec_u16_t sLandmarkData[][2] =
-{
-    {MAPSEC_NONE}
-};
-
 #include "data/pokedex_emerald_area_glow.h"
 
 static const struct PokedexAreaMapTemplate sPokedexAreaMapTemplate =
@@ -400,12 +395,12 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
             //         return;
             // }
 
-            // Don't highlight the area if it's an undiscovered landmark (e.g. Sky Pillar)
-            for (i = 0; sLandmarkData[i][0] != MAPSEC_NONE; i++)
-            {
-                if (regionMapSectionId == sLandmarkData[i][0] && !FlagGet(sLandmarkData[i][1]))
-                    return;
-            }
+            // // Don't highlight the area if it's an undiscovered landmark (e.g. Sky Pillar)
+            // for (i = 0; sLandmarkData[i] != MAPSEC_NONE; i++)
+            // {
+            //     if (regionMapSectionId == sLandmarkData[i])
+            //         return;
+            // }
 
             // Check if this special area is already being tracked
             for (i = 0; i < sPokedexAreaScreen->numSpecialAreas; i++)
@@ -413,7 +408,7 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
                 if (sPokedexAreaScreen->specialAreaRegionMapSectionIds[i] == regionMapSectionId)
                     break;
             }
-
+            DebugPrintfLevel(MGBA_LOG_ERROR, "special area mapsec: %u", regionMapSectionId);
             if (i == sPokedexAreaScreen->numSpecialAreas)
             {
                 // New special area
@@ -941,6 +936,9 @@ static void ResetPokedexAreaMapBg(void)
     SetBgAttribute(3, BG_ATTR_PALETTEMODE, 0);
 }
 
+extern const s8 sAreaMarkers[][4];
+extern const u16 sDexAreas_Kanto[55][2];
+
 // Creates the circular sprites to highlight special areas (like caves) where a Pokémon can be found
 static void CreateAreaMarkerSprites(void)
 {
@@ -956,7 +954,7 @@ static void CreateAreaMarkerSprites(void)
     numSprites = 0;
     for (i = 0; i < sPokedexAreaScreen->numSpecialAreas; i++)
     {
-        mapSecId = sPokedexAreaScreen->specialAreaRegionMapSectionIds[i];
+        mapSecId = sPokedexAreaScreen->specialAreaRegionMapSectionIds[i] - KANTO_MAPSEC_START;
         x = 8 * (gRegionMapEntries[mapSecId].x + 1) + 4;
         y = 8 * (gRegionMapEntries[mapSecId].y) + 28;
         x += 4 * (gRegionMapEntries[mapSecId].width - 1);

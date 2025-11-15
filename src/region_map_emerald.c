@@ -128,6 +128,11 @@ static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/
 static const u16 sRegionMapPlayerIcon_MayPal[] = INCBIN_U16("graphics/pokenav/region_map/may_icon.gbapal");
 static const u8 sRegionMapPlayerIcon_MayGfx[] = INCBIN_U8("graphics/pokenav/region_map/may_icon.4bpp");
 
+extern const u32 gPlayerIcon_Red[];
+extern const u32 gPlayerIcon_Leaf[];
+extern const u16 gPlayerIcon_RedPal[];
+extern const u16 gPlayerIcon_LeafPal[];
+
 #include "data/region_map/region_map_layout.h"
 // #include "data/region_map/region_map_entries.h"
 extern const struct RegionMapLocation gRegionMapEntries[];
@@ -1304,26 +1309,26 @@ static void InitMapBasedOnPlayerLocation(void)
 
     xOnMap = x;
 
-    dimensionScale = mapWidth / gRegionMapEntries[sRegionMap->mapSecId].width;
+    dimensionScale = mapWidth / gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].width;
     if (dimensionScale == 0)
     {
         dimensionScale = 1;
     }
     x /= dimensionScale;
-    if (x >= gRegionMapEntries[sRegionMap->mapSecId].width)
+    if (x >= gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].width)
     {
-        x = gRegionMapEntries[sRegionMap->mapSecId].width - 1;
+        x = gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].width - 1;
     }
 
-    dimensionScale = mapHeight / gRegionMapEntries[sRegionMap->mapSecId].height;
+    dimensionScale = mapHeight / gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].height;
     if (dimensionScale == 0)
     {
         dimensionScale = 1;
     }
     y /= dimensionScale;
-    if (y >= gRegionMapEntries[sRegionMap->mapSecId].height)
+    if (y >= gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].height)
     {
-        y = gRegionMapEntries[sRegionMap->mapSecId].height - 1;
+        y = gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].height - 1;
     }
 
     switch (sRegionMap->mapSecId)
@@ -1359,8 +1364,8 @@ static void InitMapBasedOnPlayerLocation(void)
     //     GetMarineCaveCoords(&sRegionMap->cursorPosX, &sRegionMap->cursorPosY);
     //     return;
     }
-    sRegionMap->cursorPosX = gRegionMapEntries[sRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
-    sRegionMap->cursorPosY = gRegionMapEntries[sRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
+    sRegionMap->cursorPosX = gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].x + x + MAPCURSOR_X_MIN;
+    sRegionMap->cursorPosY = gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].y + y + MAPCURSOR_Y_MIN;
 }
 
 // static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
@@ -1730,8 +1735,8 @@ static void UNUSED ClearUnkCursorSpriteData(void)
 void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
 {
     u8 spriteId;
-    struct SpriteSheet sheet = {sRegionMapPlayerIcon_BrendanGfx, 0x80, tileTag};
-    struct SpritePalette palette = {sRegionMapPlayerIcon_BrendanPal, paletteTag};
+    struct SpriteSheet sheet = {gPlayerIcon_Red, 0x80, tileTag};
+    struct SpritePalette palette = {gPlayerIcon_RedPal, paletteTag};
     struct SpriteTemplate template = {tileTag, paletteTag, &sRegionMapPlayerIconOam, sRegionMapPlayerIconAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
 
     if (IsEventIslandMapSecId(gMapHeader.regionMapSectionId))
@@ -1741,8 +1746,8 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     }
     if (gSaveBlock2Ptr->playerGender == FEMALE)
     {
-        sheet.data = sRegionMapPlayerIcon_MayGfx;
-        palette.data = sRegionMapPlayerIcon_MayPal;
+        sheet.data = gPlayerIcon_Red;
+        palette.data = gPlayerIcon_RedPal;
     }
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&palette);
@@ -1905,10 +1910,10 @@ u8 *GetMapNameHandleAquaHideout(u8 *dest, mapsec_u16_t mapSecId)
 
 static void GetMapSecDimensions(mapsec_u16_t mapSecId, u16 *x, u16 *y, u16 *width, u16 *height)
 {
-    *x = gRegionMapEntries[mapSecId].x;
-    *y = gRegionMapEntries[mapSecId].y;
-    *width = gRegionMapEntries[mapSecId].width;
-    *height = gRegionMapEntries[mapSecId].height;
+    *x = gRegionMapEntries[mapSecId - KANTO_MAPSEC_START].x;
+    *y = gRegionMapEntries[mapSecId - KANTO_MAPSEC_START].y;
+    *width = gRegionMapEntries[mapSecId - KANTO_MAPSEC_START].width;
+    *height = gRegionMapEntries[mapSecId - KANTO_MAPSEC_START].height;
 }
 
 bool8 IsRegionMapZoomed(void)
@@ -1928,7 +1933,7 @@ bool32 IsEventIslandMapSecId(mapsec_u8_t mapSecId)
     return FALSE;
 }
 
-void CB2_OpenFlyMap(void)
+void CB2_OpenFlyMapEmerald(void)
 {
     switch (gMain.state)
     {

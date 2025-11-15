@@ -22,6 +22,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "pokedex.h"
 #include "pokedex_emerald.h"
 #include "pokedex_plus_hgss.h"
 #include "pokedex_emerald_area_screen.h"
@@ -127,10 +128,10 @@ extern const u16 gPokedexOrder_Weight[];
 // static .rodata strings
 
 static const u8 sText_No0000[] = _("0000");
-static const u8 sCaughtBall_Gfx[] = INCBIN_U8("graphics/pokedex/caught_marker.4bpp");
+static const u8 sCaughtBall_Gfx[] = INCBIN_U8("graphics/pokedex/emerald/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
 ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
-static const u16 sSizeScreenSilhouette_Pal[] = INCBIN_U16("graphics/pokedex/silhouette_sprite_pal.gbapal");
+static const u16 sSizeScreenSilhouette_Pal[] = INCBIN_U16("graphics/pokedex/emerald/size_silhouette.gbapal");
 
 static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}TOGGLE   {DPAD_UPDOWN}MOVES");
 static const u8 sText_Stats_Buttons_Decapped[] = _("{A_BUTTON}Toggle   {DPAD_UPDOWN}Moves");

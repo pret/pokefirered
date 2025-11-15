@@ -12,6 +12,7 @@
 #include "pokedex_screen.h"
 #include "data.h"
 #include "pokedex.h"
+#include "pokedex_emerald.h"
 #include "pokedex_plus_hgss.h"
 #include "trainer_pokemon_sprites.h"
 #include "decompress.h"
@@ -959,6 +960,12 @@ void CB2_OpenPokedexFromStartMenu(void)
     if (POKEDEX_PLUS_HGSS)
     {
         CB2_OpenPokedexPlusHGSS();
+        return;
+    }
+    
+    if (POKEDEX_EMERALD)
+    {
+        CB2_OpenPokedex();
         return;
     }
 

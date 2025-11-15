@@ -14,6 +14,7 @@
 #include "m4a.h"
 #include "overworld.h"
 #include "palette.h"
+#include "pokedex.h"
 #include "pokedex_emerald.h"
 #include "pokedex_emerald_area_screen.h"
 #include "pokedex_emerald_cry_screen.h"
@@ -286,11 +287,11 @@ static u8* ReplaceDecimalSeparator(const u8* originalString);
 static void PrintOwnedMonMeasurements(u16 species);
 static void PrintOwnedMonHeight(u16 species);
 static void PrintOwnedMonWeight(u16 species);
-static u8* ConvertMonHeightToImperialString(u32 height);
-static u8* ConvertMonHeightToMetricString(u32 height);
+// static u8* ConvertMonHeightToImperialString(u32 height);
+// static u8* ConvertMonHeightToMetricString(u32 height);
 // static u8* ConvertMonWeightToImperialString(u32 weight);
 // static u8* ConvertMonWeightToMetricString(u32 weight);
-static u8* ConvertMeasurementToMetricString(u32 num, u32* index);
+// static u8* ConvertMeasurementToMetricString(u32 num, u32* index);
 static void ResetOtherVideoRegisters(u16);
 static u8 PrintCryScreenSpeciesName(u8, u16, u8, u8);
 static void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top);
@@ -4381,48 +4382,48 @@ static void PrintOwnedMonWeight(u16 species)
 //         return ConvertMonWeightToMetricString(weight);
 // }
 
-static u8* ConvertMonHeightToImperialString(u32 height)
-{
-    u8* heightString = Alloc(WEIGHT_HEIGHT_STR_MEM);
-    u32 inches, feet, index = 0;
+// static u8* ConvertMonHeightToImperialString(u32 height)
+// {
+//     u8* heightString = Alloc(WEIGHT_HEIGHT_STR_MEM);
+//     u32 inches, feet, index = 0;
 
-    inches = (height * 10000) / CM_PER_INCH_FACTOR;
-    if (inches % 10 >= 5)
-        inches += 10;
-    feet = inches / INCHES_IN_FOOT_FACTOR;
-    inches = (inches - (feet * INCHES_IN_FOOT_FACTOR)) / 10;
+//     inches = (height * 10000) / CM_PER_INCH_FACTOR;
+//     if (inches % 10 >= 5)
+//         inches += 10;
+//     feet = inches / INCHES_IN_FOOT_FACTOR;
+//     inches = (inches - (feet * INCHES_IN_FOOT_FACTOR)) / 10;
 
-    heightString[index++] = EXT_CTRL_CODE_BEGIN;
-    heightString[index++] = EXT_CTRL_CODE_CLEAR_TO;
-    if (feet / 10 == 0)
-    {
-        heightString[index++] = INCHES_IN_ONE_AND_HALF_FOOT;
-        heightString[index++] = feet + CHAR_0;
-    }
-    else
-    {
-        heightString[index++] = INCHES_IN_FOOT;
-        heightString[index++] = feet / 10 + CHAR_0;
-        heightString[index++] = (feet % 10) + CHAR_0;
-    }
-    heightString[index++] = CHAR_SGL_QUOTE_RIGHT;
-    heightString[index++] = (inches / 10) + CHAR_0;
-    heightString[index++] = (inches % 10) + CHAR_0;
-    heightString[index++] = CHAR_DBL_QUOTE_RIGHT;
-    heightString[index++] = EOS;
+//     heightString[index++] = EXT_CTRL_CODE_BEGIN;
+//     heightString[index++] = EXT_CTRL_CODE_CLEAR_TO;
+//     if (feet / 10 == 0)
+//     {
+//         heightString[index++] = INCHES_IN_ONE_AND_HALF_FOOT;
+//         heightString[index++] = feet + CHAR_0;
+//     }
+//     else
+//     {
+//         heightString[index++] = INCHES_IN_FOOT;
+//         heightString[index++] = feet / 10 + CHAR_0;
+//         heightString[index++] = (feet % 10) + CHAR_0;
+//     }
+//     heightString[index++] = CHAR_SGL_QUOTE_RIGHT;
+//     heightString[index++] = (inches / 10) + CHAR_0;
+//     heightString[index++] = (inches % 10) + CHAR_0;
+//     heightString[index++] = CHAR_DBL_QUOTE_RIGHT;
+//     heightString[index++] = EOS;
 
-    return heightString;
-}
+//     return heightString;
+// }
 
-static u8* ConvertMonHeightToMetricString(u32 height)
-{
-    u32 index = 0;
-    u8* heightString = ConvertMeasurementToMetricString(height, &index);
+// static u8* ConvertMonHeightToMetricString(u32 height)
+// {
+//     u32 index = 0;
+//     u8* heightString = ConvertMeasurementToMetricString(height, &index);
 
-    heightString[index++] = CHAR_m;
-    heightString[index++] = EOS;
-    return heightString;
-}
+//     heightString[index++] = CHAR_m;
+//     heightString[index++] = EOS;
+//     return heightString;
+// }
 
 // static u8* ConvertMonWeightToImperialString(u32 weight)
 // {
@@ -4492,43 +4493,43 @@ static u8* ConvertMonHeightToMetricString(u32 height)
 //     return weightString;
 // }
 
-static u8* ConvertMeasurementToMetricString(u32 num, u32* index)
-{
-    u8* string = Alloc(WEIGHT_HEIGHT_STR_MEM);
-    bool32 outputted = FALSE;
-    u32 result;
+// static u8* ConvertMeasurementToMetricString(u32 num, u32* index)
+// {
+//     u8* string = Alloc(WEIGHT_HEIGHT_STR_MEM);
+//     bool32 outputted = FALSE;
+//     u32 result;
 
-    result = num / 1000;
-    if (result == 0)
-    {
-        string[(*index)++] = CHAR_SPACER;
-        outputted = FALSE;
-    }
-    else
-    {
-        string[(*index)++] = CHAR_0 + result;
-        outputted = TRUE;
-    }
+//     result = num / 1000;
+//     if (result == 0)
+//     {
+//         string[(*index)++] = CHAR_SPACER;
+//         outputted = FALSE;
+//     }
+//     else
+//     {
+//         string[(*index)++] = CHAR_0 + result;
+//         outputted = TRUE;
+//     }
 
-    result = (num % 1000) / 100;
-    if (result == 0 && !outputted)
-    {
-        string[(*index)++] = CHAR_SPACER;
-        outputted = FALSE;
-    }
-    else
-    {
-        string[(*index)++] = CHAR_0 + result;
-        outputted = TRUE;
-    }
+//     result = (num % 1000) / 100;
+//     if (result == 0 && !outputted)
+//     {
+//         string[(*index)++] = CHAR_SPACER;
+//         outputted = FALSE;
+//     }
+//     else
+//     {
+//         string[(*index)++] = CHAR_0 + result;
+//         outputted = TRUE;
+//     }
 
-    string[(*index)++] = CHAR_0 + ((num % 1000) % 100) / 10;
-    string[(*index)++] = CHAR_DEC_SEPARATOR;
-    string[(*index)++] = CHAR_0 + ((num % 1000) % 100) % 10;
-    string[(*index)++] = CHAR_SPACE;
+//     string[(*index)++] = CHAR_0 + ((num % 1000) % 100) / 10;
+//     string[(*index)++] = CHAR_DEC_SEPARATOR;
+//     string[(*index)++] = CHAR_0 + ((num % 1000) % 100) % 10;
+//     string[(*index)++] = CHAR_SPACE;
 
-    return string;
-}
+//     return string;
+// }
 
 static void ResetOtherVideoRegisters(u16 regBits)
 {

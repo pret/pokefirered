@@ -282,7 +282,6 @@ static void SafariHandleChooseAction(u32 battler)
 
     ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(sText_WhatWillPlayerThrow);
-    BreakStringAutomatic(gDisplayedStringBattle, WindowWidthPx(B_WIN_ACTION_PROMPT), 2, FONT_NORMAL);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 

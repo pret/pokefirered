@@ -12,12 +12,14 @@
 #include "pokedex_screen.h"
 #include "data.h"
 #include "pokedex.h"
+#include "pokedex_plus_hgss.h"
 #include "trainer_pokemon_sprites.h"
 #include "decompress.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "pokedex_area_markers.h"
 #include "field_specials.h"
+#include "config/pokedex_plus_hgss.h"
 
 #define TAG_AREA_MARKERS 2001
 
@@ -954,6 +956,12 @@ void DexScreen_LoadResources(void)
 
 void CB2_OpenPokedexFromStartMenu(void)
 {
+    if (POKEDEX_PLUS_HGSS)
+    {
+        CB2_OpenPokedexPlusHGSS();
+        return;
+    }
+
     DexScreen_LoadResources();
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
     SetGpuReg(REG_OFFSET_BLDCNT, 0);

@@ -3,10 +3,18 @@
 
 #include "constants/regions.h"
 
-static inline u32 GetCurrentRegion(void)
+enum KantoSubRegion GetKantoSubregion(u32 mapSecId);
+
+static inline enum Region GetRegionForSectionId(u32 sectionId)
 {
-    // TODO: Since there's no current multi-region support, we have this constant for the purposes of regional form comparisons.
-    return REGION_KANTO;
+    if (sectionId >= KANTO_MAPSEC_START && sectionId < MAPSEC_SPECIAL_AREA)
+        return REGION_KANTO;
+    return REGION_HOENN;
+}
+
+static inline enum Region GetCurrentRegion(void)
+{
+    return GetRegionForSectionId(gMapHeader.regionMapSectionId);
 }
 
 #endif // GUARD_REGIONS_H

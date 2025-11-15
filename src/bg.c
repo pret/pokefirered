@@ -572,9 +572,9 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
         case BG_ATTR_METRIC:
             switch (GetBgType(bg))
             {
-                case 0:
+                case BG_TYPE_NORMAL:
                     return GetBgMetricTextMode(bg, 0) * 0x800;
-                case 1:
+                case BG_TYPE_AFFINE:
                     return GetBgMetricAffineMode(bg, 0) * 0x100;
                 default:
                     return 0;

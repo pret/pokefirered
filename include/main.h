@@ -53,6 +53,7 @@ extern struct Main gMain;
 extern bool8 gSoftResetDisabled;
 extern IntrFunc gIntrTable[];
 extern bool8 gLinkVSyncDisabled;
+extern s8 gPcmDmaCounter;
 
 void AgbMain(void);
 void AgbMainLoop(void);

@@ -3857,7 +3857,7 @@ static void ClearOrDrawTopBar(bool8 clear)
     }
 }
 
-void CB2_OpenFlyMap(void)
+void CB2_OpenFlyMapEmerald(void)
 {
     InitFlyMap();
     InitRegionMap(REGIONMAP_TYPE_FLY);

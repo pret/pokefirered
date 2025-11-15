@@ -52,6 +52,7 @@ bool32 InitWindows(const struct WindowTemplate *templates);
 u32 AddWindow(const struct WindowTemplate *template);
 int AddWindowWithoutTileMap(const struct WindowTemplate *template);
 void RemoveWindow(u32 windowId);
+void RemoveAllWindowsOnBg(u32 bgId);
 void FreeAllWindowBuffers(void);
 void CopyWindowToVram(u32 windowId, u32 mode);
 void CopyWindowRectToVram(u32 windowId, u32 mode, u32 x, u32 y, u32 w, u32 h);

@@ -103,7 +103,6 @@ u16 GetNationalPokedexCount(u8);
 u16 GetKantoPokedexCount(u8);
 bool16 HasAllMons(void);
 s8 GetSetPokedexFlag(u16 nationalNum, u8 caseId);
-u16 GetKantoPokedexCount(u8);
 bool16 HasAllHoennMons(void);
 bool16 HasAllKantoMons(void);
 bool16 HasAllMons(void);

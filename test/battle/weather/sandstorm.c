@@ -97,8 +97,8 @@ SINGLE_BATTLE_TEST("Sandstorm damage rounds properly when maxHP < 16")
 
 SINGLE_BATTLE_TEST("Sandstorm doesn't do damage when weather is negated")
 {
-    u32 type1 = GetSpeciesType(SPECIES_STOUTLAND, 0);
-    u32 type2 = GetSpeciesType(SPECIES_STOUTLAND, 1);
+    enum Type type1 = GetSpeciesType(SPECIES_STOUTLAND, 0);
+    enum Type type2 = GetSpeciesType(SPECIES_STOUTLAND, 1);
     GIVEN {
         ASSUME(type1 != TYPE_ROCK && type2 != TYPE_ROCK);
         ASSUME(type1 != TYPE_GROUND && type2 != TYPE_GROUND);

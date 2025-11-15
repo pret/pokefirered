@@ -177,14 +177,14 @@ SINGLE_BATTLE_TEST("Scale Shot is immune to Fairy types and will end the move co
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_SCALE_SHOT) == EFFECT_MULTI_HIT);
         ASSUME(GetMoveType(MOVE_SCALE_SHOT) == TYPE_DRAGON);
-        ASSUME(GetSpeciesType(SPECIES_CLEFAIRY, 0) == TYPE_FAIRY || GetSpeciesType(SPECIES_CLEFAIRY, 1) == TYPE_FAIRY);
+        ASSUME(GetSpeciesType(SPECIES_FIDOUGH, 0) == TYPE_FAIRY || GetSpeciesType(SPECIES_FIDOUGH, 1) == TYPE_FAIRY);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_CLEFAIRY) { HP(1); }
+        OPPONENT(SPECIES_FIDOUGH) { HP(1); }
     } WHEN {
         TURN { MOVE(player, MOVE_SCALE_SHOT); }
     } SCENE {
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SCALE_SHOT, player);
-        MESSAGE("It doesn't affect the opposing Clefairy…");
+        MESSAGE("It doesn't affect the opposing Fidough…");
     }
 }
 

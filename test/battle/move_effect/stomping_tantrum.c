@@ -90,6 +90,31 @@ SINGLE_BATTLE_TEST("Stomping Tantrum will not deal double damage if target prote
     }
 }
 
+SINGLE_BATTLE_TEST("Stomping Tantrum will deal double damage if user failed a Protect")
+{
+    s16 damage[2];
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_STOMPING_TANTRUM); }
+        TURN { MOVE(player, MOVE_PROTECT); }
+        TURN { MOVE(player, MOVE_PROTECT, WITH_RNG(RNG_PROTECT_FAIL, USHRT_MAX)); }
+        TURN { MOVE(player, MOVE_STOMPING_TANTRUM); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STOMPING_TANTRUM, player);
+        HP_BAR(opponent, captureDamage: &damage[0]);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, player);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STOMPING_TANTRUM, player);
+        HP_BAR(opponent, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
+    }
+}
+
 SINGLE_BATTLE_TEST("Stomping Tantrum will not deal double if it missed")
 {
     s16 damage[2];

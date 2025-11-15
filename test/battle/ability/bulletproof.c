@@ -1,4 +1,20 @@
 #include "global.h"
 #include "test/battle.h"
 
-TO_DO_BATTLE_TEST("Bulletproof makes ballistic moves fail against the ability user");
+SINGLE_BATTLE_TEST("Bulletproof makes ballistic moves fail against the ability user")
+{
+    GIVEN {
+        ASSUME(IsBallisticMove(MOVE_ELECTRO_BALL));
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_CHESPIN) { Ability(ABILITY_BULLETPROOF); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ELECTRO_BALL); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_BULLETPROOF);
+        MESSAGE("The opposing Chespin's Bulletproof blocks Electro Ball!");
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_ELECTRO_BALL, player);
+            HP_BAR(opponent);
+        }
+    }
+}

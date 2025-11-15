@@ -59,7 +59,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_PREDICT_SWITCH: Considers ShouldSwitch and GetMos
     // Switching in trapper is an advanced feature of ShouldSwitch that requires GetMostSuitableMonToSwitchInto to also return a specific mon; this passing means the AI can use both in prediction
     PASSES_RANDOMLY(5, 10, RNG_AI_PREDICT_SWITCH);
     GIVEN {
-        ASSUME(B_POWDER_GRASS >= GEN_6);
+        WITH_CONFIG(GEN_CONFIG_POWDER_GRASS, GEN_6);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_PREDICT_SWITCH | AI_FLAG_PREDICT_INCOMING_MON);
         PLAYER(SPECIES_SKARMORY) { Moves(MOVE_SCRATCH); }
         PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_ARENA_TRAP); Moves(MOVE_ACROBATICS); }

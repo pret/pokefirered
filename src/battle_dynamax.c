@@ -19,7 +19,6 @@
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/flags.h"
-#include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 
@@ -28,7 +27,7 @@ static u32 GetMaxPowerTier(u32 move);
 struct GMaxMove
 {
     u16 species;
-    u8 moveType;
+    enum Type moveType;
     u16 gmaxMove;
 };
 
@@ -66,15 +65,15 @@ static const struct GMaxMove sGMaxMoveTable[] =
     {SPECIES_ALCREMIE_GMAX,                   TYPE_FAIRY,      MOVE_G_MAX_FINALE},
     {SPECIES_COPPERAJAH_GMAX,                 TYPE_STEEL,      MOVE_G_MAX_STEELSURGE},
     {SPECIES_DURALUDON_GMAX,                  TYPE_DRAGON,     MOVE_G_MAX_DEPLETION},
-    {SPECIES_URSHIFU_SINGLE_STRIKE_GMAX,TYPE_DARK,       MOVE_G_MAX_ONE_BLOW},
-    {SPECIES_URSHIFU_RAPID_STRIKE_GMAX, TYPE_WATER,      MOVE_G_MAX_RAPID_FLOW},
+    {SPECIES_URSHIFU_SINGLE_STRIKE_GMAX,      TYPE_DARK,       MOVE_G_MAX_ONE_BLOW},
+    {SPECIES_URSHIFU_RAPID_STRIKE_GMAX,       TYPE_WATER,      MOVE_G_MAX_RAPID_FLOW},
 };
 
 // Returns whether a battler can Dynamax.
 bool32 CanDynamax(u32 battler)
 {
     u16 species = GetBattlerVisualSpecies(battler);
-    enum ItemHoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
+    enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
 
     // Prevents Zigzagoon from dynamaxing in vanilla.
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && !IsOnPlayerSide(battler))
@@ -178,7 +177,7 @@ void ActivateDynamax(u32 battler)
     // Set appropriate use flags.
     SetActiveGimmick(battler, GIMMICK_DYNAMAX);
     SetGimmickAsActivated(battler, GIMMICK_DYNAMAX);
-    gBattleStruct->dynamax.dynamaxTurns[battler] = gBattleTurnCounter + DYNAMAX_TURNS_COUNT;
+    gBattleStruct->dynamax.dynamaxTurns[battler] = DYNAMAX_TURNS_COUNT;
 
     // Substitute is removed upon Dynamaxing.
     gBattleMons[battler].volatiles.substitute = FALSE;
@@ -234,7 +233,7 @@ bool32 IsMoveBlockedByMaxGuard(u32 move)
     return FALSE;
 }
 
-static u16 GetTypeBasedMaxMove(u32 battler, u32 type)
+static u16 GetTypeBasedMaxMove(u32 battler, enum Type type)
 {
     // Gigantamax check
     u32 i;
@@ -265,7 +264,7 @@ static u16 GetTypeBasedMaxMove(u32 battler, u32 type)
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
 u16 GetMaxMove(u32 battler, u32 baseMove)
 {
-    u32 moveType;
+    enum Type moveType;
     SetTypeBeforeUsingMove(baseMove, battler);
     moveType = GetBattleMoveType(baseMove);
 
@@ -318,7 +317,7 @@ u32 GetMaxMovePower(u32 move)
     }
 
     tier = GetMaxPowerTier(move);
-    u32 moveType = GetMoveType(move);
+    enum Type moveType = GetMoveType(move);
     if (moveType == TYPE_FIGHTING
      || moveType == TYPE_POISON
      || move == MOVE_MULTI_ATTACK)
@@ -438,7 +437,7 @@ bool32 IsMaxMove(u32 move)
 }
 
 // Assigns the multistring to use for the "Damage Non- Types" G-Max effect.
-void ChooseDamageNonTypesString(u8 type)
+void ChooseDamageNonTypesString(enum Type type)
 {
     switch (type)
     {
@@ -453,6 +452,8 @@ void ChooseDamageNonTypesString(u8 type)
             break;
         case TYPE_ROCK:
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SURROUNDED_BY_ROCKS;
+            break;
+        default:
             break;
     }
 }

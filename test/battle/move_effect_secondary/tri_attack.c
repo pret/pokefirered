@@ -46,12 +46,11 @@ SINGLE_BATTLE_TEST("Tri Attack cannot paralyze/burn/freeze electric/fire/ice typ
     u8 statusAnim;
     u16 species;
     u32 rng;
-    #if B_PARALYZE_ELECTRIC >= GEN_6
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_PRZ; rng = MOVE_EFFECT_PARALYSIS; species = SPECIES_RAICHU; }
-    #endif // B_PARALYZE_ELECTRIC
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_BRN; rng = MOVE_EFFECT_BURN; species = SPECIES_ARCANINE; }
     PARAMETRIZE { statusAnim = B_ANIM_STATUS_FRZ; rng = MOVE_EFFECT_FREEZE_OR_FROSTBITE; species = SPECIES_GLALIE; }
     GIVEN {
+        WITH_CONFIG(GEN_CONFIG_PARALYZE_ELECTRIC, GEN_6);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(species);
     } WHEN {

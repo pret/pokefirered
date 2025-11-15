@@ -87,3 +87,16 @@ SINGLE_BATTLE_TEST("Misty Terrain lasts for 5 turns")
         MESSAGE("The mist disappeared from the battlefield.");
     }
 }
+
+SINGLE_BATTLE_TEST("Misty Terrain will fail if there is one already on the field")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_MISTY_TERRAIN); MOVE(opponent, MOVE_MISTY_TERRAIN); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MISTY_TERRAIN, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_MISTY_TERRAIN, opponent);
+    }
+}

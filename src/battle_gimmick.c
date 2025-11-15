@@ -178,6 +178,13 @@ bool32 IsGimmickTriggerSpriteActive(void)
         return FALSE;
 }
 
+bool32 IsGimmickTriggerSpriteMatchingBattler(u32 battler)
+{
+    if (battler == gSprites[gBattleStruct->gimmick.triggerSpriteId].tBattler)
+        return TRUE;
+    return FALSE;
+}
+
 void HideGimmickTriggerSprite(void)
 {
     if (gBattleStruct->gimmick.triggerSpriteId != 0xFF)

@@ -148,11 +148,12 @@ SINGLE_BATTLE_TEST("Thief and Covet can't steal target's held item if user faint
     }
 }
 
-SINGLE_BATTLE_TEST("Thief and Covet: Berry activation happens before the item can be stolen")
+SINGLE_BATTLE_TEST("Thief and Covet: Berries that activate on HP thresholds are stolen before they can activate")
 {
     u32 move;
     PARAMETRIZE { move = MOVE_THIEF; }
     PARAMETRIZE { move = MOVE_COVET; }
+
     GIVEN {
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET) { MaxHP(200); HP(101); Item(ITEM_ORAN_BERRY); }
@@ -161,6 +162,25 @@ SINGLE_BATTLE_TEST("Thief and Covet: Berry activation happens before the item ca
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, move, player);
         HP_BAR(opponent);
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_STEAL, opponent);
+    }
+}
+
+SINGLE_BATTLE_TEST("Thief and Covet: Berries that activate on a Status activate before the item can be stolen")
+{
+    u32 move;
+    PARAMETRIZE { move = MOVE_THIEF; }
+    PARAMETRIZE { move = MOVE_COVET; }
+
+    GIVEN {
+        PLAYER(SPECIES_TOXICROAK) { Ability(ABILITY_POISON_TOUCH); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_LUM_BERRY); }
+    } WHEN {
+        TURN { MOVE(player, move); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, player);
+        ABILITY_POPUP(player, ABILITY_POISON_TOUCH);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
         NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_STEAL, opponent);
     }

@@ -21,19 +21,27 @@ SINGLE_BATTLE_TEST("Thunder Shock inflicts paralysis")
     }
 }
 
-SINGLE_BATTLE_TEST("Thunder Shock cannot paralyze an Electric-type")
+SINGLE_BATTLE_TEST("Thunder Shock cannot paralyze an Electric-type (Gen6+)")
 {
+    u32 gen = 0;
+    PARAMETRIZE { gen = GEN_5; }
+    PARAMETRIZE { gen = GEN_6; }
     GIVEN {
-        ASSUME(B_PARALYZE_ELECTRIC >= GEN_6);
+        WITH_CONFIG(GEN_CONFIG_PARALYZE_ELECTRIC, gen);
         ASSUME(GetSpeciesType(SPECIES_PIKACHU, 0) == TYPE_ELECTRIC);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_PIKACHU);
     } WHEN {
-        TURN { MOVE(player, MOVE_THUNDER_SHOCK); }
+        TURN { MOVE(player, MOVE_THUNDER_SHOCK, secondaryEffect: TRUE); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDER_SHOCK, player);
         HP_BAR(opponent);
-        NONE_OF {
+        if (gen == GEN_6) {
+            NONE_OF {
+                ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
+                STATUS_ICON(opponent, paralysis: TRUE);
+            }
+        } else {
             ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PRZ, opponent);
             STATUS_ICON(opponent, paralysis: TRUE);
         }

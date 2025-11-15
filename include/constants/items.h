@@ -32,12 +32,6 @@
 #define ITEM_BEAST_BALL 26
 #define ITEM_CHERISH_BALL 27
 
-// Note: If moving ball IDs around, updating FIRST_BALL/LAST_BALL is not sufficient
-//       Several places expect the ball IDs to be first and contiguous (e.g. MON_DATA_POKEBALL)
-//       If adding new balls, it's easiest to insert them after the last ball and increment the below IDs (and removing ITEM_034 for example)
-#define FIRST_BALL ITEM_POKE_BALL
-#define LAST_BALL  ITEM_CHERISH_BALL
-
 // Medicine
 #define ITEM_POTION 28
 #define ITEM_SUPER_POTION 29
@@ -1000,10 +994,34 @@
 
 #define ITEM_STRANGE_BALL 828
 
-// HOPO BERRY
-// LEGEND PLATE
+#define ITEM_CLEFABLITE 829
+#define ITEM_VICTREEBELITE 830
+#define ITEM_STARMINITE 831
+#define ITEM_DRAGONINITE 832
+#define ITEM_MEGANIUMITE 833
+#define ITEM_FERALIGITE 834
+#define ITEM_SKARMORITE 835
+#define ITEM_FROSLASSITE 836
+#define ITEM_EMBOARITE 837
+#define ITEM_EXCADRITE 838
+#define ITEM_SCOLIPITE 839
+#define ITEM_SCRAFTINITE 840
+#define ITEM_EELEKTROSSITE 841
+#define ITEM_CHANDELURITE 842
+#define ITEM_CHESNAUGHTITE 843
+#define ITEM_DELPHOXITE 844
+#define ITEM_GRENINJITE 845
+#define ITEM_PYROARITE 846
+#define ITEM_FLOETTITE 847
+#define ITEM_MALAMARITE 848
+#define ITEM_BARBARACITE 849
+#define ITEM_DRAGALGITE 850
+#define ITEM_HAWLUCHANITE 851
+#define ITEM_ZYGARDITE 852
+#define ITEM_DRAMPANITE 853
+#define ITEM_FALINKSITE 854
 
-#define ITEMS_COUNT 829
+#define ITEMS_COUNT 855
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
@@ -1028,8 +1046,8 @@
 #define NUM_ROUTE_114_MAN_BERRIES         (LAST_ROUTE_114_MAN_BERRY - FIRST_ROUTE_114_MAN_BERRY + 1)
 #define NUM_ROUTE_114_MAN_BERRIES_SKIPPED (FIRST_ROUTE_114_MAN_BERRY - FIRST_BERRY_INDEX)
 
-#define ITEM_TO_BERRY(itemId)(((itemId) - FIRST_BERRY_INDEX) + 1)
-#define ITEM_TO_MAIL(itemId)((itemId) - FIRST_MAIL_INDEX)
+#define ITEM_TO_BERRY(itemId) (((itemId) - FIRST_BERRY_INDEX) + 1)
+#define ITEM_TO_MAIL(itemId) ((itemId) - FIRST_MAIL_INDEX)
 #define MAIL_NONE 0xFF
 #define ITEM_TO_MULCH(itemId)(((itemId) - ITEM_GROWTH_MULCH) + 1)
 

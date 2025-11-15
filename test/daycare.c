@@ -51,7 +51,10 @@ TEST("(Daycare) Pokémon can breed with Ditto if they don't belong to the Ditto 
 
     ZeroPlayerPartyMons();
     for (j = 1; j < NUM_SPECIES; j++)
-        PARAMETRIZE { parentSpecies = j; }
+    {
+        if (IsSpeciesEnabled(j))
+            PARAMETRIZE { parentSpecies = j; }
+    }
     VarSet(VAR_TEMP_C, parentSpecies);
     RUN_OVERWORLD_SCRIPT(
         givemon SPECIES_DITTO, 100; givemon VAR_TEMP_C, 100;

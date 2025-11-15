@@ -63,3 +63,19 @@ SINGLE_BATTLE_TEST("Immunity doesn't prevent Pokémon from being poisoned by Tox
         NOT HP_BAR(player);
     }
 }
+
+SINGLE_BATTLE_TEST("Immunity cures existing poison on turn 0")
+{
+    GIVEN {
+        PLAYER(SPECIES_ZANGOOSE) {
+            Ability(ABILITY_IMMUNITY);
+            Status1(STATUS1_POISON);
+        }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } SCENE {
+        ABILITY_POPUP(player, ABILITY_IMMUNITY);
+        TURN { MOVE(player, MOVE_SPLASH); }
+    } THEN {
+        EXPECT_EQ(player->status1, STATUS1_NONE);
+    }
+}

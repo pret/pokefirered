@@ -16,6 +16,7 @@
 #include "strings.h"
 #include "constants/songs.h"
 #include "constants/moves.h"
+#include "constants/move_relearner.h"
 
 /*
  * Move relearner state machine

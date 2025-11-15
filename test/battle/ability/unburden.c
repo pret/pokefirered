@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Unburden doubles speed once user uses item")
 {
     GIVEN {
-        ASSUME(GetItemHoldEffect(ITEM_GRASSY_SEED) == HOLD_EFFECT_SEEDS);
+        ASSUME(GetItemHoldEffect(ITEM_GRASSY_SEED) == HOLD_EFFECT_TERRAIN_SEED);
         ASSUME(GetMoveEffect(MOVE_U_TURN) == EFFECT_HIT_ESCAPE);
         PLAYER(SPECIES_DRIFBLIM) { Ability(ABILITY_UNBURDEN); Item(ITEM_GRASSY_SEED); Speed(5); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(7); }

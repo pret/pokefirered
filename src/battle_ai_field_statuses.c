@@ -20,7 +20,6 @@
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
-#include "constants/hold_effects.h"
 #include "constants/moves.h"
 #include "constants/items.h"
 
@@ -399,7 +398,7 @@ static enum FieldEffectOutcome BenefitsFromPsychicTerrain(u32 battler)
     if (DoesAbilityBenefitFromFieldStatus(gAiLogicData->abilities[battler], STATUS_FIELD_PSYCHIC_TERRAIN))
         return FIELD_EFFECT_POSITIVE;
 
-    if (HasMoveWithEffect(battler, EFFECT_EXPANDING_FORCE))
+    if (HasBattlerSideMoveWithEffect(battler, EFFECT_EXPANDING_FORCE))
         return FIELD_EFFECT_POSITIVE;
 
     bool32 grounded = AI_IsBattlerGrounded(battler);
@@ -411,9 +410,9 @@ static enum FieldEffectOutcome BenefitsFromPsychicTerrain(u32 battler)
     if (grounded || allyGrounded)
     {
         // harass priority
-        if (HasBattlerSideAbility(LEFT_FOE(battler), ABILITY_GALE_WINGS, gAiLogicData)
-         || HasBattlerSideAbility(LEFT_FOE(battler), ABILITY_TRIAGE, gAiLogicData)
-         || HasBattlerSideAbility(LEFT_FOE(battler), ABILITY_PRANKSTER, gAiLogicData))
+        if (AI_IsAbilityOnSide(LEFT_FOE(battler), ABILITY_GALE_WINGS)
+         || AI_IsAbilityOnSide(LEFT_FOE(battler), ABILITY_TRIAGE)
+         || AI_IsAbilityOnSide(LEFT_FOE(battler), ABILITY_PRANKSTER))
             return FIELD_EFFECT_POSITIVE;
     }
 
@@ -423,9 +422,9 @@ static enum FieldEffectOutcome BenefitsFromPsychicTerrain(u32 battler)
     if (HasBattlerSideMoveWithEffect(LEFT_FOE(battler), EFFECT_EXPANDING_FORCE))
         return FIELD_EFFECT_NEGATIVE;
 
-    if (HasBattlerSideAbility(battler, ABILITY_GALE_WINGS, gAiLogicData)
-     || HasBattlerSideAbility(battler, ABILITY_TRIAGE, gAiLogicData)
-     || HasBattlerSideAbility(battler, ABILITY_PRANKSTER, gAiLogicData))
+    if (AI_IsAbilityOnSide(battler, ABILITY_GALE_WINGS)
+     || AI_IsAbilityOnSide(battler, ABILITY_TRIAGE)
+     || AI_IsAbilityOnSide(battler, ABILITY_PRANKSTER))
         return FIELD_EFFECT_NEGATIVE;
 
     return FIELD_EFFECT_NEUTRAL;
@@ -436,7 +435,7 @@ static enum FieldEffectOutcome BenefitsFromGravity(u32 battler)
     if (!AI_IsBattlerGrounded(battler))
         return FIELD_EFFECT_NEGATIVE;
 
-    if (HasBattlerSideAbility(battler, ABILITY_HUSTLE, gAiLogicData))
+    if (AI_IsAbilityOnSide(battler, ABILITY_HUSTLE))
         return FIELD_EFFECT_POSITIVE;
 
     if (HasMoveWithFlag(battler, IsMoveGravityBanned))

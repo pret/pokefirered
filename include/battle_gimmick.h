@@ -35,6 +35,7 @@ void SetGimmickAsActivated(u32 battler, enum Gimmick gimmick);
 void ChangeGimmickTriggerSprite(u32 spriteId, u32 animId);
 void CreateGimmickTriggerSprite(u32 battler);
 bool32 IsGimmickTriggerSpriteActive(void);
+bool32 IsGimmickTriggerSpriteMatchingBattler(u32 battler);
 void HideGimmickTriggerSprite(void);
 void DestroyGimmickTriggerSprite(void);
 

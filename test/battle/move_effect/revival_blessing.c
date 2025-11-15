@@ -49,28 +49,35 @@ SINGLE_BATTLE_TEST("Revival Blessing fails if no party members are fainted")
     }
 }
 
-DOUBLE_BATTLE_TEST("Revival Blessing cannot revive a partner's party member")
+// Can only be tested through AI test, else test fails due to trying to force illegal action
+AI_MULTI_BATTLE_TEST("Revival Blessing cannot revive a partner's party member")
 {
-    KNOWN_FAILING;
     struct BattlePokemon *user = NULL;
-    gBattleTypeFlags |= BATTLE_TYPE_TWO_OPPONENTS;
-    PARAMETRIZE { user = opponentLeft; }
-    PARAMETRIZE { user = opponentRight; }
+    u32 move1, move2, move3;
+    PARAMETRIZE { user = opponentLeft, move1 = MOVE_REVIVAL_BLESSING, move2 = MOVE_CELEBRATE, move3 = MOVE_CELEBRATE; }
+    PARAMETRIZE { user = playerRight, move1 = MOVE_CELEBRATE, move2 = MOVE_REVIVAL_BLESSING, move3 = MOVE_CELEBRATE; }
+    PARAMETRIZE { user = opponentRight, move1 = MOVE_CELEBRATE, move2 = MOVE_CELEBRATE, move3 = MOVE_REVIVAL_BLESSING; }
     GIVEN {
-        ASSUME((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) != FALSE);
-        PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
-        OPPONENT(SPECIES_WYNAUT) { HP(0); }
-        OPPONENT(SPECIES_WYNAUT);
+        MULTI_PLAYER(SPECIES_CLEFABLE);
+        MULTI_PLAYER(SPECIES_CLEFABLE) { HP(0); }
+        MULTI_PLAYER(SPECIES_CLEFABLE);
+        MULTI_PARTNER(SPECIES_CLEFAIRY) { Moves(move2); } 
+        MULTI_PARTNER(SPECIES_CLEFAIRY);
+        MULTI_PARTNER(SPECIES_CLEFAIRY);
+        MULTI_OPPONENT_A(SPECIES_WOBBUFFET) { Moves(move1); } 
+        MULTI_OPPONENT_A(SPECIES_WOBBUFFET);
+        MULTI_OPPONENT_A(SPECIES_WOBBUFFET);
+        MULTI_OPPONENT_B(SPECIES_WYNAUT) { Moves(move3); } 
+        MULTI_OPPONENT_B(SPECIES_WYNAUT) { HP(0); }
+        MULTI_OPPONENT_B(SPECIES_WYNAUT);
     } WHEN {
-        TURN { MOVE(user, MOVE_REVIVAL_BLESSING, partyIndex:4); }
+        TURN { EXPECT_MOVE(playerRight, move2); } // EXPECT_MOVE makes battler2 AI-controlled
     } SCENE {
         if (user == opponentLeft) {
             MESSAGE("The opposing Wobbuffet used Revival Blessing!");
+            MESSAGE("But it failed!");
+        } else if (user == playerRight) {
+            MESSAGE("Clefairy used Revival Blessing!");
             MESSAGE("But it failed!");
         } else {
             MESSAGE("The opposing Wynaut used Revival Blessing!");

@@ -108,7 +108,7 @@ static void Task_QLFishMovement(u8 taskId)
             gTasks[taskId].data[1] = 0;
             break;
         case 1:
-            AlignFishingAnimationFrames(sprite);
+            AlignFishingAnimationFrames();
             if (gTasks[taskId].data[1] < 60)
                 gTasks[taskId].data[1]++;
             else
@@ -119,7 +119,7 @@ static void Task_QLFishMovement(u8 taskId)
             gTasks[taskId].data[0]++;
             break;
         case 3:
-            AlignFishingAnimationFrames(sprite);
+            AlignFishingAnimationFrames();
             if (sprite->animEnded)
             {
                 if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING))

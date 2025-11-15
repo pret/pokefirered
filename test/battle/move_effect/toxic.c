@@ -43,14 +43,16 @@ SINGLE_BATTLE_TEST("Toxic can't bad poison a poison or steel type")
     }
 }
 
-SINGLE_BATTLE_TEST("Toxic cannot miss if used by a Poison-type")
+SINGLE_BATTLE_TEST("Toxic cannot miss if used by a Poison-type (Gen6+)")
 {
-    u32 species;
+    u32 species, gen;
     bool32 hit;
-    PARAMETRIZE { species = SPECIES_WOBBUFFET; hit = FALSE; }
-    PARAMETRIZE { species = SPECIES_NIDORAN_M; hit = TRUE; }
+    PARAMETRIZE { species = SPECIES_WOBBUFFET; hit = FALSE; gen = GEN_5; }
+    PARAMETRIZE { species = SPECIES_NIDORAN_M; hit = FALSE; gen = GEN_5; }
+    PARAMETRIZE { species = SPECIES_WOBBUFFET; hit = FALSE; gen = GEN_6; }
+    PARAMETRIZE { species = SPECIES_NIDORAN_M; hit = TRUE;  gen = GEN_6; }
     GIVEN {
-        ASSUME(B_TOXIC_NEVER_MISS >= GEN_6);
+        WITH_CONFIG(GEN_CONFIG_TOXIC_NEVER_MISS, gen);
         ASSUME(GetSpeciesType(SPECIES_NIDORAN_M, 0) == TYPE_POISON);
         PLAYER(species);
         OPPONENT(SPECIES_WOBBUFFET);

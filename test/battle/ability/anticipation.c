@@ -16,6 +16,18 @@ SINGLE_BATTLE_TEST("Anticipation causes notifies if an opponent has a super-effe
     }
 }
 
+SINGLE_BATTLE_TEST("Anticipation does not trigger even when a move is super effective on only 1 type")
+{
+    GIVEN {
+        PLAYER(SPECIES_WHISCASH) { Ability(ABILITY_ANTICIPATION); }
+        OPPONENT(SPECIES_PIKACHU) { Moves(MOVE_CELEBRATE, MOVE_THUNDERBOLT); }
+    } WHEN {
+        TURN { }
+    } SCENE {
+        NOT ABILITY_POPUP(player, ABILITY_ANTICIPATION);
+    }
+}
+
 SINGLE_BATTLE_TEST("Anticipation causes notifies if an opponent has a One-hit KO move")
 {
     GIVEN {
@@ -59,28 +71,21 @@ SINGLE_BATTLE_TEST("Anticipation doesn't consider Normalize into their effective
 
 SINGLE_BATTLE_TEST("Anticipation doesn't consider Scrappy into their effectiveness (Gen5+)")
 {
-    KNOWN_FAILING;
     GIVEN {
         ASSUME(GetMoveType(MOVE_CLOSE_COMBAT) == TYPE_FIGHTING);
-        ASSUME(GetSpeciesType(SPECIES_EEVEE, 0) == TYPE_NORMAL);
-        ASSUME(GetSpeciesType(SPECIES_EEVEE, 1) == TYPE_NORMAL);
-        PLAYER(SPECIES_EEVEE) { Ability(ABILITY_ANTICIPATION); }
-        OPPONENT(SPECIES_KANGASKHAN) { Ability(ABILITY_SCRAPPY); Moves(MOVE_CLOSE_COMBAT, MOVE_TRICK_OR_TREAT, MOVE_SKILL_SWAP, MOVE_CELEBRATE); }
+        ASSUME(GetSpeciesType(SPECIES_DOUBLADE, 0) == TYPE_STEEL);
+        ASSUME(GetSpeciesType(SPECIES_DOUBLADE, 1) == TYPE_GHOST);
+        PLAYER(SPECIES_DOUBLADE) { Ability(ABILITY_ANTICIPATION); }
+        OPPONENT(SPECIES_KANGASKHAN) { Ability(ABILITY_SCRAPPY); Moves(MOVE_CLOSE_COMBAT, MOVE_CELEBRATE); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_TRICK_OR_TREAT); MOVE(player, MOVE_SKILL_SWAP); }
-        TURN { MOVE(opponent, MOVE_SKILL_SWAP); }
+        TURN { }
     } SCENE {
-        ABILITY_POPUP(player, ABILITY_ANTICIPATION);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_TRICK_OR_TREAT, opponent);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, player);
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SKILL_SWAP, opponent);
         NOT ABILITY_POPUP(player, ABILITY_ANTICIPATION);
     }
 }
 
 SINGLE_BATTLE_TEST("Anticipation doesn't consider Gravity into their effectiveness (Gen5+)")
 {
-    KNOWN_FAILING;
     GIVEN {
         PLAYER(SPECIES_SKARMORY);
         OPPONENT(SPECIES_EEVEE) { Ability(ABILITY_ANTICIPATION); Moves(MOVE_EARTHQUAKE, MOVE_GRAVITY, MOVE_SCRATCH, MOVE_POUND); }
@@ -95,7 +100,8 @@ SINGLE_BATTLE_TEST("Anticipation doesn't consider Gravity into their effectivene
 
 SINGLE_BATTLE_TEST("Anticipation counts Counter, Metal Burst or Mirror Coat as attacking moves of their types (Gen5+)")
 {
-    u32 move, species, typeAtk, typeDef;
+    u32 move, species;
+    enum Type typeAtk, typeDef;
     PARAMETRIZE { move = MOVE_COUNTER; species = SPECIES_RATICATE; typeAtk = TYPE_FIGHTING; typeDef = TYPE_NORMAL; }
     PARAMETRIZE { move = MOVE_METAL_BURST; species = SPECIES_ROGGENROLA; typeAtk = TYPE_STEEL; typeDef = TYPE_ROCK; }
     PARAMETRIZE { move = MOVE_MIRROR_COAT; species = SPECIES_NIDORINO; typeAtk = TYPE_PSYCHIC; typeDef = TYPE_POISON; }

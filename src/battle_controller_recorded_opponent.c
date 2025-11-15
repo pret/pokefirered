@@ -31,6 +31,8 @@
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#include "test/battle.h"
+#include "test/test_runner_battle.h"
 
 static void RecordedOpponentHandleDrawTrainerPic(u32 battler);
 static void RecordedOpponentHandleTrainerSlideBack(u32 battler);
@@ -170,8 +172,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
             gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
             gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim = FALSE;
             gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim = FALSE;
-            FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-            FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+            FreeShinyStars();
         }
 
         gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 3;
@@ -274,7 +275,24 @@ static void RecordedOpponentHandleDrawTrainerPic(u32 battler)
     s16 xPos;
     u32 trainerPicId;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+    // Sets Multibattle test opponent sprites to not be Hiker
+    if (IsMultibattleTest())
+    {
+        if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_LEFT)
+        {
+            trainerPicId = TRAINER_PIC_LEAF;
+            if (!(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS))
+                xPos = 176;
+            else
+                xPos = 200;
+        }
+        else
+        {
+            trainerPicId = TRAINER_PIC_RED;
+            xPos = 152;
+        }
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
         if ((GetBattlerPosition(battler) & BIT_FLANK) != 0) // second mon
             xPos = 152;

@@ -16,7 +16,7 @@
 #include "overworld.h"
 #include "trainer_pokemon_sprites.h"
 #include "text_window.h"
-#include "field_fadetransition.h"
+#include "field_screen_effect.h"
 #include "menu.h"
 #include "string_util.h"
 #include "trig.h"

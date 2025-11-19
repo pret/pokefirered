@@ -1,5 +1,5 @@
 // Only list base species here.
-const u16 gPokedexOrder_Alphabetical[NATIONAL_DEX_COUNT] =
+const u16 gPokedexOrder_Alphabetical[] =
 {
     NATIONAL_DEX_ABOMASNOW,
     NATIONAL_DEX_ABRA,
@@ -1045,7 +1045,7 @@ const u16 gPokedexOrder_Alphabetical[NATIONAL_DEX_COUNT] =
     NATIONAL_DEX_ZYGARDE,
 };
 
-const u16 gPokedexOrder_Weight[NATIONAL_DEX_COUNT] =
+const u16 gPokedexOrder_Weight[] =
 {
     // 0.0 - 21.8 lbs / 0.0 - 9.9 kg
     NATIONAL_DEX_GASTLY,
@@ -2911,7 +2911,7 @@ const u16 gPokedexOrder_Weight[NATIONAL_DEX_COUNT] =
     NATIONAL_DEX_CELESTEELA,
 };
 
-const u16 gPokedexOrder_Height[NATIONAL_DEX_COUNT] =
+const u16 gPokedexOrder_Height[] =
 {
     // 0'04" / 0.1m
     NATIONAL_DEX_JOLTIK,

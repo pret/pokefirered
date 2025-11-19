@@ -67,10 +67,17 @@ prefabs.json
 *.sym
 src/data/map_group_count.h
 !/tools/mgba/mgba-rom-test.exe
+include/constants/heal_locations.h
+include/constants/script_commands.h
 tools/trainerproc/trainerproc
+src/data/battle_partners.h
+src/data/trainers.h
+src/data/debug_trainers.h
+test/battle/trainer_control.h
 tools/compresSmol/compresSmol
 tools/compresSmol/compresSmolTilemap
 *.Identifier
 *.smol
 *.fastSmol
 *.smolTM
+__pycache__

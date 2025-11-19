@@ -13,6 +13,7 @@
 #include "constants/battle_setup.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
+#include "constants/script_commands.h"
 #include "constants/trainer_types.h"
 
 typedef u8 (*TrainerApproachFunc)(struct ObjectEvent *, s16, s16, s16);
@@ -201,7 +202,7 @@ static u8 CheckTrainer(u8 objectEventId)
     struct ScriptContext ctx;
     if (RunScriptImmediatelyUntilEffect(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE | SCREFF_TRAINERBATTLE, scriptPtr, &ctx))
     {
-        if (*ctx.scriptPtr == 0x5c) // trainerbattle
+        if (*ctx.scriptPtr == SCR_OP_TRAINERBATTLE) // trainerbattle
             trainerBattlePtr = ctx.scriptPtr;
         else
             trainerBattlePtr = NULL;

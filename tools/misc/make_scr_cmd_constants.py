@@ -1,6 +1,6 @@
 import re
 
-SCR_CMD_PAT = re.compile(r"\tscript_cmd_table_entry (\w+)\s+\w+,\s+[\w=]+\s+@( 0x[0-9a-f]+)")
+SCR_CMD_PAT = re.compile(r"^[ \t]*script_cmd_table_entry\s+(SCR_OP_\w+).*?ScrCmd_.*")
 
 def main():
     output = [
@@ -9,14 +9,18 @@ def main():
          "//",
          "#ifndef GUARD_SCR_CMD_CONSTANTS_H",
          "#define GUARD_SCR_CMD_CONSTANTS_H\n",
+         "enum ScrOp",
+         "{"
     ]
 
     with open("data/script_cmd_table.inc", "r") as f:
+        ctr = 0
         for line in f.readlines():
-            if match := re.match(SCR_CMD_PAT, line):
-                new_line = "#define " + match.group(1) + match.group(2)
+            if match := re.search(SCR_CMD_PAT, line):
+                new_line = "    " + match.group(1) + f" = 0x{ctr:X},"
                 output.append(new_line)
-    
+                ctr += 1
+    output.append("};")
     output.append("\n#endif // GUARD_SCR_CMD_CONSTANTS_H\n")
     with open("include/constants/script_commands.h", "w+") as f:
         f.write('\n'.join(output))

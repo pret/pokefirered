@@ -110,10 +110,10 @@ const void *GetItemIconPic(u16 itemId)
         return gItemIcon_ReturnToFieldArrow; // Use last icon, the "return to field" arrow
     if (itemId >= ITEMS_COUNT)
         return gItemsInfo[0].iconPic;
-    if (itemId >= ITEM_TM01 && itemId < ITEM_HM01 + NUM_HIDDEN_MACHINES)
+    if (gItemsInfo[itemId].pocket == POCKET_TM_HM)
     {
-        if (itemId < ITEM_TM01 + NUM_TECHNICAL_MACHINES)
-            return gItemIcon_TM;
+        if (GetItemTMHMIndex(itemId) > NUM_TECHNICAL_MACHINES)
+            return gItemIcon_HM;
         return gItemIcon_HM;
     }
 

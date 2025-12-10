@@ -920,19 +920,19 @@ bool32 IsHoldEffectChoice(enum HoldEffect holdEffect)
 
 bool32 IsItemTM(u16 itemId)
 {
-    itemId = SanitizeItemId(itemId);
-    return ITEM_TM01 <= itemId && itemId <= ITEM_TM100;
+    enum TMHMIndex index = GetItemTMHMIndex(SanitizeItemId(itemId));
+    return index > 0 && index <= NUM_TECHNICAL_MACHINES;
 }
 
 bool32 IsItemHM(u16 itemId)
 {
-    itemId = SanitizeItemId(itemId);
-    return ITEM_HM01 <= itemId && itemId <= ITEM_HM08;
+    return GetItemTMHMIndex(SanitizeItemId(itemId)) > NUM_TECHNICAL_MACHINES;
 }
 
 bool32 IsItemTMHM(u16 itemId)
 {
-    return IsItemTM(itemId) || IsItemHM(itemId);
+    enum TMHMIndex index = GetItemTMHMIndex(SanitizeItemId(itemId));
+    return index > 0 && index <= NUM_ALL_MACHINES;
 }
 
 bool32 IsItemBall(u16 itemId)

@@ -5,16 +5,11 @@ INTERFACEGFXDIR := graphics/interface
 PARTYMENUGFXDIR := graphics/party_menu
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 UNUSEDGFXDIR := graphics/unused
-UNKNOWNGFXDIR := graphics/unknown
 BATINTGFXDIR := graphics/battle_interface
 MASKSGFXDIR := graphics/battle_anims/masks
 BATTRANSGFXDIR := graphics/battle_transitions
 TYPESGFXDIR := graphics/types
-RAYQUAZAGFXDIR := graphics/rayquaza_scene
-ROULETTEGFXDIR := graphics/roulette
 SLOTMACHINEGFXDIR := graphics/slot_machine
-PSSGFXDIR := graphics/pokemon_storage
-EVENTOBJGFXDIR := graphics/object_events
 FIELDEFFECTSGFXDIR := graphics/field_effects
 MISCGFXDIR := graphics/misc
 TEXTWINDOWGFXDIR := graphics/text_window
@@ -22,7 +17,6 @@ TEACHYTVGFXDIR := graphics/teachy_tv
 SSANNEGFXDIR := graphics/ss_anne
 ITEMPCGFXDIR := graphics/item_pc
 TITLESCREENGFXDIR := graphics/title_screen
-CREDITSGFXDIR := graphics/credits
 ITEMMENUGFXDIR := graphics/item_menu
 INTROGFXDIR := graphics/intro
 BATTLETERRAINGFXDIR := graphics/battle_terrain
@@ -92,21 +86,11 @@ $(FONTGFXDIR)/latin_male.latfont: $(FONTGFXDIR)/latin_male.png
 $(FONTGFXDIR)/latin_female.latfont: $(FONTGFXDIR)/latin_female.png
 	$(GFX) $< $@
 
-graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
-	$(GFX) $< $@ -num_colors 224
-
 graphics/pokemon_jump/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 63 -Wnum_tiles
 
-$(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 29 -Wnum_tiles
-
 $(MISCGFXDIR)/markings2.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 25 -Wnum_tiles
-
-$(INTERFACEGFXDIR)/menu.gbapal: $(INTERFACEGFXDIR)/menu_0.gbapal \
-						$(INTERFACEGFXDIR)/menu_1.gbapal
-	@cat $^ >$@
 
 $(BTLANMSPRGFXDIR)/ice_cube.4bpp: $(BTLANMSPRGFXDIR)/ice_cube_0.4bpp \
 						  $(BTLANMSPRGFXDIR)/ice_cube_1.4bpp \
@@ -208,201 +192,6 @@ $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
 							   $(TYPESGFXDIR)/move_types_2.gbapal \
 							   $(TYPESGFXDIR)/move_types_3.gbapal
 	@cat $^ >$@
-
-$(INTERFACEGFXDIR)/bag_screen.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
-
-$(RAYQUAZAGFXDIR)/rayquaza.8bpp: %.8bpp: %.png
-	$(GFX) $< $@ -num_tiles 227 -Wnum_tiles
-
-$(RAYQUAZAGFXDIR)/overcast.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 313 -Wnum_tiles
-
-$(RAYQUAZAGFXDIR)/rayquaza_fly1.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 124 -Wnum_tiles
-
-$(RAYQUAZAGFXDIR)/rayquaza_tail_fix.4bpp: $(RAYQUAZAGFXDIR)/rayquaza_tail.4bpp
-	cp $< $@
-	head -c 12 /dev/zero >> $@
-
-$(RAYQUAZAGFXDIR)/chase_streaks.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 19 -Wnum_tiles
-
-$(RAYQUAZAGFXDIR)/rayquaza_chase.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 155 -Wnum_tiles
-
-graphics/picture_frame/frame5.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 86 -Wnum_tiles
-
-$(ROULETTEGFXDIR)/roulette_tilt.4bpp: $(ROULETTEGFXDIR)/shroomish.4bpp \
-									  $(ROULETTEGFXDIR)/tailow.4bpp
-	@cat $^ >$@
-
-$(ROULETTEGFXDIR)/poke_icons2.4bpp: $(ROULETTEGFXDIR)/wynaut.4bpp \
-									$(ROULETTEGFXDIR)/azurill.4bpp \
-									$(ROULETTEGFXDIR)/skitty.4bpp \
-									$(ROULETTEGFXDIR)/makuhita.4bpp
-	@cat $^ >$@
-
-$(UNUSEDGFXDIR)/intro_birch_beauty.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 822 -Wnum_tiles
-
-$(PSSGFXDIR)/forest_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 55 -Wnum_tiles
-
-$(PSSGFXDIR)/forest.4bpp: $(PSSGFXDIR)/forest_frame.4bpp $(PSSGFXDIR)/forest_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/city_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 52 -Wnum_tiles
-
-$(PSSGFXDIR)/city.4bpp: $(PSSGFXDIR)/city_frame.4bpp $(PSSGFXDIR)/city_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/desert.4bpp: $(PSSGFXDIR)/desert_frame.4bpp $(PSSGFXDIR)/desert_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/savanna_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 45 -Wnum_tiles
-
-$(PSSGFXDIR)/savanna_bg.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 23 -Wnum_tiles
-
-$(PSSGFXDIR)/savanna.4bpp: $(PSSGFXDIR)/savanna_frame.4bpp $(PSSGFXDIR)/savanna_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/crag_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 49 -Wnum_tiles
-
-$(PSSGFXDIR)/crag.4bpp: $(PSSGFXDIR)/crag_frame.4bpp $(PSSGFXDIR)/crag_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/volcano_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 56 -Wnum_tiles
-
-$(PSSGFXDIR)/volcano.4bpp: $(PSSGFXDIR)/volcano_frame.4bpp $(PSSGFXDIR)/volcano_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/snow_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 57 -Wnum_tiles
-
-$(PSSGFXDIR)/snow.4bpp: $(PSSGFXDIR)/snow_frame.4bpp $(PSSGFXDIR)/snow_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/cave_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 55 -Wnum_tiles
-
-$(PSSGFXDIR)/cave.4bpp: $(PSSGFXDIR)/cave_frame.4bpp $(PSSGFXDIR)/cave_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/beach_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 46 -Wnum_tiles
-
-$(PSSGFXDIR)/beach_bg.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 23 -Wnum_tiles
-
-$(PSSGFXDIR)/beach.4bpp: $(PSSGFXDIR)/beach_frame.4bpp $(PSSGFXDIR)/beach_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/seafloor_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 54 -Wnum_tiles
-
-$(PSSGFXDIR)/seafloor.4bpp: $(PSSGFXDIR)/seafloor_frame.4bpp $(PSSGFXDIR)/seafloor_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/river_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 51 -Wnum_tiles
-
-$(PSSGFXDIR)/river_bg.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 11 -Wnum_tiles
-
-$(PSSGFXDIR)/river.4bpp: $(PSSGFXDIR)/river_frame.4bpp $(PSSGFXDIR)/river_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/sky_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 45 -Wnum_tiles
-
-$(PSSGFXDIR)/sky.4bpp: $(PSSGFXDIR)/sky_frame.4bpp $(PSSGFXDIR)/sky_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/polkadot_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 54 -Wnum_tiles
-
-$(PSSGFXDIR)/polkadot.4bpp: $(PSSGFXDIR)/polkadot_frame.4bpp $(PSSGFXDIR)/polkadot_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/pokecenter_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 35 -Wnum_tiles
-
-$(PSSGFXDIR)/pokecenter.4bpp: $(PSSGFXDIR)/pokecenter_frame.4bpp $(PSSGFXDIR)/pokecenter_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/machine_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 33 -Wnum_tiles
-
-$(PSSGFXDIR)/machine.4bpp: $(PSSGFXDIR)/machine_frame.4bpp $(PSSGFXDIR)/machine_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/plain_frame.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 18 -Wnum_tiles
-
-$(PSSGFXDIR)/plain.4bpp: $(PSSGFXDIR)/plain_frame.4bpp $(PSSGFXDIR)/plain_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/friends_frame1.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 57 -Wnum_tiles
-
-$(PSSGFXDIR)/friends_frame2.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 57 -Wnum_tiles
-
-$(PSSGFXDIR)/zigzagoon.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/zigzagoon_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/screen.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/screen_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/horizontal.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/horizontal_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/diagonal.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/diagonal_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/block.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/block_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/ribbon.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/ribbon_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/pokecenter2.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/pokecenter2_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/frame.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/frame_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/blank.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/blank_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/circles.4bpp: $(PSSGFXDIR)/friends_frame1.4bpp $(PSSGFXDIR)/circles_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/azumarill.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/azumarill_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/pikachu.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/pikachu_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/legendary.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/legendary_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/dusclops.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/dusclops_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/ludicolo.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/ludicolo_bg.4bpp
-	@cat $^ >$@
-
-$(PSSGFXDIR)/whiscash.4bpp: $(PSSGFXDIR)/friends_frame2.4bpp $(PSSGFXDIR)/whiscash_bg.4bpp
-	@cat $^ >$@
-
 $(FIELDEFFECTSGFXDIR)/pics/underwater_bubbles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
@@ -433,24 +222,6 @@ $(INTERFACEGFXDIR)/selector_outline.4bpp: %.4bpp: %.png
 graphics/tm_case/tm_case.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 91 -Wnum_tiles
 
-$(PKNAVGFXDIR)/header.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
-
-$(PKNAVGFXDIR)/outline.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
-	
-$(PKNAVGFXDIR)/ui_matchcall.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 13 -Wnum_tiles
-
-$(INTERFACEGFXDIR)/region_map.8bpp: %.8bpp: %.png
-	$(GFX) $< $@ -num_tiles 232 -Wnum_tiles
-
-$(INTERFACEGFXDIR)/region_map_affine.8bpp: %.8bpp: %.png
-	$(GFX) $< $@ -num_tiles 233 -Wnum_tiles
-
-$(MISCGFXDIR)/birch_help.4bpp: $(MISCGFXDIR)/birch_bag.4bpp $(MISCGFXDIR)/birch_grass.4bpp
-	@cat $^ >$@
-	
 $(FAMECHECKERGFXDIR)/spinning_pokeball.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 15 -Wnum_tiles
 

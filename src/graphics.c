@@ -419,7 +419,19 @@ const u32 gUnusedTilemap_BasicFrame[] = INCBIN_U32("graphics/unused/basic_frame.
 
 const u16 gBattleInterface_Healthbox_Pal[] = INCBIN_U16("graphics/battle_interface/healthbox.gbapal");
 const u16 gBattleInterface_Healthbar_Pal[] = INCBIN_U16("graphics/battle_interface/healthbar.gbapal");
-const u8 gBattleInterface_Gfx[] = INCBIN_U8("graphics/battle_interface/healthbox_elements.4bpp");
+const u8 gHealthboxElementsGfxTable[][32] = INCBIN_U8("graphics/battle_interface/hpbar.4bpp",
+                                                  "graphics/battle_interface/expbar.4bpp",
+                                                  "graphics/battle_interface/status.4bpp",
+                                                  "graphics/battle_interface/misc.4bpp",
+                                                  "graphics/battle_interface/hpbar_anim.4bpp",
+                                                  "graphics/battle_interface/misc_frameend.4bpp",
+                                                  "graphics/battle_interface/ball_display.4bpp",
+                                                  "graphics/battle_interface/ball_caught_indicator.4bpp",
+                                                  "graphics/battle_interface/status2.4bpp", // these three duplicate sets of graphics are for the opponent/partner Pokémon
+                                                  "graphics/battle_interface/status3.4bpp",
+                                                  "graphics/battle_interface/status4.4bpp",
+                                                  "graphics/battle_interface/healthbox_doubles_frameend.4bpp",
+                                                  "graphics/battle_interface/healthbox_doubles_frameend_bar.4bpp");
 
 const u32 gBattleInterfaceGfx_UnusedWindow3[] = INCBIN_U32("graphics/battle_interface/unused_window3.4bpp.lz");
 const u32 gBattleInterfaceGfx_UnusedWindow4[] = INCBIN_U32("graphics/battle_interface/unused_window4.4bpp.lz");

@@ -37,9 +37,9 @@ enum
 
 static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
 {
-    [PARTY_BOX_LEFT_COLUMN] = 
+    [PARTY_BOX_LEFT_COLUMN] =
     {
-        BlitBitmapToPartyWindow_LeftColumn, 
+        BlitBitmapToPartyWindow_LeftColumn,
         {
             // The below are the x, y, width, and height for each of the following info
             24, 11, 40, 13, // Nickname
@@ -51,9 +51,9 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
         },
         12, 34, 64, 16      // Description text (e.g. NO USE)
     },
-    [PARTY_BOX_RIGHT_COLUMN] = 
+    [PARTY_BOX_RIGHT_COLUMN] =
     {
-        BlitBitmapToPartyWindow_RightColumn, 
+        BlitBitmapToPartyWindow_RightColumn,
         {
              // The below are the x, y, width, and height for each of the following info
              22,  3, 40, 13, // Nickname
@@ -62,14 +62,14 @@ static const struct PartyMenuBoxInfoRects sPartyBoxInfoRects[] =
             102, 12, 24,  8, // HP
             117, 12, 24,  8, // Max HP
              88, 10, 48,  3  // HP bar
-        }, 
+        },
         77, 4, 64, 16        // Description text
     },
 };
 
 static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
 {
-    [PARTY_LAYOUT_SINGLE] = 
+    [PARTY_LAYOUT_SINGLE] =
     {
         // pokemon coords, held item coords, status coords, pokeball coords
         { 16,  40,  20,  50,  56,  52,  16,  34},
@@ -79,7 +79,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
         {104,  90, 108, 100, 144,  99, 102,  97},
         {104, 114, 108, 124, 144, 123, 102, 121},
     },
-    [PARTY_LAYOUT_DOUBLE] = 
+    [PARTY_LAYOUT_DOUBLE] =
     {
         { 16,  24,  20,  34,  56,  36,  16,  18},
         { 16,  80,  20,  90,  56,  92,  16,  74},
@@ -88,7 +88,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
         {104,  82, 108,  92, 144,  91, 102,  89},
         {104, 114, 108, 124, 144, 123, 102, 121},
     },
-    [PARTY_LAYOUT_MULTI] = 
+    [PARTY_LAYOUT_MULTI] =
     {
         { 16,  24,  20,  34,  56,  36,  16,  18},
         { 16,  80,  20,  90,  56,  92,  16,  74},
@@ -97,7 +97,7 @@ static const u8 sPartyMenuSpriteCoords[PARTY_LAYOUT_COUNT][PARTY_SIZE][4 * 2] =
         {104,  82, 106,  92, 144,  91, 102,  89},
         {104, 106, 106, 116, 144, 115, 102, 113},
     },
-    [PARTY_LAYOUT_MULTI_SHOWCASE] = 
+    [PARTY_LAYOUT_MULTI_SHOWCASE] =
     {
         { 16,  32,  20,  42,  56,  44,  16,  26},
         {104,  34, 106,  44, 144,  43, 102,  41},
@@ -938,8 +938,7 @@ static const union AnimCmd sSpriteAnim_StatusFaint[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_Blank[] =
-{
+static const union AnimCmd sSpriteAnim_StatusFrostbite[] = {
     ANIMCMD_FRAME(28, 0),
     ANIMCMD_END
 };
@@ -953,7 +952,7 @@ static const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
     sSpriteAnim_StatusBurn,
     sSpriteAnim_StatusPokerus,
     sSpriteAnim_StatusFaint,
-    sSpriteAnim_Blank,
+    sSpriteAnim_StatusFrostbite,
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
@@ -977,14 +976,14 @@ const struct SpriteTemplate gSpriteTemplate_StatusIcons =
     .callback = SpriteCallbackDummy,
 };
 
-static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] = 
+static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] =
 {
-    FALSE, 
-    TRUE, 
-    FALSE, 
-    FALSE, 
-    TRUE, 
-    TRUE, 
+    FALSE,
+    TRUE,
+    FALSE,
+    FALSE,
+    TRUE,
+    TRUE,
     FALSE,
 };
 

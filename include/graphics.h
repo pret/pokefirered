@@ -5446,7 +5446,7 @@ extern const u32 gBattleTextboxTiles[];
 extern const u16 gBattleTextboxPalette[];
 extern const u32 gBattleTextboxTilemap[];
 extern const u32 gBattleInterface_PartySummaryBar_Gfx[];
-extern const u8 gBattleInterface_Gfx[][32];
+extern const u8 gHealthboxElementsGfxTable[][32];
 extern const u16 gBattleInterface_Healthbox_Pal[];
 extern const u16 gBattleInterface_Healthbar_Pal[];
 extern const u16 gCategoryIcons_Pal[];

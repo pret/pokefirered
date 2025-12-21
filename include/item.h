@@ -243,7 +243,6 @@ void SetBagItemsPointers(void);
 void ItemPcCompaction(void);
 void RemovePCItem(u16 itemId, u16 quantity);
 void CompactItemsInBagPocket(enum Pocket pocketId);
-void SortBerriesOrTMHMs(enum Pocket pocketId);
 u8 CountItemsInPC(void);
 bool32 HasAtLeastOneBerry(void);
 bool32 HasAtLeastOnePokeBall(void);

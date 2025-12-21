@@ -134,7 +134,7 @@ static void CreateBerryPouchSprite(void);
 static void StartBerryPouchSpriteWobbleAnim(void);
 static void SpriteCB_BerryPouchWaitWobbleAnim(struct Sprite *sprite);
 
-static const struct BgTemplate sBgTemplates[] = 
+static const struct BgTemplate sBgTemplates[] =
 {
     {
         .bg = 0,
@@ -163,7 +163,7 @@ static const struct BgTemplate sBgTemplates[] =
     }
 };
 
-static const TaskFunc sBerryPouchContextMenuTasks[] = 
+static const TaskFunc sBerryPouchContextMenuTasks[] =
 {
     [BERRYPOUCH_FROMFIELD]            = Task_NormalContextMenu,
     [BERRYPOUCH_FROMPARTYGIVE]        = Task_ContextMenu_FromPartyGiveMenu,
@@ -174,19 +174,19 @@ static const TaskFunc sBerryPouchContextMenuTasks[] =
     [BERRYPOUCH_FROMBERRYTREE]        = BerryPouch_StartFadeToExitCallback,
 };
 
-static const struct YesNoFuncTable sYesNoFuncs_Toss = 
+static const struct YesNoFuncTable sYesNoFuncs_Toss =
 {
     .yesFunc = Task_TossYes,
     .noFunc  = Task_TossNo
 };
 
-static const struct YesNoFuncTable sYesNoFuncs_Sell = 
+static const struct YesNoFuncTable sYesNoFuncs_Sell =
 {
     .yesFunc = Task_SellYes,
     .noFunc  = Task_SellNo
 };
 
-static const struct MenuAction sContextMenuActions[] = 
+static const struct MenuAction sContextMenuActions[] =
 {
     {gOtherText_Use,  {Task_BerryPouch_Use}},
     {gOtherText_Toss, {Task_BerryPouch_Toss}},
@@ -941,7 +941,7 @@ static void SortAndCountBerries(void)
     enum Pocket pocket = POCKET_BERRIES;
     struct BagPocket *bagPocket = &gBagPockets[pocket];
 
-    SortBerriesOrTMHMs(pocket);
+    SortItemsInBag(bagPocket, SORT_BY_INDEX);
     sResources->listMenuNumItems = 0;
     for (i = 0; i < bagPocket->capacity; i++)
     {
@@ -1155,7 +1155,7 @@ static void Task_BerryPouch_Use(u8 taskId)
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_Berry;
         gFieldCallback = FieldCB_UseItemOnField;
-        
+
         // gBagMenu->newScreenCallback = CB2_ReturnToField;
         // Task_FadeAndCloseBagMenu(taskId);
         sResources->exitCallback = CB2_ReturnToField;
@@ -1378,7 +1378,7 @@ static void Task_ContextMenu_Sell(u8 taskId)
 
             if (tQuantity > MAX_BAG_ITEM_CAPACITY)
                 tQuantity = MAX_BAG_ITEM_CAPACITY;
-            
+
             if (tQuantity > maxQuantity)
                 tQuantity = maxQuantity;
 

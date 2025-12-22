@@ -4,6 +4,7 @@
 #include "party_menu.h"
 #include "pokemon_special_anim_internal.h"
 #include "item_use.h"
+#include "item.h"
 #include "task.h"
 #include "move.h"
 #include "constants/songs.h"
@@ -617,7 +618,7 @@ static u16 GetAnimTypeByItemId(u16 itemId)
             return sItemAnimMap[i].animType;
     }
 
-    if (itemId >= ITEM_TM01 && itemId <= ITEM_HM08)
+    if (IsItemTMHM(itemId))
     {
         return 4;
     }

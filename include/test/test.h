@@ -1,24 +1,12 @@
 #ifndef GUARD_TEST_H
 #define GUARD_TEST_H
 
+#include "test_result.h"
 #include "test_runner.h"
 #include "random.h"
 
 #define MAX_PROCESSES 32 // See also tools/mgba-rom-test-hydra/main.c
 #define RIGGED_RNG_COUNT 8
-
-enum TestResult
-{
-    TEST_RESULT_FAIL,
-    TEST_RESULT_PASS,
-    TEST_RESULT_ASSUMPTION_FAIL,
-    TEST_RESULT_INVALID,
-    TEST_RESULT_ERROR,
-    TEST_RESULT_TIMEOUT,
-    TEST_RESULT_CRASH,
-    TEST_RESULT_TODO,
-    TEST_RESULT_KNOWN_FAIL,
-};
 
 struct TestRunner
 {
@@ -106,7 +94,6 @@ void CB2_TestRunner(void);
 void Test_ExpectedResult(enum TestResult);
 void Test_ExpectLeaks(bool32);
 void Test_ExpectCrash(bool32);
-void Test_ExitWithResult(enum TestResult, u32 stopLine, const char *fmt, ...);
 u32 SourceLine(u32 sourceLineOffset);
 u32 SourceLineOffset(u32 sourceLine);
 void SetupRiggedRng(u32 sourceLine, enum RandomTag randomTag, u32 value);

@@ -654,7 +654,7 @@ static void Intr_Timer2(void)
     }
 }
 
-void Test_ExitWithResult(enum TestResult result, u32 stopLine, const char *fmt, ...)
+void Test_ExitWithResult_(enum TestResult result, u32 stopLine, const void *return1, const char *fmt, ...)
 {
     gTestRunnerState.result = result;
     gTestRunnerState.failedAssumptionsBlockLine = stopLine;

@@ -1737,7 +1737,7 @@ static bool8 CapturedAllLandMons(u16 headerId)
     u16 i, species;
     int count = 0;
     enum Season season;
-    enum TimeOfDay timeOfDay; 
+    enum TimeOfDay timeOfDay;
     GetSeasonAndTimeOfDayForEncounters(headerId, WILD_AREA_LAND, &season, &timeOfDay);
     const struct WildPokemonInfo* landMonsInfo = gWildMonHeaders[headerId].encounterTypes[season][timeOfDay].landMonsInfo;
 
@@ -1773,7 +1773,7 @@ static bool8 CapturedAllWaterMons(u16 headerId)
     u16 species;
     u8 count = 0;
     enum Season season;
-    enum TimeOfDay timeOfDay; 
+    enum TimeOfDay timeOfDay;
     GetSeasonAndTimeOfDayForEncounters(headerId, WILD_AREA_WATER, &season, &timeOfDay);
     const struct WildPokemonInfo* waterMonsInfo = gWildMonHeaders[headerId].encounterTypes[season][timeOfDay].waterMonsInfo;
 
@@ -1807,7 +1807,7 @@ static bool8 CapturedAllHiddenMons(u16 headerId)
     u16 species;
     u8 count = 0;
     enum Season season;
-    enum TimeOfDay timeOfDay; 
+    enum TimeOfDay timeOfDay;
     GetSeasonAndTimeOfDayForEncounters(headerId, WILD_AREA_HIDDEN, &season, &timeOfDay);
     const struct WildPokemonInfo* hiddenMonsInfo = gWildMonHeaders[headerId].encounterTypes[season][timeOfDay].hiddenMonsInfo;
 
@@ -2348,12 +2348,13 @@ static void DexNavGuiInit(MainCallback callback)
 
 void Task_OpenDexNavFromStartMenu(u8 taskId)
 {
-    if (DEXNAV_ENABLED == FALSE)
-    {   // must have it enabled to enter
-        DebugPrintfLevel(MGBA_LOG_ERROR, "DexNav was opened when DEXNAV_ENABLED config was disabled! Check include/config/dexnav.h");
+    assertf(DEXNAV_ENABLED, "DexNav was opened when DEXNAV_ENABLED config was disabled! Check include/config/dexnav.h")
+    {
         DestroyTask(taskId);
+        return;
     }
-    else if (!gPaletteFade.active)
+
+    if (!gPaletteFade.active)
     {
         CleanupOverworldWindowsAndTilemaps();
         DexNavGuiInit(CB2_ReturnToFieldWithOpenMenu);

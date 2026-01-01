@@ -210,6 +210,7 @@ bool8 CheckBagHasItem(u16 itemId, u16 count);
 bool8 CheckBagHasSpace(u16 itemId, u16 count);
 u32 GetFreeSpaceForItemInBag(u16 itemId);
 bool8 RemoveBagItem(u16 itemId, u16 count);
+void RemoveBagItemFromSlot(struct BagPocket *pocket, u16 slotId, u16 count);
 u8 GetPocketByItemId(u16 itemId);
 u8 CountUsedPCItemSlots(void);
 bool8 CheckPCHasItem(u16 itemId, u16 count);
@@ -241,7 +242,7 @@ u16 GetPCItemQuantity(u16 *);
 void SetBagItemsPointers(void);
 
 void ItemPcCompaction(void);
-void RemovePCItem(u16 itemId, u16 quantity);
+void RemovePCItem(u8 index, u16 count);
 void CompactItemsInBagPocket(enum Pocket pocketId);
 u8 CountItemsInPC(void);
 bool32 HasAtLeastOneBerry(void);

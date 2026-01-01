@@ -1,16 +1,14 @@
 #include "global.h"
-
 #include "gba/flash_internal.h"
-
+#include "decompress.h"
 #include "dma3.h"
 #include "gpu_regs.h"
-#include "text.h"
-
-#include "decompress.h"
 #include "help_system.h"
 #include "m4a.h"
+#include "malloc.h"
 #include "save.h"
 #include "strings.h"
+#include "text.h"
 
 COMMON_DATA bool32 sIsInSaveFailedScreen = 0;
 
@@ -120,29 +118,30 @@ static void BlankPalettes(void)
     }
 }
 
-static void RequestDmaCopyFromScreenBuffer(void)
+static void RequestDmaCopyFromScreenBuffer(u8 *buffer)
 {
-    RequestDma3Copy(gDecompressionBuffer + 0x3800, (void *)BG_SCREEN_ADDR(31), 0x500, DMA3_16BIT);
+    RequestDma3Copy(buffer + 0x3800, (void *)BG_SCREEN_ADDR(31), 0x500, DMA3_16BIT);
 }
 
-static void RequestDmaCopyFromCharBuffer(void)
+static void RequestDmaCopyFromCharBuffer(u8 *buffer)
 {
-    RequestDma3Copy(gDecompressionBuffer + 0x020, (void *)BG_CHAR_ADDR(3) + 0x20, 0x2300, DMA3_16BIT);
+    RequestDma3Copy(buffer + 0x020, (void *)BG_CHAR_ADDR(3) + 0x20, 0x2300, DMA3_16BIT);
 }
 
 static void FillBgMapBufferRect(u16 baseBlock, u8 left, u8 top, u8 width, u8 height, u16 blockOffset)
 {
     u16 i, j;
+    u8 *buffer = Alloc(0x4000);
 
     for (i = top; i < top + height; i++)
     {
         for (j = left; j < left + width; j++)
         {
-            *((u16 *)(gDecompressionBuffer + 0x3800 + 64 * i + 2 * j)) = baseBlock;
+            *((u16 *)(buffer + 0x3800 + 64 * i + 2 * j)) = baseBlock;
             baseBlock += blockOffset;
         }
     }
-    RequestDmaCopyFromScreenBuffer();
+    RequestDmaCopyFromScreenBuffer(buffer);
 }
 
 static void UpdateMapBufferWithText(void)
@@ -157,10 +156,13 @@ static void ClearMapBuffer(void)
 
 static void PrintTextOnSaveFailedScreen(const u8 *str)
 {
+    u8 *buffer = Alloc(0x4000);
+
     GenerateFontHalfRowLookupTable(TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    CpuFill16(PIXEL_FILL(1) | (PIXEL_FILL(1) << 8), gDecompressionBuffer + 0x20, 0x2300);
-    HelpSystemRenderText(2, gDecompressionBuffer + 0x20, str, 2, 2, 28, 10);
-    RequestDmaCopyFromCharBuffer();
+    CpuFill16(PIXEL_FILL(1) | (PIXEL_FILL(1) << 8), buffer + 0x20, 0x2300);
+    HelpSystemRenderText(2, buffer + 0x20, str, 2, 2, 28, 10);
+    RequestDmaCopyFromCharBuffer(buffer);
+    Free(buffer);
 }
 
 static bool32 TryWipeDamagedSectors(void)

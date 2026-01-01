@@ -80,6 +80,7 @@ struct MysteryGiftClient
     struct MysteryGiftClientCmd * script;
     void *msg;
     struct MysteryGiftLink link;
+    ALIGNED(4) u8 bufferScript[MG_LINK_BUFFER_SIZE];
 };
 
 void MysteryGiftClient_Create(void);

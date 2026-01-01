@@ -427,16 +427,11 @@ static void ProcessRecvCmds(u8 unused)
         {
             if (sBlockRecv[i].size > BLOCK_BUFFER_SIZE)
             {
-                u16 *buffer;
-                u16 j;
-
-                buffer = (u16 *)gDecompressionBuffer;
-                for (j = 0; j < CMD_LENGTH - 1; j++)
-                    buffer[(sBlockRecv[i].pos / 2) + j] = gRecvCmds[i][j + 1];
+                // Too large block was sent.
             }
             else
             {
-                u16 j;
+                u32 j;
 
                 for (j = 0; j < CMD_LENGTH - 1; j++)
                     gBlockRecvBuffer[i][(sBlockRecv[i].pos / 2) + j] = gRecvCmds[i][j + 1];
@@ -935,7 +930,7 @@ void CheckLinkPlayersMatchSaved(void)
 
     for (i = 0; i < gSavedLinkPlayerCount; i++)
     {
-        if (gSavedLinkPlayers[i].trainerId != gLinkPlayers[i].trainerId 
+        if (gSavedLinkPlayers[i].trainerId != gLinkPlayers[i].trainerId
          || StringCompare(gSavedLinkPlayers[i].name, gLinkPlayers[i].name) != 0)
         {
             gLinkErrorOccurred = TRUE;

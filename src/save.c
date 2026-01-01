@@ -1,10 +1,9 @@
 #include "global.h"
-
 #include "gba/flash_internal.h"
-
 #include "agb_flash.h"
 #include "decompress.h"
 #include "fieldmap.h"
+#include "hall_of_fame.h"
 #include "link.h"
 #include "load_save.h"
 #include "overworld.h"
@@ -704,7 +703,6 @@ u8 HandleSavingData(u8 saveType)
 {
     u8 i;
     u32 *backupPtr = gTrainerTowerVBlankCounter;
-    u8 *tempAddr;
 
     gTrainerTowerVBlankCounter = NULL;
     UpdateSaveAddresses();
@@ -717,9 +715,14 @@ u8 HandleSavingData(u8 saveType)
     case SAVE_HALL_OF_FAME:
         if (GetGameStat(GAME_STAT_ENTERED_HOF) < 999)
             IncrementGameStat(GAME_STAT_ENTERED_HOF);
-        tempAddr = gDecompressionBuffer;
-        HandleWriteSectorNBytes(SECTOR_ID_HOF_1, tempAddr, SECTOR_DATA_SIZE);
-        HandleWriteSectorNBytes(SECTOR_ID_HOF_2, tempAddr + SECTOR_DATA_SIZE, SECTOR_DATA_SIZE);
+
+        // Save the Hall of Fame
+        if (gHoFSaveBuffer != NULL)
+        {
+            u8 *tempAddr = (void *) gHoFSaveBuffer;
+            HandleWriteSectorNBytes(SECTOR_ID_HOF_1, tempAddr, SECTOR_DATA_SIZE);
+            HandleWriteSectorNBytes(SECTOR_ID_HOF_2, tempAddr + SECTOR_DATA_SIZE, SECTOR_DATA_SIZE);
+        }
         // fallthrough
     case SAVE_NORMAL:
     default:
@@ -782,7 +785,7 @@ bool8 LinkFullSave_Init(void)
     return FALSE;
 }
 
-bool8 LinkFullSave_WriteSector(void) 
+bool8 LinkFullSave_WriteSector(void)
 {
     u8 status = HandleWriteIncrementalSector(NUM_SECTORS_PER_SLOT, gRamSaveSectorLocations);
     if (gDamagedSaveSectors)
@@ -877,9 +880,17 @@ u8 LoadGameSave(u8 saveType)
         gGameContinueCallback = NULL;
         break;
     case SAVE_HALL_OF_FAME:
-        result = TryLoadSaveSector(SECTOR_ID_HOF_1, gDecompressionBuffer, SECTOR_DATA_SIZE);
-        if (result == SAVE_STATUS_OK)
-            result = TryLoadSaveSector(SECTOR_ID_HOF_2, gDecompressionBuffer + SECTOR_DATA_SIZE, SECTOR_DATA_SIZE);
+        if (gHoFSaveBuffer != NULL)
+        {
+            u8 *hofData = (u8 *) gHoFSaveBuffer;
+            result = TryLoadSaveSector(SECTOR_ID_HOF_1, hofData, SECTOR_DATA_SIZE);
+            if (result == SAVE_STATUS_OK)
+                result = TryLoadSaveSector(SECTOR_ID_HOF_2, hofData + SECTOR_DATA_SIZE, SECTOR_DATA_SIZE);
+        }
+        else
+        {
+            result = SAVE_STATUS_ERROR;
+        }
         break;
     }
 

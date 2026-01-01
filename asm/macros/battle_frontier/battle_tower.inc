@@ -17,6 +17,6 @@
 
 	.macro multi_2_vs_2 trainer1Id:req, trainer1LoseText:req, trainer2Id:req, trainer2LoseText:req, partnerId:req
 	special SavePlayerParty
-	trainerbattle TRAINER_BATTLE_SET_TRAINERS_FOR_MULTI_BATTLE, OBJ_ID_NONE, \trainer1Id, NULL, \trainer1LoseText, NULL, OBJ_ID_NONE, \trainer2Id, NULL, \trainer2LoseText, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
+	trainerbattle TRAINER_BATTLE_SET_TRAINERS_FOR_MULTI_BATTLE, LOCALID_NONE, \trainer1Id, NULL, \trainer1LoseText, NULL, LOCALID_NONE, \trainer2Id, NULL, \trainer2LoseText, NULL, NULL, NULL, FALSE, TRUE, FALSE, FALSE
 	multi_do MULTI_BATTLE_2_VS_2, \partnerId
 	.endm

@@ -408,7 +408,6 @@ static void SetSpecialMapHasMon(u16 mapGroup, u16 mapNum)
                 if (sPokedexAreaScreen->specialAreaRegionMapSectionIds[i] == regionMapSectionId)
                     break;
             }
-            DebugPrintfLevel(MGBA_LOG_ERROR, "special area mapsec: %u", regionMapSectionId);
             if (i == sPokedexAreaScreen->numSpecialAreas)
             {
                 // New special area

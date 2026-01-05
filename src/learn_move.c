@@ -21,19 +21,19 @@
 /*
  * Move relearner state machine
  * ------------------------
- * 
+ *
  * CB2_MoveRelearner_Init
  *   - Creates listMenuScrollPos to listen to right/left buttons.
  *   - Creates listMenuScrollRow to listen to up/down buttons.
  * MoveRelearnerStateMachine: MENU_STATE_FADE_TO_BLACK
  * MoveRelearnerStateMachine: MENU_STATE_WAIT_FOR_FADE
  *   - Go to MENU_STATE_IDLE_BATTLE_MODE
- * 
+ *
  * MoveRelearnerStateMachine: MENU_STATE_SETUP_BATTLE_MODE
  * MoveRelearnerStateMachine: MENU_STATE_IDLE_BATTLE_MODE
  *   - If the player selected a move (pressed A), go to MENU_STATE_PRINT_TEACH_MOVE_PROMPT.
  *   - If the player cancelled (pressed B), go to MENU_STATE_PRINT_GIVE_UP_PROMPT.
- * 
+ *
  * MoveRelearnerStateMachine: MENU_STATE_PRINT_TEACH_MOVE_PROMPT
  * MoveRelearnerStateMachine: MENU_STATE_TEACH_MOVE_CONFIRM
  *   - Wait for the player to confirm.
@@ -42,24 +42,24 @@
  *     MENU_STATE_PRINT_TEXT_THEN_FANFARE.
  *   - If confirmed and the pokemon doesn't have an empty move slot, go to
  *     MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT.
- * 
+ *
  * MoveRelearnerStateMachine: MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT
  * MoveRelearnerStateMachine: MENU_STATE_WAIT_FOR_TRYING_TO_LEARN
  * MoveRelearnerStateMachine: MENU_STATE_CONFIRM_DELETE_OLD_MOVE
  *   - If the player confirms, go to MENU_STATE_PRINT_WHICH_MOVE_PROMPT.
  *   - If the player cancels, go to MENU_STATE_PRINT_STOP_TEACHING
- * 
+ *
  * MoveRelearnerStateMachine: MENU_STATE_PRINT_STOP_TEACHING
  * MoveRelearnerStateMachine: MENU_STATE_WAIT_FOR_STOP_TEACHING
  * MoveRelearnerStateMachine: MENU_STATE_CONFIRM_STOP_TEACHING
  *   - If the player confirms, go to MENU_STATE_CHOOSE_SETUP_STATE.
  *   - If the player cancels, go back to MENU_STATE_PRINT_TRYING_TO_LEARN_PROMPT.
- * 
+ *
  * MoveRelearnerStateMachine: MENU_STATE_PRINT_WHICH_MOVE_PROMPT
  * MoveRelearnerStateMachine: MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN
  *   - Go to ShowSelectMovePokemonSummaryScreen. When done, control returns to
  *     CB2_MoveRelearner_Resume.
- * 
+ *
  * MoveRelearnerStateMachine: MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE
  * MoveRelearnerStateMachine: MENU_STATE_PRINT_TEXT_THEN_FANFARE
  * MoveRelearnerStateMachine: MENU_STATE_WAIT_FOR_FANFARE
@@ -67,12 +67,12 @@
  * MoveRelearnerStateMachine: MENU_STATE_FADE_AND_RETURN
  * MoveRelearnerStateMachine: MENU_STATE_RETURN_TO_FIELD
  *   - Clean up and go to CB2_ReturnToField.
- * 
+ *
  * MoveRelearnerStateMachine: MENU_STATE_PRINT_GIVE_UP_PROMPT
  * MoveRelearnerStateMachine: MENU_STATE_GIVE_UP_CONFIRM
  *   - If the player confirms, go to MENU_STATE_FADE_AND_RETURN, and set VAR_0x8004 to FALSE.
  *   - If the player cancels, go to MENU_STATE_SETUP_BATTLE_MODE.
- * 
+ *
  * CB2_MoveRelearner_Resume:
  *   - Do most of the same stuff as CB2_MoveRelearner_Init.
  * MoveRelearnerStateMachine: MENU_STATE_FADE_FROM_SUMMARY_SCREEN
@@ -81,9 +81,9 @@
  *     go to MENU_STATE_DOUBLE_FANFARE_FORGOT_MOVE and set VAR_0x8004 to TRUE.
  *   - If the chosen move is the one the player selected before the summary screen,
  *     go to MENU_STATE_PRINT_STOP_TEACHING.
- * 
+ *
  */
- 
+
 #define MENU_STATE_FADE_TO_BLACK 0
 #define MENU_STATE_WAIT_FOR_FADE 1
 #define MENU_STATE_UNREACHABLE 2
@@ -125,24 +125,15 @@ struct MoveTutorMoveInfoHeaders
 struct LearnMoveGfxResources
 {
     u8 state;
-    u8 unk_01;
-    u8 unk_02;
     u8 spriteIds[2];
-    u8 filler_05[0x13];
-    u8 unk_18;
     u8 scrollPositionMaybe;
     u8 numLearnableMoves;
-    u8 unk_1B;
-    u8 unk_1C;
-    u8 unk_1D;
-    u8 unk_1E;
     struct ListMenuItem listMenuItems[MAX_RELEARNER_MOVES + 1];
     u16 learnableMoves[MAX_RELEARNER_MOVES];
-    u8 listMenuStrbufs[MAX_RELEARNER_MOVES][13];
+    u8 listMenuStrbufs[MAX_RELEARNER_MOVES][MOVE_NAME_LENGTH + 1];
     bool8 scheduleMoveInfoUpdate;
     u8 selectedPartyMember;
     u8 selectedMoveSlot;
-    u8 unk_262;
     u8 listMenuTaskId;
     u8 bg1TilemapBuffer[BG_SCREEN_SIZE]; // 264
     u8 textColor[3]; // A64
@@ -699,16 +690,11 @@ static void InitMoveRelearnerStateVariables(void)
 {
     int i;
     sMoveRelearner->state = 0;
-    sMoveRelearner->unk_02 = 0;
     sMoveRelearner->scrollPositionMaybe = 0;
-    sMoveRelearner->unk_18 = 0;
-    sMoveRelearner->unk_1C = 0;
     sMoveRelearner->numLearnableMoves = 0;
-    sMoveRelearner->unk_1B = 0;
-    sMoveRelearner->unk_1D = 0;
-    sMoveRelearner->unk_1E = 0;
+
     sMoveRelearner->scheduleMoveInfoUpdate = FALSE;
-    for (i = 0; i < 20; i++)
+    for (i = 0; i < MAX_RELEARNER_MOVES; i++)
         sMoveRelearner->learnableMoves[i] = MOVE_NONE;
 }
 

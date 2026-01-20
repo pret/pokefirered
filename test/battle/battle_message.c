@@ -14,7 +14,7 @@ SINGLE_BATTLE_TEST("Battle Message: Send-in message depends on foe HP")
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET) { HP(hp); MaxHP(100); }
     } WHEN {
-        TURN { SWITCH(player, 1);  }
+        TURN { SWITCH(player, 1); }
     } SCENE {
         if (hp > 69)
             MESSAGE("Go! Wynaut!");
@@ -34,7 +34,7 @@ TO_DO_BATTLE_TEST("Battle Message: Switch-out message changes based on condition
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { SWITCH(player, 1);  }
+        TURN { SWITCH(player, 1); }
     } SCENE {
         if (???)
             MESSAGE("Wynaut, that's enough! Come back!");

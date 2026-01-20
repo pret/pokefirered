@@ -1,12 +1,15 @@
 #include "global.h"
 #include "test/battle.h"
 
-SINGLE_BATTLE_TEST("Protean changes the type of the user to the move used every time (Gen6-8)")
+SINGLE_BATTLE_TEST("Protean/Libero changes the type of the user to the move used every time (Gen6-8)")
 {
+    u32 ability, species;
+    PARAMETRIZE { ability = ABILITY_PROTEAN; species = SPECIES_KECLEON; }
+    PARAMETRIZE { ability = ABILITY_LIBERO;  species = SPECIES_RABOOT; }
     GIVEN {
-        WITH_CONFIG(GEN_PROTEAN_LIBERO, GEN_6);
+        WITH_CONFIG(CONFIG_PROTEAN_LIBERO, GEN_6);
         PLAYER(SPECIES_REGIROCK);
-        OPPONENT(SPECIES_KECLEON) { Ability(ABILITY_PROTEAN); }
+        OPPONENT(species) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_WATER_GUN); }
@@ -15,24 +18,36 @@ SINGLE_BATTLE_TEST("Protean changes the type of the user to the move used every 
         TURN { SWITCH(opponent, 0); }
         TURN { MOVE(opponent, MOVE_WATER_GUN); }
     } SCENE {
-        ABILITY_POPUP(opponent, ABILITY_PROTEAN);
-        MESSAGE("The opposing Kecleon transformed into the Water type!");
+        ABILITY_POPUP(opponent, ability);
+        if (species == SPECIES_KECLEON)
+            MESSAGE("The opposing Kecleon transformed into the Water type!");
+        else
+            MESSAGE("The opposing Raboot transformed into the Water type!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
-        ABILITY_POPUP(opponent, ABILITY_PROTEAN);
-        MESSAGE("The opposing Kecleon transformed into the Normal type!");
+        ABILITY_POPUP(opponent, ability);
+        if (species == SPECIES_KECLEON)
+            MESSAGE("The opposing Kecleon transformed into the Normal type!");
+        else
+            MESSAGE("The opposing Raboot transformed into the Normal type!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        ABILITY_POPUP(opponent, ABILITY_PROTEAN);
-        MESSAGE("The opposing Kecleon transformed into the Water type!");
+        ABILITY_POPUP(opponent, ability);
+        if (species == SPECIES_KECLEON)
+            MESSAGE("The opposing Kecleon transformed into the Water type!");
+        else
+            MESSAGE("The opposing Raboot transformed into the Water type!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
     }
 }
 
-SINGLE_BATTLE_TEST("Protean changes the type of the user only once per switch in (Gen9+)")
+SINGLE_BATTLE_TEST("Protean/Libero changes the type of the user only once per switch in (Gen9+)")
 {
+    u32 ability, species;
+    PARAMETRIZE { ability = ABILITY_PROTEAN; species = SPECIES_KECLEON; }
+    PARAMETRIZE { ability = ABILITY_LIBERO;  species = SPECIES_RABOOT; }
     GIVEN {
-        WITH_CONFIG(GEN_PROTEAN_LIBERO, GEN_9);
+        WITH_CONFIG(CONFIG_PROTEAN_LIBERO, GEN_9);
         PLAYER(SPECIES_REGIROCK);
-        OPPONENT(SPECIES_KECLEON) { Ability(ABILITY_PROTEAN); }
+        OPPONENT(species) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_WATER_GUN); }
@@ -41,31 +56,42 @@ SINGLE_BATTLE_TEST("Protean changes the type of the user only once per switch in
         TURN { SWITCH(opponent, 0); }
         TURN { MOVE(opponent, MOVE_WATER_GUN); }
     } SCENE {
-        ABILITY_POPUP(opponent, ABILITY_PROTEAN);
-        MESSAGE("The opposing Kecleon transformed into the Water type!");
+        ABILITY_POPUP(opponent, ability);
+        if (species == SPECIES_KECLEON)
+            MESSAGE("The opposing Kecleon transformed into the Water type!");
+        else
+            MESSAGE("The opposing Raboot transformed into the Water type!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
         NONE_OF {
-            ABILITY_POPUP(opponent, ABILITY_PROTEAN);
+            ABILITY_POPUP(opponent, ability);
             MESSAGE("The opposing Kecleon transformed into the Normal type!");
+            MESSAGE("The opposing Raboot transformed into the Normal type!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
-        ABILITY_POPUP(opponent, ABILITY_PROTEAN);
-        MESSAGE("The opposing Kecleon transformed into the Water type!");
+        ABILITY_POPUP(opponent, ability);
+        if (species == SPECIES_KECLEON)
+            MESSAGE("The opposing Kecleon transformed into the Water type!");
+        else
+            MESSAGE("The opposing Raboot transformed into the Water type!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WATER_GUN, opponent);
     }
 }
 
-SINGLE_BATTLE_TEST("Protean does not change the user's type when using Struggle")
+SINGLE_BATTLE_TEST("Protean/Libero does not change the user's type when using Struggle")
 {
+    u32 ability, species;
+    PARAMETRIZE { ability = ABILITY_PROTEAN; species = SPECIES_GRENINJA; }
+    PARAMETRIZE { ability = ABILITY_LIBERO;  species = SPECIES_RABOOT; }
     GIVEN {
         PLAYER(SPECIES_REGIROCK);
-        OPPONENT(SPECIES_GRENINJA) { Ability(ABILITY_PROTEAN); }
+        OPPONENT(species) { Ability(ability); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_STRUGGLE); }
     } SCENE {
         NONE_OF {
-            ABILITY_POPUP(opponent, ABILITY_PROTEAN);
+            ABILITY_POPUP(opponent, ability);
             MESSAGE("The opposing Greninja transformed into the Normal type!");
+            MESSAGE("The opposing Raboot transformed into the Normal type!");
         }
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, opponent);
     }

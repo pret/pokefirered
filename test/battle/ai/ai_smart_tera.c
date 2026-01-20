@@ -31,7 +31,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_TERA: AI will not tera if it gets outsped a
         OPPONENT(SPECIES_WOBBUFFET) { HP(60); Speed(1); Moves(MOVE_SEED_BOMB); TeraType(TYPE_GRASS); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(100); TeraType(TYPE_FIRE); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         NOT MESSAGE("The opposing Wobbuffet terastallized into the Grass type!");
     }

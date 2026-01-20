@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Rivalry doesn't modify power if the attacker is genderless",
     GIVEN {
         ASSUME(GetSpeciesAbility(SPECIES_PORYGON, 0) == ABILITY_TRACE);
         PLAYER(SPECIES_PORYGON) { Ability(ABILITY_TRACE); } // No genderless mon naturally gets Rivalry
-        OPPONENT(species) { Ability(ability); };
+        OPPONENT(species) { Ability(ability); }
     } WHEN {
         TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
@@ -89,7 +89,7 @@ SINGLE_BATTLE_TEST("Rivalry doesn't modify power if the target is genderless", s
     PARAMETRIZE { species = SPECIES_NIDOQUEEN; ability = ABILITY_RIVALRY; }
 
     GIVEN {
-        PLAYER(species) { Ability(ability); };
+        PLAYER(species) { Ability(ability); }
         OPPONENT(SPECIES_PORYGON);
     } WHEN {
         TURN { MOVE(player, MOVE_SCRATCH); }

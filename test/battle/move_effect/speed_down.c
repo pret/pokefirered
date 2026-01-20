@@ -10,6 +10,7 @@ DOUBLE_BATTLE_TEST("Speed Down: Cotton Spore does not fail if it is blocked by o
 
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_COTTON_SPORE) == EFFECT_SPEED_DOWN_2);
+        ASSUME(GetMoveTarget(MOVE_COTTON_SPORE) == TARGET_BOTH);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_SHELLDER) { Ability(abilityOne); }
@@ -23,9 +24,9 @@ DOUBLE_BATTLE_TEST("Speed Down: Cotton Spore does not fail if it is blocked by o
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentRight);
         }
         else if (abilityTwo == ABILITY_OVERCOAT) {
+            ABILITY_POPUP(opponentRight, ABILITY_OVERCOAT);
             ANIMATION(ANIM_TYPE_MOVE, MOVE_COTTON_SPORE, playerLeft);
             ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
-            ABILITY_POPUP(opponentRight, ABILITY_OVERCOAT);
         }
     }
 }

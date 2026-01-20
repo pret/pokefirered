@@ -69,3 +69,17 @@ SINGLE_BATTLE_TEST("Protect always works when used after flinching")
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_HEADBUTT, opponent);
     }
 }
+
+SINGLE_BATTLE_TEST("Headbutt flinches 30% of the time")
+{
+    PASSES_RANDOMLY(30, 100, RNG_SECONDARY_EFFECT);
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_HEADBUTT); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HEADBUTT, player);
+        MESSAGE("The opposing Wobbuffet flinched and couldn't move!");
+    }
+}

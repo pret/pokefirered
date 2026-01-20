@@ -89,7 +89,7 @@ SINGLE_BATTLE_TEST("Recoil: Flare Blitz is absorbed by Flash Fire and no recoil 
     GIVEN {
         ASSUME(GetMoveRecoil(MOVE_FLARE_BLITZ) > 0);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_VULPIX) { Ability(ABILITY_FLASH_FIRE); };
+        OPPONENT(SPECIES_VULPIX) { Ability(ABILITY_FLASH_FIRE); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_SCRATCH); MOVE(player, MOVE_FLARE_BLITZ); }
     } SCENE {
@@ -111,7 +111,7 @@ SINGLE_BATTLE_TEST("Recoil: The correct amount of recoil damage is dealt after t
     GIVEN {
         ASSUME(GetMoveRecoil(MOVE_TAKE_DOWN) == 25);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(100); HP(51); Item(ITEM_SITRUS_BERRY); };
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(100); HP(51); Item(ITEM_SITRUS_BERRY); }
     } WHEN {
         TURN { MOVE(player, MOVE_TAKE_DOWN); }
     } SCENE {
@@ -120,5 +120,20 @@ SINGLE_BATTLE_TEST("Recoil: The correct amount of recoil damage is dealt after t
         HP_BAR(player, captureDamage: &recoilDamage);
     } THEN {
         EXPECT_MUL_EQ(directDamage, UQ_4_12(0.25), recoilDamage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Recoil: No recoil is taken if the move is blocked by Disguise")
+{
+    GIVEN {
+        ASSUME(GetMoveRecoil(MOVE_FLARE_BLITZ) > 0);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_MIMIKYU) { Ability(ABILITY_DISGUISE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FLARE_BLITZ); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLARE_BLITZ, player);
+    } THEN {
+        EXPECT_EQ(player->hp, player->maxHP);
     }
 }

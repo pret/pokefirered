@@ -1,7 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 
-TO_DO_BATTLE_TEST("TODO: Write Gear Up (Move Effect) test titles")
+TO_DO_BATTLE_TEST("Gear Up increases the Attack and Sp. Attack of the user and allies if they have Plus or Minus")
 
 AI_DOUBLE_BATTLE_TEST("AI uses Gear Up")
 {
@@ -12,6 +12,6 @@ AI_DOUBLE_BATTLE_TEST("AI uses Gear Up")
         OPPONENT(SPECIES_KLINKLANG) { Ability(ABILITY_PLUS); Moves(MOVE_GEAR_UP, MOVE_WATER_GUN, MOVE_POUND); }
         OPPONENT(SPECIES_KLINKLANG) { Ability(ABILITY_PLUS); Moves(MOVE_GEAR_UP, MOVE_WATER_GUN, MOVE_POUND); }
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, MOVE_GEAR_UP); }
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_GEAR_UP); }
     }
 }

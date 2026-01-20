@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+")
     }
 }
 
-SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Muscle Band, crit)")
+SINGLE_BATTLE_TEST("Damage calculation matches Gen6+ (Muscle Band, crit)")
 {
     s16 dmg;
     s16 expectedDamage;
@@ -62,6 +62,7 @@ SINGLE_BATTLE_TEST("Damage calculation matches Gen5+ (Muscle Band, crit)")
     PARAMETRIZE { expectedDamage = 276; }
     PARAMETRIZE { expectedDamage = 268; }
     GIVEN {
+        WITH_CONFIG(CONFIG_CRIT_MULTIPLIER, GEN_6);
         ASSUME(GetMoveCategory(MOVE_ICE_FANG) == DAMAGE_CATEGORY_PHYSICAL);
         PLAYER(SPECIES_GLACEON) { Level(75); Attack(123); Item(ITEM_MUSCLE_BAND); }
         OPPONENT(SPECIES_GARCHOMP) { Defense(163); }
@@ -383,7 +384,7 @@ DOUBLE_BATTLE_TEST("Transistor Damage calculation", s16 damage)
                     }
     }
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TRANSISTOR_BOOST, gen);
+        WITH_CONFIG(CONFIG_TRANSISTOR_BOOST, gen);
         ASSUME(GetMoveType(MOVE_WILD_CHARGE) == TYPE_ELECTRIC);
         ASSUME(GetMoveType(MOVE_THUNDER_SHOCK) == TYPE_ELECTRIC);
         ASSUME(GetMoveCategory(MOVE_WILD_CHARGE) == DAMAGE_CATEGORY_PHYSICAL);

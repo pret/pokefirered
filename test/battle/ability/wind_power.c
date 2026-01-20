@@ -3,14 +3,15 @@
 
 ASSUMPTIONS
 {
-    ASSUME(!IsBattleMoveStatus(MOVE_THUNDERBOLT));
-    ASSUME(GetMoveType(MOVE_THUNDERBOLT) == TYPE_ELECTRIC);
+    ASSUME(!IsBattleMoveStatus(MOVE_NUZZLE));
+    ASSUME(GetMoveType(MOVE_NUZZLE) == TYPE_ELECTRIC);
     ASSUME(!IsBattleMoveStatus(MOVE_SCRATCH));
+    ASSUME(!IsWindMove(MOVE_SCRATCH));
     ASSUME(!IsBattleMoveStatus(MOVE_AIR_CUTTER));
-    ASSUME(GetMoveTarget(MOVE_AIR_CUTTER) == MOVE_TARGET_BOTH);
+    ASSUME(GetMoveTarget(MOVE_AIR_CUTTER) == TARGET_BOTH);
     ASSUME(IsWindMove(MOVE_AIR_CUTTER));
     ASSUME(!IsBattleMoveStatus(MOVE_PETAL_BLIZZARD));
-    ASSUME(GetMoveTarget(MOVE_PETAL_BLIZZARD) == MOVE_TARGET_FOES_AND_ALLY);
+    ASSUME(GetMoveTarget(MOVE_PETAL_BLIZZARD) == TARGET_FOES_AND_ALLY);
     ASSUME(IsWindMove(MOVE_PETAL_BLIZZARD));
     ASSUME(!IsWindMove(MOVE_SCRATCH));
 }
@@ -18,19 +19,19 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Wind Power sets up Charge for player when hit by a wind move")
 {
     s16 dmgBefore, dmgAfter;
-    u16 move;
+    enum Move move;
 
-    PARAMETRIZE {move = MOVE_SCRATCH; }
-    PARAMETRIZE {move = MOVE_AIR_CUTTER; }
+    PARAMETRIZE { move = MOVE_SCRATCH; }
+    PARAMETRIZE { move = MOVE_AIR_CUTTER; }
 
     GIVEN {
         PLAYER(SPECIES_WATTREL) { Ability(ABILITY_WIND_POWER); Speed(10); }
-        OPPONENT(SPECIES_WOBBUFFET) {Ability(ABILITY_LIMBER); Speed(5) ;} // Limber, so it doesn't get paralyzed.
+        OPPONENT(SPECIES_PERSIAN) { Ability(ABILITY_LIMBER); Speed(5); } // Limber, so it doesn't get paralyzed.
     } WHEN {
-        TURN { MOVE(player, MOVE_THUNDERBOLT), MOVE(opponent, move); }
-        TURN { MOVE(player, MOVE_THUNDERBOLT), MOVE(opponent, move); }
+        TURN { MOVE(player, MOVE_NUZZLE), MOVE(opponent, move); }
+        TURN { MOVE(player, MOVE_NUZZLE), MOVE(opponent, move); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_NUZZLE, player);
         HP_BAR(opponent, captureDamage: &dmgBefore);
 
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
@@ -40,7 +41,7 @@ SINGLE_BATTLE_TEST("Wind Power sets up Charge for player when hit by a wind move
             MESSAGE("Being hit by Air Cutter charged Wattrel with power!");
         }
 
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_NUZZLE, player);
         HP_BAR(opponent, captureDamage: &dmgAfter);
 
         ANIMATION(ANIM_TYPE_MOVE, move, opponent);
@@ -63,19 +64,19 @@ SINGLE_BATTLE_TEST("Wind Power sets up Charge for player when hit by a wind move
 SINGLE_BATTLE_TEST("Wind Power sets up Charge for opponent when hit by a wind move")
 {
     s16 dmgBefore, dmgAfter;
-    u16 move;
+    enum Move move;
 
-    PARAMETRIZE {move = MOVE_SCRATCH; }
-    PARAMETRIZE {move = MOVE_AIR_CUTTER; }
+    PARAMETRIZE { move = MOVE_SCRATCH; }
+    PARAMETRIZE { move = MOVE_AIR_CUTTER; }
 
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) {Ability(ABILITY_LIMBER); Speed(5) ;} // Limber, so it doesn't get paralyzed.
+        PLAYER(SPECIES_PERSIAN) { Ability(ABILITY_LIMBER); Speed(5); } // Limber, so it doesn't get paralyzed.
         OPPONENT(SPECIES_WATTREL) { Ability(ABILITY_WIND_POWER); Speed(10); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_THUNDERBOLT), MOVE(player, move); }
-        TURN { MOVE(opponent, MOVE_THUNDERBOLT), MOVE(player, move); }
+        TURN { MOVE(opponent, MOVE_NUZZLE), MOVE(player, move); }
+        TURN { MOVE(opponent, MOVE_NUZZLE), MOVE(player, move); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_NUZZLE, opponent);
         HP_BAR(player, captureDamage: &dmgBefore);
 
         ANIMATION(ANIM_TYPE_MOVE, move, player);
@@ -85,7 +86,7 @@ SINGLE_BATTLE_TEST("Wind Power sets up Charge for opponent when hit by a wind mo
             MESSAGE("Being hit by Air Cutter charged the opposing Wattrel with power!");
         }
 
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDERBOLT, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_NUZZLE, opponent);
         HP_BAR(player, captureDamage: &dmgAfter);
 
         ANIMATION(ANIM_TYPE_MOVE, move, player);
@@ -105,21 +106,59 @@ SINGLE_BATTLE_TEST("Wind Power sets up Charge for opponent when hit by a wind mo
     }
 }
 
+SINGLE_BATTLE_TEST("Wind Power sets up Charge for only one attack when hit by a wind move")
+{
+    s16 dmgCharged, dmgAfter;
+    enum Move move;
+
+    PARAMETRIZE { move = MOVE_SCRATCH; }
+    PARAMETRIZE { move = MOVE_AIR_CUTTER; }
+
+    GIVEN {
+        PLAYER(SPECIES_WATTREL) { Ability(ABILITY_WIND_POWER); Speed(5); }
+        OPPONENT(SPECIES_PERSIAN) { Ability(ABILITY_LIMBER); Speed(10); } // Limber, so it doesn't get paralyzed.
+    } WHEN {
+        TURN { MOVE(opponent, move); MOVE(player, MOVE_NUZZLE); }
+        TURN { MOVE(player, MOVE_NUZZLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, move, opponent);
+        HP_BAR(player);
+        if (move == MOVE_AIR_CUTTER) {
+            ABILITY_POPUP(player, ABILITY_WIND_POWER);
+            MESSAGE("Being hit by Air Cutter charged Wattrel with power!");
+        }
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_NUZZLE, player);
+        HP_BAR(opponent, captureDamage: &dmgCharged);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_NUZZLE, player);
+        HP_BAR(opponent, captureDamage: &dmgAfter);
+    }
+    THEN {
+        if (move == MOVE_AIR_CUTTER) {
+            EXPECT_MUL_EQ(dmgAfter, Q_4_12(2.0), dmgCharged);
+        }
+        else {
+            EXPECT_EQ(dmgAfter, dmgCharged);
+        }
+    }
+}
+
 DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ability when hit by a 2/3 target move")
 {
     enum Ability abilityLeft, abilityRight;
 
-    PARAMETRIZE {abilityLeft = ABILITY_NONE, abilityRight = ABILITY_WIND_POWER;}
-    PARAMETRIZE {abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_NONE; }
-    PARAMETRIZE {abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_WIND_POWER; }
+    PARAMETRIZE { abilityLeft = ABILITY_NONE, abilityRight = ABILITY_WIND_POWER; }
+    PARAMETRIZE { abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_NONE; }
+    PARAMETRIZE { abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_WIND_POWER; }
 
     GIVEN {
         PLAYER(SPECIES_WATTREL) { Ability(abilityLeft); Speed(10); }
         PLAYER(SPECIES_WATTREL) { Ability(abilityRight); Speed(5); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_LIMBER); Speed(20); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_LIMBER); Speed(15); }
+        OPPONENT(SPECIES_PERSIAN) { Ability(ABILITY_LIMBER); Speed(20); }
+        OPPONENT(SPECIES_PERSIAN) { Ability(ABILITY_LIMBER); Speed(15); }
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_AIR_CUTTER); MOVE(opponentRight, MOVE_AIR_CUTTER);}
+        TURN { MOVE(opponentLeft, MOVE_AIR_CUTTER); MOVE(opponentRight, MOVE_AIR_CUTTER); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AIR_CUTTER, opponentLeft);
 
@@ -150,17 +189,17 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly for every battler with the ab
 {
     enum Ability abilityLeft, abilityRight;
 
-    PARAMETRIZE {abilityLeft = ABILITY_NONE, abilityRight = ABILITY_WIND_POWER; }
-    PARAMETRIZE {abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_NONE; }
-    PARAMETRIZE {abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_WIND_POWER; }
+    PARAMETRIZE { abilityLeft = ABILITY_NONE, abilityRight = ABILITY_WIND_POWER; }
+    PARAMETRIZE { abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_NONE; }
+    PARAMETRIZE { abilityLeft = ABILITY_WIND_POWER, abilityRight = ABILITY_WIND_POWER; }
 
     GIVEN {
         PLAYER(SPECIES_WATTREL) { Ability(abilityLeft); Speed(10); }
         PLAYER(SPECIES_WATTREL) { Ability(abilityRight); Speed(5); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_LIMBER); Speed(20); }
-        OPPONENT(SPECIES_WOBBUFFET) { Ability(ABILITY_LIMBER); Speed(15); }
+        OPPONENT(SPECIES_PERSIAN) { Ability(ABILITY_LIMBER); Speed(20); }
+        OPPONENT(SPECIES_PERSIAN) { Ability(ABILITY_LIMBER); Speed(15); }
     } WHEN {
-        TURN { MOVE(opponentLeft, MOVE_PETAL_BLIZZARD);}
+        TURN { MOVE(opponentLeft, MOVE_PETAL_BLIZZARD); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PETAL_BLIZZARD, opponentLeft);
 
@@ -189,8 +228,8 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly when Tailwind is used")
 {
     bool8 opponentSide;
 
-    PARAMETRIZE {opponentSide = TRUE;}
-    PARAMETRIZE {opponentSide = FALSE;}
+    PARAMETRIZE { opponentSide = TRUE; }
+    PARAMETRIZE { opponentSide = FALSE; }
 
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
@@ -199,7 +238,7 @@ DOUBLE_BATTLE_TEST("Wind Power activates correctly when Tailwind is used")
         OPPONENT(SPECIES_WATTREL) { Ability(ABILITY_WIND_POWER); Speed(20); }
         OPPONENT(SPECIES_WATTREL) { Ability(ABILITY_WIND_POWER); Speed(15); }
     } WHEN {
-        TURN { MOVE((opponentSide == TRUE) ? opponentLeft : playerLeft, MOVE_TAILWIND);}
+        TURN { MOVE((opponentSide == TRUE) ? opponentLeft : playerLeft, MOVE_TAILWIND); }
     } SCENE {
         if (opponentSide) {
             ANIMATION(ANIM_TYPE_MOVE, MOVE_TAILWIND, opponentLeft);

@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Earthquake's and Bulldoze's damage is halved when Grassy Terrain is in effect", s16 damage)
 {
     bool32 terrain;
-    u16 move;
+    enum Move move;
     PARAMETRIZE { terrain = FALSE; move = MOVE_EARTHQUAKE; } // 0
     PARAMETRIZE { terrain = TRUE; move = MOVE_EARTHQUAKE; } // 1
     PARAMETRIZE { terrain = FALSE; move = MOVE_BULLDOZE; } // 2

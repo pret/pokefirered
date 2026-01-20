@@ -1,7 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-
 SINGLE_BATTLE_TEST("Magic Bounce bounces back status moves")
 {
     GIVEN {
@@ -17,6 +16,46 @@ SINGLE_BATTLE_TEST("Magic Bounce bounces back status moves")
         MESSAGE("Wynaut's Toxic was bounced back by the opposing Espeon's Magic Bounce!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, opponent);
         STATUS_ICON(player, badPoison: TRUE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Magic Bounce wont activate if ability user protects")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_PROTECT) == EFFECT_PROTECT);
+        ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_TOXIC) == MOVE_EFFECT_TOXIC);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_PROTECT); MOVE(player, MOVE_TOXIC); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, opponent);
+        NONE_OF {
+            ABILITY_POPUP(opponent, ABILITY_MAGIC_BOUNCE);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, opponent);
+            STATUS_ICON(player, badPoison: TRUE);
+        }
+    }
+}
+
+SINGLE_BATTLE_TEST("Magic Bounce wont activate if ability user is in a semi-invulnerable position")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_DIG) == EFFECT_SEMI_INVULNERABLE);
+        ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_TOXIC) == MOVE_EFFECT_TOXIC);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_DIG); MOVE(player, MOVE_TOXIC); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DIG, opponent);
+        NONE_OF {
+            ABILITY_POPUP(opponent, ABILITY_MAGIC_BOUNCE);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, opponent);
+            STATUS_ICON(player, badPoison: TRUE);
+        }
     }
 }
 
@@ -42,6 +81,7 @@ SINGLE_BATTLE_TEST("Magic Bounce bounces back powder moves")
 SINGLE_BATTLE_TEST("Magic Bounce cannot bounce back powder moves against Grass Types")
 {
     GIVEN {
+        WITH_CONFIG(CONFIG_POWDER_GRASS, GEN_6);
         ASSUME(IsPowderMove(MOVE_STUN_SPORE));
         ASSUME(GetSpeciesType(SPECIES_ODDISH, 0) == TYPE_GRASS);
         PLAYER(SPECIES_ODDISH);
@@ -62,7 +102,7 @@ DOUBLE_BATTLE_TEST("Magic Bounce bounces back moves hitting both foes at two foe
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_LEER) == EFFECT_DEFENSE_DOWN);
-        ASSUME(GetMoveTarget(MOVE_LEER) == MOVE_TARGET_BOTH);
+        ASSUME(GetMoveTarget(MOVE_LEER) == TARGET_BOTH);
         PLAYER(SPECIES_ABRA);
         PLAYER(SPECIES_KADABRA);
         OPPONENT(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }
@@ -94,7 +134,7 @@ DOUBLE_BATTLE_TEST("Magic Bounce bounces back moves hitting foes field")
                   battlerTwo = SPECIES_ESPEON; abilityBattlerTwo = ABILITY_MAGIC_BOUNCE; }
 
     GIVEN {
-        ASSUME(GetMoveTarget(MOVE_STEALTH_ROCK) == MOVE_TARGET_OPPONENTS_FIELD);
+        ASSUME(GetMoveTarget(MOVE_STEALTH_ROCK) == TARGET_OPPONENTS_FIELD);
         PLAYER(SPECIES_ABRA);
         PLAYER(SPECIES_KADABRA);
         OPPONENT(battlerOne) { Ability(abilityBattlerOne); }

@@ -64,11 +64,12 @@ AI_SINGLE_BATTLE_TEST("AI sees Parental Bond killing through sturdy")
 {
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
-        PLAYER(SPECIES_MAGNEZONE){Level(64); Ability(ABILITY_STURDY); Moves(MOVE_TACKLE, MOVE_LIGHT_SCREEN); }
-        OPPONENT(SPECIES_KANGASKHAN_MEGA){Level(64); Moves(MOVE_DRAIN_PUNCH, MOVE_TAUNT); }
-        } WHEN {
-            TURN{ MOVE(player, MOVE_TACKLE);
-        EXPECT_MOVE(opponent, MOVE_DRAIN_PUNCH); // AI should see drain punch as a kill due to multi hit, outscoring taunt
+        PLAYER(SPECIES_MAGNEZONE){ Level(64); Ability(ABILITY_STURDY); Moves(MOVE_TACKLE, MOVE_LIGHT_SCREEN); }
+        OPPONENT(SPECIES_KANGASKHAN_MEGA){ Level(64); Moves(MOVE_DRAIN_PUNCH, MOVE_TAUNT); }
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_TACKLE);
+            EXPECT_MOVE(opponent, MOVE_DRAIN_PUNCH); // AI should see drain punch as a kill due to multi hit, outscoring taunt
         }
     }
 }

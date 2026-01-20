@@ -1949,7 +1949,7 @@ static const u16 sLurantisFormSpeciesIdTable[] = {
 #endif //P_FAMILY_FOMANTIS
 
 #if P_FAMILY_SALANDIT
-static const u16 sSalanditFormSpeciesIdTable[] = {
+static const u16 sSalazzleFormSpeciesIdTable[] = {
     SPECIES_SALAZZLE,
     SPECIES_SALAZZLE_TOTEM,
     FORM_SPECIES_END,

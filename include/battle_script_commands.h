@@ -18,7 +18,7 @@ struct StatFractions
 
 struct PickupItem
 {
-    u16 itemId;
+    enum Item itemId;
     u8 percentage[10];
 };
 
@@ -40,9 +40,6 @@ union TRANSPARENT StatChangeFlags
     };
 };
 
-s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, enum Ability abilityAtk, enum Ability abilityDef, enum HoldEffect holdEffectAtk);
-s32 CalcCritChanceStageGen1(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, enum Ability abilityAtk, enum Ability abilityDef, enum HoldEffect holdEffectAtk);
-s32 GetCritHitOdds(s32 critChanceIndex);
 bool32 HasBattlerActedThisTurn(u32 battler);
 u32 GetBattlerTurnOrderNum(u32 battler);
 bool32 NoAliveMonsForBattlerSide(u32 battler);
@@ -55,8 +52,8 @@ void BattleCreateYesNoCursorAt(u8 cursorPosition);
 void BufferMoveToLearnIntoBattleTextBuff2(void);
 void HandleBattleWindow(u8 xStart, u8 yStart, u8 xEnd, u8 yEnd, u8 flags);
 bool8 UproarWakeUpCheck(u8 battler);
-bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, u32 move);
-bool32 DoesDisguiseBlockMove(u32 battler, u32 move);
+bool32 DoesSubstituteBlockMove(u32 battlerAtk, u32 battlerDef, enum Move move);
+bool32 DoesDisguiseBlockMove(u32 battler, enum Move move);
 bool32 CanUseLastResort(u8 battlerId);
 u32 IsFlowerVeilProtected(u32 battler);
 u32 IsLeafGuardProtected(u32 battler, enum Ability ability);
@@ -66,16 +63,11 @@ bool32 TryResetBattlerStatChanges(u8 battler);
 bool32 CanCamouflage(u8 battlerId);
 void StealTargetItem(u8 battlerStealer, u8 battlerItem);
 u8 GetCatchingBattler(void);
-enum Stat GetHighestStatId(u32 battlerId);
-bool32 ProteanTryChangeType(u32 battler, enum Ability ability, u32 move, enum Type moveType);
-bool32 IsMoveNotAllowedInSkyBattles(u32 move);
-bool32 DoSwitchInAbilities(u32 battlerId);
+bool32 ProteanTryChangeType(u32 battler, enum Ability ability, enum Move move, enum Type moveType);
 u8 GetFirstFaintedPartyIndex(u8 battlerId);
-bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler);
 void SaveBattlerTarget(u32 battler);
 void SaveBattlerAttacker(u32 battler);
-bool32 CanBurnHitThaw(u16 move);
-bool32 EmergencyExitCanBeTriggered(u32 battler);
+bool32 CanBurnHitThaw(enum Move move);
 bool32 IsMonGettingExpSentOut(void);
 
 extern void (*const gBattleScriptingCommandsTable[])(void);

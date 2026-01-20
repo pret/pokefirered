@@ -134,7 +134,7 @@ SINGLE_BATTLE_TEST("Chloroblast does not cause the user to lose HP if there is n
 
 SINGLE_BATTLE_TEST("Chloroblast is not affected by Reckless", s16 damage)
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_CHLOROBLAST; }
     if (B_UPDATED_MOVE_DATA >= GEN_9) {

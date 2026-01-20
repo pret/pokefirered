@@ -140,7 +140,7 @@ SINGLE_BATTLE_TEST("Competitive activates after Sticky Web lowers Speed")
 SINGLE_BATTLE_TEST("Competitive doesn't activate after Sticky Web lowers Speed if Court Changed (gen8)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_DEFIANT_STICKY_WEB, GEN_8);
+        WITH_CONFIG(CONFIG_DEFIANT_STICKY_WEB, GEN_8);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_IGGLYBUFF) { Ability(ABILITY_COMPETITIVE); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -167,14 +167,14 @@ SINGLE_BATTLE_TEST("Competitive doesn't activate after Sticky Web lowers Speed i
 SINGLE_BATTLE_TEST("Competitive correctly activates after Sticky Web lowers Speed if Court Changed (Gen8)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_DEFIANT_STICKY_WEB, GEN_8);
+        WITH_CONFIG(CONFIG_DEFIANT_STICKY_WEB, GEN_8);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_IGGLYBUFF) { Ability(ABILITY_COMPETITIVE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_STICKY_WEB); MOVE(opponent, MOVE_COURT_CHANGE); }
         TURN { SWITCH(player, 1); }
-        TURN { MOVE(opponent, MOVE_GROWL);}
+        TURN { MOVE(opponent, MOVE_GROWL); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_STICKY_WEB, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_COURT_CHANGE, opponent);
@@ -237,7 +237,7 @@ DOUBLE_BATTLE_TEST("Competitive is activated by Cotton Down for non-ally pokemon
 
 SINGLE_BATTLE_TEST("Competitive activates before White Herb")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_LEER; }
     PARAMETRIZE { move = MOVE_CONFIDE; }
@@ -303,7 +303,7 @@ SINGLE_BATTLE_TEST("Competitive activates for each stat that is lowered")
 
 SINGLE_BATTLE_TEST("Competitive doesn't activate if the pokemon lowers it's own stats")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_SUPERPOWER; }
     PARAMETRIZE { move = MOVE_CLOSE_COMBAT; }

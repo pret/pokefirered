@@ -1,7 +1,27 @@
 #include "global.h"
 #include "test/battle.h"
 
-TO_DO_BATTLE_TEST("Swagger raises the target's Attack and confuses them")
+ASSUMPTIONS
+{
+    ASSUME(GetMoveEffect(MOVE_SWAGGER) == EFFECT_SWAGGER);
+}
+
+SINGLE_BATTLE_TEST("Swagger increases the target's Attack by 2 stages and confuses them")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SWAGGER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SWAGGER, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 2);
+        EXPECT(opponent->volatiles.confusionTurns > 0);
+    }
+}
+
 TO_DO_BATTLE_TEST("Swagger raises the target's Attack even if they're already confused")
 TO_DO_BATTLE_TEST("Swagger raises the target's Attack even when protected by Safeguard")
 TO_DO_BATTLE_TEST("Swagger raises the target's Attack even when protected Own Tempo")

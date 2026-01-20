@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Me First copies the move from the target and increases it's power by 1.5", s16 damage)
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_TACKLE; }
     PARAMETRIZE { move = MOVE_ME_FIRST; }
@@ -82,7 +82,7 @@ SINGLE_BATTLE_TEST("Me First can be selected if users holds Assault Vest")
     }
 }
 
-SINGLE_BATTLE_TEST("Me Frist deducts power points from itself, not the copied move")
+SINGLE_BATTLE_TEST("Me First deducts power points from itself, not the copied move")
 {
     ASSUME(GetMovePP(MOVE_ME_FIRST) == 20);
     ASSUME(GetMovePP(MOVE_POUND) == 35);

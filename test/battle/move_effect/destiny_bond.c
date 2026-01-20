@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Destiny Bond faints the opposing mon if it fainted from the 
 SINGLE_BATTLE_TEST("Destiny Bond doesn't fail if used sequentially (Gen2-6)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_DESTINY_BOND_FAIL, GEN_6);
+        WITH_CONFIG(CONFIG_DESTINY_BOND_FAIL, GEN_6);
         PLAYER(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
@@ -48,7 +48,7 @@ SINGLE_BATTLE_TEST("Destiny Bond doesn't fail if used sequentially (Gen2-6)")
 SINGLE_BATTLE_TEST("Destiny Bond fails if used sequentially (Gen7+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_DESTINY_BOND_FAIL, GEN_7);
+        WITH_CONFIG(CONFIG_DESTINY_BOND_FAIL, GEN_7);
         PLAYER(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Destiny Bond fails if used sequentially (Gen7+)")
 SINGLE_BATTLE_TEST("Destiny Bond does not fail if used repeatedly separated by other moves (Gen7+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_DESTINY_BOND_FAIL, GEN_7);
+        WITH_CONFIG(CONFIG_DESTINY_BOND_FAIL, GEN_7);
         PLAYER(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
@@ -85,7 +85,7 @@ SINGLE_BATTLE_TEST("Destiny Bond does not fail if used repeatedly separated by o
 SINGLE_BATTLE_TEST("Destiny Bond does not fail if used after failing (Gen7+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_DESTINY_BOND_FAIL, GEN_7);
+        WITH_CONFIG(CONFIG_DESTINY_BOND_FAIL, GEN_7);
         PLAYER(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
         OPPONENT(SPECIES_ZIGZAGOON);
@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("Destiny Bond does not fail if used after failing (Gen7+)")
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are not affected by Destiny Bond")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Speed(50); };
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(100); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_DESTINY_BOND); MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_DYNAMAX); }

@@ -128,6 +128,7 @@ enum RandomTag
     RNG_NONE,
     RNG_ACCURACY,
     RNG_CONFUSION,
+    RNG_CONFUSION_TURNS,
     RNG_CRITICAL_HIT,
     RNG_CURSED_BODY,
     RNG_CUTE_CHARM,
@@ -170,6 +171,9 @@ enum RandomTag
     RNG_TRACE,
     RNG_FICKLE_BEAM,
     RNG_AI_ABILITY,
+    RNG_AI_SCORE_TIE_DOUBLES_MOVE,
+    RNG_AI_SCORE_TIE_DOUBLES_TARGET,
+    RNG_AI_SCORE_TIE_SINGLES,
     RNG_AI_SWITCH_HASBADODDS,
     RNG_AI_SWITCH_BADLY_POISONED,
     RNG_AI_SWITCH_CURSED,
@@ -191,11 +195,15 @@ enum RandomTag
     RNG_AI_SWITCH_TRAPPER,
     RNG_AI_SWITCH_FREE_TURN,
     RNG_AI_SWITCH_ALL_MOVES_BAD,
+    RNG_AI_SWITCH_DYN_FUNC,
     RNG_AI_CONSERVE_TERA,
     RNG_AI_SWITCH_ALL_SCORES_BAD,
     RNG_AI_SWITCH_ABSORBING_HIDDEN_POWER,
     RNG_AI_PP_STALL_DISREGARD_MOVE,
     RNG_AI_SUCKER_PUNCH,
+    RNG_AI_CONSIDER_EXPLOSION,
+    RNG_AI_FINAL_GAMBIT,
+    RNG_AI_SHOULD_PIVOT_BREAK_SASH,
     RNG_SHELL_SIDE_ARM,
     RNG_RANDOM_TARGET,
     RNG_AI_PREDICT_ABILITY,
@@ -205,8 +213,17 @@ enum RandomTag
     RNG_AI_BOOST_INTO_HAZE,
     RNG_AI_SHOULD_RECOVER,
     RNG_AI_PRIORITIZE_LAST_CHANCE,
+    RNG_AI_RANDOM_SWITCHIN_POST_KO,
+    RNG_AI_RANDOM_SWITCHIN_MID_BATTLE,
+    RNG_AI_RANDOM_VALID_SWITCHIN_POST_KO,
+    RNG_AI_RANDOM_VALID_SWITCHIN_MID_BATTLE,
     RNG_HEALER,
     RNG_DEXNAV_ENCOUNTER_LEVEL,
+    RNG_POKERUS_PARTY_MEMBER,
+    RNG_POKERUS_INFECTION,
+    RNG_POKERUS_STRAIN_DISTRIBUTION,
+    RNG_POKERUS_SPREAD,
+    RNG_POKERUS_SPREAD_SIDE,
     RNG_AI_ASSUME_STATUS_SLEEP,
     RNG_AI_ASSUME_STATUS_NONVOLATILE,
     RNG_AI_ASSUME_STATUS_HIGH_ODDS,
@@ -223,11 +240,12 @@ enum RandomTag
     RNG_MAGNITUDE,
     RNG_FISHING_BITE,
     RNG_FISHING_GEN3_STICKY,
+    RNG_TAUNT,
 };
 
 #define RandomWeighted(tag, ...) \
     ({ \
-        const u8 weights[] = { __VA_ARGS__ }; \
+        const u16 weights[] = { __VA_ARGS__ }; \
         u32 sum, i; \
         for (i = 0, sum = 0; i < ARRAY_COUNT(weights); i++) \
             sum += weights[i]; \
@@ -249,7 +267,7 @@ enum RandomTag
         } \
         else \
         { \
-          const u8 weights[] = { 100 - t, t }; \
+          const u16 weights[] = { 100 - t, t }; \
           r = RandomWeightedArray(tag, 100, ARRAY_COUNT(weights), weights); \
         } \
         r; \
@@ -262,21 +280,24 @@ enum RandomTag
 
 u32 RandomUniform(enum RandomTag, u32 lo, u32 hi);
 u32 RandomUniformExcept(enum RandomTag, u32 lo, u32 hi, bool32 (*reject)(u32));
-u32 RandomWeightedArray(enum RandomTag, u32 sum, u32 n, const u8 *weights);
+u32 RandomWeightedArray(enum RandomTag, u32 sum, u32 n, const u16 *weights);
 const void *RandomElementArray(enum RandomTag, const void *array, size_t size, size_t count);
 
 u32 RandomUniformDefault(enum RandomTag, u32 lo, u32 hi);
 u32 RandomUniformExceptDefault(enum RandomTag, u32 lo, u32 hi, bool32 (*reject)(u32));
-u32 RandomWeightedArrayDefault(enum RandomTag, u32 sum, u32 n, const u8 *weights);
+u32 RandomWeightedArrayDefault(enum RandomTag, u32 sum, u32 n, const u16 *weights);
 const void *RandomElementArrayDefault(enum RandomTag, const void *array, size_t size, size_t count);
 
 u8 RandomWeightedIndex(u8 *weights, u8 length);
 
+u32 RandomBit(enum RandomTag tag, u32 bits);
+u32 RandomBitIndex(enum RandomTag tag, u32 bits);
+
 #if TESTING
 u32 RandomUniformTrials(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32), void *caller);
 u32 RandomUniformDefaultValue(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32), void *caller);
-u32 RandomWeightedArrayTrials(enum RandomTag tag, u32 sum, u32 n, const u8 *weights, void *caller);
-u32 RandomWeightedArrayDefaultValue(enum RandomTag tag, u32 n, const u8 *weights, void *caller);
+u32 RandomWeightedArrayTrials(enum RandomTag tag, u32 sum, u32 n, const u16 *weights, void *caller);
+u32 RandomWeightedArrayDefaultValue(enum RandomTag tag, u32 n, const u16 *weights, void *caller);
 const void *RandomElementArrayTrials(enum RandomTag tag, const void *array, size_t size, size_t count, void *caller);
 const void *RandomElementArrayDefaultValue(enum RandomTag tag, const void *array, size_t size, size_t count, void *caller);
 #endif

@@ -9,8 +9,8 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Throat Chop prevents the usage of sound moves")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Speed(100); };
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); };
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
     } WHEN {
         TURN { MOVE(player, MOVE_THROAT_CHOP); MOVE(opponent, MOVE_HYPER_VOICE); }
         TURN {}

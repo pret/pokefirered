@@ -19,8 +19,7 @@ SINGLE_BATTLE_TEST("Smelling Salts does not cure paralyzed pokemons behind subst
         if (ability == ABILITY_INNER_FOCUS)
         {
             MESSAGE("The substitute took damage for the opposing Seismitoad!");
-            NONE_OF
-            {
+            NONE_OF {
                 MESSAGE("The opposing Seismitoad's substitute faded!"); // Smelling Salts does 86 damage, the sub has 122 HP, if hitting a sub it shouldn't get boosted damage.
                 MESSAGE("The opposing Seismitoad was cured of paralysis!");
                 STATUS_ICON(opponent, none: TRUE);
@@ -75,15 +74,17 @@ SINGLE_BATTLE_TEST("Wake-Up Slap does not cure paralyzed pokemons behind substit
         TURN { MOVE(opponent, MOVE_CELEBRATE); MOVE(player, MOVE_WAKE_UP_SLAP); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WAKE_UP_SLAP, player);
-        if (ability == ABILITY_INNER_FOCUS) {
+        if (ability == ABILITY_INNER_FOCUS)
+        {
             MESSAGE("The substitute took damage for the opposing Seismitoad!");
-            NONE_OF
-            {
+            NONE_OF {
                 MESSAGE("The opposing Seismitoad's substitute faded!"); // Smelling Salts does 86 damage, the sub has 122 HP, if hitting a sub it shouldn't get boosted damage.
                 MESSAGE("The opposing Seismitoad woke up!");
                 STATUS_ICON(opponent, none: TRUE);
             }
-        } else {
+        }
+        else
+        {
             MESSAGE("The opposing Seismitoad woke up!");
             STATUS_ICON(opponent, none: TRUE);
         }
@@ -104,9 +105,12 @@ SINGLE_BATTLE_TEST("Wake-Up Slap gets increased power against sleeping targets")
         TURN { MOVE(player, MOVE_WAKE_UP_SLAP); }
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_WAKE_UP_SLAP, player);
-        if (status1 == STATUS1_SLEEP) {
+        if (status1 == STATUS1_SLEEP)
+        {
             MESSAGE("The opposing Lotad fainted!");
-        } else {
+        }
+        else
+        {
             NOT MESSAGE("The opposing Lotad fainted!");
             MESSAGE("The opposing Lotad used Celebrate!");
         }
@@ -118,6 +122,7 @@ TO_DO_BATTLE_TEST("Wake-Up Slap gets increased power against Pokémon with Comat
 DOUBLE_BATTLE_TEST("Sparkling Aria cures burns from all Pokemon on the field and behind substitutes")
 {
     GIVEN {
+        ASSUME(MoveIgnoresSubstitute(MOVE_SPARKLING_ARIA));
         ASSUME(MoveHasAdditionalEffect(MOVE_SPARKLING_ARIA, MOVE_EFFECT_REMOVE_STATUS) == TRUE);
         ASSUME(GetMoveEffectArg_Status(MOVE_SPARKLING_ARIA) == STATUS1_BURN);
         PLAYER(SPECIES_PRIMARINA);

@@ -12,7 +12,7 @@ static void GetLinkMultiBattlePlayerIndexes(s32 *, s32 *);
 
 void TrySetQuestLogBattleEvent(void)
 {
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_OLD_MAN_TUTORIAL | BATTLE_TYPE_POKEDUDE)) && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_CATCH_TUTORIAL | BATTLE_TYPE_POKEDUDE)) && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
     {
         // Why allocate both of these? Only one will ever be used at a time
         struct QuestLogEvent_TrainerBattle * trainerData = Alloc(sizeof(*trainerData));
@@ -43,7 +43,7 @@ void TrySetQuestLogBattleEvent(void)
             if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
             {
                 trainerData->speciesOpponent = gBattleResults.lastOpponentSpecies;
-                
+
                 // Decide which of the pokemon on the player's side to mention as the victor
                 if (GetBattlerSide(gBattleStruct->lastAttackerToFaintOpponent) == B_SIDE_PLAYER)
                     trainerData->speciesPlayer = gBattleMons[gBattleStruct->lastAttackerToFaintOpponent].species;
@@ -124,7 +124,7 @@ void TrySetQuestLogLinkBattleEvent(void)
             {
                 inUnionRoom = InUnionRoom();
                 eventId = QL_EVENT_LINK_BATTLED_SINGLE;
-                
+
                 if (inUnionRoom == TRUE)
                     eventId = QL_EVENT_LINK_BATTLED_UNION;
             }

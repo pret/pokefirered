@@ -3,11 +3,13 @@
 
 SINGLE_BATTLE_TEST("Synchronize will mirror back non volatile status back at opposing mon")
 {
-
+    u32 config;
+    PARAMETRIZE { config = GEN_4; }
+    PARAMETRIZE { config = GEN_5; }
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_NON_VOLATILE_STATUS);
         ASSUME(GetMoveNonVolatileStatus(MOVE_TOXIC) == MOVE_EFFECT_TOXIC);
-        ASSUME(GetMoveNonVolatileStatus(MOVE_TOXIC) == MOVE_EFFECT_TOXIC);
+        WITH_CONFIG(CONFIG_SYNCHRONIZE_TOXIC, config);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_ABRA) { Ability(ABILITY_SYNCHRONIZE); }
     } WHEN {
@@ -18,13 +20,17 @@ SINGLE_BATTLE_TEST("Synchronize will mirror back non volatile status back at opp
         STATUS_ICON(opponent, badPoison: TRUE);
         ABILITY_POPUP(opponent, ABILITY_SYNCHRONIZE);
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, player);
-        STATUS_ICON(player, badPoison: TRUE);
+        if (config >= GEN_5)
+            STATUS_ICON(player, badPoison: TRUE);
+        else
+            STATUS_ICON(player, poison: TRUE);
     }
 }
 
 SINGLE_BATTLE_TEST("Synchronize will still show up the ability pop up even if it fails")
 {
     GIVEN {
+        WITH_CONFIG(CONFIG_PARALYZE_ELECTRIC, GEN_6);
         ASSUME(MoveMakesContact(MOVE_TACKLE));
         PLAYER(SPECIES_PIKACHU) { Ability(ABILITY_STATIC); }
         OPPONENT(SPECIES_ABRA) { Ability(ABILITY_SYNCHRONIZE); }

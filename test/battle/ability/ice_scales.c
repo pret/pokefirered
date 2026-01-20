@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Ice Scales halves the damage from special moves", s16 damage)
 {
-    u32 move;
+    enum Move move;
     enum Ability ability;
     PARAMETRIZE { ability = ABILITY_SHIELD_DUST; move = MOVE_PSYCHIC; }
     PARAMETRIZE { ability = ABILITY_ICE_SCALES; move = MOVE_PSYCHIC; }

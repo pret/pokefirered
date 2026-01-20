@@ -9,7 +9,7 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Morning Sun recovers 1/2 of the user's max HP (Gen3+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
+        WITH_CONFIG(CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(200); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Morning Sun recovers 1/2 of the user's max HP (Gen3+)")
 SINGLE_BATTLE_TEST("Morning Sun recovers 2/3 of the user's max HP in Sunlight (Gen3+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
+        WITH_CONFIG(CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(300); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -34,13 +34,13 @@ SINGLE_BATTLE_TEST("Morning Sun recovers 2/3 of the user's max HP in Sunlight (G
 
 SINGLE_BATTLE_TEST("Morning Sun recovers 1/4 of the user's max HP in Rain, Sandstorm, Hail, and Snow (Gen3+)")
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_RAIN_DANCE; }
     PARAMETRIZE { move = MOVE_SANDSTORM; }
     PARAMETRIZE { move = MOVE_HAIL; }
     PARAMETRIZE { move = MOVE_SNOWSCAPE; }
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
+        WITH_CONFIG(CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -9,7 +9,7 @@ SINGLE_BATTLE_TEST("Fell Stinger raises user's Attack by 2 stages (Gen6) or 3 st
     PARAMETRIZE { config = GEN_6; }
 
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_FELL_STINGER_STAT_RAISE, config);
+        WITH_CONFIG(CONFIG_FELL_STINGER_STAT_RAISE, config);
         PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_FELL_STINGER); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);

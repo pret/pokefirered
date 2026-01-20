@@ -3,8 +3,11 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveEffect(MOVE_MIRROR_COAT) == EFFECT_MIRROR_COAT);
-    ASSUME(GetMoveEffect(MOVE_COUNTER) == EFFECT_COUNTER);
+    ASSUME(GetMoveEffect(MOVE_SHELL_SIDE_ARM) == EFFECT_SHELL_SIDE_ARM);
+    ASSUME(GetMoveEffect(MOVE_COUNTER) == EFFECT_REFLECT_DAMAGE);
+    ASSUME(GetMoveReflectDamage_DamageCategories(MOVE_COUNTER) == (1u << DAMAGE_CATEGORY_PHYSICAL));
+    ASSUME(GetMoveEffect(MOVE_MIRROR_COAT) == EFFECT_REFLECT_DAMAGE);
+    ASSUME(GetMoveReflectDamage_DamageCategories(MOVE_MIRROR_COAT) == (1u << DAMAGE_CATEGORY_SPECIAL));
 }
 
 SINGLE_BATTLE_TEST("Shell Side Arm can be countered if it is physical")

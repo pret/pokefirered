@@ -59,7 +59,6 @@ extern bool8 gIsSurfingEncounter;
 extern u16 gChainFishingDexNavStreak;
 
 void DisableWildEncounters(bool8 disabled);
-u8 PickWildMonNature(void);
 bool8 StandardWildEncounter(u32 currMetatileAttrs, u16 previousMetaTileBehavior);
 bool8 SweetScentWildEncounter(void);
 bool8 DoesCurrentMapHaveFishingMons(void);
@@ -68,7 +67,6 @@ u16 GetLocalWildMon(bool8 *isWaterMon);
 u16 GetLocalWaterMon(void);
 bool8 UpdateRepelCounter(void);
 void DisableWildEncounters(bool8 state);
-u8 GetUnownLetterByPersonalityLoByte(u32 personality);
 bool8 SweetScentWildEncounter(void);
 void SeedWildEncounterRng(u16 randVal);
 void ResetEncounterRateModifiers(void);

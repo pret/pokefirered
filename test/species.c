@@ -59,6 +59,23 @@ TEST("Form change tables contain only forms in the form species ID table")
     }
 }
 
+TEST("Forms have the appropriate species form changes")
+{
+    u32 i;
+    u32 species = SPECIES_NONE;
+
+    for (i = 0; i < NUM_SPECIES; i++)
+    {
+        if (gSpeciesInfo[i].isMegaEvolution
+            || gSpeciesInfo[i].isGigantamax
+            || gSpeciesInfo[i].isUltraBurst)
+        {
+            PARAMETRIZE_LABEL("%S", gSpeciesInfo[i].speciesName) { species = i; }
+        }
+    }
+        EXPECT(DoesSpeciesHaveFormChangeMethod(species, FORM_CHANGE_END_BATTLE));
+    }
+
 TEST("Form change targets have the appropriate species flags")
 {
     u32 i;

@@ -15,7 +15,7 @@ SINGLE_BATTLE_TEST("Xerneas changes into Active Form upon battle start")
 
 SINGLE_BATTLE_TEST("Zacian changes into its Crowned Form when holding the Rusted Sword upon battle start")
 {
-    u16 item;
+    enum Item item;
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_RUSTED_SWORD; }
     GIVEN {
@@ -39,14 +39,14 @@ SINGLE_BATTLE_TEST("Zacian's Iron Head becomes Behemoth Blade upon form change")
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); }
     } THEN {
-        ASSUME(player->species == SPECIES_ZACIAN_CROWNED); // Assumes form change worked.
+        EXPECT_EQ(player->species, SPECIES_ZACIAN_CROWNED);
         EXPECT_EQ(player->moves[0], MOVE_BEHEMOTH_BLADE);
     }
 }
 
 SINGLE_BATTLE_TEST("Zamazenta changes into its Crowned Form when holding the Rusted Shield upon battle start")
 {
-    u16 item;
+    enum Item item;
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_RUSTED_SHIELD; }
     GIVEN {
@@ -70,7 +70,7 @@ SINGLE_BATTLE_TEST("Zamazenta's Iron Head becomes Behemoth Bash upon form change
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); }
     } THEN {
-        ASSUME(player->species == SPECIES_ZAMAZENTA_CROWNED); // Assumes form change worked.
+        EXPECT_EQ(player->species, SPECIES_ZAMAZENTA_CROWNED);
         EXPECT_EQ(player->moves[0], MOVE_BEHEMOTH_BASH);
     }
 }

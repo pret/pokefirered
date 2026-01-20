@@ -9,7 +9,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Body Press uses physical defense stat of target", s16 damage)
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_DRILL_PECK; }
     PARAMETRIZE { move = MOVE_BODY_PRESS; }
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Body Press's damage depends on the user's base Defense inste
 
 SINGLE_BATTLE_TEST("Body Press's damage depends on the user's Defense and not Attack stat stages", s16 damage)
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_IRON_DEFENSE; }
     PARAMETRIZE { move = MOVE_SWORDS_DANCE; }
@@ -74,7 +74,7 @@ SINGLE_BATTLE_TEST("Body Press's damage depends on the user's Defense and not At
 
 SINGLE_BATTLE_TEST("Body Press uses Defense Stat even in Wonder Room", s16 damage)
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_WONDER_ROOM; }
     PARAMETRIZE { move = MOVE_CELEBRATE; }
@@ -96,7 +96,7 @@ SINGLE_BATTLE_TEST("Body Press uses Defense Stat even in Wonder Room", s16 damag
 
 SINGLE_BATTLE_TEST("Body Press uses Special Defense stat Stages in Wonder Room", s16 damage)
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_IRON_DEFENSE; }
     PARAMETRIZE { move = MOVE_AMNESIA; }

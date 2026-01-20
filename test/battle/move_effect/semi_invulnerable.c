@@ -19,7 +19,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Semi-invulnerable moves make the user semi-invulnerable turn 1, then strike turn 2")
 {
-    u16 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_FLY; }
     PARAMETRIZE { move = MOVE_DIG; }
@@ -64,6 +64,8 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves make the user semi-invulnerable turn
                     NOT MESSAGE("Wobbuffet vanished instantly!");
                     MESSAGE("Wobbuffet used Shadow Force!");
                     break;
+                default:
+                    break;
             }
         } else {
             ANIMATION(ANIM_TYPE_MOVE, move, player);
@@ -88,6 +90,8 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves make the user semi-invulnerable turn
                 case MOVE_SHADOW_FORCE:
                     MESSAGE("Wobbuffet vanished instantly!");
                     break;
+                default:
+                    break;
             }
         }
         else
@@ -95,7 +99,7 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves make the user semi-invulnerable turn
 
         // Aerial Ace cannot miss unless the target is semi-invulnerable
         MESSAGE("The opposing Wobbuffet used Aerial Ace!");
-        MESSAGE("The opposing Wobbuffet's attack missed!");
+        MESSAGE("Wobbuffet avoided the attack!");
         // Attack turn
         switch (move)
         {
@@ -117,6 +121,8 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves make the user semi-invulnerable turn
             case MOVE_SHADOW_FORCE:
                 MESSAGE("Wobbuffet used Shadow Force!");
                 break;
+            default:
+                break;
         }
         ANIMATION(ANIM_TYPE_MOVE, move, player);
         HP_BAR(opponent);
@@ -125,7 +131,7 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves make the user semi-invulnerable turn
 
 SINGLE_BATTLE_TEST("Semi-invulnerable moves don't need to charge with Power Herb")
 {
-    u16 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_FLY; }
     PARAMETRIZE { move = MOVE_DIG; }
@@ -169,6 +175,8 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves don't need to charge with Power Herb
                     NOT MESSAGE("Wobbuffet vanished instantly!");
                     MESSAGE("Wobbuffet used Shadow Force!");
                     break;
+                default:
+                    break;
             }
         } else {
             ANIMATION(ANIM_TYPE_MOVE, move, player);
@@ -192,6 +200,8 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves don't need to charge with Power Herb
                 case MOVE_PHANTOM_FORCE:
                 case MOVE_SHADOW_FORCE:
                     MESSAGE("Wobbuffet vanished instantly!");
+                    break;
+                default:
                     break;
             }
         }
@@ -220,6 +230,8 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves don't need to charge with Power Herb
                 case MOVE_SHADOW_FORCE:
                     MESSAGE("Wobbuffet used Shadow Force!");
                     break;
+                default:
+                    break;
             }
         }
         ANIMATION(ANIM_TYPE_MOVE, move, player);
@@ -230,7 +242,7 @@ SINGLE_BATTLE_TEST("Semi-invulnerable moves don't need to charge with Power Herb
 // No way to apply this test with Shadow Force/Phantom Force
 SINGLE_BATTLE_TEST("Semi-invulnerable moves apply a status that won't block certain moves")
 {
-    u16 move, opMove;
+    enum Move move, opMove;
 
     PARAMETRIZE { move = MOVE_FLY; opMove = MOVE_SKY_UPPERCUT; }
     PARAMETRIZE { move = MOVE_DIG; opMove = MOVE_EARTHQUAKE; }

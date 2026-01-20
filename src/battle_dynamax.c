@@ -22,7 +22,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
-static u32 GetMaxPowerTier(u32 move);
+static enum MaxPowerTier GetMaxPowerTier(enum Move move);
 
 struct GMaxMove
 {
@@ -144,7 +144,7 @@ void ApplyDynamaxHPMultiplier(struct Pokemon* mon)
 }
 
 // Returns the non-Dynamax HP of a Pokemon.
-u16 GetNonDynamaxHP(u32 battler)
+u32 GetNonDynamaxHP(u32 battler)
 {
     if (GetActiveGimmick(battler) != GIMMICK_DYNAMAX || gBattleMons[battler].species == SPECIES_SHEDINJA)
         return gBattleMons[battler].hp;
@@ -158,7 +158,7 @@ u16 GetNonDynamaxHP(u32 battler)
 }
 
 // Returns the non-Dynamax Max HP of a Pokemon.
-u16 GetNonDynamaxMaxHP(u32 battler)
+u32 GetNonDynamaxMaxHP(u32 battler)
 {
     if (GetActiveGimmick(battler) != GIMMICK_DYNAMAX || gBattleMons[battler].species == SPECIES_SHEDINJA)
         return gBattleMons[battler].maxHP;
@@ -190,7 +190,7 @@ void ActivateDynamax(u32 battler)
     if (!gBattleMons[battler].volatiles.transformed) // Ditto cannot Gigantamax.
         TryBattleFormChange(battler, FORM_CHANGE_BATTLE_GIGANTAMAX);
 
-    BattleScriptExecute(BattleScript_DynamaxBegins);
+    BattleScriptPushCursorAndCallback(BattleScript_DynamaxBegins);
 }
 
 // Unsets the flags used for Dynamaxing and reverts max HP if needed.
@@ -215,7 +215,7 @@ void UndoDynamax(u32 battler)
 }
 
 // Certain moves are blocked by Max Guard that normally ignore protection.
-bool32 IsMoveBlockedByMaxGuard(u32 move)
+bool32 IsMoveBlockedByMaxGuard(enum Move move)
 {
     switch (move)
     {
@@ -229,11 +229,12 @@ bool32 IsMoveBlockedByMaxGuard(u32 move)
         case MOVE_TEATIME:
         case MOVE_TRANSFORM:
             return TRUE;
+        default:
+            return FALSE;
     }
-    return FALSE;
 }
 
-static u16 GetTypeBasedMaxMove(u32 battler, enum Type type)
+static enum Move GetTypeBasedMaxMove(u32 battler, enum Type type)
 {
     // Gigantamax check
     u32 i;
@@ -262,7 +263,7 @@ static u16 GetTypeBasedMaxMove(u32 battler, enum Type type)
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
-u16 GetMaxMove(u32 battler, u32 baseMove)
+enum Move GetMaxMove(u32 battler, enum Move baseMove)
 {
     enum Type moveType;
     SetTypeBeforeUsingMove(baseMove, battler);
@@ -287,9 +288,9 @@ u16 GetMaxMove(u32 battler, u32 baseMove)
 }
 
 // First value is for Fighting, Poison and Multi-Attack. The second is for everything else.
-enum
+enum MaxPowerTier
 {
-    MAX_POWER_TIER_1,   //  70 or 90 damage
+    MAX_POWER_TIER_1,   // 70 or 90 damage
     MAX_POWER_TIER_2,   // 75 or 100 damage
     MAX_POWER_TIER_3,   // 80 or 110 damage
     MAX_POWER_TIER_4,   // 85 or 120 damage
@@ -300,9 +301,8 @@ enum
 };
 
 // Gets the base power of a Max Move.
-u32 GetMaxMovePower(u32 move)
+u32 GetMaxMovePower(enum Move move)
 {
-    u32 tier;
     // G-Max Drum Solo, G-Max Hydrosnipe, and G-Max Fireball always have 160 base power.
     if (MoveHasAdditionalEffect(move, MOVE_EFFECT_FIXED_POWER))
         return 160;
@@ -314,9 +314,10 @@ u32 GetMaxMovePower(u32 move)
         case MOVE_GEAR_GRIND:    return 100;
         case MOVE_DUAL_WINGBEAT: return 100;
         case MOVE_TRIPLE_AXEL:   return 140;
+        default: break;
     }
 
-    tier = GetMaxPowerTier(move);
+    enum MaxPowerTier tier = GetMaxPowerTier(move);
     enum Type moveType = GetMoveType(move);
     if (moveType == TYPE_FIGHTING
      || moveType == TYPE_POISON
@@ -352,7 +353,7 @@ u32 GetMaxMovePower(u32 move)
     }
 }
 
-static u32 GetMaxPowerTier(u32 move)
+static enum MaxPowerTier GetMaxPowerTier(enum Move move)
 {
     u32 strikeCount = GetMoveStrikeCount(move);
     if (strikeCount >= 2 && strikeCount <= 5)
@@ -368,26 +369,36 @@ static u32 GetMaxPowerTier(u32 move)
         }
     }
 
+    if (IsMultiHitMove(move))
+    {
+        switch(GetMovePower(move))
+        {
+            case 0 ... 15:    return MAX_POWER_TIER_1;
+            case 16 ... 18:   return MAX_POWER_TIER_2;
+            case 19 ... 20:   return MAX_POWER_TIER_4;
+            default:
+            case 21 ... 25:   return MAX_POWER_TIER_5;
+        }
+    }
+
     switch (GetMoveEffect(move))
     {
         case EFFECT_BIDE:
         case EFFECT_FIXED_PERCENT_DAMAGE:
         case EFFECT_LEVEL_DAMAGE:
         case EFFECT_PSYWAVE:
-        case EFFECT_COUNTER:
+        case EFFECT_REFLECT_DAMAGE:
         case EFFECT_PRESENT:
         case EFFECT_BEAT_UP:
         case EFFECT_WEATHER_BALL:
         case EFFECT_FLING:
         case EFFECT_ELECTRO_BALL:
-        case EFFECT_METAL_BURST:
         case EFFECT_TERRAIN_PULSE:
         case EFFECT_PUNISHMENT:
         case EFFECT_TRUMP_CARD:
         case EFFECT_FIXED_HP_DAMAGE:
         case EFFECT_SPIT_UP:
         case EFFECT_NATURAL_GIFT:
-        case EFFECT_MIRROR_COAT:
         case EFFECT_FINAL_GAMBIT:
             return MAX_POWER_TIER_2;
         case EFFECT_OHKO:
@@ -404,15 +415,6 @@ static u32 GetMaxPowerTier(u32 move)
         case EFFECT_FLAIL:
         case EFFECT_LOW_KICK:
             return MAX_POWER_TIER_7;
-        case EFFECT_MULTI_HIT:
-            switch(GetMovePower(move))
-            {
-                case 0 ... 15:    return MAX_POWER_TIER_1;
-                case 16 ... 18:   return MAX_POWER_TIER_2;
-                case 19 ... 20:   return MAX_POWER_TIER_4;
-                default:
-                case 21 ... 25:   return MAX_POWER_TIER_5;
-            }
         default:
             break;
     }
@@ -431,7 +433,7 @@ static u32 GetMaxPowerTier(u32 move)
 }
 
 // Returns whether a move is a Max Move or not.
-bool32 IsMaxMove(u32 move)
+bool32 IsMaxMove(enum Move move)
 {
     return move >= FIRST_MAX_MOVE && move <= LAST_MAX_MOVE;
 }

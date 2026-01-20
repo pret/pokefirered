@@ -61,7 +61,7 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon only consider their own status moves whe
 
 AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use stat boosting moves")
 {
-    // Moves defined by MOVE_TARGET_USER (with exceptions?)
+    // Moves defined by TARGET_USER (with exceptions?)
     u32 j, heldItem = ITEM_NONE;
     enum Ability ability = ABILITY_NONE;
 
@@ -78,7 +78,7 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use stat boosting moves")
     }
 
     GIVEN {
-        ASSUME(GetMoveTarget(MOVE_SWORDS_DANCE) == MOVE_TARGET_USER);
+        ASSUME(GetMoveTarget(MOVE_SWORDS_DANCE) == TARGET_USER);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_RHYDON)
         OPPONENT(SPECIES_LOPUNNY) { Moves(MOVE_SWORDS_DANCE, MOVE_SCRATCH); Item(heldItem); Ability(ability); }
@@ -130,7 +130,9 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they are the on
 
 AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they don't have a good switchin")
 {
-    u32 j, move = MOVE_NONE, species = SPECIES_NONE, heldItem = ITEM_NONE;
+    u32 j;
+    enum Move move = MOVE_NONE;
+    u32 species = SPECIES_NONE, heldItem = ITEM_NONE;
     enum Ability ability = ABILITY_NONE;
     static const u32 choiceItems[] = {
         ITEM_CHOICE_SPECS,
@@ -165,7 +167,9 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they don't have
 
 AI_SINGLE_BATTLE_TEST("Choiced Pokémon won't use status move if they are trapped")
 {
-    u32 j, aiAbility = ABILITY_NONE, playerAbility = MOVE_NONE, species = SPECIES_NONE, heldItem = ITEM_NONE;
+    u32 j;
+    enum Ability aiAbility = ABILITY_NONE, playerAbility = ABILITY_NONE;
+    u32 species = SPECIES_NONE, heldItem = ITEM_NONE;
 
     static const u32 choiceItems[] = {
         ITEM_CHOICE_SPECS,

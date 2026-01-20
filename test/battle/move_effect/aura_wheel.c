@@ -75,7 +75,7 @@ SINGLE_BATTLE_TEST("Aura Wheel can be turned into a Normal-type move after Morpe
         OPPONENT(SPECIES_DUSKULL);
     } WHEN {
         if (hangryMode)
-            TURN { }
+            TURN {}
         TURN { MOVE(opponent, MOVE_ENTRAINMENT); }
         TURN { MOVE(player, MOVE_AURA_WHEEL); SWITCH(opponent, 1); }
     } SCENE {

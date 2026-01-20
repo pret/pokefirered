@@ -7,7 +7,7 @@ SINGLE_BATTLE_TEST("Overcoat blocks powder and spore moves (Gen6+)")
     PARAMETRIZE { gen = GEN_5; }
     PARAMETRIZE { gen = GEN_6; }
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_POWDER_OVERCOAT, gen);
+        WITH_CONFIG(CONFIG_POWDER_OVERCOAT, gen);
         ASSUME(IsPowderMove(MOVE_STUN_SPORE));
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_PINECO) { Ability(ABILITY_OVERCOAT); }
@@ -52,7 +52,8 @@ DOUBLE_BATTLE_TEST("Overcoat blocks damage from sandstorm")
 DOUBLE_BATTLE_TEST("Overcoat blocks damage from hail")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_HAIL) == EFFECT_HAIL);
+        ASSUME(GetMoveEffect(MOVE_HAIL) == EFFECT_WEATHER);
+        ASSUME(GetMoveWeatherType(MOVE_HAIL) == BATTLE_WEATHER_HAIL);
         PLAYER(SPECIES_WYNAUT)    { Speed(50); Ability(ABILITY_SNOW_CLOAK); }
         PLAYER(SPECIES_SOLOSIS)   { Speed(40); Ability(ABILITY_RUN_AWAY); }
         OPPONENT(SPECIES_PINECO)  { Speed(30); Ability(ABILITY_OVERCOAT); }
@@ -71,17 +72,29 @@ DOUBLE_BATTLE_TEST("Overcoat blocks damage from hail")
     }
 }
 
-SINGLE_BATTLE_TEST("Overcoat blocks Effect Spore's effect")
+SINGLE_BATTLE_TEST("Overcoat blocks Effect Spore's effect (Gen6+)")
 {
+    u32 config;
+    PARAMETRIZE { config = GEN_5; }
+    PARAMETRIZE { config = GEN_6; }
     GIVEN {
-        PLAYER(SPECIES_PINECO) {Ability(ABILITY_OVERCOAT);}
-        OPPONENT(SPECIES_SHROOMISH) {Ability(ABILITY_EFFECT_SPORE);}
+        WITH_CONFIG(CONFIG_POWDER_OVERCOAT, config);
+        PLAYER(SPECIES_PINECO) { Ability(ABILITY_OVERCOAT); }
+        OPPONENT(SPECIES_SHROOMISH) { Ability(ABILITY_EFFECT_SPORE); }
     } WHEN {
         TURN { MOVE(player, MOVE_TACKLE, WITH_RNG(RNG_EFFECT_SPORE, 1)); }
     } SCENE {
         MESSAGE("Pineco used Tackle!");
-        NOT ABILITY_POPUP(opponent, ABILITY_EFFECT_SPORE);
+        if (config == GEN_6) {
+            NOT ABILITY_POPUP(opponent, ABILITY_EFFECT_SPORE);
+        }
+        else {
+            ABILITY_POPUP(opponent, ABILITY_EFFECT_SPORE);
+        }
     } THEN {
-        EXPECT_EQ(player->status1, 0);
+        if (config == GEN_6)
+            EXPECT_EQ(player->status1, 0);
+        else
+            EXPECT_NE(player->status1, 0);
     }
 }

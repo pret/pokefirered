@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Fillet Away sharply raises Attack, Sp. Atk, and Speed")
 SINGLE_BATTLE_TEST("Fillet Away fails if user's current HP is half or less than half its maximum")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { MaxHP(100); HP(50);}
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(100); HP(50); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_FILLET_AWAY); }

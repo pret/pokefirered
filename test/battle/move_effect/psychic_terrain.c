@@ -116,15 +116,18 @@ SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority field moves")
 
 SINGLE_BATTLE_TEST("Psychic Terrain doesn't block priority moves against semi-invulnerable targets")
 {
-    u32 move = 0, shouldWork = 0;
-    PARAMETRIZE { move = MOVE_SOLAR_BEAM; shouldWork = FALSE;}
-    PARAMETRIZE { move = MOVE_FLY; shouldWork = TRUE;}
+    enum Move move = MOVE_NONE;
+    bool32 shouldWork = FALSE;
+    PARAMETRIZE { move = MOVE_SOLAR_BEAM; shouldWork = FALSE; }
+    PARAMETRIZE { move = MOVE_FLY; shouldWork = TRUE; }
     GIVEN {
+        WITH_CONFIG(CONFIG_TOXIC_NEVER_MISS, GEN_6);
+        ASSUME(IsSpeciesOfType(SPECIES_SHROODLE, TYPE_POISON));
         PLAYER(SPECIES_SHROODLE) { Ability(ABILITY_PRANKSTER); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); MOVE(opponent,move);}
-        TURN { MOVE(player, MOVE_TOXIC); SKIP_TURN(opponent);}
+        TURN { MOVE(player, MOVE_PSYCHIC_TERRAIN); MOVE(opponent,move); }
+        TURN { MOVE(player, MOVE_TOXIC); SKIP_TURN(opponent); }
     } SCENE {
         if (shouldWork)
         {

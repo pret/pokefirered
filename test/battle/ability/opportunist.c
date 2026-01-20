@@ -218,7 +218,7 @@ DOUBLE_BATTLE_TEST("Opportunist copies the stat of each Pokémon that were raise
         OPPONENT(SPECIES_ZACIAN) { Ability(ABILITY_INTREPID_SWORD); }
         OPPONENT(SPECIES_ZACIAN) { Ability(ABILITY_INTREPID_SWORD); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(opponentLeft, ABILITY_INTREPID_SWORD);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponentLeft);
@@ -281,7 +281,7 @@ SINGLE_BATTLE_TEST("Opportunist and Mirror Herb stack stat increases")
         PLAYER(SPECIES_ZACIAN) { Ability(ABILITY_INTREPID_SWORD); }
         OPPONENT(SPECIES_ESPATHRA) { Ability(ABILITY_OPPORTUNIST); Item(ITEM_MIRROR_HERB); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(player, ABILITY_INTREPID_SWORD);
         ABILITY_POPUP(opponent, ABILITY_OPPORTUNIST);
@@ -303,7 +303,7 @@ DOUBLE_BATTLE_TEST("Opportunist and Mirror Herb resolve correctly")
         OPPONENT(SPECIES_MEOWSCARADA) { Item(ITEM_MIRROR_HERB); }
         OPPONENT(SPECIES_ESPATHRA) { Ability(ABILITY_OPPORTUNIST); Item(ITEM_MIRROR_HERB); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(playerLeft, ABILITY_INTREPID_SWORD);
         ABILITY_POPUP(opponentRight, ABILITY_OPPORTUNIST);
@@ -315,3 +315,5 @@ DOUBLE_BATTLE_TEST("Opportunist and Mirror Herb resolve correctly")
         EXPECT_EQ(opponentRight->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 2);
     }
 }
+
+TO_DO_BATTLE_TEST("Opportunist copies stat changes from the opponent's X Attack and other stat-boosting items.")

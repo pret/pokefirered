@@ -68,6 +68,7 @@
 #define GEN_7 6
 #define GEN_8 7
 #define GEN_9 8
+#define GEN_COUNT 9
 // Changing GEN_LATEST's value to a different Generation will change every default setting that uses it at once.
 #define GEN_LATEST GEN_9
 

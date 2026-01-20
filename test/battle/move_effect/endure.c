@@ -11,7 +11,7 @@ TO_DO_BATTLE_TEST("Endure allows the user to survive any attack with 1 HP left")
 SINGLE_BATTLE_TEST("Endure does not prevent multiple hits and stat changes occur at the end of the turn")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_SCALE_SHOT) == EFFECT_MULTI_HIT);
+        ASSUME(IsMultiHitMove(MOVE_SCALE_SHOT));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
     } WHEN {

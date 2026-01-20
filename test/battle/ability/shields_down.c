@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Minior Core transforms into Minior Meteor on battle start if
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_MINIOR_CORE) { Ability(ABILITY_SHIELDS_DOWN); HP(51); MaxHP(101); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_SHIELDS_DOWN);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, opponent);

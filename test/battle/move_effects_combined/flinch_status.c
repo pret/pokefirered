@@ -13,7 +13,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Thunder, Ice and Fire Fang inflict status 10% of the time")
 {
-    u16 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_THUNDER_FANG; }
     PARAMETRIZE { move = MOVE_ICE_FANG; }
@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Thunder, Ice and Fire Fang inflict status 10% of the time")
 
 SINGLE_BATTLE_TEST("Thunder, Ice and Fire Fang cause the opponent to flinch 10% of the time")
 {
-    u16 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_THUNDER_FANG; }
     PARAMETRIZE { move = MOVE_ICE_FANG; }

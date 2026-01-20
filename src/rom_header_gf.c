@@ -73,7 +73,7 @@ struct GFRomHeader
     const struct SpeciesInfo * speciesInfo;
     const u8 (* abilityNames)[];
     const u8 *const * abilityDescriptions;
-    const struct Item * items;
+    const struct ItemInfo * items;
     const struct MoveInfo * moves;
     const struct CompressedSpriteSheet * ballGfx;
     const struct SpritePalette * ballPalettes;

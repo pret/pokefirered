@@ -40,7 +40,8 @@ AI_SINGLE_BATTLE_TEST("AI will try to do damage on target instead of setting up 
 AI_SINGLE_BATTLE_TEST("AI will not set up Rain if it is already raining")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_RAIN_DANCE) == EFFECT_RAIN_DANCE);
+        ASSUME(GetMoveEffect(MOVE_RAIN_DANCE) == EFFECT_WEATHER);
+        ASSUME(GetMoveWeatherType(MOVE_RAIN_DANCE) == BATTLE_WEATHER_RAIN);
         ASSUME(GetMovePower(MOVE_SCRATCH) > 0);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_POWERFUL_STATUS);
         PLAYER(SPECIES_WOBBUFFET);

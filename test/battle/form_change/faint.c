@@ -8,12 +8,19 @@ SINGLE_BATTLE_TEST("Aegislash reverts to Shield Form upon fainting (start as Shi
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_SCRATCH); MOVE(opponent, MOVE_GUST); SEND_OUT(player, 1); }
+        TURN { MOVE(opponent, MOVE_GUST); SEND_OUT(player, 1); }
+        TURN { USE_ITEM(player, ITEM_REVIVE, 0); }
+        TURN { SWITCH(player, 0); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Gust!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUST, opponent);
+        HP_BAR(player);
         MESSAGE("Aegislash fainted!");
+        SEND_IN_MESSAGE("Wobbuffet");
+        SWITCH_OUT_MESSAGE("Wobbuffet")
+        SEND_IN_MESSAGE("Aegislash");
     } THEN {
-        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_AEGISLASH_SHIELD);
+        // We do not check gPlayerParty data to avoid triggering FORM_CHANGE_END_BATTLE.
+        EXPECT_EQ(player->species, SPECIES_AEGISLASH_SHIELD);
     }
 }
 
@@ -25,11 +32,18 @@ SINGLE_BATTLE_TEST("Aegislash reverts to Shield Form upon fainting (start as Bla
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_GUST); SEND_OUT(player, 1); }
+        TURN { USE_ITEM(player, ITEM_REVIVE, 0); }
+        TURN { SWITCH(player, 0); }
     } SCENE {
-        MESSAGE("The opposing Wobbuffet used Gust!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUST, opponent);
+        HP_BAR(player);
         MESSAGE("Aegislash fainted!");
+        SEND_IN_MESSAGE("Wobbuffet");
+        SWITCH_OUT_MESSAGE("Wobbuffet")
+        SEND_IN_MESSAGE("Aegislash");
     } THEN {
-        EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_AEGISLASH_SHIELD);
+        // We do not check gPlayerParty data to avoid triggering FORM_CHANGE_END_BATTLE.
+        EXPECT_EQ(player->species, SPECIES_AEGISLASH_SHIELD);
     }
 }
 

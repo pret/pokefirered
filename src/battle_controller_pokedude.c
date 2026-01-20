@@ -42,8 +42,6 @@ struct PokedudeBattlePartyInfo
 
 static void PokedudeHandleDrawTrainerPic(u32 battler);
 static void PokedudeHandleTrainerSlide(u32 battler);
-static void PokedudeHandleSuccessBallThrowAnim(u32 battler);
-static void PokedudeHandleBallThrowAnim(u32 battler);
 static void PokedudeHandlePrintSelectionString(u32 battler);
 static void PokedudeHandleChooseAction(u32 battler);
 static void PokedudeHandleChooseMove(u32 battler);
@@ -82,8 +80,7 @@ static void (*const sPokedudeBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler)
     [CONTROLLER_TRAINERSLIDEBACK]         = BtlController_Empty,
     [CONTROLLER_FAINTANIMATION]           = BtlController_HandleFaintAnimation,
     [CONTROLLER_PALETTEFADE]              = BtlController_Empty,
-    [CONTROLLER_SUCCESSBALLTHROWANIM]     = PokedudeHandleSuccessBallThrowAnim,
-    [CONTROLLER_BALLTHROWANIM]            = PokedudeHandleBallThrowAnim,
+    [CONTROLLER_BALLTHROWANIM]            = BtlController_HandleBallThrowAnim,
     [CONTROLLER_PAUSE]                    = BtlController_Empty,
     [CONTROLLER_MOVEANIMATION]            = BtlController_HandleMoveAnimation,
     [CONTROLLER_PRINTSTRING]              = BtlController_HandlePrintString,
@@ -335,16 +332,6 @@ static void PokedudeHandleDrawTrainerPic(u32 battler)
 static void PokedudeHandleTrainerSlide(u32 battler)
 {
     BtlController_HandleTrainerSlide(battler, TRAINER_BACK_PIC_POKEDUDE);
-}
-
-static void PokedudeHandleSuccessBallThrowAnim(u32 battler)
-{
-    BtlController_HandleSuccessBallThrowAnim(battler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW, FALSE);
-}
-
-static void PokedudeHandleBallThrowAnim(u32 battler)
-{
-    BtlController_HandleBallThrowAnim(battler, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), B_ANIM_BALL_THROW, FALSE);
 }
 
 static void PokedudeHandlePrintSelectionString(u32 battler)
@@ -1210,11 +1197,15 @@ void InitPokedudePartyAndOpponent(void)
     i = 0;
     do
     {
+        u32 personality;
         if (data[i].side == B_SIDE_PLAYER)
             mon = &gPlayerParty[myIdx++];
         else
             mon = &gEnemyParty[opIdx++];
-        CreateMonWithGenderNatureLetter(mon, data[i].species, data[i].level, 0, data[i].gender, data[i].nature, 0);
+
+        personality = GetMonPersonality(data[i].species, data[i].gender, data[i].nature, RANDOM_UNOWN_LETTER);
+        CreateMonWithIVsPersonality(mon, data[i].species, data[i].level, 0, personality);
+
         for (j = 0; j < 4; ++j)
             SetMonMoveSlot(mon, data[i].moves[j], j);
     } while (data[++i].side != 0xFF);

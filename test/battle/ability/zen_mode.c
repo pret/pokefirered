@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Zen Mode switches Darmanitan's form when HP is half or less 
         ABILITY_POPUP(player, ABILITY_ZEN_MODE);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
     } THEN {
-        ASSUME(player->hp <= player->maxHP / 2);
+        EXPECT_LT(player->hp, player->maxHP / 2);
         EXPECT_EQ(player->species, zenSpecies);
     }
 }

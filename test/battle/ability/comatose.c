@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Comatose prevents status-inducing moves")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_TOXIC; }
     PARAMETRIZE { move = MOVE_POISONPOWDER; }
@@ -26,7 +26,7 @@ SINGLE_BATTLE_TEST("Comatose prevents status-inducing moves")
 
 SINGLE_BATTLE_TEST("Comatose may be suppressed if Pokémon transformed into a Pokémon with Comatose ability and was under the effects of Gastro Acid")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_TOXIC; }
     PARAMETRIZE { move = MOVE_POISONPOWDER; }
@@ -88,7 +88,92 @@ SINGLE_BATTLE_TEST("Comatose Pokémon don't get poisoned by Toxic Spikes on swit
     }
 }
 
-TO_DO_BATTLE_TEST("Comatose makes Rest fail")
-TO_DO_BATTLE_TEST("Comatose isn't affected by Mold Breaker, Turboblaze or Teravolt")
-TO_DO_BATTLE_TEST("Comatose isn't affected by Poison Touch + Sunsteel Strike")
-TO_DO_BATTLE_TEST("Comatose boosts Dream Ball's multiplier")
+SINGLE_BATTLE_TEST("Comatose makes Rest fail")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_REST) == EFFECT_REST);
+        PLAYER(SPECIES_KOMALA) { Ability(ABILITY_COMATOSE); HP(1); MaxHP(100); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_REST); }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_REST, player);
+            HP_BAR(player);
+        }
+    } THEN {
+        EXPECT_EQ(player->hp, 1);
+        EXPECT_EQ(player->status1, STATUS1_NONE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Comatose isn't affected by Mold Breaker, Turboblaze or Teravolt")
+{
+    enum Ability ability;
+    u16 species;
+
+    PARAMETRIZE { ability = ABILITY_MOLD_BREAKER; species = SPECIES_PINSIR; }
+    PARAMETRIZE { ability = ABILITY_TURBOBLAZE; species = SPECIES_RESHIRAM; }
+    PARAMETRIZE { ability = ABILITY_TERAVOLT; species = SPECIES_ZEKROM; }
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TOXIC) == EFFECT_NON_VOLATILE_STATUS);
+        ASSUME(GetMoveNonVolatileStatus(MOVE_TOXIC) == MOVE_EFFECT_TOXIC);
+        PLAYER(SPECIES_KOMALA) { Ability(ABILITY_COMATOSE); }
+        OPPONENT(species) { Ability(ability); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_TOXIC); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_TOXIC, opponent);
+        ABILITY_POPUP(player, ABILITY_COMATOSE);
+        MESSAGE("It doesn't affect Komala…");
+    } THEN {
+        EXPECT_EQ(player->status1, STATUS1_NONE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Comatose isn't affected by Poison Touch + Sunsteel Strike")
+{
+    GIVEN {
+        ASSUME(MoveIgnoresTargetAbility(MOVE_SUNSTEEL_STRIKE));
+        ASSUME(MoveMakesContact(MOVE_SUNSTEEL_STRIKE));
+        PLAYER(SPECIES_KOMALA) { Ability(ABILITY_COMATOSE); }
+        OPPONENT(SPECIES_CROAGUNK) { Ability(ABILITY_POISON_TOUCH); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUNSTEEL_STRIKE, WITH_RNG(RNG_POISON_TOUCH, 1)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SUNSTEEL_STRIKE, opponent);
+        HP_BAR(player);
+        NOT STATUS_ICON(player, poison: TRUE);
+    } THEN {
+        EXPECT_EQ(player->status1, STATUS1_NONE);
+    }
+}
+
+WILD_BATTLE_TEST("Comatose boosts Dream Ball's multiplier")
+{
+    enum Ability ability;
+    u16 species;
+    bool32 shouldCatch;
+    const u16 rng = 50000;
+
+    PARAMETRIZE { species = SPECIES_KOMALA; ability = ABILITY_COMATOSE; shouldCatch = TRUE; }
+    PARAMETRIZE { species = SPECIES_MIMIKYU; ability = ABILITY_DISGUISE; shouldCatch = FALSE; }
+
+    GIVEN {
+        ASSUME(B_DREAM_BALL_MODIFIER >= GEN_8);
+        ASSUME(gSpeciesInfo[species].catchRate == 45);
+        WITH_CONFIG(CONFIG_MISSING_BADGE_CATCH_MALUS, GEN_7);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(species) { Ability(ability); MaxHP(100); HP(1); }
+    } WHEN {
+        TURN { USE_ITEM(player, ITEM_DREAM_BALL, WITH_RNG(RNG_BALLTHROW_SHAKE, rng)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_SPECIAL, B_ANIM_BALL_THROW, player);
+    } THEN {
+        if (shouldCatch)
+            EXPECT_EQ(gBattleResults.caughtMonSpecies, species);
+        else
+            EXPECT_EQ(gBattleResults.caughtMonSpecies, SPECIES_NONE);
+    }
+}

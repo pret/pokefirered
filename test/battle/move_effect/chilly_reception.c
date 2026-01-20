@@ -3,7 +3,7 @@
 
 ASSUMPTIONS
 {
-    ASSUME(GetMoveEffect(MOVE_CHILLY_RECEPTION) == EFFECT_CHILLY_RECEPTION);
+    ASSUME(GetMoveEffect(MOVE_CHILLY_RECEPTION) == EFFECT_WEATHER_AND_SWITCH);
 }
 #if B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_HAIL
 SINGLE_BATTLE_TEST("Chilly Reception sets up hail and switches the user out")
@@ -47,8 +47,8 @@ SINGLE_BATTLE_TEST("Chilly Reception switches the user out, even if the weather 
         TURN { MOVE(player, MOVE_CHILLY_RECEPTION); SEND_OUT(player, 1); }
     } SCENE {
         MESSAGE("Slowking is preparing to tell a chillingly bad joke!");
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
         MESSAGE("There is no relief from this heavy rain!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
         MESSAGE("Slowking went back to 1!");
         SEND_IN_MESSAGE("Slowpoke");
         MESSAGE("Rain continues to fall.");
@@ -105,4 +105,55 @@ SINGLE_BATTLE_TEST("Chilly Reception changes the weather, even if the user canno
     }
 }
 
-TO_DO_BATTLE_TEST("Chilly Reception doesn't announce its move if it's called by a different move");
+SINGLE_BATTLE_TEST("Chilly Reception switches the user out even if it can't change the weather")
+{
+    GIVEN {
+        PLAYER(SPECIES_SLOWKING_GALAR);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_NINETALES_ALOLA) { Ability(ABILITY_SNOW_WARNING); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CHILLY_RECEPTION); SEND_OUT(player, 1); }
+    } SCENE {
+        MESSAGE("Slowking is preparing to tell a chillingly bad joke!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
+        MESSAGE("But it failed!"); // According to jpwiki, this is the correct message
+        MESSAGE("Slowking went back to 1!");
+        SEND_IN_MESSAGE("Wobbuffet");
+    }
+}
+
+SINGLE_BATTLE_TEST("Chilly Reception fails if it can't switch the user out or change the weather")
+{
+    GIVEN {
+        PLAYER(SPECIES_SLOWKING_GALAR);
+        OPPONENT(SPECIES_NINETALES_ALOLA) { Ability(ABILITY_SNOW_WARNING); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_CHILLY_RECEPTION); }
+    } SCENE {
+        MESSAGE("Slowking is preparing to tell a chillingly bad joke!");
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
+        MESSAGE("But it failed!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Chilly Reception doesn't announce its move if it's called by a different move")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_SLEEP_TALK) == EFFECT_SLEEP_TALK);
+        PLAYER(SPECIES_SLOWKING_GALAR) { Status1(STATUS1_SLEEP); Moves(MOVE_SLEEP_TALK, MOVE_CHILLY_RECEPTION); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SLEEP_TALK); SEND_OUT(player, 1); }
+    } SCENE {
+        NOT MESSAGE("Slowking is preparing to tell a chillingly bad joke!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CHILLY_RECEPTION, player);
+#if B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_HAIL
+        MESSAGE("It started to hail!");
+#else
+        MESSAGE("It started to snow!");
+#endif
+        MESSAGE("Slowking went back to 1!");
+        SEND_IN_MESSAGE("Wobbuffet");
+    }
+}

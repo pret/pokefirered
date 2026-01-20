@@ -10,7 +10,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Tangling Hair drops opposing mon's speed if ability user got hit by a contact move")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_SCRATCH; }
     PARAMETRIZE { move = MOVE_SWIFT; }
@@ -89,7 +89,7 @@ SINGLE_BATTLE_TEST("Tangling Hair does not trigger on Clear Body")
 {
     GIVEN {
         PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); }
-        OPPONENT(SPECIES_BELDUM) { Ability(ABILITY_CLEAR_BODY); };
+        OPPONENT(SPECIES_BELDUM) { Ability(ABILITY_CLEAR_BODY); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
@@ -103,7 +103,7 @@ SINGLE_BATTLE_TEST("Tangling Hair will trigger if move is boosted by Sheer Force
     ASSUME(MoveIsAffectedBySheerForce(MOVE_POISON_JAB));
     GIVEN {
         PLAYER(SPECIES_DUGTRIO) { Ability(ABILITY_TANGLING_HAIR); }
-        OPPONENT(SPECIES_NIDOKING) { Ability(ABILITY_SHEER_FORCE); };
+        OPPONENT(SPECIES_NIDOKING) { Ability(ABILITY_SHEER_FORCE); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_POISON_JAB); }
     } SCENE {

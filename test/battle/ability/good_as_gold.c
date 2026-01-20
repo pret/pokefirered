@@ -38,7 +38,7 @@ SINGLE_BATTLE_TEST("Good as Gold doesn't protect from moves that target the fiel
 {
     GIVEN {
         ASSUME(GetMoveCategory(MOVE_STEALTH_ROCK) == DAMAGE_CATEGORY_STATUS);
-        ASSUME(GetMoveTarget(MOVE_STEALTH_ROCK) == MOVE_TARGET_OPPONENTS_FIELD);
+        ASSUME(GetMoveTarget(MOVE_STEALTH_ROCK) == TARGET_OPPONENTS_FIELD);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GHOLDENGO) { Ability(ABILITY_GOOD_AS_GOLD); }
     } WHEN {

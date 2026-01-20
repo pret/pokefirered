@@ -177,6 +177,8 @@ extern u8 gStringVar4[1000];
 
 #define FEATURE_FLAG_ASSERT(flag, id) STATIC_ASSERT(flag > TEMP_FLAGS_END || flag == 0, id)
 
+#define READ_OTID_FROM_SAVE T1_READ_32(gSaveBlock2Ptr->playerTrainerId)
+
 #ifndef NDEBUG
 static inline void CycleCountStart()
 {

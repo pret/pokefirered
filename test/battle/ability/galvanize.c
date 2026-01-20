@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Galvanize turns a normal type move into Electric")
 
 SINGLE_BATTLE_TEST("Galvanize can not turn certain moves into Electric type moves")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_HIDDEN_POWER; }
     PARAMETRIZE { move = MOVE_WEATHER_BALL; }
@@ -52,7 +52,7 @@ SINGLE_BATTLE_TEST("Galvanize boosts power of affected moves by 20% (Gen7+) or 3
     PARAMETRIZE { ability = ABILITY_GALVANIZE;  genConfig = GEN_6; }
 
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_ATE_MULTIPLIER, genConfig);
+        WITH_CONFIG(CONFIG_ATE_MULTIPLIER, genConfig);
         PLAYER(SPECIES_GEODUDE_ALOLA) { Ability(ability); Moves(MOVE_TACKLE); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -69,7 +69,7 @@ SINGLE_BATTLE_TEST("Galvanize boosts power of affected moves by 20% (Gen7+) or 3
 
 SINGLE_BATTLE_TEST("Galvanize doesn't affect Weather Ball's type", s16 damage)
 {
-    u16 move;
+    enum Move move;
     enum Ability ability;
     PARAMETRIZE { move = MOVE_CELEBRATE; ability = ABILITY_STURDY; }
     PARAMETRIZE { move = MOVE_SUNNY_DAY; ability = ABILITY_STURDY; }
@@ -117,7 +117,8 @@ SINGLE_BATTLE_TEST("Galvanize doesn't affect Natural Gift's type")
 
 SINGLE_BATTLE_TEST("Galvanize doesn't affect Judgment / Techno Blast / Multi-Attack's type")
 {
-    u16 move, item;
+    enum Move move;
+    enum Item item;
     PARAMETRIZE { move = MOVE_JUDGMENT; item = ITEM_SPLASH_PLATE; }
     PARAMETRIZE { move = MOVE_TECHNO_BLAST; item = ITEM_DOUSE_DRIVE; }
     PARAMETRIZE { move = MOVE_MULTI_ATTACK; item = ITEM_WATER_MEMORY; }

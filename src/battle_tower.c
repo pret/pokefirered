@@ -291,7 +291,7 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
     battleTowerLevelType = gSaveBlock2Ptr->battleTower.battleTowerLevelType;
 
     winStreak = GetCurrentBattleTowerWinStreak(battleTowerLevelType);
-    
+
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     if (ShouldBattleEReaderTrainer(battleTowerLevelType, winStreak))
     {
@@ -475,183 +475,183 @@ void GetBattleTowerTrainerName(u8 *dest)
     dest[i] = EOS;
 }
 
-static void FillBattleTowerTrainerParty(void)
-{
-    s32 partyIndex;
-    s32 i;
-    u16 chosenMonIndices[3];
-    u8 friendship;
-    u8 level;
-    u8 fixedIV;
-    u8 battleMonsOffset;
-    u8 monPoolSize;
-    u8 teamFlags;
-    const struct BattleTowerPokemonTemplate *battleTowerMons;
+// static void FillBattleTowerTrainerParty(void)
+// {
+//     s32 partyIndex;
+//     s32 i;
+//     u16 chosenMonIndices[3];
+//     u8 friendship;
+//     u8 level;
+//     u8 fixedIV;
+//     u8 battleMonsOffset;
+//     u8 monPoolSize;
+//     u8 teamFlags;
+//     const struct BattleTowerPokemonTemplate *battleTowerMons;
 
-    battleMonsOffset = 0;
-    monPoolSize = 60;
-    friendship = 255;
+//     battleMonsOffset = 0;
+//     monPoolSize = 60;
+//     friendship = 255;
 
-    ZeroEnemyPartyMons();
+//     ZeroEnemyPartyMons();
 
-    // Different trainers have access to different sets of pokemon to use in battle.
-    // The pokemon later in gBattleTowerLevel100Mons or gBattleTowerLevel50Mons are
-    // stronger. Additionally, the later trainers' pokemon are granted higher IVs.
-    if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 20)
-    {
-        fixedIV = 6;
-    }
-    else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 30)
-    {
-        fixedIV = 9;
-        battleMonsOffset = 30;
-    }
-    else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 40)
-    {
-        fixedIV = 12;
-        battleMonsOffset = 60;
-    }
-    else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 50)
-    {
-        fixedIV = 15;
-        battleMonsOffset = 90;
-    }
-    else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 60)
-    {
-        fixedIV = 18;
-        battleMonsOffset = 120;
-    }
-    else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 70)
-    {
-        fixedIV = 21;
-        battleMonsOffset = 150;
-    }
-    else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 80)
-    {
-        fixedIV = 31;
-        battleMonsOffset = 180;
-    }
-    else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
-    {
-        fixedIV = 31;
-        battleMonsOffset = 200;
-        monPoolSize = 100;
-    }
-#if FREE_BATTLE_TOWER_E_READER == FALSE
-    else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
-    {
-        // Load E-Reader trainer's party.
-        do
-        {
-            for (partyIndex = 0; partyIndex < 3; partyIndex++)
-                CreateBattleTowerMon(&gEnemyParty[partyIndex], &gSaveBlock2Ptr->battleTower.ereaderTrainer.party[partyIndex]);
-            return;
-        } while (0);
-    }
-#endif //FREE_BATTLE_TOWER_E_READER
-    else
-    {
-        // Load a battle tower record's party. (From record mixing)
-        for (partyIndex = 0; partyIndex < 3; partyIndex++)
-        {
-            CreateBattleTowerMon(
-                &gEnemyParty[partyIndex],
-                &gSaveBlock2Ptr->battleTower.records[gSaveBlock2Ptr->battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].party[partyIndex]);
-        }
-        return;
-    }
+//     // Different trainers have access to different sets of pokemon to use in battle.
+//     // The pokemon later in gBattleTowerLevel100Mons or gBattleTowerLevel50Mons are
+//     // stronger. Additionally, the later trainers' pokemon are granted higher IVs.
+//     if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 20)
+//     {
+//         fixedIV = 6;
+//     }
+//     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 30)
+//     {
+//         fixedIV = 9;
+//         battleMonsOffset = 30;
+//     }
+//     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 40)
+//     {
+//         fixedIV = 12;
+//         battleMonsOffset = 60;
+//     }
+//     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 50)
+//     {
+//         fixedIV = 15;
+//         battleMonsOffset = 90;
+//     }
+//     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 60)
+//     {
+//         fixedIV = 18;
+//         battleMonsOffset = 120;
+//     }
+//     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 70)
+//     {
+//         fixedIV = 21;
+//         battleMonsOffset = 150;
+//     }
+//     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < 80)
+//     {
+//         fixedIV = 31;
+//         battleMonsOffset = 180;
+//     }
+//     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId < BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID)
+//     {
+//         fixedIV = 31;
+//         battleMonsOffset = 200;
+//         monPoolSize = 100;
+//     }
+// #if FREE_BATTLE_TOWER_E_READER == FALSE
+//     else if (gSaveBlock2Ptr->battleTower.battleTowerTrainerId == BATTLE_TOWER_EREADER_TRAINER_ID)
+//     {
+//         // Load E-Reader trainer's party.
+//         do
+//         {
+//             for (partyIndex = 0; partyIndex < 3; partyIndex++)
+//                 CreateBattleTowerMon(&gEnemyParty[partyIndex], &gSaveBlock2Ptr->battleTower.ereaderTrainer.party[partyIndex]);
+//             return;
+//         } while (0);
+//     }
+// #endif //FREE_BATTLE_TOWER_E_READER
+//     else
+//     {
+//         // Load a battle tower record's party. (From record mixing)
+//         for (partyIndex = 0; partyIndex < 3; partyIndex++)
+//         {
+//             CreateBattleTowerMon(
+//                 &gEnemyParty[partyIndex],
+//                 &gSaveBlock2Ptr->battleTower.records[gSaveBlock2Ptr->battleTower.battleTowerTrainerId - BATTLE_TOWER_RECORD_MIXING_TRAINER_BASE_ID].party[partyIndex]);
+//         }
+//         return;
+//     }
 
-    // Use the appropriate list of pokemon and level depending on the
-    // current challenge type. (level 50 or level 100 challenge)
-    if (gSaveBlock2Ptr->battleTower.battleTowerLevelType != 0)
-    {
-        battleTowerMons = gBattleTowerLevel100Mons;
-        level = 100;
-    }
-    else
-    {
-        battleTowerMons = gBattleTowerLevel50Mons;
-        level = 50;
-    }
+//     // Use the appropriate list of pokemon and level depending on the
+//     // current challenge type. (level 50 or level 100 challenge)
+//     if (gSaveBlock2Ptr->battleTower.battleTowerLevelType != 0)
+//     {
+//         battleTowerMons = gBattleTowerLevel100Mons;
+//         level = 100;
+//     }
+//     else
+//     {
+//         battleTowerMons = gBattleTowerLevel50Mons;
+//         level = 50;
+//     }
 
-    teamFlags = sBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].teamFlags;
+//     teamFlags = sBattleTowerTrainers[gSaveBlock2Ptr->battleTower.battleTowerTrainerId].teamFlags;
 
-    // Attempt to fill the trainer's party with random Pokemon until 3 have been
-    // successfully chosen. The trainer's party may not have duplicate pokemon species
-    // or duplicate held items. Each pokemon must have all of the trainer's team flags
-    // set, as well.  If any of those conditions are not met, then the loop starts over
-    // and another pokemon is chosen at random.
-    partyIndex = 0;
-    while (partyIndex != 3)
-    {
-        // Pick a random pokemon index based on the number of pokemon available to choose from
-        // and the starting offset in the battle tower pokemon array.
-        s32 battleMonIndex = ((Random() & 0xFF) * monPoolSize) / 256 + battleMonsOffset;
+//     // Attempt to fill the trainer's party with random Pokemon until 3 have been
+//     // successfully chosen. The trainer's party may not have duplicate pokemon species
+//     // or duplicate held items. Each pokemon must have all of the trainer's team flags
+//     // set, as well.  If any of those conditions are not met, then the loop starts over
+//     // and another pokemon is chosen at random.
+//     partyIndex = 0;
+//     while (partyIndex != 3)
+//     {
+//         // Pick a random pokemon index based on the number of pokemon available to choose from
+//         // and the starting offset in the battle tower pokemon array.
+//         s32 battleMonIndex = ((Random() & 0xFF) * monPoolSize) / 256 + battleMonsOffset;
 
-        // Ensure the chosen pokemon has compatible team flags with the trainer.
-        if (teamFlags == 0 || (battleTowerMons[battleMonIndex].teamFlags & teamFlags) == teamFlags)
-        {
-            // Ensure this pokemon species isn't a duplicate.
-            for (i = 0; i < partyIndex; i++)
-            {
-                if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL) == battleTowerMons[battleMonIndex].species)
-                    break;
-            }
+//         // Ensure the chosen pokemon has compatible team flags with the trainer.
+//         if (teamFlags == 0 || (battleTowerMons[battleMonIndex].teamFlags & teamFlags) == teamFlags)
+//         {
+//             // Ensure this pokemon species isn't a duplicate.
+//             for (i = 0; i < partyIndex; i++)
+//             {
+//                 if (GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL) == battleTowerMons[battleMonIndex].species)
+//                     break;
+//             }
 
-            if (i != partyIndex)
-                continue;
+//             if (i != partyIndex)
+//                 continue;
 
-            // Ensure this pokemon's held item isn't a duplicate.
-            for (i = 0; i < partyIndex; i++)
-            {
-                if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) != ITEM_NONE
-                    && GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) == sBattleTowerHeldItems[battleTowerMons[battleMonIndex].heldItem])
-                    break;
-            }
+//             // Ensure this pokemon's held item isn't a duplicate.
+//             for (i = 0; i < partyIndex; i++)
+//             {
+//                 if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) != ITEM_NONE
+//                     && GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, NULL) == sBattleTowerHeldItems[battleTowerMons[battleMonIndex].heldItem])
+//                     break;
+//             }
 
-            if (i != partyIndex)
-                continue;
+//             if (i != partyIndex)
+//                 continue;
 
-            // Ensure this exact pokemon index isn't a duplicate. This check doesn't seem necessary
-            // because the species and held items were already checked directly above. Perhaps this
-            // is leftover code before the logic for duplicate species and held items was added.
-            //for (i = 0; i < partyIndex && chosenMonIndices[i] != battleMonIndex; i++);
-            for (i = 0; i < partyIndex; i++)
-            {
-                if (chosenMonIndices[i] == battleMonIndex)
-                    break;
-            }
+//             // Ensure this exact pokemon index isn't a duplicate. This check doesn't seem necessary
+//             // because the species and held items were already checked directly above. Perhaps this
+//             // is leftover code before the logic for duplicate species and held items was added.
+//             //for (i = 0; i < partyIndex && chosenMonIndices[i] != battleMonIndex; i++);
+//             for (i = 0; i < partyIndex; i++)
+//             {
+//                 if (chosenMonIndices[i] == battleMonIndex)
+//                     break;
+//             }
 
-            if (i != partyIndex)
-                continue;
+//             if (i != partyIndex)
+//                 continue;
 
-            chosenMonIndices[partyIndex] = battleMonIndex;
+//             chosenMonIndices[partyIndex] = battleMonIndex;
 
-            // Place the chosen pokemon into the trainer's party.
-            CreateMonWithEVSpread(
-                &gEnemyParty[partyIndex],
-                battleTowerMons[battleMonIndex].species,
-                level,
-                fixedIV,
-                battleTowerMons[battleMonIndex].evSpread);
+//             // Place the chosen pokemon into the trainer's party.
+//             CreateMonWithEVSpread(
+//                 &gEnemyParty[partyIndex],
+//                 battleTowerMons[battleMonIndex].species,
+//                 level,
+//                 fixedIV,
+//                 battleTowerMons[battleMonIndex].evSpread);
 
-            // Give the chosen pokemon its specified moves.
-            for (i = 0; i < 4; i++)
-            {
-                SetMonMoveSlot(&gEnemyParty[partyIndex], battleTowerMons[battleMonIndex].moves[i], i);
-                if (battleTowerMons[battleMonIndex].moves[i] == MOVE_FRUSTRATION)
-                    friendship = 0;  // MOVE_FRUSTRATION is more powerful the lower the pokemon's friendship is.
-            }
+//             // Give the chosen pokemon its specified moves.
+//             for (i = 0; i < 4; i++)
+//             {
+//                 SetMonMoveSlot(&gEnemyParty[partyIndex], battleTowerMons[battleMonIndex].moves[i], i);
+//                 if (battleTowerMons[battleMonIndex].moves[i] == MOVE_FRUSTRATION)
+//                     friendship = 0;  // MOVE_FRUSTRATION is more powerful the lower the pokemon's friendship is.
+//             }
 
-            SetMonData(&gEnemyParty[partyIndex], MON_DATA_FRIENDSHIP, &friendship);
-            SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, &sBattleTowerHeldItems[battleTowerMons[battleMonIndex].heldItem]);
+//             SetMonData(&gEnemyParty[partyIndex], MON_DATA_FRIENDSHIP, &friendship);
+//             SetMonData(&gEnemyParty[partyIndex], MON_DATA_HELD_ITEM, &sBattleTowerHeldItems[battleTowerMons[battleMonIndex].heldItem]);
 
-            // The pokemon was successfully added to the trainer's party, so it's safe to move on to
-            // the next party slot.
-            partyIndex++;
-        }
-    }
-}
+//             // The pokemon was successfully added to the trainer's party, so it's safe to move on to
+//             // the next party slot.
+//             partyIndex++;
+//         }
+//     }
+// }
 
 static u8 AppendBattleTowerBannedSpeciesName(u16 species, u8 count)
 {
@@ -845,15 +845,15 @@ void StartSpecialBattle(void)
     switch (sSpecialVar_0x8004_Copy)
     {
     case 0: // battle tower battle
-        gBattleTypeFlags = (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_TRAINER);
-        TRAINER_BATTLE_PARAM.opponentA = 0;
+        // gBattleTypeFlags = (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_TRAINER);
+        // TRAINER_BATTLE_PARAM.opponentA = 0;
 
-        FillBattleTowerTrainerParty();
+        // FillBattleTowerTrainerParty();
 
-        CreateTask(Task_WaitBT, 1);
-        PlayMapChosenOrBattleBGM(0);
-        transition = BattleSetup_GetBattleTowerBattleTransition();
-        BattleTransition_StartOnField(transition);
+        // CreateTask(Task_WaitBT, 1);
+        // PlayMapChosenOrBattleBGM(0);
+        // transition = BattleSetup_GetBattleTowerBattleTransition();
+        // BattleTransition_StartOnField(transition);
         break;
     case 1: // secret base battle
         for (i = 0; i < PARTY_SIZE; i++)
@@ -1391,7 +1391,7 @@ static void FillPartnerParty(u16 trainerId)
             else if (partyData[i].gender == TRAINER_MON_FEMALE)
                 personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
             ModifyPersonalityForNature(&personality, partyData[i].nature);
-            CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, 0, TRUE, personality, OT_ID_PRESET, otID);
+            CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, personality, OTID_STRUCT_PRESET(otID));
             j = partyData[i].isShiny;
             SetMonData(&gPlayerParty[i + 3], MON_DATA_IS_SHINY, &j);
             SetMonData(&gPlayerParty[i + 3], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
@@ -1433,7 +1433,7 @@ static void FillPartnerParty(u16 trainerId)
 
             StringCopy(trainerName, gBattlePartners[difficulty][trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName);
             SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_NAME, trainerName);
-            j = gBattlePartners[difficulty][SanitizeTrainerId(trainerId - TRAINER_PARTNER(PARTNER_NONE))].encounterMusic_gender >> 7;
+            j = gBattlePartners[difficulty][SanitizeTrainerId(trainerId - TRAINER_PARTNER(PARTNER_NONE))].gender;
             SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_GENDER, &j);
         }
     }

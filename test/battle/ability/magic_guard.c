@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Magic Guard ignores immobilization that can be caused by par
     else
         PASSES_RANDOMLY(75, 100, RNG_PARALYSIS);
     GIVEN {
-        PLAYER(SPECIES_CLEFABLE) { Ability(ABILITY_MAGIC_GUARD); Status1(STATUS1_PARALYSIS);}
+        PLAYER(SPECIES_CLEFABLE) { Ability(ABILITY_MAGIC_GUARD); Status1(STATUS1_PARALYSIS); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); }
@@ -35,10 +35,10 @@ SINGLE_BATTLE_TEST("Magic Guard ignores immobilization that can be caused by par
 SINGLE_BATTLE_TEST("Magic Guard does not ignore speed stat changes caused by paralysis")
 {
     GIVEN {
-        PLAYER(SPECIES_CLEFABLE) { Speed(100); Ability(ABILITY_MAGIC_GUARD); Status1(STATUS1_PARALYSIS);}
+        PLAYER(SPECIES_CLEFABLE) { Speed(100); Ability(ABILITY_MAGIC_GUARD); Status1(STATUS1_PARALYSIS); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(99); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);

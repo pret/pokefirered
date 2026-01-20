@@ -35,12 +35,12 @@ void ActivateTera(u32 battler)
     // Execute battle script.
     PREPARE_TYPE_BUFFER(gBattleTextBuff1, GetBattlerTeraType(battler));
     if (TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_TERASTALLIZATION))
-        BattleScriptExecute(BattleScript_TeraFormChange);
+        BattleScriptPushCursorAndCallback(BattleScript_TeraFormChange);
     else if (gBattleStruct->illusion[gBattlerAttacker].state == ILLUSION_ON
           && DoesSpeciesHaveFormChangeMethod(GetIllusionMonSpecies(gBattlerAttacker), FORM_CHANGE_BATTLE_TERASTALLIZATION))
-        BattleScriptExecute(BattleScript_IllusionOffAndTerastallization);
+        BattleScriptPushCursorAndCallback(BattleScript_IllusionOffAndTerastallization);
     else
-        BattleScriptExecute(BattleScript_Terastallization);
+        BattleScriptPushCursorAndCallback(BattleScript_Terastallization);
 }
 
 // Applies palette blend and enables UI indicator after animation has played
@@ -131,7 +131,7 @@ bool32 IsTypeStellarBoosted(u32 battler, enum Type type)
 
 // Returns the STAB power multiplier to use when Terastallized.
 // Power multipliers from Smogon Research thread.
-uq4_12_t GetTeraMultiplier(struct DamageContext *ctx)
+uq4_12_t GetTeraMultiplier(struct BattleContext *ctx)
 {
     enum Type teraType = GetBattlerTeraType(ctx->battlerAtk);
 

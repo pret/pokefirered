@@ -13,7 +13,7 @@ SINGLE_BATTLE_TEST("Sticky Barb hurts its holder at the end of the turn")
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_STICKY_BARB); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         HP_BAR(player, captureDamage: &damage);
     } THEN {
@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Sticky Barb hurts its holder at the end of the turn")
 
 SINGLE_BATTLE_TEST("Sticky Barb gets transferred if its holder is hit by a contact move")
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_SCRATCH; }
     PARAMETRIZE { move = MOVE_GROWL; }
     PARAMETRIZE { move = MOVE_HYPER_VOICE; }

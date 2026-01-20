@@ -295,3 +295,12 @@ TEST("trainerproc supports both Double Battle: Yes and Battle Type: Doubles")
     const struct Trainer trainer = sTestTrainers[GetTrainerDifficultyLevelTest(currTrainer)][currTrainer];
     EXPECT(trainer.battleType == TRAINER_BATTLE_TYPE_DOUBLES);
 }
+
+TEST("CreateNPCTrainerPartyForTrainer generates default moves if no moves are specified")
+{
+    ASSUME(sTestTrainers[GetTrainerDifficultyLevelTest(1)][1].party[0].moves[0] == MOVE_NONE);
+    struct Pokemon *testParty = Alloc(6 * sizeof(struct Pokemon));
+    CreateNPCTrainerPartyFromTrainer(testParty, &sTestTrainers[GetTrainerDifficultyLevelTest(1)][1], TRUE, BATTLE_TYPE_TRAINER);
+    EXPECT(GetMonData(&testParty[0], MON_DATA_MOVE1) != MOVE_NONE);
+    Free(testParty);
+}

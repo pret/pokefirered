@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Neuroforce increases the strength of super-effective moves by 25%", s16 damage)
 {
-    u32 move;
+    enum Move move;
     enum Ability ability;
     PARAMETRIZE { ability = ABILITY_NEUROFORCE; move = MOVE_SHADOW_BALL; }
     PARAMETRIZE { ability = ABILITY_KLUTZ; move = MOVE_SHADOW_BALL; }

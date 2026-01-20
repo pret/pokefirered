@@ -72,7 +72,6 @@ enum PokemonSummaryScreenSkillPageMode
 
 struct StatData {
     u8 monDataStat;
-    u8 monDataStat2;
     u8 monDataEv;
     u8 monDataIv;
     u8 monDataHyperTrained;

@@ -5189,7 +5189,7 @@ void AnimNeedleArmSpike(struct Sprite *sprite)
     {
         if (gBattleAnimArgs[0] == 0)
         {
-            if (gMovesInfo[gAnimMoveIndex].target == MOVE_TARGET_BOTH)
+            if (GetMoveTarget(gAnimMoveIndex) == TARGET_BOTH)
             {
                 SetAverageBattlerPositions(gBattleAnimAttacker, TRUE, &a, &b);
             }
@@ -5201,7 +5201,7 @@ void AnimNeedleArmSpike(struct Sprite *sprite)
         }
         else
         {
-            if (gMovesInfo[gAnimMoveIndex].target == MOVE_TARGET_BOTH)
+            if (GetMoveTarget(gAnimMoveIndex) == TARGET_BOTH)
             {
                 SetAverageBattlerPositions(gBattleAnimTarget, TRUE, &a, &b);
             }
@@ -6833,34 +6833,34 @@ static void TrySwapWishBattlerIds(u32 battlerAtk, u32 battlerPartner)
     u32 i, temp;
 
     // if used future sight on opposing side, properly track who used it
-    if (gWishFutureKnock.futureSightCounter[LEFT_FOE(battlerAtk)] > 0
-     || gWishFutureKnock.futureSightCounter[RIGHT_FOE(battlerAtk)] > 0)
+    if (gBattleStruct->futureSight[LEFT_FOE(battlerAtk)].counter > 0
+     || gBattleStruct->futureSight[RIGHT_FOE(battlerAtk)].counter > 0)
     {
         for (i = 0; i < gBattlersCount; i++)
         {
             if (IsBattlerAlly(i, battlerAtk))
                 continue;   // only on opposing side
 
-            if (gWishFutureKnock.futureSightBattlerIndex[i] == battlerAtk)
+            if (gBattleStruct->futureSight[i].battlerIndex == battlerAtk)
             {
                 // if target was attacked with future sight from us, now they'll be the partner slot
-                gWishFutureKnock.futureSightBattlerIndex[i] = battlerPartner;
-                gWishFutureKnock.futureSightPartyIndex[i] = gBattlerPartyIndexes[battlerPartner];
+                gBattleStruct->futureSight[i].battlerIndex = battlerPartner;
+                gBattleStruct->futureSight[i].partyIndex = gBattlerPartyIndexes[battlerPartner];
                 break;
             }
-            else if (gWishFutureKnock.futureSightBattlerIndex[i] == battlerPartner)
+            else if (gBattleStruct->futureSight[i].battlerIndex == battlerPartner)
             {
-                gWishFutureKnock.futureSightBattlerIndex[i] = battlerAtk;
-                gWishFutureKnock.futureSightPartyIndex[i] = gBattlerPartyIndexes[battlerAtk];
+                gBattleStruct->futureSight[i].battlerIndex = battlerAtk;
+                gBattleStruct->futureSight[i].partyIndex = gBattlerPartyIndexes[battlerAtk];
                 break;
             }
         }
     }
 
     // swap wish party indices
-    if (gWishFutureKnock.wishCounter[battlerAtk] > 0
-     || gWishFutureKnock.wishCounter[battlerPartner] > 0)
-        SWAP(gWishFutureKnock.wishPartyId[battlerAtk], gWishFutureKnock.wishPartyId[battlerPartner], temp);
+    if (gBattleStruct->wish[battlerAtk].counter > 0
+     || gBattleStruct->wish[battlerPartner].counter > 0)
+        SWAP(gBattleStruct->wish[battlerAtk].partyId, gBattleStruct->wish[battlerPartner].partyId, temp);
 }
 
 static void TrySwapAttractBattlerIds(u32 battlerAtk, u32 battlerPartner)
@@ -6923,11 +6923,11 @@ static void AnimTask_AllySwitchDataSwap(u8 taskId)
     }
 
     SwapStructData(&gBattleMons[battlerAtk], &gBattleMons[battlerPartner], data, sizeof(struct BattlePokemon));
-    SwapStructData(&gDisableStructs[battlerAtk], &gDisableStructs[battlerPartner], data, sizeof(struct DisableStruct));
     SwapStructData(&gSpecialStatuses[battlerAtk], &gSpecialStatuses[battlerPartner], data, sizeof(struct SpecialStatus));
     SwapStructData(&gProtectStructs[battlerAtk], &gProtectStructs[battlerPartner], data, sizeof(struct ProtectStruct));
     SwapStructData(&gBattleSpritesDataPtr->battlerData[battlerAtk], &gBattleSpritesDataPtr->battlerData[battlerPartner], data, sizeof(struct BattleSpriteInfo));
     SwapStructData(&gBattleStruct->illusion[battlerAtk], &gBattleStruct->illusion[battlerPartner], data, sizeof(struct Illusion));
+    SwapStructData(&gBattleStruct->battlerState[battlerAtk], &gBattleStruct->battlerState[battlerPartner], data, sizeof(struct BattlerState));
 
     SWAP(gBattleSpritesDataPtr->battlerData[battlerAtk].invisible, gBattleSpritesDataPtr->battlerData[battlerPartner].invisible, temp);
     SWAP(gTransformedPersonalities[battlerAtk], gTransformedPersonalities[battlerPartner], temp);

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "malloc.h"
 #include "test/test.h"
 #include "random.h"
 
@@ -79,19 +80,26 @@ TEST("RandomUniformExcept generates lo..hi")
 TEST("RandomWeighted generates 0..n-1")
 {
     u32 n, sum, i;
-    static const u8 ws[8] = { 1, 1, 1, 1, 1, 1, 1, 1 };
+    static const u16 ws[8] = { 1, 1, 1, 1, 1, 1, 1, 1 };
+    u16 *ws2 = Alloc(8 * sizeof(u16));
     PARAMETRIZE { n = 1; }
     PARAMETRIZE { n = 2; }
     PARAMETRIZE { n = 3; }
     PARAMETRIZE { n = 4; }
     ASSUME(n <= ARRAY_COUNT(ws));
     for (i = 0, sum = 0; i < n; i++)
+    {
+        ws2[i] = ws[i];
         sum += ws[i];
+    }
     for (i = 0; i < 1024; i++)
     {
         u32 r = RandomWeightedArrayDefault(RNG_NONE, sum, n, ws);
         EXPECT(0 <= r && r < n);
+        r = RandomWeightedArrayDefault(RNG_NONE, sum, n, ws2);
+        EXPECT(0 <= r && r < n);
     }
+    Free(ws2);
 }
 
 TEST("RandomElement generates an element")
@@ -151,7 +159,7 @@ TEST("RandomUniformExcept generates uniform distribution")
 TEST("RandomWeighted generates distribution in proportion to the weights")
 {
     u32 i, sum, error;
-    static const u8 ws[4] = { 1, 2, 2, 3 };
+    static const u16 ws[4] = { 1, 2, 2, 3 };
     u16 distribution[ARRAY_COUNT(ws)];
 
     for (i = 0, sum = 0; i < ARRAY_COUNT(ws); i++)

@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Safety Goggles blocks damage from Hail")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_SAFETY_GOGGLES); };
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_SAFETY_GOGGLES); }
     } WHEN {
         TURN { MOVE(player, MOVE_HAIL); }
     } SCENE {
@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Safety Goggles blocks damage from Sandstorm")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_SAFETY_GOGGLES); };
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_SAFETY_GOGGLES); }
     } WHEN {
         TURN { MOVE(player, MOVE_SANDSTORM); }
     } SCENE {
@@ -46,8 +46,10 @@ SINGLE_BATTLE_TEST("Safety Goggles blocks damage from Sandstorm")
 
 SINGLE_BATTLE_TEST("Safety Goggles blocks Effect Spore's effect")
 {
+    KNOWN_FAILING;
     PASSES_RANDOMLY(100, 100, RNG_EFFECT_SPORE);
     GIVEN {
+        WITH_CONFIG(CONFIG_POWDER_GRASS, GEN_5); // Setting it to Gen 6 causes it to pass
         ASSUME(MoveMakesContact(MOVE_SCRATCH));
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_SAFETY_GOGGLES); }
         OPPONENT(SPECIES_BRELOOM) { Ability(ABILITY_EFFECT_SPORE); }

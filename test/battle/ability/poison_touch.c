@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Poison Touch has a 30% chance to poison when attacking with 
 
 SINGLE_BATTLE_TEST("Poison Touch only applies when using contact moves")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_SCRATCH; }
     PARAMETRIZE { move = MOVE_SWIFT; }
@@ -54,11 +54,11 @@ SINGLE_BATTLE_TEST("Poison Touch only applies when using contact moves")
 SINGLE_BATTLE_TEST("Poison Touch applies between multi-hit move hits")
 {
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_ARM_THRUST) == EFFECT_MULTI_HIT);
+        ASSUME(IsMultiHitMove(MOVE_ARM_THRUST));
         ASSUME(MoveMakesContact(MOVE_ARM_THRUST));
         ASSUME(gItemsInfo[ITEM_PECHA_BERRY].holdEffect == HOLD_EFFECT_CURE_PSN);
         PLAYER(SPECIES_GRIMER) { Ability(ABILITY_POISON_TOUCH); }
-        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_PECHA_BERRY); };
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_PECHA_BERRY); }
     } WHEN {
         TURN { MOVE(player, MOVE_ARM_THRUST); }
     } SCENE {

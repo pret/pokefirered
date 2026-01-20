@@ -55,7 +55,7 @@ SINGLE_BATTLE_TEST("Steel Roller will fail if there is no Terrain")
 
 AI_SINGLE_BATTLE_TEST("Steel Roller wont be chosen by AI if there is no terrain on the field")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_ELECTRIC_TERRAIN; }
     PARAMETRIZE { move = MOVE_NONE; }

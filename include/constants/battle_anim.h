@@ -591,10 +591,12 @@
 #define B_ANIM_TERA_ACTIVATE            51
 #define B_ANIM_SIMPLE_HEAL              52
 #define B_ANIM_POWER_CONSTRUCT          53
+#define B_ANIM_SWAP_TO_SUBSTITUTE       54
+#define B_ANIM_SWAP_FROM_SUBSTITUTE     55
 // pokefirered
-#define B_ANIM_MON_SCARED               54
-#define B_ANIM_GHOST_GET_OUT            55
-#define B_ANIM_SILPH_SCOPED             56
+#define B_ANIM_MON_SCARED               56
+#define B_ANIM_GHOST_GET_OUT            57
+#define B_ANIM_SILPH_SCOPED             58
 #define B_ANIM_ROCK_THROW               (B_ANIM_SILPH_SCOPED    + 1)
 #define B_ANIM_SAFARI_REACTION          (B_ANIM_ROCK_THROW      + 1)
 

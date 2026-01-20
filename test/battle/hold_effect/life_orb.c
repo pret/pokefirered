@@ -1,6 +1,11 @@
 #include "global.h"
 #include "test/battle.h"
 
+ASSUMPTIONS
+{
+    ASSUME(gItemsInfo[ITEM_LIFE_ORB].holdEffect == HOLD_EFFECT_LIFE_ORB);
+}
+
 SINGLE_BATTLE_TEST("Life Orb activates when users attack is succesful")
 {
     GIVEN {
@@ -34,6 +39,7 @@ SINGLE_BATTLE_TEST("Life Orb activates if it hits a Substitute")
 SINGLE_BATTLE_TEST("Life Orb does not activate if using status move on a Substitute")
 {
     GIVEN {
+        ASSUME(MoveIgnoresSubstitute(MOVE_GROWL));
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LIFE_ORB); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -104,6 +110,7 @@ SINGLE_BATTLE_TEST("Life Orb does not activate if on a confusion hit")
 SINGLE_BATTLE_TEST("Life Orb does not activate if move was absorbed by target")
 {
     GIVEN {
+        WITH_CONFIG(CONFIG_REDIRECT_ABILITY_IMMUNITY, GEN_5);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_LIFE_ORB); }
         OPPONENT(SPECIES_RAICHU) { Ability(ABILITY_LIGHTNING_ROD); }
     } WHEN {
@@ -148,5 +155,34 @@ SINGLE_BATTLE_TEST("Life Orb does not activate on a charge turn")
         }
         HP_BAR(opponent);
         HP_BAR(player); // Lief Orb
+    }
+}
+
+DOUBLE_BATTLE_TEST("Life Orb activates if damage was inflicted by a dancer move through the dancer ability")
+{
+    GIVEN {
+        ASSUME(IsDanceMove(MOVE_FIERY_DANCE));
+        ASSUME(GetMoveEffect(MOVE_HEAL_BELL) == EFFECT_HEAL_BELL);
+        PLAYER(SPECIES_ORICORIO) { Speed(200); Ability(ABILITY_DANCER); Item(ITEM_LIFE_ORB); Status1(STATUS1_SLEEP); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(2); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(1); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_HEAL_BELL);
+            MOVE(opponentLeft, MOVE_FIERY_DANCE, target: playerLeft);
+        }
+    } SCENE {
+        NONE_OF {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, playerLeft);
+            HP_BAR(playerLeft); // Life Orb
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HEAL_BELL, playerRight);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FIERY_DANCE, opponentLeft);
+        HP_BAR(playerLeft);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FIERY_DANCE, playerLeft);
+        HP_BAR(opponentLeft);
+        HP_BAR(playerLeft); // Life Orb
     }
 }

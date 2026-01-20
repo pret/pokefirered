@@ -24,9 +24,9 @@ DOUBLE_BATTLE_TEST("Motor Drive absorbs moves that target all battlers but does 
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_DISCHARGE); }
     } SCENE {
+        ABILITY_POPUP(opponentRight, ABILITY_MOTOR_DRIVE);
         HP_BAR(opponentLeft);
         HP_BAR(playerRight);
         NOT HP_BAR(opponentRight);
-        ABILITY_POPUP(opponentRight, ABILITY_MOTOR_DRIVE);
     }
 }

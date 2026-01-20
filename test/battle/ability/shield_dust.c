@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Shield Dust blocks secondary effects")
 {
-    u16 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_NUZZLE; }
     PARAMETRIZE { move = MOVE_INFERNO; }
     PARAMETRIZE { move = MOVE_MORTAL_SPIN; }
@@ -42,7 +42,7 @@ SINGLE_BATTLE_TEST("Shield Dust blocks secondary effects")
 
 SINGLE_BATTLE_TEST("Shield Dust does not block primary effects")
 {
-    u16 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_INFESTATION; }
     PARAMETRIZE { move = MOVE_THOUSAND_ARROWS; }
     PARAMETRIZE { move = MOVE_JAW_LOCK; }
@@ -75,6 +75,8 @@ SINGLE_BATTLE_TEST("Shield Dust does not block primary effects")
             case MOVE_PAY_DAY:
                 MESSAGE("Coins were scattered everywhere!");
                 break;
+            default:
+                break;
         }
     } THEN { // Can't find good way to test trapping
         if (move == MOVE_JAW_LOCK) {
@@ -86,7 +88,7 @@ SINGLE_BATTLE_TEST("Shield Dust does not block primary effects")
 
 SINGLE_BATTLE_TEST("Shield Dust does not block self-targeting effects, primary or secondary")
 {
-    u16 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_POWER_UP_PUNCH; }
     PARAMETRIZE { move = MOVE_FLAME_CHARGE; }
     PARAMETRIZE { move = MOVE_LEAF_STORM; }
@@ -117,13 +119,15 @@ SINGLE_BATTLE_TEST("Shield Dust does not block self-targeting effects, primary o
             case MOVE_METEOR_ASSAULT: // second turn
                 MESSAGE("Wobbuffet must recharge!");
                 break;
+            default:
+                break;
         }
     }
 }
 
 DOUBLE_BATTLE_TEST("Shield Dust does or does not block Sparkling Aria depending on number of targets hit")
 {
-    u32 moveToUse;
+    enum Move moveToUse;
     PARAMETRIZE { moveToUse = MOVE_FINAL_GAMBIT; }
     PARAMETRIZE { moveToUse = MOVE_SCRATCH; }
     GIVEN {

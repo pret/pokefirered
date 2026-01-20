@@ -417,13 +417,13 @@ u32 UnpackSelectedBattlePalettes(s16 selector)
 
     switch (moveTarget)
     {
-    case MOVE_TARGET_BOTH:
+    case TARGET_BOTH:
         if (target)
         {
             targetPartner |= 1;
         }
         break;
-    case MOVE_TARGET_FOES_AND_ALLY:
+    case TARGET_FOES_AND_ALLY:
         if (target)
         {
             targetPartner |= 1;

@@ -11,11 +11,11 @@ SINGLE_BATTLE_TEST("Moody randomly raises the user's Attack, Defense, Sp. Atk, S
     // HP is not included
     PASSES_RANDOMLY(1, statsNum - 1, RNG_MOODY_INCREASE);
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_MOODY_STATS, config);
+        WITH_CONFIG(CONFIG_MOODY_ACC_EVASION, config);
         PLAYER(SPECIES_OCTILLERY) { Ability(ABILITY_MOODY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(player, ABILITY_MOODY);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
@@ -36,11 +36,11 @@ SINGLE_BATTLE_TEST("Moody randomly lowers the user's Attack, Defense, Sp. Atk, S
     // One stat becomes unavailable due to it already increasing
     PASSES_RANDOMLY(1, statsNum - 2, RNG_MOODY_DECREASE);
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_MOODY_STATS, config);
+        WITH_CONFIG(CONFIG_MOODY_ACC_EVASION, config);
         PLAYER(SPECIES_OCTILLERY) { Ability(ABILITY_MOODY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(player, ABILITY_MOODY);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
@@ -60,11 +60,11 @@ SINGLE_BATTLE_TEST("Moody randomly raises the holder's Attack, Defense, Sp. Atk,
 
     PASSES_RANDOMLY(statsNum - 1, statsNum - 1, RNG_MOODY_DECREASE);
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_MOODY_STATS, config);
+        WITH_CONFIG(CONFIG_MOODY_ACC_EVASION, config);
         PLAYER(SPECIES_OCTILLERY) { Ability(ABILITY_MOODY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(player, ABILITY_MOODY);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);

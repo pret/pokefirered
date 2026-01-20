@@ -1,4 +1,5 @@
 #include "global.h"
+#include "overworld.h"
 #include "test/battle.h"
 #include "constants/item_effects.h"
 
@@ -262,12 +263,13 @@ SINGLE_BATTLE_TEST("Max Mushrooms raises battler's Speed stat", s16 damage)
 SINGLE_BATTLE_TEST("Using X items in battle raises Friendship", s16 damage)
 {
     u32 startingFriendship;
-    u8 metLocation = MAPSEC_NONE;
+    u8 metLocation = GetCurrentRegionMapSectionId() + 1;
+
     PARAMETRIZE { startingFriendship = 0; }
     PARAMETRIZE { startingFriendship = X_ITEM_MAX_FRIENDSHIP; }
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { Friendship(startingFriendship); };
-        // Set met location to MAPSEC_NONE to avoid getting the friendship boost
+        PLAYER(SPECIES_WOBBUFFET) { Friendship(startingFriendship); }
+        // Set met location to currentMapSec + 1 to avoid getting the friendship boost
         // from being met in the current map section
         SetMonData(&PLAYER_PARTY[0], MON_DATA_MET_LOCATION, &metLocation);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -278,5 +280,27 @@ SINGLE_BATTLE_TEST("Using X items in battle raises Friendship", s16 damage)
             EXPECT_EQ(player->friendship, X_ITEM_MAX_FRIENDSHIP);
         else
             EXPECT_EQ(player->friendship, X_ITEM_FRIENDSHIP_INCREASE);
+    }
+}
+
+SINGLE_BATTLE_TEST("Using X items in battle where Pokemon was met raises Friendship with a bonus", s16 damage)
+{
+    u32 startingFriendship;
+    u8 metLocation = GetCurrentRegionMapSectionId();
+
+    PARAMETRIZE { startingFriendship = 0; }
+    PARAMETRIZE { startingFriendship = X_ITEM_MAX_FRIENDSHIP; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Friendship(startingFriendship); }
+        // Set met location to currentMapSec to get the friendship boost
+        SetMonData(&PLAYER_PARTY[0], MON_DATA_MET_LOCATION, &metLocation);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { USE_ITEM(player, ITEM_X_ACCURACY); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        if (startingFriendship == X_ITEM_MAX_FRIENDSHIP)
+            EXPECT_EQ(player->friendship, X_ITEM_MAX_FRIENDSHIP);
+        else
+            EXPECT_EQ(player->friendship, (ITEM_FRIENDSHIP_MAPSEC_BONUS + X_ITEM_FRIENDSHIP_INCREASE));
     }
 }

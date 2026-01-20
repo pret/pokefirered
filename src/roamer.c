@@ -3,6 +3,7 @@
 #include "overworld.h"
 #include "random.h"
 #include "roamer.h"
+#include "ow_synchronize.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 
@@ -108,9 +109,13 @@ void MoveAllRoamers(void)
 
 void CreateInitialRoamerMon(u32 index, u32 species, u32 level)
 {
-    struct Pokemon * mon = &gEnemyParty[0];
+    struct Pokemon *mon = &gEnemyParty[0];
     ClearRoamerLocationHistory(index);
-    CreateMon(mon, species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    u32 personality = GetMonPersonality(species,
+        GetSynchronizedGender(ROAMER_ORIGIN, species),
+        GetSynchronizedNature(ROAMER_ORIGIN, species),
+        RANDOM_UNOWN_LETTER);
+    CreateMonWithIVs(mon, species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
     ROAMER(index)->species = species;
     ROAMER(index)->level = level;
     ROAMER(index)->statusA = 0;

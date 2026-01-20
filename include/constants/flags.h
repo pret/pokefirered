@@ -1551,7 +1551,7 @@
 #define TESTING_FLAGS_START                     0x5000
 #define TESTING_FLAG_SLEEP_CLAUSE               (TESTING_FLAGS_START + 0x0)
 #define TESTING_FLAG_INVERSE_BATTLE             (TESTING_FLAGS_START + 0x1)
-#define TESTING_FLAG_UNUSED_2                   (TESTING_FLAGS_START + 0x2)
+#define TESTING_FLAG_TRAINER_SLIDES             (TESTING_FLAGS_START + 0x2)
 #define TESTING_FLAG_UNUSED_3                   (TESTING_FLAGS_START + 0x3)
 #define TESTING_FLAG_UNUSED_4                   (TESTING_FLAGS_START + 0x4)
 #define TESTING_FLAG_UNUSED_5                   (TESTING_FLAGS_START + 0x5)

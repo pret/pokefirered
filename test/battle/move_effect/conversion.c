@@ -8,3 +8,16 @@ TO_DO_BATTLE_TEST("Conversion fails if all the user's moves share types with the
 TO_DO_BATTLE_TEST("Conversion changes the user's types to the one in the user's first slot (Gen 6+)");
 TO_DO_BATTLE_TEST("Conversion can read the user's first move slot even if that move cannot be selected (Gen 6+)"); //Eg. Disable
 TO_DO_BATTLE_TEST("Conversion can change the user's types to Conversion's type");
+
+SINGLE_BATTLE_TEST("(TERA) Conversion fails if used by a Terastallized Pokemon")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_PSYCHIC); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CONVERSION, gimmick: GIMMICK_TERA); }
+    } SCENE {
+        MESSAGE("Wobbuffet used Conversion!");
+        MESSAGE("But it failed!");
+    }
+}

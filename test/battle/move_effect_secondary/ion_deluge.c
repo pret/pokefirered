@@ -70,7 +70,7 @@ SINGLE_BATTLE_TEST("Plasma Fists does not set up Ion Deluge if it does not conne
 SINGLE_BATTLE_TEST("Plasma Fists type-changing effect does not override Pixilate")
 {
     GIVEN {
-        PLAYER(SPECIES_KRABBY) { Speed(300); };
+        PLAYER(SPECIES_KRABBY) { Speed(300); }
         OPPONENT(SPECIES_SYLVEON) { Speed(1); Ability(ABILITY_PIXILATE); }
     } WHEN {
         TURN { MOVE(player, MOVE_PLASMA_FISTS); MOVE(opponent, MOVE_SCRATCH); }

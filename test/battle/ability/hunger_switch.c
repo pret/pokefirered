@@ -42,7 +42,7 @@ SINGLE_BATTLE_TEST("Hunger Switch does not switch Morpeko's form when Terastalli
         PLAYER(SPECIES_MORPEKO) { Ability(ABILITY_HUNGER_SWITCH); TeraType(TYPE_NORMAL); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { }
+        TURN {}
         TURN { MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_TERA); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE, player);
@@ -59,7 +59,7 @@ SINGLE_BATTLE_TEST("Hunger Switch does not switch Morpeko's form after switching
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { }
+        TURN {}
         TURN { MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_ROAR); }
         TURN { SWITCH(player, 0); }
     } SCENE {

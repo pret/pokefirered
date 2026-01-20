@@ -10,8 +10,10 @@ ASSUMPTIONS
 // Pretty much copy/paste of the Berry Fling Test.
 SINGLE_BATTLE_TEST("Bug Bite eats the target's berry and immediately gains its effect")
 {
-    u16 item = ITEM_NONE;
-    u32 status1 = STATUS1_NONE, effect = HOLD_EFFECT_NONE, statId = 0;
+    enum Item item = ITEM_NONE;
+    u32 status1 = STATUS1_NONE;
+    enum HoldEffect effect = HOLD_EFFECT_NONE;
+    enum Stat statId = STAT_HP;
 
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_ORAN_BERRY; effect = HOLD_EFFECT_RESTORE_HP; }
@@ -120,7 +122,7 @@ SINGLE_BATTLE_TEST("Tanga Berry activates before Bug Bite")
         ASSUME(gItemsInfo[ITEM_TANGA_BERRY].holdEffect == HOLD_EFFECT_RESIST_BERRY);
         ASSUME(gItemsInfo[ITEM_TANGA_BERRY].holdEffectParam == TYPE_BUG);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) {Item(ITEM_TANGA_BERRY); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_TANGA_BERRY); }
     } WHEN {
         TURN { MOVE(player, MOVE_BUG_BITE); }
     } SCENE {

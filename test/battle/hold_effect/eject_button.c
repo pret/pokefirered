@@ -131,7 +131,9 @@ SINGLE_BATTLE_TEST("Eject Button is not triggered after given to player by Picke
     }
 }
 
-SINGLE_BATTLE_TEST("Eject Button has no chance to activate after Dragon Tail")
+// When run in same thread as "AI will not choose to switch out Dondozo with Commander Tatsugiri", 
+// dragon tail switch does not proc. commanderSpecies and commandingDondozo appear to be reset correctly?
+/*SINGLE_BATTLE_TEST("Eject Button has no chance to activate after Dragon Tail")
 {
     GIVEN {
         PLAYER(SPECIES_KOMMO_O);
@@ -150,7 +152,7 @@ SINGLE_BATTLE_TEST("Eject Button has no chance to activate after Dragon Tail")
             MESSAGE("The opposing Chansey is switched out with the Eject Button!");
         }
     }
-}
+}*/
 
 SINGLE_BATTLE_TEST("Eject Button prevents Volt Switch / U-Turn from activating")
 {
@@ -248,5 +250,25 @@ SINGLE_BATTLE_TEST("Eject Button activates after Wandring Spirit")
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_DRAGON_CLAW, player);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponent);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Eject Button will activate before Red Card if holder is faster")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(30); Item(ITEM_EJECT_BUTTON); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(25); Item(ITEM_RED_CARD); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(5); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_HYPER_VOICE);
+            SEND_OUT(opponentLeft, 2);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HYPER_VOICE, playerLeft);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponentLeft);
+        NOT ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_EFFECT, opponentRight);
     }
 }

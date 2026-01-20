@@ -89,7 +89,7 @@ DOUBLE_BATTLE_TEST("After You calculates correct turn order if only one Pokémon
 DOUBLE_BATTLE_TEST("After You fails if the turn order remains the same after After You (Gen5-7)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_AFTER_YOU_TURN_ORDER, GEN_7);
+        WITH_CONFIG(CONFIG_AFTER_YOU_TURN_ORDER, GEN_7);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
         PLAYER(SPECIES_WYNAUT) { Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
@@ -114,7 +114,7 @@ DOUBLE_BATTLE_TEST("After You fails if the turn order remains the same after Aft
 DOUBLE_BATTLE_TEST("After You doesn't fail if the turn order remains the same after After You (Gen8+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_AFTER_YOU_TURN_ORDER, GEN_8);
+        WITH_CONFIG(CONFIG_AFTER_YOU_TURN_ORDER, GEN_8);
         PLAYER(SPECIES_WOBBUFFET) { Speed(4); }
         PLAYER(SPECIES_WYNAUT) { Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }

@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Accuracy controls the proportion of misses")
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_DYNAMIC_PUNCH; }
     PARAMETRIZE { move = MOVE_THUNDER; }
     PARAMETRIZE { move = MOVE_HYDRO_PUMP; }
@@ -23,7 +23,8 @@ SINGLE_BATTLE_TEST("Accuracy controls the proportion of misses")
 
 SINGLE_BATTLE_TEST("AdditionalEffect.chance controls the proportion of secondary effects")
 {
-    u32 move, chance;
+    enum Move move;
+    u32 chance;
     PARAMETRIZE { move = MOVE_THUNDER_SHOCK; chance = 10; }
     PARAMETRIZE { move = MOVE_DISCHARGE; chance = 30; }
     PARAMETRIZE { move = MOVE_NUZZLE; chance = 100; }
@@ -142,7 +143,7 @@ SINGLE_BATTLE_TEST("Critical hits deal 100% (Gen 1-5) or 50% (Gen 6+) more damag
     PARAMETRIZE { criticalHit = TRUE;  genConfig = GEN_5; }
     PARAMETRIZE { criticalHit = TRUE;  genConfig = GEN_6; }
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_CRIT_MULTIPLIER, genConfig);
+        WITH_CONFIG(CONFIG_CRIT_MULTIPLIER, genConfig);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -157,7 +158,7 @@ SINGLE_BATTLE_TEST("Critical hits deal 100% (Gen 1-5) or 50% (Gen 6+) more damag
 
 SINGLE_BATTLE_TEST("Critical hits do not ignore positive stat stages", s16 damage)
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     PARAMETRIZE { move = MOVE_HOWL; }
     PARAMETRIZE { move = MOVE_TAIL_WHIP; }
@@ -178,7 +179,7 @@ SINGLE_BATTLE_TEST("Critical hits do not ignore positive stat stages", s16 damag
 
 SINGLE_BATTLE_TEST("Critical hits ignore negative stat stages", s16 damage)
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     PARAMETRIZE { move = MOVE_HARDEN; }
     PARAMETRIZE { move = MOVE_GROWL; }
@@ -273,7 +274,7 @@ DOUBLE_BATTLE_TEST("Moves do not fail if an alive partner is the target")
 DOUBLE_BATTLE_TEST("Moves fail if they target into a Pokémon that was fainted by the previous move")
 {
     GIVEN {
-        ASSUME(GetMoveTarget(MOVE_HYPER_VOICE) == MOVE_TARGET_BOTH);
+        ASSUME(GetMoveTarget(MOVE_HYPER_VOICE) == TARGET_BOTH);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
@@ -296,7 +297,7 @@ DOUBLE_BATTLE_TEST("Moves fail if they target into a Pokémon that was fainted b
 DOUBLE_BATTLE_TEST("Moves that target the field are not going to fail if one mon fainted by the previous move")
 {
     GIVEN {
-        ASSUME(GetMoveTarget(MOVE_SURF) == MOVE_TARGET_FOES_AND_ALLY);
+        ASSUME(GetMoveTarget(MOVE_SURF) == TARGET_FOES_AND_ALLY);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);

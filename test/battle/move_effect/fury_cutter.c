@@ -37,6 +37,51 @@ SINGLE_BATTLE_TEST("Fury Cutter's power doubles with each use, up to 160 power")
     }
 }
 
+SINGLE_BATTLE_TEST("Fury Cutter's base power resets if the chain has been broken")
+{
+    s16 damage[2];
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FURY_CUTTER); }
+        TURN { MOVE(opponent, MOVE_PROTECT); }
+        TURN { MOVE(player, MOVE_FURY_CUTTER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FURY_CUTTER, player);
+        HP_BAR(opponent, captureDamage: &damage[0]);
+
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_FURY_CUTTER, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, opponent);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FURY_CUTTER, player);
+        HP_BAR(opponent, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_EQ(damage[0], damage[1]);
+    }
+}
+
+SINGLE_BATTLE_TEST("Fury Cutter's base power resets if the it is used again but a different user switched in")
+{
+    s16 damage[2];
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FURY_CUTTER); }
+        TURN { SWITCH(player, 1); }
+        TURN { MOVE(player, MOVE_FURY_CUTTER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FURY_CUTTER, player);
+        HP_BAR(opponent, captureDamage: &damage[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FURY_CUTTER, player);
+        HP_BAR(opponent, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_EQ(damage[0], damage[1]);
+    }
+}
+
 TO_DO_BATTLE_TEST("Fury Cutter's power is reset if the user misses")
 TO_DO_BATTLE_TEST("Fury Cutter's power is reset if the user is switched out")
 TO_DO_BATTLE_TEST("Fury Cutter's power is reset if the trainer uses an item")
@@ -62,5 +107,25 @@ SINGLE_BATTLE_TEST("Fury Cutter counter is the same for both hits of Parental Bo
         EXPECT_MUL_EQ(damage[0], B_PARENTAL_BOND_DMG >= GEN_7 ? UQ_4_12(0.25) : UQ_4_12(0.5), damage[1]);
         EXPECT_MUL_EQ(damage[2], B_PARENTAL_BOND_DMG >= GEN_7 ? UQ_4_12(0.25) : UQ_4_12(0.5), damage[3]);
         EXPECT_NE(damage[0], damage[2]);
+    }
+}
+
+SINGLE_BATTLE_TEST("Fury Cutter's base power resets if original user is forced to switch out")
+{
+    s16 damage[2];
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_FURY_CUTTER); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_FURY_CUTTER); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_RED_CARD); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_FURY_CUTTER); }
+        TURN { MOVE(player, MOVE_FURY_CUTTER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FURY_CUTTER, player);
+        HP_BAR(opponent, captureDamage: &damage[0]);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FURY_CUTTER, player);
+        HP_BAR(opponent, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_EQ(damage[0], damage[1]);
     }
 }

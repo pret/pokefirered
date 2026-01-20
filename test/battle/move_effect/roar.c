@@ -20,6 +20,8 @@ SINGLE_BATTLE_TEST("Roar switches the target with a random non-fainted replaceme
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_ROAR, player);
         MESSAGE("The opposing Bulbasaur was dragged out!");
+    } THEN {
+        EXPECT_EQ(gLastUsedMove, MOVE_ROAR);
     }
 }
 

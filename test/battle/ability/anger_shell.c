@@ -73,7 +73,7 @@ SINGLE_BATTLE_TEST("Anger Shell activates after all hits from a multi-hit move")
     u32 j;
     u16 maxHp = 500;
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_DOUBLE_SLAP) == EFFECT_MULTI_HIT);
+        ASSUME(IsMultiHitMove(MOVE_DOUBLE_SLAP));
         PLAYER(SPECIES_KLAWF) { Ability(ABILITY_ANGER_SHELL); MaxHP(maxHp); HP(maxHp / 2 + 1); }
         OPPONENT(SPECIES_SHELLDER) { Ability(ABILITY_SKILL_LINK); } // Always hits 5 times.
     } WHEN {

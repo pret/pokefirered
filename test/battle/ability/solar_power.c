@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Solar Power increases a Sp. Attack by x1.5 in Sun", s16 damage)
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     PARAMETRIZE { move = MOVE_SUNNY_DAY; }
     GIVEN {
@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Solar Power increases a Sp. Attack by x1.5 in Sun", s16 dama
 
 SINGLE_BATTLE_TEST("Solar Power doesn't increases a Sp. Attack if Cloud Nine/Air Lock is on the field", s16 damage)
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     PARAMETRIZE { move = MOVE_SUNNY_DAY; }
     GIVEN {

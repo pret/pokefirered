@@ -17,7 +17,7 @@ struct TestRunner
     bool32 (*checkProgress)(void *);
     bool32 (*handleExitWithResult)(void *, enum TestResult);
     u32 (*randomUniform)(enum RandomTag tag, u32 lo, u32 hi, bool32 (*reject)(u32), void *caller);
-    u32 (*randomWeightedArray)(enum RandomTag tag, u32 sum, u32 n, const u8 *weights, void *caller);
+    u32 (*randomWeightedArray)(enum RandomTag tag, u32 sum, u32 n, const u16 *weights, void *caller);
     const void* (*randomElementArray)(enum RandomTag tag, const void *array, size_t size, size_t count, void *caller);
 };
 
@@ -37,6 +37,16 @@ enum TestFilterMode
     TEST_FILTER_MODE_FILENAME_EXACT,
 };
 
+enum ExpectFailState
+{
+    NO_EXPECT_FAIL,
+    EXPECT_FAIL_OPEN,
+    EXPECT_FAIL_TURN_OPEN,
+    EXPECT_FAIL_SCENE_OPEN,
+    EXPECT_FAIL_SUCCESS,
+    EXPECT_FAIL_CLOSED
+};
+
 struct TestRunnerState
 {
     u8 state;
@@ -53,6 +63,8 @@ struct TestRunnerState
     bool8 inBenchmark:1;
     bool8 tearDown:1;
     u32 timeoutSeconds;
+    s32 expectedFailLine;
+    enum ExpectFailState expectedFailState;
 };
 
 struct PersistentTestRunnerState
@@ -94,6 +106,7 @@ void CB2_TestRunner(void);
 void Test_ExpectedResult(enum TestResult);
 void Test_ExpectLeaks(bool32);
 void Test_ExpectCrash(bool32);
+void Test_ExpectFail(u32 failLine);
 u32 SourceLine(u32 sourceLineOffset);
 u32 SourceLineOffset(u32 sourceLine);
 void SetupRiggedRng(u32 sourceLine, enum RandomTag randomTag, u32 value);
@@ -241,6 +254,8 @@ static inline struct Benchmark BenchmarkStop(void)
 
 #define KNOWN_CRASHING \
     Test_ExpectCrash(TRUE)
+
+#define EXPECT_FAIL for (u32 _expect_fail = (Test_ExpectFail(-1), 1); _expect_fail; Test_ExpectFail(__LINE__), _expect_fail = 0)
 
 #define PARAMETRIZE if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter)
 

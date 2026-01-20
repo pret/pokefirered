@@ -10,7 +10,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Stuff Cheeks cannot be used if the user doesn't hold a berry")
 {
-    u16 item = 0;
+    enum Item item = ITEM_NONE;
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_LIECHI_BERRY; }
     GIVEN {

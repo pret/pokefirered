@@ -9,7 +9,7 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Synthesis recovers 1/2 of the user's max HP (Gen3+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
+        WITH_CONFIG(CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(200); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Synthesis recovers 1/2 of the user's max HP (Gen3+)")
 SINGLE_BATTLE_TEST("Synthesis recovers 2/3 of the user's max HP in Sunlight (Gen3+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
+        WITH_CONFIG(CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(300); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -34,13 +34,13 @@ SINGLE_BATTLE_TEST("Synthesis recovers 2/3 of the user's max HP in Sunlight (Gen
 
 SINGLE_BATTLE_TEST("Synthesis recovers 1/4 of the user's max HP in Rain, Sandstorm, Hail, and Snow (Gen3+)")
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_RAIN_DANCE; }
     PARAMETRIZE { move = MOVE_SANDSTORM; }
     PARAMETRIZE { move = MOVE_HAIL; }
     PARAMETRIZE { move = MOVE_SNOWSCAPE; }
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
+        WITH_CONFIG(CONFIG_TIME_OF_DAY_HEALING_MOVES, GEN_3);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -52,10 +52,11 @@ SINGLE_BATTLE_TEST("Synthesis recovers 1/4 of the user's max HP in Rain, Sandsto
 
 SINGLE_BATTLE_TEST("Synthesis recovers regular amount in sandstorm if holding utility umbrella")
 {
-    u32 item;
+    enum Item item;
     PARAMETRIZE { item = ITEM_LIFE_ORB; }
     PARAMETRIZE { item = ITEM_UTILITY_UMBRELLA; }
     GIVEN {
+        ASSUME(gItemsInfo[ITEM_UTILITY_UMBRELLA].holdEffect == HOLD_EFFECT_UTILITY_UMBRELLA);
         PLAYER(SPECIES_WOBBUFFET) { HP(1); MaxHP(400); Item(item); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

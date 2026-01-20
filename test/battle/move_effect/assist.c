@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Assist fails if there are no valid moves to choose from")
 
 SINGLE_BATTLE_TEST("Assisted move triggers correct weakness berry")
 {
-    u16 item;
+    enum Item item;
     PARAMETRIZE { item = ITEM_CHILAN_BERRY; }
     PARAMETRIZE { item = ITEM_PASSHO_BERRY; }
     GIVEN {

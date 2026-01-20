@@ -12,7 +12,7 @@ DOUBLE_BATTLE_TEST("Throat Spray activates after both hits of a spread move")
     s16 firstHit, secondHit;
 
     GIVEN {
-        ASSUME(GetMoveTarget(MOVE_HYPER_VOICE) == MOVE_TARGET_BOTH);
+        ASSUME(GetMoveTarget(MOVE_HYPER_VOICE) == TARGET_BOTH);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_THROAT_SPRAY); }
         PLAYER(SPECIES_WYNAUT);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Throat Spray increases Sp. Atk by one stage")
 
 SINGLE_BATTLE_TEST("Throat Spray activates when a sound move is used")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_SWIFT; }
     PARAMETRIZE { move = MOVE_HYPER_VOICE; }

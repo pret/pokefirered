@@ -1,6 +1,24 @@
 #include "global.h"
 #include "test/battle.h"
 
-TO_DO_BATTLE_TEST("Coil raises the user's Attack by 1 stage");
-TO_DO_BATTLE_TEST("Coil raises the user's Defense by 1 stage");
-TO_DO_BATTLE_TEST("Coil raises the user's Accuracy by 1 stage");
+ASSUMPTIONS
+{
+    ASSUME(GetMoveEffect(MOVE_COIL) == EFFECT_COIL);
+}
+
+SINGLE_BATTLE_TEST("Coil increases the user's Attack, Defense and Accuracy by 1 stage each")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_COIL); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_COIL, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, player);
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(player->statStages[STAT_ACC], DEFAULT_STAT_STAGE + 1);
+    }
+}

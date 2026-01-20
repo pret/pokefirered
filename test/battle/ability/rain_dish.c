@@ -2,7 +2,8 @@
 #include "test/battle.h"
 
 ASSUMPTIONS {
-    ASSUME(GetMoveEffect(MOVE_RAIN_DANCE) == EFFECT_RAIN_DANCE);
+    ASSUME(GetMoveEffect(MOVE_RAIN_DANCE) == EFFECT_WEATHER);
+    ASSUME(GetMoveWeatherType(MOVE_RAIN_DANCE) == BATTLE_WEATHER_RAIN);
 }
 
 SINGLE_BATTLE_TEST("Rain Dish recovers 1/16th of Max HP in Rain")

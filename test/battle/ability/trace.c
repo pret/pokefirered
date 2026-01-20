@@ -7,7 +7,7 @@ SINGLE_BATTLE_TEST("Trace copies opponents ability")
         PLAYER(SPECIES_RALTS) { Ability(ABILITY_TRACE); }
         OPPONENT(SPECIES_TORCHIC) { Ability(ABILITY_BLAZE); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(player, ABILITY_TRACE);
         MESSAGE("It traced the opposing Torchic's Blaze!");
@@ -48,7 +48,7 @@ DOUBLE_BATTLE_TEST("Trace copies opponents ability randomly")
 {
     enum Ability ability1, ability2;
 
-    PARAMETRIZE { ability1 = ABILITY_SPEED_BOOST; ability2 = ABILITY_BLAZE;}
+    PARAMETRIZE { ability1 = ABILITY_SPEED_BOOST; ability2 = ABILITY_BLAZE; }
     PARAMETRIZE { ability1 = ABILITY_BLAZE; ability2 = ABILITY_SPEED_BOOST; }
 
     PASSES_RANDOMLY(1, 2, RNG_TRACE);
@@ -58,7 +58,7 @@ DOUBLE_BATTLE_TEST("Trace copies opponents ability randomly")
         OPPONENT(SPECIES_TORCHIC) { Ability(ability1); }
         OPPONENT(SPECIES_TORCHIC) { Ability(ability2); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(playerLeft, ABILITY_TRACE);
         MESSAGE("It traced the opposing Torchic's Blaze!");
@@ -87,7 +87,7 @@ SINGLE_BATTLE_TEST("Trace copies opponent's Intimidate and triggers it immediate
         PLAYER(SPECIES_RALTS) { Ability(ABILITY_TRACE); }
         OPPONENT(SPECIES_MASQUERAIN) { Ability(ABILITY_INTIMIDATE); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(player, ABILITY_TRACE);
         ABILITY_POPUP(player, ABILITY_INTIMIDATE);
@@ -103,7 +103,7 @@ DOUBLE_BATTLE_TEST("Trace respects the turn order")
         OPPONENT(SPECIES_HIPPOWDON) { Speed(10); Ability(ABILITY_SAND_STREAM); }
         OPPONENT(SPECIES_DEOXYS_SPEED) { Speed(30); Ability(ABILITY_PRESSURE); }
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(playerLeft, ABILITY_PRESSURE);
         ABILITY_POPUP(opponentRight, ABILITY_PRESSURE);

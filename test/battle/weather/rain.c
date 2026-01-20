@@ -48,7 +48,7 @@ SINGLE_BATTLE_TEST("Rain multiplies the power of Water-type moves by 1.5x", s16 
 
 SINGLE_BATTLE_TEST("Drizzle fails if Desolate Land is active")
 {
-    u32 item;
+    enum Item item;
 
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_RED_ORB; }

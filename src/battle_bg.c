@@ -20,6 +20,7 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "test_runner.h"
 #include "text_window.h"
 #include "trig.h"
 #include "window.h"
@@ -651,7 +652,7 @@ static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
 
 static const void* const sSeasonBattleBackgrounds[BATTLE_ENVIRONMENT_COUNT][SEASON_WINTER + 1] =
 {
-    [BATTLE_ENVIRONMENT_GRASS] = 
+    [BATTLE_ENVIRONMENT_GRASS] =
     {
         [SEASON_SPRING] = &gBattleEnvironmentPalette_Grass,
         [SEASON_SUMMER] = &gBattleEnvironmentPalette_GrassSummer,
@@ -1043,22 +1044,28 @@ void DrawBattleEntryBackground(void)
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_EREADER_TRAINER))
     {
-        // if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || gPartnerTrainerId > TRAINER_PARTNER(PARTNER_NONE))
-        // {
-        //     DecompressDataWithHeaderVram(gBattleEnvironmentAnimTiles_Building, (void *)(BG_CHAR_ADDR(1)));
-        //     DecompressDataWithHeaderVram(gBattleEnvironmentAnimTilemap_Building, (void *)(BG_SCREEN_ADDR(28)));
-        // }
-        // else
-        // {
-        //     // Set up bg for the multi battle intro where both teams slide in facing the screen.
-        //     // Note Steven's multi battle (which has a dedicated back pic) is excluded above.
-        //     SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 2);
-        //     SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 2);
-        //     CopyToBgTilemapBuffer(1, gMultiBattleIntroBg_Opponent_Tilemap, 0, 0);
-        //     CopyToBgTilemapBuffer(2, gMultiBattleIntroBg_Player_Tilemap, 0, 0);
-        //     CopyBgTilemapBufferToVram(1);
-        //     CopyBgTilemapBufferToVram(2);
-        // }
+        if (TestRunner_Battle_GetForcedEnvironment()
+         && gBattleEnvironmentInfo[gBattleEnvironment].background.tilemap
+         && gBattleEnvironmentInfo[gBattleEnvironment].background.tileset)
+        {
+            LoadBattleTerrainEntryGfx(gBattleEnvironment);
+        }
+        else if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || gPartnerTrainerId > TRAINER_PARTNER(PARTNER_NONE))
+        {
+            LoadBattleTerrainEntryGfx(BATTLE_ENVIRONMENT_BUILDING);
+        }
+        else
+        {
+            // Set up bg for the multi battle intro where both teams slide in facing the screen.
+            // Note Steven's multi battle (which has a dedicated back pic) is excluded above.
+            // SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 2);
+            // SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 2);
+            // CopyToBgTilemapBuffer(1, gMultiBattleIntroBg_Opponent_Tilemap, 0, 0);
+            // CopyToBgTilemapBuffer(2, gMultiBattleIntroBg_Player_Tilemap, 0, 0);
+            // CopyBgTilemapBufferToVram(1);
+            // CopyBgTilemapBufferToVram(2);
+            LoadBattleTerrainEntryGfx(BATTLE_ENVIRONMENT_BUILDING);
+        }
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
     {
@@ -1109,6 +1116,14 @@ void DrawBattleEntryBackground(void)
 static u8 GetBattleTerrainOverride(void)
 {
     u8 battleScene;
+
+    if (TestRunner_Battle_GetForcedEnvironment()
+     && gBattleEnvironmentInfo[gBattleEnvironment].background.tilemap
+     && gBattleEnvironmentInfo[gBattleEnvironment].background.tileset)
+    {
+        return gBattleEnvironment;
+    }
+
     if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER_TOWER | BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_RECORDED_LINK))
     {
         return BATTLE_ENVIRONMENT_LINK;

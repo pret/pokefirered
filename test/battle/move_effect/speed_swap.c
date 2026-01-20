@@ -35,7 +35,8 @@ SINGLE_BATTLE_TEST("Speed Swap doesn't swap user and target's speed modifiers")
     PARAMETRIZE { species = SPECIES_PSYDUCK;   ability = ABILITY_SWIFT_SWIM; move = MOVE_RAIN_DANCE;  } // x2.0
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_ROCK_POLISH) == EFFECT_SPEED_UP_2);
-        ASSUME(GetMoveEffect(MOVE_RAIN_DANCE) == EFFECT_RAIN_DANCE);
+        ASSUME(GetMoveEffect(MOVE_RAIN_DANCE) == EFFECT_WEATHER);
+        ASSUME(GetMoveWeatherType(MOVE_RAIN_DANCE) == BATTLE_WEATHER_RAIN);
         PLAYER(SPECIES_WOBBUFFET) { Speed(8); }
         OPPONENT(species) { Speed(10); Ability(ability); }
     }WHEN {

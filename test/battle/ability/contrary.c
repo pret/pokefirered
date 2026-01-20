@@ -246,7 +246,7 @@ AI_SINGLE_BATTLE_TEST("AI sees Contrary-effected moves correctly in MoveEffectIn
 {
     GIVEN{
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES | AI_FLAG_OMNISCIENT);
-        PLAYER(SPECIES_HERACROSS){
+        PLAYER(SPECIES_HERACROSS) {
             Level(44);
             HP(1);
             Speed(5);
@@ -254,7 +254,7 @@ AI_SINGLE_BATTLE_TEST("AI sees Contrary-effected moves correctly in MoveEffectIn
             Item(ITEM_LOADED_DICE);
             Moves(MOVE_PIN_MISSILE);
         }
-        OPPONENT(SPECIES_SERPERIOR){
+        OPPONENT(SPECIES_SERPERIOR) {
             Level(44);
             Speed(10);
             Nature(NATURE_TIMID);
@@ -262,11 +262,31 @@ AI_SINGLE_BATTLE_TEST("AI sees Contrary-effected moves correctly in MoveEffectIn
             Moves(MOVE_DRAGON_PULSE, MOVE_SPIN_OUT, MOVE_HIDDEN_POWER, MOVE_GLARE);
         }
     } WHEN {
-        TURN{
+        TURN {
             MOVE(player, MOVE_PIN_MISSILE);
             EXPECT_MOVE(opponent, MOVE_SPIN_OUT); // previously all 107, now sees speed can rise w/ Contrary
         }
     }
 }
 
-TO_DO_BATTLE_TEST("Contrary does not invert stat changes that have been Baton-passed")
+SINGLE_BATTLE_TEST("Contrary does not invert stat changes that have been Baton-passed")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_SWORDS_DANCE) == EFFECT_ATTACK_UP_2);
+        ASSUME(GetMoveEffect(MOVE_BATON_PASS) == EFFECT_BATON_PASS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_SNIVY) { Ability(ABILITY_CONTRARY); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SWORDS_DANCE); }
+        TURN { MOVE(opponent, MOVE_BATON_PASS); SEND_OUT(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SWORDS_DANCE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BATON_PASS, opponent);
+        MESSAGE("2 sent out Snivy!");
+    } THEN {
+        EXPECT_EQ(opponent->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 2);
+    }
+}
+
+TO_DO_BATTLE_TEST("Contrary inverts stat changes from X Attack and other stat-boosting items.")

@@ -4,9 +4,10 @@
 
 AI_DOUBLE_BATTLE_TEST("AI_FLAG_ATTACKS_PARTNER is willing to kill either the partner or the player")
 {
-    ASSUME(GetMoveTarget(MOVE_EARTHQUAKE) == MOVE_TARGET_FOES_AND_ALLY);
+    ASSUME(GetMoveTarget(MOVE_EARTHQUAKE) == TARGET_FOES_AND_ALLY);
 
-    u32 move, level;
+    enum Move move;
+    u32 level;
 
     PARAMETRIZE { move = MOVE_BRUTAL_SWING; level = 1; }
     PARAMETRIZE { move = MOVE_MIGHTY_CLEAVE; level = 1; }
@@ -26,12 +27,11 @@ AI_DOUBLE_BATTLE_TEST("AI_FLAG_ATTACKS_PARTNER is willing to kill either the par
         ASSUME(gSpeciesInfo[SPECIES_ZIGZAGOON].baseDefense == 41);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_ATTACKS_PARTNER);
         PLAYER(SPECIES_ZIGZAGOON) { Level(50); }
-        PLAYER(SPECIES_ZIGZAGOON) { Level(16); } 
+        PLAYER(SPECIES_ZIGZAGOON) { Level(16); }
         OPPONENT(SPECIES_ZIGZAGOON) { Level(50); Moves(move, MOVE_OVERDRIVE, MOVE_TACKLE); }
         OPPONENT(SPECIES_ZIGZAGOON) { Level(level); Moves(MOVE_CELEBRATE); }
     } WHEN {
-        TURN
-        { 
+        TURN {
             if (move == MOVE_MIGHTY_CLEAVE)
             {
                 if (level == 1)
@@ -46,7 +46,7 @@ AI_DOUBLE_BATTLE_TEST("AI_FLAG_ATTACKS_PARTNER is willing to kill either the par
                 else
                     EXPECT_MOVE(opponentLeft, MOVE_OVERDRIVE);
             }
-        } 
+        }
     }
 }
 
@@ -59,18 +59,16 @@ AI_DOUBLE_BATTLE_TEST("AI_FLAG_ATTACKS_PARTNER steps on its ally's weather")
 
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_ATTACKS_PARTNER);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(50); } 
-        PLAYER(SPECIES_WOBBUFFET) { Speed(50); } 
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(75); Moves(weather1, move1, MOVE_HEADBUTT); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(100); Moves(weather2, move2, MOVE_HEADBUTT); }
     } WHEN {
-        TURN
-        { 
+        TURN {
             EXPECT_MOVE(opponentLeft, weather1);
             EXPECT_MOVE(opponentRight, weather2);
         }
-        TURN
-        { 
+        TURN {
             EXPECT_MOVE(opponentLeft, move1);
             EXPECT_MOVE(opponentRight, weather2);
         }

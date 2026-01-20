@@ -18,7 +18,7 @@ SINGLE_BATTLE_TEST("Utility Umbrella blocks Sun damage modifiers", s16 damage)
     PARAMETRIZE { setupMove = MOVE_SUNNY_DAY; attackingMove = MOVE_WATER_GUN; heldItem = ITEM_NONE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(heldItem); };
+        OPPONENT(SPECIES_WOBBUFFET) { Item(heldItem); }
     } WHEN {
         TURN { MOVE(opponent, setupMove); }
         TURN { MOVE(player, attackingMove); }
@@ -40,7 +40,7 @@ SINGLE_BATTLE_TEST("Utility Umbrella blocks Rain damage modifiers", s16 damage)
     PARAMETRIZE { setupMove = MOVE_RAIN_DANCE; attackingMove = MOVE_WATER_GUN; heldItem = ITEM_NONE; }
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WOBBUFFET) { Item(heldItem); };
+        OPPONENT(SPECIES_WOBBUFFET) { Item(heldItem); }
     } WHEN {
         TURN { MOVE(opponent, setupMove); }
         TURN { MOVE(player, attackingMove); }

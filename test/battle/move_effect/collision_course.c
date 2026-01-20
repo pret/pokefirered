@@ -8,7 +8,7 @@ ASSUMPTIONS
 
 SINGLE_BATTLE_TEST("Collision Course damage is increased by 33 Percent if super effective", s16 damage)
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_HAMMER_ARM; }
     PARAMETRIZE { move = MOVE_COLLISION_COURSE; }
@@ -28,7 +28,7 @@ SINGLE_BATTLE_TEST("Collision Course damage is increased by 33 Percent if super 
 
 SINGLE_BATTLE_TEST("Collision Course does normal damage if not super effective", s16 damage)
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_HAMMER_ARM; }
     PARAMETRIZE { move = MOVE_COLLISION_COURSE; }

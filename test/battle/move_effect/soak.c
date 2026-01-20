@@ -11,7 +11,7 @@ TO_DO_BATTLE_TEST("Soak/Magic Powder changes the target's type to pure Water/Psy
 
 SINGLE_BATTLE_TEST("Soak/Magic Powder's type change is overwitten if the target changes form")
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_SOAK; }
     PARAMETRIZE { move = MOVE_MAGIC_POWDER; }
     GIVEN {
@@ -28,6 +28,7 @@ SINGLE_BATTLE_TEST("Soak/Magic Powder's type change is overwitten if the target 
         switch (move) {
             case MOVE_SOAK:         MESSAGE("Mimikyu transformed into the Water type!"); break;
             case MOVE_MAGIC_POWDER: MESSAGE("Mimikyu transformed into the Psychic type!"); break;
+            default: break;
         }
         // Turn 2
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);

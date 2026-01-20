@@ -23,11 +23,14 @@ SINGLE_BATTLE_TEST("Frostbite reduces the special attack by 50 percent")
    } THEN { EXPECT_EQ(reducedDamage * 2, normaleDamage); }
 }
 
-SINGLE_BATTLE_TEST("Frostbite deals 1/16th (Gen7+) or 1/8th damage to affected Pokémon")
+SINGLE_BATTLE_TEST("Frostbite deals 1/8th damage (Gen1-6) or 1/16th (Gen7+) per turn")
 {
     s16 frostbiteDamage;
-
+    u32 config, value;
+    PARAMETRIZE { config = GEN_7; value = 16; }
+    PARAMETRIZE { config = GEN_6; value = 8; }
     GIVEN {
+        WITH_CONFIG(CONFIG_BURN_DAMAGE, config);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_FROSTBITE); }
     } WHEN {
@@ -36,12 +39,14 @@ SINGLE_BATTLE_TEST("Frostbite deals 1/16th (Gen7+) or 1/8th damage to affected P
         MESSAGE("The opposing Wobbuffet was hurt by its frostbite!");
         ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_FRB, opponent);
         HP_BAR(opponent, captureDamage: &frostbiteDamage);
-   } THEN { EXPECT_EQ(frostbiteDamage, opponent->maxHP / ((B_BURN_DAMAGE >= GEN_7) ? 16 : 8)); }
+    } THEN {
+        EXPECT_EQ(frostbiteDamage, opponent->maxHP / value);
+    }
 }
 
 SINGLE_BATTLE_TEST("Frostbite is healed if hit with a thawing move")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_FLAME_WHEEL; }
     PARAMETRIZE { move = MOVE_SACRED_FIRE; }
@@ -68,7 +73,7 @@ SINGLE_BATTLE_TEST("Frostbite is healed if hit with a thawing move")
 
 SINGLE_BATTLE_TEST("Frostbite is healed when the user uses a thawing move")
 {
-    u32 move;
+    enum Move move;
 
     PARAMETRIZE { move = MOVE_FLAME_WHEEL; }
     PARAMETRIZE { move = MOVE_SACRED_FIRE; }

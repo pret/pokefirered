@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Captivate decreases the target's Sp. Attack if they're oppos
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_STATS_CHANGE, opponent);
         MESSAGE("The opposing Nidoking's Sp. Atk harshly fell!");
     } THEN {
-        EXPECT(opponent->statStages[STAT_SPATK] == 4);
+        EXPECT(opponent->statStages[STAT_SPATK] == DEFAULT_STAT_STAGE - 2);
     }
 }
 
@@ -35,7 +35,7 @@ SINGLE_BATTLE_TEST("Captivate fails if the target and user share gender")
     } SCENE {
         MESSAGE("But it failed!");
     } THEN {
-        EXPECT(opponent->statStages[STAT_SPATK] == 6);
+        EXPECT(opponent->statStages[STAT_SPATK] == DEFAULT_STAT_STAGE);
     }
 }
 
@@ -49,7 +49,7 @@ SINGLE_BATTLE_TEST("Captivate fails if the target is genderless")
     } SCENE {
         MESSAGE("But it failed!");
     } THEN {
-        EXPECT(opponent->statStages[STAT_SPATK] == 6);
+        EXPECT(opponent->statStages[STAT_SPATK] == DEFAULT_STAT_STAGE);
     }
 }
 

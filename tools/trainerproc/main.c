@@ -19,6 +19,7 @@
 #define PARTY_SIZE 255
 #define MAX_MON_MOVES 4
 #define MAX_MON_TAGS 32
+#define STARTING_STATUS_COUNT 64
 
 struct String
 {
@@ -114,7 +115,7 @@ struct Trainer
     struct String encounter_music;
     int encounter_music_line;
 
-    enum Gender gender;
+    struct String gender;
     int gender_line;
 
     struct String pic;
@@ -132,7 +133,8 @@ struct Trainer
     struct String mugshot;
     int mugshot_line;
 
-    struct String starting_status;
+    struct String starting_status[STARTING_STATUS_COUNT];
+    int starting_status_n;
     int starting_status_line;
 
     struct String difficulty;
@@ -1204,8 +1206,7 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
             if (trainer->gender_line)
                 any_error = !set_show_parse_error(p, key.location, "duplicate 'Gender'");
             trainer->gender_line = value.location.line;
-            if (!token_gender(p, &value, &trainer->gender))
-                any_error = !show_parse_error(p);
+            trainer->gender = token_string(&value);
         }
         else if (is_literal_token(&key, "Pic"))
         {
@@ -1251,7 +1252,8 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
             if (trainer->starting_status_line)
                 any_error = !set_show_parse_error(p, key.location, "duplicate 'Starting Status'");
             trainer->starting_status_line = value.location.line;
-            trainer->starting_status = token_string(&value);
+            if (!token_human_identifiers(p, &value, trainer->starting_status, &trainer->starting_status_n, STARTING_STATUS_COUNT))
+                any_error = !show_parse_error(p);
         }
         else if (is_literal_token(&key, "Difficulty"))
         {
@@ -1660,6 +1662,38 @@ static void fprint_constant(FILE *f, const char *prefix, struct String s)
     }
 }
 
+static void fprint_symbol(FILE *f, struct String s)
+{
+    if (s.string_n > 0)
+    {
+        bool upper = false;
+        for (int i = 0; i < s.string_n; i++)
+        {
+            unsigned char c = s.string[i];
+            if ('A' <= c && c <= 'Z')
+            {
+                if (upper)
+                {
+                    fputc(c, f);
+                    upper = false;
+                    continue;
+                }
+                fputc(c + 'a' - 'A', f);
+            }
+            else if (('a' <= c && c <= 'z') || ('0' <= c && c <= '9'))
+                fputc(c, f);
+            else if (c == '\'')
+                ;
+            else
+                upper = true;
+        }
+    }
+    else
+    {
+        fprintf(f, "NONE");
+    }
+}
+
 // This is a really stupid helper for 'fprint_species'.
 static bool is_utf8_character(struct String s, int *i, const unsigned char *utf8)
 {
@@ -1790,23 +1824,21 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             fprintf(f, ",\n");
         }
 
-        fprintf(f, "        .encounterMusic_gender =\n");
-        if (trainer->gender == GENDER_FEMALE)
+        if (!is_empty_string(trainer->gender))
         {
             fprintf(f, "#line %d\n", trainer->gender_line);
-            fprintf(f, "F_TRAINER_FEMALE | \n");
+            fprintf(f, "        .gender = ");
+            fprint_constant(f, "TRAINER_GENDER", trainer->gender);
+            fprintf(f, ",\n");
         }
+
         if (!is_empty_string(trainer->encounter_music))
         {
             fprintf(f, "#line %d\n", trainer->encounter_music_line);
-            fprintf(f, "            ");
+            fprintf(f, "        .encounterMusic = ");
             fprint_constant(f, "TRAINER_ENCOUNTER_MUSIC", trainer->encounter_music);
+            fprintf(f, ",\n");
         }
-        else
-        {
-            fprintf(f, "0");
-        }
-        fprintf(f, ",\n");
 
         if (trainer->items_n > 0)
         {
@@ -1852,12 +1884,17 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             fprintf(f, ",\n");
         }
 
-        if (!is_empty_string(trainer->starting_status))
+        if (trainer->starting_status_n > 0)
         {
             fprintf(f, "#line %d\n", trainer->starting_status_line);
-            fprintf(f, "        .startingStatus = ");
-            fprint_constant(f, "STARTING_STATUS", trainer->starting_status);
-            fprintf(f, ",\n");
+            fprintf(f, "        .startingStatus = { ");
+            for (int i = 0; i < trainer->starting_status_n; i++)
+            {
+                fprintf(f, ".");
+                fprint_symbol(f, trainer->starting_status[i]);
+                fprintf(f, " = TRUE, ");
+            }
+            fprintf(f, "},\n");
         }
 
         if (!is_empty_string(trainer->pool_rules))
@@ -1905,7 +1942,7 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             fprint_constant(f, "TRAINER_PIC", trainer->pic);
             fprintf(f, ",\n");
         }
-        
+
         if (trainer->macro_line)
         {
             fprintf(f, "#line %d\n", trainer->macro_line);

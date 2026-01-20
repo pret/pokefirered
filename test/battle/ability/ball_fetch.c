@@ -3,7 +3,7 @@
 
 WILD_BATTLE_TEST("Ball Fetch causes the Pokémon to pick up the last failed Ball at the end of the turn")
 {
-    u32 item = 0;
+    enum Item item = ITEM_NONE;
 
     PARAMETRIZE { item = ITEM_POKE_BALL; }
     PARAMETRIZE { item = ITEM_GREAT_BALL; }
@@ -15,7 +15,7 @@ WILD_BATTLE_TEST("Ball Fetch causes the Pokémon to pick up the last failed Ball
         PLAYER(SPECIES_YAMPER) { Ability(ABILITY_BALL_FETCH); }
         OPPONENT(SPECIES_METAGROSS);
     } WHEN {
-        TURN { USE_ITEM(player, item, WITH_RNG(RNG_BALLTHROW_SHAKE, MAX_u16) );}
+        TURN { USE_ITEM(player, item, WITH_RNG(RNG_BALLTHROW_SHAKE, MAX_u16)); }
         TURN {}
     } SCENE {
         if (item != ITEM_X_ACCURACY)
@@ -32,7 +32,7 @@ WILD_BATTLE_TEST("Ball Fetch causes the Pokémon to pick up the last failed Ball
 
 WILD_BATTLE_TEST("Ball Fetch doesn't trigger if the Pokémon is already holding an item")
 {
-    u32 item = 0;
+    enum Item item = ITEM_NONE;
 
     PARAMETRIZE { item = ITEM_NONE; }
     PARAMETRIZE { item = ITEM_NUGGET; }
@@ -51,8 +51,7 @@ WILD_BATTLE_TEST("Ball Fetch doesn't trigger if the Pokémon is already holding 
         }
         else
         {
-            NONE_OF 
-            {
+            NONE_OF {
                 ABILITY_POPUP(player, ABILITY_BALL_FETCH);
                 MESSAGE("Yamper found a Great Ball!");
             }
@@ -67,14 +66,14 @@ WILD_BATTLE_TEST("Ball Fetch doesn't trigger if the Pokémon is already holding 
 
 WILD_BATTLE_TEST("Ball Fetch only picks up the first failed ball, once per battle")
 {
-    u32 item = 0;
-    u32 item2 = 0;
+    enum Item item = ITEM_NONE;
+    enum Item item2 = ITEM_NONE;
 
     PARAMETRIZE { item = ITEM_GREAT_BALL; item2 = ITEM_X_ACCURACY; }
     PARAMETRIZE { item = ITEM_GREAT_BALL; item2 = ITEM_ULTRA_BALL; }
     PARAMETRIZE { item = ITEM_GREAT_BALL; item2 = ITEM_FAST_BALL; }
     PARAMETRIZE { item = ITEM_GREAT_BALL; item2 = ITEM_STRANGE_BALL; }
-    
+
 
     GIVEN {
         PLAYER(SPECIES_YAMPER) { Ability(ABILITY_BALL_FETCH); }
@@ -98,7 +97,7 @@ WILD_BATTLE_TEST("Ball Fetch only picks up the first failed ball, once per battl
 
 SINGLE_BATTLE_TEST("Ball Fetch doesn't trigger in Trainer Battles")
 {
-    u32 item = 0;
+    enum Item item = ITEM_NONE;
 
     PARAMETRIZE { item = ITEM_POKE_BALL; }
     PARAMETRIZE { item = ITEM_GREAT_BALL; }

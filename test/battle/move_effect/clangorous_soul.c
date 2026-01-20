@@ -5,7 +5,7 @@ SINGLE_BATTLE_TEST("Clangorous Soul cuts the user's HP by 1/3")
 {
     s16 dmg;
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { HP(300); MaxHP(300); };
+        PLAYER(SPECIES_WOBBUFFET) { HP(300); MaxHP(300); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_CLANGOROUS_SOUL); }
@@ -21,7 +21,7 @@ SINGLE_BATTLE_TEST("Clangorous Soul cuts the user's HP by 1/3")
 SINGLE_BATTLE_TEST("Clangorous Soul raises the user's Atk, Def, Sp. Atk. Sp. Def and Speed by 1 stage")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { HP(300); MaxHP(300); };
+        PLAYER(SPECIES_WOBBUFFET) { HP(300); MaxHP(300); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_CLANGOROUS_SOUL); }
@@ -40,7 +40,7 @@ SINGLE_BATTLE_TEST("Clangorous Soul raises the user's Atk, Def, Sp. Atk. Sp. Def
 SINGLE_BATTLE_TEST("Clangorous Soul fails if the user's HP is less or equal than 1/3")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(300); };
+        PLAYER(SPECIES_WOBBUFFET) { HP(100); MaxHP(300); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_CLANGOROUS_SOUL); }

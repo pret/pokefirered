@@ -19,5 +19,27 @@ SINGLE_BATTLE_TEST("Endeavor causes the target's HP to equal the user's current 
         EXPECT_EQ(player->hp, opponent->hp);
     }
 }
-TO_DO_BATTLE_TEST("Endeavor does not change HP if the target has less HP than the user, but still plays the animation")
-TO_DO_BATTLE_TEST("Endeavor fails on Ghost-type Pokémon");
+
+SINGLE_BATTLE_TEST("Endeavor fails on Ghost-type Pokémon")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_GASTLY);
+    } WHEN {
+        TURN { MOVE(player, MOVE_ENDEAVOR); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ENDEAVOR, player);
+    }
+}
+
+SINGLE_BATTLE_TEST("Endeavor fails to change HP if the target has less HP than the user")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(9); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ENDEAVOR); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_ENDEAVOR, player);
+    }
+}

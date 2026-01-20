@@ -25,7 +25,7 @@ SINGLE_BATTLE_TEST("Sleep prevents the battler from using a move")
 SINGLE_BATTLE_TEST("Sleep: Spore affects grass types (Gen1-5)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_POWDER_GRASS, GEN_5);
+        WITH_CONFIG(CONFIG_POWDER_GRASS, GEN_5);
         ASSUME(IsPowderMove(MOVE_SPORE));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_CHIKORITA);
@@ -39,7 +39,7 @@ SINGLE_BATTLE_TEST("Sleep: Spore affects grass types (Gen1-5)")
 SINGLE_BATTLE_TEST("Sleep: Spore doesn't affect grass types (Gen6+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_POWDER_GRASS, GEN_6);
+        WITH_CONFIG(CONFIG_POWDER_GRASS, GEN_6);
         ASSUME(IsPowderMove(MOVE_SPORE));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_CHIKORITA);

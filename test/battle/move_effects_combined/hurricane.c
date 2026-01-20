@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Hurricane bypasses accuracy checks in Rain")
 
 SINGLE_BATTLE_TEST("Hurricane can hit airborne targets (Fly, Bounce)")
 {
-    u16 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_FLY; }
     PARAMETRIZE { move = MOVE_BOUNCE; }
     GIVEN {

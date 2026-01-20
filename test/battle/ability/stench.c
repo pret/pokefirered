@@ -63,7 +63,7 @@ DOUBLE_BATTLE_TEST("Stench doesn't trigger if partner uses a move")
         PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
         PLAYER(SPECIES_WYNAUT) { Speed(10); }
         OPPONENT(SPECIES_GRIMER) { Speed(100); Ability(ABILITY_STENCH); }
-        OPPONENT(SPECIES_WOBBUFFET) {Speed(50); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
     } WHEN {
         TURN {
             MOVE(playerLeft, MOVE_FAKE_OUT, target: opponentLeft);

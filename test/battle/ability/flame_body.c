@@ -3,7 +3,7 @@
 
 SINGLE_BATTLE_TEST("Flame Body inflicts burn on contact")
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_SCRATCH; }
     PARAMETRIZE { move = MOVE_SWIFT; }
     GIVEN {
@@ -30,11 +30,14 @@ SINGLE_BATTLE_TEST("Flame Body inflicts burn on contact")
     }
 }
 
-SINGLE_BATTLE_TEST("Flame Body triggers 30% of the time")
+SINGLE_BATTLE_TEST("Flame Body triggers 1/3 times (Gen3) or 30% (Gen 4+) of the time")
 {
-    PASSES_RANDOMLY(3, 10, RNG_FLAME_BODY);
+    u32 config, passes, trials;
+    PARAMETRIZE { config = GEN_3; passes = 1; trials = 3; }  // 33.3%
+    PARAMETRIZE { config = GEN_4; passes = 3; trials = 10; } // 30%
+    PASSES_RANDOMLY(passes, trials, RNG_FLAME_BODY);
     GIVEN {
-        ASSUME(B_ABILITY_TRIGGER_CHANCE >= GEN_4);
+        WITH_CONFIG(CONFIG_ABILITY_TRIGGER_CHANCE, config);
         ASSUME(MoveMakesContact(MOVE_SCRATCH));
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_MAGMAR) { Ability(ABILITY_FLAME_BODY); }

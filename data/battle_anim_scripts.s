@@ -29344,6 +29344,16 @@ gBattleAnimGeneral_Swamp::
 	blendoff
 	end
 
+gBattleAnimGeneral_SwapToSubstitute::
+	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, FALSE
+	waitforvisualfinish
+	end
+
+gBattleAnimGeneral_SwapFromSubstitute::
+	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, TRUE
+	waitforvisualfinish
+	end
+
 SnatchMoveTrySwapFromSubstitute:
 	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2
 	jumprettrue SnatchMoveSwapSubstituteForMon

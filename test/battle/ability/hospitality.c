@@ -14,7 +14,7 @@ DOUBLE_BATTLE_TEST("Hospitality user restores 25% of ally's health")
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { }
+        TURN {}
     } SCENE {
         if (health == 75) {
             ABILITY_POPUP(playerLeft, ABILITY_HOSPITALITY);
@@ -72,8 +72,8 @@ DOUBLE_BATTLE_TEST("Hospitality ignores Substitute")
 DOUBLE_BATTLE_TEST("Hospitality does not trigger if there is no ally on the field")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { HP(1);  }
-        PLAYER(SPECIES_WOBBUFFET) { HP(1);  }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
         PLAYER(SPECIES_POLTCHAGEIST) { Ability(ABILITY_HOSPITALITY); }
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -109,5 +109,41 @@ DOUBLE_BATTLE_TEST("Hospitality is blocked by Heal Block")
             MESSAGE("Wobbuffet drank down all the matcha that Poltchageist made!");
             HP_BAR(playerRight, damage: -25);
         }
+    }
+}
+
+DOUBLE_BATTLE_TEST("Hospitality user restores 25% of ally's max HP after taking hazard damage")
+{
+    u32 speedLeft, speedRight = 0;
+
+    PARAMETRIZE { speedLeft = 200; speedRight = 150; }
+    PARAMETRIZE { speedLeft = 150; speedRight = 200; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); HP(1); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); HP(1); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(speedLeft); };
+        PLAYER(SPECIES_POLTCHAGEIST) { Speed(speedRight); Ability(ABILITY_HOSPITALITY); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(110); };
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); };
+    } WHEN {
+        TURN {
+            MOVE(opponentLeft, MOVE_SPIKES);
+            MOVE(opponentRight, MOVE_HYPER_VOICE);
+            SEND_OUT(playerLeft, 2);
+            SEND_OUT(playerRight, 3);
+        }
+    } SCENE {
+        HP_BAR(playerLeft);
+        HP_BAR(playerRight);
+        if (speedLeft == 200) {
+            HP_BAR(playerLeft); // Spikes dmg
+            HP_BAR(playerRight); // Spikes dmg
+        } else {
+            HP_BAR(playerRight); // Spikes dmg
+            HP_BAR(playerLeft); // Spikes dmg
+        }
+        ABILITY_POPUP(playerRight, ABILITY_HOSPITALITY);
+        HP_BAR(playerLeft); // Hospitality Heal
     }
 }

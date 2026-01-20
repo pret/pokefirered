@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Normalize turns a move into a Normal-type move")
     GIVEN {
         ASSUME(GetSpeciesType(SPECIES_GASTLY, 0) == TYPE_GHOST);
         PLAYER(SPECIES_GASTLY);
-        OPPONENT(SPECIES_SKITTY) { Ability(ability); Moves(MOVE_WATER_GUN);}
+        OPPONENT(SPECIES_SKITTY) { Ability(ability); Moves(MOVE_WATER_GUN); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_WATER_GUN); }
     } SCENE {
@@ -43,7 +43,7 @@ SINGLE_BATTLE_TEST("Normalize affects status moves")
         ASSUME(GetMoveType(MOVE_THUNDER_WAVE) == TYPE_ELECTRIC);
         ASSUME(GetSpeciesType(SPECIES_DRILBUR, 0) == TYPE_GROUND);
         PLAYER(SPECIES_DRILBUR);
-        OPPONENT(SPECIES_SKITTY) { Ability(ability); Moves(MOVE_THUNDER_WAVE);}
+        OPPONENT(SPECIES_SKITTY) { Ability(ability); Moves(MOVE_THUNDER_WAVE); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_THUNDER_WAVE); }
     } SCENE {
@@ -70,7 +70,7 @@ SINGLE_BATTLE_TEST("Normalize still makes Freeze-Dry do super effective damage t
         ASSUME(GetMoveEffect(MOVE_FREEZE_DRY) == EFFECT_SUPER_EFFECTIVE_ON_ARG);
         ASSUME(GetSpeciesType(SPECIES_MUDKIP, 0) == TYPE_WATER);
         PLAYER(SPECIES_MUDKIP);
-        OPPONENT(SPECIES_SKITTY) { Ability(ability); Moves(MOVE_FREEZE_DRY);}
+        OPPONENT(SPECIES_SKITTY) { Ability(ability); Moves(MOVE_FREEZE_DRY); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_FREEZE_DRY); }
     } SCENE {
@@ -87,7 +87,7 @@ SINGLE_BATTLE_TEST("Normalize doesn't boost power of unaffected moves by 20% (< 
     PARAMETRIZE { ability = ABILITY_NORMALIZE; }
 
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_ATE_MULTIPLIER, GEN_6);
+        WITH_CONFIG(CONFIG_ATE_MULTIPLIER, GEN_6);
         PLAYER(SPECIES_DELCATTY) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -106,7 +106,7 @@ SINGLE_BATTLE_TEST("Normalize boosts power of unaffected moves by 20% (Gen7+)", 
     PARAMETRIZE { ability = ABILITY_NORMALIZE; }
 
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_ATE_MULTIPLIER, GEN_7);
+        WITH_CONFIG(CONFIG_ATE_MULTIPLIER, GEN_7);
         PLAYER(SPECIES_DELCATTY) { Ability(ability); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -125,7 +125,7 @@ SINGLE_BATTLE_TEST("Normalize doesn't boost power of affected moves by 20% (< Ge
     PARAMETRIZE { ability = ABILITY_NORMALIZE; }
 
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_ATE_MULTIPLIER, GEN_6);
+        WITH_CONFIG(CONFIG_ATE_MULTIPLIER, GEN_6);
         PLAYER(SPECIES_SKITTY) { Ability(ability); Moves(MOVE_WATER_GUN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -144,7 +144,7 @@ SINGLE_BATTLE_TEST("Normalize boosts power of affected moves by 20% (Gen7+)", s1
     PARAMETRIZE { ability = ABILITY_NORMALIZE; }
 
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_ATE_MULTIPLIER, GEN_7);
+        WITH_CONFIG(CONFIG_ATE_MULTIPLIER, GEN_7);
         PLAYER(SPECIES_SKITTY) { Ability(ability); Moves(MOVE_WATER_GUN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -184,7 +184,7 @@ SINGLE_BATTLE_TEST("Normalize-affected moves become Electric-type under Ion Delu
 
 SINGLE_BATTLE_TEST("Normalize doesn't affect Weather Ball's type", s16 damage)
 {
-    u16 move;
+    enum Move move;
     enum Ability ability;
     PARAMETRIZE { move = MOVE_CELEBRATE; ability = ABILITY_CUTE_CHARM; }
     PARAMETRIZE { move = MOVE_SUNNY_DAY; ability = ABILITY_CUTE_CHARM; }
@@ -232,7 +232,8 @@ SINGLE_BATTLE_TEST("Normalize doesn't affect Natural Gift's type")
 
 SINGLE_BATTLE_TEST("Normalize doesn't affect Judgment / Techno Blast / Multi-Attack's type")
 {
-    u16 move, item;
+    enum Move move;
+    enum Item item;
     PARAMETRIZE { move = MOVE_JUDGMENT; item = ITEM_ZAP_PLATE; }
     PARAMETRIZE { move = MOVE_TECHNO_BLAST; item = ITEM_SHOCK_DRIVE; }
     PARAMETRIZE { move = MOVE_MULTI_ATTACK; item = ITEM_ELECTRIC_MEMORY; }

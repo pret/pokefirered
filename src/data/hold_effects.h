@@ -7,161 +7,138 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
     [HOLD_EFFECT_RESTORE_HP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_CURE_PAR] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onStatusChange = TRUE,
     },
 
     [HOLD_EFFECT_CURE_SLP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onStatusChange = TRUE,
     },
 
     [HOLD_EFFECT_CURE_PSN] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onStatusChange = TRUE,
     },
 
     [HOLD_EFFECT_CURE_BRN] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onStatusChange = TRUE,
     },
 
     [HOLD_EFFECT_CURE_FRZ] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onStatusChange = TRUE,
     },
 
     [HOLD_EFFECT_RESTORE_PP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onAttackerAfterHit = TRUE,
     },
 
     [HOLD_EFFECT_CURE_CONFUSION] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onStatusChange = TRUE,
     },
 
     [HOLD_EFFECT_CURE_STATUS] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onStatusChange = TRUE,
     },
 
     [HOLD_EFFECT_CONFUSE_SPICY] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_CONFUSE_DRY] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_CONFUSE_SWEET] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_CONFUSE_BITTER] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_CONFUSE_SOUR] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_ATTACK_UP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_DEFENSE_UP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_SPEED_UP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_SP_ATTACK_UP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_SP_DEFENSE_UP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_CRITICAL_UP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_RANDOM_STAT_UP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_EVASION_UP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_WHITE_HERB] =
     {
         .whiteHerb = TRUE,
-        .whiteHerbFirstTurn = TRUE,
         .whiteHerbEndTurn = TRUE,
         .onFling = TRUE,
     },
@@ -201,7 +178,6 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
     [HOLD_EFFECT_DOUBLE_PRIZE] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
     },
 
     [HOLD_EFFECT_REPEL] =
@@ -245,19 +221,11 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
         .leftovers = TRUE,
     },
 
-    [HOLD_EFFECT_DRAGON_SCALE] =
-    {
-    },
-
     [HOLD_EFFECT_LIGHT_BALL] =
     {
     },
 
     [HOLD_EFFECT_TYPE_POWER] =
-    {
-    },
-
-    [HOLD_EFFECT_UPGRADE] =
     {
     },
 
@@ -424,14 +392,12 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
     [HOLD_EFFECT_RESTORE_PCT_HP] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
     [HOLD_EFFECT_MICLE_BERRY] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onHpThreshold = TRUE,
     },
 
@@ -492,7 +458,6 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
     {
         .onTargetAfterHit = TRUE,
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
     },
 
     [HOLD_EFFECT_RED_CARD] =
@@ -559,7 +524,6 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
     [HOLD_EFFECT_TERRAIN_SEED] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onEffect = TRUE,
     },
 
@@ -586,7 +550,6 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
     [HOLD_EFFECT_ROOM_SERVICE] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onEffect = TRUE,
     },
 
@@ -615,7 +578,6 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
     [HOLD_EFFECT_MIRROR_HERB] =
     {
         .mirrorHerb = TRUE,
-        .mirrorHerbFirstTurn = TRUE,
     },
 
     [HOLD_EFFECT_PUNCHING_GLOVE] =
@@ -632,9 +594,8 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
 
     [HOLD_EFFECT_BOOSTER_ENERGY] =
     {
-        .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
         .onEffect = TRUE,
+        .boosterEnergy = TRUE,
     },
 
     [HOLD_EFFECT_OGERPON_MASK] =
@@ -644,6 +605,5 @@ const struct HoldEffectInfo gHoldEffectsInfo[HOLD_EFFECT_COUNT] =
     [HOLD_EFFECT_BERSERK_GENE] =
     {
         .onSwitchIn = TRUE,
-        .onSwitchInFirstTurn = TRUE,
     },
 };

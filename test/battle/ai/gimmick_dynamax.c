@@ -37,5 +37,29 @@ AI_SINGLE_BATTLE_TEST("AI uses Dynamax -- AI does not dynamax before using a uti
     }
 }
 
+AI_TWO_VS_ONE_BATTLE_TEST("AI only Dynamaxes once per trainer in 2v1 multi battles")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        MULTI_PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_SPLASH); }
+        MULTI_PARTNER(SPECIES_WOBBUFFET) { Moves(MOVE_SPLASH); }
+        MULTI_OPPONENT_A(SPECIES_WOBBUFFET) { Moves(MOVE_SPLASH); DynamaxLevel(10); }
+        MULTI_OPPONENT_A(SPECIES_WOBBUFFET) { Moves(MOVE_SPLASH); DynamaxLevel(10); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SPLASH);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_SPLASH, gimmick: GIMMICK_DYNAMAX);
+            EXPECT_MOVE(opponentRight, MOVE_SPLASH, gimmick: GIMMICK_NONE);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_SPLASH);
+            MOVE(playerRight, MOVE_SPLASH);
+            EXPECT_MOVE(opponentLeft, MOVE_SPLASH, gimmick: GIMMICK_NONE);
+            EXPECT_MOVE(opponentRight, MOVE_SPLASH, gimmick: GIMMICK_NONE);
+        }
+    }
+}
+
 // Copycatting an ally's Max Guard rendition of Trick Room was a notable strategy.
 TO_DO_BATTLE_TEST("TODO: AI uses Dynamax -- AI uses Copycat against a Dynamaxed Pokemon intelligently")

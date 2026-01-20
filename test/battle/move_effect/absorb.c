@@ -118,3 +118,17 @@ SINGLE_BATTLE_TEST("Absorb does not drain any HP if user does 0 damage")
         NOT MESSAGE("The opposing Wobbuffet had its energy drained!");
     }
 }
+
+SINGLE_BATTLE_TEST("Absorb does not drain any HP if the move is blocked by Disguise")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_MIMIKYU) { Ability(ABILITY_DISGUISE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_ABSORB); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ABSORB, player);
+    } THEN {
+        EXPECT_EQ(player->hp, 1);
+    }
+}

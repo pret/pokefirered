@@ -10,10 +10,10 @@ SINGLE_BATTLE_TEST("Confusion adds a 50/33% chance to hit self with 40 power")
     PARAMETRIZE { genConfig = GEN_7; pctChance = 33; }
     PASSES_RANDOMLY(pctChance, 100, RNG_CONFUSION);
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_CONFUSION_SELF_DMG_CHANCE, genConfig);
+        WITH_CONFIG(CONFIG_CONFUSION_SELF_DMG_CHANCE, genConfig);
         ASSUME(GetMovePower(MOVE_SCRATCH) == 40);
-        PLAYER(SPECIES_WOBBUFFET) { Speed(1); };
-        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); };
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_SCRATCH, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); MOVE(player, MOVE_CONFUSE_RAY); }
         TURN;
@@ -38,8 +38,8 @@ SINGLE_BATTLE_TEST("Confusion self hit does not consume Gems")
     PARAMETRIZE { genConfig = GEN_7; pctChance = 33; }
     PASSES_RANDOMLY(pctChance, 100, RNG_CONFUSION);
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_CONFUSION_SELF_DMG_CHANCE, genConfig);
-        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMAL_GEM); };
+        WITH_CONFIG(CONFIG_CONFUSION_SELF_DMG_CHANCE, genConfig);
+        PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMAL_GEM); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, MOVE_CONFUSE_RAY); MOVE(player, MOVE_SCRATCH); }

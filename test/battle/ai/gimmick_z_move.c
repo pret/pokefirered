@@ -3,7 +3,7 @@
 #include "battle_ai_util.h"
 #include "constants/battle_z_move_effects.h"
 
-AI_SINGLE_BATTLE_TEST("AI uses Z-moves.")
+AI_SINGLE_BATTLE_TEST("AI uses Z-Moves.")
 {
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT );
@@ -15,7 +15,7 @@ AI_SINGLE_BATTLE_TEST("AI uses Z-moves.")
     }
 }
 
-AI_SINGLE_BATTLE_TEST("AI does not use damaging Z-moves if the player would faint anyway.")
+AI_SINGLE_BATTLE_TEST("AI uses Z-Moves -- conserves Z-move if target will faint anyway.")
 {
     u32 currentHP;
     PARAMETRIZE { currentHP = 1; }
@@ -32,6 +32,24 @@ AI_SINGLE_BATTLE_TEST("AI does not use damaging Z-moves if the player would fain
         TURN { EXPECT_MOVE(opponent, MOVE_QUICK_ATTACK, gimmick: GIMMICK_NONE); }
     }
 }
+
+AI_SINGLE_BATTLE_TEST("AI uses Z-Moves to ensure a low-accuracy KO.")
+{
+    u32 species, ability;
+    PARAMETRIZE { species = SPECIES_TORKOAL; ability = ABILITY_DROUGHT; }
+    PARAMETRIZE { species = SPECIES_PELIPPER; ability = ABILITY_DRIZZLE; }
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT );
+        PLAYER(species) { Ability(ability); HP(1); }
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_ELECTRIUM_Z); Moves(MOVE_THUNDER); }
+    } WHEN {
+    if (ability == ABILITY_DROUGHT)
+        TURN { EXPECT_MOVE(opponent, MOVE_THUNDER, gimmick: GIMMICK_Z_MOVE); }
+    else
+        TURN { EXPECT_MOVE(opponent, MOVE_THUNDER, gimmick: GIMMICK_NONE); }
+    }
+}
+
 AI_SINGLE_BATTLE_TEST("AI uses Z-Moves -- Extreme Evoboost")
 {
     GIVEN {
@@ -44,6 +62,18 @@ AI_SINGLE_BATTLE_TEST("AI uses Z-Moves -- Extreme Evoboost")
         TURN { EXPECT_MOVE(opponent, MOVE_POUND, gimmick: GIMMICK_NONE);
                SCORE_LT_VAL(opponent, MOVE_LAST_RESORT, AI_SCORE_DEFAULT); }
         TURN { EXPECT_MOVE(opponent, MOVE_LAST_RESORT, gimmick: GIMMICK_NONE); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI uses Z-Moves to bypass move limitations")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT );
+        ASSUME(GetMoveType(MOVE_QUICK_ATTACK) == TYPE_NORMAL);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); Moves(MOVE_POUND, MOVE_LAST_RESORT); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_LAST_RESORT, gimmick: GIMMICK_Z_MOVE); }
     }
 }
 
@@ -110,7 +140,7 @@ AI_DOUBLE_BATTLE_TEST("AI uses Z-Moves -- Z-Destiny Bond is used when about to d
 
 AI_SINGLE_BATTLE_TEST("AI uses Z-Moves -- Z-Detect")
 {
-    u32 move;
+    enum Move move;
     PARAMETRIZE { move = MOVE_THUNDERBOLT; }
     PARAMETRIZE { move = MOVE_CLOSE_COMBAT; }
 

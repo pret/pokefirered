@@ -33,8 +33,8 @@ SINGLE_BATTLE_TEST("Telekinesis ends after 3 turns")
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {
         TURN { MOVE(player, MOVE_TELEKINESIS); }
-        TURN { }
-        TURN { }
+        TURN {}
+        TURN {}
     } SCENE {
         MESSAGE("Wobbuffet used Telekinesis!");
         MESSAGE("The opposing Wynaut was hurled into the air!");

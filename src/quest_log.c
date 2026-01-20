@@ -137,7 +137,7 @@ static bool8 RecordHeadAtEndOfEntry(void);
 static const struct WindowTemplate sWindowTemplates[WIN_COUNT] = {
     [WIN_TOP_BAR] = {
         .bg = 0,
-        .tilemapLeft = 0, 
+        .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 30,
         .height = 2,
@@ -271,9 +271,9 @@ static void QLogCB_Playback(void)
 
     if (sPlaybackControl.endMode == END_MODE_NONE)
     {
-        if (gQuestLogPlaybackState != QL_PLAYBACK_STATE_STOPPED 
-         || sPlaybackControl.state == 1 
-         || (sPlaybackControl.cursor < ARRAY_COUNT(sEventData) 
+        if (gQuestLogPlaybackState != QL_PLAYBACK_STATE_STOPPED
+         || sPlaybackControl.state == 1
+         || (sPlaybackControl.cursor < ARRAY_COUNT(sEventData)
           && sEventData[sPlaybackControl.cursor] != NULL))
             QuestLog_PlayCurrentEvent();
         else
@@ -546,7 +546,7 @@ static void QL_LoadObjectsAndTemplates(u8 sceneNum)
 {
     struct QuestLogScene *questLog = &gSaveBlock1Ptr->questLog[sceneNum];
     u16 i;
-    
+
     for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
     {
         if (questLog->objectEventTemplates[i].negx)
@@ -628,7 +628,7 @@ void QL_ResetPartyAndPC(void)
     } *prev = AllocZeroed(sizeof(*prev));
     u16 packedCounts, i, count, j;
 
-    CreateMon(&prev->mon, SPECIES_RATTATA, 1, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&prev->mon, SPECIES_RATTATA, 1, 0, OTID_STRUCT_PLAYER_ID);
     packedCounts = VarGet(VAR_QUEST_LOG_MON_COUNTS);
     prev->partyCount = packedCounts >> NUM_PC_COUNT_BITS;
     prev->boxMonCount = packedCounts % (1 << NUM_PC_COUNT_BITS);
@@ -899,7 +899,7 @@ static void Task_AvoidDisplay(u8 taskId)
         if (!gPaletteFade.active)
         {
             gQuestLogPlaybackState = QL_PLAYBACK_STATE_STOPPED;
-            
+
             // Call the provided function (if any). In practice this is always QL_DestroyAbortedDisplay
             routine = (void (*)(void)) GetWordTaskArg(taskId, DATA_IDX_CALLBACK);
             if (routine != NULL)
@@ -1252,10 +1252,10 @@ static bool8 RestoreScreenAfterPlayback(u8 taskId)
 
     CopyPaletteInvertedTint(&gPlttBufferUnfaded[BG_PLTT_ID(0) + 1], &gPlttBufferFaded[BG_PLTT_ID(0) + 1], 0xDF, 15 - tTimer);
     CopyPaletteInvertedTint(&gPlttBufferUnfaded[OBJ_PLTT_ID(0)], &gPlttBufferFaded[OBJ_PLTT_ID(0)], 0x100, 15 - tTimer);
-                            
+
     gTimeUpdateCounter = 0;
     UpdateTimeOfDay();
-    
+
     if (MapHasNaturalLight(gMapHeader.mapType))
     {
         UpdateAltBgPalettes(PALETTES_BG);

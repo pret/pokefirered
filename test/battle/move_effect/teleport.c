@@ -9,7 +9,7 @@ ASSUMPTIONS
 SINGLE_BATTLE_TEST("Teleport fails to switch out when there is no Pokémon to switch in (Gen 8+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TELEPORT_BEHAVIOR, GEN_8);
+        WITH_CONFIG(CONFIG_TELEPORT_BEHAVIOR, GEN_8);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -22,7 +22,7 @@ SINGLE_BATTLE_TEST("Teleport fails to switch out when there is no Pokémon to sw
 SINGLE_BATTLE_TEST("Teleport fails to switch out the user when there no alive Pokémon left (Gen 8+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TELEPORT_BEHAVIOR, GEN_8);
+        WITH_CONFIG(CONFIG_TELEPORT_BEHAVIOR, GEN_8);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT) { HP(0); }
@@ -36,7 +36,7 @@ SINGLE_BATTLE_TEST("Teleport fails to switch out the user when there no alive Po
 SINGLE_BATTLE_TEST("Teleport fails in Trainer Battles (Gen 1-7)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TELEPORT_BEHAVIOR, GEN_7);
+        WITH_CONFIG(CONFIG_TELEPORT_BEHAVIOR, GEN_7);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT);
@@ -55,7 +55,7 @@ SINGLE_BATTLE_TEST("Teleport fails in Trainer Battles (Gen 1-7)")
 SINGLE_BATTLE_TEST("Teleport forces the Pokémon to switch out in Trainer Battles (Gen 8+)")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TELEPORT_BEHAVIOR, GEN_8);
+        WITH_CONFIG(CONFIG_TELEPORT_BEHAVIOR, GEN_8);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT);
@@ -70,7 +70,7 @@ SINGLE_BATTLE_TEST("Teleport forces the Pokémon to switch out in Trainer Battle
 SINGLE_BATTLE_TEST("Teleport does not fail if the user is trapped")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_TELEPORT_BEHAVIOR, GEN_8);
+        WITH_CONFIG(CONFIG_TELEPORT_BEHAVIOR, GEN_8);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT);

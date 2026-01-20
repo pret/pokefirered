@@ -26,7 +26,7 @@ DOUBLE_BATTLE_TEST("Quash-affected target will move last in the priority bracket
 DOUBLE_BATTLE_TEST("Quash is not affected by dynamic speed")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_RECALC_TURN_AFTER_ACTIONS, GEN_8);
+        WITH_CONFIG(CONFIG_RECALC_TURN_AFTER_ACTIONS, GEN_8);
         ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
         PLAYER(SPECIES_VOLBEAT) { Speed(10); Ability(ABILITY_PRANKSTER); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(30); }
@@ -112,7 +112,7 @@ DOUBLE_BATTLE_TEST("Quash-affected targets move from fastest to slowest (Gen 8+)
 DOUBLE_BATTLE_TEST("Quash-affected mon that acted early via After You is not affected by dynamic speed")
 {
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_RECALC_TURN_AFTER_ACTIONS, GEN_8);
+        WITH_CONFIG(CONFIG_RECALC_TURN_AFTER_ACTIONS, GEN_8);
         ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
         ASSUME(GetMoveEffect(MOVE_AFTER_YOU) == EFFECT_AFTER_YOU);
         PLAYER(SPECIES_VOLBEAT) { Speed(20); Ability(ABILITY_PRANKSTER); }

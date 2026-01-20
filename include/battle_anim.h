@@ -83,6 +83,24 @@ struct BattleAnimBackground
     const u32 *tilemap;
 };
 
+struct BattleAnimation
+{
+    struct CompressedSpriteSheet pic;
+    struct SpritePalette palette;
+};
+
+// Helper struct for link battles to show correct animations and transformations that can change their look
+// Used by EmitBattleAnimation and EmitMoveAnimation
+struct LinkBattleAnim
+{
+    u32 transformedMonPID;
+    u8 rolloutTimer;
+    u8 furyCutterCounter;
+    u8 syrupBombIsShiny:1;
+    u8 isTransformedMonShiny:1;
+    u8 padding:4;
+};
+
 #define ANIM_ARGS_COUNT 8
 
 // Linear Translation
@@ -98,7 +116,7 @@ extern void (*gAnimScriptCallback)(void);
 extern bool8 gAnimScriptActive;
 extern u8 gAnimVisualTaskCount;
 extern u8 gAnimSoundTaskCount;
-extern struct DisableStruct *gAnimDisableStructPtr;
+extern struct LinkBattleAnim *gAnimDisableStructPtr;
 extern u16 gAnimMovePower;
 extern u8 gAnimFriendship;
 extern u16 gWeatherMoveAnim;
@@ -482,7 +500,7 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
 void ResetBattleAnimBg(u8);
 void LoadMoveBg(u16 bgId);
 void ClearBattleAnimationVars(void);
-void DoMoveAnim(u16 move);
+void DoMoveAnim(enum Move move);
 void LaunchBattleAnimation(u32 animType, u32 animId);
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);

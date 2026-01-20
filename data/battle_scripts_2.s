@@ -1,4 +1,5 @@
 #include "config/battle.h"
+#include "constants/global.h"
 #include "constants/battle.h"
 #include "constants/battle_script_commands.h"
 #include "constants/battle_anim.h"
@@ -111,19 +112,29 @@ BattleScript_ItemRestoreHP_Party::
 	return
 
 BattleScript_ItemRestoreHP_SendOutRevivedBattler:
+	switchhandleorder BS_SCRIPTING, 0
+	getswitchedmondata BS_SCRIPTING
+	switchindataupdate BS_SCRIPTING
+	trytoclearprimalweather
 	switchinanim BS_SCRIPTING, FALSE, FALSE
 	waitstate
 	switchineffects BS_SCRIPTING
+	switchinevents
 	end
 
 BattleScript_ItemCureStatus::
 	call BattleScript_UseItemMessage
 BattleScript_ItemCureStatusAfterItemMsg:
-	itemcurestatus BattleScript_ItemCureStatusEnd
-	updatestatusicon BS_SCRIPTING
+	itemcurestatus BattleScript_ItemCureStatusEnd, BattleScript_CureStatus_Battler
 	printstring STRINGID_ITEMCUREDSPECIESSTATUS
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_ItemCureStatusEnd:
+	end
+
+BattleScript_CureStatus_Battler::
+	updatestatusicon BS_SCRIPTING
+	printstring STRINGID_ITEMCUREDSPECIESSTATUS
+	waitmessage B_WAIT_TIME_LONG
 	end
 
 BattleScript_ItemHealAndCureStatus::
@@ -175,6 +186,7 @@ BattleScript_ItemSetMist::
 
 BattleScript_ItemSetFocusEnergy::
 	call BattleScript_UseItemMessage
+	itemincreasestat
 	jumpifvolatile BS_ATTACKER, VOLATILE_DRAGON_CHEER, BattleScript_ButItFailed
 	jumpifvolatile BS_ATTACKER, VOLATILE_FOCUS_ENERGY, BattleScript_ButItFailed
 	setfocusenergy BS_ATTACKER
@@ -194,11 +206,12 @@ BattleScript_ItemRestorePP::
 
 BattleScript_ItemIncreaseAllStats::
 	call BattleScript_UseItemMessage
+	itemincreasestat
 	call BattleScript_AllStatsUp
 	end
 
 BattleScript_BallThrow::
-	jumpifbattletype BATTLE_TYPE_OLD_MAN_TUTORIAL, BattleScript_OldManThrowBall
+	jumpifbattletype BATTLE_TYPE_CATCH_TUTORIAL, BattleScript_OldManThrowBall
 	jumpifbattletype BATTLE_TYPE_POKEDUDE, BattleScript_PokedudeThrowBall
 	printstring STRINGID_PLAYERUSEDITEM
 	handleballthrow
@@ -302,6 +315,19 @@ BattleScript_TrainerBSlideMsgRet::
 
 BattleScript_TrainerBSlideMsgEnd2::
 	call BattleScript_TrainerBSlideMsgRet
+	end2
+
+BattleScript_TrainerPartnerSlideMsgRet::
+	trainerslidein BS_PLAYER2
+	handletrainerslidemsg BS_SCRIPTING, PRINT_SLIDE_MESSAGE
+	waitstate
+	trainerslideout BS_PLAYER2
+	waitstate
+	handletrainerslidemsg BS_SCRIPTING, RESTORE_BATTLER_SLIDE_CONTROL
+	return
+
+BattleScript_TrainerPartnerSlideMsgEnd2::
+	call BattleScript_TrainerPartnerSlideMsgRet
 	end2
 
 BattleScript_GhostBallDodge::

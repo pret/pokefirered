@@ -43,13 +43,6 @@ const u8 gUnownPokedexText[] = _(
     "it is a mystery as to which came first,\n"
     "the ancient writings or the various Unown.");
 
-// Gen 3 families
-const u8 gDeoxysNormalPokedexText[] = _(
-    "Deoxys emerged from a virus that came\n"
-    "from space. It is highly intelligent and\n"
-    "can shoot lasers from the crystalline\n"
-    "organ on its chest.");
-
 // Gen 4 families
 const u8 gMothimPokedexText[] = _(
     "It does not keep a nest. While it\n"

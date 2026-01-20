@@ -70,7 +70,7 @@ DOUBLE_BATTLE_TEST("Mind Blown causes the user to faint when below 1/2 of its Ma
 SINGLE_BATTLE_TEST("Mind Blown causes the user & the target to faint when below 1/2 of its Max HP")
 {
     GIVEN {
-        PLAYER(SPECIES_WOBBUFFET) { HP(200) ; MaxHP(400); }
+        PLAYER(SPECIES_WOBBUFFET) { HP(200); MaxHP(400); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -78,9 +78,9 @@ SINGLE_BATTLE_TEST("Mind Blown causes the user & the target to faint when below 
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, player);
         HP_BAR(opponent, hp: 0);
-        MESSAGE("The opposing Wobbuffet fainted!");
         HP_BAR(player, hp: 0);
         MESSAGE("Wobbuffet fainted!");
+        MESSAGE("The opposing Wobbuffet fainted!");
     }
 }
 
@@ -91,7 +91,8 @@ DOUBLE_BATTLE_TEST("Mind Blown causes everyone to faint in a double battle")
         PLAYER(SPECIES_WYNAUT) { HP(1); }
         OPPONENT(SPECIES_ABRA) { HP(1); }
         OPPONENT(SPECIES_KADABRA) { HP(1); }
-        OPPONENT(SPECIES_KADABRA);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_MIND_BLOWN); }
     } SCENE {
@@ -99,11 +100,11 @@ DOUBLE_BATTLE_TEST("Mind Blown causes everyone to faint in a double battle")
         HP_BAR(opponentLeft, hp: 0);
         HP_BAR(playerRight, hp: 0);
         HP_BAR(opponentRight, hp: 0);
+        HP_BAR(playerLeft, hp: 0);
+        MESSAGE("Wobbuffet fainted!");
         MESSAGE("The opposing Abra fainted!");
         MESSAGE("Wynaut fainted!");
         MESSAGE("The opposing Kadabra fainted!");
-        HP_BAR(playerLeft, hp: 0);
-        MESSAGE("Wobbuffet fainted!");
     }
 }
 
@@ -118,6 +119,29 @@ SINGLE_BATTLE_TEST("Mind Blown hp loss is prevented by Magic Guard")
         ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, player);
         HP_BAR(opponent);
         NOT HP_BAR(player);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Mind Blown's recoil only happens once, regardless of number of affected targets")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { HP(399); MaxHP(400); }
+        PLAYER(SPECIES_WYNAUT) { HP(1); }
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_ABRA) { HP(1); }
+        OPPONENT(SPECIES_KADABRA) { HP(1); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_MIND_BLOWN); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, playerLeft);
+        HP_BAR(opponentLeft, hp: 0);
+        HP_BAR(playerRight, hp: 0);
+        HP_BAR(opponentRight, hp: 0);
+        MESSAGE("The opposing Abra fainted!");
+        MESSAGE("Wynaut fainted!");
+        MESSAGE("The opposing Kadabra fainted!");
+    } THEN {
+        EXPECT_GT(playerLeft->hp, 0);
     }
 }
 

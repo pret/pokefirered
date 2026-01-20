@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Unburden doubles speed once user uses item")
         OPPONENT(SPECIES_RILLABOOM) { Speed(7); Ability(ABILITY_GRASSY_SURGE); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_U_TURN); SEND_OUT(opponent, 1); }
-        TURN { }
+        TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_U_TURN, opponent);
         ABILITY_POPUP(opponent, ABILITY_GRASSY_SURGE);
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Unburden doubles speed once user gets their item knocked off
         OPPONENT(SPECIES_WOBBUFFET) { Speed(7); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_KNOCK_OFF); }
-        TURN { }
+        TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_KNOCK_OFF, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_KNOCKOFF, player);
@@ -53,7 +53,7 @@ SINGLE_BATTLE_TEST("Unburden doesn't activate when item is consumed in Neutraliz
     } WHEN {
         TURN { MOVE(opponent, MOVE_KNOCK_OFF); }
         TURN { MOVE(opponent, MOVE_U_TURN); SEND_OUT(opponent, 1); }
-        TURN { }
+        TURN {}
     } SCENE {
         ABILITY_POPUP(opponent, ABILITY_NEUTRALIZING_GAS);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_KNOCK_OFF, opponent);
@@ -81,7 +81,7 @@ SINGLE_BATTLE_TEST("Unburden doubling speed effect is ignored by Neutralizing Ga
         TURN { MOVE(opponent, MOVE_KNOCK_OFF); }
         TURN { MOVE(opponent, MOVE_U_TURN); SEND_OUT(opponent, 1); }
         TURN { MOVE(opponent, MOVE_U_TURN); SEND_OUT(opponent, 0); }
-        TURN { }
+        TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_KNOCK_OFF, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ITEM_KNOCKOFF, player);

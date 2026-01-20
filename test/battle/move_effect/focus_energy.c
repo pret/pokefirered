@@ -23,8 +23,8 @@ SINGLE_BATTLE_TEST("Focus Energy increases the user's critical hit ratio by 1 st
     }
     PASSES_RANDOMLY(1, chance, RNG_CRITICAL_HIT);
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_CRIT_CHANCE, (genConfig == GEN_1)? GEN_2 : genConfig);
-        WITH_CONFIG(GEN_CONFIG_FOCUS_ENERGY_CRIT_RATIO, genConfig);
+        WITH_CONFIG(CONFIG_CRIT_CHANCE, (genConfig == GEN_1)? GEN_2 : genConfig);
+        WITH_CONFIG(CONFIG_FOCUS_ENERGY_CRIT_RATIO, genConfig);
         ASSUME(GetSpeciesBaseSpeed(SPECIES_WOBBUFFET) == 33);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -45,13 +45,13 @@ SINGLE_BATTLE_TEST("Focus Energy multiplies crit chance by 4 with gen 1 crit cha
     bool32 useFocusEnergy = 0;
     u32 genConfig = 0, chance = 0;
     for (u32 j = GEN_1; j <= GEN_9; j++) {
-        PARAMETRIZE { genConfig = j; useFocusEnergy = FALSE; chance = 16;}
-        PARAMETRIZE { genConfig = j; useFocusEnergy = TRUE; chance = 4;}
+        PARAMETRIZE { genConfig = j; useFocusEnergy = FALSE; chance = 16; }
+        PARAMETRIZE { genConfig = j; useFocusEnergy = TRUE; chance = 4; }
     }
     PASSES_RANDOMLY(1, chance, RNG_CRITICAL_HIT);
     GIVEN {
-        WITH_CONFIG(GEN_CONFIG_CRIT_CHANCE, GEN_1);
-        WITH_CONFIG(GEN_CONFIG_FOCUS_ENERGY_CRIT_RATIO, genConfig);
+        WITH_CONFIG(CONFIG_CRIT_CHANCE, GEN_1);
+        WITH_CONFIG(CONFIG_FOCUS_ENERGY_CRIT_RATIO, genConfig);
         ASSUME(GetSpeciesBaseSpeed(SPECIES_WOBBUFFET) == 33);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);

@@ -9,7 +9,6 @@
 
 AI_DOUBLE_BATTLE_TEST("AI uses Final Gambit")
 {
-    KNOWN_FAILING;
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET);
@@ -20,13 +19,12 @@ AI_DOUBLE_BATTLE_TEST("AI uses Final Gambit")
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, MOVE_FINAL_GAMBIT); }
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_FINAL_GAMBIT); SEND_OUT(playerLeft, 2); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI uses Guillotine")
 {
-    KNOWN_FAILING;
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET);
@@ -37,13 +35,12 @@ AI_DOUBLE_BATTLE_TEST("AI uses Guillotine")
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, MOVE_GUILLOTINE); }
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_GUILLOTINE); SEND_OUT(playerLeft, 2); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI uses Sheer Cold")
 {
-    KNOWN_FAILING;
     GIVEN {
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_WOBBUFFET);
@@ -54,20 +51,20 @@ AI_DOUBLE_BATTLE_TEST("AI uses Sheer Cold")
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, MOVE_SHEER_COLD); }
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_SHEER_COLD); SEND_OUT(playerLeft, 2); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI can use all moves, 1-100")
 {
-    u32 moveStart = 0;
-    u32 moveCap = 100;
+    enum Move moveStart = 0;
+    enum Move moveCap = 100;
 
     if (moveCap > MOVES_COUNT)
         moveCap = MOVES_COUNT - 1;
 
     s32 j;
-    u32 move = MOVE_NONE;
+    enum Move move = MOVE_NONE;
 
     enum BattleMoveEffects effect;
 
@@ -116,20 +113,20 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 1-100")
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, move); }
+        TURN { EXPECT_MOVE(opponentLeft, move); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI can use all moves, 101-200")
 {
-    u32 moveStart = 100;
-    u32 moveCap = 200;
+    enum Move moveStart = 100;
+    enum Move moveCap = 200;
 
     if (moveCap > MOVES_COUNT)
         moveCap = MOVES_COUNT - 1;
 
     s32 j;
-    u32 move = MOVE_NONE;
+    enum Move move = MOVE_NONE;
 
     enum BattleMoveEffects effect;
 
@@ -192,20 +189,20 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 101-200")
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, move); }
+        TURN { EXPECT_MOVE(opponentLeft, move); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI can use all moves, 201-300")
 {
-    u32 moveStart = 200;
-    u32 moveCap = 300;
+    enum Move moveStart = 200;
+    enum Move moveCap = 300;
 
     if (moveCap > MOVES_COUNT)
         moveCap = MOVES_COUNT - 1;
 
     s32 j;
-    u32 move = MOVE_NONE;
+    enum Move move = MOVE_NONE;
 
     enum BattleMoveEffects effect;
 
@@ -247,20 +244,13 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 201-300")
 
         // tests exist elsewhere
         case EFFECT_HEAL_BELL:
-        case EFFECT_SUNNY_DAY:
-        case EFFECT_RAIN_DANCE:
-    #if B_PREFERRED_ICE_WEATHER == B_ICE_WEATHER_SNOW
-        case EFFECT_SNOWSCAPE:
-    #else
-        case EFFECT_HAIL:
-    #endif
+        case EFFECT_WEATHER:
         case EFFECT_ROLE_PLAY:
         case EFFECT_REFRESH:
 
         // Skipped on purpose.
         case EFFECT_PROTECT:
         case EFFECT_NON_VOLATILE_STATUS:
-        case EFFECT_SANDSTORM:
         case EFFECT_DO_NOTHING:
         case EFFECT_HOLD_HANDS:
         case EFFECT_CELEBRATE:
@@ -281,20 +271,20 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 201-300")
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, move); }
+        TURN { EXPECT_MOVE(opponentLeft, move); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI can use all moves, 301-400")
 {
-    u32 moveStart = 300;
-    u32 moveCap = 400;
+    enum Move moveStart = 300;
+    enum Move moveCap = 400;
 
     if (moveCap > MOVES_COUNT)
         moveCap = MOVES_COUNT - 1;
 
     s32 j;
-    u32 move = MOVE_NONE;
+    enum Move move = MOVE_NONE;
 
     enum BattleMoveEffects effect;
 
@@ -318,6 +308,7 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 301-400")
         case EFFECT_LAST_RESORT:
         case EFFECT_AQUA_RING:
         case EFFECT_HEALING_WISH:
+        case EFFECT_LUNAR_DANCE:
 
         //TODO: AI TESTS
         case EFFECT_RESTORE_HP:
@@ -332,7 +323,6 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 301-400")
         // tests exist elsewhere
         case EFFECT_GRAVITY:
         case EFFECT_HEAL_BELL:
-        case EFFECT_ATTACK_UP_USER_ALLY:
 
         // Skipped on purpose.
         case EFFECT_PROTECT:
@@ -357,20 +347,20 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 301-400")
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, move); }
+        TURN { EXPECT_MOVE(opponentLeft, move); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI can use all moves, 401-500")
 {
-    u32 moveStart = 400;
-    u32 moveCap = 500;
+    enum Move moveStart = 400;
+    enum Move moveCap = 500;
 
     if (moveCap > MOVES_COUNT)
         moveCap = MOVES_COUNT - 1;
 
     s32 j;
-    u32 move = MOVE_NONE;
+    enum Move move = MOVE_NONE;
 
     enum BattleMoveEffects effect;
 
@@ -386,6 +376,7 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 401-500")
         {
         //TODO: AI HANDLING
         case EFFECT_HEALING_WISH:
+        case EFFECT_LUNAR_DANCE:
         case EFFECT_WONDER_ROOM:
         case EFFECT_FOLLOW_ME:
         case EFFECT_MAGIC_ROOM:
@@ -424,20 +415,20 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 401-500")
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, move); }
+        TURN { EXPECT_MOVE(opponentLeft, move); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI can use all moves, 501-600")
 {
-    u32 moveStart = 515;
-    u32 moveCap = 600;
+    enum Move moveStart = 515;
+    enum Move moveCap = 600;
 
     if (moveCap > MOVES_COUNT)
         moveCap = MOVES_COUNT - 1;
 
     s32 j;
-    u32 move = MOVE_NONE;
+    enum Move move = MOVE_NONE;
 
     enum BattleMoveEffects effect;
 
@@ -499,20 +490,20 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 501-600")
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, move); }
+        TURN { EXPECT_MOVE(opponentLeft, move); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI can use all moves, 601-700")
 {
-    u32 moveStart = 600;
-    u32 moveCap = 700;
+    enum Move moveStart = 600;
+    enum Move moveCap = 700;
 
     if (moveCap > MOVES_COUNT)
         moveCap = MOVES_COUNT - 1;
 
     s32 j;
-    u32 move = MOVE_NONE;
+    enum Move move = MOVE_NONE;
 
     enum BattleMoveEffects effect;
 
@@ -547,7 +538,7 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 601-700")
         case EFFECT_AURORA_VEIL:
         case EFFECT_GEAR_UP:
         case EFFECT_MAGNETIC_FLUX:
- 
+
         // Skipped on purpose.
         case EFFECT_PROTECT:
         case EFFECT_NON_VOLATILE_STATUS:
@@ -571,20 +562,20 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 601-700")
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, move); }
+        TURN { EXPECT_MOVE(opponentLeft, move); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI can use all moves, 701-800")
 {
-    u32 moveStart = 700;
-    u32 moveCap = 800;
+    enum Move moveStart = 700;
+    enum Move moveCap = 800;
 
     if (moveCap > MOVES_COUNT)
         moveCap = MOVES_COUNT - 1;
 
     s32 j;
-    u32 move = MOVE_NONE;
+    enum Move move = MOVE_NONE;
 
     enum BattleMoveEffects effect;
 
@@ -640,20 +631,20 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 701-800")
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, move); }
+        TURN { EXPECT_MOVE(opponentLeft, move); }
     }
 }
 
 AI_DOUBLE_BATTLE_TEST("AI can use all moves, 801-900")
 {
-    u32 moveStart = 800;
-    u32 moveCap = 900;
+    enum Move moveStart = 800;
+    enum Move moveCap = 900;
 
     if (moveCap > MOVES_COUNT)
         moveCap = MOVES_COUNT - 1;
 
     s32 j;
-    u32 move = MOVE_NONE;
+    enum Move move = MOVE_NONE;
 
     enum BattleMoveEffects effect;
 
@@ -672,13 +663,18 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 801-900")
         case EFFECT_FAIL_IF_NOT_ARG_TYPE:
 
         //TODO: AI TESTS
-        case EFFECT_CHILLY_RECEPTION:
+        case EFFECT_WEATHER_AND_SWITCH:
         case EFFECT_TIDY_UP:
 
         // tests exist elsewhere
-        case EFFECT_SNOWSCAPE:
         case EFFECT_DRAGON_CHEER:
-
+            break;
+        case EFFECT_WEATHER:
+            if (GetMoveWeatherType(j) == BATTLE_WEATHER_SNOW)
+                break;
+            else
+                PARAMETRIZE { move = j; }
+            break;
         // Skipped on purpose.
         case EFFECT_PROTECT:
         case EFFECT_NON_VOLATILE_STATUS:
@@ -702,6 +698,6 @@ AI_DOUBLE_BATTLE_TEST("AI can use all moves, 801-900")
         OPPONENT(SPECIES_WOBBUFFET) { Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN {  EXPECT_MOVE(opponentLeft, move); }
+        TURN { EXPECT_MOVE(opponentLeft, move); }
     }
 }

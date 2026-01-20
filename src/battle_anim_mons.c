@@ -817,11 +817,15 @@ bool8 IsBattlerSpritePresent(u8 battler)
     }
     else
     {
-        if (GetBattlerPosition(battler) == 0xff)
+        if (GetBattlerPosition(battler) == B_POSITION_ABSENT)
             return FALSE;
 
-        if (!gBattleStruct->spriteIgnore0Hp && GetMonData(GetBattlerMon(battler), MON_DATA_HP) == 0)
+        if (gBattleStruct->battlerState[battler].fainted)
             return FALSE;
+
+        if (gAbsentBattlerFlags & 1u << battler)
+            return FALSE;
+
         return TRUE;
     }
 }

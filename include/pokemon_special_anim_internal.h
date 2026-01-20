@@ -40,8 +40,8 @@ struct PokemonSpecialAnim
     /*0x0004*/ MainCallback savedCallback;
     /*0x0008*/ struct Pokemon pokemon;
     /*0x006c*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
-    /*0x0077*/ u8 nameOfMoveForgotten[13];
-    /*0x0084*/ u8 nameOfMoveToTeach[13];
+    /*0x0077*/ u8 nameOfMoveForgotten[MOVE_NAME_LENGTH + 1];
+    /*0x0084*/ u8 nameOfMoveToTeach[MOVE_NAME_LENGTH + 1];
     /*0x0091*/ bool8 cancelDisabled;
     /*0x0092*/ u16 state;
     /*0x0094*/ u16 species;

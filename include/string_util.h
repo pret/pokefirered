@@ -8,6 +8,15 @@ enum StringConvertMode
     STR_CONV_MODE_LEADING_ZEROS
 };
 
+enum TextColorType
+{
+    TEXT_COLOR_TYPE_FOREGROUND = 0,
+    TEXT_COLOR_TYPE_SHADOW,
+    TEXT_COLOR_TYPE_HIGHLIGHT, // do not use, only kept for compatibility
+    TEXT_COLOR_TYPE_ACCENT,
+    TEXT_COLOR_TYPE_BACKGROUND,
+};
+
 u8 *StringCopy_Nickname(u8 *dest, const u8 *src);
 u8 *StringGet_Nickname(u8 *str);
 u8 *StringCopy_PlayerName(u8 *dest, const u8 *src);

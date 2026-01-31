@@ -373,32 +373,32 @@ struct BattleTowerEReaderTrainer
 
 struct BattleTowerData // Leftover from R/S
 {
-    /*0x0000, 0x00B0*/ struct BattleTowerRecord playerRecord;
-    /*0x00A4, 0x0154*/ struct BattleTowerRecord records[5]; // from record mixing
-    /*0x03D8, 0x0488*/ u16 firstMonSpecies; // species of the first pokemon in the player's battle tower party
-    /*0x03DA, 0x048A*/ u16 defeatedBySpecies; // species of the pokemon that defated the player
-    /*0x03DC, 0x048C*/ u8 defeatedByTrainerName[8];
-    /*0x03E4, 0x0494*/ u8 firstMonNickname[VANILLA_POKEMON_NAME_LENGTH]; // nickname of the first pokemon in the player's battle tower party
-#if FREE_BATTLE_TOWER_E_READER == FALSE
-    /*0x03F0, 0x04A0*/ struct BattleTowerEReaderTrainer ereaderTrainer;
-#endif //FREE_BATTLE_TOWER_E_READER
-    /*0x04AC, 0x055C*/ u8 battleTowerLevelType:1; // 0 = level 50; 1 = level 100
-    /*0x04AC, 0x055C*/ u8 unk_554:1;
-    /*0x04AD, 0x055D*/ u8 battleOutcome;
-    /*0x04AE, 0x055E*/ u8 var_4AE[2];
-    /*0x04B0, 0x0560*/ u16 curChallengeBattleNum[2]; // 1-based index of battle in the current challenge. (challenges consist of 7 battles)
-    /*0x04B4, 0x0564*/ u16 curStreakChallengesNum[2]; // 1-based index of the current challenge in the current streak.
-    /*0x04B8, 0x0568*/ u16 recordWinStreaks[2];
-    /*0x04BC, 0x056C*/ u8 battleTowerTrainerId; // index for gBattleTowerTrainers table
-    /*0x04BD, 0x056D*/ u8 selectedPartyMons[0x3]; // indices of the 3 selected player party mons.
-    /*0x04C0, 0x0570*/ u16 prizeItem;
-    /*0x04C2, 0x0572*/ u8 battledTrainerIds[6];
-    /*0x04C8, 0x0578*/ u16 totalBattleTowerWins;
-    /*0x04CA, 0x057A*/ u16 bestBattleTowerWinStreak;
-    /*0x04CC, 0x057C*/ u16 currentWinStreaks[2];
-    /*0x04D0, 0x0580*/ u8 lastStreakLevelType; // 0 = level 50, 1 = level 100.  level type of the last streak. Used by tv to report the level mode.
-    /*0x04D1, 0x0581*/ u8 filler_4D1[0x317];
-}; /* size = 0x7E8 */
+    struct BattleTowerRecord playerRecord;
+    struct BattleTowerRecord records[5]; // from record mixing
+    #if FREE_BATTLE_TOWER_E_READER == FALSE
+        struct BattleTowerEReaderTrainer ereaderTrainer;
+    #endif //FREE_BATTLE_TOWER_E_READER
+    u16 firstMonSpecies; // species of the first pokemon in the player's battle tower party
+    u16 defeatedBySpecies; // species of the pokemon that defated the player
+    u16 curChallengeBattleNum[2]; // 1-based index of battle in the current challenge. (challenges consist of 7 battles)
+    u16 curStreakChallengesNum[2]; // 1-based index of the current challenge in the current streak.
+    u16 recordWinStreaks[2];
+    u16 prizeItem;
+    u16 totalBattleTowerWins;
+    u16 bestBattleTowerWinStreak;
+    u16 currentWinStreaks[2];
+    u8 defeatedByTrainerName[8];
+    u8 firstMonNickname[VANILLA_POKEMON_NAME_LENGTH]; // nickname of the first pokemon in the player's battle tower party
+    u8 battleTowerLevelType:1; // 0 = level 50; 1 = level 100
+    u8 unk_554:1;
+    u8 battleOutcome;
+    u8 var_4AE[2];
+    u8 battleTowerTrainerId; // index for gBattleTowerTrainers table
+    u8 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
+    u8 battledTrainerIds[6];
+    u8 lastStreakLevelType; // 0 = level 50, 1 = level 100.  level type of the last streak. Used by tv to report the level mode.
+    u8 filler_4D1[0x316];
+};
 
 struct SaveBlock2
 {

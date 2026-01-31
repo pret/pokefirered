@@ -1173,7 +1173,7 @@ static void Task_OakSpeech_WelcomeToTheWorld(u8 taskId)
 
 static void Task_OakSpeech_ThisWorld(u8 taskId)
 {
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
         OakSpeechPrintMessage(gOakSpeech_Text_ThisWorld, sOakSpeechResources->textSpeed, FALSE);
         gTasks[taskId].tTimer = 30;
@@ -1186,7 +1186,7 @@ static void Task_OakSpeech_ReleaseNidoranFFromPokeBall(u8 taskId)
     s16 *data = gTasks[taskId].data;
     u8 spriteId;
 
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
         if (tTimer != 0)
             tTimer--;
@@ -1219,7 +1219,7 @@ static void Task_OakSpeech_IsInhabitedFarAndWide(u8 taskId)
 
 static void Task_OakSpeech_IStudyPokemon(u8 taskId)
 {
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
         OakSpeechPrintMessage(gOakSpeech_Text_IStudyPokemon, sOakSpeechResources->textSpeed, FALSE);
         gTasks[taskId].func = Task_OakSpeech_ReturnNidoranFToPokeBall;
@@ -1230,7 +1230,7 @@ static void Task_OakSpeech_ReturnNidoranFToPokeBall(u8 taskId)
 {
     u8 spriteId;
 
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
         ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, TRUE);
         spriteId = gTasks[taskId].tNidoranFSpriteId;
@@ -1274,7 +1274,7 @@ static void Task_OakSpeech_FadeOutOak(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
         ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, 1);
         CreateFadeInTask(taskId, 2);
@@ -1305,7 +1305,7 @@ static void Task_OakSpeech_AskPlayerGender(u8 taskId)
 
 static void Task_OakSpeech_ShowGenderOptions(u8 taskId)
 {
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
         gTasks[taskId].tMenuWindowId = AddWindow(&sIntro_WindowTemplates[WIN_INTRO_BOYGIRL]);
         PutWindowTilemap(gTasks[taskId].tMenuWindowId);
@@ -1388,7 +1388,7 @@ static void Task_OakSpeech_YourNameWhatIsIt(u8 taskId)
 
 static void Task_OakSpeech_FadeOutForPlayerNamingScreen(u8 taskId)
 {
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         sOakSpeechResources->hasPlayerBeenNamed = FALSE;
@@ -1400,7 +1400,7 @@ static void Task_OakSpeech_MoveRivalDisplayNameOptions(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
         if (tTrainerPicPosX > -60)
         {
@@ -1491,7 +1491,7 @@ static void Task_OakSpeech_ConfirmName(u8 taskId)
             tNameNotConfirmed = FALSE;
             tTimer = 25;
         }
-        else if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+        else if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
         {
             if (tTimer != 0)
             {
@@ -1554,7 +1554,7 @@ static void Task_OakSpeech_FadeOutPlayerPic(u8 taskId)
 
 static void Task_OakSpeech_FadeOutRivalPic(u8 taskId)
 {
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
         ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, TRUE);
         CreateFadeInTask(taskId, 2);
@@ -1623,7 +1623,7 @@ static void Task_OakSpeech_LetsGo(u8 taskId)
 
 static void Task_OakSpeech_FadeOutBGM(u8 taskId)
 {
-    if (!IsTextPrinterActive(WIN_INTRO_TEXTBOX))
+    if (!IsTextPrinterActiveOnWindow(WIN_INTRO_TEXTBOX))
     {
         if (gTasks[taskId].tTimer != 0)
         {

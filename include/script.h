@@ -32,6 +32,7 @@ void ScriptCall(struct ScriptContext *ctx, const u8 *ptr);
 void ScriptReturn(struct ScriptContext *ctx);
 u16 ScriptReadHalfword(struct ScriptContext *ctx);
 u32 ScriptReadWord(struct ScriptContext *ctx);
+u16 ScriptPeekHalfword(struct ScriptContext *ctx);
 u32 ScriptPeekWord(struct ScriptContext *ctx);
 void LockPlayerFieldControls(void);
 void UnlockPlayerFieldControls(void);
@@ -75,6 +76,9 @@ void ResetFacingNpcOrSignpostVars(void);
 bool8 CanWalkAwayToCancelMsgBox(void);
 void SetWalkingIntoSignVars(void);
 bool8 IsMsgBoxWalkawayDisabled(void);
+
+bool32 Script_MatchesCallNative(const u8 *script, void *funcPtr, bool32 requestEffects);
+bool32 Script_MatchesSpecial(const u8 *script, void *funcPtr);
 
 // srccmd.h
 void SetMovingNpcId(u16 npcId);

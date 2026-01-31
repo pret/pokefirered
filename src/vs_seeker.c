@@ -32,7 +32,6 @@
 // Each rematch is unavailable until the player has progressed to a certain point in the story (see TryGetRematchTrainerIdGivenGameState).
 // A list of the trainer ids for each party is in sRematches. If a party doesn't update for a progression point it will have SKIP instead,
 // and that trainer id will be ignored.
-#define MAX_REMATCH_PARTIES 6
 #define SKIP 0xFFFF
 
 #define NO_REMATCH_LOCALID LOCALID_PLAYER
@@ -57,13 +56,6 @@ typedef enum
     VSSEEKER_RESPONSE_UNFOUGHT_TRAINERS,
     VSSEEKER_RESPONSE_FOUND_REMATCHES
 } VsSeekerResponseCode;
-
-struct RematchData
-{
-    u16 trainerIDs[MAX_REMATCH_PARTIES];
-    u16 mapGroup; // unused
-    u16 mapNum; // unused
-};
 
 struct VsSeekerTrainerInfo
 {
@@ -126,7 +118,7 @@ static void StartAllRespondantIdleMovements(void);
 static bool8 ObjectEventIdIsSane(u8 objectEventId);
 static u8 GetRandomFaceDirectionMovementType();
 
-static const struct RematchData sRematches[] =
+const struct RematchData sRematches[REMATCH_TRAINER_COUNT] =
 {
     [REMATCH_YOUNGSTER_BEN] =
     {

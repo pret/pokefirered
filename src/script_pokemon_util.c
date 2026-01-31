@@ -625,3 +625,17 @@ void Script_SetStatus1(struct ScriptContext *ctx)
         SetMonData(&gPlayerParty[slot], MON_DATA_STATUS, &status1);
     }
 }
+
+void Script_SetKO(struct ScriptContext *ctx)
+{
+    u32 slot = VarGet(ScriptReadHalfword(ctx));
+
+    Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
+
+    if (slot < PARTY_SIZE)
+    {
+        u32 hp = 0;
+        SetMonData(&gPlayerParty[slot], MON_DATA_HP, &hp);
+    }
+}
+

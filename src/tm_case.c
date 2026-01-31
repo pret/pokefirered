@@ -1433,7 +1433,7 @@ static void Task_Pokedude_Run(u8 taskId)
     case 9:
     case 19:
         RunTextPrinters();
-        if (!IsTextPrinterActive(WIN_MESSAGE))
+        if (!IsTextPrinterActiveOnWindow(WIN_MESSAGE))
             tPokedudeState++;
         break;
     case 10:

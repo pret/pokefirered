@@ -752,7 +752,7 @@ void ResetTrainerOpponentIds(void)
     TRAINER_BATTLE_PARAM.opponentB = 0;
 }
 
-static void InitTrainerBattleVariables(void)
+void InitTrainerBattleParameter(void)
 {
     memset(gTrainerBattleParameter.data, 0, sizeof(TrainerBattleParameter));
     sTrainerBattleEndScript = NULL;
@@ -760,7 +760,7 @@ static void InitTrainerBattleVariables(void)
 
 void TrainerBattleLoadArgs(const u8 *data)
 {
-    InitTrainerBattleVariables();
+    InitTrainerBattleParameter();
     memcpy(gTrainerBattleParameter.data, data, sizeof(TrainerBattleParameter));
     sTrainerBattleEndScript = (u8*)data + sizeof(TrainerBattleParameter);
 }
@@ -1150,6 +1150,19 @@ void ShowTrainerCantBattleSpeech(void)
     ShowFieldMessage(GetTrainerCantBattleSpeech());
 }
 
+s32 FirstBattleTrainerIdToRematchTableId(const struct RematchData *table, u16 trainerId)
+{
+    s32 i;
+
+    for (i = 0; i < REMATCH_TRAINER_COUNT; i++)
+    {
+        if (table[i].trainerIDs[0] == trainerId)
+            return i;
+    }
+
+    return -1;
+}
+
 void PlayTrainerEncounterMusic(void)
 {
     u16 trainerId;
@@ -1229,3 +1242,40 @@ static const u8 *GetTrainerCantBattleSpeech(void)
 {
     return ReturnEmptyStringIfNull(TRAINER_BATTLE_PARAM.cannotBattleText);
 }
+
+u16 CountMaxPossibleRematch(u16 trainerId)
+{
+    for (u32 i = 1; i < MAX_REMATCH_PARTIES; i++)
+    {
+        if (sRematches[trainerId].trainerIDs[i] == 0)
+            return i;
+    }
+    return MAX_REMATCH_PARTIES - 1;
+}
+
+u16 CountBattledRematchTeams(u16 trainerId)
+{
+    if (HasTrainerBeenFought(sRematches[trainerId].trainerIDs[0]) != TRUE)
+        return 0;
+
+    for (u32 i = 1; i < MAX_REMATCH_PARTIES; i++)
+    {
+        if (sRematches[trainerId].trainerIDs[i] == 0)
+            return i;
+        if (!HasTrainerBeenFought(sRematches[trainerId].trainerIDs[i]))
+            return i;
+    }
+
+    return MAX_REMATCH_PARTIES - 1;
+}
+
+void SetMultiTrainerBattle(struct ScriptContext *ctx)
+{
+    InitTrainerBattleParameter();
+
+    TRAINER_BATTLE_PARAM.opponentA = ScriptReadHalfword(ctx);
+    TRAINER_BATTLE_PARAM.defeatTextA = (u8*)ScriptReadWord(ctx);
+    TRAINER_BATTLE_PARAM.opponentB = ScriptReadHalfword(ctx);
+    TRAINER_BATTLE_PARAM.defeatTextB = (u8*)ScriptReadWord(ctx);
+    gPartnerTrainerId = TRAINER_PARTNER(ScriptReadHalfword(ctx));
+};

@@ -96,7 +96,7 @@ void DisplayMessageAndContinueTask(u8 taskId, u8 windowId, u16 tileNum, u8 palet
 bool16 RunTextPrintersRetIsActive(u8 textPrinterId)
 {
     RunTextPrinters();
-    return IsTextPrinterActive(textPrinterId);
+    return IsTextPrinterActiveOnWindow(textPrinterId);
 }
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId)

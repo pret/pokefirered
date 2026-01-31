@@ -445,7 +445,7 @@ static void CB2_MoveRelearner_Resume(void)
 
 static void CB2_MoveRelearner(void)
 {
-    if (!IsTextPrinterActive(7))
+    if (!IsTextPrinterActiveOnWindow(7))
         MoveRelearnerStateMachine();
     if (sMoveRelearner->scheduleMoveInfoUpdate)
     {

@@ -6714,6 +6714,7 @@ static void DrawLevelUpBannerText(void)
     GetMonNickname(mon, gStringVar4);
 
     printerTemplate.currentChar = gStringVar4;
+    printerTemplate.type = WINDOW_TEXT_PRINTER;
     printerTemplate.windowId = B_WIN_LEVEL_UP_BANNER;
     printerTemplate.fontId = FONT_SMALL;
     printerTemplate.x = 32;
@@ -6722,10 +6723,10 @@ static void DrawLevelUpBannerText(void)
     printerTemplate.currentY = 0;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
-    printerTemplate.unk = 0;
-    printerTemplate.fgColor = TEXT_COLOR_WHITE;
-    printerTemplate.bgColor = TEXT_COLOR_TRANSPARENT;
-    printerTemplate.shadowColor = TEXT_COLOR_DARK_GRAY;
+    printerTemplate.color.background = TEXT_COLOR_TRANSPARENT;
+    printerTemplate.color.foreground = TEXT_COLOR_WHITE;
+    printerTemplate.color.shadow = TEXT_COLOR_DARK_GRAY;
+    printerTemplate.color.accent = TEXT_COLOR_TRANSPARENT;
 
     AddTextPrinter(&printerTemplate, TEXT_SKIP_DRAW, NULL);
 

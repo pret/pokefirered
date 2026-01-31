@@ -86,7 +86,6 @@ static u16 GetObjectEventFlagIdByObjectEventId(u8);
 static void UpdateObjectEventVisibility(struct ObjectEvent *, struct Sprite *);
 static void GetObjectEventMovingCameraOffset(s16 *, s16 *);
 static const struct ObjectEventTemplate *GetObjectEventTemplateByLocalIdAndMap(u8, u8, u8);
-u8 LoadObjectEventPalette(u16 paletteTag);
 static void RemoveObjectEventIfOutsideView(struct ObjectEvent *);
 static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y);
 static void SetPlayerAvatarObjectEventIdAndObjectId(u8, u8);
@@ -246,12 +245,12 @@ const u8 gReflectionEffectPaletteMap[16] = {
 };
 
 static const struct SpriteTemplate gCameraSpriteTemplate = {
-    .tileTag = 0, 
+    .tileTag = 0,
     .paletteTag = TAG_NONE,
-    .oam = &gDummyOamData, 
-    .anims = gDummySpriteAnimTable, 
-    .images = NULL, 
-    .affineAnims = gDummySpriteAffineAnimTable, 
+    .oam = &gDummyOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = ObjectCB_CameraObject
 };
 
@@ -1495,7 +1494,7 @@ static bool8 ShouldInitObjectEventStateFromTemplate(const struct ObjectEventTemp
 
     if (!TemplateIsObstacleAndVisibleFromConnectingMap(template, x, y))
         return FALSE;
-    
+
     return TRUE;
 }
 
@@ -1512,7 +1511,7 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     s16 y2 = 0;
     s16 x3 = 0;
     s16 y3 = 0;
-    
+
     if (template->kind == OBJ_KIND_CLONE)
     {
         isClone = TRUE;
@@ -1594,7 +1593,7 @@ u8 Unref_TryInitLocalObjectEvent(u8 localId)
         return OBJECT_EVENTS_COUNT;
 
     objectEventCount = gMapHeader.events->objectEventCount;
-    
+
     for (i = 0; i < objectEventCount; i++)
     {
         template = &gSaveBlock1Ptr->objectEventTemplates[i];
@@ -1710,7 +1709,7 @@ static s16 ReallocSpriteTiles(struct Sprite *sprite, u32 byteSize)
     {
         i = -1;
     }
-    
+
     sprite->invisible = wasVisible;
     return i;
 }
@@ -1927,12 +1926,12 @@ void CopyObjectGraphicsInfoToSpriteTemplate(u16 graphicsId, void (*callback)(str
     spriteTemplate->anims = graphicsInfo->anims;
     spriteTemplate->images = graphicsInfo->images;
     spriteTemplate->affineAnims = graphicsInfo->affineAnims;
-    
+
     if (ScriptContext_IsEnabled() != TRUE && QL_GetPlaybackState() == QL_PLAYBACK_STATE_RUNNING)
         spriteTemplate->callback = QL_UpdateObject;
     else
         spriteTemplate->callback = callback;
-    
+
     *subspriteTables = graphicsInfo->subspriteTables;
 }
 
@@ -3130,6 +3129,13 @@ u8 LoadObjectEventPalette(u16 paletteTag)
     if (i == 0xFF)
         return i;
     return LoadSpritePaletteIfTagExists(&sObjectEventSpritePalettes[i]);
+}
+
+u8 LoadObjectEventPaletteCopy(u16 originalTag, u16 copyTag)
+{
+    u32 i = FindObjectEventPaletteIndexByTag(originalTag);
+    const struct SpritePalette palette = {sObjectEventSpritePalettes[i].data, copyTag};
+    return LoadSpritePalette(&palette);
 }
 
 u8 LoadPlayerObjectEventPalette(u8 gender)
@@ -6841,7 +6847,7 @@ void QL_UpdateObjectEventCurrentMovement(struct ObjectEvent *objectEvent, struct
 
     if (ObjectEventIsHeldMovementActive(objectEvent) && !sprite->animBeginning)
         QuestLogObjectEventExecHeldMovementAction(objectEvent, sprite);
-    
+
     if (MetatileBehavior_IsIce_2(objectEvent->currentMetatileBehavior) == TRUE
         || MetatileBehavior_IsTrickHouseSlipperyFloor(objectEvent->currentMetatileBehavior) == TRUE)
         objectEvent->disableAnim = TRUE;
@@ -6981,7 +6987,7 @@ static void ObjectEventSetSingleMovement(struct ObjectEvent *objectEvent, struct
 {
     objectEvent->movementActionId = TryUpdateMovementActionOnStairs(objectEvent, movementActionId);
     sprite->data[2] = 0;
-    
+
     if (gQuestLogPlaybackState == QL_PLAYBACK_STATE_RECORDING)
         QuestLogRecordNPCStep(objectEvent->localId, objectEvent->mapNum, objectEvent->mapGroup, movementActionId);
 }
@@ -7752,7 +7758,7 @@ u8 MovementAction_GlideDown_Step0(struct ObjectEvent *objectEvent, struct Sprite
 {
     if(objectEvent->facingDirection != DIR_SOUTH)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_SOUTH));
-    
+
     InitNpcForMovement(objectEvent, sprite, DIR_SOUTH, MOVE_SPEED_FAST_1);
     return MovementAction_GlideDown_Step1(objectEvent, sprite);
 }
@@ -7772,7 +7778,7 @@ u8 MovementAction_GlideUp_Step0(struct ObjectEvent *objectEvent, struct Sprite *
 {
     if(objectEvent->facingDirection != DIR_NORTH)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_NORTH));
-    
+
     InitNpcForMovement(objectEvent, sprite, DIR_NORTH, MOVE_SPEED_FAST_1);
     return MovementAction_GlideUp_Step1(objectEvent, sprite);
 }
@@ -7792,7 +7798,7 @@ u8 MovementAction_GlideLeft_Step0(struct ObjectEvent *objectEvent, struct Sprite
 {
     if(objectEvent->facingDirection != DIR_WEST)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_WEST));
-    
+
     InitNpcForMovement(objectEvent, sprite, DIR_WEST, MOVE_SPEED_FAST_1);
     return MovementAction_GlideLeft_Step1(objectEvent, sprite);
 }
@@ -7812,7 +7818,7 @@ u8 MovementAction_GlideRight_Step0(struct ObjectEvent *objectEvent, struct Sprit
 {
     if(objectEvent->facingDirection != DIR_EAST)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_EAST));
-    
+
     InitNpcForMovement(objectEvent, sprite, DIR_EAST, MOVE_SPEED_FAST_1);
     return MovementAction_GlideRight_Step1(objectEvent, sprite);
 }
@@ -7840,7 +7846,7 @@ u8 MovementAction_FaceDownFast_Step0(struct ObjectEvent *objectEvent, struct Spr
 {
     if(objectEvent->facingDirection != DIR_SOUTH)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_SOUTH));
-    
+
     AnimateSprite(sprite);
     FaceDirectionFast(objectEvent, sprite, DIR_SOUTH);
     return TRUE;
@@ -7850,7 +7856,7 @@ u8 MovementAction_FaceUpFast_Step0(struct ObjectEvent *objectEvent, struct Sprit
 {
     if(objectEvent->facingDirection != DIR_NORTH)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_NORTH));
-    
+
     AnimateSprite(sprite);
     FaceDirectionFast(objectEvent, sprite, DIR_NORTH);
     return TRUE;
@@ -7860,7 +7866,7 @@ u8 MovementAction_FaceLeftFast_Step0(struct ObjectEvent *objectEvent, struct Spr
 {
     if(objectEvent->facingDirection != DIR_WEST)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_WEST));
-    
+
     AnimateSprite(sprite);
     FaceDirectionFast(objectEvent, sprite, DIR_WEST);
     return TRUE;
@@ -7870,7 +7876,7 @@ u8 MovementAction_FaceRightFast_Step0(struct ObjectEvent *objectEvent, struct Sp
 {
     if(objectEvent->facingDirection != DIR_EAST)
         StartSpriteAnim(sprite, GetFaceDirectionAnimNum(DIR_EAST));
-    
+
     AnimateSprite(sprite);
     FaceDirectionFast(objectEvent, sprite, DIR_EAST);
     return TRUE;
@@ -10005,7 +10011,7 @@ static void CalcWhetherObjectIsOffscreen(struct ObjectEvent *objectEvent, struct
     }
     x2 = graphicsInfo->width + (s16)x;
     y2 = graphicsInfo->height + (s16)y;
-    
+
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SSANNE_EXTERIOR)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SSANNE_EXTERIOR)
      && objectEvent->localId == LOCALID_SS_ANNE)
@@ -10671,7 +10677,7 @@ static void DoTracksGroundEffect_BikeTireTracks(struct ObjectEvent *objEvent, st
         gFieldEffectArguments[2] = 149;
         gFieldEffectArguments[3] = 2;
         gFieldEffectArguments[4] = bikeTireTracks_Transitions[movementDir][objEvent->facingDirection - 5];
-        
+
         switch(groundEffect)
         {
             case GROUND_EFFECT_SAND:
@@ -10710,7 +10716,7 @@ static void DoTracksGroundEffect_SlitherTracks(struct ObjectEvent *objEvent, str
         gFieldEffectArguments[3] = 2;
         gFieldEffectArguments[4] = slitherTracks_Transitions[objEvent->previousMovementDirection][objEvent->facingDirection - 5];
         gFieldEffectArguments[5] = objEvent->previousMetatileBehavior;
-        
+
         switch(groundEffect)
         {
             case GROUND_EFFECT_SAND:

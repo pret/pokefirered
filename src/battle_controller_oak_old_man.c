@@ -261,7 +261,7 @@ static void SimulateInputChooseAction(u32 battler)
 
 static void CompleteOnInactiveTextPrinter(u32 battler)
 {
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActiveOnWindow(0))
         OakOldManBufferExecCompleted(battler);
 }
 
@@ -424,7 +424,7 @@ static void PrintOakText_ForPetesSake(u32 battler)
         ++gBattleStruct->simulatedInputState[0];
         break;
     case 3:
-        if (!IsTextPrinterActive(B_WIN_OAK_OLD_MAN))
+        if (!IsTextPrinterActiveOnWindow(B_WIN_OAK_OLD_MAN))
         {
             mask = (gBitTable[gBattleStruct->simulatedInputState[1]] | gBitTable[gBattleStruct->simulatedInputState[3]]) << 16;
             BeginNormalPaletteFade(mask,
@@ -444,7 +444,7 @@ static void PrintOakText_ForPetesSake(u32 battler)
         }
         break;
     case 5:
-        if (!IsTextPrinterActive(B_WIN_OAK_OLD_MAN))
+        if (!IsTextPrinterActiveOnWindow(B_WIN_OAK_OLD_MAN))
         {
             mask = (gBitTable[gBattleStruct->simulatedInputState[1]] | gBitTable[gBattleStruct->simulatedInputState[3]]) << 16;
             BeginNormalPaletteFade(mask,
@@ -464,7 +464,7 @@ static void PrintOakText_ForPetesSake(u32 battler)
         }
         break;
     case 7:
-        if (!IsTextPrinterActive(B_WIN_OAK_OLD_MAN))
+        if (!IsTextPrinterActiveOnWindow(B_WIN_OAK_OLD_MAN))
         {
             BeginNormalPaletteFade(0xFFFFFF7E,
                                    4,
@@ -517,7 +517,7 @@ static void PrintOakTextWithMainBgDarkened(u32 battler, const u8 *text, u8 delay
     switch (gBattleStruct->simulatedInputState[0])
     {
     case 0:
-        if (!IsTextPrinterActive(0))
+        if (!IsTextPrinterActiveOnWindow(0))
         {
             gBattleStruct->simulatedInputState[3] = delay;
             ++gBattleStruct->simulatedInputState[0];
@@ -547,7 +547,7 @@ static void PrintOakTextWithMainBgDarkened(u32 battler, const u8 *text, u8 delay
         ++gBattleStruct->simulatedInputState[0];
         break;
     case 4:
-        if (!IsTextPrinterActive(B_WIN_OAK_OLD_MAN))
+        if (!IsTextPrinterActiveOnWindow(B_WIN_OAK_OLD_MAN))
         {
             BeginNormalPaletteFade(0xFFFFFF7E,
                                    4,
@@ -615,7 +615,7 @@ static void PrintOakText_KeepAnEyeOnHP(u32 battler)
         ++gBattleStruct->simulatedInputState[0];
         break;
     case 4:
-        if (!IsTextPrinterActive(B_WIN_OAK_OLD_MAN))
+        if (!IsTextPrinterActiveOnWindow(B_WIN_OAK_OLD_MAN))
         {
             mask = (gBitTable[gBattleStruct->simulatedInputState[1]] | gBitTable[gBattleStruct->simulatedInputState[3]]) << 16;
             BeginNormalPaletteFade(mask,

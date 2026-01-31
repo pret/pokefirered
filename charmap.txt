@@ -442,10 +442,10 @@ DYNAMIC  =   F7
 
 @ more text functions
 
-COLOR = FC 01 @ use a color listed below right after
-HIGHLIGHT = FC 02 @ same as fc 01
-SHADOW = FC 03 @ same as fc 01
-COLOR_HIGHLIGHT_SHADOW = FC 04 @ takes 3 bytes
+COLOR = FC 01 @ use a color listed below right after. sets base text color
+HIGHLIGHT = FC 02 @ same as fc 01. sets background and accent color
+SHADOW = FC 03 @ same as fc 01. sets shadow color
+COLOR_HIGHLIGHT_SHADOW = FC 04 @ takes 3 colors
 PALETTE = FC 05 @ used in credits
 FONT = FC 06 @ Given a font id, or use font constants below instead
 RESET_FONT = FC 07
@@ -466,6 +466,9 @@ JPN = FC 15
 ENG = FC 16
 PAUSE_MUSIC = FC 17
 RESUME_MUSIC = FC 18
+ACCENT = FC 1A @ same as FC 01. sets accent color
+BACKGROUND = FC 1B @ same as FC 01. sets background color
+TEXT_COLORS = FC 1C @ takes 3 colors: text base color, shadow and accent
 
 @ fonts
 

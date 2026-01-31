@@ -97,7 +97,6 @@ void LoadMessageBoxAndBorderGfx(void);
 void DrawStdWindowFrame(u8 windowId, bool8 copyNow);
 void Menu_LoadStdPal(void);
 void Menu_LoadStdPalAt(u16 offset);
-u8 GetPlayerTextSpeedDelay(void);
 void DoScheduledBgTilemapCopiesToVram(void);
 void ClearScheduledBgCopiesToVram(void);
 void ResetTempTileDataBuffers(void);

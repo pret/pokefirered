@@ -374,7 +374,7 @@ static bool32 Fishing_StartEncounter(struct Task *task)
 
     if (task->tFrameCounter == 0)
     {
-        if (!IsTextPrinterActive(0))
+        if (!IsTextPrinterActiveOnWindow(0))
         {
             struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
 
@@ -451,7 +451,7 @@ static bool32 Fishing_PutRodAway(struct Task *task)
 static bool32 Fishing_EndNoMon(struct Task *task)
 {
     RunTextPrinters();
-    if (!IsTextPrinterActive(0))
+    if (!IsTextPrinterActiveOnWindow(0))
     {
         gPlayerAvatar.preventStep = FALSE;
         UnlockPlayerFieldControls();

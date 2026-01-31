@@ -1,6 +1,7 @@
 #ifndef GUARD_BATTLE_SETUP_H
 #define GUARD_BATTLE_SETUP_H
 
+#include "vs_seeker.h"
 /*
 the layout of the first byte can be confusing here
 isDoubleBattle is the least lsb. msb is in the mode.
@@ -87,14 +88,17 @@ bool8 ShouldTryRematchBattle(void);
 bool8 ShouldTryRematchBattleForTrainerId(u16 trainerId);
 bool8 IsTrainerReadyForRematch(void);
 void ShouldTryGetTrainerScript(void);
+u16 CountMaxPossibleRematch(u16 trainerId);
 u16 CountBattledRematchTeams(u16 trainerId);
 void TrainerBattleLoadArgs(const u8 *data);
 void TrainerBattleLoadArgsTrainerA(const u8 *data);
 void TrainerBattleLoadArgsTrainerB(const u8 *data);
 void TrainerBattleLoadArgsSecondTrainer(const u8 *data);
+void InitTrainerBattleParameter(void);
 
 void DoStandardWildBattle_Debug(void);
 void BattleSetup_StartTrainerBattle_Debug(void);
+s32 FirstBattleTrainerIdToRematchTableId(const struct RematchData *table, u16 trainerId);
 
 u16 GetRivalBattleFlags(void);
 void SetBattledTrainerFlag(void);

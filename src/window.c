@@ -5,14 +5,10 @@
 #include "blit.h"
 #include "decompress.h"
 
-// This global is set to 0 and never changed.
-COMMON_DATA u8 gTransparentTileNumber = 0;
 COMMON_DATA void *gWindowBgTilemapBuffers[NUM_BACKGROUNDS] = {0};
 extern u32 gWindowTileAutoAllocEnabled;
 
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
-EWRAM_DATA static struct Window* sWindowPtr = NULL;
-EWRAM_DATA static u16 sWindowSize = 0;
 
 static u32 GetNumActiveWindowsOnBg(u32 bgId);
 static u32 GetNumActiveWindowsOnBg8Bit(u32 bgId);
@@ -103,7 +99,6 @@ bool32 InitWindows(const struct WindowTemplate *templates)
         }
     }
 
-    gTransparentTileNumber = 0;
     return TRUE;
 }
 
@@ -375,7 +370,7 @@ void ClearWindowTilemap(u32 windowId)
 
     FillBgTilemapBufferRect(
         windowLocal.window.bg,
-        gTransparentTileNumber,
+        0,
         windowLocal.window.tilemapLeft,
         windowLocal.window.tilemapTop,
         windowLocal.window.width,
@@ -698,20 +693,20 @@ void BlitBitmapRectToWindow4BitTo8Bit(u32 windowId, const u8 *pixels, u16 srcX, 
 
 void CopyWindowToVram8Bit(u32 windowId, u8 mode)
 {
-    sWindowPtr = &gWindows[windowId];
-    sWindowSize = 64 * (sWindowPtr->window.width * sWindowPtr->window.height);
+    struct Window *window = &gWindows[windowId];
+    u16 windowSize = 64 * (window->window.width * window->window.height);
 
     switch (mode)
     {
     case COPYWIN_MAP:
-        CopyBgTilemapBufferToVram(sWindowPtr->window.bg);
+        CopyBgTilemapBufferToVram(window->window.bg);
         break;
     case COPYWIN_GFX:
-        LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
+        LoadBgTiles(window->window.bg, window->tileData, windowSize, window->window.baseBlock);
         break;
     case COPYWIN_FULL:
-        LoadBgTiles(sWindowPtr->window.bg, sWindowPtr->tileData, sWindowSize, sWindowPtr->window.baseBlock);
-        CopyBgTilemapBufferToVram(sWindowPtr->window.bg);
+        LoadBgTiles(window->window.bg, window->tileData, windowSize, window->window.baseBlock);
+        CopyBgTilemapBufferToVram(window->window.bg);
         break;
     }
 }

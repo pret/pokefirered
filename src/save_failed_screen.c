@@ -157,8 +157,14 @@ static void ClearMapBuffer(void)
 static void PrintTextOnSaveFailedScreen(const u8 *str)
 {
     u8 *buffer = Alloc(0x4000);
+    union TextColor color = {
+        .background = TEXT_COLOR_DARK_GRAY,
+        .foreground = TEXT_COLOR_WHITE,
+        .shadow = TEXT_COLOR_LIGHT_GRAY,
+        .accent = TEXT_COLOR_DARK_GRAY,
+    };
 
-    GenerateFontHalfRowLookupTable(TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    GenerateFontHalfRowLookupTable(color);
     CpuFill16(PIXEL_FILL(1) | (PIXEL_FILL(1) << 8), buffer + 0x20, 0x2300);
     HelpSystemRenderText(2, buffer + 0x20, str, 2, 2, 28, 10);
     RequestDmaCopyFromCharBuffer(buffer);

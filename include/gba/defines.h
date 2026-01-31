@@ -15,6 +15,7 @@
 #define UNUSED __attribute__((unused))
 #define USED __attribute__((used))
 #define KEEP_SECTION __attribute__((section(".text.consts")))
+#define DEPRECATED(msg) __attribute__((deprecated(msg)))
 
 #define ARM_FUNC __attribute__((target("arm")))
 

@@ -1343,7 +1343,7 @@ void Dummy_TryEnableBravoTrainerBattleTower(void)
 
 #define STEVEN_OTID 61226
 
-static void FillPartnerParty(u16 trainerId)
+void FillPartnerParty(u16 trainerId)
 {
     s32 i, j, k;
     u32 firstIdPart = 0, secondIdPart = 0, thirdIdPart = 0;

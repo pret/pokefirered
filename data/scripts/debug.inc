@@ -42,26 +42,26 @@ Debug_CheatStart::
 	setflag FLAG_GOT_BIKE_VOUCHER
 	setflag FLAG_GOT_BICYCLE
 	additem ITEM_BICYCLE
-    setflag FLAG_WORLD_MAP_PALLET_TOWN
-    setflag FLAG_WORLD_MAP_VIRIDIAN_CITY
-    setflag FLAG_WORLD_MAP_PEWTER_CITY
-    setflag FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F
-    setflag FLAG_WORLD_MAP_CERULEAN_CITY
-    setflag FLAG_WORLD_MAP_VERMILION_CITY
-    setflag FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F
-    setflag FLAG_WORLD_MAP_LAVENDER_TOWN
-    setflag FLAG_WORLD_MAP_CELADON_CITY
-    setflag FLAG_WORLD_MAP_FUCHSIA_CITY
-    setflag FLAG_WORLD_MAP_SAFFRON_CITY
-    setflag FLAG_WORLD_MAP_CINNABAR_ISLAND
-    setflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
-    setflag FLAG_WORLD_MAP_ONE_ISLAND
-    setflag FLAG_WORLD_MAP_TWO_ISLAND
-    setflag FLAG_WORLD_MAP_THREE_ISLAND
-    setflag FLAG_WORLD_MAP_FOUR_ISLAND
-    setflag FLAG_WORLD_MAP_FIVE_ISLAND
-    setflag FLAG_WORLD_MAP_SIX_ISLAND
-    setflag FLAG_WORLD_MAP_SEVEN_ISLAND
+	setflag FLAG_WORLD_MAP_PALLET_TOWN
+	setflag FLAG_WORLD_MAP_VIRIDIAN_CITY
+	setflag FLAG_WORLD_MAP_PEWTER_CITY
+	setflag FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F
+	setflag FLAG_WORLD_MAP_CERULEAN_CITY
+	setflag FLAG_WORLD_MAP_VERMILION_CITY
+	setflag FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F
+	setflag FLAG_WORLD_MAP_LAVENDER_TOWN
+	setflag FLAG_WORLD_MAP_CELADON_CITY
+	setflag FLAG_WORLD_MAP_FUCHSIA_CITY
+	setflag FLAG_WORLD_MAP_SAFFRON_CITY
+	setflag FLAG_WORLD_MAP_CINNABAR_ISLAND
+	setflag FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR
+	setflag FLAG_WORLD_MAP_ONE_ISLAND
+	setflag FLAG_WORLD_MAP_TWO_ISLAND
+	setflag FLAG_WORLD_MAP_THREE_ISLAND
+	setflag FLAG_WORLD_MAP_FOUR_ISLAND
+	setflag FLAG_WORLD_MAP_FIVE_ISLAND
+	setflag FLAG_WORLD_MAP_SIX_ISLAND
+	setflag FLAG_WORLD_MAP_SEVEN_ISLAND
 	release
 	end
 
@@ -275,8 +275,34 @@ Debug_ShowExpansionVersion::
 Debug_ExpansionVersion:
 	.string "pokefirered-expansion {STR_VAR_1}$"
 
+@Debug_Follower_NPC_Not_Enabled::
+@	msgbox Debug_Enable_To_Use_Follower_NPCs, MSGBOX_DEFAULT
+@	release
+@	end
+@
+@Debug_Enable_To_Use_Follower_NPCs:
+@	.string "Feature unavailable.\nSet FNPC_ENABLE_NPC_FOLLOWERS to\lTRUE in 'include/config/follower_npc.h'.$"
+@
+@Debug_Follower_NPC_Event_Script::
+@	lock
+@	facefollowernpc
+@	msgbox Debug_Follower_NPC_Test_Message, MSGBOX_DEFAULT
+@	releaseall
+@	end
+@
+@Debug_Follower_NPC_Test_Message:
+@	.string "This is a Follower NPC test.$"
+
 Debug_EventScript_Steven_Multi::
 	call MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
+	release
+	end
+
+Debug_EventScript_OldManTutorial::
+	special SavePlayerParty
+	special StartOldManTutorialBattle
+	waitstate
+	special LoadPlayerParty
 	release
 	end
 
@@ -340,6 +366,16 @@ Debug_EventScript_InflictStatus1_Single:
 	releaseall
 	end
 
+Debug_EventScript_KoPokemon::
+	special ChoosePartyMon
+	waitstate
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
+	goto_if_eq VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
+	setko VAR_0x8004
+	releaseall
+	end
+
 Debug_EventScript_SetHiddenNature::
 	special ChoosePartyMon
 	waitstate
@@ -397,6 +433,13 @@ Debug_EventScript_SetFriendship::
 	special ChoosePartyMon
 	waitstate
 	callnative DebugNative_Party_SetFriendship
+	releaseall
+	end
+
+Debug_EventScript_GivePokerus::
+	special ChoosePartyMon
+	waitstate
+	callnative DebugNative_Party_SetPokerus
 	releaseall
 	end
 
@@ -507,6 +550,9 @@ Debug_EventScript_InflictStatus1_Text_Freeze:
 
 Debug_EventScript_InflictStatus1_Text_Frostbite:
 	.string "Frostbite$"
+
+Debug_EventScript_InflictStatus1_Text_KO:
+	.string "KO$"
 
 Debug_EventScript_ChangeNature_Text_Hardy:
 	.string "Hardy$"
@@ -731,7 +777,6 @@ Debug_EventScript_TellTheTime_Text_0:
 
 DebugEventScript_PrintWeekday_Text_0:
 	.string "Time of day: {STR_VAR_1}$"
-
 
 @ steven multibattle script
 MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle::

@@ -21,7 +21,7 @@ struct HelpSystemVideoState
     /*0x0c*/ u16 savedBg0Hofs;
     /*0x0e*/ u16 savedBg0Vofs;
     /*0x10*/ u16 savedBldCnt;
-    /*0x12*/ u8 savedTextColor[3];
+    /*0x12*/ union TextColor savedTextColor;
     /*0x15*/ u8 state;
 };
 
@@ -171,11 +171,7 @@ void SaveMapTiles(void)
 
 void SaveMapTextColors(void)
 {
-    SaveTextColors(
-        &sVideoState.savedTextColor[0],
-        &sVideoState.savedTextColor[1],
-        &sVideoState.savedTextColor[2]
-    );
+    sVideoState.savedTextColor = SaveTextColors();
 }
 
 void RestoreCallbacks(void)
@@ -202,11 +198,7 @@ void RestoreMapTiles(void)
 
 void RestoreMapTextColors(void)
 {
-    RestoreTextColors(
-        &sVideoState.savedTextColor[0],
-        &sVideoState.savedTextColor[1],
-        &sVideoState.savedTextColor[2]
-    );
+    RestoreTextColors(sVideoState.savedTextColor);
 }
 
 void CommitTilemap(void)
@@ -581,35 +573,70 @@ void DecompressAndRenderGlyph(u8 fontId, u16 glyph, struct Bitmap *srcBlit, stru
 
 void HelpSystem_PrintTextInTopLeftCorner(const u8 * str)
 {
-    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_DARK_GRAY);
+    union TextColor color = {
+        .background = TEXT_DYNAMIC_COLOR_6,
+        .foreground = TEXT_COLOR_WHITE,
+        .shadow = TEXT_COLOR_DARK_GRAY,
+        .accent = TEXT_DYNAMIC_COLOR_6,
+    };
+
+    GenerateFontHalfRowLookupTable(color);
     HelpSystemRenderText(5, gDecompressionBuffer + 0x3D00, str, 6, 2, 7, 2);
 }
 
 void HelpSystem_PrintTextRightAlign_Row52(const u8 * str)
 {
+    union TextColor color = {
+        .background = TEXT_DYNAMIC_COLOR_6,
+        .foreground = TEXT_COLOR_WHITE,
+        .shadow = TEXT_COLOR_DARK_GRAY,
+        .accent = TEXT_DYNAMIC_COLOR_6,
+    };
+
     s32 left = 0x7C - GetStringWidth(FONT_SMALL, str, 0);
-    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_DARK_GRAY);
+    GenerateFontHalfRowLookupTable(color);
     HelpSystemRenderText(0, gDecompressionBuffer + 0x3400, str, left, 2, 16, 2);
 }
 
 void HelpSystem_PrintTextAt(const u8 * str, u8 x, u8 y)
 {
-    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_DARK_GRAY);
-    HelpSystemRenderText(2, gDecompressionBuffer + 0x0000, str, x, y, 26, 16);
+    union TextColor color = {
+        .background = TEXT_DYNAMIC_COLOR_6,
+        .foreground = TEXT_COLOR_WHITE,
+        .shadow = TEXT_COLOR_DARK_GRAY,
+        .accent = TEXT_DYNAMIC_COLOR_6,
+    };
+
+    GenerateFontHalfRowLookupTable(color);
+    HelpSystemRenderText(FONT_NORMAL, gDecompressionBuffer + 0x0000, str, x, y, 26, 16);
 }
 
 void HelpSystem_PrintQuestionAndAnswerPair(const u8 * question, const u8 * answer)
 {
+    union TextColor color = {
+        .background = TEXT_DYNAMIC_COLOR_5,
+        .foreground = TEXT_COLOR_WHITE,
+        .shadow = TEXT_COLOR_DARK_GRAY,
+        .accent = TEXT_DYNAMIC_COLOR_5,
+    };
+
     CpuFill16(0xEEEE, gDecompressionBuffer + 0x0000, 0x3400);
-    GenerateFontHalfRowLookupTable(TEXT_COLOR_WHITE, TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_DARK_GRAY);
+    GenerateFontHalfRowLookupTable(color);
     HelpSystemRenderText(2, gDecompressionBuffer + 0x0000, question, 0, 0, 26, 16);
     HelpSystemRenderText(2, gDecompressionBuffer + 0x09C0, answer, 0, 0, 26, 13);
 }
 
 void HelpSystem_PrintTopicMouseoverDescription(const u8 * str)
 {
+    union TextColor color = {
+        .background = TEXT_COLOR_WHITE,
+        .foreground = TEXT_COLOR_DARK_GRAY,
+        .shadow = TEXT_COLOR_LIGHT_GRAY,
+        .accent = TEXT_COLOR_WHITE,
+    };
+
     CpuFill16(0x1111, gDecompressionBuffer + 0x23C0, 0x1040);
-    GenerateFontHalfRowLookupTable(TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    GenerateFontHalfRowLookupTable(color);
     HelpSystemRenderText(2, gDecompressionBuffer + 0x23C0, str, 2, 6, 26, 5);
 }
 

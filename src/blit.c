@@ -76,6 +76,7 @@ void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 hei
     s32 yEnd;
     s32 multiplierY;
     s32 loopX, loopY;
+    u8 toOrr1, toOrr2;
 
     xEnd = x + width;
     if (xEnd > surface->width)
@@ -86,22 +87,18 @@ void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 hei
         yEnd = surface->height;
 
     multiplierY = (surface->width + (surface->width & 7)) >> 3;
+    toOrr1 = fillValue << 4;
+    toOrr2 = fillValue & 0xF;
 
     for (loopY = y; loopY < yEnd; loopY++)
     {
         for (loopX = x; loopX < xEnd; loopX++)
         {
             u8 *pixels = surface->pixels + ((loopX >> 1) & 3) + ((loopX >> 3) << 5) + (((loopY >> 3) * multiplierY) << 5) + ((u32)(loopY << 0x1d) >> 0x1B);
-            if ((loopX & 1) != 0)
-            {
-                *pixels &= 0xF;
-                *pixels |= fillValue << 4;
-            }
+            if ((loopX << 0x1F) != 0)
+                *pixels = toOrr1 | (*pixels & 0xF);
             else
-            {
-                *pixels &= 0xF0;
-                *pixels |= fillValue;
-            }
+                *pixels = toOrr2 | (*pixels & 0xF0);
         }
     }
 }

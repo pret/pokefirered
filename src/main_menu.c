@@ -315,14 +315,14 @@ static void Task_WaitForBatteryDryErrorWindow(u8 taskId)
         RunTextPrinters();
         if(gTasks[taskId].tUnused8 == 3)
         {
-            if(!IsTextPrinterActive(MAIN_MENU_WINDOW_ERROR))
+            if(!IsTextPrinterActiveOnWindow(MAIN_MENU_WINDOW_ERROR))
             {
                 gTasks[taskId].func = Task_SetWin0BldRegsNoSaveFileCheck;
             }
         }
         else
         {
-            if (!IsTextPrinterActive(MAIN_MENU_WINDOW_ERROR) && JOY_NEW(A_BUTTON))
+            if (!IsTextPrinterActiveOnWindow(MAIN_MENU_WINDOW_ERROR) && JOY_NEW(A_BUTTON))
             {
                 ClearWindowTilemap(MAIN_MENU_WINDOW_ERROR);
                 MainMenu_EraseWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
@@ -351,7 +351,7 @@ static void Task_SaveErrorStatus_RunPrinterThenWaitButton(u8 taskId)
     if (!gPaletteFade.active)
     {
         RunTextPrinters();
-        if (!IsTextPrinterActive(MAIN_MENU_WINDOW_ERROR) && JOY_NEW(A_BUTTON))
+        if (!IsTextPrinterActiveOnWindow(MAIN_MENU_WINDOW_ERROR) && JOY_NEW(A_BUTTON))
         {
             ClearWindowTilemap(MAIN_MENU_WINDOW_ERROR);
             MainMenu_EraseWindow(&sWindowTemplate[MAIN_MENU_WINDOW_ERROR]);
@@ -569,7 +569,7 @@ static void Task_MysteryGiftError(u8 taskId)
         break;
     case 2:
         RunTextPrinters();
-        if (!IsTextPrinterActive(MAIN_MENU_WINDOW_ERROR))
+        if (!IsTextPrinterActiveOnWindow(MAIN_MENU_WINDOW_ERROR))
             gTasks[taskId].tMGErrorMsgState++;
         break;
     case 3:

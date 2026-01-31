@@ -751,7 +751,7 @@ static void DisplaySentToPCMessage(void)
 static bool8 MainState_WaitSentToPCMessage(void)
 {
     RunTextPrinters();
-    if (!IsTextPrinterActive(0) && JOY_NEW(A_BUTTON))
+    if (!IsTextPrinterActiveOnWindow(0) && JOY_NEW(A_BUTTON))
         sNamingScreen->state = STATE_FADE_OUT;
 
     return FALSE;
@@ -1923,12 +1923,12 @@ static void DrawTextEntry(void)
     PutWindowTilemap(sNamingScreen->windows[WIN_TEXT_ENTRY]);
 }
 
-struct TextColor   // Needed because of alignment
+struct NamingTextColor   // Needed because of alignment
 {
     u8 colors[3][4];
 };
 
-static const struct TextColor sTextColorStruct = {
+static const struct NamingTextColor sTextColorStruct = {
     {
         {TEXT_DYNAMIC_COLOR_4, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
         {TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},

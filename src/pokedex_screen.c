@@ -3017,14 +3017,15 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
     if (DexScreen_GetSetPokedexFlag(natDexNum, FLAG_GET_CAUGHT, FALSE))
     {
         printerTemplate.currentChar = gSpeciesInfo[species].description;
+        printerTemplate.type = WINDOW_TEXT_PRINTER;
         printerTemplate.windowId = windowId;
         printerTemplate.fontId = FONT_SMALL;
         printerTemplate.letterSpacing = 1;
         printerTemplate.lineSpacing = 0;
-        printerTemplate.unk = 0;
-        printerTemplate.fgColor = 1;
-        printerTemplate.bgColor = 0;
-        printerTemplate.shadowColor = 2;
+        printerTemplate.color.background = 0;
+        printerTemplate.color.foreground = 1;
+        printerTemplate.color.shadow = 2;
+        printerTemplate.color.accent = 0;
 
         length = GetStringWidth(FONT_SMALL, gSpeciesInfo[species].description, 0);
         xCenter = x + (240 - length) / 2;

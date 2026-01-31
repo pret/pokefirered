@@ -312,40 +312,41 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 
         switch (c)
         {
-            case PLACEHOLDER_BEGIN:
-                placeholderId = *src++;
-                expandedString = GetExpandedPlaceholder(placeholderId);
-                dest = StringExpandPlaceholders(dest, expandedString);
-                break;
-            case EXT_CTRL_CODE_BEGIN:
-                *dest++ = c;
-                c = *src++;
-                *dest++ = c;
+        case PLACEHOLDER_BEGIN:
+            placeholderId = *src++;
+            expandedString = GetExpandedPlaceholder(placeholderId);
+            dest = StringExpandPlaceholders(dest, expandedString);
+            break;
+        case EXT_CTRL_CODE_BEGIN:
+            *dest++ = c;
+            c = *src++;
+            *dest++ = c;
 
-                switch (c)
-                {
-                    case 0x07:
-                    case 0x09:
-                    case 0x0F:
-                    case 0x15:
-                    case 0x16:
-                    case 0x17:
-                    case 0x18:
-                        break;
-                    case 0x04:
-                        *dest++ = *src++;
-                    case 0x0B:
-                        *dest++ = *src++;
-                    default:
-                        *dest++ = *src++;
-                }
+            switch (c)
+            {
+            case EXT_CTRL_CODE_RESET_FONT:
+            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
+            case EXT_CTRL_CODE_FILL_WINDOW:
+            case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_ENG:
+            case EXT_CTRL_CODE_PAUSE_MUSIC:
+            case EXT_CTRL_CODE_RESUME_MUSIC:
                 break;
-            case EOS:
-                *dest = EOS;
-                return dest;
-            case 0xFA:
-            case 0xFB:
-            case 0xFE:
+            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
+            case EXT_CTRL_CODE_TEXT_COLORS:
+                *dest++ = *src++;
+            case EXT_CTRL_CODE_PLAY_BGM:
+                *dest++ = *src++;
+            default:
+                *dest++ = *src++;
+            }
+            break;
+        case EOS:
+            *dest = EOS;
+            return dest;
+        case CHAR_PROMPT_SCROLL:
+        case CHAR_PROMPT_CLEAR:
+        case CHAR_NEWLINE:
             default:
                 *dest++ = c;
         }
@@ -649,6 +650,9 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_ENG]                    = 1,
         [EXT_CTRL_CODE_PAUSE_MUSIC]            = 1,
         [EXT_CTRL_CODE_RESUME_MUSIC]           = 1,
+        [EXT_CTRL_CODE_ACCENT]                 = 2,
+        [EXT_CTRL_CODE_BACKGROUND]             = 2,
+        [EXT_CTRL_CODE_TEXT_COLORS]            = 4,
     };
 
     u8 length = 0;

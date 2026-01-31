@@ -82,7 +82,7 @@ static bool32 UnionRoomBattle_PrintTextOnWindow0(s16 * state, const u8 * str, s3
         (*state)++;
         break;
     case 1:
-        if (!IsTextPrinterActive(0))
+        if (!IsTextPrinterActiveOnWindow(0))
         {
             *state = 0;
             return TRUE;

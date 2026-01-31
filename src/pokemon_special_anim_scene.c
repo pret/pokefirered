@@ -453,7 +453,7 @@ void PSA_AfterPoof_ClearMessageWindow(void)
 
 bool8 PSA_IsMessagePrintTaskActive(void)
 {
-    return IsTextPrinterActive(0);
+    return IsTextPrinterActiveOnWindow(0);
 }
 
 void PSA_DarkenMonSprite(void)

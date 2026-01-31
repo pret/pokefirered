@@ -2183,6 +2183,12 @@
 	.2byte \slot
 	.endm
 
+	@ Sets the hp to 0 for the Pokémon in \slot.
+	.macro setko slot:req
+	callnative Script_SetKO, requests_effects=1
+	.2byte \slot
+	.endm
+
 	@ Sets VAR_RESULT to the Pokémon in \slot's Tera Type
 	.macro checkteratype slot:req
 	callnative CheckTeraType

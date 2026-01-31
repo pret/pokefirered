@@ -30,6 +30,7 @@
 #include "help_system.h"
 #include "field_fadetransition.h"
 #include "regions.h"
+#include "text.h"
 #include "trade.h"
 #include "constants/abilities.h"
 #include "constants/daycare.h"
@@ -1704,19 +1705,20 @@ static void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
     struct TextPrinterTemplate printer;
 
     printer.currentChar = text;
+    printer.type = WINDOW_TEXT_PRINTER;
     printer.windowId = windowId;
     printer.fontId = FONT_NORMAL_COPY_2;
     printer.x = x;
     printer.y = y;
     printer.currentX = x;
     printer.currentY = y;
-    printer.unk = 0;
     gTextFlags.useAlternateDownArrow = 0;
     printer.letterSpacing = 1;
     printer.lineSpacing = 1;
-    printer.fgColor = 2;
-    printer.bgColor = 1;
-    printer.shadowColor = 3;
+    printer.color.accent = 1;
+    printer.color.foreground = 2;
+    printer.color.background = 1;
+    printer.color.shadow = 3;
 
     AddTextPrinter(&printer, 0xFF, NULL);
 }
@@ -2208,7 +2210,7 @@ static void CB2_EggHatch_1(void)
         sEggHatchData->CB2_state++;
         break;
     case 9:
-        if (!IsTextPrinterActive(sEggHatchData->windowId))
+        if (!IsTextPrinterActiveOnWindow(sEggHatchData->windowId))
         {
             LoadUserWindowBorderGfx_(sEggHatchData->windowId, 0x140, BG_PLTT_ID(14));
             CreateYesNoMenuAtPos(&sYesNoWinTemplate, FONT_NORMAL_COPY_2, 0, 2, 0x140, 14, 0);

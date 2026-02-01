@@ -248,6 +248,7 @@ void DrawStdWindowFrame(u8 windowId, bool8 copyToVram)
 
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram)
 {
+    DeactivateSingleTextPrinter(windowId, WINDOW_TEXT_PRINTER);
     CallWindowFunction(windowId, WindowFunc_ClearDialogWindowAndFrame);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ClearWindowTilemap(windowId);

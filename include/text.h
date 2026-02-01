@@ -193,6 +193,7 @@ extern u8 gStringVar4[1000];
 extern const u8 gKeypadIconTiles[];
 
 void DeactivateAllTextPrinters(void);
+void DeactivateSingleTextPrinter(u32 id, enum TextPrinterType type);
 u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 bool32 AddTextPrinter(struct TextPrinterTemplate *textSubPrinter, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16));
 void RunTextPrinters(void);

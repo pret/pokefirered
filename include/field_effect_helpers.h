@@ -14,6 +14,7 @@ enum {
 };
 
 u8 CreateWarpArrowSprite(void);
+u8 StartUnderwaterSurfBlobBobbing(u8 oldSpriteId);
 void SetSurfBlob_BobState(u8 spriteId, u8 bobState);
 void SetSurfBlob_DontSyncAnim(u8 spriteId, bool8 value);
 void StartAshFieldEffect(s16, s16, u16, s16);

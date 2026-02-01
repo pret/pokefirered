@@ -12,6 +12,7 @@
 #include "field_player_avatar.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "follower_npc.h"
 #include "help_system.h"
 #include "metatile_behavior.h"
 #include "menu.h"
@@ -714,7 +715,7 @@ u32 FldEff_PokecenterHeal(void)
 {
     u8 nPokemon;
     struct Task *task;
-    
+
     FieldEffectScript_LoadFadedPal(&gSpritePalette_PokeballGlow);
     FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect0);
     nPokemon = (OW_IGNORE_EGGS_ON_HEAL <= GEN_3) ? CalculatePlayerPartyCount() : CountPartyNonEggMons();
@@ -1036,29 +1037,59 @@ void FieldCallback_UseFly(void)
     gFieldCallback = NULL;
 }
 
+#define taskState           task->data[3]
+#define fieldEffectStarted  task->data[0]
+
 static void Task_UseFly(u8 taskId)
 {
+    struct ObjectEvent *follower = &gObjectEvents[GetFollowerNPCObjectId()];
     struct Task *task;
     task = &gTasks[taskId];
-    if (task->data[0] == 0)
+    if (taskState == 0)
     {
-        if (!IsWeatherNotFadingIn())
-            return;
-        gFieldEffectArguments[0] = GetCursorSelectionMonId();
-        if ((int)gFieldEffectArguments[0] >= PARTY_SIZE)
-            gFieldEffectArguments[0] = 0;
-        FieldEffectStart(FLDEFF_FLY_OUT);
-        task->data[0]++;
+        if (!PlayerHasFollowerNPC())
+        {
+            taskState = 2;
+        }
+        else
+        {
+            FollowerNPCWalkIntoPlayerForLeaveMap();
+            taskState++;
+        }
     }
-    if (!FieldEffectActiveListContains(FLDEFF_FLY_OUT))
+    if (taskState == 1)
     {
-        Overworld_ResetStateAfterFly();
-        WarpIntoMap();
-        SetMainCallback2(CB2_LoadMap);
-        gFieldCallback = FieldCallback_FlyIntoMap;
-        DestroyTask(taskId);
+        if (ObjectEventClearHeldMovementIfFinished(follower))
+        {
+            FollowerNPCHideForLeaveMap(follower);
+            taskState++;
+        }
+    }
+    if (taskState == 2)
+    {
+        if (!fieldEffectStarted)
+        {
+            if (!IsWeatherNotFadingIn())
+                return;
+            gFieldEffectArguments[0] = GetCursorSelectionMonId();
+            if ((int)gFieldEffectArguments[0] >= PARTY_SIZE)
+                gFieldEffectArguments[0] = 0;
+            FieldEffectStart(FLDEFF_FLY_OUT);
+            fieldEffectStarted = TRUE;
+        }
+        if (!FieldEffectActiveListContains(FLDEFF_FLY_OUT))
+        {
+            Overworld_ResetStateAfterFly();
+            WarpIntoMap();
+            SetMainCallback2(CB2_LoadMap);
+            gFieldCallback = FieldCallback_FlyIntoMap;
+            DestroyTask(taskId);
+        }
     }
 }
+
+#undef taskState
+#undef fieldEffectStarted
 
 static void FieldCallback_FlyIntoMap(void)
 {
@@ -1073,24 +1104,61 @@ static void FieldCallback_FlyIntoMap(void)
     gFieldCallback = NULL;
 }
 
+#define taskState               task->data[0]
+#define tWaitPaletteFadeIn      0
+#define tWaitFieldEffectEnd     1
+#define tNPCFollowerFacePlayer  2
+#define tTaskEnd                3
+
 static void Task_FlyIntoMap(u8 taskId)
 {
+    struct ObjectEvent *player = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *follower = &gObjectEvents[GetFollowerNPCObjectId()];
     struct Task *task;
     task = &gTasks[taskId];
-    if (task->data[0] == 0)
+    if (taskState == tWaitPaletteFadeIn)
     {
         if (gPaletteFade.active)
             return;
         FieldEffectStart(FLDEFF_FLY_IN);
-        task->data[0]++;
+        taskState++;
     }
-    if (!FieldEffectActiveListContains(FLDEFF_FLY_IN))
+    if (taskState == tWaitFieldEffectEnd)
+    {
+        if (!FieldEffectActiveListContains(FLDEFF_FLY_IN))
+        {
+            if (FNPC_NPC_FOLLOWER_SHOW_AFTER_LEAVE_ROUTE)
+                FollowerNPCReappearAfterLeaveMap(follower, player);
+
+            taskState++;
+        }
+    }
+    if (taskState == tNPCFollowerFacePlayer)
+    {
+        if (PlayerHasFollowerNPC() && ObjectEventClearHeldMovementIfFinished(follower))
+        {
+            if (FNPC_NPC_FOLLOWER_SHOW_AFTER_LEAVE_ROUTE)
+                FollowerNPCFaceAfterLeaveMap();
+            taskState++;
+        }
+        else if (!PlayerHasFollowerNPC())
+        {
+            taskState++;
+        }
+    }
+    if (taskState == tTaskEnd)
     {
         UnlockPlayerFieldControls();
         UnfreezeObjectEvents();
         DestroyTask(taskId);
     }
 }
+
+#undef taskState
+#undef tWaitPaletteFadeIn
+#undef tWaitFieldEffectEnd
+#undef tNPCFollowerFacePlayer
+#undef tTaskEnd
 
 static void Task_FallWarpFieldEffect(u8 taskId);
 static bool8 FallWarpEffect_1(struct Task *task);
@@ -1246,6 +1314,8 @@ static bool8 FallWarpEffect_7(struct Task *task)
         SetHelpContext(HELPCONTEXT_SURFING);
     }
     DestroyTask(FindTaskIdByFunc(Task_FallWarpFieldEffect));
+    FollowerNPC_WarpSetEnd();
+
     return FALSE;
 }
 
@@ -1324,6 +1394,8 @@ static bool8 EscalatorWarpEffect_2(struct Task *task)
         task->data[0]++;
         task->data[2] = 0;
         task->data[3] = 0;
+        EscalatorMoveFollowerNPC(task->data[1]);
+
         if ((u8)task->data[1] == 0)
         {
             task->data[0] = 4;
@@ -1453,6 +1525,7 @@ static bool8 EscalatorWarpInEffect_1(struct Task *task)
     ObjectEventSetHeldMovement(objectEvent, GetFaceDirectionMovementAction(DIR_EAST));
     PlayerGetDestCoords(&x, &y);
     behavior = MapGridGetMetatileBehaviorAt(x, y);
+    EscalatorMoveFollowerNPCFinish();
     task->data[0]++;
     task->data[1] = 16;
     if (behavior == MB_DOWN_ESCALATOR)
@@ -1642,7 +1715,7 @@ static bool8 DiveFieldEffect_Init(struct Task *task);
 static bool8 DiveFieldEffect_ShowMon(struct Task *task);
 static bool8 DiveFieldEffect_TryWarp(struct Task *task);
 
-static bool8 (*const sDiveFieldEffectFuncs[])(struct Task *task) = 
+static bool8 (*const sDiveFieldEffectFuncs[])(struct Task *task) =
 {
     DiveFieldEffect_Init,
     DiveFieldEffect_ShowMon,
@@ -2040,10 +2113,12 @@ void SpriteCB_PopOutOfAsh(struct Sprite *sprite)
 #define tOffscreen   data[4]
 #define tMovingState data[5]
 #define tOffsetY     data[6]
+#define tHideFollower data[7]
 #define tDirection   data[15]
 
 static void Task_EscapeRopeWarpOut(u8 taskId);
 static void EscapeRopeWarpOutEffect_Init(struct Task *task);
+static void EscapeRopeWarpOutEffect_HideFollowerNPC(struct Task *);
 static void EscapeRopeWarpOutEffect_Spin(struct Task *task);
 static u8 SpinObjectEvent(struct ObjectEvent *playerObj, s16 *timer, s16 *numTurns);
 static bool32 WarpOutObjectEventUpwards(struct ObjectEvent *playerObj, s16 *movingState, s16 *offsetY);
@@ -2052,9 +2127,16 @@ static void Task_EscapeRopeWarpIn(u8 taskId);
 static void EscapeRopeWarpInEffect_Init(struct Task *task);
 static void EscapeRopeWarpInEffect_Spin(struct Task *task);
 
+enum
+{
+    START_MOVEMENT,
+    WAIT_MOVEMENT_END
+};
+
 static void (*const sEscapeRopeWarpOutEffectFuncs[])(struct Task *task) =
 {
     EscapeRopeWarpOutEffect_Init,
+    EscapeRopeWarpOutEffect_HideFollowerNPC,
     EscapeRopeWarpOutEffect_Spin
 };
 
@@ -2073,10 +2155,39 @@ static void Task_EscapeRopeWarpOut(u8 taskId)
 
 static void EscapeRopeWarpOutEffect_Init(struct Task *task)
 {
-    task->tState++;
+    if (PlayerHasFollowerNPC())
+        task->tState++;
+    else
+        task->tState += 2;
+
     task->data[13] = 64; // unused
     task->data[14] = GetPlayerFacingDirection(); // unused
     task->tDirection = DIR_NONE;
+}
+
+static void EscapeRopeWarpOutEffect_HideFollowerNPC(struct Task *task)
+{
+    struct ObjectEvent *follower = &gObjectEvents[GetFollowerNPCObjectId()];
+    if (task->tHideFollower == START_MOVEMENT)
+    {
+        if (!PlayerHasFollowerNPC())
+        {
+            task->tState++;
+        }
+        else
+        {
+            FollowerNPCWalkIntoPlayerForLeaveMap();
+            task->tHideFollower = WAIT_MOVEMENT_END;
+        }
+    }
+    if (task->tHideFollower == WAIT_MOVEMENT_END)
+    {
+        if (ObjectEventClearHeldMovementIfFinished(follower))
+        {
+            FollowerNPCHideForLeaveMap(follower);
+            task->tState++;
+        }
+    }
 }
 
 static void EscapeRopeWarpOutEffect_Spin(struct Task *task)
@@ -2107,7 +2218,7 @@ static void EscapeRopeWarpOutEffect_Spin(struct Task *task)
     }
 }
 
-static const u8 sSpinDirections[] = 
+static const u8 sSpinDirections[] =
 {
     [DIR_NONE]  = DIR_SOUTH,
     [DIR_SOUTH] = DIR_WEST,
@@ -2188,6 +2299,7 @@ static bool32 WarpOutObjectEventUpwards(struct ObjectEvent *playerObj, s16 *movi
 #define tCurrentDir    data[8]
 #define tSpinDelay     data[9]
 #define tNumTurns      data[10]
+#define tState2        data[11]
 #define tOriginalDir   data[15]
 
 static void (*const sEscapeRopeWarpInEffectFuncs[])(struct Task *task) =
@@ -2266,6 +2378,7 @@ static void EscapeRopeWarpInEffect_Init(struct Task *task)
         PlaySE(SE_WARP_OUT);
         task->tOriginalDir = GetPlayerFacingDirection();
         task->tState++;
+        task->tState2 = 0;
     }
 }
 
@@ -2275,6 +2388,7 @@ static void EscapeRopeWarpInEffect_Spin(struct Task *task)
     struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     bool32 moving = WarpInObjectEventDownwards(playerObj, &tMovingState, &tOffsetY, &tPriority, &tSubpriority, &tSubspriteMode);
     playerObj->invisible = FALSE;
+    // TODO: Follower NPC?
     if (tTimer < 8)
         tTimer++;
     else if (tSpinEnded == FALSE)
@@ -3027,6 +3141,8 @@ static void UseSurfEffect_4(struct Task *task)
         ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         ObjectEventClearHeldMovementIfFinished(objectEvent);
         ObjectEventSetHeldMovement(objectEvent, GetJumpSpecialMovementAction(objectEvent->movementDirection));
+        FollowerNPC_FollowerToWater();
+
         gFieldEffectArguments[0] = task->data[1];
         gFieldEffectArguments[1] = task->data[2];
         gFieldEffectArguments[2] = gPlayerAvatar.objectEventId;
@@ -3778,7 +3894,7 @@ static void Task_MoveDeoxysRock_Step(u8 taskId)
 u32 FldEff_CaveDust(void)
 {
     u8 spriteId;
-    
+
     FieldEffectScript_LoadFadedPal(&gSpritePalette_CaveDust);
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 8);
     spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_CaveDust, gFieldEffectArguments[0], gFieldEffectArguments[1], 0xFF);

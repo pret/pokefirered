@@ -160,8 +160,9 @@
 #define OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES     154
 #define OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES      155
 #define OBJ_EVENT_GFX_OW_MON     156
+#define OBJ_EVENT_GFX_STEVEN                     157
 
-#define NUM_OBJ_EVENT_GFX     157
+#define NUM_OBJ_EVENT_GFX     158
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
@@ -234,6 +235,7 @@
 
 // Special object event local ids
 // Aliases for old names. "object event id" normally refers to an index into gObjectEvents, which these are not.
+#define OBJ_EVENT_ID_DYNAMIC_BASE 0xF0
 #define OBJ_EVENT_ID_CAMERA LOCALID_CAMERA
 #define OBJ_EVENT_ID_PLAYER LOCALID_PLAYER
 #define OBJ_EVENT_ID_FOLLOWER     254

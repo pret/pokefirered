@@ -3440,7 +3440,7 @@ u8 GetMonsStateToDoubles_2(void)
     s32 i;
 
     if (OW_DOUBLE_APPROACH_WITH_ONE_MON
-     /* || FollowerNPCIsBattlePartner() */)
+     || FollowerNPCIsBattlePartner())
         return PLAYER_HAS_TWO_USABLE_MONS;
 
     for (i = 0; i < PARTY_SIZE; i++)

@@ -139,16 +139,19 @@
 #define OPTIONS_BATTLE_STYLE_SHIFT  0
 #define OPTIONS_BATTLE_STYLE_SET    1
 
-#define DIR_NONE        0
-#define DIR_SOUTH       1
-#define DIR_NORTH       2
-#define DIR_WEST        3
-#define DIR_EAST        4
-#define DIR_SOUTHWEST   5
-#define DIR_SOUTHEAST   6
-#define DIR_NORTHWEST   7
-#define DIR_NORTHEAST   8
-#define CARDINAL_DIRECTION_COUNT 5
+enum __attribute__((packed)) Direction
+{
+    DIR_NONE,
+    DIR_SOUTH,
+    DIR_NORTH,
+    DIR_WEST,
+    DIR_EAST,
+    CARDINAL_DIRECTION_COUNT,
+    DIR_SOUTHWEST = CARDINAL_DIRECTION_COUNT,
+    DIR_SOUTHEAST,
+    DIR_NORTHWEST,
+    DIR_NORTHEAST,
+};
 
 #define AXIS_X     0
 #define AXIS_Y     1

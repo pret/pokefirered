@@ -275,23 +275,23 @@ Debug_ShowExpansionVersion::
 Debug_ExpansionVersion:
 	.string "pokefirered-expansion {STR_VAR_1}$"
 
-@Debug_Follower_NPC_Not_Enabled::
-@	msgbox Debug_Enable_To_Use_Follower_NPCs, MSGBOX_DEFAULT
-@	release
-@	end
-@
-@Debug_Enable_To_Use_Follower_NPCs:
-@	.string "Feature unavailable.\nSet FNPC_ENABLE_NPC_FOLLOWERS to\lTRUE in 'include/config/follower_npc.h'.$"
-@
-@Debug_Follower_NPC_Event_Script::
-@	lock
-@	facefollowernpc
-@	msgbox Debug_Follower_NPC_Test_Message, MSGBOX_DEFAULT
-@	releaseall
-@	end
-@
-@Debug_Follower_NPC_Test_Message:
-@	.string "This is a Follower NPC test.$"
+Debug_Follower_NPC_Not_Enabled::
+	msgbox Debug_Enable_To_Use_Follower_NPCs, MSGBOX_DEFAULT
+	release
+	end
+
+Debug_Enable_To_Use_Follower_NPCs:
+	.string "Feature unavailable.\nSet FNPC_ENABLE_NPC_FOLLOWERS to\lTRUE in 'include/config/follower_npc.h'.$"
+
+Debug_Follower_NPC_Event_Script::
+	lock
+	facefollowernpc
+	msgbox Debug_Follower_NPC_Test_Message, MSGBOX_DEFAULT
+	releaseall
+	end
+
+Debug_Follower_NPC_Test_Message:
+	.string "This is a Follower NPC test.$"
 
 Debug_EventScript_Steven_Multi::
 	call MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle

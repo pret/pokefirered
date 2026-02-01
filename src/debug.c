@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_partner.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "clock.h"
@@ -56,7 +57,7 @@
 // #include "constants/battle_frontier.h"
 #include "constants/coins.h"
 // #include "constants/decorations.h"
-// #include "constants/event_objects.h"
+#include "constants/event_objects.h"
 // #include "constants/expansion.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -77,12 +78,11 @@
 
 enum FollowerNPCCreateDebugMenu
 {
-    DEBUG_FNPC_BRENDAN,
-    DEBUG_FNPC_MAY,
-    DEBUG_FNPC_STEVEN,
-    DEBUG_FNPC_WALLY,
     DEBUG_FNPC_RED,
     DEBUG_FNPC_LEAF,
+    DEBUG_FNPC_STEVEN,
+    DEBUG_FNPC_RS_BRENDAN,
+    DEBUG_FNPC_RS_MAY,
     DEBUG_FNPC_COUNT,
 };
 
@@ -452,12 +452,11 @@ static const u8 *const gTimeOfDayStringsTable[TIMES_OF_DAY_COUNT] = {
 // Follower NPC
 
 static const u8 *const gFollowerNPCStringsTable[DEBUG_FNPC_COUNT] = {
-    COMPOUND_STRING("Brendan"),
-    COMPOUND_STRING("May"),
-    COMPOUND_STRING("Steven"),
-    COMPOUND_STRING("Wally"),
     COMPOUND_STRING("Red"),
     COMPOUND_STRING("Leaf"),
+    COMPOUND_STRING("Steven"),
+    COMPOUND_STRING("Brendan"),
+    COMPOUND_STRING("May"),
 };
 
 // Flags/Vars Menu
@@ -523,12 +522,11 @@ static const struct DebugMenuOption sDebugMenu_Actions_TimeMenu_Weekdays[] =
 
 static const struct DebugMenuOption sDebugMenu_Actions_FollowerNPCMenu_Create[] =
 {
-    [DEBUG_FNPC_BRENDAN] = { gFollowerNPCStringsTable[DEBUG_FNPC_BRENDAN], DebugAction_CreateFollowerNPC },
-    [DEBUG_FNPC_MAY] =     { gFollowerNPCStringsTable[DEBUG_FNPC_MAY],     DebugAction_CreateFollowerNPC },
-    [DEBUG_FNPC_STEVEN] =  { gFollowerNPCStringsTable[DEBUG_FNPC_STEVEN],  DebugAction_CreateFollowerNPC },
-    [DEBUG_FNPC_WALLY] =   { gFollowerNPCStringsTable[DEBUG_FNPC_WALLY],   DebugAction_CreateFollowerNPC },
-    [DEBUG_FNPC_RED] =     { gFollowerNPCStringsTable[DEBUG_FNPC_RED],     DebugAction_CreateFollowerNPC },
-    [DEBUG_FNPC_LEAF] =    { gFollowerNPCStringsTable[DEBUG_FNPC_LEAF],    DebugAction_CreateFollowerNPC },
+    [DEBUG_FNPC_RED]        = { gFollowerNPCStringsTable[DEBUG_FNPC_RED],        DebugAction_CreateFollowerNPC },
+    [DEBUG_FNPC_LEAF]       = { gFollowerNPCStringsTable[DEBUG_FNPC_LEAF],       DebugAction_CreateFollowerNPC },
+    [DEBUG_FNPC_STEVEN]     = { gFollowerNPCStringsTable[DEBUG_FNPC_STEVEN],     DebugAction_CreateFollowerNPC },
+    [DEBUG_FNPC_RS_BRENDAN] = { gFollowerNPCStringsTable[DEBUG_FNPC_RS_BRENDAN], DebugAction_CreateFollowerNPC },
+    [DEBUG_FNPC_RS_MAY]     = { gFollowerNPCStringsTable[DEBUG_FNPC_RS_MAY],     DebugAction_CreateFollowerNPC },
     { NULL }
 };
 
@@ -1394,15 +1392,15 @@ static void DebugAction_ToggleFlag(u8 taskId)
 
 static void DebugAction_OpenSubMenuCreateFollowerNPC(u8 taskId, const struct DebugMenuOption *items)
 {
-    // if (FNPC_ENABLE_NPC_FOLLOWERS)
-    // {
-    //     Debug_DestroyMenu(taskId);
-    //     Debug_ShowMenu(DebugTask_HandleMenuInput_General, items);
-    // }
-    // else
-    // {
-    //     Debug_DestroyMenu_Full_Script(taskId, Debug_Follower_NPC_Not_Enabled);
-    // }
+    if (FNPC_ENABLE_NPC_FOLLOWERS)
+    {
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_General, items);
+    }
+    else
+    {
+        Debug_DestroyMenu_Full_Script(taskId, Debug_Follower_NPC_Not_Enabled);
+    }
 }
 
 // *******************************
@@ -2128,7 +2126,6 @@ static void DebugAction_Trainers_SetRematchReadiness(u8 taskId)
         gSaveBlock1Ptr->trainerRematches[sDebugMenuListData->data[1]] = TRUE;
 }
 
-void FillPartnerParty(u16 trainerId);
 static void DebugAction_Trainers_TryBattle(u8 taskId)
 {
     s32 trainer1Id = sDebugMenuListData->data[0];
@@ -3999,42 +3996,41 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     }
 }
 
-// static const u32 gDebugFollowerNPCGraphics[] =
-// {
-//     OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
-//     OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
-//     OBJ_EVENT_GFX_STEVEN,
-//     OBJ_EVENT_GFX_WALLY,
-//     OBJ_EVENT_GFX_RED,
-//     OBJ_EVENT_GFX_LEAF,
-// };
+static const u32 gDebugFollowerNPCGraphics[] =
+{
+    OBJ_EVENT_GFX_RED_NORMAL,
+    OBJ_EVENT_GFX_GREEN_NORMAL,
+    OBJ_EVENT_GFX_STEVEN,
+    OBJ_EVENT_GFX_RS_BRENDAN,
+    OBJ_EVENT_GFX_RS_MAY,
+};
 
 static void DebugAction_CreateFollowerNPC(u8 taskId)
 {
-    // u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
-    // u32 gfx = gDebugFollowerNPCGraphics[input];
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
+    u32 gfx = gDebugFollowerNPCGraphics[input];
 
-    // Debug_DestroyMenu_Full(taskId);
-    // LockPlayerFieldControls();
-    // DestroyFollowerNPC();
-    // SetFollowerNPCData(FNPC_DATA_BATTLE_PARTNER, PARTNER_STEVEN);
-    // CreateFollowerNPC(gfx, FNPC_ALL, Debug_Follower_NPC_Event_Script);
-    // UnlockPlayerFieldControls();
+    Debug_DestroyMenu_Full(taskId);
+    LockPlayerFieldControls();
+    DestroyFollowerNPC();
+    SetFollowerNPCData(FNPC_DATA_BATTLE_PARTNER, PARTNER_STEVEN);
+    CreateFollowerNPC(gfx, FNPC_ALL, Debug_Follower_NPC_Event_Script);
+    UnlockPlayerFieldControls();
 }
 
 static void DebugAction_DestroyFollowerNPC(u8 taskId)
 {
-    // if (FNPC_ENABLE_NPC_FOLLOWERS)
-    // {
-    //     Debug_DestroyMenu_Full(taskId);
-    //     LockPlayerFieldControls();
-    //     DestroyFollowerNPC();
-    //     UnlockPlayerFieldControls();
-    // }
-    // else
-    // {
-    //     Debug_DestroyMenu_Full_Script(taskId, Debug_Follower_NPC_Not_Enabled);
-    // }
+    if (FNPC_ENABLE_NPC_FOLLOWERS)
+    {
+        Debug_DestroyMenu_Full(taskId);
+        LockPlayerFieldControls();
+        DestroyFollowerNPC();
+        UnlockPlayerFieldControls();
+    }
+    else
+    {
+        Debug_DestroyMenu_Full_Script(taskId, Debug_Follower_NPC_Not_Enabled);
+    }
 }
 
 #undef tCurrentSong

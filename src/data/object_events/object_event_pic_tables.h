@@ -1856,3 +1856,7 @@ static const struct SpriteFrameImage sPicTable_Ball_STRANGE[] = {
 };
 #endif //ITEM_STRANGE_BALL
 #endif //OW_FOLLOWERS_POKEBALLS
+
+static const struct SpriteFrameImage sPicTable_Steven[] = {
+    overworld_ascending_frames(gObjectEventPic_Steven, 2, 4),
+};

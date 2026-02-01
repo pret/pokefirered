@@ -18,6 +18,7 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "fldeff.h"
+#include "follower_npc.h"
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
@@ -256,7 +257,7 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
      || MetatileBehavior_IsIsolatedVerticalRail(behavior) == TRUE
      || MetatileBehavior_IsIsolatedHorizontalRail(behavior) == TRUE)
         DisplayItemMessageInCurrentContext(taskId, gTasks[taskId].data[3], FONT_NORMAL, gText_CantDismountBike);
-    else if (Overworld_IsBikingAllowed() == TRUE && !IsBikingDisallowedByPlayer())
+    else if (Overworld_IsBikingAllowed() == TRUE && !IsBikingDisallowedByPlayer() && FollowerNPCCanBike())
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_Bicycle;
         SetUpItemUseOnFieldCallback(taskId);
@@ -270,6 +271,8 @@ static void ItemUseOnFieldCB_Bicycle(u8 taskId)
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
         PlaySE(SE_BIKE_BELL);
     GetOnOffBike(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE);
+
+    FollowerNPC_HandleBike();
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     UnlockPlayerFieldControls();
     DestroyTask(taskId);
@@ -828,6 +831,9 @@ static void Task_UsedBlackWhiteFlute(u8 taskId)
 
 bool8 CanUseEscapeRopeOnCurrMap(void)
 {
+    if (!CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE))
+        return FALSE;
+
     if (gMapHeader.allowEscaping)
         return TRUE;
     else
@@ -941,7 +947,7 @@ void ItemUseInBattle_BagMenu(u8 taskId)
     if (gSpecialVar_ItemId == ITEM_BERRY_POUCH)
     {
         ItemUseInBattle_BerryPouch(taskId);
-    } 
+    }
     else if (CannotUseItemsInBattle(gSpecialVar_ItemId, NULL))
     {
         DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
@@ -949,7 +955,7 @@ void ItemUseInBattle_BagMenu(u8 taskId)
     else
     {
         PlaySE(SE_SELECT);
-        if (!(B_TRY_CATCH_TRAINER_BALL >= GEN_4 && (GetItemBattleUsage(gSpecialVar_ItemId) == EFFECT_ITEM_THROW_BALL) && (gBattleTypeFlags & BATTLE_TYPE_TRAINER))) 
+        if (!(B_TRY_CATCH_TRAINER_BALL >= GEN_4 && (GetItemBattleUsage(gSpecialVar_ItemId) == EFFECT_ITEM_THROW_BALL) && (gBattleTypeFlags & BATTLE_TYPE_TRAINER)))
         {
             RemoveBagItem(gSpecialVar_ItemId, 1);
         }

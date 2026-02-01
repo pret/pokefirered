@@ -7,6 +7,7 @@
 #include "credits.h"
 #include "dexnav.h"
 #include "event_data.h"
+#include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
 #include "fake_rtc.h"
@@ -22,6 +23,7 @@
 #include "field_weather.h"
 #include "fieldmap.h"
 #include "fldeff.h"
+#include "follower_npc.h"
 #include "heal_location.h"
 #include "help_system.h"
 #include "item.h"
@@ -369,6 +371,7 @@ static void Overworld_ResetStateAfterWhitingOut(void)
         Overworld_ResetBattleFlagsAndVars();
     FlagClear(FLAG_SYS_QL_DEPARTED);
     VarSet(VAR_QL_ENTRANCE, 0);
+    FollowerNPC_TryRemoveFollowerOnWhiteOut();
 }
 
 static void Overworld_ResetStateOnContinue(void)
@@ -1430,6 +1433,9 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
             player_step(fieldInput.dpadDirection, newKeys, heldKeys);
         }
     }
+    // If stop running but keep holding B -> fix follower frame.
+    if (PlayerHasFollowerNPC() && (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT) && IsPlayerStandingStill())
+        ObjectEventSetHeldMovement(&gObjectEvents[GetFollowerNPCObjectId()], GetFaceDirectionAnimNum(gObjectEvents[GetFollowerNPCObjectId()].facingDirection));
     RunQuestLogCB();
 }
 
@@ -1728,6 +1734,7 @@ void CB2_WhiteOut(void)
         UnlockPlayerFieldControls();
         gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
         val = 0;
+        SetFollowerNPCData(FNPC_DATA_SURF_BLOB, FNPC_SURF_BLOB_NONE);
         DoMapLoadLoop(&val);
         QuestLog_CutRecording();
         SetFieldVBlankCallback();
@@ -2128,6 +2135,7 @@ static bool32 ReturnToFieldLocal(u8 *state)
         break;
     case 2:
         InitViewGraphics();
+        FollowerNPC_BindToSurfBlobOnReloadScreen();
         SetHelpContextForMap();
         (*state)++;
         break;
@@ -2320,6 +2328,7 @@ static void InitObjectEventsLocal(void)
     SetPlayerAvatarTransitionFlags(player->transitionFlags);
     ResetInitialPlayerAvatarState();
     TrySpawnObjectEvents(0, 0);
+    FollowerNPC_HandleSprite();
     UpdateFollowingPokemon();
     TryRunOnWarpIntoMapScript();
 }
@@ -3683,6 +3692,7 @@ static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = linkPlayerId;
         objEvent->triggerGroundEffectsOnMove = FALSE;
+        objEvent->localId = OBJ_EVENT_ID_DYNAMIC_BASE + linkPlayerId;
     }
 }
 

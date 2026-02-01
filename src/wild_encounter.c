@@ -1,22 +1,23 @@
 #include "global.h"
-#include "random.h"
 #include "battle_debug.h"
-#include "wild_encounter.h"
+#include "battle_setup.h"
 #include "event_data.h"
+#include "event_scripts.h"
+#include "field_player_avatar.h"
 #include "fieldmap.h"
+#include "follower_npc.h"
+#include "link.h"
+#include "metatile_behavior.h"
+#include "overworld.h"
+#include "ow_synchronize.h"
+#include "quest_log.h"
+#include "random.h"
 #include "random.h"
 #include "roamer.h"
-#include "field_player_avatar.h"
-#include "battle_setup.h"
-#include "overworld.h"
-#include "metatile_behavior.h"
-#include "event_scripts.h"
-#include "script.h"
-#include "link.h"
-#include "quest_log.h"
-#include "safari_zone.h"
 #include "rtc.h"
-#include "ow_synchronize.h"
+#include "safari_zone.h"
+#include "script.h"
+#include "wild_encounter.h"
 #include "constants/maps.h"
 #include "constants/abilities.h"
 #include "constants/item.h"
@@ -1109,6 +1110,9 @@ bool8 TryDoDoubleWildBattle(void)
     if (GetSafariZoneFlag()
       || (B_DOUBLE_WILD_REQUIRE_2_MONS == TRUE && GetMonsStateToDoubles() != PLAYER_HAS_TWO_USABLE_MONS))
         return FALSE;
+    if (FollowerNPCIsBattlePartner() && FNPC_FLAG_PARTNER_WILD_BATTLES != 0
+     && (FNPC_FLAG_PARTNER_WILD_BATTLES == FNPC_ALWAYS || FlagGet(FNPC_FLAG_PARTNER_WILD_BATTLES)) && FNPC_NPC_FOLLOWER_WILD_BATTLE_VS_2 == TRUE)
+        return TRUE;
     else if (B_FLAG_FORCE_DOUBLE_WILD != 0 && FlagGet(B_FLAG_FORCE_DOUBLE_WILD))
         return TRUE;
     else if (B_DOUBLE_WILD_CHANCE != 0 && ((Random() % 100) + 1 <= B_DOUBLE_WILD_CHANCE))

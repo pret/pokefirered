@@ -185,7 +185,7 @@ u16 FieldMove_GetDefaultSpecies(enum FieldMove fieldMove)
 {
     if (fieldMove >= FIELD_MOVE_COUNT)
         return SPECIES_NONE;
-    
+
     return SanitizeSpeciesId(gFieldMovesInfo[fieldMove].defaultSpecies);
 }
 

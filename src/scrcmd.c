@@ -20,6 +20,7 @@
 #include "field_tasks.h"
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
+#include "follower_npc.h"
 #include "script_movement.h"
 #include "event_object_movement.h"
 #include "event_object_lock.h"
@@ -752,7 +753,7 @@ bool8 ScrCmd_incrementgamestat(struct ScriptContext * ctx)
 bool8 ScrCmd_setworldmapflag(struct ScriptContext * ctx)
 {
     u16 value = ScriptReadHalfword(ctx);
-    
+
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
     QuestLog_RecordEnteredMap(value);
     MapPreview_SetFlag(value);
@@ -1211,7 +1212,7 @@ bool8 ScrCmd_fadedefaultbgm(struct ScriptContext * ctx)
 bool8 ScrCmd_fadenewbgm(struct ScriptContext * ctx)
 {
     u16 music = ScriptReadHalfword(ctx);
-    
+
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE | SCREFF_HARDWARE);
 
     if (QL_IS_PLAYBACK_STATE)
@@ -1275,7 +1276,7 @@ bool8 ScrCmd_applymovement(struct ScriptContext * ctx)
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
     // When applying script movements to follower, it may have frozen animation that must be cleared
-    if ((localId == OBJ_EVENT_ID_FOLLOWER && (objEvent = GetFollowerObject()) && objEvent->frozen) 
+    if ((localId == OBJ_EVENT_ID_FOLLOWER && (objEvent = GetFollowerObject()) && objEvent->frozen)
             || ((objEvent = &gObjectEvents[GetObjectEventIdByLocalId(localId)]) && IS_OW_MON_OBJ(objEvent)))
     {
         ClearObjectEventMovement(objEvent, &gSprites[objEvent->spriteId]);
@@ -1407,6 +1408,10 @@ bool8 ScrCmd_setobjectxy(struct ScriptContext * ctx)
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
 
+    // Don't do follower NPC post-warp position set after setobjectxy.
+    if (localId == OBJ_EVENT_ID_NPC_FOLLOWER)
+        SetFollowerNPCData(FNPC_DATA_COME_OUT_DOOR, FNPC_DOOR_NO_POS_SET);
+
     TryMoveObjectEventToMapCoords(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, x, y);
     return FALSE;
 }
@@ -1485,12 +1490,33 @@ bool8 ScrCmd_resetobjectsubpriority(struct ScriptContext * ctx)
 bool8 ScrCmd_faceplayer(struct ScriptContext * ctx)
 {
     Script_RequestEffects(SCREFF_V1 | SCREFF_HARDWARE);
-
-    if (gObjectEvents[gSelectedObjectEvent].active)
+    if (PlayerHasFollowerNPC()
+     && gObjectEvents[GetFollowerNPCObjectId()].invisible == FALSE
+     && gSelectedObjectEvent == GetFollowerNPCObjectId())
     {
-        ObjectEventFaceOppositeDirection(&gObjectEvents[gSelectedObjectEvent],
-                                         GetPlayerFacingDirection());
+        struct ObjectEvent *npcFollower = &gObjectEvents[GetFollowerNPCObjectId()];
+
+        switch (DetermineFollowerNPCDirection(&gObjectEvents[gPlayerAvatar.objectEventId], npcFollower))
+        {
+        case DIR_NORTH:
+            ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_NPC_FOLLOWER, npcFollower->mapGroup, npcFollower->mapNum, Common_Movement_FaceUp);
+            break;
+        case DIR_SOUTH:
+            ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_NPC_FOLLOWER, npcFollower->mapGroup, npcFollower->mapNum, Common_Movement_FaceDown);
+            break;
+        case DIR_EAST:
+            ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_NPC_FOLLOWER, npcFollower->mapGroup, npcFollower->mapNum, Common_Movement_FaceRight);
+            break;
+        case DIR_WEST:
+            ScriptMovement_StartObjectMovementScript(OBJ_EVENT_ID_NPC_FOLLOWER, npcFollower->mapGroup, npcFollower->mapNum, Common_Movement_FaceLeft);
+            break;
+        default:
+            break;
+        }
+        return FALSE;
     }
+    if (gObjectEvents[gSelectedObjectEvent].active)
+        ObjectEventFaceOppositeDirection(&gObjectEvents[gSelectedObjectEvent], GetPlayerFacingDirection());
     return FALSE;
 }
 
@@ -2083,7 +2109,7 @@ bool8 ScrCmd_bufferspeciesname(struct ScriptContext * ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 species = VarGet(ScriptReadHalfword(ctx));
-    
+
     Script_RequestEffects(SCREFF_V1);
 
     StringCopy(sScriptStringVars[stringVarIndex], gSpeciesInfo[species].speciesName);
@@ -2451,7 +2477,7 @@ bool8 ScrCmd_updatecoinsbox(struct ScriptContext * ctx)
 bool8 ScrCmd_trainerbattle(struct ScriptContext * ctx)
 {
     Script_RequestEffects(SCREFF_V1 | SCREFF_TRAINERBATTLE);
-    
+
     TrainerBattleLoadArgs(ctx->scriptPtr);
     ctx->scriptPtr = BattleSetup_ConfigureTrainerBattle(ctx->scriptPtr);
     return FALSE;

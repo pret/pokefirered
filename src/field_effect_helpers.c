@@ -48,6 +48,14 @@ static u32 ShowDisguiseFieldEffect(u32 fldEff, const struct SpriteTemplate* temp
 #define sReflectionVerticalOffset   data[2]
 #define sIsStillReflection          data[7]
 
+void SetUpShadow(struct ObjectEvent *objectEvent)
+{
+    gFieldEffectArguments[0] = objectEvent->localId;
+    gFieldEffectArguments[1] = objectEvent->mapNum;
+    gFieldEffectArguments[2] = objectEvent->mapGroup;
+    FldEff_Shadow();
+}
+
 void SetUpReflection(struct ObjectEvent * objectEvent, struct Sprite *sprite, bool8 stillReflection)
 {
     struct Sprite *reflectionSprite;
@@ -319,22 +327,26 @@ u32 FldEff_Shadow(void)
     u8 objectEventId;
     const struct ObjectEventGraphicsInfo *graphicsInfo;
     u8 spriteId;
-    u8 i;
-    for (i = 0; i < MAX_SPRITES; i++)
+    s32 i;
+    for (i = MAX_SPRITES - 1; i > -1; i--) // Search backwards, because of CreateSpriteAtEnd
     {
         // Return early if a shadow sprite already exists
-        if (gSprites[i].data[0] == gFieldEffectArguments[0] && gSprites[i].callback == UpdateShadowFieldEffect)
+        if (gSprites[i].callback == UpdateShadowFieldEffect
+         && gSprites[i].sLocalId == gFieldEffectArguments[0]
+         && gSprites[i].sMapNum == gFieldEffectArguments[1]
+         && gSprites[i].sMapGroup == gFieldEffectArguments[2])
             return 0;
     }
     objectEventId = GetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
     graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
     if (graphicsInfo->shadowSize == SHADOW_SIZE_XL) // don't create a shadow at all
         return 0;
-    spriteId = CreateSpriteAtEnd(gShadowEffectTemplates[graphicsInfo->shadowSize], 0, 0, 0x94);
+    LoadSpriteSheetByTemplate(gShadowEffectTemplates[graphicsInfo->shadowSize], 0, 0);
+    spriteId = CreateSpriteAtEnd(gShadowEffectTemplates[graphicsInfo->shadowSize], 0, 0, OW_OBJECT_SUBPRIORITY + 1);
     if (spriteId != MAX_SPRITES)
     {
         // SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 12));
-        gSprites[spriteId].oam.objMode = 1; // BLEND
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[spriteId].coordOffsetEnabled = TRUE;
         gSprites[spriteId].sLocalId = gFieldEffectArguments[0];
         gSprites[spriteId].sMapNum = gFieldEffectArguments[1];
@@ -369,7 +381,17 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
         sprite->y = linkedSprite->y + sprite->sYOffset;
         #endif
         sprite->invisible = linkedSprite->invisible;
-        if (!objectEvent->active || !objectEvent->hasShadow
+        if (objectEvent->jumpDone)
+        {
+            //  Ugly signaling to disable shadows after a jump
+            objectEvent->noShadow = TRUE;
+            objectEvent->jumpDone = FALSE;
+        }
+        if (!objectEvent->active
+         || objectEvent->noShadow
+         || objectEvent->inHotSprings
+         || objectEvent->inSandPile
+         || gWeatherPtr->noShadows
          || MetatileBehavior_IsPokeGrass(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsSurfable(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsSurfable(objectEvent->previousMetatileBehavior)
@@ -442,7 +464,7 @@ u32 FldEff_TallGrass(void)
         spriteTemplate = &gFieldEffectObjectTemplate_TallGrass;
     }
     spritePalette = GetGeneralFieldPalette1();
-    
+
     FieldEffectScript_LoadFadedPal(spritePalette);
     x = gFieldEffectArguments[0];
     y = gFieldEffectArguments[1];
@@ -1014,7 +1036,7 @@ u32 FldEff_JumpSmallSplash(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
-    
+
     FieldEffectScript_LoadFadedPal(&gSpritePalette_GeneralFieldEffect0);
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 12);
     spriteId = CreateSpriteAtEnd(&gFieldEffectObjectTemplate_JumpSmallSplash, gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
@@ -1265,7 +1287,7 @@ u32 FldEff_Ash(void)
     u8 spriteId;
     struct Sprite *sprite;
     const struct SpritePalette *spritePalette = GetGeneralFieldPalette1();
-	
+
     FieldEffectScript_LoadFadedPal(spritePalette);
 
     x = gFieldEffectArguments[0];

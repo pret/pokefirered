@@ -23,45 +23,41 @@ static const struct SpriteFrameImage sPicTable_ShadowExtraLarge[] = { obj_frame_
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowSmall =
 {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
+    .tileTag = FLDEFF_TILE_TAG_SHADOW_SMALL,
+    .paletteTag = TAG_WEATHER_START,
     .oam = &gObjectEventBaseOam_8x8,
     .anims = sAnimTable_Shadow,
     .images = sPicTable_ShadowSmall,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowMedium =
 {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
+    .tileTag = FLDEFF_TILE_TAG_SHADOW_MEDIUM,
+    .paletteTag = TAG_WEATHER_START,
     .oam = &gObjectEventBaseOam_16x8,
     .anims = sAnimTable_Shadow,
     .images = sPicTable_ShadowMedium,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowLarge =
 {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
+    .tileTag = FLDEFF_TILE_TAG_SHADOW_LARGE,
+    .paletteTag = TAG_WEATHER_START,
     .oam = &gObjectEventBaseOam_32x8,
     .anims = sAnimTable_Shadow,
     .images = sPicTable_ShadowLarge,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
 
 const struct SpriteTemplate gFieldEffectObjectTemplate_ShadowExtraLarge =
 {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_PLAYER_RED,
+    .tileTag = FLDEFF_TILE_TAG_SHADOW_EXTRA_LARGE,
+    .paletteTag = TAG_WEATHER_START,
     .oam = &gObjectEventBaseOam_64x32,
     .anims = sAnimTable_Shadow,
     .images = sPicTable_ShadowExtraLarge,
-    .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateShadowFieldEffect,
 };
 
@@ -1525,7 +1521,7 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_SmallSparkle =
 const struct SpritePalette gSpritePalette_SmallSparkle = { .data = gFieldEffectPal_SmallSparkle, .tag = FLDEFF_PAL_TAG_SMALL_SPARKLE };
 
 // cave dust
-static const struct SpriteFrameImage sPicTable_CaveDust[] = 
+static const struct SpriteFrameImage sPicTable_CaveDust[] =
 {
     overworld_frame(gFieldEffectObjectPic_CaveDust, 2, 2, 0),
     overworld_frame(gFieldEffectObjectPic_CaveDust, 2, 2, 1),

@@ -22,4 +22,8 @@
 #define FADE_FROM_WHITE  2
 #define FADE_TO_WHITE    3
 
+// Shadows values
+#define BASE_SHADOW_INTENSITY (16 - OW_SHADOW_INTENSITY)
+#define SHADOW_COLOR_INDEX     9 // Within the weather palette, shadow sprites' color index
+
 #endif // GUARD_CONSTANTS_FIELD_WEATHER_H

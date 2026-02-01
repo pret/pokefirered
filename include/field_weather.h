@@ -53,7 +53,8 @@ struct Weather
     s8 targetColorMapIndex;
     u8 colorMapStepDelay;
     u8 colorMapStepCounter;
-    u16 fadeDestColor;
+    u16 fadeDestColor:15;
+    u16 noShadows:1; // Certain weathers require blend coeffs that do not work nice with shadows
     u8 palProcessingState;
     u8 fadeScreenCounter;
     bool8 readyForInit;
@@ -183,5 +184,6 @@ void StartWeather(void);
 void SetWeather(u32 weather);
 void ResumePausedWeather(void);
 void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes);
+u8 UpdateShadowColor(u16 color);
 
 #endif // GUARD_WEATHER_H

@@ -14,6 +14,7 @@
 #include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
+#include "field_effect_helpers.h"
 #include "field_fadetransition.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
@@ -1551,7 +1552,7 @@ void UpdateTimeOfDay(void)
 #undef TIME_BLEND_WEIGHT
 
 // Whether a map type is naturally lit/outside
-bool8 MapHasNaturalLight(u8 mapType)
+bool32 MapHasNaturalLight(u8 mapType)
 {
     if (!OW_ENABLE_DNS)
         return FALSE;
@@ -1560,6 +1561,13 @@ bool8 MapHasNaturalLight(u8 mapType)
          || mapType == MAP_TYPE_ROUTE
          || mapType == MAP_TYPE_OCEAN_ROUTE
     );
+}
+
+bool32 CurrentMapHasShadows(void)
+{
+    // Add all conditionals here for maps that shouldn't have shadows
+    // By default only cave maps are excluded from having shadows under object events
+    return (gMapHeader.mapType != MAP_TYPE_UNDERGROUND);
 }
 
 // Update & mix day / night bg palettes (into unfaded)
@@ -1596,20 +1604,20 @@ void UpdatePalettesWithTime(u32 palettes)
 {
     if (QL_IS_PLAYBACK_STATE)
         return;
-    if (MapHasNaturalLight(gMapHeader.mapType))
-    {
-        u32 i;
-        u32 mask = 1 << 16;
-        if (palettes >= (1 << 16))
-            for (i = 0; i < 16; i++, mask <<= 1)
-                if (IS_BLEND_IMMUNE_TAG(GetSpritePaletteTagByPaletteNum(i)))
-                    palettes &= ~(mask);
+    if (!MapHasNaturalLight(gMapHeader.mapType))
+        return;
 
-        palettes &= PALETTES_MAP | PALETTES_OBJECTS; // Don't blend UI pals
-        if (!palettes)
-            return;
-        TimeMixPalettes(palettes, gPlttBufferUnfaded, gPlttBufferFaded, &gTimeBlend.startBlend, &gTimeBlend.endBlend, gTimeBlend.weight);
-    }
+    u32 i;
+    u32 mask = 1 << 16;
+    if (palettes >= (1 << 16))
+        for (i = 0; i < 16; i++, mask <<= 1)
+            if (IS_BLEND_IMMUNE_TAG(GetSpritePaletteTagByPaletteNum(i)))
+                palettes &= ~(mask);
+
+    palettes &= PALETTES_MAP | PALETTES_OBJECTS; // Don't blend UI pals
+    if (!palettes)
+        return;
+    TimeMixPalettes(palettes, gPlttBufferUnfaded, gPlttBufferFaded, &gTimeBlend.startBlend, &gTimeBlend.endBlend, gTimeBlend.weight);
 }
 
 u8 UpdateSpritePaletteWithTime(u8 paletteNum)
@@ -3693,6 +3701,7 @@ static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
         sprite->data[0] = linkPlayerId;
         objEvent->triggerGroundEffectsOnMove = FALSE;
         objEvent->localId = OBJ_EVENT_ID_DYNAMIC_BASE + linkPlayerId;
+        SetUpShadow(objEvent);
     }
 }
 

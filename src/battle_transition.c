@@ -619,6 +619,9 @@ static void Task_BattleTransition(u8 taskId)
 static bool8 Transition_StartIntro(struct Task *task)
 {
     SetWeatherScreenFadeOut();
+    // cause all shadow sprites to destroy themselves,
+    // freeing up sprite slots for the transition
+    gWeatherPtr->noShadows = TRUE;
     CpuCopy32(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
     if (sTasks_Intro[task->tTransitionId] != NULL)
     {
@@ -873,24 +876,27 @@ static void Task_BigPokeball(u8 taskId)
 }
 
 // Separate function in Emerald
-#define InitPatternWeaveTransition(task) \
-{ \
-    u16 i; \
-    InitTransitionData(); \
-    ScanlineEffect_Clear(); \
-    (task)->tBlendTarget1 = 16; \
-    (task)->tBlendTarget2 = 0; \
-    (task)->tSinIndex = 0; \
-    (task)->tAmplitude = 0x4000; \
-    sTransitionData->winIn = WININ_WIN0_ALL; \
-    sTransitionData->winOut = 0; \
-    sTransitionData->win0H = DISPLAY_WIDTH; \
-    sTransitionData->win0V = DISPLAY_HEIGHT; \
-    sTransitionData->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL; \
-    sTransitionData->bldAlpha = BLDALPHA_BLEND((task)->tBlendTarget2, (task)->tBlendTarget1); \
-    for (i = 0; i < DISPLAY_HEIGHT; i++) \
-        gScanlineEffectRegBuffers[1][i] = DISPLAY_WIDTH; \
-    SetVBlankCallback(VBlankCB_PatternWeave); \
+static void InitPatternWeaveTransition(struct Task *task)
+{
+    u16 i;
+    InitTransitionData();
+    ScanlineEffect_Clear();
+    task->tBlendTarget1 = 16;
+    task->tBlendTarget2 = 0;
+    task->tSinIndex = 0;
+    task->tAmplitude = 0x4000;
+    sTransitionData->winIn = WININ_WIN0_ALL;
+    sTransitionData->winOut = 0;
+    sTransitionData->win0H = DISPLAY_WIDTH;
+    sTransitionData->win0V = DISPLAY_HEIGHT;
+    sTransitionData->bldCnt = BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL;
+    sTransitionData->bldAlpha = BLDALPHA_BLEND((task)->tBlendTarget2, (task)->tBlendTarget1);
+    UpdateShadowColor(RGB_GRAY);
+
+    for (i = 0; i < DISPLAY_HEIGHT; i++)
+        gScanlineEffectRegBuffers[1][i] = DISPLAY_WIDTH;
+
+    SetVBlankCallback(VBlankCB_PatternWeave);
 }
 
 static bool8 BigPokeball_Init(struct Task *task)
@@ -2709,6 +2715,8 @@ static void VBlankCB_AngledWipes(void)
 #define tFadeFromGraySpeed data[5]
 #define tDelayTimer        data[6]
 #define tBlend             data[7]
+#define tBldCntSaved           data[8]
+#define tShadowColor           data[9]
 
 static void CreateIntroTask(s16 fadeToGrayDelay, s16 fadeFromGrayDelay, s16 numFades, s16 fadeToGraySpeed, s16 fadeFromGraySpeed)
 {
@@ -2736,17 +2744,28 @@ static void Task_BattleTransition_Intro(u8 taskId)
 
 static bool8 TransitionIntro_FadeToGray(struct Task *task)
 {
+    u8 paletteNum = IndexOfSpritePaletteTag(TAG_WEATHER_START);
+    u16 index = OBJ_PLTT_ID(paletteNum) + SHADOW_COLOR_INDEX;
     if (task->tDelayTimer == 0 || --task->tDelayTimer == 0)
     {
         task->tDelayTimer = task->tFadeToGrayDelay;
         task->tBlend += task->tFadeToGraySpeed;
         if (task->tBlend > 16)
             task->tBlend = 16;
+        if (paletteNum < 16)
+            task->tShadowColor = gPlttBufferFaded[index];
         BlendPalettes(-1, task->tBlend, RGB(11, 11, 11));
+        if (paletteNum < 16)
+            gPlttBufferFaded[index] = task->tShadowColor;
     }
     if (task->tBlend >= 16)
     {
         // Fade to gray complete, start fade back
+        // Save BLDCNT and turn off targets temporarily
+        task->tBldCntSaved = GetGpuReg(REG_OFFSET_BLDCNT);
+        SetGpuReg(REG_OFFSET_BLDCNT, task->tBldCntSaved & ~BLDCNT_TGT2_BG_ALL);
+        if (paletteNum < 16)
+            gPlttBufferFaded[index] = RGB(11, 11, 11);
         task->tState++;
         task->tDelayTimer = task->tFadeFromGrayDelay;
     }
@@ -2757,11 +2776,19 @@ static bool8 TransitionIntro_FadeFromGray(struct Task *task)
 {
     if (task->tDelayTimer == 0 || --task->tDelayTimer == 0)
     {
+        u8 paletteNum = IndexOfSpritePaletteTag(TAG_WEATHER_START);
         task->tDelayTimer = task->tFadeFromGrayDelay;
         task->tBlend -= task->tFadeFromGraySpeed;
         if (task->tBlend < 0)
             task->tBlend = 0;
         BlendPalettes(PALETTES_ALL, task->tBlend, RGB(11, 11, 11));
+        // Restore BLDCNT
+        SetGpuReg(REG_OFFSET_BLDCNT, task->tBldCntSaved);
+        if (paletteNum < 16)
+        {
+            u16 index = OBJ_PLTT_ID(paletteNum) + SHADOW_COLOR_INDEX;
+            gPlttBufferFaded[index] = task->tShadowColor;
+        }
     }
     if (task->tBlend == 0)
     {
@@ -2787,6 +2814,8 @@ static bool8 TransitionIntro_FadeFromGray(struct Task *task)
 #undef tFadeFromGraySpeed
 #undef tDelayTimer
 #undef tBlend
+#undef tBldCntSaved
+#undef tShadowColor
 
 //-----------------------------------
 // General transition functions

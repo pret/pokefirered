@@ -192,7 +192,7 @@ void StartWeather(void)
         sPaletteColorMapTypes = sBasePaletteColorMapTypes;
 
         gWeatherPtr->contrastColorMapSpritePalIndex = index;
-        gWeatherPtr->weatherPicSpritePalIndex = AllocSpritePalette(PALTAG_WEATHER_2);
+        gWeatherPtr->weatherPicSpritePalIndex = 0xFF; // defer allocation until needed
         gWeatherPtr->rainSpriteCount = 0;
         gWeatherPtr->curRainSpriteIndex = 0;
         gWeatherPtr->cloudSpritesCreated = FALSE;
@@ -303,7 +303,8 @@ static void Task_WeatherMain(u8 taskId)
 
 static void None_Init(void)
 {
-    Weather_SetBlendCoeffs(8, 12); // Indoor shadows
+    Weather_SetBlendCoeffs(8, BASE_SHADOW_INTENSITY); // Indoor shadows
+    gWeatherPtr->noShadows = FALSE;
     gWeatherPtr->targetColorMapIndex = 0;
     gWeatherPtr->colorMapStepDelay = 0;
 }
@@ -439,7 +440,7 @@ static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
     u16 curPalIndex;
     u16 palOffset;
     const u8 *colorMap;
-    u16 i;
+    u32 i;
 
     if (colorMapIndex > 0)
     {
@@ -447,29 +448,27 @@ static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
         u32 palettes = PALETTES_ALL;
         numPalettes += startPalIndex;
         palettes = (palettes >> startPalIndex) << startPalIndex;
-        palettes = (palettes << (32-numPalettes)) >> (32-numPalettes);
+        palettes = (palettes << (32 - numPalettes)) >> (32 - numPalettes);
         numPalettes -= startPalIndex;
-
         colorMapIndex--;
         palOffset = PLTT_ID(startPalIndex);
         UpdateAltBgPalettes(palettes & PALETTES_BG);
         // Thunder gamma-shift looks bad on night-blended palettes, so ignore time blending in some situations
-        if (!(colorMapIndex > 3) && MapHasNaturalLight(gMapHeader.mapType))
-          UpdatePalettesWithTime(palettes);
+        if (colorMapIndex <= 3 && MapHasNaturalLight(gMapHeader.mapType))
+            UpdatePalettesWithTime(palettes);
         else
-          CpuFastCopy(gPlttBufferUnfaded + palOffset, gPlttBufferFaded + palOffset, PLTT_SIZE_4BPP * numPalettes);
-
+            CpuFastCopy(gPlttBufferUnfaded + palOffset, gPlttBufferFaded + palOffset, PLTT_SIZE_4BPP * numPalettes);
         numPalettes += startPalIndex;
         curPalIndex = startPalIndex;
 
-        // Loop through the speficied palette range and apply necessary gamma shifts to the colors.
+        // Loop through the specified palette range and apply necessary color maps.
         while (curPalIndex < numPalettes)
         {
+            // don't blend special palettes immune to blending
             if (sPaletteColorMapTypes[curPalIndex] == COLOR_MAP_NONE ||
                 (curPalIndex >= 16 && IS_BLEND_IMMUNE_TAG(GetSpritePaletteTagByPaletteNum(curPalIndex - 16))))
             {
                 // No palette change.
-                CpuFastCopy(&gPlttBufferUnfaded[palOffset], &gPlttBufferFaded[palOffset], PLTT_SIZE_4BPP);
                 palOffset += 16;
             }
             else
@@ -483,12 +482,12 @@ static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
 
                 for (i = 0; i < 16; i++)
                 {
-                    // Apply gamma shift to the original color.
-                    struct RGBColor baseColor = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
+                    // Apply color map to the original color.
+                    struct RGBColor baseColor = *(struct RGBColor *)&gPlttBufferFaded[palOffset];
                     r = colorMap[baseColor.r];
                     g = colorMap[baseColor.g];
                     b = colorMap[baseColor.b];
-                    gPlttBufferFaded[palOffset++] = (b << 10) | (g << 5) | r;
+                    gPlttBufferFaded[palOffset++] = RGB2(r, g, b);
                 }
             }
 
@@ -534,7 +533,6 @@ static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
         }
         else
         {
-            // No palette blending.
             CpuFastCopy(&gPlttBufferUnfaded[PLTT_ID(startPalIndex)], &gPlttBufferFaded[PLTT_ID(startPalIndex)], numPalettes * PLTT_SIZE_4BPP);
         }
     }
@@ -897,6 +895,9 @@ void ApplyWeatherColorMapToPals(u8 startPalIndex, u8 numPalettes)
 
 void LoadCustomWeatherSpritePalette(const u16 *palette)
 {
+    if (gWeatherPtr->weatherPicSpritePalIndex > 16 // haven't allocated palette yet
+    && (gWeatherPtr->weatherPicSpritePalIndex = AllocSpritePalette(PALTAG_WEATHER_2)) > 16)
+        return;
     LoadPalette(palette, OBJ_PLTT_ID(gWeatherPtr->weatherPicSpritePalIndex), PLTT_SIZE_4BPP);
     UpdateSpritePaletteWithWeather(gWeatherPtr->weatherPicSpritePalIndex, TRUE);
 }
@@ -982,7 +983,10 @@ void Weather_SetBlendCoeffs(u8 eva, u8 evb)
     gWeatherPtr->currBlendEVB = evb;
     gWeatherPtr->targetBlendEVA = eva;
     gWeatherPtr->targetBlendEVB = evb;
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(eva, evb));
+
+    // don't update BLDALPHA if a hardware fade is on-screen
+    if ((GetGpuReg(REG_OFFSET_BLDCNT) & BLDCNT_EFFECT_EFF_MASK) < BLDCNT_EFFECT_LIGHTEN)
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(eva, evb));
 }
 
 void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay)

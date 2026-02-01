@@ -904,6 +904,7 @@ static void ForceStairsMovement(u16 metatileBehavior, s16 *x, s16 *y)
 {
     ObjectEventForceSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], GetWalkInPlaceNormalMovementAction(GetPlayerFacingDirection()));
     GetStairsMovementDirection(metatileBehavior, x, y);
+    gObjectEvents[gPlayerAvatar.objectEventId].noShadow = TRUE;
 }
 
 static void GetStairsMovementDirection(u8 metatileBehavior, s16 *x, s16 *y)
@@ -960,6 +961,7 @@ static void Task_ExitStairs(u8 taskId)
             data[0]++;
         break;
     }
+    gObjectEvents[gPlayerAvatar.objectEventId].noShadow = FALSE;
 }
 
 static void ExitStairsMovement(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer)

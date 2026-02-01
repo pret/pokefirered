@@ -95,7 +95,7 @@
 #define OW_TIME_OF_DAY_ENCOUNTERS       FALSE        // If TRUE, will allow the user to define and use different encounter tables based on the time of day.
 #define OW_TIME_OF_DAY_DISABLE_FALLBACK FALSE        // If TRUE, if the encounter table for a specific map and time is empty, the area will have no encounters instead of falling back to the vanilla map and time.
 #define OW_TIME_OF_DAY_FALLBACK         TIME_MORNING // The time of day that encounter tables fall back to. If you set OW_TIMES_OF_DAY to GEN_3, change this to TIME_DAY or you won't have any encounters!
-#define OW_SEASONS                      TRUE         // Enables seasonal tilesets
+#define OW_SEASONS                      FALSE         // Enables seasonal tilesets
 #define OW_SEASON_ENCOUNTERS            FALSE
 #define OW_SEASON_DISABLE_FALLBACK      FALSE
 #define OW_SEASON_FALLBACK              SEASON_SPRING

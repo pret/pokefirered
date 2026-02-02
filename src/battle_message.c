@@ -2,23 +2,23 @@
 #include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
-#include "battle_z_move.h"
-#include "strings.h"
-#include "battle_message.h"
-#include "link.h"
-#include "line_break.h"
-#include "event_scripts.h"
-#include "event_data.h"
-#include "item.h"
-#include "battle_tower.h"
-#include "trainer_tower.h"
-#include "battle_setup.h"
-#include "field_specials.h"
-#include "menu.h"
 #include "battle_controllers.h"
+#include "battle_message.h"
+#include "battle_setup.h"
+#include "battle_special.h"
+#include "battle_z_move.h"
+#include "event_data.h"
+#include "event_scripts.h"
+#include "field_specials.h"
 #include "graphics.h"
+#include "item.h"
+#include "line_break.h"
+#include "link.h"
+#include "menu.h"
 #include "recorded_battle.h"
+#include "strings.h"
 #include "test_runner.h"
+#include "trainer_tower.h"
 #include "constants/abilities.h"
 #include "constants/battle_string_ids.h"
 #include "constants/moves.h"
@@ -277,11 +277,6 @@ static const u8 sText_GotchaPkmnCaught2[] = _("Gotcha!\n{B_OPPONENT_MON1_NAME} w
 static const u8 sText_Bills[] = _("BILL's");
 const u8 gText_HighlightRed_Left[] = _("{HIGHLIGHT 2}Left: ");
 const u8 gText_HighlightRed[] = _("{HIGHLIGHT 2}");
-const u8 gText_BattleTowerBan_Space[] = _("  ");
-const u8 gText_BattleTowerBan_Newline1[] = _("\n");
-const u8 gText_BattleTowerBan_Newline2[] = _("\n");
-const u8 gText_BattleTowerBan_Is1[] = _(" is");
-const u8 gText_BattleTowerBan_Is2[] = _(" is");
 const u8 gText_TimeBoard[] = _("TIME BOARD");
 const u8 gText_XMinYZSec[] = _("{STR_VAR_1}MIN. {STR_VAR_2}.{STR_VAR_3}SEC.");
 
@@ -2105,6 +2100,8 @@ static void GetBattlerNick(u32 battler, u8 *dst)
     GetBattlerNick(battler, text);                                      \
     toCpy = text;
 
+static const u8 gText_Placeholder[] = _("PH");
+
 static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text, u8 multiplayerId, u8 battler)
 {
     const u8 *toCpy = NULL;
@@ -2131,7 +2128,7 @@ static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text,
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
     {
-        GetBattleTowerTrainerName(text);
+        StringCopy(text, gText_Placeholder);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
     {
@@ -2235,7 +2232,7 @@ static const u8 *BattleStringGetOpponentClassByTrainerId(u16 trainerId)
     else if (trainerId == TRAINER_UNION_ROOM)
         toCpy = gTrainerClasses[GetUnionRoomTrainerClass()].name;
     else if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-        toCpy = gTrainerClasses[GetBattleTowerTrainerClassNameId()].name;
+        toCpy = gTrainerClasses[TRAINER_CLASS_PLAYER].name;
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER)
         toCpy = gTrainerClasses[GetTrainerTowerOpponentClass()].name;
     else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)

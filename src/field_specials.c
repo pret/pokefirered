@@ -17,7 +17,6 @@
 #include "field_specials.h"
 #include "region_map.h"
 #include "task.h"
-#include "battle_tower.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_weather.h"
@@ -374,11 +373,6 @@ void RemoveCameraObject(void)
 {
     CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
     RemoveObjectEventByLocalIdAndMap(LOCALID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-}
-
-void BufferEReaderTrainerName(void)
-{
-    CopyEReaderTrainerName5(gStringVar1);
 }
 
 // Unused

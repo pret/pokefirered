@@ -5,7 +5,6 @@
 #include "battle_controllers.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_interface.h"
-#include "battle_tower.h"
 #include "berry_pouch.h"
 #include "data.h"
 #include "decompress.h"
@@ -6517,11 +6516,9 @@ static u8 GetPartySlotEntryStatus(s8 slot)
 
 static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
 {
-    u16 species;
-    u16 i = 0;
-
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return FALSE;
+
     switch (gPartyMenu.chooseMonsBattleType)
     {
     default:
@@ -6532,43 +6529,16 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
         if (GetMonData(mon, MON_DATA_HP) == 0)
             return FALSE;
         break;
-    case CHOOSE_MONS_FOR_BATTLE_TOWER:
-        if (gSaveBlock2Ptr->battleTower.battleTowerLevelType == 0 // level 50
-         && GetMonData(mon, MON_DATA_LEVEL) > 50)
-            return FALSE;
-        species = GetMonData(mon, MON_DATA_SPECIES);
-        for (; gBattleTowerBannedSpecies[i] != 0xFFFF; ++i)
-            if (gBattleTowerBannedSpecies[i] == species)
-                return FALSE;
-        break;
     }
     return TRUE;
 }
 
 static u8 CheckBattleEntriesAndGetMessage(void)
 {
-    u8 i, j;
-    struct Pokemon *party = gPlayerParty;
     u8 *order = gSelectedOrderFromParty;
 
     switch (gPartyMenu.chooseMonsBattleType)
     {
-    case CHOOSE_MONS_FOR_BATTLE_TOWER:
-        if (order[2] == 0)
-            return PARTY_MSG_THREE_MONS_ARE_NEEDED;
-        for (i = 0; i < 2; ++i)
-        {
-            sPartyMenuInternal->data[15] = GetMonData(&party[order[i] - 1], MON_DATA_SPECIES);
-            sPartyMenuInternal->data[14] = GetMonData(&party[order[i] - 1], MON_DATA_HELD_ITEM);
-            for (j = i + 1; j < 3; ++j)
-            {
-                if (sPartyMenuInternal->data[15] == GetMonData(&party[order[j] - 1], MON_DATA_SPECIES))
-                    return PARTY_MSG_MONS_CANT_BE_SAME;
-                if (sPartyMenuInternal->data[14] != ITEM_NONE && sPartyMenuInternal->data[14] == GetMonData(&party[order[j] - 1], MON_DATA_HELD_ITEM))
-                    return PARTY_MSG_NO_SAME_HOLD_ITEMS;
-            }
-        }
-        break;
     case CHOOSE_MONS_FOR_UNION_ROOM_BATTLE:
         if (order[1] == 0)
             return PARTY_MSG_TWO_MONS_ARE_NEEDED;

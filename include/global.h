@@ -374,18 +374,6 @@ struct RecordMixingGift
 #include "global.berry.h"
 #include "pokemon.h"
 
-struct BattleTowerRecord // record mixing
-{
-    /*0x00*/ u8 battleTowerLevelType; // 0 = level 50, 1 = level 100
-    /*0x01*/ u8 trainerClass;
-    /*0x02*/ u16 winStreak;
-    /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
-    /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
-    /*0x10*/ u16 greeting[EASY_CHAT_BATTLE_WORDS_COUNT];
-    /*0x1C*/ struct BattleTowerPokemon party[3];
-    /*0xA0*/ u32 checksum;
-};
-
 struct BattleTowerEReaderTrainer
 {
     /*0x4A0 0x3F0 0x00*/ u8 unk0;
@@ -398,35 +386,6 @@ struct BattleTowerEReaderTrainer
     /*0x4C8 0x418 0x28*/ u16 farewellPlayerWon[6];
     /*0x4D4 0x424 0x34*/ struct BattleTowerPokemon party[3];
     /*0x558 0x4A8 0xB8*/ u32 checksum;
-};
-
-struct BattleTowerData // Leftover from R/S
-{
-    struct BattleTowerRecord playerRecord;
-    struct BattleTowerRecord records[5]; // from record mixing
-    #if FREE_BATTLE_TOWER_E_READER == FALSE
-        struct BattleTowerEReaderTrainer ereaderTrainer;
-    #endif //FREE_BATTLE_TOWER_E_READER
-    u16 firstMonSpecies; // species of the first pokemon in the player's battle tower party
-    u16 defeatedBySpecies; // species of the pokemon that defated the player
-    u16 curChallengeBattleNum[2]; // 1-based index of battle in the current challenge. (challenges consist of 7 battles)
-    u16 curStreakChallengesNum[2]; // 1-based index of the current challenge in the current streak.
-    u16 recordWinStreaks[2];
-    u16 prizeItem;
-    u16 totalBattleTowerWins;
-    u16 bestBattleTowerWinStreak;
-    u16 currentWinStreaks[2];
-    u8 defeatedByTrainerName[8];
-    u8 firstMonNickname[VANILLA_POKEMON_NAME_LENGTH]; // nickname of the first pokemon in the player's battle tower party
-    u8 battleTowerLevelType:1; // 0 = level 50; 1 = level 100
-    u8 unk_554:1;
-    u8 battleOutcome;
-    u8 var_4AE[2];
-    u8 battleTowerTrainerId; // index for gBattleTowerTrainers table
-    u8 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
-    u8 battledTrainerIds[6];
-    u8 lastStreakLevelType; // 0 = level 50, 1 = level 100.  level type of the last streak. Used by tv to report the level mode.
-    u8 filler_4D1[0x316];
 };
 
 struct SaveBlock2
@@ -452,7 +411,10 @@ struct SaveBlock2
     /*0x0A8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
     /*0x0AC*/ bool8 unkFlag1; // Set TRUE, never read
     /*0x0AD*/ bool8 unkFlag2; // Set FALSE, never read
-    /*0x0B0*/ struct BattleTowerData battleTower;
+    #if FREE_BATTLE_TOWER_E_READER == FALSE
+        struct BattleTowerEReaderTrainer ereaderTrainer;
+    #endif //FREE_BATTLE_TOWER_E_READER
+    u8 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE]; // temporary, replace with frontier
     /*0x898*/ u16 mapView[0x100];
 #if FREE_LINK_BATTLE_RECORDS == FALSE
     /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
@@ -463,7 +425,7 @@ struct SaveBlock2
 #endif //FREE_POKEMON_JUMP
     /*0xB10*/ struct BerryPickingResults berryPick;
     /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT]; // moved to SaveBlock2 due to QuestLogScene taking up SaveBlock1
-    /*0x???*/ u8 filler_90[212];
+    /*0x???*/ u8 filler_90[2044];
 }; // size: 0xF24
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;

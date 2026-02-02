@@ -4,7 +4,6 @@
 #include "battle.h"
 #include "battle_partner.h"
 #include "battle_setup.h"
-#include "battle_tower.h"
 #include "bike.h"
 #include "event_data.h"
 #include "event_object_movement.h"

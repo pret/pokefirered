@@ -80,9 +80,9 @@ static void ClearPokedexFlags(void)
     memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
 }
 
-static void ClearBattleTower(void)
+static void ClearEReaderTrainer(void)
 {
-    CpuFill32(0, &gSaveBlock2Ptr->battleTower, sizeof(gSaveBlock2Ptr->battleTower));
+    CpuFill32(0, &gSaveBlock2Ptr->ereaderTrainer, sizeof(gSaveBlock2Ptr->ereaderTrainer));
 }
 
 static void WarpToPlayersRoom(void)
@@ -121,7 +121,7 @@ void NewGameInitData(void)
     gDifferentSaveFile = TRUE;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
-    ClearBattleTower();
+    ClearEReaderTrainer();
     ClearSav1();
     ClearSav3();
     ClearMailData();

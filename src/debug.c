@@ -2157,7 +2157,7 @@ static void DebugAction_Trainers_TryBattle(u8 taskId)
         for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
         {
             gSelectedOrderFromParty[i] = i + 1;
-            gSaveBlock2Ptr->battleTower.selectedPartyMons[i] = gSelectedOrderFromParty[i];
+            gSaveBlock2Ptr->selectedPartyMons[i] = gSelectedOrderFromParty[i];
         }
         FillPartnerParty(gPartnerTrainerId);
     }

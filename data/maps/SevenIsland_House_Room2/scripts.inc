@@ -18,9 +18,9 @@ SevenIsland_House_Room2_EventScript_BattleVisitingTrainer::
 	special BufferEReaderTrainerGreeting
 	msgbox gStringVar4
 	closemessage
-	setvar VAR_0x8004, 2
+	setvar VAR_0x8004, SPECIAL_BATTLE_EREADER
 	setvar VAR_0x8005, 0
-	special StartSpecialBattle
+	special DoSpecialTrainerBattle
 	waitstate
 	call_if_eq VAR_RESULT, 3, SevenIsland_House_Room2_EventScript_BattleTie
 	call_if_eq VAR_RESULT, 1, SevenIsland_House_Room2_EventScript_BattleWon

@@ -1,20 +1,20 @@
 #include "global.h"
 #include "gflib.h"
-#include "constants/songs.h"
+#include "battle_special.h"
 #include "easy_chat.h"
-#include "task.h"
-#include "link.h"
-#include "link_rfu.h"
-#include "util.h"
-#include "script.h"
 #include "event_data.h"
-#include "battle_tower.h"
-#include "new_game.h"
-#include "wonder_news.h"
-#include "mystery_gift_menu.h"
 #include "help_system.h"
+#include "link_rfu.h"
+#include "link.h"
+#include "mystery_gift_menu.h"
 #include "mystery_gift.h"
+#include "new_game.h"
+#include "script.h"
 #include "strings.h"
+#include "task.h"
+#include "util.h"
+#include "wonder_news.h"
+#include "constants/songs.h"
 
 #define CALC_CRC(data) CalcCRC16WithTable((void *)&(data), sizeof(data))
 
@@ -211,7 +211,7 @@ void ClearSavedWonderCardAndRelated(void)
     ClearMysteryGiftVars();
 #endif //FREE_MYSTERY_GIFT
 #if FREE_BATTLE_TOWER_E_READER == FALSE
-    ClearEReaderTrainer(&gSaveBlock2Ptr->battleTower.ereaderTrainer);
+    ClearEReaderTrainer(&gSaveBlock2Ptr->ereaderTrainer);
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
@@ -480,7 +480,7 @@ u32 MysteryGift_CompareCardFlags(const u16 * flagId, const struct MysteryGiftLin
 u32 MysteryGift_CheckStamps(const u16 * stamp, const struct MysteryGiftLinkGameData * data, const void *unused)
 {
     s32 stampsMissing = data->maxStamps - GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
-    
+
     // Has full stamp card?
     if (stampsMissing == 0)
         return 1;

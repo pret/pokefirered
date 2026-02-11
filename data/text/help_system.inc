@@ -1,30 +1,30 @@
 Help_Text_WhatShouldIDo::
-	.string "What should I do in this situation?$"
+	.string "Que faire dans ce cas?$"
 
 Help_Text_HowDoIDoThis::
-	.string "How do I do this?$"
+	.string "Comment faire ça?$"
 
 Help_Text_WhatDoesThisTermMean::
 	.string "What does this term mean?$"
 
 Help_Text_AboutThisGame::
-	.string "About this game$"
+	.string "A propos de ce jeu$"
 
 Help_Text_TypeMatchupList::
 	.string "Type Matchup List$"
 
 Help_Text_Exit::
-	.string "EXIT$"
+	.string "SORTIR$"
 
 Help_Text_Cancel::
-	.string "CANCEL$"
+	.string "RETOUR$"
 
 Help_Text_TryDoingItOnYourOwn::
 	.string "じぶんの ちからで やってみよう！$"
 
 Help_Text_DescWhatShouldIDo::
-	.string "Select to obtain hints for getting\n"
-	.string "over challenging situations.$"
+	.string "Pour obtenir des indices sur\n"
+	.string "des situations complexes.$"
 
 Help_Text_DescHowDoIDoThis::
 	.string "Detailed instructions are given for\n"
@@ -35,31 +35,32 @@ Help_Text_DescWhatDoesThisTermMean::
 	.string "terms that appear in the game.$"
 
 Help_Text_DescAboutThisGame::
-	.string "Detailed descriptions are given\n"
-	.string "about this game.$"
+	.string "Des explications détaillées sur\n"
+	.string "le jeu.$"
 
 Help_Text_DescTypeMatchupList::
 	.string "The matchups of  POKéMON types\n"
 	.string "and moves are listed.$"
 
 Help_Text_DescExit::
-	.string "Select to exit the HELP System.$"
+	.string "Pour quitter le menu d'aide.$"
 
 Help_Text_Greetings::
-	.string "Greetings! This is the HELP System.\n"
-	.string "Call me up whenever and wherever you\l"
-	.string "need by pressing the L or R Button.\l"
-	.string "The help messages change to suit the\l"
-	.string "situation, so check them often, please.$"
+	.string "Bienvenue! Tu es dans le système\n"
+	.string "d'AIDE. Appelle-moi dès que tu en\l"
+	.string "as besoin en appuyant sur le bouton\l"
+	.string "L ou R. Les messages d'aide changent\l"
+	.string "en fonction de la situation, alors\l"
+	.string "n'hésite pas à les consulter.$"
 
 Help_Text_PlayingForFirstTime::
 	.string "I'm playing for the first time. Help!$"
 
 Help_Text_WhatShouldIBeDoing::
-	.string "What should I be doing?$"
+	.string "Que dois-je faire?$"
 
 Help_Text_CantGetOutOfRoom::
-	.string "I can't get out of a room!$"
+	.string "Je ne peux pas sortir!$"
 
 Help_Text_CantFindPersonIWant::
 	.string "I can't find the person I want.$"
@@ -193,21 +194,20 @@ Help_Text_AnswerPlayingForFirstTime::
 	.string "wonderful POKéMON.$"
 
 Help_Text_AnswerWhatShouldIBeDoing::
-	.string "When you come across another person,\n"
-	.string "go up to them and press the A Button.\l"
-	.string "That will get them to talk and interact\l"
-	.string "with your character. You may also\l"
-	.string "examine various items and objects in\l"
-	.string "the same way. Talk to people and check\l"
-	.string "things often to obtain information.$"
+	.string "Quand tu rencontres quelqu'un,\n"
+	.string "approche-toi de cette personne et.\l"
+	.string "appuie sur le bouton A pour\l"
+	.string "commencer une discussion. De la\l"
+	.string "même façon, tu peux aussi examiner\l"
+	.string "des objets. Utilise souvent ce bouton\l"
+	.string "pour obtenir plein d'informations.$"
 
 Help_Text_AnswerCantGetOutOfRoom::
-	.string "On the stairs or the exits of a\n"
-	.string "building is a red mat. Move your\l"
-	.string "character to stand on top of the\l"
-	.string "red mat. Press the {PLUS} Control Pad \l"
-	.string "toward the stairs or the exit to\l"
-	.string "advance.$"
+	.string "Des tapis rouges se trouvent près\n"
+	.string "des marches ou des sorties de\l"
+	.string "bâtiments. Place-toi dessus et appuie\l"
+	.string "sur la manette {PLUS} vers les marches \l"
+	.string "ou la sortie pour continuer.$"
 
 Help_Text_AnswerCantFindPersonIWant::
 	.string "This isn't something you should worry\n"
@@ -583,7 +583,7 @@ Help_Text_RidingBicycle::
 	.string "    Riding the BICYCLE$"
 
 Help_Text_EnteringName::
-	.string "Entering a name$"
+	.string "Entrer un nom$"
 
 Help_Text_UsingPC::
 	.string "Using a PC$"
@@ -826,13 +826,13 @@ Help_Text_HowToRideBicycle::
 	.string "   pressing SELECT.$"
 
 Help_Text_HowToEnterName::
-	.string "{CIRCLE_1} Move the cursor to the letter you\n"
-	.string "   want with the {PLUS} Control Pad, then\n"
-	.string "   press the A Button to enter it.\n"
-	.string "{CIRCLE_2} Press the B Button to back up.\n"
-	.string "{CIRCLE_3} Press SELECT to switch between\n"
-	.string "   uppercase and lowercase letters.\n"
-	.string "{CIRCLE_4} Press the A Button on “OK.”$"
+	.string "{CIRCLE_1} Avec la manette {PLUS}, choisis une\n"
+	.string "lettre et confirme avec le bouton A.\n"
+	.string "{CIRCLE_2} Appuie sur le bouton B pour\n"
+	.string "revenir en arrière.\n"
+	.string "{CIRCLE_3} Appuie sur SELECT pour passer\n"
+	.string "des majuscules aux minuscules.\n"
+	.string "{CIRCLE_4} Valide ton nom avec OK$"
 
 Help_Text_HowToUsePC::
 	.string "{CIRCLE_1} Go to any POKéMON CENTER, go up\n"
@@ -1506,13 +1506,13 @@ Help_Text_DefineBadges2::
 	.string "in various cities and towns.$"
 
 Help_Text_TheHelpSystem::
-	.string "The HELP System$"
+	.string "Système d'AIDE$"
 
 Help_Text_TheGame::
-	.string "The game$"
+	.string "Le jeu$"
 
 Help_Text_WirelessAdapter::
-	.string "Wireless Adapter$"
+	.string "Adaptateur sans fil GBA$"
 
 Help_Text_GameFundamentals1::
 	.string "Game fundamentals 1$"
@@ -1527,28 +1527,29 @@ Help_Text_WhatArePokemon::
 	.string "What are POKéMON?$"
 
 Help_Text_DescTheHelpSystem::
-	.string "The help messages change depending on\n"
-	.string "how much you have progressed in the\l"
-	.string "game. They are designed to support you\l"
-	.string "when you need them. If there is\l"
-	.string "anything that you don't understand,\l"
-	.string "please look up the HELP System!$"
+	.string "Les messages d'aide changent\n"
+	.string "selon ta progression dans le jeu.\l"
+	.string "Ils sont conçus pour t'aider selon\l"
+	.string "tes besoins. Utilise le système\l"
+	.string "d'AIDE s'il y a quelque chose que\l"
+	.string "tu ne comprends pas.$"
 
 Help_Text_DescTheGame::
-	.string "You become the main character to\n"
-	.string "explore the world of POKéMON!\l"
-	.string "By talking to people and solving\l"
-	.string "mysteries, new paths will open to you.\l"
-	.string "Strive for the goal together with your\l"
-	.string "wonderful POKéMON!$"
+	.string "Tu incarnes le personnage principal\n"
+	.string "du jeu parti explorer le monde des\l"
+	.string "POKéMON. En parlant aux gens\l"
+	.string "et en résolvant des énigmes, tu\l"
+	.string "ouvriras de nouvelles voies. Tu\l"
+	.string "pourras compter sur tes POKéMON\l"
+	.string "pour finir ta quête.$"
 
 Help_Text_DescWirelessAdapter::
-	.string "This game communicates over a wireless\n"
-	.string "link using the Wireless Adapter.\p"
-	.string "Go wireless anywhere, anytime, and\n"
-	.string "with anybody!\p"
-	.string "Try playing with the Wireless Adapter\n"
-	.string "always attached!$"
+	.string "Ce jeu utilise un adaptateur sans fil\n"
+	.string "GBA pour communiquer en réseau.\l"
+	.string "Tu peux te connecter n'importe quand\l"
+	.string "et avec n'importe qui!\l"
+	.string "Essaie de jouer en gardant toujours\l"
+	.string "l'adaptateur sans fil GBA branché!$"
 
 Help_Text_DescGameFundamentals1::
 	.string "Visit every city and town, travel every\n"

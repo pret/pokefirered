@@ -11,16 +11,16 @@ gNameChoice_Leaf::
     .string "LEAF$"
 
 gNameChoice_Fire::
-    .string "MARIO$"
+    .string "FIRE$"
 
 gNameChoice_Gary::
-    .string "YAN$"
+    .string "GARY$"
 
 gNameChoice_Kaz::
-    .string "MAEL$"
+    .string "KAZ$"
 
 gNameChoice_Toru::
-    .string "DAVY$"
+    .string "TORU$"
 
 gNameChoice_Ash::
     .string "ASH$"
@@ -196,7 +196,7 @@ gOakSpeech_Text_ThisWorld::
     .string "Ce monde…$"
 
 gOakSpeech_Text_IsInhabitedFarAndWide::
-    .string "…est peuplé de créatures\n"
+    .string "… est peuplé de créatures\n"
     .string "appelées POKéMON!\p$"
 
 gOakSpeech_Text_IStudyPokemon::
@@ -226,7 +226,7 @@ gOakSpeech_Text_WhatWasHisName::
     .string "C'est quoi donc son nom déjà?$"
 
 gOakSpeech_Text_YourRivalsNameWhatWasIt::
-    .string "Your rival's name, what was it now?$"
+    .string "Tu le connais, n'est-ce pas?$"
 
 gOakSpeech_Text_ConfirmRivalName::
     .string "Euh, c'est bien {RIVAL}?$"

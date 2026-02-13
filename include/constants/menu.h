@@ -1,14 +1,13 @@
 #ifndef GUARD_CONSTANTS_MENU_H
 #define GUARD_CONSTANTS_MENU_H
 
+#define MULTI_B_PRESSED  127
 #define SCR_MENU_CANCEL 127
 #define SCR_MENU_UNSET  255
 
 #define MAX_MULTICHOICE_WIDTH 28
 
-#define MULTI_B_PRESSED  127
-
-#define MULTICHOICE_YES_NO                                      0
+#define MULTI_YESNO                                             0
 #define MULTICHOICE_EEVEELUTIONS                                1
 #define MULTICHOICE_TRAINER_CARD_ICON_TINT                      2
 #define MULTICHOICE_HOF_QUIT                                    3
@@ -27,7 +26,7 @@
 #define MULTICHOICE_YES_NO_INFO                                16
 #define MULTICHOICE_SINGLE_DOUBLE_MULTI_INFO_EXIT              17
 #define MULTICHOICE_YES_NO_INFO_2                              18
-#define MULTICHOICE_CHALLENGE_INFO_EXIT                        19
+#define MULTI_CHALLENGEINFO                                    19
 #define MULTICHOICE_ROOFTOP_B1F                                20
 #define MULTICHOICE_HELIX                                      21
 #define MULTICHOICE_DOME                                       22
@@ -70,19 +69,55 @@
 #define MULTICHOICE_SEAGALLOP_V13                              59
 #define MULTICHOICE_SEAGALLOP_V12                              60
 #define MULTICHOICE_SEAGALLOP_VERMILION                        61
-#define MULTICHOICE_62                                         62
+#define MULTI_SSTIDAL_BATTLE_FRONTIER                          62
 #define MULTICHOICE_JOIN_OR_LEAD                               63
 #define MULTICHOICE_TRAINER_TOWER_MODE                         64
+#define MULTI_FRONTIER_RULES                                   65
+#define MULTI_FRONTIER_PASS_INFO                               66
+#define MULTI_FRONTIER_GAMBLER_BET                             67
+#define MULTI_LEVEL_MODE                                       68
+#define MULTI_BATTLE_FACTORY_RULES                             69
+#define MULTI_GO_ON_RECORD_REST_RETIRE                         70
+#define MULTI_GO_ON_REST_RETIRE                                71
+#define MULTI_GO_ON_RECORD_RETIRE                              72
+#define MULTI_GO_ON_RETIRE                                     73
+#define MULTI_BATTLE_ARENA_RULES                               74
+#define MULTI_BATTLE_DOME_RULES                                75
+#define MULTI_TOURNEY_WITH_RECORD                              76
+#define MULTI_TOURNEY_NO_RECORD                                77
+#define MULTI_BATTLE_PALACE_RULES                              78
+#define MULTI_BATTLE_PYRAMID_RULES                             79
+#define MULTI_BATTLE_PIKE_RULES                                80
+#define MULTI_FRONTIER_ITEM_CHOOSE                             81
+#define MULTI_BATTLE_TOWER_RULES                               82
+#define MULTI_BATTLE_TOWER_FEELINGS                            83
+#define MULTI_LINK_LEADER                                      84
+#define MULTI_SATISFACTION                                     85
+
 
 #define MULTICHOICE_NONE                                      255
 
-#define LISTMENU_BADGES                    0
-#define LISTMENU_SILPHCO_FLOORS            1
-#define LISTMENU_ROCKET_HIDEOUT_FLOORS     2
-#define LISTMENU_DEPT_STORE_FLOORS         3
-#define LISTMENU_WIRELESS_LECTURE_HEADERS  4
-#define LISTMENU_BERRY_POWDER              5
-#define LISTMENU_TRAINER_TOWER_FLOORS      6
+enum ScrollMulti
+{
+    LISTMENU_BADGES,
+    LISTMENU_SILPHCO_FLOORS,
+    LISTMENU_ROCKET_HIDEOUT_FLOORS,
+    LISTMENU_DEPT_STORE_FLOORS,
+    LISTMENU_WIRELESS_LECTURE_HEADERS,
+    LISTMENU_BERRY_POWDER,
+    LISTMENU_TRAINER_TOWER_FLOORS,
+    SCROLL_MULTI_BF_RECEPTIONIST,
+    SCROLL_MULTI_BF_MOVE_TUTOR_1,
+    SCROLL_MULTI_BF_MOVE_TUTOR_2,
+    SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1,
+    SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2,
+    SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR,
+    SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR,
+    SCROLL_MULTI_NONE = 99,
+};
+
+#define MAX_SCROLL_MULTI_ON_SCREEN 6
+#define MAX_SCROLL_MULTI_LENGTH 16
 
 // Std String Ids
 #define STDSTRING_COOL              0
@@ -114,5 +149,15 @@
 #define STDSTRING_POKEBALLS_POCKET  26
 #define STDSTRING_TM_CASE           27
 #define STDSTRING_BERRY_POUCH       28
+#define STDSTRING_SINGLE            29
+#define STDSTRING_DOUBLE            30
+#define STDSTRING_MULTI             31
+#define STDSTRING_MULTI_LINK        32
+#define STDSTRING_BATTLE_DOME       33
+#define STDSTRING_BATTLE_FACTORY    34
+#define STDSTRING_BATTLE_PALACE     35
+#define STDSTRING_BATTLE_ARENA      36
+#define STDSTRING_BATTLE_PIKE       37
+#define STDSTRING_BATTLE_PYRAMID    38
 
 #endif //GUARD_CONSTANTS_MENU_H

@@ -1,6 +1,9 @@
 #ifndef GUARD_CONSTANTS_PARTY_MENU_H
 #define GUARD_CONSTANTS_PARTY_MENU_H
 
+#define PC_MON_CHOSEN 0xFE
+#define PARTY_NOTHING_CHOSEN 0xFF
+
 #define AILMENT_NONE  0
 #define AILMENT_PSN   1
 #define AILMENT_PRZ   2
@@ -30,6 +33,7 @@
 #define PARTY_MENU_TYPE_UNION_ROOM_TRADE          9  // trading board
 #define PARTY_MENU_TYPE_SPIN_TRADE                10 // Unused beta for Gen IV's Spin Trade
 #define PARTY_MENU_TYPE_MINIGAME                  11
+#define PARTY_MENU_TYPE_STORE_PYRAMID_HELD_ITEMS  12
 
 #define PARTY_ACTION_CHOOSE_MON         0
 #define PARTY_ACTION_SEND_OUT           1
@@ -67,16 +71,16 @@
 #define PARTY_MSG_NO_MON_FOR_BATTLE         14
 #define PARTY_MSG_CHOOSE_MON_2              15
 #define PARTY_MSG_NOT_ENOUGH_HP             16
-#define PARTY_MSG_THREE_MONS_ARE_NEEDED     17
-#define PARTY_MSG_TWO_MONS_ARE_NEEDED       18
-#define PARTY_MSG_MONS_CANT_BE_SAME         19
-#define PARTY_MSG_NO_SAME_HOLD_ITEMS        20
-#define PARTY_MSG_UNUSED                    21
-#define PARTY_MSG_DO_WHAT_WITH_MON          22
-#define PARTY_MSG_RESTORE_WHICH_MOVE        23
-#define PARTY_MSG_BOOST_PP_WHICH_MOVE       24
-#define PARTY_MSG_DO_WHAT_WITH_ITEM         25
-#define PARTY_MSG_DO_WHAT_WITH_MAIL         26
+#define PARTY_MSG_X_MONS_ARE_NEEDED         17
+#define PARTY_MSG_MONS_CANT_BE_SAME         18
+#define PARTY_MSG_NO_SAME_HOLD_ITEMS        19
+#define PARTY_MSG_UNUSED                    20
+#define PARTY_MSG_DO_WHAT_WITH_MON          21
+#define PARTY_MSG_RESTORE_WHICH_MOVE        22
+#define PARTY_MSG_BOOST_PP_WHICH_MOVE       23
+#define PARTY_MSG_DO_WHAT_WITH_ITEM         24
+#define PARTY_MSG_DO_WHAT_WITH_MAIL         25
+#define PARTY_MSG_ALREADY_HOLDING_ONE       26
 #define PARTY_MSG_WHICH_APPLIANCE           27
 #define PARTY_MSG_CHOOSE_SECOND_FUSION      28
 #define PARTY_MSG_NO_POKEMON                29
@@ -95,6 +99,8 @@
 #define PARTYBOX_DESC_ABLE_2      7
 #define PARTYBOX_DESC_NOT_ABLE_2  8
 #define PARTYBOX_DESC_LEARNED     9
+#define PARTYBOX_DESC_HAVE        11
+#define PARTYBOX_DESC_DONT_HAVE   12
 
 #define SELECTWINDOW_ACTIONS        0
 #define SELECTWINDOW_ITEM           1
@@ -107,6 +113,24 @@ enum
 {
     CHOOSE_MONS_FOR_CABLE_CLUB_BATTLE,
     CHOOSE_MONS_FOR_UNION_ROOM_BATTLE,
+};
+
+enum PcMonSelectionType
+{
+    SELECT_PC_MON_NORMAL,
+    SELECT_PC_MON_TRADE, // Also used for Lotad / Seedot size check
+    SELECT_PC_MON_DAYCARE,
+    SELECT_PC_MON_MOVE_TUTOR,
+    SELECT_PC_MON_MOVE_DELETER,
+    SELECT_PC_MON_MOVE_RELEARNER,
+};
+
+enum CanMoveBeLearned
+{
+    CAN_LEARN_MOVE,
+    CANNOT_LEARN_MOVE,
+    ALREADY_KNOWS_MOVE,
+    CANNOT_LEARN_MOVE_IS_EGG
 };
 
 #endif // GUARD_CONSTANTS_PARTY_MENU_H

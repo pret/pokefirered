@@ -621,6 +621,19 @@ u8 *WriteColorChangeControlCode(u8 *dest, u32 colorType, u8 color)
     return dest;
 }
 
+bool32 IsStringJapanese(u8 *str)
+{
+    while (*str != EOS)
+    {
+        if (*str <= JAPANESE_CHAR_END)
+            if (*str != CHAR_SPACE)
+                return TRUE;
+        str++;
+    }
+
+    return FALSE;
+}
+
 u8 GetExtCtrlCodeLength(u8 code)
 {
     static const u8 lengths[] =

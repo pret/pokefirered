@@ -44,6 +44,8 @@
 
 #define ACTIVITY_WONDER_CARD        21
 #define ACTIVITY_WONDER_NEWS        22
+#define ACTIVITY_BATTLE_TOWER       23
+#define ACTIVITY_BATTLE_TOWER_OPEN  24
 
 #define IN_UNION_ROOM               (1 << 6)
 
@@ -60,7 +62,9 @@
 #define LINK_GROUP_UNION_ROOM_INIT     10
 #define LINK_GROUP_UNK_11              11
 #define LINK_GROUP_UNK_12              12
-#define NUM_LINK_GROUP_TYPES           13
+#define LINK_GROUP_BATTLE_TOWER        13
+#define LINK_GROUP_BATTLE_TOWER_OPEN   14
+#define NUM_LINK_GROUP_TYPES           15
 
 #define UR_TRADE_MATCH  0
 #define UR_TRADE_NOTYPE 1

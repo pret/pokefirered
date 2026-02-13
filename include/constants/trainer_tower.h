@@ -7,9 +7,9 @@
 #define CHALLENGE_TYPE_MIXED      3
 // Mixed challenges use one of the above 3 for each floor
 
-#define CHALLENGE_STATUS_LOST     0
-#define CHALLENGE_STATUS_UNK      1  // Never set, possibly e-Card related
-#define CHALLENGE_STATUS_NORMAL   2  // Not started or ongoing
+#define TT_CHALLENGE_STATUS_LOST     0
+#define TT_CHALLENGE_STATUS_UNK      1  // Never set, possibly e-Card related
+#define TT_CHALLENGE_STATUS_NORMAL   2  // Not started or ongoing
 
 #define TTPRIZE_HP_UP               0
 #define TTPRIZE_PROTEIN             1

@@ -85,7 +85,7 @@ void FreezeObjects_WaitForPlayerAndSelected(void)
     }
 }
 
-void ClearPlayerHeldMovementAndUnfreezeObjectEvents(void)
+void ScriptUnfreezeObjectEvents(void)
 {
     u8 objectEventId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objectEventId]);

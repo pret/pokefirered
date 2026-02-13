@@ -5,6 +5,8 @@
 #include "list_menu.h"
 #include "menu.h"
 
+#define MULTI_B_PRESSED  127
+
 // The default size the stack for dynamic multichoice is initialized to
 // If you try to push an element when the stack is full, it will be reallocated
 // With increasing capacity of MULTICHOICE_DYNAMIC_STACK_INC

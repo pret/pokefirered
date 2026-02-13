@@ -41,6 +41,7 @@
 #include "union_room_chat.h"
 #include "union_room_player_avatar.h"
 #include "union_room_message.h"
+#include "constants/battle_frontier.h"
 #include "constants/songs.h"
 #include "constants/maps.h"
 #include "constants/cable_club.h"
@@ -346,6 +347,8 @@ static void GetAwaitingCommunicationText(u8 *dst, u8 caseId)
     case ACTIVITY_BERRY_PICK:
     case ACTIVITY_WONDER_CARD:
     case ACTIVITY_WONDER_NEWS:
+    case ACTIVITY_BATTLE_TOWER:
+    case ACTIVITY_BATTLE_TOWER_OPEN:
         // BUG: argument *dst isn't used, instead it always prints to gStringVar4
         // not an issue in practice since Gamefreak never used any other arguments here besides gStringVar4
     #ifndef BUGFIX
@@ -379,6 +382,8 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
     switch (data->state)
     {
     case LL_STATE_INIT:
+        if (gSpecialVar_0x8004 == LINK_GROUP_BATTLE_TOWER && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
+            gSpecialVar_0x8004++;
         sPlayerCurrActivity = sLinkGroupToActivityAndCapacity[gSpecialVar_0x8004];
         sPlayerActivityGroupSize = sLinkGroupToActivityAndCapacity[gSpecialVar_0x8004] >> 8;
         SetHostRfuGameData(sPlayerCurrActivity, 0, 0);
@@ -698,6 +703,8 @@ static void Leader_GetAcceptNewMemberPrompt(u8 *dst, u8 activity)
     case ACTIVITY_BATTLE_SINGLE:
     case ACTIVITY_BATTLE_DOUBLE:
     case ACTIVITY_TRADE:
+    case ACTIVITY_BATTLE_TOWER_OPEN:
+    case ACTIVITY_BATTLE_TOWER:
         StringExpandPlaceholders(dst, gText_UR_PlayerContactedYouForXAccept);
         break;
     case ACTIVITY_WONDER_CARD:
@@ -735,6 +742,8 @@ static void GetYouAskedToJoinGroupPleaseWaitMessage(u8 *dst, u8 activity)
     case ACTIVITY_BATTLE_SINGLE:
     case ACTIVITY_BATTLE_DOUBLE:
     case ACTIVITY_TRADE:
+    case ACTIVITY_BATTLE_TOWER:
+    case ACTIVITY_BATTLE_TOWER_OPEN:
     case ACTIVITY_WONDER_CARD:
     case ACTIVITY_WONDER_NEWS:
         StringExpandPlaceholders(dst, gText_UR_AwaitingPlayersResponse);
@@ -755,6 +764,8 @@ static void GetGroupLeaderSentAnOKMessage(u8 *dst, u8 caseId)
     case ACTIVITY_BATTLE_SINGLE:
     case ACTIVITY_BATTLE_DOUBLE:
     case ACTIVITY_TRADE:
+    case ACTIVITY_BATTLE_TOWER:
+    case ACTIVITY_BATTLE_TOWER_OPEN:
     case ACTIVITY_WONDER_CARD:
     case ACTIVITY_WONDER_NEWS:
         StringExpandPlaceholders(dst, gText_UR_PlayerSentBackOK);
@@ -917,6 +928,8 @@ static void Task_TryJoinLinkGroup(u8 taskId)
     switch (data->state)
     {
     case LG_STATE_INIT:
+        if (gSpecialVar_0x8004 == LINK_GROUP_BATTLE_TOWER && gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_OPEN)
+            gSpecialVar_0x8004++;
         SetHostRfuGameData(sLinkGroupToURoomActivity[gSpecialVar_0x8004], 0, 0);
         sPlayerCurrActivity = sLinkGroupToURoomActivity[gSpecialVar_0x8004];
         SetWirelessCommType1();
@@ -1026,6 +1039,8 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             case ACTIVITY_BERRY_CRUSH:
             case ACTIVITY_BERRY_PICK:
             case ACTIVITY_SPIN_TRADE:
+            case ACTIVITY_BATTLE_TOWER:
+            case ACTIVITY_BATTLE_TOWER_OPEN:
             case ACTIVITY_ITEM_TRADE:
             case ACTIVITY_WONDER_CARD:
             case ACTIVITY_WONDER_NEWS:
@@ -1048,9 +1063,16 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             GetGroupLeaderSentAnOKMessage(gStringVar4, sPlayerCurrActivity);
             if (PrintOnTextbox(&data->textState, gStringVar4))
             {
-                RfuSetStatus(RFU_STATUS_WAIT_ACK_JOIN_GROUP, 0);
-                StringCopy(gStringVar1, sLinkGroupActivityNameTexts[sPlayerCurrActivity]);
-                StringExpandPlaceholders(gStringVar4, gText_UR_AwaitingOtherMembers);
+                if (sPlayerCurrActivity == ACTIVITY_BATTLE_TOWER || sPlayerCurrActivity == ACTIVITY_BATTLE_TOWER_OPEN)
+                {
+                    RfuSetStatus(RFU_STATUS_ACK_JOIN_GROUP, 0);
+                }
+                else
+                {
+                    RfuSetStatus(RFU_STATUS_WAIT_ACK_JOIN_GROUP, 0);
+                    StringCopy(gStringVar1, sLinkGroupActivityNameTexts[sPlayerCurrActivity]);
+                    StringExpandPlaceholders(gStringVar4, gText_UR_AwaitingOtherMembers);
+                }
             }
             break;
         case RFU_STATUS_WAIT_ACK_JOIN_GROUP:
@@ -1064,7 +1086,14 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             }
             else
             {
-                data->delayBeforePrint++;
+                switch (sPlayerCurrActivity)
+                {
+                case ACTIVITY_BATTLE_TOWER:
+                case ACTIVITY_BATTLE_TOWER_OPEN:
+                    break;
+                default:
+                    data->delayBeforePrint++;
+                }
             }
             break;
         }
@@ -1558,6 +1587,7 @@ static void Task_StartActivity(u8 taskId)
     case ACTIVITY_ACCEPT | IN_UNION_ROOM:
         CleanupOverworldWindowsAndTilemaps();
         gMain.savedCallback = CB2_UnionRoomBattle;
+        VarSet(VAR_FRONTIER_FACILITY, FACILITY_UNION_ROOM);
         InitChooseMonsForBattle(CHOOSE_MONS_FOR_UNION_ROOM_BATTLE);
         break;
     case ACTIVITY_BATTLE_SINGLE:
@@ -1636,13 +1666,30 @@ static void Task_StartActivity(u8 taskId)
 static void Task_RunScriptAndFadeToActivity(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
+    u16 *sendBuff = (u16 *)(gBlockSendBuffer);
 
     switch (data[0])
     {
     case 0:
         gSpecialVar_Result = LINKUP_SUCCESS;
-        ScriptContext_Enable();
-        data[0]++;
+        switch (sPlayerCurrActivity)
+        {
+        case ACTIVITY_BATTLE_TOWER:
+        case ACTIVITY_BATTLE_TOWER_OPEN:
+            gLinkPlayers[0].linkType = LINKTYPE_BATTLE;
+            gLinkPlayers[0].id = 0;
+            gLinkPlayers[1].id = 2;
+            sendBuff[0] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[0] - 1], MON_DATA_SPECIES);
+            sendBuff[1] = GetMonData(&gPlayerParty[gSelectedOrderFromParty[1] - 1], MON_DATA_SPECIES);
+            gMain.savedCallback = NULL;
+            data[0] = 4;
+            SaveLinkTrainerNames();
+            ResetBlockReceivedFlags();
+            break;
+        default:
+            ScriptContext_Enable();
+            data[0]++;
+        }
         break;
     case 1:
         if (!ScriptContext_IsEnabled())
@@ -2443,7 +2490,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case UR_STATE_WAIT_FOR_START_MENU:
-        if (!FuncIsActiveTask(Task_StartMenuHandleInput))
+        if (!FuncIsActiveTask(Task_ShowStartMenu))
         {
             UpdateGameData_SetActivity(ACTIVITY_NONE | IN_UNION_ROOM, 0, FALSE);
             uroom->state = UR_STATE_MAIN;

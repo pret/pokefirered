@@ -50,6 +50,11 @@ void SetTrainerId(u32 trainerId, u8 *dst)
     dst[3] = trainerId >> 24;
 }
 
+u32 GetTrainerId(u8 *trainerId)
+{
+    return (trainerId[3] << 24) | (trainerId[2] << 16) | (trainerId[1] << 8) | (trainerId[0]);
+}
+
 void CopyTrainerId(u8 *dst, u8 *src)
 {
     s32 i;
@@ -82,7 +87,7 @@ static void ClearPokedexFlags(void)
 
 static void ClearEReaderTrainer(void)
 {
-    CpuFill32(0, &gSaveBlock2Ptr->ereaderTrainer, sizeof(gSaveBlock2Ptr->ereaderTrainer));
+    CpuFill32(0, &gSaveBlock2Ptr->frontier.ereaderTrainer, sizeof(gSaveBlock2Ptr->frontier.ereaderTrainer));
 }
 
 static void WarpToPlayersRoom(void)

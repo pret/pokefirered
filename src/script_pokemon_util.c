@@ -18,10 +18,12 @@
 #include "script_pokemon_util.h"
 #include "wild_encounter.h"
 #include "constants/abilities.h"
+#include "constants/battle_frontier.h"
 #include "constants/items.h"
 #include "constants/pokemon.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);
+static void CB2_ReturnFromChooseBattleFrontierParty(void);
 static void HealPlayerBoxes(void);
 
 void HealPlayerParty(void)
@@ -508,11 +510,32 @@ void ScriptSetMonMoveSlot(u8 monIndex, u16 move, u8 slot)
 void ChooseHalfPartyForBattle(void)
 {
     gMain.savedCallback = CB2_ReturnFromChooseHalfParty;
-//    VarSet(VAR_FRONTIER_FACILITY, FACILITY_MULTI_OR_EREADER);
+    VarSet(VAR_FRONTIER_FACILITY, FACILITY_MULTI_OR_EREADER);
     InitChooseMonsForBattle(CHOOSE_MONS_FOR_CABLE_CLUB_BATTLE);
 }
 
 static void CB2_ReturnFromChooseHalfParty(void)
+{
+    switch (gSelectedOrderFromParty[0])
+    {
+    case 0:
+        gSpecialVar_Result = FALSE;
+        break;
+    default:
+        gSpecialVar_Result = TRUE;
+        break;
+    }
+
+    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+
+void ChoosePartyForBattleFrontier(void)
+{
+    gMain.savedCallback = CB2_ReturnFromChooseBattleFrontierParty;
+    InitChooseMonsForBattle(gSpecialVar_0x8004 + 1);
+}
+
+static void CB2_ReturnFromChooseBattleFrontierParty(void)
 {
     switch (gSelectedOrderFromParty[0])
     {

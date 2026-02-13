@@ -119,7 +119,7 @@ static bool8 IsECWordInvalid(u16 easyChatWord)
     u32 index;
     u16 numWords;
     const u16 *list;
-    if (easyChatWord == EC_WORD_UNDEFINED)
+    if (easyChatWord == EC_EMPTY_WORD)
         return FALSE;
 
     groupId = EC_GROUP(easyChatWord);
@@ -171,7 +171,7 @@ u8 *CopyEasyChatWord(u8 *dest, u16 easyChatWord)
     {
         resultStr = StringCopy(dest, gText_ThreeQuestionMarks);
     }
-    else if (easyChatWord != EC_WORD_UNDEFINED)
+    else if (easyChatWord != EC_EMPTY_WORD)
     {
         u16 index = EC_INDEX(easyChatWord);
         u8 groupId = EC_GROUP(easyChatWord);
@@ -196,7 +196,7 @@ u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows
         for (j = 0; j < numColumns; j++)
         {
             dest = CopyEasyChatWord(dest, *src);
-            if (*src != EC_WORD_UNDEFINED)
+            if (*src != EC_EMPTY_WORD)
             {
                 *dest = CHAR_SPACE;
                 dest++;
@@ -217,7 +217,7 @@ u8 *ConvertEasyChatWordsToString(u8 *dest, const u16 *src, u16 columns, u16 rows
 
 static u16 GetEasyChatWordStringLength(u16 easyChatWord)
 {
-    if (easyChatWord == EC_WORD_UNDEFINED)
+    if (easyChatWord == EC_EMPTY_WORD)
         return 0;
 
     if (IsECWordInvalid(easyChatWord))
@@ -266,7 +266,7 @@ static u16 GetRandomWordFromGroup(u16 groupId)
 static u16 GetRandomWordFromAnyGroup(u16 groupId)
 {
     if (!IsECGroupUnlocked(groupId))
-        return EC_WORD_UNDEFINED;
+        return EC_EMPTY_WORD;
 
     if (groupId == EC_GROUP_POKEMON)
         return GetRandomECPokemon();
@@ -345,7 +345,7 @@ static u16 GetRandomECPokemon(void)
     const u16 *species;
     u16 index = EasyChat_GetNumWordsInGroup(EC_GROUP_POKEMON_2);
     if (index == 0)
-        return EC_WORD_UNDEFINED;
+        return EC_EMPTY_WORD;
 
     index = Random() % index;
     species = sEasyChatGroups[EC_GROUP_POKEMON_2].wordData.valueList;
@@ -364,7 +364,7 @@ static u16 GetRandomECPokemon(void)
         species++;
     }
 
-    return EC_WORD_UNDEFINED;
+    return EC_EMPTY_WORD;
 }
 
 void InitEasyChatPhrases(void)
@@ -379,14 +379,14 @@ void InitEasyChatPhrases(void)
 
     for (i = 0; i < 6; i++)
     {
-        gSaveBlock1Ptr->easyChatBattleWon[i] = EC_WORD_UNDEFINED;
-        gSaveBlock1Ptr->easyChatBattleLost[i] = EC_WORD_UNDEFINED;
+        gSaveBlock1Ptr->easyChatBattleWon[i] = EC_EMPTY_WORD;
+        gSaveBlock1Ptr->easyChatBattleLost[i] = EC_EMPTY_WORD;
     }
 
     for (i = 0; i < MAIL_COUNT; i++)
     {
         for (j = 0; j < MAIL_WORDS_COUNT; j++)
-            gSaveBlock1Ptr->mail[i].words[j] = EC_WORD_UNDEFINED;
+            gSaveBlock1Ptr->mail[i].words[j] = EC_EMPTY_WORD;
     }
 
 #ifndef UBFIX
@@ -407,7 +407,7 @@ void InitQuestionnaireWords(void)
     s32 i;
     u16 *ptr = GetQuestionnaireWordsPtr();
     for (i = 0; i < NUM_QUESTIONNAIRE_WORDS; i++)
-        ptr[i] = EC_WORD_UNDEFINED;
+        ptr[i] = EC_EMPTY_WORD;
 }
 
 bool8 InitEasyChatSelection(void)
@@ -499,7 +499,7 @@ static void PopulateAlphabeticalGroups(void)
         index = 0;
         for (j = 0; j < numWords; )
         {
-            if (*words == EC_WORD_UNDEFINED)
+            if (*words == EC_EMPTY_WORD)
             {
                 words++;
                 numToProcess = *words++;
@@ -537,7 +537,7 @@ void GetUnlockedECWords(bool32 isAlphabetical, u16 groupId)
 u16 GetDisplayedWordByIndex(u16 index)
 {
     if (index >= sEasyChatSelectionData->totalWords)
-        return EC_WORD_UNDEFINED;
+        return EC_EMPTY_WORD;
     else
         return sEasyChatSelectionData->allWords[index];
 }

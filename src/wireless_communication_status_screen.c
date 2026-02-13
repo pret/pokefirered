@@ -164,7 +164,9 @@ static const u8 sActivityGroupInfo[][3] = {
     {ACTIVITY_PLYRTALK | IN_UNION_ROOM,       GROUPTYPE_UNION,  1},
     {ACTIVITY_NPCTALK | IN_UNION_ROOM,        GROUPTYPE_UNION,  2},
     {ACTIVITY_ACCEPT | IN_UNION_ROOM,         GROUPTYPE_UNION,  1},
-    {ACTIVITY_DECLINE | IN_UNION_ROOM,        GROUPTYPE_UNION,  1}
+    {ACTIVITY_DECLINE | IN_UNION_ROOM,        GROUPTYPE_UNION,  1},
+    {ACTIVITY_BATTLE_TOWER,                  GROUPTYPE_BATTLE, 2},
+    {ACTIVITY_BATTLE_TOWER_OPEN,             GROUPTYPE_BATTLE, 2}
 };
 
 static void CB2_RunWirelessCommunicationScreen(void)
@@ -457,7 +459,7 @@ static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts
 
     memcpy(groupCounts,     groupCountBuffer, sizeof(groupCountBuffer));
     memcpy(prevGroupCounts, groupCountBuffer, sizeof(groupCountBuffer));
-    
+
     groupCounts[GROUPTYPE_TOTAL] = groupCounts[GROUPTYPE_TRADE]
                                  + groupCounts[GROUPTYPE_BATTLE]
                                  + groupCounts[GROUPTYPE_UNION]

@@ -97,7 +97,7 @@ static const struct SpriteFrameImage sSpriteFrameImages_FldEff_CutGrass[] = {
 };
 
 const struct SpritePalette gFldEffPalette_CutGrass = {
-    .data = gFieldEffectPal_CutGrass, 
+    .data = gFieldEffectPal_CutGrass,
     .tag = 4096
 };
 
@@ -135,11 +135,11 @@ bool32 FieldMove_SetUpCut(void)
         gPostMenuFieldCallback = FieldCallback_CutTree;
         return TRUE;
     }
-    
+
     else
     {
         PlayerGetDestCoords(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
-    
+
         for (i = 0; i < CUT_SIDE; i++)
         {
             y = gPlayerFacingPosition.y - 1 + i;
@@ -282,7 +282,7 @@ static void SpriteCallback_CutGrass_Cleanup(struct Sprite *sprite)
     }
     FieldEffectStop(&gSprites[sCutGrassSpriteArrayPtr[0]], FLDEFF_CUT_GRASS);
     Free(sCutGrassSpriteArrayPtr);
-    ClearPlayerHeldMovementAndUnfreezeObjectEvents();
+    ScriptUnfreezeObjectEvents();
     UnlockPlayerFieldControls();
 }
 

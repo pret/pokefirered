@@ -236,6 +236,8 @@ void TrySetObtainedItemQuestLogEvent(u16 itemId);
 bool8 AddBagItem(u16 itemId, u16 amount);
 
 u16 CountTotalItemQuantityInBag(u16 item);
+bool32 AddPyramidBagItem(enum Item itemId, u16 count);
+bool32 RemovePyramidBagItem(enum Item itemId, u16 count);
 u8 GetItemImportance(u16 itemId);
 u16 GetPCItemQuantity(u16 *);
 void SetBagItemsPointers(void);

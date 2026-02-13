@@ -5,7 +5,15 @@
 	.include "asm/macros/map.inc"
 	.include "asm/macros/m4a.inc"
 	.include "asm/macros/trainer_tower.inc"
+	.include "asm/macros/battle_frontier/apprentice.inc"
+	.include "asm/macros/battle_frontier/battle_arena.inc"
+	.include "asm/macros/battle_frontier/battle_dome.inc"
+	.include "asm/macros/battle_frontier/battle_factory.inc"
+	.include "asm/macros/battle_frontier/battle_palace.inc"
+	.include "asm/macros/battle_frontier/battle_pike.inc"
+	.include "asm/macros/battle_frontier/battle_pyramid.inc"
 	.include "asm/macros/battle_frontier/battle_tower.inc"
+	.include "asm/macros/battle_frontier/frontier_util.inc"
 
 	.macro region_map_location x, y, width, height, name
 	.byte \x

@@ -157,7 +157,6 @@ static void Task_AngledWipes(u8 taskId);
 static void Task_Mugshot(u8 taskId);
 static void Task_Spiral(u8 taskId);
 static void Task_Intro(u8 taskId);
-static void Task_BattleTransition_Intro(u8 taskId);
 
 static void SpriteCB_MugshotTrainerPic(struct Sprite *sprite);
 static void SpriteCB_FldEffPokeballTrail(struct Sprite *sprite);
@@ -2737,7 +2736,7 @@ static bool8 IsIntroTaskDone(void)
         return FALSE;
 }
 
-static void Task_BattleTransition_Intro(u8 taskId)
+void Task_BattleTransition_Intro(u8 taskId)
 {
     while (sTransitionIntroFuncs[gTasks[taskId].tState](&gTasks[taskId]));
 }

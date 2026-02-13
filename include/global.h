@@ -21,6 +21,7 @@
 #include "constants/rgb.h"
 #include "constants/easy_chat.h"
 #include "constants/items.h"
+#include "constants/moves.h"
 #include "config/save.h"
 
 // Prevent cross-jump optimization.
@@ -274,6 +275,24 @@ struct NPCFollower
     u8 battlePartner; // If you have more than 255 total battle partners defined, change this to a u16
 };
 
+#define LINK_B_RECORDS_COUNT 5
+
+struct LinkBattleRecord
+{
+    u8 name[PLAYER_NAME_LENGTH + 1];
+    u16 trainerId;
+    u16 wins;
+    u16 losses;
+    u16 draws;
+};
+
+struct LinkBattleRecords
+{
+    struct LinkBattleRecord entries[LINK_B_RECORDS_COUNT];
+    u8 languages[LINK_B_RECORDS_COUNT];
+};
+
+#include "global.berry.h"
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
@@ -291,6 +310,10 @@ struct SaveBlock3
 #if USE_DEXNAV_SEARCH_LEVELS == TRUE
     u8 dexNavSearchLevels[NUM_SPECIES];
 #endif
+#if FREE_LINK_BATTLE_RECORDS == FALSE
+    struct LinkBattleRecords linkBattleRecords;
+#endif //FREE_LINK_BATTLE_RECORDS
+    struct BerryTree berryTrees[BERRY_TREES_COUNT];
     u8 dexNavChain;
 };
 
@@ -331,6 +354,17 @@ struct BerryPickingResults // possibly used in the game itself? Size may be wron
     u8 field_F;
 };
 
+struct PyramidBag
+{
+    enum Item itemId[FRONTIER_LVL_MODE_COUNT][PYRAMID_BAG_ITEMS_COUNT];
+#if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
+    u16 quantity[FRONTIER_LVL_MODE_COUNT][PYRAMID_BAG_ITEMS_COUNT];
+#else
+    u8 quantity[FRONTIER_LVL_MODE_COUNT][PYRAMID_BAG_ITEMS_COUNT];
+#endif
+};
+
+
 struct BerryCrush
 {
     u16 pressingSpeeds[4]; // For the record with each possible group size, 2-5 players
@@ -338,21 +372,29 @@ struct BerryCrush
     u32 unk;
 };
 
-#define LINK_B_RECORDS_COUNT 5
-
-struct LinkBattleRecord
+struct ApprenticeMon
 {
-    u8 name[PLAYER_NAME_LENGTH + 1];
-    u16 trainerId;
-    u16 wins;
-    u16 losses;
-    u16 draws;
+    u16 species;
+    enum Move moves[MAX_MON_MOVES];
+    enum Item item;
 };
 
-struct LinkBattleRecords
+// This is for past players Apprentices or Apprentices received via Record Mix.
+// For the current Apprentice, see struct PlayersApprentice
+struct Apprentice
 {
-    struct LinkBattleRecord entries[LINK_B_RECORDS_COUNT];
-    u8 languages[LINK_B_RECORDS_COUNT];
+    u8 id:5;
+    u8 lvlMode:2;
+    //u8 padding1:1;
+    u8 numQuestions;
+    u8 number;
+    //u8 padding2;
+    struct ApprenticeMon party[MULTI_PARTY_SIZE];
+    u16 speechWon[EASY_CHAT_BATTLE_WORDS_COUNT];
+    u8 playerId[TRAINER_ID_LENGTH];
+    u8 playerName[PLAYER_NAME_LENGTH];
+    u8 language;
+    u32 checksum;
 };
 
 struct RecordMixingGiftData
@@ -371,13 +413,12 @@ struct RecordMixingGift
 
 #include "constants/game_stat.h"
 #include "global.fieldmap.h"
-#include "global.berry.h"
 #include "pokemon.h"
 
 struct BattleTowerEReaderTrainer
 {
     /*0x4A0 0x3F0 0x00*/ u8 unk0;
-    /*0x4A1 0x3F1 0x01*/ u8 trainerClass;
+    /*0x4A1 0x3F1 0x01*/ u8 facilityClass;
     /*0x4A2 0x3F2 0x02*/ u16 winStreak;
     /*0x4A4 0x3F4 0x04*/ u8 name[8];
     /*0x4AC 0x3FC 0x0C*/ u8 trainerId[4];
@@ -386,6 +427,195 @@ struct BattleTowerEReaderTrainer
     /*0x4C8 0x418 0x28*/ u16 farewellPlayerWon[6];
     /*0x4D4 0x424 0x34*/ struct BattleTowerPokemon party[3];
     /*0x558 0x4A8 0xB8*/ u32 checksum;
+};
+
+
+
+struct EmeraldBattleTowerRecord
+{
+    /*0x00*/ u8 lvlMode; // 0 = level 50, 1 = level 100
+    /*0x01*/ u8 facilityClass;
+    /*0x02*/ u16 winStreak;
+    /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
+    /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
+    /*0x10*/ u16 greeting[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x1C*/ u16 speechWon[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x28*/ u16 speechLost[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x34*/ struct BattleTowerPokemon party[MAX_FRONTIER_PARTY_SIZE];
+    /*0xE4*/ u8 language;
+    /*0xE7*/ //u8 padding[3];
+    /*0xE8*/ u32 checksum;
+};
+
+struct BattleTowerInterview
+{
+    u16 playerSpecies;
+    u16 opponentSpecies;
+    u8 opponentName[PLAYER_NAME_LENGTH + 1];
+    u8 opponentMonNickname[VANILLA_POKEMON_NAME_LENGTH + 1];
+    u8 opponentLanguage;
+};
+
+// For displaying party information on the player's Battle Dome tourney page
+struct DomeMonData
+{
+    enum Move moves[MAX_MON_MOVES];
+    u8 evs[NUM_STATS];
+    u8 nature;
+    //u8 padding;
+};
+
+struct RentalMon
+{
+    u16 monId;
+    //u8 padding1[2];
+    u32 personality;
+    u8 ivs;
+    u8 abilityNum;
+    //u8 padding2[2];
+};
+
+struct BattleDomeTrainer
+{
+    u16 trainerId:10;
+    u16 isEliminated:1;
+    u16 eliminatedAt:2;
+    u16 forfeited:3;
+};
+
+#define DOME_TOURNAMENT_TRAINERS_COUNT 16
+#define BATTLE_TOWER_RECORD_COUNT 5
+
+struct BattleFrontier
+{
+    /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
+    /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[BATTLE_TOWER_RECORD_COUNT]; // From record mixing.
+    /*0xBEB*/ struct BattleTowerInterview towerInterview;
+#if FREE_BATTLE_TOWER_E_READER == FALSE
+    /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;  //188 bytes
+#endif //FREE_BATTLE_TOWER_E_READER
+    /*0xCA8*/ u8 challengeStatus;
+    /*0xCA9*/ u8 lvlMode:2;
+              u8 challengePaused:1;
+              u8 disableRecordBattle:1;
+              //u8 padding1:4;
+    /*0xCAA*/ u16 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE];
+    /*0xCB2*/ u16 curChallengeBattleNum; // Battle number / room number (Pike) / floor number (Pyramid)
+    /*0xCB4*/ u16 trainerIds[20];
+    /*0xCDC*/ u32 winStreakActiveFlags;
+    /*0xCE0*/ u16 towerWinStreaks[4][FRONTIER_LVL_MODE_COUNT];
+    /*0xCF0*/ u16 towerRecordWinStreaks[4][FRONTIER_LVL_MODE_COUNT];
+    /*0xD00*/ u16 battledBrainFlags;
+    /*0xD02*/ u16 towerSinglesStreak; // Never read
+    /*0xD04*/ u16 towerNumWins; // Increments to MAX_STREAK but never read otherwise
+    /*0xD06*/ u8 towerBattleOutcome;
+    /*0xD07*/ u8 towerLvlMode;
+    /*0xD08*/ u8 domeAttemptedSingles50:1;
+    /*0xD08*/ u8 domeAttemptedSinglesOpen:1;
+    /*0xD08*/ u8 domeHasWonSingles50:1;
+    /*0xD08*/ u8 domeHasWonSinglesOpen:1;
+    /*0xD08*/ u8 domeAttemptedDoubles50:1;
+    /*0xD08*/ u8 domeAttemptedDoublesOpen:1;
+    /*0xD08*/ u8 domeHasWonDoubles50:1;
+    /*0xD08*/ u8 domeHasWonDoublesOpen:1;
+    /*0xD09*/ u8 domeUnused;
+    /*0xD0A*/ u8 domeLvlMode;
+    /*0xD0B*/ u8 domeBattleMode;
+    /*0xD0C*/ u16 domeWinStreaks[2][FRONTIER_LVL_MODE_COUNT];
+    /*0xD14*/ u16 domeRecordWinStreaks[2][FRONTIER_LVL_MODE_COUNT];
+    /*0xD1C*/ u16 domeTotalChampionships[2][FRONTIER_LVL_MODE_COUNT];
+    /*0xD24*/ struct BattleDomeTrainer domeTrainers[DOME_TOURNAMENT_TRAINERS_COUNT];
+    /*0xD64*/ u16 domeMonIds[DOME_TOURNAMENT_TRAINERS_COUNT][FRONTIER_PARTY_SIZE];
+    /*0xDC4*/ u16 unused_DC4;
+    /*0xDC6*/ u16 palacePrize;
+    /*0xDC8*/ u16 palaceWinStreaks[2][FRONTIER_LVL_MODE_COUNT];
+    /*0xDD0*/ u16 palaceRecordWinStreaks[2][FRONTIER_LVL_MODE_COUNT];
+    /*0xDD8*/ u16 arenaPrize;
+    /*0xDDA*/ u16 arenaWinStreaks[FRONTIER_LVL_MODE_COUNT];
+    /*0xDDE*/ u16 arenaRecordStreaks[FRONTIER_LVL_MODE_COUNT];
+    /*0xDE2*/ u16 factoryWinStreaks[2][FRONTIER_LVL_MODE_COUNT];
+    /*0xDEA*/ u16 factoryRecordWinStreaks[2][FRONTIER_LVL_MODE_COUNT];
+    /*0xDF6*/ u16 factoryRentsCount[2][FRONTIER_LVL_MODE_COUNT];
+    /*0xDFA*/ u16 factoryRecordRentsCount[2][FRONTIER_LVL_MODE_COUNT];
+    /*0xE02*/ u16 pikePrize;
+    /*0xE04*/ u16 pikeWinStreaks[FRONTIER_LVL_MODE_COUNT];
+    /*0xE08*/ u16 pikeRecordStreaks[FRONTIER_LVL_MODE_COUNT];
+    /*0xE0C*/ u16 pikeTotalStreaks[FRONTIER_LVL_MODE_COUNT];
+    /*0xE10*/ u8 pikeHintedRoomIndex:3;
+              u8 pikeHintedRoomType:4;
+              u8 pikeHealingRoomsDisabled:1;
+    /*0xE11*/ //u8 padding2;
+    /*0xE12*/ u16 pikeHeldItemsBackup[FRONTIER_PARTY_SIZE];
+    /*0xE18*/ u16 pyramidPrize;
+    /*0xE1A*/ u16 pyramidWinStreaks[FRONTIER_LVL_MODE_COUNT];
+    /*0xE1E*/ u16 pyramidRecordStreaks[FRONTIER_LVL_MODE_COUNT];
+    /*0xE22*/ u16 pyramidRandoms[4];
+    /*0xE2A*/ u8 pyramidTrainerFlags; // 1 bit for each trainer (MAX_PYRAMID_TRAINERS)
+    /*0xE2B*/ //u8 padding3;
+    /*0xE2C*/ struct PyramidBag pyramidBag;
+    /*0xE68*/ u8 pyramidLightRadius;
+    /*0xE69*/ //u8 padding4;
+    /*0xE6A*/ u16 verdanturfTentPrize;
+    /*0xE6C*/ u16 fallarborTentPrize;
+    /*0xE6E*/ u16 slateportTentPrize;
+    /*0xE70*/ struct RentalMon rentalMons[FRONTIER_PARTY_SIZE * 2];
+    /*0xEB8*/ u16 battlePoints;
+    /*0xEBA*/ u16 cardBattlePoints;
+    /*0xEBC*/ u32 battlesCount;
+    /*0xEC0*/ u16 domeWinningMoves[DOME_TOURNAMENT_TRAINERS_COUNT];
+    /*0xEE0*/ u8 trainerFlags;
+    /*0xEE1*/ u8 opponentNames[FRONTIER_LVL_MODE_COUNT][PLAYER_NAME_LENGTH + 1];
+    /*0xEF1*/ u8 opponentTrainerIds[FRONTIER_LVL_MODE_COUNT][TRAINER_ID_LENGTH];
+    /*0xEF9*/ u8 unk_EF9:7; // Never read
+    /*0xEF9*/ u8 savedGame:1;
+    /*0xEFA*/ u8 unused_EFA;
+    /*0xEFB*/ u8 unused_EFB;
+    /*0xEFC*/ struct DomeMonData domePlayerPartyData[FRONTIER_PARTY_SIZE];
+};
+
+struct ApprenticeQuestion
+{
+    u8 questionId:2;
+    u8 monId:2;
+    u8 moveSlot:2;
+    u8 suggestedChange:2; // TRUE if told to use held item or second move, FALSE if told to use no item or first move
+    //u8 padding;
+    u16 data; // used both as an itemId and a move
+};
+
+struct PlayersApprentice
+{
+    /*0xB0*/ u8 id;
+    /*0xB1*/ u8 lvlMode:2;  //0: Unassigned, 1: Lv 50, 2: Open Lv
+    /*0xB1*/ u8 questionsAnswered:4;
+    /*0xB1*/ u8 leadMonId:2;
+    /*0xB2*/ u8 party:3;
+             u8 saveId:2;
+             //u8 padding1:3;
+    /*0xB3*/ u8 unused;
+    /*0xB4*/ u8 speciesIds[MULTI_PARTY_SIZE];
+    /*0xB7*/ //u8 padding2;
+    /*0xB8*/ struct ApprenticeQuestion questions[APPRENTICE_MAX_QUESTIONS];
+};
+
+struct RankingHall1P
+{
+    u8 id[TRAINER_ID_LENGTH];
+    u16 winStreak;
+    u8 name[PLAYER_NAME_LENGTH + 1];
+    u8 language;
+    //u8 padding;
+};
+
+struct RankingHall2P
+{
+    u8 id1[TRAINER_ID_LENGTH];
+    u8 id2[TRAINER_ID_LENGTH];
+    u16 winStreak;
+    u8 name1[PLAYER_NAME_LENGTH + 1];
+    u8 name2[PLAYER_NAME_LENGTH + 1];
+    u8 language;
+    //u8 padding;
 };
 
 struct SaveBlock2
@@ -411,21 +641,18 @@ struct SaveBlock2
     /*0x0A8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
     /*0x0AC*/ bool8 unkFlag1; // Set TRUE, never read
     /*0x0AD*/ bool8 unkFlag2; // Set FALSE, never read
-    #if FREE_BATTLE_TOWER_E_READER == FALSE
-        struct BattleTowerEReaderTrainer ereaderTrainer;
-    #endif //FREE_BATTLE_TOWER_E_READER
-    u8 selectedPartyMons[MAX_FRONTIER_PARTY_SIZE]; // temporary, replace with frontier
     /*0x898*/ u16 mapView[0x100];
-#if FREE_LINK_BATTLE_RECORDS == FALSE
-    /*0xA98*/ struct LinkBattleRecords linkBattleRecords;
-#endif //FREE_LINK_BATTLE_RECORDS
     /*0xAF0*/ struct BerryCrush berryCrush;
 #if FREE_POKEMON_JUMP == FALSE
     /*0xB00*/ struct PokemonJumpRecords pokeJump;
 #endif //FREE_POKEMON_JUMP
     /*0xB10*/ struct BerryPickingResults berryPick;
-    /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT]; // moved to SaveBlock2 due to QuestLogScene taking up SaveBlock1
-    /*0x???*/ u8 filler_90[2044];
+#if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
+    /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
+    /*0x57C*/ struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
+#endif //FREE_RECORD_MIXING_HALL_RECORDS
+    struct BattleFrontier frontier;
+    // /*0x???*/ u8 filler_90[268];
 }; // size: 0xF24
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
@@ -517,81 +744,6 @@ struct RamScript
     struct RamScriptData data;
 };
 
-// Leftover from R/S
-struct DewfordTrend
-{
-    u16 trendiness:7;
-    u16 maxTrendiness:7;
-    u16 gainingTrendiness:1;
-    u16 rand;
-    u16 words[2];
-}; /*size = 0x8*/
-
-struct MauvilleManCommon
-{
-    u8 id;
-};
-
-struct MauvilleManBard
-{
-    /*0x00*/ u8 id;
-    /*0x02*/ u16 songLyrics[BARD_SONG_LENGTH];
-    /*0x0E*/ u16 temporaryLyrics[BARD_SONG_LENGTH];
-    /*0x1A*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x22*/ u8 filler_2DB6[0x3];
-    /*0x25*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
-    /*0x29*/ bool8 hasChangedSong;
-    /*0x2A*/ u8 language;
-}; /*size = 0x2C*/
-
-struct MauvilleManStoryteller
-{
-    u8 id;
-    bool8 alreadyRecorded;
-    u8 filler2[2];
-    u8 gameStatIDs[NUM_STORYTELLER_TALES];
-    u8 trainerNames[NUM_STORYTELLER_TALES][PLAYER_NAME_LENGTH];
-    u8 statValues[NUM_STORYTELLER_TALES][4];
-    u8 language[NUM_STORYTELLER_TALES];
-};
-
-struct MauvilleManGiddy
-{
-    /*0x00*/ u8 id;
-    /*0x01*/ u8 taleCounter;
-    /*0x02*/ u8 questionNum;
-    /*0x04*/ u16 randomWords[GIDDY_MAX_TALES];
-    /*0x18*/ u8 questionList[GIDDY_MAX_QUESTIONS];
-    /*0x20*/ u8 language;
-}; /*size = 0x2C*/
-
-struct MauvilleManHipster
-{
-    u8 id;
-    bool8 alreadySpoken;
-    u8 language;
-};
-
-struct MauvilleOldManTrader
-{
-    u8 id;
-    u8 decorIds[NUM_TRADER_ITEMS];
-    u8 playerNames[NUM_TRADER_ITEMS][11];
-    u8 alreadyTraded;
-    u8 language[NUM_TRADER_ITEMS];
-};
-
-typedef union OldMan
-{
-    struct MauvilleManCommon common;
-    struct MauvilleManBard bard;
-    struct MauvilleManGiddy giddy;
-    struct MauvilleManHipster hipster;
-    struct MauvilleOldManTrader trader;
-    struct MauvilleManStoryteller storyteller;
-    u8 filler[0x40];
-} OldMan;
-
 struct Mail
 {
     /*0x00*/ u16 words[MAIL_WORDS_COUNT];
@@ -677,7 +829,7 @@ struct QuestLogObjectEvent
     /*0x0f*/ u8 previousMetatileBehavior;
     /*0x10*/ u8 directionSequenceIndex;
     /*0x11*/ u8 animId;
-};
+} __attribute__((packed));
 
 // This represents all the data needed to display a single scene for the "Quest Log" when the player resumes playing.
 //
@@ -873,8 +1025,6 @@ struct SaveBlock1
     /*0x2CC4*/ u16 easyChatBattleLost[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2CD0*/ struct Mail mail[MAIL_COUNT];
     /*0x2F10*/ u8 additionalPhrases[NUM_ADDITIONAL_PHRASE_BYTES];
-    /*0x2F18*/ OldMan oldMan; // unused
-    /*0x2F54*/ struct DewfordTrend dewfordTrends[5]; // unused
     /*0x2F80*/ struct DayCare daycare;
     /*0x309C*/ u8 giftRibbons[GIFT_RIBBONS_COUNT];
     /*0x30A7*/ struct ExternalEventData externalEventData;
@@ -903,7 +1053,9 @@ struct SaveBlock1
     /*0x3D34*/ u32 towerChallengeId;
     /*0x3D38*/ struct TrainerTower trainerTower[NUM_TOWER_CHALLENGE_TYPES];
 #endif //FREE_TRAINER_HILL
-    /*0x3D24*/ u8 unusedSB1[0x1C];
+    struct PlayersApprentice playerApprentice;
+    struct Apprentice apprentices[APPRENTICE_COUNT];
+    // /*0x3D24*/ u8 unusedSB1[0x1C];
 }; // size: 0x3D68
 
 struct MapPosition

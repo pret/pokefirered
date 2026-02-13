@@ -188,9 +188,9 @@ static const struct YesNoFuncTable sYesNoFuncs_Sell =
 
 static const struct MenuAction sContextMenuActions[] =
 {
-    {gOtherText_Use,  {Task_BerryPouch_Use}},
-    {gOtherText_Toss, {Task_BerryPouch_Toss}},
-    {gOtherText_Give, {Task_BerryPouch_Give}},
+    {gMenuText_Use,  {Task_BerryPouch_Use}},
+    {gMenuText_Toss, {Task_BerryPouch_Toss}},
+    {gMenuText_Give, {Task_BerryPouch_Give}},
     {gOtherText_Exit, {Task_BerryPouch_Exit}},
     {gString_Dummy,   {NULL}}
 };
@@ -1193,7 +1193,7 @@ static void Task_AskTossMultiple(u8 taskId)
     s16 * data = gTasks[taskId].data;
 
     ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
-    StringExpandPlaceholders(gStringVar4, gText_ThrowAwayStrVar2OfThisItemQM);
+    StringExpandPlaceholders(gStringVar4, gText_ConfirmTossItems);
     BerryPouchPrint(GetOrCreateVariableWindow(7), FONT_NORMAL, gStringVar4, 0, 2, 1, 2, 0, 1);
     CreateYesNoMenuWin3(taskId, &sYesNoFuncs_Toss);
 }
@@ -1251,7 +1251,7 @@ static void Task_TossYes(u8 taskId)
     DestroyVariableWindow(7);
     CopySelectedListMenuItemName(tListPosition, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
-    StringExpandPlaceholders(gStringVar4, gText_ThrewAwayStrVar2StrVar1s);
+    StringExpandPlaceholders(gStringVar4, gText_ThrewAwayVar2Var1s);
     BerryPouchPrint(GetOrCreateVariableWindow(9), FONT_NORMAL, gStringVar4, 0, 2, 1, 2, 0, 1);
     gTasks[taskId].func = Task_WaitButtonThenTossBerries;
 }

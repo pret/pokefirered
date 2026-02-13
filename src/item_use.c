@@ -36,13 +36,14 @@
 #include "teachy_tv.h"
 #include "tm_case.h"
 #include "vs_seeker.h"
-#include "constants/sound.h"
-#include "constants/items.h"
+#include "constants/event_objects.h"
+#include "constants/field_weather.h"
 #include "constants/item_effects.h"
+#include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
-#include "constants/field_weather.h"
+#include "constants/sound.h"
 
 EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
@@ -151,7 +152,7 @@ static void Task_ItemUse_CloseMessageBoxAndReturnToField(u8 taskId)
 {
     ClearDialogWindowAndFrame(0, 1);
     DestroyTask(taskId);
-    ClearPlayerHeldMovementAndUnfreezeObjectEvents();
+    ScriptUnfreezeObjectEvents();
     UnlockPlayerFieldControls();
 }
 
@@ -273,7 +274,7 @@ static void ItemUseOnFieldCB_Bicycle(u8 taskId)
     GetOnOffBike(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE);
 
     FollowerNPC_HandleBike();
-    ClearPlayerHeldMovementAndUnfreezeObjectEvents();
+    ScriptUnfreezeObjectEvents();
     UnlockPlayerFieldControls();
     DestroyTask(taskId);
 }
@@ -466,23 +467,22 @@ static void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId)
 
 static bool8 TryToWaterSudowoodo(void)
 {
-    // s16 x, y;
-    // u8 elevation;
-    // u8 objId;
-    // GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    // elevation = PlayerGetElevation();
-    // objId = GetObjectEventIdByPosition(x, y, elevation);
-    // if (objId == OBJECT_EVENTS_COUNT || gObjectEvents[objId].graphicsId != OBJ_EVENT_GFX_SUDOWOODO)
-    //     return FALSE;
-    // else
-    //     return TRUE;
-    return FALSE;
+    s16 x, y;
+    u8 elevation;
+    u8 objId;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    elevation = PlayerGetElevation();
+    objId = GetObjectEventIdByPosition(x, y, elevation);
+    if (objId == OBJECT_EVENTS_COUNT || gObjectEvents[objId].graphicsId != OBJ_EVENT_GFX_SUDOWOODO)
+        return FALSE;
+    else
+        return TRUE;
 }
 
 static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 {
-    // LockPlayerFieldControls();
-    // ScriptContext_SetupScript(BattleFrontier_OutsideEast_EventScript_WaterSudowoodo);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(BattleFrontier_OutsideEast_EventScript_WaterSudowoodo);
     DestroyTask(taskId);
 }
 

@@ -295,6 +295,86 @@
 #define METATILE_ViridianForest_HugeTreeTopMiddle_Grass  0x284
 #define METATILE_ViridianForest_HugeTreeTopMiddle_Mowed  0x281
 
+// gTileset_BattleFrontierOutside
+#define METATILE_BattleFrontierOutside_Door_PokeCenter  0x037
+#define METATILE_BattleFrontierOutside_Door_PokeMart    0x01C
+#define METATILE_BattleFrontierOutsideDoor1             0x0D2
+#define METATILE_BattleFrontierOutsideDoor2             0x0EE
+
+// gTileset_BattleFrontierOutsideWest
+#define METATILE_BattleFrontierOutsideWest_Door_BattleDome      0x304
+#define METATILE_BattleFrontierOutsideWest_Door_BattleFactory   0x2E4
+#define METATILE_BattleFrontierOutsideWest_Door_Sliding         0x297
+
+// gTileset_BattleFrontierOutsideEast
+#define METATILE_BattleFrontierOutsideEast_Door_BattleTower 0x3A4
+#define METATILE_BattleFrontierOutsideEast_Door_BattleArena 0x320
+#define METATILE_BattleFrontierOutsideEast_Door_Sliding     0x297
+
+// gTileset_BattleFrontierBuilding
+#define METATILE_BattleFrontierBuilding_Door_Elevator            0x294
+#define METATILE_BattleFrontierBuilding_Door_MultiCorridor       0x2EF
+#define METATILE_BattleFrontierBuilding_CorridorOpenDoor_Top     0x280
+#define METATILE_BattleFrontierBuilding_CorridorOpenDoor_Bottom  0x281
+#define METATILE_BattleFrontierBuilding_Elevator_Top0            0x282
+#define METATILE_BattleFrontierBuilding_Elevator_Top1            0x283
+#define METATILE_BattleFrontierBuilding_Elevator_Top2            0x284
+#define METATILE_BattleFrontierBuilding_Elevator_Mid0            0x285
+#define METATILE_BattleFrontierBuilding_Elevator_Mid1            0x286
+#define METATILE_BattleFrontierBuilding_Elevator_Mid2            0x287
+#define METATILE_BattleFrontierBuilding_Elevator_Bottom0         0x288
+#define METATILE_BattleFrontierBuilding_Elevator_Bottom1         0x289
+#define METATILE_BattleFrontierBuilding_Elevator_Bottom2         0x28A
+
+// gTileset_BattleArena
+#define METATILE_BattleArena_Door 0x291
+
+// gTileset_BattlePalaceGeneral
+#define METATILE_BattlePalaceGeneral_Door 0x290
+
+// gTileset_BattlePalaceBuilding
+#define METATILE_BattlePalaceBuilding_Door 0x295
+
+// gTileset_BattleDome
+#define METATILE_BattleDome_Door_Lobby 0x286
+#define METATILE_BattleDome_Door_Corridor 0x2B9
+#define METATILE_BattleDome_Door_PreBattleRoom 0x287
+
+// gTileset_BattlePike
+#define METATILE_BattlePike_CurtainFrames_Start   0x280
+#define METATILE_BattlePike_Curtain_Stage0_Tile0  0x284
+#define METATILE_BattlePike_Curtain_Stage0_Tile1  0x286
+#define METATILE_BattlePike_Curtain_Stage0_Tile2  0x287
+#define METATILE_BattlePike_Curtain_Stage0_Tile3  0x288
+#define METATILE_BattlePike_Curtain_Stage0_Tile4  0x289
+#define METATILE_BattlePike_Curtain_Stage0_Tile5  0x28A
+#define METATILE_BattlePike_Curtain_Stage0_Tile6  0x28B
+#define METATILE_BattlePike_Curtain_Stage1_Tile0  0x290
+#define METATILE_BattlePike_Curtain_Stage1_Tile1  0x292
+#define METATILE_BattlePike_Curtain_Stage1_Tile2  0x293
+#define METATILE_BattlePike_Curtain_Stage1_Tile3  0x294
+#define METATILE_BattlePike_Curtain_Stage1_Tile4  0x295
+#define METATILE_BattlePike_Curtain_Stage1_Tile5  0x296
+#define METATILE_BattlePike_Curtain_Stage1_Tile6  0x297
+#define METATILE_BattlePike_Curtain_Stage2_Tile0  0x29C
+#define METATILE_BattlePike_Curtain_Stage2_Tile1  0x29E
+#define METATILE_BattlePike_Curtain_Stage2_Tile2  0x29F
+#define METATILE_BattlePike_Curtain_Stage2_Tile3  0x2A0
+#define METATILE_BattlePike_Curtain_Stage2_Tile4  0x2A1
+#define METATILE_BattlePike_Curtain_Stage2_Tile5  0x2A2
+#define METATILE_BattlePike_Curtain_Stage2_Tile6  0x2A3
+#define METATILE_BattlePike_Curtain_Stage3_Tile0  0x2A8
+#define METATILE_BattlePike_Curtain_Stage3_Tile1  0x2AA
+#define METATILE_BattlePike_Curtain_Stage3_Tile2  0x2AB
+#define METATILE_BattlePike_Curtain_Stage3_Tile3  0x2AC
+#define METATILE_BattlePike_Curtain_Stage3_Tile4  0x2AD
+#define METATILE_BattlePike_Curtain_Stage3_Tile5  0x2AE
+#define METATILE_BattlePike_Curtain_Stage3_Tile6  0x2AF
+
+// gTileset_BattlePyramid
+#define METATILE_BattlePyramid_Exit   0x2E8
+#define METATILE_BattlePyramid_Floor  0x2E7
+
 // Other
 #define METATILE_Fallarbor_AshGrass                      0x20A
 #define METATILE_Fallarbor_NormalGrass                   0x212

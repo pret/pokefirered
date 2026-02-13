@@ -330,7 +330,7 @@ static EWRAM_DATA struct HpBarObjs * sHpBarObjs = NULL;
 static EWRAM_DATA struct ExpBarObjs * sExpBarObjs = NULL;
 static EWRAM_DATA struct PokerusIconObj * sPokerusIconObj = NULL;
 static EWRAM_DATA struct ShinyStarObjData * sShinyStarObjData = NULL;
-static EWRAM_DATA u8 sLastViewedMonIndex = 0;
+EWRAM_DATA u8 gLastViewedMonIndex = 0;
 static EWRAM_DATA u8 sMoveSelectionCursorPos = 0;
 static EWRAM_DATA u8 sMoveSwapCursorPos = 0;
 static EWRAM_DATA struct MonPicBounceState * sMonPicBounceState = NULL;
@@ -1212,7 +1212,7 @@ void ShowPokemonSummaryScreen(struct Pokemon * party, u8 cursorPos, u8 lastIdx, 
         return;
     }
 
-    sLastViewedMonIndex = cursorPos;
+    gLastViewedMonIndex = cursorPos;
 
     sMoveSelectionCursorPos = 0;
     sMoveSwapCursorPos = 0;
@@ -3441,7 +3441,7 @@ static void Task_DestroyResourcesOnExit(u8 taskId)
     DestroyTask(taskId);
     SetMainCallback2(sMonSummaryScreen->savedCallback);
 
-    sLastViewedMonIndex = GetLastViewedMonIndex();
+    gLastViewedMonIndex = GetLastViewedMonIndex();
 
     FREE_AND_SET_NULL_IF_SET(sMonSummaryScreen);
     FREE_AND_SET_NULL_IF_SET(sMonSkillsPrinterXpos);
@@ -3841,7 +3841,7 @@ static void PokeSum_PrintMonTypeIcons(void)
 
 u8 GetLastViewedMonIndex(void)
 {
-    return sLastViewedMonIndex;
+    return gLastViewedMonIndex;
 }
 
 u8 GetMoveSlotToReplace(void)
@@ -3859,7 +3859,7 @@ static bool32 IsMultiBattlePartner(void)
     if (!IsUpdateLinkStateCBActive()
         && IsMultiBattle() == TRUE
         && gReceivedRemoteLinkPlayers == 1
-        && (sLastViewedMonIndex >= 4 || sLastViewedMonIndex == 1))
+        && (gLastViewedMonIndex >= 4 || gLastViewedMonIndex == 1))
         return TRUE;
 
     return FALSE;
@@ -5377,7 +5377,7 @@ static void PokeSum_SeekToNextMon(u8 taskId, s8 direction)
     if (scrollResult == -1)
         return;
 
-    sLastViewedMonIndex = scrollResult;
+    gLastViewedMonIndex = scrollResult;
     CreateTask(Task_PokeSum_SwitchDisplayedPokemon, 0);
     sMonSummaryScreen->switchMonTaskState = 0;
 }
@@ -5389,22 +5389,22 @@ static s8 SeekToNextMonInSingleParty(s8 direction)
 
     if (sMonSummaryScreen->curPageIndex == 0)
     {
-        if (direction == -1 && sLastViewedMonIndex == 0)
+        if (direction == -1 && gLastViewedMonIndex == 0)
             return -1;
-        else if (direction == 1 && sLastViewedMonIndex >= sMonSummaryScreen->lastIndex)
+        else if (direction == 1 && gLastViewedMonIndex >= sMonSummaryScreen->lastIndex)
             return -1;
         else
-            return sLastViewedMonIndex + direction;
+            return gLastViewedMonIndex + direction;
     }
 
     while (TRUE)
     {
         seekDelta += direction;
-        if (0 > sLastViewedMonIndex + seekDelta || sLastViewedMonIndex + seekDelta > sMonSummaryScreen->lastIndex)
+        if (0 > gLastViewedMonIndex + seekDelta || gLastViewedMonIndex + seekDelta > sMonSummaryScreen->lastIndex)
             return -1;
 
-        if (GetMonData(&partyMons[sLastViewedMonIndex + seekDelta], MON_DATA_IS_EGG) == 0)
-            return sLastViewedMonIndex + seekDelta;
+        if (GetMonData(&partyMons[gLastViewedMonIndex + seekDelta], MON_DATA_IS_EGG) == 0)
+            return gLastViewedMonIndex + seekDelta;
     }
 
     return -1;

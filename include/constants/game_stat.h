@@ -54,8 +54,9 @@
 #define GAME_STAT_NUM_UNION_ROOM_BATTLES    50
 #define GAME_STAT_BERRY_CRUSH_POINTS        51
 #define GAME_STAT_DEXNAV_SCANNED            52
+#define GAME_STAT_BATTLE_TOWER_SINGLES_STREAK 53
 
-#define NUM_USED_GAME_STATS                 53
+#define NUM_USED_GAME_STATS                 54
 #define NUM_GAME_STATS                      64
 
 #endif // GUARD_CONSTANTS_GAME_STAT_H

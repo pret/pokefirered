@@ -676,12 +676,18 @@ bool8 ScrCmd_checkpcitem(struct ScriptContext * ctx)
     return FALSE;
 }
 
+static bool32 DecorationAdd(u16 decorId)
+{
+    return FALSE;
+}
+
 bool8 ScrCmd_adddecoration(struct ScriptContext * ctx)
 {
-    u32 UNUSED decorId = VarGet(ScriptReadHalfword(ctx));
+    u32 decorId = VarGet(ScriptReadHalfword(ctx));
 
     Script_RequestEffects(SCREFF_V1 | SCREFF_SAVE);
 
+    gSpecialVar_Result = DecorationAdd(decorId);
     return FALSE;
 }
 

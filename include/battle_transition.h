@@ -19,7 +19,7 @@ enum {
     B_TRANSITION_CLOCKWISE_WIPE,
     B_TRANSITION_RIPPLE,
     B_TRANSITION_WAVE,
-    B_TRANSITION_SLICE, 
+    B_TRANSITION_SLICE,
     B_TRANSITION_WHITE_BARS_FADE,
     B_TRANSITION_GRID_SQUARES,
     B_TRANSITION_ANGLED_WIPES,
@@ -32,5 +32,6 @@ extern const struct SpritePalette gSpritePalette_Pokeball;
 
 bool8 IsBattleTransitionDone(void);
 void BattleTransition_StartOnField(u8 transitionId);
+void Task_BattleTransition_Intro(u8 taskId);
 
 #endif // GUARD_BATTLE_TRANSITION_H

@@ -4,8 +4,9 @@
 // Special trainer battles.
 enum SpecialBattle
 {
-    SPECIAL_BATTLE_EREADER,
-    SPECIAL_BATTLE_MULTI,
+    SPECIAL_BATTLE_SECRET_BASE = 1,
+    SPECIAL_BATTLE_EREADER = 2,
+    SPECIAL_BATTLE_MULTI = 3,
 };
 
 // Ids for special multi battle types

@@ -309,7 +309,7 @@ static const u16 sMapPopUpTilesPalette_BW_White[] = {0};
 
 static bool8 UNUSED StartMenu_ShowMapNamePopup(void)
 {
-    CloseStartMenu();
+    HideStartMenuWindow();
     ShowMapNamePopupExpansion();
     return TRUE;
 }
@@ -509,7 +509,7 @@ static void ShowMapNamePopUpWindow(void)
     if (OW_POPUP_GENERATION == GEN_5)
     {
         AddTextPrinterParameterized(mapNamePopUpWindowId, FONT_SMALL, mapDisplayHeader, 8, 2, TEXT_SKIP_DRAW, NULL);
-        
+
         if (OW_POPUP_BW_TIME_MODE != OW_POPUP_BW_TIME_NONE)
         {
             RtcCalcLocalTime();
@@ -581,7 +581,7 @@ static void LoadMapNamePopUpWindowBg(void)
     if (OW_POPUP_GENERATION == GEN_5)
     {
         popUpThemeId = MAPPOPUP_THEME_BW_DEFAULT; // sRegionMapSectionId_To_PopUpThemeIdMapping_BW[regionMapSectionId];
-        switch (popUpThemeId) 
+        switch (popUpThemeId)
         {
             // add additional gen 5-style pop-up themes as cases here
             case MAPPOPUP_THEME_BW_DEFAULT:

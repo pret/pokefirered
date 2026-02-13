@@ -8,7 +8,7 @@ CeruleanCity_House1_EventScript_BadgeGuy::
 	message CeruleanCity_House1_Text_DescribeWhichBadge
 	waitmessage
 	setvar VAR_0x8004, LISTMENU_BADGES
-	special ListMenu
+	special ShowScrollableMultichoice
 	waitstate
 	switch VAR_RESULT
 	case 0, CeruleanCity_House1_EventScript_DescribeBoulderBadge

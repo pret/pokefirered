@@ -1723,7 +1723,7 @@ static void Task_VsSeeker_3(u8 taskId)
             if (sVsSeeker->responseCode == VSSEEKER_RESPONSE_FOUND_REMATCHES)
                 StartAllRespondantIdleMovements();
             ClearDialogWindowAndFrame(0, TRUE);
-            ClearPlayerHeldMovementAndUnfreezeObjectEvents();
+            ScriptUnfreezeObjectEvents();
             UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }

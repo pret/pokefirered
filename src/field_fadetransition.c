@@ -485,7 +485,7 @@ static void Task_WaitFadeAndCreateStartMenuTask(u8 taskId)
     if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
     {
         DestroyTask(taskId);
-        CreateTask(Task_StartMenuHandleInput, 80);
+        CreateTask(Task_ShowStartMenu, 80);
     }
 }
 
@@ -508,7 +508,7 @@ static void Task_SafariZoneRanOutOfBalls(u8 taskId)
     {
         UnlockPlayerFieldControls();
         DestroyTask(taskId);
-        ClearPlayerHeldMovementAndUnfreezeObjectEvents();
+        ScriptUnfreezeObjectEvents();
     }
 }
 

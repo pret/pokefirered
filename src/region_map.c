@@ -39,7 +39,7 @@ enum {
     MAPSECTYPE_ROUTE,
     MAPSECTYPE_VISITED,
     MAPSECTYPE_NOT_VISITED,
-    MAPSECTYPE_UNKNOWN, // Checked but never used
+    MAPSECTYPE_BATTLE_FRONTIER, // Checked but never used
 };
 
 enum {
@@ -109,7 +109,7 @@ struct RegionMap
     u16 dungeonWinTop;    // Never read
     u16 dungeonWinRight;  // Never read
     u16 dungeonWinBottom; // Never read
-    u8 filler[6]; 
+    u8 filler[6];
     TaskFunc mainTask;
     MainCallback savedCallback;
 }; // size = 0x47C0
@@ -461,7 +461,7 @@ static const struct BgTemplate sRegionMapBgTemplates[] = {
 };
 
 static const struct WindowTemplate sRegionMapWindowTemplates[] = {
-    [WIN_MAP_NAME] = 
+    [WIN_MAP_NAME] =
     {
         .bg = 3,
         .tilemapLeft = 3,
@@ -470,7 +470,7 @@ static const struct WindowTemplate sRegionMapWindowTemplates[] = {
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x001
-    }, 
+    },
     [WIN_DUNGEON_NAME] =
     {
         .bg = 3,
@@ -480,7 +480,7 @@ static const struct WindowTemplate sRegionMapWindowTemplates[] = {
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x01f
-    }, 
+    },
     [WIN_MAP_PREVIEW] =
     {
         .bg = 3,
@@ -500,7 +500,7 @@ static const struct WindowTemplate sRegionMapWindowTemplates[] = {
         .height = 2,
         .paletteNum = 12,
         .baseBlock = 0x150
-    }, 
+    },
     [WIN_TOPBAR_RIGHT] =
     {
         .bg = 3,
@@ -519,7 +519,8 @@ ALIGNED(4) const u8 sTextColor_Red[]   = {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_C
 
 static const u8 *const sTextColorTable[] = {
     [MAPSECTYPE_VISITED - 2]     = sTextColor_Green,
-    [MAPSECTYPE_NOT_VISITED - 2] = sTextColor_Red
+    [MAPSECTYPE_NOT_VISITED - 2] = sTextColor_Red,
+    [MAPSECTYPE_BATTLE_FRONTIER - 2] = sTextColor_White,
 };
 
 static const u8 sSeviiMapsecs[3][30] = {
@@ -538,7 +539,7 @@ static const u8 sSeviiMapsecs[3][30] = {
         MAPSEC_THREE_ISLE_PATH,
         MAPSEC_EMBER_SPA,
         MAPSEC_NONE
-    }, 
+    },
     [REGIONMAP_SEVII45 - 1] =
     {
         MAPSEC_FOUR_ISLAND,
@@ -556,8 +557,8 @@ static const u8 sSeviiMapsecs[3][30] = {
         MAPSEC_ROCKET_WAREHOUSE,
         MAPSEC_LOST_CAVE,
         MAPSEC_NONE
-    }, 
-    [REGIONMAP_SEVII67 - 1] = 
+    },
+    [REGIONMAP_SEVII67 - 1] =
     {
         MAPSEC_SEVEN_ISLAND,
         MAPSEC_SIX_ISLAND,
@@ -591,26 +592,26 @@ static const u8 sSeviiMapsecs[3][30] = {
 };
 
 ALIGNED(4) static const bool8 sRegionMapPermissions[REGIONMAP_TYPE_COUNT][MAPPERM_COUNT] = {
-    [REGIONMAP_TYPE_NORMAL] = 
+    [REGIONMAP_TYPE_NORMAL] =
     {
-        [MAPPERM_HAS_SWITCH_BUTTON]    = TRUE, 
-        [MAPPERM_HAS_MAP_PREVIEW]      = TRUE, 
-        [MAPPERM_HAS_OPEN_ANIM]        = TRUE, 
+        [MAPPERM_HAS_SWITCH_BUTTON]    = TRUE,
+        [MAPPERM_HAS_MAP_PREVIEW]      = TRUE,
+        [MAPPERM_HAS_OPEN_ANIM]        = TRUE,
         [MAPPERM_HAS_FLY_DESTINATIONS] = FALSE
     },
-    [REGIONMAP_TYPE_WALL] = 
+    [REGIONMAP_TYPE_WALL] =
     {
-        [MAPPERM_HAS_SWITCH_BUTTON]    = FALSE, 
-        [MAPPERM_HAS_MAP_PREVIEW]      = FALSE, 
-        [MAPPERM_HAS_OPEN_ANIM]        = FALSE, 
+        [MAPPERM_HAS_SWITCH_BUTTON]    = FALSE,
+        [MAPPERM_HAS_MAP_PREVIEW]      = FALSE,
+        [MAPPERM_HAS_OPEN_ANIM]        = FALSE,
         [MAPPERM_HAS_FLY_DESTINATIONS] = FALSE
     },
-    [REGIONMAP_TYPE_FLY] = 
+    [REGIONMAP_TYPE_FLY] =
     {
-        [MAPPERM_HAS_SWITCH_BUTTON]    = FALSE, 
-        [MAPPERM_HAS_MAP_PREVIEW]      = FALSE, 
-        [MAPPERM_HAS_OPEN_ANIM]        = FALSE, 
-        [MAPPERM_HAS_FLY_DESTINATIONS] = TRUE 
+        [MAPPERM_HAS_SWITCH_BUTTON]    = FALSE,
+        [MAPPERM_HAS_MAP_PREVIEW]      = FALSE,
+        [MAPPERM_HAS_OPEN_ANIM]        = FALSE,
+        [MAPPERM_HAS_FLY_DESTINATIONS] = TRUE
     }
 };
 
@@ -714,6 +715,10 @@ static const struct DungeonMapInfo sDungeonInfo[] = {
         .id = MAPSEC_DOTTED_HOLE,
         .name = sMapName_DOTTED_HOLE,
         .desc = gText_RegionMap_AreaDesc_DottedHole
+    }, {
+        .id = MAPSEC_ARTISAN_CAVE,
+        .name = sMapName_ARTISAN_CAVE,
+        .desc = gText_RegionMap_AreaDesc_ArtisanCave
     }
 };
 
@@ -732,9 +737,9 @@ static const union AnimCmd *const sAnims_MapEdge[] = {
 };
 
 static const struct GpuWindowParams sMapWindowDim = {
-    .left = 24, 
-    .top = 16, 
-    .right = 216, 
+    .left = 24,
+    .top = 16,
+    .right = 216,
     .bottom = 160
 };
 
@@ -825,114 +830,115 @@ static const u8 sTextColors[] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_CO
 #include "data/region_map/region_map_layout_sevii_67.h"
 
 static const u8 sMapFlyDestinations[][3] = {
-    [MAPSEC_PALLET_TOWN         - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_PALLET_TOWN},
-    [MAPSEC_VIRIDIAN_CITY       - KANTO_MAPSEC_START] = {MAP(MAP_VIRIDIAN_CITY),                         HEAL_LOCATION_VIRIDIAN_CITY},
-    [MAPSEC_PEWTER_CITY         - KANTO_MAPSEC_START] = {MAP(MAP_PEWTER_CITY),                           HEAL_LOCATION_PEWTER_CITY},
-    [MAPSEC_CERULEAN_CITY       - KANTO_MAPSEC_START] = {MAP(MAP_CERULEAN_CITY),                         HEAL_LOCATION_CERULEAN_CITY},
-    [MAPSEC_LAVENDER_TOWN       - KANTO_MAPSEC_START] = {MAP(MAP_LAVENDER_TOWN),                         HEAL_LOCATION_LAVENDER_TOWN},
-    [MAPSEC_VERMILION_CITY      - KANTO_MAPSEC_START] = {MAP(MAP_VERMILION_CITY),                        HEAL_LOCATION_VERMILION_CITY},
-    [MAPSEC_CELADON_CITY        - KANTO_MAPSEC_START] = {MAP(MAP_CELADON_CITY),                          HEAL_LOCATION_CELADON_CITY},
-    [MAPSEC_FUCHSIA_CITY        - KANTO_MAPSEC_START] = {MAP(MAP_FUCHSIA_CITY),                          HEAL_LOCATION_FUCHSIA_CITY},
-    [MAPSEC_CINNABAR_ISLAND     - KANTO_MAPSEC_START] = {MAP(MAP_CINNABAR_ISLAND),                       HEAL_LOCATION_CINNABAR_ISLAND},
-    [MAPSEC_INDIGO_PLATEAU      - KANTO_MAPSEC_START] = {MAP(MAP_INDIGO_PLATEAU_EXTERIOR),               HEAL_LOCATION_INDIGO_PLATEAU},
-    [MAPSEC_SAFFRON_CITY        - KANTO_MAPSEC_START] = {MAP(MAP_SAFFRON_CITY),                          HEAL_LOCATION_SAFFRON_CITY},
-    [MAPSEC_ROUTE_4_POKECENTER  - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE4),                                HEAL_LOCATION_ROUTE4},
-    [MAPSEC_ROUTE_10_POKECENTER - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE10),                               HEAL_LOCATION_ROUTE10},
-    [MAPSEC_ROUTE_1             - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE1),                                HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_2             - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE2),                                HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_3             - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE3),                                HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_4             - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE4),                                HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_5             - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE5),                                HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_6             - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE6),                                HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_7             - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE7),                                HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_8             - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE8),                                HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_9             - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE9),                                HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_10            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE10),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_11            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE11),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_12            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE12),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_13            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE13),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_14            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE14),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_15            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE15),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_16            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE16),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_17            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE17),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_18            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE18),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_19            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE19),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_20            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE20),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_21            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE21_NORTH),                         HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_22            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE22),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_23            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE23),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_24            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE24),                               HEAL_LOCATION_NONE},
-    [MAPSEC_ROUTE_25            - KANTO_MAPSEC_START] = {MAP(MAP_ROUTE25),                               HEAL_LOCATION_NONE},
-    [MAPSEC_VIRIDIAN_FOREST     - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_MT_MOON             - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_S_S_ANNE            - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_UNDERGROUND_PATH    - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_UNDERGROUND_PATH_2  - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_DIGLETTS_CAVE       - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_KANTO_VICTORY_ROAD  - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_ROCKET_HIDEOUT      - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_SILPH_CO            - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_POKEMON_MANSION     - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_KANTO_SAFARI_ZONE   - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_POKEMON_LEAGUE      - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_ROCK_TUNNEL         - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_SEAFOAM_ISLANDS     - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_POKEMON_TOWER       - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_CERULEAN_CAVE       - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_POWER_PLANT         - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_ONE_ISLAND          - KANTO_MAPSEC_START] = {MAP(MAP_ONE_ISLAND),                            HEAL_LOCATION_ONE_ISLAND},
-    [MAPSEC_TWO_ISLAND          - KANTO_MAPSEC_START] = {MAP(MAP_TWO_ISLAND),                            HEAL_LOCATION_TWO_ISLAND},
-    [MAPSEC_THREE_ISLAND        - KANTO_MAPSEC_START] = {MAP(MAP_THREE_ISLAND),                          HEAL_LOCATION_THREE_ISLAND},
-    [MAPSEC_FOUR_ISLAND         - KANTO_MAPSEC_START] = {MAP(MAP_FOUR_ISLAND),                           HEAL_LOCATION_FOUR_ISLAND},
-    [MAPSEC_FIVE_ISLAND         - KANTO_MAPSEC_START] = {MAP(MAP_FIVE_ISLAND),                           HEAL_LOCATION_FIVE_ISLAND},
-    [MAPSEC_SEVEN_ISLAND        - KANTO_MAPSEC_START] = {MAP(MAP_SEVEN_ISLAND),                          HEAL_LOCATION_SEVEN_ISLAND},
-    [MAPSEC_SIX_ISLAND          - KANTO_MAPSEC_START] = {MAP(MAP_SIX_ISLAND),                            HEAL_LOCATION_SIX_ISLAND},
-    [MAPSEC_KINDLE_ROAD         - KANTO_MAPSEC_START] = {MAP(MAP_ONE_ISLAND_KINDLE_ROAD),                HEAL_LOCATION_NONE},
-    [MAPSEC_TREASURE_BEACH      - KANTO_MAPSEC_START] = {MAP(MAP_ONE_ISLAND_TREASURE_BEACH),             HEAL_LOCATION_NONE},
-    [MAPSEC_CAPE_BRINK          - KANTO_MAPSEC_START] = {MAP(MAP_TWO_ISLAND_CAPE_BRINK),                 HEAL_LOCATION_NONE},
-    [MAPSEC_BOND_BRIDGE         - KANTO_MAPSEC_START] = {MAP(MAP_THREE_ISLAND_BOND_BRIDGE),              HEAL_LOCATION_NONE},
-    [MAPSEC_THREE_ISLE_PORT     - KANTO_MAPSEC_START] = {MAP(MAP_THREE_ISLAND_PORT),                     HEAL_LOCATION_NONE},
-    [MAPSEC_SEVII_ISLE_6        - KANTO_MAPSEC_START] = {MAP(MAP_PROTOTYPE_SEVII_ISLE_6),                HEAL_LOCATION_NONE},
-    [MAPSEC_SEVII_ISLE_7        - KANTO_MAPSEC_START] = {MAP(MAP_PROTOTYPE_SEVII_ISLE_7),                HEAL_LOCATION_NONE},
-    [MAPSEC_SEVII_ISLE_8        - KANTO_MAPSEC_START] = {MAP(MAP_PROTOTYPE_SEVII_ISLE_8),                HEAL_LOCATION_NONE},
-    [MAPSEC_SEVII_ISLE_9        - KANTO_MAPSEC_START] = {MAP(MAP_PROTOTYPE_SEVII_ISLE_9),                HEAL_LOCATION_NONE},
-    [MAPSEC_RESORT_GORGEOUS     - KANTO_MAPSEC_START] = {MAP(MAP_FIVE_ISLAND_RESORT_GORGEOUS),           HEAL_LOCATION_NONE},
-    [MAPSEC_WATER_LABYRINTH     - KANTO_MAPSEC_START] = {MAP(MAP_FIVE_ISLAND_WATER_LABYRINTH),           HEAL_LOCATION_NONE},
-    [MAPSEC_FIVE_ISLE_MEADOW    - KANTO_MAPSEC_START] = {MAP(MAP_FIVE_ISLAND_MEADOW),                    HEAL_LOCATION_NONE},
-    [MAPSEC_MEMORIAL_PILLAR     - KANTO_MAPSEC_START] = {MAP(MAP_FIVE_ISLAND_MEMORIAL_PILLAR),           HEAL_LOCATION_NONE},
-    [MAPSEC_OUTCAST_ISLAND      - KANTO_MAPSEC_START] = {MAP(MAP_SIX_ISLAND_OUTCAST_ISLAND),             HEAL_LOCATION_NONE},
-    [MAPSEC_GREEN_PATH          - KANTO_MAPSEC_START] = {MAP(MAP_SIX_ISLAND_GREEN_PATH),                 HEAL_LOCATION_NONE},
-    [MAPSEC_WATER_PATH          - KANTO_MAPSEC_START] = {MAP(MAP_SIX_ISLAND_WATER_PATH),                 HEAL_LOCATION_NONE},
-    [MAPSEC_RUIN_VALLEY         - KANTO_MAPSEC_START] = {MAP(MAP_SIX_ISLAND_RUIN_VALLEY),                HEAL_LOCATION_NONE},
-    [MAPSEC_TRAINER_TOWER       - KANTO_MAPSEC_START] = {MAP(MAP_SEVEN_ISLAND_TRAINER_TOWER),            HEAL_LOCATION_NONE},
-    [MAPSEC_CANYON_ENTRANCE     - KANTO_MAPSEC_START] = {MAP(MAP_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE),  HEAL_LOCATION_NONE},
-    [MAPSEC_SEVAULT_CANYON      - KANTO_MAPSEC_START] = {MAP(MAP_SEVEN_ISLAND_SEVAULT_CANYON),           HEAL_LOCATION_NONE},
-    [MAPSEC_TANOBY_RUINS        - KANTO_MAPSEC_START] = {MAP(MAP_SEVEN_ISLAND_TANOBY_RUINS),             HEAL_LOCATION_NONE},
-    [MAPSEC_SEVII_ISLE_22       - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_SEVII_ISLE_23       - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_SEVII_ISLE_24       - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_NAVEL_ROCK_FRLG     - KANTO_MAPSEC_START] = {MAP(MAP_NAVEL_ROCK_EXTERIOR),                   HEAL_LOCATION_NONE},
-    [MAPSEC_MT_EMBER            - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_BERRY_FOREST        - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_ICEFALL_CAVE        - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_ROCKET_WAREHOUSE    - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_TRAINER_TOWER_2     - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_DOTTED_HOLE         - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_LOST_CAVE           - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_PATTERN_BUSH        - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_ALTERING_CAVE_FRLG  - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_TANOBY_CHAMBERS     - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_THREE_ISLE_PATH     - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_TANOBY_KEY          - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_BIRTH_ISLAND_FRLG   - KANTO_MAPSEC_START] = {MAP(MAP_BIRTH_ISLAND_EXTERIOR),                 HEAL_LOCATION_NONE},
-    [MAPSEC_MONEAN_CHAMBER      - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_LIPTOO_CHAMBER      - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_WEEPTH_CHAMBER      - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_DILFORD_CHAMBER     - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_SCUFIB_CHAMBER      - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_RIXY_CHAMBER        - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_VIAPOIS_CHAMBER     - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
-    [MAPSEC_EMBER_SPA           - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_BATTLE_FRONTIER]     = {MAP(MAP_BATTLE_FRONTIER_OUTSIDE_EAST),          HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST},
+    [MAPSEC_PALLET_TOWN]         = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_PALLET_TOWN},
+    [MAPSEC_VIRIDIAN_CITY]       = {MAP(MAP_VIRIDIAN_CITY),                         HEAL_LOCATION_VIRIDIAN_CITY},
+    [MAPSEC_PEWTER_CITY]         = {MAP(MAP_PEWTER_CITY),                           HEAL_LOCATION_PEWTER_CITY},
+    [MAPSEC_CERULEAN_CITY]       = {MAP(MAP_CERULEAN_CITY),                         HEAL_LOCATION_CERULEAN_CITY},
+    [MAPSEC_LAVENDER_TOWN]       = {MAP(MAP_LAVENDER_TOWN),                         HEAL_LOCATION_LAVENDER_TOWN},
+    [MAPSEC_VERMILION_CITY]      = {MAP(MAP_VERMILION_CITY),                        HEAL_LOCATION_VERMILION_CITY},
+    [MAPSEC_CELADON_CITY]        = {MAP(MAP_CELADON_CITY),                          HEAL_LOCATION_CELADON_CITY},
+    [MAPSEC_FUCHSIA_CITY]        = {MAP(MAP_FUCHSIA_CITY),                          HEAL_LOCATION_FUCHSIA_CITY},
+    [MAPSEC_CINNABAR_ISLAND]     = {MAP(MAP_CINNABAR_ISLAND),                       HEAL_LOCATION_CINNABAR_ISLAND},
+    [MAPSEC_INDIGO_PLATEAU]      = {MAP(MAP_INDIGO_PLATEAU_EXTERIOR),               HEAL_LOCATION_INDIGO_PLATEAU},
+    [MAPSEC_SAFFRON_CITY]        = {MAP(MAP_SAFFRON_CITY),                          HEAL_LOCATION_SAFFRON_CITY},
+    [MAPSEC_ROUTE_4_POKECENTER]  = {MAP(MAP_ROUTE4),                                HEAL_LOCATION_ROUTE4},
+    [MAPSEC_ROUTE_10_POKECENTER] = {MAP(MAP_ROUTE10),                               HEAL_LOCATION_ROUTE10},
+    [MAPSEC_ROUTE_1]             = {MAP(MAP_ROUTE1),                                HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_2]             = {MAP(MAP_ROUTE2),                                HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_3]             = {MAP(MAP_ROUTE3),                                HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_4]             = {MAP(MAP_ROUTE4),                                HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_5]             = {MAP(MAP_ROUTE5),                                HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_6]             = {MAP(MAP_ROUTE6),                                HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_7]             = {MAP(MAP_ROUTE7),                                HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_8]             = {MAP(MAP_ROUTE8),                                HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_9]             = {MAP(MAP_ROUTE9),                                HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_10]            = {MAP(MAP_ROUTE10),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_11]            = {MAP(MAP_ROUTE11),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_12]            = {MAP(MAP_ROUTE12),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_13]            = {MAP(MAP_ROUTE13),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_14]            = {MAP(MAP_ROUTE14),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_15]            = {MAP(MAP_ROUTE15),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_16]            = {MAP(MAP_ROUTE16),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_17]            = {MAP(MAP_ROUTE17),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_18]            = {MAP(MAP_ROUTE18),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_19]            = {MAP(MAP_ROUTE19),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_20]            = {MAP(MAP_ROUTE20),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_21]            = {MAP(MAP_ROUTE21_NORTH),                         HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_22]            = {MAP(MAP_ROUTE22),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_23]            = {MAP(MAP_ROUTE23),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_24]            = {MAP(MAP_ROUTE24),                               HEAL_LOCATION_NONE},
+    [MAPSEC_ROUTE_25]            = {MAP(MAP_ROUTE25),                               HEAL_LOCATION_NONE},
+    [MAPSEC_VIRIDIAN_FOREST]     = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_MT_MOON]             = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_S_S_ANNE]            = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_UNDERGROUND_PATH]    = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_UNDERGROUND_PATH_2]  = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_DIGLETTS_CAVE]       = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_KANTO_VICTORY_ROAD]  = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_ROCKET_HIDEOUT]      = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_SILPH_CO]            = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_POKEMON_MANSION]     = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_KANTO_SAFARI_ZONE]   = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_POKEMON_LEAGUE]      = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_ROCK_TUNNEL]         = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_SEAFOAM_ISLANDS]     = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_POKEMON_TOWER]       = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_CERULEAN_CAVE]       = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_POWER_PLANT]         = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_ONE_ISLAND]          = {MAP(MAP_ONE_ISLAND),                            HEAL_LOCATION_ONE_ISLAND},
+    [MAPSEC_TWO_ISLAND]          = {MAP(MAP_TWO_ISLAND),                            HEAL_LOCATION_TWO_ISLAND},
+    [MAPSEC_THREE_ISLAND]        = {MAP(MAP_THREE_ISLAND),                          HEAL_LOCATION_THREE_ISLAND},
+    [MAPSEC_FOUR_ISLAND]         = {MAP(MAP_FOUR_ISLAND),                           HEAL_LOCATION_FOUR_ISLAND},
+    [MAPSEC_FIVE_ISLAND]         = {MAP(MAP_FIVE_ISLAND),                           HEAL_LOCATION_FIVE_ISLAND},
+    [MAPSEC_SEVEN_ISLAND]        = {MAP(MAP_SEVEN_ISLAND),                          HEAL_LOCATION_SEVEN_ISLAND},
+    [MAPSEC_SIX_ISLAND]          = {MAP(MAP_SIX_ISLAND),                            HEAL_LOCATION_SIX_ISLAND},
+    [MAPSEC_KINDLE_ROAD]         = {MAP(MAP_ONE_ISLAND_KINDLE_ROAD),                HEAL_LOCATION_NONE},
+    [MAPSEC_TREASURE_BEACH]      = {MAP(MAP_ONE_ISLAND_TREASURE_BEACH),             HEAL_LOCATION_NONE},
+    [MAPSEC_CAPE_BRINK]          = {MAP(MAP_TWO_ISLAND_CAPE_BRINK),                 HEAL_LOCATION_NONE},
+    [MAPSEC_BOND_BRIDGE]         = {MAP(MAP_THREE_ISLAND_BOND_BRIDGE),              HEAL_LOCATION_NONE},
+    [MAPSEC_THREE_ISLE_PORT]     = {MAP(MAP_THREE_ISLAND_PORT),                     HEAL_LOCATION_NONE},
+    [MAPSEC_SEVII_ISLE_6]        = {MAP(MAP_PROTOTYPE_SEVII_ISLE_6),                HEAL_LOCATION_NONE},
+    [MAPSEC_SEVII_ISLE_7]        = {MAP(MAP_PROTOTYPE_SEVII_ISLE_7),                HEAL_LOCATION_NONE},
+    [MAPSEC_SEVII_ISLE_8]        = {MAP(MAP_PROTOTYPE_SEVII_ISLE_8),                HEAL_LOCATION_NONE},
+    [MAPSEC_SEVII_ISLE_9]        = {MAP(MAP_PROTOTYPE_SEVII_ISLE_9),                HEAL_LOCATION_NONE},
+    [MAPSEC_RESORT_GORGEOUS]     = {MAP(MAP_FIVE_ISLAND_RESORT_GORGEOUS),           HEAL_LOCATION_NONE},
+    [MAPSEC_WATER_LABYRINTH]     = {MAP(MAP_FIVE_ISLAND_WATER_LABYRINTH),           HEAL_LOCATION_NONE},
+    [MAPSEC_FIVE_ISLE_MEADOW]    = {MAP(MAP_FIVE_ISLAND_MEADOW),                    HEAL_LOCATION_NONE},
+    [MAPSEC_MEMORIAL_PILLAR]     = {MAP(MAP_FIVE_ISLAND_MEMORIAL_PILLAR),           HEAL_LOCATION_NONE},
+    [MAPSEC_OUTCAST_ISLAND]      = {MAP(MAP_SIX_ISLAND_OUTCAST_ISLAND),             HEAL_LOCATION_NONE},
+    [MAPSEC_GREEN_PATH]          = {MAP(MAP_SIX_ISLAND_GREEN_PATH),                 HEAL_LOCATION_NONE},
+    [MAPSEC_WATER_PATH]          = {MAP(MAP_SIX_ISLAND_WATER_PATH),                 HEAL_LOCATION_NONE},
+    [MAPSEC_RUIN_VALLEY]         = {MAP(MAP_SIX_ISLAND_RUIN_VALLEY),                HEAL_LOCATION_NONE},
+    [MAPSEC_TRAINER_TOWER]       = {MAP(MAP_SEVEN_ISLAND_TRAINER_TOWER),            HEAL_LOCATION_NONE},
+    [MAPSEC_CANYON_ENTRANCE]     = {MAP(MAP_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE),  HEAL_LOCATION_NONE},
+    [MAPSEC_SEVAULT_CANYON]      = {MAP(MAP_SEVEN_ISLAND_SEVAULT_CANYON),           HEAL_LOCATION_NONE},
+    [MAPSEC_TANOBY_RUINS]        = {MAP(MAP_SEVEN_ISLAND_TANOBY_RUINS),             HEAL_LOCATION_NONE},
+    [MAPSEC_SEVII_ISLE_22]       = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_SEVII_ISLE_23]       = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_SEVII_ISLE_24]       = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_NAVEL_ROCK_FRLG]     = {MAP(MAP_NAVEL_ROCK_EXTERIOR),                   HEAL_LOCATION_NONE},
+    [MAPSEC_MT_EMBER]            = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_BERRY_FOREST]        = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_ICEFALL_CAVE]        = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_ROCKET_WAREHOUSE]    = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_TRAINER_TOWER_2]     = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_DOTTED_HOLE]         = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_LOST_CAVE]           = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_PATTERN_BUSH]        = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_ALTERING_CAVE_FRLG]  = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_TANOBY_CHAMBERS]     = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_THREE_ISLE_PATH]     = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_TANOBY_KEY]          = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_BIRTH_ISLAND_FRLG]   = {MAP(MAP_BIRTH_ISLAND_EXTERIOR),                 HEAL_LOCATION_NONE},
+    [MAPSEC_MONEAN_CHAMBER]      = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_LIPTOO_CHAMBER]      = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_WEEPTH_CHAMBER]      = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_DILFORD_CHAMBER]     = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_SCUFIB_CHAMBER]      = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_RIXY_CHAMBER]        = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_VIAPOIS_CHAMBER]     = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
+    [MAPSEC_EMBER_SPA]           = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
 };
 
 static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
@@ -1168,7 +1174,7 @@ static void PlaySEForSelectedMapsec(void)
 {
     if (SelectedMapsecSEEnabled())
     {
-        if ((GetSelectedMapsecType(LAYER_MAP) != MAPSECTYPE_ROUTE && GetSelectedMapsecType(LAYER_MAP) != MAPSECTYPE_NONE) 
+        if ((GetSelectedMapsecType(LAYER_MAP) != MAPSECTYPE_ROUTE && GetSelectedMapsecType(LAYER_MAP) != MAPSECTYPE_NONE)
          || (GetSelectedMapsecType(LAYER_DUNGEON) != MAPSECTYPE_ROUTE && GetSelectedMapsecType(LAYER_DUNGEON) != MAPSECTYPE_NONE))
             PlaySE(SE_DEX_SCROLL);
         if (GetMapCursorX() == SWITCH_BUTTON_X && GetMapCursorY() == SWITCH_BUTTON_Y && GetRegionMapPermission(MAPPERM_HAS_SWITCH_BUTTON) == TRUE)
@@ -1463,7 +1469,7 @@ static void DisplayCurrentDungeonName(void)
     mapsecId = GetDungeonMapsecUnderCursor();
     if (mapsecId != MAPSEC_NONE)
     {
-         descOffset = mapsecId - KANTO_MAPSEC_START;
+         descOffset = mapsecId;
          SetDispCnt(1, FALSE);
          sRegionMap->dungeonWinTop = TRUE;
          sRegionMap->dungeonWinLeft = StringLength(gRegionMapEntries[descOffset].name);
@@ -2779,14 +2785,14 @@ static u8 HandleRegionMapInput(void)
     if (JOY_NEW(A_BUTTON))
     {
         input = MAP_INPUT_A_BUTTON;
-        if (sMapCursor->x == CANCEL_BUTTON_X 
+        if (sMapCursor->x == CANCEL_BUTTON_X
          && sMapCursor->y == CANCEL_BUTTON_Y)
         {
             PlaySE(SE_M_HYPER_BEAM2);
             input = MAP_INPUT_CANCEL;
         }
-        if (sMapCursor->x == SWITCH_BUTTON_X 
-         && sMapCursor->y == SWITCH_BUTTON_Y 
+        if (sMapCursor->x == SWITCH_BUTTON_X
+         && sMapCursor->y == SWITCH_BUTTON_Y
          && GetRegionMapPermission(MAPPERM_HAS_SWITCH_BUTTON) == TRUE)
         {
             PlaySE(SE_M_HYPER_BEAM2);
@@ -2982,6 +2988,8 @@ static u8 GetMapsecType(u8 mapsec)
         return FlagGet(FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
     case MAPSEC_ROUTE_10_POKECENTER:
         return FlagGet(FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
+    case MAPSEC_BATTLE_FRONTIER:
+        return FlagGet(FLAG_WORLD_MAP_BATTLE_FRONTIER) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
     case MAPSEC_NONE:
         return MAPSECTYPE_NONE;
     default:
@@ -3057,6 +3065,8 @@ static u8 GetDungeonMapsecType(u8 mapsec)
         return FlagGet(FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
     case MAPSEC_BIRTH_ISLAND_FRLG:
         return FlagGet(FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
+    case MAPSEC_ARTISAN_CAVE:
+        return FlagGet(FLAG_WORLD_ARTISAN_CAVE) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
     default:
         return MAPSECTYPE_ROUTE;
     }
@@ -3141,7 +3151,6 @@ static void GetPlayerPositionOnRegionMap(void)
         break;
     }
 
-    sMapCursor->selectedMapsec -= KANTO_MAPSEC_START;
     divisor = width / gRegionMapEntries[sMapCursor->selectedMapsec].width;
     if (divisor == 0)
         divisor = 1;
@@ -3555,6 +3564,7 @@ static void CreateFlyIcons(void)
                 {
                     if (GetMapsecType(GetSelectedMapSection(i, LAYER_MAP, y, x)) == MAPSECTYPE_VISITED)
                     {
+                        DebugPrintfLevel(MGBA_LOG_ERROR, "Creating fly icon for map %d, x %d, y %d", i, x, y);
                         CreateFlyIconSprite(i, numIcons, x, y, numIcons + 10, 10);
                         numIcons++;
                     }
@@ -3788,13 +3798,13 @@ u8 *GetMapName(u8 *dst0, u16 mapsec, u16 fill)
 {
     u8 *dst;
     u16 i;
-    u16 idx;
-    if ((idx = mapsec - KANTO_MAPSEC_START) < MAPSEC_NONE - KANTO_MAPSEC_START)
+
+    if (mapsec < MAPSEC_NONE)
     {
         if (IsCeladonDeptStoreMapsec(mapsec) == TRUE)
             dst = StringCopy(dst0, sMapName_CELADON_DEPT_);
         else
-            dst = StringCopy(dst0, gRegionMapEntries[idx].name);
+            dst = StringCopy(dst0, gRegionMapEntries[mapsec].name);
     }
     else
     {
@@ -3929,7 +3939,7 @@ static void Task_FlyMap(u8 taskId)
                 PlaySE(SE_M_SPIT_UP);
                 PrintTopBarTextRight(gText_RegionMap_AButtonCancel);
             }
-            else if (GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_VISITED || GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_UNKNOWN)
+            else if (GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_VISITED || GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_BATTLE_FRONTIER)
             {
                 PrintTopBarTextRight(gText_RegionMap_AButtonOK);
             }
@@ -3939,7 +3949,7 @@ static void Task_FlyMap(u8 taskId)
             }
             break;
         case MAP_INPUT_A_BUTTON:
-            if ((GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_VISITED || GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_UNKNOWN) && GetRegionMapPermission(MAPPERM_HAS_FLY_DESTINATIONS) == TRUE)
+            if ((GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_VISITED || GetSelectedMapsecType(LAYER_MAP) == MAPSECTYPE_BATTLE_FRONTIER) && GetRegionMapPermission(MAPPERM_HAS_FLY_DESTINATIONS) == TRUE)
             {
                 switch (GetMapTypeByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
                 {
@@ -4008,7 +4018,7 @@ static void FreeFlyMap(u8 taskId)
 
 static void SetFlyWarpDestination(u16 mapsec)
 {
-    u16 idx = mapsec - KANTO_MAPSEC_START;
+    u16 idx = mapsec;
     if (sMapFlyDestinations[idx][2])
     {
         SetWarpDestinationToHealLocation(sMapFlyDestinations[idx][2]);

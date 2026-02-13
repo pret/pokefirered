@@ -189,23 +189,23 @@
 #define FLAG_HIDE_MISC_KANTO_ROCKETS                       0x0AD
 #define FLAG_HIDE_SAFFRON_CITY_POKECENTER_SABRINA_JOURNALS 0x0AE
 
-// Unused?
-#define FLAG_0x0AF               0x0AF
-#define FLAG_0x0B0               0x0B0
-#define FLAG_0x0B1               0x0B1
-#define FLAG_0x0B2               0x0B2
-#define FLAG_0x0B3               0x0B3
-#define FLAG_0x0B4               0x0B4
-#define FLAG_0x0B5               0x0B5
-#define FLAG_0x0B6               0x0B6
-#define FLAG_0x0B7               0x0B7
-#define FLAG_0x0B8               0x0B8
-#define FLAG_0x0B9               0x0B9
-#define FLAG_0x0BA               0x0BA
-#define FLAG_0x0BB               0x0BB
-#define FLAG_0x0BC               0x0BC
-#define FLAG_0x0BD               0x0BD
-#define FLAG_0x0BE               0x0BE
+// Frontier flags
+#define FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO                 0x0AF
+#define FLAG_DEFEATED_SUDOWOODO                             0x0B0
+#define FLAG_SYS_CTRL_OBJ_DELETE                            0x0B1
+#define FLAG_HIDE_BATTLE_TOWER_REPORTER                     0x0B2
+#define FLAG_HIDE_APPRENTICE                                0x0B3
+#define FLAG_HIDE_BATTLE_TOWER_OPPONENT                     0x0B4
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_1       0x0B5
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_2       0x0B6
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_3       0x0B7
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_4       0x0B8
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_5       0x0B9
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_6       0x0BA
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_1   0x0BB
+#define FLAG_HIDE_BATTLE_TOWER_MULTI_BATTLE_PARTNER_ALT_2   0x0BC
+#define FLAG_HIDE_BATTLE_FRONTIER_RECEPTION_GATE_SCOTT      0x0BD
+#define FLAG_CANCEL_BATTLE_ROOM_CHALLENGE                   0x0BE
 #define FLAG_0x0BF               0x0BF
 #define FLAG_0x0C0               0x0C0
 #define FLAG_0x0C1               0x0C1
@@ -530,8 +530,8 @@
 #define FLAG_HIDE_SILPH_CO_4F_TM41                              0x1FE
 
 // Unused?
-#define FLAG_0x1FF               0x1FF
-#define FLAG_0x200               0x200
+#define FLAG_ITEM_ARTISAN_CAVE_1F_CARBOS                        0x1FF
+#define FLAG_ITEM_ARTISAN_CAVE_B1F_HP_UP                        0x200
 #define FLAG_0x201               0x201
 #define FLAG_0x202               0x202
 #define FLAG_0x203               0x203
@@ -794,18 +794,18 @@
 #define FLAG_OAKS_RATING_IS_VIA_PC                       0x2FF
 
 // Unused?
-#define FLAG_0x300               0x300
-#define FLAG_0x301               0x301
-#define FLAG_0x302               0x302
-#define FLAG_0x303               0x303
-#define FLAG_0x304               0x304
-#define FLAG_0x305               0x305
-#define FLAG_0x306               0x306
-#define FLAG_0x307               0x307
-#define FLAG_0x308               0x308
-#define FLAG_0x309               0x309
-#define FLAG_0x30A               0x30A
-#define FLAG_0x30B               0x30B
+#define FLAG_MET_BATTLE_FRONTIER_BREEDER                 0x300
+#define FLAG_MET_BATTLE_FRONTIER_MANIAC                  0x301
+#define FLAG_MET_BATTLE_FRONTIER_GAMBLER                 0x302
+#define FLAG_BATTLE_FRONTIER_TRADE_DONE                  0x303
+#define FLAG_MET_FRONTIER_BEAUTY_MOVE_TUTOR              0x304
+#define FLAG_MET_FRONTIER_SWIMMER_MOVE_TUTOR             0x305
+#define FLAG_SCOTT_GIVES_BATTLE_POINTS                   0x306
+#define FLAG_COLLECTED_ALL_SILVER_SYMBOLS                0x307
+#define FLAG_COLLECTED_ALL_GOLD_SYMBOLS                  0x308
+#define FLAG_RECEIVED_SILVER_SHIELD                      0x309
+#define FLAG_RECEIVED_GOLD_SHIELD                        0x30A
+#define FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER             0x30B
 #define FLAG_0x30C               0x30C
 #define FLAG_0x30D               0x30D
 #define FLAG_0x30E               0x30E
@@ -941,7 +941,7 @@
 
 #define DAILY_FLAGS_START                           (FLAG_0x38F + (8 - FLAG_0x38F % 8))
 
-#define FLAG_0x390               0x390
+#define FLAG_DAILY_APPRENTICE_LEAVES               0x390
 #define FLAG_0x391               0x391
 #define FLAG_0x392               0x392
 #define FLAG_0x393               0x393
@@ -1226,12 +1226,12 @@
 #define FLAG_HIDDEN_ITEM_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE_RAWST_BERRY  (FLAG_HIDDEN_ITEMS_START + 188)
 #define FLAG_HIDDEN_ITEM_VIRIDIAN_CITY_GYM_MACHO_BRACE                     (FLAG_HIDDEN_ITEMS_START + 189)
 #define FLAG_HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE                       (FLAG_HIDDEN_ITEMS_START + 190)
-
+// battle frontier
+#define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_ZINC                             (FLAG_HIDDEN_ITEMS_START + 191)
+#define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_CALCIUM                          (FLAG_HIDDEN_ITEMS_START + 192)
+#define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_PROTEIN                          (FLAG_HIDDEN_ITEMS_START + 193)
+#define FLAG_HIDDEN_ITEM_ARTISAN_CAVE_B1F_IRON                             (FLAG_HIDDEN_ITEMS_START + 194)
 // Unused hidden item flags
-#define FLAG_UNUSED_0x4A7               0x4A7 // Unused Flag
-#define FLAG_UNUSED_0x4A8               0x4A8 // Unused Flag
-#define FLAG_UNUSED_0x4A9               0x4A9 // Unused Flag
-#define FLAG_UNUSED_0x4AA               0x4AA // Unused Flag
 #define FLAG_UNUSED_0x4AB               0x4AB // Unused Flag
 #define FLAG_UNUSED_0x4AC               0x4AC // Unused Flag
 #define FLAG_UNUSED_0x4AD               0x4AD // Unused Flag
@@ -1467,26 +1467,26 @@
 #define FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY       (SYS_FLAGS + 0xC1)
 #define FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR                        (SYS_FLAGS + 0xC2)
 
-#define FLAG_0x8C3                                                  (SYS_FLAGS + 0xC3)
-#define FLAG_0x8C4                                                  (SYS_FLAGS + 0xC4)
+#define FLAG_WORLD_MAP_BATTLE_FRONTIER                              (SYS_FLAGS + 0xC3)
+#define FLAG_WORLD_ARTISAN_CAVE                                     (SYS_FLAGS + 0xC4)
 #define FLAG_0x8C5                                                  (SYS_FLAGS + 0xC5)
 #define FLAG_0x8C6                                                  (SYS_FLAGS + 0xC6)
 #define FLAG_0x8C7                                                  (SYS_FLAGS + 0xC7)
-#define FLAG_0x8C8                                                  (SYS_FLAGS + 0xC8)
-#define FLAG_0x8C9                                                  (SYS_FLAGS + 0xC9)
-#define FLAG_0x8CA                                                  (SYS_FLAGS + 0xCA)
-#define FLAG_0x8CB                                                  (SYS_FLAGS + 0xCB)
-#define FLAG_0x8CC                                                  (SYS_FLAGS + 0xCC)
-#define FLAG_0x8CD                                                  (SYS_FLAGS + 0xCD)
-#define FLAG_0x8CE                                                  (SYS_FLAGS + 0xCE)
-#define FLAG_0x8CF                                                  (SYS_FLAGS + 0xCF)
-#define FLAG_0x8D0                                                  (SYS_FLAGS + 0xD0)
-#define FLAG_0x8D1                                                  (SYS_FLAGS + 0xD1)
-#define FLAG_0x8D2                                                  (SYS_FLAGS + 0xD2)
-#define FLAG_0x8D3                                                  (SYS_FLAGS + 0xD3)
-#define FLAG_0x8D4                                                  (SYS_FLAGS + 0xD4)
-#define FLAG_0x8D5                                                  (SYS_FLAGS + 0xD5)
-#define FLAG_0x8D6                                                  (SYS_FLAGS + 0xD6)
+#define FLAG_SYS_TOWER_SILVER                                       (SYS_FLAGS + 0xC8)
+#define FLAG_SYS_TOWER_GOLD                                         (SYS_FLAGS + 0xC9)
+#define FLAG_SYS_DOME_SILVER                                        (SYS_FLAGS + 0xCA)
+#define FLAG_SYS_DOME_GOLD                                          (SYS_FLAGS + 0xCB)
+#define FLAG_SYS_PALACE_SILVER                                      (SYS_FLAGS + 0xCC)
+#define FLAG_SYS_PALACE_GOLD                                        (SYS_FLAGS + 0xCD)
+#define FLAG_SYS_ARENA_SILVER                                       (SYS_FLAGS + 0xCE)
+#define FLAG_SYS_ARENA_GOLD                                         (SYS_FLAGS + 0xCF)
+#define FLAG_SYS_FACTORY_SILVER                                     (SYS_FLAGS + 0xD0)
+#define FLAG_SYS_FACTORY_GOLD                                       (SYS_FLAGS + 0xD1)
+#define FLAG_SYS_PIKE_SILVER                                        (SYS_FLAGS + 0xD2)
+#define FLAG_SYS_PIKE_GOLD                                          (SYS_FLAGS + 0xD3)
+#define FLAG_SYS_PYRAMID_SILVER                                     (SYS_FLAGS + 0xD4)
+#define FLAG_SYS_PYRAMID_GOLD                                       (SYS_FLAGS + 0xD5)
+#define FLAG_SYS_FRONTIER_PASS                                      (SYS_FLAGS + 0xD6)
 #define FLAG_0x8D7                                                  (SYS_FLAGS + 0xD7)
 #define FLAG_0x8D8                                                  (SYS_FLAGS + 0xD8)
 #define FLAG_0x8D9                                                  (SYS_FLAGS + 0xD9)
@@ -1535,9 +1535,9 @@
 #define SPECIAL_FLAGS_START           0x4000
 #define FLAG_DONT_SHOW_MAP_NAME_POPUP (SPECIAL_FLAGS_START + 0x0)
 #define FLAG_DONT_TRANSITION_MUSIC    (SPECIAL_FLAGS_START + 0x1)
-#define FLAG_SPECIAL_FLAG_UNUSED_0x4002         (SPECIAL_FLAGS_START + 0x2) // Unused Flag
+#define FLAG_ENABLE_MULTI_CORRIDOR_DOOR         (SPECIAL_FLAGS_START + 0x2) // Unused Flag
 #define FLAG_SPECIAL_FLAG_UNUSED_0x4003         (SPECIAL_FLAGS_START + 0x3) // Unused Flag
-#define FLAG_SPECIAL_FLAG_UNUSED_0x4004         (SPECIAL_FLAGS_START + 0x4) // Unused Flag
+#define FLAG_STORING_ITEMS_IN_PYRAMID_BAG       (SPECIAL_FLAGS_START + 0x4) // Unused Flag
 #define FLAG_SAFE_FOLLOWER_MOVEMENT             (SPECIAL_FLAGS_START + 0x5) // When set, applymovement does not put the follower inside a pokeball
 // FLAG_SPECIAL_FLAG_0x4002 - 0x407F also exist and are unused
 #define SPECIAL_FLAGS_END             (SPECIAL_FLAGS_START + 0x7F)

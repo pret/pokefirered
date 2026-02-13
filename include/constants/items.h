@@ -1057,7 +1057,7 @@ enum __attribute__((packed)) Item
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
 // Its icon is defined at ITEMS_COUNT as the "return to field" arrow
-#define ITEM_LIST_END 0xFFFF
+#define ITEM_LIST_END ITEM_FIELD_ARROW
 
 #if B_CONFUSE_BERRIES_HEAL >= GEN_8
     #define CONFUSE_BERRY_HEAL_FRACTION 3
@@ -1117,13 +1117,16 @@ enum __attribute__((packed)) Item
 #define EXP_30000 5
 
 // Item type IDs (used to determine the exit callback)
-#define ITEM_USE_MAIL             0
-#define ITEM_USE_PARTY_MENU       1
-#define ITEM_USE_FIELD            2
-#define ITEM_USE_UNUSED           3
-#define ITEM_USE_BAG_MENU         4 // No exit callback, stays in bag menu
-#define ITEM_USE_PARTY_MENU_MOVES 5
-#define ITEM_USE_BATTLER          6 // Auto-select in Singles but lets you choose from party menu in Doubles
+enum ItemType
+{
+    ITEM_USE_MAIL,
+    ITEM_USE_PARTY_MENU,
+    ITEM_USE_FIELD,
+    ITEM_USE_UNUSED,
+    ITEM_USE_BAG_MENU,          // No exit callback, stays in bag menu
+    ITEM_USE_PARTY_MENU_MOVES,
+    ITEM_USE_BATTLER,           // Auto-select in Singles but lets you choose from party menu in Doubles
+};
 
 // Item battle script IDs (need to be non-zero)
 #define EFFECT_ITEM_RESTORE_HP              1

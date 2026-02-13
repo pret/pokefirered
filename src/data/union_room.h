@@ -21,7 +21,9 @@ static const u8 *const sLinkGroupActivityNameTexts[] = {
     [ACTIVITY_NPCTALK]         = gText_UR_EmptyString,
     [ACTIVITY_PLYRTALK]        = gText_UR_EmptyString,
     [ACTIVITY_WONDER_CARD]     = gText_UR_WonderCards,
-    [ACTIVITY_WONDER_NEWS]     = gText_UR_WonderNews
+    [ACTIVITY_WONDER_NEWS]     = gText_UR_WonderNews,
+    [ACTIVITY_BATTLE_TOWER]      = COMPOUND_STRING("BATTLE TOWER LV. 50"),
+    [ACTIVITY_BATTLE_TOWER_OPEN] = COMPOUND_STRING("BATTLE TOWER OPEN LEVEL"),
 };
 
 static const struct WindowTemplate sWindowTemplate_BButtonCancel = {
@@ -50,7 +52,9 @@ static const u32 sLinkGroupToActivityAndCapacity[] = {
     [LINK_GROUP_BERRY_CRUSH]   = ACTIVITY_BERRY_CRUSH       | LINK_GROUP_CAPACITY(2, 5),
     [LINK_GROUP_BERRY_PICKING] = ACTIVITY_BERRY_PICK        | LINK_GROUP_CAPACITY(3, 5),
     [LINK_GROUP_WONDER_CARD]   = ACTIVITY_SPIN_TRADE        | LINK_GROUP_CAPACITY(3, 5),
-    [LINK_GROUP_WONDER_NEWS]   = ACTIVITY_ITEM_TRADE        | LINK_GROUP_CAPACITY(3, 5)
+    [LINK_GROUP_WONDER_NEWS]   = ACTIVITY_ITEM_TRADE        | LINK_GROUP_CAPACITY(3, 5),
+    [LINK_GROUP_BATTLE_TOWER]      = ACTIVITY_BATTLE_TOWER      | LINK_GROUP_CAPACITY(0, 2),
+    [LINK_GROUP_BATTLE_TOWER_OPEN] = ACTIVITY_BATTLE_TOWER_OPEN | LINK_GROUP_CAPACITY(0, 2)
 };
 
 static const struct WindowTemplate sWindowTemplate_List_PossibleGroupMembers = {
@@ -440,6 +444,9 @@ ALIGNED(4) static const u8 sAcceptedActivityIds_Unk12[] = {
     0xFF
 };
 
+ALIGNED(4) static const u8 sAcceptedActivityIds_BattleTower[]     = {ACTIVITY_BATTLE_TOWER, 0xff};
+ALIGNED(4) static const u8 sAcceptedActivityIds_BattleTowerOpen[] = {ACTIVITY_BATTLE_TOWER_OPEN, 0xff};
+
 static const u8 *const sAcceptedActivityIds[NUM_LINK_GROUP_TYPES] = {
     [LINK_GROUP_SINGLE_BATTLE]     = sAcceptedActivityIds_SingleBattle,
     [LINK_GROUP_DOUBLE_BATTLE]     = sAcceptedActivityIds_DoubleBattle,
@@ -454,6 +461,8 @@ static const u8 *const sAcceptedActivityIds[NUM_LINK_GROUP_TYPES] = {
     [LINK_GROUP_UNION_ROOM_INIT]   = sAcceptedActivityIds_Init,
     [LINK_GROUP_UNK_11]            = sAcceptedActivityIds_Unk11,
     [LINK_GROUP_UNK_12]            = sAcceptedActivityIds_Unk12,
+    [LINK_GROUP_BATTLE_TOWER]      = sAcceptedActivityIds_BattleTower,
+    [LINK_GROUP_BATTLE_TOWER_OPEN] = sAcceptedActivityIds_BattleTowerOpen
 };
 
 static const u8 sLinkGroupToURoomActivity[] = {
@@ -465,7 +474,9 @@ static const u8 sLinkGroupToURoomActivity[] = {
     [LINK_GROUP_BERRY_CRUSH]   = ACTIVITY_BERRY_CRUSH,
     [LINK_GROUP_BERRY_PICKING] = ACTIVITY_BERRY_PICK,
     [LINK_GROUP_WONDER_CARD]   = ACTIVITY_WONDER_CARD,
-    [LINK_GROUP_WONDER_NEWS]   = ACTIVITY_WONDER_NEWS
+    [LINK_GROUP_WONDER_NEWS]   = ACTIVITY_WONDER_NEWS,
+    [LINK_GROUP_BATTLE_TOWER]      = ACTIVITY_BATTLE_TOWER,
+    [LINK_GROUP_BATTLE_TOWER_OPEN] = ACTIVITY_BATTLE_TOWER_OPEN
 };
 
 // Unused

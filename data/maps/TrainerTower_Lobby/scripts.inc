@@ -65,9 +65,9 @@ TrainerTower_Lobby_EventScript_Enter::
 	setvar VAR_TEMP_0, 1
 	ttower_getchallengestatus
 	switch VAR_RESULT
-	case CHALLENGE_STATUS_LOST, TrainerTower_Lobby_EventScript_LostChallenge
-	case CHALLENGE_STATUS_UNK, TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist
-	case CHALLENGE_STATUS_NORMAL, TrainerTower_Lobby_EventScript_EnterEnd
+	case TT_CHALLENGE_STATUS_LOST, TrainerTower_Lobby_EventScript_LostChallenge
+	case TT_CHALLENGE_STATUS_UNK, TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist
+	case TT_CHALLENGE_STATUS_NORMAL, TrainerTower_Lobby_EventScript_EnterEnd
 
 TrainerTower_Lobby_EventScript_LostChallenge::
 	lock

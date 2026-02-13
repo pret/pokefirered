@@ -144,5 +144,6 @@ bool8 MetatileBehavior_IsSidewaysStairsRightSideBottom(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSidewaysStairsLeftSideBottom(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSidewaysStairsRightSideAny(u8 metatileBehavior);
 bool8 MetatileBehavior_IsSidewaysStairsLeftSideAny(u8 metatileBehavior);
+bool8 MetatileBehavior_IsBattlePyramidWarp(u8 metatileBehavior);
 
 #endif // GUARD_METATILE_BEHAVIOR

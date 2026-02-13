@@ -36,7 +36,6 @@ static void DrawNumObjsMinusInFront(struct DigitPrinter *objWork, s32 num, bool3
 static void DrawNumObjsMinusInBack(struct DigitPrinter *objWork, s32 num, bool32 sign);
 static bool32 SharesTileWithAnyActive(u32 id);
 static bool32 SharesPalWithAnyActive(u32 id);
-static u8 GetTilesPerImage(u32 shape, u32 size);
 
 // ewram
 static EWRAM_DATA struct DigitPrinterAlloc *sOamWork = {0};
@@ -445,7 +444,7 @@ static bool32 SharesPalWithAnyActive(u32 id)
     return FALSE;
 }
 
-static u8 GetTilesPerImage(u32 shape, u32 size)
+u8 GetTilesPerImage(u32 shape, u32 size)
 {
     return 1 << GetSpanPerImage(shape, size);
 }

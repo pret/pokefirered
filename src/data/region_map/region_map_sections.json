@@ -175,7 +175,12 @@
       "id": "MAPSEC_SAFARI_ZONE"
     },
     {
-      "id": "MAPSEC_BATTLE_FRONTIER"
+      "id": "MAPSEC_BATTLE_FRONTIER",
+      "name": "BATTLE FRONTIER",
+      "x": 9,
+      "y": 10,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_PETALBURG_WOODS"
@@ -262,7 +267,12 @@
       "id": "MAPSEC_SECRET_BASE"
     },
     {
-      "id": "MAPSEC_DYNAMIC"
+      "id": "MAPSEC_DYNAMIC",
+      "name": "",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
     },
     {
       "id": "MAPSEC_PALLET_TOWN",
@@ -355,7 +365,6 @@
     {
       "id": "MAPSEC_ROUTE_4_POKECENTER",
       "name": "ROUTE 4",
-      "name_clone": true,
       "x": 8,
       "y": 3,
       "width": 1,
@@ -364,7 +373,6 @@
     {
       "id": "MAPSEC_ROUTE_10_POKECENTER",
       "name": "ROUTE 10",
-      "name_clone": true,
       "x": 18,
       "y": 3,
       "width": 1,
@@ -605,7 +613,6 @@
     {
       "id": "MAPSEC_UNDERGROUND_PATH_2",
       "name": "UNDERGROUND PATH",
-      "name_clone": true,
       "x": 12,
       "y": 6,
       "width": 1,
@@ -998,7 +1005,6 @@
     {
       "id": "MAPSEC_TRAINER_TOWER_2",
       "name": "TRAINER TOWER",
-      "name_clone": true,
       "x": 5,
       "y": 6,
       "width": 1,
@@ -1139,6 +1145,14 @@
       "y": 0,
       "width": 0,
       "height": 0
+    },
+    {
+      "id": "MAPSEC_ARTISAN_CAVE",
+      "name": "ARTISAN CAVE",
+      "x": 9,
+      "y": 10,
+      "width": 1,
+      "height": 1
     }
   ]
 }

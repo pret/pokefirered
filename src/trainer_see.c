@@ -1,7 +1,9 @@
 #include "global.h"
+#include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "event_scripts.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "follower_npc.h"
@@ -11,6 +13,7 @@
 #include "task.h"
 #include "trainer_see.h"
 #include "util.h"
+#include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
@@ -140,15 +143,15 @@ bool8 CheckForTrainersWantingBattle(void)
             continue;
 
         numTrainers = CheckTrainer(i);
-        // if (numTrainers == 0xFF) // non-trainerbatle script
-        // {
-        //     u32 objectEventId = gApproachingTrainers[gNoOfApproachingTrainers - 1].objectEventId;
-        //     gSelectedObjectEvent = objectEventId;
-        //     gSpecialVar_LastTalked = gObjectEvents[objectEventId].localId;
-        //     ScriptContext_SetupScript(EventScript_ObjectApproachPlayer);
-        //     LockPlayerFieldControls();
-        //     return TRUE;
-        // }
+        if (numTrainers == 0xFF) // non-trainerbatle script
+        {
+            u32 objectEventId = gApproachingTrainers[gNoOfApproachingTrainers - 1].objectEventId;
+            gSelectedObjectEvent = objectEventId;
+            gSpecialVar_LastTalked = gObjectEvents[objectEventId].localId;
+            ScriptContext_SetupScript(EventScript_ObjectApproachPlayer);
+            LockPlayerFieldControls();
+            return TRUE;
+        }
 
         if (numTrainers == 2)
             break;
@@ -160,6 +163,32 @@ bool8 CheckForTrainersWantingBattle(void)
             break;
         if (GetMonsStateToDoubles_2() != PLAYER_HAS_TWO_USABLE_MONS) // one trainer found and cant have a double battle
             break;
+    }
+
+    if (InBattlePyramid_())
+    {
+        u8 facility = FACILITY_BATTLE_PYRAMID;
+
+        if (gNoOfApproachingTrainers > 0)
+        {
+            ResetTrainerOpponentIds();
+            InitTrainerBattleParameter();
+
+            gSelectedObjectEvent = gApproachingTrainers[0].objectEventId;
+            gSpecialVar_LastTalked = gObjectEvents[gApproachingTrainers[0].objectEventId].localId;
+            BattleSetup_ConfigureFacilityTrainerBattle(facility, gApproachingTrainers[0].trainerScriptPtr + 2);
+            if (gNoOfApproachingTrainers > 1)
+            {
+                gApproachingTrainerId++;
+                gSelectedObjectEvent = gApproachingTrainers[1].objectEventId;
+                gSpecialVar_LastTalked = gObjectEvents[gApproachingTrainers[1].objectEventId].localId;
+                BattleSetup_ConfigureFacilityTrainerBattle(facility, gApproachingTrainers[0].trainerScriptPtr + 2);
+                gApproachingTrainerId = 0;
+            }
+            ScriptContext_SetupScript(EventScript_StartTrainerApproach);
+            LockPlayerFieldControls();
+            return TRUE;
+        }
     }
 
     if (gNoOfApproachingTrainers == 1)
@@ -213,7 +242,12 @@ static u8 CheckTrainer(u8 objectEventId)
         return 0; // no effect
     }
 
-    if (trainerBattlePtr)
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+    {
+        if (GetBattlePyramidTrainerFlag(objectEventId))
+            return 0;
+    }
+    else if (trainerBattlePtr)
     {
         if (GetTrainerFlagFromScriptPointer(trainerBattlePtr))
             return 0;
@@ -668,7 +702,7 @@ void MovementAction_RevealTrainer_RunTrainerSeeFuncList(struct ObjectEvent *var)
     StoreWordInTwoHalfwords((u16 *)&gTasks[CreateTask(Task_RevealTrainer_RunTrainerSeeFuncList, 0)].data[1], (u32)var);
 }
 
-void EndTrainerApproach(void)
+void DoTrainerApproach(void)
 {
     StartTrainerApproach(Task_DestroyTrainerApproachTask);
 }

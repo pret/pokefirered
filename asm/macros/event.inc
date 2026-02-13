@@ -56,16 +56,15 @@
 	@ Callstd ids
 	STD_OBTAIN_ITEM = 0
 	STD_FIND_ITEM = 1
-
 	MSGBOX_NPC = 2
 	MSGBOX_SIGN = 3
 	MSGBOX_DEFAULT = 4
 	MSGBOX_YESNO = 5
 	MSGBOX_AUTOCLOSE = 6
-
 	STD_OBTAIN_DECORATION = 7
 	STD_PUT_ITEM_AWAY = 8
 	STD_RECEIVED_ITEM = 9
+	MSGBOX_GETPOINTS = 10
 
 	@ Calls the script in gStdScripts at index function.
 	.macro callstd function:req
@@ -686,6 +685,14 @@
 	.byte SCR_OP_HIDEOBJECTAT
 	.2byte \localId
 	map \map
+	.endm
+
+	@ Set the player object's invisibility to TRUE.
+	.macro hideplayer
+	.byte SCR_OP_HIDEOBJECTAT
+	.2byte LOCALID_PLAYER
+	.byte 0 @ map group
+	.byte 0 @ map num
 	.endm
 
 	@ Turns the currently selected object (if there is one) to face the player.
@@ -1977,6 +1984,12 @@
 	callstd STD_PUT_ITEM_AWAY
 	.endm
 
+	@ Equivalent to giveitem but for a single decoration.
+	.macro givedecoration decoration:req
+	setorcopyvar VAR_0x8000, \decoration
+	callstd STD_OBTAIN_DECORATION
+	.endm
+
 	@ Prints the provided message after playing the fanfare music (can only be MUS_LEVEL_UP or MUS_OBTAIN_KEY_ITEM).
 	@ It then prints the message shown by using putitemaway.
 	.macro msgreceiveditem msg:req, item:req, amount=1, fanfare=MUS_LEVEL_UP
@@ -2282,6 +2295,11 @@
 	.2byte \rematchId
 	.endm
 
+	.macro chooseboxmon selectionType=SELECT_PC_MON_NORMAL
+	callnative ChooseBoxMon
+	.byte \selectionType
+	.endm
+
 @ Follower NPCs
 
 	@ Sets an existing NPC up to follow the player.
@@ -2374,4 +2392,41 @@
 	.macro setspeaker name:req
 	callnative SetSpeaker
 	.4byte \name
+	.endm
+
+	.macro setmultitrainerbattle trainer_a:req, lose_text_a:req, trainer_b:req, lose_text_b:req, partnerId:req
+	callnative SetMultiTrainerBattle
+	.2byte \trainer_a
+	.4byte \lose_text_a
+	.2byte \trainer_b
+	.4byte \lose_text_b
+	.2byte \partnerId
+	.endm
+
+	@ facility version of `trainerbattle` macro. Used in Battle Pyramid and Trainer Hill
+	.macro facilitytrainerbattle facility:req
+	callnative FacilityTrainerBattle
+	.byte \facility
+	.endm
+
+	@ immediately starts a battle of the given facility
+	.macro dofacilitytrainerbattle facility:req
+	callnative DoFacilityTrainerBattle
+	.byte \facility
+	.endm
+
+	.macro ingame_trade tradeId:req wantTradeMsg:req, declineTradeJump:req, wrongMonJump:req, tradeCompleteMsg:req
+	setvar VAR_0x8005, \tradeId
+	specialvar VAR_0x8009, GetInGameTradeSpeciesInfo
+	msgbox \wantTradeMsg, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, \declineTradeJump
+	chooseboxmon SELECT_PC_MON_TRADE
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, \declineTradeJump
+	specialvar VAR_0x800B, GetTradeSpecies
+	goto_if_ne VAR_0x800B, VAR_0x8009, \wrongMonJump
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
+	waitstate
+	msgbox \tradeCompleteMsg, MSGBOX_DEFAULT
 	.endm

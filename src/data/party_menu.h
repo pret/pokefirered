@@ -472,6 +472,17 @@ static const struct WindowTemplate sWhichMoveMsgWindowTemplate =
     .baseBlock = 0x299,
 };
 
+static const struct WindowTemplate sAlreadyHoldingOneMsgWindowTemplate =
+{
+    .bg = 2,
+    .tilemapLeft = 1,
+    .tilemapTop = 15,
+    .width = 21,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x299,
+};
+
 static const struct WindowTemplate sOrderWhichApplianceMsgWindowTemplate =
 {
     .bg = 2,
@@ -652,8 +663,7 @@ static const u8 *const sActionStringTable[] =
     [PARTY_MSG_NO_MON_FOR_BATTLE]      = gText_NoPokemonForBattle,
     [PARTY_MSG_CHOOSE_MON_2]           = gText_ChoosePokemon2,
     [PARTY_MSG_NOT_ENOUGH_HP]          = gText_NotEnoughHp,
-    [PARTY_MSG_THREE_MONS_ARE_NEEDED]  = gText_ThreePkmnAreNeeded,
-    [PARTY_MSG_TWO_MONS_ARE_NEEDED]    = gText_TwoPokemonAreNeeded,
+    [PARTY_MSG_X_MONS_ARE_NEEDED]      = gText_PokemonAreNeeded,
     [PARTY_MSG_MONS_CANT_BE_SAME]      = gText_PokemonCantBeSame,
     [PARTY_MSG_NO_SAME_HOLD_ITEMS]     = gText_NoIdenticalHoldItems,
     [PARTY_MSG_UNUSED]                 = gString_Dummy,
@@ -662,6 +672,7 @@ static const u8 *const sActionStringTable[] =
     [PARTY_MSG_BOOST_PP_WHICH_MOVE]    = gText_BoostPp,
     [PARTY_MSG_DO_WHAT_WITH_ITEM]      = gText_DoWhatWithItem,
     [PARTY_MSG_DO_WHAT_WITH_MAIL]      = gText_DoWhatWithMail,
+    [PARTY_MSG_ALREADY_HOLDING_ONE]    = gText_AlreadyHoldingOne,
     [PARTY_MSG_WHICH_APPLIANCE]        = gText_WhichAppliance,
     [PARTY_MSG_CHOOSE_SECOND_FUSION]   = gText_NextFusionMon,
     [PARTY_MSG_NO_POKEMON]             = COMPOUND_STRING("You have no POKéMON."),
@@ -1007,6 +1018,7 @@ enum
     CURSOR_OPTION_REGISTER,
     CURSOR_OPTION_TRADE1,
     CURSOR_OPTION_TRADE2,
+    MENU_TOSS,
     CURSOR_OPTION_CATALOG_BULB,
     CURSOR_OPTION_CATALOG_OVEN,
     CURSOR_OPTION_CATALOG_WASHING,
@@ -1028,7 +1040,7 @@ static struct
     [CURSOR_OPTION_SWITCH]                               = {gText_Switch2,                     CursorCB_Switch          },
     [CURSOR_OPTION_CANCEL1]                              = {gFameCheckerText_Cancel,           CursorCB_Cancel1         },
     [CURSOR_OPTION_ITEM]                                 = {gText_Item,                        CursorCB_Item            },
-    [CURSOR_OPTION_GIVE]                                 = {gOtherText_Give,                   CursorCB_Give            },
+    [CURSOR_OPTION_GIVE]                                 = {gMenuText_Give,                   CursorCB_Give            },
     [CURSOR_OPTION_TAKE_ITEM]                            = {gText_Take,                        CursorCB_TakeItem        },
     [CURSOR_OPTION_MAIL]                                 = {gText_Mail,                        CursorCB_Mail            },
     [CURSOR_OPTION_TAKE_MAIL]                            = {gText_Take2,                       CursorCB_TakeMail        },
@@ -1042,6 +1054,7 @@ static struct
     [CURSOR_OPTION_REGISTER]                             = {gText_Register,                    CursorCB_Register        },
     [CURSOR_OPTION_TRADE1]                               = {gText_Trade4,                      CursorCB_Trade1          },
     [CURSOR_OPTION_TRADE2]                               = {gText_Trade4,                      CursorCB_Trade2          },
+    [MENU_TOSS]                                          = {gMenuText_Toss,                    CursorCb_Toss},
     [CURSOR_OPTION_CATALOG_BULB]                         = {gText_LightBulb,                   CursorCB_CatalogBulb     },
     [CURSOR_OPTION_CATALOG_OVEN]                         = {gText_MicrowaveOven,               CursorCB_CatalogOven     },
     [CURSOR_OPTION_CATALOG_WASHING]                      = {gText_WashingMachine,              CursorCB_CatalogWashing  },
@@ -1064,6 +1077,7 @@ static const u8 sPartyMenuAction_ReadTakeMailCancel[]    = {CURSOR_OPTION_READ, 
 static const u8 sPartyMenuAction_RegisterSummaryCancel[] = {CURSOR_OPTION_REGISTER, CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
 static const u8 sPartyMenuAction_TradeSummaryCancel1[]   = {CURSOR_OPTION_TRADE1,   CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
 static const u8 sPartyMenuAction_TradeSummaryCancel2[]   = {CURSOR_OPTION_TRADE2,   CURSOR_OPTION_SUMMARY,   CURSOR_OPTION_CANCEL1};
+static const u8 sPartyMenuAction_TakeItemTossCancel[]    = {CURSOR_OPTION_TAKE_ITEM, MENU_TOSS, CURSOR_OPTION_CANCEL1};
 static const u8 sPartyMenuAction_RotomCatalog[]          = {CURSOR_OPTION_CATALOG_BULB, CURSOR_OPTION_CATALOG_OVEN, CURSOR_OPTION_CATALOG_WASHING, CURSOR_OPTION_CATALOG_FRIDGE, CURSOR_OPTION_CATALOG_FAN, CURSOR_OPTION_CATALOG_MOWER, CURSOR_OPTION_CANCEL1};
 static const u8 sPartyMenuAction_ZygardeCube[]           = {CURSOR_OPTION_CHANGE_FORM, CURSOR_OPTION_CHANGE_ABILITY, CURSOR_OPTION_CANCEL1};
 
@@ -1083,6 +1097,7 @@ enum
     ACTIONS_REGISTER,
     ACTIONS_TRADE,
     ACTIONS_SPIN_TRADE,
+    ACTIONS_TAKEITEM_TOSS,
     ACTIONS_ROTOM_CATALOG,
     ACTIONS_ZYGARDE_CUBE,
 };
@@ -1102,6 +1117,7 @@ static const u8 *const sPartyMenuActions[] =
     [ACTIONS_REGISTER]      = sPartyMenuAction_RegisterSummaryCancel,
     [ACTIONS_TRADE]         = sPartyMenuAction_TradeSummaryCancel1,
     [ACTIONS_SPIN_TRADE]    = sPartyMenuAction_TradeSummaryCancel2,
+    [ACTIONS_TAKEITEM_TOSS] = sPartyMenuAction_TakeItemTossCancel,
     [ACTIONS_ROTOM_CATALOG] = sPartyMenuAction_RotomCatalog,
     [ACTIONS_ZYGARDE_CUBE]  = sPartyMenuAction_ZygardeCube,
 };
@@ -1121,6 +1137,7 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_REGISTER]      = NELEMS(sPartyMenuAction_RegisterSummaryCancel),
     [ACTIONS_TRADE]         = NELEMS(sPartyMenuAction_TradeSummaryCancel1),
     [ACTIONS_SPIN_TRADE]    = NELEMS(sPartyMenuAction_TradeSummaryCancel2),
+    [ACTIONS_TAKEITEM_TOSS] = ARRAY_COUNT(sPartyMenuAction_TakeItemTossCancel),
     [ACTIONS_ROTOM_CATALOG] = NELEMS(sPartyMenuAction_RotomCatalog),
     [ACTIONS_ZYGARDE_CUBE]  = NELEMS(sPartyMenuAction_ZygardeCube),
 };

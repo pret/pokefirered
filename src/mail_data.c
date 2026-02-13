@@ -137,26 +137,36 @@ void ClearMailItemId(u8 mailId)
     gSaveBlock1Ptr->mail[mailId].itemId = ITEM_NONE;
 }
 
-u8 TakeMailFromMon2(struct Pokemon *mon)
+u8 SaveMailToPC(struct Mail *mail)
 {
-    u8 i, newMailId;
-    u8 newHeldItem[2];
-
-    newHeldItem[0] = ITEM_NONE;
-    newHeldItem[1] = ITEM_NONE << 8;
-    newMailId = 0xFF;
-    for (i = PARTY_SIZE; i < MAIL_COUNT; i++)
+    for (u32 i = PARTY_SIZE; i < MAIL_COUNT; i++)
     {
         if (gSaveBlock1Ptr->mail[i].itemId == ITEM_NONE)
         {
-            memcpy(&gSaveBlock1Ptr->mail[i], &gSaveBlock1Ptr->mail[GetMonData(mon, MON_DATA_MAIL)], sizeof(struct Mail));
-            gSaveBlock1Ptr->mail[GetMonData(mon, MON_DATA_MAIL)].itemId = ITEM_NONE;
-            SetMonData(mon, MON_DATA_MAIL, &newMailId);
-            SetMonData(mon, MON_DATA_HELD_ITEM, newHeldItem);
+            memcpy(&gSaveBlock1Ptr->mail[i], mail, sizeof(struct Mail));
             return i;
         }
     }
-    return 0xFF;
+    // No space to save mail
+    return MAIL_NONE;
+}
+
+u8 TakeMailFromMonAndSave(struct Pokemon *mon)
+{
+    u32 heldItem;
+    u32 mailId, newMailId;
+
+    mailId = GetMonData(mon, MON_DATA_MAIL);
+    newMailId = SaveMailToPC(&gSaveBlock1Ptr->mail[mailId]);
+    if (newMailId != MAIL_NONE)
+    {
+        gSaveBlock1Ptr->mail[mailId].itemId = ITEM_NONE;
+        mailId = MAIL_NONE;
+        SetMonData(mon, MON_DATA_MAIL, &mailId);
+        heldItem = ITEM_NONE;
+        SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
+    }
+    return newMailId;
 }
 
 bool8 ItemIsMail(u16 itemId)

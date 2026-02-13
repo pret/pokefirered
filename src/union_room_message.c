@@ -480,6 +480,8 @@ ALIGNED(4) static const u8 sText_ChooseTrainerToShareWonderNews[] = _("Please ch
 ALIGNED(4) static const u8 sText_ChooseLeaderPokemonJump[] = _("Jump with mini POKéMON!\nPlease choose the LEADER.");
 ALIGNED(4) static const u8 sText_ChooseLeaderBerryCrush[] = _("BERRY CRUSH!\nPlease choose the LEADER.");
 ALIGNED(4) static const u8 sText_ChooseLeaderBerryPicking[] = _("DODRIO BERRY-PICKING!\nPlease choose the LEADER.");
+ALIGNED(4) static const u8 sText_ChooseLeaderBattleTowerLv50[] = _("BATTLE TOWER LEVEL 50!\nPlease choose the LEADER.");
+ALIGNED(4) static const u8 sText_ChooseLeaderBattleTowerOpenLv[] = _("BATTLE TOWER OPEN LEVEL!\nPlease choose the LEADER.");
 
 const u8 *const gTexts_UR_ChooseTrainer[] = {
     [LINK_GROUP_SINGLE_BATTLE] = sText_ChooseTrainerSingleBattle,
@@ -490,7 +492,9 @@ const u8 *const gTexts_UR_ChooseTrainer[] = {
     [LINK_GROUP_BERRY_CRUSH]   = sText_ChooseLeaderBerryCrush,
     [LINK_GROUP_BERRY_PICKING] = sText_ChooseLeaderBerryPicking,
     [LINK_GROUP_WONDER_CARD]   = sText_ChooseTrainerToShareWonderCards,
-    [LINK_GROUP_WONDER_NEWS]   = sText_ChooseTrainerToShareWonderNews
+    [LINK_GROUP_WONDER_NEWS]   = sText_ChooseTrainerToShareWonderNews,
+    [LINK_GROUP_BATTLE_TOWER]      = sText_ChooseLeaderBattleTowerLv50,
+    [LINK_GROUP_BATTLE_TOWER_OPEN] = sText_ChooseLeaderBattleTowerOpenLv
 };
 
 ALIGNED(4) const u8 gText_UR_SearchingForWirelessSystemWait[] = _("Searching for a WIRELESS\nCOMMUNICATION SYSTEM. Wait...");

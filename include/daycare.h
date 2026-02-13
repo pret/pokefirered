@@ -4,6 +4,7 @@
 #include "constants/daycare.h"
 
 u8 *GetMonNick(struct Pokemon *mon, u8 *dest);
+u8 *DayCare_GetBoxMonNickname(struct BoxPokemon *mon, u8 *dest);
 u8 *GetBoxMonNick(struct BoxPokemon *mon, u8 *dest);
 u8 CountPokemonInDaycare(struct DayCare *daycare);
 void InitDaycareMailRecordMixing(struct DayCare *daycare, struct RecordMixingDayCareMail *daycareMail);

@@ -53,7 +53,7 @@ void DoSpecialTrainerBattle(void)
         ZeroEnemyPartyMons();
 
         for (u32 i = 0; i < 3; i++)
-            CreateBattleTowerMon(&gEnemyParty[i], &gSaveBlock2Ptr->ereaderTrainer.party[i]);
+            CreateBattleTowerMon(&gEnemyParty[i], &gSaveBlock2Ptr->frontier.ereaderTrainer.party[i]);
 
         gBattleTypeFlags = (BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER);
         TRAINER_BATTLE_PARAM.opponentA = 0;
@@ -120,7 +120,7 @@ static void BufferBattleTowerTrainerMessage(const u16 *greeting)
 void BufferEReaderTrainerGreeting(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
-    BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->ereaderTrainer.greeting);
+    BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
@@ -130,9 +130,9 @@ static void PrintEReaderTrainerFarewellMessage(void)
     if (gBattleOutcome == B_OUTCOME_DREW)
         gStringVar4[0] = EOS;
     else if (gBattleOutcome == B_OUTCOME_WON)
-        BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->ereaderTrainer.farewellPlayerWon);
+        BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerWon);
     else
-        BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->ereaderTrainer.farewellPlayerLost);
+        BufferBattleTowerTrainerMessage(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerLost);
 #endif //FREE_BATTLE_TOWER_E_READER
 }
 
@@ -153,7 +153,7 @@ void SetEReaderTrainerGfxId(void)
 u8 GetEreaderTrainerFrontSpriteId(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
-    return gFacilityClassToPicIndex[gSaveBlock2Ptr->ereaderTrainer.trainerClass];
+    return gFacilityClassToPicIndex[gSaveBlock2Ptr->frontier.ereaderTrainer.facilityClass];
 #else
     return 0;
 #endif //FREE_BATTLE_TOWER_E_READER
@@ -162,7 +162,7 @@ u8 GetEreaderTrainerFrontSpriteId(void)
 u8 GetEreaderTrainerClassId(void)
 {
 #if FREE_BATTLE_TOWER_E_READER == FALSE
-    return gFacilityClassToTrainerClass[gSaveBlock2Ptr->ereaderTrainer.trainerClass];
+    return gFacilityClassToTrainerClass[gSaveBlock2Ptr->frontier.ereaderTrainer.facilityClass];
 #else
     return 0;
 #endif //FREE_BATTLE_TOWER_E_READER
@@ -174,7 +174,7 @@ void CopyEReaderTrainerName5(u8 *trainerName)
     s32 i;
 
     for (i = 0; i < 5; i++)
-        trainerName[i] = gSaveBlock2Ptr->ereaderTrainer.name[i];
+        trainerName[i] = gSaveBlock2Ptr->frontier.ereaderTrainer.name[i];
 
     trainerName[i] = EOS;
 #else
@@ -191,7 +191,7 @@ void ValidateEReaderTrainer(void)
     struct BattleTowerEReaderTrainer *ereaderTrainer;
 
     gSpecialVar_Result = 0;
-    ereaderTrainer = &gSaveBlock2Ptr->ereaderTrainer;
+    ereaderTrainer = &gSaveBlock2Ptr->frontier.ereaderTrainer;
 
     checksum = 0;
     for (i = 0; i < sizeof(struct BattleTowerEReaderTrainer) / sizeof(u32) - 1; i++)
@@ -207,9 +207,9 @@ void ValidateEReaderTrainer(void)
     for (i = 0; i < sizeof(struct BattleTowerEReaderTrainer) / sizeof(u32) - 1; i++)
         checksum += ((u32 *)ereaderTrainer)[i];
 
-    if (gSaveBlock2Ptr->ereaderTrainer.checksum != checksum)
+    if (gSaveBlock2Ptr->frontier.ereaderTrainer.checksum != checksum)
     {
-        ClearEReaderTrainer(&gSaveBlock2Ptr->ereaderTrainer);
+        ClearEReaderTrainer(&gSaveBlock2Ptr->frontier.ereaderTrainer);
         gSpecialVar_Result = 1;
     }
 #else

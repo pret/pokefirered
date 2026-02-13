@@ -21,6 +21,7 @@ void DoLavaridgeGymB1FWarp(void);
 void DoLavaridgeGym1FWarp(void);
 void DoTeleportWarp(void);
 void DoUnionRoomWarp(void);
+void WriteBattlePyramidViewScanlineEffectBuffer(void);
 
 extern const s32 gMaxFlashLevel;
 

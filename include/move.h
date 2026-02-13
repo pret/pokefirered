@@ -3,22 +3,10 @@
 
 #include "contest_effect.h"
 #include "constants/battle.h"
-// #include "constants/battle_factory.h"
+#include "constants/battle_factory.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
 #include "constants/moves.h"
-
-enum FactoryStyle {
-    FACTORY_STYLE_NONE,
-    FACTORY_STYLE_PREPARATION,
-    FACTORY_STYLE_SLOW_STEADY,
-    FACTORY_STYLE_ENDURANCE,
-    FACTORY_STYLE_HIGH_RISK,
-    FACTORY_STYLE_WEAKENING,
-    FACTORY_STYLE_UNPREDICTABLE,
-    FACTORY_STYLE_WEATHER,
-    FACTORY_NUM_STYLES
-};
 
 // For defining EFFECT_HIT etc. with battle TV scores and flags etc.
 struct __attribute__((packed, aligned(2))) BattleMoveEffect

@@ -1136,6 +1136,8 @@ static const u16 sLocationFlags[] =
     FLAG_WORLD_MAP_SIX_ISLAND,
     FLAG_WORLD_MAP_ROUTE4_POKEMON_CENTER_1F,
     FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F,
+    FLAG_WORLD_MAP_BATTLE_FRONTIER,
+    FLAG_WORLD_ARTISAN_CAVE,
 };
 
 static u8 Debug_CheckToggleFlags(u8 id)
@@ -2157,7 +2159,7 @@ static void DebugAction_Trainers_TryBattle(u8 taskId)
         for (u32 i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
         {
             gSelectedOrderFromParty[i] = i + 1;
-            gSaveBlock2Ptr->selectedPartyMons[i] = gSelectedOrderFromParty[i];
+            gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
         }
         FillPartnerParty(gPartnerTrainerId);
     }
@@ -4439,7 +4441,7 @@ static void DebugAction_BerryFunctions_Ready(u8 taskId)
     {
         if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
-            tree = &gSaveBlock2Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            tree = &gSaveBlock3Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
             if (tree->stage != BERRY_STAGE_NO_BERRY)
             {
                 tree->stage = BERRY_STAGE_BERRIES - 1;
@@ -4461,7 +4463,7 @@ static void DebugAction_BerryFunctions_NextStage(u8 taskId)
     {
         if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
-            tree = &gSaveBlock2Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            tree = &gSaveBlock3Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
             BerryTreeGrow(tree);
         }
     }
@@ -4484,8 +4486,8 @@ static void DebugAction_BerryFunctions_Pests(u8 taskId)
     {
         if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
-            if (gSaveBlock2Ptr->berryTrees[GetObjectEventBerryTreeId(i)].stage != BERRY_STAGE_PLANTED)
-                gSaveBlock2Ptr->berryTrees[GetObjectEventBerryTreeId(i)].pests = TRUE;
+            if (gSaveBlock3Ptr->berryTrees[GetObjectEventBerryTreeId(i)].stage != BERRY_STAGE_PLANTED)
+                gSaveBlock3Ptr->berryTrees[GetObjectEventBerryTreeId(i)].pests = TRUE;
         }
     }
 
@@ -4507,7 +4509,7 @@ static void DebugAction_BerryFunctions_Weeds(u8 taskId)
     {
         if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
-            gSaveBlock2Ptr->berryTrees[GetObjectEventBerryTreeId(i)].weeds = TRUE;
+            gSaveBlock3Ptr->berryTrees[GetObjectEventBerryTreeId(i)].weeds = TRUE;
         }
     }
 

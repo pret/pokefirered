@@ -53,6 +53,7 @@
 #define MAX_FRONTIER_PARTY_SIZE    (max(FRONTIER_PARTY_SIZE,        \
                                     max(FRONTIER_DOUBLES_PARTY_SIZE,\
                                         FRONTIER_MULTI_PARTY_SIZE)))
+#define UNION_ROOM_PARTY_SIZE       2
 
 // capacities of various saveblock objects
 #define DAYCARE_MON_COUNT   2
@@ -67,10 +68,29 @@
 #define MAIL_COUNT         (PARTY_SIZE + 10)
 #define PC_MAIL_NUM(i)     (PARTY_SIZE + (i))
 #define DECOR_MAX_SECRET_BASE 16
+#define APPRENTICE_COUNT 4
+#define APPRENTICE_MAX_QUESTIONS 9
 #define MAX_REMATCH_ENTRIES 100
 #define UNION_ROOM_KB_ROW_COUNT 10
 #define GIFT_RIBBONS_COUNT 11
+#define PYRAMID_BAG_ITEMS_COUNT 10
 #define ROAMER_COUNT 1 // Number of maximum concurrent active roamers
+
+// Number of facilities for Ranking Hall.
+// 7 facilities for single mode + tower double mode + tower multi mode.
+// Excludes link modes. See RANKING_HALL_* in include/constants/battle_frontier.h
+#define HALL_FACILITIES_COUNT 9
+// Received via record mixing, 1 for each player other than yourself
+#define HALL_RECORDS_COUNT 3
+
+// Battle Frontier level modes.
+enum FrontierLevelMode
+{
+    FRONTIER_LVL_50,
+    FRONTIER_LVL_OPEN,
+    FRONTIER_LVL_TENT, // Special usage for indicating Battle Tent
+    FRONTIER_LVL_MODE_COUNT = FRONTIER_LVL_TENT,
+};
 
 // Contests
 #define CONTEST_CATEGORIES_COUNT  5

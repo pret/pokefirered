@@ -990,3 +990,66 @@ void Task_WaitForLinkPlayerConnection(u8 taskId)
 }
 
 #undef tTimer
+
+
+#define tTimer data[1]
+
+// Confirm that all cabled link players are connected
+void Task_ReconnectWithLinkPlayers(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch (tState)
+    {
+    case 0:
+        if (gWirelessCommType != 0)
+        {
+            DestroyTask(taskId);
+        }
+        else
+        {
+            OpenLink();
+            CreateTask(Task_WaitForLinkPlayerConnection, 1);
+            tState++;
+        }
+        break;
+    case 1:
+        if (++tTimer > 11)
+        {
+            tTimer = 0;
+            tState++;
+        }
+        break;
+    case 2:
+        if (GetLinkPlayerCount_2() >= GetSavedPlayerCount())
+        {
+            if (IsLinkMaster())
+            {
+                if (++tTimer > 30)
+                {
+                    CheckShouldAdvanceLinkState();
+                    tState++;
+                }
+            }
+            else
+            {
+                tState++;
+            }
+        }
+        break;
+    case 3:
+        if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
+        {
+            DestroyTask(taskId);
+        }
+        break;
+    }
+}
+
+#undef tTimer
+
+void TrySetBattleTowerLinkType(void)
+{
+    if (gWirelessCommType == 0)
+        gLinkType = LINKTYPE_BATTLE_TOWER;
+}

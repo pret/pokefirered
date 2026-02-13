@@ -16,6 +16,7 @@
 #include "constants/songs.h"
 #include "constants/maps.h"
 
+EWRAM_DATA u8 gRecordsWindowId = 0;
 static EWRAM_DATA u16 * sBg3TilemapBuffer_p = NULL;
 
 static void MainCB2_SetUp(void);
@@ -413,7 +414,7 @@ static void AddOpponentLinkBattleRecord(struct LinkBattleRecords * records, cons
 void ClearPlayerLinkBattleRecords(void)
 {
 #if FREE_LINK_BATTLE_RECORDS == FALSE
-    ClearLinkBattleRecords(&gSaveBlock2Ptr->linkBattleRecords);
+    ClearLinkBattleRecords(&gSaveBlock3Ptr->linkBattleRecords);
 #endif //FREE_LINK_BATTLE_RECORDS
 }
 
@@ -456,7 +457,7 @@ void UpdatePlayerLinkBattleRecords(s32 battlerId)
     if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_UNION_ROOM) || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_UNION_ROOM))
     {
         UpdateBattleOutcomeOnTrainerCards(battlerId);
-        AddOpponentLinkBattleRecord(&gSaveBlock2Ptr->linkBattleRecords, gTrainerCards[battlerId].rse.playerName, gTrainerCards[battlerId].rse.trainerId, gBattleOutcome, gLinkPlayers[battlerId].language);
+        AddOpponentLinkBattleRecord(&gSaveBlock3Ptr->linkBattleRecords, gTrainerCards[battlerId].rse.playerName, gTrainerCards[battlerId].rse.trainerId, gBattleOutcome, gLinkPlayers[battlerId].language);
     }
 #endif //FREE_LINK_BATTLE_RECORDS
 }
@@ -560,10 +561,10 @@ static void PrintBattleRecords(void)
     StringExpandPlaceholders(gStringVar4, gString_BattleRecords_PlayersBattleResults);
     left = 0xD0 - GetStringWidth(FONT_NORMAL, gStringVar4, -1);
     AddTextPrinterParameterized4(0, FONT_NORMAL, left / 2, 4, 0, 2, sTextColor, 0, gStringVar4);
-    PrintTotalRecord(&gSaveBlock2Ptr->linkBattleRecords);
+    PrintTotalRecord(&gSaveBlock3Ptr->linkBattleRecords);
     AddTextPrinterParameterized4(0, FONT_NORMAL, 0x54, 0x30, 0, 2, sTextColor, 0, gString_BattleRecords_ColumnHeaders);
     for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
-        PrintOpponentBattleRecord(&gSaveBlock2Ptr->linkBattleRecords.entries[i], 0x3D + 14 * i);
+        PrintOpponentBattleRecord(&gSaveBlock3Ptr->linkBattleRecords.entries[i], 0x3D + 14 * i);
     CommitWindow(0);
 }
 
@@ -579,4 +580,10 @@ static void LoadFrameGfxOnBg(u8 bg)
     LoadBgTiles(bg, sTiles, 0xC0, 0);
     CopyToBgTilemapBufferRect(bg, sTilemap, 0, 0, 32, 32);
     LoadPalette(sPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+}
+
+void RemoveRecordsWindow(void)
+{
+    ClearStdWindowAndFrame(gRecordsWindowId, FALSE);
+    RemoveWindow(gRecordsWindowId);
 }

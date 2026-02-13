@@ -65,5 +65,7 @@ void CB2_ReturnToPokeStorage(void);
 
 void EnterPokeStorage(u8 boxOption);
 u32 CountPartyNonEggMons(void);
+void ChooseMonFromStorage();
+void RemoveSelectedPcMon(struct Pokemon *mon);
 
 #endif // GUARD_POKEMON_STORAGE_SYSTEM_H

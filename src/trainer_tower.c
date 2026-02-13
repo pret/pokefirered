@@ -660,7 +660,7 @@ static void BufferTowerOpponentSpeech(void)
     u16 trainerId = gSpecialVar_0x8006;
     u8 facilityClass;
     u8 challengeType = CURR_FLOOR.challengeType;
-    
+
     if (challengeType != CHALLENGE_TYPE_DOUBLE)
         facilityClass = CURR_FLOOR.trainers[trainerId].facilityClass;
     else
@@ -769,7 +769,7 @@ static void GetFloorAlreadyCleared(void)
 {
 #if FREE_TRAINER_HILL == FALSE
     u16 mapLayoutId = gMapHeader.mapLayoutId;
-    if (mapLayoutId - LAYOUT_TRAINER_TOWER_1F == TRAINER_TOWER.floorsCleared 
+    if (mapLayoutId - LAYOUT_TRAINER_TOWER_1F == TRAINER_TOWER.floorsCleared
      && mapLayoutId - LAYOUT_TRAINER_TOWER_LOBBY <= CURR_FLOOR.floorIdx)
         gSpecialVar_Result = FALSE;
     else
@@ -888,19 +888,19 @@ static void GetTrainerTowerChallengeStatus(void)
     if (TRAINER_TOWER.hasLost)
     {
         TRAINER_TOWER.hasLost = FALSE;
-        gSpecialVar_Result = CHALLENGE_STATUS_LOST;
+        gSpecialVar_Result = TT_CHALLENGE_STATUS_LOST;
     }
     else if (TRAINER_TOWER.unkA_4)
     {
         TRAINER_TOWER.unkA_4 = FALSE;
-        gSpecialVar_Result = CHALLENGE_STATUS_UNK;
+        gSpecialVar_Result = TT_CHALLENGE_STATUS_UNK;
     }
     else
     {
-        gSpecialVar_Result = CHALLENGE_STATUS_NORMAL;
+        gSpecialVar_Result = TT_CHALLENGE_STATUS_NORMAL;
     }
 #else
-    gSpecialVar_Result = CHALLENGE_STATUS_NORMAL;
+    gSpecialVar_Result = TT_CHALLENGE_STATUS_NORMAL;
 #endif //FREE_TRAINER_HILL
 }
 

@@ -5,5 +5,6 @@ void Task_WaitForLinkPlayerConnection(u8 taskId);
 u8 CreateTask_ReestablishCableClubLink(void);
 void CB2_ReturnFromCableClubBattle(void);
 bool32 GetSeeingLinkPlayerCardMsg(u8 who);
+void Task_ReconnectWithLinkPlayers(u8 taskId);
 
 #endif //GUARD_CABLE_CLUB_H

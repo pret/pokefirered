@@ -40,6 +40,8 @@ EWRAM_DATA static u16 sBattlerRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerPrevRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerSavedRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u8 sRecordMode = 0;
+EWRAM_DATA static u8 sFrontierFacility = 0;
+EWRAM_DATA static u8 sFrontierBrainSymbol = 0;
 EWRAM_DATA u8 gRecordedBattleMultiplayerId = 0;
 EWRAM_DATA static u8 sBattleScene = 0;
 EWRAM_DATA static u8 sTextSpeed = 0;
@@ -54,6 +56,7 @@ EWRAM_DATA static u8 sRecordMixFriendName[PLAYER_NAME_LENGTH + 1] = {0};
 EWRAM_DATA static u8 sRecordMixFriendClass = 0;
 EWRAM_DATA static u8 sApprenticeId = 0;
 EWRAM_DATA static u16 sEasyChatSpeech[EASY_CHAT_BATTLE_WORDS_COUNT] = {0};
+EWRAM_DATA static u8 sBattleOutcome = 0;
 
 static u8 sRecordMixFriendLanguage;
 static u8 sApprenticeLanguage;
@@ -304,6 +307,16 @@ void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
 
 #undef tFramesToWait
 
+u8 GetRecordedBattleFrontierFacility(void)
+{
+    return sFrontierFacility;
+}
+
+u8 GetRecordedBattleFronterBrainSymbol(void)
+{
+    return sFrontierBrainSymbol;
+}
+
 void RecordedBattle_SaveParties(void)
 {
     s32 i;
@@ -480,3 +493,44 @@ u8 GetBattlerLinkPlayerGender(u32 battler)
 
     return 0;
 }
+
+void GetRecordedBattleRecordMixFriendName(u8 *dst)
+{
+    s32 i;
+
+    for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
+        dst[i] = sRecordMixFriendName[i];
+    dst[PLAYER_NAME_LENGTH] = EOS;
+    ConvertInternationalString(dst, sRecordMixFriendLanguage);
+}
+
+u8 GetRecordedBattleRecordMixFriendClass(void)
+{
+    return sRecordMixFriendClass;
+}
+
+u8 GetRecordedBattleApprenticeId(void)
+{
+    return sApprenticeId;
+}
+
+u8 GetRecordedBattleRecordMixFriendLanguage(void)
+{
+    return sRecordMixFriendLanguage;
+}
+
+u8 GetRecordedBattleApprenticeLanguage(void)
+{
+    return sApprenticeLanguage;
+}
+
+void RecordedBattle_SaveBattleOutcome(void)
+{
+    sBattleOutcome = gBattleOutcome;
+}
+
+u16 *GetRecordedBattleEasyChatSpeech(void)
+{
+    return sEasyChatSpeech;
+}
+

@@ -842,12 +842,14 @@ extern const u8 EventScript_TryDoDoubleTrainerBattle[];
 extern const u8 EventScript_TryDoNormalTrainerBattle[];
 extern const u8 EventScript_TryDoDoubleRematchBattle[];
 extern const u8 EventScript_TryDoRematchBattle[];
-extern const u8 EventScript_DoTrainerBattleFromApproach[];
+extern const u8 EventScript_StartTrainerApproach[];
 extern const u8 EventScript_TestSignpostMsg[];
+extern const u8 EventScript_ObjectApproachPlayer[];
 
 extern const u8 BerryTreeScript[];
 extern const u8 BerryTree_EventScript_ItemUsePlantBerry[];
 extern const u8 BerryTree_EventScript_ItemUseWailmerPail[];
+extern const u8 BattleFrontier_OutsideEast_EventScript_WaterSudowoodo[];
 
 // new_game
 extern const u8 EventScript_ResetAllMapFlags[];
@@ -978,5 +980,11 @@ extern const u8 EventScript_PokemonGotAway[];
 extern const u8 EventScript_LostSignal[];
 extern const u8 EventScript_TooDark[];
 extern const u8 EventScript_MovedTooFast[];
+
+// Battle Pyramid.
+extern const u8 BattlePyramid_Retire[];
+extern const u8 BattlePyramid_WarpToNextFloor[];
+extern const u8 BattlePyramid_TrainerBattle[];
+extern const u8 BattlePyramid_FindItemBall[];
 
 #endif //GUARD_EVENT_SCRIPTS_H

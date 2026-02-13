@@ -953,7 +953,7 @@ static void CreateAreaMarkerSprites(void)
     numSprites = 0;
     for (i = 0; i < sPokedexAreaScreen->numSpecialAreas; i++)
     {
-        mapSecId = sPokedexAreaScreen->specialAreaRegionMapSectionIds[i] - KANTO_MAPSEC_START;
+        mapSecId = sPokedexAreaScreen->specialAreaRegionMapSectionIds[i];
         x = 8 * (gRegionMapEntries[mapSecId].x + 1) + 4;
         y = 8 * (gRegionMapEntries[mapSecId].y) + 28;
         x += 4 * (gRegionMapEntries[mapSecId].width - 1);

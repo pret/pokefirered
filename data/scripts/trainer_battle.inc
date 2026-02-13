@@ -1,9 +1,9 @@
-EventScript_DoTrainerBattleFromApproach::
+EventScript_StartTrainerApproach::
 	selectapproachingtrainer
 	lockfortrainer
 EventScript_TrainerApproach::
 	special PlayTrainerEncounterMusic
-	special EndTrainerApproach
+	special DoTrainerApproach
 	waitstate
 	goto EventScript_ShowTrainerIntroMsg
 

@@ -12,14 +12,27 @@
 #define MAP_TYPE_INDOOR      8
 #define MAP_TYPE_SECRET_BASE 9 // Not used by any map.
 
-#define MAP_BATTLE_SCENE_NORMAL   0
-#define MAP_BATTLE_SCENE_GYM      1
-#define MAP_BATTLE_SCENE_INDOOR_1 2 // Pokemon Tower, Tanoby ruins
-#define MAP_BATTLE_SCENE_INDOOR_2 3 // Pokemon Mansion, Power Plant, Rocket Hideout/Warehouse
-#define MAP_BATTLE_SCENE_LORELEI  4
-#define MAP_BATTLE_SCENE_BRUNO    5
-#define MAP_BATTLE_SCENE_AGATHA   6
-#define MAP_BATTLE_SCENE_LANCE    7
-#define MAP_BATTLE_SCENE_LINK     8
+
+//Battle backgrounds
+enum MapBattleScene
+{
+    MAP_BATTLE_SCENE_NORMAL,
+    MAP_BATTLE_SCENE_GYM,
+    MAP_BATTLE_SCENE_INDOOR_1, // Pokemon Tower, Tanoby ruins
+    MAP_BATTLE_SCENE_INDOOR_2, // Pokemon Mansion, Power Plant, Rocket Hideout/Warehouse
+    MAP_BATTLE_SCENE_LORELEI,
+    MAP_BATTLE_SCENE_BRUNO,
+    MAP_BATTLE_SCENE_AGATHA,
+    MAP_BATTLE_SCENE_LANCE,
+    MAP_BATTLE_SCENE_LINK,
+    MAP_BATTLE_SCENE_MAGMA,
+    MAP_BATTLE_SCENE_AQUA,
+    MAP_BATTLE_SCENE_FRONTIER,
+    MAP_BATTLE_SCENE_LEADER,
+    MAP_BATTLE_SCENE_CHAMPION,
+    MAP_BATTLE_SCENE_GROUDON,
+    MAP_BATTLE_SCENE_KYOGRE,
+    MAP_BATTLE_SCENE_RAYQUAZA,
+};
 
 #endif  // GUARD_CONSTANTS_MAP_TYPES_H

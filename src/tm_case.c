@@ -213,8 +213,8 @@ static void (*const sSelectTMActionTasks[])(u8 taskId) = {
 };
 
 static const struct MenuAction sMenuActions[] = {
-    [TMCASE_ACTION_USE]  = {gOtherText_Use,  {Action_Use}  },
-    [TMCASE_ACTION_GIVE] = {gOtherText_Give, {Action_Give} },
+    [TMCASE_ACTION_USE]  = {gMenuText_Use,  {Action_Use}  },
+    [TMCASE_ACTION_GIVE] = {gMenuText_Give, {Action_Give} },
     [TMCASE_ACTION_EXIT] = {gOtherText_Exit, {Action_Exit} },
 };
 

@@ -8,7 +8,7 @@
 #include "battle_ai_switch.h"
 #include "battle_ai_main.h"
 #include "battle_controllers.h"
-// #include "battle_factory.h"
+#include "battle_factory.h"
 #include "battle_setup.h"
 #include "battle_z_move.h"
 #include "battle_terastal.h"
@@ -211,8 +211,8 @@ static u64 GetAiFlags(u16 trainerId, u32 battler)
             flags = AI_FLAG_CHECK_BAD_MOVE;
         // else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         //     flags = AI_FLAG_FIRST_BATTLE;
-        // else if (gBattleTypeFlags & BATTLE_TYPE_FACTORY)
-        //     flags = GetAiScriptsInBattleFactory();
+        else if (gBattleTypeFlags & BATTLE_TYPE_FACTORY)
+            flags = GetAiScriptsInBattleFactory();
         else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE))
             flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
         else

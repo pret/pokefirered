@@ -1,5 +1,5 @@
 static const struct InGameTrade sInGameTrades[] = {
-    [INGAME_TRADE_MR_MIME] = 
+    [INGAME_TRADE_MR_MIME] =
     {
         .nickname = _("MIMIEN"),
         .species = SPECIES_MR_MIME,
@@ -14,8 +14,8 @@ static const struct InGameTrade sInGameTrades[] = {
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_ABRA
-    }, 
-    [INGAME_TRADE_JYNX] = 
+    },
+    [INGAME_TRADE_JYNX] =
     {
         .nickname = _("ZYNX"),
         .species = SPECIES_JYNX,
@@ -30,8 +30,8 @@ static const struct InGameTrade sInGameTrades[] = {
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_POLIWHIRL
-    }, 
-    [INGAME_TRADE_NIDORAN] = 
+    },
+    [INGAME_TRADE_NIDORAN] =
     {
 #if defined(FIRERED)
         .nickname = _("MS. NIDO"),
@@ -62,8 +62,8 @@ static const struct InGameTrade sInGameTrades[] = {
         .sheen = 10,
         .requestedSpecies = SPECIES_NIDORAN_F
 #endif
-    }, 
-    [INGAME_TRADE_FARFETCHD] = 
+    },
+    [INGAME_TRADE_FARFETCHD] =
     {
         .nickname = _("CH'DING"),
         .species = SPECIES_FARFETCHD,
@@ -78,8 +78,8 @@ static const struct InGameTrade sInGameTrades[] = {
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_SPEAROW
-    }, 
-    [INGAME_TRADE_NIDORINOA] = 
+    },
+    [INGAME_TRADE_NIDORINOA] =
     {
 #if defined(FIRERED)
         .nickname = _("NINA"),
@@ -110,8 +110,8 @@ static const struct InGameTrade sInGameTrades[] = {
         .sheen = 10,
         .requestedSpecies = SPECIES_NIDORINA
 #endif
-    }, 
-    [INGAME_TRADE_LICKITUNG] = 
+    },
+    [INGAME_TRADE_LICKITUNG] =
     {
         .nickname = _("MARC"),
         .species = SPECIES_LICKITUNG,
@@ -130,8 +130,8 @@ static const struct InGameTrade sInGameTrades[] = {
 #elif defined(LEAFGREEN)
         .requestedSpecies = SPECIES_SLOWBRO
 #endif
-    }, 
-    [INGAME_TRADE_ELECTRODE] = 
+    },
+    [INGAME_TRADE_ELECTRODE] =
     {
         .nickname = _("ESPHERE"),
         .species = SPECIES_ELECTRODE,
@@ -146,8 +146,8 @@ static const struct InGameTrade sInGameTrades[] = {
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_RAICHU
-    }, 
-    [INGAME_TRADE_TANGELA] = 
+    },
+    [INGAME_TRADE_TANGELA] =
     {
         .nickname = _("TANGENY"),
         .species = SPECIES_TANGELA,
@@ -163,7 +163,7 @@ static const struct InGameTrade sInGameTrades[] = {
         .sheen = 10,
         .requestedSpecies = SPECIES_VENONAT
     },
-    [INGAME_TRADE_SEEL] = 
+    [INGAME_TRADE_SEEL] =
     {
         .nickname = _("SEELOR"),
         .species = SPECIES_SEEL,
@@ -178,6 +178,22 @@ static const struct InGameTrade sInGameTrades[] = {
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_PONYTA
+    },
+    [INGAME_TRADE_MEOWTH] =
+    {
+        .nickname = _("MEOWOW"),
+        .species = SPECIES_MEOWTH,
+        .ivs = {4, 5, 4, 5, 4, 4},
+        .abilityNum = 0,
+        .otId = 91481,
+        .conditions = {5, 5, 5, 30, 5},
+        .personality = 0x8B,
+        .heldItem = ITEM_RETRO_MAIL,
+        .mailNum = 2,
+        .otName = _("ISIS"),
+        .otGender = FEMALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_SKITTY
     }
 };
 
@@ -192,5 +208,16 @@ static const u16 sInGameTradeMailMessages[][10] = {
         EC_WORD_KIND,
         EC_WORD_TO,
         EC_WORD_IT
-    }
+    },
+    [2] = {
+        EC_WORD_THANK_YOU,
+        EC_WORD_FOR,
+        EC_POKEMON2(SKITTY),
+        EC_POKEMON(MEOWTH),
+        EC_WORD_CRIES,
+        EC_WORD_IN,
+        EC_WORD_A,
+        EC_WORD_CUTE,
+        EC_WORD_WAY
+    },
 };

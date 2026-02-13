@@ -1977,3 +1977,333 @@ const u16 gTilesetPalettes_IndigoPlateauWinter[][16] =
 };
 
 const u32 gTilesetTiles_IndigoPlateauWinter[] = INCBIN_U32("data/tilesets/secondary/indigo_plateau_winter/tiles.4bpp.lz");
+
+const u32 gTilesetTiles_BattleFrontierOutside[] = INCBIN_U32("data/tilesets/primary/battle_frontier_outside/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattleFrontierOutside[][16] =
+{
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_outside/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattleFrontierInside[] = INCBIN_U32("data/tilesets/primary/battle_frontier_inside/tiles.4bpp.smol");
+
+const u16 gTilesetPalettes_BattleFrontierInside[][16] =
+{
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/primary/battle_frontier_inside/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattleFrontierOutsideWest[] = INCBIN_U32("data/tilesets/secondary/battle_frontier_outside_west/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattleFrontierOutsideWest[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_west/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattleFrontierOutsideEast[] = INCBIN_U32("data/tilesets/secondary/battle_frontier_outside_east/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattleFrontierOutsideEast[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_outside_east/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattleFrontierGeneral[] = INCBIN_U32("data/tilesets/secondary/battle_frontier_general/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattleFrontierGeneral[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_general/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattleFrontierBuilding[] = INCBIN_U32("data/tilesets/secondary/battle_frontier_building/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattleFrontierBuilding[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_building/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattleArena[] = INCBIN_U32("data/tilesets/secondary/battle_arena/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattleArena[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_arena/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattlePalaceGeneral[] = INCBIN_U32("data/tilesets/secondary/battle_palace_general/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattlePalaceGeneral[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_general/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattlePalaceBuilding[] = INCBIN_U32("data/tilesets/secondary/battle_palace_building/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattlePalaceBuilding[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_palace_building/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattlePyramid[] = INCBIN_U32("data/tilesets/secondary/battle_pyramid/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattlePyramid[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pyramid/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattleFrontierRankingHall[] = INCBIN_U32("data/tilesets/secondary/battle_frontier_ranking_hall/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattleFrontierRankingHall[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_frontier_ranking_hall/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_ArtisanCave[] = INCBIN_U32("data/tilesets/secondary/artisan_cave/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_ArtisanCave[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/artisan_cave/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattlePike[] = INCBIN_U32("data/tilesets/secondary/battle_pike/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattlePike[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_pike/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattleDome[] = INCBIN_U32("data/tilesets/secondary/battle_dome/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattleDome[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_dome/palettes/15.gbapal"),
+};
+
+const u32 gTilesetTiles_BattleFactory[] = INCBIN_U32("data/tilesets/secondary/battle_factory/tiles.4bpp.fastSmol");
+
+const u16 gTilesetPalettes_BattleFactory[][16] =
+{
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/00.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/01.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/02.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/03.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/04.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/05.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/06.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/07.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/08.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/09.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/10.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/11.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/12.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/13.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/14.gbapal"),
+    INCBIN_U16("data/tilesets/secondary/battle_factory/palettes/15.gbapal"),
+};

@@ -1,0 +1,84 @@
+{
+  "id": "MAP_BATTLE_FRONTIER_MART",
+  "name": "BattleFrontier_Mart",
+  "layout": "LAYOUT_MART",
+  "music": "MUS_POKE_CENTER",
+  "region_map_section": "MAPSEC_BATTLE_FRONTIER",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "floor_number": 0,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_FRONTIER_MART_CLERK",
+      "graphics_id": "OBJ_EVENT_GFX_CLERK",
+      "x": 2,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "BattleFrontier_Mart_EventScript_Clerk",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_FRONTIER_MART_OLD_WOMAN",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
+      "x": 6,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "BattleFrontier_Mart_EventScript_OldWoman",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+      "x": 6,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "BattleFrontier_Mart_EventScript_OldMan",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BOY_2",
+      "x": 9,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "BattleFrontier_Mart_EventScript_Boy",
+      "flag": "0"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_WEST",
+      "dest_warp_id": "4"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

@@ -67,6 +67,8 @@ u8 RecordedBattle_BufferNewBattlerData(u8 *dst);
 void RecordedBattle_RecordAllBattlerData(u8 *data);
 void SetPartiesFromRecordedSave(struct RecordedBattleSave *src);
 void SetVariablesForRecordedBattle(struct RecordedBattleSave *);
+u8 GetRecordedBattleFrontierFacility(void);
+u8 GetRecordedBattleFronterBrainSymbol(void);
 void RecordedBattle_SaveParties(void);
 void RecordedBattle_ClearFrontierPassFlag(void);
 void RecordedBattle_SetFrontierPassFlagFromHword(u16 flags);
@@ -79,5 +81,12 @@ u64 GetAiScriptsInRecordedBattle(u32 battler);
 void RecordedBattle_SetPlaybackFinished(void);
 bool8 RecordedBattle_CanStopPlayback(void);
 u8 GetBattlerLinkPlayerGender(u32 battler);
+void GetRecordedBattleRecordMixFriendName(u8 *dst);
+u8 GetRecordedBattleRecordMixFriendClass(void);
+u8 GetRecordedBattleApprenticeId(void);
+u8 GetRecordedBattleRecordMixFriendLanguage(void);
+u8 GetRecordedBattleApprenticeLanguage(void);
+void RecordedBattle_SaveBattleOutcome(void);
+u16 *GetRecordedBattleEasyChatSpeech(void);
 
 #endif // GUARD_RECORDED_BATTLE_H

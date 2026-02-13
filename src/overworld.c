@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gflib.h"
+#include "battle_pyramid.h"
 #include "io_reg.h"
 #include "battle_util.h"
 #include "cable_club.h"
@@ -59,6 +60,7 @@
 #include "wild_encounter.h"
 #include "constants/cable_club.h"
 #include "constants/event_objects.h"
+#include "constants/layouts.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -254,6 +256,14 @@ static const u16 sWhiteOutMoneyLossBadgeFlagIDs[] = {
     FLAG_BADGE06_GET,
     FLAG_BADGE07_GET,
     FLAG_BADGE08_GET
+};
+
+static const struct ScanlineEffectParams sFlashEffectParams =
+{
+    .dmaDest = &REG_WIN0H,
+    .dmaControl = (2 >> 1) | ((DMA_16BIT | DMA_DEST_RELOAD | DMA_SRC_INC | DMA_REPEAT | DMA_START_HBLANK | DMA_ENABLE) << 16),
+    .initState = 1,
+    .unused9 = 0
 };
 
 static void DoWhiteOut(void)
@@ -812,7 +822,10 @@ static void LoadMapFromWarp(bool32 unused)
     bool8 isOutdoors;
 
     LoadCurrentMapData();
-    LoadObjEventTemplatesFromHeader();
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+        LoadBattlePyramidObjectEventTemplates();
+    else
+        LoadObjEventTemplatesFromHeader();
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
 
     TrySetMapSaveWarpStatus();
@@ -836,7 +849,10 @@ static void LoadMapFromWarp(bool32 unused)
     MoveAllRoamersToOtherLocationSets();
     gChainFishingDexNavStreak = 0;
     QL_ResetDefeatedWildMonRecord();
-    InitMap();
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+        InitBattlePyramidMap(FALSE);
+    else
+        InitMap();
 }
 
 static void QL_LoadMapNormal(void)
@@ -1880,11 +1896,19 @@ void CB2_ContinueSavedGame(void)
     StopMapMusic();
     ResetSafariZoneFlag_();
     LoadSaveblockMapHeader();
-    LoadSaveblockObjEventScripts();
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+        LoadBattlePyramidFloorObjectEventScripts();
+    else
+        LoadSaveblockObjEventScripts();
+
     UnfreezeObjectEvents();
     DoTimeBasedEvents();
     Overworld_ResetStateOnContinue();
-    InitMapFromSavedGame();
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+        InitBattlePyramidMap(TRUE);
+    else
+        InitMapFromSavedGame();
+
     PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
@@ -1943,15 +1967,15 @@ static void VBlankCB_Field(void)
 static void InitCurrentFlashLevelScanlineEffect(void)
 {
     u8 flashLevel = GetFlashLevel();
-    if (flashLevel != 0)
+    if (InBattlePyramid_())
+    {
+        WriteBattlePyramidViewScanlineEffectBuffer();
+        ScanlineEffect_SetParams(sFlashEffectParams);
+    }
+    else if (flashLevel != 0)
     {
         WriteFlashScanlineEffectBuffer(flashLevel);
-        ScanlineEffect_SetParams((struct ScanlineEffectParams){
-            .dmaDest = &REG_WIN0H,
-            .dmaControl = (2 >> 1) | ((DMA_16BIT | DMA_DEST_RELOAD | DMA_SRC_INC | DMA_REPEAT | DMA_START_HBLANK | DMA_ENABLE) << 16),
-            .initState = 1,
-            .unused9 = 0
-        });
+        ScanlineEffect_SetParams(sFlashEffectParams);
     }
 }
 

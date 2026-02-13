@@ -711,7 +711,11 @@ static bool8 TryStartCoordEventScript(struct MapPosition *position)
 
 static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
 {
-    // Dummied
+    if (MetatileBehavior_IsBattlePyramidWarp(metatileBehavior))
+    {
+        ScriptContext_SetupScript(BattlePyramid_WarpToNextFloor);
+        return TRUE;
+    }
     return FALSE;
 }
 

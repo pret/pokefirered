@@ -31,6 +31,7 @@ enum MapPreviewScreenId
     MPS_SCUFIB_CHAMBER,
     MPS_RIXY_CHAMBER,
     MPS_VIAPOIS_CHAMBER,
+    MPS_ARTISAN_CAVE,
     MPS_COUNT
 };
 

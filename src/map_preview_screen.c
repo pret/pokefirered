@@ -304,7 +304,15 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .tilesptr = sMoneanChamberMapPreviewTiles,
         .tilemapptr = sMoneanChamberMapPreviewTilemap,
         .palptr = sMoneanChamberMapPreviewPalette
-    }
+    },
+    [MPS_ARTISAN_CAVE] = {
+        .mapsec = MAPSEC_ARTISAN_CAVE,
+        .type = MPS_TYPE_CAVE,
+        .flagId = FLAG_WORLD_ARTISAN_CAVE,
+        .tilesptr = sRockTunnelMapPreviewTiles,
+        .tilemapptr = sRockTunnelMapPreviewTilemap,
+        .palptr = sRockTunnelMapPreviewPalette
+    },
 };
 
 static const struct WindowTemplate sMapNameWindow = {

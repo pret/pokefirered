@@ -20,6 +20,7 @@
 #include "test_runner.h"
 #include "trainer_tower.h"
 #include "constants/abilities.h"
+#include "constants/battle_dome.h"
 #include "constants/battle_string_ids.h"
 #include "constants/moves.h"
 #include "constants/items.h"
@@ -204,10 +205,13 @@ static const u8 sText_SpaceIs[] = _(" is");
 static const u8 sText_ApostropheS[] = _("'s");
 const u8 gText_BattleTourney[] = _("BATTLE TOURNEY");
 
-static const u8 sText_Round1[] = _("Round 1");
-static const u8 sText_Round2[] = _("Round 2");
-static const u8 sText_Semifinal[] = _("Semifinal");
-static const u8 sText_Final[] = _("Final");
+const u8 *const gRoundsStringTable[DOME_ROUNDS_COUNT] =
+{
+    [DOME_ROUND1]    = COMPOUND_STRING("Round 1"),
+    [DOME_ROUND2]    = COMPOUND_STRING("Round 2"),
+    [DOME_SEMIFINAL] = COMPOUND_STRING("Semifinal"),
+    [DOME_FINAL]     = COMPOUND_STRING("Final"),
+};
 
 const u8 gText_TheGreatNewHope[] = _("The great new hope!\p");
 const u8 gText_WillChampionshipDreamComeTrue[] = _("Will the championship dream come true?!\p");
@@ -228,6 +232,27 @@ static const u8 sText_TwoTrainersWantToBattle[] = _("You are challenged by {B_TR
 static const u8 sText_InGamePartnerSentOutZGoN[] = _("{B_PARTNER_NAME_WITH_CLASS} sent out {B_PLAYER_MON2_NAME}! Go, {B_PLAYER_MON1_NAME}!");
 static const u8 sText_InGamePartnerSentOutPkmn2[] = _("{B_PARTNER_NAME_WITH_CLASS} sent out {B_PLAYER_MON2_NAME}!");
 static const u8 sText_InGamePartnerWithdrewPkmn2[] = _("{B_PARTNER_NAME_WITH_CLASS} withdrew {B_PLAYER_MON2_NAME}!");
+
+const u16 gBattlePalaceFlavorTextTable[] =
+{
+    [B_MSG_GLINT_IN_EYE]   = STRINGID_GLINTAPPEARSINEYE,
+    [B_MSG_GETTING_IN_POS] = STRINGID_PKMNGETTINGINTOPOSITION,
+    [B_MSG_GROWL_DEEPLY]   = STRINGID_PKMNBEGANGROWLINGDEEPLY,
+    [B_MSG_EAGER_FOR_MORE] = STRINGID_PKMNEAGERFORMORE,
+};
+
+const u8 *const gRefereeStringsTable[] =
+{
+    [B_MSG_REF_NOTHING_IS_DECIDED] = COMPOUND_STRING("REFEREE: If nothing is decided in 3 turns, we will go to judging!"),
+    [B_MSG_REF_THATS_IT]           = COMPOUND_STRING("REFEREE: That's it! We will now go to judging to determine the winner!"),
+    [B_MSG_REF_JUDGE_MIND]         = COMPOUND_STRING("REFEREE: Judging category 1, Mind! The POKéMON showing the most guts!\p"),
+    [B_MSG_REF_JUDGE_SKILL]        = COMPOUND_STRING("REFEREE: Judging category 2, Skill! The POKéMON using moves the best!\p"),
+    [B_MSG_REF_JUDGE_BODY]         = COMPOUND_STRING("REFEREE: Judging category 3, Body! The POKéMON with the most vitality!\p"),
+    [B_MSG_REF_PLAYER_WON]         = COMPOUND_STRING("REFEREE: Judgment: {B_BUFF1} to {B_BUFF2}! The winner is {B_PLAYER_NAME}'s {B_PLAYER_MON1_NAME}!\p"),
+    [B_MSG_REF_OPPONENT_WON]       = COMPOUND_STRING("REFEREE: Judgment: {B_BUFF1} to {B_BUFF2}! The winner is {B_TRAINER1_NAME}'s {B_OPPONENT_MON1_NAME}!\p"),
+    [B_MSG_REF_DRAW]               = COMPOUND_STRING("REFEREE: Judgment: 3 to 3! We have a draw!\p"),
+    [B_MSG_REF_COMMENCE_BATTLE]    = COMPOUND_STRING("REFEREE: {B_PLAYER_MON1_NAME} VS {B_OPPONENT_MON1_NAME}! Commence battling!"),
+};
 
 static const u8 sText_TwoInGameTrainersDefeated[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} and\n{B_TRAINER2_CLASS} {B_TRAINER2_NAME}\lwere defeated!\p");
 static const u8 sText_Trainer2LoseText[] = _("{B_TRAINER2_LOSE_TEXT}");
@@ -3334,6 +3359,280 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] = {
     },
 };
 
+static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
+{
+    [B_WIN_MSG] = {
+        .fillValue = PIXEL_FILL(0xF),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 1,
+        .color.foreground = 1,
+        .color.background = 15,
+        .color.accent = 15,
+        .color.shadow = 6,
+    },
+    [B_WIN_ACTION_PROMPT] = {
+        .fillValue = PIXEL_FILL(0xF),
+        .fontId = FONT_NORMAL,
+        .x = 1,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 1,
+        .color.background = 15,
+        .color.accent = 15,
+        .color.shadow = 6,
+    },
+    [B_WIN_ACTION_MENU] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [B_WIN_MOVE_NAME_1] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [B_WIN_MOVE_NAME_2] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [B_WIN_MOVE_NAME_3] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [B_WIN_MOVE_NAME_4] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [B_WIN_PP] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = B_SHOW_EFFECTIVENESS != SHOW_EFFECTIVENESS_NEVER ? 13 : 12,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = B_SHOW_EFFECTIVENESS != SHOW_EFFECTIVENESS_NEVER ? 15 : 11,
+    },
+    [B_WIN_DUMMY] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [B_WIN_PP_REMAINING] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 2,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 12,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 11,
+    },
+    [B_WIN_MOVE_TYPE] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [B_WIN_SWITCH_PROMPT] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [B_WIN_YESNO] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [B_WIN_LEVEL_UP_BOX] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [B_WIN_LEVEL_UP_BANNER] = {
+        .fillValue = PIXEL_FILL(0),
+        .fontId = FONT_NORMAL,
+        .x = 32,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 1,
+        .color.shadow = 2,
+    },
+    [ARENA_WIN_PLAYER_NAME] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 1,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [ARENA_WIN_VS] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [ARENA_WIN_OPPONENT_NAME] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [ARENA_WIN_MIND] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [ARENA_WIN_SKILL] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [ARENA_WIN_BODY] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [ARENA_WIN_JUDGMENT_TITLE] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = -1,
+        .y = 1,
+        .speed = 0,
+        .color.foreground = 13,
+        .color.background = 14,
+        .color.accent = 14,
+        .color.shadow = 15,
+    },
+    [ARENA_WIN_JUDGMENT_TEXT] = {
+        .fillValue = PIXEL_FILL(0x1),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 1,
+        .color.foreground = 2,
+        .color.background = 1,
+        .color.accent = 1,
+        .color.shadow = 3,
+    },
+    [B_WIN_MOVE_DESCRIPTION] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .speed = 0,
+        .color.foreground = TEXT_DYNAMIC_COLOR_4,
+        .color.background = TEXT_DYNAMIC_COLOR_5,
+        .color.accent = TEXT_DYNAMIC_COLOR_5,
+        .color.shadow = TEXT_DYNAMIC_COLOR_6,
+    },
+};
+
+static const struct BattleWindowText *const sBattleTextOnWindowsInfo[] =
+{
+    [B_WIN_TYPE_NORMAL] = sTextOnWindowsInfo_Normal,
+    [B_WIN_TYPE_ARENA]  = sTextOnWindowsInfo_Arena
+};
+
 static const u8 sNpcTextColorToFont[] =
 {
     [NPC_TEXT_COLOR_MALE]    = FONT_MALE,
@@ -3345,7 +3644,9 @@ static const u8 sNpcTextColorToFont[] =
 // windowId: Upper 2 bits are text flags
 //   x40: Use NPC context-defined font
 //   x80: Inhibit window clear
-void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
+void BattlePutTextOnWindow(const u8 *text, u8 windowId)
+{
+    const struct BattleWindowText *textInfo = sBattleTextOnWindowsInfo[gBattleScripting.windowsType];
     struct TextPrinterTemplate printerTemplate;
     u8 speed;
     int x;
@@ -3354,13 +3655,13 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     u8 textFlags = windowId & 0xC0;
     windowId &= 0x3F;
     if (!(textFlags & 0x80))
-        FillWindowPixelBuffer(windowId, sTextOnWindowsInfo_Normal[windowId].fillValue);
+        FillWindowPixelBuffer(windowId, textInfo[windowId].fillValue);
     if (textFlags & 0x40) {
         color = ContextNpcGetTextColor();
         printerTemplate.fontId = sNpcTextColorToFont[color];
     }
     else {
-        printerTemplate.fontId = sTextOnWindowsInfo_Normal[windowId].fontId;
+        printerTemplate.fontId = textInfo[windowId].fontId;
     }
     switch (windowId)
     {
@@ -3370,17 +3671,17 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     case B_WIN_VS_MULTI_PLAYER_2:
     case B_WIN_VS_MULTI_PLAYER_3:
     case B_WIN_VS_MULTI_PLAYER_4:
-        x = (48 - GetStringWidth(sTextOnWindowsInfo_Normal[windowId].fontId, text,
-                                 sTextOnWindowsInfo_Normal[windowId].letterSpacing)) / 2;
+        x = (48 - GetStringWidth(textInfo[windowId].fontId, text,
+                                 textInfo[windowId].letterSpacing)) / 2;
         break;
     case B_WIN_VS_OUTCOME_DRAW:
     case B_WIN_VS_OUTCOME_LEFT:
     case B_WIN_VS_OUTCOME_RIGHT:
-        x = (64 - GetStringWidth(sTextOnWindowsInfo_Normal[windowId].fontId, text,
-                                 sTextOnWindowsInfo_Normal[windowId].letterSpacing)) / 2;
+        x = (64 - GetStringWidth(textInfo[windowId].fontId, text,
+                                 textInfo[windowId].letterSpacing)) / 2;
         break;
     default:
-        x = sTextOnWindowsInfo_Normal[windowId].x;
+        x = textInfo[windowId].x;
         break;
     }
     if (x < 0)
@@ -3389,12 +3690,12 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     printerTemplate.type = WINDOW_TEXT_PRINTER;
     printerTemplate.windowId = windowId;
     printerTemplate.x = x;
-    printerTemplate.y = sTextOnWindowsInfo_Normal[windowId].y;
+    printerTemplate.y = textInfo[windowId].y;
     printerTemplate.currentX = printerTemplate.x;
     printerTemplate.currentY = printerTemplate.y;
-    printerTemplate.letterSpacing = sTextOnWindowsInfo_Normal[windowId].letterSpacing;
-    printerTemplate.lineSpacing = sTextOnWindowsInfo_Normal[windowId].lineSpacing;
-    printerTemplate.color = sTextOnWindowsInfo_Normal[windowId].color;
+    printerTemplate.letterSpacing = textInfo[windowId].letterSpacing;
+    printerTemplate.lineSpacing = textInfo[windowId].lineSpacing;
+    printerTemplate.color = textInfo[windowId].color;
 
     if (B_WIN_MOVE_NAME_1 <= windowId && windowId <= B_WIN_MOVE_NAME_4)
     {
@@ -3426,7 +3727,7 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId) {
     }
     else
     {
-        speed = sTextOnWindowsInfo_Normal[windowId].speed;
+        speed = textInfo[windowId].speed;
         gTextFlags.canABSpeedUpPrint = FALSE;
     }
 

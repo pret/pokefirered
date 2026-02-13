@@ -453,3 +453,9 @@ void FieldCB_RushInjuredPokemonToCenter(void)
     taskId = CreateTask(Task_RushInjuredPokemonToCenter, 10);
     gTasks[taskId].tState = 0;
 }
+
+void WriteBattlePyramidViewScanlineEffectBuffer(void)
+{
+    SetFlashScanlineEffectWindowBoundaries(&gScanlineEffectRegBuffers[0][0], DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, gSaveBlock2Ptr->frontier.pyramidLightRadius);
+    CpuFastSet(&gScanlineEffectRegBuffers[0], &gScanlineEffectRegBuffers[1], 480);
+}

@@ -271,7 +271,7 @@ void Script_BufferFanClubTrainerName(void)
         break;
     }
 #if FREE_LINK_BATTLE_RECORDS == FALSE
-    BufferFanClubTrainerName(&gSaveBlock2Ptr->linkBattleRecords, whichLinkTrainer, whichNPCTrainer);
+    BufferFanClubTrainerName(&gSaveBlock3Ptr->linkBattleRecords, whichLinkTrainer, whichNPCTrainer);
 #else
     BufferFanClubTrainerName(whichLinkTrainer, whichNPCTrainer);
 #endif //FREE_LINK_BATTLE_RECORDS

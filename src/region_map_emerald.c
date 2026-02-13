@@ -430,6 +430,7 @@ static const u8 sMapHealLocations[][3] =
     // [MAPSEC_ROUTE_132] = {MAP_GROUP(MAP_ROUTE132), MAP_NUM(MAP_ROUTE132), HEAL_LOCATION_NONE},
     // [MAPSEC_ROUTE_133] = {MAP_GROUP(MAP_ROUTE133), MAP_NUM(MAP_ROUTE133), HEAL_LOCATION_NONE},
     // [MAPSEC_ROUTE_134] = {MAP_GROUP(MAP_ROUTE134), MAP_NUM(MAP_ROUTE134), HEAL_LOCATION_NONE},
+    [MAPSEC_BATTLE_FRONTIER] = {MAP_GROUP(MAP_BATTLE_FRONTIER_OUTSIDE_EAST), MAP_NUM(MAP_BATTLE_FRONTIER_OUTSIDE_EAST), HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST},
     [MAPSEC_PALLET_TOWN] = {MAP_GROUP(MAP_PALLET_TOWN), MAP_NUM(MAP_PALLET_TOWN), HEAL_LOCATION_PALLET_TOWN},
     [MAPSEC_VIRIDIAN_CITY] = {MAP_GROUP(MAP_VIRIDIAN_CITY), MAP_NUM(MAP_VIRIDIAN_CITY), HEAL_LOCATION_VIRIDIAN_CITY},
     [MAPSEC_PEWTER_CITY] = {MAP_GROUP(MAP_PEWTER_CITY), MAP_NUM(MAP_PEWTER_CITY), HEAL_LOCATION_PEWTER_CITY},
@@ -620,7 +621,7 @@ static const struct SpritePalette sFlyTargetIconsSpritePalette =
 // static const mapsec_u16_t sRedOutlineFlyDestinations[][2] =
 // {
 //     {
-//         FLAG_LANDMARK_BATTLE_FRONTIER,
+//         FLAG_WORLD_MAP_BATTLE_FRONTIER,
 //         MAPSEC_BATTLE_FRONTIER
 //     },
 //     {
@@ -1309,26 +1310,26 @@ static void InitMapBasedOnPlayerLocation(void)
 
     xOnMap = x;
 
-    dimensionScale = mapWidth / gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].width;
+    dimensionScale = mapWidth / gRegionMapEntries[sRegionMap->mapSecId].width;
     if (dimensionScale == 0)
     {
         dimensionScale = 1;
     }
     x /= dimensionScale;
-    if (x >= gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].width)
+    if (x >= gRegionMapEntries[sRegionMap->mapSecId].width)
     {
-        x = gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].width - 1;
+        x = gRegionMapEntries[sRegionMap->mapSecId].width - 1;
     }
 
-    dimensionScale = mapHeight / gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].height;
+    dimensionScale = mapHeight / gRegionMapEntries[sRegionMap->mapSecId].height;
     if (dimensionScale == 0)
     {
         dimensionScale = 1;
     }
     y /= dimensionScale;
-    if (y >= gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].height)
+    if (y >= gRegionMapEntries[sRegionMap->mapSecId].height)
     {
-        y = gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].height - 1;
+        y = gRegionMapEntries[sRegionMap->mapSecId].height - 1;
     }
 
     switch (sRegionMap->mapSecId)
@@ -1364,8 +1365,8 @@ static void InitMapBasedOnPlayerLocation(void)
     //     GetMarineCaveCoords(&sRegionMap->cursorPosX, &sRegionMap->cursorPosY);
     //     return;
     }
-    sRegionMap->cursorPosX = gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].x + x + MAPCURSOR_X_MIN;
-    sRegionMap->cursorPosY = gRegionMapEntries[sRegionMap->mapSecId - KANTO_MAPSEC_START].y + y + MAPCURSOR_Y_MIN;
+    sRegionMap->cursorPosX = gRegionMapEntries[sRegionMap->mapSecId].x + x + MAPCURSOR_X_MIN;
+    sRegionMap->cursorPosY = gRegionMapEntries[sRegionMap->mapSecId].y + y + MAPCURSOR_Y_MIN;
 }
 
 // static void RegionMap_InitializeStateBasedOnSSTidalLocation(void)
@@ -1458,8 +1459,8 @@ static u8 GetMapsecType(mapsec_u16_t mapSecId)
     //     return FlagGet(FLAG_VISITED_SOOTOPOLIS_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
     // case MAPSEC_EVER_GRANDE_CITY:
     //     return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? MAPSECTYPE_CITY_CANFLY : MAPSECTYPE_CITY_CANTFLY;
-    // case MAPSEC_BATTLE_FRONTIER:
-    //     return FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER) ? MAPSECTYPE_BATTLE_FRONTIER : MAPSECTYPE_NONE;
+    case MAPSEC_BATTLE_FRONTIER:
+        return FlagGet(FLAG_WORLD_MAP_BATTLE_FRONTIER) ? MAPSECTYPE_BATTLE_FRONTIER : MAPSECTYPE_NONE;
     // case MAPSEC_SOUTHERN_ISLAND:
     //     return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? MAPSECTYPE_ROUTE : MAPSECTYPE_NONE;
     case MAPSEC_PALLET_TOWN:
@@ -1862,7 +1863,7 @@ void TrySetPlayerIconBlink(void)
 //     {
 //         str = GetSecretBaseMapName(dest);
 //     }
-//     else 
+//     else
 //     if (regionMapId < MAPSEC_NONE)
 //     {
 //         str = StringCopy(dest, gRegionMapEntries[regionMapId].name);
@@ -1910,10 +1911,10 @@ u8 *GetMapNameHandleAquaHideout(u8 *dest, mapsec_u16_t mapSecId)
 
 static void GetMapSecDimensions(mapsec_u16_t mapSecId, u16 *x, u16 *y, u16 *width, u16 *height)
 {
-    *x = gRegionMapEntries[mapSecId - KANTO_MAPSEC_START].x;
-    *y = gRegionMapEntries[mapSecId - KANTO_MAPSEC_START].y;
-    *width = gRegionMapEntries[mapSecId - KANTO_MAPSEC_START].width;
-    *height = gRegionMapEntries[mapSecId - KANTO_MAPSEC_START].height;
+    *x = gRegionMapEntries[mapSecId].x;
+    *y = gRegionMapEntries[mapSecId].y;
+    *width = gRegionMapEntries[mapSecId].width;
+    *height = gRegionMapEntries[mapSecId].height;
 }
 
 bool8 IsRegionMapZoomed(void)
@@ -2129,7 +2130,7 @@ struct FlyLocation
 };
 
 static const struct FlyLocation sFlyLocations[] =
-{    
+{
     // {
     //     .regionMapType = REGION_MAP_HOENN,
     //     .mapsec = MAPSEC_LITTLEROOT_TOWN,

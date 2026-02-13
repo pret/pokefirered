@@ -40,7 +40,7 @@
 #include "data.h"
 #include "vs_seeker.h"
 #include "item.h"
-// #include "constants/battle_frontier.h"
+#include "constants/battle_frontier.h"
 #include "constants/battle_setup.h"
 #include "constants/event_objects.h"
 #include "constants/game_stat.h"
@@ -62,7 +62,7 @@ enum {
 };
 
 // this file's functions
-// static void DoBattlePikeWildBattle(void);
+static void DoBattlePikeWildBattle(void);
 static void DoSafariBattle(void);
 static void DoGhostBattle(void);
 static void DoStandardWildBattle(bool32 isDouble);
@@ -222,10 +222,10 @@ void BattleSetup_StartDoubleWildBattle(void)
     DoStandardWildBattle(TRUE);
 }
 
-// void BattleSetup_StartBattlePikeWildBattle(void)
-// {
-//     DoBattlePikeWildBattle();
-// }
+void BattleSetup_StartBattlePikeWildBattle(void)
+{
+    DoBattlePikeWildBattle();
+}
 
 static void DoStandardWildBattle(bool32 isDouble)
 {
@@ -308,19 +308,19 @@ static void DoGhostBattle(void)
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
 
-// static void DoBattlePikeWildBattle(void)
-// {
-//     LockPlayerFieldControls();
-//     FreezeObjectEvents();
-//     StopPlayerAvatar();
-//     gMain.savedCallback = CB2_EndWildBattle;
-//     gBattleTypeFlags = BATTLE_TYPE_PIKE;
-//     CreateBattleStartTask(GetWildBattleTransition(), 0);
-//     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
-//     IncrementGameStat(GAME_STAT_WILD_BATTLES);
-//     IncrementDailyWildBattles();
-//     TryUpdateGymLeaderRematchFromWild();
-// }
+static void DoBattlePikeWildBattle(void)
+{
+    LockPlayerFieldControls();
+    FreezeObjectEvents();
+    StopPlayerAvatar();
+    gMain.savedCallback = CB2_EndWildBattle;
+    gBattleTypeFlags = BATTLE_TYPE_PIKE;
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    IncrementGameStat(GAME_STAT_WILD_BATTLES);
+    // IncrementDailyWildBattles();
+    // TryUpdateGymLeaderRematchFromWild();
+}
 
 static void DoTrainerBattle(void)
 {
@@ -709,6 +709,12 @@ u8 GetTrainerBattleTransition(void)
         return sBattleTransitionTable_Trainer[transitionType][1];
 }
 
+// TODO: transitions
+u8 GetSpecialBattleTransition(s32 id)
+{
+    return B_TRANSITION_POKEBALLS_TRAIL;
+}
+
 u8 BattleSetup_GetBattleTowerBattleTransition(void)
 {
     u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
@@ -871,13 +877,46 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     }
 }
 
+const u8* BattleSetup_ConfigureFacilityTrainerBattle(u8 facility, const u8* scriptEndPtr)
+{
+    sTrainerBattleEndScript = (u8*)scriptEndPtr;
+
+    switch (facility)
+    {
+    // case FACILITY_BATTLE_PYRAMID:
+    //     if (gApproachingTrainerId == 0)
+    //     {
+    //         SetMapVarsToTrainerA();
+    //         TRAINER_BATTLE_PARAM.opponentA = LocalIdToPyramidTrainerId(gSpecialVar_LastTalked);
+    //     }
+    //     else
+    //     {
+    //         TRAINER_BATTLE_PARAM.opponentB = LocalIdToPyramidTrainerId(gSpecialVar_LastTalked);
+    //     }
+    //     return EventScript_TryDoNormalTrainerBattle;
+    // case FACILITY_BATTLE_TRAINER_HILL:
+    //     if (gApproachingTrainerId == 0)
+    //     {
+    //         SetMapVarsToTrainerA();
+    //         TRAINER_BATTLE_PARAM.opponentA = LocalIdToHillTrainerId(gSpecialVar_LastTalked);
+    //     }
+    //     else
+    //     {
+    //         TRAINER_BATTLE_PARAM.opponentB = LocalIdToHillTrainerId(gSpecialVar_LastTalked);
+    //     }
+    //     return EventScript_TryDoNormalTrainerBattle;
+    default:
+        return sTrainerBattleEndScript;
+    }
+}
+
 void ConfigureAndSetUpOneTrainerBattle(u8 trainerObjEventId, const u8 *trainerScript)
 {
     gSelectedObjectEvent = trainerObjEventId;
     gSpecialVar_LastTalked = gObjectEvents[trainerObjEventId].localId;
     TrainerBattleLoadArgs(trainerScript + 1);
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
-    ScriptContext_SetupScript(EventScript_DoTrainerBattleFromApproach);
+    ScriptContext_SetupScript(EventScript_StartTrainerApproach);
     LockPlayerFieldControls();
 }
 
@@ -896,7 +935,7 @@ void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript)
 
 void SetUpTwoTrainersBattle(void)
 {
-    ScriptContext_SetupScript(EventScript_DoTrainerBattleFromApproach);
+    ScriptContext_SetupScript(EventScript_StartTrainerApproach);
     LockPlayerFieldControls();
 }
 

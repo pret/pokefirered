@@ -62,7 +62,7 @@ static void SpriteCallback_ScrollIndicatorArrow(struct Sprite *sprite);
 static void SpriteCallback_RedArrowCursor(struct Sprite *sprite);
 
 // EWRAM vars
-static EWRAM_DATA struct 
+static EWRAM_DATA struct
 {
     u32 currItemId;
     u8 state;
@@ -73,7 +73,7 @@ static EWRAM_DATA struct
 EWRAM_DATA struct ScrollArrowsTemplate gTempScrollArrowTemplate = {0};
 
 // IWRAM common
-COMMON_DATA struct ListMenuOverride 
+COMMON_DATA struct ListMenuOverride
 {
     u8 cursorPal:4;
     u8 fillValue:4;
@@ -86,7 +86,7 @@ COMMON_DATA struct ListMenuOverride
 
 COMMON_DATA struct ListMenuTemplate gMultiuseListMenuTemplate = {0};
 
-static const struct 
+static const struct
 {
     u8 animNum:4;
     u8 bounceDir:4;
@@ -385,7 +385,7 @@ u8 ListMenuInitInRect(const struct ListMenuTemplate *listMenuTemplate, const str
 {
     s32 i;
     u8 taskId = ListMenuInitInternal(listMenuTemplate, scrollOffset, selectedRow);
-    
+
     for (i = 0; rect[i].palNum != 0xFF; i++)
         PutWindowRectTilemapOverridePalette(listMenuTemplate->windowId, rect[i].x, rect[i].y, rect[i].width, rect[i].height, rect[i].palNum);
     CopyWindowToVram(listMenuTemplate->windowId, COPYWIN_GFX);
@@ -398,7 +398,10 @@ s32 ListMenu_ProcessInput(u8 listTaskId)
 
     if (JOY_NEW(A_BUTTON))
     {
-        return list->template.items[list->scrollOffset + list->selectedRow].id;
+        if (list->template.isDynamic)
+            return list->scrollOffset + list->selectedRow;
+        else
+            return list->template.items[list->scrollOffset + list->selectedRow].id;
     }
     else if (JOY_NEW(B_BUTTON))
     {
@@ -584,10 +587,17 @@ static void ListMenuPrintEntries(struct ListMenu *list, u16 startIndex, u16 yOff
             x = list->template.header_X;
 
         y = (yOffset + i) * yMultiplier + list->template.upText_Y;
-        if (list->template.itemPrintFunc != NULL)
-            list->template.itemPrintFunc(list->template.windowId, list->template.items[startIndex].id, y);
+        if (list->template.isDynamic)
+        {
+            list->template.itemPrintFunc(list->template.windowId, startIndex, y);
+        }
+        else
+        {
+            if (list->template.itemPrintFunc != NULL)
+                list->template.itemPrintFunc(list->template.windowId, list->template.items[startIndex].id, y);
 
-        ListMenuPrint(list, list->template.items[startIndex].name, x, y);
+            ListMenuPrint(list, list->template.items[startIndex].name, x, y);
+        }
         startIndex++;
     }
 }
@@ -674,7 +684,7 @@ static u8 ListMenuUpdateSelectedRowIndexAndScrollOffset(struct ListMenu *list, b
             while (selectedRow != 0)
             {
                 selectedRow--;
-                if (list->template.items[scrollOffset + selectedRow].id != LIST_HEADER)
+                if (list->template.isDynamic || list->template.items[scrollOffset + selectedRow].id != LIST_HEADER)
                 {
                     list->selectedRow = selectedRow;
                     return 1;
@@ -688,7 +698,7 @@ static u8 ListMenuUpdateSelectedRowIndexAndScrollOffset(struct ListMenu *list, b
             while (selectedRow > newRow)
             {
                 selectedRow--;
-                if (list->template.items[scrollOffset + selectedRow].id != LIST_HEADER)
+                if (list->template.isDynamic || list->template.items[scrollOffset + selectedRow].id != LIST_HEADER)
                 {
                     list->selectedRow = selectedRow;
                     return 1;
@@ -710,7 +720,7 @@ static u8 ListMenuUpdateSelectedRowIndexAndScrollOffset(struct ListMenu *list, b
             while (selectedRow < list->template.maxShowed - 1)
             {
                 selectedRow++;
-                if (list->template.items[scrollOffset + selectedRow].id != LIST_HEADER)
+                if (list->template.isDynamic || list->template.items[scrollOffset + selectedRow].id != LIST_HEADER)
                 {
                     list->selectedRow = selectedRow;
                     return 1;
@@ -724,7 +734,7 @@ static u8 ListMenuUpdateSelectedRowIndexAndScrollOffset(struct ListMenu *list, b
             while (selectedRow < newRow)
             {
                 selectedRow++;
-                if (list->template.items[scrollOffset + selectedRow].id != LIST_HEADER)
+                if (list->template.isDynamic || list->template.items[scrollOffset + selectedRow].id != LIST_HEADER)
                 {
                     list->selectedRow = selectedRow;
                     return 1;
@@ -790,14 +800,23 @@ bool8 ListMenuChangeSelectionFull(struct ListMenu *list, bool32 updateCursor, bo
     selectionChange = 0;
     for (i = 0; i < count; i++)
     {
-        do
+        if (list->template.isDynamic)
         {
             u8 ret = ListMenuUpdateSelectedRowIndexAndScrollOffset(list, movingDown);
             selectionChange |= ret;
-            if (ret != 2)
-                break;
             cursorCount++;
-        } while (list->template.items[list->scrollOffset + list->selectedRow].id == LIST_HEADER);
+        }
+        else
+        {
+            do
+            {
+                u8 ret = ListMenuUpdateSelectedRowIndexAndScrollOffset(list, movingDown);
+                selectionChange |= ret;
+                if (ret != 2)
+                    break;
+                cursorCount++;
+            } while (list->template.items[list->scrollOffset + list->selectedRow].id == LIST_HEADER);
+        }
     }
 
     if (updateCursor)

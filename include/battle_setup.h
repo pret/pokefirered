@@ -58,6 +58,7 @@ void ResetTrainerOpponentIds(void);
 void SetMapVarsToTrainerA(void);
 void SetMapVarsToTrainerB(void);
 const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data);
+const u8* BattleSetup_ConfigureFacilityTrainerBattle(u8 facility, const u8* scriptEndPtr);
 void ConfigureAndSetUpOneTrainerBattle(u8 trainerObjEventId, const u8 *trainerScript);
 void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript);
 void SetUpTwoTrainersBattle(void);

@@ -154,4 +154,6 @@
 
 #define OW_FIELD_MOVES_WITHOUT_HMS          TRUE
 
+#define OW_BATTLE_FRONTIER TRUE // If TRUE, enables the Battle Frontier.
+
 #endif // GUARD_CONFIG_OVERWORLD_H

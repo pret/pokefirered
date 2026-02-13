@@ -2,17 +2,28 @@
 #include "config/battle.h"
 #include "constants/global.h"
 #include "constants/flags.h"
+#include "constants/apprentice.h"
+#include "constants/battle_arena.h"
+#include "constants/battle_dome.h"
+#include "constants/battle_factory.h"
+#include "constants/battle_frontier.h"
+#include "constants/battle_palace.h"
+#include "constants/battle_pike.h"
+#include "constants/battle_pyramid.h"
 #include "constants/battle_special.h"
+#include "constants/battle_tower.h"
 #include "constants/berry.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/field_move.h"
+#include "constants/frontier_util.h"
 #include "constants/decorations.h"
 #include "constants/item.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/maps.h"
 #include "constants/metatile_labels.h"
+#include "constants/party_menu.h"
 #include "constants/pokemon.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -40,6 +51,7 @@
 #include "constants/quest_log.h"
 #include "constants/daycare.h"
 #include "constants/easy_chat.h"
+#include "constants/tv.h"
 #include "constants/trainer_card.h"
 #include "constants/help_system.h"
 #include "constants/trainer_fan_club.h"
@@ -91,6 +103,7 @@ gStdScripts::
 	.4byte Std_ObtainDecoration     @ STD_OBTAIN_DECORATION
 	.4byte Std_PutItemAway          @ STD_PUT_ITEM_AWAY
 	.4byte Std_ReceivedItem         @ STD_RECEIVED_ITEM
+	.4byte Std_MsgboxGetPoints      @ MSGBOX_GETPOINTS
 gStdScriptsEnd::
 
 	.include "data/maps/BattleColosseum_2P/scripts.inc"
@@ -518,6 +531,59 @@ gStdScriptsEnd::
 	.include "data/maps/SixIsland_WaterPath_House1/scripts.inc"
 	.include "data/maps/SixIsland_WaterPath_House2/scripts.inc"
 	.include "data/maps/SevenIsland_SevaultCanyon_House/scripts.inc"
+	.include "data/maps/BattleFrontier_OutsideWest/scripts.inc"
+	.include "data/maps/BattleFrontier_OutsideEast/scripts.inc"
+	.include "data/maps/BattleFrontier_PokemonCenter_1F/scripts.inc"
+	.include "data/maps/BattleFrontier_PokemonCenter_2F/scripts.inc"
+	.include "data/maps/BattleFrontier_Mart/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleTowerLobby/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleTowerBattleRoom/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleTowerElevator/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleTowerCorridor/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleTowerMultiPartnerRoom/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleTowerMultiCorridor/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleTowerMultiBattleRoom/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleArenaBattleRoom/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleArenaCorridor/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleArenaLobby/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePalaceBattleRoom/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePalaceCorridor/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePalaceLobby/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePyramidFloor/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePyramidLobby/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePyramidTop/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePikeCorridor/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePikeLobby/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePikeRoomFinal/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePikeRoomNormal/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePikeRoomWildMons/scripts.inc"
+	.include "data/maps/BattleFrontier_BattlePikeThreePathRoom/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleDomeBattleRoom/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleDomeCorridor/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleDomeLobby/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleDomePreBattleRoom/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleFactoryLobby/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleFactoryBattleRoom/scripts.inc"
+	.include "data/maps/BattleFrontier_BattleFactoryPreBattleRoom/scripts.inc"
+	.include "data/maps/BattlePyramidSquare01/scripts.inc"
+	.include "data/maps/BattleFrontier_RankingHall/scripts.inc"
+	.include "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
+	.include "data/maps/BattleFrontier_ScottsHouse/scripts.inc"
+	.include "data/maps/BattleFrontier_ReceptionGate/scripts.inc"
+	.include "data/maps/BattleFrontier_Lounge1/scripts.inc"
+	.include "data/maps/BattleFrontier_Lounge2/scripts.inc"
+	.include "data/maps/BattleFrontier_Lounge3/scripts.inc"
+	.include "data/maps/BattleFrontier_Lounge4/scripts.inc"
+	.include "data/maps/BattleFrontier_Lounge5/scripts.inc"
+	.include "data/maps/BattleFrontier_Lounge6/scripts.inc"
+	.include "data/maps/BattleFrontier_Lounge7/scripts.inc"
+	.include "data/maps/BattleFrontier_Lounge8/scripts.inc"
+	.include "data/maps/ArtisanCave_B1F/scripts.inc"
+	.include "data/maps/ArtisanCave_1F/scripts.inc"
+
+	.include "data/scripts/battle_frontier.inc"
+	.include "data/scripts/battle_pike.inc"
+	.include "data/scripts/apprentice.inc"
 
 	.include "data/maps/ViridianForest/text.inc"
 	.include "data/maps/MtMoon_1F/text.inc"
@@ -1202,36 +1268,6 @@ EventScript_DelayedLookAround::
 	.include "data/scripts/pc_transfer.inc"
 	.include "data/scripts/berry_tree.inc"
 
-EventScript_GetInGameTradeSpeciesInfo::
-	copyvar VAR_0x8004, VAR_0x8008
-	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
-	copyvar VAR_0x8009, VAR_RESULT
-	return
-
-EventScript_ChooseMonForInGameTrade::
-	special ChoosePartyMon
-	waitstate
-	lock
-	faceplayer
-	copyvar VAR_0x800A, VAR_0x8004
-	return
-
-EventScript_GetInGameTradeSpecies::
-	copyvar VAR_0x8005, VAR_0x800A
-	specialvar VAR_RESULT, GetTradeSpecies
-	copyvar VAR_0x800B, VAR_RESULT
-	return
-
-EventScript_DoInGameTrade::
-	copyvar VAR_0x8004, VAR_0x8008
-	copyvar VAR_0x8005, VAR_0x800A
-	special CreateInGameTradePokemon
-	special DoInGameTradeScene
-	waitstate
-	lock
-	faceplayer
-	return
-
 EventScript_VsSeekerChargingDone::
 	special VsSeekerFreezeObjectsAfterChargeComplete
 	waitstate
@@ -1369,3 +1405,5 @@ Text_TestMsg::
 	.include "data/text/pokedude.inc"
 	.include "data/scripts/follower.inc"
 	.include "data/scripts/dexnav.inc"
+	.include "data/text/apprentice.inc"
+	.include "data/text/tv.inc"

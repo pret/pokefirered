@@ -15,6 +15,10 @@ Text_TooBadBagFull::
 	.string "Too bad!\n"
 	.string "The BAG is full…$"
 
+gText_PlayerPutItemInBag::
+	.string "{PLAYER} put away the {STR_VAR_2}\n"
+	.string "in the BAG.$"
+
 Text_FoundXCoins::
 	.string "{PLAYER} found\n"
 	.string "{STR_VAR_1} {STR_VAR_2}!$"

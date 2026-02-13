@@ -135,7 +135,14 @@ EventScript_PickUpItem::
 	showitemdescription
 	waitfanfare
 	waitmessage
+	pyramid_getlocation
+	goto_if_eq VAR_RESULT, PYRAMID_LOCATION_FLOOR, EventScript_PutBattlePyramidItemInBag
 	msgbox Text_PutItemAway
+	hideitemdescription
+	return
+
+EventScript_PutBattlePyramidItemInBag::
+	msgbox gText_PlayerPutItemInBag, MSGBOX_DEFAULT
 	hideitemdescription
 	return
 

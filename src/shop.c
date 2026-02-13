@@ -154,7 +154,7 @@ static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 
 static const struct YesNoFuncTable sShopMenuActions_BuyQuit =
 {
-    .yesFunc = BuyMenuTryMakePurchase, 
+    .yesFunc = BuyMenuTryMakePurchase,
     .noFunc = BuyMenuReturnToItemList,
 };
 

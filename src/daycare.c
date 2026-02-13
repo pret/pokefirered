@@ -397,7 +397,7 @@ u8 *GetMonNicknameVanilla(struct Pokemon *mon, u8 *dest)
     return StringCopyN(dest, nickname, VANILLA_POKEMON_NAME_LENGTH);
 }
 
-static u8 *DayCare_GetBoxMonNickname(struct BoxPokemon *mon, u8 *dest)
+u8 *DayCare_GetBoxMonNickname(struct BoxPokemon *mon, u8 *dest)
 {
     u8 nickname[POKEMON_NAME_LENGTH * 2];
 

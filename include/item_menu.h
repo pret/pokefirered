@@ -16,6 +16,7 @@ enum {
     ITEMMENULOCATION_TTVSCR_CATCHING,
     ITEMMENULOCATION_TTVSCR_REGISTER,
     ITEMMENULOCATION_TTVSCR_TMS,
+    ITEMMENULOCATION_APPRENTICE,
     ITEMMENULOCATION_BERRY_TREE_MULCH,
     ITEMMENULOCATION_LAST
 };
@@ -106,6 +107,7 @@ void UpdatePocketItemList(enum Pocket pocketId);
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId));
 void CloseItemMessage(u8 taskId);
 void SortItemsInBag(struct BagPocket *pocket, enum BagSortOptions type);
+void ApprenticeOpenBagMenu(void);
 
 void InitPokedudeBag(u8);
 void ItemMenu_SetExitCallback(void (*)(void));

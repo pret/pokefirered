@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gflib.h"
+#include "confetti_util.h"
 #include "decompress.h"
 #include "scanline_effect.h"
 #include "task.h"
@@ -27,6 +28,7 @@
 
 #define HALL_OF_FAME_MAX_TEAMS 50
 #define HALL_OF_FAME_BG_PAL    RGB(22, 24, 29)
+#define TAG_CONFETTI 1001
 
 
 STATIC_ASSERT(sizeof(struct HallofFameTeam) * HALL_OF_FAME_MAX_TEAMS <= SECTOR_DATA_SIZE * NUM_HOF_SECTORS, HallOfFameFreeSpace);
@@ -79,6 +81,7 @@ static bool8 DrawHofBackground(void);
 static void SpriteCB_GetOnScreen(struct Sprite *sprite);
 static void SpriteCB_Confetti(struct Sprite *sprite);
 static bool8 Hof_SpawnConfetti(void);
+static void Task_DoDomeConfetti(u8 taskId);
 
 static const struct BgTemplate sHof_BgTemplates[] = {
     {
@@ -127,12 +130,12 @@ static const u8 sTextColors[][4] = {
 };
 
 static const struct CompressedSpriteSheet sHallOfFame_ConfettiSpriteSheet[] = {
-    {gFile_graphics_misc_confetti_sheet, 0x220, 1001},
+    {gFile_graphics_misc_confetti_sheet, 0x220, TAG_CONFETTI},
     {}
 };
 
 static const struct SpritePalette sHallOfFame_ConfettiSpritePalette[] = {
-    {gFile_graphics_misc_confetti_palette, 1001},
+    {gFile_graphics_misc_confetti_palette, TAG_CONFETTI},
     {}
 };
 
@@ -264,8 +267,8 @@ static const union AnimCmd *const sSpriteAnimTable_Confetti[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Confetti = {
-    .tileTag = 1001,
-    .paletteTag = 1001,
+    .tileTag = TAG_CONFETTI,
+    .paletteTag = TAG_CONFETTI,
     .oam = &sOamData_Confetti,
     .anims = sSpriteAnimTable_Confetti,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -1275,3 +1278,132 @@ static bool8 Hof_SpawnConfetti(void)
 
     return FALSE;
 }
+
+// The below confetti functions are used when a Battle Dome tourney is won
+// For the Hall of Fame confetti see Task_Hof_DoConfetti
+// The end result is essentially the same, just a very different way of handling it
+#define tState         data[0]
+#define tTimer         data[1]
+#define tConfettiCount data[15]
+
+// Indexes into the data array of the struct ConfettiUtil
+#define CONFETTI_SINE_IDX 0
+#define CONFETTI_EXTRA_Y  1
+#define CONFETTI_TASK_ID  7
+
+void DoDomeConfetti(void)
+{
+    u8 taskId;
+
+    gSpecialVar_0x8004 = 180;
+    taskId = CreateTask(Task_DoDomeConfetti, 0);
+    if (taskId != TASK_NONE)
+    {
+        gTasks[taskId].tTimer = gSpecialVar_0x8004;
+        gSpecialVar_0x8005 = taskId;
+    }
+}
+
+static void StopDomeConfetti(void)
+{
+    u8 taskId;
+
+    if ((taskId = FindTaskIdByFunc(Task_DoDomeConfetti)) != TASK_NONE)
+        DestroyTask(taskId);
+
+    ConfettiUtil_Free();
+    FreeSpriteTilesByTag(TAG_CONFETTI);
+    FreeSpritePaletteByTag(TAG_CONFETTI);
+}
+
+static void UpdateDomeConfetti(struct ConfettiUtil *util)
+{
+    if (util->yDelta > 110)
+    {
+        // Destroy confetti after it falls far enough
+        gTasks[util->data[CONFETTI_TASK_ID]].tConfettiCount--;
+        ConfettiUtil_Remove(util->id);
+    }
+    else
+    {
+        // Move confetti down
+        u8 sineIdx;
+        s32 rand;
+
+        util->yDelta++;
+        util->yDelta += util->data[CONFETTI_EXTRA_Y];
+
+        sineIdx = util->data[CONFETTI_SINE_IDX];
+        rand = Random();
+        rand &= 3;
+        rand += 8;
+        util->xDelta = (rand) * ((gSineTable[sineIdx])) / 256;
+
+        util->data[CONFETTI_SINE_IDX] += 4;
+    }
+}
+
+static void Task_DoDomeConfetti(u8 taskId)
+{
+    u32 id = 0;
+    s16 *data = gTasks[taskId].data;
+
+    switch (tState)
+    {
+    case 0:
+        if (!ConfettiUtil_Init(64))
+        {
+            // Init failed
+            DestroyTask(taskId);
+            gSpecialVar_0x8004 = 0;
+            gSpecialVar_0x8005 = 0xFFFF;
+        }
+        LoadCompressedSpriteSheet(sHallOfFame_ConfettiSpriteSheet);
+        LoadSpritePalette(sHallOfFame_ConfettiSpritePalette);
+        tState++;
+        break;
+    case 1:
+        if (tTimer != 0 && tTimer % 3 == 0)
+        {
+            // Create new confetti every 3 frames
+            id = ConfettiUtil_AddNew(&sOamData_Confetti,
+                              TAG_CONFETTI,
+                              TAG_CONFETTI,
+                              Random() % DISPLAY_WIDTH,
+                              -(Random() % 8),
+                              Random() % ARRAY_COUNT(sSpriteAnimTable_Confetti),
+                              id);
+            if (id != 0xFF)
+            {
+                ConfettiUtil_SetCallback(id, UpdateDomeConfetti);
+
+                // 1/4 of the confetti move an extra y coord every frame
+                if ((Random() % 4) == 0)
+                    ConfettiUtil_SetData(id, CONFETTI_EXTRA_Y, 1);
+
+                ConfettiUtil_SetData(id, CONFETTI_TASK_ID, taskId);
+                tConfettiCount++;
+            }
+        }
+
+        ConfettiUtil_Update();
+        if (tTimer != 0)
+            tTimer--;
+        else if (tConfettiCount == 0)
+            tState = 0xFF;
+        break;
+    case 0xFF:
+        StopDomeConfetti();
+        gSpecialVar_0x8004 = 0;
+        gSpecialVar_0x8005 = 0xFFFF;
+        break;
+    }
+}
+
+#undef tState
+#undef tTimer
+#undef tConfettiCount
+
+#undef CONFETTI_SINE_IDX
+#undef CONFETTI_EXTRA_Y
+#undef CONFETTI_TASK_ID

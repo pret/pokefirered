@@ -25,3 +25,9 @@ Test_Text_ThisIsACoordEvent::
 	.align 2
 Test_Text_Empty::
 	.string "$"
+
+EventScript_ObjectApproachPlayer::
+	lock
+	special DoTrainerApproach
+	waitstate
+	gotonative LoadTrainerObjectScript

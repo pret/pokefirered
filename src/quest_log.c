@@ -1226,7 +1226,7 @@ static void Task_EndQuestLog(u8 taskId)
         CpuCopy16(sPalettesBackup, gPlttBufferUnfaded, PLTT_SIZE);
         Free(sPalettesBackup);
         sPlaybackControl = (struct PlaybackControl){};
-        ClearPlayerHeldMovementAndUnfreezeObjectEvents();
+        ScriptUnfreezeObjectEvents();
         UnlockPlayerFieldControls();
         gTextFlags.autoScroll = FALSE;
         gGlobalFieldTintMode = QL_TINT_NONE;

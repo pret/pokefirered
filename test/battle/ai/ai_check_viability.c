@@ -135,6 +135,25 @@ AI_SINGLE_BATTLE_TEST("AI will only use Dream Eater if target is asleep")
     }
 }
 
+AI_SINGLE_BATTLE_TEST("AI chooses Sleep Talk only when it will not wake up with Early Bird")
+{
+    enum Ability ability;
+
+    PARAMETRIZE { ability = ABILITY_RUN_AWAY; }
+    PARAMETRIZE { ability = ABILITY_EARLY_BIRD; }
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_DODRIO) { Ability(ability); Status1(STATUS1_SLEEP_TURN(2)); Moves(MOVE_SLEEP_TALK, MOVE_TACKLE); }
+    } WHEN {
+        if (ability == ABILITY_EARLY_BIRD)
+            TURN { EXPECT_MOVE(opponent, MOVE_TACKLE); }
+        else
+            TURN { EXPECT_MOVE(opponent, MOVE_SLEEP_TALK); }
+    }
+}
+
 AI_SINGLE_BATTLE_TEST("AI sees increased base power of Spit Up")
 {
     GIVEN {
@@ -394,6 +413,51 @@ AI_SINGLE_BATTLE_TEST("AI uses Trick Room (singles)")
             TURN { EXPECT_MOVE(opponent, MOVE_TRICK_ROOM); }
         else
             TURN { NOT_EXPECT_MOVE(opponent, MOVE_TRICK_ROOM); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI uses Tailwind to trigger Wind Rider (Single)")
+{
+    bool32 expectTailwind;
+    u16 tailwindSpecies;
+    enum Ability tailwindAbility;
+
+    PARAMETRIZE { tailwindSpecies = SPECIES_BRAMBLEGHAST; tailwindAbility = ABILITY_WIND_RIDER;  expectTailwind = TRUE; }
+    PARAMETRIZE { tailwindSpecies = SPECIES_BRAMBLEGHAST; tailwindAbility = ABILITY_INFILTRATOR; expectTailwind = FALSE; }
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
+        OPPONENT(tailwindSpecies) { Ability(tailwindAbility); Speed(9); Moves(MOVE_TAILWIND, MOVE_HEADBUTT); }
+    } WHEN {
+        if (expectTailwind)
+            TURN { EXPECT_MOVE(opponent, MOVE_TAILWIND); }
+        else
+            TURN { NOT_EXPECT_MOVE(opponent, MOVE_TAILWIND); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("AI uses Tailwind to trigger Wind Power (Single)")
+{
+    bool32 expectTailwind;
+    u16 tailwindSpecies;
+    enum Ability tailwindAbility;
+
+    PARAMETRIZE { tailwindSpecies = SPECIES_KILOWATTREL; tailwindAbility = ABILITY_WIND_POWER;  expectTailwind = TRUE; }
+    PARAMETRIZE { tailwindSpecies = SPECIES_KILOWATTREL; tailwindAbility = ABILITY_COMPETITIVE; expectTailwind = FALSE; }
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
+        ASSUME(GetMoveType(MOVE_THUNDERSHOCK) == TYPE_ELECTRIC);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
+        OPPONENT(tailwindSpecies) { Ability(tailwindAbility); Speed(9); Moves(MOVE_TAILWIND, MOVE_THUNDERSHOCK); }
+    } WHEN {
+        if (expectTailwind)
+            TURN { EXPECT_MOVE(opponent, MOVE_TAILWIND); }
+        else
+            TURN { NOT_EXPECT_MOVE(opponent, MOVE_TAILWIND); }
     }
 }
 

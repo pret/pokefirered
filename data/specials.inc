@@ -69,7 +69,7 @@ gSpecials::
 	def_special GetTrainerBattleMode
 	def_special ShowTrainerIntroSpeech
 	def_special ShowTrainerCantBattleSpeech
-	def_special Script_HasTrainerBeenFought
+	def_special GetTrainerFlag
 	def_special DoTrainerApproach
 	def_special PlayTrainerEncounterMusic
 	def_special ShouldTryRematchBattle
@@ -315,8 +315,8 @@ gSpecials::
 	def_special StartGroudonKyogreBattle
 	def_special BattleSetup_StartLegendaryBattle
 	def_special StartRegiBattle
-	def_special SetUpTrainerMovement
-	def_special NullFieldSpecial
+	def_special SetTrainerFacingDirection
+	def_special ShouldTryGetTrainerScript
 	def_special NullFieldSpecial
 	def_special StartDroughtWeatherBlend
 	def_special DoDiveWarp

@@ -1,6 +1,6 @@
 #include "battle.h"
 #include "battle_scripts.h"
-// #include "constants/battle_factory.h"
+#include "constants/battle_factory.h"
 #include "constants/battle_move_effects.h"
 
 const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
@@ -216,15 +216,9 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_OHKO] =
     {
-        .battleScript = BattleScript_EffectOHKO,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 7,
         .battleFactoryStyle = FACTORY_STYLE_HIGH_RISK,
-    },
-
-    [EFFECT_SHEER_COLD] =
-    {
-        .battleScript = BattleScript_EffectOHKO,
-        .battleTvScore = 7,
     },
 
     [EFFECT_FUSION_COMBO] =
@@ -508,7 +502,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_SNORE] =
     {
-        .battleScript = BattleScript_EffectSnore,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 3,
     },
 
@@ -721,7 +715,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_MAGNITUDE] =
     {
-        .battleScript = BattleScript_EffectMagnitude,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
     },
 
@@ -832,7 +826,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_BEAT_UP] =
     {
-        .battleScript = BattleScript_EffectBeatUp,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 2,
     },
 
@@ -882,7 +876,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_SPIT_UP] =
     {
-        .battleScript = BattleScript_EffectSpitUp,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 3,
         .encourageEncore = TRUE,
     },
@@ -1204,7 +1198,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_NATURAL_GIFT] =
     {
-        .battleScript = BattleScript_EffectNaturalGift,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
         .encourageEncore = TRUE,
     },
@@ -2131,7 +2125,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_FICKLE_BEAM] =
     {
-        .battleScript = BattleScript_EffectFickleBeam,
+        .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
     },
 

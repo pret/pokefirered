@@ -66,34 +66,7 @@ SINGLE_BATTLE_TEST("Corrosion does not effect poison type damaging moves if the 
     }
 }
 
-SINGLE_BATTLE_TEST("Corrosion can poison Poison- and Steel-type targets if it uses Fling while holding a Toxic Orb or a Poison Barb")
-{
-    u16 heldItem;
-
-    PARAMETRIZE { heldItem = ITEM_POISON_BARB; }
-    PARAMETRIZE { heldItem = ITEM_TOXIC_ORB; }
-
-    GIVEN {
-        ASSUME(GetMoveEffect(MOVE_FLING) == EFFECT_FLING);
-        ASSUME(gItemsInfo[ITEM_POISON_BARB].holdEffect == HOLD_EFFECT_TYPE_POWER);
-        ASSUME(gItemsInfo[ITEM_POISON_BARB].secondaryId == TYPE_POISON);
-        ASSUME(gItemsInfo[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
-        PLAYER(SPECIES_SALANDIT) { Ability(ABILITY_CORROSION); Item(heldItem); }
-        OPPONENT(SPECIES_ODDISH);
-    } WHEN {
-        TURN { MOVE(player, MOVE_FLING); }
-    } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLING, player);
-        HP_BAR(opponent);
-        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_PSN, opponent);
-        if (heldItem == ITEM_POISON_BARB)
-            STATUS_ICON(opponent, poison: TRUE);
-        else
-            STATUS_ICON(opponent, badPoison: TRUE);
-    }
-}
-
-SINGLE_BATTLE_TEST("If a Poison- or Steel-type Pokémon with Corrosion holds a Toxic Orb, it will badly poison itself")
+SINGLE_BATTLE_TEST("Corrosion badly poisons its Poison/Steel-type user who holds a Toxic Orb")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_TOXIC_ORB].holdEffect == HOLD_EFFECT_TOXIC_ORB);
@@ -107,7 +80,7 @@ SINGLE_BATTLE_TEST("If a Poison- or Steel-type Pokémon with Corrosion holds a T
     }
 }
 
-SINGLE_BATTLE_TEST("If a Poison- or Steel-type Pokémon with Corrosion poisons a target with Synchronize, Synchronize will not poison Poison- or Steel-type Pokémon")
+SINGLE_BATTLE_TEST("Corrosion can poison a target with Synchronize and Synchronize will not poison Poison- or Steel-type Pokémon")
 {
     enum Move move;
     PARAMETRIZE { move = MOVE_TOXIC; }

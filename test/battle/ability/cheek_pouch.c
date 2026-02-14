@@ -119,7 +119,7 @@ SINGLE_BATTLE_TEST("Cheek Pouch doesn't activate when using Natural Gift")
     }
 }
 
-SINGLE_BATTLE_TEST("Cheek Pouch doesn't activate when using Fling")
+SINGLE_BATTLE_TEST("Cheek Pouch doesn't activate when user uses Fling")
 {
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_FLING) == EFFECT_FLING);

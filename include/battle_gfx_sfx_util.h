@@ -3,6 +3,7 @@
 
 void AllocateBattleSpritesData(void);
 void FreeBattleSpritesData(void);
+u16 ChooseMoveAndTargetInBattlePalace(enum BattlerId battler);
 void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite);
 void SpriteCB_TrainerSlideIn(struct Sprite *sprite);
 void SpriteCB_TrainerSpawn(struct Sprite *sprite);
@@ -22,7 +23,7 @@ bool8 BattleInitAllSprites(u8 *state, u8 *battlerId);
 void ClearSpritesHealthboxAnimData(void);
 void CopyAllBattleSpritesInvisibilities(void);
 void CopyBattleSpriteInvisibility(u8 battlerId);
-void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bool32 trackEnemyPersonality, bool32 ghostUnveil);
+void HandleSpeciesGfxDataChange(enum BattlerId battlerAtk, enum BattlerId battlerDef, u8 changeType);
 void BattleLoadSubstituteOrMonSpriteGfx(u8 battlerId, bool8 loadMonSprite);
 void LoadBattleMonGfxAndAnimate(u8 battlerId, bool8 loadMonSprite, u8 spriteId);
 void TrySetBehindSubstituteSpriteBit(u8 battlerId, u16 move);

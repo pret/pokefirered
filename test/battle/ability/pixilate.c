@@ -138,13 +138,104 @@ SINGLE_BATTLE_TEST("Pixilate doesn't affect Hidden Power's type")
     }
 }
 
-TO_DO_BATTLE_TEST("Pixilate doesn't override Electrify (Gen7+)");
-TO_DO_BATTLE_TEST("Pixilate doesn't override Ion Deluge (Gen7+)"); // Ion Deluge doesn't exist in Gen 8+, but we probably could assume it behaves similar to under Electrify. TODO: Test by hacking SV.
-TO_DO_BATTLE_TEST("Pixilate overrides Electrify (Gen6)")
-TO_DO_BATTLE_TEST("Pixilate overrides Ion Deluge (Gen6)")
-TO_DO_BATTLE_TEST("Pixilate doesn't affect Tera Starstorm's type");
+SINGLE_BATTLE_TEST("Pixilate doesn't override Electrify")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_ELECTRIFY) == EFFECT_ELECTRIFY);
+        ASSUME(GetSpeciesType(SPECIES_SANDSHREW, 0) == TYPE_GROUND || GetSpeciesType(SPECIES_SANDSHREW, 1) == TYPE_GROUND);
+        PLAYER(SPECIES_SYLVEON) { Ability(ABILITY_PIXILATE); }
+        OPPONENT(SPECIES_SANDSHREW);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_ELECTRIFY); MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ELECTRIFY, opponent);
+        NOT { ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player); }
+        MESSAGE("It doesn't affect the opposing Sandshrew…");
+    }
+}
+
+SINGLE_BATTLE_TEST("Pixilate overrides Ion Deluge")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_ION_DELUGE) == EFFECT_ION_DELUGE);
+        ASSUME(GetSpeciesType(SPECIES_BAGON, 0) == TYPE_DRAGON || GetSpeciesType(SPECIES_BAGON, 1) == TYPE_DRAGON);
+        PLAYER(SPECIES_SYLVEON) { Ability(ABILITY_PIXILATE); }
+        OPPONENT(SPECIES_BAGON);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_ION_DELUGE); MOVE(player, MOVE_SCRATCH); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ION_DELUGE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
+        MESSAGE("It's super effective!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Pixilate changes Tera Blast's type when not Terastallized")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TERA_BLAST) == EFFECT_TERA_BLAST);
+        ASSUME(GetMoveType(MOVE_TERA_BLAST) == TYPE_NORMAL);
+        ASSUME(GetSpeciesType(SPECIES_MACHOP, 0) == TYPE_FIGHTING || GetSpeciesType(SPECIES_MACHOP, 1) == TYPE_FIGHTING);
+        PLAYER(SPECIES_SYLVEON) { Ability(ABILITY_PIXILATE); }
+        OPPONENT(SPECIES_MACHOP);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TERA_BLAST); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
+        MESSAGE("It's super effective!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Pixilate doesn't change Tera Blast's type when Terastallized")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TERA_BLAST) == EFFECT_TERA_BLAST);
+        ASSUME(GetMoveType(MOVE_TERA_BLAST) == TYPE_NORMAL);
+        ASSUME(GetSpeciesType(SPECIES_MISDREAVUS, 0) == TYPE_GHOST);
+        PLAYER(SPECIES_SYLVEON) { Ability(ABILITY_PIXILATE); TeraType(TYPE_NORMAL); }
+        OPPONENT(SPECIES_MISDREAVUS);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
+    } SCENE {
+        NOT { ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player); }
+        MESSAGE("It doesn't affect the opposing Misdreavus…");
+    }
+}
+
+SINGLE_BATTLE_TEST("Pixilate doesn't affect Terrain Pulse's type")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TERRAIN_PULSE) == EFFECT_TERRAIN_PULSE);
+        ASSUME(GetMoveType(MOVE_TERRAIN_PULSE) == TYPE_NORMAL);
+        ASSUME(GetSpeciesType(SPECIES_SANDSHREW, 0) == TYPE_GROUND || GetSpeciesType(SPECIES_SANDSHREW, 1) == TYPE_GROUND);
+        PLAYER(SPECIES_SYLVEON) { Ability(ABILITY_PIXILATE); }
+        OPPONENT(SPECIES_SANDSHREW);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_ELECTRIC_TERRAIN); MOVE(player, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_TERRAIN_PULSE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ELECTRIC_TERRAIN, opponent);
+        NOT { ANIMATION(ANIM_TYPE_MOVE, MOVE_TERRAIN_PULSE, player); }
+        MESSAGE("It doesn't affect the opposing Sandshrew…");
+    }
+}
+
+SINGLE_BATTLE_TEST("Pixilate doesn't affect damaging Z-Move types")
+{
+    GIVEN {
+        ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
+        ASSUME(GetSpeciesType(SPECIES_BAGON, 0) == TYPE_DRAGON || GetSpeciesType(SPECIES_BAGON, 1) == TYPE_DRAGON);
+        PLAYER(SPECIES_SYLVEON) { Ability(ABILITY_PIXILATE); Item(ITEM_NORMALIUM_Z); }
+        OPPONENT(SPECIES_BAGON);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_Z_MOVE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_BREAKNECK_BLITZ, player);
+        NOT { MESSAGE("It's super effective!"); }
+    }
+}
+
 TO_DO_BATTLE_TEST("Pixilate doesn't affect Max Strike's type");
-TO_DO_BATTLE_TEST("Pixilate doesn't affect Terrain Pulse's type");
-TO_DO_BATTLE_TEST("Pixilate doesn't affect damaging Z-Move types");
 TO_DO_BATTLE_TEST("(DYNAMAX) Pixilate turns Max Strike into Max Starfall when not used by Gigantamax Alcremie");
 TO_DO_BATTLE_TEST("(DYNAMAX) Pixilate doesn't turn Max Strike into Max Starfall when used by Gigantamax Alcremie, instead becoming G-Max Finale");

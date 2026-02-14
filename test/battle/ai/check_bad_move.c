@@ -50,6 +50,19 @@ AI_DOUBLE_BATTLE_TEST("AI will not try to lower opposing stats if target is prot
     }
 }
 
+AI_SINGLE_BATTLE_TEST("AI sees No Guard affects semi-invulnerable moves")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_PHANTOM_FORCE) == EFFECT_SEMI_INVULNERABLE);
+        ASSUME(GetMovePower(MOVE_PHANTOM_FORCE) == GetMovePower(MOVE_SPECTRAL_THIEF));
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_GOLURK) { Ability(ABILITY_NO_GUARD); Moves(MOVE_DYNAMIC_PUNCH, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_SMEARGLE) { Moves(MOVE_PHANTOM_FORCE, MOVE_SPECTRAL_THIEF); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_SPECTRAL_THIEF); }
+    }
+}
+
 AI_SINGLE_BATTLE_TEST("Protect: AI avoids Protect vs Unseen Fist contact (Single)")
 {
     static const enum Move protectMoves[] =

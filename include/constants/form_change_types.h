@@ -1,7 +1,7 @@
 #ifndef GUARD_CONSTANTS_FORM_CHANGE_TYPES_H
 #define GUARD_CONSTANTS_FORM_CHANGE_TYPES_H
 
-// FORM_CHANGE_BATTLE_HP_PERCENT param2 arguments
+// FORM_CHANGE_BATTLE_HP_PERCENT_TURN_END / FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT param2 arguments
 enum FormChangeBattleHPPercentArguments
 {
     HP_HIGHER_THAN = 1,
@@ -47,8 +47,6 @@ enum FormChanges
     // - No parameters.
     FORM_CHANGE_WITHDRAW,
     // Form change that activates when the Pokémon faints, either in battle or in the overworld by poison.
-    // If species is not specified and it's on the player's side, it will try to use the value
-    // saved in gBattleStruct->partyState[x][y].changedSpecies from a previous form change.
     // - No parameters.
     FORM_CHANGE_FAINT,
     // Form change that activates when the Pokémon is sent out at the beginning of a battle
@@ -65,15 +63,36 @@ enum FormChanges
     // param1: battle environment to check.
     FORM_CHANGE_END_BATTLE_ENVIRONMENT,
     // Form change that activates when the Pokémon is switched out in battle.
-    // param1: ability to check, optional
-    FORM_CHANGE_BATTLE_SWITCH,
+    // param1: (optional) ability to check
+    FORM_CHANGE_BATTLE_SWITCH_OUT,
+    // Form change that activates when the Pokémon is switched-in in battle.
+    // This form change happens before other abilities like Neutralizing Gas.
+    // param1: ability to check
+    FORM_CHANGE_BATTLE_SWITCH_IN,
     // Form change that activates when the Pokémon's HP % passes a certain threshold.
     // param1: Ability to check.
     // param2: HP comparer
     // - HP_HIGHER_THAN if the form triggers when the current HP is higher than the specified threshold.
     // - HP_LOWER_EQ_THAN if the form triggers when the current HP is lower or equal than the specified threshold.
     // param3: HP percentage threshold.
-    FORM_CHANGE_BATTLE_HP_PERCENT,
+    // param4: (optional) Minimum level to do form change
+    FORM_CHANGE_BATTLE_HP_PERCENT_TURN_END,
+    // Form change that activates when the Pokémon's HP % passes a certain threshold when sent out into battle.
+    // param1: Ability to check.
+    // param2: HP comparer
+    // - HP_HIGHER_THAN if the form triggers when the current HP is higher than the specified threshold.
+    // - HP_LOWER_EQ_THAN if the form triggers when the current HP is lower or equal than the specified threshold.
+    // param3: HP percentage threshold.
+    // param4: (optional) Minimum level to do form change
+    FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT,
+    // Form change that activates when the Pokémon's HP % passes a certain threshold when using a move.
+    // param1: Ability to check.
+    // param2: HP comparer
+    // - HP_HIGHER_THAN if the form triggers when the current HP is higher than the specified threshold.
+    // - HP_LOWER_EQ_THAN if the form triggers when the current HP is lower or equal than the specified threshold.
+    // param3: HP percentage threshold.
+    // param4: Move used.
+    FORM_CHANGE_BATTLE_HP_PERCENT_DURING_MOVE,
     // Form change that activates when the mon has the defined item.
     // If it's on the player's side, it also requires ITEM_MEGA_RING in the user's bag and for the player to trigger it by pressing START before selecting a move.
     // param1: item to hold.
@@ -112,8 +131,13 @@ enum FormChanges
     // Form change that activates when inflicted with a specific status
     // param1: status
     FORM_CHANGE_STATUS,
-    // Form change that activates after move is used. Currently only used for activating Gulp Missile.
-    FORM_CHANGE_HIT_BY_MOVE,
+    // Form change that activates after receiving an attack.
+    // param1: ability
+    // param2: move category to check
+    FORM_CHANGE_BATTLE_HIT_BY_MOVE_CATEGORY,
+    // Form change that activates after hitting itself in confusion.
+    // param1: ability
+    FORM_CHANGE_BATTLE_HIT_BY_CONFUSION_SELF_DMG,
     // Form change that activates when terastallized as as a specific type
     // param1: tera type
     FORM_CHANGE_BATTLE_TERASTALLIZATION,

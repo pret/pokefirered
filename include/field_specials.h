@@ -33,5 +33,6 @@ bool8 InPokemonCenter(void);
 void UpdateFrontierManiac(u16 daysSince);
 void UpdateFrontierGambler(u16 daysSince);
 void FrontierGamblerSetWonOrLost(bool8 won);
+bool8 InMultiPartnerRoom(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

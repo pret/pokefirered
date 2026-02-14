@@ -597,10 +597,11 @@
 #define B_ANIM_MON_SCARED               56
 #define B_ANIM_GHOST_GET_OUT            57
 #define B_ANIM_SILPH_SCOPED             58
-#define B_ANIM_ROCK_THROW               (B_ANIM_SILPH_SCOPED    + 1)
-#define B_ANIM_SAFARI_REACTION          (B_ANIM_ROCK_THROW      + 1)
-
-#define NUM_B_ANIMS_GENERAL             (B_ANIM_SAFARI_REACTION + 1)
+#define B_ANIM_ROCK_THROW               59
+#define B_ANIM_SAFARI_REACTION          60
+#define B_ANIM_FORM_CHANGE_INSTANT      61
+#define B_ANIM_FORM_CHANGE_DISGUISE     62
+#define NUM_B_ANIMS_GENERAL             63
 
 // special animations table (sBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -675,6 +676,16 @@
 #define ANIM_ORDER_UP_CURLY          1
 #define ANIM_ORDER_UP_DROOPY         2
 #define ANIM_ORDER_UP_STRETCHY       3
+
+// AnimTask_TransformMon variations
+enum SpeciesGfxChange
+{
+    SPECIES_GFX_CHANGE_TRANSFORM,
+    SPECIES_GFX_CHANGE_FORM_CHANGE,
+    SPECIES_GFX_CHANGE_FORM_CHANGE_INSTANT,
+    SPECIES_GFX_CHANGE_ILLUSION_OFF,
+    SPECIES_GFX_CHANGE_GHOST_UNVEIL,
+};
 
 // Flags given to various functions to indicate which palettes to consider.
 // Handled by UnpackSelectedBattlePalettes

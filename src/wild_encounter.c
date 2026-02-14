@@ -880,6 +880,8 @@ bool8 UpdateRepelCounter(void)
     u16 steps = REPEL_LURE_STEPS(repelLureVar);
     bool32 isLure = IS_LAST_USED_LURE(repelLureVar);
 
+    if (InBattlePike() || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
+        return FALSE;
     if (InUnionRoom() == TRUE)
         return FALSE;
 

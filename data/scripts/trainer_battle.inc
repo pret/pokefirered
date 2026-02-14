@@ -14,10 +14,10 @@ EventScript_TryDoNormalTrainerBattle::
 	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
 	waitmovement 0
 	clearflag FLAG_SAFE_FOLLOWER_MOVEMENT
-	specialvar VAR_RESULT, Script_HasTrainerBeenFought
+	specialvar VAR_RESULT, GetTrainerFlag
 	goto_if_ne VAR_RESULT, FALSE, EventScript_NoTrainerBattle
 	special PlayTrainerEncounterMusic
-	special SetUpTrainerMovement
+	special SetTrainerFacingDirection
 	goto EventScript_ShowTrainerIntroMsg
 
 EventScript_NoTrainerBattle::
@@ -27,12 +27,12 @@ EventScript_TryDoDoubleTrainerBattle::
 	lock
 	faceplayer
 	call EventScript_RevealTrainer
-	specialvar VAR_RESULT, Script_HasTrainerBeenFought
+	specialvar VAR_RESULT, GetTrainerFlag
 	goto_if_ne VAR_RESULT, FALSE, EventScript_NoDoubleTrainerBattle
 	special HasEnoughMonsForDoubleBattle
 	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, EventScript_NotEnoughMonsForDoubleBattle
 	special PlayTrainerEncounterMusic
-	special SetUpTrainerMovement
+	special SetTrainerFacingDirection
 	goto EventScript_ShowTrainerIntroMsg
 
 EventScript_NotEnoughMonsForDoubleBattle::
@@ -60,7 +60,7 @@ EventScript_TryDoRematchBattle::
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	goto_if_eq VAR_RESULT, FALSE, EventScript_NoRematchBattle
 	special PlayTrainerEncounterMusic
-	special SetUpTrainerMovement
+	special SetTrainerFacingDirection
 	special ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
@@ -79,7 +79,7 @@ EventScript_TryDoDoubleRematchBattle::
 	special HasEnoughMonsForDoubleBattle
 	goto_if_ne VAR_RESULT, PLAYER_HAS_TWO_USABLE_MONS, EventScript_NotEnoughMonsForDoubleRematchBattle
 	special PlayTrainerEncounterMusic
-	special SetUpTrainerMovement
+	special SetTrainerFacingDirection
 	special ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress

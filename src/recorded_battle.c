@@ -43,6 +43,7 @@ EWRAM_DATA static u8 sRecordMode = 0;
 EWRAM_DATA static u8 sFrontierFacility = 0;
 EWRAM_DATA static u8 sFrontierBrainSymbol = 0;
 EWRAM_DATA u8 gRecordedBattleMultiplayerId = 0;
+EWRAM_DATA static u8 sFrontierPassFlag = 0;
 EWRAM_DATA static u8 sBattleScene = 0;
 EWRAM_DATA static u8 sTextSpeed = 0;
 EWRAM_DATA static u32 sBattleFlags = 0;
@@ -328,6 +329,22 @@ void RecordedBattle_SaveParties(void)
     }
 }
 
+void RecordedBattle_ClearFrontierPassFlag(void)
+{
+    sFrontierPassFlag = 0;
+}
+
+// Set sFrontierPassFlag to received state of FLAG_SYS_FRONTIER_PASS
+void RecordedBattle_SetFrontierPassFlagFromHword(u16 flags)
+{
+    sFrontierPassFlag |= (flags & (1 << 15)) >> 15;
+}
+
+u8 RecordedBattle_GetFrontierPassFlag(void)
+{
+    return sFrontierPassFlag;
+}
+
 u8 GetBattleSceneInRecordedBattle(void)
 {
     return sBattleScene;
@@ -359,12 +376,12 @@ void RecordedBattle_CopyBattlerMoves(u32 battler)
 
 void RecordedBattle_CheckMovesetChanges(u8 mode)
 {
-    s32 battler, j, k;
+    s32 j, k;
 
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return;
 
-    for (battler = 0; battler < gBattlersCount; battler++)
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
     {
         // Player's side only
         if (IsOnPlayerSide(battler))
@@ -436,12 +453,12 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
                     {
                         struct Pokemon *mon = GetBattlerMon(battler);
                         for (j = 0; j < MAX_MON_MOVES; j++)
-                            ppBonuses[j] = (GetMonData(mon, MON_DATA_PP_BONUSES, NULL) & ((3 << (j << 1)))) >> (j << 1);
+                            ppBonuses[j] = (GetMonData(mon, MON_DATA_PP_BONUSES) & ((3 << (j << 1)))) >> (j << 1);
 
                         for (j = 0; j < MAX_MON_MOVES; j++)
                         {
-                            movePp.moves[j] = GetMonData(mon, MON_DATA_MOVE1 + moveSlots[j], NULL);
-                            movePp.currentPp[j] = GetMonData(mon, MON_DATA_PP1 + moveSlots[j], NULL);
+                            movePp.moves[j] = GetMonData(mon, MON_DATA_MOVE1 + moveSlots[j]);
+                            movePp.currentPp[j] = GetMonData(mon, MON_DATA_PP1 + moveSlots[j]);
                             movePp.maxPp[j] = ppBonuses[moveSlots[j]];
                         }
                         for (j = 0; j < MAX_MON_MOVES; j++)
@@ -455,7 +472,7 @@ void RecordedBattle_CheckMovesetChanges(u8 mode)
 
                         SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonusSet);
                     }
-                    gChosenMoveByBattler[battler] = GetChosenMoveFromPosition(battler);
+                    gChosenMoveByBattler[battler] = GetBattlerChosenMove(battler);
                 }
             }
         }

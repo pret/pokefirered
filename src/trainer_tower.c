@@ -748,7 +748,7 @@ static void DoTrainerTowerBattle(void)
     BuildEnemyParty();
     CreateTask(Task_DoTrainerTowerBattle, 1);
     PlayMapChosenOrBattleBGM(0);
-    BattleTransition_StartOnField(BattleSetup_GetBattleTowerBattleTransition());
+    BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_TRAINER_TOWER));
 }
 
 static void TrainerTowerGetChallengeType(void)

@@ -84,7 +84,7 @@ void ChooseMonForWirelessMinigame(void);
 void OpenPartyMenuInBattle(u8 partyAction);
 void Pokedude_OpenPartyMenuInBattle(void);
 void Pokedude_ChooseMonForInBattleItem(void);
-void EnterPartyFromItemMenuInBattle(void);
+void ChooseMonForInBattleItem(void);
 void BufferBattlePartyCurrentOrder(void);
 void BufferBattlePartyCurrentOrderBySide(u8 battlerId, u8 flankId);
 void SwitchPartyOrderLinkMulti(u8 battlerId, u8 slot, u8 slot2);

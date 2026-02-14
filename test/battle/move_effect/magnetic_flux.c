@@ -1,17 +1,47 @@
 #include "global.h"
 #include "test/battle.h"
 
-TO_DO_BATTLE_TEST("TODO: Write Magnetic Flux (Move Effect) test titles")
+ASSUMPTIONS
+{
+    ASSUME(GetMoveEffect(MOVE_MAGNETIC_FLUX) == EFFECT_MAGNETIC_FLUX);
+}
 
-AI_DOUBLE_BATTLE_TEST("AI uses Magnetic Flux")
+SINGLE_BATTLE_TEST("Magnetic Flux raises Defense and Sp. Defense of the user with Plus/Minus in singles")
 {
     GIVEN {
-        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, MOVE_CELEBRATE); }
-        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, MOVE_CELEBRATE); }
-        OPPONENT(SPECIES_KLINK) { Ability(ABILITY_PLUS); Moves(MOVE_MAGNETIC_FLUX, MOVE_POUND); }
-        OPPONENT(SPECIES_KLINK) { Ability(ABILITY_PLUS); Moves(MOVE_MAGNETIC_FLUX, MOVE_POUND); }
+        PLAYER(SPECIES_PLUSLE) { Ability(ABILITY_PLUS); }
+        OPPONENT(SPECIES_MINUN) { Ability(ABILITY_MINUS); }
     } WHEN {
-        TURN { EXPECT_MOVE(opponentLeft, MOVE_MAGNETIC_FLUX); }
+        TURN { MOVE(player, MOVE_MAGNETIC_FLUX); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MAGNETIC_FLUX, player);
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(player->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(opponent->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(opponent->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Magnetic Flux raises Defense and Sp. Defense of all Plus/Minus allies in doubles")
+{
+    GIVEN {
+        PLAYER(SPECIES_PLUSLE) { Ability(ABILITY_PLUS); }
+        PLAYER(SPECIES_MINUN) { Ability(ABILITY_MINUS); }
+        OPPONENT(SPECIES_PLUSLE) { Ability(ABILITY_PLUS); }
+        OPPONENT(SPECIES_MINUN) { Ability(ABILITY_MINUS); }
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_MAGNETIC_FLUX); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MAGNETIC_FLUX, playerLeft);
+    } THEN {
+        EXPECT_EQ(playerLeft->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(playerLeft->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(playerRight->statStages[STAT_DEF], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(playerRight->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE + 1);
+        EXPECT_EQ(opponentLeft->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(opponentLeft->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(opponentRight->statStages[STAT_DEF], DEFAULT_STAT_STAGE);
+        EXPECT_EQ(opponentRight->statStages[STAT_SPDEF], DEFAULT_STAT_STAGE);
     }
 }

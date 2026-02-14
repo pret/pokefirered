@@ -602,7 +602,7 @@ AI_DOUBLE_BATTLE_TEST("Battler 3 has Battler 1 AI flags set correctly (doubles)"
     ASSUME(IsExplosionMove(MOVE_EXPLOSION));
 
     u32 aiFlags;
-    u32 battler;
+    enum BattlerId battler;
 
     PARAMETRIZE { aiFlags = 0; battler = 1; }
     PARAMETRIZE { aiFlags = 0; battler = 3; }
@@ -946,27 +946,86 @@ AI_DOUBLE_BATTLE_TEST("AI does not use Helping Hand on Good as Gold ally")
     }
 }
 
-AI_DOUBLE_BATTLE_TEST("AI uses Tailwind")
+AI_DOUBLE_BATTLE_TEST("AI uses Tailwind based on speed matchups")
 {
     u32 speed1, speed2, speed3, speed4;
+    bool32 expectTailwind;
 
-    PARAMETRIZE { speed1 = 20; speed2 = 20; speed3 = 20; speed4 = 20; }
-    PARAMETRIZE { speed1 = 20; speed2 = 20; speed3 =  5; speed4 =  5; }
-    PARAMETRIZE { speed1 = 20; speed2 = 20; speed3 = 15; speed4 = 15; }
-    PARAMETRIZE { speed1 =  1; speed2 =  1; speed3 =  5; speed4 =  5; }
-    PARAMETRIZE { speed1 =  1; speed2 = 20; speed3 = 15; speed4 = 15; }
-    PARAMETRIZE { speed1 =  1; speed2 = 20; speed3 = 20; speed4 = 15; }
+    // All four comparisons qualify -> tailwindScore = 5
+    PARAMETRIZE { speed1 = 20; speed2 = 20; speed3 = 20; speed4 = 20; expectTailwind = TRUE; }
+    // Only the attacker flips one foe matchup -> tailwindScore = 2
+    PARAMETRIZE { speed1 = 20; speed2 = 40; speed3 = 20; speed4 = 50; expectTailwind = TRUE; }
+    // Only the partner flips one foe matchup -> tailwindScore = 2
+    PARAMETRIZE { speed1 = 10; speed2 = 29; speed3 = 50; speed4 = 15; expectTailwind = TRUE; }
+    // Too slow: even after doubling, still slower than both foes -> tailwindScore = 0.
+    PARAMETRIZE { speed1 = 40; speed2 = 40; speed3 = 10; speed4 = 10; expectTailwind = FALSE; }
+    // Already faster: Tailwind doesn't improve matchups -> tailwindScore = 0.
+    PARAMETRIZE { speed1 =  5; speed2 =  5; speed3 = 10; speed4 = 10; expectTailwind = FALSE; }
+    // Boundary: speed*2 == foe speed does not count -> tailwindScore = 0.
+    PARAMETRIZE { speed1 = 20; speed2 = 20; speed3 = 10; speed4 = 30; expectTailwind = FALSE; }
 
     GIVEN {
-        ASSUME(GetMoveEffect(MOVE_AFTER_YOU) == EFFECT_AFTER_YOU);
-        ASSUME(GetMoveEffect(MOVE_TRICK_ROOM) == EFFECT_TRICK_ROOM);
+        ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_DOUBLE_BATTLE);
         PLAYER(SPECIES_WOBBUFFET) { Speed(speed1); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(speed2); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(speed3); Moves(MOVE_TAILWIND, MOVE_HEADBUTT); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(speed4); Moves(MOVE_TAILWIND, MOVE_HEADBUTT); }
     } WHEN {
-        if (speed3 > 10)
+        if (expectTailwind)
+            TURN { EXPECT_MOVE(opponentLeft, MOVE_TAILWIND); }
+        else
+            TURN { NOT_EXPECT_MOVE(opponentLeft, MOVE_TAILWIND); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI uses Tailwind to trigger Wind Rider (Doubles)")
+{
+    bool32 expectTailwind;
+    u16 tailwindSpecies, partnerSpecies;
+    enum Ability tailwindAbility, partnerAbility;
+
+    PARAMETRIZE { tailwindSpecies = SPECIES_BRAMBLEGHAST; tailwindAbility = ABILITY_WIND_RIDER;  partnerSpecies = SPECIES_BRAMBLEGHAST; partnerAbility = ABILITY_WIND_RIDER;  expectTailwind = TRUE; }
+    PARAMETRIZE { tailwindSpecies = SPECIES_BRAMBLEGHAST; tailwindAbility = ABILITY_WIND_RIDER;  partnerSpecies = SPECIES_BRAMBLEGHAST; partnerAbility = ABILITY_INFILTRATOR; expectTailwind = TRUE; }
+    PARAMETRIZE { tailwindSpecies = SPECIES_BRAMBLEGHAST; tailwindAbility = ABILITY_INFILTRATOR; partnerSpecies = SPECIES_BRAMBLEGHAST; partnerAbility = ABILITY_WIND_RIDER;  expectTailwind = TRUE; }
+    PARAMETRIZE { tailwindSpecies = SPECIES_BRAMBLEGHAST; tailwindAbility = ABILITY_INFILTRATOR; partnerSpecies = SPECIES_BRAMBLEGHAST; partnerAbility = ABILITY_INFILTRATOR; expectTailwind = FALSE; }
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
+        OPPONENT(tailwindSpecies) { Ability(tailwindAbility); Speed(9); Moves(MOVE_TAILWIND, MOVE_HEADBUTT); }
+        OPPONENT(partnerSpecies) { Ability(partnerAbility); Speed(9); Moves(MOVE_HEADBUTT); }
+    } WHEN {
+        if (expectTailwind)
+            TURN { EXPECT_MOVE(opponentLeft, MOVE_TAILWIND); }
+        else
+            TURN { NOT_EXPECT_MOVE(opponentLeft, MOVE_TAILWIND); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI uses Tailwind to trigger Wind Power (Doubles)")
+{
+    bool32 expectTailwind;
+    u16 tailwindSpecies, partnerSpecies;
+    enum Ability tailwindAbility, partnerAbility;
+
+    PARAMETRIZE { tailwindSpecies = SPECIES_KILOWATTREL; tailwindAbility = ABILITY_WIND_POWER;  partnerSpecies = SPECIES_KILOWATTREL; partnerAbility = ABILITY_WIND_POWER;  expectTailwind = TRUE; }
+    PARAMETRIZE { tailwindSpecies = SPECIES_KILOWATTREL; tailwindAbility = ABILITY_WIND_POWER;  partnerSpecies = SPECIES_KILOWATTREL; partnerAbility = ABILITY_COMPETITIVE; expectTailwind = TRUE; }
+    PARAMETRIZE { tailwindSpecies = SPECIES_KILOWATTREL; tailwindAbility = ABILITY_COMPETITIVE; partnerSpecies = SPECIES_KILOWATTREL; partnerAbility = ABILITY_WIND_POWER;  expectTailwind = TRUE; }
+    PARAMETRIZE { tailwindSpecies = SPECIES_KILOWATTREL; tailwindAbility = ABILITY_COMPETITIVE; partnerSpecies = SPECIES_KILOWATTREL; partnerAbility = ABILITY_COMPETITIVE; expectTailwind = FALSE; }
+
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TAILWIND) == EFFECT_TAILWIND);
+        ASSUME(GetMoveType(MOVE_THUNDERSHOCK) == TYPE_ELECTRIC);
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_DOUBLE_BATTLE);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(20); }
+        OPPONENT(tailwindSpecies) { Ability(tailwindAbility); Speed(21); Moves(MOVE_TAILWIND, MOVE_THUNDERSHOCK); }
+        OPPONENT(partnerSpecies) { Ability(partnerAbility); Speed(21); Moves(MOVE_THUNDERSHOCK); }
+    } WHEN {
+        if (expectTailwind)
             TURN { EXPECT_MOVE(opponentLeft, MOVE_TAILWIND); }
         else
             TURN { NOT_EXPECT_MOVE(opponentLeft, MOVE_TAILWIND); }
@@ -1038,5 +1097,31 @@ AI_DOUBLE_BATTLE_TEST("AI prefers to Fake Out the opponent vulnerable to flinchi
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { EXPECT_MOVE(opponentLeft, MOVE_FAKE_OUT, target:playerRight); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI uses Gear Up")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_KLINKLANG) { Ability(ABILITY_PLUS); Moves(MOVE_GEAR_UP, MOVE_WATER_GUN, MOVE_POUND); }
+        OPPONENT(SPECIES_KLINKLANG) { Ability(ABILITY_PLUS); Moves(MOVE_GEAR_UP, MOVE_WATER_GUN, MOVE_POUND); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_GEAR_UP); }
+    }
+}
+
+AI_DOUBLE_BATTLE_TEST("AI uses Magnetic Flux")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_OMNISCIENT);
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_POUND, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_KLINK) { Ability(ABILITY_PLUS); Moves(MOVE_MAGNETIC_FLUX, MOVE_POUND); }
+        OPPONENT(SPECIES_KLINK) { Ability(ABILITY_PLUS); Moves(MOVE_MAGNETIC_FLUX, MOVE_POUND); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponentLeft, MOVE_MAGNETIC_FLUX); }
     }
 }

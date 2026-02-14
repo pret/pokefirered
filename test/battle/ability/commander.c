@@ -455,3 +455,22 @@ DOUBLE_BATTLE_TEST("Commander prevent Dondozo from switch out by Dragon Tail")
         NOT MESSAGE("Wobbuffet was dragged out!");
     }
 }
+
+DOUBLE_BATTLE_TEST("Commander will not activate if partner Dondozo is about to switch out")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_DONDOZO);
+        PLAYER(SPECIES_TATSUGIRI) { Ability(ABILITY_COMMANDER); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            SWITCH(playerLeft, 2);
+            SWITCH(playerRight, 3);
+        }
+    } SCENE {
+        NOT ABILITY_POPUP(playerRight, ABILITY_COMMANDER);
+    }
+}

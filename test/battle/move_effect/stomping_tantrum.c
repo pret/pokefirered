@@ -157,3 +157,29 @@ SINGLE_BATTLE_TEST("Stomping Tantrum will deal double damage if user was immune 
         EXPECT_MUL_EQ(damage[0], Q_4_12(2.0), damage[1]);
     }
 }
+
+DOUBLE_BATTLE_TEST("Stomping Tantrum will not deal double damage if spread moved failed one target")
+{
+    s16 damage[2];
+    GIVEN {
+        ASSUME(GetMoveTarget(MOVE_EARTHQUAKE) == TARGET_FOES_AND_ALLY);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_PIDGEY);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_STOMPING_TANTRUM, target: opponentLeft); }
+        TURN { MOVE(playerLeft, MOVE_EARTHQUAKE); }
+        TURN { MOVE(playerLeft, MOVE_STOMPING_TANTRUM, target: opponentLeft); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STOMPING_TANTRUM, playerLeft);
+        HP_BAR(opponentLeft, captureDamage: &damage[0]);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EARTHQUAKE, playerLeft);
+
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STOMPING_TANTRUM, playerLeft);
+        HP_BAR(opponentLeft, captureDamage: &damage[1]);
+    } THEN {
+        EXPECT_EQ(damage[0], damage[1]);
+    }
+}

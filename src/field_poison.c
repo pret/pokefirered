@@ -1,15 +1,19 @@
 #include "global.h"
-#include "gflib.h"
-#include "strings.h"
-#include "task.h"
-#include "field_message_box.h"
-#include "script.h"
+#include "battle_pike.h"
+#include "battle_pyramid.h"
 #include "event_data.h"
+#include "event_object_movement.h"
+#include "field_message_box.h"
+#include "field_poison.h"
 #include "fldeff.h"
 #include "party_menu.h"
 #include "pokemon.h"
-#include "field_poison.h"
+#include "script.h"
+#include "string_util.h"
+#include "strings.h"
+#include "task.h"
 #include "constants/battle.h"
+#include "constants/field_poison.h"
 #include "constants/form_change_types.h"
 
 static bool32 IsMonValidSpecies(struct Pokemon *pokemon)
@@ -77,9 +81,17 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
         break;
     case 2:
         if (AllMonsFainted())
-            gSpecialVar_Result = TRUE;
+        {
+            if (CurrentBattlePyramidLocation() || InBattlePike())
+                gSpecialVar_Result = FLDPSN_FRONTIER_WHITEOUT;
+            else
+                gSpecialVar_Result = FLDPSN_WHITEOUT;
+        }
         else
-            gSpecialVar_Result = FALSE;
+        {
+            gSpecialVar_Result = FLDPSN_NO_WHITEOUT;
+            UpdateFollowingPokemon();
+        }
         ScriptContext_Enable();
         DestroyTask(taskId);
         break;
@@ -96,7 +108,7 @@ s32 DoPoisonFieldEffect(void)
 {
     int i;
     u32 hp;
-    
+
     struct Pokemon *pokemon = gPlayerParty;
     u32 numPoisoned = 0;
     u32 numFainted = 0;
@@ -108,7 +120,7 @@ s32 DoPoisonFieldEffect(void)
             hp = GetMonData(pokemon, MON_DATA_HP);
             if (OW_POISON_DAMAGE < GEN_4 && (hp == 0 || --hp == 0))
             {
-                TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_FAINT);
+                TryFormChange(&gPlayerParty[i], FORM_CHANGE_FAINT);
                 numFainted++;
             }
             else if (OW_POISON_DAMAGE >= GEN_4 && (hp == 1 || --hp == 1))

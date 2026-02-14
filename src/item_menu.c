@@ -3,6 +3,9 @@
 #include "apprentice.h"
 #include "battle.h"
 #include "battle_controllers.h"
+#include "battle_pike.h"
+#include "battle_pyramid_bag.h"
+#include "battle_pyramid.h"
 #include "battle_main.h"
 #include "berry_pouch.h"
 #include "decompress.h"
@@ -10,6 +13,7 @@
 #include "event_scripts.h"
 #include "event_object_movement.h"
 #include "field_player_avatar.h"
+#include "field_specials.h"
 #include "graphics.h"
 #include "help_system.h"
 #include "international_string_util.h"
@@ -648,7 +652,10 @@ void CB2_BagMenuFromStartMenu(void)
 
 void CB2_BagMenuFromBattle(void)
 {
-    GoToBagMenu(ITEMMENULOCATION_BATTLE, POCKETS_COUNT_NO_CASES, CB2_SetUpReshowBattleScreenAfterMenu2);
+    if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
+        GoToBagMenu(ITEMMENULOCATION_BATTLE, POCKETS_COUNT_NO_CASES, CB2_SetUpReshowBattleScreenAfterMenu2);
+    else
+        GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 static void ReturnToBagMenuFromSubmenu_PCBox(void)
@@ -1845,7 +1852,10 @@ static void ConfirmToss(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_ThrewAwayVar2Var1s);
     BagMenu_Print(BagMenu_AddWindow(ITEMWIN_TOSSED), FONT_NORMAL, gStringVar4, 0, 2, 1, 0, 0, COLORID_BLACK_CURSOR);
-    gTasks[taskId].func = Task_TossItemFromBag;
+    if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
+        gTasks[taskId].func = Task_RemoveItemFromBag;
+    else
+        gTasks[taskId].func = Task_TossItemFromBag;
 }
 
 static void Task_RemoveItemFromBag(u8 taskId)
@@ -2033,7 +2043,7 @@ static void Task_ItemContext_GiveToPC(u8 taskId)
 bool8 UseRegisteredKeyItemOnField(void)
 {
     u8 taskId;
-    if (InUnionRoom() == TRUE)
+    if (InUnionRoom() == TRUE || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InBattlePike() || InMultiPartnerRoom() == TRUE)
         return FALSE;
     HideMapNamePopUpWindow();
     ChangeBgY(0, 0, 0);

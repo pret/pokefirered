@@ -1,11 +1,13 @@
 #ifndef GUARD_MOVES_H
 #define GUARD_MOVES_H
 
+#include "generational_changes.h"
 #include "contest_effect.h"
 #include "constants/battle.h"
 #include "constants/battle_factory.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
+#include "constants/battle_z_move_effects.h"
 #include "constants/moves.h"
 
 // For defining EFFECT_HIT etc. with battle TV scores and flags etc.
@@ -94,6 +96,7 @@ struct MoveInfo
     u32 criticalHitStage:2;
     bool32 alwaysCriticalHit:1;
     u32 numAdditionalEffects:3; // limited to 7
+
     // Flags
     bool32 makesContact:1;
     bool32 ignoresProtect:1;
@@ -126,6 +129,12 @@ struct MoveInfo
     bool32 alwaysHitsInRain:1;
     bool32 accuracy50InSun:1;
     bool32 alwaysHitsInHailSnow:1;
+    bool32 alwaysHitsOnSameType:1; // Always hits if user is of same type as move
+    bool32 noAffectOnSameTypeTarget:1; // Fails if target is of same type as move
+    bool32 accIncreaseByTenOnSameType:1; // Accuracy is increased by 10% if user is of same type as move
+    bool32 padding1:15;
+    // end of word
+
     // Ban flags
     bool32 gravityBanned:1;
     bool32 mirrorMoveBanned:1;
@@ -143,7 +152,7 @@ struct MoveInfo
     bool32 dampBanned:1;
     //Other
     bool32 validApprenticeMove:1;
-    u32 padding:3;
+    u32 padding2:17;
     // end of word
 
     union {
@@ -165,7 +174,7 @@ struct MoveInfo
         } reflectDamage;
         struct {
             u16 terrain;
-            u16 percent:14;
+            u16 percent:13;
             enum TerrainGroundCheck groundCheck:2;
             u16 hitsBothFoes:1;
         } terrainBoost;
@@ -259,7 +268,7 @@ static inline u32 GetMovePP(enum Move moveId)
     return gMovesInfo[SanitizeMoveId(moveId)].pp;
 }
 
-static inline u32 GetMoveZEffect(enum Move moveId)
+static inline enum ZEffect GetMoveZEffect(enum Move moveId)
 {
     moveId = SanitizeMoveId(moveId);
     assertf(GetMoveCategory(moveId) == DAMAGE_CATEGORY_STATUS, "not a status move: %S", gMovesInfo[moveId].name);
@@ -458,6 +467,29 @@ static inline bool32 MoveAlwaysHitsInHailSnow(enum Move moveId)
     return gMovesInfo[SanitizeMoveId(moveId)].alwaysHitsInHailSnow;
 }
 
+static inline bool32 MoveAlwaysHitsOnSameType(enum Move moveId)
+{
+    #if TESTING
+    if (moveId == MOVE_TOXIC && GetConfig(CONFIG_TOXIC_NEVER_MISS) < GEN_6)
+       return FALSE;
+    #endif
+    return gMovesInfo[SanitizeMoveId(moveId)].alwaysHitsOnSameType;
+}
+
+static inline bool32 MoveHasNoEffectOnSameType(enum Move moveId)
+{
+    #if TESTING
+    if (moveId == MOVE_SHEER_COLD && GetConfig(CONFIG_SHEER_COLD_IMMUNITY) < GEN_7)
+       return FALSE;
+    #endif
+    return gMovesInfo[SanitizeMoveId(moveId)].noAffectOnSameTypeTarget;
+}
+
+static inline bool32 MoveHasIncreasedAccByTenOnSameType(enum Move moveId)
+{
+    return gMovesInfo[SanitizeMoveId(moveId)].accIncreaseByTenOnSameType;
+}
+
 static inline bool32 IsMoveGravityBanned(enum Move moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].gravityBanned;
@@ -613,7 +645,7 @@ static inline u32 GetMoveTerrainBoost_GroundCheck(enum Move moveId)
     return gMovesInfo[moveId].argument.terrainBoost.groundCheck;
 }
 
-static inline u32 GetMoveTerrainBoost_HitsBothFoes(enum Move moveId)
+static inline bool32 GetMoveTerrainBoost_HitsBothFoes(enum Move moveId)
 {
     moveId = SanitizeMoveId(moveId);
     assertf(gMovesInfo[moveId].effect == EFFECT_TERRAIN_BOOST, "not a terrain boosted move: %S", GetMoveName(moveId));
@@ -688,7 +720,7 @@ static inline u32 GetMoveRecoil(enum Move moveId)
     return gMovesInfo[moveId].argument.recoilPercentage;
 }
 
-static inline u32 GetMoveNonVolatileStatus(enum Move move)
+static inline enum MoveEffect GetMoveNonVolatileStatus(enum Move move)
 {
     move = SanitizeMoveId(move);
     switch (GetMoveEffect(move))

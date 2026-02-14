@@ -11,7 +11,7 @@ extern const struct CompressedSpriteSheet gSpriteSheet_CategoryIcons;
 extern const struct SpritePalette gSpritePal_CategoryIcons;
 extern const struct SpriteTemplate gSpriteTemplate_CategoryIcons;
 
-void ShowSelectMovePokemonSummaryScreen(struct Pokemon *, u8, u8, MainCallback, u16);
+void ShowSelectMovePokemonSummaryScreen(struct Pokemon *mons, u8 monIndex, void (*callback)(void), u16 newMove);
 u8 GetMoveSlotToReplace(void);
 void SummaryScreen_SetUnknownTaskId(u8 a0);
 void SummaryScreen_DestroyUnknownTask(void);

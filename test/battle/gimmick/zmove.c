@@ -1,6 +1,5 @@
 #include "global.h"
 #include "test/battle.h"
-#include "constants/battle_z_move_effects.h"
 
 // Basic Functionality
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves do not retain priority")

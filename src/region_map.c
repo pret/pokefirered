@@ -3564,7 +3564,6 @@ static void CreateFlyIcons(void)
                 {
                     if (GetMapsecType(GetSelectedMapSection(i, LAYER_MAP, y, x)) == MAPSECTYPE_VISITED)
                     {
-                        DebugPrintfLevel(MGBA_LOG_ERROR, "Creating fly icon for map %d, x %d, y %d", i, x, y);
                         CreateFlyIconSprite(i, numIcons, x, y, numIcons + 10, 10);
                         numIcons++;
                     }

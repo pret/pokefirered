@@ -126,16 +126,16 @@ enum MoveComparisonResult
 
 void BattleAI_SetupItems(void);
 void BattleAI_SetupFlags(void);
-void BattleAI_SetupAIData(u8 defaultScoreMoves, u32 battler);
-void ComputeBattlerDecisions(u32 battler);
-u32 BattleAI_ChooseMoveIndex(u32 battler);
+void BattleAI_SetupAIData(u8 defaultScoreMoves, enum BattlerId battler);
+void ComputeBattlerDecisions(enum BattlerId battler);
+u32 BattleAI_ChooseMoveIndex(enum BattlerId battler);
 void Ai_InitPartyStruct(void);
-void Ai_UpdateSwitchInData(u32 battler);
-void Ai_UpdateFaintData(u32 battler);
+void Ai_UpdateSwitchInData(enum BattlerId battler);
+void Ai_UpdateFaintData(enum BattlerId battler);
 void SetAiLogicDataForTurn(struct AiLogicData *aiData);
 void ResetDynamicAiFunctions(void);
-void AI_TrySwitchOrUseItem(u32 battler);
-void CalcBattlerAiMovesData(struct AiLogicData *aiData, u32 battlerAtk, u32 battlerDef, u32 weather, u32 fieldStatus);
+void AI_TrySwitchOrUseItem(enum BattlerId battler);
+void CalcBattlerAiMovesData(struct AiLogicData *aiData, enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 weather, u32 fieldStatus);
 
 extern AiSwitchFunc gDynamicAiSwitchFunc;
 

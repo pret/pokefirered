@@ -256,3 +256,30 @@ AI_SINGLE_BATTLE_TEST("Choiced Pokémon will only see choiced moves when conside
         TURN { MOVE(player, MOVE_WATER_GUN); EXPECT_SWITCH(opponent, 1); }
     }
 }
+
+AI_DOUBLE_BATTLE_TEST("Choiced Pokémon won't switch out if they can still affect one opposing Pokémon in doubles")
+{
+    u32 defendingSpecies = SPECIES_NONE;
+    enum Ability defendingAbility = ABILITY_NONE;
+    PARAMETRIZE { defendingSpecies = SPECIES_VAPOREON; defendingAbility = ABILITY_WATER_ABSORB; }
+    PARAMETRIZE { defendingSpecies = SPECIES_ZIGZAGOON; defendingAbility = SPECIES_ZIGZAGOON; }
+
+    PASSES_RANDOMLY(SHOULD_SWITCH_CHOICE_LOCKED_PERCENTAGE, 100, RNG_AI_SWITCH_CHOICE_LOCKED);
+
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY | AI_FLAG_RISKY | AI_FLAG_SMART_SWITCHING | AI_FLAG_OMNISCIENT | AI_FLAG_SMART_MON_CHOICES);
+        PLAYER(SPECIES_CHARMANDER) { Level(5); Moves(MOVE_CELEBRATE); }
+        PLAYER(SPECIES_VAPOREON) { Ability(ABILITY_WATER_ABSORB); Moves(MOVE_CELEBRATE); }
+        PLAYER(defendingSpecies) { Ability(defendingAbility); SpDefense(500); Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_VAPOREON) { Moves(MOVE_SCALD); Item(ITEM_CHOICE_SPECS); }
+        OPPONENT(SPECIES_VAPOREON) { Moves(MOVE_SCALD); Item(ITEM_CHOICE_SPECS); }
+        OPPONENT(SPECIES_ZIGZAGOON);
+        OPPONENT(SPECIES_ZIGZAGOON);
+    } WHEN {
+        TURN { SWITCH(playerLeft, 2); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_MOVE(opponentLeft, MOVE_SCALD, target:playerLeft); EXPECT_MOVE(opponentRight, MOVE_SCALD, target:playerLeft); }
+        if (defendingSpecies == SPECIES_VAPOREON)
+            TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_SWITCH(opponentLeft, 3); EXPECT_MOVE(opponentRight, MOVE_SCALD); }
+        else
+            TURN { MOVE(playerLeft, MOVE_CELEBRATE); MOVE(playerRight, MOVE_CELEBRATE); EXPECT_MOVE(opponentLeft, MOVE_SCALD, target:playerLeft); EXPECT_MOVE(opponentRight, MOVE_SCALD, target:playerLeft); SEND_OUT(playerLeft, 0); }
+    }
+}

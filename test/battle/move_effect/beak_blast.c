@@ -87,7 +87,6 @@ SINGLE_BATTLE_TEST("Beak Blast burns only when contact moves are used")
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(opponent, move); MOVE(player, MOVE_BEAK_BLAST); }
-        TURN {}
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_BEAK_BLAST_SETUP, player);
         MESSAGE("Wobbuffet started heating up its beak!");
@@ -109,6 +108,35 @@ SINGLE_BATTLE_TEST("Beak Blast burns only when contact moves are used")
         MESSAGE("Wobbuffet used Beak Blast!");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_BEAK_BLAST, player);
         HP_BAR(opponent);
+    }
+}
+
+SINGLE_BATTLE_TEST("Beak Blast doesn't burn when charging a two turn move")
+{
+    u32 move;
+    PARAMETRIZE { move = MOVE_BOUNCE; }
+    PARAMETRIZE { move = MOVE_DIG; }
+
+    GIVEN {
+        ASSUME(MoveMakesContact(MOVE_BOUNCE));
+        ASSUME(MoveMakesContact(MOVE_DIG));
+        ASSUME(gBattleMoveEffects[GetMoveEffect(MOVE_BOUNCE)].twoTurnEffect);
+        ASSUME(gBattleMoveEffects[GetMoveEffect(MOVE_DIG)].twoTurnEffect);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, move); MOVE(player, MOVE_BEAK_BLAST); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_BEAK_BLAST_SETUP, player);
+        MESSAGE("Wobbuffet started heating up its beak!");
+        ANIMATION(ANIM_TYPE_MOVE, move, opponent);
+
+        NONE_OF {
+            HP_BAR(player);
+            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_BRN, opponent);
+            MESSAGE("The opposing Wobbuffet was burned!");
+            STATUS_ICON(opponent, burn: TRUE);
+        }
     }
 }
 

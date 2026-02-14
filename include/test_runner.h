@@ -13,23 +13,23 @@ extern const bool8 gTestRunnerSkipIsFail;
 
 enum Gimmick;
 
-void TestRunner_Battle_RecordAbilityPopUp(u32 battlerId, enum Ability ability);
+void TestRunner_Battle_RecordAbilityPopUp(enum BattlerId battlerId, enum Ability ability);
 void TestRunner_Battle_RecordAnimation(u32 animType, u32 animId);
-void TestRunner_Battle_RecordHP(u32 battlerId, u32 oldHP, u32 newHP);
-void TestRunner_Battle_RecordSubHit(u32 battlerId, u32 damage, bool32 broke);
-void TestRunner_Battle_RecordExp(u32 battlerId, u32 oldExp, u32 newExp);
+void TestRunner_Battle_RecordHP(enum BattlerId battlerId, u32 oldHP, u32 newHP);
+void TestRunner_Battle_RecordSubHit(enum BattlerId battlerId, u32 damage, bool32 broke);
+void TestRunner_Battle_RecordExp(enum BattlerId battlerId, u32 oldExp, u32 newExp);
 void TestRunner_Battle_RecordMessage(const u8 *message);
-void TestRunner_Battle_RecordStatus1(u32 battlerId, u32 status1);
+void TestRunner_Battle_RecordStatus1(enum BattlerId battlerId, u32 status1);
 void TestRunner_Battle_RecordCatchChance(u32 catchChance);
 void TestRunner_Battle_AfterLastTurn(void);
-void TestRunner_Battle_CheckChosenMove(u32 battlerId, enum Move moveId, u32 target, enum Gimmick gimmick);
-void TestRunner_Battle_CheckSwitch(u32 battlerId, u32 partyIndex);
-void TestRunner_Battle_CheckAiMoveScores(u32 battlerId);
-void TestRunner_Battle_AISetScore(const char *file, u32 line, u32 battlerId, u32 moveIndex, s32 score);
-void TestRunner_Battle_AIAdjustScore(const char *file, u32 line, u32 battlerId, u32 moveIndex, s32 score);
+void TestRunner_Battle_CheckChosenMove(enum BattlerId battlerId, enum Move moveId, u32 target, enum Gimmick gimmick);
+void TestRunner_Battle_CheckSwitch(enum BattlerId battlerId, u32 partyIndex);
+void TestRunner_Battle_CheckAiMoveScores(enum BattlerId battlerId);
+void TestRunner_Battle_AISetScore(const char *file, u32 line, enum BattlerId battlerId, u32 moveIndex, s32 score);
+void TestRunner_Battle_AIAdjustScore(const char *file, u32 line, enum BattlerId battlerId, u32 moveIndex, s32 score);
 void TestRunner_CheckMemory(void);
 
-void TestRunner_Battle_CheckBattleRecordActionType(u32 battlerId, u32 recordIndex, u32 actionType);
+void TestRunner_Battle_CheckBattleRecordActionType(enum BattlerId battlerId, u32 recordIndex, u32 actionType);
 
 u32 TestRunner_Battle_GetForcedAbility(enum BattleTrainer trainer, u32 partyIndex);
 u32 TestRunner_Battle_GetChosenGimmick(enum BattleTrainer trainer, u32 partyIndex);

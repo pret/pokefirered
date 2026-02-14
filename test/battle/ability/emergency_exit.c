@@ -209,3 +209,73 @@ WILD_BATTLE_TEST("Emergency Exit activates when taking residual damage and falli
         EXPECT_EQ(gBattleOutcome, B_OUTCOME_PLAYER_TELEPORTED);
     }
 }
+
+SINGLE_BATTLE_TEST("Emergency Exit will trigger due to recoil damage")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_MIND_BLOWN) == EFFECT_MAX_HP_50_RECOIL);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(262); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_MIND_BLOWN); SEND_OUT(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MIND_BLOWN, opponent);
+        HP_BAR(player);
+        HP_BAR(opponent);
+        ABILITY_POPUP(opponent, ABILITY_EMERGENCY_EXIT);
+    }
+}
+
+SINGLE_BATTLE_TEST("Emergency Exit will trigger due to confusion damage")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_CONFUSE_RAY) == EFFECT_CONFUSE);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(133); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_CONFUSE_RAY);
+            MOVE(opponent, MOVE_POUND);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CONFUSE_RAY, player);
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_POUND, opponent);
+        HP_BAR(opponent);
+        NOT ABILITY_POPUP(opponent, ABILITY_EMERGENCY_EXIT);
+    }
+}
+
+SINGLE_BATTLE_TEST("Emergency Exit is not triggered by Pain Split")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_PAIN_SPLIT) == EFFECT_PAIN_SPLIT);
+        PLAYER(SPECIES_WOBBUFFET) { HP(1); }
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(133); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_PAIN_SPLIT); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_PAIN_SPLIT, player);
+        HP_BAR(opponent);
+        NOT ABILITY_POPUP(opponent, ABILITY_EMERGENCY_EXIT);
+    }
+}
+
+SINGLE_BATTLE_TEST("Emergency Exit will trigger due to Jump Kick recoil")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_JUMP_KICK) == EFFECT_RECOIL_IF_MISS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_GOLISOPOD) { Ability(ABILITY_EMERGENCY_EXIT); MaxHP(263); HP(262); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_JUMP_KICK, hit: FALSE); SEND_OUT(opponent, 1); }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_JUMP_KICK, opponent);
+        HP_BAR(opponent);
+        ABILITY_POPUP(opponent, ABILITY_EMERGENCY_EXIT);
+    }
+}
+

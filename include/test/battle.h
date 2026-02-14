@@ -621,7 +621,7 @@ enum
 
 struct QueuedAbilityEvent
 {
-    u8 battlerId;
+    enum BattlerId battlerId;
     enum Ability ability;
 };
 
@@ -638,14 +638,14 @@ enum { EXP_EVENT_NEW_EXP, EXP_EVENT_DELTA_EXP };
 
 struct QueuedHPEvent
 {
-    u32 battlerId:3;
+    enum BattlerId battlerId:3;
     u32 type:1;
     u32 address:28;
 };
 
 struct QueuedSubHitEvent
 {
-    u32 battlerId:3;
+    enum BattlerId battlerId:3;
     u32 checkBreak:1;
     u32 breakSub:1;
     u32 address:27;
@@ -653,7 +653,7 @@ struct QueuedSubHitEvent
 
 struct QueuedExpEvent
 {
-    u32 battlerId:3;
+    enum BattlerId battlerId:3;
     u32 type:1;
     u32 address:28;
 };
@@ -665,7 +665,7 @@ struct QueuedMessageEvent
 
 struct QueuedStatusEvent
 {
-    u32 battlerId:3;
+    enum BattlerId battlerId:3;
     u32 mask:29;
 };
 
@@ -1064,7 +1064,7 @@ void ClosePokemon(u32 sourceLine);
 
 void RNGSeed_(u32 sourceLine, rng_value_t seed);
 void AIFlags_(u32 sourceLine, u64 flags);
-void BattlerAIFlags_(u32 sourceLine, u32 battler, u64 flags);
+void BattlerAIFlags_(u32 sourceLine, enum BattlerId battler, u64 flags);
 void AILogScores(u32 sourceLine);
 void Gender_(u32 sourceLine, u32 gender);
 void Nature_(u32 sourceLine, u32 nature);
@@ -1098,18 +1098,14 @@ void Environment_(u32 sourceLine, u32 environment);
 
 static inline bool8 IsMultibattleTest(void)
 {
-    if (TESTING)
+    #if TESTING
     {
         if (((gBattleTypeFlags & BATTLE_MULTI_TEST) == BATTLE_MULTI_TEST)
-        || ((gBattleTypeFlags & BATTLE_TWO_VS_ONE_TEST) == BATTLE_TWO_VS_ONE_TEST))
+         || ((gBattleTypeFlags & BATTLE_TWO_VS_ONE_TEST) == BATTLE_TWO_VS_ONE_TEST))
             return TRUE;
-        else
-            return FALSE;
     }
-    else
-    {
-        return FALSE;
-    }
+    #endif
+    return FALSE;
 }
 
 // Created for easy use of EXPECT_MOVES, so the user can provide 1, 2, 3 or 4 moves for AI which can pass the test.

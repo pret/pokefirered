@@ -224,7 +224,7 @@ SINGLE_BATTLE_TEST("Dynamax: Dynamaxed Pokemon cannot be hit by OHKO moves")
     } SCENE {
         MESSAGE("Wobbuffet used Max Strike!");
         MESSAGE("The opposing Machamp used Fissure!");
-        MESSAGE("Wobbuffet is unaffected!");
+        MESSAGE("It doesn't affect Wobbuffet…");
         NONE_OF { HP_BAR(player); }
     }
 }

@@ -1,7 +1,8 @@
 #ifndef GUARD_BATTLE_TRANSITION_H
 #define GUARD_BATTLE_TRANSITION_H
 
-enum {
+enum MugshotColor
+{
     MUGSHOT_COLOR_PURPLE,
     MUGSHOT_COLOR_GREEN,
     MUGSHOT_COLOR_PINK,
@@ -10,7 +11,8 @@ enum {
     MUGSHOT_COLOR_COUNT
 };
 
-enum {
+enum BattleTransition
+{
     B_TRANSITION_BLUR,
     B_TRANSITION_SWIRL,
     B_TRANSITION_SHUFFLE,
@@ -28,10 +30,48 @@ enum {
     B_TRANSITION_COUNT
 };
 
+#define B_TRANSITION_FRONTIER_LOGO_WIGGLE                       B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_LOGO_WAVE                         B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_SQUARES                           B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_SQUARES_SCROLL                    B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_SQUARES_SPIRAL                    B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_CIRCLES_MEET                      B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_CIRCLES_CROSS                     B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_CIRCLES_ASYMMETRIC_SPIRAL         B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_CIRCLES_SYMMETRIC_SPIRAL          B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_CIRCLES_MEET_IN_SEQ               B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_CIRCLES_CROSS_IN_SEQ              B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_CIRCLES_ASYMMETRIC_SPIRAL_IN_SEQ  B_TRANSITION_BLUR
+#define B_TRANSITION_FRONTIER_CIRCLES_SYMMETRIC_SPIRAL_IN_SEQ   B_TRANSITION_BLUR
+#define B_TRANSITION_REGICE                                     B_TRANSITION_BLUR
+#define B_TRANSITION_REGISTEEL                                  B_TRANSITION_BLUR
+#define B_TRANSITION_REGIROCK                                   B_TRANSITION_BLUR
+#define B_TRANSITION_KYOGRE                                     B_TRANSITION_BLUR
+#define B_TRANSITION_GROUDON                                    B_TRANSITION_BLUR
+#define B_TRANSITION_RAYQUAZA                                   B_TRANSITION_BLUR
+#define B_TRANSITION_AQUA                                       B_TRANSITION_BLUR
+#define B_TRANSITION_MAGMA                                      B_TRANSITION_BLUR
+
+
+// IDs for GetSpecialBattleTransition
+enum BattleTransitionGroup
+{
+    B_TRANSITION_GROUP_B_TOWER,
+    B_TRANSITION_GROUP_B_DOME = 3,
+    B_TRANSITION_GROUP_B_PALACE,
+    B_TRANSITION_GROUP_B_ARENA,
+    B_TRANSITION_GROUP_B_FACTORY,
+    B_TRANSITION_GROUP_B_PIKE,
+    B_TRANSITION_GROUP_B_PYRAMID = 10,
+    B_TRANSITION_GROUP_TRAINER_TOWER,
+    B_TRANSITION_GROUP_SECRET_BASE,
+    B_TRANSITION_GROUP_E_READER,
+};
+
 extern const struct SpritePalette gSpritePalette_Pokeball;
 
 bool8 IsBattleTransitionDone(void);
-void BattleTransition_StartOnField(u8 transitionId);
+void BattleTransition_StartOnField(enum BattleTransition transitionId);
 void Task_BattleTransition_Intro(u8 taskId);
 
 #endif // GUARD_BATTLE_TRANSITION_H

@@ -1,6 +1,17 @@
 #include "global.h"
 #include "test/battle.h"
 
+ASSUMPTIONS
+{
+    ASSUME(GetMoveEffect(MOVE_SYNCHRONOISE) == EFFECT_SYNCHRONOISE);
+    ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 0) == TYPE_PSYCHIC);
+    ASSUME(GetSpeciesType(SPECIES_WOBBUFFET, 1) == TYPE_PSYCHIC);
+    ASSUME(GetSpeciesType(SPECIES_BULBASAUR, 0) == TYPE_GRASS);
+    ASSUME(GetSpeciesType(SPECIES_BULBASAUR, 1) == TYPE_POISON);
+    ASSUME(GetSpeciesType(SPECIES_ARCANINE, 0) == TYPE_FIRE);
+    ASSUME(GetSpeciesType(SPECIES_ARCANINE, 1) == TYPE_FIRE);
+}
+
 DOUBLE_BATTLE_TEST("Synchronoise hits all Pokemon that share a type with the attacker")
 {
     GIVEN {
@@ -70,6 +81,37 @@ DOUBLE_BATTLE_TEST("Synchronoise will fail if the corresponding typing mon prote
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PROTECT, opponentLeft);
         MESSAGE("The opposing Wobbuffet protected itself!");
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SYNCHRONOISE, playerLeft);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Synchronoise will fail for a typeless user even if a target is typeless")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_BURN_UP) == EFFECT_FAIL_IF_NOT_ARG_TYPE);
+        PLAYER(SPECIES_ARCANINE) { Moves(MOVE_BURN_UP, MOVE_SYNCHRONOISE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ARCANINE) { Moves(MOVE_BURN_UP, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_BURN_UP, target: opponentRight);
+            MOVE(opponentLeft, MOVE_BURN_UP, target: playerRight);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_SYNCHRONOISE);
+            MOVE(opponentLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    } SCENE {
+        NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_SYNCHRONOISE, playerLeft);
+        MESSAGE("Arcanine used Synchronoise!");
+        MESSAGE("It doesn't affect the opposing Arcanine…");
+        MESSAGE("It doesn't affect Wobbuffet…");
+        MESSAGE("It doesn't affect the opposing Wobbuffet…");
+        NOT MESSAGE("But it failed!");
     }
 }
 

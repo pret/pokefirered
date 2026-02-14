@@ -261,6 +261,8 @@ static const u8* const sBattleAnims_General[NUM_B_ANIMS_GENERAL] =
 	[B_ANIM_SILPH_SCOPED]           = gBattleAnimGeneral_SilphScoped,
 	[B_ANIM_ROCK_THROW]             = gBattleAnimGeneral_SafariRockThrow,
 	[B_ANIM_SAFARI_REACTION]        = gBattleAnimGeneral_SafariReaction,
+    [B_ANIM_FORM_CHANGE_INSTANT]    = gBattleAnimGeneral_FormChangeInstant,
+    [B_ANIM_FORM_CHANGE_DISGUISE]   = gBattleAnimGeneral_FormChangeDisguise,
 };
 
 static const u8* const sBattleAnims_Special[NUM_B_ANIMS_SPECIAL] =

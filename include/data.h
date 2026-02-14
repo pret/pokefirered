@@ -232,7 +232,7 @@ static inline u16 SanitizeTrainerId(u16 trainerId)
 {
     switch (trainerId)
     {
-    case TRAINER_RECORD_MIXING_FRIEND:
+    // case TRAINER_RECORD_MIXING_FRIEND:
     case TRAINER_RECORD_MIXING_APPRENTICE:
     case TRAINER_EREADER:
     case TRAINER_FRONTIER_BRAIN:

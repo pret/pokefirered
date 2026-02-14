@@ -3,8 +3,6 @@
 
 ASSUMPTIONS
 {
-    ASSUME(!IsBattleMoveStatus(MOVE_SCRATCH));
-    ASSUME(!IsBattleMoveStatus(MOVE_GUST));
     ASSUME(GetMoveCategory(MOVE_GUST) == DAMAGE_CATEGORY_SPECIAL);
     ASSUME(GetMoveCategory(MOVE_SCRATCH) == DAMAGE_CATEGORY_PHYSICAL);
 }

@@ -155,7 +155,6 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, e
 {
     struct Pokemon mon;
     u32 i;
-    u16 targetSpecies;
     bool32 isShiny;
 
     u32 personality = GetMonPersonality(species, gender, nature, RANDOM_UNOWN_LETTER);
@@ -238,9 +237,7 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, e
     SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
 
     // In case a mon with a form changing item is given. Eg: SPECIES_ARCEUS_NORMAL with ITEM_SPLASH_PLATE will transform into SPECIES_ARCEUS_WATER upon gifted.
-    targetSpecies = GetFormChangeTargetSpecies(&mon, FORM_CHANGE_ITEM_HOLD, 0);
-    if (targetSpecies != SPECIES_NONE)
-        SetMonData(&mon, MON_DATA_SPECIES, &targetSpecies);
+    TryFormChange(&mon, FORM_CHANGE_ITEM_HOLD);
 
     if (side == B_SIDE_PLAYER)
         return GiveScriptedMonToPlayer(&mon, slot);

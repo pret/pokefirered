@@ -562,48 +562,56 @@ static void BufferArenaOpponentName(void)
 
 void DrawArenaRefereeTextBox(void)
 {
-    u8 width = 27;
-    u8 palNum = 7;
+    u32 width = 0x1A;
+    u32 pal = 7;
 
-    FillBgTilemapBufferRect(0, 0,    254, 14, 1,  6, palNum);
-    FillBgTilemapBufferRect(0, 0,    32,  14, 1,  6, palNum);
-    FillBgTilemapBufferRect(0, 0x31, 0,   14, 1,  1, palNum);
-    FillBgTilemapBufferRect(0, 0x33, 1,   14, 1,  1, palNum);
-    FillBgTilemapBufferRect(0, 0x34, 2,   14, width, 1, palNum);
-    width++;
-    FillBgTilemapBufferRect(0, 0x35, 28,  14, 1,  1, palNum);
-    FillBgTilemapBufferRect(0, 0x36, 29,  14, 1,  1, palNum);
-    FillBgTilemapBufferRect(0, 0x37, 0,   15, 1,  5, palNum);
-    FillBgTilemapBufferRect(0, 0x39, 1,   15, width, 5, palNum);
-    FillBgTilemapBufferRect(0, 0x3A, 29,  15, 1,  5, palNum);
-    FillBgTilemapBufferRect(0, 0x831, 0,  19, 1,  1, palNum);
-    FillBgTilemapBufferRect(0, 0x833, 1,  19, 1,  1, palNum);
-    FillBgTilemapBufferRect(0, 0x834, 2,  19, width - 2, 1, palNum);
-    FillBgTilemapBufferRect(0, 0x835, 28, 19, 1,  1, palNum);
-    FillBgTilemapBufferRect(0, 0x836, 29, 19, 1,  1, palNum);
+    FillBgTilemapBufferRect(0, 0x30,                 0,    0xE,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x31,                 1,    0xE,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x32,                 2,    0xE,  width, 1, pal);
+    FillBgTilemapBufferRect(0, 0x33,                 0x1C, 0xE,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x34,                 0x1D, 0xE,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x35,                 0,    0xF,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x36,                 1,    0xF,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x38,                 0x1C, 0xF,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x39,                 0x1D, 0xF,  1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x3A,                 0,    0x10, 1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x3B,                 1,    0x10, 1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x3C,                 0x1C, 0x10, 1,     1, pal);
+    FillBgTilemapBufferRect(0, 0x3D,                 0x1D, 0x10, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x3A), 0,    0x11, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x3B), 1,    0x11, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x3C), 0x1C, 0x11, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x3D), 0x1D, 0x11, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x35), 0,    0x12, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x36), 1,    0x12, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x38), 0x1C, 0x12, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x39), 0x1D, 0x12, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x30), 0,    0x13, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x31), 1,    0x13, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x32), 2,    0x13, width, 1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x33), 0x1C, 0x13, 1,     1, pal);
+    FillBgTilemapBufferRect(0, BG_TILE_V_FLIP(0x34), 0x1D, 0x13, 1,     1, pal);
 }
 
 void EraseArenaRefereeTextBox(void)
 {
-    u8 width;
-    u8 height;
-    u8 palNum = 0;
+    u32 pal = 0;
+    u32 width = 0x1A;
+    u32 height = 4;
 
-    FillBgTilemapBufferRect(0, 3, 0, 14, 1, 1, palNum);
-    height = 4;
-    FillBgTilemapBufferRect(0, 4, 1, 14, 1, 1, palNum);
-    width = 27;
-    FillBgTilemapBufferRect(0, 5, 2, 14, width, 1, palNum);
-    FillBgTilemapBufferRect(0, 6, 28, 14, 1, 1, palNum);
-    FillBgTilemapBufferRect(0, 7, 29, 14, 1, 1, palNum);
-    FillBgTilemapBufferRect(0, 8, 0, 15, 1, height, palNum);
-    FillBgTilemapBufferRect(0, 9, 1, 15, 1, height, palNum);
-    FillBgTilemapBufferRect(0, 0xA, 2, 15, width, height, palNum);
-    FillBgTilemapBufferRect(0, 0xB, 28, 15, 1, height, palNum);
-    FillBgTilemapBufferRect(0, 0xC, 29, 15, 1, height, palNum);
-    FillBgTilemapBufferRect(0, 0xD, 0, 19, 1, 1, palNum);
-    FillBgTilemapBufferRect(0, 0xE, 1, 19, 1, 1, palNum);
-    FillBgTilemapBufferRect(0, 0xF, 2, 19, width, 1, palNum);
-    FillBgTilemapBufferRect(0, 0x10, 28, 19, 1, 1, palNum);
-    FillBgTilemapBufferRect(0, 0x11, 29, 19, 1, 1, palNum);
+    FillBgTilemapBufferRect(0, 3,    0,    0xE,  1,     1,      pal);
+    FillBgTilemapBufferRect(0, 4,    1,    0xE,  1,     1,      pal);
+    FillBgTilemapBufferRect(0, 5,    2,    0xE,  width, 1,      pal);
+    FillBgTilemapBufferRect(0, 6,    0x1C, 0xE,  1,     1,      pal);
+    FillBgTilemapBufferRect(0, 7,    0x1D, 0xE,  1,     1,      pal);
+    FillBgTilemapBufferRect(0, 8,    0,    0xF,  1,     height, pal);
+    FillBgTilemapBufferRect(0, 9,    1,    0xF,  1,     height, pal);
+    FillBgTilemapBufferRect(0, 0xA,  2,    0xF,  width, height, pal);
+    FillBgTilemapBufferRect(0, 0xB,  0x1C, 0xF,  1,     height, pal);
+    FillBgTilemapBufferRect(0, 0xC,  0x1D, 0xF,  1,     height, pal);
+    FillBgTilemapBufferRect(0, 0xD,  0,    0x13, 1,     1,      pal);
+    FillBgTilemapBufferRect(0, 0xE,  1,    0x13, 1,     1,      pal);
+    FillBgTilemapBufferRect(0, 0xF,  2,    0x13, width, 1,      pal);
+    FillBgTilemapBufferRect(0, 0x10, 0x1C, 0x13, 1,     1,      pal);
+    FillBgTilemapBufferRect(0, 0x11, 0x1D, 0x13, 1,     1,      pal);
 }

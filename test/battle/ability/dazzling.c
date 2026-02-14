@@ -1,6 +1,5 @@
 #include "global.h"
 #include "test/battle.h"
-#include "constants/battle_z_move_effects.h"
 
 ASSUMPTIONS
 {

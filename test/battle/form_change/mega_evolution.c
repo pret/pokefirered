@@ -216,3 +216,41 @@ SINGLE_BATTLE_TEST("Rayquaza returns its base Form upon battle end after Mega Ev
         EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_RAYQUAZA);
     }
 }
+
+SINGLE_BATTLE_TEST("Venusaur returns its base Form upon fainting end after Mega Evolving")
+{
+    GIVEN {
+        PLAYER(SPECIES_VENUSAUR) { HP(1); Item(ITEM_VENUSAURITE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA);
+            MOVE(opponent, MOVE_SCRATCH);
+            SEND_OUT(player, 1);
+        }
+        TURN { USE_ITEM(player, ITEM_REVIVE, 0); }
+        TURN { SWITCH(player, 0); }
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_VENUSAUR);
+    }
+}
+
+SINGLE_BATTLE_TEST("Rayquaza returns its base Form upon fainting end after Mega Evolving")
+{
+    GIVEN {
+        PLAYER(SPECIES_RAYQUAZA) { HP(1); Moves(MOVE_DRAGON_ASCENT, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA);
+            MOVE(opponent, MOVE_SCRATCH);
+            SEND_OUT(player, 1);
+        }
+        TURN { USE_ITEM(player, ITEM_REVIVE, 0); }
+        TURN { SWITCH(player, 0); }
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_RAYQUAZA);
+    }
+}

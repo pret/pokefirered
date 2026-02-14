@@ -98,7 +98,7 @@ struct LinkBattleAnim
     u8 furyCutterCounter;
     u8 syrupBombIsShiny:1;
     u8 isTransformedMonShiny:1;
-    u8 padding:4;
+    u8 stockpileCounter:4;
 };
 
 #define ANIM_ARGS_COUNT 8

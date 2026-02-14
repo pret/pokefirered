@@ -2488,7 +2488,7 @@ void AnimTask_HideSwapSprite(u8 taskId)
         gTasks[taskId].data[0]++;
         break;
     case 1:
-        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10], gBattleAnimArgs[1], FALSE);
+        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, SPECIES_GFX_CHANGE_FORM_CHANGE);
         GetBgDataForTransform(&animBg, gBattleAnimAttacker);
 
         if (IsContest())
@@ -2576,14 +2576,10 @@ void AnimTask_SetOpponentShadowCallbacks(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-#define megaEvo data[10]
-#define trackEnemyPersonality data[11]
-#define ghostUnveil data[12]
-
 void AnimTask_TransformMon(u8 taskId)
 {
     // int i, j;
-    u8 position;
+    enum BattlerPosition position;
     struct BattleAnimBgData animBg;
     u8 *dest;
     u8 *src;
@@ -2593,15 +2589,19 @@ void AnimTask_TransformMon(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
+        gTasks[taskId].data[10] = gBattleAnimArgs[0];
+        if (gTasks[taskId].data[10] == SPECIES_GFX_CHANGE_FORM_CHANGE_INSTANT)
+        {
+            // Skip mosaic animation
+            gTasks[taskId].data[0] = 2;
+            break;
+        }
         SetGpuReg(REG_OFFSET_MOSAIC, 0);
         if (GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker) == 1)
             SetAnimBgAttribute(1, BG_ANIM_MOSAIC, 1);
         else
             SetAnimBgAttribute(2, BG_ANIM_MOSAIC, 1);
 
-        gTasks[taskId].megaEvo = gBattleAnimArgs[0];
-        gTasks[taskId].trackEnemyPersonality = gBattleAnimArgs[1];
-        gTasks[taskId].ghostUnveil = gBattleAnimArgs[2];
         gTasks[taskId].data[0]++;
         break;
     case 1:
@@ -2616,7 +2616,7 @@ void AnimTask_TransformMon(u8 taskId)
         }
         break;
     case 2:
-        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].megaEvo, gTasks[taskId].trackEnemyPersonality, gTasks[taskId].ghostUnveil);
+        HandleSpeciesGfxDataChange(gBattleAnimAttacker, gBattleAnimTarget, gTasks[taskId].data[10]);
         GetBgDataForTransform(&animBg, gBattleAnimAttacker);
 
         if (IsContest())
@@ -2660,6 +2660,12 @@ void AnimTask_TransformMon(u8 taskId)
             // StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimAttacker]], BATTLER_AFFINE_NORMAL);
         }
 
+        if (gTasks[taskId].data[10] == SPECIES_GFX_CHANGE_FORM_CHANGE_INSTANT)
+        {
+            // Skip mosaic animation
+            DestroyAnimVisualTask(taskId);
+            break;
+        }
         gTasks[taskId].data[0]++;
         break;
     case 3:
@@ -2685,7 +2691,7 @@ void AnimTask_TransformMon(u8 taskId)
         {
             if (!IsOnPlayerSide(gBattleAnimAttacker))
             {
-                if (gTasks[taskId].data[10] == 0)
+                if (gTasks[taskId].data[10] == SPECIES_GFX_CHANGE_TRANSFORM)
                     SetBattlerShadowSpriteCallback(gBattleAnimAttacker, gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].transformSpecies);
             }
         }
@@ -2694,10 +2700,6 @@ void AnimTask_TransformMon(u8 taskId)
         break;
     }
 }
-
-#undef megaEvo
-#undef trackEnemyPersonality
-#undef ghostUnveil
 
 void AnimTask_IsMonInvisible(u8 taskId)
 {

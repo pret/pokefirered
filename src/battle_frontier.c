@@ -71,15 +71,6 @@ static void Task_StartBattleAfterTransition(u8 taskId)
     }
 }
 
-// placeholders
-#define B_TRANSITION_GROUP_B_PALACE B_TRANSITION_BLUR
-#define B_TRANSITION_GROUP_B_TOWER B_TRANSITION_BLUR
-#define B_TRANSITION_GROUP_B_DOME B_TRANSITION_BLUR
-#define B_TRANSITION_GROUP_B_ARENA B_TRANSITION_BLUR
-#define B_TRANSITION_GROUP_B_FACTORY B_TRANSITION_BLUR
-#define B_TRANSITION_GROUP_B_PIKE B_TRANSITION_BLUR
-#define B_TRANSITION_GROUP_B_PYRAMID B_TRANSITION_BLUR
-
 static void DoFacilityTrainerBattleInternal(u8 facility)
 {
     gBattleScripting.specialTrainerBattleType = facility;

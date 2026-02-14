@@ -1,6 +1,5 @@
 #include "global.h"
 #include "test/battle.h"
-#include "constants/battle_z_move_effects.h"
 
 SINGLE_BATTLE_TEST("Dancer can copy a dance move immediately after it was used and allow the user of Dancer to still use its move")
 {

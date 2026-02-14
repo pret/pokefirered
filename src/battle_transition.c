@@ -578,7 +578,7 @@ static const struct SpritePalette sSpritePalette_UnusedTrainer =
 static const u16 sBigPokeball_Tilemap[] = INCBIN_U16("graphics/battle_transitions/big_pokeball_tilemap.bin");
 static const u16 sMugshotsTilemap[] = INCBIN_U16("graphics/battle_transitions/vsbar_tilemap.bin");
 
-void BattleTransition_StartOnField(u8 transitionId)
+void BattleTransition_StartOnField(enum BattleTransition transitionId)
 {
     sTransitionData = AllocZeroed(sizeof(*sTransitionData));
     gMain.callback2 = CB2_OverworldBasic;

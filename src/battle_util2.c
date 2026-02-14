@@ -5,7 +5,6 @@
 #include "malloc.h"
 #include "pokemon.h"
 #include "trainer_tower.h"
-// #include "trainer_hill.h"
 #include "party_menu.h"
 #include "event_data.h"
 #include "constants/abilities.h"
@@ -65,6 +64,7 @@ void FreeBattleResources(void)
             TRY_FREE_AND_SET_NULL(gPokedudeBattlerStates[i]);
         }
     }
+
     gFieldStatuses = 0;
     if (gBattleResources != NULL)
     {
@@ -89,13 +89,13 @@ void FreeBattleResources(void)
     }
 }
 
-void AdjustFriendshipOnBattleFaint(u8 battler)
+void AdjustFriendshipOnBattleFaint(enum BattlerId battler)
 {
-    u8 opposingBattlerId;
+    enum BattlerId opposingBattlerId;
 
     if (IsDoubleBattle())
     {
-        u8 opposingBattlerId2;
+        enum BattlerId opposingBattlerId2;
 
         opposingBattlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         opposingBattlerId2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
@@ -121,7 +121,7 @@ void AdjustFriendshipOnBattleFaint(u8 battler)
     }
 }
 
-void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1)
+void SwitchPartyOrderInGameMulti(enum BattlerId battler, u8 arg1)
 {
     if (IsOnPlayerSide(battler))
     {
@@ -138,92 +138,90 @@ void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1)
 
 // Called when a Pokémon is unable to attack during a Battle Palace battle.
 // Check if it was because they are frozen/asleep, and if so try to cure the status.
-// u32 BattlePalace_TryEscapeStatus(u8 battler)
-// {
-//     u32 effect = 0;
+u32 BattlePalace_TryEscapeStatus(enum BattlerId battler)
+{
+    u32 effect = 0;
 
-//     do
-//     {
-//         switch (gBattleCommunication[MULTIUSE_STATE])
-//         {
-//         case 0:
-//             if (gBattleMons[battler].status1 & STATUS1_SLEEP)
-//             {
-//                 if (UproarWakeUpCheck(battler))
-//                 {
-//                     // Wake up from Uproar
-//                     gBattleMons[battler].status1 &= ~(STATUS1_SLEEP);
-//                     gBattleMons[battler].status2 &= ~(STATUS2_NIGHTMARE);
-//                     BattleScriptPushCursor();
-//                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP_UPROAR;
-//                     gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
-//                     effect = 2;
-//                 }
-//                 else
-//                 {
-//                     u32 toSub;
+    do
+    {
+        switch (gBattleCommunication[MULTIUSE_STATE])
+        {
+        case 0:
+            if (gBattleMons[battler].status1 & STATUS1_SLEEP)
+            {
+                if (UproarWakeUpCheck(battler))
+                {
+                    // Wake up from Uproar
+                    gEffectBattler = battler;
+                    gBattleMons[battler].status1 &= ~(STATUS1_SLEEP);
+                    gBattleMons[battler].volatiles.nightmare = FALSE;
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP_UPROAR;
+                    BattleScriptCall(BattleScript_MoveUsedWokeUp);
+                    effect = 2;
+                }
+                else
+                {
+                    u32 toSub;
 
-//                     if (GetBattlerAbility(battler) == ABILITY_EARLY_BIRD)
-//                         toSub = 2;
-//                     else
-//                         toSub = 1;
+                    if (GetBattlerAbility(battler) == ABILITY_EARLY_BIRD)
+                        toSub = 2;
+                    else
+                        toSub = 1;
 
-//                     // Reduce number of sleep turns
-//                     if ((gBattleMons[battler].status1 & STATUS1_SLEEP) < toSub)
-//                         gBattleMons[battler].status1 &= ~(STATUS1_SLEEP);
-//                     else
-//                         gBattleMons[battler].status1 -= toSub;
+                    // Reduce number of sleep turns
+                    if ((gBattleMons[battler].status1 & STATUS1_SLEEP) < toSub)
+                        gBattleMons[battler].status1 &= ~(STATUS1_SLEEP);
+                    else
+                        gBattleMons[battler].status1 -= toSub;
 
-//                     if (gBattleMons[battler].status1 & STATUS1_SLEEP)
-//                     {
-//                         // Still asleep
-//                         gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
-//                         effect = 2;
-//                     }
-//                     else
-//                     {
-//                         // Wake up
-//                         gBattleMons[battler].status2 &= ~(STATUS2_NIGHTMARE);
-//                         BattleScriptPushCursor();
-//                         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP;
-//                         gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
-//                         effect = 2;
-//                     }
-//                 }
-//             }
-//             gBattleCommunication[MULTIUSE_STATE]++;
-//             break;
-//         case 1:
-//             if (gBattleMons[battler].status1 & STATUS1_FREEZE)
-//             {
-//                 if (Random() % 5 != 0)
-//                 {
-//                     // Still frozen
-//                     gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
-//                 }
-//                 else
-//                 {
-//                     // Unfreeze
-//                     gBattleMons[battler].status1 &= ~(STATUS1_FREEZE);
-//                     BattleScriptPushCursor();
-//                     gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
-//                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
-//                 }
-//                 effect = 2;
-//             }
-//             gBattleCommunication[MULTIUSE_STATE]++;
-//             break;
-//         case 2:
-//             break;
-//         }
-//         // Loop until reaching the final state, or stop early if Pokémon was Asleep/Frozen
-//     } while (gBattleCommunication[MULTIUSE_STATE] != 2 && effect == 0);
+                    if (gBattleMons[battler].status1 & STATUS1_SLEEP)
+                    {
+                        // Still asleep
+                        gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
+                        effect = 2;
+                    }
+                    else
+                    {
+                        // Wake up
+                        gBattleMons[battler].volatiles.nightmare = FALSE;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP;
+                        BattleScriptCall(BattleScript_MoveUsedWokeUp);
+                        effect = 2;
+                    }
+                }
+            }
+            gBattleCommunication[MULTIUSE_STATE]++;
+            break;
+        case 1:
+            if (gBattleMons[battler].status1 & STATUS1_FREEZE)
+            {
+                if (Random() % 5 != 0)
+                {
+                    // Still frozen
+                    gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
+                }
+                else
+                {
+                    // Unfreeze
+                    gBattleMons[battler].status1 &= ~(STATUS1_FREEZE);
+                    BattleScriptCall(BattleScript_MoveUsedUnfroze);
+                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
+                }
+                effect = 2;
+            }
+            gBattleCommunication[MULTIUSE_STATE]++;
+            break;
+        case 2:
+            break;
+        }
+        // Loop until reaching the final state, or stop early if Pokémon was Asleep/Frozen
+    } while (gBattleCommunication[MULTIUSE_STATE] != 2 && effect == 0);
 
-//     if (effect == 2)
-//     {
-//         BtlController_EmitSetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battler].status1);
-//         MarkBattlerForControllerExec(battler);
-//     }
+    if (effect == 2)
+    {
+        BtlController_EmitSetMonData(battler, B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battler].status1);
+        MarkBattlerForControllerExec(battler);
+    }
 
-//     return effect;
-// }
+    return effect;
+}

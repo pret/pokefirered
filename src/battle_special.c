@@ -60,7 +60,7 @@ void DoSpecialTrainerBattle(void)
 
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(BattleSetup_GetBattleTowerBattleTransition());
+        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_E_READER));
 #endif //FREE_BATTLE_TOWER_E_READER
         break;
     }

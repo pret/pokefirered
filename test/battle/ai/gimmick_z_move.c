@@ -1,7 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 #include "battle_ai_util.h"
-#include "constants/battle_z_move_effects.h"
 
 AI_SINGLE_BATTLE_TEST("AI uses Z-Moves.")
 {

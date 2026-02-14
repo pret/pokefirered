@@ -9,8 +9,8 @@ SINGLE_BATTLE_TEST("Arena Trap prevents grounded adjacent opponents from switchi
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); }
     } THEN {
-        u32 battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        u32 trapper = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        enum BattlerId trapper = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         EXPECT_EQ(IsAbilityPreventingEscape(battler), trapper + 1);
     }
 }
@@ -86,8 +86,8 @@ WILD_BATTLE_TEST("Arena Trap prevents switching but Run Away allows fleeing")
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); }
     } THEN {
-        u32 battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        u32 trapper = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        enum BattlerId trapper = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         EXPECT_EQ(IsAbilityPreventingEscape(battler), trapper + 1);
         EXPECT_EQ(IsRunningFromBattleImpossible(battler), BATTLE_RUN_SUCCESS);
     }
@@ -102,8 +102,8 @@ WILD_BATTLE_TEST("Arena Trap prevents switching but Smoke Ball allows fleeing")
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); }
     } THEN {
-        u32 battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        u32 trapper = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        enum BattlerId trapper = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         EXPECT_EQ(IsAbilityPreventingEscape(battler), trapper + 1);
         EXPECT_EQ(IsRunningFromBattleImpossible(battler), BATTLE_RUN_SUCCESS);
     }
@@ -119,8 +119,8 @@ SINGLE_BATTLE_TEST("Arena Trap prevents switch outs from Ghost-type Pokémon (Ge
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); }
     } THEN {
-        u32 battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        u32 trapper = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        enum BattlerId trapper = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
         EXPECT_EQ(IsAbilityPreventingEscape(battler), trapper + 1);
     }
 }
@@ -135,7 +135,7 @@ SINGLE_BATTLE_TEST("Arena Trap doesn't prevent switch outs from Ghost-type Poké
     } WHEN {
         TURN { MOVE(player, MOVE_CELEBRATE); }
     } THEN {
-        u32 battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
         EXPECT_EQ(IsAbilityPreventingEscape(battler), 0);
     }
 }

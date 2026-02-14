@@ -33,14 +33,17 @@
 
 #define NUM_VERSIONS 15
 
-#define LANGUAGE_JAPANESE 1
-#define LANGUAGE_ENGLISH  2
-#define LANGUAGE_FRENCH   3
-#define LANGUAGE_ITALIAN  4
-#define LANGUAGE_GERMAN   5
-#define LANGUAGE_KOREAN   6 // 6 goes unused but the theory is it was meant to be Korean
-#define LANGUAGE_SPANISH  7
-#define NUM_LANGUAGES     7
+enum Language
+{
+    LANGUAGE_JAPANESE = 1,
+    LANGUAGE_ENGLISH  = 2,
+    LANGUAGE_FRENCH   = 3,
+    LANGUAGE_ITALIAN  = 4,
+    LANGUAGE_GERMAN   = 5,
+    LANGUAGE_KOREAN   = 6, // 6 goes unused but the theory is it was meant to be Korean
+    LANGUAGE_SPANISH  = 7,
+    NUM_LANGUAGES
+};
 
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
 
@@ -134,9 +137,12 @@ enum FrontierLevelMode
 
 #define NUM_TOWER_CHALLENGE_TYPES 4
 
-#define MALE   0
-#define FEMALE 1
-#define GENDER_COUNT 2
+enum Gender
+{
+    MALE,
+    FEMALE,
+    GENDER_COUNT,
+};
 
 #define BARD_SONG_LENGTH       6
 #define NUM_STORYTELLER_TALES  4

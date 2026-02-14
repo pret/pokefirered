@@ -17,12 +17,15 @@
 #define BERRY_COLOR_YELLOW 4
 #define BERRY_COLOR_PINK   5
 
-#define FLAVOR_SPICY   0
-#define FLAVOR_DRY     1
-#define FLAVOR_SWEET   2
-#define FLAVOR_BITTER  3
-#define FLAVOR_SOUR    4
-#define FLAVOR_COUNT   5
+enum __attribute__((__packed__)) Flavor
+{
+    FLAVOR_SPICY,
+    FLAVOR_DRY,
+    FLAVOR_SWEET,
+    FLAVOR_BITTER,
+    FLAVOR_SOUR,
+    FLAVOR_COUNT,
+};
 
 #define BERRY_STAGE_NO_BERRY    0  // there is no tree planted and the soil is completely flat.
 #define BERRY_STAGE_PLANTED     1

@@ -2400,7 +2400,6 @@ extern const u8 gText_BattleArenaGutsSymbol[];
 extern const u8 gText_BattleFactoryKnowledgeSymbol[];
 extern const u8 gText_BattlePikeLuckSymbol[];
 extern const u8 gText_BattlePyramidBraveSymbol[];
-extern const u8 gText_EmptyString7[];
 extern const u8 gText_BattleTower3[];
 extern const u8 gText_BattleDome2[];
 extern const u8 gText_BattlePalace2[];

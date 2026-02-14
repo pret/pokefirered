@@ -35,7 +35,7 @@ enum BattlerPosition
     B_POSITION_ABSENT = 0xFF,
 };
 
-enum BattlerId
+enum __attribute__((packed)) BattlerId
 {
     B_BATTLER_0,
     B_BATTLER_1,
@@ -284,7 +284,6 @@ enum VolatileFlags
     F(VOLATILE_ROOST_ACTIVE,                roostActive,                   (u32, 1)) \
     F(VOLATILE_UNBURDEN_ACTIVE,             unburdenActive,                (u32, 1)) \
     F(VOLATILE_NEUTRALIZING_GAS,            neutralizingGas,               (u32, 1)) \
-    F(VOLATILE_TRIGGER_ICE_FACE,            triggerIceFace,                (u32, 1)) \
     F(VOLATILE_UNNERVE_ACTIVATED,           unnerveActivated,              (u32, 1)) \
     F(VOLATILE_ENDURED,                     endured,                       (u32, 1)) \
     F(VOLATILE_TRY_EJECT_PACK,              tryEjectPack,                  (u32, 1)) \
@@ -410,11 +409,13 @@ enum TypeSideHazard
 #define MOVE_RESULT_NOT_VERY_EFFECTIVE    (1 << 2)
 #define MOVE_RESULT_DOESNT_AFFECT_FOE     (1 << 3)
 #define MOVE_RESULT_ONE_HIT_KO            (1 << 4)
-#define MOVE_RESULT_FAILED                (1 << 5)
-#define MOVE_RESULT_FOE_ENDURED           (1 << 6)
-#define MOVE_RESULT_FOE_HUNG_ON           (1 << 7)
-#define MOVE_RESULT_STURDIED              (1 << 8)
-#define MOVE_RESULT_FOE_ENDURED_AFFECTION (1 << 9)
+#define MOVE_RESULT_ONE_HIT_KO_NO_AFFECT  (1 << 5)
+#define MOVE_RESULT_ONE_HIT_KO_STURDY     (1 << 6)
+#define MOVE_RESULT_FAILED                (1 << 7)
+#define MOVE_RESULT_FOE_ENDURED           (1 << 8)
+#define MOVE_RESULT_FOE_HUNG_ON           (1 << 9)
+#define MOVE_RESULT_STURDIED              (1 << 10)
+#define MOVE_RESULT_FOE_ENDURED_AFFECTION (1 << 11)
 #define MOVE_RESULT_AVOIDED_ATTACK        (MOVE_RESULT_MISSED | MOVE_RESULT_FAILED)
 #define MOVE_RESULT_NO_EFFECT             (MOVE_RESULT_MISSED | MOVE_RESULT_FAILED | MOVE_RESULT_DOESNT_AFFECT_FOE)
 
@@ -594,6 +595,7 @@ enum __attribute__((packed)) MoveEffect
     // Move effects that happen before the move hits. Set in SetPreAttackMoveEffect
     MOVE_EFFECT_BREAK_SCREEN,
     MOVE_EFFECT_STEAL_STATS,
+    MOVE_EFFECT_BEAT_UP_MESSAGE, // Handles the message printing for gen2,3 and 4
 
     NUM_MOVE_EFFECTS
 };
@@ -730,11 +732,6 @@ enum MoveTarget
 #define PARENTAL_BOND_1ST_HIT 2
 #define PARENTAL_BOND_2ND_HIT 1
 #define PARENTAL_BOND_OFF     0
-
-// Constants for if HandleScriptMegaPrimalBurst should handle Mega Evolution, Primal Reversion, or Ultra Burst.
-#define HANDLE_TYPE_MEGA_EVOLUTION 0
-#define HANDLE_TYPE_PRIMAL_REVERSION 1
-#define HANDLE_TYPE_ULTRA_BURST 2
 
 // Constants for Torment
 #define PERMANENT_TORMENT   0xF

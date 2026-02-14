@@ -274,7 +274,72 @@ SINGLE_BATTLE_TEST("Normalize doesn't affect Hidden Power's type")
     }
 }
 
-TO_DO_BATTLE_TEST("Aerilate doesn't affect Tera Starstorm's type");
-TO_DO_BATTLE_TEST("Normalize makes Flying Press do Normal/Flying damage");
-TO_DO_BATTLE_TEST("Normalize doesn't affect Terrain Pulse's type");
-TO_DO_BATTLE_TEST("Normalize doesn't affect damaging Z-Move types");
+SINGLE_BATTLE_TEST("Normalize doesn't change Tera Blast's type when Terastallized")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TERA_BLAST) == EFFECT_TERA_BLAST);
+        ASSUME(GetMoveType(MOVE_TERA_BLAST) == TYPE_NORMAL);
+        ASSUME(GetSpeciesType(SPECIES_MISDREAVUS, 0) == TYPE_GHOST);
+        PLAYER(SPECIES_SKITTY) { Ability(ABILITY_NORMALIZE); TeraType(TYPE_DARK); }
+        OPPONENT(SPECIES_MISDREAVUS);
+    } WHEN {
+        TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TERA_BLAST, player);
+        MESSAGE("It's super effective!");
+    }
+}
+
+SINGLE_BATTLE_TEST("Normalize makes Flying Press do Normal/Flying damage")
+{
+    enum Ability ability;
+    PARAMETRIZE { ability = ABILITY_CUTE_CHARM; }
+    PARAMETRIZE { ability = ABILITY_NORMALIZE; }
+    GIVEN {
+        ASSUME(GetSpeciesType(SPECIES_GOLEM, 0) == TYPE_ROCK || GetSpeciesType(SPECIES_GOLEM, 1) == TYPE_ROCK);
+        PLAYER(SPECIES_SKITTY) { Ability(ability); Moves(MOVE_FLYING_PRESS); }
+        OPPONENT(SPECIES_GOLEM);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FLYING_PRESS); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLYING_PRESS, player);
+        if (ability == ABILITY_NORMALIZE)
+            MESSAGE("It's not very effective…");
+        else
+            NOT { MESSAGE("It's not very effective…"); }
+    }
+}
+
+SINGLE_BATTLE_TEST("Normalize doesn't affect Terrain Pulse's type")
+{
+    GIVEN {
+        ASSUME(GetMoveEffect(MOVE_TERRAIN_PULSE) == EFFECT_TERRAIN_PULSE);
+        ASSUME(GetMoveType(MOVE_TERRAIN_PULSE) == TYPE_NORMAL);
+        ASSUME(GetSpeciesType(SPECIES_SANDSHREW, 0) == TYPE_GROUND || GetSpeciesType(SPECIES_SANDSHREW, 1) == TYPE_GROUND);
+        PLAYER(SPECIES_SKITTY) { Ability(ABILITY_NORMALIZE); }
+        OPPONENT(SPECIES_SANDSHREW);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_ELECTRIC_TERRAIN); MOVE(player, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_TERRAIN_PULSE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ELECTRIC_TERRAIN, opponent);
+        NOT { ANIMATION(ANIM_TYPE_MOVE, MOVE_TERRAIN_PULSE, player); }
+        MESSAGE("It doesn't affect the opposing Sandshrew…");
+    }
+}
+
+SINGLE_BATTLE_TEST("Normalize doesn't affect damaging Z-Move types")
+{
+    GIVEN {
+        ASSUME(GetMoveType(MOVE_WATER_GUN) == TYPE_WATER);
+        ASSUME(GetSpeciesType(SPECIES_GOLEM, 0) == TYPE_ROCK || GetSpeciesType(SPECIES_GOLEM, 1) == TYPE_ROCK);
+        PLAYER(SPECIES_SKITTY) { Ability(ABILITY_NORMALIZE); Item(ITEM_WATERIUM_Z); Moves(MOVE_WATER_GUN); }
+        OPPONENT(SPECIES_GOLEM);
+    } WHEN {
+        TURN { MOVE(player, MOVE_WATER_GUN, gimmick: GIMMICK_Z_MOVE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ZMOVE_ACTIVATE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_HYDRO_VORTEX, player);
+        MESSAGE("It's super effective!");
+    }
+}

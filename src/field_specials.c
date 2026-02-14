@@ -3815,6 +3815,15 @@ void CloseBattleFrontierTutorWindow(void)
     RemoveWindow(sTutorMoveAndElevatorWindowId);
 }
 
+bool8 InMultiPartnerRoom(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM) &&
+        VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS)
+        return TRUE;
+    return FALSE;
+}
+
 void OffsetCameraForBattle(void)
 {
     SetCameraPanningCallback(NULL);

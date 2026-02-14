@@ -316,6 +316,7 @@ void CreateBattlerSprite(u32 battler)
     if (battler < gBattlersCount)
     {
         u8 posY;
+        enum BattlerPosition position = GetBattlerPosition(battler);
 
         if (IsGhostBattleWithoutScope())
             posY = GetGhostSpriteDefault_Y(battler);
@@ -323,21 +324,27 @@ void CreateBattlerSprite(u32 battler)
             posY = GetSubstituteSpriteDefault_Y(battler);
         else
             posY = GetBattlerSpriteDefault_Y(battler);
-        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+
+        if (!IsOnPlayerSide(battler))
         {
-            if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
+            struct Pokemon *mon = GetBattlerMon(battler);
+            if (GetMonData(mon, MON_DATA_HP) == 0)
                 return;
-            SetMultiuseSpriteTemplateToPokemon(GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES), GetBattlerPosition(battler));
+            if (gBattleScripting.monCaught) // Don't create opponent sprite if it has been caught.
+                return;
+            u32 species = GetMonData(mon, MON_DATA_SPECIES);
+
+            SetMultiuseSpriteTemplateToPokemon(species, position);
             gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, GetBattlerSpriteCoord(battler, BATTLER_COORD_X_2), posY, GetBattlerSpriteSubpriority(battler));
             gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
             gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
             gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
-            gSprites[gBattlerSpriteIds[battler]].data[2] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
+            gSprites[gBattlerSpriteIds[battler]].data[2] = species;
             StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 0);
         }
         else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT)
         {
-            SetMultiuseSpriteTemplateToTrainerBack(gSaveBlock2Ptr->playerGender, GetBattlerPosition(B_POSITION_PLAYER_LEFT));
+            SetMultiuseSpriteTemplateToTrainerBack(gSaveBlock2Ptr->playerGender, position);
             gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, 80,
                                                       (8 - gTrainerBacksprites[gSaveBlock2Ptr->playerGender].coordinates.size) * 4 + 80,
                                                       GetBattlerSpriteSubpriority(0));

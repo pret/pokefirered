@@ -12,9 +12,10 @@ SINGLE_BATTLE_TEST("Neuroforce increases the strength of super-effective moves b
     GIVEN {
         ASSUME(GetMoveType(MOVE_SHADOW_BALL) == TYPE_GHOST);
         ASSUME(GetMoveType(MOVE_SCRATCH) == TYPE_NORMAL);
-        PLAYER(SPECIES_NECROZMA_ULTRA) { Ability(ability); }
+        PLAYER(SPECIES_NECROZMA_DUSK_MANE) { Ability(ability); Item(ITEM_ULTRANECROZIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_ULTRA_BURST); }
         TURN { MOVE(player, move); }
     } SCENE {
         HP_BAR(opponent, captureDamage: &results[i].damage);

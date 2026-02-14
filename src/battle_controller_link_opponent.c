@@ -6,9 +6,11 @@
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "battle_setup.h"
+#include "battle_tower.h"
 // #include "battle_tv.h"
 #include "bg.h"
 #include "data.h"
+#include "frontier_util.h"
 #include "link.h"
 #include "main.h"
 #include "m4a.h"
@@ -29,17 +31,17 @@
 #include "recorded_battle.h"
 #include "random.h"
 
-static void LinkOpponentHandleDrawTrainerPic(u32 battler);
-static void LinkOpponentHandleTrainerSlide(u32 battler);
-static void LinkOpponentHandleTrainerSlideBack(u32 battler);
-static void LinkOpponentHandleIntroTrainerBallThrow(u32 battler);
-static void LinkOpponentHandleDrawPartyStatusSummary(u32 battler);
-static void LinkOpponentHandleLinkStandbyMsg(u32 battler);
-static void LinkOpponentHandleEndLinkBattle(u32 battler);
+static void LinkOpponentHandleDrawTrainerPic(enum BattlerId battler);
+static void LinkOpponentHandleTrainerSlide(enum BattlerId battler);
+static void LinkOpponentHandleTrainerSlideBack(enum BattlerId battler);
+static void LinkOpponentHandleIntroTrainerBallThrow(enum BattlerId battler);
+static void LinkOpponentHandleDrawPartyStatusSummary(enum BattlerId battler);
+static void LinkOpponentHandleLinkStandbyMsg(enum BattlerId battler);
+static void LinkOpponentHandleEndLinkBattle(enum BattlerId battler);
 
-static void LinkOpponentBufferRunCommand(u32 battler);
+static void LinkOpponentBufferRunCommand(enum BattlerId battler);
 
-static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
+static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(enum BattlerId battler) =
 {
     [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
     [CONTROLLER_GETRAWMONDATA]            = BtlController_Empty,
@@ -96,13 +98,14 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 batt
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
-void SetControllerToLinkOpponent(u32 battler)
+void SetControllerToLinkOpponent(enum BattlerId battler)
 {
+    gBattlerBattleController[battler] = BATTLE_CONTROLLER_LINK_OPPONENT;
     gBattlerControllerEndFuncs[battler] = LinkOpponentBufferExecCompleted;
     gBattlerControllerFuncs[battler] = LinkOpponentBufferRunCommand;
 }
 
-static void LinkOpponentBufferRunCommand(u32 battler)
+static void LinkOpponentBufferRunCommand(enum BattlerId battler)
 {
     if (IsBattleControllerActiveOnLocal(battler))
     {
@@ -113,7 +116,7 @@ static void LinkOpponentBufferRunCommand(u32 battler)
     }
 }
 
-static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
+static void Intro_WaitForShinyAnimAndHealthbox(enum BattlerId battler)
 {
     bool32 healthboxAnimDone = FALSE;
     bool32 twoMons = FALSE;
@@ -148,8 +151,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
             gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim = FALSE;
             gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim = FALSE;
 
-            FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-            FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
+            FreeShinyStars();
         }
         else
         {
@@ -160,10 +162,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
             gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
 
             if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_RIGHT)
-            {
-                FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
-                FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
-            }
+                FreeShinyStars();
         }
 
         gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 3;
@@ -171,7 +170,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
     }
 }
 
-static void Intro_TryShinyAnimShowHealthbox(u32 battler)
+static void Intro_TryShinyAnimShowHealthbox(enum BattlerId battler)
 {
     bool32 bgmRestored = FALSE;
 
@@ -248,7 +247,7 @@ static void Intro_TryShinyAnimShowHealthbox(u32 battler)
 
 
             DestroySprite(&gSprites[gBattleControllerData[battler]]);
-            SetBattlerShadowSpriteCallback(battler, GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES));
+            SetBattlerShadowSpriteCallback(battler, GetBattlerVisualSpecies(battler));
 
             gBattleSpritesDataPtr->animationData->introAnimActive = FALSE;
             gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored = FALSE;
@@ -259,7 +258,7 @@ static void Intro_TryShinyAnimShowHealthbox(u32 battler)
     }
 }
 
-void LinkOpponentBufferExecCompleted(u32 battler)
+void LinkOpponentBufferExecCompleted(enum BattlerId battler)
 {
     gBattlerControllerFuncs[battler] = LinkOpponentBufferRunCommand;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -275,34 +274,41 @@ void LinkOpponentBufferExecCompleted(u32 battler)
     }
 }
 
-static void LinkOpponentHandleDrawTrainerPic(u32 battler)
+static void LinkOpponentHandleDrawTrainerPic(enum BattlerId battler)
 {
     s16 xPos;
-    u32 trainerPicId;
+    enum TrainerPicID trainerPicId;
+    enum BattlerPosition position = GetBattlerPosition(battler);
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if ((GetBattlerPosition(battler) & BIT_FLANK) != 0) // second mon
+        if ((position & BIT_FLANK) != 0) // second mon
             xPos = 152;
         else // first mon
             xPos = 200;
 
-        if ((gLinkPlayers[GetBattlerMultiplayerId(battler)].version & 0xFF) == VERSION_RUBY
-         || (gLinkPlayers[GetBattlerMultiplayerId(battler)].version & 0xFF) == VERSION_SAPPHIRE
-         || (gLinkPlayers[GetBattlerMultiplayerId(battler)].version & 0xFF) == VERSION_EMERALD)
+        if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
         {
-            if (gLinkPlayers[GetBattlerMultiplayerId(battler)].gender != MALE)
-                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_MAY];
+            if (position == B_POSITION_OPPONENT_LEFT)
+                trainerPicId = GetFrontierTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentA);
             else
-                trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_BRENDAN];
-        }
-        else if (gLinkPlayers[GetBattlerMultiplayerId(battler)].gender != MALE)
-        {
-            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
+                trainerPicId = GetFrontierTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentB);
         }
         else
         {
-            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
+            if ((gLinkPlayers[GetBattlerMultiplayerId(battler)].version & 0xFF) == VERSION_RUBY
+            || (gLinkPlayers[GetBattlerMultiplayerId(battler)].version & 0xFF) == VERSION_SAPPHIRE
+            || (gLinkPlayers[GetBattlerMultiplayerId(battler)].version & 0xFF) == VERSION_EMERALD)
+            {
+                if (gLinkPlayers[GetBattlerMultiplayerId(battler)].gender != MALE)
+                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_MAY];
+                else
+                    trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_BRENDAN];
+            }
+            else
+            {
+                trainerPicId = PlayerGenderToFrontTrainerPicId(gLinkPlayers[GetBattlerMultiplayerId(battler)].gender);
+            }
         }
     }
     else
@@ -321,57 +327,59 @@ static void LinkOpponentHandleDrawTrainerPic(u32 battler)
             else
                 trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_PKMN_TRAINER_BRENDAN];
         }
-        else if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != MALE)
-        {
-            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_LEAF];
-        }
         else
         {
-            trainerPicId = gFacilityClassToPicIndex[FACILITY_CLASS_RED];
+            trainerPicId = PlayerGenderToFrontTrainerPicId(gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender);
         }
     }
+
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, TRUE, xPos, 40, -1);
 }
 
-static void LinkOpponentHandleTrainerSlide(u32 battler)
+static void LinkOpponentHandleTrainerSlide(enum BattlerId battler)
 {
-    u32 trainerPicId = TRAINER_PIC_RED;
+    enum TrainerPicID trainerPicId;
+
+    if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_LEFT)
+        trainerPicId = GetFrontierTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentA);
+    else
+        trainerPicId = GetFrontierTrainerFrontSpriteId(TRAINER_BATTLE_PARAM.opponentB);
 
     BtlController_HandleTrainerSlide(battler, trainerPicId);
     BtlController_Complete(battler); // Possibly a bug, because execution should be completed after the slide in finishes. See Controller_WaitForTrainerPic.
 }
 
-static void LinkOpponentHandleTrainerSlideBack(u32 battler)
+static void LinkOpponentHandleTrainerSlideBack(enum BattlerId battler)
 {
     BtlController_HandleTrainerSlideBack(battler, 35, FALSE);
 }
 
-static void LinkOpponentHandleIntroTrainerBallThrow(u32 battler)
+static void LinkOpponentHandleIntroTrainerBallThrow(enum BattlerId battler)
 {
     BtlController_HandleIntroTrainerBallThrow(battler, 0, NULL, 0, Intro_TryShinyAnimShowHealthbox);
 }
 
-static void LinkOpponentHandleDrawPartyStatusSummary(u32 battler)
+static void LinkOpponentHandleDrawPartyStatusSummary(enum BattlerId battler)
 {
     BtlController_HandleDrawPartyStatusSummary(battler, B_SIDE_OPPONENT, TRUE);
 }
 
-static void LinkOpponentHandleLinkStandbyMsg(u32 battler)
+static void LinkOpponentHandleLinkStandbyMsg(enum BattlerId battler)
 {
-    // RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
     BtlController_Complete(battler);
 }
 
-static void LinkOpponentHandleEndLinkBattle(u32 battler)
+static void LinkOpponentHandleEndLinkBattle(enum BattlerId battler)
 {
-    // RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4]);
+    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4]);
 
     if (gBattleResources->bufferA[battler][1] == B_OUTCOME_DREW)
         gBattleOutcome = gBattleResources->bufferA[battler][1];
     else
         gBattleOutcome = gBattleResources->bufferA[battler][1] ^ B_OUTCOME_DREW;
 
-    // gSaveBlock2Ptr->frontier.disableRecordBattle = gBattleResources->bufferA[battler][2];
+    gSaveBlock2Ptr->frontier.disableRecordBattle = gBattleResources->bufferA[battler][2];
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
     BtlController_Complete(battler);

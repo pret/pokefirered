@@ -43,11 +43,11 @@ enum SwitchType
     SWITCH_MID_BATTLE_OPTIONAL,
 };
 
-u32 GetMostSuitableMonToSwitchInto(u32 battler, enum SwitchType switchType);
-bool32 ShouldSwitch(u32 battler);
-void ModifySwitchAfterMoveScoring(u32 battler);
-u32 AI_SelectRevivalBlessingMon(u32 battler);
-bool32 IsSwitchinValid(u32 battler);
-bool32 IsAceMon(u32 battler, u32 monPartyId);
+u32 GetMostSuitableMonToSwitchInto(enum BattlerId battler, enum SwitchType switchType);
+bool32 ShouldSwitch(enum BattlerId battler);
+void ModifySwitchAfterMoveScoring(enum BattlerId battler);
+u32 AI_SelectRevivalBlessingMon(enum BattlerId battler);
+bool32 IsSwitchinValid(enum BattlerId battler);
+bool32 IsAceMon(enum BattlerId battler, u32 monPartyId);
 
 #endif // GUARD_BATTLE_AI_SWITCH_H

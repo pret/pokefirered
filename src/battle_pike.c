@@ -303,7 +303,7 @@ static const struct PikeRoomNPC sNPCTable[] =
         .speechId3 = 1
     },
     {
-        .graphicsId = OBJ_EVENT_GFX_BLACK_BELT,
+        .graphicsId = OBJ_EVENT_GFX_BLACKBELT,
         .speechId1 = 22,
         .speechId2 = 23,
         .speechId3 = 27
@@ -345,7 +345,7 @@ static const struct PikeRoomNPC sNPCTable[] =
         .speechId3 = 26
     },
     {
-        .graphicsId = OBJ_EVENT_GFX_FISHERMAN,
+        .graphicsId = OBJ_EVENT_GFX_FISHER,
         .speechId1 = 23,
         .speechId2 = 30,
         .speechId3 = 11

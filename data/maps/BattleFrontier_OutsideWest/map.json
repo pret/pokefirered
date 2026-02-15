@@ -253,7 +253,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHER",
       "x": 31,
       "y": 31,
       "elevation": 0,
@@ -268,7 +268,7 @@
     {
       "local_id": "LOCALID_FRONTIER_FISHERMAN_2",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
+      "graphics_id": "OBJ_EVENT_GFX_FISHER",
       "x": 42,
       "y": 48,
       "elevation": 0,

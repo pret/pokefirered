@@ -27,6 +27,7 @@
 #define SECTOR_ID_HOF_2              29
 #define SECTOR_ID_TRAINER_TOWER_1    30
 #define SECTOR_ID_TRAINER_TOWER_2    31
+#define SECTOR_ID_RECORDED_BATTLE    31
 #define SECTORS_COUNT                32
 
 #define NUM_HOF_SECTORS 2

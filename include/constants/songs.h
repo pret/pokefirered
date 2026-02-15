@@ -378,6 +378,7 @@
 #define MUS_VS_RAYQUAZA         MUS_VS_LEGEND
 #define MUS_VS_MEW              MUS_VS_LEGEND
 #define MUS_VS_REGI             MUS_VS_LEGEND
+#define MUS_VS_RIVAL        MUS_VS_CHAMPION
 
 #define MUS_OBTAIN_SYMBOL   SE_USE_ITEM
 #define MUS_OBTAIN_B_POINTS SE_USE_ITEM

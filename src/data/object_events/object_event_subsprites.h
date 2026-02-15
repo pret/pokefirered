@@ -1,4 +1,4 @@
-const struct Subsprite gObjectEventSpriteOamTable_16x16_0[] = {
+const struct Subsprite sOamTable_16x16_0[] = {
     {
         .x = -8,
         .y = -8,
@@ -9,7 +9,7 @@ const struct Subsprite gObjectEventSpriteOamTable_16x16_0[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_16x16_1[] = {
+const struct Subsprite sOamTable_16x16_1[] = {
     {
         .x = -8,
         .y = -8,
@@ -20,7 +20,7 @@ const struct Subsprite gObjectEventSpriteOamTable_16x16_1[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_16x16_2[] = {
+const struct Subsprite sOamTable_16x16_2[] = {
     {
         .x = -8,
         .y = -8,
@@ -39,7 +39,7 @@ const struct Subsprite gObjectEventSpriteOamTable_16x16_2[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_16x16_3[] = {
+const struct Subsprite sOamTable_16x16_3[] = {
     {
         .x = -8,
         .y = -8,
@@ -58,7 +58,7 @@ const struct Subsprite gObjectEventSpriteOamTable_16x16_3[] = {
     }
 };
 
-const struct Subsprite gObjectEventSpriteOamTable_16x16_4[] = {
+const struct Subsprite sOamTable_16x16_4[] = {
     {
         .x = -8,
         .y = -8,
@@ -77,13 +77,13 @@ const struct Subsprite gObjectEventSpriteOamTable_16x16_4[] = {
     }
 };
 
-const struct SubspriteTable gObjectEventSpriteOamTables_16x16[] = {
-    {0, NULL},
-    {1, gObjectEventSpriteOamTable_16x16_0},
-    {1, gObjectEventSpriteOamTable_16x16_1},
-    {2, gObjectEventSpriteOamTable_16x16_2},
-    {2, gObjectEventSpriteOamTable_16x16_3},
-    {2, gObjectEventSpriteOamTable_16x16_4},
+const struct SubspriteTable sOamTables_16x16[] = {
+    {},
+    {ARRAY_COUNT(sOamTable_16x16_0), sOamTable_16x16_0},
+    {ARRAY_COUNT(sOamTable_16x16_1), sOamTable_16x16_1},
+    {ARRAY_COUNT(sOamTable_16x16_2), sOamTable_16x16_2},
+    {ARRAY_COUNT(sOamTable_16x16_3), sOamTable_16x16_3},
+    {ARRAY_COUNT(sOamTable_16x16_4), sOamTable_16x16_4}
 };
 
 const struct Subsprite gObjectEventSpriteOamTable_16x32_0[] = {
@@ -222,11 +222,11 @@ const struct Subsprite gObjectEventSpriteOamTable_32x32_2[] = {
         .priority = 2
     },
     {
-        .x = -16, 
-        .y = 8, 
-        .shape = SPRITE_SHAPE(32x8), 
-        .size = SPRITE_SIZE(32x8), 
-        .tileOffset = 12, 
+        .x = -16,
+        .y = 8,
+        .shape = SPRITE_SHAPE(32x8),
+        .size = SPRITE_SIZE(32x8),
+        .tileOffset = 12,
         .priority = 3
     }
 };

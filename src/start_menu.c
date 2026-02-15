@@ -5,6 +5,7 @@
 #include "battle_pyramid.h"
 #include "debug.h"
 #include "dexnav.h"
+#include "frontier_pass.h"
 #include "scanline_effect.h"
 #include "overworld.h"
 #include "link.h"
@@ -99,7 +100,7 @@ static bool8 StartMenuPokedexSanityCheck(void);
 static bool8 StartMenuPokedexCallback(void);
 static bool8 StartMenuPokemonCallback(void);
 static bool8 StartMenuBagCallback(void);
-static bool8 StartMenuPlayerCallback(void);
+static bool8 StartMenuPlayerNameCallback(void);
 static bool8 StartMenuSaveCallback(void);
 static bool8 StartMenuOptionCallback(void);
 static bool8 StartMenuExitCallback(void);
@@ -148,7 +149,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [MENU_ACTION_POKEDEX] = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
     [MENU_ACTION_POKEMON] = {gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback}},
     [MENU_ACTION_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBagCallback}},
-    [MENU_ACTION_PLAYER]  = {gText_MenuPlayer,  {.u8_void = StartMenuPlayerCallback}},
+    [MENU_ACTION_PLAYER]  = {gText_MenuPlayer,  {.u8_void = StartMenuPlayerNameCallback}},
     [MENU_ACTION_SAVE]    = {gText_MenuSave,    {.u8_void = StartMenuSaveCallback}},
     [MENU_ACTION_OPTION]  = {gText_MenuOption,  {.u8_void = StartMenuOptionCallback}},
     [MENU_ACTION_EXIT]    = {gText_MenuExit,    {.u8_void = StartMenuExitCallback}},
@@ -728,7 +729,7 @@ static bool8 StartMenuBagCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuPlayerCallback(void)
+static bool8 StartMenuPlayerNameCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -736,7 +737,12 @@ static bool8 StartMenuPlayerCallback(void)
         RemoveExtraStartMenuWindows();
         DestroyTimeWindow();
         CleanupOverworldWindowsAndTilemaps();
-        ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
+        if (IsUpdateLinkStateCBActive() || InUnionRoom())
+            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
+        else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
+            ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
+        else
+            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu);
         return TRUE;
     }
     return FALSE;

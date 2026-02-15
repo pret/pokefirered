@@ -2103,7 +2103,7 @@ static void RestoreHeldItems(void)
 
 static void SaveRecordBattle(void)
 {
-    // gSpecialVar_Result = MoveRecordedBattleToSaveData();
+    gSpecialVar_Result = MoveRecordedBattleToSaveData();
     gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
 }
 

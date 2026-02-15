@@ -10515,7 +10515,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_PLAYER_BRENDAN ===
 Name: BRENDAN
-Class: Player
+Class: Rival
 Pic: RS Brendan 2
 Gender: Male
 Music: Male
@@ -10528,7 +10528,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_PLAYER_MAY ===
 Name: MAY
-Class: Player
+Class: Rival
 Pic: RS May 2
 Gender: Male
 Music: Female
@@ -10541,7 +10541,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_PLAYER_RED ===
 Name: RED
-Class: Player
+Class: Rival
 Pic: Red
 Gender: Male
 Music: Male
@@ -10554,7 +10554,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_PLAYER_LEAF ===
 Name: LEAF
-Class: Player
+Class: Rival
 Pic: Leaf
 Gender: Male
 Music: Female
@@ -10634,7 +10634,7 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
 === TRAINER_TUBER_AMIRA ===
 Name: AMIRA
-Class: Tuber
+Class: Tuber F
 Pic: Tuber F
 Gender: Male
 Music: Girl
@@ -10656,7 +10656,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 === TRAINER_PKMN_BREEDER_ALIZE ===
 Name: ALIZE
 Class: Pkmn Breeder
-Pic: Pokemon Breeder
+Pic: Pokemon Breeder F
 Gender: Male
 Music: Female
 Double Battle: No
@@ -11491,7 +11491,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_TUBER_ALEXIS ===
 Name: ALEXIS
-Class: Tuber
+Class: Tuber F
 Pic: Tuber F
 Gender: Male
 Music: Girl
@@ -12539,7 +12539,7 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 === TRAINER_PKMN_BREEDER_BETHANY ===
 Name: BETHANY
 Class: Pkmn Breeder
-Pic: Pokemon Breeder
+Pic: Pokemon Breeder F
 Gender: Male
 Music: Female
 Double Battle: No
@@ -12552,7 +12552,7 @@ IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 === TRAINER_PKMN_BREEDER_ALLISON ===
 Name: ALLISON
 Class: Pkmn Breeder
-Pic: Pokemon Breeder
+Pic: Pokemon Breeder F
 Gender: Male
 Music: Female
 Double Battle: No
@@ -14270,7 +14270,7 @@ IVs: 20 HP / 20 Atk / 20 Def / 20 SpA / 20 SpD / 20 Spe
 
 === TRAINER_TUBER_AMIRA_2 ===
 Name: AMIRA
-Class: Tuber
+Class: Tuber F
 Pic: Tuber F
 Gender: Male
 Music: Girl
@@ -14343,7 +14343,7 @@ IVs: 14 HP / 14 Atk / 14 Def / 14 SpA / 14 SpD / 14 Spe
 === TRAINER_PKMN_BREEDER_ALIZE_2 ===
 Name: ALIZE
 Class: Pkmn Breeder
-Pic: Pokemon Breeder
+Pic: Pokemon Breeder F
 Gender: Male
 Music: Female
 Double Battle: No
@@ -15414,3 +15414,95 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 Muk
 Level: 39
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+
+=== TRAINER_ANABEL ===
+Name: ANABEL
+Class: Salon Maiden
+Pic: Salon Maiden Anabel
+Gender: Female
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Beldum
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_TUCKER ===
+Name: TUCKER
+Class: Dome Ace
+Pic: Dome Ace Tucker
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Beldum
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_SPENSER ===
+Name: SPENSER
+Class: Palace Maven
+Pic: Palace Maven Spenser
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Beldum
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_GRETA ===
+Name: GRETA
+Class: Arena Tycoon
+Pic: Arena Tycoon Greta
+Gender: Female
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Beldum
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_NOLAND ===
+Name: NOLAND
+Class: Factory Head
+Pic: Factory Head Noland
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Beldum
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_LUCY ===
+Name: LUCY
+Class: Pike Queen
+Pic: Pike Queen Lucy
+Gender: Female
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Beldum
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+
+=== TRAINER_BRANDON ===
+Name: BRANDON
+Class: Pyramid King
+Pic: Pyramid King Brandon
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Beldum
+Level: 5
+IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe

@@ -30,11 +30,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx::
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RED_NORMAL
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_GREEN_NORMAL
 	return
 
 BattleFrontier_BattleDomeBattleRoom_OnFrame:
@@ -498,11 +498,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound1Audience::
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound2Audience::
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 1, 3, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST, 1, 3, 0
 	createvobject OBJ_EVENT_GFX_EXPERT_F, 4, 6, 0
 	createvobject OBJ_EVENT_GFX_NINJA_BOY, 6, 8, 0
 	createvobject OBJ_EVENT_GFX_LITTLE_GIRL, 9, 11, 0
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 11, 13, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST, 11, 13, 0
 	createvobject OBJ_EVENT_GFX_MAN_5, 13, 15, 0
 	createvobject OBJ_EVENT_GFX_BEAUTY, 19, 7, 1
 	createvobject OBJ_EVENT_GFX_WOMAN_5, 22, 11, 1
@@ -512,13 +512,13 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound2Audience::
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience::
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 1, 3, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST, 1, 3, 0
 	createvobject OBJ_EVENT_GFX_EXPERT_F, 4, 6, 0
 	createvobject OBJ_EVENT_GFX_NINJA_BOY, 6, 8, 0
 	createvobject OBJ_EVENT_GFX_WOMAN_2, 7, 9, 0
 	createvobject OBJ_EVENT_GFX_LITTLE_GIRL, 9, 11, 0
 	createvobject OBJ_EVENT_GFX_LASS, 10, 12, 0
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 11, 13, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST, 11, 13, 0
 	createvobject OBJ_EVENT_GFX_MAN_5, 13, 15, 0
 	createvobject OBJ_EVENT_GFX_GENTLEMAN, 15, 2, 1
 	createvobject OBJ_EVENT_GFX_NINJA_BOY, 16, 3, 1
@@ -526,7 +526,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience::
 	createvobject OBJ_EVENT_GFX_BEAUTY, 19, 7, 1
 	createvobject OBJ_EVENT_GFX_EXPERT_F, 20, 9, 1
 	createvobject OBJ_EVENT_GFX_WOMAN_5, 22, 11, 1
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 23, 13, 1
+	createvobject OBJ_EVENT_GFX_SCIENTIST, 23, 13, 1
 	createvobject OBJ_EVENT_GFX_LITTLE_BOY, 25, 15, 1
 	createvobject OBJ_EVENT_GFX_YOUNGSTER, 26, 2, 2
 	createvobject OBJ_EVENT_GFX_HEX_MANIAC, 28, 5, 2
@@ -537,17 +537,17 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience::
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience::
 	createvobject OBJ_EVENT_GFX_NINJA_BOY, 0, 2, 0
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 1, 3, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST, 1, 3, 0
 	createvobject OBJ_EVENT_GFX_BEAUTY, 2, 15, 0
 	createvobject OBJ_EVENT_GFX_MAN_5, 3, 5, 0
 	createvobject OBJ_EVENT_GFX_EXPERT_F, 4, 6, 0
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 5, 7, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST, 5, 7, 0
 	createvobject OBJ_EVENT_GFX_NINJA_BOY, 6, 8, 0
 	createvobject OBJ_EVENT_GFX_WOMAN_2, 7, 9, 0
 	createvobject OBJ_EVENT_GFX_WOMAN_3, 8, 10, 0
 	createvobject OBJ_EVENT_GFX_LITTLE_GIRL, 9, 11, 0
 	createvobject OBJ_EVENT_GFX_LASS, 10, 12, 0
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 11, 13, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST, 11, 13, 0
 	createvobject OBJ_EVENT_GFX_BEAUTY, 12, 14, 0
 	createvobject OBJ_EVENT_GFX_MAN_5, 13, 15, 2
 	createvobject OBJ_EVENT_GFX_HIKER, 14, 12, 2
@@ -559,7 +559,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience::
 	createvobject OBJ_EVENT_GFX_EXPERT_F, 20, 9, 1
 	createvobject OBJ_EVENT_GFX_MAN_2, 21, 10, 1
 	createvobject OBJ_EVENT_GFX_WOMAN_5, 22, 11, 1
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 23, 13, 1
+	createvobject OBJ_EVENT_GFX_SCIENTIST, 23, 13, 1
 	createvobject OBJ_EVENT_GFX_GENTLEMAN, 24, 14, 1
 	createvobject OBJ_EVENT_GFX_LITTLE_BOY, 25, 15, 1
 	createvobject OBJ_EVENT_GFX_YOUNGSTER, 26, 2, 2

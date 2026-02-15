@@ -2409,7 +2409,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_8 = {
 	.trainers = {
 	    {
 			.name = _("LILY"),
-			.facilityClass = FACILITY_CLASS_PKMN_BREEDER,
+			.facilityClass = FACILITY_CLASS_PKMN_BREEDER_F,
 			.textColor = 1,
 			.speechBefore = {EC_WORD_I, EC_WORD_WANT, EC_WORD_SOMETHING, EC_WORD_IN, EC_MOVE(RETURN), EC_WORD_EXCL},
 			.speechWin = {EC_WORD_I, EC_WORD_BELIEVE, EC_WORD_IN, EC_WORD_MY, EC_WORD_POKEMON, EC_WORD_EXCL},
@@ -5844,7 +5844,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_7 = {
 	.trainers = {
 	    {
 			.name = _("PRISCILLA"),
-			.facilityClass = FACILITY_CLASS_TUBER,
+			.facilityClass = FACILITY_CLASS_TUBER_F,
 			.textColor = 1,
 			.speechBefore = {EC_WORD_I_AM, EC_WORD_A_LITTLE, EC_WORD_POKEMON, EC_WORD_GIRL, EC_WORD_HERE_I_COME, EC_WORD_EXCL},
 			.speechWin = {EC_WORD_WAAAH, EC_WORD_EXCL, EC_WORD_DID, EC_WORD_I, EC_WORD_WIN, EC_WORD_QUES},

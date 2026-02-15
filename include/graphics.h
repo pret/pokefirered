@@ -6539,4 +6539,17 @@ extern const u32 gBattlePyramidBagTilemap[];
 extern const u16 gBattlePyramidBagInterface_Pal[];
 extern const u16 gBattlePyramidFloor_Pal[][16];
 
+// Frontier Pass
+extern const u32 gFrontierPassBg_Gfx[];
+extern const u32 gFrontierPassBg_Tilemap[];
+extern const u16 gFrontierPassBg_Pal[][16];
+extern const u32 gFrontierPassMapAndCard_Gfx[];
+extern const u32 gFrontierPassCancelButton_Tilemap[];
+extern const u32 gFrontierPassCancelButtonHighlighted_Tilemap[];
+extern const u32 gFrontierPassMedals_Gfx[];
+extern const u16 gFrontierPassCursor_Pal[];
+extern const u16 gFrontierPassMedalsGold_Pal[];
+extern const u16 gFrontierPassMedalsSilver_Pal[];
+extern const u16 gFrontierPassMapCursor_Pal[];
+
 #endif //GUARD_GRAPHICS_H

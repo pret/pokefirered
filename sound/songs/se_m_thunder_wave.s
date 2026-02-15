@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_thunder_wave_grp, voicegroup128
+	.equ	se_m_thunder_wave_grp, voicegroup_rs_sfx_2
 	.equ	se_m_thunder_wave_pri, 4
 	.equ	se_m_thunder_wave_rev, reverb_set+50
 	.equ	se_m_thunder_wave_mvl, 127
@@ -31,7 +31,7 @@ se_m_thunder_wave_1:
 	.byte	W03
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+32
-	.byte		N04   , Cn3 
+	.byte		N04   , Cn3
 	.byte	W02
 	.byte		PAN   , c_v+9
 	.byte	W01
@@ -39,11 +39,11 @@ se_m_thunder_wave_1:
 	.byte	W03
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+0
-	.byte		N01   , Gn3 
+	.byte		N01   , Gn3
 	.byte	W02
-	.byte		        Bn2 
+	.byte		        Bn2
 	.byte	W02
-	.byte		N13   , Gn3 
+	.byte		N13   , Gn3
 	.byte	W02
 	.byte		VOL   , 96*se_m_thunder_wave_mvl/mxv
 	.byte	W01

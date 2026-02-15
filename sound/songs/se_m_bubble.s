@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_bubble_grp, voicegroup128
+	.equ	se_m_bubble_grp, voicegroup_rs_sfx_2
 	.equ	se_m_bubble_pri, 4
 	.equ	se_m_bubble_rev, reverb_set+50
 	.equ	se_m_bubble_mvl, 127
@@ -37,7 +37,7 @@ se_m_bubble_1:
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v-1
-	.byte		N03   , En3 
+	.byte		N03   , En3
 	.byte	W15
 	.byte	FINE
 

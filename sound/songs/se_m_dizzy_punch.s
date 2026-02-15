@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_dizzy_punch_grp, voicegroup128
+	.equ	se_m_dizzy_punch_grp, voicegroup_rs_sfx_2
 	.equ	se_m_dizzy_punch_pri, 4
 	.equ	se_m_dizzy_punch_rev, reverb_set+50
 	.equ	se_m_dizzy_punch_mvl, 127
@@ -46,7 +46,7 @@ se_m_dizzy_punch_1:
 	.byte	W01
 	.byte		PAN   , c_v-13
 	.byte		BEND  , c_v+0
-	.byte		N04   , Cn6 
+	.byte		N04   , Cn6
 	.byte	W01
 	.byte		VOL   , 66*se_m_dizzy_punch_mvl/mxv
 	.byte		PAN   , c_v+0

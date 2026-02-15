@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_cosmic_power_grp, voicegroup128
+	.equ	se_m_cosmic_power_grp, voicegroup_rs_sfx_2
 	.equ	se_m_cosmic_power_pri, 4
 	.equ	se_m_cosmic_power_rev, reverb_set+50
 	.equ	se_m_cosmic_power_mvl, 127
@@ -27,24 +27,24 @@ se_m_cosmic_power_1:
 	.byte	W06
 	.byte	W03
 	.byte		PAN   , c_v-5
-	.byte		N08   , Cn5 
+	.byte		N08   , Cn5
 	.byte	W03
 	.byte	W06
 	.byte		PAN   , c_v-9
-	.byte		N10   , Gn5 
+	.byte		N10   , Gn5
 	.byte	W06
 	.byte	W04
 	.byte		PAN   , c_v-5
-	.byte		N09   , Fn6 
+	.byte		N09   , Fn6
 	.byte	W02
 	.byte	W06
 	.byte	W02
 	.byte		PAN   , c_v+0
-	.byte		N09   , An5 
+	.byte		N09   , An5
 	.byte	W04
 	.byte	W06
 	.byte		PAN   , c_v+4
-	.byte		N09   , As5 
+	.byte		N09   , As5
 	.byte	W06
 	.byte	W03
 	.byte		PAN   , c_v+9
@@ -129,19 +129,19 @@ se_m_cosmic_power_2:
 	.byte	W02
 	.byte	W06
 	.byte	W01
-	.byte		N10   , Ds5 
+	.byte		N10   , Ds5
 	.byte	W05
 	.byte	W06
-	.byte		N09   , As6 
+	.byte		N09   , As6
 	.byte	W06
 	.byte	W03
-	.byte		        Cn6 
+	.byte		        Cn6
 	.byte	W03
 	.byte	W06
-	.byte		N10   , Fn5 
+	.byte		N10   , Fn5
 	.byte	W06
 	.byte	W04
-	.byte		N08   
+	.byte		N08
 	.byte	W02
 	.byte	W06
 	.byte	W01

@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_bonemerang_grp, voicegroup128
+	.equ	se_m_bonemerang_grp, voicegroup_rs_sfx_2
 	.equ	se_m_bonemerang_pri, 4
 	.equ	se_m_bonemerang_rev, reverb_set+50
 	.equ	se_m_bonemerang_mvl, 127
@@ -26,18 +26,18 @@ se_m_bonemerang_1:
 	.byte		N01   , Cn5 , v127
 	.byte	W01
 	.byte		PAN   , c_v+10
-	.byte		N01   , Cn6 
+	.byte		N01   , Cn6
 	.byte	W01
 	.byte		PAN   , c_v+0
-	.byte		N01   , Cn5 
+	.byte		N01   , Cn5
 	.byte	W04
-	.byte		N01   
+	.byte		N01
 	.byte	W01
 	.byte		PAN   , c_v-11
-	.byte		N01   , Cn6 
+	.byte		N01   , Cn6
 	.byte	W01
 	.byte		PAN   , c_v+0
-	.byte		N01   , Cn5 
+	.byte		N01   , Cn5
 	.byte	W04
 	.byte	FINE
 

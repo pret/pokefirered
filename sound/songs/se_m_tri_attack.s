@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_tri_attack_grp, voicegroup128
+	.equ	se_m_tri_attack_grp, voicegroup_rs_sfx_2
 	.equ	se_m_tri_attack_pri, 4
 	.equ	se_m_tri_attack_rev, reverb_set+50
 	.equ	se_m_tri_attack_mvl, 127
@@ -68,17 +68,17 @@ se_m_tri_attack_2:
 	.byte		VOL   , 110*se_m_tri_attack_mvl/mxv
 	.byte		N02   , Gs3 , v032
 	.byte	W02
-	.byte		        Gn3 
+	.byte		        Gn3
 	.byte	W02
-	.byte		        Fn3 
+	.byte		        Fn3
 	.byte	W03
-	.byte		        En3 
+	.byte		        En3
 	.byte	W02
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W03
-	.byte		        Cn3 
+	.byte		        Cn3
 	.byte	W02
-	.byte		        Gs2 
+	.byte		        Gs2
 	.byte	W10
 	.byte	FINE
 

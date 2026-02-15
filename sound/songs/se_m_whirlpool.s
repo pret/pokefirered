@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_whirlpool_grp, voicegroup128
+	.equ	se_m_whirlpool_grp, voicegroup_rs_sfx_2
 	.equ	se_m_whirlpool_pri, 4
 	.equ	se_m_whirlpool_rev, reverb_set+50
 	.equ	se_m_whirlpool_mvl, 127
@@ -106,7 +106,7 @@ se_m_whirlpool_1:
 	.byte	W01
 	.byte		BEND  , c_v-28
 	.byte	W04
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @******************************************************@

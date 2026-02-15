@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_confuse_ray_grp, voicegroup128
+	.equ	se_m_confuse_ray_grp, voicegroup_rs_sfx_2
 	.equ	se_m_confuse_ray_pri, 4
 	.equ	se_m_confuse_ray_rev, reverb_set+50
 	.equ	se_m_confuse_ray_mvl, 127
@@ -56,7 +56,7 @@ se_m_confuse_ray_1:
 	.byte		        c_v-17
 	.byte	W01
 	.byte		        c_v-1
-	.byte		N12   , As2 
+	.byte		N12   , As2
 	.byte	W02
 	.byte		PAN   , c_v+4
 	.byte		BEND  , c_v+8
@@ -82,7 +82,7 @@ se_m_confuse_ray_1:
 	.byte		        c_v-16
 	.byte	W01
 	.byte		        c_v-1
-	.byte		N12   , As2 
+	.byte		N12   , As2
 	.byte	W03
 	.byte		PAN   , c_v+4
 	.byte		BEND  , c_v+8

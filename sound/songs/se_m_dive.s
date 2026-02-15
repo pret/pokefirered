@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_dive_grp, voicegroup128
+	.equ	se_m_dive_grp, voicegroup_rs_sfx_2
 	.equ	se_m_dive_pri, 4
 	.equ	se_m_dive_rev, reverb_set+50
 	.equ	se_m_dive_mvl, 127
@@ -30,7 +30,7 @@ se_m_dive_1:
 	.byte	W04
 	.byte		PAN   , c_v+6
 	.byte		BEND  , c_v-14
-	.byte		N04   
+	.byte		N04
 	.byte	W03
 	.byte		PAN   , c_v+3
 	.byte		BEND  , c_v-11
@@ -90,7 +90,7 @@ se_m_dive_2:
 	.byte		VOL   , 105*se_m_dive_mvl/mxv
 	.byte		N06   , An2 , v040
 	.byte	W06
-	.byte		        Gn2 
+	.byte		        Gn2
 	.byte	W06
 	.byte		        Gs3 , v044
 	.byte	W07

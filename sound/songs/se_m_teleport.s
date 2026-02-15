@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_teleport_grp, voicegroup128
+	.equ	se_m_teleport_grp, voicegroup_rs_sfx_2
 	.equ	se_m_teleport_pri, 4
 	.equ	se_m_teleport_rev, reverb_set+50
 	.equ	se_m_teleport_mvl, 127
@@ -68,7 +68,7 @@ se_m_teleport_1:
 	.byte	W02
 	.byte		PAN   , c_v+0
 	.byte		BEND  , c_v+6
-	.byte		N06   , Fn3 
+	.byte		N06   , Fn3
 	.byte	W01
 	.byte		BEND  , c_v+11
 	.byte	W01

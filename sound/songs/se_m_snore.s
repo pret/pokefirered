@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_snore_grp, voicegroup128
+	.equ	se_m_snore_grp, voicegroup_rs_sfx_2
 	.equ	se_m_snore_pri, 4
 	.equ	se_m_snore_rev, reverb_set+50
 	.equ	se_m_snore_mvl, 127
@@ -63,28 +63,28 @@ se_m_snore_2:
 	.byte		VOICE , 27
 	.byte		N01   , En2 , v052
 	.byte	W02
-	.byte		        Dn2 
+	.byte		        Dn2
 	.byte	W02
-	.byte		        En2 
+	.byte		        En2
 	.byte	W02
 	.byte	W01
-	.byte		        Dn2 
+	.byte		        Dn2
 	.byte	W02
-	.byte		        En2 
+	.byte		        En2
 	.byte	W03
 	.byte	W01
 	.byte		        En2 , v064
 	.byte	W02
-	.byte		        Gs2 
+	.byte		        Gs2
 	.byte	W03
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W02
-	.byte		        En2 
+	.byte		        En2
 	.byte	W02
-	.byte		        Gs2 
+	.byte		        Gs2
 	.byte	W02
 	.byte	W01
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W05
 	.byte	FINE
 

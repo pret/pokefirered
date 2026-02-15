@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_self_destruct_grp, voicegroup128
+	.equ	se_m_self_destruct_grp, voicegroup_rs_sfx_2
 	.equ	se_m_self_destruct_pri, 4
 	.equ	se_m_self_destruct_rev, reverb_set+50
 	.equ	se_m_self_destruct_mvl, 127
@@ -25,9 +25,9 @@ se_m_self_destruct_1:
 	.byte		BEND  , c_v+0
 	.byte		N01   , Gn3 , v127
 	.byte	W01
-	.byte		        Cn3 
+	.byte		        Cn3
 	.byte	W01
-	.byte		N24   , An3 
+	.byte		N24   , An3
 	.byte	W06
 	.byte		PAN   , c_v+6
 	.byte	W04

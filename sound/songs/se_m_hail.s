@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_hail_grp, voicegroup128
+	.equ	se_m_hail_grp, voicegroup_rs_sfx_2
 	.equ	se_m_hail_pri, 4
 	.equ	se_m_hail_rev, reverb_set+50
 	.equ	se_m_hail_mvl, 127
@@ -31,7 +31,7 @@ se_m_hail_1:
 	.byte		N01   , Gn4 , v112
 	.byte	W01
 	.byte		PAN   , c_v+0
-	.byte		N01   , Ds5 
+	.byte		N01   , Ds5
 	.byte	W03
 	.byte	W01
 	.byte		PAN   , c_v+6
@@ -41,7 +41,7 @@ se_m_hail_1:
 	.byte		N01   , Gn4 , v064
 	.byte	W02
 	.byte		PAN   , c_v+0
-	.byte		N01   , Ds5 
+	.byte		N01   , Ds5
 	.byte	W03
 	.byte		PAN   , c_v+11
 	.byte		N02   , Ds5 , v020
@@ -51,7 +51,7 @@ se_m_hail_1:
 	.byte		N01   , Gn4 , v064
 	.byte	W01
 	.byte		PAN   , c_v+0
-	.byte		N01   , Ds5 
+	.byte		N01   , Ds5
 	.byte	W04
 	.byte	FINE
 
@@ -64,20 +64,20 @@ se_m_hail_2:
 	.byte		PAN   , c_v+0
 	.byte		N01   , Dn4 , v040
 	.byte	W04
-	.byte		        Bn3 
+	.byte		        Bn3
 	.byte	W02
 	.byte	W03
-	.byte		        Dn4 
+	.byte		        Dn4
 	.byte	W03
 	.byte	W01
 	.byte		        Bn3 , v032
 	.byte	W05
-	.byte		        Dn4 
+	.byte		        Dn4
 	.byte	W03
 	.byte		        Bn3 , v012
 	.byte	W03
 	.byte	W02
-	.byte		        Dn4 
+	.byte		        Dn4
 	.byte	W04
 	.byte	FINE
 

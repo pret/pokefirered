@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_sing_grp, voicegroup128
+	.equ	se_m_sing_grp, voicegroup_rs_sfx_2
 	.equ	se_m_sing_pri, 4
 	.equ	se_m_sing_rev, reverb_set+50
 	.equ	se_m_sing_mvl, 127
@@ -46,7 +46,7 @@ se_m_sing_1:
 	.byte		MOD   , 0
 	.byte	W03
 	.byte		VOL   , 95*se_m_sing_mvl/mxv
-	.byte		N21   , Fn5 
+	.byte		N21   , Fn5
 	.byte	W06
 	.byte	W06
 se_m_sing_1_000:
@@ -128,7 +128,7 @@ se_m_sing_2:
 	.byte	W03
 	.byte		VOL   , 95*se_m_sing_mvl/mxv
 	.byte		PAN   , c_v-12
-	.byte		N21   , Fn5 
+	.byte		N21   , Fn5
 	.byte	W06
 	.byte	W06
 se_m_sing_2_000:

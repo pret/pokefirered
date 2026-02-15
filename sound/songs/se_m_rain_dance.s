@@ -1,6 +1,6 @@
 	.include "MPlayDef.s"
 
-	.equ	se_m_rain_dance_grp, voicegroup128
+	.equ	se_m_rain_dance_grp, voicegroup_rs_sfx_2
 	.equ	se_m_rain_dance_pri, 4
 	.equ	se_m_rain_dance_rev, reverb_set+50
 	.equ	se_m_rain_dance_mvl, 127
@@ -97,7 +97,7 @@ se_m_rain_dance_1:
 	.byte		        1*se_m_rain_dance_mvl/mxv
 	.byte		PAN   , c_v+4
 	.byte	W06
-	.byte		EOT   
+	.byte		EOT
 	.byte	FINE
 
 @******************************************************@

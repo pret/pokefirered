@@ -50,6 +50,7 @@
 #include "pokemon_summary_screen.h"
 // #include "pokenav.h"
 // #include "menu_specialized.h"
+#include "trainer_pokemon_sprites.h"
 #include "data.h"
 #include "generational_changes.h"
 #include "move.h"
@@ -70,6 +71,8 @@
 #include "battle_util.h"
 #include "constants/pokemon.h"
 #include "config/battle.h"
+#include "pokedex_emerald.h"
+#include "config/pokedex_plus_hgss.h"
 #include "data/battle_move_effects.h"
 #include "test/battle.h"
 #include "follower_npc.h"
@@ -11070,8 +11073,6 @@ static void Cmd_trysetcaughtmondexflags(void)
     u32 species = GetMonData(caughtMon, MON_DATA_SPECIES);
     u32 personality = GetMonData(caughtMon, MON_DATA_PERSONALITY);
 
-    // required for FRLG dex
-    HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_SEEN, personality);
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT))
     {
         gBattlescriptCurrInstr = cmd->failInstr;
@@ -11127,6 +11128,11 @@ static void Cmd_displaydexinfo(void)
     case 4:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
+            if (!POKEDEX_PLUS_HGSS && !POKEDEX_EMERALD)
+            {
+                LoadSpritePaletteWithTag(GetMonSpritePalFromSpeciesAndPersonality(species, GetMonData(mon, MON_DATA_IS_SHINY), GetMonData(mon, MON_DATA_PERSONALITY)), species);
+                Pokedex_CreateCaughtMonSprite(species, 120, 64);
+            }
             BeginNormalPaletteFade(PALETTES_BG, 0, 16, 0, RGB_BLACK);
             ShowBg(0);
             ShowBg(3);

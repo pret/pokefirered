@@ -99,7 +99,6 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
                 block = block->next;
             }
             while (block != head);
-            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":L%s:%d, %s: OOM allocating %d bytes", gTestRunnerState.test->filename, SourceLine(0), location, size);
         }
 #endif
         assertf(pos->next != head, "%s: out of memory trying to allocate %d bytes", location, size)
@@ -111,7 +110,7 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
     }
 }
 
-void FreeInternal(void *heapStart, void *pointer)
+void FreeInternal(void *heapStart, void *pointer, const char *location)
 {
     if (pointer)
     {
@@ -213,9 +212,9 @@ void *AllocZeroed_(u32 size, const char *location)
     return AllocZeroedInternal(sHeapStart, size, location);
 }
 
-void Free(void *pointer)
+void Free_(void *pointer, const char *location)
 {
-    FreeInternal(sHeapStart, pointer);
+    FreeInternal(sHeapStart, pointer, location);
 }
 
 bool32 CheckMemBlock(void *pointer)

@@ -14,8 +14,6 @@
 
 #define SMOL_IMAGE_SIZE_MULTIPLIER 4
 
-extern u8 ALIGNED(4) gDecompressionBuffer[0x4000];
-
 struct LZ77Header {
     u32 lz77IdBits:5;
     u32 padding:3;
@@ -79,8 +77,10 @@ bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet *src
 void DecompressPicFromTable(const struct CompressedSpriteSheet *src, void *buffer);
 
 void HandleLoadSpecialPokePic(bool32 isFrontPic, void *dest, s32 species, u32 personality);
+void HandleLoadSpecialPokePicIsEgg(bool32 isFrontPic, void *dest, s32 species, u32 personality, bool32 isEgg);
 
 void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool8 isFrontPic);
+void LoadSpecialPokePicIsEgg(void *dest, s32 species, u32 personality, bool8 isFrontPic, bool32 isEgg);
 
 u32 GetDecompressedDataSize(const u32 *ptr);
 bool32 IsCompressedData(const u32 *ptr);

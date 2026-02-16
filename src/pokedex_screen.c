@@ -3496,6 +3496,21 @@ void DexScreen_InputHandler_StartToCry(void)
 #define tPersonalityLo 14
 #define tPersonalityHi 15
 
+u8 DexScreen_RegisterMonToPokedex(u16 species)
+{
+    DexScreen_GetSetPokedexFlag(species, FLAG_SET_SEEN, TRUE);
+    DexScreen_GetSetPokedexFlag(species, FLAG_SET_CAUGHT, TRUE);
+
+    if ((!IsNationalPokedexEnabled() && !IsSpeciesInKantoDex(species)) || !DexScreen_MonHasCategoryEntry(species))
+        return CreateTask(Task_DexScreen_RegisterNonKantoMonBeforeNationalDex, 0);
+
+    DexScreen_LoadResources();
+    gTasks[sPokedexScreenData->taskId].func = Task_DexScreen_RegisterMonToPokedex;
+    DexScreen_LookUpCategoryBySpecies(species);
+
+    return sPokedexScreenData->taskId;
+}
+
 u8 DisplayCaughtMonDexPage(u16 species, bool32 isShiny, u32 personality)
 {
     u8 taskId = 0;
@@ -3509,14 +3524,7 @@ u8 DisplayCaughtMonDexPage(u16 species, bool32 isShiny, u32 personality)
     }
     else
     {
-        if ((!IsNationalPokedexEnabled() && !IsSpeciesInKantoDex(species)) || !DexScreen_MonHasCategoryEntry(species))
-            return CreateTask(Task_DexScreen_RegisterNonKantoMonBeforeNationalDex, 0);
-
-        DexScreen_LoadResources();
-        gTasks[sPokedexScreenData->taskId].func = Task_DexScreen_RegisterMonToPokedex;
-        DexScreen_LookUpCategoryBySpecies(species);
-
-        return sPokedexScreenData->taskId;
+        return DexScreen_RegisterMonToPokedex(species);
     }
 
     gTasks[taskId].tState = 0;

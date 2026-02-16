@@ -27,6 +27,7 @@ struct HelpSystemVideoState
 
 #define TILES_BACKUP_HEAP 0x2000
 
+static EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[0x4000] = {0};
 static EWRAM_DATA u8 sMapTilesBackup[BG_CHAR_SIZE - TILES_BACKUP_HEAP] = {0};
 static EWRAM_DATA u8 (*sMapTilesBackupHeap)[TILES_BACKUP_HEAP] = NULL;
 EWRAM_DATA u8 gDisableHelpSystemVolumeReduce = 0;

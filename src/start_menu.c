@@ -34,7 +34,6 @@
 #include "quest_log.h"
 #include "rtc.h"
 #include "safari_zone.h"
-#include "save_menu_util.h"
 #include "save.h"
 #include "scanline_effect.h"
 #include "script.h"
@@ -1334,27 +1333,38 @@ static void ShowSaveInfoWindow(void)
     sSaveStatsWindowId = AddWindow(&sSaveStatsWindowTemplate);
     LoadStdWindowGfx(sSaveStatsWindowId, 0x21D, BG_PLTT_ID(13));
     DrawStdFrameWithCustomTileAndPalette(sSaveStatsWindowId, FALSE, 0x21D, 13);
-    SaveStatToString(SAVE_STAT_LOCATION, gStringVar4, 8);
+
+    // Print region name
+    BufferSaveMenuText(SAVE_MENU_LOCATION, gStringVar4, TEXT_COLOR_BLUE);
     x = (u32)(112 - GetStringWidth(FONT_NORMAL, gStringVar4, -1)) / 2;
-    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_NORMAL, x, 0, sTextColor_LocationHeader, -1, gStringVar4);
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_NORMAL, x, 0, sTextColor_LocationHeader, TEXT_SKIP_DRAW, gStringVar4);
+
+    // Print player name
     x = (u32)(112 - GetStringWidth(FONT_NORMAL, gStringVar4, -1)) / 2;
-    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 2, 14, sTextColor_StatName, -1, gSaveStatName_Player);
-    SaveStatToString(SAVE_STAT_NAME, gStringVar4, 2);
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 2, 14, sTextColor_StatName, TEXT_SKIP_DRAW, gSaveStatName_Player);
+    BufferSaveMenuText(SAVE_MENU_NAME, gStringVar4, TEXT_COLOR_DARK_GRAY);
+
+    // Print badge count
     PrintPlayerNameOnWindow(sSaveStatsWindowId, gStringVar4, 60, 14);
-    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 2, 28, sTextColor_StatName, -1, gSaveStatName_Badges);
-    SaveStatToString(SAVE_STAT_BADGES, gStringVar4, 2);
-    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 60, 28, sTextColor_StatValue, -1, gStringVar4);
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 2, 28, sTextColor_StatName, TEXT_SKIP_DRAW, gSaveStatName_Badges);
+    BufferSaveMenuText(SAVE_MENU_BADGES, gStringVar4, TEXT_COLOR_DARK_GRAY);
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 60, 28, sTextColor_StatValue, TEXT_SKIP_DRAW, gStringVar4);
+
     y = 42;
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
-        AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 2, 42, sTextColor_StatName, -1, gSaveStatName_Pokedex);
-        SaveStatToString(SAVE_STAT_POKEDEX, gStringVar4, 2);
-        AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 60, 42, sTextColor_StatValue, -1, gStringVar4);
+        // Print Pokédex count
+        AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 2, 42, sTextColor_StatName, TEXT_SKIP_DRAW, gSaveStatName_Pokedex);
+        BufferSaveMenuText(SAVE_MENU_POKEDEX, gStringVar4, TEXT_COLOR_DARK_GRAY);
+        AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 60, 42, sTextColor_StatValue, TEXT_SKIP_DRAW, gStringVar4);
         y = 56;
     }
-    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 2, y, sTextColor_StatName, -1, gSaveStatName_Time);
-    SaveStatToString(SAVE_STAT_TIME, gStringVar4, 2);
-    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 60, y, sTextColor_StatValue, -1, gStringVar4);
+
+    // Print play time
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 2, y, sTextColor_StatName, TEXT_SKIP_DRAW, gSaveStatName_Time);
+    BufferSaveMenuText(SAVE_MENU_TIME, gStringVar4, TEXT_COLOR_DARK_GRAY);
+    AddTextPrinterParameterized3(sSaveStatsWindowId, FONT_SMALL, 60, y, sTextColor_StatValue, TEXT_SKIP_DRAW, gStringVar4);
+
     CopyWindowToVram(sSaveStatsWindowId, COPYWIN_GFX);
 }
 

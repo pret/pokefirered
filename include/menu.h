@@ -22,6 +22,15 @@
 #define MENU_INFO_ICON_PP        (NUMBER_OF_MON_TYPES + 4)
 #define MENU_INFO_ICON_EFFECT    (NUMBER_OF_MON_TYPES + 5)
 
+enum SaveStat
+{
+    SAVE_MENU_NAME = 0,
+    SAVE_MENU_POKEDEX,
+    SAVE_MENU_TIME,
+    SAVE_MENU_LOCATION,
+    SAVE_MENU_BADGES,
+};
+
 struct MenuAction
 {
     const u8 *text;
@@ -133,5 +142,6 @@ void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
 void DecompressAndLoadBgGfxUsingHeap2(u8 bgId, const void *src, u32 size, u16 offset, u8 mode);
 void FreeAllOverworldWindowBuffers(void);
 void CopyToBufferFromBgTilemap(u8 bgId, u16 *dest, u8 left, u8 top, u8 width, u8 height);
+void BufferSaveMenuText(enum SaveStat stat, u8 *dest, u8 color);
 
 #endif // GUARD_MENU_H

@@ -1,14 +1,17 @@
 #include "global.h"
 #include "decompress.h"
 #include "gflib.h"
+#include "event_data.h"
 #include "field_specials.h"
 #include "field_weather.h"
 #include "graphics.h"
 #include "help_message.h"
 #include "menu.h"
 #include "menu_helpers.h"
+#include "pokedex.h"
 #include "pokemon_icon.h"
 #include "quest_log.h"
+#include "region_map.h"
 #include "script.h"
 #include "strings.h"
 #include "text_window.h"
@@ -1584,6 +1587,50 @@ void ListMenuLoadStdPalAt(u8 palOffset, u8 palId)
 void BlitMenuInfoIcon(u8 windowId, u8 iconId, u16 x, u16 y)
 {
     BlitBitmapRectToWindow(windowId, &gMenuInfoElements_Gfx[sMenuInfoIcons[iconId].offset * TILE_SIZE_4BPP], 0, 0, 128, 128, x, y, sMenuInfoIcons[iconId].width, sMenuInfoIcons[iconId].height);
+}
+
+void BufferSaveMenuText(enum SaveStat gameStatId, u8 *dest0, u8 color)
+{
+    int nBadges;
+    int flagId;
+
+    u8 *dest = dest0;
+    *dest++ = EXT_CTRL_CODE_BEGIN;
+    *dest++ = EXT_CTRL_CODE_COLOR;
+    *dest++ = color;
+    *dest++ = EXT_CTRL_CODE_BEGIN;
+    *dest++ = EXT_CTRL_CODE_SHADOW;
+    *dest++ = color + 1;
+    switch (gameStatId)
+    {
+    case SAVE_MENU_NAME:
+        dest = StringCopy(dest, gSaveBlock2Ptr->playerName);
+        break;
+    case SAVE_MENU_POKEDEX:
+        break;
+        if (IsNationalPokedexEnabled())
+            dest = ConvertIntToDecimalStringN(dest, GetNationalPokedexCount(FLAG_GET_CAUGHT), STR_CONV_MODE_LEFT_ALIGN, 4);
+        else
+            dest = ConvertIntToDecimalStringN(dest, GetKantoPokedexCount(FLAG_GET_CAUGHT), STR_CONV_MODE_LEFT_ALIGN, 3);
+        break;
+    case SAVE_MENU_TIME:
+        dest = ConvertIntToDecimalStringN(dest, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
+        *dest++ = CHAR_COLON;
+        dest = ConvertIntToDecimalStringN(dest, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+        break;
+    case SAVE_MENU_LOCATION:
+        GetMapNameGeneric(dest, gMapHeader.regionMapSectionId);
+        break;
+    case SAVE_MENU_BADGES:
+        for (flagId = FLAG_BADGE01_GET, nBadges = 0; flagId < FLAG_BADGE01_GET + 8; flagId++)
+        {
+            if (FlagGet(flagId))
+                nBadges++;
+        }
+        *dest++ = nBadges + CHAR_0;
+        *dest++ = EOS;
+        break;
+    }
 }
 
 // BW map pop-ups

@@ -56,7 +56,6 @@ bool32 IsMysteryGiftEnabled(void);
 void ResetSpecialVars(void);
 void ClearMysteryGiftFlags(void);
 void ClearMysteryGiftVars(void);
-bool32 IsNationalPokedexEnabled(void);
 void EnableNationalPokedex_RSE(void);
 void ClearTempFieldEventData(void);
 

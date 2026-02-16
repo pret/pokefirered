@@ -11097,7 +11097,7 @@ static void Cmd_displaydexinfo(void)
     case 0:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         ClearTemporarySpeciesSpriteData(caughtBattler, FALSE, FALSE);
-        BattleLoadMonSpriteGfx(mon, caughtBattler);
+        // BattleLoadMonSpriteGfx(mon, caughtBattler);
         gBattleCommunication[0]++;
         break;
     case 1:
@@ -11115,6 +11115,10 @@ static void Cmd_displaydexinfo(void)
             && gMain.callback2 == BattleMainCB2
             && !gTasks[gBattleCommunication[TASK_ID]].isActive)
         {
+            if (!POKEDEX_PLUS_HGSS && !POKEDEX_EMERALD)
+            {
+                CpuFill32(0, (void *)VRAM, VRAM_SIZE);
+            }
             SetVBlankCallback(VBlankCB_Battle);
             gBattleCommunication[0]++;
         }

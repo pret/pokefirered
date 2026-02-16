@@ -1507,7 +1507,10 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         u32 species;
         for (i = SPECIES_BULBASAUR; i < NUM_SPECIES; i++)
         {
-            species = SanitizeSpeciesId(i);
+            if (!IsSpeciesEnabled(i))
+                continue;
+            species = i;
+
             natDexNum = gSpeciesInfo[species].natDexNum;
             if (!natDexNum)
                 continue;
@@ -3335,7 +3338,7 @@ static bool32 DexScreen_MonHasCategoryEntry(u16 species)
     u16 i, j, k;
     u16 natDexNum = SpeciesToNationalPokedexNum(species);
 
-    for (i = 0; i < NELEMS(gDexCategories); i++)
+    for (i = 0; i < ARRAY_COUNT(gDexCategories); i++)
     {
         for (j = 0; j < gDexCategories[i].count; j++)
         {
@@ -3486,7 +3489,7 @@ void DexScreen_InputHandler_StartToCry(void)
 }
 
 #define tState         data[0]
-#define tSpecies        data[1]
+#define tSpecies       data[1]
 #define tPalTimer      data[2]
 #define tMonSpriteId   data[3]
 #define tIsShiny       data[13]

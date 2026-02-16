@@ -5263,17 +5263,13 @@ enum KantoDexOrder NationalToKantoDexNum(enum NationalDexOrder natDexNum)
 {
     enum KantoDexOrder i;
 
-    if (natDexNum == 0)
-    {
+    if (natDexNum == NATIONAL_DEX_NONE)
         return KANTO_DEX_NONE;
-    }
 
     for (i = 0; i < ARRAY_COUNT(sKantoToNationalOrder); i++)
     {
         if (sKantoToNationalOrder[i] == natDexNum)
-        {
             return i + KANTO_DEX_START;
-        }
     }
     return KANTO_DEX_NONE;
 }

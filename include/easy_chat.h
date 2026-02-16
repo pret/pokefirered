@@ -54,7 +54,7 @@ bool8 LoadEasyChatGraphics(void);
 void DestroyEasyChatGraphicsResources(void);
 void EasyChatInterfaceCommand_Setup(u16 id);
 bool8 EasyChatInterfaceCommand_Run(void);
-u8 GetEasyChatScreenFrameId(void);
+enum EasyChatFrameId GetEasyChatScreenFrameId(void);
 const u8 *GetTitleText(void);
 u16 *GetEasyChatWordBuffer(void);
 u8 GetNumRows(void);

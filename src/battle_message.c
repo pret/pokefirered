@@ -2169,8 +2169,6 @@ static void GetBattlerNick(u32 battler, u8 *dst)
     GetBattlerNick(battler, text);                                      \
     toCpy = text;
 
-static const u8 gText_Placeholder[] = _("PH");
-
 static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text, u8 multiplayerId, u8 battler)
 {
     const u8 *toCpy = NULL;

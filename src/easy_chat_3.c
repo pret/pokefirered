@@ -167,37 +167,46 @@ static const u16 sTitleText_Pal[] = INCBIN_U16("graphics/easy_chat/title_text.gb
 static const u16 sText_Pal[] = INCBIN_U16("graphics/easy_chat/text.gbapal");
 
 static const struct EasyChatPhraseFrameDimensions sPhraseFrameDimensions[] = {
+    [FRAMEID_0] =
     {
         .left = 3,
         .top = 4,
         .width = 24,
         .height = 4
-    }, {
+    },
+    [FRAMEID_1] =
+    {
         .left = 1,
         .top = 4,
         .width = 27,
         .height = 4
-    }, {
+    },
+    [FRAMEID_MAIL] =
+    {
         .left = 3,
         .top = 0,
         .width = 24,
         .height = 10
-    }, {
+    },
+    [FRAMEID_COMBINE_TWO_WORDS] =
+    {
         .left = 6,
         .top = 6,
         .width = 18,
         .height = 4
-    }, {
+    },
+    [FRAMEID_INTERVIEW_SHOW_PERSON] = {
         .left = 16,
-        .top = 4,
-        .width = 9,
-        .height = 2
-    }, {
-        .left = 14,
-        .top = 4,
-        .width = 18,
-        .height = 4
-    }
+        .top = 5,
+        .width = 12,
+        .height = 2,
+    },
+    [FRAMEID_GENERAL_2x3] = {
+        .left = 3,
+        .top = 3,
+        .width = 24,
+        .height = 6,
+    },
 };
 
 static const struct BgTemplate sEasyChatBgTemplates[] = {
@@ -691,7 +700,7 @@ static bool8 ECInterfaceCmd_02(void)
     u8 i;
     u16 *ecWordBuffer;
     u16 *ecWord;
-    u8 frameId;
+    enum EasyChatFrameId frameId;
     u8 cursorColumn, cursorRow, numColumns;
     s16 var1;
     int stringWidth;
@@ -1406,7 +1415,7 @@ static void EC_CreateYesNoMenuWithInitialCursorPos(u8 initialCursorPos)
 
 static void CreatePhraseFrameWindow(void)
 {
-    u8 frameId;
+    enum EasyChatFrameId frameId;
     struct WindowTemplate template;
 
     frameId = GetEasyChatScreenFrameId();
@@ -1426,7 +1435,7 @@ static void PrintECFields(void)
     u16 *ecWord;
     u8 numColumns, numRows;
     u8 *str;
-    u8 frameId;
+    enum EasyChatFrameId frameId;
     int i, j, k;
 
     ecWord = GetEasyChatWordBuffer();
@@ -1460,7 +1469,7 @@ static void PrintECFields(void)
             }
 
             str = StringAppend(str, sText_Clear17);
-            if (frameId == 2)
+            if (frameId == FRAMEID_MAIL)
             {
                 if (j == 0 && i == 4)
                     break;
@@ -1476,13 +1485,13 @@ static void PrintECFields(void)
 
 static void DrawECFrameInTilemapBuffer(u16 *tilemap)
 {
-    u8 frameId;
+    enum EasyChatFrameId frameId;
     int right, bottom;
     int x, y;
 
     frameId = GetEasyChatScreenFrameId();
     CpuFastFill(0, tilemap, BG_SCREEN_SIZE);
-    if (frameId == 2)
+    if (frameId == FRAMEID_MAIL)
     {
         right = sPhraseFrameDimensions[frameId].left + sPhraseFrameDimensions[frameId].width;
         bottom = sPhraseFrameDimensions[frameId].top + sPhraseFrameDimensions[frameId].height;
@@ -1941,7 +1950,7 @@ static void LoadSpriteGfx(void)
 
 static void CreateSelectDestFieldCursorSprite(void)
 {
-    u8 frameId = GetEasyChatScreenFrameId();
+    enum EasyChatFrameId frameId = GetEasyChatScreenFrameId();
     s16 x = sPhraseFrameDimensions[frameId].left * 8 + 13;
     s16 y = (sPhraseFrameDimensions[frameId].top + 1) * 8 + 1;
     u8 spriteId = CreateSprite(&sSpriteTemplate_TriangleCursor, x, y, 2);

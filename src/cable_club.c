@@ -609,7 +609,7 @@ static void Task_ReestablishLinkAwaitConfirmation(u8 taskId)
 // Unused
 void CableClub_AskSaveTheGame(void)
 {
-    Field_AskSaveTheGame();
+    SaveGame();
 }
 
 #define tTimer data[1]

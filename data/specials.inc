@@ -108,7 +108,7 @@ gSpecials::
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special TryContestLinkup
-	def_special Field_AskSaveTheGame
+	def_special SaveGame
 	def_special DoWateringBerryTreeAnim
 	def_special ShowEasyChatScreen
 	def_special ShowEasyChatMessage

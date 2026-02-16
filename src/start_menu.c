@@ -941,7 +941,6 @@ static u8 RunSaveCallback(void)
 
 void SaveGame(void)
 {
-    sTimeWindowId = WINDOW_NONE;
     BackupHelpContext();
     SetHelpContext(HELPCONTEXT_SAVE);
     InitSave();

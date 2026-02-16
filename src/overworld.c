@@ -182,7 +182,7 @@ static void CameraCB_CreditsPan(struct CameraObject * camera);
 static void Task_OvwldCredits_FadeOut(u8 taskId);
 static void Task_OvwldCredits_WaitFade(u8 taskId);
 
-static void CB1_UpdateLinkState(void);
+static void CB1_OverworldLink(void);
 static void ResetAllMultiplayerState(void);
 static void ClearAllPlayerKeys(void);
 static void SetKeyInterceptCallback(KeyInterCB callback);
@@ -1419,9 +1419,9 @@ static void ResetSafariZoneFlag_(void)
     ResetSafariZoneFlag();
 }
 
-bool32 IsUpdateLinkStateCBActive(void)
+bool32 IsOverworldLinkActive(void)
 {
-    if (gMain.callback1 == CB1_UpdateLinkState)
+    if (gMain.callback1 == CB1_OverworldLink)
         return TRUE;
     else
         return FALSE;
@@ -1804,7 +1804,7 @@ static void CB2_LoadMapOnReturnToFieldCableClub(void)
     if (LoadMapInStepsLink(&gMain.state))
     {
         SetFieldVBlankCallback();
-        SetMainCallback1(CB1_UpdateLinkState);
+        SetMainCallback1(CB1_OverworldLink);
         ResetAllMultiplayerState();
         SetMainCallback2(CB2_Overworld);
     }
@@ -1812,7 +1812,7 @@ static void CB2_LoadMapOnReturnToFieldCableClub(void)
 
 void CB2_ReturnToField(void)
 {
-    if (IsUpdateLinkStateCBActive() == TRUE)
+    if (IsOverworldLinkActive() == TRUE)
     {
         SetMainCallback2(CB2_ReturnToFieldLink);
     }
@@ -1842,7 +1842,7 @@ void CB2_ReturnToFieldFromMultiplayer(void)
 {
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
-    SetMainCallback1(CB1_UpdateLinkState);
+    SetMainCallback1(CB1_OverworldLink);
     ResetAllMultiplayerState();
 
     if (gWirelessCommType != 0)
@@ -2797,7 +2797,7 @@ static void (*const sMovementStatusHandler[])(struct LinkPlayerObjectEvent *, st
     [TRUE]  = MovementStatusHandler_TryAdvanceScript,
 };
 
-static void CB1_UpdateLinkState(void)
+static void CB1_OverworldLink(void)
 {
     if (gWirelessCommType == 0 || !IsRfuRecvQueueEmpty() || !IsSendingKeysToLink())
     {
@@ -3013,7 +3013,7 @@ static void UpdateHeldKeyCode(u16 key)
 
     if (gWirelessCommType != 0
         && GetLinkSendQueueLength() > 1
-        && IsUpdateLinkStateCBActive() == TRUE
+        && IsOverworldLinkActive() == TRUE
         && IsSendingKeysToLink() == TRUE)
     {
         switch (key)
@@ -3184,7 +3184,7 @@ static u16 KeyInterCB_WaitForPlayersToExit(u32 keyOrPlayerId)
 {
     // keyOrPlayerId could be any keycode. This callback does no sanity checking
     // on the size of the key. It's assuming that it is being called from
-    // CB1_UpdateLinkState.
+    // CB1_OverworldLink.
     if (sPlayerLinkStates[keyOrPlayerId] != PLAYER_LINK_STATE_EXITING_ROOM)
         CheckRfuKeepAliveTimer();
     if (AreAllPlayersInLinkState(PLAYER_LINK_STATE_EXITING_ROOM) == TRUE)
@@ -3401,7 +3401,7 @@ static void RunTerminateLinkScript(void)
 
 bool32 Overworld_LinkRecvQueueLengthMoreThan2(void)
 {
-    if (!IsUpdateLinkStateCBActive())
+    if (!IsOverworldLinkActive())
         return FALSE;
     if (GetLinkRecvQueueLength() >= 3)
         sReceivingFromLink = TRUE;
@@ -3416,7 +3416,7 @@ bool32 Overworld_RecvKeysFromLinkIsRunning(void)
 
     if (GetLinkRecvQueueLength() < 2)
         return FALSE;
-    else if (IsUpdateLinkStateCBActive() != TRUE)
+    else if (IsOverworldLinkActive() != TRUE)
         return FALSE;
     else if (IsSendingKeysToLink() != TRUE)
         return FALSE;
@@ -3440,7 +3440,7 @@ bool32 Overworld_SendKeysToLinkIsRunning(void)
 {
     if (GetLinkSendQueueLength() < 2)
         return FALSE;
-    else if (IsUpdateLinkStateCBActive() != TRUE)
+    else if (IsOverworldLinkActive() != TRUE)
         return FALSE;
     else if (IsSendingKeysToLink() != TRUE)
         return FALSE;

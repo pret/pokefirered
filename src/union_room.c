@@ -1,5 +1,4 @@
 #include "global.h"
-#include "gflib.h"
 #include "battle.h"
 #include "berry_crush.h"
 #include "cable_club.h"
@@ -10,42 +9,47 @@
 #include "easy_chat.h"
 #include "event_data.h"
 #include "event_object_lock.h"
-#include "fieldmap.h"
 #include "field_control_avatar.h"
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
 #include "field_weather.h"
-#include "link.h"
+#include "fieldmap.h"
+#include "help_message.h"
 #include "link_rfu.h"
+#include "link.h"
 #include "list_menu.h"
 #include "load_save.h"
+#include "malloc.h"
 #include "menu.h"
-#include "mystery_gift.h"
 #include "mystery_gift_menu.h"
+#include "mystery_gift.h"
 #include "overworld.h"
+#include "palette.h"
 #include "party_menu.h"
 #include "pokemon_jump.h"
 #include "quest_log.h"
 #include "random.h"
 #include "save_location.h"
-#include "script.h"
 #include "script_pokemon_util.h"
+#include "script.h"
+#include "sound.h"
 #include "start_menu.h"
+#include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "trade.h"
 #include "trade_scene.h"
+#include "trade.h"
 #include "trainer_card.h"
-#include "union_room.h"
 #include "union_room_battle.h"
 #include "union_room_chat.h"
-#include "union_room_player_avatar.h"
 #include "union_room_message.h"
+#include "union_room_player_avatar.h"
+#include "union_room.h"
 #include "constants/battle_frontier.h"
-#include "constants/songs.h"
-#include "constants/maps.h"
 #include "constants/cable_club.h"
 #include "constants/field_weather.h"
+#include "constants/maps.h"
+#include "constants/songs.h"
 #include "constants/trainer_card.h"
 #include "constants/union_room.h"
 
@@ -2944,7 +2948,7 @@ static void Task_RunUnionRoom(u8 taskId)
                     break;
                 }
             }
-            DestroyHelpMessageWindow_();
+            DestroyHelpMessageWindow(COPYWIN_GFX);
         }
         break;
     case UR_STATE_REGISTER_SELECT_MON_FADE:
@@ -3027,7 +3031,7 @@ static void Task_RunUnionRoom(u8 taskId)
             case LIST_CANCEL:
             case 8: // EXIT
                 HandleCancelActivity(TRUE);
-                DestroyHelpMessageWindow_();
+                DestroyHelpMessageWindow(COPYWIN_GFX);
                 uroom->state = UR_STATE_MAIN;
                 break;
             default:

@@ -1,10 +1,11 @@
 #include "global.h"
 #include "battle.h"
-#include "event_scripts.h"
-#include "overworld.h"
-#include "script.h"
 #include "event_data.h"
+#include "event_scripts.h"
 #include "field_screen_effect.h"
+#include "overworld.h"
+#include "safari_zone.h"
+#include "script.h"
 
 EWRAM_DATA u8 gNumSafariBalls = 0;
 EWRAM_DATA u16 gSafariZoneStepCounter = 0;
@@ -28,8 +29,8 @@ void EnterSafariMode(void)
 {
     IncrementGameStat(GAME_STAT_ENTERED_SAFARI_ZONE);
     SetSafariZoneFlag();
-    gNumSafariBalls = 30;
-    gSafariZoneStepCounter = 600;
+    gNumSafariBalls = MAX_SAFARI_BALLS;
+    gSafariZoneStepCounter = MAX_SAFARI_STEPS;
 }
 
 void ExitSafariMode(void)

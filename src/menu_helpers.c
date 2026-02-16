@@ -166,7 +166,7 @@ bool8 IsHoldingItemAllowed(u16 itemId)
 
 bool8 IsWritingMailAllowed(u16 itemId)
 {
-    if ((IsUpdateLinkStateCBActive() == TRUE || InUnionRoom() == TRUE) && ItemIsMail(itemId) == TRUE)
+    if ((IsOverworldLinkActive() == TRUE || InUnionRoom() == TRUE) && ItemIsMail(itemId) == TRUE)
         return FALSE;
     else
         return TRUE;
@@ -174,7 +174,7 @@ bool8 IsWritingMailAllowed(u16 itemId)
 
 bool8 MenuHelpers_IsLinkActive(void)
 {
-    if (IsUpdateLinkStateCBActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
+    if (IsOverworldLinkActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
         return TRUE;
     else
         return FALSE;

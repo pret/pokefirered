@@ -32,15 +32,15 @@ u8 CreateHelpMessageWindow(void)
     return sHelpMessageWindowId;
 }
 
-void DestroyHelpMessageWindow(u8 a0)
+void DestroyHelpMessageWindow(u8 mode)
 {
     if (sHelpMessageWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sHelpMessageWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(sHelpMessageWindowId);
 
-        if (a0)
-            CopyWindowToVram(sHelpMessageWindowId, a0);
+        if (mode)
+            CopyWindowToVram(sHelpMessageWindowId, mode);
 
         RemoveWindow(sHelpMessageWindowId);
         sHelpMessageWindowId = WINDOW_NONE;
@@ -58,7 +58,7 @@ void DrawHelpMessageWindowTilesById(u8 windowId)
 
     width = (u8)GetWindowAttribute(windowId, WINDOW_WIDTH);
     height = (u8)GetWindowAttribute(windowId, WINDOW_HEIGHT);
-    
+
     buffer = (u8 *)Alloc(32 * width * height);
 
     if (buffer != NULL)
@@ -72,7 +72,7 @@ void DrawHelpMessageWindowTilesById(u8 windowId)
                 else if (i == height - 1) // Bottom row
                     tileId = 14;
                 else // Middle row
-                    tileId = 5; 
+                    tileId = 5;
                 CpuCopy32(
                     &ptr[tileId * 32],
                     &buffer[(i * width + j) * 32],

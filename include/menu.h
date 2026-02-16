@@ -130,7 +130,6 @@ void DisplayItemMessageOnField(u8 taskId, u8 fontId, const u8 *src, TaskFunc cal
 void *malloc_and_decompress(const void *src, u32 * size);
 void DrawHelpMessageWindowWithText(const u8 * text);
 u8 GetStartMenuWindowId(void);
-void DestroyHelpMessageWindow_(void);
 u8 AddStartMenuWindow(u8 height);
 void RemoveStartMenuWindow(void);
 u16 RunTextPrintersAndIsPrinter0Active(void);

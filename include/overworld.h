@@ -103,7 +103,7 @@ void Overworld_SetSavedMusic(u16);
 void Overworld_ChangeMusicToDefault(void);
 void Overworld_ChangeMusicTo(u16);
 
-bool32 IsUpdateLinkStateCBActive(void);
+bool32 IsOverworldLinkActive(void);
 
 void ClearLinkPlayerObjectEvents(void);
 const struct MapHeader *const Overworld_GetMapHeaderByGroupAndId(u16, u16);

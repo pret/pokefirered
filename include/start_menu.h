@@ -5,11 +5,11 @@
 
 void AppendToList(u8 *list, u8 *pos, u8 newEntry);
 void Task_ShowStartMenu(u8 taskId);
-void SetUpReturnToStartMenu(void);
+void ShowReturnToFieldStartMenu(void);
 void ShowStartMenu(void);
 void SaveGame(void);
 void CB2_SetUpSaveAfterLinkBattle(void);
-void HideStartMenuWindow(void);
+void HideStartMenu(void);
 void ShowBattlePyramidStartMenu(void);
 
 #endif // GUARD_START_MENU_H

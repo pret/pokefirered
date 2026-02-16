@@ -3,6 +3,9 @@
 
 #include "global.h"
 
+#define MAX_SAFARI_BALLS 30
+#define MAX_SAFARI_STEPS 600
+
 extern u8 gNumSafariBalls;
 extern u16 gSafariZoneStepCounter;
 

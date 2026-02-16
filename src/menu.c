@@ -1675,12 +1675,7 @@ void HBlankCB_DoublePopupWindow(void)
 void DrawHelpMessageWindowWithText(const u8 * text)
 {
     LoadHelpMessageWindowGfx(CreateHelpMessageWindow(), DLG_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM));
-    PrintTextOnHelpMessageWindow(text, 2);
-}
-
-void DestroyHelpMessageWindow_(void)
-{
-    DestroyHelpMessageWindow(2);
+    PrintTextOnHelpMessageWindow(text, COPYWIN_GFX);
 }
 
 void LoadSignPostWindowFrameGfx(void)

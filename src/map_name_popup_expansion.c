@@ -309,7 +309,7 @@ static const u16 sMapPopUpTilesPalette_BW_White[] = {0};
 
 static bool8 UNUSED StartMenu_ShowMapNamePopup(void)
 {
-    HideStartMenuWindow();
+    HideStartMenu();
     ShowMapNamePopupExpansion();
     return TRUE;
 }

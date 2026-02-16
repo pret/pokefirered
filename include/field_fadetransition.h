@@ -8,7 +8,7 @@ void FieldCB_DefaultWarpExit(void);
 void WarpFadeOutScreen(void);
 void FieldCB_ContinueScriptHandleMusic(void);
 void FadeInFromBlack(void);
-void FadeTransition_FadeInOnReturnToStartMenu(void);
+void ReturnToFieldOpenStartMenu(void);
 void WarpFadeInScreen(void);
 
 void FieldCB_ContinueScriptUnionRoom(void);

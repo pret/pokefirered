@@ -4,7 +4,11 @@
 #include "global.h"
 #include "main.h"
 
+#if REVISION >= 0xA
+#define LIBRFU_VERSION 1028
+#else
 #define LIBRFU_VERSION 1024
+#endif
 
 /* TODOs:
  * - documentation

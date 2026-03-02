@@ -17,7 +17,7 @@ SECTIONS {
 
         . = 0x1C000;
 
-        INCLUDE "sym_ewram.ld"
+        INCLUDE "sym_ewram_rev10.ld"
         src/*.o(ewram_data);
 
         *libc.a:impure.o(.data);
@@ -29,7 +29,7 @@ SECTIONS {
     ALIGN(4)
     {
         /* .bss starts at 0x3000000 */
-        INCLUDE "sym_bss.ld"
+        INCLUDE "sym_bss_rev10.ld"
         src/*.o(.bss);
         data/*.o(.bss);
 
@@ -37,7 +37,7 @@ SECTIONS {
         src/m4a.o(.bss.code);
 
         /* COMMON starts at 0x30030E0 */
-        INCLUDE "sym_common.ld"
+        INCLUDE "sym_common_rev10.ld"
         src/*.o(COMMON);
 
         *libc.a:sbrkr.o(COMMON);
@@ -62,6 +62,8 @@ SECTIONS {
         src/window.o(.text);
         src/blit.o(.text);
         src/window_8bpp.o(.text);
+        src/librfu_stwi.o(.text);
+        src/librfu_rfu.o(.text);
         src/text.o(.text);
         src/sprite.o(.text);
         src/sloopsvc.o(.text);
@@ -335,10 +337,8 @@ SECTIONS {
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
         src/agb_flash_le.o(.text);
-        src/librfu_stwi.o(.text);
-        src/librfu_intr.o(.text);
-        src/librfu_rfu.o(.text);
         src/librfu_sio32id.o(.text);
+        src/librfu_intr.o(.text);
         src/isagbprn.o(.text);
         src/libagbsyscall.o(.text);
         *libgcc.a:_call_via_rX.o(.text);
@@ -403,6 +403,7 @@ SECTIONS {
         src/malloc.o(.rodata.str1.4);
         src/text_printer.o(.rodata);
         src/window.o(.rodata);
+        src/librfu_rfu.o(.rodata);
         src/text.o(.rodata);
         src/sprite.o(.rodata);
         src/bg_regs.o(.rodata);
@@ -974,7 +975,6 @@ SECTIONS {
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
-        src/librfu_rfu.o(.rodata);
         src/librfu_sio32id.o(.rodata);
         src/isagbprn.o(.rodata);
         *libgcc.a:_divdi3.o(.rodata);

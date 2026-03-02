@@ -8,12 +8,17 @@
 // still has them in the ROM. This is because the developers forgot
 // to define NDEBUG before release, however this has been changed as
 // Ruby's actual debug build does not use the AGBPrint features.
-// #define NDEBUG
+
+// Revision 10 disabled asserts in some other way, comment out NDEBUG there to bring them back.
+#if REVISION >= 0xA
+#define NDEBUG
+#endif
 
 // Fire Red likely forgot to define NDEBUG/NOAGBPRN before release, leading
 // to the inclusion of asserts in the retail ROM.
+// Revision 10 disabled asserts in some other way, but isagbprint/etc is still present there.
 
-#ifndef NDEBUG
+#if !defined(NDEBUG) || REVISION >= 0xA
 #define PRETTY_PRINT_OFF (0)
 #define PRETTY_PRINT_MINI_PRINTF (1)
 #define PRETTY_PRINT_LIBC (2)

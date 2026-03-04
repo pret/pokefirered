@@ -15,7 +15,13 @@ ViridianCity_PokemonCenter_1F_EventScript_Nurse::
 	end
 
 ViridianCity_PokemonCenter_1F_EventScript_Boy::
-	msgbox ViridianCity_PokemonCenter_1F_Text_PokeCenterInEveryTown, MSGBOX_NPC
+	goto_if_set FLAG_TALKED_TO_VIRIDIAN_POKECENTER_REINFORCEMENT, ViridianCity_PokemonCenter_1F_EventScript_BoyRepeat
+	setflag FLAG_TALKED_TO_VIRIDIAN_POKECENTER_REINFORCEMENT
+	msgbox ViridianCity_PokemonCenter_1F_Text_PokeCenterCheckpointFirstTime, MSGBOX_NPC
+	end
+
+ViridianCity_PokemonCenter_1F_EventScript_BoyRepeat::
+	msgbox ViridianCity_PokemonCenter_1F_Text_PokeCenterCheckpointRepeat, MSGBOX_NPC
 	end
 
 ViridianCity_PokemonCenter_1F_EventScript_Gentleman::

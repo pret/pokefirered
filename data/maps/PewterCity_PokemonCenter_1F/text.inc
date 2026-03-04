@@ -25,3 +25,16 @@ PewterCity_PokemonCenter_1F_Text_TradingPikachuWithKid::
     .string "I had two PIKACHU, so I figured\n"
     .string "I might as well trade one.$"
 
+
+PewterCity_PokemonCenter_1F_Text_LevelBeforeBrockFirstTime::
+    .string "Before BROCK, do some manual\n"
+    .string "leveling on ROUTE 2.\p"
+    .string "Fight wild POKéMON, then come back\n"
+    .string "here to heal for free.\p"
+    .string "A couple levels make PEWTER GYM\n"
+    .string "way safer.$"
+
+PewterCity_PokemonCenter_1F_Text_LevelBeforeBrockRepeat::
+    .string "Still stuck on BROCK?\p"
+    .string "Train a bit more on ROUTE 2, then\n"
+    .string "heal here and try again.$"

@@ -10757,6 +10757,13 @@ static const struct TrainerMonItemCustomMoves sParty_EliteFourLance2[] = {
         .species = SPECIES_GYARADOS,
         .heldItem = ITEM_LUM_BERRY,
         .moves = {MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE, MOVE_HIDDEN_POWER, MOVE_TAUNT},
+        .hasCustomIvs = TRUE,
+        .hpIv = 30,
+        .atkIv = 30,
+        .defIv = 30,
+        .speedIv = 31,
+        .spAtkIv = 30,
+        .spDefIv = 30,
     },
     {
         .iv = 255,

@@ -1533,6 +1533,21 @@ static void SpriteCB_UnusedDebugSprite_Step(struct Sprite *sprite)
     }
 }
 
+
+static void TryApplyTrainerMonCustomIvs(struct Pokemon *mon, bool8 hasCustomIvs, u8 hpIv, u8 atkIv, u8 defIv, u8 speedIv, u8 spAtkIv, u8 spDefIv)
+{
+    if (!hasCustomIvs)
+        return;
+
+    SetMonData(mon, MON_DATA_HP_IV, &hpIv);
+    SetMonData(mon, MON_DATA_ATK_IV, &atkIv);
+    SetMonData(mon, MON_DATA_DEF_IV, &defIv);
+    SetMonData(mon, MON_DATA_SPEED_IV, &speedIv);
+    SetMonData(mon, MON_DATA_SPATK_IV, &spAtkIv);
+    SetMonData(mon, MON_DATA_SPDEF_IV, &spDefIv);
+    CalculateMonStats(mon);
+}
+
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 {
     u32 nameHash = 0;
@@ -1572,6 +1587,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                TryApplyTrainerMonCustomIvs(&party[i], partyData[i].hasCustomIvs, partyData[i].hpIv, partyData[i].atkIv, partyData[i].defIv, partyData[i].speedIv, partyData[i].spAtkIv, partyData[i].spDefIv);
                 break;
             }
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
@@ -1584,6 +1600,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                TryApplyTrainerMonCustomIvs(&party[i], partyData[i].hasCustomIvs, partyData[i].hpIv, partyData[i].atkIv, partyData[i].defIv, partyData[i].speedIv, partyData[i].spAtkIv, partyData[i].spDefIv);
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
@@ -1602,6 +1619,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                TryApplyTrainerMonCustomIvs(&party[i], partyData[i].hasCustomIvs, partyData[i].hpIv, partyData[i].atkIv, partyData[i].defIv, partyData[i].speedIv, partyData[i].spAtkIv, partyData[i].spDefIv);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
@@ -1616,6 +1634,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                TryApplyTrainerMonCustomIvs(&party[i], partyData[i].hasCustomIvs, partyData[i].hpIv, partyData[i].atkIv, partyData[i].defIv, partyData[i].speedIv, partyData[i].spAtkIv, partyData[i].spDefIv);
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
@@ -1636,6 +1655,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                TryApplyTrainerMonCustomIvs(&party[i], partyData[i].hasCustomIvs, partyData[i].hpIv, partyData[i].atkIv, partyData[i].defIv, partyData[i].speedIv, partyData[i].spAtkIv, partyData[i].spDefIv);
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
                 abilityNum = partyData[i].ability;

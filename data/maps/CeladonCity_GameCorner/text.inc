@@ -107,8 +107,12 @@ CeladonCity_GameCorner_Text_WatchReelsClosely::
     .string "closely.$"
 
 CeladonCity_GameCorner_Text_GruntIntro::
-    .string "I'm guarding this poster!\n"
-    .string "Go away, or else!$"
+    .string "This place is a business.\n"
+    .string "Move along.\p"
+    .string "...You're carrying SOULS.\n"
+    .string "I can tell.\p"
+    .string "ROCKET collects\n"
+    .string "what trainers drop.$"
 
 CeladonCity_GameCorner_Text_GruntDefeat::
     .string "Dang!$"

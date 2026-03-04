@@ -1,14 +1,13 @@
 SaffronCity_Text_WhatDoYouWantGetLost::
-    .string "What do you want?\n"
-    .string "Get lost!$"
+    .string "SILPH built machines\n"
+    .string "that focus SOULS.$"
 
 SaffronCity_Text_BossTakeTownForTeamRocket::
-    .string "BOSS said he'll take this town\n"
-    .string "in the name of TEAM ROCKET!$"
+    .string "Once we control\n"
+    .string "SOUL focusing...$"
 
 SaffronCity_Text_DontGetDefiantOrIllHurtYou::
-    .string "Don't get defiant!\n"
-    .string "Or I'll have to hurt you!$"
+    .string "TRAINERS will become obsolete.$"
 
 SaffronCity_Text_SaffronBelongsToTeamRocket::
     .string "SAFFRON belongs to TEAM ROCKET!$"
@@ -50,8 +49,9 @@ SaffronCity_Text_Pidgeot::
     .string "PIDGEOT: Bi bibii!$"
 
 SaffronCity_Text_SawRocketBossEscaping::
-    .string "I saw the ROCKET BOSS escaping\n"
-    .string "SILPH's building.$"
+    .string "Extraction operation\n"
+    .string "compromised!\p"
+    .string "Fall back!$"
 
 SaffronCity_Text_ImASecurityGuard::
     .string "I'm a security guard.\p"

@@ -42,25 +42,21 @@ SilphCo_11F_Text_ThanksForRescuingUs::
     .string "are indebted to you.$"
 
 SilphCo_11F_Text_GiovanniIntro::
-    .string "Ah, {PLAYER}!\n"
-    .string "So we meet again!\p"
-    .string "The PRESIDENT and I are discussing\n"
-    .string "a vital business proposition.\p"
-    .string "Keep your nose out of grown-up\n"
-    .string "matters…\p"
-    .string "Or, experience a world of pain!$"
+    .string "You again.\p"
+    .string "You've ruined\n"
+    .string "two of my operations.\p"
+    .string "SILPH's SOUL technology\n"
+    .string "belongs to ROCKET now.$"
 
 SilphCo_11F_Text_GiovanniDefeat::
     .string "Arrgh!!\n"
     .string "I lost again!?$"
 
 SilphCo_11F_Text_GiovanniPostBattle::
-    .string "Blast it all!\n"
-    .string "You ruined our plans for SILPH!\p"
-    .string "But, TEAM ROCKET will never fall!\p"
-    .string "{PLAYER}! Never forget that all\n"
-    .string "POKéMON exist for TEAM ROCKET!\p"
-    .string "I must go, but I shall return!$"
+    .string "...So the rumors were true.\p"
+    .string "A TRAINER who earns\n"
+    .string "their SOULS honestly...\p"
+    .string "We will meet again.$"
 
 SilphCo_11F_Text_Grunt2Intro::
     .string "Stop right there!\n"

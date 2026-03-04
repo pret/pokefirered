@@ -48,28 +48,33 @@ CeruleanCity_Text_RivalVictory::
     .string "おれは　てんさい　だからよ！$"
 
 CeruleanCity_Text_GruntIntro::
-    .string "Hey! Stay out!\n"
-    .string "It's not your yard!\p"
-    .string "…Huh?\n"
-    .string "Me?\p"
-    .string "I'm an innocent bystander!\n"
-    .string "Don't you believe me?{PLAY_BGM}{MUS_ENCOUNTER_ROCKET}$"
+    .string "Stay back!\n"
+    .string "This house is ROCKET\n"
+    .string "property now.\p"
+    .string "Relax.\n"
+    .string "I'm not here for the house.\p"
+    .string "I already got what\n"
+    .string "I came for.\p"
+    .string "The trainers in this\n"
+    .string "city carry plenty\n"
+    .string "of SOULS.{PLAY_BGM}{MUS_ENCOUNTER_ROCKET}$"
 
 CeruleanCity_Text_GruntDefeat::
     .string "GRUNT: Stop! I give up!\n"
     .string "I'll leave quietly!$"
 
 CeruleanCity_Text_OkayIllReturnStolenTM::
-    .string "…Okay.\n"
-    .string "I'll return the TM I stole.$"
+    .string "Tch...\n"
+    .string "Losing means losing\n"
+    .string "my SOULS too.$"
 
 CeruleanCity_Text_RecoveredTM28FromGrunt::
     .string "{PLAYER} recovered TM28 from\n"
     .string "the TEAM ROCKET GRUNT.$"
 
 CeruleanCity_Text_BetterGetMovingBye::
-    .string "I better get moving!\n"
-    .string "Bye!$"
+    .string "ROCKET will hear\n"
+    .string "about you, kid.$"
 
 CeruleanCity_Text_MakeRoomForThisCantRun::
     .string "Make room for this!\n"

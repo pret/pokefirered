@@ -18,8 +18,8 @@ RocketHideout_B1F_Text_Grunt2Defeat::
     .string "Boom!$"
 
 RocketHideout_B1F_Text_Grunt2PostBattle::
-    .string "You're not going to get away with\n"
-    .string "this, brat!$"
+    .string "This hideout stores\n"
+    .string "condensed SOUL energy.$"
 
 RocketHideout_B1F_Text_Grunt3Intro::
     .string "Intruder alert!$"

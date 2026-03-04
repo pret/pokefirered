@@ -12,8 +12,8 @@ RocketHideout_B3F_Text_Grunt1PostBattle::
     .string "It's here somewhere.$"
 
 RocketHideout_B3F_Text_Grunt2Intro::
-    .string "We got word from upstairs that you\n"
-    .string "were coming!$"
+    .string "Boss says this city\n"
+    .string "is overflowing with SOULS.$"
 
 RocketHideout_B3F_Text_Grunt2Defeat::
     .string "What?\n"

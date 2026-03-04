@@ -252,7 +252,7 @@ void CorpseRunInitialization(void)
 {
     RunScriptImmediately(EventScript_ResetEliteFourEnd);
 
-    if (!IsCorpseRunFeatureEnabled())
+    if (!IsCorpseRunFeatureEnabled() || CorpseRun_ShouldBypassDefeatPersistenceForCurrentBattle())
     {
         RemoveMoney(&gSaveBlock1Ptr->money, ComputeWhiteOutMoneyLoss());
         HealPlayerParty();

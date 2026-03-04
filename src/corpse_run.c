@@ -4,11 +4,73 @@
 #include "event_data.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "battle.h"
+#include "battle_setup.h"
+
+#include "constants/battle_setup.h"
+#include "constants/opponents.h"
+#include "constants/trainers.h"
 
 #define CORPSE_RUN_PAYLOAD_OFFSET offsetof(struct CorpseRunSaveData, state)
 #define CORPSE_RUN_MAX_PARTY_COUNT PARTY_SIZE
 
 STATIC_ASSERT(sizeof(struct CorpseRunSaveData) == 400, CorpseRunSaveDataSize);
+
+
+static bool8 CorpseRun_IsCriticalScriptedTrainer(u16 trainerId)
+{
+    switch (trainerId)
+    {
+    case TRAINER_RIVAL_OAKS_LAB_SQUIRTLE:
+    case TRAINER_RIVAL_OAKS_LAB_BULBASAUR:
+    case TRAINER_RIVAL_OAKS_LAB_CHARMANDER:
+    case TRAINER_RIVAL_ROUTE22_EARLY_SQUIRTLE:
+    case TRAINER_RIVAL_ROUTE22_EARLY_BULBASAUR:
+    case TRAINER_RIVAL_ROUTE22_EARLY_CHARMANDER:
+    case TRAINER_RIVAL_CERULEAN_SQUIRTLE:
+    case TRAINER_RIVAL_CERULEAN_BULBASAUR:
+    case TRAINER_RIVAL_CERULEAN_CHARMANDER:
+    case TRAINER_RIVAL_SS_ANNE_SQUIRTLE:
+    case TRAINER_RIVAL_SS_ANNE_BULBASAUR:
+    case TRAINER_RIVAL_SS_ANNE_CHARMANDER:
+    case TRAINER_RIVAL_POKEMON_TOWER_SQUIRTLE:
+    case TRAINER_RIVAL_POKEMON_TOWER_BULBASAUR:
+    case TRAINER_RIVAL_POKEMON_TOWER_CHARMANDER:
+    case TRAINER_RIVAL_SILPH_SQUIRTLE:
+    case TRAINER_RIVAL_SILPH_BULBASAUR:
+    case TRAINER_RIVAL_SILPH_CHARMANDER:
+    case TRAINER_RIVAL_ROUTE22_LATE_SQUIRTLE:
+    case TRAINER_RIVAL_ROUTE22_LATE_BULBASAUR:
+    case TRAINER_RIVAL_ROUTE22_LATE_CHARMANDER:
+    case TRAINER_CHAMPION_FIRST_SQUIRTLE:
+    case TRAINER_CHAMPION_FIRST_BULBASAUR:
+    case TRAINER_CHAMPION_FIRST_CHARMANDER:
+    case TRAINER_TEAM_ROCKET_ADMIN:
+    case TRAINER_TEAM_ROCKET_ADMIN_2:
+    case TRAINER_BOSS_GIOVANNI:
+    case TRAINER_BOSS_GIOVANNI_2:
+    case TRAINER_LEADER_GIOVANNI:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static bool8 CorpseRun_IsBlockedTrainerClass(u8 trainerClass)
+{
+    switch (trainerClass)
+    {
+    case TRAINER_CLASS_LEADER:
+    case TRAINER_CLASS_BOSS:
+    case TRAINER_CLASS_RIVAL_EARLY:
+    case TRAINER_CLASS_RIVAL_LATE:
+    case TRAINER_CLASS_ELITE_FOUR:
+    case TRAINER_CLASS_CHAMPION:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
 
 static bool8 CorpseRun_IsValidTransition(u8 from, u8 to)
 {
@@ -229,4 +291,57 @@ void CorpseRun_OnMapEnter(void)
 void CorpseRun_DebugReset(void)
 {
     CorpseRun_ResetSaveData();
+}
+
+
+bool8 CorpseRun_IsEscapeTrainerEncounter(u16 trainerId, u8 trainerBattleMode)
+{
+    u8 trainerClass;
+
+    if (gSaveBlock1Ptr->corpseRun.state != CR_ACTIVE)
+        return FALSE;
+
+    if (trainerId > NUM_TRAINERS)
+        return FALSE;
+
+    if (trainerBattleMode == TRAINER_BATTLE_EARLY_RIVAL
+     || trainerBattleMode == TRAINER_BATTLE_CONTINUE_SCRIPT
+     || trainerBattleMode == TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC
+     || trainerBattleMode == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE
+     || trainerBattleMode == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC)
+        return FALSE;
+
+    trainerClass = gTrainers[trainerId].trainerClass;
+    if (CorpseRun_IsBlockedTrainerClass(trainerClass))
+        return FALSE;
+
+    if (CorpseRun_IsCriticalScriptedTrainer(trainerId))
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 CorpseRun_ShouldBypassDefeatPersistenceForCurrentBattle(void)
+{
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return FALSE;
+
+    return CorpseRun_IsEscapeTrainerEncounter(gTrainerBattleOpponent_A, GetTrainerBattleMode());
+}
+
+bool8 CorpseRun_ShouldSuppressTrainerBattleSideEffects(void)
+{
+    if (gSaveBlock1Ptr->corpseRun.state != CR_ACTIVE)
+        return FALSE;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return FALSE;
+
+    if (gTrainerBattleOpponent_A > NUM_TRAINERS)
+        return FALSE;
+
+    if (CorpseRun_IsCriticalScriptedTrainer(gTrainerBattleOpponent_A))
+        return FALSE;
+
+    return TRUE;
 }

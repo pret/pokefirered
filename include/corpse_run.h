@@ -22,5 +22,8 @@ void CorpseRun_HandlePlayerDefeat(void);
 void CorpseRun_TryRecoverByTouch(void);
 void CorpseRun_OnMapEnter(void);
 void CorpseRun_DebugReset(void);
+bool8 CorpseRun_IsEscapeTrainerEncounter(u16 trainerId, u8 trainerBattleMode);
+bool8 CorpseRun_ShouldBypassDefeatPersistenceForCurrentBattle(void);
+bool8 CorpseRun_ShouldSuppressTrainerBattleSideEffects(void);
 
 #endif // GUARD_CORPSE_RUN_H

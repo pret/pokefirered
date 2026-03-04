@@ -1,15 +1,14 @@
 Route1_Text_WorkAtPokeMartTakeSample::
     .string "Hi!\n"
-    .string "I work at a POKéMON MART.\p"
-    .string "It's part of a convenient chain\n"
-    .string "selling all sorts of items.\p"
-    .string "Please, visit us in VIRIDIAN CITY.\p"
-    .string "I know, I'll give you a sample.\n"
-    .string "Here you go!$"
+    .string "Carrying SOULS can be risky.\p"
+    .string "If you black out, you'll drop them\n"
+    .string "right where you fell.\p"
+    .string "Bank or spend them at a\n"
+    .string "POKéMON CENTER often!$"
 
 Route1_Text_ComeSeeUsIfYouNeedPokeBalls::
-    .string "Please come see us if you need\n"
-    .string "POKé BALLS for catching POKéMON.$"
+    .string "Remember: bank or spend your\n"
+    .string "SOULS at POKéMON CENTERs.$"
 
 Route1_Text_PutPotionAway::
     .string "{PLAYER} put the POTION away in\n"
@@ -25,4 +24,3 @@ Route1_Text_CanJumpFromLedges::
 Route1_Text_RouteSign::
     .string "ROUTE 1\n"
     .string "PALLET TOWN - VIRIDIAN CITY$"
-

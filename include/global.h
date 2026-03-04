@@ -803,7 +803,11 @@ struct CorpseRunSaveData
     u8 partyCount;
     struct CorpseRunPartySnapshot partySnapshot[PARTY_SIZE];
 
-    u8 reserved[312];
+    // Emergency salvage mode payload
+    bool8 salvageActive;
+    bool8 salvageWarpToHealPending;
+
+    u8 reserved[310];
 };
 
 struct SaveBlock1

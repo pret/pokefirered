@@ -384,8 +384,9 @@
 #define STRINGID_TRAINER1WINTEXT 383
 #define STRINGID_TRAINER1MON2COMEBACK 384
 #define STRINGID_TRAINER1MON1AND2COMEBACK 385
+#define STRINGID_PKMNTOOSTRONGTOFOLLOW 386
 
-#define BATTLESTRINGS_COUNT     386
+#define BATTLESTRINGS_COUNT     387
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -539,6 +540,7 @@
 #define B_MSG_SENT_BILLS_PC     1
 #define B_MSG_SOMEONES_BOX_FULL 2
 #define B_MSG_BILLS_BOX_FULL    3
+#define B_MSG_TOO_STRONG_TO_FOLLOW 4
 
 // gInobedientStringIds
 #define B_MSG_LOAFING            0

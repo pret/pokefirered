@@ -6,6 +6,7 @@
 #include "pokemon.h"
 #include "battle.h"
 #include "battle_setup.h"
+#include "safari_zone.h"
 
 #include "constants/battle_setup.h"
 #include "constants/opponents.h"
@@ -16,6 +17,25 @@
 
 STATIC_ASSERT(sizeof(struct CorpseRunSaveData) == 400, CorpseRunSaveDataSize);
 
+
+static const u16 sSalvageBadgeFlagIds[] =
+{
+    FLAG_BADGE01_GET,
+    FLAG_BADGE02_GET,
+    FLAG_BADGE03_GET,
+    FLAG_BADGE04_GET,
+    FLAG_BADGE05_GET,
+    FLAG_BADGE06_GET,
+    FLAG_BADGE07_GET,
+    FLAG_BADGE08_GET,
+};
+
+static const u8 sGymAceLevelByBadgeCount[] =
+{
+    14, 21, 24, 29, 43, 43, 47, 50, 55
+};
+
+#define ELITE_FOUR_1_ACE_LEVEL 56
 
 static bool8 CorpseRun_IsCriticalScriptedTrainer(u16 trainerId)
 {
@@ -224,10 +244,40 @@ static void CorpseRun_SpawnMarkerAtPlayer(void)
     gSaveBlock1Ptr->corpseRun.markerSpawnCounter++;
 }
 
+static void CorpseRun_InvalidateStoredPartyBlob(void)
+{
+    u8 i;
+
+    gSaveBlock1Ptr->corpseRun.partyCount = 0;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        gSaveBlock1Ptr->corpseRun.partySnapshot[i].species = SPECIES_NONE;
+        gSaveBlock1Ptr->corpseRun.partySnapshot[i].level = 0;
+        gSaveBlock1Ptr->corpseRun.partySnapshot[i].hpPercent = 0;
+        gSaveBlock1Ptr->corpseRun.partySnapshot[i].personality = 0;
+    }
+}
+
+static void OnSecondDeathDuringCorpseRun(void)
+{
+    gSaveBlock1Ptr->corpseRun.droppedSouls = 0;
+    CorpseRun_InvalidateStoredPartyBlob();
+    CorpseRun_SetState(CR_FAILED);
+    CorpseRun_DespawnMarker();
+    gSaveBlock1Ptr->corpseRun.salvageActive = TRUE;
+
+    SetSafariZoneFlag();
+    gNumSafariBalls = 30;
+    gSafariZoneStepCounter = 600;
+    SetWarpDestination(MAP_GROUP(MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE), MAP_NUM(MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE), -1, 4, 4);
+}
+
 void CorpseRun_ResetSaveData(void)
 {
     CpuFill32(0, &gSaveBlock1Ptr->corpseRun, sizeof(gSaveBlock1Ptr->corpseRun));
     gSaveBlock1Ptr->corpseRun.state = CR_OFF;
+    gSaveBlock1Ptr->corpseRun.salvageActive = FALSE;
+    gSaveBlock1Ptr->corpseRun.salvageWarpToHealPending = FALSE;
     CorpseRun_DespawnMarker();
     CorpseRun_FinalizeForSave();
 }
@@ -236,8 +286,9 @@ void CorpseRun_HandlePlayerDefeat(void)
 {
     if (gSaveBlock1Ptr->corpseRun.state == CR_ACTIVE)
     {
-        CorpseRun_SetState(CR_FAILED);
-        CorpseRun_DespawnMarker();
+        OnSecondDeathDuringCorpseRun();
+        CorpseRun_FinalizeForSave();
+        return;
     }
 
     gSaveBlock1Ptr->corpseRun.deathMapGroup = gSaveBlock1Ptr->location.mapGroup;
@@ -285,6 +336,9 @@ void CorpseRun_OnMapEnter(void)
     if (gSaveBlock1Ptr->corpseRun.state == CR_ACTIVE && gSaveBlock1Ptr->corpseRun.markerSpawned)
         CorpseRun_TryRecoverByTouch();
 
+    if (gSaveBlock1Ptr->corpseRun.salvageWarpToHealPending)
+        gSaveBlock1Ptr->corpseRun.salvageWarpToHealPending = FALSE;
+
     CorpseRun_FinalizeForSave();
 }
 
@@ -294,14 +348,65 @@ void CorpseRun_DebugReset(void)
 }
 
 
+
+static u8 CorpseRun_GetBadgeCount(void)
+{
+    u8 i;
+    u8 badgesEarned = 0;
+
+    for (i = 0; i < NELEMS(sSalvageBadgeFlagIds); i++)
+    {
+        if (FlagGet(sSalvageBadgeFlagIds[i]))
+            badgesEarned++;
+    }
+
+    return badgesEarned;
+}
+
+u8 CorpseRun_GetSalvageLevelCap(void)
+{
+    u8 badgesEarned = CorpseRun_GetBadgeCount();
+    u8 referenceLevel = (badgesEarned >= NELEMS(sSalvageBadgeFlagIds))
+                        ? ELITE_FOUR_1_ACE_LEVEL
+                        : sGymAceLevelByBadgeCount[badgesEarned];
+
+    return referenceLevel - 5;
+}
+
+bool8 CorpseRun_IsSalvageCatchAllowed(const struct Pokemon *mon)
+{
+    u8 caughtLevel;
+
+    if (!gSaveBlock1Ptr->corpseRun.salvageActive)
+        return TRUE;
+
+    caughtLevel = GetMonData(mon, MON_DATA_LEVEL);
+    return caughtLevel <= CorpseRun_GetSalvageLevelCap();
+}
+
+void CorpseRun_CompleteSalvage(void)
+{
+    ExitSafariMode();
+    gSaveBlock1Ptr->corpseRun.salvageActive = FALSE;
+    gSaveBlock1Ptr->corpseRun.salvageWarpToHealPending = TRUE;
+    SetWarpDestinationToLastHealLocation();
+    CorpseRun_FinalizeForSave();
+}
+
+
 bool8 CorpseRun_IsActive(void)
 {
     return gSaveBlock1Ptr->corpseRun.state == CR_ACTIVE;
 }
 
+bool8 CorpseRun_IsSalvageActive(void)
+{
+    return gSaveBlock1Ptr->corpseRun.salvageActive;
+}
+
 bool8 CorpseRun_CanUseBagInCurrentBattle(void)
 {
-    return !CorpseRun_IsActive();
+    return !CorpseRun_IsSalvageActive();
 }
 
 bool8 CorpseRun_CanRunFromCurrentBattle(void)
@@ -311,22 +416,32 @@ bool8 CorpseRun_CanRunFromCurrentBattle(void)
 
 bool8 CorpseRun_CanGainExpFromCurrentBattle(void)
 {
-    return !CorpseRun_IsActive();
+    return !CorpseRun_IsSalvageActive();
 }
 
 bool8 CorpseRun_CanGainCurrencyFromCurrentBattle(void)
 {
-    return !CorpseRun_IsActive();
+    return !CorpseRun_IsSalvageActive();
 }
 
 bool8 CorpseRun_CanCaptureInCurrentBattle(void)
 {
-    return !CorpseRun_IsActive();
+    return !CorpseRun_IsSalvageActive();
+}
+
+bool8 CorpseRun_CanReceiveItemDrops(void)
+{
+    return !CorpseRun_IsSalvageActive();
+}
+
+bool8 CorpseRun_ShouldUseSafariBattle(void)
+{
+    return GetSafariZoneFlag() || CorpseRun_IsSalvageActive();
 }
 
 bool8 CorpseRun_ShouldRunPostBattleScripts(void)
 {
-    return !CorpseRun_IsActive();
+    return !CorpseRun_IsSalvageActive();
 }
 
 bool8 CorpseRun_IsEscapeTrainerEncounter(u16 trainerId, u8 trainerBattleMode)

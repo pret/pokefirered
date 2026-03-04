@@ -17,11 +17,16 @@ EventScript_PkmnCenterNurse_LevelUpPokemon_Loop::
 	waitstate
 	goto_if_eq VAR_0x8004, PARTY_SIZE, EventScript_PkmnCenterNurse_LevelUpPokemon_End
 	specialvar VAR_RESULT, PkmnCenterLevelUp_PrepareSelection
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_LevelUpPokemon_CantLevel
+	goto_if_eq VAR_RESULT, 1, EventScript_PkmnCenterNurse_LevelUpPokemon_CantLevel
+	goto_if_eq VAR_RESULT, 3, EventScript_PkmnCenterNurse_LevelUpPokemon_AtLevelCap
+	goto_if_eq VAR_RESULT, 4, EventScript_PkmnCenterNurse_LevelUpPokemon_BreaksPartySpread
 	msgbox Text_PkmnCenterNurse_LevelUpPrompt, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_PkmnCenterNurse_LevelUpPokemon_Loop
 	specialvar VAR_RESULT, PkmnCenterLevelUp_Purchase
-	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_LevelUpPokemon_NotEnoughSouls
+	goto_if_eq VAR_RESULT, 1, EventScript_PkmnCenterNurse_LevelUpPokemon_CantLevel
+	goto_if_eq VAR_RESULT, 2, EventScript_PkmnCenterNurse_LevelUpPokemon_NotEnoughSouls
+	goto_if_eq VAR_RESULT, 3, EventScript_PkmnCenterNurse_LevelUpPokemon_AtLevelCap
+	goto_if_eq VAR_RESULT, 4, EventScript_PkmnCenterNurse_LevelUpPokemon_BreaksPartySpread
 	updatemoneybox
 	msgbox Text_PkmnCenterNurse_LevelUpSuccess
 	goto EventScript_PkmnCenterNurse_LevelUpPokemon_Loop
@@ -32,6 +37,14 @@ EventScript_PkmnCenterNurse_LevelUpPokemon_NotEnoughSouls::
 
 EventScript_PkmnCenterNurse_LevelUpPokemon_CantLevel::
 	msgbox Text_PkmnCenterNurse_CantLevel
+	goto EventScript_PkmnCenterNurse_LevelUpPokemon_Loop
+
+EventScript_PkmnCenterNurse_LevelUpPokemon_AtLevelCap::
+	msgbox Text_PkmnCenterNurse_LevelCapReached
+	goto EventScript_PkmnCenterNurse_LevelUpPokemon_Loop
+
+EventScript_PkmnCenterNurse_LevelUpPokemon_BreaksPartySpread::
+	msgbox Text_PkmnCenterNurse_PartySpreadViolation
 	goto EventScript_PkmnCenterNurse_LevelUpPokemon_Loop
 
 EventScript_PkmnCenterNurse_LevelUpPokemon_End::

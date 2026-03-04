@@ -3268,6 +3268,10 @@ static void Cmd_getexp(void)
                     if (gBattleMoveDamage != 0 && CorpseRun_CanGainCurrencyFromCurrentBattle())
                         AddMoney(&gSaveBlock1Ptr->money, gBattleMoveDamage);
 
+                    // Prevent case 5 from routing into case 3 (direct EXP grant).
+                    // Souls banking above is the only automatic battle progression.
+                    gBattleMoveDamage = 0;
+
                     MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
                 }
                 gBattleStruct->sentInPokes >>= 1;

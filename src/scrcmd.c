@@ -37,6 +37,7 @@
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/sound.h"
+#include "corpse_run.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -464,8 +465,15 @@ bool8 ScrCmd_additem(struct ScriptContext * ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = AddBagItem(itemId, (u8)quantity);
-    TrySetObtainedItemQuestLogEvent(itemId);
+    if (CorpseRun_ShouldBlockRewardScriptCommands())
+    {
+        gSpecialVar_Result = FALSE;
+    }
+    else
+    {
+        gSpecialVar_Result = AddBagItem(itemId, (u8)quantity);
+        TrySetObtainedItemQuestLogEvent(itemId);
+    }
     return FALSE;
 }
 
@@ -509,7 +517,10 @@ bool8 ScrCmd_addpcitem(struct ScriptContext * ctx)
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = AddPCItem(itemId, quantity);
+    if (CorpseRun_ShouldBlockRewardScriptCommands())
+        gSpecialVar_Result = FALSE;
+    else
+        gSpecialVar_Result = AddPCItem(itemId, quantity);
     return FALSE;
 }
 
@@ -1787,7 +1798,7 @@ bool8 ScrCmd_addmoney(struct ScriptContext * ctx)
     u32 amount = ScriptReadWord(ctx);
     u8 ignore = ScriptReadByte(ctx);
 
-    if (!ignore)
+    if (!ignore && !CorpseRun_ShouldBlockRewardScriptCommands())
         AddMoney(&gSaveBlock1Ptr->money, amount);
     return FALSE;
 }
@@ -1907,7 +1918,8 @@ bool8 ScrCmd_settrainerflag(struct ScriptContext * ctx)
 {
     u16 index = VarGet(ScriptReadHalfword(ctx));
 
-    SetTrainerFlag(index);
+    if (!CorpseRun_ShouldBlockRewardScriptCommands())
+        SetTrainerFlag(index);
     return FALSE;
 }
 

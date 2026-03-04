@@ -29,6 +29,8 @@ bool8 CorpseRun_IsActive(void);
 bool8 CorpseRun_IsSalvageActive(void);
 bool8 CorpseRun_CanUseBagInCurrentBattle(void);
 bool8 CorpseRun_CanRunFromCurrentBattle(void);
+bool8 CorpseRun_IsRewardPolicyGateActive(void);
+bool8 CorpseRun_ShouldBlockRewardScriptCommands(void);
 bool8 CorpseRun_CanGainExpFromCurrentBattle(void);
 bool8 CorpseRun_CanGainCurrencyFromCurrentBattle(void);
 bool8 CorpseRun_CanCaptureInCurrentBattle(void);

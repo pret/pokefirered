@@ -3846,7 +3846,7 @@ static void HandleEndTurn_FinishBattle(void)
             }
         }
         TrySetQuestLogBattleEvent();
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && !CorpseRun_ShouldSuppressTrainerBattleSideEffects())
             ClearRematchStateByTrainerId();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);

@@ -404,6 +404,16 @@ bool8 CorpseRun_IsSalvageActive(void)
     return gSaveBlock1Ptr->corpseRun.salvageActive;
 }
 
+bool8 CorpseRun_IsRewardPolicyGateActive(void)
+{
+    return CorpseRun_IsActive() || CorpseRun_IsSalvageActive();
+}
+
+bool8 CorpseRun_ShouldBlockRewardScriptCommands(void)
+{
+    return CorpseRun_IsRewardPolicyGateActive();
+}
+
 bool8 CorpseRun_CanUseBagInCurrentBattle(void)
 {
     return !CorpseRun_IsSalvageActive();
@@ -416,12 +426,12 @@ bool8 CorpseRun_CanRunFromCurrentBattle(void)
 
 bool8 CorpseRun_CanGainExpFromCurrentBattle(void)
 {
-    return !CorpseRun_IsSalvageActive();
+    return !CorpseRun_IsRewardPolicyGateActive();
 }
 
 bool8 CorpseRun_CanGainCurrencyFromCurrentBattle(void)
 {
-    return !CorpseRun_IsSalvageActive();
+    return !CorpseRun_IsRewardPolicyGateActive();
 }
 
 bool8 CorpseRun_CanCaptureInCurrentBattle(void)
@@ -431,7 +441,7 @@ bool8 CorpseRun_CanCaptureInCurrentBattle(void)
 
 bool8 CorpseRun_CanReceiveItemDrops(void)
 {
-    return !CorpseRun_IsSalvageActive();
+    return !CorpseRun_IsRewardPolicyGateActive();
 }
 
 bool8 CorpseRun_ShouldUseSafariBattle(void)
@@ -481,16 +491,10 @@ bool8 CorpseRun_ShouldBypassDefeatPersistenceForCurrentBattle(void)
 
 bool8 CorpseRun_ShouldSuppressTrainerBattleSideEffects(void)
 {
-    if (gSaveBlock1Ptr->corpseRun.state != CR_ACTIVE)
+    if (!CorpseRun_IsRewardPolicyGateActive())
         return FALSE;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
-        return FALSE;
-
-    if (gTrainerBattleOpponent_A > NUM_TRAINERS)
-        return FALSE;
-
-    if (CorpseRun_IsCriticalScriptedTrainer(gTrainerBattleOpponent_A))
         return FALSE;
 
     return TRUE;

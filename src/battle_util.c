@@ -25,6 +25,7 @@
 #include "constants/hold_effects.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
+#include "corpse_run.h"
 
 #define SOUND_MOVES_END 0xFFFF
 
@@ -1167,6 +1168,17 @@ bool8 HandleFaintedMonActions(void)
                  && !(gBattleStruct->givenExpMons & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBattlerId]])
                  && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBattlerId]))
                 {
+                    if (!CorpseRun_CanGainExpFromCurrentBattle())
+                    {
+#ifndef NDEBUG
+                        DebugPrintf("CorpseRun: suppressed EXP grant in battleType=0x%08x\n", gBattleTypeFlags);
+#endif
+                        gBattleStruct->faintedActionsState = 2;
+                        return TRUE;
+                    }
+#ifndef NDEBUG
+                    AGB_ASSERT(!CorpseRun_IsActive());
+#endif
                     BattleScriptExecute(BattleScript_GiveExp);
                     gBattleStruct->faintedActionsState = 2;
                     return TRUE;

@@ -5,6 +5,7 @@
 #include "script.h"
 #include "event_data.h"
 #include "field_screen_effect.h"
+#include "corpse_run.h"
 
 EWRAM_DATA u8 gNumSafariBalls = 0;
 EWRAM_DATA u16 gSafariZoneStepCounter = 0;
@@ -43,6 +44,10 @@ bool8 SafariZoneTakeStep(void)
 {
     if (GetSafariZoneFlag() == FALSE)
         return FALSE;
+
+    if (CorpseRun_IsActive())
+        return FALSE;
+
     gSafariZoneStepCounter--;
     if (gSafariZoneStepCounter == 0)
     {

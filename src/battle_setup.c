@@ -1002,6 +1002,9 @@ void ShowTrainerIntroSpeech(void)
 
 const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
 {
+    if (!CorpseRun_ShouldRunPostBattleScripts())
+        return EventScript_TestSignpostMsg;
+
     if (sTrainerBattleEndScript != NULL)
         return sTrainerBattleEndScript;
     else
@@ -1010,6 +1013,9 @@ const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
 
 const u8 *BattleSetup_GetTrainerPostBattleScript(void)
 {
+    if (!CorpseRun_ShouldRunPostBattleScripts())
+        return EventScript_TestSignpostMsg;
+
     if (sTrainerABattleScriptRetAddr != NULL)
         return sTrainerABattleScriptRetAddr;
     else

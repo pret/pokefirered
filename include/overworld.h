@@ -151,6 +151,8 @@ bool32 IsSendingKeysOverCable(void);
 
 void CB2_ReturnToFieldWithOpenMenu(void);
 void CB2_WhiteOut(void);
+void CorpseRunInitialization(void);
+bool8 IsCorpseRunFeatureEnabled(void);
 void CB2_ReturnToFieldFromMultiplayer(void);
 void ApplyNewEncryptionKeyToGameStats(u32 newKey);
 void SetContinueGameWarpToDynamicWarp(int);

@@ -242,14 +242,29 @@ static const u16 sWhiteOutMoneyLossBadgeFlagIDs[] = {
     FLAG_BADGE08_GET
 };
 
-static void DoWhiteOut(void)
+bool8 IsCorpseRunFeatureEnabled(void)
+{
+    return FEATURE_FLAG_CORPSE_RUN;
+}
+
+void CorpseRunInitialization(void)
 {
     RunScriptImmediately(EventScript_ResetEliteFourEnd);
-    RemoveMoney(&gSaveBlock1Ptr->money, ComputeWhiteOutMoneyLoss());
-    HealPlayerParty();
+
+    if (!IsCorpseRunFeatureEnabled())
+    {
+        RemoveMoney(&gSaveBlock1Ptr->money, ComputeWhiteOutMoneyLoss());
+        HealPlayerParty();
+        Overworld_SetWhiteoutRespawnPoint();
+    }
+
     Overworld_ResetStateAfterWhitingOut();
-    Overworld_SetWhiteoutRespawnPoint();
     WarpIntoMap();
+}
+
+static void DoWhiteOut(void)
+{
+    CorpseRunInitialization();
 }
 
 u32 ComputeWhiteOutMoneyLoss(void)
@@ -265,7 +280,11 @@ u32 ComputeWhiteOutMoneyLoss(void)
 
 void OverworldWhiteOutGetMoneyLoss(void)
 {
-    u32 losings = ComputeWhiteOutMoneyLoss();
+    u32 losings = 0;
+
+    if (!IsCorpseRunFeatureEnabled())
+        losings = ComputeWhiteOutMoneyLoss();
+
     ConvertIntToDecimalStringN(gStringVar1, losings, STR_CONV_MODE_LEFT_ALIGN, CountDigits(losings));
 }
 
@@ -1543,7 +1562,9 @@ void CB2_WhiteOut(void)
         SetInitialPlayerAvatarStateWithDirection(DIR_NORTH);
         ScriptContext_Init();
         UnlockPlayerFieldControls();
-        gFieldCallback = FieldCB_RushInjuredPokemonToCenter;
+        gFieldCallback = IsCorpseRunFeatureEnabled()
+            ? FieldCB_WarpExitFadeFromBlack
+            : FieldCB_RushInjuredPokemonToCenter;
         val = 0;
         DoMapLoadLoop(&val);
         QuestLog_CutRecording();

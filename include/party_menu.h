@@ -82,5 +82,7 @@ u8 GetPartyIdFromBattlePartyId(u8 battlePartyId);
 void ShowPartyMenuToShowcaseMultiBattleParty(void);
 void ChooseMonForDaycare(void);
 void ChoosePartyMonByMenuType(u8 menuType);
+u16 PkmnCenterLevelUp_PrepareSelection(void);
+u16 PkmnCenterLevelUp_Purchase(void);
 
 #endif // GUARD_PARTY_MENU_H

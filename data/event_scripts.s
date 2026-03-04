@@ -902,6 +902,20 @@ Text_RestoredPkmnToFullHealth::
 	.string "We've restored your POKéMON to\l"
 	.string "full health.$"
 
+Text_PkmnCenterNurse_LevelUpPrompt::
+	.string "Current Souls: {STR_VAR_1}\n"
+	.string "Required Souls: {STR_VAR_2}\p"
+	.string "Level up this POKéMON?$"
+
+Text_PkmnCenterNurse_NotEnoughSouls::
+	.string "You don't have enough SOULS.$"
+
+Text_PkmnCenterNurse_LevelUpSuccess::
+	.string "Your POKéMON grew stronger!$"
+
+Text_PkmnCenterNurse_CantLevel::
+	.string "That POKéMON can't level up.$"
+
 	.include "data/text/surf.inc"
 
 @ Unused, from R/S

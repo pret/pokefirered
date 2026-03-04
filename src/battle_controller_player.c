@@ -6,6 +6,7 @@
 #include "link.h"
 #include "m4a.h"
 #include "party_menu.h"
+#include "corpse_run.h"
 #include "pokeball.h"
 #include "strings.h"
 #include "pokemon_special_anim.h"
@@ -216,6 +217,20 @@ static void CompleteOnBattlerSpritePosX_0(void)
         PlayerBufferExecCompleted();
 }
 
+
+static bool8 IsBattleMenuActionAllowed(u8 action)
+{
+    switch (action)
+    {
+    case B_ACTION_USE_ITEM:
+        return CorpseRun_CanUseBagInCurrentBattle();
+    case B_ACTION_RUN:
+        return CorpseRun_CanRunFromCurrentBattle();
+    default:
+        return TRUE;
+    }
+}
+
 static void HandleInputChooseAction(void)
 {
     u16 itemId = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
@@ -224,9 +239,14 @@ static void HandleInputChooseAction(void)
     DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
     if (JOY_NEW(A_BUTTON))
     {
+        u8 action = gActionSelectionCursor[gActiveBattler];
+
+        if (!IsBattleMenuActionAllowed(action))
+            return;
+
         PlaySE(SE_SELECT);
 
-        switch (gActionSelectionCursor[gActiveBattler])
+        switch (action)
         {
         case 0:
             BtlController_EmitTwoReturnValues(1, B_ACTION_USE_MOVE, 0);

@@ -36,6 +36,7 @@
 #include "constants/abilities.h"
 #include "constants/pokemon.h"
 #include "constants/maps.h"
+#include "corpse_run.h"
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
@@ -5327,7 +5328,14 @@ static void Cmd_getmoneyreward(void)
 
     if (gBattleOutcome == B_OUTCOME_WON)
     {
-        if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
+        if (!CorpseRun_CanGainCurrencyFromCurrentBattle())
+        {
+#ifndef NDEBUG
+            DebugPrintf("CorpseRun: suppressed trainer payout in battleType=0x%08x\n", gBattleTypeFlags);
+#endif
+            moneyReward = 0;
+        }
+        else if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
         {
             moneyReward = gBattleResources->secretBase->party.levels[0] * 20 * gBattleStruct->moneyMultiplier;
         }
@@ -5372,6 +5380,10 @@ static void Cmd_getmoneyreward(void)
             party4 = gTrainers[gTrainerBattleOpponent_A].party.ItemCustomMoves; // Needed to Match. Has no effect.
             moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * (gBattleTypeFlags & BATTLE_TYPE_DOUBLE ? 2 : 1) * gTrainerMoneyTable[i].value;
         }
+#ifndef NDEBUG
+        if (moneyReward != 0)
+            AGB_ASSERT(!CorpseRun_IsActive());
+#endif
         AddMoney(&gSaveBlock1Ptr->money, moneyReward);
     }
     else
@@ -7066,6 +7078,19 @@ static void Cmd_givepaydaymoney(void)
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gPaydayMoney != 0)
     {
         u32 bonusMoney = gPaydayMoney * gBattleStruct->moneyMultiplier;
+
+        if (!CorpseRun_CanGainCurrencyFromCurrentBattle())
+        {
+#ifndef NDEBUG
+            DebugPrintf("CorpseRun: suppressed Pay Day payout in battleType=0x%08x\n", gBattleTypeFlags);
+#endif
+            bonusMoney = 0;
+        }
+
+#ifndef NDEBUG
+        if (bonusMoney != 0)
+            AGB_ASSERT(!CorpseRun_IsActive());
+#endif
         AddMoney(&gSaveBlock1Ptr->money, bonusMoney);
 
         PREPARE_HWORD_NUMBER_BUFFER(gBattleTextBuff1, 5, bonusMoney)
@@ -9476,7 +9501,8 @@ static void Cmd_handleballthrow(void)
         MarkBattlerForControllerExec(gActiveBattler);
         gBattlescriptCurrInstr = BattleScript_GhostBallDodge;
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    else if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+          || !CorpseRun_CanCaptureInCurrentBattle())
     {
         BtlController_EmitBallThrowAnim(BUFFER_A, BALL_TRAINER_BLOCK);
         MarkBattlerForControllerExec(gActiveBattler);

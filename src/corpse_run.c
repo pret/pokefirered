@@ -294,6 +294,41 @@ void CorpseRun_DebugReset(void)
 }
 
 
+bool8 CorpseRun_IsActive(void)
+{
+    return gSaveBlock1Ptr->corpseRun.state == CR_ACTIVE;
+}
+
+bool8 CorpseRun_CanUseBagInCurrentBattle(void)
+{
+    return !CorpseRun_IsActive();
+}
+
+bool8 CorpseRun_CanRunFromCurrentBattle(void)
+{
+    return TRUE;
+}
+
+bool8 CorpseRun_CanGainExpFromCurrentBattle(void)
+{
+    return !CorpseRun_IsActive();
+}
+
+bool8 CorpseRun_CanGainCurrencyFromCurrentBattle(void)
+{
+    return !CorpseRun_IsActive();
+}
+
+bool8 CorpseRun_CanCaptureInCurrentBattle(void)
+{
+    return !CorpseRun_IsActive();
+}
+
+bool8 CorpseRun_ShouldRunPostBattleScripts(void)
+{
+    return !CorpseRun_IsActive();
+}
+
 bool8 CorpseRun_IsEscapeTrainerEncounter(u16 trainerId, u8 trainerBattleMode)
 {
     u8 trainerClass;

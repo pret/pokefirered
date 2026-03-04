@@ -57,6 +57,10 @@
 #define UNITS_METRIC
 #endif // ENGLISH
 
+// When enabled, defeat flow is routed through corpse-run initialization instead
+// of vanilla whiteout money loss/heal/respawn behavior.
+#define FEATURE_FLAG_CORPSE_RUN FALSE
+
 // Crashes may occur due to section reordering in the modern build,
 // so we force BUGFIX here.
 #if MODERN

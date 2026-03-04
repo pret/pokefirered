@@ -1,6 +1,8 @@
 PokemonTower_7F_Text_Grunt1Intro::
-    .string "What do you want?\n"
-    .string "Why are you here?$"
+    .string "This tower is rich\n"
+    .string "with lingering SOULS.\p"
+    .string "These spirits hold\n"
+    .string "enormous energy.$"
 
 PokemonTower_7F_Text_Grunt1Defeat::
     .string "I give up!$"
@@ -9,12 +11,9 @@ PokemonTower_7F_Text_Grunt1PostBattle::
     .string "I'm not going to forget this!$"
 
 PokemonTower_7F_Text_Grunt2Intro::
-    .string "This old guy marched right up to\n"
-    .string "our HIDEOUT.\p"
-    .string "Then, he starts ranting about how\n"
-    .string "TEAM ROCKET's abusing POKéMON.\p"
-    .string "So, we're just talking it over as\n"
-    .string "adults.$"
+    .string "That old man knows\n"
+    .string "too much about SOULS.\p"
+    .string "Boss wants him alive.$"
 
 PokemonTower_7F_Text_Grunt2Defeat::
     .string "Please!\n"
@@ -32,7 +31,8 @@ PokemonTower_7F_Text_Grunt3Defeat::
     .string "Don't fight us ROCKETS!$"
 
 PokemonTower_7F_Text_Grunt3PostBattle::
-    .string "You're not getting away with this!$"
+    .string "Just SOULS\n"
+    .string "that refused to fade.$"
 
 PokemonTower_7F_Text_MrFujiThankYouFollowMe::
     .string "MR. FUJI: Heh?\n"

@@ -1,7 +1,8 @@
 Route24_Text_JustEarnedFabulousPrize::
-    .string "Congratulations! You beat our\n"
-    .string "five contest TRAINERS!\p"
-    .string "You just earned a fabulous prize!$"
+    .string "Impressive...\n"
+    .string "Five trainers defeated.\p"
+    .string "That means you're carrying\n"
+    .string "quite a few SOULS.$"
 
 Route24_Text_ReceivedNuggetFromMysteryTrainer::
     .string "{PLAYER} received a NUGGET\n"
@@ -11,17 +12,22 @@ Route24_Text_YouDontHaveAnyRoom::
     .string "You don't have any room!$"
 
 Route24_Text_JoinTeamRocket::
-    .string "By the way, how would you like to\n"
-    .string "join TEAM ROCKET?\p"
-    .string "We're a group of professional\n"
-    .string "criminals specializing in POKéMON!\p"
-    .string "Want to join?\p"
+    .string "Tell me something.\n"
+    .string "Do you enjoy risking\n"
+    .string "those SOULS every battle?\p"
+    .string "TEAM ROCKET doesn't\n"
+    .string "waste time battling.\p"
+    .string "We extract SOULS.\p"
+    .string "Join us.\n"
+    .string "No risk.\n"
+    .string "No corpse runs.\n"
+    .string "Just profit.\p"
     .string "Are you sure?\p"
     .string "Come on, join us!\p"
     .string "I'm telling you to join!\p"
-    .string "…Okay, you need convincing!\p"
-    .string "I'll make you an offer you can't\n"
-    .string "refuse!$"
+    .string "Hmph.\n"
+    .string "Then we'll take\n"
+    .string "those SOULS instead!$"
 
 Route24_Text_RocketDefeat::
     .string "Arrgh!\n"

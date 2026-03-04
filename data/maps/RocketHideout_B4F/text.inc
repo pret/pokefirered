@@ -1,25 +1,23 @@
 RocketHideout_B4F_Text_GiovanniIntro::
-    .string "So! I must say, I am impressed you\n"
-    .string "got here.\p"
-    .string "TEAM ROCKET captures POKéMON from\n"
-    .string "around the world.\p"
-    .string "They're important tools for keeping\n"
-    .string "our criminal enterprise going.\p"
-    .string "I am the leader, GIOVANNI!\p"
-    .string "For your insolence, you will feel a\n"
-    .string "world of pain!$"
+    .string "So...\n"
+    .string "You're the TRAINER\n"
+    .string "disrupting my operation.\p"
+    .string "TRAINERS collect SOULS\n"
+    .string "one battle at a time.\p"
+    .string "I collect them\n"
+    .string "by the thousands.$"
 
 RocketHideout_B4F_Text_GiovanniDefeat::
-    .string "WHAT!\n"
-    .string "This can't be!$"
+    .string "Impossible...\n"
+    .string "A child ruined\n"
+    .string "my extraction site?$"
 
 RocketHideout_B4F_Text_GiovanniPostBattle::
-    .string "I see that you raise POKéMON with\n"
-    .string "utmost care.\p"
-    .string "A child like you would never\n"
-    .string "understand what I hope to achieve.\p"
-    .string "I shall step aside this time!\p"
-    .string "I hope we meet again…$"
+    .string "You carry SOULS\n"
+    .string "but do not hoard them.\p"
+    .string "Remember this:\n"
+    .string "Power belongs\n"
+    .string "to whoever takes it.$"
 
 RocketHideout_B4F_Text_Grunt2Intro::
     .string "I know you!\n"

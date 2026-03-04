@@ -237,7 +237,7 @@ static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
 
 void StartWildBattle(void)
 {
-    if (GetSafariZoneFlag())
+    if (CorpseRun_ShouldUseSafariBattle())
         DoSafariBattle();
     else if (CheckSilphScopeInPokemonTower(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
         DoGhostBattle();

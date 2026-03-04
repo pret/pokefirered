@@ -77,8 +77,25 @@ void CB2_EndSafariBattle(void)
     }
     else if (gBattleOutcome == B_OUTCOME_CAUGHT)
     {
-        ScriptContext_SetupScript(SafariZone_EventScript_OutOfBalls);
-        ScriptContext_Stop();
-        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        if (CorpseRun_IsSalvageActive())
+        {
+            if (gBattleResults.caughtMonSpecies != SPECIES_NONE)
+            {
+                CorpseRun_CompleteSalvage();
+                WarpIntoMap();
+                gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+                SetMainCallback2(CB2_LoadMap);
+            }
+            else
+            {
+                SetMainCallback2(CB2_ReturnToField);
+            }
+        }
+        else
+        {
+            ScriptContext_SetupScript(SafariZone_EventScript_OutOfBalls);
+            ScriptContext_Stop();
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        }
     }
 }

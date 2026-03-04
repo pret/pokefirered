@@ -9290,6 +9290,12 @@ static void Cmd_pickup(void)
     u16 species, heldItem;
     u32 ability;
 
+    if (!CorpseRun_CanReceiveItemDrops())
+    {
+        gBattlescriptCurrInstr++;
+        return;
+    }
+
     for (i = 0; i < PARTY_SIZE; i++)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
@@ -9642,18 +9648,35 @@ static void Cmd_handleballthrow(void)
 
 static void Cmd_givecaughtmon(void)
 {
-    if (GiveMonToPlayer(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]]) != MON_GIVEN_TO_PARTY)
+    struct Pokemon *caughtMon = &gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]];
+
+    if (CorpseRun_IsSalvageActive())
+    {
+        if (!CorpseRun_IsSalvageCatchAllowed(caughtMon))
+        {
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TOO_STRONG_TO_FOLLOW;
+            gBattleResults.caughtMonSpecies = SPECIES_NONE;
+            gBattlescriptCurrInstr++;
+            return;
+        }
+
+        ZeroPlayerPartyMons();
+        CopyMon(&gPlayerParty[0], caughtMon, sizeof(*caughtMon));
+        CalculatePlayerPartyCount();
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SENT_SOMEONES_PC;
+    }
+    else if (GiveMonToPlayer(caughtMon) != MON_GIVEN_TO_PARTY)
     {
         if (!ShouldShowBoxWasFullMessage())
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SENT_SOMEONES_PC;
             StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON)));
-            GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gStringVar2);
+            GetMonData(caughtMon, MON_DATA_NICKNAME, gStringVar2);
         }
         else
         {
             StringCopy(gStringVar1, GetBoxNamePtr(VarGet(VAR_PC_BOX_TO_SEND_MON))); // box the mon was sent to
-            GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gStringVar2);
+            GetMonData(caughtMon, MON_DATA_NICKNAME, gStringVar2);
             StringCopy(gStringVar3, GetBoxNamePtr(GetPCBoxToSendMon())); //box the mon was going to be sent to
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SOMEONES_BOX_FULL;
         }
@@ -9664,7 +9687,7 @@ static void Cmd_givecaughtmon(void)
     }
 
     gBattleResults.caughtMonSpecies = gBattleMons[gBattlerAttacker ^ BIT_SIDE].species;
-    GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerAttacker ^ BIT_SIDE]], MON_DATA_NICKNAME, gBattleResults.caughtMonNick);
+    GetMonData(caughtMon, MON_DATA_NICKNAME, gBattleResults.caughtMonNick);
 
     gBattlescriptCurrInstr++;
 }

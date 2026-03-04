@@ -45,7 +45,7 @@ bool8 SafariZoneTakeStep(void)
     if (GetSafariZoneFlag() == FALSE)
         return FALSE;
 
-    if (CorpseRun_IsActive())
+    if (CorpseRun_IsActive() || CorpseRun_IsSalvageActive())
         return FALSE;
 
     gSafariZoneStepCounter--;
@@ -64,6 +64,9 @@ void SafariZoneRetirePrompt(void)
 
 void CB2_EndSafariBattle(void)
 {
+    if (CorpseRun_IsSalvageActive())
+        gSaveBlock1Ptr->corpseRun.salvageBallsRemaining = gNumSafariBalls;
+
     if (gNumSafariBalls != 0)
     {
         SetMainCallback2(CB2_ReturnToField);

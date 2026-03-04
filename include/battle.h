@@ -73,6 +73,13 @@ struct TrainerMonNoItemDefaultMoves
     u16 iv;
     u8 lvl;
     u16 species;
+    bool8 hasCustomIvs;
+    u8 hpIv;
+    u8 atkIv;
+    u8 defIv;
+    u8 speedIv;
+    u8 spAtkIv;
+    u8 spDefIv;
 };
 
 struct TrainerMonItemDefaultMoves
@@ -81,6 +88,13 @@ struct TrainerMonItemDefaultMoves
     u8 lvl;
     u16 species;
     u16 heldItem;
+    bool8 hasCustomIvs;
+    u8 hpIv;
+    u8 atkIv;
+    u8 defIv;
+    u8 speedIv;
+    u8 spAtkIv;
+    u8 spDefIv;
 };
 
 struct TrainerMonNoItemCustomMoves
@@ -89,6 +103,13 @@ struct TrainerMonNoItemCustomMoves
     u8 lvl;
     u16 species;
     u16 moves[MAX_MON_MOVES];
+    bool8 hasCustomIvs;
+    u8 hpIv;
+    u8 atkIv;
+    u8 defIv;
+    u8 speedIv;
+    u8 spAtkIv;
+    u8 spDefIv;
 };
 
 struct TrainerMonItemCustomMoves
@@ -98,6 +119,13 @@ struct TrainerMonItemCustomMoves
     u16 species;
     u16 heldItem;
     u16 moves[MAX_MON_MOVES];
+    bool8 hasCustomIvs;
+    u8 hpIv;
+    u8 atkIv;
+    u8 defIv;
+    u8 speedIv;
+    u8 spAtkIv;
+    u8 spDefIv;
 };
 
 struct TrainerMonItemCustomMovesAbility
@@ -108,6 +136,13 @@ struct TrainerMonItemCustomMovesAbility
     u16 heldItem;
     u16 moves[MAX_MON_MOVES];
     u8 ability;
+    bool8 hasCustomIvs;
+    u8 hpIv;
+    u8 atkIv;
+    u8 defIv;
+    u8 speedIv;
+    u8 spAtkIv;
+    u8 spDefIv;
 };
 
 #define NO_ITEM_DEFAULT_MOVES(party) { .NoItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = 0

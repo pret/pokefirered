@@ -16,11 +16,10 @@ ViridianCity_Mart_Text_SayHiToOakForMe::
     .string "PROF. OAK for me, too.$"
 
 ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes::
-    .string "This shop does good business in\n"
-    .string "ANTIDOTES, I've heard.$"
+    .string "Word is this shop moves lots of\n"
+    .string "ANTIDOTES for SOULS now.$"
 
 ViridianCity_Mart_Text_GotToBuySomePotions::
-    .string "I've got to buy some POTIONS.\p"
-    .string "You never know when your POKéMON\n"
-    .string "will need quick healing.$"
-
+    .string "I've got to trade SOULS for POTIONS.\p"
+    .string "Supplies cost SOULS these days—\n"
+    .string "cash doesn't mean anything anymore.$"

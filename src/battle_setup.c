@@ -33,6 +33,7 @@
 #include "constants/songs.h"
 #include "constants/pokemon.h"
 #include "constants/trainers.h"
+#include "corpse_run.h"
 
 enum {
     TRANSITION_TYPE_NORMAL,
@@ -905,6 +906,8 @@ void StartTrainerBattle(void)
 
 static void CB2_EndTrainerBattle(void)
 {
+    bool8 suppressSideEffects = CorpseRun_ShouldSuppressTrainerBattleSideEffects();
+
     if (sTrainerBattleMode == TRAINER_BATTLE_EARLY_RIVAL)
     {
         if (IsPlayerDefeated(gBattleOutcome) == TRUE)
@@ -920,15 +923,21 @@ static void CB2_EndTrainerBattle(void)
                 return;
             }
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-            SetBattledTrainerFlag();
-            QuestLogEvents_HandleEndTrainerBattle();
+            if (!suppressSideEffects)
+            {
+                SetBattledTrainerFlag();
+                QuestLogEvents_HandleEndTrainerBattle();
+            }
         }
         else
         {
             gSpecialVar_Result = FALSE;
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-            SetBattledTrainerFlag();
-            QuestLogEvents_HandleEndTrainerBattle();
+            if (!suppressSideEffects)
+            {
+                SetBattledTrainerFlag();
+                QuestLogEvents_HandleEndTrainerBattle();
+            }
         }
 
     }
@@ -945,14 +954,19 @@ static void CB2_EndTrainerBattle(void)
         else
         {
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-            SetBattledTrainerFlag();
-            QuestLogEvents_HandleEndTrainerBattle();
+            if (!suppressSideEffects)
+            {
+                SetBattledTrainerFlag();
+                QuestLogEvents_HandleEndTrainerBattle();
+            }
         }
     }
 }
 
 static void CB2_EndRematchBattle(void)
 {
+    bool8 suppressSideEffects = CorpseRun_ShouldSuppressTrainerBattleSideEffects();
+
     if (gTrainerBattleOpponent_A == TRAINER_SECRET_BASE)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
@@ -964,9 +978,12 @@ static void CB2_EndRematchBattle(void)
     else
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        SetBattledTrainerFlag();
-        ClearRematchStateOfLastTalked();
-        ResetDeferredLinkEvent();
+        if (!suppressSideEffects)
+        {
+            SetBattledTrainerFlag();
+            ClearRematchStateOfLastTalked();
+            ResetDeferredLinkEvent();
+        }
     }
 }
 

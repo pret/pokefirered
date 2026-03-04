@@ -55,6 +55,14 @@ On a valid salvage catch, commit order is deterministic:
 
 Load-time reconciliation treats `salvageCatchConsumed` as authoritative, so interrupted transitions cannot duplicate or bypass one-catch completion.
 
+
+## Salvage level policy
+
+Salvage catch eligibility uses an upper-bound-only check: a catch is allowed when the caught level is less than or equal to the dynamic salvage cap (gym ace / Elite Four reference minus 5). There is no lower-bound rejection in salvage logic.
+
+When an out-of-band high-level encounter is caught above the cap, the catch is rejected with the in-battle “too strong to follow” message.
+Encounter-table tuning is expected to guarantee at least one achievable encounter in-band for salvage progression.
+
 ## Permanent second-death invalidation
 
 Second-death handling permanently invalidates prior run recovery payload before salvage:

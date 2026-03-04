@@ -2,12 +2,41 @@ EventScript_PkmnCenterNurse::
 	goto_if_questlog EventScript_ReleaseEnd
 	message Text_WelcomeWantToHealPkmn
 	waitmessage
-	multichoice 19, 8, MULTICHOICE_YES_NO, FALSE | (TRUE << 1)
+	multichoice 15, 8, MULTICHOICE_PKMN_CENTER_NURSE, FALSE | (TRUE << 1)
 	switch VAR_RESULT
 	case 0, EventScript_PkmnCenterNurse_HealPkmn
-	case 1 EventScript_PkmnCenterNurse_Goodbye
+	case 1, EventScript_PkmnCenterNurse_LevelUpPokemon
+	case 2 EventScript_PkmnCenterNurse_Goodbye
 	case SCR_MENU_CANCEL, EventScript_PkmnCenterNurse_Goodbye
 	end
+
+EventScript_PkmnCenterNurse_LevelUpPokemon::
+	showmoneybox 0, 0
+EventScript_PkmnCenterNurse_LevelUpPokemon_Loop::
+	special ChoosePartyMon
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_SIZE, EventScript_PkmnCenterNurse_LevelUpPokemon_End
+	specialvar VAR_RESULT, PkmnCenterLevelUp_PrepareSelection
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_LevelUpPokemon_CantLevel
+	msgbox Text_PkmnCenterNurse_LevelUpPrompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_PkmnCenterNurse_LevelUpPokemon_Loop
+	specialvar VAR_RESULT, PkmnCenterLevelUp_Purchase
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_LevelUpPokemon_NotEnoughSouls
+	updatemoneybox
+	msgbox Text_PkmnCenterNurse_LevelUpSuccess
+	goto EventScript_PkmnCenterNurse_LevelUpPokemon_Loop
+
+EventScript_PkmnCenterNurse_LevelUpPokemon_NotEnoughSouls::
+	msgbox Text_PkmnCenterNurse_NotEnoughSouls
+	goto EventScript_PkmnCenterNurse_LevelUpPokemon_Loop
+
+EventScript_PkmnCenterNurse_LevelUpPokemon_CantLevel::
+	msgbox Text_PkmnCenterNurse_CantLevel
+	goto EventScript_PkmnCenterNurse_LevelUpPokemon_Loop
+
+EventScript_PkmnCenterNurse_LevelUpPokemon_End::
+	hidemoneybox
+	goto EventScript_PkmnCenterNurse_Goodbye
 
 EventScript_PkmnCenterNurse_HealPkmn::
 	incrementgamestat GAME_STAT_USED_POKECENTER

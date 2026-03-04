@@ -7,6 +7,11 @@
 #include "field_fadetransition.h"
 #include "pokemon_summary_screen.h"
 #include "event_data.h"
+#include "battle.h"
+#include "money.h"
+#include "pokemon.h"
+#include "string_util.h"
+#include "constants/items.h"
 #include "constants/moves.h"
 
 static void Task_ChoosePartyMon(u8 taskId);
@@ -105,4 +110,78 @@ void IsSelectedMonEgg(void)
         gSpecialVar_Result = TRUE;
     else
         gSpecialVar_Result = FALSE;
+}
+
+
+static bool8 CanLevelUpMonWithSouls(u8 partyId, u32 *requiredSouls, u32 *nextLevelExp)
+{
+    struct Pokemon *mon;
+    u16 species;
+    u8 level;
+    u32 currentExp;
+    u32 targetExp;
+
+    if (partyId >= PARTY_SIZE)
+        return FALSE;
+
+    mon = &gPlayerParty[partyId];
+    if (GetMonData(mon, MON_DATA_IS_EGG) == TRUE)
+        return FALSE;
+
+    level = GetMonData(mon, MON_DATA_LEVEL);
+    if (level >= MAX_LEVEL)
+        return FALSE;
+
+    species = GetMonData(mon, MON_DATA_SPECIES);
+    currentExp = GetMonData(mon, MON_DATA_EXP);
+    targetExp = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1];
+
+    if (nextLevelExp != NULL)
+        *nextLevelExp = targetExp;
+    *requiredSouls = targetExp - currentExp;
+    return TRUE;
+}
+
+u16 PkmnCenterLevelUp_PrepareSelection(void)
+{
+    u32 requiredSouls = 0;
+
+    if (!CanLevelUpMonWithSouls(gSpecialVar_0x8004, &requiredSouls, NULL))
+        return FALSE;
+
+    ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->money, STR_CONV_MODE_LEFT_ALIGN, 10);
+    ConvertIntToDecimalStringN(gStringVar2, requiredSouls, STR_CONV_MODE_LEFT_ALIGN, 10);
+    gSpecialVar_0x8005 = requiredSouls;
+    return TRUE;
+}
+
+u16 PkmnCenterLevelUp_Purchase(void)
+{
+    struct Pokemon *mon;
+    u16 learnedMove;
+    bool8 firstMove;
+    u32 requiredSouls = 0;
+    u32 nextLevelExp = 0;
+
+    if (!CanLevelUpMonWithSouls(gSpecialVar_0x8004, &requiredSouls, &nextLevelExp))
+        return FALSE;
+
+    if (!IsEnoughMoney(&gSaveBlock1Ptr->money, requiredSouls))
+        return FALSE;
+
+    RemoveMoney(&gSaveBlock1Ptr->money, requiredSouls);
+
+    mon = &gPlayerParty[gSpecialVar_0x8004];
+    SetMonData(mon, MON_DATA_EXP, &nextLevelExp);
+    CalculateMonStats(mon);
+
+    firstMove = TRUE;
+    while ((learnedMove = MonTryLearningNewMove(mon, firstMove)) != MOVE_NONE)
+    {
+        firstMove = FALSE;
+        if (learnedMove == MON_HAS_MAX_MOVES)
+            DeleteFirstMoveAndGiveMoveToMon(mon, gMoveToLearn);
+    }
+
+    return TRUE;
 }

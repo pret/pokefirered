@@ -40,14 +40,17 @@ Text_MomExplainHPGetPotions::
 	.string "Make me proud, honey!\p"
 	.string "Take care!$"
 
-Text_WhitedOutLostMoney::
+Text_WhitedOutCorpseRunFirst::
 	.string "{PLAYER} is out of usable\n"
 	.string "POKéMON!\p"
-	.string "{PLAYER} panicked and lost ¥{STR_VAR_1}…\p"
-	.string "… … … …\p"
+	.string "{PLAYER} fell...\p"
+	.string "Your SOULS scattered where you fell.\p"
+	.string "You have one chance to retrieve them.\p"
 	.string "{PLAYER} whited out!$"
 
-Text_WhitedOut::
+Text_WhitedOutCorpseRunRepeat::
 	.string "{PLAYER} is out of usable\n"
 	.string "POKéMON!\p"
+	.string "{PLAYER} fell again...\p"
+	.string "Your SOULS scattered. Retrieve them.\p"
 	.string "{PLAYER} whited out!$"

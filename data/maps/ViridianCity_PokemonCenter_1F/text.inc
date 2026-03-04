@@ -26,5 +26,5 @@ ViridianCity_PokemonCenter_1F_Text_PokeCenterCheckpointFirstTime::
 ViridianCity_PokemonCenter_1F_Text_PokeCenterCheckpointRepeat::
     .string "Quick reminder: heal and save here\n"
     .string "before heading out.\p"
-    .string "It's the safest way to bank your\n"
+    .string "It's the safest way to protect your\n"
     .string "progress.$"

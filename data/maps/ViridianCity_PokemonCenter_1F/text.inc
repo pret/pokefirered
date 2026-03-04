@@ -16,3 +16,15 @@ ViridianCity_PokemonCenter_1F_Text_PokeCentersHealMons::
     .string "They make all POKéMON completely\n"
     .string "healthy.$"
 
+
+ViridianCity_PokemonCenter_1F_Text_PokeCenterCheckpointFirstTime::
+    .string "Think of this CENTER as your first\n"
+    .string "checkpoint.\p"
+    .string "Heal up and save before each route,\n"
+    .string "and you'll never lose much progress.$"
+
+ViridianCity_PokemonCenter_1F_Text_PokeCenterCheckpointRepeat::
+    .string "Quick reminder: heal and save here\n"
+    .string "before heading out.\p"
+    .string "It's the safest way to bank your\n"
+    .string "progress.$"

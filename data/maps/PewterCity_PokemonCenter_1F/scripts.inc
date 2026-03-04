@@ -31,7 +31,13 @@ PewterCity_PokemonCenter_1F_EventScript_Jigglypuff::
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_Youngster::
-	msgbox PewterCity_PokemonCenter_1F_Text_WhenJiggylypuffSingsMonsGetDrowsy, MSGBOX_NPC
+	goto_if_set FLAG_TALKED_TO_PEWTER_POKECENTER_LEVEL_TUTORIAL, PewterCity_PokemonCenter_1F_EventScript_YoungsterRepeat
+	setflag FLAG_TALKED_TO_PEWTER_POKECENTER_LEVEL_TUTORIAL
+	msgbox PewterCity_PokemonCenter_1F_Text_LevelBeforeBrockFirstTime, MSGBOX_NPC
+	end
+
+PewterCity_PokemonCenter_1F_EventScript_YoungsterRepeat::
+	msgbox PewterCity_PokemonCenter_1F_Text_LevelBeforeBrockRepeat, MSGBOX_NPC
 	end
 
 PewterCity_PokemonCenter_1F_EventScript_GBAKid1::

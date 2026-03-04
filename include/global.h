@@ -756,6 +756,30 @@ struct ExternalEventFlags
 
 } __attribute__((packed));/*size = 0x15*/
 
+struct CorpseRunPartySnapshot
+{
+    u16 species;
+    u8 level;
+    u8 hpPercent;
+    u32 personality;
+};
+
+struct CorpseRunSaveData
+{
+    u8 state;
+    bool8 rewardSuppressed;
+    bool8 trainerOverride;
+    bool8 markerSpawned;
+    u8 markerMapGroup;
+    u8 markerMapNum;
+    s16 markerX;
+    s16 markerY;
+    s8 markerElevation;
+    u8 partyCount;
+    struct CorpseRunPartySnapshot partySnapshot[PARTY_SIZE];
+    u8 reserved[336];
+};
+
 struct SaveBlock1
 {
     /*0x0000*/ struct Coords16 pos;
@@ -806,7 +830,7 @@ struct SaveBlock1
     /*0x30D0*/ struct Roamer roamer;
     /*0x30EC*/ struct EnigmaBerry enigmaBerry;
     /*0x3120*/ struct MysteryGiftSave mysteryGift;
-    /*0x348C*/ u8 unused_348C[400];
+    /*0x348C*/ struct CorpseRunSaveData corpseRun;
     /*0x361C*/ struct RamScript ramScript;
     /*0x3A08*/ struct RecordMixingGift recordMixingGift; // unused
     /*0x3A18*/ u8 seen2[DEX_FLAGS_NO];

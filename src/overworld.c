@@ -3,6 +3,7 @@
 #include "bg_regs.h"
 #include "cable_club.h"
 #include "credits.h"
+#include "corpse_run.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -256,6 +257,10 @@ void CorpseRunInitialization(void)
         RemoveMoney(&gSaveBlock1Ptr->money, ComputeWhiteOutMoneyLoss());
         HealPlayerParty();
         Overworld_SetWhiteoutRespawnPoint();
+    }
+    else
+    {
+        CorpseRun_HandlePlayerDefeat();
     }
 
     Overworld_ResetStateAfterWhitingOut();
@@ -1473,6 +1478,9 @@ void CB1_Overworld(void)
 
 static void OverworldBasic(void)
 {
+    if (IsCorpseRunFeatureEnabled())
+        CorpseRun_TryRecoverByTouch();
+
     ScriptContext_RunScript();
     RunTasks();
     AnimateSprites();
@@ -1587,6 +1595,8 @@ void CB2_LoadMap(void)
 static void CB2_LoadMap2(void)
 {
     DoMapLoadLoop(&gMain.state);
+    if (IsCorpseRunFeatureEnabled())
+        CorpseRun_OnMapEnter();
     if (QuestLog_ShouldEndSceneOnMapChange() == TRUE)
     {
         QuestLog_AdvancePlayhead_();
@@ -1712,6 +1722,10 @@ void CB2_ContinueSavedGame(void)
     UnlockPlayerFieldControls();
     gFieldCallback2 = NULL;
     gExitStairsMovementDisabled = TRUE;
+    if (IsCorpseRunFeatureEnabled())
+        CorpseRun_OnMapEnter();
+    else
+        CorpseRun_ResetSaveData();
     if (UseContinueGameWarp() == TRUE)
     {
         ClearContinueGameWarpStatus();

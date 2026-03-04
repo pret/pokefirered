@@ -1168,17 +1168,8 @@ bool8 HandleFaintedMonActions(void)
                  && !(gBattleStruct->givenExpMons & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBattlerId]])
                  && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBattlerId]))
                 {
-                    if (!CorpseRun_CanGainExpFromCurrentBattle())
-                    {
-#ifndef NDEBUG
-                        DebugPrintf("CorpseRun: suppressed EXP grant in battleType=0x%08x\n", gBattleTypeFlags);
-#endif
-                        gBattleStruct->faintedActionsState = 2;
-                        return TRUE;
-                    }
-#ifndef NDEBUG
-                    AGB_ASSERT(!CorpseRun_IsActive());
-#endif
+                    // BattleScript_GiveExp is now the centralized EXP->Souls path.
+                    // It no longer grants direct battle EXP to party Pokémon.
                     BattleScriptExecute(BattleScript_GiveExp);
                     gBattleStruct->faintedActionsState = 2;
                     return TRUE;

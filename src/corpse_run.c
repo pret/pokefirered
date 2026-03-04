@@ -15,6 +15,7 @@
 
 #define CORPSE_RUN_PAYLOAD_OFFSET offsetof(struct CorpseRunSaveData, state)
 #define CORPSE_RUN_MAX_PARTY_COUNT PARTY_SIZE
+#define CORPSE_RUN_RECOVERY_HP_PERCENT 33
 
 STATIC_ASSERT(sizeof(struct CorpseRunSaveData) == 400, CorpseRunSaveDataSize);
 
@@ -301,6 +302,34 @@ static void CorpseRun_SerializeParty(void)
     }
 }
 
+static void CorpseRun_ApplyRecoveryHpToParty(void)
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+        u16 maxHp;
+        u16 hp;
+
+        if (species == SPECIES_NONE)
+            continue;
+
+        if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            continue;
+
+        maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP);
+        if (maxHp == 0)
+            continue;
+
+        hp = (maxHp * CORPSE_RUN_RECOVERY_HP_PERCENT) / 100;
+        if (hp == 0)
+            hp = 1;
+
+        SetMonData(&gPlayerParty[i], MON_DATA_HP, &hp);
+    }
+}
+
 static void CorpseRun_SpawnMarkerAtPlayer(void)
 {
     gSaveBlock1Ptr->corpseRun.markerSpawned = TRUE;
@@ -359,6 +388,8 @@ void CorpseRun_ResetSaveData(void)
 
 void CorpseRun_HandlePlayerDefeat(void)
 {
+    u8 i;
+
     if (gSaveBlock1Ptr->corpseRun.state == CR_ACTIVE)
     {
         OnSecondDeathDuringCorpseRun();
@@ -374,6 +405,9 @@ void CorpseRun_HandlePlayerDefeat(void)
     gSaveBlock1Ptr->corpseRun.droppedSouls = ComputeWhiteOutMoneyLoss();
 
     CorpseRun_SerializeParty();
+    for (i = 0; i < gSaveBlock1Ptr->corpseRun.partyCount; i++)
+        gSaveBlock1Ptr->corpseRun.partySnapshot[i].hpPercent = 0;
+
     CorpseRun_SpawnMarkerAtPlayer();
     CorpseRun_SetState(CR_ACTIVE);
     CorpseRun_FinalizeForSave();
@@ -391,6 +425,7 @@ void CorpseRun_TryRecoverByTouch(void)
     if (gSaveBlock1Ptr->pos.x == gSaveBlock1Ptr->corpseRun.markerX
      && gSaveBlock1Ptr->pos.y == gSaveBlock1Ptr->corpseRun.markerY)
     {
+        CorpseRun_ApplyRecoveryHpToParty();
         gSaveBlock1Ptr->corpseRun.droppedSouls = 0;
         CorpseRun_DespawnMarker();
         CorpseRun_SetState(CR_RECOVERED);

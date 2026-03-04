@@ -3263,16 +3263,19 @@ static void Cmd_getexp(void)
                         gBattleStruct->expGetterBattlerId = 0;
                     }
 
-                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId);
-                    // buffer 'gained' or 'gained a boosted'
-                    PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
-                    PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
+                    // Automatic battle EXP is globally disabled.
+                    // Bank the EXP value that would have been granted into Souls instead.
+                    if (gBattleMoveDamage != 0 && CorpseRun_CanGainCurrencyFromCurrentBattle())
+                        AddMoney(&gSaveBlock1Ptr->money, gBattleMoveDamage);
 
-                    PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                    // Prevent case 5 from routing into case 3 (direct EXP grant).
+                    // Souls banking above is the only automatic battle progression.
+                    gBattleMoveDamage = 0;
+
                     MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
                 }
                 gBattleStruct->sentInPokes >>= 1;
-                gBattleScripting.getexpState++;
+                gBattleScripting.getexpState = 5;
             }
         }
         break;

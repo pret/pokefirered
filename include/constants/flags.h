@@ -1389,7 +1389,7 @@
 #define FLAG_SYS_RESET_RTC_ENABLE                                   (SYS_FLAGS + 0x37)
 #define FLAG_0x838                                                  (SYS_FLAGS + 0x38) // Set, never read
 #define FLAG_SYS_MYSTERY_GIFT_ENABLED                               (SYS_FLAGS + 0x39)
-#define FLAG_0x83A                                                  (SYS_FLAGS + 0x3A)
+#define FLAG_SYS_CORPSE_RUN_EXPLAINED                             (SYS_FLAGS + 0x3A)
 #define FLAG_SYS_RIBBON_GET                                         (SYS_FLAGS + 0x3B)
 #define FLAG_SYS_SAW_HELP_SYSTEM_INTRO                              (SYS_FLAGS + 0x3C)
 #define FLAG_0x83D                                                  (SYS_FLAGS + 0x3D)

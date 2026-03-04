@@ -47,13 +47,27 @@ EventScript_FieldWhiteOut::
 	end
 
 EventScript_FieldWhiteOutNoMoney::
-	msgbox Text_WhitedOut
+	goto_if_set FLAG_SYS_CORPSE_RUN_EXPLAINED, EventScript_FieldWhiteOutNoMoneyRepeat
+	msgbox Text_WhitedOutCorpseRunFirst
+	setflag FLAG_SYS_CORPSE_RUN_EXPLAINED
+	goto EventScript_FieldWhiteOutFade
+	end
+
+EventScript_FieldWhiteOutNoMoneyRepeat::
+	msgbox Text_WhitedOutCorpseRunRepeat
 	goto EventScript_FieldWhiteOutFade
 	end
 
 EventScript_FieldWhiteOutHasMoney::
 	special OverworldWhiteOutGetMoneyLoss
-	msgbox Text_WhitedOutLostMoney
+	goto_if_set FLAG_SYS_CORPSE_RUN_EXPLAINED, EventScript_FieldWhiteOutHasMoneyRepeat
+	msgbox Text_WhitedOutCorpseRunFirst
+	setflag FLAG_SYS_CORPSE_RUN_EXPLAINED
+	goto EventScript_FieldWhiteOutFade
+	end
+
+EventScript_FieldWhiteOutHasMoneyRepeat::
+	msgbox Text_WhitedOutCorpseRunRepeat
 	goto EventScript_FieldWhiteOutFade
 	end
 

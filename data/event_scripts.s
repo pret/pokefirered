@@ -916,6 +916,14 @@ Text_PkmnCenterNurse_LevelUpSuccess::
 Text_PkmnCenterNurse_CantLevel::
 	.string "That POKéMON can't level up.$"
 
+Text_PkmnCenterNurse_LevelCapReached::
+	.string "That POKéMON is already at the\n"
+	.string "current level cap.$"
+
+Text_PkmnCenterNurse_PartySpreadViolation::
+	.string "That level-up would widen your\n"
+	.string "party spread too much.$"
+
 	.include "data/text/surf.inc"
 
 @ Unused, from R/S

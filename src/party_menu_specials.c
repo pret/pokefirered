@@ -8,6 +8,7 @@
 #include "pokemon_summary_screen.h"
 #include "event_data.h"
 #include "battle.h"
+#include "corpse_run.h"
 #include "money.h"
 #include "pokemon.h"
 #include "string_util.h"
@@ -15,6 +16,15 @@
 #include "constants/moves.h"
 
 static void Task_ChoosePartyMon(u8 taskId);
+
+enum ManualLevelUpResult
+{
+    MANUAL_LEVEL_UP_SUCCESS,
+    MANUAL_LEVEL_UP_FAIL_CANT_LEVEL,
+    MANUAL_LEVEL_UP_FAIL_NOT_ENOUGH_SOULS,
+    MANUAL_LEVEL_UP_FAIL_LEVEL_CAP,
+    MANUAL_LEVEL_UP_FAIL_PARTY_SPREAD,
+};
 
 void ChoosePartyMon(void)
 {
@@ -113,7 +123,50 @@ void IsSelectedMonEgg(void)
 }
 
 
-static bool8 CanLevelUpMonWithSouls(u8 partyId, u32 *requiredSouls, u32 *nextLevelExp)
+static u8 GetManualLevelCap(void)
+{
+    u16 levelCap = CorpseRun_GetSalvageLevelCap() + 10;
+
+    if (levelCap > MAX_LEVEL)
+        levelCap = MAX_LEVEL;
+
+    return levelCap;
+}
+
+static bool8 DoesNextPurchasedLevelBreakPartySpread(u8 leveledPartyId)
+{
+    s16 i;
+    bool8 foundMon = FALSE;
+    u8 minLevel = MAX_LEVEL;
+    u8 maxLevel = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *partyMon = &gPlayerParty[i];
+        u16 species = GetMonData(partyMon, MON_DATA_SPECIES);
+        u8 level;
+
+        if (species == SPECIES_NONE || GetMonData(partyMon, MON_DATA_IS_EGG) == TRUE)
+            continue;
+
+        level = GetMonData(partyMon, MON_DATA_LEVEL);
+        if (i == leveledPartyId)
+            level++;
+
+        if (!foundMon || level < minLevel)
+            minLevel = level;
+        if (!foundMon || level > maxLevel)
+            maxLevel = level;
+        foundMon = TRUE;
+    }
+
+    if (!foundMon)
+        return FALSE;
+
+    return (maxLevel - minLevel) > 5;
+}
+
+static u16 CanLevelUpMonWithSouls(u8 partyId, u32 *requiredSouls, u32 *nextLevelExp)
 {
     struct Pokemon *mon;
     u16 species;
@@ -122,15 +175,19 @@ static bool8 CanLevelUpMonWithSouls(u8 partyId, u32 *requiredSouls, u32 *nextLev
     u32 targetExp;
 
     if (partyId >= PARTY_SIZE)
-        return FALSE;
+        return MANUAL_LEVEL_UP_FAIL_CANT_LEVEL;
 
     mon = &gPlayerParty[partyId];
     if (GetMonData(mon, MON_DATA_IS_EGG) == TRUE)
-        return FALSE;
+        return MANUAL_LEVEL_UP_FAIL_CANT_LEVEL;
 
     level = GetMonData(mon, MON_DATA_LEVEL);
     if (level >= MAX_LEVEL)
-        return FALSE;
+        return MANUAL_LEVEL_UP_FAIL_CANT_LEVEL;
+    if (level >= GetManualLevelCap())
+        return MANUAL_LEVEL_UP_FAIL_LEVEL_CAP;
+    if (DoesNextPurchasedLevelBreakPartySpread(partyId))
+        return MANUAL_LEVEL_UP_FAIL_PARTY_SPREAD;
 
     species = GetMonData(mon, MON_DATA_SPECIES);
     currentExp = GetMonData(mon, MON_DATA_EXP);
@@ -139,20 +196,22 @@ static bool8 CanLevelUpMonWithSouls(u8 partyId, u32 *requiredSouls, u32 *nextLev
     if (nextLevelExp != NULL)
         *nextLevelExp = targetExp;
     *requiredSouls = targetExp - currentExp;
-    return TRUE;
+    return MANUAL_LEVEL_UP_SUCCESS;
 }
 
 u16 PkmnCenterLevelUp_PrepareSelection(void)
 {
     u32 requiredSouls = 0;
+    u16 result;
 
-    if (!CanLevelUpMonWithSouls(gSpecialVar_0x8004, &requiredSouls, NULL))
-        return FALSE;
+    result = CanLevelUpMonWithSouls(gSpecialVar_0x8004, &requiredSouls, NULL);
+    if (result != MANUAL_LEVEL_UP_SUCCESS)
+        return result;
 
     ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->money, STR_CONV_MODE_LEFT_ALIGN, 10);
     ConvertIntToDecimalStringN(gStringVar2, requiredSouls, STR_CONV_MODE_LEFT_ALIGN, 10);
     gSpecialVar_0x8005 = requiredSouls;
-    return TRUE;
+    return MANUAL_LEVEL_UP_SUCCESS;
 }
 
 u16 PkmnCenterLevelUp_Purchase(void)
@@ -162,12 +221,14 @@ u16 PkmnCenterLevelUp_Purchase(void)
     bool8 firstMove;
     u32 requiredSouls = 0;
     u32 nextLevelExp = 0;
+    u16 result;
 
-    if (!CanLevelUpMonWithSouls(gSpecialVar_0x8004, &requiredSouls, &nextLevelExp))
-        return FALSE;
+    result = CanLevelUpMonWithSouls(gSpecialVar_0x8004, &requiredSouls, &nextLevelExp);
+    if (result != MANUAL_LEVEL_UP_SUCCESS)
+        return result;
 
     if (!IsEnoughMoney(&gSaveBlock1Ptr->money, requiredSouls))
-        return FALSE;
+        return MANUAL_LEVEL_UP_FAIL_NOT_ENOUGH_SOULS;
 
     RemoveMoney(&gSaveBlock1Ptr->money, requiredSouls);
 
@@ -183,5 +244,5 @@ u16 PkmnCenterLevelUp_Purchase(void)
             DeleteFirstMoveAndGiveMoveToMon(mon, gMoveToLearn);
     }
 
-    return TRUE;
+    return MANUAL_LEVEL_UP_SUCCESS;
 }

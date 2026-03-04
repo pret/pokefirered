@@ -515,6 +515,8 @@ bool8 CorpseRun_IsSalvageCatchAllowed(const struct Pokemon *mon)
         return TRUE;
 
     caughtLevel = GetMonData(mon, MON_DATA_LEVEL);
+    // Salvage gating is intentionally an upper-bound-only policy.
+    // Any encounter at or below the dynamic cap is valid.
     return caughtLevel <= CorpseRun_GetSalvageLevelCap();
 }
 

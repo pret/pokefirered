@@ -766,18 +766,44 @@ struct CorpseRunPartySnapshot
 
 struct CorpseRunSaveData
 {
+    // Binary layout contract:
+    // - magic/version identify the schema.
+    // - payloadLength/payloadChecksum cover bytes in [state..partySnapshot].
+    // - New fields must be appended before reserved and guarded by version.
+    u32 magic;
+    u8 version;
     u8 state;
     bool8 rewardSuppressed;
     bool8 trainerOverride;
+    u16 payloadLength;
+    u16 payloadChecksum;
+
+    // Death-site metadata
+    u8 deathMapGroup;
+    u8 deathMapNum;
+    s16 deathX;
+    s16 deathY;
+    s8 deathElevation;
+
+    // Corpse marker metadata
     bool8 markerSpawned;
     u8 markerMapGroup;
     u8 markerMapNum;
     s16 markerX;
     s16 markerY;
     s8 markerElevation;
+    u8 markerStyle;
+    u16 markerMapSection;
+    u32 markerSpawnCounter;
+
+    // Run economy payload
+    u32 droppedSouls;
+
+    // Stored party payload
     u8 partyCount;
     struct CorpseRunPartySnapshot partySnapshot[PARTY_SIZE];
-    u8 reserved[336];
+
+    u8 reserved[312];
 };
 
 struct SaveBlock1

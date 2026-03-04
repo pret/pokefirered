@@ -5374,6 +5374,14 @@ static void Cmd_getmoneyreward(void)
                     lastMonLevel = party4[gTrainers[gTrainerBattleOpponent_A].partySize - 1].lvl;
                 }
                 break;
+            case (F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM | F_TRAINER_PARTY_CUSTOM_ABILITY):
+                {
+                    const struct TrainerMonItemCustomMovesAbility *party5;
+
+                    party5 = gTrainers[gTrainerBattleOpponent_A].party.ItemCustomMovesAbility;
+                    lastMonLevel = party5[gTrainers[gTrainerBattleOpponent_A].partySize - 1].lvl;
+                }
+                break;
             }
             for (; gTrainerMoneyTable[i].classId != 0xFF; i++)
             {

@@ -133,9 +133,12 @@ PalletTown_ProfessorOaksLab_Text_OakCanReachNextTownWithMon::
     .string "able to reach the next town.$"
 
 PalletTown_ProfessorOaksLab_Text_OakBattleMonForItToGrow::
-    .string "OAK: {PLAYER}, raise your young\n"
-    .string "POKéMON by making it battle.\p"
-    .string "It has to battle for it to grow.$"
+    .string "OAK: {PLAYER}, battles release\n"
+    .string "SOULS from your foes.\p"
+    .string "POKéMON do not grow stronger\n"
+    .string "automatically from battle.\p"
+    .string "Focus and spend those SOULS at a\n"
+    .string "POKéMON CENTER to help them grow.$"
 
 PalletTown_ProfessorOaksLab_Text_OakHaveSomethingForMe::
     .string "OAK: Oh, {PLAYER}!\n"
@@ -354,4 +357,3 @@ PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex::
     .string "I think I'll try looking around\n"
     .string "ONE ISLAND first…\p"
     .string "Anyways, I'm outta here!$"
-

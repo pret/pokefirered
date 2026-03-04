@@ -805,9 +805,13 @@ struct CorpseRunSaveData
 
     // Emergency salvage mode payload
     bool8 salvageActive;
-    bool8 salvageWarpToHealPending;
+    u16 salvageBallsRemaining;
+    bool8 salvageCatchConsumed;
+    u16 respawnMapId;
+    s16 respawnX;
+    s16 respawnY;
 
-    u8 reserved[310];
+    u8 reserved[302];
 };
 
 struct SaveBlock1

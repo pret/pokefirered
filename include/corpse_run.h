@@ -39,6 +39,7 @@ bool8 CorpseRun_CanReceiveItemDrops(void);
 bool8 CorpseRun_ShouldUseSafariBattle(void);
 u8 CorpseRun_GetSalvageLevelCap(void);
 bool8 CorpseRun_IsSalvageCatchAllowed(const struct Pokemon *mon);
+void CorpseRun_CommitSalvageCatchState(void);
 void CorpseRun_CompleteSalvage(void);
 
 #endif // GUARD_CORPSE_RUN_H

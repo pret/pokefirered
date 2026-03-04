@@ -9660,6 +9660,7 @@ static void Cmd_givecaughtmon(void)
             return;
         }
 
+        CorpseRun_CommitSalvageCatchState();
         ZeroPlayerPartyMons();
         CopyMon(&gPlayerParty[0], caughtMon, sizeof(*caughtMon));
         CalculatePlayerPartyCount();

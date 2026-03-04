@@ -7,6 +7,7 @@
 #include "battle.h"
 #include "battle_setup.h"
 #include "safari_zone.h"
+#include "field_fadetransition.h"
 
 #include "constants/battle_setup.h"
 #include "constants/opponents.h"
@@ -36,6 +37,75 @@ static const u8 sGymAceLevelByBadgeCount[] =
 };
 
 #define ELITE_FOUR_1_ACE_LEVEL 56
+
+static bool8 CorpseRun_IsMapInSalvageSafariScope(u8 mapGroup, u8 mapNum)
+{
+    u16 i;
+    static const u16 sValidSalvageMaps[] =
+    {
+        MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE,
+        MAP_SAFARI_ZONE_CENTER,
+        MAP_SAFARI_ZONE_EAST,
+        MAP_SAFARI_ZONE_NORTH,
+        MAP_SAFARI_ZONE_WEST,
+        MAP_SAFARI_ZONE_CENTER_REST_HOUSE,
+        MAP_SAFARI_ZONE_EAST_REST_HOUSE,
+        MAP_SAFARI_ZONE_NORTH_REST_HOUSE,
+        MAP_SAFARI_ZONE_WEST_REST_HOUSE,
+        MAP_SAFARI_ZONE_SECRET_HOUSE,
+    };
+
+    for (i = 0; i < NELEMS(sValidSalvageMaps); i++)
+    {
+        if (mapGroup == MAP_GROUP(sValidSalvageMaps[i]) && mapNum == MAP_NUM(sValidSalvageMaps[i]))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void CorpseRun_WarpToMap(u16 map, s8 x, s8 y)
+{
+    SetWarpDestination(MAP_GROUP(map), MAP_NUM(map), WARP_ID_NONE, x, y);
+    WarpIntoMap();
+    gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+    SetMainCallback2(CB2_LoadMap);
+}
+
+static void CorpseRun_WarpToLastCenter(void)
+{
+    SetWarpDestinationToLastHealLocation();
+    WarpIntoMap();
+    gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+    SetMainCallback2(CB2_LoadMap);
+}
+
+static void CorpseRun_InitSalvageRespawnCheckpoint(void)
+{
+    gSaveBlock1Ptr->corpseRun.respawnMapId = (gSaveBlock1Ptr->lastHealLocation.mapGroup << 8) | gSaveBlock1Ptr->lastHealLocation.mapNum;
+    gSaveBlock1Ptr->corpseRun.respawnX = gSaveBlock1Ptr->lastHealLocation.x;
+    gSaveBlock1Ptr->corpseRun.respawnY = gSaveBlock1Ptr->lastHealLocation.y;
+}
+
+static void CorpseRun_ReconcileSalvageRuntimeState(void)
+{
+    if (gSaveBlock1Ptr->corpseRun.salvageBallsRemaining == 0)
+        gSaveBlock1Ptr->corpseRun.salvageBallsRemaining = 30;
+
+    SetSafariZoneFlag();
+    gNumSafariBalls = gSaveBlock1Ptr->corpseRun.salvageBallsRemaining;
+    if (gSafariZoneStepCounter == 0)
+        gSafariZoneStepCounter = 600;
+}
+
+static void CorpseRun_ForceSalvageExitAndClear(void)
+{
+    ExitSafariMode();
+    gSaveBlock1Ptr->corpseRun.salvageActive = FALSE;
+    gSaveBlock1Ptr->corpseRun.salvageBallsRemaining = 0;
+    gSaveBlock1Ptr->corpseRun.salvageCatchConsumed = FALSE;
+    CorpseRun_WarpToLastCenter();
+}
 
 static bool8 CorpseRun_IsCriticalScriptedTrainer(u16 trainerId)
 {
@@ -265,11 +335,12 @@ static void OnSecondDeathDuringCorpseRun(void)
     CorpseRun_SetState(CR_FAILED);
     CorpseRun_DespawnMarker();
     gSaveBlock1Ptr->corpseRun.salvageActive = TRUE;
+    gSaveBlock1Ptr->corpseRun.salvageCatchConsumed = FALSE;
+    gSaveBlock1Ptr->corpseRun.salvageBallsRemaining = 30;
+    CorpseRun_InitSalvageRespawnCheckpoint();
 
-    SetSafariZoneFlag();
-    gNumSafariBalls = 30;
-    gSafariZoneStepCounter = 600;
-    SetWarpDestination(MAP_GROUP(MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE), MAP_NUM(MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE), -1, 4, 4);
+    CorpseRun_ReconcileSalvageRuntimeState();
+    SetWarpDestination(MAP_GROUP(MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE), MAP_NUM(MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE), WARP_ID_NONE, 4, 4);
 }
 
 void CorpseRun_ResetSaveData(void)
@@ -277,7 +348,11 @@ void CorpseRun_ResetSaveData(void)
     CpuFill32(0, &gSaveBlock1Ptr->corpseRun, sizeof(gSaveBlock1Ptr->corpseRun));
     gSaveBlock1Ptr->corpseRun.state = CR_OFF;
     gSaveBlock1Ptr->corpseRun.salvageActive = FALSE;
-    gSaveBlock1Ptr->corpseRun.salvageWarpToHealPending = FALSE;
+    gSaveBlock1Ptr->corpseRun.salvageBallsRemaining = 0;
+    gSaveBlock1Ptr->corpseRun.salvageCatchConsumed = FALSE;
+    gSaveBlock1Ptr->corpseRun.respawnMapId = MAP_UNDEFINED;
+    gSaveBlock1Ptr->corpseRun.respawnX = 0;
+    gSaveBlock1Ptr->corpseRun.respawnY = 0;
     CorpseRun_DespawnMarker();
     CorpseRun_FinalizeForSave();
 }
@@ -336,8 +411,32 @@ void CorpseRun_OnMapEnter(void)
     if (gSaveBlock1Ptr->corpseRun.state == CR_ACTIVE && gSaveBlock1Ptr->corpseRun.markerSpawned)
         CorpseRun_TryRecoverByTouch();
 
-    if (gSaveBlock1Ptr->corpseRun.salvageWarpToHealPending)
-        gSaveBlock1Ptr->corpseRun.salvageWarpToHealPending = FALSE;
+    if (gSaveBlock1Ptr->corpseRun.salvageActive)
+    {
+        if (CalculatePlayerPartyCount() > 0)
+        {
+            CorpseRun_ForceSalvageExitAndClear();
+        }
+        else if (gSaveBlock1Ptr->corpseRun.salvageCatchConsumed)
+        {
+            CorpseRun_ForceSalvageExitAndClear();
+        }
+        else
+        {
+            if (!CorpseRun_IsMapInSalvageSafariScope(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
+                CorpseRun_WarpToMap(MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 4, 4);
+
+            CorpseRun_ReconcileSalvageRuntimeState();
+        }
+    }
+    else if (gSaveBlock1Ptr->corpseRun.salvageCatchConsumed)
+    {
+        CorpseRun_ForceSalvageExitAndClear();
+    }
+    else
+    {
+        gSaveBlock1Ptr->corpseRun.salvageBallsRemaining = 0;
+    }
 
     CorpseRun_FinalizeForSave();
 }
@@ -384,12 +483,18 @@ bool8 CorpseRun_IsSalvageCatchAllowed(const struct Pokemon *mon)
     return caughtLevel <= CorpseRun_GetSalvageLevelCap();
 }
 
+void CorpseRun_CommitSalvageCatchState(void)
+{
+    gSaveBlock1Ptr->corpseRun.salvageCatchConsumed = TRUE;
+    gSaveBlock1Ptr->corpseRun.salvageActive = FALSE;
+    CorpseRun_FinalizeForSave();
+}
+
 void CorpseRun_CompleteSalvage(void)
 {
+    gSaveBlock1Ptr->corpseRun.salvageBallsRemaining = 0;
     ExitSafariMode();
-    gSaveBlock1Ptr->corpseRun.salvageActive = FALSE;
-    gSaveBlock1Ptr->corpseRun.salvageWarpToHealPending = TRUE;
-    SetWarpDestinationToLastHealLocation();
+    CorpseRun_WarpToLastCenter();
     CorpseRun_FinalizeForSave();
 }
 

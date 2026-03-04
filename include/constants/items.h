@@ -234,9 +234,9 @@
 #define ITEM_METAL_POWDER 223
 #define ITEM_THICK_CLUB 224
 #define ITEM_STICK 225
-#define ITEM_0E2 226
-#define ITEM_0E3 227
-#define ITEM_0E4 228
+#define ITEM_HEAT_ROCK 226
+#define ITEM_LIFE_ORB 227
+#define ITEM_LIGHT_CLAY 228
 #define ITEM_0E5 229
 #define ITEM_0E6 230
 #define ITEM_0E7 231

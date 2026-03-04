@@ -6436,8 +6436,10 @@ static void Cmd_setreflect(void)
     }
     else
     {
+        u8 holdEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+
         gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_REFLECT;
-        gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectTimer = 5;
+        gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectTimer = (holdEffect == HOLD_EFFECT_LIGHT_CLAY) ? 8 : 5;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectBattlerId = gBattlerAttacker;
 
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && CountAliveMonsInBattle(BATTLE_ALIVE_ATK_SIDE) == 2)
@@ -7116,8 +7118,10 @@ static void Cmd_setlightscreen(void)
     }
     else
     {
+        u8 holdEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+
         gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_LIGHTSCREEN;
-        gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenTimer = 5;
+        gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenTimer = (holdEffect == HOLD_EFFECT_LIGHT_CLAY) ? 8 : 5;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenBattlerId = gBattlerAttacker;
 
         if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && CountAliveMonsInBattle(BATTLE_ALIVE_ATK_SIDE) == 2)
@@ -8415,9 +8419,11 @@ static void Cmd_setsunny(void)
     }
     else
     {
+        u8 holdEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+
         gBattleWeather = B_WEATHER_SUN_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;
-        gWishFutureKnock.weatherDuration = 5;
+        gWishFutureKnock.weatherDuration = (holdEffect == HOLD_EFFECT_HEAT_ROCK) ? 8 : 5;
     }
 
     gBattlescriptCurrInstr++;

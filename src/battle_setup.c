@@ -932,6 +932,9 @@ static void CB2_EndTrainerBattle(void)
 
     if (sTrainerBattleMode == TRAINER_BATTLE_EARLY_RIVAL)
     {
+        // Always consume this one-off scripted encounter, even on losses that white out.
+        SetBattledTrainerFlag();
+
         if (IsPlayerDefeated(gBattleOutcome) == TRUE)
         {
             gSpecialVar_Result = TRUE;
@@ -952,20 +955,14 @@ static void CB2_EndTrainerBattle(void)
             }
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             if (!suppressSideEffects)
-            {
-                SetBattledTrainerFlag();
                 QuestLogEvents_HandleEndTrainerBattle();
-            }
         }
         else
         {
             gSpecialVar_Result = FALSE;
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             if (!suppressSideEffects)
-            {
-                SetBattledTrainerFlag();
                 QuestLogEvents_HandleEndTrainerBattle();
-            }
         }
 
     }

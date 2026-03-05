@@ -16,6 +16,12 @@
 #define CORPSE_RUN_PAYLOAD_OFFSET offsetof(struct CorpseRunSaveData, state)
 #define CORPSE_RUN_MAX_PARTY_COUNT PARTY_SIZE
 #define CORPSE_RUN_RECOVERY_HP_PERCENT 33
+#define CORPSE_RUN_TRAINER_HP_BASE 40
+#define CORPSE_RUN_TRAINER_HP_PER_BADGE 8
+#define CORPSE_RUN_TRAINER_HP_MIN 40
+#define CORPSE_RUN_TRAINER_HP_MAX 120
+#define CORPSE_RUN_TRAINER_DAMAGE_BASE 6
+#define CORPSE_RUN_TRAINER_DAMAGE_CAP 20
 
 STATIC_ASSERT(sizeof(struct CorpseRunSaveData) == 400, CorpseRunSaveDataSize);
 
@@ -38,6 +44,8 @@ static const u8 sGymAceLevelByBadgeCount[] =
 };
 
 #define ELITE_FOUR_1_ACE_LEVEL 56
+
+static u8 CorpseRun_GetBadgeCount(void);
 
 static bool8 CorpseRun_IsMapInSalvageSafariScope(u8 mapGroup, u8 mapNum)
 {
@@ -268,6 +276,11 @@ static void CorpseRun_SetState(u8 newState)
     case CR_OFF:
         gSaveBlock1Ptr->corpseRun.rewardSuppressed = FALSE;
         gSaveBlock1Ptr->corpseRun.trainerOverride = FALSE;
+        if (newState != CR_ACTIVE)
+        {
+            gSaveBlock1Ptr->corpseRun.trainerHpMax = 0;
+            gSaveBlock1Ptr->corpseRun.trainerHpCurrent = 0;
+        }
         break;
     }
 }
@@ -366,6 +379,8 @@ static void OnSecondDeathDuringCorpseRun(void)
     gSaveBlock1Ptr->corpseRun.salvageActive = TRUE;
     gSaveBlock1Ptr->corpseRun.salvageCatchConsumed = FALSE;
     gSaveBlock1Ptr->corpseRun.salvageBallsRemaining = 30;
+    gSaveBlock1Ptr->corpseRun.trainerHpMax = 0;
+    gSaveBlock1Ptr->corpseRun.trainerHpCurrent = 0;
     CorpseRun_InitSalvageRespawnCheckpoint();
 
     CorpseRun_ReconcileSalvageRuntimeState();
@@ -379,6 +394,8 @@ void CorpseRun_ResetSaveData(void)
     gSaveBlock1Ptr->corpseRun.salvageActive = FALSE;
     gSaveBlock1Ptr->corpseRun.salvageBallsRemaining = 0;
     gSaveBlock1Ptr->corpseRun.salvageCatchConsumed = FALSE;
+    gSaveBlock1Ptr->corpseRun.trainerHpMax = 0;
+    gSaveBlock1Ptr->corpseRun.trainerHpCurrent = 0;
     gSaveBlock1Ptr->corpseRun.respawnMapId = MAP_UNDEFINED;
     gSaveBlock1Ptr->corpseRun.respawnX = 0;
     gSaveBlock1Ptr->corpseRun.respawnY = 0;
@@ -410,6 +427,8 @@ void CorpseRun_HandlePlayerDefeat(void)
 
     CorpseRun_SpawnMarkerAtPlayer();
     CorpseRun_SetState(CR_ACTIVE);
+    gSaveBlock1Ptr->corpseRun.trainerHpMax = min(CORPSE_RUN_TRAINER_HP_MAX, max(CORPSE_RUN_TRAINER_HP_MIN, CORPSE_RUN_TRAINER_HP_BASE + (CorpseRun_GetBadgeCount() * CORPSE_RUN_TRAINER_HP_PER_BADGE)));
+    gSaveBlock1Ptr->corpseRun.trainerHpCurrent = gSaveBlock1Ptr->corpseRun.trainerHpMax;
     CorpseRun_FinalizeForSave();
 }
 
@@ -427,6 +446,8 @@ void CorpseRun_TryRecoverByTouch(void)
     {
         CorpseRun_ApplyRecoveryHpToParty();
         gSaveBlock1Ptr->corpseRun.droppedSouls = 0;
+        gSaveBlock1Ptr->corpseRun.trainerHpMax = 0;
+        gSaveBlock1Ptr->corpseRun.trainerHpCurrent = 0;
         CorpseRun_DespawnMarker();
         CorpseRun_SetState(CR_RECOVERED);
         CorpseRun_FinalizeForSave();
@@ -536,6 +557,48 @@ void CorpseRun_CompleteSalvage(void)
 }
 
 
+
+void CorpseRun_FailActiveRunAndEnterSalvage(void)
+{
+    if (gSaveBlock1Ptr->corpseRun.state != CR_ACTIVE)
+        return;
+
+    OnSecondDeathDuringCorpseRun();
+    CorpseRun_FinalizeForSave();
+}
+
+void CorpseRun_ApplyTrainerDamageFromWild(u8 wildLevel)
+{
+    u16 damage;
+
+    if (gSaveBlock1Ptr->corpseRun.state != CR_ACTIVE)
+        return;
+
+    damage = CORPSE_RUN_TRAINER_DAMAGE_BASE + (wildLevel / 4);
+    if (damage < CORPSE_RUN_TRAINER_DAMAGE_BASE)
+        damage = CORPSE_RUN_TRAINER_DAMAGE_BASE;
+    if (damage > CORPSE_RUN_TRAINER_DAMAGE_CAP)
+        damage = CORPSE_RUN_TRAINER_DAMAGE_CAP;
+
+    if (gBattleStruct->safariBaitThrowCounter != 0)
+        damage = (damage * 3) / 4;
+    else if (gBattleStruct->safariRockThrowCounter != 0)
+        damage = (damage * 14) / 10;
+
+    if (damage == 0)
+        damage = 1;
+
+    if (damage >= gSaveBlock1Ptr->corpseRun.trainerHpCurrent)
+        gSaveBlock1Ptr->corpseRun.trainerHpCurrent = 0;
+    else
+        gSaveBlock1Ptr->corpseRun.trainerHpCurrent -= damage;
+
+    if (gSaveBlock1Ptr->corpseRun.trainerHpCurrent == 0)
+        CorpseRun_FailActiveRunAndEnterSalvage();
+    else
+        CorpseRun_FinalizeForSave();
+}
+
 bool8 CorpseRun_IsActive(void)
 {
     return gSaveBlock1Ptr->corpseRun.state == CR_ACTIVE;
@@ -578,7 +641,7 @@ bool8 CorpseRun_CanGainCurrencyFromCurrentBattle(void)
 
 bool8 CorpseRun_CanCaptureInCurrentBattle(void)
 {
-    return !CorpseRun_IsSalvageActive();
+    return !CorpseRun_IsActive() && !CorpseRun_IsSalvageActive();
 }
 
 bool8 CorpseRun_CanReceiveItemDrops(void)
@@ -588,7 +651,7 @@ bool8 CorpseRun_CanReceiveItemDrops(void)
 
 bool8 CorpseRun_ShouldUseSafariBattle(void)
 {
-    return GetSafariZoneFlag() || CorpseRun_IsSalvageActive();
+    return GetSafariZoneFlag() || CorpseRun_IsActive() || CorpseRun_IsSalvageActive();
 }
 
 bool8 CorpseRun_ShouldRunPostBattleScripts(void)

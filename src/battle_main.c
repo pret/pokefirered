@@ -4410,6 +4410,18 @@ static void HandleAction_WatchesCarefully(void)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MON_WATCHING;
         }
     }
+
+    if (CorpseRun_IsActive())
+    {
+        CorpseRun_ApplyTrainerDamageFromWild(gBattleMons[gBattlerAttacker].level);
+        if (!CorpseRun_IsActive())
+        {
+            gCurrentTurnActionNumber = gBattlersCount;
+            gBattleOutcome = B_OUTCOME_RAN;
+            return;
+        }
+    }
+
     gBattlescriptCurrInstr = gBattlescriptsForSafariActions[0];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }

@@ -807,11 +807,13 @@ struct CorpseRunSaveData
     bool8 salvageActive;
     u16 salvageBallsRemaining;
     bool8 salvageCatchConsumed;
+    u16 trainerHpMax;
+    u16 trainerHpCurrent;
     u16 respawnMapId;
     s16 respawnX;
     s16 respawnY;
 
-    u8 reserved[302];
+    u8 reserved[298];
 };
 
 struct SaveBlock1

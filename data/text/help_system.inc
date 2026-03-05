@@ -1296,8 +1296,8 @@ Help_Text_DefineAbility::
 
 Help_Text_DefineMoney::
 	.string "Whenever you win a battle against a\n"
-	.string "TRAINER, you are given prize money.\l"
-	.string "Save up your prize money so you can\l"
+	.string "TRAINER, you are given souls.\l"
+	.string "Save up your souls so you can\l"
 	.string "enjoy shopping at POKéMON MARTS!$"
 
 Help_Text_DefineMoveType::
@@ -1495,8 +1495,8 @@ Help_Text_DefineIDNo2::
 
 Help_Text_DefineMoney2::
 	.string "Whenever you win a battle against a\n"
-	.string "TRAINER, you are given prize money.\l"
-	.string "Save up your prize money so you can\l"
+	.string "TRAINER, you are given souls.\l"
+	.string "Save up your souls so you can\l"
 	.string "enjoy shopping at POKéMON MARTS!$"
 
 Help_Text_DefineBadges2::

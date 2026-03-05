@@ -604,6 +604,11 @@ bool8 CorpseRun_IsActive(void)
     return gSaveBlock1Ptr->corpseRun.state == CR_ACTIVE;
 }
 
+bool8 CorpseRun_IsFieldMovementEscapeDisallowed(void)
+{
+    return gSaveBlock1Ptr->corpseRun.state == CR_ACTIVE;
+}
+
 bool8 CorpseRun_IsSalvageActive(void)
 {
     return gSaveBlock1Ptr->corpseRun.salvageActive;

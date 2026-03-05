@@ -277,6 +277,7 @@ extern const u8 gText_CurrentIsTooFast[];
 extern const u8 gText_EnjoyCycling[];
 extern const u8 gText_InUseAlready_PM[];
 extern const u8 gText_CantUseHere[];
+extern const u8 gText_CorpseRun_EscapeDisallowed[];
 extern const u8 gText_NoPokemonForBattle[];
 extern const u8 gText_ChoosePokemon2[];
 extern const u8 gText_NotEnoughHp[];

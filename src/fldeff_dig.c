@@ -1,5 +1,6 @@
 #include "global.h"
 #include "field_effect.h"
+#include "corpse_run.h"
 #include "field_player_avatar.h"
 #include "fldeff.h"
 #include "item_use.h"
@@ -11,6 +12,9 @@ static void StartDigFieldEffect(void);
 
 bool8 SetUpFieldMove_Dig(void)
 {
+    if (CorpseRun_IsFieldMovementEscapeDisallowed() == TRUE)
+        return FALSE;
+
     if (CanUseEscapeRopeOnCurrMap() == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;

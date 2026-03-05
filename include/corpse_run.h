@@ -47,7 +47,7 @@ void CorpseRun_OnCorpseSafariTurnStart(void);
 void CorpseRun_OnCorpseSafariAction(u8 action);
 void CorpseRun_OnCorpseSafariTurnEnd(u8 wildLevel);
 u8 CorpseRun_GetSalvageLevelCap(void);
-bool8 CorpseRun_IsSalvageCatchAllowed(const struct Pokemon *mon);
+bool8 CorpseRun_IsSalvageCatchAllowed(struct Pokemon *mon);
 void CorpseRun_CommitSalvageCatchState(void);
 void CorpseRun_CompleteSalvage(void);
 

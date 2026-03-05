@@ -30,4 +30,3 @@ SilphCo_10F_Text_KeepMeCryingASecret::
 SilphCo_10F_Text_FloorSign::
     .string "SILPH CO. HEAD OFFICE\n"
     .string "10F$"
-

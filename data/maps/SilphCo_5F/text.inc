@@ -62,7 +62,7 @@ SilphCo_5F_Text_PorygonFirstVRMon::
     .string "trainers collect energy\n"
     .string "after POKéMON battles.\p"
     .string "Trainers call this\n"
-    .string "energy \"Souls.\"\p"
+    .string "energy “Souls.”\p"
     .string "Normally this energy\n"
     .string "disperses quickly.\p"
     .string "However…\n"

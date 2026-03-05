@@ -104,7 +104,7 @@ SilphCo_5F_Text_SomeMonsEvolveWhenTraded::
     .string "has been restricted.\p"
     .string "Unauthorized use\n"
     .string "is strictly prohibited.\p"
-    .string "— SILPH RESEARCH DIVISION\p"
+    .string "- SILPH RESEARCH DIVISION\p"
     .string "Someone has accessed\n"
     .string "this file recently…$"
 

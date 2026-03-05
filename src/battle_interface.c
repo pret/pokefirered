@@ -1495,8 +1495,16 @@ void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     u8 gender;
 
     ptr = StringCopy(gDisplayedStringBattle, sText_HealthboxNickname);
-    GetMonData(mon, MON_DATA_NICKNAME, nickname);
-    StringGet_Nickname(nickname);
+    if ((gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+     && GetBattlerPosition(gSprites[healthboxSpriteId].sBattlerId) == B_POSITION_PLAYER_LEFT)
+    {
+        StringCopy(nickname, gSaveBlock2Ptr->playerName);
+    }
+    else
+    {
+        GetMonData(mon, MON_DATA_NICKNAME, nickname);
+        StringGet_Nickname(nickname);
+    }
     ptr = StringCopy(ptr, nickname);
     *ptr++ = EXT_CTRL_CODE_BEGIN;
     *ptr++ = EXT_CTRL_CODE_COLOR;

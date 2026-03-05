@@ -246,6 +246,17 @@ static void CompleteOnHealthboxSpriteCallbackDummy(void)
         SafariBufferExecCompleted();
 }
 
+static void CompleteOnHealthbarDone(void)
+{
+    s16 hpValue = MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
+
+    SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
+    if (hpValue != -1)
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], hpValue, HP_CURRENT);
+    else
+        SafariBufferExecCompleted();
+}
+
 static void Safari_SetBattleEndCallbacks(void)
 {
     if (!gPaletteFade.active)
@@ -482,7 +493,36 @@ static void SafariHandleCmd23(void)
 
 static void SafariHandleHealthBarUpdate(void)
 {
-    SafariBufferExecCompleted();
+    s16 hpVal;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+     || GetBattlerPosition(gActiveBattler) != B_POSITION_PLAYER_LEFT)
+    {
+        SafariBufferExecCompleted();
+        return;
+    }
+
+    LoadBattleBarGfx(0);
+    hpVal = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
+    if (hpVal != INSTANT_HP_BAR_DROP)
+    {
+        SetBattleBarStruct(gActiveBattler,
+                           gHealthboxSpriteIds[gActiveBattler],
+                           gBattleMons[gActiveBattler].maxHP,
+                           gBattleMons[gActiveBattler].hp,
+                           hpVal);
+    }
+    else
+    {
+        SetBattleBarStruct(gActiveBattler,
+                           gHealthboxSpriteIds[gActiveBattler],
+                           gBattleMons[gActiveBattler].maxHP,
+                           0,
+                           hpVal);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], 0, HP_CURRENT);
+    }
+
+    gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthbarDone;
 }
 
 static void SafariHandleExpUpdate(void)
@@ -492,7 +532,10 @@ static void SafariHandleExpUpdate(void)
 
 static void SafariHandleStatusIconUpdate(void)
 {
-    UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_SAFARI_BALLS_TEXT);
+    if (gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_STATUS_ICON);
+    else
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_SAFARI_BALLS_TEXT);
     SafariBufferExecCompleted();
 }
 
@@ -611,7 +654,23 @@ static void SafariHandleIntroSlide(void)
 
 static void SafariHandleIntroTrainerBallThrow(void)
 {
-    UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_SAFARI_ALL_TEXT);
+    if (gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+    {
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_ALL);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], gBattleMons[gActiveBattler].hp, HP_CURRENT);
+        UpdateHpTextInHealthbox(gHealthboxSpriteIds[gActiveBattler], gBattleMons[gActiveBattler].maxHP, HP_MAX);
+        SetBattleBarStruct(gActiveBattler,
+                           gHealthboxSpriteIds[gActiveBattler],
+                           gBattleMons[gActiveBattler].maxHP,
+                           gBattleMons[gActiveBattler].hp,
+                           0);
+        MoveBattleBar(gActiveBattler, gHealthboxSpriteIds[gActiveBattler], HEALTH_BAR, 0);
+    }
+    else
+    {
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &gPlayerParty[gBattlerPartyIndexes[gActiveBattler]], HEALTHBOX_SAFARI_ALL_TEXT);
+    }
+
     StartHealthboxSlideIn(gActiveBattler);
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[gActiveBattler]);
     gBattlerControllerFuncs[gActiveBattler] = CompleteOnHealthboxSpriteCallbackDummy;

@@ -2607,12 +2607,24 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
 
     for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
     {
+        bool8 isCorpseSafariTrainerBattler = ((gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+                                           && GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_LEFT);
+
         if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             && GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         {
             ptr = (u8 *)&gBattleMons[gActiveBattler];
             for (i = 0; i < sizeof(struct BattlePokemon); i++)
                 ptr[i] = 0;
+
+            if (isCorpseSafariTrainerBattler)
+            {
+                gBattleMons[gActiveBattler].species = SPECIES_BULBASAUR;
+                gBattleMons[gActiveBattler].level = 1;
+                gBattleMons[gActiveBattler].hp = gSaveBlock1Ptr->corpseRun.trainerHpCurrent;
+                gBattleMons[gActiveBattler].maxHP = gSaveBlock1Ptr->corpseRun.trainerHpMax;
+                gBattleMons[gActiveBattler].nickname[0] = EOS;
+            }
         }
         else
         {
@@ -4383,11 +4395,32 @@ static void HandleAction_Run(void)
 
 static void ApplyCorpseSafariTurnEndEffects(u8 action)
 {
+    u8 trainerBattler;
+    u8 oldActiveBattler;
+    u16 hpBefore;
+    u16 hpAfter;
+
     if (!(gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI))
         return;
 
+    trainerBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+    hpBefore = gSaveBlock1Ptr->corpseRun.trainerHpCurrent;
+
     CorpseRun_OnCorpseSafariAction(action);
     CorpseRun_OnCorpseSafariTurnEnd(gBattleMons[gBattlerAttacker].level);
+
+    hpAfter = gSaveBlock1Ptr->corpseRun.trainerHpCurrent;
+    gBattleMons[trainerBattler].hp = hpAfter;
+    gBattleMons[trainerBattler].maxHP = gSaveBlock1Ptr->corpseRun.trainerHpMax;
+
+    if (hpAfter < hpBefore)
+    {
+        oldActiveBattler = gActiveBattler;
+        gActiveBattler = trainerBattler;
+        BtlController_EmitHealthBarUpdate(BUFFER_A, hpBefore - hpAfter);
+        MarkBattlerForControllerExec(gActiveBattler);
+        gActiveBattler = oldActiveBattler;
+    }
 }
 
 static void HandleAction_WatchesCarefully(void)

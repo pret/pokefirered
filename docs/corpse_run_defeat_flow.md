@@ -10,8 +10,10 @@ This document tracks every known whiteout/defeat entry point in this codebase an
 
 ## Feature flag and guards
 
-- `FEATURE_FLAG_CORPSE_RUN` (`include/config.h`): compile-time feature flag controlling corpse-run mode.
-- `IsCorpseRunFeatureEnabled` (`src/overworld.c`): helper used by whiteout handlers.
+- `FEATURE_FLAG_CORPSE_RUN` (`include/config.h`): compile-time default/build gate (defaults to `TRUE`, can be overridden by build define).
+- `FEATURE_FLAG_CORPSE_RUN_USE_SAVE_TOGGLE` (`include/config.h`): compile-time toggle for runtime save-flag gating (defaults to `TRUE`).
+- `FLAG_SYS_CORPSE_RUN_ENABLED` (`include/constants/flags.h`): runtime save flag that acts as the tester-facing on/off toggle when save gating is enabled.
+- `IsCorpseRunFeatureEnabled` (`src/overworld.c`): source-of-truth helper used by whiteout handlers; returns `TRUE` only when compile-time gate is on and (optionally) runtime save flag is enabled.
 - `OverworldWhiteOutGetMoneyLoss` (`src/overworld.c`): returns `0` while corpse-run mode is enabled so whiteout text/scripts cannot use vanilla loss values.
 - `CB2_WhiteOut` (`src/overworld.c`): uses `FieldCB_WarpExitFadeFromBlack` in corpse-run mode, preventing post-whiteout nurse/home scripts (`FieldCB_RushInjuredPokemonToCenter`).
 
@@ -49,3 +51,12 @@ Also ensure no corpse-run-enabled path directly calls:
 - `HealPlayerParty()` for whiteout recovery
 - `Overworld_SetWhiteoutRespawnPoint()`
 - `FieldCB_RushInjuredPokemonToCenter`
+
+
+## Activation source of truth
+
+`IsCorpseRunFeatureEnabled` in `src/overworld.c` is the single source of truth for whether corpse-run defeat behavior is active at runtime. In the current default configuration:
+
+1. `FEATURE_FLAG_CORPSE_RUN` must be enabled at compile time (default `TRUE` in `include/config.h`).
+2. `FEATURE_FLAG_CORPSE_RUN_USE_SAVE_TOGGLE` is enabled by default, so `FLAG_SYS_CORPSE_RUN_ENABLED` controls runtime activation.
+3. New saves set `FLAG_SYS_CORPSE_RUN_ENABLED` during `NewGameInitData` (`src/new_game.c`) so default behavior remains ON while still allowing testers to clear/set the flag without recompiling.

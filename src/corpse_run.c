@@ -332,7 +332,11 @@ static bool8 CorpseRun_IsPlayerAtOrFacingMarker(void)
      && gSaveBlock1Ptr->pos.y == gSaveBlock1Ptr->corpseRun.markerY)
         return TRUE;
 
-    GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
+    // Corpse marker coordinates are stored in saveblock map-space (camera origin),
+    // so derive facing coordinates from the same space for consistent comparisons.
+    facingX = gSaveBlock1Ptr->pos.x;
+    facingY = gSaveBlock1Ptr->pos.y;
+    MoveCoords(GetPlayerFacingDirection(), &facingX, &facingY);
     if (facingX == gSaveBlock1Ptr->corpseRun.markerX
      && facingY == gSaveBlock1Ptr->corpseRun.markerY)
         return TRUE;

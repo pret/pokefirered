@@ -5,6 +5,7 @@
 #include "heal_location.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "souls_hud.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "safari_zone.h"
@@ -408,6 +409,7 @@ static void CorpseRun_InvalidateStoredPartyBlob(void)
 static void OnSecondDeathDuringCorpseRun(void)
 {
     gSaveBlock1Ptr->corpseRun.droppedSouls = 0;
+    SoulsHud_Update();
     CorpseRun_InvalidateStoredPartyBlob();
     CorpseRun_SetState(CR_FAILED);
     CorpseRun_DespawnMarker();
@@ -434,6 +436,7 @@ void CorpseRun_ResetSaveData(void)
     gSaveBlock1Ptr->corpseRun.respawnMapId = MAP_UNDEFINED;
     gSaveBlock1Ptr->corpseRun.respawnX = 0;
     gSaveBlock1Ptr->corpseRun.respawnY = 0;
+    SoulsHud_Update();
     CorpseRun_DespawnMarker();
     CorpseRun_FinalizeForSave();
 }
@@ -456,6 +459,7 @@ void CorpseRun_HandlePlayerDefeat(void)
     gSaveBlock1Ptr->corpseRun.deathElevation = 0;
     gSaveBlock1Ptr->corpseRun.droppedSouls = ComputeWhiteOutMoneyLoss();
     RemoveMoney(&gSaveBlock1Ptr->money, gSaveBlock1Ptr->corpseRun.droppedSouls);
+    SoulsHud_Update();
 
     CorpseRun_SerializeParty();
     for (i = 0; i < gSaveBlock1Ptr->corpseRun.partyCount; i++)
@@ -482,6 +486,7 @@ void CorpseRun_TryRecoverByTouch(void)
     {
         CorpseRun_ApplyRecoveryHpToParty();
         gSaveBlock1Ptr->corpseRun.droppedSouls = 0;
+        SoulsHud_Update();
         gSaveBlock1Ptr->corpseRun.trainerHpMax = 0;
         gSaveBlock1Ptr->corpseRun.trainerHpCurrent = 0;
         CorpseRun_DespawnMarker();

@@ -846,6 +846,7 @@ const u8 gText_PokeSum_HmMovesCantBeForgotten[] = _("HM moves can't be\nforgotte
 const u8 gText_TrainerCardName[] = _("NAME: ");
 const u8 gText_TrainerCardIDNo[] = _("IDNo.");
 const u8 gText_TrainerCardMoney[] = _("MONEY");
+const u8 gText_SoulsHudLabel[] = _("SOULS");
 const u8 gText_TrainerCardYen[] = _("¥");
 const u8 gText_TrainerCardPokedex[] = _("POKéDEX");
 const u8 gText_TrainerCardNull[] = _("");

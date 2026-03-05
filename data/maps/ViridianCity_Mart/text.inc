@@ -21,5 +21,5 @@ ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes::
 
 ViridianCity_Mart_Text_GotToBuySomePotions::
     .string "I've got to trade SOULS for POTIONS.\p"
-    .string "Supplies cost SOULS these days—\n"
+    .string "Supplies cost SOULS these days-\n"
     .string "cash doesn't mean anything anymore.$"

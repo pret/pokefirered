@@ -252,7 +252,9 @@ void CorpseRunInitialization(void)
 {
     RunScriptImmediately(EventScript_ResetEliteFourEnd);
 
-    if (!IsCorpseRunFeatureEnabled() || CorpseRun_ShouldBypassDefeatPersistenceForCurrentBattle())
+    // With corpse-run enabled, every defeat (including trainer battles)
+    // advances corpse-run state through CorpseRun_HandlePlayerDefeat.
+    if (!IsCorpseRunFeatureEnabled())
     {
         RemoveMoney(&gSaveBlock1Ptr->money, ComputeWhiteOutMoneyLoss());
         HealPlayerParty();

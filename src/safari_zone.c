@@ -15,6 +15,11 @@ bool32 GetSafariZoneFlag(void)
     return FlagGet(FLAG_SYS_SAFARI_MODE);
 }
 
+bool8 InSafariZone(void)
+{
+    return GetSafariZoneFlag();
+}
+
 void SetSafariZoneFlag(void)
 {
     FlagSet(FLAG_SYS_SAFARI_MODE);

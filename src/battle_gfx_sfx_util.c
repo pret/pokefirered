@@ -572,7 +572,7 @@ bool8 BattleInitAllSprites(u8 *state, u8 *battlerId)
         ++*state;
         break;
     case 3:
-        if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI) && *battlerId == 0)
+        if ((gBattleTypeFlags & BATTLE_TYPE_SAFARI) && !(gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI) && *battlerId == 0)
             gHealthboxSpriteIds[*battlerId] = CreateSafariPlayerHealthboxSprites();
         else
             gHealthboxSpriteIds[*battlerId] = CreateBattlerHealthboxSprites(*battlerId);
@@ -601,7 +601,7 @@ bool8 BattleInitAllSprites(u8 *state, u8 *battlerId)
     case 5:
         if (GetBattlerSide(*battlerId) == B_SIDE_PLAYER)
         {
-            if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
+            if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI) || (gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI))
                 UpdateHealthboxAttribute(gHealthboxSpriteIds[*battlerId], &gPlayerParty[gBattlerPartyIndexes[*battlerId]], HEALTHBOX_ALL);
         }
         else

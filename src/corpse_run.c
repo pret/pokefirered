@@ -3,6 +3,7 @@
 
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "heal_location.h"
 #include "overworld.h"
@@ -57,6 +58,7 @@ static const u8 sGymAceLevelByBadgeCount[] =
 
 static u8 CorpseRun_GetBadgeCount(void);
 static void CorpseRun_SyncVisibleMarkerObject(void);
+static bool8 CorpseRun_IsPlayerAtOrFacingMarker(void);
 
 static bool8 CorpseRun_IsMapInSalvageSafariScope(u8 mapGroup, u8 mapNum)
 {
@@ -321,6 +323,23 @@ static void CorpseRun_SyncVisibleMarkerObject(void)
         MapGridGetElevationAt(gSaveBlock1Ptr->corpseRun.markerX, gSaveBlock1Ptr->corpseRun.markerY));
 }
 
+static bool8 CorpseRun_IsPlayerAtOrFacingMarker(void)
+{
+    s16 facingX;
+    s16 facingY;
+
+    if (gSaveBlock1Ptr->pos.x == gSaveBlock1Ptr->corpseRun.markerX
+     && gSaveBlock1Ptr->pos.y == gSaveBlock1Ptr->corpseRun.markerY)
+        return TRUE;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&facingX, &facingY);
+    if (facingX == gSaveBlock1Ptr->corpseRun.markerX
+     && facingY == gSaveBlock1Ptr->corpseRun.markerY)
+        return TRUE;
+
+    return FALSE;
+}
+
 static void CorpseRun_SetState(u8 newState)
 {
     u8 oldState = gSaveBlock1Ptr->corpseRun.state;
@@ -510,8 +529,7 @@ void CorpseRun_TryRecoverByTouch(void)
      || gSaveBlock1Ptr->location.mapNum != gSaveBlock1Ptr->corpseRun.markerMapNum)
         return;
 
-    if (gSaveBlock1Ptr->pos.x == gSaveBlock1Ptr->corpseRun.markerX
-     && gSaveBlock1Ptr->pos.y == gSaveBlock1Ptr->corpseRun.markerY)
+    if (CorpseRun_IsPlayerAtOrFacingMarker())
     {
         AddMoney(&gSaveBlock1Ptr->money, gSaveBlock1Ptr->corpseRun.droppedSouls);
         CorpseRun_ApplyRecoveryHpToParty();

@@ -144,6 +144,10 @@ PalletTown_ProfessorOaksLab_Text_ReceivedMonFromOak::
 PalletTown_ProfessorOaksLab_Text_OakCanReachNextTownWithMon::
     .string "OAK: If a wild POKéMON appears,\n"
     .string "your POKéMON can battle it.\p"
+    .string "As you battle, you'll gather\n"
+    .string "SOULS.\p"
+    .string "Use those SOULS at a POKéMON\n"
+    .string "CENTER to level up your POKéMON.\p"
     .string "With it at your side, you should be\n"
     .string "able to reach the next town.$"
 

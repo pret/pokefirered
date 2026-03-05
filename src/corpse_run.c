@@ -5,6 +5,7 @@
 #include "heal_location.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "money.h"
 #include "souls_hud.h"
 #include "battle.h"
 #include "battle_setup.h"

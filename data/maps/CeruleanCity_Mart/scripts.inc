@@ -15,11 +15,11 @@ CeruleanCity_Mart_EventScript_Clerk::
 	faceplayer
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
-	goto_if_eq VAR_RESULT, 0, .MartContinue
+	goto_if_eq VAR_RESULT, 0, CeruleanCity_Mart_MartContinue
 	msgbox Text_CorpseRun_BlockMart
 	release
 	end
-.MartContinue::
+CeruleanCity_Mart_MartContinue::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart CeruleanCity_Mart_Items

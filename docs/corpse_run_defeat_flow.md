@@ -49,3 +49,10 @@ Also ensure no corpse-run-enabled path directly calls:
 - `HealPlayerParty()` for whiteout recovery
 - `Overworld_SetWhiteoutRespawnPoint()`
 - `FieldCB_RushInjuredPokemonToCenter`
+
+## Last-heal fallback behavior
+
+- `CorpseRun_InitSalvageRespawnCheckpoint` and `CorpseRun_WarpToLastCenter` validate `gSaveBlock1Ptr->lastHealLocation` before use.
+- Validation uses `GetHealLocationIndexFromMapGroupAndNum(...)`; when no matching heal location exists (for example, a run where the player has never rested), corpse-run deterministically rewrites `lastHealLocation` to Pallet Town (`MAP_PALLET_TOWN`, `x=6`, `y=8`) and then proceeds.
+- This makes “never rested” behavior explicit and stable: corpse-run fallback respawn is always Pallet/home-equivalent via the Pallet heal location checkpoint.
+

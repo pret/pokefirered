@@ -26,7 +26,7 @@ All of the following now route to `CorpseRunInitialization` through `CB2_WhiteOu
 - `CB2_EndWildBattle`
 - `CB2_EndScriptedWildBattle`
 - `CB2_EndMarowakBattle`
-- `CB2_EndTrainerBattle` (normal trainer and early rival loss path)
+- `CB2_EndTrainerBattle` (normal trainer and early rival loss path, including `RIVAL_BATTLE_HEAL_AFTER` while corpse-run mode is enabled)
 - `CB2_EndRematchBattle`
 
 ### Field special (`src/post_battle_event_funcs.c`)

@@ -25,8 +25,6 @@ EventScript_AfterWhiteOutMomHeal::
 	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	msgbox Text_HadQuiteAnExperienceTakeRest
-	call EventScript_OutOfCenterPartyHeal
-	msgbox Text_MomExplainHPGetPotions
 	fadedefaultbgm
 	releaseall
 	end

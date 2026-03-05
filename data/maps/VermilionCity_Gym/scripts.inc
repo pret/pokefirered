@@ -205,6 +205,9 @@ VermilionCity_Gym_EventScript_SetBeamsOn::
 
 VermilionCity_Gym_EventScript_LtSurge::
 	famechecker FAMECHECKER_LTSURGE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_LEADER_LT_SURGE, VermilionCity_Gym_Text_LtSurgeIntro, VermilionCity_Gym_Text_LtSurgeDefeat, VermilionCity_Gym_EventScript_DefeatedLtSurge, NO_MUSIC
 	goto_if_unset FLAG_GOT_TM34_FROM_SURGE, VermilionCity_Gym_EventScript_GiveTM34
 	msgbox VermilionCity_Gym_Text_LtSurgePostBattle
@@ -241,17 +244,26 @@ VermilionCity_Gym_EventScript_NoRoomForTM34::
 	end
 
 VermilionCity_Gym_EventScript_Dwayne::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_SAILOR_DWAYNE, VermilionCity_Gym_Text_DwayneIntro, VermilionCity_Gym_Text_DwayneDefeat
 	famechecker FAMECHECKER_LTSURGE, 4
 	msgbox VermilionCity_Gym_Text_DwaynePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VermilionCity_Gym_EventScript_Baily::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_ENGINEER_BAILY, VermilionCity_Gym_Text_BailyIntro, VermilionCity_Gym_Text_BailyDefeat
 	msgbox VermilionCity_Gym_Text_BailyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VermilionCity_Gym_EventScript_Tucker::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_GENTLEMAN_TUCKER, VermilionCity_Gym_Text_TuckerIntro, VermilionCity_Gym_Text_TuckerDefeat, VermilionCity_Gym_EventScript_DefeatedTucker
 	famechecker FAMECHECKER_LTSURGE, 3
 	msgbox VermilionCity_Gym_Text_TuckerPostBattle, MSGBOX_AUTOCLOSE

@@ -3,6 +3,9 @@ FuchsiaCity_Gym_MapScripts::
 
 FuchsiaCity_Gym_EventScript_Koga::
 	famechecker FAMECHECKER_KOGA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_LEADER_KOGA, FuchsiaCity_Gym_Text_KogaIntro, FuchsiaCity_Gym_Text_KogaDefeat, FuchsiaCity_Gym_EventScript_DefeatedKoga, NO_MUSIC
 	goto_if_unset FLAG_GOT_TM06_FROM_KOGA, FuchsiaCity_Gym_EventScript_GiveTM06
 	msgbox FuchsiaCity_Gym_Text_KogaPostBattle
@@ -34,32 +37,50 @@ FuchsiaCity_Gym_EventScript_NoRoomForTM06::
 	end
 
 FuchsiaCity_Gym_EventScript_Phil::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_TAMER_PHIL, FuchsiaCity_Gym_Text_PhilIntro, FuchsiaCity_Gym_Text_PhilDefeat
 	msgbox FuchsiaCity_Gym_Text_PhilPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_Edgar::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_TAMER_EDGAR, FuchsiaCity_Gym_Text_EdgarIntro, FuchsiaCity_Gym_Text_EdgarDefeat
 	msgbox FuchsiaCity_Gym_Text_EdgarPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_Kirk::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_JUGGLER_KIRK, FuchsiaCity_Gym_Text_KirkIntro, FuchsiaCity_Gym_Text_KirkDefeat
 	famechecker FAMECHECKER_KOGA, 2
 	msgbox FuchsiaCity_Gym_Text_KirkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_Shawn::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_JUGGLER_SHAWN, FuchsiaCity_Gym_Text_ShawnIntro, FuchsiaCity_Gym_Text_ShawnDefeat
 	msgbox FuchsiaCity_Gym_Text_ShawnPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_Kayden::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_JUGGLER_KAYDEN, FuchsiaCity_Gym_Text_KaydenIntro, FuchsiaCity_Gym_Text_KaydenDefeat
 	msgbox FuchsiaCity_Gym_Text_KaydenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FuchsiaCity_Gym_EventScript_Nate::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_JUGGLER_NATE, FuchsiaCity_Gym_Text_NateIntro, FuchsiaCity_Gym_Text_NateDefeat
 	msgbox FuchsiaCity_Gym_Text_NatePostBattle, MSGBOX_AUTOCLOSE
 	end

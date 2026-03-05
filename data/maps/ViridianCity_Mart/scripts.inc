@@ -54,6 +54,13 @@ ViridianCity_Mart_EventScript_Clerk::
 	faceplayer
 	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1, ViridianCity_Mart_EventScript_SayHiToOak
 	goto_if_questlog EventScript_ReleaseEnd
+	setvar VAR_0x8004, 1
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_eq VAR_RESULT, 0, ViridianCity_Mart_EventScript_ClerkContinue
+	msgbox Text_CorpseRun_BlockMart
+	release
+	end
+ViridianCity_Mart_EventScript_ClerkContinue::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart ViridianCity_Mart_Items

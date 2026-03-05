@@ -2,6 +2,14 @@ Route5_PokemonDayCare_EventScript_DaycareMan::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
+	setvar VAR_0x8004, 5
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_eq VAR_RESULT, 0, Route5_PokemonDayCare_EventScript_Continue
+	msgbox Text_CorpseRun_BlockDaycareTutor
+	release
+	end
+
+Route5_PokemonDayCare_EventScript_Continue::
 	showmoneybox 0, 0
 	specialvar VAR_RESULT, IsThereMonInRoute5Daycare
 	goto_if_eq VAR_RESULT, TRUE, Route5_PokemonDayCare_EventScript_CheckOnMon

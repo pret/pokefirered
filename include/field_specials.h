@@ -3,6 +3,16 @@
 
 #include "global.h"
 
+enum CorpseRunFieldBlockReason
+{
+    CORPSE_RUN_FIELD_BLOCK_NONE,
+    CORPSE_RUN_FIELD_BLOCK_MART,
+    CORPSE_RUN_FIELD_BLOCK_HEAL,
+    CORPSE_RUN_FIELD_BLOCK_PC,
+    CORPSE_RUN_FIELD_BLOCK_GYM_BATTLE,
+    CORPSE_RUN_FIELD_BLOCK_DAYCARE_TUTOR,
+};
+
 u8 GetLeadMonIndex(void);
 s32 CountDigits(s32 number);
 void TV_PrintIntToStringVar(u8 varidx, s32 number);
@@ -27,5 +37,7 @@ void ResetFieldTasksArgs(void);
 bool8 UsedPokemonCenterWarp(void);
 void QuestLog_CheckDepartingIndoorsMap(void);
 void QuestLog_TryRecordDepartedLocation(void);
+u8 GetCorpseRunFieldBlockReason(void);
+u16 GetCorpseRunFieldBlockTextId(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

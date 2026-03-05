@@ -3,6 +3,9 @@ ViridianCity_Gym_MapScripts::
 
 ViridianCity_Gym_EventScript_Giovanni::
 	famechecker FAMECHECKER_GIOVANNI, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_LEADER_GIOVANNI, ViridianCity_Gym_Text_GiovanniIntro, ViridianCity_Gym_Text_GiovanniDefeat, ViridianCity_Gym_EventScript_DefeatedGiovanni, NO_MUSIC
 	goto_if_unset FLAG_GOT_TM26_FROM_GIOVANNI, ViridianCity_Gym_EventScript_GiveTM26
 	msgbox ViridianCity_Gym_Text_GiovanniPostBattle
@@ -39,41 +42,65 @@ ViridianCity_Gym_EventScript_NoRoomForTM26::
 	end
 
 ViridianCity_Gym_EventScript_Jason::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_TAMER_JASON, ViridianCity_Gym_Text_JasonIntro, ViridianCity_Gym_Text_JasonDefeat
 	msgbox ViridianCity_Gym_Text_JasonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 ViridianCity_Gym_EventScript_Cole::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_TAMER_COLE, ViridianCity_Gym_Text_ColeIntro, ViridianCity_Gym_Text_ColeDefeat
 	msgbox ViridianCity_Gym_Text_ColePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 ViridianCity_Gym_EventScript_Atsushi::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_BLACK_BELT_ATSUSHI, ViridianCity_Gym_Text_AtsushiIntro, ViridianCity_Gym_Text_AtsushiDefeat
 	msgbox ViridianCity_Gym_Text_AtsushiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 ViridianCity_Gym_EventScript_Kiyo::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_BLACK_BELT_KIYO, ViridianCity_Gym_Text_KiyoIntro, ViridianCity_Gym_Text_KiyoDefeat
 	msgbox ViridianCity_Gym_Text_KiyoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 ViridianCity_Gym_EventScript_Takashi::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_BLACK_BELT_TAKASHI, ViridianCity_Gym_Text_TakashiIntro, ViridianCity_Gym_Text_TakashiDefeat
 	msgbox ViridianCity_Gym_Text_TakashiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 ViridianCity_Gym_EventScript_Samuel::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_COOLTRAINER_SAMUEL, ViridianCity_Gym_Text_SamuelIntro, ViridianCity_Gym_Text_SamuelDefeat
 	msgbox ViridianCity_Gym_Text_SamuelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 ViridianCity_Gym_EventScript_Yuji::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_COOLTRAINER_YUJI, ViridianCity_Gym_Text_YujiIntro, ViridianCity_Gym_Text_YujiDefeat
 	msgbox ViridianCity_Gym_Text_YujiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 ViridianCity_Gym_EventScript_Warren::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_COOLTRAINER_WARREN, ViridianCity_Gym_Text_WarrenIntro, ViridianCity_Gym_Text_WarrenDefeat
 	msgbox ViridianCity_Gym_Text_WarrenPostBattle, MSGBOX_AUTOCLOSE
 	end

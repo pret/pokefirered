@@ -813,7 +813,7 @@ struct CorpseRunSaveData
     s16 respawnX;
     s16 respawnY;
 
-    u8 reserved[298];
+    u8 reserved[290];
 };
 
 struct SaveBlock1

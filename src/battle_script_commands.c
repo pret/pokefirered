@@ -6444,7 +6444,7 @@ static void Cmd_setreflect(void)
     }
     else
     {
-        u8 holdEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+        u8 holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerAttacker].item);
 
         gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_REFLECT;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].reflectTimer = (holdEffect == HOLD_EFFECT_LIGHT_CLAY) ? 8 : 5;
@@ -7126,7 +7126,7 @@ static void Cmd_setlightscreen(void)
     }
     else
     {
-        u8 holdEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+        u8 holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerAttacker].item);
 
         gSideStatuses[GET_BATTLER_SIDE(gBattlerAttacker)] |= SIDE_STATUS_LIGHTSCREEN;
         gSideTimers[GET_BATTLER_SIDE(gBattlerAttacker)].lightscreenTimer = (holdEffect == HOLD_EFFECT_LIGHT_CLAY) ? 8 : 5;
@@ -8427,7 +8427,7 @@ static void Cmd_setsunny(void)
     }
     else
     {
-        u8 holdEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+        u8 holdEffect = ItemId_GetHoldEffect(gBattleMons[gBattlerAttacker].item);
 
         gBattleWeather = B_WEATHER_SUN_TEMPORARY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_STARTED_SUNLIGHT;

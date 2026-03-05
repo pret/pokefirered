@@ -59,7 +59,15 @@
 
 // When enabled, defeat flow is routed through corpse-run initialization instead
 // of vanilla whiteout money loss/heal/respawn behavior.
-#define FEATURE_FLAG_CORPSE_RUN FALSE
+#ifndef FEATURE_FLAG_CORPSE_RUN
+#define FEATURE_FLAG_CORPSE_RUN TRUE
+#endif
+
+// When enabled, save data controls runtime corpse-run availability so testers
+// can toggle behavior without rebuilding.
+#ifndef FEATURE_FLAG_CORPSE_RUN_USE_SAVE_TOGGLE
+#define FEATURE_FLAG_CORPSE_RUN_USE_SAVE_TOGGLE TRUE
+#endif
 
 // Crashes may occur due to section reordering in the modern build,
 // so we force BUGFIX here.

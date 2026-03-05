@@ -1392,7 +1392,8 @@
 #define FLAG_SYS_CORPSE_RUN_EXPLAINED                             (SYS_FLAGS + 0x3A)
 #define FLAG_SYS_RIBBON_GET                                         (SYS_FLAGS + 0x3B)
 #define FLAG_SYS_SAW_HELP_SYSTEM_INTRO                              (SYS_FLAGS + 0x3C)
-#define FLAG_0x83D                                                  (SYS_FLAGS + 0x3D)
+// Runtime toggle for corpse-run defeat flow when FEATURE_FLAG_CORPSE_RUN_USE_SAVE_TOGGLE is enabled.
+#define FLAG_SYS_CORPSE_RUN_ENABLED                               (SYS_FLAGS + 0x3D)
 #define FLAG_OPENED_START_MENU                                      (SYS_FLAGS + 0x3E)
 #define FLAG_0x83F                                                  (SYS_FLAGS + 0x3F)
 #define FLAG_SYS_NATIONAL_DEX                                       (SYS_FLAGS + 0x40)

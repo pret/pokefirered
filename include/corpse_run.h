@@ -14,7 +14,7 @@ enum CorpseRunState
 enum
 {
     CORPSE_RUN_SAVE_MAGIC = 0x43525356, // 'CRSV'
-    CORPSE_RUN_SAVE_VERSION = 1,
+    CORPSE_RUN_SAVE_VERSION = 2,
 };
 
 void CorpseRun_ResetSaveData(void);
@@ -22,6 +22,8 @@ void CorpseRun_HandlePlayerDefeat(void);
 void CorpseRun_TryRecoverByTouch(void);
 void CorpseRun_OnMapEnter(void);
 void CorpseRun_DebugReset(void);
+void CorpseRun_ApplyTrainerDamageFromWild(u8 wildLevel);
+void CorpseRun_FailActiveRunAndEnterSalvage(void);
 bool8 CorpseRun_IsEscapeTrainerEncounter(u16 trainerId, u8 trainerBattleMode);
 bool8 CorpseRun_ShouldBypassDefeatPersistenceForCurrentBattle(void);
 bool8 CorpseRun_ShouldSuppressTrainerBattleSideEffects(void);

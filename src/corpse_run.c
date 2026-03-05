@@ -754,7 +754,8 @@ void CorpseRun_OnCorpseSafariTurnStart(void)
 
 void CorpseRun_OnCorpseSafariAction(u8 action)
 {
-    u16 threat;
+    // field_89 is the persisted corpse-safari threat meter for the current encounter.
+    u16 threat = gBattleStruct->field_89;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI) || !CorpseRun_IsActive())
         return;

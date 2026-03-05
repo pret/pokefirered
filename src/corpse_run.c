@@ -436,6 +436,7 @@ void CorpseRun_HandlePlayerDefeat(void)
     gSaveBlock1Ptr->corpseRun.deathY = gSaveBlock1Ptr->pos.y;
     gSaveBlock1Ptr->corpseRun.deathElevation = 0;
     gSaveBlock1Ptr->corpseRun.droppedSouls = ComputeWhiteOutMoneyLoss();
+    RemoveMoney(&gSaveBlock1Ptr->money, gSaveBlock1Ptr->corpseRun.droppedSouls);
 
     CorpseRun_SerializeParty();
     for (i = 0; i < gSaveBlock1Ptr->corpseRun.partyCount; i++)

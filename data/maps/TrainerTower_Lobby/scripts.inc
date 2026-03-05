@@ -120,11 +120,11 @@ TrainerTower_Lobby_EventScript_MartClerk::
 	faceplayer
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
-	goto_if_eq VAR_RESULT, 0, .MartContinue
+	goto_if_eq VAR_RESULT, 0, TrainerTower_Lobby_MartContinue
 	msgbox Text_CorpseRun_BlockMart
 	release
 	end
-.MartContinue::
+TrainerTower_Lobby_MartContinue::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart TrainerTower_Lobby_Mart_Items

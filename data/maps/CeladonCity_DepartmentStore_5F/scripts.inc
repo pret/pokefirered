@@ -19,11 +19,11 @@ CeladonCity_DepartmentStore_5F_EventScript_ClerkXItems::
 	faceplayer
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
-	goto_if_eq VAR_RESULT, 0, .MartContinue
+	goto_if_eq VAR_RESULT, 0, CeladonCity_DepartmentStore_5F_MartContinue
 	msgbox Text_CorpseRun_BlockMart
 	release
 	end
-.MartContinue::
+CeladonCity_DepartmentStore_5F_MartContinue::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart CeladonCity_DepartmentStore_5F_XItems
@@ -50,11 +50,11 @@ CeladonCity_DepartmentStore_5F_EventScript_ClerkVitamins::
 	faceplayer
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
-	goto_if_eq VAR_RESULT, 0, .MartContinueVitamins
+	goto_if_eq VAR_RESULT, 0, CeladonCity_DepartmentStore_5F_MartContinueVitamins
 	msgbox Text_CorpseRun_BlockMart
 	release
 	end
-.MartContinueVitamins::
+CeladonCity_DepartmentStore_5F_MartContinueVitamins::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart CeladonCity_DepartmentStore_5F_Vitamins

@@ -646,7 +646,9 @@ bool8 CorpseRun_CanGainCurrencyFromCurrentBattle(void)
 
 bool8 CorpseRun_CanCaptureInCurrentBattle(void)
 {
-    return !CorpseRun_IsActive() && !CorpseRun_IsSalvageActive();
+    // Salvage mode's core objective is a single successful catch.
+    // Keep capture blocked during active corpse-runs, but allow it during salvage.
+    return !CorpseRun_IsActive();
 }
 
 bool8 CorpseRun_CanReceiveItemDrops(void)

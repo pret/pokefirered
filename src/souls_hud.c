@@ -26,6 +26,8 @@ static const struct WindowTemplate sSoulsHudWindowTemplate = {
 static EWRAM_DATA u8 sSoulsHudWindowId = WINDOW_NONE;
 static EWRAM_DATA u32 sSoulsHudLastDrawnValue = 0;
 
+void SoulsHud_Update(void);
+
 static void SoulsHud_PrintLabel(void)
 {
     AddTextPrinterParameterized(sSoulsHudWindowId, FONT_SMALL, gText_SoulsHudLabel, 2, 1, TEXT_SKIP_DRAW, NULL);

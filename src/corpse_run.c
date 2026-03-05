@@ -2,6 +2,7 @@
 #include "corpse_run.h"
 
 #include "event_data.h"
+#include "heal_location.h"
 #include "overworld.h"
 #include "pokemon.h"
 #include "battle.h"
@@ -74,6 +75,18 @@ static bool8 CorpseRun_IsMapInSalvageSafariScope(u8 mapGroup, u8 mapNum)
     return FALSE;
 }
 
+
+static void CorpseRun_EnsureValidLastHealLocation(void)
+{
+    if (GetHealLocationIndexFromMapGroupAndNum(gSaveBlock1Ptr->lastHealLocation.mapGroup, gSaveBlock1Ptr->lastHealLocation.mapNum) != 0)
+        return;
+
+    gSaveBlock1Ptr->lastHealLocation.mapGroup = MAP_GROUP(MAP_PALLET_TOWN);
+    gSaveBlock1Ptr->lastHealLocation.mapNum = MAP_NUM(MAP_PALLET_TOWN);
+    gSaveBlock1Ptr->lastHealLocation.x = 6;
+    gSaveBlock1Ptr->lastHealLocation.y = 8;
+}
+
 static void CorpseRun_WarpToMap(u16 map, s8 x, s8 y)
 {
     SetWarpDestination(MAP_GROUP(map), MAP_NUM(map), WARP_ID_NONE, x, y);
@@ -84,6 +97,7 @@ static void CorpseRun_WarpToMap(u16 map, s8 x, s8 y)
 
 static void CorpseRun_WarpToLastCenter(void)
 {
+    CorpseRun_EnsureValidLastHealLocation();
     SetWarpDestinationToLastHealLocation();
     WarpIntoMap();
     gFieldCallback = FieldCB_WarpExitFadeFromBlack;
@@ -92,6 +106,7 @@ static void CorpseRun_WarpToLastCenter(void)
 
 static void CorpseRun_InitSalvageRespawnCheckpoint(void)
 {
+    CorpseRun_EnsureValidLastHealLocation();
     gSaveBlock1Ptr->corpseRun.respawnMapId = (gSaveBlock1Ptr->lastHealLocation.mapGroup << 8) | gSaveBlock1Ptr->lastHealLocation.mapNum;
     gSaveBlock1Ptr->corpseRun.respawnX = gSaveBlock1Ptr->lastHealLocation.x;
     gSaveBlock1Ptr->corpseRun.respawnY = gSaveBlock1Ptr->lastHealLocation.y;

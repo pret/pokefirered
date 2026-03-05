@@ -544,7 +544,7 @@ u8 CorpseRun_GetSalvageLevelCap(void)
     return referenceLevel - 5;
 }
 
-bool8 CorpseRun_IsSalvageCatchAllowed(const struct Pokemon *mon)
+bool8 CorpseRun_IsSalvageCatchAllowed(struct Pokemon *mon)
 {
     u8 caughtLevel;
 

@@ -1,18 +1,31 @@
 PokemonTower_2F_Text_RivalIntro::
-    .string "{RIVAL}: Hey, {PLAYER}!\n"
-    .string "What brings you here?\l"
-    .string "Is your POKéMON dead?\p"
-    .string "Hey! It's alive!\p"
-    .string "I can at least make them faint!\n"
-    .string "Let's go!$"
+    .string "{RIVAL}: You again.\p"
+    .string "I knew you'd\n"
+    .string "come here.\p"
+    .string "This tower...\p"
+    .string "it's full\n"
+    .string "of SOULS.\p"
+    .string "TRAINERS lose\n"
+    .string "them here all\l"
+    .string "the time.\p"
+    .string "I'm going\n"
+    .string "to become\l"
+    .string "stronger than you.\p"
+    .string "No matter\n"
+    .string "what it takes.$"
 
 PokemonTower_2F_Text_RivalDefeat::
-    .string "What?\n"
-    .string "You stinker!\p"
-    .string "I took it easy on you, too!$"
+    .string "What?!\p"
+    .string "I've been grinding\n"
+    .string "SOULS all day!\p"
+    .string "Why are you\n"
+    .string "still stronger?\p"
+    .string "This doesn't\n"
+    .string "make sense...\p"
+    .string "Whatever.\p"
+    .string "I'll keep\n"
+    .string "getting stronger.$"
 
-@ Unused. Translated below
-@ Aw, man! They really kicked the bucket! Weak! Do them a favor and raise them more properly.
 PokemonTower_2F_Text_RivalVictory::
     .string "{RIVAL}“あーあ‥！\n"
     .string "ほんとに　くたばっちまったぞ！\l"
@@ -20,14 +33,7 @@ PokemonTower_2F_Text_RivalVictory::
     .string "もっと　ちゃんと　そだてて　やれよ$"
 
 PokemonTower_2F_Text_RivalPostBattle::
-    .string "How's your POKéDEX coming?\n"
-    .string "I just caught a CUBONE!\p"
-    .string "I can't find the bigger MAROWAK.\n"
-    .string "Where could they be?\p"
-    .string "I bet there aren't any left!\p"
-    .string "Well, I better get going.\n"
-    .string "I've got a lot to accomplish,\l"
-    .string "unlike you.\p"
+    .string "I'm not done yet.\n"
     .string "Smell ya later!$"
 
 PokemonTower_2F_Text_SilphScopeCouldUnmaskGhosts::

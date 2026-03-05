@@ -5,20 +5,33 @@ SSAnne_2F_Corridor_Text_ThisShipIsLuxuryLiner::
     .string "invited TRAINERS.$"
 
 SSAnne_2F_Corridor_Text_RivalIntro::
-    .string "{RIVAL}: Bonjour!\n"
-    .string "{PLAYER}!\p"
-    .string "Imagine seeing you here!\n"
-    .string "{PLAYER}, were you really invited?\p"
-    .string "So how's your POKéDEX coming?\p"
-    .string "I already caught 40 kinds, pal.\n"
-    .string "Different kinds are everywhere.\p"
-    .string "Crawl around in grassy areas, and\n"
-    .string "look hard for them.$"
+    .string "{RIVAL}: Hey!\p"
+    .string "I knew you'd\n"
+    .string "show up here.\p"
+    .string "You know what\n"
+    .string "I realized?\p"
+    .string "Carrying a lot\n"
+    .string "of SOULS...\p"
+    .string "is terrifying.\p"
+    .string "One bad battle\n"
+    .string "and they're gone.\p"
+    .string "But if you spend\n"
+    .string "them too soon...\p"
+    .string "you fall behind.\p"
+    .string "I'm still figuring\n"
+    .string "out the best way\l"
+    .string "to use them.\p"
+    .string "Let's battle!$"
 
 SSAnne_2F_Corridor_Text_RivalDefeat::
-    .string "Humph!\p"
-    .string "At least you're raising your\n"
-    .string "POKéMON!$"
+    .string "Seriously?!\p"
+    .string "How are you\n"
+    .string "already ahead\l"
+    .string "of me again?\p"
+    .string "Don't get cocky.\p"
+    .string "I'll figure out\n"
+    .string "this SOULS thing\l"
+    .string "before you do.$"
 
 SSAnne_2F_Corridor_Text_RivalVictory::
     .string "{PLAYER}‥！\n"
@@ -27,11 +40,5 @@ SSAnne_2F_Corridor_Text_RivalVictory::
     .string "きたえた　ほうが　いいぜ！$"
 
 SSAnne_2F_Corridor_Text_RivalPostBattle::
-    .string "{RIVAL}: I heard there was a CUT\n"
-    .string "master on board.\p"
-    .string "But he was just a seasick old man!\p"
-    .string "CUT itself is really useful.\n"
-    .string "Yup, it'll be handy.\p"
-    .string "You should go see him, too.\n"
-    .string "Smell ya!$"
+    .string "{RIVAL}: Smell ya!$"
 

@@ -687,7 +687,7 @@
 #define FLAG_GOT_TM16_FROM_THIRSTY_GIRL                  0x296
 #define FLAG_GOT_TM03_FROM_MISTY                         0x297
 #define FLAG_GOT_TM26_FROM_GIOVANNI                      0x298
-#define FLAG_0x299                                       0x299
+#define FLAG_OAK_SOULS_REALIZATION                      0x299
 #define FLAG_GOT_TM04_FROM_SABRINA                       0x29A
 #define FLAG_GOT_FAME_CHECKER                            0x29B
 #define FLAG_GOT_RECORD_SETTING_MAGIKARP                 0x29C

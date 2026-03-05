@@ -2,6 +2,8 @@
 #include "corpse_run.h"
 
 #include "event_data.h"
+#include "event_object_movement.h"
+#include "fieldmap.h"
 #include "heal_location.h"
 #include "overworld.h"
 #include "pokemon.h"
@@ -13,6 +15,8 @@
 #include "field_fadetransition.h"
 
 #include "constants/battle_setup.h"
+#include "constants/event_object_movement.h"
+#include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/opponents.h"
 #include "constants/trainers.h"
@@ -26,6 +30,8 @@
 #define CORPSE_RUN_TRAINER_HP_MAX 120
 #define CORPSE_RUN_TRAINER_DAMAGE_BASE 6
 #define CORPSE_RUN_TRAINER_DAMAGE_CAP 20
+#define CORPSE_RUN_MARKER_LOCAL_ID 0xFE
+#define CORPSE_RUN_MARKER_GFX_ID OBJ_EVENT_GFX_SIGN
 
 STATIC_ASSERT(sizeof(struct CorpseRunSaveData) == 400, CorpseRunSaveDataSize);
 
@@ -50,6 +56,7 @@ static const u8 sGymAceLevelByBadgeCount[] =
 #define ELITE_FOUR_1_ACE_LEVEL 56
 
 static u8 CorpseRun_GetBadgeCount(void);
+static void CorpseRun_SyncVisibleMarkerObject(void);
 
 static bool8 CorpseRun_IsMapInSalvageSafariScope(u8 mapGroup, u8 mapNum)
 {
@@ -291,6 +298,27 @@ static void CorpseRun_DespawnMarker(void)
     gSaveBlock1Ptr->corpseRun.markerElevation = 0;
     gSaveBlock1Ptr->corpseRun.markerStyle = 0;
     gSaveBlock1Ptr->corpseRun.markerMapSection = 0;
+    RemoveObjectEventByLocalIdAndMap(CORPSE_RUN_MARKER_LOCAL_ID, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+}
+
+static void CorpseRun_SyncVisibleMarkerObject(void)
+{
+    RemoveObjectEventByLocalIdAndMap(CORPSE_RUN_MARKER_LOCAL_ID, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+
+    if (gSaveBlock1Ptr->corpseRun.state != CR_ACTIVE || !gSaveBlock1Ptr->corpseRun.markerSpawned)
+        return;
+
+    if (gSaveBlock1Ptr->location.mapGroup != gSaveBlock1Ptr->corpseRun.markerMapGroup
+     || gSaveBlock1Ptr->location.mapNum != gSaveBlock1Ptr->corpseRun.markerMapNum)
+        return;
+
+    SpawnSpecialObjectEventParameterized(
+        CORPSE_RUN_MARKER_GFX_ID,
+        MOVEMENT_TYPE_FACE_DOWN,
+        CORPSE_RUN_MARKER_LOCAL_ID,
+        gSaveBlock1Ptr->corpseRun.markerX + MAP_OFFSET,
+        gSaveBlock1Ptr->corpseRun.markerY + MAP_OFFSET,
+        MapGridGetElevationAt(gSaveBlock1Ptr->corpseRun.markerX, gSaveBlock1Ptr->corpseRun.markerY));
 }
 
 static void CorpseRun_SetState(u8 newState)
@@ -509,6 +537,8 @@ void CorpseRun_OnMapEnter(void)
     // the player may either recover at the marker or fail on the next defeat.
     if (gSaveBlock1Ptr->corpseRun.state == CR_ACTIVE && gSaveBlock1Ptr->corpseRun.markerSpawned)
         CorpseRun_TryRecoverByTouch();
+
+    CorpseRun_SyncVisibleMarkerObject();
 
     if (gSaveBlock1Ptr->corpseRun.salvageActive)
     {

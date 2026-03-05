@@ -188,12 +188,27 @@ static bool8 CorpseRun_IsValidTransition(u8 from, u8 to)
     }
 }
 
+static u16 CorpseRun_CalculateChecksum(const void *data, u16 size)
+{
+    u16 i;
+    u32 checksum = 0;
+    const u8 *cursor = data;
+
+    for (i = 0; i < (size / 4); i++)
+    {
+        checksum += *(const u32 *)cursor;
+        cursor += 4;
+    }
+
+    return ((checksum >> 16) + checksum);
+}
+
 static u16 CorpseRun_CalcPayloadChecksum(const struct CorpseRunSaveData *save)
 {
     struct CorpseRunSaveData copy = *save;
 
     copy.payloadChecksum = 0;
-    return CalculateChecksum((const void *)&copy.state, copy.payloadLength);
+    return CorpseRun_CalculateChecksum((const void *)&copy.state, copy.payloadLength);
 }
 
 static bool8 CorpseRun_IsExpectedPayloadLength(u16 payloadLength)

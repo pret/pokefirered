@@ -3,6 +3,9 @@ CeruleanCity_Gym_MapScripts::
 
 CeruleanCity_Gym_EventScript_Misty::
 	famechecker FAMECHECKER_MISTY, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_LEADER_MISTY, CeruleanCity_Gym_Text_MistyIntro, CeruleanCity_Gym_Text_MistyDefeat, CeruleanCity_Gym_EventScript_MistyDefeated, NO_MUSIC
 	goto_if_unset FLAG_GOT_TM03_FROM_MISTY, CeruleanCity_Gym_EventScript_GiveTM03
 	msgbox CeruleanCity_Gym_Text_ExplainTM03
@@ -34,11 +37,17 @@ CeruleanCity_Gym_EventScript_NoRoomForTM03::
 	end
 
 CeruleanCity_Gym_EventScript_Diana::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_PICNICKER_DIANA, CeruleanCity_Gym_Text_DianaIntro, CeruleanCity_Gym_Text_DianaDefeat
 	msgbox CeruleanCity_Gym_Text_DianaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 CeruleanCity_Gym_EventScript_Luis::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_SWIMMER_MALE_LUIS, CeruleanCity_Gym_Text_LuisIntro, CeruleanCity_Gym_Text_LuisDefeat
 	famechecker FAMECHECKER_MISTY, 2
 	msgbox CeruleanCity_Gym_Text_LuisPostBattle, MSGBOX_AUTOCLOSE

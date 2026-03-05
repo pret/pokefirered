@@ -3,6 +3,9 @@ PewterCity_Gym_MapScripts::
 
 PewterCity_Gym_EventScript_Brock::
 	famechecker FAMECHECKER_BROCK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_LEADER_BROCK, PewterCity_Gym_Text_BrockIntro, PewterCity_Gym_Text_BrockDefeat, PewterCity_Gym_EventScript_DefeatedBrock, NO_MUSIC
 	goto_if_unset FLAG_GOT_TM39_FROM_BROCK, PewterCity_Gym_EventScript_GiveTM39
 	msgbox PewterCity_Gym_Text_BrockPostBattle
@@ -36,6 +39,9 @@ PewterCity_Gym_EventScript_NoRoomForTM39::
 	end
 
 PewterCity_Gym_EventScript_Liam::
+	setvar VAR_0x8004, 4
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_ne VAR_RESULT, 0, EventScript_CorpseRun_GymBattleBlocked
 	trainerbattle_single TRAINER_CAMPER_LIAM, PewterCity_Gym_Text_LiamIntro, PewterCity_Gym_Text_LiamDefeat
 	msgbox PewterCity_Gym_Text_LiamPostBattle, MSGBOX_AUTOCLOSE
 	end

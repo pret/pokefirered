@@ -100,6 +100,13 @@ TwoIsland_EventScript_ClerkShopInitial::
 	end
 
 TwoIsland_EventScript_ClerkShopSkipIntro::
+	setvar VAR_0x8004, 1
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_eq VAR_RESULT, 0, TwoIsland_EventScript_ClerkContinue
+	msgbox Text_CorpseRun_BlockMart
+	release
+	end
+TwoIsland_EventScript_ClerkContinue::
 	message Text_MayIHelpYou
 	waitmessage
 	goto_if_eq VAR_MAP_SCENE_TWO_ISLAND, 4, TwoIsland_EventScript_ShopExpanded3

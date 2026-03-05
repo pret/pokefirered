@@ -52,6 +52,13 @@ EventScript_PkmnCenterNurse_LevelUpPokemon_End::
 	goto EventScript_PkmnCenterNurse_Goodbye
 
 EventScript_PkmnCenterNurse_HealPkmn::
+	setvar VAR_0x8004, 2
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_eq VAR_RESULT, 0, EventScript_PkmnCenterNurse_HealPkmnContinue
+	msgbox Text_CorpseRun_BlockHeal
+	return
+
+EventScript_PkmnCenterNurse_HealPkmnContinue::
 	incrementgamestat GAME_STAT_USED_POKECENTER
 	message Text_TakeYourPkmnForFewSeconds
 	waitmessage

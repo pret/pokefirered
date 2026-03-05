@@ -1,6 +1,14 @@
 EventScript_PC::
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall
+	setvar VAR_0x8004, 3
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_eq VAR_RESULT, 0, EventScript_PCContinue
+	msgbox Text_CorpseRun_BlockPC
+	releaseall
+	end
+
+EventScript_PCContinue::
 	goto_if_set FLAG_SYS_PC_STORAGE_DISABLED, EventScript_PCDisabled
 	setvar VAR_0x8004, HELPCONTEXT_PC
 	special Script_SetHelpContext

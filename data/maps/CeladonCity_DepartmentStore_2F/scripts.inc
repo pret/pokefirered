@@ -17,6 +17,13 @@ CeladonCity_DepartmentStore_2F_EventScript_ClerkItems::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
+	setvar VAR_0x8004, 1
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_eq VAR_RESULT, 0, .MartContinue
+	msgbox Text_CorpseRun_BlockMart
+	release
+	end
+.MartContinue::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart CeladonCity_DepartmentStore_2F_Items
@@ -43,6 +50,13 @@ CeladonCity_DepartmentStore_2F_EventScript_ClerkTMs::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
+	setvar VAR_0x8004, 1
+	specialvar VAR_RESULT, GetCorpseRunFieldBlockReason
+	goto_if_eq VAR_RESULT, 0, .MartContinueTMs
+	msgbox Text_CorpseRun_BlockMart
+	release
+	end
+.MartContinueTMs::
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart CeladonCity_DepartmentStore_2F_TMs

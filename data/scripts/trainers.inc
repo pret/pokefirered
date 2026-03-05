@@ -1,3 +1,7 @@
+EventScript_CorpseRun_GymBattleBlocked::
+	msgbox Text_CorpseRun_BlockGymBattle
+	end
+
 Route3_EventScript_Ben::
 	trainerbattle_single TRAINER_YOUNGSTER_BEN, Route3_Text_BenIntro, Route3_Text_BenDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle

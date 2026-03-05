@@ -54,3 +54,23 @@ Text_WhitedOutCorpseRunRepeat::
 	.string "{PLAYER} fell again...\p"
 	.string "Your SOULS scattered. Retrieve them.\p"
 	.string "{PLAYER} whited out!$"
+
+Text_CorpseRun_BlockMart::
+	.string "You can't shop while your SOULS are\n"
+	.string "scattered. Retrieve them first.$"
+
+Text_CorpseRun_BlockHeal::
+	.string "The healing machine won't respond\n"
+	.string "until you reclaim your SOULS.$"
+
+Text_CorpseRun_BlockPC::
+	.string "The PC connection is unstable while\n"
+	.string "your SOULS are scattered.$"
+
+Text_CorpseRun_BlockGymBattle::
+	.string "A GYM battle cannot begin while\n"
+	.string "your SOULS are scattered.$"
+
+Text_CorpseRun_BlockDaycareTutor::
+	.string "No one can help with training while\n"
+	.string "your SOULS are scattered.$"

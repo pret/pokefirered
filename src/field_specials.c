@@ -41,6 +41,7 @@
 #include "constants/menu.h"
 #include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
+#include "corpse_run.h"
 
 static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
@@ -122,6 +123,44 @@ void ShowFieldMessageStringVar4(void)
     ShowFieldMessage(gStringVar4);
 }
 
+
+
+u8 GetCorpseRunFieldBlockReason(void)
+{
+    if (!CorpseRun_IsActive())
+        return CORPSE_RUN_FIELD_BLOCK_NONE;
+
+    switch (gSpecialVar_0x8004)
+    {
+    case CORPSE_RUN_FIELD_BLOCK_MART:
+    case CORPSE_RUN_FIELD_BLOCK_HEAL:
+    case CORPSE_RUN_FIELD_BLOCK_PC:
+    case CORPSE_RUN_FIELD_BLOCK_GYM_BATTLE:
+    case CORPSE_RUN_FIELD_BLOCK_DAYCARE_TUTOR:
+        return gSpecialVar_0x8004;
+    default:
+        return CORPSE_RUN_FIELD_BLOCK_NONE;
+    }
+}
+
+u16 GetCorpseRunFieldBlockTextId(void)
+{
+    switch (GetCorpseRunFieldBlockReason())
+    {
+    case CORPSE_RUN_FIELD_BLOCK_MART:
+        return 1;
+    case CORPSE_RUN_FIELD_BLOCK_HEAL:
+        return 2;
+    case CORPSE_RUN_FIELD_BLOCK_PC:
+        return 3;
+    case CORPSE_RUN_FIELD_BLOCK_GYM_BATTLE:
+        return 4;
+    case CORPSE_RUN_FIELD_BLOCK_DAYCARE_TUTOR:
+        return 5;
+    default:
+        return 0;
+    }
+}
 void GetPlayerXY(void)
 {
     gSpecialVar_0x8004 = gSaveBlock1Ptr->pos.x;

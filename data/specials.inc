@@ -241,6 +241,8 @@ gSpecials::
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special GetLeadMonFriendship
+	def_special GetCorpseRunFieldBlockReason
+	def_special GetCorpseRunFieldBlockTextId
 	def_special BattleTowerMapScript2
 	def_special ChooseNextBattleTowerTrainer
 	def_special CheckPartyBattleTowerBanlist

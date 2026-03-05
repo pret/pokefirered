@@ -5,6 +5,7 @@
 #include "script.h"
 #include "event_data.h"
 #include "field_screen_effect.h"
+#include "field_fadetransition.h"
 #include "corpse_run.h"
 
 EWRAM_DATA u8 gNumSafariBalls = 0;

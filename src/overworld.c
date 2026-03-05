@@ -43,6 +43,7 @@
 #include "scanline_effect.h"
 #include "script.h"
 #include "script_pokemon_util.h"
+#include "souls_hud.h"
 #include "start_menu.h"
 #include "tileset_anims.h"
 #include "trainer_pokemon_sprites.h"
@@ -1487,7 +1488,10 @@ void CB1_Overworld(void)
 static void OverworldBasic(void)
 {
     if (IsCorpseRunFeatureEnabled())
+    {
+        SoulsHud_Update();
         CorpseRun_TryRecoverByTouch();
+    }
 
     ScriptContext_RunScript();
     RunTasks();
@@ -1560,6 +1564,8 @@ void CB2_NewGame(void)
     gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     gFieldCallback2 = NULL;
     DoMapLoadLoop(&gMain.state);
+    if (IsCorpseRunFeatureEnabled())
+        SoulsHud_Show();
     SetFieldVBlankCallback();
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
@@ -1583,6 +1589,8 @@ void CB2_WhiteOut(void)
             : FieldCB_RushInjuredPokemonToCenter;
         val = 0;
         DoMapLoadLoop(&val);
+        if (IsCorpseRunFeatureEnabled())
+            SoulsHud_Show();
         QuestLog_CutRecording();
         SetFieldVBlankCallback();
         SetMainCallback1(CB1_Overworld);
@@ -1604,7 +1612,10 @@ static void CB2_LoadMap2(void)
 {
     DoMapLoadLoop(&gMain.state);
     if (IsCorpseRunFeatureEnabled())
+    {
         CorpseRun_OnMapEnter();
+        SoulsHud_Show();
+    }
     if (QuestLog_ShouldEndSceneOnMapChange() == TRUE)
     {
         QuestLog_AdvancePlayhead_();
@@ -1652,6 +1663,8 @@ static void CB2_ReturnToFieldLocal(void)
 {
     if (ReturnToFieldLocal(&gMain.state))
     {
+        if (IsCorpseRunFeatureEnabled())
+            SoulsHud_Show();
         SetFieldVBlankCallback();
         SetMainCallback2(CB2_Overworld);
     }
@@ -1660,7 +1673,11 @@ static void CB2_ReturnToFieldLocal(void)
 static void CB2_ReturnToFieldLink(void)
 {
     if (!Overworld_LinkRecvQueueLengthMoreThan2() && ReturnToFieldLink(&gMain.state))
+    {
+        if (IsCorpseRunFeatureEnabled())
+            SoulsHud_Show();
         SetMainCallback2(CB2_Overworld);
+    }
 }
 
 void CB2_ReturnToFieldFromMultiplayer(void)
@@ -1751,6 +1768,8 @@ void CB2_ContinueSavedGame(void)
 
 static void FieldClearVBlankHBlankCallbacks(void)
 {
+    SoulsHud_Hide();
+
     if (UsedPokemonCenterWarp() == TRUE)
         CloseLink();
 

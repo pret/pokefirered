@@ -110,7 +110,6 @@ static bool8 PrintAllOnCardBack(void);
 static void BufferTextForCardBack(void);
 static void PrintNameOnCardFront(void);
 static void PrintIdOnCard(void);
-static void PrintMoneyOnCard(void);
 static u16 GetCaughtMonsCount(void);
 static void PrintPokedexOnCard(void);
 static void PrintTimeOnCard(void);
@@ -830,7 +829,7 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
 
     trainerCard->rse.hasAllPaintings = FALSE;
 
-    trainerCard->rse.money = GetMoney(&gSaveBlock1Ptr->money);
+    trainerCard->rse.money = 0;
 
     for (i = 0; i < TRAINER_CARD_PROFILE_LENGTH; i++)
         trainerCard->rse.easyChatProfile[i] = gSaveBlock1Ptr->easyChatProfile[i];
@@ -1054,7 +1053,6 @@ static bool8 PrintAllOnCardFront(void)
         PrintIdOnCard();
         break;
     case 2:
-        PrintMoneyOnCard();
         break;
     case 3:
         PrintPokedexOnCard();
@@ -1140,28 +1138,6 @@ static void PrintIdOnCard(void)
     txtPtr = StringCopy(buffer, gText_TrainerCardIDNo);
     ConvertIntToDecimalStringN(txtPtr, sTrainerCardDataPtr->trainerCard.rse.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
     AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], sTrainerCardIdXPositions[sTrainerCardDataPtr->cardType], sTrainerCardIdYPositions[sTrainerCardDataPtr->cardType], sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
-}
-
-static void PrintMoneyOnCard(void)
-{
-    u8 buffer[10];
-    u8 *txtPtr;
-    u8 x;
-
-    txtPtr = StringCopy(buffer, gText_TrainerCardYen);
-    ConvertIntToDecimalStringN(txtPtr, sTrainerCardDataPtr->trainerCard.rse.money, STR_CONV_MODE_LEFT_ALIGN, 6);
-    if (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE)
-    {
-        x = -122 - 6 * StringLength(buffer);
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 20, 56, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardMoney);
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], x, 56, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
-    }
-    else
-    {
-        x = 118 - 6 * StringLength(buffer);
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], 16, 57, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardMoney);
-        AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], x, 57, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
-    }    
 }
 
 static u16 GetCaughtMonsCount(void)

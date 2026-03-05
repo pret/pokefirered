@@ -282,13 +282,14 @@ static void DoWhiteOut(void)
 
 u32 ComputeWhiteOutMoneyLoss(void)
 {
+    // Economy is souls-based; whiteout no longer deducts currency.
+    // Keep badge/level evaluation in place so related helper paths stay live.
     u8 nbadges = CountBadgesForOverworldWhiteOutLossCalculation();
     u8 toplevel = GetPlayerPartyHighestLevel();
-    u32 losings = toplevel * 4 * sWhiteOutMoneyLossMultipliers[nbadges];
-    u32 money = GetMoney(&gSaveBlock1Ptr->money);
-    if (losings > money)
-        losings = money;
-    return losings;
+
+    (void)nbadges;
+    (void)toplevel;
+    return 0;
 }
 
 void OverworldWhiteOutGetMoneyLoss(void)

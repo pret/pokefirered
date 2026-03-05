@@ -13,6 +13,7 @@
 #include "script.h"
 #include "link.h"
 #include "quest_log.h"
+#include "corpse_run.h"
 #include "constants/maps.h"
 #include "constants/abilities.h"
 #include "constants/items.h"
@@ -38,6 +39,7 @@ static bool8 UnlockedTanobyOrAreNotInTanoby(void);
 static u32 GenerateUnownPersonalityByLetter(u8 letter);
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *rate);
+static void ApplyCorpseRunEncounterRateMod(u32 *rate);
 static u8 GetFluteEncounterRateModType(void);
 static void ApplyCleanseTagEncounterRateMod(u32 *rate);
 static bool8 IsLeadMonHoldingCleanseTag(void);
@@ -326,9 +328,16 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
             break;
         }
     }
+    ApplyCorpseRunEncounterRateMod(&encounterRate);
     if (encounterRate > MAX_ENCOUNTER_RATE)
         encounterRate = MAX_ENCOUNTER_RATE;
     return DoWildEncounterRateDiceRoll(encounterRate);
+}
+
+static void ApplyCorpseRunEncounterRateMod(u32 *encounterRate)
+{
+    if (CorpseRun_IsActive())
+        *encounterRate = *encounterRate * 120 / 100;
 }
 
 static u8 GetAbilityEncounterRateModType(void)

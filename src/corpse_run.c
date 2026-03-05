@@ -134,6 +134,8 @@ static void CorpseRun_ForceSalvageExitAndClear(void)
 
 static bool8 CorpseRun_IsCriticalScriptedTrainer(u16 trainerId)
 {
+    // These story-gated opponents should never use the "escape" trainer path.
+    // Defeats against them are always resolved by normal corpse-run persistence.
     switch (trainerId)
     {
     case TRAINER_RIVAL_OAKS_LAB_SQUIRTLE:
@@ -173,6 +175,8 @@ static bool8 CorpseRun_IsCriticalScriptedTrainer(u16 trainerId)
 
 static bool8 CorpseRun_IsBlockedTrainerClass(u8 trainerClass)
 {
+    // High-priority trainer archetypes that should always advance corpse-run state
+    // on defeat: gym leaders, bosses, rivals, Elite Four, and Champion.
     switch (trainerClass)
     {
     case TRAINER_CLASS_LEADER:
@@ -811,6 +815,12 @@ bool8 CorpseRun_IsEscapeTrainerEncounter(u16 trainerId, u8 trainerBattleMode)
      || trainerBattleMode == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC)
         return FALSE;
 
+    // Category policy for trainer encounters while a corpse-run is active:
+    // - Gym/rival/boss/champion classes are blocked from escape handling.
+    // - Specific scripted rivals/Giovanni/admin IDs are blocked explicitly.
+    // - Regular trainers (lass, youngster, etc.) are considered escapable.
+    // This helper now only documents/classifies encounter categories and is no
+    // longer used by whiteout initialization to bypass defeat persistence.
     trainerClass = gTrainers[trainerId].trainerClass;
     if (CorpseRun_IsBlockedTrainerClass(trainerClass))
         return FALSE;

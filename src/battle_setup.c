@@ -937,6 +937,12 @@ static void CB2_EndTrainerBattle(void)
             gSpecialVar_Result = TRUE;
             if (sRivalBattleFlags & RIVAL_BATTLE_HEAL_AFTER)
             {
+                if (IsCorpseRunFeatureEnabled())
+                {
+                    SetMainCallback2(CB2_WhiteOut);
+                    return;
+                }
+
                 HealPlayerParty();
             }
             else

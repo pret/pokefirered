@@ -245,14 +245,22 @@ static const u16 sWhiteOutMoneyLossBadgeFlagIDs[] = {
 
 bool8 IsCorpseRunFeatureEnabled(void)
 {
-    return FEATURE_FLAG_CORPSE_RUN;
+    if (!FEATURE_FLAG_CORPSE_RUN)
+        return FALSE;
+
+    if (FEATURE_FLAG_CORPSE_RUN_USE_SAVE_TOGGLE)
+        return FlagGet(FLAG_SYS_CORPSE_RUN_ENABLED);
+
+    return TRUE;
 }
 
 void CorpseRunInitialization(void)
 {
     RunScriptImmediately(EventScript_ResetEliteFourEnd);
 
-    if (!IsCorpseRunFeatureEnabled() || CorpseRun_ShouldBypassDefeatPersistenceForCurrentBattle())
+    // With corpse-run enabled, every defeat (including trainer battles)
+    // advances corpse-run state through CorpseRun_HandlePlayerDefeat.
+    if (!IsCorpseRunFeatureEnabled())
     {
         RemoveMoney(&gSaveBlock1Ptr->money, ComputeWhiteOutMoneyLoss());
         HealPlayerParty();

@@ -10,8 +10,10 @@ This document tracks every known whiteout/defeat entry point in this codebase an
 
 ## Feature flag and guards
 
-- `FEATURE_FLAG_CORPSE_RUN` (`include/config.h`): compile-time feature flag controlling corpse-run mode.
-- `IsCorpseRunFeatureEnabled` (`src/overworld.c`): helper used by whiteout handlers.
+- `FEATURE_FLAG_CORPSE_RUN` (`include/config.h`): compile-time default/build gate (defaults to `TRUE`, can be overridden by build define).
+- `FEATURE_FLAG_CORPSE_RUN_USE_SAVE_TOGGLE` (`include/config.h`): compile-time toggle for runtime save-flag gating (defaults to `TRUE`).
+- `FLAG_SYS_CORPSE_RUN_ENABLED` (`include/constants/flags.h`): runtime save flag that acts as the tester-facing on/off toggle when save gating is enabled.
+- `IsCorpseRunFeatureEnabled` (`src/overworld.c`): source-of-truth helper used by whiteout handlers; returns `TRUE` only when compile-time gate is on and (optionally) runtime save flag is enabled.
 - `OverworldWhiteOutGetMoneyLoss` (`src/overworld.c`): returns `0` while corpse-run mode is enabled so whiteout text/scripts cannot use vanilla loss values.
 - `CB2_WhiteOut` (`src/overworld.c`): uses `FieldCB_WarpExitFadeFromBlack` in corpse-run mode, preventing post-whiteout nurse/home scripts (`FieldCB_RushInjuredPokemonToCenter`).
 
@@ -24,7 +26,7 @@ All of the following now route to `CorpseRunInitialization` through `CB2_WhiteOu
 - `CB2_EndWildBattle`
 - `CB2_EndScriptedWildBattle`
 - `CB2_EndMarowakBattle`
-- `CB2_EndTrainerBattle` (normal trainer and early rival loss path)
+- `CB2_EndTrainerBattle` (normal trainer and early rival loss path, including `RIVAL_BATTLE_HEAL_AFTER` while corpse-run mode is enabled)
 - `CB2_EndRematchBattle`
 
 ### Field special (`src/post_battle_event_funcs.c`)
@@ -56,3 +58,11 @@ Also ensure no corpse-run-enabled path directly calls:
 - Validation uses `GetHealLocationIndexFromMapGroupAndNum(...)`; when no matching heal location exists (for example, a run where the player has never rested), corpse-run deterministically rewrites `lastHealLocation` to Pallet Town (`MAP_PALLET_TOWN`, `x=6`, `y=8`) and then proceeds.
 - This makes “never rested” behavior explicit and stable: corpse-run fallback respawn is always Pallet/home-equivalent via the Pallet heal location checkpoint.
 
+
+## Activation source of truth
+
+`IsCorpseRunFeatureEnabled` in `src/overworld.c` is the single source of truth for whether corpse-run defeat behavior is active at runtime. In the current default configuration:
+
+1. `FEATURE_FLAG_CORPSE_RUN` must be enabled at compile time (default `TRUE` in `include/config.h`).
+2. `FEATURE_FLAG_CORPSE_RUN_USE_SAVE_TOGGLE` is enabled by default, so `FLAG_SYS_CORPSE_RUN_ENABLED` controls runtime activation.
+3. New saves set `FLAG_SYS_CORPSE_RUN_ENABLED` during `NewGameInitData` (`src/new_game.c`) so default behavior remains ON while still allowing testers to clear/set the flag without recompiling.

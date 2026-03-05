@@ -147,6 +147,7 @@ void NewGameInitData(void)
     SetAllRenewableItemFlags();
     WarpToPlayersRoom();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
+    FlagSet(FLAG_SYS_CORPSE_RUN_ENABLED);
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
     ResetTrainerTowerResults();
 }

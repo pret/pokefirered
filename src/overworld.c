@@ -270,6 +270,11 @@ void CorpseRunInitialization(void)
     else
     {
         CorpseRun_HandlePlayerDefeat();
+
+        // Use standard whiteout respawn routing for normal corpse-run defeats,
+        // but preserve salvage-mode warp destinations set by corpse-run logic.
+        if (!CorpseRun_IsSalvageActive())
+            Overworld_SetWhiteoutRespawnPoint();
     }
 
     Overworld_ResetStateAfterWhitingOut();

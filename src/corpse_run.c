@@ -10,6 +10,7 @@
 #include "field_fadetransition.h"
 
 #include "constants/battle_setup.h"
+#include "constants/maps.h"
 #include "constants/opponents.h"
 #include "constants/trainers.h"
 

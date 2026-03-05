@@ -3877,6 +3877,9 @@ static void HandleEndTurn_RanFromBattle(void)
 
 static void HandleEndTurn_MonFled(void)
 {
+    if (gBattlerAttacker >= gBattlersCount || GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+        gBattlerAttacker = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+
     gCurrentActionFuncId = 0;
     PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker]);
     gBattlescriptCurrInstr = BattleScript_WildMonFled;

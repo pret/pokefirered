@@ -1,30 +1,34 @@
 CeruleanCity_Text_RivalIntro::
-    .string "{RIVAL}: Yo! {PLAYER}!\p"
-    .string "You're still struggling along back\n"
-    .string "here?\p"
-    .string "I'm doing great! I caught a bunch\n"
-    .string "of strong and smart POKéMON!\p"
-    .string "Here, let me see what you caught,\n"
-    .string "{PLAYER}!$"
+    .string "{RIVAL}: Yo!\p"
+    .string "I heard you beat\n"
+    .string "the NUGGET BRIDGE\l"
+    .string "trainers.\p"
+    .string "That means you're\n"
+    .string "carrying quite a few\l"
+    .string "SOULS right now.\p"
+    .string "Be careful.\p"
+    .string "If you black out...\p"
+    .string "they spill\n"
+    .string "everywhere.\p"
+    .string "Anyway.\p"
+    .string "Let's see\n"
+    .string "how strong\l"
+    .string "you've gotten.$"
 
 CeruleanCity_Text_RivalDefeat::
-    .string "Hey!\n"
-    .string "Take it easy!\l"
-    .string "You won already!$"
+    .string "What?!\p"
+    .string "You're already\n"
+    .string "that strong?\p"
+    .string "No way...\p"
+    .string "I've been battling\n"
+    .string "nonstop.\p"
+    .string "I won't lose\n"
+    .string "again.$"
 
 CeruleanCity_Text_RivalPostBattle::
-    .string "{RIVAL}: Hey, guess what?\p"
-    .string "I went to BILL's and got him to\n"
-    .string "show me his rare POKéMON.\p"
-    .string "That added a lot of pages to my\n"
-    .string "POKéDEX!\p"
-    .string "After all, BILL's world famous as a\n"
-    .string "POKéMANIAC.\p"
-    .string "He invented the POKéMON Storage\n"
-    .string "System on PC, too.\p"
-    .string "Since you're using his system,\n"
-    .string "you should go thank him.\p"
-    .string "Well, I better get rolling!\n"
+    .string "{RIVAL}: Well, I better get going.\p"
+    .string "I've got a lot to\n"
+    .string "accomplish.\p"
     .string "Smell ya later!$"
 
 CeruleanCity_Text_OhRightLittlePresentAsFavor::
@@ -35,7 +39,7 @@ CeruleanCity_Text_OhRightLittlePresentAsFavor::
     .string "present as a favor.$"
 
 CeruleanCity_Text_ExplainFameCheckerSmellYa::
-    .string "A chatty gossip like you…\n"
+    .string "A chatty gossip like you...\n"
     .string "That thing's perfect.\p"
     .string "I don't need it because I don't\n"
     .string "give a hoot about others.\p"
@@ -82,7 +86,7 @@ CeruleanCity_Text_MakeRoomForThisCantRun::
 
 CeruleanCity_Text_TrainerLifeIsToughIsntIt::
     .string "You're a TRAINER, too?\p"
-    .string "Collecting, battling…\n"
+    .string "Collecting, battling...\n"
     .string "It's a tough life, isn't it?$"
 
 CeruleanCity_Text_YouCanCutDownSmallTrees::
@@ -136,16 +140,16 @@ CeruleanCity_Text_HardToControlMonsObedience::
     .string "on your abilities as a TRAINER.$"
 
 CeruleanCity_Text_SlowbroTookSnooze::
-    .string "SLOWBRO took a snooze…$"
+    .string "SLOWBRO took a snooze...$"
 
 CeruleanCity_Text_SlowbroLoafingAround::
-    .string "SLOWBRO is loafing around…$"
+    .string "SLOWBRO is loafing around...$"
 
 CeruleanCity_Text_SlowbroTurnedAway::
-    .string "SLOWBRO turned away…$"
+    .string "SLOWBRO turned away...$"
 
 CeruleanCity_Text_SlowbroIgnoredOrders::
-    .string "SLOWBRO ignored orders…$"
+    .string "SLOWBRO ignored orders...$"
 
 CeruleanCity_Text_WantBrightRedBicycle::
     .string "I want a bright red bicycle.\p"

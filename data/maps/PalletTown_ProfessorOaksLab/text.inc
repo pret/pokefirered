@@ -27,14 +27,31 @@ PalletTown_ProfessorOaksLab_Text_RivalMyMonLooksTougher::
     .string "tougher than yours.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalLetsCheckOutMons::
-    .string "{RIVAL}: Wait, {PLAYER}!\n"
-    .string "Let's check out our POKéMON!\p"
-    .string "Come on, I'll take you on!$"
+    .string "{RIVAL}: Hey!\n"
+    .string "Wait a minute!\p"
+    .string "OAK just gave us\n"
+    .string "our POKéMON.\p"
+    .string "And you already\n"
+    .string "look like you're\l"
+    .string "nervous.\p"
+    .string "What's wrong?\p"
+    .string "Afraid you'll\n"
+    .string "lose already?\p"
+    .string "Let's see\n"
+    .string "what your POKéMON\l"
+    .string "can do!$"
 
 PalletTown_ProfessorOaksLab_Text_RivalDefeat::
-    .string "WHAT?\n"
-    .string "Unbelievable!\l"
-    .string "I picked the wrong POKéMON!$"
+    .string "What?\p"
+    .string "Something weird\n"
+    .string "happened.\p"
+    .string "When my POKéMON\n"
+    .string "fainted...\p"
+    .string "I felt something\n"
+    .string "leave it.\p"
+    .string "Whatever.\n"
+    .string "Next time I'll\l"
+    .string "win.$"
 
 @ Also used for early Route 22 battle
 Text_RivalVictory::
@@ -42,9 +59,7 @@ Text_RivalVictory::
     .string "Am I great or what?$"
 
 PalletTown_ProfessorOaksLab_Text_RivalGoToughenMyMon::
-    .string "{RIVAL}: Okay! I'll make my\n"
-    .string "POKéMON battle to toughen it up!\p"
-    .string "{PLAYER}! Gramps!\n"
+    .string "{RIVAL}: {PLAYER}! Gramps!\n"
     .string "Smell you later!$"
 
 PalletTown_ProfessorOaksLab_Text_RivalGramps::
@@ -70,7 +85,7 @@ PalletTown_ProfessorOaksLab_Text_RivalTellSisNotToGiveYouMap::
 
 PalletTown_ProfessorOaksLab_Text_OakThreeMonsChooseOne::
     .string "OAK: {RIVAL}?\n"
-    .string "Let me think…\p"
+    .string "Let me think...\p"
     .string "Oh, that's right, I told you to\n"
     .string "come! Just wait!\p"
     .string "Here, {PLAYER}.\p"
@@ -200,7 +215,7 @@ PalletTown_ProfessorOaksLab_Text_OakExplainCatching::
 
 PalletTown_ProfessorOaksLab_Text_OakCompleteMonGuideWasMyDream::
     .string "To make a complete guide on all\n"
-    .string "the POKéMON in the world…\p"
+    .string "the POKéMON in the world...\p"
     .string "That was my dream!\p"
     .string "But, I'm too old.\n"
     .string "I can't get the job done.\p"
@@ -221,7 +236,7 @@ PalletTown_ProfessorOaksLab_Text_OakAddedNothingToPokedex::
     .string "POKéMON and added to the data.\p"
     .string "So, {PLAYER}, let's have a look at\n"
     .string "your POKéDEX.\p"
-    .string "…What's the matter?\n"
+    .string "...What's the matter?\n"
     .string "You've added no new data at all.\p"
     .string "I'll give you these, so do try a\n"
     .string "little harder.$"
@@ -233,7 +248,7 @@ PalletTown_ProfessorOaksLab_Text_OakComeSeeMeSometime::
 
 
 PalletTown_ProfessorOaksLab_Text_OakSoulsRealization::
-    .string "Ah—\n"
+    .string "Ah-\n"
     .string "You're back.\p"
     .string "Good.\n"
     .string "I needed to see you.\p"
@@ -309,7 +324,7 @@ PalletTown_ProfessorOaksLab_Text_AllMonTypesHaveStrongAndWeakPoints::
 
 PalletTown_ProfessorOaksLab_Text_EmailMessage::
     .string "There's an e-mail message here.\p"
-    .string "…\p"
+    .string "...\p"
     .string "Finally!\n"
     .string "The ultimate TRAINERS of the\l"
     .string "POKéMON LEAGUE are ready to\l"
@@ -319,7 +334,7 @@ PalletTown_ProfessorOaksLab_Text_EmailMessage::
     .string "POKéMON LEAGUE HQ\n"
     .string "INDIGO PLATEAU\p"
     .string "PROF. OAK, please visit us!\n"
-    .string "…$"
+    .string "...$"
 
 PalletTown_ProfessorOaksLab_Text_StudyAsOaksAide::
     .string "I study POKéMON as PROF. OAK's\n"
@@ -385,9 +400,9 @@ PalletTown_ProfessorOaksLab_Text_OakTookBothPokedexUnits::
     .string "units.$"
 
 PalletTown_ProfessorOaksLab_Text_OakNowTheseUnitsCanRecordMoreData::
-    .string "… … …  … … …\p"
-    .string "… … …  … … …\p"
-    .string "…And that's done!\p"
+    .string "... ... ...  ... ... ...\p"
+    .string "... ... ...  ... ... ...\p"
+    .string "...And that's done!\p"
     .string "Now these units can record data on\n"
     .string "a lot more POKéMON.$"
 
@@ -409,5 +424,5 @@ PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex::
     .string "I'll get the POKéDEX completed,\n"
     .string "don't you worry about a thing.\p"
     .string "I think I'll try looking around\n"
-    .string "ONE ISLAND first…\p"
+    .string "ONE ISLAND first...\p"
     .string "Anyways, I'm outta here!$"

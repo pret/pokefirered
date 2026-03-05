@@ -104,20 +104,35 @@ SilphCo_7F_Text_Grunt2PostBattle::
     .string "ticked off!$"
 
 SilphCo_7F_Text_RivalWhatKeptYou::
-    .string "{RIVAL}: What kept you, {PLAYER}?$"
+    .string "{RIVAL}: So it was you\n"
+    .string "causing trouble\l"
+    .string "here too.$"
 
 SilphCo_7F_Text_RivalIntro::
-    .string "{RIVAL}: Hahaha! I thought you'd\n"
-    .string "turn up if I waited here!\p"
-    .string "I guess TEAM ROCKET slowed you\n"
-    .string "down! Not that I care!\p"
-    .string "I saw you in SAFFRON, so I decided\n"
-    .string "to see if you got better!$"
+    .string "{RIVAL}: TEAM ROCKET's\n"
+    .string "been talking about\l"
+    .string "SOULS nonstop.\p"
+    .string "Machines...\p"
+    .string "extraction...\p"
+    .string "I hate it.\p"
+    .string "SOULS should be\n"
+    .string "earned in battle.\p"
+    .string "Not stolen.\p"
+    .string "But that doesn't\n"
+    .string "matter right now.\p"
+    .string "What matters\n"
+    .string "is beating you.$"
 
 SilphCo_7F_Text_RivalDefeat::
-    .string "Oh, man!\n"
-    .string "So, you are ready for BOSS\l"
-    .string "ROCKET!$"
+    .string "I lost...\p"
+    .string "again.\p"
+    .string "I thought\n"
+    .string "I finally caught up.\p"
+    .string "Maybe you're\n"
+    .string "just better\l"
+    .string "at this.\p"
+    .string "But I'm not\n"
+    .string "giving up.$"
 
 SilphCo_7F_Text_RivalVictory::
     .string "{RIVAL}“おまえなあ‥\p"
@@ -126,18 +141,9 @@ SilphCo_7F_Text_RivalVictory::
     .string "いちにんまえ　とは　いえないぜ$"
 
 SilphCo_7F_Text_RivalPostBattle::
-    .string "Well, {PLAYER}!\n"
-    .string "I'm moving on up and ahead!\p"
-    .string "By checking my POKéDEX, I'm\n"
-    .string "starting to see what's strong and\l"
-    .string "how they evolve!\p"
-    .string "Am I a genius or what?\p"
-    .string "I'm going to the POKéMON LEAGUE to\n"
-    .string "boot out the ELITE FOUR.\p"
-    .string "I'll become the world's most\n"
-    .string "powerful TRAINER!\p"
-    .string "{PLAYER}, well, good luck to you!\n"
-    .string "Don't sweat it!\l"
+    .string "{RIVAL}: I'm heading for\n"
+    .string "the POKéMON LEAGUE.\p"
+    .string "Don't fall behind.\n"
     .string "Smell ya!$"
 
 SilphCo_7F_Text_FloorSign::

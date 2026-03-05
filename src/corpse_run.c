@@ -580,6 +580,15 @@ void CorpseRun_ApplyTrainerDamageFromWild(u8 wildLevel)
     if (damage > CORPSE_RUN_TRAINER_DAMAGE_CAP)
         damage = CORPSE_RUN_TRAINER_DAMAGE_CAP;
 
+    if (gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+    {
+        u16 threat = gBattleStruct->field_89;
+
+        if (threat == 0)
+            threat = 100;
+        damage = (damage * threat) / 100;
+    }
+
     if (gBattleStruct->safariBaitThrowCounter != 0)
         damage = (damage * 3) / 4;
     else if (gBattleStruct->safariRockThrowCounter != 0)
@@ -658,12 +667,99 @@ bool8 CorpseRun_CanReceiveItemDrops(void)
 
 bool8 CorpseRun_ShouldUseSafariBattle(void)
 {
-    return GetSafariZoneFlag() || CorpseRun_IsActive() || CorpseRun_IsSalvageActive();
+    return GetSafariZoneFlag() || CorpseRun_IsSalvageActive() || CorpseRun_IsActive();
+}
+
+bool8 CorpseRun_ShouldUseStandardSafariBattle(void)
+{
+    return CorpseRun_IsSalvageActive();
+}
+
+bool8 CorpseRun_ShouldUseCorpseSafariBattle(void)
+{
+    if (InSafariZone())
+        return FALSE;
+
+    return CorpseRun_IsActive() && !CorpseRun_IsSalvageActive();
 }
 
 bool8 CorpseRun_ShouldRunPostBattleScripts(void)
 {
     return !CorpseRun_IsSalvageActive();
+}
+
+void CorpseRun_OnCorpseSafariEncounterStart(u8 wildLevel)
+{
+    u16 threat;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI) || !CorpseRun_IsActive())
+        return;
+
+    threat = 100 + wildLevel;
+    if (threat > 220)
+        threat = 220;
+
+    gBattleStruct->field_89 = threat;
+    gBattleStruct->field_8A = 0;
+}
+
+void CorpseRun_OnCorpseSafariTurnStart(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+        gBattleStruct->field_8A = 0;
+}
+
+void CorpseRun_OnCorpseSafariAction(u8 action)
+{
+    u16 threat;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI) || !CorpseRun_IsActive())
+        return;
+
+    if (threat == 0)
+        threat = 100;
+
+    if (action == B_ACTION_SAFARI_BAIT)
+    {
+        threat = (threat * 75) / 100;
+    }
+    else if (action == B_ACTION_SAFARI_GO_NEAR)
+    {
+        threat = (threat * 140) / 100;
+    }
+
+    if (threat < 40)
+        threat = 40;
+    if (threat > 250)
+        threat = 250;
+
+    gBattleStruct->field_89 = threat;
+}
+
+void CorpseRun_OnCorpseSafariTurnEnd(u8 wildLevel)
+{
+    u16 before;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI) || !CorpseRun_IsActive())
+        return;
+    if (gBattleOutcome != 0)
+        return;
+    if (gBattleStruct->field_8A)
+        return;
+
+    if (gBattleStruct->field_89 == 0)
+        CorpseRun_OnCorpseSafariEncounterStart(wildLevel);
+
+    before = gSaveBlock1Ptr->corpseRun.trainerHpCurrent;
+    CorpseRun_ApplyTrainerDamageFromWild(wildLevel);
+
+    if (before != 0 && gSaveBlock1Ptr->corpseRun.trainerHpCurrent == 0)
+    {
+        gCurrentTurnActionNumber = gBattlersCount;
+        gBattleOutcome = B_OUTCOME_RAN;
+    }
+
+    gBattleStruct->field_8A = 1;
 }
 
 bool8 CorpseRun_IsEscapeTrainerEncounter(u16 trainerId, u8 trainerBattleMode)

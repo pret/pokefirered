@@ -54,6 +54,7 @@ static void HandleAction_SafariZoneBallThrow(void);
 static void HandleAction_ThrowBait(void);
 static void HandleAction_ThrowRock(void);
 static void HandleAction_SafariZoneRun(void);
+static void ApplyCorpseSafariTurnEndEffects(u8 action);
 static void HandleAction_OldManBallThrow(void);
 static void HandleAction_TryFinish(void);
 static void HandleAction_NothingIsFainted(void);
@@ -2327,6 +2328,8 @@ static void BattleStartClearSetData(void)
     *(&gBattleStruct->safariEscapeFactor) = gSpeciesInfo[GetMonData(&gEnemyParty[0], MON_DATA_SPECIES)].safariZoneFleeRate * 100 / 1275;
     if (gBattleStruct->safariEscapeFactor <= 1)
         gBattleStruct->safariEscapeFactor = 2;
+    if (gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+        CorpseRun_OnCorpseSafariEncounterStart(gBattleMons[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)].level);
     gBattleStruct->wildVictorySong = 0;
     gBattleStruct->moneyMultiplier = 1;
 
@@ -3743,6 +3746,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
     gBattleMainFunc = RunTurnActionsFunctions;
     gBattleCommunication[3] = 0;
     gBattleCommunication[4] = 0;
+    CorpseRun_OnCorpseSafariTurnStart();
     gBattleScripting.multihitMoveEffect = 0;
     gBattleResources->battleScriptsStack->size = 0;
 }
@@ -4377,6 +4381,15 @@ static void HandleAction_Run(void)
     }
 }
 
+static void ApplyCorpseSafariTurnEndEffects(u8 action)
+{
+    if (!(gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI))
+        return;
+
+    CorpseRun_OnCorpseSafariAction(action);
+    CorpseRun_OnCorpseSafariTurnEnd(gBattleMons[gBattlerAttacker].level);
+}
+
 static void HandleAction_WatchesCarefully(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
@@ -4411,16 +4424,7 @@ static void HandleAction_WatchesCarefully(void)
         }
     }
 
-    if (CorpseRun_IsActive())
-    {
-        CorpseRun_ApplyTrainerDamageFromWild(gBattleMons[gBattlerAttacker].level);
-        if (!CorpseRun_IsActive())
-        {
-            gCurrentTurnActionNumber = gBattlersCount;
-            gBattleOutcome = B_OUTCOME_RAN;
-            return;
-        }
-    }
+    ApplyCorpseSafariTurnEndEffects(B_ACTION_SAFARI_WATCH_CAREFULLY);
 
     gBattlescriptCurrInstr = gBattlescriptsForSafariActions[0];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
@@ -4431,6 +4435,16 @@ static void HandleAction_SafariZoneBallThrow(void)
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_MON_WATCHING;
+        ApplyCorpseSafariTurnEndEffects(B_ACTION_SAFARI_WATCH_CAREFULLY);
+        gBattlescriptCurrInstr = gBattlescriptsForSafariActions[0];
+        gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
+        return;
+    }
+
     --gNumSafariBalls;
     gLastUsedItem = ITEM_SAFARI_BALL;
     gBattlescriptCurrInstr = gBattlescriptsForBallThrow[ITEM_SAFARI_BALL];
@@ -4449,6 +4463,7 @@ static void HandleAction_ThrowBait(void)
     gBattleStruct->safariCatchFactor >>= 1;
     if (gBattleStruct->safariCatchFactor <= 2)
         gBattleStruct->safariCatchFactor = 3;
+    ApplyCorpseSafariTurnEndEffects(B_ACTION_SAFARI_BAIT);
     gBattlescriptCurrInstr = gBattlescriptsForSafariActions[2];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
@@ -4465,6 +4480,7 @@ static void HandleAction_ThrowRock(void)
     gBattleStruct->safariCatchFactor <<= 1;
     if (gBattleStruct->safariCatchFactor > 20)
         gBattleStruct->safariCatchFactor = 20;
+    ApplyCorpseSafariTurnEndEffects(B_ACTION_SAFARI_GO_NEAR);
     gBattlescriptCurrInstr = gBattlescriptsForSafariActions[1];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
@@ -4472,6 +4488,25 @@ static void HandleAction_ThrowRock(void)
 static void HandleAction_SafariZoneRun(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+
+    if (gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+    {
+        if ((Random() & 0xFF) < 224)
+        {
+            PlaySE(SE_FLEE);
+            gCurrentTurnActionNumber = gBattlersCount;
+            gBattleOutcome = B_OUTCOME_RAN;
+            return;
+        }
+
+        gBattleCommunication[MULTISTRING_CHOOSER] = 3;
+        gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;
+        gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
+        CorpseRun_OnCorpseSafariAction(B_ACTION_SAFARI_GO_NEAR);
+        CorpseRun_OnCorpseSafariTurnEnd(gBattleMons[gBattlerAttacker].level);
+        return;
+    }
+
     PlaySE(SE_FLEE);
     gCurrentTurnActionNumber = gBattlersCount;
     gBattleOutcome = B_OUTCOME_RAN;

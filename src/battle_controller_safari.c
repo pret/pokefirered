@@ -13,6 +13,7 @@
 #include "util.h"
 #include "strings.h"
 #include "constants/songs.h"
+#include "corpse_run.h"
 #include "constants/battle_anim.h"
 
 static void SafariHandleGetMonData(void);
@@ -168,7 +169,10 @@ static void HandleInputChooseAction(void)
         switch (gActionSelectionCursor[gActiveBattler])
         {
         case 0:
-            BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_BALL, 0);
+            if (gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI)
+                BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
+            else
+                BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_BALL, 0);
             break;
         case 1:
             BtlController_EmitTwoReturnValues(1, B_ACTION_SAFARI_BAIT, 0);
@@ -439,11 +443,11 @@ static void SafariHandleChooseAction(void)
 
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
-    BattlePutTextOnWindow(gText_SafariZoneMenu, B_WIN_ACTION_MENU);
+    BattlePutTextOnWindow((gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI) ? gText_CorpseSafariZoneMenu : gText_SafariZoneMenu, B_WIN_ACTION_MENU);
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
-    BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPlayerThrow);
+    BattleStringExpandPlaceholdersToDisplayedString((gBattleTypeFlags & BATTLE_TYPE_CORPSE_SAFARI) ? gText_WhatWillPlayerDo : gText_WhatWillPlayerThrow);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 

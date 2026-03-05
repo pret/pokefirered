@@ -60,6 +60,7 @@ struct TrainerBattleParameter
 };
 
 static void DoSafariBattle(void);
+static void DoCorpseSafariBattle(void);
 static void DoGhostBattle(void);
 static void DoStandardWildBattle(void);
 static void CB2_EndWildBattle(void);
@@ -237,8 +238,10 @@ static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
 
 void StartWildBattle(void)
 {
-    if (CorpseRun_ShouldUseSafariBattle())
+    if (InSafariZone() || CorpseRun_ShouldUseStandardSafariBattle())
         DoSafariBattle();
+    else if (CorpseRun_ShouldUseCorpseSafariBattle())
+        DoCorpseSafariBattle();
     else if (CheckSilphScopeInPokemonTower(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
         DoGhostBattle();
     else
@@ -276,6 +279,16 @@ static void DoSafariBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndSafariBattle;
     gBattleTypeFlags = BATTLE_TYPE_SAFARI;
+    CreateBattleStartTask(GetWildBattleTransition(), 0);
+}
+
+static void DoCorpseSafariBattle(void)
+{
+    LockPlayerFieldControls();
+    FreezeObjectEvents();
+    StopPlayerAvatar();
+    gMain.savedCallback = CB2_EndSafariBattle;
+    gBattleTypeFlags = BATTLE_TYPE_SAFARI | BATTLE_TYPE_CORPSE_SAFARI;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
 }
 

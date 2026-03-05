@@ -578,7 +578,7 @@ bool8 CorpseRun_CanGainCurrencyFromCurrentBattle(void)
 
 bool8 CorpseRun_CanCaptureInCurrentBattle(void)
 {
-    return !CorpseRun_IsSalvageActive();
+    return !CorpseRun_IsActive() && !CorpseRun_IsSalvageActive();
 }
 
 bool8 CorpseRun_CanReceiveItemDrops(void)
@@ -588,7 +588,7 @@ bool8 CorpseRun_CanReceiveItemDrops(void)
 
 bool8 CorpseRun_ShouldUseSafariBattle(void)
 {
-    return GetSafariZoneFlag() || CorpseRun_IsSalvageActive();
+    return GetSafariZoneFlag() || CorpseRun_IsActive() || CorpseRun_IsSalvageActive();
 }
 
 bool8 CorpseRun_ShouldRunPostBattleScripts(void)

@@ -480,6 +480,7 @@ void CorpseRun_TryRecoverByTouch(void)
     if (gSaveBlock1Ptr->pos.x == gSaveBlock1Ptr->corpseRun.markerX
      && gSaveBlock1Ptr->pos.y == gSaveBlock1Ptr->corpseRun.markerY)
     {
+        AddMoney(&gSaveBlock1Ptr->money, gSaveBlock1Ptr->corpseRun.droppedSouls);
         CorpseRun_ApplyRecoveryHpToParty();
         gSaveBlock1Ptr->corpseRun.droppedSouls = 0;
         gSaveBlock1Ptr->corpseRun.trainerHpMax = 0;

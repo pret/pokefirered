@@ -255,7 +255,7 @@ PalletTown_ProfessorOaksLab_Text_OakSoulsRealization::
     .string "I've been studying\n"
     .string "the battle reports\n"
     .string "you've been making.\p"
-    .string "The \"SOULS.\"\p"
+    .string "The “SOULS.”\p"
     .string "TRAINERs talk about them\n"
     .string "like they're new.\p"
     .string "But they aren't.\p"

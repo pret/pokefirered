@@ -5,6 +5,7 @@
 #include "berry_powder.h"
 #include "bike.h"
 #include "coins.h"
+#include "corpse_run.h"
 #include "event_data.h"
 #include "field_effect.h"
 #include "field_fadetransition.h"
@@ -613,6 +614,9 @@ static void Task_UsedBlackWhiteFlute(u8 taskId)
 
 bool8 CanUseEscapeRopeOnCurrMap(void)
 {
+    if (CorpseRun_IsFieldMovementEscapeDisallowed() == TRUE)
+        return FALSE;
+
     if (gMapHeader.allowEscaping)
         return TRUE;
     else
@@ -627,6 +631,8 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
         sItemUseOnFieldCB = ItemUseOnFieldCB_EscapeRope;
         SetUpItemUseOnFieldCallback(taskId);
     }
+    else if (CorpseRun_IsFieldMovementEscapeDisallowed() == TRUE)
+        DisplayItemMessageInCurrentContext(taskId, gTasks[taskId].data[3], FONT_NORMAL, gText_CorpseRun_EscapeDisallowed);
     else
         PrintNotTheTimeToUseThat(taskId, gTasks[taskId].data[3]);
 }

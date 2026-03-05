@@ -316,6 +316,7 @@ const u8 gText_NothingToCut[] = _("There's nothing to CUT.");
 const u8 gText_CantSurfHere[] = _("No SURFING here!");
 const u8 gText_AlreadySurfing[] = _("You're already SURFING.");
 const u8 gText_CantUseHere[] = _("Can't use that here.");
+const u8 gText_CorpseRun_EscapeDisallowed[] = _("You feel compelled to return to where you fell.");
 const u8 gText_RestoreWhichMove[] = _("Restore which move?");
 const u8 gText_BoostPp[] = _("Boost PP of which?");
 const u8 gText_DoWhatWithItem[] = _("Do what with an item?");

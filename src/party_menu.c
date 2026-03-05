@@ -57,6 +57,7 @@
 #include "tm_case.h"
 #include "trade.h"
 #include "union_room.h"
+#include "corpse_run.h"
 #include "constants/battle.h"
 #include "constants/easy_chat.h"
 #include "constants/field_effects.h"
@@ -3973,7 +3974,11 @@ static void CursorCB_FieldMove(u8 taskId)
                 DisplayCantUseFlashMessage();
                 break;
             default:
-                DisplayPartyMenuStdMessage(sFieldMoveCursorCallbacks[fieldMove].msgId);
+                if (CorpseRun_IsFieldMovementEscapeDisallowed() == TRUE
+                 && (fieldMove == FIELD_MOVE_FLY || fieldMove == FIELD_MOVE_TELEPORT || fieldMove == FIELD_MOVE_DIG))
+                    DisplayPartyMenuMessage(gText_CorpseRun_EscapeDisallowed, TRUE);
+                else
+                    DisplayPartyMenuStdMessage(sFieldMoveCursorCallbacks[fieldMove].msgId);
                 break;
             }
             gTasks[taskId].func = Task_CancelAfterAorBPress;
@@ -4098,6 +4103,9 @@ static void DisplayCantUseSurfMessage(void)
 
 static bool8 SetUpFieldMove_Fly(void)
 {
+    if (CorpseRun_IsFieldMovementEscapeDisallowed() == TRUE)
+        return FALSE;
+
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
         return TRUE;
     else

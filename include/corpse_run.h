@@ -28,6 +28,7 @@ bool8 CorpseRun_IsEscapeTrainerEncounter(u16 trainerId, u8 trainerBattleMode);
 bool8 CorpseRun_ShouldBypassDefeatPersistenceForCurrentBattle(void);
 bool8 CorpseRun_ShouldSuppressTrainerBattleSideEffects(void);
 bool8 CorpseRun_IsActive(void);
+bool8 CorpseRun_IsFieldMovementEscapeDisallowed(void);
 bool8 CorpseRun_IsSalvageActive(void);
 bool8 CorpseRun_CanUseBagInCurrentBattle(void);
 bool8 CorpseRun_CanRunFromCurrentBattle(void);

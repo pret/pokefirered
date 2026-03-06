@@ -22,6 +22,7 @@
 
 #define STAMINA_REGEN_DELAY_FRAMES 90
 #define STAMINA_REGEN_TICK_FRAMES 16
+#define STAMINA_EXHAUSTED_COOLDOWN_FRAMES 120
 
 #define CHASE_MAX_CHASERS 2
 #define CHASE_BASE_STEPS 45
@@ -37,6 +38,7 @@
 
 static EWRAM_DATA u8 sStaminaRegenDelay = 0;
 static EWRAM_DATA u8 sStaminaRegenTick = 0;
+static EWRAM_DATA u8 sStaminaExhaustedCooldownFrames = 0;
 static EWRAM_DATA u8 sActiveChasers = 0;
 static EWRAM_DATA u16 sChaseStepsRemaining = 0;
 static EWRAM_DATA u8 sChaseReengageStepCountdown = 0;
@@ -294,13 +296,21 @@ u16 PkmnCenterStaminaUpgrade_Purchase(void)
 bool8 ChaseStamina_CanUseRunStep(void)
 {
     ClampCurrentStamina();
+    if (sStaminaExhaustedCooldownFrames != 0)
+        return FALSE;
+
     return gSaveBlock1Ptr->staminaCurrent != 0;
 }
 
 void ChaseStamina_ConsumeRunStep(void)
 {
+    u8 previousStamina = gSaveBlock1Ptr->staminaCurrent;
+
     if (gSaveBlock1Ptr->staminaCurrent != 0)
         gSaveBlock1Ptr->staminaCurrent--;
+
+    if (previousStamina != 0 && gSaveBlock1Ptr->staminaCurrent == 0)
+        sStaminaExhaustedCooldownFrames = STAMINA_EXHAUSTED_COOLDOWN_FRAMES;
 
     sStaminaRegenDelay = STAMINA_REGEN_DELAY_FRAMES;
     sStaminaRegenTick = 0;
@@ -312,6 +322,9 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
 
     if (ChaseStamina_IsChaseActive() && !IsCurrentAreaValidForActiveChase())
         EndChase();
+
+    if (sStaminaExhaustedCooldownFrames != 0)
+        sStaminaExhaustedCooldownFrames--;
 
     if (sStaminaRegenDelay != 0)
         sStaminaRegenDelay--;

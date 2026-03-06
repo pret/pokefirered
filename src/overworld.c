@@ -32,6 +32,7 @@
 #include "new_game.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
+#include "overworld_hud.h"
 #include "play_time.h"
 #include "quest_log.h"
 #include "quest_log_objects.h"
@@ -1507,6 +1508,8 @@ static void OverworldBasic(void)
         CorpseRun_TryRecoverByTouch();
     }
 
+    OverworldHud_Update();
+
     ScriptContext_RunScript();
     RunTasks();
     AnimateSprites();
@@ -1784,6 +1787,7 @@ void CB2_ContinueSavedGame(void)
 static void FieldClearVBlankHBlankCallbacks(void)
 {
     SoulsHud_Hide();
+    OverworldHud_Hide();
 
     if (UsedPokemonCenterWarp() == TRUE)
         CloseLink();

@@ -46,14 +46,14 @@ static u8 GetStaminaLevel(void)
     return gSaveBlock1Ptr->staminaLevel;
 }
 
-static u8 GetStaminaMax(void)
+u8 ChaseStamina_GetMax(void)
 {
     return STAMINA_BASE_STEPS + (GetStaminaLevel() - 1) * STAMINA_STEPS_PER_LEVEL;
 }
 
 static void ClampCurrentStamina(void)
 {
-    u8 maxStamina = GetStaminaMax();
+    u8 maxStamina = ChaseStamina_GetMax();
 
     if (gSaveBlock1Ptr->staminaCurrent > maxStamina)
         gSaveBlock1Ptr->staminaCurrent = maxStamina;
@@ -61,10 +61,10 @@ static void ClampCurrentStamina(void)
 
 static void RefillStamina(void)
 {
-    gSaveBlock1Ptr->staminaCurrent = GetStaminaMax();
+    gSaveBlock1Ptr->staminaCurrent = ChaseStamina_GetMax();
 }
 
-static bool8 IsChaseActive(void)
+bool8 ChaseStamina_IsChaseActive(void)
 {
     return sActiveChasers != 0 && sChaseStepsRemaining != 0;
 }
@@ -96,6 +96,22 @@ static void EndChase(void)
 static u32 GetStaminaUpgradeCost(u8 nextLevel)
 {
     return STAMINA_UPGRADE_COST_BASE + (nextLevel - STAMINA_LEVEL_MIN) * STAMINA_UPGRADE_COST_STEP;
+}
+
+u8 ChaseStamina_GetCurrent(void)
+{
+    ClampCurrentStamina();
+    return gSaveBlock1Ptr->staminaCurrent;
+}
+
+u8 ChaseStamina_GetActiveChasers(void)
+{
+    return sActiveChasers;
+}
+
+u16 ChaseStamina_GetChaseStepsRemaining(void)
+{
+    return sChaseStepsRemaining;
 }
 
 u16 PkmnCenterStaminaUpgrade_Preview(void)
@@ -161,7 +177,7 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
 
     if (sStaminaRegenDelay != 0)
         sStaminaRegenDelay--;
-    else if (gSaveBlock1Ptr->staminaCurrent < GetStaminaMax())
+    else if (gSaveBlock1Ptr->staminaCurrent < ChaseStamina_GetMax())
     {
         if (++sStaminaRegenTick >= STAMINA_REGEN_TICK_FRAMES)
         {
@@ -173,7 +189,7 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
     if (!tookStep)
         return;
 
-    if (IsChaseActive())
+    if (ChaseStamina_IsChaseActive())
     {
         sChaseStepsRemaining--;
         if (sChaseStepsRemaining == 0)
@@ -189,7 +205,7 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
 
 bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
 {
-    if (!IsChaseActive())
+    if (!ChaseStamina_IsChaseActive())
         return FALSE;
 
     if (sChaseReengageStepCounter < CHASE_REENGAGE_STEP_INTERVAL)
@@ -210,7 +226,7 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
 
 bool8 ChaseStamina_ShouldSuppressRandomEncounters(void)
 {
-    return IsChaseActive();
+    return ChaseStamina_IsChaseActive();
 }
 
 void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)

@@ -10,6 +10,11 @@
 void ChaseStamina_UpdateOverworldFrame(bool8 tookStep);
 bool8 ChaseStamina_CanUseRunStep(void);
 void ChaseStamina_ConsumeRunStep(void);
+u8 ChaseStamina_GetCurrent(void);
+u8 ChaseStamina_GetMax(void);
+u8 ChaseStamina_GetActiveChasers(void);
+u16 ChaseStamina_GetChaseStepsRemaining(void);
+bool8 ChaseStamina_IsChaseActive(void);
 
 u16 PkmnCenterStaminaUpgrade_Preview(void);
 u16 PkmnCenterStaminaUpgrade_Purchase(void);

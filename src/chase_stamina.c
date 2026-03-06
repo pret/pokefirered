@@ -96,6 +96,37 @@ static bool8 IsValidChaseEncounterContext(u32 metatileAttributes)
     return FALSE;
 }
 
+static bool8 IsCurrentAreaValidForActiveChase(void)
+{
+    s16 x;
+    s16 y;
+    u8 encounterType;
+
+    if (!IsMapTypeChaseCompatible(gMapHeader.mapType))
+        return FALSE;
+
+    // Town/city/indoor maps are treated as safe/scripted hubs for chase continuation.
+    if (gMapHeader.mapType == MAP_TYPE_TOWN
+     || gMapHeader.mapType == MAP_TYPE_CITY
+     || gMapHeader.mapType == MAP_TYPE_INDOOR)
+        return FALSE;
+
+    PlayerGetDestCoords(&x, &y);
+    encounterType = MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE);
+
+    if (encounterType == TILE_ENCOUNTER_LAND)
+        return TRUE;
+
+    if (encounterType == TILE_ENCOUNTER_WATER)
+        return TRUE;
+
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING)
+     && MetatileBehavior_IsBridge(MapGridGetMetatileBehaviorAt(x, y)))
+        return TRUE;
+
+    return FALSE;
+}
+
 static void EndChase(void)
 {
     sActiveChasers = 0;
@@ -261,6 +292,9 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
 {
     ClampCurrentStamina();
 
+    if (ChaseStamina_IsChaseActive() && !IsCurrentAreaValidForActiveChase())
+        EndChase();
+
     if (sStaminaRegenDelay != 0)
         sStaminaRegenDelay--;
     else if (gSaveBlock1Ptr->staminaCurrent < ChaseStamina_GetMax())
@@ -317,6 +351,12 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
 
 bool8 ChaseStamina_ShouldSuppressRandomEncounters(void)
 {
+    if (ChaseStamina_IsChaseActive() && !IsCurrentAreaValidForActiveChase())
+    {
+        EndChase();
+        return FALSE;
+    }
+
     return ChaseStamina_IsChaseActive();
 }
 
@@ -439,4 +479,3 @@ void ChaseStamina_OnMapTransition(const struct WarpData *from, const struct Warp
         return;
     }
 }
-

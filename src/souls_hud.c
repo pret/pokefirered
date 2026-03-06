@@ -16,6 +16,8 @@
 #define SOULS_HUD_FRAME_TILE   0x240
 #define SOULS_HUD_TEXT_X       2
 #define SOULS_HUD_TEXT_WIDTH   60
+#define SOULS_HUD_LETTER_SPACING 0
+#define SOULS_HUD_LINE_SPACING   0
 
 static const struct WindowTemplate sSoulsHudWindowTemplate = {
     .bg = SOULS_HUD_BG,
@@ -33,8 +35,9 @@ static EWRAM_DATA bool8 sSoulsHudSuppressed = FALSE;
 
 static void SoulsHud_PrintLabel(void)
 {
-    s32 x = SOULS_HUD_TEXT_X + (SOULS_HUD_TEXT_WIDTH - GetStringWidth(FONT_SMALL, gText_SoulsHudLabel, 0)) / 2;
-    AddTextPrinterParameterized(sSoulsHudWindowId, FONT_SMALL, gText_SoulsHudLabel, x, 1, TEXT_SKIP_DRAW, NULL);
+    s32 x = SOULS_HUD_TEXT_X + (SOULS_HUD_TEXT_WIDTH - GetStringWidth(FONT_SMALL, gText_SoulsHudLabel, SOULS_HUD_LETTER_SPACING)) / 2;
+    AddTextPrinterParameterized5(sSoulsHudWindowId, FONT_SMALL, gText_SoulsHudLabel, x, 1, TEXT_SKIP_DRAW, NULL,
+                                 SOULS_HUD_LETTER_SPACING, SOULS_HUD_LINE_SPACING);
 }
 
 static void SoulsHud_PrintValue(u32 souls)
@@ -44,8 +47,9 @@ static void SoulsHud_PrintValue(u32 souls)
 
     ConvertIntToDecimalStringN(text, souls, STR_CONV_MODE_LEFT_ALIGN, 6);
     FillWindowPixelRect(sSoulsHudWindowId, PIXEL_FILL(1), SOULS_HUD_TEXT_X, 14, SOULS_HUD_TEXT_WIDTH, 7);
-    x = SOULS_HUD_TEXT_X + (SOULS_HUD_TEXT_WIDTH - GetStringWidth(FONT_SMALL, text, 0)) / 2;
-    AddTextPrinterParameterized(sSoulsHudWindowId, FONT_SMALL, text, x, 14, TEXT_SKIP_DRAW, NULL);
+    x = SOULS_HUD_TEXT_X + (SOULS_HUD_TEXT_WIDTH - GetStringWidth(FONT_SMALL, text, SOULS_HUD_LETTER_SPACING)) / 2;
+    AddTextPrinterParameterized5(sSoulsHudWindowId, FONT_SMALL, text, x, 14, TEXT_SKIP_DRAW, NULL,
+                                 SOULS_HUD_LETTER_SPACING, SOULS_HUD_LINE_SPACING);
 }
 
 bool8 SoulsHud_IsVisible(void)

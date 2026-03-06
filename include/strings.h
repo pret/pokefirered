@@ -41,6 +41,8 @@ extern const u8 gText_Third[];
 extern const u8 gText_NoDecorations[];
 extern const u8 gText_NoDecorationsInUse[];
 extern const u8 gText_Cancel[];
+extern const u8 gText_Increase[];
+extern const u8 gText_Decrease[];
 extern const u8 gText_Color161Shadow161[];
 extern const u8 gText_GoBackPrevMenu[];
 extern const u8 gText_CantPlaceInRoom[];

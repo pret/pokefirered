@@ -166,6 +166,121 @@ static bool8 DoesNextPurchasedLevelBreakPartySpread(u8 leveledPartyId)
     return (maxLevel - minLevel) > 5;
 }
 
+static bool8 DoesPurchasedLevelsBreakPartySpread(u8 leveledPartyId, u8 addedLevels)
+{
+    s16 i;
+    bool8 foundMon = FALSE;
+    u8 minLevel = MAX_LEVEL;
+    u8 maxLevel = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *partyMon = &gPlayerParty[i];
+        u16 species = GetMonData(partyMon, MON_DATA_SPECIES);
+        u8 level;
+
+        if (species == SPECIES_NONE || GetMonData(partyMon, MON_DATA_IS_EGG) == TRUE)
+            continue;
+
+        level = GetMonData(partyMon, MON_DATA_LEVEL);
+        if (i == leveledPartyId)
+            level += addedLevels;
+
+        if (!foundMon || level < minLevel)
+            minLevel = level;
+        if (!foundMon || level > maxLevel)
+            maxLevel = level;
+        foundMon = TRUE;
+    }
+
+    if (!foundMon)
+        return FALSE;
+
+    return (maxLevel - minLevel) > 5;
+}
+
+static u8 GetMaxPurchasableLevels(u8 partyId, u32 availableSouls, u32 *oneLevelCost)
+{
+    struct Pokemon *mon = &gPlayerParty[partyId];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL);
+    u32 currentExp = GetMonData(mon, MON_DATA_EXP);
+    u8 purchasableLevels = 0;
+
+    while (level < MAX_LEVEL && level < GetManualLevelCap())
+    {
+        u32 nextLevelExp;
+        u32 requiredSouls;
+
+        if (DoesPurchasedLevelsBreakPartySpread(partyId, purchasableLevels + 1))
+            break;
+
+        nextLevelExp = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1];
+        requiredSouls = nextLevelExp - currentExp;
+        if (purchasableLevels == 0 && oneLevelCost != NULL)
+            *oneLevelCost = requiredSouls;
+
+        if (requiredSouls > availableSouls)
+            break;
+
+        availableSouls -= requiredSouls;
+        currentExp = nextLevelExp;
+        level++;
+        purchasableLevels++;
+    }
+
+    return purchasableLevels;
+}
+
+static u16 GetPurchasedLevelOutcome(u8 partyId, u8 requestedLevels, u32 *requiredSouls, u32 *finalExp)
+{
+    struct Pokemon *mon;
+    u16 species;
+    u8 level;
+    u32 currentExp;
+    u8 purchasedLevels;
+
+    if (requestedLevels == 0)
+        return MANUAL_LEVEL_UP_FAIL_CANT_LEVEL;
+
+    if (partyId >= PARTY_SIZE)
+        return MANUAL_LEVEL_UP_FAIL_CANT_LEVEL;
+
+    mon = &gPlayerParty[partyId];
+    if (GetMonData(mon, MON_DATA_IS_EGG) == TRUE)
+        return MANUAL_LEVEL_UP_FAIL_CANT_LEVEL;
+
+    level = GetMonData(mon, MON_DATA_LEVEL);
+    if (level >= MAX_LEVEL)
+        return MANUAL_LEVEL_UP_FAIL_CANT_LEVEL;
+    if (level >= GetManualLevelCap())
+        return MANUAL_LEVEL_UP_FAIL_LEVEL_CAP;
+
+    species = GetMonData(mon, MON_DATA_SPECIES);
+    currentExp = GetMonData(mon, MON_DATA_EXP);
+    *requiredSouls = 0;
+
+    for (purchasedLevels = 0; purchasedLevels < requestedLevels; purchasedLevels++)
+    {
+        u32 nextLevelExp;
+
+        if (level >= MAX_LEVEL)
+            return MANUAL_LEVEL_UP_FAIL_CANT_LEVEL;
+        if (level >= GetManualLevelCap())
+            return MANUAL_LEVEL_UP_FAIL_LEVEL_CAP;
+        if (DoesPurchasedLevelsBreakPartySpread(partyId, purchasedLevels + 1))
+            return MANUAL_LEVEL_UP_FAIL_PARTY_SPREAD;
+
+        nextLevelExp = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1];
+        *requiredSouls += nextLevelExp - currentExp;
+        currentExp = nextLevelExp;
+        level++;
+    }
+
+    *finalExp = currentExp;
+    return MANUAL_LEVEL_UP_SUCCESS;
+}
+
 static u16 CanLevelUpMonWithSouls(u8 partyId, u32 *requiredSouls, u32 *nextLevelExp)
 {
     struct Pokemon *mon;
@@ -202,15 +317,46 @@ static u16 CanLevelUpMonWithSouls(u8 partyId, u32 *requiredSouls, u32 *nextLevel
 u16 PkmnCenterLevelUp_PrepareSelection(void)
 {
     u32 requiredSouls = 0;
+    u32 currentSouls;
+    u8 maxPurchasableLevels;
     u16 result;
 
     result = CanLevelUpMonWithSouls(gSpecialVar_0x8004, &requiredSouls, NULL);
     if (result != MANUAL_LEVEL_UP_SUCCESS)
         return result;
 
-    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_LEFT_ALIGN, 10);
+    currentSouls = GetMoney(&gSaveBlock1Ptr->money);
+    maxPurchasableLevels = GetMaxPurchasableLevels(gSpecialVar_0x8004, currentSouls, NULL);
+    if (maxPurchasableLevels == 0)
+        return MANUAL_LEVEL_UP_FAIL_NOT_ENOUGH_SOULS;
+
+    ConvertIntToDecimalStringN(gStringVar1, currentSouls, STR_CONV_MODE_LEFT_ALIGN, 10);
     ConvertIntToDecimalStringN(gStringVar2, requiredSouls, STR_CONV_MODE_LEFT_ALIGN, 10);
-    gSpecialVar_0x8005 = requiredSouls;
+    ConvertIntToDecimalStringN(gStringVar3, maxPurchasableLevels, STR_CONV_MODE_LEFT_ALIGN, 2);
+    gSpecialVar_0x8005 = 1;
+    gSpecialVar_0x8006 = maxPurchasableLevels;
+    return MANUAL_LEVEL_UP_SUCCESS;
+}
+
+u16 PkmnCenterLevelUp_UpdateSelection(void)
+{
+    u32 currentSouls = GetMoney(&gSaveBlock1Ptr->money);
+    u16 result;
+    u32 requiredSouls = 0;
+    u32 ignoredFinalExp = 0;
+
+    if (gSpecialVar_0x8005 == 0)
+        gSpecialVar_0x8005 = 1;
+
+    result = GetPurchasedLevelOutcome(gSpecialVar_0x8004, gSpecialVar_0x8005, &requiredSouls, &ignoredFinalExp);
+    if (result != MANUAL_LEVEL_UP_SUCCESS)
+        return result;
+
+    ConvertIntToDecimalStringN(gStringVar1, currentSouls, STR_CONV_MODE_LEFT_ALIGN, 10);
+    ConvertIntToDecimalStringN(gStringVar2, requiredSouls, STR_CONV_MODE_LEFT_ALIGN, 10);
+    ConvertIntToDecimalStringN(gStringVar3, gSpecialVar_0x8005, STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(gStringVar4, gSpecialVar_0x8006, STR_CONV_MODE_LEFT_ALIGN, 2);
+
     return MANUAL_LEVEL_UP_SUCCESS;
 }
 
@@ -223,7 +369,7 @@ u16 PkmnCenterLevelUp_Purchase(void)
     u32 nextLevelExp = 0;
     u16 result;
 
-    result = CanLevelUpMonWithSouls(gSpecialVar_0x8004, &requiredSouls, &nextLevelExp);
+    result = GetPurchasedLevelOutcome(gSpecialVar_0x8004, gSpecialVar_0x8005, &requiredSouls, &nextLevelExp);
     if (result != MANUAL_LEVEL_UP_SUCCESS)
         return result;
 

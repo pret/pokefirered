@@ -169,6 +169,7 @@ gSpecials::
 	def_special ChangePokemonNickname
 	def_special ChoosePartyMon
 	def_special PkmnCenterLevelUp_PrepareSelection
+	def_special PkmnCenterLevelUp_UpdateSelection
 	def_special PkmnCenterLevelUp_Purchase
 	def_special NullFieldSpecial  @ Berry Blender/Roulette specials
 	def_special NullFieldSpecial

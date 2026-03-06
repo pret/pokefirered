@@ -50,6 +50,13 @@ static const struct MenuAction sMultichoiceList_PkmnCenterNurse[] = {
     { gOtherText_Exit }
 };
 
+static const struct MenuAction sMultichoiceList_PkmnCenterLevelUpAmount[] = {
+    { gText_Increase },
+    { gText_Decrease },
+    { gText_Confirm3 },
+    { gText_Cancel }
+};
+
 static const struct MenuAction sMultichoiceList_TrainerCardIconTint[] = {
     { gText_Normal },
     { gText_Black },
@@ -569,6 +576,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] = {
     [MULTICHOICE_JOIN_OR_LEAD]                               = MULTICHOICE(sMultichoiceList_JoinOrLead),
     [MULTICHOICE_TRAINER_TOWER_MODE]                         = MULTICHOICE(sMultichoiceList_TrainerTowerMode),
     [MULTICHOICE_PKMN_CENTER_NURSE]                           = MULTICHOICE(sMultichoiceList_PkmnCenterNurse),
+    [MULTICHOICE_PKMN_CENTER_LEVELUP_AMOUNT]                  = MULTICHOICE(sMultichoiceList_PkmnCenterLevelUpAmount),
 };
 
 // From Cool to Berries goes unused

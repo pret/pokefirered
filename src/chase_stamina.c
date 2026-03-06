@@ -134,6 +134,22 @@ static void EndChase(void)
     sChaseReengageStepCountdown = 0;
 }
 
+static void StartChase(u8 initialChasers, u16 initialSteps)
+{
+    if (initialChasers == 0 || initialSteps == 0)
+    {
+        EndChase();
+        return;
+    }
+
+    if (initialChasers > CHASE_MAX_CHASERS)
+        initialChasers = CHASE_MAX_CHASERS;
+
+    sActiveChasers = initialChasers;
+    sChaseStepsRemaining = initialSteps;
+    sChaseReengageStepCountdown = CHASE_REENGAGE_COUNTDOWN_MIN;
+}
+
 static bool8 IsMapTypeChaseCompatible(u8 mapType)
 {
     switch (mapType)
@@ -371,7 +387,11 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
         return;
 
     if (!wasChaseBattle)
+    {
+        if (battleOutcome == B_OUTCOME_RAN && !ChaseStamina_IsChaseActive())
+            StartChase(1, CHASE_BASE_STEPS);
         return;
+    }
 
     switch (battleOutcome)
     {

@@ -25,9 +25,8 @@
 #define CHASE_MAX_CHASERS 2
 #define CHASE_BASE_STEPS 45
 #define CHASE_EXTRA_STEPS_PER_CHASER 15
-#define CHASE_REENGAGE_PROGRESS_GOAL 10
-#define CHASE_REENGAGE_PROGRESS_WALK 2
-#define CHASE_REENGAGE_PROGRESS_RUN 1
+#define CHASE_REENGAGE_COUNTDOWN_MIN 3
+#define CHASE_REENGAGE_COUNTDOWN_MAX 5
 #define CHASE_SPECIES_VARIANCE_MAX 24
 #define CHASE_AREA_ROUTE_BONUS 10
 #define CHASE_AREA_UNDERGROUND_BONUS 18
@@ -39,7 +38,7 @@ static EWRAM_DATA u8 sStaminaRegenDelay = 0;
 static EWRAM_DATA u8 sStaminaRegenTick = 0;
 static EWRAM_DATA u8 sActiveChasers = 0;
 static EWRAM_DATA u16 sChaseStepsRemaining = 0;
-static EWRAM_DATA u8 sChaseReengageProgress = 0;
+static EWRAM_DATA u8 sChaseReengageStepCountdown = 0;
 static EWRAM_DATA bool8 sPendingWildFirstMovePriority = FALSE;
 static EWRAM_DATA bool8 sBattleUsesWildFirstMovePriority = FALSE;
 
@@ -100,7 +99,17 @@ static void EndChase(void)
 {
     sActiveChasers = 0;
     sChaseStepsRemaining = 0;
-    sChaseReengageProgress = 0;
+    sChaseReengageStepCountdown = 0;
+}
+
+static void ResetChaseReengageStepCountdown(void)
+{
+    sChaseReengageStepCountdown = 0;
+}
+
+static void RollChaseReengageStepCountdown(void)
+{
+    sChaseReengageStepCountdown = (Random() % (CHASE_REENGAGE_COUNTDOWN_MAX - CHASE_REENGAGE_COUNTDOWN_MIN + 1)) + CHASE_REENGAGE_COUNTDOWN_MIN;
 }
 
 static u16 GetChaseSpecies(void)
@@ -257,12 +266,9 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
         {
             EndChase();
         }
-        else
+        else if (sChaseReengageStepCountdown != 0)
         {
-            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
-                sChaseReengageProgress += CHASE_REENGAGE_PROGRESS_RUN;
-            else
-                sChaseReengageProgress += CHASE_REENGAGE_PROGRESS_WALK;
+            sChaseReengageStepCountdown--;
         }
     }
 }
@@ -272,7 +278,7 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
     if (!ChaseStamina_IsChaseActive())
         return FALSE;
 
-    if (sChaseReengageProgress < CHASE_REENGAGE_PROGRESS_GOAL)
+    if (sChaseReengageStepCountdown != 0)
         return FALSE;
 
     if (!IsValidChaseEncounterContext(metatileAttributes))
@@ -280,7 +286,7 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
 
     if (SweetScentWildEncounter())
     {
-        sChaseReengageProgress = 0;
+        ResetChaseReengageStepCountdown();
         sPendingWildFirstMovePriority = TRUE;
         return TRUE;
     }
@@ -317,7 +323,7 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
         chaseLength = GetChaseLengthForEncounter();
         if (sChaseStepsRemaining < chaseLength)
             sChaseStepsRemaining = chaseLength;
-        sChaseReengageProgress = 0;
+        RollChaseReengageStepCountdown();
         break;
     }
 

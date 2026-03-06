@@ -225,20 +225,22 @@ static bool8 UnlockedTanobyOrAreNotInTanoby(void)
     return FALSE;
 }
 
-static void GenerateWildMon(u16 species, u8 level, u8 slot)
+static void GenerateWildMon(u16 species, u8 level, u8 slot, u8 partyIndex, bool8 resetParty)
 {
     u32 personality;
     s8 chamber;
-    ZeroEnemyPartyMons();
+    if (resetParty)
+        ZeroEnemyPartyMons();
+
     if (species != SPECIES_UNOWN)
     {
-        CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, Random() % NUM_NATURES);
+        CreateMonWithNature(&gEnemyParty[partyIndex], species, level, USE_RANDOM_IVS, Random() % NUM_NATURES);
     }
     else
     {
         chamber = gSaveBlock1Ptr->location.mapNum - MAP_NUM(MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER);
         personality = GenerateUnownPersonalityByLetter(sUnownLetterSlots[chamber][slot]);
-        CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, TRUE, personality, FALSE, 0);
+        CreateMon(&gEnemyParty[partyIndex], species, level, USE_RANDOM_IVS, TRUE, personality, FALSE, 0);
     }
 }
 
@@ -289,7 +291,31 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo * info, u8 area, u8
     {
         return FALSE;
     }
-    GenerateWildMon(info->wildPokemon[slot].species, level, slot);
+    GenerateWildMon(info->wildPokemon[slot].species, level, slot, 0, TRUE);
+    return TRUE;
+}
+
+static bool8 TryGenerateWildMonInSlot(const struct WildPokemonInfo *info, u8 area, u8 flags, u8 partyIndex, bool8 resetParty)
+{
+    u8 slot = 0;
+    u8 level;
+
+    switch (area)
+    {
+    case WILD_AREA_LAND:
+        slot = ChooseWildMonIndex_Land();
+        break;
+    case WILD_AREA_WATER:
+    case WILD_AREA_ROCKS:
+        slot = ChooseWildMonIndex_WaterRock();
+        break;
+    }
+
+    level = ChooseWildMonLevel(&info->wildPokemon[slot]);
+    if (flags == WILD_CHECK_REPEL && !IsWildLevelAllowedByRepel(level))
+        return FALSE;
+
+    GenerateWildMon(info->wildPokemon[slot].species, level, slot, partyIndex, resetParty);
     return TRUE;
 }
 
@@ -297,7 +323,7 @@ static u16 GenerateFishingEncounter(const struct WildPokemonInfo * info, u8 rod)
 {
     u8 slot = ChooseWildMonIndex_Fishing(rod);
     u8 level = ChooseWildMonLevel(&info->wildPokemon[slot]);
-    GenerateWildMon(info->wildPokemon[slot].species, level, slot);
+    GenerateWildMon(info->wildPokemon[slot].species, level, slot, 0, TRUE);
     return info->wildPokemon[slot].species;
 }
 
@@ -472,8 +498,19 @@ void RockSmashWildEncounter(void)
 
 bool8 SweetScentWildEncounter(void)
 {
+    return SweetScentWildEncounterWithCount(1);
+}
+
+bool8 SweetScentWildEncounterWithCount(u8 count)
+{
     s16 x, y;
     u16 headerId;
+    const struct WildPokemonInfo *wildMonsInfo;
+    u8 area;
+    u8 i;
+
+    if (count == 0 || count > 2)
+        return FALSE;
 
     PlayerGetDestCoords(&x, &y);
     headerId = GetCurrentMapWildMonHeaderId();
@@ -481,35 +518,43 @@ bool8 SweetScentWildEncounter(void)
     {
         if (MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_LAND)
         {
-            if (TryStartRoamerEncounter() == TRUE)
+            if (TryStartRoamerEncounter() == TRUE && count == 1)
             {
                 StartRoamerBattle();
                 return TRUE;
             }
 
-            if (gWildMonHeaders[headerId].landMonsInfo == NULL)
-                return FALSE;
-
-            TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
-
-            StartWildBattle();
-            return TRUE;
+            wildMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
+            area = WILD_AREA_LAND;
         }
         else if (MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE) == TILE_ENCOUNTER_WATER)
         {
-            if (TryStartRoamerEncounter() == TRUE)
+            if (TryStartRoamerEncounter() == TRUE && count == 1)
             {
                 StartRoamerBattle();
                 return TRUE;
             }
 
-            if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
-                return FALSE;
-
-            TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, 0);
-            StartWildBattle();
-            return TRUE;
+            wildMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
+            area = WILD_AREA_WATER;
         }
+        else
+        {
+            return FALSE;
+        }
+
+        if (wildMonsInfo == NULL)
+            return FALSE;
+
+        for (i = 0; i < count; i++)
+            TryGenerateWildMonInSlot(wildMonsInfo, area, 0, i, i == 0);
+
+        if (count >= 2)
+            StartDoubleWildBattle();
+        else
+            StartWildBattle();
+
+        return TRUE;
     }
 
     return FALSE;

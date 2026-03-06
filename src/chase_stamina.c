@@ -284,14 +284,19 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
     if (!IsValidChaseEncounterContext(metatileAttributes))
         return FALSE;
 
-    if (SweetScentWildEncounter())
+    if (sActiveChasers >= 2)
     {
-        ResetChaseReengageStepCountdown();
-        sPendingWildFirstMovePriority = TRUE;
-        return TRUE;
+        if (!SweetScentWildEncounterWithCount(2))
+            return FALSE;
+    }
+    else if (!SweetScentWildEncounter())
+    {
+        return FALSE;
     }
 
-    return FALSE;
+    sChaseReengageProgress = 0;
+    sPendingWildFirstMovePriority = TRUE;
+    return TRUE;
 }
 
 bool8 ChaseStamina_ShouldSuppressRandomEncounters(void)

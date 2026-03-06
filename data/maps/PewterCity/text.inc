@@ -121,23 +121,23 @@ PewterCity_Text_OhPlayer::
     .string "Oh, {PLAYER}{KUN}!$"
 
 PewterCity_Text_AskedToDeliverBonus::
-    .string "I'm glad I caught up to you.\n"
+    .string "Hey, {PLAYER}!\n"
     .string "I'm PROF. OAK's AIDE.\p"
-    .string "I had one more delivery for\n"
-    .string "you before heading back.$"
+    .string "PROF. OAK asked me to check in\n"
+    .string "before I head back.$"
 
 PewterCity_Text_AideAlreadyHasRunningShoes::
-    .string "Looks like you've already got your\n"
-    .string "RUNNING SHOES all set.\p"
-    .string "In that case, please take this\n"
-    .string "little extra instead.$"
+    .string "Looks like you already have\n"
+    .string "RUNNING SHOES. Nice!\p"
+    .string "Please take this small bonus\n"
+    .string "instead.$"
 
 PewterCity_Text_ReceivedBonusItemFromAide::
     .string "{PLAYER} received a\n"
     .string "SUPER POTION from the AIDE.$"
 
 PewterCity_Text_AideUseBonusItemWell::
-    .string "That should help on the road.\n"
+    .string "A little help for the road.\n"
     .string "Use it well!$"
 
 PewterCity_Text_NoRoomForBonusItem::

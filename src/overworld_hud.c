@@ -6,7 +6,7 @@
 #define OVERWORLD_HUD_BG           0
 #define OVERWORLD_HUD_LEFT         1
 #define OVERWORLD_HUD_TOP          0
-#define OVERWORLD_HUD_WIDTH        28
+#define OVERWORLD_HUD_WIDTH        12
 #define OVERWORLD_HUD_HEIGHT       2
 #define OVERWORLD_HUD_PAL          13
 #define OVERWORLD_HUD_BASE_BLOCK   0x148

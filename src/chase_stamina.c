@@ -186,17 +186,8 @@ static void RollChaseReengageStepCountdown(void)
 
 static u16 GetChaseSpecies(void)
 {
-    u8 i;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        u16 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
-
-        if (species != SPECIES_NONE)
-            return species;
-    }
-
-    // Default to a defined overworld-capable chaser species when no enemy slot is populated.
+    // The overworld chase sprite intentionally uses Meowth as a generic placeholder
+    // for "a wild Pokémon is chasing you" and not a species-accurate representation.
     return SPECIES_MEOWTH;
 }
 
@@ -394,7 +385,9 @@ bool8 ChaseStamina_ShouldSuppressRandomEncounters(void)
         return FALSE;
     }
 
-    return ChaseStamina_IsChaseActive();
+    // Once re-engage countdown expires, allow a regular encounter roll as a
+    // fallback if a forced chase encounter cannot be generated this step.
+    return ChaseStamina_IsChaseActive() && sChaseReengageStepCountdown != 0;
 }
 
 void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
@@ -409,7 +402,9 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
 
     if (!wasChaseBattle)
     {
-        if ((normalizedOutcome == B_OUTCOME_RAN || normalizedOutcome == B_OUTCOME_PLAYER_TELEPORTED)
+        if ((normalizedOutcome == B_OUTCOME_RAN
+          || normalizedOutcome == B_OUTCOME_PLAYER_TELEPORTED
+          || normalizedOutcome == B_OUTCOME_MON_TELEPORTED)
          && !ChaseStamina_IsChaseActive())
             StartChase(1, CHASE_BASE_STEPS);
         return;

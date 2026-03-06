@@ -14,6 +14,20 @@ PalletTown_PlayersHouse_1F_EventScript_Mom::
 	release
 	end
 
+PalletTown_PlayersHouse_1F_EventScript_MomRunningShoesIntercept::
+	lockall
+	goto_if_set FLAG_GOT_RUNNING_SHOES_FROM_MOM, PalletTown_PlayersHouse_1F_EventScript_MomRunningShoesInterceptEnd
+	goto_if_set FLAG_SYS_B_DASH, PalletTown_PlayersHouse_1F_EventScript_MomRunningShoesInterceptEnd
+	turnobject LOCALID_PLAYER, DIR_UP
+	turnobject LOCALID_MOM, DIR_DOWN
+	msgbox PalletTown_PlayersHouse_1F_Text_MomGaveRunningShoes
+	setflag FLAG_SYS_B_DASH
+	setflag FLAG_GOT_RUNNING_SHOES_FROM_MOM
+
+PalletTown_PlayersHouse_1F_EventScript_MomRunningShoesInterceptEnd::
+	releaseall
+	end
+
 PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale::
 	msgbox PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou
 	return

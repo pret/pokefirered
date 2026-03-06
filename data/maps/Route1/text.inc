@@ -15,11 +15,12 @@ Route1_Text_PutPotionAway::
     .string "the BAG's ITEMS POCKET.$"
 
 Route1_Text_CanJumpFromLedges::
-    .string "See those ledges along the road?\p"
-    .string "It's a bit scary, but you can jump\n"
-    .string "from them.\p"
-    .string "You can get back to PALLET TOWN\n"
-    .string "quicker that way.$"
+    .string "When something chases you, sprinting\n"
+    .string "uses STAMINA fast.\p"
+    .string "Your STAMINA is limited, but it\n"
+    .string "recovers while you're not sprinting.\p"
+    .string "Run to escape danger, then slow down\n"
+    .string "to save STAMINA for the next chase.$"
 
 Route1_Text_RouteSign::
     .string "ROUTE 1\n"

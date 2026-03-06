@@ -7,15 +7,15 @@
 #include "text_window.h"
 
 #define SOULS_HUD_BG           0
-#define SOULS_HUD_LEFT         21
+#define SOULS_HUD_LEFT         23
 #define SOULS_HUD_TOP          1
-#define SOULS_HUD_WIDTH        10
-#define SOULS_HUD_HEIGHT       4
+#define SOULS_HUD_WIDTH        8
+#define SOULS_HUD_HEIGHT       3
 #define SOULS_HUD_PAL          13
 #define SOULS_HUD_BASE_BLOCK   0x120
 #define SOULS_HUD_FRAME_TILE   0x240
 #define SOULS_HUD_TEXT_X       2
-#define SOULS_HUD_TEXT_WIDTH   76
+#define SOULS_HUD_TEXT_WIDTH   60
 
 static const struct WindowTemplate sSoulsHudWindowTemplate = {
     .bg = SOULS_HUD_BG,
@@ -43,9 +43,9 @@ static void SoulsHud_PrintValue(u32 souls)
     s32 x;
 
     ConvertIntToDecimalStringN(text, souls, STR_CONV_MODE_LEFT_ALIGN, 6);
-    FillWindowPixelRect(sSoulsHudWindowId, PIXEL_FILL(1), SOULS_HUD_TEXT_X, 16, SOULS_HUD_TEXT_WIDTH, 8);
+    FillWindowPixelRect(sSoulsHudWindowId, PIXEL_FILL(1), SOULS_HUD_TEXT_X, 14, SOULS_HUD_TEXT_WIDTH, 7);
     x = SOULS_HUD_TEXT_X + (SOULS_HUD_TEXT_WIDTH - GetStringWidth(FONT_SMALL, text, 0)) / 2;
-    AddTextPrinterParameterized(sSoulsHudWindowId, FONT_SMALL, text, x, 16, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sSoulsHudWindowId, FONT_SMALL, text, x, 14, TEXT_SKIP_DRAW, NULL);
 }
 
 bool8 SoulsHud_IsVisible(void)

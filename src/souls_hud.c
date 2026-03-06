@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "menu.h"
 #include "strings.h"
+#include "souls_hud.h"
 #include "text_window.h"
 
 #define SOULS_HUD_BG           0
@@ -27,8 +28,7 @@ static const struct WindowTemplate sSoulsHudWindowTemplate = {
 
 static EWRAM_DATA u8 sSoulsHudWindowId = WINDOW_NONE;
 static EWRAM_DATA u32 sSoulsHudLastDrawnValue = 0;
-
-void SoulsHud_Update(void);
+static EWRAM_DATA bool8 sSoulsHudSuppressed = FALSE;
 
 static void SoulsHud_PrintLabel(void)
 {
@@ -50,6 +50,25 @@ static void SoulsHud_PrintValue(u32 souls)
 bool8 SoulsHud_IsVisible(void)
 {
     return sSoulsHudWindowId != WINDOW_NONE;
+}
+
+bool8 SoulsHud_IsSuppressed(void)
+{
+    return sSoulsHudSuppressed;
+}
+
+void SoulsHud_Toggle(void)
+{
+    if (SoulsHud_IsVisible())
+    {
+        sSoulsHudSuppressed = TRUE;
+        SoulsHud_Hide();
+    }
+    else
+    {
+        sSoulsHudSuppressed = FALSE;
+        SoulsHud_Show();
+    }
 }
 
 void SoulsHud_Show(void)

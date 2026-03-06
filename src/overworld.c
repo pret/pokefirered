@@ -1431,6 +1431,12 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
 
     QL_TryRunActions();
     UpdatePlayerAvatarTransitionState();
+    if (IsCorpseRunFeatureEnabled() && (newKeys & R_BUTTON))
+    {
+        SoulsHud_Toggle();
+        newKeys &= ~R_BUTTON;
+        heldKeys &= ~R_BUTTON;
+    }
     FieldClearPlayerInput(&fieldInput);
     FieldGetPlayerInput(&fieldInput, newKeys, heldKeys);
     if (IsCorpseRunFeatureEnabled() && JOY_NEW(R_BUTTON))

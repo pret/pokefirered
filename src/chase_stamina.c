@@ -3,6 +3,7 @@
 #include "chase_stamina.h"
 #include "field_player_avatar.h"
 #include "item.h"
+#include "metatile_behavior.h"
 #include "money.h"
 #include "party_menu.h"
 #include "strings.h"
@@ -66,6 +67,23 @@ static void RefillStamina(void)
 static bool8 IsChaseActive(void)
 {
     return sActiveChasers != 0 && sChaseStepsRemaining != 0;
+}
+
+static bool8 IsValidChaseEncounterContext(u32 metatileAttributes)
+{
+    u8 encounterType = ExtractMetatileAttribute(metatileAttributes, METATILE_ATTRIBUTE_ENCOUNTER_TYPE);
+
+    if (encounterType == TILE_ENCOUNTER_LAND)
+        return TRUE;
+
+    if (encounterType == TILE_ENCOUNTER_WATER)
+        return TRUE;
+
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING)
+     && MetatileBehavior_IsBridge(ExtractMetatileAttribute(metatileAttributes, METATILE_ATTRIBUTE_BEHAVIOR)))
+        return TRUE;
+
+    return FALSE;
 }
 
 static void EndChase(void)
@@ -171,11 +189,13 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
 
 bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
 {
-    (void)metatileAttributes;
     if (!IsChaseActive())
         return FALSE;
 
     if (sChaseReengageStepCounter < CHASE_REENGAGE_STEP_INTERVAL)
+        return FALSE;
+
+    if (!IsValidChaseEncounterContext(metatileAttributes))
         return FALSE;
 
     if (SweetScentWildEncounter())

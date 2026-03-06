@@ -681,6 +681,10 @@ PewterCity_EventScript_RunningShoesAideTriggerBottom::
 	end
 
 PewterCity_EventScript_AideGiveRunningShoes::
+	goto_if_set FLAG_SYS_B_DASH, PewterCity_EventScript_AideAlreadyHasRunningShoes
+	goto PewterCity_EventScript_AideGiveRunningShoesFallback
+
+PewterCity_EventScript_AideAlreadyHasRunningShoes::
 	textcolor NPC_TEXT_COLOR_MALE
 	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideNoticePlayer
 	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideNoticePlayer
@@ -696,16 +700,55 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideApproachPlayer1
 	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideApproachPlayer2
 	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideApproachPlayer3
-	msgbox PewterCity_Text_AskedToDeliverThis
+	msgbox PewterCity_Text_AskedToDeliverBonus
+	msgbox PewterCity_Text_AideAlreadyHasRunningShoes
+	checkitemspace ITEM_SUPER_POTION
+	goto_if_eq VAR_RESULT, FALSE, PewterCity_EventScript_AideNoRoomForBonus
+	giveitem_msg PewterCity_Text_ReceivedBonusItemFromAide, ITEM_SUPER_POTION
+	msgbox PewterCity_Text_AideUseBonusItemWell
+	goto PewterCity_EventScript_AideFinish
+
+PewterCity_EventScript_AideNoRoomForBonus::
+	msgbox PewterCity_Text_NoRoomForBonusItem
+
+PewterCity_EventScript_AideFinish::
+	msgbox PewterCity_Text_MustBeGoingBackToLab
+	closemessage
+	call_if_eq VAR_TEMP_1, 0, PewterCity_EventScript_AideExit0
+	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideExit1
+	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideExit2
+	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideExit3
+	delay 30
+	removeobject LOCALID_PEWTER_AIDE
+	setvar VAR_MAP_SCENE_PEWTER_CITY, 2
+	return
+
+PewterCity_EventScript_AideGiveRunningShoesFallback::
+	textcolor NPC_TEXT_COLOR_MALE
+	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideNoticePlayer
+	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideNoticePlayer
+	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideNoticePlayer
+	waitse
+	playse SE_PIN
+	applymovement LOCALID_PEWTER_AIDE, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_PEWTER_AIDE, Common_Movement_Delay48
+	waitmovement 0
+	msgbox PewterCity_Text_OhPlayer
+	call_if_eq VAR_TEMP_1, 0, PewterCity_EventScript_AideApproachPlayer0
+	call_if_eq VAR_TEMP_1, 1, PewterCity_EventScript_AideApproachPlayer1
+	call_if_eq VAR_TEMP_1, 2, PewterCity_EventScript_AideApproachPlayer2
+	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideApproachPlayer3
+	msgbox PewterCity_Text_AskedToDeliverThisFallback
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_KEY_ITEM
-	message PewterCity_Text_ReceivedRunningShoesFromAide
+	message PewterCity_Text_ReceivedRunningShoesFromAideFallback
 	waitmessage
 	waitfanfare
-	msgbox PewterCity_Text_SwitchedShoesWithRunningShoes
+	msgbox PewterCity_Text_SwitchedShoesWithRunningShoesFallback
 	special DisableMsgBoxWalkaway
 	signmsg
-	msgbox PewterCity_Text_ExplainRunningShoes
+	msgbox PewterCity_Text_ExplainRunningShoesFallback
 	normalmsg
 	call EventScript_RestorePrevTextColor
 	msgbox PewterCity_Text_MustBeGoingBackToLab
@@ -716,7 +759,7 @@ PewterCity_EventScript_AideGiveRunningShoes::
 	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideExit3
 	delay 30
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	msgbox PewterCity_Text_RunningShoesLetterFromMom
+	msgbox PewterCity_Text_RunningShoesLetterFromMomFallback
 	closemessage
 	removeobject LOCALID_PEWTER_AIDE
 	setflag FLAG_SYS_B_DASH

@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "bg_regs.h"
 #include "cable_club.h"
+#include "chase_stamina.h"
 #include "credits.h"
 #include "corpse_run.h"
 #include "event_data.h"
@@ -787,10 +788,14 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
     int paletteIndex;
+    struct WarpData from = gLastUsedWarp;
+    struct WarpData to;
 
     SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
     Overworld_TryMapConnectionMusicTransition();
     ApplyCurrentWarp();
+    to = gSaveBlock1Ptr->location;
+    ChaseStamina_OnMapTransition(&from, &to);
     LoadCurrentMapData();
     LoadObjEventTemplatesFromHeader();
     TrySetMapSaveWarpStatus();
@@ -823,8 +828,10 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 static void LoadMapFromWarp(bool32 unused)
 {
     bool8 isOutdoors;
+    struct WarpData from = gLastUsedWarp;
 
     LoadCurrentMapData();
+    ChaseStamina_OnMapTransition(&from, &gSaveBlock1Ptr->location);
     LoadObjEventTemplatesFromHeader();
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
 

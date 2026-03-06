@@ -5,6 +5,7 @@
 #include "item.h"
 #include "metatile_behavior.h"
 #include "money.h"
+#include "overworld.h"
 #include "party_menu.h"
 #include "pokemon.h"
 #include "strings.h"
@@ -100,6 +101,21 @@ static void EndChase(void)
     sActiveChasers = 0;
     sChaseStepsRemaining = 0;
     sChaseReengageStepCountdown = 0;
+}
+
+static bool8 IsMapTypeChaseCompatible(u8 mapType)
+{
+    switch (mapType)
+    {
+    case MAP_TYPE_ROUTE:
+    case MAP_TYPE_TOWN:
+    case MAP_TYPE_CITY:
+    case MAP_TYPE_UNDERGROUND:
+    case MAP_TYPE_INDOOR:
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 static void ResetChaseReengageStepCountdown(void)
@@ -294,7 +310,7 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
         return FALSE;
     }
 
-    sChaseReengageProgress = 0;
+    sChaseReengageStepCountdown = 0;
     sPendingWildFirstMovePriority = TRUE;
     return TRUE;
 }
@@ -379,3 +395,48 @@ bool8 ChaseStamina_ShouldPrioritizeWildOpponent(u8 battler1, u8 battler2)
     return (GetBattlerSide(battler1) == B_SIDE_PLAYER && GetBattlerSide(battler2) == B_SIDE_OPPONENT)
         || (GetBattlerSide(battler1) == B_SIDE_OPPONENT && GetBattlerSide(battler2) == B_SIDE_PLAYER);
 }
+
+void ChaseStamina_OnMapTransition(const struct WarpData *from, const struct WarpData *to)
+{
+    const struct MapHeader *fromMap;
+    const struct MapHeader *toMap;
+
+    if (!ChaseStamina_IsChaseActive())
+        return;
+
+    if (from == NULL || to == NULL)
+    {
+        EndChase();
+        return;
+    }
+
+    fromMap = Overworld_GetMapHeaderByGroupAndId(from->mapGroup, from->mapNum);
+    toMap = Overworld_GetMapHeaderByGroupAndId(to->mapGroup, to->mapNum);
+    if (fromMap == NULL || toMap == NULL)
+    {
+        EndChase();
+        return;
+    }
+
+    if (from->mapGroup != to->mapGroup || from->mapNum != to->mapNum)
+    {
+        if (!IsMapTypeChaseCompatible(toMap->mapType))
+        {
+            EndChase();
+            return;
+        }
+    }
+
+    if (IsMapTypeOutdoors(fromMap->mapType) != IsMapTypeOutdoors(toMap->mapType))
+    {
+        EndChase();
+        return;
+    }
+
+    if (fromMap->regionMapSectionId != toMap->regionMapSectionId)
+    {
+        EndChase();
+        return;
+    }
+}
+

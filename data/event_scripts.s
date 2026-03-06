@@ -908,7 +908,7 @@ Text_PkmnCenterNurse_LevelUpPrompt::
 	.string "Max levels now: {STR_VAR_3}$"
 
 Text_PkmnCenterNurse_LevelUpAmountPrompt::
-	.string "Levels selected: {STR_VAR_3}/{STR_VAR_4}\n"
+	.string "Levels selected: {STR_VAR_3}/{STR_VAR_1}\n"
 	.string "Total cost: {STR_VAR_2}\p"
 	.string "Adjust amount?$"
 

@@ -763,6 +763,7 @@ PewterCity_EventScript_AideGiveRunningShoesFallback::
 	closemessage
 	removeobject LOCALID_PEWTER_AIDE
 	setflag FLAG_SYS_B_DASH
+	setflag FLAG_GOT_RUNNING_SHOES_FROM_MOM
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 2
 	return
 

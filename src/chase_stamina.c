@@ -155,6 +155,7 @@ static bool8 IsMapTypeChaseCompatible(u8 mapType)
     switch (mapType)
     {
     case MAP_TYPE_ROUTE:
+    case MAP_TYPE_OCEAN_ROUTE:
     case MAP_TYPE_TOWN:
     case MAP_TYPE_CITY:
     case MAP_TYPE_UNDERGROUND:

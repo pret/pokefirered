@@ -12,13 +12,13 @@ PalletTown_Text_OakGrassUnsafeNeedMon::
 
 PalletTown_Text_RaisingMonsToo::
     .string "I'm raising POKéMON, too.\p"
-    .string "When they get strong, they can\n"
-    .string "protect me.$"
+    .string "On long walks between towns, we\n"
+    .string "take little rests together.$"
 
 PalletTown_Text_CanStoreItemsAndMonsInPC::
     .string "Technology is incredible!\p"
-    .string "You can now store and recall items\n"
-    .string "and POKéMON as data via PC.$"
+    .string "Before heading onto a ROUTE, I sort\n"
+    .string "items and POKéMON at the PC.$"
 
 PalletTown_Text_OakPokemonResearchLab::
     .string "OAK POKéMON RESEARCH LAB$"
@@ -64,4 +64,3 @@ PalletTown_Text_OakYouEnjoyingTraveling::
     .string "exotic locales.\p"
     .string "Good for you, good for you.\n"
     .string "Hohoho.$"
-

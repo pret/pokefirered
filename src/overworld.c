@@ -1431,6 +1431,12 @@ static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
 
     QL_TryRunActions();
     UpdatePlayerAvatarTransitionState();
+    if (IsCorpseRunFeatureEnabled() && (newKeys & R_BUTTON))
+    {
+        SoulsHud_Toggle();
+        newKeys &= ~R_BUTTON;
+        heldKeys &= ~R_BUTTON;
+    }
     FieldClearPlayerInput(&fieldInput);
     FieldGetPlayerInput(&fieldInput, newKeys, heldKeys);
     FieldInput_HandleCancelSignpost(&fieldInput);
@@ -1570,7 +1576,7 @@ void CB2_NewGame(void)
     gFieldCallback = FieldCB_WarpExitFadeFromBlack;
     gFieldCallback2 = NULL;
     DoMapLoadLoop(&gMain.state);
-    if (IsCorpseRunFeatureEnabled())
+    if (IsCorpseRunFeatureEnabled() && !SoulsHud_IsSuppressed())
         SoulsHud_Show();
     SetFieldVBlankCallback();
     SetMainCallback1(CB1_Overworld);
@@ -1595,7 +1601,7 @@ void CB2_WhiteOut(void)
             : FieldCB_RushInjuredPokemonToCenter;
         val = 0;
         DoMapLoadLoop(&val);
-        if (IsCorpseRunFeatureEnabled())
+        if (IsCorpseRunFeatureEnabled() && !SoulsHud_IsSuppressed())
             SoulsHud_Show();
         QuestLog_CutRecording();
         SetFieldVBlankCallback();
@@ -1620,7 +1626,8 @@ static void CB2_LoadMap2(void)
     if (IsCorpseRunFeatureEnabled())
     {
         CorpseRun_OnMapEnter();
-        SoulsHud_Show();
+        if (!SoulsHud_IsSuppressed())
+            SoulsHud_Show();
     }
     if (QuestLog_ShouldEndSceneOnMapChange() == TRUE)
     {
@@ -1669,7 +1676,7 @@ static void CB2_ReturnToFieldLocal(void)
 {
     if (ReturnToFieldLocal(&gMain.state))
     {
-        if (IsCorpseRunFeatureEnabled())
+        if (IsCorpseRunFeatureEnabled() && !SoulsHud_IsSuppressed())
             SoulsHud_Show();
         SetFieldVBlankCallback();
         SetMainCallback2(CB2_Overworld);
@@ -1680,7 +1687,7 @@ static void CB2_ReturnToFieldLink(void)
 {
     if (!Overworld_LinkRecvQueueLengthMoreThan2() && ReturnToFieldLink(&gMain.state))
     {
-        if (IsCorpseRunFeatureEnabled())
+        if (IsCorpseRunFeatureEnabled() && !SoulsHud_IsSuppressed())
             SoulsHud_Show();
         SetMainCallback2(CB2_Overworld);
     }

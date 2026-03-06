@@ -400,6 +400,7 @@ bool8 ChaseStamina_ShouldSuppressRandomEncounters(void)
 void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
 {
     bool8 wasChaseBattle = sBattleUsesWildFirstMovePriority;
+    u8 normalizedOutcome = battleOutcome & ~B_OUTCOME_LINK_BATTLE_RAN;
 
     sBattleUsesWildFirstMovePriority = FALSE;
 
@@ -408,14 +409,16 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
 
     if (!wasChaseBattle)
     {
-        if (battleOutcome == B_OUTCOME_RAN && !ChaseStamina_IsChaseActive())
+        if ((normalizedOutcome == B_OUTCOME_RAN || normalizedOutcome == B_OUTCOME_PLAYER_TELEPORTED)
+         && !ChaseStamina_IsChaseActive())
             StartChase(1, CHASE_BASE_STEPS);
         return;
     }
 
-    switch (battleOutcome)
+    switch (normalizedOutcome)
     {
     case B_OUTCOME_RAN:
+    case B_OUTCOME_PLAYER_TELEPORTED:
     {
         u16 chaseLength;
 
@@ -441,7 +444,6 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
 
     case B_OUTCOME_LOST:
     case B_OUTCOME_DREW:
-    case B_OUTCOME_PLAYER_TELEPORTED:
     case B_OUTCOME_MON_FLED:
     case B_OUTCOME_NO_SAFARI_BALLS:
     case B_OUTCOME_FORFEITED:

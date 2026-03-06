@@ -134,11 +134,11 @@ PewterCity_Text_AideAlreadyHasRunningShoes::
 
 PewterCity_Text_ReceivedBonusItemFromAide::
     .string "{PLAYER} received a\n"
-    .string "SUPER POTION from the AIDE.$"
+    .string "LIFE ORB from the AIDE.$"
 
 PewterCity_Text_AideUseBonusItemWell::
-    .string "A little help for the road.\n"
-    .string "Use it well!$"
+    .string "That LIFE ORB is a held item.\n"
+    .string "Use it wisely!$"
 
 PewterCity_Text_NoRoomForBonusItem::
     .string "Oh! Your BAG is full.\n"

@@ -26,6 +26,7 @@
 #include "battle.h"
 #include "battle_transition.h"
 #include "battle_controllers.h"
+#include "chase_stamina.h"
 #include "constants/battle_setup.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
@@ -435,6 +436,7 @@ static void StartPokedudeBattle(void)
 
 static void CB2_EndWildBattle(void)
 {
+    ChaseStamina_OnWildBattleEnded(gBattleOutcome, gBattleTypeFlags);
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)
@@ -450,6 +452,7 @@ static void CB2_EndWildBattle(void)
 
 static void CB2_EndScriptedWildBattle(void)
 {
+    ChaseStamina_OnWildBattleEnded(gBattleOutcome, gBattleTypeFlags);
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)

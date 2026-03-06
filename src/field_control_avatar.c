@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "bike.h"
+#include "chase_stamina.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
 #include "event_data.h"
@@ -203,6 +204,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     FieldClearPlayerInput(&gFieldInputRecord);
     gFieldInputRecord.dpadDirection = input->dpadDirection;
+    ChaseStamina_UpdateOverworldFrame(input->tookStep);
 
     if (CheckForTrainersWantingBattle() == TRUE)
         return TRUE;
@@ -737,6 +739,12 @@ void RestartWildEncounterImmunitySteps(void)
 
 static bool8 CheckStandardWildEncounter(u32 metatileAttributes)
 {
+    if (ChaseStamina_TryStartChaseEncounter(metatileAttributes))
+        return TRUE;
+
+    if (ChaseStamina_ShouldSuppressRandomEncounters())
+        return FALSE;
+
     return TryStandardWildEncounter(metatileAttributes);
 }
 

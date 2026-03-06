@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "bike.h"
+#include "chase_stamina.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"
@@ -514,12 +515,14 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     }
 
     if ((heldKeys & B_BUTTON) && FlagGet(FLAG_SYS_B_DASH)
-        && !IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior))
+        && !IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior)
+        && ChaseStamina_CanUseRunStep())
     {
         if (PlayerIsMovingOnRockStairs(direction))
             PlayerRunSlow(direction);
         else
             PlayerRun(direction);
+        ChaseStamina_ConsumeRunStep();
         gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
         return;
     }

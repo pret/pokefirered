@@ -933,6 +933,17 @@ Text_PkmnCenterNurse_PartySpreadViolation::
 	.string "That level-up would widen your\n"
 	.string "party spread too much.$"
 
+Text_PkmnCenterNurse_StaminaUpgradePrompt::
+	.string "Upgrade RUN STAMINA to Lv {STR_VAR_2}\n"
+	.string "for {STR_VAR_1} SOULS?$"
+
+Text_PkmnCenterNurse_StaminaUpgradeSuccess::
+	.string "Your running stamina increased!$"
+
+Text_PkmnCenterNurse_StaminaAlreadyMax::
+	.string "Your running stamina is already\n"
+	.string "at maximum level.$"
+
 	.include "data/text/surf.inc"
 
 @ Unused, from R/S

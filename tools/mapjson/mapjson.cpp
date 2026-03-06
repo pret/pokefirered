@@ -122,17 +122,24 @@ string get_include_guard_end(const string &name) {
 string generate_map_header_text(Json map_data, Json layouts_data) {
     string map_layout_id = json_to_string(map_data, "layout");
 
-    vector<Json> matched;
+    Json matchedLayout;
+    bool foundLayout = false;
 
     for (auto &layout : layouts_data["layouts"].array_items()) {
-        if (map_layout_id == json_to_string(layout, "id", true))
-            matched.push_back(layout);
+        if (map_layout_id != json_to_string(layout, "id", true))
+            continue;
+
+        if (foundLayout)
+            FATAL_ERROR("Found duplicate layouts for %s.\n", map_layout_id.c_str());
+
+        matchedLayout = layout;
+        foundLayout = true;
     }
 
-    if (matched.size() != 1)
+    if (!foundLayout)
         FATAL_ERROR("Failed to find matching layout for %s.\n", map_layout_id.c_str());
 
-    Json layout = matched[0];
+    const Json &layout = matchedLayout;
 
     ostringstream text;
 

@@ -11,7 +11,7 @@
 #include "constants/battle.h"
 
 #define STAMINA_LEVEL_MIN 1
-#define STAMINA_LEVEL_MAX 5
+#define STAMINA_LEVEL_MAX 10
 #define STAMINA_BASE_STEPS 30
 #define STAMINA_STEPS_PER_LEVEL 15
 #define STAMINA_UPGRADE_COST_BASE 1200

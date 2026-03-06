@@ -3462,19 +3462,19 @@ void SwapTurnOrder(u8 id1, u8 id2)
 
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 {
-    if (!ignoreChosenMoves && ChaseStamina_ShouldPrioritizeWildOpponent(battler1, battler2))
-    {
-        if (GetBattlerSide(battler1) == B_SIDE_PLAYER)
-            return 1;
-        return 0;
-    }
-
     u8 strikesFirst = 0;
     u8 speedMultiplierBattler1 = 0, speedMultiplierBattler2 = 0;
     u32 speedBattler1 = 0, speedBattler2 = 0;
     u8 holdEffect = 0;
     u8 holdEffectParam = 0;
     u16 moveBattler1 = 0, moveBattler2 = 0;
+
+    if (!ignoreChosenMoves && ChaseStamina_ShouldPrioritizeWildOpponent(battler1, battler2))
+    {
+        if (GetBattlerSide(battler1) == B_SIDE_PLAYER)
+            return 1;
+        return 0;
+    }
 
     if (WEATHER_HAS_EFFECT)
     {

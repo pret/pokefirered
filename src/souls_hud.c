@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "menu.h"
+#include "money.h"
 #include "strings.h"
 #include "souls_hud.h"
 #include "text_window.h"
@@ -106,7 +107,7 @@ void SoulsHud_Update(void)
     if (!SoulsHud_IsVisible())
         return;
 
-    souls = gSaveBlock1Ptr->corpseRun.droppedSouls;
+    souls = GetMoney(&gSaveBlock1Ptr->money);
     if (souls == sSoulsHudLastDrawnValue)
         return;
 

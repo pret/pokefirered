@@ -208,7 +208,7 @@ u16 PkmnCenterLevelUp_PrepareSelection(void)
     if (result != MANUAL_LEVEL_UP_SUCCESS)
         return result;
 
-    ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->money, STR_CONV_MODE_LEFT_ALIGN, 10);
+    ConvertIntToDecimalStringN(gStringVar1, GetMoney(&gSaveBlock1Ptr->money), STR_CONV_MODE_LEFT_ALIGN, 10);
     ConvertIntToDecimalStringN(gStringVar2, requiredSouls, STR_CONV_MODE_LEFT_ALIGN, 10);
     gSpecialVar_0x8005 = requiredSouls;
     return MANUAL_LEVEL_UP_SUCCESS;

@@ -171,6 +171,8 @@ gSpecials::
 	def_special PkmnCenterLevelUp_PrepareSelection
 	def_special PkmnCenterLevelUp_UpdateSelection
 	def_special PkmnCenterLevelUp_Purchase
+	def_special PkmnCenterStaminaUpgrade_Preview
+	def_special PkmnCenterStaminaUpgrade_Purchase
 	def_special NullFieldSpecial  @ Berry Blender/Roulette specials
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial

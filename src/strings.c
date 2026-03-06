@@ -939,6 +939,7 @@ const u8 gText_Register2[] = _("REGISTER");
 const u8 gText_Exit[] = _("EXIT");
 const u8 gText_HealPokemon[] = _("HEAL POKéMON");
 const u8 gText_LevelUpPokemon[] = _("LEVEL UP POKéMON");
+const u8 gText_UpgradeStamina[] = _("UPGRADE STAMINA");
 const u8 gText_QuitChatting[] = _("Quit chatting?");
 const u8 gText_RegisterTextWhere[] = _("Register text where?");
 const u8 gText_RegisterTextHere[] = _("Register text here?");

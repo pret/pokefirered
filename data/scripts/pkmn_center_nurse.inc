@@ -6,7 +6,8 @@ EventScript_PkmnCenterNurse::
 	switch VAR_RESULT
 	case 0, EventScript_PkmnCenterNurse_HealPkmn
 	case 1, EventScript_PkmnCenterNurse_LevelUpPokemon
-	case 2 EventScript_PkmnCenterNurse_Goodbye
+	case 2, EventScript_PkmnCenterNurse_UpgradeStamina
+	case 3, EventScript_PkmnCenterNurse_Goodbye
 	case SCR_MENU_CANCEL, EventScript_PkmnCenterNurse_Goodbye
 	end
 
@@ -84,6 +85,33 @@ EventScript_PkmnCenterNurse_LevelUpPokemon_BreaksPartySpread::
 	goto EventScript_PkmnCenterNurse_LevelUpPokemon_Loop
 
 EventScript_PkmnCenterNurse_LevelUpPokemon_End::
+	hidemoneybox
+	goto EventScript_PkmnCenterNurse_Goodbye
+
+
+EventScript_PkmnCenterNurse_UpgradeStamina::
+	showmoneybox 0, 0
+	specialvar VAR_RESULT, PkmnCenterStaminaUpgrade_Preview
+	goto_if_eq VAR_RESULT, 1, EventScript_PkmnCenterNurse_UpgradeStamina_Max
+	goto_if_eq VAR_RESULT, 2, EventScript_PkmnCenterNurse_UpgradeStamina_NotEnoughSouls
+	msgbox Text_PkmnCenterNurse_StaminaUpgradePrompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_PkmnCenterNurse_UpgradeStamina_End
+	goto_if_eq VAR_RESULT, SCR_MENU_CANCEL, EventScript_PkmnCenterNurse_UpgradeStamina_End
+	specialvar VAR_RESULT, PkmnCenterStaminaUpgrade_Purchase
+	goto_if_eq VAR_RESULT, 1, EventScript_PkmnCenterNurse_UpgradeStamina_Max
+	goto_if_eq VAR_RESULT, 2, EventScript_PkmnCenterNurse_UpgradeStamina_NotEnoughSouls
+	updatemoneybox
+	msgbox Text_PkmnCenterNurse_StaminaUpgradeSuccess
+	goto EventScript_PkmnCenterNurse_UpgradeStamina_End
+
+EventScript_PkmnCenterNurse_UpgradeStamina_NotEnoughSouls::
+	msgbox Text_PkmnCenterNurse_NotEnoughSouls
+	goto EventScript_PkmnCenterNurse_UpgradeStamina_End
+
+EventScript_PkmnCenterNurse_UpgradeStamina_Max::
+	msgbox Text_PkmnCenterNurse_StaminaAlreadyMax
+
+EventScript_PkmnCenterNurse_UpgradeStamina_End::
 	hidemoneybox
 	goto EventScript_PkmnCenterNurse_Goodbye
 

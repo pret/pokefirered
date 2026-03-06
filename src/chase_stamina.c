@@ -1,0 +1,243 @@
+#include "global.h"
+#include "battle.h"
+#include "chase_stamina.h"
+#include "field_player_avatar.h"
+#include "item.h"
+#include "money.h"
+#include "party_menu.h"
+#include "strings.h"
+#include "wild_encounter.h"
+#include "constants/battle.h"
+
+#define STAMINA_LEVEL_MIN 1
+#define STAMINA_LEVEL_MAX 5
+#define STAMINA_BASE_STEPS 30
+#define STAMINA_STEPS_PER_LEVEL 15
+#define STAMINA_UPGRADE_COST_BASE 1200
+#define STAMINA_UPGRADE_COST_STEP 800
+
+#define STAMINA_REGEN_DELAY_FRAMES 90
+#define STAMINA_REGEN_TICK_FRAMES 16
+
+#define CHASE_MAX_CHASERS 3
+#define CHASE_BASE_STEPS 45
+#define CHASE_EXTRA_STEPS_PER_CHASER 15
+#define CHASE_REENGAGE_STEP_INTERVAL 10
+
+static EWRAM_DATA u8 sStaminaRegenDelay = 0;
+static EWRAM_DATA u8 sStaminaRegenTick = 0;
+static EWRAM_DATA u8 sActiveChasers = 0;
+static EWRAM_DATA u16 sChaseStepsRemaining = 0;
+static EWRAM_DATA u8 sChaseReengageStepCounter = 0;
+static EWRAM_DATA bool8 sPendingWildFirstMovePriority = FALSE;
+static EWRAM_DATA bool8 sBattleUsesWildFirstMovePriority = FALSE;
+
+static u8 GetStaminaLevel(void)
+{
+    if (gSaveBlock1Ptr->staminaLevel < STAMINA_LEVEL_MIN)
+    {
+        gSaveBlock1Ptr->staminaLevel = STAMINA_LEVEL_MIN;
+        if (gSaveBlock1Ptr->staminaCurrent == 0)
+            gSaveBlock1Ptr->staminaCurrent = STAMINA_BASE_STEPS;
+    }
+    if (gSaveBlock1Ptr->staminaLevel > STAMINA_LEVEL_MAX)
+        gSaveBlock1Ptr->staminaLevel = STAMINA_LEVEL_MAX;
+    return gSaveBlock1Ptr->staminaLevel;
+}
+
+static u8 GetStaminaMax(void)
+{
+    return STAMINA_BASE_STEPS + (GetStaminaLevel() - 1) * STAMINA_STEPS_PER_LEVEL;
+}
+
+static void ClampCurrentStamina(void)
+{
+    u8 maxStamina = GetStaminaMax();
+
+    if (gSaveBlock1Ptr->staminaCurrent > maxStamina)
+        gSaveBlock1Ptr->staminaCurrent = maxStamina;
+}
+
+static void RefillStamina(void)
+{
+    gSaveBlock1Ptr->staminaCurrent = GetStaminaMax();
+}
+
+static bool8 IsChaseActive(void)
+{
+    return sActiveChasers != 0 && sChaseStepsRemaining != 0;
+}
+
+static void EndChase(void)
+{
+    sActiveChasers = 0;
+    sChaseStepsRemaining = 0;
+    sChaseReengageStepCounter = 0;
+}
+
+static u32 GetStaminaUpgradeCost(u8 nextLevel)
+{
+    return STAMINA_UPGRADE_COST_BASE + (nextLevel - STAMINA_LEVEL_MIN) * STAMINA_UPGRADE_COST_STEP;
+}
+
+u16 PkmnCenterStaminaUpgrade_Preview(void)
+{
+    u8 level = GetStaminaLevel();
+    u8 nextLevel;
+    u32 cost;
+    u32 souls;
+
+    if (level >= STAMINA_LEVEL_MAX)
+        return STAMINA_UPGRADE_FAIL_MAX;
+
+    nextLevel = level + 1;
+    cost = GetStaminaUpgradeCost(nextLevel);
+    souls = GetMoney(&gSaveBlock1Ptr->money);
+    ConvertIntToDecimalStringN(gStringVar1, cost, STR_CONV_MODE_LEFT_ALIGN, 10);
+    ConvertIntToDecimalStringN(gStringVar2, nextLevel, STR_CONV_MODE_LEFT_ALIGN, 2);
+
+    if (souls < cost)
+        return STAMINA_UPGRADE_FAIL_NOT_ENOUGH_SOULS;
+
+    return STAMINA_UPGRADE_SUCCESS;
+}
+
+u16 PkmnCenterStaminaUpgrade_Purchase(void)
+{
+    u8 level = GetStaminaLevel();
+    u8 nextLevel;
+    u32 cost;
+
+    if (level >= STAMINA_LEVEL_MAX)
+        return STAMINA_UPGRADE_FAIL_MAX;
+
+    nextLevel = level + 1;
+    cost = GetStaminaUpgradeCost(nextLevel);
+    if (!IsEnoughMoney(&gSaveBlock1Ptr->money, cost))
+        return STAMINA_UPGRADE_FAIL_NOT_ENOUGH_SOULS;
+
+    RemoveMoney(&gSaveBlock1Ptr->money, cost);
+    gSaveBlock1Ptr->staminaLevel = nextLevel;
+    RefillStamina();
+    return STAMINA_UPGRADE_SUCCESS;
+}
+
+bool8 ChaseStamina_CanUseRunStep(void)
+{
+    ClampCurrentStamina();
+    return gSaveBlock1Ptr->staminaCurrent != 0;
+}
+
+void ChaseStamina_ConsumeRunStep(void)
+{
+    if (gSaveBlock1Ptr->staminaCurrent != 0)
+        gSaveBlock1Ptr->staminaCurrent--;
+
+    sStaminaRegenDelay = STAMINA_REGEN_DELAY_FRAMES;
+    sStaminaRegenTick = 0;
+}
+
+void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
+{
+    ClampCurrentStamina();
+
+    if (sStaminaRegenDelay != 0)
+        sStaminaRegenDelay--;
+    else if (gSaveBlock1Ptr->staminaCurrent < GetStaminaMax())
+    {
+        if (++sStaminaRegenTick >= STAMINA_REGEN_TICK_FRAMES)
+        {
+            sStaminaRegenTick = 0;
+            gSaveBlock1Ptr->staminaCurrent++;
+        }
+    }
+
+    if (!tookStep)
+        return;
+
+    if (IsChaseActive())
+    {
+        sChaseStepsRemaining--;
+        if (sChaseStepsRemaining == 0)
+        {
+            EndChase();
+        }
+        else
+        {
+            sChaseReengageStepCounter++;
+        }
+    }
+}
+
+bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
+{
+    (void)metatileAttributes;
+    if (!IsChaseActive())
+        return FALSE;
+
+    if (sChaseReengageStepCounter < CHASE_REENGAGE_STEP_INTERVAL)
+        return FALSE;
+
+    if (SweetScentWildEncounter())
+    {
+        sChaseReengageStepCounter = 0;
+        sPendingWildFirstMovePriority = TRUE;
+        if (sActiveChasers != 0)
+            sActiveChasers--;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool8 ChaseStamina_ShouldSuppressRandomEncounters(void)
+{
+    return IsChaseActive();
+}
+
+void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
+{
+    sBattleUsesWildFirstMovePriority = FALSE;
+
+    if (battleTypeFlags & BATTLE_TYPE_TRAINER)
+        return;
+
+    if (battleOutcome == B_OUTCOME_RAN)
+    {
+        u16 chaseLength;
+
+        if (sActiveChasers < CHASE_MAX_CHASERS)
+            sActiveChasers++;
+
+        chaseLength = CHASE_BASE_STEPS + sActiveChasers * CHASE_EXTRA_STEPS_PER_CHASER;
+        if (sChaseStepsRemaining < chaseLength)
+            sChaseStepsRemaining = chaseLength;
+        sChaseReengageStepCounter = 0;
+    }
+    else if (battleOutcome == B_OUTCOME_CAUGHT || battleOutcome == B_OUTCOME_WON)
+    {
+        if (sActiveChasers != 0)
+            sActiveChasers--;
+        if (sActiveChasers == 0)
+            EndChase();
+    }
+}
+
+void ChaseStamina_OnBattleStart(void)
+{
+    sBattleUsesWildFirstMovePriority = sPendingWildFirstMovePriority;
+    sPendingWildFirstMovePriority = FALSE;
+}
+
+bool8 ChaseStamina_ShouldPrioritizeWildOpponent(u8 battler1, u8 battler2)
+{
+    if (!sBattleUsesWildFirstMovePriority)
+        return FALSE;
+    if (gBattleResults.battleTurnCounter != 0)
+        return FALSE;
+    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_DOUBLE))
+        return FALSE;
+
+    return (GetBattlerSide(battler1) == B_SIDE_PLAYER && GetBattlerSide(battler2) == B_SIDE_OPPONENT)
+        || (GetBattlerSide(battler1) == B_SIDE_OPPONENT && GetBattlerSide(battler2) == B_SIDE_PLAYER);
+}

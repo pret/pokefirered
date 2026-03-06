@@ -171,7 +171,8 @@ static u16 GetChaseSpecies(void)
             return species;
     }
 
-    return SPECIES_BULBASAUR;
+    // Default to a defined overworld-capable chaser species when no enemy slot is populated.
+    return SPECIES_MEOWTH;
 }
 
 static u16 GetAreaAdjustedChaseLength(u16 chaseLength)

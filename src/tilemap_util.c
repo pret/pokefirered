@@ -39,6 +39,8 @@ struct TilemapUtil
 
 static EWRAM_DATA struct TilemapUtil *sTilemapUtil = NULL;
 static EWRAM_DATA u16 sNumTilemapUtilIds = 0;
+static EWRAM_DATA bool8 sTilemapUtilUsesHeap = FALSE;
+static EWRAM_DATA struct TilemapUtil sTilemapUtilInline[3];
 
 static void TilemapUtil_DrawPrev(u8 tilemapId);
 static void TilemapUtil_Draw(u8 tilemapId);
@@ -63,7 +65,19 @@ static const struct {
 void TilemapUtil_Init(u8 numTilemapIds)
 {
     u16 i;
-    sTilemapUtil = Alloc(numTilemapIds * sizeof(struct TilemapUtil));
+    TilemapUtil_Free();
+
+    if (numTilemapIds <= ARRAY_COUNT(sTilemapUtilInline))
+    {
+        sTilemapUtil = sTilemapUtilInline;
+        sTilemapUtilUsesHeap = FALSE;
+    }
+    else
+    {
+        sTilemapUtil = Alloc(numTilemapIds * sizeof(struct TilemapUtil));
+        sTilemapUtilUsesHeap = TRUE;
+    }
+
     sNumTilemapUtilIds = sTilemapUtil == NULL ? 0 : numTilemapIds;
     for (i = 0; i < sNumTilemapUtilIds; i++)
     {
@@ -74,7 +88,12 @@ void TilemapUtil_Init(u8 numTilemapIds)
 
 void TilemapUtil_Free(void)
 {
-    Free(sTilemapUtil);
+    if (sTilemapUtilUsesHeap)
+        Free(sTilemapUtil);
+
+    sTilemapUtil = NULL;
+    sNumTilemapUtilIds = 0;
+    sTilemapUtilUsesHeap = FALSE;
 }
 
 // Unused

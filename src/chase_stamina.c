@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "chase_stamina.h"
+#include "fieldmap.h"
 #include "field_player_avatar.h"
 #include "item.h"
 #include "metatile_behavior.h"
@@ -8,8 +9,11 @@
 #include "overworld.h"
 #include "party_menu.h"
 #include "pokemon.h"
+#include "random.h"
+#include "string_util.h"
 #include "strings.h"
 #include "wild_encounter.h"
+#include "battle_anim.h"
 #include "constants/battle.h"
 #include "constants/map_types.h"
 
@@ -44,6 +48,8 @@ static EWRAM_DATA u16 sChaseStepsRemaining = 0;
 static EWRAM_DATA u8 sChaseReengageStepCountdown = 0;
 static EWRAM_DATA bool8 sPendingWildFirstMovePriority = FALSE;
 static EWRAM_DATA bool8 sBattleUsesWildFirstMovePriority = FALSE;
+
+static bool8 IsMapTypeChaseCompatible(u8 mapType);
 
 static u8 GetStaminaLevel(void)
 {

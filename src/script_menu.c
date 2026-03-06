@@ -54,8 +54,8 @@ static const struct MenuAction sMultichoiceList_PkmnCenterNurse[] = {
 static const struct MenuAction sMultichoiceList_PkmnCenterLevelUpAmount[] = {
     { gText_Increase },
     { gText_Decrease },
-    { gText_Confirm3 },
-    { gText_Cancel }
+    { gMenuText_Confirm },
+    { gOtherText_Exit }
 };
 
 static const struct MenuAction sMultichoiceList_TrainerCardIconTint[] = {

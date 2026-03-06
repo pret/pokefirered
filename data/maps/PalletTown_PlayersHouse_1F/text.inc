@@ -37,7 +37,11 @@ PalletTown_PlayersHouse_1F_Text_OopsWrongSide::
     .string "Oops, wrong side…$"
 
 PalletTown_PlayersHouse_1F_Text_MomGaveRunningShoes::
-    .string "MOM: {PLAYER}!\n"
-    .string "You should take these with you.\p"
-    .string "Running Shoes will let you move\n"
-    .string "faster if you hold down the B Button.$"
+    .string "MOM: {PLAYER}! Wait.\p"
+    .string "If you're heading out,\n"
+    .string "take these with you.\p"
+    .string "The roads aren't as safe\n"
+    .string "as they used to be.\p"
+    .string "RUNNING SHOES will help\n"
+    .string "you move faster.\p"
+    .string "Be careful out there.$"

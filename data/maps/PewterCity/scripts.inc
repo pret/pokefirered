@@ -702,9 +702,9 @@ PewterCity_EventScript_AideAlreadyHasRunningShoes::
 	call_if_eq VAR_TEMP_1, 3, PewterCity_EventScript_AideApproachPlayer3
 	msgbox PewterCity_Text_AskedToDeliverBonus
 	msgbox PewterCity_Text_AideAlreadyHasRunningShoes
-	checkitemspace ITEM_SUPER_POTION
+	checkitemspace ITEM_LIFE_ORB
 	goto_if_eq VAR_RESULT, FALSE, PewterCity_EventScript_AideNoRoomForBonus
-	giveitem_msg PewterCity_Text_ReceivedBonusItemFromAide, ITEM_SUPER_POTION
+	giveitem_msg PewterCity_Text_ReceivedBonusItemFromAide, ITEM_LIFE_ORB
 	msgbox PewterCity_Text_AideUseBonusItemWell
 	goto PewterCity_EventScript_AideFinish
 

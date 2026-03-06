@@ -735,7 +735,13 @@ bool8 CorpseRun_CanUseBagInCurrentBattle(void)
 
 bool8 CorpseRun_CanRunFromCurrentBattle(void)
 {
-    return TRUE;
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return TRUE;
+
+    if (!CorpseRun_IsActive())
+        return FALSE;
+
+    return CorpseRun_IsEscapeTrainerEncounter(gTrainerBattleOpponent_A, GetTrainerBattleMode());
 }
 
 bool8 CorpseRun_CanGainExpFromCurrentBattle(void)

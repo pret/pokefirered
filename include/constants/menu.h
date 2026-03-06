@@ -70,6 +70,7 @@
 #define MULTICHOICE_JOIN_OR_LEAD                               63
 #define MULTICHOICE_TRAINER_TOWER_MODE                         64
 #define MULTICHOICE_PKMN_CENTER_NURSE                           65
+#define MULTICHOICE_PKMN_CENTER_LEVELUP_AMOUNT                  66
 
 #define MULTICHOICE_NONE                                      255
 

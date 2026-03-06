@@ -904,8 +904,17 @@ Text_RestoredPkmnToFullHealth::
 
 Text_PkmnCenterNurse_LevelUpPrompt::
 	.string "Current Souls: {STR_VAR_1}\n"
-	.string "Required Souls: {STR_VAR_2}\p"
-	.string "Level up this POKéMON?$"
+	.string "Cost for 1 level: {STR_VAR_2}\n"
+	.string "Max levels now: {STR_VAR_3}$"
+
+Text_PkmnCenterNurse_LevelUpAmountPrompt::
+	.string "Levels selected: {STR_VAR_3}/{STR_VAR_4}\n"
+	.string "Total cost: {STR_VAR_2}\p"
+	.string "Adjust amount?$"
+
+Text_PkmnCenterNurse_LevelUpConfirmPrompt::
+	.string "Spend {STR_VAR_2} SOULS to gain\n"
+	.string "{STR_VAR_3} level(s)?$"
 
 Text_PkmnCenterNurse_NotEnoughSouls::
 	.string "You don't have enough SOULS.$"

@@ -8,6 +8,7 @@
 #include "heal_location.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "money.h"
 #include "souls_hud.h"
 #include "battle.h"
@@ -33,6 +34,9 @@
 #define CORPSE_RUN_TRAINER_DAMAGE_CAP 20
 #define CORPSE_RUN_MARKER_LOCAL_ID 0xFE
 #define CORPSE_RUN_MARKER_GFX_ID OBJ_EVENT_GFX_SIGN
+#define CORPSE_RUN_STASH_VALID_INDEX 0
+#define CORPSE_RUN_STASH_COUNT_INDEX 1
+#define CORPSE_RUN_STASH_DATA_START 2
 
 STATIC_ASSERT(sizeof(struct CorpseRunSaveData) == 400, CorpseRunSaveDataSize);
 
@@ -59,6 +63,7 @@ static const u8 sGymAceLevelByBadgeCount[] =
 static u8 CorpseRun_GetBadgeCount(void);
 static void CorpseRun_SyncVisibleMarkerObject(void);
 static bool8 CorpseRun_IsPlayerAtOrFacingMarker(void);
+static void CorpseRun_ClearPartyStashMetadata(void);
 
 static bool8 CorpseRun_IsMapInSalvageSafariScope(u8 mapGroup, u8 mapNum)
 {
@@ -458,10 +463,136 @@ static void CorpseRun_InvalidateStoredPartyBlob(void)
     }
 }
 
+static void CorpseRun_ClearPartyStashMetadata(void)
+{
+    gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_VALID_INDEX] = FALSE;
+    gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_COUNT_INDEX] = 0;
+    CpuFill8(0, &gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_DATA_START], PARTY_SIZE * 2);
+}
+
+static bool8 CorpseRun_FindFreePcSlots(u8 requiredSlots, u8 *boxIds, u8 *boxPositions)
+{
+    u8 boxId;
+    u8 boxPos;
+    u8 found = 0;
+
+    for (boxId = 0; boxId < TOTAL_BOXES_COUNT && found < requiredSlots; boxId++)
+    {
+        for (boxPos = 0; boxPos < IN_BOX_COUNT && found < requiredSlots; boxPos++)
+        {
+            if (GetBoxMonDataAt(boxId, boxPos, MON_DATA_SPECIES) == SPECIES_NONE)
+            {
+                boxIds[found] = boxId;
+                boxPositions[found] = boxPos;
+                found++;
+            }
+        }
+    }
+
+    return found == requiredSlots;
+}
+
+static bool8 CorpseRun_StashPlayerPartyInPc(void)
+{
+    u8 i;
+    u8 partyCount = CalculatePlayerPartyCount();
+    u8 stashBoxIds[PARTY_SIZE];
+    u8 stashBoxPositions[PARTY_SIZE];
+
+    if (partyCount == 0)
+    {
+        CorpseRun_ClearPartyStashMetadata();
+        return TRUE;
+    }
+
+    if (!CorpseRun_FindFreePcSlots(partyCount, stashBoxIds, stashBoxPositions))
+    {
+        CorpseRun_ClearPartyStashMetadata();
+        return FALSE;
+    }
+
+    for (i = 0; i < partyCount; i++)
+    {
+        SetBoxMonAt(stashBoxIds[i], stashBoxPositions[i], &gPlayerParty[i].box);
+        ZeroMonData(&gPlayerParty[i]);
+        gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_DATA_START + (i * 2)] = stashBoxIds[i];
+        gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_DATA_START + (i * 2) + 1] = stashBoxPositions[i];
+    }
+
+    for (; i < PARTY_SIZE; i++)
+        ZeroMonData(&gPlayerParty[i]);
+
+    CalculatePlayerPartyCount();
+    gSaveBlock1Ptr->playerPartyCount = gPlayerPartyCount;
+    gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_COUNT_INDEX] = partyCount;
+    gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_VALID_INDEX] = TRUE;
+    return TRUE;
+}
+
+static void CorpseRun_RemoveStashedPartyFromPc(void)
+{
+    u8 i;
+    u8 stashCount;
+
+    if (!gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_VALID_INDEX])
+        return;
+
+    stashCount = min(gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_COUNT_INDEX], PARTY_SIZE);
+    for (i = 0; i < stashCount; i++)
+    {
+        u8 boxId = gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_DATA_START + (i * 2)];
+        u8 boxPos = gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_DATA_START + (i * 2) + 1];
+
+        if (boxId >= TOTAL_BOXES_COUNT || boxPos >= IN_BOX_COUNT)
+            continue;
+
+        ZeroBoxMonData(GetBoxedMonPtr(boxId, boxPos));
+    }
+
+    CorpseRun_ClearPartyStashMetadata();
+}
+
+static void CorpseRun_RestorePartyFromPcStash(void)
+{
+    u8 i;
+    u8 restoredCount = 0;
+    u8 stashCount;
+
+    if (!gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_VALID_INDEX])
+        return;
+
+    stashCount = min(gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_COUNT_INDEX], PARTY_SIZE);
+    for (i = 0; i < stashCount; i++)
+    {
+        u8 boxId = gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_DATA_START + (i * 2)];
+        u8 boxPos = gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_DATA_START + (i * 2) + 1];
+        struct BoxPokemon *boxMon;
+
+        if (boxId >= TOTAL_BOXES_COUNT || boxPos >= IN_BOX_COUNT)
+            continue;
+
+        boxMon = GetBoxedMonPtr(boxId, boxPos);
+        if (GetBoxMonData(boxMon, MON_DATA_SPECIES) == SPECIES_NONE)
+            continue;
+
+        gPlayerParty[restoredCount].box = *boxMon;
+        ZeroBoxMonData(boxMon);
+        restoredCount++;
+    }
+
+    for (; restoredCount < PARTY_SIZE; restoredCount++)
+        ZeroMonData(&gPlayerParty[restoredCount]);
+
+    CalculatePlayerPartyCount();
+    gSaveBlock1Ptr->playerPartyCount = gPlayerPartyCount;
+    CorpseRun_ClearPartyStashMetadata();
+}
+
 static void OnSecondDeathDuringCorpseRun(void)
 {
     gSaveBlock1Ptr->corpseRun.droppedSouls = 0;
     SoulsHud_Update();
+    CorpseRun_RemoveStashedPartyFromPc();
     CorpseRun_InvalidateStoredPartyBlob();
     CorpseRun_SetState(CR_FAILED);
     CorpseRun_DespawnMarker();
@@ -488,6 +619,7 @@ void CorpseRun_ResetSaveData(void)
     gSaveBlock1Ptr->corpseRun.respawnMapId = MAP_UNDEFINED;
     gSaveBlock1Ptr->corpseRun.respawnX = 0;
     gSaveBlock1Ptr->corpseRun.respawnY = 0;
+    CorpseRun_ClearPartyStashMetadata();
     SoulsHud_Update();
     CorpseRun_DespawnMarker();
     CorpseRun_FinalizeForSave();
@@ -517,6 +649,9 @@ void CorpseRun_HandlePlayerDefeat(void)
     for (i = 0; i < gSaveBlock1Ptr->corpseRun.partyCount; i++)
         gSaveBlock1Ptr->corpseRun.partySnapshot[i].hpPercent = 0;
 
+    if (!CorpseRun_StashPlayerPartyInPc())
+        CorpseRun_ClearPartyStashMetadata();
+
     CorpseRun_SpawnMarkerAtPlayer();
     CorpseRun_SetState(CR_ACTIVE);
     gSaveBlock1Ptr->corpseRun.trainerHpMax = min(CORPSE_RUN_TRAINER_HP_MAX, max(CORPSE_RUN_TRAINER_HP_MIN, CORPSE_RUN_TRAINER_HP_BASE + (CorpseRun_GetBadgeCount() * CORPSE_RUN_TRAINER_HP_PER_BADGE)));
@@ -536,6 +671,7 @@ void CorpseRun_TryRecoverByTouch(void)
     if (CorpseRun_IsPlayerAtOrFacingMarker())
     {
         AddMoney(&gSaveBlock1Ptr->money, gSaveBlock1Ptr->corpseRun.droppedSouls);
+        CorpseRun_RestorePartyFromPcStash();
         CorpseRun_ApplyRecoveryHpToParty();
         gSaveBlock1Ptr->corpseRun.droppedSouls = 0;
         SoulsHud_Update();

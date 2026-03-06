@@ -4,6 +4,7 @@
 #include "global.h"
 
 void StartWildBattle(void);
+void StartDoubleWildBattle(void);
 void StartRoamerBattle(void);
 void StartOldManTutorialBattle(void);
 void StartScriptedWildBattle(void);

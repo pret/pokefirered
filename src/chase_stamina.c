@@ -182,8 +182,6 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
     {
         sChaseReengageStepCounter = 0;
         sPendingWildFirstMovePriority = TRUE;
-        if (sActiveChasers != 0)
-            sActiveChasers--;
         return TRUE;
     }
 
@@ -197,12 +195,19 @@ bool8 ChaseStamina_ShouldSuppressRandomEncounters(void)
 
 void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
 {
+    bool8 wasChaseBattle = sBattleUsesWildFirstMovePriority;
+
     sBattleUsesWildFirstMovePriority = FALSE;
 
     if (battleTypeFlags & BATTLE_TYPE_TRAINER)
         return;
 
-    if (battleOutcome == B_OUTCOME_RAN)
+    if (!wasChaseBattle)
+        return;
+
+    switch (battleOutcome)
+    {
+    case B_OUTCOME_RAN:
     {
         u16 chaseLength;
 
@@ -213,13 +218,22 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
         if (sChaseStepsRemaining < chaseLength)
             sChaseStepsRemaining = chaseLength;
         sChaseReengageStepCounter = 0;
+        break;
     }
-    else if (battleOutcome == B_OUTCOME_CAUGHT || battleOutcome == B_OUTCOME_WON)
+
+    case B_OUTCOME_CAUGHT:
+    case B_OUTCOME_WON:
     {
         if (sActiveChasers != 0)
             sActiveChasers--;
         if (sActiveChasers == 0)
             EndChase();
+        break;
+    }
+
+    default:
+        // Non-resolution outcomes make no chase stack change.
+        break;
     }
 }
 

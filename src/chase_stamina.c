@@ -6,9 +6,11 @@
 #include "metatile_behavior.h"
 #include "money.h"
 #include "party_menu.h"
+#include "pokemon.h"
 #include "strings.h"
 #include "wild_encounter.h"
 #include "constants/battle.h"
+#include "constants/map_types.h"
 
 #define STAMINA_LEVEL_MIN 1
 #define STAMINA_LEVEL_MAX 10
@@ -23,13 +25,21 @@
 #define CHASE_MAX_CHASERS 3
 #define CHASE_BASE_STEPS 45
 #define CHASE_EXTRA_STEPS_PER_CHASER 15
-#define CHASE_REENGAGE_STEP_INTERVAL 10
+#define CHASE_REENGAGE_PROGRESS_GOAL 10
+#define CHASE_REENGAGE_PROGRESS_WALK 2
+#define CHASE_REENGAGE_PROGRESS_RUN 1
+#define CHASE_SPECIES_VARIANCE_MAX 24
+#define CHASE_AREA_ROUTE_BONUS 10
+#define CHASE_AREA_UNDERGROUND_BONUS 18
+#define CHASE_AREA_INDOOR_PENALTY 8
+#define CHASE_STEPS_MIN 30
+#define CHASE_STEPS_MAX 140
 
 static EWRAM_DATA u8 sStaminaRegenDelay = 0;
 static EWRAM_DATA u8 sStaminaRegenTick = 0;
 static EWRAM_DATA u8 sActiveChasers = 0;
 static EWRAM_DATA u16 sChaseStepsRemaining = 0;
-static EWRAM_DATA u8 sChaseReengageStepCounter = 0;
+static EWRAM_DATA u8 sChaseReengageProgress = 0;
 static EWRAM_DATA bool8 sPendingWildFirstMovePriority = FALSE;
 static EWRAM_DATA bool8 sBattleUsesWildFirstMovePriority = FALSE;
 
@@ -90,7 +100,58 @@ static void EndChase(void)
 {
     sActiveChasers = 0;
     sChaseStepsRemaining = 0;
-    sChaseReengageStepCounter = 0;
+    sChaseReengageProgress = 0;
+}
+
+static u16 GetChaseSpecies(void)
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES);
+
+        if (species != SPECIES_NONE)
+            return species;
+    }
+
+    return SPECIES_BULBASAUR;
+}
+
+static u16 GetAreaAdjustedChaseLength(u16 chaseLength)
+{
+    switch (gMapHeader.mapType)
+    {
+    case MAP_TYPE_ROUTE:
+    case MAP_TYPE_OCEAN_ROUTE:
+        chaseLength += CHASE_AREA_ROUTE_BONUS;
+        break;
+    case MAP_TYPE_UNDERGROUND:
+        chaseLength += CHASE_AREA_UNDERGROUND_BONUS;
+        break;
+    case MAP_TYPE_INDOOR:
+        if (chaseLength > CHASE_AREA_INDOOR_PENALTY)
+            chaseLength -= CHASE_AREA_INDOOR_PENALTY;
+        break;
+    }
+
+    return chaseLength;
+}
+
+static u16 GetChaseLengthForEncounter(void)
+{
+    u16 species = GetChaseSpecies();
+    u16 chaseLength = CHASE_BASE_STEPS + sActiveChasers * CHASE_EXTRA_STEPS_PER_CHASER;
+
+    chaseLength += species % CHASE_SPECIES_VARIANCE_MAX;
+    chaseLength = GetAreaAdjustedChaseLength(chaseLength);
+
+    if (chaseLength < CHASE_STEPS_MIN)
+        chaseLength = CHASE_STEPS_MIN;
+    if (chaseLength > CHASE_STEPS_MAX)
+        chaseLength = CHASE_STEPS_MAX;
+
+    return chaseLength;
 }
 
 static u32 GetStaminaUpgradeCost(u8 nextLevel)
@@ -198,7 +259,10 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
         }
         else
         {
-            sChaseReengageStepCounter++;
+            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_DASH))
+                sChaseReengageProgress += CHASE_REENGAGE_PROGRESS_RUN;
+            else
+                sChaseReengageProgress += CHASE_REENGAGE_PROGRESS_WALK;
         }
     }
 }
@@ -208,7 +272,7 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
     if (!ChaseStamina_IsChaseActive())
         return FALSE;
 
-    if (sChaseReengageStepCounter < CHASE_REENGAGE_STEP_INTERVAL)
+    if (sChaseReengageProgress < CHASE_REENGAGE_PROGRESS_GOAL)
         return FALSE;
 
     if (!IsValidChaseEncounterContext(metatileAttributes))
@@ -216,7 +280,7 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
 
     if (SweetScentWildEncounter())
     {
-        sChaseReengageStepCounter = 0;
+        sChaseReengageProgress = 0;
         sPendingWildFirstMovePriority = TRUE;
         return TRUE;
     }
@@ -250,10 +314,10 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
         if (sActiveChasers < CHASE_MAX_CHASERS)
             sActiveChasers++;
 
-        chaseLength = CHASE_BASE_STEPS + sActiveChasers * CHASE_EXTRA_STEPS_PER_CHASER;
+        chaseLength = GetChaseLengthForEncounter();
         if (sChaseStepsRemaining < chaseLength)
             sChaseStepsRemaining = chaseLength;
-        sChaseReengageStepCounter = 0;
+        sChaseReengageProgress = 0;
         break;
     }
 

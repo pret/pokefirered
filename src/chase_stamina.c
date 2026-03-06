@@ -231,8 +231,21 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
         break;
     }
 
+    case B_OUTCOME_LOST:
+    case B_OUTCOME_DREW:
+    case B_OUTCOME_PLAYER_TELEPORTED:
+    case B_OUTCOME_MON_FLED:
+    case B_OUTCOME_NO_SAFARI_BALLS:
+    case B_OUTCOME_FORFEITED:
+    case B_OUTCOME_MON_TELEPORTED:
+    case B_OUTCOME_LINK_BATTLE_RAN:
+        // Forced-end and escape outcomes clear the chase to keep its state deterministic.
+        EndChase();
+        break;
+
     default:
-        // Non-resolution outcomes make no chase stack change.
+        // Any unknown outcome is treated as a forced end to avoid stale chase state.
+        EndChase();
         break;
     }
 }

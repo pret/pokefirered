@@ -16,7 +16,7 @@ static void AnimTranslateStinger(struct Sprite *sprite);
 static void AnimMissileArc(struct Sprite *sprite);
 static void AnimMissileArc_Step(struct Sprite *sprite);
 static void AnimTailGlowOrb(struct Sprite *sprite);
-
+//test
 static const union AffineAnimCmd sAffineAnim_MegahornHorn_0[] =
 {
     AFFINEANIMCMD_FRAME(0x100, 0x100, 30, 0),

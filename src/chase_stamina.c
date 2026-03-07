@@ -4,6 +4,7 @@
 #include "chase_stamina.h"
 #include "fieldmap.h"
 #include "field_player_avatar.h"
+#include "field_camera.h"
 #include "item.h"
 #include "metatile_behavior.h"
 #include "money.h"
@@ -15,6 +16,10 @@
 #include "strings.h"
 #include "wild_encounter.h"
 #include "battle_anim.h"
+#include "overworld_hud.h"
+#include "palette.h"
+#include "script.h"
+#include "sound.h"
 #include "constants/battle.h"
 #include "constants/map_types.h"
 
@@ -47,6 +52,9 @@ typedef enum
     CHASE_END_FEEDBACK_ESCAPED,
     CHASE_END_FEEDBACK_ENDED,
 } ChaseEndFeedback;
+#define CHASE_START_TOAST_DURATION_FRAMES 90
+
+static const u8 sChaseStartToastText[] = _("Something is chasing you!");
 
 static EWRAM_DATA u8 sStaminaRegenDelay = 0;
 static EWRAM_DATA u8 sStaminaRegenTick = 0;
@@ -148,6 +156,25 @@ static bool8 IsCurrentAreaValidForActiveChase(void)
 }
 
 static void EndChase(bool8 shouldQueueFeedback, u8 feedbackType)
+static bool8 ShouldSuppressChaseStartFeedback(void)
+{
+    if (ScriptContext_IsEnabled())
+        return TRUE;
+
+    return gPaletteFade.active;
+}
+
+static void TryShowChaseStartFeedback(void)
+{
+    if (ShouldSuppressChaseStartFeedback())
+        return;
+
+    OverworldHud_ShowToast(sChaseStartToastText, CHASE_START_TOAST_DURATION_FRAMES);
+    PlaySE(SE_M_SCREECH);
+    SetCameraPanning(0, 2);
+}
+
+static void EndChase(void)
 {
     bool8 wasActive = ChaseStamina_IsChaseActive();
 
@@ -162,6 +189,8 @@ static void EndChase(bool8 shouldQueueFeedback, u8 feedbackType)
 
 static void StartChase(u8 initialChasers, u16 initialSteps)
 {
+    bool8 wasActive = ChaseStamina_IsChaseActive();
+
     if (initialChasers == 0 || initialSteps == 0)
     {
         EndChase(FALSE, CHASE_END_FEEDBACK_NONE);
@@ -174,6 +203,9 @@ static void StartChase(u8 initialChasers, u16 initialSteps)
     sActiveChasers = initialChasers;
     sChaseStepsRemaining = initialSteps;
     sChaseReengageStepCountdown = CHASE_REENGAGE_COUNTDOWN_MIN;
+
+    if (!wasActive && ChaseStamina_IsChaseActive())
+        TryShowChaseStartFeedback();
 }
 
 static bool8 IsMapTypeChaseCompatible(u8 mapType)

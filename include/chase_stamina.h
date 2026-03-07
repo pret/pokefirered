@@ -6,6 +6,7 @@
 #define STAMINA_UPGRADE_SUCCESS 0
 #define STAMINA_UPGRADE_FAIL_MAX 1
 #define STAMINA_UPGRADE_FAIL_NOT_ENOUGH_SOULS 2
+#define CHASE_STAMINA_MAX_ACTIVE_CHASERS 2
 
 void ChaseStamina_UpdateOverworldFrame(bool8 tookStep);
 bool8 ChaseStamina_CanUseRunStep(void);

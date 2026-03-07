@@ -87,10 +87,8 @@ bool8 ChaseStamina_IsChaseActive(void)
     return sActiveChasers != 0 && sChaseStepsRemaining != 0;
 }
 
-static bool8 IsValidChaseEncounterContext(u32 metatileAttributes)
+static bool8 IsTileChaseEncounterEligible(u8 encounterType, u8 metatileBehavior)
 {
-    u8 encounterType = ExtractMetatileAttribute(metatileAttributes, METATILE_ATTRIBUTE_ENCOUNTER_TYPE);
-
     if (encounterType == TILE_ENCOUNTER_LAND)
         return TRUE;
 
@@ -98,41 +96,46 @@ static bool8 IsValidChaseEncounterContext(u32 metatileAttributes)
         return TRUE;
 
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING)
-     && MetatileBehavior_IsBridge(ExtractMetatileAttribute(metatileAttributes, METATILE_ATTRIBUTE_BEHAVIOR)))
+     && MetatileBehavior_IsBridge(metatileBehavior))
         return TRUE;
 
     return FALSE;
 }
 
-static bool8 IsCurrentAreaValidForActiveChase(void)
+static bool8 IsCurrentTileChaseEncounterEligible(void)
 {
     s16 x;
     s16 y;
     u8 encounterType;
+    u8 metatileBehavior;
 
+    PlayerGetDestCoords(&x, &y);
+    encounterType = MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE);
+    metatileBehavior = MapGridGetMetatileBehaviorAt(x, y);
+
+    return IsTileChaseEncounterEligible(encounterType, metatileBehavior);
+}
+
+static bool8 IsValidChaseEncounterContext(u32 metatileAttributes)
+{
+    u8 encounterType = ExtractMetatileAttribute(metatileAttributes, METATILE_ATTRIBUTE_ENCOUNTER_TYPE);
+    u8 metatileBehavior = ExtractMetatileAttribute(metatileAttributes, METATILE_ATTRIBUTE_BEHAVIOR);
+
+    return IsTileChaseEncounterEligible(encounterType, metatileBehavior);
+}
+
+static bool8 IsCurrentAreaValidForActiveChase(void)
+{
     if (!IsMapTypeChaseCompatible(gMapHeader.mapType))
         return FALSE;
 
-    // Town/city/indoor maps are treated as safe/scripted hubs for chase continuation.
+    // Town/city/indoor maps are safe/scripted hubs that terminate active chase.
     if (gMapHeader.mapType == MAP_TYPE_TOWN
      || gMapHeader.mapType == MAP_TYPE_CITY
      || gMapHeader.mapType == MAP_TYPE_INDOOR)
         return FALSE;
 
-    PlayerGetDestCoords(&x, &y);
-    encounterType = MapGridGetMetatileAttributeAt(x, y, METATILE_ATTRIBUTE_ENCOUNTER_TYPE);
-
-    if (encounterType == TILE_ENCOUNTER_LAND)
-        return TRUE;
-
-    if (encounterType == TILE_ENCOUNTER_WATER)
-        return TRUE;
-
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING)
-     && MetatileBehavior_IsBridge(MapGridGetMetatileBehaviorAt(x, y)))
-        return TRUE;
-
-    return FALSE;
+    return TRUE;
 }
 
 static void EndChase(void)
@@ -360,6 +363,9 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
         return FALSE;
 
     if (!IsValidChaseEncounterContext(metatileAttributes))
+        return FALSE;
+
+    if (!IsCurrentTileChaseEncounterEligible())
         return FALSE;
 
     if (sActiveChasers >= 2)

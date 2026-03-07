@@ -201,6 +201,9 @@
 // can be spawned for the camera to track instead of the player. Additionally, the value 0 is reserved as an "empty" indicator.
 #define LOCALID_NONE                         0
 #define LOCALID_CAMERA                     127
+// Reserved local-id range for runtime chase visuals.
+#define LOCALID_CHASE_VISUAL_BASE          230
+#define LOCALID_CHASE_VISUAL_MAX           231
 #define LOCALID_BERRY_BLENDER_PLAYER_END   240 // This will use 5 (MAX_RFU_PLAYERS) IDs ending at 240, i.e. 236-240
 #define LOCALID_PLAYER                     255
 

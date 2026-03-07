@@ -10,6 +10,10 @@
 #define CHASE_OVERWORLD_MAX_CHASERS (LOCALID_CHASE_VISUAL_MAX - LOCALID_CHASE_VISUAL_BASE + 1)
 #define CHASE_OVERWORLD_GFX_ID OBJ_EVENT_GFX_MEOWTH
 #define CHASE_OVERWORLD_MAX_STALLED_FRAMES 30
+#define CHASE_OVERWORLD_CENTER_SAFE_RADIUS_X 2
+#define CHASE_OVERWORLD_CENTER_SAFE_RADIUS_Y 2
+#define CHASE_OVERWORLD_OFFSCREEN_RADIUS_X 8
+#define CHASE_OVERWORLD_OFFSCREEN_RADIUS_Y 6
 #define CHASE_OVERWORLD_PROXIMITY_RANGE 5
 #define CHASE_OVERWORLD_ATTENTION_COOLDOWN 120
 #define CHASE_OVERWORLD_IDLE_ANIM_PERIOD 24
@@ -31,6 +35,18 @@ static const s8 sChaserSpawnOffsets[][2] =
     {0, 2},
     {-2, 2},
     {2, 2},
+};
+
+static const s8 sChaserEdgeSpawnOffsets[][2] =
+{
+    {-9, 0},
+    {9, 0},
+    {0, -7},
+    {0, 7},
+    {-9, -3},
+    {9, -3},
+    {-9, 3},
+    {9, 3},
 };
 
 static EWRAM_DATA bool8 sChasersSpawned = FALSE;
@@ -84,6 +100,32 @@ static void UpdateChaserVisibilityPriority(struct ObjectEvent *objectEvent)
 }
 static EWRAM_DATA u8 sChaserStalledFrames[CHASE_STAMINA_MAX_ACTIVE_CHASERS];
 
+static bool8 IsOutsideImmediateCameraCenter(s16 playerX, s16 playerY, s16 targetX, s16 targetY)
+{
+    s16 dx = targetX - playerX;
+    s16 dy = targetY - playerY;
+
+    if (dx < 0)
+        dx = -dx;
+    if (dy < 0)
+        dy = -dy;
+
+    return dx > CHASE_OVERWORLD_CENTER_SAFE_RADIUS_X || dy > CHASE_OVERWORLD_CENTER_SAFE_RADIUS_Y;
+}
+
+static bool8 IsLikelyOffscreenFromPlayer(s16 playerX, s16 playerY, s16 targetX, s16 targetY)
+{
+    s16 dx = targetX - playerX;
+    s16 dy = targetY - playerY;
+
+    if (dx < 0)
+        dx = -dx;
+    if (dy < 0)
+        dy = -dy;
+
+    return dx >= CHASE_OVERWORLD_OFFSCREEN_RADIUS_X || dy >= CHASE_OVERWORLD_OFFSCREEN_RADIUS_Y;
+}
+
 static void DespawnChasers(void)
 {
     u8 i;
@@ -106,6 +148,41 @@ static bool8 IsSpawnContextValid(void)
     return sChasersSpawned
         && sSpawnedMapGroup == gSaveBlock1Ptr->location.mapGroup
         && sSpawnedMapNum == gSaveBlock1Ptr->location.mapNum;
+}
+
+static bool8 IsSpawnTileValid(struct ObjectEvent *referenceObjectEvent, s16 x, s16 y)
+{
+    if (MapGridGetCollisionAt(x, y))
+        return FALSE;
+    if (GetMapBorderIdAt(x, y) == CONNECTION_INVALID)
+        return FALSE;
+
+    return GetCollisionAtCoords(referenceObjectEvent, x, y, DIR_SOUTH) == COLLISION_NONE;
+}
+
+static bool8 TryGetSpawnCoordsFromOffsets(struct ObjectEvent *referenceObjectEvent, s16 playerX, s16 playerY, u8 chaserIndex, const s8 offsets[][2], u8 offsetsCount, bool8 requireLikelyOffscreen, s16 *candidateX, s16 *candidateY)
+{
+    u8 i;
+
+    for (i = 0; i < offsetsCount; i++)
+    {
+        u8 offsetIndex = (i + chaserIndex) % offsetsCount;
+        s16 testX = playerX + offsets[offsetIndex][0];
+        s16 testY = playerY + offsets[offsetIndex][1];
+
+        if (!IsOutsideImmediateCameraCenter(playerX, playerY, testX, testY))
+            continue;
+        if (requireLikelyOffscreen && !IsLikelyOffscreenFromPlayer(playerX, playerY, testX, testY))
+            continue;
+        if (!IsSpawnTileValid(referenceObjectEvent, testX, testY))
+            continue;
+
+        *candidateX = testX;
+        *candidateY = testY;
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 static u16 GetDistanceScore(s16 fromX, s16 fromY, s16 toX, s16 toY, u8 direction)
@@ -167,51 +244,47 @@ static bool8 TryQueueChaserStep(struct ObjectEvent *objectEvent, s16 targetX, s1
     return FALSE;
 }
 
-static bool8 TryGetChaserSpawnCoords(s16 playerX, s16 playerY, u8 chaserIndex, u8 candidateIndex, s16 *candidateX, s16 *candidateY)
+static bool8 TryGetChaserSpawnCoords(struct ObjectEvent *referenceObjectEvent, s16 playerX, s16 playerY, u8 chaserIndex, bool8 allowNearPlayerFallback, s16 *candidateX, s16 *candidateY)
 {
-    if (candidateIndex == 0)
-    {
-        *candidateX = playerX - (chaserIndex + 2);
-        *candidateY = playerY + 1;
+    if (TryGetSpawnCoordsFromOffsets(referenceObjectEvent, playerX, playerY, chaserIndex, sChaserEdgeSpawnOffsets, ARRAY_COUNT(sChaserEdgeSpawnOffsets), TRUE, candidateX, candidateY))
         return TRUE;
-    }
 
-    candidateIndex--;
-    if (candidateIndex < ARRAY_COUNT(sChaserSpawnOffsets))
-    {
-        candidateIndex = (candidateIndex + chaserIndex) % ARRAY_COUNT(sChaserSpawnOffsets);
-        *candidateX = playerX + sChaserSpawnOffsets[candidateIndex][0];
-        *candidateY = playerY + sChaserSpawnOffsets[candidateIndex][1];
+    if (TryGetSpawnCoordsFromOffsets(referenceObjectEvent, playerX, playerY, chaserIndex, sChaserSpawnOffsets, ARRAY_COUNT(sChaserSpawnOffsets), TRUE, candidateX, candidateY))
         return TRUE;
-    }
+
+    if (allowNearPlayerFallback
+     && TryGetSpawnCoordsFromOffsets(referenceObjectEvent, playerX, playerY, chaserIndex, sChaserSpawnOffsets, ARRAY_COUNT(sChaserSpawnOffsets), FALSE, candidateX, candidateY))
+        return TRUE;
 
     return FALSE;
 }
 
-static bool8 TrySpawnChaserNearPlayer(u8 localId, u8 chaserIndex, s16 playerX, s16 playerY, u8 *objectEventId)
+static bool8 TrySpawnChaserNearPlayer(struct ObjectEvent *referenceObjectEvent, u8 localId, u8 chaserIndex, s16 playerX, s16 playerY, u8 *objectEventId)
 {
-    u8 candidateIndex;
+    s16 candidateX;
+    s16 candidateY;
+    u8 elevation;
 
-    for (candidateIndex = 0; candidateIndex <= ARRAY_COUNT(sChaserSpawnOffsets); candidateIndex++)
-    {
-        s16 candidateX;
-        s16 candidateY;
-        u8 elevation;
+    if (!TryGetChaserSpawnCoords(referenceObjectEvent, playerX, playerY, chaserIndex, FALSE, &candidateX, &candidateY))
+        return FALSE;
 
-        if (!TryGetChaserSpawnCoords(playerX, playerY, chaserIndex, candidateIndex, &candidateX, &candidateY))
-            break;
-
-        elevation = MapGridGetElevationAt(candidateX, candidateY);
-        SpawnSpecialObjectEventParameterized(CHASE_OVERWORLD_GFX_ID, MOVEMENT_TYPE_FACE_DOWN, localId, candidateX + MAP_OFFSET, candidateY + MAP_OFFSET, elevation);
-        if (!TryGetObjectEventIdByLocalIdAndMap(localId, sSpawnedMapNum, sSpawnedMapGroup, objectEventId))
-            return TRUE;
-    }
+    elevation = MapGridGetElevationAt(candidateX, candidateY);
+    SpawnSpecialObjectEventParameterized(CHASE_OVERWORLD_GFX_ID, MOVEMENT_TYPE_FACE_DOWN, localId, candidateX + MAP_OFFSET, candidateY + MAP_OFFSET, elevation);
+    if (!TryGetObjectEventIdByLocalIdAndMap(localId, sSpawnedMapNum, sSpawnedMapGroup, objectEventId))
+        return TRUE;
 
     return FALSE;
 }
 
-static void PlaceChaserNearPlayer(u8 localId, u8 objectEventId, u8 chaserIndex, s16 playerX, s16 playerY)
+static void PlaceChaserNearPlayer(struct ObjectEvent *referenceObjectEvent, u8 localId, u8 chaserIndex, s16 playerX, s16 playerY)
 {
+    s16 candidateX;
+    s16 candidateY;
+
+    if (!TryGetChaserSpawnCoords(referenceObjectEvent, playerX, playerY, chaserIndex, TRUE, &candidateX, &candidateY))
+        return;
+
+    TryMoveObjectEventToMapCoords(localId, sSpawnedMapNum, sSpawnedMapGroup, candidateX, candidateY);
     s16 radius;
 
     (void)chaserIndex;
@@ -285,13 +358,15 @@ static void PlaceChaserNearPlayer(u8 localId, u8 objectEventId, u8 chaserIndex, 
 static void SpawnOrSyncChasers(void)
 {
     u8 i;
-    u8 playerObjectEventId;
+    u8 playerObjectEventId = 0;
     u8 activeChasers = ChaseStamina_GetActiveChasers();
+    bool8 playerObjectAvailable = FALSE;
     s16 playerX = gSaveBlock1Ptr->pos.x;
     s16 playerY = gSaveBlock1Ptr->pos.y;
 
     if (TryGetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0, &playerObjectEventId))
     {
+        playerObjectAvailable = TRUE;
         playerX = gObjectEvents[playerObjectEventId].currentCoords.x;
         playerY = gObjectEvents[playerObjectEventId].currentCoords.y;
     }
@@ -322,9 +397,15 @@ static void SpawnOrSyncChasers(void)
 
         if (!TryGetObjectEventIdByLocalIdAndMap(localId, sSpawnedMapNum, sSpawnedMapGroup, &objectEventId))
         {
-            if (!TrySpawnChaserNearPlayer(localId, i, playerX, playerY, &objectEventId))
+            if (!playerObjectAvailable)
+                continue;
+
+            if (!TrySpawnChaserNearPlayer(&gObjectEvents[playerObjectEventId], localId, i, playerX, playerY, &objectEventId))
                 continue;
             sChaserStalledFrames[i] = 0;
+
+            if (TryQueueChaserStep(&gObjectEvents[objectEventId], playerX, playerY))
+                continue;
             sChaserAttentionCooldown[i] = 0;
             sChaserWasInProximity[i] = FALSE;
         }
@@ -357,6 +438,7 @@ static void SpawnOrSyncChasers(void)
 
             if (TryQueueChaserStep(chaser, playerX, playerY, activePursuit))
             {
+                PlaceChaserNearPlayer(&gObjectEvents[objectEventId], localId, i, playerX, playerY);
                 sChaserStalledFrames[i] = 0;
             }
             else

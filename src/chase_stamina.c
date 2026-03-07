@@ -46,6 +46,12 @@
 #define CHASE_STEPS_MIN 30
 #define CHASE_STEPS_MAX 140
 
+typedef enum
+{
+    CHASE_END_FEEDBACK_NONE,
+    CHASE_END_FEEDBACK_ESCAPED,
+    CHASE_END_FEEDBACK_ENDED,
+} ChaseEndFeedback;
 #define CHASE_START_TOAST_DURATION_FRAMES 90
 
 static const u8 sChaseStartToastText[] = _("Something is chasing you!");
@@ -58,6 +64,7 @@ static EWRAM_DATA u16 sChaseStepsRemaining = 0;
 static EWRAM_DATA u8 sChaseReengageStepCountdown = 0;
 static EWRAM_DATA bool8 sPendingWildFirstMovePriority = FALSE;
 static EWRAM_DATA bool8 sBattleUsesWildFirstMovePriority = FALSE;
+static EWRAM_DATA u8 sPendingChaseEndFeedback = CHASE_END_FEEDBACK_NONE;
 
 static bool8 IsMapTypeChaseCompatible(u8 mapType);
 
@@ -148,6 +155,7 @@ static bool8 IsCurrentAreaValidForActiveChase(void)
     return TRUE;
 }
 
+static void EndChase(bool8 shouldQueueFeedback, u8 feedbackType)
 static bool8 ShouldSuppressChaseStartFeedback(void)
 {
     if (ScriptContext_IsEnabled())
@@ -168,10 +176,15 @@ static void TryShowChaseStartFeedback(void)
 
 static void EndChase(void)
 {
+    bool8 wasActive = ChaseStamina_IsChaseActive();
+
     sActiveChasers = 0;
     sChaseStepsRemaining = 0;
     sChaseReengageStepCountdown = 0;
     ChaseOverworld_OnChaseEnded();
+
+    if (wasActive && shouldQueueFeedback && feedbackType != CHASE_END_FEEDBACK_NONE)
+        sPendingChaseEndFeedback = feedbackType;
 }
 
 static void StartChase(u8 initialChasers, u16 initialSteps)
@@ -180,7 +193,7 @@ static void StartChase(u8 initialChasers, u16 initialSteps)
 
     if (initialChasers == 0 || initialSteps == 0)
     {
-        EndChase();
+        EndChase(FALSE, CHASE_END_FEEDBACK_NONE);
         return;
     }
 
@@ -355,7 +368,7 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
     ClampCurrentStamina();
 
     if (ChaseStamina_IsChaseActive() && !IsCurrentAreaValidForActiveChase())
-        EndChase();
+        EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
 
     if (sStaminaExhaustedCooldownFrames != 0)
         sStaminaExhaustedCooldownFrames--;
@@ -379,7 +392,7 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
         sChaseStepsRemaining--;
         if (sChaseStepsRemaining == 0)
         {
-            EndChase();
+            EndChase(TRUE, CHASE_END_FEEDBACK_ESCAPED);
         }
         else if (sChaseReengageStepCountdown != 0)
         {
@@ -426,7 +439,7 @@ bool8 ChaseStamina_ShouldSuppressRandomEncounters(void)
 {
     if (ChaseStamina_IsChaseActive() && !IsCurrentAreaValidForActiveChase())
     {
-        EndChase();
+        EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
         return FALSE;
     }
 
@@ -498,7 +511,7 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
         if (sActiveChasers != 0)
             sActiveChasers--;
         if (sActiveChasers == 0)
-            EndChase();
+            EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
         break;
     }
 
@@ -510,12 +523,12 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
     case B_OUTCOME_MON_TELEPORTED:
     case B_OUTCOME_LINK_BATTLE_RAN:
         // Forced-end and escape outcomes clear the chase to keep its state deterministic.
-        EndChase();
+        EndChase(FALSE, CHASE_END_FEEDBACK_NONE);
         break;
 
     default:
         // Any unknown outcome is treated as a forced end to avoid stale chase state.
-        EndChase();
+        EndChase(FALSE, CHASE_END_FEEDBACK_NONE);
         break;
     }
 }
@@ -549,7 +562,7 @@ void ChaseStamina_OnMapTransition(const struct WarpData *from, const struct Warp
 
     if (from == NULL || to == NULL)
     {
-        EndChase();
+        EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
         return;
     }
 
@@ -557,7 +570,7 @@ void ChaseStamina_OnMapTransition(const struct WarpData *from, const struct Warp
     toMap = Overworld_GetMapHeaderByGroupAndId(to->mapGroup, to->mapNum);
     if (fromMap == NULL || toMap == NULL)
     {
-        EndChase();
+        EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
         return;
     }
 
@@ -565,20 +578,38 @@ void ChaseStamina_OnMapTransition(const struct WarpData *from, const struct Warp
     {
         if (!IsMapTypeChaseCompatible(toMap->mapType))
         {
-            EndChase();
+            EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
             return;
         }
     }
 
     if (IsMapTypeOutdoors(fromMap->mapType) != IsMapTypeOutdoors(toMap->mapType))
     {
-        EndChase();
+        EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
         return;
     }
 
     if (fromMap->regionMapSectionId != toMap->regionMapSectionId)
     {
-        EndChase();
+        EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
         return;
     }
+}
+
+const u8 *ChaseStamina_TryConsumeEndFeedback(void)
+{
+    const u8 *message = NULL;
+
+    switch (sPendingChaseEndFeedback)
+    {
+    case CHASE_END_FEEDBACK_ESCAPED:
+        message = gText_YouGotAway;
+        break;
+    case CHASE_END_FEEDBACK_ENDED:
+        message = gText_TheChaseEnded;
+        break;
+    }
+
+    sPendingChaseEndFeedback = CHASE_END_FEEDBACK_NONE;
+    return message;
 }

@@ -42,11 +42,13 @@ Encounter-eligible tiles are used for **re-engagement attempts only** (forced ch
 
 When `ChaseStamina_IsChaseActive()` is true, a chase-overworld layer drives 1..`ChaseStamina_GetActiveChasers()` visual object events.
 
-- Chasers use a reserved local-id range (`230..231`) and a dedicated chase graphics id (`OBJ_EVENT_GFX_MEOWTH`).
+- Chasers use a reserved local-id range (`LOCALID_CHASE_VISUAL_BASE..LOCALID_CHASE_VISUAL_MAX`) and a dedicated chase graphics id (`OBJ_EVENT_GFX_MEOWTH`).
 - Spawn point is biased behind the player when possible; each chaser then pursues every overworld frame.
 - Target coordinate selection prefers the live player object-event coordinates and falls back to `gSaveBlock1Ptr->pos` when needed.
-- Movement picks a primary axis toward player distance, then tries fallback directions (secondary axis, current facing, opposite facing).
+- Movement evaluates all four cardinal directions, ranks them by `GetDistanceScore` distance-to-player score, and selects the first legal collision-free step via `TryQueueChaserStep`.
 - Every attempted step is validated with object collision checks; if all checks fail the chaser turns in place toward the player instead of forcing illegal movement.
+- If a chaser is stalled for too long, stuck recovery now performs a deterministic perimeter search centered on the player: radius `1..4`, scanning each ring clockwise (top edge, right edge, bottom edge, left edge). Each candidate relocation must succeed (object coordinates match requested tile) and the player's exact tile is always skipped.
+- If no valid relocation candidate is found in the bounded search, the chaser remains in place and retries on a later update cycle.
 
 This policy keeps chasers visible and responsive while avoiding collision softlocks.
 

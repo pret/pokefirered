@@ -94,11 +94,14 @@ void HasEnoughMonsForDoubleBattle(void)
     case PLAYER_HAS_TWO_USABLE_MONS:
         gSpecialVar_Result = PLAYER_HAS_TWO_USABLE_MONS;
         break;
+    case PLAYER_HAS_ONE_USABLE_MON:
+        // Allow scripted double battles to start even when the player can only
+        // field one battler. Battle init will mark the right-side battler slot
+        // absent so the lead mon is not duplicated.
+        gSpecialVar_Result = PLAYER_HAS_TWO_USABLE_MONS;
+        break;
     case PLAYER_HAS_ONE_MON:
         gSpecialVar_Result = PLAYER_HAS_ONE_MON;
-        break;
-    case PLAYER_HAS_ONE_USABLE_MON:
-        gSpecialVar_Result = PLAYER_HAS_ONE_USABLE_MON;
         break;
     }
 }

@@ -7,7 +7,7 @@
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 
-#define CHASE_OVERWORLD_LOCAL_ID_BASE 230
+#define CHASE_OVERWORLD_MAX_CHASERS (LOCALID_CHASE_VISUAL_MAX - LOCALID_CHASE_VISUAL_BASE + 1)
 #define CHASE_OVERWORLD_GFX_ID OBJ_EVENT_GFX_MEOWTH
 #define CHASE_OVERWORLD_MAX_STALLED_FRAMES 30
 
@@ -40,7 +40,7 @@ static void DespawnChasers(void)
 
     for (i = 0; i < CHASE_STAMINA_MAX_ACTIVE_CHASERS; i++)
     {
-        RemoveObjectEventByLocalIdAndMap(CHASE_OVERWORLD_LOCAL_ID_BASE + i, sSpawnedMapNum, sSpawnedMapGroup);
+        RemoveObjectEventByLocalIdAndMap(LOCALID_CHASE_VISUAL_BASE + i, sSpawnedMapNum, sSpawnedMapGroup);
         sChaserStalledFrames[i] = 0;
     }
 
@@ -200,7 +200,7 @@ static void SpawnOrSyncChasers(void)
 
     for (i = 0; i < CHASE_STAMINA_MAX_ACTIVE_CHASERS; i++)
     {
-        u8 localId = CHASE_OVERWORLD_LOCAL_ID_BASE + i;
+        u8 localId = LOCALID_CHASE_VISUAL_BASE + i;
         u8 objectEventId;
 
         if (i >= activeChasers)

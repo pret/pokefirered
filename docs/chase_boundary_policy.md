@@ -42,7 +42,7 @@ Encounter-eligible tiles are used for **re-engagement attempts only** (forced ch
 
 When `ChaseStamina_IsChaseActive()` is true, a chase-overworld layer drives 1..`ChaseStamina_GetActiveChasers()` visual object events.
 
-- Chasers use a reserved local-id range (`230..231`) and a dedicated chase graphics id (`OBJ_EVENT_GFX_MEOWTH`).
+- Chasers use a reserved local-id range (`LOCALID_CHASE_VISUAL_BASE..LOCALID_CHASE_VISUAL_MAX`) and a dedicated chase graphics id (`OBJ_EVENT_GFX_MEOWTH`).
 - Spawn point is biased behind the player when possible; each chaser then pursues every overworld frame.
 - Target coordinate selection prefers the live player object-event coordinates and falls back to `gSaveBlock1Ptr->pos` when needed.
 - Movement picks a primary axis toward player distance, then tries fallback directions (secondary axis, current facing, opposite facing).

@@ -2323,6 +2323,15 @@ static void BattleStartClearSetData(void)
     gBattleScripting.animTargetsHit = 0;
     gLeveledUpInBattle = 0;
     gAbsentBattlerFlags = 0;
+    if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+     && !(gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_LINK)))
+    {
+        u8 playerLeft = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        u8 playerRight = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+
+        if (gBattlerPartyIndexes[playerLeft] == gBattlerPartyIndexes[playerRight])
+            gAbsentBattlerFlags |= gBitTable[playerRight];
+    }
     gBattleStruct->runTries = 0;
     gBattleStruct->safariRockThrowCounter = 0;
     gBattleStruct->safariBaitThrowCounter = 0;

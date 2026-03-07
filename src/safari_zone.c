@@ -77,11 +77,6 @@ void CB2_EndSafariBattle(void)
     {
         SetMainCallback2(CB2_ReturnToField);
     }
-    else if (gBattleOutcome == B_OUTCOME_RAN
-          || gBattleOutcome == B_OUTCOME_MON_FLED)
-    {
-        SetMainCallback2(CB2_ReturnToField);
-    }
     else if (gBattleOutcome == B_OUTCOME_NO_SAFARI_BALLS)
     {
         RunScriptImmediately(SafariZone_EventScript_OutOfBallsMidBattle);

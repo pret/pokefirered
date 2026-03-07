@@ -1,7 +1,9 @@
 #include "global.h"
 #include "chase_stamina.h"
 #include "gflib.h"
+#include "overworld.h"
 #include "overworld_hud.h"
+#include "script.h"
 #include "pokemon_icon.h"
 #include "constants/species.h"
 
@@ -22,6 +24,18 @@
 #define CHASE_ICON_X_SPACING       18
 #define CHASE_ICON_Y               11
 #define CHASE_HUD_ICON_SPECIES     SPECIES_HOUNDOUR
+
+#define TOAST_WINDOW_BG            OVERWORLD_HUD_BG
+#define TOAST_WINDOW_LEFT          1
+#define TOAST_WINDOW_TOP           3
+#define TOAST_WINDOW_WIDTH         18
+#define TOAST_WINDOW_HEIGHT        2
+#define TOAST_WINDOW_PAL           13
+#define TOAST_WINDOW_BASE_BLOCK    0x160
+#define TOAST_TEXT_X               4
+#define TOAST_TEXT_Y               2
+
+#define TOAST_DURATION_DEFAULT     120
 
 // Palette index 0 is kept transparent for the window background.
 #define STAMINA_COLOR_EMPTY        PIXEL_FILL(1)
@@ -55,8 +69,20 @@ static const struct WindowTemplate sOverworldHudWindowTemplate = {
     .paletteNum = OVERWORLD_HUD_PAL,
     .baseBlock = OVERWORLD_HUD_BASE_BLOCK,
 };
+static const struct WindowTemplate sToastWindowTemplate = {
+    .bg = TOAST_WINDOW_BG,
+    .tilemapLeft = TOAST_WINDOW_LEFT,
+    .tilemapTop = TOAST_WINDOW_TOP,
+    .width = TOAST_WINDOW_WIDTH,
+    .height = TOAST_WINDOW_HEIGHT,
+    .paletteNum = TOAST_WINDOW_PAL,
+    .baseBlock = TOAST_WINDOW_BASE_BLOCK,
+};
+
 
 static EWRAM_DATA u8 sOverworldHudWindowId = WINDOW_NONE;
+static EWRAM_DATA u8 sToastWindowId = WINDOW_NONE;
+static EWRAM_DATA u8 sToastTimer = 0;
 static EWRAM_DATA u8 sLastStaminaCurrent = 0xFF;
 static EWRAM_DATA u8 sLastStaminaMax = 0xFF;
 static EWRAM_DATA u8 sChaseIconSpriteIds[CHASE_ICON_COUNT_MAX] = {MAX_SPRITES, MAX_SPRITES};
@@ -129,6 +155,51 @@ static void OverworldHud_DrawStaminaBar(u8 current, u8 max)
         FillWindowPixelRect(sOverworldHudWindowId, STAMINA_COLOR_FILL, STAMINA_BAR_X, STAMINA_BAR_Y, fillWidth, STAMINA_BAR_HEIGHT);
 }
 
+static bool8 OverworldHud_IsToastSuppressed(void)
+{
+    if (ScriptContext_IsEnabled())
+        return TRUE;
+
+    if (gPaletteFade.active)
+        return TRUE;
+
+    if (IsUpdateLinkStateCBActive())
+        return TRUE;
+
+    return FALSE;
+}
+
+static void OverworldHud_HideToast(void)
+{
+    if (sToastWindowId == WINDOW_NONE)
+        return;
+
+    ClearWindowTilemap(sToastWindowId);
+    FillWindowPixelBuffer(sToastWindowId, PIXEL_FILL(0));
+    CopyWindowToVram(sToastWindowId, COPYWIN_FULL);
+    RemoveWindow(sToastWindowId);
+    sToastWindowId = WINDOW_NONE;
+    sToastTimer = 0;
+}
+
+void OverworldHud_ShowToast(const u8 *text, u8 durationFrames)
+{
+    if (text == NULL || OverworldHud_IsToastSuppressed())
+        return;
+
+    if (durationFrames == 0)
+        durationFrames = TOAST_DURATION_DEFAULT;
+
+    if (sToastWindowId == WINDOW_NONE)
+        sToastWindowId = AddWindow(&sToastWindowTemplate);
+
+    FillWindowPixelBuffer(sToastWindowId, PIXEL_FILL(1));
+    PutWindowTilemap(sToastWindowId);
+    AddTextPrinterParameterized(sToastWindowId, FONT_SMALL, text, TOAST_TEXT_X, TOAST_TEXT_Y, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sToastWindowId, COPYWIN_FULL);
+    sToastTimer = durationFrames;
+}
+
 void OverworldHud_Show(void)
 {
     if (sOverworldHudWindowId != WINDOW_NONE)
@@ -156,12 +227,22 @@ void OverworldHud_Hide(void)
     RemoveWindow(sOverworldHudWindowId);
     sOverworldHudWindowId = WINDOW_NONE;
     OverworldHud_DestroyChaseIcons();
+    OverworldHud_HideToast();
 }
 
 void OverworldHud_Update(void)
 {
     u8 current;
     u8 max;
+
+    if (sToastWindowId != WINDOW_NONE)
+    {
+        if (OverworldHud_IsToastSuppressed())
+            OverworldHud_HideToast();
+        else if (sToastTimer != 0 && --sToastTimer == 0)
+            OverworldHud_HideToast();
+    }
+
     if (sOverworldHudWindowId == WINDOW_NONE)
         OverworldHud_Show();
 

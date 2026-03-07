@@ -21,6 +21,7 @@
 #define CHASE_ICON_X_START         180
 #define CHASE_ICON_X_SPACING       18
 #define CHASE_ICON_Y               11
+#define CHASE_HUD_ICON_SPECIES     SPECIES_HOUNDOUR
 
 // Palette index 0 is kept transparent for the window background.
 #define STAMINA_COLOR_EMPTY        PIXEL_FILL(1)
@@ -73,7 +74,7 @@ static void OverworldHud_DestroyChaseIcons(void)
         }
     }
 
-    SafeFreeMonIconPalette(SPECIES_MEOWTH);
+    SafeFreeMonIconPalette(CHASE_HUD_ICON_SPECIES);
 }
 
 static void OverworldHud_UpdateChaseIcons(void)
@@ -81,6 +82,8 @@ static void OverworldHud_UpdateChaseIcons(void)
     u8 iconCount;
     u8 i;
 
+    // These are HUD-only indicators for chase pressure (screen-space icons),
+    // not the overworld pursuing object events handled by chase_overworld.c.
     if (ChaseStamina_IsChaseActive())
         iconCount = min(ChaseStamina_GetActiveChasers(), CHASE_ICON_COUNT_MAX);
     else
@@ -92,8 +95,8 @@ static void OverworldHud_UpdateChaseIcons(void)
         {
             if (sChaseIconSpriteIds[i] == MAX_SPRITES)
             {
-                SafeLoadMonIconPalette(SPECIES_MEOWTH);
-                sChaseIconSpriteIds[i] = CreateMonIcon(SPECIES_MEOWTH,
+                SafeLoadMonIconPalette(CHASE_HUD_ICON_SPECIES);
+                sChaseIconSpriteIds[i] = CreateMonIcon(CHASE_HUD_ICON_SPECIES,
                                                        SpriteCB_MonIcon,
                                                        CHASE_ICON_X_START + i * CHASE_ICON_X_SPACING,
                                                        CHASE_ICON_Y,
@@ -101,14 +104,14 @@ static void OverworldHud_UpdateChaseIcons(void)
                                                        0,
                                                        FALSE);
                 if (sChaseIconSpriteIds[i] == MAX_SPRITES)
-                    SafeFreeMonIconPalette(SPECIES_MEOWTH);
+                    SafeFreeMonIconPalette(CHASE_HUD_ICON_SPECIES);
             }
         }
         else if (sChaseIconSpriteIds[i] != MAX_SPRITES)
         {
             DestroyMonIcon(&gSprites[sChaseIconSpriteIds[i]]);
             sChaseIconSpriteIds[i] = MAX_SPRITES;
-            SafeFreeMonIconPalette(SPECIES_MEOWTH);
+            SafeFreeMonIconPalette(CHASE_HUD_ICON_SPECIES);
         }
     }
 }

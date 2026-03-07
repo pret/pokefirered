@@ -2,15 +2,28 @@
 #include "chase_overworld.h"
 #include "chase_stamina.h"
 #include "event_object_movement.h"
+#include "field_message_box.h"
 #include "fieldmap.h"
+#include "palette.h"
+#include "script.h"
+#include "sound.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/maps.h"
+#include "constants/rgb.h"
+#include "constants/songs.h"
 
 #define CHASE_OVERWORLD_MAX_CHASERS 2
 #define CHASE_OVERWORLD_LOCAL_ID_BASE 230
 #define CHASE_OVERWORLD_GFX_ID OBJ_EVENT_GFX_MEOWTH
 #define CHASE_OVERWORLD_MAX_STALLED_FRAMES 30
+#define CHASE_CUE_DISTANCE_CLOSE 3
+#define CHASE_CUE_DISTANCE_MEDIUM 6
+#define CHASE_CUE_DISTANCE_FAR 10
+#define CHASE_CUE_VOLUME_NONE 256
+#define CHASE_CUE_VOLUME_LOW 232
+#define CHASE_CUE_VOLUME_MEDIUM 208
+#define CHASE_CUE_VOLUME_HIGH 184
 
 static const u8 sAllMoveDirections[] =
 {
@@ -34,6 +47,154 @@ static EWRAM_DATA bool8 sChasersSpawned = FALSE;
 static EWRAM_DATA u8 sSpawnedMapGroup = MAP_GROUP(MAP_UNDEFINED);
 static EWRAM_DATA u8 sSpawnedMapNum = MAP_NUM(MAP_UNDEFINED);
 static EWRAM_DATA u8 sChaserStalledFrames[CHASE_OVERWORLD_MAX_CHASERS];
+static EWRAM_DATA u8 sCueLevel = 0;
+static EWRAM_DATA u8 sCueCooldownFrames = 0;
+static EWRAM_DATA u8 sHeartbeatTimer = 0;
+static EWRAM_DATA u8 sVignettePulsePhase = 0;
+
+static void ResetChaseCues(void)
+{
+    sCueLevel = 0;
+    sCueCooldownFrames = 0;
+    sHeartbeatTimer = 0;
+    sVignettePulsePhase = 0;
+    BlendPalettes(PALETTES_ALL, 0, RGB_BLACK);
+    BGMVolumeMax_EnableHelpSystemReduction();
+}
+
+static void GetPlayerCoordsForChase(s16 *x, s16 *y)
+{
+    u8 playerObjectEventId;
+
+    *x = gSaveBlock1Ptr->pos.x;
+    *y = gSaveBlock1Ptr->pos.y;
+    if (TryGetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0, &playerObjectEventId))
+    {
+        *x = gObjectEvents[playerObjectEventId].currentCoords.x;
+        *y = gObjectEvents[playerObjectEventId].currentCoords.y;
+    }
+}
+
+static u16 GetMinDistanceToActiveChaser(void)
+{
+    u8 i;
+    u16 minDistance = 0xFFFF;
+    u8 activeChasers = ChaseStamina_GetActiveChasers();
+    s16 playerX;
+    s16 playerY;
+
+    GetPlayerCoordsForChase(&playerX, &playerY);
+    if (activeChasers > CHASE_OVERWORLD_MAX_CHASERS)
+        activeChasers = CHASE_OVERWORLD_MAX_CHASERS;
+
+    for (i = 0; i < activeChasers; i++)
+    {
+        u8 objectEventId;
+        s16 dx;
+        s16 dy;
+        u16 distance;
+
+        if (!TryGetObjectEventIdByLocalIdAndMap(CHASE_OVERWORLD_LOCAL_ID_BASE + i, sSpawnedMapNum, sSpawnedMapGroup, &objectEventId))
+            continue;
+
+        dx = gObjectEvents[objectEventId].currentCoords.x - playerX;
+        dy = gObjectEvents[objectEventId].currentCoords.y - playerY;
+        if (dx < 0)
+            dx = -dx;
+        if (dy < 0)
+            dy = -dy;
+        distance = dx + dy;
+        if (distance < minDistance)
+            minDistance = distance;
+    }
+
+    return minDistance;
+}
+
+static bool8 ShouldDisableChaseCues(void)
+{
+    return ScriptContext_IsEnabled() || !IsFieldMessageBoxHidden();
+}
+
+static u8 GetCueLevelFromDistance(u16 minDistance)
+{
+    if (minDistance <= CHASE_CUE_DISTANCE_CLOSE)
+        return 3;
+    if (minDistance <= CHASE_CUE_DISTANCE_MEDIUM)
+        return 2;
+    if (minDistance <= CHASE_CUE_DISTANCE_FAR)
+        return 1;
+    return 0;
+}
+
+static void UpdateChaseCues(void)
+{
+    static const u8 sHeartbeatIntervals[] = {0, 26, 18, 10};
+    static const u8 sPulsePeriods[] = {1, 30, 22, 14};
+    static const u8 sPulseMaxBlend[] = {0, 3, 5, 7};
+    static const u16 sCueVolumes[] =
+    {
+        CHASE_CUE_VOLUME_NONE,
+        CHASE_CUE_VOLUME_LOW,
+        CHASE_CUE_VOLUME_MEDIUM,
+        CHASE_CUE_VOLUME_HIGH,
+    };
+    u8 targetCueLevel;
+    u16 minDistance;
+
+    if (ShouldDisableChaseCues())
+    {
+        ResetChaseCues();
+        return;
+    }
+
+    minDistance = GetMinDistanceToActiveChaser();
+    targetCueLevel = GetCueLevelFromDistance(minDistance);
+
+    if (targetCueLevel > sCueLevel)
+    {
+        sCueLevel = targetCueLevel;
+        sCueCooldownFrames = 0;
+    }
+    else if (targetCueLevel < sCueLevel)
+    {
+        if (++sCueCooldownFrames >= 3)
+        {
+            sCueLevel--;
+            sCueCooldownFrames = 0;
+        }
+    }
+    else
+    {
+        sCueCooldownFrames = 0;
+    }
+
+    if (sCueLevel != 0)
+    {
+        u8 pulsePeriod = sPulsePeriods[sCueLevel];
+        u8 halfPeriod = pulsePeriod / 2;
+        u8 phase = sVignettePulsePhase % pulsePeriod;
+        u8 rising = phase <= halfPeriod ? phase : pulsePeriod - phase;
+        u8 pulseCoeff = (rising * sPulseMaxBlend[sCueLevel]) / halfPeriod;
+
+        sVignettePulsePhase++;
+        BlendPalettes(PALETTES_ALL, pulseCoeff, RGB_BLACK);
+
+        if (++sHeartbeatTimer >= sHeartbeatIntervals[sCueLevel])
+        {
+            PlaySE(SE_CONTEST_HEART);
+            sHeartbeatTimer = 0;
+        }
+    }
+    else
+    {
+        sHeartbeatTimer = 0;
+        sVignettePulsePhase = 0;
+        BlendPalettes(PALETTES_ALL, 0, RGB_BLACK);
+    }
+
+    SetBGMVolume_SuppressHelpSystemReduction(sCueVolumes[sCueLevel]);
+}
 
 static void DespawnChasers(void)
 {
@@ -48,6 +209,7 @@ static void DespawnChasers(void)
     sChasersSpawned = FALSE;
     sSpawnedMapGroup = MAP_GROUP(MAP_UNDEFINED);
     sSpawnedMapNum = MAP_NUM(MAP_UNDEFINED);
+    ResetChaseCues();
 }
 
 static bool8 IsSpawnContextValid(void)
@@ -178,16 +340,11 @@ static void PlaceChaserNearPlayer(u8 localId, u8 objectEventId, u8 chaserIndex, 
 static void SpawnOrSyncChasers(void)
 {
     u8 i;
-    u8 playerObjectEventId;
     u8 activeChasers = ChaseStamina_GetActiveChasers();
-    s16 playerX = gSaveBlock1Ptr->pos.x;
-    s16 playerY = gSaveBlock1Ptr->pos.y;
+    s16 playerX;
+    s16 playerY;
 
-    if (TryGetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0, &playerObjectEventId))
-    {
-        playerX = gObjectEvents[playerObjectEventId].currentCoords.x;
-        playerY = gObjectEvents[playerObjectEventId].currentCoords.y;
-    }
+    GetPlayerCoordsForChase(&playerX, &playerY);
 
     if (activeChasers > CHASE_OVERWORLD_MAX_CHASERS)
         activeChasers = CHASE_OVERWORLD_MAX_CHASERS;
@@ -260,6 +417,7 @@ void ChaseOverworld_UpdateOverworldFrame(bool8 tookStep)
     }
 
     SpawnOrSyncChasers();
+    UpdateChaseCues();
 }
 
 void ChaseOverworld_OnMapTransition(const struct WarpData *from, const struct WarpData *to)

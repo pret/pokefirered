@@ -44,15 +44,22 @@ Text_WhitedOutCorpseRunFirst::
 	.string "{PLAYER} is out of usable\n"
 	.string "POKéMON!\p"
 	.string "{PLAYER} fell...\p"
-	.string "Your SOULS scattered where you fell.\p"
-	.string "You have one chance to retrieve them.\p"
+	.string "Your corpse and SOULS were left\n"
+	.string "where you fell.\p"
+	.string "Recover your corpse to retrieve your\n"
+	.string "SOULS and your party.\p"
+	.string "Fail to recover it and you'll be\n"
+	.string "forced into SALVAGE MODE.\p"
 	.string "{PLAYER} whited out!$"
 
 Text_WhitedOutCorpseRunRepeat::
 	.string "{PLAYER} is out of usable\n"
 	.string "POKéMON!\p"
 	.string "{PLAYER} fell again...\p"
-	.string "Your SOULS scattered. Retrieve them.\p"
+	.string "Recover your corpse to retrieve your\n"
+	.string "SOULS and your party.\p"
+	.string "Fail to recover it and you'll be\n"
+	.string "forced into SALVAGE MODE.\p"
 	.string "{PLAYER} whited out!$"
 
 Text_CorpseRun_BlockMart::

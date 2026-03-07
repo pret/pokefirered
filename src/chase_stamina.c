@@ -396,6 +396,24 @@ bool8 ChaseStamina_ShouldSuppressRandomEncounters(void)
     return ChaseStamina_IsChaseActive() && sChaseReengageStepCountdown != 0;
 }
 
+
+static bool8 IsEscapeLikeWildOutcome(u8 normalizedOutcome)
+{
+    switch (normalizedOutcome)
+    {
+    case B_OUTCOME_RAN:
+    case B_OUTCOME_PLAYER_TELEPORTED:
+    case B_OUTCOME_MON_TELEPORTED:
+        // Start chase when the player successfully disengages from a wild battle.
+        return TRUE;
+    case B_OUTCOME_MON_FLED:
+        // Wild-mon flee is not player-driven escape and should not initialize chase.
+        return FALSE;
+    }
+
+    return FALSE;
+}
+
 void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
 {
     bool8 wasChaseBattle = sBattleUsesWildFirstMovePriority;
@@ -408,9 +426,11 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
 
     if (!wasChaseBattle)
     {
-        if ((normalizedOutcome == B_OUTCOME_RAN
-          || normalizedOutcome == B_OUTCOME_PLAYER_TELEPORTED
-          || normalizedOutcome == B_OUTCOME_MON_TELEPORTED)
+        // Initialize a chase only when the player actively leaves a normal
+        // wild battle (running or teleporting). Wild-forced endings such as
+        // B_OUTCOME_MON_FLED do not indicate player pressure and should not
+        // create a new chase state.
+        if (IsEscapeLikeWildOutcome(normalizedOutcome)
          && !ChaseStamina_IsChaseActive())
             StartChase(1, CHASE_BASE_STEPS);
         return;

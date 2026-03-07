@@ -45,7 +45,7 @@ When `ChaseStamina_IsChaseActive()` is true, a chase-overworld layer drives 1..`
 - Chasers use a reserved local-id range (`230..231`) and a dedicated chase graphics id (`OBJ_EVENT_GFX_MEOWTH`).
 - Spawn point is biased behind the player when possible; each chaser then pursues every overworld frame.
 - Target coordinate selection prefers the live player object-event coordinates and falls back to `gSaveBlock1Ptr->pos` when needed.
-- Movement picks a primary axis toward player distance, then tries fallback directions (secondary axis, current facing, opposite facing).
+- Movement evaluates all four cardinal directions, ranks them by `GetDistanceScore` distance-to-player score, and selects the first legal collision-free step via `TryQueueChaserStep`.
 - Every attempted step is validated with object collision checks; if all checks fail the chaser turns in place toward the player instead of forcing illegal movement.
 
 This policy keeps chasers visible and responsive while avoiding collision softlocks.

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "bike.h"
+#include "chase_overworld.h"
 #include "chase_stamina.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
@@ -205,6 +206,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     FieldClearPlayerInput(&gFieldInputRecord);
     gFieldInputRecord.dpadDirection = input->dpadDirection;
     ChaseStamina_UpdateOverworldFrame(input->tookStep);
+    ChaseOverworld_UpdateOverworldFrame(input->tookStep);
 
     if (CheckForTrainersWantingBattle() == TRUE)
         return TRUE;

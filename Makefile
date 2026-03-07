@@ -132,7 +132,7 @@ MAKEFLAGS += --no-print-directory
 ALL_BUILDS := firered firered_rev1 leafgreen leafgreen_rev1
 ALL_BUILDS += $(ALL_BUILDS:%=%_modern)
 
-RULES_NO_SCAN += clean clean-assets tidy generated clean-generated
+RULES_NO_SCAN += clean clean-assets tidy generated clean-generated check-chase
 .PHONY: all rom modern compare $(ALL_BUILDS) $(ALL_BUILDS:%=compare_%)
 .PHONY: $(RULES_NO_SCAN)
 
@@ -220,6 +220,10 @@ clean-assets:
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
 	$(RM) -r $(BUILD_DIR)
+
+check-chase:
+	python3 tools/validate_chase_overworld_visuals.py
+	python3 tools/validate_chase_escape_outcomes.py
 
 # "friendly" target names for convenience sake
 firered:                ; @$(MAKE) GAME_VERSION=FIRERED

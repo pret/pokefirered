@@ -47,6 +47,8 @@ When `ChaseStamina_IsChaseActive()` is true, a chase-overworld layer drives 1..`
 - Target coordinate selection prefers the live player object-event coordinates and falls back to `gSaveBlock1Ptr->pos` when needed.
 - Movement picks a primary axis toward player distance, then tries fallback directions (secondary axis, current facing, opposite facing).
 - Every attempted step is validated with object collision checks; if all checks fail the chaser turns in place toward the player instead of forcing illegal movement.
+- If a chaser is stalled for too long, stuck recovery now performs a deterministic perimeter search centered on the player: radius `1..4`, scanning each ring clockwise (top edge, right edge, bottom edge, left edge). Each candidate relocation must succeed (object coordinates match requested tile) and the player's exact tile is always skipped.
+- If no valid relocation candidate is found in the bounded search, the chaser remains in place and retries on a later update cycle.
 
 This policy keeps chasers visible and responsive while avoiding collision softlocks.
 

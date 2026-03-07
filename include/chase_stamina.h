@@ -26,5 +26,6 @@ void ChaseStamina_OnMapTransition(const struct WarpData *from, const struct Warp
 
 void ChaseStamina_OnBattleStart(void);
 bool8 ChaseStamina_ShouldPrioritizeWildOpponent(u8 battler1, u8 battler2);
+const u8 *ChaseStamina_TryConsumeEndFeedback(void);
 
 #endif // GUARD_CHASE_STAMINA_H

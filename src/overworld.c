@@ -134,6 +134,7 @@ static u16 GetCenterScreenMetatileBehavior(void);
 static void SetDefaultFlashLevel(void);
 static void Overworld_TryMapConnectionMusicTransition(void);
 static void ChooseAmbientCrySpecies(void);
+static void TryShowChaseEndFeedback(void);
 
 static void CB2_Overworld(void);
 static void CB2_LoadMap2(void);
@@ -1510,6 +1511,26 @@ void CB1_Overworld(void)
     }
 }
 
+static void TryShowChaseEndFeedback(void)
+{
+    const u8 *message;
+
+    if (ArePlayerFieldControlsLocked())
+        return;
+    if (ScriptContext_IsEnabled())
+        return;
+    if (!IsFieldMessageBoxHidden())
+        return;
+
+    message = ChaseStamina_TryConsumeEndFeedback();
+    if (message == NULL)
+        return;
+
+    OverworldHud_BeginChaseResolvedState();
+    PlaySE(SE_DING_DONG);
+    ShowFieldMessage(message);
+}
+
 static void OverworldBasic(void)
 {
     if (IsCorpseRunFeatureEnabled())
@@ -1519,6 +1540,7 @@ static void OverworldBasic(void)
     }
 
     OverworldHud_Update();
+    TryShowChaseEndFeedback();
 
     ScriptContext_RunScript();
     RunTasks();

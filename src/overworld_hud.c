@@ -22,6 +22,7 @@
 #define CHASE_ICON_X_SPACING       18
 #define CHASE_ICON_Y               11
 #define CHASE_HUD_ICON_SPECIES     SPECIES_HOUNDOUR
+#define CHASE_RESOLVED_DISPLAY_FRAMES 30
 
 // Palette index 0 is kept transparent for the window background.
 #define STAMINA_COLOR_EMPTY        PIXEL_FILL(1)
@@ -60,6 +61,7 @@ static EWRAM_DATA u8 sOverworldHudWindowId = WINDOW_NONE;
 static EWRAM_DATA u8 sLastStaminaCurrent = 0xFF;
 static EWRAM_DATA u8 sLastStaminaMax = 0xFF;
 static EWRAM_DATA u8 sChaseIconSpriteIds[CHASE_ICON_COUNT_MAX] = {MAX_SPRITES, MAX_SPRITES};
+static EWRAM_DATA u8 sChaseResolvedDisplayFrames = 0;
 
 static void OverworldHud_DestroyChaseIcons(void)
 {
@@ -86,6 +88,8 @@ static void OverworldHud_UpdateChaseIcons(void)
     // not the overworld pursuing object events handled by chase_overworld.c.
     if (ChaseStamina_IsChaseActive())
         iconCount = min(ChaseStamina_GetActiveChasers(), CHASE_ICON_COUNT_MAX);
+    else if (sChaseResolvedDisplayFrames != 0)
+        iconCount = 1;
     else
         iconCount = 0;
 
@@ -142,6 +146,7 @@ void OverworldHud_Show(void)
 
     sLastStaminaCurrent = 0xFF;
     sLastStaminaMax = 0xFF;
+    sChaseResolvedDisplayFrames = 0;
     OverworldHud_UpdateChaseIcons();
 }
 
@@ -165,6 +170,9 @@ void OverworldHud_Update(void)
     if (sOverworldHudWindowId == WINDOW_NONE)
         OverworldHud_Show();
 
+    if (sChaseResolvedDisplayFrames != 0 && !ChaseStamina_IsChaseActive())
+        sChaseResolvedDisplayFrames--;
+
     current = ChaseStamina_GetCurrent();
     max = ChaseStamina_GetMax();
 
@@ -180,4 +188,9 @@ void OverworldHud_Update(void)
     OverworldHud_DrawStaminaBar(current, max);
     CopyWindowToVram(sOverworldHudWindowId, COPYWIN_GFX);
     OverworldHud_UpdateChaseIcons();
+}
+
+void OverworldHud_BeginChaseResolvedState(void)
+{
+    sChaseResolvedDisplayFrames = CHASE_RESOLVED_DISPLAY_FRAMES;
 }

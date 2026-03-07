@@ -32,13 +32,13 @@ static const s8 sChaserSpawnOffsets[][2] =
 static EWRAM_DATA bool8 sChasersSpawned = FALSE;
 static EWRAM_DATA u8 sSpawnedMapGroup = MAP_GROUP(MAP_UNDEFINED);
 static EWRAM_DATA u8 sSpawnedMapNum = MAP_NUM(MAP_UNDEFINED);
-static EWRAM_DATA u8 sChaserStalledFrames[CHASE_OVERWORLD_MAX_CHASERS];
+static EWRAM_DATA u8 sChaserStalledFrames[CHASE_STAMINA_MAX_ACTIVE_CHASERS];
 
 static void DespawnChasers(void)
 {
     u8 i;
 
-    for (i = 0; i < CHASE_OVERWORLD_MAX_CHASERS; i++)
+    for (i = 0; i < CHASE_STAMINA_MAX_ACTIVE_CHASERS; i++)
     {
         RemoveObjectEventByLocalIdAndMap(LOCALID_CHASE_VISUAL_BASE + i, sSpawnedMapNum, sSpawnedMapGroup);
         sChaserStalledFrames[i] = 0;
@@ -188,8 +188,8 @@ static void SpawnOrSyncChasers(void)
         playerY = gObjectEvents[playerObjectEventId].currentCoords.y;
     }
 
-    if (activeChasers > CHASE_OVERWORLD_MAX_CHASERS)
-        activeChasers = CHASE_OVERWORLD_MAX_CHASERS;
+    if (activeChasers > CHASE_STAMINA_MAX_ACTIVE_CHASERS)
+        activeChasers = CHASE_STAMINA_MAX_ACTIVE_CHASERS;
 
     if (!sChasersSpawned)
     {
@@ -198,7 +198,7 @@ static void SpawnOrSyncChasers(void)
         sSpawnedMapNum = gSaveBlock1Ptr->location.mapNum;
     }
 
-    for (i = 0; i < CHASE_OVERWORLD_MAX_CHASERS; i++)
+    for (i = 0; i < CHASE_STAMINA_MAX_ACTIVE_CHASERS; i++)
     {
         u8 localId = LOCALID_CHASE_VISUAL_BASE + i;
         u8 objectEventId;

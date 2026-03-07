@@ -205,7 +205,8 @@ static void TryShowPendingChaseMessage(void)
 
     if (message != NULL)
         ShowFieldMessage(message);
-static void EndChase(bool8 shouldQueueFeedback, u8 feedbackType)
+}
+
 static bool8 ShouldSuppressChaseStartFeedback(void)
 {
     if (ScriptContext_IsEnabled())
@@ -224,7 +225,7 @@ static void TryShowChaseStartFeedback(void)
     SetCameraPanning(0, 2);
 }
 
-static void EndChase(void)
+static void EndChase(bool8 shouldQueueFeedback, u8 feedbackType)
 {
     bool8 wasActive = ChaseStamina_IsChaseActive();
 
@@ -582,14 +583,12 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
     case B_OUTCOME_LINK_BATTLE_RAN:
         // Forced-end and escape outcomes clear the chase to keep its state deterministic.
         sConsecutiveChaseFailures = 0;
-        EndChase();
         EndChase(FALSE, CHASE_END_FEEDBACK_NONE);
         break;
 
     default:
         // Any unknown outcome is treated as a forced end to avoid stale chase state.
         sConsecutiveChaseFailures = 0;
-        EndChase();
         EndChase(FALSE, CHASE_END_FEEDBACK_NONE);
         break;
     }

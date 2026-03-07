@@ -1,6 +1,6 @@
 # Chase boundary policy
 
-This document defines where an **active chase** is allowed to continue in the overworld.
+This document defines where an **active chase** is allowed to continue in the overworld and how chase visuals move while the chase state is active.
 
 ## Continuation gate
 
@@ -38,6 +38,27 @@ Encounter-eligible tiles are used for **re-engagement attempts only** (forced ch
 - Active chase can persist while crossing safe/non-encounter tiles (for example, route path tiles) as long as map context remains valid.
 - Forced chase encounter generation resumes once the player steps back onto an encounter-eligible tile before chase timeout expires.
 
+## Overworld chaser movement policy
+
+When `ChaseStamina_IsChaseActive()` is true, a chase-overworld layer drives 1..`ChaseStamina_GetActiveChasers()` visual object events.
+
+- Chasers use a reserved local-id range (`230..231`) and a dedicated chase graphics id (`OBJ_EVENT_GFX_MEOWTH`).
+- Spawn point is biased behind the player when possible; each chaser then pursues every overworld frame.
+- Target coordinate selection prefers the live player object-event coordinates and falls back to `gSaveBlock1Ptr->pos` when needed.
+- Movement picks a primary axis toward player distance, then tries fallback directions (secondary axis, current facing, opposite facing).
+- Every attempted step is validated with object collision checks; when no immediate move is legal, the chaser waits and retries.
+- If a chaser remains blocked for an extended period, it is repositioned to a nearby legal tile around the player to break long-lived stuck states.
+
+This policy keeps chasers visible and responsive while avoiding collision softlocks and prolonged stalls.
+
+## Edge cases and invalidation handling
+
+- **Chase termination (`EndChase`)**: all spawned chaser object events are explicitly removed immediately.
+- **Map transitions / warps**: transition hooks despawn all chase object events before map context changes settle.
+- **Context mismatch safety**: if spawned chasers belong to a previous map context, the chase-overworld layer invalidates and despawns them before any updates.
+- **Doors/buildings/safe hubs**: entering non-chase contexts still terminates the chase state per core policy above, and visual chasers are cleaned up with that termination.
+- **Ledges / blocked terrain**: collision fallback can choose alternate legal directions or no-step facing updates, preventing repeated illegal moves.
+
 ## Suppression safety rule
 
 `ChaseStamina_ShouldSuppressRandomEncounters()` re-checks map-context validity. If the map context is invalid, it clears chase state and returns `FALSE` so random-encounter suppression cannot persist outside chase-valid zones.
@@ -52,4 +73,4 @@ State-machine coverage should include the following sequence:
 4. Player returns to grass before timeout.
 5. Forced chase re-engagement is again eligible on encounter-valid terrain.
 
-Future tuning should update this document alongside `src/chase_stamina.c` so map/terrain rules stay explicit.
+Future tuning should update this document alongside `src/chase_stamina.c` and `src/chase_overworld.c` so map, terrain, and visual pursuit behavior stay explicit.

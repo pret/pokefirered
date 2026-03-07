@@ -1558,6 +1558,26 @@ void CB1_Overworld(void)
     }
 }
 
+static void TryShowChaseEndFeedback(void)
+{
+    const u8 *message;
+
+    if (ArePlayerFieldControlsLocked())
+        return;
+    if (ScriptContext_IsEnabled())
+        return;
+    if (!IsFieldMessageBoxHidden())
+        return;
+
+    message = ChaseStamina_TryConsumeEndFeedback();
+    if (message == NULL)
+        return;
+
+    OverworldHud_BeginChaseResolvedState();
+    PlaySE(SE_DING_DONG);
+    ShowFieldMessage(message);
+}
+
 static void OverworldBasic(void)
 {
     if (IsCorpseRunFeatureEnabled())
@@ -1567,6 +1587,7 @@ static void OverworldBasic(void)
     }
 
     OverworldHud_Update();
+    TryShowChaseEndFeedback();
 
     ScriptContext_RunScript();
     RunTasks();

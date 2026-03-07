@@ -6,6 +6,7 @@
 #define STAMINA_UPGRADE_SUCCESS 0
 #define STAMINA_UPGRADE_FAIL_MAX 1
 #define STAMINA_UPGRADE_FAIL_NOT_ENOUGH_SOULS 2
+#define CHASE_STAMINA_MAX_ACTIVE_CHASERS 2
 
 void ChaseStamina_UpdateOverworldFrame(bool8 tookStep);
 bool8 ChaseStamina_CanUseRunStep(void);
@@ -35,5 +36,6 @@ enum ChaseTransitionResult ChaseStamina_OnMapTransition(const struct WarpData *f
 
 void ChaseStamina_OnBattleStart(void);
 bool8 ChaseStamina_ShouldPrioritizeWildOpponent(u8 battler1, u8 battler2);
+const u8 *ChaseStamina_TryConsumeEndFeedback(void);
 
 #endif // GUARD_CHASE_STAMINA_H

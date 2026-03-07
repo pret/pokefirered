@@ -20,6 +20,16 @@ static const u8 sAllMoveDirections[] =
     DIR_EAST,
 };
 
+static const s8 sChaserSpawnOffsets[][2] =
+{
+    {-2, 0},
+    {2, 0},
+    {0, -2},
+    {0, 2},
+    {-2, 2},
+    {2, 2},
+};
+
 static EWRAM_DATA bool8 sChasersSpawned = FALSE;
 static EWRAM_DATA u8 sSpawnedMapGroup = MAP_GROUP(MAP_UNDEFINED);
 static EWRAM_DATA u8 sSpawnedMapNum = MAP_NUM(MAP_UNDEFINED);
@@ -103,24 +113,60 @@ static bool8 TryQueueChaserStep(struct ObjectEvent *objectEvent, s16 targetX, s1
     return FALSE;
 }
 
-static void PlaceChaserNearPlayer(u8 localId, u8 objectEventId, s16 playerX, s16 playerY)
+static bool8 TryGetChaserSpawnCoords(s16 playerX, s16 playerY, u8 chaserIndex, u8 candidateIndex, s16 *candidateX, s16 *candidateY)
 {
-    static const s8 sRespawnOffsets[][2] =
+    if (candidateIndex == 0)
     {
-        {-2, 0},
-        {2, 0},
-        {0, -2},
-        {0, 2},
-        {-2, 2},
-        {2, 2},
-    };
+        *candidateX = playerX - (chaserIndex + 2);
+        *candidateY = playerY + 1;
+        return TRUE;
+    }
 
-    u8 i;
-
-    for (i = 0; i < ARRAY_COUNT(sRespawnOffsets); i++)
+    candidateIndex--;
+    if (candidateIndex < ARRAY_COUNT(sChaserSpawnOffsets))
     {
-        s16 candidateX = playerX + sRespawnOffsets[i][0];
-        s16 candidateY = playerY + sRespawnOffsets[i][1];
+        candidateIndex = (candidateIndex + chaserIndex) % ARRAY_COUNT(sChaserSpawnOffsets);
+        *candidateX = playerX + sChaserSpawnOffsets[candidateIndex][0];
+        *candidateY = playerY + sChaserSpawnOffsets[candidateIndex][1];
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool8 TrySpawnChaserNearPlayer(u8 localId, u8 chaserIndex, s16 playerX, s16 playerY, u8 *objectEventId)
+{
+    u8 candidateIndex;
+
+    for (candidateIndex = 0; candidateIndex <= ARRAY_COUNT(sChaserSpawnOffsets); candidateIndex++)
+    {
+        s16 candidateX;
+        s16 candidateY;
+        u8 elevation;
+
+        if (!TryGetChaserSpawnCoords(playerX, playerY, chaserIndex, candidateIndex, &candidateX, &candidateY))
+            break;
+
+        elevation = MapGridGetElevationAt(candidateX, candidateY);
+        SpawnSpecialObjectEventParameterized(CHASE_OVERWORLD_GFX_ID, MOVEMENT_TYPE_FACE_DOWN, localId, candidateX + MAP_OFFSET, candidateY + MAP_OFFSET, elevation);
+        if (TryGetObjectEventIdByLocalIdAndMap(localId, sSpawnedMapNum, sSpawnedMapGroup, objectEventId))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void PlaceChaserNearPlayer(u8 localId, u8 objectEventId, u8 chaserIndex, s16 playerX, s16 playerY)
+{
+    u8 candidateIndex;
+
+    for (candidateIndex = 0; candidateIndex <= ARRAY_COUNT(sChaserSpawnOffsets); candidateIndex++)
+    {
+        s16 candidateX;
+        s16 candidateY;
+
+        if (!TryGetChaserSpawnCoords(playerX, playerY, chaserIndex, candidateIndex, &candidateX, &candidateY))
+            break;
 
         TryMoveObjectEventToMapCoords(localId, sSpawnedMapNum, sSpawnedMapGroup, candidateX, candidateY);
         if (gObjectEvents[objectEventId].currentCoords.x == candidateX
@@ -167,12 +213,7 @@ static void SpawnOrSyncChasers(void)
 
         if (!TryGetObjectEventIdByLocalIdAndMap(localId, sSpawnedMapNum, sSpawnedMapGroup, &objectEventId))
         {
-            s16 spawnX = playerX - (i + 2);
-            s16 spawnY = playerY + 1;
-            u8 elevation = MapGridGetElevationAt(spawnX, spawnY);
-
-            SpawnSpecialObjectEventParameterized(CHASE_OVERWORLD_GFX_ID, MOVEMENT_TYPE_FACE_DOWN, localId, spawnX + MAP_OFFSET, spawnY + MAP_OFFSET, elevation);
-            if (!TryGetObjectEventIdByLocalIdAndMap(localId, sSpawnedMapNum, sSpawnedMapGroup, &objectEventId))
+            if (!TrySpawnChaserNearPlayer(localId, i, playerX, playerY, &objectEventId))
                 continue;
             sChaserStalledFrames[i] = 0;
         }
@@ -194,7 +235,7 @@ static void SpawnOrSyncChasers(void)
 
             if (sChaserStalledFrames[i] >= CHASE_OVERWORLD_MAX_STALLED_FRAMES)
             {
-                PlaceChaserNearPlayer(localId, objectEventId, playerX, playerY);
+                PlaceChaserNearPlayer(localId, objectEventId, i, playerX, playerY);
                 sChaserStalledFrames[i] = 0;
             }
         }

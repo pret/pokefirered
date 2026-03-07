@@ -8,6 +8,7 @@
 #include "field_player_avatar.h"
 #include "battle_setup.h"
 #include "overworld.h"
+#include "pokemon.h"
 #include "metatile_behavior.h"
 #include "event_scripts.h"
 #include "script.h"
@@ -511,6 +512,9 @@ bool8 SweetScentWildEncounterWithCount(u8 count)
 
     if (count == 0 || count > 2)
         return FALSE;
+
+    if (count >= 2 && GetMonsStateToDoubles() != PLAYER_HAS_TWO_USABLE_MONS)
+        count = 1;
 
     PlayerGetDestCoords(&x, &y);
     headerId = GetCurrentMapWildMonHeaderId();

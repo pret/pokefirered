@@ -370,7 +370,12 @@ bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes)
 
     if (sActiveChasers >= 2)
     {
-        if (!SweetScentWildEncounterWithCount(2))
+        u8 encounterCount = 2;
+
+        if (GetMonsStateToDoubles() != PLAYER_HAS_TWO_USABLE_MONS)
+            encounterCount = 1;
+
+        if (!SweetScentWildEncounterWithCount(encounterCount))
             return FALSE;
     }
     else if (!SweetScentWildEncounter())

@@ -46,10 +46,9 @@ When `ChaseStamina_IsChaseActive()` is true, a chase-overworld layer drives 1..`
 - Spawn point is biased behind the player when possible; each chaser then pursues every overworld frame.
 - Target coordinate selection prefers the live player object-event coordinates and falls back to `gSaveBlock1Ptr->pos` when needed.
 - Movement picks a primary axis toward player distance, then tries fallback directions (secondary axis, current facing, opposite facing).
-- Every attempted step is validated with object collision checks; when no immediate move is legal, the chaser waits and retries.
-- If a chaser remains blocked for an extended period, it is repositioned to a nearby legal tile around the player to break long-lived stuck states.
+- Every attempted step is validated with object collision checks; if all checks fail the chaser turns in place toward the player instead of forcing illegal movement.
 
-This policy keeps chasers visible and responsive while avoiding collision softlocks and prolonged stalls.
+This policy keeps chasers visible and responsive while avoiding collision softlocks.
 
 ## Edge cases and invalidation handling
 

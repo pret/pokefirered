@@ -24,3 +24,7 @@ While `corpseRun.state == CR_ACTIVE`, battle permissions and payouts are resolve
 When corpse-run mode is active, Safari step countdown is paused so Safari-linked encounters do not force `Times Up` during the run.
 
 Vanilla step countdown resumes automatically as soon as corpse-run exits active state (recovery/failure/off), because the pause check is keyed directly to `CorpseRun_IsActive()`.
+
+## Chase encounter party eligibility
+
+Chase pressure can scale to request a double wild encounter when multiple chasers are active, but battle startup now downgrades to a single wild encounter unless `GetMonsStateToDoubles()` reports `PLAYER_HAS_TWO_USABLE_MONS`. Chase timers/chaser counts are still preserved regardless of this downgrade.

@@ -10,6 +10,7 @@
 #define CHASE_OVERWORLD_MAX_CHASERS (LOCALID_CHASE_VISUAL_MAX - LOCALID_CHASE_VISUAL_BASE + 1)
 #define CHASE_OVERWORLD_GFX_ID OBJ_EVENT_GFX_MEOWTH
 #define CHASE_OVERWORLD_MAX_STALLED_FRAMES 30
+#define CHASE_OVERWORLD_RESPAWN_SEARCH_MAX_RADIUS 4
 
 static const u8 sAllMoveDirections[] =
 {
@@ -157,20 +158,73 @@ static bool8 TrySpawnChaserNearPlayer(u8 localId, u8 chaserIndex, s16 playerX, s
 
 static void PlaceChaserNearPlayer(u8 localId, u8 objectEventId, u8 chaserIndex, s16 playerX, s16 playerY)
 {
-    u8 candidateIndex;
+    s16 radius;
 
-    for (candidateIndex = 0; candidateIndex <= ARRAY_COUNT(sChaserSpawnOffsets); candidateIndex++)
+    (void)chaserIndex;
+
+    for (radius = 1; radius <= CHASE_OVERWORLD_RESPAWN_SEARCH_MAX_RADIUS; radius++)
     {
-        s16 candidateX;
-        s16 candidateY;
+        s16 x;
+        s16 y;
 
-        if (!TryGetChaserSpawnCoords(playerX, playerY, chaserIndex, candidateIndex, &candidateX, &candidateY))
-            break;
+        // Deterministic clockwise perimeter scan for this radius:
+        // top edge (left->right), right edge (top->bottom),
+        // bottom edge (right->left), left edge (bottom->top).
+        for (x = playerX - radius; x <= playerX + radius; x++)
+        {
+            s16 candidateX = x;
+            s16 candidateY = playerY - radius;
 
-        TryMoveObjectEventToMapCoords(localId, sSpawnedMapNum, sSpawnedMapGroup, candidateX, candidateY);
-        if (gObjectEvents[objectEventId].currentCoords.x == candidateX
-         && gObjectEvents[objectEventId].currentCoords.y == candidateY)
-            return;
+            if (candidateX == playerX && candidateY == playerY)
+                continue;
+
+            TryMoveObjectEventToMapCoords(localId, sSpawnedMapNum, sSpawnedMapGroup, candidateX, candidateY);
+            if (gObjectEvents[objectEventId].currentCoords.x == candidateX
+             && gObjectEvents[objectEventId].currentCoords.y == candidateY)
+                return;
+        }
+
+        for (y = playerY - radius + 1; y <= playerY + radius; y++)
+        {
+            s16 candidateX = playerX + radius;
+            s16 candidateY = y;
+
+            if (candidateX == playerX && candidateY == playerY)
+                continue;
+
+            TryMoveObjectEventToMapCoords(localId, sSpawnedMapNum, sSpawnedMapGroup, candidateX, candidateY);
+            if (gObjectEvents[objectEventId].currentCoords.x == candidateX
+             && gObjectEvents[objectEventId].currentCoords.y == candidateY)
+                return;
+        }
+
+        for (x = playerX + radius - 1; x >= playerX - radius; x--)
+        {
+            s16 candidateX = x;
+            s16 candidateY = playerY + radius;
+
+            if (candidateX == playerX && candidateY == playerY)
+                continue;
+
+            TryMoveObjectEventToMapCoords(localId, sSpawnedMapNum, sSpawnedMapGroup, candidateX, candidateY);
+            if (gObjectEvents[objectEventId].currentCoords.x == candidateX
+             && gObjectEvents[objectEventId].currentCoords.y == candidateY)
+                return;
+        }
+
+        for (y = playerY + radius - 1; y >= playerY - radius + 1; y--)
+        {
+            s16 candidateX = playerX - radius;
+            s16 candidateY = y;
+
+            if (candidateX == playerX && candidateY == playerY)
+                continue;
+
+            TryMoveObjectEventToMapCoords(localId, sSpawnedMapNum, sSpawnedMapGroup, candidateX, candidateY);
+            if (gObjectEvents[objectEventId].currentCoords.x == candidateX
+             && gObjectEvents[objectEventId].currentCoords.y == candidateY)
+                return;
+        }
     }
 }
 

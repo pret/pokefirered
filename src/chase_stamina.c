@@ -552,18 +552,18 @@ bool8 ChaseStamina_ShouldPrioritizeWildOpponent(u8 battler1, u8 battler2)
         || (GetBattlerSide(battler1) == B_SIDE_OPPONENT && GetBattlerSide(battler2) == B_SIDE_PLAYER);
 }
 
-void ChaseStamina_OnMapTransition(const struct WarpData *from, const struct WarpData *to)
+enum ChaseTransitionResult ChaseStamina_OnMapTransition(const struct WarpData *from, const struct WarpData *to)
 {
     const struct MapHeader *fromMap;
     const struct MapHeader *toMap;
 
     if (!ChaseStamina_IsChaseActive())
-        return;
+        return CHASE_TRANSITION_NO_ACTIVE_CHASE;
 
     if (from == NULL || to == NULL)
     {
         EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
-        return;
+        return CHASE_TRANSITION_ENDED_CONTEXT_CHANGE;
     }
 
     fromMap = Overworld_GetMapHeaderByGroupAndId(from->mapGroup, from->mapNum);
@@ -571,7 +571,7 @@ void ChaseStamina_OnMapTransition(const struct WarpData *from, const struct Warp
     if (fromMap == NULL || toMap == NULL)
     {
         EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
-        return;
+        return CHASE_TRANSITION_ENDED_CONTEXT_CHANGE;
     }
 
     if (from->mapGroup != to->mapGroup || from->mapNum != to->mapNum)
@@ -579,21 +579,23 @@ void ChaseStamina_OnMapTransition(const struct WarpData *from, const struct Warp
         if (!IsMapTypeChaseCompatible(toMap->mapType))
         {
             EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
-            return;
+            return CHASE_TRANSITION_ENDED_SAFE_ZONE;
         }
     }
 
     if (IsMapTypeOutdoors(fromMap->mapType) != IsMapTypeOutdoors(toMap->mapType))
     {
         EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
-        return;
+        return CHASE_TRANSITION_ENDED_SAFE_ZONE;
     }
 
     if (fromMap->regionMapSectionId != toMap->regionMapSectionId)
     {
         EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
-        return;
+        return CHASE_TRANSITION_ENDED_SAFE_ZONE;
     }
+
+    return CHASE_TRANSITION_PERSISTS;
 }
 
 const u8 *ChaseStamina_TryConsumeEndFeedback(void)

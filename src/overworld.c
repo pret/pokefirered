@@ -134,7 +134,9 @@ static u16 GetCenterScreenMetatileBehavior(void);
 static void SetDefaultFlashLevel(void);
 static void Overworld_TryMapConnectionMusicTransition(void);
 static void ChooseAmbientCrySpecies(void);
-static void TryShowChaseEndFeedback(void);
+static bool8 IsConnectionTransitionWarp(const struct WarpData *from, const struct WarpData *to);
+static void TryShowChaseTransitionFeedback(enum ChaseTransitionResult result, bool8 suppressFeedback);
+
 
 static void CB2_Overworld(void);
 static void CB2_LoadMap2(void);
@@ -787,6 +789,39 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
 
 // Map loaders
 
+static bool8 IsConnectionTransitionWarp(const struct WarpData *from, const struct WarpData *to)
+{
+    if (from == NULL || to == NULL)
+        return FALSE;
+
+    return from->warpId == -1 && to->warpId == -1;
+}
+
+static void TryShowChaseTransitionFeedback(enum ChaseTransitionResult result, bool8 suppressFeedback)
+{
+    static const u8 sText_ChaseSafeZone[] = _("The chase faded in the safe zone.");
+    static const u8 sText_ChaseLostTrail[] = _("The pursuers lost your trail.");
+
+    if (suppressFeedback)
+        return;
+
+    switch (result)
+    {
+    case CHASE_TRANSITION_ENDED_SAFE_ZONE:
+        PlaySE(SE_SUCCESS);
+        if (IsFieldMessageBoxHidden())
+            ShowFieldMessage(sText_ChaseSafeZone);
+        break;
+    case CHASE_TRANSITION_ENDED_CONTEXT_CHANGE:
+        PlaySE(SE_FLEE);
+        if (IsFieldMessageBoxHidden())
+            ShowFieldMessage(sText_ChaseLostTrail);
+        break;
+    default:
+        break;
+    }
+}
+
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
     int paletteIndex;
@@ -797,8 +832,14 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     Overworld_TryMapConnectionMusicTransition();
     ApplyCurrentWarp();
     to = gSaveBlock1Ptr->location;
-    ChaseStamina_OnMapTransition(&from, &to);
-    ChaseOverworld_OnMapTransition(&from, &to);
+    {
+        enum ChaseTransitionResult chaseTransitionResult = ChaseStamina_OnMapTransition(&from, &to);
+        bool8 suppressChaseFeedback = IsConnectionTransitionWarp(&from, &to);
+
+        TryShowChaseTransitionFeedback(chaseTransitionResult, suppressChaseFeedback);
+        ChaseOverworld_OnMapTransition(&from, &to);
+        OverworldHud_Update();
+    }
     LoadCurrentMapData();
     LoadObjEventTemplatesFromHeader();
     TrySetMapSaveWarpStatus();
@@ -834,8 +875,14 @@ static void LoadMapFromWarp(bool32 unused)
     struct WarpData from = gLastUsedWarp;
 
     LoadCurrentMapData();
-    ChaseStamina_OnMapTransition(&from, &gSaveBlock1Ptr->location);
-    ChaseOverworld_OnMapTransition(&from, &gSaveBlock1Ptr->location);
+    {
+        enum ChaseTransitionResult chaseTransitionResult = ChaseStamina_OnMapTransition(&from, &gSaveBlock1Ptr->location);
+        bool8 suppressChaseFeedback = IsConnectionTransitionWarp(&from, &gSaveBlock1Ptr->location);
+
+        TryShowChaseTransitionFeedback(chaseTransitionResult, suppressChaseFeedback);
+        ChaseOverworld_OnMapTransition(&from, &gSaveBlock1Ptr->location);
+        OverworldHud_Update();
+    }
     LoadObjEventTemplatesFromHeader();
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
 

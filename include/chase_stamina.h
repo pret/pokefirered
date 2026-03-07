@@ -23,7 +23,16 @@ u16 PkmnCenterStaminaUpgrade_Purchase(void);
 void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags);
 bool8 ChaseStamina_TryStartChaseEncounter(u32 metatileAttributes);
 bool8 ChaseStamina_ShouldSuppressRandomEncounters(void);
-void ChaseStamina_OnMapTransition(const struct WarpData *from, const struct WarpData *to);
+
+enum ChaseTransitionResult
+{
+    CHASE_TRANSITION_NO_ACTIVE_CHASE,
+    CHASE_TRANSITION_PERSISTS,
+    CHASE_TRANSITION_ENDED_SAFE_ZONE,
+    CHASE_TRANSITION_ENDED_CONTEXT_CHANGE,
+};
+
+enum ChaseTransitionResult ChaseStamina_OnMapTransition(const struct WarpData *from, const struct WarpData *to);
 
 void ChaseStamina_OnBattleStart(void);
 bool8 ChaseStamina_ShouldPrioritizeWildOpponent(u8 battler1, u8 battler2);

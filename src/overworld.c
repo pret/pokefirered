@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "bg_regs.h"
 #include "cable_club.h"
+#include "chase_overworld.h"
 #include "chase_stamina.h"
 #include "credits.h"
 #include "corpse_run.h"
@@ -796,6 +797,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ApplyCurrentWarp();
     to = gSaveBlock1Ptr->location;
     ChaseStamina_OnMapTransition(&from, &to);
+    ChaseOverworld_OnMapTransition(&from, &to);
     LoadCurrentMapData();
     LoadObjEventTemplatesFromHeader();
     TrySetMapSaveWarpStatus();
@@ -832,6 +834,7 @@ static void LoadMapFromWarp(bool32 unused)
 
     LoadCurrentMapData();
     ChaseStamina_OnMapTransition(&from, &gSaveBlock1Ptr->location);
+    ChaseOverworld_OnMapTransition(&from, &gSaveBlock1Ptr->location);
     LoadObjEventTemplatesFromHeader();
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
 

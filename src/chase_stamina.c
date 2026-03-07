@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "chase_overworld.h"
 #include "chase_stamina.h"
 #include "fieldmap.h"
 #include "field_player_avatar.h"
@@ -143,6 +144,7 @@ static void EndChase(void)
     sActiveChasers = 0;
     sChaseStepsRemaining = 0;
     sChaseReengageStepCountdown = 0;
+    ChaseOverworld_OnChaseEnded();
 }
 
 static void StartChase(u8 initialChasers, u16 initialSteps)

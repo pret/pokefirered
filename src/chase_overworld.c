@@ -2,8 +2,10 @@
 #include "chase_overworld.h"
 #include "chase_stamina.h"
 #include "event_object_movement.h"
+#include "field_effect.h"
 #include "fieldmap.h"
 #include "constants/event_object_movement.h"
+#include "constants/field_effects.h"
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 
@@ -11,6 +13,8 @@
 #define CHASE_OVERWORLD_LOCAL_ID_BASE 230
 #define CHASE_OVERWORLD_GFX_ID OBJ_EVENT_GFX_MEOWTH
 #define CHASE_OVERWORLD_MAX_STALLED_FRAMES 30
+#define CHASE_OVERWORLD_MIN_RELOCATE_RADIUS 4
+#define CHASE_OVERWORLD_RELOCATE_COOLDOWN_FRAMES 120
 
 static const u8 sAllMoveDirections[] =
 {
@@ -34,6 +38,7 @@ static EWRAM_DATA bool8 sChasersSpawned = FALSE;
 static EWRAM_DATA u8 sSpawnedMapGroup = MAP_GROUP(MAP_UNDEFINED);
 static EWRAM_DATA u8 sSpawnedMapNum = MAP_NUM(MAP_UNDEFINED);
 static EWRAM_DATA u8 sChaserStalledFrames[CHASE_OVERWORLD_MAX_CHASERS];
+static EWRAM_DATA u8 sChaserRelocationCooldown[CHASE_OVERWORLD_MAX_CHASERS];
 
 static void DespawnChasers(void)
 {
@@ -43,6 +48,7 @@ static void DespawnChasers(void)
     {
         RemoveObjectEventByLocalIdAndMap(CHASE_OVERWORLD_LOCAL_ID_BASE + i, sSpawnedMapNum, sSpawnedMapGroup);
         sChaserStalledFrames[i] = 0;
+        sChaserRelocationCooldown[i] = 0;
     }
 
     sChasersSpawned = FALSE;
@@ -156,23 +162,172 @@ static bool8 TrySpawnChaserNearPlayer(u8 localId, u8 chaserIndex, s16 playerX, s
     return FALSE;
 }
 
-static void PlaceChaserNearPlayer(u8 localId, u8 objectEventId, u8 chaserIndex, s16 playerX, s16 playerY)
+static bool8 IsOutsideRelocationRadius(s16 x, s16 y, s16 playerX, s16 playerY)
+{
+    s16 dx = x - playerX;
+    s16 dy = y - playerY;
+
+    if (dx < 0)
+        dx = -dx;
+    if (dy < 0)
+        dy = -dy;
+
+    return (dx + dy) >= CHASE_OVERWORLD_MIN_RELOCATE_RADIUS;
+}
+
+static void GetViewBounds(s16 *left, s16 *right, s16 *top, s16 *bottom)
+{
+    *left = gSaveBlock1Ptr->pos.x;
+    *right = gSaveBlock1Ptr->pos.x + MAP_OFFSET_W - 1;
+    *top = gSaveBlock1Ptr->pos.y;
+    *bottom = gSaveBlock1Ptr->pos.y + MAP_OFFSET_H - 1;
+}
+
+static u8 GetRelocationVisibilityRank(s16 x, s16 y)
+{
+    s16 left, right, top, bottom;
+
+    GetViewBounds(&left, &right, &top, &bottom);
+    if (x < left || x > right || y < top || y > bottom)
+        return 0;
+    if (x == left || x == right || y == top || y == bottom)
+        return 1;
+
+    return 2;
+}
+
+static bool8 TryGetRelocationCoords(s16 playerX, s16 playerY, u8 chaserIndex, u8 candidateIndex, s16 *candidateX, s16 *candidateY)
+{
+    s16 left, right, top, bottom;
+    s16 sideOffset = chaserIndex + 1;
+
+    GetViewBounds(&left, &right, &top, &bottom);
+
+    switch (candidateIndex)
+    {
+    case 0:
+        *candidateX = left - 1;
+        *candidateY = playerY + sideOffset;
+        return TRUE;
+    case 1:
+        *candidateX = right + 1;
+        *candidateY = playerY - sideOffset;
+        return TRUE;
+    case 2:
+        *candidateX = playerX - sideOffset;
+        *candidateY = top - 1;
+        return TRUE;
+    case 3:
+        *candidateX = playerX + sideOffset;
+        *candidateY = bottom + 1;
+        return TRUE;
+    case 4:
+        *candidateX = left;
+        *candidateY = playerY + sideOffset;
+        return TRUE;
+    case 5:
+        *candidateX = right;
+        *candidateY = playerY - sideOffset;
+        return TRUE;
+    case 6:
+        *candidateX = playerX - sideOffset;
+        *candidateY = top;
+        return TRUE;
+    case 7:
+        *candidateX = playerX + sideOffset;
+        *candidateY = bottom;
+        return TRUE;
+    case 8:
+        *candidateX = left - 1;
+        *candidateY = top - 1;
+        return TRUE;
+    case 9:
+        *candidateX = right + 1;
+        *candidateY = top - 1;
+        return TRUE;
+    case 10:
+        *candidateX = left - 1;
+        *candidateY = bottom + 1;
+        return TRUE;
+    case 11:
+        *candidateX = right + 1;
+        *candidateY = bottom + 1;
+        return TRUE;
+    case 12:
+        *candidateX = left;
+        *candidateY = top;
+        return TRUE;
+    case 13:
+        *candidateX = right;
+        *candidateY = top;
+        return TRUE;
+    case 14:
+        *candidateX = left;
+        *candidateY = bottom;
+        return TRUE;
+    case 15:
+        *candidateX = right;
+        *candidateY = bottom;
+        return TRUE;
+    default:
+        return TryGetChaserSpawnCoords(playerX, playerY, chaserIndex, candidateIndex - 16, candidateX, candidateY);
+    }
+}
+
+static void PlayChaserRelocationEffect(u8 objectEventId)
+{
+    struct ObjectEvent *objectEvent = &gObjectEvents[objectEventId];
+    u8 spritePriority = 1;
+
+    if (objectEvent->spriteId < MAX_SPRITES)
+        spritePriority = gSprites[objectEvent->spriteId].oam.priority;
+
+    gFieldEffectArguments[0] = objectEvent->currentCoords.x;
+    gFieldEffectArguments[1] = objectEvent->currentCoords.y;
+    gFieldEffectArguments[2] = objectEvent->currentElevation;
+    gFieldEffectArguments[3] = spritePriority;
+    FieldEffectStart(FLDEFF_DUST);
+}
+
+static bool8 PlaceChaserNearPlayer(u8 localId, u8 objectEventId, u8 chaserIndex, s16 playerX, s16 playerY)
 {
     u8 candidateIndex;
+    bool8 moved = FALSE;
+    u8 bestVisibilityRank = 3;
 
-    for (candidateIndex = 0; candidateIndex <= ARRAY_COUNT(sChaserSpawnOffsets); candidateIndex++)
+    for (candidateIndex = 0; candidateIndex < ARRAY_COUNT(sChaserSpawnOffsets) + 17; candidateIndex++)
     {
         s16 candidateX;
         s16 candidateY;
+        u8 visibilityRank;
 
-        if (!TryGetChaserSpawnCoords(playerX, playerY, chaserIndex, candidateIndex, &candidateX, &candidateY))
+        if (!TryGetRelocationCoords(playerX, playerY, chaserIndex, candidateIndex, &candidateX, &candidateY))
             break;
+        if (!IsOutsideRelocationRadius(candidateX, candidateY, playerX, playerY))
+            continue;
+
+        visibilityRank = GetRelocationVisibilityRank(candidateX, candidateY);
+        if (moved && visibilityRank > bestVisibilityRank)
+            continue;
 
         TryMoveObjectEventToMapCoords(localId, sSpawnedMapNum, sSpawnedMapGroup, candidateX, candidateY);
         if (gObjectEvents[objectEventId].currentCoords.x == candidateX
          && gObjectEvents[objectEventId].currentCoords.y == candidateY)
-            return;
+        {
+            moved = TRUE;
+            bestVisibilityRank = visibilityRank;
+            if (bestVisibilityRank == 0)
+                break;
+        }
     }
+
+    if (moved)
+    {
+        PlayChaserRelocationEffect(objectEventId);
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 static void SpawnOrSyncChasers(void)
@@ -208,8 +363,12 @@ static void SpawnOrSyncChasers(void)
         {
             RemoveObjectEventByLocalIdAndMap(localId, sSpawnedMapNum, sSpawnedMapGroup);
             sChaserStalledFrames[i] = 0;
+            sChaserRelocationCooldown[i] = 0;
             continue;
         }
+
+        if (sChaserRelocationCooldown[i] > 0)
+            sChaserRelocationCooldown[i]--;
 
         if (!TryGetObjectEventIdByLocalIdAndMap(localId, sSpawnedMapNum, sSpawnedMapGroup, &objectEventId))
         {
@@ -235,8 +394,11 @@ static void SpawnOrSyncChasers(void)
 
             if (sChaserStalledFrames[i] >= CHASE_OVERWORLD_MAX_STALLED_FRAMES)
             {
-                PlaceChaserNearPlayer(localId, objectEventId, i, playerX, playerY);
-                sChaserStalledFrames[i] = 0;
+                if (sChaserRelocationCooldown[i] == 0 && PlaceChaserNearPlayer(localId, objectEventId, i, playerX, playerY))
+                {
+                    sChaserStalledFrames[i] = 0;
+                    sChaserRelocationCooldown[i] = CHASE_OVERWORLD_RELOCATE_COOLDOWN_FRAMES;
+                }
             }
         }
     }

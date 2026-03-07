@@ -2,6 +2,8 @@
 #include "chase_stamina.h"
 #include "gflib.h"
 #include "overworld_hud.h"
+#include "pokemon_icon.h"
+#include "constants/species.h"
 
 #define OVERWORLD_HUD_BG           0
 #define OVERWORLD_HUD_LEFT         1
@@ -15,6 +17,10 @@
 #define STAMINA_BAR_Y              2
 #define STAMINA_BAR_WIDTH          (OVERWORLD_HUD_WIDTH * 8)
 #define STAMINA_BAR_HEIGHT         8
+#define CHASE_ICON_COUNT_MAX       2
+#define CHASE_ICON_X_START         180
+#define CHASE_ICON_X_SPACING       18
+#define CHASE_ICON_Y               11
 
 // Palette index 0 is kept transparent for the window background.
 #define STAMINA_COLOR_EMPTY        PIXEL_FILL(1)
@@ -52,6 +58,60 @@ static const struct WindowTemplate sOverworldHudWindowTemplate = {
 static EWRAM_DATA u8 sOverworldHudWindowId = WINDOW_NONE;
 static EWRAM_DATA u8 sLastStaminaCurrent = 0xFF;
 static EWRAM_DATA u8 sLastStaminaMax = 0xFF;
+static EWRAM_DATA u8 sChaseIconSpriteIds[CHASE_ICON_COUNT_MAX] = {MAX_SPRITES, MAX_SPRITES};
+
+static void OverworldHud_DestroyChaseIcons(void)
+{
+    u8 i;
+
+    for (i = 0; i < CHASE_ICON_COUNT_MAX; i++)
+    {
+        if (sChaseIconSpriteIds[i] != MAX_SPRITES)
+        {
+            DestroyMonIcon(&gSprites[sChaseIconSpriteIds[i]]);
+            sChaseIconSpriteIds[i] = MAX_SPRITES;
+        }
+    }
+
+    SafeFreeMonIconPalette(SPECIES_MEOWTH);
+}
+
+static void OverworldHud_UpdateChaseIcons(void)
+{
+    u8 iconCount;
+    u8 i;
+
+    if (ChaseStamina_IsChaseActive())
+        iconCount = min(ChaseStamina_GetActiveChasers(), CHASE_ICON_COUNT_MAX);
+    else
+        iconCount = 0;
+
+    for (i = 0; i < CHASE_ICON_COUNT_MAX; i++)
+    {
+        if (i < iconCount)
+        {
+            if (sChaseIconSpriteIds[i] == MAX_SPRITES)
+            {
+                SafeLoadMonIconPalette(SPECIES_MEOWTH);
+                sChaseIconSpriteIds[i] = CreateMonIcon(SPECIES_MEOWTH,
+                                                       SpriteCB_MonIcon,
+                                                       CHASE_ICON_X_START + i * CHASE_ICON_X_SPACING,
+                                                       CHASE_ICON_Y,
+                                                       0,
+                                                       0,
+                                                       FALSE);
+                if (sChaseIconSpriteIds[i] == MAX_SPRITES)
+                    SafeFreeMonIconPalette(SPECIES_MEOWTH);
+            }
+        }
+        else if (sChaseIconSpriteIds[i] != MAX_SPRITES)
+        {
+            DestroyMonIcon(&gSprites[sChaseIconSpriteIds[i]]);
+            sChaseIconSpriteIds[i] = MAX_SPRITES;
+            SafeFreeMonIconPalette(SPECIES_MEOWTH);
+        }
+    }
+}
 
 static void OverworldHud_DrawStaminaBar(u8 current, u8 max)
 {
@@ -79,6 +139,7 @@ void OverworldHud_Show(void)
 
     sLastStaminaCurrent = 0xFF;
     sLastStaminaMax = 0xFF;
+    OverworldHud_UpdateChaseIcons();
 }
 
 void OverworldHud_Hide(void)
@@ -91,6 +152,7 @@ void OverworldHud_Hide(void)
     CopyWindowToVram(sOverworldHudWindowId, COPYWIN_FULL);
     RemoveWindow(sOverworldHudWindowId);
     sOverworldHudWindowId = WINDOW_NONE;
+    OverworldHud_DestroyChaseIcons();
 }
 
 void OverworldHud_Update(void)
@@ -104,11 +166,15 @@ void OverworldHud_Update(void)
     max = ChaseStamina_GetMax();
 
     if (current == sLastStaminaCurrent && max == sLastStaminaMax)
+    {
+        OverworldHud_UpdateChaseIcons();
         return;
+    }
 
     sLastStaminaCurrent = current;
     sLastStaminaMax = max;
 
     OverworldHud_DrawStaminaBar(current, max);
     CopyWindowToVram(sOverworldHudWindowId, COPYWIN_GFX);
+    OverworldHud_UpdateChaseIcons();
 }

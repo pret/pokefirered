@@ -16,11 +16,13 @@
 #include "strings.h"
 #include "wild_encounter.h"
 #include "battle_anim.h"
+#include "event_data.h"
+#include "field_message_box.h"
+#include "script.h"
 #include "overworld_hud.h"
 #include "palette.h"
-#include "script.h"
-#include "sound.h"
 #include "constants/battle.h"
+#include "constants/flags.h"
 #include "constants/map_types.h"
 
 #define STAMINA_LEVEL_MIN 1
@@ -46,6 +48,7 @@
 #define CHASE_STEPS_MIN 30
 #define CHASE_STEPS_MAX 140
 
+#define CHASE_FAILURE_REMINDER_THRESHOLD 2
 typedef enum
 {
     CHASE_END_FEEDBACK_NONE,
@@ -64,9 +67,15 @@ static EWRAM_DATA u16 sChaseStepsRemaining = 0;
 static EWRAM_DATA u8 sChaseReengageStepCountdown = 0;
 static EWRAM_DATA bool8 sPendingWildFirstMovePriority = FALSE;
 static EWRAM_DATA bool8 sBattleUsesWildFirstMovePriority = FALSE;
+static EWRAM_DATA bool8 sPendingChaseTutorialMessage = FALSE;
+static EWRAM_DATA bool8 sPendingChaseReminderMessage = FALSE;
+static EWRAM_DATA u8 sConsecutiveChaseFailures = 0;
 static EWRAM_DATA u8 sPendingChaseEndFeedback = CHASE_END_FEEDBACK_NONE;
 
 static bool8 IsMapTypeChaseCompatible(u8 mapType);
+static void QueueChaseTutorialIfNeeded(void);
+static void QueueChaseFailureReminderIfNeeded(void);
+static void TryShowPendingChaseMessage(void);
 
 static u8 GetStaminaLevel(void)
 {
@@ -155,6 +164,47 @@ static bool8 IsCurrentAreaValidForActiveChase(void)
     return TRUE;
 }
 
+static void QueueChaseTutorialIfNeeded(void)
+{
+    if (FlagGet(FLAG_SYS_CHASE_TUTORIAL_SEEN))
+        return;
+
+    FlagSet(FLAG_SYS_CHASE_TUTORIAL_SEEN);
+    sPendingChaseTutorialMessage = TRUE;
+}
+
+static void QueueChaseFailureReminderIfNeeded(void)
+{
+    if (FlagGet(FLAG_SYS_CHASE_FAILURE_REMINDER_SEEN))
+        return;
+
+    if (sConsecutiveChaseFailures < CHASE_FAILURE_REMINDER_THRESHOLD)
+        return;
+
+    FlagSet(FLAG_SYS_CHASE_FAILURE_REMINDER_SEEN);
+    sPendingChaseReminderMessage = TRUE;
+}
+
+static void TryShowPendingChaseMessage(void)
+{
+    const u8 *message = NULL;
+
+    if (ScriptContext_IsEnabled() || !IsFieldMessageBoxHidden())
+        return;
+
+    if (sPendingChaseTutorialMessage)
+    {
+        message = gText_ChaseTutorialIntro;
+        sPendingChaseTutorialMessage = FALSE;
+    }
+    else if (sPendingChaseReminderMessage)
+    {
+        message = gText_ChaseTutorialReminder;
+        sPendingChaseReminderMessage = FALSE;
+    }
+
+    if (message != NULL)
+        ShowFieldMessage(message);
 static void EndChase(bool8 shouldQueueFeedback, u8 feedbackType)
 static bool8 ShouldSuppressChaseStartFeedback(void)
 {
@@ -203,6 +253,8 @@ static void StartChase(u8 initialChasers, u16 initialSteps)
     sActiveChasers = initialChasers;
     sChaseStepsRemaining = initialSteps;
     sChaseReengageStepCountdown = CHASE_REENGAGE_COUNTDOWN_MIN;
+    sConsecutiveChaseFailures = 0;
+    QueueChaseTutorialIfNeeded();
 
     if (!wasActive && ChaseStamina_IsChaseActive())
         TryShowChaseStartFeedback();
@@ -384,6 +436,8 @@ void ChaseStamina_UpdateOverworldFrame(bool8 tookStep)
         }
     }
 
+    TryShowPendingChaseMessage();
+
     if (!tookStep)
         return;
 
@@ -502,6 +556,9 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
         if (sChaseStepsRemaining < chaseLength)
             sChaseStepsRemaining = chaseLength;
         RollChaseReengageStepCountdown();
+        if (sConsecutiveChaseFailures < 255)
+            sConsecutiveChaseFailures++;
+        QueueChaseFailureReminderIfNeeded();
         break;
     }
 
@@ -510,6 +567,7 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
     {
         if (sActiveChasers != 0)
             sActiveChasers--;
+        sConsecutiveChaseFailures = 0;
         if (sActiveChasers == 0)
             EndChase(TRUE, CHASE_END_FEEDBACK_ENDED);
         break;
@@ -523,11 +581,15 @@ void ChaseStamina_OnWildBattleEnded(u8 battleOutcome, u32 battleTypeFlags)
     case B_OUTCOME_MON_TELEPORTED:
     case B_OUTCOME_LINK_BATTLE_RAN:
         // Forced-end and escape outcomes clear the chase to keep its state deterministic.
+        sConsecutiveChaseFailures = 0;
+        EndChase();
         EndChase(FALSE, CHASE_END_FEEDBACK_NONE);
         break;
 
     default:
         // Any unknown outcome is treated as a forced end to avoid stale chase state.
+        sConsecutiveChaseFailures = 0;
+        EndChase();
         EndChase(FALSE, CHASE_END_FEEDBACK_NONE);
         break;
     }

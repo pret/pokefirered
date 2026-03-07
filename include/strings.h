@@ -1030,6 +1030,8 @@ extern const u8 gText_StaminaHudLabel[];
 extern const u8 gText_ChaseHudInactive[];
 extern const u8 gText_ChaseHudChasersLabel[];
 extern const u8 gText_ChaseHudStepsLabel[];
+extern const u8 gText_ChaseTutorialIntro[];
+extern const u8 gText_ChaseTutorialReminder[];
 extern const u8 gText_TrainerCardYen[];
 extern const u8 gText_TrainerCardPokedex[];
 extern const u8 gText_TrainerCardNull[];

@@ -855,6 +855,17 @@ const u8 gText_StaminaHudLabel[] = _("STA ");
 const u8 gText_ChaseHudInactive[] = _("CHASE: OFF");
 const u8 gText_ChaseHudChasersLabel[] = _("CHASERS ");
 const u8 gText_ChaseHudStepsLabel[] = _("STEPS ");
+const u8 gText_ChaseTutorialIntro[] = _("You're being chased!\p"
+    "Chasers pursue you while CHASE is active.\n"
+    "Reach a safe hub (town/city/indoors)\n"
+    "to end it.\p"
+    "If an encounter starts before the timer\n"
+    "runs out, the chase can re-engage.\n"
+    "Keep moving!");
+const u8 gText_ChaseTutorialReminder[] = _("Hint: if you keep getting caught,\n"
+    "head for a safe hub to reset pressure.\n"
+    "On routes, avoid long grass/water\n"
+    "until you're ready to re-engage.");
 const u8 gText_TrainerCardYen[] = _("¥");
 const u8 gText_TrainerCardPokedex[] = _("POKéDEX");
 const u8 gText_TrainerCardNull[] = _("");

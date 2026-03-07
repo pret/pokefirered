@@ -7,7 +7,6 @@
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 
-#define CHASE_OVERWORLD_MAX_CHASERS 2
 #define CHASE_OVERWORLD_LOCAL_ID_BASE 230
 #define CHASE_OVERWORLD_GFX_ID OBJ_EVENT_GFX_MEOWTH
 #define CHASE_OVERWORLD_MAX_STALLED_FRAMES 30
@@ -33,13 +32,13 @@ static const s8 sChaserSpawnOffsets[][2] =
 static EWRAM_DATA bool8 sChasersSpawned = FALSE;
 static EWRAM_DATA u8 sSpawnedMapGroup = MAP_GROUP(MAP_UNDEFINED);
 static EWRAM_DATA u8 sSpawnedMapNum = MAP_NUM(MAP_UNDEFINED);
-static EWRAM_DATA u8 sChaserStalledFrames[CHASE_OVERWORLD_MAX_CHASERS];
+static EWRAM_DATA u8 sChaserStalledFrames[CHASE_STAMINA_MAX_ACTIVE_CHASERS];
 
 static void DespawnChasers(void)
 {
     u8 i;
 
-    for (i = 0; i < CHASE_OVERWORLD_MAX_CHASERS; i++)
+    for (i = 0; i < CHASE_STAMINA_MAX_ACTIVE_CHASERS; i++)
     {
         RemoveObjectEventByLocalIdAndMap(CHASE_OVERWORLD_LOCAL_ID_BASE + i, sSpawnedMapNum, sSpawnedMapGroup);
         sChaserStalledFrames[i] = 0;
@@ -189,8 +188,8 @@ static void SpawnOrSyncChasers(void)
         playerY = gObjectEvents[playerObjectEventId].currentCoords.y;
     }
 
-    if (activeChasers > CHASE_OVERWORLD_MAX_CHASERS)
-        activeChasers = CHASE_OVERWORLD_MAX_CHASERS;
+    if (activeChasers > CHASE_STAMINA_MAX_ACTIVE_CHASERS)
+        activeChasers = CHASE_STAMINA_MAX_ACTIVE_CHASERS;
 
     if (!sChasersSpawned)
     {
@@ -199,7 +198,7 @@ static void SpawnOrSyncChasers(void)
         sSpawnedMapNum = gSaveBlock1Ptr->location.mapNum;
     }
 
-    for (i = 0; i < CHASE_OVERWORLD_MAX_CHASERS; i++)
+    for (i = 0; i < CHASE_STAMINA_MAX_ACTIVE_CHASERS; i++)
     {
         u8 localId = CHASE_OVERWORLD_LOCAL_ID_BASE + i;
         u8 objectEventId;

@@ -51,6 +51,7 @@ struct PokemonStorage
 
 u8 *GetBoxNamePtr(u8 boxNumber);
 struct BoxPokemon *GetBoxedMonPtr(u8 boxId, u8 monPosition);
+void SetBoxMonAt(u8 boxId, u8 boxPosition, struct BoxPokemon *src);
 void SetBoxMonNickAt(u8 boxId, u8 monPosition, const u8 *newNick);
 s16 CompactPartySlots(void);
 u32 GetBoxMonDataAt(u8 boxId, u8 monPosition, s32 request);

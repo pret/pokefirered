@@ -467,7 +467,7 @@ static void CorpseRun_ClearPartyStashMetadata(void)
 {
     gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_VALID_INDEX] = FALSE;
     gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_COUNT_INDEX] = 0;
-    CpuFill8(0, &gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_DATA_START], PARTY_SIZE * 2);
+    memset(&gSaveBlock1Ptr->corpseRun.reserved[CORPSE_RUN_STASH_DATA_START], 0, PARTY_SIZE * 2);
 }
 
 static bool8 CorpseRun_FindFreePcSlots(u8 requiredSlots, u8 *boxIds, u8 *boxPositions)

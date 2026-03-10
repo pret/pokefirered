@@ -39,6 +39,30 @@
             ]
         },
         {
+            "label": "Build Debug",
+            "type": "shell",
+            "promptOnClose": true,
+            "dependsOn": "Clean",
+            "command": "make",
+            "args": [
+                "-j$(nproc)",
+                "${command:cpptools.activeConfigName}",
+                "DINFO=1"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
             "label": "Clean and Build",
             "dependsOrder": "sequence",
             "dependsOn": [

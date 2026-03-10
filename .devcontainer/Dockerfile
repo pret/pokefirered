@@ -11,7 +11,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && apt-get -y instal
  git \
  libpng-dev \
  gcc-arm-none-eabi \
- libnewlib-arm-none-eabi
+ libnewlib-arm-none-eabi \
+ gdb-multiarch
 
 # Download and compile agbcc
 WORKDIR /tmp/tools/agbcc

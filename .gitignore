@@ -62,6 +62,7 @@ prefabs.json
 .vscode/*.*
 !.vscode/c_cpp_properties.json
 !.vscode/tasks.json
+!.vscode/launch.json
 *.js
 *.sym
 build-cmake-*/

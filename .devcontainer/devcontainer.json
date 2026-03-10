@@ -21,7 +21,10 @@
 				},
 				"search.exclude": {
 					"**/tools": true
-				}
+				},
+				
+				"mgba_debug_ip": "host.docker.internal",
+				"mgba_debug_port": 2345
 				
 			},
 

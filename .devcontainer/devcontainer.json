@@ -1,0 +1,40 @@
+{
+	"name": "pokefirered",
+	"build": {
+		"dockerfile": "Dockerfile",
+		// Update 'VARIANT' to pick an Ubuntu version: jammy, noble
+		"args": { "VARIANT": "noble" }
+	},
+	
+    "customizations": {
+        "vscode": {
+
+			"settings": {
+				
+				"files.associations": {
+					"*.inc": "arm",
+					"*.h": "c"
+				},
+
+				"files.exclude": {
+					"**/build": true // This is to exclude the build folder from IntelliSense, though also removes it from the Explorer
+				},
+				"search.exclude": {
+					"**/tools": true
+				}
+				
+			},
+
+			"extensions": [
+				"ms-vscode.cpptools",
+				"dan-c-underwood.arm",
+				"ms-vscode-remote.remote-containers"
+			]
+		}
+	},
+
+	// Install agbcc
+	"postCreateCommand": "workspaceFolder=$(pwd) && (cd /tmp/tools/agbcc && ./install.sh $workspaceFolder)",
+
+	"remoteUser": "vscode"
+}

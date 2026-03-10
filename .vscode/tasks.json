@@ -1,0 +1,55 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Clean",
+            "type": "shell",
+            "promptOnClose": true,
+            "command": "make",
+            "args": ["clean"],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared",
+                "close": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "promptOnClose": true,
+            "command": "make",
+            "args": [
+                "-j$(nproc)",
+                "${command:cpptools.activeConfigName}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Clean and Build",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Clean",
+                "Build",
+            ],
+            "options": {
+                "statusbar": {
+                    "hide": true
+                }
+            }
+        }
+    ]
+}

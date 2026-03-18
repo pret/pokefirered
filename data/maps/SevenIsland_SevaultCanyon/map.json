@@ -28,7 +28,7 @@
   "object_events": [
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BATTLE_GIRL",
+      "graphics_id": "OBJ_EVENT_GFX_CRUSH_GIRL",
       "x": 13,
       "y": 43,
       "elevation": 3,
@@ -294,7 +294,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 8,
       "y": 26,
       "elevation": 3,

@@ -45,7 +45,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 6,
       "y": 8,
       "elevation": 3,

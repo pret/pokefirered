@@ -27,7 +27,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirl",
+      "script": "SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirl",
       "flag": "0"
     },
     {
@@ -133,7 +133,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SaffronCity_PokemonTrainerFanClub_EventScript_BlackBelt",
-      "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT"
+      "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_BlackBelt"
     },
     {
       "type": "object",

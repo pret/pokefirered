@@ -192,7 +192,7 @@ TwoIsland_EventScript_Beauty::
 	release
 	end
 
-TwoIsland_EventScript_SuperNerd::
+TwoIsland_EventScript_PokeManiac::
 	msgbox TwoIsland_Text_BuyRareItemsHere, MSGBOX_NPC
 	end
 

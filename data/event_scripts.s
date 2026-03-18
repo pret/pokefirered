@@ -1030,7 +1030,7 @@ EventScript_ResetAllMapFlags::
 	setflag FLAG_HIDE_CINNABAR_SEAGALLOP
 	setflag FLAG_HIDE_CINNABAR_POKECENTER_BILL
 	setflag FLAG_HIDE_LORELEI_IN_HER_HOUSE
-	setflag FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT
+	setflag FLAG_HIDE_SAFFRON_FAN_CLUB_BlackBelt
 	setflag FLAG_HIDE_SAFFRON_FAN_CLUB_ROCKER
 	setflag FLAG_HIDE_SAFFRON_FAN_CLUB_WOMAN
 	setflag FLAG_HIDE_SAFFRON_FAN_CLUB_BEAUTY
@@ -1123,7 +1123,7 @@ EventScript_HandOverItem::
 	return
 
 	.include "data/scripts/pokemon_league.inc"
-	.include "data/scripts/movement.inc"	
+	.include "data/scripts/movement.inc"
 	.include "data/scripts/flavor_text.inc"
 	.include "data/scripts/questionnaire.inc"
 

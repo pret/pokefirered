@@ -34,7 +34,7 @@ $(OBJEVENTGFXDIR)/people/biker.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/bill.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/blackbelt.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/BlackBelt.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(OBJEVENTGFXDIR)/people/blaine.4bpp: %.4bpp: %.png

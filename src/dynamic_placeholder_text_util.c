@@ -89,8 +89,8 @@ static const u8 sTextColorTable[] =
 
 void DynamicPlaceholderTextUtil_Reset(void)
 {
-    s32 i;
-    for (i = 0; i < NELEMS(sStringPointers); i++)
+    int i;
+    for (i = 0; i < (int)NELEMS(sStringPointers); i++)
         sStringPointers[i] = NULL;
 }
 

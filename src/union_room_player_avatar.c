@@ -9,6 +9,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/union_room.h"
 #include "constants/event_objects.h"
+#include "sloopsvc.h"
 
 #define UR_SPRITE_START_ID (MAX_SPRITES - MAX_UNION_ROOM_LEADERS)
 
@@ -513,6 +514,14 @@ static void SpawnGroupLeaderAndMembers(u32 leaderId, struct RfuGameData * gameDa
     {
     case ACTIVITY_NONE | IN_UNION_ROOM:
     case ACTIVITY_PLYRTALK | IN_UNION_ROOM:
+#if REVISION >= 0xA
+        if ((svc_4b() & SVC4B_EXIT_EARLY) != 0)
+        {
+            DespawnGroupLeader(leaderId);
+            AssembleGroup(leaderId, gameData);
+            break;
+        }
+#endif
         SpawnGroupLeader(leaderId, gameData->playerGender, gameData->compatibility.playerTrainerId[0]);
         for (i = 0; i < MAX_RFU_PLAYERS; i++)
             DespawnGroupMember(leaderId, i);

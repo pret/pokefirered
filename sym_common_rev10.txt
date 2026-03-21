@@ -3,8 +3,12 @@
 	.include "text_printer.o"
 	.align 4
 	.include "window.o"
+	.include "librfu_stwi.o"
+	.align 4
+	.include "librfu_rfu.o"
 	.include "text.o"
 	.include "sprite.o"
+	.align 4
 	.include "sloopsvc.o"
 	.include "link.o"
 	.align 4
@@ -35,6 +39,7 @@
 	.align 4
 	.include "list_menu.o"
 	.include "quest_log.o"
+	.include "union_room.o"
 	.include "party_menu.o"
 	.include "help_system.o"
 	.align 4
@@ -48,8 +53,4 @@
 	.include "berry_fix_program.o"
 	.include "m4a.o"
 	.include "agb_flash.o"
-	.include "librfu_stwi.o"
-	.align 4
-	.include "librfu_rfu.o"
-	.align 4
 	.include "librfu_sio32id.o"

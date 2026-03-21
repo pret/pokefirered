@@ -1512,6 +1512,13 @@ static bool8 RunFieldCallback(void)
     return TRUE;
 }
 
+#if REVISION >= 0xA
+void ClearFieldCallback(void)
+{
+    gFieldCallback = NULL;
+}
+#endif
+
 void CB2_NewGame(void)
 {
     FieldClearVBlankHBlankCallbacks();

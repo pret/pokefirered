@@ -1533,28 +1533,16 @@ void ply_xxx(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
     gMPlayJumpTable[0](mplayInfo, track);
 }
 
-#define READ_XCMD_BYTE(var, n)       \
-{                                    \
-    u32 byte = track->cmdPtr[(n)]; \
-    byte <<= n * 8;                  \
-    (var) &= ~(0xFF << (n * 8));     \
-    (var) |= byte;                   \
-}
-
 void ply_xwave(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
-    u32 wav;
+    union { struct WaveData *w; u8 d[4]; } u;
 
-#ifdef UBFIX
-    wav = 0;
-#endif
+    u.d[0] = *track->cmdPtr;
+    u.d[1] = *(track->cmdPtr + 1);
+    u.d[2] = *(track->cmdPtr + 2);
+    u.d[3] = *(track->cmdPtr + 3);
 
-    READ_XCMD_BYTE(wav, 0) // UB: uninitialized variable
-    READ_XCMD_BYTE(wav, 1)
-    READ_XCMD_BYTE(wav, 2)
-    READ_XCMD_BYTE(wav, 3)
-
-    track->tone.wav = (struct WaveData *)wav;
+    track->tone.wav = u.w;
     track->cmdPtr += 4;
 }
 
@@ -1614,16 +1602,12 @@ void ply_xswee(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 
 void ply_xwait(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
-    u32 len;
+    union { u16 a; u8 d[2]; } u;
 
-#ifdef UBFIX
-    len = 0;
-#endif
+    u.d[0] = *track->cmdPtr;
+    u.d[1] = *(track->cmdPtr + 1);
 
-    READ_XCMD_BYTE(len, 0) // UB: uninitialized variable
-    READ_XCMD_BYTE(len, 1)
-
-    if (track->timer < (u16)len)
+    if (track->timer < u.a)
     {
         track->timer++;
         track->cmdPtr -= 2;
@@ -1638,18 +1622,14 @@ void ply_xwait(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
 
 void ply_xcmd_0D(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track)
 {
-    u32 unk;
+    union { u32 a; u8 d[4]; } u;
 
-#ifdef UBFIX
-    unk = 0;
-#endif
+    u.d[0] = *track->cmdPtr;
+    u.d[1] = *(track->cmdPtr + 1);
+    u.d[2] = *(track->cmdPtr + 2);
+    u.d[3] = *(track->cmdPtr + 3);
 
-    READ_XCMD_BYTE(unk, 0) // UB: uninitialized variable
-    READ_XCMD_BYTE(unk, 1)
-    READ_XCMD_BYTE(unk, 2)
-    READ_XCMD_BYTE(unk, 3)
-
-    track->unk_3C = unk;
+    track->unk_3C = u.a;
     track->cmdPtr += 4;
 }
 

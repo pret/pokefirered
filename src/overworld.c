@@ -59,15 +59,20 @@
 #define PLAYER_LINK_STATE_READY 0x82
 #define PLAYER_LINK_STATE_EXITING_ROOM 0x83
 
-#define FACING_NONE 0
-#define FACING_UP 1
-#define FACING_DOWN 2
-#define FACING_LEFT 3
-#define FACING_RIGHT 4
-#define FACING_FORCED_UP 7
-#define FACING_FORCED_DOWN 8
-#define FACING_FORCED_LEFT 9
-#define FACING_FORCED_RIGHT 10
+enum LinkFacing
+{
+    FACING_NONE,
+    FACING_UP,
+    FACING_DOWN,
+    FACING_LEFT,
+    FACING_RIGHT,
+    FACING_UNUSED1,
+    FACING_UNUSED2,
+    FACING_FORCED_UP,
+    FACING_FORCED_DOWN,
+    FACING_FORCED_LEFT,
+    FACING_FORCED_RIGHT,
+};
 
 typedef u16 (*KeyInterCB)(u32 key);
 
@@ -1278,7 +1283,7 @@ static const int sUnusedData[] = {
       44
 };
 
-const struct Coords32 gDirectionToVectors[] = 
+const struct Coords32 gDirectionToVectors[] =
 {
     [DIR_NONE]      = { 0,  0},
     [DIR_SOUTH]     = { 0,  1},
@@ -1511,6 +1516,13 @@ static bool8 RunFieldCallback(void)
 
     return TRUE;
 }
+
+#if REVISION >= 0xA
+void ClearFieldCallback(void)
+{
+    gFieldCallback = NULL;
+}
+#endif
 
 void CB2_NewGame(void)
 {
@@ -2545,21 +2557,17 @@ static u8 (*const sLinkPlayerMovementModes[])(struct LinkPlayerObjectEvent *, st
 // These handlers return TRUE if the movement was scripted and successful, and FALSE otherwise.
 static bool8 (*const sLinkPlayerFacingHandlers[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8) =
 {
-    [DIR_NONE]  = FacingHandler_DoNothing,
-    [DIR_SOUTH] = FacingHandler_DpadMovement,
-    [DIR_NORTH] = FacingHandler_DpadMovement,
-    [DIR_WEST]  = FacingHandler_DpadMovement,
-    [DIR_EAST]  = FacingHandler_DpadMovement,
-};
-
-static bool8 (*const sUnusedLinkPlayerFacingHandlers[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8) =
-{
-    FacingHandler_DoNothing,
-    FacingHandler_DoNothing,
-    FacingHandler_ForcedFacingChange,
-    FacingHandler_ForcedFacingChange,
-    FacingHandler_ForcedFacingChange,
-    FacingHandler_ForcedFacingChange,
+    [FACING_NONE]         = FacingHandler_DoNothing,
+    [FACING_UP]           = FacingHandler_DpadMovement,
+    [FACING_DOWN]         = FacingHandler_DpadMovement,
+    [FACING_LEFT]         = FacingHandler_DpadMovement,
+    [FACING_RIGHT]        = FacingHandler_DpadMovement,
+    [FACING_UNUSED1]      = FacingHandler_DoNothing,
+    [FACING_UNUSED2]      = FacingHandler_DoNothing,
+    [FACING_FORCED_UP]    = FacingHandler_ForcedFacingChange,
+    [FACING_FORCED_DOWN]  = FacingHandler_ForcedFacingChange,
+    [FACING_FORCED_LEFT]  = FacingHandler_ForcedFacingChange,
+    [FACING_FORCED_RIGHT] = FacingHandler_ForcedFacingChange,
 };
 
 // These handlers are run after an attempted movement.
@@ -3059,7 +3067,8 @@ static bool32 CanCableClubPlayerPressStart(struct CableClubPlayer *player)
 static const u8 *TryGetTileEventScript(struct CableClubPlayer *player)
 {
     if (player->movementMode != MOVEMENT_MODE_SCRIPTED)
-        return FACING_NONE;
+        return NULL;
+
     return GetCoordEventScriptAtMapPosition(&player->pos);
 }
 
@@ -3081,7 +3090,7 @@ static const u8 *TryInteractWithPlayer(struct CableClubPlayer *player)
     u8 linkPlayerId;
 
     if (player->movementMode != MOVEMENT_MODE_FREE && player->movementMode != MOVEMENT_MODE_SCRIPTED)
-        return FACING_NONE;
+        return NULL;
 
     otherPlayerPos = player->pos;
     otherPlayerPos.x += gDirectionToVectors[player->facing].x;

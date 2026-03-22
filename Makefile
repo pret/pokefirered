@@ -129,7 +129,7 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
-ALL_BUILDS := firered firered_rev1 leafgreen leafgreen_rev1
+ALL_BUILDS := firered firered_rev1 firered_rev10 leafgreen leafgreen_rev1 leafgreen_rev10
 ALL_BUILDS += $(ALL_BUILDS:%=%_modern)
 
 RULES_NO_SCAN += clean clean-assets tidy generated clean-generated
@@ -224,13 +224,17 @@ tidy:
 # "friendly" target names for convenience sake
 firered:                ; @$(MAKE) GAME_VERSION=FIRERED
 firered_rev1:           ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=1
+firered_switch:          ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=10
 leafgreen:              ; @$(MAKE) GAME_VERSION=LEAFGREEN
 leafgreen_rev1:         ; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=1
+leafgreen_switch:        ; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=10
 
 compare_firered:        ; @$(MAKE) GAME_VERSION=FIRERED COMPARE=1
 compare_firered_rev1:   ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=1 COMPARE=1
+compare_firered_switch: ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=10 COMPARE=1
 compare_leafgreen:      ; @$(MAKE) GAME_VERSION=LEAFGREEN COMPARE=1
 compare_leafgreen_rev1: ; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=1 COMPARE=1
+compare_leafgreen_switch:; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=10 COMPARE=1
 
 firered_modern:        ; @$(MAKE) GAME_VERSION=FIRERED MODERN=1
 firered_rev1_modern:   ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=1 MODERN=1
@@ -348,16 +352,30 @@ endif
 $(OBJ_DIR)/sym_bss.ld: sym_bss.txt
 	$(RAMSCRGEN) .bss $< ENGLISH > $@
 
+$(OBJ_DIR)/sym_bss_rev10.ld: sym_bss_rev10.txt
+	$(RAMSCRGEN) .bss $< ENGLISH > $@
+
 $(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
+	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
+
+$(OBJ_DIR)/sym_common_rev10.ld: sym_common_rev10.txt $(C_OBJS) $(wildcard common_syms/*.txt)
 	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
 
 $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
+$(OBJ_DIR)/sym_ewram_rev10.ld: sym_ewram_rev10.txt
+	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
+
 # Linker script
 ifeq ($(MODERN),0)
+ifeq ($(GAME_REVISION),10)
+LD_SCRIPT := ld_script_rev10.ld
+LD_SCRIPT_DEPS := $(OBJ_DIR)/sym_bss_rev10.ld $(OBJ_DIR)/sym_common_rev10.ld $(OBJ_DIR)/sym_ewram_rev10.ld
+else
 LD_SCRIPT := ld_script.ld
 LD_SCRIPT_DEPS := $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
+endif
 else
 LD_SCRIPT := ld_script_modern.ld
 LD_SCRIPT_DEPS :=

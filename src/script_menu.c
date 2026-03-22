@@ -338,8 +338,14 @@ static const struct MenuAction sMultichoiceList_TradeCenter_Colosseum[] = {
 };
 
 static const struct MenuAction sMultichoiceList_Link_Wireless[] = {
+#if REVISION >= 0xA
+    // The default is wireless here as it's always emulated by Sloop
+    { gText_Wireless },
+    { gText_GameLinkCable },
+#else
     { gText_GameLinkCable },
     { gText_Wireless },
+#endif
     { gOtherText_Exit }
 };
 

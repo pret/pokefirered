@@ -1785,26 +1785,20 @@ static const u8 *TryGetStatusString(u8 *src)
 {
     u32 i;
     u8 status[] = _("$$$$$$$");
-    u32 chars1, chars2;
+    u32 chars1, chars2, *cmp;
     u8 *statusPtr;
 
     statusPtr = status;
-    for (i = 0; i < 8; i++)
-    {
-        if (*src == EOS)
-            break;
-        *statusPtr = *src;
-        src++;
-        statusPtr++;
-    }
+    for (i = 0; i < 8 && *src != EOS; i++)
+        *statusPtr++ = *src++;
 
-    chars1 = *(u32 *)(&status[0]);
-    chars2 = *(u32 *)(&status[4]);
+    chars1 = *(u32 *)status;
+    chars2 = *((u32 *)status + 1);
 
     for (i = 0; i < NELEMS(gStatusConditionStringsTable); i++)
     {
-        if (chars1 == *(u32 *)(&gStatusConditionStringsTable[i][0][0])
-            && chars2 == *(u32 *)(&gStatusConditionStringsTable[i][0][4]))
+        cmp = (u32 *)gStatusConditionStringsTable[i][0];
+        if (chars1 == cmp[0] && chars2 == cmp[1])
             return gStatusConditionStringsTable[i][1];
     }
     return NULL;

@@ -31,8 +31,8 @@ void AddTextPrinterParameterized5(u8 windowId, u8 fontId, const u8 *str, u8 x, u
 void Menu_PrintFormatIntlPlayerName(u8 windowId, const u8 * src, u16 x, u16 y);
 void StartBlendTask(u8 eva_start, u8 evb_start, u8 eva_end, u8 evb_end, u8 ev_step, u8 priority);
 bool8 IsBlendTaskActive(void);
-u8 Menu2_GetMonSpriteAnchorCoord(u16 species, u32 personality, u8 a2);
-s8 Menu2_GetMonSpriteAnchorCoordMinusx20(u16 species, u32 personality, u8 a2);
+u8 Menu2_GetMonPosAttribute(u16 species, u32 personality, u8 attributeId);
+s8 Menu2_GetStarSpritePosAttribute(u16 species, u32 personality, u8 attributeId);
 
 // list_menu
 void ListMenu_LoadMonIconPalette(u8 palOffset, u16 speciesId);

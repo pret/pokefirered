@@ -3,19 +3,6 @@
 
 #include "pokemon_special_anim.h"
 
-enum
-{
-    PSA_TEXT_ITEM_USED,
-    PSA_TEXT_LEVEL_ELEVATED,
-    PSA_TEXT_FORGET_1,
-    PSA_TEXT_FORGET_2_AND,
-    PSA_TEXT_FORGET_POOF,
-    PSA_TEXT_FORGET_FORGOT,
-    PSA_TEXT_FORGET_AND,
-    PSA_TEXT_MACHINE_SET,
-    PSA_TEXT_HUH,
-    PSA_TEXT_LEARNED_MOVE
-};
 
 struct PokemonSpecialAnimScene
 {

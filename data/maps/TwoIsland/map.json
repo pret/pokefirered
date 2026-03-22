@@ -89,7 +89,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "TwoIsland_EventScript_PokeManiac",
-      "flag": "FLAG_HIDE_TWO_ISLAND_SUPER_NERD"
+      "flag": "FLAG_HIDE_TWO_ISLAND_POKE_MANIAC"
     },
     {
       "type": "object",

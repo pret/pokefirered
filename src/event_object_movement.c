@@ -8415,7 +8415,7 @@ void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *sprite, u8 sub
 {
     u16 y;
 
-    y = (sprite->y - sprite->centerToCornerVecY + gSpriteCoordOffsetY + 8) & 0xff;
+    y = (sprite->y - sprite->centerToCornerVecY + gSpriteCoordOffsetY + 8) & 0xFF;
     y = (16 - (y >> 4)) << 1;
 
     sprite->subpriority = sElevationToSubpriority[elevation] + y + subpriority;

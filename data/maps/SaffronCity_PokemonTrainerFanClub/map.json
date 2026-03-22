@@ -18,7 +18,7 @@
     {
       "local_id": "LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BATTLE_GIRL",
+      "graphics_id": "OBJ_EVENT_GFX_CRUSH_GIRL",
       "x": 7,
       "y": 13,
       "elevation": 3,
@@ -27,7 +27,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirl",
+      "script": "SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirl",
       "flag": "0"
     },
     {
@@ -123,7 +123,7 @@
     {
       "local_id": "LOCALID_TRAINER_FAN_CLUB_BLACK_BELT",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BLACKBELT",
+      "graphics_id": "OBJ_EVENT_GFX_BLACK_BELT",
       "x": 5,
       "y": 11,
       "elevation": 3,
@@ -133,7 +133,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SaffronCity_PokemonTrainerFanClub_EventScript_BlackBelt",
-      "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT"
+      "flag": "FLAG_HIDE_SAFFRON_FAN_CLUB_BLACK_BELT"
     },
     {
       "type": "object",

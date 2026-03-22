@@ -379,15 +379,15 @@ OneIsland_PokemonCenter_1F_EventScript_Hiker::
 	msgbox OneIsland_PokemonCenter_1F_Text_EnormousVolcanoOnIsland, MSGBOX_NPC
 	end
 
-OneIsland_PokemonCenter_1F_EventScript_BattleGirl::
+OneIsland_PokemonCenter_1F_EventScript_CrushGirl::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, OneIsland_PokemonCenter_1F_EventScript_BattleGirlHoennLinked
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, OneIsland_PokemonCenter_1F_EventScript_CrushGirlHoennLinked
 	msgbox OneIsland_PokemonCenter_1F_Text_WishICouldTradeWithBoyfriend
 	release
 	end
 
-OneIsland_PokemonCenter_1F_EventScript_BattleGirlHoennLinked::
+OneIsland_PokemonCenter_1F_EventScript_CrushGirlHoennLinked::
 	msgbox OneIsland_PokemonCenter_1F_Text_TradedWithFarAwayBoyfriend
 	release
 	end

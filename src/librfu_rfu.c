@@ -784,7 +784,7 @@ static void rfu_CB_pollConnectParent(u8 reqCommand, u16 reqResult)
     u16 id;
     u8 slot;
     u8 bm_slot_flag, i;
-#if REVISION >= 0xA
+#if REVISION >= 0xA || defined(UBFIX)
     struct RfuTgtData *target_p = NULL;
 #else
     struct RfuTgtData *target_p;
@@ -1424,7 +1424,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
 {
     u8 bm_slot_id, sendSlotFlag;
     u8 frameSize;
-#if REVISION >= 0xA
+#if REVISION >= 0xA || defined(UBFIX)
     u8 *llFrameSize_p = NULL;
 #else
     u8 *llFrameSize_p;
@@ -1454,7 +1454,11 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
     else if (gRfuLinkStatus->parentChild == MODE_CHILD)
         llFrameSize_p = &gRfuLinkStatus->remainLLFrameSizeChild[bm_slot_id];
     frameSize = llsf_struct[gRfuLinkStatus->parentChild].frameSize;
+#ifdef UBFIX
+    if ((llFrameSize_p && subFrameSize > *llFrameSize_p) || subFrameSize <= frameSize)
+#else
     if (subFrameSize > *llFrameSize_p || subFrameSize <= frameSize)
+#endif
         return ERR_SUBFRAME_SIZE;
     imeBak = REG_IME;
     REG_IME = 0;

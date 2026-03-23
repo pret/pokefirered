@@ -1082,7 +1082,7 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
     bool8 isOpponent;
     s8 nValidMons;
     s16 x, y, x2, speed;
-    s32 i;
+    s32 i, s;
     u8 summaryBarSpriteId;
     u8 ballIconSpritesIds[PARTY_SIZE];
     u8 taskId;
@@ -1204,39 +1204,35 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
     }
     else
     {
+        s = 5;
         for (i = 0; i < PARTY_SIZE; i++)
         {
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
                 if (partyInfo[i].hp == HP_EMPTY_SLOT)
                 {
-                    gSprites[ballIconSpritesIds[5 - i]].oam.tileNum += 1;
-                    gSprites[ballIconSpritesIds[5 - i]].sIsEmptyBall = TRUE;
+                    gSprites[ballIconSpritesIds[s]].oam.tileNum += 1;
+                    gSprites[ballIconSpritesIds[s]].sIsEmptyBall = TRUE;
                 }
                 else if (partyInfo[i].hp == 0)
-                    gSprites[ballIconSpritesIds[5 - i]].oam.tileNum += 3;
+                    gSprites[ballIconSpritesIds[s]].oam.tileNum += 3;
                 else if (partyInfo[i].status != STATUS1_NONE)
-                    gSprites[ballIconSpritesIds[5 - i]].oam.tileNum += 2;
+                    gSprites[ballIconSpritesIds[s]].oam.tileNum += 2;
+                s--;
             }
             else
             {
-                ballIconSpritesIds[5 - i] += 0;
                 if (i >= nValidMons)
                 {
-                    gSprites[ballIconSpritesIds[5 - i]].oam.tileNum += 1;
-                    gSprites[ballIconSpritesIds[5 - i]].sIsEmptyBall = TRUE;
+                    gSprites[ballIconSpritesIds[s]].oam.tileNum += 1;
+                    gSprites[ballIconSpritesIds[s]].sIsEmptyBall = TRUE;
                 }
                 else if (partyInfo[i].hp == 0)
-                    gSprites[ballIconSpritesIds[5 - i]].oam.tileNum += 3;
+                    gSprites[ballIconSpritesIds[s]].oam.tileNum += 3;
                 else if (partyInfo[i].status != STATUS1_NONE)
-                {
-                    do
-                    {
-                        gSprites[ballIconSpritesIds[5 - i]].oam.tileNum += 2;
-                    } while (0);
-                }
+                    gSprites[ballIconSpritesIds[s]].oam.tileNum += 2;
+                s--;
             }
-            ballIconSpritesIds[5 - ++i] += 0; i--;
         }
     }
 

@@ -28,8 +28,10 @@ CeladonCity_Gym_Text_ErikaPostBattle::
     .string "they were unattractive.$"
 
 CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
-    .string "The RAINBOWBADGE will make\n"
-    .string "POKéMON up to Lv. 50 obey.\p"
+    .string "The RAINBOWBADGE raises your\n"
+    .string "training authority by 5.\p"
+    .string "It eases your POKéMON's trust\n"
+    .string "as their levels grow higher.\p"
     .string "It also allows POKéMON to use\n"
     .string "STRENGTH in and out of battle.\p"
     .string "Please also take this with you.$"

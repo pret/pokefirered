@@ -20,12 +20,12 @@ CeruleanCity_House1_Text_AttackStatFlash::
     .string "FLASH outside of battle.$"
 
 CeruleanCity_House1_Text_ObeyLv30Cut::
-    .string "POKéMON up to Lv. 30 will obey\n"
-    .string "you.\p"
-    .string "That includes even outsiders you\n"
-    .string "obtain in trades.\p"
-    .string "POKéMON of higher levels will\n"
-    .string "be unruly in battle, however.\p"
+    .string "It boosts your training authority\n"
+    .string "by 5.\p"
+    .string "Even outsiders from trades become\n"
+    .string "more willing to obey you.\p"
+    .string "High-level POKéMON may still\n"
+    .string "resist without strong TYPE LEVELS.\p"
     .string "It also lets you use the move\n"
     .string "CUT outside of battle.$"
 
@@ -36,12 +36,12 @@ CeruleanCity_House1_Text_SpeedStatFly::
     .string "FLY outside of battle.$"
 
 CeruleanCity_House1_Text_ObeyLv50Strength::
-    .string "POKéMON up to Lv. 50 will obey\n"
-    .string "you.\p"
-    .string "That includes even outsiders you\n"
-    .string "obtain in trades.\p"
-    .string "POKéMON of higher levels will\n"
-    .string "be unruly in battle, however.\p"
+    .string "It boosts your training authority\n"
+    .string "by 5.\p"
+    .string "Even outsiders from trades become\n"
+    .string "more willing to obey you.\p"
+    .string "High-level POKéMON may still\n"
+    .string "resist without strong TYPE LEVELS.\p"
     .string "It also lets you use the move\n"
     .string "STRENGTH outside of battle.$"
 
@@ -52,12 +52,12 @@ CeruleanCity_House1_Text_DefenseStatSurf::
     .string "SURF outside of battle.$"
 
 CeruleanCity_House1_Text_ObeyLv70RockSmash::
-    .string "POKéMON up to Lv. 70 will obey\n"
-    .string "you.\p"
-    .string "That includes even outsiders you\n"
-    .string "obtain in trades.\p"
-    .string "POKéMON of higher levels will\n"
-    .string "be unruly in battle, however.\p"
+    .string "It boosts your training authority\n"
+    .string "by 5.\p"
+    .string "Even outsiders from trades become\n"
+    .string "more willing to obey you.\p"
+    .string "High-level POKéMON may still\n"
+    .string "resist without strong TYPE LEVELS.\p"
     .string "It also lets you use the move\n"
     .string "ROCK SMASH outside of battle.$"
 
@@ -68,5 +68,8 @@ CeruleanCity_House1_Text_SpStatsWaterfall::
     .string "WATERFALL outside of battle.$"
 
 CeruleanCity_House1_Text_AllMonsWillObeyYou::
-    .string "All POKéMON will obey you!$"
+    .string "Your own POKéMON of any level\n"
+    .string "will obey you!\p"
+    .string "Traded POKéMON still depend on\n"
+    .string "your TYPE LEVELS to trust you.$"
 

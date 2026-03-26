@@ -22,12 +22,12 @@ SaffronCity_Gym_Text_SabrinaPostBattle::
     .string "People just don't realize it.$"
 
 SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis::
-    .string "The MARSHBADGE makes POKéMON up\n"
-    .string "to Lv. 70 obey you.\p"
-    .string "Stronger POKéMON will become wild,\n"
-    .string "ignoring your orders in battle.\p"
-    .string "Just don't raise your POKéMON too\n"
-    .string "much to avoid that problem.\p"
+    .string "The MARSHBADGE raises your\n"
+    .string "training authority by 5.\p"
+    .string "Even so, powerful POKéMON\n"
+    .string "demand high TYPE LEVELS.\p"
+    .string "Build your expertise in every\n"
+    .string "type to keep your edge.\p"
     .string "Wait, please take this TM with you.$"
 
 SaffronCity_Gym_Text_ReceivedTM04FromSabrina::

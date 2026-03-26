@@ -576,7 +576,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_FLINCH_HIT,
         .power = 60,
-        .type = TYPE_DARK,
+        .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 25,
         .secondaryEffectChance = 30,
@@ -2188,7 +2188,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_THIEF,
         .power = 40,
-        .type = TYPE_DARK,
+        .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 10,
         .secondaryEffectChance = 100,
@@ -2409,7 +2409,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_ALWAYS_HIT,
         .power = 60,
-        .type = TYPE_DARK,
+        .type = TYPE_GHOST,
         .accuracy = 0,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -2747,7 +2747,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_DEFENSE_UP_HIT,
         .power = 70,
-        .type = TYPE_STEEL,
+        .type = TYPE_FLYING,
         .accuracy = 90,
         .pp = 25,
         .secondaryEffectChance = 10,
@@ -2968,7 +2968,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_PURSUIT,
         .power = 40,
-        .type = TYPE_DARK,
+        .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -3007,7 +3007,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_DEFENSE_DOWN_HIT,
         .power = 100,
-        .type = TYPE_STEEL,
+        .type = TYPE_ROCK,
         .accuracy = 75,
         .pp = 15,
         .secondaryEffectChance = 30,
@@ -3020,7 +3020,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_ATTACK_UP_HIT,
         .power = 50,
-        .type = TYPE_STEEL,
+        .type = TYPE_ROCK,
         .accuracy = 95,
         .pp = 35,
         .secondaryEffectChance = 10,
@@ -3150,7 +3150,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
         .power = 80,
-        .type = TYPE_DARK,
+        .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 15,
         .secondaryEffectChance = 20,
@@ -3267,7 +3267,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_BEAT_UP,
         .power = 10,
-        .type = TYPE_DARK,
+        .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -3371,7 +3371,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_TORMENT,
         .power = 0,
-        .type = TYPE_DARK,
+        .type = TYPE_PSYCHIC,
         .accuracy = 100,
         .pp = 15,
         .secondaryEffectChance = 0,
@@ -3384,7 +3384,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_FLATTER,
         .power = 0,
-        .type = TYPE_DARK,
+        .type = TYPE_PSYCHIC,
         .accuracy = 100,
         .pp = 15,
         .secondaryEffectChance = 0,
@@ -3410,7 +3410,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_MEMENTO,
         .power = 0,
-        .type = TYPE_DARK,
+        .type = TYPE_GHOST,
         .accuracy = 100,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -3501,7 +3501,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_TAUNT,
         .power = 0,
-        .type = TYPE_DARK,
+        .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -3670,7 +3670,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_KNOCK_OFF,
         .power = 20,
-        .type = TYPE_DARK,
+        .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 20,
         .secondaryEffectChance = 100,
@@ -3761,7 +3761,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_SNATCH,
         .power = 0,
-        .type = TYPE_DARK,
+        .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -4021,7 +4021,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_ATTACK_UP_HIT,
         .power = 100,
-        .type = TYPE_STEEL,
+        .type = TYPE_ROCK,
         .accuracy = 85,
         .pp = 10,
         .secondaryEffectChance = 20,
@@ -4073,7 +4073,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_SPECIAL_DEFENSE_DOWN_2,
         .power = 0,
-        .type = TYPE_DARK,
+        .type = TYPE_PSYCHIC,
         .accuracy = 100,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -4151,7 +4151,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_SPECIAL_DEFENSE_DOWN_2,
         .power = 0,
-        .type = TYPE_STEEL,
+        .type = TYPE_ELECTRIC,
         .accuracy = 85,
         .pp = 40,
         .secondaryEffectChance = 0,
@@ -4346,7 +4346,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_DEFENSE_UP_2,
         .power = 0,
-        .type = TYPE_STEEL,
+        .type = TYPE_ROCK,
         .accuracy = 0,
         .pp = 15,
         .secondaryEffectChance = 0,
@@ -4593,7 +4593,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_FUTURE_SIGHT,
         .power = 120,
-        .type = TYPE_STEEL,
+        .type = TYPE_GHOST,
         .accuracy = 85,
         .pp = 5,
         .secondaryEffectChance = 0,

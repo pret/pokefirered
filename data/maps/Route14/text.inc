@@ -32,8 +32,9 @@ Route14_Text_BeckDefeat::
 Route14_Text_BeckPostBattle::
     .string "Try teaching POKéMON a move that's\n"
     .string "the same type as it.\p"
-    .string "That apparently boosts the power\n"
-    .string "of the move.$"
+    .string "That boosts the power of the move.\p"
+    .string "Your TYPE LEVELS in that type\n"
+    .string "also improve accuracy and crits!$"
 
 Route14_Text_MarlonIntro::
     .string "Have you taught your bird POKéMON\n"

@@ -127,4 +127,6 @@ Pokedude_Text_PickBestKindOfBall::
 	.string "Before you throw a POKé BALL,\n"
 	.string "consider the condition and the\l"
 	.string "type of POKéMON, and pick the kind\l"
-	.string "of BALL that would work best.$"
+	.string "of BALL that would work best.\p"
+	.string "Also, high TYPE LEVELS in that\n"
+	.string "type boost your catch rate, too!$"

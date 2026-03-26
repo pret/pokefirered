@@ -23,5 +23,7 @@ CeruleanCity_PokemonCenter_1F_Text_TryTradingUpstairs::
     .string "You could get a lot more variety\n"
     .string "by trading.\p"
     .string "The POKéMON you get in trades grow\n"
-    .string "quickly, too.$"
+    .string "quickly, too.\p"
+    .string "But high-level traded POKéMON\n"
+    .string "need strong TYPE LEVELS to obey.$"
 

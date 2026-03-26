@@ -9,6 +9,8 @@ PewterCity_House2_Text_MonsEasierCatchIfStatused::
     .string "catch if it has a status problem.\p"
     .string "Sleep, poison, burn, or paralysis…\n"
     .string "Those are all effective.\p"
+    .string "Trainers with higher TYPE LEVELS\n"
+    .string "in a type also catch it better!\p"
     .string "But catching POKéMON is never\n"
     .string "a sure thing!$"
 

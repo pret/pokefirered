@@ -128,7 +128,11 @@ CeruleanCity_Text_HardToControlMonsObedience::
     .string "No! That's wrong!\n"
     .string "It's so hard to control POKéMON!\p"
     .string "Your POKéMON's obedience depends\n"
-    .string "on your abilities as a TRAINER.$"
+    .string "on your abilities as a TRAINER.\p"
+    .string "Your TYPE LEVELS measure your\n"
+    .string "bond with each POKéMON type.\p"
+    .string "Check them in your START MENU\n"
+    .string "to see how you are doing!$"
 
 CeruleanCity_Text_SlowbroTookSnooze::
     .string "SLOWBRO took a snooze…$"

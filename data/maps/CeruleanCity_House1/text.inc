@@ -3,7 +3,10 @@ CeruleanCity_House1_Text_BadgesHaveAmazingSecrets::
     .string "POKéMON BADGES.\p"
     .string "I see you have at least one.\p"
     .string "Those BADGES have amazing secrets,\n"
-    .string "did you know?$"
+    .string "did you know?\p"
+    .string "But BADGES alone are not enough.\p"
+    .string "Your TYPE LEVELS also shape how\n"
+    .string "well your POKéMON trust you.$"
 
 CeruleanCity_House1_Text_DescribeWhichBadge::
     .string "Now then…\p"

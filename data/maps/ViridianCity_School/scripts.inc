@@ -36,6 +36,9 @@ ViridianCity_School_EventScript_Notebook::
 	msgbox ViridianCity_School_Text_TurnThePage, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, ViridianCity_School_EventScript_StopReadingNotebook
 	msgbox ViridianCity_School_Text_NotebookFourthPage
+	msgbox ViridianCity_School_Text_TurnThePage, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, ViridianCity_School_EventScript_StopReadingNotebook
+	msgbox ViridianCity_School_Text_NotebookFifthPage
 	applymovement LOCALID_LASS, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	textcolor NPC_TEXT_COLOR_FEMALE

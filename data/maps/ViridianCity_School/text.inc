@@ -46,6 +46,17 @@ ViridianCity_School_Text_NotebookFourthPage::
 ViridianCity_School_Text_TurnThePage::
     .string "Turn the page?$"
 
+ViridianCity_School_Text_NotebookFifthPage::
+    .string "Fifth page…\p"
+    .string "As you battle and catch POKéMON,\n"
+    .string "you earn TYPE LEVELS.\p"
+    .string "Higher TYPE LEVELS mean POKéMON\n"
+    .string "of that type trust you more.\p"
+    .string "Catch rates also improve with\n"
+    .string "your TYPE LEVELS for that type.\p"
+    .string "Check your START MENU to see\n"
+    .string "your TYPE LEVELS anytime!$"
+
 ViridianCity_School_Text_HeyDontLookAtMyNotes::
     .string "GIRL: Hey!\n"
     .string "Don't look at my notes!$"

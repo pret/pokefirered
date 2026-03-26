@@ -1,3 +1,12 @@
+.set LOCALID_BATTLE_GIRL, 1
+.set LOCALID_LITTLE_GIRL, 2
+.set LOCALID_YOUNGSTER,   3
+.set LOCALID_GENTLEMAN,   4
+.set LOCALID_WOMAN,       5
+.set LOCALID_ROCKER,      6
+.set LOCALID_BEAUTY,      7
+.set LOCALID_BLACK_BELT,  8
+
 SaffronCity_PokemonTrainerFanClub_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SaffronCity_PokemonTrainerFanClub_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_PokemonTrainerFanClub_OnTransition
@@ -10,18 +19,18 @@ SaffronCity_PokemonTrainerFanClub_OnFrame::
 SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans::
 	lockall
 	textcolor NPC_TEXT_COLOR_FEMALE
-	applymovement LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_BATTLE_GIRL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playse SE_PIN
-	applymovement LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, Common_Movement_ExclamationMark
+	applymovement LOCALID_BATTLE_GIRL, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, Common_Movement_Delay48
+	applymovement LOCALID_BATTLE_GIRL, Common_Movement_Delay48
 	waitmovement 0
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_HuhYou
 	closemessage
-	applymovement LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer
+	applymovement LOCALID_BATTLE_GIRL, SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer
 	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_YourePlayerWereYourFansNow
 	setvar VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
@@ -108,43 +117,43 @@ SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions::
 	end
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, 5, 2
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_BATTLE_GIRL, 5, 2
+	setobjectmovementtype LOCALID_BATTLE_GIRL, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_YOUNGSTER, 7, 4
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_YOUNGSTER, MOVEMENT_TYPE_FACE_LEFT
+	setobjectxyperm LOCALID_YOUNGSTER, 7, 4
+	setobjectmovementtype LOCALID_YOUNGSTER, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_GENTLEMAN, 2, 2
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_GENTLEMAN, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_GENTLEMAN, 2, 2
+	setobjectmovementtype LOCALID_GENTLEMAN, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL, 3, 4
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_LITTLE_GIRL, 3, 4
+	setobjectmovementtype LOCALID_LITTLE_GIRL, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_ROCKER, 4, 6
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_ROCKER, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_ROCKER, 4, 6
+	setobjectmovementtype LOCALID_ROCKER, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_WOMAN, 10, 3
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_WOMAN, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_WOMAN, 10, 3
+	setobjectmovementtype LOCALID_WOMAN, MOVEMENT_TYPE_FACE_UP
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_BEAUTY, 7, 5
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_BEAUTY, MOVEMENT_TYPE_FACE_LEFT
+	setobjectxyperm LOCALID_BEAUTY, 7, 5
+	setobjectmovementtype LOCALID_BEAUTY, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_BLACK_BELT, 9, 6
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_BLACK_BELT, MOVEMENT_TYPE_FACE_LEFT
+	setobjectxyperm LOCALID_BLACK_BELT, 9, 6
+	setobjectmovementtype LOCALID_BLACK_BELT, MOVEMENT_TYPE_FACE_LEFT
 	return
 
 SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting::
@@ -155,38 +164,38 @@ SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting::
 	call SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirl::
+SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirl::
 	lock
 	faceplayer
 	setvar VAR_0x8004, FANCLUB_MEMBER1
 	special Script_BufferFanClubTrainerName
-	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0, SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlPlayerNotChampion
+	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0, SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayerNotChampion
 	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlPlayersFan
+	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlOnlyNonFan
+	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyNonFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_WasYourFanNotAnymore
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlPlayersFan::
+SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayersFan::
 	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlOnlyFan
+	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlOnlyFan::
+SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_IllAlwaysBelieveInYou
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlOnlyNonFan::
+SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlOnlyNonFan::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_EveryonesYourFanButICantBe
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlPlayerNotChampion::
+SaffronCity_PokemonTrainerFanClub_EventScript_BattleGirlPlayerNotChampion::
 	msgbox SaffronCity_PokemonTrainerFanClub_Text_TrainersCoolWhenBattling
 	release
 	end

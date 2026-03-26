@@ -164,6 +164,7 @@ const u8 gText_MenuSave[] = _("SAVE");
 const u8 gText_MenuOption[] = _("OPTION");
 const u8 gText_MenuExit[] = _("EXIT");
 const u8 gText_MenuRetire[] = _("RETIRE");
+const u8 gText_MenuTrainerTypeLevels[] = _("TYPE LEVELS");
 const u8 gText_MenuSafariStats[] = _("{STR_VAR_1}/{STR_VAR_2}\nBALLS  {STR_VAR_3}");
 const u8 gText_TimesStrVar1[] = _("×{STR_VAR_1}");
 const u8 gText_Berry[] = _(" BERRY");
@@ -371,6 +372,7 @@ const u8 gText_CancelBattle[] = _("Cancel the battle?");
 const u8 gText_TurnOff[] = _("TURN OFF");
 const u8 gText_Decoration[] = _("もようがえ");
 const u8 gText_ItemStorage[] = _("ITEM STORAGE");
+const u8 gText_RetrainPkmn[] = _("RETRAIN PKMN");
 const u8 gText_Mailbox[] = _("MAILBOX");
 const u8 gText_DepositItem2[] = _("DEPOSIT ITEM");
 const u8 gText_WithdrawItem2[] = _("WITHDRAW ITEM");
@@ -501,6 +503,8 @@ const u8 gText_NoThanks_2[] = _("NO THANKS");
 const u8 gText_HelixFossil[] = _("HELIX FOSSIL");
 const u8 gText_DomeFossil[] = _("DOME FOSSIL");
 const u8 gText_OldAmber[] = _("OLD AMBER");
+const u8 gText_RootFossil[] = _("ROOT FOSSIL");
+const u8 gText_ClawFossil[] = _("CLAW FOSSIL");
 const u8 gText_TradeCenter[] = _("TRADE CENTER");
 const u8 gText_Colosseum[] = _("COLOSSEUM");
 const u8 gText_GameLinkCable[] = _("Game Link cable");
@@ -904,6 +908,38 @@ const u8 gStartMenuDesc_Save[] = _("Save your game with a complete record\nof yo
 const u8 gStartMenuDesc_Option[] = _("Adjust various game settings such as text\nspeed, game rules, etc.");
 const u8 gStartMenuDesc_Exit[] = _("Close this MENU window.");
 const u8 gStartMenuDesc_Retire[] = _("Retire from the SAFARI GAME and return to\nthe registration counter.");
+const u8 gStartMenuDesc_TrainerTypeLevels[] = _("Check your trainer experience levels\nfor each POKéMON type.");
+
+const u8 gText_TTL_Page[] = _("Page");
+const u8 gText_TTL_Level[] = _("L");
+const u8 gText_PressAToChange[] = _("Press A/L/R to change pages");
+const u8 gText_PressB[] = _("Press B to close");
+const u8 gText_TTLSummaryHeader[] = _("Trainer Type XP");
+const u8 gText_TTLSummaryExp[] = _("{STR_VAR_1} +{STR_VAR_2}XP");
+const u8 gText_TTLSummaryLevelUp[] = _("{STR_VAR_1} +{STR_VAR_2}XP Lv+{STR_VAR_3}");
+
+// Trainer type names (for trainer level screen)
+// Indexed by type ID from constants/pokemon.h
+const u8 gTrainerTypeNames[][9] = {
+    _("NORMAL"),    // TYPE_NORMAL (0)
+    _("FIGHTING"),  // TYPE_FIGHTING (1)
+    _("FLYING"),    // TYPE_FLYING (2)
+    _("POISON"),    // TYPE_POISON (3)
+    _("GROUND"),    // TYPE_GROUND (4)
+    _("ROCK"),      // TYPE_ROCK (5)
+    _("BUG"),       // TYPE_BUG (6)
+    _("GHOST"),     // TYPE_GHOST (7)
+    _("STEEL"),     // TYPE_STEEL (8)
+    _("???"),       // TYPE_MYSTERY (9)
+    _("FIRE"),      // TYPE_FIRE (10)
+    _("WATER"),     // TYPE_WATER (11)
+    _("GRASS"),     // TYPE_GRASS (12)
+    _("ELECTRIC"),  // TYPE_ELECTRIC (13)
+    _("PSYCHIC"),   // TYPE_PSYCHIC (14)
+    _("ICE"),       // TYPE_ICE (15)
+    _("DRAGON"),    // TYPE_DRAGON (16)
+    _("DARK"),      // TYPE_DARK (17)
+};
 
 #include "data/text/quest_log.h"
 

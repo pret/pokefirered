@@ -50,24 +50,27 @@ ViridianCity_Text_ShowYouHowToCatchMons::
     .string "POKéDEX.\p"
     .string "Then let me give you a word of\n"
     .string "advice.\p"
-    .string "Whenever you catch a POKéMON,\n"
-    .string "the POKéDEX automatically updates\l"
-    .string "its data.\p"
-    .string "…You don't know how to catch\n"
-    .string "a POKéMON?\p"
+    .string "See the water nearby? You can find\n"
+    .string "POKéMON living in rivers and ponds\l"
+    .string "by using a fishing rod!\p"
+    .string "…You don't have a fishing rod?\p"
     .string "I suppose I had better show you\n"
-    .string "then!$"
+    .string "how it's done then!$"
 
 ViridianCity_Text_ThatWasEducationalTakeThis::
     .string "There! Now tell me, that was\n"
     .string "educational, was it not?\p"
-    .string "And here, take this, too.$"
+    .string "Here, take my OLD ROD so you can\n"
+    .string "try fishing whenever you see water.$"
 
 ViridianCity_Text_WatchThatToLearnBasics::
     .string "If there's something you don't\n"
     .string "understand, watch that.\p"
     .string "It will teach you about the basics\n"
     .string "of being a POKéMON TRAINER.$"
+
+ViridianCity_Text_AndTakeThisToo::
+    .string "And here, take this, too.$"
 
 ViridianCity_Text_WeakenMonsFirstToCatch::
     .string "Well, now, I've had my coffee, and\n"
@@ -76,8 +79,8 @@ ViridianCity_Text_WeakenMonsFirstToCatch::
     .string "It gave me a headache…\p"
     .string "Incidentally, are you filling your\n"
     .string "POKéDEX?\p"
-    .string "At first, focus on weakening the\n"
-    .string "POKéMON before trying to catch it.$"
+    .string "Don't forget to use that OLD ROD\n"
+    .string "near any water you find!$"
 
 ViridianCity_Text_HowsTeachyTVHelping::
     .string "Well, now, I've had my coffee, and\n"

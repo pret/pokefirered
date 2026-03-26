@@ -4,7 +4,6 @@
 	.include "src/malloc.o"
 	.include "src/text_printer.o"
 	.include "src/sprite.o"
-	.include "src/sloopsvc.o"
 	.include "src/link.o"
 	.include "src/multiboot.o"
 	.include "src/daycare.o"

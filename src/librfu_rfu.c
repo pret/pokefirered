@@ -1,6 +1,5 @@
 #include <limits.h>
 #include "librfu.h"
-#include "sloopsvc.h"
 
 struct LLSFStruct
 {
@@ -382,9 +381,6 @@ void rfu_REQ_stopMode(void)
             REG_SIOCNT = SIO_MULTI_MODE;
             rfu_STC_REQ_callback(ID_STOP_MODE_REQ, 0);
         }
-#if REVISION >= 0xA
-        svc_44();
-#endif
     }
 }
 
@@ -465,9 +461,6 @@ void rfu_REQ_configGameData(u8 mbootFlag, u16 serialNo, const u8 *gname, const u
         packet[14] = 0;
     STWI_set_Callback_M(rfu_CB_configGameData);
     STWI_send_GameConfigREQ(packet, uname);
-#if REVISION >= 0xA
-    svc_47();
-#endif
 }
 
 static void rfu_CB_configGameData(u8 reqCommand, u16 reqResult)
@@ -526,9 +519,6 @@ void rfu_REQ_startSearchChild(void)
     }
     STWI_set_Callback_M(rfu_CB_startSearchChild);
     STWI_send_SC_StartREQ();
-#if REVISION >= 0xA
-    svc_42();
-#endif
 }
 
 static void rfu_CB_startSearchChild(u8 reqCommand, u16 reqResult)
@@ -640,11 +630,7 @@ static void rfu_STC_readChildList(void)
                 gRfuStatic->cidBak[bm_slot_id] = gRfuLinkStatus->partner[bm_slot_id].id;
             }
         #else
-#if REVISION >= 0xA
-            gRfuStatic->lsFixedCount[bm_slot_id] = 0x3C;
-#else
             gRfuStatic->lsFixedCount[bm_slot_id] = 0xF0;
-#endif
             gRfuLinkStatus->strength[bm_slot_id] = 16;
             gRfuLinkStatus->connSlotFlag |= 1 << bm_slot_id;
             ++gRfuLinkStatus->connCount;
@@ -663,9 +649,6 @@ void rfu_REQ_startSearchParent(void)
 {
     STWI_set_Callback_M(rfu_CB_startSearchParent);
     STWI_send_SP_StartREQ();
-#if REVISION >= 0xA
-    svc_45_rfu_link_status();
-#endif
 }
 
 static void rfu_CB_startSearchParent(u8 reqCommand, u16 reqResult)
@@ -720,13 +703,8 @@ static void rfu_STC_readParentCandidateList(void)
         }
         if (my_check_sum == check_sum)
         {
-#if REVISION >= 0xA
-            target = &gRfuLinkStatus->partner[gRfuLinkStatus->findParentCount];
-            packet_p -= 28;
-#else
             packet_p -= 28;
             target = &gRfuLinkStatus->partner[gRfuLinkStatus->findParentCount];
-#endif
             target->id = *(u16 *)packet_p;
             packet_p += 2;
             target->slot = *packet_p;
@@ -745,9 +723,6 @@ static void rfu_STC_readParentCandidateList(void)
             ++gRfuLinkStatus->findParentCount;
         }
     }
-#if REVISION >= 0xA
-    svc_45_rfu_link_status();
-#endif
 }
 
 void rfu_REQ_startConnectParent(u16 pid)
@@ -763,9 +738,6 @@ void rfu_REQ_startConnectParent(u16 pid)
         gRfuStatic->tryPid = pid;
         STWI_set_Callback_M(rfu_STC_REQ_callback);
         STWI_send_CP_StartREQ(pid);
-#if REVISION >= 0xA
-        svc_43(pid);
-#endif
     }
     else
     {
@@ -784,11 +756,7 @@ static void rfu_CB_pollConnectParent(u8 reqCommand, u16 reqResult)
     u16 id;
     u8 slot;
     u8 bm_slot_flag, i;
-#if REVISION >= 0xA || defined(UBFIX)
-    struct RfuTgtData *target_p = NULL;
-#else
     struct RfuTgtData *target_p;
-#endif
     struct RfuTgtData target_local;
 
     if (reqResult == 0)
@@ -1424,11 +1392,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
 {
     u8 bm_slot_id, sendSlotFlag;
     u8 frameSize;
-#if REVISION >= 0xA || defined(UBFIX)
-    u8 *llFrameSize_p = NULL;
-#else
     u8 *llFrameSize_p;
-#endif
     u8 sending;
     u8 i;
     u16 imeBak;
@@ -1454,11 +1418,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
     else if (gRfuLinkStatus->parentChild == MODE_CHILD)
         llFrameSize_p = &gRfuLinkStatus->remainLLFrameSizeChild[bm_slot_id];
     frameSize = llsf_struct[gRfuLinkStatus->parentChild].frameSize;
-#ifdef UBFIX
-    if ((llFrameSize_p && subFrameSize > *llFrameSize_p) || subFrameSize <= frameSize)
-#else
     if (subFrameSize > *llFrameSize_p || subFrameSize <= frameSize)
-#endif
         return ERR_SUBFRAME_SIZE;
     imeBak = REG_IME;
     REG_IME = 0;

@@ -20,6 +20,10 @@
 #include "field_specials.h"
 #include "event_object_lock.h"
 #include "start_menu.h"
+#include "new_menu_helpers.h"
+#include "string_util.h"
+#include "trainer_xp_system.h"
+#include "strings.h"
 #include "constants/songs.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
@@ -40,6 +44,17 @@ static void UpdateStairsMovement(s16 speedX, s16 speedY, s16 *offsetX, s16 *offs
 static void Task_ExitStairs(u8 taskId);
 static void ExitStairsMovement(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer);
 static bool8 WaitStairExitMovementFinished(s16 *speedX, s16 *speedY, s16 *offsetX, s16 *offsetY, s16 *timer);
+static bool8 BuildTrainerTypeSummaryMessage(u8 *dest);
+static bool8 TryShowTrainerTypeSummaryMessage(u8 taskId, u8 mode);
+static void Task_TrainerTypeSummary_WaitForDismiss(u8 taskId);
+static void Task_ContinueScriptWithTrainerTypeSummary(u8 taskId);
+static void Task_SafariZoneWithTrainerTypeSummary(u8 taskId);
+
+static const u8 sText_TTLSummaryNewLine[] = _("\n");
+static const u8 sText_TTLSummaryPageBreak[] = _("\p");
+
+#define TTL_SUMMARY_MODE_CONTINUE_SCRIPT 0
+#define TTL_SUMMARY_MODE_RESUME_FIELD    1
 
 void palette_bg_faded_fill_white(void)
 {
@@ -152,19 +167,109 @@ static void Task_ContinueScript(u8 taskId)
     }
 }
 
+static bool8 BuildTrainerTypeSummaryMessage(u8 *dest)
+{
+    u8 typeId;
+    u16 expGained;
+    u8 levelsGained;
+    bool8 hasEntries;
+    bool8 isFirstEntry;
+    u8 lineBuffer[64];
+
+    StringCopy(dest, gText_TTLSummaryHeader);
+    hasEntries = FALSE;
+    isFirstEntry = TRUE;
+
+    while (TrainerTypeBattleSummary_GetNext(&typeId, &expGained, &levelsGained))
+    {
+        // Use page breaks so every gained type is visible and can be advanced with A.
+        if (isFirstEntry)
+            StringAppend(dest, sText_TTLSummaryNewLine);
+        else
+            StringAppend(dest, sText_TTLSummaryPageBreak);
+
+        StringCopy(gStringVar1, gTrainerTypeNames[typeId]);
+        ConvertIntToDecimalStringN(gStringVar2, expGained, STR_CONV_MODE_LEFT_ALIGN, 5);
+        if (levelsGained > 0)
+        {
+            ConvertIntToDecimalStringN(gStringVar3, levelsGained, STR_CONV_MODE_LEFT_ALIGN, 2);
+            StringExpandPlaceholders(lineBuffer, gText_TTLSummaryLevelUp);
+        }
+        else
+        {
+            StringExpandPlaceholders(lineBuffer, gText_TTLSummaryExp);
+        }
+
+        StringAppend(dest, lineBuffer);
+        hasEntries = TRUE;
+        isFirstEntry = FALSE;
+    }
+
+    return hasEntries;
+}
+
+static bool8 TryShowTrainerTypeSummaryMessage(u8 taskId, u8 mode)
+{
+    if (!BuildTrainerTypeSummaryMessage(gStringVar4))
+        return FALSE;
+
+    gTasks[taskId].data[0] = mode;
+    DisplayItemMessageOnField(taskId, FONT_NORMAL, gStringVar4, Task_TrainerTypeSummary_WaitForDismiss);
+
+    return TRUE;
+}
+
+static void Task_TrainerTypeSummary_WaitForDismiss(u8 taskId)
+{
+    if (!JOY_NEW(A_BUTTON) && !JOY_NEW(B_BUTTON))
+        return;
+
+    ClearDialogWindowAndFrame(0, TRUE);
+
+    if (gTasks[taskId].data[0] == TTL_SUMMARY_MODE_CONTINUE_SCRIPT)
+    {
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+    }
+    else
+    {
+        UnlockPlayerFieldControls();
+        DestroyTask(taskId);
+        ClearPlayerHeldMovementAndUnfreezeObjectEvents();
+    }
+}
+
+static void Task_ContinueScriptWithTrainerTypeSummary(u8 taskId)
+{
+    if (FieldFadeTransitionBackgroundEffectIsFinished() != TRUE)
+        return;
+
+    if (!TryShowTrainerTypeSummaryMessage(taskId, TTL_SUMMARY_MODE_CONTINUE_SCRIPT))
+    {
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+    }
+}
+
 void FieldCB_ContinueScriptHandleMusic(void)
 {
     LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     FadeInFromBlack();
-    CreateTask(Task_ContinueScript, 10);
+    if (TrainerTypeBattleSummary_HasPending())
+        CreateTask(Task_ContinueScriptWithTrainerTypeSummary, 10);
+    else
+        CreateTask(Task_ContinueScript, 10);
 }
 
 void FieldCB_ContinueScript(void)
 {
     LockPlayerFieldControls();
     FadeInFromBlack();
-    CreateTask(Task_ContinueScript, 10);
+    if (TrainerTypeBattleSummary_HasPending())
+        CreateTask(Task_ContinueScriptWithTrainerTypeSummary, 10);
+    else
+        CreateTask(Task_ContinueScript, 10);
 }
 
 static void Task_ReturnToFieldCableLink(u8 taskId)
@@ -207,9 +312,6 @@ static void Task_ReturnToFieldRecordMixing(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-#if REVISION >= 0xA
-        if (!IsLinkTaskFinished()) break;
-#endif
         SetLinkStandbyCallback();
         task->data[0]++;
         break;
@@ -354,7 +456,7 @@ static void Task_ExitDoor(u8 taskId)
         {
             PlayerGetDestCoords(&task->data[12], &task->data[13]);
             SetPlayerVisibility(TRUE);
-            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->data[0] = 8;
         }
         break;
@@ -369,7 +471,7 @@ static void Task_ExitDoor(u8 taskId)
     case 9:
         if (FieldFadeTransitionBackgroundEffectIsFinished() && walkrun_is_standing_still() && !FieldIsDoorAnimationRunning() && !FuncIsActiveTask(Task_BarnDoorWipe))
         {
-            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]);
+            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)]);
             task->data[0] = 4;
         }
         break;
@@ -378,7 +480,7 @@ static void Task_ExitDoor(u8 taskId)
         if (FieldFadeTransitionBackgroundEffectIsFinished())
         {
             SetPlayerVisibility(TRUE);
-            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_DOWN);
             task->data[0] = 2;
         }
         break;
@@ -386,7 +488,7 @@ static void Task_ExitDoor(u8 taskId)
         if (walkrun_is_standing_still())
         {
             task->data[1] = FieldAnimateDoorClose(*x, *y);
-            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]);
+            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)]);
             task->data[0] = 3;
         }
         break;
@@ -420,7 +522,7 @@ static void Task_ExitNonAnimDoor(u8 taskId)
         if (FieldFadeTransitionBackgroundEffectIsFinished())
         {
             SetPlayerVisibility(TRUE);
-            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)], GetWalkNormalMovementAction(GetPlayerFacingDirection()));
             task->data[0] = 2;
         }
         break;
@@ -511,12 +613,28 @@ static void Task_SafariZoneRanOutOfBalls(u8 taskId)
     }
 }
 
+static void Task_SafariZoneWithTrainerTypeSummary(u8 taskId)
+{
+    if (FieldFadeTransitionBackgroundEffectIsFinished() != TRUE)
+        return;
+
+    if (!TryShowTrainerTypeSummaryMessage(taskId, TTL_SUMMARY_MODE_RESUME_FIELD))
+    {
+        UnlockPlayerFieldControls();
+        DestroyTask(taskId);
+        ClearPlayerHeldMovementAndUnfreezeObjectEvents();
+    }
+}
+
 void FieldCB_SafariZoneRanOutOfBalls(void)
 {
     LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
     FadeInFromBlack();
-    CreateTask(Task_SafariZoneRanOutOfBalls, 10);
+    if (TrainerTypeBattleSummary_HasPending())
+        CreateTask(Task_SafariZoneWithTrainerTypeSummary, 10);
+    else
+        CreateTask(Task_SafariZoneRanOutOfBalls, 10);
 }
 
 static bool32 WaitWarpFadeOutScreen(void)
@@ -757,8 +875,8 @@ static void Task_DoorWarp(u8 taskId)
     case 1:
         if (task->data[1] < 0 || gTasks[task->data[1]].isActive != TRUE)
         {
-            ObjectEventClearHeldMovementIfActive(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]);
-            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_UP);
+            ObjectEventClearHeldMovementIfActive(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)]);
+            ObjectEventSetHeldMovement(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)], MOVEMENT_ACTION_WALK_NORMAL_UP);
             task->data[0] = 2;
         }
         break;
@@ -766,7 +884,7 @@ static void Task_DoorWarp(u8 taskId)
         if (walkrun_is_standing_still())
         {
             task->data[1] = FieldAnimateDoorClose(*xp, *yp - 1);
-            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0)]);
+            ObjectEventClearHeldMovementIfFinished(&gObjectEvents[GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0)]);
             SetPlayerVisibility(FALSE);
             task->data[0] = 3;
         }

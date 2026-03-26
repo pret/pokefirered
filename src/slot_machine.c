@@ -15,6 +15,7 @@
 
 #define NUM_REELS 3
 #define REEL_LENGTH 21 // Total number of icons per reel
+#define ALL_SEVENS_MACHINE_IDX 5 // machine index that shows only 7s on all reels
 
 // Only 4 icons are actually visible per reel at a single
 // time, with 1 on deck. Only 3 visible when not spinning.
@@ -385,6 +386,28 @@ static const u8 sReelIconAnimByReelAndPos[NUM_REELS][REEL_LENGTH] = {
     },
 };
 
+static u8 GetReelIconAnim(s32 reel, s32 pos)
+{
+    s32 p = pos;
+
+    if (sSlotMachineState != NULL && sSlotMachineState->machineIdx == ALL_SEVENS_MACHINE_IDX)
+        return ICON_7;
+
+    if (p < 0)
+    {
+        /* wrap negative positions */
+        p %= REEL_LENGTH;
+        if (p < 0)
+            p += REEL_LENGTH;
+    }
+    else if (p >= REEL_LENGTH)
+    {
+        p %= REEL_LENGTH;
+    }
+
+    return sReelIconAnimByReelAndPos[reel][p];
+}
+
 static const u16 sPayoutTable[] = {
     [PAYOUT_NONE]      =   0,
     [PAYOUT_CHERRIES2] =   2,
@@ -395,7 +418,7 @@ static const u16 sPayoutTable[] = {
     [PAYOUT_7]         = 300
 };
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 static const u16 sReelIcons_Pal[][16] = INCBIN_U16("graphics/slot_machine/firered/reel_icons.gbapal");
 static const u32 sReelIcons_Tiles[]   = INCBIN_U32("graphics/slot_machine/firered/reel_icons.4bpp.lz");
 static const u16 sClefairy_Pal[]      = INCBIN_U16("graphics/slot_machine/firered/clefairy.gbapal");
@@ -427,7 +450,7 @@ static const struct SpritePalette sSpritePalettes[] = {
 };
 
 static const u16 sReelIconPaletteTags[] = {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     [ICON_7]         = PALTAG_REEL_ICONS_2,
     [ICON_ROCKET]    = PALTAG_REEL_ICONS_2,
     [ICON_PIKACHU]   = PALTAG_REEL_ICONS_0,
@@ -735,7 +758,7 @@ bool8 (*const sSlotMachineSetupTasks[])(u8 *, struct SlotMachineSetupTaskData *)
     [SLOTTASK_HIDEHELP] = SlotsTask_HideHelp
 };
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 static const u16 sBg_Pal[][16]             = INCBIN_U16("graphics/slot_machine/firered/bg.gbapal");
 static const u32 sBg_Tiles[]               = INCBIN_U32("graphics/slot_machine/firered/bg.4bpp.lz");
 static const u32 sBg_Tilemap[]             = INCBIN_U32("graphics/slot_machine/firered/bg.bin.lz");
@@ -1358,7 +1381,7 @@ static void StopReel1(u16 whichReel)
             {
                 if (destPos >= REEL_LENGTH)
                     destPos = 0;
-                if (TestReelIconAttribute(1, sReelIconAnimByReelAndPos[whichReel][destPos]))
+                if (TestReelIconAttribute(1, GetReelIconAnim(whichReel, destPos)))
                     break;
             }
             if (j == 3)
@@ -1374,7 +1397,7 @@ static void StopReel1(u16 whichReel)
         {
             if (destPos >= REEL_LENGTH)
                 destPos = 0;
-            if (TestReelIconAttribute(sSlotMachineState->machineBias, sReelIconAnimByReelAndPos[whichReel][destPos]))
+            if (TestReelIconAttribute(sSlotMachineState->machineBias, GetReelIconAnim(whichReel, destPos)))
             {
                 posToSample[0] = 0;
                 numPosToSample = 1;
@@ -1385,7 +1408,7 @@ static void StopReel1(u16 whichReel)
         {
             if (destPos < 0)
                 destPos = REEL_LENGTH - 1;
-            if (TestReelIconAttribute(sSlotMachineState->machineBias, sReelIconAnimByReelAndPos[whichReel][destPos]))
+            if (TestReelIconAttribute(sSlotMachineState->machineBias, GetReelIconAnim(whichReel, destPos)))
             {
                 posToSample[numPosToSample] = i + 1;
                 numPosToSample++;
@@ -1475,7 +1498,7 @@ static void StopReel3(u16 whichReel)
         }
         testPos--;
         if (testPos < 0)
-            testPos = 20;
+            testPos = REEL_LENGTH - 1;
     }
     if (numPossiblePositions == 0)
     {
@@ -1502,8 +1525,8 @@ static bool32 TwoReelBiasCheck(s32 reel0id, s32 reel0pos, s32 reel1id, s32 reel1
 
     for (i = 0; i < 3; i++)
     {
-        icons[3 * reel0id + i] = sReelIconAnimByReelAndPos[reel0id][reel0pos];
-        icons[3 * reel1id + i] = sReelIconAnimByReelAndPos[reel1id][reel1pos];
+        icons[3 * reel0id + i] = GetReelIconAnim(reel0id, reel0pos);
+        icons[3 * reel1id + i] = GetReelIconAnim(reel1id, reel1pos);
         reel0pos++;
         if (reel0pos >= REEL_LENGTH)
             reel0pos = 0;
@@ -1583,9 +1606,9 @@ static bool32 OneReelBiasCheck(s32 reelId, s32 reelPos, s32 biasIcon)
         reelPos = 0;
     for (i = 0; i < 3; i++)
     {
-        icons[sSlotMachineState->reelStopOrder[0] * 3 + i] = sReelIconAnimByReelAndPos[sSlotMachineState->reelStopOrder[0]][firstStoppedPos];
-        icons[sSlotMachineState->reelStopOrder[1] * 3 + i] = sReelIconAnimByReelAndPos[sSlotMachineState->reelStopOrder[1]][secondStoppedPos];
-        icons[reelId * 3 + i] = sReelIconAnimByReelAndPos[reelId][reelPos];
+        icons[sSlotMachineState->reelStopOrder[0] * 3 + i] = GetReelIconAnim(sSlotMachineState->reelStopOrder[0], firstStoppedPos);
+        icons[sSlotMachineState->reelStopOrder[1] * 3 + i] = GetReelIconAnim(sSlotMachineState->reelStopOrder[1], secondStoppedPos);
+        icons[reelId * 3 + i] = GetReelIconAnim(reelId, reelPos);
         if (++firstStoppedPos >= REEL_LENGTH)
             firstStoppedPos = 0;
         if (++secondStoppedPos >= REEL_LENGTH)
@@ -1735,9 +1758,9 @@ static u16 CalcPayout(void)
         reel3pos++;
         if (reel3pos >= REEL_LENGTH)
             reel3pos = 0;
-        visibleIcons[0 * 3 + i] = sReelIconAnimByReelAndPos[0][reel1pos];
-        visibleIcons[1 * 3 + i] = sReelIconAnimByReelAndPos[1][reel2pos];
-        visibleIcons[2 * 3 + i] = sReelIconAnimByReelAndPos[2][reel3pos];
+        visibleIcons[0 * 3 + i] = GetReelIconAnim(0, reel1pos);
+        visibleIcons[1 * 3 + i] = GetReelIconAnim(1, reel2pos);
+        visibleIcons[2 * 3 + i] = GetReelIconAnim(2, reel3pos);
     }
     sSlotMachineState->payout = 0;
     for (i = 0; i < NUM_MATCH_LINES; i++)
@@ -1824,7 +1847,7 @@ static void CreateReelIconSprites(void)
         for (j = 0; j < REEL_LOAD_LENGTH; j++)
         {
             spriteId = CreateSprite(&sSpriteTemplate_ReelIcons, 80 + 40 * i, 44 + 24 * j, 2);
-            animId =  sReelIconAnimByReelAndPos[i][j];
+            animId =  GetReelIconAnim(i, j);
             sprite = &gSprites[spriteId];
             StartSpriteAnim(sprite, animId);
             sprite->oam.paletteNum = IndexOfSpritePaletteTag(sReelIconPaletteTags[animId]);
@@ -1852,16 +1875,17 @@ static void UpdateReelIconSprites(const s16 * reelPosPtr, const s16 * yposPtr)
         {
             sSlotMachineGfxManager->reelIconSprites[i][j]->y2 = ypos;
             {
-                s32 animId = sReelIconAnimByReelAndPos[i][reelPos];
+                s32 animId = GetReelIconAnim(i, reelPos);
                 struct Sprite *sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
                 StartSpriteAnim(sprite, animId);
             }
             {
-                s32 animId = sReelIconAnimByReelAndPos[i][reelPos];
+                /* Use GetReelIconAnim to allow machine-level overrides */
+                s32 animId = GetReelIconAnim(i, reelPos);
                 struct Sprite *sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
                 StartSpriteAnim(sprite, animId);
             }
-            sSlotMachineGfxManager->reelIconSprites[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(sReelIconPaletteTags[sReelIconAnimByReelAndPos[i][reelPos]]);
+            sSlotMachineGfxManager->reelIconSprites[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(sReelIconPaletteTags[GetReelIconAnim(i, reelPos)]);
             reelPos++;
             if (reelPos >= REEL_LENGTH)
                 reelPos = 0;

@@ -25,6 +25,8 @@
 #include "constants/hold_effects.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
+#include "trainer_xp_system.h"
+#include "trainer_type_debug.h"
 
 #define SOUND_MOVES_END 0xFFFF
 
@@ -33,6 +35,46 @@ static const u16 sSoundMovesTable[] =
     MOVE_GROWL, MOVE_ROAR, MOVE_SING, MOVE_SUPERSONIC, MOVE_SCREECH, MOVE_SNORE,
     MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, SOUND_MOVES_END
 };
+
+static bool8 TrySelectFrustrationOnDisobedience(u8 battler, u8 moveLimitations)
+{
+    s32 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (gBattleMons[battler].moves[i] != MOVE_FRUSTRATION)
+            continue;
+        if (gBitTable[i] & moveLimitations)
+            continue;
+
+        gCurrMovePos = gChosenMovePos = i;
+        gCalledMove = MOVE_FRUSTRATION;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static bool8 TryForceFrustrationOnDisobedience(u8 battler)
+{
+    s32 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (gBattleMons[battler].moves[i] != MOVE_FRUSTRATION)
+            continue;
+        if (gBattleMons[battler].pp[i] == 0)
+            continue;
+
+        gCurrMovePos = gChosenMovePos = i;
+        gCurrentMove = gChosenMove = MOVE_FRUSTRATION;
+        gCalledMove = MOVE_FRUSTRATION;
+        gChosenMoveByBattler[battler] = MOVE_FRUSTRATION;
+        return TRUE;
+    }
+
+    return FALSE;
+}
 
 u8 GetBattlerForBattleScript(u8 caseId)
 {
@@ -1421,8 +1463,8 @@ u8 AtkCanceller_UnableToUseMove(void)
                     {
                         gBattleCommunication[MULTISTRING_CHOOSER] = TRUE;
                         gBattlerTarget = gBattlerAttacker;
-                        gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerAttacker], MOVE_POUND, 0, 40, 0, gBattlerAttacker, gBattlerAttacker);
                         gProtectStructs[gBattlerAttacker].confusionSelfDmg = 1;
+                        gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerAttacker], MOVE_POUND, 0, 40, 0, gBattlerAttacker, gBattlerAttacker);
                         gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                     }
                     gBattlescriptCurrInstr = BattleScript_MoveUsedIsConfused;
@@ -3145,27 +3187,88 @@ u8 IsMonDisobedient(void)
     s32 rnd;
     s32 calc;
     u8 obedienceLevel = 0;
+    u16 badgeFlag;
+    s32 trainerTypeLevel;
+    s32 requiredLevel;
+    u8 monType1;
+    u8 monType2;
+    u8 monLevel;
+    u8 moveType;
+    s8 friendshipMod;
+    u8 attackerSide;
 
     if ((gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_POKEDUDE)))
         return 0;
-    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)
+    attackerSide = GetBattlerSide(gBattlerAttacker);
+    if (attackerSide == B_SIDE_OPPONENT && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
         return 0;
 
-    if (IsBattlerModernFatefulEncounter(gBattlerAttacker)) // only false if illegal Mew or Deoxys
+    if ((attackerSide == B_SIDE_OPPONENT)
+     || IsBattlerModernFatefulEncounter(gBattlerAttacker)) // only false if illegal Mew or Deoxys
     {
-        if (!IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName))
-            return 0;
-        if (FlagGet(FLAG_BADGE08_GET))
-            return 0;
+        bool8 isOwnMon = (attackerSide == B_SIDE_PLAYER
+         && !IsOtherTrainer(gBattleMons[gBattlerAttacker].otId, gBattleMons[gBattlerAttacker].otName));
 
-        obedienceLevel = 10;
+        // Use persistent trainer type levels for obedience check
+        monType1 = gBattleMons[gBattlerAttacker].type1;
+        monType2 = gBattleMons[gBattlerAttacker].type2;
+        monLevel = gBattleMons[gBattlerAttacker].level;
+        moveType = (gCurrentMove < MOVES_COUNT) ? gBattleMoves[gCurrentMove].type : TYPE_MYSTERY;
 
-        if (FlagGet(FLAG_BADGE02_GET))
-            obedienceLevel = 30;
-        if (FlagGet(FLAG_BADGE04_GET))
-            obedienceLevel = 50;
-        if (FlagGet(FLAG_BADGE06_GET))
-            obedienceLevel = 70;
+        // Use average(mon typing level, move type level) for obedience checks.
+        trainerTypeLevel = GetTrainerTypeObedienceLevelByBattlerSide(attackerSide, monType1, monType2, moveType);
+
+        // Add badge bonuses: +5 per badge
+        for (badgeFlag = FLAG_BADGE01_GET; attackerSide == B_SIDE_PLAYER && badgeFlag <= FLAG_BADGE08_GET; badgeFlag++)
+        {
+            if (FlagGet(badgeFlag))
+                trainerTypeLevel += 5;
+        }
+
+        // Apply friendship obedience modifier: positive friendship = more obedient,
+        // inverted for Frustration (low friendship benefits that move).
+        friendshipMod = GetFriendshipObedienceModifier(
+            gBattleMons[gBattlerAttacker].friendship,
+            gCurrentMove == MOVE_FRUSTRATION);
+        trainerTypeLevel += friendshipMod;
+        if (trainerTypeLevel < 0)
+            trainerTypeLevel = 0;
+
+        // Own Pokemon: trainer type level >= ceil(level / 3)
+        // Traded Pokemon: trainer type level >= ceil(level / 2)
+        if (isOwnMon)
+            requiredLevel = (monLevel + 2) / 3;
+        else
+            requiredLevel = (monLevel + 1) / 2;
+
+        // If trainer level meets the requirement, Pokemon obeys
+        if (trainerTypeLevel >= requiredLevel)
+        {
+            TRAINER_TYPE_DEBUG_LOGF("OBEDIENCE obey species=%u monLv=%u trainerLv=%ld req=%ld type1=%u type2=%u friendMod=%d move=%u\n",
+                                    gBattleMons[gBattlerAttacker].species,
+                                    monLevel,
+                                    (long)trainerTypeLevel,
+                                    (long)requiredLevel,
+                                    monType1,
+                                    monType2,
+                                    friendshipMod,
+                                    gCurrentMove);
+            return 0;
+        }
+
+        // Otherwise, scale obedience by how close the trainer is to the threshold
+        obedienceLevel = (u8)((trainerTypeLevel * monLevel) / requiredLevel);
+
+        TRAINER_TYPE_DEBUG_LOGF("OBEDIENCE check species=%u monLv=%u trainerLv=%ld req=%ld scaled=%u type1=%u type2=%u friendMod=%d move=%u\n",
+                                gBattleMons[gBattlerAttacker].species,
+                                monLevel,
+                                (long)trainerTypeLevel,
+                                (long)requiredLevel,
+                                obedienceLevel,
+                                monType1,
+                                monType2,
+                                friendshipMod,
+                                gCurrentMove);
     }
 
     if (gBattleMons[gBattlerAttacker].level <= obedienceLevel)
@@ -3174,6 +3277,17 @@ u8 IsMonDisobedient(void)
     calc = (gBattleMons[gBattlerAttacker].level + obedienceLevel) * rnd >> 8;
     if (calc < obedienceLevel)
         return 0;
+
+    if (TryForceFrustrationOnDisobedience(gBattlerAttacker))
+    {
+        *(gBattleStruct->moveTarget + gBattlerAttacker) = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
+        TRAINER_TYPE_DEBUG_LOGF("OBEDIENCE fallback species=%u monLv=%u move=%u pp=%u\n",
+                                gBattleMons[gBattlerAttacker].species,
+                                gBattleMons[gBattlerAttacker].level,
+                                gCurrentMove,
+                                gBattleMons[gBattlerAttacker].pp[gCurrMovePos]);
+        return 0;
+    }
 
     // is not obedient
     if (gCurrentMove == MOVE_RAGE)
@@ -3199,12 +3313,16 @@ u8 IsMonDisobedient(void)
         }
         else // use a random move
         {
-            do
+            if (!TrySelectFrustrationOnDisobedience(gBattlerAttacker, calc))
             {
-                gCurrMovePos = gChosenMovePos = Random() & (MAX_MON_MOVES - 1);
-            } while (gBitTable[gCurrMovePos] & calc);
+                do
+                {
+                    gCurrMovePos = gChosenMovePos = Random() & (MAX_MON_MOVES - 1);
+                } while (gBitTable[gCurrMovePos] & calc);
 
-            gCalledMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+                gCalledMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+            }
+
             gBattlescriptCurrInstr = BattleScript_IgnoresAndUsesRandomMove;
             gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
             gHitMarker |= HITMARKER_DISOBEDIENT_MOVE;

@@ -5,11 +5,7 @@ EWRAM_DATA u8 gStringVar1[32] = {};
 EWRAM_DATA u8 gStringVar2[20] = {};
 EWRAM_DATA u8 gStringVar3[20] = {};
 EWRAM_DATA u8 gStringVar4[1000] = {};
-#if REVISION >= 0xA
-EWRAM_DATA u8 gUnknownStringVar[12] = {0};
-#else
 EWRAM_DATA u8 gUnknownStringVar[16] = {0};
-#endif
 
 static const u8 sDigits[] = __("0123456789ABCDEF");
 
@@ -408,7 +404,7 @@ static u8 *ExpandPlaceholder_RivalName(void)
 
 static u8 *ExpandPlaceholder_Version(void)
 {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     return gExpandedPlaceholder_Ruby;
 #elif defined(LEAFGREEN)
     return gExpandedPlaceholder_Sapphire;
@@ -417,7 +413,7 @@ static u8 *ExpandPlaceholder_Version(void)
 
 static u8 *ExpandPlaceholder_Magma(void)
 {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     return gExpandedPlaceholder_Magma;
 #elif defined(LEAFGREEN)
     return gExpandedPlaceholder_Aqua;
@@ -426,7 +422,7 @@ static u8 *ExpandPlaceholder_Magma(void)
 
 static u8 *ExpandPlaceholder_Aqua(void)
 {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     return gExpandedPlaceholder_Aqua;
 #elif defined(LEAFGREEN)
     return gExpandedPlaceholder_Magma;
@@ -435,7 +431,7 @@ static u8 *ExpandPlaceholder_Aqua(void)
 
 static u8 *ExpandPlaceholder_Maxie(void)
 {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     return gExpandedPlaceholder_Maxie;
 #elif defined(LEAFGREEN)
     return gExpandedPlaceholder_Archie;
@@ -444,7 +440,7 @@ static u8 *ExpandPlaceholder_Maxie(void)
 
 static u8 *ExpandPlaceholder_Archie(void)
 {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     return gExpandedPlaceholder_Archie;
 #elif defined(LEAFGREEN)
     return gExpandedPlaceholder_Maxie;
@@ -453,7 +449,7 @@ static u8 *ExpandPlaceholder_Archie(void)
 
 static u8 *ExpandPlaceholder_Groudon(void)
 {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     return gExpandedPlaceholder_Groudon;
 #elif defined(LEAFGREEN)
     return gExpandedPlaceholder_Kyogre;
@@ -462,7 +458,7 @@ static u8 *ExpandPlaceholder_Groudon(void)
 
 static u8 *ExpandPlaceholder_Kyogre(void)
 {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     return gExpandedPlaceholder_Kyogre;
 #elif defined(LEAFGREEN)
     return gExpandedPlaceholder_Groudon;

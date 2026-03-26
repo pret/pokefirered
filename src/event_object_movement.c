@@ -1206,9 +1206,9 @@ static const u8 sPlayerDirectionToCopyDirection[][4] = {
 static void ClearObjectEvent(struct ObjectEvent *objectEvent)
 {
     *objectEvent = (struct ObjectEvent){};
-    objectEvent->localId = LOCALID_PLAYER;
-    objectEvent->mapNum = MAP_NUM(MAP_UNDEFINED);
-    objectEvent->mapGroup = MAP_GROUP(MAP_UNDEFINED);
+    objectEvent->localId = 0xFF;
+    objectEvent->mapNum = MAP_NUM(UNDEFINED);
+    objectEvent->mapGroup = MAP_GROUP(UNDEFINED);
     objectEvent->movementActionId = MOVEMENT_ACTION_NONE;
 }
 
@@ -1257,7 +1257,7 @@ u8 GetFirstInactiveObjectEventId(void)
 
 u8 GetObjectEventIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroupId)
 {
-    if (localId < LOCALID_PLAYER)
+    if (localId < OBJ_EVENT_ID_PLAYER)
     {
         return GetObjectEventIdByLocalIdAndMapInternal(localId, mapNum, mapGroupId);
     }
@@ -1317,7 +1317,7 @@ static u8 InitObjectEventStateFromTemplate(const struct ObjectEventTemplate *tem
     s16 x;
     s16 y;
     bool8 isClone = FALSE;
-    u8 localId = LOCALID_NONE;
+    u8 localId = 0;
     s16 x2 = 0;
     s16 y2 = 0;
     s16 x3 = 0;
@@ -1495,19 +1495,22 @@ static bool8 GetAvailableObjectEventId(u16 localId, u8 mapNum, u8 mapGroup, u8 *
 {
     u8 i = 0;
 
-    for (i = 0; i < OBJECT_EVENTS_COUNT && gObjectEvents[i].active; i++)
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
+        if (!gObjectEvents[i].active)
+            break;
         if (gObjectEvents[i].localId == localId && gObjectEvents[i].mapNum == mapNum && gObjectEvents[i].mapGroup == mapGroup)
             return TRUE;
     }
     if (i >= OBJECT_EVENTS_COUNT)
         return TRUE;
     *objectEventId = i;
-    for (; i < OBJECT_EVENTS_COUNT; i++)
+    do
     {
         if (gObjectEvents[i].active && gObjectEvents[i].localId == localId && gObjectEvents[i].mapNum == mapNum && gObjectEvents[i].mapGroup == mapGroup)
             return TRUE;
-    }
+        i++;
+    } while (i < OBJECT_EVENTS_COUNT);
     return FALSE;
 }
 
@@ -6773,7 +6776,7 @@ static bool8 MovementAction_FacePlayer_Step0(struct ObjectEvent *objectEvent, st
 {
     u8 playerObjectId;
 
-    if (!TryGetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0, &playerObjectId))
+    if (!TryGetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0, &playerObjectId))
     {
         FaceDirection(objectEvent, sprite, GetDirectionToFace(objectEvent->currentCoords.x, objectEvent->currentCoords.y, gObjectEvents[playerObjectId].currentCoords.x, gObjectEvents[playerObjectId].currentCoords.y));
     }
@@ -6785,7 +6788,7 @@ static bool8 MovementAction_FaceAwayPlayer_Step0(struct ObjectEvent *objectEvent
 {
     u8 playerObjectId;
 
-    if (!TryGetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0, &playerObjectId))
+    if (!TryGetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0, &playerObjectId))
     {
         FaceDirection(objectEvent, sprite, GetOppositeDirection(GetDirectionToFace(objectEvent->currentCoords.x, objectEvent->currentCoords.y, gObjectEvents[playerObjectId].currentCoords.x, gObjectEvents[playerObjectId].currentCoords.y)));
     }
@@ -7974,7 +7977,7 @@ static void CalcWhetherObjectIsOffscreen(struct ObjectEvent *objectEvent, struct
     u16 x, y;
     u16 x2, y2;
     const struct ObjectEventGraphicsInfo *graphicsInfo;
-    s16 minX;
+    s16 var;
 
     objectEvent->offScreen = FALSE;
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
@@ -7991,21 +7994,21 @@ static void CalcWhetherObjectIsOffscreen(struct ObjectEvent *objectEvent, struct
     x2 = graphicsInfo->width + (s16)x;
     y2 = graphicsInfo->height + (s16)y;
     
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SSANNE_EXTERIOR)
-     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SSANNE_EXTERIOR)
-     && objectEvent->localId == LOCALID_SS_ANNE)
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SSANNE_EXTERIOR)
+         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SSANNE_EXTERIOR)
+         && objectEvent->localId == 1)
     {
-        minX = -32;
+        var = -32;
     }
     else
     {
-        minX = -16;
+        var = -16;
     }
-    if ((s16)x >= (DISPLAY_WIDTH + 16) || (s16)x2 < minX)
+    if ((s16)x >= 256 || (s16)x2 < var)
     {
         objectEvent->offScreen = TRUE;
     }
-    if ((s16)y >= (DISPLAY_HEIGHT + 16) || (s16)y2 < -16)
+    if ((s16)y >= 176 || (s16)y2 < -16)
     {
         objectEvent->offScreen = TRUE;
     }
@@ -8413,12 +8416,12 @@ void ObjectEventUpdateElevation(struct ObjectEvent *objEvent)
 
 void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *sprite, u8 subpriority)
 {
-    u16 y;
-
-    y = (sprite->y - sprite->centerToCornerVecY + gSpriteCoordOffsetY + 8) & 0xFF;
-    y = (16 - (y >> 4)) << 1;
-
-    sprite->subpriority = sElevationToSubpriority[elevation] + y + subpriority;
+    s32 tmp = sprite->centerToCornerVecY;
+    u32 tmpa = *(u16 *)&sprite->y;
+    u32 tmpb = *(u16 *)&gSpriteCoordOffsetY;
+    s32 tmp2 = (tmpa - tmp) + tmpb;
+    u16 tmp3 = (0x10 - ((((u32)tmp2 + 8) & 0xFF) >> 4)) * 2;
+    sprite->subpriority = tmp3 + sElevationToSubpriority[elevation] + subpriority;
 }
 
 static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
@@ -8688,7 +8691,7 @@ static void DoFlaggedGroundEffects(struct ObjectEvent *objEvent, struct Sprite *
 {
     u8 i;
 
-    if (objEvent->localId == LOCALID_CAMERA && objEvent->invisible)
+    if (objEvent->localId == OBJ_EVENT_ID_CAMERA && objEvent->invisible)
         return;
 
     for (i = 0; i < NELEMS(sGroundEffectFuncs); i++, flags >>= 1)

@@ -25,6 +25,7 @@
 #include "mystery_gift.h"
 #include "renewable_hidden_items.h"
 #include "trainer_tower.h"
+#include "trainer_xp_system.h"
 #include "script.h"
 #include "berry_powder.h"
 #include "pokemon_jump.h"
@@ -81,7 +82,7 @@ static void ClearBattleTower(void)
 
 static void WarpToPlayersRoom(void)
 {
-    SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), -1, 6, 6);
+    SetWarpDestination(MAP_GROUP(PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(PALLET_TOWN_PLAYERS_HOUSE_2F), -1, 6, 6);
     WarpIntoMap();
 }
 
@@ -149,6 +150,7 @@ void NewGameInitData(void)
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
     ResetTrainerTowerResults();
+    InitializeTrainerTypeLevels();
 }
 
 static void ResetMiniGamesResults(void)

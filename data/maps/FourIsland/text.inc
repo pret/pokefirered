@@ -54,3 +54,34 @@ FourIsland_Text_MadeSlushieUsingIcefallCaveIce::
 FourIsland_Text_LoreleisHouse::
     .string "LORELEI'S HOUSE$"
 
+FourIsland_Text_SquirtleEggOffer::
+    .string "I collect rare POKéMON EGGS\n"
+    .string "as a hobby, you see.\p"
+    .string "This one here should hatch into\n"
+    .string "a SQUIRTLE. They're incredibly\l"
+    .string "rare in the wild.\p"
+    .string "I'd like to give it to a trainer\n"
+    .string "who will appreciate it. Interested?$"
+
+FourIsland_Text_SquirtleEggWaterTypeFavorite::
+    .string "My word, you already have a\n"
+    .string "SQUIRTLE! How splendid.\p"
+    .string "WATER-type POKéMON are my\n"
+    .string "favorite, you know. There's a\l"
+    .string "certain elegance to them.$"
+
+FourIsland_Text_SquirtleEggReceived::
+    .string "{PLAYER} received an EGG\n"
+    .string "from the gentleman!$"
+
+FourIsland_Text_SquirtleEggPostComment::
+    .string "Splendid! Do take good care of\n"
+    .string "that EGG.\p"
+    .string "WATER types are magnificent\n"
+    .string "swimmers. Raise it with care.$"
+
+FourIsland_Text_SquirtleEggNoRoom::
+    .string "It seems your party is full.\p"
+    .string "Do come back when you have\n"
+    .string "space. The EGG will be waiting.$"
+

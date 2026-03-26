@@ -41,7 +41,6 @@
       "flag": "FLAG_HIDE_CELADON_ROCKETS"
     },
     {
-      "local_id": "LOCALID_CELADON_FAT_MAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 38,
@@ -56,7 +55,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_CELADON_POLIWRATH",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POLIWRATH",
       "x": 36,
@@ -155,7 +153,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_CELADON_BORDER_TREE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": 52,
@@ -202,7 +199,7 @@
       "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
       "x": -7,
       "y": 21,
-      "target_local_id": "LOCALID_ROUTE16_CUT_TREE",
+      "target_local_id": 7,
       "target_map": "MAP_ROUTE16"
     },
     {

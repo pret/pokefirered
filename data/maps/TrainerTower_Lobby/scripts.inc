@@ -1,3 +1,9 @@
+.set LOCALID_NURSE,         1
+.set LOCALID_MART_CLERK,    2
+.set LOCALID_RECEPTIONIST,  3
+.set LOCALID_COOLTRAINER_F, 4
+.set LOCALID_BALDING_MAN,   5
+
 TrainerTower_Lobby_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, TrainerTower_Lobby_OnResume
 	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, TrainerTower_Lobby_OnReturnToField
@@ -13,17 +19,17 @@ TrainerTower_Lobby_OnResume::
 	goto_if_eq VAR_RESULT, FALSE, TrainerTower_Lobby_OnResumeEnd
 	@ Never reached, above always FALSE
 	setvar VAR_TEMP_0, 0
-	setobjectxy LOCALID_PLAYER, 9, 7
-	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
+	setobjectxy OBJ_EVENT_ID_PLAYER, 9, 7
+	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
 TrainerTower_Lobby_OnResumeEnd::
 	end
 
 TrainerTower_Lobby_OnReturnToField::
-	addobject LOCALID_TOWER_NURSE
-	addobject LOCALID_TOWER_MART_CLERK
-	addobject LOCALID_TOWER_RECEPTIONIST
-	addobject LOCALID_TOWER_COOLTRAINER_F
-	addobject LOCALID_TOWER_BALDING_MAN
+	addobject LOCALID_NURSE
+	addobject LOCALID_MART_CLERK
+	addobject LOCALID_RECEPTIONIST
+	addobject LOCALID_COOLTRAINER_F
+	addobject LOCALID_BALDING_MAN
 	end
 
 TrainerTower_Lobby_OnLoad::
@@ -46,7 +52,7 @@ TrainerTower_Lobby_OnFrame::
 
 TrainerTower_Lobby_EventScript_ExitElevator::
 	lockall
-	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_ExitElevator
+	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_ExitElevator
 	waitmovement 0
 	setmetatile 17, 10, METATILE_TrainerTower_CounterBarrier, 1
 	special DrawWholeMapView
@@ -72,7 +78,7 @@ TrainerTower_Lobby_EventScript_Enter::
 TrainerTower_Lobby_EventScript_LostChallenge::
 	lock
 	faceplayer
-	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
+	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
 	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox TrainerTower_Lobby_Text_TooBadComeBackTryAgain
 	goto TrainerTower_Lobby_EventScript_ExitChallenge
@@ -81,12 +87,12 @@ TrainerTower_Lobby_EventScript_LostChallenge::
 TrainerTower_Lobby_EventScript_ExitChallengeSpeakToReceptionist::
 	lock
 	faceplayer
-	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
+	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
 	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch
 TrainerTower_Lobby_EventScript_ExitChallenge::
 	closemessage
-	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_WalkDown
+	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_WalkDown
 	waitmovement 0
 	setvar VAR_MAP_SCENE_TRAINER_TOWER, 0
 	release
@@ -142,7 +148,7 @@ TrainerTower_Lobby_Mart_Items::
 
 TrainerTower_Lobby_EventScript_EntryTrigger::
 	lockall
-	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
+	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_FaceReceptionist
 	textcolor NPC_TEXT_COLOR_FEMALE
 	msgbox TrainerTower_Lobby_Text_WelcomeToTrainerTower
 	ttower_getnumfloors
@@ -191,7 +197,7 @@ TrainerTower_Lobby_EventScript_BeginChallenge::
 TrainerTower_Lobby_EventScript_DeclineChallenge::
 	msgbox TrainerTower_Lobby_Text_PleaseVisitUsAgain
 	closemessage
-	applymovement LOCALID_PLAYER, TrainerTower_Lobby_Movement_WalkDown
+	applymovement OBJ_EVENT_ID_PLAYER, TrainerTower_Lobby_Movement_WalkDown
 	waitmovement 0
 	releaseall
 	end

@@ -58,7 +58,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_OAKS_LAB_PROF_OAK",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PROF_OAK",
       "x": 6,
@@ -73,7 +72,6 @@
       "flag": "FLAG_HIDE_OAK_IN_HIS_LAB"
     },
     {
-      "local_id": "LOCALID_BULBASAUR_BALL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 8,
@@ -88,7 +86,6 @@
       "flag": "FLAG_HIDE_BULBASAUR_BALL"
     },
     {
-      "local_id": "LOCALID_SQUIRTLE_BALL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 9,
@@ -103,7 +100,6 @@
       "flag": "FLAG_HIDE_SQUIRTLE_BALL"
     },
     {
-      "local_id": "LOCALID_CHARMANDER_BALL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 10,
@@ -118,7 +114,6 @@
       "flag": "FLAG_HIDE_CHARMANDER_BALL"
     },
     {
-      "local_id": "LOCALID_OAKS_LAB_RIVAL",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BLUE",
       "x": 5,
@@ -133,7 +128,6 @@
       "flag": "FLAG_HIDE_RIVAL_IN_LAB"
     },
     {
-      "local_id": "LOCALID_POKEDEX_1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POKEDEX",
       "x": 4,
@@ -148,7 +142,6 @@
       "flag": "FLAG_HIDE_POKEDEX"
     },
     {
-      "local_id": "LOCALID_POKEDEX_2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_POKEDEX",
       "x": 5,
@@ -161,6 +154,160 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PalletTown_ProfessorOaksLab_EventScript_Pokedex",
       "flag": "FLAG_HIDE_POKEDEX"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_MewScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 8,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_CelebiScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 3,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_RegirockScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 9,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_RegiceScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 4,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_RegisteelScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 8,
+      "y": 7,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_KyogreScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 3,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_GroudonScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 9,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_RayquazaScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 4,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_LatiasScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 9,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_LatiosScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
+      "x": 6,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_ProfessorOaksLab_EventScript_JirachiScientist",
+      "flag": "FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS"
     }
   ],
   "warp_events": [

@@ -54,7 +54,7 @@ TwoIsland_EventScript_SetShopExpanded2::
 
 TwoIsland_EventScript_SetShopExpanded3::
 	setvar VAR_MAP_SCENE_TWO_ISLAND, 4
-	clearflag FLAG_HIDE_TWO_ISLAND_POKE_MANIAC
+	clearflag FLAG_HIDE_TWO_ISLAND_SUPER_NERD
 	return
 
 TwoIsland_EventScript_Clerk::
@@ -192,7 +192,7 @@ TwoIsland_EventScript_Beauty::
 	release
 	end
 
-TwoIsland_EventScript_PokeManiac::
+TwoIsland_EventScript_SuperNerd::
 	msgbox TwoIsland_Text_BuyRareItemsHere, MSGBOX_NPC
 	end
 
@@ -214,4 +214,52 @@ TwoIsland_EventScript_JoyfulGameCornerSign::
 
 TwoIsland_EventScript_FastCurrentSign::
 	msgbox TwoIsland_Text_DangerFastCurrent, MSGBOX_SIGN
+	end
+
+TwoIsland_EventScript_BulbasaurEggNPC::
+	goto_if_questlog EventScript_ReleaseEnd
+	special QuestLog_CutRecording
+	lock
+	faceplayer
+	goto_if_set FLAG_GOT_BULBASAUR_EGG, TwoIsland_EventScript_BulbasaurEggPostComment
+	goto_if_set FLAG_NO_ROOM_FOR_BULBASAUR_EGG, TwoIsland_EventScript_BulbasaurEggReturnForEgg
+	setvar VAR_0x8004, SPECIES_BULBASAUR
+	specialvar VAR_RESULT, ScriptCheckSpeciesCaught
+	goto_if_eq VAR_RESULT, TRUE, TwoIsland_EventScript_BulbasaurEggAlreadyCaught
+	msgbox TwoIsland_Text_BulbasaurEggOffer
+	goto TwoIsland_EventScript_BulbasaurEggTryGive
+	end
+
+TwoIsland_EventScript_BulbasaurEggAlreadyCaught::
+	msgbox TwoIsland_Text_BulbasaurEggGrassTypeFavorite
+	release
+	end
+
+TwoIsland_EventScript_BulbasaurEggTryGive::
+	getpartysize
+	goto_if_eq VAR_RESULT, PARTY_SIZE, TwoIsland_EventScript_BulbasaurEggNoRoom
+	setflag FLAG_GOT_BULBASAUR_EGG
+	giveegg SPECIES_BULBASAUR
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	playfanfare MUS_LEVEL_UP
+	message TwoIsland_Text_BulbasaurEggReceived
+	waitfanfare
+	waitmessage
+	call EventScript_RestorePrevTextColor
+	goto TwoIsland_EventScript_BulbasaurEggPostComment
+	end
+
+TwoIsland_EventScript_BulbasaurEggPostComment::
+	msgbox TwoIsland_Text_BulbasaurEggPostComment
+	release
+	end
+
+TwoIsland_EventScript_BulbasaurEggNoRoom::
+	setflag FLAG_NO_ROOM_FOR_BULBASAUR_EGG
+	msgbox TwoIsland_Text_BulbasaurEggNoRoom
+	release
+	end
+
+TwoIsland_EventScript_BulbasaurEggReturnForEgg::
+	goto TwoIsland_EventScript_BulbasaurEggTryGive
 	end

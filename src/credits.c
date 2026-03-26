@@ -16,7 +16,7 @@
 #include "constants/field_weather.h"
 #include "constants/sound.h"
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 #define TITLE_TEXT gString_PokemonFireRed_Staff
 #elif defined(LEAFGREEN)
 #define TITLE_TEXT gString_PokemonLeafGreen_Staff
@@ -569,79 +569,79 @@ static const struct SpriteTemplate sGroundSpriteTemplate_Static = {
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_Route23[] = {
-    CREDITSOVWLDLOADMAP(MAP_ROUTE23, 11, 107, 1),
+    CREDITSOVWLDLOADMAP(ROUTE23, 11, 107, 1),
     CREDITSOVWLDSCROLL(0, 1, 0x0500), // Scroll down
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_ViridianCity[] = {
-    CREDITSOVWLDLOADMAP(MAP_VIRIDIAN_CITY, 30, 34, 1),
+    CREDITSOVWLDLOADMAP(VIRIDIAN_CITY, 30, 34, 1),
     CREDITSOVWLDSCROLL(0, -1, 0x0500), // Scroll up
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_PewterCity[] = {
-    CREDITSOVWLDLOADMAP(MAP_PEWTER_CITY, 20, 26, 1),
+    CREDITSOVWLDLOADMAP(PEWTER_CITY, 20, 26, 1),
     CREDITSOVWLDSCROLL(0, -1, 0x0500), // Scroll up
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_CeruleanCity[] = {
-    CREDITSOVWLDLOADMAP(MAP_CERULEAN_CITY, 8, 6, 1),
+    CREDITSOVWLDLOADMAP(CERULEAN_CITY, 8, 6, 1),
     CREDITSOVWLDSCROLL(1, 1, 0x0500), // Scroll right and down
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_Route25[] = {
-    CREDITSOVWLDLOADMAP(MAP_ROUTE25, 25, 6, 1),
+    CREDITSOVWLDLOADMAP(ROUTE25, 25, 6, 1),
     CREDITSOVWLDSCROLL(1, 0, 0x0500), // Scroll right
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_VermilionCity[] = {
-    CREDITSOVWLDLOADMAP(MAP_VERMILION_CITY, 9, 7, 1),
+    CREDITSOVWLDLOADMAP(VERMILION_CITY, 9, 7, 1),
     CREDITSOVWLDSCROLL(1, 1, 0x0500), // Scroll right and down
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_Route10[] = {
-    CREDITSOVWLDLOADMAP(MAP_ROUTE10, 11, 68, 1),
+    CREDITSOVWLDLOADMAP(ROUTE10, 11, 68, 1),
     CREDITSOVWLDSCROLL(0, 1, 0x0500), // Scroll down
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_CeladonCity[] = {
-    CREDITSOVWLDLOADMAP(MAP_CELADON_CITY, 48, 16, 1),
+    CREDITSOVWLDLOADMAP(CELADON_CITY, 48, 16, 1),
     CREDITSOVWLDSCROLL(-1, 0, 0x0500), // Scroll left
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_SaffronCity[] = {
-    CREDITSOVWLDLOADMAP(MAP_SAFFRON_CITY, 39, 5, 1),
+    CREDITSOVWLDLOADMAP(SAFFRON_CITY, 39, 5, 1),
     CREDITSOVWLDSCROLL(0, 1, 0x0500), // Scroll down
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_Route17[] = {
-    CREDITSOVWLDLOADMAP(MAP_ROUTE17, 7, 43, 1),
+    CREDITSOVWLDLOADMAP(ROUTE17, 7, 43, 1),
     CREDITSOVWLDSCROLL(0, 1, 0x0500), // Scroll down
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_FuchsiaCity[] = {
-    CREDITSOVWLDLOADMAP(MAP_FUCHSIA_CITY, 28, 5, 1),
+    CREDITSOVWLDLOADMAP(FUCHSIA_CITY, 28, 5, 1),
     CREDITSOVWLDSCROLL(0, 1, 0x0500), // Scroll down
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_CinnabarIsland[] = {
-    CREDITSOVWLDLOADMAP(MAP_CINNABAR_ISLAND, 13, 17, 1),
+    CREDITSOVWLDLOADMAP(CINNABAR_ISLAND, 13, 17, 1),
     CREDITSOVWLDSCROLL(0, -1, 0x0500), // Scroll up
     CREDITSOVWLDEND
 };
 
 static const struct CreditsOverworldCmd sOverworldCmd_Route21[] = {
-    CREDITSOVWLDLOADMAP(MAP_ROUTE21_NORTH, 8, 20, 1),
+    CREDITSOVWLDLOADMAP(ROUTE21_NORTH, 8, 20, 1),
     CREDITSOVWLDSCROLL(0, -1, 0x0500), // Scroll up
     CREDITSOVWLDEND,
 };

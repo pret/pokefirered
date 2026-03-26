@@ -15,3 +15,17 @@ Text_AccessedPlayersPC::
 
 Text_AccessedBillsPC::
 	.string "Accessed BILL's PC.$"
+
+Text_PCRetrainWhichMon::
+	.string "Which POKéMON needs retraining?$"
+
+Text_PCRetrainWhichMove::
+	.string "Which move should it relearn?$"
+
+Text_PCRetrainNoMoves::
+	.string "That POKéMON doesn't have any\n"
+	.string "moves it can relearn right now.$"
+
+Text_PCRetrainCantTeachEgg::
+	.string "You can't reteach moves\n"
+	.string "to an EGG.$"

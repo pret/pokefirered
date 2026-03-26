@@ -27,7 +27,7 @@ EWRAM_DATA u8 sDownArrowCounterAndYCoordIdx[8] = {};
 EWRAM_DATA bool8 gGiftIsFromEReader = FALSE;
 
 static void CreateMysteryGiftTask(void);
-void Task_MysteryGift(u8 taskId);
+static void Task_MysteryGift(u8 taskId);
 extern void CreateEReaderTask(void);
 
 static const u16 sTextboxBorder_Pal[] = INCBIN_U16("graphics/interface/mystery_gift_textbox_border.gbapal");
@@ -1110,7 +1110,7 @@ static void CreateMysteryGiftTask(void)
     data->clientMsg = AllocZeroed(CLIENT_MAX_MSG_SIZE);
 }
 
-void Task_MysteryGift(u8 taskId)
+static void Task_MysteryGift(u8 taskId)
 {
     struct MysteryGiftTaskData * data = (void *)gTasks[taskId].data;
     bool32 successMsg, input;

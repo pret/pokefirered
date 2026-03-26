@@ -670,7 +670,7 @@ static const u16 sDiglettLevelUpLearnset[] = {
 
 static const u16 sDugtrioLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_TRI_ATTACK),
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     LEVEL_UP_MOVE(1, MOVE_SCRATCH),
     LEVEL_UP_MOVE(1, MOVE_SAND_ATTACK),
 #elif defined(LEAFGREEN)
@@ -5654,7 +5654,7 @@ static const u16 sJirachiLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 static const u16 sDeoxysLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_LEER),
     LEVEL_UP_MOVE(1, MOVE_WRAP),

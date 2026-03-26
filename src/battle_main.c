@@ -8,6 +8,7 @@
 #include "battle_main.h"
 #include "battle_message.h"
 #include "battle_scripts.h"
+#include "trainer_xp_system.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "data.h"
@@ -107,6 +108,13 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void);
 static void ReturnFromBattleToOverworld(void);
 static void TryEvolvePokemon(void);
 static void WaitForEvoSceneToFinish(void);
+static u8 GetNpcTrainerMonFriendship(u16 trainerNum);
+static bool8 IsNpcMonLikelyToDisobey(u16 trainerNum, u16 species, u8 level, u8 friendship, bool8 isFrustrationMove);
+static void ApplyNpcTrainerMoveTweaks(u16 trainerNum, u16 species, u8 level, u8 friendship, bool8 hasCustomMoves, u16 *moves);
+static void PushTrainerTypeActionToken(u8 battler, u16 token);
+
+#define TRAINER_TYPE_ACTION_STREAK_MAX 5
+#define TRAINER_TYPE_ACTION_TOKEN_ITEM 0xFFFF
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -219,6 +227,8 @@ EWRAM_DATA struct MonSpritesGfx *gMonSpritesGfxPtr = NULL;
 EWRAM_DATA u16 gBattleMovePower = 0;
 EWRAM_DATA u16 gMoveToLearn = 0;
 EWRAM_DATA u8 gBattleMonForms[MAX_BATTLERS_COUNT] = {0};
+static EWRAM_DATA u16 sTrainerTypeActionStreakTokens[MAX_BATTLERS_COUNT][TRAINER_TYPE_ACTION_STREAK_MAX] = {0};
+static EWRAM_DATA u8 sTrainerTypeActionStreakCount[MAX_BATTLERS_COUNT] = {0};
 
 COMMON_DATA void (*gPreBattleCallback1)(void) = NULL;
 COMMON_DATA void (*gBattleMainFunc)(void) = NULL;
@@ -234,6 +244,81 @@ static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
     &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1
 };
+
+void ResetTrainerTypeActionStreak(u8 battler)
+{
+    u8 i;
+
+    if (battler >= MAX_BATTLERS_COUNT)
+        return;
+
+    sTrainerTypeActionStreakCount[battler] = 0;
+    for (i = 0; i < TRAINER_TYPE_ACTION_STREAK_MAX; i++)
+        sTrainerTypeActionStreakTokens[battler][i] = MOVE_NONE;
+}
+
+void ResetAllTrainerTypeActionStreaks(void)
+{
+    u8 battler;
+
+    for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
+        ResetTrainerTypeActionStreak(battler);
+}
+
+static void PushTrainerTypeActionToken(u8 battler, u16 token)
+{
+    u8 i;
+    u8 count;
+
+    if (battler >= MAX_BATTLERS_COUNT)
+        return;
+
+    count = sTrainerTypeActionStreakCount[battler];
+    if (count > TRAINER_TYPE_ACTION_STREAK_MAX)
+        count = TRAINER_TYPE_ACTION_STREAK_MAX;
+
+    for (i = 0; i < count; i++)
+    {
+        if (sTrainerTypeActionStreakTokens[battler][i] == token)
+        {
+            // Repeating any token resets the streak, then records the current action.
+            ResetTrainerTypeActionStreak(battler);
+            sTrainerTypeActionStreakTokens[battler][0] = token;
+            sTrainerTypeActionStreakCount[battler] = 1;
+            return;
+        }
+    }
+
+    if (count < TRAINER_TYPE_ACTION_STREAK_MAX)
+    {
+        sTrainerTypeActionStreakTokens[battler][count] = token;
+        sTrainerTypeActionStreakCount[battler] = count + 1;
+    }
+}
+
+void RecordTrainerTypeActionMove(u8 battler, u16 move)
+{
+    PushTrainerTypeActionToken(battler, move);
+}
+
+void RecordTrainerTypeActionItem(u8 battler)
+{
+    PushTrainerTypeActionToken(battler, TRAINER_TYPE_ACTION_TOKEN_ITEM);
+}
+
+u8 GetTrainerTypeActionStreakMultiplierTenths(u8 battler)
+{
+    u8 count;
+
+    if (battler >= MAX_BATTLERS_COUNT)
+        return 10;
+
+    count = sTrainerTypeActionStreakCount[battler];
+    if (count > TRAINER_TYPE_ACTION_STREAK_MAX)
+        count = TRAINER_TYPE_ACTION_STREAK_MAX;
+
+    return 10 + count;
+}
 
 const struct SpriteTemplate gUnknownDebugSprite =
 {
@@ -305,7 +390,7 @@ static const s8 sPlayerThrowXTranslation[] = { -32, -16, -16, -32, -32, 0, 0, 0 
 
 // format: attacking type, defending type, damage multiplier
 // the multiplier is a (decimal) fixed-point number:
-// 20 is ×2.0 TYPE_MUL_SUPER_EFFECTIVE
+// 15 is ×1.5 TYPE_MUL_SUPER_EFFECTIVE (nerfed from 20; trainer levels restore via effectiveness modifier)
 // 10 is ×1.0 TYPE_MUL_NORMAL
 // 05 is ×0.5 TYPE_MUL_NOT_EFFECTIVE
 // 00 is ×0.0 TYPE_MUL_NO_EFFECT
@@ -1160,11 +1245,7 @@ static void CB2_PreInitMultiBattle(void)
         }
         break;
     case 2:
-#if REVISION >= 0xA
-        if (IsLinkTaskFinished() && !gPaletteFade.active)
-#else
         if (!gPaletteFade.active)
-#endif
         {
             gBattleCommunication[MULTIUSE_STATE]++;
             if (gWirelessCommType)
@@ -1568,6 +1649,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             case 0:
             {
                 const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
+                u16 moves[MAX_MON_MOVES];
+                u8 friendship;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1575,11 +1658,23 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                friendship = GetNpcTrainerMonFriendship(trainerNum);
+                SetMonData(&party[i], MON_DATA_FRIENDSHIP, &friendship);
+
+                GetTrainerMonBattleMoves(trainerNum, i, partyData[i].species, partyData[i].lvl, moves);
+                ApplyNpcTrainerMoveTweaks(trainerNum, partyData[i].species, partyData[i].lvl, friendship, FALSE, moves);
+                for (j = 0; j < MAX_MON_MOVES; j++)
+                {
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &moves[j]);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[moves[j]].pp);
+                }
                 break;
             }
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
                 const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
+                u16 moves[MAX_MON_MOVES];
+                u8 friendship;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1587,17 +1682,23 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                friendship = GetNpcTrainerMonFriendship(trainerNum);
+                SetMonData(&party[i], MON_DATA_FRIENDSHIP, &friendship);
 
+                GetTrainerMonBattleMoves(trainerNum, i, partyData[i].species, partyData[i].lvl, moves);
+                ApplyNpcTrainerMoveTweaks(trainerNum, partyData[i].species, partyData[i].lvl, friendship, TRUE, moves);
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &moves[j]);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[moves[j]].pp);
                 }
                 break;
             }
             case F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
+                u16 moves[MAX_MON_MOVES];
+                u8 friendship;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1605,13 +1706,24 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                friendship = GetNpcTrainerMonFriendship(trainerNum);
+                SetMonData(&party[i], MON_DATA_FRIENDSHIP, &friendship);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
+                GetTrainerMonBattleMoves(trainerNum, i, partyData[i].species, partyData[i].lvl, moves);
+                ApplyNpcTrainerMoveTweaks(trainerNum, partyData[i].species, partyData[i].lvl, friendship, FALSE, moves);
+                for (j = 0; j < MAX_MON_MOVES; j++)
+                {
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &moves[j]);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[moves[j]].pp);
+                }
                 break;
             }
             case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
             {
                 const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
+                u16 moves[MAX_MON_MOVES];
+                u8 friendship;
 
                 for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
                     nameHash += gSpeciesNames[partyData[i].species][j];
@@ -1619,12 +1731,16 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
                 CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                friendship = GetNpcTrainerMonFriendship(trainerNum);
+                SetMonData(&party[i], MON_DATA_FRIENDSHIP, &friendship);
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
+                GetTrainerMonBattleMoves(trainerNum, i, partyData[i].species, partyData[i].lvl, moves);
+                ApplyNpcTrainerMoveTweaks(trainerNum, partyData[i].species, partyData[i].lvl, friendship, TRUE, moves);
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
-                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &partyData[i].moves[j]);
-                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[partyData[i].moves[j]].pp);
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &moves[j]);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[moves[j]].pp);
                 }
                 break;
             }
@@ -1635,6 +1751,97 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
     }
 
     return gTrainers[trainerNum].partySize;
+}
+
+static u8 GetNpcTrainerMonFriendship(u16 trainerNum)
+{
+    switch (gTrainers[trainerNum].trainerClass)
+    {
+    case TRAINER_CLASS_TEAM_ROCKET:
+        return 0;
+    case TRAINER_CLASS_YOUNGSTER:
+    case TRAINER_CLASS_AROMA_LADY:
+    case TRAINER_CLASS_TWINS:
+    case TRAINER_CLASS_LADY:
+    case TRAINER_CLASS_PAINTER:
+        return 220;
+    case TRAINER_CLASS_COOLTRAINER:
+    case TRAINER_CLASS_COOL_COUPLE:
+    case TRAINER_CLASS_LEADER:
+    case TRAINER_CLASS_ELITE_FOUR:
+    case TRAINER_CLASS_CHAMPION:
+        return 180;
+    default:
+        return 128;
+    }
+}
+
+static bool8 IsNpcMonLikelyToDisobey(u16 trainerNum, u16 species, u8 level, u8 friendship, bool8 isFrustrationMove)
+{
+    s32 trainerLevel;
+    s32 requiredLevel;
+    u8 moveType;
+    u8 type1 = gSpeciesInfo[species].types[0];
+    u8 type2 = gSpeciesInfo[species].types[1];
+
+    moveType = isFrustrationMove ? gBattleMoves[MOVE_FRUSTRATION].type : TYPE_MYSTERY;
+    trainerLevel = GetTrainerTypeObedienceLevelByTrainer(trainerNum, type1, type2, moveType);
+    trainerLevel += GetFriendshipObedienceModifier(friendship, isFrustrationMove);
+    if (trainerLevel < 0)
+        trainerLevel = 0;
+
+    requiredLevel = (level + 1) / 2;
+    return trainerLevel < requiredLevel;
+}
+
+static void ApplyNpcTrainerMoveTweaks(u16 trainerNum, u16 species, u8 level, u8 friendship, bool8 hasCustomMoves, u16 *moves)
+{
+    s32 i;
+    s32 weakestMoveSlot = -1;
+    u16 weakestMovePower = 0xFFFF;
+    bool8 hasFrustration = FALSE;
+
+    if (gTrainers[trainerNum].trainerClass != TRAINER_CLASS_TEAM_ROCKET)
+        return;
+    if (!IsNpcMonLikelyToDisobey(trainerNum, species, level, friendship, FALSE))
+        return;
+
+    if (!hasCustomMoves)
+    {
+        moves[MAX_MON_MOVES - 1] = MOVE_FRUSTRATION;
+        return;
+    }
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u16 move = moves[i];
+        u16 movePower;
+
+        if (move == MOVE_FRUSTRATION)
+        {
+            hasFrustration = TRUE;
+            break;
+        }
+
+        if (move == MOVE_NONE)
+        {
+            if (weakestMoveSlot < 0)
+                weakestMoveSlot = i;
+            continue;
+        }
+
+        movePower = gBattleMoves[move].power;
+        if (weakestMoveSlot < 0 || movePower <= weakestMovePower)
+        {
+            weakestMovePower = movePower;
+            weakestMoveSlot = i;
+        }
+    }
+
+    if (hasFrustration || weakestMoveSlot < 0)
+        return;
+
+    moves[weakestMoveSlot] = MOVE_FRUSTRATION;
 }
 
 // Unused
@@ -2287,6 +2494,8 @@ static void BattleStartClearSetData(void)
         gBattleStruct->safariEscapeFactor = 2;
     gBattleStruct->wildVictorySong = 0;
     gBattleStruct->moneyMultiplier = 1;
+    TrainerTypeBattleSummary_Reset();
+    ResetAllTrainerTypeActionStreaks();
 
     for (i = 0; i < 8; i++)
     {
@@ -2608,6 +2817,11 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
                                     | BATTLE_TYPE_OLD_MAN_TUTORIAL
                                     | BATTLE_TYPE_LEGENDARY)))
             {
+                u8 partyIndex = gBattlerPartyIndexes[gActiveBattler];
+                u32 otId = GetMonData(&gEnemyParty[partyIndex], MON_DATA_OT_ID, NULL);
+                u32 personality = GetMonData(&gEnemyParty[partyIndex], MON_DATA_PERSONALITY, NULL);
+
+                AwardTrainerTypeEncounterExp(gBattleMons[gActiveBattler].species, otId, personality);
                 HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), FLAG_SET_SEEN, gBattleMons[gActiveBattler].personality);
             }
         }
@@ -2627,6 +2841,11 @@ static void BattleIntroDrawTrainersOrMonsSprites(void)
                                             | BATTLE_TYPE_OLD_MAN_TUTORIAL
                                             | BATTLE_TYPE_LEGENDARY)))
                 {
+                    u8 partyIndex = gBattlerPartyIndexes[gActiveBattler];
+                    u32 otId = GetMonData(&gEnemyParty[partyIndex], MON_DATA_OT_ID, NULL);
+                    u32 personality = GetMonData(&gEnemyParty[partyIndex], MON_DATA_PERSONALITY, NULL);
+
+                    AwardTrainerTypeEncounterExp(gBattleMons[gActiveBattler].species, otId, personality);
                     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), FLAG_SET_SEEN, gBattleMons[gActiveBattler].personality);
                 }
                 BtlController_EmitLoadMonSprite(0);
@@ -3400,6 +3619,10 @@ void SwapTurnOrder(u8 id1, u8 id2)
 u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
 {
     u8 strikesFirst = 0;
+    u8 speedBonusBattler1 = 0;
+    u8 speedBonusBattler2 = 0;
+    u8 speedTypeBattler1;
+    u8 speedTypeBattler2;
     u8 speedMultiplierBattler1 = 0, speedMultiplierBattler2 = 0;
     u32 speedBattler1 = 0, speedBattler2 = 0;
     u8 holdEffect = 0;
@@ -3501,6 +3724,31 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         else
             moveBattler2 = MOVE_NONE;
     }
+
+    speedTypeBattler1 = gBattleMons[battler1].type1;
+    if (moveBattler1 != MOVE_NONE)
+        speedTypeBattler1 = gBattleMoves[moveBattler1].type;
+    speedBonusBattler1 = GetTrainerTypeOffenseBonusLevelByBattlerSide(
+        GetBattlerSide(battler1),
+        gBattleMons[battler1].type1,
+        gBattleMons[battler1].type2,
+        speedTypeBattler1);
+
+    speedTypeBattler2 = gBattleMons[battler2].type1;
+    if (moveBattler2 != MOVE_NONE)
+        speedTypeBattler2 = gBattleMoves[moveBattler2].type;
+    speedBonusBattler2 = GetTrainerTypeOffenseBonusLevelByBattlerSide(
+        GetBattlerSide(battler2),
+        gBattleMons[battler2].type1,
+        gBattleMons[battler2].type2,
+        speedTypeBattler2);
+
+    // Mastery adds a light speed scalar (0.5% per averaged level).
+    if (speedBonusBattler1)
+        speedBattler1 = (speedBattler1 * (200 + speedBonusBattler1)) / 200;
+    if (speedBonusBattler2)
+        speedBattler2 = (speedBattler2 * (200 + speedBonusBattler2)) / 200;
+
     // both move priorities are different than 0
     if (gBattleMoves[moveBattler1].priority != 0 || gBattleMoves[moveBattler2].priority != 0)
     {
@@ -3927,8 +4175,8 @@ static void ReturnFromBattleToOverworld(void)
         if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
         {
             UpdateRoamerHPStatus(&gEnemyParty[0]);
-#if defined(BUGFIX) || REVISION >= 0xA
-            if ((gBattleOutcome == B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT || gBattleOutcome == B_OUTCOME_DREW)
+#ifdef BUGFIX
+            if ((gBattleOutcome == B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT)
 #else
             if ((gBattleOutcome & B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT) // Bug: When Roar is used by roamer, gBattleOutcome is B_OUTCOME_PLAYER_TELEPORTED (5).
 #endif                                                                                  // & with B_OUTCOME_WON (1) will return TRUE and deactivates the roamer.
@@ -4153,6 +4401,7 @@ static void HandleAction_UseItem(void)
     gBattle_BG0_X = 0;
     gBattle_BG0_Y = 0;
     ClearFuryCutterDestinyBondGrudge(gBattlerAttacker);
+    RecordTrainerTypeActionItem(gBattlerAttacker);
     gLastUsedItem = gBattleBufferB[gBattlerAttacker][1] | (gBattleBufferB[gBattlerAttacker][2] << 8);
     if (gLastUsedItem <= ITEM_PREMIER_BALL) // is ball
     {

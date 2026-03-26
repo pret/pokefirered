@@ -294,7 +294,6 @@ bool32 WaitRfuState(bool32 force);
 bool32 HasTrainerLeftPartnersList(u16 trainerId, const u8 *trainerName);
 void SendRfuStatusToPartner(u8 status, u16 trainerId, const u8 *name);
 u32 WaitSendRfuStatusToPartner(u16 trainerId, const u8 *name);
-s32 GetJoinGroupStatus(void);
 void SetHostRfuGameData(u8 activity, u32 partnerInfo, bool32 startedActivity);
 void InitializeRfuLinkManager_LinkLeader(u32 availSlots);
 void RequestDisconnectSlotByTrainerNameAndId(const u8 *trainerName, u16 trainerId);
@@ -322,17 +321,6 @@ void Rfu_StopPartnerSearch(void);
 void RfuSetNormalDisconnectMode(void);
 void SetUnionRoomChatPlayerData(u32 numPlayers);
 void ClearRecvCommands(void);
-
-void PkmnStrToASCII(u8 *dest, const u8 *src);
-void ASCIIToPkmnStr(u8 *dest, const u8 *src);
-
-#if REVISION >= 0xA
-u16 RfuGetErrorInfo(void);
-void LinkRfu_ForceChangeSpParent(void);
-void DestroyTask_RfuReconnectWithParent(void);
-void RfuReloadSave(void);
-void RfuSoftReset(void);
-#endif
 
 #include "mystery_gift_server.h"
 extern const struct MysteryGiftServerCmd gServerScript_ClientCanceledCard[];

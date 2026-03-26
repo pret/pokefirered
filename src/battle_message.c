@@ -49,6 +49,10 @@ static const u8 sText_Trainer1RecallPkmn1[] = _("{B_TRAINER1_NAME}: {B_OPPONENT_
 static const u8 sText_Trainer1WinText[] = _("{B_TRAINER1_WIN_TEXT}");
 static const u8 sText_Trainer1RecallPkmn2[] = _("{B_TRAINER1_NAME}: {B_OPPONENT_MON2_NAME}, come back!");
 static const u8 sText_Trainer1RecallBoth[] = _("{B_TRAINER1_NAME}: {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME}, come back!");
+static const u8 sText_TrainerLvlEdge1[] = _("Your trainer levels give\nyou a slight edge!");
+static const u8 sText_TrainerLvlEdge2[] = _("Your experience with this\ntype sharpens the blow!");
+static const u8 sText_TrainerLvlEdge3[] = _("Your deep expertise\noverwhelms the foe!");
+static const u8 sText_TrainerLvlEdge4[] = _("Your total dominance of\nthis type is devastating!");
 static const u8 sText_Trainer2WinText[] = _("{B_TRAINER2_WIN_TEXT}");
 static const u8 sText_PkmnGainedEXP[] = _("{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} EXP. Points!\p");
 static const u8 sText_EmptyString4[] = _("");
@@ -888,7 +892,11 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_TRAINER1MON1COMEBACK - BATTLESTRINGS_TABLE_START]          = sText_Trainer1RecallPkmn1,
     [STRINGID_TRAINER1WINTEXT - BATTLESTRINGS_TABLE_START]               = sText_Trainer1WinText,
     [STRINGID_TRAINER1MON2COMEBACK - BATTLESTRINGS_TABLE_START]          = sText_Trainer1RecallPkmn2,
-    [STRINGID_TRAINER1MON1AND2COMEBACK - BATTLESTRINGS_TABLE_START]      = sText_Trainer1RecallBoth
+    [STRINGID_TRAINER1MON1AND2COMEBACK - BATTLESTRINGS_TABLE_START]      = sText_Trainer1RecallBoth,
+    [STRINGID_TRAINERLVLEDGE1 - BATTLESTRINGS_TABLE_START]              = sText_TrainerLvlEdge1,
+    [STRINGID_TRAINERLVLEDGE2 - BATTLESTRINGS_TABLE_START]              = sText_TrainerLvlEdge2,
+    [STRINGID_TRAINERLVLEDGE3 - BATTLESTRINGS_TABLE_START]              = sText_TrainerLvlEdge3,
+    [STRINGID_TRAINERLVLEDGE4 - BATTLESTRINGS_TABLE_START]              = sText_TrainerLvlEdge4
 };
 
 const u16 gMissStringIds[] =
@@ -1785,20 +1793,26 @@ static const u8 *TryGetStatusString(u8 *src)
 {
     u32 i;
     u8 status[] = _("$$$$$$$");
-    u32 chars1, chars2, *cmp;
+    u32 chars1, chars2;
     u8 *statusPtr;
 
     statusPtr = status;
-    for (i = 0; i < 8 && *src != EOS; i++)
-        *statusPtr++ = *src++;
+    for (i = 0; i < 8; i++)
+    {
+        if (*src == EOS)
+            break;
+        *statusPtr = *src;
+        src++;
+        statusPtr++;
+    }
 
-    chars1 = *(u32 *)status;
-    chars2 = *((u32 *)status + 1);
+    chars1 = *(u32 *)(&status[0]);
+    chars2 = *(u32 *)(&status[4]);
 
     for (i = 0; i < NELEMS(gStatusConditionStringsTable); i++)
     {
-        cmp = (u32 *)gStatusConditionStringsTable[i][0];
-        if (chars1 == cmp[0] && chars2 == cmp[1])
+        if (chars1 == *(u32 *)(&gStatusConditionStringsTable[i][0][0])
+            && chars2 == *(u32 *)(&gStatusConditionStringsTable[i][0][4]))
             return gStatusConditionStringsTable[i][1];
     }
     return NULL;

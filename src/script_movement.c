@@ -84,7 +84,7 @@ bool8 ScriptMovement_TryAddNewMovement(u8 taskId, u8 objEventId, const u8 *movem
             return FALSE;
         }
     }
-    moveScrId = GetMovementScriptIdFromObjectEventId(taskId, LOCALID_PLAYER);
+    moveScrId = GetMovementScriptIdFromObjectEventId(taskId, OBJ_EVENT_ID_PLAYER);
     if (moveScrId == OBJECT_EVENTS_COUNT)
     {
         return TRUE;

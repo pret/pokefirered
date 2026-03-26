@@ -42,6 +42,7 @@ EWRAM_DATA struct PlayerPCItemPageStruct gPlayerPcMenuManager = {};
 static void Task_DrawPlayerPcTopMenu(u8 taskId);
 static void Task_TopMenuHandleInput(u8 taskId);
 static void Task_PlayerPcItemStorage(u8 taskId);
+static void Task_PlayerPcRetrainPkmn(u8 taskId);
 static void Task_PlayerPcMailbox(u8 taskId);
 static void Task_PlayerPcTurnOff(u8 taskId);
 static void Task_CreateItemStorageSubmenu(u8 taskId, u8 cursorPos);
@@ -85,11 +86,12 @@ static const u8 *const sItemStorageActionDescriptionPtrs[] = {
 static const struct MenuAction sMenuActions_TopMenu[] = {
     {gText_ItemStorage, Task_PlayerPcItemStorage},
     {gText_Mailbox, Task_PlayerPcMailbox},
-    {gText_TurnOff, Task_PlayerPcTurnOff}
+    {gText_TurnOff, Task_PlayerPcTurnOff},
+    {gText_RetrainPkmn, Task_PlayerPcRetrainPkmn}
 };
 
-static const u8 sItemOrder_BedroomPC[] = { 0, 1, 2 };
-static const u8 sItemOrder_PlayerPC[] = { 0, 1, 2 };
+static const u8 sItemOrder_BedroomPC[] = { 0, 3, 1, 2 };
+static const u8 sItemOrder_PlayerPC[] = { 0, 3, 1, 2 };
 
 static const struct MenuAction sMenuActions_ItemPc[] = {
     {gText_WithdrawItem2, Task_PlayerPcWithdrawItem},
@@ -155,7 +157,7 @@ void BedroomPC(void)
     gPlayerPcMenuManager.notInRoom = FALSE;
     BackupHelpContext();
     sItemOrder = sItemOrder_BedroomPC;
-    sTopMenuItemCount = 3;
+    sTopMenuItemCount = 4;
     taskId = CreateTask(TaskDummy, 0);
     DisplayItemMessageOnField(taskId, FONT_NORMAL, gText_WhatWouldYouLikeToDo, Task_DrawPlayerPcTopMenu);
 }
@@ -167,7 +169,7 @@ void PlayerPC(void)
     gPlayerPcMenuManager.notInRoom = TRUE;
     BackupHelpContext();
     sItemOrder = sItemOrder_PlayerPC;
-    sTopMenuItemCount = 3;
+    sTopMenuItemCount = 4;
     taskId = CreateTask(TaskDummy, 0);
     DisplayItemMessageOnField(taskId, FONT_NORMAL, gText_WhatWouldYouLikeToDo, Task_DrawPlayerPcTopMenu);
 }
@@ -260,6 +262,12 @@ static void Task_PlayerPcTurnOff(u8 taskId)
         ScriptContext_SetupScript(EventScript_PalletTown_PlayersHouse_2F_ShutDownPC);
     else
         ScriptContext_Enable();
+    DestroyTask(taskId);
+}
+
+static void Task_PlayerPcRetrainPkmn(u8 taskId)
+{
+    ScriptContext_SetupScript(EventScript_PCRetrainPkmn);
     DestroyTask(taskId);
 }
 

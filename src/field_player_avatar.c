@@ -10,6 +10,7 @@
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
 #include "help_system.h"
+#include "item.h"
 #include "metatile_behavior.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
@@ -22,6 +23,7 @@
 #include "wild_encounter.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
+#include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
@@ -125,7 +127,7 @@ static u8 TeleportAnim_RotatePlayer(struct ObjectEvent * object, s16 *timer);
 
 void MovementType_Player(struct Sprite *sprite)
 {
-    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, (bool8 (*)(struct ObjectEvent *, struct Sprite *))ObjectEventCB2_NoMovement2);
+    UpdateObjectEventCurrentMovement(&gObjectEvents[sprite->data[0]], sprite, ObjectEventCB2_NoMovement2);
 }
 
 static u8 ObjectEventCB2_NoMovement2(struct ObjectEvent * object, struct Sprite *sprite)
@@ -1194,6 +1196,9 @@ bool8 PartyHasMonWithSurf(void)
             if (MonKnowsMove(&gPlayerParty[i], MOVE_SURF))
                 return TRUE;
         }
+        // HM Sim fallback
+        if (CheckBagHasItem(ITEM_HM_SIM, 1) && CheckBagHasItem(ITEM_HM03, 1))
+            return TRUE;
     }
     return FALSE;
 }
@@ -1289,7 +1294,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     u8 objectEventId;
     struct ObjectEvent *objectEvent;
 
-    playerObjEventTemplate.localId = LOCALID_PLAYER;
+    playerObjEventTemplate.localId = OBJ_EVENT_ID_PLAYER;
     playerObjEventTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_GFX_NORMAL, gender);
     playerObjEventTemplate.x = x - 7;
     playerObjEventTemplate.y = y - 7;

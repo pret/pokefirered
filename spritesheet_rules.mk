@@ -22,7 +22,7 @@ $(OBJEVENTGFXDIR)/people/agatha.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/balding_man.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/crush_girl.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/battle_girl.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(OBJEVENTGFXDIR)/people/beauty.4bpp: %.4bpp: %.png
@@ -34,7 +34,7 @@ $(OBJEVENTGFXDIR)/people/biker.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/bill.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/black_belt.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/blackbelt.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(OBJEVENTGFXDIR)/people/blaine.4bpp: %.4bpp: %.png
@@ -241,7 +241,7 @@ $(OBJEVENTGFXDIR)/people/scientist.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/sitting_boy.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/poke_maniac.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/people/super_nerd.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(OBJEVENTGFXDIR)/people/swimmer_f_land.4bpp: %.4bpp: %.png

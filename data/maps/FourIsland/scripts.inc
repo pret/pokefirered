@@ -1,3 +1,6 @@
+.equ LOCALID_DAYCARE_MAN, 1
+.equ LOCALID_RIVAL, 10
+
 FourIsland_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FourIsland_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, FourIsland_OnFrame
@@ -15,7 +18,7 @@ FourIsland_EventScript_ShowRival::
 
 FourIsland_EventScript_TrySetDayCareManPos::
 	goto_if_unset FLAG_PENDING_DAYCARE_EGG, FourIsland_EventScript_EndSetDayCareManPos
-	setobjectxyperm LOCALID_FOUR_ISLAND_DAYCARE_MAN, 16, 14
+	setobjectxyperm LOCALID_DAYCARE_MAN, 16, 14
 FourIsland_EventScript_EndSetDayCareManPos::
 	return
 
@@ -26,25 +29,25 @@ FourIsland_OnFrame::
 FourIsland_EventScript_RivalScene::
 	lockall
 	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	playbgm MUS_ENCOUNTER_RIVAL, 0
-	applymovement LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_ExclamationMark
+	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement LOCALID_FOUR_ISLAND_RIVAL, Common_Movement_Delay48
+	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	delay 25
-	applymovement LOCALID_FOUR_ISLAND_RIVAL, FourIsland_Movement_RivalApproach
+	applymovement LOCALID_RIVAL, FourIsland_Movement_RivalApproach
 	waitmovement 0
 	msgbox FourIsland_Text_RivalAlreadyGotEggBeSmellingYa
 	closemessage
-	applymovement LOCALID_PLAYER, FourIsland_Movement_PlayerWatchRivalExit
-	applymovement LOCALID_FOUR_ISLAND_RIVAL, FourIsland_Movement_RivalExit
+	applymovement OBJ_EVENT_ID_PLAYER, FourIsland_Movement_PlayerWatchRivalExit
+	applymovement LOCALID_RIVAL, FourIsland_Movement_RivalExit
 	waitmovement 0
 	fadedefaultbgm
 	playse SE_EXIT
 	delay 35
-	removeobject LOCALID_FOUR_ISLAND_RIVAL
+	removeobject LOCALID_RIVAL
 	setvar VAR_MAP_SCENE_FOUR_ISLAND, 1
 	releaseall
 	end
@@ -160,4 +163,52 @@ FourIsland_EventScript_IslandSign::
 
 FourIsland_EventScript_LoreleisHouseSign::
 	msgbox FourIsland_Text_LoreleisHouse, MSGBOX_SIGN
+	end
+
+FourIsland_EventScript_SquirtleEggNPC::
+	goto_if_questlog EventScript_ReleaseEnd
+	special QuestLog_CutRecording
+	lock
+	faceplayer
+	goto_if_set FLAG_GOT_SQUIRTLE_EGG, FourIsland_EventScript_SquirtleEggPostComment
+	goto_if_set FLAG_NO_ROOM_FOR_SQUIRTLE_EGG, FourIsland_EventScript_SquirtleEggReturnForEgg
+	setvar VAR_0x8004, SPECIES_SQUIRTLE
+	specialvar VAR_RESULT, ScriptCheckSpeciesCaught
+	goto_if_eq VAR_RESULT, TRUE, FourIsland_EventScript_SquirtleEggAlreadyCaught
+	msgbox FourIsland_Text_SquirtleEggOffer
+	goto FourIsland_EventScript_SquirtleEggTryGive
+	end
+
+FourIsland_EventScript_SquirtleEggAlreadyCaught::
+	msgbox FourIsland_Text_SquirtleEggWaterTypeFavorite
+	release
+	end
+
+FourIsland_EventScript_SquirtleEggTryGive::
+	getpartysize
+	goto_if_eq VAR_RESULT, PARTY_SIZE, FourIsland_EventScript_SquirtleEggNoRoom
+	setflag FLAG_GOT_SQUIRTLE_EGG
+	giveegg SPECIES_SQUIRTLE
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	playfanfare MUS_LEVEL_UP
+	message FourIsland_Text_SquirtleEggReceived
+	waitfanfare
+	waitmessage
+	call EventScript_RestorePrevTextColor
+	goto FourIsland_EventScript_SquirtleEggPostComment
+	end
+
+FourIsland_EventScript_SquirtleEggPostComment::
+	msgbox FourIsland_Text_SquirtleEggPostComment
+	release
+	end
+
+FourIsland_EventScript_SquirtleEggNoRoom::
+	setflag FLAG_NO_ROOM_FOR_SQUIRTLE_EGG
+	msgbox FourIsland_Text_SquirtleEggNoRoom
+	release
+	end
+
+FourIsland_EventScript_SquirtleEggReturnForEgg::
+	goto FourIsland_EventScript_SquirtleEggTryGive
 	end

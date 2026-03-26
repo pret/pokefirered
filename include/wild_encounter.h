@@ -10,6 +10,9 @@
 
 #define NUM_ALTERING_CAVE_TABLES 9
 
+#define TIME_DAY   0
+#define TIME_NIGHT 1
+
 struct WildPokemon
 {
     u8 minLevel;
@@ -27,6 +30,7 @@ struct WildPokemonHeader
 {
     u8 mapGroup;
     u8 mapNum;
+    u8 timeOfDay;
     const struct WildPokemonInfo *landMonsInfo;
     const struct WildPokemonInfo *waterMonsInfo;
     const struct WildPokemonInfo *rockSmashMonsInfo;
@@ -35,6 +39,7 @@ struct WildPokemonHeader
 
 extern const struct WildPokemonHeader gWildMonHeaders[];
 
+bool8 IsNightTime(void);
 void DisableWildEncounters(bool8 disabled);
 bool8 StandardWildEncounter(u32 currMetatileAttrs, u16 previousMetaTileBehavior);
 bool8 SweetScentWildEncounter(void);

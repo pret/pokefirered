@@ -5,6 +5,7 @@
 #include "field_weather.h"
 #include "field_weather_util.h"
 #include "field_weather_effects.h"
+#include "wild_encounter.h"
 #include "task.h"
 #include "trig.h"
 #include "constants/field_weather.h"
@@ -12,6 +13,12 @@
 #include "constants/songs.h"
 
 #define DROUGHT_COLOR_INDEX(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
+
+// Night palette tint: blend toward dark blue
+#define NIGHT_BLEND_R 1
+#define NIGHT_BLEND_G 1
+#define NIGHT_BLEND_B 10
+#define NIGHT_BLEND_COEFF 7  // out of 16
 
 enum
 {
@@ -62,6 +69,9 @@ static bool8 FadeInScreen_FogHorizontal(void);
 static void DoNothing(void);
 static void ApplyFogBlend(u8 blendCoeff, u16 blendColor);
 static bool8 LightenSpritePaletteInFog(u8 paletteIndex);
+static void ApplyNightTintToFadedRange(u16 palOffset, u16 count);
+static void RemoveNightTintFromUnfadedRange(u16 palOffset, u16 count);
+static void CheckNightTransition(void);
 
 struct Weather *const gWeatherPtr = &sWeather;
 
@@ -87,7 +97,7 @@ static void (*const sWeatherPalStateFuncs[])(void) = {
     UpdateWeatherGammaShift,
     FadeInScreenWithWeather,
     DoNothing,
-    DoNothing
+    CheckNightTransition,
 };
 
 static const u8 sBasePaletteGammaTypes[32] = {
@@ -439,12 +449,75 @@ static bool8 FadeInScreen_FogHorizontal(void)
 static void DoNothing(void)
 { }
 
+static void ApplyNightTintToFadedRange(u16 palOffset, u16 count)
+{
+    u16 i;
+
+    for (i = 0; i < count; i++)
+    {
+        struct RGBColor c = *(struct RGBColor *)&gPlttBufferFaded[palOffset];
+        u8 r = c.r + (((NIGHT_BLEND_R - (s16)c.r) * NIGHT_BLEND_COEFF) >> 4);
+        u8 g = c.g + (((NIGHT_BLEND_G - (s16)c.g) * NIGHT_BLEND_COEFF) >> 4);
+        u8 b = c.b + (((NIGHT_BLEND_B - (s16)c.b) * NIGHT_BLEND_COEFF) >> 4);
+        gPlttBufferFaded[palOffset] = (b << 10) | (g << 5) | r;
+        palOffset++;
+    }
+}
+
+// Reconstructs the pre-night color from a night-tinted color.
+// Tint formula is: out = in + ((target - in) * coeff) / 16.
+// With coeff=7, invert as: in ~= (16*out - 7*target) / 9.
+static void RemoveNightTintFromUnfadedRange(u16 palOffset, u16 count)
+{
+    u16 i;
+
+    for (i = 0; i < count; i++)
+    {
+        struct RGBColor c = *(struct RGBColor *)&gPlttBufferUnfaded[palOffset];
+        s16 r = ((s16)16 * c.r - (s16)7 * NIGHT_BLEND_R + 4) / 9;
+        s16 g = ((s16)16 * c.g - (s16)7 * NIGHT_BLEND_G + 4) / 9;
+        s16 b = ((s16)16 * c.b - (s16)7 * NIGHT_BLEND_B + 4) / 9;
+
+        if (r < 0)
+            r = 0;
+        else if (r > 31)
+            r = 31;
+        if (g < 0)
+            g = 0;
+        else if (g > 31)
+            g = 31;
+        if (b < 0)
+            b = 0;
+        else if (b > 31)
+            b = 31;
+
+        gPlttBufferUnfaded[palOffset] = ((u16)b << 10) | ((u16)g << 5) | (u16)r;
+        palOffset++;
+    }
+}
+
+// Runs each frame during WEATHER_PAL_STATE_IDLE.
+// Detects day/night transitions and reapplies palette processing.
+static void CheckNightTransition(void)
+{
+    static bool8 sLastNightState = 0xFF;
+    bool8 isNight = IsNightTime();
+
+    if (isNight != sLastNightState)
+    {
+        sLastNightState = isNight;
+        ApplyGammaShift(0, 32, gWeatherPtr->gammaIndex);
+    }
+}
+
 static void ApplyGammaShift(u8 startPalIndex, u8 numPalettes, s8 gammaIndex)
 {
     u16 curPalIndex;
     u16 palOffset;
     u8 *gammaTable;
     u16 i;
+    u8 origStartPalIndex = startPalIndex;
+    u8 origNumPalettes = numPalettes;
 
     if (gammaIndex > 0)
     {
@@ -495,6 +568,9 @@ static void ApplyGammaShift(u8 startPalIndex, u8 numPalettes, s8 gammaIndex)
         // No palette blending.
         CpuFastCopy(&gPlttBufferUnfaded[PLTT_ID(startPalIndex)], &gPlttBufferFaded[PLTT_ID(startPalIndex)], numPalettes * PLTT_SIZE_4BPP);
     }
+
+    if (IsNightTime())
+        ApplyNightTintToFadedRange(PLTT_ID(origStartPalIndex), origNumPalettes * 16);
 }
 
 static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaIndex, u8 blendCoeff, u16 blendColor)
@@ -506,6 +582,8 @@ static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaI
     u8 rBlend = color.r;
     u8 gBlend = color.g;
     u8 bBlend = color.b;
+    u8 origStartPalIndex = startPalIndex;
+    u8 origNumPalettes = numPalettes;
 
     palOffset = PLTT_ID(startPalIndex);
     numPalettes += startPalIndex;
@@ -546,6 +624,9 @@ static void ApplyGammaShiftWithBlend(u8 startPalIndex, u8 numPalettes, s8 gammaI
 
         curPalIndex++;
     }
+
+    if (IsNightTime())
+        ApplyNightTintToFadedRange(PLTT_ID(origStartPalIndex), origNumPalettes * 16);
 }
 
 static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 blendColor)
@@ -595,6 +676,9 @@ static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 bl
             }
         }
     }
+
+    if (IsNightTime())
+        ApplyNightTintToFadedRange(0, PLTT_BUFFER_SIZE);
 }
 
 static void ApplyFogBlend(u8 blendCoeff, u16 blendColor)
@@ -642,6 +726,9 @@ static void ApplyFogBlend(u8 blendCoeff, u16 blendColor)
             BlendPalette(PLTT_ID(curPalIndex), 16, blendCoeff, blendColor);
         }
     }
+
+    if (IsNightTime())
+        ApplyNightTintToFadedRange(0, PLTT_BUFFER_SIZE);
 }
 
 static void MarkFogSpritePalToLighten(u8 paletteIndex)
@@ -735,7 +822,11 @@ void FadeScreen(u8 mode, s8 delay)
     if (fadeOut)
     {
         if (useWeatherPal)
+        {
             CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
+            if (IsNightTime())
+                RemoveNightTintFromUnfadedRange(0, PLTT_BUFFER_SIZE);
+        }
 
         BeginNormalPaletteFade(PALETTES_ALL, delay, 0, 16, fadeColor);
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_OUT;
@@ -803,7 +894,11 @@ void FadeSelectedPals(u8 mode, s8 delay, u32 selectedPalettes)
     if (fadeOut)
     {
         if (useWeatherPal)
+        {
             CpuFastCopy(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
+            if (IsNightTime())
+                RemoveNightTintFromUnfadedRange(0, PLTT_BUFFER_SIZE);
+        }
 
         BeginNormalPaletteFade(selectedPalettes, delay, 0, 16, fadeColor);
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_OUT;

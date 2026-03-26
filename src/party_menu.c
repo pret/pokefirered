@@ -2963,6 +2963,7 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 {
     u8 i, j;
+    bool8 alreadyAdded[NELEMS(sFieldMoves)] = {0};
 
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_SUMMARY);
@@ -2974,7 +2975,35 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
             if (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == sFieldMoves[j])
             {
                 AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + CURSOR_OPTION_FIELD_MOVES);
+                alreadyAdded[j] = TRUE;
                 break;
+            }
+        }
+    }
+    // HM Sim: add HM field moves the mon doesn't know, if player has HM Sim + the HM item
+    if (CheckBagHasItem(ITEM_HM_SIM, 1) && !GetMonData(&mons[slotId], MON_DATA_IS_EGG))
+    {
+        static const struct { u16 move; u16 hmItem; } sHmSimMoves[] = {
+            {MOVE_CUT,       ITEM_HM01},
+            {MOVE_FLY,       ITEM_HM02},
+            {MOVE_SURF,      ITEM_HM03},
+            {MOVE_STRENGTH,  ITEM_HM04},
+            {MOVE_FLASH,     ITEM_HM05},
+            {MOVE_ROCK_SMASH, ITEM_HM06},
+            {MOVE_WATERFALL, ITEM_HM07},
+        };
+        for (i = 0; i < NELEMS(sHmSimMoves); i++)
+        {
+            if (!CheckBagHasItem(sHmSimMoves[i].hmItem, 1))
+                continue;
+            for (j = 0; sFieldMoves[j] != FIELD_MOVE_END; ++j)
+            {
+                if (sFieldMoves[j] == sHmSimMoves[i].move && !alreadyAdded[j])
+                {
+                    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + CURSOR_OPTION_FIELD_MOVES);
+                    alreadyAdded[j] = TRUE;
+                    break;
+                }
             }
         }
     }
@@ -4087,9 +4116,9 @@ static void DisplayCantUseSurfMessage(void)
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         if (MetatileBehavior_IsFastWater(MapGridGetMetatileBehaviorAt(x, y)) == TRUE)
             DisplayPartyMenuStdMessage(PARTY_MSG_CURRENT_TOO_FAST);
-        else if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE17))
-              && ((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE17))
-                 || (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE18))))
+        else if ((gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE17))
+              && ((gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE17))
+                 || (gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE18))))
             DisplayPartyMenuStdMessage(PARTY_MSG_ENJOY_CYCLING);
         else
             DisplayPartyMenuStdMessage(PARTY_MSG_CANT_SURF_HERE);

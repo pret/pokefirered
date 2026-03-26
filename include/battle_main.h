@@ -35,7 +35,7 @@ struct MultiBattlePokemonTx
 #define TYPE_MUL_NO_EFFECT          0
 #define TYPE_MUL_NOT_EFFECTIVE      5
 #define TYPE_MUL_NORMAL             10
-#define TYPE_MUL_SUPER_EFFECTIVE    20
+#define TYPE_MUL_SUPER_EFFECTIVE    15  // nerfed from 20; trainer levels restore via effectiveness modifier
 
 // special type table Ids
 #define TYPE_FORESIGHT  0xFE
@@ -94,5 +94,11 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battler);
+
+void ResetTrainerTypeActionStreak(u8 battler);
+void ResetAllTrainerTypeActionStreaks(void);
+void RecordTrainerTypeActionMove(u8 battler, u16 move);
+void RecordTrainerTypeActionItem(u8 battler);
+u8 GetTrainerTypeActionStreakMultiplierTenths(u8 battler);
 
 #endif // GUARD_BATTLE_MAIN_H

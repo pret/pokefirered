@@ -1,6 +1,10 @@
 	.ifdef FIRERED
 	.equiv GAME_VERSION, 4
-	.else
+	.endif
+	.ifdef FULLSPEC
+	.equiv GAME_VERSION, 4
+	.endif
+	.ifdef LEAFGREEN
 	.equiv GAME_VERSION, 5
 	.endif
 

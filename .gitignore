@@ -1,68 +1,73 @@
+# -------------------------------------------------------
+# Build output directory (object files, dependency files)
+# -------------------------------------------------------
+build/
+*.o
+*.d
+
+# -------------------------------------------------------
+# Final ROM / linker outputs
+# -------------------------------------------------------
+poke*.gba
+poke*.elf
+poke*.map
+
+# -------------------------------------------------------
+# Generated graphics files (produced by gbagfx from *.png)
+# -------------------------------------------------------
 *.1bpp
 *.4bpp
 *.8bpp
-*.DS_Store
-*.bak
-*.bat
-*.diff
-*.dump
-*.elf
-*.exe
-*.fwjpnfont
-*.gba
-!data/*.gba
-*.sgm
-*.sa1
-*.sg1
 *.gbapal
-*.hwjpnfont
-*.i
-*.idb
-*.id0
-*.id1
-*.id2
-*.latfont
 *.lz
-*.map
-*.nam
-*.o
-*.pcm
-*.pl
 *.rl
-*.s.old
-*.s.old2
-*.sa*
-*.swo
-*.swp
-*.til
-.fuse*
-.idea/
-Thumbs.db
-build/
-cmake-build-*
-ld_script_ruby.txt
-ld_script_sapphire.txt
+
+# Binary artifacts removed by clean-assets
 sound/**/*.bin
+
+# Dependency and intermediate files emitted by the build system
+*.i
+*.ii
+*.s~
+
+# -------------------------------------------------------
+# Generated font files
+# -------------------------------------------------------
+*.fwjpnfont
+*.hwjpnfont
+*.latfont
+
+# -------------------------------------------------------
+# Generated MIDI-to-assembly files (produced by mid2agb)
+# -------------------------------------------------------
 sound/songs/midi/*.s
-src/data/heal_locations.h
-src/data/items.h
-src/data/wild_encounters.h
-src/data/region_map/region_map_entries.h
-src/data/region_map/region_map_entry_strings.h
-src/data/region_map/porymap_config.json
-tags
-tools/agbcc
-tools/binutils
-types_*.taghl
-!.github/calcrom/calcrom.pl
-!sound/programmable_wave_samples/*.pcm
-_Deparsed_XSubs.pm
-porymap.*.cfg
-prefabs.json
-.vscode/*.*
-*.js
-*.sym
-build-cmake-*/
-.cache/
-CMakeLists.txt
-compile_commands.json
+
+# -------------------------------------------------------
+# Generated JSON header / text files (produced by jsonproc)
+# -------------------------------------------------------
+src/data/*.h
+src/data/*.json.txt
+src/data/region_map/*.h
+src/data/region_map/*.json.txt
+include/constants/map_groups.h
+include/constants/layouts.h
+
+# Generated map/layout include files
+data/layouts/layouts.inc
+data/layouts/layouts_table.inc
+data/maps/connections.inc
+data/maps/events.inc
+data/maps/groups.inc
+data/maps/headers.inc
+data/maps/**/connections.inc
+data/maps/**/events.inc
+data/maps/**/header.inc
+
+# -------------------------------------------------------
+# Editor / OS artifacts
+# -------------------------------------------------------
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo

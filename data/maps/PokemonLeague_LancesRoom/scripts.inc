@@ -1,3 +1,5 @@
+.set LOCALID_LANCE, 1
+
 PokemonLeague_LancesRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_LancesRoom_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_LancesRoom_OnLoad
@@ -28,7 +30,7 @@ PokemonLeague_LancesRoom_OnWarp::
 	.2byte 0
 
 PokemonLeague_LancesRoom_EventScript_TurnPlayerNorth::
-	turnobject LOCALID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_LancesRoom_OnFrame::
@@ -37,7 +39,7 @@ PokemonLeague_LancesRoom_OnFrame::
 
 PokemonLeague_LancesRoom_EventScript_EnterRoom::
 	lockall
-	applymovement LOCALID_PLAYER, PokemonLeague_LancesRoom_Movement_WalkThroughCorridor
+	applymovement OBJ_EVENT_ID_PLAYER, PokemonLeague_LancesRoom_Movement_WalkThroughCorridor
 	waitmovement 0
 	setflag FLAG_TEMP_2
 	call PokemonLeague_LancesRoom_EventScript_SetEntryClosed

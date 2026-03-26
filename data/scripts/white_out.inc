@@ -19,6 +19,8 @@ EventScript_AfterWhiteOutHealMsg::
 	msgbox Text_MonsHealed
 	return
 
+@ LOCALID_MOM set by PalletTown_PlayersHouse_1F
+
 EventScript_AfterWhiteOutMomHeal::
 	lockall
 	textcolor NPC_TEXT_COLOR_FEMALE

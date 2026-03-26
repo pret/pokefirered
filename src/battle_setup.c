@@ -27,7 +27,6 @@
 #include "battle_transition.h"
 #include "battle_controllers.h"
 #include "constants/battle_setup.h"
-#include "constants/event_objects.h"
 #include "constants/items.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
@@ -220,14 +219,14 @@ static void CreateBattleStartTask(u8 transition, u16 song) // song == 0 means de
 
 static bool8 CheckSilphScopeInPokemonTower(u16 mapGroup, u16 mapNum)
 {
-    if (mapGroup == MAP_GROUP(MAP_POKEMON_TOWER_1F)
-     && (mapNum == MAP_NUM(MAP_POKEMON_TOWER_1F)
-      || mapNum == MAP_NUM(MAP_POKEMON_TOWER_2F)
-      || mapNum == MAP_NUM(MAP_POKEMON_TOWER_3F)
-      || mapNum == MAP_NUM(MAP_POKEMON_TOWER_4F)
-      || mapNum == MAP_NUM(MAP_POKEMON_TOWER_5F)
-      || mapNum == MAP_NUM(MAP_POKEMON_TOWER_6F)
-      || mapNum == MAP_NUM(MAP_POKEMON_TOWER_7F))
+    if (mapGroup == MAP_GROUP(POKEMON_TOWER_1F)
+     && (mapNum == MAP_NUM(POKEMON_TOWER_1F)
+      || mapNum == MAP_NUM(POKEMON_TOWER_2F)
+      || mapNum == MAP_NUM(POKEMON_TOWER_3F)
+      || mapNum == MAP_NUM(POKEMON_TOWER_4F)
+      || mapNum == MAP_NUM(POKEMON_TOWER_5F)
+      || mapNum == MAP_NUM(POKEMON_TOWER_6F)
+      || mapNum == MAP_NUM(POKEMON_TOWER_7F))
      && !(CheckBagHasItem(ITEM_SILPH_SCOPE, 1)))
         return TRUE;
     else
@@ -239,7 +238,15 @@ void StartWildBattle(void)
     if (GetSafariZoneFlag())
         DoSafariBattle();
     else if (CheckSilphScopeInPokemonTower(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
-        DoGhostBattle();
+    {
+        // Without Silph Scope, only Ghost-type Pokemon appear as unidentifiable ghosts.
+        // Non-Ghost Pokemon encountered in the tower can be battled normally.
+        u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
+        if (gSpeciesInfo[species].types[0] == TYPE_GHOST || gSpeciesInfo[species].types[1] == TYPE_GHOST)
+            DoGhostBattle();
+        else
+            DoStandardWildBattle();
+    }
     else
         DoStandardWildBattle();
 }
@@ -300,7 +307,7 @@ static void DoTrainerBattle(void)
 
 void StartOldManTutorialBattle(void)
 {
-    CreateMaleMon(&gEnemyParty[0], SPECIES_WEEDLE, 5);
+    CreateMaleMon(&gEnemyParty[0], SPECIES_MAGIKARP, 5);
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
     gBattleTypeFlags = BATTLE_TYPE_OLD_MAN_TUTORIAL;
@@ -710,7 +717,7 @@ static void InitTrainerBattleVariables(void)
 {
     sTrainerBattleMode = 0;
     gTrainerBattleOpponent_A = 0;
-    sTrainerObjectEventLocalId = LOCALID_NONE;
+    sTrainerObjectEventLocalId = 0;
     sTrainerAIntroSpeech = NULL;
     sTrainerADefeatSpeech = NULL;
     sTrainerVictorySpeech = NULL;
@@ -777,7 +784,7 @@ static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, co
 
 static void SetMapVarsToTrainer(void)
 {
-    if (sTrainerObjectEventLocalId != LOCALID_NONE)
+    if (sTrainerObjectEventLocalId != 0)
     {
         gSpecialVar_LastTalked = sTrainerObjectEventLocalId;
         gSelectedObjectEvent = GetObjectEventIdByLocalIdAndMap(sTrainerObjectEventLocalId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);

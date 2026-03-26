@@ -1,3 +1,7 @@
+.equ LOCALID_DOME_FOSSIL,  1
+.equ LOCALID_HELIX_FOSSIL, 2
+.equ LOCALID_MIGUEL,       3
+
 MtMoon_B2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, MtMoon_B2F_OnTransition
 	.byte 0
@@ -60,16 +64,16 @@ MtMoon_B2F_EventScript_DomeFossil::
 	closemessage
 	special QuestLog_CutRecording
 	delay 10
+	@ Miguel gives the player the other fossil too
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToHelixFossil
 	waitmovement 0
 	copyobjectxytoperm LOCALID_MIGUEL
 	textcolor NPC_TEXT_COLOR_MALE
-	playfanfare MUS_OBTAIN_KEY_ITEM
-	message MtMoon_B2F_Text_ThenThisFossilIsMine
-	waitmessage
-	waitfanfare
+	msgbox MtMoon_B2F_Text_TakeOtherFossilToo
 	removeobject LOCALID_HELIX_FOSSIL
+	giveitem_msg MtMoon_B2F_Text_ObtainedHelixFossil, ITEM_HELIX_FOSSIL, 1, MUS_OBTAIN_KEY_ITEM
 	setflag FLAG_GOT_DOME_FOSSIL
+	setflag FLAG_GOT_HELIX_FOSSIL
 	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	release
 	end
@@ -91,15 +95,15 @@ MtMoon_B2F_EventScript_HelixFossil::
 	closemessage
 	special QuestLog_CutRecording
 	delay 10
+	@ Miguel gives the player the other fossil too
 	applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
 	waitmovement 0
 	copyobjectxytoperm LOCALID_MIGUEL
 	textcolor NPC_TEXT_COLOR_MALE
-	playfanfare MUS_OBTAIN_KEY_ITEM
-	message MtMoon_B2F_Text_ThenThisFossilIsMine
-	waitmessage
-	waitfanfare
+	msgbox MtMoon_B2F_Text_TakeOtherFossilToo
 	removeobject LOCALID_DOME_FOSSIL
+	giveitem_msg MtMoon_B2F_Text_ObtainedDomeFossil, ITEM_DOME_FOSSIL, 1, MUS_OBTAIN_KEY_ITEM
+	setflag FLAG_GOT_DOME_FOSSIL
 	setflag FLAG_GOT_HELIX_FOSSIL
 	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
 	release

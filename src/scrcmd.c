@@ -23,6 +23,7 @@
 #include "data.h"
 #include "field_specials.h"
 #include "constants/items.h"
+#include "constants/moves.h"
 #include "script_pokemon_util.h"
 #include "pokemon_storage_system.h"
 #include "party_menu.h"
@@ -37,7 +38,6 @@
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/sound.h"
-#include "sloopsvc.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -766,7 +766,7 @@ bool8 ScrCmd_warphole(struct ScriptContext * ctx)
     u16 y;
 
     PlayerGetDestCoords(&x, &y);
-    if (mapGroup == MAP_GROUP(MAP_UNDEFINED) && mapNum == MAP_NUM(MAP_UNDEFINED))
+    if (mapGroup == MAP_GROUP(UNDEFINED) && mapNum == MAP_NUM(UNDEFINED))
         SetWarpDestinationToFixedHoleWarp(x - MAP_OFFSET, y - MAP_OFFSET);
     else
         SetWarpDestination(mapGroup, mapNum, WARP_ID_NONE, x - MAP_OFFSET, y - MAP_OFFSET);
@@ -1011,7 +1011,7 @@ bool8 ScrCmd_waitmovement(struct ScriptContext * ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
 
-    if (localId != LOCALID_NONE)
+    if (localId != 0)
         sMovingNpcId = localId;
     sMovingNpcMapGroup = gSaveBlock1Ptr->location.mapGroup;
     sMovingNpcMapNum = gSaveBlock1Ptr->location.mapNum;
@@ -1025,7 +1025,7 @@ bool8 ScrCmd_waitmovementat(struct ScriptContext * ctx)
     u8 mapBank;
     u8 mapId;
 
-    if (localId != LOCALID_NONE)
+    if (localId != 0)
         sMovingNpcId = localId;
     mapBank = ScriptReadByte(ctx);
     mapId = ScriptReadByte(ctx);
@@ -1233,7 +1233,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext * ctx)
     u8 playerObjectId;
 
     HideFieldMessageBox();
-    playerObjectId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
+    playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
@@ -1247,7 +1247,7 @@ bool8 ScrCmd_release(struct ScriptContext * ctx)
     HideFieldMessageBox();
     if (gObjectEvents[gSelectedObjectEvent].active)
         ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gSelectedObjectEvent]);
-    playerObjectId = GetObjectEventIdByLocalIdAndMap(LOCALID_PLAYER, 0, 0);
+    playerObjectId = GetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_PLAYER, 0, 0);
     ObjectEventClearHeldMovementIfFinished(&gObjectEvents[playerObjectId]);
     ScriptMovement_UnfreezeObjectEvents();
     UnfreezeObjectEvents();
@@ -1733,24 +1733,12 @@ bool8 ScrCmd_bufferboxname(struct ScriptContext * ctx)
 
 bool8 ScrCmd_givemon(struct ScriptContext * ctx)
 {
-    u16 species;
-    u8 level;
-    u16 item;
-    u32 unkParam1;
-    u32 unkParam2;
-    u8 unkParam3;
-    species = VarGet(ScriptReadHalfword(ctx));
-#if REVISION >= 0xA
-    // If the player party count is zero, this "must" be giving the starter.
-    // Notify the emulator of what starter was picked, for telemetry purposes.
-    if (gSaveBlock1Ptr->playerPartyCount == 0)
-        svc_SetStarter(species);
-#endif
-    level = ScriptReadByte(ctx);
-    item = VarGet(ScriptReadHalfword(ctx));
-    unkParam1 = ScriptReadWord(ctx);
-    unkParam2 = ScriptReadWord(ctx);
-    unkParam3 = ScriptReadByte(ctx);
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u8 level = ScriptReadByte(ctx);
+    u16 item = VarGet(ScriptReadHalfword(ctx));
+    u32 unkParam1 = ScriptReadWord(ctx);
+    u32 unkParam2 = ScriptReadWord(ctx);
+    u8 unkParam3 = ScriptReadByte(ctx);
 
     gSpecialVar_Result = ScriptGiveMon(species, level, item, unkParam1, unkParam2, unkParam3);
     return FALSE;
@@ -1774,6 +1762,21 @@ bool8 ScrCmd_setmonmove(struct ScriptContext * ctx)
     return FALSE;
 }
 
+static u16 GetHmItemForMove(u16 moveId)
+{
+    switch (moveId)
+    {
+    case MOVE_CUT:       return ITEM_HM01;
+    case MOVE_FLY:       return ITEM_HM02;
+    case MOVE_SURF:      return ITEM_HM03;
+    case MOVE_STRENGTH:  return ITEM_HM04;
+    case MOVE_FLASH:     return ITEM_HM05;
+    case MOVE_ROCK_SMASH: return ITEM_HM06;
+    case MOVE_WATERFALL: return ITEM_HM07;
+    default:             return ITEM_NONE;
+    }
+}
+
 bool8 ScrCmd_checkpartymove(struct ScriptContext * ctx)
 {
     u8 i;
@@ -1792,6 +1795,29 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext * ctx)
             break;
         }
     }
+
+    // HM Sim fallback: if no party mon knows the move, check for the HM Sim + corresponding HM item
+    if (gSpecialVar_Result == PARTY_SIZE)
+    {
+        u16 hmItem = GetHmItemForMove(moveId);
+        if (hmItem != ITEM_NONE && CheckBagHasItem(ITEM_HM_SIM, 1) && CheckBagHasItem(hmItem, 1))
+        {
+            // Find first non-egg party mon to attribute the action to
+            for (i = 0; i < PARTY_SIZE; i++)
+            {
+                u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+                if (!species)
+                    break;
+                if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+                {
+                    gSpecialVar_Result = i;
+                    gSpecialVar_0x8004 = species;
+                    break;
+                }
+            }
+        }
+    }
+
     return FALSE;
 }
 

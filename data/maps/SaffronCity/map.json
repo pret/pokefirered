@@ -108,7 +108,6 @@
       "flag": "FLAG_HIDE_SAFFRON_ROCKETS"
     },
     {
-      "local_id": "LOCALID_SAFFRON_DOOR_GUARD_GRUNT",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ROCKET_M",
       "x": 34,
@@ -236,7 +235,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_CRUSH_GIRL",
+      "graphics_id": "OBJ_EVENT_GFX_BATTLE_GIRL",
       "x": 47,
       "y": 24,
       "elevation": 3,
@@ -245,7 +244,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SaffronCity_EventScript_CrushGirl",
+      "script": "SaffronCity_EventScript_BattleGirl",
       "flag": "FLAG_HIDE_POSTGAME_GOSSIPERS"
     }
   ],

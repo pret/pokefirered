@@ -1,111 +1,176 @@
+.set LOCALID_ROUTE5_DAYCAREMAN, 1
+
 Route5_PokemonDayCare_EventScript_DaycareMan::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
-	showmoneybox 0, 0
-	specialvar VAR_RESULT, IsThereMonInRoute5Daycare
-	goto_if_eq VAR_RESULT, TRUE, Route5_PokemonDayCare_EventScript_CheckOnMon
+	specialvar VAR_RESULT, GetDaycareState
+	goto_if_eq VAR_RESULT, DAYCARE_EGG_WAITING, Route5_PokemonDayCare_EventScript_EggWaiting
+	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, Route5_PokemonDayCare_EventScript_OneMonInDaycare
+	goto_if_eq VAR_RESULT, DAYCARE_TWO_MONS, Route5_PokemonDayCare_EventScript_TwoMonsInDaycare
 	msgbox Route5_PokemonDayCare_Text_WantMeToRaiseMon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route5_PokemonDayCare_EventScript_TryGiveMon
+	goto_if_eq VAR_RESULT, YES, Route5_PokemonDayCare_EventScript_GiveMonToRaise
 	msgbox Route5_PokemonDayCare_Text_ComeAgain
-	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
+	release
 	end
 
-Route5_PokemonDayCare_EventScript_TryGiveMon::
+Route5_PokemonDayCare_EventScript_GiveMonToRaise::
 	specialvar VAR_RESULT, CountPartyNonEggMons
 	goto_if_eq VAR_RESULT, 1, Route5_PokemonDayCare_EventScript_OnlyOneMonInParty
 	msgbox Route5_PokemonDayCare_Text_WhichMonShouldIRaise
 	fadescreen FADE_TO_BLACK
-	hidemoneybox
 	special ChooseSendDaycareMon
 	waitstate
-	showmoneybox 0, 0
 	goto_if_ge VAR_0x8004, PARTY_SIZE, Route5_PokemonDayCare_EventScript_ComeAgain
 	specialvar VAR_RESULT, CountPartyAliveNonEggMons_IgnoreVar0x8004Slot
 	goto_if_eq VAR_RESULT, 0, Route5_PokemonDayCare_EventScript_OnlyOneAliveMonInParty
 	specialvar VAR_0x8005, GetSelectedMonNicknameAndSpecies
-	msgbox Route5_PokemonDayCare_Text_LookAfterMonForAWhile
 	waitse
 	playmoncry VAR_0x8005, CRY_MODE_NORMAL
-	msgbox Route5_PokemonDayCare_Text_ComeSeeMeInAWhile
+	msgbox Route5_PokemonDayCare_Text_LookAfterMonForAWhile
 	waitmoncry
-	special PutMonInRoute5Daycare
+	special StoreSelectedPokemonInDaycare
 	incrementgamestat GAME_STAT_USED_DAYCARE
-	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
+	specialvar VAR_RESULT, GetDaycareState
+	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, Route5_PokemonDayCare_EventScript_CanRaiseOneMore
+	release
 	end
 
 Route5_PokemonDayCare_EventScript_ComeAgain::
-	msgbox Route5_PokemonDayCare_Text_ComeAnytimeYouLike
-	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
+	msgbox Route5_PokemonDayCare_Text_ComeAgain
+	release
+	end
+
+Route5_PokemonDayCare_EventScript_CanRaiseOneMore::
+	msgbox Route5_PokemonDayCare_Text_CanRaiseOneMore, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route5_PokemonDayCare_EventScript_GiveMonToRaise
+	goto Route5_PokemonDayCare_EventScript_ComeAgain
 	end
 
 Route5_PokemonDayCare_EventScript_OnlyOneMonInParty::
 	msgbox Route5_PokemonDayCare_Text_OnlyHaveOneMonWithYou
-	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
+	release
 	end
 
 Route5_PokemonDayCare_EventScript_OnlyOneAliveMonInParty::
 	msgbox Route5_PokemonDayCare_Text_WhatWillYouBattleWith
-	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
+	release
 	end
 
-Route5_PokemonDayCare_EventScript_CheckOnMon::
+Route5_PokemonDayCare_EventScript_EggWaiting::
+	msgbox Route5_PokemonDayCare_Text_EggWaiting
+	release
+	end
+
+Route5_PokemonDayCare_EventScript_MonHasGrownXLevels::
+	msgbox Route5_PokemonDayCare_Text_MonHasGrownByXLevels
+	return
+
+Route5_PokemonDayCare_EventScript_DisplayLevelsGained::
+	specialvar VAR_RESULT, GetNumLevelsGainedFromDaycare
+	call_if_ne VAR_RESULT, 0, Route5_PokemonDayCare_EventScript_MonHasGrownXLevels
+	return
+
+Route5_PokemonDayCare_EventScript_OneMonInDaycare::
+	msgbox Route5_PokemonDayCare_Text_GoodToSeeYou
 	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, GetNumLevelsGainedForRoute5DaycareMon
-	call_if_ne VAR_RESULT, 0, Route5_PokemonDayCare_EventScript_MonHasGrownByXLevels
-	call_if_eq VAR_RESULT, 0, Route5_PokemonDayCare_EventScript_NotEnoughTime
-	special GetCostToWithdrawRoute5DaycareMon
-	msgbox Route5_PokemonDayCare_Text_OweMeXForMonsReturn, MSGBOX_YESNO
+	call Route5_PokemonDayCare_EventScript_DisplayLevelsGained
+	msgbox Route5_PokemonDayCare_Text_CanRaiseOneMore, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route5_PokemonDayCare_EventScript_GiveMonToRaise
+	msgbox Route5_PokemonDayCare_Text_TakeYourMonBack, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, Route5_PokemonDayCare_EventScript_TryRetrieveMon
 	goto Route5_PokemonDayCare_EventScript_ComeAgain
 	end
 
-Route5_PokemonDayCare_EventScript_MonHasGrownByXLevels::
-	msgbox Route5_PokemonDayCare_Text_MonHasGrownByXLevels
-	return
-
-Route5_PokemonDayCare_EventScript_NotEnoughTime::
-	msgbox Route5_PokemonDayCare_Text_MonNeedsToSpendMoreTime
-	return
-
 Route5_PokemonDayCare_EventScript_TryRetrieveMon::
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	goto_if_eq VAR_RESULT, PARTY_SIZE, Route5_PokemonDayCare_EventScript_NoRoomInParty
+	specialvar VAR_RESULT, GetDaycareState
+	setvar VAR_0x8004, 0
+	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, Route5_PokemonDayCare_EventScript_CostPrompt
+	special ShowDaycareLevelMenu
+	waitstate
+	copyvar VAR_0x8004, VAR_RESULT
+	goto_if_eq VAR_RESULT, DAYCARE_EXITED_LEVEL_MENU, Route5_PokemonDayCare_EventScript_ComeAgain
+	goto Route5_PokemonDayCare_EventScript_CostPrompt
+	end
+
+Route5_PokemonDayCare_EventScript_CostPrompt::
+	special GetDaycareCost
+	msgbox Route5_PokemonDayCare_Text_OweMeXForMonsReturn, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route5_PokemonDayCare_EventScript_CheckEnoughMoney
+	goto Route5_PokemonDayCare_EventScript_ComeAgain
+	end
+
+Route5_PokemonDayCare_EventScript_CheckEnoughMoney::
 	specialvar VAR_RESULT, IsEnoughForCostInVar0x8005
 	goto_if_eq VAR_RESULT, TRUE, Route5_PokemonDayCare_EventScript_RetrieveMon
 	msgbox Route5_PokemonDayCare_Text_DontHaveEnoughMoney
-	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
+	release
 	end
 
 Route5_PokemonDayCare_EventScript_RetrieveMon::
-	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, TakePokemonFromRoute5Daycare
+	applymovement LOCALID_ROUTE5_DAYCAREMAN, Route5_PokemonDayCare_Movement_RetrieveMon
+	waitmovement 0
+	specialvar VAR_RESULT, TakePokemonFromDaycare
 	special SubtractMoneyFromVar0x8005
-	updatemoneybox
-	copyvar VAR_0x8008, VAR_RESULT
-	getpartysize
-	subvar VAR_RESULT, 1
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	copyvar VAR_RESULT, VAR_0x8008
+	playse SE_RS_SHOP
 	msgbox Route5_PokemonDayCare_Text_ThankYouHeresMon
-	textcolor NPC_TEXT_COLOR_NEUTRAL
 	waitse
 	playmoncry VAR_RESULT, CRY_MODE_NORMAL
+	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox Route5_PokemonDayCare_Text_PlayerGotMonBack
 	call EventScript_RestorePrevTextColor
 	waitmoncry
-	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
+	specialvar VAR_RESULT, GetDaycareState
+	goto_if_eq VAR_RESULT, DAYCARE_ONE_MON, Route5_PokemonDayCare_EventScript_AskRetrieveOther
+	goto Route5_PokemonDayCare_EventScript_ComeAgain
+	end
+
+Route5_PokemonDayCare_EventScript_AskRetrieveOther::
+	msgbox Route5_PokemonDayCare_Text_TakeOtherOneBackToo, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route5_PokemonDayCare_EventScript_TryRetrieveMon
+	goto Route5_PokemonDayCare_EventScript_ComeAgain
 	end
 
 Route5_PokemonDayCare_EventScript_NoRoomInParty::
 	msgbox Route5_PokemonDayCare_Text_YouveGotNoRoomForIt
-	goto Route5_PokemonDayCare_EventScript_CloseMoneyBox
-	end
-
-Route5_PokemonDayCare_EventScript_CloseMoneyBox::
-	hidemoneybox
 	release
 	end
+
+Route5_PokemonDayCare_EventScript_TwoMonsInDaycare::
+	msgbox Route5_PokemonDayCare_Text_GoodToSeeYou
+	setvar VAR_0x8004, 0
+	call Route5_PokemonDayCare_EventScript_DisplayLevelsGained
+	setvar VAR_0x8004, 1
+	call Route5_PokemonDayCare_EventScript_DisplayLevelsGained
+	msgbox Route5_PokemonDayCare_Text_TakeYourMonBack, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route5_PokemonDayCare_EventScript_TryRetrieveMon
+	msgbox Route5_PokemonDayCare_Text_ComeAgain
+	release
+	end
+
+Route5_PokemonDayCare_Movement_RetrieveMon::
+	delay_16
+	delay_16
+	face_right
+	delay_16
+	delay_16
+	face_left
+	delay_16
+	delay_16
+	face_up
+	walk_slower_up
+	set_invisible
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	face_down
+	set_visible
+	walk_slower_down
+	step_end
 
 EventScript_EggHatch::
 	lockall

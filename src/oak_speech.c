@@ -587,7 +587,7 @@ static const u8 *const sControlsGuide_Pages2And3_Strings[CONTROLS_GUIDE_STRINGS_
 
 static const u8 *const sMaleNameChoices[] =
 {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     gNameChoice_Red,
     gNameChoice_Fire,
     gNameChoice_Ash,
@@ -618,7 +618,7 @@ static const u8 *const sMaleNameChoices[] =
 
 static const u8 *const sFemaleNameChoices[] =
 {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     gNameChoice_Red,
     gNameChoice_Fire,
 #elif defined(LEAFGREEN)
@@ -646,7 +646,7 @@ static const u8 *const sFemaleNameChoices[] =
 
 static const u8 *const sRivalNameChoices[] =
 {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     gNameChoice_Green,
     gNameChoice_Gary,
     gNameChoice_Kaz,

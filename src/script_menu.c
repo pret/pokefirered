@@ -159,6 +159,16 @@ static const struct MenuAction sMultichoiceList_DomeAmber[] = {
     { gOtherText_Exit }
 };
 
+static const struct MenuAction sMultichoiceList_Root[] = {
+    { gText_RootFossil },
+    { gOtherText_Exit }
+};
+
+static const struct MenuAction sMultichoiceList_Claw[] = {
+    { gText_ClawFossil },
+    { gOtherText_Exit }
+};
+
 static const struct MenuAction sMultichoiceList_CeladonVendingMachine[] = {
     { gText_FreshWater_200 },
     { gText_SodaPop_300 },
@@ -315,7 +325,7 @@ static const struct MenuAction sMultichoiceList_BikeShop[] = {
 };
 
 static const struct MenuAction sMultichoiceList_GameCornerPokemonPrizes[] = {
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
     { gText_Abra_180Coins },
     { gText_Clefairy_500Coins },
     { gText_Dratini_2800Coins },
@@ -338,14 +348,8 @@ static const struct MenuAction sMultichoiceList_TradeCenter_Colosseum[] = {
 };
 
 static const struct MenuAction sMultichoiceList_Link_Wireless[] = {
-#if REVISION >= 0xA
-    // The default is wireless here as it's always emulated by Sloop
-    { gText_Wireless },
-    { gText_GameLinkCable },
-#else
     { gText_GameLinkCable },
     { gText_Wireless },
-#endif
     { gOtherText_Exit }
 };
 
@@ -568,6 +572,8 @@ static const struct MultichoiceListStruct sMultichoiceLists[] = {
     [MULTICHOICE_62]                                         = MULTICHOICE(sMultichoiceList_62),
     [MULTICHOICE_JOIN_OR_LEAD]                               = MULTICHOICE(sMultichoiceList_JoinOrLead),
     [MULTICHOICE_TRAINER_TOWER_MODE]                         = MULTICHOICE(sMultichoiceList_TrainerTowerMode),
+    [MULTICHOICE_ROOT]                                       = MULTICHOICE(sMultichoiceList_Root),
+    [MULTICHOICE_CLAW]                                       = MULTICHOICE(sMultichoiceList_Claw),
 };
 
 // From Cool to Berries goes unused

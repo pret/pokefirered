@@ -27,7 +27,7 @@ enum TitleScreenScene
     TITLESCREENSCENE_CRY
 };
 
-#if   defined(FIRERED)
+#if   defined(FIRERED) || defined(FULLSPEC)
 #define TITLE_SPECIES SPECIES_CHARIZARD
 #elif defined(LEAFGREEN)
 #define TITLE_SPECIES SPECIES_VENUSAUR
@@ -57,7 +57,7 @@ static void LoadMainTitleScreenPalsAndResetBgs(void);
 static void CB2_FadeOutTransitionToSaveClearScreen(void);
 static void CB2_FadeOutTransitionToBerryFix(void);
 static void LoadSpriteGfxAndPals(void);
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 static void SpriteCallback_TitleScreenFlame(struct Sprite *sprite);
 static void Task_FlameSpawner(u8 taskId);
 #elif defined(LEAFGREEN)
@@ -75,7 +75,7 @@ static void SpriteCallback_Slash(struct Sprite *sprite);
 
 static const u8 sBorderBgTiles[] = INCBIN_U8("graphics/title_screen/border_bg.4bpp.lz");
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 static const u8 sBorderBgMap[] = INCBIN_U8("graphics/title_screen/firered/border_bg.bin.lz");
 #elif defined(LEAFGREEN)
 static const u8 sBorderBgMap[] = INCBIN_U8("graphics/title_screen/leafgreen/border_bg.bin.lz");
@@ -83,7 +83,7 @@ static const u8 sBorderBgMap[] = INCBIN_U8("graphics/title_screen/leafgreen/bord
 
 static const u32 sSlash_Gfx[] = INCBIN_U32("graphics/title_screen/slash.4bpp.lz");
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 static const u16 sFlames_Pal[] = INCBIN_U16("graphics/title_screen/firered/flames.gbapal");
 static const u32 sFlames_Gfx[] = INCBIN_U32("graphics/title_screen/firered/flames.4bpp.lz");
 static const u32 sBlankFlames_Gfx[] = INCBIN_U32("graphics/title_screen/firered/blank_flames.4bpp.lz");
@@ -102,7 +102,7 @@ static const struct OamData sOamData_FlameOrLeaf = {
     .paletteNum = 0
 };
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 static const union AnimCmd sSpriteAnim_Flame[] = {
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_FRAME(4, 6),
@@ -174,7 +174,7 @@ static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf = {
     .callback = SpriteCallbackDummy
 };
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 static const struct SpriteTemplate sSpriteTemplate_BlankFlame = {
     .tileTag = TILE_TAG_BLANK_OR_STREAK,
     .paletteTag = PAL_TAG_DEFAULT,
@@ -286,7 +286,7 @@ static void (*const sSceneFuncs[])(s16 *data) = {
     [TITLESCREENSCENE_CRY]         = SetTitleScreenScene_Cry
 };
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
     {sFlames_Gfx,                    0x500, TILE_TAG_FLAME_OR_LEAF},
     {sBlankFlames_Gfx,               0x500, TILE_TAG_BLANK_OR_STREAK},
@@ -617,7 +617,7 @@ static void SetTitleScreenScene_Run(s16 *data)
     case 0:
         SetHelpContext(HELPCONTEXT_TITLE_SCREEN);
         CreateTask(Task_TitleScreen_BlinkPressStart, 0);
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
         CreateTask(Task_FlameSpawner, 5);
 #elif defined(LEAFGREEN)
         CreateTask(Task_LeafSpawner, 5);
@@ -634,16 +634,12 @@ static void SetTitleScreenScene_Run(s16 *data)
             DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
             SetMainCallback2(CB2_FadeOutTransitionToSaveClearScreen);
         }
-#if REVISION >= 0xA
-        // Berry fix trigger has been removed.
-#else
         else if (JOY_HELD(KEYSTROKE_BERRY_FIX) == KEYSTROKE_BERRY_FIX)
         {
             DeactivateSlashSprite(tSlashSpriteId);
             DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
             SetMainCallback2(CB2_FadeOutTransitionToBerryFix);
         }
-#endif
         else if (JOY_NEW(A_BUTTON | START_BUTTON))
         {
             SetTitleScreenScene(data, TITLESCREENSCENE_CRY);
@@ -946,7 +942,7 @@ static void LoadSpriteGfxAndPals(void)
     LoadSpritePalettes(sSpritePals);
 }
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 
 #define sPosX      data[0]
 #define sSpeedX    data[1]

@@ -1,17 +1,19 @@
+.set LOCALID_DOOR_GUARD, 4
+
 IndigoPlateau_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, IndigoPlateau_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 IndigoPlateau_PokemonCenter_1F_OnTransition::
-	setrespawn HEAL_LOCATION_INDIGO_PLATEAU
+	setrespawn SPAWN_INDIGO_PLATEAU
 	specialvar VAR_RESULT, IsNationalPokedexEnabled
 	call_if_eq VAR_RESULT, TRUE, IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor
 	end
 
 IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor::
 	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, EventScript_Return
-	setobjectxyperm LOCALID_LEAGUE_DOOR_GUARD, 4, 2
+	setobjectxyperm LOCALID_DOOR_GUARD, 4, 2
 	return
 
 IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard::
@@ -66,5 +68,39 @@ IndigoPlateau_PokemonCenter_1F_EventScript_Nurse::
 	lock
 	faceplayer
 	call EventScript_PkmnCenterNurse
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_Trader::
+	lock
+	faceplayer
+	setvar VAR_0x8008, INGAME_TRADE_HO_OH
+	call EventScript_GetInGameTradeSpeciesInfo
+	goto_if_set FLAG_DID_HO_OH_TRADE, IndigoPlateau_PokemonCenter_1F_EventScript_AlreadyTraded
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, IndigoPlateau_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_ChooseMonForInGameTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, IndigoPlateau_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_GetInGameTradeSpecies
+	goto_if_ne VAR_RESULT, VAR_0x8009, IndigoPlateau_PokemonCenter_1F_EventScript_NotRequestedMon
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_HeyThanks
+	setflag FLAG_DID_HO_OH_TRADE
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_DeclineTrade::
+	msgbox Trade_Text_AwwOhWell
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_NotRequestedMon::
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+	msgbox Trade_Text_WhatThatsNoMon
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_AlreadyTraded::
+	msgbox Trade_Text_IsntMyOldMonGreat
 	release
 	end

@@ -16,7 +16,6 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "LOCALID_TANOBY_KEY_BOULDER1",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 7,
@@ -31,7 +30,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_TANOBY_KEY_BOULDER2",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 8,
@@ -46,7 +44,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_TANOBY_KEY_BOULDER3",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 8,
@@ -61,7 +58,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_TANOBY_KEY_BOULDER4",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 6,
@@ -76,7 +72,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_TANOBY_KEY_BOULDER5",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 8,
@@ -91,7 +86,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_TANOBY_KEY_BOULDER6",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 6,
@@ -106,7 +100,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_TANOBY_KEY_BOULDER7",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
       "x": 6,

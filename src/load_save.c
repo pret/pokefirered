@@ -10,7 +10,6 @@
 #include "berry_powder.h"
 #include "overworld.h"
 #include "quest_log.h"
-#include "sloopsvc.h"
 
 #define SAVEBLOCK_MOVE_RANGE    128
 
@@ -126,9 +125,6 @@ void MoveSaveBlocks_ResetHeap(void)
     encryptionKey = (Random() << 0x10) + (Random());
     ApplyNewEncryptionKeyToAllEncryptedData(encryptionKey);
     gSaveBlock2Ptr->encryptionKey = encryptionKey;
-#if REVISION >= 0xA
-    svc_SetSaveBlock2(gSaveBlock2Ptr);
-#endif
 }
 
 u32 UseContinueGameWarp(void)

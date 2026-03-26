@@ -328,7 +328,7 @@ bool32 MysteryGift_TrySaveStamp(const u16 * stamp)
 
 #define GAME_DATA_VALID_VAR 0x101
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 #define VERSION_CODE 1
 #elif defined(LEAFGREEN)
 #define VERSION_CODE 2

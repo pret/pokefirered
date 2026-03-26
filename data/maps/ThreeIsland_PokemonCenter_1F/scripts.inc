@@ -4,7 +4,7 @@ ThreeIsland_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 ThreeIsland_PokemonCenter_1F_OnTransition::
-	setrespawn HEAL_LOCATION_THREE_ISLAND
+	setrespawn SPAWN_THREE_ISLAND
 	end
 
 ThreeIsland_PokemonCenter_1F_EventScript_Nurse::
@@ -24,4 +24,38 @@ ThreeIsland_PokemonCenter_1F_EventScript_Lass::
 
 ThreeIsland_PokemonCenter_1F_EventScript_Rocker::
 	msgbox ThreeIsland_PokemonCenter_1F_Text_PCNetworkCanLinkWithKanto, MSGBOX_NPC
+	end
+
+ThreeIsland_PokemonCenter_1F_EventScript_Trader::
+	lock
+	faceplayer
+	setvar VAR_0x8008, INGAME_TRADE_ENTEI
+	call EventScript_GetInGameTradeSpeciesInfo
+	goto_if_set FLAG_DID_ENTEI_TRADE, ThreeIsland_PokemonCenter_1F_EventScript_AlreadyTraded
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, ThreeIsland_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_ChooseMonForInGameTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, ThreeIsland_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_GetInGameTradeSpecies
+	goto_if_ne VAR_RESULT, VAR_0x8009, ThreeIsland_PokemonCenter_1F_EventScript_NotRequestedMon
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_HeyThanks
+	setflag FLAG_DID_ENTEI_TRADE
+	release
+	end
+
+ThreeIsland_PokemonCenter_1F_EventScript_DeclineTrade::
+	msgbox Trade_Text_AwwOhWell
+	release
+	end
+
+ThreeIsland_PokemonCenter_1F_EventScript_NotRequestedMon::
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+	msgbox Trade_Text_WhatThatsNoMon
+	release
+	end
+
+ThreeIsland_PokemonCenter_1F_EventScript_AlreadyTraded::
+	msgbox Trade_Text_IsntMyOldMonGreat
+	release
 	end

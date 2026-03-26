@@ -24,11 +24,6 @@
 
 
 ## for encounter in wild_encounter_group.encounters
-{% if contains(encounter.base_label, "LeafGreen") %}
-#ifdef LEAFGREEN
-{% else if contains(encounter.base_label, "FireRed") %}
-#ifdef FIRERED
-{% endif %}
 {% if existsIn(encounter, "land_mons") %}
 const struct WildPokemon {{ encounter.base_label }}_LandMons[] =
 {
@@ -69,35 +64,26 @@ const struct WildPokemon {{ encounter.base_label }}_FishingMons[] =
 
 const struct WildPokemonInfo {{ encounter.base_label }}_FishingMonsInfo = { {{encounter.fishing_mons.encounter_rate}}, {{ encounter.base_label }}_FishingMons };
 {% endif %}
-{% if contains(encounter.base_label, "FireRed") or contains(encounter.base_label, "LeafGreen") %}
-#endif
-{% endif %}
 
 ## endfor
 
 const struct WildPokemonHeader {{ wild_encounter_group.label }}[] =
 {
 ## for encounter in wild_encounter_group.encounters
-{% if contains(encounter.base_label, "LeafGreen") %}
-#ifdef LEAFGREEN
-{% else if contains(encounter.base_label, "FireRed") %}
-#ifdef FIRERED
-{% endif %}
     {
-        .mapGroup = {% if wild_encounter_group.for_maps %}MAP_GROUP({{ encounter.map }}){% else %}0{% endif %},
-        .mapNum = {% if wild_encounter_group.for_maps %}MAP_NUM({{ encounter.map }}){% else %}{{ loop.index1 }}{% endif %},
+        .mapGroup = {% if wild_encounter_group.for_maps %}MAP_GROUP({{ removePrefix(encounter.map, "MAP_") }}){% else %}0{% endif %},
+        .mapNum = {% if wild_encounter_group.for_maps %}MAP_NUM({{ removePrefix(encounter.map, "MAP_") }}){% else %}{{ loop.index1 }}{% endif %},
+        .timeOfDay = {% if contains(encounter.base_label, "Night") %}TIME_NIGHT{% else %}TIME_DAY{% endif %},
         .landMonsInfo = {% if existsIn(encounter, "land_mons") %}&{{ encounter.base_label }}_LandMonsInfo{% else %}NULL{% endif %},
         .waterMonsInfo = {% if existsIn(encounter, "water_mons") %}&{{ encounter.base_label }}_WaterMonsInfo{% else %}NULL{% endif %},
         .rockSmashMonsInfo = {% if existsIn(encounter, "rock_smash_mons") %}&{{ encounter.base_label }}_RockSmashMonsInfo{% else %}NULL{% endif %},
         .fishingMonsInfo = {% if existsIn(encounter, "fishing_mons") %}&{{ encounter.base_label }}_FishingMonsInfo{% else %}NULL{% endif %},
     },
-{% if contains(encounter.base_label, "FireRed") or contains(encounter.base_label, "LeafGreen") %}
-#endif
-{% endif %}
 ## endfor
     {
-        .mapGroup = MAP_GROUP(MAP_UNDEFINED),
-        .mapNum = MAP_NUM(MAP_UNDEFINED),
+        .mapGroup = MAP_GROUP(UNDEFINED),
+        .mapNum = MAP_NUM(UNDEFINED),
+        .timeOfDay = TIME_DAY,
         .landMonsInfo = NULL,
         .waterMonsInfo = NULL,
         .rockSmashMonsInfo = NULL,

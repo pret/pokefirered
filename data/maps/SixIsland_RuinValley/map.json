@@ -22,7 +22,6 @@
   ],
   "object_events": [
     {
-      "local_id": "LOCALID_RUIN_VALLEY_SCIENTIST",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST",
       "x": 24,
@@ -94,7 +93,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_POKE_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
       "x": 21,
       "y": 29,
       "elevation": 5,

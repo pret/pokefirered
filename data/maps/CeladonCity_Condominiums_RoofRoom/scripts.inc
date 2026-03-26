@@ -1,3 +1,5 @@
+.set LOCALID_EEVEE_POKEBALL, 2
+
 CeladonCity_Condominiums_RoofRoom_MapScripts::
 	.byte 0
 

@@ -22,7 +22,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BugCatcher;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SittingBoy;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lass;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman1;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CrushGirl;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BattleGirl;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Man;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Rocker;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FatMan;
@@ -50,9 +50,9 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_WorkerF;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RocketM;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RocketF;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GBAKid;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeManiac;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SuperNerd;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Biker;
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BlackBelt;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blackbelt;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Scientist;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Hiker;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fisher;
@@ -177,7 +177,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_SITTING_BOY]              = &gObjectEventGraphicsInfo_SittingBoy,
     [OBJ_EVENT_GFX_LASS]                     = &gObjectEventGraphicsInfo_Lass,
     [OBJ_EVENT_GFX_WOMAN_1]                  = &gObjectEventGraphicsInfo_Woman1,
-    [OBJ_EVENT_GFX_CRUSH_GIRL]               = &gObjectEventGraphicsInfo_CrushGirl,
+    [OBJ_EVENT_GFX_BATTLE_GIRL]              = &gObjectEventGraphicsInfo_BattleGirl,
     [OBJ_EVENT_GFX_MAN]                      = &gObjectEventGraphicsInfo_Man,
     [OBJ_EVENT_GFX_ROCKER]                   = &gObjectEventGraphicsInfo_Rocker,
     [OBJ_EVENT_GFX_FAT_MAN]                  = &gObjectEventGraphicsInfo_FatMan,
@@ -205,9 +205,9 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ROCKET_M]                 = &gObjectEventGraphicsInfo_RocketM,
     [OBJ_EVENT_GFX_ROCKET_F]                 = &gObjectEventGraphicsInfo_RocketF,
     [OBJ_EVENT_GFX_GBA_KID]                  = &gObjectEventGraphicsInfo_GBAKid,
-    [OBJ_EVENT_GFX_POKE_MANIAC]              = &gObjectEventGraphicsInfo_PokeManiac,
+    [OBJ_EVENT_GFX_SUPER_NERD]               = &gObjectEventGraphicsInfo_SuperNerd,
     [OBJ_EVENT_GFX_BIKER]                    = &gObjectEventGraphicsInfo_Biker,
-    [OBJ_EVENT_GFX_BLACK_BELT]               = &gObjectEventGraphicsInfo_BlackBelt,
+    [OBJ_EVENT_GFX_BLACKBELT]                = &gObjectEventGraphicsInfo_Blackbelt,
     [OBJ_EVENT_GFX_SCIENTIST]                = &gObjectEventGraphicsInfo_Scientist,
     [OBJ_EVENT_GFX_HIKER]                    = &gObjectEventGraphicsInfo_Hiker,
     [OBJ_EVENT_GFX_FISHER]                   = &gObjectEventGraphicsInfo_Fisher,

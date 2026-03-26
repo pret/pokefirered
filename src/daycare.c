@@ -27,6 +27,7 @@
 #include "help_system.h"
 #include "field_fadetransition.h"
 #include "trade.h"
+#include "trainer_xp_system.h"
 #include "constants/daycare.h"
 #include "constants/region_map_sections.h"
 
@@ -605,7 +606,7 @@ static void Debug_AddDaycareSteps(u16 numSteps)
 
 u8 GetNumLevelsGainedFromDaycare(void)
 {
-    if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004].mon, MON_DATA_SPECIES) != 0)
+    if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004], MON_DATA_SPECIES) != 0)
         return GetNumLevelsGainedForDaycareMon(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004]);
 
     return 0;
@@ -986,21 +987,10 @@ void RejectEggFromDayCare(void)
 
 static void AlterEggSpeciesWithIncenseItem(u16 *species, struct DayCare *daycare)
 {
-    u16 motherItem, fatherItem;
-    if (*species == SPECIES_WYNAUT || *species == SPECIES_AZURILL)
-    {
-        motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
-        fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
-        if (*species == SPECIES_WYNAUT && motherItem != ITEM_LAX_INCENSE && fatherItem != ITEM_LAX_INCENSE)
-        {
-            *species = SPECIES_WOBBUFFET;
-        }
-
-        if (*species == SPECIES_AZURILL && motherItem != ITEM_SEA_INCENSE && fatherItem != ITEM_SEA_INCENSE)
-        {
-            *species = SPECIES_MARILL;
-        }
-    }
+    // Incense items are no longer required to breed baby forms.
+    // Azurill and Wynaut always hatch from their respective parents
+    // (Marill/Azumarill and Wobbuffet) without needing Sea Incense
+    // or Lax Incense held items.
 }
 
 /*static void GiveVoltTackleIfLightBall(struct Pokemon *mon, struct DayCare *daycare)
@@ -1168,7 +1158,22 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
             steps = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
             if (steps != 0)
             {
-                steps -= 1;
+                // Trainer type levels speed up hatching per-egg:
+                // decrement = ceil((type1_level + type2_level) / 20)
+                // At levels 1-10 (sum 2-20) -> 1 (normal).
+                // At levels 11-20 (sum ~22-40) -> 2 (half time), etc.
+                u16 eggSpecies = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+                u8 t1 = gSpeciesInfo[eggSpecies].types[0];
+                u8 t2 = gSpeciesInfo[eggSpecies].types[1];
+                u8 lvSum = gSaveBlock2Ptr->trainerTypeLevels[t1]
+                         + gSaveBlock2Ptr->trainerTypeLevels[t2];
+                u32 decrement = (lvSum + 19) / 20; // ceil(lvSum / 20)
+                if (decrement < 1)
+                    decrement = 1;
+                if (steps <= decrement)
+                    steps = 0;
+                else
+                    steps -= decrement;
                 SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &steps);
             }
             else // hatch the egg

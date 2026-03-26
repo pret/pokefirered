@@ -19,10 +19,6 @@
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 
-#if __STDC_VERSION__ < 202311L
-#define asm __asm__
-#endif
-
 // IDE support
 #if defined(__APPLE__) || defined(__CYGWIN__) || defined(__INTELLISENSE__)
 // We define these when using certain IDEs to fool preproc
@@ -134,13 +130,6 @@ extern u8 gStringVar4[];
 #define DEX_FLAGS_NO ROUND_BITS_TO_BYTES(NUM_SPECIES)
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_ADDITIONAL_PHRASE_BYTES ROUND_BITS_TO_BYTES(NUM_ADDITIONAL_PHRASES)
-
-// This returns the number of arguments passed to it (up to 8).
-#define NARG_8(...) NARG_8_(_, ##__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1, 0)
-#define NARG_8_(_, a, b, c, d, e, f, g, h, N, ...) N
-
-#define CAT(a, b) CAT_(a, b)
-#define CAT_(a, b) a ## b
 
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
@@ -354,7 +343,9 @@ struct SaveBlock2
     /*0xAF0*/ struct BerryCrush berryCrush;
     /*0xB00*/ struct PokemonJumpRecords pokeJump;
     /*0xB10*/ struct BerryPickingResults berryPick;
-    /*0xB20*/ u8 filler_B20[0x400];
+    /*0xB20*/ u32 trainerTypeExp[NUMBER_OF_MON_TYPES];
+    /*0xB68*/ u8 trainerTypeLevels[NUMBER_OF_MON_TYPES];
+    /*0xB7A*/ u8 filler_B7A[0x3A6];
     /*0xF20*/ u32 encryptionKey;
 }; // size: 0xF24
 

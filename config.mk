@@ -1,6 +1,6 @@
 # Default variables
 
-GAME_VERSION  ?= FIRERED
+GAME_VERSION  ?= FULLSPEC
 GAME_REVISION ?= 0
 GAME_LANGUAGE ?= ENGLISH
 
@@ -29,6 +29,11 @@ ifeq ($(GAME_VERSION),FIRERED)
   GAME_CODE   := BPR
   BUILD_NAME  := firered
 else
+ifeq ($(GAME_VERSION),FULLSPEC)
+  TITLE       := PKMN FULSPEC
+  GAME_CODE   := BPR
+  BUILD_NAME  := fullspec
+else
 ifeq ($(GAME_VERSION),LEAFGREEN)
   TITLE       := POKEMON LEAF
   GAME_CODE   := BPG
@@ -37,14 +42,11 @@ else
   $(error unknown version $(GAME_VERSION))
 endif
 endif
+endif
 
 # Revision
 ifeq ($(GAME_REVISION),1)
   BUILD_NAME  := $(BUILD_NAME)_rev1
-endif
-
-ifeq ($(GAME_REVISION),10)
-  BUILD_NAME  := $(BUILD_NAME)_switch
 endif
 
 # Modern GCC

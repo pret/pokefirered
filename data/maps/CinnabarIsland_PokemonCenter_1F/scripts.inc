@@ -1,10 +1,12 @@
+.set LOCALID_BILL, 7
+
 CinnabarIsland_PokemonCenter_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, CinnabarIsland_PokemonCenter_1F_OnTransition
 	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
 	.byte 0
 
 CinnabarIsland_PokemonCenter_1F_OnTransition::
-	setrespawn HEAL_LOCATION_CINNABAR_ISLAND
+	setrespawn SPAWN_CINNABAR_ISLAND
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_Nurse::
@@ -41,7 +43,7 @@ CinnabarIsland_PokemonCenter_1F_EventScript_Bill::
 	call_if_eq VAR_FACING, DIR_SOUTH, CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth
 	call_if_eq VAR_FACING, DIR_EAST, CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast
 	call_if_eq VAR_FACING, DIR_WEST, CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest
-	removeobject LOCALID_CINNABAR_POKEMON_CENTER_BILL
+	removeobject LOCALID_BILL
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND_2, 1
 	clearflag FLAG_HIDE_CINNABAR_BILL
 	warp MAP_CINNABAR_ISLAND, 14, 11
@@ -50,20 +52,20 @@ CinnabarIsland_PokemonCenter_1F_EventScript_Bill::
 	end
 
 CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth::
-	applymovement LOCALID_CINNABAR_POKEMON_CENTER_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
-	applymovement LOCALID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitSouth
+	applymovement LOCALID_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
+	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitSouth
 	waitmovement 0
 	return
 
 CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast::
-	applymovement LOCALID_CINNABAR_POKEMON_CENTER_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExitEast
-	applymovement LOCALID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitEast
+	applymovement LOCALID_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExitEast
+	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitEast
 	waitmovement 0
 	return
 
 CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest::
-	applymovement LOCALID_CINNABAR_POKEMON_CENTER_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
-	applymovement LOCALID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitWest
+	applymovement LOCALID_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
+	applymovement OBJ_EVENT_ID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitWest
 	waitmovement 0
 	return
 
@@ -138,3 +140,37 @@ CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitWest::
 	delay_16
 	walk_down
 	step_end
+
+CinnabarIsland_PokemonCenter_1F_EventScript_Trader::
+	lock
+	faceplayer
+	setvar VAR_0x8008, INGAME_TRADE_KECLEON
+	call EventScript_GetInGameTradeSpeciesInfo
+	goto_if_set FLAG_DID_KECLEON_TRADE, CinnabarIsland_PokemonCenter_1F_EventScript_AlreadyTraded
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, CinnabarIsland_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_ChooseMonForInGameTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, CinnabarIsland_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_GetInGameTradeSpecies
+	goto_if_ne VAR_RESULT, VAR_0x8009, CinnabarIsland_PokemonCenter_1F_EventScript_NotRequestedMon
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_HeyThanks
+	setflag FLAG_DID_KECLEON_TRADE
+	release
+	end
+
+CinnabarIsland_PokemonCenter_1F_EventScript_DeclineTrade::
+	msgbox Trade_Text_AwwOhWell
+	release
+	end
+
+CinnabarIsland_PokemonCenter_1F_EventScript_NotRequestedMon::
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+	msgbox Trade_Text_WhatThatsNoMon
+	release
+	end
+
+CinnabarIsland_PokemonCenter_1F_EventScript_AlreadyTraded::
+	msgbox Trade_Text_IsntMyOldMonGreat
+	release
+	end

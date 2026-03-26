@@ -364,6 +364,7 @@ gSpecials::
 	def_special ForcePlayerToStartSurfing
 	def_special GetStarterSpecies
 	def_special SetSeenMon
+	def_special ScriptCheckSpeciesCaught
 	def_special VsSeekerResetObjectMovementAfterChargeComplete
 	def_special ShouldShowBoxWasFullMessage
 	def_special ChangeBoxPokemonNickname
@@ -452,4 +453,5 @@ gSpecials::
 	def_special UpdateLoreleiDollCollection
 	def_special LoopWingFlapSound
 	def_special CreateEnemyEventMon
+	def_special GrantStarterTypeBoost
 gSpecialsEnd::

@@ -1,3 +1,7 @@
+.set LOCALID_OLD_MAN,      3
+.set LOCALID_TUTORIAL_MAN, 4
+.set LOCALID_WOMAN,        5
+
 ViridianCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, ViridianCity_OnTransition
 	.byte 0
@@ -39,12 +43,12 @@ ViridianCity_EventScript_TryUnlockGym::
 ViridianCity_EventScript_GymDoorLocked::
 	lockall
 	textcolor NPC_TEXT_COLOR_NEUTRAL
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	msgbox ViridianCity_Text_GymDoorsAreLocked
 	closemessage
-	applymovement LOCALID_PLAYER, ViridianCity_Movement_JumpDownLedge
+	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_JumpDownLedge
 	waitmovement 0
 	releaseall
 	end
@@ -84,7 +88,7 @@ ViridianCity_EventScript_OldMan::
 	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1, ViridianCity_EventScript_OldManGymLeaderReturned
 	msgbox ViridianCity_Text_GymClosedWonderWhoLeaderIs
 	closemessage
-	applymovement LOCALID_VIRIDIAN_OLD_MAN, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_OLD_MAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -121,6 +125,16 @@ ViridianCity_EventScript_TutorialCompleted::
 	end
 
 ViridianCity_EventScript_TutorialStart::
+	msgbox ViridianCity_Text_ShowYouHowToCatchMons
+	closemessage
+	goto_if_questlog EventScript_ReleaseEnd
+	special QuestLog_CutRecording
+	playbgm MUS_FOLLOW_ME, 0
+	call_if_eq VAR_FACING, DIR_SOUTH, ViridianCity_EventScript_WalkToPondFromBelow
+	call_if_eq VAR_FACING, DIR_NORTH, ViridianCity_EventScript_WalkToPondFromAbove
+	call_if_eq VAR_FACING, DIR_WEST, ViridianCity_EventScript_WalkToPondFromLeft
+	call_if_eq VAR_FACING, DIR_EAST, ViridianCity_EventScript_WalkToPondFromRight
+	fadedefaultbgm
 	call ViridianCity_EventScript_DoTutorialBattle
 	release
 	end
@@ -176,7 +190,7 @@ ViridianCity_EventScript_Woman::
 ViridianCity_EventScript_WomanRoadBlocked::
 	msgbox ViridianCity_Text_GrandpaHasntHadCoffeeYet
 	closemessage
-	applymovement LOCALID_VIRIDIAN_WOMAN, Common_Movement_FaceOriginalDirection
+	applymovement LOCALID_WOMAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -190,7 +204,7 @@ ViridianCity_EventScript_RoadBlocked::
 	textcolor NPC_TEXT_COLOR_MALE
 	msgbox ViridianCity_Text_ThisIsPrivateProperty
 	closemessage
-	applymovement LOCALID_PLAYER, ViridianCity_Movement_WalkDown
+	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_WalkDown
 	waitmovement 0
 	releaseall
 	end
@@ -204,8 +218,17 @@ ViridianCity_EventScript_TutorialTriggerLeft::
 	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
+	msgbox ViridianCity_Text_ShowYouHowToCatchMons
+	closemessage
+	goto_if_questlog EventScript_ReleaseEnd
+	special QuestLog_CutRecording
+	playbgm MUS_FOLLOW_ME, 0
+	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_PlayerFollowFromLeft
+	applymovement LOCALID_TUTORIAL_MAN, ViridianCity_Movement_OldManWalkToPond
+	waitmovement 0
+	fadedefaultbgm
 	call ViridianCity_EventScript_DoTutorialBattle
 	release
 	end
@@ -215,23 +238,193 @@ ViridianCity_EventScript_TutorialTriggerRight::
 	textcolor NPC_TEXT_COLOR_MALE
 	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
+	msgbox ViridianCity_Text_ShowYouHowToCatchMons
+	closemessage
+	goto_if_questlog EventScript_ReleaseEnd
+	special QuestLog_CutRecording
+	playbgm MUS_FOLLOW_ME, 0
+	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_PlayerFollowFromRight
+	applymovement LOCALID_TUTORIAL_MAN, ViridianCity_Movement_OldManWalkToPond
+	waitmovement 0
+	fadedefaultbgm
 	call ViridianCity_EventScript_DoTutorialBattle
 	release
 	end
 
 ViridianCity_EventScript_DoTutorialBattle::
-	msgbox ViridianCity_Text_ShowYouHowToCatchMons
-	closemessage
-	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_CutRecording
 	special StartOldManTutorialBattle
 	waitstate
 	lock
 	faceplayer
 	msgbox ViridianCity_Text_ThatWasEducationalTakeThis
 	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
+	giveitem ITEM_OLD_ROD
+	setflag FLAG_GOT_OLD_ROD
+	msgbox ViridianCity_Text_AndTakeThisToo
 	giveitem ITEM_TEACHY_TV
 	msgbox ViridianCity_Text_WatchThatToLearnBasics
 	return
+
+ViridianCity_EventScript_WalkToPondFromBelow::
+	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_PlayerFollowFromBelow
+	applymovement LOCALID_TUTORIAL_MAN, ViridianCity_Movement_OldManWalkToPond
+	waitmovement 0
+	return
+
+ViridianCity_EventScript_WalkToPondFromAbove::
+	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_PlayerFollowFromAbove
+	applymovement LOCALID_TUTORIAL_MAN, ViridianCity_Movement_OldManWalkToPond
+	waitmovement 0
+	return
+
+ViridianCity_EventScript_WalkToPondFromLeft::
+	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_PlayerFollowFromLeft
+	applymovement LOCALID_TUTORIAL_MAN, ViridianCity_Movement_OldManWalkToPond
+	waitmovement 0
+	return
+
+ViridianCity_EventScript_WalkToPondFromRight::
+	applymovement OBJ_EVENT_ID_PLAYER, ViridianCity_Movement_PlayerFollowFromRight
+	applymovement LOCALID_TUTORIAL_MAN, ViridianCity_Movement_OldManWalkToPond
+	waitmovement 0
+	return
+
+ViridianCity_Movement_OldManWalkToPond::
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_in_place_faster_left
+	step_end
+
+ViridianCity_Movement_PlayerFollowFromLeft::
+	walk_right
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+ViridianCity_Movement_PlayerFollowFromRight::
+	walk_left
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+ViridianCity_Movement_PlayerFollowFromBelow::
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+ViridianCity_Movement_PlayerFollowFromAbove::
+	delay_16
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	step_end

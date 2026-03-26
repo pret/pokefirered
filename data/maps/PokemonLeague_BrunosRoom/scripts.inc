@@ -1,3 +1,5 @@
+.set LOCALID_BRUNO, 1
+
 PokemonLeague_BrunosRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, PokemonLeague_BrunosRoom_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, PokemonLeague_BrunosRoom_OnLoad
@@ -28,7 +30,7 @@ PokemonLeague_BrunosRoom_OnWarp::
 	.2byte 0
 
 PokemonLeague_BrunosRoom_EventScript_TurnPlayerNorth::
-	turnobject LOCALID_PLAYER, DIR_NORTH
+	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
 PokemonLeague_BrunosRoom_OnFrame::

@@ -18,7 +18,7 @@ extern ScrCmdFunc gMysteryEventScriptCmdTable[];
 extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
 
 #define LANGUAGE_MASK 0x1
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 #define VERSION_MASK 0x1
 #elif defined(LEAFGREEN)
 #define VERSION_MASK 0x2

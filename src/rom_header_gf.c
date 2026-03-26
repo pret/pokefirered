@@ -91,7 +91,7 @@ __attribute__((section(".text.consts")))
 static const struct GFRomHeader sGFRomHeader = {
     .version = GAME_VERSION,
     .language = GAME_LANGUAGE,
-#ifdef FIRERED
+#if defined(FIRERED) || defined(FULLSPEC)
     .gameName = "pokemon red version",
 #else
     .gameName = "pokemon green version",

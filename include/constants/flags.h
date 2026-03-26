@@ -43,12 +43,12 @@
 #define FLAG_TEMP_1F     (TEMP_FLAGS_START + 0x1F)
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 
-#define FLAG_0x020               0x020
-#define FLAG_0x021               0x021
-#define FLAG_0x022               0x022
-#define FLAG_0x023               0x023
-#define FLAG_0x024               0x024
-#define FLAG_0x025               0x025
+#define FLAG_DID_ENTEI_TRADE             0x020
+#define FLAG_DID_SUICUNE_TRADE           0x021
+#define FLAG_DID_HO_OH_TRADE             0x022
+#define FLAG_DID_DUSKULL_TRADE           0x023
+#define FLAG_DID_MURKROW_TRADE           0x024
+#define FLAG_DID_BAGON_TRADE             0x025
 #define FLAG_0x026               0x026
 #define FLAG_0x027               0x027
 
@@ -121,7 +121,7 @@
 #define FLAG_HIDE_UNION_ROOM_PLAYER_7                      0x069
 #define FLAG_HIDE_UNION_ROOM_PLAYER_8                      0x06A
 #define FLAG_HIDE_CINNABAR_SEAGALLOP                       0x06B
-#define FLAG_HIDE_SAFFRON_FAN_CLUB_BLACK_BELT               0x06C
+#define FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT               0x06C
 #define FLAG_HIDE_SAFFRON_FAN_CLUB_ROCKER                  0x06D
 #define FLAG_HIDE_SAFFRON_FAN_CLUB_WOMAN                   0x06E
 #define FLAG_HIDE_SAFFRON_FAN_CLUB_BEAUTY                  0x06F
@@ -138,7 +138,7 @@
 #define FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST                 0x07A
 #define FLAG_HIDE_TWO_ISLAND_WOMAN                         0x07B
 #define FLAG_HIDE_TWO_ISLAND_BEAUTY                        0x07C
-#define FLAG_HIDE_TWO_ISLAND_POKE_MANIAC                   0x07D
+#define FLAG_HIDE_TWO_ISLAND_SUPER_NERD                    0x07D
 #define FLAG_HIDE_THREE_ISLAND_ANTIBIKERS                  0x07E
 #define FLAG_0x07F                                         0x07F
 #define FLAG_HIDE_ROUTE_16_SNORLAX                         0x080
@@ -653,9 +653,9 @@
 #define FLAG_DID_ESPHERE_TRADE                           0x274
 #define FLAG_DID_TANGENY_TRADE                           0x275
 #define FLAG_DID_SEELOR_TRADE                            0x276
-#define FLAG_0x277                                       0x277
+#define FLAG_GOT_ROOT_FOSSIL                            0x277
 #define FLAG_GOT_HITMON_FROM_DOJO                        0x278
-#define FLAG_0x279                                       0x279
+#define FLAG_GOT_CLAW_FOSSIL                             0x279
 #define FLAG_SILPH_2F_DOOR_1                             0x27A
 #define FLAG_SILPH_2F_DOOR_2                             0x27B
 #define FLAG_SILPH_3F_DOOR_1                             0x27C
@@ -770,8 +770,8 @@
 #define FLAG_0x2E7                                       0x2E7
 #define FLAG_0x2E8                                       0x2E8
 #define FLAG_0x2E9                                       0x2E9
-#define FLAG_0x2EA                                       0x2EA
-#define FLAG_0x2EB                                       0x2EB
+#define FLAG_REVIVED_ROOT                                0x2EA
+#define FLAG_REVIVED_CLAW                                0x2EB
 #define FLAG_REVIVED_DOME                                0x2EC
 #define FLAG_REVIVED_HELIX                               0x2ED
 #define FLAG_REVIVED_AMBER                               0x2EE
@@ -1222,15 +1222,15 @@
 #define FLAG_HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE                       (FLAG_HIDDEN_ITEMS_START + 190)
 
 // Unused hidden item flags
-#define FLAG_UNUSED_0x4A7               0x4A7 // Unused Flag
-#define FLAG_UNUSED_0x4A8               0x4A8 // Unused Flag
-#define FLAG_UNUSED_0x4A9               0x4A9 // Unused Flag
-#define FLAG_UNUSED_0x4AA               0x4AA // Unused Flag
-#define FLAG_UNUSED_0x4AB               0x4AB // Unused Flag
-#define FLAG_UNUSED_0x4AC               0x4AC // Unused Flag
-#define FLAG_UNUSED_0x4AD               0x4AD // Unused Flag
-#define FLAG_UNUSED_0x4AE               0x4AE // Unused Flag
-#define FLAG_UNUSED_0x4AF               0x4AF // Unused Flag
+#define FLAG_DID_CHIKORITA_TRADE         0x4A7
+#define FLAG_DID_CYNDAQUIL_TRADE         0x4A8
+#define FLAG_DID_TOTODILE_TRADE          0x4A9
+#define FLAG_DID_TREECKO_TRADE           0x4AA
+#define FLAG_DID_TORCHIC_TRADE           0x4AB
+#define FLAG_DID_MUDKIP_TRADE            0x4AC
+#define FLAG_DID_CASTFORM_TRADE          0x4AD
+#define FLAG_DID_KECLEON_TRADE           0x4AE
+#define FLAG_DID_RAIKOU_TRADE            0x4AF
 
 // Boss clear flags, 1200
 #define FLAG_DEFEATED_BROCK           0x4B0
@@ -1247,19 +1247,20 @@
 #define FLAG_DEFEATED_LANCE           0x4BB
 #define FLAG_DEFEATED_CHAMP           0x4BC
 
-// Unused?
-#define FLAG_0x4BD               0x4BD
-#define FLAG_0x4BE               0x4BE
-#define FLAG_0x4BF               0x4BF
-#define FLAG_0x4C0               0x4C0
-#define FLAG_0x4C1               0x4C1
-#define FLAG_0x4C2               0x4C2
-#define FLAG_0x4C3               0x4C3
-#define FLAG_0x4C4               0x4C4
-#define FLAG_0x4C5               0x4C5
-#define FLAG_0x4C6               0x4C6
-#define FLAG_0x4C7               0x4C7
-#define FLAG_0x4C8               0x4C8
+// Mewtwo trade scientists (Oak's Lab)
+#define FLAG_HIDE_MEWTWO_TRADE_SCIENTISTS 0x4BD
+#define FLAG_DID_MEW_TRADE                0x4BE
+#define FLAG_DID_CELEBI_TRADE             0x4BF
+#define FLAG_DID_REGIROCK_TRADE           0x4C0
+#define FLAG_DID_REGICE_TRADE             0x4C1
+#define FLAG_DID_REGISTEEL_TRADE          0x4C2
+#define FLAG_DID_KYOGRE_TRADE             0x4C3
+#define FLAG_DID_GROUDON_TRADE            0x4C4
+#define FLAG_DID_RAYQUAZA_TRADE           0x4C5
+#define FLAG_DID_LATIAS_TRADE             0x4C6
+#define FLAG_DID_LATIOS_TRADE             0x4C7
+#define FLAG_DID_JIRACHI_TRADE            0x4C8
+
 #define FLAG_0x4C9               0x4C9
 #define FLAG_0x4CA               0x4CA
 #define FLAG_0x4CB               0x4CB
@@ -1461,12 +1462,12 @@
 #define FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY       (SYS_FLAGS + 0xC1)
 #define FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR                        (SYS_FLAGS + 0xC2)
 
-#define FLAG_0x8C3                                                  (SYS_FLAGS + 0xC3)
-#define FLAG_0x8C4                                                  (SYS_FLAGS + 0xC4)
-#define FLAG_0x8C5                                                  (SYS_FLAGS + 0xC5)
-#define FLAG_0x8C6                                                  (SYS_FLAGS + 0xC6)
-#define FLAG_0x8C7                                                  (SYS_FLAGS + 0xC7)
-#define FLAG_0x8C8                                                  (SYS_FLAGS + 0xC8)
+#define FLAG_GOT_BULBASAUR_EGG                                      (SYS_FLAGS + 0xC3)
+#define FLAG_NO_ROOM_FOR_BULBASAUR_EGG                              (SYS_FLAGS + 0xC4)
+#define FLAG_GOT_CHARMANDER_EGG                                     (SYS_FLAGS + 0xC5)
+#define FLAG_NO_ROOM_FOR_CHARMANDER_EGG                             (SYS_FLAGS + 0xC6)
+#define FLAG_GOT_SQUIRTLE_EGG                                       (SYS_FLAGS + 0xC7)
+#define FLAG_NO_ROOM_FOR_SQUIRTLE_EGG                               (SYS_FLAGS + 0xC8)
 #define FLAG_0x8C9                                                  (SYS_FLAGS + 0xC9)
 #define FLAG_0x8CA                                                  (SYS_FLAGS + 0xCA)
 #define FLAG_0x8CB                                                  (SYS_FLAGS + 0xCB)

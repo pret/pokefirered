@@ -278,6 +278,9 @@
 #define EVO_LEVEL_NINJASK    13 // Pokémon reaches the specified level (special value for Ninjask)
 #define EVO_LEVEL_SHEDINJA   14 // Pokémon reaches the specified level (special value for Shedinja)
 #define EVO_BEAUTY           15 // Pokémon levels up with beauty ≥ specified value
+#define EVO_FRIENDSHIP_WATER_TRAINER 16 // Pokémon levels up with friendship ≥ param AND Water trainer level ≥ 50
+#define EVO_FRIENDSHIP_PSYCHIC_TRAINER 17 // Pokémon levels up with friendship ≥ 220 AND Psychic trainer level ≥ param
+#define EVO_FRIENDSHIP_DARK_TRAINER 18 // Pokémon levels up with friendship ≥ 220 AND Dark trainer level ≥ param
 
 #define EVOS_PER_MON 5
 

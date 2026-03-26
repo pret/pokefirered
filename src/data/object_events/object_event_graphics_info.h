@@ -283,7 +283,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Boy = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CrushGirl = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BattleGirl = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -298,7 +298,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CrushGirl = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = gObjectEventSpriteOamTables_16x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_CrushGirl,
+    .images = sPicTable_BattleGirl,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -587,7 +587,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CooltrainerF = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeManiac = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SuperNerd = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -602,7 +602,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeManiac = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = gObjectEventSpriteOamTables_16x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_PokeManiac,
+    .images = sPicTable_SuperNerd,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
@@ -720,7 +720,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SwimmerFLand = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BlackBelt = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blackbelt = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -735,7 +735,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BlackBelt = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = gObjectEventSpriteOamTables_16x32,
     .anims = sAnimTable_Standard,
-    .images = sPicTable_BlackBelt,
+    .images = sPicTable_Blackbelt,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 

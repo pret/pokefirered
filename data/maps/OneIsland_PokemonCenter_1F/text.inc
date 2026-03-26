@@ -273,6 +273,42 @@ OneIsland_PokemonCenter_1F_Text_ManagedToLinkWithHoennThankYou::
     .string "Thanks to you, my dream came\n"
     .string "true…$"
 
+OneIsland_PokemonCenter_1F_Text_CelioGiveRubyRewards::
+    .string "Oh, one more thing!\p"
+    .string "While calibrating the network,\n"
+    .string "I found some unusual data…\p"
+    .string "It seems the RUBY picked up a\n"
+    .string "signal from a distant island.\p"
+    .string "I decoded it into a ferry ticket.\p"
+    .string "I also found this fossil buried\n"
+    .string "near the machine. Here, take\n"
+    .string "these!$"
+
+OneIsland_PokemonCenter_1F_Text_CelioExplainRubyRewards::
+    .string "The MYSTIC TICKET will let you\n"
+    .string "reach NAVEL ROCK.\p"
+    .string "I've heard rare POKéMON dwell\n"
+    .string "there.\p"
+    .string "And the ROOT FOSSIL can be\n"
+    .string "revived at the lab on CINNABAR\n"
+    .string "ISLAND.$"
+
+OneIsland_PokemonCenter_1F_Text_CelioGiveSapphireRewards::
+    .string "Oh, I almost forgot!\p"
+    .string "The SAPPHIRE also picked up\n"
+    .string "a signal from another island.\p"
+    .string "And there was another fossil\n"
+    .string "tucked behind the machine.\p"
+    .string "Here, you should have these!$"
+
+OneIsland_PokemonCenter_1F_Text_CelioExplainSapphireRewards::
+    .string "The AURORA TICKET grants\n"
+    .string "passage to BIRTH ISLAND.\p"
+    .string "And the CLAW FOSSIL can also\n"
+    .string "be revived at the CINNABAR\n"
+    .string "ISLAND POKéMON LAB.\p"
+    .string "You should check them out!$"
+
 OneIsland_PokemonCenter_1F_Text_WishYouBestOfLuck::
     .string "I…\n"
     .string "I'm not crying.\p"

@@ -4,7 +4,7 @@ TwoIsland_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 TwoIsland_PokemonCenter_1F_OnTransition::
-	setrespawn HEAL_LOCATION_TWO_ISLAND
+	setrespawn SPAWN_TWO_ISLAND
 	end
 
 TwoIsland_PokemonCenter_1F_EventScript_Nurse::
@@ -20,4 +20,38 @@ TwoIsland_PokemonCenter_1F_EventScript_GBAKid::
 
 TwoIsland_PokemonCenter_1F_EventScript_BugCatcher::
 	msgbox TwoIsland_PokemonCenter_1F_Text_OldLadyLivesOutOnCape, MSGBOX_NPC
+	end
+
+TwoIsland_PokemonCenter_1F_EventScript_Trader::
+	lock
+	faceplayer
+	setvar VAR_0x8008, INGAME_TRADE_BAGON
+	call EventScript_GetInGameTradeSpeciesInfo
+	goto_if_set FLAG_DID_BAGON_TRADE, TwoIsland_PokemonCenter_1F_EventScript_AlreadyTraded
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, TwoIsland_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_ChooseMonForInGameTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, TwoIsland_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_GetInGameTradeSpecies
+	goto_if_ne VAR_RESULT, VAR_0x8009, TwoIsland_PokemonCenter_1F_EventScript_NotRequestedMon
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_HeyThanks
+	setflag FLAG_DID_BAGON_TRADE
+	release
+	end
+
+TwoIsland_PokemonCenter_1F_EventScript_DeclineTrade::
+	msgbox Trade_Text_AwwOhWell
+	release
+	end
+
+TwoIsland_PokemonCenter_1F_EventScript_NotRequestedMon::
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+	msgbox Trade_Text_WhatThatsNoMon
+	release
+	end
+
+TwoIsland_PokemonCenter_1F_EventScript_AlreadyTraded::
+	msgbox Trade_Text_IsntMyOldMonGreat
+	release
 	end

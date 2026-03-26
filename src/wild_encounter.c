@@ -21,6 +21,9 @@
 
 #define HEADER_NONE 0xFFFF
 
+// Day/night cycle period in play-time hours
+#define DAY_NIGHT_CYCLE_HOURS 2
+
 struct WildEncounterData
 {
     u32 rngState;
@@ -35,6 +38,7 @@ static EWRAM_DATA struct WildEncounterData sWildEncounterData = {};
 static EWRAM_DATA bool8 sWildEncountersDisabled = FALSE;
 
 static bool8 UnlockedTanobyOrAreNotInTanoby(void);
+bool8 IsNightTime(void);
 static u32 GenerateUnownPersonalityByLetter(u8 letter);
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *rate);
@@ -176,51 +180,80 @@ static u8 ChooseWildMonLevel(const struct WildPokemon * info)
 static u16 GetCurrentMapWildMonHeaderId(void)
 {
     u16 i;
+    u16 fallbackId = HEADER_NONE;
+    bool8 isNight = IsNightTime();
+    bool8 isAlteringCave = (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SIX_ISLAND_ALTERING_CAVE)
+                         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SIX_ISLAND_ALTERING_CAVE));
 
     for (i = 0; ; i++)
     {
-        const struct WildPokemonHeader * wildHeader = &gWildMonHeaders[i];
-        if (wildHeader->mapGroup == MAP_GROUP(MAP_UNDEFINED))
+        const struct WildPokemonHeader *wildHeader = &gWildMonHeaders[i];
+        if (wildHeader->mapGroup == MAP_GROUP(UNDEFINED))
             break;
 
-        if (gWildMonHeaders[i].mapGroup == gSaveBlock1Ptr->location.mapGroup &&
-            gWildMonHeaders[i].mapNum == gSaveBlock1Ptr->location.mapNum)
+        if (wildHeader->mapGroup == gSaveBlock1Ptr->location.mapGroup &&
+            wildHeader->mapNum == gSaveBlock1Ptr->location.mapNum)
         {
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_SIX_ISLAND_ALTERING_CAVE) &&
-                gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SIX_ISLAND_ALTERING_CAVE))
-            {
-                u16 alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
-                if (alteringCaveId >= NUM_ALTERING_CAVE_TABLES)
-                    alteringCaveId = 0;
-
-                i += alteringCaveId;
-            }
-
             if (!UnlockedTanobyOrAreNotInTanoby())
                 break;
-            return i;
+
+            if (isAlteringCave)
+            {
+                u16 alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
+                u16 targetIdx;
+                if (alteringCaveId >= NUM_ALTERING_CAVE_TABLES)
+                    alteringCaveId = 0;
+                targetIdx = i + alteringCaveId;
+
+                if (gWildMonHeaders[targetIdx].timeOfDay == TIME_NIGHT && isNight)
+                    return targetIdx;
+                if (gWildMonHeaders[targetIdx].timeOfDay == TIME_DAY)
+                {
+                    if (!isNight)
+                        return targetIdx;
+                    fallbackId = targetIdx;
+                }
+                // Skip remaining entries in this Altering Cave block
+                i += NUM_ALTERING_CAVE_TABLES - 1;
+                continue;
+            }
+
+            if (wildHeader->timeOfDay == TIME_NIGHT && isNight)
+                return i;
+            if (wildHeader->timeOfDay == TIME_DAY)
+            {
+                if (!isNight)
+                    return i;
+                fallbackId = i;
+            }
         }
     }
 
-    return HEADER_NONE;
+    return fallbackId;
 }
 
 static bool8 UnlockedTanobyOrAreNotInTanoby(void)
 {
     if (FlagGet(FLAG_SYS_UNLOCKED_TANOBY_RUINS))
         return TRUE;
-    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_SEVEN_ISLAND_TANOBY_RUINS_DILFORD_CHAMBER))
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(SEVEN_ISLAND_TANOBY_RUINS_DILFORD_CHAMBER))
         return TRUE;
-    if (!(gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER)
-    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SEVEN_ISLAND_TANOBY_RUINS_LIPTOO_CHAMBER)
-    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SEVEN_ISLAND_TANOBY_RUINS_WEEPTH_CHAMBER)
-    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SEVEN_ISLAND_TANOBY_RUINS_DILFORD_CHAMBER)
-    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SEVEN_ISLAND_TANOBY_RUINS_SCUFIB_CHAMBER)
-    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SEVEN_ISLAND_TANOBY_RUINS_RIXY_CHAMBER)
-    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_SEVEN_ISLAND_TANOBY_RUINS_VIAPOIS_CHAMBER)
+    if (!(gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER)
+    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_LIPTOO_CHAMBER)
+    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_WEEPTH_CHAMBER)
+    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_DILFORD_CHAMBER)
+    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_SCUFIB_CHAMBER)
+    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_RIXY_CHAMBER)
+    ||  gSaveBlock1Ptr->location.mapNum == MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_VIAPOIS_CHAMBER)
     ))
         return TRUE;
     return FALSE;
+}
+
+bool8 IsNightTime(void)
+{
+    // Second half of each cycle is night
+    return (gSaveBlock2Ptr->playTimeHours % DAY_NIGHT_CYCLE_HOURS) >= (DAY_NIGHT_CYCLE_HOURS / 2);
 }
 
 static void GenerateWildMon(u16 species, u8 level, u8 slot)
@@ -234,7 +267,7 @@ static void GenerateWildMon(u16 species, u8 level, u8 slot)
     }
     else
     {
-        chamber = gSaveBlock1Ptr->location.mapNum - MAP_NUM(MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER);
+        chamber = gSaveBlock1Ptr->location.mapNum - MAP_NUM(SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER);
         personality = GenerateUnownPersonalityByLetter(sUnownLetterSlots[chamber][slot]);
         CreateMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, TRUE, personality, FALSE, 0);
     }

@@ -1,12 +1,12 @@
 TwoIsland_House_Text_TeachMonMoveForMushroom::
-    .string "I'm the POKéMON MOVE MANIAC.\p"
+    .string "I'm the POKéMON MOVE MANIAC.\n"
     .string "I know every single move that\n"
     .string "POKéMON learn growing up.\p"
-    .string "I'm also a mushroom maniac.\p"
-    .string "Bring me two TINYMUSHROOMS,\n"
-    .string "or one BIG MUSHROOM.\p"
-    .string "If you do that for me, I'll teach\n"
-    .string "a move to one POKéMON.$"
+    .string "I made a RETRAIN app for the PC\n"
+    .string "so trainers can reteach moves\l"
+    .string "to their POKéMON anytime.\p"
+    .string "Just look for RETRAIN PKMN on\n"
+    .string "your PC!$"
 
 TwoIsland_House_Text_WantMeToTeachMove::
     .string "Sniff, sniff…\n"
@@ -38,8 +38,8 @@ TwoIsland_House_Text_HandedOverOneBigMushroom::
     .string "BIG MUSHROOM in exchange.$"
 
 TwoIsland_House_Text_NeedMushroomOrTwoToLearnMove::
-    .string "If your POKéMON need to learn a\n"
-    .string "move, I need a MUSHROOM or two.$"
+    .string "Remember, you can use RETRAIN\n"
+    .string "PKMN on any PC to reteach moves!$"
 
 TwoIsland_House_Text_CantTeachAnEgg::
     .string "Hunh? There isn't a single move\n"

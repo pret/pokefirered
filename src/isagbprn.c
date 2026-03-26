@@ -31,8 +31,7 @@ struct AGBPrintStruct
 
 typedef void (*LPFN_PRINT_FLUSH)(void);
 
-// Revision 10 still has this code present, despite only the init function ever being used.
-#if !defined(NDEBUG) || REVISION >= 0xA
+#ifndef NDEBUG
 
 // AGBPrint print functions
 #if (LOG_HANDLER == LOG_HANDLER_AGB_PRINT)

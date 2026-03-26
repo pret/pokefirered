@@ -186,6 +186,20 @@ PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese::
 PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls::
     .string "{PLAYER} received five POKé BALLS.$"
 
+PalletTown_ProfessorOaksLab_Text_OakExplainHmSim::
+    .string "Oh, and take this, too!\p"
+    .string "It's a device I invented called\n"
+    .string "the HM SIM.\p"
+    .string "It can replicate the field effects\n"
+    .string "of HM moves for you.\p"
+    .string "As long as you have the right HM\n"
+    .string "and the proper GYM BADGE, it will\l"
+    .string "work automatically!$"
+
+PalletTown_ProfessorOaksLab_Text_ReceivedHmSim::
+    .string "{PLAYER} received an HM SIM\n"
+    .string "from PROF. OAK!$"
+
 PalletTown_ProfessorOaksLab_Text_OakExplainCatching::
     .string "When a wild POKéMON appears,\n"
     .string "it's fair game.\p"
@@ -354,4 +368,96 @@ PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex::
     .string "I think I'll try looking around\n"
     .string "ONE ISLAND first…\p"
     .string "Anyways, I'm outta here!$"
+
+@ Mewtwo trade scientist dialogue
+@ Each scientist asks for Mewtwo and offers a different rare species.
+@ They use the shared Trade_Text for decline/wrong-mon/post-trade messages.
+
+PalletTown_ProfessorOaksLab_Text_MewScientistOffer::
+    .string "I've been studying MEWTWO's\n"
+    .string "genetic origins.\p"
+    .string "I have a MEW that may be its\n"
+    .string "progenitor.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my MEW?$"
+
+PalletTown_ProfessorOaksLab_Text_CelebiScientistOffer::
+    .string "I traveled through time to\n"
+    .string "study MEWTWO's creation.\p"
+    .string "I brought a CELEBI with me\n"
+    .string "from the ILEX FOREST.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my CELEBI?$"
+
+PalletTown_ProfessorOaksLab_Text_RegirockScientistOffer::
+    .string "I study the ancient titans of\n"
+    .string "the HOENN region.\p"
+    .string "I have a REGIROCK from the\n"
+    .string "DESERT RUINS.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my REGIROCK?$"
+
+PalletTown_ProfessorOaksLab_Text_RegiceScientistOffer::
+    .string "I study the ancient titans of\n"
+    .string "the HOENN region.\p"
+    .string "I have a REGICE from the\n"
+    .string "ISLAND CAVE.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my REGICE?$"
+
+PalletTown_ProfessorOaksLab_Text_RegisteelScientistOffer::
+    .string "I study the ancient titans of\n"
+    .string "the HOENN region.\p"
+    .string "I have a REGISTEEL from the\n"
+    .string "ANCIENT TOMB.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my REGISTEEL?$"
+
+PalletTown_ProfessorOaksLab_Text_KyogreScientistOffer::
+    .string "I research the legendary\n"
+    .string "POKéMON of the sea.\p"
+    .string "I have a KYOGRE that once\n"
+    .string "expanded the oceans.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my KYOGRE?$"
+
+PalletTown_ProfessorOaksLab_Text_GroudonScientistOffer::
+    .string "I research the legendary\n"
+    .string "POKéMON of the land.\p"
+    .string "I have a GROUDON that once\n"
+    .string "expanded the continents.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my GROUDON?$"
+
+PalletTown_ProfessorOaksLab_Text_RayquazaScientistOffer::
+    .string "I study the POKéMON said to\n"
+    .string "live in the ozone layer.\p"
+    .string "I have a RAYQUAZA that\n"
+    .string "mediates land and sea.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my RAYQUAZA?$"
+
+PalletTown_ProfessorOaksLab_Text_LatiasScientistOffer::
+    .string "I track the eon POKéMON that\n"
+    .string "roam across HOENN.\p"
+    .string "I have a LATIAS that I've\n"
+    .string "befriended on my travels.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my LATIAS?$"
+
+PalletTown_ProfessorOaksLab_Text_LatiosScientistOffer::
+    .string "I track the eon POKéMON that\n"
+    .string "roam across HOENN.\p"
+    .string "I have a LATIOS that I've\n"
+    .string "befriended on my travels.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my LATIOS?$"
+
+PalletTown_ProfessorOaksLab_Text_JirachiScientistOffer::
+    .string "I study the mythical wish\n"
+    .string "POKéMON of ancient legend.\p"
+    .string "I have a JIRACHI that wakes\n"
+    .string "once every thousand years.\p"
+    .string "Would you trade your MEWTWO\n"
+    .string "for my JIRACHI?$"
 

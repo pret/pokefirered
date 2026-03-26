@@ -165,3 +165,35 @@ ThreeIsland_Text_WhenDodouEvolvesGoingToPlayGame::
 ThreeIsland_Text_Doduo::
     .string "DODUO: Gigiih!$"
 
+ThreeIsland_Text_CharmanderEggOffer::
+    .string "I used to be a trainer, back in\n"
+    .string "the day. Traveled all over KANTO.\p"
+    .string "I've got a POKéMON EGG here that\n"
+    .string "should hatch into a CHARMANDER.\p"
+    .string "They're nearly impossible to come\n"
+    .string "by. You seem like a worthy trainer.\l"
+    .string "Would you like it?$"
+
+ThreeIsland_Text_CharmanderEggFireTypeFavorite::
+    .string "Ah, you've already got yourself\n"
+    .string "a CHARMANDER! Good for you.\p"
+    .string "FIRE-type POKéMON are my favorite.\n"
+    .string "Nothing beats their spirit and\l"
+    .string "passion for battle.$"
+
+ThreeIsland_Text_CharmanderEggReceived::
+    .string "{PLAYER} received an EGG\n"
+    .string "from the old man!$"
+
+ThreeIsland_Text_CharmanderEggPostComment::
+    .string "Take good care of that EGG, now.\p"
+    .string "FIRE types have a real fighting\n"
+    .string "spirit. Raise it well and it'll\l"
+    .string "be a loyal partner.$"
+
+ThreeIsland_Text_CharmanderEggNoRoom::
+    .string "Hmm, looks like your party is\n"
+    .string "full.\p"
+    .string "Come back when you've made some\n"
+    .string "room. I'll keep the EGG warm.$"
+

@@ -4,7 +4,7 @@ VermilionCity_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 VermilionCity_PokemonCenter_1F_OnTransition::
-	setrespawn HEAL_LOCATION_VERMILION_CITY
+	setrespawn SPAWN_VERMILION_CITY
 	end
 
 VermilionCity_PokemonCenter_1F_EventScript_Nurse::
@@ -24,4 +24,38 @@ VermilionCity_PokemonCenter_1F_EventScript_Hiker::
 
 VermilionCity_PokemonCenter_1F_EventScript_Youngster::
 	msgbox VermilionCity_PokemonCenter_1F_Text_AllMonWeakToSpecificTypes, MSGBOX_NPC
+	end
+
+VermilionCity_PokemonCenter_1F_EventScript_Trader::
+	lock
+	faceplayer
+	setvar VAR_0x8008, INGAME_TRADE_CYNDAQUIL
+	call EventScript_GetInGameTradeSpeciesInfo
+	goto_if_set FLAG_DID_CYNDAQUIL_TRADE, VermilionCity_PokemonCenter_1F_EventScript_AlreadyTraded
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, VermilionCity_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_ChooseMonForInGameTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, VermilionCity_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_GetInGameTradeSpecies
+	goto_if_ne VAR_RESULT, VAR_0x8009, VermilionCity_PokemonCenter_1F_EventScript_NotRequestedMon
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_HeyThanks
+	setflag FLAG_DID_CYNDAQUIL_TRADE
+	release
+	end
+
+VermilionCity_PokemonCenter_1F_EventScript_DeclineTrade::
+	msgbox Trade_Text_AwwOhWell
+	release
+	end
+
+VermilionCity_PokemonCenter_1F_EventScript_NotRequestedMon::
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+	msgbox Trade_Text_WhatThatsNoMon
+	release
+	end
+
+VermilionCity_PokemonCenter_1F_EventScript_AlreadyTraded::
+	msgbox Trade_Text_IsntMyOldMonGreat
+	release
 	end

@@ -16,7 +16,6 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "LOCALID_TOWER_NURSE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_NURSE",
       "x": 4,
@@ -31,7 +30,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_TOWER_MART_CLERK",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_RECEPTIONIST",
       "x": 14,
@@ -46,7 +44,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_TOWER_RECEPTIONIST",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_RECEPTIONIST",
       "x": 11,
@@ -61,7 +58,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_TOWER_COOLTRAINER_F",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_COOLTRAINER_F",
       "x": 12,
@@ -76,7 +72,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_TOWER_BALDING_MAN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_BALDING_MAN",
       "x": 2,

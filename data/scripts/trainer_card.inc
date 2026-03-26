@@ -1,3 +1,5 @@
+.set LOCALID_STICKER_MAN, 1
+
 CeladonCity_GameCorner_EventScript_PhotoPrinter::
 	lockall
 	showmoneybox 0, 0

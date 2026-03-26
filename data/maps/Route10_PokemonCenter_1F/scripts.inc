@@ -7,7 +7,7 @@ Route10_PokemonCenter_1F_MapScripts::
 
 Route10_PokemonCenter_1F_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_ROUTE10_POKEMON_CENTER_1F
-	setrespawn HEAL_LOCATION_ROUTE10
+	setrespawn SPAWN_ROUTE10
 	end
 
 Route10_PokemonCenter_1F_EventScript_Nurse::
@@ -59,3 +59,37 @@ Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo::
 	buffernumberstring STR_VAR_1, REQUIRED_OWNED_MONS
 	bufferitemname STR_VAR_2, ITEM_EVERSTONE
 	return
+
+Route10_PokemonCenter_1F_EventScript_Trader::
+	lock
+	faceplayer
+	setvar VAR_0x8008, INGAME_TRADE_MURKROW
+	call EventScript_GetInGameTradeSpeciesInfo
+	goto_if_set FLAG_DID_MURKROW_TRADE, Route10_PokemonCenter_1F_EventScript_AlreadyTraded
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, Route10_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_ChooseMonForInGameTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, Route10_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_GetInGameTradeSpecies
+	goto_if_ne VAR_RESULT, VAR_0x8009, Route10_PokemonCenter_1F_EventScript_NotRequestedMon
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_HeyThanks
+	setflag FLAG_DID_MURKROW_TRADE
+	release
+	end
+
+Route10_PokemonCenter_1F_EventScript_DeclineTrade::
+	msgbox Trade_Text_AwwOhWell
+	release
+	end
+
+Route10_PokemonCenter_1F_EventScript_NotRequestedMon::
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+	msgbox Trade_Text_WhatThatsNoMon
+	release
+	end
+
+Route10_PokemonCenter_1F_EventScript_AlreadyTraded::
+	msgbox Trade_Text_IsntMyOldMonGreat
+	release
+	end

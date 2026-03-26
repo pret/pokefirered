@@ -449,7 +449,7 @@ static bool8 TrainerSeeFunc_OffscreenAboveTrainerCreateCameraObj(u8 taskId, stru
 {
     int specialObjectId;
     task->tData5 = 0;
-    specialObjectId = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_YOUNGSTER, 7, LOCALID_CAMERA, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
+    specialObjectId = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_YOUNGSTER, 7, OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->pos.x + 7, gSaveBlock1Ptr->pos.y + 7, 3);
     gObjectEvents[specialObjectId].invisible = TRUE;
     CameraObjectSetFollowedObjectId(gObjectEvents[specialObjectId].spriteId);
     task->tFuncId++;
@@ -459,7 +459,7 @@ static bool8 TrainerSeeFunc_OffscreenAboveTrainerCreateCameraObj(u8 taskId, stru
 static bool8 TrainerSeeFunc_OffscreenAboveTrainerCameraObjMoveUp(u8 taskId, struct Task *task, struct ObjectEvent *trainerObj)
 {
     u8 specialObjectId;
-    TryGetObjectEventIdByLocalIdAndMap(LOCALID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &specialObjectId);
+    TryGetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &specialObjectId);
 
     if (ObjectEventIsMovementOverridden(&gObjectEvents[specialObjectId]) && !ObjectEventClearHeldMovementIfFinished(&gObjectEvents[specialObjectId]))
         return FALSE;
@@ -482,7 +482,7 @@ static bool8 TrainerSeeFunc_OffscreenAboveTrainerCameraObjMoveUp(u8 taskId, stru
 static bool8 TrainerSeeFunc_OffscreenAboveTrainerCameraObjMoveDown(u8 taskId, struct Task *task, struct ObjectEvent * trainerObj)
 {
     u8 specialObjectId;
-    TryGetObjectEventIdByLocalIdAndMap(LOCALID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &specialObjectId);
+    TryGetObjectEventIdByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &specialObjectId);
 
     if (FieldEffectActiveListContains(FLDEFF_EXCLAMATION_MARK_ICON))
         return FALSE;
@@ -498,7 +498,7 @@ static bool8 TrainerSeeFunc_OffscreenAboveTrainerCameraObjMoveDown(u8 taskId, st
     else
     {
         CameraObjectSetFollowedObjectId(GetPlayerAvatarObjectId());
-        RemoveObjectEventByLocalIdAndMap(LOCALID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
         task->tData5 = 0;
         task->tFuncId = 2;
     }
@@ -578,27 +578,26 @@ static const struct OamData sOamData_Emoticons = {
     .affineParam = 0,
 };
 
-static const struct SpriteFrameImage sSpriteImages_Emoticons[] =
-{
-    overworld_frame(sGfx_Emoticons, 2, 2, 0),
-    overworld_frame(sGfx_Emoticons, 2, 2, 1),
-    overworld_frame(sGfx_Emoticons, 2, 2, 2),
+static const struct SpriteFrameImage sSpriteImages_Emoticons[] = {
+    {sGfx_Emoticons + 0x000, 0x80},
+    {sGfx_Emoticons + 0x040, 0x80},
+    {sGfx_Emoticons + 0x080, 0x80},
 
-    overworld_frame(sGfx_Emoticons, 2, 2, 6),
-    overworld_frame(sGfx_Emoticons, 2, 2, 7),
-    overworld_frame(sGfx_Emoticons, 2, 2, 8),
+    {sGfx_Emoticons + 0x180, 0x80},
+    {sGfx_Emoticons + 0x1C0, 0x80},
+    {sGfx_Emoticons + 0x200, 0x80},
 
-    overworld_frame(sGfx_Emoticons, 2, 2, 3),
-    overworld_frame(sGfx_Emoticons, 2, 2, 4),
-    overworld_frame(sGfx_Emoticons, 2, 2, 5),
+    {sGfx_Emoticons + 0x0C0, 0x80},
+    {sGfx_Emoticons + 0x100, 0x80},
+    {sGfx_Emoticons + 0x140, 0x80},
 
-    overworld_frame(sGfx_Emoticons, 2, 2,  9),
-    overworld_frame(sGfx_Emoticons, 2, 2, 10),
-    overworld_frame(sGfx_Emoticons, 2, 2, 11),
+    {sGfx_Emoticons + 0x240, 0x80},
+    {sGfx_Emoticons + 0x280, 0x80},
+    {sGfx_Emoticons + 0x2C0, 0x80},
 
-    overworld_frame(sGfx_Emoticons, 2, 2, 12),
-    overworld_frame(sGfx_Emoticons, 2, 2, 13),
-    overworld_frame(sGfx_Emoticons, 2, 2, 14),
+    {sGfx_Emoticons + 0x300, 0x80},
+    {sGfx_Emoticons + 0x340, 0x80},
+    {sGfx_Emoticons + 0x380, 0x80},
 };
 
 static const union AnimCmd sAnimCmd_ExclamationMark1[] = {

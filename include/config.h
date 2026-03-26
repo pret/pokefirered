@@ -8,17 +8,12 @@
 // still has them in the ROM. This is because the developers forgot
 // to define NDEBUG before release, however this has been changed as
 // Ruby's actual debug build does not use the AGBPrint features.
-
-// Revision 10 disabled asserts in some other way, comment out NDEBUG there to bring them back.
-#if REVISION >= 0xA
-#define NDEBUG
-#endif
+// #define NDEBUG
 
 // Fire Red likely forgot to define NDEBUG/NOAGBPRN before release, leading
 // to the inclusion of asserts in the retail ROM.
-// Revision 10 disabled asserts in some other way, but isagbprint/etc is still present there.
 
-#if !defined(NDEBUG) || REVISION >= 0xA
+#ifndef NDEBUG
 #define PRETTY_PRINT_OFF (0)
 #define PRETTY_PRINT_MINI_PRINTF (1)
 #define PRETTY_PRINT_LIBC (2)
@@ -37,11 +32,11 @@
 //       Some emulators or real hardware might (and is allowed to) crash if they are used.
 //       AGB_PRINT is supported on respective debug units.
 
-#define LOG_HANDLER (LOG_HANDLER_AGB_PRINT)
+#define LOG_HANDLER (LOG_HANDLER_MGBA_PRINT)
 #endif // NDEBUG
 
 // Define the game version for use elsewhere
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 #define GAME_VERSION VERSION_FIRE_RED
 #else // Default version seems to be LeafGreen
 #define GAME_VERSION VERSION_LEAF_GREEN
@@ -72,5 +67,11 @@
 #define UBFIX
 #endif // UBFIX
 #endif // MODERN
+
+// Optional trainer-level debug telemetry.
+// 0: disabled (default), 1: emit debug logs via the selected LOG_HANDLER.
+#ifndef TRAINER_TYPE_DEBUG_LOG
+#define TRAINER_TYPE_DEBUG_LOG 0
+#endif
 
 #endif // GUARD_CONFIG_H

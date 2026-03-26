@@ -16,7 +16,6 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "LOCALID_HIDEOUT_GIOVANNI",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_GIOVANNI",
       "x": 19,
@@ -31,7 +30,6 @@
       "flag": "FLAG_HIDE_HIDEOUT_GIOVANNI"
     },
     {
-      "local_id": "LOCALID_SILPH_SCOPE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 20,
@@ -60,7 +58,6 @@
       "flag": "FLAG_HIDE_MISC_KANTO_ROCKETS"
     },
     {
-      "local_id": "LOCALID_LIFT_KEY",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 3,

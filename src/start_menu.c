@@ -31,12 +31,12 @@
 #include "field_specials.h"
 #include "pokedex_screen.h"
 #include "trainer_card.h"
+#include "trainer_type_levels.h"
 #include "option_menu.h"
 #include "save_menu_util.h"
 #include "help_system.h"
 #include "constants/songs.h"
 #include "constants/field_weather.h"
-#include "sloopsvc.h"
 
 enum StartMenuOption
 {
@@ -46,6 +46,7 @@ enum StartMenuOption
     STARTMENU_PLAYER,
     STARTMENU_SAVE,
     STARTMENU_OPTION,
+    STARTMENU_TRAINER_TYPE_LEVELS,
     STARTMENU_EXIT,
     STARTMENU_RETIRE,
     STARTMENU_PLAYER2,
@@ -85,6 +86,7 @@ static bool8 StartMenuBagCallback(void);
 static bool8 StartMenuPlayerCallback(void);
 static bool8 StartMenuSaveCallback(void);
 static bool8 StartMenuOptionCallback(void);
+static bool8 StartMenuTrainerTypeLevelsCallback(void);
 static bool8 StartMenuExitCallback(void);
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkPlayerCallback(void);
@@ -114,15 +116,16 @@ static void CloseSaveStatsWindow(void);
 static void CloseStartMenu(void);
 
 static const struct MenuAction sStartMenuActionTable[] = {
-    [STARTMENU_POKEDEX] = { gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback} },
-    [STARTMENU_POKEMON] = { gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback} },
-    [STARTMENU_BAG]     = { gText_MenuBag,     {.u8_void = StartMenuBagCallback} },
-    [STARTMENU_PLAYER]  = { gText_MenuPlayer,  {.u8_void = StartMenuPlayerCallback} },
-    [STARTMENU_SAVE]    = { gText_MenuSave,    {.u8_void = StartMenuSaveCallback} },
-    [STARTMENU_OPTION]  = { gText_MenuOption,  {.u8_void = StartMenuOptionCallback} },
-    [STARTMENU_EXIT]    = { gText_MenuExit,    {.u8_void = StartMenuExitCallback} },
-    [STARTMENU_RETIRE]  = { gText_MenuRetire,  {.u8_void = StartMenuSafariZoneRetireCallback} },
-    [STARTMENU_PLAYER2] = { gText_MenuPlayer,  {.u8_void = StartMenuLinkPlayerCallback} }
+    { gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback} },
+    { gText_MenuPokemon, {.u8_void = StartMenuPokemonCallback} },
+    { gText_MenuBag, {.u8_void = StartMenuBagCallback} },
+    { gText_MenuPlayer, {.u8_void = StartMenuPlayerCallback} },
+    { gText_MenuSave, {.u8_void = StartMenuSaveCallback} },
+    { gText_MenuOption, {.u8_void = StartMenuOptionCallback} },
+    { gText_MenuTrainerTypeLevels, {.u8_void = StartMenuTrainerTypeLevelsCallback} },
+    { gText_MenuExit, {.u8_void = StartMenuExitCallback} },
+    { gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback} },
+    { gText_MenuPlayer, {.u8_void = StartMenuLinkPlayerCallback} }
 };
 
 static const struct WindowTemplate sSafariZoneStatsWindowTemplate = {
@@ -142,6 +145,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_Player,
     gStartMenuDesc_Save,
     gStartMenuDesc_Option,
+    gStartMenuDesc_TrainerTypeLevels,
     gStartMenuDesc_Exit,
     gStartMenuDesc_Retire,
     gStartMenuDesc_Player
@@ -220,6 +224,7 @@ static void SetUpStartMenu_NormalField(void)
     AppendToStartMenuItems(STARTMENU_PLAYER);
     AppendToStartMenuItems(STARTMENU_SAVE);
     AppendToStartMenuItems(STARTMENU_OPTION);
+    AppendToStartMenuItems(STARTMENU_TRAINER_TYPE_LEVELS);
     AppendToStartMenuItems(STARTMENU_EXIT);
 }
 
@@ -530,6 +535,19 @@ static bool8 StartMenuOptionCallback(void)
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_OptionsMenuFromStartMenu);
         gMain.savedCallback = CB2_ReturnToFieldWithOpenMenu;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+static bool8 StartMenuTrainerTypeLevelsCallback(void)
+{
+    if (!gPaletteFade.active)
+    {
+        PlayRainStoppingSoundEffect();
+        DestroySafariZoneStatsWindow();
+        CleanupOverworldWindowsAndTilemaps();
+        ShowTrainerTypeScreen(CB2_ReturnToFieldWithOpenMenu);
         return TRUE;
     }
     return FALSE;
@@ -936,9 +954,6 @@ static void task50_after_link_battle_save(u8 taskId)
             if (WriteSaveBlock1Sector())
             {
                 ClearContinueGameWarpStatus2();
-#if REVISION >= 0xA
-                svc_FinishSave();
-#endif
                 data[0] = 3;
             }
             break;

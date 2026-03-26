@@ -9,7 +9,6 @@
 #include "constants/event_object_movement.h"
 #include "constants/union_room.h"
 #include "constants/event_objects.h"
-#include "sloopsvc.h"
 
 #define UR_SPRITE_START_ID (MAX_SPRITES - MAX_UNION_ROOM_LEADERS)
 
@@ -33,7 +32,7 @@ static void SetUnionRoomObjectFacingDirection(s32 member, s32 leaderId, u8 direc
 static const u8 sUnionRoomObjGfxIds[GENDER_COUNT][NUM_UNION_ROOM_CLASSES + 2] = {
     [MALE]   = {
         OBJ_EVENT_GFX_COOLTRAINER_M,
-        OBJ_EVENT_GFX_BLACK_BELT,
+        OBJ_EVENT_GFX_BLACKBELT,
         OBJ_EVENT_GFX_CAMPER,
         OBJ_EVENT_GFX_YOUNGSTER,
         OBJ_EVENT_GFX_BOY,
@@ -47,7 +46,7 @@ static const u8 sUnionRoomObjGfxIds[GENDER_COUNT][NUM_UNION_ROOM_CLASSES + 2] = 
         OBJ_EVENT_GFX_PICNICKER,
         OBJ_EVENT_GFX_LASS,
         OBJ_EVENT_GFX_WOMAN_1,
-        OBJ_EVENT_GFX_CRUSH_GIRL,
+        OBJ_EVENT_GFX_BATTLE_GIRL,
         OBJ_EVENT_GFX_WOMAN_2,
         OBJ_EVENT_GFX_BEAUTY
     }
@@ -514,14 +513,6 @@ static void SpawnGroupLeaderAndMembers(u32 leaderId, struct RfuGameData * gameDa
     {
     case ACTIVITY_NONE | IN_UNION_ROOM:
     case ACTIVITY_PLYRTALK | IN_UNION_ROOM:
-#if REVISION >= 0xA
-        if ((svc_4b() & SVC4B_EXIT_EARLY) != 0)
-        {
-            DespawnGroupLeader(leaderId);
-            AssembleGroup(leaderId, gameData);
-            break;
-        }
-#endif
         SpawnGroupLeader(leaderId, gameData->playerGender, gameData->compatibility.playerTrainerId[0]);
         for (i = 0; i < MAX_RFU_PLAYERS; i++)
             DespawnGroupMember(leaderId, i);

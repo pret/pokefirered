@@ -567,14 +567,8 @@ s8 Menu_ProcessInputNoWrapClearOnChoose(void)
 
 void DestroyYesNoMenu(void)
 {
-#if REVISION >= 0xA
-    if (sYesNoWindowId == 0xFF) return;
-#endif
     ClearStdWindowAndFrameToTransparent(sYesNoWindowId, TRUE);
     RemoveWindow(sYesNoWindowId);
-#if REVISION >= 0xA
-    sYesNoWindowId = 0xFF;
-#endif
 }
 
 void MultichoiceGrid_PrintItems(u8 windowId, u8 fontId, u8 itemWidth, u8 itemHeight, u8 cols, u8 rows, const struct MenuAction *strs)

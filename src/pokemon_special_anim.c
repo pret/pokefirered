@@ -5,7 +5,6 @@
 #include "pokemon_special_anim_internal.h"
 #include "item_use.h"
 #include "task.h"
-#include "constants/pokemon_special_anim.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 
@@ -87,7 +86,7 @@ static struct PokemonSpecialAnim * AllocPSA(u8 slotId, u16 itemId, MainCallback 
     ptr->pokemon = *pokemon;
     ptr->field_00a4 = 0;
     GetMonData(pokemon, MON_DATA_NICKNAME, ptr->nickname);
-    if (ptr->animType == PSA_ITEM_ANIM_TYPE_TMHM)
+    if (ptr->animType == 4)
     {
         moveId = ItemIdToBattleMoveId(itemId);
         StringCopy(ptr->nameOfMoveToTeach, gMoveNames[moveId]);
@@ -123,12 +122,12 @@ static void SetUpUseItemAnim_Normal(struct PokemonSpecialAnim * ptr)
     u8 taskId;
     switch (ptr->animType)
     {
-    case PSA_ITEM_ANIM_TYPE_DEFAULT:
-    case PSA_ITEM_ANIM_TYPE_POTION:
-    case PSA_ITEM_ANIM_TYPE_UNUSED2:
+    case 0:
+    case 1:
+    case 3:
         taskId = CreateTask(Task_UseItem_Normal, 0);
         break;
-    case PSA_ITEM_ANIM_TYPE_TMHM:
+    case 4:
         taskId = CreateTask(Task_UseTM_NoForget, 0);
         break;
     default:
@@ -603,8 +602,8 @@ static const struct {
     u16 itemId;
     u16 animType;
 } sItemAnimMap[2] = {
-    {ITEM_RARE_CANDY, PSA_ITEM_ANIM_TYPE_DEFAULT},
-    {ITEM_POTION,     PSA_ITEM_ANIM_TYPE_POTION}
+    {ITEM_RARE_CANDY, 0},
+    {ITEM_POTION,     1}
 };
 
 static u16 GetAnimTypeByItemId(u16 itemId)
@@ -619,10 +618,10 @@ static u16 GetAnimTypeByItemId(u16 itemId)
 
     if (itemId >= ITEM_TM01 && itemId <= ITEM_HM08)
     {
-        return PSA_ITEM_ANIM_TYPE_TMHM;
+        return 4;
     }
 
-    return PSA_ITEM_ANIM_TYPE_DEFAULT;
+    return 0;
 }
 
 static u8 GetClosenessFromFriendship(u16 friendship)

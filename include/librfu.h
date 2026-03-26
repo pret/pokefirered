@@ -4,11 +4,7 @@
 #include "global.h"
 #include "main.h"
 
-#if REVISION >= 0xA
-#define LIBRFU_VERSION 1028
-#else
 #define LIBRFU_VERSION 1024
-#endif
 
 /* TODOs:
  * - documentation
@@ -320,11 +316,7 @@ struct STWIStatus
     u8 recoveryCount;
     u8 unk_16;
     u8 unk_17;
-#if __STDC_VERSION__ < 202311L
-    void (*callbackM)();
-#else
-    void (*callbackM)(...);
-#endif
+    void (*callbackM)(u8, ...);
     void (*callbackS)(u16);
     void (*callbackID)(void);
     union RfuPacket *txPacket;

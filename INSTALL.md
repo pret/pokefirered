@@ -456,6 +456,30 @@ If it has built successfully you will have the output file **pokefirered.gba** i
 > If you switched terminals since the last build (e.g. from msys2 to WSL1), you must run `make clean-tools` once before any subsequent `make` commands.
 </details>
 
+### Clean rebuild with PowerShell Core
+
+If you want a clean, repeatable rebuild workflow on any platform with PowerShell Core installed,
+use the helper script in the repository root:
+
+```powershell
+pwsh ./rebuild.ps1
+```
+
+This script runs a full clean rebuild sequence:
+
+1. `make clean`
+2. `make tools`
+3. `make generated` (unless skipped)
+4. `make <target> -j<jobs>`
+
+Examples:
+
+```powershell
+pwsh ./rebuild.ps1 -Target modern
+pwsh ./rebuild.ps1 -Target firered -Jobs 8
+pwsh ./rebuild.ps1 -Target modern -SkipGenerate
+```
+
 ## Build pokeleafgreen and REV1
 Pokemon FireRed and LeafGreen were both released together. As such, this project is capable of building both ROMs. To do so, simply run
 ```bash

@@ -39,66 +39,56 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_EndPrizeExchange::
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_Abra::
-	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_ABRA
-	setvar VAR_TEMP_2, 180
-	.else
 	.ifdef LEAFGREEN
 	setvar VAR_TEMP_1, SPECIES_ABRA
 	setvar VAR_TEMP_2, 120
-	.endif
+	.else
+	setvar VAR_TEMP_1, SPECIES_ABRA
+	setvar VAR_TEMP_2, 180
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_Clefairy::
-	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_CLEFAIRY
-	setvar VAR_TEMP_2, 500
-	.else
 	.ifdef LEAFGREEN
 	setvar VAR_TEMP_1, SPECIES_CLEFAIRY
 	setvar VAR_TEMP_2, 750
-	.endif
+	.else
+	setvar VAR_TEMP_1, SPECIES_CLEFAIRY
+	setvar VAR_TEMP_2, 500
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_DratiniPinsir::
-	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_DRATINI
-	setvar VAR_TEMP_2, 2800
-	.else
 	.ifdef LEAFGREEN
 	setvar VAR_TEMP_1, SPECIES_PINSIR
 	setvar VAR_TEMP_2, 2500
-	.endif
+	.else
+	setvar VAR_TEMP_1, SPECIES_DRATINI
+	setvar VAR_TEMP_2, 2800
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_ScytherDratini::
-	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_SCYTHER
-	setvar VAR_TEMP_2, 5500
-	.else
 	.ifdef LEAFGREEN
 	setvar VAR_TEMP_1, SPECIES_DRATINI
 	setvar VAR_TEMP_2, 4600
-	.endif
+	.else
+	setvar VAR_TEMP_1, SPECIES_SCYTHER
+	setvar VAR_TEMP_2, 5500
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_Porygon::
-	.ifdef FIRERED
-	setvar VAR_TEMP_1, SPECIES_PORYGON
-	setvar VAR_TEMP_2, 9999
-	.else
 	.ifdef LEAFGREEN
 	setvar VAR_TEMP_1, SPECIES_PORYGON
 	setvar VAR_TEMP_2, 6500
-	.endif
+	.else
+	setvar VAR_TEMP_1, SPECIES_PORYGON
+	setvar VAR_TEMP_2, 9999
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon
 	end
@@ -120,34 +110,28 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_ConfirmPrizeMon::
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GiveAbra::
-	.ifdef FIRERED
-	givemon VAR_TEMP_1, 9
-	.else
 	.ifdef LEAFGREEN
 	givemon VAR_TEMP_1, 7
-	.endif
+	.else
+	givemon VAR_TEMP_1, 9
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GiveClefairy::
-	.ifdef FIRERED
-	givemon VAR_TEMP_1, 8
-	.else
 	.ifdef LEAFGREEN
 	givemon VAR_TEMP_1, 12
-	.endif
+	.else
+	givemon VAR_TEMP_1, 8
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GiveDratini::
-	.ifdef FIRERED
-	givemon VAR_TEMP_1, 18
-	.else
 	.ifdef LEAFGREEN
 	givemon VAR_TEMP_1, 24
-	.endif
+	.else
+	givemon VAR_TEMP_1, 18
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
 	end
@@ -158,12 +142,10 @@ CeladonCity_GameCorner_PrizeRoom_EventScript_GiveScyther::
 	end
 
 CeladonCity_GameCorner_PrizeRoom_EventScript_GivePorygon::
-	.ifdef FIRERED
-	givemon VAR_TEMP_1, 26
-	.else
 	.ifdef LEAFGREEN
 	givemon VAR_TEMP_1, 18
-	.endif
+	.else
+	givemon VAR_TEMP_1, 26
 	.endif
 	goto CeladonCity_GameCorner_PrizeRoom_EventScript_CheckReceivedMon
 	end

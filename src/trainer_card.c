@@ -19,6 +19,7 @@
 #include "constants/songs.h"
 #include "constants/game_stat.h"
 #include "constants/trainers.h"
+#include "battle_main.h"
 
 // Trainer Card Strings
 enum
@@ -131,6 +132,7 @@ static void PrintPokemonIconsOnCard(void);
 static void LoadMonIconGfx(void);
 static void PrintStickersOnCard(void);
 static void LoadStickerGfx(void);
+static void PrintTrainerTypeLevelsOnCard(void);
 static void DrawTrainerCardWindow(u8 windowId);
 static bool8 SetTrainerCardBgsAndPals(void);
 static void DrawCardScreenBackground(const u16 *ptr);
@@ -1065,6 +1067,9 @@ static bool8 PrintAllOnCardFront(void)
     case 5:
         PrintProfilePhraseOnCard();
         break;
+    case 6:
+        PrintTrainerTypeLevelsOnCard();
+        break;
     default:
         sTrainerCardDataPtr->printState = 0;
         return TRUE;
@@ -1459,6 +1464,78 @@ static void LoadStickerGfx(void)
     LoadPalette(sTrainerCardStickerPal3, BG_PLTT_ID(13), sizeof(sTrainerCardStickerPal3));
     LoadPalette(sTrainerCardStickerPal4, BG_PLTT_ID(14), sizeof(sTrainerCardStickerPal4));
     LoadBgTiles(3, sTrainerCardDataPtr->stickerTiles, 1024, 128);
+}
+
+static void PrintTrainerTypeLevelsOnCard(void)
+{
+    // Show top 3 trainer type levels on the front of the card.
+    // Only displayed for non-link cards (link cards show profile phrase instead).
+    if (!sTrainerCardDataPtr->isLink)
+    {
+        u8 buffer[64];
+        u8 numBuffer[4];
+        u8 topTypes[3];
+        u8 topLevels[3];
+        u8 i;
+        u8 x;
+        u8 y = (sTrainerCardDataPtr->cardType != CARD_TYPE_RSE) ? 104 : 105;
+
+        // Find top 3 types by level
+        for (i = 0; i < 3; i++)
+        {
+            topTypes[i] = TYPE_NORMAL;
+            topLevels[i] = 0;
+        }
+        for (i = 0; i < NUMBER_OF_MON_TYPES; i++)
+        {
+            if (i == TYPE_MYSTERY)
+                continue;
+            if (gSaveBlock2Ptr->trainerTypeLevels[i] > topLevels[0])
+            {
+                topLevels[2] = topLevels[1];
+                topTypes[2] = topTypes[1];
+                topLevels[1] = topLevels[0];
+                topTypes[1] = topTypes[0];
+                topLevels[0] = gSaveBlock2Ptr->trainerTypeLevels[i];
+                topTypes[0] = i;
+            }
+            else if (gSaveBlock2Ptr->trainerTypeLevels[i] > topLevels[1])
+            {
+                topLevels[2] = topLevels[1];
+                topTypes[2] = topTypes[1];
+                topLevels[1] = gSaveBlock2Ptr->trainerTypeLevels[i];
+                topTypes[1] = i;
+            }
+            else if (gSaveBlock2Ptr->trainerTypeLevels[i] > topLevels[2])
+            {
+                topLevels[2] = gSaveBlock2Ptr->trainerTypeLevels[i];
+                topTypes[2] = i;
+            }
+        }
+
+        // Only show if at least one type is above level 1
+        if (topLevels[0] > 1)
+        {
+            x = 8;
+            for (i = 0; i < 3; i++)
+            {
+                if (topLevels[i] <= 1)
+                    break;
+                buffer[0] = EOS;
+                StringCopy(buffer, gTypeNames[topTypes[i]]);
+                AddTextPrinterParameterized3(1, FONT_SMALL, x, y,
+                    sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
+                x += GetStringWidth(FONT_SMALL, buffer, 0) + 1;
+
+                StringCopy(buffer, gText_Lv);
+                ConvertIntToDecimalStringN(numBuffer, topLevels[i], STR_CONV_MODE_LEFT_ALIGN, 3);
+                StringAppend(buffer, numBuffer);
+                AddTextPrinterParameterized3(1, FONT_SMALL, x, y,
+                    sTrainerCardStatColors, TEXT_SKIP_DRAW, buffer);
+                x += GetStringWidth(FONT_SMALL, buffer, 0) + 6;
+            }
+        }
+    }
 }
 
 static void DrawTrainerCardWindow(u8 windowId)

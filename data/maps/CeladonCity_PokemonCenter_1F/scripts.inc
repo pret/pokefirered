@@ -4,7 +4,7 @@ CeladonCity_PokemonCenter_1F_MapScripts::
 	.byte 0
 
 CeladonCity_PokemonCenter_1F_OnTransition::
-	setrespawn HEAL_LOCATION_CELADON_CITY
+	setrespawn SPAWN_CELADON_CITY
 	end
 
 CeladonCity_PokemonCenter_1F_EventScript_Nurse::
@@ -24,4 +24,38 @@ CeladonCity_PokemonCenter_1F_EventScript_CooltrainerF::
 
 CeladonCity_PokemonCenter_1F_EventScript_Youngster::
 	msgbox CeladonCity_PokemonCenter_1F_Text_GoToCyclingRoadIfIHadBike, MSGBOX_NPC
+	end
+
+CeladonCity_PokemonCenter_1F_EventScript_Trader::
+	lock
+	faceplayer
+	setvar VAR_0x8008, INGAME_TRADE_TREECKO
+	call EventScript_GetInGameTradeSpeciesInfo
+	goto_if_set FLAG_DID_TREECKO_TRADE, CeladonCity_PokemonCenter_1F_EventScript_AlreadyTraded
+	msgbox Trade_Text_LookingForMonWannaTradeForMon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, CeladonCity_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_ChooseMonForInGameTrade
+	goto_if_ge VAR_0x8004, PARTY_SIZE, CeladonCity_PokemonCenter_1F_EventScript_DeclineTrade
+	call EventScript_GetInGameTradeSpecies
+	goto_if_ne VAR_RESULT, VAR_0x8009, CeladonCity_PokemonCenter_1F_EventScript_NotRequestedMon
+	call EventScript_DoInGameTrade
+	msgbox Trade_Text_HeyThanks
+	setflag FLAG_DID_TREECKO_TRADE
+	release
+	end
+
+CeladonCity_PokemonCenter_1F_EventScript_DeclineTrade::
+	msgbox Trade_Text_AwwOhWell
+	release
+	end
+
+CeladonCity_PokemonCenter_1F_EventScript_NotRequestedMon::
+	bufferspeciesname STR_VAR_1, VAR_0x8009
+	msgbox Trade_Text_WhatThatsNoMon
+	release
+	end
+
+CeladonCity_PokemonCenter_1F_EventScript_AlreadyTraded::
+	msgbox Trade_Text_IsntMyOldMonGreat
+	release
 	end

@@ -36,6 +36,8 @@
 #include "constants/hold_effects.h"
 #include "constants/battle_move_effects.h"
 #include "constants/union_room.h"
+#include "trainer_xp_system.h"
+#include "trainer_type_debug.h"
 
 #define SPECIES_TO_HOENN(name)      [SPECIES_##name - 1] = HOENN_DEX_##name
 #define SPECIES_TO_NATIONAL(name)   [SPECIES_##name - 1] = NATIONAL_DEX_##name
@@ -56,6 +58,9 @@ struct MonSpritesGfxManager
 };
 
 static EWRAM_DATA u8 sLearningMoveTableID = 0;
+static EWRAM_DATA u8 sLearningMoveCurrentLevel = 0;
+static EWRAM_DATA u8 sLearningMovePreviousEffectiveLevel = 0;
+static EWRAM_DATA u8 sLearningMoveCurrentEffectiveLevel = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
 EWRAM_DATA u8 gEnemyPartyCount = 0;
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {};
@@ -78,6 +83,7 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
+static bool8 IsMoveInLearningWindow(u16 moveLevel, u8 currentLevel, u8 previousEffectiveLevel, u8 currentEffectiveLevel);
 
 #include "data/battle_moves.h"
 
@@ -1637,7 +1643,7 @@ static const u16 sHMMoves[] =
     MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_DIVE, HM_MOVES_END
 };
 
-#if defined(FIRERED)
+#if defined(FIRERED) || defined(FULLSPEC)
 // Attack forme
 static const u16 sDeoxysBaseStats[] = 
 {
@@ -2290,6 +2296,7 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
     u32 retVal = MOVE_NONE;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+    u8 learnBonus = GetTrainerTypeLearnLevelBonus(gSpeciesInfo[species].types[0], gSpeciesInfo[species].types[1]);
 
     // since you can learn more than one move per level
     // the game needs to know whether you decided to
@@ -2298,16 +2305,35 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
     if (firstMove)
     {
         sLearningMoveTableID = 0;
+        sLearningMoveCurrentLevel = level;
+        sLearningMovePreviousEffectiveLevel = level - 1;
+        sLearningMoveCurrentEffectiveLevel = level + learnBonus;
 
-        while ((gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_LV) != (level << 9))
+        if (sLearningMovePreviousEffectiveLevel > MAX_LEVEL)
+            sLearningMovePreviousEffectiveLevel = MAX_LEVEL;
+        if (sLearningMoveCurrentEffectiveLevel > MAX_LEVEL)
+            sLearningMoveCurrentEffectiveLevel = MAX_LEVEL;
+
+        while (gLevelUpLearnsets[species][sLearningMoveTableID] != LEVEL_UP_END
+            && !IsMoveInLearningWindow((gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_LV) >> 9,
+                                       sLearningMoveCurrentLevel,
+                                       sLearningMovePreviousEffectiveLevel,
+                                       sLearningMoveCurrentEffectiveLevel))
         {
             sLearningMoveTableID++;
-            if (gLevelUpLearnsets[species][sLearningMoveTableID] == LEVEL_UP_END)
-                return MOVE_NONE;
         }
     }
 
-    if ((gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_LV) == (level << 9))
+    while (gLevelUpLearnsets[species][sLearningMoveTableID] != LEVEL_UP_END
+        && !IsMoveInLearningWindow((gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_LV) >> 9,
+                                   sLearningMoveCurrentLevel,
+                                   sLearningMovePreviousEffectiveLevel,
+                                   sLearningMoveCurrentEffectiveLevel))
+    {
+        sLearningMoveTableID++;
+    }
+
+    if (gLevelUpLearnsets[species][sLearningMoveTableID] != LEVEL_UP_END)
     {
         gMoveToLearn = (gLevelUpLearnsets[species][sLearningMoveTableID] & LEVEL_UP_MOVE_ID);
         sLearningMoveTableID++;
@@ -2315,6 +2341,14 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
     }
 
     return retVal;
+}
+
+static bool8 IsMoveInLearningWindow(u16 moveLevel, u8 currentLevel, u8 previousEffectiveLevel, u8 currentEffectiveLevel)
+{
+    if (moveLevel == currentLevel)
+        return TRUE;
+
+    return moveLevel > previousEffectiveLevel && moveLevel <= currentEffectiveLevel;
 }
 
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move)
@@ -2394,6 +2428,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     u8 defenderHoldEffectParam;
     u8 attackerHoldEffect;
     u8 attackerHoldEffectParam;
+    u8 trainerOffBonus;
+    u8 trainerDefBonus;
+    bool8 skipTrainerBonuses = FALSE;
 
     if (!powerOverride)
         gBattleMovePower = gBattleMoves[move].power;
@@ -2445,6 +2482,44 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         spAttack = (110 * spAttack) / 100;
     if (ShouldGetStatBadgeBoost(FLAG_BADGE07_GET, battlerIdDef))
         spDefense = (110 * spDefense) / 100;
+
+    if (battlerIdAtk == battlerIdDef && gProtectStructs[battlerIdAtk].confusionSelfDmg)
+        skipTrainerBonuses = TRUE;
+
+    // Trainer type level stat bonuses (player side only).
+    // Each averaged level adds 0.5% to the relevant stat pair.
+    // Physical moves: affect attack/defense; Special: affect spAttack/spDefense.
+    if (!skipTrainerBonuses)
+    {
+        trainerOffBonus = GetTrainerTypeOffenseBonusLevelByBattlerSide(GetBattlerSide(battlerIdAtk), attacker->type1, attacker->type2, (u8)type);
+        trainerDefBonus = GetTrainerTypeDefenseBonusLevelByBattlerSide(GetBattlerSide(battlerIdDef), defender->type1, defender->type2, (u8)type);
+        if (IS_TYPE_PHYSICAL(type))
+        {
+            if (trainerOffBonus)
+                attack    = (u16)((u32)attack    * (200 + trainerOffBonus) / 200);
+            if (trainerDefBonus)
+                defense   = (u16)((u32)defense   * (200 + trainerDefBonus) / 200);
+        }
+        else if (IS_TYPE_SPECIAL(type))
+        {
+            if (trainerOffBonus)
+                spAttack  = (u16)((u32)spAttack  * (200 + trainerOffBonus) / 200);
+            if (trainerDefBonus)
+                spDefense = (u16)((u32)spDefense * (200 + trainerDefBonus) / 200);
+        }
+
+        if (trainerOffBonus || trainerDefBonus)
+        {
+            TRAINER_TYPE_DEBUG_LOGF("STAT moveType=%u atkType1=%u atkType2=%u defType1=%u defType2=%u offBonus=%u defBonus=%u\n",
+                                    (u8)type,
+                                    attacker->type1,
+                                    attacker->type2,
+                                    defender->type1,
+                                    defender->type2,
+                                    trainerOffBonus,
+                                    trainerDefBonus);
+        }
+    }
 
     // Apply type-bonus hold item
     for (i = 0; i < ARRAY_COUNT(sHoldEffectToType); i++)
@@ -2895,11 +2970,7 @@ static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 perso
     return substruct;
 }
 
-/* GameFreak called GetMonData with either 2 or 3 arguments, for type
- * safety we have a GetMonData macro (in include/pokemon.h) which
- * dispatches to either GetMonData2 or GetMonData3 based on the number
- * of arguments. */
-u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
+u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
 {
     u32 ret;
 
@@ -2967,13 +3038,7 @@ u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
     return ret;
 }
 
-u32 GetMonData2(struct Pokemon *mon, s32 field) __attribute__((alias("GetMonData3")));
-
-/* GameFreak called GetBoxMonData with either 2 or 3 arguments, for type
- * safety we have a GetBoxMonData macro (in include/pokemon.h) which
- * dispatches to either GetBoxMonData2 or GetBoxMonData3 based on the
- * number of arguments. */
-u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
+u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
 {
     s32 i;
     u32 retVal = 0;
@@ -3328,8 +3393,6 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
 
     return retVal;
 }
-
-u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field) __attribute__((alias("GetBoxMonData3")));
 
 #define SET8(lhs) (lhs) = *data
 #define SET16(lhs) (lhs) = data[0] + (data[1] << 8)
@@ -5022,6 +5085,68 @@ static u8 GetNatureFromPersonality(u32 personality)
     return personality % NUM_NATURES;
 }
 
+// Returns signed comparison of progress percentage to next trainer-type level.
+// >0 means typeA is closer, <0 means typeB is closer, 0 means equal.
+static s8 CompareTrainerTypeLevelProgress(u8 typeA, u8 typeB)
+{
+    u8 levelA = gSaveBlock2Ptr->trainerTypeLevels[typeA];
+    u8 levelB = gSaveBlock2Ptr->trainerTypeLevels[typeB];
+    u32 expA = gSaveBlock2Ptr->trainerTypeExp[typeA];
+    u32 expB = gSaveBlock2Ptr->trainerTypeExp[typeB];
+    u32 curA;
+    u32 curB;
+    u32 nextA;
+    u32 nextB;
+    u32 spanA;
+    u32 spanB;
+    u32 gainedA;
+    u32 gainedB;
+    u32 lhs;
+    u32 rhs;
+
+    if (levelA >= 100)
+    {
+        curA = GetTrainerTypeLevelThreshold(typeA, 100);
+        nextA = curA;
+    }
+    else
+    {
+        curA = GetTrainerTypeLevelThreshold(typeA, levelA);
+        nextA = GetTrainerTypeLevelThreshold(typeA, levelA + 1);
+    }
+
+    if (levelB >= 100)
+    {
+        curB = GetTrainerTypeLevelThreshold(typeB, 100);
+        nextB = curB;
+    }
+    else
+    {
+        curB = GetTrainerTypeLevelThreshold(typeB, levelB);
+        nextB = GetTrainerTypeLevelThreshold(typeB, levelB + 1);
+    }
+
+    spanA = (nextA > curA) ? (nextA - curA) : 1;
+    spanB = (nextB > curB) ? (nextB - curB) : 1;
+    gainedA = (expA > curA) ? (expA - curA) : 0;
+    gainedB = (expB > curB) ? (expB - curB) : 0;
+
+    if (gainedA > spanA)
+        gainedA = spanA;
+    if (gainedB > spanB)
+        gainedB = spanB;
+
+    // Compare gainedA/spanA versus gainedB/spanB without floating point.
+    lhs = gainedA * spanB;
+    rhs = gainedB * spanA;
+
+    if (lhs > rhs)
+        return 1;
+    if (lhs < rhs)
+        return -1;
+    return 0;
+}
+
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
 {
     int i;
@@ -5050,6 +5175,69 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
         level = GetMonData(mon, MON_DATA_LEVEL, NULL);
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
 
+        // Eevee-specific arbitration when both Espeon and Umbreon are eligible:
+        // 1) higher trainer type level, 2) greater % progress to next level,
+        // 3) day/night fallback (day = Espeon, night = Umbreon).
+        if (species == SPECIES_EEVEE && friendship >= 220)
+        {
+            u8 psychicReq = 255;
+            u8 darkReq = 255;
+            u16 espeonTarget = 0;
+            u16 umbreonTarget = 0;
+            u8 psychicLevel = gSaveBlock2Ptr->trainerTypeLevels[TYPE_PSYCHIC];
+            u8 darkLevel = gSaveBlock2Ptr->trainerTypeLevels[TYPE_DARK];
+            bool8 canEspeon = FALSE;
+            bool8 canUmbreon = FALSE;
+            s8 progressCmp;
+
+            for (i = 0; i < EVOS_PER_MON; i++)
+            {
+                if (gEvolutionTable[species][i].method == EVO_FRIENDSHIP_PSYCHIC_TRAINER)
+                {
+                    psychicReq = gEvolutionTable[species][i].param;
+                    espeonTarget = gEvolutionTable[species][i].targetSpecies;
+                }
+                else if (gEvolutionTable[species][i].method == EVO_FRIENDSHIP_DARK_TRAINER)
+                {
+                    darkReq = gEvolutionTable[species][i].param;
+                    umbreonTarget = gEvolutionTable[species][i].targetSpecies;
+                }
+            }
+
+            if (espeonTarget != 0 && psychicLevel >= psychicReq)
+                canEspeon = TRUE;
+            if (umbreonTarget != 0 && darkLevel >= darkReq)
+                canUmbreon = TRUE;
+
+            if (canEspeon && canUmbreon)
+            {
+                if (psychicLevel > darkLevel)
+                    targetSpecies = espeonTarget;
+                else if (darkLevel > psychicLevel)
+                    targetSpecies = umbreonTarget;
+                else
+                {
+                    progressCmp = CompareTrainerTypeLevelProgress(TYPE_PSYCHIC, TYPE_DARK);
+                    if (progressCmp > 0)
+                        targetSpecies = espeonTarget;
+                    else if (progressCmp < 0)
+                        targetSpecies = umbreonTarget;
+                    else if (!(gSaveBlock2Ptr->playTimeHours % 2))
+                        targetSpecies = espeonTarget;
+                    else
+                        targetSpecies = umbreonTarget;
+                }
+            }
+            else if (canEspeon)
+            {
+                targetSpecies = espeonTarget;
+            }
+            else if (canUmbreon)
+            {
+                targetSpecies = umbreonTarget;
+            }
+        }
+
         for (i = 0; i < EVOS_PER_MON; i++)
         {
             switch (gEvolutionTable[species][i].method)
@@ -5058,20 +5246,23 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                 if (friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
-            // FR/LG removed the time of day evolutions due to having no RTC.
             case EVO_FRIENDSHIP_DAY:
-                /*
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && friendship >= 220)
+                if (!(gSaveBlock2Ptr->playTimeHours % 2) && friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                */
                 break;
             case EVO_FRIENDSHIP_NIGHT:
-                /*
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && friendship >= 220)
+                if ((gSaveBlock2Ptr->playTimeHours % 2) && friendship >= 220)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
-                */
+                break;
+            case EVO_FRIENDSHIP_PSYCHIC_TRAINER:
+                if (species != SPECIES_EEVEE && friendship >= 220
+                    && gSaveBlock2Ptr->trainerTypeLevels[TYPE_PSYCHIC] >= gEvolutionTable[species][i].param)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_FRIENDSHIP_DARK_TRAINER:
+                if (species != SPECIES_EEVEE && friendship >= 220
+                    && gSaveBlock2Ptr->trainerTypeLevels[TYPE_DARK] >= gEvolutionTable[species][i].param)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL:
                 if (gEvolutionTable[species][i].param <= level)
@@ -5106,6 +5297,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                 break;
             case EVO_BEAUTY:
                 if (gEvolutionTable[species][i].param <= beauty)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_FRIENDSHIP_WATER_TRAINER:
+                if (friendship >= gEvolutionTable[species][i].param
+                    && gSaveBlock2Ptr->trainerTypeLevels[TYPE_WATER] >= 50)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
@@ -5458,6 +5654,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
     if (species && species != SPECIES_EGG)
     {
         s8 delta;
+        s16 trainerFriendshipBonus;
         // Friendship level refers to the column in sFriendshipEventDeltas.
         // 0-99: Level 0 (maximum increase, typically)
         // 100-199: Level 1
@@ -5492,8 +5689,16 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             delta = (150 * delta) / 100;
 
         friendship += delta;
+        trainerFriendshipBonus = 0;
         if (delta > 0)
         {
+            u8 monType1 = gSpeciesInfo[species].types[0];
+            u8 monType2 = gSpeciesInfo[species].types[1];
+            // Trainer type level bonus: floor(type_level / 10) per type
+            trainerFriendshipBonus += (s16)GetFriendshipGrowthBonus(monType1);
+            if (monType2 != monType1)
+                trainerFriendshipBonus += (s16)GetFriendshipGrowthBonus(monType2);
+            friendship += trainerFriendshipBonus;
             if (GetMonData(mon, MON_DATA_POKEBALL, NULL) == ITEM_LUXURY_BALL)
                 friendship++;
             if (GetMonData(mon, MON_DATA_MET_LOCATION, NULL) == GetCurrentRegionMapSectionId())
@@ -5506,6 +5711,16 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             friendship = MAX_FRIENDSHIP;
 
         SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
+
+        if (trainerFriendshipBonus != 0)
+        {
+            TRAINER_TYPE_DEBUG_LOGF("FRIENDSHIP species=%u event=%u baseDelta=%d trainerBonus=%d final=%d\n",
+                                    species,
+                                    event,
+                                    delta,
+                                    trainerFriendshipBonus,
+                                    friendship);
+        }
     }
 }
 
@@ -5738,41 +5953,80 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     }
 }
 
-u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
+// Return the immediate pre-evolution of `species`, or SPECIES_NONE if it is
+// a base-stage Pokémon.
+static u16 GetPreEvolutionSpecies(u16 species)
 {
-    u16 learnedMoves[MAX_MON_MOVES];
-    u8 numMoves = 0;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
-    int i, j, k;
+    int i, k;
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        for (k = 0; k < EVOS_PER_MON; k++)
+        {
+            if (gEvolutionTable[i][k].targetSpecies == species)
+                return (u16)i;
+        }
+    }
+    return SPECIES_NONE;
+}
+
+// Collect level-up moves from `species` that are at or below `effectiveLevel`,
+// are not already known by the mon, and are not already in `moves`.
+static u8 CollectRelearnableMoves(u16 species, u8 effectiveLevel,
+                                  const u16 *learnedMoves, u16 *moves, u8 numMoves)
+{
+    int i, j, k;
 
     for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
     {
         u16 moveLevel;
+        u16 moveId;
 
         if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
             break;
 
         moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV;
 
-        if (moveLevel <= (level << 9))
+        if (moveLevel <= ((u16)effectiveLevel << 9))
         {
-            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); j++)
+            moveId = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
+
+            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != moveId; j++)
                 ;
 
             if (j == MAX_MON_MOVES)
             {
-                for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); k++)
+                for (k = 0; k < numMoves && moves[k] != moveId; k++)
                     ;
 
                 if (k == numMoves)
-                    moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
+                    moves[numMoves++] = moveId;
             }
         }
     }
+    return numMoves;
+}
+
+u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[MAX_MON_MOVES];
+    u8 numMoves = 0;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+    u8 learnBonus = GetTrainerTypeLearnLevelBonus(gSpeciesInfo[species].types[0], gSpeciesInfo[species].types[1]);
+    u8 effectiveLevel = (level + learnBonus > MAX_LEVEL) ? MAX_LEVEL : level + learnBonus;
+    u16 prevo;
+    int i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
+
+    // Collect moves from the current species.
+    numMoves = CollectRelearnableMoves(species, effectiveLevel, learnedMoves, moves, numMoves);
+
+    // Also include moves from pre-evolution species up to the effective level.
+    for (prevo = GetPreEvolutionSpecies(species); prevo != SPECIES_NONE; prevo = GetPreEvolutionSpecies(prevo))
+        numMoves = CollectRelearnableMoves(prevo, effectiveLevel, learnedMoves, moves, numMoves);
 
     return numMoves;
 }
@@ -5795,7 +6049,10 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     u8 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
-    int i, j, k;
+    u8 learnBonus = GetTrainerTypeLearnLevelBonus(gSpeciesInfo[species].types[0], gSpeciesInfo[species].types[1]);
+    u8 effectiveLevel = (level + learnBonus > MAX_LEVEL) ? MAX_LEVEL : level + learnBonus;
+    u16 prevo;
+    int i;
 
     if (species == SPECIES_EGG)
         return 0;
@@ -5803,30 +6060,10 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
     for (i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
 
-    for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
-    {
-        u16 moveLevel;
+    numMoves = CollectRelearnableMoves(species, effectiveLevel, learnedMoves, moves, numMoves);
 
-        if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
-            break;
-
-        moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV;
-
-        if (moveLevel <= (level << 9))
-        {
-            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); j++)
-                ;
-
-            if (j == MAX_MON_MOVES)
-            {
-                for (k = 0; k < numMoves && moves[k] != (gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID); k++)
-                    ;
-
-                if (k == numMoves)
-                    moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
-            }
-        }
-    }
+    for (prevo = GetPreEvolutionSpecies(species); prevo != SPECIES_NONE; prevo = GetPreEvolutionSpecies(prevo))
+        numMoves = CollectRelearnableMoves(prevo, effectiveLevel, learnedMoves, moves, numMoves);
 
     return numMoves;
 }
@@ -6233,9 +6470,42 @@ void CreateEnemyEventMon(void)
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 {
     u8 getFlagCaseId = (caseId == FLAG_SET_SEEN) ? FLAG_GET_SEEN : FLAG_GET_CAUGHT;
+    u16 species = NationalPokedexNumToSpecies(nationalNum);
+    u8 type1;
+    u8 type2;
+
+    if (species != SPECIES_NONE)
+    {
+        type1 = gSpeciesInfo[species].types[0];
+        type2 = gSpeciesInfo[species].types[1];
+    }
+    else
+    {
+        type1 = TYPE_NORMAL;
+        type2 = TYPE_NORMAL;
+    }
     
     if (!GetSetPokedexFlag(nationalNum, getFlagCaseId))
     {
+        if (caseId == FLAG_SET_SEEN)
+        {
+            // First-time seen bonus for any flow that registers seen data.
+            // Awards per species type slot; pure-typed species get both slots.
+            if (type1 < NUMBER_OF_MON_TYPES && type1 != TYPE_MYSTERY)
+                AwardTrainerTypeExp(type1, 5);
+            if (type2 < NUMBER_OF_MON_TYPES && type2 != TYPE_MYSTERY)
+                AwardTrainerTypeExp(type2, 5);
+        }
+        else if (caseId == FLAG_SET_CAUGHT)
+        {
+            // First-time caught bonus for any flow that registers caught data.
+            // Awards per species type slot; pure-typed species get both slots.
+            if (type1 < NUMBER_OF_MON_TYPES && type1 != TYPE_MYSTERY)
+                AwardTrainerTypeExp(type1, 15);
+            if (type2 < NUMBER_OF_MON_TYPES && type2 != TYPE_MYSTERY)
+                AwardTrainerTypeExp(type2, 15);
+        }
+
         GetSetPokedexFlag(nationalNum, caseId);
         if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_UNOWN)
             gSaveBlock2Ptr->pokedex.unownPersonality = personality;

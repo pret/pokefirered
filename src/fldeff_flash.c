@@ -157,7 +157,8 @@ static const struct FlashStruct sTransitionTypes[] = {
 static const u16 sCaveTransitionPalette_White[] = INCBIN_U16("graphics/cave_transition/white.gbapal");
 static const u16 sCaveTransitionPalette_Black[] = INCBIN_U16("graphics/cave_transition/black.gbapal");
 
-static const u16 sCaveTransitionPalette[] = INCBIN_U16("graphics/cave_transition/tiles.gbapal");
+static const u16 sCaveTransitionPalette_Enter[] = INCBIN_U16("graphics/cave_transition/enter.gbapal");
+static const u16 sCaveTransitionPalette_Exit[] = INCBIN_U16("graphics/cave_transition/exit.gbapal");
 static const u32 sCaveTransitionTilemap[] = INCBIN_U32("graphics/cave_transition/tilemap.bin.lz");
 static const u32 sCaveTransitionTiles[] = INCBIN_U32("graphics/cave_transition/tiles.4bpp.lz");
 
@@ -301,7 +302,7 @@ static void Task_FlashTransition_Exit_1(u8 taskId)
     LZ77UnCompVram(sCaveTransitionTiles, (void *)BG_CHAR_ADDR(3));
     LZ77UnCompVram(sCaveTransitionTilemap, (void *)BG_SCREEN_ADDR(31));
     LoadPalette(sCaveTransitionPalette_White, BG_PLTT_ID(14), sizeof(sCaveTransitionPalette_White));
-    LoadPalette(&sCaveTransitionPalette[8], BG_PLTT_ID(14), PLTT_SIZEOF(8));
+    LoadPalette(sCaveTransitionPalette_Exit, BG_PLTT_ID(14), sizeof(sCaveTransitionPalette_Exit));
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_TGT2_BD);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
     SetGpuReg(REG_OFFSET_BLDY, 0);
@@ -335,7 +336,7 @@ static void Task_FlashTransition_Exit_3(u8 taskId)
     if (count < 8)
     {
         gTasks[taskId].data[2]++;
-        LoadPalette(&sCaveTransitionPalette[count + 8], BG_PLTT_ID(14), PLTT_SIZEOF(8) - PLTT_SIZEOF(count));
+        LoadPalette(&sCaveTransitionPalette_Exit[count], BG_PLTT_ID(14), sizeof(sCaveTransitionPalette_Exit) - PLTT_SIZEOF(count));
     }
     else
     {
@@ -388,7 +389,7 @@ static void Task_FlashTransition_Enter_2(u8 taskId)
     {
         gTasks[taskId].data[2]++;
         gTasks[taskId].data[2]++;
-        LoadPalette(&sCaveTransitionPalette[15 - count], BG_PLTT_ID(14), PLTT_SIZEOF(count + 1));
+        LoadPalette(&sCaveTransitionPalette_Enter[15 - count], BG_PLTT_ID(14), PLTT_SIZEOF(count + 1));
     }
     else
     {

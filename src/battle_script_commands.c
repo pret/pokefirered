@@ -36,6 +36,7 @@
 #include "constants/abilities.h"
 #include "constants/pokemon.h"
 #include "constants/maps.h"
+#include "trainer_xp_system.h"
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
@@ -1089,6 +1090,17 @@ static void Cmd_accuracycheck(void)
         if (holdEffect == HOLD_EFFECT_EVASION_UP)
             calc = (calc * (100 - param)) / 100;
 
+        // Trainer type level accuracy bonus: +1% per 20 effective levels
+        {
+            u8 trainerAccBonus = GetTrainerTypeOffenseBonusLevelByBattlerSide(
+                GetBattlerSide(gBattlerAttacker),
+                gBattleMons[gBattlerAttacker].type1,
+                gBattleMons[gBattlerAttacker].type2,
+                type) / 20;
+            if (trainerAccBonus > 0)
+                calc = (calc * (100 + trainerAccBonus)) / 100;
+        }
+
         // final calculation
         if ((Random() % 100 + 1) > calc)
         {
@@ -1117,6 +1129,82 @@ static void Cmd_attackstring(void)
     }
     gBattlescriptCurrInstr++;
     gBattleCommunication[MSG_DISPLAY] = 0;
+}
+
+// Returns the effective move type, resolving TYPE_MYSTERY to the attacker's type.
+static u8 GetEffectiveMoveType(void)
+{
+    u8 moveType;
+    u16 species;
+    u8 monType1;
+    u8 monType2;
+
+    if (gBattleStruct->dynamicMoveType == 0)
+        moveType = gBattleMoves[gCurrentMove].type;
+    else if (!(gBattleStruct->dynamicMoveType & F_DYNAMIC_TYPE_1))
+        moveType = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK;
+    else
+        moveType = gBattleMoves[gCurrentMove].type;
+
+    if (moveType == TYPE_MYSTERY)
+    {
+        species = gBattleMons[gBattlerAttacker].species;
+        monType1 = gSpeciesInfo[species].types[0];
+        monType2 = gSpeciesInfo[species].types[1];
+        if (monType1 < NUMBER_OF_MON_TYPES && monType1 != TYPE_MYSTERY)
+            return monType1;
+        if (monType2 < NUMBER_OF_MON_TYPES && monType2 != TYPE_MYSTERY)
+            return monType2;
+        return TYPE_NORMAL;
+    }
+    return moveType;
+}
+
+static void AwardTrainerTypeExpQuartersScaled(u8 typeId, u8 quarterExp, u8 multiplierTenths)
+{
+    u16 scaledQuarterExp;
+
+    if (typeId >= NUMBER_OF_MON_TYPES || typeId == TYPE_MYSTERY || quarterExp == 0)
+        return;
+
+    // Round to nearest quarter-EXP unit after applying tenths multiplier.
+    scaledQuarterExp = (quarterExp * multiplierTenths + 5) / 10;
+    if (scaledQuarterExp == 0)
+        scaledQuarterExp = 1;
+
+    AwardTrainerTypeExpQuarters(typeId, scaledQuarterExp);
+}
+
+static void AwardTrainerTypeExpScaled(u8 typeId, u16 exp, u8 multiplierTenths)
+{
+    u32 scaledExp;
+
+    if (typeId >= NUMBER_OF_MON_TYPES || typeId == TYPE_MYSTERY || exp == 0)
+        return;
+
+    scaledExp = (exp * multiplierTenths + 5) / 10;
+    if (scaledExp == 0)
+        scaledExp = 1;
+
+    AwardTrainerTypeExp(typeId, scaledExp);
+}
+
+// Awards 0.5 XP to each of the attacker's species types and 0.5 XP to the
+// move's effective type.  Used for status moves that skip Cmd_resultmessage.
+static void AwardMoveAttemptedXp(void)
+{
+    u16 species = gBattleMons[gBattlerAttacker].species;
+    u8 monType1 = gSpeciesInfo[species].types[0];
+    u8 monType2 = gSpeciesInfo[species].types[1];
+    u8 effectiveMoveType = GetEffectiveMoveType();
+    u8 multiplierTenths;
+
+    RecordTrainerTypeActionMove(gBattlerAttacker, gCurrentMove);
+    multiplierTenths = GetTrainerTypeActionStreakMultiplierTenths(gBattlerAttacker);
+
+    AwardTrainerTypeExpQuartersScaled(monType1, 2, multiplierTenths);
+    AwardTrainerTypeExpQuartersScaled(monType2, 2, multiplierTenths);
+    AwardTrainerTypeExpQuartersScaled(effectiveMoveType, 2, multiplierTenths);
 }
 
 static void Cmd_ppreduce(void)
@@ -1164,6 +1252,17 @@ static void Cmd_ppreduce(void)
     }
 
     gHitMarker &= ~HITMARKER_NO_PPDEDUCT;
+
+    // Status moves (power == 0) never reach Cmd_resultmessage on the success/failure
+    // path — their battle scripts jump directly to BattleScript_MoveEnd after the
+    // effect.  Award XP here so that moves like Growl and Leer are counted.
+    // Cmd_resultmessage will skip awarding for power-0 moves to prevent double-counting.
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
+        && gBattleMoves[gCurrentMove].power == 0)
+    {
+        AwardMoveAttemptedXp();
+    }
+
     gBattlescriptCurrInstr++;
 }
 
@@ -1202,6 +1301,24 @@ static void Cmd_critcalc(void)
         gCritMultiplier = 2;
     else
         gCritMultiplier = 1;
+
+    // Trainer type level crit bonus: +1% per 20 effective levels (if normal crit missed)
+    if (gCritMultiplier == 1
+     && gBattleMons[gBattlerTarget].ability != ABILITY_BATTLE_ARMOR
+     && gBattleMons[gBattlerTarget].ability != ABILITY_SHELL_ARMOR
+     && !(gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT))
+    {
+        u8 moveType;
+        u8 trainerCritBonus;
+        GET_MOVE_TYPE(gCurrentMove, moveType);
+        trainerCritBonus = GetTrainerTypeOffenseBonusLevelByBattlerSide(
+            GetBattlerSide(gBattlerAttacker),
+            gBattleMons[gBattlerAttacker].type1,
+            gBattleMons[gBattlerAttacker].type2,
+            moveType) / 20;
+        if (trainerCritBonus > 0 && (Random() % 100) < trainerCritBonus)
+            gCritMultiplier = 2;
+    }
 
     gBattlescriptCurrInstr++;
 }
@@ -1284,10 +1401,10 @@ static void Cmd_typecalc(void)
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
-    // check stab
+    // check stab (1.2x instead of 1.5x — trainer type levels provide the expertise bonus)
     if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType))
     {
-        gBattleMoveDamage = gBattleMoveDamage * 15;
+        gBattleMoveDamage = gBattleMoveDamage * 12;
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
 
@@ -1323,6 +1440,46 @@ static void Cmd_typecalc(void)
             }
             i += 3;
         }
+    }
+
+    // Trainer-level type effectiveness modifier.
+    // Both sides compute a "matchup composite" — their trainer's knowledge of
+    // the three types at play (moveType, defType1, defType2).
+    // SE:  damage * (300 + atkComp*3 - defComp*2) / 300  — flat restore + differential
+    // NVE: damage * 300 / (300 + defComp*3 - atkComp*2)  — mirror for resistance
+    if (gBattleMoves[gCurrentMove].power
+        && !(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
+        && (gMoveResultFlags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)))
+    {
+        u8 atkSide = GetBattlerSide(gBattlerAttacker);
+        u8 defSide = GetBattlerSide(gBattlerTarget);
+        u8 defType1 = gBattleMons[gBattlerTarget].type1;
+        u8 defType2 = gBattleMons[gBattlerTarget].type2;
+        u8 atkComp = GetMatchupCompositeByBattlerSide(atkSide, moveType, defType1, defType2);
+        u8 defComp = GetMatchupCompositeByBattlerSide(defSide, moveType, defType1, defType2);
+        s32 mod;
+
+        if (gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE)
+        {
+            // Attacker's knowledge is the primary driver (3x weight),
+            // defender's knowledge partially counters (2x weight).
+            mod = 300 + (s32)atkComp * 3 - (s32)defComp * 2;
+            if (mod < 240)
+                mod = 240; // floor: SE never drops below 1.2x (1.5 * 240/300)
+            gBattleMoveDamage = (s32)((s32)gBattleMoveDamage * mod / 300);
+        }
+        else if (gMoveResultFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE)
+        {
+            // Mirror: defender's knowledge strengthens resistance (3x weight),
+            // attacker's knowledge partially overcomes it (2x weight).
+            mod = 300 + (s32)defComp * 3 - (s32)atkComp * 2;
+            if (mod < 150)
+                mod = 150; // floor: NVE resistance never flips to bonus
+            gBattleMoveDamage = (s32)((s32)gBattleMoveDamage * 300 / mod);
+        }
+
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
     }
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBattlerAttacker, gCurrentMove) == 2
@@ -1463,10 +1620,10 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
 
     moveType = gBattleMoves[move].type;
 
-    // check stab
+    // check stab (1.2x)
     if (IS_BATTLER_OF_TYPE(attacker, moveType))
     {
-        gBattleMoveDamage = gBattleMoveDamage * 15;
+        gBattleMoveDamage = gBattleMoveDamage * 12;
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
 
@@ -2005,13 +2162,81 @@ static void Cmd_resultmessage(void)
             }
             else
             {
-                gBattleCommunication[MSG_DISPLAY] = 0;
+                // Show trainer level feedback on normal-effectiveness hits (rare)
+                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
+                    && gBattleMoves[gCurrentMove].power != 0
+                    && (Random() % 8) == 0)
+                {
+                    u8 moveType;
+                    u8 bonusLevel;
+                    GET_MOVE_TYPE(gCurrentMove, moveType);
+                    bonusLevel = GetTrainerTypeOffenseBonusLevelByBattlerSide(
+                        B_SIDE_PLAYER,
+                        gBattleMons[gBattlerAttacker].type1,
+                        gBattleMons[gBattlerAttacker].type2,
+                        moveType);
+                    if (bonusLevel >= 60)
+                        stringId = STRINGID_TRAINERLVLEDGE4;
+                    else if (bonusLevel >= 40)
+                        stringId = STRINGID_TRAINERLVLEDGE3;
+                    else if (bonusLevel >= 20)
+                        stringId = STRINGID_TRAINERLVLEDGE2;
+                    else if (bonusLevel >= 10)
+                        stringId = STRINGID_TRAINERLVLEDGE1;
+                }
+                if (stringId)
+                    gBattleCommunication[MSG_DISPLAY] = 1;
+                else
+                    gBattleCommunication[MSG_DISPLAY] = 0;
             }
         }
     }
 
     if (stringId)
         PrepareStringBattle(stringId, gBattlerAttacker);
+
+    // Award trainer XP based on move result (player's Pokemon only).
+    // Status moves (power == 0) already had their XP awarded in Cmd_ppreduce
+    // because their battle scripts skip resultmessage on the effect path.
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
+        && gBattleMoves[gCurrentMove].power != 0)
+    {
+        bool8 landedHit;
+        u8 effectiveMoveType = GetEffectiveMoveType();
+        u16 species = gBattleMons[gBattlerAttacker].species;
+        u8 monType1 = gSpeciesInfo[species].types[0];
+        u8 monType2 = gSpeciesInfo[species].types[1];
+        u8 multiplierTenths;
+
+        RecordTrainerTypeActionMove(gBattlerAttacker, gCurrentMove);
+        multiplierTenths = GetTrainerTypeActionStreakMultiplierTenths(gBattlerAttacker);
+
+        // Attempting a move grants 0.5 XP per species type slot.
+        // Pure-typed species use the same type in both slots and get double credit.
+        AwardTrainerTypeExpQuartersScaled(monType1, 2, multiplierTenths);
+        AwardTrainerTypeExpQuartersScaled(monType2, 2, multiplierTenths);
+
+        if (gMoveResultFlags & MOVE_RESULT_MISSED)
+        {
+            AwardTrainerTypeExpQuartersScaled(effectiveMoveType, 1, multiplierTenths);
+        }
+        else if (!(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE) && !(gMoveResultFlags & MOVE_RESULT_FAILED))
+        {
+            AwardTrainerTypeExpQuartersScaled(effectiveMoveType, 2, multiplierTenths);
+        }
+
+        landedHit = !(gMoveResultFlags & MOVE_RESULT_MISSED)
+            && !(gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
+            && !(gMoveResultFlags & MOVE_RESULT_FAILED);
+        // Bonus trigger: landed critical hit or true one-hit-KO move resolution.
+        // Species-type bonus is also slot-based (pure-typed species get both slots).
+        if (landedHit && (gCritMultiplier > 1 || (gMoveResultFlags & MOVE_RESULT_ONE_HIT_KO)))
+        {
+            AwardTrainerTypeExpScaled(monType1, 1, multiplierTenths);
+            AwardTrainerTypeExpScaled(monType2, 1, multiplierTenths);
+            AwardTrainerTypeExpScaled(effectiveMoveType, 1, multiplierTenths);
+        }
+    }
 
     gBattlescriptCurrInstr++;
 }
@@ -2774,11 +2999,41 @@ void SetMoveEffect(bool8 primary, u8 certain)
 static void Cmd_seteffectwithchance(void)
 {
     u32 percentChance;
+    s16 effectMod;
+    u8 offBonus;
+    u8 defBonus;
 
     if (gBattleMons[gBattlerAttacker].ability == ABILITY_SERENE_GRACE)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
+
+    // Trainer mastery shifts secondary effect reliability without changing move accuracy.
+    offBonus = GetTrainerTypeOffenseBonusLevelByBattlerSide(
+        GetBattlerSide(gBattlerAttacker),
+        gBattleMons[gBattlerAttacker].type1,
+        gBattleMons[gBattlerAttacker].type2,
+        gBattleMoves[gCurrentMove].type);
+    defBonus = GetTrainerTypeDefenseBonusLevelByBattlerSide(
+        GetBattlerSide(gBattlerTarget),
+        gBattleMons[gBattlerTarget].type1,
+        gBattleMons[gBattlerTarget].type2,
+        gBattleMoves[gCurrentMove].type);
+    effectMod = (s16)offBonus - (s16)defBonus;
+    if (effectMod > 20)
+        effectMod = 20;
+    if (effectMod < -20)
+        effectMod = -20;
+
+    if (effectMod > 0)
+        percentChance += effectMod;
+    else if ((u32)(-effectMod) > percentChance)
+        percentChance = 0;
+    else
+        percentChance -= (u32)(-effectMod);
+
+    if (percentChance > 100)
+        percentChance = 100;
 
     if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN
         && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
@@ -3138,6 +3393,8 @@ static void Cmd_getexp(void)
         {
             gBattleScripting.getexpState++;
             gBattleStruct->givenExpMons |= gBitTable[gBattlerPartyIndexes[gBattlerFainted]];
+            // Award trainer type XP for defeating this Pokemon (+2 per type slot)
+            AwardTrainerTypeExpToSpeciesTypes(gBattleMons[gBattlerFainted].species, 2);
         }
         break;
     case 1: // calculate experience points to redistribute
@@ -3270,6 +3527,7 @@ static void Cmd_getexp(void)
                     PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
                     MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
                 }
+
                 gBattleStruct->sentInPokes >>= 1;
                 gBattleScripting.getexpState++;
             }
@@ -4515,6 +4773,7 @@ static void Cmd_switchinanim(void)
         return;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
+    ResetTrainerTypeActionStreak(gActiveBattler);
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_OPPONENT
         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
@@ -4523,7 +4782,14 @@ static void Cmd_switchinanim(void)
                                  | BATTLE_TYPE_POKEDUDE
                                  | BATTLE_TYPE_EREADER_TRAINER
                                  | BATTLE_TYPE_GHOST)))
+    {
+        u8 partyIndex = gBattlerPartyIndexes[gActiveBattler];
+        u32 otId = GetMonData(&gEnemyParty[partyIndex], MON_DATA_OT_ID, NULL);
+        u32 personality = GetMonData(&gEnemyParty[partyIndex], MON_DATA_PERSONALITY, NULL);
+
+        AwardTrainerTypeEncounterExp(gBattleMons[gActiveBattler].species, otId, personality);
         HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gActiveBattler].species), FLAG_SET_SEEN, gBattleMons[gActiveBattler].personality);
+    }
 
     gAbsentBattlerFlags &= ~(gBitTable[gActiveBattler]);
 
@@ -9460,6 +9726,35 @@ static void Cmd_removelightscreenreflect(void)
     gBattlescriptCurrInstr++;
 }
 
+static void AwardTrainerTypeCatchExpForSpecies(u16 species, u32 otId, u32 personality)
+{
+    u16 nationalDexNum;
+    u16 catchExpPerType;
+    u8 type1;
+    u8 type2;
+
+    nationalDexNum = SpeciesToNationalPokedexNum(species);
+    catchExpPerType = GetSetPokedexFlag(nationalDexNum, FLAG_GET_CAUGHT) ? 1 : 0;
+    type1 = gSpeciesInfo[species].types[0];
+    type2 = gSpeciesInfo[species].types[1];
+
+    // Per-type catch XP is granted per species type slot.
+    // Pure-typed species therefore award the same type twice.
+    if (catchExpPerType != 0 && type1 < NUMBER_OF_MON_TYPES && type1 != TYPE_MYSTERY)
+        AwardTrainerTypeExp(type1, catchExpPerType);
+    if (catchExpPerType != 0 && type2 < NUMBER_OF_MON_TYPES && type2 != TYPE_MYSTERY)
+        AwardTrainerTypeExp(type2, catchExpPerType);
+
+    if (GET_SHINY_VALUE(otId, personality) < SHINY_ODDS)
+    {
+        // Shiny bonus follows the same slot-based rule as catch XP.
+        if (type1 < NUMBER_OF_MON_TYPES && type1 != TYPE_MYSTERY)
+            AwardTrainerTypeExp(type1, 15);
+        if (type2 < NUMBER_OF_MON_TYPES && type2 != TYPE_MYSTERY)
+            AwardTrainerTypeExp(type2, 15);
+    }
+}
+
 static void Cmd_handleballthrow(void)
 {
     u8 ballMultiplier = 0;
@@ -9492,11 +9787,32 @@ static void Cmd_handleballthrow(void)
     {
         u32 odds;
         u8 catchRate;
+        u16 species = gBattleMons[gBattlerTarget].species;
+        u8 targetPartyIndex = gBattlerPartyIndexes[gBattlerTarget];
+        u32 targetOtId = GetMonData(&gEnemyParty[targetPartyIndex], MON_DATA_OT_ID, NULL);
+        u32 targetPersonality = GetMonData(&gEnemyParty[targetPartyIndex], MON_DATA_PERSONALITY, NULL);
 
         if (gLastUsedItem == ITEM_SAFARI_BALL)
-            catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
+        {
+            u16 safariBase = gBattleStruct->safariCatchFactor * 1275 / 100;
+            u16 safariBonus = GetSafariCatchRateBonus(species);
+            u16 safariTotal = safariBase + safariBonus;
+            if (safariTotal > 255)
+                safariTotal = 255;
+            catchRate = safariTotal;
+        }
         else
-            catchRate = gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate;
+        {
+            u16 bonus;
+            u16 newCatch;
+            catchRate = gSpeciesInfo[species].catchRate;
+            // Apply trainer catch rate bonus for matching types
+            bonus = GetCatchRateBonus(species);
+            newCatch = catchRate + bonus;
+            if (newCatch > 255)
+                newCatch = 255;
+            catchRate = newCatch;
+        }
 
         if (gLastUsedItem > ITEM_SAFARI_BALL)
         {
@@ -9574,6 +9890,7 @@ static void Cmd_handleballthrow(void)
             MarkBattlerForControllerExec(gActiveBattler);
             gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
             SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
+            AwardTrainerTypeCatchExpForSpecies(species, targetOtId, targetPersonality);
 
             if (CalculatePlayerPartyCount() == PARTY_SIZE)
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
@@ -9599,6 +9916,7 @@ static void Cmd_handleballthrow(void)
             {
                 gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
                 SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
+                AwardTrainerTypeCatchExpForSpecies(species, targetOtId, targetPersonality);
 
                 if (CalculatePlayerPartyCount() == PARTY_SIZE)
                     gBattleCommunication[MULTISTRING_CHOOSER] = 0;

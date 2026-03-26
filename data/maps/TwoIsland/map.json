@@ -79,7 +79,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_POKE_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_SUPER_NERD",
       "x": 27,
       "y": 6,
       "elevation": 3,
@@ -88,8 +88,8 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "TwoIsland_EventScript_PokeManiac",
-      "flag": "FLAG_HIDE_TWO_ISLAND_POKE_MANIAC"
+      "script": "TwoIsland_EventScript_SuperNerd",
+      "flag": "FLAG_HIDE_TWO_ISLAND_SUPER_NERD"
     },
     {
       "type": "object",
@@ -145,6 +145,20 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "TwoIsland_EventScript_Boy",
+      "flag": "0"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "x": 36,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "TwoIsland_EventScript_BulbasaurEggNPC",
       "flag": "0"
     }
   ],

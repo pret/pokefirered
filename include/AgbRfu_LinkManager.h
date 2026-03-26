@@ -23,13 +23,8 @@
 #define PCSWITCH_FORCE_SP_START 0x09
 
 // Period for which parent-child switching search specified
-#if REVISION >= 0xA
-#define PCSWITCH_ALL_PERIOD                                             180             // Entire cycle 180 frames
-#define PCSWITCH_SP_PERIOD                                               65             // Child period 40 frames
-#else
 #define PCSWITCH_ALL_PERIOD                                             180             // Entire cycle 180 frames
 #define PCSWITCH_SP_PERIOD                                               40             // Child period 40 frames
-#endif
 
 // Error code returned by Link Manager API (rfu_LMAN_...return value of function)
 #define LMAN_ERROR_MANAGER_BUSY                                1    // Link Manager is already running.
@@ -170,9 +165,6 @@ typedef struct linkManagerTag
     /* 0x014 */ u16 param[2];
     /* 0x018 */ u16 NI_failCounter_limit;
     /* 0x01a */ u16 connect_period;
-#if REVISION >= 0xA
-    /* 0x01c */ u16 connect_period_initial; // pushes next offsets up by 2
-#endif
     /* 0x01c */ u16 pcswitch_period_bak;
     /* 0x01e */ u16 work;
     /* 0x020 */ u16 *acceptable_serialNo_list;
@@ -198,10 +190,6 @@ u8 rfu_LMAN_setLinkRecovery(u8 enable_flag, u16 recovery_period);
 void rfu_LMAN_manager_entity(u32 rand);
 void rfu_LMAN_syncVBlank(void);
 u8 rfu_LMAN_initializeManager(void (*LMAN_callback_p)(u8, u8), void (*MSC_callback_p)(u16));
-#if REVISION >= 0xA
-void rfu_LMAN_forceChangeSP(bool8 child);
-#else
 void rfu_LMAN_forceChangeSP(void);
-#endif
 
 #endif //GUARD_LINKMANAGER_H

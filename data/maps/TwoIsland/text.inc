@@ -84,3 +84,33 @@ TwoIsland_Text_HaveYouTriedJumpingGame::
     .string "Did you know that?\n"
     .string "Boing!$"
 
+TwoIsland_Text_BulbasaurEggOffer::
+    .string "I've been raising POKéMON here on\n"
+    .string "the island for years.\p"
+    .string "I have an EGG that I think will\n"
+    .string "hatch into a BULBASAUR.\p"
+    .string "They're almost impossible to find\n"
+    .string "in the wild. Would you like it?$"
+
+TwoIsland_Text_BulbasaurEggGrassTypeFavorite::
+    .string "Oh, you already have a BULBASAUR!\n"
+    .string "What a fine POKéMON.\p"
+    .string "GRASS-type POKéMON are my absolute\n"
+    .string "favorite. There's nothing like\l"
+    .string "watching them bask in the sun.$"
+
+TwoIsland_Text_BulbasaurEggReceived::
+    .string "{PLAYER} received an EGG\n"
+    .string "from the woman!$"
+
+TwoIsland_Text_BulbasaurEggPostComment::
+    .string "Take good care of that EGG.\p"
+    .string "GRASS-type POKéMON are wonderful\n"
+    .string "companions. I just know you'll\l"
+    .string "raise it well.$"
+
+TwoIsland_Text_BulbasaurEggNoRoom::
+    .string "Oh, your party is full.\p"
+    .string "Come back when you have room\n"
+    .string "and I'll give you the EGG.$"
+

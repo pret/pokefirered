@@ -1148,6 +1148,7 @@ extern const u8 EventScript_ResetAllMapFlags[];
 
 // player_pc
 extern const u8 EventScript_PalletTown_PlayersHouse_2F_ShutDownPC[];
+extern const u8 EventScript_PCRetrainPkmn[];
 
 // field_screen_effect
 extern const u8 EventScript_AfterWhiteOutMomHeal[];

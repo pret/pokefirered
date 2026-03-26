@@ -99,3 +99,36 @@ EventScript_ExitOaksPC::
 	msgbox Text_ClosedLinkToProfOaksPC
 	goto EventScript_PCMainMenu
 	end
+
+EventScript_PCRetrainPkmn::
+	msgbox Text_PCRetrainWhichMon
+	special ChooseMonForMoveRelearner
+	waitstate
+	goto_if_ge VAR_0x8004, PARTY_SIZE, EventScript_PCRetrainDone
+	special IsSelectedMonEgg
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PCRetrainCantTeachEgg
+	goto_if_eq VAR_0x8005, 0, EventScript_PCRetrainNoMoves
+	goto EventScript_PCRetrainChooseMove
+	end
+
+EventScript_PCRetrainChooseMove::
+	msgbox Text_PCRetrainWhichMove
+	special TeachMoveRelearnerMove
+	waitstate
+	goto_if_eq VAR_0x8004, 0, EventScript_PCRetrainPkmn
+	goto EventScript_PCRetrainPkmn
+	end
+
+EventScript_PCRetrainNoMoves::
+	msgbox Text_PCRetrainNoMoves
+	goto EventScript_PCRetrainPkmn
+	end
+
+EventScript_PCRetrainCantTeachEgg::
+	msgbox Text_PCRetrainCantTeachEgg
+	goto EventScript_PCRetrainPkmn
+	end
+
+EventScript_PCRetrainDone::
+	goto EventScript_PCMainMenu
+	end

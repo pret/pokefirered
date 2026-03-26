@@ -211,7 +211,7 @@ EventScript_LanceUnused::
 	release
 	end
 
-SaffronCity_EventScript_CrushGirlUnused::
+SaffronCity_EventScript_BattleGirlUnused::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 1
@@ -219,7 +219,7 @@ SaffronCity_EventScript_CrushGirlUnused::
 	release
 	end
 
-SaffronCity_EventScript_CrushGirl::
+SaffronCity_EventScript_BattleGirl::
 	lock
 	faceplayer
 	famechecker FAMECHECKER_LANCE, 2

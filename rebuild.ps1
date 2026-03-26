@@ -2,11 +2,9 @@
 [CmdletBinding()]
 param(
     [ValidateSet("modern", "rom", "firered", "firered_rev1", "leafgreen", "leafgreen_rev1", "fullspec", "fullspec_modern")]
-    [string]$Target = "modern",
+    [string]$Target = "fullspec_modern",
 
-    [int]$Jobs = [Math]::Max(1, [Environment]::ProcessorCount),
-
-    [switch]$SkipGenerate
+    [int]$Jobs = [Math]::Max(1, [Environment]::ProcessorCount)
 )
 
 $ErrorActionPreference = "Stop"
@@ -34,15 +32,10 @@ try {
         throw "make tools failed with exit code $LASTEXITCODE"
     }
 
-    if (-not $SkipGenerate.IsPresent) {
-        Write-Host "[4/5] Regenerating derived sources/assets..."
-        & make generated
-        if ($LASTEXITCODE -ne 0) {
-            throw "make generated failed with exit code $LASTEXITCODE"
-        }
-    }
-    else {
-        Write-Host "[4/5] Skipping make generated (requested)."
+    Write-Host "[4/5] Regenerating derived sources/assets..."
+    & make generated
+    if ($LASTEXITCODE -ne 0) {
+        throw "make generated failed with exit code $LASTEXITCODE"
     }
 
     Write-Host "[5/5] Building target '$Target' with -j$Jobs..."

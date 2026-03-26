@@ -59,15 +59,17 @@ This means Bug types level up fastest through play, while Dragon and Psychic tak
 
 ---
 
-## Obedience (Traded Pokemon)
+## Obedience
 
 In vanilla FireRed, gym badges unlock obedience thresholds. In this version:
 
 - Each gym badge still gives **+5** to your effective trainer level for obedience checks.
 - **Traded Pokemon** obey if your trainer level in their type >= half their level.
 - **Your own Pokemon** obey if your trainer level >= one-third their level.
+- **NPC trainers** are also subject to trainer-level obedience checks in trainer battles.
+- **Frustration** has special obedience behavior: low friendship can help obedience for that move, and disobedient battlers may prefer or be forced into Frustration in some branches.
 
-In practice: keep training the types you use, collect gym badges, and traded Pokemon will behave. If a trade is much higher-leveled than your experience warrants, it may disobey until your trainer level catches up.
+In practice: keep training the types you use and collect gym badges. High-level traded Pokemon can still disobey until your trainer levels catch up, and NPC teams can show obedience flavor too (notably some Rocket teams using Frustration).
 
 ---
 

@@ -7,7 +7,7 @@ A human-readable guide to where every wild Pokemon and in-game trade can be foun
 - 🌙 = Night-only (appears only during odd play-time hours)
 - Species without a moon icon are available during the day, and usually at night too unless noted
 
-> **Day/Night cycle:** Night occurs during odd play-time hours (hour 1, 3, 5, …). Day occurs during even hours (hour 0, 2, 4, …). The cycle repeats every 2 hours of play time. At night, some species are added, and some day-only species are swapped out. There is currently no visual palette change — the only way to tell is by checking your play-time in the Trainer Card.
+> **Day/Night cycle:** Night occurs during odd play-time hours (hour 1, 3, 5, …). Day occurs during even hours (hour 0, 2, 4, …). The cycle repeats every 2 hours of play time. At night, some species are added, and some day-only species are swapped out. Night also has a slight visual cue: outdoor palettes are a bit darker and bluer.
 
 ---
 

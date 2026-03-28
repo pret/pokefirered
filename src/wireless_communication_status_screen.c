@@ -360,6 +360,9 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
         textColor[1] = TEXT_COLOR_DARK_GRAY;
         textColor[2] = TEXT_COLOR_LIGHT_GRAY;
         break;
+#ifdef UBFIX
+    default:
+#endif
     case COLOR_NORMAL:
         textColor[0] = TEXT_COLOR_TRANSPARENT;
         textColor[1] = TEXT_COLOR_WHITE;
@@ -385,58 +388,49 @@ static void WCSS_AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 * 
     AddTextPrinterParameterized4(windowId, fontId, x, y, fontId == FONT_SMALL ? 0 : 1, 0, textColor, TEXT_SKIP_DRAW, str);
 }
 
-static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * groupCounts)
+static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer *player, u32 *groupCounts)
 {
-#if REVISION >= 0xA
     u32 activity = player->rfu.data.activity;
-    if (player->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
-    {
-
-        u32 i = 0;
-        const u8 * group_info = &sActivityGroupInfo[0][0];
-        const u8 * group_players = &group_info[2];
-        const u8 * group_activity = group_info;
-        s32 offset = 0;
-        for (; i < ARRAY_COUNT(sActivityGroupInfo); i++)
-        {
-            const u8 * group_type = &group_info[1];
-            u8 type = ((u8*)offset)[(u32)group_type]; // needed to match, but nobody would write this???
-            if (type < MAX_LINK_PLAYERS && activity == *group_activity)
-            {
-                    u8 k = *group_players;
-                    if (k == 0)
-                    {
-                        s32 j;
-                        for (j = 0; j < RFU_CHILD_MAX; j++)
-                            if (player->rfu.data.partnerInfo[j] != 0) k++;
-                        k++;
-                    }
-                    groupCounts[type] += k;
-                    break;
-            }
-            group_players += sizeof(sActivityGroupInfo[0]);
-            group_activity += sizeof(sActivityGroupInfo[0]);
-            offset += (u8)sizeof(sActivityGroupInfo[0]);
-        }
-
-    }
-#else
-    u32 activity = player->rfu.data.activity;
-    s32 i, j, k;
+    s32 i, j;
 
     #define group_activity(i) (sActivityGroupInfo[(i)][0])
     #define group_type(i)     (sActivityGroupInfo[(i)][1])
     #define group_players(i)  (sActivityGroupInfo[(i)][2])
 
+#if REVISION >= 0xA || defined(UBFIX)
+    if (player->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
+    {
+        for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
+        {
+            u8 type = group_type(i);
+
+            if (type < NUM_GROUPTYPES && activity == group_activity(i))
+            {
+                u8 k = group_players(i);
+                if (k == 0)
+                {
+                    for (j = 0; j < RFU_CHILD_MAX; j++)
+                        if (player->rfu.data.partnerInfo[j] != 0)
+                            k++;
+                    k++;
+                }
+
+                groupCounts[type] += k;
+                break;
+            }
+        }
+    }
+#else
     for (i = 0; i < ARRAY_COUNT(sActivityGroupInfo); i++)
     {
         if (activity == group_activity(i) && player->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
         {
             if (group_players(i) == 0)
             {
-                k = 0;
-                for (j = 0; j < RFU_CHILD_MAX; j++)
-                    if (player->rfu.data.partnerInfo[j] != 0) k++;
+                s32 k;
+                for (k = 0, j = 0; j < RFU_CHILD_MAX; j++)
+                    if (player->rfu.data.partnerInfo[j] != 0)
+                        k++;
                 k++;
                 groupCounts[group_type(i)] += k;
             }
@@ -446,14 +440,13 @@ static u32 CountPlayersInGroupAndGetActivity(struct RfuPlayer * player, u32 * gr
             }
         }
     }
+#endif
 
     #undef group_activity
     #undef group_type
     #undef group_players
-#endif
 
     return activity;
-
 }
 
 static bool32 HaveCountsChanged(const u32 * curCounts, const u32 * prevCounts)
@@ -472,13 +465,14 @@ static bool32 HaveCountsChanged(const u32 * curCounts, const u32 * prevCounts)
 static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts, u32 * activities, u8 taskId)
 {
     bool32 activitiesUpdated = FALSE;
-    u32 groupCountBuffer[NUM_GROUPTYPES] = {0, 0, 0, 0};
-    struct WirelessLink_Group * group = (void *)gTasks[taskId].data;
-    s32 i;
+    u32 groupCountBuffer[NUM_GROUPTYPES] = { 0, 0, 0, 0 };
+    struct WirelessLink_Group *group = (void *)gTasks[taskId].data;
+    s32 i, activity;
 
     for (i = 0; i < NUM_TASK_DATA; i++)
     {
-        u32 activity = CountPlayersInGroupAndGetActivity(&group->playerList->players[i], groupCountBuffer);
+        activity =
+            CountPlayersInGroupAndGetActivity(&group->playerList->players[i], groupCountBuffer);
         if (activity != activities[i])
         {
             activities[i] = activity;
@@ -486,37 +480,31 @@ static bool32 UpdateCommunicationCounts(u32 * groupCounts, u32 * prevGroupCounts
         }
     }
 
-#if REVISION >= 0xA
     if (HaveCountsChanged(groupCountBuffer, prevGroupCounts))
-#else
-    if (!HaveCountsChanged(groupCountBuffer, prevGroupCounts))
     {
-        if (activitiesUpdated == TRUE)
-            return TRUE;
-        else
-            return FALSE;
-    }
-#endif
-    {
-        memcpy(groupCounts,     groupCountBuffer, sizeof(groupCountBuffer));
+        memcpy(groupCounts, groupCountBuffer, sizeof(groupCountBuffer));
         memcpy(prevGroupCounts, groupCountBuffer, sizeof(groupCountBuffer));
 
-        groupCounts[GROUPTYPE_TOTAL] = groupCounts[GROUPTYPE_TRADE]
-                                     + groupCounts[GROUPTYPE_BATTLE]
-                                     + groupCounts[GROUPTYPE_UNION]
-                                #if defined(BUGFIX) || REVISION >= 0xA
-                                     + groupCounts[GROUPTYPE_TOTAL] // Missing count for activities not in above groups
-                                #endif
-                                     ;
+        groupCounts[GROUPTYPE_TOTAL] =
+            groupCounts[GROUPTYPE_TRADE] + groupCounts[GROUPTYPE_BATTLE] +
+            groupCounts[GROUPTYPE_UNION]
+#if defined(BUGFIX) || REVISION >= 0xA
+            + groupCounts[GROUPTYPE_TOTAL] // Missing count for activities not in above groups
+#endif
+            ;
 
 #if REVISION >= 0xA
         activitiesUpdated = TRUE;
+#else
+        return TRUE;
 #endif
     }
 
 #if REVISION >= 0xA
     return activitiesUpdated;
 #else
-    return TRUE;
+    if (activitiesUpdated == TRUE)
+        return TRUE;
+    return FALSE;
 #endif
 }

@@ -1,6 +1,6 @@
 #include "global.h"
 
-
+//stubs
 void umul3232H32(){}
 void SoundMain(){}
 void SoundMainRAM(){}

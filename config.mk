@@ -43,10 +43,6 @@ ifeq ($(GAME_REVISION),1)
   BUILD_NAME  := $(BUILD_NAME)_rev1
 endif
 
-ifeq ($(GAME_REVISION),10)
-  BUILD_NAME  := $(BUILD_NAME)_switch
-endif
-
 # Modern GCC
 ifeq ($(MODERN),1)
   BUILD_NAME := $(BUILD_NAME)_modern

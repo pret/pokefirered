@@ -8,7 +8,7 @@
 #include "constants/pokemon.h"
 	.include "asm/macros/battle_ai_script.inc"
 
-	.section script_data, "aw", %progbits
+	.section script_data, "aw"
 
 @ The FRLG scripts are improved subtly by Emerald in a few places
 @ To make adding these improvements easier they are commented and tagged with "Improvement in Emerald"

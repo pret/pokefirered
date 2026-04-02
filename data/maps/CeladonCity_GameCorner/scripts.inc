@@ -43,7 +43,7 @@ CeladonCity_GameCorner_EventScript_BuyCoins::
 
 CeladonCity_GameCorner_EventScript_Buy500Coins::
 	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1) - 500, CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins
+	goto_if_ge VAR_TEMP_1, ((MAX_COINS + 1) - 500), CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins
 	checkmoney 10000
 	goto_if_eq VAR_RESULT, FALSE, CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney
 	addcoins 500
@@ -53,7 +53,7 @@ CeladonCity_GameCorner_EventScript_Buy500Coins::
 
 CeladonCity_GameCorner_EventScript_Buy50Coins::
 	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1) - 50, CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins
+	goto_if_ge VAR_TEMP_1, ((MAX_COINS + 1) - 50), CeladonCity_GameCorner_EventScript_ClerkNoRoomForCoins
 	checkmoney 1000
 	goto_if_eq VAR_RESULT, FALSE, CeladonCity_GameCorner_EventScript_ClerkNotEnoughMoney
 	addcoins 50
@@ -123,7 +123,7 @@ CeladonCity_GameCorner_EventScript_Fisher::
 	msgbox CeladonCity_GameCorner_Text_DoYouWantToPlay
 	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_EventScript_GamblerNoCoinCase
 	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1) - 10, CeladonCity_GameCorner_EventScript_FisherNoRoomForCoins
+	goto_if_ge VAR_TEMP_1, ((MAX_COINS + 1) - 10), CeladonCity_GameCorner_EventScript_FisherNoRoomForCoins
 	addcoins 10
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_Text_Received10CoinsFromMan
@@ -183,7 +183,7 @@ CeladonCity_GameCorner_EventScript_Scientist::
 	msgbox CeladonCity_GameCorner_Text_WantSomeCoins
 	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_EventScript_GamblerNoCoinCase
 	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1) - 20, CeladonCity_GameCorner_EventScript_ScientistNoRoomForCoins
+	goto_if_ge VAR_TEMP_1, ((MAX_COINS + 1) - 20), CeladonCity_GameCorner_EventScript_ScientistNoRoomForCoins
 	addcoins 20
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_Text_Received20CoinsFromNiceGuy
@@ -210,7 +210,7 @@ CeladonCity_GameCorner_EventScript_Gentleman::
 	msgbox CeladonCity_GameCorner_Text_HereAreSomeCoinsShoo
 	goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_EventScript_GamblerNoCoinCase
 	checkcoins VAR_TEMP_1
-	goto_if_ge VAR_TEMP_1, (MAX_COINS + 1) - 20, CeladonCity_GameCorner_EventScript_GentlemanNoRoomForCoins
+	goto_if_ge VAR_TEMP_1, ((MAX_COINS + 1) - 20), CeladonCity_GameCorner_EventScript_GentlemanNoRoomForCoins
 	addcoins 20
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox CeladonCity_GameCorner_Text_Received20CoinsFromMan

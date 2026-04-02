@@ -20,6 +20,11 @@ COMMON_DATA struct MusicPlayerInfo gMPlayInfo_SE2 = {0};
 COMMON_DATA u8 gMPlayMemAccArea[0x10] = {0};
 COMMON_DATA struct MusicPlayerInfo gMPlayInfo_SE3 = {0};
 
+struct MusicPlayerTrack gMPlayTrack_BGM[10];
+struct MusicPlayerTrack gMPlayTrack_SE1[3];
+struct MusicPlayerTrack gMPlayTrack_SE2[9];
+struct MusicPlayerTrack gMPlayTrack_SE3[1];
+
 u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
 {
     u32 val1;
@@ -327,7 +332,6 @@ void MPlayExtender(struct CgbChannel *cgbChans)
 
 void MusicPlayerJumpTableCopy(void)
 {
-    asm("swi 0x2A");
 }
 
 void ClearChain(void *x)

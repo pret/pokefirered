@@ -392,19 +392,7 @@ static int MultiBootHandShake(struct MultiBootParam *mp)
 
 static NOINLINE void MultiBootWaitCycles(u32 cycles)
 {
-    asm("mov r2, pc");
-    asm("lsr r2, #24");
-    asm("mov r1, #12");
-    asm("cmp r2, #0x02");
-    asm("beq MultiBootWaitCyclesLoop");
-    asm("mov r1, #13");
-    asm("cmp r2, #0x08");
-    asm("beq MultiBootWaitCyclesLoop");
-    asm("mov r1, #4");
 
-    asm("MultiBootWaitCyclesLoop:");
-    asm("sub r0, r1");
-    asm("bgt MultiBootWaitCyclesLoop");
 }
 
 static void MultiBootWaitSendDone(void)

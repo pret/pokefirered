@@ -15,7 +15,7 @@
 	.set NULL, 0
 	.set FALSE, 0
 	.set TRUE, 1
-	.section script_data, "aw", %progbits
+	.section script_data, "aw"
 	.align 2
 
 gBattlescriptsForBallThrow::

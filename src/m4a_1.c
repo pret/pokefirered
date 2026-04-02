@@ -1,0 +1,36 @@
+#include "global.h"
+
+
+void umul3232H32(){}
+void SoundMain(){}
+void SoundMainRAM(){}
+void SoundMainBTM(){}
+void RealClearChain(){}
+void ply_fine(){}
+void MPlayJumpTableCopy(){}
+void ply_goto(){}
+void ply_patt(){}
+void ply_pend(){}
+void ply_rept(){}
+void ply_prio(){}
+void ply_tempo(){}
+void ply_keysh(){}
+void ply_voice(){}
+void ply_vol(){}
+void ply_pan(){}
+void ply_bend(){}
+void ply_bendr(){}
+void ply_lfodl(){}
+void ply_modt(){}
+void ply_tune(){}
+void ply_port(){}
+void m4aSoundVSync(){}
+void MPlayMain(){}
+void TrackStop(){}
+void ChnVolSetAsm(){}
+void ply_note(){}
+void ply_endtie(){}
+void clear_modM(){}
+void ld_r3_tp_adr_i(){}
+void ply_lfos(){}
+void ply_mod(){}

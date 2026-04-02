@@ -401,17 +401,23 @@ static void Callback_Dummy_M(int reqCommandId, int error, void (*callbackM)())
 static void Callback_Dummy_M(int reqCommandId, int error, void (*callbackM)(...))
 #endif
 {
-    asm("bx r2");
+    if (callbackM != NULL) {
+        callbackM(reqCommandId, error);
+    }
 }
 
 NAKED
 static void Callback_Dummy_S(u16 reqCommandId, void (*callbackS)(u16))
 {
-    asm("bx r1");
+    if (callbackS != NULL) {
+        callbackS(reqCommandId);
+    }
 }
 
 NAKED
 static void Callback_Dummy_ID(void (*callbackId)(void))
 {
-    asm("bx r0");
+    if (callbackId != NULL) {
+        callbackId();
+    }
 }

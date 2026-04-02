@@ -17,11 +17,13 @@ ifneq (,$(TOOLCHAIN))
   endif
 endif
 
-PREFIX := arm-none-eabi-
+PREFIX := i686-w64-mingw32-
 OBJCOPY := $(PREFIX)objcopy
 OBJDUMP := $(PREFIX)objdump
 AS := $(PREFIX)as
 LD := $(PREFIX)ld
+MODERN := 1
+SDL_DIR := /mnt/c/Users/josma/Desktop/pokexe/pokefirered/sdl
 
 EXE :=
 ifeq ($(OS),Windows_NT)
@@ -45,11 +47,11 @@ else
   CPP := $(PREFIX)cpp
 endif
 
-ROM := poke$(BUILD_NAME).gba
+ROM := poke$(BUILD_NAME).exe
 OBJ_DIR := $(BUILD_DIR)/$(BUILD_NAME)
 
-ELF := $(ROM:.gba=.elf)
-MAP := $(ROM:.gba=.map)
+ELF := $(ROM:.exe=.elf)
+MAP := $(ROM:.exe=.map)
 SYM := $(ROM:.gba=.sym)
 
 # Commonly used directories
@@ -69,14 +71,14 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 SHELL := bash -o pipefail
 
 # Set flags for tools
-ASFLAGS := -mcpu=arm7tdmi --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym MODERN=$(MODERN)
+ASFLAGS := --32 --defsym $(GAME_VERSION)=1 --defsym REVISION=$(GAME_REVISION) --defsym $(GAME_LANGUAGE)=1 --defsym MODERN=$(MODERN)
 
 INCLUDE_DIRS := include
 INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
 INCLUDE_SCANINC_ARGS := $(INCLUDE_DIRS:%=-I %)
 
 O_LEVEL ?= 2
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -D$(GAME_VERSION) -DREVISION=$(GAME_REVISION) -D$(GAME_LANGUAGE) -DMODERN=$(MODERN)
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -D$(GAME_VERSION) -DREVISION=$(GAME_REVISION) -D$(GAME_LANGUAGE) -DMODERN=$(MODERN) -I$(SDL_DIR)/include -L$(SDL_DIR)/lib
 ifeq ($(MODERN),0)
   CPPFLAGS += -I tools/agbcc/include -I tools/agbcc -nostdinc -undef -std=gnu89
   CC1 := tools/agbcc/bin/agbcc$(EXE)
@@ -88,7 +90,7 @@ else
   MODERNCC := $(PREFIX)gcc
   PATH_MODERNCC := PATH="$(PATH)" $(MODERNCC)
   CC1 := $(shell $(PATH_MODERNCC) --print-prog-name=cc1) -quiet
-  override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
+  override CFLAGS += -Wno-trigraphs -Wimplicit -Wparentheses -Wunused -m32 -std=gnu99 -fleading-underscore -fno-dce -fno-builtin -Wno-unused-function -O$(O_LEVEL) -DMODERN=$(MODERN)
   LIBPATH := -L $(shell dirname $(shell $(PATH_MODERNCC) -print-file-name=libgcc.a)) -L $(shell dirname $(shell $(PATH_MODERNCC) -print-file-name=libc.a))
   LIB := $(LIBPATH) -lc -lgcc
   ifneq ($(DEVKITARM),)
@@ -129,7 +131,7 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
-ALL_BUILDS := firered firered_rev1 firered_rev10 leafgreen leafgreen_rev1 leafgreen_rev10
+ALL_BUILDS := firered firered_rev1 leafgreen leafgreen_rev1
 ALL_BUILDS += $(ALL_BUILDS:%=%_modern)
 
 RULES_NO_SCAN += clean clean-assets tidy generated clean-generated
@@ -218,23 +220,19 @@ clean-assets:
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 
 tidy:
-	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
+	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map,.exe})
 	$(RM) -r $(BUILD_DIR)
 
 # "friendly" target names for convenience sake
 firered:                ; @$(MAKE) GAME_VERSION=FIRERED
 firered_rev1:           ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=1
-firered_switch:          ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=10
 leafgreen:              ; @$(MAKE) GAME_VERSION=LEAFGREEN
 leafgreen_rev1:         ; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=1
-leafgreen_switch:        ; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=10
 
 compare_firered:        ; @$(MAKE) GAME_VERSION=FIRERED COMPARE=1
 compare_firered_rev1:   ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=1 COMPARE=1
-compare_firered_switch: ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=10 COMPARE=1
 compare_leafgreen:      ; @$(MAKE) GAME_VERSION=LEAFGREEN COMPARE=1
 compare_leafgreen_rev1: ; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=1 COMPARE=1
-compare_leafgreen_switch:; @$(MAKE) GAME_VERSION=LEAFGREEN GAME_REVISION=10 COMPARE=1
 
 firered_modern:        ; @$(MAKE) GAME_VERSION=FIRERED MODERN=1
 firered_rev1_modern:   ; @$(MAKE) GAME_VERSION=FIRERED GAME_REVISION=1 MODERN=1
@@ -292,7 +290,7 @@ $(C_BUILDDIR)/berry_crush_3.o: CFLAGS += -Wno-address-of-packed-member
 $(C_BUILDDIR)/braille_text.o: CFLAGS += -Wno-address-of-packed-member
 $(C_BUILDDIR)/text.o: CFLAGS += -Wno-address-of-packed-member
 $(C_BUILDDIR)/battle_tower.o: CFLAGS += -Wno-div-by-zero
-$(C_BUILDDIR)/librfu_intr.o: override CFLAGS += -marm -mthumb-interwork -O2 -mtune=arm7tdmi -march=armv4t -mabi=apcs-gnu -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
+#$(C_BUILDDIR)/librfu_intr.o: override CFLAGS += -marm -mthumb-interwork -O2 -mtune=arm7tdmi -march=armv4t -mabi=apcs-gnu -fno-toplevel-reorder -fno-aggressive-loop-optimizations -Wno-pointer-to-int-cast
 endif
 
 # Dependency rules (for the *.c & *.s sources to .o files)
@@ -304,11 +302,11 @@ endif
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 ifneq ($(KEEP_TEMPS),1)
 	@echo "$(CC1) <flags> -o $@ $<"
-	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
+	$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
 else
-	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
-	@$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
-	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
+	$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
+	$(PREPROC) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
+	echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 endif
 
@@ -340,7 +338,8 @@ ifneq ($(NODEP),1)
 endif
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
-	$(PREPROC) $< charmap.txt | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< charmap.txt | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | sed -e 's/\.4byte/\.int/g;s/\.2byte/\.short/g'| $(AS) $(ASFLAGS) -o $@
+	$(OBJCOPY) --prefix-symbol _ $@
 
 $(DATA_ASM_BUILDDIR)/%.d: $(DATA_ASM_SUBDIR)/%.s
 	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I "" $<
@@ -352,30 +351,16 @@ endif
 $(OBJ_DIR)/sym_bss.ld: sym_bss.txt
 	$(RAMSCRGEN) .bss $< ENGLISH > $@
 
-$(OBJ_DIR)/sym_bss_rev10.ld: sym_bss_rev10.txt
-	$(RAMSCRGEN) .bss $< ENGLISH > $@
-
 $(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
-	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
-
-$(OBJ_DIR)/sym_common_rev10.ld: sym_common_rev10.txt $(C_OBJS) $(wildcard common_syms/*.txt)
 	$(RAMSCRGEN) COMMON $< ENGLISH -c $(C_BUILDDIR),common_syms > $@
 
 $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
-$(OBJ_DIR)/sym_ewram_rev10.ld: sym_ewram_rev10.txt
-	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
-
 # Linker script
 ifeq ($(MODERN),0)
-ifeq ($(GAME_REVISION),10)
-LD_SCRIPT := ld_script_rev10.ld
-LD_SCRIPT_DEPS := $(OBJ_DIR)/sym_bss_rev10.ld $(OBJ_DIR)/sym_common_rev10.ld $(OBJ_DIR)/sym_ewram_rev10.ld
-else
 LD_SCRIPT := ld_script.ld
 LD_SCRIPT_DEPS := $(OBJ_DIR)/sym_bss.ld $(OBJ_DIR)/sym_common.ld $(OBJ_DIR)/sym_ewram.ld
-endif
 else
 LD_SCRIPT := ld_script_modern.ld
 LD_SCRIPT_DEPS :=
@@ -385,15 +370,17 @@ endif
 
 # Elf from object files
 LDFLAGS = -Map ../../$(MAP)
-$(ELF): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS)
-	@cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
-	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ <objs> <libs> | cat"
-	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
+$(ROM): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS)
+	cd $(OBJ_DIR) && i686-w64-mingw32-gcc -Wno-trigraphs -Wimplicit -Wparentheses -Wunused -m32 -std=gnu99 -fleading-underscore -fno-dce -fno-builtin -Wno-unused-function -DFIRERED=1 -DREVISION=0 -DENGLISH=1 -DPORTABLE -DNONMATCHING -D UBFIX -DMODERN=1 -O3 -Wl,--demangle $(OBJS_REL) -o $(ROM) -L$(SDL_DIR)/lib -lxinput -lkernel32 -lSDL3
+	mv $(OBJ_DIR)/$(ROM) ./
+# cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
+#	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ <objs> <libs> | cat"
+#	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
 
 # Builds the rom from the elf file
-$(ROM): $(ELF)
-	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
+#$(ROM): $(ELF)
+#	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
 
 # Symbol file (`make syms`)
-$(SYM): $(ELF)
-	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@
+#$(SYM): $(ELF)
+#	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@

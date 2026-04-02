@@ -12,9 +12,11 @@ $(shell mkdir -p $(SPECIAL_OUTDIRS) )
 
 # Assembly song compilation
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
-	$(AS) $(ASFLAGS) -I sound -o $@ $<
+	sed -e 's/\.4byte/\.int/g;s/\.2byte/\.short/g;s/\([^\\]\)@/\1#/;s/^@/#/;s/\.word/\.long/g' $< | $(AS) $(ASFLAGS) -I sound -o $@
+	$(OBJCOPY)  --prefix-symbol _ $@
 $(MID_BUILDDIR)/%.o: $(MID_ASM_DIR)/%.s
-	$(AS) $(ASFLAGS) -I sound -o $@ $<
+	sed -e 's/\.4byte/\.int/g;s/\.2byte/\.short/g;s/\([^\\]\)@/\1#/;s/^@/#/;s/\.word/\.long/g' $< | $(AS) $(ASFLAGS) -I sound -o $@
+	$(OBJCOPY) --prefix-symbol _ $@
 
 $(CRY_BIN_DIR)/%.bin: $(CRY_SUBDIR)/%.wav
 # NOTE: If using ipatix's High Quality Audio Mixer, remove "--no-pad" below.

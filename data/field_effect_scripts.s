@@ -1,5 +1,5 @@
 	.include "asm/macros/field_effect_script.inc"
-	.section script_data, "aw", %progbits
+	.section script_data, "aw"
 	.align 2
 gFieldEffectScriptPointers::
 	.4byte gFldEffScript_ExclamationMarkIcon     @ FLDEFF_EXCLAMATION_MARK_ICON

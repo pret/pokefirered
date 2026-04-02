@@ -17,7 +17,7 @@
 #include "quest_log.h"
 #include "sloopsvc.h"
 
-extern u32 intr_main[];
+
 
 static void VBlankIntr(void);
 static void HBlankIntr(void);
@@ -69,6 +69,8 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
+#define INTR_MAIN_SIZE 0x200
+
 COMMON_DATA u16 gKeyRepeatStartDelay = 0;
 COMMON_DATA u8 gLinkTransferringData = 0;
 COMMON_DATA struct Main gMain = {0};
@@ -77,10 +79,12 @@ COMMON_DATA u8 gSoftResetDisabled = 0;
 COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};
 COMMON_DATA u8 sVcountAfterSound = 0;
 COMMON_DATA bool8 gLinkVSyncDisabled = 0;
-COMMON_DATA u32 IntrMain_Buffer[0x200] = {0};
+COMMON_DATA u32 IntrMain_Buffer[INTR_MAIN_SIZE] = {0};
 COMMON_DATA u8 sVcountAtIntr = 0;
 COMMON_DATA u8 sVcountBeforeSound = 0;
 COMMON_DATA u8 gPcmDmaCounter = 0;
+
+u32 intr_main[INTR_MAIN_SIZE];
 
 static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 
@@ -97,42 +101,17 @@ void EnableVCountIntrAtLine150(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
+int main(void)
+{
+    AgbMain();
+    return 0;
+}
+
 void AgbMain()
 {
 #if REVISION >= 0xA
     svc_stubbed();
 #endif
-#if MODERN
-    // Modern compilers are liberal with the stack on entry to this function,
-    // so RegisterRamReset may crash if it resets IWRAM.
-    RegisterRamReset(RESET_ALL & ~RESET_IWRAM);
-    asm("mov\tr1, #0xC0\n"
-        "\tlsl\tr1, r1, #0x12\n"
-        "\tmov\tr2, #0xFC\n"
-        "\tlsl\tr2, r2, #0x7\n"
-        "\tadd\tr2, r1, r2\n"
-        "\tmov\tr0, #0\n"
-        "\tmov\tr3, r0\n"
-        "\tmov\tr4, r0\n"
-        "\tmov\tr5, r0\n"
-        ".LCU%=:\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tstmia\tr1!, {r0, r3, r4, r5}\n"
-        "\tcmp\tr1, r2\n"
-        "\tbcc\t.LCU%=\n"
-        :
-        :
-        : "r0", "r1", "r2", "r3", "r4", "r5", "memory"
-    );
-#else
-    RegisterRamReset(RESET_ALL);
-#endif //MODERN
 
 #if REVISION >= 0xA
     *(vu16 *)BG_PLTT = RGB_BLACK;

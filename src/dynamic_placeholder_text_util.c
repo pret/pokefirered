@@ -2,7 +2,7 @@
 #include "gflib.h"
 #include "constants/event_objects.h"
 
-static EWRAM_DATA const u8 *sStringPointers[8] = {0};
+static const u8 *sStringPointers[8] = {0};
 
 #define COLORS(a, b)((a) | (b << 4))
 

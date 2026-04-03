@@ -139,11 +139,11 @@ enum {
 // Checked to confirm DrawSelectedMonScreen has reached final state
 #define DRAW_SELECTED_FINISH 5
 
-static EWRAM_DATA u8 *sMenuTextTileBuffer = NULL;
-static EWRAM_DATA u8 *sMenuTextTileBuffers[NUM_MENU_TEXT_SPRITES] = {};
-EWRAM_DATA struct Mail gLinkPartnerMail[PARTY_SIZE] = {};
-EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
-static EWRAM_DATA struct {
+static u8 *sMenuTextTileBuffer = NULL;
+static u8 *sMenuTextTileBuffers[NUM_MENU_TEXT_SPRITES] = {};
+struct Mail gLinkPartnerMail[PARTY_SIZE] = {};
+u8 gSelectedTradeMonPositions[2] = {0};
+static struct {
     u8 bg2hofs;
     u8 bg3hofs;
     u8 filler_2[38];

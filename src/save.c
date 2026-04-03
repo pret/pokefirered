@@ -78,21 +78,21 @@ STATIC_ASSERT(sizeof(struct SaveBlock1) <= SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLO
 STATIC_ASSERT(sizeof(struct PokemonStorage) <= SECTOR_DATA_SIZE * (SECTOR_ID_PKMN_STORAGE_END - SECTOR_ID_PKMN_STORAGE_START + 1), PokemonStorageFreeSpace);
 
 // Sector num to begin writing save data. Sectors are rotated each time the game is saved. (possibly to avoid wear on flash memory?)
-COMMON_DATA u16 gLastWrittenSector = 0;
-COMMON_DATA u32 gLastSaveCounter = 0;
-COMMON_DATA u16 gLastKnownGoodSector = 0;
-COMMON_DATA u32 gDamagedSaveSectors = 0;
-COMMON_DATA u32 gSaveCounter = 0;
-COMMON_DATA struct SaveSector *gSaveDataBufferPtr = NULL; // the pointer is in fast IWRAM but points to the slower EWRAM.
-COMMON_DATA u16 gIncrementalSectorId = 0;
-COMMON_DATA u16 gSaveUnusedVar = 0;
-COMMON_DATA u16 gSaveFileStatus = 0;
-COMMON_DATA void (*gGameContinueCallback)(void) = NULL;
-COMMON_DATA struct SaveSectorLocation gRamSaveSectorLocations[NUM_SECTORS_PER_SLOT] = {0};
-COMMON_DATA u16 gSaveAttemptStatus = 0;
+u16 gLastWrittenSector = 0;
+u32 gLastSaveCounter = 0;
+u16 gLastKnownGoodSector = 0;
+u32 gDamagedSaveSectors = 0;
+u32 gSaveCounter = 0;
+struct SaveSector *gSaveDataBufferPtr = NULL; // the pointer is in fast IWRAM but points to the slower EWRAM.
+u16 gIncrementalSectorId = 0;
+u16 gSaveUnusedVar = 0;
+u16 gSaveFileStatus = 0;
+void (*gGameContinueCallback)(void) = NULL;
+struct SaveSectorLocation gRamSaveSectorLocations[NUM_SECTORS_PER_SLOT] = {0};
+u16 gSaveAttemptStatus = 0;
 
-EWRAM_DATA struct SaveSector gSaveDataBuffer = {0};
-EWRAM_DATA u32 gSaveUnusedVar2 = 0;
+struct SaveSector gSaveDataBuffer = {0};
+u32 gSaveUnusedVar2 = 0;
 
 void ClearSaveData(void)
 {

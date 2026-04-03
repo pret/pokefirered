@@ -44,7 +44,7 @@ struct OakSpeechResources
     u8 bg1TilemapBuffer[0x800];
 };
 
-static EWRAM_DATA struct OakSpeechResources *sOakSpeechResources = NULL;
+static struct OakSpeechResources *sOakSpeechResources = NULL;
 
 static void Task_NewGameScene(u8);
 

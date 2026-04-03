@@ -373,14 +373,3 @@ LDFLAGS = -Map ../../$(MAP)
 $(ROM): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS)
 	cd $(OBJ_DIR) && i686-w64-mingw32-gcc -Wno-trigraphs -Wimplicit -Wparentheses -Wunused -m32 -std=gnu99 -fleading-underscore -fno-dce -fno-builtin -Wno-unused-function -DFIRERED=1 -DREVISION=0 -DENGLISH=1 -DPORTABLE -DNONMATCHING -D UBFIX -DMODERN=1 -O3 -Wl,--demangle $(OBJS_REL) -o $(ROM) -L$(SDL_DIR)/lib -lxinput -lkernel32 -lSDL3
 	mv $(OBJ_DIR)/$(ROM) ./
-# cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ $(OBJS_REL) $(LIB) | cat
-#	@echo "cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ../../$< --print-memory-usage -o ../../$@ <objs> <libs> | cat"
-#	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(GAME_REVISION) --silent
-
-# Builds the rom from the elf file
-#$(ROM): $(ELF)
-#	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
-
-# Symbol file (`make syms`)
-#$(SYM): $(ELF)
-#	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@

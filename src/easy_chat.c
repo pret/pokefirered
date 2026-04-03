@@ -23,7 +23,7 @@ struct Unk203A120
     u16 totalWords;
 }; /*size = 0x3BA4*/
 
-static EWRAM_DATA struct Unk203A120 * sEasyChatSelectionData = NULL;
+static struct Unk203A120 * sEasyChatSelectionData = NULL;
 
 static bool8 EC_IsNationalPokedexEnabled(void);
 static u16 GetRandomECPokemon(void);

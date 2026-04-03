@@ -10,7 +10,7 @@
 #include "wild_encounter.h"
 #include "constants/songs.h"
 
-static EWRAM_DATA u8 *sPlttBufferBak = NULL;
+static u8 *sPlttBufferBak = NULL;
 
 static void FieldCallback_SweetScent(void);
 static void StartSweetScentFieldEffect(void);

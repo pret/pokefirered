@@ -50,15 +50,15 @@ struct FameCheckerData
     u8 pickModeOverCancel:1;
 };
 
-static EWRAM_DATA u16 * sBg3TilemapBuffer = NULL;
-static EWRAM_DATA u16 * sBg1TilemapBuffer = NULL;
-static EWRAM_DATA u16 * sBg2TilemapBuffer = NULL;
-static EWRAM_DATA struct FameCheckerData * sFameCheckerData = NULL;
-static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
-static EWRAM_DATA s32 sLastMenuIdx = 0;
+static u16 * sBg3TilemapBuffer = NULL;
+static u16 * sBg1TilemapBuffer = NULL;
+static u16 * sBg2TilemapBuffer = NULL;
+static struct FameCheckerData * sFameCheckerData = NULL;
+static struct ListMenuItem * sListMenuItems = NULL;
+static s32 sLastMenuIdx = 0;
 
-COMMON_DATA struct ListMenuTemplate gFameChecker_ListMenuTemplate = {0};
-COMMON_DATA u8 gIconDescriptionBoxIsOpen = 0;
+struct ListMenuTemplate gFameChecker_ListMenuTemplate = {0};
+u8 gIconDescriptionBoxIsOpen = 0;
 
 static void MainCB2_LoadFameChecker(void);
 static void LoadUISpriteSheetsAndPalettes(void);

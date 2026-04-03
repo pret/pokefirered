@@ -40,10 +40,10 @@ struct WeatherCallbacks
     bool8 (*finish)(void);
 };
 
-static EWRAM_DATA struct Weather sWeather = {};
-static EWRAM_DATA u8 sFieldEffectPaletteGammaTypes[32] = {};
-static EWRAM_DATA const u8 *sPaletteGammaTypes = NULL;
-static EWRAM_DATA u16 sDroughtFrameDelay = 0;
+static struct Weather sWeather = {};
+static u8 sFieldEffectPaletteGammaTypes[32] = {};
+static const u8 *sPaletteGammaTypes = NULL;
+static u16 sDroughtFrameDelay = 0;
 
 static void Task_WeatherMain(u8 taskId);
 static void Task_WeatherInit(u8 taskId);

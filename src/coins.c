@@ -6,7 +6,7 @@
 #include "strings.h"
 #include "constants/coins.h"
 
-EWRAM_DATA static u8 sCoinsWindowId = 0;
+static u8 sCoinsWindowId = 0;
 
 u16 GetCoins(void)
 {

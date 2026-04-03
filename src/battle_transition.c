@@ -71,7 +71,7 @@ struct TransitionData
     s16 data[11]; // for multiple purposes
 };
 
-static EWRAM_DATA struct TransitionData *sTransitionData = NULL;
+static struct TransitionData *sTransitionData = NULL;
 
 static bool8 TransitionIntro_FadeToGray(struct Task *task);
 static bool8 TransitionIntro_FadeFromGray(struct Task *task);

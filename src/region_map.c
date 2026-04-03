@@ -277,15 +277,15 @@ struct FlyMap
     bool8 selectedDestination;
 };
 
-static EWRAM_DATA struct RegionMap * sRegionMap = NULL;
-static EWRAM_DATA struct SwitchMapMenu * sSwitchMapMenu = NULL;
-static EWRAM_DATA struct DungeonMapPreview * sDungeonMapPreview = NULL;
-static EWRAM_DATA struct MapOpenCloseAnim * sMapOpenCloseAnim = NULL;
-static EWRAM_DATA struct MapCursor * sMapCursor = NULL;
-static EWRAM_DATA struct PlayerIcon * sPlayerIcon = NULL;
-static EWRAM_DATA struct MapIcons * sMapIcons = NULL;
-static EWRAM_DATA struct RegionMapGpuRegs * sRegionMapGpuRegs[3] = {};
-static EWRAM_DATA struct FlyMap * sFlyMap = NULL;
+static struct RegionMap * sRegionMap = NULL;
+static struct SwitchMapMenu * sSwitchMapMenu = NULL;
+static struct DungeonMapPreview * sDungeonMapPreview = NULL;
+static struct MapOpenCloseAnim * sMapOpenCloseAnim = NULL;
+static struct MapCursor * sMapCursor = NULL;
+static struct PlayerIcon * sPlayerIcon = NULL;
+static struct MapIcons * sMapIcons = NULL;
+static struct RegionMapGpuRegs * sRegionMapGpuRegs[3] = {};
+static struct FlyMap * sFlyMap = NULL;
 
 static void InitRegionMapType(void);
 static void CB2_OpenRegionMap(void);

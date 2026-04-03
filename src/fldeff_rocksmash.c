@@ -21,7 +21,7 @@ static void Task_FieldEffectShowMon_Cleanup(u8 taskId);
 static void FieldCallback_UseRockSmash(void);
 static void StartRockSmashFieldEffect(void);
 
-EWRAM_DATA struct MapPosition gPlayerFacingPosition = {};
+struct MapPosition gPlayerFacingPosition = {};
 
 bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId)
 {

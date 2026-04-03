@@ -13,29 +13,29 @@ static bool8 IsFlagOrVarStoredInQuestLog(u16 idx, u8 a1);
 #define TEMP_FLAGS_SIZE    (NUM_TEMP_FLAGS / 8)
 #define TEMP_VARS_SIZE     (NUM_TEMP_VARS * 2)      // 1/2 var per byte
 
-EWRAM_DATA u16 gSpecialVar_0x8000 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8001 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8002 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8003 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8004 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8005 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8006 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8007 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8008 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8009 = 0;
-EWRAM_DATA u16 gSpecialVar_0x800A = 0;
-EWRAM_DATA u16 gSpecialVar_0x800B = 0;
-EWRAM_DATA u16 gSpecialVar_Result = 0;
-EWRAM_DATA u16 gSpecialVar_LastTalked = 0;
-EWRAM_DATA u16 gSpecialVar_Facing = 0;
-EWRAM_DATA u16 gSpecialVar_MonBoxId = 0;
-EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
-EWRAM_DATA u16 gSpecialVar_TextColor = 0;
-EWRAM_DATA u16 gSpecialVar_PrevTextColor = 0;
-EWRAM_DATA u16 gSpecialVar_0x8014 = 0;
-EWRAM_DATA u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {};
+u16 gSpecialVar_0x8000 = 0;
+u16 gSpecialVar_0x8001 = 0;
+u16 gSpecialVar_0x8002 = 0;
+u16 gSpecialVar_0x8003 = 0;
+u16 gSpecialVar_0x8004 = 0;
+u16 gSpecialVar_0x8005 = 0;
+u16 gSpecialVar_0x8006 = 0;
+u16 gSpecialVar_0x8007 = 0;
+u16 gSpecialVar_0x8008 = 0;
+u16 gSpecialVar_0x8009 = 0;
+u16 gSpecialVar_0x800A = 0;
+u16 gSpecialVar_0x800B = 0;
+u16 gSpecialVar_Result = 0;
+u16 gSpecialVar_LastTalked = 0;
+u16 gSpecialVar_Facing = 0;
+u16 gSpecialVar_MonBoxId = 0;
+u16 gSpecialVar_MonBoxPos = 0;
+u16 gSpecialVar_TextColor = 0;
+u16 gSpecialVar_PrevTextColor = 0;
+u16 gSpecialVar_0x8014 = 0;
+u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {};
 
-COMMON_DATA u16 gLastQuestLogStoredFlagOrVarIdx = 0;
+u16 gLastQuestLogStoredFlagOrVarIdx = 0;
 
 extern u16 *const gSpecialVars[];
 

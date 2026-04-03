@@ -6,7 +6,7 @@
 #include "script.h"
 #include "text_window.h"
 
-static EWRAM_DATA u8 sMessageBoxType = 0;
+static u8 sMessageBoxType = 0;
 
 static void ExpandStringAndStartDrawFieldMessageBox(const u8 *str);
 static void StartDrawFieldMessageBox(void);

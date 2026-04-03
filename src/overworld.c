@@ -93,32 +93,32 @@ struct CableClubPlayer
     u16 metatileBehavior;
 };
 
-EWRAM_DATA struct WarpData gLastUsedWarp = {};
-static EWRAM_DATA struct WarpData sWarpDestination = {};
-static EWRAM_DATA struct WarpData sFixedDiveWarp = {};
-static EWRAM_DATA struct WarpData sFixedHoleWarp = {};
+struct WarpData gLastUsedWarp = {};
+static struct WarpData sWarpDestination = {};
+static struct WarpData sFixedDiveWarp = {};
+static struct WarpData sFixedHoleWarp = {};
 
-static EWRAM_DATA struct InitialPlayerAvatarState sInitialPlayerAvatarState = {};
+static struct InitialPlayerAvatarState sInitialPlayerAvatarState = {};
 
-EWRAM_DATA bool8 gDisableMapMusicChangeOnMapLoad = MUSIC_DISABLE_OFF;
-static EWRAM_DATA u16 sAmbientCrySpecies = SPECIES_NONE;
-static EWRAM_DATA bool8 sIsAmbientCryWaterMon = FALSE;
+bool8 gDisableMapMusicChangeOnMapLoad = MUSIC_DISABLE_OFF;
+static u16 sAmbientCrySpecies = SPECIES_NONE;
+static bool8 sIsAmbientCryWaterMon = FALSE;
 
-ALIGNED(4) EWRAM_DATA bool8 gExitStairsMovementDisabled = FALSE;
-static EWRAM_DATA const struct CreditsOverworldCmd *sCreditsOverworld_Script = NULL;
-static EWRAM_DATA s16 sCreditsOverworld_CmdLength = 0;
-static EWRAM_DATA s16 sCreditsOverworld_CmdIndex = 0;
+ALIGNED(4) bool8 gExitStairsMovementDisabled = FALSE;
+static const struct CreditsOverworldCmd *sCreditsOverworld_Script = NULL;
+static s16 sCreditsOverworld_CmdLength = 0;
+static s16 sCreditsOverworld_CmdIndex = 0;
 
-EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {};
+struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {};
 
-COMMON_DATA u16 *gBGTilemapBuffers1 = NULL;
-COMMON_DATA u16 *gBGTilemapBuffers2 = NULL;
-COMMON_DATA u16 *gBGTilemapBuffers3 = NULL;
-COMMON_DATA void (*gFieldCallback)(void) = NULL;
-COMMON_DATA bool8 (*gFieldCallback2)(void) = NULL;
-COMMON_DATA u16 gHeldKeyCodeToSend = 0;
-COMMON_DATA u8 gLocalLinkPlayerId = 0;
-COMMON_DATA u8 gFieldLinkPlayerCount = 0;
+u16 *gBGTilemapBuffers1 = NULL;
+u16 *gBGTilemapBuffers2 = NULL;
+u16 *gBGTilemapBuffers3 = NULL;
+void (*gFieldCallback)(void) = NULL;
+bool8 (*gFieldCallback2)(void) = NULL;
+u16 gHeldKeyCodeToSend = 0;
+u8 gLocalLinkPlayerId = 0;
+u8 gFieldLinkPlayerCount = 0;
 
 static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
 static KeyInterCB sPlayerKeyInterceptCallback;

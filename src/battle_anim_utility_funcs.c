@@ -31,7 +31,7 @@ static void AnimTask_UpdateSlidingBg(u8 taskId);
 static void UpdateMonScrollingBgMask(u8 taskId);
 static void AnimTask_WaitAndRestoreVisibility(u8 taskId);
 
-static EWRAM_DATA struct AnimStatsChangeData *sAnimStatsChangeData = NULL;
+static struct AnimStatsChangeData *sAnimStatsChangeData = NULL;
 
 static const u16 sRgbWhite[] = { RGB_WHITE };
 const u8 gBattleAnimRegOffsBgCnt[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, REG_OFFSET_BG2CNT, REG_OFFSET_BG3CNT };

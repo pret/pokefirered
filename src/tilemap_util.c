@@ -37,8 +37,8 @@ struct TilemapUtil
     bool8 active; // Only read in unused function
 };
 
-static EWRAM_DATA struct TilemapUtil *sTilemapUtil = NULL;
-static EWRAM_DATA u16 sNumTilemapUtilIds = 0;
+static struct TilemapUtil *sTilemapUtil = NULL;
+static u16 sNumTilemapUtilIds = 0;
 
 static void TilemapUtil_DrawPrev(u8 tilemapId);
 static void TilemapUtil_Draw(u8 tilemapId);

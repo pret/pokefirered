@@ -2,16 +2,16 @@
 #include "window.h"
 #include "text.h"
 
-static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
-static EWRAM_DATA struct TextPrinter sTextPrinters[NUM_TEXT_PRINTERS] = {0};
+static struct TextPrinter sTempTextPrinter = {0};
+static struct TextPrinter sTextPrinters[NUM_TEXT_PRINTERS] = {0};
 
 static u16 sFontHalfRowLookupTable[0x51];
 static u16 sLastTextBgColor;
 static u16 sLastTextFgColor;
 static u16 sLastTextShadowColor;
 
-COMMON_DATA const struct FontInfo *gFonts = NULL;
-COMMON_DATA struct GlyphInfo gGlyphInfo = {0};
+const struct FontInfo *gFonts = NULL;
+struct GlyphInfo gGlyphInfo = {0};
 
 static const u8 sFontHalfRowOffsets[] =
 {

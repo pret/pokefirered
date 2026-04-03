@@ -21,8 +21,8 @@
 // Original symbol name from ASSERT statements
 #define UnionObjWork sUnionObjWork
 
-static EWRAM_DATA struct UnionRoomObject * sUnionObjWork = NULL;
-static EWRAM_DATA u32 sUnionObjRefreshTimer = 0;
+static struct UnionRoomObject * sUnionObjWork = NULL;
+static u32 sUnionObjRefreshTimer = 0;
 
 static u8 CreateTask_AnimateUnionRoomPlayers(void);
 static u32 IsUnionRoomPlayerInvisible(u32 leaderId, u32 member);

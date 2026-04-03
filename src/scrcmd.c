@@ -47,16 +47,16 @@ extern const u8 *const gStdScriptsEnd[];
 static bool8 ScriptContext_NextCommandEndsScript(struct ScriptContext * ctx);
 static u8 ScriptContext_GetQuestLogInput(struct ScriptContext * ctx);
 
-static EWRAM_DATA ptrdiff_t sAddressOffset = 0; // For relative addressing in vgoto etc., used by saved scripts (e.g. Mystery Event)
-static EWRAM_DATA u8 sQuestLogWaitButtonPressTimer = 0;
-static EWRAM_DATA u16 sPauseCounter = 0;
-static EWRAM_DATA u16 sMovingNpcId = 0;
-static EWRAM_DATA u16 sMovingNpcMapGroup = 0;
-static EWRAM_DATA u16 sMovingNpcMapNum = 0;
-static EWRAM_DATA u16 sFieldEffectScriptId = 0;
+static ptrdiff_t sAddressOffset = 0; // For relative addressing in vgoto etc., used by saved scripts (e.g. Mystery Event)
+static u8 sQuestLogWaitButtonPressTimer = 0;
+static u16 sPauseCounter = 0;
+static u16 sMovingNpcId = 0;
+static u16 sMovingNpcMapGroup = 0;
+static u16 sMovingNpcMapNum = 0;
+static u16 sFieldEffectScriptId = 0;
 
-COMMON_DATA struct ScriptContext * sQuestLogScriptContextPtr = NULL;
-COMMON_DATA u8 gSelectedObjectEvent = 0;
+struct ScriptContext * sQuestLogScriptContextPtr = NULL;
+u8 gSelectedObjectEvent = 0;
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.

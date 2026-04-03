@@ -27,10 +27,10 @@
 #include "constants/moves.h"
 #include "constants/trainer_types.h"
 
-static EWRAM_DATA struct ObjectEvent * sPlayerObjectPtr = NULL;
-static EWRAM_DATA u8 sTeleportSavedFacingDirection = DIR_NONE;
-EWRAM_DATA struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT] = {};
-EWRAM_DATA struct PlayerAvatar gPlayerAvatar = {};
+static struct ObjectEvent * sPlayerObjectPtr = NULL;
+static u8 sTeleportSavedFacingDirection = DIR_NONE;
+struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT] = {};
+struct PlayerAvatar gPlayerAvatar = {};
 
 static u8 ObjectEventCB2_NoMovement2(struct ObjectEvent * object, struct Sprite *sprite);
 static bool8 TryUpdatePlayerSpinDirection(void);

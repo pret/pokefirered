@@ -16,7 +16,7 @@ struct UnionRoomBattleWork
     s16 textState;
 };
 
-static EWRAM_DATA struct UnionRoomBattleWork * sWork = NULL;
+static struct UnionRoomBattleWork * sWork = NULL;
 
 static const struct BgTemplate sBgTemplates[] = {
     {

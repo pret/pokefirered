@@ -19,8 +19,8 @@ extern u8 gDisableMapMusicChangeOnMapLoad;
 extern u8 gDisableHelpSystemVolumeReduce;
 
 // ewram
-EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
-EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
+struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
+u8 gPokemonCryBGMDuckingCounter = 0;
 
 // iwram bss
 static u16 sCurrentMapMusic;
@@ -30,7 +30,7 @@ static u8 sMapMusicFadeInSpeed;
 static u16 sFanfareCounter;
 
 // iwram common
-COMMON_DATA bool8 gDisableMusic = 0;
+bool8 gDisableMusic = 0;
 
 extern u32 gBattleTypeFlags;
 extern struct MusicPlayerInfo gMPlayInfo_BGM;

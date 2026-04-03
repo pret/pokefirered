@@ -314,18 +314,18 @@ struct ShinyStarObjData
     u16 palTag; /* 0x06 */
 };
 
-static EWRAM_DATA struct PokemonSummaryScreenData * sMonSummaryScreen = NULL;
-static EWRAM_DATA struct Struct203B144 * sMonSkillsPrinterXpos = NULL;
-static EWRAM_DATA struct MoveSelectionCursor * sMoveSelectionCursorObjs[4] = {};
-static EWRAM_DATA struct MonStatusIconObj * sStatusIcon = NULL;
-static EWRAM_DATA struct HpBarObjs * sHpBarObjs = NULL;
-static EWRAM_DATA struct ExpBarObjs * sExpBarObjs = NULL;
-static EWRAM_DATA struct PokerusIconObj * sPokerusIconObj = NULL;
-static EWRAM_DATA struct ShinyStarObjData * sShinyStarObjData = NULL;
-static EWRAM_DATA u8 sLastViewedMonIndex = 0;
-static EWRAM_DATA u8 sMoveSelectionCursorPos = 0;
-static EWRAM_DATA u8 sMoveSwapCursorPos = 0;
-static EWRAM_DATA struct MonPicBounceState * sMonPicBounceState = NULL;
+static struct PokemonSummaryScreenData * sMonSummaryScreen = NULL;
+static struct Struct203B144 * sMonSkillsPrinterXpos = NULL;
+static struct MoveSelectionCursor * sMoveSelectionCursorObjs[4] = {};
+static struct MonStatusIconObj * sStatusIcon = NULL;
+static struct HpBarObjs * sHpBarObjs = NULL;
+static struct ExpBarObjs * sExpBarObjs = NULL;
+static struct PokerusIconObj * sPokerusIconObj = NULL;
+static struct ShinyStarObjData * sShinyStarObjData = NULL;
+static u8 sLastViewedMonIndex = 0;
+static u8 sMoveSelectionCursorPos = 0;
+static u8 sMoveSwapCursorPos = 0;
+static struct MonPicBounceState * sMonPicBounceState = NULL;
 
 extern const u32 gSummaryScreen_PageSkills_Tilemap[];
 extern const u32 gSummaryScreen_PageMoves_Tilemap[];

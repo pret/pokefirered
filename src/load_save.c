@@ -25,23 +25,23 @@ struct LoadedSaveData
 };
 
 // EWRAM DATA
-EWRAM_DATA struct SaveBlock2 gSaveBlock2 = {0};
-EWRAM_DATA u8 gSaveBlock2_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+struct SaveBlock2 gSaveBlock2 = {0};
+u8 gSaveBlock2_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
-EWRAM_DATA struct SaveBlock1 gSaveBlock1 = {0};
-EWRAM_DATA u8 gSaveBlock1_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+struct SaveBlock1 gSaveBlock1 = {0};
+u8 gSaveBlock1_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
-EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
-EWRAM_DATA u8 gSaveBlock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
+struct PokemonStorage gPokemonStorage = {0};
+u8 gSaveBlock3_DMA[SAVEBLOCK_MOVE_RANGE] = {0};
 
-EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
-EWRAM_DATA u32 gLastEncryptionKey = 0;
+struct LoadedSaveData gLoadedSaveData = {0};
+u32 gLastEncryptionKey = 0;
 
 // IWRAM common
-COMMON_DATA bool32 gFlashMemoryPresent = 0;
-COMMON_DATA struct SaveBlock1 *gSaveBlock1Ptr = NULL;
-COMMON_DATA struct SaveBlock2 *gSaveBlock2Ptr = NULL;
-COMMON_DATA struct PokemonStorage *gPokemonStoragePtr = NULL;
+bool32 gFlashMemoryPresent = 0;
+struct SaveBlock1 *gSaveBlock1Ptr = NULL;
+struct SaveBlock2 *gSaveBlock2Ptr = NULL;
+struct PokemonStorage *gPokemonStoragePtr = NULL;
 
 void CheckForFlashMemory(void)
 {

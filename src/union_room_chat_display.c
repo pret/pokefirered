@@ -65,7 +65,7 @@ struct MessageWindowInfo
     bool8 widerBox;
 };
 
-static EWRAM_DATA struct UnionRoomChat2 * sWork = NULL;
+static struct UnionRoomChat2 * sWork = NULL;
 
 static void InitWork(struct UnionRoomChat2 * ptr);
 static void UnionRoomChat_ResetDisplaySubtasks(void);

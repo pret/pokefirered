@@ -33,12 +33,12 @@ struct DeferredLinkEvent
 #define CMD_HEADER_SIZE 4
 #define MAX_CMD_REPEAT  4
 
-static EWRAM_DATA struct DeferredLinkEvent sDeferredEvent = {0};
-EWRAM_DATA struct QuestLogRepeatEventTracker gQuestLogRepeatEventTracker = {0};
-static EWRAM_DATA u8 sStepRecordingMode = 0;
-static EWRAM_DATA bool8 sNewlyEnteredMap = FALSE;
-static EWRAM_DATA u8 sLastDepartedLocation = 0;
-static EWRAM_DATA bool8 sPlayedTheSlots = FALSE;
+static struct DeferredLinkEvent sDeferredEvent = {0};
+struct QuestLogRepeatEventTracker gQuestLogRepeatEventTracker = {0};
+static u8 sStepRecordingMode = 0;
+static bool8 sNewlyEnteredMap = FALSE;
+static u8 sLastDepartedLocation = 0;
+static bool8 sPlayedTheSlots = FALSE;
 
 static bool8 InQuestLogDisabledLocation(void);
 static bool8 ShouldRegisterEvent_HandlePartyActions(u16, const u16 *);

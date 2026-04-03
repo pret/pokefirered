@@ -18,29 +18,29 @@
 
 #define ANIM_SPRITE_INDEX_COUNT 8
 
-EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
-EWRAM_DATA static const u8 *sBattleAnimScriptRetAddr = NULL;
-EWRAM_DATA void (*gAnimScriptCallback)(void) = NULL;
-EWRAM_DATA static s8 sAnimFramesToWait = 0;
-EWRAM_DATA bool8 gAnimScriptActive = FALSE;
-EWRAM_DATA u8 gAnimVisualTaskCount = 0;
-EWRAM_DATA u8 gAnimSoundTaskCount = 0;
-EWRAM_DATA struct DisableStruct *gAnimDisableStructPtr = NULL;
-EWRAM_DATA s32 gAnimMoveDmg = 0;
-EWRAM_DATA u16 gAnimMovePower = 0;
-EWRAM_DATA static u16 sAnimSpriteIndexArray[ANIM_SPRITE_INDEX_COUNT] = {0};
-EWRAM_DATA u8 gAnimFriendship = 0;
-EWRAM_DATA u16 gWeatherMoveAnim = 0;
-EWRAM_DATA s16 gBattleAnimArgs[ANIM_ARGS_COUNT] = {0};
-EWRAM_DATA static u16 sSoundAnimFramesToWait = 0;
-EWRAM_DATA static u8 sMonAnimTaskIdArray[2] = {0};
-EWRAM_DATA u8 gAnimMoveTurn = 0;
-EWRAM_DATA static u8 sAnimBackgroundFadeState = 0;
-EWRAM_DATA static u16 sAnimMoveIndex = 0; // Set but unused.
-EWRAM_DATA u8 gBattleAnimAttacker = 0;
-EWRAM_DATA u8 gBattleAnimTarget = 0;
-EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
-EWRAM_DATA u8 gAnimCustomPanning = 0;
+static const u8 *sBattleAnimScriptPtr = NULL;
+static const u8 *sBattleAnimScriptRetAddr = NULL;
+void (*gAnimScriptCallback)(void) = NULL;
+static s8 sAnimFramesToWait = 0;
+bool8 gAnimScriptActive = FALSE;
+u8 gAnimVisualTaskCount = 0;
+u8 gAnimSoundTaskCount = 0;
+struct DisableStruct *gAnimDisableStructPtr = NULL;
+s32 gAnimMoveDmg = 0;
+u16 gAnimMovePower = 0;
+static u16 sAnimSpriteIndexArray[ANIM_SPRITE_INDEX_COUNT] = {0};
+u8 gAnimFriendship = 0;
+u16 gWeatherMoveAnim = 0;
+s16 gBattleAnimArgs[ANIM_ARGS_COUNT] = {0};
+static u16 sSoundAnimFramesToWait = 0;
+static u8 sMonAnimTaskIdArray[2] = {0};
+u8 gAnimMoveTurn = 0;
+static u8 sAnimBackgroundFadeState = 0;
+static u16 sAnimMoveIndex = 0; // Set but unused.
+u8 gBattleAnimAttacker = 0;
+u8 gBattleAnimTarget = 0;
+u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
+u8 gAnimCustomPanning = 0;
 
 static void AddSpriteIndex(u16 index);
 static void ClearSpriteIndex(u16 index);

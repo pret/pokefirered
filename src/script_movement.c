@@ -5,7 +5,7 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 
-static EWRAM_DATA const u8 (*sMovementScripts[OBJECT_EVENTS_COUNT]) = {};
+static const u8 (*sMovementScripts[OBJECT_EVENTS_COUNT]) = {};
 
 static void ScriptMovement_StartMoveObjects(u8 priority);
 static u8 GetMoveObjectsTaskId(void);

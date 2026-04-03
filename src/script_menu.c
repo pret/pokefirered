@@ -24,7 +24,7 @@ struct MultichoiceListStruct
     u8 count;
 };
 
-static EWRAM_DATA u8 sDelay = 0;
+static u8 sDelay = 0;
 
 static void DrawVerticalMultichoiceMenu(u8 left, u8 top, u8 mcId, u8 ignoreBpress, u8 initPos);
 static u8 GetMCWindowHeight(u8 count);

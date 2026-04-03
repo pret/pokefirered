@@ -21,8 +21,8 @@
 #define CUT_GRASS_SPRITE_COUNT 8
 #define CUT_SIDE 3
 
-static EWRAM_DATA u8 *sCutGrassSpriteArrayPtr = NULL;
-static EWRAM_DATA bool8 sScheduleOpenDottedHole = FALSE;
+static u8 *sCutGrassSpriteArrayPtr = NULL;
+static bool8 sScheduleOpenDottedHole = FALSE;
 
 static void FieldCallback_CutGrass(void);
 static void FieldCallback_CutTree(void);

@@ -1,6 +1,6 @@
 #include "global.h"
 
-static EWRAM_DATA struct {
+static struct {
     const u16 *src;
     u16 *dest;
     u16 size;

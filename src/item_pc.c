@@ -44,12 +44,12 @@ struct ItemPcStaticResources
     u8 initialized;
 };
 
-static EWRAM_DATA struct ItemPcResources * sStateDataPtr = NULL;
-static EWRAM_DATA u8 * sBg1TilemapBuffer = NULL;
-static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
-static EWRAM_DATA u8 * sUnusedStringAllocation = NULL;
-static EWRAM_DATA struct ItemPcStaticResources sListMenuState = {};
-static EWRAM_DATA u8 sSubmenuWindowIds[3] = {};
+static struct ItemPcResources * sStateDataPtr = NULL;
+static u8 * sBg1TilemapBuffer = NULL;
+static struct ListMenuItem * sListMenuItems = NULL;
+static u8 * sUnusedStringAllocation = NULL;
+static struct ItemPcStaticResources sListMenuState = {};
+static u8 sSubmenuWindowIds[3] = {};
 
 extern const struct CompressedSpriteSheet gBagSwapSpriteSheet;
 extern const struct CompressedSpritePalette gBagSwapSpritePalette;

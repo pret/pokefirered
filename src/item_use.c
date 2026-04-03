@@ -39,7 +39,7 @@
 #include "constants/songs.h"
 #include "constants/field_weather.h"
 
-static EWRAM_DATA void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
+static void (*sItemUseOnFieldCB)(u8 taskId) = NULL;
 
 static void FieldCB_FadeInFromBlack(void);
 static void Task_WaitFadeIn_CallItemUseOnFieldCB(u8 taskId);

@@ -45,7 +45,7 @@ struct WonderCardData
     /*045C*/ u8 bgTilemapBuffer[0x1000];
 };
 
-static EWRAM_DATA struct WonderCardData * sWonderCardData = NULL;
+static struct WonderCardData * sWonderCardData = NULL;
 
 static void BufferCardText(void);
 static void DrawCardWindow(u8 whichWindow);

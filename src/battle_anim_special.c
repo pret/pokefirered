@@ -30,9 +30,9 @@
 #define TAG_PARTICLES_LUXURYBALL  55030
 #define TAG_PARTICLES_PREMIERBALL 55031
 
-COMMON_DATA u32 gMonShrinkDuration = 0;
-COMMON_DATA u16 gMonShrinkDelta = 0;
-COMMON_DATA u16 gMonShrinkDistance = 0;
+u32 gMonShrinkDuration = 0;
+u16 gMonShrinkDelta = 0;
+u16 gMonShrinkDistance = 0;
 
 static void AnimTask_UnusedLevelUpHealthBox_Step(u8);
 static void AnimTask_FlashHealthboxOnLevelUp_Step(u8);

@@ -23,8 +23,8 @@ enum {
     CONTEXT_SHUTDOWN,
 };
 
-EWRAM_DATA u8 gWalkAwayFromSignInhibitTimer = 0;
-EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
+u8 gWalkAwayFromSignInhibitTimer = 0;
+const u8 *gRamScriptRetAddr = NULL;
 
 static u8 sGlobalScriptContextStatus;
 static u32 sUnusedVariable1;

@@ -6,9 +6,9 @@ u8 gHeap[HEAP_SIZE] = {0};
 static void *sHeapStart;
 static u32 sHeapSize;
 
-static EWRAM_DATA struct MemBlock *head = NULL;
-static EWRAM_DATA struct MemBlock *pos = NULL;
-static EWRAM_DATA struct MemBlock *splitBlock = NULL;
+static struct MemBlock *head = NULL;
+static struct MemBlock *pos = NULL;
+static struct MemBlock *splitBlock = NULL;
 
 #define MALLOC_SYSTEM_ID 0xA3A3
 

@@ -74,8 +74,8 @@ struct RfuDebug
     u8 unused4[88];
 };
 
-static EWRAM_DATA INIT_PARAM sRfuReqConfig = {};
-static EWRAM_DATA struct RfuDebug sRfuDebug = {};
+static INIT_PARAM sRfuReqConfig = {};
+static struct RfuDebug sRfuDebug = {};
 
 #if REVISION >= 0xA
 #else
@@ -85,11 +85,11 @@ static u8 sResendBlock8[CMD_LENGTH * 2];
 static u16 sResendBlock16[CMD_LENGTH];
 
 #if REVISION >= 0xA
-COMMON_DATA u32 sRfuAPIBuffer[RFU_API_BUFF_SIZE_RAM / 4] = {0};
+u32 sRfuAPIBuffer[RFU_API_BUFF_SIZE_RAM / 4] = {0};
 #endif
-COMMON_DATA struct RfuGameData gHostRfuGameData = {0};
-COMMON_DATA struct RfuManager gRfu = {0};
-COMMON_DATA u8 gHostRfuUsername[PLAYER_NAME_LENGTH + 1] = {0};
+struct RfuGameData gHostRfuGameData = {0};
+struct RfuManager gRfu = {0};
+u8 gHostRfuUsername[PLAYER_NAME_LENGTH + 1] = {0};
 
 #if REVISION >= 0xA
 u16 ReadU16(const void* ptr);

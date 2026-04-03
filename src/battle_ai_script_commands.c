@@ -39,7 +39,7 @@ in order to read the next command correctly. refer to battle_ai_scripts.s for th
 AI scripts.
 */
 
-static EWRAM_DATA const u8 *sAIScriptPtr = NULL;
+static const u8 *sAIScriptPtr = NULL;
 extern u8 *gBattleAI_ScriptsTable[];
 
 static void Cmd_if_random_less_than(void);

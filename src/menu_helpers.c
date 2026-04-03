@@ -12,9 +12,9 @@
 #include "constants/items.h"
 #include "constants/maps.h"
 
-static EWRAM_DATA const struct YesNoFuncTable *sYesNo = NULL;
-static EWRAM_DATA TaskFunc sMessageNextTask = NULL;
-static EWRAM_DATA u8 sMessageWindowId = {0};
+static const struct YesNoFuncTable *sYesNo = NULL;
+static TaskFunc sMessageNextTask = NULL;
+static u8 sMessageWindowId = {0};
 
 static void Task_ContinueTaskAfterMessagePrints(u8 taskId);
 

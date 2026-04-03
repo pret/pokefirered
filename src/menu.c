@@ -22,11 +22,11 @@ struct Menu
     bool8 APressMuted;
 };
 
-static EWRAM_DATA struct Menu sMenu = {0};
-static EWRAM_DATA u16 sTileNum = 0;
-static EWRAM_DATA u8 sPaletteNum = 0;
-static EWRAM_DATA u8 sYesNoWindowId = 0;
-static EWRAM_DATA u8 sTopBarWindowId = 0;
+static struct Menu sMenu = {0};
+static u16 sTileNum = 0;
+static u8 sPaletteNum = 0;
+static u8 sYesNoWindowId = 0;
+static u8 sTopBarWindowId = 0;
 
 static void WindowFunc_DrawDialogFrameWithCustomTileAndPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);
 static void WindowFunc_ClearDialogWindowAndFrameNullPalette(u8 bg, u8 tilemapLeft, u8 tilemapTop, u8 width, u8 height, u8 paletteNum);

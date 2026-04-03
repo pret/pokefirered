@@ -188,8 +188,8 @@ struct CreditsTaskData
     u16 groundPalTag;
 };
 
-static EWRAM_DATA struct CreditsResources * sCreditsMgr = NULL;
-EWRAM_DATA bool8 gHasHallOfFameRecords = FALSE;
+static struct CreditsResources * sCreditsMgr = NULL;
+bool8 gHasHallOfFameRecords = FALSE;
 
 static void CB2_Credits(void);
 static s32 RollCredits(void);

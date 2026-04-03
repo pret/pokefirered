@@ -8,8 +8,8 @@
 #include "menu_indicators.h"
 #include "constants/songs.h"
 
-static EWRAM_DATA u8 sWindowIds[3] = {};
-static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
+static u8 sWindowIds[3] = {};
+static struct ListMenuItem * sListMenuItems = NULL;
 
 static void MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu * list);
 

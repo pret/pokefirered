@@ -55,13 +55,13 @@ struct MonSpritesGfxManager
     struct SpriteFrameImage *frameImages;
 };
 
-static EWRAM_DATA u8 sLearningMoveTableID = 0;
-EWRAM_DATA u8 gPlayerPartyCount = 0;
-EWRAM_DATA u8 gEnemyPartyCount = 0;
-EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {};
-EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {};
-EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
-static EWRAM_DATA struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
+static u8 sLearningMoveTableID = 0;
+u8 gPlayerPartyCount = 0;
+u8 gEnemyPartyCount = 0;
+struct Pokemon gEnemyParty[PARTY_SIZE] = {};
+struct Pokemon gPlayerParty[PARTY_SIZE] = {};
+struct SpriteTemplate gMultiuseSpriteTemplate = {0};
+static struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
 
 static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
 static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId);

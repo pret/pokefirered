@@ -30,7 +30,7 @@ enum {
     FUNC_RUN,
 };
 
-static EWRAM_DATA struct MysteryGiftServer * sServer = NULL;
+static struct MysteryGiftServer * sServer = NULL;
 
 static void MysteryGiftServer_Init(struct MysteryGiftServer *, const void *, u32, u32);
 static void MysteryGiftServer_Free(struct MysteryGiftServer *);

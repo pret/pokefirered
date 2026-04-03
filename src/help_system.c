@@ -31,8 +31,8 @@ enum HelpSystemTopics
     TOPIC_COUNT
 };
 
-static EWRAM_DATA u16 sHelpSystemContextId = 0;
-static EWRAM_DATA u8 sSeenHelpSystemIntro = 0;
+static u16 sHelpSystemContextId = 0;
+static u8 sSeenHelpSystemIntro = 0;
 
 struct HelpSystemState
 {
@@ -51,8 +51,8 @@ struct HelpSystemState
     u8 scrollSub;
 };
 
-COMMON_DATA struct HelpSystemState gHelpSystemState = {0};
-COMMON_DATA u16 gHelpContextIdBackup = 0;
+struct HelpSystemState gHelpSystemState = {0};
+u16 gHelpContextIdBackup = 0;
 
 static bool32 IsCurrentMapInArray(const u16 * mapIdxs);
 static void BuildMainTopicsListAndMoveToH00(struct HelpSystemListMenu * a0, struct ListMenuItem * a1);

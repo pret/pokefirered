@@ -399,22 +399,22 @@ static void Task_ReplaceMoveWithTMHM(u8 taskId);
 static void CB2_UseEvolutionStone(void);
 static bool8 MonCanEvolve(void);
 
-static EWRAM_DATA struct PartyMenuInternal *sPartyMenuInternal = NULL;
-EWRAM_DATA struct PartyMenu gPartyMenu = {0};
-static EWRAM_DATA struct PartyMenuBox *sPartyMenuBoxes = NULL;
-static EWRAM_DATA u8 *sPartyBgGfxTilemap = NULL;
-static EWRAM_DATA u8 *sPartyBgTilemapBuffer = NULL;
-EWRAM_DATA bool8 gPartyMenuUseExitCallback = FALSE;
-EWRAM_DATA u8 gSelectedMonPartyId = 0;
-EWRAM_DATA MainCallback gPostMenuFieldCallback = NULL;
-static EWRAM_DATA u16 *sSlot1TilemapBuffer = NULL; // for switching party slots
-static EWRAM_DATA u16 *sSlot2TilemapBuffer = NULL;
-static EWRAM_DATA struct Pokemon *sSacredAshQuestLogMonBackup = NULL;
-EWRAM_DATA u8 gSelectedOrderFromParty[3] = {0};
-static EWRAM_DATA u16 sPartyMenuItemId = ITEM_NONE;
-ALIGNED(4) EWRAM_DATA u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2] = {0}; // bits 0-3 are the current pos of Slot 1, 4-7 are Slot 2, and so on
+static struct PartyMenuInternal *sPartyMenuInternal = NULL;
+struct PartyMenu gPartyMenu = {0};
+static struct PartyMenuBox *sPartyMenuBoxes = NULL;
+static u8 *sPartyBgGfxTilemap = NULL;
+static u8 *sPartyBgTilemapBuffer = NULL;
+bool8 gPartyMenuUseExitCallback = FALSE;
+u8 gSelectedMonPartyId = 0;
+MainCallback gPostMenuFieldCallback = NULL;
+static u16 *sSlot1TilemapBuffer = NULL; // for switching party slots
+static u16 *sSlot2TilemapBuffer = NULL;
+static struct Pokemon *sSacredAshQuestLogMonBackup = NULL;
+u8 gSelectedOrderFromParty[3] = {0};
+static u16 sPartyMenuItemId = ITEM_NONE;
+ALIGNED(4) u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2] = {0}; // bits 0-3 are the current pos of Slot 1, 4-7 are Slot 2, and so on
 
-COMMON_DATA void (*gItemUseCB)(u8, TaskFunc) = NULL;
+void (*gItemUseCB)(u8, TaskFunc) = NULL;
 
 #include "data/pokemon/tutor_learnsets.h"
 #include "data/party_menu.h"

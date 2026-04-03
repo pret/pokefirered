@@ -82,7 +82,7 @@ enum {
 // The "static" resources are preserved even if the TM case is exited. This is
 // useful for when its left temporarily (e.g. going to the party menu to teach a TM)
 // but also to preserve the selected item when the TM case is fully closed.
-static EWRAM_DATA struct {
+static struct {
     void (* exitCallback)(void);
     u8 menuType;
     bool8 allowSelectClose;
@@ -92,7 +92,7 @@ static EWRAM_DATA struct {
 } sTMCaseStaticResources = {};
 
 // The "dynamic" resources will be reset any time the TM case is exited, even temporarily.
-static EWRAM_DATA struct {
+static struct {
     void (* nextScreenCallback)(void);
     u8 discSpriteId;
     u8 maxTMsShown;
@@ -107,17 +107,17 @@ static EWRAM_DATA struct {
 } * sTMCaseDynamicResources = NULL;
 
 // Save the player's bag state when the Pokedude's bag is being shown
-static EWRAM_DATA struct {
+static struct {
     struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
     struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
     u16 selectedRow;
     u16 scrollOffset;
 } * sPokedudeBagBackup = NULL;
 
-static EWRAM_DATA void *sTilemapBuffer = NULL;
-static EWRAM_DATA struct ListMenuItem * sListMenuItemsBuffer = NULL;
-static EWRAM_DATA u8 (* sListMenuStringsBuffer)[29] = NULL;
-static EWRAM_DATA u16 * sTMSpritePaletteBuffer = NULL;
+static void *sTilemapBuffer = NULL;
+static struct ListMenuItem * sListMenuItemsBuffer = NULL;
+static u8 (* sListMenuStringsBuffer)[29] = NULL;
+static u16 * sTMSpritePaletteBuffer = NULL;
 
 static void CB2_SetUpTMCaseUI_Blocking(void);
 static bool8 DoSetUpTMCaseUI(void);

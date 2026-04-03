@@ -28,7 +28,7 @@ enum {
     BG_DIPLOMA,
 };
 
-static EWRAM_DATA struct Diploma *sDiploma = NULL;
+static struct Diploma *sDiploma = NULL;
 
 static void DiplomaReset(void);
 static void DiplomaPrintText(void);

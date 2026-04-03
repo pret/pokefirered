@@ -6,7 +6,7 @@
 #include "field_camera.h"
 #include "constants/metatile_labels.h"
 
-static EWRAM_DATA u8 sEscalatorTaskId = 0;
+static u8 sEscalatorTaskId = 0;
 
 static void SetEscalatorMetatile(u8 taskId, const s16 *metatileIds, u16 metatileMasks);
 static void Task_DrawEscalator(u8 taskId);

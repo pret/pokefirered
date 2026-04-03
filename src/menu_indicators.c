@@ -42,7 +42,7 @@ struct ScrollIndicatorTemplate
     s16 frequency;
 };
 
-static EWRAM_DATA struct ScrollArrowsTemplate sTempScrollArrowTemplate = {0};
+static struct ScrollArrowsTemplate sTempScrollArrowTemplate = {0};
 
 static void SpriteCallback_ScrollIndicatorArrow(struct Sprite *sprite);
 static void SpriteCallback_RedArrowCursor(struct Sprite *sprite);

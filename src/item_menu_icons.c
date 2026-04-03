@@ -34,9 +34,9 @@ enum {
     AFFINEANIM_BAG_SHAKE,
 };
 
-static EWRAM_DATA u8 sItemMenuIconSpriteIds[SPR_COUNT] = {0};
-static EWRAM_DATA void *sItemIconTilesBuffer = NULL;
-static EWRAM_DATA void *sItemIconTilesBufferPadded = NULL;
+static u8 sItemMenuIconSpriteIds[SPR_COUNT] = {0};
+static void *sItemIconTilesBuffer = NULL;
+static void *sItemIconTilesBufferPadded = NULL;
 
 static void SpriteCB_BagVisualSwitchingPockets(struct Sprite *sprite);
 static void SpriteCB_ShakeBagSprite(struct Sprite *sprite);

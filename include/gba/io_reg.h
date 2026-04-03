@@ -1,7 +1,7 @@
 #ifndef GUARD_GBA_IO_REG_H
 #define GUARD_GBA_IO_REG_H
 
-#define REG_BASE 0x4000000 // I/O register base address
+extern u8 REG_BASE[];
 
 // I/O register offsets
 

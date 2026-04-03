@@ -25,8 +25,8 @@ static void CreateBattlerTrace(struct Task *task, u8 taskId);
 static void AnimBattlerTrace(struct Sprite *sprite);
 static void AnimWeatherBallUp_Step(struct Sprite *sprite);
 
-static EWRAM_DATA union AffineAnimCmd *sAnimTaskAffineAnim = NULL;
-static EWRAM_DATA u32 sUnused = 0;
+static union AffineAnimCmd *sAnimTaskAffineAnim = NULL;
+static u32 sUnused = 0;
 
 static const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
 {

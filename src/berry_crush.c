@@ -342,7 +342,7 @@ struct BerryCrushGame
     struct BerryCrushGame_Gfx gfx;
 };
 
-static EWRAM_DATA struct BerryCrushGame *sGame = NULL;
+static struct BerryCrushGame *sGame = NULL;
 
 static void SetNamesAndTextSpeed(struct BerryCrushGame *game);
 static void GetBerryFromBag(void);

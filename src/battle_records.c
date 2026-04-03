@@ -16,7 +16,7 @@
 #include "constants/songs.h"
 #include "constants/maps.h"
 
-static EWRAM_DATA u16 * sBg3TilemapBuffer_p = NULL;
+static u16 * sBg3TilemapBuffer_p = NULL;
 
 static void MainCB2_SetUp(void);
 static void VBlankCB(void);

@@ -67,31 +67,31 @@ struct FlagOrVarRecord
     u16 value;
 };
 
-COMMON_DATA u8 gQuestLogPlaybackState = 0;
-COMMON_DATA u16 sMaxActionsInScene = 0;
-COMMON_DATA struct FieldInput gQuestLogFieldInput = {0};
-COMMON_DATA struct QuestLogAction * sCurSceneActions = NULL;
+u8 gQuestLogPlaybackState = 0;
+u16 sMaxActionsInScene = 0;
+struct FieldInput gQuestLogFieldInput = {0};
+struct QuestLogAction * sCurSceneActions = NULL;
 
 static struct FlagOrVarRecord * sFlagOrVarRecords;
 static u16 sNumFlagsOrVars;
 
-static EWRAM_DATA u8 sCurrentSceneNum = 0;
-static EWRAM_DATA u8 sNumScenes = 0;
-EWRAM_DATA u8 gQuestLogState = 0;
-static EWRAM_DATA u16 sRecordSequenceStartIdx = 0;
-static EWRAM_DATA u8 sWindowIds[WIN_COUNT] = {0};
-EWRAM_DATA u16 *gQuestLogDefeatedWildMonRecord = NULL;
-EWRAM_DATA u16 *gQuestLogRecordingPointer = NULL;
-static EWRAM_DATA u16 *sEventData[32] = {NULL};
-static EWRAM_DATA void (* sQuestLogCB)(void) = NULL;
-static EWRAM_DATA u16 *sPalettesBackup = NULL;
-static EWRAM_DATA struct PlaybackControl sPlaybackControl = {0};
-static EWRAM_DATA struct QuestLogAction sQuestLogActionRecordBuffer[SCRIPT_BUFFER_SIZE] = {0};
-EWRAM_DATA u16 gQuestLogCurActionIdx = 0;
-static EWRAM_DATA u8 sMovementScripts[OBJECT_EVENT_TEMPLATES_COUNT][2] = {{0}};
-static EWRAM_DATA u16 sNextActionDelay = 0;
-static EWRAM_DATA u16 sLastQuestLogCursor = 0;
-static EWRAM_DATA u16 sFlagOrVarPlayhead = 0;
+static u8 sCurrentSceneNum = 0;
+static u8 sNumScenes = 0;
+u8 gQuestLogState = 0;
+static u16 sRecordSequenceStartIdx = 0;
+static u8 sWindowIds[WIN_COUNT] = {0};
+u16 *gQuestLogDefeatedWildMonRecord = NULL;
+u16 *gQuestLogRecordingPointer = NULL;
+static u16 *sEventData[32] = {NULL};
+static void (* sQuestLogCB)(void) = NULL;
+static u16 *sPalettesBackup = NULL;
+static struct PlaybackControl sPlaybackControl = {0};
+static struct QuestLogAction sQuestLogActionRecordBuffer[SCRIPT_BUFFER_SIZE] = {0};
+u16 gQuestLogCurActionIdx = 0;
+static u8 sMovementScripts[OBJECT_EVENT_TEMPLATES_COUNT][2] = {{0}};
+static u16 sNextActionDelay = 0;
+static u16 sLastQuestLogCursor = 0;
+static u16 sFlagOrVarPlayhead = 0;
 
 static void QLogCB_Recording(void);
 static void QLogCB_Playback(void);

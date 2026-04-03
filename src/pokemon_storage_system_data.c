@@ -12,14 +12,14 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 
-static EWRAM_DATA struct Pokemon sMonBeingCarried = {};
-static EWRAM_DATA s8 sCursorArea = 0;
-static EWRAM_DATA s8 sCursorPosition = 0;
-static EWRAM_DATA bool8 sIsMonBeingMoved = FALSE;
-static EWRAM_DATA u8 sMovingMonOrigBoxId = 0;
-static EWRAM_DATA u8 sMovingMonOrigBoxPos = 0;
-static EWRAM_DATA bool8 sInMultiMoveMode = FALSE;
-static EWRAM_DATA u8 sSavedCursorPosition = 0;
+static struct Pokemon sMonBeingCarried = {};
+static s8 sCursorArea = 0;
+static s8 sCursorPosition = 0;
+static bool8 sIsMonBeingMoved = FALSE;
+static u8 sMovingMonOrigBoxId = 0;
+static u8 sMovingMonOrigBoxPos = 0;
+static bool8 sInMultiMoveMode = FALSE;
+static u8 sSavedCursorPosition = 0;
 
 static void DoCursorNewPosUpdate(void);
 static bool8 MonPlaceChange_Grab(void);

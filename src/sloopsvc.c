@@ -14,8 +14,8 @@ typedef struct _SloopSvc47Params {
 
 static u8 sBadWordAsciiString[256];
 
-COMMON_DATA SloopSvc47Params gSvc47Params = {0};
-COMMON_DATA struct RfuLinkStatus *gSloopRfuLinkStatus = NULL;
+SloopSvc47Params gSvc47Params = {0};
+struct RfuLinkStatus *gSloopRfuLinkStatus = NULL;
 
 // Syscall functions for the extra syscalls handled by the Sloop emulator.
 #define SLOOP_SVC_CLOBBERS "r0", "r1", "r2", "r3", "memory"

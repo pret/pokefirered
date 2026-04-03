@@ -13,7 +13,7 @@ struct ClearSaveDataStruct {
     u8 unk2;
 };
 
-static EWRAM_DATA struct ClearSaveDataStruct * sClearSaveDataState = NULL;
+static struct ClearSaveDataStruct * sClearSaveDataState = NULL;
 
 static void Task_DrawClearSaveDataScreen(u8 taskId);
 static void Task_HandleYesNoMenu(u8 taskId);

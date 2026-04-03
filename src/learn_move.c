@@ -150,7 +150,7 @@ struct LearnMoveGfxResources
     u16 listMenuScrollRow;
 };
 
-static EWRAM_DATA struct LearnMoveGfxResources * sMoveRelearner = NULL;
+static struct LearnMoveGfxResources * sMoveRelearner = NULL;
 
 static void Task_InitMoveRelearnerMenu(u8 taskId);
 static void CB2_MoveRelearner_Init(void);

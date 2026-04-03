@@ -6,8 +6,8 @@
 #include "event_data.h"
 #include "field_screen_effect.h"
 
-EWRAM_DATA u8 gNumSafariBalls = 0;
-EWRAM_DATA u16 gSafariZoneStepCounter = 0;
+u8 gNumSafariBalls = 0;
+u16 gSafariZoneStepCounter = 0;
 
 bool32 GetSafariZoneFlag(void)
 {

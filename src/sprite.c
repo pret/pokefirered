@@ -270,22 +270,22 @@ static u16 sSpriteTileRanges[MAX_SPRITES * 2];
 static struct AffineAnimState sAffineAnimStates[OAM_MATRIX_COUNT];
 static u16 sSpritePaletteTags[16];
 
-COMMON_DATA u32 gOamMatrixAllocBitmap = 0;
-COMMON_DATA u8 gReservedSpritePaletteCount = 0;
+u32 gOamMatrixAllocBitmap = 0;
+u8 gReservedSpritePaletteCount = 0;
 
-EWRAM_DATA struct Sprite gSprites[MAX_SPRITES + 1] = {0};
-EWRAM_DATA u16 gSpritePriorities[MAX_SPRITES] = {0};
-EWRAM_DATA u8 gSpriteOrder[MAX_SPRITES] = {0};
-EWRAM_DATA bool8 gShouldProcessSpriteCopyRequests = 0;
-EWRAM_DATA u8 gSpriteCopyRequestCount = 0;
-EWRAM_DATA struct SpriteCopyRequest gSpriteCopyRequests[MAX_SPRITES] = {0};
-EWRAM_DATA u8 gOamLimit = 0;
-EWRAM_DATA u16 gReservedSpriteTileCount = 0;
-EWRAM_DATA u8 gSpriteTileAllocBitmap[128] = {0};
-EWRAM_DATA s16 gSpriteCoordOffsetX = 0;
-EWRAM_DATA s16 gSpriteCoordOffsetY = 0;
-EWRAM_DATA struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT] = {0};
-EWRAM_DATA bool8 gAffineAnimsDisabled = 0;
+struct Sprite gSprites[MAX_SPRITES + 1] = {0};
+u16 gSpritePriorities[MAX_SPRITES] = {0};
+u8 gSpriteOrder[MAX_SPRITES] = {0};
+bool8 gShouldProcessSpriteCopyRequests = 0;
+u8 gSpriteCopyRequestCount = 0;
+struct SpriteCopyRequest gSpriteCopyRequests[MAX_SPRITES] = {0};
+u8 gOamLimit = 0;
+u16 gReservedSpriteTileCount = 0;
+u8 gSpriteTileAllocBitmap[128] = {0};
+s16 gSpriteCoordOffsetX = 0;
+s16 gSpriteCoordOffsetY = 0;
+struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT] = {0};
+bool8 gAffineAnimsDisabled = 0;
 
 void ResetSpriteData(void)
 {

@@ -16,8 +16,8 @@ enum
 };
 
 #define ROAMER (&gSaveBlock1Ptr->roamer)
-EWRAM_DATA u8 sLocationHistory[3][2] = {};
-EWRAM_DATA u8 sRoamerLocation[2] = {};
+u8 sLocationHistory[3][2] = {};
+u8 sRoamerLocation[2] = {};
 
 #define ___ MAP_NUM(MAP_UNDEFINED) // For empty spots in the location table
 

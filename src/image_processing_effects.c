@@ -4,16 +4,16 @@
 #define MAX_DIMENSION 64
 
 // IWRAM common
-COMMON_DATA u8 gCanvasColumnStart = 0;
-COMMON_DATA u16 *gCanvasPixels = NULL;
-COMMON_DATA u8 gCanvasRowEnd = 0;
-COMMON_DATA u8 gCanvasHeight = 0;
-COMMON_DATA u8 gCanvasColumnEnd = 0;
-COMMON_DATA u8 gCanvasRowStart = 0;
-COMMON_DATA u8 gCanvasMonPersonality = 0;
-COMMON_DATA u8 gCanvasWidth = 0;
-COMMON_DATA u16 *gCanvasPalette = NULL;
-COMMON_DATA u16 gCanvasPaletteStart = 0;
+u8 gCanvasColumnStart = 0;
+u16 *gCanvasPixels = NULL;
+u8 gCanvasRowEnd = 0;
+u8 gCanvasHeight = 0;
+u8 gCanvasColumnEnd = 0;
+u8 gCanvasRowStart = 0;
+u8 gCanvasMonPersonality = 0;
+u8 gCanvasWidth = 0;
+u16 *gCanvasPalette = NULL;
+u16 gCanvasPaletteStart = 0;
 
 static void ApplyImageEffect_Pointillism(void);
 static void ApplyImageEffect_Blur(void);

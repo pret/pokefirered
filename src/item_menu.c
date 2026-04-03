@@ -63,16 +63,16 @@ struct BagSlots
     u16 pocket;
 };
 
-EWRAM_DATA struct BagStruct gBagMenuState = {};
-static EWRAM_DATA struct BagMenuAlloc * sBagMenuDisplay = NULL;
-static EWRAM_DATA void *sBagBgTilemapBuffer = NULL;
-static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
-static EWRAM_DATA u8 (*sListMenuItemStrings)[19] = NULL;
-static EWRAM_DATA u8 sContextMenuItemsBuffer[4] = {};
-static EWRAM_DATA const u8 *sContextMenuItemsPtr = NULL;
-static EWRAM_DATA u8 sContextMenuNumItems = 0;
-static EWRAM_DATA struct BagSlots * sBackupPlayerBag = NULL;
-EWRAM_DATA u16 gSpecialVar_ItemId = ITEM_NONE;
+struct BagStruct gBagMenuState = {};
+static struct BagMenuAlloc * sBagMenuDisplay = NULL;
+static void *sBagBgTilemapBuffer = NULL;
+static struct ListMenuItem * sListMenuItems = NULL;
+static u8 (*sListMenuItemStrings)[19] = NULL;
+static u8 sContextMenuItemsBuffer[4] = {};
+static const u8 *sContextMenuItemsPtr = NULL;
+static u8 sContextMenuNumItems = 0;
+static struct BagSlots * sBackupPlayerBag = NULL;
+u16 gSpecialVar_ItemId = ITEM_NONE;
 
 static void CB2_OpenBagMenu(void);
 static bool8 LoadBagMenuGraphics(void);

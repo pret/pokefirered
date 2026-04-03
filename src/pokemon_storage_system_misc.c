@@ -12,7 +12,7 @@
 #include "trig.h"
 #include "constants/items.h"
 
-static EWRAM_DATA struct
+static struct
 {
     u8 funcId;
     u8 state;
@@ -1343,7 +1343,7 @@ static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite)
 //  Storage with UnkUtil_Run, but neither of the Add functions are ever used,
 //  so UnkUtil_Run performs no actions.
 
-static EWRAM_DATA struct UnkUtil *sUnkUtil = NULL;
+static struct UnkUtil *sUnkUtil = NULL;
 
 static void UnkUtil_CpuRun(struct UnkUtilData *unkStruct);
 static void UnkUtil_DmaRun(struct UnkUtilData *unkStruct);

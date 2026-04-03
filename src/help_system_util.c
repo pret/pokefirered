@@ -10,7 +10,7 @@
 
 #define ZERO 0
 
-COMMON_DATA bool8 gHelpSystemEnabled = 0;
+bool8 gHelpSystemEnabled = 0;
 
 struct HelpSystemVideoState
 {
@@ -25,14 +25,14 @@ struct HelpSystemVideoState
     /*0x15*/ u8 state;
 };
 
-static EWRAM_DATA u8 sMapTilesBackup[BG_CHAR_SIZE] = {0};
-EWRAM_DATA u8 gDisableHelpSystemVolumeReduce = 0;
-EWRAM_DATA bool8 gHelpSystemToggleWithRButtonDisabled = FALSE;
-static EWRAM_DATA u8 sDelayTimer = 0;
-static EWRAM_DATA u8 sInHelpSystem = 0;
-static EWRAM_DATA struct HelpSystemVideoState sVideoState = {0};
-EWRAM_DATA struct HelpSystemListMenu gHelpSystemListMenu = {0};
-EWRAM_DATA struct ListMenuItem gHelpSystemListMenuItems[52] = {0};
+static u8 sMapTilesBackup[BG_CHAR_SIZE] = {0};
+u8 gDisableHelpSystemVolumeReduce = 0;
+bool8 gHelpSystemToggleWithRButtonDisabled = FALSE;
+static u8 sDelayTimer = 0;
+static u8 sInHelpSystem = 0;
+static struct HelpSystemVideoState sVideoState = {0};
+struct HelpSystemListMenu gHelpSystemListMenu = {0};
+struct ListMenuItem gHelpSystemListMenuItems[52] = {0};
 
 static const u16 sTiles[] = INCBIN_U16("graphics/help_system/bg_tiles.4bpp");
 static const u16 sPals[] = INCBIN_U16("graphics/help_system/bg_tiles.gbapal");

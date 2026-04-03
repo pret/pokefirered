@@ -63,71 +63,71 @@ static u16 sRecvNonzeroCheck;
 static u8 sChecksumAvailable;
 static u8 sHandshakePlayerCount;
 
-COMMON_DATA u16 gLinkPartnersHeldKeys[6] = {0};
-COMMON_DATA u32 gLinkDebugSeed = 0;
-COMMON_DATA struct LinkPlayerBlock gLocalLinkPlayerBlock = {0};
-COMMON_DATA bool8 gLinkErrorOccurred = 0;
-COMMON_DATA u32 gLinkDebugFlags = 0;
+u16 gLinkPartnersHeldKeys[6] = {0};
+u32 gLinkDebugSeed = 0;
+struct LinkPlayerBlock gLocalLinkPlayerBlock = {0};
+bool8 gLinkErrorOccurred = 0;
+u32 gLinkDebugFlags = 0;
 #if REVISION >= 0xA
 #else
-COMMON_DATA u32 gLinkFiller1 = 0;
+u32 gLinkFiller1 = 0;
 #endif
-COMMON_DATA bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS] = {0};
-COMMON_DATA u8 gBlockReceivedStatus[MAX_LINK_PLAYERS] = {0};
-COMMON_DATA u32 gLinkFiller2 = 0;
-COMMON_DATA u16 gLinkHeldKeys = 0;
-COMMON_DATA u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH] = {0};
-COMMON_DATA u32 gLinkStatus = 0;
-COMMON_DATA bool8 gLinkDummy1 = 0; // Never read
-COMMON_DATA bool8 gLinkDummy2 = 0; // Never read
-COMMON_DATA bool8 gReadyToExitStandby[MAX_LINK_PLAYERS] = {0};
-COMMON_DATA bool8 gReadyToCloseLink[MAX_LINK_PLAYERS] = {0};
-COMMON_DATA u16 gReadyCloseLinkType = 0;
-COMMON_DATA u8 gSuppressLinkErrorMessage = 0;
-COMMON_DATA u8 gWirelessCommType = 0;
-COMMON_DATA u8 gSavedLinkPlayerCount = 0;
-COMMON_DATA u16 gSendCmd[CMD_LENGTH] = {0};
-COMMON_DATA u8 gSavedMultiplayerId = 0;
-COMMON_DATA bool8 gReceivedRemoteLinkPlayers = 0;
+bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS] = {0};
+u8 gBlockReceivedStatus[MAX_LINK_PLAYERS] = {0};
+u32 gLinkFiller2 = 0;
+u16 gLinkHeldKeys = 0;
+u16 gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH] = {0};
+u32 gLinkStatus = 0;
+bool8 gLinkDummy1 = 0; // Never read
+bool8 gLinkDummy2 = 0; // Never read
+bool8 gReadyToExitStandby[MAX_LINK_PLAYERS] = {0};
+bool8 gReadyToCloseLink[MAX_LINK_PLAYERS] = {0};
+u16 gReadyCloseLinkType = 0;
+u8 gSuppressLinkErrorMessage = 0;
+u8 gWirelessCommType = 0;
+u8 gSavedLinkPlayerCount = 0;
+u16 gSendCmd[CMD_LENGTH] = {0};
+u8 gSavedMultiplayerId = 0;
+bool8 gReceivedRemoteLinkPlayers = 0;
 #if REVISION >= 0xA
 // all references to this are gone anyway
 #else
-COMMON_DATA struct LinkTestBGInfo gLinkTestBGInfo = {0};
+struct LinkTestBGInfo gLinkTestBGInfo = {0};
 #endif
-COMMON_DATA void (*gLinkCallback)(void) = NULL;
-COMMON_DATA u8 gShouldAdvanceLinkState = 0;
-COMMON_DATA u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS] = {0};
-COMMON_DATA u8 gBlockRequestType = 0;
-COMMON_DATA u32 gLinkFiller3 = 0; // file
+void (*gLinkCallback)(void) = NULL;
+u8 gShouldAdvanceLinkState = 0;
+u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS] = {0};
+u8 gBlockRequestType = 0;
+u32 gLinkFiller3 = 0; // file
 #if REVISION >= 0xA
 #else
-COMMON_DATA u32 gLinkFiller4 = 0; // boundary
-COMMON_DATA u32 gLinkFiller5 = 0; // here?
+u32 gLinkFiller4 = 0; // boundary
+u32 gLinkFiller5 = 0; // here?
 #endif
-COMMON_DATA u8 gLastSendQueueCount = 0;
-COMMON_DATA struct Link gLink = {0};
-COMMON_DATA u8 gLastRecvQueueCount = 0;
-COMMON_DATA u16 gLinkSavedIme = 0;
+u8 gLastSendQueueCount = 0;
+struct Link gLink = {0};
+u8 gLastRecvQueueCount = 0;
+u16 gLinkSavedIme = 0;
 
-static EWRAM_DATA bool8 sLinkTestDebugValuesEnabled = FALSE;
-static EWRAM_DATA bool8 sDummyFlag = FALSE;
-EWRAM_DATA u32 gBerryBlenderKeySendAttempts = 0;
-EWRAM_DATA u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2] = {};
-EWRAM_DATA u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE] = {};
-static EWRAM_DATA bool8 sLinkOpen = FALSE;
-EWRAM_DATA u16 gLinkType = 0;
-static EWRAM_DATA u16 sTimeOutCounter = 0;
-EWRAM_DATA struct LinkPlayer gLocalLinkPlayer = {};
-EWRAM_DATA struct LinkPlayer gLinkPlayers[MAX_RFU_PLAYERS] = {};
-EWRAM_DATA struct LinkPlayer gSavedLinkPlayers[MAX_RFU_PLAYERS] = {};
-EWRAM_DATA struct {
+static bool8 sLinkTestDebugValuesEnabled = FALSE;
+static bool8 sDummyFlag = FALSE;
+u32 gBerryBlenderKeySendAttempts = 0;
+u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2] = {};
+u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE] = {};
+static bool8 sLinkOpen = FALSE;
+u16 gLinkType = 0;
+static u16 sTimeOutCounter = 0;
+struct LinkPlayer gLocalLinkPlayer = {};
+struct LinkPlayer gLinkPlayers[MAX_RFU_PLAYERS] = {};
+struct LinkPlayer gSavedLinkPlayers[MAX_RFU_PLAYERS] = {};
+struct {
     u32 status;
     u8 lastRecvQueueCount;
     u8 lastSendQueueCount;
     bool8 disconnected;
 } sLinkErrorBuffer = {};
-static EWRAM_DATA u16 sReadyCloseLinkAttempts = 0; // never read
-static EWRAM_DATA void *sLinkErrorBgTilemapBuffer = NULL;
+static u16 sReadyCloseLinkAttempts = 0; // never read
+static void *sLinkErrorBgTilemapBuffer = NULL;
 
 void Task_WirelessCommunicationScreen(u8 taskId);
 void Task_MysteryGift(u8 taskId);

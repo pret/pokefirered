@@ -14,8 +14,8 @@ struct PicData
 
 #define PICS_COUNT 8
 
-static EWRAM_DATA struct SpriteTemplate sCreatingSpriteTemplate = {};
-static EWRAM_DATA struct PicData sSpritePics[PICS_COUNT] = {};
+static struct SpriteTemplate sCreatingSpriteTemplate = {};
+static struct PicData sSpritePics[PICS_COUNT] = {};
 
 static const struct PicData sDummyPicData = {};
 

@@ -72,7 +72,7 @@ struct UnionRoomChat
     u8 sendMessageBuffer[0x28];
 };
 
-static EWRAM_DATA struct UnionRoomChat * sWork = NULL;
+static struct UnionRoomChat * sWork = NULL;
 
 static void InitChatWork(struct UnionRoomChat * unionRoomChat);
 static void CB2_LoadInterface(void);

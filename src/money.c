@@ -7,7 +7,7 @@
 
 #define MAX_MONEY 999999
 
-EWRAM_DATA static u8 sMoneyBoxWindowId = 0;
+static u8 sMoneyBoxWindowId = 0;
 
 u32 GetMoney(u32 *moneyPtr)
 {

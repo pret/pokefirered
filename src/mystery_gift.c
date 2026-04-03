@@ -50,7 +50,7 @@ static const u16 sReceivedGiftFlags[] = {
     FLAG_WONDER_CARD_UNUSED_17
 };
 
-static EWRAM_DATA bool32 sStatsEnabled = FALSE;
+static bool32 sStatsEnabled = FALSE;
 
 void ClearMysteryGift(void)
 {

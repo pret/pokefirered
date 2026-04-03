@@ -20,7 +20,7 @@ enum {
     FUNC_RUN_BUFFER,
 };
 
-static EWRAM_DATA struct MysteryGiftClient * sClient = NULL;
+static struct MysteryGiftClient * sClient = NULL;
 
 static void MysteryGiftClient_Init(struct MysteryGiftClient *, u32, u32);
 static u32 MysteryGiftClient_CallFunc(struct MysteryGiftClient *);

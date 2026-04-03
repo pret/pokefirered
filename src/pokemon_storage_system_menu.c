@@ -15,8 +15,8 @@
 #include "constants/field_weather.h"
 #include "constants/help_system.h"
 
-static EWRAM_DATA u8 sPreviousBoxOption = 0;
-static EWRAM_DATA struct ChooseBoxMenu *sChooseBoxMenu = NULL;
+static u8 sPreviousBoxOption = 0;
+static struct ChooseBoxMenu *sChooseBoxMenu = NULL;
 
 static void CreatePCMainMenu(u8 whichMenu, s16 *windowIdPtr);
 static void ChooseBoxMenu_CreateSprites(u8 curBox);

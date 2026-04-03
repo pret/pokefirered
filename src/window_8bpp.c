@@ -1,8 +1,8 @@
 #include "global.h"
 #include "gflib.h"
 
-EWRAM_DATA static struct Window* sWindowPtr = NULL;
-EWRAM_DATA static u16 sWindowSize = 0;
+static struct Window* sWindowPtr = NULL;
+static u16 sWindowSize = 0;
 
 static u8 GetNumActiveWindowsOnBg8Bit(u8 bgId);
 

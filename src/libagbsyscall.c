@@ -1,4 +1,15 @@
 #include "global.h"
+#include "gba/flash_internal.h"
+
+u8 REG_BASE[0x400];
+struct SoundInfo *SOUND_INFO_PTR;
+u16 INTR_CHECK;
+void *INTR_VECTOR;
+u8 PLTT[PLTT_SIZE];
+u32 VRAM[VRAM_SIZE/sizeof(u32)];
+u8 OAM[OAM_SIZE];
+u8 FLASH_BASE[FLASH_ROM_SIZE_1M];
+
 const s16 sineTable[256] = {
   (s16)0x0000, (s16)0x0192, (s16)0x0323, (s16)0x04B5, (s16)0x0645, (s16)0x07D5, (s16)0x0964, (s16)0x0AF1,
   (s16)0x0C7C, (s16)0x0E05, (s16)0x0F8C, (s16)0x1111, (s16)0x1294, (s16)0x1413, (s16)0x158F, (s16)0x1708,

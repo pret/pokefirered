@@ -43,7 +43,7 @@ static struct BgConfig2 sGpuBgConfigs2[4];
 static u32 sDmaBusyBitfield[4];
 static u8 gpu_tile_allocation_map_bg[0x100];
 
-COMMON_DATA bool32 gWindowTileAutoAllocEnabled = 0;
+bool32 gWindowTileAutoAllocEnabled = 0;
 
 static const struct BgConfig sZeroedBgControlStruct = { 0 };
 
@@ -1207,8 +1207,6 @@ bool32 IsInvalidBg32(u8 bg)
 
 bool32 IsTileMapOutsideWram(u8 bg)
 {
-    if (sGpuBgConfigs2[bg].tilemap > (void *)IWRAM_END)
-        return TRUE;
     if (sGpuBgConfigs2[bg].tilemap == 0x0)
         return TRUE;
     return FALSE;

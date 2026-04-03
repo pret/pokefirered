@@ -72,7 +72,7 @@ struct MailViewResources {
     u16 bg2TilemapBuffer[BG_SCREEN_SIZE];
 };
 
-static EWRAM_DATA struct MailViewResources * sMailViewResources = NULL;
+static struct MailViewResources * sMailViewResources = NULL;
 
 static void CB2_InitMailView(void);
 static void BufferMailMessage(void);

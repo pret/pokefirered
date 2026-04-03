@@ -116,7 +116,7 @@ struct {
     /*0x10A*/ u8 win0top;
     /*0x10B*/ u8 win0right;
     /*0x10C*/ u8 win0bottom;
-} static EWRAM_DATA * sTradeAnim = NULL;
+} static * sTradeAnim = NULL;
 
 static void SpriteCB_LinkMonGlow(struct Sprite *sprite);
 static void SpriteCB_LinkMonGlowWireless(struct Sprite *sprite);

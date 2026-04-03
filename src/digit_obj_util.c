@@ -39,7 +39,7 @@ static bool32 SharesPalWithAnyActive(u32 id);
 static u8 GetTilesPerImage(u32 shape, u32 size);
 
 // ewram
-static EWRAM_DATA struct DigitPrinterAlloc *sOamWork = {0};
+static struct DigitPrinterAlloc *sOamWork = {0};
 
 // const rom data
 static const u8 sTilesPerImage[4][4] =

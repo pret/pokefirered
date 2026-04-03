@@ -26,13 +26,13 @@
 #include "constants/help_system.h"
 #include "constants/songs.h"
 
-EWRAM_DATA struct PokemonStorageSystemData *gStorage = NULL;
-static EWRAM_DATA bool8 sInPartyMenu = 0;
-static EWRAM_DATA u8 sCurrentBoxOption = 0;
-static EWRAM_DATA u8 sDepositBoxId = 0;
-static EWRAM_DATA u8 sWhichToReshow = 0;
-static EWRAM_DATA u8 sLastUsedBox = 0;
-static EWRAM_DATA u16 sMovingItemId = ITEM_NONE;
+struct PokemonStorageSystemData *gStorage = NULL;
+static bool8 sInPartyMenu = 0;
+static u8 sCurrentBoxOption = 0;
+static u8 sDepositBoxId = 0;
+static u8 sWhichToReshow = 0;
+static u8 sLastUsedBox = 0;
+static u16 sMovingItemId = ITEM_NONE;
 
 static void Task_InitPokeStorage(u8 taskId);
 static void Task_ShowPokeStorage(u8 taskId);

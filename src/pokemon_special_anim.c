@@ -12,9 +12,9 @@
 // Functions related to the special anims Pokemon
 // make when using an item on them in the field.
 
-static EWRAM_DATA bool32 sCancelDisabled = FALSE;
-static EWRAM_DATA u8 sPSATaskId = 0;
-static EWRAM_DATA struct PokemonSpecialAnim * sPSAWork = NULL;
+static bool32 sCancelDisabled = FALSE;
+static u8 sPSATaskId = 0;
+static struct PokemonSpecialAnim * sPSAWork = NULL;
 
 static struct PokemonSpecialAnim * AllocPSA(u8 slotId, u16 itemId, MainCallback callback);
 static void SetUpUseItemAnim_Normal(struct PokemonSpecialAnim * ptr);

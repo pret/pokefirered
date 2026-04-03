@@ -23,8 +23,8 @@
 #include "constants/songs.h"
 #include "constants/union_room.h"
 
-EWRAM_DATA u8 sDownArrowCounterAndYCoordIdx[8] = {};
-EWRAM_DATA bool8 gGiftIsFromEReader = FALSE;
+u8 sDownArrowCounterAndYCoordIdx[8] = {};
+bool8 gGiftIsFromEReader = FALSE;
 
 static void CreateMysteryGiftTask(void);
 void Task_MysteryGift(u8 taskId);

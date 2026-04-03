@@ -22,7 +22,7 @@ struct UnionRoomChat3
     u16 cursorBlinkTimer;
 };
 
-static EWRAM_DATA struct UnionRoomChat3 *sWork = NULL;
+static struct UnionRoomChat3 *sWork = NULL;
 
 static void SpriteCB_TextEntryCursor(struct Sprite *sprite);
 static void SpriteCB_CharacterSelectCursor(struct Sprite *sprite);

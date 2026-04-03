@@ -71,16 +71,16 @@ static void CB2_EndTrainerBattle(void);
 static const u8 *GetIntroSpeechOfApproachingTrainer(void);
 static const u8 *GetTrainerCantBattleSpeech(void);
 
-static EWRAM_DATA u16 sTrainerBattleMode = 0;
-EWRAM_DATA u16 gTrainerBattleOpponent_A = 0;
-static EWRAM_DATA u16 sTrainerObjectEventLocalId = 0;
-static EWRAM_DATA u8 *sTrainerAIntroSpeech = NULL;
-static EWRAM_DATA u8 *sTrainerADefeatSpeech = NULL;
-static EWRAM_DATA u8 *sTrainerVictorySpeech = NULL;
-static EWRAM_DATA u8 *sTrainerCannotBattleSpeech = NULL;
-static EWRAM_DATA u8 *sTrainerBattleEndScript = NULL;
-static EWRAM_DATA u8 *sTrainerABattleScriptRetAddr = NULL;
-static EWRAM_DATA u16 sRivalBattleFlags = 0;
+static u16 sTrainerBattleMode = 0;
+u16 gTrainerBattleOpponent_A = 0;
+static u16 sTrainerObjectEventLocalId = 0;
+static u8 *sTrainerAIntroSpeech = NULL;
+static u8 *sTrainerADefeatSpeech = NULL;
+static u8 *sTrainerVictorySpeech = NULL;
+static u8 *sTrainerCannotBattleSpeech = NULL;
+static u8 *sTrainerBattleEndScript = NULL;
+static u8 *sTrainerABattleScriptRetAddr = NULL;
+static u16 sRivalBattleFlags = 0;
 
 // The first transition is used if the enemy pokemon are lower level than our pokemon.
 // Otherwise, the second transition is used.

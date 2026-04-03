@@ -12,7 +12,7 @@
 
 #define MAX_BERRY_POWDER 99999
 
-static EWRAM_DATA u8 sBerryPowderVendorWindowId = 0;
+static u8 sBerryPowderVendorWindowId = 0;
 
 u32 DecryptBerryPowder(u32 *powder)
 {

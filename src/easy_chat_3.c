@@ -62,7 +62,7 @@ struct EasyChatPhraseFrameDimensions
     u8 height;
 };
 
-static EWRAM_DATA struct ECWork * sEasyChatGraphicsResources = NULL;
+static struct ECWork * sEasyChatGraphicsResources = NULL;
 
 static bool8 ECInterfaceCmd_01(void);
 static bool8 ECInterfaceCmd_02(void);

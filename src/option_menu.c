@@ -44,7 +44,7 @@ struct OptionMenu
     /*0x12*/ u8 loadPaletteState;
 };
 
-static EWRAM_DATA struct OptionMenu *sOptionMenuPtr = NULL;
+static struct OptionMenu *sOptionMenuPtr = NULL;
 
 //Function Declarataions
 static void CB2_InitOptionMenu(void);

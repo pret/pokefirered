@@ -1,14 +1,14 @@
 #include "global.h"
 #include "gflib.h"
 
-EWRAM_DATA u8 gStringVar1[32] = {};
-EWRAM_DATA u8 gStringVar2[20] = {};
-EWRAM_DATA u8 gStringVar3[20] = {};
-EWRAM_DATA u8 gStringVar4[1000] = {};
+u8 gStringVar1[32] = {};
+u8 gStringVar2[20] = {};
+u8 gStringVar3[20] = {};
+u8 gStringVar4[1000] = {};
 #if REVISION >= 0xA
-EWRAM_DATA u8 gUnknownStringVar[12] = {0};
+u8 gUnknownStringVar[12] = {0};
 #else
-EWRAM_DATA u8 gUnknownStringVar[16] = {0};
+u8 gUnknownStringVar[16] = {0};
 #endif
 
 static const u8 sDigits[] = __("0123456789ABCDEF");

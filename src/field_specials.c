@@ -42,16 +42,16 @@
 #include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
 
-static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
-static EWRAM_DATA u16 sElevatorScroll = 0;
-static EWRAM_DATA u16 sElevatorCursorPos = 0;
-static EWRAM_DATA struct ListMenuItem * sListMenuItems = NULL;
-static EWRAM_DATA u16 sListMenuLastScrollPosition = 0;
-static EWRAM_DATA u8 sPCBoxToSendMon = 0;
-static EWRAM_DATA u8 sBrailleTextCursorSpriteID = 0;
+static u8 sElevatorCurrentFloorWindowId = 0;
+static u16 sElevatorScroll = 0;
+static u16 sElevatorCursorPos = 0;
+static struct ListMenuItem * sListMenuItems = NULL;
+static u16 sListMenuLastScrollPosition = 0;
+static u8 sPCBoxToSendMon = 0;
+static u8 sBrailleTextCursorSpriteID = 0;
 
-COMMON_DATA struct ListMenuTemplate sFieldSpecialsListMenuTemplate = {0};
-COMMON_DATA u16 sFieldSpecialsListMenuScrollBuffer = 0;
+struct ListMenuTemplate sFieldSpecialsListMenuTemplate = {0};
+u16 sFieldSpecialsListMenuScrollBuffer = 0;
 
 static void Task_AnimatePcTurnOn(u8 taskId);
 static void PcTurnOnUpdateMetatileId(bool16 flag);

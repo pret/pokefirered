@@ -31,8 +31,8 @@ struct WildEncounterData
     u16 leadMonHeldItem;
 };
 
-static EWRAM_DATA struct WildEncounterData sWildEncounterData = {};
-static EWRAM_DATA bool8 sWildEncountersDisabled = FALSE;
+static struct WildEncounterData sWildEncounterData = {};
+static bool8 sWildEncountersDisabled = FALSE;
 
 static bool8 UnlockedTanobyOrAreNotInTanoby(void);
 static u32 GenerateUnownPersonalityByLetter(u8 letter);

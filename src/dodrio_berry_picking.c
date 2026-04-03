@@ -235,13 +235,13 @@ struct DodrioGame
     /*0x3308*/ struct DodrioGame_ScoreResults scoreResults[MAX_RFU_PLAYERS];
 }; // size = 0x3330
 
-static EWRAM_DATA struct DodrioGame * sGame = NULL;
-static EWRAM_DATA u16 *sDodrioSpriteIds[MAX_RFU_PLAYERS] = {NULL};
-static EWRAM_DATA u16 *sCloudSpriteIds[NUM_CLOUDS] = {NULL};
-static EWRAM_DATA u16 *sBerrySpriteIds[NUM_BERRY_COLUMNS] = {NULL};
-static EWRAM_DATA u16 *sBerryIconSpriteIds[NUM_BERRY_TYPES] = {NULL};
-static EWRAM_DATA struct StatusBar * sStatusBar = NULL;
-static EWRAM_DATA struct DodrioGame_Gfx * sGfx = NULL;
+static struct DodrioGame * sGame = NULL;
+static u16 *sDodrioSpriteIds[MAX_RFU_PLAYERS] = {NULL};
+static u16 *sCloudSpriteIds[NUM_CLOUDS] = {NULL};
+static u16 *sBerrySpriteIds[NUM_BERRY_COLUMNS] = {NULL};
+static u16 *sBerryIconSpriteIds[NUM_BERRY_TYPES] = {NULL};
+static struct StatusBar * sStatusBar = NULL;
+static struct DodrioGame_Gfx * sGfx = NULL;
 
 static bool32 sExitingGame;
 

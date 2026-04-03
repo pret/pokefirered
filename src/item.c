@@ -11,7 +11,7 @@
 #include "constants/items.h"
 #include "constants/maps.h"
 
-EWRAM_DATA struct BagPocket gBagPockets[NUM_BAG_POCKETS] = {};
+struct BagPocket gBagPockets[NUM_BAG_POCKETS] = {};
 
 void SortAndCompactBagPocket(struct BagPocket * pocket);
 

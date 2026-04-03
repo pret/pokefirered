@@ -195,25 +195,25 @@ enum {
     PLIST_CONTACTED,
 };
 
-static EWRAM_DATA u8 sUnionRoomPlayerName[12] = {};
-static EWRAM_DATA u8 sPlayerCurrActivity = 0;
-static EWRAM_DATA u8 sPlayerActivityGroupSize = 0;
-static EWRAM_DATA union
+static u8 sUnionRoomPlayerName[12] = {};
+static u8 sPlayerCurrActivity = 0;
+static u8 sPlayerActivityGroupSize = 0;
+static union
 {
     struct WirelessLink_Leader *leader;
     struct WirelessLink_Group *group;
     struct WirelessLink_URoom *uRoom;
 } sWirelessLinkMain = {};
-static EWRAM_DATA u32 sUnused = 0;
-EWRAM_DATA struct RfuGameCompatibilityData gRfuPartnerCompatibilityData = {};
-EWRAM_DATA u16 gUnionRoomOfferedSpecies = SPECIES_NONE;
-EWRAM_DATA u8 gUnionRoomRequestedMonType = TYPE_NORMAL;
-static EWRAM_DATA struct UnionRoomTrade sUnionRoomTrade = {};
+static u32 sUnused = 0;
+struct RfuGameCompatibilityData gRfuPartnerCompatibilityData = {};
+u16 gUnionRoomOfferedSpecies = SPECIES_NONE;
+u8 gUnionRoomRequestedMonType = TYPE_NORMAL;
+static struct UnionRoomTrade sUnionRoomTrade = {};
 
 #if REVISION >= 0xA
-COMMON_DATA struct WirelessLink_Leader * sLeader = NULL;
-COMMON_DATA struct WirelessLink_URoom * sURoom = NULL;
-COMMON_DATA struct WirelessLink_Group * sGroup = NULL;
+struct WirelessLink_Leader * sLeader = NULL;
+struct WirelessLink_URoom * sURoom = NULL;
+struct WirelessLink_Group * sGroup = NULL;
 #else
 static struct WirelessLink_Leader * sLeader;
 static struct WirelessLink_Group * sGroup;

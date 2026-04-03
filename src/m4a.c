@@ -7,18 +7,18 @@ extern const u8 gCgb3Vol[];
 
 BSS_CODE ALIGNED(4) char SoundMainRAM_Buffer[0x800] = {0};
 
-COMMON_DATA struct SoundInfo gSoundInfo = {0};
-COMMON_DATA struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES] = {0};
-COMMON_DATA struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES] = {0};
-COMMON_DATA MPlayFunc gMPlayJumpTable[36] = {0};
-COMMON_DATA struct CgbChannel gCgbChans[4] = {0};
-COMMON_DATA struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES * 2] = {0};
-COMMON_DATA struct PokemonCrySong gPokemonCrySong = {0};
-COMMON_DATA struct MusicPlayerInfo gMPlayInfo_BGM = {0};
-COMMON_DATA struct MusicPlayerInfo gMPlayInfo_SE1 = {0};
-COMMON_DATA struct MusicPlayerInfo gMPlayInfo_SE2 = {0};
-COMMON_DATA u8 gMPlayMemAccArea[0x10] = {0};
-COMMON_DATA struct MusicPlayerInfo gMPlayInfo_SE3 = {0};
+struct SoundInfo gSoundInfo = {0};
+struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES] = {0};
+struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES] = {0};
+MPlayFunc gMPlayJumpTable[36] = {0};
+struct CgbChannel gCgbChans[4] = {0};
+struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES * 2] = {0};
+struct PokemonCrySong gPokemonCrySong = {0};
+struct MusicPlayerInfo gMPlayInfo_BGM = {0};
+struct MusicPlayerInfo gMPlayInfo_SE1 = {0};
+struct MusicPlayerInfo gMPlayInfo_SE2 = {0};
+u8 gMPlayMemAccArea[0x10] = {0};
+struct MusicPlayerInfo gMPlayInfo_SE3 = {0};
 
 struct MusicPlayerTrack gMPlayTrack_BGM[10];
 struct MusicPlayerTrack gMPlayTrack_SE1[3];

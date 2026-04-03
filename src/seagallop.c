@@ -18,7 +18,7 @@
 
 #define PALTAG_FERRY_WAKE 3000
 
-static EWRAM_DATA void *sBg3TilemapBuffer = NULL;
+static void *sBg3TilemapBuffer = NULL;
 
 static void CB2_SetUpSeagallopScene(void);
 static void VBlankCB_SeaGallop(void);

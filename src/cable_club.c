@@ -27,7 +27,7 @@
 #include "constants/field_weather.h"
 #include "constants/maps.h"
 
-COMMON_DATA u32 UnusedVarNeededToMatch[8] = {0};
+u32 UnusedVarNeededToMatch[8] = {0};
 
 static void Task_LinkupStart(u8 taskId);
 static void Task_LinkupAwaitConnection(u8 taskId);

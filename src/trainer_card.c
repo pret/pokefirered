@@ -80,8 +80,8 @@ struct TrainerCardData
 }; /* size = 0x7BD0 */
 
 // RAM
-EWRAM_DATA struct TrainerCard gTrainerCards[4] = {0};
-EWRAM_DATA static struct TrainerCardData *sTrainerCardDataPtr = NULL;
+struct TrainerCard gTrainerCards[4] = {0};
+static struct TrainerCardData *sTrainerCardDataPtr = NULL;
 
 // Function Declaration
 static void VBlankCB_TrainerCard(void);

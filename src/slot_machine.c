@@ -155,8 +155,8 @@ struct LineStateTileIdxList
     u32 count;
 };
 
-static EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
-static EWRAM_DATA struct SlotMachineGfxManager * sSlotMachineGfxManager = NULL;
+static struct SlotMachineState * sSlotMachineState = NULL;
+static struct SlotMachineGfxManager * sSlotMachineGfxManager = NULL;
 
 static void InitSlotMachineState(struct SlotMachineState * ptr);
 static void CB2_InitSlotMachine(void);

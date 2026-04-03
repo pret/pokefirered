@@ -33,7 +33,7 @@ enum TitleScreenScene
 #define TITLE_SPECIES SPECIES_VENUSAUR
 #endif
 
-static EWRAM_DATA u8 sTitleScreenTimerTaskId = 0;
+static u8 sTitleScreenTimerTaskId = 0;
 
 static void ResetGpuRegs(void);
 static void CB2_TitleScreenRun(void);

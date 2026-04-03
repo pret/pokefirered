@@ -53,9 +53,9 @@ struct HofGfx
     u8 tilemap2[0x1000];
 };
 
-static EWRAM_DATA u32 sSelectedPaletteIndices = 0;
-static EWRAM_DATA struct HallofFameTeam * sHofMonPtr = NULL;
-static EWRAM_DATA struct HofGfx * sHofGfxPtr = NULL;
+static u32 sSelectedPaletteIndices = 0;
+static struct HallofFameTeam * sHofMonPtr = NULL;
+static struct HofGfx * sHofGfxPtr = NULL;
 
 static void Task_Hof_InitMonData(u8 taskId);
 static void Task_Hof_InitTeamSaveData(u8 taskId);

@@ -421,8 +421,8 @@ static void Gfx_ResetMonSpriteSubpriorities(struct PokemonJumpGfx *);
 static void Gfx_StartMonIntroBounce(struct PokemonJumpGfx *, int);
 static bool32 Gfx_IsMonIntroBounceActive(struct PokemonJumpGfx *);
 
-EWRAM_DATA static struct PokemonJump *sPokemonJump = NULL;
-EWRAM_DATA static struct PokemonJumpGfx *sPokemonJumpGfx = NULL;
+static struct PokemonJump *sPokemonJump = NULL;
+static struct PokemonJumpGfx *sPokemonJumpGfx = NULL;
 
 // Unused static version of the wireless minigame countdown
 

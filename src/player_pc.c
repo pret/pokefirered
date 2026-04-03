@@ -33,9 +33,9 @@
 #define tWindowId       data[10]
 #define tListMenuTaskId data[11]
 
-static EWRAM_DATA const u8 *sItemOrder = NULL;
-static EWRAM_DATA u8 sTopMenuItemCount = 0;
-EWRAM_DATA struct PlayerPCItemPageStruct gPlayerPcMenuManager = {};
+static const u8 *sItemOrder = NULL;
+static u8 sTopMenuItemCount = 0;
+struct PlayerPCItemPageStruct gPlayerPcMenuManager = {};
 
 #define SELECTED_MAIL (gSaveBlock1Ptr->mail[PC_MAIL_NUM(gPlayerPcMenuManager.cursorPos) + gPlayerPcMenuManager.itemsAbove])
 

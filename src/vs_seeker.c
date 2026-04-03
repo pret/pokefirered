@@ -88,7 +88,7 @@ struct VsSeekerStruct
 };
 
 // static declarations
-static EWRAM_DATA struct VsSeekerStruct *sVsSeeker = NULL;
+static struct VsSeekerStruct *sVsSeeker = NULL;
 
 static void VsSeekerResetInBagStepCounter(void);
 static void VsSeekerResetChargingStepCounter(void);

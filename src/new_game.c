@@ -34,7 +34,7 @@
 static void ResetMiniGamesResults(void);
 
 // EWRAM vars
-EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
+bool8 gDifferentSaveFile = FALSE;
 
 void SetTrainerId(u32 trainerId, u8 *dst)
 {

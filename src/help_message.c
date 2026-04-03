@@ -3,7 +3,7 @@
 #include "menu.h"
 #include "malloc.h"
 
-static EWRAM_DATA u8 sHelpMessageWindowId = 0;
+static u8 sHelpMessageWindowId = 0;
 
 const u8 gHelpMessageWindow_Gfx[] = INCBIN_U8("graphics/help_system/msg_window.4bpp");
 

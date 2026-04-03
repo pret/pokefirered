@@ -149,26 +149,26 @@ struct IntroSequenceData
     u8 unused1[0x2080];
 }; // size: 0x28BC
 
-static EWRAM_DATA struct GcmbStruct sGcmb = {0};
-static EWRAM_DATA u16 sUnusedScene3Var0 = 0; // Set but never read
-static EWRAM_DATA u16 sUnusedScene3Var1 = 0; // Set but never read
-static EWRAM_DATA u16 sNidorinoJumpMult = 0;
-static EWRAM_DATA u16 sNidorinoAnimDelayTime = 0;
-static EWRAM_DATA u16 sNidorinoJumpDiv = 0;
-static EWRAM_DATA u16 sNidorinoRecoilReturnTime = 0;
-static EWRAM_DATA u16 sNidorinoUnusedVar = 0; // Set but never read
-static EWRAM_DATA u16 sStarSpeedX = 0;
-static EWRAM_DATA u16 sStarSpeedY = 0;
-static EWRAM_DATA u16 sStarSparklesXmodMask = 0;
-static EWRAM_DATA u16 sStarSparklesUnusedVar = 0; // Set but never read
-static EWRAM_DATA u16 sStarSparklesSpawnRate = 0;
-static EWRAM_DATA u16 sStarSparklesFlickerStartTime = 0;
-static EWRAM_DATA u16 sStarSparklesDestroySpriteTime = 0;
-static EWRAM_DATA u16 sStarSparklesGravityShift = 0;
-static EWRAM_DATA u16 sStarSparklesXspeed = 0;
-static EWRAM_DATA u16 sStarSparklesYspeed = 0;
-static EWRAM_DATA u16 sStarSparklesXprecision = 0;
-static EWRAM_DATA u16 sStarSparklesYprecision = 0;
+static struct GcmbStruct sGcmb = {0};
+static u16 sUnusedScene3Var0 = 0; // Set but never read
+static u16 sUnusedScene3Var1 = 0; // Set but never read
+static u16 sNidorinoJumpMult = 0;
+static u16 sNidorinoAnimDelayTime = 0;
+static u16 sNidorinoJumpDiv = 0;
+static u16 sNidorinoRecoilReturnTime = 0;
+static u16 sNidorinoUnusedVar = 0; // Set but never read
+static u16 sStarSpeedX = 0;
+static u16 sStarSpeedY = 0;
+static u16 sStarSparklesXmodMask = 0;
+static u16 sStarSparklesUnusedVar = 0; // Set but never read
+static u16 sStarSparklesSpawnRate = 0;
+static u16 sStarSparklesFlickerStartTime = 0;
+static u16 sStarSparklesDestroySpriteTime = 0;
+static u16 sStarSparklesGravityShift = 0;
+static u16 sStarSparklesXspeed = 0;
+static u16 sStarSparklesYspeed = 0;
+static u16 sStarSparklesXprecision = 0;
+static u16 sStarSparklesYprecision = 0;
 
 // General
 static void CB2_SetUpIntro(void);
@@ -973,11 +973,6 @@ static bool8 SetUpCopyrightScreen(void)
             {
                 if (sGcmb.gcmb_field_2 == 2)
                 {
-                    if (*(u32 *)(EWRAM_START + 0xAC) == COLOSSEUM_GAME_CODE)
-                    {
-                        CpuCopy16(gMultiBootProgram_PokemonColosseum_Start, (void *)EWRAM_START, 0x28000);
-                        *(u32 *)(EWRAM_START + 0xAC) = COLOSSEUM_GAME_CODE;
-                    }
                     GameCubeMultiBoot_ExecuteProgram(&sGcmb);
                 }
             }
@@ -1954,7 +1949,7 @@ static void GFScene_LoadGfxCreateStar(void)
 {
     int i;
     u8 spriteId;
-    static EWRAM_DATA u32 sStarSparklesRngSeed = 0;
+    static u32 sStarSparklesRngSeed = 0;
 
     for (i = 0; i < ARRAY_COUNT(sSpriteSheets_GameFreakScene); i++)
         LoadCompressedSpriteSheet(&sSpriteSheets_GameFreakScene[i]);
@@ -1994,7 +1989,7 @@ static void GFScene_LoadGfxCreateStar(void)
 
 static void GFScene_CreateStarSparkle(s16 x, s16 y, u16 random)
 {
-    static EWRAM_DATA s16 sYmod = 0;
+    static s16 sYmod = 0;
 
     u8 spriteId;
     s16 xMod = (random & sStarSparklesXmodMask) + 2;
@@ -2249,7 +2244,7 @@ static void SpriteCB_GengarSwipe(struct Sprite *sprite)
 static void Scene3_Task_GengarEnter(u8 taskId)
 {
     s16 * data = gTasks[taskId].data;
-    static EWRAM_DATA u32 sGengarScroll = 0;
+    static u32 sGengarScroll = 0;
 
     switch (tState)
     {

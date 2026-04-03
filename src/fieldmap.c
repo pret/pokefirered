@@ -14,12 +14,12 @@ struct ConnectionFlags
     u8 east:1;
 };
 
-COMMON_DATA struct BackupMapLayout VMap = {0};
-EWRAM_DATA u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
-EWRAM_DATA struct MapHeader gMapHeader = {};
-EWRAM_DATA struct Camera gCamera = {};
-static EWRAM_DATA struct ConnectionFlags gMapConnectionFlags = {};
-EWRAM_DATA u8 gGlobalFieldTintMode = QL_TINT_NONE;
+struct BackupMapLayout VMap = {0};
+u16 gBackupMapData[VIRTUAL_MAP_SIZE] = {};
+struct MapHeader gMapHeader = {};
+struct Camera gCamera = {};
+static struct ConnectionFlags gMapConnectionFlags = {};
+u8 gGlobalFieldTintMode = QL_TINT_NONE;
 
 static const struct ConnectionFlags sDummyConnectionFlags = {};
 

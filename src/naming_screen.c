@@ -176,7 +176,7 @@ struct NamingScreenData
     /*0x1E3C*/ MainCallback returnCallback;
 };
 
-static EWRAM_DATA struct NamingScreenData * sNamingScreen = NULL;
+static struct NamingScreenData * sNamingScreen = NULL;
 
 static void CB2_LoadNamingScreen(void);
 static void NamingScreen_Init(void);

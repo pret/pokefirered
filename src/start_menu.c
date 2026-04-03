@@ -60,13 +60,13 @@ enum SaveCBReturn
     SAVECB_RETURN_ERROR
 };
 
-static EWRAM_DATA bool8 (*sStartMenuCallback)(void) = NULL;
-static EWRAM_DATA u8 sStartMenuCursorPos = 0;
-static EWRAM_DATA u8 sNumStartMenuItems = 0;
-static EWRAM_DATA u8 sStartMenuOrder[MAX_STARTMENU_ITEMS] = {};
-static EWRAM_DATA s8 sDrawStartMenuState[2] = {};
-static EWRAM_DATA u8 sSafariZoneStatsWindowId = 0;
-static ALIGNED(4) EWRAM_DATA u8 sSaveStatsWindowId = 0;
+static bool8 (*sStartMenuCallback)(void) = NULL;
+static u8 sStartMenuCursorPos = 0;
+static u8 sNumStartMenuItems = 0;
+static u8 sStartMenuOrder[MAX_STARTMENU_ITEMS] = {};
+static s8 sDrawStartMenuState[2] = {};
+static u8 sSafariZoneStatsWindowId = 0;
+static ALIGNED(4) u8 sSaveStatsWindowId = 0;
 
 static u8 (*sSaveDialogCB)(void);
 static u8 sSaveDialogDelay;

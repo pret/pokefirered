@@ -17,8 +17,6 @@
 #include "quest_log.h"
 #include "sloopsvc.h"
 
-
-
 static void VBlankIntr(void);
 static void HBlankIntr(void);
 static void VCountIntr(void);
@@ -71,25 +69,25 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_MAIN_SIZE 0x200
 
-COMMON_DATA u16 gKeyRepeatStartDelay = 0;
-COMMON_DATA u8 gLinkTransferringData = 0;
-COMMON_DATA struct Main gMain = {0};
-COMMON_DATA u16 gKeyRepeatContinueDelay = 0;
-COMMON_DATA u8 gSoftResetDisabled = 0;
-COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};
-COMMON_DATA u8 sVcountAfterSound = 0;
-COMMON_DATA bool8 gLinkVSyncDisabled = 0;
-COMMON_DATA u32 IntrMain_Buffer[INTR_MAIN_SIZE] = {0};
-COMMON_DATA u8 sVcountAtIntr = 0;
-COMMON_DATA u8 sVcountBeforeSound = 0;
-COMMON_DATA u8 gPcmDmaCounter = 0;
+u16 gKeyRepeatStartDelay = 0;
+u8 gLinkTransferringData = 0;
+struct Main gMain = {0};
+u16 gKeyRepeatContinueDelay = 0;
+u8 gSoftResetDisabled = 0;
+IntrFunc gIntrTable[INTR_COUNT] = {0};
+u8 sVcountAfterSound = 0;
+bool8 gLinkVSyncDisabled = 0;
+u32 IntrMain_Buffer[INTR_MAIN_SIZE] = {0};
+u8 sVcountAtIntr = 0;
+u8 sVcountBeforeSound = 0;
+u8 gPcmDmaCounter = 0;
 
 u32 intr_main[INTR_MAIN_SIZE];
 
 static IntrFunc * const sTimerIntrFunc = gIntrTable + 0x7;
 
-EWRAM_DATA u8 gDecompressionBuffer[0x4000] = {0};
-EWRAM_DATA u16 gTrainerId = 0;
+u8 gDecompressionBuffer[0x4000] = {0};
+u16 gTrainerId = 0;
 
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);

@@ -38,7 +38,7 @@ struct WonderNewsData
     u8 bgTilemapBuffer[0x1000];
 };
 
-static EWRAM_DATA struct WonderNewsData * sWonderNewsData = NULL;
+static struct WonderNewsData * sWonderNewsData = NULL;
 
 static void BufferNewsText(void);
 static void DrawNewsWindows(void);

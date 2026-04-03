@@ -191,8 +191,8 @@ static u8 setup##_callback(struct ObjectEvent *objectEvent, struct Sprite *sprit
     return 0;                                                                                    \
 }
 
-EWRAM_DATA u8 sCurrentReflectionType = 0;
-EWRAM_DATA u16 sCurrentSpecialObjectPaletteTag = 0;
+u8 sCurrentReflectionType = 0;
+u16 sCurrentSpecialObjectPaletteTag = 0;
 
 const u8 gReflectionEffectPaletteMap[16] = {
     [PALSLOT_PLAYER]                 = PALSLOT_PLAYER_REFLECTION,

@@ -47,7 +47,30 @@ EWRAM_DATA static u16 sTestVars[TEST_VARS_SIZE] = {0};
 
 COMMON_DATA u16 gLastQuestLogStoredFlagOrVarIdx = 0;
 
-extern u16 *const gSpecialVars[];
+static u16 *const gSpecialVars[SPECIAL_VARS_END - SPECIAL_VARS_START + 1] =
+{
+    [VAR_0x8000 - SPECIAL_VARS_START] = &gSpecialVar_0x8000,
+    [VAR_0x8001 - SPECIAL_VARS_START] = &gSpecialVar_0x8001,
+    [VAR_0x8002 - SPECIAL_VARS_START] = &gSpecialVar_0x8002,
+    [VAR_0x8003 - SPECIAL_VARS_START] = &gSpecialVar_0x8003,
+    [VAR_0x8004 - SPECIAL_VARS_START] = &gSpecialVar_0x8004,
+    [VAR_0x8005 - SPECIAL_VARS_START] = &gSpecialVar_0x8005,
+    [VAR_0x8006 - SPECIAL_VARS_START] = &gSpecialVar_0x8006,
+    [VAR_0x8007 - SPECIAL_VARS_START] = &gSpecialVar_0x8007,
+    [VAR_0x8008 - SPECIAL_VARS_START] = &gSpecialVar_0x8008,
+    [VAR_0x8009 - SPECIAL_VARS_START] = &gSpecialVar_0x8009,
+    [VAR_0x800A - SPECIAL_VARS_START] = &gSpecialVar_0x800A,
+    [VAR_0x800B - SPECIAL_VARS_START] = &gSpecialVar_0x800B,
+    [VAR_FACING - SPECIAL_VARS_START] = &gSpecialVar_Facing,
+    [VAR_RESULT - SPECIAL_VARS_START] = &gSpecialVar_Result,
+    [VAR_ITEM_ID - SPECIAL_VARS_START] = &gSpecialVar_ItemId,
+    [VAR_LAST_TALKED - SPECIAL_VARS_START] = &gSpecialVar_LastTalked,
+    [VAR_MON_BOX_ID - SPECIAL_VARS_START] = &gSpecialVar_MonBoxId,
+    [VAR_MON_BOX_POS - SPECIAL_VARS_START] = &gSpecialVar_MonBoxPos,
+    [VAR_TEXT_COLOR - SPECIAL_VARS_START] = &gSpecialVar_TextColor,
+    [VAR_PREV_TEXT_COLOR - SPECIAL_VARS_START] = &gSpecialVar_PrevTextColor,
+    [VAR_0x8014 - SPECIAL_VARS_START] = &gSpecialVar_0x8014,
+};
 
 const u16 gBadgeFlags[NUM_BADGES] =
 {

@@ -183,6 +183,21 @@ enum Gender
 #define OPTIONS_BATTLE_STYLE_SHIFT  0
 #define OPTIONS_BATTLE_STYLE_SET    1
 
+enum CallStdID
+{
+    STD_OBTAIN_ITEM,
+    STD_FIND_ITEM,
+    MSGBOX_NPC,
+    MSGBOX_SIGN,
+    MSGBOX_DEFAULT,
+    MSGBOX_YESNO,
+    MSGBOX_AUTOCLOSE,
+    STD_OBTAIN_DECORATION,
+    STD_PUT_ITEM_AWAY,
+    STD_RECEIVED_ITEM,
+    MSGBOX_GETPOINTS,
+};
+
 enum __attribute__((packed)) Direction
 {
     DIR_NONE,

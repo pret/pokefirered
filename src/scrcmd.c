@@ -61,8 +61,18 @@ typedef void (*NativeFunc)(struct ScriptContext *ctx);
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
-extern const u8 *gStdScripts[];
-extern const u8 *gStdScriptsEnd[];
+
+extern const u8 Std_ObtainItem[];
+extern const u8 Std_FindItem[];
+extern const u8 Std_MsgboxNPC[];
+extern const u8 Std_MsgboxSign[];
+extern const u8 Std_MsgboxDefault[];
+extern const u8 Std_MsgboxYesNo[];
+extern const u8 Std_MsgboxAutoclose[];
+extern const u8 Std_ObtainDecoration[];
+extern const u8 Std_PutItemAway[];
+extern const u8 Std_ReceivedItem[];
+extern const u8 Std_MsgboxGetPoints[];
 
 static bool8 ScriptContext_NextCommandEndsScript(struct ScriptContext * ctx);
 static u8 ScriptContext_GetQuestLogInput(struct ScriptContext * ctx);
@@ -83,6 +93,22 @@ COMMON_DATA u8 gSelectedObjectEvent = 0;
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
 void *const gNullScriptPtr = NULL;
+
+static const u8 *gStdScripts[] =
+{
+
+    [STD_OBTAIN_ITEM]       = Std_ObtainItem,
+    [STD_FIND_ITEM]         = Std_FindItem,
+    [MSGBOX_NPC]            = Std_MsgboxNPC,
+    [MSGBOX_SIGN]           = Std_MsgboxSign,
+    [MSGBOX_DEFAULT]        = Std_MsgboxDefault,
+    [MSGBOX_YESNO]          = Std_MsgboxYesNo,
+    [MSGBOX_AUTOCLOSE]      = Std_MsgboxAutoclose,
+    [STD_OBTAIN_DECORATION] = Std_ObtainDecoration,
+    [STD_PUT_ITEM_AWAY]     = Std_PutItemAway,
+    [STD_RECEIVED_ITEM]     = Std_ReceivedItem,
+    [MSGBOX_GETPOINTS]      = Std_MsgboxGetPoints,
+};
 
 static const u8 sScriptConditionTable[6][3] =
 {
@@ -283,24 +309,22 @@ bool8 ScrCmd_vcall_if(struct ScriptContext * ctx)
 bool8 ScrCmd_gotostd(struct ScriptContext * ctx)
 {
     u8 index = ScriptReadByte(ctx);
-    const u8 **ptr = &gStdScripts[index];
 
     Script_RequestEffects(SCREFF_V1);
 
-    if (ptr < gStdScriptsEnd)
-        ScriptJump(ctx, *ptr);
+    if (index < ARRAY_COUNT(gStdScripts))
+        ScriptJump(ctx, gStdScripts[index]);
     return FALSE;
 }
 
 bool8 ScrCmd_callstd(struct ScriptContext * ctx)
 {
     u8 index = ScriptReadByte(ctx);
-    const u8 **ptr = &gStdScripts[index];
 
     Script_RequestEffects(SCREFF_V1);
 
-    if (ptr < gStdScriptsEnd)
-        ScriptCall(ctx, *ptr);
+    if (index < ARRAY_COUNT(gStdScripts))
+        ScriptCall(ctx, gStdScripts[index]);
     return FALSE;
 }
 
@@ -313,9 +337,8 @@ bool8 ScrCmd_gotostd_if(struct ScriptContext * ctx)
 
     if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
     {
-        const u8 **ptr = &gStdScripts[index];
-        if (ptr < gStdScriptsEnd)
-            ScriptJump(ctx, *ptr);
+        if (index < ARRAY_COUNT(gStdScripts))
+            ScriptJump(ctx, gStdScripts[index]);
     }
     return FALSE;
 }
@@ -329,9 +352,8 @@ bool8 ScrCmd_callstd_if(struct ScriptContext * ctx)
 
     if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
     {
-        const u8 **ptr = &gStdScripts[index];
-        if (ptr < gStdScriptsEnd)
-            ScriptCall(ctx, *ptr);
+        if (index < ARRAY_COUNT(gStdScripts))
+            ScriptCall(ctx, gStdScripts[index]);
     }
     return FALSE;
 }

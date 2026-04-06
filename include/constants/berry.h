@@ -50,7 +50,6 @@ enum __attribute__((__packed__)) Flavor
 // 90 reserved
 enum BerryTreeId
 {
-    BERRY_TREE_DUMMY,
     BERRY_TREES_COUNT = 90,
 };
 

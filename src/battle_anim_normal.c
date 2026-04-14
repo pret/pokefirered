@@ -793,7 +793,7 @@ static void AnimShakeMonOrBattleTerrain(struct Sprite *sprite)
         StoreSpriteCallbackInData6(sprite, (void *)&gSpriteCoordOffsetY);
         break;
     }
-    sprite->data[4] = *(u16 *)(sprite->data[6] | (sprite->data[7] << 16));
+    sprite->data[4] = *(u16 *)LoadPointerFromVars(sprite->data[6], sprite->data[7]);
     sprite->data[5] = gBattleAnimArgs[3];
     var0 = sprite->data[5] - 2;
     if (var0 < 2)
@@ -816,13 +816,13 @@ static void AnimShakeMonOrBattleTerrain_Step(struct Sprite *sprite)
         else
         {
             sprite->data[1] = sprite->data[2];
-            *(u16 *)(sprite->data[6] | (sprite->data[7] << 16)) += sprite->data[0];
+            *(u16 *)LoadPointerFromVars(sprite->data[6], sprite->data[7]) += sprite->data[0];
             sprite->data[0] = -sprite->data[0];
         }
     }
     else
     {
-        *(u16 *)(sprite->data[6] | (sprite->data[7] << 16)) = sprite->data[4];
+        *(u16 *)LoadPointerFromVars(sprite->data[6], sprite->data[7]) = sprite->data[4];
         var0 = sprite->data[5] - 2;
         if (var0 < 2)
             for (i = 0; i < gBattlersCount; ++i)

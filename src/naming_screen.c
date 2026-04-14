@@ -718,10 +718,11 @@ static bool8 MainState_Exit(void)
 {
     if (!gPaletteFade.active)
     {
-        if (sNamingScreen->templateNum == NAMING_SCREEN_PLAYER)
-            SeedRngAndSetTrainerId();
         SetMainCallback2(sNamingScreen->returnCallback);
         DestroyTask(FindTaskIdByFunc(Task_NamingScreen));
+        ResetVHBlank();
+        // Fix use-after-free issues with gNamingScreenData caused by sprites calling their callbacks which attempt to read from gNamingScreenData.
+        ResetSpriteData();
         FreeAllWindowBuffers();
         FREE_AND_SET_NULL(sNamingScreen);
         RestoreHelpContext();

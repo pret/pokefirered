@@ -691,6 +691,7 @@ u8 HandleSavingData(u8 saveType)
         WriteSaveSectorOrSlot(FULL_SAVE_SLOT, gRamSaveSectorLocations);
         break;
     }
+    Platform_StoreSaveFile();
     gMain.vblankCounter1 = backupPtr;
 #if REVISION >= 0xA
     svc_FinishSave();
@@ -709,6 +710,7 @@ u8 TrySavingData(u8 saveType)
     HandleSavingData(saveType);
     if (!gDamagedSaveSectors)
     {
+        Platform_StoreSaveFile();
         gSaveAttemptStatus = SAVE_STATUS_OK;
         return SAVE_STATUS_OK;
     }

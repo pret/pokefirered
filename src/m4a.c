@@ -1,29 +1,30 @@
 #include "global.h"
 #include "gba/m4a_internal.h"
 
+#include "cgb_audio.h"
+
 extern const u8 gCgb3Vol[];
 
-#define BSS_CODE __attribute__((section(".bss.code")))
 
-BSS_CODE ALIGNED(4) char SoundMainRAM_Buffer[0x800] = {0};
-
-struct SoundInfo gSoundInfo = {0};
-struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES] = {0};
-struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES] = {0};
-MPlayFunc gMPlayJumpTable[36] = {0};
-struct CgbChannel gCgbChans[4] = {0};
-struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES * 2] = {0};
-struct PokemonCrySong gPokemonCrySong = {0};
-struct MusicPlayerInfo gMPlayInfo_BGM = {0};
-struct MusicPlayerInfo gMPlayInfo_SE1 = {0};
-struct MusicPlayerInfo gMPlayInfo_SE2 = {0};
-u8 gMPlayMemAccArea[0x10] = {0};
-struct MusicPlayerInfo gMPlayInfo_SE3 = {0};
-
+struct SoundInfo gSoundInfo;
+struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES];
+struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES];
+MPlayFunc gMPlayJumpTable[36];
+struct CgbChannel gCgbChans[4];
+struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES * 2];
+struct PokemonCrySong gPokemonCrySong;
+struct MusicPlayerInfo gMPlayInfo_BGM;
+struct MusicPlayerInfo gMPlayInfo_SE1;
+struct MusicPlayerInfo gMPlayInfo_SE2;
+struct MusicPlayerInfo gMPlayInfo_SE3;
 struct MusicPlayerTrack gMPlayTrack_BGM[10];
 struct MusicPlayerTrack gMPlayTrack_SE1[3];
 struct MusicPlayerTrack gMPlayTrack_SE2[9];
 struct MusicPlayerTrack gMPlayTrack_SE3[1];
+u8 gMPlayMemAccArea[0x10];
+
+void MP2K_event_nxx();
+void MP2KPlayerMain();
 
 u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
 {
@@ -76,12 +77,10 @@ void m4aSoundInit(void)
 {
     s32 i;
 
-    CpuCopy32((void *)((s32)SoundMainRAM & ~1), SoundMainRAM_Buffer, sizeof(SoundMainRAM_Buffer));
-
     SoundInit(&gSoundInfo);
     MPlayExtender(gCgbChans);
     m4aSoundMode(SOUND_MODE_DA_BIT_8
-               | SOUND_MODE_FREQ_13379
+               | SOUND_MODE_FREQ_42048
                | (12 << SOUND_MODE_MASVOL_SHIFT)
                | (5 << SOUND_MODE_MAXCHN_SHIFT));
 
@@ -106,7 +105,7 @@ void m4aSoundInit(void)
 
 void m4aSoundMain(void)
 {
-    SoundMain();
+    //RunMixerFrame();
 }
 
 void m4aSongNumStart(u16 n)
@@ -279,6 +278,11 @@ void MPlayExtender(struct CgbChannel *cgbChans)
     REG_NR30 = 0;
     REG_NR50 = 0x77;
 
+    for(u8 i = 0; i < 4; i++){
+        cgb_set_envelope(i, 8);
+        cgb_trigger_note(i);
+    }
+
     soundInfo = SOUND_INFO_PTR;
 
     ident = soundInfo->ident;
@@ -290,10 +294,10 @@ void MPlayExtender(struct CgbChannel *cgbChans)
 
 #if __STDC_VERSION__ < 202311L
     gMPlayJumpTable[8] = ply_memacc;
-    gMPlayJumpTable[17] = ply_lfos;
-    gMPlayJumpTable[19] = ply_mod;
+    gMPlayJumpTable[17] = MP2K_event_lfos;
+    gMPlayJumpTable[19] = MP2K_event_mod;
     gMPlayJumpTable[28] = ply_xcmd;
-    gMPlayJumpTable[29] = ply_endtie;
+    gMPlayJumpTable[29] = MP2K_event_endtie;
     gMPlayJumpTable[30] = SampleFreqSet;
     gMPlayJumpTable[31] = TrackStop;
     gMPlayJumpTable[32] = FadeOutBody;
@@ -386,7 +390,7 @@ void SoundInit(struct SoundInfo *soundInfo)
 
     soundInfo->maxChans = 8;
     soundInfo->masterVolume = 15;
-    soundInfo->plynote = ply_note;
+    soundInfo->plynote = MP2K_event_nxx;
     soundInfo->CgbSound = DummyFunc;
     soundInfo->CgbOscOff = (CgbOscOffFunc)DummyFunc;
     soundInfo->MidiKeyToCgbFreq = (MidiKeyToCgbFreqFunc)DummyFunc;
@@ -396,7 +400,7 @@ void SoundInit(struct SoundInfo *soundInfo)
 
     soundInfo->MPlayJumpTable = gMPlayJumpTable;
 
-    SampleFreqSet(SOUND_MODE_FREQ_13379);
+    SampleFreqSet(SOUND_MODE_FREQ_42048);
 
     soundInfo->ident = ID_NUMBER;
 }
@@ -407,14 +411,12 @@ void SampleFreqSet(u32 freq)
 
     freq = (freq & 0xF0000) >> 16;
     soundInfo->freq = freq;
-    soundInfo->pcmSamplesPerVBlank = gPcmSamplesPerVBlankTable[freq - 1];
+    soundInfo->pcmSamplesPerVBlank = 701;
     soundInfo->pcmDmaPeriod = PCM_DMA_BUF_SIZE / soundInfo->pcmSamplesPerVBlank;
 
-    // LCD refresh rate 59.7275Hz
-    soundInfo->pcmFreq = (597275 * soundInfo->pcmSamplesPerVBlank + 5000) / 10000;
+    soundInfo->pcmFreq = 60.0f * soundInfo->pcmSamplesPerVBlank;
 
-    // CPU frequency 16.78Mhz
-    soundInfo->divFreq = (16777216 / soundInfo->pcmFreq + 1) >> 1;
+    soundInfo->divFreq = 1.0f / soundInfo->pcmFreq;
 
     // Turn off timer 0.
     REG_TM0CNT_H = 0;
@@ -423,12 +425,6 @@ void SampleFreqSet(u32 freq)
     REG_TM0CNT_L = -(280896 / soundInfo->pcmSamplesPerVBlank);
 
     m4aSoundVSyncOn();
-
-    while (*(vu8 *)REG_ADDR_VCOUNT == 159)
-        ;
-
-    while (*(vu8 *)REG_ADDR_VCOUNT != 159)
-        ;
 
     REG_TM0CNT_H = TIMER_ENABLE | TIMER_1CLK;
 }
@@ -606,8 +602,8 @@ void MPlayOpen(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *track
         soundInfo->MPlayMainHead = NULL;
     }
 
-    soundInfo->musicPlayerHead = mplayInfo;
-    soundInfo->MPlayMainHead = MPlayMain;
+    soundInfo->musicPlayerHead = (u32)mplayInfo;
+    soundInfo->MPlayMainHead = (u32)MP2KPlayerMain;
     soundInfo->ident = ID_NUMBER;
     mplayInfo->ident = ID_NUMBER;
 }
@@ -877,6 +873,8 @@ void CgbOscOff(u8 chanNum)
         REG_NR42 = 8;
         REG_NR44 = 0x80;
     }
+    cgb_set_envelope(chanNum - 1, 8);
+    cgb_trigger_note(chanNum - 1);
 }
 
 static inline int CgbPan(struct CgbChannel *chan)
@@ -1000,6 +998,7 @@ void CgbSound(void)
                 {
                 case 1:
                     *nrx0ptr = channels->sweep;
+                    cgb_set_sweep(channels->sweep);
                     // fallthrough
                 case 2:
                     *nrx1ptr = ((u32)channels->wavePointer << 6) + channels->length;
@@ -1013,6 +1012,7 @@ void CgbSound(void)
                         REG_WAVE_RAM2 = channels->wavePointer[2];
                         REG_WAVE_RAM3 = channels->wavePointer[3];
                         channels->currentPointer = channels->wavePointer;
+                        cgb_set_wavram();
                     }
                     *nrx0ptr = 0;
                     *nrx1ptr = channels->length;
@@ -1032,6 +1032,7 @@ void CgbSound(void)
                         channels->n4 = 0x00;
                     break;
                 }
+                cgb_set_length(ch - 1, channels->length);
                 channels->envelopeCounter = channels->attack;
                 if ((s8)(channels->attack & mask))
                 {
@@ -1228,6 +1229,9 @@ void CgbSound(void)
                 if (ch == 1 && !(*nrx0ptr & 0x08))
                     *nrx4ptr = channels->n4 | 0x80;
             }
+            cgb_set_envelope(ch - 1, *nrx2ptr);
+            cgb_toggle_length(ch - 1, (*nrx4ptr & 0x40));
+            cgb_trigger_note(ch - 1);
         }
 
     channel_complete:

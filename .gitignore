@@ -7,6 +7,7 @@
 *.diff
 *.dump
 *.elf
+*.dll
 *.exe
 *.fwjpnfont
 *.gba

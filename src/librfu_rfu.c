@@ -124,73 +124,7 @@ static const char str_checkMbootLL[] = "RFU-MBOOT";
         *_dst++ = *_src++;                          \
 } while (0)
 
-u16 rfu_initializeAPI(u32 *APIBuffer, u16 buffByteSize, IntrFunc *sioIntrTable_p, bool8 copyInterruptToRam)
-{
-    u16 i;
-    u16 *dst;
-    const u16 *src;
-    u16 buffByteSizeMax;
 
-    // is in EWRAM?
-    if (((uintptr_t)APIBuffer & 0xF000000) == 0x2000000 && copyInterruptToRam)
-        return ERR_RFU_API_BUFF_ADR;
-    // is not 4-byte aligned?
-    if ((u32)APIBuffer & 3)
-        return ERR_RFU_API_BUFF_ADR;
-    if (copyInterruptToRam)
-    {
-        // An assert/debug print may have existed before, ie
-        // printf("%s %u < %u", "somefile.c:12345", buffByteSize, num)
-        // to push this into buffByteSizeMax?
-        buffByteSizeMax = RFU_API_BUFF_SIZE_RAM;
-        if (buffByteSize < buffByteSizeMax)
-            return ERR_RFU_API_BUFF_SIZE;
-    }
-    if (!copyInterruptToRam)
-    {
-        buffByteSizeMax = RFU_API_BUFF_SIZE_ROM; // same issue as above
-        if (buffByteSize < buffByteSizeMax)
-            return ERR_RFU_API_BUFF_SIZE;
-    }
-    gRfuLinkStatus = (void *)APIBuffer + 0;
-    gRfuStatic = (void *)APIBuffer + 0xb4; // + sizeof(*gRfuLinkStatus)
-    gRfuFixed = (void *)APIBuffer + 0xdc; // + sizeof(*gRfuStatic)
-    gRfuSlotStatusNI[0] = (void *)APIBuffer + 0x1bc; // + sizeof(*gRfuFixed)
-    gRfuSlotStatusUNI[0] = (void *)APIBuffer + 0x37c; // + sizeof(*gRfuSlotStatusNI[0]) * RFU_CHILD_MAX
-    for (i = 1; i < RFU_CHILD_MAX; ++i)
-    {
-        gRfuSlotStatusNI[i] = &gRfuSlotStatusNI[i - 1][1];
-        gRfuSlotStatusUNI[i] = &gRfuSlotStatusUNI[i - 1][1];
-    }
-    // remaining space in API buffer is used for `struct RfuIntrStruct`. 
-    gRfuFixed->STWIBuffer = (struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1];
-    STWI_init_all((struct RfuIntrStruct *)&gRfuSlotStatusUNI[3][1], sioIntrTable_p, copyInterruptToRam);
-    rfu_STC_clearAPIVariables();
-    for (i = 0; i < RFU_CHILD_MAX; ++i)
-    {
-        gRfuSlotStatusNI[i]->recvBuffer = NULL;
-        gRfuSlotStatusNI[i]->recvBufferSize = 0;
-        gRfuSlotStatusUNI[i]->recvBuffer = NULL;
-        gRfuSlotStatusUNI[i]->recvBufferSize = 0;
-    }
-    // rfu_REQ_changeMasterSlave is the function next to rfu_STC_fastCopy
-#if LIBRFU_VERSION < 1026
-    src = (const u16 *)((uintptr_t)&rfu_STC_fastCopy & ~1);
-    dst = gRfuFixed->fastCopyBuffer;
-    buffByteSizeMax = ((void *)rfu_REQ_changeMasterSlave - (void *)rfu_STC_fastCopy) / sizeof(u16);
-    while (buffByteSizeMax-- != 0)
-        *dst++ = *src++;
-#else
-    COPY(
-        (uintptr_t)&rfu_STC_fastCopy & ~1,
-        gRfuFixed->fastCopyBuffer,
-        buffByteSizeMax,
-        0x60 / sizeof(u16)
-        );
-#endif
-    gRfuFixed->fastCopyPtr = (void *)gRfuFixed->fastCopyBuffer + 1;
-    return 0;
-}
 
 static void rfu_STC_clearAPIVariables(void)
 {
@@ -317,41 +251,6 @@ u16 rfu_getRFUStatus(u8 *rfuState)
     return 0;
 }
 
-/*
- * RFU Multiboot images are loaded into IWRAM
- * struct RfuMbootLL
- * {
- *   struct RfuLinkStatus status;
- *   u8 filler_B4[0x3C];
- *   char name[10];
- *   u16 checksum;
- * }
- * Returns 1 if the packet to inherit is malformed.
- */
-u16 rfu_MBOOT_CHILD_inheritanceLinkStatus(void)
-{
-    const char *s1 = str_checkMbootLL;
-    char *s2 = (char *)0x30000F0;
-    u16 checksum;
-    u16 *mb_buff_iwram_p;
-    u8 i;
-
-    // if (strcmp(s1, s2) != 0) return 1;
-    while (*s1 != '\0')
-        if (*s1++ != *s2++)
-            return 1;
-    mb_buff_iwram_p = (u16 *)0x3000000;
-
-    // The size of struct RfuLinkStatus is 180
-    checksum = 0;
-    for (i = 0; i < 180/2; ++i)
-        checksum += *mb_buff_iwram_p++;
-    if (checksum != *(u16 *)0x30000FA)
-        return 1;
-    CpuCopy16((u16 *)0x3000000, gRfuLinkStatus, sizeof(struct RfuLinkStatus));
-    gRfuStatic->flags |= 0x80; // mboot
-    return 0;
-}
 
 void rfu_REQ_stopMode(void)
 {
@@ -434,7 +333,7 @@ void rfu_REQ_configSystem(u16 availSlotFlag, u8 maxMFrame, u8 mcTimer)
         u16 IMEBackup = REG_IME;
 
         REG_IME = 0;
-        gRfuStatic->linkEmergencyLimit = Div(600, mcTimer);
+        gRfuStatic->linkEmergencyLimit = 600 / mcTimer;
         REG_IME = IMEBackup;
     }
 }

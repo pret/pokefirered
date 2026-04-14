@@ -3536,71 +3536,7 @@ void InitUnionRoom(void)
 
 static void Task_InitUnionRoom(u8 taskId)
 {
-    s32 i;
-    u8 text[32];
-    struct WirelessLink_URoom * data = sWirelessLinkMain.uRoom;
 
-    switch (data->state)
-    {
-    case 0:
-        data->state = 1;
-        break;
-    case 1:
-        SetHostRfuGameData(ACTIVITY_SEARCH, 0, FALSE);
-        SetWirelessCommType1();
-        OpenLink();
-        InitializeRfuLinkManager_EnterUnionRoom();
-        RfuSetIgnoreError(TRUE);
-        data->state = 2;
-        break;
-    case 2:
-        data->incomingChildList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
-        ClearIncomingPlayerList(data->incomingChildList->players, RFU_CHILD_MAX);
-        data->incomingParentList = AllocZeroed(RFU_CHILD_MAX * sizeof(struct RfuIncomingPlayer));
-        ClearIncomingPlayerList(data->incomingParentList->players, RFU_CHILD_MAX);
-        data->playerList = AllocZeroed(MAX_UNION_ROOM_LEADERS * sizeof(struct RfuPlayer));
-        ClearRfuPlayerList(data->playerList->players, MAX_UNION_ROOM_LEADERS);
-        data->spawnPlayer = AllocZeroed(sizeof(struct RfuPlayer));
-        ClearRfuPlayerList(&data->spawnPlayer->players[0], 1);
-        data->searchTaskId = CreateTask_SearchForChildOrParent(data->incomingParentList, data->incomingChildList, LINK_GROUP_UNION_ROOM_INIT);
-        data->state = 3;
-        break;
-    case 3:
-        switch (HandlePlayerListUpdate())
-        {
-        case PLIST_NEW_PLAYER:
-        case PLIST_RECENT_UPDATE:
-            if (sUnionRoomPlayerName[0] == EOS)
-            {
-                for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
-                {
-                    if (data->playerList->players[i].groupScheduledAnim == UNION_ROOM_SPAWN_IN)
-                    {
-                        CopyAndTranslatePlayerName2(text, data->playerList->players[i]);
-                        if (PlayerHasMetTrainerBefore(ReadAsU16(data->playerList->players[i].rfu.data.compatibility.playerTrainerId), text))
-                        {
-                            StringCopy(sUnionRoomPlayerName, text);
-                            break;
-                        }
-                    }
-                }
-            }
-            break;
-        case PLIST_UNUSED:
-            break;
-        }
-        break;
-    case 4:
-        Free(data->spawnPlayer);
-        Free(data->playerList);
-        Free(data->incomingParentList);
-        Free(data->incomingChildList);
-        DestroyTask(data->searchTaskId);
-        Free(sWirelessLinkMain.uRoom);
-        LinkRfu_Shutdown();
-        DestroyTask(taskId);
-        break;
-    }
 }
 
 bool16 BufferUnionRoomPlayerName(void)

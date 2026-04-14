@@ -31,14 +31,7 @@
 
 #define CpuFastCopy(src, dest, size) CpuFastSet(src, dest, ((size)/(32/8) & 0x1FFFFF))
 
-#define DmaSet(dmaNum, src, dest, control)        \
-{                                                 \
-    vu32 *dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum; \
-    dmaRegs[0] = (vu32)(src);                     \
-    dmaRegs[1] = (vu32)(dest);                    \
-    dmaRegs[2] = (vu32)(control);                 \
-    dmaRegs[2];                                   \
-}
+extern void DmaSet(int dmaNum, const void * src, void * dest, u32 control);
 
 #define DMA_FILL(dmaNum, value, dest, size, bit)                                              \
 {                                                                                             \
@@ -50,8 +43,8 @@
          | ((size)/(bit/8)));                                                                 \
 }
 
-#define DmaFill16(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 16)
-#define DmaFill32(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 32)
+#define DmaFill16(dmaNum, value, dest, size) CpuFill16(value, dest, size)
+#define DmaFill32(dmaNum, value, dest, size) CpuFill32(value, dest, size)
 
 // Note that the DMA clear macros cause the DMA control value to be calculated
 // at runtime rather than compile time. The size is divided by the DMA transfer
@@ -75,8 +68,8 @@
            (DMA_ENABLE | DMA_START_NOW | DMA_##bit##BIT | DMA_SRC_INC | DMA_DEST_INC) << 16 \
          | ((size)/(bit/8)))
 
-#define DmaCopy16(dmaNum, src, dest, size) DMA_COPY(dmaNum, src, dest, size, 16)
-#define DmaCopy32(dmaNum, src, dest, size) DMA_COPY(dmaNum, src, dest, size, 32)
+#define DmaCopy16(dmaNum, src, dest, size) CpuCopy16(src, dest, size)
+#define DmaCopy32(dmaNum, src, dest, size) CpuCopy32(src, dest, size)
 
 #define DmaStop(dmaNum)                                         \
 {                                                               \

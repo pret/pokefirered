@@ -99,12 +99,6 @@ void EnableVCountIntrAtLine150(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
-int main(void)
-{
-    AgbMain();
-    return 0;
-}
-
 void AgbMain()
 {
 #if REVISION >= 0xA
@@ -122,7 +116,7 @@ void AgbMain()
     InitIntrHandlers();
     m4aSoundInit();
     EnableVCountIntrAtLine150();
-    InitRFU();
+    //InitRFU();
     CheckForFlashMemory();
     InitMainCallbacks();
     InitMapMusic();
@@ -136,23 +130,14 @@ void AgbMain()
 
     SetNotInSaveFailedScreen();
 
-    // Revision 10 has no calls into libisagbprn except this one.
-#if !defined(NDEBUG) || REVISION >= 0xA
-#if (LOG_HANDLER == LOG_HANDLER_MGBA_PRINT)
-    (void) MgbaOpen();
-#elif (LOG_HANDLER == LOG_HANDLER_AGB_PRINT)
-    AGBPrintInit();
-#endif
-#endif
-
 #if REVISION >= 1
     if (gFlashMemoryPresent != TRUE)
         SetMainCallback2(NULL);
 #endif
 
     gLinkTransferringData = FALSE;
-
-    for (;;)
+    int i=0;
+    for (;;i++)
     {
         ReadKeys();
 
@@ -190,6 +175,7 @@ void AgbMain()
 
         PlayTimeCounter_Update();
         MapMusicMain();
+
         WaitForVBlank();
     }
 }
@@ -272,7 +258,7 @@ void InitKeys(void)
 
 static void ReadKeys(void)
 {
-    u16 keyInput = REG_KEYINPUT ^ KEYS_MASK;
+    u16 keyInput = Platform_GetKeyInput();
     gMain.newKeysRaw = keyInput & ~gMain.heldKeysRaw;
     gMain.newKeys = gMain.newKeysRaw;
     gMain.newAndRepeatedKeys = gMain.newKeysRaw;
@@ -363,13 +349,11 @@ static void VBlankIntr(void)
         RfuVSync();
     else if (!gLinkVSyncDisabled)
         LinkVSync();
-
     if (gMain.vblankCounter1)
         (*gMain.vblankCounter1)++;
 
     if (gMain.vblankCallback)
         gMain.vblankCallback();
-
     gMain.vblankCounter2++;
 
     CopyBufferedValuesToGpuRegs();
@@ -380,11 +364,13 @@ static void VBlankIntr(void)
 #if !defined(NDEBUG) || REVISION >= 0xA
     sVcountBeforeSound = REG_VCOUNT;
 #endif
+
     m4aSoundMain();
+
 #if !defined(NDEBUG) || REVISION >= 0xA
     sVcountAfterSound = REG_VCOUNT;
-#endif
 
+#endif
     TryReceiveLinkBattleData();
     Random();
     UpdateWirelessStatusIndicatorSprite();
@@ -438,10 +424,7 @@ static void IntrDummy(void)
 
 static void WaitForVBlank(void)
 {
-    gMain.intrCheck &= ~INTR_FLAG_VBLANK;
-
-    while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
-        ;
+    VBlankIntrWait();
 }
 
 void SetVBlankCounter1Ptr(u32 *ptr)

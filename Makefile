@@ -23,7 +23,9 @@ OBJDUMP := $(PREFIX)objdump
 AS := $(PREFIX)as
 LD := $(PREFIX)ld
 MODERN := 1
-SDL_DIR := /mnt/c/Users/josma/Desktop/pokexe/pokefirered/sdl
+SDL_DIR := /mnt/c/Users/josma/Desktop/pokexe2/SDL2-2.32.10/i686-w64-mingw32
+
+
 
 EXE :=
 ifeq ($(OS),Windows_NT)
@@ -371,5 +373,5 @@ endif
 # Elf from object files
 LDFLAGS = -Map ../../$(MAP)
 $(ROM): $(LD_SCRIPT) $(LD_SCRIPT_DEPS) $(OBJS)
-	cd $(OBJ_DIR) && i686-w64-mingw32-gcc -Wno-trigraphs -Wimplicit -Wparentheses -Wunused -m32 -std=gnu99 -fleading-underscore -fno-dce -fno-builtin -Wno-unused-function -DFIRERED=1 -DREVISION=0 -DENGLISH=1 -DPORTABLE -DNONMATCHING -D UBFIX -DMODERN=1 -O3 -Wl,--demangle $(OBJS_REL) -o $(ROM) -L$(SDL_DIR)/lib -lxinput -lkernel32 -lSDL3
+	cd $(OBJ_DIR) && i686-w64-mingw32-gcc -Wno-trigraphs -Wimplicit -Wparentheses -Wunused -m32 -std=gnu99 -fleading-underscore -fno-dce -fno-builtin -Wno-unused-function -DFIRERED=1 -DREVISION=0 -DENGLISH=1 -DPORTABLE -DNONMATCHING -D UBFIX -DMODERN=1 -O3 -Wl,--demangle $(OBJS_REL) -o $(ROM) -L$(SDL_DIR)/lib -lxinput -lkernel32 -lmingw32 -lSDL2main -lSDL2
 	mv $(OBJ_DIR)/$(ROM) ./

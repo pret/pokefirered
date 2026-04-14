@@ -1,7 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 
-u8 gHeap[HEAP_SIZE] = {0};
+ALIGNED(4) u8 gHeap[HEAP_SIZE] = {0};
 
 static void *sHeapStart;
 static u32 sHeapSize;

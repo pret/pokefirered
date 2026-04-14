@@ -3862,18 +3862,19 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
 {
     if (!gPaletteFade.active)
     {
+        FreeAllWindowBuffers(); // This needs to be moved up here to avoid a use-after-free
+        if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
+        {
+            FreeMonSpritesGfx();
+            FreeBattleResources();
+            FreeBattleSpritesData();
+        }
         ResetSpriteData();
         if (gLeveledUpInBattle == 0 || gBattleOutcome != B_OUTCOME_WON)
             gBattleMainFunc = ReturnFromBattleToOverworld;
         else
             gBattleMainFunc = TryEvolvePokemon;
         FreeAllWindowBuffers();
-        if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
-        {
-            FreeMonSpritesGfx();
-            FreeBattleSpritesData();
-            FreeBattleResources();
-        }
     }
 }
 

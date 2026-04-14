@@ -1,13 +1,12 @@
 #include "global.h"
 
 //stubs
-void umul3232H32(){}
 void SoundMain(){}
 void SoundMainRAM(){}
-void SoundMainBTM(){}
+
 void RealClearChain(){}
 void ply_fine(){}
-void MPlayJumpTableCopy(){}
+
 void ply_goto(){}
 void ply_patt(){}
 void ply_pend(){}
@@ -24,10 +23,9 @@ void ply_lfodl(){}
 void ply_modt(){}
 void ply_tune(){}
 void ply_port(){}
-void m4aSoundVSync(){}
+
 void MPlayMain(){}
-void TrackStop(){}
-void ChnVolSetAsm(){}
+
 void ply_note(){}
 void ply_endtie(){}
 void clear_modM(){}

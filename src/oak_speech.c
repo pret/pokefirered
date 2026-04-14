@@ -1966,7 +1966,6 @@ static void DestroyPikachuOrPlatformSprites(u8 taskId, u8 spriteType)
 static void LoadTrainerPic(u16 whichPic, u16 tileOffset)
 {
     u32 i;
-
     switch (whichPic)
     {
     case MALE_PLAYER_PIC:
@@ -1988,7 +1987,6 @@ static void LoadTrainerPic(u16 whichPic, u16 tileOffset)
     default:
         return;
     }
-
     sOakSpeechResources->trainerPicTilemap = AllocZeroed(0x60);
     for (i = 0; i < 0x60; i++)
         ((u8 *)sOakSpeechResources->trainerPicTilemap)[i] = i;

@@ -242,21 +242,6 @@ static const u8 sLinkErrorTextColor[] = { 0x00, 0x01, 0x02 };
 
 bool8 IsWirelessAdapterConnected(void)
 {
-    if (QL_IS_PLAYBACK_STATE)
-        return FALSE;
-
-    SetWirelessCommType1();
-    InitRFUAPI();
-    RfuSetIgnoreError(TRUE);
-    if (rfu_LMAN_REQBN_softReset_and_checkID() == RFU_ID)
-    {
-        rfu_REQ_stopMode();
-        rfu_waitREQComplete();
-        return TRUE;
-    }
-    SetWirelessCommType0_Internal();
-    CloseLink();
-    RestoreSerialTimer3IntrHandlers();
     return FALSE;
 }
 
@@ -1637,53 +1622,6 @@ void LinkPlayerFromBlock(u32 who)
 // When this function returns TRUE the callbacks are skipped
 bool8 HandleLinkConnection(void)
 {
-    bool32 main1Failed;
-    bool32 main2Failed;
-
-    if (gWirelessCommType == 0)
-    {
-        gLinkStatus = LinkMain1(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
-        LinkMain2(&gMain.heldKeys);
-        if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && IsSendingKeysOverCable() == TRUE)
-            return TRUE;
-    }
-    else
-    {
-#if REVISION >= 0xA
-        bool32 reloadOrReset = FALSE;
-        if (svc_51())
-        {
-// Documentation issue:
-// Rfu_IsMaster supposedly returns bool8, but just returns gRfu.ParentChild
-// That value has three states, see librfu.h. One of those states is MODE_NEUTRAL (0xFF) which means init.
-// So the last condition basically means "rfu link status is connected, not initialising".
-// As in, it's true if value is MODE_CHILD or MODE_PARENT but not MODE_NEUTRAL (because unsigned cmp).
-            if (!FuncIsActiveTask(Task_WirelessCommunicationScreen) && (InUnionRoom() || gReceivedRemoteLinkPlayers != 0 || Rfu_IsMaster() <= MODE_PARENT))
-            {
-                reloadOrReset = TRUE;
-            }
-            CloseLink();
-        }
-#endif
-        main1Failed = RfuMain1(); // Always returns FALSE
-        main2Failed = RfuMain2();
-#if REVISION >= 0xA
-        if (reloadOrReset)
-        {
-            // If active task is mystery gift then soft reset, otherwise reload the save.
-            if (FuncIsActiveTask(Task_MysteryGift)) RfuSoftReset();
-            else RfuReloadSave();
-        }
-        else
-#endif
-        if (IsSendingKeysOverCable() == TRUE)
-        {
-            // This will never be reached.
-            // IsSendingKeysOverCable is always FALSE for wireless communication
-            if (main1Failed == TRUE || IsRfuRecvQueueEmpty() || main2Failed)
-                return TRUE;
-        }
-    }
     return FALSE;
 }
 

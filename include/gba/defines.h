@@ -24,14 +24,15 @@ extern void * INTR_VECTOR;
 #define OBJ_PLTT_SIZE 0x200
 #define PLTT_SIZE     (BG_PLTT_SIZE + OBJ_PLTT_SIZE)
 
-extern u8 PLTT[PLTT_SIZE];
+extern u8 PLTT[PLTT_SIZE] __attribute__ ((aligned (4)));
 #define BG_PLTT       PLTT
 #define OBJ_PLTT      (PLTT + BG_PLTT_SIZE)
 
 
 
 #define VRAM_SIZE 0x18000
-extern u32 VRAM[VRAM_SIZE / sizeof(u32)];
+extern u8 VRAM_[VRAM_SIZE] __attribute__ ((aligned (4)));
+#define VRAM (u32)VRAM_
 
 #define BG_VRAM           VRAM
 #define BG_VRAM_SIZE      0x10000
@@ -54,7 +55,7 @@ extern u32 VRAM[VRAM_SIZE / sizeof(u32)];
 #define OBJ_VRAM1_SIZE 0x4000
 
 #define OAM_SIZE 0x400
-extern u8 OAM[OAM_SIZE];
+extern u8 OAM[OAM_SIZE] __attribute__ ((aligned (4)));
 
 #define ROM_HEADER_SIZE   0xC0
 

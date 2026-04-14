@@ -141,6 +141,7 @@ static void Task_HandleYesNoMenu(u8 taskId)
             AddTextPrinterParameterized4(1, FONT_NORMAL, 0, 3, 1, 1, sTextColor, 0, gText_ClearingData);
             CopyWindowToVram(1, COPYWIN_FULL);
             ClearSaveData();
+            Platform_StoreSaveFile();
             break;
         case MENU_NOTHING_CHOSEN:
         default:

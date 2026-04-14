@@ -633,6 +633,7 @@ bool8 IsBattleTransitionDone(void)
         InitTransitionData();
         FREE_AND_SET_NULL(sTransitionData);
         DestroyTask(taskId);
+        SetHBlankCallback(NULL); //prevents use after free crash in HBlankCB_Phase2_Mugshots
         return TRUE;
     }
     else
@@ -692,8 +693,10 @@ static bool8 Transition_StartMain(struct Task *task)
 static bool8 Transition_WaitForMain(struct Task *task)
 {
     task->tTransitionDone = FALSE;
-    if (FindTaskIdByFunc(sTasks_Main[task->tTransitionId]) == TASK_NONE)
+    if (FindTaskIdByFunc(sTasks_Main[task->tTransitionId]) == TASK_NONE){
         task->tTransitionDone = TRUE;
+        SetVBlankCallback(NULL); // Fixes use-after-free of sTransitionData in callbacks
+    }
     return FALSE;
 }
 

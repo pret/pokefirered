@@ -315,14 +315,7 @@ void InitRFU(void)
 
 void InitRFUAPI(void)
 {
-    if (!rfu_initializeAPI(sRfuAPIBuffer, RFU_API_BUFF_SIZE_RAM, &gIntrTable[1], TRUE))
-    {
-        gLinkType = 0;
-        // ClearSavedLinkPlayers(); // Em fix
-        RfuSetIgnoreError(FALSE);
-        ResetLinkRfuGFLayer();
-        rfu_setTimerInterrupt(3, &gIntrTable[2]);
-    }
+
 }
 
 static void Task_ParentSearchForChildren(u8 taskId)

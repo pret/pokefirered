@@ -2,7 +2,7 @@
 #define GUARD_GBA_FLASH_INTERNAL_H
 
 #define FLASH_ROM_SIZE_1M 131072 // 1 megabit ROM
-extern u8 FLASH_BASE[FLASH_ROM_SIZE_1M];
+extern u8 FLASH_BASE[FLASH_ROM_SIZE_1M] __attribute__ ((aligned (4)));
 
 #define FLASH_WRITE(addr, data) ((*(vu8 *)(FLASH_BASE + (addr))) = (data))
 
@@ -44,11 +44,11 @@ struct FlashSetupInfo
 
 extern u16 gFlashNumRemainingBytes;
 
-extern u16 (*ProgramFlashByte)(u16, u32, u8);
-extern u16 (*ProgramFlashSector)(u16, void *);
-extern u16 (*EraseFlashChip)(void);
-extern u16 (*EraseFlashSector)(u16);
-extern u16 (*WaitForFlashWrite)(u8, u8 *, u8);
+extern u16 ProgramFlashByte(u16, u32, u8);
+extern u16 ProgramFlashSector(u16, void *);
+extern u16 EraseFlashChip(void);
+extern u16 EraseFlashSector(u16);
+extern u16 WaitForFlashWrite(u8, u8 *, u8);
 extern const u16 *gFlashMaxTime;
 extern const struct FlashType *gFlash;
 
@@ -60,7 +60,6 @@ extern const struct FlashSetupInfo LE26FV10N1TS;
 extern const struct FlashSetupInfo DefaultFlash;
 
 void SwitchFlashBank(u8 bankNum);
-u16 ReadFlashId(void);
 void StartFlashTimer(u8 phase);
 void SetReadFlash1(u16 *dest);
 void StopFlashTimer(void);

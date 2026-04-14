@@ -47,13 +47,16 @@ void SetTrainerId(u32 trainerId, u8 *dst)
 void CopyTrainerId(u8 *dst, u8 *src)
 {
     s32 i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++){
+        if (src == NULL)
+            dst[i] = 0;
         dst[i] = src[i];
+    }
 }
 
 static void InitPlayerTrainerId(void)
 {
-    u32 trainerId = (Random() << 0x10) | GetGeneratedTrainerIdLower();
+    u32 trainerId = (Random() << 16  | Random());
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
 }
 

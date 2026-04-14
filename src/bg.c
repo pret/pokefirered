@@ -493,7 +493,7 @@ u16 Unused_LoadBgPalette(u8 bg, const void *src, u16 size, u16 destOffset)
 bool8 IsDma3ManagerBusyWithBgCopy(void)
 {
     int i;
-
+    VBlankIntrWait();
     for (i = 0; i < 0x80; i++)
     {
         u8 div = i / 0x20;

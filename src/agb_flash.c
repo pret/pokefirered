@@ -1,5 +1,7 @@
+#include "global.h"
 #include "gba/gba.h"
 #include "gba/flash_internal.h"
+#include "platform.h"
 
 static u8 sTimerNum;
 static u16 sTimerCount;
@@ -8,70 +10,14 @@ static u16 sSavedIme;
 
 u8 gFlashTimeoutFlag = 0;
 u8 (*PollFlashStatus)(u8 *) = NULL;
-
-const u16 gFlashMaxTimeData[] =
-{
-      10, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
-      10, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
-    2000, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
-    2000, 65469, TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_256CLK,
-};
-const struct FlashType gFlashData = {
-    131072, // ROM size
-    {
-        4096, // sector size
-            12, // bit shift to multiply by sector size (4096 == 1 << 12)
-            32, // number of sectors
-            0  // appears to be unused
-    },
-    { 3, 1 }, // wait state setup data
-    { { 0xCC, 0xCC } } // ID
-};
-
-u16 WaitForFlashWrite(u8 phase, u8 *addr, u8 lastData);
-u16 ProgramFlashSector(u16 sectorNum, void *src);
-u16 ProgramFlashByte(u16 sectorNum, u32 offset, u8 data);
+u16 (*WaitForFlashWrite)(u8 phase, u8 *addr, u8 lastData) = NULL;
+u16 (*ProgramFlashSector)(u16 sectorNum, void *src) = NULL;
+const struct FlashType *gFlash = NULL;
+u16 (*ProgramFlashByte)(u16 sectorNum, u32 offset, u8 data) = NULL;
 u16 gFlashNumRemainingBytes = 0;
-u16 EraseFlashChip(void);
-u16 EraseFlashSector(u16 sectorNum);
-const u16 *gFlashMaxTime = gFlashMaxTimeData;
-const struct FlashType *gFlash = &gFlashData;
-
-u16 WaitForFlashWrite(u8 phase, u8 *addr, u8 lastData)
-{
-    // stub
-    return 0;
-}
-
-u16 EraseFlashChip(void)
-{
-    memset(FLASH_BASE, 0xFF, sizeof(FLASH_BASE));
-    return 0;
-}
-
-u16 EraseFlashSector(u16 sectorNum)
-{
-    u8 clearBuffer[0x1000] = { 0xFF };
-    return ProgramFlashSector(sectorNum, &clearBuffer[0]);
-}
-
-u16 ProgramFlashByte(u16 sectorNum, u32 offset, u8 data)
-{
-    FLASH_BASE[(sectorNum << gFlash->sector.shift) + offset] = data;
-    return 0;
-}
-
-u16 ProgramFlashSector(u16 sectorNum, void *src)
-{
-    memcpy(&FLASH_BASE[sectorNum << gFlash->sector.shift], src, 0x1000);
-    return 0;
-}
-
-u16 IdentifyFlash(void)
-{
-    REG_WAITCNT = (REG_WAITCNT & ~WAITCNT_SRAM_MASK) | WAITCNT_SRAM_8;
-    return 0;
-}
+u16 (*EraseFlashChip)() = NULL;
+u16 (*EraseFlashSector)(u16 sectorNum) = NULL;
+const u16 *gFlashMaxTime = NULL;
 
 void SetReadFlash1(u16 *dest);
 
@@ -90,7 +36,10 @@ do {                             \
         ;                        \
 } while (0)
 
-
+u16 ReadFlashId(void)
+{
+    return 0xCCCC;
+}
 
 void FlashTimerIntr(void)
 {
@@ -158,19 +107,11 @@ void SetReadFlash1(u16 *dest)
 }
 
 
-// Using volatile here to make sure the flash memory will ONLY be read as bytes, to prevent any compiler optimizations.
-void ReadFlash_Core(vu8 *src, u8 *dest, u32 size)
-{
-    while (size-- != 0)
-    {
-        *dest++ = *src++;
-    }
-}
-
 void ReadFlash(u16 sectorNum, u32 offset, void *dest, u32 size)
 {
+    //u8 *src = FLASH_BASE + (sectorNum << gFlash->sector.shift) + offset;
+    //memcpy(dest, src, size);
     Platform_ReadFlash(sectorNum, offset, dest, size);
-    return;
 }
 
 u32 VerifyFlashSector_Core(u8 *src, u8 *tgt, u32 size)
@@ -178,21 +119,22 @@ u32 VerifyFlashSector_Core(u8 *src, u8 *tgt, u32 size)
     return 0;
 }
 
+
 u32 VerifyFlashSector(u16 sectorNum, u8 *src)
 {
-    return 0; // return 0 if verified.
+    return 0;
 }
 
 u32 VerifyFlashSectorNBytes(u16 sectorNum, u8 *src, u32 n)
 {
-    return 0; // return 0 if verified.
+    return 0;
 }
 
 u32 ProgramFlashSectorAndVerify(u16 sectorNum, u8 *src)
 {
     u8 i;
     u32 result;
-
+    printf("ProgramFlashSectorAndVerify: sectorNum=%d\n", sectorNum);
     for (i = 0; i < 3; i++) // 3 attempts
     {
         result = ProgramFlashSector(sectorNum, src);

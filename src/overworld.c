@@ -438,12 +438,14 @@ static void LoadSaveblockObjEventScripts(void)
     int i;
     const struct ObjectEventTemplate * src = gMapHeader.events->objectEvents;
     struct ObjectEventTemplate * savObjTemplates = gSaveBlock1Ptr->objectEventTemplates;
-
-    for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
-    {
-        savObjTemplates[i].script = src[i].script;
+    if (src != NULL && savObjTemplates != NULL) {
+        for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
+        {
+            savObjTemplates[i].script = src[i].script;
+        }
     }
 }
+
 
 void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y)
 {

@@ -188,7 +188,7 @@ struct Time
     /*0x02*/ s8 hours;
     /*0x03*/ s8 minutes;
     /*0x04*/ s8 seconds;
-};
+} __attribute__((aligned(4)));;
 
 struct Pokedex
 {
@@ -343,8 +343,8 @@ struct SaveBlock2
               u16 regionMapZoom:1; // whether the map is zoomed in
     /*0x018*/ struct Pokedex pokedex;
     /*0x090*/ u8 filler_90[0x8];
-    /*0x098*/ struct Time localTimeOffset;
-    /*0x0A0*/ struct Time lastBerryTreeUpdate;
+    /*0x098*/ struct Time localTimeOffset; 
+    /*0x0A0*/ struct Time lastBerryTreeUpdate; 
     /*0x0A8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
     /*0x0AC*/ bool8 unkFlag1; // Set TRUE, never read
     /*0x0AD*/ bool8 unkFlag2; // Set FALSE, never read
@@ -518,7 +518,7 @@ typedef union OldMan
     struct MauvilleManHipster hipster;
     struct MauvilleOldManTrader trader;
     struct MauvilleManStoryteller storyteller;
-    u8 filler[0x40];
+    u8 filler[0x3C];
 } OldMan;
 
 struct Mail
@@ -528,6 +528,7 @@ struct Mail
     /*0x1A*/ u8 trainerId[TRAINER_ID_LENGTH];
     /*0x1E*/ u16 species;
     /*0x20*/ u16 itemId;
+    u8 filler[2];
 };
 
 struct DayCareMail
@@ -606,6 +607,7 @@ struct QuestLogObjectEvent
     /*0x0f*/ u8 previousMetatileBehavior;
     /*0x10*/ u8 directionSequenceIndex;
     /*0x11*/ u8 animId;
+    u8 filler_12[2];
 };
 
 // This represents all the data needed to display a single scene for the "Quest Log" when the player resumes playing.
@@ -754,7 +756,7 @@ struct ExternalEventFlags
     u8 unknownFlag19;
     u8 unknownFlag20;
 
-} __attribute__((packed));/*size = 0x15*/
+}__attribute__((packed));/*size = 0x15*/
 
 struct SaveBlock1
 {
@@ -785,7 +787,7 @@ struct SaveBlock1
     /*0x0632*/ u8 unused_632[6];
     /*0x0638*/ u16 trainerRematchStepCounter;
     /*0x063A*/ u8 ALIGNED(2) trainerRematches[MAX_REMATCH_ENTRIES];
-    /*0x06A0*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
+    /*0x06A0*/ ALIGNED(4) struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
     /*0x08E0*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
     /*0x0EE0*/ u8 flags[NUM_FLAG_BYTES];
     /*0x1000*/ u16 vars[VARS_COUNT];
@@ -797,8 +799,9 @@ struct SaveBlock1
     /*0x2CC4*/ u16 easyChatBattleLost[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2CD0*/ struct Mail mail[MAIL_COUNT];
     /*0x2F10*/ u8 additionalPhrases[NUM_ADDITIONAL_PHRASE_BYTES];
-    /*0x2F18*/ OldMan oldMan; // unused
+    /*0x2F18*/ ALIGNED(4) OldMan oldMan; // unused
     /*0x2F54*/ struct DewfordTrend dewfordTrends[5]; // unused
+                u8 filler_2F74[0x4];
     /*0x2F80*/ struct DayCare daycare;
     /*0x309C*/ u8 giftRibbons[GIFT_RIBBONS_COUNT];
     /*0x30A7*/ struct ExternalEventData externalEventData;
@@ -812,6 +815,7 @@ struct SaveBlock1
     /*0x3A18*/ u8 seen2[DEX_FLAGS_NO];
     /*0x3A4C*/ u8 rivalName[PLAYER_NAME_LENGTH + 1];
     /*0x3A54*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
+                u8 unused_3A74[0x20];
     /*0x3A94*/ u8 unused_3A94[64];
     /*0x3AD4*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3BA8*/ struct TrainerNameRecord trainerNameRecords[20];

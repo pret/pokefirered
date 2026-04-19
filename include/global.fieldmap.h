@@ -265,7 +265,7 @@ struct ObjectEvent
     /*0x21*/        u8 directionSequenceIndex;
     /*0x22*/        u8 playerCopyableMovement;
     /*size = 0x24*/
-};
+} __attribute__((packed));
 
 struct ObjectEventGraphicsInfo
 {

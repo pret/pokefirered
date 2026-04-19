@@ -450,13 +450,11 @@ static u8 CopySaveSlotData(u16 sectorId, const struct SaveSectorLocation *locati
         id = gSaveDataBufferPtr->id;
         if (id == 0)
             gLastWrittenSector = i;
-
+         printf("Loading save slot...%d\n", i);
         checksum = CalculateChecksum(gSaveDataBufferPtr->data, locations[id].size);
         if (gSaveDataBufferPtr->signature == SECTOR_SIGNATURE && gSaveDataBufferPtr->checksum == checksum)
         {
-            u16 j;
-            for (j = 0; j < locations[id].size; j++)
-                locations[id].data[j] = gSaveDataBufferPtr->data[j];
+            memcpy(locations[id].data, gSaveDataBufferPtr->data, locations[id].size);
         }
     }
 
@@ -811,7 +809,9 @@ u8 LoadGameSave(u8 saveType)
         gSaveFileStatus = SAVE_STATUS_NO_FLASH;
         return SAVE_STATUS_ERROR;
     }
-
+    if (!gSaveBlock2Ptr) gSaveBlock2Ptr = malloc(sizeof(struct SaveBlock2));
+    if (!gSaveBlock1Ptr) gSaveBlock1Ptr = malloc(sizeof(struct SaveBlock1));
+    if (!gPokemonStoragePtr) gPokemonStoragePtr = malloc(sizeof(struct PokemonStorage));
     UpdateSaveAddresses();
     switch (saveType)
     {

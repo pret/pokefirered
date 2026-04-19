@@ -44,11 +44,11 @@ struct FlashSetupInfo
 
 extern u16 gFlashNumRemainingBytes;
 
-extern u16 ProgramFlashByte(u16, u32, u8);
-extern u16 ProgramFlashSector(u16, void *);
-extern u16 EraseFlashChip(void);
-extern u16 EraseFlashSector(u16);
-extern u16 WaitForFlashWrite(u8, u8 *, u8);
+extern u16 (*ProgramFlashByte)(u16, u32, u8);
+extern u16 (*ProgramFlashSector)(u16, void *);
+extern u16 (*EraseFlashChip)(void);
+extern u16 (*EraseFlashSector)(u16);
+extern u16 (*WaitForFlashWrite)(u8, u8 *, u8);
 extern const u16 *gFlashMaxTime;
 extern const struct FlashType *gFlash;
 
@@ -60,6 +60,7 @@ extern const struct FlashSetupInfo LE26FV10N1TS;
 extern const struct FlashSetupInfo DefaultFlash;
 
 void SwitchFlashBank(u8 bankNum);
+u16 ReadFlashId(void);
 void StartFlashTimer(u8 phase);
 void SetReadFlash1(u16 *dest);
 void StopFlashTimer(void);
@@ -74,6 +75,14 @@ u16 EraseFlashChip_MX(void);
 u16 EraseFlashSector_MX(u16 sectorNum);
 u16 ProgramFlashByte_MX(u16 sectorNum, u32 offset, u8 data);
 u16 ProgramFlashSector_MX(u16 sectorNum, void *src);
+
+extern const struct FlashSetupInfo DUMMY_SAVE;
+
+u16 WaitForFlashWrite_DUMMY(u8 phase, u8 *addr, u8 lastData);
+u16 EraseFlashChip_DUMMY(void);
+u16 EraseFlashSector_DUMMY(u16 sectorNum);
+u16 ProgramFlashByte_DUMMY(u16 sectorNum, u32 offset, u8 data);
+u16 ProgramFlashSector_DUMMY(u16 sectorNum, void *src);
 
 // agb_flash_1m
 u16 IdentifyFlash(void);

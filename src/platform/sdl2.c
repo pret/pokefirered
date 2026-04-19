@@ -38,9 +38,6 @@ double curGameTime = 0;
 double fixedTimestep = 1.0 / 60.0; // 16.666667ms
 double timeScale = 1.0;
 
-
-static FILE *sSaveFile = NULL;
-
 extern void AgbMain(void);
 extern void DoSoftReset(void);
 
@@ -49,8 +46,7 @@ void ProcessEvents(void);
 void VDraw(SDL_Texture *texture);
 
 static void ReadSaveFile(char *path);
-static void StoreSaveFile(void);
-static void CloseSaveFile(void);
+static void StoreSaveFile(char *path);
 
 
 
@@ -179,9 +175,6 @@ int main(int argc, char **argv)
         SDL_RenderPresent(sdlRenderer);
     }
 
-    //StoreSaveFile();
-    CloseSaveFile();
-
     SDL_DestroyWindow(sdlWindow);
     SDL_Quit();
     return 0;
@@ -190,50 +183,56 @@ int main(int argc, char **argv)
 static void ReadSaveFile(char *path)
 {
     // Check whether the saveFile exists, and create it if not
-    sSaveFile = fopen(path, "r+b");
-    if (sSaveFile == NULL)
+    FILE *savefile = fopen(path, "r+b");
+    if (savefile == NULL)
     {
-        sSaveFile = fopen(path, "w+b");
+        savefile = fopen(path, "w+b");
     }
 
-    fseek(sSaveFile, 0, SEEK_END);
-    int fileSize = ftell(sSaveFile);
-    fseek(sSaveFile, 0, SEEK_SET);
+    fseek(savefile, 0, SEEK_END);
+    int fileSize = ftell(savefile);
+    fseek(savefile, 0, SEEK_SET);
 
     // Only read as many bytes as fit inside the buffer
     // or as many bytes as are in the file
     int bytesToRead = (fileSize < sizeof(FLASH_BASE)) ? fileSize : sizeof(FLASH_BASE);
 
-    int bytesRead = fread(FLASH_BASE, 1, bytesToRead, sSaveFile);
+    int bytesRead = fread(FLASH_BASE, 1, bytesToRead, savefile);
 
     // Fill the buffer if the savefile was just created or smaller than the buffer itself
     for (int i = bytesRead; i < sizeof(FLASH_BASE); i++)
     {
         FLASH_BASE[i] = 0xFF;
     }
+    fclose(savefile);
 }
 
-static void StoreSaveFile()
+static void StoreSaveFile(char *path)
 {
-    if (sSaveFile != NULL)
+    FILE *savefile = fopen(path, "r+b");
+    if (savefile != NULL)
     {
-        fseek(sSaveFile, 0, SEEK_SET);
-        fwrite(FLASH_BASE, 1, sizeof(FLASH_BASE), sSaveFile);
+        fseek(savefile, 0, SEEK_SET);
+        fwrite(FLASH_BASE, 1, sizeof(FLASH_BASE), savefile);
+        fclose(savefile);
+    } else {
+        printf("Error opening save file for writing.\n");
     }
+    
 }
 
 void Platform_StoreSaveFile(void)
 {
-    StoreSaveFile();
+    StoreSaveFile("pokefirered.sav");
 }
 
 void Platform_ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size)
 {
-    printf("ReadFlash(sectorNum=0x%04X,offset=0x%08X,size=0x%02X)\n",sectorNum,offset,size);
+    //printf("ReadFlash(sectorNum=0x%04X,offset=0x%08X,size=0x%02X)\n",sectorNum,offset,size);
     FILE * savefile = fopen("pokefirered.sav", "r+b");
     if (savefile == NULL)
     {
-        puts("Error opening save file.");
+        printf("Error opening save file.\n");
         return;
     }
     if (fseek(savefile, (sectorNum << gFlash->sector.shift) + offset, SEEK_SET))
@@ -249,19 +248,12 @@ void Platform_ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size)
     fclose(savefile);
 }
 
+
 void Platform_QueueAudio(float *audioBuffer, s32 samplesPerFrame)
 {
     SDL_QueueAudio(1, audioBuffer, samplesPerFrame);
 }
 
-
-static void CloseSaveFile()
-{
-    if (sSaveFile != NULL)
-    {
-        fclose(sSaveFile);
-    }
-}
 
 // Key mappings
 #define KEY_A_BUTTON      SDLK_z

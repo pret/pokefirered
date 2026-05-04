@@ -195,7 +195,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "CinnabarIsland_Gym_EventScript_Quz1Left"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz1Left"
     },
     {
       "type": "sign",
@@ -203,7 +203,7 @@
       "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "CinnabarIsland_Gym_EventScript_Quz1Right"
+      "script": "CinnabarIsland_Gym_EventScript_Quiz1Right"
     },
     {
       "type": "sign",

@@ -270,34 +270,45 @@ static const struct TrainerMonNoItemDefaultMoves sParty_YoungsterBen2[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_BugCatcherRick[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_BugCatcherRick[] = {
     {
         .iv = 0,
-        .lvl = 6,
+        .lvl = 9,
         .species = SPECIES_WEEDLE,
+	.moves = {MOVE_LEECH_LIFE, MOVE_POISON_STING, MOVE_TACKLE, MOVE_NONE},
     },
     {
         .iv = 0,
-        .lvl = 6,
+        .lvl = 9,
         .species = SPECIES_CATERPIE,
+	.moves = {MOVE_LEECH_LIFE, MOVE_STRING_SHOT, MOVE_TACKLE, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 9,
+	.species = SPECIES_PARAS,
+	.moves = {MOVE_FURY_CUTTER, MOVE_NONE, MOVE_NONE, MOVE_NONE},
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_BugCatcherDoug[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_BugCatcherDoug[] = {
     {
         .iv = 0,
-        .lvl = 7,
-        .species = SPECIES_WEEDLE,
-    },
-    {
-        .iv = 0,
-        .lvl = 7,
+        .lvl = 10,
         .species = SPECIES_KAKUNA,
+	.moves = {MOVE_LEECH_LIFE, MOVE_IRON_DEFENSE, MOVE_POISON_STING, MOVE_NONE},
     },
     {
         .iv = 0,
-        .lvl = 7,
-        .species = SPECIES_WEEDLE,
+        .lvl = 10,
+        .species = SPECIES_METAPOD,
+	.moves = {MOVE_LEECH_LIFE, MOVE_IRON_DEFENSE, MOVE_REST, MOVE_SNORE},
+    },
+    {
+        .iv = 0,
+        .lvl = 10,
+        .species = SPECIES_SHELLDER,
+	.moves = {MOVE_IRON_DEFENSE, MOVE_CLAMP, MOVE_NONE, MOVE_NONE},
     },
 };
 
@@ -7344,16 +7355,36 @@ static const struct TrainerMonNoItemDefaultMoves sParty_BikerGoon3[] = {
 
 static const struct TrainerMonNoItemDefaultMoves sParty_Biker2[] = {DUMMY_TRAINER_MON};
 
-static const struct TrainerMonNoItemDefaultMoves sParty_BugCatcherAnthony[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_BugCatcherAnthony[] = {
     {
         .iv = 0,
-        .lvl = 7,
+        .lvl = 10,
         .species = SPECIES_CATERPIE,
+	.moves = {MOVE_LEECH_LIFE, MOVE_STRING_SHOT, MOVE_NONE, MOVE_NONE},
     },
     {
         .iv = 0,
-        .lvl = 8,
-        .species = SPECIES_CATERPIE,
+        .lvl = 10,
+        .species = SPECIES_WEEDLE,
+	.moves = {MOVE_LEECH_LIFE, MOVE_POISON_STING, MOVE_NONE, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 10,
+	.species = SPECIES_PARAS,
+	.moves = {MOVE_FURY_CUTTER, MOVE_STUN_SPORE, MOVE_NONE, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 10,
+	.species = SPECIES_VENONAT,
+	.moves = {MOVE_LEECH_LIFE, MOVE_POISON_STING, MOVE_CONFUSION, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 8,
+	.species = SPECIES_SCYTHER,
+	.moves = {MOVE_FURY_CUTTER, MOVE_GUST, MOVE_NONE, MOVE_NONE},
     },
 };
 

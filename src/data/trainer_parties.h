@@ -312,11 +312,36 @@ static const struct TrainerMonNoItemCustomMoves sParty_BugCatcherDoug[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_BugCatcherSammy[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_BugCatcherSammy[] = {
     {
         .iv = 0,
-        .lvl = 9,
-        .species = SPECIES_WEEDLE,
+        .lvl = 11,
+        .species = SPECIES_BEEDRILL,
+	.moves = {MOVE_TWINEEDLE, MOVE_POISON_TAIL, MOVE_NONE, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 11,
+	.species = SPECIES_BUTTERFREE,
+	.moves = {MOVE_SILVER_WIND, MOVE_SLEEP_POWDER, MOVE_GUST, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 11,
+	.species = SPECIES_VENOMOTH,
+	.moves = {MOVE_POISON_POWDER, MOVE_SILVER_WIND, MOVE_GUST, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 9,
+	.species = SPECIES_SCYTHER,
+	.moves = {MOVE_FURY_CUTTER, MOVE_GUST, MOVE_NONE, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 9,
+	.species = SPECIES_PINSIR,
+	.moves = {MOVE_VICE_GRIP, MOVE_HORN_ATTACK, MOVE_NONE, MOVE_NONE},
     },
 };
 
@@ -7388,21 +7413,30 @@ static const struct TrainerMonNoItemCustomMoves sParty_BugCatcherAnthony[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_BugCatcherCharlie[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_BugCatcherCharlie[] = {
     {
         .iv = 0,
-        .lvl = 7,
-        .species = SPECIES_METAPOD,
+        .lvl = 11,
+        .species = SPECIES_PARAS,
+	.moves = {MOVE_SLEEP_POWDER, MOVE_FURY_CUTTER, MOVE_LEECH_SEED, MOVE_NONE},
     },
     {
         .iv = 0,
-        .lvl = 7,
-        .species = SPECIES_CATERPIE,
+        .lvl = 11,
+        .species = SPECIES_VENONAT,
+	.moves = {MOVE_POISON_POWDER, MOVE_LEECH_LIFE, MOVE_NONE, MOVE_NONE},
     },
     {
         .iv = 0,
-        .lvl = 7,
+        .lvl = 11,
         .species = SPECIES_METAPOD,
+	.moves = {MOVE_IRON_DEFENSE, MOVE_LEECH_LIFE, MOVE_REST, MOVE_SLEEP_TALK},
+    },
+    {
+	.iv = 0,
+	.lvl = 11,
+	.species = SPECIES_KAKUNA,
+	.moves = {MOVE_PROTECT, MOVE_TOXIC, MOVE_LEECH_LIFE},
     },
 };
 

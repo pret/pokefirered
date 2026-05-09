@@ -894,15 +894,15 @@ static const struct TrainerMonNoItemDefaultMoves sParty_SailorDwayne[] = {
 static const struct TrainerMonNoItemCustomMoves sParty_CamperLiam[] = {
     {
         .iv = 0,
-        .lvl = 10,
+        .lvl = 13,
         .species = SPECIES_GEODUDE,
-        .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_NONE, MOVE_NONE},
+        .moves = {MOVE_ROCK_TOMB, MOVE_SAND_ATTACK, MOVE_NONE, MOVE_NONE},
     },
     {
         .iv = 0,
-        .lvl = 11,
-        .species = SPECIES_SANDSHREW,
-        .moves = {MOVE_SCRATCH, MOVE_DEFENSE_CURL, MOVE_SAND_ATTACK, MOVE_NONE},
+        .lvl = 13,
+        .species = SPECIES_RHYHORN,
+        .moves = {MOVE_DIG, MOVE_ROCK_BLAST, MOVE_NONE, MOVE_NONE},
     },
 };
 
@@ -5640,15 +5640,33 @@ static const struct TrainerMonItemCustomMoves sParty_EliteFourLance[] = {
 static const struct TrainerMonNoItemCustomMoves sParty_LeaderBrock[] = {
     {
         .iv = 0,
-        .lvl = 12,
+        .lvl = 14,
         .species = SPECIES_GEODUDE,
-        .moves = {MOVE_TACKLE, MOVE_DEFENSE_CURL, MOVE_NONE, MOVE_NONE},
+        .moves = {MOVE_ROCK_TOMB, MOVE_ROLLOUT, MOVE_SAND_ATTACK, MOVE_BRICK_BREAK},
     },
     {
         .iv = 0,
-        .lvl = 14,
-        .species = SPECIES_ONIX,
-        .moves = {MOVE_TACKLE, MOVE_BIND, MOVE_ROCK_TOMB, MOVE_NONE},
+        .lvl = 13,
+        .species = SPECIES_RHYHORN,
+        .moves = {MOVE_STOMP, MOVE_ROCK_TOMB, MOVE_NONE, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 13,
+	.species = SPECIES_OMANYTE,
+	.moves = {MOVE_ROCK_TOMB, MOVE_WHIRLPOOL, MOVE_CONFUSE_RAY, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 13,
+	.species = SPECIES_KABUTO,
+	.moves = {MOVE_ROCK_TOMB, MOVE_WATER_PULSE, MOVE_SLASH, MOVE_NONE},
+    },
+    {
+	.iv = 0,
+	.lvl = 15,
+	.species = SPECIES_ONIX,
+	.moves = {MOVE_ROCK_TOMB, MOVE_DIG, MOVE_SCREECH, MOVE_NONE},
     },
 };
 

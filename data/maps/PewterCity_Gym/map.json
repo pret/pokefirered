@@ -32,14 +32,14 @@
     {
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_CAMPER",
-      "x": 3,
+      "x": 2,
       "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "4",
+      "trainer_sight_or_berry_tree_id": "8",
       "script": "PewterCity_Gym_EventScript_Liam",
       "flag": "0"
     },

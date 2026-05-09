@@ -253,8 +253,6 @@
       "border_filepath": "data/layouts/House5/border.bin",
       "blockdata_filepath": "data/layouts/House5/map.bin"
     },
-    {},
-    {},
     {
       "id": "LAYOUT_UNUSED1",
       "name": "Unused1_Layout",
@@ -315,7 +313,6 @@
       "border_filepath": "data/layouts/PewterCity_Gym/border.bin",
       "blockdata_filepath": "data/layouts/PewterCity_Gym/map.bin"
     },
-    {},
     {
       "id": "LAYOUT_FOUR_ISLAND_LORELEIS_HOUSE",
       "name": "FourIsland_LoreleisHouse_Layout",
@@ -412,14 +409,6 @@
       "border_filepath": "data/layouts/ViridianCity_Gym/border.bin",
       "blockdata_filepath": "data/layouts/ViridianCity_Gym/map.bin"
     },
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
-    {},
     {
       "id": "LAYOUT_RS_SAFARI_ZONE_ENTRANCE",
       "name": "RS_SafariZone_Entrance_Layout",
@@ -540,7 +529,6 @@
       "border_filepath": "data/layouts/FortreeCity_DecorationShop/border.bin",
       "blockdata_filepath": "data/layouts/FortreeCity_DecorationShop/map.bin"
     },
-    {},
     {
       "id": "LAYOUT_RS_BATTLE_TOWER",
       "name": "RS_BattleTower_Layout",
@@ -553,10 +541,6 @@
       "border_filepath": "data/layouts/RS_BattleTower/border.bin",
       "blockdata_filepath": "data/layouts/RS_BattleTower/map.bin"
     },
-    {},
-    {},
-    {},
-    {},
     {
       "id": "LAYOUT_SS_TIDAL_CORRIDOR",
       "name": "SSTidal_Corridor_Layout",
@@ -725,7 +709,6 @@
       "border_filepath": "data/layouts/RustboroCity_Flat1_2F/border.bin",
       "blockdata_filepath": "data/layouts/RustboroCity_Flat1_2F/map.bin"
     },
-    {},
     {
       "id": "LAYOUT_RS_SAFARI_ZONE_REST_HOUSE",
       "name": "RS_SafariZone_RestHouse_Layout",
@@ -1902,7 +1885,6 @@
       "border_filepath": "data/layouts/UndergroundPath_NorthSouthTunnel/border.bin",
       "blockdata_filepath": "data/layouts/UndergroundPath_NorthSouthTunnel/map.bin"
     },
-    {},
     {
       "id": "LAYOUT_ROUTE12_NORTH_ENTRANCE_1F",
       "name": "Route12_NorthEntrance_1F_Layout",

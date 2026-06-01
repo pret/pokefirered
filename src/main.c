@@ -184,6 +184,9 @@ void AgbMain()
          && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
         {
             rfu_REQ_stopMode();
+
+            // Note: This is an emulation hack for sloop. Do not remove if building for real
+            // hardware!
 #if REVISION < 0xA
             rfu_waitREQComplete();
 #endif

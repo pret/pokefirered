@@ -100,7 +100,7 @@ else
 endif
 # Enable debug info if set
 ifeq ($(DINFO),1)
-  override CFLAGS += -g
+  override CFLAGS += -g -O0
 endif
 
 # Variable filled out in other make files

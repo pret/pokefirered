@@ -194,13 +194,13 @@ CinnabarIsland_Gym_EventScript_GymStatuePostVictory::
 	releaseall
 	end
 
-CinnabarIsland_Gym_EventScript_Quz1Left::
+CinnabarIsland_Gym_EventScript_Quiz1Left::
 	lockall
 	setvar VAR_TEMP_1, 0
 	goto CinnabarIsland_Gym_EventScript_Quiz1
 	end
 
-CinnabarIsland_Gym_EventScript_Quz1Right::
+CinnabarIsland_Gym_EventScript_Quiz1Right::
 	lockall
 	setvar VAR_TEMP_1, 1
 	goto CinnabarIsland_Gym_EventScript_Quiz1

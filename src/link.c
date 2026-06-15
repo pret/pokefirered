@@ -1425,7 +1425,9 @@ void CB2_LinkError(void)
 {
     u8 *tilemapBuffer;
 
-#if REVISION >= 0xA
+    // BUGFIX: Link error calls ResetTasks() but leaves gFieldCallback set; overworld may
+    // then run a stale post-link callback on a dead connection (softlock / erratic link state).
+#if defined(BUGFIX) || REVISION >= 0xA
     ClearFieldCallback();
 #endif
     SetGpuReg(REG_OFFSET_DISPCNT, 0);

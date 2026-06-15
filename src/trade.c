@@ -2116,7 +2116,8 @@ static void CB_HandleTradeCanceled(void)
 
 static void CB_InitExitCanceledTrade(void)
 {
-#if REVISION >= 0xA
+    // BUGFIX: Wait for link idle before exiting a canceled trade.
+#if defined(BUGFIX) || REVISION >= 0xA
     if (IsLinkTaskFinished() && !gPaletteFade.active)
 #else
     if (!gPaletteFade.active)

@@ -1,0 +1,189 @@
+{
+    "env": {
+        "workspace_include": [
+            "${workspaceFolder}/include"
+        ],
+        "agbcc": "${workspaceFolder}/tools/agbcc/bin/agbcc_arm",
+        "agbcc_include": [
+            "${workspaceFolder}/tools/agbcc/**"
+        ],
+        "agbcc_args": [
+            "-mthumb-interwork",
+            "-Wimplicit",
+            "-Wparentheses",
+            "-Werror",
+            "-O2",
+            "-fhex-asm"
+        ],
+        "modern": "/usr/bin/arm-none-eabi-gcc",
+        "modern_args": [
+            "-mthumb",
+            "-mthumb-interwork",
+            "-O2",
+            "-mabi=apcs-gnu",
+            "-mtune=arm7tdmi",
+            "-march=armv4t",
+            "-fno-toplevel-reorder",
+            "-Wno-pointer-to-int-cast"
+        ]
+    },
+    "configurations": [
+        {
+            "name": "firered",
+            "includePath": [
+                "${workspace_include}",
+                "${agbcc_include}"
+            ],
+            "compilerPath": "${agbcc}",
+            "cStandard": "gnu99",
+            "cppStandard": "gnu++98",
+            "intelliSenseMode": "linux-gcc-arm",
+            "defines": [
+                "ENGLISH",
+                "FIRERED",
+                "REVISION=0",
+                "MODERN=0"
+            ],
+            "compilerArgs": [
+                "${agbcc_args}"
+            ]
+        },
+        {
+            "name": "firered_rev1",
+            "includePath": [
+                "${workspace_include}",
+                "${agbcc_include}"
+            ],
+            "compilerPath": "${agbcc}",
+            "cStandard": "gnu99",
+            "cppStandard": "gnu++98",
+            "intelliSenseMode": "linux-gcc-arm",
+            "defines": [
+                "ENGLISH",
+                "FIRERED",
+                "REVISION=1",
+                "MODERN=0"
+            ],
+            "compilerArgs": [
+                "${agbcc_args}"
+            ]
+        },
+        {
+            "name": "firered_modern",
+            "includePath": [
+                "${workspace_include}"
+            ],
+            "compilerPath": "${modern}",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm",
+            "defines": [
+                "ENGLISH",
+                "FIRERED",
+                "REVISION=0",
+                "MODERN=1"
+            ],
+            "compilerArgs": [
+                "${modern_args}"
+            ]
+        },
+        {
+            "name": "firered_rev1_modern",
+            "includePath": [
+                "${workspace_include}"
+            ],
+            "compilerPath": "${modern}",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm",
+            "defines": [
+                "ENGLISH",
+                "FIRERED",
+                "REVISION=1",
+                "MODERN=1"
+            ],
+            "compilerArgs": [
+                "${modern_args}"
+            ]
+        },
+        {
+            "name": "leafgreen",
+            "includePath": [
+                "${workspace_include}",
+                "${agbcc_include}"
+            ],
+            "compilerPath": "${agbcc}",
+            "cStandard": "gnu99",
+            "cppStandard": "gnu++98",
+            "intelliSenseMode": "linux-gcc-arm",
+            "defines": [
+                "ENGLISH",
+                "LEAFGREEN",
+                "REVISION=0",
+                "MODERN=0"
+            ],
+            "compilerArgs": [
+                "${agbcc_args}"
+            ]
+        },
+        {
+            "name": "leafgreen_rev1",
+            "includePath": [
+                "${workspace_include}",
+                "${agbcc_include}"
+            ],
+            "compilerPath": "${agbcc}",
+            "cStandard": "gnu99",
+            "cppStandard": "gnu++98",
+            "intelliSenseMode": "linux-gcc-arm",
+            "defines": [
+                "ENGLISH",
+                "LEAFGREEN",
+                "REVISION=1",
+                "MODERN=0"
+            ],
+            "compilerArgs": [
+                "${agbcc_args}"
+            ]
+        },
+        {
+            "name": "leafgreen_modern",
+            "includePath": [
+                "${workspace_include}"
+            ],
+            "compilerPath": "${modern}",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm",
+            "defines": [
+                "ENGLISH",
+                "LEAFGREEN",
+                "REVISION=0",
+                "MODERN=1"
+            ],
+            "compilerArgs": [
+                "${modern_args}"
+            ]
+        },
+        {
+            "name": "leafgreen_rev1_modern",
+            "includePath": [
+                "${workspace_include}"
+            ],
+            "compilerPath": "${modern}",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-arm",
+            "defines": [
+                "ENGLISH",
+                "LEAFGREEN",
+                "REVISION=1",
+                "MODERN=1"
+            ],
+            "compilerArgs": [
+                "${modern_args}"
+            ]
+        }
+    ],
+    "version": 4
+}

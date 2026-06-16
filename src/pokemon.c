@@ -37,6 +37,11 @@
 #include "constants/battle_move_effects.h"
 #include "constants/union_room.h"
 
+#ifndef UBFIX
+u32 GetMonData2(struct Pokemon *mon, s32 field) __attribute__((alias("GetMonData3")));
+u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field) __attribute__((alias("GetBoxMonData3")));
+#endif
+
 #define SPECIES_TO_HOENN(name)      [SPECIES_##name - 1] = HOENN_DEX_##name
 #define SPECIES_TO_NATIONAL(name)   [SPECIES_##name - 1] = NATIONAL_DEX_##name
 #define HOENN_TO_NATIONAL(name)     [HOENN_DEX_##name - 1] = NATIONAL_DEX_##name
@@ -2899,7 +2904,11 @@ static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 perso
  * safety we have a GetMonData macro (in include/pokemon.h) which
  * dispatches to either GetMonData2 or GetMonData3 based on the number
  * of arguments. */
+#ifndef UBFIX
 u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
+#else
+u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
+#endif
 {
     u32 ret;
 
@@ -2967,13 +2976,16 @@ u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
     return ret;
 }
 
-u32 GetMonData2(struct Pokemon *mon, s32 field) __attribute__((alias("GetMonData3")));
 
 /* GameFreak called GetBoxMonData with either 2 or 3 arguments, for type
  * safety we have a GetBoxMonData macro (in include/pokemon.h) which
  * dispatches to either GetBoxMonData2 or GetBoxMonData3 based on the
  * number of arguments. */
+#ifndef UBFIX
 u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
+#else
+u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
+#endif
 {
     s32 i;
     u32 retVal = 0;
@@ -3328,8 +3340,6 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
 
     return retVal;
 }
-
-u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field) __attribute__((alias("GetBoxMonData3")));
 
 #define SET8(lhs) (lhs) = *data
 #define SET16(lhs) (lhs) = data[0] + (data[1] << 8)

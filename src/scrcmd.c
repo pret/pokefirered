@@ -37,6 +37,7 @@
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/sound.h"
+#include "sloopsvc.h"
 
 extern u16 (*const gSpecials[])(void);
 extern u16 (*const gSpecialsEnd[])(void);
@@ -1732,12 +1733,24 @@ bool8 ScrCmd_bufferboxname(struct ScriptContext * ctx)
 
 bool8 ScrCmd_givemon(struct ScriptContext * ctx)
 {
-    u16 species = VarGet(ScriptReadHalfword(ctx));
-    u8 level = ScriptReadByte(ctx);
-    u16 item = VarGet(ScriptReadHalfword(ctx));
-    u32 unkParam1 = ScriptReadWord(ctx);
-    u32 unkParam2 = ScriptReadWord(ctx);
-    u8 unkParam3 = ScriptReadByte(ctx);
+    u16 species;
+    u8 level;
+    u16 item;
+    u32 unkParam1;
+    u32 unkParam2;
+    u8 unkParam3;
+    species = VarGet(ScriptReadHalfword(ctx));
+#if REVISION >= 0xA
+    // If the player party count is zero, this "must" be giving the starter.
+    // Notify the emulator of what starter was picked, for telemetry purposes.
+    if (gSaveBlock1Ptr->playerPartyCount == 0)
+        svc_SetStarter(species);
+#endif
+    level = ScriptReadByte(ctx);
+    item = VarGet(ScriptReadHalfword(ctx));
+    unkParam1 = ScriptReadWord(ctx);
+    unkParam2 = ScriptReadWord(ctx);
+    unkParam3 = ScriptReadByte(ctx);
 
     gSpecialVar_Result = ScriptGiveMon(species, level, item, unkParam1, unkParam2, unkParam3);
     return FALSE;

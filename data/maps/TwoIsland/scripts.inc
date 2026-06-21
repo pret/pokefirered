@@ -54,7 +54,7 @@ TwoIsland_EventScript_SetShopExpanded2::
 
 TwoIsland_EventScript_SetShopExpanded3::
 	setvar VAR_MAP_SCENE_TWO_ISLAND, 4
-	clearflag FLAG_HIDE_TWO_ISLAND_SUPER_NERD
+	clearflag FLAG_HIDE_TWO_ISLAND_POKE_MANIAC
 	return
 
 TwoIsland_EventScript_Clerk::
@@ -192,7 +192,7 @@ TwoIsland_EventScript_Beauty::
 	release
 	end
 
-TwoIsland_EventScript_SuperNerd::
+TwoIsland_EventScript_PokeManiac::
 	msgbox TwoIsland_Text_BuyRareItemsHere, MSGBOX_NPC
 	end
 

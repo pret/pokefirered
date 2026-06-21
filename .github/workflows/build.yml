@@ -32,7 +32,9 @@ jobs:
           ref: 'symbols'
 
       - name: Install binutils
-        run: sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi libpng-dev
+        run: |
+          sudo apt update
+          sudo apt install gcc-arm-none-eabi binutils-arm-none-eabi libpng-dev
         # build-essential and git are already installed
         # gcc-arm-none-eabi is only needed for the modern build
         # as an alternative to dkP
@@ -53,6 +55,12 @@ jobs:
         run: |
           make -j${nproc} all syms
 
+      - name: Compare FireRed rev10
+        env:
+          GAME_REVISION: 10
+        run: |
+          make -j${nproc} all syms
+
       - name: Compare LeafGreen
         env:
           GAME_VERSION: LEAFGREEN
@@ -63,6 +71,13 @@ jobs:
         env:
           GAME_VERSION: LEAFGREEN
           GAME_REVISION: 1
+        run: |
+          make -j${nproc} all syms
+
+      - name: Compare LeafGreen rev10
+        env:
+          GAME_VERSION: LEAFGREEN
+          GAME_REVISION: 10
         run: |
           make -j${nproc} all syms
 

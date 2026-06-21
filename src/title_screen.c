@@ -634,12 +634,16 @@ static void SetTitleScreenScene_Run(s16 *data)
             DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
             SetMainCallback2(CB2_FadeOutTransitionToSaveClearScreen);
         }
+#if REVISION >= 0xA
+        // Berry fix trigger has been removed.
+#else
         else if (JOY_HELD(KEYSTROKE_BERRY_FIX) == KEYSTROKE_BERRY_FIX)
         {
             DeactivateSlashSprite(tSlashSpriteId);
             DestroyTask(FindTaskIdByFunc(Task_TitleScreenMain));
             SetMainCallback2(CB2_FadeOutTransitionToBerryFix);
         }
+#endif
         else if (JOY_NEW(A_BUTTON | START_BUTTON))
         {
             SetTitleScreenScene(data, TITLESCREENSCENE_CRY);

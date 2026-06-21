@@ -578,26 +578,27 @@ static const struct OamData sOamData_Emoticons = {
     .affineParam = 0,
 };
 
-static const struct SpriteFrameImage sSpriteImages_Emoticons[] = {
-    {sGfx_Emoticons + 0x000, 0x80},
-    {sGfx_Emoticons + 0x040, 0x80},
-    {sGfx_Emoticons + 0x080, 0x80},
+static const struct SpriteFrameImage sSpriteImages_Emoticons[] =
+{
+    overworld_frame(sGfx_Emoticons, 2, 2, 0),
+    overworld_frame(sGfx_Emoticons, 2, 2, 1),
+    overworld_frame(sGfx_Emoticons, 2, 2, 2),
 
-    {sGfx_Emoticons + 0x180, 0x80},
-    {sGfx_Emoticons + 0x1C0, 0x80},
-    {sGfx_Emoticons + 0x200, 0x80},
+    overworld_frame(sGfx_Emoticons, 2, 2, 6),
+    overworld_frame(sGfx_Emoticons, 2, 2, 7),
+    overworld_frame(sGfx_Emoticons, 2, 2, 8),
 
-    {sGfx_Emoticons + 0x0C0, 0x80},
-    {sGfx_Emoticons + 0x100, 0x80},
-    {sGfx_Emoticons + 0x140, 0x80},
+    overworld_frame(sGfx_Emoticons, 2, 2, 3),
+    overworld_frame(sGfx_Emoticons, 2, 2, 4),
+    overworld_frame(sGfx_Emoticons, 2, 2, 5),
 
-    {sGfx_Emoticons + 0x240, 0x80},
-    {sGfx_Emoticons + 0x280, 0x80},
-    {sGfx_Emoticons + 0x2C0, 0x80},
+    overworld_frame(sGfx_Emoticons, 2, 2,  9),
+    overworld_frame(sGfx_Emoticons, 2, 2, 10),
+    overworld_frame(sGfx_Emoticons, 2, 2, 11),
 
-    {sGfx_Emoticons + 0x300, 0x80},
-    {sGfx_Emoticons + 0x340, 0x80},
-    {sGfx_Emoticons + 0x380, 0x80},
+    overworld_frame(sGfx_Emoticons, 2, 2, 12),
+    overworld_frame(sGfx_Emoticons, 2, 2, 13),
+    overworld_frame(sGfx_Emoticons, 2, 2, 14),
 };
 
 static const union AnimCmd sAnimCmd_ExclamationMark1[] = {

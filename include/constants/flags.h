@@ -121,7 +121,7 @@
 #define FLAG_HIDE_UNION_ROOM_PLAYER_7                      0x069
 #define FLAG_HIDE_UNION_ROOM_PLAYER_8                      0x06A
 #define FLAG_HIDE_CINNABAR_SEAGALLOP                       0x06B
-#define FLAG_HIDE_SAFFRON_FAN_CLUB_BLACKBELT               0x06C
+#define FLAG_HIDE_SAFFRON_FAN_CLUB_BLACK_BELT               0x06C
 #define FLAG_HIDE_SAFFRON_FAN_CLUB_ROCKER                  0x06D
 #define FLAG_HIDE_SAFFRON_FAN_CLUB_WOMAN                   0x06E
 #define FLAG_HIDE_SAFFRON_FAN_CLUB_BEAUTY                  0x06F
@@ -138,7 +138,7 @@
 #define FLAG_HIDE_LOSTELLE_IN_BERRY_FOREST                 0x07A
 #define FLAG_HIDE_TWO_ISLAND_WOMAN                         0x07B
 #define FLAG_HIDE_TWO_ISLAND_BEAUTY                        0x07C
-#define FLAG_HIDE_TWO_ISLAND_SUPER_NERD                    0x07D
+#define FLAG_HIDE_TWO_ISLAND_POKE_MANIAC                   0x07D
 #define FLAG_HIDE_THREE_ISLAND_ANTIBIKERS                  0x07E
 #define FLAG_0x07F                                         0x07F
 #define FLAG_HIDE_ROUTE_16_SNORLAX                         0x080

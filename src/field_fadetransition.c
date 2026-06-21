@@ -207,6 +207,9 @@ static void Task_ReturnToFieldRecordMixing(u8 taskId)
     switch (task->data[0])
     {
     case 0:
+#if REVISION >= 0xA
+        if (!IsLinkTaskFinished()) break;
+#endif
         SetLinkStandbyCallback();
         task->data[0]++;
         break;

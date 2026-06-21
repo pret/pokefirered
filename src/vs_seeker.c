@@ -644,7 +644,7 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
     for (i = 0; i < gMapHeader.events->objectEventCount; i++)
     {
         if ((templates[i].objUnion.normal.trainerType == TRAINER_TYPE_NORMAL
-          || templates[i].objUnion.normal.trainerType == TRAINER_TYPE_BURIED) 
+          || templates[i].objUnion.normal.trainerType == TRAINER_TYPE_BURIED)
          && (templates[i].objUnion.normal.movementType == MOVEMENT_TYPE_RAISE_HAND_AND_STOP
           || templates[i].objUnion.normal.movementType == MOVEMENT_TYPE_RAISE_HAND_AND_JUMP
           || templates[i].objUnion.normal.movementType == MOVEMENT_TYPE_RAISE_HAND_AND_SWIM))
@@ -946,7 +946,7 @@ void ClearRematchStateByTrainerId(void)
 
         for (i = 0; i < gMapHeader.events->objectEventCount; i++)
         {
-            if ((objectEventTemplates[i].objUnion.normal.trainerType == TRAINER_TYPE_NORMAL 
+            if ((objectEventTemplates[i].objUnion.normal.trainerType == TRAINER_TYPE_NORMAL
               || objectEventTemplates[i].objUnion.normal.trainerType == TRAINER_TYPE_BURIED)
               && vsSeekerDataIdx == LookupVsSeekerOpponentInArray(sRematches, GetTrainerFlagFromScript(objectEventTemplates[i].script)))
             {
@@ -1139,7 +1139,7 @@ static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId)
         case OBJ_EVENT_GFX_BUG_CATCHER:
         case OBJ_EVENT_GFX_LASS:
         case OBJ_EVENT_GFX_WOMAN_1:
-        case OBJ_EVENT_GFX_BATTLE_GIRL:
+        case OBJ_EVENT_GFX_CRUSH_GIRL:
         case OBJ_EVENT_GFX_MAN:
         case OBJ_EVENT_GFX_ROCKER:
         case OBJ_EVENT_GFX_WOMAN_2:
@@ -1152,7 +1152,7 @@ static u8 GetRunningBehaviorFromGraphicsId(u8 graphicsId)
         case OBJ_EVENT_GFX_COOLTRAINER_F:
         case OBJ_EVENT_GFX_SWIMMER_M_LAND:
         case OBJ_EVENT_GFX_SWIMMER_F_LAND:
-        case OBJ_EVENT_GFX_BLACKBELT:
+        case OBJ_EVENT_GFX_BLACK_BELT:
         case OBJ_EVENT_GFX_HIKER:
         case OBJ_EVENT_GFX_SAILOR:
             return MOVEMENT_TYPE_RAISE_HAND_AND_JUMP;

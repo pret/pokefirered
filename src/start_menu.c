@@ -36,6 +36,7 @@
 #include "help_system.h"
 #include "constants/songs.h"
 #include "constants/field_weather.h"
+#include "sloopsvc.h"
 
 enum StartMenuOption
 {
@@ -935,6 +936,9 @@ static void task50_after_link_battle_save(u8 taskId)
             if (WriteSaveBlock1Sector())
             {
                 ClearContinueGameWarpStatus2();
+#if REVISION >= 0xA
+                svc_FinishSave();
+#endif
                 data[0] = 3;
             }
             break;

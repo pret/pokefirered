@@ -9,7 +9,7 @@
 #define MGBA_LOG_INFO   (3)
 #define MGBA_LOG_DEBUG  (4)
 
-#ifdef NDEBUG
+#if defined(NDEBUG) && !(REVISION >= 0xA)
 #define DebugPrintf(pBuf, ...)
 #define DebugPrintfLevel(level, pBuf, ...)
 #define MgbaOpen()

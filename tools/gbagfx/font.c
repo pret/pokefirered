@@ -16,7 +16,53 @@ unsigned char gFontPalette[][3] = {
 	{0xFF, 0xFF, 0xFF}  // box (white)
 };
 
-static void ConvertFromLatinFont(unsigned char *src, unsigned char *dest, unsigned int numRows)
+static void ConvertFromHalfWidthLatinFont(unsigned char *src, unsigned char *dest, unsigned int numRows)
+{
+	unsigned int srcPixelsOffset = 0;
+
+	for (unsigned int row = 0; row < numRows; row++) {
+		for (unsigned int column = 0; column < 32; column++) {
+			for (unsigned int glyphTile = 0; glyphTile < 2; glyphTile++) {
+				unsigned int pixelsX = (column * 8);
+
+				for (unsigned int i = 0; i < 8; i++) {
+					unsigned int pixelsY = (row * 16) + (glyphTile * 8) + i;				
+					unsigned int destPixelsOffset = (pixelsY * 64) + (pixelsX / 4);
+
+					dest[destPixelsOffset] = src[srcPixelsOffset + 1];
+					dest[destPixelsOffset + 1] = src[srcPixelsOffset];
+
+					srcPixelsOffset += 2;
+				}
+			}
+		}
+	}
+}
+
+static void ConvertToHalfWidthLatinFont(unsigned char *src, unsigned char *dest, unsigned int numRows)
+{
+	unsigned int destPixelsOffset = 0;
+	
+	for (unsigned int row = 0; row < numRows; row++) {
+		for (unsigned int column = 0; column < 32; column++) {
+			for (unsigned int glyphTile = 0; glyphTile < 2; glyphTile++) {
+				unsigned int pixelsX = (column * 8);
+
+				for (unsigned int i = 0; i < 8; i++) {
+					unsigned int pixelsY = (row * 16) + (glyphTile * 8) + i;
+					unsigned int srcPixelsOffset = (pixelsY * 64) + (pixelsX / 4);
+
+					dest[destPixelsOffset] = src[srcPixelsOffset + 1];
+					dest[destPixelsOffset + 1] = src[srcPixelsOffset];
+
+					destPixelsOffset += 2;
+				}
+			}
+		}
+	}
+}
+
+static void ConvertFromFullWidthLatinFont(unsigned char *src, unsigned char *dest, unsigned int numRows)
 {
 	unsigned int srcPixelsOffset = 0;
 
@@ -39,7 +85,7 @@ static void ConvertFromLatinFont(unsigned char *src, unsigned char *dest, unsign
 	}
 }
 
-static void ConvertToLatinFont(unsigned char *src, unsigned char *dest, unsigned int numRows)
+static void ConvertToFullWidthLatinFont(unsigned char *src, unsigned char *dest, unsigned int numRows)
 {
 	unsigned int destPixelsOffset = 0;
 
@@ -173,7 +219,56 @@ static void SetFontPalette(struct Image *image)
 	image->hasTransparency = false;
 }
 
-void ReadLatinFont(char *path, struct Image *image)
+void ReadHalfWidthLatinFont(char *path, struct Image *image)
+{
+	int fileSize;
+	unsigned char *buffer = ReadWholeFile(path, &fileSize);
+
+	int numGlyphs = fileSize / 32;
+
+	if (numGlyphs % 16 != 0)
+		FATAL_ERROR("The number of glyphs (%d) is not a multiple of 16.\n", numGlyphs);
+
+	int numRows = numGlyphs / 16;
+
+	image->width = 256;
+	image->height = numRows * 16;
+	image->bitDepth = 2;
+	image->pixels = malloc(fileSize);
+
+	if (image->pixels == NULL)
+		FATAL_ERROR("Failed to allocate memory for font.\n");
+
+	ConvertFromHalfWidthLatinFont(buffer, image->pixels, numRows);
+
+	free(buffer);
+
+	SetFontPalette(image);
+}
+
+void WriteHalfWidthLatinFont(char *path, struct Image *image)
+{
+	if (image->width != 256)
+		FATAL_ERROR("The width of the font image (%d) is not 256.\n", image->width);
+
+	if (image->height % 16 != 0)
+		FATAL_ERROR("The height of the font image (%d) is not a multiple of 16.\n", image->height);
+
+	int numRows = image->height / 16;
+	int bufferSize = numRows * 16 * 64;
+	unsigned char *buffer = malloc(bufferSize);
+
+	if (buffer == NULL)
+		FATAL_ERROR("Failed to allocate memory for font.\n");
+
+	ConvertToHalfWidthLatinFont(image->pixels, buffer, numRows);
+
+	WriteWholeFile(path, buffer, bufferSize);
+
+	free(buffer);
+}
+
+void ReadFullWidthLatinFont(char *path, struct Image *image)
 {
 	int fileSize;
 	unsigned char *buffer = ReadWholeFile(path, &fileSize);
@@ -193,14 +288,14 @@ void ReadLatinFont(char *path, struct Image *image)
 	if (image->pixels == NULL)
 		FATAL_ERROR("Failed to allocate memory for font.\n");
 
-	ConvertFromLatinFont(buffer, image->pixels, numRows);
+	ConvertFromFullWidthLatinFont(buffer, image->pixels, numRows);
 
 	free(buffer);
 
 	SetFontPalette(image);
 }
 
-void WriteLatinFont(char *path, struct Image *image)
+void WriteFullWidthLatinFont(char *path, struct Image *image)
 {
 	if (image->width != 256)
 		FATAL_ERROR("The width of the font image (%d) is not 256.\n", image->width);
@@ -215,7 +310,7 @@ void WriteLatinFont(char *path, struct Image *image)
 	if (buffer == NULL)
 		FATAL_ERROR("Failed to allocate memory for font.\n");
 
-	ConvertToLatinFont(image->pixels, buffer, numRows);
+	ConvertToFullWidthLatinFont(image->pixels, buffer, numRows);
 
 	WriteWholeFile(path, buffer, bufferSize);
 

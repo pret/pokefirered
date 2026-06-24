@@ -97,7 +97,7 @@ struct
 
 const u8 gKeypadIconTiles[] = INCBIN_U8("graphics/fonts/keypad_icons.4bpp");
 
-static const u16 sFontSmallLatinGlyphs[] = INCBIN_U16("graphics/fonts/latin_small.latfont");
+static const u16 sFontSmallLatinGlyphs[] = INCBIN_U16("graphics/fonts/latin_small.hwlatfont");
 static const u8 sFontSmallLatinGlyphWidths[] = 
 {
      5,  5,  5,  5,  5,  5,  5,  5,  5,  4,  5,  4,  4,  5, 
@@ -140,7 +140,7 @@ static const u8 sFontSmallLatinGlyphWidths[] =
 };
 static const u16 sFontSmallJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/japanese_small.fwjpnfont");
 
-static const u16 sFontNormalCopy1LatinGlyphs[] = INCBIN_U16("graphics/fonts/latin_normal.latfont");
+static const u16 sFontNormalCopy1LatinGlyphs[] = INCBIN_U16("graphics/fonts/latin_normal.fwlatfont");
 static const u8 sFontNormalCopy1LatinGlyphWidths[] =
 {
      6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,
@@ -183,7 +183,7 @@ static const u8 sFontNormalCopy1LatinGlyphWidths[] =
 };
 static const u16 sFontTallJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/japanese_tall.fwjpnfont");
 
-static const u16 sFontNormalLatinGlyphs[] = INCBIN_U16("graphics/fonts/latin_normal.latfont");
+static const u16 sFontNormalLatinGlyphs[] = INCBIN_U16("graphics/fonts/latin_normal.fwlatfont");
 static const u8 sFontNormalLatinGlyphWidths[] =
 {
      6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,
@@ -249,7 +249,7 @@ static const u8 sFontNormalJapaneseGlyphWidths[] =
     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,  0
 };
 
-static const u16 sFontMaleLatinGlyphs[] = INCBIN_U16("graphics/fonts/latin_male.latfont");
+static const u16 sFontMaleLatinGlyphs[] = INCBIN_U16("graphics/fonts/latin_male.fwlatfont");
 static const u8 sFontMaleLatinGlyphWidths[] =
 {
      6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,
@@ -315,7 +315,7 @@ static const u8 sFontMaleJapaneseGlyphWidths[] =
     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,  0
 };
 
-static const u16 sFontFemaleLatinGlyphs[] = INCBIN_U16("graphics/fonts/latin_female.latfont");
+static const u16 sFontFemaleLatinGlyphs[] = INCBIN_U16("graphics/fonts/latin_female.fwlatfont");
 static const u8 sFontFemaleLatinGlyphWidths[] =
 {
      6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,  6,

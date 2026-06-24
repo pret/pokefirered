@@ -207,7 +207,8 @@ static void Task_ReturnToFieldRecordMixing(u8 taskId)
     switch (task->data[0])
     {
     case 0:
-#if REVISION >= 0xA
+        // BUGFIX: Wait for link idle before wireless return-to-field standby.
+#if defined(BUGFIX) || REVISION >= 0xA
         if (!IsLinkTaskFinished()) break;
 #endif
         SetLinkStandbyCallback();

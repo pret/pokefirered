@@ -58,10 +58,6 @@ static EWRAM_DATA u16 sFieldEffectScriptId = 0;
 COMMON_DATA struct ScriptContext * sQuestLogScriptContextPtr = NULL;
 COMMON_DATA u8 gSelectedObjectEvent = 0;
 
-// This is defined in here so the optimizer can't see its value when compiling
-// script.c.
-void *const gNullScriptPtr = NULL;
-
 static const u8 sScriptConditionTable[6][3] =
 {
 //  <  =  >

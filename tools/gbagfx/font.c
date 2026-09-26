@@ -224,7 +224,7 @@ void ReadHalfWidthLatinFont(char *path, struct Image *image)
 	int fileSize;
 	unsigned char *buffer = ReadWholeFile(path, &fileSize);
 
-	int numGlyphs = fileSize / 32;
+	int numGlyphs = fileSize / 64;
 
 	if (numGlyphs % 16 != 0)
 		FATAL_ERROR("The number of glyphs (%d) is not a multiple of 16.\n", numGlyphs);

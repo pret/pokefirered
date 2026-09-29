@@ -620,7 +620,7 @@ struct QuestLogScene
     /*0x0006*/ s16 y;
     /*0x0008*/ struct QuestLogObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
     /*0x0148*/ u8 flags[NUM_FLAG_BYTES];
-    /*0x02c8*/ u16 vars[VARS_COUNT];
+    /*0x0268*/ u16 vars[VARS_COUNT];
     /*0x0468*/ struct QuestLogObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
     /*0x0568*/ u16 script[128];
     /*0x0668*/ u16 end[0];
@@ -798,7 +798,7 @@ struct SaveBlock1
     /*0x2CD0*/ struct Mail mail[MAIL_COUNT];
     /*0x2F10*/ u8 additionalPhrases[NUM_ADDITIONAL_PHRASE_BYTES];
     /*0x2F18*/ OldMan oldMan; // unused
-    /*0x2F54*/ struct DewfordTrend dewfordTrends[5]; // unused
+    /*0x2F58*/ struct DewfordTrend dewfordTrends[5]; // unused
     /*0x2F80*/ struct DayCare daycare;
     /*0x309C*/ u8 giftRibbons[GIFT_RIBBONS_COUNT];
     /*0x30A7*/ struct ExternalEventData externalEventData;

@@ -179,7 +179,8 @@ void CB2_UnionRoomBattle(void)
     case 50:
         if (!UpdatePaletteFade())
         {
-#if REVISION >= 0xA
+            // BUGFIX: Defer standby until after fade; extra round syncs link before battle start.
+#if REVISION >= 0xA || defined(BUGFIX)
 #else
             SetLinkStandbyCallback();
 #endif
@@ -189,7 +190,7 @@ void CB2_UnionRoomBattle(void)
     case 51:
         if (IsLinkTaskFinished())
         {
-#if REVISION >= 0xA
+#if REVISION >= 0xA || defined(BUGFIX)
             SetLinkStandbyCallback();
             gMain.state++;
 #else
@@ -197,7 +198,7 @@ void CB2_UnionRoomBattle(void)
 #endif
         }
         break;
-#if REVISION >= 0xA
+#if REVISION >= 0xA || defined(BUGFIX)
     case 52:
         if (IsLinkTaskFinished())
         {

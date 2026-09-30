@@ -1517,7 +1517,7 @@ static bool8 RunFieldCallback(void)
     return TRUE;
 }
 
-#if REVISION >= 0xA
+#if defined(BUGFIX) || REVISION >= 0xA
 void ClearFieldCallback(void)
 {
     gFieldCallback = NULL;

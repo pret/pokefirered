@@ -86,8 +86,8 @@ static void InsertTask(u8 newTaskId)
 
 void DestroyTask(u8 taskId)
 {
-#if REVISION >= 0xA
-    // Bounds check on the task ID.
+#if REVISION >= 0xA || defined(UBFIX)
+    // UBFIX: Invalid taskId would read past gTasks[].
     if (taskId >= NUM_TASKS) return;
 #endif
     if (gTasks[taskId].isActive)

@@ -819,14 +819,15 @@ static void SetLinkBattleEndCallbacks(void)
 
 void SetBattleEndCallbacks(void)
 {
-#if REVISION >= 0xA
-#else
+    // BUGFIX: Link battles wait for RFU/cable idle and fade end before standby/close.
+    // SetLinkStandbyCallback no-ops while gRfu.callback is set, which could skip teardown.
+#if !(defined(BUGFIX) || REVISION >= 0xA)
     if (!gPaletteFade.active)
 #endif
     {
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         {
-#if REVISION >= 0xA
+#if REVISION >= 0xA || defined(BUGFIX)
             if (!IsLinkTaskFinished() || gPaletteFade.active) return;
 #endif
             if (gWirelessCommType == 0)

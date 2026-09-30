@@ -180,7 +180,8 @@ void UpdateEscapeWarp(s16 x, s16 y);
 bool8 SetDiveWarpEmerge(u16 x, u16 y);
 bool8 SetDiveWarpDive(u16 x, u16 y);
 
-#if REVISION >= 0xA
+#if defined(BUGFIX) || REVISION >= 0xA
+// Clears stale post-link callback after CB2_LinkError (see link.c).
 void ClearFieldCallback(void);
 #endif
 

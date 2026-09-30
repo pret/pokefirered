@@ -784,6 +784,7 @@ static void rfu_CB_pollConnectParent(u8 reqCommand, u16 reqResult)
     u16 id;
     u8 slot;
     u8 bm_slot_flag, i;
+    // UBFIX: Initialize target_p; some failure paths never assign it before use.
 #if REVISION >= 0xA || defined(UBFIX)
     struct RfuTgtData *target_p = NULL;
 #else
@@ -1424,6 +1425,7 @@ static u16 rfu_STC_setSendData_org(u8 ni_or_uni, u8 bmSendSlot, u8 subFrameSize,
 {
     u8 bm_slot_id, sendSlotFlag;
     u8 frameSize;
+    // UBFIX: llFrameSize_p may be unset if parentChild is neither parent nor child.
 #if REVISION >= 0xA || defined(UBFIX)
     u8 *llFrameSize_p = NULL;
 #else

@@ -473,50 +473,47 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
     struct TextPrinterSubStruct *subStruct = &textPrinter->subUnion.sub;
     const u8 *arrowTiles;
 
-    if (gTextFlags.autoScroll == 0)
+    if (gTextFlags.autoScroll)
+        return;
+
+    if (subStruct->downArrowDelay != 0)
     {
-        if (subStruct->downArrowDelay != 0)
-        {
-            subStruct->downArrowDelay = ((*(u32 *)&textPrinter->subUnion.sub) << 19 >> 27) - 1;    // convoluted way of getting field_1, necessary to match
-        }
-        else
-        {
-            FillWindowPixelRect(
-                textPrinter->printerTemplate.windowId,
-                textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor,
-                textPrinter->printerTemplate.currentX,
-                textPrinter->printerTemplate.currentY,
-                10,
-                12);
-
-            switch (gTextFlags.useAlternateDownArrow)
-            {
-                case 0:
-                default:
-                    arrowTiles = sDownArrowTiles;
-                    break;
-                case 1:
-                    arrowTiles = &sDownArrowTiles[DARK_DOWN_ARROW_OFFSET];
-                    break;
-            }
-
-            BlitBitmapRectToWindow(
-                textPrinter->printerTemplate.windowId,
-                arrowTiles,
-                sDownArrowYCoords[subStruct->downArrowYPosIdx],
-                0,
-                0x80,
-                0x10,
-                textPrinter->printerTemplate.currentX,
-                textPrinter->printerTemplate.currentY,
-                10,
-                12);
-            CopyWindowToVram(textPrinter->printerTemplate.windowId, 0x2);
-
-            subStruct->downArrowDelay = CURSOR_DELAY;
-            subStruct->downArrowYPosIdx = (*(u32 *)subStruct << 17 >> 30) + 1;
-        }
+        subStruct->downArrowDelay--;
+        return;
     }
+
+    FillWindowPixelRect(textPrinter->printerTemplate.windowId,
+        textPrinter->printerTemplate.bgColor << 4 | textPrinter->printerTemplate.bgColor,
+        textPrinter->printerTemplate.currentX,
+        textPrinter->printerTemplate.currentY,
+        10,
+        12);
+
+    switch (gTextFlags.useAlternateDownArrow)
+    {
+    case 0:
+    default:
+        arrowTiles = sDownArrowTiles;
+        break;
+    case 1:
+        arrowTiles = &sDownArrowTiles[DARK_DOWN_ARROW_OFFSET];
+        break;
+    }
+
+    BlitBitmapRectToWindow(textPrinter->printerTemplate.windowId,
+        arrowTiles,
+        sDownArrowYCoords[subStruct->downArrowYPosIdx],
+        0,
+        0x80,
+        0x10,
+        textPrinter->printerTemplate.currentX,
+        textPrinter->printerTemplate.currentY,
+        10,
+        12);
+    CopyWindowToVram(textPrinter->printerTemplate.windowId, 0x2);
+
+    subStruct->downArrowDelay = CURSOR_DELAY;
+    subStruct->downArrowYPosIdx++;
 }
 
 void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)

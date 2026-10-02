@@ -1648,12 +1648,8 @@ static void UpdateWin2PrintWordsScrollPageUp(void)
 
 static void PrintECRowsWin2(u8 row, u8 remrow)
 {
-    int i, j;
-    u16 easyChatWord;
-    u8 *str;
-    int y;
-    u8 y_;
-    int ecWordIdx;
+    int i, j, easyChatWord;
+    int y, ecWordIdx;
 
     ecWordIdx = row * 2;
     y = (row * 16 + 96) & 0xFF;
@@ -1662,15 +1658,11 @@ static void PrintECRowsWin2(u8 row, u8 remrow)
     {
         for (j = 0; j < 2; j++)
         {
-            // FIXME: Dumb trick needed to match
-            y_ = y << 18 >> 18;
             easyChatWord = GetDisplayedWordByIndex(ecWordIdx++);
             if (easyChatWord != 0xFFFF)
             {
-
                 CopyEasyChatWordPadded(sEasyChatGraphicsResources->ecPaddedWordBuffer, easyChatWord, 0);
-
-                EC_AddTextPrinterParameterized(2, FONT_NORMAL_COPY_1, sEasyChatGraphicsResources->ecPaddedWordBuffer, (j * 13 + 3) * 8, y_, TEXT_SKIP_DRAW, NULL);
+                EC_AddTextPrinterParameterized(2, FONT_NORMAL_COPY_1, sEasyChatGraphicsResources->ecPaddedWordBuffer, (j * 13 + 3) * 8, y, TEXT_SKIP_DRAW, NULL);
             }
         }
         y += 16;

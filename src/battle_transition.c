@@ -1928,7 +1928,6 @@ static bool8 Mugshot_ShowBanner(struct Task *task)
     u8 i, sinIndex;
     u16 *winVal;
     s16 x;
-    s32 mergedValue;
 
     sTransitionData->vblankDma = FALSE;
 
@@ -1967,8 +1966,7 @@ static bool8 Mugshot_ShowBanner(struct Task *task)
     if (task->tBottomBannerX < 0)
         task->tBottomBannerX = 0;
 
-    mergedValue = *(s32 *)(&task->tTopBannerX);
-    if (mergedValue == DISPLAY_WIDTH)
+    if (task->tTopBannerX == DISPLAY_WIDTH && task->tBottomBannerX == 0)
         task->tState++;
 
     sTransitionData->bg0HOfsOpponent -= 8;

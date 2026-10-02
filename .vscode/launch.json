@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "mGBA GDB Remote",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "./poke${command:cpptools.activeConfigName}.elf",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Build Debug",
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "/usr/bin/gdb-multiarch",
+                "miDebuggerServerAddress": "${config:mgba_debug_ip}:${config:mgba_debug_port}",
+            },
+            "targetArchitecture": "arm",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}

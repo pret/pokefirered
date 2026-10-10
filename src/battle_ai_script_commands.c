@@ -1681,7 +1681,7 @@ static void Cmd_if_has_move_with_effect(void)
     1: loops 8 times instead of 4
     2: checks attacker's moves instead of AI's moves
     3: never checks i, so the entire check is useless and there's never a jump
-    bugs 1 and 2 were fixed in emerald, bug 2 was not
+    bugs 1 and 3 were fixed in emerald, bug 2 was not
 */
 #ifndef BUGFIX
         for (i = 0; i < MAX_MON_MOVES * 2; i++)

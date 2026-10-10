@@ -463,8 +463,8 @@ static void RecordLastUsedMoveByTarget(void)
 {
     s32 i;
 
-#ifndef BUGFIX
-    for (i = 0; i < 8; i++)
+#ifndef BUGFIX // Loops to 8 and divides by 2 instead of looping to 4
+    for (i = 0; i < MAX_MON_MOVES * 2; i++)
     {
         if (BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1].moves[i] == MOVE_NONE)
         {
@@ -492,8 +492,8 @@ static void ClearBattlerMoveHistory(u8 battlerId)
 {
     s32 i;
 
-#ifndef BUGFIX
-    for (i = 0; i < 8; i++)
+#ifndef BUGFIX // Loops to 8 and divides by 2 instead of looping to 4
+    for (i = 0; i < MAX_MON_MOVES * 2; i++)
         BATTLE_HISTORY->usedMoves[battlerId >> 1].moves[i] = MOVE_NONE;
 #else
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -503,7 +503,7 @@ static void ClearBattlerMoveHistory(u8 battlerId)
 
 void RecordAbilityBattle(u8 battlerId, u8 abilityId)
 {
-#ifndef BUGFIX
+#ifndef BUGFIX // Only records one ability for the whole side
     if (GetBattlerSide(battlerId) == 0)
         BATTLE_HISTORY->abilities[GET_BATTLER_SIDE(battlerId)] = abilityId;
 #else
@@ -513,7 +513,7 @@ void RecordAbilityBattle(u8 battlerId, u8 abilityId)
 
 void RecordItemEffectBattle(u8 battlerId, u8 itemEffect)
 {
-#ifndef BUGFIX
+#ifndef BUGFIX // Only records one item for the whole side
     if (GetBattlerSide(battlerId) == 0)
         BATTLE_HISTORY->itemEffects[GET_BATTLER_SIDE(battlerId)] = itemEffect;
 #else
@@ -1170,12 +1170,12 @@ static void Cmd_get_ability(void)
 {
     u8 battlerId;
 
-#ifndef BUGFIX
     if (sAIScriptPtr[1] == AI_USER)
         battlerId = gBattlerAttacker;
     else
         battlerId = gBattlerTarget;
 
+#ifndef BUGFIX // Only considers one ability for the whole side
     if (GetBattlerSide(battlerId) == AI_TARGET)
     {
         u16 side = GET_BATTLER_SIDE(battlerId);
@@ -1187,11 +1187,6 @@ static void Cmd_get_ability(void)
             return;
         }
 #else
-    if (sAIScriptPtr[1] == AI_USER)
-        battlerId = gBattlerAttacker;
-    else
-        battlerId = gBattlerTarget;
-
     if (gActiveBattler != battlerId)
     {
         if (BATTLE_HISTORY->abilities[battlerId] != 0)
@@ -1595,13 +1590,13 @@ static void Cmd_if_has_move(void)
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
-#ifndef BUGFIX
-        for (i = 0; i < 8; i++)
+#ifndef BUGFIX // Loops to 8 and divides by 2 instead of looping to 4
+        for (i = 0; i < MAX_MON_MOVES * 2; i++)
         {
             if (BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1].moves[i] == *movePtr)
                 break;
         }
-        if (i == 8)
+        if (i == MAX_MON_MOVES * 2)
             sAIScriptPtr += 8;
 #else
         for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1629,11 +1624,7 @@ static void Cmd_if_doesnt_have_move(void)
     case AI_USER_PARTNER:
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-#ifndef BUGFIX
             if (gBattleMons[gBattlerAttacker].moves[i] == *movePtr)
-#else
-            if (gBattleMons[gBattlerAttacker].moves[i] == *movePtr)
-#endif
                 break;
         }
         if (i != MAX_MON_MOVES)
@@ -1643,8 +1634,8 @@ static void Cmd_if_doesnt_have_move(void)
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
-#ifndef BUGFIX
-        for (i = 0; i < 8; i++)
+#ifndef BUGFIX // Loops to 8 and divides by 2 instead of looping to 4
+        for (i = 0; i < MAX_MON_MOVES * 2; i++)
         {
             if (BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1].moves[i] == *movePtr)
                 break;
@@ -1693,7 +1684,7 @@ static void Cmd_if_has_move_with_effect(void)
     bugs 1 and 2 were fixed in emerald, bug 2 was not
 */
 #ifndef BUGFIX
-        for (i = 0; i < 8; i++)
+        for (i = 0; i < MAX_MON_MOVES * 2; i++)
         {
             if (gBattleMons[gBattlerAttacker].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1].moves[i]].effect == sAIScriptPtr[2])
                 break;
@@ -1702,7 +1693,7 @@ static void Cmd_if_has_move_with_effect(void)
 #else
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1].moves[i]].effect == sAIScriptPtr[2])
+            if (gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == sAIScriptPtr[2])
                 break;
         }
         if (i == MAX_MON_MOVES)
@@ -1733,8 +1724,8 @@ static void Cmd_if_doesnt_have_move_with_effect(void)
         break;
     case AI_TARGET:
     case AI_TARGET_PARTNER:
-#ifndef BUGFIX
-        for (i = 0; i < 8; i++)
+#ifndef BUGFIX // Same 3 bugs as last function
+        for (i = 0; i < MAX_MON_MOVES * 2; i++)
         {
             if (BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget >> 1].moves[i]].effect == sAIScriptPtr[2])
                 break;
@@ -1845,23 +1836,18 @@ static void Cmd_get_hold_effect(void)
     u8 battlerId;
     u16 side;
 
-#ifndef BUGFIX
     if (sAIScriptPtr[1] == AI_USER)
         battlerId = gBattlerAttacker;
     else
         battlerId = gBattlerTarget;
 
+#ifndef BUGFIX // Only considers one hold effect for the whole side
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
         side = GET_BATTLER_SIDE(battlerId);
         AI_THINKING_STRUCT->funcResult = BATTLE_HISTORY->itemEffects[side];
     }
 #else
-    if (sAIScriptPtr[1] == AI_USER)
-        battlerId = gBattlerAttacker;
-    else
-        battlerId = gBattlerTarget;
-
     if (gActiveBattler != battlerId)
         AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(BATTLE_HISTORY->itemEffects[battlerId]);
 #endif

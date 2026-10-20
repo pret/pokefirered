@@ -888,7 +888,8 @@ void Task_LinkFullSave(u8 taskId)
         gTasks[taskId].data[0] = 1;
         break;
     case 1:
-#if REVISION >= 0xA
+        // BUGFIX: Wait for link idle before link full-save standby (see also cases 7 and 9).
+#if defined(BUGFIX) || REVISION >= 0xA
         if (!IsLinkTaskFinished()) break;
 #endif
         SetLinkStandbyCallback();
@@ -924,7 +925,8 @@ void Task_LinkFullSave(u8 taskId)
         gTasks[taskId].data[0] = 7;
         break;
     case 7:
-#if REVISION >= 0xA
+        // BUGFIX: Wait for link idle between save sectors.
+#if defined(BUGFIX) || REVISION >= 0xA
         if (!IsLinkTaskFinished()) break;
 #endif
         ClearContinueGameWarpStatus2();
@@ -942,7 +944,8 @@ void Task_LinkFullSave(u8 taskId)
         }
         break;
     case 9:
-#if REVISION >= 0xA
+        // BUGFIX: Wait for link idle before final post-save standby.
+#if defined(BUGFIX) || REVISION >= 0xA
         if (!IsLinkTaskFinished()) break;
 #endif
         SetLinkStandbyCallback();

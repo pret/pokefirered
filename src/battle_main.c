@@ -1160,7 +1160,8 @@ static void CB2_PreInitMultiBattle(void)
         }
         break;
     case 2:
-#if REVISION >= 0xA
+        // BUGFIX: Wait for link idle before closing link after multi battle party showcase.
+#if defined(BUGFIX) || REVISION >= 0xA
         if (IsLinkTaskFinished() && !gPaletteFade.active)
 #else
         if (!gPaletteFade.active)
@@ -3927,6 +3928,7 @@ static void ReturnFromBattleToOverworld(void)
         if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
         {
             UpdateRoamerHPStatus(&gEnemyParty[0]);
+            // BUGFIX: Use == B_OUTCOME_WON, not &. Roar sets outcome to PLAYER_TELEPORTED (5); 5 & 1 is nonzero.
 #if defined(BUGFIX) || REVISION >= 0xA
             if ((gBattleOutcome == B_OUTCOME_WON) || gBattleOutcome == B_OUTCOME_CAUGHT || gBattleOutcome == B_OUTCOME_DREW)
 #else

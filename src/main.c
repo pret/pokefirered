@@ -134,6 +134,8 @@ void AgbMain()
     RegisterRamReset(RESET_ALL);
 #endif //MODERN
 
+// It is white because the GBA Boot screen is white.
+// Sloop does not display this screen, so fade from black instead.
 #if REVISION >= 0xA
     *(vu16 *)BG_PLTT = RGB_BLACK;
 #else
@@ -184,6 +186,8 @@ void AgbMain()
          && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
         {
             rfu_REQ_stopMode();
+
+            // Note: Rev10 skips rfu_waitREQComplete for faster Sloop reset; keep the wait on real hardware.
 #if REVISION < 0xA
             rfu_waitREQComplete();
 #endif

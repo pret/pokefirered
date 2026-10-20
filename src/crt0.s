@@ -14,6 +14,10 @@ start_vector:
 	mov r0, #PSR_SYS_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_usr
+	.if MODERN
+	mov r0, #255 @ RESET_ALL
+	svc #1 << 16
+	.endif @ MODERN
 	ldr r1, =INTR_VECTOR
 	adr r0, intr_main
 	str r0, [r1]
@@ -98,7 +102,7 @@ jump_intr:
 	orr r0, r0, #INTR_FLAG_GAMEPAK
 	orr r1, r0, #INTR_FLAG_SERIAL | INTR_FLAG_TIMER3 | INTR_FLAG_VCOUNT | INTR_FLAG_HBLANK
 	and r1, r1, r2
-	strh r1, [r3, #0]
+	strh r1, [r3]
 	mrs r3, cpsr
 	bic r3, r3, #PSR_I_BIT | PSR_F_BIT | PSR_MODE_MASK
 	orr r3, r3, #PSR_SYS_MODE

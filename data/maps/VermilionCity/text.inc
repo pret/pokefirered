@@ -61,14 +61,25 @@ VermilionCity_Text_DoYouHaveATicket::
     .string "Excuse me, do you have a ticket?$"
 
 VermilionCity_Text_FlashedSSTicket::
+#ifdef BUGFIX @ The localizers missed what should be a textcolor change in the localizations.
+    .string "{COLOR DARK_GRAY}{PLAYER} flashed the S.S. TICKET!\p"
+    .string "{COLOR BLUE}Great!\n"
+#else @ In the JP games, gender-based text used a different font instead of different colors.
     .string "{FONT_NORMAL}{PLAYER} flashed the S.S. TICKET!\p"
     .string "{FONT_MALE}Great!\n"
+#endif
     .string "Welcome to the S.S. ANNE!$"
 
 VermilionCity_Text_DontHaveNeededSSTicket::
+#ifdef BUGFIX @ The localizers missed what should be a textcolor change in the localizations.
+    .string "{COLOR DARK_GRAY}{PLAYER} doesn't have the needed\n"
+    .string "S.S. TICKET.\p"
+    .string "{COLOR BLUE}Sorry!\p"
+#else @ In the JP games, gender-based text used a different font instead of different colors.
     .string "{FONT_NORMAL}{PLAYER} doesn't have the needed\n"
     .string "S.S. TICKET.\p"
     .string "{FONT_MALE}Sorry!\p"
+#endif
     .string "You need a ticket to get aboard.$"
 
 VermilionCity_Text_TheShipSetSail::

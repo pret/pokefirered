@@ -60,11 +60,14 @@ CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain::
     .string "My Resurrection Machine will make\n"
     .string "that POKéMON live again!$"
 
-@ TODO: Resolve text dump error below?
 CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor::
     .string "So!\n"
     .string "You hurry and give me that!\p"
+#ifdef BUGFIX @ The localizers missed what should be a textcolor change in the localizations.
+    .string "{COLOR DARK_GRAY}{PLAYER} handed over the\n"
+#else @ In the JP games, gender-based text used a different font instead of different colors.
     .string "{FONT_NORMAL}{PLAYER} handed over the\n"
+#endif
     .string "{STR_VAR_2} to the weird doctor.$"
 
 CinnabarIsland_PokemonLab_ExperimentRoom_Text_TakesTimeGoForWalk::

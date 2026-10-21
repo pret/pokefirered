@@ -12,6 +12,7 @@
 	.include "src/play_time.o"
 	.include "src/overworld.o"
 	.include "src/field_camera.o"
+	.include "src/script_vm.o"
 	.include "src/script.o"
 	.include "src/start_menu.o"
 	.include "src/tileset_anims.o"

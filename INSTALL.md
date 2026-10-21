@@ -348,6 +348,13 @@ Then proceed to [Choosing where to store pokefirered (Linux)](#choosing-where-to
 >   [install devkitARM on Debian/Ubuntu-based distributions](#installing-devkitarm-on-debianubuntu-based-distributions).
 </details>
 
+### Arch-based distributions
+Run the following command to install the necessary packages:
+```bash
+sudo pacman --needed -S base-devel arm-none-eabi-binutils git libpng
+```
+Then proceed to [Choosing where to store pokefirered (Linux)](#choosing-where-to-store-pokefirered-linux).
+
 ### Other distributions
 _(Specific instructions for other distributions would be greatly appreciated!)_
 
